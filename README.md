@@ -14,9 +14,16 @@ The macro `CAST_THIS_CALL` doesn't document argument names. So maybe typedef app
 ```cpp
 #include <cstdlib> 
 
-#define __cdecl __attribute__((cdecl))
-#define __stdcall __attribute__((stdcall))
-#define __thiscall __attribute__((thiscall))
+#ifdef __linux__ 
+    //linux code goes here
+    #define __cdecl __attribute__((cdecl))
+    #define __stdcall __attribute__((stdcall))
+    #define __thiscall __attribute__((thiscall))
+#elif _WIN32
+    // windows code goes here
+#else
+
+#endif
 
 #define TYPEDEF_THIS_CALL_CLASS(returnType, name, cls, ...) typedef const returnType (__thiscall name)(cls*, __VA_ARGS__)
 #define TYPEDEF_THIS_CALL_PVOID(returnType, name, ...) TYPEDEF_THIS_CALL_CLASS(returnType, name, void, __VA_ARGS__)
@@ -24,7 +31,7 @@ The macro `CAST_THIS_CALL` doesn't document argument names. So maybe typedef app
 #define ADDR_CALL_A 0x401000
 #define DO_GAME_X ((FuncDef*) ADDR_CALL_A)
 
-int (__stdcall *f)(int, int, int);
+typedef int (__stdcall *f)(int a, int b, int c);
 
 class A {
 
@@ -62,7 +69,10 @@ TYPEDEF_THIS_CALL_PVOID(int, FuncDef2, int, int);
 #define CALL_FUNC_Whatever(...) THIS_CALL(CAST_THIS_CALL(0x401000, int, int, int), a, __VA_ARGS__)
 
 const auto whatever3 = CAST_THIS_CALL(0x401000, int, int);
-const FuncDef* whatever2 = (FuncDef*) 0x401000;
+
+#ifdef __linux__ 
+    const FuncDef* whatever2 = (FuncDef*) 0x401000;
+#endif
 
 A *a = new A();
 
@@ -76,14 +86,19 @@ int main() {
     b->v = 100;
     int r = b->whatever(1000, r0);
 
-    int r2 = whatever2(a, r, 250);
+    int r2 = 0;
+    int r3 = 0;
+
+#ifdef __linux__ 
+    r2 = whatever2(a, r, 250);
 
     r2 = DO_GAME_X(a, r, r2);
 
-    int r3 = ((FuncDef*) 0x401000)(a, r, r2);
+    r3 = ((FuncDef*) 0x401000)(a, r, r2);
 
     FuncDef* a4 = (const int (__thiscall *)(A*, int, int)) 0x401000;
     FuncDefVoid* a5 = CAST_THIS_CALL(0x401000, int, int, int);
+#endif
 
     int r4 = CAST_THIS_CALL(0x401000, int, int, int)(a, r2, r3);
     int r5 = CALL_FUNC_Whatever(r3, r4);
