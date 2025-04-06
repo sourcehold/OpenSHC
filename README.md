@@ -18,9 +18,8 @@ The macro `CAST_THIS_CALL` doesn't document argument names. So maybe typedef app
 #define __stdcall __attribute__((stdcall))
 #define __thiscall __attribute__((thiscall))
 
-#define TYPEDEF_THIS_CALL(name, ...)(__thiscall name)(__VA_ARGS__)
-#define SINGLETON_THIS_CALL(ecx, name, ...)
-#define CALL_ARGS(...) (__VA_ARGS__)
+#define TYPEDEF_THIS_CALL_CLASS(returnType, name, cls, ...) typedef const returnType (__thiscall name)(cls*, __VA_ARGS__)
+#define TYPEDEF_THIS_CALL_PVOID(returnType, name, ...) TYPEDEF_THIS_CALL_CLASS(returnType, name, void, __VA_ARGS__)
 
 #define ADDR_CALL_A 0x401000
 #define DO_GAME_X ((FuncDef*) ADDR_CALL_A)
@@ -40,9 +39,12 @@ public:
 
 };
 
-typedef const int (__thiscall FuncDef)(A*, int, int);
-typedef const int (__thiscall FuncDefVoid)(void*, int, int);
-typedef const int TYPEDEF_THIS_CALL(FuncDef2, A*, int, int);
+TYPEDEF_THIS_CALL_CLASS(int, FuncDef, A, int a, int b);
+TYPEDEF_THIS_CALL_CLASS(int, FuncDefVoid, void, int a, int b);
+
+TYPEDEF_THIS_CALL_PVOID(int, FuncDefTest, int* a, int* b);
+
+TYPEDEF_THIS_CALL_PVOID(int, FuncDef2, int, int);
 
 #define CAST_CDECL_CALL(addr, returnType, ...) ((const returnType (__cdecl *)(__VA_ARGS__)) addr)
 #define CDECL_CALL(func, ...) func(__VA_ARGS__)
@@ -65,10 +67,13 @@ const FuncDef* whatever2 = (FuncDef*) 0x401000;
 A *a = new A();
 
 int main() {
+    a->v = 100;
+
     int r0 = a->whatever(100, 9);
 
-    void * p = (void *) 0x4001000;
+    void * p = (void *) 0x401000;
     A* b = ((A*) p);
+    b->v = 100;
     int r = b->whatever(1000, r0);
 
     int r2 = whatever2(a, r, 250);
