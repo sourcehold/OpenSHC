@@ -1,7 +1,13 @@
 # openshc
 An open source re-implementation of Stronghold Crusader
 
-## API proof of concept
+## Strategy option A
+The preferred strategy for now. Let's use binkw32.dll as a hijack to include our own dll that initially just calls the entry function.
+The next function that should be implemented is the main game loop's calls.
+We can use pointers to these functions in header files.
+The .exe is initially version 1.41 (Latin-based languages), so we can hardcode pointer addresses in the header files.
+
+### API proof of concept
 API calls should largely be self documenting.
 The macro `CAST_THIS_CALL` doesn't document argument names. So maybe typedef approach is better and more clear.
 
