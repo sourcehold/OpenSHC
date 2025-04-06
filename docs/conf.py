@@ -11,6 +11,7 @@ html_theme = 'furo'
 
 html_title = 'OpenSHC Documentation'
 html_logo = '_static/openshc-logo-01.png'
+html_favicon = '_static/favicon.ico'
 html_static_path = ['_static']
 html_theme_options = {
     "footer_icons": [
