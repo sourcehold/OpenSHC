@@ -1,111 +1,42 @@
-# openshc
-An open source re-implementation of Stronghold Crusader
+# OpenSHC
+An open source re-implementation of Stronghold Crusader 1. The beloved Castle Building, Real Time Strategy, and Simulation game remastered.
 
-## Strategy option A
-The preferred strategy for now. Let's use binkw32.dll as a hijack to include our own dll that initially just calls the entry function.
-The next function that should be implemented is the main game loop's calls.
-We can use pointers to these functions in header files.
-The .exe is initially version 1.41 (Latin-based languages), so we can hardcode pointer addresses in the header files.
+## Download and Install
+This reimplementation requires you to own a legal copy of the original Stronghold Crusader game from Firefly Studios.
 
-### API proof of concept
-API calls should largely be self documenting.
-The macro `CAST_THIS_CALL` doesn't document argument names. So maybe typedef approach is better and more clear.
+The current method of installation is via the [Unofficial Crusader Patch](https://github.com/UnofficialCrusaderPatch/UnofficialCrusaderPatch). Make sure to set that up first.
 
-```cpp
-#include <cstdlib> 
+0. Set up the Unofficial Crusader Patch.
+1. Download the latest release of the reimplementation from the Releases page of this repo.
+2. Launch the GUI from the Unofficial Crusader Patch.
+3. Drag and drop the zip file unto your open UCP3 GUI, or manually move the zip file into the `ucp/modules` folder inside your game folder.
+4. Reload the UCP3 GUI and activate the module.
+5. Disable Security in the Launch tab of the GUI.
+5. Launch the game!
 
-#ifdef __linux__ 
-    //linux code goes here
-    #define __cdecl __attribute__((cdecl))
-    #define __stdcall __attribute__((stdcall))
-    #define __thiscall __attribute__((thiscall))
-#elif _WIN32
-    // windows code goes here
-#else
+## Help
+Raise an issue here on GitHub to receive support. Or visit the [Discord](https://discord.gg/27W68ZaFT4) server.
 
-#endif
+## About
+The project aims to provide a faithful open source reimplementation of the game that works on Windows 10+, Linux, and MacOS.
 
-#define TYPEDEF_THIS_CALL_CLASS(returnType, name, cls, ...) typedef const returnType (__thiscall name)(cls*, __VA_ARGS__)
-#define TYPEDEF_THIS_CALL_PVOID(returnType, name, ...) TYPEDEF_THIS_CALL_CLASS(returnType, name, void, __VA_ARGS__)
+## Contribute
+The development of this reimplementation is a stepwise process. All developers are welcome to contribute.
 
-#define ADDR_CALL_A 0x401000
-#define DO_GAME_X ((FuncDef*) ADDR_CALL_A)
+### Development
+The development of this reimplementation primarily focuses on reimplementing functions and data structures of the original game.
 
-typedef int (__stdcall *f)(int a, int b, int c);
+We use [reccmp](https://github.com/isledecomp/reccmp) to verify compatibility of reimplemented code and the original game.
 
-class A {
+The game 1.41 Latin version of the Stronghold Crusader executable serves as the reference point (SHA hash: 012E9D55DAC04B23ED9A334C975D3A5B6287020B).
 
-public:
+Collaboration on this version of the game happens via tools such as GitHub, Ghidra, x64dbg, and other tools.
 
-    int v = 1;
+Join the [Discord](https://discord.gg/27W68ZaFT4) server to learn more!
 
-    int __thiscall whatever(int a, int b) {
-        this->v += (a * b);
-        return this->v;
-    }
+### Approach
+The approach of this reimplementation is to provide a Windows DLL file that reimplements functionality of the original game.
 
-};
+Thus, we reimplement the game function by function. The Windows DLL is included into the original Stronghold Crusader process.
 
-TYPEDEF_THIS_CALL_CLASS(int, FuncDef, A, int a, int b);
-TYPEDEF_THIS_CALL_CLASS(int, FuncDefVoid, void, int a, int b);
-
-TYPEDEF_THIS_CALL_PVOID(int, FuncDefTest, int* a, int* b);
-
-TYPEDEF_THIS_CALL_PVOID(int, FuncDef2, int, int);
-
-#define CAST_CDECL_CALL(addr, returnType, ...) ((const returnType (__cdecl *)(__VA_ARGS__)) addr)
-#define CDECL_CALL(func, ...) func(__VA_ARGS__)
-
-#define CALL_FUNC_CdeclExample(...) CDECL_CALL(CAST_CDECL_CALL(0x401000, int, int, int), __VA_ARGS__)
-
-#define CAST_STD_CALL(addr, returnType, ...) ((const returnType (__stdcall *)(__VA_ARGS__)) addr)
-#define STD_CALL(func, ...) func(__VA_ARGS__)
-
-#define CALL_FUNC_StdExample(...) STD_CALL(CAST_STD_CALL(0x401000, int, int, int), __VA_ARGS__)
-
-#define CAST_THIS_CALL(addr, returnType, ...) ((const returnType (__thiscall *)(void*, __VA_ARGS__)) addr)
-#define THIS_CALL(func, thisValue, ...) func(thisValue, __VA_ARGS__)
-
-#define CALL_FUNC_Whatever(...) THIS_CALL(CAST_THIS_CALL(0x401000, int, int, int), a, __VA_ARGS__)
-
-const auto whatever3 = CAST_THIS_CALL(0x401000, int, int);
-
-#ifdef __linux__ 
-    const FuncDef* whatever2 = (FuncDef*) 0x401000;
-#endif
-
-A *a = new A();
-
-int main() {
-    a->v = 100;
-
-    int r0 = a->whatever(100, 9);
-
-    void * p = (void *) 0x401000;
-    A* b = ((A*) p);
-    b->v = 100;
-    int r = b->whatever(1000, r0);
-
-    int r2 = 0;
-    int r3 = 0;
-
-#ifdef __linux__ 
-    r2 = whatever2(a, r, 250);
-
-    r2 = DO_GAME_X(a, r, r2);
-
-    r3 = ((FuncDef*) 0x401000)(a, r, r2);
-
-    FuncDef* a4 = (const int (__thiscall *)(A*, int, int)) 0x401000;
-    FuncDefVoid* a5 = CAST_THIS_CALL(0x401000, int, int, int);
-#endif
-
-    int r4 = CAST_THIS_CALL(0x401000, int, int, int)(a, r2, r3);
-    int r5 = CALL_FUNC_Whatever(r3, r4);
-    int r6 = CALL_FUNC_StdExample(r4, r5);
-    int r7 = CALL_FUNC_CdeclExample(r6, r5);
-    
-
-    return a->whatever(r+r3, r2+r7);
-}
-```
+Faithfulness to the original game is verified using `reccmp`. Because the original game was compiled using an old compiler, you have to compile it using [this compiler](https://github.com/sourcehold/MSVC1400).
