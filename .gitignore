@@ -1,3 +1,7 @@
+# OpenSHC project specific:
+build/
+_build/
+
 # Prerequisites
 *.d
 

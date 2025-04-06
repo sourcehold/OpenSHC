@@ -5,10 +5,11 @@ Ready to dive in? Here's how you can start contributing to OpenSHC.
 
 1. **Clone the Repository**
 
-   ```bash
+.. code-block:: bash
+
    git clone https://github.com/sourcehold/OpenSHC.git
    cd OpenSHC
-   ```
+
 
 2. **Install Dependencies**
 
@@ -20,16 +21,18 @@ Ready to dive in? Here's how you can start contributing to OpenSHC.
 3. **Build the Project**
 
    Open a prompt and load the MSVC 1400 environment (.bat file)
-   
-   ```bash
+
+.. code-block:: bash
+
    mkdir build && cd build
-   cmake .. -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=%1
+   cmake .. -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=RelWithDebInfo
    nmake
-   ```
 
 4. **Run reccmp**
-   This compares 
-   ```bash
-   reccmp-reccmp --paths "path\to\Stronghold Crusader.exe" build\OpenSHC.dll build\OpenSHC.pdb . %2 %3
-   ```
+   This compares the functions in the dll to those in the original game.
+   
+.. code-block:: bash
+
+   reccmp-reccmp --paths "path\to\Stronghold Crusader.exe" "build\OpenSHC.dll" "build\OpenSHC.pdb" .
+
 
