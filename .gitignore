@@ -1,6 +1,10 @@
 # OpenSHC project specific:
 build/
 _build/
+build.bat
+build.ps1
+build.py
+
 
 # Prerequisites
 *.d
