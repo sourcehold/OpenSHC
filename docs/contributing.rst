@@ -16,7 +16,7 @@ Ready to dive in? Here's how you can start contributing to OpenSHC.
 
    Make sure you have the required libraries:
 
-   - Python
+   - Python 3: ``python -m pip install -r requirements.txt``
    - `MSVC 1400 <https://github.com/sourcehold/MSVC1400>`_
 
 3. **Build the Project**
