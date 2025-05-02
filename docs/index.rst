@@ -13,7 +13,7 @@ and accessible to everyone.
    :caption: Contents:
 
    get_started
-   wiki
-   contributing
    faq
+   contributing
+   wiki
 
