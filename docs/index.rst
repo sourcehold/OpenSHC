@@ -15,4 +15,5 @@ and accessible to everyone.
    get_started
    wiki
    contributing
+   faq
 
