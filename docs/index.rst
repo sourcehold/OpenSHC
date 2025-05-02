@@ -10,10 +10,11 @@ and accessible to everyone.
 
 .. toctree::
    :maxdepth: 2
+   :glob:
    :caption: Contents:
 
-   get_started
-   faq
-   contributing
+   get_started*
+   faq*
+   contributing*
    wiki
-
+   

@@ -1,4 +1,4 @@
-
+====
 Wiki
 ====
 
@@ -14,3 +14,4 @@ Here you'll find detailed documentation about:
 
 (Coming Soon!)
 
+.. include:: wiki-approach.rst
