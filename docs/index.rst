@@ -13,6 +13,7 @@ and accessible to everyone.
    :glob:
    :caption: Contents:
 
+   about
    get_started*
    faq*
    contributing*

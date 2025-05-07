@@ -38,3 +38,5 @@ html_context = {
 
 templates_path = ['_templates']
 exclude_patterns = []
+
+autosectionlabel_prefix_document = True

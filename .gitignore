@@ -4,6 +4,7 @@ _build/
 build.bat
 build.ps1
 build.py
+dist/
 
 
 # Prerequisites

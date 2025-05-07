@@ -1,14 +1,6 @@
 Approach
 ===========
 
-Aims
-------
-
-The two main aims are:
-
-#. Replicating the original game's machine code using new source code (reimplementation)
-#. Providing modding opportunities in the new source code
-
 Examples
 --------
 
@@ -35,7 +27,7 @@ If the pseudo-C code of the original machine code looks like this:
 
 Then a reimplementation could look like below. Note the use of macros to define the 
 damage as an (inline) constant or not depending on whether compilation for replication of the
-original code is desired (:ref:`aim 1<Aims>`), or compilation for easier modding (:ref:`aim 2<Aims>`).
+original code is desired (:ref:`aim 1<about:Aims>`), or compilation for easier modding (:ref:`aim 2<about:Aims>`).
 
 `View on godbolt.org <https://godbolt.org/z/5e485dh8r>`_
 

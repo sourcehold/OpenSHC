@@ -2,6 +2,17 @@
 Frequently Asked Questions (FAQ)
 ==================================
 
+Why?
+====
+
+The original game is a masterpiece, seeing new reignited popularity since the release of the Definitive Edition.
+However, the Definitive Edition does not address various `shortcomings` in the original game.
+Furthermore, the new Definitive Edition requires modern hardware to run, which isn't something all fans can afford.
+
+This reimplementation seeks to cater to the wishes of the dedicated community by providing an
+open source reimplementation that permits modding.
+
+
 An open source Stronghold Crusader has been tried before, why will it work this time?
 ===========================================================================================
 The current project has several key strategies that will more likely make it a success.
