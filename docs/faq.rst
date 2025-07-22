@@ -35,7 +35,7 @@ Yes and no. The spin-off needs to give credit to this project and the spin-off n
 
 What Software and programming language is the reimplementation using?
 ======================================================================
-In order to be a true reimplementation it should work on machines on which the original game also works. Preferably, the same kind of performance level is retained. Thus, for performance-sensitive code, we will be mostly using C and C++. For other parts of the project (mods), we could rely on another software paradigm such lua or python.
+In order to be a true reimplementation it should work on machines on which the original game also works. However, in order to make use of time-saving modernizations, the aim is to support Windows 7 and higher, MacOS, and Linux. Preferably, the same kind of performance level is retained. Thus, for performance-sensitive code, we will be mostly using C and C++. For other parts of the project (mods), we could rely on another software paradigm such as lua or python.
 
 What skills do I need, in order to contribute?
 ============================================================================
