@@ -6,7 +6,7 @@ In this article, a table is presented with a summarized form of what occurs at e
 
 One load-balance cycle is 200 ticks (0 - 199), after which count starts from 0 again.
 
-#### Table of always load-balanced stuff
+#### Table of load-balanced stuff when game is running
 (source: `processSingleTimeTick`)
 
 | Tick (0 - 199) | Function called (and key args)                                                                       |
@@ -36,6 +36,7 @@ One load-balance cycle is 200 ticks (0 - 199), after which count starts from 0 a
 
 ##### Things that are not load-balanced:
 - Checking game sync status as this is performed by the host at the game time we know hashes for
+- All the multiplayer message handling
 
 
 #### Load-balancing in calendar modes
@@ -73,10 +74,11 @@ Note 2: While the on-screen instruction to place keep and/or granary is showing,
 ### More game ticks
 source: `processGameTick`
 
-With the calendar-based ticks out of the way, the game also balances several other computations.
+With the calendar-based ticks out of the way, the game also balances several other computations. These occur when the game is running
 
 |Tick|What|
 |--:|:--|
+|0-199|reset counts and statistics to 0|
 |0-199|updateWind (a wind cycle is 32 ticks)|
 |0-199|updateClimbData (a wind cycle is 32 ticks)|
 |0-199|updateBuildings (a wind cycle is 32 ticks)|
