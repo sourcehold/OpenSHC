@@ -6,6 +6,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.napoleon',
     'sphinx.ext.autosectionlabel',
+    'myst_parser',
 ]
 
 html_theme = 'furo'
