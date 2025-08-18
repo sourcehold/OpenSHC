@@ -9,6 +9,7 @@ and accessible to everyone.
 
 Aims
 ====
+.. _About_Aims:
 
 The two main aims are:
 
@@ -33,3 +34,4 @@ While the reimplementation is underway, Windows DLL files are released that prov
 
 For example, API functions are added to provide modding access to reimplemented parts.
 
+.. include:: wiki-approach.rst

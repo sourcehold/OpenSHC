@@ -1,6 +1,17 @@
 Approach
 ===========
 
+This project's approach fulfills two aims as outlined in :ref:`Aims <About_Aims>`. Below a few examples are given to illustrate the approach.
+
+Essentially, the approach recreates source code for the original game, and in the meantime adds macro's to support mods.
+
+Two criteria define succesful code:
+
+#. Faithful to the original. Byte-code similarity can be tested using the `reccmp` framework. A higher similarity indicates better code, but 100% similarity isn't a requirement, as incremental improvements are also great.
+#. Modding abilities. The new source code should include toggles to toggle moddability on or off. If off, the code should function as identically as feasible compared to the original game. If on, mods can alter the functionality of the code.
+
+Note that mods itself are outside the scope of this project. This project is meant to facilitate mods, not implement them.
+
 Examples
 --------
 
