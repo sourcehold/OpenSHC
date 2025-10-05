@@ -1,0 +1,1 @@
+reccmp-reccmp --paths "C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme\Stronghold Crusader.exe" build-RelWithDebInfo\StrongholdCrusader.exe build-RelWithDebInfo\StrongholdCrusader.pdb . %1 %2
