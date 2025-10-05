@@ -1,6 +1,6 @@
 taskkill /f /t /im mspdbsrv.exe
 
-del build-%1
+del /Y build-%1
 mkdir build-%1
 
 pushd build-%1

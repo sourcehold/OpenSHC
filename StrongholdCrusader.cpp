@@ -16,13 +16,13 @@ int main(int argc, char** argv)
 		argc = 200;
 	}
 
-	BOOL result = DAT_ViewportRenderState.xyAreValid(199, argc);
+	BOOL result = DAT_ViewportRenderState.xyAreValid(atoi(argv[1]), atoi(argv[2]));
 	std::cout << "The answer is: " << result << " " << sizeof(ViewportRenderState) << std::endl;
-	std::cout << "The answer is: " << DAT_ViewportRenderState.translateXYToTile(200, argc) << std::endl;
-	std::cout << "The answer is: " << DAT_ViewportRenderState.meth_0x4092e0(200, argc) << std::endl;
-	DAT_ViewportRenderState.setupMouseTileXY();
-	DAT_ViewportRenderState.setupMouseTileXY2();
-	DAT_ViewportRenderState.meth_0x4e5a90();
+	// std::cout << "The answer is: " << DAT_ViewportRenderState.translateXYToTile(200, argc) << std::endl;
+	// std::cout << "The answer is: " << DAT_ViewportRenderState.meth_0x4092e0(200, argc) << std::endl;
+	// DAT_ViewportRenderState.setupMouseTileXY();
+	// DAT_ViewportRenderState.setupMouseTileXY2();
+	// DAT_ViewportRenderState.meth_0x4e5a90();
 	return 0;
 }
 

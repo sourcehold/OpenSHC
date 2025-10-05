@@ -1,7 +1,7 @@
 #include "windowslib.h"
 
 #pragma optimize("", off)
-//LIB: CRUSADER 
+//LIB: STRONGHOLDCRUSADER 
 DWORD __stdcall timeGetTime() {
     return 0;
 }

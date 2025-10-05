@@ -10,7 +10,7 @@
 
 ### 3. MSVC1400 for byte-accurate builds
 ```sh
-git clone https://github.com/gynt/MSVC1400
+git clone https://github.com/sourcehold/MSVC1400
 ```
 This also requires NET Framework 3.5 which can be easily installed on Windows 11 by running mt.exe (from MSVC1400 repo), Windows 11 will ask to install the right version.
 
@@ -25,7 +25,7 @@ build.bat RelWithDebInfo
 ```
 5. Compare a function byte by byte to check compilation:
 ```sh
-reccmp-reccmp --paths "Stronghold Crusader".exe build-RelWithDebInfo\StrongholdCrusader.exe build-RelWithDebInfo\StrongholdCrusader.pdb .
+reccmp-reccmp --target STRONGHOLDCRUSADER --verbose 0x401000
 ```
 
 ## How it works

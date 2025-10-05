@@ -1,7 +1,7 @@
 #pragma once
 
 #define MAP_XY_LIMIT 400
-#define MAP_XY_LIMIT_INCLUSIVE MAP_XY_LIMIT - 1
+#define MAP_XY_LIMIT_INCLUSIVE 399
 
 namespace Ghidra {
     typedef void* pointer;
