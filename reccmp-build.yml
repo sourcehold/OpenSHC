@@ -1,0 +1,5 @@
+project: C:\Users\Gynt\Projects\sourcehold\openshc
+targets:
+  STRONGHOLDCRUSADER:
+    path: build-RelWithDebInfo\StrongholdCrusader.exe
+    pdb:  build-RelWithDebInfo\StrongholdCrusader.pdb
