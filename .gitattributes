@@ -1,0 +1,54 @@
+# source: https://rehansaeed.com/gitattributes-best-practices
+# and: https://www.aleksandrhovhannisyan.com/blog/crlf-vs-lf-normalizing-line-endings-in-git/
+# NOTE:
+# The source contains another part about LFS, but while it reduces the size of the repo somewhat,
+# Github offers it only with limits and charges for it after 1GB.
+# Strangely, using binary does not include any restriction, despite having to keep
+# a copy of the data for every change. So we handle the pictures as binary for now.
+#
+# Interesting commands:
+# - git add --renormalize .
+#   - applies all changes
+# - git ls-files --eol
+#   - shows line endings and infos per file
+
+###############################
+# Git Line Endings            #
+###############################
+
+# Set default behaviour to automatically normalize line endings.
+# EDIT: But we enforce "lf", since this was the setting before.
+* text=auto eol=lf
+
+# Force batch scripts to always use CRLF line endings so that if a repo is accessed
+# in Windows via a file share from Linux, the scripts will work.
+# These used a glob pattern originally, but apparently this actually does not work
+*.bat text eol=crlf
+*.bAt text eol=crlf
+*.baT text eol=crlf
+*.bAT text eol=crlf
+*.Bat text eol=crlf
+*.BAt text eol=crlf
+*.BaT text eol=crlf
+*.BAT text eol=crlf
+
+*.cmd text eol=crlf
+*.cMd text eol=crlf
+*.cmD text eol=crlf
+*.cMD text eol=crlf
+*.Cmd text eol=crlf
+*.CMd text eol=crlf
+*.CmD text eol=crlf
+*.CMD text eol=crlf
+
+*.ps1 text eol=crlf
+*.Ps1 text eol=crlf
+*.pS1 text eol=crlf
+*.PS1 text eol=crlf
+
+# Force bash scripts to always use LF line endings so that if a repo is accessed
+# in Unix via a file share from Windows, the scripts will work.
+*.sh text eol=lf
+*.sH text eol=lf
+*.Sh text eol=lf
+*.SH text eol=lf
