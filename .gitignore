@@ -44,3 +44,6 @@ dist/
 *.exe
 *.out
 *.app
+
+# Visual Studio Configuration
+.vs
