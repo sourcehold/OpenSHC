@@ -1,5 +1,5 @@
 @echo off
-setlocal
+setlocal EnableDelayedExpansion
 
 :: --- Validate task parameter (clean, build, rebuild) ---
 if "%~1"=="" (
@@ -69,8 +69,18 @@ if errorlevel 1 (
 :: --- Check for cmake ---
 where cmake >nul 2>nul
 if errorlevel 1 (
-    echo [ERROR] 'cmake' is not found in PATH.
-    exit /b 1
+    echo [INFO]  Auto-detecting cmake location using vswhere.
+    if not exist "C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" (
+        echo [ERROR] 'vswhere' not found, cannot locate 'cmake'.
+        exit /b 1
+    )
+    FOR /F "tokens=* USEBACKQ" %%g IN (`"C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" -latest -property installationPath -requires Microsoft.VisualStudio.Component.VC.CMake.Project`) do (SET "CMAKE=%%g\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin")
+    echo [INFO]  Detected: "!CMAKE!"
+    if not exist "!CMAKE!" (
+        echo [ERROR] 'cmake' is not found in PATH and not found using vswhere.
+        exit /b 1
+    )
+    set "PATH=!CMAKE!;%PATH%"
 )
 
 :: --- Check for nmake ---
