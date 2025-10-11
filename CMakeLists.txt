@@ -9,12 +9,37 @@ cmake_minimum_required (VERSION 3.19)
   #set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>")
 #endif()
 
-if (NOT CMAKE_BUILD_TYPE)
-    message(STATUS "No build type selected, default to RelWithDebInfo")
-    set(CMAKE_BUILD_TYPE "RelWithDebInfo")
-endif()
+#if (NOT CMAKE_BUILD_TYPE)
+    #message(STATUS "No build type selected, default to RelWithDebInfo")
+    #set(CMAKE_BUILD_TYPE "RelWithDebInfo")
+#endif()
 
 project ("StrongholdCrusader")
+
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+    message(STATUS "VCINSTALLDIR = $ENV{VCINSTALLDIR}")
+    set(MSVC80_DEBUGCRT_SOURCE_DIR
+        "$ENV{VCINSTALLDIR}/redist/Debug_NonRedist/x86/Microsoft.VC80.DebugCRT"
+    )
+
+    set(MSVC80_DEBUGCRT_DEST_DIR
+        "${PROJECT_BINARY_DIR}/Microsoft.VC80.DebugCRT"
+    )
+
+    file(MAKE_DIRECTORY "${MSVC80_DEBUGCRT_DEST_DIR}")
+
+    file(GLOB MSVC80_DEBUGCRT_FILES
+        "${MSVC80_DEBUGCRT_SOURCE_DIR}/*.dll"
+        "${MSVC80_DEBUGCRT_SOURCE_DIR}/*.manifest"
+    )
+
+    foreach(FILE ${MSVC80_DEBUGCRT_FILES})
+        message(STATUS "copy file from: ${FILE} to: ${MSVC80_DEBUGCRT_DEST_DIR}/")
+        configure_file("${FILE}"
+                       "${MSVC80_DEBUGCRT_DEST_DIR}/"
+                       COPYONLY)
+    endforeach()
+endif()
 
 # /MD is required to make alignment happen (first function 0x401000)
 set(CMAKE_CXX_FLAGS "/W3 /EHsc /D \"WIN32\" /D \"_WINDOWS\" /MD")
