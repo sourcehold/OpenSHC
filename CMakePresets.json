@@ -32,9 +32,9 @@
         "FrameworkVersion": "v2.0.50727",
         "FrameworkSDKDir": "${sourceDir}/MSVC1400/SDK/v2.0",
         "DevEnvDir": "${sourceDir}/MSVC1400/Common7/IDE",
-        "PATH": "${sourceDir}/MSVC1400/Common7/IDE;${sourceDir}/MSVC1400/VC/BIN;${sourceDir}/MSVC1400/Common7/Tools;${sourceDir}/MSVC1400/Common7/Tools/bin;${sourceDir}/MSVC1400/VC/PlatformSDK/bin;${sourceDir}/MSVC1400/SDK/v2.0/bin;C:/WINDOWS/Microsoft.NET/Framework/v2.0.50727;${sourceDir}/MSVC1400/VC/VCPackages;$penv{PATH}",
-        "INCLUDE": "${sourceDir}/MSVC1400/VC/ATLMFC/INCLUDE;${sourceDir}/MSVC1400/VC/INCLUDE;${sourceDir}/MSVC1400/VC/PlatformSDK/include;${sourceDir}/MSVC1400/SDK/v2.0/include;$penv{INCLUDE}",
-        "LIB": "${sourceDir}/MSVC1400/VC/ATLMFC/LIB;${sourceDir}/MSVC1400/VC/LIB;${sourceDir}/MSVC1400/VC/PlatformSDK/lib;${sourceDir}/MSVC1400/SDK/v2.0/lib;$penv{LIB}",
+        "PATH": "${sourceDir}/MSVC1400/Common7/IDE;${sourceDir}/MSVC1400/VC/BIN;${sourceDir}/MSVC1400/Common7/Tools;${sourceDir}/MSVC1400/Common7/Tools/bin;${sourceDir}/MSVC1400/VC/PlatformSDK/bin;${sourceDir}/MSVC1400/SDK/v2.0/bin;C:/WINDOWS/Microsoft.NET/Framework/v2.0.50727;${sourceDir}/MSVC1400/VC/VCPackages",
+        "INCLUDE": "${sourceDir}/MSVC1400/VC/ATLMFC/INCLUDE;${sourceDir}/MSVC1400/VC/INCLUDE;${sourceDir}/MSVC1400/VC/PlatformSDK/include;${sourceDir}/MSVC1400/SDK/v2.0/include",
+        "LIB": "${sourceDir}/MSVC1400/VC/ATLMFC/LIB;${sourceDir}/MSVC1400/VC/LIB;${sourceDir}/MSVC1400/VC/PlatformSDK/lib;${sourceDir}/MSVC1400/SDK/v2.0/lib",
         "LIBPATH": "C:/WINDOWS/Microsoft.NET/Framework/v2.0.50727;${sourceDir}/MSVC1400/VC/ATLMFC/LIB"
       }
     },
