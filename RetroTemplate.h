@@ -157,16 +157,36 @@ public:
     struct Initializer { Initializer(); };
     static const Initializer initializer;
 
-    template<typename Resolver, typename FuncPtrType, typename ClassToUse>
+    template<typename FuncPtrType, bool implemented, bool wrapper>
     struct FunctionProvider;
     // Call helper "typename _" is needed for explicit instantiation, otherwise MSVC will complain
+    // TODO: 9 Variant: 3 Implemented, 3 Not Implemented, 3-6 Wrapper (6 if wrapper for not implemented should be used, but this could also be handled by the wrapper itself
+    // it might be possible to optimize (use the same funcs for different function variants, but be verbose for now
+    // TODO create call for wrappers
+    // TODO create wrapper for hooked calls, so that they are properly inlined
     #define MACRO_FUNCTION_PROVIDER(N) \
-      MACRO_FUNC_TEMPLATE_HEADER(typename Resolver M_COMMA, Ret, N, M_COMMA typename ClassToUse) struct FunctionProvider<Resolver, MACRO_FUNC_PTR_TYPE_CDECL(Ret, N), ClassToUse> { private: template<typename R, typename = void> struct CallHelper { inline static R call(MACRO_ARG_PARAMETER_LIST(N)) { return Resolver::value(MACRO_PARAMETER_LIST(N)); } }; template<typename _> struct CallHelper<void, _> { inline static void call(MACRO_ARG_PARAMETER_LIST(N)) { Resolver::value(MACRO_PARAMETER_LIST(N)); } }; public: typedef CallHelper<Ret> Function; }; \
-      MACRO_FUNC_TEMPLATE_HEADER(typename Resolver M_COMMA, Ret, N, M_COMMA typename ClassToUse) struct FunctionProvider<Resolver, MACRO_FUNC_PTR_TYPE_STDCALL(Ret, N), ClassToUse> { private: template<typename R, typename = void> struct CallHelper { inline static R call(MACRO_ARG_PARAMETER_LIST(N)) { return Resolver::value(MACRO_PARAMETER_LIST(N)); } }; template<typename _> struct CallHelper<void, _> { inline static void call(MACRO_ARG_PARAMETER_LIST(N)) { Resolver::value(MACRO_PARAMETER_LIST(N)); } }; public: typedef CallHelper<Ret> Function; }; \
-      MACRO_CLASS_FUNC_TEMPLATE_HEADER(typename Resolver M_COMMA, Ret, Class, N, M_COMMA typename ClassToUse) struct FunctionProvider<Resolver, MACRO_FUNC_PTR_TYPE_MEMBER(Ret, Class, N), ClassToUse> { private: template<typename R, typename = void> struct CallHelper { inline static R call(Class* that MACRO_ARG_PARAMETER_LIST_WITH_COMMA_PREFIX(N)) { return (((ClassToUse*) that)->*funcAddress)(MACRO_PARAMETER_LIST(N)); } }; template<typename _> struct CallHelper<void, _> { inline static void call(Class* that MACRO_ARG_PARAMETER_LIST_WITH_COMMA_PREFIX(N)) { (((ClassToUse*) that)->*Resolver::value)(MACRO_PARAMETER_LIST(N)); } }; public: typedef CallHelper<Ret> Function; }; \
-      MACRO_CLASS_FUNC_TEMPLATE_HEADER(typename Resolver M_COMMA, Ret, Class, N, M_COMMA typename ClassToUse) struct FunctionProvider<Resolver, MACRO_FUNC_PTR_TYPE_THISCALL(Ret, Class, N), ClassToUse> { private: template<typename R, typename = void> struct CallHelper { inline static R call(Class* that MACRO_ARG_PARAMETER_LIST_WITH_COMMA_PREFIX(N)) { return Resolver::value(((ClassToUse*) that) MACRO_PARAMETER_LIST_WITH_COMMA_PREFIX(N)); } }; template<typename _> struct CallHelper<void, _> { inline static void call(Class* that MACRO_ARG_PARAMETER_LIST_WITH_COMMA_PREFIX(N)) { Resolver::value(((ClassToUse*) that) MACRO_PARAMETER_LIST_WITH_COMMA_PREFIX(N)); } }; public: typedef CallHelper<Ret> Function; };
-      MACRO_INDEX_ITERATE_DEPTH_1(MACRO_NUMBER_OF_FUNCTIONS_TO_GENERATE, MACRO_FUNCTION_PROVIDER, M_SPACE)
+      MACRO_FUNC_TEMPLATE_HEADER(, Ret, N, ) struct FunctionProvider<MACRO_FUNC_PTR_TYPE_CDECL(Ret, N), true, false> { private: template<typename R, typename = void> struct CallHelper { inline static R call(MACRO_ARG_PARAMETER_LIST(N)) { return funcAddress(MACRO_PARAMETER_LIST(N)); } }; template<typename _> struct CallHelper<void, _> { inline static void call(MACRO_ARG_PARAMETER_LIST(N)) { funcAddress(MACRO_PARAMETER_LIST(N)); } }; public: typedef CallHelper<Ret> Function; }; \
+      MACRO_FUNC_TEMPLATE_HEADER(, Ret, N, ) struct FunctionProvider<MACRO_FUNC_PTR_TYPE_STDCALL(Ret, N), true, false> { private: template<typename R, typename = void> struct CallHelper { inline static R call(MACRO_ARG_PARAMETER_LIST(N)) { return funcAddress(MACRO_PARAMETER_LIST(N)); } }; template<typename _> struct CallHelper<void, _> { inline static void call(MACRO_ARG_PARAMETER_LIST(N)) { funcAddress(MACRO_PARAMETER_LIST(N)); } }; public: typedef CallHelper<Ret> Function; }; \
+      MACRO_CLASS_FUNC_TEMPLATE_HEADER(, Ret, Class, N, ) struct FunctionProvider<MACRO_FUNC_PTR_TYPE_MEMBER(Ret, Class, N), true, false> { private: template<typename R, typename = void> struct CallHelper { inline static R call(Class* that MACRO_ARG_PARAMETER_LIST_WITH_COMMA_PREFIX(N)) { return (that->*funcAddress)(MACRO_PARAMETER_LIST(N)); } }; template<typename _> struct CallHelper<void, _> { inline static void call(Class* that MACRO_ARG_PARAMETER_LIST_WITH_COMMA_PREFIX(N)) { (that->*funcAddress)(MACRO_PARAMETER_LIST(N)); } }; public: typedef CallHelper<Ret> Function; }; \
+      MACRO_FUNC_TEMPLATE_HEADER(, Ret, N, ) struct FunctionProvider<MACRO_FUNC_PTR_TYPE_CDECL(Ret, N), false, false> { private: template<typename R, typename = void> struct CallHelper { inline static R call(MACRO_ARG_PARAMETER_LIST(N)) { return GameCallerFunction::call(MACRO_PARAMETER_LIST(N)); } }; template<typename _> struct CallHelper<void, _> { inline static void call(MACRO_ARG_PARAMETER_LIST(N)) { GameCallerFunction::call(MACRO_PARAMETER_LIST(N)); } }; public: typedef CallHelper<Ret> Function; }; \
+      MACRO_FUNC_TEMPLATE_HEADER(, Ret, N, ) struct FunctionProvider<MACRO_FUNC_PTR_TYPE_STDCALL(Ret, N), false, false> { private: template<typename R, typename = void> struct CallHelper { inline static R call(MACRO_ARG_PARAMETER_LIST(N)) { return GameCallerFunction::call(Ret, N)) gameAddress)(MACRO_PARAMETER_LIST(N)); } }; template<typename _> struct CallHelper<void, _> { inline static void call(MACRO_ARG_PARAMETER_LIST(N)) { GameCallerFunction::call(MACRO_PARAMETER_LIST(N)); } }; public: typedef CallHelper<Ret> Function; }; \
+      MACRO_CLASS_FUNC_TEMPLATE_HEADER(, Ret, Class, N, ) struct FunctionProvider<MACRO_FUNC_PTR_TYPE_MEMBER(Ret, Class, N), false, false> { private: template<typename R, typename = void> struct CallHelper { inline static R call(Class* that MACRO_ARG_PARAMETER_LIST_WITH_COMMA_PREFIX(N)) { return (((GameCallerFunction*) that)->GameCallerFunction::call)(MACRO_PARAMETER_LIST(N)); } }; template<typename _> struct CallHelper<void, _> { inline static void call(Class* that MACRO_ARG_PARAMETER_LIST_WITH_COMMA_PREFIX(N)) { (((GameCallerFunction*) that)->GameCallerFunction::call)(MACRO_PARAMETER_LIST(N)); } }; public: typedef CallHelper<Ret> Function; };
+      // TODO: add wrapper macros
+    MACRO_INDEX_ITERATE_DEPTH_1(MACRO_NUMBER_OF_FUNCTIONS_TO_GENERATE, MACRO_FUNCTION_PROVIDER, M_SPACE)
     #undef MACRO_FUNCTION_PROVIDER
+
+    template<typename FuncPtrType>
+    struct GameCaller;
+
+    #define MACRO_GAME_CALLER(N) \
+      MACRO_FUNC_TEMPLATE_HEADER(, Ret, N, ) struct GameCaller<MACRO_FUNC_PTR_TYPE_CDECL(Ret, N)> { private: template<typename R, typename = void> struct CallHelper { __declspec(noinline) static R __cdecl call(MACRO_ARG_PARAMETER_LIST(N)) { return ((MACRO_FUNC_PTR_TYPE_CDECL(Ret, N)) gameAddress)(MACRO_PARAMETER_LIST(N)); } }; template<typename _> struct CallHelper<void, _> { __declspec(noinline) static void __cdecl call(MACRO_ARG_PARAMETER_LIST(N)) { ((MACRO_FUNC_PTR_TYPE_CDECL(Ret, N)) gameAddress)(MACRO_PARAMETER_LIST(N)); } }; public: typedef CallHelper<Ret> Function; }; \
+      MACRO_FUNC_TEMPLATE_HEADER(, Ret, N, ) struct GameCaller<MACRO_FUNC_PTR_TYPE_STDCALL(Ret, N)> { private: template<typename R, typename = void> struct CallHelper { __declspec(noinline) static R __stdcall call(MACRO_ARG_PARAMETER_LIST(N)) { return ((MACRO_FUNC_PTR_TYPE_STDCALL(Ret, N)) gameAddress)(MACRO_PARAMETER_LIST(N)); } }; template<typename _> struct CallHelper<void, _> { __declspec(noinline) static void __stdcall call(MACRO_ARG_PARAMETER_LIST(N)) { ((MACRO_FUNC_PTR_TYPE_STDCALL(Ret, N)) gameAddress)(MACRO_PARAMETER_LIST(N)); } }; public: typedef CallHelper<Ret> Function; }; \
+      MACRO_CLASS_FUNC_TEMPLATE_HEADER(, Ret, Class, N, ) struct GameCaller<MACRO_FUNC_PTR_TYPE_MEMBER(Ret, Class, N)> { private: template<typename R, typename = void> struct CallHelper { __declspec(noinline) R call(MACRO_ARG_PARAMETER_LIST(N)) { return ((MACRO_FUNC_PTR_TYPE_THISCALL(Ret, Class, N)) gameAddress)((Class*)this MACRO_PARAMETER_LIST_WITH_COMMA_PREFIX(N)); } }; template<typename _> struct CallHelper<void, _> { __declspec(noinline) void call(MACRO_ARG_PARAMETER_LIST(N)) { ((MACRO_FUNC_PTR_TYPE_THISCALL(Ret, Class, N)) gameAddress)((Class*)this MACRO_PARAMETER_LIST_WITH_COMMA_PREFIX(N)); } }; public: typedef CallHelper<Ret> Function; };
+    MACRO_INDEX_ITERATE_DEPTH_1(MACRO_NUMBER_OF_FUNCTIONS_TO_GENERATE, MACRO_GAME_CALLER, M_SPACE)
+    #undef MACRO_GAME_CALLER
+
+    // TODO: address of the hooked caller could be obtained through this... if wanted
+    typedef typename GameCaller<FuncPtrType>::Function GameCallerFunction;
 
 
     template<typename FuncPtrType>
@@ -179,7 +199,6 @@ public:
 
     #define MACRO_WRAPPER_BODY_POSTCALL(N)
 
-    // To use SFINEA here, it seems to be needed to template the functions
     #define MACRO_CALL_WRAPPER(N) \
       MACRO_FUNC_TEMPLATE_HEADER(, Ret, N, ) struct Wrapper<MACRO_FUNC_PTR_TYPE_CDECL(Ret, N)> { private: template<typename R, typename = void> struct CallHelper { static R __cdecl call(MACRO_ARG_PARAMETER_LIST(N)) { MACRO_WRAPPER_BODY_PRECALL(N) Ret ret = CorePtrResolver::value(MACRO_PARAMETER_LIST(N)); MACRO_WRAPPER_BODY_POSTCALL(N) return ret; } }; template<typename _> struct CallHelper<void, _> { static void __cdecl call(MACRO_ARG_PARAMETER_LIST(N)) { MACRO_WRAPPER_BODY_PRECALL(N) CorePtrResolver::value(MACRO_PARAMETER_LIST(N)); MACRO_WRAPPER_BODY_POSTCALL(N) } }; public: typedef CallHelper<Ret> Function; }; \
       MACRO_FUNC_TEMPLATE_HEADER(, Ret, N, ) struct Wrapper<MACRO_FUNC_PTR_TYPE_STDCALL(Ret, N)> { private: template<typename R, typename = void> struct CallHelper { static R __stdcall call(MACRO_ARG_PARAMETER_LIST(N)) { MACRO_WRAPPER_BODY_PRECALL(N) Ret ret = CorePtrResolver::value(MACRO_PARAMETER_LIST(N)); MACRO_WRAPPER_BODY_POSTCALL(N) return ret; } }; template<typename _> struct CallHelper<void, _> { static void __stdcall call(MACRO_ARG_PARAMETER_LIST(N)) { MACRO_WRAPPER_BODY_PRECALL(N) CorePtrResolver::value(MACRO_PARAMETER_LIST(N)); MACRO_WRAPPER_BODY_POSTCALL(N) } }; public: typedef CallHelper<Ret> Function; }; \
@@ -210,8 +229,7 @@ public:
     typedef typename TypeTernary<Flags::USE_WRAPPER, WrapperFuncPtr, CorePtrResolver>::Type MaybeWrapperResolver;
     typedef typename TypeTernary<Flags::USE_WRAPPER, WrapperFuncPtrType, TargetFunctionType>::Type PtrResolverValueType;
   public:
-    // need to use other call type again if wrapper is used
-    typedef typename FunctionProvider<PtrResolverValueType, typename TypeTernary<Flags::USE_WRAPPER, FuncPtrType, TargetFunctionType>::Type, typename TypeTernary<Flags::USE_WRAPPER, WrapperFunction, typename SourceFuncTraits::ClassType>::Type>::Function Function;
+    typedef typename FunctionProvider<FuncPtrType, implemented, Flags::USE_WRAPPER>::Function Function;
   };
 };
 
