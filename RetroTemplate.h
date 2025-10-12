@@ -235,7 +235,8 @@ public:
     //typedef typename SourceFuncTraits::template Transform<WrapperFunction>::AsSame WrapperFuncPtrType;
     //typedef ValueType<WrapperFuncPtrType, &WrapperFunction::call> WrapperFuncPtr; // TODO: apparently, this is not valid in C++03, so it seems to be time to switch
     //typedef typename TypeTernary<Flags::USE_WRAPPER, WrapperFuncPtr, CorePtrResolver>::Type MaybeWrapperResolver;
-    //typedef typename TypeTernary<Flags::USE_WRAPPER, WrapperFuncPtrType, TargetFunctionType>::Type PtrResolverValueType;
+    typedef typename TypeTernary<Flags::USE_WRAPPER, WrapperFunction, typename TypeTernary<implemented, FuncPtrType, GameCallerFunction>::Type>::Type PtrResolverValueType;
+
   public:
     typedef typename FunctionProvider<FuncPtrType, implemented, Flags::USE_WRAPPER>::Function Function;
   };
@@ -270,10 +271,20 @@ RetroFunctionResolver::Resolver<FuncPtrType, implemented, gameAddress, funcAddre
   {
     // these positions could be used to hook into the game using another parameter to provide the address
     // TODO: the hook would need to take the resolved ptr as reference, not the "funcAddress", otherwise it would not call the wrapping logic if the game calls
-    //const PtrResolverValueType func = MaybeWrapperResolver::value;
-    //std::cout << "implemented with type " << typeid(Self).name() << ", now hook to: " << *((void**) (&func)) << "\n";
 
-    std::cout << "implemented with type " << typeid(Self).name() << "\n";
+    // Way to get address to link (only implemented): 
+    void* func;
+    if (Flags::USE_WRAPPER)
+    {
+      const typename FuncTraits<FuncPtrType>::Transform<WrapperFunction>::AsSame wrapperFunction = &WrapperFunction::call;
+      func = *((void**) &wrapperFunction);
+    }
+    else
+    {
+      const FuncPtrType funcPtr = funcAddress;
+      func = *((void**) &funcPtr);
+    }
+    std::cout << "implemented with type " << typeid(Self).name() << ", now hook to: " << *((void**) (&func)) << "\n";
 
     // test
     //typedef FuncTraits<FuncPtrType> SourceFuncTraits;
