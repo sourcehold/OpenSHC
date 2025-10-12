@@ -110,9 +110,6 @@ private:
   template<typename IF, typename ELSE> struct TypeTernary<true, IF, ELSE> { typedef IF Type; };
   template<typename IF, typename ELSE> struct TypeTernary<false, IF, ELSE> { typedef ELSE Type; };
 
-  template<typename T, const void* effectTrigger> struct TypeSideEffect { typedef T Type; };
-  template<typename T, T tValue, void* effectTrigger> struct ValueSideEffect { static const T value; };
-
   template<typename T, T tValue> struct ValueType { static const T value; };
 
   template<typename IN, IN inValue, typename OUT> struct CStyleCaster { static const OUT value; }; // potentially not runtime safe
@@ -157,8 +154,8 @@ public:
 
     typedef OptionFlags<options> Flags;
 
-    static const bool initialized;
-    static const bool initialize();
+    struct Initializer { Initializer(); };
+    static const Initializer initializer;
 
     template<typename Resolver, typename FuncPtrType, typename ClassToUse>
     struct FunctionProvider;
@@ -166,7 +163,7 @@ public:
     #define MACRO_FUNCTION_PROVIDER(N) \
       MACRO_FUNC_TEMPLATE_HEADER(typename Resolver M_COMMA, Ret, N, M_COMMA typename ClassToUse) struct FunctionProvider<Resolver, MACRO_FUNC_PTR_TYPE_CDECL(Ret, N), ClassToUse> { private: template<typename R, typename = void> struct CallHelper { inline static R call(MACRO_ARG_PARAMETER_LIST(N)) { return Resolver::value(MACRO_PARAMETER_LIST(N)); } }; template<typename _> struct CallHelper<void, _> { inline static void call(MACRO_ARG_PARAMETER_LIST(N)) { Resolver::value(MACRO_PARAMETER_LIST(N)); } }; public: typedef CallHelper<Ret> Function; }; \
       MACRO_FUNC_TEMPLATE_HEADER(typename Resolver M_COMMA, Ret, N, M_COMMA typename ClassToUse) struct FunctionProvider<Resolver, MACRO_FUNC_PTR_TYPE_STDCALL(Ret, N), ClassToUse> { private: template<typename R, typename = void> struct CallHelper { inline static R call(MACRO_ARG_PARAMETER_LIST(N)) { return Resolver::value(MACRO_PARAMETER_LIST(N)); } }; template<typename _> struct CallHelper<void, _> { inline static void call(MACRO_ARG_PARAMETER_LIST(N)) { Resolver::value(MACRO_PARAMETER_LIST(N)); } }; public: typedef CallHelper<Ret> Function; }; \
-      MACRO_CLASS_FUNC_TEMPLATE_HEADER(typename Resolver M_COMMA, Ret, Class, N, M_COMMA typename ClassToUse) struct FunctionProvider<Resolver, MACRO_FUNC_PTR_TYPE_MEMBER(Ret, Class, N), ClassToUse> { private: template<typename R, typename = void> struct CallHelper { inline static R call(Class* that MACRO_ARG_PARAMETER_LIST_WITH_COMMA_PREFIX(N)) { return (((ClassToUse*) that)->*(&initialized ? funcAddress : 0))(MACRO_PARAMETER_LIST(N)); } }; template<typename _> struct CallHelper<void, _> { inline static void call(Class* that MACRO_ARG_PARAMETER_LIST_WITH_COMMA_PREFIX(N)) { (((ClassToUse*) that)->*Resolver::value)(MACRO_PARAMETER_LIST(N)); } }; public: typedef CallHelper<Ret> Function; }; \
+      MACRO_CLASS_FUNC_TEMPLATE_HEADER(typename Resolver M_COMMA, Ret, Class, N, M_COMMA typename ClassToUse) struct FunctionProvider<Resolver, MACRO_FUNC_PTR_TYPE_MEMBER(Ret, Class, N), ClassToUse> { private: template<typename R, typename = void> struct CallHelper { inline static R call(Class* that MACRO_ARG_PARAMETER_LIST_WITH_COMMA_PREFIX(N)) { return (((ClassToUse*) that)->*funcAddress)(MACRO_PARAMETER_LIST(N)); } }; template<typename _> struct CallHelper<void, _> { inline static void call(Class* that MACRO_ARG_PARAMETER_LIST_WITH_COMMA_PREFIX(N)) { (((ClassToUse*) that)->*Resolver::value)(MACRO_PARAMETER_LIST(N)); } }; public: typedef CallHelper<Ret> Function; }; \
       MACRO_CLASS_FUNC_TEMPLATE_HEADER(typename Resolver M_COMMA, Ret, Class, N, M_COMMA typename ClassToUse) struct FunctionProvider<Resolver, MACRO_FUNC_PTR_TYPE_THISCALL(Ret, Class, N), ClassToUse> { private: template<typename R, typename = void> struct CallHelper { inline static R call(Class* that MACRO_ARG_PARAMETER_LIST_WITH_COMMA_PREFIX(N)) { return Resolver::value(((ClassToUse*) that) MACRO_PARAMETER_LIST_WITH_COMMA_PREFIX(N)); } }; template<typename _> struct CallHelper<void, _> { inline static void call(Class* that MACRO_ARG_PARAMETER_LIST_WITH_COMMA_PREFIX(N)) { Resolver::value(((ClassToUse*) that) MACRO_PARAMETER_LIST_WITH_COMMA_PREFIX(N)); } }; public: typedef CallHelper<Ret> Function; };
       MACRO_INDEX_ITERATE_DEPTH_1(MACRO_NUMBER_OF_FUNCTIONS_TO_GENERATE, MACRO_FUNCTION_PROVIDER, M_SPACE)
     #undef MACRO_FUNCTION_PROVIDER
@@ -212,17 +209,14 @@ public:
     typedef ValueType<WrapperFuncPtrType, &WrapperFunction::call> WrapperFuncPtr; // TODO: apparently, this is not valid in C++03, so it seems to be time to switch
     typedef typename TypeTernary<Flags::USE_WRAPPER, WrapperFuncPtr, CorePtrResolver>::Type MaybeWrapperResolver;
     typedef typename TypeTernary<Flags::USE_WRAPPER, WrapperFuncPtrType, TargetFunctionType>::Type PtrResolverValueType;
-    typedef typename TypeSideEffect<MaybeWrapperResolver, &initialized>::Type PtrResolver;
   public:
     // need to use other call type again if wrapper is used
-    typedef typename FunctionProvider<PtrResolver, typename TypeTernary<Flags::USE_WRAPPER, FuncPtrType, TargetFunctionType>::Type, typename TypeTernary<Flags::USE_WRAPPER, WrapperFunction, typename SourceFuncTraits::ClassType>::Type>::Function Function;
+    typedef typename FunctionProvider<PtrResolverValueType, typename TypeTernary<Flags::USE_WRAPPER, FuncPtrType, TargetFunctionType>::Type, typename TypeTernary<Flags::USE_WRAPPER, WrapperFunction, typename SourceFuncTraits::ClassType>::Type>::Function Function;
   };
 };
 
 template<typename IF, IF ifValue, typename ELSE, ELSE elseValue> const IF RetroFunctionResolver::Ternary<true, IF, ifValue, ELSE, elseValue>::value = ifValue;
 template<typename IF, IF ifValue, typename ELSE, ELSE elseValue> const ELSE RetroFunctionResolver::Ternary<false, IF, ifValue, ELSE, elseValue>::value = elseValue;
-
-template<typename T, T value, void* effectTrigger> const T RetroFunctionResolver::ValueSideEffect<T, value, effectTrigger>::value = value;
 
 template<typename T, T tValue> const T RetroFunctionResolver::ValueType<T, tValue>::value = tValue;
 
@@ -234,15 +228,15 @@ template<int address>
 bool RetroFunctionResolver::AddressUsageKeeper<address>::initialized = false;
 
 template<typename FuncPtrType, bool implemented, int gameAddress, FuncPtrType funcAddress, int options>
-const bool RetroFunctionResolver::Resolver<FuncPtrType, implemented, gameAddress, funcAddress, options>::initialized = RetroFunctionResolver::Resolver<FuncPtrType, implemented, gameAddress, funcAddress, options>::initialize();
+typename RetroFunctionResolver::Resolver<FuncPtrType, implemented, gameAddress, funcAddress, options>::Initializer const RetroFunctionResolver::Resolver<FuncPtrType, implemented, gameAddress, funcAddress, options>::initializer;
 
 template<typename FuncPtrType, bool implemented, int gameAddress, FuncPtrType funcAddress, int options>
-const bool RetroFunctionResolver::Resolver<FuncPtrType, implemented, gameAddress, funcAddress, options>::initialize()
+RetroFunctionResolver::Resolver<FuncPtrType, implemented, gameAddress, funcAddress, options>::Initializer::Initializer()
 {
   if (AddressUsageKeeper<gameAddress>::initialized)
   {
     std::cout << "do something if already initialized\n";
-    return false;
+    return;
   }
   AddressUsageKeeper<gameAddress>::initialized = true;
 
@@ -250,8 +244,8 @@ const bool RetroFunctionResolver::Resolver<FuncPtrType, implemented, gameAddress
   {
     // these positions could be used to hook into the game using another parameter to provide the address
     // TODO: the hook would need to take the resolved ptr as reference, not the "funcAddress", otherwise it would not call the wrapping logic if the game calls
-    const PtrResolverValueType func = PtrResolver::value;
-    std::cout << "implemented with type " << typeid(Self).name() << ", now hook to: " << *((void**)(&func)) << "\n";
+    const PtrResolverValueType func = MaybeWrapperResolver::value;
+    std::cout << "implemented with type " << typeid(Self).name() << ", now hook to: " << *((void**) (&func)) << "\n";
 
     // test
     //typedef FuncTraits<FuncPtrType> SourceFuncTraits;
@@ -269,7 +263,6 @@ const bool RetroFunctionResolver::Resolver<FuncPtrType, implemented, gameAddress
   {
     std::cout << "not implemented\n";
   }
-  return true;
 }
 
 #undef MACRO_NUMBER_OF_FUNCTIONS_TO_GENERATE
