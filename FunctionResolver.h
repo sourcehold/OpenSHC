@@ -74,7 +74,7 @@
 
 
 // no support for virtual function ptrs
-struct RetroFunctionResolver
+struct FunctionResolver
 {
 private:
 
@@ -101,27 +101,9 @@ private:
   #undef MACRO_FUNC_TRAITS
   #undef MACRO_FUNC_TRAITS_TRANSFROM_SUBSTUCT
 
-  // utility templates
-  // only integrals and enums are allowed as template arguments if provided as static const values, which means we need to carry the values as types
-
-  template<bool condition, typename IF, IF ifValue, typename ELSE, ELSE elseValue> struct Ternary;
-  template<bool condition, typename Type, Type ifValue, Type elseValue> struct Ternary<condition, Type, ifValue, Type, elseValue>;
-  template<typename IF, IF ifValue, typename ELSE, ELSE elseValue> struct Ternary<true, IF, ifValue, ELSE, elseValue> { static const IF value; };
-  template<typename IF, IF ifValue, typename ELSE, ELSE elseValue> struct Ternary<false, IF, ifValue, ELSE, elseValue> { static const ELSE value; };
-
   template<bool condition, typename IF, typename ELSE> struct TypeTernary;
   template<typename IF, typename ELSE> struct TypeTernary<true, IF, ELSE> { typedef IF Type; };
   template<typename IF, typename ELSE> struct TypeTernary<false, IF, ELSE> { typedef ELSE Type; };
-
-  template<typename T, T tValue> struct ValueType { static const T value; };
-
-  template<typename IN, IN inValue, typename OUT> struct CStyleCaster { static const OUT value; }; // potentially not runtime safe
-  template<typename IN, IN inValue, typename OUT> struct StaticCaster { static const OUT value; };
-  template<typename IN, IN inValue, typename OUT> struct ReinterpretCaster { static const  OUT value; }; // not runtime safe
-
-  template<typename T, T a, T b> struct ValueEquals { static const bool value = a == b; };
-  template<bool a, bool b> struct LogicalAnd { static const bool value = a && b; };
-
 
   template<int address> struct AddressUsageKeeper { static bool initialized; };
 
@@ -131,7 +113,6 @@ private:
     enum
     {
       USE_WRAPPER = !!(options & Option::USE_WRAPPER),
-      USE_OWN_IMPLEMENTATION_CALL_LOGGING = !!(options & Option::USE_OWN_IMPLEMENTATION_CALL_LOGGING)
     };
   };
 
@@ -143,7 +124,6 @@ public:
     {
       NONE = 0,
       USE_WRAPPER = 1,
-      USE_OWN_IMPLEMENTATION_CALL_LOGGING = 2,
     };
   };
 
@@ -240,47 +220,19 @@ public:
 
     typedef typename GameCaller<FuncPtrType>::Function GameCallerFunction;
 
-     
-    // there can only be one finalizing logic function (cast or the ptr) involving the ptr if the ptr should be inlined, since only integral arithmetic is compiletime supported in C++03
-    //typedef FuncTraits<FuncPtrType> SourceFuncTraits;
-    //  
-    //typedef typename TypeTernary<
-    //  LogicalAnd<ValueEquals<CallConvention, CC_MEMBER, SourceFuncTraits::callConvention>::value, !implemented>::value,
-    //  typename SourceFuncTraits::template Transform<SourceFuncTraits::ClassType>::AsThiscall,
-    //  FuncPtrType
-    //>::Type TargetFunctionType;
-    //typedef ValueType<FuncPtrType, funcAddress> FuncPtrResolver;
-    //typedef ReinterpretCaster<int, gameAddress, TargetFunctionType> GameAddressResolver; // indirect call is as good as it gets, since the relative address is not known at compile time (apparently there are linker tricks, but that would need a lot of external steps, making this approach void)
-    //typedef typename TypeTernary<implemented, FuncPtrResolver, GameAddressResolver>::Type CorePtrResolver;
-
-    //typedef typename Wrapper<TargetFunctionType>::Function WrapperFunction;
-    //typedef typename SourceFuncTraits::template Transform<WrapperFunction>::AsSame WrapperFuncPtrType;
-    //typedef ValueType<WrapperFuncPtrType, &WrapperFunction::call> WrapperFuncPtr; // TODO: apparently, this is not valid in C++03, so it seems to be time to switch
-    //typedef typename TypeTernary<Flags::USE_WRAPPER, WrapperFuncPtr, CorePtrResolver>::Type MaybeWrapperResolver;
-    typedef typename TypeTernary<Flags::USE_WRAPPER, WrapperFunction, typename TypeTernary<implemented, FuncPtrType, GameCallerFunction>::Type>::Type PtrResolverValueType;
-
   public:
     typedef typename FunctionProvider<FuncPtrType, implemented, Flags::USE_WRAPPER>::Function Function;
   };
 };
 
-template<typename IF, IF ifValue, typename ELSE, ELSE elseValue> const IF RetroFunctionResolver::Ternary<true, IF, ifValue, ELSE, elseValue>::value = ifValue;
-template<typename IF, IF ifValue, typename ELSE, ELSE elseValue> const ELSE RetroFunctionResolver::Ternary<false, IF, ifValue, ELSE, elseValue>::value = elseValue;
-
-template<typename T, T tValue> const T RetroFunctionResolver::ValueType<T, tValue>::value = tValue;
-
-template<typename IN, IN inValue, typename OUT> const OUT RetroFunctionResolver::CStyleCaster<IN, inValue, OUT>::value = (OUT) inValue;
-template<typename IN, IN inValue, typename OUT> const OUT RetroFunctionResolver::StaticCaster<IN, inValue, OUT>::value = static_cast<OUT>(inValue);
-template<typename IN, IN inValue, typename OUT> const OUT RetroFunctionResolver::ReinterpretCaster<IN, inValue, OUT>::value = reinterpret_cast<OUT>(inValue);
-
 template<int address>
-bool RetroFunctionResolver::AddressUsageKeeper<address>::initialized = false;
+bool FunctionResolver::AddressUsageKeeper<address>::initialized = false;
 
 template<typename FuncPtrType, bool implemented, int gameAddress, FuncPtrType funcAddress, int options>
-typename RetroFunctionResolver::Resolver<FuncPtrType, implemented, gameAddress, funcAddress, options>::Initializer const RetroFunctionResolver::Resolver<FuncPtrType, implemented, gameAddress, funcAddress, options>::initializer;
+typename FunctionResolver::Resolver<FuncPtrType, implemented, gameAddress, funcAddress, options>::Initializer const FunctionResolver::Resolver<FuncPtrType, implemented, gameAddress, funcAddress, options>::initializer;
 
 template<typename FuncPtrType, bool implemented, int gameAddress, FuncPtrType funcAddress, int options>
-RetroFunctionResolver::Resolver<FuncPtrType, implemented, gameAddress, funcAddress, options>::Initializer::Initializer()
+FunctionResolver::Resolver<FuncPtrType, implemented, gameAddress, funcAddress, options>::Initializer::Initializer()
 {
   if (AddressUsageKeeper<gameAddress>::initialized)
   {
@@ -376,7 +328,7 @@ RetroFunctionResolver::Resolver<FuncPtrType, implemented, gameAddress, funcAddre
 
 // Helper Macro to support function definition
 // Only provides the template instantiation and the typedef start, so add the same afterwards
-#define MACRO_FUNCTION_RESOLVER(FUNCTION_TYPE, IMPLEMENTED, GAME_ADDRESS, FUNCTION_ADDRESS) MACRO_FUNCTION_RESOLVER_EXT(FUNCTION_TYPE, IMPLEMENTED, GAME_ADDRESS, FUNCTION_ADDRESS, RetroFunctionResolver::Option::NONE)
-#define MACRO_FUNCTION_RESOLVER_EXT(FUNCTION_TYPE, IMPLEMENTED, GAME_ADDRESS, FUNCTION_ADDRESS, OPTIONS) template struct RetroFunctionResolver::Resolver<FUNCTION_TYPE, IMPLEMENTED, GAME_ADDRESS, FUNCTION_ADDRESS, OPTIONS>; typedef RetroFunctionResolver::Resolver<FUNCTION_TYPE, IMPLEMENTED, GAME_ADDRESS, FUNCTION_ADDRESS, OPTIONS>::Function
+#define MACRO_FUNCTION_RESOLVER(FUNCTION_TYPE, IMPLEMENTED, GAME_ADDRESS, FUNCTION_ADDRESS) MACRO_FUNCTION_RESOLVER_EXT(FUNCTION_TYPE, IMPLEMENTED, GAME_ADDRESS, FUNCTION_ADDRESS, FunctionResolver::Option::NONE)
+#define MACRO_FUNCTION_RESOLVER_EXT(FUNCTION_TYPE, IMPLEMENTED, GAME_ADDRESS, FUNCTION_ADDRESS, OPTIONS) template struct FunctionResolver::Resolver<FUNCTION_TYPE, IMPLEMENTED, GAME_ADDRESS, FUNCTION_ADDRESS, OPTIONS>; typedef FunctionResolver::Resolver<FUNCTION_TYPE, IMPLEMENTED, GAME_ADDRESS, FUNCTION_ADDRESS, OPTIONS>::Function
 
 #endif // FUNCTION_RESOLVER
