@@ -5,6 +5,13 @@
 #include "FunctionTest.h" // placed here, due to MS macro problems at the moment
 #include "ViewportRenderState.h"
 
+int test(const char*)
+{
+  return 0;
+}
+
+MACRO_FUNCTION_RESOLVER_EXT(int(*)(const char*), true, 0x0, test, FunctionResolver::Option::USE_WRAPPER) testFunc;
+
 //#pragma optimize("", off)
 static ViewportRenderState DAT_ViewportRenderState;
 
@@ -15,6 +22,8 @@ int main(int argc, char** argv)
 	if (argc > 399) {
 		argc = 200;
 	}
+
+	testFunc::call("TEST");
 
 	// We might get multiple definition if it appears in other headers, putting it in a anonymous namespace might help
 	BOOL result = ViewportRenderState_Func::xyAreValid::call(&DAT_ViewportRenderState, 100, 100);

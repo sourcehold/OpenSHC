@@ -37,6 +37,8 @@
 #define MACRO_INDEX_ITERATE_15(M, D) M(0)D M(1)D M(2)D M(3)D M(4)D M(5)D M(6)D M(7)D M(8)D M(9)D M(10)D M(11)D M(12)D M(13)D M(14)
 #define MACRO_INDEX_ITERATE_16(M, D) M(0)D M(1)D M(2)D M(3)D M(4)D M(5)D M(6)D M(7)D M(8)D M(9)D M(10)D M(11)D M(12)D M(13)D M(14)D M(15)
 
+// TODO: definitions mixed up: Check again what are args and what are parameters!
+
 #define MACRO_ARG(N) Arg##N
 #define MACRO_PARAMETER(N) arg##N
 #define MACRO_TYPENAME_ARG(N) typename MACRO_ARG(N)
@@ -71,6 +73,70 @@
 // we are loosing one level due to the way the recursion iteration works
 #define MACRO_SUPPORTED_PARAMETER_NUMBER 15
 #define MACRO_NUMBER_OF_FUNCTIONS_TO_GENERATE 16
+
+template <typename T>
+const char* getTypeName()
+{
+  static std::string cached;
+  if (!cached.empty())
+  {
+    return cached.c_str();
+  }
+  static const char* fallback = "<UNKNOWN>";
+
+  const char* sig = __FUNCSIG__;
+  const char* start = std::strchr(sig, '<');
+  const char* end = std::strrchr(sig, '>');
+
+  if (start && end && end > start)
+  {
+    cached = std::string(start + 1, end);
+  }
+  else
+  {
+    cached = fallback;
+  }
+  return cached.c_str();
+}
+
+template <typename FuncPtrType, FuncPtrType funcPtr>
+const char* getFuncPtrName()
+{
+  static std::string cached;
+  if (!cached.empty())
+  {
+    return cached.c_str();
+  }
+  static const char* fallback = "<UNKNOWN>";
+
+  const char* sig = __FUNCSIG__;
+  const char* typePart = getTypeName<FuncPtrType>();
+  if (!typePart)
+  {
+    cached = fallback;
+    return cached.c_str();
+  }
+
+  const char* typeInThisSig = std::strstr(sig, typePart);
+  if (!typeInThisSig)
+  {
+    cached = fallback;
+    return cached.c_str();
+  }
+
+  const char* start = typeInThisSig + std::strlen(typePart);
+  const char* end = std::strrchr(sig, '>');
+  if (start && end && end > start)
+  {
+    cached = std::string(start + 1, end); // 1 for comma
+  }
+  else
+  {
+    cached = fallback;
+  }
+
+  return cached.c_str();
+}
 
 
 // no support for virtual function ptrs
@@ -165,28 +231,34 @@ public:
     #define MACRO_SPACED_STREAM_PRINT_PARAMETER(N) << "\t" << MACRO_PARAMETER(N)
     #define MACRO_SPACED_STREAM_PRINT_PARAMETER_LIST(N) MACRO_INDEX_ITERATE_DEPTH_0(N, MACRO_SPACED_STREAM_PRINT_PARAMETER, M_SPACE)
 
-    // TODO: Currently still prints whole type signature: Extract function name. Also replace with proper logging with condition
+    // TODO: Replace with proper logging with condition
     #define MACRO_WRAPPER_BODY_PRECALL(N) \
-      std::ostringstream ossParams; \
-      if (implemented) { ossParams << "Call implemented function replacement '" << typeid(Self).name() << "' for function '" << std::hex << gameAddress << std::dec << "' with '" << N << "' arguments:"; } \
-      else { ossParams << "Call from own function to game function '" << std::hex << gameAddress << std::dec << "' with arguments:"; } \
-      ossParams MACRO_SPACED_STREAM_PRINT_PARAMETER_LIST(N); \
-      std::string strParams = ossParams.str(); \
-      std::cout << strParams << '\n';
+      { \
+        std::ostringstream ossParams; \
+        if (implemented) { ossParams << "Call: " << getFuncPtrName<FuncPtrType, funcAddress>() << " | Replaces: '" << std::hex << gameAddress << std::dec << "' | Args(" << N << "): "; } \
+        else { ossParams << "Call from own function: " << std::hex << gameAddress << std::dec << "' | Args(" << N << "): "; } \
+        ossParams MACRO_SPACED_STREAM_PRINT_PARAMETER_LIST(N); \
+        std::string strParams = ossParams.str(); \
+        std::cout << strParams << '\n'; \
+      }
 
     #define MACRO_WRAPPER_BODY_POSTCALL(N) \
-      std::ostringstream ossReturn; \
-      if (implemented) { ossReturn << "Implemented function replacement '" << typeid(Self).name() << "' for function '" << std::hex << gameAddress << std::dec << "' returned: " << "\t" << ret; } \
-      else { ossReturn << "Game function '" << std::hex << gameAddress << std::dec << "' returned:" << "\t" << ret; } \
-      std::string strReturn = ossReturn.str(); \
-      std::cout << strReturn << '\n';
+      { \
+        std::ostringstream ossReturn; \
+        if (implemented) { ossReturn << "Call: " << getFuncPtrName<FuncPtrType, funcAddress>() << " | Replaces: '" << std::hex << gameAddress << std::dec << "' | Returned:" << "\t" << ret; } \
+        else { ossReturn << "Call from own function: " << std::hex << gameAddress << std::dec << "' | Returned:" << "\t" << ret; } \
+        std::string strReturn = ossReturn.str(); \
+        std::cout << strReturn << '\n'; \
+      }
 
     #define MACRO_WRAPPER_BODY_POSTCALL_VOID(N) \
-      std::ostringstream ossReturn; \
-      if (implemented) { ossReturn << "Implemented function replacement '" << typeid(Self).name() << "' for function '" << std::hex << gameAddress << std::dec << "' returned"; } \
-      else { ossReturn << "Game function '" << std::hex << gameAddress << std::dec << "' returned"; } \
-      std::string strReturn = ossReturn.str(); \
-      std::cout << strReturn << '\n';
+      { \
+        std::ostringstream ossReturn; \
+        if (implemented) { ossReturn << "Call: " << getFuncPtrName<FuncPtrType, funcAddress>() << " | Replaces: '" << std::hex << gameAddress << std::dec << "' | Returned"; } \
+        else { ossReturn << "Call from own function: " << std::hex << gameAddress << std::dec << "' | Returned"; } \
+        std::string strReturn = ossReturn.str(); \
+        std::cout << strReturn << '\n'; \
+      }
 
     #define MACRO_CALL_WRAPPER(N) \
       MACRO_FUNC_TEMPLATE_HEADER(, Ret, N, ) struct Wrapper<MACRO_FUNC_PTR_TYPE_CDECL(Ret, N), true> { private: template<typename R, typename = void> struct CallHelper { __declspec(noinline) static R __cdecl call(MACRO_ARG_PARAMETER_LIST(N)) { MACRO_WRAPPER_BODY_PRECALL(N) Ret ret = funcAddress(MACRO_PARAMETER_LIST(N)); MACRO_WRAPPER_BODY_POSTCALL(N) return ret; } }; template<typename _> struct CallHelper<void, _> { __declspec(noinline) static void __cdecl call(MACRO_ARG_PARAMETER_LIST(N)) { MACRO_WRAPPER_BODY_PRECALL(N) funcAddress(MACRO_PARAMETER_LIST(N)); MACRO_WRAPPER_BODY_POSTCALL_VOID(N) } }; public: typedef CallHelper<Ret> Function; }; \
@@ -258,7 +330,7 @@ FunctionResolver::Resolver<FuncPtrType, implemented, gameAddress, funcAddress, o
       const FuncPtrType funcPtr = funcAddress;
       func = *((void**) &funcPtr);
     }
-    std::cout << "implemented with type " << typeid(Self).name() << ", now hook to: " << *((void**) (&func)) << "\n";
+    std::cout << "implemented with '" << getFuncPtrName<FuncPtrType, funcAddress>() << "', now hook to: " << *((void**) (&func)) << "\n";
   }
   else
   {
