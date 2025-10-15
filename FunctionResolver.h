@@ -154,17 +154,17 @@ private:
   template <typename FuncType> struct FuncTraits;
 
   // using void as special case which falls back to void... not nice, but it allows to continue the logic
-  #define MACRO_FUNC_TRAITS_TRANSFROM_SUBSTUCT(SAME_CONV, SAME_CONV_VOID, N) \
+  #define MACRO_FUNC_TRAITS_TRANSFROM_SUBSTRUCT(SAME_CONV, SAME_CONV_VOID, N) \
     template<typename NewClass> struct Transform { SAME_CONV typedef MACRO_FUNC_PTR_CDECL(Ret, AsCdecl, N); typedef MACRO_FUNC_PTR_STDCALL(Ret, AsStdcall, N); typedef MACRO_FUNC_PTR_MEMBER(Ret, NewClass, AsMember, N); typedef MACRO_FUNC_PTR_THISCALL(Ret, NewClass, AsThiscall, N); }; \
     template<> struct Transform<void> { SAME_CONV_VOID typedef MACRO_FUNC_PTR_CDECL(Ret, AsCdecl, N); typedef MACRO_FUNC_PTR_STDCALL(Ret, AsStdcall, N); typedef void AsMember; typedef void AsThiscall; };
   #define MACRO_FUNC_TRAITS(N) \
-    MACRO_FUNC_TEMPLATE_HEADER(, Ret, N, ) struct FuncTraits<MACRO_FUNC_PTR_TYPE_CDECL(Ret, N)> { typedef MACRO_FUNC_PTR_CDECL(Ret, FuncType, N); typedef Ret ReturnType; typedef void ClassType; static const CallConvention callConvention = CC_CDECL; static const int argCount = N; MACRO_FUNC_TRAITS_TRANSFROM_SUBSTUCT(typedef FuncType AsSame;, typedef FuncType AsSame;, N) }; \
-    MACRO_FUNC_TEMPLATE_HEADER(, Ret, N, ) struct FuncTraits<MACRO_FUNC_PTR_TYPE_STDCALL(Ret, N)> { typedef MACRO_FUNC_PTR_STDCALL(Ret, FuncType, N); typedef Ret ReturnType; typedef void ClassType; static const CallConvention callConvention = CC_STDCALL; static const int argCount = N; MACRO_FUNC_TRAITS_TRANSFROM_SUBSTUCT(typedef FuncType AsSame;, typedef FuncType AsSame;, N) }; \
-    MACRO_CLASS_FUNC_TEMPLATE_HEADER(, Ret, Class, N, ) struct FuncTraits<MACRO_FUNC_PTR_TYPE_MEMBER(Ret, Class, N)> { typedef MACRO_FUNC_PTR_MEMBER(Ret, Class, FuncType, N); typedef Ret ReturnType; typedef Class ClassType; static const CallConvention callConvention = CC_MEMBER; static const int argCount = N; MACRO_FUNC_TRAITS_TRANSFROM_SUBSTUCT(typedef MACRO_FUNC_PTR_MEMBER(Ret, NewClass, AsSame, N);, typedef void AsSame;, N) }; \
-    MACRO_CLASS_FUNC_TEMPLATE_HEADER(, Ret, Class, N, ) struct FuncTraits<MACRO_FUNC_PTR_TYPE_THISCALL(Ret, Class, N)> { typedef MACRO_FUNC_PTR_THISCALL(Ret, Class, FuncType, N); typedef Ret ReturnType; typedef Class ClassType; static const CallConvention callConvention = CC_THISCALL; static const int argCount = N; MACRO_FUNC_TRAITS_TRANSFROM_SUBSTUCT(typedef MACRO_FUNC_PTR_THISCALL(Ret, NewClass, AsSame, N);, typedef void AsSame;, N) };
+    MACRO_FUNC_TEMPLATE_HEADER(, Ret, N, ) struct FuncTraits<MACRO_FUNC_PTR_TYPE_CDECL(Ret, N)> { typedef MACRO_FUNC_PTR_CDECL(Ret, FuncType, N); typedef Ret ReturnType; typedef void ClassType; static const CallConvention callConvention = CC_CDECL; static const int argCount = N; MACRO_FUNC_TRAITS_TRANSFROM_SUBSTRUCT(typedef FuncType AsSame;, typedef FuncType AsSame;, N) }; \
+    MACRO_FUNC_TEMPLATE_HEADER(, Ret, N, ) struct FuncTraits<MACRO_FUNC_PTR_TYPE_STDCALL(Ret, N)> { typedef MACRO_FUNC_PTR_STDCALL(Ret, FuncType, N); typedef Ret ReturnType; typedef void ClassType; static const CallConvention callConvention = CC_STDCALL; static const int argCount = N; MACRO_FUNC_TRAITS_TRANSFROM_SUBSTRUCT(typedef FuncType AsSame;, typedef FuncType AsSame;, N) }; \
+    MACRO_CLASS_FUNC_TEMPLATE_HEADER(, Ret, Class, N, ) struct FuncTraits<MACRO_FUNC_PTR_TYPE_MEMBER(Ret, Class, N)> { typedef MACRO_FUNC_PTR_MEMBER(Ret, Class, FuncType, N); typedef Ret ReturnType; typedef Class ClassType; static const CallConvention callConvention = CC_MEMBER; static const int argCount = N; MACRO_FUNC_TRAITS_TRANSFROM_SUBSTRUCT(typedef MACRO_FUNC_PTR_MEMBER(Ret, NewClass, AsSame, N);, typedef void AsSame;, N) }; \
+    MACRO_CLASS_FUNC_TEMPLATE_HEADER(, Ret, Class, N, ) struct FuncTraits<MACRO_FUNC_PTR_TYPE_THISCALL(Ret, Class, N)> { typedef MACRO_FUNC_PTR_THISCALL(Ret, Class, FuncType, N); typedef Ret ReturnType; typedef Class ClassType; static const CallConvention callConvention = CC_THISCALL; static const int argCount = N; MACRO_FUNC_TRAITS_TRANSFROM_SUBSTRUCT(typedef MACRO_FUNC_PTR_THISCALL(Ret, NewClass, AsSame, N);, typedef void AsSame;, N) };
   MACRO_INDEX_ITERATE_DEPTH_1(MACRO_NUMBER_OF_FUNCTIONS_TO_GENERATE, MACRO_FUNC_TRAITS, M_SPACE)
   #undef MACRO_FUNC_TRAITS
-  #undef MACRO_FUNC_TRAITS_TRANSFROM_SUBSTUCT
+  #undef MACRO_FUNC_TRAITS_TRANSFROM_SUBSTRUCT
 
   template<bool condition, typename IF, typename ELSE> struct TypeTernary;
   template<typename IF, typename ELSE> struct TypeTernary<true, IF, ELSE> { typedef IF Type; };
