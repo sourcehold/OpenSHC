@@ -16,6 +16,9 @@ cmake_minimum_required (VERSION 3.19)
 
 project ("StrongholdCrusader")
 
+set(CMAKE_CXX_STANDARD 98)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     message(STATUS "VCINSTALLDIR = $ENV{VCINSTALLDIR}")
     set(MSVC80_DEBUGCRT_SOURCE_DIR
@@ -66,6 +69,12 @@ message("CMAKE_C_FLAGS is ${CMAKE_C_FLAGS}")
 message("CMAKE_C_FLAGS_RELWITHDEBINFO is ${CMAKE_C_FLAGS_RELWITHDEBINFO}")
 message("CMAKE_CXX_FLAGS is ${CMAKE_CXX_FLAGS}")
 message("CMAKE_CXX_FLAGS_RELWITHDEBINFO is ${CMAKE_CXX_FLAGS_RELWITHDEBINFO}")
+
+# Handled by path, but explicitly included to support IntelliSense
+include_directories(
+  ${CMAKE_SOURCE_DIR}/MSVC1400/VC/include
+  ${CMAKE_SOURCE_DIR}/MSVC1400/VC/PlatformSDK/Include
+)
 
 # Add source to this project's executable.
 add_executable (StrongholdCrusader "StrongholdCrusader.cpp" "ViewportRenderState.h" "ViewportRenderState.cpp" "framework.h" "ViewportRenderStateStruct.h" "ViewportState.h"  "windowslib.h" "windowslib.cpp" "FunctionResolver.h" "FunctionTest.h")
