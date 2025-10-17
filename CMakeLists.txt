@@ -16,9 +16,6 @@ cmake_minimum_required (VERSION 3.19)
 
 project ("StrongholdCrusader")
 
-set(CMAKE_CXX_STANDARD 98)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     message(STATUS "VCINSTALLDIR = $ENV{VCINSTALLDIR}")
     set(MSVC80_DEBUGCRT_SOURCE_DIR
