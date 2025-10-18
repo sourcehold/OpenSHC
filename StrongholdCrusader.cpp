@@ -1,49 +1,43 @@
-// StrongholdCrusader.cpp : This file contains the 'main' function. Program execution begins and ends there.
+// StrongholdCrusader.cpp : This file contains the 'main' function. Program
+// execution begins and ends there.
 //
 
-#include <iostream>
-#include "FunctionTest.h" // placed here, due to MS macro problems at the moment
+#include "ViewportRenderState.func.h"
 #include "ViewportRenderState.h"
+#include <iostream>
 
-int test(const char*)
-{
-	std::cout << "Test." << std::endl;
-  return 0;
-}
-
-MACRO_FUNCTION_RESOLVER_EXT(int(*)(const char*), true, 0x0, test, FunctionResolver::Option::NONE) testFunc;
-
-//#pragma optimize("", off)
 static ViewportRenderState DAT_ViewportRenderState;
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
-	std::cout << "Hello CMake." << std::endl;
+    std::cout << "Hello CMake." << std::endl;
 
-	if (argc > 399) {
-		argc = 200;
-	}
+    if (argc > 399)
+    {
+        argc = 200;
+    }
 
-	testFunc::call("TEST");
-
-	// We might get multiple definition if it appears in other headers, putting it in a anonymous namespace might help
-	BOOL result = ViewportRenderState_Func::xyAreValid::call(&DAT_ViewportRenderState, 100, 100);
-	std::cout << "The answer is: " << result << " " << sizeof(ViewportRenderState) << std::endl;
-	std::cout << "The answer is: " << DAT_ViewportRenderState.translateXYToTile(200, argc) << std::endl;
-	std::cout << "The answer is: " << DAT_ViewportRenderState.meth_0x4092e0(200, argc) << std::endl;
-	DAT_ViewportRenderState.setupMouseTileXY();
-	DAT_ViewportRenderState.setupMouseTileXY2();
-	DAT_ViewportRenderState.meth_0x4e5a90();
-	return 0;
+    // We might get multiple definition if it appears in other headers, putting it
+    // in a anonymous namespace might help
+    BOOL result = ViewportRenderState_Func::xyAreValid::call(&DAT_ViewportRenderState, 100, 100);
+    std::cout << "The answer is: " << result << " " << sizeof(ViewportRenderState) << std::endl;
+    std::cout << "The answer is: " << ViewportRenderState_Func::translateXYToTile::call(&DAT_ViewportRenderState, 200, argc) << std::endl;
+    std::cout << "The answer is: " << ViewportRenderState_Func::meth_0x4092e0::call(&DAT_ViewportRenderState, 200, argc) << std::endl;
+    ViewportRenderState_Func::setupMouseTileXY::call(&DAT_ViewportRenderState);
+    ViewportRenderState_Func::setupMouseTileXY2::call(&DAT_ViewportRenderState);
+    ViewportRenderState_Func::meth_0x4e5a90::call(&DAT_ViewportRenderState);
+    return 0;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
 
-// Tips for Getting Started: 
+// Tips for Getting Started:
 //   1. Use the Solution Explorer window to add/manage files
 //   2. Use the Team Explorer window to connect to source control
 //   3. Use the Output window to see build output and other messages
 //   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+//   5. Go to Project > Add New Item to create new code files, or Project > Add
+//   Existing Item to add existing code files to the project
+//   6. In the future, to open this project again, go to File > Open > Project
+//   and select the .sln file

@@ -75,12 +75,12 @@ include_directories(
 )
 
 # Add source to this project's executable.
-add_executable (StrongholdCrusader "StrongholdCrusader.cpp" "ViewportRenderState.h" "ViewportRenderState.cpp" "framework.h" "ViewportRenderStateStruct.h" "ViewportState.h"  "windowslib.h" "windowslib.cpp" "FunctionResolver.h" "FunctionTest.h")
+add_executable (StrongholdCrusader "StrongholdCrusader.cpp" "ViewportRenderState.h" "ViewportRenderState.cpp" "framework.h" "ViewportRenderStateStruct.h" "ViewportState.h"  "windowslib.h" "windowslib.cpp" "FunctionResolver.h" ViewportRenderState.func.h)
 
 #if (CMAKE_VERSION VERSION_GREATER 3.12)
   #set_property(TARGET StrongholdCrusader PROPERTY CXX_STANDARD 20)
 #endif()
 
-add_library(OpenSHC SHARED "StrongholdCrusader.cpp" "ViewportRenderState.h" "ViewportRenderState.cpp" "framework.h" "ViewportRenderStateStruct.h" "ViewportState.h"  "windowslib.h" "windowslib.cpp" "FunctionResolver.h" "FunctionTest.h")
+add_library(OpenSHC SHARED "StrongholdCrusader.cpp" "ViewportRenderState.h" "ViewportRenderState.cpp" "framework.h" "ViewportRenderStateStruct.h" "ViewportState.h"  "windowslib.h" "windowslib.cpp" "FunctionResolver.h" ViewportRenderState.func.h)
 
 # TODO: Add tests and install targets if needed.
