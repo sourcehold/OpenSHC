@@ -7,10 +7,11 @@
 
 int test(const char*)
 {
+	std::cout << "Test." << std::endl;
   return 0;
 }
 
-MACRO_FUNCTION_RESOLVER_EXT(int(*)(const char*), true, 0x0, test, FunctionResolver::Option::USE_WRAPPER) testFunc;
+MACRO_FUNCTION_RESOLVER_EXT(int(*)(const char*), true, 0x0, test, FunctionResolver::Option::NONE) testFunc;
 
 //#pragma optimize("", off)
 static ViewportRenderState DAT_ViewportRenderState;
