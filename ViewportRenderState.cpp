@@ -3,8 +3,13 @@
 
 #include "windowslib.h"
 
-// FUNCTION: STRONGHOLDCRUSADER 0x004e1fa0
 ViewportRenderState::ViewportRenderState()
+{
+    ViewportRenderState_Func::_constructor_::call(this);
+}
+
+// FUNCTION: STRONGHOLDCRUSADER 0x004e1fa0
+ViewportRenderState *ViewportRenderState::_constructor_()
 {
     int iVar1;
     int *piVar2;
@@ -41,6 +46,7 @@ ViewportRenderState::ViewportRenderState()
         *piVar2 = 0;
         piVar2 = piVar2 + 1;
     }
+    return this;
 }
 
 // FUNCTION: STRONGHOLDCRUSADER 0x00401000

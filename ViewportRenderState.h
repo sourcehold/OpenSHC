@@ -23,9 +23,8 @@ struct TranslationMatrixTriplet
     int addXgetTile;      /* tile - x */
 };
 
-class ViewportRenderState
+struct ViewportRenderState
 {
-  public:
     // Do not declare virtual functions, it will shift all struct addresses by +4
     struct ViewportState DAT_ViewportState; /* imported */
     undefined4 DAT_skipped_isos;
@@ -97,8 +96,10 @@ class ViewportRenderState
     undefined4 unitRender4;
     undefined4 unitRender5;
 
-    // FUNCTION: STRONGHOLDCRUSADER 0x004e1fa0
     ViewportRenderState();
+
+    // FUNCTION: STRONGHOLDCRUSADER 0x004e1fa0
+    ViewportRenderState *_constructor_();
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00401000
     BOOL xyAreValid(uint x, uint y);

@@ -5,7 +5,9 @@
 
 namespace ViewportRenderState_Func
 {
-// TODO: discuss how to handle constructors and destructors
+// constructors and destructors are handled by a this call function called by the "real" constructor/destructor
+MACRO_FUNCTION_RESOLVER(ViewportRenderState *(ViewportRenderState::*)(), true, 0x004e1fa0, &ViewportRenderState::_constructor_)
+_constructor_;
 
 MACRO_FUNCTION_RESOLVER_EXT(BOOL (ViewportRenderState::*)(uint, uint), true, 0x00401000, &ViewportRenderState::xyAreValid, FunctionResolver::Option::USE_WRAPPER)
 xyAreValid;
