@@ -4,8 +4,7 @@
 #include "common.h"
 #include "framework.h"
 
-struct UnitRenderHelpStructure
-{
+struct UnitRenderHelpStructure {
     int param_1;
     int param_2;
     int param_3;
@@ -16,15 +15,13 @@ struct UnitRenderHelpStructure
     int param_8;
 };
 
-struct TranslationMatrixTriplet
-{
+struct TranslationMatrixTriplet {
     int distanceToCenter; /* y distance to center */
-    int firstTileOfRow;   /* serialized tiles */
-    int addXgetTile;      /* tile - x */
+    int firstTileOfRow; /* serialized tiles */
+    int addXgetTile; /* tile - x */
 };
 
-struct ViewportRenderState
-{
+struct ViewportRenderState {
     // Do not declare virtual functions, it will shift all struct addresses by +4
     struct ViewportState DAT_ViewportState; /* imported */
     undefined4 DAT_skipped_isos;
@@ -99,7 +96,7 @@ struct ViewportRenderState
     ViewportRenderState();
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004e1fa0
-    ViewportRenderState *_constructor_();
+    ViewportRenderState* _constructor_();
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00401000
     BOOL xyAreValid(uint x, uint y);

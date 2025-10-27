@@ -3,8 +3,7 @@
 #include "common.h"
 
 /* C++ Class updated via OOAanalyzer. */
-struct ViewportState
-{
+struct ViewportState {
     undefined4 field0_0x0;
     int mouseTileX;
     int mouseTileY;
@@ -35,13 +34,13 @@ struct ViewportState
     undefined4 field27_0x6c;
     int mouseAtomRefFloorTile;
     undefined4 ptrColor;
-    int viewportX;            /* Unsigned Double-Word (ddw, 4-bytes) */
-    int viewportY;            /* Unsigned Double-Word (ddw, 4-bytes) */
+    int viewportX; /* Unsigned Double-Word (ddw, 4-bytes) */
+    int viewportY; /* Unsigned Double-Word (ddw, 4-bytes) */
     int currentCameraOffsetX; /* Unsigned Double-Word (ddw, 4-bytes) */
     int currentCameraOffsetY; /* Unsigned Double-Word (ddw, 4-bytes) */
-    int viewportHeight;       /* Unsigned Double-Word (ddw, 4-bytes) */
-    int viewportWidth;        /* Unsigned Double-Word (ddw, 4-bytes) */
-    int isZoomedOut;          /* Unsigned Double-Word (ddw, 4-bytes) */
+    int viewportHeight; /* Unsigned Double-Word (ddw, 4-bytes) */
+    int viewportWidth; /* Unsigned Double-Word (ddw, 4-bytes) */
+    int isZoomedOut; /* Unsigned Double-Word (ddw, 4-bytes) */
     undefined4 field37_0x94;
     undefined4 field38_0x98;
     int tileCenterX;

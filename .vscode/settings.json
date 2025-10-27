@@ -1,10 +1,12 @@
 {
   "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
-  "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle : Microsoft, ColumnLimit: 0, IndentWidth: 4 }",
   "editor.formatOnSave": true,
   "editor.formatOnSaveMode": "file",
   "editor.indentSize": 4,
   "editor.tabSize": 4,
+  "editor.rulers": [
+    120
+  ],
   "files.associations": {
     "iostream": "cpp",
     "algorithm": "cpp",

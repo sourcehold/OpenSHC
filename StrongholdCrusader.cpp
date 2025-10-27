@@ -8,12 +8,11 @@
 
 static ViewportRenderState DAT_ViewportRenderState;
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
     std::cout << "Hello CMake." << std::endl;
 
-    if (argc > 399)
-    {
+    if (argc > 399) {
         argc = 200;
     }
 
@@ -21,8 +20,10 @@ int main(int argc, char **argv)
     // in a anonymous namespace might help
     BOOL result = ViewportRenderState_Func::xyAreValid::call(&DAT_ViewportRenderState, 100, 100);
     std::cout << "The answer is: " << result << " " << sizeof(ViewportRenderState) << std::endl;
-    std::cout << "The answer is: " << ViewportRenderState_Func::translateXYToTile::call(&DAT_ViewportRenderState, 200, argc) << std::endl;
-    std::cout << "The answer is: " << ViewportRenderState_Func::meth_0x4092e0::call(&DAT_ViewportRenderState, 200, argc) << std::endl;
+    std::cout << "The answer is: "
+              << ViewportRenderState_Func::translateXYToTile::call(&DAT_ViewportRenderState, 200, argc) << std::endl;
+    std::cout << "The answer is: " << ViewportRenderState_Func::meth_0x4092e0::call(&DAT_ViewportRenderState, 200, argc)
+              << std::endl;
     ViewportRenderState_Func::setupMouseTileXY::call(&DAT_ViewportRenderState);
     ViewportRenderState_Func::setupMouseTileXY2::call(&DAT_ViewportRenderState);
     ViewportRenderState_Func::meth_0x4e5a90::call(&DAT_ViewportRenderState);

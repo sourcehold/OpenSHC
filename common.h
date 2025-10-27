@@ -3,10 +3,9 @@
 #define MAP_XY_LIMIT 400
 #define MAP_XY_LIMIT_INCLUSIVE 399
 
-namespace Ghidra
-{
-typedef void *pointer;
-typedef void *pointer32;
+namespace Ghidra {
+typedef void* pointer;
+typedef void* pointer32;
 typedef unsigned char undefined;
 
 // typedef unsigned char    bool;

@@ -3,16 +3,18 @@
 #include "FunctionResolver.h"
 #include "ViewportRenderState.h"
 
-namespace ViewportRenderState_Func
-{
+namespace ViewportRenderState_Func {
 // constructors and destructors are handled by a this call function called by the "real" constructor/destructor
-MACRO_FUNCTION_RESOLVER(ViewportRenderState *(ViewportRenderState::*)(), true, 0x004e1fa0, &ViewportRenderState::_constructor_)
+MACRO_FUNCTION_RESOLVER(
+    ViewportRenderState* (ViewportRenderState::*)(), true, 0x004e1fa0, &ViewportRenderState::_constructor_)
 _constructor_;
 
-MACRO_FUNCTION_RESOLVER_EXT(BOOL (ViewportRenderState::*)(uint, uint), true, 0x00401000, &ViewportRenderState::xyAreValid, FunctionResolver::Option::USE_WRAPPER)
+MACRO_FUNCTION_RESOLVER_EXT(BOOL (ViewportRenderState::*)(uint, uint), true, 0x00401000,
+    &ViewportRenderState::xyAreValid, FunctionResolver::Option::USE_WRAPPER)
 xyAreValid;
 
-MACRO_FUNCTION_RESOLVER(int (ViewportRenderState::*)(int, int), true, 0x00401040, &ViewportRenderState::translateXYToTile)
+MACRO_FUNCTION_RESOLVER(
+    int (ViewportRenderState::*)(int, int), true, 0x00401040, &ViewportRenderState::translateXYToTile)
 translateXYToTile;
 
 MACRO_FUNCTION_RESOLVER(int (ViewportRenderState::*)(int, int), true, 0x004092e0, &ViewportRenderState::meth_0x4092e0)

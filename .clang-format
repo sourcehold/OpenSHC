@@ -1,0 +1,9 @@
+﻿---
+BasedOnStyle: WebKit
+ColumnLimit: '120'
+IndentWidth: '4'
+TabWidth: '4'
+UseTab: Never
+InsertNewlineAtEOF: true
+
+...
