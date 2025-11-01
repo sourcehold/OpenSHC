@@ -11,6 +11,8 @@ build.ps1
 build.py
 dist/
 
+# Softlink to game installation
+_original
 
 # Prerequisites
 *.d
