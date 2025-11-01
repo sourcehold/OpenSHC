@@ -49,3 +49,6 @@ _original
 
 # Visual Studio Configuration
 .vs
+
+# Allow the recreated static libs
+!dependencies/recreated/lib/*.lib
