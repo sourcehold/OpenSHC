@@ -100,8 +100,11 @@ if(EXISTS "${CRUSADER_DIR}/binkw32_real.dll")
 else()
     add_file_copy(StrongholdCrusader "${CRUSADER_DIR}/binkw32.dll" "$<TARGET_FILE_DIR:StrongholdCrusader>/binkw32.dll")
 endif()
-add_file_copy(StrongholdCrusader "${CRUSADER_DIR}/shfolder.dll" "$<TARGET_FILE_DIR:StrongholdCrusader>/shfolder.dll")
 add_file_copy(StrongholdCrusader "${CRUSADER_DIR}/Mss32.dll" "$<TARGET_FILE_DIR:StrongholdCrusader>/Mss32.dll")
+
+# shfolder is a normal windows lib, however, the game needs to work with the games version, so we still copy it
+# it should be checked later if the compiler emits a shfolder.dll on its own
+add_file_copy(StrongholdCrusader "${CRUSADER_DIR}/shfolder.dll" "$<TARGET_FILE_DIR:StrongholdCrusader>/shfolder.dll")
 
 #if (CMAKE_VERSION VERSION_GREATER 3.12)
   #set_property(TARGET StrongholdCrusader PROPERTY CXX_STANDARD 20)
