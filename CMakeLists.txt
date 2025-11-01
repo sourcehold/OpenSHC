@@ -14,7 +14,16 @@ cmake_minimum_required (VERSION 3.19)
     #set(CMAKE_BUILD_TYPE "RelWithDebInfo")
 #endif()
 
+function(add_file_copy target src dest)
+    message(STATUS "Ensure file from \"${src}\" is copied to \"${dest}\" for target: ${target}")
+    add_custom_command(TARGET ${target} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different "${src}" "${dest}"
+    )
+endfunction()
+
 project ("StrongholdCrusader")
+
+set(CRUSADER_DIR "${CMAKE_SOURCE_DIR}/_original")
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     message(STATUS "VCINSTALLDIR = $ENV{VCINSTALLDIR}")
@@ -70,12 +79,29 @@ message("CMAKE_CXX_FLAGS_RELWITHDEBINFO is ${CMAKE_CXX_FLAGS_RELWITHDEBINFO}")
 
 # Handled by path, but explicitly included to support IntelliSense
 include_directories(
-  ${CMAKE_SOURCE_DIR}/MSVC1400/VC/include
-  ${CMAKE_SOURCE_DIR}/MSVC1400/VC/PlatformSDK/Include
+    ${CMAKE_SOURCE_DIR}/MSVC1400/VC/include
+    ${CMAKE_SOURCE_DIR}/MSVC1400/VC/PlatformSDK/Include
+)
+
+# Handle dependencies without source files
+include_directories(
+    ${CMAKE_SOURCE_DIR}/dependencies/recreated/include
+)
+link_directories(
+    ${CMAKE_SOURCE_DIR}/dependencies/recreated/lib
 )
 
 # Add source to this project's executable.
-add_executable (StrongholdCrusader "StrongholdCrusader.cpp" "ViewportRenderState.h" "ViewportRenderState.cpp" "framework.h" "ViewportRenderStateStruct.h" "ViewportState.h"  "windowslib.h" "windowslib.cpp" "FunctionResolver.h" ViewportRenderState.func.h)
+add_executable(StrongholdCrusader "StrongholdCrusader.cpp" "ViewportRenderState.h" "ViewportRenderState.cpp" "framework.h" "ViewportRenderStateStruct.h" "ViewportState.h"  "windowslib.h" "windowslib.cpp" "FunctionResolver.h" ViewportRenderState.func.h)
+
+# Checks if a binkw32_real is present and uses this instead; only checks on reconfigure
+if(EXISTS "${CRUSADER_DIR}/binkw32_real.dll")
+    add_file_copy(StrongholdCrusader "${CRUSADER_DIR}/binkw32_real.dll" "$<TARGET_FILE_DIR:StrongholdCrusader>/binkw32.dll")
+else()
+    add_file_copy(StrongholdCrusader "${CRUSADER_DIR}/binkw32.dll" "$<TARGET_FILE_DIR:StrongholdCrusader>/binkw32.dll")
+endif()
+add_file_copy(StrongholdCrusader "${CRUSADER_DIR}/shfolder.dll" "$<TARGET_FILE_DIR:StrongholdCrusader>/shfolder.dll")
+add_file_copy(StrongholdCrusader "${CRUSADER_DIR}/Mss32.dll" "$<TARGET_FILE_DIR:StrongholdCrusader>/Mss32.dll")
 
 #if (CMAKE_VERSION VERSION_GREATER 3.12)
   #set_property(TARGET StrongholdCrusader PROPERTY CXX_STANDARD 20)
