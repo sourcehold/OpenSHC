@@ -2,11 +2,10 @@
 // execution begins and ends there.
 //
 
+#include "StructTest.h"
 #include "ViewportRenderState.func.h"
 #include "ViewportRenderState.h"
 #include <iostream>
-
-static ViewportRenderState DAT_ViewportRenderState;
 
 int main(int argc, char** argv)
 {
@@ -18,15 +17,16 @@ int main(int argc, char** argv)
 
     // We might get multiple definition if it appears in other headers, putting it
     // in a anonymous namespace might help
-    BOOL result = ViewportRenderState_Func::xyAreValid::call(&DAT_ViewportRenderState, 100, 100);
+    BOOL result = ViewportRenderState_Func::xyAreValid::call(ViewportRenderState_Struct::ptr, 100, 100);
     std::cout << "The answer is: " << result << " " << sizeof(ViewportRenderState) << std::endl;
     std::cout << "The answer is: "
-              << ViewportRenderState_Func::translateXYToTile::call(&DAT_ViewportRenderState, 200, argc) << std::endl;
-    std::cout << "The answer is: " << ViewportRenderState_Func::meth_0x4092e0::call(&DAT_ViewportRenderState, 200, argc)
+              << ViewportRenderState_Func::translateXYToTile::call(ViewportRenderState_Struct::ptr, 200, argc)
               << std::endl;
-    ViewportRenderState_Func::setupMouseTileXY::call(&DAT_ViewportRenderState);
-    ViewportRenderState_Func::setupMouseTileXY2::call(&DAT_ViewportRenderState);
-    ViewportRenderState_Func::meth_0x4e5a90::call(&DAT_ViewportRenderState);
+    std::cout << "The answer is: "
+              << ViewportRenderState_Func::meth_0x4092e0::call(ViewportRenderState_Struct::ptr, 200, argc) << std::endl;
+    ViewportRenderState_Func::setupMouseTileXY::call(ViewportRenderState_Struct::ptr);
+    ViewportRenderState_Func::setupMouseTileXY2::call(ViewportRenderState_Struct::ptr);
+    ViewportRenderState_Func::meth_0x4e5a90::call(ViewportRenderState_Struct::ptr);
     return 0;
 }
 
