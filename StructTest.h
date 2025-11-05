@@ -3,4 +3,4 @@
 #include "StructResolver.h"
 #include "ViewportRenderState.h"
 
-MACRO_STRUCT_RESOLVER(ViewportRenderState, 0x100) ViewportRenderState_Struct;
+MACRO_STRUCT_RESOLVER(ViewportRenderState, true, 0x100) ViewportRenderState_Struct;

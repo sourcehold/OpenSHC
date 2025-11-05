@@ -6,7 +6,7 @@
 
 // could also be placed in own file against the clutter
 // PROBLEM: Needs definition of address twice, could however be helped if addresses are moved into own struct/file
-template <> ViewportRenderState StructResolver::InternalResolver<ViewportRenderState, 0x100>::obj;
+template <> ViewportRenderState StructResolver::Instance<ViewportRenderState, 0x100>::instance;
 
 ViewportRenderState::ViewportRenderState() { ViewportRenderState_Func::_constructor_::call(this); }
 
