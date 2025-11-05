@@ -298,7 +298,7 @@ public:
     template<bool implemented, bool wrapper, typename _>
     struct FunctionPtrUnifier;
     template<typename _>
-    struct FunctionPtrUnifier<false, false, _>{
+    struct FunctionPtrUnifier<true, false, _>{
       inline static const FuncPtrType get(){ return funcAddress; }
     };
     template<bool implemented, typename _>
@@ -306,7 +306,7 @@ public:
       inline static const FuncPtrType get(){ return reinterpret_cast<FuncPtrType>(&WrapperFunction::call); }
     };
     template<typename _>
-    struct FunctionPtrUnifier<true, false, _>{
+    struct FunctionPtrUnifier<false, false, _>{
       inline static const FuncPtrType get(){ return reinterpret_cast<FuncPtrType>(&GameCallerFunction::call); }
     };
 
