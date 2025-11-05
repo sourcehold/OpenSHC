@@ -209,7 +209,6 @@ public:
     struct Initializer { Initializer(); };
     static const Initializer initializer;
 
-
     template<typename FuncPtrType, bool implemented, bool wrapper>
     struct FunctionProvider;
 
@@ -219,10 +218,10 @@ public:
       MACRO_FUNC_TEMPLATE_HEADER(, Ret, N, ) struct FunctionProvider<MACRO_FUNC_PTR_TYPE_STDCALL(Ret, N), true, false> { private: template<typename R, typename = void> struct CallHelper { inline static R call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N)) { return funcAddress(MACRO_PARAMETER_LIST(N)); } }; template<typename _> struct CallHelper<void, _> { inline static void call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N)) { funcAddress(MACRO_PARAMETER_LIST(N)); } }; public: typedef CallHelper<Ret> Function; }; \
       MACRO_CLASS_FUNC_TEMPLATE_HEADER(, Ret, Class, N, ) struct FunctionProvider<MACRO_FUNC_PTR_TYPE_MEMBER(Ret, Class, N), true, false> { private: template<typename R, typename = void> struct CallHelper { inline static R call(Class* that MACRO_PARAMETER_TYPE_PARAMETER_LIST_WITH_COMMA_PREFIX(N)) { return (that->*funcAddress)(MACRO_PARAMETER_LIST(N)); } }; template<typename _> struct CallHelper<void, _> { inline static void call(Class* that MACRO_PARAMETER_TYPE_PARAMETER_LIST_WITH_COMMA_PREFIX(N)) { (that->*funcAddress)(MACRO_PARAMETER_LIST(N)); } }; public: typedef CallHelper<Ret> Function; }; \
       MACRO_FUNC_TEMPLATE_HEADER(, Ret, N, ) struct FunctionProvider<MACRO_FUNC_PTR_TYPE_CCALL(Ret, N), false, false> { private: template<typename R, typename = void> struct CallHelper { inline static R call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N)) { return GameCallerFunction::call(MACRO_PARAMETER_LIST(N)); } }; template<typename _> struct CallHelper<void, _> { inline static void call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N)) { GameCallerFunction::call(MACRO_PARAMETER_LIST(N)); } }; public: typedef CallHelper<Ret> Function; }; \
-      MACRO_FUNC_TEMPLATE_HEADER(, Ret, N, ) struct FunctionProvider<MACRO_FUNC_PTR_TYPE_STDCALL(Ret, N), false, false> { private: template<typename R, typename = void> struct CallHelper { inline static R call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N)) { return GameCallerFunction::call(Ret, N)) gameAddress)(MACRO_PARAMETER_LIST(N)); } }; template<typename _> struct CallHelper<void, _> { inline static void call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N)) { GameCallerFunction::call(MACRO_PARAMETER_LIST(N)); } }; public: typedef CallHelper<Ret> Function; }; \
+      MACRO_FUNC_TEMPLATE_HEADER(, Ret, N, ) struct FunctionProvider<MACRO_FUNC_PTR_TYPE_STDCALL(Ret, N), false, false> { private: template<typename R, typename = void> struct CallHelper { inline static R call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N)) { return GameCallerFunction::call(MACRO_PARAMETER_LIST(N)); } }; template<typename _> struct CallHelper<void, _> { inline static void call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N)) { GameCallerFunction::call(MACRO_PARAMETER_LIST(N)); } }; public: typedef CallHelper<Ret> Function; }; \
       MACRO_CLASS_FUNC_TEMPLATE_HEADER(, Ret, Class, N, ) struct FunctionProvider<MACRO_FUNC_PTR_TYPE_MEMBER(Ret, Class, N), false, false> { private: template<typename R, typename = void> struct CallHelper { inline static R call(Class* that MACRO_PARAMETER_TYPE_PARAMETER_LIST_WITH_COMMA_PREFIX(N)) { return (((GameCallerFunction*) that)->GameCallerFunction::call)(MACRO_PARAMETER_LIST(N)); } }; template<typename _> struct CallHelper<void, _> { inline static void call(Class* that MACRO_PARAMETER_TYPE_PARAMETER_LIST_WITH_COMMA_PREFIX(N)) { (((GameCallerFunction*) that)->GameCallerFunction::call)(MACRO_PARAMETER_LIST(N)); } }; public: typedef CallHelper<Ret> Function; }; \
       MACRO_FUNC_TEMPLATE_HEADER(, Ret, N, M_COMMA bool implemented) struct FunctionProvider<MACRO_FUNC_PTR_TYPE_CCALL(Ret, N), implemented, true> { private: template<typename R, typename = void> struct CallHelper { inline static R call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N)) { return WrapperFunction::call(MACRO_PARAMETER_LIST(N)); } }; template<typename _> struct CallHelper<void, _> { inline static void call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N)) { WrapperFunction::call(MACRO_PARAMETER_LIST(N)); } }; public: typedef CallHelper<Ret> Function; }; \
-      MACRO_FUNC_TEMPLATE_HEADER(, Ret, N, M_COMMA bool implemented) struct FunctionProvider<MACRO_FUNC_PTR_TYPE_STDCALL(Ret, N), implemented, true> { private: template<typename R, typename = void> struct CallHelper { inline static R call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N)) { return WrapperFunction::call(Ret, N)) gameAddress)(MACRO_PARAMETER_LIST(N)); } }; template<typename _> struct CallHelper<void, _> { inline static void call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N)) { WrapperFunction::call(MACRO_PARAMETER_LIST(N)); } }; public: typedef CallHelper<Ret> Function; }; \
+      MACRO_FUNC_TEMPLATE_HEADER(, Ret, N, M_COMMA bool implemented) struct FunctionProvider<MACRO_FUNC_PTR_TYPE_STDCALL(Ret, N), implemented, true> { private: template<typename R, typename = void> struct CallHelper { inline static R call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N)) { return WrapperFunction::call(MACRO_PARAMETER_LIST(N)); } }; template<typename _> struct CallHelper<void, _> { inline static void call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N)) { WrapperFunction::call(MACRO_PARAMETER_LIST(N)); } }; public: typedef CallHelper<Ret> Function; }; \
       MACRO_CLASS_FUNC_TEMPLATE_HEADER(, Ret, Class, N, M_COMMA bool implemented) struct FunctionProvider<MACRO_FUNC_PTR_TYPE_MEMBER(Ret, Class, N), implemented, true> { private: template<typename R, typename = void> struct CallHelper { inline static R call(Class* that MACRO_PARAMETER_TYPE_PARAMETER_LIST_WITH_COMMA_PREFIX(N)) { return (((WrapperFunction*) that)->WrapperFunction::call)(MACRO_PARAMETER_LIST(N)); } }; template<typename _> struct CallHelper<void, _> { inline static void call(Class* that MACRO_PARAMETER_TYPE_PARAMETER_LIST_WITH_COMMA_PREFIX(N)) { (((WrapperFunction*) that)->WrapperFunction::call)(MACRO_PARAMETER_LIST(N)); } }; public: typedef CallHelper<Ret> Function; };
     MACRO_INDEX_ITERATE_DEPTH_1(MACRO_NUMBER_OF_FUNCTIONS_TO_GENERATE, MACRO_FUNCTION_PROVIDER, M_SPACE)
     #undef MACRO_FUNCTION_PROVIDER
@@ -295,6 +294,24 @@ public:
 
     typedef typename GameCaller<FuncPtrType>::Function GameCallerFunction;
 
+
+    template<bool implemented, bool wrapper, typename _>
+    struct FunctionPtrUnifier;
+    template<typename _>
+    struct FunctionPtrUnifier<false, false, _>{
+      inline static const FuncPtrType get(){ return funcAddress; }
+    };
+    template<bool implemented, typename _>
+    struct FunctionPtrUnifier<implemented, true, _>{
+      inline static const FuncPtrType get(){ return reinterpret_cast<FuncPtrType>(&WrapperFunction::call); }
+    };
+    template<typename _>
+    struct FunctionPtrUnifier<true, false, _>{
+      inline static const FuncPtrType get(){ return reinterpret_cast<FuncPtrType>(&GameCallerFunction::call); }
+    };
+
+    typedef FunctionPtrUnifier<implemented, Flags::USE_WRAPPER, void> UnifiedFunctionPtr;
+
   public:
     typedef typename FunctionProvider<FuncPtrType, implemented, Flags::USE_WRAPPER>::Function Function;
   };
@@ -304,7 +321,7 @@ template<int address>
 bool FunctionResolver::AddressUsageKeeper<address>::initialized = false;
 
 template<typename FuncPtrType, bool implemented, int gameAddress, FuncPtrType funcAddress, int options>
-typename FunctionResolver::Resolver<FuncPtrType, implemented, gameAddress, funcAddress, options>::Initializer const FunctionResolver::Resolver<FuncPtrType, implemented, gameAddress, funcAddress, options>::initializer;
+const typename FunctionResolver::Resolver<FuncPtrType, implemented, gameAddress, funcAddress, options>::Initializer FunctionResolver::Resolver<FuncPtrType, implemented, gameAddress, funcAddress, options>::initializer;
 
 template<typename FuncPtrType, bool implemented, int gameAddress, FuncPtrType funcAddress, int options>
 FunctionResolver::Resolver<FuncPtrType, implemented, gameAddress, funcAddress, options>::Initializer::Initializer()
@@ -322,17 +339,8 @@ FunctionResolver::Resolver<FuncPtrType, implemented, gameAddress, funcAddress, o
     // TODO: the hook would need to take the resolved ptr as reference, not the "funcAddress", otherwise it would not call the wrapping logic if the game calls
 
     // Way to get address to link (only implemented): 
-    void* func;
-    if (Flags::USE_WRAPPER)
-    {
-      const typename FuncTraits<FuncPtrType>::Transform<WrapperFunction>::AsSame wrapperFunction = &WrapperFunction::call;
-      func = *((void**) &wrapperFunction);
-    }
-    else
-    {
-      const FuncPtrType funcPtr = funcAddress;
-      func = *((void**) &funcPtr);
-    }
+    const FuncPtrType funcPtr = UnifiedFunctionPtr::get();
+    const void* func= *((void**) &funcPtr);
     std::cout << "implemented with '" << getFuncPtrName<FuncPtrType, funcAddress>() << "', now hook to: " << *((void**) (&func)) << "\n";
   }
   else
