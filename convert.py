@@ -58,13 +58,19 @@ for cls in clsses:
 
 collection.add(exporter.export_addresses(project.yield_objects()))
 
-class_paths = set(cls.location() for cls in clsses)
+from skink.export.context import DEFAULT, Context
+ctx: Context = DEFAULT.copy() # type: ignore
+ctx.class_rules.suffix = ""
+ctx.struct_rules.suffix = ""
+ctx.include.file_extension = ""
+
+class_paths = set(cls.location(ctx) for cls in clsses)
 
 for obj in objs:
   if isinstance(obj, DataTypeResult):
     if obj.message.text == "DT.Struct":
       s = Struct(obj)
-      if s.location() not in class_paths:
+      if s.path(ctx) not in class_paths:
         collection.add(exporter.export_struct(s))
   elif isinstance(obj, EnumResult):
     e = Enum(obj)
