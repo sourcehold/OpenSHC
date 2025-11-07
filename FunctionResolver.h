@@ -139,10 +139,6 @@ public:
   struct Resolver
   {
   private:
-    // TODO: if the old MSVC still works the same, one can get name information by using typeid(MyTemplate<...>).name() or __FUNCSIG__
-    //   and then extract the names. This could be helpful for debugging
-    typedef Resolver<FuncPtrType, implemented, gameAddress, funcAddress, options> Self;
-
     typedef OptionFlags<options> Flags;
 
     struct Initializer { Initializer(); };
@@ -163,21 +159,6 @@ public:
     struct FunctionPtrUnifier<false, false, _>{
       inline static const FuncPtrType get(){ return reinterpret_cast<FuncPtrType>(&GameCallerFunction::call); }
     };
-
-
-    typedef FunctionPtrUnifier<implemented, Flags::USE_WRAPPER, void> UnifiedFunctionPtr;
-
-    template<typename FuncPtrType>
-    struct FunctionProvider;
-
-    // Call helper "typename _" is needed for explicit instantiation, otherwise MSVC will complain
-    #define MACRO_FUNCTION_PROVIDER(N) \
-      MACRO_FUNC_TEMPLATE_HEADER(, Ret, N, ) struct FunctionProvider<MACRO_FUNC_PTR_TYPE_CCALL(Ret, N)> { private: template<typename R, typename = void> struct CallHelper : public UnifiedFunctionPtr { inline static R call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N)) { return get()(MACRO_PARAMETER_LIST(N)); } }; template<typename _> struct CallHelper<void, _> : public UnifiedFunctionPtr { inline static void call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N)) { get()(MACRO_PARAMETER_LIST(N)); } }; public: typedef CallHelper<Ret> Function; }; \
-      MACRO_FUNC_TEMPLATE_HEADER(, Ret, N, ) struct FunctionProvider<MACRO_FUNC_PTR_TYPE_STDCALL(Ret, N)> { private: template<typename R, typename = void> struct CallHelper : public UnifiedFunctionPtr { inline static R call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N)) { return get()(MACRO_PARAMETER_LIST(N)); } }; template<typename _> struct CallHelper<void, _> : public UnifiedFunctionPtr { inline static void call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N)) { get()(MACRO_PARAMETER_LIST(N)); } }; public: typedef CallHelper<Ret> Function; }; \
-      MACRO_CLASS_FUNC_TEMPLATE_HEADER(, Ret, Class, N, ) struct FunctionProvider<MACRO_FUNC_PTR_TYPE_MEMBER(Ret, Class, N)> { private: template<typename R, typename = void> struct CallHelper : public UnifiedFunctionPtr { inline static R call(Class* that MACRO_PARAMETER_TYPE_PARAMETER_LIST_WITH_COMMA_PREFIX(N)) { return (that->*get())(MACRO_PARAMETER_LIST(N)); } }; template<typename _> struct CallHelper<void, _> : public UnifiedFunctionPtr { inline static void call(Class* that MACRO_PARAMETER_TYPE_PARAMETER_LIST_WITH_COMMA_PREFIX(N)) { (that->*get())(MACRO_PARAMETER_LIST(N)); } }; public: typedef CallHelper<Ret> Function; };
-    MACRO_INDEX_ITERATE_DEPTH_1(MACRO_NUMBER_OF_FUNCTIONS_TO_GENERATE, MACRO_FUNCTION_PROVIDER, M_SPACE)
-    #undef MACRO_FUNCTION_PROVIDER
-
 
     typedef FunctionPtrUnifier<implemented, false, void> UnifiedFunctionPtrForWrapper;
 
@@ -245,8 +226,9 @@ public:
 
     typedef typename GameCaller<FuncPtrType>::Function GameCallerFunction;
 
+    typedef FunctionPtrUnifier<implemented, Flags::USE_WRAPPER, void> UnifiedFunctionPtr;
   public:
-    typedef typename FunctionProvider<FuncPtrType>::Function Function;
+    typedef UnifiedFunctionPtr Function;
   };
 };
 
@@ -274,7 +256,7 @@ FunctionResolver::Resolver<FuncPtrType, implemented, gameAddress, funcAddress, o
     // Way to get address to link (only implemented): 
     const FuncPtrType funcPtr = Function::get();
     const void* func= *((void**) &funcPtr);
-    std::cout << "implemented with '" << getFuncPtrName<FuncPtrType, funcAddress>() << "', now hook to: " << *((void**) (&func)) << "\n";
+    std::cout << "implemented '" << (void*)gameAddress << "' with '" << getFuncPtrName<FuncPtrType, funcAddress>() << "', now hook to: " << *((void**) (&func)) << "\n";
   }
   else
   {
@@ -346,6 +328,9 @@ FunctionResolver::Resolver<FuncPtrType, implemented, gameAddress, funcAddress, o
 // Only provides the template instantiation and the typedef start, so add the same afterwards
 #define MACRO_FUNCTION_RESOLVER(FUNCTION_TYPE, IMPLEMENTED, GAME_ADDRESS, FUNCTION_ADDRESS) MACRO_FUNCTION_RESOLVER_EXT(FUNCTION_TYPE, IMPLEMENTED, GAME_ADDRESS, FUNCTION_ADDRESS, FunctionResolver::Option::NONE)
 #define MACRO_FUNCTION_RESOLVER_EXT(FUNCTION_TYPE, IMPLEMENTED, GAME_ADDRESS, FUNCTION_ADDRESS, OPTIONS) template struct FunctionResolver::Resolver<FUNCTION_TYPE, IMPLEMENTED, GAME_ADDRESS, FUNCTION_ADDRESS, OPTIONS>; typedef FunctionResolver::Resolver<FUNCTION_TYPE, IMPLEMENTED, GAME_ADDRESS, FUNCTION_ADDRESS, OPTIONS>::Function
+
+#define MACRO_CALL(RESOLVED_FUNCTION) (RESOLVED_FUNCTION::get())
+#define MACRO_CALL_MEMBER(RESOLVED_FUNCTION, STRUCT_POINTER) (STRUCT_POINTER->*RESOLVED_FUNCTION::get())
 
 #endif // FUNCTION_RESOLVER
 

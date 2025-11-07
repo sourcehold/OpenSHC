@@ -17,16 +17,18 @@ int main(int argc, char** argv)
 
     // We might get multiple definition if it appears in other headers, putting it
     // in a anonymous namespace might help
-    BOOL result = ViewportRenderState_Func::xyAreValid::call(ViewportRenderState_Struct::ptr, 100, 100);
+    BOOL result = MACRO_CALL_MEMBER(ViewportRenderState_Func::xyAreValid, ViewportRenderState_Struct::ptr)(100, 100);
     std::cout << "The answer is: " << result << " " << sizeof(ViewportRenderState) << std::endl;
     std::cout << "The answer is: "
-              << ViewportRenderState_Func::translateXYToTile::call(ViewportRenderState_Struct::ptr, 200, argc)
+              << MACRO_CALL_MEMBER(ViewportRenderState_Func::translateXYToTile, ViewportRenderState_Struct::ptr)(
+                     200, argc)
               << std::endl;
     std::cout << "The answer is: "
-              << ViewportRenderState_Func::meth_0x4092e0::call(ViewportRenderState_Struct::ptr, 200, argc) << std::endl;
-    ViewportRenderState_Func::setupMouseTileXY::call(ViewportRenderState_Struct::ptr);
-    ViewportRenderState_Func::setupMouseTileXY2::call(ViewportRenderState_Struct::ptr);
-    ViewportRenderState_Func::meth_0x4e5a90::call(ViewportRenderState_Struct::ptr);
+              << MACRO_CALL_MEMBER(ViewportRenderState_Func::meth_0x4092e0, ViewportRenderState_Struct::ptr)(200, argc)
+              << std::endl;
+    MACRO_CALL_MEMBER(ViewportRenderState_Func::setupMouseTileXY, ViewportRenderState_Struct::ptr)();
+    MACRO_CALL_MEMBER(ViewportRenderState_Func::setupMouseTileXY2, ViewportRenderState_Struct::ptr)();
+    MACRO_CALL_MEMBER(ViewportRenderState_Func::meth_0x4e5a90, ViewportRenderState_Struct::ptr)();
     return 0;
 }
 

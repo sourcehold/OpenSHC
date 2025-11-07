@@ -16,7 +16,7 @@ MACRO_STRUCT_INSTANCE(ViewportRenderState, 0x100)
     return ViewportRenderState();
 }
 
-ViewportRenderState::ViewportRenderState() { ViewportRenderState_Func::_constructor_::call(this); }
+ViewportRenderState::ViewportRenderState() { MACRO_CALL_MEMBER(ViewportRenderState_Func::_constructor_, this)(); }
 
 // FUNCTION: STRONGHOLDCRUSADER 0x004e1fa0
 ViewportRenderState* ViewportRenderState::_constructor_()
