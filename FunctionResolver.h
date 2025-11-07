@@ -4,6 +4,9 @@
 #define FUNCTION_RESOLVER
 
 // NOTE: Changed CDECL tp CCALL to avoid window macro issue
+// TODO: Maybe change naming convention to not run into these issues
+
+#include "TypeUtility.h"
 
 #include <iostream>
 #include <ios>
@@ -76,70 +79,6 @@
 // we are loosing one level due to the way the recursion iteration works
 #define MACRO_SUPPORTED_PARAMETER_NUMBER 15
 #define MACRO_NUMBER_OF_FUNCTIONS_TO_GENERATE 16
-
-template <typename T>
-const char* getTypeName()
-{
-  static std::string cached;
-  if (!cached.empty())
-  {
-    return cached.c_str();
-  }
-  static const char* fallback = "<UNKNOWN>";
-
-  const char* sig = __FUNCSIG__;
-  const char* start = std::strchr(sig, '<');
-  const char* end = std::strrchr(sig, '>');
-
-  if (start && end && end > start)
-  {
-    cached = std::string(start + 1, end);
-  }
-  else
-  {
-    cached = fallback;
-  }
-  return cached.c_str();
-}
-
-template <typename FuncPtrType, FuncPtrType funcPtr>
-const char* getFuncPtrName()
-{
-  static std::string cached;
-  if (!cached.empty())
-  {
-    return cached.c_str();
-  }
-  static const char* fallback = "<UNKNOWN>";
-
-  const char* sig = __FUNCSIG__;
-  const char* typePart = getTypeName<FuncPtrType>();
-  if (!typePart)
-  {
-    cached = fallback;
-    return cached.c_str();
-  }
-
-  const char* typeInThisSig = std::strstr(sig, typePart);
-  if (!typeInThisSig)
-  {
-    cached = fallback;
-    return cached.c_str();
-  }
-
-  const char* start = typeInThisSig + std::strlen(typePart);
-  const char* end = std::strrchr(sig, '>');
-  if (start && end && end > start)
-  {
-    cached = std::string(start + 1, end); // 1 for comma
-  }
-  else
-  {
-    cached = fallback;
-  }
-
-  return cached.c_str();
-}
 
 
 // no support for virtual function ptrs
@@ -322,7 +261,7 @@ FunctionResolver::Resolver<FuncPtrType, implemented, gameAddress, funcAddress, o
 {
   if (AddressUsageKeeper<gameAddress>::initialized)
   {
-    std::cout << "do something if already initialized\n";
+    std::cout << "TODO: do something if function already initialized\n";
     return;
   }
   AddressUsageKeeper<gameAddress>::initialized = true;
