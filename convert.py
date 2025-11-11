@@ -13,7 +13,7 @@ from skink.sarif.BasicResult import BasicResult
 from skink.sarif.datatypes.TypedefResult import TypedefResult
 import logging
 logging.getLogger().setLevel(logging.DEBUG)
-from skink.export.classes.collect import collect_classes
+from skink.export.classes.collect import collect_classes, collect_namespaced_functions
 import pathlib
 from skink.export.project.exporter import Exporter
 
@@ -48,6 +48,9 @@ logging.log(logging.INFO, "collecting classes")
 clsses = list(collect_classes(objs))
 logging.log(logging.INFO, "collecting classes: finished")
 
+logging.log(logging.INFO, "collecting namespaced functions")
+namespaced_functions = list(collect_namespaced_functions(objs))
+logging.log(logging.INFO, "collecting namespaced functions: finished")
 
 exporter = Exporter()
 
@@ -55,6 +58,9 @@ collection = ExportedContentCollection(ignore_duplicates=True)
 
 for cls in clsses:
   collection.add(*exporter.export_class(cls))
+
+for ns in namespaced_functions:
+  collection.add(*exporter.export_namespace(ns))
 
 collection.add(exporter.export_addresses(project.yield_objects()))
 
