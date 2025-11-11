@@ -1,0 +1,10 @@
+
+*.py
+*.json
+*.bin
+*.7z
+*.sarif
+EXE
+Addresses/*.hpp
+
+!convert.py
