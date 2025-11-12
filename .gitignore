@@ -5,6 +5,7 @@
 *.7z
 *.sarif
 EXE/
+util/
 Addresses/*.hpp
 .vs/
 MSVC1400/

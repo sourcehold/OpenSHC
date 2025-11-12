@@ -1,7 +1,8 @@
 
 #pragma once
 
-#include "util/interfacing/GlobalReference.h"
+#include "util/assertion.h"
+#include "util/interfacing/DataReference.h"
 #include "util/interfacing/MemberFunctionPointerGenerator.h"
 
 namespace Ghidra {

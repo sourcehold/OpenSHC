@@ -57,6 +57,8 @@ exporter = Exporter(binary_context=bc, transformation_rules=TransformationRules(
 
 collection = ExportedContentCollection(ignore_duplicates=True)
 
+collection.add(*exporter.export_helpers())
+
 for cls in clsses:
   collection.add(*exporter.export_class(cls))
 
