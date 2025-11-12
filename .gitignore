@@ -4,7 +4,13 @@
 *.bin
 *.7z
 *.sarif
-EXE
+EXE/
 Addresses/*.hpp
+.vs/
+MSVC1400/
+build/
+build-*/
+*.exe
+*.txt
 
 !convert.py
