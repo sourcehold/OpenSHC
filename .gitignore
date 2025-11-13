@@ -15,3 +15,5 @@ build-*/
 *.txt
 
 !convert.py
+!CMakePresets.json
+!CMakeLists.txt

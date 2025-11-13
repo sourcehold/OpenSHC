@@ -92,7 +92,8 @@ link_directories(
 )
 
 # Add source to this project's executable.
-add_executable(StrongholdCrusader "StrongholdCrusader.cpp" "EXE/Rendering/ViewportRenderState/ViewportRenderStateClass_.cpp" "EXE/Rendering/ViewportRenderState/ViewportRenderStateClass.cpp")
+add_executable(StrongholdCrusader "StrongholdCrusader.cpp" "EXE/Rendering/ViewportRenderState/ViewportRenderStateClass_.cpp" "EXE/Rendering/ViewportRenderState/ViewportRenderStateClass.cpp" )
+target_include_directories(StrongholdCrusader PRIVATE ".")
 
 ## # Checks if a binkw32_real is present and uses this instead; only checks on reconfigure
 ## if(EXISTS "${CRUSADER_DIR}/binkw32_real.dll")
@@ -111,5 +112,6 @@ add_executable(StrongholdCrusader "StrongholdCrusader.cpp" "EXE/Rendering/Viewpo
 #endif()
 
 add_library(OpenSHC SHARED "StrongholdCrusader.cpp" "EXE/Rendering/ViewportRenderState/ViewportRenderStateClass_.cpp" "EXE/Rendering/ViewportRenderState/ViewportRenderStateClass.cpp")
+target_include_directories(OpenSHC PRIVATE ".")
 
 # TODO: Add tests and install targets if needed.
