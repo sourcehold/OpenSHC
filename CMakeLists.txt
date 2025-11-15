@@ -50,13 +50,14 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     endforeach()
 endif()
 
-# /MD is required to make alignment happen (first function 0x401000)
-# /Ob1 for release builds to prevent unwanted inlining
+# Use static runtime
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+
 set(CMAKE_CXX_FLAGS "/W3 /EHsc /D \"WIN32\" /D \"_WINDOWS\"")
-set(CMAKE_CXX_FLAGS_DEBUG "/Gm /Zi /Od /D \"_DEBUG\" /MDd")
-set(CMAKE_CXX_FLAGS_RELEASE "/O2 /D \"NDEBUG\" /MD /Ob1")
-set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "/Zi /O2 /D \"NDEBUG\" /MD /Ob1")
-set(CMAKE_CXX_FLAGS_MINSIZEREL "/Os /D \"NDEBUG\" /MD")
+set(CMAKE_CXX_FLAGS_DEBUG "/Gm /Zi /Od /D \"_DEBUG\"")
+set(CMAKE_CXX_FLAGS_RELEASE "/O2 /D \"NDEBUG\"")
+set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "/Zi /O2 /D \"NDEBUG\"")
+set(CMAKE_CXX_FLAGS_MINSIZEREL "/Os /D \"NDEBUG\"")
 
 set(CMAKE_EXE_LINKER_FLAGS "/machine:I386")
 set(CMAKE_EXE_LINKER_FLAGS_DEBUG "/incremental:yes /debug")
