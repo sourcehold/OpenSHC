@@ -25,31 +25,6 @@ project ("StrongholdCrusader")
 
 set(CRUSADER_DIR "${CMAKE_SOURCE_DIR}/_original")
 
-if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-    message(STATUS "VCINSTALLDIR = $ENV{VCINSTALLDIR}")
-    set(MSVC80_DEBUGCRT_SOURCE_DIR
-        "$ENV{VCINSTALLDIR}/redist/Debug_NonRedist/x86/Microsoft.VC80.DebugCRT"
-    )
-
-    set(MSVC80_DEBUGCRT_DEST_DIR
-        "${PROJECT_BINARY_DIR}/Microsoft.VC80.DebugCRT"
-    )
-
-    file(MAKE_DIRECTORY "${MSVC80_DEBUGCRT_DEST_DIR}")
-
-    file(GLOB MSVC80_DEBUGCRT_FILES
-        "${MSVC80_DEBUGCRT_SOURCE_DIR}/*.dll"
-        "${MSVC80_DEBUGCRT_SOURCE_DIR}/*.manifest"
-    )
-
-    foreach(FILE ${MSVC80_DEBUGCRT_FILES})
-        message(STATUS "copy file from: ${FILE} to: ${MSVC80_DEBUGCRT_DEST_DIR}/")
-        configure_file("${FILE}"
-                       "${MSVC80_DEBUGCRT_DEST_DIR}/"
-                       COPYONLY)
-    endforeach()
-endif()
-
 # Use static runtime
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 
