@@ -15,7 +15,7 @@ import logging
 logging.getLogger().setLevel(logging.DEBUG)
 from skink.export.classes.collect import collect_classes, collect_namespaced_functions
 import pathlib
-from skink.export.styles.style1.exporter import Exporter, BinaryContext, TransformationRules
+from skink.export.styles.style2.exporter import Exporter, BinaryContext, TransformationRules
 
 project = Project("Stronghold Crusader.exe.all.sarif", cache_objects=True, cache_symbols_to_path=".cached-symbols.bin")
 
@@ -53,7 +53,7 @@ namespaced_functions = list(collect_namespaced_functions(objs))
 logging.log(logging.INFO, "collecting namespaced functions: finished")
 
 bc = BinaryContext(hash="3BB0A8C1", abbreviation="SHC", reccmp_binary="STRONGHOLDCRUSADER")
-exporter = Exporter(binary_context=bc, transformation_rules=TransformationRules(use_regex = True, regex={"_HoldStrong": "EXE"}))
+exporter = Exporter(binary_context=bc, transformation_rules=TransformationRules(use_regex = True, regex={"_HoldStrong": "EXE"}), expose_original_methods=True)
 
 collection = ExportedContentCollection(ignore_duplicates=True)
 
