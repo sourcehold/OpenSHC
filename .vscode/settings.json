@@ -8,6 +8,7 @@
     120
   ],
   "files.associations": {
+    "*.inl": "cpp",
     "iostream": "cpp",
     "algorithm": "cpp",
     "cmath": "cpp",
