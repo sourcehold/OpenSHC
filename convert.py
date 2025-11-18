@@ -78,7 +78,10 @@ class_paths = set(cls.location(ctx) for cls in clsses)
 for obj in objs:
   if isinstance(obj, DataTypeResult):
     if obj.message.text == "DT.Struct":
+      global S
       s = Struct(obj)
+      if s.name == "GameSynchronyState":
+        S = s
       if s.path(ctx) not in class_paths:
         collection.add(exporter.export_struct(s))
   elif isinstance(obj, EnumResult):
@@ -95,6 +98,8 @@ for obj in objs:
     collection.add(exporter.export_function_signature(fsr))
   elif isinstance(obj, TypedefResult):
     td = Typedef(obj)
+    if "*" in td.name:
+      continue
     collection.add(exporter.export_typedef(td))
 
 collection.write_to_disk(pathlib.Path("."))
