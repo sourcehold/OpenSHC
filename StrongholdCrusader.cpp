@@ -5,6 +5,8 @@
 #include "StructTest.h"
 #include "ViewportRenderState.func.h"
 #include "ViewportRenderState.h"
+#include "binkw32.h"
+
 #include <iostream>
 
 int main(int argc, char** argv)
@@ -29,6 +31,11 @@ int main(int argc, char** argv)
     MACRO_CALL_MEMBER(ViewportRenderState_Func::setupMouseTileXY, ViewportRenderState_Struct::ptr)();
     MACRO_CALL_MEMBER(ViewportRenderState_Func::setupMouseTileXY2, ViewportRenderState_Struct::ptr)();
     MACRO_CALL_MEMBER(ViewportRenderState_Func::meth_0x4e5a90, ViewportRenderState_Struct::ptr)();
+
+    const HBINK bink = BinkOpen("..\\_original\\binks\\abbot_angry.bik", BINKNOSKIP);
+    std::cout << bink->Width << " " << bink->Height << " " << bink->Frames << " " << bink->FrameNum << std::endl;
+    BinkClose(bink);
+
     return 0;
 }
 

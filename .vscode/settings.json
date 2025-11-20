@@ -55,6 +55,9 @@
     "xstring": "cpp",
     "xtree": "cpp",
     "xutility": "cpp",
-    "list": "cpp"
+    "list": "cpp",
+    "cctype": "cpp",
+    "csetjmp": "cpp",
+    "cstdarg": "cpp"
   }
 }
