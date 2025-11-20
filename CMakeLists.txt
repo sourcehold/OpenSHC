@@ -66,6 +66,10 @@ include_directories(
 link_directories(
     ${CMAKE_SOURCE_DIR}/dependencies/recreated/lib
 )
+link_libraries(
+    binkw32
+    Mss32
+)
 
 # Add source to this project's executable.
 add_executable(StrongholdCrusader "StrongholdCrusader.cpp" "ViewportRenderState.h" "ViewportRenderState.cpp" "framework.h" "ViewportRenderStateStruct.h" "ViewportState.h"  "windowslib.h" "windowslib.cpp" "FunctionResolver.h" "ViewportRenderState.func.h" "StructResolver.h" "StructTest.h" "TypeUtility.h")
