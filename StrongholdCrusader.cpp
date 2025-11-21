@@ -8,6 +8,7 @@
 
 #include "Mss32.h"
 #include "binkw32.h"
+#include "pklib.h"
 
 #include <iostream>
 
@@ -48,6 +49,11 @@ int main(int argc, char** argv)
 
     const int ret = AIL_startup();
     std::cout << ret << std::endl;
+
+    char testText[] = "Hello World";
+    unsigned int testTextSize = sizeof(testText);
+    unsigned long fakeOldCrc = 0;
+    std::cout << crc32_pklib(testText, &testTextSize, &fakeOldCrc) << std::endl;
 
     return 0;
 }

@@ -71,6 +71,20 @@ link_libraries(
     Mss32
 )
 
+# Handle pklib
+file(GLOB_RECURSE PKLIB_SRC
+    ${CMAKE_SOURCE_DIR}/dependencies/pklib/*
+)
+add_library(pklib
+    ${PKLIB_SRC}
+)
+include_directories(
+    ${CMAKE_SOURCE_DIR}/dependencies/pklib
+)
+link_libraries(
+    pklib
+)
+
 # Add source to this project's executable.
 add_executable(StrongholdCrusader "StrongholdCrusader.cpp" "ViewportRenderState.h" "ViewportRenderState.cpp" "framework.h" "ViewportRenderStateStruct.h" "ViewportState.h"  "windowslib.h" "windowslib.cpp" "FunctionResolver.h" "ViewportRenderState.func.h" "StructResolver.h" "StructTest.h" "TypeUtility.h")
 
