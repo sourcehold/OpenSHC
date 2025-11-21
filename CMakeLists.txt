@@ -67,8 +67,11 @@ add_library(pklib ${PKLIB_SRC})
 include_directories(${CMAKE_SOURCE_DIR}/dependencies/pklib)
 link_libraries(pklib)
 
+# Collect main source
+file(GLOB_RECURSE MAIN_SRC ${CMAKE_SOURCE_DIR}/src/*)
+
 # Add source to this project's executable.
-add_executable(StrongholdCrusader "StrongholdCrusader.cpp" "ViewportRenderState.h" "ViewportRenderState.cpp" "framework.h" "ViewportRenderStateStruct.h" "ViewportState.h"  "windowslib.h" "windowslib.cpp" "FunctionResolver.h" "ViewportRenderState.func.h" "StructResolver.h" "StructTest.h" "TypeUtility.h")
+add_executable(StrongholdCrusader ${MAIN_SRC})
 
 # Checks if a binkw32_real is present and uses this instead; only checks on reconfigure
 if(EXISTS "${CRUSADER_DIR}/binkw32_real.dll")
@@ -86,6 +89,6 @@ add_file_copy(StrongholdCrusader "${CRUSADER_DIR}/shfolder.dll" "$<TARGET_FILE_D
   #set_property(TARGET StrongholdCrusader PROPERTY CXX_STANDARD 20)
 #endif()
 
-add_library(OpenSHC SHARED "StrongholdCrusader.cpp" "ViewportRenderState.h" "ViewportRenderState.cpp" "framework.h" "ViewportRenderStateStruct.h" "ViewportState.h"  "windowslib.h" "windowslib.cpp" "FunctionResolver.h" "ViewportRenderState.func.h" "StructResolver.h" "StructTest.h" "TypeUtility.h")
+add_library(OpenSHC SHARED ${MAIN_SRC})
 
 # TODO: Add tests and install targets if needed.
