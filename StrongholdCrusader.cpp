@@ -5,9 +5,19 @@
 #include "StructTest.h"
 #include "ViewportRenderState.func.h"
 #include "ViewportRenderState.h"
+
+#include "Mss32.h"
 #include "binkw32.h"
 
 #include <iostream>
+
+void MSS_cleanup() { AIL_shutdown(); }
+
+__declspec(noinline) int MSS_auto_cleanup()
+{
+    atexit(MSS_cleanup);
+    return 0;
+}
 
 int main(int argc, char** argv)
 {
@@ -35,6 +45,9 @@ int main(int argc, char** argv)
     const HBINK bink = BinkOpen("..\\_original\\binks\\abbot_angry.bik", BINKNOSKIP);
     std::cout << bink->Width << " " << bink->Height << " " << bink->Frames << " " << bink->FrameNum << std::endl;
     BinkClose(bink);
+
+    const int ret = AIL_startup();
+    std::cout << ret << std::endl;
 
     return 0;
 }
