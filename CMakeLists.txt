@@ -54,36 +54,18 @@ message("CMAKE_CXX_FLAGS is ${CMAKE_CXX_FLAGS}")
 message("CMAKE_CXX_FLAGS_RELWITHDEBINFO is ${CMAKE_CXX_FLAGS_RELWITHDEBINFO}")
 
 # Handled by path, but explicitly included to support IntelliSense
-include_directories(
-    ${CMAKE_SOURCE_DIR}/MSVC1400/VC/include
-    ${CMAKE_SOURCE_DIR}/MSVC1400/VC/PlatformSDK/Include
-)
+include_directories(${CMAKE_SOURCE_DIR}/MSVC1400/VC/include ${CMAKE_SOURCE_DIR}/MSVC1400/VC/PlatformSDK/Include)
 
 # Handle dependencies without source files
-include_directories(
-    ${CMAKE_SOURCE_DIR}/dependencies/recreated/include
-)
-link_directories(
-    ${CMAKE_SOURCE_DIR}/dependencies/recreated/lib
-)
-link_libraries(
-    binkw32
-    Mss32
-)
+include_directories(${CMAKE_SOURCE_DIR}/dependencies/recreated/include)
+link_directories(${CMAKE_SOURCE_DIR}/dependencies/recreated/lib)
+link_libraries(binkw32 Mss32)
 
 # Handle pklib
-file(GLOB_RECURSE PKLIB_SRC
-    ${CMAKE_SOURCE_DIR}/dependencies/pklib/*
-)
-add_library(pklib
-    ${PKLIB_SRC}
-)
-include_directories(
-    ${CMAKE_SOURCE_DIR}/dependencies/pklib
-)
-link_libraries(
-    pklib
-)
+file(GLOB_RECURSE PKLIB_SRC ${CMAKE_SOURCE_DIR}/dependencies/pklib/*)
+add_library(pklib ${PKLIB_SRC})
+include_directories(${CMAKE_SOURCE_DIR}/dependencies/pklib)
+link_libraries(pklib)
 
 # Add source to this project's executable.
 add_executable(StrongholdCrusader "StrongholdCrusader.cpp" "ViewportRenderState.h" "ViewportRenderState.cpp" "framework.h" "ViewportRenderStateStruct.h" "ViewportState.h"  "windowslib.h" "windowslib.cpp" "FunctionResolver.h" "ViewportRenderState.func.h" "StructResolver.h" "StructTest.h" "TypeUtility.h")
@@ -97,7 +79,7 @@ endif()
 add_file_copy(StrongholdCrusader "${CRUSADER_DIR}/Mss32.dll" "$<TARGET_FILE_DIR:StrongholdCrusader>/Mss32.dll")
 
 # shfolder is a normal windows lib, however, the game needs to work with the games version, so we still copy it
-# it should be checked later if the compiler emits a shfolder.dll on its own
+# it should be checked later if the compiler emits a shfolder.dll on its own or if it statically links, which we do not want
 add_file_copy(StrongholdCrusader "${CRUSADER_DIR}/shfolder.dll" "$<TARGET_FILE_DIR:StrongholdCrusader>/shfolder.dll")
 
 #if (CMAKE_VERSION VERSION_GREATER 3.12)
