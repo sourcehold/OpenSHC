@@ -72,6 +72,7 @@ file(GLOB_RECURSE MAIN_SRC ${CMAKE_SOURCE_DIR}/src/*)
 
 # Add source to this project's executable.
 add_executable(StrongholdCrusader ${MAIN_SRC})
+target_compile_definitions(StrongholdCrusader PRIVATE OPEN_SHC_EXE)
 
 # Checks if a binkw32_real is present and uses this instead; only checks on reconfigure
 if(EXISTS "${CRUSADER_DIR}/binkw32_real.dll")
@@ -90,5 +91,6 @@ add_file_copy(StrongholdCrusader "${CRUSADER_DIR}/shfolder.dll" "$<TARGET_FILE_D
 #endif()
 
 add_library(OpenSHC SHARED ${MAIN_SRC})
+target_compile_definitions(OpenSHC PRIVATE OPEN_SHC_DLL)
 
 # TODO: Add tests and install targets if needed.

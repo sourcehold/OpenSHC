@@ -1,6 +1,7 @@
 #ifndef STRUCT_RESOLVER
 #define STRUCT_RESOLVER
 
+#include "CompileMacros.h"
 #include "TypeUtility.h"
 
 #include <ios>
@@ -28,13 +29,16 @@ private:
 public:
     template <typename T, bool implemented, int gameAddress> struct Resolver {
     private:
+        // only use this for internal logic and declarations/definitions
+        static const bool isImplemented = OPEN_SHC_IMPLEMENTED(implemented);
+
         struct Initializer {
             Initializer();
         };
         static const Initializer initializer;
 
     public:
-        typedef typename InternalResolver<T, implemented, gameAddress> Ptr;
+        typedef typename InternalResolver<T, isImplemented, gameAddress> Ptr;
     };
 };
 
@@ -60,11 +64,11 @@ StructResolver::Resolver<T, implemented, gameAddress>::Initializer::Initializer(
     AddressUsageKeeper<gameAddress>::initialized = true;
 
     // other then with the functions, there is only a usage check to be performed, so maybe for debug logs?
-    if (implemented) {
-        std::cout << "initialized a '" << getTypeName<T>() << "' at address '" << Ptr::ptr << "', replacing '"
-                  << (void*)gameAddress << "'\n";
+    if (isImplemented) {
+        std::cout << "Implemented '" << (void*)gameAddress << "' at address '" << Ptr::ptr << "' as a '"
+                  << getTypeName<T>() << "'\n";
     } else {
-        std::cout << "initialized a '" << getTypeName<T>() << "' to point to address '" << (void*)gameAddress << "'\n";
+        std::cout << "Use '" << (void*)gameAddress << "' as a '" << getTypeName<T>() << "'\n";
     }
 }
 

@@ -6,6 +6,7 @@
 // NOTE: Changed CDECL tp CCALL to avoid window macro issue
 // TODO: Maybe change naming convention to not run into these issues
 
+#include "CompileMacros.h"
 #include "TypeUtility.h"
 
 #include <iostream>
@@ -139,6 +140,9 @@ public:
   struct Resolver
   {
   private:
+    // only use this for internal logic and declarations/definitions
+    static const bool isImplemented = OPEN_SHC_IMPLEMENTED(implemented);
+
     typedef OptionFlags<options> Flags;
 
     struct Initializer { Initializer(); };
@@ -160,7 +164,7 @@ public:
       inline static const FuncPtrType get(){ return reinterpret_cast<FuncPtrType>(&GameCallerFunction::call); }
     };
 
-    typedef FunctionPtrUnifier<implemented, false, void> UnifiedFunctionPtrForWrapper;
+    typedef FunctionPtrUnifier<isImplemented, false, void> UnifiedFunctionPtrForWrapper;
 
     template<typename FuncPtrType>
     struct Wrapper;
@@ -172,7 +176,7 @@ public:
     #define MACRO_WRAPPER_BODY_PRECALL(N) \
       { \
         std::ostringstream ossParams; \
-        if (implemented) { ossParams << "Call: " << getFuncPtrName<FuncPtrType, funcAddress>() << " | Replaces: '" << std::hex << gameAddress << std::dec << "' | Args(" << N << "): "; } \
+        if (isImplemented) { ossParams << "Call: " << getFuncPtrName<FuncPtrType, funcAddress>() << " | Replaces: '" << std::hex << gameAddress << std::dec << "' | Args(" << N << "): "; } \
         else { ossParams << "Call from own function: " << std::hex << gameAddress << std::dec << "' | Args(" << N << "): "; } \
         ossParams MACRO_SPACED_STREAM_PRINT_PARAMETER_LIST(N); \
         std::string strParams = ossParams.str(); \
@@ -182,7 +186,7 @@ public:
     #define MACRO_WRAPPER_BODY_POSTCALL(N) \
       { \
         std::ostringstream ossReturn; \
-        if (implemented) { ossReturn << "Call: " << getFuncPtrName<FuncPtrType, funcAddress>() << " | Replaces: '" << std::hex << gameAddress << std::dec << "' | Returned:" << "\t" << ret; } \
+        if (isImplemented) { ossReturn << "Call: " << getFuncPtrName<FuncPtrType, funcAddress>() << " | Replaces: '" << std::hex << gameAddress << std::dec << "' | Returned:" << "\t" << ret; } \
         else { ossReturn << "Call from own function: " << std::hex << gameAddress << std::dec << "' | Returned:" << "\t" << ret; } \
         std::string strReturn = ossReturn.str(); \
         std::cout << strReturn << '\n'; \
@@ -191,7 +195,7 @@ public:
     #define MACRO_WRAPPER_BODY_POSTCALL_VOID(N) \
       { \
         std::ostringstream ossReturn; \
-        if (implemented) { ossReturn << "Call: " << getFuncPtrName<FuncPtrType, funcAddress>() << " | Replaces: '" << std::hex << gameAddress << std::dec << "' | Returned"; } \
+        if (isImplemented) { ossReturn << "Call: " << getFuncPtrName<FuncPtrType, funcAddress>() << " | Replaces: '" << std::hex << gameAddress << std::dec << "' | Returned"; } \
         else { ossReturn << "Call from own function: " << std::hex << gameAddress << std::dec << "' | Returned"; } \
         std::string strReturn = ossReturn.str(); \
         std::cout << strReturn << '\n'; \
@@ -226,7 +230,7 @@ public:
 
     typedef typename GameCaller<FuncPtrType>::Function GameCallerFunction;
 
-    typedef FunctionPtrUnifier<implemented, Flags::USE_WRAPPER, void> UnifiedFunctionPtr;
+    typedef FunctionPtrUnifier<isImplemented, Flags::USE_WRAPPER, void> UnifiedFunctionPtr;
   public:
     typedef UnifiedFunctionPtr Function;
   };
@@ -248,19 +252,19 @@ FunctionResolver::Resolver<FuncPtrType, implemented, gameAddress, funcAddress, o
   }
   AddressUsageKeeper<gameAddress>::initialized = true;
 
-  if (implemented)
+  if (isImplemented)
   {
     // these positions could be used to hook into the game using another parameter to provide the address
     // TODO: the hook would need to take the resolved ptr as reference, not the "funcAddress", otherwise it would not call the wrapping logic if the game calls
 
     // Way to get address to link (only implemented): 
     const FuncPtrType funcPtr = Function::get();
-    const void* func= *((void**) &funcPtr);
-    std::cout << "implemented '" << (void*)gameAddress << "' with '" << getFuncPtrName<FuncPtrType, funcAddress>() << "', now hook to: " << *((void**) (&func)) << "\n";
+    const void* func = *((void**) &funcPtr);
+    std::cout << "Implemented '" << (void*)gameAddress << "' at address '" << func << "' as '" << getFuncPtrName<FuncPtrType, funcAddress>() << "'\n";
   }
   else
   {
-    std::cout << "not implemented\n";
+    std::cout << "Use '" << (void*)gameAddress << "' as '" << getFuncPtrName<FuncPtrType, funcAddress>() << "'\n";
   }
 }
 
