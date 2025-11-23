@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug OpenSHC.dll",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/_original/Stronghold Crusader.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/_original",
+            // Note: build currently set target, so if this is the exe, nothing will change
+            "preLaunchTask": "CMake: build",
+        }
+    ]
+}

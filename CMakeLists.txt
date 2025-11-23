@@ -9,6 +9,7 @@ function(target_file_copy_if_different TARGET FILE DEST)
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${FILE}" "${DEST}"
     )
 endfunction()
+# Possible that this could also be done by an "install" command.
 function(target_files_copy_if_different TARGET ROOT FILES DEST_DIR)
     foreach(FILE IN LISTS FILES)
         file(RELATIVE_PATH REL "${ROOT}" "${FILE}")
