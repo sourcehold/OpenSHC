@@ -9,6 +9,8 @@
 #include "CompileMacros.h"
 #include "TypeUtility.h"
 
+#include "ucp3.h"
+
 #include <iostream>
 #include <ios>
 #include <sstream>
@@ -115,6 +117,8 @@ private:
   template<typename IF, typename ELSE> struct TypeTernary<false, IF, ELSE> { typedef ELSE Type; };
 
   template<int address> struct AddressUsageKeeper { static bool initialized; };
+
+  static void initialize(bool& initialized, bool isImplemented, int gameAddress, const void* funcPtr, const char* funcName);
 
   template<int options> 
   struct OptionFlags
@@ -245,27 +249,9 @@ const typename FunctionResolver::Resolver<FuncPtrType, implemented, gameAddress,
 template<typename FuncPtrType, bool implemented, int gameAddress, FuncPtrType funcAddress, int options>
 FunctionResolver::Resolver<FuncPtrType, implemented, gameAddress, funcAddress, options>::Initializer::Initializer()
 {
-  if (AddressUsageKeeper<gameAddress>::initialized)
-  {
-    std::cout << "TODO: do something if function already initialized\n";
-    return;
-  }
-  AddressUsageKeeper<gameAddress>::initialized = true;
-
-  if (isImplemented)
-  {
-    // these positions could be used to hook into the game using another parameter to provide the address
-    // TODO: the hook would need to take the resolved ptr as reference, not the "funcAddress", otherwise it would not call the wrapping logic if the game calls
-
-    // Way to get address to link (only implemented): 
-    const FuncPtrType funcPtr = Function::get();
-    const void* func = *((void**) &funcPtr);
-    std::cout << "Implemented '" << (void*)gameAddress << "' at address '" << func << "' as '" << getFuncPtrName<FuncPtrType, funcAddress>() << "'\n";
-  }
-  else
-  {
-    std::cout << "Use '" << (void*)gameAddress << "' as '" << getFuncPtrName<FuncPtrType, funcAddress>() << "'\n";
-  }
+  const FuncPtrType funcPtr = Function::get();
+  const void* func = *((void**) &funcPtr);
+  initialize(AddressUsageKeeper<gameAddress>::initialized, isImplemented, gameAddress, func, getFuncPtrName<FuncPtrType, funcAddress>());
 }
 
 #undef MACRO_NUMBER_OF_FUNCTIONS_TO_GENERATE

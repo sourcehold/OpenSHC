@@ -4,8 +4,6 @@
 #include "CompileMacros.h"
 #include "TypeUtility.h"
 
-#include <ios>
-
 struct StructResolver {
 private:
     template <typename T, int gameAddress> static T instance();
@@ -25,6 +23,9 @@ private:
     template <int address> struct AddressUsageKeeper {
         static bool initialized;
     };
+
+    static void initialize(
+        bool& initialized, bool isImplemented, int gameAddress, const void* structPtr, const char* typeName);
 
 public:
     template <typename T, bool implemented, int gameAddress> struct Resolver {
@@ -57,19 +58,7 @@ const typename StructResolver::Resolver<T, implemented, gameAddress>::Initialize
 template <typename T, bool implemented, int gameAddress>
 StructResolver::Resolver<T, implemented, gameAddress>::Initializer::Initializer()
 {
-    if (AddressUsageKeeper<gameAddress>::initialized) {
-        std::cout << "TODO: do something if struct already initialized\n";
-        return;
-    }
-    AddressUsageKeeper<gameAddress>::initialized = true;
-
-    // other then with the functions, there is only a usage check to be performed, so maybe for debug logs?
-    if (isImplemented) {
-        std::cout << "Implemented '" << (void*)gameAddress << "' at address '" << Ptr::ptr << "' as a '"
-                  << getTypeName<T>() << "'\n";
-    } else {
-        std::cout << "Use '" << (void*)gameAddress << "' as a '" << getTypeName<T>() << "'\n";
-    }
+    initialize(AddressUsageKeeper<gameAddress>::initialized, isImplemented, gameAddress, Ptr::ptr, getTypeName<T>());
 }
 
 #define MACRO_STRUCT_RESOLVER(STRUCT_TYPE, IMPLEMENTED, GAME_ADDRESS)                                                  \
