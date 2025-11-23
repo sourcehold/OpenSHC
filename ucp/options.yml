@@ -1,0 +1,8 @@
+specification-version: 1.0.0
+options:
+- display: GroupBox
+  header: '{{general}}'
+  text: '{{general_descr}}'
+  category: ['{{reimplementation}}']
+  children: []
+  

@@ -1,0 +1,7 @@
+name: OpenSHC
+display-name: OpenSHC
+version: 1.41.0
+author: OpenSHC Team
+meta:
+  version: 1.0.0
+type: module

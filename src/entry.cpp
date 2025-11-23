@@ -7,7 +7,7 @@
 
 #ifdef OPEN_SHC_DLL
 
-int luaopen_OpenSHC(lua_State* L) { return 0; }
+extern "C" __declspec(dllexport) int __cdecl luaopen_OpenSHC(lua_State* L) { return 0; }
 
 #endif
 

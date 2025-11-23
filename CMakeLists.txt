@@ -3,11 +3,22 @@
 cmake_minimum_required (VERSION 3.20)
 
 # NOTE: POST_BUILD does not run if the target is unchanged, so a config switch will not trigger them again, so clean + build if issues happen
-function(target_file_copy_if_different target src dest)
-    message(STATUS "Ensure file from \"${src}\" is copied to \"${dest}\" if different for target: ${target}")
-    add_custom_command(TARGET ${target} POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different "${src}" "${dest}"
+function(target_file_copy_if_different TARGET FILE DEST)
+    message(STATUS "Ensure file \"${FILE}\" is copied to \"${DEST}\" if different for target: ${TARGET}")
+    add_custom_command(TARGET ${TARGET} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different "${FILE}" "${DEST}"
     )
+endfunction()
+function(target_files_copy_if_different TARGET ROOT FILES DEST_DIR)
+    foreach(FILE IN LISTS FILES)
+        file(RELATIVE_PATH REL "${ROOT}" "${FILE}")
+        get_filename_component(DIR "${REL}" DIRECTORY)
+        set(DEST_FILE_DIR "${DEST_DIR}/${DIR}")
+        add_custom_command(TARGET ${TARGET} POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E make_directory "${DEST_FILE_DIR}"
+        )
+        target_file_copy_if_different(${TARGET} "${FILE}" "${DEST_FILE_DIR}")
+    endforeach()
 endfunction()
 
 project ("OpenSHC")
@@ -18,7 +29,7 @@ set(OPEN_SHC_NAME "OpenSHC")
 # Set to the games version we try to reimplement
 # TODO: Discuss: Since the approach should not entail module releases, the version could stay fixed.
 # Only devs and interested users would use it and it will have no options to begin with
-set(OPEN_SHC_VERSION 1.41)
+set(OPEN_SHC_VERSION 1.41.0)
 
 set(CRUSADER_DIR "${CMAKE_SOURCE_DIR}/_original")
 
@@ -110,6 +121,7 @@ set_target_properties(OpenSHC.dll PROPERTIES OUTPUT_NAME ${OPEN_SHC_NAME})
 target_compile_definitions(OpenSHC.dll PRIVATE OPEN_SHC_DLL)
 
 # Using module folder as runtime output to properly place the dll and other libs
+set_target_properties(OpenSHC.dll PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${OPEN_SHC_DLL_DEST})
 
 # This strange workaround does ensure that the module folder is generated and that a config change regenerates the dll.
 # It "only" costs a file creation and a compare minimum while not changing the actual source. Found no other way.
@@ -126,4 +138,6 @@ add_custom_target(
 target_sources(OpenSHC.dll PRIVATE ${BUILD_TRIGGER_FILE})
 add_dependencies(OpenSHC.dll OpenSHC.dll.trigger)
 
-set_target_properties(OpenSHC.dll PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${OPEN_SHC_DLL_DEST})
+# Copy ucp definition files
+file(GLOB_RECURSE UCP_DEFINITION ${CMAKE_SOURCE_DIR}/ucp/*)
+target_files_copy_if_different(OpenSHC.dll ${CMAKE_SOURCE_DIR}/ucp "${UCP_DEFINITION}" "${OPEN_SHC_DLL_DEST}")
