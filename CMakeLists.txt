@@ -64,13 +64,28 @@ add_library(pklib ${PKLIB_SRC})
 include_directories(${CMAKE_SOURCE_DIR}/dependencies/pklib)
 link_libraries(pklib)
 
+# Handle lua and ucp3 dynamic libs for DLL target
+# TODO?: Would it make any sense at this stage to only add them to the dll?
+include_directories(
+    ${CMAKE_SOURCE_DIR}/dependencies/ucp3/include
+    ${CMAKE_SOURCE_DIR}/dependencies/lua/include
+)
+link_directories(
+    ${CMAKE_SOURCE_DIR}/dependencies/ucp3/lib
+    ${CMAKE_SOURCE_DIR}/dependencies/lua/lib
+)
+link_libraries(
+    ucp3
+    lua
+)
+
 # Collect main source
 file(GLOB_RECURSE MAIN_SRC ${CMAKE_SOURCE_DIR}/src/*)
 
 
 
 # Add source to this project's executable.
-add_executable(OpenSHC.exe ${MAIN_SRC})
+add_executable(OpenSHC.exe WIN32 ${MAIN_SRC})
 set_target_properties(OpenSHC.exe PROPERTIES OUTPUT_NAME ${OPEN_SHC_NAME})
 target_compile_definitions(OpenSHC.exe PRIVATE OPEN_SHC_EXE)
 
