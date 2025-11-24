@@ -3,9 +3,41 @@
 
 #include "ucp3.h"
 
+#include "framework.h"
+
 #include <sstream>
 
 // TODO?: When in doubt regarding the transition to full exe: Add other logging system.
+
+#ifdef OPEN_SHC_DLL
+
+static void createRelativeJump(int from, int to)
+{
+    const int instructionLength = 5;
+    const int relativeOffset = to - (from + instructionLength);
+
+    DWORD oldProtection;
+    if (!VirtualProtect((void*)from, instructionLength, PAGE_EXECUTE_READWRITE, &oldProtection)) {
+        std::ostringstream oss;
+        oss << "Error while trying to remove memory protection to create relative jump from '" << from << "' to '" << to
+            << "': " << GetLastError();
+        ucp_log(Verbosity_FATAL, oss.str().c_str());
+    }
+
+    // create relative jmp
+    *((char*)from) = (char)0xe9;
+    *((int*)(from + 1)) = relativeOffset;
+
+    DWORD dummyProtection;
+    if (!VirtualProtect((void*)from, instructionLength, oldProtection, &dummyProtection)) {
+        std::ostringstream oss;
+        oss << "Error while trying to re-enable memory protection after creating relative jump from '" << from
+            << "' to '" << to << "': " << GetLastError();
+        ucp_log(Verbosity_FATAL, oss.str().c_str());
+    }
+}
+
+#endif
 
 void StructResolver::initialize(
     bool& initialized, bool isImplemented, int gameAddress, const void* funcPtr, const char* funcName)
@@ -25,7 +57,7 @@ void StructResolver::initialize(
     initialized = true;
 
 #ifdef OPEN_SHC_DLL
-    if (ucp_logLevel() < Verbosity_INFO) {
+    if (ucp_logLevel() < Verbosity_1) {
         return;
     }
     std::ostringstream oss;
@@ -34,7 +66,7 @@ void StructResolver::initialize(
     } else {
         oss << "Use '" << (void*)gameAddress << "' as a '" << funcName;
     }
-    ucp_log(Verbosity_INFO, oss.str().c_str());
+    ucp_log(Verbosity_1, oss.str().c_str());
 #endif
 }
 
@@ -57,10 +89,10 @@ void FunctionResolver::initialize(
 
 #ifdef OPEN_SHC_DLL
     if (isImplemented) {
-        // TODO: hooking code
+        createRelativeJump(gameAddress, (int)funcPtr);
     }
 
-    if (ucp_logLevel() < Verbosity_INFO) {
+    if (ucp_logLevel() < Verbosity_1) {
         return;
     }
     std::ostringstream oss;
@@ -69,6 +101,6 @@ void FunctionResolver::initialize(
     } else {
         oss << "Use '" << (void*)gameAddress << "' as '" << funcName;
     }
-    ucp_log(Verbosity_INFO, oss.str().c_str());
+    ucp_log(Verbosity_1, oss.str().c_str());
 #endif
 }

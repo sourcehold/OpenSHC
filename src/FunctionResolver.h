@@ -222,7 +222,7 @@ public:
         typedef FuncTraits<FuncPtrType> FuncPtrTypeTraits;
 
 #define MACRO_WRAPPER_BODY_PRECALL(N)                                                                                  \
-    if (ucp_logLevel() >= Verbosity_1) {                                                                               \
+    if (ucp_logLevel() >= Verbosity_2) {                                                                               \
         std::ostringstream oss;                                                                                        \
         if (isImplemented) {                                                                                           \
             oss << "Call '" << getFuncPtrName<FuncPtrType, funcAddress>() << "' replacing '" << (void*)gameAddress     \
@@ -232,11 +232,11 @@ public:
                 << "' from replaced function with: ";                                                                  \
         }                                                                                                              \
         oss << "void->(" MACRO_STREAM_PRINT_PARAMETER_LIST(N) << ")";                                                  \
-        ucp_log(Verbosity_1, oss.str().c_str());                                                                       \
+        ucp_log(Verbosity_2, oss.str().c_str());                                                                       \
     }
 
 #define MACRO_WRAPPER_BODY_PRECALL_THISCALL(N)                                                                         \
-    if (ucp_logLevel() >= Verbosity_1) {                                                                               \
+    if (ucp_logLevel() >= Verbosity_2) {                                                                               \
         std::ostringstream oss;                                                                                        \
         if (isImplemented) {                                                                                           \
             oss << "Call '" << getFuncPtrName<FuncPtrType, funcAddress>() << "' replacing '" << (void*)gameAddress     \
@@ -246,33 +246,33 @@ public:
                 << "' from replaced function with: ";                                                                  \
         }                                                                                                              \
         oss << (void*)this << "->(" MACRO_STREAM_PRINT_PARAMETER_LIST(N) << ")";                                       \
-        ucp_log(Verbosity_1, oss.str().c_str());                                                                       \
+        ucp_log(Verbosity_2, oss.str().c_str());                                                                       \
     }
 
 #define MACRO_WRAPPER_BODY_POSTCALL(N)                                                                                 \
-    if (ucp_logLevel() >= Verbosity_1) {                                                                               \
+    if (ucp_logLevel() >= Verbosity_2) {                                                                               \
         std::ostringstream oss;                                                                                        \
         if (isImplemented) {                                                                                           \
-            oss << "Call: " << getFuncPtrName<FuncPtrType, funcAddress>() << " replacing '" << (void*)gameAddress      \
+            oss << "Call '" << getFuncPtrName<FuncPtrType, funcAddress>() << "' replacing '" << (void*)gameAddress     \
                 << "' returned: " << ret;                                                                              \
         } else {                                                                                                       \
             oss << "Call '" << (void*)gameAddress << "' of type '" << getTypeName<FuncPtrType>()                       \
                 << "' from replaced function returned: " << ret;                                                       \
         }                                                                                                              \
-        ucp_log(Verbosity_1, oss.str().c_str());                                                                       \
+        ucp_log(Verbosity_2, oss.str().c_str());                                                                       \
     }
 
 #define MACRO_WRAPPER_BODY_POSTCALL_VOID(N)                                                                            \
-    if (ucp_logLevel() >= Verbosity_1) {                                                                               \
+    if (ucp_logLevel() >= Verbosity_2) {                                                                               \
         std::ostringstream oss;                                                                                        \
         if (isImplemented) {                                                                                           \
-            oss << "Call: " << getFuncPtrName<FuncPtrType, funcAddress>() << " replacing '" << (void*)gameAddress      \
+            oss << "Call '" << getFuncPtrName<FuncPtrType, funcAddress>() << "' replacing '" << (void*)gameAddress     \
                 << "' returned.";                                                                                      \
         } else {                                                                                                       \
             oss << "Call '" << (void*)gameAddress << "' of type '" << getTypeName<FuncPtrType>()                       \
                 << "' from replaced function returned.";                                                               \
         }                                                                                                              \
-        ucp_log(Verbosity_1, oss.str().c_str());                                                                       \
+        ucp_log(Verbosity_2, oss.str().c_str());                                                                       \
     }
 
 #define MACRO_CALL_WRAPPER(N)                                                                                          \

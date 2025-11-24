@@ -9,8 +9,7 @@ MACRO_FUNCTION_RESOLVER(
     ViewportRenderState* (ViewportRenderState::*)(), false, 0x004e1fa0, &ViewportRenderState::_constructor_)
 _constructor_;
 
-MACRO_FUNCTION_RESOLVER_EXT(BOOL (ViewportRenderState::*)(uint, uint), false, 0x00401000,
-    &ViewportRenderState::xyAreValid, FunctionResolver::Option::USE_WRAPPER)
+MACRO_FUNCTION_RESOLVER(BOOL (ViewportRenderState::*)(uint, uint), true, 0x00401000, &ViewportRenderState::xyAreValid)
 xyAreValid;
 
 MACRO_FUNCTION_RESOLVER(

@@ -6,7 +6,12 @@
             "type": "cppvsdbg",
             "request": "launch",
             "program": "${workspaceFolder}/_original/Stronghold Crusader.exe",
-            "args": [],
+            "args": [
+                "--ucp-verbosity",
+                "2",
+                "--ucp-console-verbosity",
+                "2"
+            ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/_original",
             // Note: build currently set target, so if this is the exe, nothing will change
