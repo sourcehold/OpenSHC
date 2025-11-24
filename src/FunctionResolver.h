@@ -199,62 +199,80 @@ public:
         template <typename _> struct FunctionPtrUnifier<true, false, _> {
             inline static const FuncPtrType get() { return funcAddress; }
         };
-        template <bool implemented, typename _> struct FunctionPtrUnifier<implemented, true, _> {
-            inline static const FuncPtrType get() { return reinterpret_cast<FuncPtrType>(&WrapperFunction::call); }
-        };
+
+        // At the moment, there is not much sense in allowing the wrapper function for the exe.
+        // Should logging for it get added, reconsider this.
+        // Although, it might then require workaround for ucp usage inside the macros.
+#ifdef OPEN_SHC_DLL
+
         template <typename _> struct FunctionPtrUnifier<false, false, _> {
             inline static const FuncPtrType get() { return reinterpret_cast<FuncPtrType>(&GameCallerFunction::call); }
+        };
+        template <bool implemented, typename _> struct FunctionPtrUnifier<implemented, true, _> {
+            inline static const FuncPtrType get() { return reinterpret_cast<FuncPtrType>(&WrapperFunction::call); }
         };
 
         typedef FunctionPtrUnifier<isImplemented, false, void> UnifiedFunctionPtrForWrapper;
 
         template <typename FuncPtrType> struct Wrapper;
 
-#define MACRO_SPACED_STREAM_PRINT_PARAMETER(N) << "\t" << MACRO_PARAMETER(N)
-#define MACRO_SPACED_STREAM_PRINT_PARAMETER_LIST(N)                                                                    \
-    MACRO_INDEX_ITERATE_DEPTH_0(N, MACRO_SPACED_STREAM_PRINT_PARAMETER, M_SPACE)
+#define MACRO_STREAM_PRINT_PARAMETER(N) << MACRO_PARAMETER(N)
+#define MACRO_STREAM_PRINT_PARAMETER_LIST(N) MACRO_INDEX_ITERATE_DEPTH_0(N, MACRO_STREAM_PRINT_PARAMETER, << ", ")
 
-// TODO: Replace with proper logging with condition
+        typedef FuncTraits<FuncPtrType> FuncPtrTypeTraits;
+
 #define MACRO_WRAPPER_BODY_PRECALL(N)                                                                                  \
-    {                                                                                                                  \
-        std::ostringstream ossParams;                                                                                  \
+    if (ucp_logLevel() >= Verbosity_1) {                                                                               \
+        std::ostringstream oss;                                                                                        \
         if (isImplemented) {                                                                                           \
-            ossParams << "Call: " << getFuncPtrName<FuncPtrType, funcAddress>() << " | Replaces: '" << std::hex        \
-                      << gameAddress << std::dec << "' | Args(" << N << "): ";                                         \
+            oss << "Call '" << getFuncPtrName<FuncPtrType, funcAddress>() << "' replacing '" << (void*)gameAddress     \
+                << "' with: ";                                                                                         \
         } else {                                                                                                       \
-            ossParams << "Call from own function: " << std::hex << gameAddress << std::dec << "' | Args(" << N         \
-                      << "): ";                                                                                        \
+            oss << "Call '" << (void*)gameAddress << "' of type '" << getTypeName<FuncPtrType>()                       \
+                << "' from replaced function with: ";                                                                  \
         }                                                                                                              \
-        ossParams MACRO_SPACED_STREAM_PRINT_PARAMETER_LIST(N);                                                         \
-        std::string strParams = ossParams.str();                                                                       \
-        std::cout << strParams << '\n';                                                                                \
+        oss << "void->(" MACRO_STREAM_PRINT_PARAMETER_LIST(N) << ")";                                                  \
+        ucp_log(Verbosity_1, oss.str().c_str());                                                                       \
+    }
+
+#define MACRO_WRAPPER_BODY_PRECALL_THISCALL(N)                                                                         \
+    if (ucp_logLevel() >= Verbosity_1) {                                                                               \
+        std::ostringstream oss;                                                                                        \
+        if (isImplemented) {                                                                                           \
+            oss << "Call '" << getFuncPtrName<FuncPtrType, funcAddress>() << "' replacing '" << (void*)gameAddress     \
+                << "' with: ";                                                                                         \
+        } else {                                                                                                       \
+            oss << "Call '" << (void*)gameAddress << "' of type '" << getTypeName<FuncPtrType>()                       \
+                << "' from replaced function with: ";                                                                  \
+        }                                                                                                              \
+        oss << (void*)this << "->(" MACRO_STREAM_PRINT_PARAMETER_LIST(N) << ")";                                       \
+        ucp_log(Verbosity_1, oss.str().c_str());                                                                       \
     }
 
 #define MACRO_WRAPPER_BODY_POSTCALL(N)                                                                                 \
-    {                                                                                                                  \
-        std::ostringstream ossReturn;                                                                                  \
+    if (ucp_logLevel() >= Verbosity_1) {                                                                               \
+        std::ostringstream oss;                                                                                        \
         if (isImplemented) {                                                                                           \
-            ossReturn << "Call: " << getFuncPtrName<FuncPtrType, funcAddress>() << " | Replaces: '" << std::hex        \
-                      << gameAddress << std::dec << "' | Returned:" << "\t" << ret;                                    \
+            oss << "Call: " << getFuncPtrName<FuncPtrType, funcAddress>() << " replacing '" << (void*)gameAddress      \
+                << "' returned: " << ret;                                                                              \
         } else {                                                                                                       \
-            ossReturn << "Call from own function: " << std::hex << gameAddress << std::dec << "' | Returned:" << "\t"  \
-                      << ret;                                                                                          \
+            oss << "Call '" << (void*)gameAddress << "' of type '" << getTypeName<FuncPtrType>()                       \
+                << "' from replaced function returned: " << ret;                                                       \
         }                                                                                                              \
-        std::string strReturn = ossReturn.str();                                                                       \
-        std::cout << strReturn << '\n';                                                                                \
+        ucp_log(Verbosity_1, oss.str().c_str());                                                                       \
     }
 
 #define MACRO_WRAPPER_BODY_POSTCALL_VOID(N)                                                                            \
-    {                                                                                                                  \
-        std::ostringstream ossReturn;                                                                                  \
+    if (ucp_logLevel() >= Verbosity_1) {                                                                               \
+        std::ostringstream oss;                                                                                        \
         if (isImplemented) {                                                                                           \
-            ossReturn << "Call: " << getFuncPtrName<FuncPtrType, funcAddress>() << " | Replaces: '" << std::hex        \
-                      << gameAddress << std::dec << "' | Returned";                                                    \
+            oss << "Call: " << getFuncPtrName<FuncPtrType, funcAddress>() << " replacing '" << (void*)gameAddress      \
+                << "' returned.";                                                                                      \
         } else {                                                                                                       \
-            ossReturn << "Call from own function: " << std::hex << gameAddress << std::dec << "' | Returned";          \
+            oss << "Call '" << (void*)gameAddress << "' of type '" << getTypeName<FuncPtrType>()                       \
+                << "' from replaced function returned.";                                                               \
         }                                                                                                              \
-        std::string strReturn = ossReturn.str();                                                                       \
-        std::cout << strReturn << '\n';                                                                                \
+        ucp_log(Verbosity_1, oss.str().c_str());                                                                       \
     }
 
 #define MACRO_CALL_WRAPPER(N)                                                                                          \
@@ -263,14 +281,17 @@ public:
         template <typename R, typename = void> struct CallHelper : public UnifiedFunctionPtrForWrapper {               \
             __declspec(noinline) static R __cdecl call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N))                         \
             {                                                                                                          \
-                MACRO_WRAPPER_BODY_PRECALL(N) Ret ret = get()(MACRO_PARAMETER_LIST(N));                                \
-                MACRO_WRAPPER_BODY_POSTCALL(N) return ret;                                                             \
+                MACRO_WRAPPER_BODY_PRECALL(N)                                                                          \
+                Ret ret = get()(MACRO_PARAMETER_LIST(N));                                                              \
+                MACRO_WRAPPER_BODY_POSTCALL(N)                                                                         \
+                return ret;                                                                                            \
             }                                                                                                          \
         };                                                                                                             \
         template <typename _> struct CallHelper<void, _> : public UnifiedFunctionPtrForWrapper {                       \
             __declspec(noinline) static void __cdecl call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N))                      \
             {                                                                                                          \
-                MACRO_WRAPPER_BODY_PRECALL(N) get()(MACRO_PARAMETER_LIST(N));                                          \
+                MACRO_WRAPPER_BODY_PRECALL(N)                                                                          \
+                get()(MACRO_PARAMETER_LIST(N));                                                                        \
                 MACRO_WRAPPER_BODY_POSTCALL_VOID(N)                                                                    \
             }                                                                                                          \
         };                                                                                                             \
@@ -283,14 +304,17 @@ public:
         template <typename R, typename = void> struct CallHelper : public UnifiedFunctionPtrForWrapper {               \
             __declspec(noinline) static R __stdcall call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N))                       \
             {                                                                                                          \
-                MACRO_WRAPPER_BODY_PRECALL(N) Ret ret = get()(MACRO_PARAMETER_LIST(N));                                \
-                MACRO_WRAPPER_BODY_POSTCALL(N) return ret;                                                             \
+                MACRO_WRAPPER_BODY_PRECALL(N)                                                                          \
+                Ret ret = get()(MACRO_PARAMETER_LIST(N));                                                              \
+                MACRO_WRAPPER_BODY_POSTCALL(N)                                                                         \
+                return ret;                                                                                            \
             }                                                                                                          \
         };                                                                                                             \
         template <typename _> struct CallHelper<void, _> : public UnifiedFunctionPtrForWrapper {                       \
             __declspec(noinline) static void __stdcall call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N))                    \
             {                                                                                                          \
-                MACRO_WRAPPER_BODY_PRECALL(N) get()(MACRO_PARAMETER_LIST(N));                                          \
+                MACRO_WRAPPER_BODY_PRECALL(N)                                                                          \
+                get()(MACRO_PARAMETER_LIST(N));                                                                        \
                 MACRO_WRAPPER_BODY_POSTCALL_VOID(N)                                                                    \
             }                                                                                                          \
         };                                                                                                             \
@@ -303,14 +327,17 @@ public:
         template <typename R, typename = void> struct CallHelper : public UnifiedFunctionPtrForWrapper {               \
             __declspec(noinline) R call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N))                                        \
             {                                                                                                          \
-                MACRO_WRAPPER_BODY_PRECALL(N) Ret ret = (((Class*)(this))->*get())(MACRO_PARAMETER_LIST(N));           \
-                MACRO_WRAPPER_BODY_POSTCALL(N) return ret;                                                             \
+                MACRO_WRAPPER_BODY_PRECALL_THISCALL(N)                                                                 \
+                Ret ret = (((Class*)(this))->*get())(MACRO_PARAMETER_LIST(N));                                         \
+                MACRO_WRAPPER_BODY_POSTCALL(N)                                                                         \
+                return ret;                                                                                            \
             }                                                                                                          \
         };                                                                                                             \
         template <typename _> struct CallHelper<void, _> : public UnifiedFunctionPtrForWrapper {                       \
             __declspec(noinline) void call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N))                                     \
             {                                                                                                          \
-                MACRO_WRAPPER_BODY_PRECALL(N)(((Class*)(this))->*get())(MACRO_PARAMETER_LIST(N));                      \
+                MACRO_WRAPPER_BODY_PRECALL_THISCALL(N)                                                                 \
+                (((Class*)(this))->*get())(MACRO_PARAMETER_LIST(N));                                                   \
                 MACRO_WRAPPER_BODY_POSTCALL_VOID(N)                                                                    \
             }                                                                                                          \
         };                                                                                                             \
@@ -323,10 +350,11 @@ public:
 
 #undef MACRO_WRAPPER_BODY_POSTCALL_VOID
 #undef MACRO_WRAPPER_BODY_POSTCALL
+#undef MACRO_WRAPPER_BODY_PRECALL_THISCALL
 #undef MACRO_WRAPPER_BODY_PRECALL
 
-#undef MACRO_SPACED_STREAM_PRINT_PARAMETER_LIST
-#undef MACRO_SPACED_STREAM_PRINT_PARAMETER
+#undef MACRO_MACRO_STREAM_PRINT_PARAMETER_LIST
+#undef MACRO_STREAM_PRINT_PARAMETER
 
         typedef typename Wrapper<FuncPtrType>::Function WrapperFunction;
 
@@ -395,6 +423,12 @@ public:
         typedef typename GameCaller<FuncPtrType>::Function GameCallerFunction;
 
         typedef FunctionPtrUnifier<isImplemented, Flags::USE_WRAPPER, void> UnifiedFunctionPtr;
+
+#endif
+
+#ifdef OPEN_SHC_EXE
+        typedef FunctionPtrUnifier<isImplemented, false, void> UnifiedFunctionPtr;
+#endif
 
     public:
         typedef UnifiedFunctionPtr Function;
