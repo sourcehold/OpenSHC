@@ -9,18 +9,6 @@ function(target_file_copy_if_different TARGET FILE DEST)
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${FILE}" "${DEST}"
     )
 endfunction()
-# Possible that this could also be done by an "install" command.
-function(target_files_copy_if_different TARGET ROOT FILES DEST_DIR)
-    foreach(FILE IN LISTS FILES)
-        file(RELATIVE_PATH REL "${ROOT}" "${FILE}")
-        get_filename_component(DIR "${REL}" DIRECTORY)
-        set(DEST_FILE_DIR "${DEST_DIR}/${DIR}")
-        add_custom_command(TARGET ${TARGET} POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E make_directory "${DEST_FILE_DIR}"
-        )
-        target_file_copy_if_different(${TARGET} "${FILE}" "${DEST_FILE_DIR}")
-    endforeach()
-endfunction()
 
 project ("OpenSHC")
 
@@ -71,8 +59,8 @@ link_directories(${CMAKE_SOURCE_DIR}/dependencies/recreated/lib)
 link_libraries(binkw32 Mss32)
 
 # Handle pklib
-file(GLOB_RECURSE PKLIB_SRC ${CMAKE_SOURCE_DIR}/dependencies/pklib/*)
-add_library(pklib ${PKLIB_SRC})
+include(${CMAKE_SOURCE_DIR}/cmake/pklib-sources.cmake) # PKLIB_SOURCES
+add_library(pklib ${PKLIB_SOURCES})
 include_directories(${CMAKE_SOURCE_DIR}/dependencies/pklib)
 link_libraries(pklib)
 
@@ -91,13 +79,15 @@ link_libraries(
     lua
 )
 
-# Collect main source
-file(GLOB_RECURSE MAIN_SRC ${CMAKE_SOURCE_DIR}/src/*)
+
+# Include precomp header list and main sources
+include(${CMAKE_SOURCE_DIR}/cmake/precomp-headers.cmake) # PRECOMP_HEADERS
+include(${CMAKE_SOURCE_DIR}/cmake/core-sources.cmake) # CORE_SOURCES
 
 
 
 # Add source to this project's executable.
-add_executable(OpenSHC.exe WIN32 ${MAIN_SRC})
+add_executable(OpenSHC.exe WIN32 ${CORE_SOURCES})
 set_target_properties(OpenSHC.exe PROPERTIES OUTPUT_NAME ${OPEN_SHC_NAME})
 target_compile_definitions(OpenSHC.exe PRIVATE OPEN_SHC_EXE)
 
@@ -117,7 +107,7 @@ target_file_copy_if_different(OpenSHC.exe "${CRUSADER_DIR}/shfolder.dll" "$<TARG
 
 set(OPEN_SHC_DLL_DEST "${CRUSADER_DIR}/ucp/modules/${OPEN_SHC_NAME}-${OPEN_SHC_VERSION}")
 
-add_library(OpenSHC.dll SHARED ${MAIN_SRC})
+add_library(OpenSHC.dll SHARED ${CORE_SOURCES})
 set_target_properties(OpenSHC.dll PROPERTIES OUTPUT_NAME ${OPEN_SHC_NAME})
 target_compile_definitions(OpenSHC.dll PRIVATE OPEN_SHC_DLL)
 
@@ -140,5 +130,16 @@ target_sources(OpenSHC.dll PRIVATE ${BUILD_TRIGGER_FILE})
 add_dependencies(OpenSHC.dll OpenSHC.dll.trigger)
 
 # Copy ucp definition files
-file(GLOB_RECURSE UCP_DEFINITION ${CMAKE_SOURCE_DIR}/ucp/*)
-target_files_copy_if_different(OpenSHC.dll ${CMAKE_SOURCE_DIR}/ucp "${UCP_DEFINITION}" "${OPEN_SHC_DLL_DEST}")
+include(${CMAKE_SOURCE_DIR}/cmake/ucp-definition.cmake) # UCP_DEFINITION
+foreach(FILE IN LISTS UCP_DEFINITION)
+    get_filename_component(DIR "${FILE}" DIRECTORY)
+    if (DIR)
+        set(DEST_FILE_DIR "${OPEN_SHC_DLL_DEST}/${DIR}")
+        add_custom_command(TARGET OpenSHC.dll POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E make_directory "${DEST_FILE_DIR}"
+        )
+    else()
+        set(DEST_FILE_DIR "${OPEN_SHC_DLL_DEST}")
+    endif()
+    target_file_copy_if_different(OpenSHC.dll "${CMAKE_SOURCE_DIR}/ucp/${FILE}" "${DEST_FILE_DIR}/${FILE}")
+endforeach()
