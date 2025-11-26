@@ -7,7 +7,7 @@
 
 cmake_minimum_required(VERSION 3.10)
 
-function(generate_file_list SOURCE_ROOT PATTERNS_LIST OUTPUT_FILE VAR_NAME)
+function(generate_file_list SOURCE_ROOT PATTERNS_LIST OUTPUT_FILE)
     set(ALL_ENTRIES "")
 
     # 1. Recursively collect entries for each pattern
@@ -30,37 +30,18 @@ function(generate_file_list SOURCE_ROOT PATTERNS_LIST OUTPUT_FILE VAR_NAME)
     # 4. Sort alphabetically
     list(SORT FILES_ONLY)
 
-    # 5. Generate output include file
-    file(WRITE "${OUTPUT_FILE}" "# Auto-generated file — do not edit!\n")
-    file(APPEND "${OUTPUT_FILE}" "set(${VAR_NAME}\n")
-    foreach(FILE IN LISTS FILES_ONLY)
-        file(APPEND "${OUTPUT_FILE}" "    ${FILE}\n")
-    endforeach()
-    file(APPEND "${OUTPUT_FILE}" ")\n")
+    # 5. Generate output file
+    string(JOIN "\n" FILES_ONLY_STRING ${FILES_ONLY})
+    file(WRITE "${OUTPUT_FILE}" "${FILES_ONLY_STRING}\n")
 
     message(STATUS "Generated file list in: ${OUTPUT_FILE}")
 endfunction()
 
-
-# Directory whose files you want to list
-set(SOURCE_ROOT "${CMAKE_CURRENT_LIST_DIR}/src")
-
-# File pattern (e.g., "*.cpp", "*.h", "*.*", "*.txt")
-set(PATTERN "*.cpp")
-
-# Where to write the generated include file
-set(OUTPUT_FILE "${CMAKE_CURRENT_LIST_DIR}/file_list.cmake")
-
-# Variable name that will appear inside file_list.cmake
-set(VAR_NAME "GENERATED_FILES")
-
-file(MAKE_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/cmake")
-
 # core sources
-generate_file_list("${CMAKE_CURRENT_LIST_DIR}" "src/core/*.c;src/core/*.cpp" "${CMAKE_CURRENT_LIST_DIR}/cmake/core-sources.cmake" CORE_SOURCES)
+generate_file_list("${CMAKE_CURRENT_LIST_DIR}" "src/core/*.c;src/core/*.cpp" "${CMAKE_CURRENT_LIST_DIR}/cmake/core-sources.txt")
 
 # pklib sources
-generate_file_list("${CMAKE_CURRENT_LIST_DIR}" "dependencies/pklib/*.c" "${CMAKE_CURRENT_LIST_DIR}/cmake/pklib-sources.cmake" PKLIB_SOURCES)
+generate_file_list("${CMAKE_CURRENT_LIST_DIR}" "dependencies/pklib/*.c" "${CMAKE_CURRENT_LIST_DIR}/cmake/pklib-sources.txt")
 
 # ucp definition
-generate_file_list("${CMAKE_CURRENT_LIST_DIR}/ucp" "*.lua;*.yml;*.md" "${CMAKE_CURRENT_LIST_DIR}/cmake/ucp-definition.cmake" UCP_DEFINITION)
+generate_file_list("${CMAKE_CURRENT_LIST_DIR}/ucp" "*.lua;*.yml;*.md" "${CMAKE_CURRENT_LIST_DIR}/cmake/ucp-definition.txt")

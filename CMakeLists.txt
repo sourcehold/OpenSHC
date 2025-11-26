@@ -9,6 +9,11 @@ function(target_file_copy_if_different TARGET FILE DEST)
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${FILE}" "${DEST}"
     )
 endfunction()
+function(file_dependent_read_list FILE LIST)
+    set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS ${FILE}) # watch the file
+    file(STRINGS "${FILE}" TEMP_LIST)
+    set(${LIST} "${TEMP_LIST}" PARENT_SCOPE)
+endfunction()
 
 project ("OpenSHC")
 
@@ -59,7 +64,7 @@ link_directories(${CMAKE_SOURCE_DIR}/dependencies/recreated/lib)
 link_libraries(binkw32 Mss32)
 
 # Handle pklib
-include(${CMAKE_SOURCE_DIR}/cmake/pklib-sources.cmake) # PKLIB_SOURCES
+file_dependent_read_list("${CMAKE_SOURCE_DIR}/cmake/pklib-sources.txt" PKLIB_SOURCES)
 add_library(pklib ${PKLIB_SOURCES})
 include_directories(${CMAKE_SOURCE_DIR}/dependencies/pklib)
 link_libraries(pklib)
@@ -82,7 +87,7 @@ link_libraries(
 
 # Include core source and precomp header
 set(PCH_FILE ${CMAKE_SOURCE_DIR}/src/precomp/pch.h)
-include(${CMAKE_SOURCE_DIR}/cmake/core-sources.cmake) # CORE_SOURCES
+file_dependent_read_list("${CMAKE_SOURCE_DIR}/cmake/core-sources.txt" CORE_SOURCES)
 
 
 
@@ -132,7 +137,7 @@ target_sources(OpenSHC.dll PRIVATE ${BUILD_TRIGGER_FILE})
 add_dependencies(OpenSHC.dll OpenSHC.dll.trigger)
 
 # Copy ucp definition files
-include(${CMAKE_SOURCE_DIR}/cmake/ucp-definition.cmake) # UCP_DEFINITION
+file_dependent_read_list("${CMAKE_SOURCE_DIR}/cmake/ucp-definition.txt" UCP_DEFINITION)
 foreach(FILE IN LISTS UCP_DEFINITION)
     get_filename_component(DIR "${FILE}" DIRECTORY)
     if (DIR)

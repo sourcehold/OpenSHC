@@ -1,0 +1,3 @@
+dependencies/pklib/crc32.c
+dependencies/pklib/explode.c
+dependencies/pklib/implode.c
