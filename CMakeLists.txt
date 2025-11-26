@@ -80,8 +80,8 @@ link_libraries(
 )
 
 
-# Include precomp header list and main sources
-include(${CMAKE_SOURCE_DIR}/cmake/precomp-headers.cmake) # PRECOMP_HEADERS
+# Include core source and precomp header
+set(PCH_FILE ${CMAKE_SOURCE_DIR}/src/precomp/pch.h)
 include(${CMAKE_SOURCE_DIR}/cmake/core-sources.cmake) # CORE_SOURCES
 
 
@@ -90,6 +90,7 @@ include(${CMAKE_SOURCE_DIR}/cmake/core-sources.cmake) # CORE_SOURCES
 add_executable(OpenSHC.exe WIN32 ${CORE_SOURCES})
 set_target_properties(OpenSHC.exe PROPERTIES OUTPUT_NAME ${OPEN_SHC_NAME})
 target_compile_definitions(OpenSHC.exe PRIVATE OPEN_SHC_EXE)
+target_precompile_headers(OpenSHC.exe PRIVATE $<$<COMPILE_LANGUAGE:CXX>:${PCH_FILE}>)
 
 # Checks if a binkw32_real is present and uses this instead; only checks on reconfigure
 if(EXISTS "${CRUSADER_DIR}/binkw32_real.dll")
@@ -110,6 +111,7 @@ set(OPEN_SHC_DLL_DEST "${CRUSADER_DIR}/ucp/modules/${OPEN_SHC_NAME}-${OPEN_SHC_V
 add_library(OpenSHC.dll SHARED ${CORE_SOURCES})
 set_target_properties(OpenSHC.dll PROPERTIES OUTPUT_NAME ${OPEN_SHC_NAME})
 target_compile_definitions(OpenSHC.dll PRIVATE OPEN_SHC_DLL)
+target_precompile_headers(OpenSHC.dll PRIVATE $<$<COMPILE_LANGUAGE:CXX>:${PCH_FILE}>)
 
 # Using module folder as runtime output to properly place the dll and other libs
 set_target_properties(OpenSHC.dll PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${OPEN_SHC_DLL_DEST})

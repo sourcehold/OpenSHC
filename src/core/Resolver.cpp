@@ -1,9 +1,5 @@
-#include "FunctionResolver.h"
-#include "StructResolver.h"
 
 #include "ucp3.h"
-
-#include "framework.h"
 
 #include <sstream>
 

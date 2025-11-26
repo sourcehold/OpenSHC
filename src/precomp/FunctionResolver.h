@@ -4,7 +4,6 @@
 // NOTE: Changed CDECL tp CCALL to avoid window macro issue
 // TODO: Maybe change naming convention to not run into these issues
 
-#include "CompileMacros.h"
 #include "TypeUtility.h"
 
 #include "ucp3.h"

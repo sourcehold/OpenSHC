@@ -1,8 +1,6 @@
 #pragma once
 
 #include "ViewportRenderStateStruct.h"
-#include "common.h"
-#include "framework.h"
 
 struct UnitRenderHelpStructure {
     int param_1;

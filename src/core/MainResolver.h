@@ -1,7 +1,5 @@
 #pragma once
 
-#include "FunctionResolver.h"
-
 #include "MainDeclaration.h"
 
 namespace Main_Func {

@@ -1,5 +1,4 @@
 #include "ViewportRenderState.h"
-#include "StructResolver.h"
 #include "ViewportRenderState.func.h"
 
 #include "windowslib.h"

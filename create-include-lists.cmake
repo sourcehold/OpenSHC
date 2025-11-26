@@ -56,9 +56,6 @@ set(VAR_NAME "GENERATED_FILES")
 
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
-# precompile headers
-generate_file_list("${CMAKE_CURRENT_LIST_DIR}" "src/precomp/*.h" "${CMAKE_CURRENT_LIST_DIR}/cmake/precomp-headers.cmake" PRECOMP_HEADERS)
-
 # core sources
 generate_file_list("${CMAKE_CURRENT_LIST_DIR}" "src/core/*.c;src/core/*.cpp" "${CMAKE_CURRENT_LIST_DIR}/cmake/core-sources.cmake" CORE_SOURCES)
 

@@ -1,8 +1,6 @@
 
 #include "MainResolver.h"
 
-#include "CompileMacros.h"
-
 #include "lua.h"
 
 #ifdef OPEN_SHC_DLL

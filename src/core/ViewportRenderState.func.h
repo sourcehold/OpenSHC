@@ -1,6 +1,5 @@
 #pragma once
 
-#include "FunctionResolver.h"
 #include "ViewportRenderState.h"
 
 namespace ViewportRenderState_Func {

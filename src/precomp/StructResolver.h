@@ -1,7 +1,6 @@
 #ifndef STRUCT_RESOLVER
 #define STRUCT_RESOLVER
 
-#include "CompileMacros.h"
 #include "TypeUtility.h"
 
 struct StructResolver {

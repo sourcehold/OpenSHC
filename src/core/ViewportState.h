@@ -1,7 +1,5 @@
 #pragma once
 
-#include "common.h"
-
 /* C++ Class updated via OOAanalyzer. */
 struct ViewportState {
     undefined4 field0_0x0;
