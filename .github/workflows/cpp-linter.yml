@@ -4,6 +4,7 @@ name: cpp-linter
 on:
   pull_request:
     branches: [main]
+    types: [opened, reopened, synchronize, ready_for_review]
     paths: ['**.c', '**.cpp', '**.h', '**.hpp', '**.cxx', '**.hxx', '**.cc', '**.hh', '**CMakeLists.txt', 'meson.build', '**.cmake']
   push:
     branches: [main]
@@ -11,7 +12,7 @@ on:
 
 jobs:
   cpp-linter:
-    # only run on non-draft PRs
+    # only run on non-draft PRs, this will skip the job for drafts and report success, but drafts can not be merged anyway
     if: ${{ github.event_name != 'pull_request' || github.event.pull_request.draft == false }}
     runs-on: ubuntu-latest
     permissions: 
