@@ -1,0 +1,38 @@
+# Taken mostly from https://cpp-linter.github.io/cpp-linter-action/examples/
+
+name: cpp-linter
+on:
+  pull_request:
+    branches: [main]
+    paths: ['**.c', '**.cpp', '**.h', '**.hpp', '**.cxx', '**.hxx', '**.cc', '**.hh', '**CMakeLists.txt', 'meson.build', '**.cmake']
+  push:
+    branches: [main]
+    paths: ['**.c', '**.cpp', '**.h', '**.hpp', '**.cxx', '**.hxx', '**.cc', '**.hh', '**CMakeLists.txt', 'meson.build', '**.cmake']
+
+jobs:
+  cpp-linter:
+    runs-on: ubuntu-latest
+    permissions: 
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v5
+
+      # ... optionally setup build env to create a compilation database
+
+      - uses: cpp-linter/cpp-linter-action@v2
+        id: linter
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          style: 'file'  # Use .clang-format config file. 
+          tidy-checks: '-*' # disable clang-tidy checks.
+          
+          # only 'update' a single comment in a pull request's thread. 
+          thread-comments: ${{ github.event_name == 'pull_request' && 'update' }}
+          
+          # disable file annotations, the thread comment should be the response
+          file-annotations: false
+
+      - name: Fail fast?!
+        if: steps.linter.outputs.checks-failed > 0
+        run: exit 1
