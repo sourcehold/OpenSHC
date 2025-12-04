@@ -11,6 +11,8 @@ on:
 
 jobs:
   cpp-linter:
+    # only run on non-draft PRs
+    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.draft == false }}
     runs-on: ubuntu-latest
     permissions: 
       pull-requests: write
