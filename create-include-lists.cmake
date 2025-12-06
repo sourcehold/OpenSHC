@@ -5,7 +5,7 @@
 # Usage:  cmake -P generate_file_list.cmake
 # ======================================================================
 
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.20)
 
 function(generate_file_list SOURCE_ROOT PATTERNS_LIST OUTPUT_FILE)
     set(ALL_ENTRIES "")
@@ -32,7 +32,13 @@ function(generate_file_list SOURCE_ROOT PATTERNS_LIST OUTPUT_FILE)
 
     # 5. Generate output file
     string(JOIN "\n" FILES_ONLY_STRING ${FILES_ONLY})
-    file(WRITE "${OUTPUT_FILE}" "${FILES_ONLY_STRING}\n")
+    file(WRITE "${OUTPUT_FILE}.temp" "${FILES_ONLY_STRING}\n")
+
+    # 6. Convert line endings
+    configure_file("${OUTPUT_FILE}.temp" "${OUTPUT_FILE}" @ONLY NEWLINE_STYLE LF)
+
+    # 7. Remove temp file
+    file(REMOVE "${OUTPUT_FILE}.temp")
 
     message(STATUS "Generated file list in: ${OUTPUT_FILE}")
 endfunction()
