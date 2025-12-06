@@ -11,10 +11,6 @@ _constructor_;
 MACRO_FUNCTION_RESOLVER(BOOL (ViewportRenderState::*)(uint, uint), true, 0x00401000, &ViewportRenderState::xyAreValid)
 xyAreValid;
 
-MACRO_FUNCTION_RESOLVER(
-    int (ViewportRenderState::*)(int, int), false, 0x00401040, &ViewportRenderState::translateXYToTile)
-translateXYToTile;
-
 MACRO_FUNCTION_RESOLVER(int (ViewportRenderState::*)(int, int), false, 0x004092e0, &ViewportRenderState::meth_0x4092e0)
 meth_0x4092e0;
 
