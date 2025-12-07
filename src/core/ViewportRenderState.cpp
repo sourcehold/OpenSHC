@@ -67,9 +67,6 @@ BOOL ViewportRenderState::xyAreValid(uint x, uint y)
     return 0;
 }
 
-// FUNCTION: STRONGHOLDCRUSADER 0x00401040
-int ViewportRenderState::translateXYToTile(int x, int y) { return this->translationMatrix[y].addXgetTile + x; }
-
 // FUNCTION: STRONGHOLDCRUSADER 0x004092e0
 int ViewportRenderState::meth_0x4092e0(int param_1, int param_2)
 {
