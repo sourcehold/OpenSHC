@@ -3,17 +3,26 @@
 #include "ViewportRenderState.h"
 
 // would need to be defined in every function case
-// here, if causes no issues, and can even be undefined at the end
+// here, it causes no issues, and can even be undefined at the end
 // it could even be left out completely, and the "safety" check and hooking via macro could be hardcoded at both
 // conditions BUT issue:
-// Structs need this switch in the header, but also in the implementation files, which would mean setting the state
-// twice, if not moved to a central position, where the naming could be an issue again (a central file would trigger
-// recomp for everything, so that would be bad)
-#define IMPLEMENTED CHECK_IMPLEMENTED(FALSE)
+// Structs need this switch in the header, but also in the implementation files, which would mean resolving and setting
+// the implementation state twice, if not moved to a central position, where the naming could be an issue again (a
+// central file would trigger recomp for everything, so that would be bad)
+// the macro in the header could also used to define a macro to indicate that the struct definition should happen, but
+// these would also need to be unique for the specific struct
+#define IMPLEMENTED CHECK_IMPLEMENTED(TRUE)
 
 // using macro to run init, requires also complete definition of type, otherwise we can not pass the function pointer
-template struct Initializer::FunctionInitializer<int (ViewportRenderState::*)(int, int), IMPLEMENTED,
-    Address::F_00401040, &ViewportRenderState::translateXYToTile>;
+
+/* example using the template: */
+// template struct Initializer::FunctionInitializer<int (ViewportRenderState::*)(int, int), IMPLEMENTED,
+//    Address::F_00401040, &ViewportRenderState::translateXYToTile>;
+
+/* example using a start up function: */
+STARTUP_FUNCTION(initViewportRenderStateTranslateXYToTile,
+    INIT_FUNCTION_BODY(int (ViewportRenderState::*)(int, int), IMPLEMENTED, Address::F_00401040,
+        &ViewportRenderState::translateXYToTile))
 
 #if IMPLEMENTED
 
@@ -30,6 +39,8 @@ JMP_TO_GAME(int ViewportRenderState::translateXYToTile(int x, int y), F_00401040
 
 // would convert to a jmp, but would require to define the ptr type for all functions and consider the thiscall !=
 // memberfunc difference
+// could also use the template created for the function resolver that can take a function pointer type and transform
+// it to another function type, although member ptr always require their class at the moment
 // int ViewportRenderState::translateXYToTile(int x, int y)
 //{
 //    return ((int(__thiscall*)(ViewportRenderState*, int, int))Address::F_00401040)(this, x, y);

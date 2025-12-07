@@ -14,10 +14,33 @@
 
 // Enums can only be used, if they are simple values, so the namespace needs to be removed or not even used (addresses
 // as simple macros in global namespace)
-// using a body macro might be trick with inline assembly macros, had weird errors during tests
+// using a body macro might be tricky with inline assembly macros, had weird errors during tests
 #define JMP_TO_GAME(DECLARATION, ADDR)                                                                                 \
     __declspec(naked) DECLARATION { __asm mov eax, ADDR __asm jmp eax }
 
+// example for macro that could create a MICROSOFT startup function
+// execution apparently in name order? If the name is not important, it could also be possible to generate the name from
+// something (or random) or place it in an anonymous namespace, that being said, if only function hooking should be done
+// this way, the macro could also completely generate the code
+#define STARTUP_FUNCTION(NAME, BODY)                                                                                   \
+    static void NAME() BODY __pragma(section(".CRT$XCU", read))                                                        \
+        __declspec(allocate(".CRT$XCU")) void (*_init_##NAME)()                                                        \
+        = NAME;
+
+// taken from std::type_identity, which only becomes available with C++20+
+template <typename T> struct type_identity {
+    typedef T type;
+};
+
+// example for generating the init body
+#define INIT_FUNCTION_BODY(TYPE, IMPLEMENTED, GAME_ADDRESS, POINTER)                                                   \
+    {                                                                                                                  \
+        const type_identity<TYPE>::type funcPtr = POINTER;                                                             \
+        Initializer::initializeFunction(Initializer::AddressUsageKeeper<GAME_ADDRESS>::initialized, IMPLEMENTED,       \
+            GAME_ADDRESS, *((void**)&funcPtr), getFuncPtrName<TYPE, POINTER>());                                       \
+    }
+
+// for testing only
 namespace Address {
 enum {
     F_00401040 = 0x00401040,
@@ -29,7 +52,7 @@ enum {
 //__declspec(allocate(".CRT$XCU")) void(*pInit)() = myInitFunction;
 
 struct Initializer {
-private:
+public: // everything is public, but only for testing
     template <int address> struct AddressUsageKeeper {
         static bool initialized;
     };
@@ -40,7 +63,6 @@ private:
     static void initializeFunction(
         bool& initialized, bool isImplemented, int gameAddress, const void* funcPtr, const char* funcName);
 
-public:
     template <typename T, bool implemented, int gameAddress, T* structAddress> struct StructInitializer {
     private:
         struct Init {
