@@ -27,6 +27,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          version: 21 # default is 18
+
           style: 'file'  # Use .clang-format config file. 
           tidy-checks: '-*' # disable clang-tidy checks.
           
