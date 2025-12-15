@@ -63,6 +63,11 @@ include_directories(${CMAKE_SOURCE_DIR}/dependencies/recreated/include)
 link_directories(${CMAKE_SOURCE_DIR}/dependencies/recreated/lib)
 link_libraries(binkw32 Mss32)
 
+# Handle DirectDraw and DirectPlay
+include_directories(${CMAKE_SOURCE_DIR}/dependencies/DXSDK_Aug2007/include)
+link_directories(${CMAKE_SOURCE_DIR}/dependencies/DXSDK_Aug2007/lib)
+link_libraries(ddraw dplayx)
+
 # Handle pklib
 file_dependent_read_list("${CMAKE_SOURCE_DIR}/cmake/pklib-sources.txt" PKLIB_SOURCES)
 add_library(pklib ${PKLIB_SOURCES})
