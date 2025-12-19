@@ -5,14 +5,10 @@
 
 struct StructResolver {
 private:
-    template <typename T, int gameAddress> static T instance();
+    template <typename T, int gameAddress, typename = void> struct Instance;
 
     template <typename T, bool implemented, int gameAddress> struct InternalResolver;
     template <typename T, int gameAddress> struct InternalResolver<T, true, gameAddress> {
-    private:
-        static T instance;
-
-    public:
         static T* const ptr;
     };
     template <typename T, int gameAddress> struct InternalResolver<T, false, gameAddress> {
@@ -44,9 +40,10 @@ public:
 
 template <typename T, int gameAddress>
 T* const StructResolver::InternalResolver<T, false, gameAddress>::ptr = reinterpret_cast<T*>(gameAddress);
+
 template <typename T, int gameAddress>
-T StructResolver::InternalResolver<T, true, gameAddress>::instance = StructResolver::instance<T, gameAddress>();
-template <typename T, int gameAddress> T* const StructResolver::InternalResolver<T, true, gameAddress>::ptr = &instance;
+T* const StructResolver::InternalResolver<T, true, gameAddress>::ptr
+    = &StructResolver::Instance<T, gameAddress>::instance;
 
 template <int address> bool StructResolver::AddressUsageKeeper<address>::initialized = false;
 
@@ -65,6 +62,9 @@ StructResolver::Resolver<T, implemented, gameAddress>::Initializer::Initializer(
     typedef StructResolver::Resolver<STRUCT_TYPE, IMPLEMENTED, GAME_ADDRESS>::Ptr
 
 #define MACRO_STRUCT_INSTANCE(STRUCT_TYPE, GAME_ADDRESS)                                                               \
-    template <> STRUCT_TYPE StructResolver::instance<STRUCT_TYPE, GAME_ADDRESS>()
+    template <typename _> struct StructResolver::Instance<STRUCT_TYPE, GAME_ADDRESS, _> {                              \
+        static STRUCT_TYPE instance;                                                                                   \
+    };                                                                                                                 \
+    template <typename _> STRUCT_TYPE StructResolver::Instance<STRUCT_TYPE, GAME_ADDRESS, _>::instance
 
 #endif // STRUCT_RESOLVER

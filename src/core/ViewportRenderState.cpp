@@ -3,18 +3,6 @@
 
 #include "windowslib.h"
 
-// could also be placed in own file against the clutter
-// PROBLEM: Needs definition of address twice, could however be helped if addresses are moved into own struct/file
-MACRO_STRUCT_INSTANCE(ViewportRenderState, 0x100)
-{
-    // needs direct create return to properly work
-    // interestingly, "ViewportRenderState" here would be so big,
-    // a stack overflow would occur if it was not optimized to be no copy
-    // works with variables
-    // might work good together with the copy prevention
-    return ViewportRenderState();
-}
-
 ViewportRenderState::ViewportRenderState() { MACRO_CALL_MEMBER(ViewportRenderState_Func::_constructor_, this)(); }
 
 // FUNCTION: STRONGHOLDCRUSADER 0x004e1fa0
