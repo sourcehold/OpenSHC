@@ -5,7 +5,7 @@
 
 struct StructResolver {
 private:
-    template <typename T, int gameAddress, typename = void> struct Instance;
+    template <typename T, int gameAddress> struct Instance;
 
     template <typename T, bool implemented, int gameAddress> struct InternalResolver;
     template <typename T, int gameAddress> struct InternalResolver<T, true, gameAddress> {
@@ -61,10 +61,10 @@ StructResolver::Resolver<T, implemented, gameAddress>::Initializer::Initializer(
     template struct StructResolver::Resolver<STRUCT_TYPE, IMPLEMENTED, GAME_ADDRESS>;                                  \
     typedef StructResolver::Resolver<STRUCT_TYPE, IMPLEMENTED, GAME_ADDRESS>::Ptr
 
-#define MACRO_STRUCT_INSTANCE(STRUCT_TYPE, GAME_ADDRESS)                                                               \
-    template <typename _> struct StructResolver::Instance<STRUCT_TYPE, GAME_ADDRESS, _> {                              \
-        static STRUCT_TYPE instance;                                                                                   \
+#define MACRO_STRUCT_INSTANCE(GAME_ADDRESS)                                                                            \
+    template <typename T> struct StructResolver::Instance<T, GAME_ADDRESS> {                                           \
+        static T instance;                                                                                             \
     };                                                                                                                 \
-    template <typename _> STRUCT_TYPE StructResolver::Instance<STRUCT_TYPE, GAME_ADDRESS, _>::instance
+    template <typename T> T StructResolver::Instance<T, GAME_ADDRESS>::instance
 
 #endif // STRUCT_RESOLVER
