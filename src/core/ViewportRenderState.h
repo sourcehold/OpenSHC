@@ -93,24 +93,17 @@ struct ViewportRenderState {
 
     ViewportRenderState();
 
-    // FUNCTION: STRONGHOLDCRUSADER 0x004e1fa0
     ViewportRenderState* _constructor_();
 
-    // FUNCTION: STRONGHOLDCRUSADER 0x00401000
     BOOL xyAreValid(uint x, uint y);
 
-    // FUNCTION: STRONGHOLDCRUSADER 0x00401040
     int translateXYToTile(int x, int y);
 
-    // FUNCTION: STRONGHOLDCRUSADER 0x004092e0
     int meth_0x4092e0(int param_1, int param_2);
 
-    // FUNCTION: STRONGHOLDCRUSADER 0x004e5dd0
     void setupMouseTileXY();
 
-    // FUNCTION: STRONGHOLDCRUSADER 0x004e5d80
     void setupMouseTileXY2();
 
-    // FUNCTION: STRONGHOLDCRUSADER 0x004e5a90
     void meth_0x4e5a90();
 };
