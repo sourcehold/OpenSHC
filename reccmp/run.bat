@@ -11,6 +11,7 @@ set "CMD_EXIT_CODE=0"
 :: --------------------------------------------
 cd /d "%~dp0" || (
     echo [ERROR] Failed to set working directory to script location.
+    call :Cleanup
     exit /b 1
 )
 
@@ -20,6 +21,7 @@ cd /d "%~dp0" || (
 if "%~1"=="" (
     echo [ERROR] No command provided.
     echo Usage: %~nx0 command [args...]
+    call :Cleanup
     exit /b 1
 )
 
@@ -29,6 +31,7 @@ if "%~1"=="" (
 if not exist "%VENV_DIR%\Scripts\activate.bat" (
     echo [ERROR] Virtual environment not found: %VENV_DIR%
     echo Please run the setup script first.
+    call :Cleanup
     exit /b 1
 )
 
@@ -37,6 +40,7 @@ if not exist "%VENV_DIR%\Scripts\activate.bat" (
 :: --------------------------------------------
 if /i "%VIRTUAL_ENV%"=="%CD%\%VENV_DIR%" (
     echo [ERROR] Already running inside the target virtual environment.
+    call :Cleanup
     exit /b 1
 )
 
@@ -59,16 +63,16 @@ echo [OK] Virtual environment activated.
 echo [INFO] Running command: %*
 cmd /c %*
 set "CMD_EXIT_CODE=%ERRORLEVEL%"
-
-:: --------------------------------------------
-:: Cleanup (always if activated)
-:: --------------------------------------------
-call :Cleanup
-
 if %CMD_EXIT_CODE% neq 0 (
     echo [ERROR] Command failed with exit code %CMD_EXIT_CODE%.
+    call :Cleanup
     exit /b %CMD_EXIT_CODE%
 )
+
+:: --------------------------------------------
+:: Cleanup
+:: --------------------------------------------
+call :Cleanup
 
 echo [SUCCESS] Command completed successfully.
 exit /b 0
