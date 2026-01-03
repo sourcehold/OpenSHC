@@ -1,7 +1,7 @@
 #include "ViewportRenderState.h"
 #include "ViewportRenderState.func.h"
 
-#include "windowslib.h"
+#include "mmsystem.h"
 
 ViewportRenderState::ViewportRenderState() { MACRO_CALL_MEMBER(ViewportRenderState_Func::_constructor_, this)(); }
 

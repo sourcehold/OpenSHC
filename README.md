@@ -47,11 +47,8 @@ Because the original game was compiled using an old compiler, you have to compil
     git clone --recursive https://github.com/sourcehold/OpenSHC.git
     ```
     - Should NET Framework 3.5 be required, it can be easily installed on Windows 11 by running `mt.exe` (from the MSVC1400 repo), Windows 11 will ask to install the right version.
-2. Install the needed Python dependencies, mainly `reccmp` for binary comparison
-    ```sh
-    python -m pip install -r requirements.txt
-    ```
-3. Create a softlink to the original game executable with the name `_original` by running [softlink.bat](softlink.bat). It will request the full path to the game folder.
+2. Create a softlink to the original game executable with the name `_original` by running [softlink.bat](softlink.bat). It will request the full path to the game folder.
+3. Setup the needed Python environment to run `reccmp` for binary comparison by running [setup.bat](reccmp/setup.bat) in the reccmp folder.
 
 ### Development
 The build can be run using the dev tools of the preferred IDE or via the build scripts. Regardless, a CMake installation is required.
@@ -69,7 +66,7 @@ If the scripts are preferred, the following triggers a build using the scripts:
     ```
 5. Compare a function byte by byte to check compilation:
     ```sh
-    reccmp-reccmp --target STRONGHOLDCRUSADER --verbose 0x401000
+    reccmp/run reccmp-reccmp --target STRONGHOLDCRUSADER --verbose 0x401000
     ```
 
 Note that any code needs to be formatted properly using the provided `clang-format`. The way to do so it up to the developer. Many IDEs support it out of the box.
