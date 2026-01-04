@@ -1,70 +1,17 @@
 @echo off
 setlocal EnableDelayedExpansion
 
-:: --- Validate task parameter (clean, build, rebuild) ---
+:: --- Validate preset parameter (required) ---
 if "%~1"=="" (
-    echo [ERROR] Task not specified.
-    echo Usage: %~nx0 [clean^|build^|rebuild] [BuildType]
+    echo [ERROR] Preset not specified.
+    echo Usage: %~nx0 ^<Preset^> [Target]
+    echo   ^<Preset^> : Required. The CMake configure/build preset to use.
+    echo   [Target]   : Optional. The specific target to build. If omitted, the default target will be built.
     exit /b 1
 )
 
-set "TASK=%~1"
-
-if /I not "%TASK%"=="clean" if /I not "%TASK%"=="build" if /I not "%TASK%"=="rebuild" (
-    echo [ERROR] Invalid task: "%TASK%"
-    echo Valid tasks are: clean, build, rebuild
-    exit /b 1
-)
-
-:: --- Validate build type parameter (must be only letters) ---
-if "%~2"=="" (
-    echo [ERROR] Build type not specified.
-    echo Usage: %~nx0 [clean^|build^|rebuild] [BuildType]
-    exit /b 1
-)
-
-:: --- Validate that is is at least all letters, also need to use "." hack due to piping issue with *$ in findstr (. consumes \r) ---
-echo %~2 | findstr /R "^[a-zA-Z][a-zA-Z]*.$" >nul
-if errorlevel 1 (
-    echo [ERROR] Invalid build type: "%~2"
-    echo It must only contain letters ^(e.g., Debug, Release^).
-    exit /b 1
-)
-
-:: --- Set build directory ---
-set "BUILD_DIR=build-%~2"
-
-:: --- Clean build directory if task is clean or rebuild ---
-if /I not "%TASK%"=="build" (
-    if exist "%BUILD_DIR%" (
-        echo Cleaning build directory "%BUILD_DIR%"...
-        rmdir /S /Q "%BUILD_DIR%"
-        if errorlevel 1 (
-            echo [ERROR] Failed to clean build directory "%BUILD_DIR%".
-            exit /b 1
-        )
-        echo Clean completed successfully.
-    ) else (
-        echo Build directory "%BUILD_DIR%" does not exist. Nothing to clean.
-    )
-)
-
-:: --- If task is clean only, exit after cleaning ---
-if /I "%TASK%"=="clean" (
-    exit /b 0
-)
-
-:: --- Check and load old environment into context ---
-set "VSVARS=MSVC1400\vsvars32-portable.bat"
-if not exist "%VSVARS%" (
-    echo [ERROR] Could not find environment setup script: %VSVARS%
-    exit /b 1
-)
-call "%VSVARS%"
-if errorlevel 1 (
-    echo [ERROR] Failed to execute: %VSVARS%
-    exit /b 2
-)
+set "PRESET=%~1"
+set "TARGET=%~2"
 
 :: --- Check for cmake ---
 where cmake >nul 2>nul
@@ -74,20 +21,15 @@ if errorlevel 1 (
         echo [ERROR] 'vswhere' not found, cannot locate 'cmake'.
         exit /b 1
     )
-    FOR /F "tokens=* USEBACKQ" %%g IN (`"C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" -latest -property installationPath -requires Microsoft.VisualStudio.Component.VC.CMake.Project`) do (SET "CMAKE=%%g\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin")
+    FOR /F "tokens=* USEBACKQ" %%g IN (`"C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" -latest -property installationPath -requires Microsoft.VisualStudio.Component.VC.CMake.Project`) do (
+        SET "CMAKE=%%g\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin"
+    )
     echo [INFO]  Detected: "!CMAKE!"
     if not exist "!CMAKE!" (
         echo [ERROR] 'cmake' is not found in PATH and not found using vswhere.
         exit /b 1
     )
     set "PATH=!CMAKE!;%PATH%"
-)
-
-:: --- Check for nmake ---
-where nmake >nul 2>nul
-if errorlevel 1 (
-    echo [ERROR] 'nmake' is not found in PATH.
-    exit /b 1
 )
 
 :: --- Kill mspdbsrv.exe if it's running ---
@@ -97,33 +39,32 @@ if not errorlevel 1 (
     taskkill /f /t /im mspdbsrv.exe >nul
     if errorlevel 1 (
         echo [WARNING] Failed to stop mspdbsrv.exe, continuing...
-    ) 
-)
-
-:: --- Create build directory ---
-if not exist "%BUILD_DIR%" (
-    mkdir "%BUILD_DIR%" >nul 2>&1
-    if errorlevel 1 (
-        echo [ERROR] Failed to create build directory "%BUILD_DIR%".
-        exit /b 1
     )
 )
 
-:: --- Run cmake and nmake ---
-pushd "%BUILD_DIR%"
-cmake .. -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=%~2
+:: --- Run cmake configure using preset ---
+echo [INFO] Configuring with preset "%PRESET%"...
+cmake --preset "%PRESET%"
 if errorlevel 1 (
-    echo [ERROR] cmake failed.
-    popd
+    echo [ERROR] CMake configure failed for preset "%PRESET%".
     exit /b 1
 )
 
-nmake
-if errorlevel 1 (
-    echo [ERROR] nmake build failed.
-    popd
-    exit /b 1
+:: --- Run cmake build using preset ---
+if "%TARGET%"=="" (
+    echo [INFO] Building preset "%PRESET%" with default target...
+    cmake --build --preset "%PRESET%"
+    if errorlevel 1 (
+        echo [ERROR] CMake build failed for preset "%PRESET%".
+        exit /b 1
+    )
+    echo Build completed successfully for preset "%PRESET%".
+) else (
+    echo [INFO] Building preset "%PRESET%" with target "%TARGET%"...
+    cmake --build --preset "%PRESET%" --target "%TARGET%"
+    if errorlevel 1 (
+        echo [ERROR] CMake build failed for preset "%PRESET%" target "%TARGET%".
+        exit /b 1
+    )
+    echo Build completed successfully for preset "%PRESET%" target "%TARGET%".
 )
-
-popd
-echo Build completed successfully for "%~2" configuration.
