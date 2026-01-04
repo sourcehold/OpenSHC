@@ -58,6 +58,9 @@ message("CMAKE_CXX_FLAGS_RELWITHDEBINFO is ${CMAKE_CXX_FLAGS_RELWITHDEBINFO}")
 # Handled by path, but explicitly included to support IntelliSense
 include_directories(${CMAKE_SOURCE_DIR}/MSVC1400/VC/include ${CMAKE_SOURCE_DIR}/MSVC1400/VC/PlatformSDK/Include)
 
+# Handle Windows dependencies that need explicit linking
+link_libraries(winmm)
+
 # Handle dependencies without source files
 include_directories(${CMAKE_SOURCE_DIR}/dependencies/recreated/include)
 link_directories(${CMAKE_SOURCE_DIR}/dependencies/recreated/lib)
