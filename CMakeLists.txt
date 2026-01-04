@@ -1,6 +1,6 @@
 ﻿# CMakeList.txt : CMake project for OpenSHC
 
-cmake_minimum_required (VERSION 3.20)
+cmake_minimum_required (VERSION 3.21)
 
 # NOTE: POST_BUILD does not run if the target is unchanged, so a config switch will not trigger them again, so clean + build if issues happen
 function(target_file_copy_if_different TARGET FILE DEST)

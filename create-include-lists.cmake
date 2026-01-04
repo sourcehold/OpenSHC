@@ -5,7 +5,7 @@
 # Usage:  cmake -P generate_file_list.cmake
 # ======================================================================
 
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.21)
 
 function(generate_file_list SOURCE_ROOT PATTERNS_LIST OUTPUT_FILE)
     set(ALL_ENTRIES "")
