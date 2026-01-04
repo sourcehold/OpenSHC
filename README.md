@@ -59,12 +59,11 @@ Additionally, it configures format-on-save and a debug target for the UCP3.
 If the scripts are preferred, the following triggers a build using the scripts:
 1. Open a terminal. If the Visual Studio CMake version is used, it needs to be the CMD developer command prompt.
 2. Navigate to this project folder
-3. Invoke vsvars32-portable.bat from the MSVC1400 in the developer command prompt session. Check with `where cl.exe` to see if it was successful: cl.exe and link.exe are supposed to be executed from your MSVC1400 folder. `where cmake` should point to your CMake installation.
-4. Execute build.bat:
+3. Execute build.bat:
     ```sh
     build.bat RelWithDebInfo
     ```
-5. Compare a function byte by byte to check compilation:
+4. Compare a function byte by byte to check compilation:
     ```sh
     reccmp/run reccmp-reccmp --target STRONGHOLDCRUSADER --verbose 0x401000
     ```
