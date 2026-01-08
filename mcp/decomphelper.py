@@ -8,11 +8,10 @@ This server provides tools for:
 - Generating assembly diffs
 
 Usage:
-    python decomp_mcp_server.py
-
-Environment variables:
-    MSVC_PATH: Path to MSVC compiler (cl.exe directory)
-    PROJECT_ROOT: Root directory of the project
+    Claude:
+        add a mcpServers entry to the Claude Desktop App config file
+    Testing:
+        python decomp_mcp_server.py
 """
 
 import asyncio
