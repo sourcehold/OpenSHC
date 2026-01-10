@@ -31,10 +31,7 @@ int WINAPI Main::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCm
     // in a anonymous namespace might help
     BOOL result = MACRO_CALL_MEMBER(ViewportRenderState_Func::xyAreValid, ViewportRenderState_Struct::ptr)(100, 100);
     std::cout << "The answer is: " << result << " " << sizeof(ViewportRenderState) << std::endl;
-    std::cout << "The answer is: "
-              << MACRO_CALL_MEMBER(ViewportRenderState_Func::translateXYToTile, ViewportRenderState_Struct::ptr)(
-                     200, 150)
-              << std::endl;
+    std::cout << "The answer is: " << ViewportRenderState_Struct::ptr->translateXYToTile(200, 150) << std::endl;
     std::cout << "The answer is: "
               << MACRO_CALL_MEMBER(ViewportRenderState_Func::meth_0x4092e0, ViewportRenderState_Struct::ptr)(200, 150)
               << std::endl;

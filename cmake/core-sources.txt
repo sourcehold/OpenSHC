@@ -1,4 +1,6 @@
+src/core/MacroApproachTest.cpp
 src/core/MainImplementation.cpp
 src/core/Resolver.cpp
+src/core/ViewportRenderState.2.cpp
 src/core/ViewportRenderState.cpp
 src/core/entry.cpp
