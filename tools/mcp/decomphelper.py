@@ -24,8 +24,8 @@ from typing import Any, Sequence
 import difflib
 import re
 import sys
-sys.stdout.reconfigure(line_buffering=True)
-sys.stderr.reconfigure(line_buffering=True)
+#sys.stdout.reconfigure(line_buffering=True)
+#sys.stderr.reconfigure(line_buffering=True)
 import logging
 logging.basicConfig(stream=sys.stderr)
 
@@ -153,6 +153,52 @@ def read_cpp_code_for_function(function_name: str) -> tuple[bool, str, str]:
         return True, path.read_text(), ""
     except Exception as e:
         return False, "", f"{e}"
+
+@mcp.tool()
+def read_source_file(relative_path: str) -> tuple[bool, str, str]:
+    """
+    Read the C++ file contents of a file
+    
+    Args:
+        relative_path: Name of the file, usually starts with 'EXE/'
+    
+    Returns:
+        Tuple of (success, contents, stderr)
+    """
+    src = Path("src")
+    path = (src / Path(relative_path)).resolve()
+    if not str(path).startswith(str(src.resolve())):
+        return False, "", "Cannot escape src/ directory"
+    if not path.exists():
+        return False, "", f" cpp file path does not exist: {str(path)}"
+    try:
+        return True, path.read_text(), ""
+    except Exception as e:
+        return False, "", f"{e}"
+
+import requests
+
+@mcp.tool()
+def fetch_ghidra_function_decompilation(function_name: str) -> tuple[bool, str, str]:
+    """
+    Fetches decompilation of a function (json with additional information). Contains ghidra special functions.
+    
+    Args:
+        function_name: Name of the function to extract, fully namespaced using '::'
+    
+    Returns:
+        Tuple of (success, contents, stderr)
+    """
+    try:
+        resp = requests.get("http://127.0.0.1:11337/functions/decompile", params={
+            "name": function_name,
+        }, timeout=5)
+        resp.raise_for_status()
+        contents = resp.json()
+        return True, json.dumps(contents), ""
+    except Exception as e:
+        return False, "", f"{e}"
+
 
 import sys
 
