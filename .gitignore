@@ -3,6 +3,7 @@
 *.7z
 *.sarif
 *.bin
+/tmp
 
 __pycache__
 
