@@ -97,7 +97,10 @@ link_libraries(
 set(PCH_FILE ${CMAKE_SOURCE_DIR}/src/precomp/pch.h)
 file_dependent_read_list("${CMAKE_SOURCE_DIR}/cmake/core-sources.txt" CORE_SOURCES)
 
-
+# Make src/ a valid include directory
+include_directories(
+    ${CMAKE_SOURCE_DIR}/src
+)
 
 # Add source to this project's executable.
 add_executable(OpenSHC.exe WIN32 ${CORE_SOURCES})
