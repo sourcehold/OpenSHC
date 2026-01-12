@@ -1,6 +1,10 @@
 # reccmp-user.yml
 # reccmp-build.yml
+*.7z
+*.sarif
+*.bin
 
+__pycache__
 
 # OpenSHC project specific:
 build-*/
