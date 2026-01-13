@@ -122,7 +122,7 @@ target_file_copy_if_different(OpenSHC.exe "${CRUSADER_DIR}/shfolder.dll" "$<TARG
 
 
 
-set(OPEN_SHC_DLL_DEST "${CRUSADER_DIR}/ucp/modules/${OPEN_SHC_NAME}-${OPEN_SHC_VERSION}" CACHE PATH "path for OpenSHC.dll and OpenSHC.pdb")
+set(OPEN_SHC_DLL_DEST "${CRUSADER_DIR}/ucp/modules/${OPEN_SHC_NAME}-${OPEN_SHC_VERSION}" CACHE PATH "Path for OpenSHC.dll and OpenSHC.pdb")
 
 add_library(OpenSHC.dll SHARED ${CORE_SOURCES})
 set_target_properties(OpenSHC.dll PROPERTIES OUTPUT_NAME ${OPEN_SHC_NAME})
