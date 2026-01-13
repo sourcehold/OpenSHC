@@ -1,10 +1,10 @@
 
 #include "MainResolver.h"
 
+#include "OpenSHC.hpp"
 #include "StructTest.h"
 #include "ViewportRenderState.func.h"
 #include "ViewportRenderState.h"
-#include "OpenSHC.hpp"
 
 #include "Mss32.h"
 #include "binkw32.h"
