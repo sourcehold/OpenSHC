@@ -13,30 +13,6 @@ if "%~1"=="" (
 set "PRESET=%~1"
 set "TARGET=%~2"
 
-:: --- Check for cmake ---
-where cmake >nul 2>nul
-if errorlevel 1 (
-    echo [INFO]  Auto-detecting cmake location using vswhere.
-    if not exist "C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" (
-        echo [ERROR] 'vswhere' not found, cannot locate 'cmake'.
-        exit /b 1
-    )
-    FOR /F "tokens=* USEBACKQ" %%g IN (`"C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" -latest -property installationPath -requires Microsoft.VisualStudio.Component.VC.CMake.Project`) do (
-        SET "CMAKE=%%g\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin"
-    )
-    if not exist "!CMAKE!" (
-        FOR /F "tokens=* USEBACKQ" %%g IN (`"C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" -latest -property installationPath -requires Microsoft.VisualStudio.Component.VC.CMake.Project -products Microsoft.VisualStudio.Product.BuildTools` ) do (
-            SET "CMAKE=%%g\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin"
-        )
-    )
-    if not exist "!CMAKE!" (
-        echo [ERROR] 'cmake' is not found in PATH and not found using vswhere.
-        exit /b 1
-    )
-    echo [INFO]  Detected: "!CMAKE!"
-    set "PATH=!CMAKE!;%PATH%"
-)
-
 :: --- Kill mspdbsrv.exe if it's running ---
 tasklist | find /I "mspdbsrv.exe" >nul
 if not errorlevel 1 (
@@ -49,7 +25,7 @@ if not errorlevel 1 (
 
 :: --- Run cmake configure using preset ---
 echo [INFO] Configuring with preset "%PRESET%"...
-cmake --preset "%PRESET%"
+call .\cmakew --preset "%PRESET%"
 if errorlevel 1 (
     echo [ERROR] CMake configure failed for preset "%PRESET%".
     exit /b 1
@@ -58,7 +34,7 @@ if errorlevel 1 (
 :: --- Run cmake build using preset ---
 if "%TARGET%"=="" (
     echo [INFO] Building preset "%PRESET%" with default target...
-    cmake --build --preset "%PRESET%"
+    call .\cmakew --build --preset "%PRESET%"
     if errorlevel 1 (
         echo [ERROR] CMake build failed for preset "%PRESET%".
         exit /b 1
@@ -66,7 +42,7 @@ if "%TARGET%"=="" (
     echo Build completed successfully for preset "%PRESET%".
 ) else (
     echo [INFO] Building preset "%PRESET%" with target "%TARGET%"...
-    cmake --build --preset "%PRESET%" --target "%TARGET%"
+    call .\cmakew --build --preset "%PRESET%" --target "%TARGET%"
     if errorlevel 1 (
         echo [ERROR] CMake build failed for preset "%PRESET%" target "%TARGET%".
         exit /b 1
