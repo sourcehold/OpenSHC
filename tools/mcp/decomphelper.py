@@ -56,7 +56,7 @@ def compile_project() -> tuple[bool, str, str]:
         Tuple of (success, stdout, stderr)
     """
     # Build compiler command
-    cmd = ["build.bat", "build", "RelWithDebInfo"]
+    cmd = ["build.bat", "RelWithDebInfo", "OpenSHC.dll"]
     
     try:
         result = subprocess.run(
