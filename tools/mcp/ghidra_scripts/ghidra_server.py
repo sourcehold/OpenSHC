@@ -7,7 +7,7 @@
 #@runtime PyGhidra
 
 
-NAMESPACE = "EXE"
+NAMESPACE = "OpenSHC"
 
 """
 Starts an HTTP server that provides function decompilation via REST API.

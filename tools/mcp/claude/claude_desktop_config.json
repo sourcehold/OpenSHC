@@ -6,12 +6,7 @@
   "mcpServers": {
     "decomp-helper": {
       "command": "uv",
-      "args": [
-        "--directory",
-        "C:\\Users\\%USERNAME%\\source\\repos\\openshc\\tools\\mcp\\",
-        "run",
-        "decomphelper.py"
-      ]
+      "args": ["--directory", "<OpenSHC/tools/mcp>", "run", "decomphelper.py"]
     }
   }
 }

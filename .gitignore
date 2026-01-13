@@ -1,8 +1,4 @@
-# reccmp-user.yml
-# reccmp-build.yml
-
-
-# OpenSHC project specific:
+### OpenSHC
 build-*/
 build/
 _build/
@@ -14,6 +10,7 @@ dist/
 # Softlink to game installation
 _original
 
+### C++ (https://github.com/github/gitignore/blob/main/C%2B%2B.gitignore)
 # Prerequisites
 *.d
 
@@ -55,7 +52,7 @@ _original
 
 
 
-### Python
+### Python (https://github.com/github/gitignore/blob/main/Python.gitignore)
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
