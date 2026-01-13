@@ -17,7 +17,17 @@ from skink.export.classes.collect import collect_classes, collect_namespaced_fun
 import pathlib
 from skink.export.styles.style3.exporter import Exporter, BinaryContext, TransformationRules, FileRules
 
-project = Project("Stronghold Crusader.exe.all.sarif", cache_objects=True, cache_symbols_to_path=".cached-symbols.bin")
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument("--sarif", required=False, default="Stronghold Crusader.exe.all.sarif")
+parser.add_argument("--clear-cache", required=False, action='store_true', default=False)
+args = parser.parse_args()
+
+if args.clear_cache:
+  pathlib.Path(".cached-symbols.bin").unlink()
+  pathlib.Path(".cached-objs.bin").unlink()
+
+project = Project(args.sarif, cache_objects=True, cache_symbols_to_path=".cached-symbols.bin")
 
 # TODO: permit_overwrite = False
 logging.log(logging.INFO, "processing all symbol results")
