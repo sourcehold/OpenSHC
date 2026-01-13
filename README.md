@@ -71,3 +71,12 @@ If the scripts are preferred, the following triggers a build using the scripts:
 Note that any code needs to be formatted properly using the provided `clang-format`. The way to do so it up to the developer. Many IDEs support it out of the box.
 
 Should any files be added to the source code in `src/core` or the ucp files in `ucp`, the cmake script [create-include-lists.cmake](create-include-lists.cmake) needs to be rerun and the changed list files need to be committed.
+
+#### Manual configuration
+The file `build.bat` exists for convenience. If you want more control, you can specify the following cmake options.
+
+##### Output folder of dll
+Use `cmake --preset RelWithDebInfo -D OPEN_SHC_DLL_DEST=.\build-RelWithDebInfo\dll` to specify the destination folder for the .dll and .pdb files in favor of the default
+
+##### Building
+Build using `cmake --build --preset RelWithDebInfo --target OpenSHC.dll`
