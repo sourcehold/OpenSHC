@@ -78,7 +78,7 @@ The file `build.bat` exists for convenience. If you want more control, you can s
 ##### Output folder of dll
 Use `cmake --preset RelWithDebInfo -D OPEN_SHC_DLL_DEST=.\build-RelWithDebInfo\dll` to specify the destination folder for the .dll and .pdb files in favor of the default.
 
-Note this will be set even if you remove the `-D` option later. To actually clear this configuration, use `cmake --build --preset RelWithDebInfo --target clean`.
+Note this will be set even if you remove the `-D` option later. To actually clear this configuration, use `cmake --preset RelWithDebInfo --refresh` (cmake 3.24 or later).
 
 ##### Building
 Build using `cmake --build --preset RelWithDebInfo --target OpenSHC.dll`
