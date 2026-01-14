@@ -10,6 +10,9 @@ dist/
 # Softlink to game installation
 _original
 
+# Allow dependency libs
+!dependencies/**/*.lib
+
 ### C++ (https://github.com/github/gitignore/blob/main/C%2B%2B.gitignore)
 # Prerequisites
 *.d
@@ -46,11 +49,6 @@ _original
 
 # Visual Studio Configuration
 .vs
-
-# Allow dependency libs
-!dependencies/**/*.lib
-
-
 
 ### Python (https://github.com/github/gitignore/blob/main/Python.gitignore)
 
