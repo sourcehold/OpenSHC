@@ -1,4 +1,9 @@
 ### OpenSHC
+*.7z
+*.sarif
+*.bin
+/tmp
+
 build-*/
 build/
 _build/
