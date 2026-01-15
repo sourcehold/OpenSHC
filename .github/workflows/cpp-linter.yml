@@ -5,10 +5,8 @@ on:
   pull_request:
     branches: [main]
     types: [opened, reopened, synchronize, ready_for_review]
-    paths: ['**.c', '**.cpp', '**.h', '**.hpp', '**.cxx', '**.hxx', '**.cc', '**.hh', '**CMakeLists.txt', 'meson.build', '**.cmake']
   push:
     branches: [main]
-    paths: ['**.c', '**.cpp', '**.h', '**.hpp', '**.cxx', '**.hxx', '**.cc', '**.hh', '**CMakeLists.txt', 'meson.build', '**.cmake']
 
 jobs:
   cpp-linter:
@@ -20,10 +18,31 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
+      # Detect if any relevant files changed
+      - name: Detect relevant files
+        id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            cpp:
+              - '**/*.c'
+              - '**/*.cpp'
+              - '**/*.h'
+              - '**/*.hpp'
+              - '**/*.cxx'
+              - '**/*.hxx'
+              - '**/*.cc'
+              - '**/*.hh'
+              - '**/CMakeLists.txt'
+              - 'meson.build'
+              - '**/*.cmake'
+
       # ... optionally setup build env to create a compilation database
 
-      - uses: cpp-linter/cpp-linter-action@v2
+      - name: Run cpp-linter
         id: linter
+        uses: cpp-linter/cpp-linter-action@v2
+        if: steps.filter.outputs.cpp == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -38,6 +57,12 @@ jobs:
           # disable file annotations, the thread comment should be the response
           file-annotations: false
 
-      - name: Fail fast?!
-        if: steps.linter.outputs.checks-failed > 0
+      # Fail the job only if the linter ran and found issues
+      - name: Fail fast if linter failed
+        if: steps.filter.outputs.cpp == 'true' && steps.linter.outputs.checks-failed > 0
         run: exit 1
+
+      # Optional: print a message if no relevant files changed
+      - name: Skip message
+        if: steps.filter.outputs.cpp != 'true'
+        run: echo "No relevant C/C++/CMake files changed — cpp-linter skipped"

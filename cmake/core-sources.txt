@@ -1,4 +1,3 @@
 src/core/MainImplementation.cpp
 src/core/Resolver.cpp
 src/core/ViewportRenderState.cpp
-src/core/entry.cpp
