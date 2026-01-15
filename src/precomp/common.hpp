@@ -1,7 +1,9 @@
-#pragma once
+/**
+  AUTO_GENERATED: DO NOT TOUCH THIS FILE
+  path: 'precomp/common.hpp'
+*/
 
-#define MAP_XY_LIMIT 400
-#define MAP_XY_LIMIT_INCLUSIVE 399
+#pragma once
 
 namespace Ghidra {
 typedef void* pointer;
@@ -11,7 +13,7 @@ typedef unsigned char undefined;
 // typedef unsigned char    bool;
 typedef unsigned char byte;
 typedef unsigned int dword;
-// typedef unsigned long long    GUID; // different then the Windows one?
+// typedef unsigned long long    GUID;
 typedef pointer32 ImageBaseOffset32;
 
 typedef long long longlong;
@@ -23,13 +25,13 @@ typedef unsigned long ulong;
 typedef unsigned long long ulonglong;
 typedef unsigned char undefined1;
 typedef unsigned short undefined2;
-typedef unsigned int undefined3;
+typedef unsigned char undefined3[3];
 typedef unsigned int undefined4;
 typedef unsigned long long undefined6;
 typedef unsigned long long undefined8;
 typedef unsigned short ushort;
 // typedef short    wchar_t;
 typedef unsigned short word;
-} // namespace Ghidra
+}
 
 using namespace Ghidra;
