@@ -93,17 +93,20 @@ link_libraries(
 )
 
 
-# Include core source and precomp header
-set(PCH_FILE ${CMAKE_SOURCE_DIR}/src/precomp/pch.h)
-file_dependent_read_list("${CMAKE_SOURCE_DIR}/cmake/core-sources.txt" CORE_SOURCES)
-
 # Make src/ a valid include directory
 include_directories(
     ${CMAKE_SOURCE_DIR}/src
 )
 
+# Include core source and precomp header
+set(PCH_FILE ${CMAKE_SOURCE_DIR}/src/precomp/pch.h)
+file_dependent_read_list("${CMAKE_SOURCE_DIR}/cmake/core-sources.txt" CORE_SOURCES)
+
+# Include openshc source files
+file_dependent_read_list("${CMAKE_SOURCE_DIR}/cmake/openshc-sources.txt" OPENSHC_SOURCES)
+
 # Add source to this project's executable.
-add_executable(OpenSHC.exe WIN32 ${CORE_SOURCES})
+add_executable(OpenSHC.exe WIN32 src/entry.cpp ${CORE_SOURCES} ${OPENSHC_SOURCES})
 set_target_properties(OpenSHC.exe PROPERTIES OUTPUT_NAME ${OPEN_SHC_NAME})
 target_compile_definitions(OpenSHC.exe PRIVATE OPEN_SHC_EXE)
 target_precompile_headers(OpenSHC.exe PRIVATE $<$<COMPILE_LANGUAGE:CXX>:${PCH_FILE}>)
@@ -124,7 +127,7 @@ target_file_copy_if_different(OpenSHC.exe "${CRUSADER_DIR}/shfolder.dll" "$<TARG
 
 set(OPEN_SHC_DLL_DEST "${CRUSADER_DIR}/ucp/modules/${OPEN_SHC_NAME}-${OPEN_SHC_VERSION}" CACHE PATH "Path for OpenSHC.dll and OpenSHC.pdb")
 
-add_library(OpenSHC.dll SHARED ${CORE_SOURCES})
+add_library(OpenSHC.dll SHARED src/entry.cpp ${CORE_SOURCES} ${OPENSHC_SOURCES})
 set_target_properties(OpenSHC.dll PROPERTIES OUTPUT_NAME ${OPEN_SHC_NAME})
 target_compile_definitions(OpenSHC.dll PRIVATE OPEN_SHC_DLL)
 target_precompile_headers(OpenSHC.dll PRIVATE $<$<COMPILE_LANGUAGE:CXX>:${PCH_FILE}>)

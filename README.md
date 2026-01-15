@@ -65,6 +65,7 @@ Visual Studio Code with the proper extensions only needs to open the folder and 
 Additionally, it configures format-on-save and a debug target for the UCP3.
 
 If the scripts are preferred, the following triggers a build using the scripts:
+
 1. Open a terminal.
 2. Navigate to this project folder
 3. Execute build.bat:
@@ -80,10 +81,11 @@ If CMake is installed and not in PATH, for example if installed via Visual Studi
 
 Note that any code needs to be formatted properly using the provided `clang-format`. The way to do so it up to the developer. Many IDEs support it out of the box.
 
-Should any files be added to the source code in `src/core` or the ucp files in `ucp`, the cmake script [create-include-lists.cmake](create-include-lists.cmake) needs to be rerun and the changed list files need to be committed:
-```bat
-.\cmakew -P create-include-lists.cmake
-```
+If any `.cpp` or `.c` files are added to the source code, they should be listed in one of the txt files in `cmake/`:
+
+- `cmake/core-sources.txt` containing the core sources to compile the project.
+- `cmake/pklib-sources.txt` containing the source files for compiling the pklib dependency.
+- `cmake/openshc-sources.txt` containing the files with reimplementations of the original game's functions.
 
 #### Manual configuration
 
