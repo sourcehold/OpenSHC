@@ -65,8 +65,7 @@ Visual Studio Code with the proper extensions only needs to open the folder and 
 Additionally, it configures format-on-save and a debug target for the UCP3.
 
 If the scripts are preferred, the following triggers a build using the scripts:
-
-1. Open a terminal. If the Visual Studio CMake version is used, it needs to be the CMD developer command prompt.
+1. Open a terminal.
 2. Navigate to this project folder
 3. Execute build.bat:
    ```sh
@@ -77,9 +76,14 @@ If the scripts are preferred, the following triggers a build using the scripts:
    reccmp/run reccmp-reccmp --target STRONGHOLDCRUSADER --verbose 0x401000
    ```
 
+If CMake is installed and not in PATH, for example if installed via Visual Studio, `cmakew.bat` can be used instead. It tries to detect a CMake installation and uses it.
+
 Note that any code needs to be formatted properly using the provided `clang-format`. The way to do so it up to the developer. Many IDEs support it out of the box.
 
-Should any files be added to the source code in `src/core` or the ucp files in `ucp`, the cmake script [create-include-lists.cmake](create-include-lists.cmake) needs to be rerun and the changed list files need to be committed.
+Should any files be added to the source code in `src/core` or the ucp files in `ucp`, the cmake script [create-include-lists.cmake](create-include-lists.cmake) needs to be rerun and the changed list files need to be committed:
+```bat
+.\cmakew -P create-include-lists.cmake
+```
 
 #### Manual configuration
 
