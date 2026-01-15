@@ -81,7 +81,11 @@ If CMake is installed and not in PATH, for example if installed via Visual Studi
 
 Note that any code needs to be formatted properly using the provided `clang-format`. The way to do so it up to the developer. Many IDEs support it out of the box.
 
-Should any files be added to the source code in `src/core` or the ucp files in `ucp`, the file lists in `cmake/` should be updated accordingly.
+If any `.cpp` or `.c` files are added to the source code, they should be listed in one of the txt files in `cmake/`:
+
+- `cmake/core-sources.txt` containing the core sources to compile the project.
+- `cmake/pklib-sources.txt` containing the source files for compiling the pklib dependency.
+- `cmake/openshc-sources.txt` containing the files with reimplementations of the original game's functions.
 
 #### Manual configuration
 
