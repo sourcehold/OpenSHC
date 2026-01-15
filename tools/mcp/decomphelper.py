@@ -144,7 +144,7 @@ def compile_cpp_code_for_function(function_name: str, contents: str) -> tuple[bo
     lines = PATH_CMAKE_OPENSHC_SOURCES.read_text().splitlines(False)
     if not csentry in lines:
         lines.append(csentry)
-    PATH_CMAKE_OPENSHC_SOURCES.write_text('\n'.join(lines))
+    PATH_CMAKE_OPENSHC_SOURCES.write_text('\n'.join(lines) + '\n', newline='\n')
 
     # Compile the project and return the resulting state
     return compile_project()
