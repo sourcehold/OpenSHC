@@ -41,9 +41,9 @@ from mcp.types import (
 )
 import mcp.server.stdio
 
-PATH_CMAKE_CORE_SOURCES = Path("cmake/core-sources.txt")
-if not PATH_CMAKE_CORE_SOURCES.exists():
-    raise Exception(f"could not find cmake core sources txt file: {str(PATH_CMAKE_CORE_SOURCES)}")
+PATH_CMAKE_OPENSHC_SOURCES = Path("cmake/openshc-sources.txt")
+if not PATH_CMAKE_OPENSHC_SOURCES.exists():
+    raise Exception(f"could not find cmake core sources txt file: {str(PATH_CMAKE_OPENSHC_SOURCES)}")
 
 # Initialize MCP server
 mcp = FastMCP("decomp-helper")
@@ -139,12 +139,12 @@ def compile_cpp_code_for_function(function_name: str, contents: str) -> tuple[bo
     # Ensure the cpp file is included in the build
     csentry = str(path).replace("\\", "/")
     if not csentry.startswith("src/"):
-        return False, "", f"invalid core-sources.txt entry: {csentry}"
+        return False, "", f"invalid cmake/openshc-sources.txt entry: {csentry}"
     
-    lines = PATH_CMAKE_CORE_SOURCES.read_text().splitlines(False)
+    lines = PATH_CMAKE_OPENSHC_SOURCES.read_text().splitlines(False)
     if not csentry in lines:
         lines.append(csentry)
-    PATH_CMAKE_CORE_SOURCES.write_text('\n'.join(lines))
+    PATH_CMAKE_OPENSHC_SOURCES.write_text('\n'.join(lines))
 
     # Compile the project and return the resulting state
     return compile_project()
