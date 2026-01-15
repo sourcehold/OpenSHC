@@ -12,7 +12,7 @@ from skink.sarif.datatypes.UnionResult import UnionResult
 from skink.sarif.BasicResult import BasicResult
 from skink.sarif.datatypes.TypedefResult import TypedefResult
 import logging
-logging.getLogger().setLevel(logging.DEBUG)
+
 from skink.export.classes.collect import collect_classes, collect_namespaced_functions
 import pathlib
 from skink.export.styles.style3.exporter import Exporter, BinaryContext, TransformationRules, FileRules
@@ -21,11 +21,18 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("--sarif", required=False, default="Stronghold Crusader.exe.all.sarif")
 parser.add_argument("--clear-cache", required=False, action='store_true', default=False)
+parser.add_argument("--output-dir", required=False, default='src')
+parser.add_argument("--verbose", default=False, action='store_true')
 args = parser.parse_args()
 
+if args.verbose:
+  logging.getLogger().setLevel(logging.DEBUG)
+
 if args.clear_cache:
-  pathlib.Path(".cached-symbols.bin").unlink()
-  pathlib.Path(".cached-objs.bin").unlink()
+  if pathlib.Path(".cached-symbols.bin").exists():
+    pathlib.Path(".cached-symbols.bin").unlink()
+  if pathlib.Path(".cached-objs.bin").exists():
+    pathlib.Path(".cached-objs.bin").unlink()
 
 project = Project(args.sarif, cache_objects=True, cache_symbols_to_path=".cached-symbols.bin")
 
@@ -113,4 +120,4 @@ for obj in objs:
       continue
     collection.add(exporter.export_typedef(td))
 
-collection.write_to_disk(pathlib.Path("src/"), overwrite_all=True)
+collection.write_to_disk(pathlib.Path(args.output_dir), overwrite_all=True)
