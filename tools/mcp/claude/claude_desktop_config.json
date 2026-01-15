@@ -1,0 +1,17 @@
+{
+  "preferences": {
+    "legacyQuickEntryEnabled": false,
+    "menuBarEnabled": false
+  },
+  "mcpServers": {
+    "decomp-helper": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "<OpenSHC>",
+        "run",
+        "./tools/mcp/decomphelper.py"
+      ]
+    }
+  }
+}
