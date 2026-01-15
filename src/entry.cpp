@@ -1,5 +1,5 @@
 
-#include "MainResolver.h"
+#include "core/MainResolver.h"
 
 #include "lua.h"
 
