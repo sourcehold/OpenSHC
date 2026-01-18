@@ -17,6 +17,13 @@ from skink.export.classes.collect import collect_classes, collect_namespaced_fun
 import pathlib
 from skink.export.styles.style3.exporter import Exporter, BinaryContext, TransformationRules, FileRules
 
+from skink.export.context import DEFAULT, Context
+ctx: Context = DEFAULT.copy() # type: ignore
+ctx.class_rules.suffix = ""
+ctx.struct_rules.suffix = ""
+ctx.include.file_extension = ""
+
+
 import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("--sarif", required=False, default="Stronghold Crusader.exe.all.sarif")
@@ -84,12 +91,6 @@ for ns in namespaced_functions:
   collection.add(*exporter.export_namespace(ns))
 
 collection.add(exporter.export_addresses(project.yield_objects()))
-
-from skink.export.context import DEFAULT, Context
-ctx: Context = DEFAULT.copy() # type: ignore
-ctx.class_rules.suffix = ""
-ctx.struct_rules.suffix = ""
-ctx.include.file_extension = ""
 
 class_paths = set(cls.location(ctx) for cls in clsses)
 
