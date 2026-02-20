@@ -1,4 +1,4 @@
-from typing import List
+from typing import Dict, List
 from skink.architecture.enums import Enum, EnumResult
 from skink.export.project.project import Project
 from skink.export.project.collection import ExportedContentCollection, ExportContents
@@ -14,6 +14,7 @@ from skink.sarif.datatypes.TypedefResult import TypedefResult
 import logging
 
 from skink.export.classes.collect import collect_classes, collect_namespaced_functions
+from skink.export.enums.enumfamilies import collect_enum_families
 import pathlib
 from skink.export.styles.style3.exporter import Exporter, BinaryContext, TransformationRules, FileRules
 
@@ -76,6 +77,10 @@ logging.log(logging.INFO, "collecting namespaced functions")
 namespaced_functions = list(collect_namespaced_functions(objs))
 logging.log(logging.INFO, "collecting namespaced functions: finished")
 
+enum_families, enum_orphans = collect_enum_families(objs)
+enum_families_dict = {f.name: f for f in enum_families}
+enum_family_names = [f.name for f in enum_families]
+
 bc = BinaryContext(hash="3BB0A8C1", abbreviation="SHC", reccmp_binary="STRONGHOLDCRUSADER")
 exporter = Exporter(binary_context=bc, transformation_rules=TransformationRules(use_regex = True, regex={"_HoldStrong": "OpenSHC"}), expose_original_methods=True,
                     file_rules = FileRules(one_file_per_function=True, one_file_per_method=True))
@@ -105,10 +110,20 @@ for obj in objs:
         collection.add(exporter.export_struct(s))
   elif isinstance(obj, EnumResult):
     e = Enum(obj)
-    if e.er.properties.additionalProperties.size == 4:
+    if obj in enum_orphans:
+      #if e.er.properties.additionalProperties.size == 4:
       collection.add(exporter.export_enum(e))
+      #else:
+      #  collection.add(*exporter.export_sized_enum(e))
     else:
-      collection.add(*exporter.export_sized_enum(e))
+      if obj.properties.additionalProperties.name in enum_family_names:
+        # is root
+        if obj.properties.additionalProperties.size != 4:
+          logging.warning(f"root enum of family is not of type int: '{e.location(ctx)}'")
+        collection.add(exporter.export_enum(e))
+      else:
+        # TODO: add "startswith" logic to find the actual family?
+        collection.add(exporter.export_enum_typedef(e))
   elif isinstance(obj, UnionResult):
     e = Union(obj)
     collection.add(exporter.export_union(e))
