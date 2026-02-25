@@ -10,7 +10,7 @@ from skink.sarif.datatypes.DataTypeResult import DataTypeResult
 from skink.sarif.datatypes.FunctionSignatureResult import FunctionSignatureResult
 from skink.sarif.datatypes.UnionResult import UnionResult
 from skink.sarif.BasicResult import BasicResult
-from skink.sarif.datatypes.TypedefResult import TypedefResult
+from skink.sarif.datatypes.TypedefResult import AdditionalTypedefProperties, Message, TypedefProperties, TypedefResult
 import logging
 
 from skink.export.classes.collect import collect_classes, collect_namespaced_functions
@@ -31,6 +31,8 @@ parser.add_argument("--sarif", required=False, default="Stronghold Crusader.exe.
 parser.add_argument("--clear-cache", required=False, action='store_true', default=False)
 parser.add_argument("--output-dir", required=False, default='src')
 parser.add_argument("--verbose", default=False, action='store_true')
+parser.add_argument("--export-helpers", default=False, action='store_true')
+parser.add_argument("--overwrite-all", default=False, action='store_true')
 args = parser.parse_args()
 
 if args.verbose:
@@ -87,7 +89,8 @@ exporter = Exporter(binary_context=bc, transformation_rules=TransformationRules(
 
 collection = ExportedContentCollection(ignore_duplicates=True)
 
-collection.add(*exporter.export_helpers())
+if args.export_helpers:
+  collection.add(*exporter.export_helpers())
 
 for cls in clsses:
   collection.add(*exporter.export_class(cls))
@@ -110,7 +113,13 @@ for obj in objs:
         collection.add(exporter.export_struct(s))
   elif isinstance(obj, EnumResult):
     e = Enum(obj)
-    if obj in enum_orphans:
+    if e.name == "BOOLEnum":
+      # Swallow Ghidras enum
+      collection.add(exporter.export_typedef_raw(location="OpenSHC/WindowsHelper/Enums",
+                                                 namespace_path="OpenSHC::WindowsHelper::Enums",
+                                                 name="BOOLEnum",
+                                                 type="BOOL"))
+    elif obj in enum_orphans:
       #if e.er.properties.additionalProperties.size == 4:
       collection.add(exporter.export_enum(e))
       #else:
@@ -136,4 +145,4 @@ for obj in objs:
       continue
     collection.add(exporter.export_typedef(td))
 
-collection.write_to_disk(pathlib.Path(args.output_dir), overwrite_all=True)
+collection.write_to_disk(pathlib.Path(args.output_dir), overwrite_all=args.overwrite_all)
