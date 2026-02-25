@@ -6,6 +6,11 @@ build.bat
 build.ps1
 build.py
 dist/
+tmp/
+/*.7z
+/*.sarif
+/*.bin
+/reccmp/*.json
 
 # Softlink to game installation
 _original
