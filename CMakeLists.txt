@@ -125,7 +125,10 @@ target_file_copy_if_different(OpenSHC.exe "${CRUSADER_DIR}/shfolder.dll" "$<TARG
 
 
 
-set(OPEN_SHC_DLL_DEST "${CRUSADER_DIR}/ucp/modules/${OPEN_SHC_NAME}-${OPEN_SHC_VERSION}" CACHE PATH "Path for OpenSHC.dll and OpenSHC.pdb")
+# We could reinstate this later:
+## set(OPEN_SHC_DLL_DEST "${CRUSADER_DIR}/ucp/modules/${OPEN_SHC_NAME}-${OPEN_SHC_VERSION}" CACHE PATH "Path for OpenSHC.dll and OpenSHC.pdb")
+# For now it is easier to put it in a dll subfolder
+set(OPEN_SHC_DLL_DEST "${CMAKE_BINARY_DIR}/dll" CACHE PATH "Path for OpenSHC.dll and OpenSHC.pdb")
 
 add_library(OpenSHC.dll SHARED src/entry.cpp ${CORE_SOURCES} ${OPENSHC_SOURCES})
 set_target_properties(OpenSHC.dll PROPERTIES OUTPUT_NAME ${OPEN_SHC_NAME})
