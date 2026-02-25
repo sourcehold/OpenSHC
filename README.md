@@ -50,12 +50,15 @@ Because the original game was compiled using an old compiler, you have to compil
 ### Setup
 
 1. Clone the repository. Make sure to also pull the submodules to have the compiler included:
+
    ```sh
    git clone --recursive https://github.com/sourcehold/OpenSHC.git
    ```
+
    - Should NET Framework 3.5 be required, it can be easily installed on Windows 11 by running `mt.exe` (from the MSVC1400 repo), Windows 11 will ask to install the right version.
+
 2. Create a softlink to the original game executable with the name `_original` by running [softlink.bat](softlink.bat). It will request the full path to the game folder.
-3. Setup the needed Python environment to run `reccmp` for binary comparison by running [setup.bat](reccmp/setup.bat) in the reccmp folder.
+3. Setup the needed Python environment to run `reccmp` for binary comparison by running [setup.bat](reccmp/dll/setup.bat) in the reccmp folder.
 
 ### Development
 
@@ -72,9 +75,9 @@ If the scripts are preferred, the following triggers a build using the scripts:
    ```sh
    build.bat RelWithDebInfo
    ```
-4. Compare a function byte by byte to check compilation:
+4. Compare a function byte by byte to the OpenSHC.dll to check compilation:
    ```sh
-   reccmp/run reccmp-reccmp --target STRONGHOLDCRUSADER --verbose 0x401000
+   reccmp/dll/run reccmp-reccmp --target STRONGHOLDCRUSADER --verbose 0x401000
    ```
 
 If CMake is installed and not in PATH, for example if installed via Visual Studio, `cmakew.bat` can be used instead. It tries to detect a CMake installation and uses it.
