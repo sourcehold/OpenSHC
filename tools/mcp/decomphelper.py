@@ -81,7 +81,7 @@ def extract_function_assembly_diff(function_name: str) -> tuple[bool, Any, str, 
     Returns:
         Tuple of (success, diff, stdout, stderr)
     """
-    cmd = [str(Path("reccmp") / "run.bat"), "reccmp-reccmp", "--target", "STRONGHOLDCRUSADER", "--json", "diff.json"]
+    cmd = [str(Path("reccmp") / "dll" / "run.bat"), "reccmp-reccmp", "--target", "STRONGHOLDCRUSADER", "--json", "diff.json"]
     
     try:
         result = subprocess.run(
@@ -94,11 +94,11 @@ def extract_function_assembly_diff(function_name: str) -> tuple[bool, Any, str, 
         if result.returncode != 0:
             raise Exception(f"could not create diff: {result.stderr}, command: {' '.join(cmd)}")
     except Exception as e:
-        return False, "", "", f"could not execute reccmp/run: {str(e)}"
+        return False, "", "", f"could not execute reccmp/dll/run: {str(e)}"
     try:
-        diff = json.loads(Path("reccmp/diff.json").read_text())
+        diff = json.loads(Path("reccmp/dll/diff.json").read_text())
     except Exception as e:
-        return False, "", "", f"could not load reccmp/diff.json: {str(e)}"
+        return False, "", "", f"could not load reccmp/dll/diff.json: {str(e)}"
     all_data = diff['data']
     data = [entry for entry in all_data if entry['name'] == function_name]
     if len(data) == 0:
