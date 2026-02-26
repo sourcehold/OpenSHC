@@ -10,7 +10,10 @@ tmp/
 /*.7z
 /*.sarif
 /*.bin
-/reccmp/*.json
+/reccmp/**/*.json
+
+# Users should use git add --force for these:
+/cmake/openshc-sources.txt
 
 # Softlink to game installation
 _original
