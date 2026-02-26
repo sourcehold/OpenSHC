@@ -58,7 +58,7 @@ Because the original game was compiled using an old compiler, you have to compil
    - Should NET Framework 3.5 be required, it can be easily installed on Windows 11 by running `mt.exe` (from the MSVC1400 repo), Windows 11 will ask to install the right version.
 
 2. Create a softlink to the original game executable with the name `_original` by running [softlink.bat](softlink.bat). It will request the full path to the game folder.
-3. Setup the needed Python environment to run `reccmp` for binary comparison by running [setup.bat](reccmp/dll/setup.bat) in the reccmp folder.
+3. Setup the needed Python environment to run `reccmp` for binary comparison by running [setup.bat](reccmp/dll/setup.bat) in the reccmp/dll folder (or the `setup.bat` in the reccmp/exe folder if binary comparison on the reimplemented .exe file is preferred)
 
 ### Development
 
