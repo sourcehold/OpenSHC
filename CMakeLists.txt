@@ -2,6 +2,15 @@
 
 cmake_minimum_required (VERSION 3.21)
 
+function(file_add_depends FILE)
+    message(STATUS "Add file dependency: ${FILE}")
+    if(EXISTS "${FILE}")
+        set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS ${FILE}) # generally watches for changes
+    else()
+        file(GLOB _ CONFIGURE_DEPENDS ${FILE}) # trick to trigger reconfigure if the file comes into existence
+    endif()
+endfunction()
+
 # NOTE: POST_BUILD does not run if the target is unchanged, so a config switch will not trigger them again, so clean + build if issues happen
 function(target_file_copy_if_different TARGET FILE DEST)
     message(STATUS "Ensure file \"${FILE}\" is copied to \"${DEST}\" if different for target: ${TARGET}")
@@ -10,7 +19,7 @@ function(target_file_copy_if_different TARGET FILE DEST)
     )
 endfunction()
 function(file_dependent_read_list FILE LIST)
-    set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS ${FILE}) # watch the file
+    file_add_depends("${FILE}")
     file(STRINGS "${FILE}" TEMP_LIST)
     set(${LIST} "${TEMP_LIST}" PARENT_SCOPE)
 endfunction()
@@ -102,8 +111,17 @@ include_directories(
 set(PCH_FILE ${CMAKE_SOURCE_DIR}/src/precomp/pch.h)
 file_dependent_read_list("${CMAKE_SOURCE_DIR}/cmake/core-sources.txt" CORE_SOURCES)
 
-# Include openshc source files
-file_dependent_read_list("${CMAKE_SOURCE_DIR}/cmake/openshc-sources.txt" OPENSHC_SOURCES)
+# Include openshc source files or local alternative
+set(OPENSHC_SOURCES_FILE "${CMAKE_SOURCE_DIR}/cmake/openshc-sources.txt")
+set(OPENSHC_SOURCES_FILE_LOCAL "${CMAKE_SOURCE_DIR}/cmake/openshc-sources.txt.local")
+if(EXISTS "${OPENSHC_SOURCES_FILE_LOCAL}")
+    message(STATUS "WARNING: Found and using openshc-sources.txt.local")
+    file_dependent_read_list("${OPENSHC_SOURCES_FILE_LOCAL}" OPENSHC_SOURCES)
+else()
+    file_dependent_read_list("${OPENSHC_SOURCES_FILE}" OPENSHC_SOURCES)
+    file_add_depends("${OPENSHC_SOURCES_FILE_LOCAL}") # Add to notice if it comes into existence
+endif()
+
 
 # Add source to this project's executable.
 add_executable(OpenSHC.exe WIN32 src/entry.cpp ${CORE_SOURCES} ${OPENSHC_SOURCES})
@@ -111,7 +129,8 @@ set_target_properties(OpenSHC.exe PROPERTIES OUTPUT_NAME ${OPEN_SHC_NAME})
 target_compile_definitions(OpenSHC.exe PRIVATE OPEN_SHC_EXE)
 target_precompile_headers(OpenSHC.exe PRIVATE $<$<COMPILE_LANGUAGE:CXX>:${PCH_FILE}>)
 
-# Checks if a binkw32_real is present and uses this instead; only checks on reconfigure
+# Checks if a binkw32_real is present and uses this instead
+file_add_depends("${CRUSADER_DIR}/binkw32_real.dll")
 if(EXISTS "${CRUSADER_DIR}/binkw32_real.dll")
     target_file_copy_if_different(OpenSHC.exe "${CRUSADER_DIR}/binkw32_real.dll" "$<TARGET_FILE_DIR:OpenSHC.exe>/binkw32.dll")
 else()
