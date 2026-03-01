@@ -1,0 +1,15 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cmake",
+			"label": "CMake: Prepare OpenSHC.dll Debug",
+			"command": "build",
+			"targets": [
+				"OpenSHC.dll.deploy"
+			],
+			"preset": "Debug",
+			"group": "build"
+		}
+	]
+}

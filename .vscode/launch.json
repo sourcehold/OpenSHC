@@ -14,8 +14,7 @@
             ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/_original",
-            // Note: build currently set target, so if this is the exe, nothing will change
-            "preLaunchTask": "CMake: build",
+            "preLaunchTask": "CMake: Prepare OpenSHC.dll Debug",
         }
     ]
 }

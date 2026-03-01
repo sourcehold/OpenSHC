@@ -3,11 +3,19 @@
 cmake_minimum_required (VERSION 3.21)
 
 function(file_add_depends FILE)
-    message(STATUS "Add file system dependency: ${FILE}")
-    if(EXISTS "${FILE}")
-        set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS ${FILE}) # generally watches for changes
+    cmake_parse_arguments(ADDITIONAL_ARGS "EXISTENCE_ONLY" "" "" ${ARGN})
+
+    if(ADDITIONAL_ARGS_EXISTENCE_ONLY)
+        message(STATUS "Add file system dependency on existence: ${FILE}")
+        file(GLOB _ CONFIGURE_DEPENDS "${FILE}")
     else()
-        file(GLOB _ CONFIGURE_DEPENDS ${FILE}) # trick to trigger reconfigure if the file comes into existence
+        message(STATUS "Add file system dependency: ${FILE}")
+        if(EXISTS "${FILE}")
+            set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${FILE}")
+        else()
+            # Trigger reconfigure if the file comes into existence
+            file(GLOB _ CONFIGURE_DEPENDS "${FILE}")
+        endif()
     endif()
 endfunction()
 
@@ -126,6 +134,7 @@ endif()
 # Add source to this project's executable.
 add_executable(OpenSHC.exe WIN32 src/entry.cpp ${CORE_SOURCES} ${OPENSHC_SOURCES})
 set_target_properties(OpenSHC.exe PROPERTIES OUTPUT_NAME ${OPEN_SHC_NAME})
+set_target_properties(OpenSHC.exe PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/EXE")
 target_compile_definitions(OpenSHC.exe PRIVATE OPEN_SHC_EXE)
 target_precompile_headers(OpenSHC.exe PRIVATE $<$<COMPILE_LANGUAGE:CXX>:${PCH_FILE}>)
 
@@ -144,33 +153,29 @@ target_file_copy_if_different(OpenSHC.exe "${CRUSADER_DIR}/shfolder.dll" "$<TARG
 
 
 
-set(OPEN_SHC_DLL_DEST "${CRUSADER_DIR}/ucp/modules/${OPEN_SHC_NAME}-${OPEN_SHC_VERSION}" CACHE PATH "Path for OpenSHC.dll and OpenSHC.pdb")
+set(OPEN_SHC_DLL_DEST "${CRUSADER_DIR}/ucp/modules/${OPEN_SHC_NAME}-${OPEN_SHC_VERSION}")
 
 add_library(OpenSHC.dll SHARED src/entry.cpp ${CORE_SOURCES} ${OPENSHC_SOURCES})
 set_target_properties(OpenSHC.dll PROPERTIES OUTPUT_NAME ${OPEN_SHC_NAME})
+set_target_properties(OpenSHC.dll PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/DLL")
 target_compile_definitions(OpenSHC.dll PRIVATE OPEN_SHC_DLL)
 target_precompile_headers(OpenSHC.dll PRIVATE $<$<COMPILE_LANGUAGE:CXX>:${PCH_FILE}>)
 
-# Using module folder as runtime output to properly place the dll and other libs
-set_target_properties(OpenSHC.dll PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${OPEN_SHC_DLL_DEST})
+
+
+add_custom_target(
+    OpenSHC.dll.deploy
+    DEPENDS OpenSHC.dll
+)
 
 # Ensure the module folder exists
-file(MAKE_DIRECTORY ${OPEN_SHC_DLL_DEST})
-file_add_depends("${OPEN_SHC_DLL_DEST}")
-
-# This strange workaround does ensure that the module folder is generated and that a config change regenerates the dll.
-# It "only" costs a file creation and a compare minimum while not changing the actual source. Found no other way.
-set(BUILD_TRIGGER_FILE "${OPEN_SHC_DLL_DEST}/buildtrigger.c")
-add_custom_target(
-    OpenSHC.dll.trigger
-    BYPRODUCTS ${BUILD_TRIGGER_FILE}
-    COMMAND ${CMAKE_COMMAND} -E echo "// $<CONFIG>" > ${BUILD_TRIGGER_FILE}.tmp
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different ${BUILD_TRIGGER_FILE}.tmp ${BUILD_TRIGGER_FILE}
-    COMMAND ${CMAKE_COMMAND} -E remove ${BUILD_TRIGGER_FILE}.tmp
-    VERBATIM
+add_custom_command(TARGET OpenSHC.dll.deploy POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${OPEN_SHC_DLL_DEST}"
 )
-target_sources(OpenSHC.dll PRIVATE ${BUILD_TRIGGER_FILE})
-add_dependencies(OpenSHC.dll OpenSHC.dll.trigger)
+
+# Copy exe and pdb is possible
+target_file_copy_if_different(OpenSHC.dll.deploy "$<TARGET_FILE:OpenSHC.dll>" "${OPEN_SHC_DLL_DEST}/$<TARGET_FILE_NAME:OpenSHC.dll>")
+target_file_copy_if_different(OpenSHC.dll.deploy "$<TARGET_PDB_FILE:OpenSHC.dll>" "${OPEN_SHC_DLL_DEST}/$<TARGET_PDB_FILE_NAME:OpenSHC.dll>")
 
 # Copy ucp definition files
 file_dependent_read_list("${CMAKE_SOURCE_DIR}/cmake/ucp-definition.txt" UCP_DEFINITION)
@@ -178,11 +183,11 @@ foreach(FILE IN LISTS UCP_DEFINITION)
     get_filename_component(DIR "${FILE}" DIRECTORY)
     if (DIR)
         set(DEST_FILE_DIR "${OPEN_SHC_DLL_DEST}/${DIR}")
-        add_custom_command(TARGET OpenSHC.dll POST_BUILD
+        add_custom_command(TARGET OpenSHC.dll.deploy POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E make_directory "${DEST_FILE_DIR}"
         )
     else()
         set(DEST_FILE_DIR "${OPEN_SHC_DLL_DEST}")
     endif()
-    target_file_copy_if_different(OpenSHC.dll "${CMAKE_SOURCE_DIR}/ucp/${FILE}" "${DEST_FILE_DIR}/${FILE}")
+    target_file_copy_if_different(OpenSHC.dll.deploy "${CMAKE_SOURCE_DIR}/ucp/${FILE}" "${DEST_FILE_DIR}/${FILE}")
 endforeach()

@@ -1,5 +1,5 @@
 project: .
 targets:
   STRONGHOLDCRUSADER:
-    path: ../build-RelWithDebInfo/OpenSHC.exe
-    pdb: ../build-RelWithDebInfo/OpenSHC.pdb
+    path: ../build-RelWithDebInfo/EXE/OpenSHC.exe
+    pdb: ../build-RelWithDebInfo/EXE/OpenSHC.pdb

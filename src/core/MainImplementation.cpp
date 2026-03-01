@@ -42,7 +42,7 @@ int WINAPI Main::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCm
     MACRO_CALL_MEMBER(ViewportRenderState_Func::setupMouseTileXY2, ViewportRenderState_Struct::ptr)();
     MACRO_CALL_MEMBER(ViewportRenderState_Func::meth_0x4e5a90, ViewportRenderState_Struct::ptr)();
 
-    const HBINK bink = BinkOpen("..\\_original\\binks\\abbot_angry.bik", BINKNOSKIP);
+    const HBINK bink = BinkOpen("..\\..\\_original\\binks\\abbot_angry.bik", BINKNOSKIP);
     std::cout << bink->Width << " " << bink->Height << " " << bink->Frames << " " << bink->FrameNum << std::endl;
     BinkClose(bink);
 
