@@ -7,8 +7,8 @@
   "editor.rulers": [
     120
   ],
-  //"cmake.automaticReconfigure": false,
-  //"cmake.configureOnEdit": false,
+  "cmake.useCMakePresets": "always",
+  "cmake.useVsDeveloperEnvironment": "never",
   "files.associations": {
     "*.inl": "cpp",
     "iostream": "cpp",
