@@ -3,7 +3,7 @@
 cmake_minimum_required (VERSION 3.21)
 
 function(file_add_depends FILE)
-    message(STATUS "Add file dependency: ${FILE}")
+    message(STATUS "Add file system dependency: ${FILE}")
     if(EXISTS "${FILE}")
         set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS ${FILE}) # generally watches for changes
     else()
@@ -154,13 +154,16 @@ target_precompile_headers(OpenSHC.dll PRIVATE $<$<COMPILE_LANGUAGE:CXX>:${PCH_FI
 # Using module folder as runtime output to properly place the dll and other libs
 set_target_properties(OpenSHC.dll PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${OPEN_SHC_DLL_DEST})
 
+# Ensure the module folder exists
+file(MAKE_DIRECTORY ${OPEN_SHC_DLL_DEST})
+file_add_depends("${OPEN_SHC_DLL_DEST}")
+
 # This strange workaround does ensure that the module folder is generated and that a config change regenerates the dll.
 # It "only" costs a file creation and a compare minimum while not changing the actual source. Found no other way.
 set(BUILD_TRIGGER_FILE "${OPEN_SHC_DLL_DEST}/buildtrigger.c")
 add_custom_target(
     OpenSHC.dll.trigger
     BYPRODUCTS ${BUILD_TRIGGER_FILE}
-    COMMAND ${CMAKE_COMMAND} -E make_directory "${OPEN_SHC_DLL_DEST}"
     COMMAND ${CMAKE_COMMAND} -E echo "// $<CONFIG>" > ${BUILD_TRIGGER_FILE}.tmp
     COMMAND ${CMAKE_COMMAND} -E copy_if_different ${BUILD_TRIGGER_FILE}.tmp ${BUILD_TRIGGER_FILE}
     COMMAND ${CMAKE_COMMAND} -E remove ${BUILD_TRIGGER_FILE}.tmp
