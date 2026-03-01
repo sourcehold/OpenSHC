@@ -131,30 +131,35 @@ else()
 endif()
 
 
-# Add source to this project's executable.
+# Create the OpenSHC.exe target, should not require the game
 add_executable(OpenSHC.exe WIN32 src/entry.cpp ${CORE_SOURCES} ${OPENSHC_SOURCES})
 set_target_properties(OpenSHC.exe PROPERTIES OUTPUT_NAME ${OPEN_SHC_NAME})
 set_target_properties(OpenSHC.exe PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/EXE")
 target_compile_definitions(OpenSHC.exe PRIVATE OPEN_SHC_EXE)
 target_precompile_headers(OpenSHC.exe PRIVATE $<$<COMPILE_LANGUAGE:CXX>:${PCH_FILE}>)
 
+
+
+# Create custom target that pulls in the required dependencies to run the exe
+# NOTE: There seems to be an issue with our naming here, causing the depends to look for "OpenSHC.exe.exe" instead
+add_custom_target(OpenSHC.exe.runnable DEPENDS OpenSHC.exe.exe)
+
 # Checks if a binkw32_real is present and uses this instead
 file_add_depends("${CRUSADER_DIR}/binkw32_real.dll")
 if(EXISTS "${CRUSADER_DIR}/binkw32_real.dll")
-    target_file_copy_if_different(OpenSHC.exe "${CRUSADER_DIR}/binkw32_real.dll" "$<TARGET_FILE_DIR:OpenSHC.exe>/binkw32.dll")
+   target_file_copy_if_different(OpenSHC.exe.runnable "${CRUSADER_DIR}/binkw32_real.dll" "$<TARGET_FILE_DIR:OpenSHC.exe>/binkw32.dll")
 else()
-    target_file_copy_if_different(OpenSHC.exe "${CRUSADER_DIR}/binkw32.dll" "$<TARGET_FILE_DIR:OpenSHC.exe>/binkw32.dll")
+   target_file_copy_if_different(OpenSHC.exe.runnable "${CRUSADER_DIR}/binkw32.dll" "$<TARGET_FILE_DIR:OpenSHC.exe>/binkw32.dll")
 endif()
-target_file_copy_if_different(OpenSHC.exe "${CRUSADER_DIR}/Mss32.dll" "$<TARGET_FILE_DIR:OpenSHC.exe>/Mss32.dll")
+target_file_copy_if_different(OpenSHC.exe.runnable "${CRUSADER_DIR}/Mss32.dll" "$<TARGET_FILE_DIR:OpenSHC.exe>/Mss32.dll")
 
 # shfolder is a normal windows lib, however, the game needs to work with the games version, so we still copy it
 # it should be checked later if the compiler emits a shfolder.dll on its own or if it statically links, which we do not want
-target_file_copy_if_different(OpenSHC.exe "${CRUSADER_DIR}/shfolder.dll" "$<TARGET_FILE_DIR:OpenSHC.exe>/shfolder.dll")
+target_file_copy_if_different(OpenSHC.exe.runnable "${CRUSADER_DIR}/shfolder.dll" "$<TARGET_FILE_DIR:OpenSHC.exe>/shfolder.dll")
 
 
 
-set(OPEN_SHC_DLL_DEST "${CRUSADER_DIR}/ucp/modules/${OPEN_SHC_NAME}-${OPEN_SHC_VERSION}")
-
+# Create the OpenSHC.dll target, should not require the game
 add_library(OpenSHC.dll SHARED src/entry.cpp ${CORE_SOURCES} ${OPENSHC_SOURCES})
 set_target_properties(OpenSHC.dll PROPERTIES OUTPUT_NAME ${OPEN_SHC_NAME})
 set_target_properties(OpenSHC.dll PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/DLL")
@@ -163,10 +168,9 @@ target_precompile_headers(OpenSHC.dll PRIVATE $<$<COMPILE_LANGUAGE:CXX>:${PCH_FI
 
 
 
-add_custom_target(
-    OpenSHC.dll.deploy
-    DEPENDS OpenSHC.dll
-)
+# Create custom target that deploys the DLL and the required UCP files to the modules folder
+add_custom_target(OpenSHC.dll.deploy DEPENDS OpenSHC.dll)
+set(OPEN_SHC_DLL_DEST "${CRUSADER_DIR}/ucp/modules/${OPEN_SHC_NAME}-${OPEN_SHC_VERSION}")
 
 # Ensure the module folder exists
 add_custom_command(TARGET OpenSHC.dll.deploy POST_BUILD
