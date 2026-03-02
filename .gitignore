@@ -10,6 +10,9 @@ dist/
 # Softlink to game installation
 _original
 
+# Local openshc-sources for faster tests (ignores any longer name to allow keeping backups)
+cmake/openshc-sources.txt.local*
+
 # Allow dependency libs
 !dependencies/**/*.lib
 

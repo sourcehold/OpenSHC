@@ -87,6 +87,9 @@ If any `.cpp` or `.c` files are added to the source code, they should be listed 
 - `cmake/pklib-sources.txt` containing the source files for compiling the pklib dependency.
 - `cmake/openshc-sources.txt` containing the files with reimplementations of the original game's functions.
 
+You can also create a local only `cmake/openshc-sources.txt.local` file, which will be used instead of `cmake/openshc-sources.txt` if it exists, to allow faster tests.
+Extending this files name in any way, like `openshc-sources.txt.local.bak`, will prevent it from being used, but it is still ignored by git. This allows to keep small local file lists.
+
 #### Manual configuration
 
 The file `build.bat` exists for convenience. If you want more control, you can specify the following cmake options.
