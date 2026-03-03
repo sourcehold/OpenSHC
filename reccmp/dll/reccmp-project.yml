@@ -1,7 +1,7 @@
 targets:
   STRONGHOLDCRUSADER:
     filename: Stronghold Crusader.exe
-    source_root: ../src
+    source_root: ../../src
     hash:
       sha256: 3bb0a8c1e72331b3a30a5aa93ed94beca0081b476b04c1960e26d5b45387ac5a
     data_sources: []

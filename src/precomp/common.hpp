@@ -1,8 +1,5 @@
 #pragma once
 
-#define MAP_XY_LIMIT 400
-#define MAP_XY_LIMIT_INCLUSIVE 399
-
 namespace Ghidra {
 typedef void* pointer;
 typedef void* pointer32;
@@ -23,7 +20,7 @@ typedef unsigned long ulong;
 typedef unsigned long long ulonglong;
 typedef unsigned char undefined1;
 typedef unsigned short undefined2;
-typedef unsigned int undefined3;
+typedef unsigned char undefined3[3];
 typedef unsigned int undefined4;
 typedef unsigned long long undefined6;
 typedef unsigned long long undefined8;

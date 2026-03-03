@@ -1,0 +1,5 @@
+project: .
+targets:
+  STRONGHOLDCRUSADER:
+    path: ../../_original/ucp/modules/OpenSHC-1.41.0/OpenSHC.dll
+    pdb: ../../_original/ucp/modules/OpenSHC-1.41.0/OpenSHC.pdb

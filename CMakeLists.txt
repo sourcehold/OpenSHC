@@ -144,6 +144,7 @@ target_file_copy_if_different(OpenSHC.exe "${CRUSADER_DIR}/shfolder.dll" "$<TARG
 
 
 
+# Place the dll and its pdb in the OpenSHC module folder for live testing
 set(OPEN_SHC_DLL_DEST "${CRUSADER_DIR}/ucp/modules/${OPEN_SHC_NAME}-${OPEN_SHC_VERSION}" CACHE PATH "Path for OpenSHC.dll and OpenSHC.pdb")
 
 add_library(OpenSHC.dll SHARED src/entry.cpp ${CORE_SOURCES} ${OPENSHC_SOURCES})
