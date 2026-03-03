@@ -9,6 +9,5 @@
 #include "TypeUtility.h"
 #include "addresses-SHC-3BB0A8C1.hpp"
 #include "common.hpp"
-#include "constants-SHC-3BB0A8C1.hpp"
 #include "framework.h"
 #include "polyfills/assertion.h"
