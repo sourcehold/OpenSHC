@@ -186,12 +186,9 @@ file_dependent_read_list("${CMAKE_SOURCE_DIR}/cmake/ucp-definition.txt" UCP_DEFI
 foreach(FILE IN LISTS UCP_DEFINITION)
     get_filename_component(DIR "${FILE}" DIRECTORY)
     if (DIR)
-        set(DEST_FILE_DIR "${OPEN_SHC_DLL_DEST}/${DIR}")
         add_custom_command(TARGET OpenSHC.dll.deploy POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E make_directory "${DEST_FILE_DIR}"
+            COMMAND ${CMAKE_COMMAND} -E make_directory "${OPEN_SHC_DLL_DEST}/${DIR}"
         )
-    else()
-        set(DEST_FILE_DIR "${OPEN_SHC_DLL_DEST}")
     endif()
-    target_file_copy_if_different(OpenSHC.dll.deploy "${CMAKE_SOURCE_DIR}/ucp/${FILE}" "${DEST_FILE_DIR}/${FILE}")
+    target_file_copy_if_different(OpenSHC.dll.deploy "${CMAKE_SOURCE_DIR}/ucp/${FILE}" "${OPEN_SHC_DLL_DEST}/${FILE}")
 endforeach()
