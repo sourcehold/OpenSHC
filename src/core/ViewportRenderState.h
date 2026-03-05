@@ -2,6 +2,10 @@
 
 #include "ViewportRenderStateStruct.h"
 
+// WARN: Temporarily set, move to constants headers later
+const int MAP_XY_LIMIT = 400;
+const int MAP_XY_LIMIT_INCLUSIVE = 399;
+
 struct UnitRenderHelpStructure {
     int param_1;
     int param_2;
