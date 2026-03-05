@@ -33,6 +33,7 @@ parser.add_argument("--output-dir", required=False, default='src')
 parser.add_argument("--verbose", default=False, action='store_true')
 parser.add_argument("--export-helpers", default=False, action='store_true')
 parser.add_argument("--overwrite-all", default=False, action='store_true')
+parser.add_argument("--export-cpp", default=False, action='store_true')
 args = parser.parse_args()
 
 if args.verbose:
@@ -62,7 +63,6 @@ if pathlib.Path(".cached-objs.bin").exists() == False:
   objs_i = 0
   for obj in project.find_all_by_location(location="/_HoldStrong", recursive=True, lookup_lsymbols=True):
     objs_i += 1
-    print(f"{objs_i}\t\t{obj.ruleId}")
     objs.append(obj)
   logging.log(logging.INFO, "finding all by location: finished")
   with open(".cached-objs.bin", 'wb') as f:
@@ -93,10 +93,10 @@ if args.export_helpers:
   collection.add(*exporter.export_helpers())
 
 for cls in clsses:
-  collection.add(*exporter.export_class(cls))
+  collection.add(*exporter.export_class(cls, export_bodies=args.export_cpp))
 
 for ns in namespaced_functions:
-  collection.add(*exporter.export_namespace(ns))
+  collection.add(*exporter.export_namespace(ns, export_bodies=args.export_cpp))
 
 collection.add(exporter.export_addresses(project.yield_objects()))
 
@@ -128,7 +128,7 @@ for obj in objs:
       if obj.properties.additionalProperties.name in enum_family_names:
         # is root
         if obj.properties.additionalProperties.size != 4:
-          logging.warning(f"root enum of family is not of type int: '{e.location(ctx)}'")
+          logging.warning(f"root enum of family is not of type int: '{e.location(ctx)}/{e.name}'")
         collection.add(exporter.export_enum(e))
       else:
         # TODO: add "startswith" logic to find the actual family?
