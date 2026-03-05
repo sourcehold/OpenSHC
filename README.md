@@ -97,12 +97,9 @@ Extending this files name in any way, like `openshc-sources.txt.local.bak`, will
 
 The file `build.bat` exists for convenience. If you want more control, you can specify the following cmake options.
 
-##### Output folder of dll
-
-Use `cmake --preset RelWithDebInfo -D OPEN_SHC_DLL_DEST=.\build-RelWithDebInfo\dll` to specify the destination folder for the .dll and .pdb files in favor of the default.
-
-Note this setting will remain present even if you remove the `-D` option later from the command. To actually clear this configuration, use `cmake --preset RelWithDebInfo --fresh`.
-
 ##### Building
 
-Build using `cmake --build --preset RelWithDebInfo --target OpenSHC.dll`
+Build using `cmake --build --preset RelWithDebInfo --target OpenSHC.dll` will create the dll in `build-RelWithDebInfo/DLL`.
+Build using `cmake --build --preset RelWithDebInfo --target OpenSHC.exe` will create the exe in `build-RelWithDebInfo/EXE`.
+Build using `cmake --build --preset RelWithDebInfo --target OpenSHC.dll.deploy` will prepare the modules folder in the UCP setup of the bound SHC.
+Build using `cmake --build --preset RelWithDebInfo --target OpenSHC.exe.runnable` will prepare the runtime folder of the exe to make it runnable.
