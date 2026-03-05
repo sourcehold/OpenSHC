@@ -101,4 +101,5 @@ The file `build.bat` exists for convenience. If you want more control, you can s
 
 Build using `cmake --build --preset RelWithDebInfo --target OpenSHC.dll` will create the dll in `build-RelWithDebInfo/DLL`.
 Build using `cmake --build --preset RelWithDebInfo --target OpenSHC.exe` will create the exe in `build-RelWithDebInfo/EXE`.
-Build using `cmake --build --preset RelWithDebInfo --target OpenSHC.exe.deploy` will prepare the modules folder in the UCP setup of the bound SHC.
+Build using `cmake --build --preset RelWithDebInfo --target OpenSHC.dll.deploy` will prepare the modules folder in the UCP setup of the bound SHC.
+Build using `cmake --build --preset RelWithDebInfo --target OpenSHC.exe.runnable` will prepare the runtime folder of the exe to make it runnable.
