@@ -34,6 +34,7 @@ parser.add_argument("--verbose", default=False, action='store_true')
 parser.add_argument("--export-helpers", default=False, action='store_true')
 parser.add_argument("--overwrite-all", default=False, action='store_true')
 parser.add_argument("--export-cpp", default=False, action='store_true')
+parser.add_argument("--dry-run", default=False, action='store_true')
 args = parser.parse_args()
 
 if args.verbose:
@@ -145,4 +146,5 @@ for obj in objs:
       continue
     collection.add(exporter.export_typedef(td))
 
-collection.write_to_disk(pathlib.Path(args.output_dir), overwrite_all=args.overwrite_all)
+if not args.dry_run:
+  collection.write_to_disk(pathlib.Path(args.output_dir), overwrite_all=args.overwrite_all)
