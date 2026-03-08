@@ -104,7 +104,7 @@ for cls in clsses:
 for ns in namespaced_functions:
   collection.add(*exporter.export_namespace(ns, export_bodies=args.export_cpp))
 
-collection.add(exporter.export_addresses(project.yield_objects()))
+collection.add(exporter.export_addresses(project.yield_raw_objects()))
 
 class_paths = set(cls.location(ctx) for cls in clsses)
 
