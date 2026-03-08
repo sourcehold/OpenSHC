@@ -72,6 +72,14 @@ else:
   with open(".cached-objs.bin", 'rb') as f:
     objs = pickle.load(file=f)
 
+    
+bc = BinaryContext(hash="3BB0A8C1", abbreviation="SHC", reccmp_binary="STRONGHOLDCRUSADER")
+exporter = Exporter(binary_context=bc, transformation_rules=TransformationRules(use_regex = True, regex={"_HoldStrong": "OpenSHC"}), expose_original_methods=True,
+                    file_rules = FileRules(one_file_per_function=True, one_file_per_method=True))
+
+collection = ExportedContentCollection(ignore_duplicates=True)
+
+
 logging.log(logging.INFO, "collecting classes")
 clsses = list(collect_classes(objs))
 logging.log(logging.INFO, "collecting classes: finished")
@@ -84,11 +92,8 @@ enum_families, enum_orphans = collect_enum_families(objs)
 enum_families_dict = {f.name: f for f in enum_families}
 enum_family_names = [f.name for f in enum_families]
 
-bc = BinaryContext(hash="3BB0A8C1", abbreviation="SHC", reccmp_binary="STRONGHOLDCRUSADER")
-exporter = Exporter(binary_context=bc, transformation_rules=TransformationRules(use_regex = True, regex={"_HoldStrong": "OpenSHC"}), expose_original_methods=True,
-                    file_rules = FileRules(one_file_per_function=True, one_file_per_method=True))
-
-collection = ExportedContentCollection(ignore_duplicates=True)
+for c in exporter.export_symbols(project.find_global_primary_symbol_defined_data_pairs_by_address(), destination="OpenSHC"):
+  collection.add(c)
 
 if args.export_helpers:
   collection.add(*exporter.export_helpers())
