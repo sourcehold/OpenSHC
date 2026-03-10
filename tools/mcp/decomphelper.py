@@ -41,7 +41,7 @@ from mcp.types import (
 )
 import mcp.server.stdio
 
-PATH_CMAKE_OPENSHC_SOURCES = Path("cmake/openshc-sources.txt")
+PATH_CMAKE_OPENSHC_SOURCES = Path("cmake/openshc-sources.txt.local")
 if not PATH_CMAKE_OPENSHC_SOURCES.exists():
     raise Exception(f"could not find cmake core sources txt file: {str(PATH_CMAKE_OPENSHC_SOURCES)}")
 
@@ -102,7 +102,7 @@ def extract_function_assembly_diff(function_name: str) -> tuple[bool, Any, str, 
     all_data = diff['data']
     data = [entry for entry in all_data if entry['name'] == function_name]
     if len(data) == 0:
-        return False, "", "", f"no function with name '{function_name}' in diff.json"
+        return False, "", "", f"no function with name '{function_name}' in .pdb file. Cannot execute diff"
     data = data[0]
     return True, data, "", ""
 
@@ -133,7 +133,7 @@ def compile_cpp_code_for_function(function_name: str, contents: str) -> tuple[bo
         return rstate, "", f"could not resolve function name to file path: {rerr}"
     path = Path(rresult)
     if not path.exists():
-        return False, "", f"cpp file path does not exist: {str(path)}"
+        path.parent.mkdir(parents = True, exist_ok=True)
     path.write_text(contents)
 
     # Ensure the cpp file is included in the build
@@ -149,6 +149,18 @@ def compile_cpp_code_for_function(function_name: str, contents: str) -> tuple[bo
     # Compile the project and return the resulting state
     return compile_project()
 
+def read_function(function_name: str, base_path: Path = Path("src")):
+    rstate, rresult, rerr = function_name_to_cpp_path(function_name=function_name, base_path=base_path)
+    if not rstate:
+        return rstate, "", f"could not resolve function name to file path: {rerr}"
+    path = Path(rresult)
+    if not path.exists():
+        return False, "", f"cpp file path does not exist: {str(path)}"
+    try:
+        return True, path.read_text(), ""
+    except Exception as e:
+        return False, "", f"{e}"
+
 @mcp.tool()
 def read_cpp_code_for_function(function_name: str) -> tuple[bool, str, str]:
     """
@@ -160,16 +172,7 @@ def read_cpp_code_for_function(function_name: str) -> tuple[bool, str, str]:
     Returns:
         Tuple of (success, contents, stderr)
     """
-    rstate, rresult, rerr = function_name_to_cpp_path(function_name=function_name)
-    if not rstate:
-        return rstate, "", f"could not resolve function name to file path: {rerr}"
-    path = Path(rresult)
-    if not path.exists():
-        return False, "", f"cpp file path does not exist: {str(path)}"
-    try:
-        return True, path.read_text(), ""
-    except Exception as e:
-        return False, "", f"{e}"
+    return read_function(function_name=function_name)
 
 @mcp.tool()
 def read_source_file(relative_path: str) -> tuple[bool, str, str]:
@@ -214,6 +217,20 @@ def fetch_ghidra_function_decompilation(function_name: str) -> tuple[bool, str, 
     except Exception as e:
         return False, "", f"{e}"
 
+
+@mcp.tool()
+def fetch_cached_ghidra_function_decompilation(function_name: str) -> tuple[bool, str, str]:
+    """
+    Fetches cached decompilation of a function (json with additional information) containing ghidra special functions.
+    This should be used if 'fetch_ghidra_function_decompilation' isn't available or fails.
+    
+    Args:
+        function_name: Name of the function to extract, fully namespaced using '::'
+    
+    Returns:
+        Tuple of (success, contents, stderr)
+    """
+    return read_function(function_name=function_name, base_path=Path("tools") / "mcp" / "ghidra_scripts" / "decompilation")
 
 if __name__ == "__main__":
     mcp.run(transport="stdio")

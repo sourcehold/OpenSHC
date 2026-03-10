@@ -1,0 +1,2 @@
+# Ignore cached decompiled functions from 'functionexporter.py'
+decompilation/OpenSHC
