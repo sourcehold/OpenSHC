@@ -134,7 +134,6 @@ def compile_cpp_code_for_function(function_name: str, contents: str) -> tuple[bo
     path = Path(rresult)
     if not path.exists():
         path.parent.mkdir(parents = True, exist_ok=True)
-        #return False, "", f"cpp file path does not exist: {str(path)}"
     path.write_text(contents)
 
     # Ensure the cpp file is included in the build
