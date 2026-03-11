@@ -7,7 +7,7 @@
 #include "FunctionResolver.h"
 #include "StructResolver.h"
 #include "TypeUtility.h"
+#include "Windows.h"
 #include "addresses-SHC-3BB0A8C1.hpp"
 #include "common.hpp"
-#include "framework.h"
 #include "polyfills/assertion.h"
