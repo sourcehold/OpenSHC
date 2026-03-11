@@ -28,6 +28,8 @@ from ghidra.app.decompiler import DecompInterface, DecompileOptions
 from ghidra.util.task import ConsoleTaskMonitor
 from ghidra.program.model.symbol import SymbolType
 
+from functionexport_preprocessor import preprocess
+
 
 
 TARGET_NAMESPACE  = "_HoldStrong"  # Root namespace to search (case-sensitive)
@@ -103,6 +105,14 @@ def init_decompiler():
     """Initialise and open a DecompInterface for the current program."""
     iface = DecompInterface()
     opts  = DecompileOptions()
+    opts.setNoCastPrint(False)
+    opts.setEliminateUnreachable(False)
+    opts.setPLATECommentIncluded(True)
+    opts.setPOSTCommentIncluded(True)
+    opts.setPRECommentIncluded(True)
+    opts.setEOLCommentIncluded(True)
+    opts.setHeadCommentIncluded(True)
+    
     iface.setOptions(opts)
     iface.openProgram(currentProgram)
     return iface
@@ -222,7 +232,7 @@ def run():
             else:
                 if not code:
                     raise Exception("impossible situation")
-                fh.write(code)
+                fh.write(preprocess(func, code, toAddr))
                 fh.write("\n")
 
         written.append(out_path)
