@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 namespace Ghidra {
 typedef void* pointer;
 typedef void* pointer32;
