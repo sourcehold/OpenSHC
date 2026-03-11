@@ -1,9 +1,6 @@
 #pragma once
 
-#include "framework.h"
-#include "winnt.h"
-#include "wtypes.h"
-#include <windef.h>
+
 
 namespace Ghidra {
 typedef void* pointer;
