@@ -75,7 +75,9 @@ else:
     
 bc = BinaryContext(hash="3BB0A8C1", abbreviation="SHC", reccmp_binary="STRONGHOLDCRUSADER")
 exporter = Exporter(binary_context=bc, transformation_rules=TransformationRules(use_regex = True, regex={"_HoldStrong": "OpenSHC"}), expose_original_methods=True,
-                    file_rules = FileRules(one_file_per_function=True, one_file_per_method=True), includes_remapping=[(".*DirectDraw/.*", "ddraw.h")])
+                    file_rules = FileRules(one_file_per_function=True, one_file_per_method=True), includes_remapping=[(".*DirectDraw/.*", "ddraw.h")],
+                    includes_exclude_regex=[".*Enums/WindowsVirtualKey.*",
+                                            ".*Enums/GeneralWindowsMessage.*"])
 
 collection = ExportedContentCollection(ignore_duplicates=True)
 
