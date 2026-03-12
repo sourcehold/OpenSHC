@@ -74,10 +74,41 @@ else:
 
     
 bc = BinaryContext(hash="3BB0A8C1", abbreviation="SHC", reccmp_binary="STRONGHOLDCRUSADER")
-exporter = Exporter(binary_context=bc, transformation_rules=TransformationRules(use_regex = True, regex={"_HoldStrong": "OpenSHC"}), expose_original_methods=True,
-                    file_rules = FileRules(one_file_per_function=True, one_file_per_method=True), includes_remapping=[(".*DirectDraw/.*", "ddraw.h")],
+exporter = Exporter(binary_context=bc,
+                    transformation_rules=TransformationRules(use_regex = True, regex={"_HoldStrong": "OpenSHC"}),
+                    expose_original_methods=True,
+                    file_rules = FileRules(one_file_per_function=True, one_file_per_method=True),
+                    includes_remapping=[(".*DirectDraw/.*", "ddraw.h")],
                     includes_exclude_regex=[".*Enums/WindowsVirtualKey.*",
-                                            ".*Enums/GeneralWindowsMessage.*"])
+                                            ".*Enums/GeneralWindowsMessage.*"],
+                    type_mapping={
+                      ("/_HoldStrong/WindowsHelper/Enums", "GeneralWindowsMessage"): ("/WinDef.h", "UINT"),
+                      ("/_HoldStrong/WindowsHelper/Enums", "RawWindowsMessage"): ("/WinDef.h", "UINT"),
+                      ("/_HoldStrong/WindowsHelper/Enums", "WindowsVirtualKey"): ("/WinDef.h", "WPARAM"),
+                      ("/_HoldStrong/WindowsHelper/Enums", "GeneralWindowsMessageInt"): ("/WinDef.h", "UINT"),
+                      ("/_HoldStrong/WindowsHelper/Enums", "RawWindowsMessageInt"): ("/WinDef.h", "UINT"),
+                      ("/_HoldStrong/WindowsHelper/Enums", "WindowsVirtualKeyInt"): ("/WinDef.h", "WPARAM"),
+                    },
+                    inject_forwards_in_files={
+                      "OpenSHC/UI/Menu.hpp": [("OpenSHC/UI/FwdMenuMenuItem.hpp",
+"""
+namespace OpenSHC {
+namespace UI {
+    class Menu;
+    class MenuItem;
+}
+}
+""")],
+                      "OpenSHC/UI/MenuItem.hpp": [("OpenSHC/UI/FwdMenuMenuItem.hpp",
+"""
+namespace OpenSHC {
+namespace UI {
+    class Menu;
+    class MenuItem;
+}
+}
+""")],
+                    })
 
 collection = ExportedContentCollection(ignore_duplicates=True)
 
