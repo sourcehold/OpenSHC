@@ -36,7 +36,7 @@ static void createRelativeJump(int from, int to)
 #endif
 
 void StructResolver::initialize(
-    bool& initialized, bool isImplemented, int gameAddress, const void* funcPtr, const char* funcName)
+    bool& initialized, bool isImplemented, int gameAddress, const void* structPtr, const char* typeName)
 {
     if (initialized) {
 #ifdef OPEN_SHC_EXE
@@ -58,9 +58,9 @@ void StructResolver::initialize(
     }
     std::ostringstream oss;
     if (isImplemented) {
-        oss << "Implemented '" << (void*)gameAddress << "' at address '" << funcPtr << "' as a '" << funcName;
+        oss << "Implemented '" << (void*)gameAddress << "' at address '" << structPtr << "' as '" << typeName << "'";
     } else {
-        oss << "Use '" << (void*)gameAddress << "' as a '" << funcName;
+        oss << "Use '" << (void*)gameAddress << "' as '" << typeName << "'";
     }
     ucp_log(Verbosity_1, oss.str().c_str());
 #endif
@@ -93,9 +93,9 @@ void FunctionResolver::initialize(
     }
     std::ostringstream oss;
     if (isImplemented) {
-        oss << "Implemented '" << (void*)gameAddress << "' at address '" << funcPtr << "' as '" << funcName;
+        oss << "Implemented '" << (void*)gameAddress << "' at address '" << funcPtr << "' as '" << funcName << "'";
     } else {
-        oss << "Use '" << (void*)gameAddress << "' as '" << funcName;
+        oss << "Use '" << (void*)gameAddress << "' as '" << funcName << "'";
     }
     ucp_log(Verbosity_1, oss.str().c_str());
 #endif
