@@ -20,7 +20,7 @@ import os
 import subprocess
 import tempfile
 from pathlib import Path
-from typing import Any, Sequence
+from typing import Any, List, Sequence
 import difflib
 import re
 import sys
@@ -119,9 +119,10 @@ def function_name_to_cpp_path(function_name: str, base_path = Path("src")) -> tu
 def compile_cpp_code_for_function(function_name: str, contents: str) -> tuple[bool, str, str]:
     """
     Write and compile cpp code for function identified by fully namespaced function name.
+    Includes the generated cpp file automatically in the cmake sources list.
     
     Args:
-        function_name: Name of the function to extract, fully namespaced using '::'
+        function_name: Name of the function to compile, fully namespaced using '::'
         contents: New contents of the file
     
     Returns:
@@ -148,6 +149,45 @@ def compile_cpp_code_for_function(function_name: str, contents: str) -> tuple[bo
 
     # Compile the project and return the resulting state
     return compile_project()
+
+@mcp.tool()
+def exclude_function_cpp_code_from_compilation(function_name: str) -> tuple[bool, str, str]:
+    """
+    Excludes the generated cpp file from the cmake sources list, avoiding its compilation.
+    
+    Args:
+        function_name: Name of the function to exclude, fully namespaced using '::'
+    
+    Returns:
+        Tuple of (success, stdout, stderr)
+    """
+    # Translate the function name into a path
+    rstate, rresult, rerr = function_name_to_cpp_path(function_name=function_name)
+    if not rstate:
+        return rstate, "", f"could not resolve function name to file path: {rerr}"
+    path = Path(rresult)
+    if not path.exists():
+        return False, "", f"could not resolve function name to file path, file does not exist: {rerr}"
+
+    # Ensure the cpp file is included in the build
+    csentry = str(path).replace("\\", "/")
+    if not csentry.startswith("src/"):
+        return False, "", f"invalid cmake/openshc-sources.txt entry: {csentry}"
+    
+    # Store a backup
+    i = 1
+    pcandidate = PATH_CMAKE_OPENSHC_SOURCES.with_name(PATH_CMAKE_OPENSHC_SOURCES.name + f".{i:{0}>3}")
+    while pcandidate.exists():
+        i += 1
+        pcandidate = PATH_CMAKE_OPENSHC_SOURCES.with_name(PATH_CMAKE_OPENSHC_SOURCES.name + f".{i:{0}>3}")
+    pcandidate.write_text(PATH_CMAKE_OPENSHC_SOURCES.read_text())
+
+    # Produce the new file without the line
+    lines = PATH_CMAKE_OPENSHC_SOURCES.read_text().splitlines(False)
+    lines = [line for line in lines if not line.startswith(csentry)]
+    PATH_CMAKE_OPENSHC_SOURCES.write_text('\n'.join(lines) + '\n', newline='\n')
+
+    return True, "cpp file excluded", ""
 
 def read_function(function_name: str, base_path: Path = Path("src")):
     rstate, rresult, rerr = function_name_to_cpp_path(function_name=function_name, base_path=base_path)
@@ -231,6 +271,26 @@ def fetch_cached_ghidra_function_decompilation(function_name: str) -> tuple[bool
         Tuple of (success, contents, stderr)
     """
     return read_function(function_name=function_name, base_path=Path("tools") / "mcp" / "ghidra_scripts" / "decompilation")
+
+@mcp.tool()
+def find_source_file_containing_text(text: str, glob: str = "**/*") -> List[str]:
+    """
+    Returns a list of files in which 'text' can be found. The default file glob pattern is '**/*'.
+    
+    Args:
+        text: the text to find, no regex is supported
+        glob: the glob to use, useful to look in hpp or cpp files specifically
+    
+    Returns:
+        list of file path strings
+    """
+    results: List[str] = []
+    src = Path("src")
+    for f in src.glob(pattern=glob):
+        if f.is_file():
+            if text in f.read_text(encoding='UTF-8'):
+                results.append(str(f.relative_to(src)))
+    return results
 
 if __name__ == "__main__":
     mcp.run(transport="stdio")

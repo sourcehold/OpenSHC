@@ -31,6 +31,17 @@
 import re
 import os
 
+from ghidra.app.decompiler import ClangReturnType, ClangVariableDecl, DecompileResults
+from ghidra.program.model.pcode import PcodeBlockBasic
+from ghidra.program.model.pcode import PcodeOpAST
+from ghidra.program.model.pcode import HighGlobal
+from ghidra.program.model.pcode import HighConstant
+from ghidra.program.database.data import EnumDB
+from ghidra.app.decompiler import ClangFunction
+from ghidra.app.decompiler import ClangStatement
+from ghidra.app.decompiler import ClangFuncProto
+from ghidra.app.decompiler import ClangFuncNameToken
+
 # ----------------------------------------------------------------------------
 # Configuration
 # ----------------------------------------------------------------------------
@@ -87,6 +98,8 @@ def replace_this_references(source, dat_prefix):
         # Use word boundary on the left, match the dot accessor
         pattern = re.compile(r'\b' + re.escape(dat_prefix) + r'\.(\w+)')
         result = pattern.sub(r'this->\1', result)
+        pattern = re.compile(r'&' + re.escape(dat_prefix) + r'')
+        result = pattern.sub('this', result)
     
     # Handle Ghidra's ADJ() artefact: ADJ(expr)->field means same address,
     # just different type view. In __thiscall context this is this->field
@@ -152,7 +165,15 @@ def fix_thiscall_param(source):
     # Remove it when it is the first of multiple parameters:
     # (FooType *this, int x, ...) -> (int x, ...)
     source = re.sub(r'\(\s*\w[\w\s\*]*\*\s*this\s*,\s*', '(', source)
+
+    # Remove explicit (this) parameter
+    # when it is the only parameter
+    source = re.sub(r'\(\s*\s*this\s*\)', '()', source)
     
+    # Remove it when it is the first of multiple parameters:
+    # (this, x, ...) -> (x, ...)
+    source = re.sub(r'\(\s*\s*this\s*,\s*', '(', source)
+
     return source
 
 def is_thiscall_function(func):
@@ -189,18 +210,73 @@ def process_dat_prefixes(decompiled_source):
         result = result.replace(dat_name + "." + field, dat_name + "::ptr->" + field)
     return result
 
-def find_dat_includes(decompiled_source):
+def find_dat_includes(decompiled_source, globals_folder):
     pattern = re.compile(r'\b([A-Z]{3,}_\w+)[.\[]')
     matches = pattern.findall(decompiled_source)
     for match in matches:
-        yield '#include "OpenSHC/'+match+'.hpp"'
-        
+        yield '#include "' + globals_folder +'/'+match+'.hpp"'
 
-def preprocess(func, source, toAddr):
+def fix_enum_namespaces(decompilation_result: DecompileResults, source: str):
+    for block in decompilation_result.getHighFunction().getBasicBlocks():
+        if not isinstance(block, PcodeBlockBasic):
+            continue
+        for part in block.getIterator():
+            if not isinstance(part, PcodeOpAST):
+                continue
+            for input in part.getInputs():
+                input = input.getHigh()
+                if input:
+                    if isinstance(input, HighConstant):
+                        dt = input.getDataType()
+                        if isinstance(dt, EnumDB): # type: ignore
+                            for name in dt.getNames():
+                                if name in source:
+                                    if "::" + name in source:
+                                        continue
+                                    p = dt.getDataTypePath().getCategoryPath().getPath()
+                                    while p.startswith("/"):
+                                        p = p[1:]
+                                    p = p.replace("/", "::")
+                                    source = source.replace(name, p + "::" + name)
+    return source
+
+
+def guess_includes(decompilation_result: DecompileResults, globals_folder: str):
+    inputs = []
+    for block in decompilation_result.getHighFunction().getBasicBlocks():
+        if not isinstance(block, PcodeBlockBasic):
+            continue
+        for part in block.getIterator():
+            if not isinstance(part, PcodeOpAST):
+                continue
+            for input in part.getInputs():
+                if input.getHigh():
+                    inputs.append(input.getHigh())
+    includes = []
+    for input in inputs:
+        data_type = input
+        while hasattr(data_type, "getDataType"):
+            data_type = data_type.getDataType()
+        path = data_type.getDataTypePath()
+        if path.getCategoryPath().getPath() != "/":
+            path_string = path.getPath()
+            if path_string and path_string not in includes:
+                while path_string[0] == '/':
+                    path_string = path_string[1:]
+                if path_string not in includes:
+                    includes.append(path_string)
+        if (isinstance(input, HighGlobal) and input.getName()) and input.getName() != "UNNAMED":
+            include = globals_folder + "/" + input.getName()
+            if include not in includes:
+                includes.append(include)
+    return [f'#include "{include}.hpp"' for include in includes]
+
+
+def preprocess(func, decompilation_result, source, toAddr, globals_folder, transformer = ("_HoldStrong", "OpenSHC")):
     """
     Full preprocessing pipeline for a single decompiled function source string.
     """
-    result = source
+    result = fix_enum_namespaces(decompilation_result=decompilation_result, source=source)
     
     # 1. Strip Ghidra header comment block
     result = strip_ghidra_signature_comments(result)
@@ -220,12 +296,33 @@ def preprocess(func, source, toAddr):
     #if ANNOTATE_CDECL_GLOBALS:
     #    result = annotate_cdecl_globals(result)
     
-    ns = func.getParentNamespace().getName(True)
-    nsp = ns.replace("::", "/") + ".hpp"
-    result = '#include "'+nsp+'"\n\n' + result
-    
-    result = "\n".join(find_dat_includes(result)) + result
-    
-    return process_dat_prefixes(result).replace("_HoldStrong", "OpenSHC")
+    pns = func.getParentNamespace()
+    isClass = pns.getSymbol().getSymbolType().CLASS == pns.getSymbol().getSymbolType()
+    fname = func.getName(True).replace(*transformer)
+    nsparts = fname.split("::")
+    if isClass:
+        nsparts = fname.split("::", fname.count("::") - 1)
+    ns = pns.getName(True)
+    nsp = ns.replace("::", "/").replace(*transformer) + ".hpp"
+    includes = ['#include "' + nsp + '"']
+    includes += [inc.replace(*transformer) for inc in guess_includes(decompilation_result=decompilation_result, globals_folder=globals_folder)]
+    includes += list(find_dat_includes(result, globals_folder=globals_folder))
+    namespace_wrap_start = ["namespace "+ nsparts[i] + " {" for i in range(len(nsparts) - 1)]
+    namespace_wrap_end = ["}"] * (len(nsparts) - 1)
+    result = process_dat_prefixes(result).replace(*transformer)
+    result = '\n'.join(sorted(set(includes))) + '\n\n' + '\n'.join([*namespace_wrap_start, result, *namespace_wrap_end])
+    lines = result.splitlines(keepends=False)
+    index = -1
+    for i, line in enumerate(lines):
+        if fname in line:
+            index = i
+            break
+    else:
+        result = result.replace(fname, nsparts[-1])
+        return result
+    lines[index] = lines[index].replace(fname, nsparts[-1])
+    lines[index-1] = f'// FUNCTION: STRONGHOLDCRUSADER 0x{func.getEntryPoint().getUnsignedOffset():0{8}x}'
+    result = '\n'.join(lines)
+    return result
 
 

@@ -119,15 +119,15 @@ def init_decompiler():
 
 
 def decompile_function(func, iface, monitor):
-    """Return (code_str, None) on success or (None, error_str) on failure."""
+    """Return (result, code_str, None) on success or (None, error_str) on failure."""
     result = iface.decompileFunction(func, TIMEOUT_SECONDS, monitor)
     if result is None or not result.decompileCompleted():
         err = result.getErrorMessage() if result else "unknown error"
         return None, "/* ERROR decompiling {}: {} */\n".format(func.getName(), err)
     markup = result.getDecompiledFunction().getC() # .getCCodeMarkup()
     if markup is None:
-        return None, "/* ERROR: no C markup for {} */\n".format(func.getName())
-    return str(markup).replace("_HoldStrong", "OpenSHC"), None
+        return None, None, "/* ERROR: no C markup for {} */\n".format(func.getName())
+    return result, str(markup).replace("_HoldStrong", "OpenSHC"), None
 
 
 def collect_functions_in_namespace(ns):
@@ -213,7 +213,7 @@ def run():
             idx, len(entries), ns_qualified, func_name, addr))
         print("          -> {}".format(out_path))
 
-        code, err = decompile_function(func, iface, monitor)
+        decompilation_result, code, err = decompile_function(func, iface, monitor)
 
         with open(out_path, 'w', encoding='UTF-8') as fh:
             fh.write("// {}\n".format("=" * 76))
@@ -232,10 +232,12 @@ def run():
             else:
                 if not code:
                     raise Exception("impossible situation")
-                fh.write(preprocess(func, code, toAddr))
+                fh.write(preprocess(func, decompilation_result, code, toAddr, "OpenSHC/Globals"))
                 fh.write("\n")
 
         written.append(out_path)
+        if monitor.cancelled:
+            break
 
     iface.dispose()
 
