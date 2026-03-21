@@ -39,6 +39,9 @@ We use [reccmp](https://github.com/isledecomp/reccmp) to verify compatibility of
 
 Because the original game was compiled using an old compiler, you have to compile it using [this compiler](https://github.com/sourcehold/MSVC1400), which is included in the repository via a submodule.
 
+If you made any advances or noticed something while implementing, please also add the status to [SHC_3BB0A8C1_STATUS.txt](SHC_3BB0A8C1_STATUS.txt).  
+The structure is simply `<address-enum> | <matching-percent> | <comment>`.
+
 ### Prerequisites
 
 1. Stronghold Crusader 1.41 Latin. The Steam version is the easiest one to get, but any patched version will do. Make sure the installation uses a Latin version (English, German, etc).
