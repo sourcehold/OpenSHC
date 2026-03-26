@@ -97,7 +97,7 @@ def write_output(txt_path, addresses, data_map):
 
     logging.info(f"Writing output to: {txt_path}")
 
-    with txt_path.open("w", encoding="utf-8") as f:
+    with txt_path.open("w", encoding="utf-8", newline="\n") as f:
         for addr in addresses:
             if addr in data_map:
                 percent, comment = data_map.pop(addr)
@@ -111,7 +111,7 @@ def write_output(txt_path, addresses, data_map):
     # logging leftovers
     for leftover, (percent, comment) in data_map.items():
         logging.warning(
-            f"Unused entry in txt (not in header): {format_line(leftover, percent, comment)}"
+            f"Unused entry in previous txt (not in header): {format_line(leftover, percent, comment)}"
         )
 
 
@@ -133,7 +133,7 @@ def main():
         logging.error("No addresses found in header file. Exiting.")
         raise SystemExit(1)
 
-    txt_filename = header_path.name + ".txt"
+    txt_filename = header_path.stem + ".txt"
     txt_path = folder_path / txt_filename
 
     data_map = read_existing_txt(txt_path)
