@@ -39,6 +39,15 @@ We use [reccmp](https://github.com/isledecomp/reccmp) to verify compatibility of
 
 Because the original game was compiled using an old compiler, you have to compile it using [this compiler](https://github.com/sourcehold/MSVC1400), which is included in the repository via a submodule.
 
+If you made any advances or noticed something while implementing, please also add or update the status in [addresses-SHC-3BB0A8C1.txt](status/addresses-SHC-3BB0A8C1.txt).  
+The structure is simply `<address-enum> | <matching-percent> | <comment>`.  
+Should the address list change, please run the following command to recreate the file:
+```sh
+python .\status\extract_header_and_update.py .\src\precomp\addresses-SHC-3BB0A8C1.hpp
+```
+Percentages and comments should be kept, but always check the difference.
+
+
 ### Prerequisites
 
 1. Stronghold Crusader 1.41 Latin. The Steam version is the easiest one to get, but any patched version will do. Make sure the installation uses a Latin version (English, German, etc).
