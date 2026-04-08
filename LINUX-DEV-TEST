@@ -1,0 +1,47 @@
+- Wine: 11.0 (stable)
+
+- softlink.bat
+    - basically not useful, since the hash function is not available
+    - either deactivate or create the link manually
+
+- cmakew.bat
+    - one needs to install a cmake version on wine, otherwise the calls do not work
+    - directly calling the installer with the wine command works
+
+- build.bat
+    - same manifest problem (see "Build" here), likely works otherwise
+
+- Configure:
+    -  works
+
+- Build
+    - issues: It can not run "mt.exe", this causes a page fault.
+        - if no manifest is added, the build seems to work (difference)
+
+- Running
+    - Running the default exe (under wine) causes an issue with the bink.dll -> Page fault
+        - although, Crusader does also not run under default Wine (likely due to other issues), so it might be a general problem
+
+- Visual Studio
+    - Default Plugin does not work out of the box (since on Linux side)
+    - Requires complicated translation script for calls
+        - also needs to be set in preference config manually (difference)
+    - calls might not finish
+
+- Presets:
+    - restriction to windows needs to be removed
+
+- Python
+    - other names
+    - other setups (scripts do not work)
+    - reccmp needs other symlink, or also python on wine
+    - if the paths fit, the linux installation works
+
+- UCP:
+    - is adding "Developer" to the "build" entry in the UCP version file really the only remaining way to get Dev-Build behaviour?
+    - Start Configs possible, but they need to be added via Steam: --ucp-console --ucp-no-security
+    - did not test debugging, short search made it look like it would be hard and really inconsistend
+
+>> Conclusion:
+- Developing the ReImp on Linux at its core is almost possible (if the manifest is removed and certain compile problems are accepted)
+- The whole ENV to setup however is pain, and really not worth it unless there is no other option.
