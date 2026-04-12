@@ -1,5 +1,7 @@
 #pragma once
 
+typedef int WINBOOL;
+
 namespace Ghidra {
 typedef void* pointer;
 typedef void* pointer32;
