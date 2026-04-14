@@ -15,10 +15,10 @@ logging.basicConfig(
 )
 
 ADDRESS_REGEX = re.compile(
-    r'ADDRESS_SHC_[A-Fa-f0-9]{8}_0x[A-Fa-f0-9]{8}'
+    r'SHC_[A-Fa-f0-9]{8}_0x[A-Fa-f0-9]{8}'
 )
 TXT_LINE_REGEX = re.compile(
-    r'^\s*(ADDRESS_SHC_[A-Fa-f0-9]{8}_0x[A-Fa-f0-9]{8})\s*\|\s*([\d]*\.?[\d]+)\s*%\s*\|\s*(.*)\s*$'
+    r'^\s*(SHC_[A-Fa-f0-9]{8}_0x[A-Fa-f0-9]{8})\s*\|\s*([\d]*\.?[\d]+)\s*%\s*\|\s*(.*)\s*$'
 )
 
 # -------------------------
