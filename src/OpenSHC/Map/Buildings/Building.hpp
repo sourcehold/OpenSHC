@@ -1,0 +1,292 @@
+/**
+  AUTO_GENERATED: DO NOT TOUCH THIS FILE
+  path: 'OpenSHC/Map/Buildings/Building.hpp'
+*/
+
+#pragma once
+
+#include "OpenSHC/Game/Resources/ResourceTypeShort.hpp"
+#include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
+
+namespace OpenSHC {
+namespace Map {
+    namespace Buildings {
+
+        using OpenSHC::Game::Resources::ResourceTypeShort;
+        using OpenSHC::Map::Buildings::BuildingTypeShort;
+
+#pragma pack(push, 1)
+        // SIZE: 0x0000032C
+        typedef struct Building {
+
+            int spriteID; // 0x00000000 length: 4
+            int spriteSheetID; // 0x00000004 length: 4
+            int field2_0x8; // 0x00000008 length: 4
+            short field3_0xc; // 0x0000000C length: 2
+            short field4_0xe; // 0x0000000E length: 2
+            int field5_0x10; // 0x00000010 length: 4
+            int field6_0x14; // 0x00000014 length: 4
+            int field7_0x18; // 0x00000018 length: 4
+            int animationFrame; // 0x0000001C length: 4
+            short animationIndex; // 0x00000020 length: 2
+            short field10_0x22; // 0x00000022 length: 2
+            short unknownStockpileOrSignpostRelated; // 0x00000024 length: 2
+            short field12_0x26; // 0x00000026 length: 2
+            int field13_0x28; // 0x00000028 length: 4
+            short field14_0x2c; // 0x0000002C length: 2
+            short field15_0x2e; // 0x0000002E length: 2
+            short field16_0x30; // 0x00000030 length: 2
+            undefined1 padding_0x32[2]; // 0x00000032 length: 2
+            int displayOwnerFlag; // 0x00000034 length: 4
+            int field20_0x38; // 0x00000038 length: 4
+            int field21_0x3c; // 0x0000003C length: 4
+            int field22_0x40; // 0x00000040 length: 4
+            int field23_0x44; // 0x00000044 length: 4
+            int campgroundVclock; // 0x00000048 length: 4
+            int field25_0x4c; // 0x0000004C length: 4
+            int field26_0x50; // 0x00000050 length: 4
+            int field27_0x54; // 0x00000054 length: 4
+            int field28_0x58; // 0x00000058 length: 4
+            int field29_0x5c; // 0x0000005C length: 4
+            int shouldRenderRoof; // 0x00000060 length: 4
+            int shouldRenderSomeOverlay; // 0x00000064 length: 4
+            int field32_0x68; // 0x00000068 length: 4
+            int field33_0x6c; // 0x0000006C length: 4
+            int field34_0x70; // 0x00000070 length: 4
+            int field35_0x74; // 0x00000074 length: 4
+            int field36_0x78; // 0x00000078 length: 4
+            int field37_0x7c; // 0x0000007C length: 4
+            int ownerFlagFrame; // 0x00000080 length: 4
+            int field39_0x84; // 0x00000084 length: 4
+            int field40_0x88; // 0x00000088 length: 4
+            byte xPosition; // 0x0000008C length: 1
+            byte yPosition; // 0x0000008D length: 1
+            undefined1 padding_0x8e[2]; // 0x0000008E length: 2
+            short surfaceAreaUnk; // 0x00000090 length: 2
+            short orientation; // 0x00000092 length: 2
+            undefined1 padding_0x94[6]; // 0x00000094 length: 6
+            short unknownFlag3; // 0x0000009A length: 2
+            short someResourceNumber; // 0x0000009C length: 2
+            short buildingIsVisuallyActive; // 0x0000009E length: 2
+            int field56_0xa0; // 0x000000A0 length: 4
+            short resourceRelatedCountDown; // 0x000000A4 length: 2
+            undefined1 padding_0xa6[2]; // 0x000000A6 length: 2
+            uint unknownManorHouseOrStoneKeepRelated; // 0x000000A8 length: 4
+            int field61_0xac; // 0x000000AC length: 4
+            int field62_0xb0; // 0x000000B0 length: 4
+            int field63_0xb4; // 0x000000B4 length: 4
+            int field64_0xb8; // 0x000000B8 length: 4
+            short tickRelatedVisuallyActiveIndicator; // 0x000000BC length: 2
+            short field66_0xbe; // 0x000000BE length: 2
+            short recruitTimer; // 0x000000C0 length: 2
+            short field68_0xc2; // 0x000000C2 length: 2
+            short noRubble; // 0x000000C4 length: 2
+            undefined1 padding_0xc6[2]; // 0x000000C6 length: 2
+            int field72_0xc8; // 0x000000C8 length: 4
+            short pathLinkageRelated1; // 0x000000CC length: 2
+            short oldVisualActiveState; // 0x000000CE length: 2
+            short logicalState; // 0x000000D0 length: 2
+            BuildingTypeShort buildingType; // 0x000000D2 length: 2
+            undefined1 padding_0xd4[2]; // 0x000000D4 length: 2
+            short owner; // 0x000000D6 length: 2
+            int uid; // 0x000000D8 length: 4
+            undefined1 padding_0xdc[12]; // 0x000000DC length: 12
+            ushort microX; // 0x000000E8 length: 2
+            ushort microY; // 0x000000EA length: 2
+            short terrainHeightUnk; // 0x000000EC length: 2
+            ushort x; // 0x000000EE length: 2
+            ushort y; // 0x000000F0 length: 2
+            undefined1 padding_0xf2[2]; // 0x000000F2 length: 2
+            uint currentTilePositionAdjusted; // 0x000000F4 length: 4
+            uint widthOrHeight; // 0x000000F8 length: 4
+            ushort entranceAttemptTileIndex; // 0x000000FC length: 2
+            short buildingEntryX; // 0x000000FE length: 2
+            short buildingEntryY; // 0x00000100 length: 2
+            short buildingVariationRelated; // 0x00000102 length: 2
+            int fireRelatedRNG1; // 0x00000104 length: 4
+            short flag1; // 0x00000108 length: 2
+            undefined1 padding_0x10a[2]; // 0x0000010A length: 2
+            short currentHealth; // 0x0000010C length: 2
+            short maxHealth; // 0x0000010E length: 2
+            short unitRefID; // 0x00000110 length: 2
+            undefined1 padding_0x112[2]; // 0x00000112 length: 2
+            int unitRefUID; // 0x00000114 length: 4
+            int killingPitTriggered; // 0x00000118 length: 4
+            int killingPitField; // 0x0000011C length: 4
+            int resourceArray_resourceTypePlus1[2]; // 0x00000120 length: 8
+            int resourceWood; // 0x00000128 length: 4
+            int resourceHops; // 0x0000012C length: 4
+            int resourceStone; // 0x00000130 length: 4
+            int resourcePartialStone; // 0x00000134 length: 4
+            int resourceIron; // 0x00000138 length: 4
+            int resourcePitch; // 0x0000013C length: 4
+            int resourcePartialPitch; // 0x00000140 length: 4
+            int resourceWheat; // 0x00000144 length: 4
+            int resourceBread; // 0x00000148 length: 4
+            int resourceCheese; // 0x0000014C length: 4
+            int resourceMeat; // 0x00000150 length: 4
+            int resourceApple; // 0x00000154 length: 4
+            int resourceAle; // 0x00000158 length: 4
+            int resourceGold; // 0x0000015C length: 4
+            int resourceFlour; // 0x00000160 length: 4
+            int resourceBow; // 0x00000164 length: 4
+            int resourceCrossbow; // 0x00000168 length: 4
+            int resourceSpear; // 0x0000016C length: 4
+            int resourcePike; // 0x00000170 length: 4
+            int resourceMace; // 0x00000174 length: 4
+            int resourceSword; // 0x00000178 length: 4
+            int resourceLeatherArmor; // 0x0000017C length: 4
+            int resourceIronArmor; // 0x00000180 length: 4
+            uint currentNumberOfResource; // 0x00000184 length: 4
+            uint currentLimitOfResource; // 0x00000188 length: 4
+            short currentStoredResourceType; // 0x0000018C length: 2
+            undefined1 someUID; // 0x0000018E length: 1
+            undefined1 padding_0x18f[1]; // 0x0000018F length: 1
+            short field147_0x190; // 0x00000190 length: 2
+            undefined2 quarryStockpileID; // 0x00000192 length: 2
+            short field149_0x194; // 0x00000194 length: 2
+            short numberOfPopulationProvided; // 0x00000196 length: 2
+            short buildingTypeBasedEmployeeCount; // 0x00000198 length: 2
+            short currentEmployeeCount; // 0x0000019A length: 2
+            short currentlyNeededEmployeeCount; // 0x0000019C length: 2
+            short workerID[4]; // 0x0000019E length: 8
+            undefined1 padding_0x1a6[2]; // 0x000001A6 length: 2
+            int workerUID[4]; // 0x000001A8 length: 16
+            short workers[2]; // 0x000001B8 length: 4
+            undefined1 padding_0x1bc[4]; // 0x000001BC length: 4
+            short unitID; // 0x000001C0 length: 2
+            short field164_0x1c2; // 0x000001C2 length: 2
+            short growCounter; // 0x000001C4 length: 2
+            undefined1 padding_0x1c6[2]; // 0x000001C6 length: 2
+            int tileRef1; // 0x000001C8 length: 4
+            int tileRef2; // 0x000001CC length: 4
+            int tileRef3; // 0x000001D0 length: 4
+            int tileRef4; // 0x000001D4 length: 4
+            int tileRef5; // 0x000001D8 length: 4
+            int tileRef6; // 0x000001DC length: 4
+            int tileRef7; // 0x000001E0 length: 4
+            int tileRef8; // 0x000001E4 length: 4
+            int tileRef9; // 0x000001E8 length: 4
+            int tileRef10; // 0x000001EC length: 4
+            int tileRef11; // 0x000001F0 length: 4
+            int tileRef12; // 0x000001F4 length: 4
+            int tileRef13; // 0x000001F8 length: 4
+            int tileRef14; // 0x000001FC length: 4
+            int tileRef15; // 0x00000200 length: 4
+            int tileRef16; // 0x00000204 length: 4
+            int tileRef17; // 0x00000208 length: 4
+            int tileRef18; // 0x0000020C length: 4
+            int tileRef19; // 0x00000210 length: 4
+            int tileRef20; // 0x00000214 length: 4
+            int tileRef21; // 0x00000218 length: 4
+            int tileRef22; // 0x0000021C length: 4
+            int tileRef23; // 0x00000220 length: 4
+            int tileRef24; // 0x00000224 length: 4
+            int tileRef25; // 0x00000228 length: 4
+            int tileRef26; // 0x0000022C length: 4
+            int tileRef27; // 0x00000230 length: 4
+            int tileRef28; // 0x00000234 length: 4
+            int tileRef29; // 0x00000238 length: 4
+            int tileRef30; // 0x0000023C length: 4
+            int tileRef31; // 0x00000240 length: 4
+            int tileRef32; // 0x00000244 length: 4
+            int tileRef33; // 0x00000248 length: 4
+            int tileRef34; // 0x0000024C length: 4
+            int tileRef35; // 0x00000250 length: 4
+            int tileRef36; // 0x00000254 length: 4
+            undefined1 wheatGrowStateRelated; // 0x00000258 length: 1
+            undefined1 padding_0x259[3]; // 0x00000259 length: 3
+            int tunnelerCounter; // 0x0000025C length: 4
+            short someX; // 0x00000260 length: 2
+            short someY; // 0x00000262 length: 2
+            short field211_0x264; // 0x00000264 length: 2
+            undefined1 padding_0x266[2]; // 0x00000266 length: 2
+            int oxTetherRelatedUnitUID; // 0x00000268 length: 4
+            short oxTetherRelatedUnitID; // 0x0000026C length: 2
+            undefined1 padding_0x26e[2]; // 0x0000026E length: 2
+            short field218_0x270; // 0x00000270 length: 2
+            short field219_0x272; // 0x00000272 length: 2
+            short field220_0x274; // 0x00000274 length: 2
+            short field221_0x276; // 0x00000276 length: 2
+            int buildingProgress; // 0x00000278 length: 4
+            uint timeAlive; // 0x0000027C length: 4
+            undefined1 padding_0x280[4]; // 0x00000280 length: 4
+            int hovelVisualStyle; // 0x00000284 length: 4
+            short field229_0x288; // 0x00000288 length: 2
+            short field230_0x28a; // 0x0000028A length: 2
+            short flag2; // 0x0000028C length: 2
+            ResourceTypeShort producedItemTypeNext; // 0x0000028E length: 2
+            ResourceTypeShort producedItemType; // 0x00000290 length: 2
+            undefined1 padding_0x292[1]; // 0x00000292 length: 1
+            byte drawbridgeState2; // 0x00000293 length: 1
+            byte drawBridgeState1; // 0x00000294 length: 1
+            byte containsSiegeMangonel1OrBallista2; // 0x00000295 length: 1
+            bool sleeping; // 0x00000296 length: 1
+            byte numberOfAnimals; // 0x00000297 length: 1
+            byte field240_0x298; // 0x00000298 length: 1
+            byte field241_0x299; // 0x00000299 length: 1
+            short unknownOutpostValue01; // 0x0000029A length: 2
+            int ffBuildingVariation; // 0x0000029C length: 4
+            undefined1 padding_0x2a0[2]; // 0x000002A0 length: 2
+            byte pathLinkageRelated2; // 0x000002A2 length: 1
+            byte gateState; // 0x000002A3 length: 1
+            undefined1 unknownFlag4; // 0x000002A4 length: 1
+            undefined1 padding_0x2a5[2]; // 0x000002A5 length: 2
+            char randomOutpostField; // 0x000002A7 length: 1
+            int uidWhenPlaced; // 0x000002A8 length: 4
+            int attackWave; // 0x000002AC length: 4
+            short flagonsOfAleOrCheese; // 0x000002B0 length: 2
+            undefined1 padding_0x2b2[2]; // 0x000002B2 length: 2
+            short unknownCounterTo10000_0x2b4; // 0x000002B4 length: 2
+            short field258_0x2b6; // 0x000002B6 length: 2
+            short gateCloseOpenTimer; // 0x000002B8 length: 2
+            short buildMonthOrBuildOrder; // 0x000002BA length: 2
+            short unknownAccessibilityRelatedFlag; // 0x000002BC length: 2
+            short fireDuration; // 0x000002BE length: 2
+            short gateState2; // 0x000002C0 length: 2
+            undefined1 padding_0x2c2[2]; // 0x000002C2 length: 2
+            short cooldownTimer; // 0x000002C4 length: 2
+            short field267_0x2c6; // 0x000002C6 length: 2
+            short field268_0x2c8; // 0x000002C8 length: 2
+            short quarryLinkedOxTethers[3]; // 0x000002CA length: 6
+            short oxtetherLinkedQuarryID; // 0x000002D0 length: 2
+            short laddermanDataID; // 0x000002D2 length: 2
+            short field272_0x2d4; // 0x000002D4 length: 2
+            short idleTimerUnk; // 0x000002D6 length: 2
+            short unknownSiegeTentRelated01; // 0x000002D8 length: 2
+            short field275_0x2da; // 0x000002DA length: 2
+            short unknownTickRelatedValue; // 0x000002DC length: 2
+            ushort ifFireThenResponsiblePlayer; // 0x000002DE length: 2
+            short insideUnitID1; // 0x000002E0 length: 2
+            short insideUnitID2; // 0x000002E2 length: 2
+            short insideUnitID3; // 0x000002E4 length: 2
+            short insideUnitID4; // 0x000002E6 length: 2
+            int field282_0x2e8; // 0x000002E8 length: 4
+            int field283_0x2ec; // 0x000002EC length: 4
+            int field284_0x2f0; // 0x000002F0 length: 4
+            int unitRefUID2; // 0x000002F4 length: 4
+            short hasUnitsOntop; // 0x000002F8 length: 2
+            short field287_0x2fa; // 0x000002FA length: 2
+            undefined1 padding_0x2fc[2]; // 0x000002FC length: 2
+            short statueCommemoratingPlayerID; // 0x000002FE length: 2
+            short field291_0x300; // 0x00000300 length: 2
+            short tribeID; // 0x00000302 length: 2
+            int tribeUID; // 0x00000304 length: 4
+            short field294_0x308; // 0x00000308 length: 2
+            short field295_0x30a; // 0x0000030A length: 2
+            short field296_0x30c; // 0x0000030C length: 2
+            short field297_0x30e; // 0x0000030E length: 2
+            short field298_0x310; // 0x00000310 length: 2
+            short field299_0x312; // 0x00000312 length: 2
+            undefined1 padding_0x314[2]; // 0x00000314 length: 2
+            short field302_0x316; // 0x00000316 length: 2
+            short field303_0x318; // 0x00000318 length: 2
+            undefined1 padding_0x31a[18]; // 0x0000031A length: 18
+
+        } Building;
+#pragma pack(pop)
+
+        static_assert_cpp98_obj(sizeof(Building) == 812, Building);
+    } // namespace Buildings
+} // namespace Map
+} // namespace OpenSHC
