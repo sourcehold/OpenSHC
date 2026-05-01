@@ -10,18 +10,18 @@
 #include "OpenSHC/Audio/SFX/SoundStructure1.hpp"
 #include "OpenSHC/Audio/SFX/SoundStructure2.hpp"
 #include "OpenSHC/Audio/SFX/SpeechEffectIDInt.hpp"
-#include "OpenSHC/_SHCDE/eSFXInt.hpp"
+#include "OpenSHC/DE/SHCDE/eSFXInt.hpp"
 
 namespace OpenSHC {
 namespace Audio {
     namespace SFX {
 
-        using OpenSHC::_SHCDE::eSFXInt;
         using OpenSHC::Audio::SFX::AmbientSFXTypeInt;
         using OpenSHC::Audio::SFX::SoundEffectIDInt;
         using OpenSHC::Audio::SFX::SoundStructure1;
         using OpenSHC::Audio::SFX::SoundStructure2;
         using OpenSHC::Audio::SFX::SpeechEffectIDInt;
+        using OpenSHC::DE::SHCDE::eSFXInt;
 
 #pragma pack(push, 1)
 

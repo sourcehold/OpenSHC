@@ -2,19 +2,19 @@
   path: 'OpenSHC/UI/Rendering/TextureRenderCore.func.hpp'
 */
 
+#include "OpenSHC/DE/SHCDE/eGMInt.hpp"
 #include "OpenSHC/IO/Graphics/GmIDInt.hpp"
 #include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Rendering/Colors/RGB15.hpp"
 #include "OpenSHC/Text/FontRenderTypeInt.hpp"
 #include "OpenSHC/UI/Rendering/TextureRenderCore.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
-#include "OpenSHC/_SHCDE/eGMInt.hpp"
 namespace OpenSHC {
 namespace UI {
     namespace Rendering {
         namespace TextureRenderCore_Func {
 
-            using OpenSHC::_SHCDE::eGMInt;
+            using OpenSHC::DE::SHCDE::eGMInt;
             using OpenSHC::IO::Graphics::GmIDInt;
             using OpenSHC::Rendering::Colors::BGR24;
             using OpenSHC::Rendering::Colors::RGB15;

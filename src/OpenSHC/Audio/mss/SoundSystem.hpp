@@ -10,20 +10,20 @@
 #include "OpenSHC/Audio/mss/HSTREAM.hpp"
 #include "OpenSHC/Audio/mss/UnkSoundFlagsAndLoopCount.hpp"
 #include "OpenSHC/Audio/mss/_enums/SHC_SoundStreamInt.hpp"
+#include "OpenSHC/DE/SHCDE/eMusicIDsInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
-#include "OpenSHC/_SHCDE/eMusicIDsInt.hpp"
 #include "WinDef.h"
 
 namespace OpenSHC {
 namespace Audio {
     namespace mss {
 
-        using OpenSHC::_SHCDE::eMusicIDsInt;
         using OpenSHC::Audio::mss::HDIGDRIVER;
         using OpenSHC::Audio::mss::HSAMPLE;
         using OpenSHC::Audio::mss::HSTREAM;
         using OpenSHC::Audio::mss::UnkSoundFlagsAndLoopCount;
         using OpenSHC::Audio::mss::_enums::SHC_SoundStreamInt;
+        using OpenSHC::DE::SHCDE::eMusicIDsInt;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)

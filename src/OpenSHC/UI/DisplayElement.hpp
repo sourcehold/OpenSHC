@@ -5,15 +5,15 @@
 
 #pragma once
 
+#include "OpenSHC/DE/SHCDE/eOnScreenTextInt.hpp"
 #include "OpenSHC/UI/DisplayElementRenderFunc.hpp"
 #include "OpenSHC/UI/Enums/DisplayElementIDInt.hpp"
 #include "OpenSHC/UI/Enums/DisplayElementPositionModifierInt.hpp"
-#include "OpenSHC/_SHCDE/eOnScreenTextInt.hpp"
 
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::_SHCDE::eOnScreenTextInt;
+    using OpenSHC::DE::SHCDE::eOnScreenTextInt;
     using OpenSHC::UI::DisplayElementRenderFunc;
     using OpenSHC::UI::Enums::DisplayElementIDInt;
     using OpenSHC::UI::Enums::DisplayElementPositionModifierInt;

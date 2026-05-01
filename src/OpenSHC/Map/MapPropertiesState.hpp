@@ -6,6 +6,7 @@
 #pragma once
 
 #include "OpenSHC/AI/Siege/SiegeInformation.hpp"
+#include "OpenSHC/DE/SHCDE/eMappersInt.hpp"
 #include "OpenSHC/Game/Scenario/BarracksRecruitabilityShort.hpp"
 #include "OpenSHC/Game/ScenarioEvents/InGameEventExtra.hpp"
 #include "OpenSHC/Game/ScenarioEvents/InGameEventUnionVersion.hpp"
@@ -15,13 +16,12 @@
 #include "OpenSHC/Game/TradeableResourcesSection.hpp"
 #include "OpenSHC/Map/MapType2Int.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
-#include "OpenSHC/_SHCDE/eMappersInt.hpp"
 
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::_SHCDE::eMappersInt;
     using OpenSHC::AI::Siege::SiegeInformation;
+    using OpenSHC::DE::SHCDE::eMappersInt;
     using OpenSHC::Game::TradeableResourcesSection;
     using OpenSHC::Game::Scenario::BarracksRecruitabilityShort;
     using OpenSHC::Game::ScenarioEvents::InGameEventExtra;

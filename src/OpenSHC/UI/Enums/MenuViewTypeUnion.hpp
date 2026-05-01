@@ -5,14 +5,14 @@
 
 #pragma once
 
+#include "OpenSHC/DE/SHCDE/eAppModesInt.hpp"
 #include "OpenSHC/UI/Enums/MenuViewTypeInt.hpp"
-#include "OpenSHC/_SHCDE/eAppModesInt.hpp"
 
 namespace OpenSHC {
 namespace UI {
     namespace Enums {
 
-        using OpenSHC::_SHCDE::eAppModesInt;
+        using OpenSHC::DE::SHCDE::eAppModesInt;
         using OpenSHC::UI::Enums::MenuViewTypeInt;
 
 #pragma pack(push, 1)

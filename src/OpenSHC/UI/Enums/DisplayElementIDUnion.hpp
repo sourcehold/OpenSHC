@@ -5,14 +5,14 @@
 
 #pragma once
 
+#include "OpenSHC/DE/SHCDE/eOnScreenTextInt.hpp"
 #include "OpenSHC/UI/Enums/DisplayElementIDInt.hpp"
-#include "OpenSHC/_SHCDE/eOnScreenTextInt.hpp"
 
 namespace OpenSHC {
 namespace UI {
     namespace Enums {
 
-        using OpenSHC::_SHCDE::eOnScreenTextInt;
+        using OpenSHC::DE::SHCDE::eOnScreenTextInt;
         using OpenSHC::UI::Enums::DisplayElementIDInt;
 
 #pragma pack(push, 1)

@@ -7,16 +7,16 @@
 
 #include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
 #include "OpenSHC/Commands/CommandBuildingTypeShort.hpp"
-#include "OpenSHC/SHDE/eMappersInt.hpp"
-#include "OpenSHC/_SHCDE/eMappersInt.hpp"
+#include "OpenSHC/DE/SHCDE/eMappersInt.hpp"
+#include "OpenSHC/DE/SHDE/eMappersInt.hpp"
 
 namespace OpenSHC {
 namespace Common {
 
-    using OpenSHC::_SHCDE::eMappersInt;
     using OpenSHC::Commands::CommandBuildingTypeInt;
     using OpenSHC::Commands::CommandBuildingTypeShort;
-    using OpenSHC::SHDE::eMappersInt;
+    using OpenSHC::DE::SHCDE::eMappersInt;
+    using OpenSHC::DE::SHDE::eMappersInt;
 
 #pragma pack(push, 1)
     // SIZE: 0x00000004

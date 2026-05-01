@@ -5,6 +5,7 @@
 
 #pragma once
 
+#include "OpenSHC/DE/SHCDE/eGMInt.hpp"
 #include "OpenSHC/IO/Graphics/GMFileHeaderColorpalette.hpp"
 #include "OpenSHC/IO/Graphics/GfxRef.hpp"
 #include "OpenSHC/IO/Graphics/GmIDInt.hpp"
@@ -14,14 +15,13 @@
 #include "OpenSHC/Text/FontRenderTypeInt.hpp"
 #include "OpenSHC/UI/Rendering/Range.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
-#include "OpenSHC/_SHCDE/eGMInt.hpp"
 #include "WinDef.h"
 
 namespace OpenSHC {
 namespace UI {
     namespace Rendering {
 
-        using OpenSHC::_SHCDE::eGMInt;
+        using OpenSHC::DE::SHCDE::eGMInt;
         using OpenSHC::IO::Graphics::GfxRef;
         using OpenSHC::IO::Graphics::GMFileHeaderColorpalette;
         using OpenSHC::IO::Graphics::GmIDInt;

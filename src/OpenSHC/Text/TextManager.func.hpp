@@ -2,17 +2,17 @@
   path: 'OpenSHC/Text/TextManager.func.hpp'
 */
 
+#include "OpenSHC/DE/SHCDE/eTextSectionsInt.hpp"
 #include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Text/TextAlignmentInt.hpp"
 #include "OpenSHC/Text/TextManager.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
-#include "OpenSHC/_SHCDE/eTextSectionsInt.hpp"
 #include "WinDef.h"
 namespace OpenSHC {
 namespace Text {
     namespace TextManager_Func {
 
-        using OpenSHC::_SHCDE::eTextSectionsInt;
+        using OpenSHC::DE::SHCDE::eTextSectionsInt;
         using OpenSHC::Rendering::Colors::BGR24;
         using OpenSHC::Text::TextAlignmentInt;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;

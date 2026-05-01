@@ -5,16 +5,16 @@
 #include "OpenSHC/Audio/mss/SoundSystem.hpp"
 #include "OpenSHC/Audio/mss/UnkSoundFlagsAndLoopCount.hpp"
 #include "OpenSHC/Audio/mss/_enums/SHC_SoundStreamInt.hpp"
+#include "OpenSHC/DE/SHCDE/eMusicIDsInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
-#include "OpenSHC/_SHCDE/eMusicIDsInt.hpp"
 namespace OpenSHC {
 namespace Audio {
     namespace mss {
         namespace SoundSystem_Func {
 
-            using OpenSHC::_SHCDE::eMusicIDsInt;
             using OpenSHC::Audio::mss::UnkSoundFlagsAndLoopCount;
             using OpenSHC::Audio::mss::_enums::SHC_SoundStreamInt;
+            using OpenSHC::DE::SHCDE::eMusicIDsInt;
             using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
             MACRO_FUNCTION_RESOLVER(

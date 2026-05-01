@@ -6,16 +6,16 @@
 #include "OpenSHC/Audio/SFX/SFXState.hpp"
 #include "OpenSHC/Audio/SFX/SoundEffectIDInt.hpp"
 #include "OpenSHC/Audio/SFX/SpeechEffectIDInt.hpp"
-#include "OpenSHC/_SHCDE/eSFXInt.hpp"
+#include "OpenSHC/DE/SHCDE/eSFXInt.hpp"
 namespace OpenSHC {
 namespace Audio {
     namespace SFX {
         namespace SFXState_Func {
 
-            using OpenSHC::_SHCDE::eSFXInt;
             using OpenSHC::Audio::SFX::AmbientSFXTypeInt;
             using OpenSHC::Audio::SFX::SoundEffectIDInt;
             using OpenSHC::Audio::SFX::SpeechEffectIDInt;
+            using OpenSHC::DE::SHCDE::eSFXInt;
 
             MACRO_FUNCTION_RESOLVER(
                 void (SFXState::*)(int), false, Address::SHC_3BB0A8C1_0x00449B20, &SFXState::freeMemoryAt)

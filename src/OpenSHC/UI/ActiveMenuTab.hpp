@@ -5,14 +5,14 @@
 
 #pragma once
 
+#include "OpenSHC/DE/SHCDE/eInBuildingModesInt.hpp"
 #include "OpenSHC/UI/Enums/BuildMenuTabTypeShort.hpp"
 #include "OpenSHC/UI/Enums/BuildingsAndStatusMenuTabTypeInt.hpp"
-#include "OpenSHC/_SHCDE/eInBuildingModesInt.hpp"
 
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::_SHCDE::eInBuildingModesInt;
+    using OpenSHC::DE::SHCDE::eInBuildingModesInt;
     using OpenSHC::UI::Enums::BuildingsAndStatusMenuTabTypeInt;
     using OpenSHC::UI::Enums::BuildMenuTabTypeShort;
 

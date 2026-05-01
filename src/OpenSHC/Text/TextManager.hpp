@@ -5,6 +5,7 @@
 
 #pragma once
 
+#include "OpenSHC/DE/SHCDE/eTextSectionsInt.hpp"
 #include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTargetInt.hpp"
 #include "OpenSHC/Text/FontSizeClass.hpp"
@@ -12,13 +13,12 @@
 #include "OpenSHC/Text/TextAlignmentInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 #include "OpenSHC/WindowsHelper/Enums/CodePageInt.hpp"
-#include "OpenSHC/_SHCDE/eTextSectionsInt.hpp"
 #include "WinDef.h"
 
 namespace OpenSHC {
 namespace Text {
 
-    using OpenSHC::_SHCDE::eTextSectionsInt;
+    using OpenSHC::DE::SHCDE::eTextSectionsInt;
     using OpenSHC::Rendering::Colors::BGR24;
     using OpenSHC::Rendering::Enums::RenderTargetInt;
     using OpenSHC::Text::FontSizeClass;
