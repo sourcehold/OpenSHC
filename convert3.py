@@ -125,7 +125,24 @@ enum_families, enum_orphans = collect_enum_families(objs)
 enum_families_dict = {f.name: f for f in enum_families}
 enum_family_names = [f.name for f in enum_families]
 
-for c in exporter.export_symbols(project.find_global_primary_symbol_defined_data_pairs_by_address(), destination="OpenSHC"):
+def is_symbol_addr_in_useful_range(addr):
+  if addr == 0x00618250:
+    return False
+  if addr < 0x005a6e20:
+    return False
+  if addr >= 0x005a6f00 and addr < 0x005b6004:
+    return False
+  if addr >= 0x00b93208 and addr < 0x00b94220:
+    return False
+  if addr >= 0x00b94228 and addr < 0x00b95778:
+    return False
+  if addr >= 0x00b383f0 and addr < 0x00b3868c:
+    return False
+  if addr >= 0x02427478:
+    return False
+  return True
+
+for c in exporter.export_symbols(((addr, symb, ddr,) for addr, symb, ddr in project.find_global_primary_symbol_defined_data_pairs_by_address() if is_symbol_addr_in_useful_range(addr)), destination="OpenSHC/Globals", namespace="OpenSHC"):
   collection.add(c)
 
 if args.export_helpers:
@@ -137,7 +154,7 @@ for cls in clsses:
 for ns in namespaced_functions:
   collection.add(*exporter.export_namespace(ns, export_bodies=args.export_cpp))
 
-collection.add(exporter.export_addresses(project.yield_raw_objects()))
+collection.add(exporter.export_addresses(project.yield_raw_objects(), include_address=is_symbol_addr_in_useful_range))
 
 class_paths = set(cls.location(ctx) for cls in clsses)
 
