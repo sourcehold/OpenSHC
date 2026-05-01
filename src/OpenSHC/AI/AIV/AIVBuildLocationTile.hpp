@@ -1,0 +1,24 @@
+/**
+  AUTO_GENERATED: DO NOT TOUCH THIS FILE
+  path: 'OpenSHC/AI/AIV/AIVBuildLocationTile.hpp'
+*/
+
+#pragma once
+
+namespace OpenSHC {
+namespace AI {
+    namespace AIV {
+
+#pragma pack(push, 1)
+        // SIZE: 0x00000004
+        typedef struct AIVBuildLocationTile {
+
+            int tile; // 0x00000000 length: 4
+
+        } AIVBuildLocationTile;
+#pragma pack(pop)
+
+        static_assert_cpp98_obj(sizeof(AIVBuildLocationTile) == 4, AIVBuildLocationTile);
+    } // namespace AIV
+} // namespace AI
+} // namespace OpenSHC

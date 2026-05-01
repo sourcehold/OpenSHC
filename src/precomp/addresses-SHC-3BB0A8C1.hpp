@@ -33021,7 +33021,7 @@ enum {
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004BAEC0 = 0x004BAEC0,
-    // label: FUN_004bb010
+    // label: isMapperAvailable
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004BB010 = 0x004BB010,
@@ -55340,7 +55340,7 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005364C0 = 0x005364C0,
-    // label: meth_0x536530
+    // label: getTunnelerIDOnlyIfFirstSelected
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536530 = 0x00536530,
@@ -77803,6 +77803,8 @@ enum {
     // location: OpenSHC/Meta
     // type: function
     SHC_3BB0A8C1_0x0059D7F2 = 0x0059D7F2,
+    // label: IMAGE_DIRECTORY_ENTRY_IAT
+    // location:
     // type: /pointer
     SHC_3BB0A8C1_0x0059E000 = 0x0059E000,
     // type: /pointer
@@ -78813,17 +78815,38 @@ enum {
     SHC_3BB0A8C1_0x0059E81C = 0x0059E81C,
     // type: /string
     SHC_3BB0A8C1_0x0059E830 = 0x0059E830,
+    // type: /double
+    SHC_3BB0A8C1_0x0059E840 = 0x0059E840,
+    // type: /double
+    SHC_3BB0A8C1_0x0059E848 = 0x0059E848,
+    // type: /double
+    SHC_3BB0A8C1_0x0059E850 = 0x0059E850,
+    // type: /double
+    SHC_3BB0A8C1_0x0059E858 = 0x0059E858,
+    // type: /double
+    SHC_3BB0A8C1_0x0059E860 = 0x0059E860,
     // label: GRAVITY
     // location:
+    // type: /double
     SHC_3BB0A8C1_0x0059E868 = 0x0059E868,
+    // type: /double
+    SHC_3BB0A8C1_0x0059E870 = 0x0059E870,
+    // type: /double
+    SHC_3BB0A8C1_0x0059E878 = 0x0059E878,
+    // type: /double
+    SHC_3BB0A8C1_0x0059E880 = 0x0059E880,
+    // type: /double
+    SHC_3BB0A8C1_0x0059E888 = 0x0059E888,
+    // type: /double
+    SHC_3BB0A8C1_0x0059E890 = 0x0059E890,
     // label: GRAVITY_DIV_2
     // location:
+    // type: /double
     SHC_3BB0A8C1_0x0059E898 = 0x0059E898,
     // label: SFX_BuildingsAreOnFireSire
-    // label: SFX_BuildingsAreOnFireSire2
     // location:
     // type: /string
-    SHC_3BB0A8C1_0x0059E89F = 0x0059E89F,
+    SHC_3BB0A8C1_0x0059E8A0 = 0x0059E8A0,
     // label: SFX_WeLostControlOfAGatehouse
     // location:
     // type: /string
@@ -80486,16 +80509,28 @@ enum {
     // location:
     // type: /char[20]
     SHC_3BB0A8C1_0x005A2758 = 0x005A2758,
+    // label: STR_EQUALS
+    // location:
     // type: /char[4]
     SHC_3BB0A8C1_0x005A276C = 0x005A276C,
+    // label: STR_PERCENTAGE
+    // location:
     // type: /char[4]
     SHC_3BB0A8C1_0x005A2770 = 0x005A2770,
+    // label: STR_CLOSE_BRACE
+    // location:
     // type: /char[4]
     SHC_3BB0A8C1_0x005A2774 = 0x005A2774,
+    // label: STR_OPEN_BRACE
+    // location:
     // type: /char[4]
     SHC_3BB0A8C1_0x005A2778 = 0x005A2778,
+    // label: STR_SLASH
+    // location:
     // type: /char[4]
     SHC_3BB0A8C1_0x005A277C = 0x005A277C,
+    // label: STR_FMT_D_SLASH_D
+    // location:
     // type: /char[8]
     SHC_3BB0A8C1_0x005A2780 = 0x005A2780,
     // label: SFX_TheRoundTable
@@ -80506,8 +80541,12 @@ enum {
     // location:
     // type: /char[16]
     SHC_3BB0A8C1_0x005A2798 = 0x005A2798,
+    // label: STR_AutoBackupMap
+    // location:
     // type: /char[20]
     SHC_3BB0A8C1_0x005A27A8 = 0x005A27A8,
+    // label: STR_Mission22Map
+    // location:
     // type: /char[16]
     SHC_3BB0A8C1_0x005A27BC = 0x005A27BC,
     // label: SFX_YourAllies
@@ -85488,6 +85527,8 @@ enum {
     SHC_3BB0A8C1_0x005ACE48 = 0x005ACE48,
     // type: /double
     SHC_3BB0A8C1_0x005ACE50 = 0x005ACE50,
+    // type: /longdouble
+    SHC_3BB0A8C1_0x005ACE5A = 0x005ACE5A,
     // type: /double
     SHC_3BB0A8C1_0x005AE4A0 = 0x005AE4A0,
     // type: /double
@@ -89816,146 +89857,42 @@ enum {
     SHC_3BB0A8C1_0x005B3FA8 = 0x005B3FA8,
     // type: /pointer
     SHC_3BB0A8C1_0x005B3FC8 = 0x005B3FC8,
-    // type: /dword
+    // type: /pointer
+    SHC_3BB0A8C1_0x005B41AC = 0x005B41AC,
+    // type: /pointer
+    SHC_3BB0A8C1_0x005B41B0 = 0x005B41B0,
+    // type: /pointer
+    SHC_3BB0A8C1_0x005B41D0 = 0x005B41D0,
+    // label: IMAGE_DIRECTORY_ENTRY_IMPORT
+    // location:
+    // type: winnt/IMAGE_IMPORT_DESCRIPTOR
     SHC_3BB0A8C1_0x005B41D4 = 0x005B41D4,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B41D8 = 0x005B41D8,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B41DC = 0x005B41DC,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B41E0 = 0x005B41E0,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B41E4 = 0x005B41E4,
-    // type: /dword
+    // type: winnt/IMAGE_IMPORT_DESCRIPTOR
     SHC_3BB0A8C1_0x005B41E8 = 0x005B41E8,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B41EC = 0x005B41EC,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B41F0 = 0x005B41F0,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B41F4 = 0x005B41F4,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B41F8 = 0x005B41F8,
-    // type: /dword
+    // type: winnt/IMAGE_IMPORT_DESCRIPTOR
     SHC_3BB0A8C1_0x005B41FC = 0x005B41FC,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B4200 = 0x005B4200,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B4204 = 0x005B4204,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B4208 = 0x005B4208,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B420C = 0x005B420C,
-    // type: /dword
+    // type: winnt/IMAGE_IMPORT_DESCRIPTOR
     SHC_3BB0A8C1_0x005B4210 = 0x005B4210,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B4214 = 0x005B4214,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B4218 = 0x005B4218,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B421C = 0x005B421C,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B4220 = 0x005B4220,
-    // type: /dword
+    // type: winnt/IMAGE_IMPORT_DESCRIPTOR
     SHC_3BB0A8C1_0x005B4224 = 0x005B4224,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B4228 = 0x005B4228,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B422C = 0x005B422C,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B4230 = 0x005B4230,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B4234 = 0x005B4234,
-    // type: /dword
+    // type: winnt/IMAGE_IMPORT_DESCRIPTOR
     SHC_3BB0A8C1_0x005B4238 = 0x005B4238,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B423C = 0x005B423C,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B4240 = 0x005B4240,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B4244 = 0x005B4244,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B4248 = 0x005B4248,
-    // type: /dword
+    // type: winnt/IMAGE_IMPORT_DESCRIPTOR
     SHC_3BB0A8C1_0x005B424C = 0x005B424C,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B4250 = 0x005B4250,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B4254 = 0x005B4254,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B4258 = 0x005B4258,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B425C = 0x005B425C,
-    // type: /dword
+    // type: winnt/IMAGE_IMPORT_DESCRIPTOR
     SHC_3BB0A8C1_0x005B4260 = 0x005B4260,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B4264 = 0x005B4264,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B4268 = 0x005B4268,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B426C = 0x005B426C,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B4270 = 0x005B4270,
-    // type: /dword
+    // type: winnt/IMAGE_IMPORT_DESCRIPTOR
     SHC_3BB0A8C1_0x005B4274 = 0x005B4274,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B4278 = 0x005B4278,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B427C = 0x005B427C,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B4280 = 0x005B4280,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B4284 = 0x005B4284,
-    // type: /dword
+    // type: winnt/IMAGE_IMPORT_DESCRIPTOR
     SHC_3BB0A8C1_0x005B4288 = 0x005B4288,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B428C = 0x005B428C,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B4290 = 0x005B4290,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B4294 = 0x005B4294,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B4298 = 0x005B4298,
-    // type: /dword
+    // type: winnt/IMAGE_IMPORT_DESCRIPTOR
     SHC_3BB0A8C1_0x005B429C = 0x005B429C,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B42A0 = 0x005B42A0,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B42A4 = 0x005B42A4,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B42A8 = 0x005B42A8,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B42AC = 0x005B42AC,
-    // type: /dword
+    // type: winnt/IMAGE_IMPORT_DESCRIPTOR
     SHC_3BB0A8C1_0x005B42B0 = 0x005B42B0,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B42B4 = 0x005B42B4,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B42B8 = 0x005B42B8,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B42BC = 0x005B42BC,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B42C0 = 0x005B42C0,
-    // type: /dword
+    // type: winnt/IMAGE_IMPORT_DESCRIPTOR
     SHC_3BB0A8C1_0x005B42C4 = 0x005B42C4,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B42C8 = 0x005B42C8,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B42CC = 0x005B42CC,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B42D0 = 0x005B42D0,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B42D4 = 0x005B42D4,
-    // type: /dword
+    // type: winnt/IMAGE_IMPORT_DESCRIPTOR
     SHC_3BB0A8C1_0x005B42D8 = 0x005B42D8,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B42DC = 0x005B42DC,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B42E0 = 0x005B42E0,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B42E4 = 0x005B42E4,
-    // type: /dword
-    SHC_3BB0A8C1_0x005B42E8 = 0x005B42E8,
     // type: /dword
     SHC_3BB0A8C1_0x005B4300 = 0x005B4300,
     // type: /dword
@@ -94082,7 +94019,7 @@ enum {
     // location:
     // type: /pointer[32]
     SHC_3BB0A8C1_0x00B98710 = 0x00B98710,
-    // label: GMImageHeaders
+    // label: DAT_GMImageHeaders
     // location:
     // type: OpenSHC/IO/Graphics/ImageHeader[66000]
     SHC_3BB0A8C1_0x00B98790 = 0x00B98790,
@@ -94090,11 +94027,11 @@ enum {
     SHC_3BB0A8C1_0x00C9A490 = 0x00C9A490,
     // type: /pointer[32]
     SHC_3BB0A8C1_0x00C9A510 = 0x00C9A510,
-    // label: GMImageSizes
+    // label: DAT_GMImageSizes
     // location:
     // type: /int[116000]
     SHC_3BB0A8C1_0x00C9A590 = 0x00C9A590,
-    // label: GMImageOffsets
+    // label: DAT_GMImageOffsets
     // location:
     // type: /int[116000]
     SHC_3BB0A8C1_0x00D0BA10 = 0x00D0BA10,
@@ -94958,6 +94895,8 @@ enum {
     // label: DAT_SkMasterDataEntries
     // location:
     SHC_3BB0A8C1_0x00DF663C = 0x00DF663C,
+    // label: CHAR_ARRAY_00eb0ab0
+    // location:
     // type: /char[64]
     SHC_3BB0A8C1_0x00EB0AB0 = 0x00EB0AB0,
     // type: /int[9]
@@ -95002,6 +94941,8 @@ enum {
     SHC_3BB0A8C1_0x00EB9AC0 = 0x00EB9AC0,
     // type: /dword
     SHC_3BB0A8C1_0x00EB9AC4 = 0x00EB9AC4,
+    // label: CHAR_ARRAY_00eb9ac8
+    // location:
     // type: /char[32]
     SHC_3BB0A8C1_0x00EB9AC8 = 0x00EB9AC8,
     // type: /int
@@ -95149,6 +95090,10 @@ enum {
     // label: DAT_TacticalPowersHelpTextDisplayBool
     // location:
     SHC_3BB0A8C1_0x00ED3128 = 0x00ED3128,
+    // type: /dword
+    SHC_3BB0A8C1_0x00ED3138 = 0x00ED3138,
+    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
+    SHC_3BB0A8C1_0x00ED313C = 0x00ED313C,
     // type: /int
     SHC_3BB0A8C1_0x00ED3144 = 0x00ED3144,
     // type: /undefined4
@@ -97721,6 +97666,8 @@ enum {
     SHC_3BB0A8C1_0x02429238 = 0x02429238,
     // type: /pointer
     SHC_3BB0A8C1_0x0242923C = 0x0242923C,
+    // label: IMAGE_DIRECTORY_ENTRY_RESOURCE
+    // location:
     // type: PE/IMAGE_RESOURCE_DIRECTORY
     SHC_3BB0A8C1_0x0242A000 = 0x0242A000,
     // type: PE/IMAGE_RESOURCE_DIRECTORY_ENTRY
