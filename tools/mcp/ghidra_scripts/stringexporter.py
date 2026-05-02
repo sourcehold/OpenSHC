@@ -1,5 +1,6 @@
-#TODO write a description for this script
-#@author 
+#This script exports .rdata literal strings and addresses into a file. 
+# Labels are either default Ghidra labels or labels set by users.
+#@author Gynt
 #@category _OPENSHC.TOOLS.DECOMPILATION
 #@keybinding 
 #@menupath 
@@ -7,7 +8,6 @@
 #@runtime Jython
 
 
-#TODO Add User Code Here
 
 import re
 PATTERN = re.compile("[^a-zA-Z0-9_]+")
