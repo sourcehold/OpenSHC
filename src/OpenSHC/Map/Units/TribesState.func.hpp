@@ -314,8 +314,8 @@ namespace Map {
                 undefined4 (TribesState::*)(int), false, Address::SHC_3BB0A8C1_0x00524B30, &TribesState::meth_0x524b30)
             meth_0x524b30;
 
-            MACRO_FUNCTION_RESOLVER(undefined (TribesState::*)(int), false, Address::SHC_3BB0A8C1_0x00524BF0,
-                &TribesState::getTribeAliveStatus)
+            MACRO_FUNCTION_RESOLVER(
+                int (TribesState::*)(int), false, Address::SHC_3BB0A8C1_0x00524BF0, &TribesState::getTribeAliveStatus)
             getTribeAliveStatus;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (TribesState::*)(int, uint, uint, uint, uint), false,

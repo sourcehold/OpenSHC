@@ -53,21 +53,21 @@ namespace Text {
 
         void handleRightKey();
 
-        undefined handleLeftKey();
+        void handleLeftKey();
 
-        undefined FUN_004698c0();
+        void FUN_004698c0();
 
         void moveCursorToEnd();
 
         void FUN_004698f0(int param_1, int param_2);
 
-        undefined FUN_00469930();
+        void FUN_00469930(int param_1, int param_2);
 
         void handleCharacterIntoInputBuffer(int characterCode);
 
         uint FUN_004699e0();
 
-        undefined handleBackspace();
+        void handleBackspace();
 
         void clearTextAndCursor();
 
@@ -77,7 +77,7 @@ namespace Text {
 
         void handleDeleteKey();
 
-        undefined handleCharacterCode(undefined1 characterCode);
+        void handleCharacterCode(byte characterCode);
     };
 
     static_assert_cpp98_obj(sizeof(UserTextHandler) == 4372, UserTextHandler);

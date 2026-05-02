@@ -1287,9 +1287,9 @@ namespace Global_Func {
     PlayJokeVideoBasedOnCurrentTimeAndPlayTime;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(HINSTANCE hInstance, undefined4 param_2, char* commandLineArguments, undefined4 param_4),
-        false, Address::SHC_3BB0A8C1_0x0057BE10, &OpenSHC::Global::MainGameLoop)
-    MainGameLoop;
+        int(__stdcall*)(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd), false,
+        Address::SHC_3BB0A8C1_0x0057BE10, &OpenSHC::Global::WinMain)
+    WinMain;
 
     MACRO_FUNCTION_RESOLVER(
         void(__cdecl*)(ulong param_1), false, Address::SHC_3BB0A8C1_0x005816EE, &OpenSHC::Global::SetRNGSeed)

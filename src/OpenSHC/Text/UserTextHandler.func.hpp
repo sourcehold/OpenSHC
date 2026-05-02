@@ -36,11 +36,11 @@ namespace Text {
         handleRightKey;
 
         MACRO_FUNCTION_RESOLVER(
-            undefined (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x004698A0, &UserTextHandler::handleLeftKey)
+            void (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x004698A0, &UserTextHandler::handleLeftKey)
         handleLeftKey;
 
         MACRO_FUNCTION_RESOLVER(
-            undefined (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x004698C0, &UserTextHandler::FUN_004698c0)
+            void (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x004698C0, &UserTextHandler::FUN_004698c0)
         FUN_004698c0;
 
         MACRO_FUNCTION_RESOLVER(
@@ -51,8 +51,8 @@ namespace Text {
             &UserTextHandler::FUN_004698f0)
         FUN_004698f0;
 
-        MACRO_FUNCTION_RESOLVER(
-            undefined (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x00469930, &UserTextHandler::FUN_00469930)
+        MACRO_FUNCTION_RESOLVER(void (UserTextHandler::*)(int, int), false, Address::SHC_3BB0A8C1_0x00469930,
+            &UserTextHandler::FUN_00469930)
         FUN_00469930;
 
         MACRO_FUNCTION_RESOLVER(void (UserTextHandler::*)(int), false, Address::SHC_3BB0A8C1_0x00469980,
@@ -63,8 +63,8 @@ namespace Text {
             uint (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x004699E0, &UserTextHandler::FUN_004699e0)
         FUN_004699e0;
 
-        MACRO_FUNCTION_RESOLVER(undefined (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x004715A0,
-            &UserTextHandler::handleBackspace)
+        MACRO_FUNCTION_RESOLVER(
+            void (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x004715A0, &UserTextHandler::handleBackspace)
         handleBackspace;
 
         MACRO_FUNCTION_RESOLVER(
@@ -83,7 +83,7 @@ namespace Text {
             void (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x00472D00, &UserTextHandler::handleDeleteKey)
         handleDeleteKey;
 
-        MACRO_FUNCTION_RESOLVER(undefined (UserTextHandler::*)(undefined1), false, Address::SHC_3BB0A8C1_0x00474110,
+        MACRO_FUNCTION_RESOLVER(void (UserTextHandler::*)(byte), false, Address::SHC_3BB0A8C1_0x00474110,
             &UserTextHandler::handleCharacterCode)
         handleCharacterCode;
 

@@ -690,8 +690,7 @@ namespace Global {
 
     void __stdcall PlayJokeVideoBasedOnCurrentTimeAndPlayTime();
 
-    void __stdcall MainGameLoop(
-        HINSTANCE hInstance, undefined4 param_2, char* commandLineArguments, undefined4 param_4);
+    int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd);
 
     void __cdecl SetRNGSeed(ulong param_1);
 

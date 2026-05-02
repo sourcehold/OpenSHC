@@ -72082,7 +72082,7 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x0057B9C0 = 0x0057B9C0,
-    // label: MainGameLoop
+    // label: WinMain
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x0057BE10 = 0x0057BE10,

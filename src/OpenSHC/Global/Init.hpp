@@ -9,37 +9,37 @@ namespace OpenSHC {
 namespace Global {
     namespace Init {
 
-        void* __thiscall Constructor_Empty();
+        void* __cdecl Constructor_Empty();
 
-        undefined __cdecl Constructor_MenuView_Reduced();
+        void __stdcall Constructor_MenuView_Reduced();
 
         void __stdcall Constructor_MenuView_IntroLogos();
 
-        undefined __cdecl Constructor_MenuView_HistoricMissionSelect();
+        void __stdcall Constructor_MenuView_HistoricMissionSelect();
 
         void __stdcall Constructor_MenuView_UnusedEconomicMissionSelect();
 
         void __stdcall Constructor_MenuView_UnusedSomeMissionStartUnk();
 
-        undefined __cdecl Constructor_MenuView_UnusedOldTitleMenu();
+        void __stdcall Constructor_MenuView_UnusedOldTitleMenu();
 
         void __stdcall Constructor_MenuView_MpConnection();
 
-        undefined __cdecl Constructor_MenuView_Unknown21();
+        void __stdcall Constructor_MenuView_Unknown21();
 
-        undefined __cdecl Constructor_MenuView_LobbyMenu();
+        void __stdcall Constructor_MenuView_LobbyMenu();
 
-        undefined __cdecl Constructor_MenuView_Unknown33();
+        void __stdcall Constructor_MenuView_Unknown33();
 
-        undefined __cdecl Constructor_MenuView_Unknown61ReturnToSkrimishMenuUnk();
+        void __stdcall Constructor_MenuView_Unknown61ReturnToSkrimishMenuUnk();
 
-        undefined __cdecl Constructor_MenuView_SingleplayerMapChoice();
+        void __stdcall Constructor_MenuView_SingleplayerMapChoice();
 
         void __stdcall Constructor_MenuView_Unknown49DoesNothingUnk();
 
-        undefined __cdecl Constructor_MenuView_MapEditorLandscaping();
+        void __stdcall Constructor_MenuView_MapEditorLandscaping();
 
-        undefined __cdecl Constructor_MenuView_BuildMenu();
+        void __stdcall Constructor_MenuView_BuildMenu();
 
         void __stdcall Constructor_MenuView_BuildingAndStatusMenu();
 
@@ -47,13 +47,13 @@ namespace Global {
 
         void __stdcall Constructor_MenuView_MapEditorProperties();
 
-        undefined __cdecl Constructor_MenuView_NewMapMaptype();
+        void __stdcall Constructor_MenuView_NewMapMaptype();
 
         void __stdcall Constructor_MenuView_NewMapMapsize();
 
         void __stdcall Constructor_MenuView_UnusedChooseAvailableKeeps();
 
-        undefined __cdecl Constructor_MenuView_UnusedChooseGameType();
+        void __stdcall Constructor_MenuView_UnusedChooseGameType();
 
         void __stdcall Constructor_MenuView_UnusedCreateSiege();
 
@@ -61,17 +61,17 @@ namespace Global {
 
         void __stdcall Constructor_MenuView_CampaignUnk();
 
-        undefined __cdecl Constructor_MenuView_ScenarioDescription();
+        void __stdcall Constructor_MenuView_ScenarioDescription();
 
         void __stdcall Constructor_MenuView_MissionFinishedTransition();
 
         void __stdcall Constructor_MenuView_GameLost();
 
-        undefined __cdecl Constructor_MenuView_UnusedExtremeAd();
+        void __stdcall Constructor_MenuView_UnusedExtremeAd();
 
         void __stdcall Constructor_MenuView_EditScenario();
 
-        undefined __cdecl Constructor_MenuView_GameStartEnterName();
+        void __stdcall Constructor_MenuView_GameStartEnterName();
 
         void __stdcall Constructor_MenuView_MainMenu();
 
@@ -79,7 +79,7 @@ namespace Global {
 
         void __stdcall Constructor_MenuView_UnusedEconomicGametypeSelect();
 
-        undefined __cdecl Constructor_MenuView_CustomScenarios();
+        void __stdcall Constructor_MenuView_CustomScenarios();
 
         void __stdcall Constructor_MenuView_Credits();
 
@@ -89,77 +89,77 @@ namespace Global {
 
         void __stdcall Constructor_MenuView_HistoricMissionPicture();
 
-        undefined __cdecl Constructor_MenuView_HistoricMissionIntro();
+        void __stdcall Constructor_MenuView_HistoricMissionIntro();
 
-        undefined __cdecl Constructor_MenuView_HistoricCampaignIntro();
+        void __stdcall Constructor_MenuView_HistoricCampaignIntro();
 
-        undefined __cdecl Constructor_MenuView_HistoricCampaignOutro();
+        void __stdcall Constructor_MenuView_HistoricCampaignOutro();
 
-        undefined __cdecl Constructor_MenuView_UnusedSelectRandomNumberOfEnemies();
+        void __stdcall Constructor_MenuView_UnusedSelectRandomNumberOfEnemies();
 
-        undefined __cdecl Constructor_MenuView_SelectCrusade();
+        void __stdcall Constructor_MenuView_SelectCrusade();
 
-        undefined __cdecl Constructor_MenuView_CrusadeMissionIntro();
+        void __stdcall Constructor_MenuView_CrusadeMissionIntro();
 
-        undefined __cdecl Constructor_MenuView_CrusadeMap();
+        void __stdcall Constructor_MenuView_CrusadeMap();
 
-        undefined __cdecl Constructor_MenuView_RankingGames();
+        void __stdcall Constructor_MenuView_RankingGames();
 
-        undefined __cdecl Constructor_MenuView_CrusadeEndscreen();
+        void __stdcall Constructor_MenuView_CrusadeEndscreen();
 
-        undefined __cdecl Constructor_Menu_Unknown_ManyThings();
+        void __stdcall Constructor_Menu_Unknown_ManyThings();
 
-        undefined __cdecl Constructor_Menu_IntroLogos();
+        void __stdcall Constructor_Menu_IntroLogos();
 
-        undefined __cdecl Constructor_Menu_IntroVideo();
+        void __stdcall Constructor_Menu_IntroVideo();
 
-        undefined __cdecl Constructor_Menu_StartEnterName();
+        void __stdcall Constructor_Menu_StartEnterName();
 
         void __stdcall Constructor_Menu_MainMenu();
 
-        undefined __cdecl Constructor_Menu_HistoricCampaignSelect();
+        void __stdcall Constructor_Menu_HistoricCampaignSelect();
 
-        undefined __cdecl Constructor_Menu_UnusedEconomicGametypeSelect();
+        void __stdcall Constructor_Menu_UnusedEconomicGametypeSelect();
 
-        undefined __cdecl Constructor_Menu_CustomScenarios();
+        void __stdcall Constructor_Menu_CustomScenarios();
 
-        undefined __cdecl Constructor_Menu_UnusedSomeMissionStartUnk();
+        void __stdcall Constructor_Menu_UnusedSomeMissionStartUnk();
 
         void __stdcall Constructor_Menu_HistoricMissionSelect();
 
         void __stdcall Constructor_Menu_UnusedEconomicMissionSelect();
 
-        undefined __cdecl Constructor_Menu_UnusedSetName();
+        void __stdcall Constructor_Menu_UnusedSetName();
 
-        undefined __cdecl Constructor_Menu_UnusedOldTitleMenu();
+        void __stdcall Constructor_Menu_UnusedOldTitleMenu();
 
-        undefined __cdecl Constructor_Menu_LobbyMenu();
+        void __stdcall Constructor_Menu_LobbyMenu();
 
-        undefined __cdecl Constructor_Menu_SkirmishConnectionOptions();
+        void __stdcall Constructor_Menu_SkirmishConnectionOptions();
 
-        undefined __cdecl Constructor_Menu_SkirmishPlayOptions();
+        void __stdcall Constructor_Menu_SkirmishPlayOptions();
 
-        undefined __cdecl Constructor_Menu_SendMapTo();
+        void __stdcall Constructor_Menu_SendMapTo();
 
-        undefined __cdecl Constructor_Menu_ReceiveMapFrom();
+        void __stdcall Constructor_Menu_ReceiveMapFrom();
 
-        undefined __cdecl Constructor_Menu_UnusedSelectRandomNumberOfEnemies();
+        void __stdcall Constructor_Menu_UnusedSelectRandomNumberOfEnemies();
 
-        undefined __cdecl Constructor_Menu_ChooseRandomNumberOfEnemies();
+        void __stdcall Constructor_Menu_ChooseRandomNumberOfEnemies();
 
         void __stdcall Constructor_Menu_SelectCrusade();
 
-        undefined __cdecl Constructor_Menu_BasicAiLordSelect();
+        void __stdcall Constructor_Menu_BasicAiLordSelect();
 
-        undefined __cdecl Constructor_Menu_ExtendedAiLordSelect();
+        void __stdcall Constructor_Menu_ExtendedAiLordSelect();
 
-        undefined __cdecl Constructor_Menu_Roundtable();
+        void __stdcall Constructor_Menu_Roundtable();
 
-        undefined __cdecl Constructor_Menu_OverlaySlider();
+        void __stdcall Constructor_Menu_OverlaySlider();
 
-        undefined __cdecl Constructor_Menu_UnusedWinCondition();
+        void __stdcall Constructor_Menu_UnusedWinCondition();
 
-        undefined __cdecl Constructor_Menu_SingleplayerMapChoice();
+        void __stdcall Constructor_Menu_SingleplayerMapChoice();
 
         void __stdcall Constructor_Menu_MapEditorProperties();
 
@@ -171,7 +171,7 @@ namespace Global {
 
         void __stdcall Constructor_Menu_UnusedChooseGameType();
 
-        undefined __cdecl Constructor_Menu_UnusedCreateSiege();
+        void __stdcall Constructor_Menu_UnusedCreateSiege();
 
         void __stdcall Constructor_Menu_Unknown26CampaignRelatedUnk();
 
@@ -179,317 +179,317 @@ namespace Global {
 
         void __stdcall Constructor_Menu_UnusedExtremeAd();
 
-        undefined __cdecl Constructor_Menu_HistoricCampaignIntroAndMissionPicture();
+        void __stdcall Constructor_Menu_HistoricCampaignIntroAndMissionPicture();
 
-        undefined __cdecl Constructor_Menu_HistoricCampaignOutroAndMissionIntro();
+        void __stdcall Constructor_Menu_HistoricCampaignOutroAndMissionIntro();
 
         void __stdcall Constructor_Menu_ScenarioDescription();
 
-        undefined __cdecl Constructor_Menu_CrusadeMissionIntro();
+        void __stdcall Constructor_Menu_CrusadeMissionIntro();
 
-        undefined __cdecl Constructor_Menu_CrusadeMap();
+        void __stdcall Constructor_Menu_CrusadeMap();
 
-        undefined __cdecl Constructor_Menu_RankingGames();
+        void __stdcall Constructor_Menu_RankingGames();
 
-        undefined __cdecl Constructor_Menu_CrusadeEndscreen();
+        void __stdcall Constructor_Menu_CrusadeEndscreen();
 
         void __stdcall Constructor_Menu_MissionFinishedTransition();
 
         void __stdcall Constructor_Menu_GameLostUnk();
 
-        undefined __cdecl Constructor_Menu_ChooseNetworkServiceProvider();
+        void __stdcall Constructor_Menu_ChooseNetworkServiceProvider();
 
-        undefined __cdecl Constructor_Menu_FindingNetworkSessions();
+        void __stdcall Constructor_Menu_FindingNetworkSessions();
 
-        undefined __cdecl Constructor_Menu_WaitingForHost();
+        void __stdcall Constructor_Menu_WaitingForHost();
 
-        undefined __cdecl Constructor_Menu_BuildMenu();
+        void __stdcall Constructor_Menu_BuildMenu();
 
-        undefined __cdecl Constructor_Menu_BuildingAndStatusMenu();
+        void __stdcall Constructor_Menu_BuildingAndStatusMenu();
 
-        undefined __cdecl Constructor_Menu_PauseMenu();
+        void __stdcall Constructor_Menu_PauseMenu();
 
-        undefined __cdecl Constructor_Menu_PauseMenuOptions();
+        void __stdcall Constructor_Menu_PauseMenuOptions();
 
-        undefined __cdecl Constructor_Menu_MainMenuOptions();
+        void __stdcall Constructor_Menu_MainMenuOptions();
 
-        undefined __cdecl Constructor_Menu_GameplayOptions();
+        void __stdcall Constructor_Menu_GameplayOptions();
 
-        undefined __cdecl Constructor_Menu_VideoOptions();
+        void __stdcall Constructor_Menu_VideoOptions();
 
-        undefined __cdecl Constructor_Menu_SoundOptions();
+        void __stdcall Constructor_Menu_SoundOptions();
 
-        undefined __cdecl Constructor_Menu_IdentityOptions();
+        void __stdcall Constructor_Menu_IdentityOptions();
 
-        undefined __cdecl Constructor_Menu_EnterTitleOnGameStart();
+        void __stdcall Constructor_Menu_EnterTitleOnGameStart();
 
-        undefined __cdecl Constructor_Menu_NetworkOptions();
+        void __stdcall Constructor_Menu_NetworkOptions();
 
-        undefined __cdecl Constructor_Menu_LoadMap();
+        void __stdcall Constructor_Menu_LoadMap();
 
-        undefined __cdecl Constructor_Menu_SaveMap();
+        void __stdcall Constructor_Menu_SaveMap();
 
-        undefined __cdecl Constructor_Menu_YesNoDialog();
+        void __stdcall Constructor_Menu_YesNoDialog();
 
-        undefined __cdecl Constructor_Menu_QuitDialog();
+        void __stdcall Constructor_Menu_QuitDialog();
 
-        undefined __cdecl Constructor_Menu_DeleteGameRecord();
+        void __stdcall Constructor_Menu_DeleteGameRecord();
 
-        undefined __cdecl Constructor_Menu_TacticalPowerBar();
+        void __stdcall Constructor_Menu_TacticalPowerBar();
 
-        undefined __cdecl Constructor_Menu_ProgressBarBox();
+        void __stdcall Constructor_Menu_ProgressBarBox();
 
-        undefined __cdecl Constructor_Menu_Chat();
+        void __stdcall Constructor_Menu_Chat();
 
-        undefined __cdecl Constructor_Menu_Allies();
+        void __stdcall Constructor_Menu_Allies();
 
-        undefined __cdecl Constructor_Menu_AlliesOrder();
+        void __stdcall Constructor_Menu_AlliesOrder();
 
-        undefined __cdecl Constructor_Menu_AlliesRequestGoods();
+        void __stdcall Constructor_Menu_AlliesRequestGoods();
 
-        undefined __cdecl Constructor_Menu_AlliesSendGoods();
+        void __stdcall Constructor_Menu_AlliesSendGoods();
 
-        undefined __cdecl Constructor_Menu_GreatestLord();
+        void __stdcall Constructor_Menu_GreatestLord();
 
-        undefined __cdecl Constructor_Menu_OnlineQuitGame();
+        void __stdcall Constructor_Menu_OnlineQuitGame();
 
-        undefined __cdecl Constructor_Menu_OnlineVoteQuitGame();
+        void __stdcall Constructor_Menu_OnlineVoteQuitGame();
 
-        undefined __cdecl Constructor_Menu_DebugModals();
+        void __stdcall Constructor_Menu_DebugModals();
 
-        undefined __cdecl Constructor_Menu_DisplayAiLordMessage();
+        void __stdcall Constructor_Menu_DisplayAiLordMessage();
 
-        undefined __cdecl Constructor_Menu_TutorialBox();
+        void __stdcall Constructor_Menu_TutorialBox();
 
-        undefined __cdecl Constructor_Menu_TutorialBoxWithLeave();
+        void __stdcall Constructor_Menu_TutorialBoxWithLeave();
 
         void __stdcall Constructor_Menu_UnusedHelpTextEditor();
 
-        undefined __cdecl Constructor_Menu_BuildingHelpText();
+        void __stdcall Constructor_Menu_BuildingHelpText();
 
-        undefined __cdecl Constructor_Menu_InGameHelpText();
+        void __stdcall Constructor_Menu_InGameHelpText();
 
-        undefined __cdecl Constructor_Menu_DisplayScenarioHelpText();
+        void __stdcall Constructor_Menu_DisplayScenarioHelpText();
 
-        undefined __cdecl Constructor_Menu_Credits();
+        void __stdcall Constructor_Menu_Credits();
 
-        undefined __cdecl Constructor_Menu_MapDescriptionEditor();
+        void __stdcall Constructor_Menu_MapDescriptionEditor();
 
-        undefined __cdecl Constructor_Menu_UnusedDemoBuyItScreen();
+        void __stdcall Constructor_Menu_UnusedDemoBuyItScreen();
 
-        undefined __cdecl Constructor_Menu_EditorMapTypeQuickChange();
+        void __stdcall Constructor_Menu_EditorMapTypeQuickChange();
 
-        undefined __cdecl Constructor_Menu_Empty10();
+        void __stdcall Constructor_Menu_Empty10();
 
-        undefined __cdecl Constructor_Menu_Empty11();
+        void __stdcall Constructor_Menu_Empty11();
 
         void __stdcall Constructor_Menu_MapEditorLandscaping();
 
         void __stdcall Constructor_Menu_EditScenario();
 
-        undefined __cdecl Constructor_Menu_UnusedChooseMessageBox();
+        void __stdcall Constructor_Menu_UnusedChooseMessageBox();
 
-        undefined __cdecl Constructor_Menu_TraderSettings();
+        void __stdcall Constructor_Menu_TraderSettings();
 
-        undefined __cdecl Constructor_Menu_StartGoods();
+        void __stdcall Constructor_Menu_StartGoods();
 
-        undefined __cdecl Constructor_Menu_UnusedSiegeAttackingForceUnk();
+        void __stdcall Constructor_Menu_UnusedSiegeAttackingForceUnk();
 
-        undefined __cdecl Constructor_Menu_NewInvasion();
+        void __stdcall Constructor_Menu_NewInvasion();
 
-        undefined __cdecl Constructor_Menu_UnusedCreateTimedMessageEvent();
+        void __stdcall Constructor_Menu_UnusedCreateTimedMessageEvent();
 
-        undefined __cdecl Constructor_Menu_NewEvent();
+        void __stdcall Constructor_Menu_NewEvent();
 
-        undefined __cdecl Constructor_Menu_NewEventCondition();
+        void __stdcall Constructor_Menu_NewEventCondition();
 
-        undefined __cdecl Constructor_Menu_NewEventAction();
+        void __stdcall Constructor_Menu_NewEventAction();
 
-        undefined __cdecl Constructor_Menu_UnusedCreateMessageEvent();
+        void __stdcall Constructor_Menu_UnusedCreateMessageEvent();
 
-        undefined __cdecl Constructor_Menu_BuildingAvailability();
+        void __stdcall Constructor_Menu_BuildingAvailability();
 
-        undefined __cdecl Constructor_Menu_DisableEuroTroops();
+        void __stdcall Constructor_Menu_DisableEuroTroops();
 
-        undefined __cdecl Constructor_Menu_DisableArabTroops();
+        void __stdcall Constructor_Menu_DisableArabTroops();
 
-        undefined __cdecl Constructor_Menu_DisableWeapon();
+        void __stdcall Constructor_Menu_DisableWeapon();
 
-        undefined __cdecl Constructor_Menu_TriggerInvasion();
+        void __stdcall Constructor_Menu_TriggerInvasion();
 
-        undefined __cdecl Constructor_Menu_TriggerEventOrInvasion();
+        void __stdcall Constructor_Menu_TriggerEventOrInvasion();
 
-        undefined __cdecl Constructor_Menu_TriggerEvent();
+        void __stdcall Constructor_Menu_TriggerEvent();
 
-        undefined __cdecl Constructor_Menu_TriggerEventSlider();
+        void __stdcall Constructor_Menu_TriggerEventSlider();
 
-        undefined __cdecl Constructor_MenuModal_OverlaySlider();
+        void __stdcall Constructor_MenuModal_OverlaySlider();
 
-        undefined __cdecl Constructor_MenuModal_UnusedWinCondition();
+        void __stdcall Constructor_MenuModal_UnusedWinCondition();
 
-        undefined __cdecl Constructor_MenuModal_DebugDataCurrentPlayerData();
+        void __stdcall Constructor_MenuModal_DebugDataCurrentPlayerData();
 
-        undefined __cdecl Constructor_MenuModal_DebugDataAiInfo();
+        void __stdcall Constructor_MenuModal_DebugDataAiInfo();
 
-        undefined __cdecl Constructor_MenuModal_DebugDataUnitData();
+        void __stdcall Constructor_MenuModal_DebugDataUnitData();
 
-        undefined __cdecl Constructor_MenuModal_DebugDataZoneDataUnk();
+        void __stdcall Constructor_MenuModal_DebugDataZoneDataUnk();
 
-        undefined __cdecl Constructor_MenuModal_DebugDataNetwork();
+        void __stdcall Constructor_MenuModal_DebugDataNetwork();
 
-        undefined __cdecl Constructor_MenuModal_DebugDataMousePointing();
+        void __stdcall Constructor_MenuModal_DebugDataMousePointing();
 
-        undefined __cdecl Constructor_MenuModal_DebugDataSplitInfo();
+        void __stdcall Constructor_MenuModal_DebugDataSplitInfo();
 
-        undefined __cdecl Constructor_MenuModal_DebugDataMapData();
+        void __stdcall Constructor_MenuModal_DebugDataMapData();
 
-        undefined __cdecl Constructor_MenuModal_PauseMenu();
+        void __stdcall Constructor_MenuModal_PauseMenu();
 
-        undefined __cdecl Constructor_MenuModal_VideoOptions();
+        void __stdcall Constructor_MenuModal_VideoOptions();
 
-        undefined __cdecl Constructor_MenuModal_SoundOptions();
+        void __stdcall Constructor_MenuModal_SoundOptions();
 
-        undefined __cdecl Constructor_MenuModal_NetworkOptions();
+        void __stdcall Constructor_MenuModal_NetworkOptions();
 
-        undefined __cdecl Constructor_MenuModal_LoadMap();
+        void __stdcall Constructor_MenuModal_LoadMap();
 
-        undefined __cdecl Constructor_MenuModal_SaveMap();
+        void __stdcall Constructor_MenuModal_SaveMap();
 
-        undefined __cdecl Constructor_MenuModal_YesNoDialog();
+        void __stdcall Constructor_MenuModal_YesNoDialog();
 
-        undefined __cdecl Constructor_MenuModal_QuitDialog();
+        void __stdcall Constructor_MenuModal_QuitDialog();
 
-        undefined __cdecl Constructor_MenuModal_PauseMenuOptions();
+        void __stdcall Constructor_MenuModal_PauseMenuOptions();
 
-        undefined __cdecl Constructor_MenuModal_MainMenuOptions();
+        void __stdcall Constructor_MenuModal_MainMenuOptions();
 
-        undefined __cdecl Constructor_MenuModal_GameplayOptions();
+        void __stdcall Constructor_MenuModal_GameplayOptions();
 
-        undefined __cdecl Constructor_MenuModal_IdentityOptions();
+        void __stdcall Constructor_MenuModal_IdentityOptions();
 
-        undefined __cdecl Constructor_MenuModal_EnterTitleOnGameStart();
+        void __stdcall Constructor_MenuModal_EnterTitleOnGameStart();
 
-        undefined __cdecl Constructor_MenuModal_ProgressBarBox();
+        void __stdcall Constructor_MenuModal_ProgressBarBox();
 
-        undefined __cdecl Constructor_MenuModal_BuildingHelpText();
+        void __stdcall Constructor_MenuModal_BuildingHelpText();
 
-        undefined __cdecl Constructor_MenuModal_InGameHelpText();
+        void __stdcall Constructor_MenuModal_InGameHelpText();
 
-        undefined __cdecl Constructor_MenuModal_MapDescriptionEditor();
+        void __stdcall Constructor_MenuModal_MapDescriptionEditor();
 
-        undefined __cdecl Constructor_MenuModal_ChooseNetworkServiceProvider();
+        void __stdcall Constructor_MenuModal_ChooseNetworkServiceProvider();
 
-        undefined __cdecl Constructor_MenuModal_FindingNetworkSessions();
+        void __stdcall Constructor_MenuModal_FindingNetworkSessions();
 
-        undefined __cdecl Constructor_MenuModal_DisplayAiLordMessage();
+        void __stdcall Constructor_MenuModal_DisplayAiLordMessage();
 
-        undefined __cdecl Constructor_MenuModal_WaitingForHost();
+        void __stdcall Constructor_MenuModal_WaitingForHost();
 
-        undefined __cdecl Constructor_MenuModal_UnusedSetName();
+        void __stdcall Constructor_MenuModal_UnusedSetName();
 
-        undefined __cdecl Constructor_MenuModal_UnusedChooseMessageBox();
+        void __stdcall Constructor_MenuModal_UnusedChooseMessageBox();
 
-        undefined __cdecl Constructor_MenuModal_TraderSettings();
+        void __stdcall Constructor_MenuModal_TraderSettings();
 
-        undefined __cdecl Constructor_MenuModal_StartGoods();
+        void __stdcall Constructor_MenuModal_StartGoods();
 
-        undefined __cdecl Constructor_MenuModal_UnusedSiegeAttackingForceUnk();
+        void __stdcall Constructor_MenuModal_UnusedSiegeAttackingForceUnk();
 
-        undefined __cdecl Constructor_MenuModal_NewInvasion();
+        void __stdcall Constructor_MenuModal_NewInvasion();
 
-        undefined __cdecl Constructor_MenuModal_UnusedCreateTimedMessageEvent();
+        void __stdcall Constructor_MenuModal_UnusedCreateTimedMessageEvent();
 
-        undefined __cdecl Constructor_MenuModal_NewEvent();
+        void __stdcall Constructor_MenuModal_NewEvent();
 
-        undefined __cdecl Constructor_MenuModal_NewEventCondition();
+        void __stdcall Constructor_MenuModal_NewEventCondition();
 
-        undefined __cdecl Constructor_MenuModal_NewEventAction();
+        void __stdcall Constructor_MenuModal_NewEventAction();
 
-        undefined __cdecl Constructor_MenuModal_UnusedCreateMessageEvent();
+        void __stdcall Constructor_MenuModal_UnusedCreateMessageEvent();
 
-        undefined __cdecl Constructor_MenuModal_BuildingAvailability();
+        void __stdcall Constructor_MenuModal_BuildingAvailability();
 
-        undefined __cdecl Constructor_MenuModal_DisableEuroTroops();
+        void __stdcall Constructor_MenuModal_DisableEuroTroops();
 
-        undefined __cdecl Constructor_MenuModal_DisableArabTroops();
+        void __stdcall Constructor_MenuModal_DisableArabTroops();
 
-        undefined __cdecl Constructor_MenuModal_DisableWeapon();
+        void __stdcall Constructor_MenuModal_DisableWeapon();
 
-        undefined __cdecl Constructor_MenuModal_TutorialBox();
+        void __stdcall Constructor_MenuModal_TutorialBox();
 
         void __stdcall Constructor_MenuModal_TutorialBoxWithLeave();
 
-        undefined __cdecl Constructor_MenuModal_DisplayScenarioHelpText();
+        void __stdcall Constructor_MenuModal_DisplayScenarioHelpText();
 
-        undefined __cdecl Constructor_MenuModal_Chat();
+        void __stdcall Constructor_MenuModal_Chat();
 
-        undefined __cdecl Constructor_MenuModal_CreditsScroll();
+        void __stdcall Constructor_MenuModal_CreditsScroll();
 
-        undefined __cdecl Constructor_MenuModal_EditorMapTypeQuickChange();
+        void __stdcall Constructor_MenuModal_EditorMapTypeQuickChange();
 
-        undefined __cdecl Constructor_MenuModal_SkirmishConnectionOptions();
+        void __stdcall Constructor_MenuModal_SkirmishConnectionOptions();
 
-        undefined __cdecl Constructor_MenuModal_SkirmishPlayOptions();
+        void __stdcall Constructor_MenuModal_SkirmishPlayOptions();
 
-        undefined __cdecl Constructor_MenuModal_OnlineQuitGame();
+        void __stdcall Constructor_MenuModal_OnlineQuitGame();
 
-        undefined __cdecl Constructor_MenuModal_OnlineVoteQuitGame();
+        void __stdcall Constructor_MenuModal_OnlineVoteQuitGame();
 
-        undefined __cdecl Constructor_MenuModal_TriggerInvasion();
+        void __stdcall Constructor_MenuModal_TriggerInvasion();
 
-        undefined __cdecl Constructor_MenuModal_TriggerEvent();
+        void __stdcall Constructor_MenuModal_TriggerEvent();
 
-        undefined __cdecl Constructor_MenuModal_TriggerEventOrInvasion();
+        void __stdcall Constructor_MenuModal_TriggerEventOrInvasion();
 
-        undefined __cdecl Constructor_MenuModal_TriggerEventSlider();
+        void __stdcall Constructor_MenuModal_TriggerEventSlider();
 
-        undefined __cdecl Constructor_MenuModal_SendMapTo();
+        void __stdcall Constructor_MenuModal_SendMapTo();
 
-        undefined __cdecl Constructor_MenuModal_ReceiveMapFrom();
+        void __stdcall Constructor_MenuModal_ReceiveMapFrom();
 
-        undefined __cdecl Constructor_MenuModal_BasicAiLordSelect();
+        void __stdcall Constructor_MenuModal_BasicAiLordSelect();
 
-        undefined __cdecl Constructor_MenuModal_ExtendedAiLordSelect();
+        void __stdcall Constructor_MenuModal_ExtendedAiLordSelect();
 
-        undefined __cdecl Constructor_MenuModal_Roundtable();
+        void __stdcall Constructor_MenuModal_Roundtable();
 
-        undefined __cdecl Constructor_MenuModal_Allies();
+        void __stdcall Constructor_MenuModal_Allies();
 
-        undefined __cdecl Constructor_MenuModal_AlliesOrder();
+        void __stdcall Constructor_MenuModal_AlliesOrder();
 
-        undefined __cdecl Constructor_MenuModal_AlliesRequestGoods();
+        void __stdcall Constructor_MenuModal_AlliesRequestGoods();
 
-        undefined __cdecl Constructor_MenuModal_GreatestLord();
+        void __stdcall Constructor_MenuModal_GreatestLord();
 
-        undefined __cdecl Constructor_MenuModal_AlliesSendGoods();
+        void __stdcall Constructor_MenuModal_AlliesSendGoods();
 
-        undefined __cdecl Constructor_MenuModal_ChooseRandomNumberOfEnemies();
+        void __stdcall Constructor_MenuModal_ChooseRandomNumberOfEnemies();
 
-        undefined __cdecl Constructor_MenuModal_DeleteGameRecord();
+        void __stdcall Constructor_MenuModal_DeleteGameRecord();
 
-        undefined __cdecl Constructor_MenuModal_TacticalPowerBar();
+        void __stdcall Constructor_MenuModal_TacticalPowerBar();
 
-        undefined __cdecl Constructor_MenuModal_DebugDataAivStateUnk();
+        void __stdcall Constructor_MenuModal_DebugDataAivStateUnk();
 
-        undefined __cdecl CreateUnknownDisplayElement0();
+        void __stdcall CreateUnknownDisplayElement0();
 
-        undefined __cdecl CreateBottomLeftDateDisplayElement();
+        void __stdcall CreateBottomLeftDateDisplayElement();
 
-        undefined __cdecl CreateUnknownDisplayElement18();
+        void __stdcall CreateUnknownDisplayElement18();
 
-        undefined __cdecl CreateInGameStartingGoodsCounterDisplayElement();
+        void __stdcall CreateInGameStartingGoodsCounterDisplayElement();
 
         void __stdcall CreateConnectAndPathLinkageInfoTextDisplayElement();
 
         void __stdcall CreateInGameChatDisplayElementUnk();
 
-        undefined __cdecl CreateResourceMissing1DisplayElement();
+        void __stdcall CreateResourceMissing1DisplayElement();
 
-        undefined __cdecl CreateResourceMissing2DisplayElement();
+        void __stdcall CreateResourceMissing2DisplayElement();
 
-        undefined __cdecl CreateDebugNumbersDisplayElement();
+        void __stdcall CreateDebugNumbersDisplayElement();
 
-        undefined __cdecl CreateUnknownDisplayElement7();
+        void __stdcall CreateUnknownDisplayElement7();
 
         void __stdcall CreateSomeMissionNumberUnkDisplayElement9();
 
@@ -503,13 +503,13 @@ namespace Global {
 
         void __stdcall CreateKeepAndGranaryPlacementInfoDisplayElement();
 
-        undefined __cdecl CreatePlayerInfoOnHoverDisplayElement();
+        void __stdcall CreatePlayerInfoOnHoverDisplayElement();
 
         void __stdcall CreatePlayerPingUnkDisplayElement22();
 
-        undefined __cdecl CreateGamePausedTextDisplayElement();
+        void __stdcall CreateGamePausedTextDisplayElement();
 
-        undefined __cdecl CreateGameSpeedTextDisplayElement();
+        void __stdcall CreateGameSpeedTextDisplayElement();
 
         void __stdcall CreateUnknownDisplayElement25();
 
@@ -523,113 +523,113 @@ namespace Global {
 
         void __stdcall CreatePeopleLeftToPlaceDisplayElement();
 
-        undefined __cdecl Constructor_UnknownClass1();
+        void __stdcall Constructor_UnknownClass1();
 
-        undefined __cdecl Constructor_WindowAndDirectDraw();
+        void __stdcall Constructor_WindowAndDirectDraw();
 
-        undefined __cdecl Constructor_WindowInformation();
+        void __stdcall Constructor_WindowInformation();
 
-        undefined __cdecl Constructor_MouseState();
+        void __stdcall Constructor_MouseState();
 
-        undefined __cdecl Constructor_ModifierKeyState();
+        void __stdcall Constructor_ModifierKeyState();
 
-        undefined __cdecl Constructor_ScrollingHandler();
+        void __stdcall Constructor_ScrollingHandler();
 
-        undefined __cdecl Constructor_InsertKeyState();
+        void __stdcall Constructor_InsertKeyState();
 
-        undefined __cdecl Constructor_PencilRenderCoreObj();
+        void __stdcall Constructor_PencilRenderCoreObj();
 
         void __stdcall Constructor_UserTextHandler();
 
         void __stdcall Constructor_TextManagerObj();
 
-        undefined __cdecl Constructor_UnusedClass1Unk();
+        void __stdcall Constructor_UnusedClass1Unk();
 
-        undefined __cdecl Constructor_RNGState();
+        void __stdcall Constructor_RNGState();
 
-        undefined __cdecl Constructor_LowLevelMemory();
+        void __stdcall Constructor_LowLevelMemory();
 
-        undefined __cdecl Constructor_GameCore();
+        void __stdcall Constructor_GameCore();
 
-        undefined __cdecl Constructor_ResourceManager();
+        void __stdcall Constructor_ResourceManager();
 
-        undefined __cdecl Constructor_BitMapState();
+        void __stdcall Constructor_BitMapState();
 
-        undefined __cdecl Constructor_DirectionAlgorithmState();
+        void __stdcall Constructor_DirectionAlgorithmState();
 
-        undefined __cdecl Constructor_Stopwatch_Gameloop();
+        void __stdcall Constructor_Stopwatch_Gameloop();
 
-        undefined __cdecl Constructor_Stopwatch_Unknown();
+        void __stdcall Constructor_Stopwatch_Unknown();
 
-        undefined __cdecl Constructor_FilePackager();
+        void __stdcall Constructor_FilePackager();
 
-        undefined __cdecl Constructor_DecoderState();
+        void __stdcall Constructor_DecoderState();
 
         void __stdcall Constructor_TextureRenderingCore();
 
-        undefined __cdecl Constructor_SFXState();
+        void __stdcall Constructor_SFXState();
 
-        undefined __cdecl Constructor_AlphaAndButtonSurface();
+        void __stdcall Constructor_AlphaAndButtonSurface();
 
-        undefined __cdecl Constructor_Empty1();
+        void __stdcall Constructor_Empty1();
 
-        undefined __cdecl Constructor_ViewportRenderState();
+        void __stdcall Constructor_ViewportRenderState();
 
-        undefined __cdecl Constructor_MiniMapView();
+        void __stdcall Constructor_MiniMapView();
 
-        undefined __cdecl Constructor_MenuModalComposition1();
+        void __stdcall Constructor_MenuModalComposition1();
 
-        undefined __cdecl Constructor_MenuModalComposition2();
+        void __stdcall Constructor_MenuModalComposition2();
 
-        undefined __cdecl Constructor_MenuModalComposition3();
+        void __stdcall Constructor_MenuModalComposition3();
 
-        undefined __cdecl Constructor_TileMapState();
+        void __stdcall Constructor_TileMapState();
 
-        undefined __cdecl Constructor_WildlifeState();
+        void __stdcall Constructor_WildlifeState();
 
-        undefined __cdecl Constructor_PathFindingState();
+        void __stdcall Constructor_PathFindingState();
 
-        undefined __cdecl Constructor_UnitsState();
+        void __stdcall Constructor_UnitsState();
 
-        undefined __cdecl Constructor_EntityState();
+        void __stdcall Constructor_EntityState();
 
-        undefined __cdecl Constructor_TribesState();
+        void __stdcall Constructor_TribesState();
 
-        undefined __cdecl Constructor_TroopValueState();
+        void __stdcall Constructor_TroopValueState();
 
-        undefined __cdecl Constructor_BuildingsState();
+        void __stdcall Constructor_BuildingsState();
 
-        undefined __cdecl Constructor_AIVState();
+        void __stdcall Constructor_AIVState();
 
-        undefined __cdecl Constructor_AICState();
+        void __stdcall Constructor_AICState();
 
-        undefined __cdecl Constructor_LandscapeState();
+        void __stdcall Constructor_LandscapeState();
 
-        undefined __cdecl Constructor_GameState();
+        void __stdcall Constructor_GameState();
 
-        undefined __cdecl Constructor_MenuTextInputState();
+        void __stdcall Constructor_MenuTextInputState();
 
-        undefined __cdecl Constructor_TextEditorState();
+        void __stdcall Constructor_TextEditorState();
 
-        undefined __cdecl Constructor_BinkControlClass();
+        void __stdcall Constructor_BinkControlClass();
 
-        undefined __cdecl Constructor_Empty2();
+        void __stdcall Constructor_Empty2();
 
-        void __thiscall Constructor_HoveredState();
+        void __cdecl Constructor_HoveredState();
 
-        undefined __cdecl Constructor_MapPropertiesState();
+        void __cdecl Constructor_MapPropertiesState();
 
-        undefined __cdecl Constructor_GameSynchronyState();
+        void __stdcall Constructor_GameSynchronyState();
 
-        undefined __cdecl Constructor_Locks();
+        void __cdecl Constructor_Locks();
 
-        undefined __cdecl Constructor_CreateLocaleMemoryRelated();
+        void __stdcall Constructor_CreateLocaleMemoryRelated();
 
-        undefined __cdecl Constructor_Locks2();
+        void __stdcall Constructor_Locks2();
 
-        undefined __cdecl Constructor_CRelated();
+        void __stdcall Constructor_CRelated();
 
-        undefined __cdecl Destructor_MenuView_MissionFinishedTransition();
+        void __stdcall Destructor_MenuView_MissionFinishedTransition();
 
     } // namespace Init
 } // namespace Global

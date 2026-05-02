@@ -216,7 +216,7 @@ namespace Map {
 
             undefined4 meth_0x524b30(int param_1);
 
-            undefined getTribeAliveStatus(int tribeID);
+            int getTribeAliveStatus(int tribeID);
 
             undefined4 meth_0x524ca0(int param_1, uint param_2, uint param_3, uint param_4, uint param_5);
 
