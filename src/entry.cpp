@@ -1,5 +1,5 @@
 
-#include "core/MainResolver.h"
+#include "OpenSHC/Global.func.hpp"
 
 #include "lua.h"
 
@@ -13,7 +13,7 @@ extern "C" __declspec(dllexport) int __cdecl luaopen_OpenSHC(lua_State* L) { ret
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow)
 {
-    return MACRO_CALL(Main_Func::WinMain)(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
+    return MACRO_CALL(OpenSHC::Global_Func::WinMain)(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
 }
 
 #endif
