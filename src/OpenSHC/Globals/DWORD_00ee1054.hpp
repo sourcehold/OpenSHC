@@ -1,5 +1,8 @@
 /**
-  AUTO_GENERATED: DO NOT TOUCH THIS FILE
+  THIS FILE IS AUTO GENERATED
+  Communicate changes to the dev team (e.g. via a Pull Request).
+  Changes get lost otherwise.
+
   path: 'OpenSHC/Globals/DWORD_00ee1054.hpp'
 */
 
