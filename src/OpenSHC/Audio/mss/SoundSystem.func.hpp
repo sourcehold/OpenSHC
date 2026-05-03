@@ -29,7 +29,7 @@ namespace Audio {
                 void (SoundSystem::*)(), false, Address::SHC_3BB0A8C1_0x00467830, &SoundSystem::endSoundStreamsUnk)
             endSoundStreamsUnk;
 
-            MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(SHC_SoundStreamInt), false, Address::SHC_3BB0A8C1_0x004799A0,
+            MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(SHC_SoundStreamInt), true, Address::SHC_3BB0A8C1_0x004799A0,
                 &SoundSystem::endSoundStream)
             endSoundStream;
 

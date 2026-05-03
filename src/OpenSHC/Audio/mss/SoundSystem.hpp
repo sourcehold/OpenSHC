@@ -8,9 +8,7 @@
 
 #pragma once
 
-#include "OpenSHC/Audio/mss/HDIGDRIVER.hpp"
-#include "OpenSHC/Audio/mss/HSAMPLE.hpp"
-#include "OpenSHC/Audio/mss/HSTREAM.hpp"
+#include "Mss32.h"
 #include "OpenSHC/Audio/mss/UnkSoundFlagsAndLoopCount.hpp"
 #include "OpenSHC/Audio/mss/_enums/SHC_SoundStreamInt.hpp"
 #include "OpenSHC/DE/SHCDE/eMusicIDsInt.hpp"
@@ -21,9 +19,6 @@ namespace OpenSHC {
 namespace Audio {
     namespace mss {
 
-        using OpenSHC::Audio::mss::HDIGDRIVER;
-        using OpenSHC::Audio::mss::HSAMPLE;
-        using OpenSHC::Audio::mss::HSTREAM;
         using OpenSHC::Audio::mss::UnkSoundFlagsAndLoopCount;
         using OpenSHC::Audio::mss::_enums::SHC_SoundStreamInt;
         using OpenSHC::DE::SHCDE::eMusicIDsInt;
