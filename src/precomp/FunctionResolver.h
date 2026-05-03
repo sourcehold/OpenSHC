@@ -205,10 +205,16 @@ public:
 #ifdef OPEN_SHC_DLL
 
         template <typename _> struct FunctionPtrUnifier<false, false, _> {
-            inline static const FuncPtrType get() { return reinterpret_cast<FuncPtrType>(&GameCallerFunction::call); }
+            inline static const FuncPtrType get()
+            {
+                return reinterpret_cast<FuncPtrType>(&GameCaller<FuncPtrType>::Function::call);
+            }
         };
         template <bool implemented, typename _> struct FunctionPtrUnifier<implemented, true, _> {
-            inline static const FuncPtrType get() { return reinterpret_cast<FuncPtrType>(&WrapperFunction::call); }
+            inline static const FuncPtrType get()
+            {
+                return reinterpret_cast<FuncPtrType>(&Wrapper<FuncPtrType>::Function::call);
+            }
         };
 
         typedef FunctionPtrUnifier<isImplemented, false, void> UnifiedFunctionPtrForWrapper;
@@ -277,20 +283,20 @@ public:
 #define MACRO_CALL_WRAPPER(N)                                                                                          \
     MACRO_FUNC_TEMPLATE_HEADER(, Ret, N, ) struct Wrapper<MACRO_FUNC_PTR_TYPE_CCALL(Ret, N)> {                         \
     private:                                                                                                           \
-        template <typename R, typename = void> struct CallHelper : public UnifiedFunctionPtrForWrapper {               \
+        template <typename R, typename = void> struct CallHelper {                                                     \
             __declspec(noinline) static R __cdecl call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N))                         \
             {                                                                                                          \
                 MACRO_WRAPPER_BODY_PRECALL(N)                                                                          \
-                Ret ret = get()(MACRO_PARAMETER_LIST(N));                                                              \
+                Ret ret = UnifiedFunctionPtrForWrapper::get()(MACRO_PARAMETER_LIST(N));                                \
                 MACRO_WRAPPER_BODY_POSTCALL(N)                                                                         \
                 return ret;                                                                                            \
             }                                                                                                          \
         };                                                                                                             \
-        template <typename _> struct CallHelper<void, _> : public UnifiedFunctionPtrForWrapper {                       \
+        template <typename _> struct CallHelper<void, _> {                                                             \
             __declspec(noinline) static void __cdecl call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N))                      \
             {                                                                                                          \
                 MACRO_WRAPPER_BODY_PRECALL(N)                                                                          \
-                get()(MACRO_PARAMETER_LIST(N));                                                                        \
+                UnifiedFunctionPtrForWrapper::get()(MACRO_PARAMETER_LIST(N));                                          \
                 MACRO_WRAPPER_BODY_POSTCALL_VOID(N)                                                                    \
             }                                                                                                          \
         };                                                                                                             \
@@ -300,20 +306,20 @@ public:
     };                                                                                                                 \
     MACRO_FUNC_TEMPLATE_HEADER(, Ret, N, ) struct Wrapper<MACRO_FUNC_PTR_TYPE_STDCALL(Ret, N)> {                       \
     private:                                                                                                           \
-        template <typename R, typename = void> struct CallHelper : public UnifiedFunctionPtrForWrapper {               \
+        template <typename R, typename = void> struct CallHelper {                                                     \
             __declspec(noinline) static R __stdcall call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N))                       \
             {                                                                                                          \
                 MACRO_WRAPPER_BODY_PRECALL(N)                                                                          \
-                Ret ret = get()(MACRO_PARAMETER_LIST(N));                                                              \
+                Ret ret = UnifiedFunctionPtrForWrapper::get()(MACRO_PARAMETER_LIST(N));                                \
                 MACRO_WRAPPER_BODY_POSTCALL(N)                                                                         \
                 return ret;                                                                                            \
             }                                                                                                          \
         };                                                                                                             \
-        template <typename _> struct CallHelper<void, _> : public UnifiedFunctionPtrForWrapper {                       \
+        template <typename _> struct CallHelper<void, _> {                                                             \
             __declspec(noinline) static void __stdcall call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N))                    \
             {                                                                                                          \
                 MACRO_WRAPPER_BODY_PRECALL(N)                                                                          \
-                get()(MACRO_PARAMETER_LIST(N));                                                                        \
+                UnifiedFunctionPtrForWrapper::get()(MACRO_PARAMETER_LIST(N));                                          \
                 MACRO_WRAPPER_BODY_POSTCALL_VOID(N)                                                                    \
             }                                                                                                          \
         };                                                                                                             \
@@ -323,20 +329,20 @@ public:
     };                                                                                                                 \
     MACRO_CLASS_FUNC_TEMPLATE_HEADER(, Ret, Class, N, ) struct Wrapper<MACRO_FUNC_PTR_TYPE_MEMBER(Ret, Class, N)> {    \
     private:                                                                                                           \
-        template <typename R, typename = void> struct CallHelper : public UnifiedFunctionPtrForWrapper {               \
+        template <typename R, typename = void> struct CallHelper {                                                     \
             __declspec(noinline) R call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N))                                        \
             {                                                                                                          \
                 MACRO_WRAPPER_BODY_PRECALL_THISCALL(N)                                                                 \
-                Ret ret = (((Class*)(this))->*get())(MACRO_PARAMETER_LIST(N));                                         \
+                Ret ret = (((Class*)(this))->*UnifiedFunctionPtrForWrapper::get())(MACRO_PARAMETER_LIST(N));           \
                 MACRO_WRAPPER_BODY_POSTCALL(N)                                                                         \
                 return ret;                                                                                            \
             }                                                                                                          \
         };                                                                                                             \
-        template <typename _> struct CallHelper<void, _> : public UnifiedFunctionPtrForWrapper {                       \
+        template <typename _> struct CallHelper<void, _> {                                                             \
             __declspec(noinline) void call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N))                                     \
             {                                                                                                          \
                 MACRO_WRAPPER_BODY_PRECALL_THISCALL(N)                                                                 \
-                (((Class*)(this))->*get())(MACRO_PARAMETER_LIST(N));                                                   \
+                (((Class*)(this))->*UnifiedFunctionPtrForWrapper::get())(MACRO_PARAMETER_LIST(N));                     \
                 MACRO_WRAPPER_BODY_POSTCALL_VOID(N)                                                                    \
             }                                                                                                          \
         };                                                                                                             \
@@ -354,8 +360,6 @@ public:
 
 #undef MACRO_MACRO_STREAM_PRINT_PARAMETER_LIST
 #undef MACRO_STREAM_PRINT_PARAMETER
-
-        typedef typename Wrapper<FuncPtrType>::Function WrapperFunction;
 
         template <typename FuncPtrType> struct GameCaller;
 
@@ -418,8 +422,6 @@ public:
     };
         MACRO_INDEX_ITERATE_DEPTH_1(MACRO_NUMBER_OF_FUNCTIONS_TO_GENERATE, MACRO_GAME_CALLER, M_SPACE)
 #undef MACRO_GAME_CALLER
-
-        typedef typename GameCaller<FuncPtrType>::Function GameCallerFunction;
 
         typedef FunctionPtrUnifier<isImplemented, Flags::USE_WRAPPER, void> UnifiedFunctionPtr;
 
