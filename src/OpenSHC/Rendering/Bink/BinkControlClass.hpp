@@ -8,20 +8,18 @@
 
 #pragma once
 
-#include "OpenSHC/Audio/mss/HDIGDRIVER.hpp"
-#include "OpenSHC/Audio/mss/_enums/SHC_SoundStreamInt.hpp"
-#include "OpenSHC/Rendering/Bink/HBINK.hpp"
+#include "Mss32.h"
+#include "OpenSHC/Audio/MSS/enums/SHC_SoundStreamInt.hpp"
 #include "OpenSHC/Rendering/Bink/UnsortedBinkFlagInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 #include "WinDef.h"
+#include "binkw32.h"
 
 namespace OpenSHC {
 namespace Rendering {
     namespace Bink {
 
-        using OpenSHC::Audio::mss::HDIGDRIVER;
-        using OpenSHC::Audio::mss::_enums::SHC_SoundStreamInt;
-        using OpenSHC::Rendering::Bink::HBINK;
+        using OpenSHC::Audio::MSS::enums::SHC_SoundStreamInt;
         using OpenSHC::Rendering::Bink::UnsortedBinkFlagInt;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 

@@ -3,19 +3,19 @@
   Communicate changes to the dev team (e.g. via a Pull Request).
   Changes get lost otherwise.
 
-  path: 'OpenSHC/Audio/mss/HDIGDRIVER.hpp'
+  path: 'OpenSHC/Audio/MSS/Mss32/HSTREAM.hpp'
 */
 
 #pragma once
 
-#include "OpenSHC/Audio/mss/FakeDigDriver.hpp"
+#include "Mss32.h"
 namespace OpenSHC {
 namespace Audio {
-    namespace mss {
+    namespace MSS {
+        namespace Mss32 {
 
-        using OpenSHC::Audio::mss::FakeDigDriver;
-
-        typedef FakeDigDriver* HDIGDRIVER;
-    } // namespace mss
+            typedef FakeStream* HSTREAM;
+        } // namespace Mss32
+    } // namespace MSS
 } // namespace Audio
 } // namespace OpenSHC

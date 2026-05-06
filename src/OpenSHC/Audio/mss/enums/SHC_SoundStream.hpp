@@ -3,15 +3,15 @@
   Communicate changes to the dev team (e.g. via a Pull Request).
   Changes get lost otherwise.
 
-  path: 'OpenSHC/Audio/mss/_enums/SHC_SoundStream.hpp'
+  path: 'OpenSHC/Audio/MSS/enums/SHC_SoundStream.hpp'
 */
 
 #pragma once
 
 namespace OpenSHC {
 namespace Audio {
-    namespace mss {
-        namespace _enums {
+    namespace MSS {
+        namespace enums {
             typedef enum SHC_SoundStream {
 
                 SND_STR_MUSIC = 0, // 0x00000000
@@ -23,7 +23,7 @@ namespace Audio {
             } SHC_SoundStream;
 
             static_assert_cpp98_obj(sizeof(SHC_SoundStream) == 4, SHC_SoundStream);
-        } // namespace _enums
-    } // namespace mss
+        } // namespace enums
+    } // namespace MSS
 } // namespace Audio
 } // namespace OpenSHC

@@ -3,15 +3,15 @@
   Communicate changes to the dev team (e.g. via a Pull Request).
   Changes get lost otherwise.
 
-  path: 'OpenSHC/Audio/mss/_enums/SHC_SoundFlag.hpp'
+  path: 'OpenSHC/Audio/MSS/enums/SHC_SoundFlag.hpp'
 */
 
 #pragma once
 
 namespace OpenSHC {
 namespace Audio {
-    namespace mss {
-        namespace _enums {
+    namespace MSS {
+        namespace enums {
             typedef enum SHC_SoundFlag {
 
                 SND_NOT_OVERWRITEUnk = 2147483648 // 0x80000000
@@ -19,7 +19,7 @@ namespace Audio {
             } SHC_SoundFlag;
 
             static_assert_cpp98_obj(sizeof(SHC_SoundFlag) == 4, SHC_SoundFlag);
-        } // namespace _enums
-    } // namespace mss
+        } // namespace enums
+    } // namespace MSS
 } // namespace Audio
 } // namespace OpenSHC

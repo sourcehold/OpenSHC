@@ -3,14 +3,14 @@
   Communicate changes to the dev team (e.g. via a Pull Request).
   Changes get lost otherwise.
 
-  path: 'OpenSHC/Audio/mss/SndStreamHelper.hpp'
+  path: 'OpenSHC/Audio/MSS/SndStreamHelper.hpp'
 */
 
 #pragma once
 
 namespace OpenSHC {
 namespace Audio {
-    namespace mss {
+    namespace MSS {
 
 #pragma pack(push, 1)
         // SIZE: 0x00000014
@@ -26,6 +26,6 @@ namespace Audio {
 #pragma pack(pop)
 
         static_assert_cpp98_obj(sizeof(SndStreamHelper) == 20, SndStreamHelper);
-    } // namespace mss
+    } // namespace MSS
 } // namespace Audio
 } // namespace OpenSHC

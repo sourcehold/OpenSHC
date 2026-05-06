@@ -3,19 +3,19 @@
   Communicate changes to the dev team (e.g. via a Pull Request).
   Changes get lost otherwise.
 
-  path: 'OpenSHC/Audio/mss/HSAMPLE.hpp'
+  path: 'OpenSHC/Audio/MSS/Mss32/HSAMPLE.hpp'
 */
 
 #pragma once
 
-#include "OpenSHC/Audio/mss/FakeSample.hpp"
+#include "Mss32.h"
 namespace OpenSHC {
 namespace Audio {
-    namespace mss {
+    namespace MSS {
+        namespace Mss32 {
 
-        using OpenSHC::Audio::mss::FakeSample;
-
-        typedef FakeSample* HSAMPLE;
-    } // namespace mss
+            typedef FakeSample* HSAMPLE;
+        } // namespace Mss32
+    } // namespace MSS
 } // namespace Audio
 } // namespace OpenSHC

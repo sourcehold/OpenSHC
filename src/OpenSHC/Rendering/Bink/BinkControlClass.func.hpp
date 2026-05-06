@@ -2,8 +2,8 @@
   path: 'OpenSHC/Rendering/Bink/BinkControlClass.func.hpp'
 */
 
-#include "OpenSHC/Audio/mss/HDIGDRIVER.hpp"
-#include "OpenSHC/Audio/mss/_enums/SHC_SoundStreamInt.hpp"
+#include "Mss32.h"
+#include "OpenSHC/Audio/MSS/enums/SHC_SoundStreamInt.hpp"
 #include "OpenSHC/Rendering/Bink/BinkControlClass.hpp"
 #include "WinDef.h"
 namespace OpenSHC {
@@ -11,8 +11,7 @@ namespace Rendering {
     namespace Bink {
         namespace BinkControlClass_Func {
 
-            using OpenSHC::Audio::mss::HDIGDRIVER;
-            using OpenSHC::Audio::mss::_enums::SHC_SoundStreamInt;
+            using OpenSHC::Audio::MSS::enums::SHC_SoundStreamInt;
 
             MACRO_FUNCTION_RESOLVER(void (BinkControlClass::*)(HDIGDRIVER), false, Address::SHC_3BB0A8C1_0x00408E10,
                 &BinkControlClass::zeroBinkPtrAndLoadBinkSoundSystem)

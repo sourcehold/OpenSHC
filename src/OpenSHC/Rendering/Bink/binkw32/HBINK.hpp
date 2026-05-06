@@ -3,19 +3,19 @@
   Communicate changes to the dev team (e.g. via a Pull Request).
   Changes get lost otherwise.
 
-  path: 'OpenSHC/Rendering/Bink/HBINK.hpp'
+  path: 'OpenSHC/Rendering/Bink/binkw32/HBINK.hpp'
 */
 
 #pragma once
 
-#include "OpenSHC/Rendering/Bink/FakeBink.hpp"
+#include "binkw32.h"
 namespace OpenSHC {
 namespace Rendering {
     namespace Bink {
+        namespace binkw32 {
 
-        using OpenSHC::Rendering::Bink::FakeBink;
-
-        typedef FakeBink* HBINK;
+            typedef FakeBink* HBINK;
+        } // namespace binkw32
     } // namespace Bink
 } // namespace Rendering
 } // namespace OpenSHC

@@ -3,22 +3,24 @@
   Communicate changes to the dev team (e.g. via a Pull Request).
   Changes get lost otherwise.
 
-  path: 'OpenSHC/Audio/mss/FakeDigDriver.hpp'
+  path: 'OpenSHC/Audio/MSS/Mss32/FakeSample.hpp'
 */
 
 #pragma once
 
 namespace OpenSHC {
 namespace Audio {
-    namespace mss {
+    namespace MSS {
+        namespace Mss32 {
 
 #pragma pack(push, 1)
-        // SIZE: 0x00000000
-        typedef struct FakeDigDriver {
+            // SIZE: 0x00000000
+            typedef struct FakeSample {
 
-        } FakeDigDriver;
+            } FakeSample;
 #pragma pack(pop)
 
-    } // namespace mss
+        } // namespace Mss32
+    } // namespace MSS
 } // namespace Audio
 } // namespace OpenSHC
