@@ -163,7 +163,7 @@ target_file_copy_if_different(OpenSHC.exe.runnable "${CRUSADER_DIR}/shfolder.dll
 add_library(OpenSHC.dll SHARED src/entry.cpp ${CORE_SOURCES} ${OPENSHC_SOURCES})
 set_target_properties(OpenSHC.dll PROPERTIES OUTPUT_NAME ${OPEN_SHC_NAME})
 set_target_properties(OpenSHC.dll PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/DLL")
-target_compile_definitions(OpenSHC.dll PRIVATE OPEN_SHC_DLL)
+target_compile_definitions(OpenSHC.dll PRIVATE OPEN_SHC_DLL REIMPLEMENTED_CRT=0)
 target_precompile_headers(OpenSHC.dll PRIVATE $<$<COMPILE_LANGUAGE:CXX>:${PCH_FILE}>)
 
 

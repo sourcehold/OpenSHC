@@ -24712,7 +24712,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00479140 = 0x00479140,
     // label: basic_ofstream_write
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x004791B0 = 0x004791B0,
     // type: function
@@ -24956,7 +24956,7 @@ enum {
     // label: FID_conflict:IsEqualGUID
     // label: isEqualGUID
     // location:
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0047C5D0 = 0x0047C5D0,
     // label: MenuItemRenderFunction_NetworkSessions_Buttons
@@ -72101,11 +72101,11 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057C85F = 0x0057C85F,
-    // label: SetWindowLongAThunk
+    // label: SetWindowLongA_user32_Thunk
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057C884 = 0x0057C884,
-    // label: GetShortPathNameW_Thunk
+    // label: GetShortPathNameW_kernel32_Thunk
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057C8A9 = 0x0057C8A9,
@@ -72572,35 +72572,35 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0057ECD3 = 0x0057ECD3,
     // label: __isnan
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057ECF1 = 0x0057ECF1,
-    // label: DoubleOrFloat10ToIntUnk
-    // location: HoldStrong_lib
+    // label: __ftol2
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057ED20 = 0x0057ED20,
     // type: function
     SHC_3BB0A8C1_0x0057ED56 = 0x0057ED56,
     // label: math_atan_FUN_0057ee10
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057EE10 = 0x0057EE10,
     // label: math_atan_FUN_0057ee68
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057EE68 = 0x0057EE68,
     // type: function
     SHC_3BB0A8C1_0x0057EECB = 0x0057EECB,
     // label: math_sqrt_FUN_0057eef0
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057EEF0 = 0x0057EEF0,
     // label: math_sqrt_FUN_0057ef0d
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057EF0D = 0x0057EF0D,
     // label: math_tan_1_FUN_0057eff0
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057EFF0 = 0x0057EFF0,
     // label: FUN_0057f03f
@@ -72608,11 +72608,11 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0057F03F = 0x0057F03F,
     // label: math_FUN_0057f048
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057F048 = 0x0057F048,
     // label: math_cos
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057F120 = 0x0057F120,
     // label: FUN_0057f16f
@@ -72624,7 +72624,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0057F178 = 0x0057F178,
     // label: math_sin
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057F250 = 0x0057F250,
     // type: function
@@ -72640,21 +72640,21 @@ enum {
     // label: FID_conflict:__gmtime32
     // label: FID_conflict:__gmtime64
     // label: FID_conflict:__localtime32
-    // label: FID_conflict:__localtime64
+    // label: __localtime64
     // location:
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057F5FE = 0x0057F5FE,
     // label: __time64
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057F622 = 0x0057F622,
     // label: _memset
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057F660 = 0x0057F660,
     // label: _sprintf
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057F6DA = 0x0057F6DA,
     // label: __security_check_cookie
@@ -72676,7 +72676,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0057F81B = 0x0057F81B,
     // label: __stricmp
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057F8EE = 0x0057F8EE,
     // label: FUN_0057f93e
@@ -72696,11 +72696,11 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0057FA5C = 0x0057FA5C,
     // label: _atexit
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057FA62 = 0x0057FA62,
     // label: _free
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057FA74 = 0x0057FA74,
     // label: FUN_0057faca
@@ -72714,7 +72714,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0057FB02 = 0x0057FB02,
     // label: _tolower
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057FC19 = 0x0057FC19,
     // label: FUN_0057fc40
@@ -72722,7 +72722,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0057FC40 = 0x0057FC40,
     // label: _fclose
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057FCB2 = 0x0057FCB2,
     // label: FUN_0057fd26
@@ -72742,7 +72742,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0057FFC0 = 0x0057FFC0,
     // label: _fread
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057FFCA = 0x0057FFCA,
     // label: _V6_HeapAlloc
@@ -72754,7 +72754,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0058002B = 0x0058002B,
     // label: _malloc
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00580034 = 0x00580034,
     // label: FUN_005800f7
@@ -72762,7 +72762,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x005800F7 = 0x005800F7,
     // label: _ftell
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0058028F = 0x0058028F,
     // label: FUN_005802f3
@@ -72774,7 +72774,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x005802FD = 0x005802FD,
     // label: _fseek
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00580384 = 0x00580384,
     // label: FUN_005803ff
@@ -72790,7 +72790,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x005804C3 = 0x005804C3,
     // label: _fopen
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x005804CD = 0x005804CD,
     // label: __vswprintf_l
@@ -72798,7 +72798,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x005804E0 = 0x005804E0,
     // label: __vswprintf
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00580577 = 0x00580577,
     // label: FUN_0058058e
@@ -72806,7 +72806,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0058058E = 0x0058058E,
     // label: _fgetwc
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00580735 = 0x00580735,
     // label: FUN_0058079e
@@ -72826,7 +72826,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0058083C = 0x0058083C,
     // label: _fwrite
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0058099B = 0x0058099B,
     // label: FUN_00580a13
@@ -72834,7 +72834,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00580A13 = 0x00580A13,
     // label: _wcsncpy
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00580A1D = 0x00580A1D,
     // label: __wcsicmp_l
@@ -72842,7 +72842,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00580A5A = 0x00580A5A,
     // label: __wcsicmp
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00580B69 = 0x00580B69,
     // label: WCharStringToLong
@@ -72922,11 +72922,11 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00580DA6 = 0x00580DA6,
     // label: _free
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00580DC1 = 0x00580DC1,
     // label: _memcpy_s
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00580DC6 = 0x00580DC6,
     // label: _memmove_s
@@ -72934,7 +72934,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00580E41 = 0x00580E41,
     // label: _free
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00580E9C = 0x00580E9C,
     // label: FUN_00580ea1
@@ -72942,7 +72942,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00580EA1 = 0x00580EA1,
     // label: _ucrt_close
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00580F38 = 0x00580F38,
     // label: FUN_00580ffb
@@ -72957,17 +72957,17 @@ enum {
     // location: HoldStrong_lib/FUN_00581005/override
     SHC_3BB0A8C1_0x005813FC = 0x005813FC,
     // label: _ucrt_read
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x005815C6 = 0x005815C6,
     // label: FUN_005816b9
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005816B9 = 0x005816B9,
-    // label: FID_conflict:_open
     // label: FID_conflict:open
+    // label: _ucrt_open
     // location:
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x005816C3 = 0x005816C3,
     // label: SetRNGSeed
@@ -72975,7 +72975,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x005816EE = 0x005816EE,
     // label: _rand
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x005816FB = 0x005816FB,
     // label: __freea
@@ -72992,8 +72992,8 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005818B9 = 0x005818B9,
-    // label: StringToLowerCase
-    // location: OpenSHC/Global
+    // label: __strlwr
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x005818EB = 0x005818EB,
     // label: FUN_0058194d
@@ -73001,7 +73001,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0058194D = 0x0058194D,
     // label: _ucrt_write
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00581F6F = 0x00581F6F,
     // label: FUN_00582041
@@ -73009,7 +73009,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00582041 = 0x00582041,
     // label: _memcpy
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00582050 = 0x00582050,
     // type: function
@@ -73115,7 +73115,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x005823B5 = 0x005823B5,
     // label: _toupper
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x005824CD = 0x005824CD,
     // label: FUN_005824f4
@@ -73159,7 +73159,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0058270C = 0x0058270C,
     // label: _ucrt_lseek
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0058277E = 0x0058277E,
     // label: Unlock
@@ -73236,11 +73236,11 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00582BC3 = 0x00582BC3,
     // label: __alldiv
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00582C30 = 0x00582C30,
     // label: __allmul
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00582CE0 = 0x00582CE0,
     // label: FUN_00582d14
@@ -73324,7 +73324,7 @@ enum {
     // label: __alloca_probe
     // label: __chkstk
     // location:
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x005834A0 = 0x005834A0,
     // label: __strnicmp_l
@@ -73332,7 +73332,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x005834CB = 0x005834CB,
     // label: __strnicmp
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x005835BB = 0x005835BB,
     // label: _atol
@@ -73486,7 +73486,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00583D4F = 0x00583D4F,
     // label: _exit
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00583D55 = 0x00583D55,
     // label: __exit
@@ -73978,13 +73978,13 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x005885E5 = 0x005885E5,
     // label: math_FUN_00588628
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00588628 = 0x00588628,
     // type: function
     SHC_3BB0A8C1_0x0058863E = 0x0058863E,
     // label: math_FUN_0058864b
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0058864B = 0x0058864B,
     // label: __startOneArgErrorHandling
@@ -73996,7 +73996,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00588790 = 0x00588790,
     // label: math_FUN_005887ae
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x005887AE = 0x005887AE,
     // label: FUN_005889f0
@@ -75462,7 +75462,7 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0059987C = 0x0059987C,
-    // label: GetStringTypeWThunk
+    // label: GetStringTypeW_kernel32_Thunk
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005998A1 = 0x005998A1,
@@ -75622,7 +75622,7 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00599C08 = 0x00599C08,
-    // label: SomeCxxFrameHandlerUnk
+    // label: CxxFrameHandlerThunk_00599c10
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00599C10 = 0x00599C10,
@@ -97653,6 +97653,8 @@ enum {
     SHC_3BB0A8C1_0x0242921C = 0x0242921C,
     // type: /undefined4
     SHC_3BB0A8C1_0x02429220 = 0x02429220,
+    // label: LIB_g_HasSSE2
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x02429224 = 0x02429224,
     // label: DAT_CommandLine

@@ -1299,10 +1299,6 @@ namespace Global_Func {
     SetRNGSeed;
 
     MACRO_FUNCTION_RESOLVER(
-        char*(__cdecl*)(char* string), false, Address::SHC_3BB0A8C1_0x005818EB, &OpenSHC::Global::StringToLowerCase)
-    StringToLowerCase;
-
-    MACRO_FUNCTION_RESOLVER(
         int(__cdecl*)(HANDLE hFile), false, Address::SHC_3BB0A8C1_0x005826FB, &OpenSHC::Global::GetFilePtrPos)
     GetFilePtrPos;
 
