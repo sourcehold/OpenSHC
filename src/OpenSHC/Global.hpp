@@ -697,8 +697,6 @@ namespace Global {
 
     void __cdecl SetRNGSeed(ulong param_1);
 
-    char* __cdecl StringToLowerCase(char* string);
-
     int __cdecl GetFilePtrPos(HANDLE hFile);
 
 } // namespace Global
