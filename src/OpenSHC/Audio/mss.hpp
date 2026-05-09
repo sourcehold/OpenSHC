@@ -3,7 +3,7 @@
   Communicate changes to the dev team (e.g. via a Pull Request).
   Changes get lost otherwise.
 
-  path: 'OpenSHC/Audio/mss.hpp'
+  path: 'OpenSHC/Audio/MSS.hpp'
 */
 
 #pragma once
@@ -12,12 +12,12 @@
 #include "basetsd.h"
 namespace OpenSHC {
 namespace Audio {
-    namespace mss {
+    namespace MSS {
 
         void __stdcall SndSystemTimeCallback(UINT uTimerID, UINT uMsg, DWORD_PTR dwUser, DWORD_PTR dw1, DWORD_PTR dw2);
 
         undefined4 __stdcall RegisterMilesAILShutdown();
 
-    } // namespace mss
+    } // namespace MSS
 } // namespace Audio
 } // namespace OpenSHC

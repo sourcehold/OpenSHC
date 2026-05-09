@@ -1,19 +1,19 @@
 /**
-  path: 'OpenSHC/Audio/mss/SoundSystem.func.hpp'
+  path: 'OpenSHC/Audio/MSS/SoundSystem.func.hpp'
 */
 
-#include "OpenSHC/Audio/mss/SoundSystem.hpp"
-#include "OpenSHC/Audio/mss/UnkSoundFlagsAndLoopCount.hpp"
-#include "OpenSHC/Audio/mss/_enums/SHC_SoundStreamInt.hpp"
+#include "OpenSHC/Audio/MSS/SoundSystem.hpp"
+#include "OpenSHC/Audio/MSS/UnkSoundFlagsAndLoopCount.hpp"
+#include "OpenSHC/Audio/MSS/enums/SHC_SoundStreamInt.hpp"
 #include "OpenSHC/DE/SHCDE/eMusicIDsInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
 namespace Audio {
-    namespace mss {
+    namespace MSS {
         namespace SoundSystem_Func {
 
-            using OpenSHC::Audio::mss::UnkSoundFlagsAndLoopCount;
-            using OpenSHC::Audio::mss::_enums::SHC_SoundStreamInt;
+            using OpenSHC::Audio::MSS::UnkSoundFlagsAndLoopCount;
+            using OpenSHC::Audio::MSS::enums::SHC_SoundStreamInt;
             using OpenSHC::DE::SHCDE::eMusicIDsInt;
             using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
@@ -222,6 +222,6 @@ namespace Audio {
             initMiles;
 
         } // namespace SoundSystem_Func
-    } // namespace mss
+    } // namespace MSS
 } // namespace Audio
 } // namespace OpenSHC

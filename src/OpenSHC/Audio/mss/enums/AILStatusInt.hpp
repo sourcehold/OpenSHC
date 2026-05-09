@@ -3,21 +3,21 @@
   Communicate changes to the dev team (e.g. via a Pull Request).
   Changes get lost otherwise.
 
-  path: 'OpenSHC/Audio/mss/_enums/AILStatusInt.hpp'
+  path: 'OpenSHC/Audio/MSS/enums/AILStatusInt.hpp'
 */
 
 #pragma once
 
-#include "OpenSHC/Audio/mss/_enums/AILStatus.hpp"
+#include "OpenSHC/Audio/MSS/enums/AILStatus.hpp"
 
 namespace OpenSHC {
 namespace Audio {
-    namespace mss {
-        namespace _enums {
+    namespace MSS {
+        namespace enums {
             typedef int AILStatusInt;
 
             static_assert_cpp98_obj(sizeof(AILStatusInt) == 4, AILStatusInt);
-        } // namespace _enums
-    } // namespace mss
+        } // namespace enums
+    } // namespace MSS
 } // namespace Audio
 } // namespace OpenSHC

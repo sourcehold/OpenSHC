@@ -8,14 +8,14 @@
 
 #pragma once
 
-#include "OpenSHC/Audio/mss/UnkSoundFlagsAndLoopCount.hpp"
-#include "OpenSHC/Audio/mss/_enums/SHC_SoundStreamInt.hpp"
+#include "OpenSHC/Audio/MSS/UnkSoundFlagsAndLoopCount.hpp"
+#include "OpenSHC/Audio/MSS/enums/SHC_SoundStreamInt.hpp"
 
 namespace OpenSHC {
 namespace Rendering {
 
-    using OpenSHC::Audio::mss::UnkSoundFlagsAndLoopCount;
-    using OpenSHC::Audio::mss::_enums::SHC_SoundStreamInt;
+    using OpenSHC::Audio::MSS::UnkSoundFlagsAndLoopCount;
+    using OpenSHC::Audio::MSS::enums::SHC_SoundStreamInt;
 
 #pragma pack(push, 1)
     // SIZE: 0x0000005C

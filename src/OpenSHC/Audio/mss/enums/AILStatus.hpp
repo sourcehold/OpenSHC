@@ -3,15 +3,15 @@
   Communicate changes to the dev team (e.g. via a Pull Request).
   Changes get lost otherwise.
 
-  path: 'OpenSHC/Audio/mss/_enums/AILStatus.hpp'
+  path: 'OpenSHC/Audio/MSS/enums/AILStatus.hpp'
 */
 
 #pragma once
 
 namespace OpenSHC {
 namespace Audio {
-    namespace mss {
-        namespace _enums {
+    namespace MSS {
+        namespace enums {
             typedef enum AILStatus {
 
                 SND_FREE = 1, // 0x00000001
@@ -23,7 +23,7 @@ namespace Audio {
             } AILStatus;
 
             static_assert_cpp98_obj(sizeof(AILStatus) == 4, AILStatus);
-        } // namespace _enums
-    } // namespace mss
+        } // namespace enums
+    } // namespace MSS
 } // namespace Audio
 } // namespace OpenSHC

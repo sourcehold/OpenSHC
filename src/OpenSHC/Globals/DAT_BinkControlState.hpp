@@ -3,7 +3,7 @@
   Communicate changes to the dev team (e.g. via a Pull Request).
   Changes get lost otherwise.
 
-  path: 'OpenSHC/Globals/DAT_BinkControlClass.hpp'
+  path: 'OpenSHC/Globals/DAT_BinkControlState.hpp'
 */
 
 #pragma once
@@ -13,5 +13,5 @@ namespace OpenSHC {
 
 using OpenSHC::Rendering::Bink::BinkControlClass;
 
-MACRO_STRUCT_RESOLVER(BinkControlClass, false, Address::SHC_3BB0A8C1_0x02157518) DAT_BinkControlClass;
+MACRO_STRUCT_RESOLVER(BinkControlClass, false, Address::SHC_3BB0A8C1_0x02157518) DAT_BinkControlState;
 } // namespace OpenSHC
