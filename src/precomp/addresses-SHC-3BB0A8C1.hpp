@@ -7620,7 +7620,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004246E0 = 0x004246E0,
     // label: meth_0x424700
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00424700 = 0x00424700,
     // label: MenuView_IntroLogos_Prepare
@@ -21910,11 +21910,11 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004677E0 = 0x004677E0,
     // label: stopMusicPlayback
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00467810 = 0x00467810,
     // label: endSoundStreamsUnk
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00467830 = 0x00467830,
     // label: TransformToCurrentModeColor
@@ -24734,23 +24734,23 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00479790 = 0x00479790,
     // label: endSoundStream
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x004799A0 = 0x004799A0,
     // label: isSampleOrStreamPlaying
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00479A60 = 0x00479A60,
     // label: shouldSoundXNotBePlaying
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00479AB0 = 0x00479AB0,
     // label: setStreamAndSampleVolumeUnk
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00479AF0 = 0x00479AF0,
     // label: meth_0x479b70
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00479B70 = 0x00479B70,
     // label: meth_0x479c20
@@ -24758,59 +24758,59 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00479C20 = 0x00479C20,
     // label: findSamplePlaceForSoundUnk
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00479C80 = 0x00479C80,
     // label: setupSampleForNextSound
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00479CF0 = 0x00479CF0,
     // label: getAndUpdateSampleStatus
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00479D90 = 0x00479D90,
     // label: playSound
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00479DF0 = 0x00479DF0,
     // label: setVolumeUnk
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00479E60 = 0x00479E60,
     // label: deactivateSoundFromMenuFuncUnk
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00479F30 = 0x00479F30,
     // label: pauseAudioSample
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00479FC0 = 0x00479FC0,
     // label: resumeAudioSample
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A080 = 0x0047A080,
     // label: mapLoadingAndLaunchGameRelated1
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A130 = 0x0047A130,
     // label: setupVolumeAndSoundID
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A1B0 = 0x0047A1B0,
     // label: setupVolumeAndSoundIDWithMultiplier
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A220 = 0x0047A220,
     // label: meth_0x47a290
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A290 = 0x0047A290,
     // label: setSomeSoundTime
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A2A0 = 0x0047A2A0,
     // label: setupVolumeAndSoundID0xF0_100
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A310 = 0x0047A310,
     // type: function
@@ -24826,43 +24826,43 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x0047A564 = 0x0047A564,
     // label: setSection1079_28_4_
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A570 = 0x0047A570,
     // label: meth_0x47a580
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A580 = 0x0047A580,
     // label: playDarMehqOrGlory
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A5E0 = 0x0047A5E0,
     // label: playWinMusicVariation
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A630 = 0x0047A630,
     // label: setupLossMusic
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A660 = 0x0047A660,
     // label: shutdownSoundSystem
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A690 = 0x0047A690,
     // label: playMusicUnk
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A790 = 0x0047A790,
     // label: meth_0x47a9e0
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A9E0 = 0x0047A9E0,
     // label: endSpeechSoundStreams
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047AA70 = 0x0047AA70,
     // label: playRandomMusic02
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047AB10 = 0x0047AB10,
     // type: /pointer
@@ -24874,83 +24874,83 @@ enum {
     // type: /pointer
     SHC_3BB0A8C1_0x0047AF40 = 0x0047AF40,
     // label: handleBattleEndMusicTransition
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047AF50 = 0x0047AF50,
     // label: playSoundStreamUnk
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B060 = 0x0047B060,
     // label: meth_0x47b250
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B250 = 0x0047B250,
     // label: playOrSetupMusicUnk
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B2F0 = 0x0047B2F0,
     // label: playOrEndMusicUnk
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B3C0 = 0x0047B3C0,
     // label: openSound
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B490 = 0x0047B490,
     // label: SndSystemTimeCallback
-    // location: OpenSHC/Audio/mss
+    // location: OpenSHC/Audio/MSS
     // type: function
     SHC_3BB0A8C1_0x0047B510 = 0x0047B510,
     // label: playOnSfx1SoundStreamOnceOrOnRepeatUnk
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B590 = 0x0047B590,
     // label: playSoundOnSoundStream2
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B5C0 = 0x0047B5C0,
     // label: playSoundOnSpeechStream
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B5F0 = 0x0047B5F0,
     // label: playSpeechSfx
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B670 = 0x0047B670,
     // label: meth_0x47b700
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B700 = 0x0047B700,
     // label: playSomeMusicUnk
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B760 = 0x0047B760,
     // label: playOnSfx1SoundStreamUnk
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B7D0 = 0x0047B7D0,
     // label: playSoundOnSfxSoundStream2
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B800 = 0x0047B800,
     // label: playSoundOnStream3Unk
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B830 = 0x0047B830,
     // label: activateSoundFromMenuFuncUnk
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B870 = 0x0047B870,
     // label: playRandomAmbientMusic
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B890 = 0x0047B890,
     // label: playRandomBackgroundMusicUnk
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047BF20 = 0x0047BF20,
     // label: initMiles
-    // location: OpenSHC/Audio/mss/SoundSystem
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047C400 = 0x0047C400,
     // label: FID_conflict:IsEqualGUID
@@ -72305,7 +72305,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0057E158 = 0x0057E158,
     // label: RegisterMilesAILShutdown
-    // location: OpenSHC/Audio/mss
+    // location: OpenSHC/Audio/MSS
     // type: function
     SHC_3BB0A8C1_0x0057E160 = 0x0057E160,
     // label: AIL_shutdown
@@ -95801,9 +95801,9 @@ enum {
     // label: DAT_ArrayOfMapIndices2Unk
     // location:
     SHC_3BB0A8C1_0x011275FC = 0x011275FC,
-    // label: SND_SoundSystemObj
+    // label: DAT_SoundSystemState
     // location:
-    // type: OpenSHC/Audio/mss/SoundSystem
+    // type: OpenSHC/Audio/MSS/SoundSystem
     SHC_3BB0A8C1_0x01127DD0 = 0x01127DD0,
     // label: DAT_SomeSoundTime
     // location:
@@ -97223,7 +97223,7 @@ enum {
     // label: RECT_ZeroToGameResRect
     // location:
     SHC_3BB0A8C1_0x021568E4 = 0x021568E4,
-    // label: DAT_BinkControlClass
+    // label: DAT_BinkControlState
     // location:
     // type: OpenSHC/Rendering/Bink/BinkControlClass
     SHC_3BB0A8C1_0x02157518 = 0x02157518,
