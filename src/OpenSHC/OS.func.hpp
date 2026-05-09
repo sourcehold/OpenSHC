@@ -24,9 +24,9 @@ namespace OS_Func {
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
     using OpenSHC::WindowsHelper::Enums::OpenFlagInt;
 
-    MACRO_FUNCTION_RESOLVER(int*(__stdcall*)(void* param_1, uint param_2), REIMPLEMENTED_CRT,
-        Address::SHC_3BB0A8C1_0x004791B0, &OpenSHC::OS::basic_ofstream_write)
-    basic_ofstream_write;
+    // MACRO_FUNCTION_RESOLVER(int*(__stdcall*)(void* param_1, uint param_2), REIMPLEMENTED_CRT,
+    //     Address::SHC_3BB0A8C1_0x004791B0, &OpenSHC::OS::basic_ofstream_write)
+    // basic_ofstream_write;
 
     MACRO_FUNCTION_RESOLVER(BOOLEnum(__cdecl*)(GUID* param_1, GUID* param_2), REIMPLEMENTED_CRT,
         Address::SHC_3BB0A8C1_0x0047C5D0, &OpenSHC::OS::isEqualGUID)
@@ -108,9 +108,9 @@ namespace OS_Func {
         Address::SHC_3BB0A8C1_0x00580B69, &OpenSHC::OS::__wcsicmp)
     __wcsicmp;
 
-    MACRO_FUNCTION_RESOLVER(
-        void(__cdecl*)(void* _Memory), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x00580DC1, &OpenSHC::OS::_free)
-    _free;
+    // MACRO_FUNCTION_RESOLVER(
+    //     void(__cdecl*)(void* _Memory), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x00580DC1, &OpenSHC::OS::_free)
+    //_free;
 
     MACRO_FUNCTION_RESOLVER(errno_t(__cdecl*)(void* _Dst, rsize_t _DstSize, void* _Src, rsize_t _MaxCount),
         REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x00580DC6, &OpenSHC::OS::_memcpy_s)

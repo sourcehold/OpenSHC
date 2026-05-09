@@ -1,2 +1,3 @@
 src/OpenSHC/Audio/mss/SoundSystem/stopMusicPlayback.cpp
 src/OpenSHC/Audio/mss/SoundSystem/endSoundStream.cpp
+src/OpenSHC/OS/OS.cpp

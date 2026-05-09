@@ -1,11 +1,9 @@
-#include "OpenSHC/Audio/mss/SoundSystem.hpp"
+#include "OpenSHC/Audio/MSS/SoundSystem.hpp"
 
-#include "OpenSHC/Audio/mss/_enums/AILStatus.hpp"
-#include "OpenSHC/Audio/mss/_enums/SHC_SoundStream.hpp"
+#include "OpenSHC/Audio/MSS/enums/AILStatus.hpp"
+#include "OpenSHC/Audio/MSS/enums/SHC_SoundStream.hpp"
 
-#include "Mss32.h"
-
-#include <io.h>
+#include "OpenSHC/OS.func.hpp"
 
 #include "OpenSHC/Globals/DAT_00df3844.hpp"
 
@@ -25,21 +23,21 @@
 // this works for multifield checks or assigns
 
 // FUNCTION: STRONGHOLDCRUSADER 0x004799A0
-void OpenSHC::Audio::mss::SoundSystem::endSoundStream(SHC_SoundStreamInt sndStreamIndex)
+void OpenSHC::Audio::MSS::SoundSystem::endSoundStream(SHC_SoundStreamInt sndStreamIndex)
 {
     if (!this->waveOutOpenUnk_0x8) {
         return;
     }
 
-    if (sndStreamIndex == _enums::SND_STR_MUSIC) {
+    if (sndStreamIndex == enums::SND_STR_MUSIC) {
         this->streamActiveUnk_0x20[0] = 0;
         *DAT_00df3844::ptr = 1;
         if (this->musicSampleFileHandleUnk_0x174 != -1) {
             AIL_end_sample(this->musicSampleUnk_0x170);
-            _close(this->musicSampleFileHandleUnk_0x174);
+            MACRO_CALL(OS_Func::_ucrt_close)(this->musicSampleFileHandleUnk_0x174);
         }
         if (this->musicFileHandle_0x178 != -1) {
-            _close(this->musicFileHandle_0x178);
+            MACRO_CALL(OS_Func::_ucrt_close)(this->musicFileHandle_0x178);
         }
         this->musicFileHandle_0x178 = -1;
         this->musicSampleFileHandleUnk_0x174 = -1;
