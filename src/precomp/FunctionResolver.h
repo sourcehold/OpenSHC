@@ -1,6 +1,9 @@
 #ifndef FUNCTION_RESOLVER
 #define FUNCTION_RESOLVER
 
+// NOTE: No support for hierarchical structures
+// NOTE: Only limited support for variadic functions (...), only resolver, no wrapper or function traits
+
 // NOTE: Changed CDECL tp CCALL to avoid window macro issue
 // TODO: Maybe change naming convention to not run into these issues
 
@@ -89,6 +92,16 @@
 // we are loosing one level due to the way the recursion iteration works
 #define MACRO_SUPPORTED_PARAMETER_NUMBER 15
 #define MACRO_NUMBER_OF_FUNCTIONS_TO_GENERATE 16
+
+template <int gameAddress> __declspec(naked) void trampoline()
+{
+    enum { addr = gameAddress };
+    __asm
+    {
+        mov eax, addr
+        jmp eax
+    }
+}
 
 // no support for virtual function ptrs
 struct FunctionResolver {
@@ -205,10 +218,7 @@ public:
 #ifdef OPEN_SHC_DLL
 
         template <typename _> struct FunctionPtrUnifier<false, false, _> {
-            inline static const FuncPtrType get()
-            {
-                return reinterpret_cast<FuncPtrType>(&GameCaller<FuncPtrType>::Function::call);
-            }
+            inline static const FuncPtrType get() { return GameFunction<FuncPtrType>::get(); }
         };
         template <bool implemented, typename _> struct FunctionPtrUnifier<implemented, true, _> {
             inline static const FuncPtrType get()
@@ -219,7 +229,9 @@ public:
 
         typedef FunctionPtrUnifier<isImplemented, false, void> UnifiedFunctionPtrForWrapper;
 
-        template <typename FuncPtrType> struct Wrapper;
+        template <typename FuncPtrType> struct Wrapper {
+            typedef typename FuncPtrType::NoWrapperSupportForThisFuncPtrType Function;
+        };
 
 #define MACRO_STREAM_PRINT_PARAMETER(N) << MACRO_PARAMETER(N)
 #define MACRO_STREAM_PRINT_PARAMETER_LIST(N) MACRO_INDEX_ITERATE_DEPTH_0(N, MACRO_STREAM_PRINT_PARAMETER, << ", ")
@@ -361,46 +373,13 @@ public:
 #undef MACRO_MACRO_STREAM_PRINT_PARAMETER_LIST
 #undef MACRO_STREAM_PRINT_PARAMETER
 
-        template <typename FuncPtrType> struct GameCaller;
+        template <typename FuncPtrType> struct GameFunction {
+            inline static FuncPtrType get() { return reinterpret_cast<FuncPtrType>(&trampoline<gameAddress>); }
+        };
 
-#define MACRO_GAME_CALLER(N)                                                                                           \
-    MACRO_FUNC_TEMPLATE_HEADER(, Ret, N, ) struct GameCaller<MACRO_FUNC_PTR_TYPE_CCALL(Ret, N)> {                      \
-    private:                                                                                                           \
-        template <typename R, typename = void> struct CallHelper {                                                     \
-            __declspec(noinline) static R __cdecl call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N))                         \
-            {                                                                                                          \
-                return ((MACRO_FUNC_PTR_TYPE_CCALL(Ret, N))gameAddress)(MACRO_PARAMETER_LIST(N));                      \
-            }                                                                                                          \
-        };                                                                                                             \
-        template <typename _> struct CallHelper<void, _> {                                                             \
-            __declspec(noinline) static void __cdecl call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N))                      \
-            {                                                                                                          \
-                ((MACRO_FUNC_PTR_TYPE_CCALL(Ret, N))gameAddress)(MACRO_PARAMETER_LIST(N));                             \
-            }                                                                                                          \
-        };                                                                                                             \
-                                                                                                                       \
-    public:                                                                                                            \
-        typedef CallHelper<Ret> Function;                                                                              \
-    };                                                                                                                 \
-    MACRO_FUNC_TEMPLATE_HEADER(, Ret, N, ) struct GameCaller<MACRO_FUNC_PTR_TYPE_STDCALL(Ret, N)> {                    \
-    private:                                                                                                           \
-        template <typename R, typename = void> struct CallHelper {                                                     \
-            __declspec(noinline) static R __stdcall call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N))                       \
-            {                                                                                                          \
-                return ((MACRO_FUNC_PTR_TYPE_STDCALL(Ret, N))gameAddress)(MACRO_PARAMETER_LIST(N));                    \
-            }                                                                                                          \
-        };                                                                                                             \
-        template <typename _> struct CallHelper<void, _> {                                                             \
-            __declspec(noinline) static void __stdcall call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N))                    \
-            {                                                                                                          \
-                ((MACRO_FUNC_PTR_TYPE_STDCALL(Ret, N))gameAddress)(MACRO_PARAMETER_LIST(N));                           \
-            }                                                                                                          \
-        };                                                                                                             \
-                                                                                                                       \
-    public:                                                                                                            \
-        typedef CallHelper<Ret> Function;                                                                              \
-    };                                                                                                                 \
-    MACRO_CLASS_FUNC_TEMPLATE_HEADER(, Ret, Class, N, ) struct GameCaller<MACRO_FUNC_PTR_TYPE_MEMBER(Ret, Class, N)> { \
+#define MACRO_GAME_THIS_FUNCTION(N)                                                                                    \
+    MACRO_CLASS_FUNC_TEMPLATE_HEADER(, Ret, Class, N, )                                                                \
+    struct GameFunction<MACRO_FUNC_PTR_TYPE_MEMBER(Ret, Class, N)> {                                                   \
     private:                                                                                                           \
         template <typename R, typename = void> struct CallHelper {                                                     \
             __declspec(noinline) R call(MACRO_PARAMETER_TYPE_PARAMETER_LIST(N))                                        \
@@ -418,10 +397,10 @@ public:
         };                                                                                                             \
                                                                                                                        \
     public:                                                                                                            \
-        typedef CallHelper<Ret> Function;                                                                              \
+        inline static FuncPtrType get() { return reinterpret_cast<FuncPtrType>(&CallHelper<Ret>::call); }              \
     };
-        MACRO_INDEX_ITERATE_DEPTH_1(MACRO_NUMBER_OF_FUNCTIONS_TO_GENERATE, MACRO_GAME_CALLER, M_SPACE)
-#undef MACRO_GAME_CALLER
+        MACRO_INDEX_ITERATE_DEPTH_1(MACRO_NUMBER_OF_FUNCTIONS_TO_GENERATE, MACRO_GAME_THIS_FUNCTION, M_SPACE)
+#undef MACRO_GAME_THIS_FUNCTION
 
         typedef FunctionPtrUnifier<isImplemented, Flags::USE_WRAPPER, void> UnifiedFunctionPtr;
 
