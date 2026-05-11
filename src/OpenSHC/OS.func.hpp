@@ -10,9 +10,9 @@
 
 #include "OpenSHC/OS.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
-#include "OpenSHC/WindowsHelper/Enums/FilePtrMoveMethodInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/OpenFlagInt.hpp"
 #include "crtdefs.h"
+#include "fileapi.h"
 #include "guiddef.h"
 #include "mbstring.h"
 #include "time.h"
@@ -21,7 +21,6 @@ namespace OpenSHC {
 namespace OS_Func {
 
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-    using OpenSHC::WindowsHelper::Enums::FilePtrMoveMethodInt;
     using OpenSHC::WindowsHelper::Enums::OpenFlagInt;
 
     MACRO_FUNCTION_RESOLVER(int*(__stdcall*)(void* param_1, uint param_2), REIMPLEMENTED_CRT,
@@ -120,7 +119,7 @@ namespace OS_Func {
         long(__cdecl*)(FILE* _File), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x0058028F, &OpenSHC::OS::_ftell)
     _ftell;
 
-    MACRO_FUNCTION_RESOLVER(int(__cdecl*)(FILE* _File, long _Offset, FilePtrMoveMethodInt _Origin), REIMPLEMENTED_CRT,
+    MACRO_FUNCTION_RESOLVER(int(__cdecl*)(FILE* _File, long _Offset, DWORD _Origin), REIMPLEMENTED_CRT,
         Address::SHC_3BB0A8C1_0x00580384, &OpenSHC::OS::_fseek)
     _fseek;
 
@@ -191,7 +190,7 @@ namespace OS_Func {
         int(__cdecl*)(int _C), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x005824CD, &OpenSHC::OS::_toupper)
     _toupper;
 
-    MACRO_FUNCTION_RESOLVER(int(__cdecl*)(int fileDescriptor, long lDistanceToMove, FilePtrMoveMethodInt moveMethod),
+    MACRO_FUNCTION_RESOLVER(int(__cdecl*)(int fileDescriptor, long lDistanceToMove, DWORD moveMethod),
         REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x0058277E, &OpenSHC::OS::_ucrt_lseek)
     _ucrt_lseek;
 

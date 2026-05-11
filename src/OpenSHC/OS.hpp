@@ -9,9 +9,9 @@
 #pragma once
 
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
-#include "OpenSHC/WindowsHelper/Enums/FilePtrMoveMethodInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/OpenFlagInt.hpp"
 #include "crtdefs.h"
+#include "fileapi.h"
 #include "guiddef.h"
 #include "mbstring.h"
 #include "time.h"
@@ -20,7 +20,6 @@ namespace OpenSHC {
 namespace OS {
 
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-    using OpenSHC::WindowsHelper::Enums::FilePtrMoveMethodInt;
     using OpenSHC::WindowsHelper::Enums::OpenFlagInt;
 
     int* __stdcall basic_ofstream_write(void* param_1, uint param_2);
@@ -71,7 +70,7 @@ namespace OS {
 
     long __cdecl _ftell(FILE* _File);
 
-    int __cdecl _fseek(FILE* _File, long _Offset, FilePtrMoveMethodInt _Origin);
+    int __cdecl _fseek(FILE* _File, long _Offset, DWORD _Origin);
 
     FILE* __cdecl _fopen(char* _Filename, char* _Mode);
 
@@ -107,7 +106,7 @@ namespace OS {
 
     int __cdecl _toupper(int _C);
 
-    int __cdecl _ucrt_lseek(int fileDescriptor, long lDistanceToMove, FilePtrMoveMethodInt moveMethod);
+    int __cdecl _ucrt_lseek(int fileDescriptor, long lDistanceToMove, DWORD moveMethod);
 
     longlong __stdcall __alldiv(
         long dividend_lowOrder, long dividend_highOrder, long divisor_lowOrder, long divisor_highOrder);
