@@ -26,26 +26,6 @@ namespace OS {
 
     BOOLEnum __cdecl isEqualGUID(GUID* param_1, GUID* param_2);
 
-    int __cdecl __isnan(double _X);
-
-    int __cdecl __ftol2(float10 param);
-
-    void __cdecl math_atan_FUN_0057ee10(float10 param_1);
-
-    float10 __cdecl math_atan_FUN_0057ee68(float10 floatIn, uint eaxIn, int param_3, int param_4);
-
-    float10 __cdecl math_sqrt_FUN_0057eef0(float10 param_1);
-
-    float10 __cdecl math_sqrt_FUN_0057ef0d(int param_1, uint param_2, float10 param_3);
-
-    void __cdecl math_tan_1_FUN_0057eff0(float10 param_1);
-
-    float10 __cdecl math_FUN_0057f048(int param_1, int param_2);
-
-    float10 __fastcall math_cos(float10 param_1);
-
-    float10 __fastcall math_sin(float10 param_1);
-
     tm* __cdecl __localtime64(__time32_t* _Time);
 
     __time64_t __cdecl __time64(__time64_t* _Time);
@@ -108,24 +88,11 @@ namespace OS {
 
     int __cdecl _ucrt_lseek(int fileDescriptor, long lDistanceToMove, DWORD moveMethod);
 
-    longlong __stdcall __alldiv(
-        long dividend_lowOrder, long dividend_highOrder, long divisor_lowOrder, long divisor_highOrder);
-
-    ulonglong __stdcall __allmul(
-        ulong factor1_lowOrder, ulong factor1_highOrder, ulong factor2_lowOrder, ulong factor2_highOrder);
-
     undefined4 __stdcall __alloca_probe();
 
     int __cdecl __strnicmp(char* _Str1, char* _Str2, size_t _MaxCount);
 
     void __cdecl _exit(int _Code);
-
-    uint __cdecl math_FUN_00588628(undefined4 param_1, uint param_2);
-
-    float10 __fastcall math_FUN_0058864b(float10 param_1, char* param_2, int param_3, undefined4 param_4,
-        undefined4 param_5, undefined4 param_6, undefined4 param_7);
-
-    float10 __fastcall math_FUN_005887ae();
 
 } // namespace OS
 } // namespace OpenSHC

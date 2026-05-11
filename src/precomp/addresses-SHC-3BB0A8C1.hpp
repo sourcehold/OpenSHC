@@ -72572,47 +72572,47 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0057ECD3 = 0x0057ECD3,
     // label: __isnan
-    // location: OpenSHC/OS
+    // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057ECF1 = 0x0057ECF1,
     // label: __ftol2
-    // location: OpenSHC/OS
+    // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057ED20 = 0x0057ED20,
     // type: function
     SHC_3BB0A8C1_0x0057ED56 = 0x0057ED56,
-    // label: math_atan_FUN_0057ee10
-    // location: OpenSHC/OS
+    // label: _math_atan_FUN_0057ee10
+    // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057EE10 = 0x0057EE10,
-    // label: math_atan_FUN_0057ee68
-    // location: OpenSHC/OS
+    // label: _math_atan_FUN_0057ee68
+    // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057EE68 = 0x0057EE68,
     // type: function
     SHC_3BB0A8C1_0x0057EECB = 0x0057EECB,
-    // label: math_sqrt_FUN_0057eef0
-    // location: OpenSHC/OS
+    // label: _math_sqrt_FUN_0057eef0
+    // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057EEF0 = 0x0057EEF0,
-    // label: math_sqrt_FUN_0057ef0d
-    // location: OpenSHC/OS
+    // label: _math_sqrt_FUN_0057ef0d
+    // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057EF0D = 0x0057EF0D,
-    // label: math_tan_1_FUN_0057eff0
-    // location: OpenSHC/OS
+    // label: _math_tan_1_FUN_0057eff0
+    // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057EFF0 = 0x0057EFF0,
     // label: FUN_0057f03f
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057F03F = 0x0057F03F,
-    // label: math_FUN_0057f048
-    // location: OpenSHC/OS
+    // label: _math_FUN_0057f048
+    // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057F048 = 0x0057F048,
-    // label: math_cos
-    // location: OpenSHC/OS
+    // label: _math_cos
+    // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057F120 = 0x0057F120,
     // label: FUN_0057f16f
@@ -72623,8 +72623,8 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057F178 = 0x0057F178,
-    // label: math_sin
-    // location: OpenSHC/OS
+    // label: _math_sin
+    // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057F250 = 0x0057F250,
     // type: function
@@ -73236,11 +73236,11 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00582BC3 = 0x00582BC3,
     // label: __alldiv
-    // location: OpenSHC/OS
+    // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00582C30 = 0x00582C30,
     // label: __allmul
-    // location: OpenSHC/OS
+    // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00582CE0 = 0x00582CE0,
     // label: FUN_00582d14
@@ -73561,7 +73561,8 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0058457D = 0x0058457D,
     // label: ___init_ctype
-    // location:
+    // location: HoldStrong_lib
+    // type: function
     SHC_3BB0A8C1_0x005845A6 = 0x005845A6,
     // label: ____lc_codepage_func
     // location: HoldStrong_lib
@@ -73977,14 +73978,14 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005885E5 = 0x005885E5,
-    // label: math_FUN_00588628
-    // location: OpenSHC/OS
+    // label: _math_FUN_00588628
+    // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00588628 = 0x00588628,
     // type: function
     SHC_3BB0A8C1_0x0058863E = 0x0058863E,
-    // label: math_FUN_0058864b
-    // location: OpenSHC/OS
+    // label: _math_FUN_0058864b
+    // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058864B = 0x0058864B,
     // label: __startOneArgErrorHandling
@@ -73995,8 +73996,8 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00588790 = 0x00588790,
-    // label: math_FUN_005887ae
-    // location: OpenSHC/OS
+    // label: _math_FUN_005887ae
+    // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005887AE = 0x005887AE,
     // label: FUN_005889f0
@@ -74889,7 +74890,8 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00591C99 = 0x00591C99,
     // label: ___init_time
-    // location:
+    // location: HoldStrong_lib
+    // type: function
     SHC_3BB0A8C1_0x00591E29 = 0x00591E29,
     // label: ___free_lconv_num
     // location: HoldStrong_lib
@@ -95093,6 +95095,8 @@ enum {
     // label: DAT_TacticalPowersHelpTextDisplayBool
     // location:
     SHC_3BB0A8C1_0x00ED3128 = 0x00ED3128,
+    // type: /float
+    SHC_3BB0A8C1_0x00ED312C = 0x00ED312C,
     // type: /dword
     SHC_3BB0A8C1_0x00ED3138 = 0x00ED3138,
     // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
