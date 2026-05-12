@@ -108,7 +108,7 @@ namespace AI {
         setFoodBuyPlan;
 
         MACRO_FUNCTION_RESOLVER(
-            int (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CB120, &AICState::getAIBuildInterval)
+            int (AICState::*)(int), true, Address::SHC_3BB0A8C1_0x004CB120, &AICState::getAIBuildInterval)
         getAIBuildInterval;
 
         MACRO_FUNCTION_RESOLVER(
