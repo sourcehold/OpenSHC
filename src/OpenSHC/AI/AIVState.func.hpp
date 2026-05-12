@@ -35,7 +35,7 @@ namespace AI {
         syncAIPlayerNamesAndBuildIntervals;
 
         MACRO_FUNCTION_RESOLVER(
-            int (AIVState::*)(int), false, Address::SHC_3BB0A8C1_0x004ECEF0, &AIVState::setupAIVMetadata)
+            int (AIVState::*)(int), true, Address::SHC_3BB0A8C1_0x004ECEF0, &AIVState::setupAIVMetadata)
         setupAIVMetadata;
 
         MACRO_FUNCTION_RESOLVER(void (AIVState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004ECF70,
