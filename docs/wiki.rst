@@ -9,6 +9,8 @@ Here you'll find detailed documentation about the Project and the Game
 The OpenSHC Project
 -------------
 - :doc:`How reimplementation works <wiki/wiki-workings>`
+- Tutorials
+  1. :doc:`Reimplementation tutorial 1 <wiki/tutorials/reimplementation-tutorial-1>`
 
 The Game itself
 -----------
