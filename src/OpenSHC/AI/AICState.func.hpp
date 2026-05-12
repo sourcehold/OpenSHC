@@ -104,7 +104,7 @@ namespace AI {
         updateTaxesAndRationsForAI;
 
         MACRO_FUNCTION_RESOLVER(
-            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CB060, &AICState::setFoodBuyPlan)
+            void (AICState::*)(int), true, Address::SHC_3BB0A8C1_0x004CB060, &AICState::setFoodBuyPlan)
         setFoodBuyPlan;
 
         MACRO_FUNCTION_RESOLVER(
@@ -602,8 +602,8 @@ namespace AI {
             void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D3780, &AICState::computeNervousness)
         computeNervousness;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004D3850,
-            &AICState::determineAIPlayerHelp)
+        MACRO_FUNCTION_RESOLVER(
+            BOOLEnum (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004D3850, &AICState::determineAIPlayerHelp)
         determineAIPlayerHelp;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, undefined4, int), false, Address::SHC_3BB0A8C1_0x004D38C0,

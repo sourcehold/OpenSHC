@@ -349,7 +349,7 @@ namespace AI {
 
         void computeNervousness(int playerID);
 
-        undefined4 determineAIPlayerHelp(int playerID, int requestedByPlayerID);
+        BOOLEnum determineAIPlayerHelp(int playerID, int requestedByPlayerID);
 
         BOOLEnum determineAIPlayerAttackRequestResponse(int playerID, undefined4 param_2, int requestedByPlayerID);
 
