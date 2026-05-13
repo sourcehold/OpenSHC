@@ -340,7 +340,7 @@ this->aivCount = this->aivCount + 1;
 See Tutorial 1. Make sure to only submit one function per PR or multiple functions that belong logically together (such as class methods of the same class).
 
 ### Note: reimplementation of library functions
-Not all called functions can reimplemented, as some are windows library functions that were statically included into the binary.
+Not all called functions can reimplemented, as some are windows library functions that were statically included into the binary. Note that not all library functions start with `_`.
 
 #### Windows library functions
 For example, line 20 calls the windows `_rand()` function:
@@ -402,3 +402,36 @@ For math operations that involve floating point numbers, functions are injected 
 As this injection of functions cannot be replicated from source code, we ignore these in reimplementations and hope the compiler injects them again.
 
 You won't see such functions listed in the `OpenSHC::OS` namespace.
+
+
+### Note: ignoring Ghidra function sugar
+Ghidra includes helper functions to explicate what is happening logically. One such example is the `ADJ()` function, which represents relative offsets from one field to another. Note how the ptr on line 12 is the input of `ADJ()` to get access to other fields.
+
+Ghida functions like this are not reimplemented and can be removed/ignored.
+
+```cpp=
+
+int __thiscall
+OpenSHC::Map::Units::UnitsState::getAliveLordForPlayer(UnitsState *this,int playerID)
+
+{
+  int _unit;
+  Unit * 150 _ptrUnit;
+  
+  _unit = 1;
+  if (1 < (int)DAT_UnitsState.maxUnitCount) {
+                    /* Unit offset 150 */
+    _ptrUnit = &DAT_UnitsState.units[1].owner;
+    do {
+      if ((((ADJ(_ptrUnit)->unitType == UT_LORD) && (ADJ(_ptrUnit)->owner == playerID)) &&
+          (ADJ(_ptrUnit)->logicalState == ULS_NORMAL)) && (ADJ(_ptrUnit)->dying == 0)) {
+        return _unit;
+      }
+      _unit = _unit + 1;
+      _ptrUnit = _ptrUnit + 0x248;
+    } while (_unit < (int)DAT_UnitsState.maxUnitCount);
+  }
+  return 0;
+}
+
+```
