@@ -10,27 +10,24 @@ namespace Random {
     void RNG::populateRNG1040()
 
     {
-        int iVar1;
-        int iVar2;
-        short* _pRandomNumber;
 
         MACRO_CALL(OpenSHC::Global_Func::SetRNGSeed)(this->seed);
         this->index2 = 0;
         this->index1 = 0;
-        _pRandomNumber = &this->randomNumbers[0];
-        iVar2 = 20000;
+        short* _pRandomNumber = &this->randomNumbers[0];
+        int n = 20000;
         do {
-            iVar1 = MACRO_CALL(OpenSHC::OS_Func::_rand)();
-            *_pRandomNumber = (short)iVar1;
-            _pRandomNumber = _pRandomNumber + 1;
-            iVar2 = iVar2 + -1;
-        } while (iVar2 != 0);
+            int random = MACRO_CALL(OpenSHC::OS_Func::_rand)();
+            *_pRandomNumber = (short)random;
+            _pRandomNumber += 1;
+            n -= 1;
+        } while (n != 0);
 
         this->currentNumber2 = this->randomNumbers[this->index2];
-        this->index2 = this->index2 + 1;
+        this->index2 += 1;
 
         this->currentNumber1 = this->randomNumbers[this->index1];
-        this->index1 = this->index1 + 1;
+        this->index1 += 1;
 
         return;
     }

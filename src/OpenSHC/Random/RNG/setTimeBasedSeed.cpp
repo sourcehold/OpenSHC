@@ -11,8 +11,8 @@ namespace Random {
 
     {
 
-        __time64_t _Var1 = MACRO_CALL(OpenSHC::OS_Func::__time64)((__time64_t*)0x0);
-        this->seed = (int)_Var1;
+        __time64_t time = MACRO_CALL(OpenSHC::OS_Func::__time64)((__time64_t*)0x0);
+        this->seed = (int)time;
         return;
     }
 
