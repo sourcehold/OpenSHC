@@ -10,7 +10,9 @@ The OpenSHC Project
 -------------
 - :doc:`How reimplementation works <wiki/wiki-workings>`
 - Tutorials
-  1. :doc:`Reimplementation tutorial 1 <wiki/tutorials/reimplementation-tutorial-1>`
+  1. :doc:`Reimplementation tutorial 1: basics <wiki/tutorials/reimplementation-tutorial-1>`
+  2. :doc:`Reimplementation tutorial 2: function calls <wiki/tutorials/reimplementation-tutorial-2>`
+  3. :doc:`Reimplementation tutorial 3: arrays and fields <wiki/tutorials/reimplementation-tutorial-3>`
 
 The Game itself
 -----------
