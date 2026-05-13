@@ -23,7 +23,7 @@ namespace OS {
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
     using OpenSHC::WindowsHelper::Enums::OpenFlagInt;
 
-    // int* __stdcall basic_ofstream_write(void* param_1, uint param_2);
+    int* __stdcall basic_ofstream_write(void* param_1, uint param_2);
 
     BOOLEnum __cdecl isEqualGUID(GUID* param_1, GUID* param_2);
 

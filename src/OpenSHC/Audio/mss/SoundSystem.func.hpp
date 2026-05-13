@@ -22,7 +22,7 @@ namespace Audio {
             meth_0x424700;
 
             MACRO_FUNCTION_RESOLVER(
-                void (SoundSystem::*)(), false, Address::SHC_3BB0A8C1_0x00467810, &SoundSystem::stopMusicPlayback)
+                void (SoundSystem::*)(), true, Address::SHC_3BB0A8C1_0x00467810, &SoundSystem::stopMusicPlayback)
             stopMusicPlayback;
 
             MACRO_FUNCTION_RESOLVER(

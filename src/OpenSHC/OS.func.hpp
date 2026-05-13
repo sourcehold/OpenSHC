@@ -24,13 +24,17 @@ namespace OS_Func {
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
     using OpenSHC::WindowsHelper::Enums::OpenFlagInt;
 
-    // MACRO_FUNCTION_RESOLVER(int*(__stdcall*)(void* param_1, uint param_2), REIMPLEMENTED_CRT,
-    //     Address::SHC_3BB0A8C1_0x004791B0, &OpenSHC::OS::basic_ofstream_write)
-    // basic_ofstream_write;
+    MACRO_FUNCTION_RESOLVER(int*(__stdcall*)(void* param_1, uint param_2), REIMPLEMENTED_CRT,
+        Address::SHC_3BB0A8C1_0x004791B0, &OpenSHC::OS::basic_ofstream_write)
+    basic_ofstream_write;
 
     MACRO_FUNCTION_RESOLVER(BOOLEnum(__cdecl*)(GUID* param_1, GUID* param_2), REIMPLEMENTED_CRT,
         Address::SHC_3BB0A8C1_0x0047C5D0, &OpenSHC::OS::isEqualGUID)
     isEqualGUID;
+
+    MACRO_FUNCTION_RESOLVER(
+        int(__cdecl*)(double _X), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x0057ECF1, &OpenSHC::OS::__isnan)
+    __isnan;
 
     MACRO_FUNCTION_RESOLVER(
         tm*(__cdecl*)(time_t* _Time), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x0057F5FE, &OpenSHC::OS::_localtime)
