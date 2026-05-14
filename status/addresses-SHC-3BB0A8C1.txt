@@ -10880,7 +10880,7 @@ SHC_3BB0A8C1_0x00479369 | 0.0% | Pending
 SHC_3BB0A8C1_0x00479400 | 0.0% | Pending
 SHC_3BB0A8C1_0x00479540 | 0.0% | Pending
 SHC_3BB0A8C1_0x00479790 | 0.0% | Pending
-SHC_3BB0A8C1_0x004799A0 | 96.36% | "_close" is seen as unknown offset call by reccmp
+SHC_3BB0A8C1_0x004799A0 | 100.0% | Reimplemented
 SHC_3BB0A8C1_0x00479A60 | 100.0% | Reimplemented
 SHC_3BB0A8C1_0x00479AB0 | 100.0% | Reimplemented
 SHC_3BB0A8C1_0x00479AF0 | 100.0% | Reimplemented
@@ -42943,4 +42943,3 @@ SHC_3BB0A8C1_0x02490916 | 0.0% | Pending
 SHC_3BB0A8C1_0x02490930 | 0.0% | Pending
 SHC_3BB0A8C1_0x02490936 | 0.0% | Pending
 SHC_3BB0A8C1_0x02490954 | 0.0% | Pending
-SHC_3BB0A8C1_0x00df3844 | 0.0% | Pending

@@ -5,12 +5,10 @@
 
 #include "OpenSHC/OS.func.hpp"
 
-#include "OpenSHC/Globals/DAT_00df3844.hpp"
+#include "OpenSHC/Globals/DAT_SoundEffectsHelperData1.hpp"
 
-// - DAT_00df3844 did not exist before and is therefore wrongly sorted into the status file
-// - "UnkSoundFlagsAndLoopCount" plays not nice with any number-like operation, the more likely thing therefore are
-// either a union, which allows to access the different parts separately, but this would likely compile to WORD
-// operations, or a bitfield, maybe like this:
+// NOTE:
+// "UnkSoundFlagsAndLoopCount" might be a bitfield, maybe like this:
 //      int loopCount : 16;
 //      int reserved : 13;
 //      int unknownFlag1 : 1;
@@ -32,7 +30,7 @@ namespace Audio {
 
             if (sndStreamIndex == enums::SND_STR_MUSIC) {
                 this->streamActiveUnk_0x20[0] = 0;
-                *DAT_00df3844::ptr = 1;
+                DAT_SoundEffectsHelperData1::ptr->field14_0x54 = true;
                 if (this->musicSampleFileHandleUnk_0x174 != -1) {
                     AIL_end_sample(this->musicSampleUnk_0x170);
                     MACRO_CALL(OS_Func::_ucrt_close)(this->musicSampleFileHandleUnk_0x174);
@@ -43,7 +41,7 @@ namespace Audio {
                 this->musicFileHandle_0x178 = -1;
                 this->musicSampleFileHandleUnk_0x174 = -1;
                 this->mbr_0x188 = 1;
-                *DAT_00df3844::ptr = 0;
+                DAT_SoundEffectsHelperData1::ptr->field14_0x54 = false;
                 this->sec_Section1055_0x3274 = 0;
                 return;
             }

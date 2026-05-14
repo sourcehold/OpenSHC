@@ -98109,7 +98109,6 @@ enum {
     // location:
     // type: /byte[1708]
     SHC_3BB0A8C1_0x02490954 = 0x02490954,
-    // type: /undefined4
-    SHC_3BB0A8C1_0x00df3844 = 0x00df3844,
+
 };
 }
