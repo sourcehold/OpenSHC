@@ -53,7 +53,7 @@ Percentages and comments should be kept, but always check the difference.
 1. Stronghold Crusader 1.41 Latin. The Steam version is the easiest one to get, but any patched version will do. Make sure the installation uses a Latin version (English, German, etc).
 2. CMake with the minimum version 3.24.
 3. [Python3](https://www.python.org/)
-4. A way to execute `clang-format`
+4. A way to execute `clang-format 22`
 5. (Recommended) An IDE with CMake integration. The repository has been optimized for Visual Studio Code using the [Microsoft C/C++ Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools-extension-pack).
 
 ### Setup
@@ -91,7 +91,7 @@ If the scripts are preferred, the following triggers a build using the scripts:
 
 If CMake is installed and not in PATH, for example if installed via Visual Studio, `cmakew.bat` can be used instead. It tries to detect a CMake installation and uses it.
 
-Note that any code needs to be formatted properly using the provided `clang-format`. The way to do so it up to the developer. Many IDEs support it out of the box.
+Note that any code needs to be formatted properly using the provided `clang-format` file. The way to do so it up to the developer. Many IDEs support it out of the box. Should issues occur, please note that we target clang-format 22. So if your local version or IDE seems to not produce the right format, switch to a fixed version installed on your system.
 
 If any `.cpp` or `.c` files are added to the source code, they should be listed in one of the txt files in `cmake/`:
 
