@@ -16,12 +16,12 @@ jobs:
     permissions: 
       pull-requests: write
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       # Detect if any relevant files changed
       - name: Detect relevant files
         id: filter
-        uses: dorny/paths-filter@v3
+        uses: dorny/paths-filter@v4
         with:
           filters: |
             cpp:
