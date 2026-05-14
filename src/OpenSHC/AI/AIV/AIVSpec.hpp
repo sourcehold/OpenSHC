@@ -3,7 +3,7 @@
   Communicate changes to the dev team (e.g. via a Pull Request).
   Changes get lost otherwise.
 
-  path: 'OpenSHC/AI/AIV/AIV.hpp'
+  path: 'OpenSHC/AI/AIV/AIVSpec.hpp'
 */
 
 #pragma once
@@ -18,7 +18,7 @@ namespace AI {
 
 #pragma pack(push, 1)
         // SIZE: 0x00006D98
-        typedef struct AIV {
+        typedef struct AIVSpec {
 
             int playerID; // 0x00000000 length: 4
             int aiType; // 0x00000004 length: 4
@@ -37,10 +37,10 @@ namespace AI {
             int locationsArray[4000]; // 0x00002F14 length: 16000
             int wallLocationsArrayIndex; // 0x00006D94 length: 4
 
-        } AIV;
+        } AIVSpec;
 #pragma pack(pop)
 
-        static_assert_cpp98_obj(sizeof(AIV) == 28056, AIV);
+        static_assert_cpp98_obj(sizeof(AIVSpec) == 28056, AIVSpec);
     } // namespace AIV
 } // namespace AI
 } // namespace OpenSHC

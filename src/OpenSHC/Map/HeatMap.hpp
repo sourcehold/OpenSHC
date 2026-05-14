@@ -3,7 +3,7 @@
   Communicate changes to the dev team (e.g. via a Pull Request).
   Changes get lost otherwise.
 
-  path: 'OpenSHC/Map/HeatMap1114.hpp'
+  path: 'OpenSHC/Map/HeatMap.hpp'
 */
 
 #pragma once
@@ -13,12 +13,12 @@ namespace Map {
 
 #pragma pack(push, 1)
     // SIZE: 0x00000030
-    typedef struct HeatMap1114 {
+    typedef struct HeatMap {
 
         int algorithmIterationNumber; // 0x00000000 length: 4
         byte distanceToTheKeepCountUnk_fixme; // 0x00000004 length: 1
         byte algorithmVisitCountUnk; // 0x00000005 length: 1
-        byte anotherCount_0x6; // 0x00000006 length: 1
+        byte woodRelatedCountdownTo0; // 0x00000006 length: 1
         byte woodCount; // 0x00000007 length: 1
         byte stoneCount; // 0x00000008 length: 1
         byte ironCount; // 0x00000009 length: 1
@@ -31,7 +31,7 @@ namespace Map {
         byte isNotNearEdgeUnk; // 0x00000010 length: 1
         byte oasisUnk; // 0x00000011 length: 1
         byte oasisthickUnk; // 0x00000012 length: 1
-        byte value10; // 0x00000013 length: 1
+        byte countdownFrom10to0; // 0x00000013 length: 1
         byte field17_0x14; // 0x00000014 length: 1
         byte tileOwnership; // 0x00000015 length: 1
         byte waterOrRockCountUnk; // 0x00000016 length: 1
@@ -49,9 +49,9 @@ namespace Map {
         short field31_0x2c; // 0x0000002C length: 2
         short field32_0x2e; // 0x0000002E length: 2
 
-    } HeatMap1114;
+    } HeatMap;
 #pragma pack(pop)
 
-    static_assert_cpp98_obj(sizeof(HeatMap1114) == 48, HeatMap1114);
+    static_assert_cpp98_obj(sizeof(HeatMap) == 48, HeatMap);
 } // namespace Map
 } // namespace OpenSHC

@@ -492,8 +492,8 @@ namespace Map {
             processDamageFromKillingPit;
 
             MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x00419960,
-                &BuildingsState::SomethingUpdatePathLinkageTileMap)
-            SomethingUpdatePathLinkageTileMap;
+                &BuildingsState::unkUpdatePathLinkageTileMap)
+            unkUpdatePathLinkageTileMap;
 
             MACRO_FUNCTION_RESOLVER(
                 void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x00419A30, &BuildingsState::meth_0x419a30)

@@ -168,7 +168,8 @@ namespace AI {
 
         int getDefensiveTribeForUnit(int playerID, int unitID);
 
-        int addUnitToSmallestBehaviourTypeTribe(short* playerID, undefined unitID, int aiUnitBehaviourType);
+        int addUnitToSmallestBehaviourTypeTribe(
+            undefined4 playerID, undefined4 param_2, undefined4 aiUnitBehaviourType);
 
         void sendUnitsToKeep(undefined4 tribeID, int playerID);
 
@@ -188,7 +189,7 @@ namespace AI {
 
         void giveMoveCommandToSortieUnits(int playerID);
 
-        void addBuildingToSomePlayerStateArray(int buildingID);
+        void addBuildingToTargetableBuildings(int buildingID);
 
         int selectBuildingFromAListOfBuildingTypes(int playerID);
 
@@ -295,11 +296,37 @@ namespace AI {
 
         int shareGoldAmongTeamMembers(int playerID, int gold);
 
-        void PlayAnger1BikFromPlayer(int playerID);
+        void playTauntToAttackedPlayerBikFromPlayer(int playerID);
 
-        void PlayPlayerKilledBiksFromKilledAndKillerPlayer(int killerPlayerID, int killedPlayerID);
+        void playAnger1BikFromPlayer(int playerID);
+
+        void playPlayerKilledBiksFromKilledAndKillerPlayer(int killerPlayerID, int killedPlayerID);
+
+        void playGoodsRequestBikFromPlayerToPlayer(int playerID, int targetPlayerID);
 
         void playThanksBikFromPlayerToPlayer(int playerID, int targetPlayerID);
+
+        void playNervous2BikFromPlayer(int playerID);
+
+        void playGoodsNotSentBikFromPlayer(int playerID);
+
+        void playGoodsSentBikFromPlayerToPlayer(int playerID, int targetPlayerID);
+
+        void playAnger2BikFromPlayerToPlayer(int playerID, int targetPlayerID);
+
+        void playVictory2BikFromPlayerToPlayer(int playerID, int targetPlayerID);
+
+        void playNervous1BikFromPlayer(int playerID);
+
+        void playRequestHelpBikFromPlayer(int playerID);
+
+        void playJokeBikFromAIToHuman(int playerID, int aiType);
+
+        void playFriendlyVictoryBikFromPlayer(int playerID);
+
+        void playTeamWinningBikFromPlayer(int playerID);
+
+        void playNoHelpBikFromPlayer(int playerID);
 
         void setSomeTimeToNowIfInIngameMenu();
 
@@ -349,7 +376,7 @@ namespace AI {
 
         void computeNervousness(int playerID);
 
-        undefined4 determineAIPlayerHelp(int playerID, int requestedByPlayerID);
+        BOOLEnum determineAIPlayerHelp(int playerID, int requestedByPlayerID);
 
         BOOLEnum determineAIPlayerAttackRequestResponse(int playerID, undefined4 param_2, int requestedByPlayerID);
 

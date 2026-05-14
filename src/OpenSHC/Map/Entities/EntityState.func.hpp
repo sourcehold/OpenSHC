@@ -188,7 +188,7 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x004083A0, &EntityState::spawnEntityEffect1)
             spawnEntityEffect1;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (EntityState::*)(int), false, Address::SHC_3BB0A8C1_0x004084A0,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (EntityState::*)(int), false, Address::SHC_3BB0A8C1_0x004084A0,
                 &EntityState::moveProjectileEntity)
             moveProjectileEntity;
 

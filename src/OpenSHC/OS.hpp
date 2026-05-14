@@ -11,9 +11,9 @@
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 #include "OpenSHC/WindowsHelper/Enums/OpenFlagInt.hpp"
 #include "crtdefs.h"
-#include "fileapi.h"
 #include "guiddef.h"
 #include "mbstring.h"
+#include "stdio.h"
 #include "time.h"
 #include "vadefs.h"
 namespace OpenSHC {
@@ -38,9 +38,9 @@ namespace OS {
 
     int __cdecl _atexit(void* param_1);
 
-    void __cdecl _free(void* _Memory);
+    void __cdecl _free_base(void* _Memory);
 
-    int __cdecl _tolower(int _C);
+    int __cdecl __tolower(int _C);
 
     int __cdecl _fclose(FILE* _File);
 
@@ -68,7 +68,7 @@ namespace OS {
 
     errno_t __cdecl _memcpy_s(void* _Dst, rsize_t _DstSize, void* _Src, rsize_t _MaxCount);
 
-    void __cdecl _free(void* _Memory);
+    void __cdecl _free_cpp(void* _Memory);
 
     int __cdecl _ucrt_close(int fileDescriptor);
 
@@ -84,7 +84,7 @@ namespace OS {
 
     void* __cdecl _memcpy(void* _Dst, void* _Src, size_t _Size);
 
-    int __cdecl _toupper(int _C);
+    int __cdecl __toupper(int _C);
 
     int __cdecl _ucrt_lseek(int fileDescriptor, long lDistanceToMove, DWORD moveMethod);
 

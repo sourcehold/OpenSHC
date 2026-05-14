@@ -408,24 +408,6 @@ namespace Global {
 
     BOOLEnum __stdcall CheckTribeActivityPercentages(int tribeID, BOOLEnum ignoreShooting, BOOLEnum includeMoving);
 
-    void __stdcall PlayTauntToAttackedPlayerBikFromPlayer(int playerID);
-
-    void __stdcall PlayGoodsRequestBikFromPlayerToPlayer(int playerID, int targetPlayerID);
-
-    void __stdcall PlayNervous2BikFromPlayer(int playerID);
-
-    void __stdcall PlayGoodsNotSentBikFromPlayer(int playerID);
-
-    void __stdcall PlayGoodsSentBikFromPlayerToPlayer(int playerID, int targetPlayerID);
-
-    void __stdcall PlayAnger2BikFromPlayerToPlayer(int playerID, int targetPlayerID);
-
-    void __stdcall PlayVictory2BikFromPlayerToPlayer(int playerID, int targetPlayerID);
-
-    void __stdcall PlayNervous1BikFromPlayer(int playerID);
-
-    void __stdcall PlayRequestHelpBikFromPlayer(int playerID);
-
     void __stdcall PlayWillNotHelp1BikFromPlayerToPlayer(int playerID, int targetPlayerID);
 
     void __stdcall PlayWillNotHelp2BikFromPlayerToPlayer(int playerID, int targetPlayerID);
@@ -437,14 +419,6 @@ namespace Global {
     void __stdcall PlayWillNotAttack2BikFromPlayerToPlayer(int playerID, int targetPlayerID);
 
     void __stdcall PlayWillAttackBikFromPlayerToPlayer(int playerID, int targetPlayerID);
-
-    void __stdcall PlayJokeBikFromAIToHuman(int playerID, int aiType);
-
-    void __stdcall PlayFriendlyVictoryBikFromPlayer(int playerID);
-
-    void __stdcall PlayTeamWinningBikFromPlayer(int playerID);
-
-    void __stdcall PlayNoHelpBikFromPlayer(int playerID);
 
     BOOLEnum __cdecl StoreCurrentGameIntoTemporarySKMasterEntry(int score);
 
