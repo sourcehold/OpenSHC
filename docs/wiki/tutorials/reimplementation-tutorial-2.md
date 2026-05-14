@@ -130,12 +130,20 @@ OpenSHC::AI::AIVState::setupAIVMetadata is only 64.10% similar to the original, 
 
 We achieved 64%!
 
-#### Dealing with non-reimplemented calls
+### Step 3: Dealing with non-reimplemented calls
 Note line 50 which instead of calling an OFFSET, it calls `FunctionResolver::Resolver<int (__thiscall OpenSHC::AI::AICState::*)(int),0,5026080,&OpenSHC::AI::AICState::getAIBuildInterval,0>::GameFunction<int (__thiscall OpenSHC::AI::AICState::*)(int)>::CallHelper<int,void>::call (FUNCTION)`.
 
 This happens when the called function hasn't been implemented yet. One solution is to temporarily stub a reimplementation for this function and set its reimplementation state to `true`. The other solution is to reimplement that function first.
 
-### Step 3: reimplementing called functions
+For every reimplemented function to be called, the associated function resolver should have its reimplementation state set to `true`. So, for example, for function `AICState::setFoodBuyPlan` (see Tutorial 1) in file `OpenSHC/AI/AICState.func.hpp` we change line 2 below from `, false,` to `true, `. This detours all calls to `setFoodBuyPlan` through our DLL instead of through the original binary. **Furthermore, functions calling `setFoodBuyPlan` have their percentages improved as the call points to the reimplementation.**
+
+```cpp=
+MACRO_FUNCTION_RESOLVER(
+    void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CB060, &AICState::setFoodBuyPlan)
+setFoodBuyPlan;
+```
+
+### Step 4: reimplementing called functions
 Let's see whether we can reimplement that function while we are at it:
 
 ```cpp=
@@ -257,7 +265,7 @@ OpenSHC::AI::AIVState::setupAIVMetadata is only 66.67% similar to the original, 
 ```
 
 
-### Step 4: improving accuracy using AI
+### Step 5: improving accuracy using AI
 
 Using Claude AI, the following solution gives a special 100% match:
 
@@ -336,8 +344,8 @@ this->aivCount = this->aivCount + 1;
 
 ```
 
-### Step 5: Pull Request preparation
-See Tutorial 1. Make sure to only submit one function per PR or multiple functions that belong logically together (such as class methods of the same class).
+### Step 6: Pull Request preparation
+See Tutorial 1. Make sure to only submit the .cpp file and `status/` update for one function per PR or multiple functions that belong logically together (such as class methods of the same class).
 
 ### Note: reimplementation of library functions
 Not all called functions can reimplemented, as some are windows library functions that were statically included into the binary. Note that not all library functions start with `_`.
