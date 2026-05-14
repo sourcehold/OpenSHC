@@ -17,9 +17,6 @@ namespace OS {
         return static_cast<BOOLEnum>(IsEqualGUID(*param_1, *param_2));
     }
 
-    // STUB: STRONGHOLDCRUSADER 0x0057ECF1
-    int __isnan(double _X) { return _isnan(_X); }
-
     // Very likely just default function call, using time64_t and localtime64 behind
     // STUB: STRONGHOLDCRUSADER 0x0057F5FE
     tm* _localtime(time_t* _Time) { return localtime(_Time); }
@@ -49,11 +46,10 @@ namespace OS {
 
     // This seems to be the games main free function
     // STUB: STRONGHOLDCRUSADER 0x0057FA74
-    void __cdecl _free(void* _Memory) { free(_Memory); }
+    void __cdecl _free_base(void* _Memory) { free(_Memory); }
 
-    // Used implicitly in character conversion pipeline (_tolower). Save if global locale never set.
     // STUB: STRONGHOLDCRUSADER 0x0057FC19
-    // int __cdecl _tolower(int _C);
+    int __cdecl __tolower(int _C) { return tolower(_C); };
 
     // STUB: STRONGHOLDCRUSADER 0x0057FCB2
     int _fclose(FILE* _File) { return fclose(_File); }
@@ -88,9 +84,9 @@ namespace OS {
     // STUB: STRONGHOLDCRUSADER 0x00580B69
     int __wcsicmp(wchar_t* _Str1, wchar_t* _Str2) { return _wcsicmp(_Str1, _Str2); }
 
-    // Only jumps to _free
+    // Only jumps to _free in game version
     // STUB: STRONGHOLDCRUSADER 0x00580DC1
-    // void __cdecl _free(void* _Memory) { free(_Memory); }
+    void __cdecl _free(void* _Memory) { free(_Memory); }
 
     // STUB: STRONGHOLDCRUSADER 0x00580DC6
     errno_t _memcpy_s(void* _Dst, rsize_t _DstSize, void* _Src, rsize_t _MaxCount)
@@ -100,7 +96,7 @@ namespace OS {
 
     // Only jumps to _free
     // STUB: STRONGHOLDCRUSADER 0x00580E9C
-    // void __cdecl _free(void* _Memory) { free(_Memory); }
+    void __cdecl _free_cpp(void* _Memory) { free(_Memory); }
 
     // STUB: STRONGHOLDCRUSADER 0x00580F38
     int _ucrt_close(int fileDescriptor) { return _close(fileDescriptor); }
@@ -126,9 +122,8 @@ namespace OS {
     // STUB: STRONGHOLDCRUSADER 0x00582050
     void* _memcpy(void* _Dst, void* _Src, size_t _Size) { return memcpy(_Dst, _Src, _Size); }
 
-    // Used implicitly in character conversion pipeline (_toupper) Save if global locale never set.
     // STUB: STRONGHOLDCRUSADER 0x005824CD
-    // int __cdecl _toupper(int _C);
+    int __cdecl __toupper(int _C) { return toupper(_C); }
 
     // STUB: STRONGHOLDCRUSADER 0x0058277E
     int _ucrt_lseek(int fileDescriptor, long lDistanceToMove, DWORD moveMethod)

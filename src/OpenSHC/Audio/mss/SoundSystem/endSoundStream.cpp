@@ -7,7 +7,6 @@
 
 #include "OpenSHC/Globals/DAT_00df3844.hpp"
 
-// TODO:
 // - DAT_00df3844 did not exist before and is therefore wrongly sorted into the status file
 // - "UnkSoundFlagsAndLoopCount" plays not nice with any number-like operation, the more likely thing therefore are
 // either a union, which allows to access the different parts separately, but this would likely compile to WORD
