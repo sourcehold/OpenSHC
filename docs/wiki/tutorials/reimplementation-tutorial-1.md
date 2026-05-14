@@ -679,18 +679,10 @@ Note that this 100% reimplementation also revealed a bug or quirk (or feature?):
 It is best practice to note down such oddities in code comments.
 
 ### Step 9: Preparing a Pull Request
-For every reimplemented function, the associated function resolver should have its reimplementation state set to `true`. So, in file `OpenSHC/AI/AICState.func.hpp` we change line 2 below from `, false,` to `true, `. This detours all calls to `setFoodBuyPlan` through our DLL instead of through the original binary. Furthermore, functions calling `setFoodBuyPlan` have their percentages improved as the call points to a reimplementation.
-
-```cpp=
-MACRO_FUNCTION_RESOLVER(
-    void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CB060, &AICState::setFoodBuyPlan)
-setFoodBuyPlan;
-```
-
-Furthermore, in the file `status/addresses-SHC-3BB0A8C1.txt`, we set entry `SHC_3BB0A8C1_0x004CB060`  to `100%` and change `Pending` into `Completed`. If we didn't achieve 100% in Step 7, we note here what prevented full reimplementation. For example, if the reimplementation appears to be functionally identical but optimizations that are only applied to exe files hinder 100%, write: `Functional reimplementation: compiler optimization prevented identical reimplementation`.
+In the file `status/addresses-SHC-3BB0A8C1.txt`, we set entry `SHC_3BB0A8C1_0x004CB060`  to `100%` and change `Pending` into `Completed`. If we didn't achieve 100% in Step 7, we note here what prevented full reimplementation. For example, if the reimplementation appears to be functionally identical but optimizations that are only applied to exe files hinder 100%, write: `Functional reimplementation: compiler optimization prevented identical reimplementation`.
 
 ### Step 10: open the Pull Request
-The Pull Request should contain the changes to the .cpp file, the .func.hpp file. The body of your Pull Request should contain the status of the reimplementation and the output of `reccmp` if not 100%.
+The Pull Request should contain the changes to the .cpp file and the update to the txt file found under `status/`. The body of your Pull Request should contain the status of the reimplementation and the output of `reccmp` if not 100% (run `reccmp` without `--verbose` if you file multiple functions in the PR).
 
 
 ### Conclusion
