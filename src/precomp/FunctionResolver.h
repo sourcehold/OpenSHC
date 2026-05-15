@@ -177,7 +177,7 @@ private:
     };
 
     static void initialize(
-        bool& initialized, bool isImplemented, int gameAddress, const void* funcPtr, const char* funcName);
+        bool& initialized, bool isImplemented, int gameAddress, void const* funcPtr, char const* funcName);
 
     template <int options> struct OptionFlags {
         enum {
@@ -198,18 +198,18 @@ public:
     struct Resolver {
     private:
         // only use this for internal logic and declarations/definitions
-        static const bool isImplemented = OPEN_SHC_IMPLEMENTED(implemented);
+        static bool const isImplemented = OPEN_SHC_IMPLEMENTED(implemented);
 
         typedef OptionFlags<options> Flags;
 
         struct Initializer {
             Initializer();
         };
-        static const Initializer initializer;
+        static Initializer const initializer;
 
         template <bool implemented, bool wrapper, typename _> struct FunctionPtrUnifier;
         template <typename _> struct FunctionPtrUnifier<true, false, _> {
-            inline static const FuncPtrType get() { return funcAddress; }
+            inline static FuncPtrType const get() { return funcAddress; }
         };
 
         // At the moment, there is not much sense in allowing the wrapper function for the exe.
@@ -218,10 +218,10 @@ public:
 #ifdef OPEN_SHC_DLL
 
         template <typename _> struct FunctionPtrUnifier<false, false, _> {
-            inline static const FuncPtrType get() { return GameFunction<FuncPtrType>::get(); }
+            inline static FuncPtrType const get() { return GameFunction<FuncPtrType>::get(); }
         };
         template <bool implemented, typename _> struct FunctionPtrUnifier<implemented, true, _> {
-            inline static const FuncPtrType get()
+            inline static FuncPtrType const get()
             {
                 return reinterpret_cast<FuncPtrType>(&Wrapper<FuncPtrType>::Function::call);
             }
@@ -418,14 +418,14 @@ public:
 template <int address> bool FunctionResolver::AddressUsageKeeper<address>::initialized = false;
 
 template <typename FuncPtrType, bool implemented, int gameAddress, FuncPtrType funcAddress, int options>
-const typename FunctionResolver::Resolver<FuncPtrType, implemented, gameAddress, funcAddress, options>::Initializer
+typename FunctionResolver::Resolver<FuncPtrType, implemented, gameAddress, funcAddress, options>::Initializer const
     FunctionResolver::Resolver<FuncPtrType, implemented, gameAddress, funcAddress, options>::initializer;
 
 template <typename FuncPtrType, bool implemented, int gameAddress, FuncPtrType funcAddress, int options>
 FunctionResolver::Resolver<FuncPtrType, implemented, gameAddress, funcAddress, options>::Initializer::Initializer()
 {
-    const FuncPtrType funcPtr = Function::get();
-    const void* func = *((void**)&funcPtr);
+    FuncPtrType const funcPtr = Function::get();
+    void const* func = *((void**)&funcPtr);
     initialize(AddressUsageKeeper<gameAddress>::initialized, isImplemented, gameAddress, func,
         getFuncPtrName<FuncPtrType, funcAddress>());
 }

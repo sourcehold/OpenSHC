@@ -20,18 +20,18 @@ private:
     };
 
     static void initialize(
-        bool& initialized, bool isImplemented, int gameAddress, const void* structPtr, const char* typeName);
+        bool& initialized, bool isImplemented, int gameAddress, void const* structPtr, char const* typeName);
 
 public:
     template <typename T, bool implemented, int gameAddress> struct Resolver {
     private:
         // only use this for internal logic and declarations/definitions
-        static const bool isImplemented = OPEN_SHC_IMPLEMENTED(implemented);
+        static bool const isImplemented = OPEN_SHC_IMPLEMENTED(implemented);
 
         struct Initializer {
             Initializer();
         };
-        static const Initializer initializer;
+        static Initializer const initializer;
 
     public:
         typedef typename InternalResolver<T, isImplemented, gameAddress> Ptr;
@@ -48,7 +48,7 @@ T* const StructResolver::InternalResolver<T, true, gameAddress>::ptr
 template <int address> bool StructResolver::AddressUsageKeeper<address>::initialized = false;
 
 template <typename T, bool implemented, int gameAddress>
-const typename StructResolver::Resolver<T, implemented, gameAddress>::Initializer
+typename StructResolver::Resolver<T, implemented, gameAddress>::Initializer const
     StructResolver::Resolver<T, implemented, gameAddress>::initializer;
 
 template <typename T, bool implemented, int gameAddress>
