@@ -15,6 +15,7 @@ Tutorials
 - :doc:`Reimplementation tutorial 1: basics <wiki/tutorials/reimplementation-tutorial-1>`
 - :doc:`Reimplementation tutorial 2: function calls <wiki/tutorials/reimplementation-tutorial-2>`
 - :doc:`Reimplementation tutorial 3: arrays and fields <wiki/tutorials/reimplementation-tutorial-3>`
+- :doc:`Reimplementation tutorial addendum 1: debugging and wrapper logs <wiki/tutorials/reimplementation-tutorial-addendum-1>`
 
 The Game itself
 ------------------
