@@ -4,6 +4,13 @@ namespace OpenSHC {
 namespace Audio {
     namespace MSS {
 
+        // NOTE:
+        // This functions seems to reset the 0 indexed stream, most likely the music stream
+        // Index 3 seems to be general NPC voices (at least)
+        // Assumption:
+        // The tested flag here ("unkownFlag1" currently) might indicate that playing this sample should lower the music
+        // volume, or that the music volume is currently lowered
+
         // FUNCTION: STRONGHOLDCRUSADER 0x00479B70
         void SoundSystem::meth_0x479b70()
         {
