@@ -9,8 +9,8 @@
 
 static void createRelativeJump(int from, int to)
 {
-    const int instructionLength = 5;
-    const int relativeOffset = to - (from + instructionLength);
+    int const instructionLength = 5;
+    int const relativeOffset = to - (from + instructionLength);
 
     DWORD oldProtection;
     if (!VirtualProtect((void*)from, instructionLength, PAGE_EXECUTE_READWRITE, &oldProtection)) {
@@ -36,7 +36,7 @@ static void createRelativeJump(int from, int to)
 #endif
 
 void StructResolver::initialize(
-    bool& initialized, bool isImplemented, int gameAddress, const void* structPtr, const char* typeName)
+    bool& initialized, bool isImplemented, int gameAddress, void const* structPtr, char const* typeName)
 {
     if (initialized) {
 #ifdef OPEN_SHC_EXE
@@ -67,7 +67,7 @@ void StructResolver::initialize(
 }
 
 void FunctionResolver::initialize(
-    bool& initialized, bool isImplemented, int gameAddress, const void* funcPtr, const char* funcName)
+    bool& initialized, bool isImplemented, int gameAddress, void const* funcPtr, char const* funcName)
 {
     if (initialized) {
 #ifdef OPEN_SHC_EXE

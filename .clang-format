@@ -6,4 +6,7 @@ TabWidth: 4
 UseTab: Never
 InsertNewlineAtEOF: true
 SpaceInEmptyBraces: Never
+PointerAlignment: Left
+QualifierAlignment: Custom
+QualifierOrder: [inline, static, type, const, volatile]
 ...
