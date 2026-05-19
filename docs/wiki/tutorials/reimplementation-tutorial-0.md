@@ -113,5 +113,3 @@ reccmp/dll/run reccmp-reccmp --target STRONGHOLDCRUSADER
 > Tip: use `reccmp/dll/run reccmp-reccmp --target STRONGHOLDCRUSADER --verbose <hex address of function>` to investigate code byte mismatches.
 
 ---
-
-**If both commands complete successfully, your development environment is ready and you can start working on OpenSHC.**
