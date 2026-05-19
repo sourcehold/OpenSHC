@@ -12,6 +12,7 @@ About the OpenSHC Project
 
 Tutorials
 -------------
+- :doc:`Getting Started <wiki/tutorials/reimplementation-tutorial-0>`
 - :doc:`Reimplementation tutorial 1: basics <wiki/tutorials/reimplementation-tutorial-1>`
 - :doc:`Reimplementation tutorial 2: function calls <wiki/tutorials/reimplementation-tutorial-2>`
 - :doc:`Reimplementation tutorial 3: arrays and fields <wiki/tutorials/reimplementation-tutorial-3>`
