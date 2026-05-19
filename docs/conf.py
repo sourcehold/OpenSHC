@@ -41,3 +41,5 @@ templates_path = ['_templates']
 exclude_patterns = []
 
 autosectionlabel_prefix_document = True
+
+myst_enable_extensions = ["attrs_block"]

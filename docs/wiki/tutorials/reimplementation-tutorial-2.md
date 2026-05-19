@@ -1,12 +1,11 @@
-# Tutorials
-
-## Reimplementation Tutorial 2
+## Tutorial 2: Reimplementing function calls
 This tutorial assumes you have followed tutorial 1.
 
 ### Step 1: rough reimplementation
 In this tutorial, we reimplement `OpenSHC::AI::AIVState::setupAIVMetadata`. I have taken a decompilation from Ghidra and polished it with what we learned from Tutorial 1.
 
-```cpp=
+{lineno-start=1}
+```cpp
 #include "OpenSHC/AI/AIVState.hpp"
 #include "OpenSHC/Globals/DAT_AICState.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -63,7 +62,8 @@ We run the following to get a diff report:
 reccmp/dll/run reccmp-reccmp --target STRONGHOLDCRUSADER --verbose 0x004ECEF0
 ```
 
-```raw=
+{lineno-start=1}
+```raw
 
 ---
 +++
@@ -137,7 +137,8 @@ This happens when the called function hasn't been implemented yet. One solution 
 
 For every reimplemented function to be called, the associated function resolver should have its reimplementation state set to `true`. So, for example, for function `AICState::setFoodBuyPlan` (see Tutorial 1) in file `OpenSHC/AI/AICState.func.hpp` we change line 2 below from `, false,` to `true, `. This detours all calls to `setFoodBuyPlan` through our DLL instead of through the original binary. **Furthermore, functions calling `setFoodBuyPlan` have their percentages improved as the call points to the reimplementation.**
 
-```cpp=
+{lineno-start=1}
+```cpp
 MACRO_FUNCTION_RESOLVER(
     void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CB060, &AICState::setFoodBuyPlan)
 setFoodBuyPlan;
@@ -146,7 +147,8 @@ setFoodBuyPlan;
 ### Step 4: reimplementing called functions
 Let's see whether we can reimplement that function while we are at it:
 
-```cpp=
+{lineno-start=1}
+```cpp
 int AICState::getAIBuildInterval(int playerID)
 {
   int _aiType;
@@ -169,7 +171,8 @@ Note that the raw assembly for that instruction says something entirely differen
 
 Luckily, this optimization is quite straightforward and always occurs, as this fix for the optimization achieves 100% accuracy with the original bytecode:
 
-```cpp=
+{lineno-start=1}
+```cpp
 #include "OpenSHC/AI/AICState.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 namespace OpenSHC {
@@ -195,7 +198,9 @@ namespace AI {
 
 
 Now let's set the reimplemented status inside `AICState.func.hpp` to `true`:
-```cpp=
+
+{lineno-start=1}
+```cpp
         MACRO_FUNCTION_RESOLVER(
             int (AICState::*)(int), true, Address::SHC_3BB0A8C1_0x004CB120, &AICState::getAIBuildInterval)
         getAIBuildInterval;
@@ -203,7 +208,9 @@ Now let's set the reimplemented status inside `AICState.func.hpp` to `true`:
 
 And rerun the comparison for `setupAIVMetadata`. Note that line 48 now corresponds with the correct function instead of a `FunctionResolver` statement.
 
-```diff=
+
+{lineno-start=1}
+```diff
 ---
 +++
 @@ -0x4ecef0,38 +0x1002ef40,40 @@
@@ -269,7 +276,9 @@ OpenSHC::AI::AIVState::setupAIVMetadata is only 66.67% similar to the original, 
 
 Using Claude AI, the following solution gives a special 100% match:
 
-```cpp=
+
+{lineno-start=1}
+```cpp
 #include "OpenSHC/AI/AICState.func.hpp"
 #include "OpenSHC/AI/AIVState.hpp"
 #include "OpenSHC/Globals/DAT_AICState.hpp"
@@ -327,7 +336,9 @@ The reccmp output indicates a special form of 100% accuracy:
 It turns out some code lines can be reordered to achieve a full 100% match. If you are a perfectionist, go ahead!
 
 This is the right order:
-```cpp=
+
+{lineno-start=1}
+```cpp
 this->SEC_AIVS[aivID].playerID = playerID;
 
 int aiType = DAT_GameState::ptr->playerDataArray[playerID].aiType;
@@ -353,7 +364,9 @@ Not all called functions can reimplemented, as some are windows library function
 #### Windows library functions
 For example, line 20 calls the windows `_rand()` function:
 
-```cpp=
+
+{lineno-start=1}
+```cpp
 #include "OpenSHC/Global.func.hpp"
 #include "OpenSHC/OS.func.hpp"
 #include "OpenSHC/Random/RNG.func.hpp"
@@ -394,7 +407,9 @@ namespace Random {
 
 #### Compiler-injected functions
 For math operations that involve floating point numbers, functions are injected as well. See line 3 and line 6 below (`OpenSHC::IO::FilePackager::writeMapOrSaveFile`):
-```cpp=
+
+{lineno-start=1}
+```cpp
         if (local_8 != (RenderLoadAndSaveBar *)0x0) {
           _someBigNumbeKeeper =
                __allmul(_secSizeSumUnk,(int)_secSizeSumUnk >> 0x1f,1000,0);
@@ -417,7 +432,9 @@ Ghidra includes helper functions to explicate what is happening logically. One s
 
 Ghida functions like this are not reimplemented and can be removed/ignored.
 
-```cpp=
+
+{lineno-start=1}
+```cpp
 
 int __thiscall
 OpenSHC::Map::Units::UnitsState::getAliveLordForPlayer(UnitsState *this,int playerID)

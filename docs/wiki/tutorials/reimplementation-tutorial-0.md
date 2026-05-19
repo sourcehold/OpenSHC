@@ -1,5 +1,3 @@
-# Tutorials
-
 ## Tutorial 0: Getting Started
 
 ### Requirements

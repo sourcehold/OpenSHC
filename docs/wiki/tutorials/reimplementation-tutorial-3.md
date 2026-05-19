@@ -1,11 +1,11 @@
-# Tutorials
-
-## Dealing with Ghidra arrays, field pointers, and ADJ()
+## Tutorial 3: Dealing with Ghidra arrays, field pointers, and ADJ()
 
 ### Example 1
 A lot of assembly that accesses structs is optimized by the compiler to use relative offsets. Usually one field of a struct is chosen as the reference point. For example, in this function, `owner` is chosen as the reference point as can be seen in line 11:
 
-```cpp=
+
+{lineno-start=1}
+```cpp
 int __thiscall
 UnitsState::getAliveLordForPlayer(UnitsState *this,int playerID)
 
@@ -39,7 +39,9 @@ Furthermore, the line `_ptrUnit  = _ptrUnit + 0x248` is deceptive. Technically, 
 Note how we changed the line referring to `owner` and instead refer to the unit instead. Then, when incrementing the pointer, we increment by `1` (1 `Unit`).
 We remove `ADJ()`.
 
-```cpp=
+
+{lineno-start=1}
+```cpp
 #include "OpenSHC/Map/Units/UnitsState.hpp"
 
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"

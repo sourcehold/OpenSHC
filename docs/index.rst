@@ -14,7 +14,6 @@ and accessible to everyone.
    :caption: Contents:
 
    about
-   get_started*
    faq*
    contributing*
    wiki

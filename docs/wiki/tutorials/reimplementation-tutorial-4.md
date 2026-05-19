@@ -1,6 +1,4 @@
-# Tutorials
-
-## Tutorial 4
+## Tutorial 4: debugging, investigating, and logging
 
 This tutorial does not directly provide information about how to reimplement.
 Instead, it shows other abilities of the OpenSHC resolver approach.  
@@ -53,7 +51,9 @@ Recommended for tests is the local version.
 
 For example:
 
-```cpp=
+
+{lineno-start=1}
+```cpp
 MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(SHC_SoundStreamInt, int), false,
     Address::SHC_3BB0A8C1_0x00479AF0, &SoundSystem::setStreamAndSampleVolumeUnk)
 setStreamAndSampleVolumeUnk;
@@ -61,7 +61,9 @@ setStreamAndSampleVolumeUnk;
 
 would be set to
 
-```cpp=
+
+{lineno-start=1}
+```cpp
 MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(SHC_SoundStreamInt, int), true,
     Address::SHC_3BB0A8C1_0x00479AF0, &SoundSystem::setStreamAndSampleVolumeUnk)
 setStreamAndSampleVolumeUnk;
@@ -129,7 +131,9 @@ Activating the logging for an unimplemented function will only log calls made fr
 
 The wrapping requires a different macro. The following example from above was extended to also wrap the function:
 
-```cpp=
+
+{lineno-start=1}
+```cpp
 MACRO_FUNCTION_RESOLVER_EXT(void (SoundSystem::*)(SHC_SoundStreamInt, int), true,
     Address::SHC_3BB0A8C1_0x00479AF0, &SoundSystem::setStreamAndSampleVolumeUnk, FunctionResolver::Option::USE_WRAPPER)
 setStreamAndSampleVolumeUnk;

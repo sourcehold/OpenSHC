@@ -8,7 +8,7 @@ Essentially, the approach recreates source code for the original game, and in th
 Two criteria define succesful code:
 
 #. Faithful to the original. Byte-code similarity can be tested using the `reccmp` framework. A higher similarity indicates better code, but 100% similarity isn't a requirement, as incremental improvements are also great.
-#. Modding abilities. The new source code should include toggles to toggle moddability on or off. If off, the code should function as identically as feasible compared to the original game. If on, mods can alter the functionality of the code.
+#. Modding abilities. The new source code should clarify value constants and possibilities to add moddability.
 
 Note that mods itself are outside the scope of this project. This project is meant to facilitate mods, not implement them.
 
@@ -36,31 +36,22 @@ If the pseudo-C code of the original machine code looks like this:
         }
     }
 
-Then a reimplementation could look like below. Note the use of macros to define the 
-damage as an (inline) constant or not depending on whether compilation for replication of the
-original code is desired (:ref:`aim 1<about:Aims>`), or compilation for easier modding (:ref:`aim 2<about:Aims>`).
+Then a reimplementation could look like below. A mod would remove the `const` modifiers and define an interface for customisations from users and creators.
 
 `View on godbolt.org <https://godbolt.org/z/5e485dh8r>`_
 
 .. code-block:: c++
-
-    #define PERMIT_MODDING
-    #ifdef PERMIT_MODDING
-    #define CONST 
-    #else
-    #define CONST const
-    #endif
 
     namespace Damage {
         namespace Entities {
             // A struct is used here to make modding easier as it strictly defines the ints
             // as next to each other in memory.
             typedef struct UnitDamage {
-                int CONST fromArrow = 30;
-                int CONST fromPebble = 50;
-                int CONST fromOther = 20;
+                int const fromArrow = 30;
+                int const fromPebble = 50;
+                int const fromOther = 20;
             } UnitDamage;
-            UnitDamage CONST unitDamages;
+            UnitDamage const unitDamages;
         }
     }
 

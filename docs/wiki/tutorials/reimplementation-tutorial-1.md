@@ -1,5 +1,4 @@
-# Tutorials
-## Reimplementation Tutorial 1
+## Tutorial 1: Reimplementation
 
 For this tutorial, I chose to reimplement the function: `OpenSHC::AI::AICState::setFoodBuyPlan`, which is a member function of class `AICState`. This function doesn't contain any calls to other functions, and I understand the Ghidra decompilation for this function, which makes reimplementation simpler.
 
@@ -8,7 +7,9 @@ For this tutorial, I chose to reimplement the function: `OpenSHC::AI::AICState::
 Every file in OpenSHC has a deterministic location. The reimplementation for function `OpenSHC::AI::AICState::setFoodBuyPlan` should be placed in `OpenSHC/AI/AICState/setFoodBuyPlan.cpp`. Everything in OpenSHC is also namespaced.
 
 Therefore, we create file: `OpenSHC/AI/AICState/setFoodBuyPlan.cpp` with the following contents
-```cpp=
+
+{lineno-start=1}
+```cpp
 #include "OpenSHC/AI/AICState.hpp"
 
 namespace OpenSHC {
@@ -21,7 +22,8 @@ namespace AI {
 
 Now, for `reccmp` to be able to associate this definition with the one in the original binary, we insert an annotation containing the address of this function in the original binary. You can find this address in `OpenSHC/AI/AICState.func.hpp`, which contains this:
 
-```cpp=
+{lineno-start=1}
+```cpp
         MACRO_FUNCTION_RESOLVER(
             void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CB060, &AICState::setFoodBuyPlan)
         setFoodBuyPlan;
@@ -31,7 +33,8 @@ Now, for `reccmp` to be able to associate this definition with the one in the or
 
 Let's insert the annotation:
 
-```cpp=
+{lineno-start=1}
+```cpp
 #include "OpenSHC/AI/AICState.hpp"
 
 namespace OpenSHC {
@@ -46,7 +49,7 @@ namespace AI {
 Now, for the compiler to include this .cpp file in the compilation, we add it to `cmake/openshc-sources.txt.local` (use the .local file for local development):
 
 `cmake/openshc-sources.txt.local`:
-```txt=
+```txt
 src/OpenSHC/AI/AICState/setFoodBuyPlan.cpp
 ```
 
@@ -73,7 +76,9 @@ reccmp/dll/run reccmp-reccmp --target STRONGHOLDCRUSADER --verbose 0x004CB060
 ```
 
 Output:
-```diff=
+
+{lineno-start=1}
+```diff
 
 ---
 +++
@@ -88,7 +93,8 @@ Note that `reccmp` processes our function until it finds the last `return` state
 
 I use Ghidra, which given the current state of the database gives:
 
-```cpp=
+{lineno-start=1}
+```cpp
 void __thiscall OpenSHC::AI::AICState::setFoodBuyPlan(AICState *this, int playerID)
 
 {
@@ -132,7 +138,8 @@ We could try to compile this directly, which would be a good starting point. Bec
 
 ### Step 3: understanding and tidying the basic reimplementation
 
-```cpp=
+{lineno-start=1}
+```cpp
 void __thiscall OpenSHC::AI::AICState::setFoodBuyPlan(AICState *this, int playerID)
 
 {
@@ -184,7 +191,9 @@ Line 10-15 look quite ugly, they use binary offsets instead of accessing fields.
 
 Assuming `_aiType` is 1, which is a valid ai type (the Rat), then `_offset` is 0. Then `_preferredStock` simplifies to `&DAT_AICState + 0x84` which gives us the field `DAT_AICState.minimumApples`. This last step can be figured out like so:
 1. Look for `DAT_AICState` in the project. Or visit `src/OpenSHC/Globals` and find `DAT_AICState.hpp`:
-```cpp=
+
+{lineno-start=1}
+```cpp
 #pragma once
 
 #include "OpenSHC/AI/AICState.hpp"
@@ -198,7 +207,9 @@ MACRO_STRUCT_RESOLVER(AICState, false, Address::SHC_3BB0A8C1_0x023FC8E8) DAT_AIC
 We see that `DAT_AICState` is of type `AICState`, which is defined in `OpenSHC/AI/AICState.hpp` as can we be seen from the `#include` statement (in this case this is actually the same class for which we are reimplementing a member function).
 
 2. Looking at the struct part of the class declaration, we can see some helpful annotations to trace offset `+ 0x84`.
-```cpp=
+
+{lineno-start=1 emphasize-lines="4"}
+```cpp
 // SIZE: 0x00006D90
 class AICState {
 public:
@@ -213,7 +224,7 @@ public:
 ```
 Note that `+ 0x84` is smaller than the first field's offset which is  `DAT_AICArray[20]` with offsets `0`. We have to look into `AICSpecification` in which we find `minimumApples` at offset `0x84`.
 
-```cpp=
+```cpp
 // SIZE: 0x000002A4
 typedef struct AICSpecification {
 
@@ -232,7 +243,9 @@ typedef struct AICSpecification {
 So the code in the function is accessing minimum apples.
 
 3. Let's rewrite our reimplementation (line 2 below, note `_offset` becomes useless):
-```cpp=
+
+{lineno-start=1 emphasize-lines="2"}
+```cpp
 _offset = (_aiType + -1) * 0x2a4;
 _preferredStock = *(int*)((int)&DAT_AICState.DAT_AICArray[_aiType - 1].minimumApples);
 if ((-1 < _preferredStock)
@@ -245,7 +258,9 @@ if ((-1 < _preferredStock)
 
 #### Substituting enum values
 At line 4 we see the usage of `0xd`, which we can guess is the resource type for apples. Let's check in `src/OpenSHC/Game/Resources/ResourceType.hpp` to see if apples is associated with integer 0xd. Yes, see line 15:
-```cpp=
+
+{lineno-start=1 emphasize-lines="15"}
+```cpp
 typedef enum ResourceType {
 
     RT_LOGS = 1, // 0x00000001
@@ -265,7 +280,8 @@ typedef enum ResourceType {
 
 Furthermore, we can trace offset `+0x98 in line 6` to `tradeAmountFood`. Cleaning up our reimplementation (include ResourceType.hpp!):
 
-```cpp=
+{lineno-start=1}
+```cpp
 #include "OpenSHC/AI/AICState.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 
@@ -295,7 +311,9 @@ namespace AI {
 ### Step 4: Correct references to global variables
 
 Before we recompile, we need to change how globals are referred to. OpenSHC refers to the global memory in the exe, so we use pointer access for structs `->` instead of `.`. Also, we need to explicitly mention we want the pointer with `::ptr`:
-```cpp=
+
+{lineno-start=1}
+```cpp
 #include "OpenSHC/AI/AICState.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 
@@ -323,14 +341,16 @@ namespace AI {
 ```
 
 Also note we use DAT_GameState, so make sure to include that too:
-```cpp=
+```cpp
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 ```
 
 ### Step 5: compiling the reimplementation and comparing it to the original
 
 Patching everything up, we get something that looks like good code and that actually compiles with `.\build.bat RelWithDebInfo OpenSHC.dll`: 
-```cpp=
+
+{lineno-start=1}
+```cpp
 #include "OpenSHC/AI/AICState.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/Globals/DAT_AICState.hpp"
@@ -402,7 +422,9 @@ reccmp/dll/run reccmp-reccmp --target STRONGHOLDCRUSADER --verbose 0x004CB060
 ```
 
 Output:
-```diff=
+
+{lineno-start=1}
+```diff
 
 ---
 +++
@@ -491,7 +513,9 @@ Oof, only 26%! Now this is a great moment to start using AI to get better result
 
 Let's try manual improvements first:
 Line 13 suggests `_aiType - 1` is cached in a register. Let's do that and insert that line after the `if (_aiType != 0)` check.
-```cpp=
+
+{lineno-start=13}
+```cpp
 int _aiType0 = _aiType - 1;
 ```
 
@@ -515,7 +539,8 @@ AI prompt:
 
 After two iterations, it found a 100% matching solution and it documented our source code by itself:
 
-```cpp=
+{lineno-start=1}
+```cpp
 #include "OpenSHC/AI/AICState.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/Globals/DAT_AICState.hpp"
@@ -603,7 +628,8 @@ OpenSHC> reccmp/dll/run reccmp-reccmp --target STRONGHOLDCRUSADER --verbose 0x00
 #### Improving code style
 While the code is 100% matching, it can be improved in terms of style. Let's apply some code style changes that don't affect matching (always check!).
 
-```cpp=
+{lineno-start=1}
+```cpp
 #include "OpenSHC/AI/AICState.hpp"
 #include "OpenSHC/AI/AITypeA.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
