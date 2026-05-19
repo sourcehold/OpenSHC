@@ -90,6 +90,8 @@ reccmp\dll\setup.bat
 
 ## Verifying the Setup
 
+If **both** commands complete successfully, your development environment is ready and you can start working on OpenSHC.
+
 ### 1. Build the project
 
 From the `OpenSHC` directory, run:
