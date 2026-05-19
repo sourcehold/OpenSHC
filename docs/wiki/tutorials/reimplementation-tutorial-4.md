@@ -1,6 +1,6 @@
 # Tutorials
 
-## Tutorial Addendum 1
+## Tutorial 4
 
 This tutorial does not directly provide information about how to reimplement.
 Instead, it shows other abilities of the OpenSHC resolver approach.  
