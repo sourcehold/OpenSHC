@@ -18,7 +18,9 @@ The two main aims are:
 #. Replicating the original game's machine code using new C++ source code, producing a faithful reimplementation
 #. Providing modding opportunities in the new source code
 
-The project is considered complete when :ref:`Aim 1<Aim1>` has been reached.
+The project is considered complete when :ref:`Aim 1<Aim1>` has been reached. 
+
+You can track the recent progress `here <https://gynt.github.io/OpenSHC/progress.html>`.
 
 How
 =====
