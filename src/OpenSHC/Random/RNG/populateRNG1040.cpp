@@ -14,14 +14,9 @@ namespace Random {
         MACRO_CALL(OpenSHC::Global_Func::SetRNGSeed)(this->seed);
         this->index2 = 0;
         this->index1 = 0;
-        short* _pRandomNumber = &this->randomNumbers[0];
-        int n = 20000;
-        do {
-            int random = MACRO_CALL(OpenSHC::OS_Func::_rand)();
-            *_pRandomNumber = (short)random;
-            _pRandomNumber += 1;
-            n -= 1;
-        } while (n != 0);
+        for (int i = 0; i < sizeof(this->randomNumbers) / sizeof(this->randomNumbers[0]); i++) {
+            this->randomNumbers[i] = MACRO_CALL(OpenSHC::OS_Func::_rand)();
+        }
 
         this->currentNumber2 = this->randomNumbers[this->index2];
         this->index2 += 1;

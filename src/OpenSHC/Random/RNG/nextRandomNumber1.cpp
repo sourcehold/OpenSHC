@@ -8,11 +8,10 @@ namespace Random {
     void RNG::nextRandomNumber1()
     {
         this->currentNumber1 = this->randomNumbers[this->index1];
-        this->index1 = this->index1 + 1;
-        if (20000 <= this->index1) {
+        this->index1 += 1;
+        if (sizeof(this->randomNumbers) / sizeof(this->randomNumbers[0]) <= this->index1) {
             this->index1 = 0;
         }
-        return;
     }
 }
 
