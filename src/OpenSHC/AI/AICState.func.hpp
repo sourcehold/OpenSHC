@@ -104,7 +104,7 @@ namespace AI {
         updateTaxesAndRationsForAI;
 
         MACRO_FUNCTION_RESOLVER(
-            void (AICState::*)(int), true, Address::SHC_3BB0A8C1_0x004CB060, &AICState::setFoodBuyPlan)
+            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CB060, &AICState::setFoodBuyPlan)
         setFoodBuyPlan;
 
         MACRO_FUNCTION_RESOLVER(
