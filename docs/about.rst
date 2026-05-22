@@ -20,7 +20,7 @@ The two main aims are:
 
 The project is considered complete when :ref:`Aim 1<Aim1>` has been reached. 
 
-You can track the recent progress `here <https://gynt.github.io/OpenSHC/progress.html>`.
+You can track the recent progress `here <https://gynt.github.io/OpenSHC/progress.html>`_.
 
 How
 =====

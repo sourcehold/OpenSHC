@@ -10,7 +10,7 @@ Developing contributions
 Contributions are done by contributing either:
 
 * reimplemented source code for functions of the original game: we aim for 100% functionally identical reimplementations
-* improving other's reimplementations (track progress `here <https://gynt.github.io/OpenSHC/progress.html>`)
+* improving other's reimplementations (track progress `here <https://gynt.github.io/OpenSHC/progress.html>`_)
 * data structures
 * other code
 

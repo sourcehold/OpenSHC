@@ -5,7 +5,7 @@ Frequently Asked Questions (FAQ)
 What is the current status?
 =============================
 
-You can track the recent progress `here <https://gynt.github.io/OpenSHC/progress.html>`.
+You can track the recent progress `here <https://gynt.github.io/OpenSHC/progress.html>`_.
 
 Why?
 ====
