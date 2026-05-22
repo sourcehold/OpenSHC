@@ -12,7 +12,6 @@ namespace Random {
         if (20000 <= this->index2) {
             this->index2 = 0;
         }
-        return;
     }
 }
 

@@ -8,9 +8,7 @@ namespace Random {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x0046a760
     void RNG::populateRNG1040()
-
     {
-
         MACRO_CALL(OpenSHC::Global_Func::SetRNGSeed)(this->seed);
         this->index2 = 0;
         this->index1 = 0;
@@ -23,8 +21,6 @@ namespace Random {
 
         this->currentNumber1 = this->randomNumbers[this->index1];
         this->index1 += 1;
-
-        return;
     }
 
 }
