@@ -48,7 +48,7 @@ if not PATH_CMAKE_OPENSHC_SOURCES.exists():
 # Initialize MCP server
 mcp = FastMCP("decomp-helper")
 
-def compile_project() -> tuple[bool, str, str]:
+def compile_project(truncated: bool = True, no_output_on_succes: bool = True) -> tuple[bool, str, str]:
     """
     Compile the C++ project using MSVC. Must be executed after writing new cpp file contents.
     
@@ -66,7 +66,20 @@ def compile_project() -> tuple[bool, str, str]:
             cwd=".",
             stdin=subprocess.DEVNULL,
         )
-        return result.returncode == 0, result.stdout, result.stderr
+        code = result.returncode
+        stdout = result.stdout
+        stderr = result.stderr
+        if stderr and code == 0:
+            code = -1
+        if truncated:
+            needle1 = "-- Build files have been written to:"
+            if needle1 in stdout:
+                start = stdout.index(needle1)
+                eol_index = stdout.index("\n", start) + 1
+                stdout = stdout[eol_index:]
+        if no_output_on_succes and code == 0:
+            return True, "", ""
+        return False, stdout, stderr
     except Exception as e:
         return False, "", str(e)
 
