@@ -14,7 +14,7 @@ namespace Random {
         MACRO_CALL(OpenSHC::Global_Func::SetRNGSeed)(this->seed);
         this->index2 = 0;
         this->index1 = 0;
-        for (int i = 0; i < sizeof(this->randomNumbers) / sizeof(this->randomNumbers[0]); i++) {
+        for (int i = 0; i < 20000; i++) {
             this->randomNumbers[i] = MACRO_CALL(OpenSHC::OS_Func::_rand)();
         }
 

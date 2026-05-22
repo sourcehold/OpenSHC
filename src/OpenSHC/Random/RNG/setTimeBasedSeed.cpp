@@ -6,7 +6,7 @@
 namespace OpenSHC {
 namespace Random {
 
-    // FUNCTION: STRONGHOLDCRUSADER 0x0046a740
+    // FUNCTION: STRONGHOLDCRUSADER 0x0046A740
     void RNG::setTimeBasedSeed()
 
     {

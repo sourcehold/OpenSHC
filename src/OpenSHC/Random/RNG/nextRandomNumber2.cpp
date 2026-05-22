@@ -9,7 +9,7 @@ namespace Random {
     {
         this->currentNumber2 = this->randomNumbers[this->index2];
         this->index2 = this->index2 + 1;
-        if (sizeof(this->randomNumbers) / sizeof(this->randomNumbers[0]) <= this->index2) {
+        if (20000 <= this->index2) {
             this->index2 = 0;
         }
         return;
