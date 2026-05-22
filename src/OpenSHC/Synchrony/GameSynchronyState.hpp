@@ -14,9 +14,6 @@
 #include "OpenSHC/Commands/GameCommandSchedulingInt.hpp"
 #include "OpenSHC/Commands/GameCommandTypeInt.hpp"
 #include "OpenSHC/DirectPlay/DPERRInt.hpp"
-#include "OpenSHC/DirectPlay/DPNAME.hpp"
-#include "OpenSHC/DirectPlay/IDirectPlay4A.hpp"
-#include "OpenSHC/DirectPlay/lobby/IDirectPlayLobby3.hpp"
 #include "OpenSHC/Game/GameModeInt.hpp"
 #include "OpenSHC/Game/Skirmish/SkirmishStatistics.hpp"
 #include "OpenSHC/Synchrony/HashContainer.hpp"
@@ -27,8 +24,11 @@
 #include "OpenSHC/UI/Enums/MenuModalTypeInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 #include "WinDef.h"
+#include "WinSock.h"
 #include "basetsd.h"
 #include "crtdefs.h"
+#include "dplay.h"
+#include "dplobby.h"
 #include "guiddef.h"
 #include "inaddr.h"
 #include "mbstring.h"
@@ -43,9 +43,6 @@ namespace Synchrony {
     using OpenSHC::Commands::GameCommandSchedulingInt;
     using OpenSHC::Commands::GameCommandTypeInt;
     using OpenSHC::DirectPlay::DPERRInt;
-    using OpenSHC::DirectPlay::DPNAME;
-    using OpenSHC::DirectPlay::IDirectPlay4A;
-    using OpenSHC::DirectPlay::lobby::IDirectPlayLobby3;
     using OpenSHC::Game::GameModeInt;
     using OpenSHC::Game::Skirmish::SkirmishStatistics;
     using OpenSHC::Synchrony::HashContainer;

@@ -9,8 +9,6 @@
 #pragma once
 
 #include "OpenSHC/AI/AIVUnitTypeInt.hpp"
-#include "OpenSHC/DirectPlay/DPNAME.hpp"
-#include "OpenSHC/DirectPlay/DPSESSIONDESC2.hpp"
 #include "OpenSHC/Game/Resources/ResourceTypeInt.hpp"
 #include "OpenSHC/Map/Buildings/BuildingTypeInt.hpp"
 #include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
@@ -24,13 +22,12 @@
 #include "WinDef.h"
 #include "crtdefs.h"
 #include "ddraw.h"
+#include "dplay.h"
 #include "winnt.h"
 namespace OpenSHC {
 namespace Global {
 
     using OpenSHC::AI::AIVUnitTypeInt;
-    using OpenSHC::DirectPlay::DPNAME;
-    using OpenSHC::DirectPlay::DPSESSIONDESC2;
     using OpenSHC::Game::Resources::ResourceTypeInt;
     using OpenSHC::Map::Buildings::BuildingTypeInt;
     using OpenSHC::Map::Buildings::BuildingTypeShort;
