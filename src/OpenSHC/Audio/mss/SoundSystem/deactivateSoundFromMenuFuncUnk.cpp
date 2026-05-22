@@ -19,14 +19,10 @@ namespace Audio {
                 MACRO_CALL_MEMBER(SoundSystem_Func::endSoundStream, this)(i);
             }
 
-            int* piVar1 = this->sampleSoundIndex_0x20c + 1;
-            unsigned int iVar3 = 32;
-            do {
-                AIL_end_sample((HSAMPLE)piVar1[-0x20]);
-                *piVar1 = 0;
-                piVar1 = piVar1 + 1;
-                iVar3 = iVar3 + -1;
-            } while (iVar3 != 1);
+            for (int i = 0; i < 31; ++i) {
+                AIL_end_sample(this->sample_0x190[i]);
+                this->sampleSoundIndex_0x20c[i + 1] = 0;
+            }
 
             for (int i = 1; i < this->loadedSoundsCountAndIndex_0x316c; ++i) {
                 this->soundFileCurrSampleNum_0x28c[i] = -1;
