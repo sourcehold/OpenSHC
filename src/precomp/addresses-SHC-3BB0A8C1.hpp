@@ -94285,7 +94285,7 @@ enum {
     SHC_3BB0A8C1_0x00DF3878 = 0x00DF3878,
     // label: DPLAY_InterfacePointer
     // location:
-    // type: OpenSHC/DirectPlay/IDirectPlay4A * *
+    // type: OpenSHC/DirectPlay/dplay/IDirectPlay4A * *
     SHC_3BB0A8C1_0x00DF3D18 = 0x00DF3D18,
     // label: DPLAY_CurrentSessionGUID
     // location:
