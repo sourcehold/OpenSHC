@@ -1,7 +1,5 @@
 #include "OpenSHC/Audio/MSS/SoundSystem.func.hpp"
 
-#include <iostream>
-
 namespace OpenSHC {
 namespace Audio {
     namespace MSS {
