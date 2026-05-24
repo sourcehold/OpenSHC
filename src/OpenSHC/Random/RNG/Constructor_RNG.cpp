@@ -1,5 +1,4 @@
-#include "OpenSHC/Random/RNG.func.hpp"
-#include "OpenSHC/Random/RNG.hpp"
+#include "../RNG.func.hpp"
 
 namespace OpenSHC {
 namespace Random {

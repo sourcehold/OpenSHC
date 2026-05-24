@@ -8,9 +8,7 @@
 // TODO: Maybe change naming convention to not run into these issues
 
 #include "TypeUtility.h"
-
 #include "ucp3.h"
-
 #include <ios>
 #include <iostream>
 #include <sstream>

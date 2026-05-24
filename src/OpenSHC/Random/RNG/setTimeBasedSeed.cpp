@@ -1,6 +1,7 @@
+#include "../RNG.func.hpp"
+
 #include "OpenSHC/OS.func.hpp"
-#include "OpenSHC/Random/RNG.func.hpp"
-#include "OpenSHC/Random/RNG.hpp"
+
 #include <time.h>
 
 namespace OpenSHC {

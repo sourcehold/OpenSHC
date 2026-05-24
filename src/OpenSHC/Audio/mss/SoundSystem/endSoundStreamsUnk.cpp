@@ -1,6 +1,4 @@
-#include "OpenSHC/Audio/MSS/SoundSystem.hpp"
-
-#include "OpenSHC/Audio/MSS/SoundSystem.func.hpp"
+#include "../SoundSystem.func.hpp"
 
 #include "OpenSHC/Audio/MSS/enums/SHC_SoundStream.hpp"
 
