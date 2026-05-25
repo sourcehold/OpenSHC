@@ -1,7 +1,7 @@
+#include "../RNG.func.hpp"
+
 #include "OpenSHC/Global.func.hpp"
 #include "OpenSHC/OS.func.hpp"
-#include "OpenSHC/Random/RNG.func.hpp"
-#include "OpenSHC/Random/RNG.hpp"
 
 namespace OpenSHC {
 namespace Random {

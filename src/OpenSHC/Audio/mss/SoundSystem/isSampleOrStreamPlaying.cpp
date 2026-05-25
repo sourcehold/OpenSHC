@@ -1,4 +1,4 @@
-#include "OpenSHC/Audio/MSS/SoundSystem.hpp"
+#include "../SoundSystem.func.hpp"
 
 namespace OpenSHC {
 namespace Audio {

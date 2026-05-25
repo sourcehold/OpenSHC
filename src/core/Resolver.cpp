@@ -1,6 +1,5 @@
 
 #include "ucp3.h"
-
 #include <sstream>
 
 // TODO?: When in doubt regarding the transition to full exe: Add other logging system.
