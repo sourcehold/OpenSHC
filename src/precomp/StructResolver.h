@@ -5,16 +5,6 @@
 
 struct StructResolver {
 private:
-    template <typename T, int gameAddress> struct Instance;
-
-    template <typename T, bool implemented, int gameAddress> struct InternalResolver;
-    template <typename T, int gameAddress> struct InternalResolver<T, true, gameAddress> {
-        static T* const ptr;
-    };
-    template <typename T, int gameAddress> struct InternalResolver<T, false, gameAddress> {
-        static T* const ptr;
-    };
-
     template <int address> struct AddressUsageKeeper {
         static bool initialized;
     };
@@ -28,43 +18,54 @@ public:
         // only use this for internal logic and declarations/definitions
         static bool const isImplemented = OPEN_SHC_IMPLEMENTED(implemented);
 
-        struct Initializer {
-            Initializer();
+        template <bool implemented, typename _> struct Instance;
+        template <typename _> struct Instance<true, _> {
+            inline T* const get() { return &instance; }
+
+            Instance();
+
+        private:
+            T instance;
         };
-        static Initializer const initializer;
+        template <typename _> struct Instance<false, _> {
+            inline static T* const get() { return reinterpret_cast<T* const>(gameAddress); }
+            static T* const ptr;
+
+            Instance();
+        };
 
     public:
-        typedef typename InternalResolver<T, isImplemented, gameAddress> Ptr;
+        typedef Instance<isImplemented, void> Type;
     };
 };
 
-template <typename T, int gameAddress>
-T* const StructResolver::InternalResolver<T, false, gameAddress>::ptr = reinterpret_cast<T*>(gameAddress);
+template <typename T, bool implemented, int gameAddress>
+template <typename _>
+StructResolver::Resolver<T, implemented, gameAddress>::Instance<false, _>::Instance()
+{
+    initialize(AddressUsageKeeper<gameAddress>::initialized, isImplemented, gameAddress, this->get(), getTypeName<T>());
+}
 
-template <typename T, int gameAddress>
-T* const StructResolver::InternalResolver<T, true, gameAddress>::ptr
-    = &StructResolver::Instance<T, gameAddress>::instance;
+template <typename T, bool implemented, int gameAddress>
+template <typename _>
+T* const StructResolver::Resolver<T, implemented, gameAddress>::Instance<false, _>::ptr
+    = reinterpret_cast<T* const>(gameAddress);
 
 template <int address> bool StructResolver::AddressUsageKeeper<address>::initialized = false;
 
-template <typename T, bool implemented, int gameAddress>
-typename StructResolver::Resolver<T, implemented, gameAddress>::Initializer const
-    StructResolver::Resolver<T, implemented, gameAddress>::initializer;
-
-template <typename T, bool implemented, int gameAddress>
-StructResolver::Resolver<T, implemented, gameAddress>::Initializer::Initializer()
-{
-    initialize(AddressUsageKeeper<gameAddress>::initialized, isImplemented, gameAddress, Ptr::ptr, getTypeName<T>());
-}
-
 #define MACRO_STRUCT_RESOLVER(STRUCT_TYPE, IMPLEMENTED, GAME_ADDRESS)                                                  \
     template struct StructResolver::Resolver<STRUCT_TYPE, IMPLEMENTED, GAME_ADDRESS>;                                  \
-    typedef StructResolver::Resolver<STRUCT_TYPE, IMPLEMENTED, GAME_ADDRESS>::Ptr
+    StructResolver::Resolver<STRUCT_TYPE, IMPLEMENTED, GAME_ADDRESS>::Type
 
-#define MACRO_STRUCT_INSTANCE(GAME_ADDRESS)                                                                            \
-    template <typename T> struct StructResolver::Instance<T, GAME_ADDRESS> {                                           \
-        static T instance;                                                                                             \
-    };                                                                                                                 \
-    template <typename T> T StructResolver::Instance<T, GAME_ADDRESS>::instance
+// TODO: Currently not split between game addresses, would need further specialization
+#define MACRO_STRUCT_INSTANCE(GAME_ADDRESS, INSTANCE)                                                                  \
+    template <typename T, bool implemented, int gameAddress>                                                           \
+    template <typename _>                                                                                              \
+    StructResolver::Resolver<T, implemented, gameAddress>::Instance<true, _>::Instance()                               \
+        : instance(INSTANCE)                                                                                           \
+    {                                                                                                                  \
+        initialize(                                                                                                    \
+            AddressUsageKeeper<gameAddress>::initialized, isImplemented, gameAddress, this->get(), getTypeName<T>());  \
+    };
 
 #endif // STRUCT_RESOLVER
