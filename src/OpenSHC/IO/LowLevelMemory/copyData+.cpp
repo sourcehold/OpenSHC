@@ -3,9 +3,9 @@
 namespace OpenSHC {
 namespace IO {
 
-    // NOTE: The calls to the copyData... functions are optimized, which means the compiler knew the content of these
-    //   functions. The most likely thing is, that these functions shared a file. It does therefore only work if the
-    //   resolvers are active.
+    // NOTE: The calls to the copyData... functions are optimized in "copyData", which means the compiler knew the
+    //   content of these functions. The most likely thing is that these functions shared a file. It does therefore only
+    //   work if the resolvers are active.
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00471830
     void LowLevelMemory::copyData(size_t size, void* src, void* destination)
@@ -24,8 +24,8 @@ namespace IO {
     //   to not use the stack and use a more optimized loop. Regardless what the original reason was, no other way was
     //   found so far aside of using assembly, which provokes the strange "store in stack then load" pattern.
     //
-    //   Since these are low level support functions anyway, I would consider this good enough. They can be visited if
-    //   anything else is done to be rejudged.
+    //   The general sentiment expressed by these functions is added as a comment before the assembly code. Note, that
+    //   actually using these would not result in the same binary.
 
     // FUNCTION: STRONGHOLDCRUSADER 0x0046ABA0
     void LowLevelMemory::copyData0x100()
@@ -33,6 +33,18 @@ namespace IO {
         unsigned int* localDest = (unsigned int*)this->destination;
         unsigned int* localSrc = (unsigned int*)this->src;
         size_t localSize = this->size;
+
+        /*
+            while (localSize >= 0x100) {
+                // actually manually enrolled to 64 int assigns
+                for (int i = 0; i < 64; i++) {
+                    localDest[i] = localSrc[i];
+                }
+                localSrc += 64;
+                localDest += 64;
+                localSize -= 0x100;
+            }
+        */
 
         __asm
         {
@@ -196,6 +208,18 @@ namespace IO {
         unsigned int* localSrc = (unsigned int*)this->src;
         size_t localSize = this->size;
 
+        /*
+            while (localSize >= 0x10) {
+                // actually manually enrolled to 4 int assigns
+                for (int i = 0; i < 4; i++) {
+                    localDest[i] = localSrc[i];
+                }
+                localSrc += 4;
+                localDest += 4;
+                localSize -= 0x10;
+            }
+        */
+
         __asm
         {
             mov edi, localDest
@@ -237,6 +261,13 @@ namespace IO {
         unsigned char* localDest = (unsigned char*)this->destination;
         unsigned char* localSrc = (unsigned char*)this->src;
         size_t localSize = this->size;
+
+        /*
+            // assembly logic just uses localSize to count down and src and dest up
+            for(size_t i = 0; i < localSize; ++i) {
+                localDest[i] = localSrc[i];
+            }
+        */
 
         __asm
         {
