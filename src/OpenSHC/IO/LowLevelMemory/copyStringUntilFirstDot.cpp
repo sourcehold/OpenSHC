@@ -6,6 +6,14 @@ namespace IO {
     // FUNCTION: STRONGHOLDCRUSADER 0x0046AE50
     void LowLevelMemory::copyStringUntilFirstDot(char* source, char* destination)
     {
+        /*
+            while (*source != '.' && *source != '\0') {
+                *destination = *source;
+                ++destination;
+                ++source;
+            }
+        */
+
         __asm
         {
             mov edi, destination
