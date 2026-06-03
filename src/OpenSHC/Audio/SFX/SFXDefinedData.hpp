@@ -9,6 +9,7 @@
 #pragma once
 
 #include "OpenSHC/Audio/SFX/MusicSfx.hpp"
+
 #include "mmsystem.h"
 
 namespace OpenSHC {

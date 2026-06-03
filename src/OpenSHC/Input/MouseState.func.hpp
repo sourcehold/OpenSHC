@@ -5,6 +5,7 @@
 #include "OpenSHC/Input/Mouse/MouseClickInteractionInt.hpp"
 #include "OpenSHC/Input/MouseState.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
 #include "WinDef.h"
 namespace OpenSHC {
 namespace Input {

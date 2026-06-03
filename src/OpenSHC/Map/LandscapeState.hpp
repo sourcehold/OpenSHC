@@ -14,6 +14,7 @@
 #include "OpenSHC/Map/Trees/TreeTypeInt.hpp"
 #include "OpenSHC/Map/WindState.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
 #include "WinDef.h"
 
 namespace OpenSHC {

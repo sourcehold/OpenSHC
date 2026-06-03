@@ -2,10 +2,11 @@
   path: 'OpenSHC/IO/ResourceManager.func.hpp'
 */
 
-#include "HoldStrong_lib/StringObject.hpp"
 #include "OpenSHC/IO/FileResourceTypeInt.hpp"
 #include "OpenSHC/IO/ResourceManager.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
+#include "HoldStrong_lib/StringObject.hpp"
 #include "crtdefs.h"
 namespace OpenSHC {
 namespace IO {

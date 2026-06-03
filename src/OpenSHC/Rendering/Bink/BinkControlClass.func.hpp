@@ -2,9 +2,10 @@
   path: 'OpenSHC/Rendering/Bink/BinkControlClass.func.hpp'
 */
 
-#include "Mss32.h"
 #include "OpenSHC/Audio/MSS/enums/SHC_SoundStreamInt.hpp"
 #include "OpenSHC/Rendering/Bink/BinkControlClass.hpp"
+
+#include "Mss32.h"
 #include "WinDef.h"
 namespace OpenSHC {
 namespace Rendering {

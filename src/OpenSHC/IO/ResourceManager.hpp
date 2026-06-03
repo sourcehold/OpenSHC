@@ -8,11 +8,12 @@
 
 #pragma once
 
-#include "HoldStrong_lib/StringObject.hpp"
 #include "OpenSHC/IO/FileResourceTypeInt.hpp"
 #include "OpenSHC/IO/Helpers/OPENFILENAMEA_Truncated.hpp"
 #include "OpenSHC/Map/MapMetaInfo.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
+#include "HoldStrong_lib/StringObject.hpp"
 #include "crtdefs.h"
 
 namespace OpenSHC {

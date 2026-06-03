@@ -16,6 +16,7 @@
 #include "OpenSHC/Text/TextAlignmentInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 #include "OpenSHC/WindowsHelper/Enums/CodePageInt.hpp"
+
 #include "WinDef.h"
 
 namespace OpenSHC {

@@ -16,9 +16,11 @@ namespace Audio {
         // SIZE: 0x00000004
         typedef struct UnkSoundFlagsAndLoopCount {
 
-            ushort loopCount; // 0x00000000 length: 2
-            undefined1 padding_0x2[1]; // 0x00000002 length: 1
-            byte flagsUnk; // 0x00000003 length: 1
+            int loopCount : 16;
+            int reserved : 13;
+            int unknownFlag1 : 1;
+            int unknownFlag2 : 1;
+            int uninterruptable : 1;
 
         } UnkSoundFlagsAndLoopCount;
 #pragma pack(pop)

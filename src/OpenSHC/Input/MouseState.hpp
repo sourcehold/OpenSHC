@@ -12,6 +12,7 @@
 #include "OpenSHC/Input/Mouse/MouseClickInteractionInt.hpp"
 #include "OpenSHC/Input/Mouse/MouseXYUUStruct.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
 #include "WinDef.h"
 
 namespace OpenSHC {

@@ -9,6 +9,7 @@
 #pragma once
 
 #include "OpenSHC/Map/MapHeaderSection4IntStruct.hpp"
+
 #include "WinDef.h"
 
 namespace OpenSHC {

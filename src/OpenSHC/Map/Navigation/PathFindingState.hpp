@@ -12,6 +12,7 @@
 #include "OpenSHC/Map/Navigation/PathFindingStatePartB.hpp"
 #include "OpenSHC/Map/Units/UnitTypeInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
 #include "WinDef.h"
 
 namespace OpenSHC {

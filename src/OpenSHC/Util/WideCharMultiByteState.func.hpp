@@ -3,6 +3,7 @@
 */
 
 #include "OpenSHC/Util/WideCharMultiByteState.hpp"
+
 #include "winnt.h"
 namespace OpenSHC {
 namespace Util {

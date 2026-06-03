@@ -4,6 +4,7 @@
 
 #include "OpenSHC/IO/LowLevelMemory.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
 #include "crtdefs.h"
 namespace OpenSHC {
 namespace IO {

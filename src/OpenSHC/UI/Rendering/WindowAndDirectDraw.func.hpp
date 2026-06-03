@@ -5,6 +5,7 @@
 #include "OpenSHC/Rendering/ScreenResolutionEnumInt.hpp"
 #include "OpenSHC/UI/Rendering/WindowAndDirectDraw.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
 #include "WinDef.h"
 #include "winnt.h"
 namespace OpenSHC {

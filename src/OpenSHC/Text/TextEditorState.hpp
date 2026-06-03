@@ -9,6 +9,7 @@
 #pragma once
 
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
 #include "mbstring.h"
 #include "winnt.h"
 

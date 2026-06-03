@@ -8,8 +8,8 @@
 
 #pragma once
 
-#include "OpenSHC/UI/Enums/MenuViewTypeInt.hpp"
 #include "OpenSHC/WindowsHelper/cdeclVoidFunc.hpp"
+#include "OpenSHC/UI/Enums/MenuViewTypeInt.hpp"
 
 namespace OpenSHC {
 namespace UI {

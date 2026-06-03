@@ -14,6 +14,7 @@
 #include "OpenSHC/Map/Navigation/Algorithms/XYPair.hpp"
 #include "OpenSHC/Map/Navigation/Algorithms/XYTileObject.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
 #include "WinDef.h"
 
 namespace OpenSHC {
