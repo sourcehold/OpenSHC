@@ -20,6 +20,7 @@
 #include "OpenSHC/UI/DisplayElement.hpp"
 #include "OpenSHC/UI/Enums/DisplayElementIDInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
 #include "WinDef.h"
 #include "crtdefs.h"
 #include "ddraw.h"

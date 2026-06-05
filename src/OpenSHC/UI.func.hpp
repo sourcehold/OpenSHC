@@ -15,6 +15,7 @@
 #include "OpenSHC/UI/Enums/SoundMenuClickTypeInt.hpp"
 #include "OpenSHC/UI/Multiplayer/FindingNetworkSessions_ButtonParametersInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
 #include "WinDef.h"
 namespace OpenSHC {
 namespace UI_Func {
