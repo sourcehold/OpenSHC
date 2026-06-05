@@ -9,8 +9,6 @@
 #pragma once
 
 #include "OpenSHC/AI/AIVUnitTypeInt.hpp"
-#include "OpenSHC/DirectPlay/DPNAME.hpp"
-#include "OpenSHC/DirectPlay/DPSESSIONDESC2.hpp"
 #include "OpenSHC/Game/Resources/ResourceTypeInt.hpp"
 #include "OpenSHC/Map/Buildings/BuildingTypeInt.hpp"
 #include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
@@ -21,16 +19,16 @@
 #include "OpenSHC/UI/DisplayElement.hpp"
 #include "OpenSHC/UI/Enums/DisplayElementIDInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
 #include "WinDef.h"
 #include "crtdefs.h"
 #include "ddraw.h"
+#include "dplay.h"
 #include "winnt.h"
 namespace OpenSHC {
 namespace Global {
 
     using OpenSHC::AI::AIVUnitTypeInt;
-    using OpenSHC::DirectPlay::DPNAME;
-    using OpenSHC::DirectPlay::DPSESSIONDESC2;
     using OpenSHC::Game::Resources::ResourceTypeInt;
     using OpenSHC::Map::Buildings::BuildingTypeInt;
     using OpenSHC::Map::Buildings::BuildingTypeShort;
@@ -408,24 +406,6 @@ namespace Global {
 
     BOOLEnum __stdcall CheckTribeActivityPercentages(int tribeID, BOOLEnum ignoreShooting, BOOLEnum includeMoving);
 
-    void __stdcall PlayTauntToAttackedPlayerBikFromPlayer(int playerID);
-
-    void __stdcall PlayGoodsRequestBikFromPlayerToPlayer(int playerID, int targetPlayerID);
-
-    void __stdcall PlayNervous2BikFromPlayer(int playerID);
-
-    void __stdcall PlayGoodsNotSentBikFromPlayer(int playerID);
-
-    void __stdcall PlayGoodsSentBikFromPlayerToPlayer(int playerID, int targetPlayerID);
-
-    void __stdcall PlayAnger2BikFromPlayerToPlayer(int playerID, int targetPlayerID);
-
-    void __stdcall PlayVictory2BikFromPlayerToPlayer(int playerID, int targetPlayerID);
-
-    void __stdcall PlayNervous1BikFromPlayer(int playerID);
-
-    void __stdcall PlayRequestHelpBikFromPlayer(int playerID);
-
     void __stdcall PlayWillNotHelp1BikFromPlayerToPlayer(int playerID, int targetPlayerID);
 
     void __stdcall PlayWillNotHelp2BikFromPlayerToPlayer(int playerID, int targetPlayerID);
@@ -437,14 +417,6 @@ namespace Global {
     void __stdcall PlayWillNotAttack2BikFromPlayerToPlayer(int playerID, int targetPlayerID);
 
     void __stdcall PlayWillAttackBikFromPlayerToPlayer(int playerID, int targetPlayerID);
-
-    void __stdcall PlayJokeBikFromAIToHuman(int playerID, int aiType);
-
-    void __stdcall PlayFriendlyVictoryBikFromPlayer(int playerID);
-
-    void __stdcall PlayTeamWinningBikFromPlayer(int playerID);
-
-    void __stdcall PlayNoHelpBikFromPlayer(int playerID);
 
     BOOLEnum __cdecl StoreCurrentGameIntoTemporarySKMasterEntry(int score);
 

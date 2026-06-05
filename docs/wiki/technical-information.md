@@ -1,0 +1,87 @@
+
+# Technical information
+
+### Approach
+
+The development of this reimplementation primarily focuses on reimplementing functions and data structures of the original game.
+The game 1.41 Latin version of the Stronghold Crusader executable serves as the reference point (SHA hash: 012E9D55DAC04B23ED9A334C975D3A5B6287020B).
+To achieve this, a combination approach is used. The code has mechanisms in place to allow a compilation to both and executable and a DLL.
+The DLL is meant to be loaded by the UCP and only replace certain functions, while other calls would call into the games executable. This allows to reimplement one function after the other while still maintaining a runnable game.
+
+We use [reccmp](https://github.com/isledecomp/reccmp) to verify compatibility of reimplemented code and the original game.
+
+Because the original game was compiled using an old compiler, you have to compile it using [this compiler](https://github.com/sourcehold/MSVC1400), which is included in the repository via a submodule.
+
+If you made any advances or noticed something while implementing, please also add or update the status in [addresses-SHC-3BB0A8C1.txt](status/addresses-SHC-3BB0A8C1.txt).  
+The structure is simply `<address-enum> | <matching-percent> | <comment>`.  
+Should the address list change, please run the following command to recreate the file:
+```sh
+python .\status\extract_header_and_update.py .\src\precomp\addresses-SHC-3BB0A8C1.hpp
+```
+Percentages and comments should be kept, but always check the difference.
+
+
+### Prerequisites
+
+1. Stronghold Crusader 1.41 Latin. The Steam version is the easiest one to get, but any patched version will do. Make sure the installation uses a Latin version (English, German, etc).
+2. CMake with the minimum version 3.24.
+3. [Python3](https://www.python.org/)
+4. A way to execute `clang-format 22`
+5. (Recommended) An IDE with CMake integration. The repository has been optimized for Visual Studio Code using the [Microsoft C/C++ Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools-extension-pack).
+
+### Setup
+
+1. Clone the repository. Make sure to also pull the submodules to have the compiler included:
+
+   ```sh
+   git clone --recursive https://github.com/sourcehold/OpenSHC.git
+   ```
+
+   - Should NET Framework 3.5 be required, it can be easily installed on Windows 11 by running `mt.exe` (from the MSVC1400 repo), Windows 11 will ask to install the right version.
+
+2. Create a softlink to the original game executable with the name `_original` by running [softlink.bat](softlink.bat). It will request the full path to the game folder.
+3. Setup the needed Python environment to run `reccmp` for binary comparison by running [setup.bat](reccmp/dll/setup.bat) in the reccmp/dll folder (or the `setup.bat` in the reccmp/exe folder if binary comparison on the reimplemented .exe file is preferred)
+
+### Development
+
+The build can be run using the dev tools of the preferred IDE or via the build scripts. Regardless, a CMake installation is required.
+
+Visual Studio Code with the proper extensions only needs to open the folder and the targets can be chosen in the "CMake" menu.
+Additionally, it configures format-on-save and a debug target for the UCP3.
+
+If the scripts are preferred, the following triggers a build using the scripts:
+
+1. Open a terminal.
+2. Navigate to this project folder
+3. Execute build.bat:
+   ```sh
+   build.bat RelWithDebInfo OpenSHC.dll
+   ```
+4. Compare a function byte by byte to the OpenSHC.dll to check compilation:
+   ```sh
+   reccmp/dll/run reccmp-reccmp --target STRONGHOLDCRUSADER --verbose 0x401000
+   ```
+
+If CMake is installed and not in PATH, for example if installed via Visual Studio, `cmakew.bat` can be used instead. It tries to detect a CMake installation and uses it.
+
+Note that any code needs to be formatted properly using the provided `clang-format` file. The way to do so it up to the developer. Many IDEs support it out of the box. Should issues occur, please note that we target clang-format 22. So if your local version or IDE seems to not produce the right format, switch to a fixed version installed on your system.
+
+If any `.cpp` or `.c` files are added to the source code, they should be listed in one of the txt files in `cmake/`:
+
+- `cmake/core-sources.txt` containing the core sources to compile the project.
+- `cmake/pklib-sources.txt` containing the source files for compiling the pklib dependency.
+- `cmake/openshc-sources.txt` containing the files with reimplementations of the original game's functions.
+
+You can also create a local only `cmake/openshc-sources.txt.local` file, which will be used instead of `cmake/openshc-sources.txt` if it exists, to allow faster tests.
+Extending this files name in any way, like `openshc-sources.txt.local.bak`, will prevent it from being used, but it is still ignored by git. This allows to keep small local file lists.
+
+#### Manual configuration
+
+The file `build.bat` exists for convenience. If you want more control, you can specify the following cmake options.
+
+##### Building
+
+Build using `cmake --build --preset RelWithDebInfo --target OpenSHC.dll` will create the dll in `build-RelWithDebInfo/DLL`.
+Build using `cmake --build --preset RelWithDebInfo --target OpenSHC.exe` will create the exe in `build-RelWithDebInfo/EXE`.
+Build using `cmake --build --preset RelWithDebInfo --target OpenSHC.dll.deploy` will prepare the modules folder in the UCP setup of the bound SHC.
+Build using `cmake --build --preset RelWithDebInfo --target OpenSHC.exe.runnable` will prepare the runtime folder of the exe to make it runnable.

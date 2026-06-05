@@ -16,12 +16,12 @@ jobs:
     permissions: 
       pull-requests: write
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       # Detect if any relevant files changed
       - name: Detect relevant files
         id: filter
-        uses: dorny/paths-filter@v3
+        uses: dorny/paths-filter@v4
         with:
           filters: |
             cpp:
@@ -46,7 +46,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          version: 21 # default is 18
+          version: 22 # default is 18
 
           style: 'file'  # Use .clang-format config file. 
           tidy-checks: '-*' # disable clang-tidy checks.

@@ -1,9 +1,32 @@
 ﻿---
 BasedOnStyle: WebKit
-ColumnLimit: '120'
-IndentWidth: '4'
-TabWidth: '4'
+ColumnLimit: 120
+IndentWidth: 4
+TabWidth: 4
 UseTab: Never
 InsertNewlineAtEOF: true
-
+SpaceInEmptyBraces: Never
+PointerAlignment: Left
+QualifierAlignment: Custom
+QualifierOrder: [inline, static, type, const, volatile]
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex:           ^"\.\./.*\.hpp"$
+    Priority:        0
+    SortPriority:    0
+  - Regex:           ^"OpenSHC/.*func\.hpp"$
+    Priority:        1
+    SortPriority:    1
+  - Regex:           ^"OpenSHC/Globals/.*"$
+    Priority:        2
+    SortPriority:    3
+  - Regex:           ^"OpenSHC/.*"$
+    Priority:        1
+    SortPriority:    2
+  - Regex:           ^".*"$
+    Priority:        3
+    SortPriority:    4
+  - Regex:           .*
+    Priority:        3
+    SortPriority:    5
 ...

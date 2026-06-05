@@ -1,15 +1,15 @@
 
-#include "OpenSHC/Global.func.hpp"
+#ifdef OPEN_SHC_DLL
 
 #include "lua.h"
-
-#ifdef OPEN_SHC_DLL
 
 extern "C" __declspec(dllexport) int __cdecl luaopen_OpenSHC(lua_State* L) { return 0; }
 
 #endif
 
 #ifdef OPEN_SHC_EXE
+
+#include "OpenSHC/Global.func.hpp"
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow)
 {

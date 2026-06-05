@@ -140,7 +140,7 @@ namespace Map {
             uint spawnEntityEffect1(
                 short x, short y, undefined4 height, undefined4 entityType, int graphicType1, int graphicType2);
 
-            undefined4 moveProjectileEntity(int entityID);
+            BOOLEnum moveProjectileEntity(int entityID);
 
             void FUN_00408770(PackagedFileMagicNumInt receivedMapVersion, PackagedFileMagicNumInt packagerMapVersion);
 

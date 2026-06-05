@@ -16,6 +16,7 @@
 #include "OpenSHC/Map/Units/UnitInstructionTypeInt.hpp"
 #include "OpenSHC/Map/Units/UnitTypeInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
 #include "WinDef.h"
 
 namespace OpenSHC {

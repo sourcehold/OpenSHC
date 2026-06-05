@@ -5,6 +5,7 @@
 #include "OpenSHC/Map/Navigation/PathFindingState.hpp"
 #include "OpenSHC/Map/Units/UnitTypeInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
 #include "WinDef.h"
 namespace OpenSHC {
 namespace Map {

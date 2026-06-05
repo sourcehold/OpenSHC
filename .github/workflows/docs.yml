@@ -10,6 +10,7 @@ on:
 
 jobs:
   pages:
+    if: github.repository == 'sourcehold/OpenSHC'
     runs-on: ubuntu-22.04
     environment:
       name: github-pages

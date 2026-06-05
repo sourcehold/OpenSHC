@@ -18,6 +18,7 @@
 #include "OpenSHC/Text/FontRenderTypeInt.hpp"
 #include "OpenSHC/UI/Rendering/Range.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
 #include "WinDef.h"
 
 namespace OpenSHC {

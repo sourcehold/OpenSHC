@@ -11,10 +11,11 @@
 #include "OpenSHC/OS.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 #include "OpenSHC/WindowsHelper/Enums/OpenFlagInt.hpp"
+
 #include "crtdefs.h"
-#include "fileapi.h"
 #include "guiddef.h"
 #include "mbstring.h"
+#include "stdio.h"
 #include "time.h"
 #include "vadefs.h"
 namespace OpenSHC {
@@ -56,12 +57,12 @@ namespace OS_Func {
     _atexit;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__cdecl*)(void* _Memory), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x0057FA74, &OpenSHC::OS::_free)
-    _free;
+        void(__cdecl*)(void* _Memory), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x0057FA74, &OpenSHC::OS::_free_base)
+    _free_base;
 
     MACRO_FUNCTION_RESOLVER(
-        int(__cdecl*)(int _C), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x0057FC19, &OpenSHC::OS::_tolower)
-    _tolower;
+        int(__cdecl*)(int _C), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x0057FC19, &OpenSHC::OS::__tolower)
+    __tolower;
 
     MACRO_FUNCTION_RESOLVER(
         int(__cdecl*)(FILE* _File), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x0057FCB2, &OpenSHC::OS::_fclose)
@@ -116,8 +117,8 @@ namespace OS_Func {
     _memcpy_s;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__cdecl*)(void* _Memory), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x00580E9C, &OpenSHC::OS::_free)
-    _free;
+        void(__cdecl*)(void* _Memory), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x00580E9C, &OpenSHC::OS::_free_cpp)
+    _free_cpp;
 
     MACRO_FUNCTION_RESOLVER(int(__cdecl*)(int fileDescriptor), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x00580F38,
         &OpenSHC::OS::_ucrt_close)
@@ -147,8 +148,8 @@ namespace OS_Func {
     _memcpy;
 
     MACRO_FUNCTION_RESOLVER(
-        int(__cdecl*)(int _C), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x005824CD, &OpenSHC::OS::_toupper)
-    _toupper;
+        int(__cdecl*)(int _C), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x005824CD, &OpenSHC::OS::__toupper)
+    __toupper;
 
     MACRO_FUNCTION_RESOLVER(int(__cdecl*)(int fileDescriptor, long lDistanceToMove, DWORD moveMethod),
         REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x0058277E, &OpenSHC::OS::_ucrt_lseek)

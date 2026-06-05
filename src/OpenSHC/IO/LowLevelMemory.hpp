@@ -9,6 +9,7 @@
 #pragma once
 
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
 #include "crtdefs.h"
 
 namespace OpenSHC {
@@ -21,9 +22,9 @@ namespace IO {
     // SIZE: 0x00000014
     class LowLevelMemory {
     public:
-        int src; // 0x00000000 length: 4
-        pointer* destination; // 0x00000004 length: 4
-        pointer* size; // 0x00000008 length: 4
+        void* src; // 0x00000000 length: 4
+        void* destination; // 0x00000004 length: 4
+        int size; // 0x00000008 length: 4
         int value; // 0x0000000C length: 4
         int field4_0x10; // 0x00000010 length: 4
 

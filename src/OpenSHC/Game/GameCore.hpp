@@ -18,6 +18,7 @@
 #include "OpenSHC/UI/Enums/MenuViewTypeInt.hpp"
 #include "OpenSHC/UI/MenuItemActionHandler.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
 #include "WinDef.h"
 
 namespace OpenSHC {

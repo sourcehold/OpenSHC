@@ -9,8 +9,6 @@
 #pragma once
 
 #include "OpenSHC/AI/AIVUnitTypeInt.hpp"
-#include "OpenSHC/DirectPlay/DPNAME.hpp"
-#include "OpenSHC/DirectPlay/DPSESSIONDESC2.hpp"
 #include "OpenSHC/Game/Resources/ResourceTypeInt.hpp"
 #include "OpenSHC/Global.hpp"
 #include "OpenSHC/Map/Buildings/BuildingTypeInt.hpp"
@@ -22,16 +20,16 @@
 #include "OpenSHC/UI/DisplayElement.hpp"
 #include "OpenSHC/UI/Enums/DisplayElementIDInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
 #include "WinDef.h"
 #include "crtdefs.h"
 #include "ddraw.h"
+#include "dplay.h"
 #include "winnt.h"
 namespace OpenSHC {
 namespace Global_Func {
 
     using OpenSHC::AI::AIVUnitTypeInt;
-    using OpenSHC::DirectPlay::DPNAME;
-    using OpenSHC::DirectPlay::DPSESSIONDESC2;
     using OpenSHC::Game::Resources::ResourceTypeInt;
     using OpenSHC::Map::Buildings::BuildingTypeInt;
     using OpenSHC::Map::Buildings::BuildingTypeShort;
@@ -747,42 +745,6 @@ namespace Global_Func {
         Address::SHC_3BB0A8C1_0x004CD070, &OpenSHC::Global::CheckTribeActivityPercentages)
     CheckTribeActivityPercentages;
 
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(int playerID), false, Address::SHC_3BB0A8C1_0x004D07C0,
-        &OpenSHC::Global::PlayTauntToAttackedPlayerBikFromPlayer)
-    PlayTauntToAttackedPlayerBikFromPlayer;
-
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(int playerID, int targetPlayerID), false, Address::SHC_3BB0A8C1_0x004D0A20,
-        &OpenSHC::Global::PlayGoodsRequestBikFromPlayerToPlayer)
-    PlayGoodsRequestBikFromPlayerToPlayer;
-
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(int playerID), false, Address::SHC_3BB0A8C1_0x004D0B10,
-        &OpenSHC::Global::PlayNervous2BikFromPlayer)
-    PlayNervous2BikFromPlayer;
-
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(int playerID), false, Address::SHC_3BB0A8C1_0x004D0B70,
-        &OpenSHC::Global::PlayGoodsNotSentBikFromPlayer)
-    PlayGoodsNotSentBikFromPlayer;
-
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(int playerID, int targetPlayerID), false, Address::SHC_3BB0A8C1_0x004D0BB0,
-        &OpenSHC::Global::PlayGoodsSentBikFromPlayerToPlayer)
-    PlayGoodsSentBikFromPlayerToPlayer;
-
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(int playerID, int targetPlayerID), false, Address::SHC_3BB0A8C1_0x004D0C00,
-        &OpenSHC::Global::PlayAnger2BikFromPlayerToPlayer)
-    PlayAnger2BikFromPlayerToPlayer;
-
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(int playerID, int targetPlayerID), false, Address::SHC_3BB0A8C1_0x004D0C70,
-        &OpenSHC::Global::PlayVictory2BikFromPlayerToPlayer)
-    PlayVictory2BikFromPlayerToPlayer;
-
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(int playerID), false, Address::SHC_3BB0A8C1_0x004D0CF0,
-        &OpenSHC::Global::PlayNervous1BikFromPlayer)
-    PlayNervous1BikFromPlayer;
-
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(int playerID), false, Address::SHC_3BB0A8C1_0x004D0D40,
-        &OpenSHC::Global::PlayRequestHelpBikFromPlayer)
-    PlayRequestHelpBikFromPlayer;
-
     MACRO_FUNCTION_RESOLVER(void(__stdcall*)(int playerID, int targetPlayerID), false, Address::SHC_3BB0A8C1_0x004D0DB0,
         &OpenSHC::Global::PlayWillNotHelp1BikFromPlayerToPlayer)
     PlayWillNotHelp1BikFromPlayerToPlayer;
@@ -806,22 +768,6 @@ namespace Global_Func {
     MACRO_FUNCTION_RESOLVER(void(__stdcall*)(int playerID, int targetPlayerID), false, Address::SHC_3BB0A8C1_0x004D0F40,
         &OpenSHC::Global::PlayWillAttackBikFromPlayerToPlayer)
     PlayWillAttackBikFromPlayerToPlayer;
-
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(int playerID, int aiType), false, Address::SHC_3BB0A8C1_0x004D0F90,
-        &OpenSHC::Global::PlayJokeBikFromAIToHuman)
-    PlayJokeBikFromAIToHuman;
-
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(int playerID), false, Address::SHC_3BB0A8C1_0x004D0FC0,
-        &OpenSHC::Global::PlayFriendlyVictoryBikFromPlayer)
-    PlayFriendlyVictoryBikFromPlayer;
-
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(int playerID), false, Address::SHC_3BB0A8C1_0x004D1000,
-        &OpenSHC::Global::PlayTeamWinningBikFromPlayer)
-    PlayTeamWinningBikFromPlayer;
-
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(int playerID), false, Address::SHC_3BB0A8C1_0x004D1050,
-        &OpenSHC::Global::PlayNoHelpBikFromPlayer)
-    PlayNoHelpBikFromPlayer;
 
     MACRO_FUNCTION_RESOLVER(BOOLEnum(__cdecl*)(int score), false, Address::SHC_3BB0A8C1_0x004D1700,
         &OpenSHC::Global::StoreCurrentGameIntoTemporarySKMasterEntry)

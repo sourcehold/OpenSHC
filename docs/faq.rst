@@ -2,6 +2,11 @@
 Frequently Asked Questions (FAQ)
 ==================================
 
+What is the current status?
+=============================
+
+You can track the recent progress `here <https://gynt.github.io/OpenSHC/progress.html>`_.
+
 Why?
 ====
 
@@ -10,14 +15,14 @@ However, the Definitive Edition does not address various `shortcomings` in the o
 Furthermore, the new Definitive Edition requires modern hardware to run, which isn't something all fans can afford.
 
 This reimplementation seeks to cater to the wishes of the dedicated community by providing an
-open source reimplementation that permits modding.
+open source reimplementation that benefits modding.
 
 
 An open source Stronghold Crusader has been tried before, why will it work this time?
 ===========================================================================================
 The current project has several key strategies that will more likely make it a success.
 
-#. The current project focuses on fidelity to the original game. This means the goals are clear: reimplement the original engine. Stronghold Crusader is a game where many players have different experiences playing the same game. Some play it as a simulation, others as a Real Time Strategy, and others watch AI battle each other. Focusing on a reimplementation focuses our energy on the same goal, rather than trying to recreate different games.
+#. The current project focuses on fidelity to the original game. This means the goals are clear: reimplement the original game. Stronghold Crusader is a game where many players have different experiences playing the same game. Some play it as a simulation, others as a Real Time Strategy, and others watch AI battle each other. Focusing on a reimplementation focuses our energy on the same goal, rather than trying to recreate different games.
 
 #. The current project builds on the knowledge in the Sourcehold network of people. The sourcehold project has more than half a decade of working with the details of the game and therefore there is a lot of knowledge that can be transferred to a reimplementation to pull off a reimplementation.
 
@@ -30,7 +35,7 @@ Yes.
 
 Am I free to make a spin-off of the current reimplementation?
 ===========================================================================================
-Yes and no. The spin-off needs to give credit to this project and the spin-off needs to be open source and free of charge. This is to protect the effort invested by contributors: contributors may be less inclined to contribute to a private project than a common-good.
+Yes, but with limitations. The spin-off needs to give credit to this project and the spin-off needs to be open source and free of charge. This is to protect the effort invested by contributors: contributors may be less inclined to contribute to a private project than a common-good.
 
 
 What Software and programming language is the reimplementation using?

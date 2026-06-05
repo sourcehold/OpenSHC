@@ -12,6 +12,7 @@
 #include "OpenSHC/Rendering/ScreenResolutionArrayStruct.hpp"
 #include "OpenSHC/Rendering/ScreenResolutionEnumInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
 #include "WinDef.h"
 #include "ddraw.h"
 #include "winnt.h"

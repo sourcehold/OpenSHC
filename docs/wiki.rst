@@ -6,12 +6,22 @@ Welcome to the OpenSHC Wiki!
 
 Here you'll find detailed documentation about the Project and the Game
 
-The OpenSHC Project
+About the OpenSHC Project
+-----------------------------
+- :doc:`Approach <wiki/approach>`
+- :doc:`How reimplementation works <wiki/workings>`
+- :doc:`Technical information <wiki/technical-information>`
+
+Tutorials
 -------------
-- :doc:`How reimplementation works <wiki/wiki-workings>`
+- :doc:`Getting Started <wiki/tutorials/reimplementation-tutorial-0>`
+- :doc:`Reimplementation tutorial 1: basics <wiki/tutorials/reimplementation-tutorial-1>`
+- :doc:`Reimplementation tutorial 2: function calls <wiki/tutorials/reimplementation-tutorial-2>`
+- :doc:`Reimplementation tutorial 3: arrays and fields <wiki/tutorials/reimplementation-tutorial-3>`
+- :doc:`Reimplementation tutorial 4: debugging and logging <wiki/tutorials/reimplementation-tutorial-4>`
 
 The Game itself
------------
+------------------
 - :doc:`Load balancing of the core game engine <wiki/load-balancing-table>`
 - Game Mechanics
 - AI Behavior
@@ -21,4 +31,4 @@ The Game itself
 
 (Coming Soon!)
 
-.. include:: wiki-approach.rst
+.. include:: wiki/approach.rst

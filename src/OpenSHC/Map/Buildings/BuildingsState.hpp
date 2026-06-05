@@ -325,7 +325,7 @@ namespace Map {
 
             void processDamageFromKillingPit(int unitID);
 
-            void SomethingUpdatePathLinkageTileMap(int param_1);
+            void unkUpdatePathLinkageTileMap(int param_1);
 
             void meth_0x419a30(int param_1);
 

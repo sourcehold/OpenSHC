@@ -243,8 +243,8 @@ namespace AI {
             int (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004CCBE0, &AICState::getDefensiveTribeForUnit)
         getDefensiveTribeForUnit;
 
-        MACRO_FUNCTION_RESOLVER(int (AICState::*)(short*, undefined, int), false, Address::SHC_3BB0A8C1_0x004CCD20,
-            &AICState::addUnitToSmallestBehaviourTypeTribe)
+        MACRO_FUNCTION_RESOLVER(int (AICState::*)(undefined4, undefined4, undefined4), false,
+            Address::SHC_3BB0A8C1_0x004CCD20, &AICState::addUnitToSmallestBehaviourTypeTribe)
         addUnitToSmallestBehaviourTypeTribe;
 
         MACRO_FUNCTION_RESOLVER(
@@ -284,8 +284,8 @@ namespace AI {
         giveMoveCommandToSortieUnits;
 
         MACRO_FUNCTION_RESOLVER(void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CDA50,
-            &AICState::addBuildingToSomePlayerStateArray)
-        addBuildingToSomePlayerStateArray;
+            &AICState::addBuildingToTargetableBuildings)
+        addBuildingToTargetableBuildings;
 
         MACRO_FUNCTION_RESOLVER(int (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CDAB0,
             &AICState::selectBuildingFromAListOfBuildingTypes)
@@ -495,17 +495,69 @@ namespace AI {
             int (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004D05D0, &AICState::shareGoldAmongTeamMembers)
         shareGoldAmongTeamMembers;
 
+        MACRO_FUNCTION_RESOLVER(void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D07C0,
+            &AICState::playTauntToAttackedPlayerBikFromPlayer)
+        playTauntToAttackedPlayerBikFromPlayer;
+
         MACRO_FUNCTION_RESOLVER(
-            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D0830, &AICState::PlayAnger1BikFromPlayer)
-        PlayAnger1BikFromPlayer;
+            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D0830, &AICState::playAnger1BikFromPlayer)
+        playAnger1BikFromPlayer;
 
         MACRO_FUNCTION_RESOLVER(void (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004D08B0,
-            &AICState::PlayPlayerKilledBiksFromKilledAndKillerPlayer)
-        PlayPlayerKilledBiksFromKilledAndKillerPlayer;
+            &AICState::playPlayerKilledBiksFromKilledAndKillerPlayer)
+        playPlayerKilledBiksFromKilledAndKillerPlayer;
+
+        MACRO_FUNCTION_RESOLVER(void (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004D0A20,
+            &AICState::playGoodsRequestBikFromPlayerToPlayer)
+        playGoodsRequestBikFromPlayerToPlayer;
 
         MACRO_FUNCTION_RESOLVER(void (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004D0A80,
             &AICState::playThanksBikFromPlayerToPlayer)
         playThanksBikFromPlayerToPlayer;
+
+        MACRO_FUNCTION_RESOLVER(
+            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D0B10, &AICState::playNervous2BikFromPlayer)
+        playNervous2BikFromPlayer;
+
+        MACRO_FUNCTION_RESOLVER(
+            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D0B70, &AICState::playGoodsNotSentBikFromPlayer)
+        playGoodsNotSentBikFromPlayer;
+
+        MACRO_FUNCTION_RESOLVER(void (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004D0BB0,
+            &AICState::playGoodsSentBikFromPlayerToPlayer)
+        playGoodsSentBikFromPlayerToPlayer;
+
+        MACRO_FUNCTION_RESOLVER(void (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004D0C00,
+            &AICState::playAnger2BikFromPlayerToPlayer)
+        playAnger2BikFromPlayerToPlayer;
+
+        MACRO_FUNCTION_RESOLVER(void (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004D0C70,
+            &AICState::playVictory2BikFromPlayerToPlayer)
+        playVictory2BikFromPlayerToPlayer;
+
+        MACRO_FUNCTION_RESOLVER(
+            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D0CF0, &AICState::playNervous1BikFromPlayer)
+        playNervous1BikFromPlayer;
+
+        MACRO_FUNCTION_RESOLVER(
+            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D0D40, &AICState::playRequestHelpBikFromPlayer)
+        playRequestHelpBikFromPlayer;
+
+        MACRO_FUNCTION_RESOLVER(
+            void (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004D0F90, &AICState::playJokeBikFromAIToHuman)
+        playJokeBikFromAIToHuman;
+
+        MACRO_FUNCTION_RESOLVER(void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D0FC0,
+            &AICState::playFriendlyVictoryBikFromPlayer)
+        playFriendlyVictoryBikFromPlayer;
+
+        MACRO_FUNCTION_RESOLVER(
+            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D1000, &AICState::playTeamWinningBikFromPlayer)
+        playTeamWinningBikFromPlayer;
+
+        MACRO_FUNCTION_RESOLVER(
+            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D1050, &AICState::playNoHelpBikFromPlayer)
+        playNoHelpBikFromPlayer;
 
         MACRO_FUNCTION_RESOLVER(
             void (AICState::*)(), false, Address::SHC_3BB0A8C1_0x004D1090, &AICState::setSomeTimeToNowIfInIngameMenu)
@@ -602,8 +654,8 @@ namespace AI {
             void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D3780, &AICState::computeNervousness)
         computeNervousness;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004D3850,
-            &AICState::determineAIPlayerHelp)
+        MACRO_FUNCTION_RESOLVER(
+            BOOLEnum (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004D3850, &AICState::determineAIPlayerHelp)
         determineAIPlayerHelp;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, undefined4, int), false, Address::SHC_3BB0A8C1_0x004D38C0,

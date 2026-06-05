@@ -179,9 +179,9 @@ namespace Map {
         int unknownSignpostRelatedArray; // 0x0004690C length: 4
         undefined1 padding_0x46910[196]; // 0x00046910 length: 196
         int field128077_0x469d4; // 0x000469D4 length: 4
-        undefined1 padding_0x469d8[4]; // 0x000469D8 length: 4
-        int field128082_0x469dc; // 0x000469DC length: 4
-        undefined1 padding_0x469e0[4]; // 0x000469E0 length: 4
+        int field128078_0x469d8; // 0x000469D8 length: 4
+        int field128079_0x469dc; // 0x000469DC length: 4
+        int field128080_0x469e0; // 0x000469E0 length: 4
         int knights; // 0x000469E4 length: 4
         int ranged; // 0x000469E8 length: 4
         undefined1 padding_0x469ec[8]; // 0x000469EC length: 8

@@ -6358,7 +6358,7 @@ enum {
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00419800 = 0x00419800,
-    // label: SomethingUpdatePathLinkageTileMap
+    // label: unkUpdatePathLinkageTileMap
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00419960 = 0x00419960,
@@ -39244,7 +39244,7 @@ enum {
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CD8F0 = 0x004CD8F0,
-    // label: addBuildingToSomePlayerStateArray
+    // label: addBuildingToTargetableBuildings
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CDA50 = 0x004CDA50,
@@ -39476,54 +39476,54 @@ enum {
     SHC_3BB0A8C1_0x004D05D0 = 0x004D05D0,
     // type: function
     SHC_3BB0A8C1_0x004D0720 = 0x004D0720,
-    // label: PlayTauntToAttackedPlayerBikFromPlayer
-    // location: OpenSHC/Global
+    // label: playTauntToAttackedPlayerBikFromPlayer
+    // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D07C0 = 0x004D07C0,
-    // label: PlayAnger1BikFromPlayer
+    // label: playAnger1BikFromPlayer
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0830 = 0x004D0830,
-    // label: PlayPlayerKilledBiksFromKilledAndKillerPlayer
+    // label: playPlayerKilledBiksFromKilledAndKillerPlayer
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D08B0 = 0x004D08B0,
     // type: function
     SHC_3BB0A8C1_0x004D0910 = 0x004D0910,
-    // label: PlayGoodsRequestBikFromPlayerToPlayer
-    // location: OpenSHC/Global
+    // label: playGoodsRequestBikFromPlayerToPlayer
+    // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0A20 = 0x004D0A20,
     // label: playThanksBikFromPlayerToPlayer
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0A80 = 0x004D0A80,
-    // label: PlayNervous2BikFromPlayer
-    // location: OpenSHC/Global
+    // label: playNervous2BikFromPlayer
+    // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0B10 = 0x004D0B10,
-    // label: PlayGoodsNotSentBikFromPlayer
-    // location: OpenSHC/Global
+    // label: playGoodsNotSentBikFromPlayer
+    // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0B70 = 0x004D0B70,
-    // label: PlayGoodsSentBikFromPlayerToPlayer
-    // location: OpenSHC/Global
+    // label: playGoodsSentBikFromPlayerToPlayer
+    // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0BB0 = 0x004D0BB0,
-    // label: PlayAnger2BikFromPlayerToPlayer
-    // location: OpenSHC/Global
+    // label: playAnger2BikFromPlayerToPlayer
+    // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0C00 = 0x004D0C00,
-    // label: PlayVictory2BikFromPlayerToPlayer
-    // location: OpenSHC/Global
+    // label: playVictory2BikFromPlayerToPlayer
+    // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0C70 = 0x004D0C70,
-    // label: PlayNervous1BikFromPlayer
-    // location: OpenSHC/Global
+    // label: playNervous1BikFromPlayer
+    // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0CF0 = 0x004D0CF0,
-    // label: PlayRequestHelpBikFromPlayer
-    // location: OpenSHC/Global
+    // label: playRequestHelpBikFromPlayer
+    // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0D40 = 0x004D0D40,
     // label: PlayWillNotHelp1BikFromPlayerToPlayer
@@ -39550,20 +39550,20 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004D0F40 = 0x004D0F40,
-    // label: PlayJokeBikFromAIToHuman
-    // location: OpenSHC/Global
+    // label: playJokeBikFromAIToHuman
+    // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0F90 = 0x004D0F90,
-    // label: PlayFriendlyVictoryBikFromPlayer
-    // location: OpenSHC/Global
+    // label: playFriendlyVictoryBikFromPlayer
+    // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0FC0 = 0x004D0FC0,
-    // label: PlayTeamWinningBikFromPlayer
-    // location: OpenSHC/Global
+    // label: playTeamWinningBikFromPlayer
+    // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D1000 = 0x004D1000,
-    // label: PlayNoHelpBikFromPlayer
-    // location: OpenSHC/Global
+    // label: playNoHelpBikFromPlayer
+    // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D1050 = 0x004D1050,
     // label: setSomeTimeToNowIfInIngameMenu
@@ -72699,7 +72699,7 @@ enum {
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057FA62 = 0x0057FA62,
-    // label: _free
+    // label: _free_base
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057FA74 = 0x0057FA74,
@@ -72713,7 +72713,7 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057FB02 = 0x0057FB02,
-    // label: _tolower
+    // label: __tolower
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057FC19 = 0x0057FC19,
@@ -72933,7 +72933,7 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00580E41 = 0x00580E41,
-    // label: _free
+    // label: _free_cpp
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00580E9C = 0x00580E9C,
@@ -73114,7 +73114,7 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005823B5 = 0x005823B5,
-    // label: _toupper
+    // label: __toupper
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x005824CD = 0x005824CD,
@@ -94285,7 +94285,7 @@ enum {
     SHC_3BB0A8C1_0x00DF3878 = 0x00DF3878,
     // label: DPLAY_InterfacePointer
     // location:
-    // type: OpenSHC/DirectPlay/IDirectPlay4A * *
+    // type: OpenSHC/DirectPlay/dplay/IDirectPlay4A * *
     SHC_3BB0A8C1_0x00DF3D18 = 0x00DF3D18,
     // label: DPLAY_CurrentSessionGUID
     // location:

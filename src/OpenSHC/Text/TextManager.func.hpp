@@ -7,6 +7,7 @@
 #include "OpenSHC/Text/TextAlignmentInt.hpp"
 #include "OpenSHC/Text/TextManager.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
 #include "WinDef.h"
 namespace OpenSHC {
 namespace Text {

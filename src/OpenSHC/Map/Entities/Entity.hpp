@@ -72,7 +72,7 @@ namespace Map {
             short field49_0x72; // 0x00000072 length: 2
             short field50_0x74; // 0x00000074 length: 2
             byte unused_0x76[2]; // 0x00000076 length: 2
-            int field52_0x78; // 0x00000078 length: 4
+            int speedUnk; // 0x00000078 length: 4
             float vCos; // 0x0000007C length: 4
             float vSin; // 0x00000080 length: 4
             short travelledDistance; // 0x00000084 length: 2
@@ -83,7 +83,7 @@ namespace Map {
             int heightDifference; // 0x00000090 length: 4
             short field62_0x94; // 0x00000094 length: 2
             short velocityUnk; // 0x00000096 length: 2
-            float field64_0x98; // 0x00000098 length: 4
+            float _elapsedTimeOrGravityAccumulator; // 0x00000098 length: 4
             short startingAngle; // 0x0000009C length: 2
             word graphicRotationUnk; // 0x0000009E length: 2
             short unitID; // 0x000000A0 length: 2

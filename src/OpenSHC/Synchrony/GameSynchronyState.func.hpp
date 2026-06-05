@@ -8,6 +8,7 @@
 #include "OpenSHC/DirectPlay/DPERRInt.hpp"
 #include "OpenSHC/Synchrony/GameSynchronyState.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
 #include "WinDef.h"
 #include "basetsd.h"
 #include "crtdefs.h"

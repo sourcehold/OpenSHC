@@ -1,114 +1,144 @@
-# OpenSHC
+# OpenSHC [![sourcehold](https://discordapp.com/api/guilds/1259903348077756527/widget.png?style=shield)](https://discord.gg/SKJGEGgPTv)
+[Join our Discord Server!](http://discord.gg/SKJGEGgPTv)
 
-An open source re-implementation of Stronghold Crusader 1. The beloved Castle Building, Real Time Strategy, and Simulation game remastered.
+An open source re-implementation of Stronghold Crusader 1. The beloved Castle Building, Real Time Strategy, and Simulation game reimplemented.
+
+For running and developing this re-implementation, you need to own Stronghold Crusader 1.41 (Latin version), preferably from Steam or GOG.
+
+## Motivation
+
+The original game is a masterpiece, seeing new reignited popularity since the release of the Definitive Edition.
+However, the Definitive Edition does not address various shortcomings in the original game.
+Furthermore, the new Definitive Edition requires modern hardware to run, which isn't something all fans can afford.
+
+This reimplementation seeks to cater to the wishes of the dedicated community by providing an
+open source reimplementation that benefits modding to those that own the original Stronghold Crusader (available from Steam and GOG).
 
 ## Usage
 
-### Download and Install
-
-This reimplementation requires you to own a legal copy of the original Stronghold Crusader game from Firefly Studios.
-
-The current method of installation is via the [Unofficial Crusader Patch](https://github.com/UnofficialCrusaderPatch/UnofficialCrusaderPatch). Make sure to set that up first.
-
-0. Set up the Unofficial Crusader Patch.
-1. Download the latest release of the reimplementation from the Releases page of this repo.
-2. Launch the GUI from the Unofficial Crusader Patch.
-3. Drag and drop the zip file unto your open UCP3 GUI, or manually move the zip file into the `ucp/modules` folder inside your game folder.
-4. Reload the UCP3 GUI and activate the module.
-5. Disable Security in the Launch tab of the GUI.
-6. Launch the game!
-
-Note that the goal is to recreate the game. So if there are no changes compared to vanilla, then it is exactly like intended.
-
-### Help
-
-Raise an issue here on GitHub to receive support. Or visit the [Discord](https://discord.gg/27W68ZaFT4) server.
+OpenSHC builds as a DLL that is loaded at game start. Functions that have a functionally identical reimplementation are hooked, such that the reimplemented versions are run instead of the original. This enables easy modding, although modding itself is currently beyond the scope of the OpenSHC project.
 
 ## Contribute
 
-The development of this reimplementation is a stepwise process. All developers are welcome to contribute.
+The development of this reimplementation is a stepwise process in which we aim to achieve a functionally identical reimplementation. We track progress using various tools.
 
-### Approach
+All developers are welcome to contribute.
 
-The development of this reimplementation primarily focuses on reimplementing functions and data structures of the original game.
-The game 1.41 Latin version of the Stronghold Crusader executable serves as the reference point (SHA hash: 012E9D55DAC04B23ED9A334C975D3A5B6287020B).
-To achieve this, a combination approach is used. The code has mechanisms in place to allow a compilation to both and executable and a DLL.
-The DLL is meant to be loaded by the UCP and only replace certain functions, while other calls would call into the games executable. This allows to reimplement one function after the other while still maintaining a runnable game.
+### Requirements
 
-We use [reccmp](https://github.com/isledecomp/reccmp) to verify compatibility of reimplemented code and the original game.
+Before you begin, install the following:
 
-Because the original game was compiled using an old compiler, you have to compile it using [this compiler](https://github.com/sourcehold/MSVC1400), which is included in the repository via a submodule.
+* **Stronghold Crusader 1.41 (Latin version)**
+  
+  The Steam release is the easiest version to obtain. Make sure the game installation uses a Latin-language version such as English or German.
 
-If you made any advances or noticed something while implementing, please also add or update the status in [addresses-SHC-3BB0A8C1.txt](status/addresses-SHC-3BB0A8C1.txt).  
-The structure is simply `<address-enum> | <matching-percent> | <comment>`.  
-Should the address list change, please run the following command to recreate the file:
-```sh
-python .\status\extract_header_and_update.py .\src\precomp\addresses-SHC-3BB0A8C1.hpp
-```
-Percentages and comments should be kept, but always check the difference.
+* **CMake 3.24 or later**
+  
+  You can install it from:
 
+  * [https://cmake.org/download/](https://cmake.org/download/)
+  * [https://github.com/Kitware/CMake/releases/](https://github.com/Kitware/CMake/releases/)
 
-### Prerequisites
+  If you already installed the Microsoft Visual C++ Development Tools, you can also install CMake through Visual Studio.
 
-1. Stronghold Crusader 1.41 Latin. The Steam version is the easiest one to get, but any patched version will do. Make sure the installation uses a Latin version (English, German, etc).
-2. CMake with the minimum version 3.24.
-3. [Python3](https://www.python.org/)
-4. A way to execute `clang-format`
-5. (Recommended) An IDE with CMake integration. The repository has been optimized for Visual Studio Code using the [Microsoft C/C++ Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools-extension-pack).
+* **Python 3**
+
+* **clang-format 22 or later**
+  
+  Install it with:
+
+  ```bash
+  python -m pip install clang-format
+  ```
+
+* **An IDE with CMake support (recommended)**
+  
+  The repository is optimized for Visual Studio Code with the Microsoft C/C++ Extension Pack.
+  
+  To automatically format and style new C++ files, install the clang-format Extension Pack.
+
+---
 
 ### Setup
 
-1. Clone the repository. Make sure to also pull the submodules to have the compiler included:
+#### 1. Clone the repository
 
-   ```sh
-   git clone --recursive https://github.com/sourcehold/OpenSHC.git
-   ```
+Clone the repository with submodules included:
 
-   - Should NET Framework 3.5 be required, it can be easily installed on Windows 11 by running `mt.exe` (from the MSVC1400 repo), Windows 11 will ask to install the right version.
+```bash
+git clone --recursive https://github.com/sourcehold/OpenSHC.git
+```
 
-2. Create a softlink to the original game executable with the name `_original` by running [softlink.bat](softlink.bat). It will request the full path to the game folder.
-3. Setup the needed Python environment to run `reccmp` for binary comparison by running [setup.bat](reccmp/dll/setup.bat) in the reccmp/dll folder (or the `setup.bat` in the reccmp/exe folder if binary comparison on the reimplemented .exe file is preferred)
+Then enter the project directory:
 
-### Development
+```bash
+cd OpenSHC
+```
 
-The build can be run using the dev tools of the preferred IDE or via the build scripts. Regardless, a CMake installation is required.
+> The `--recursive` flag is required because the repository depends on submodules, including the compiler.
 
-Visual Studio Code with the proper extensions only needs to open the folder and the targets can be chosen in the "CMake" menu.
-Additionally, it configures format-on-save and a debug target for the UCP3.
+---
 
-If the scripts are preferred, the following triggers a build using the scripts:
+#### 2. Create a symbolic link to the original game
 
-1. Open a terminal.
-2. Navigate to this project folder
-3. Execute build.bat:
-   ```sh
-   build.bat RelWithDebInfo
-   ```
-4. Compare a function byte by byte to the OpenSHC.dll to check compilation:
-   ```sh
-   reccmp/dll/run reccmp-reccmp --target STRONGHOLDCRUSADER --verbose 0x401000
-   ```
+Run the following command:
 
-If CMake is installed and not in PATH, for example if installed via Visual Studio, `cmakew.bat` can be used instead. It tries to detect a CMake installation and uses it.
+```bash
+softlink.bat
+```
 
-Note that any code needs to be formatted properly using the provided `clang-format`. The way to do so it up to the developer. Many IDEs support it out of the box.
+The script will ask for the full path to your Stronghold Crusader installation directory.
 
-If any `.cpp` or `.c` files are added to the source code, they should be listed in one of the txt files in `cmake/`:
+After the link is created, a folder named `_original` will appear in the repository root.
 
-- `cmake/core-sources.txt` containing the core sources to compile the project.
-- `cmake/pklib-sources.txt` containing the source files for compiling the pklib dependency.
-- `cmake/openshc-sources.txt` containing the files with reimplementations of the original game's functions.
+> This script may require administrator privileges to be able to create the symbolic link
 
-You can also create a local only `cmake/openshc-sources.txt.local` file, which will be used instead of `cmake/openshc-sources.txt` if it exists, to allow faster tests.
-Extending this files name in any way, like `openshc-sources.txt.local.bak`, will prevent it from being used, but it is still ignored by git. This allows to keep small local file lists.
+---
 
-#### Manual configuration
+#### 3. Set up the Python environment for binary comparison
 
-The file `build.bat` exists for convenience. If you want more control, you can specify the following cmake options.
+To set up the binary comparison tools, run:
 
-##### Building
+```bash
+reccmp\dll\setup.bat
+```
 
-Build using `cmake --build --preset RelWithDebInfo --target OpenSHC.dll` will create the dll in `build-RelWithDebInfo/DLL`.
-Build using `cmake --build --preset RelWithDebInfo --target OpenSHC.exe` will create the exe in `build-RelWithDebInfo/EXE`.
-Build using `cmake --build --preset RelWithDebInfo --target OpenSHC.dll.deploy` will prepare the modules folder in the UCP setup of the bound SHC.
-Build using `cmake --build --preset RelWithDebInfo --target OpenSHC.exe.runnable` will prepare the runtime folder of the exe to make it runnable.
+> In the future, if you want to setup comparison of the reimplemented executable instead of the DLL, use:
+> ```bash
+> reccmp\exe\setup.bat
+> ```
+
+---
+
+### Verifying the Setup
+
+If **both** commands complete successfully, your development environment is ready and you can start working on OpenSHC.
+
+#### 1. Build the project
+
+From the `OpenSHC` directory, run:
+
+```bash
+build.bat RelWithDebInfo OpenSHC.dll
+```
+
+---
+
+#### 2. Run binary comparison
+
+This verifies byte-level accuracy between the reimplementation and the original binary:
+
+```bash
+reccmp/dll/run reccmp-reccmp --target STRONGHOLDCRUSADER
+```
+
+> Tip: use `reccmp/dll/run reccmp-reccmp --target STRONGHOLDCRUSADER --verbose <hex address of function>` to investigate code byte mismatches.
+
+---
+
+## Tutorials
+When you are set up, follow any of the [tutorials](https://sourcehold.github.io/OpenSHC/wiki/tutorials/reimplementation-tutorial-1.html) to get you started!
+
+
+## Help
+Raise an issue here on GitHub to receive support. Or visit the [Discord](https://discord.gg/SKJGEGgPTv) server.

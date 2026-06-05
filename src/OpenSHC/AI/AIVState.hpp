@@ -10,12 +10,12 @@
 
 #include "OpenSHC/AI/AIGridComputationResourceTypeInt.hpp"
 #include "OpenSHC/AI/AIMapExtraInfo.hpp"
-#include "OpenSHC/AI/AIV/AIV.hpp"
 #include "OpenSHC/AI/AIV/AIVBuildingType2Int.hpp"
 #include "OpenSHC/AI/AIV/AIVBuildingType2Short.hpp"
+#include "OpenSHC/AI/AIV/AIVSpec.hpp"
 #include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
 #include "OpenSHC/Game/Player/PlayerID.hpp"
-#include "OpenSHC/Map/HeatMap1114.hpp"
+#include "OpenSHC/Map/HeatMap.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
@@ -23,12 +23,12 @@ namespace AI {
 
     using OpenSHC::AI::AIGridComputationResourceTypeInt;
     using OpenSHC::AI::AIMapExtraInfo;
-    using OpenSHC::AI::AIV::AIV;
     using OpenSHC::AI::AIV::AIVBuildingType2Int;
     using OpenSHC::AI::AIV::AIVBuildingType2Short;
+    using OpenSHC::AI::AIV::AIVSpec;
     using OpenSHC::Commands::CommandBuildingTypeInt;
     using OpenSHC::Game::Player::PlayerID;
-    using OpenSHC::Map::HeatMap1114;
+    using OpenSHC::Map::HeatMap;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
@@ -37,7 +37,7 @@ namespace AI {
     class AIVState {
     public:
         int totalSteps; // 0x00000000 length: 4
-        AIV SEC_AIVS[9]; // 0x00000004 length: 252504
+        AIVSpec SEC_AIVS[9]; // 0x00000004 length: 252504
         int DAT_AIVFileHash[16][8]; // 0x0003DA5C length: 512
         int DAT_AIVFilePresent[16][8]; // 0x0003DC5C length: 512
         byte DAT_ReceivedAIVFileHash[9][512]; // 0x0003DE5C length: 4608
@@ -61,7 +61,7 @@ namespace AI {
         undefined4 buildingCounter; // 0x0005CA0C length: 4
         undefined4 invalidTileCounter; // 0x0005CA10 length: 4
         AIMapExtraInfo mapExtraInfo; // 0x0005CA14 length: 816
-        HeatMap1114 SEC_HeatMaps[80][80]; // 0x0005CD44 length: 307200
+        HeatMap SEC_HeatMaps[80][80]; // 0x0005CD44 length: 307200
         int visitCount; // 0x000A7D44 length: 4
         undefined4 _valueAIndex; // 0x000A7D48 length: 4
         undefined4 _valueBIndex; // 0x000A7D4C length: 4
