@@ -8,11 +8,12 @@
 
 #pragma once
 
-#include "Mss32.h"
 #include "OpenSHC/Audio/MSS/UnkSoundFlagsAndLoopCount.hpp"
 #include "OpenSHC/Audio/MSS/enums/SHC_SoundStreamInt.hpp"
 #include "OpenSHC/DE/SHCDE/eMusicIDsInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
+#include "Mss32.h"
 #include "WinDef.h"
 
 namespace OpenSHC {
@@ -60,7 +61,7 @@ namespace Audio {
             int sampleVolume; // 0x00003170 length: 4
             int sampleSndStructVolumePercentage_0x3174[32]; // 0x00003174 length: 128
             int samplePaused_0x31f4[32]; // 0x000031F4 length: 128
-            undefined4 sec_Section1055_0x3274; // 0x00003274 length: 4
+            int sec_Section1055_0x3274; // 0x00003274 length: 4
             int currentSoundID_0x3278; // 0x00003278 length: 4
             dword currentSoundIDVolumeUnk_0x327c; // 0x0000327C length: 4
             dword mbr_0x3280; // 0x00003280 length: 4

@@ -11,6 +11,7 @@
 #include "OpenSHC/IO/Graphics/GmIDInt.hpp"
 #include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Text/FontRenderTypeInt.hpp"
+
 #include "WinDef.h"
 
 namespace OpenSHC {

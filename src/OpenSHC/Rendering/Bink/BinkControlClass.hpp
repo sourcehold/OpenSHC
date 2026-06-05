@@ -8,10 +8,11 @@
 
 #pragma once
 
-#include "Mss32.h"
 #include "OpenSHC/Audio/MSS/enums/SHC_SoundStreamInt.hpp"
 #include "OpenSHC/Rendering/Bink/UnsortedBinkFlagInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
+#include "Mss32.h"
 #include "WinDef.h"
 #include "binkw32.h"
 

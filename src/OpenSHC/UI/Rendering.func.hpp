@@ -11,6 +11,7 @@
 #include "OpenSHC/UI/Enums/DisplayElementIDInt.hpp"
 #include "OpenSHC/UI/Rendering.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
 #include "WinDef.h"
 namespace OpenSHC {
 namespace UI {

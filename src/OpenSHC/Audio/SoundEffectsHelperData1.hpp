@@ -10,6 +10,7 @@
 
 #include "OpenSHC/Audio/MusicControl.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
 #include "WinDef.h"
 #include "mmsystem.h"
 

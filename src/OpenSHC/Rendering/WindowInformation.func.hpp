@@ -3,6 +3,7 @@
 */
 
 #include "OpenSHC/Rendering/WindowInformation.hpp"
+
 #include "winnt.h"
 namespace OpenSHC {
 namespace Rendering {

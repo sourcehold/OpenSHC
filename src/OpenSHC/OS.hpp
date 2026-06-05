@@ -10,6 +10,7 @@
 
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 #include "OpenSHC/WindowsHelper/Enums/OpenFlagInt.hpp"
+
 #include "crtdefs.h"
 #include "guiddef.h"
 #include "mbstring.h"

@@ -9,6 +9,7 @@
 #pragma once
 
 #include "OpenSHC/Audio/MSS.hpp"
+
 #include "WinDef.h"
 #include "basetsd.h"
 namespace OpenSHC {

@@ -3,6 +3,7 @@
 */
 
 #include "OpenSHC/Text/TextEditorState.hpp"
+
 #include "mbstring.h"
 #include "winnt.h"
 namespace OpenSHC {

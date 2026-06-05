@@ -8,8 +8,8 @@
 
 #pragma once
 
-#include "OpenSHC/DE/SHCDE/eOnScreenTextInt.hpp"
 #include "OpenSHC/UI/DisplayElementRenderFunc.hpp"
+#include "OpenSHC/DE/SHCDE/eOnScreenTextInt.hpp"
 #include "OpenSHC/UI/Enums/DisplayElementIDInt.hpp"
 #include "OpenSHC/UI/Enums/DisplayElementPositionModifierInt.hpp"
 

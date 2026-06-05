@@ -23,6 +23,7 @@
 #include "OpenSHC/Synchrony/Networking/PacketUnion.hpp"
 #include "OpenSHC/UI/Enums/MenuModalTypeInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
 #include "WinDef.h"
 #include "WinSock.h"
 #include "basetsd.h"
@@ -30,7 +31,6 @@
 #include "dplay.h"
 #include "dplobby.h"
 #include "guiddef.h"
-#include "inaddr.h"
 #include "mbstring.h"
 #include "winnt.h"
 
