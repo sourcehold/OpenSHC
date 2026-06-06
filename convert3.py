@@ -28,17 +28,24 @@ ctx.include.file_extension = ""
 import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("--sarif", required=False, default="Stronghold Crusader.exe.all.sarif")
-parser.add_argument("--clear-cache", required=False, action='store_true', default=False)
+parser.add_argument("--clear-cache", required=False, action=argparse.BooleanOptionalAction, default=False)
 parser.add_argument("--output-dir", required=False, default='src')
-parser.add_argument("--verbose", default=False, action='store_true')
-parser.add_argument("--export-helpers", default=False, action='store_true')
-parser.add_argument("--overwrite-all", default=False, action='store_true')
-parser.add_argument("--export-cpp", default=False, action='store_true')
+parser.add_argument("--verbose", default=False, action=argparse.BooleanOptionalAction)
+parser.add_argument("--export-helpers", default=False, action=argparse.BooleanOptionalAction)
+parser.add_argument("--overwrite-all", default=False, action=argparse.BooleanOptionalAction)
+parser.add_argument("--export-cpp", default=False, action=argparse.BooleanOptionalAction)
 parser.add_argument("--dry-run", default=False, action='store_true')
+parser.add_argument("--cache", default=True, action=argparse.BooleanOptionalAction)
 args = parser.parse_args()
 
 if args.verbose:
   logging.getLogger().setLevel(logging.DEBUG)
+  logging.getLogger().log(logging.DEBUG, args)
+
+if args.dry_run:
+  print(logging.getLogger().getEffectiveLevel())
+  print(args)
+  exit(0)
 
 if args.clear_cache:
   if pathlib.Path(".cached-symbols.bin").exists():
@@ -46,7 +53,7 @@ if args.clear_cache:
   if pathlib.Path(".cached-objs.bin").exists():
     pathlib.Path(".cached-objs.bin").unlink()
 
-project = Project(args.sarif, cache_objects=True, cache_symbols_to_path=".cached-symbols.bin")
+project = Project(args.sarif, cache_objects=args.cache, cache_symbols_to_path=".cached-symbols.bin" if args.cache else None)
 
 # TODO: permit_overwrite = False
 logging.log(logging.INFO, "processing all symbol results")
@@ -66,8 +73,9 @@ if pathlib.Path(".cached-objs.bin").exists() == False:
     objs_i += 1
     objs.append(obj)
   logging.log(logging.INFO, "finding all by location: finished")
-  with open(".cached-objs.bin", 'wb') as f:
-    pickle.dump(file=f, obj=objs)
+  if args.cache:
+    with open(".cached-objs.bin", 'wb') as f:
+      pickle.dump(file=f, obj=objs)
 else:
   with open(".cached-objs.bin", 'rb') as f:
     objs = pickle.load(file=f)
@@ -78,9 +86,25 @@ exporter = Exporter(binary_context=bc,
                     transformation_rules=TransformationRules(use_regex = True, regex={"_HoldStrong": "OpenSHC"}),
                     expose_original_methods=True,
                     file_rules = FileRules(one_file_per_function=True, one_file_per_method=True),
-                    includes_remapping=[(".*DirectDraw/.*", "ddraw.h")],
+                    includes_remapping=[(".*DirectDraw/.*", "ddraw.h"),
+                                        (".*/Mss32/.*", "Mss32.h"),
+                                        (".*/binkw32/.*", "binkw32.h"),
+                                        (".*inaddr.h", "WinSock.h"),
+                                        (".*DirectPlay/dplay/.*", "dplay.h"),
+                                        (".*DirectPlay/dplobby/.*", "dplobby.h"),],
                     includes_exclude_regex=[".*Enums/WindowsVirtualKey.*",
-                                            ".*Enums/GeneralWindowsMessage.*"],
+                                            ".*Enums/GeneralWindowsMessage.*",
+                                            ".*Enums/FilePtrMoveMethod/*"],
+                    exclude_files_regex=[
+                      ".*Enums/WindowsVirtualKey.*",
+                      ".*Enums/GeneralWindowsMessage.*",
+                      ".*Enums/FilePtrMoveMethod/*",
+                      ".*/Mss32/.*",
+                      ".*/binkw32/.*",
+                      ".*DirectDraw/.*",
+                      ".*DirectPlay/dplay/.*",
+                      ".*DirectPlay/dplobby/.*",
+                    ],
                     type_mapping={
                       ("/_HoldStrong/WindowsHelper/Enums", "GeneralWindowsMessage"): ("/WinDef.h", "UINT"),
                       ("/_HoldStrong/WindowsHelper/Enums", "RawWindowsMessage"): ("/WinDef.h", "UINT"),
@@ -88,6 +112,8 @@ exporter = Exporter(binary_context=bc,
                       ("/_HoldStrong/WindowsHelper/Enums", "GeneralWindowsMessageInt"): ("/WinDef.h", "UINT"),
                       ("/_HoldStrong/WindowsHelper/Enums", "RawWindowsMessageInt"): ("/WinDef.h", "UINT"),
                       ("/_HoldStrong/WindowsHelper/Enums", "WindowsVirtualKeyInt"): ("/WinDef.h", "WPARAM"),
+                      ("/_HoldStrong/WindowsHelper/Enums", "FilePtrMoveMethod"): ("/stdio.h", "DWORD"),
+                      ("/_HoldStrong/WindowsHelper/Enums", "FilePtrMoveMethodInt"): ("/stdio.h", "DWORD"),
                     },
                     inject_forwards_in_files={
                       "OpenSHC/UI/Menu.hpp": [("OpenSHC/UI/FwdMenuMenuItem.hpp",
@@ -125,7 +151,10 @@ enum_families, enum_orphans = collect_enum_families(objs)
 enum_families_dict = {f.name: f for f in enum_families}
 enum_family_names = [f.name for f in enum_families]
 
-def is_symbol_addr_in_useful_range(addr):
+def is_symbol_addr_in_useful_range(addr, include_code = True):
+  if include_code:
+    if addr >= 0x00401000 and addr < 0x0059e000:
+      return True
   if addr == 0x00618250:
     return False
   if addr < 0x005a6e20:
@@ -142,7 +171,7 @@ def is_symbol_addr_in_useful_range(addr):
     return False
   return True
 
-for c in exporter.export_symbols(((addr, symb, ddr,) for addr, symb, ddr in project.find_global_primary_symbol_defined_data_pairs_by_address() if is_symbol_addr_in_useful_range(addr)), destination="OpenSHC/Globals", namespace="OpenSHC"):
+for c in exporter.export_symbols(((addr, symb, ddr,) for addr, symb, ddr in project.find_global_primary_symbol_defined_data_pairs_by_address() if is_symbol_addr_in_useful_range(addr, include_code=False)), destination="OpenSHC/Globals", namespace="OpenSHC"):
   collection.add(c)
 
 if args.export_helpers:
@@ -150,11 +179,13 @@ if args.export_helpers:
 
 for cls in clsses:
   collection.add(*exporter.export_class(cls, export_bodies=args.export_cpp))
-
 for ns in namespaced_functions:
-  collection.add(*exporter.export_namespace(ns, export_bodies=args.export_cpp))
+  reimplementation_unifier = None
+  if ns.name == "OS":
+    reimplementation_unifier = "REIMPLEMENTED_CRT"
+  collection.add(*exporter.export_namespace(ns, export_bodies=args.export_cpp, reimplementation_unifier=reimplementation_unifier))
 
-collection.add(exporter.export_addresses(project.yield_raw_objects(), include_address=is_symbol_addr_in_useful_range))
+collection.add(exporter.export_addresses(project.yield_raw_objects()))
 
 class_paths = set(cls.location(ctx) for cls in clsses)
 
@@ -201,5 +232,42 @@ for obj in objs:
       continue
     collection.add(exporter.export_typedef(td))
 
+def write_patches(output_dir: pathlib.Path):
+  patch1 = """/**
+  THIS FILE IS AUTO GENERATED
+  Communicate changes to the dev team (e.g. via a Pull Request).
+  Changes get lost otherwise.
+
+  path: 'OpenSHC/Audio/MSS/UnkSoundFlagsAndLoopCount.hpp'
+*/
+
+#pragma once
+
+namespace OpenSHC {
+namespace Audio {
+    namespace MSS {
+
+#pragma pack(push, 1)
+        // SIZE: 0x00000004
+        typedef struct UnkSoundFlagsAndLoopCount {
+
+            int loopCount : 16;
+            int reserved : 13;
+            int unknownFlag1 : 1;
+            int unknownFlag2 : 1;
+            int uninterruptable : 1;
+
+        } UnkSoundFlagsAndLoopCount;
+#pragma pack(pop)
+
+        static_assert_cpp98_obj(sizeof(UnkSoundFlagsAndLoopCount) == 4, UnkSoundFlagsAndLoopCount);
+    } // namespace MSS
+} // namespace Audio
+} // namespace OpenSHC
+"""
+  (output_dir / "OpenSHC/Audio/MSS/UnkSoundFlagsAndLoopCount.hpp").write_bytes(patch1.encode('utf-8'))
+
 if not args.dry_run:
-  collection.write_to_disk(pathlib.Path(args.output_dir), overwrite_all=args.overwrite_all)
+  # TODO: 
+  collection.write_to_disk(pathlib.Path(args.output_dir), overwrite_all=args.overwrite_all, no_touch_warning="THIS FILE IS AUTO GENERATED\n  Communicate changes to the dev team (e.g. via a Pull Request).\n  Changes get lost otherwise.")
+  write_patches(pathlib.Path(args.output_dir))
