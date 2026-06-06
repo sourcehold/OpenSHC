@@ -103,10 +103,10 @@ namespace Text {
         TextEditorState(TextEditorState const&);
         void operator=(TextEditorState const&);
 
+    public:
         TextEditorState();
         ~TextEditorState();
 
-    public:
         // Constructor
         TextEditorState* Constructor_TextEditorState();
 
@@ -192,8 +192,6 @@ namespace Text {
     static_assert_cpp98_obj(sizeof(TextEditorState) == 145780, TextEditorState);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(TextEditorState, false, Address::SHC_3BB0A8C1_0x02403AF8) pDAT_TextEditorState;
 
 } // namespace Text
 } // namespace OpenSHC

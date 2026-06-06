@@ -49,10 +49,10 @@ namespace Game {
             SkirmishLobbySetupStructure(SkirmishLobbySetupStructure const&);
             void operator=(SkirmishLobbySetupStructure const&);
 
+        public:
             SkirmishLobbySetupStructure();
             ~SkirmishLobbySetupStructure();
 
-        public:
             void commitSkirmishSettings();
 
             void restoreSkirmishLobbySetup();
@@ -61,9 +61,6 @@ namespace Game {
         static_assert_cpp98_obj(sizeof(SkirmishLobbySetupStructure) == 264, SkirmishLobbySetupStructure);
 
 #pragma pack(pop)
-
-        MACRO_STRUCT_RESOLVER(SkirmishLobbySetupStructure, false, Address::SHC_3BB0A8C1_0x00DF4118)
-        pDAT_SkirmishLobbySetupStructure;
 
     } // namespace Skirmish
 } // namespace Game

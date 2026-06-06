@@ -32,10 +32,10 @@ namespace IO {
         LowLevelMemory(LowLevelMemory const&);
         void operator=(LowLevelMemory const&);
 
+    public:
         LowLevelMemory();
         ~LowLevelMemory();
 
-    public:
         void moveLowerThreeBytesIntoParam2(undefined4* src, undefined3* dst);
 
         void setMemoryToValue0x001();
@@ -72,8 +72,6 @@ namespace IO {
     static_assert_cpp98_obj(sizeof(LowLevelMemory) == 20, LowLevelMemory);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(LowLevelMemory, false, Address::SHC_3BB0A8C1_0x0165272C) pDAT_LowLevelMemory;
 
 } // namespace IO
 } // namespace OpenSHC

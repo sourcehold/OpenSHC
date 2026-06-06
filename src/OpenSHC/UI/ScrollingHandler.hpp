@@ -47,10 +47,10 @@ namespace UI {
         ScrollingHandler(ScrollingHandler const&);
         void operator=(ScrollingHandler const&);
 
+    public:
         ScrollingHandler();
         ~ScrollingHandler();
 
-    public:
         // Constructor
         ScrollingHandler* Constructor_ScrollingHandler();
 
@@ -62,8 +62,6 @@ namespace UI {
     static_assert_cpp98_obj(sizeof(ScrollingHandler) == 72, ScrollingHandler);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(ScrollingHandler, false, Address::SHC_3BB0A8C1_0x0112B070) pDAT_ScrollingHandler;
 
 } // namespace UI
 } // namespace OpenSHC

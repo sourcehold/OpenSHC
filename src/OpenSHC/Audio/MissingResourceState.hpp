@@ -26,10 +26,10 @@ namespace Audio {
         MissingResourceState(MissingResourceState const&);
         void operator=(MissingResourceState const&);
 
+    public:
         MissingResourceState();
         ~MissingResourceState();
 
-    public:
         void playResourceLackSFX(int resourceTextElement, ResourceLackSFXInt resourceType);
 
         void renderResourceMissingText(int posX, int posY, dword textGroup, dword unusedUnk);
@@ -38,8 +38,6 @@ namespace Audio {
     static_assert_cpp98_obj(sizeof(MissingResourceState) == 1, MissingResourceState);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(MissingResourceState, false, Address::SHC_3BB0A8C1_0x00EE1098) pDAT_MissingResourceState;
 
 } // namespace Audio
 } // namespace OpenSHC

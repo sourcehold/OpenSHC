@@ -52,10 +52,10 @@ namespace UI {
         MinimapViewState(MinimapViewState const&);
         void operator=(MinimapViewState const&);
 
+    public:
         MinimapViewState();
         ~MinimapViewState();
 
-    public:
         // Constructor
         MinimapViewState* Constructor_MinimapViewState();
 
@@ -100,8 +100,6 @@ namespace UI {
     static_assert_cpp98_obj(sizeof(MinimapViewState) == 400376, MinimapViewState);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(MinimapViewState, false, Address::SHC_3BB0A8C1_0x01A31610) pDAT_MinimapViewState;
 
 } // namespace UI
 } // namespace OpenSHC

@@ -367,10 +367,10 @@ namespace Synchrony {
         GameSynchronyState(GameSynchronyState const&);
         void operator=(GameSynchronyState const&);
 
+    public:
         GameSynchronyState();
         ~GameSynchronyState();
 
-    public:
         // Constructor
         GameSynchronyState* Constructor_GameSynchronyState();
 
@@ -515,8 +515,6 @@ namespace Synchrony {
     static_assert_cpp98_obj(sizeof(GameSynchronyState) == 1090072, GameSynchronyState);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(GameSynchronyState, false, Address::SHC_3BB0A8C1_0x0191D768) pDAT_GameSynchronyState;
 
 } // namespace Synchrony
 } // namespace OpenSHC

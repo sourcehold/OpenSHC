@@ -30,10 +30,10 @@ namespace Util {
             Stopwatch(Stopwatch const&);
             void operator=(Stopwatch const&);
 
+        public:
             Stopwatch();
             ~Stopwatch();
 
-        public:
             // Constructor
             Stopwatch* Cosntructor_Stopwatch();
 
@@ -45,8 +45,6 @@ namespace Util {
         static_assert_cpp98_obj(sizeof(Stopwatch) == 16, Stopwatch);
 
 #pragma pack(pop)
-
-        MACRO_STRUCT_RESOLVER(Stopwatch, false, Address::SHC_3BB0A8C1_0x0165271C) pDAT_Stopwatch;
 
     } // namespace Timing
 } // namespace Util

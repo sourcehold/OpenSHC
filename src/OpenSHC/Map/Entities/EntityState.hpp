@@ -42,10 +42,10 @@ namespace Map {
             EntityState(EntityState const&);
             void operator=(EntityState const&);
 
+        public:
             EntityState();
             ~EntityState();
 
-        public:
             // Constructor
             EntityState* Constructor_EntityState();
 
@@ -150,8 +150,6 @@ namespace Map {
         static_assert_cpp98_obj(sizeof(EntityState) == 706024, EntityState);
 
 #pragma pack(pop)
-
-        MACRO_STRUCT_RESOLVER(EntityState, false, Address::SHC_3BB0A8C1_0x02350300) pDAT_EntityState;
 
     } // namespace Entities
 } // namespace Map

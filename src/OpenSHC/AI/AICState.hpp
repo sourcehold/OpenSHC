@@ -51,10 +51,10 @@ namespace AI {
         AICState(AICState const&);
         void operator=(AICState const&);
 
+    public:
         AICState();
         ~AICState();
 
-    public:
         // Constructor
         AICState* Constructor_AICState();
 
@@ -424,8 +424,6 @@ namespace AI {
     static_assert_cpp98_obj(sizeof(AICState) == 28048, AICState);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(AICState, false, Address::SHC_3BB0A8C1_0x023FC8E8) pDAT_AICState;
 
 } // namespace AI
 } // namespace OpenSHC

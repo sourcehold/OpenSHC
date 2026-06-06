@@ -45,10 +45,10 @@ namespace UI {
         Menu(Menu const&);
         void operator=(Menu const&);
 
+    public:
         Menu();
         ~Menu();
 
-    public:
         // Constructor
         Menu* Constructor_Menu(MenuItem* menuItemArrayAddress);
 
@@ -64,8 +64,6 @@ namespace UI {
     static_assert_cpp98_obj(sizeof(Menu) == 68, Menu);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(Menu, false, Address::SHC_3BB0A8C1_0x00B983C0) pDAT_Menu;
 
 } // namespace UI
 } // namespace OpenSHC

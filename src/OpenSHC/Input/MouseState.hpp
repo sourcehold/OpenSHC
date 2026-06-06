@@ -152,10 +152,10 @@ namespace Input {
         MouseState(MouseState const&);
         void operator=(MouseState const&);
 
+    public:
         MouseState();
         ~MouseState();
 
-    public:
         // Constructor
         MouseState* Constructor_MouseState();
 
@@ -196,8 +196,6 @@ namespace Input {
     static_assert_cpp98_obj(sizeof(MouseState) == 628, MouseState);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(MouseState, false, Address::SHC_3BB0A8C1_0x00F2C9B0) pDAT_MouseState;
 
 } // namespace Input
 } // namespace OpenSHC

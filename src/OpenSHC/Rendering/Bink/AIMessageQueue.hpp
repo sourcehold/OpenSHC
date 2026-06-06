@@ -41,10 +41,10 @@ namespace Rendering {
             AIMessageQueue(AIMessageQueue const&);
             void operator=(AIMessageQueue const&);
 
+        public:
             AIMessageQueue();
             ~AIMessageQueue();
 
-        public:
             void playVideoOverMap(char* binkFileName, char* sfxFileName);
 
             void playAiLordMessage(int param_1, int param_2);
@@ -63,8 +63,6 @@ namespace Rendering {
         static_assert_cpp98_obj(sizeof(AIMessageQueue) == 2352, AIMessageQueue);
 
 #pragma pack(pop)
-
-        MACRO_STRUCT_RESOLVER(AIMessageQueue, false, Address::SHC_3BB0A8C1_0x00EE10A0) pDAT_AIMessageQueue;
 
     } // namespace Bink
 } // namespace Rendering

@@ -39,10 +39,10 @@ namespace UI {
         MenuModal(MenuModal const&);
         void operator=(MenuModal const&);
 
+    public:
         MenuModal();
         ~MenuModal();
 
-    public:
         // Constructor
         MenuModal* Constructor_MenuModal(MenuModalTypeInt menuModalId, int xPos, int yPos, int width, int height,
             int borderStyle, int backgroundColourIndex, MenuModalRenderFunction* renderFunctionPtr, Menu* menuPtr);
@@ -51,8 +51,6 @@ namespace UI {
     static_assert_cpp98_obj(sizeof(MenuModal) == 40, MenuModal);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(MenuModal, false, Address::SHC_3BB0A8C1_0x00DF51C8) pDAT_MenuModal;
 
 } // namespace UI
 } // namespace OpenSHC

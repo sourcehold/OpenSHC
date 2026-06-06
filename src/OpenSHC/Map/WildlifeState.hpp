@@ -32,10 +32,10 @@ namespace Map {
         WildlifeState(WildlifeState const&);
         void operator=(WildlifeState const&);
 
+    public:
         WildlifeState();
         ~WildlifeState();
 
-    public:
         // Constructor
         WildlifeState* Constructor_WildlifeState();
 
@@ -73,8 +73,6 @@ namespace Map {
     static_assert_cpp98_obj(sizeof(WildlifeState) == 262416, WildlifeState);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(WildlifeState, false, Address::SHC_3BB0A8C1_0x00EE23D8) pDAT_WildlifeState;
 
 } // namespace Map
 } // namespace OpenSHC

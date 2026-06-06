@@ -50,10 +50,10 @@ namespace UI {
         MenuModalComposition(MenuModalComposition const&);
         void operator=(MenuModalComposition const&);
 
+    public:
         MenuModalComposition();
         ~MenuModalComposition();
 
-    public:
         // Constructor
         MenuModalComposition* Constructor_MenuModalComposition(int slot);
 
@@ -85,8 +85,6 @@ namespace UI {
     static_assert_cpp98_obj(sizeof(MenuModalComposition) == 124, MenuModalComposition);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(MenuModalComposition, false, Address::SHC_3BB0A8C1_0x02403678) pDAT_MenuModalComposition;
 
 } // namespace UI
 } // namespace OpenSHC

@@ -86,10 +86,10 @@ namespace UI {
             WindowAndDirectDraw(WindowAndDirectDraw const&);
             void operator=(WindowAndDirectDraw const&);
 
+        public:
             WindowAndDirectDraw();
             ~WindowAndDirectDraw();
 
-        public:
             // Constructor
             WindowAndDirectDraw* Constructor_WindowAndDirectDraw();
 
@@ -137,8 +137,6 @@ namespace UI {
         static_assert_cpp98_obj(sizeof(WindowAndDirectDraw) == 484, WindowAndDirectDraw);
 
 #pragma pack(pop)
-
-        MACRO_STRUCT_RESOLVER(WindowAndDirectDraw, false, Address::SHC_3BB0A8C1_0x00F98338) pDAT_WindowAndDirectDraw;
 
     } // namespace Rendering
 } // namespace UI

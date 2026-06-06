@@ -68,10 +68,10 @@ namespace Text {
         TextManager(TextManager const&);
         void operator=(TextManager const&);
 
+    public:
         TextManager();
         ~TextManager();
 
-    public:
         void renderInGameText(char* textAddress, int xParam, int yParam, TextAlignmentInt alignment, uint color1,
             uint color2, int fontSize, BOOLEnum keepOffsetX);
 
@@ -174,8 +174,6 @@ namespace Text {
     static_assert_cpp98_obj(sizeof(TextManager) == 356980, TextManager);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(TextManager, false, Address::SHC_3BB0A8C1_0x02157578) pDAT_TextManager;
 
 } // namespace Text
 } // namespace OpenSHC

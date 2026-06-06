@@ -94,10 +94,10 @@ namespace Rendering {
         ViewportRenderState(ViewportRenderState const&);
         void operator=(ViewportRenderState const&);
 
+    public:
         ViewportRenderState();
         ~ViewportRenderState();
 
-    public:
         // Constructor
         ViewportRenderState* Constructor_ViewportRenderState();
 
@@ -167,8 +167,6 @@ namespace Rendering {
     static_assert_cpp98_obj(sizeof(ViewportRenderState) == 1699848, ViewportRenderState);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(ViewportRenderState, false, Address::SHC_3BB0A8C1_0x021AEBD8) pDAT_ViewportRenderState;
 
 } // namespace Rendering
 } // namespace OpenSHC

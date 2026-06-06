@@ -224,10 +224,10 @@ namespace Game {
         GameCore(GameCore const&);
         void operator=(GameCore const&);
 
+    public:
         GameCore();
         ~GameCore();
 
-    public:
         // Constructor
         GameCore* Constructor_GameCore();
 
@@ -267,8 +267,6 @@ namespace Game {
     static_assert_cpp98_obj(sizeof(GameCore) == 9088, GameCore);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(GameCore, false, Address::SHC_3BB0A8C1_0x01FE7D10) pDAT_GameCore;
 
 } // namespace Game
 } // namespace OpenSHC

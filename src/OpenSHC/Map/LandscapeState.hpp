@@ -49,10 +49,10 @@ namespace Map {
         LandscapeState(LandscapeState const&);
         void operator=(LandscapeState const&);
 
+    public:
         LandscapeState();
         ~LandscapeState();
 
-    public:
         // Constructor
         LandscapeState* Constructor_LandscapeState();
 
@@ -119,8 +119,6 @@ namespace Map {
     static_assert_cpp98_obj(sizeof(LandscapeState) == 440064, LandscapeState);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(LandscapeState, false, Address::SHC_3BB0A8C1_0x00F2CC38) pDAT_LandscapeState;
 
 } // namespace Map
 } // namespace OpenSHC

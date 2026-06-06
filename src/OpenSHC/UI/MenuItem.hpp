@@ -67,10 +67,10 @@ namespace UI {
         MenuItem(MenuItem const&);
         void operator=(MenuItem const&);
 
+    public:
         MenuItem();
         ~MenuItem();
 
-    public:
         BOOLEnum handleMenuElementsCallbacks();
 
         void prepareAndRenderMenuItems();

@@ -40,10 +40,10 @@ namespace UI {
         DisplayElement(DisplayElement const&);
         void operator=(DisplayElement const&);
 
+    public:
         DisplayElement();
         ~DisplayElement();
 
-    public:
         // Constructor
         DisplayElement* Constructor_DisplayElement(eOnScreenTextInt elementID, int xPos, int yPos, dword elementState,
             DisplayElementRenderFunc* renderFunction, DisplayElementPositionModifierInt positionModifier);
@@ -52,8 +52,6 @@ namespace UI {
     static_assert_cpp98_obj(sizeof(DisplayElement) == 36, DisplayElement);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(DisplayElement, false, Address::SHC_3BB0A8C1_0x00DF517C) pDAT_DisplayElement;
 
 } // namespace UI
 } // namespace OpenSHC

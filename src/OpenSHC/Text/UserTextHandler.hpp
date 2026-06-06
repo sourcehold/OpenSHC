@@ -38,10 +38,10 @@ namespace Text {
         UserTextHandler(UserTextHandler const&);
         void operator=(UserTextHandler const&);
 
+    public:
         UserTextHandler();
         ~UserTextHandler();
 
-    public:
         void resetToTextIndex(undefined4 textIndex);
 
         char* getCurrentText();
@@ -86,8 +86,6 @@ namespace Text {
     static_assert_cpp98_obj(sizeof(UserTextHandler) == 4372, UserTextHandler);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(UserTextHandler, false, Address::SHC_3BB0A8C1_0x01652740) pDAT_UserTextHandler;
 
 } // namespace Text
 } // namespace OpenSHC

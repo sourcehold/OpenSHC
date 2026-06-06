@@ -47,10 +47,10 @@ namespace Rendering {
             BinkControlClass(BinkControlClass const&);
             void operator=(BinkControlClass const&);
 
+        public:
             BinkControlClass();
             ~BinkControlClass();
 
-        public:
             void zeroBinkPtrAndLoadBinkSoundSystem(HDIGDRIVER drvrPtr);
 
             void stopBinkPlayback(int binkObjIndex);
@@ -72,8 +72,6 @@ namespace Rendering {
         static_assert_cpp98_obj(sizeof(BinkControlClass) == 96, BinkControlClass);
 
 #pragma pack(pop)
-
-        MACRO_STRUCT_RESOLVER(BinkControlClass, false, Address::SHC_3BB0A8C1_0x02157518) pDAT_BinkControlClass;
 
     } // namespace Bink
 } // namespace Rendering

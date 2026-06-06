@@ -57,10 +57,10 @@ namespace IO {
         ResourceManager(ResourceManager const&);
         void operator=(ResourceManager const&);
 
+    public:
         ResourceManager();
         ~ResourceManager();
 
-    public:
         // Constructor
         ResourceManager* Constructor_ResourceManager();
 
@@ -132,8 +132,6 @@ namespace IO {
     static_assert_cpp98_obj(sizeof(ResourceManager) == 1034132, ResourceManager);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(ResourceManager, false, Address::SHC_3BB0A8C1_0x011BF130) pDAT_ResourceManager;
 
 } // namespace IO
 } // namespace OpenSHC

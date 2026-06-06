@@ -62,10 +62,10 @@ namespace Map {
             TribesState(TribesState const&);
             void operator=(TribesState const&);
 
+        public:
             TribesState();
             ~TribesState();
 
-        public:
             // Constructor
             TribesState* Constructor_TribesState();
 
@@ -307,8 +307,6 @@ namespace Map {
         static_assert_cpp98_obj(sizeof(TribesState) == 1029072, TribesState);
 
 #pragma pack(pop)
-
-        MACRO_STRUCT_RESOLVER(TribesState, false, Address::SHC_3BB0A8C1_0x01667F78) pDAT_TribesState;
 
     } // namespace Units
 } // namespace Map

@@ -32,10 +32,10 @@ namespace UI {
             AlphaAndButtonSurface(AlphaAndButtonSurface const&);
             void operator=(AlphaAndButtonSurface const&);
 
+        public:
             AlphaAndButtonSurface();
             ~AlphaAndButtonSurface();
 
-        public:
             // Constructor
             AlphaAndButtonSurface* Constructor_AlphaAndButtonSurface();
 
@@ -59,9 +59,6 @@ namespace UI {
         static_assert_cpp98_obj(sizeof(AlphaAndButtonSurface) == 16, AlphaAndButtonSurface);
 
 #pragma pack(pop)
-
-        MACRO_STRUCT_RESOLVER(AlphaAndButtonSurface, false, Address::SHC_3BB0A8C1_0x00F2C7BC)
-        pDAT_AlphaAndButtonSurface;
 
     } // namespace Rendering
 } // namespace UI

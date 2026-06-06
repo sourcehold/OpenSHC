@@ -27,10 +27,10 @@ namespace Input {
         ModifierKeyState(ModifierKeyState const&);
         void operator=(ModifierKeyState const&);
 
+    public:
         ModifierKeyState();
         ~ModifierKeyState();
 
-    public:
         // Constructor
         ModifierKeyState* Constructor_ModifierKeyState();
 
@@ -40,8 +40,6 @@ namespace Input {
     static_assert_cpp98_obj(sizeof(ModifierKeyState) == 24, ModifierKeyState);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(ModifierKeyState, false, Address::SHC_3BB0A8C1_0x00F224E8) pDAT_ModifierKeyState;
 
 } // namespace Input
 } // namespace OpenSHC

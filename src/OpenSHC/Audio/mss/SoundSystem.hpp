@@ -72,10 +72,10 @@ namespace Audio {
             SoundSystem(SoundSystem const&);
             void operator=(SoundSystem const&);
 
+        public:
             SoundSystem();
             ~SoundSystem();
 
-        public:
             void meth_0x424700();
 
             void stopMusicPlayback();
@@ -183,8 +183,6 @@ namespace Audio {
         static_assert_cpp98_obj(sizeof(SoundSystem) == 12940, SoundSystem);
 
 #pragma pack(pop)
-
-        MACRO_STRUCT_RESOLVER(SoundSystem, false, Address::SHC_3BB0A8C1_0x01127DD0) pDAT_SoundSystem;
 
     } // namespace MSS
 } // namespace Audio

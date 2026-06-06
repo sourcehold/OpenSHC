@@ -48,10 +48,10 @@ namespace UI {
             PencilRenderCore(PencilRenderCore const&);
             void operator=(PencilRenderCore const&);
 
+        public:
             PencilRenderCore();
             ~PencilRenderCore();
 
-        public:
             void setupPencilSurface();
 
             BOOLEnum setupPencil(int left, int top, int right, int bottom, ushort color);
@@ -108,8 +108,6 @@ namespace UI {
         static_assert_cpp98_obj(sizeof(PencilRenderCore) == 66, PencilRenderCore);
 
 #pragma pack(pop)
-
-        MACRO_STRUCT_RESOLVER(PencilRenderCore, false, Address::SHC_3BB0A8C1_0x0191D720) pDAT_PencilRenderCore;
 
     } // namespace Rendering
 } // namespace UI

@@ -24,10 +24,10 @@ namespace Util {
         WideCharMultiByteState(WideCharMultiByteState const&);
         void operator=(WideCharMultiByteState const&);
 
+    public:
         WideCharMultiByteState();
         ~WideCharMultiByteState();
 
-    public:
         int wideCharToMultiByteComplete(LPSTR charOut, LPCWSTR wideCharIn);
 
         void multiByteToWideCharacter(LPWSTR param_1, LPCSTR param_2);
@@ -44,8 +44,6 @@ namespace Util {
     static_assert_cpp98_obj(sizeof(WideCharMultiByteState) == 1, WideCharMultiByteState);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(WideCharMultiByteState, false, Address::SHC_3BB0A8C1_0x00EE1099) pDAT_WideCharMultiByteState;
 
 } // namespace Util
 } // namespace OpenSHC

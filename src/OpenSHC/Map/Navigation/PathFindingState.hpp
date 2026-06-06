@@ -91,10 +91,10 @@ namespace Map {
             PathFindingState(PathFindingState const&);
             void operator=(PathFindingState const&);
 
+        public:
             PathFindingState();
             ~PathFindingState();
 
-        public:
             // Constructor
             PathFindingState* Constructor_PathFindingState();
 
@@ -341,8 +341,6 @@ namespace Map {
         static_assert_cpp98_obj(sizeof(PathFindingState) == 837232, PathFindingState);
 
 #pragma pack(pop)
-
-        MACRO_STRUCT_RESOLVER(PathFindingState, false, Address::SHC_3BB0A8C1_0x012BB8C8) pDAT_PathFindingState;
 
     } // namespace Navigation
 } // namespace Map

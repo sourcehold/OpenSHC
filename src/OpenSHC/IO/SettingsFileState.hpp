@@ -22,10 +22,10 @@ namespace IO {
         SettingsFileState(SettingsFileState const&);
         void operator=(SettingsFileState const&);
 
+    public:
         SettingsFileState();
         ~SettingsFileState();
 
-    public:
         void readUserConfig();
 
         void writeUserConfig();
@@ -38,8 +38,6 @@ namespace IO {
     static_assert_cpp98_obj(sizeof(SettingsFileState) == 2, SettingsFileState);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(SettingsFileState, false, Address::SHC_3BB0A8C1_0x00EE109A) pDAT_SettingsFileState;
 
 } // namespace IO
 } // namespace OpenSHC

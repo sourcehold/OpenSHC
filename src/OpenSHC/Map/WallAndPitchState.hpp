@@ -35,10 +35,10 @@ namespace Map {
         WallAndPitchState(WallAndPitchState const&);
         void operator=(WallAndPitchState const&);
 
+    public:
         WallAndPitchState();
         ~WallAndPitchState();
 
-    public:
         void meth_0x500c20(int buildingID);
 
         void resetWallAndPitchState();
@@ -65,8 +65,6 @@ namespace Map {
     static_assert_cpp98_obj(sizeof(WallAndPitchState) == 2432, WallAndPitchState);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(WallAndPitchState, false, Address::SHC_3BB0A8C1_0x00EE19D0) pDAT_WallAndPitchState;
 
 } // namespace Map
 } // namespace OpenSHC

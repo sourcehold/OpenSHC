@@ -27,10 +27,10 @@ namespace Random {
         RNG(RNG const&);
         void operator=(RNG const&);
 
+    public:
         RNG();
         ~RNG();
 
-    public:
         // Constructor
         RNG* Constructor_RNG();
 
@@ -46,8 +46,6 @@ namespace Random {
     static_assert_cpp98_obj(sizeof(RNG) == 40016, RNG);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(RNG, false, Address::SHC_3BB0A8C1_0x01A279C0) pDAT_RNG;
 
 } // namespace Random
 } // namespace OpenSHC

@@ -28,10 +28,10 @@ namespace UI {
         HoveredState(HoveredState const&);
         void operator=(HoveredState const&);
 
+    public:
         HoveredState();
         ~HoveredState();
 
-    public:
         // Constructor
         HoveredState* Constructor_HoveredState();
 
@@ -47,8 +47,6 @@ namespace UI {
     static_assert_cpp98_obj(sizeof(HoveredState) == 480, HoveredState);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(HoveredState, false, Address::SHC_3BB0A8C1_0x00F2C7D0) pDAT_HoveredState;
 
 } // namespace UI
 } // namespace OpenSHC

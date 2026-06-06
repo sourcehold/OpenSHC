@@ -33,10 +33,10 @@ namespace UI {
         MenuView(MenuView const&);
         void operator=(MenuView const&);
 
+    public:
         MenuView();
         ~MenuView();
 
-    public:
         // Constructor
         MenuView* Constructor_MenuView(MenuViewTypeInt menuID, cdeclVoidFunc* prepareMenuView, cdeclVoidFunc* doInitial,
             cdeclVoidFunc* doEveryFrame);
@@ -47,8 +47,6 @@ namespace UI {
     static_assert_cpp98_obj(sizeof(MenuView) == 24, MenuView);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(MenuView, false, Address::SHC_3BB0A8C1_0x00B983A4) pDAT_MenuView;
 
 } // namespace UI
 } // namespace OpenSHC

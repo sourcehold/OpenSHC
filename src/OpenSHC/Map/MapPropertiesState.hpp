@@ -181,10 +181,10 @@ namespace Map {
         MapPropertiesState(MapPropertiesState const&);
         void operator=(MapPropertiesState const&);
 
+    public:
         MapPropertiesState();
         ~MapPropertiesState();
 
-    public:
         BOOLEnum isParam1LessThan21(int param_1);
 
         void importTradingCosts();
@@ -251,8 +251,6 @@ namespace Map {
     static_assert_cpp98_obj(sizeof(MapPropertiesState) == 83616, MapPropertiesState);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(MapPropertiesState, false, Address::SHC_3BB0A8C1_0x01653858) pDAT_MapPropertiesState;
 
 } // namespace Map
 } // namespace OpenSHC

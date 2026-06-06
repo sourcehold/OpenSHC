@@ -239,10 +239,10 @@ namespace Map {
         TileMapState(TileMapState const&);
         void operator=(TileMapState const&);
 
+    public:
         TileMapState();
         ~TileMapState();
 
-    public:
         // Constructor
         TileMapState* Constructor_TileMapState();
 
@@ -644,8 +644,6 @@ namespace Map {
     static_assert_cpp98_obj(sizeof(TileMapState) == 5589640, TileMapState);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(TileMapState, false, Address::SHC_3BB0A8C1_0x01A93208) pDAT_TileMapState;
 
 } // namespace Map
 } // namespace OpenSHC

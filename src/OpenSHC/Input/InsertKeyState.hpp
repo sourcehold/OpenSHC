@@ -23,10 +23,10 @@ namespace Input {
         InsertKeyState(InsertKeyState const&);
         void operator=(InsertKeyState const&);
 
+    public:
         InsertKeyState();
         ~InsertKeyState();
 
-    public:
         // Constructor
         InsertKeyState* Constructor_InsertKeyState();
     };
@@ -34,8 +34,6 @@ namespace Input {
     static_assert_cpp98_obj(sizeof(InsertKeyState) == 8, InsertKeyState);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(InsertKeyState, false, Address::SHC_3BB0A8C1_0x00EE239C) pDAT_InsertKeyState;
 
 } // namespace Input
 } // namespace OpenSHC

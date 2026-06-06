@@ -45,10 +45,10 @@ namespace Audio {
             SFXState(SFXState const&);
             void operator=(SFXState const&);
 
+        public:
             SFXState();
             ~SFXState();
 
-        public:
             // Constructor
             SFXState* Constructor_SFXState();
 
@@ -102,8 +102,6 @@ namespace Audio {
         static_assert_cpp98_obj(sizeof(SFXState) == 36496, SFXState);
 
 #pragma pack(pop)
-
-        MACRO_STRUCT_RESOLVER(SFXState, false, Address::SHC_3BB0A8C1_0x00F22500) pDAT_SFXState;
 
     } // namespace SFX
 } // namespace Audio

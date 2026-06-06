@@ -48,10 +48,10 @@ namespace IO {
         FilePackager(FilePackager const&);
         void operator=(FilePackager const&);
 
+    public:
         FilePackager();
         ~FilePackager();
 
-    public:
         // Constructor
         FilePackager* Constructor_FilePackager();
 
@@ -71,8 +71,6 @@ namespace IO {
     static_assert_cpp98_obj(sizeof(FilePackager) == 5100, FilePackager);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(FilePackager, false, Address::SHC_3BB0A8C1_0x00F2B3D0) pDAT_FilePackager;
 
 } // namespace IO
 } // namespace OpenSHC

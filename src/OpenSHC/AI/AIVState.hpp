@@ -77,10 +77,10 @@ namespace AI {
         AIVState(AIVState const&);
         void operator=(AIVState const&);
 
+    public:
         AIVState();
         ~AIVState();
 
-    public:
         // Constructor
         AIVState* Constructor_AIVState();
 
@@ -162,8 +162,6 @@ namespace AI {
     static_assert_cpp98_obj(sizeof(AIVState) == 748656, AIVState);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(AIVState, false, Address::SHC_3BB0A8C1_0x01866AB0) pDAT_AIVState;
 
 } // namespace AI
 } // namespace OpenSHC

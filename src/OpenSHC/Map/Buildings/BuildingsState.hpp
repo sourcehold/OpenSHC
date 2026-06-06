@@ -81,10 +81,10 @@ namespace Map {
             BuildingsState(BuildingsState const&);
             void operator=(BuildingsState const&);
 
+        public:
             BuildingsState();
             ~BuildingsState();
 
-        public:
             // Constructor
             BuildingsState* Constructor_BuildingsState();
 
@@ -428,8 +428,6 @@ namespace Map {
         static_assert_cpp98_obj(sizeof(BuildingsState) == 1630344, BuildingsState);
 
 #pragma pack(pop)
-
-        MACRO_STRUCT_RESOLVER(BuildingsState, false, Address::SHC_3BB0A8C1_0x00F98520) pDAT_BuildingsState;
 
     } // namespace Buildings
 } // namespace Map

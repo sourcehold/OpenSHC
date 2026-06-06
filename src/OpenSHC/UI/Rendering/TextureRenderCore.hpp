@@ -113,10 +113,10 @@ namespace UI {
             TextureRenderCore(TextureRenderCore const&);
             void operator=(TextureRenderCore const&);
 
+        public:
             TextureRenderCore();
             ~TextureRenderCore();
 
-        public:
             // Constructor
             TextureRenderCore* Constructor_TextureRenderCore(
                 int processedImageDataBufferSize, int gmAndGfxImageDataBufferSize, int unknownMemSize);
@@ -239,8 +239,6 @@ namespace UI {
         static_assert_cpp98_obj(sizeof(TextureRenderCore) == 1496196, TextureRenderCore);
 
 #pragma pack(pop)
-
-        MACRO_STRUCT_RESOLVER(TextureRenderCore, false, Address::SHC_3BB0A8C1_0x01FEA090) pDAT_TextureRenderCore;
 
     } // namespace Rendering
 } // namespace UI

@@ -75,10 +75,10 @@ namespace UI {
         MenuTextInputState(MenuTextInputState const&);
         void operator=(MenuTextInputState const&);
 
+    public:
         MenuTextInputState();
         ~MenuTextInputState();
 
-    public:
         // Constructor
         MenuTextInputState* Constructor_MenuTextInputState();
 
@@ -102,8 +102,6 @@ namespace UI {
     static_assert_cpp98_obj(sizeof(MenuTextInputState) == 6184, MenuTextInputState);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(MenuTextInputState, false, Address::SHC_3BB0A8C1_0x011265A8) pDAT_MenuTextInputState;
 
 } // namespace UI
 } // namespace OpenSHC

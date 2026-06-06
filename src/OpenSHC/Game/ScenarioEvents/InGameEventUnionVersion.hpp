@@ -32,10 +32,10 @@ namespace Game {
             InGameEventUnionVersion(InGameEventUnionVersion const&);
             void operator=(InGameEventUnionVersion const&);
 
+        public:
             InGameEventUnionVersion();
             ~InGameEventUnionVersion();
 
-        public:
             undefined4 resetEvent();
 
             ScenarioEventCondition* initializeScenarioEvent();

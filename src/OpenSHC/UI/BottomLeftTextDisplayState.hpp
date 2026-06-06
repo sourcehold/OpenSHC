@@ -34,10 +34,10 @@ namespace UI {
         BottomLeftTextDisplayState(BottomLeftTextDisplayState const&);
         void operator=(BottomLeftTextDisplayState const&);
 
+    public:
         BottomLeftTextDisplayState();
         ~BottomLeftTextDisplayState();
 
-    public:
         void setBottomLeftTextDisplayText(int messageTypeUnk, int textGroupIndex, int textNumInGroup,
             TextMessageBLLookupStructUnion param_4, int importanceUnk, int displayDurationUnk);
 
@@ -49,9 +49,6 @@ namespace UI {
     static_assert_cpp98_obj(sizeof(BottomLeftTextDisplayState) == 36, BottomLeftTextDisplayState);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(BottomLeftTextDisplayState, false, Address::SHC_3BB0A8C1_0x00EE106C)
-    pDAT_BottomLeftTextDisplayState;
 
 } // namespace UI
 } // namespace OpenSHC

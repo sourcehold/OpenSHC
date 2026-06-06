@@ -45,10 +45,10 @@ namespace IO {
         BitMapState(BitMapState const&);
         void operator=(BitMapState const&);
 
+    public:
         BitMapState();
         ~BitMapState();
 
-    public:
         // Constructor
         BitMapState* Constructor_BitMapState();
 
@@ -72,8 +72,6 @@ namespace IO {
     static_assert_cpp98_obj(sizeof(BitMapState) == 1152, BitMapState);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(BitMapState, false, Address::SHC_3BB0A8C1_0x011BECB0) pDAT_BitMapState;
 
 } // namespace IO
 } // namespace OpenSHC

@@ -46,10 +46,10 @@ namespace Map {
             TroopValueState(TroopValueState const&);
             void operator=(TroopValueState const&);
 
+        public:
             TroopValueState();
             ~TroopValueState();
 
-        public:
             // Constructor
             TroopValueState* Constructor_TroopValueState();
 
@@ -252,8 +252,6 @@ namespace Map {
         static_assert_cpp98_obj(sizeof(TroopValueState) == 1062760, TroopValueState);
 
 #pragma pack(pop)
-
-        MACRO_STRUCT_RESOLVER(TroopValueState, false, Address::SHC_3BB0A8C1_0x01763348) pDAT_TroopValueState;
 
     } // namespace Units
 } // namespace Map

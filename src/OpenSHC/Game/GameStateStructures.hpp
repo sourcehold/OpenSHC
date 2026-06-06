@@ -43,10 +43,10 @@ namespace Game {
         GameStateStructures(GameStateStructures const&);
         void operator=(GameStateStructures const&);
 
+    public:
         GameStateStructures();
         ~GameStateStructures();
 
-    public:
         bool isSameTeam(int playerID1, int playerID2);
 
         void clearMapAndTimeAndPlayerData();
@@ -250,8 +250,6 @@ namespace Game {
     static_assert_cpp98_obj(sizeof(GameStateStructures) == 605172, GameStateStructures);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(GameStateStructures, false, Address::SHC_3BB0A8C1_0x0112B0B8) pDAT_GameStateStructures;
 
 } // namespace Game
 } // namespace OpenSHC

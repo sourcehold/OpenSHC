@@ -26,18 +26,16 @@ namespace Rendering {
         WindowInformation(WindowInformation const&);
         void operator=(WindowInformation const&);
 
+    public:
         WindowInformation();
         ~WindowInformation();
 
-    public:
         void storeWindowRectangleInfoUnk(LONG param_1, LONG param_2, LONG param_3, LONG param_4);
     };
 
     static_assert_cpp98_obj(sizeof(WindowInformation) == 64, WindowInformation);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(WindowInformation, false, Address::SHC_3BB0A8C1_0x01A27980) pDAT_WindowInformation;
 
 } // namespace Rendering
 } // namespace OpenSHC

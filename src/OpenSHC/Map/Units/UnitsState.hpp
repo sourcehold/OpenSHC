@@ -98,10 +98,10 @@ namespace Map {
             UnitsState(UnitsState const&);
             void operator=(UnitsState const&);
 
+        public:
             UnitsState();
             ~UnitsState();
 
-        public:
             // Constructor
             UnitsState* Constructor_UnitsState();
 
@@ -493,8 +493,6 @@ namespace Map {
         static_assert_cpp98_obj(sizeof(UnitsState) == 2926564, UnitsState);
 
 #pragma pack(pop)
-
-        MACRO_STRUCT_RESOLVER(UnitsState, false, Address::SHC_3BB0A8C1_0x01387F38) pDAT_UnitsState;
 
     } // namespace Units
 } // namespace Map

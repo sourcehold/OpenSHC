@@ -51,10 +51,10 @@ namespace UI {
         MenuHandlerState(MenuHandlerState const&);
         void operator=(MenuHandlerState const&);
 
+    public:
         MenuHandlerState();
         ~MenuHandlerState();
 
-    public:
         void setupBuildMenuState(dword param_1, dword param_2);
 
         void startBuildMenuTransition(int transitionDuration);
@@ -70,8 +70,6 @@ namespace UI {
     static_assert_cpp98_obj(sizeof(MenuHandlerState) == 64, MenuHandlerState);
 
 #pragma pack(pop)
-
-    MACRO_STRUCT_RESOLVER(MenuHandlerState, false, Address::SHC_3BB0A8C1_0x00F2B390) pDAT_MenuHandlerState;
 
 } // namespace UI
 } // namespace OpenSHC

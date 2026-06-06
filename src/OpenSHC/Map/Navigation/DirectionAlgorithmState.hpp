@@ -27,10 +27,10 @@ namespace Map {
             DirectionAlgorithmState(DirectionAlgorithmState const&);
             void operator=(DirectionAlgorithmState const&);
 
+        public:
             DirectionAlgorithmState();
             ~DirectionAlgorithmState();
 
-        public:
             int computeHealthPercentage(int param_1, int param_2);
 
             void calculateOrientation(
@@ -56,9 +56,6 @@ namespace Map {
         static_assert_cpp98_obj(sizeof(DirectionAlgorithmState) == 20, DirectionAlgorithmState);
 
 #pragma pack(pop)
-
-        MACRO_STRUCT_RESOLVER(DirectionAlgorithmState, false, Address::SHC_3BB0A8C1_0x00EE23BC)
-        pDAT_DirectionAlgorithmState;
 
     } // namespace Navigation
 } // namespace Map
