@@ -8,7 +8,7 @@ This tutorial describes how to import a SARIF export into your Ghidra project co
 
 - Ghidra 11.4.1 or higher
 - Stronghold Crusader (Steam or GOG version in English). The `Stronghold Crusader.exe` binary should have `SHA256-hash`: `3BB0A8C1E72331B3A30A5AA93ED94BECA0081B476B04C1960E26D5B45387AC5A`
-- A SARIF file containing the Ghidra database export the team has worked on for years. You can find the latest [here](https://github.com/gynt/OpenSHC/releases/tag/latest-sarif) (unzip the file into a directory).
+- A SARIF file containing the Ghidra database export the team has worked on for years. You can find the latest [here](https://github.com/sourcehold/OpenSHC/releases/tag/latest-sarif) (unzip the file into a directory).
 
 ## Step by step
 
