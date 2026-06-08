@@ -23,9 +23,9 @@ namespace Audio {
             DAT_GameCore::ptr->battleLevel = 0;
             DAT_GameCore::ptr->battleLevel2 = 0;
             DAT_GameCore::ptr->field36_0x90 = 0;
-            DAT_TroopValueState::ptr->attackInfo.field_0x469d8 = 0;
-            DAT_TroopValueState::ptr->attackInfo.field_0x469e0 = 0;
-            DAT_TroopValueState::ptr->attackInfo.field128082_0x469dc = 0;
+            DAT_TroopValueState::ptr->attackInfo.field128078_0x469d8 = 0;
+            DAT_TroopValueState::ptr->attackInfo.field128080_0x469e0 = 0;
+            DAT_TroopValueState::ptr->attackInfo.field128079_0x469dc = 0;
             DAT_SoundEffectsHelperData1::ptr->field8_0x3c = 0;
         }
 
