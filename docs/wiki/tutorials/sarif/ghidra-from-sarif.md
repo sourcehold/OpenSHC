@@ -4,11 +4,12 @@
 
 This tutorial describes how to import a SARIF export into your Ghidra project containing the original `Stronghold Crusader.exe` binary.
 
-## Step by step
-
 ### Prerequisites
 
 - Ghidra 11.4.1 or higher
+- Stronghold Crusader (Steam or GOG version in English). The `Stronghold Crusader.exe` binary should have `SHA256-hash`: `3BB0A8C1E72331B3A30A5AA93ED94BECA0081B476B04C1960E26D5B45387AC5A`
+
+## Step by step
 
 ### Launch Ghidra
 
@@ -30,7 +31,7 @@ Browse to a directory of your liking and name the project `ghidra-OpenSHC` (or s
 
 ### Importing Stronghold Crusader.exe into Ghidra
 
-Now, we import the original game binary into Ghidra (make sure it is exactly the right version, `SHA256: 3BB0A8C1E72331B3A30A5AA93ED94BECA0081B476B04C1960E26D5B45387AC5A`):
+Now, we import the original game binary into Ghidra (make sure it is exactly the right version):
 
 ![alt text](./images/image-230709.png)
 
@@ -84,8 +85,8 @@ all(disassemble(f.getEntryPoint()) for f in getCurrentProgram().getFunctionManag
 
 After a while, it will have decompiled all functions.
 
-Happy browsing!
+Happy browsing! The Symbol Table on the left of the CodeBrowser is your friend: open up the namespace `_HoldStrong` to view functions that are relevant to `OpenSHC`.
 
 ## Known limitations
 
-Calling conventions that preserve registers such as ECX are not supported for import.
+Calling conventions that preserve registers such as ECX are not supported for import. A future import script via Python could perhaps resolve this.
