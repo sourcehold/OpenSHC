@@ -1,6 +1,6 @@
-#include "OpenSHC/Audio/MSS/SoundSystem.hpp"
+#include "../SoundSystem.func.hpp"
 
-#include "OpenSHC/Audio/MSS/SoundSystem.func.hpp"
+#include "OpenSHC/Audio/MSS/SoundSystem.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
