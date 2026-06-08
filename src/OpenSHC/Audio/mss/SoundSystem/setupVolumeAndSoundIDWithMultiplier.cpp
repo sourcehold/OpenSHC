@@ -11,8 +11,8 @@ namespace OpenSHC {
 namespace Audio {
     namespace MSS {
 
-        // FUNCTION: STRONGHOLDCRUSADER 0x0047A1B0
-        void SoundSystem::setupVolumeAndSoundID(eMusicIDsInt soundID)
+        // FUNCTION: STRONGHOLDCRUSADER 0x0047A220
+        void SoundSystem::setupVolumeAndSoundIDWithMultiplier(eMusicIDsInt soundID, int soundMultiplier)
         {
             // Indicator to handle as mission sound (?)
             if (soundID == DE::SHCDE::MUSIC_TUNE_NARR1) {
@@ -33,7 +33,7 @@ namespace Audio {
             int const fileVolume = MACRO_CALL_MEMBER(SFX::SFXState_Func::getSoundVolumeForFilename, DAT_SFXState::ptr)(
                 DAT_SFXDefinedData::ptr->DAT_SFX_Pointers[soundID].musicFile);
             // 0x7f is the maximum volume of the MSS32 volume API.
-            this->currentSoundIDVolumeUnk_0x327c = (fileVolume * 100) / 0x7f;
+            this->currentSoundIDVolumeUnk_0x327c = (fileVolume * soundMultiplier) / 0x7f;
             this->mbr_0x3280 = 0;
         }
 
