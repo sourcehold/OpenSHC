@@ -24,7 +24,7 @@ namespace Map {
 
             int spriteID; // 0x00000000 length: 4
             int spriteSheetID; // 0x00000004 length: 4
-            int field2_0x8; // 0x00000008 length: 4
+            int playerColorUnk; // 0x00000008 length: 4
             short field3_0xc; // 0x0000000C length: 2
             short field4_0xe; // 0x0000000E length: 2
             int field5_0x10; // 0x00000010 length: 4
@@ -32,7 +32,7 @@ namespace Map {
             int field7_0x18; // 0x00000018 length: 4
             int animationFrame; // 0x0000001C length: 4
             short animationIndex; // 0x00000020 length: 2
-            short field10_0x22; // 0x00000022 length: 2
+            short spriteID2; // 0x00000022 length: 2
             short unknownStockpileOrSignpostRelated; // 0x00000024 length: 2
             short field12_0x26; // 0x00000026 length: 2
             int field13_0x28; // 0x00000028 length: 4
@@ -71,21 +71,21 @@ namespace Map {
             short unknownFlag3; // 0x0000009A length: 2
             short someResourceNumber; // 0x0000009C length: 2
             short buildingIsVisuallyActive; // 0x0000009E length: 2
-            int field56_0xa0; // 0x000000A0 length: 4
+            int visuallyActiveSpriteID; // 0x000000A0 length: 4
             short resourceRelatedCountDown; // 0x000000A4 length: 2
             undefined1 padding_0xa6[2]; // 0x000000A6 length: 2
             uint unknownManorHouseOrStoneKeepRelated; // 0x000000A8 length: 4
-            int field61_0xac; // 0x000000AC length: 4
+            int gfxOffset; // 0x000000AC length: 4
             int field62_0xb0; // 0x000000B0 length: 4
-            int field63_0xb4; // 0x000000B4 length: 4
-            int field64_0xb8; // 0x000000B8 length: 4
+            int gfxOffset2; // 0x000000B4 length: 4
+            int gfxOffset3; // 0x000000B8 length: 4
             short tickRelatedVisuallyActiveIndicator; // 0x000000BC length: 2
             short field66_0xbe; // 0x000000BE length: 2
             short recruitTimer; // 0x000000C0 length: 2
             short field68_0xc2; // 0x000000C2 length: 2
             short noRubble; // 0x000000C4 length: 2
             undefined1 padding_0xc6[2]; // 0x000000C6 length: 2
-            int field72_0xc8; // 0x000000C8 length: 4
+            int miscDisplayLayerTile; // 0x000000C8 length: 4
             short pathLinkageRelated1; // 0x000000CC length: 2
             short oldVisualActiveState; // 0x000000CE length: 2
             short logicalState; // 0x000000D0 length: 2
@@ -105,7 +105,7 @@ namespace Map {
             ushort entranceAttemptTileIndex; // 0x000000FC length: 2
             short buildingEntryX; // 0x000000FE length: 2
             short buildingEntryY; // 0x00000100 length: 2
-            short buildingVariationRelated; // 0x00000102 length: 2
+            short buildingVariation; // 0x00000102 length: 2
             int fireRelatedRNG1; // 0x00000104 length: 4
             short flag1; // 0x00000108 length: 2
             undefined1 padding_0x10a[2]; // 0x0000010A length: 2
@@ -228,7 +228,7 @@ namespace Map {
             byte numberOfAnimals; // 0x00000297 length: 1
             byte field240_0x298; // 0x00000298 length: 1
             byte field241_0x299; // 0x00000299 length: 1
-            short unknownOutpostValue01; // 0x0000029A length: 2
+            short outpostRelatedUnk4; // 0x0000029A length: 2
             int ffBuildingVariation; // 0x0000029C length: 4
             undefined1 padding_0x2a0[2]; // 0x000002A0 length: 2
             byte pathLinkageRelated2; // 0x000002A2 length: 1
@@ -264,26 +264,26 @@ namespace Map {
             short insideUnitID2; // 0x000002E2 length: 2
             short insideUnitID3; // 0x000002E4 length: 2
             short insideUnitID4; // 0x000002E6 length: 2
-            int field282_0x2e8; // 0x000002E8 length: 4
-            int field283_0x2ec; // 0x000002EC length: 4
-            int field284_0x2f0; // 0x000002F0 length: 4
-            int unitRefUID2; // 0x000002F4 length: 4
+            int insideUnitUID1; // 0x000002E8 length: 4
+            int insideUnitUID2; // 0x000002EC length: 4
+            int insideUnitUID3; // 0x000002F0 length: 4
+            int insideUnitUID4; // 0x000002F4 length: 4
             short hasUnitsOntop; // 0x000002F8 length: 2
             short field287_0x2fa; // 0x000002FA length: 2
             undefined1 padding_0x2fc[2]; // 0x000002FC length: 2
             short statueCommemoratingPlayerID; // 0x000002FE length: 2
-            short field291_0x300; // 0x00000300 length: 2
+            short outpostRelatedUnk1; // 0x00000300 length: 2
             short tribeID; // 0x00000302 length: 2
             int tribeUID; // 0x00000304 length: 4
             short field294_0x308; // 0x00000308 length: 2
-            short field295_0x30a; // 0x0000030A length: 2
+            short outpostRelatedUnk05; // 0x0000030A length: 2
             short field296_0x30c; // 0x0000030C length: 2
-            short field297_0x30e; // 0x0000030E length: 2
-            short field298_0x310; // 0x00000310 length: 2
+            short outpostRelatedUnk2; // 0x0000030E length: 2
+            short outpostRelatedUnk3; // 0x00000310 length: 2
             short field299_0x312; // 0x00000312 length: 2
             undefined1 padding_0x314[2]; // 0x00000314 length: 2
-            short field302_0x316; // 0x00000316 length: 2
-            short field303_0x318; // 0x00000318 length: 2
+            short outpostRelatedUnk06; // 0x00000316 length: 2
+            short incByFourUnk; // 0x00000318 length: 2
             undefined1 padding_0x31a[18]; // 0x0000031A length: 18
 
         } Building;

@@ -69,10 +69,10 @@ namespace Map {
             TruncatedInt DAT_Building_SpriteSheet_ID_Array_1[110]; // 0x00002E6C length: 440
             int DAT_Building_Sprite_ID_Array_1[110]; // 0x00003024 length: 440
             int DAT_Building_Sprite_ID_Array_2[110]; // 0x000031DC length: 440
-            int field35_0x3394[110]; // 0x00003394 length: 440
-            int field36_0x354c[110]; // 0x0000354C length: 440
-            int field37_0x3704[110]; // 0x00003704 length: 440
-            TruncatedInt field38_0x38bc[110]; // 0x000038BC length: 440
+            int visuallyActiveSpriteIDOffsets[110]; // 0x00003394 length: 440
+            int gfxOffsets[110]; // 0x0000354C length: 440
+            int gfxOffsets3[110]; // 0x00003704 length: 440
+            TruncatedInt spriteIDs2[110]; // 0x000038BC length: 440
             short field39_0x3a74[110][2][2]; // 0x00003A74 length: 880
             int field40_0x3de4[110]; // 0x00003DE4 length: 440
             int DAT_BuildingHeights[110]; // 0x00003F9C length: 440
@@ -243,13 +243,13 @@ namespace Map {
             XYPair field209_0x976c[52]; // 0x0000976C length: 416
             XYPair field210_0x990c[56]; // 0x0000990C length: 448
             undefined1 padding_0x9acc[156]; // 0x00009ACC length: 156
-            int field367_0x9b68[12]; // 0x00009B68 length: 48
-            int field368_0x9b98[13]; // 0x00009B98 length: 52
+            int gardenVariations[12]; // 0x00009B68 length: 48
+            int unknownVariations[13]; // 0x00009B98 length: 52
             int DAT_SomeSpriteArray1[7]; // 0x00009BCC length: 28
-            int field370_0x9be8[4]; // 0x00009BE8 length: 16
-            int field371_0x9bf8[5]; // 0x00009BF8 length: 20
-            int field372_0x9c0c[5]; // 0x00009C0C length: 20
-            int field373_0x9c20[5]; // 0x00009C20 length: 20
+            int cesspitVariations[4]; // 0x00009BE8 length: 16
+            int statueVariations[5]; // 0x00009BF8 length: 20
+            int shrineVariations[5]; // 0x00009C0C length: 20
+            int pondVariations[5]; // 0x00009C20 length: 20
             XYPairShort DAT_PlayerDataUnknownStructureRelatedArray_3[2][24]; // 0x00009C34 length: 192
             int DAT_PlayerDataUnknownStructureRelatedArray_1[6]; // 0x00009CF4 length: 24
             int DAT_PlayerDataUnknownStructureRelatedArray_2[6][3]; // 0x00009D0C length: 72

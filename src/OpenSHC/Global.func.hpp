@@ -497,7 +497,7 @@ namespace Global_Func {
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0044E510, &OpenSHC::Global::InitBlendFilterArraysUnk)
     InitBlendFilterArraysUnk;
 
-    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(wchar_t* destination, wchar_t* format), false,
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(wchar_t* destination, wchar_t* format, ...), false,
         Address::SHC_3BB0A8C1_0x0045D060, &OpenSHC::Global::PrintToDestination)
     PrintToDestination;
 

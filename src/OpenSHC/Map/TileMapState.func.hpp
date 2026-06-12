@@ -247,8 +247,8 @@ namespace Map {
         meth_0x4faf70;
 
         MACRO_FUNCTION_RESOLVER(
-            void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004FB0C0, &TileMapState::meth_0x4fb0c0)
-        meth_0x4fb0c0;
+            void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004FB0C0, &TileMapState::setMiscDisplayLayer)
+        setMiscDisplayLayer;
 
         MACRO_FUNCTION_RESOLVER(
             void (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004FB360, &TileMapState::meth_0x4fb360)

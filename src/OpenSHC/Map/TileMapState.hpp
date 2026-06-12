@@ -359,7 +359,7 @@ namespace Map {
 
         void meth_0x4faf70(int param_1, int param_2);
 
-        void meth_0x4fb0c0(int buildingID);
+        void setMiscDisplayLayer(int buildingID);
 
         void meth_0x4fb360(int buildingID, int param_2);
 
@@ -520,8 +520,8 @@ namespace Map {
         void placeSiegeTentUnk(
             int param_1, uint param_2, uint param_3, undefined4 param_4, uint param_5, int param_6, undefined4 param_7);
 
-        void placePositiveFearfactor(int param_1, uint param_2, uint param_3, undefined4 param_4, undefined4 param_5,
-            uint param_6, undefined4 param_7, undefined4 param_8);
+        void placePositiveFearfactor(int playerID, uint x, uint y, undefined4 buildingType, undefined4 variation,
+            uint buildingSize, undefined4 param_7, undefined4 height);
 
         void meth_0x507060(int param_1, uint param_2, uint param_3, undefined4 param_4, undefined4 param_5,
             uint param_6, undefined4 param_7, undefined4 param_8);

@@ -48,11 +48,11 @@ namespace IO {
 
         void setMemoryToValue0x100();
 
-        void copyData0x001();
+        void copyData_0x001();
 
-        void copyData0x010();
+        void copyData_0x010();
 
-        void copyData0x100();
+        void copyData_0x100();
 
         void copyStringUntilFirstDot(char* param_1, char* param_2);
 

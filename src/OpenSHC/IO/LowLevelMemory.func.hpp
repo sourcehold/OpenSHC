@@ -37,16 +37,16 @@ namespace IO {
         setMemoryToValue0x100;
 
         MACRO_FUNCTION_RESOLVER(
-            void (LowLevelMemory::*)(), false, Address::SHC_3BB0A8C1_0x0046AAF0, &LowLevelMemory::copyData0x001)
-        copyData0x001;
+            void (LowLevelMemory::*)(), false, Address::SHC_3BB0A8C1_0x0046AAF0, &LowLevelMemory::copyData_0x001)
+        copyData_0x001;
 
         MACRO_FUNCTION_RESOLVER(
-            void (LowLevelMemory::*)(), false, Address::SHC_3BB0A8C1_0x0046AB30, &LowLevelMemory::copyData0x010)
-        copyData0x010;
+            void (LowLevelMemory::*)(), false, Address::SHC_3BB0A8C1_0x0046AB30, &LowLevelMemory::copyData_0x010)
+        copyData_0x010;
 
         MACRO_FUNCTION_RESOLVER(
-            void (LowLevelMemory::*)(), false, Address::SHC_3BB0A8C1_0x0046ABA0, &LowLevelMemory::copyData0x100)
-        copyData0x100;
+            void (LowLevelMemory::*)(), false, Address::SHC_3BB0A8C1_0x0046ABA0, &LowLevelMemory::copyData_0x100)
+        copyData_0x100;
 
         MACRO_FUNCTION_RESOLVER(void (LowLevelMemory::*)(char*, char*), false, Address::SHC_3BB0A8C1_0x0046AE50,
             &LowLevelMemory::copyStringUntilFirstDot)

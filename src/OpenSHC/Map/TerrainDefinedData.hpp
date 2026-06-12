@@ -88,8 +88,8 @@ namespace Map {
         int field2469_0x21ec[4][25]; // 0x000021EC length: 400
         int field2470_0x237c[4][25]; // 0x0000237C length: 400
         int field2471_0x250c[26]; // 0x0000250C length: 104
-        int field2472_0x2574[60]; // 0x00002574 length: 240
-        int field2473_0x2664[64]; // 0x00002664 length: 256
+        int orientationRelativeBuildingTileOffset2[60]; // 0x00002574 length: 240
+        int orientationRelativeBuildingTileOffset1[64]; // 0x00002664 length: 256
         XYPair field2474_0x2764[501]; // 0x00002764 length: 4008
         int field2475_0x370c[8]; // 0x0000370C length: 32
         XYPair field2476_0x372c[8]; // 0x0000372C length: 64

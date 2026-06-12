@@ -391,7 +391,7 @@ namespace Map {
             void meth_0x420bf0(PackagedFileMagicNumInt receivedMapVersion, PackagedFileMagicNumInt packagerMapVersion);
 
             int setupBuildingData(int playerID, uint x, uint y, undefined4 averageHeight, BuildingTypeInt buildingType,
-                uint width, int playerID_dup, int variation);
+                uint width, int playerID_dup, int variationIndex);
 
             void deleteBuilding(uint buildingID);
 

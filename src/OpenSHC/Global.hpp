@@ -275,7 +275,7 @@ namespace Global {
 
     void __stdcall InitBlendFilterArraysUnk();
 
-    void __cdecl PrintToDestination(wchar_t* destination, wchar_t* format);
+    void __cdecl PrintToDestination(wchar_t* destination, wchar_t* format, ...);
 
     EuroRecruitableStateInt __cdecl IsEuroUnitRecruitableUnk(int barrackUnitIdUnk);
 
