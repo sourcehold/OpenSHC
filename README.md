@@ -16,13 +16,15 @@ open source reimplementation that benefits modding to those that own the origina
 
 ## Usage
 
-OpenSHC builds as a DLL that is loaded at game start. Functions that have a functionally identical reimplementation are hooked, such that the reimplemented versions are run instead of the original. This enables easy modding, although modding itself is currently beyond the scope of the OpenSHC project.
+OpenSHC builds as a DLL that is loaded at game start. Functions that have a functionally identical reimplementation are hooked, such that the reimplemented versions are run instead of the original. This enables easy modding, although modding itself is currently beyond the scope of the OpenSHC project. Instead, the project currently focuses on reimplementing functionality.
 
 ## Contribute
 
 The development of this reimplementation is a stepwise process in which we aim to achieve a functionally identical reimplementation. We track progress using various tools.
 
 All developers are welcome to contribute.
+
+Get an overview [here](https://sourcehold.github.io/OpenSHC/wiki.html) or dive straight in [here](https://sourcehold.github.io/OpenSHC/wiki/tutorials/reimplementation-tutorial-0.html)!
 
 ### Requirements
 
@@ -81,7 +83,7 @@ cd OpenSHC
 
 #### 2. Create a symbolic link to the original game
 
-Run the following command:
+Run the following batch file:
 
 ```bash
 softlink.bat
@@ -137,8 +139,9 @@ reccmp/dll/run reccmp-reccmp --target STRONGHOLDCRUSADER
 ---
 
 ## Tutorials
-When you are set up, follow any of the [tutorials](https://sourcehold.github.io/OpenSHC/wiki/tutorials/reimplementation-tutorial-1.html) to get you started!
 
+When you are set up, follow any of the tutorials such as [this one](https://sourcehold.github.io/OpenSHC/wiki/tutorials/reimplementation-tutorial-1.html) to get you started!
 
 ## Help
+
 Raise an issue here on GitHub to receive support. Or visit the [Discord](https://discord.gg/SKJGEGgPTv) server.
