@@ -22775,15 +22775,15 @@ enum {
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x0046A970 = 0x0046A970,
-    // label: copyData0x001
+    // label: copyData_0x001
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x0046AAF0 = 0x0046AAF0,
-    // label: copyData0x010
+    // label: copyData_0x010
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x0046AB30 = 0x0046AB30,
-    // label: copyData0x100
+    // label: copyData_0x100
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x0046ABA0 = 0x0046ABA0,
@@ -44894,7 +44894,7 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FAF70 = 0x004FAF70,
-    // label: meth_0x4fb0c0
+    // label: setMiscDisplayLayer
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FB0C0 = 0x004FB0C0,
@@ -72640,7 +72640,7 @@ enum {
     // label: FID_conflict:__gmtime32
     // label: FID_conflict:__gmtime64
     // label: FID_conflict:__localtime32
-    // label: __localtime64
+    // label: _localtime
     // location:
     // location: OpenSHC/OS
     // type: function
@@ -73324,7 +73324,7 @@ enum {
     // label: __alloca_probe
     // label: __chkstk
     // location:
-    // location: OpenSHC/OS
+    // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005834A0 = 0x005834A0,
     // label: __strnicmp_l

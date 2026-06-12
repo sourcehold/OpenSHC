@@ -41,9 +41,9 @@ namespace Audio {
         BOOLEnum field14_0x54; // 0x00000054 length: 4
         BOOLEnum field15_0x58; // 0x00000058 length: 4
         undefined4 field16_0x5c; // 0x0000005C length: 4
-        undefined4 DAT_WinMusicVariation; // 0x00000060 length: 4
+        int DAT_WinMusicVariation; // 0x00000060 length: 4
         undefined4 field18_0x64; // 0x00000064 length: 4
-        undefined4 DAT_LossMusicVariation; // 0x00000068 length: 4
+        int DAT_LossMusicVariation; // 0x00000068 length: 4
         DWORD DAT_enemyInsideCastleSoundWarningCooldownTimer; // 0x0000006C length: 4
         undefined4 field21_0x70; // 0x00000070 length: 4
         WAVEFORMATEX SND_Waveformat; // 0x00000074 length: 18
