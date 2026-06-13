@@ -1,4 +1,4 @@
-#include "OpenSHC/IO/LowLevelMemory.func.hpp"
+#include "../LowLevelMemory.func.hpp"
 
 namespace OpenSHC {
 namespace IO {
@@ -13,9 +13,9 @@ namespace IO {
         this->size = size;
         this->src = src;
         this->destination = destination;
-        MACRO_CALL_MEMBER(LowLevelMemory_Func::copyData0x100, this)();
-        MACRO_CALL_MEMBER(LowLevelMemory_Func::copyData0x010, this)();
-        MACRO_CALL_MEMBER(LowLevelMemory_Func::copyData0x001, this)();
+        MACRO_CALL_MEMBER(LowLevelMemory_Func::copyData_0x100, this)();
+        MACRO_CALL_MEMBER(LowLevelMemory_Func::copyData_0x010, this)();
+        MACRO_CALL_MEMBER(LowLevelMemory_Func::copyData_0x001, this)();
     }
 
     // NOTE: Heavy use of assembly.
@@ -28,7 +28,7 @@ namespace IO {
     //   actually using these would not result in the same binary.
 
     // FUNCTION: STRONGHOLDCRUSADER 0x0046ABA0
-    void LowLevelMemory::copyData0x100()
+    void LowLevelMemory::copyData_0x100()
     {
         unsigned int* localDest = (unsigned int*)this->destination;
         unsigned int* localSrc = (unsigned int*)this->src;
@@ -202,7 +202,7 @@ namespace IO {
     }
 
     // FUNCTION: STRONGHOLDCRUSADER 0x0046AB30
-    void LowLevelMemory::copyData0x010()
+    void LowLevelMemory::copyData_0x010()
     {
         unsigned int* localDest = (unsigned int*)this->destination;
         unsigned int* localSrc = (unsigned int*)this->src;
@@ -256,7 +256,7 @@ namespace IO {
     }
 
     // FUNCTION: STRONGHOLDCRUSADER 0x0046AAF0
-    void LowLevelMemory::copyData0x001()
+    void LowLevelMemory::copyData_0x001()
     {
         unsigned char* localDest = (unsigned char*)this->destination;
         unsigned char* localSrc = (unsigned char*)this->src;
