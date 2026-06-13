@@ -65,7 +65,7 @@ namespace OS {
 
     int __cdecl __wcsicmp(wchar_t* _Str1, wchar_t* _Str2);
 
-    // void __cdecl _free(void* _Memory);
+    void __cdecl _free(void* _Memory);
 
     errno_t __cdecl _memcpy_s(void* _Dst, rsize_t _DstSize, void* _Src, rsize_t _MaxCount);
 

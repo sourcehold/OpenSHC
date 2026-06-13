@@ -1,7 +1,7 @@
 // disable deprecation warnings, since we use the old calls on purpose
 #pragma warning(disable : 4996)
 
-#include "OpenSHC/OS.hpp"
+#include "../OS.func.hpp"
 
 #include "float.h"
 #include "io.h"

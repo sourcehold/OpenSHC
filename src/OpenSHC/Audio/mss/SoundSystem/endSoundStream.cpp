@@ -1,21 +1,8 @@
-#include "OpenSHC/Audio/MSS/SoundSystem.hpp"
-
-#include "OpenSHC/Audio/MSS/enums/AILStatus.hpp"
-#include "OpenSHC/Audio/MSS/enums/SHC_SoundStream.hpp"
+#include "../SoundSystem.func.hpp"
 
 #include "OpenSHC/OS.func.hpp"
 
 #include "OpenSHC/Globals/DAT_SoundEffectsHelperData1.hpp"
-
-// NOTE:
-// "UnkSoundFlagsAndLoopCount" might be a bitfield, maybe like this:
-//      int loopCount : 16;
-//      int reserved : 13;
-//      int unknownFlag1 : 1;
-//      int unknownFlag2 : 1;
-//      int uninterruptable : 1; // ?
-// In a test in the current file it compiled to "& 0x80000000" properly when using the specific field, but no idea if
-// this works for multifield checks or assigns
 
 namespace OpenSHC {
 namespace Audio {
@@ -50,9 +37,8 @@ namespace Audio {
                 return;
             }
 
-            // flag seems to indicate an "uninterruptable" stream; if it is set, a playing stream can not be ended
-            if ((*reinterpret_cast<unsigned int*>(&this->streamFlagsUnkAndLoopCount_0x34[sndStreamIndex]) & 0x80000000)
-                && (AIL_stream_status(this->stream_0xc[sndStreamIndex]) == SMP_PLAYING)) {
+            if (this->streamFlagsUnkAndLoopCount_0x34[sndStreamIndex].uninterruptable
+                && AIL_stream_status(this->stream_0xc[sndStreamIndex]) == SMP_PLAYING) {
                 return;
             }
             AIL_close_stream(this->stream_0xc[sndStreamIndex]);

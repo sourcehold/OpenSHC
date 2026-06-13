@@ -33,10 +33,6 @@ namespace OS_Func {
     isEqualGUID;
 
     MACRO_FUNCTION_RESOLVER(
-        int(__cdecl*)(double _X), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x0057ECF1, &OpenSHC::OS::__isnan)
-    __isnan;
-
-    MACRO_FUNCTION_RESOLVER(
         tm*(__cdecl*)(time_t* _Time), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x0057F5FE, &OpenSHC::OS::_localtime)
     _localtime;
 
@@ -112,9 +108,9 @@ namespace OS_Func {
         Address::SHC_3BB0A8C1_0x00580B69, &OpenSHC::OS::__wcsicmp)
     __wcsicmp;
 
-    // MACRO_FUNCTION_RESOLVER(
-    //     void(__cdecl*)(void* _Memory), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x00580DC1, &OpenSHC::OS::_free)
-    //_free;
+    MACRO_FUNCTION_RESOLVER(
+        void(__cdecl*)(void* _Memory), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x00580DC1, &OpenSHC::OS::_free)
+    _free;
 
     MACRO_FUNCTION_RESOLVER(errno_t(__cdecl*)(void* _Dst, rsize_t _DstSize, void* _Src, rsize_t _MaxCount),
         REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x00580DC6, &OpenSHC::OS::_memcpy_s)
