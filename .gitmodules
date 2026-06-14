@@ -1,0 +1,3 @@
+[submodule "MSVC1400-SP1"]
+	path = MSVC1400-SP1
+	url = https://github.com/sourcehold/MSVC1400-SP1.git
