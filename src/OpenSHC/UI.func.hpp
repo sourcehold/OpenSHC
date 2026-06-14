@@ -8,23 +8,23 @@
 
 #pragma once
 
-#include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
-#include "OpenSHC/Game/Resources/ResourceTypeInt.hpp"
+#include "OpenSHC/Commands/CommandBuildingType.hpp"
+#include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/UI.hpp"
-#include "OpenSHC/UI/ChooseNetworkServiceProvider/ChooseNetworkServiceProviderButtonActionsInt.hpp"
-#include "OpenSHC/UI/Enums/SoundMenuClickTypeInt.hpp"
-#include "OpenSHC/UI/Multiplayer/FindingNetworkSessions_ButtonParametersInt.hpp"
+#include "OpenSHC/UI/ChooseNetworkServiceProvider/ChooseNetworkServiceProviderButtonActions.hpp"
+#include "OpenSHC/UI/Enums/SoundMenuClickType.hpp"
+#include "OpenSHC/UI/Multiplayer/FindingNetworkSessions_ButtonParameters.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "WinDef.h"
 namespace OpenSHC {
 namespace UI_Func {
 
-    using OpenSHC::Commands::CommandBuildingTypeInt;
-    using OpenSHC::Game::Resources::ResourceTypeInt;
-    using OpenSHC::UI::ChooseNetworkServiceProvider::ChooseNetworkServiceProviderButtonActionsInt;
-    using OpenSHC::UI::Enums::SoundMenuClickTypeInt;
-    using OpenSHC::UI::Multiplayer::FindingNetworkSessions_ButtonParametersInt;
+    using OpenSHC::Commands::CommandBuildingType;
+    using OpenSHC::Game::Resources::ResourceType;
+    using OpenSHC::UI::ChooseNetworkServiceProvider::ChooseNetworkServiceProviderButtonActions;
+    using OpenSHC::UI::Enums::SoundMenuClickType;
+    using OpenSHC::UI::Multiplayer::FindingNetworkSessions_ButtonParameters;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     MACRO_FUNCTION_RESOLVER(
@@ -489,8 +489,8 @@ namespace UI_Func {
         &OpenSHC::UI::MenuItemActionHandler_MapEditorLandscaping_CategoryButtons)
     MenuItemActionHandler_MapEditorLandscaping_CategoryButtons;
 
-    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(CommandBuildingTypeInt param_1, ...), false,
-        Address::SHC_3BB0A8C1_0x004314E0, &OpenSHC::UI::MenuItemActionHandler_MapEditorLandscaping_GeneralButtons)
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(CommandBuildingType param_1, ...), false, Address::SHC_3BB0A8C1_0x004314E0,
+        &OpenSHC::UI::MenuItemActionHandler_MapEditorLandscaping_GeneralButtons)
     MenuItemActionHandler_MapEditorLandscaping_GeneralButtons;
 
     MACRO_FUNCTION_RESOLVER(
@@ -723,7 +723,7 @@ namespace UI_Func {
         &OpenSHC::UI::MenuItemActionHandler_MapEditorLandscaping_QueueCommandCallback)
     MenuItemActionHandler_MapEditorLandscaping_QueueCommandCallback;
 
-    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(CommandBuildingTypeInt buttonID), false, Address::SHC_3BB0A8C1_0x00444410,
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(CommandBuildingType buttonID), false, Address::SHC_3BB0A8C1_0x00444410,
         &OpenSHC::UI::MenuItemActionHandler_General_ToolbarButtonPressed)
     MenuItemActionHandler_General_ToolbarButtonPressed;
 
@@ -824,11 +824,11 @@ namespace UI_Func {
         BOOLEnum(__cdecl*)(int param_1), false, Address::SHC_3BB0A8C1_0x00465040, &OpenSHC::UI::HasEnoughGold)
     HasEnoughGold;
 
-    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(ResourceTypeInt _weapon, ...), false, Address::SHC_3BB0A8C1_0x00465110,
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(ResourceType _weapon, ...), false, Address::SHC_3BB0A8C1_0x00465110,
         &OpenSHC::UI::MenuItemRenderFunction_BuildingAndStatusMenu_WorkshopWeaponSelection)
     MenuItemRenderFunction_BuildingAndStatusMenu_WorkshopWeaponSelection;
 
-    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(ResourceTypeInt weapon, ...), false, Address::SHC_3BB0A8C1_0x00465200,
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(ResourceType weapon, ...), false, Address::SHC_3BB0A8C1_0x00465200,
         &OpenSHC::UI::MenuItemActionHandler_BuildingAndStatusMenu_WorkshopWeaponSelection)
     MenuItemActionHandler_BuildingAndStatusMenu_WorkshopWeaponSelection;
 
@@ -1076,11 +1076,11 @@ namespace UI_Func {
         &OpenSHC::UI::MenuItemActionHandler_Chat_TauntButtons)
     MenuItemActionHandler_Chat_TauntButtons;
 
-    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(ChooseNetworkServiceProviderButtonActionsInt param_1, ...), false,
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(ChooseNetworkServiceProviderButtonActions param_1, ...), false,
         Address::SHC_3BB0A8C1_0x004909E0, &OpenSHC::UI::MenuItemActionHandler_ChooseNetworkServiceProvider_Buttons)
     MenuItemActionHandler_ChooseNetworkServiceProvider_Buttons;
 
-    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(FindingNetworkSessions_ButtonParametersInt param_1, ...), false,
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(FindingNetworkSessions_ButtonParameters param_1, ...), false,
         Address::SHC_3BB0A8C1_0x00490D90, &OpenSHC::UI::MenuItemActionHandler_FindingNetworkSessions_Buttons)
     MenuItemActionHandler_FindingNetworkSessions_Buttons;
 
@@ -1245,7 +1245,7 @@ namespace UI_Func {
         &OpenSHC::UI::MenuItemActionHandler_VideoOptions_Main)
     MenuItemActionHandler_VideoOptions_Main;
 
-    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(SoundMenuClickTypeInt param_1, ...), false, Address::SHC_3BB0A8C1_0x004940B0,
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(SoundMenuClickType param_1, ...), false, Address::SHC_3BB0A8C1_0x004940B0,
         &OpenSHC::UI::MenuItemActionHandler_SoundOptions_Buttons)
     MenuItemActionHandler_SoundOptions_Buttons;
 

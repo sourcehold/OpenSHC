@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "OpenSHC/UI/Enums/DisplayElementIDInt.hpp"
+#include "OpenSHC/UI/Enums/DisplayElementID.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "WinDef.h"
@@ -16,7 +16,7 @@ namespace OpenSHC {
 namespace UI {
     namespace Rendering {
 
-        using OpenSHC::UI::Enums::DisplayElementIDInt;
+        using OpenSHC::UI::Enums::DisplayElementID;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         void __cdecl RenderConnectAndPathLinkageInfoTextDisplayElement(int posX, int posY, DWORD tileType);
@@ -219,7 +219,7 @@ namespace UI {
 
         void __cdecl RenderLoadAndSaveBar(int progressValueUnk);
 
-        void __cdecl TogglePlayerPingDisplayElementUnk(DisplayElementIDInt displayElementID, uint toggleValue);
+        void __cdecl TogglePlayerPingDisplayElementUnk(DisplayElementID displayElementID, uint toggleValue);
 
         void __stdcall RenderDisplayElementsUnk();
 

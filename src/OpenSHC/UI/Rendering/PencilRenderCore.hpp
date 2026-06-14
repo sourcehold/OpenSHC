@@ -9,7 +9,7 @@
 #pragma once
 
 #include "OpenSHC/Rendering/Enums/RenderTargetInt.hpp"
-#include "OpenSHC/UI/Enums/RoundedBoxEdgeRoundingLevelInt.hpp"
+#include "OpenSHC/UI/Enums/RoundedBoxEdgeRoundingLevel.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
@@ -17,7 +17,7 @@ namespace UI {
     namespace Rendering {
 
         using OpenSHC::Rendering::Enums::RenderTargetInt;
-        using OpenSHC::UI::Enums::RoundedBoxEdgeRoundingLevelInt;
+        using OpenSHC::UI::Enums::RoundedBoxEdgeRoundingLevel;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
@@ -78,14 +78,14 @@ namespace UI {
             void drawColorBox(int left, int top, int right, int bottom, ushort color);
 
             void drawBoxWithRoundedEdgesAndColor(
-                int left, int top, int right, int bottom, ushort color, RoundedBoxEdgeRoundingLevelInt roundingLevel);
+                int left, int top, int right, int bottom, ushort color, RoundedBoxEdgeRoundingLevel roundingLevel);
 
             void drawBlendedBlackBox(int left, int top, int right, int bottom, int blendStrengh);
 
             void dimBox(int left, int top, int right, int bottom);
 
             void drawBoxWithRoundedEdges(
-                int left, int top, int right, int bottom, RoundedBoxEdgeRoundingLevelInt roundingLevel);
+                int left, int top, int right, int bottom, RoundedBoxEdgeRoundingLevel roundingLevel);
 
             void drawBorderBox(int left, int top, int right, int bottom, ushort color);
 

@@ -2,19 +2,19 @@
   path: 'OpenSHC/Text/FontSizeClass.func.hpp'
 */
 
-#include "OpenSHC/IO/Graphics/GmIDInt.hpp"
+#include "OpenSHC/IO/Graphics/GmID.hpp"
 #include "OpenSHC/Rendering/Colors/BGR24.hpp"
-#include "OpenSHC/Text/FontRenderTypeInt.hpp"
+#include "OpenSHC/Text/FontRenderType.hpp"
 #include "OpenSHC/Text/FontSizeClass.hpp"
 namespace OpenSHC {
 namespace Text {
     namespace FontSizeClass_Func {
 
-        using OpenSHC::IO::Graphics::GmIDInt;
+        using OpenSHC::IO::Graphics::GmID;
         using OpenSHC::Rendering::Colors::BGR24;
-        using OpenSHC::Text::FontRenderTypeInt;
+        using OpenSHC::Text::FontRenderType;
 
-        MACRO_FUNCTION_RESOLVER(void (FontSizeClass::*)(GmIDInt, int, FontRenderTypeInt, int, int, int, int), false,
+        MACRO_FUNCTION_RESOLVER(void (FontSizeClass::*)(GmID, int, FontRenderType, int, int, int, int), false,
             Address::SHC_3BB0A8C1_0x00469A30, &FontSizeClass::setupFontSizeClassObject)
         setupFontSizeClassObject;
 

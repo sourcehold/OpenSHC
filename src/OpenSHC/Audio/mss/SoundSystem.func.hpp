@@ -4,8 +4,8 @@
 
 #include "OpenSHC/Audio/MSS/SoundSystem.hpp"
 #include "OpenSHC/Audio/MSS/UnkSoundFlagsAndLoopCount.hpp"
-#include "OpenSHC/Audio/MSS/enums/SHC_SoundStreamInt.hpp"
-#include "OpenSHC/DE/SHCDE/eMusicIDsInt.hpp"
+#include "OpenSHC/Audio/MSS/enums/SHC_SoundStream.hpp"
+#include "OpenSHC/DE/SHCDE/eMusicIDs.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
 namespace Audio {
@@ -13,8 +13,8 @@ namespace Audio {
         namespace SoundSystem_Func {
 
             using OpenSHC::Audio::MSS::UnkSoundFlagsAndLoopCount;
-            using OpenSHC::Audio::MSS::enums::SHC_SoundStreamInt;
-            using OpenSHC::DE::SHCDE::eMusicIDsInt;
+            using OpenSHC::Audio::MSS::enums::SHC_SoundStream;
+            using OpenSHC::DE::SHCDE::eMusicIDs;
             using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
             MACRO_FUNCTION_RESOLVER(
@@ -29,19 +29,19 @@ namespace Audio {
                 void (SoundSystem::*)(), false, Address::SHC_3BB0A8C1_0x00467830, &SoundSystem::endSoundStreamsUnk)
             endSoundStreamsUnk;
 
-            MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(SHC_SoundStreamInt), false, Address::SHC_3BB0A8C1_0x004799A0,
+            MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(SHC_SoundStream), false, Address::SHC_3BB0A8C1_0x004799A0,
                 &SoundSystem::endSoundStream)
             endSoundStream;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (SoundSystem::*)(SHC_SoundStreamInt), false,
-                Address::SHC_3BB0A8C1_0x00479A60, &SoundSystem::isSampleOrStreamPlaying)
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (SoundSystem::*)(SHC_SoundStream), false, Address::SHC_3BB0A8C1_0x00479A60,
+                &SoundSystem::isSampleOrStreamPlaying)
             isSampleOrStreamPlaying;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (SoundSystem::*)(), false, Address::SHC_3BB0A8C1_0x00479AB0,
                 &SoundSystem::shouldSoundXNotBePlaying)
             shouldSoundXNotBePlaying;
 
-            MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(SHC_SoundStreamInt, int), false,
+            MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(SHC_SoundStream, int), false,
                 Address::SHC_3BB0A8C1_0x00479AF0, &SoundSystem::setStreamAndSampleVolumeUnk)
             setStreamAndSampleVolumeUnk;
 
@@ -85,11 +85,11 @@ namespace Audio {
                 &SoundSystem::mapLoadingAndLaunchGameRelated1)
             mapLoadingAndLaunchGameRelated1;
 
-            MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(eMusicIDsInt), false, Address::SHC_3BB0A8C1_0x0047A1B0,
+            MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(eMusicIDs), false, Address::SHC_3BB0A8C1_0x0047A1B0,
                 &SoundSystem::setupVolumeAndSoundID)
             setupVolumeAndSoundID;
 
-            MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(eMusicIDsInt, int), false, Address::SHC_3BB0A8C1_0x0047A220,
+            MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(eMusicIDs, int), false, Address::SHC_3BB0A8C1_0x0047A220,
                 &SoundSystem::setupVolumeAndSoundIDWithMultiplier)
             setupVolumeAndSoundIDWithMultiplier;
 
@@ -149,7 +149,7 @@ namespace Audio {
                 &SoundSystem::handleBattleEndMusicTransition)
             handleBattleEndMusicTransition;
 
-            MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(SHC_SoundStreamInt, char*, UnkSoundFlagsAndLoopCount), false,
+            MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(SHC_SoundStream, char*, UnkSoundFlagsAndLoopCount), false,
                 Address::SHC_3BB0A8C1_0x0047B060, &SoundSystem::playSoundStreamUnk)
             playSoundStreamUnk;
 

@@ -2,14 +2,14 @@
   path: 'OpenSHC/Map/MapPropertiesState.func.hpp'
 */
 
-#include "OpenSHC/DE/SHCDE/eMappersInt.hpp"
+#include "OpenSHC/DE/SHCDE/eMappers.hpp"
 #include "OpenSHC/Map/MapPropertiesState.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
 namespace Map {
     namespace MapPropertiesState_Func {
 
-        using OpenSHC::DE::SHCDE::eMappersInt;
+        using OpenSHC::DE::SHCDE::eMappers;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (MapPropertiesState::*)(int), false, Address::SHC_3BB0A8C1_0x004B77E0,
@@ -56,7 +56,7 @@ namespace Map {
             &MapPropertiesState::commitBuildingAvailability)
         commitBuildingAvailability;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (MapPropertiesState::*)(eMappersInt), false, Address::SHC_3BB0A8C1_0x004BB010,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (MapPropertiesState::*)(eMappers), false, Address::SHC_3BB0A8C1_0x004BB010,
             &MapPropertiesState::isMapperAvailable)
         isMapperAvailable;
 

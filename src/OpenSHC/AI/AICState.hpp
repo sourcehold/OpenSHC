@@ -9,28 +9,28 @@
 #pragma once
 
 #include "OpenSHC/AI/AIC/AICSpecification.hpp"
-#include "OpenSHC/AI/AINervousDestroyBuildingCategoryInt.hpp"
-#include "OpenSHC/AI/AIUnitBehaviourTypeInt.hpp"
-#include "OpenSHC/AI/AIVUnitTypeInt.hpp"
+#include "OpenSHC/AI/AINervousDestroyBuildingCategory.hpp"
+#include "OpenSHC/AI/AIUnitBehaviourType.hpp"
+#include "OpenSHC/AI/AIVUnitType.hpp"
 #include "OpenSHC/AI/TileDistancePair.hpp"
-#include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
+#include "OpenSHC/Commands/CommandBuildingType.hpp"
 #include "OpenSHC/Game/Player/PlayerID.hpp"
-#include "OpenSHC/Game/Resources/ResourceTypeInt.hpp"
-#include "OpenSHC/Map/Units/UnitTypeInt.hpp"
+#include "OpenSHC/Game/Resources/ResourceType.hpp"
+#include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::AI::AINervousDestroyBuildingCategoryInt;
-    using OpenSHC::AI::AIUnitBehaviourTypeInt;
-    using OpenSHC::AI::AIVUnitTypeInt;
+    using OpenSHC::AI::AINervousDestroyBuildingCategory;
+    using OpenSHC::AI::AIUnitBehaviourType;
+    using OpenSHC::AI::AIVUnitType;
     using OpenSHC::AI::TileDistancePair;
     using OpenSHC::AI::AIC::AICSpecification;
-    using OpenSHC::Commands::CommandBuildingTypeInt;
+    using OpenSHC::Commands::CommandBuildingType;
     using OpenSHC::Game::Player::PlayerID;
-    using OpenSHC::Game::Resources::ResourceTypeInt;
-    using OpenSHC::Map::Units::UnitTypeInt;
+    using OpenSHC::Game::Resources::ResourceType;
+    using OpenSHC::Map::Units::UnitType;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
@@ -120,11 +120,11 @@ namespace AI {
 
         uint aiShouldBuildPitchrig(PlayerID param_1);
 
-        BOOLEnum shouldNotBeBuildingHovel(PlayerID playerID, CommandBuildingTypeInt param_2);
+        BOOLEnum shouldNotBeBuildingHovel(PlayerID playerID, CommandBuildingType param_2);
 
-        BOOLEnum shouldWaitWithBuildingNegativeFearFactor(int param_1, CommandBuildingTypeInt param_2);
+        BOOLEnum shouldWaitWithBuildingNegativeFearFactor(int param_1, CommandBuildingType param_2);
 
-        BOOLEnum shouldWaitWithBuildingAPositiveFearFactor(int playerID, CommandBuildingTypeInt param_2);
+        BOOLEnum shouldWaitWithBuildingAPositiveFearFactor(int playerID, CommandBuildingType param_2);
 
         BOOLEnum destroyHouse(int playerID);
 
@@ -132,19 +132,19 @@ namespace AI {
 
         undefined4 destroyBuildingIfNoWorker(int buildingID);
 
-        BOOLEnum shouldNotBuildMarketArmoryGranaryBarracksMercenarypost(int playerID, CommandBuildingTypeInt param_2);
+        BOOLEnum shouldNotBuildMarketArmoryGranaryBarracksMercenarypost(int playerID, CommandBuildingType param_2);
 
         void planToBuyWhenLowOnResourceAndSnoozeBuildings(int playerID);
 
         void setupWorkshopProductionType(int playerID, int buildingID);
 
-        void sellGoods(int playerID, ResourceTypeInt resourceType, int amount);
+        void sellGoods(int playerID, ResourceType resourceType, int amount);
 
-        BOOLEnum buyGoods(int playerID, ResourceTypeInt resourceType, int amount);
+        BOOLEnum buyGoods(int playerID, ResourceType resourceType, int amount);
 
-        AIUnitBehaviourTypeInt randomlySelectAttackUnitTypeToRecruit(int playerID);
+        AIUnitBehaviourType randomlySelectAttackUnitTypeToRecruit(int playerID);
 
-        UnitTypeInt getUnitTypeForUnitBehaviourType(int playerID, AIUnitBehaviourTypeInt unitBehaviourType);
+        UnitType getUnitTypeForUnitBehaviourType(int playerID, AIUnitBehaviourType unitBehaviourType);
 
         void generateSiegeCreationInformation(int playerID, int buildingID, int unitID);
 
@@ -239,7 +239,7 @@ namespace AI {
 
         BOOLEnum processAttForceRallyPercentage(int playerID);
 
-        void useAITribe_0x12_toPlaceSiegeTentsAndAssignEngineers(CommandBuildingTypeInt playerID);
+        void useAITribe_0x12_toPlaceSiegeTentsAndAssignEngineers(CommandBuildingType playerID);
 
         void useAITribe_0xe_toPlaceTunnels(int playerID);
 
@@ -287,10 +287,10 @@ namespace AI {
 
         BOOLEnum teamIsWeakRelativeToEnemy(int playerID, BOOLEnum param_2);
 
-        void destroyAnyBuildingInCategory(int playerID, AINervousDestroyBuildingCategoryInt buildingCategory);
+        void destroyAnyBuildingInCategory(int playerID, AINervousDestroyBuildingCategory buildingCategory);
 
         BOOLEnum isResourceLargerOrEqualThanMinimumGoodsRequiredAfterTrade(
-            int playerID, ResourceTypeInt resourceType, int buffer);
+            int playerID, ResourceType resourceType, int buffer);
 
         BOOLEnum aiOfTypeInCurrentGame(int param_1);
 
@@ -342,7 +342,7 @@ namespace AI {
 
         void decideOnTribeAttackLocation(uint tribeID__moatWasHit);
 
-        void requestGoods(int playerID, ResourceTypeInt resourceType, undefined4 amount);
+        void requestGoods(int playerID, ResourceType resourceType, undefined4 amount);
 
         void aiCreateSiegeUnits(int playerID);
 
@@ -364,7 +364,7 @@ namespace AI {
 
         void aiGiveRaidInstructions(int playerID);
 
-        void sendTribeToAIVLocationSlot(int tribeID, AIVUnitTypeInt aivUnitType, int slotIndex);
+        void sendTribeToAIVLocationSlot(int tribeID, AIVUnitType aivUnitType, int slotIndex);
 
         void computeAttackPossibilities(int playerID);
 
@@ -412,13 +412,13 @@ namespace AI {
 
         void updateAIBehaviour();
 
-        BOOLEnum shouldNotBeBuildingGranary(int playerID, CommandBuildingTypeInt param_2);
+        BOOLEnum shouldNotBeBuildingGranary(int playerID, CommandBuildingType param_2);
 
-        BOOLEnum shouldNotBeBuildingArmoury(PlayerID playerID, CommandBuildingTypeInt param_2);
+        BOOLEnum shouldNotBeBuildingArmoury(PlayerID playerID, CommandBuildingType param_2);
 
-        BOOLEnum shouldNotBuildKillingPits(int playerID, CommandBuildingTypeInt commandBuildingType);
+        BOOLEnum shouldNotBuildKillingPits(int playerID, CommandBuildingType commandBuildingType);
 
-        BOOLEnum woodCuttersHutWhileNoWoodAvailable(undefined4 playerID, CommandBuildingTypeInt param_2);
+        BOOLEnum woodCuttersHutWhileNoWoodAvailable(undefined4 playerID, CommandBuildingType param_2);
     };
 
     static_assert_cpp98_obj(sizeof(AICState) == 28048, AICState);

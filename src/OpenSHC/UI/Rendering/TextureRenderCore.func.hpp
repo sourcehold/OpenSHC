@@ -2,11 +2,11 @@
   path: 'OpenSHC/UI/Rendering/TextureRenderCore.func.hpp'
 */
 
-#include "OpenSHC/DE/SHCDE/eGMInt.hpp"
-#include "OpenSHC/IO/Graphics/GmIDInt.hpp"
+#include "OpenSHC/DE/SHCDE/eGM.hpp"
+#include "OpenSHC/IO/Graphics/GmID.hpp"
 #include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Rendering/Colors/RGB15.hpp"
-#include "OpenSHC/Text/FontRenderTypeInt.hpp"
+#include "OpenSHC/Text/FontRenderType.hpp"
 #include "OpenSHC/UI/Rendering/TextureRenderCore.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
@@ -14,18 +14,18 @@ namespace UI {
     namespace Rendering {
         namespace TextureRenderCore_Func {
 
-            using OpenSHC::DE::SHCDE::eGMInt;
-            using OpenSHC::IO::Graphics::GmIDInt;
+            using OpenSHC::DE::SHCDE::eGM;
+            using OpenSHC::IO::Graphics::GmID;
             using OpenSHC::Rendering::Colors::BGR24;
             using OpenSHC::Rendering::Colors::RGB15;
-            using OpenSHC::Text::FontRenderTypeInt;
+            using OpenSHC::Text::FontRenderType;
             using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
             MACRO_FUNCTION_RESOLVER(void (TextureRenderCore::*)(), false, Address::SHC_3BB0A8C1_0x0044C7E0,
                 &TextureRenderCore::Destructor_TextureRenderCore)
             Destructor_TextureRenderCore;
 
-            MACRO_FUNCTION_RESOLVER(void (TextureRenderCore::*)(GmIDInt, int), false, Address::SHC_3BB0A8C1_0x0044C850,
+            MACRO_FUNCTION_RESOLVER(void (TextureRenderCore::*)(GmID, int), false, Address::SHC_3BB0A8C1_0x0044C850,
                 &TextureRenderCore::drawLoadingBarUnk)
             drawLoadingBarUnk;
 
@@ -197,23 +197,23 @@ namespace UI {
                 &TextureRenderCore::transformUncompressedImageToRGB565)
             transformUncompressedImageToRGB565;
 
-            MACRO_FUNCTION_RESOLVER(void (TextureRenderCore::*)(eGMInt, int, int, int), false,
+            MACRO_FUNCTION_RESOLVER(void (TextureRenderCore::*)(eGM, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x00455300, &TextureRenderCore::renderGM)
             renderGM;
 
-            MACRO_FUNCTION_RESOLVER(void (TextureRenderCore::*)(GmIDInt, int, int, int, int), false,
+            MACRO_FUNCTION_RESOLVER(void (TextureRenderCore::*)(GmID, int, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x00455390, &TextureRenderCore::renderGMWithBlending)
             renderGMWithBlending;
 
-            MACRO_FUNCTION_RESOLVER(void (TextureRenderCore::*)(GmIDInt, int, int, int), false,
+            MACRO_FUNCTION_RESOLVER(void (TextureRenderCore::*)(GmID, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x004554A0, &TextureRenderCore::drawTgxGmOnFlaggedSurface)
             drawTgxGmOnFlaggedSurface;
 
-            MACRO_FUNCTION_RESOLVER(void (TextureRenderCore::*)(int, int, int, FontRenderTypeInt, int, ushort, int),
-                false, Address::SHC_3BB0A8C1_0x00455540, &TextureRenderCore::renderTextChar)
+            MACRO_FUNCTION_RESOLVER(void (TextureRenderCore::*)(int, int, int, FontRenderType, int, ushort, int), false,
+                Address::SHC_3BB0A8C1_0x00455540, &TextureRenderCore::renderTextChar)
             renderTextChar;
 
-            MACRO_FUNCTION_RESOLVER(void (TextureRenderCore::*)(GmIDInt, int, int, int, GmIDInt, int, int), false,
+            MACRO_FUNCTION_RESOLVER(void (TextureRenderCore::*)(GmID, int, int, int, GmID, int, int), false,
                 Address::SHC_3BB0A8C1_0x004557B0, &TextureRenderCore::renderGMWithAlphaMask)
             renderGMWithAlphaMask;
 
@@ -225,8 +225,8 @@ namespace UI {
                 &TextureRenderCore::adaptGmColorsToRGB565IfRequired)
             adaptGmColorsToRGB565IfRequired;
 
-            MACRO_FUNCTION_RESOLVER(void (TextureRenderCore::*)(GmIDInt, char*), false,
-                Address::SHC_3BB0A8C1_0x004559B0, &TextureRenderCore::loadGMFile)
+            MACRO_FUNCTION_RESOLVER(void (TextureRenderCore::*)(GmID, char*), false, Address::SHC_3BB0A8C1_0x004559B0,
+                &TextureRenderCore::loadGMFile)
             loadGMFile;
 
             MACRO_FUNCTION_RESOLVER(void (TextureRenderCore::*)(char*), false, Address::SHC_3BB0A8C1_0x00455C60,

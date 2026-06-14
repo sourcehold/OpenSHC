@@ -8,12 +8,12 @@
 
 #pragma once
 
-#include "OpenSHC/Audio/SFX/ResourceLackSFXInt.hpp"
+#include "OpenSHC/Audio/SFX/ResourceLackSFX.hpp"
 
 namespace OpenSHC {
 namespace Audio {
 
-    using OpenSHC::Audio::SFX::ResourceLackSFXInt;
+    using OpenSHC::Audio::SFX::ResourceLackSFX;
 
 #pragma pack(push, 1)
 
@@ -30,7 +30,7 @@ namespace Audio {
         MissingResourceState();
         ~MissingResourceState();
 
-        void playResourceLackSFX(int resourceTextElement, ResourceLackSFXInt resourceType);
+        void playResourceLackSFX(int resourceTextElement, ResourceLackSFX resourceType);
 
         void renderResourceMissingText(int posX, int posY, dword textGroup, dword unusedUnk);
     };

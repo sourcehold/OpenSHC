@@ -8,14 +8,14 @@
 
 #pragma once
 
-#include "OpenSHC/DE/SHCDE/eGMInt.hpp"
+#include "OpenSHC/DE/SHCDE/eGM.hpp"
 #include "OpenSHC/IO/Graphics/GMFileHeaderColorpalette.hpp"
 #include "OpenSHC/IO/Graphics/GfxRef.hpp"
-#include "OpenSHC/IO/Graphics/GmIDInt.hpp"
+#include "OpenSHC/IO/Graphics/GmID.hpp"
 #include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Rendering/Colors/RGB15.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTargetInt.hpp"
-#include "OpenSHC/Text/FontRenderTypeInt.hpp"
+#include "OpenSHC/Text/FontRenderType.hpp"
 #include "OpenSHC/UI/Rendering/Range.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -25,14 +25,14 @@ namespace OpenSHC {
 namespace UI {
     namespace Rendering {
 
-        using OpenSHC::DE::SHCDE::eGMInt;
+        using OpenSHC::DE::SHCDE::eGM;
         using OpenSHC::IO::Graphics::GfxRef;
         using OpenSHC::IO::Graphics::GMFileHeaderColorpalette;
-        using OpenSHC::IO::Graphics::GmIDInt;
+        using OpenSHC::IO::Graphics::GmID;
         using OpenSHC::Rendering::Colors::BGR24;
         using OpenSHC::Rendering::Colors::RGB15;
         using OpenSHC::Rendering::Enums::RenderTargetInt;
-        using OpenSHC::Text::FontRenderTypeInt;
+        using OpenSHC::Text::FontRenderType;
         using OpenSHC::UI::Rendering::Range;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
@@ -123,7 +123,7 @@ namespace UI {
 
             void Destructor_TextureRenderCore();
 
-            void drawLoadingBarUnk(GmIDInt currentGmId, int barLengthUnk);
+            void drawLoadingBarUnk(GmID currentGmId, int barLengthUnk);
 
             void transformGmColorTableFromRGB555To565IfRequired(int gmID);
 
@@ -215,23 +215,23 @@ namespace UI {
 
             void transformUncompressedImageToRGB565(int imageIndex);
 
-            void renderGM(eGMInt gmID, int imageID, int drawX, int drawY);
+            void renderGM(eGM gmID, int imageID, int drawX, int drawY);
 
-            void renderGMWithBlending(GmIDInt GmID, int imageID, int drawX, int drawY, int blendStrengthUnk);
+            void renderGMWithBlending(GmID GmID, int imageID, int drawX, int drawY, int blendStrengthUnk);
 
-            void drawTgxGmOnFlaggedSurface(GmIDInt gmId, int imageIndexInGm, int xPos, int yPos);
+            void drawTgxGmOnFlaggedSurface(GmID gmId, int imageIndexInGm, int xPos, int yPos);
 
-            void renderTextChar(int xPos, int yPos, int imageId, FontRenderTypeInt renderType, int lineHeight,
+            void renderTextChar(int xPos, int yPos, int imageId, FontRenderType renderType, int lineHeight,
                 ushort fillColor, int blendStrength);
 
             void renderGMWithAlphaMask(
-                GmIDInt gmID, int imageID, int xPos, int yPos, GmIDInt maskGmID, int alphaImageID, int blendStrength);
+                GmID gmID, int imageID, int xPos, int yPos, GmID maskGmID, int alphaImageID, int blendStrength);
 
             void drawGfxOnFlaggedSurface(int gfxIndex, int xPos, int yPos);
 
             void adaptGmColorsToRGB565IfRequired(int gmID, int imageIndex);
 
-            void loadGMFile(GmIDInt gmID, char* gmFileName);
+            void loadGMFile(GmID gmID, char* gmFileName);
 
             void loadGmFiles(char* fileNameArray);
         };

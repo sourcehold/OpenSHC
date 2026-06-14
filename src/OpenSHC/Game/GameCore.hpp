@@ -15,6 +15,7 @@
 #include "OpenSHC/Rendering/Enums/DirectDrawStatusInt.hpp"
 #include "OpenSHC/UI/ActiveMenuTab.hpp"
 #include "OpenSHC/UI/Enums/BuildMenuTabTypeShort.hpp"
+#include "OpenSHC/UI/Enums/MenuViewType.hpp"
 #include "OpenSHC/UI/Enums/MenuViewTypeInt.hpp"
 #include "OpenSHC/UI/MenuItemActionHandler.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -32,6 +33,7 @@ namespace Game {
     using OpenSHC::UI::ActiveMenuTab;
     using OpenSHC::UI::MenuItemActionHandler;
     using OpenSHC::UI::Enums::BuildMenuTabTypeShort;
+    using OpenSHC::UI::Enums::MenuViewType;
     using OpenSHC::UI::Enums::MenuViewTypeInt;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
@@ -237,7 +239,7 @@ namespace Game {
 
         void meth_0x46b320();
 
-        void switchToMenuView(MenuViewTypeInt menuID, int delay);
+        void switchToMenuView(MenuViewType menuID, int delay);
 
         void processMenuViewSwitch();
 

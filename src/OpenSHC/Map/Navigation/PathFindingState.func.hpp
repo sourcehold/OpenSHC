@@ -3,7 +3,7 @@
 */
 
 #include "OpenSHC/Map/Navigation/PathFindingState.hpp"
-#include "OpenSHC/Map/Units/UnitTypeInt.hpp"
+#include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "WinDef.h"
@@ -12,7 +12,7 @@ namespace Map {
     namespace Navigation {
         namespace PathFindingState_Func {
 
-            using OpenSHC::Map::Units::UnitTypeInt;
+            using OpenSHC::Map::Units::UnitType;
             using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (PathFindingState::*)(), false, Address::SHC_3BB0A8C1_0x00496E20,
@@ -389,7 +389,7 @@ namespace Map {
                 &PathFindingState::setMoveDestinationPairs)
             setMoveDestinationPairs;
 
-            MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int, int, int, UnitTypeInt, undefined4), false,
+            MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int, int, int, UnitType, undefined4), false,
                 Address::SHC_3BB0A8C1_0x004A67D0, &PathFindingState::spawnUnitAndAddToTribe)
             spawnUnitAndAddToTribe;
 

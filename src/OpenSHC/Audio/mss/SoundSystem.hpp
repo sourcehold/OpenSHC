@@ -9,8 +9,8 @@
 #pragma once
 
 #include "OpenSHC/Audio/MSS/UnkSoundFlagsAndLoopCount.hpp"
-#include "OpenSHC/Audio/MSS/enums/SHC_SoundStreamInt.hpp"
-#include "OpenSHC/DE/SHCDE/eMusicIDsInt.hpp"
+#include "OpenSHC/Audio/MSS/enums/SHC_SoundStream.hpp"
+#include "OpenSHC/DE/SHCDE/eMusicIDs.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "Mss32.h"
@@ -21,8 +21,8 @@ namespace Audio {
     namespace MSS {
 
         using OpenSHC::Audio::MSS::UnkSoundFlagsAndLoopCount;
-        using OpenSHC::Audio::MSS::enums::SHC_SoundStreamInt;
-        using OpenSHC::DE::SHCDE::eMusicIDsInt;
+        using OpenSHC::Audio::MSS::enums::SHC_SoundStream;
+        using OpenSHC::DE::SHCDE::eMusicIDs;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
@@ -82,13 +82,13 @@ namespace Audio {
 
             void endSoundStreamsUnk();
 
-            void endSoundStream(SHC_SoundStreamInt sndStreamIndex);
+            void endSoundStream(SHC_SoundStream sndStreamIndex);
 
-            BOOLEnum isSampleOrStreamPlaying(SHC_SoundStreamInt streamIndex);
+            BOOLEnum isSampleOrStreamPlaying(SHC_SoundStream streamIndex);
 
             BOOLEnum shouldSoundXNotBePlaying();
 
-            void setStreamAndSampleVolumeUnk(SHC_SoundStreamInt sndStreamIndex, int volumeParam);
+            void setStreamAndSampleVolumeUnk(SHC_SoundStream sndStreamIndex, int volumeParam);
 
             void meth_0x479b70();
 
@@ -110,9 +110,9 @@ namespace Audio {
 
             void mapLoadingAndLaunchGameRelated1();
 
-            void setupVolumeAndSoundID(eMusicIDsInt soundID);
+            void setupVolumeAndSoundID(eMusicIDs soundID);
 
-            void setupVolumeAndSoundIDWithMultiplier(eMusicIDsInt soundID, int soundMultiplier);
+            void setupVolumeAndSoundIDWithMultiplier(eMusicIDs soundID, int soundMultiplier);
 
             void meth_0x47a290();
 
@@ -143,7 +143,7 @@ namespace Audio {
             void handleBattleEndMusicTransition();
 
             void playSoundStreamUnk(
-                SHC_SoundStreamInt sndStreamIndex, char* filename, UnkSoundFlagsAndLoopCount flagsAndLoopCount);
+                SHC_SoundStream sndStreamIndex, char* filename, UnkSoundFlagsAndLoopCount flagsAndLoopCount);
 
             void meth_0x47b250(char* filename);
 

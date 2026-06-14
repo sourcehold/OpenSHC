@@ -2,28 +2,28 @@
   path: 'OpenSHC/Map/Entities/EntityState.func.hpp'
 */
 
-#include "OpenSHC/IO/PackagedFileMagicNumInt.hpp"
+#include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Entities/EntityState.hpp"
-#include "OpenSHC/Map/Entities/EntityTypeInt.hpp"
+#include "OpenSHC/Map/Entities/EntityType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
 namespace Map {
     namespace Entities {
         namespace EntityState_Func {
 
-            using OpenSHC::IO::PackagedFileMagicNumInt;
-            using OpenSHC::Map::Entities::EntityTypeInt;
+            using OpenSHC::IO::PackagedFileMagicNum;
+            using OpenSHC::Map::Entities::EntityType;
             using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
             MACRO_FUNCTION_RESOLVER(void (EntityState::*)(), false, Address::SHC_3BB0A8C1_0x004010E0,
                 &EntityState::clearEntityArrayAndSec1077)
             clearEntityArrayAndSec1077;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (EntityState::*)(int, EntityTypeInt), false,
-                Address::SHC_3BB0A8C1_0x00401150, &EntityState::meth_0x401150)
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (EntityState::*)(int, EntityType), false, Address::SHC_3BB0A8C1_0x00401150,
+                &EntityState::meth_0x401150)
             meth_0x401150;
 
-            MACRO_FUNCTION_RESOLVER(void (EntityState::*)(int, EntityTypeInt), false, Address::SHC_3BB0A8C1_0x004011D0,
+            MACRO_FUNCTION_RESOLVER(void (EntityState::*)(int, EntityType), false, Address::SHC_3BB0A8C1_0x004011D0,
                 &EntityState::setProjectileEntityValues2)
             setProjectileEntityValues2;
 
@@ -152,7 +152,7 @@ namespace Map {
             arrowShootingRelated;
 
             MACRO_FUNCTION_RESOLVER(
-                uint (EntityState::*)(int, undefined4, uint, int, int, int, int, int, int, EntityTypeInt, int), false,
+                uint (EntityState::*)(int, undefined4, uint, int, int, int, int, int, int, EntityType, int), false,
                 Address::SHC_3BB0A8C1_0x00404AE0, &EntityState::spawnProjectileEntity)
             spawnProjectileEntity;
 
@@ -192,7 +192,7 @@ namespace Map {
                 &EntityState::moveProjectileEntity)
             moveProjectileEntity;
 
-            MACRO_FUNCTION_RESOLVER(void (EntityState::*)(PackagedFileMagicNumInt, PackagedFileMagicNumInt), false,
+            MACRO_FUNCTION_RESOLVER(void (EntityState::*)(PackagedFileMagicNum, PackagedFileMagicNum), false,
                 Address::SHC_3BB0A8C1_0x00408770, &EntityState::FUN_00408770)
             FUN_00408770;
 

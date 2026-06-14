@@ -8,30 +8,30 @@
 
 #pragma once
 
-#include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
-#include "OpenSHC/IO/PackagedFileMagicNumInt.hpp"
-#include "OpenSHC/Map/Units/Behavior/UnitStanceEnumShort.hpp"
-#include "OpenSHC/Map/Units/Instructions/UnitMatchSpeedEnumInt.hpp"
-#include "OpenSHC/Map/Units/SomeTribeBehaviorTypeInt.hpp"
+#include "OpenSHC/Commands/CommandBuildingType.hpp"
+#include "OpenSHC/IO/PackagedFileMagicNum.hpp"
+#include "OpenSHC/Map/Units/Behavior/UnitStanceEnum.hpp"
+#include "OpenSHC/Map/Units/Instructions/UnitMatchSpeedEnum.hpp"
+#include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
 #include "OpenSHC/Map/Units/Tribe.hpp"
 #include "OpenSHC/Map/Units/UnitIDMovementDistancePair.hpp"
-#include "OpenSHC/Map/Units/UnitInstructionTypeInt.hpp"
-#include "OpenSHC/Map/Units/UnitTypeInt.hpp"
+#include "OpenSHC/Map/Units/UnitInstructionType.hpp"
+#include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Commands::CommandBuildingTypeInt;
-        using OpenSHC::IO::PackagedFileMagicNumInt;
-        using OpenSHC::Map::Units::SomeTribeBehaviorTypeInt;
+        using OpenSHC::Commands::CommandBuildingType;
+        using OpenSHC::IO::PackagedFileMagicNum;
+        using OpenSHC::Map::Units::SomeTribeBehaviorType;
         using OpenSHC::Map::Units::Tribe;
         using OpenSHC::Map::Units::UnitIDMovementDistancePair;
-        using OpenSHC::Map::Units::UnitInstructionTypeInt;
-        using OpenSHC::Map::Units::UnitTypeInt;
-        using OpenSHC::Map::Units::Behavior::UnitStanceEnumShort;
-        using OpenSHC::Map::Units::Instructions::UnitMatchSpeedEnumInt;
+        using OpenSHC::Map::Units::UnitInstructionType;
+        using OpenSHC::Map::Units::UnitType;
+        using OpenSHC::Map::Units::Behavior::UnitStanceEnum;
+        using OpenSHC::Map::Units::Instructions::UnitMatchSpeedEnum;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
@@ -84,7 +84,7 @@ namespace Map {
 
             void calculatePathPlanToUnitUnk(int targetUnitID, int unitID, int* unitCurrentX, int* unitCurrentY);
 
-            UnitTypeInt FUN_00521720(undefined4 tribeID, int* maximumCount);
+            UnitType FUN_00521720(undefined4 tribeID, int* maximumCount);
 
             void meth_0x5217e0(int param_1);
 
@@ -102,7 +102,7 @@ namespace Map {
 
             void meth_0x522160(undefined4 param_1);
 
-            void applyTribeBehaviorType(int attackWave, SomeTribeBehaviorTypeInt tribeBehaviorType);
+            void applyTribeBehaviorType(int attackWave, SomeTribeBehaviorType tribeBehaviorType);
 
             void FUN_00522210(int param_1, int param_2, int param_3);
 
@@ -138,7 +138,7 @@ namespace Map {
 
             void queueUnitStance(undefined4 stanceID, undefined4 param_2);
 
-            void setUnitStance(int tribeID, UnitStanceEnumShort unitStance);
+            void setUnitStance(int tribeID, UnitStanceEnum unitStance);
 
             void addRallyPoint(int section1016ID, short destinationX, short destinationY, int step);
 
@@ -148,17 +148,17 @@ namespace Map {
 
             void meth_0x522ef0(undefined4 tribeID, int smallerSize);
 
-            void FUN_00522f70(undefined4 param_1, int param_2, int param_3, int param_4, UnitTypeInt param_5,
-                int param_6, int param_7);
+            void FUN_00522f70(
+                undefined4 param_1, int param_2, int param_3, int param_4, UnitType param_5, int param_6, int param_7);
 
             dword spawnUnitsIntoNewTribe(undefined4 counter, int tribeType, int x, int y, int playerID,
-                UnitTypeInt unitType, UnitTypeInt unitType2, int unitType1Count, int unitType2Count);
+                UnitType unitType, UnitType unitType2, int unitType1Count, int unitType2Count);
 
             dword meth_0x523190(short param_1, undefined4 param_2, int param_3, int param_4, int param_5,
-                UnitTypeInt param_6, int param_7);
+                UnitType param_6, int param_7);
 
             dword spawnUnitsAroundLocation(
-                undefined4 param_1, int aroundX, int aroundY, int playerID, UnitTypeInt unitType, int count);
+                undefined4 param_1, int aroundX, int aroundY, int playerID, UnitType unitType, int count);
 
             void storeDeerXAndYinMapInfo(undefined4 x, undefined4 y);
 
@@ -190,7 +190,7 @@ namespace Map {
 
             void drawFlagsAndUnitDestinations(int tribeID);
 
-            void meth_0x523ef0(PackagedFileMagicNumInt receivedMapVersion, PackagedFileMagicNumInt packagerMapVersion);
+            void meth_0x523ef0(PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
 
             undefined4 meth_0x523f70(int param_1);
 
@@ -206,12 +206,12 @@ namespace Map {
 
             BOOLEnum selectionContainsHorses(int param_1);
 
-            UnitTypeInt getMajorityArcherTypeEuropeanOrArabian(int selectionID);
+            UnitType getMajorityArcherTypeEuropeanOrArabian(int selectionID);
 
             undefined4 applyMoveCommandOrRallyCommandToTribe(
                 int tribeID, undefined4 x1, undefined4 y1, undefined4 isRallying, int storeAsRallyPoint);
 
-            undefined4 aiAttackWaveUnk(int tribeID, SomeTribeBehaviorTypeInt targetType);
+            undefined4 aiAttackWaveUnk(int tribeID, SomeTribeBehaviorType targetType);
 
             undefined4 meth_0x524890(int param_1);
 
@@ -259,9 +259,9 @@ namespace Map {
 
             int popUnitFromTribe(int tribeID);
 
-            dword createAnimal(CommandBuildingTypeInt animalType, uint x, uint y, int tile);
+            dword createAnimal(CommandBuildingType animalType, uint x, uint y, int tile);
 
-            BOOLEnum spawnDeerLionOrRabbit(int tribeID, int param_2, UnitTypeInt unitType);
+            BOOLEnum spawnDeerLionOrRabbit(int tribeID, int param_2, UnitType unitType);
 
             undefined4 meth_0x5260b0(int param_1, int param_2, int param_3, int param_4);
 
@@ -270,10 +270,10 @@ namespace Map {
             void meth_0x5262a0();
 
             void upgradeMapTribesState(
-                PackagedFileMagicNumInt receivedMapVersion, PackagedFileMagicNumInt packagerMapVersion);
+                PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
 
-            undefined4 giveTribeMoveInstruction(int tribeID, uint x1, uint y1, int rallyBool, int storeAsRallyPoint,
-                UnitMatchSpeedEnumInt speedMatching);
+            undefined4 giveTribeMoveInstruction(
+                int tribeID, uint x1, uint y1, int rallyBool, int storeAsRallyPoint, UnitMatchSpeedEnum speedMatching);
 
             undefined4 commandUnitsToLocation(
                 int tribeID, uint destinationX, uint destinationY, undefined4 matchUnitSpeeds);
@@ -285,7 +285,7 @@ namespace Map {
             void siegeThatRelatedUnk();
 
             undefined4 giveTribeAnInstruction(
-                int tribeID, UnitInstructionTypeInt unitInstructionType, int id__x__tile, int unitUID__Y, int param_5);
+                int tribeID, UnitInstructionType unitInstructionType, int id__x__tile, int unitUID__Y, int param_5);
 
             void meth_0x52a640(int param_1);
 

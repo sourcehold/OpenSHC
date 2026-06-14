@@ -2,16 +2,16 @@
   path: 'OpenSHC/Map/LandscapeState.func.hpp'
 */
 
-#include "OpenSHC/IO/PackagedFileMagicNumInt.hpp"
+#include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/LandscapeState.hpp"
-#include "OpenSHC/Map/Trees/TreeTypeInt.hpp"
+#include "OpenSHC/Map/Trees/TreeType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
 namespace Map {
     namespace LandscapeState_Func {
 
-        using OpenSHC::IO::PackagedFileMagicNumInt;
-        using OpenSHC::Map::Trees::TreeTypeInt;
+        using OpenSHC::IO::PackagedFileMagicNum;
+        using OpenSHC::Map::Trees::TreeType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         MACRO_FUNCTION_RESOLVER(undefined4 (LandscapeState::*)(undefined4), false, Address::SHC_3BB0A8C1_0x004F1A60,
@@ -27,7 +27,7 @@ namespace Map {
         clearRocksAndTrees;
 
         MACRO_FUNCTION_RESOLVER(
-            int (LandscapeState::*)(undefined4, undefined4, TreeTypeInt, undefined4, int, undefined4, int), false,
+            int (LandscapeState::*)(undefined4, undefined4, TreeType, undefined4, int, undefined4, int), false,
             Address::SHC_3BB0A8C1_0x004F1CE0, &LandscapeState::createTree)
         createTree;
 
@@ -123,7 +123,7 @@ namespace Map {
             &LandscapeState::findTree)
         findTree;
 
-        MACRO_FUNCTION_RESOLVER(void (LandscapeState::*)(PackagedFileMagicNumInt, PackagedFileMagicNumInt), false,
+        MACRO_FUNCTION_RESOLVER(void (LandscapeState::*)(PackagedFileMagicNum, PackagedFileMagicNum), false,
             Address::SHC_3BB0A8C1_0x004F3D30, &LandscapeState::FUN_004f3d30)
         FUN_004f3d30;
 

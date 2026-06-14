@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include "OpenSHC/IO/FileResourceType.hpp"
 #include "OpenSHC/IO/FileResourceTypeInt.hpp"
 #include "OpenSHC/IO/Helpers/OPENFILENAMEA_Truncated.hpp"
 #include "OpenSHC/Map/MapMetaInfo.hpp"
@@ -20,6 +21,7 @@ namespace OpenSHC {
 namespace IO {
 
     using HoldStrong_lib::StringObject;
+    using OpenSHC::IO::FileResourceType;
     using OpenSHC::IO::FileResourceTypeInt;
     using OpenSHC::IO::Helpers::OPENFILENAMEA_Truncated;
     using OpenSHC::Map::MapMetaInfo;
@@ -122,7 +124,7 @@ namespace IO {
 
         void discoverMapFiles(char* param_1);
 
-        void resolveResourceFileName(FileResourceTypeInt resourceType, char* shortFileName);
+        void resolveResourceFileName(FileResourceType resourceType, char* shortFileName);
 
         void loadMapHeaders(BOOLEnum drawLoadingBar);
 

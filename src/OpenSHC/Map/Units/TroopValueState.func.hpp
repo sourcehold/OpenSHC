@@ -2,27 +2,25 @@
   path: 'OpenSHC/Map/Units/TroopValueState.func.hpp'
 */
 
-#include "OpenSHC/AI/Tribes/AITribeTypeShort.hpp"
-#include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
-#include "OpenSHC/IO/PackagedFileMagicNumInt.hpp"
-#include "OpenSHC/Map/Units/SomeTribeBehaviorTypeInt.hpp"
-#include "OpenSHC/Map/Units/SomeTribeBehaviorTypeShort.hpp"
+#include "OpenSHC/AI/Tribes/AITribeType.hpp"
+#include "OpenSHC/Commands/CommandBuildingType.hpp"
+#include "OpenSHC/IO/PackagedFileMagicNum.hpp"
+#include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
 #include "OpenSHC/Map/Units/TroopValueState.hpp"
-#include "OpenSHC/Map/Units/UnitInstructionTypeInt.hpp"
-#include "OpenSHC/Map/Units/UnitTypeInt.hpp"
+#include "OpenSHC/Map/Units/UnitInstructionType.hpp"
+#include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
 namespace Map {
     namespace Units {
         namespace TroopValueState_Func {
 
-            using OpenSHC::AI::Tribes::AITribeTypeShort;
-            using OpenSHC::Commands::CommandBuildingTypeInt;
-            using OpenSHC::IO::PackagedFileMagicNumInt;
-            using OpenSHC::Map::Units::SomeTribeBehaviorTypeInt;
-            using OpenSHC::Map::Units::SomeTribeBehaviorTypeShort;
-            using OpenSHC::Map::Units::UnitInstructionTypeInt;
-            using OpenSHC::Map::Units::UnitTypeInt;
+            using OpenSHC::AI::Tribes::AITribeType;
+            using OpenSHC::Commands::CommandBuildingType;
+            using OpenSHC::IO::PackagedFileMagicNum;
+            using OpenSHC::Map::Units::SomeTribeBehaviorType;
+            using OpenSHC::Map::Units::UnitInstructionType;
+            using OpenSHC::Map::Units::UnitType;
             using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
             MACRO_FUNCTION_RESOLVER(
@@ -41,22 +39,20 @@ namespace Map {
                 &TroopValueState::FUN_00518350)
             FUN_00518350;
 
-            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int, int, int, SomeTribeBehaviorTypeInt), false,
+            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int, int, int, SomeTribeBehaviorType), false,
                 Address::SHC_3BB0A8C1_0x00518380, &TroopValueState::sortAttackInfoTribeIDArrayBasedOn)
             sortAttackInfoTribeIDArrayBasedOn;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (TroopValueState::*)(SomeTribeBehaviorTypeInt, SomeTribeBehaviorTypeInt, int, int), false,
-                Address::SHC_3BB0A8C1_0x00518870, &TroopValueState::applyTribeBehaviorTypes)
+            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(SomeTribeBehaviorType, SomeTribeBehaviorType, int, int),
+                false, Address::SHC_3BB0A8C1_0x00518870, &TroopValueState::applyTribeBehaviorTypes)
             applyTribeBehaviorTypes;
 
-            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(SomeTribeBehaviorTypeShort, undefined4, short, short),
-                false, Address::SHC_3BB0A8C1_0x00518930, &TroopValueState::FUN_00518930)
+            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(SomeTribeBehaviorType, undefined4, short, short), false,
+                Address::SHC_3BB0A8C1_0x00518930, &TroopValueState::FUN_00518930)
             FUN_00518930;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (TroopValueState::*)(int, int, SomeTribeBehaviorTypeShort, undefined4, undefined4), false,
-                Address::SHC_3BB0A8C1_0x00518A10, &TroopValueState::FUN_00518a10)
+            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int, int, SomeTribeBehaviorType, undefined4, undefined4),
+                false, Address::SHC_3BB0A8C1_0x00518A10, &TroopValueState::FUN_00518a10)
             FUN_00518a10;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (TroopValueState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00518BB0,
@@ -219,13 +215,12 @@ namespace Map {
                 void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051B290, &TroopValueState::FUN_0051b290)
             FUN_0051b290;
 
-            MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(int, CommandBuildingTypeInt), false,
+            MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(int, CommandBuildingType), false,
                 Address::SHC_3BB0A8C1_0x0051B310, &TroopValueState::placeSiegeTentAndAssignEngineersUnk)
             placeSiegeTentAndAssignEngineersUnk;
 
-            MACRO_FUNCTION_RESOLVER(
-                BOOLEnum (TroopValueState::*)(int, CommandBuildingTypeInt, uint, UnitInstructionTypeInt), false,
-                Address::SHC_3BB0A8C1_0x0051B420,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (TroopValueState::*)(int, CommandBuildingType, uint, UnitInstructionType),
+                false, Address::SHC_3BB0A8C1_0x0051B420,
                 &TroopValueState::placeSiegeTentOrTunnelAtSuitableLocationAndAssignEngineers)
             placeSiegeTentOrTunnelAtSuitableLocationAndAssignEngineers;
 
@@ -249,7 +244,7 @@ namespace Map {
                 &TroopValueState::placeTunnelForEveryTunneler)
             placeTunnelForEveryTunneler;
 
-            MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(undefined4, int, AITribeTypeShort, undefined4), false,
+            MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(undefined4, int, AITribeType, undefined4), false,
                 Address::SHC_3BB0A8C1_0x0051BC70, &TroopValueState::addUnitToNewTribe)
             addUnitToNewTribe;
 
@@ -281,7 +276,7 @@ namespace Map {
                 void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051C2D0, &TroopValueState::meth_0x51c2d0)
             meth_0x51c2d0;
 
-            MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(UnitTypeInt), false, Address::SHC_3BB0A8C1_0x0051C360,
+            MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(UnitType), false, Address::SHC_3BB0A8C1_0x0051C360,
                 &TroopValueState::getValueOfTroopType)
             getValueOfTroopType;
 
@@ -373,7 +368,7 @@ namespace Map {
                 &TroopValueState::recomputeTotalTroopValueOfTroopsNearKeep)
             recomputeTotalTroopValueOfTroopsNearKeep;
 
-            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(PackagedFileMagicNumInt, PackagedFileMagicNumInt), false,
+            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(PackagedFileMagicNum, PackagedFileMagicNum), false,
                 Address::SHC_3BB0A8C1_0x0051FB80, &TroopValueState::uselessFunction)
             uselessFunction;
 

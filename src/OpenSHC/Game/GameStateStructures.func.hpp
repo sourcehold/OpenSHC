@@ -2,18 +2,18 @@
   path: 'OpenSHC/Game/GameStateStructures.func.hpp'
 */
 
-#include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
+#include "OpenSHC/Commands/CommandBuildingType.hpp"
 #include "OpenSHC/Game/GameStateStructures.hpp"
-#include "OpenSHC/Game/Resources/ResourceTypeInt.hpp"
-#include "OpenSHC/IO/PackagedFileMagicNumInt.hpp"
+#include "OpenSHC/Game/Resources/ResourceType.hpp"
+#include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
 namespace Game {
     namespace GameStateStructures_Func {
 
-        using OpenSHC::Commands::CommandBuildingTypeInt;
-        using OpenSHC::Game::Resources::ResourceTypeInt;
-        using OpenSHC::IO::PackagedFileMagicNumInt;
+        using OpenSHC::Commands::CommandBuildingType;
+        using OpenSHC::Game::Resources::ResourceType;
+        using OpenSHC::IO::PackagedFileMagicNum;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         MACRO_FUNCTION_RESOLVER(bool (GameStateStructures::*)(int, int), false, Address::SHC_3BB0A8C1_0x00401090,
@@ -140,7 +140,7 @@ namespace Game {
             &GameStateStructures::destroyPlayerCompletely)
         destroyPlayerCompletely;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (GameStateStructures::*)(CommandBuildingTypeInt, int, BOOLEnum), false,
+        MACRO_FUNCTION_RESOLVER(undefined4 (GameStateStructures::*)(CommandBuildingType, int, BOOLEnum), false,
             Address::SHC_3BB0A8C1_0x00457B80, &GameStateStructures::checkRequiredResourcesForBuildingOrPlanToBuy)
         checkRequiredResourcesForBuildingOrPlanToBuy;
 
@@ -188,7 +188,7 @@ namespace Game {
             &GameStateStructures::meth_0x458700)
         meth_0x458700;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (GameStateStructures::*)(ResourceTypeInt), false,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (GameStateStructures::*)(ResourceType), false,
             Address::SHC_3BB0A8C1_0x00458740, &GameStateStructures::isResourceTypeTradeable)
         isResourceTypeTradeable;
 
@@ -196,11 +196,11 @@ namespace Game {
             &GameStateStructures::anyGoodsAreAllowedForSale)
         anyGoodsAreAllowedForSale;
 
-        MACRO_FUNCTION_RESOLVER(int (GameStateStructures::*)(ResourceTypeInt), false, Address::SHC_3BB0A8C1_0x004587A0,
+        MACRO_FUNCTION_RESOLVER(int (GameStateStructures::*)(ResourceType), false, Address::SHC_3BB0A8C1_0x004587A0,
             &GameStateStructures::getNextGoodFilteringUnallowed)
         getNextGoodFilteringUnallowed;
 
-        MACRO_FUNCTION_RESOLVER(int (GameStateStructures::*)(ResourceTypeInt), false, Address::SHC_3BB0A8C1_0x00458820,
+        MACRO_FUNCTION_RESOLVER(int (GameStateStructures::*)(ResourceType), false, Address::SHC_3BB0A8C1_0x00458820,
             &GameStateStructures::getPreviousGoodsFilteringUnallowed)
         getPreviousGoodsFilteringUnallowed;
 
@@ -216,7 +216,7 @@ namespace Game {
             &GameStateStructures::meth_0x4588d0)
         meth_0x4588d0;
 
-        MACRO_FUNCTION_RESOLVER(int (GameStateStructures::*)(ResourceTypeInt), false, Address::SHC_3BB0A8C1_0x004588F0,
+        MACRO_FUNCTION_RESOLVER(int (GameStateStructures::*)(ResourceType), false, Address::SHC_3BB0A8C1_0x004588F0,
             &GameStateStructures::getSalePriceOfGood)
         getSalePriceOfGood;
 
@@ -400,7 +400,7 @@ namespace Game {
             &GameStateStructures::spawnPoisonCloudsAtRandomStorageOrArmyBuilding)
         spawnPoisonCloudsAtRandomStorageOrArmyBuilding;
 
-        MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(PackagedFileMagicNumInt, PackagedFileMagicNumInt), false,
+        MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(PackagedFileMagicNum, PackagedFileMagicNum), false,
             Address::SHC_3BB0A8C1_0x0045C1C0, &GameStateStructures::meth_0x45c1c0)
         meth_0x45c1c0;
 

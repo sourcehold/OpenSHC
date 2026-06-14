@@ -8,16 +8,15 @@
 
 #pragma once
 
-#include "OpenSHC/AI/AIVUnitTypeInt.hpp"
-#include "OpenSHC/Game/Resources/ResourceTypeInt.hpp"
-#include "OpenSHC/Map/Buildings/BuildingTypeInt.hpp"
+#include "OpenSHC/AI/AIVUnitType.hpp"
+#include "OpenSHC/Game/Resources/ResourceType.hpp"
+#include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
-#include "OpenSHC/Map/Units/EuroRecruitableStateInt.hpp"
-#include "OpenSHC/Map/Units/States/UnitStateShort.hpp"
-#include "OpenSHC/Map/Units/UnitTypeInt.hpp"
-#include "OpenSHC/Rendering/Enums/DirectDrawStatusInt.hpp"
+#include "OpenSHC/Map/Units/EuroRecruitableState.hpp"
+#include "OpenSHC/Map/Units/States/UnitState.hpp"
+#include "OpenSHC/Rendering/Enums/DirectDrawStatus.hpp"
 #include "OpenSHC/UI/DisplayElement.hpp"
-#include "OpenSHC/UI/Enums/DisplayElementIDInt.hpp"
+#include "OpenSHC/UI/Enums/DisplayElementID.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "WinDef.h"
@@ -28,16 +27,15 @@
 namespace OpenSHC {
 namespace Global {
 
-    using OpenSHC::AI::AIVUnitTypeInt;
-    using OpenSHC::Game::Resources::ResourceTypeInt;
-    using OpenSHC::Map::Buildings::BuildingTypeInt;
+    using OpenSHC::AI::AIVUnitType;
+    using OpenSHC::Game::Resources::ResourceType;
+    using OpenSHC::Map::Buildings::BuildingType;
     using OpenSHC::Map::Buildings::BuildingTypeShort;
-    using OpenSHC::Map::Units::EuroRecruitableStateInt;
-    using OpenSHC::Map::Units::UnitTypeInt;
-    using OpenSHC::Map::Units::States::UnitStateShort;
-    using OpenSHC::Rendering::Enums::DirectDrawStatusInt;
+    using OpenSHC::Map::Units::EuroRecruitableState;
+    using OpenSHC::Map::Units::States::UnitState;
+    using OpenSHC::Rendering::Enums::DirectDrawStatus;
     using OpenSHC::UI::DisplayElement;
-    using OpenSHC::UI::Enums::DisplayElementIDInt;
+    using OpenSHC::UI::Enums::DisplayElementID;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     void __stdcall SetCurrentEntityID3000();
@@ -259,8 +257,6 @@ namespace Global {
 
     int __cdecl ComputePlayerPoints1(int playerID);
 
-    void __stdcall PlayUnitSpeech(UnitTypeInt unitType, int actionID);
-
     int __cdecl ComputePlayerRanking(int playerID);
 
     int __cdecl GetPlayerAtRank(int rankingPosition);
@@ -277,7 +273,7 @@ namespace Global {
 
     void __cdecl PrintToDestination(wchar_t* destination, wchar_t* format, ...);
 
-    EuroRecruitableStateInt __cdecl IsEuroUnitRecruitableUnk(int barrackUnitIdUnk);
+    EuroRecruitableState __cdecl IsEuroUnitRecruitableUnk(int barrackUnitIdUnk);
 
     int __cdecl GetUnitRecruitPermission(int param_1);
 
@@ -298,9 +294,9 @@ namespace Global {
 
     void __cdecl ChangeRations(int playerID, int rationsSetting);
 
-    void __cdecl SetPlayerBuyingResultStateUnk(int state, ResourceTypeInt resourceTypePlus1);
+    void __cdecl SetPlayerBuyingResultStateUnk(int state, ResourceType resourceTypePlus1);
 
-    void __cdecl ProcessBuyOrSell(int playerID, int buyOrSell, ResourceTypeInt resourceType);
+    void __cdecl ProcessBuyOrSell(int playerID, int buyOrSell, ResourceType resourceType);
 
     void __cdecl TryAcquireAmmunitionOrPlanToBuyStone(int param_1, int param_2);
 
@@ -325,7 +321,7 @@ namespace Global {
 
     char* __cdecl GetStringBasedOnHardcodedMaps(char* mapName, int* hardcodedMapDescriptionGroupNum);
 
-    DirectDrawStatusInt __stdcall DetectDXVersionByLoadingDDRAW();
+    DirectDrawStatus __stdcall DetectDXVersionByLoadingDDRAW();
 
     byte __stdcall TestOSVersion();
 
@@ -370,19 +366,19 @@ namespace Global {
 
     void __cdecl ProcessAllyRequestingGoods(int askedPlayerID, int param_2, int amount, int askee);
 
-    void __cdecl ProcessAllyGoodsRequest(int param_1, ResourceTypeInt param_2, int param_3, int param_4);
+    void __cdecl ProcessAllyGoodsRequest(int param_1, ResourceType param_2, int param_3, int param_4);
 
     void __cdecl ProcessAllyDeniesRequest(int param_1, int param_2);
 
     DisplayElement* __cdecl FindDisplayElementWithID(int elementID);
 
     void __cdecl CheckDisplayElementByIDAndSetForUnlimitedDisplay(
-        DisplayElementIDInt displayElementID, dword elementState);
+        DisplayElementID displayElementID, dword elementState);
 
     void __cdecl ActivateGameSpeedAndResourceLackDisplayElementUnk(
-        DisplayElementIDInt elementId, dword elementState, int displayDuration);
+        DisplayElementID elementId, dword elementState, int displayDuration);
 
-    BOOLEnum __cdecl GetIfDisplayElementStateNotZero(DisplayElementIDInt displayElementID);
+    BOOLEnum __cdecl GetIfDisplayElementStateNotZero(DisplayElementID displayElementID);
 
     LRESULT __stdcall WindowMsgProcessingFunc(HWND windowHandle, UINT message, WPARAM wParam, LPARAM lParam);
 
@@ -390,7 +386,7 @@ namespace Global {
 
     void __cdecl SumUnitPoints();
 
-    void __cdecl FUN_004bc690(int param_1, BuildingTypeInt buildingType);
+    void __cdecl FUN_004bc690(int param_1, BuildingType buildingType);
 
     void __stdcall FUN_004bc770();
 
@@ -400,7 +396,7 @@ namespace Global {
 
     int __stdcall StoreTime();
 
-    AIVUnitTypeInt __stdcall GetUnitTypeIndexForUnitID(int unitID, int param_2);
+    AIVUnitType __stdcall GetUnitTypeIndexForUnitID(int unitID, int param_2);
 
     int __stdcall ChecksAndGenerateAITribesForPlayerIfNotExisting(int playerID, int maxAmount, BOOLEnum checkOnly);
 
@@ -499,7 +495,7 @@ namespace Global {
 
     void __cdecl IncrementAndOptionalUpdateAVValueRelated(int unitID, BOOLEnum updateAV);
 
-    BOOLEnum __cdecl ConsiderHavingABreakNowUnk(int unitID, UnitStateShort nextUnitState);
+    BOOLEnum __cdecl ConsiderHavingABreakNowUnk(int unitID, UnitState nextUnitState);
 
     undefined4 __cdecl SetStateToFreetimeWalking(int unitID, int shouldFindNewGoodThing, int param_3);
 

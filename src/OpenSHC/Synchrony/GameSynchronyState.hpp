@@ -9,10 +9,11 @@
 #pragma once
 
 #include "OpenSHC/Commands/GameCommand.hpp"
-#include "OpenSHC/Commands/GameCommandParameterLocationInt.hpp"
-#include "OpenSHC/Commands/GameCommandParameterReadWriteInt.hpp"
+#include "OpenSHC/Commands/GameCommandParameterLocation.hpp"
+#include "OpenSHC/Commands/GameCommandParameterReadWrite.hpp"
 #include "OpenSHC/Commands/GameCommandSchedulingInt.hpp"
-#include "OpenSHC/Commands/GameCommandTypeInt.hpp"
+#include "OpenSHC/Commands/GameCommandType.hpp"
+#include "OpenSHC/DirectPlay/DPERR.hpp"
 #include "OpenSHC/DirectPlay/DPERRInt.hpp"
 #include "OpenSHC/Game/GameModeInt.hpp"
 #include "OpenSHC/Game/Skirmish/SkirmishStatistics.hpp"
@@ -38,10 +39,11 @@ namespace OpenSHC {
 namespace Synchrony {
 
     using OpenSHC::Commands::GameCommand;
-    using OpenSHC::Commands::GameCommandParameterLocationInt;
-    using OpenSHC::Commands::GameCommandParameterReadWriteInt;
+    using OpenSHC::Commands::GameCommandParameterLocation;
+    using OpenSHC::Commands::GameCommandParameterReadWrite;
     using OpenSHC::Commands::GameCommandSchedulingInt;
-    using OpenSHC::Commands::GameCommandTypeInt;
+    using OpenSHC::Commands::GameCommandType;
+    using OpenSHC::DirectPlay::DPERR;
     using OpenSHC::DirectPlay::DPERRInt;
     using OpenSHC::Game::GameModeInt;
     using OpenSHC::Game::Skirmish::SkirmishStatistics;
@@ -382,11 +384,11 @@ namespace Synchrony {
 
         void setMenuTypeBasedOnDirectPlayGUID();
 
-        DPERRInt createCompoundAddressBasedOnSelectedProvider(LPVOID* pCompoundAddress, SIZE_T* param_2);
+        DPERR createCompoundAddressBasedOnSelectedProvider(LPVOID* pCompoundAddress, SIZE_T* param_2);
 
         void setDPlaySessionNameValue();
 
-        DPERRInt initializeDirectPlayAndCreateOrJoinSession(BOOLEnum join);
+        DPERR initializeDirectPlayAndCreateOrJoinSession(BOOLEnum join);
 
         void setSessionDescription();
 
@@ -436,10 +438,9 @@ namespace Synchrony {
 
         void clearGameCommandEntry(int gameCommandID);
 
-        int sendLongerDataSuchAsResync(GameCommandTypeInt commandCategory);
+        int sendLongerDataSuchAsResync(GameCommandType commandCategory);
 
-        void scheduleReceivedCommand(
-            GameCommandTypeInt commandCategory, DWORD dxPlayerHandle, dword time, void* address);
+        void scheduleReceivedCommand(GameCommandType commandCategory, DWORD dxPlayerHandle, dword time, void* address);
 
         int getCommandIDFromCommandSelectionStuff();
 
@@ -448,7 +449,7 @@ namespace Synchrony {
         int getPendingGameCommandsCount();
 
         void serializeOrDeserializeCommandParameter(void* destination, size_t size,
-            GameCommandParameterLocationInt srcSwitch, GameCommandParameterReadWriteInt destSwitch);
+            GameCommandParameterLocation srcSwitch, GameCommandParameterReadWrite destSwitch);
 
         void checkSkirmishGameDefeat();
 
@@ -479,7 +480,7 @@ namespace Synchrony {
 
         void renderDebugDataNetwork(int x, int y, int width, int height);
 
-        void queueCommand(GameCommandTypeInt commandType);
+        void queueCommand(GameCommandType commandType);
 
         void processWaitingCommands();
 

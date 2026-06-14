@@ -2,7 +2,7 @@
   path: 'OpenSHC/IO/ResourceManager.func.hpp'
 */
 
-#include "OpenSHC/IO/FileResourceTypeInt.hpp"
+#include "OpenSHC/IO/FileResourceType.hpp"
 #include "OpenSHC/IO/ResourceManager.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -13,7 +13,7 @@ namespace IO {
     namespace ResourceManager_Func {
 
         using HoldStrong_lib::StringObject;
-        using OpenSHC::IO::FileResourceTypeInt;
+        using OpenSHC::IO::FileResourceType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         MACRO_FUNCTION_RESOLVER(void (ResourceManager::*)(dword), false, Address::SHC_3BB0A8C1_0x0046C200,
@@ -132,7 +132,7 @@ namespace IO {
             &ResourceManager::discoverMapFiles)
         discoverMapFiles;
 
-        MACRO_FUNCTION_RESOLVER(void (ResourceManager::*)(FileResourceTypeInt, char*), false,
+        MACRO_FUNCTION_RESOLVER(void (ResourceManager::*)(FileResourceType, char*), false,
             Address::SHC_3BB0A8C1_0x00478360, &ResourceManager::resolveResourceFileName)
         resolveResourceFileName;
 

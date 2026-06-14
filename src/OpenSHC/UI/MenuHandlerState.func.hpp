@@ -2,7 +2,7 @@
   path: 'OpenSHC/UI/MenuHandlerState.func.hpp'
 */
 
-#include "OpenSHC/UI/Enums/MenuViewTypeInt.hpp"
+#include "OpenSHC/UI/Enums/MenuViewType.hpp"
 #include "OpenSHC/UI/MenuHandlerState.hpp"
 #include "OpenSHC/UI/MenuIDMenuElementAddressPair.hpp"
 #include "OpenSHC/UI/UC.hpp"
@@ -12,7 +12,7 @@ namespace UI {
 
         using OpenSHC::UI::MenuIDMenuElementAddressPair;
         using OpenSHC::UI::UC;
-        using OpenSHC::UI::Enums::MenuViewTypeInt;
+        using OpenSHC::UI::Enums::MenuViewType;
 
         MACRO_FUNCTION_RESOLVER(void (MenuHandlerState::*)(dword, dword), false, Address::SHC_3BB0A8C1_0x004F4C60,
             &MenuHandlerState::setupBuildMenuState)
@@ -30,7 +30,7 @@ namespace UI {
             Address::SHC_3BB0A8C1_0x004F6A20, &MenuHandlerState::initializeUI)
         initializeUI;
 
-        MACRO_FUNCTION_RESOLVER(void (MenuHandlerState::*)(MenuViewTypeInt), false, Address::SHC_3BB0A8C1_0x004F6A80,
+        MACRO_FUNCTION_RESOLVER(void (MenuHandlerState::*)(MenuViewType), false, Address::SHC_3BB0A8C1_0x004F6A80,
             &MenuHandlerState::setupMenuForRendering)
         setupMenuForRendering;
 

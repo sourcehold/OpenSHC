@@ -2,7 +2,7 @@
   path: 'OpenSHC/UI/Rendering/PencilRenderCore.func.hpp'
 */
 
-#include "OpenSHC/UI/Enums/RoundedBoxEdgeRoundingLevelInt.hpp"
+#include "OpenSHC/UI/Enums/RoundedBoxEdgeRoundingLevel.hpp"
 #include "OpenSHC/UI/Rendering/PencilRenderCore.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
@@ -10,7 +10,7 @@ namespace UI {
     namespace Rendering {
         namespace PencilRenderCore_Func {
 
-            using OpenSHC::UI::Enums::RoundedBoxEdgeRoundingLevelInt;
+            using OpenSHC::UI::Enums::RoundedBoxEdgeRoundingLevel;
             using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
             MACRO_FUNCTION_RESOLVER(void (PencilRenderCore::*)(), false, Address::SHC_3BB0A8C1_0x00468C50,
@@ -61,9 +61,8 @@ namespace UI {
                 Address::SHC_3BB0A8C1_0x00470E90, &PencilRenderCore::drawColorBox)
             drawColorBox;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (PencilRenderCore::*)(int, int, int, int, ushort, RoundedBoxEdgeRoundingLevelInt), false,
-                Address::SHC_3BB0A8C1_0x00470EE0, &PencilRenderCore::drawBoxWithRoundedEdgesAndColor)
+            MACRO_FUNCTION_RESOLVER(void (PencilRenderCore::*)(int, int, int, int, ushort, RoundedBoxEdgeRoundingLevel),
+                false, Address::SHC_3BB0A8C1_0x00470EE0, &PencilRenderCore::drawBoxWithRoundedEdgesAndColor)
             drawBoxWithRoundedEdgesAndColor;
 
             MACRO_FUNCTION_RESOLVER(void (PencilRenderCore::*)(int, int, int, int, int), false,
@@ -74,8 +73,8 @@ namespace UI {
                 Address::SHC_3BB0A8C1_0x00471050, &PencilRenderCore::dimBox)
             dimBox;
 
-            MACRO_FUNCTION_RESOLVER(void (PencilRenderCore::*)(int, int, int, int, RoundedBoxEdgeRoundingLevelInt),
-                false, Address::SHC_3BB0A8C1_0x004710A0, &PencilRenderCore::drawBoxWithRoundedEdges)
+            MACRO_FUNCTION_RESOLVER(void (PencilRenderCore::*)(int, int, int, int, RoundedBoxEdgeRoundingLevel), false,
+                Address::SHC_3BB0A8C1_0x004710A0, &PencilRenderCore::drawBoxWithRoundedEdges)
             drawBoxWithRoundedEdges;
 
             MACRO_FUNCTION_RESOLVER(void (PencilRenderCore::*)(int, int, int, int, ushort), false,

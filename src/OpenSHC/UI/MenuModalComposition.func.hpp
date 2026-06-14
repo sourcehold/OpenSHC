@@ -2,7 +2,7 @@
   path: 'OpenSHC/UI/MenuModalComposition.func.hpp'
 */
 
-#include "OpenSHC/UI/Enums/MenuModalTypeInt.hpp"
+#include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/UI/MenuModal.hpp"
 #include "OpenSHC/UI/MenuModalComposition.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -11,22 +11,22 @@ namespace UI {
     namespace MenuModalComposition_Func {
 
         using OpenSHC::UI::MenuModal;
-        using OpenSHC::UI::Enums::MenuModalTypeInt;
+        using OpenSHC::UI::Enums::MenuModalType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         MACRO_FUNCTION_RESOLVER(void (MenuModalComposition::*)(), false, Address::SHC_3BB0A8C1_0x004A9E80,
             &MenuModalComposition::loadAllMenuElementsOfMenuModals)
         loadAllMenuElementsOfMenuModals;
 
-        MACRO_FUNCTION_RESOLVER(MenuModal* (MenuModalComposition::*)(MenuModalTypeInt), false,
+        MACRO_FUNCTION_RESOLVER(MenuModal* (MenuModalComposition::*)(MenuModalType), false,
             Address::SHC_3BB0A8C1_0x004A9EB0, &MenuModalComposition::findModalMenu)
         findModalMenu;
 
-        MACRO_FUNCTION_RESOLVER(void (MenuModalComposition::*)(MenuModalTypeInt, BOOLEnum), false,
+        MACRO_FUNCTION_RESOLVER(void (MenuModalComposition::*)(MenuModalType, BOOLEnum), false,
             Address::SHC_3BB0A8C1_0x004A9ED0, &MenuModalComposition::activateModalDialog)
         activateModalDialog;
 
-        MACRO_FUNCTION_RESOLVER(void (MenuModalComposition::*)(MenuModalTypeInt, int, int), false,
+        MACRO_FUNCTION_RESOLVER(void (MenuModalComposition::*)(MenuModalType, int, int), false,
             Address::SHC_3BB0A8C1_0x004AA0A0, &MenuModalComposition::setExtraActiveModalDialog)
         setExtraActiveModalDialog;
 
@@ -54,8 +54,8 @@ namespace UI {
             &MenuModalComposition::renderMenuModal)
         renderMenuModal;
 
-        MACRO_FUNCTION_RESOLVER(void (MenuModalComposition::*)(MenuModalTypeInt), false,
-            Address::SHC_3BB0A8C1_0x004B2820, &MenuModalComposition::activateModalDialog2)
+        MACRO_FUNCTION_RESOLVER(void (MenuModalComposition::*)(MenuModalType), false, Address::SHC_3BB0A8C1_0x004B2820,
+            &MenuModalComposition::activateModalDialog2)
         activateModalDialog2;
 
     } // namespace MenuModalComposition_Func

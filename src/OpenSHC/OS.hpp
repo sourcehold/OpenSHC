@@ -9,7 +9,7 @@
 #pragma once
 
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
-#include "OpenSHC/WindowsHelper/Enums/OpenFlagInt.hpp"
+#include "OpenSHC/WindowsHelper/Enums/OpenFlag.hpp"
 
 #include "crtdefs.h"
 #include "guiddef.h"
@@ -21,7 +21,7 @@ namespace OpenSHC {
 namespace OS {
 
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-    using OpenSHC::WindowsHelper::Enums::OpenFlagInt;
+    using OpenSHC::WindowsHelper::Enums::OpenFlag;
 
     int* __stdcall basic_ofstream_write(void* param_1, uint param_2);
 
@@ -75,7 +75,7 @@ namespace OS {
 
     int __cdecl _ucrt_read(int fileDescriptor, void* destination, size_t size);
 
-    int __cdecl _ucrt_open(char* _Filename, OpenFlagInt _OpenFlag, int _PMode);
+    int __cdecl _ucrt_open(char* _Filename, OpenFlag _OpenFlag, int _PMode);
 
     int __cdecl _rand();
 

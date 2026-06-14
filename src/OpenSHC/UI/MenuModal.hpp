@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/UI/Enums/MenuModalTypeInt.hpp"
 #include "OpenSHC/UI/Menu.hpp"
 #include "OpenSHC/UI/MenuModalRenderFunction.hpp"
@@ -17,6 +18,7 @@ namespace UI {
 
     using OpenSHC::UI::Menu;
     using OpenSHC::UI::MenuModalRenderFunction;
+    using OpenSHC::UI::Enums::MenuModalType;
     using OpenSHC::UI::Enums::MenuModalTypeInt;
 
 #pragma pack(push, 1)
@@ -44,7 +46,7 @@ namespace UI {
         ~MenuModal();
 
         // Constructor
-        MenuModal* Constructor_MenuModal(MenuModalTypeInt menuModalId, int xPos, int yPos, int width, int height,
+        MenuModal* Constructor_MenuModal(MenuModalType menuModalId, int xPos, int yPos, int width, int height,
             int borderStyle, int backgroundColourIndex, MenuModalRenderFunction* renderFunctionPtr, Menu* menuPtr);
     };
 

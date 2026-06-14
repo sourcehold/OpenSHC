@@ -2,14 +2,14 @@
   path: 'OpenSHC/Rendering/ViewportRenderState.func.hpp'
 */
 
-#include "OpenSHC/IO/Graphics/GmIDInt.hpp"
+#include "OpenSHC/IO/Graphics/GmID.hpp"
 #include "OpenSHC/Rendering/ViewportRenderState.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
 namespace Rendering {
     namespace ViewportRenderState_Func {
 
-        using OpenSHC::IO::Graphics::GmIDInt;
+        using OpenSHC::IO::Graphics::GmID;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (ViewportRenderState::*)(uint, uint), false, Address::SHC_3BB0A8C1_0x00401000,
@@ -85,7 +85,7 @@ namespace Rendering {
             &ViewportRenderState::meth_0x4e6340)
         meth_0x4e6340;
 
-        MACRO_FUNCTION_RESOLVER(void (ViewportRenderState::*)(GmIDInt, int, int, int, int, int), false,
+        MACRO_FUNCTION_RESOLVER(void (ViewportRenderState::*)(GmID, int, int, int, int, int), false,
             Address::SHC_3BB0A8C1_0x004E63A0, &ViewportRenderState::creataAFloatingLayerElement)
         creataAFloatingLayerElement;
 

@@ -8,8 +8,10 @@
 
 #pragma once
 
+#include "OpenSHC/IO/Graphics/GmID.hpp"
 #include "OpenSHC/IO/Graphics/GmIDInt.hpp"
 #include "OpenSHC/Rendering/Colors/BGR24.hpp"
+#include "OpenSHC/Text/FontRenderType.hpp"
 #include "OpenSHC/Text/FontRenderTypeInt.hpp"
 
 #include "WinDef.h"
@@ -17,8 +19,10 @@
 namespace OpenSHC {
 namespace Text {
 
+    using OpenSHC::IO::Graphics::GmID;
     using OpenSHC::IO::Graphics::GmIDInt;
     using OpenSHC::Rendering::Colors::BGR24;
+    using OpenSHC::Text::FontRenderType;
     using OpenSHC::Text::FontRenderTypeInt;
 
 #pragma pack(push, 1)
@@ -44,7 +48,7 @@ namespace Text {
         FontSizeClass();
         ~FontSizeClass();
 
-        void setupFontSizeClassObject(GmIDInt fontGmID, int numberOfFontStartInGm, FontRenderTypeInt renderType,
+        void setupFontSizeClassObject(GmID fontGmID, int numberOfFontStartInGm, FontRenderType renderType,
             int baselineOffset, int lineHeight, int letterSpacing, int whiteSpaceWidth);
 
         int getWidthOfText(char* text, int length);

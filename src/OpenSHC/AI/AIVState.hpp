@@ -8,12 +8,12 @@
 
 #pragma once
 
-#include "OpenSHC/AI/AIGridComputationResourceTypeInt.hpp"
+#include "OpenSHC/AI/AIGridComputationResourceType.hpp"
 #include "OpenSHC/AI/AIMapExtraInfo.hpp"
-#include "OpenSHC/AI/AIV/AIVBuildingType2Int.hpp"
+#include "OpenSHC/AI/AIV/AIVBuildingType2.hpp"
 #include "OpenSHC/AI/AIV/AIVBuildingType2Short.hpp"
 #include "OpenSHC/AI/AIV/AIVSpec.hpp"
-#include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
+#include "OpenSHC/Commands/CommandBuildingType.hpp"
 #include "OpenSHC/Game/Player/PlayerID.hpp"
 #include "OpenSHC/Map/HeatMap.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -21,12 +21,12 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::AI::AIGridComputationResourceTypeInt;
+    using OpenSHC::AI::AIGridComputationResourceType;
     using OpenSHC::AI::AIMapExtraInfo;
-    using OpenSHC::AI::AIV::AIVBuildingType2Int;
+    using OpenSHC::AI::AIV::AIVBuildingType2;
     using OpenSHC::AI::AIV::AIVBuildingType2Short;
     using OpenSHC::AI::AIV::AIVSpec;
-    using OpenSHC::Commands::CommandBuildingTypeInt;
+    using OpenSHC::Commands::CommandBuildingType;
     using OpenSHC::Game::Player::PlayerID;
     using OpenSHC::Map::HeatMap;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
@@ -96,7 +96,7 @@ namespace AI {
 
         void setKeepOffsetAndOrientation(int aiID, int keepX, int keepY);
 
-        CommandBuildingTypeInt convertAIVBuildingTypeToCommandBuildingType(AIVBuildingType2Int param_1);
+        CommandBuildingType convertAIVBuildingTypeToCommandBuildingType(AIVBuildingType2 param_1);
 
         void rotateAIV(int orientation);
 
@@ -112,13 +112,12 @@ namespace AI {
 
         void set0x13ValueTo10InHeatMap(int x, int y);
 
-        int findSuitableLocationCloseToKeepAndPlaceBuilding(
-            PlayerID playerID, CommandBuildingTypeInt commandBuildingType);
+        int findSuitableLocationCloseToKeepAndPlaceBuilding(PlayerID playerID, CommandBuildingType commandBuildingType);
 
         void findAppropriateWoodCutterLocation(int playerID);
 
         void findAppropriateBuildingLocationForResourceType(
-            int playerID, AIGridComputationResourceTypeInt resourceTypeNumber);
+            int playerID, AIGridComputationResourceType resourceTypeNumber);
 
         void recomputeAIAvailableGridTiles(int playerID);
 
@@ -132,7 +131,7 @@ namespace AI {
 
         int computeAIVPlacementFit(int playerID);
 
-        int aiPlaceFarm(int playerID, CommandBuildingTypeInt buildingType);
+        int aiPlaceFarm(int playerID, CommandBuildingType buildingType);
 
         void aiPlaceWoodcuttershut(int playerID);
 

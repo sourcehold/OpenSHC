@@ -2,7 +2,7 @@
   path: 'OpenSHC/UI/Rendering/WindowAndDirectDraw.func.hpp'
 */
 
-#include "OpenSHC/Rendering/ScreenResolutionEnumInt.hpp"
+#include "OpenSHC/Rendering/ScreenResolutionEnum.hpp"
 #include "OpenSHC/UI/Rendering/WindowAndDirectDraw.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -13,7 +13,7 @@ namespace UI {
     namespace Rendering {
         namespace WindowAndDirectDraw_Func {
 
-            using OpenSHC::Rendering::ScreenResolutionEnumInt;
+            using OpenSHC::Rendering::ScreenResolutionEnum;
             using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (WindowAndDirectDraw::*)(LPCSTR, uint), false,
@@ -88,7 +88,7 @@ namespace UI {
                 &WindowAndDirectDraw::reinitWindow)
             reinitWindow;
 
-            MACRO_FUNCTION_RESOLVER(void (WindowAndDirectDraw::*)(BOOLEnum, ScreenResolutionEnumInt), false,
+            MACRO_FUNCTION_RESOLVER(void (WindowAndDirectDraw::*)(BOOLEnum, ScreenResolutionEnum), false,
                 Address::SHC_3BB0A8C1_0x004729B0, &WindowAndDirectDraw::prepareWindowAndDDraw_2Unk)
             prepareWindowAndDDraw_2Unk;
 

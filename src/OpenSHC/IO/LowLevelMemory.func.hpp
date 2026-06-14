@@ -16,25 +16,25 @@ namespace IO {
             Address::SHC_3BB0A8C1_0x0046A830, &LowLevelMemory::moveLowerThreeBytesIntoParam2)
         moveLowerThreeBytesIntoParam2;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (LowLevelMemory::*)(), false, Address::SHC_3BB0A8C1_0x0046A850, &LowLevelMemory::setMemoryToValue0x001)
-        setMemoryToValue0x001;
+        MACRO_FUNCTION_RESOLVER(void (LowLevelMemory::*)(), false, Address::SHC_3BB0A8C1_0x0046A850,
+            &LowLevelMemory::setMemoryToValue_0x001)
+        setMemoryToValue_0x001;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (LowLevelMemory::*)(), false, Address::SHC_3BB0A8C1_0x0046A890, &LowLevelMemory::setMemoryToValue0x002)
-        setMemoryToValue0x002;
+        MACRO_FUNCTION_RESOLVER(void (LowLevelMemory::*)(), false, Address::SHC_3BB0A8C1_0x0046A890,
+            &LowLevelMemory::setMemoryToValue_0x002)
+        setMemoryToValue_0x002;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (LowLevelMemory::*)(), false, Address::SHC_3BB0A8C1_0x0046A8D0, &LowLevelMemory::setMemoryToValue0x004)
-        setMemoryToValue0x004;
+        MACRO_FUNCTION_RESOLVER(void (LowLevelMemory::*)(), false, Address::SHC_3BB0A8C1_0x0046A8D0,
+            &LowLevelMemory::setMemoryToValue_0x004)
+        setMemoryToValue_0x004;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (LowLevelMemory::*)(), false, Address::SHC_3BB0A8C1_0x0046A910, &LowLevelMemory::setMemoryToValue0x010)
-        setMemoryToValue0x010;
+        MACRO_FUNCTION_RESOLVER(void (LowLevelMemory::*)(), false, Address::SHC_3BB0A8C1_0x0046A910,
+            &LowLevelMemory::setMemoryToValue_0x010)
+        setMemoryToValue_0x010;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (LowLevelMemory::*)(), false, Address::SHC_3BB0A8C1_0x0046A970, &LowLevelMemory::setMemoryToValue0x100)
-        setMemoryToValue0x100;
+        MACRO_FUNCTION_RESOLVER(void (LowLevelMemory::*)(), false, Address::SHC_3BB0A8C1_0x0046A970,
+            &LowLevelMemory::setMemoryToValue_0x100)
+        setMemoryToValue_0x100;
 
         MACRO_FUNCTION_RESOLVER(
             void (LowLevelMemory::*)(), false, Address::SHC_3BB0A8C1_0x0046AAF0, &LowLevelMemory::copyData_0x001)
@@ -64,15 +64,15 @@ namespace IO {
             &LowLevelMemory::copyData)
         copyData;
 
-        MACRO_FUNCTION_RESOLVER(void (LowLevelMemory::*)(int, int, void*), false, Address::SHC_3BB0A8C1_0x00471860,
+        MACRO_FUNCTION_RESOLVER(void (LowLevelMemory::*)(size_t, int, void*), false, Address::SHC_3BB0A8C1_0x00471860,
             &LowLevelMemory::fillMemoryWithIntegerValue)
         fillMemoryWithIntegerValue;
 
-        MACRO_FUNCTION_RESOLVER(void (LowLevelMemory::*)(undefined*, uint, undefined*), false,
+        MACRO_FUNCTION_RESOLVER(void (LowLevelMemory::*)(size_t, ushort, void*), false,
             Address::SHC_3BB0A8C1_0x00471890, &LowLevelMemory::fillMemoryWithShortValue)
         fillMemoryWithShortValue;
 
-        MACRO_FUNCTION_RESOLVER(void (LowLevelMemory::*)(int, uchar, void*), false, Address::SHC_3BB0A8C1_0x004718C0,
+        MACRO_FUNCTION_RESOLVER(void (LowLevelMemory::*)(size_t, uchar, void*), false, Address::SHC_3BB0A8C1_0x004718C0,
             &LowLevelMemory::fillMemoryWithByteValue)
         fillMemoryWithByteValue;
 

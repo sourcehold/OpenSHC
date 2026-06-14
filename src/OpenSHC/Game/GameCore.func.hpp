@@ -3,13 +3,13 @@
 */
 
 #include "OpenSHC/Game/GameCore.hpp"
-#include "OpenSHC/UI/Enums/MenuViewTypeInt.hpp"
+#include "OpenSHC/UI/Enums/MenuViewType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
 namespace Game {
     namespace GameCore_Func {
 
-        using OpenSHC::UI::Enums::MenuViewTypeInt;
+        using OpenSHC::UI::Enums::MenuViewType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         MACRO_FUNCTION_RESOLVER(
@@ -23,8 +23,8 @@ namespace Game {
         MACRO_FUNCTION_RESOLVER(void (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x0046B320, &GameCore::meth_0x46b320)
         meth_0x46b320;
 
-        MACRO_FUNCTION_RESOLVER(void (GameCore::*)(MenuViewTypeInt, int), false, Address::SHC_3BB0A8C1_0x0046B340,
-            &GameCore::switchToMenuView)
+        MACRO_FUNCTION_RESOLVER(
+            void (GameCore::*)(MenuViewType, int), false, Address::SHC_3BB0A8C1_0x0046B340, &GameCore::switchToMenuView)
         switchToMenuView;
 
         MACRO_FUNCTION_RESOLVER(

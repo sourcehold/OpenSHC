@@ -2,12 +2,12 @@
   path: 'OpenSHC/Map/Units/UnitsState.func.hpp'
 */
 
-#include "OpenSHC/IO/Graphics/GmIDInt.hpp"
-#include "OpenSHC/IO/PackagedFileMagicNumInt.hpp"
-#include "OpenSHC/Map/Entities/EntityTypeInt.hpp"
-#include "OpenSHC/Map/Units/Instructions/MatchSpeedInstructionEnumInt.hpp"
-#include "OpenSHC/Map/Units/UnitInstructionTypeInt.hpp"
-#include "OpenSHC/Map/Units/UnitTypeInt.hpp"
+#include "OpenSHC/IO/Graphics/GmID.hpp"
+#include "OpenSHC/IO/PackagedFileMagicNum.hpp"
+#include "OpenSHC/Map/Entities/EntityType.hpp"
+#include "OpenSHC/Map/Units/Instructions/MatchSpeedInstructionEnum.hpp"
+#include "OpenSHC/Map/Units/UnitInstructionType.hpp"
+#include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/Map/Units/UnitsState.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
@@ -15,19 +15,19 @@ namespace Map {
     namespace Units {
         namespace UnitsState_Func {
 
-            using OpenSHC::IO::PackagedFileMagicNumInt;
-            using OpenSHC::IO::Graphics::GmIDInt;
-            using OpenSHC::Map::Entities::EntityTypeInt;
-            using OpenSHC::Map::Units::UnitInstructionTypeInt;
-            using OpenSHC::Map::Units::UnitTypeInt;
-            using OpenSHC::Map::Units::Instructions::MatchSpeedInstructionEnumInt;
+            using OpenSHC::IO::PackagedFileMagicNum;
+            using OpenSHC::IO::Graphics::GmID;
+            using OpenSHC::Map::Entities::EntityType;
+            using OpenSHC::Map::Units::UnitInstructionType;
+            using OpenSHC::Map::Units::UnitType;
+            using OpenSHC::Map::Units::Instructions::MatchSpeedInstructionEnum;
             using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
             MACRO_FUNCTION_RESOLVER(
                 void (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x0052E7B0, &UnitsState::clearAllUnits)
             clearAllUnits;
 
-            MACRO_FUNCTION_RESOLVER(int (UnitsState::*)(UnitTypeInt, int, int, int), false,
+            MACRO_FUNCTION_RESOLVER(int (UnitsState::*)(UnitType, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x0052E830, &UnitsState::assignPeasantToBuilding)
             assignPeasantToBuilding;
 
@@ -35,7 +35,7 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x0052E960, &UnitsState::euroRecruit)
             euroRecruit;
 
-            MACRO_FUNCTION_RESOLVER(int (UnitsState::*)(UnitTypeInt, undefined4, int, int), false,
+            MACRO_FUNCTION_RESOLVER(int (UnitsState::*)(UnitType, undefined4, int, int), false,
                 Address::SHC_3BB0A8C1_0x0052EC10, &UnitsState::nonEuroRecruit)
             nonEuroRecruit;
 
@@ -199,7 +199,7 @@ namespace Map {
                 &UnitsState::processFireDamageToUnit)
             processFireDamageToUnit;
 
-            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int, EntityTypeInt, int, int, int), false,
+            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int, EntityType, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x00532700, &UnitsState::shootProjectile)
             shootProjectile;
 
@@ -459,7 +459,7 @@ namespace Map {
                 void (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00536190, &UnitsState::tribeRelated1)
             tribeRelated1;
 
-            MACRO_FUNCTION_RESOLVER(UnitTypeInt (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x005361F0,
+            MACRO_FUNCTION_RESOLVER(UnitType (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x005361F0,
                 &UnitsState::getUnitTypeOfFirstSelectedUnit)
             getUnitTypeOfFirstSelectedUnit;
 
@@ -543,7 +543,7 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x00536E30, &UnitsState::giveMoveCommand)
             giveMoveCommand;
 
-            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int, uint, uint, int, MatchSpeedInstructionEnumInt), false,
+            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int, uint, uint, int, MatchSpeedInstructionEnum), false,
                 Address::SHC_3BB0A8C1_0x00537070, &UnitsState::giveTribeMoveInstructionHumans)
             giveTribeMoveInstructionHumans;
 
@@ -564,11 +564,11 @@ namespace Map {
             queueCommand_36d;
 
             MACRO_FUNCTION_RESOLVER(
-                void (UnitsState::*)(undefined4, UnitInstructionTypeInt, undefined4, undefined4, undefined4), false,
+                void (UnitsState::*)(undefined4, UnitInstructionType, undefined4, undefined4, undefined4), false,
                 Address::SHC_3BB0A8C1_0x005371A0, &UnitsState::queueCommand_36_variation2)
             queueCommand_36_variation2;
 
-            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int, UnitInstructionTypeInt, int, int, int), false,
+            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int, UnitInstructionType, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x005371E0, &UnitsState::giveTribeAnInstruction2)
             giveTribeAnInstruction2;
 
@@ -621,7 +621,7 @@ namespace Map {
             FUN_00537f60;
 
             MACRO_FUNCTION_RESOLVER(
-                GmIDInt (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00539BE0, &UnitsState::getPeasantGmID)
+                GmID (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00539BE0, &UnitsState::getPeasantGmID)
             getPeasantGmID;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(int*, int*), false, Address::SHC_3BB0A8C1_0x00539DF0,
@@ -648,7 +648,7 @@ namespace Map {
                 &UnitsState::renderDebugDataUnitData)
             renderDebugDataUnitData;
 
-            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int, UnitTypeInt), false, Address::SHC_3BB0A8C1_0x0053B8E0,
+            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int, UnitType), false, Address::SHC_3BB0A8C1_0x0053B8E0,
                 &UnitsState::setUnitValues)
             setUnitValues;
 
@@ -700,11 +700,11 @@ namespace Map {
                 int (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0053DDD0, &UnitsState::meth_0x53ddd0)
             meth_0x53ddd0;
 
-            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(PackagedFileMagicNumInt, PackagedFileMagicNumInt), false,
+            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(PackagedFileMagicNum, PackagedFileMagicNum), false,
                 Address::SHC_3BB0A8C1_0x0053E390, &UnitsState::upgradeMapFormatForUnits)
             upgradeMapFormatForUnits;
 
-            MACRO_FUNCTION_RESOLVER(int (UnitsState::*)(int, int, int, int, int, UnitTypeInt), false,
+            MACRO_FUNCTION_RESOLVER(int (UnitsState::*)(int, int, int, int, int, UnitType), false,
                 Address::SHC_3BB0A8C1_0x0053E440, &UnitsState::spawnUnit)
             spawnUnit;
 

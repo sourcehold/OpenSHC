@@ -3,25 +3,25 @@
 */
 
 #include "OpenSHC/AI/AICState.hpp"
-#include "OpenSHC/AI/AINervousDestroyBuildingCategoryInt.hpp"
-#include "OpenSHC/AI/AIUnitBehaviourTypeInt.hpp"
-#include "OpenSHC/AI/AIVUnitTypeInt.hpp"
-#include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
+#include "OpenSHC/AI/AINervousDestroyBuildingCategory.hpp"
+#include "OpenSHC/AI/AIUnitBehaviourType.hpp"
+#include "OpenSHC/AI/AIVUnitType.hpp"
+#include "OpenSHC/Commands/CommandBuildingType.hpp"
 #include "OpenSHC/Game/Player/PlayerID.hpp"
-#include "OpenSHC/Game/Resources/ResourceTypeInt.hpp"
-#include "OpenSHC/Map/Units/UnitTypeInt.hpp"
+#include "OpenSHC/Game/Resources/ResourceType.hpp"
+#include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
 namespace AI {
     namespace AICState_Func {
 
-        using OpenSHC::AI::AINervousDestroyBuildingCategoryInt;
-        using OpenSHC::AI::AIUnitBehaviourTypeInt;
-        using OpenSHC::AI::AIVUnitTypeInt;
-        using OpenSHC::Commands::CommandBuildingTypeInt;
+        using OpenSHC::AI::AINervousDestroyBuildingCategory;
+        using OpenSHC::AI::AIUnitBehaviourType;
+        using OpenSHC::AI::AIVUnitType;
+        using OpenSHC::Commands::CommandBuildingType;
         using OpenSHC::Game::Player::PlayerID;
-        using OpenSHC::Game::Resources::ResourceTypeInt;
-        using OpenSHC::Map::Units::UnitTypeInt;
+        using OpenSHC::Game::Resources::ResourceType;
+        using OpenSHC::Map::Units::UnitType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         MACRO_FUNCTION_RESOLVER(void (AICState::*)(), false, Address::SHC_3BB0A8C1_0x004C6D30, &AICState::wipeAICMemory)
@@ -147,15 +147,15 @@ namespace AI {
             uint (AICState::*)(PlayerID), false, Address::SHC_3BB0A8C1_0x004CB540, &AICState::aiShouldBuildPitchrig)
         aiShouldBuildPitchrig;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(PlayerID, CommandBuildingTypeInt), false,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(PlayerID, CommandBuildingType), false,
             Address::SHC_3BB0A8C1_0x004CB5B0, &AICState::shouldNotBeBuildingHovel)
         shouldNotBeBuildingHovel;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, CommandBuildingTypeInt), false,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, CommandBuildingType), false,
             Address::SHC_3BB0A8C1_0x004CB610, &AICState::shouldWaitWithBuildingNegativeFearFactor)
         shouldWaitWithBuildingNegativeFearFactor;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, CommandBuildingTypeInt), false,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, CommandBuildingType), false,
             Address::SHC_3BB0A8C1_0x004CB700, &AICState::shouldWaitWithBuildingAPositiveFearFactor)
         shouldWaitWithBuildingAPositiveFearFactor;
 
@@ -171,7 +171,7 @@ namespace AI {
             &AICState::destroyBuildingIfNoWorker)
         destroyBuildingIfNoWorker;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, CommandBuildingTypeInt), false,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, CommandBuildingType), false,
             Address::SHC_3BB0A8C1_0x004CB9F0, &AICState::shouldNotBuildMarketArmoryGranaryBarracksMercenarypost)
         shouldNotBuildMarketArmoryGranaryBarracksMercenarypost;
 
@@ -183,19 +183,19 @@ namespace AI {
             &AICState::setupWorkshopProductionType)
         setupWorkshopProductionType;
 
-        MACRO_FUNCTION_RESOLVER(void (AICState::*)(int, ResourceTypeInt, int), false, Address::SHC_3BB0A8C1_0x004CBFA0,
-            &AICState::sellGoods)
+        MACRO_FUNCTION_RESOLVER(
+            void (AICState::*)(int, ResourceType, int), false, Address::SHC_3BB0A8C1_0x004CBFA0, &AICState::sellGoods)
         sellGoods;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, ResourceTypeInt, int), false,
-            Address::SHC_3BB0A8C1_0x004CC000, &AICState::buyGoods)
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, ResourceType, int), false, Address::SHC_3BB0A8C1_0x004CC000,
+            &AICState::buyGoods)
         buyGoods;
 
-        MACRO_FUNCTION_RESOLVER(AIUnitBehaviourTypeInt (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CC070,
+        MACRO_FUNCTION_RESOLVER(AIUnitBehaviourType (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CC070,
             &AICState::randomlySelectAttackUnitTypeToRecruit)
         randomlySelectAttackUnitTypeToRecruit;
 
-        MACRO_FUNCTION_RESOLVER(UnitTypeInt (AICState::*)(int, AIUnitBehaviourTypeInt), false,
+        MACRO_FUNCTION_RESOLVER(UnitType (AICState::*)(int, AIUnitBehaviourType), false,
             Address::SHC_3BB0A8C1_0x004CC250, &AICState::getUnitTypeForUnitBehaviourType)
         getUnitTypeForUnitBehaviourType;
 
@@ -383,7 +383,7 @@ namespace AI {
             &AICState::processAttForceRallyPercentage)
         processAttForceRallyPercentage;
 
-        MACRO_FUNCTION_RESOLVER(void (AICState::*)(CommandBuildingTypeInt), false, Address::SHC_3BB0A8C1_0x004CEFD0,
+        MACRO_FUNCTION_RESOLVER(void (AICState::*)(CommandBuildingType), false, Address::SHC_3BB0A8C1_0x004CEFD0,
             &AICState::useAITribe_0x12_toPlaceSiegeTentsAndAssignEngineers)
         useAITribe_0x12_toPlaceSiegeTentsAndAssignEngineers;
 
@@ -479,12 +479,12 @@ namespace AI {
             &AICState::teamIsWeakRelativeToEnemy)
         teamIsWeakRelativeToEnemy;
 
-        MACRO_FUNCTION_RESOLVER(void (AICState::*)(int, AINervousDestroyBuildingCategoryInt), false,
+        MACRO_FUNCTION_RESOLVER(void (AICState::*)(int, AINervousDestroyBuildingCategory), false,
             Address::SHC_3BB0A8C1_0x004D0280, &AICState::destroyAnyBuildingInCategory)
         destroyAnyBuildingInCategory;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, ResourceTypeInt, int), false,
-            Address::SHC_3BB0A8C1_0x004D0520, &AICState::isResourceLargerOrEqualThanMinimumGoodsRequiredAfterTrade)
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, ResourceType, int), false, Address::SHC_3BB0A8C1_0x004D0520,
+            &AICState::isResourceLargerOrEqualThanMinimumGoodsRequiredAfterTrade)
         isResourceLargerOrEqualThanMinimumGoodsRequiredAfterTrade;
 
         MACRO_FUNCTION_RESOLVER(
@@ -586,7 +586,7 @@ namespace AI {
             void (AICState::*)(uint), false, Address::SHC_3BB0A8C1_0x004D1A00, &AICState::decideOnTribeAttackLocation)
         decideOnTribeAttackLocation;
 
-        MACRO_FUNCTION_RESOLVER(void (AICState::*)(int, ResourceTypeInt, undefined4), false,
+        MACRO_FUNCTION_RESOLVER(void (AICState::*)(int, ResourceType, undefined4), false,
             Address::SHC_3BB0A8C1_0x004D1F00, &AICState::requestGoods)
         requestGoods;
 
@@ -630,7 +630,7 @@ namespace AI {
             void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D2A70, &AICState::aiGiveRaidInstructions)
         aiGiveRaidInstructions;
 
-        MACRO_FUNCTION_RESOLVER(void (AICState::*)(int, AIVUnitTypeInt, int), false, Address::SHC_3BB0A8C1_0x004D2E00,
+        MACRO_FUNCTION_RESOLVER(void (AICState::*)(int, AIVUnitType, int), false, Address::SHC_3BB0A8C1_0x004D2E00,
             &AICState::sendTribeToAIVLocationSlot)
         sendTribeToAIVLocationSlot;
 
@@ -726,19 +726,19 @@ namespace AI {
             void (AICState::*)(), false, Address::SHC_3BB0A8C1_0x004D53E0, &AICState::updateAIBehaviour)
         updateAIBehaviour;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, CommandBuildingTypeInt), false,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, CommandBuildingType), false,
             Address::SHC_3BB0A8C1_0x004ECA30, &AICState::shouldNotBeBuildingGranary)
         shouldNotBeBuildingGranary;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(PlayerID, CommandBuildingTypeInt), false,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(PlayerID, CommandBuildingType), false,
             Address::SHC_3BB0A8C1_0x004ECA60, &AICState::shouldNotBeBuildingArmoury)
         shouldNotBeBuildingArmoury;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, CommandBuildingTypeInt), false,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, CommandBuildingType), false,
             Address::SHC_3BB0A8C1_0x004ECA90, &AICState::shouldNotBuildKillingPits)
         shouldNotBuildKillingPits;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(undefined4, CommandBuildingTypeInt), false,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(undefined4, CommandBuildingType), false,
             Address::SHC_3BB0A8C1_0x004ECAB0, &AICState::woodCuttersHutWhileNoWoodAvailable)
         woodCuttersHutWhileNoWoodAvailable;
 

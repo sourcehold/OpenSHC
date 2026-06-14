@@ -8,23 +8,25 @@
 
 #pragma once
 
-#include "OpenSHC/Audio/SFX/AmbientSFXTypeInt.hpp"
-#include "OpenSHC/Audio/SFX/SoundEffectIDInt.hpp"
+#include "OpenSHC/Audio/SFX/AmbientSFXType.hpp"
+#include "OpenSHC/Audio/SFX/SoundEffectID.hpp"
 #include "OpenSHC/Audio/SFX/SoundStructure1.hpp"
 #include "OpenSHC/Audio/SFX/SoundStructure2.hpp"
-#include "OpenSHC/Audio/SFX/SpeechEffectIDInt.hpp"
-#include "OpenSHC/DE/SHCDE/eSFXInt.hpp"
+#include "OpenSHC/Audio/SFX/SpeechEffectID.hpp"
+#include "OpenSHC/DE/SHCDE/eSFX.hpp"
+#include "OpenSHC/Map/Units/UnitType.hpp"
 
 namespace OpenSHC {
 namespace Audio {
     namespace SFX {
 
-        using OpenSHC::Audio::SFX::AmbientSFXTypeInt;
-        using OpenSHC::Audio::SFX::SoundEffectIDInt;
+        using OpenSHC::Audio::SFX::AmbientSFXType;
+        using OpenSHC::Audio::SFX::SoundEffectID;
         using OpenSHC::Audio::SFX::SoundStructure1;
         using OpenSHC::Audio::SFX::SoundStructure2;
-        using OpenSHC::Audio::SFX::SpeechEffectIDInt;
-        using OpenSHC::DE::SHCDE::eSFXInt;
+        using OpenSHC::Audio::SFX::SpeechEffectID;
+        using OpenSHC::DE::SHCDE::eSFX;
+        using OpenSHC::Map::Units::UnitType;
 
 #pragma pack(push, 1)
 
@@ -56,13 +58,13 @@ namespace Audio {
 
             void loadWavSounds(char* param_1);
 
-            void setUpSFXToPlayUnk(SoundEffectIDInt sfxOffsetInArray);
+            void setUpSFXToPlayUnk(SoundEffectID sfxOffsetInArray);
 
             void setSoundWithVariation(int unknownSfxID, int volumePercentage);
 
             void scheduleSFXVariation(int sfxGroupID, int variationIndex);
 
-            void playSFXAtLocation(int xPosition, int yPosition, eSFXInt sfxOffsetInArray);
+            void playSFXAtLocation(int xPosition, int yPosition, eSFX sfxOffsetInArray);
 
             void someVolumeAdjustmentFunction(int param_1, int param_2, int param_3);
 
@@ -70,7 +72,7 @@ namespace Audio {
 
             void notifyAmbientSoundEvent(int ambientSoundType);
 
-            void playAmbientSoundStreamUnk(AmbientSFXTypeInt ambientSoundIndexUnk);
+            void playAmbientSoundStreamUnk(AmbientSFXType ambientSoundIndexUnk);
 
             void playAmbientSoundStream2Unk(int ambientSoundIndexUnk);
 
@@ -78,7 +80,7 @@ namespace Audio {
 
             void playUnitSpeechEffect(uint speechEffectID);
 
-            void PlaySpeechSFX(SpeechEffectIDInt speechID);
+            void PlaySpeechSFX(SpeechEffectID speechID);
 
             void playWAVSFX(char* wav_filename);
 
@@ -91,6 +93,8 @@ namespace Audio {
             void tweakVolume(int param_1, float param_2);
 
             void readVolumeFileAndSetupSoundVolumes();
+
+            void playUnitSpeech(UnitType unitType, int actionID);
 
             void loadSFX();
 

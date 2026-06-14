@@ -8,13 +8,13 @@
 
 #pragma once
 
-#include "OpenSHC/IO/Graphics/GmIDInt.hpp"
-#include "OpenSHC/IO/PackagedFileMagicNumInt.hpp"
-#include "OpenSHC/Map/Entities/EntityTypeInt.hpp"
-#include "OpenSHC/Map/Units/Instructions/MatchSpeedInstructionEnumInt.hpp"
+#include "OpenSHC/IO/Graphics/GmID.hpp"
+#include "OpenSHC/IO/PackagedFileMagicNum.hpp"
+#include "OpenSHC/Map/Entities/EntityType.hpp"
+#include "OpenSHC/Map/Units/Instructions/MatchSpeedInstructionEnum.hpp"
 #include "OpenSHC/Map/Units/Unit.hpp"
-#include "OpenSHC/Map/Units/UnitInstructionTypeInt.hpp"
-#include "OpenSHC/Map/Units/UnitTypeInt.hpp"
+#include "OpenSHC/Map/Units/UnitInstructionType.hpp"
+#include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "WinDef.h"
@@ -23,13 +23,13 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::IO::PackagedFileMagicNumInt;
-        using OpenSHC::IO::Graphics::GmIDInt;
-        using OpenSHC::Map::Entities::EntityTypeInt;
+        using OpenSHC::IO::PackagedFileMagicNum;
+        using OpenSHC::IO::Graphics::GmID;
+        using OpenSHC::Map::Entities::EntityType;
         using OpenSHC::Map::Units::Unit;
-        using OpenSHC::Map::Units::UnitInstructionTypeInt;
-        using OpenSHC::Map::Units::UnitTypeInt;
-        using OpenSHC::Map::Units::Instructions::MatchSpeedInstructionEnumInt;
+        using OpenSHC::Map::Units::UnitInstructionType;
+        using OpenSHC::Map::Units::UnitType;
+        using OpenSHC::Map::Units::Instructions::MatchSpeedInstructionEnum;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
@@ -107,11 +107,11 @@ namespace Map {
 
             void clearAllUnits();
 
-            int assignPeasantToBuilding(UnitTypeInt unitType, int buildingID, int playerID, int workerIndex);
+            int assignPeasantToBuilding(UnitType unitType, int buildingID, int playerID, int workerIndex);
 
             int euroRecruit(int unitType, undefined4 playersBarracksID, int playerID, int param_4);
 
-            int nonEuroRecruit(UnitTypeInt unitType, undefined4 recruitmentBuilding, int playerID, int param_4);
+            int nonEuroRecruit(UnitType unitType, undefined4 recruitmentBuilding, int playerID, int param_4);
 
             int disbandUnit(int unitID);
 
@@ -193,7 +193,7 @@ namespace Map {
 
             undefined4 processFireDamageToUnit(int unitID, int playerID, int halfTheDamage);
 
-            void shootProjectile(int unitID, EntityTypeInt projectileType, int targetX, int targetY, int targetZUnk);
+            void shootProjectile(int unitID, EntityType projectileType, int targetX, int targetY, int targetZUnk);
 
             void recomputeTroopValuesForPlayer(int playerID);
 
@@ -324,7 +324,7 @@ namespace Map {
 
             void tribeRelated1(int playerID, int tribeID);
 
-            UnitTypeInt getUnitTypeOfFirstSelectedUnit();
+            UnitType getUnitTypeOfFirstSelectedUnit();
 
             undefined4 meth_0x536260();
 
@@ -367,7 +367,7 @@ namespace Map {
             void giveMoveCommand(int tribeID, int x, int y, int patrol, int matchUnitSpeeds);
 
             void giveTribeMoveInstructionHumans(
-                int tribeID, uint x, uint y, int rallyBool, MatchSpeedInstructionEnumInt speedMatching);
+                int tribeID, uint x, uint y, int rallyBool, MatchSpeedInstructionEnum speedMatching);
 
             void extendRallyPoint(int tribeID, int mouseX, int mouseY, int rallyCount);
 
@@ -377,11 +377,11 @@ namespace Map {
 
             void queueCommand_36d(undefined4 param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4);
 
-            void queueCommand_36_variation2(undefined4 param_1, UnitInstructionTypeInt instruction, undefined4 param_3,
+            void queueCommand_36_variation2(undefined4 param_1, UnitInstructionType instruction, undefined4 param_3,
                 undefined4 param_4, undefined4 param_5);
 
             void giveTribeAnInstruction2(
-                int tribeID, UnitInstructionTypeInt instructionType, int targetID_1, int targetID_2, int param_5);
+                int tribeID, UnitInstructionType instructionType, int targetID_1, int targetID_2, int param_5);
 
             uint findFreeTileNearby(uint unitID, uint tile);
 
@@ -407,7 +407,7 @@ namespace Map {
 
             int FUN_00537f60(int unitIndex, int* param_2);
 
-            GmIDInt getPeasantGmID(int unitID);
+            GmID getPeasantGmID(int unitID);
 
             undefined4 chooseHusbandAndWife(int* husbandID, int* wifeID);
 
@@ -421,7 +421,7 @@ namespace Map {
 
             void renderDebugDataUnitData(int x, int y, int width, int height);
 
-            void setUnitValues(int unitID, UnitTypeInt unitType);
+            void setUnitValues(int unitID, UnitType unitType);
 
             void updateUnitPositionUnk(int unitID);
 
@@ -448,10 +448,10 @@ namespace Map {
             int meth_0x53ddd0(int unitID);
 
             void upgradeMapFormatForUnits(
-                PackagedFileMagicNumInt receivedMapVersion, PackagedFileMagicNumInt packagerMapVersion);
+                PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
 
             int spawnUnit(int playerID, int displayColor, int microXPosition, int microYPosition, int terrainHeight,
-                UnitTypeInt unitType);
+                UnitType unitType);
 
             int changeUnitType(int unitID);
 

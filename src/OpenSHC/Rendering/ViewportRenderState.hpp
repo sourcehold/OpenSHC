@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "OpenSHC/IO/Graphics/GmIDInt.hpp"
+#include "OpenSHC/IO/Graphics/GmID.hpp"
 #include "OpenSHC/Map/Floaters/Floater.hpp"
 #include "OpenSHC/Map/Matrices/TranslationMatrixTriplet.hpp"
 #include "OpenSHC/Rendering/UnitRenderHelpStructure.hpp"
@@ -18,7 +18,7 @@
 namespace OpenSHC {
 namespace Rendering {
 
-    using OpenSHC::IO::Graphics::GmIDInt;
+    using OpenSHC::IO::Graphics::GmID;
     using OpenSHC::Map::Floaters::Floater;
     using OpenSHC::Map::Matrices::TranslationMatrixTriplet;
     using OpenSHC::Rendering::UnitRenderHelpStructure;
@@ -138,7 +138,7 @@ namespace Rendering {
 
         void meth_0x4e6340();
 
-        void creataAFloatingLayerElement(GmIDInt gmID, int imageID, int imageX, int imageY, int tile, int variation);
+        void creataAFloatingLayerElement(GmID gmID, int imageID, int imageX, int imageY, int tile, int variation);
 
         void renderDebugDataMousePointing(int x, int y, int width, int height);
 

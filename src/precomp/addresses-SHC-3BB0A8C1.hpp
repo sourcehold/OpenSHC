@@ -22755,23 +22755,23 @@ enum {
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x0046A830 = 0x0046A830,
-    // label: setMemoryToValue0x001
+    // label: setMemoryToValue_0x001
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x0046A850 = 0x0046A850,
-    // label: setMemoryToValue0x002
+    // label: setMemoryToValue_0x002
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x0046A890 = 0x0046A890,
-    // label: setMemoryToValue0x004
+    // label: setMemoryToValue_0x004
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x0046A8D0 = 0x0046A8D0,
-    // label: setMemoryToValue0x010
+    // label: setMemoryToValue_0x010
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x0046A910 = 0x0046A910,
-    // label: setMemoryToValue0x100
+    // label: setMemoryToValue_0x100
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x0046A970 = 0x0046A970,
@@ -93763,7 +93763,7 @@ enum {
     SHC_3BB0A8C1_0x00B983C0 = 0x00B983C0,
     // label: BOOL_WasInteracting
     // location:
-    // type: WinDef/BOOL
+    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
     SHC_3BB0A8C1_0x00B98408 = 0x00B98408,
     // type: /undefined4
     SHC_3BB0A8C1_0x00B9840C = 0x00B9840C,
@@ -94080,7 +94080,7 @@ enum {
     SHC_3BB0A8C1_0x00DF2970 = 0x00DF2970,
     // label: HLP_WCHAR_Buffer
     // location:
-    // type: ntddk_32/WCHAR[256]
+    // type: /wchar_t[256]
     SHC_3BB0A8C1_0x00DF2978 = 0x00DF2978,
     // type: winapi_32/WCHAR[1000]
     SHC_3BB0A8C1_0x00DF2B78 = 0x00DF2B78,
@@ -94096,7 +94096,7 @@ enum {
     SHC_3BB0A8C1_0x00DF3354 = 0x00DF3354,
     // label: DAT_EnoughGoldForRequestedUnit
     // location:
-    // type: WinDef/BOOL
+    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
     SHC_3BB0A8C1_0x00DF3358 = 0x00DF3358,
     // type: /int
     SHC_3BB0A8C1_0x00DF335C = 0x00DF335C,
@@ -94361,7 +94361,7 @@ enum {
     SHC_3BB0A8C1_0x00DF429C = 0x00DF429C,
     // label: BOOL_RelatedToInitialGranaryAndKeepPlacement
     // location:
-    // type: ntddk_32/BOOL
+    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
     SHC_3BB0A8C1_0x00DF42A0 = 0x00DF42A0,
     // label: DAT_ModalMenuArrayPointerToStackTop
     // location:
@@ -95178,7 +95178,7 @@ enum {
     SHC_3BB0A8C1_0x00ED31B4 = 0x00ED31B4,
     // label: DAT_ButtonCurrentlyInteracting
     // location:
-    // type: ntddk_32/BOOL
+    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
     SHC_3BB0A8C1_0x00ED31B8 = 0x00ED31B8,
     // label: DAT_CurrentButtonGmDataIndex
     // location:
@@ -95244,7 +95244,7 @@ enum {
     SHC_3BB0A8C1_0x00EE0FCC = 0x00EE0FCC,
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00EE0FD4 = 0x00EE0FD4,
-    // type: WinDef/BOOL
+    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
     SHC_3BB0A8C1_0x00EE0FD8 = 0x00EE0FD8,
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00EE0FDC = 0x00EE0FDC,
@@ -95364,7 +95364,7 @@ enum {
     SHC_3BB0A8C1_0x00EE2350 = 0x00EE2350,
     // label: FLAG_ChristmasAIMessage01to04
     // location:
-    // type: WinDef/BOOL
+    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
     SHC_3BB0A8C1_0x00EE2354 = 0x00EE2354,
     // type: /int
     SHC_3BB0A8C1_0x00EE2358 = 0x00EE2358,
@@ -95374,11 +95374,11 @@ enum {
     SHC_3BB0A8C1_0x00EE2360 = 0x00EE2360,
     // label: FLAG_JokeAIMessage05
     // location:
-    // type: WinDef/BOOL
+    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
     SHC_3BB0A8C1_0x00EE2364 = 0x00EE2364,
     // label: FLAG_JokeAIMessage06
     // location:
-    // type: WinDef/BOOL
+    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
     SHC_3BB0A8C1_0x00EE2368 = 0x00EE2368,
     // type: /int
     SHC_3BB0A8C1_0x00EE236C = 0x00EE236C,
@@ -95386,7 +95386,7 @@ enum {
     SHC_3BB0A8C1_0x00EE2370 = 0x00EE2370,
     // label: FLAG_JokeAIMessage09
     // location:
-    // type: WinDef/BOOL
+    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
     SHC_3BB0A8C1_0x00EE2374 = 0x00EE2374,
     // type: /int
     SHC_3BB0A8C1_0x00EE2378 = 0x00EE2378,
@@ -95394,7 +95394,7 @@ enum {
     SHC_3BB0A8C1_0x00EE237C = 0x00EE237C,
     // label: FLAG_JokeAIMessage12
     // location:
-    // type: WinDef/BOOL
+    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
     SHC_3BB0A8C1_0x00EE2380 = 0x00EE2380,
     // type: /int
     SHC_3BB0A8C1_0x00EE2384 = 0x00EE2384,
@@ -95404,7 +95404,7 @@ enum {
     SHC_3BB0A8C1_0x00EE238C = 0x00EE238C,
     // label: FLAG_JokeAIMessage16
     // location:
-    // type: WinDef/BOOL
+    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
     SHC_3BB0A8C1_0x00EE2390 = 0x00EE2390,
     // label: TIME_ReceivedMessage_1
     // location:
@@ -97410,11 +97410,11 @@ enum {
     SHC_3BB0A8C1_0x02403AF8 = 0x02403AF8,
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x0242746C = 0x0242746C,
-    // type: WinDef/BOOL
+    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
     SHC_3BB0A8C1_0x02427470 = 0x02427470,
     // label: DAT_RenderMiniMapOrBinkFlag
     // location:
-    // type: WinDef/BOOL
+    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
     SHC_3BB0A8C1_0x02427474 = 0x02427474,
     // type: /int
     SHC_3BB0A8C1_0x02427478 = 0x02427478,

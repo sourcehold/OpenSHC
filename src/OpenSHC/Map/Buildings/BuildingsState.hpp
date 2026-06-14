@@ -8,28 +8,28 @@
 
 #pragma once
 
-#include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
+#include "OpenSHC/Commands/CommandBuildingType.hpp"
 #include "OpenSHC/Game/Player/PlayerID.hpp"
-#include "OpenSHC/Game/Resources/ResourceTypeInt.hpp"
-#include "OpenSHC/IO/PackagedFileMagicNumInt.hpp"
+#include "OpenSHC/Game/Resources/ResourceType.hpp"
+#include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Buildings/Building.hpp"
 #include "OpenSHC/Map/Buildings/BuildingCostStruct.hpp"
-#include "OpenSHC/Map/Buildings/BuildingTypeInt.hpp"
-#include "OpenSHC/Map/Units/UnitTypeInt.hpp"
+#include "OpenSHC/Map/Buildings/BuildingType.hpp"
+#include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
-        using OpenSHC::Commands::CommandBuildingTypeInt;
+        using OpenSHC::Commands::CommandBuildingType;
         using OpenSHC::Game::Player::PlayerID;
-        using OpenSHC::Game::Resources::ResourceTypeInt;
-        using OpenSHC::IO::PackagedFileMagicNumInt;
+        using OpenSHC::Game::Resources::ResourceType;
+        using OpenSHC::IO::PackagedFileMagicNum;
         using OpenSHC::Map::Buildings::Building;
         using OpenSHC::Map::Buildings::BuildingCostStruct;
-        using OpenSHC::Map::Buildings::BuildingTypeInt;
-        using OpenSHC::Map::Units::UnitTypeInt;
+        using OpenSHC::Map::Buildings::BuildingType;
+        using OpenSHC::Map::Units::UnitType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
@@ -88,19 +88,19 @@ namespace Map {
             // Constructor
             BuildingsState* Constructor_BuildingsState();
 
-            undefined4 someArrayIndexingOnBuildingField0x120(int buildingID, int param_2, ResourceTypeInt param_3);
+            undefined4 someArrayIndexingOnBuildingField0x120(int buildingID, int param_2, ResourceType param_3);
 
-            BuildingTypeInt convertCommandBuildingTypeToBuildingType(CommandBuildingTypeInt commandBuildingType);
+            BuildingType convertCommandBuildingTypeToBuildingType(CommandBuildingType commandBuildingType);
 
-            CommandBuildingTypeInt convertBuildingTypeToCommandBuildingType(BuildingTypeInt buildingType);
+            CommandBuildingType convertBuildingTypeToCommandBuildingType(BuildingType buildingType);
 
             undefined4 getBuildingHeightForBuildingID(int buildingID);
 
             undefined4 GetBuildingHeightForBuildingID_type2(int buildingID);
 
-            int getSpriteID(CommandBuildingTypeInt commandBuildingType);
+            int getSpriteID(CommandBuildingType commandBuildingType);
 
-            int getSpriteID2(CommandBuildingTypeInt commandBuildingType);
+            int getSpriteID2(CommandBuildingType commandBuildingType);
 
             void clearBuildings();
 
@@ -114,19 +114,19 @@ namespace Map {
 
             void copyPlayerDataArrayValues(int playerID, int playerID2);
 
-            int chooseProductionItemType(int playerID, BuildingTypeInt buildingType);
+            int chooseProductionItemType(int playerID, BuildingType buildingType);
 
-            int getEmptyBuildingCount(int playerID, BuildingTypeInt buildingType);
+            int getEmptyBuildingCount(int playerID, BuildingType buildingType);
 
-            int countBuildingsForPlayer(PlayerID playerID, BuildingTypeInt buildingType, int includeBool);
+            int countBuildingsForPlayer(PlayerID playerID, BuildingType buildingType, int includeBool);
 
             int countFarms(PlayerID playerID, int param_2);
 
-            int findFirstBuildingOfType(int playerID, BuildingTypeInt buildingType);
+            int findFirstBuildingOfType(int playerID, BuildingType buildingType);
 
-            int findFirstBuildingIDForPlayerAndType(int playerID, BuildingTypeInt buildingType);
+            int findFirstBuildingIDForPlayerAndType(int playerID, BuildingType buildingType);
 
-            int findNextBuildingForPlayerAndType(PlayerID playerID, BuildingTypeInt buildingType, int buildingID);
+            int findNextBuildingForPlayerAndType(PlayerID playerID, BuildingType buildingType, int buildingID);
 
             int meth_0x40ab90(int param_1, int param_2, int param_3);
 
@@ -137,10 +137,10 @@ namespace Map {
 
             int meth_0x40adb0(int param_1, int param_2, int param_3, int param_4);
 
-            int pickARandomBuildingOfType(int playerID, BuildingTypeInt buildingType);
+            int pickARandomBuildingOfType(int playerID, BuildingType buildingType);
 
-            int pickARandomBuildingIDOfTheseThreeTypes(int playerID, BuildingTypeInt buildingType1,
-                BuildingTypeInt buildingType2, BuildingTypeInt buildingType3);
+            int pickARandomBuildingIDOfTheseThreeTypes(
+                int playerID, BuildingType buildingType1, BuildingType buildingType2, BuildingType buildingType3);
 
             int pickARandomPositiveFearFactorBuilding(int playerID);
 
@@ -148,7 +148,7 @@ namespace Map {
 
             void recomputeAllFearFactors();
 
-            undefined4 findBuildingOfTypeForPlayer(int playerID, BuildingTypeInt buildingType);
+            undefined4 findBuildingOfTypeForPlayer(int playerID, BuildingType buildingType);
 
             void removeSiegeBuildings(int attackWave, int playerID);
 
@@ -170,17 +170,17 @@ namespace Map {
 
             void setupNextCandidateLocationComputeOffsets2(int size, int nudge, int try_, int offset);
 
-            BOOLEnum buildingHasSpaceForResource(int buildingID, ResourceTypeInt resourceType);
+            BOOLEnum buildingHasSpaceForResource(int buildingID, ResourceType resourceType);
 
-            void meth_0x40bee0(BuildingTypeInt buildingType, int someCountdown, int playerID);
+            void meth_0x40bee0(BuildingType buildingType, int someCountdown, int playerID);
 
-            int canBuildingStoreTheAmount(int buildingID, ResourceTypeInt resourceType, int storageLimit);
+            int canBuildingStoreTheAmount(int buildingID, ResourceType resourceType, int storageLimit);
 
             int getResourceCountThatCanBeDeposited(int buildingID, undefined4 resourceType, int storageLimit);
 
-            BuildingTypeInt getBuildingStorageTypeForResourceType(ResourceTypeInt resourceType);
+            BuildingType getBuildingStorageTypeForResourceType(ResourceType resourceType);
 
-            int getStorageBuildingForResourceTypeAndAmount(ResourceTypeInt resourceType, int amount, int owner);
+            int getStorageBuildingForResourceTypeAndAmount(ResourceType resourceType, int amount, int owner);
 
             uint ifArmoryReturnIDIfSpaceLeft(uint buildingID, undefined4 resourceID, int playerID, int resourceCount);
 
@@ -196,12 +196,12 @@ namespace Map {
 
             void recomputePlayerDataStocksBasedOnStorageBuildings();
 
-            void getBuildingCostUnk(CommandBuildingTypeInt commandBuildingType, int* pStone, int* pGold);
+            void getBuildingCostUnk(CommandBuildingType commandBuildingType, int* pStone, int* pGold);
 
-            void getPriceForDisbandedUnitType(UnitTypeInt unitType, int* outPrice);
+            void getPriceForDisbandedUnitType(UnitType unitType, int* outPrice);
 
             void resourceGainForKillingPitAndPitchDitch(
-                BuildingTypeInt buildingType, int* ptrRequiredStone, int* ptrRequiredGold);
+                BuildingType buildingType, int* ptrRequiredStone, int* ptrRequiredGold);
 
             void subtractPitchAndMoatFromStartingGoldInSiegeThatMode();
 
@@ -354,33 +354,33 @@ namespace Map {
             void meth_0x41b7c0(int param_1);
 
             void findQuarryPileLocation(undefined4 playerID, int x, int y, int buildingSize, int pileSize, int tryUnk,
-                CommandBuildingTypeInt commandBuildingType);
+                CommandBuildingType commandBuildingType);
 
-            BOOLEnum hasBuildingAsNeighbour(int playerID, int x, int y, int size, BuildingTypeInt type);
+            BOOLEnum hasBuildingAsNeighbour(int playerID, int x, int y, int size, BuildingType type);
 
             int findParticularBuilding(
-                undefined4 param_1, int x, int y, int buildingSize, BuildingTypeInt buildingType, int buildingID);
+                undefined4 param_1, int x, int y, int buildingSize, BuildingType buildingType, int buildingID);
 
             int getAreaForSurroundingTileUnk(int x, int y, int buildingSize);
 
-            undefined4 addResourceToStockpile(int buildingID, int buildingUID, ResourceTypeInt resourceType, int amount,
+            undefined4 addResourceToStockpile(int buildingID, int buildingUID, ResourceType resourceType, int amount,
                 int maxCapacity, int recomputeResources);
 
-            void addResourceToGranary(ResourceTypeInt resourceType, int playerID, int amount);
+            void addResourceToGranary(ResourceType resourceType, int playerID, int amount);
 
-            void addResourceToArmory(ResourceTypeInt resourceType, int playerID, int amount);
+            void addResourceToArmory(ResourceType resourceType, int playerID, int amount);
 
-            void processResourceLoss(int playerID, ResourceTypeInt resourceType, int amount, int param_4);
+            void processResourceLoss(int playerID, ResourceType resourceType, int amount, int param_4);
 
             void subtractResourcesStoredInBuilding(int buildingID);
 
-            void processPlacementResourceLossForBuildingType(int playerID, BuildingTypeInt buildingType, int param_3);
+            void processPlacementResourceLossForBuildingType(int playerID, BuildingType buildingType, int param_3);
 
             void processWallBuildingLoss(int playerID, int highCount, int lowCount, int zero);
 
             void FUN_0041c240(int param_1, int param_2);
 
-            BOOLEnum processResourceGain(int playerID, ResourceTypeInt resourceType, int amount);
+            BOOLEnum processResourceGain(int playerID, ResourceType resourceType, int amount);
 
             void ApplyGateOrDrawbridgeOpenCloseChange(int buildingID, BOOLEnum param_2, BOOLEnum param_3);
 
@@ -388,9 +388,9 @@ namespace Map {
 
             undefined4 lightUpBuilding(int buildingID, int burnerPlayerID, int spareGrounds);
 
-            void meth_0x420bf0(PackagedFileMagicNumInt receivedMapVersion, PackagedFileMagicNumInt packagerMapVersion);
+            void meth_0x420bf0(PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
 
-            int setupBuildingData(int playerID, uint x, uint y, undefined4 averageHeight, BuildingTypeInt buildingType,
+            int setupBuildingData(int playerID, uint x, uint y, undefined4 averageHeight, BuildingType buildingType,
                 uint width, int playerID_dup, int variationIndex);
 
             void deleteBuilding(uint buildingID);
@@ -403,7 +403,7 @@ namespace Map {
 
             int giveBackResourceForDestroyedBuilding(int buildingID__negResourceType, int playerID, int param_3);
 
-            int getBuildingThatCanStoreThisResource(ResourceTypeInt resourceType, int amount, int playerID);
+            int getBuildingThatCanStoreThisResource(ResourceType resourceType, int amount, int playerID);
 
             uint getArmoryWithSpaceLeft(
                 uint targetBuildingID, undefined4 producedItemTypeUnk, int playerID, int resourceToDeposit);
@@ -422,7 +422,7 @@ namespace Map {
 
             void updateHeatmapBasedOnBuildingAccessibility(int playerID);
 
-            void FUN_00424310(PackagedFileMagicNumInt receivedMapVersion, PackagedFileMagicNumInt packagerMapVersion);
+            void FUN_00424310(PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
         };
 
         static_assert_cpp98_obj(sizeof(BuildingsState) == 1630344, BuildingsState);

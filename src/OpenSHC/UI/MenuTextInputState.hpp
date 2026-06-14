@@ -8,11 +8,13 @@
 
 #pragma once
 
+#include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/UI/Enums/MenuModalTypeInt.hpp"
 
 namespace OpenSHC {
 namespace UI {
 
+    using OpenSHC::UI::Enums::MenuModalType;
     using OpenSHC::UI::Enums::MenuModalTypeInt;
 
 #pragma pack(push, 1)
@@ -82,7 +84,7 @@ namespace UI {
         // Constructor
         MenuTextInputState* Constructor_MenuTextInputState();
 
-        void activateModalDialogAndClearText(MenuModalTypeInt dialogID);
+        void activateModalDialogAndClearText(MenuModalType dialogID);
 
         void clearModalDialog2to6();
 
@@ -94,7 +96,7 @@ namespace UI {
 
         void activateLoadOrSaveMapUI(int loadOrSaveMap);
 
-        void loadOrSaveMap(MenuModalTypeInt param_1);
+        void loadOrSaveMap(MenuModalType param_1);
 
         void loadOrSaveGame(int action);
     };

@@ -2,26 +2,24 @@
   path: 'OpenSHC/Map/TileMapState.func.hpp'
 */
 
-#include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
-#include "OpenSHC/Commands/CommandBuildingTypeShort.hpp"
+#include "OpenSHC/Commands/CommandBuildingType.hpp"
 #include "OpenSHC/Game/Player/PlayerID.hpp"
-#include "OpenSHC/IO/PackagedFileMagicNumInt.hpp"
-#include "OpenSHC/Map/Buildings/BuildingTypeInt.hpp"
-#include "OpenSHC/Map/LogicHelpers/Logic1Int.hpp"
-#include "OpenSHC/Map/LogicHelpers/Logic2Int.hpp"
+#include "OpenSHC/IO/PackagedFileMagicNum.hpp"
+#include "OpenSHC/Map/Buildings/BuildingType.hpp"
+#include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
+#include "OpenSHC/Map/LogicHelpers/Logic2.hpp"
 #include "OpenSHC/Map/TileMapState.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
 namespace Map {
     namespace TileMapState_Func {
 
-        using OpenSHC::Commands::CommandBuildingTypeInt;
-        using OpenSHC::Commands::CommandBuildingTypeShort;
+        using OpenSHC::Commands::CommandBuildingType;
         using OpenSHC::Game::Player::PlayerID;
-        using OpenSHC::IO::PackagedFileMagicNumInt;
-        using OpenSHC::Map::Buildings::BuildingTypeInt;
-        using OpenSHC::Map::LogicHelpers::Logic1Int;
-        using OpenSHC::Map::LogicHelpers::Logic2Int;
+        using OpenSHC::IO::PackagedFileMagicNum;
+        using OpenSHC::Map::Buildings::BuildingType;
+        using OpenSHC::Map::LogicHelpers::Logic1;
+        using OpenSHC::Map::LogicHelpers::Logic2;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         MACRO_FUNCTION_RESOLVER(
@@ -154,7 +152,7 @@ namespace Map {
             void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004F93E0, &TileMapState::destroyWallsOfPlayer)
         destroyWallsOfPlayer;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, CommandBuildingTypeInt), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, CommandBuildingType), false,
             Address::SHC_3BB0A8C1_0x004F94A0, &TileMapState::isWallUnkPlacementAllowed)
         isWallUnkPlacementAllowed;
 
@@ -174,7 +172,7 @@ namespace Map {
             &TileMapState::storeMinAndMaxHeightOfArea)
         storeMinAndMaxHeightOfArea;
 
-        MACRO_FUNCTION_RESOLVER(int (TileMapState::*)(int, int, CommandBuildingTypeInt, int), false,
+        MACRO_FUNCTION_RESOLVER(int (TileMapState::*)(int, int, CommandBuildingType, int), false,
             Address::SHC_3BB0A8C1_0x004F9A60, &TileMapState::isBuildingPlacementAllowedAtTile)
         isBuildingPlacementAllowedAtTile;
 
@@ -198,7 +196,7 @@ namespace Map {
             undefined4 (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004FA460, &TileMapState::meth_0x4fa460)
         meth_0x4fa460;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (TileMapState::*)(CommandBuildingTypeInt), false,
+        MACRO_FUNCTION_RESOLVER(undefined4 (TileMapState::*)(CommandBuildingType), false,
             Address::SHC_3BB0A8C1_0x004FA550, &TileMapState::getBuildingSizeForCommandBuildingType)
         getBuildingSizeForCommandBuildingType;
 
@@ -510,11 +508,11 @@ namespace Map {
             Address::SHC_3BB0A8C1_0x005029D0, &TileMapState::checkWhetherThisWallBuildIsAllowed)
         checkWhetherThisWallBuildIsAllowed;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, uint, uint, CommandBuildingTypeInt, int), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, uint, uint, CommandBuildingType, int), false,
             Address::SHC_3BB0A8C1_0x00502F30, &TileMapState::placeWalls)
         placeWalls;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, CommandBuildingTypeInt), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, CommandBuildingType), false,
             Address::SHC_3BB0A8C1_0x005034A0, &TileMapState::placeDefensiveStructurePart2Unk)
         placeDefensiveStructurePart2Unk;
 
@@ -522,7 +520,7 @@ namespace Map {
             &TileMapState::setupBuildingSizeIndexMapping)
         setupBuildingSizeIndexMapping;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, CommandBuildingTypeShort, int), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, CommandBuildingType, int), false,
             Address::SHC_3BB0A8C1_0x005037B0, &TileMapState::checkBuildingCanBePlacedHere)
         checkBuildingCanBePlacedHere;
 
@@ -534,7 +532,7 @@ namespace Map {
             void (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00504EE0, &TileMapState::meth_0x504ee0)
         meth_0x504ee0;
 
-        MACRO_FUNCTION_RESOLVER(int (TileMapState::*)(int, int, CommandBuildingTypeInt, int), false,
+        MACRO_FUNCTION_RESOLVER(int (TileMapState::*)(int, int, CommandBuildingType, int), false,
             Address::SHC_3BB0A8C1_0x00504F10, &TileMapState::setConstructionGFXLayerBasedOnPlacementChecks)
         setConstructionGFXLayerBasedOnPlacementChecks;
 
@@ -546,7 +544,7 @@ namespace Map {
             &TileMapState::someUpdatePathLinkageRelatedCall)
         someUpdatePathLinkageRelatedCall;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, BuildingTypeInt, uint, int, undefined4), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, BuildingType, uint, int, undefined4), false,
             Address::SHC_3BB0A8C1_0x00506BD0, &TileMapState::placeWorkshopOrHovel)
         placeWorkshopOrHovel;
 
@@ -624,7 +622,7 @@ namespace Map {
             void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x00508910, &TileMapState::meth_0x508910)
         meth_0x508910;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(uint, uint, CommandBuildingTypeInt), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(uint, uint, CommandBuildingType), false,
             Address::SHC_3BB0A8C1_0x00508A00, &TileMapState::renderPreviewMapperWithBrush)
         renderPreviewMapperWithBrush;
 
@@ -668,7 +666,7 @@ namespace Map {
             void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x00511850, &TileMapState::updateGameRelatedValue)
         updateGameRelatedValue;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(PackagedFileMagicNumInt, PackagedFileMagicNumInt), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(PackagedFileMagicNum, PackagedFileMagicNum), false,
             Address::SHC_3BB0A8C1_0x00511D70, &TileMapState::upgradeMapFormatLogicLayer)
         upgradeMapFormatLogicLayer;
 
@@ -692,7 +690,7 @@ namespace Map {
             &TileMapState::processMapOrientationChange)
         processMapOrientationChange;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int, uint, uint, Logic1Int, Logic2Int), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int, uint, uint, Logic1, Logic2), false,
             Address::SHC_3BB0A8C1_0x00512940, &TileMapState::setTerrain)
         setTerrain;
 
@@ -704,7 +702,7 @@ namespace Map {
             Address::SHC_3BB0A8C1_0x00514520, &TileMapState::placeKillingPit)
         placeKillingPit;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, BuildingTypeInt, uint, int, int), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, BuildingType, uint, int, int), false,
             Address::SHC_3BB0A8C1_0x005146D0, &TileMapState::placeKeep)
         placeKeep;
 
@@ -724,7 +722,7 @@ namespace Map {
             false, Address::SHC_3BB0A8C1_0x005154D0, &TileMapState::placeDairyfarm)
         placeDairyfarm;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, BuildingTypeInt, undefined4, int, int*), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, BuildingType, undefined4, int, int*), false,
             Address::SHC_3BB0A8C1_0x00515740, &TileMapState::placeApplefarm)
         placeApplefarm;
 
@@ -740,11 +738,11 @@ namespace Map {
             &TileMapState::placeTree)
         placeTree;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (TileMapState::*)(int, uint, uint, CommandBuildingTypeInt, int), false,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (TileMapState::*)(int, uint, uint, CommandBuildingType, int), false,
             Address::SHC_3BB0A8C1_0x005160C0, &TileMapState::prepareAreaForBuildingPlacement)
         prepareAreaForBuildingPlacement;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(PlayerID, int, int, CommandBuildingTypeInt, int, int), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(PlayerID, int, int, CommandBuildingType, int, int), false,
             Address::SHC_3BB0A8C1_0x005162D0, &TileMapState::placeBuilding)
         placeBuilding;
 

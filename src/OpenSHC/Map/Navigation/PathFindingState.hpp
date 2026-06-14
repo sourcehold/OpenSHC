@@ -10,7 +10,7 @@
 
 #include "OpenSHC/Map/ClimbData.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingStatePartB.hpp"
-#include "OpenSHC/Map/Units/UnitTypeInt.hpp"
+#include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "WinDef.h"
@@ -21,7 +21,7 @@ namespace Map {
 
         using OpenSHC::Map::ClimbData;
         using OpenSHC::Map::Navigation::PathFindingStatePartB;
-        using OpenSHC::Map::Units::UnitTypeInt;
+        using OpenSHC::Map::Units::UnitType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
@@ -295,7 +295,7 @@ namespace Map {
             void setMoveDestinationPairs(int playerIDmin1, int playerID, int maxCost);
 
             void spawnUnitAndAddToTribe(
-                int playerID, int displayColor, int count, UnitTypeInt unitType, undefined4 tribeID);
+                int playerID, int displayColor, int count, UnitType unitType, undefined4 tribeID);
 
             void computeAttackVectorsBasedOnXAndY(int playerID);
 

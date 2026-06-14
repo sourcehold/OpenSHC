@@ -8,10 +8,10 @@
 
 #pragma once
 
-#include "OpenSHC/IO/PackagedFileMagicNumInt.hpp"
+#include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Rocks/Rock.hpp"
 #include "OpenSHC/Map/Trees/Tree.hpp"
-#include "OpenSHC/Map/Trees/TreeTypeInt.hpp"
+#include "OpenSHC/Map/Trees/TreeType.hpp"
 #include "OpenSHC/Map/WindState.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -20,11 +20,11 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::IO::PackagedFileMagicNumInt;
+    using OpenSHC::IO::PackagedFileMagicNum;
     using OpenSHC::Map::WindState;
     using OpenSHC::Map::Rocks::Rock;
     using OpenSHC::Map::Trees::Tree;
-    using OpenSHC::Map::Trees::TreeTypeInt;
+    using OpenSHC::Map::Trees::TreeType;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
@@ -62,7 +62,7 @@ namespace Map {
 
         void clearRocksAndTrees();
 
-        int createTree(undefined4 x, undefined4 y, TreeTypeInt treeType, undefined4 size, int stageRelatedValue,
+        int createTree(undefined4 x, undefined4 y, TreeType treeType, undefined4 size, int stageRelatedValue,
             undefined4 param_6, int stage);
 
         void setTreeStageRelatedValues(int treeID, int stage);
@@ -111,7 +111,7 @@ namespace Map {
 
         int findTree(int playerID, uint unitXPosition, uint unitYPosition);
 
-        void FUN_004f3d30(PackagedFileMagicNumInt receivedMapVersion, PackagedFileMagicNumInt packagerMapVersion);
+        void FUN_004f3d30(PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
 
         void updateTrees();
     };

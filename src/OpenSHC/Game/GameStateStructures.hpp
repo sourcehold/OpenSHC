@@ -8,23 +8,23 @@
 
 #pragma once
 
-#include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
+#include "OpenSHC/Commands/CommandBuildingType.hpp"
 #include "OpenSHC/Game/Player/PlayerData.hpp"
-#include "OpenSHC/Game/Resources/ResourceTypeInt.hpp"
+#include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/Game/State/MapAndTimeState.hpp"
 #include "OpenSHC/Game/State/UnitSelectionHotKeyEntry.hpp"
-#include "OpenSHC/IO/PackagedFileMagicNumInt.hpp"
+#include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
 namespace Game {
 
-    using OpenSHC::Commands::CommandBuildingTypeInt;
+    using OpenSHC::Commands::CommandBuildingType;
     using OpenSHC::Game::Player::PlayerData;
-    using OpenSHC::Game::Resources::ResourceTypeInt;
+    using OpenSHC::Game::Resources::ResourceType;
     using OpenSHC::Game::State::MapAndTimeState;
     using OpenSHC::Game::State::UnitSelectionHotKeyEntry;
-    using OpenSHC::IO::PackagedFileMagicNumInt;
+    using OpenSHC::IO::PackagedFileMagicNum;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
@@ -110,7 +110,7 @@ namespace Game {
         void destroyPlayerCompletely(int playerID);
 
         undefined4 checkRequiredResourcesForBuildingOrPlanToBuy(
-            CommandBuildingTypeInt commandBuildingType, int playerID, BOOLEnum playResourceLackMsgUnk);
+            CommandBuildingType commandBuildingType, int playerID, BOOLEnum playResourceLackMsgUnk);
 
         int getWallTilesThatCanBeBuilt(int playerID, int wallMaterial);
 
@@ -134,13 +134,13 @@ namespace Game {
 
         int meth_0x458700(int param_1);
 
-        BOOLEnum isResourceTypeTradeable(ResourceTypeInt resourceType);
+        BOOLEnum isResourceTypeTradeable(ResourceType resourceType);
 
         BOOLEnum anyGoodsAreAllowedForSale();
 
-        int getNextGoodFilteringUnallowed(ResourceTypeInt param_1);
+        int getNextGoodFilteringUnallowed(ResourceType param_1);
 
-        int getPreviousGoodsFilteringUnallowed(ResourceTypeInt param_1);
+        int getPreviousGoodsFilteringUnallowed(ResourceType param_1);
 
         int getBatchBuyPrice(undefined4 playerID, int resourceType);
 
@@ -148,7 +148,7 @@ namespace Game {
 
         int meth_0x4588d0(int param_1);
 
-        int getSalePriceOfGood(ResourceTypeInt param_1);
+        int getSalePriceOfGood(ResourceType param_1);
 
         int getSellPrice(int playerID, int resourceType, int amount);
 
@@ -240,7 +240,7 @@ namespace Game {
 
         void spawnPoisonCloudsAtRandomStorageOrArmyBuilding(int playerID, int count);
 
-        void meth_0x45c1c0(PackagedFileMagicNumInt receivedMapVersion, PackagedFileMagicNumInt packagerMapVersion);
+        void meth_0x45c1c0(PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
 
         void processSingleTimeTick();
 

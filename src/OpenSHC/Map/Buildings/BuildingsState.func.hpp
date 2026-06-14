@@ -2,36 +2,36 @@
   path: 'OpenSHC/Map/Buildings/BuildingsState.func.hpp'
 */
 
-#include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
+#include "OpenSHC/Commands/CommandBuildingType.hpp"
 #include "OpenSHC/Game/Player/PlayerID.hpp"
-#include "OpenSHC/Game/Resources/ResourceTypeInt.hpp"
-#include "OpenSHC/IO/PackagedFileMagicNumInt.hpp"
-#include "OpenSHC/Map/Buildings/BuildingTypeInt.hpp"
+#include "OpenSHC/Game/Resources/ResourceType.hpp"
+#include "OpenSHC/IO/PackagedFileMagicNum.hpp"
+#include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Buildings/BuildingsState.hpp"
-#include "OpenSHC/Map/Units/UnitTypeInt.hpp"
+#include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
 namespace Map {
     namespace Buildings {
         namespace BuildingsState_Func {
 
-            using OpenSHC::Commands::CommandBuildingTypeInt;
+            using OpenSHC::Commands::CommandBuildingType;
             using OpenSHC::Game::Player::PlayerID;
-            using OpenSHC::Game::Resources::ResourceTypeInt;
-            using OpenSHC::IO::PackagedFileMagicNumInt;
-            using OpenSHC::Map::Buildings::BuildingTypeInt;
-            using OpenSHC::Map::Units::UnitTypeInt;
+            using OpenSHC::Game::Resources::ResourceType;
+            using OpenSHC::IO::PackagedFileMagicNum;
+            using OpenSHC::Map::Buildings::BuildingType;
+            using OpenSHC::Map::Units::UnitType;
             using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (BuildingsState::*)(int, int, ResourceTypeInt), false,
+            MACRO_FUNCTION_RESOLVER(undefined4 (BuildingsState::*)(int, int, ResourceType), false,
                 Address::SHC_3BB0A8C1_0x00409330, &BuildingsState::someArrayIndexingOnBuildingField0x120)
             someArrayIndexingOnBuildingField0x120;
 
-            MACRO_FUNCTION_RESOLVER(BuildingTypeInt (BuildingsState::*)(CommandBuildingTypeInt), false,
+            MACRO_FUNCTION_RESOLVER(BuildingType (BuildingsState::*)(CommandBuildingType), false,
                 Address::SHC_3BB0A8C1_0x00409370, &BuildingsState::convertCommandBuildingTypeToBuildingType)
             convertCommandBuildingTypeToBuildingType;
 
-            MACRO_FUNCTION_RESOLVER(CommandBuildingTypeInt (BuildingsState::*)(BuildingTypeInt), false,
+            MACRO_FUNCTION_RESOLVER(CommandBuildingType (BuildingsState::*)(BuildingType), false,
                 Address::SHC_3BB0A8C1_0x00409930, &BuildingsState::convertBuildingTypeToCommandBuildingType)
             convertBuildingTypeToCommandBuildingType;
 
@@ -43,11 +43,11 @@ namespace Map {
                 &BuildingsState::GetBuildingHeightForBuildingID_type2)
             GetBuildingHeightForBuildingID_type2;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(CommandBuildingTypeInt), false,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(CommandBuildingType), false,
                 Address::SHC_3BB0A8C1_0x00409F50, &BuildingsState::getSpriteID)
             getSpriteID;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(CommandBuildingTypeInt), false,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(CommandBuildingType), false,
                 Address::SHC_3BB0A8C1_0x00409FF0, &BuildingsState::getSpriteID2)
             getSpriteID2;
 
@@ -75,15 +75,15 @@ namespace Map {
                 &BuildingsState::copyPlayerDataArrayValues)
             copyPlayerDataArrayValues;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingTypeInt), false,
-                Address::SHC_3BB0A8C1_0x0040A8A0, &BuildingsState::chooseProductionItemType)
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingType), false, Address::SHC_3BB0A8C1_0x0040A8A0,
+                &BuildingsState::chooseProductionItemType)
             chooseProductionItemType;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingTypeInt), false,
-                Address::SHC_3BB0A8C1_0x0040A950, &BuildingsState::getEmptyBuildingCount)
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingType), false, Address::SHC_3BB0A8C1_0x0040A950,
+                &BuildingsState::getEmptyBuildingCount)
             getEmptyBuildingCount;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(PlayerID, BuildingTypeInt, int), false,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(PlayerID, BuildingType, int), false,
                 Address::SHC_3BB0A8C1_0x0040A9B0, &BuildingsState::countBuildingsForPlayer)
             countBuildingsForPlayer;
 
@@ -91,15 +91,15 @@ namespace Map {
                 &BuildingsState::countFarms)
             countFarms;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingTypeInt), false,
-                Address::SHC_3BB0A8C1_0x0040AA80, &BuildingsState::findFirstBuildingOfType)
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingType), false, Address::SHC_3BB0A8C1_0x0040AA80,
+                &BuildingsState::findFirstBuildingOfType)
             findFirstBuildingOfType;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingTypeInt), false,
-                Address::SHC_3BB0A8C1_0x0040AAD0, &BuildingsState::findFirstBuildingIDForPlayerAndType)
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingType), false, Address::SHC_3BB0A8C1_0x0040AAD0,
+                &BuildingsState::findFirstBuildingIDForPlayerAndType)
             findFirstBuildingIDForPlayerAndType;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(PlayerID, BuildingTypeInt, int), false,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(PlayerID, BuildingType, int), false,
                 Address::SHC_3BB0A8C1_0x0040AB30, &BuildingsState::findNextBuildingForPlayerAndType)
             findNextBuildingForPlayerAndType;
 
@@ -119,12 +119,12 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x0040ADB0, &BuildingsState::meth_0x40adb0)
             meth_0x40adb0;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingTypeInt), false,
-                Address::SHC_3BB0A8C1_0x0040AEF0, &BuildingsState::pickARandomBuildingOfType)
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingType), false, Address::SHC_3BB0A8C1_0x0040AEF0,
+                &BuildingsState::pickARandomBuildingOfType)
             pickARandomBuildingOfType;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingTypeInt, BuildingTypeInt, BuildingTypeInt),
-                false, Address::SHC_3BB0A8C1_0x0040AFB0, &BuildingsState::pickARandomBuildingIDOfTheseThreeTypes)
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingType, BuildingType, BuildingType), false,
+                Address::SHC_3BB0A8C1_0x0040AFB0, &BuildingsState::pickARandomBuildingIDOfTheseThreeTypes)
             pickARandomBuildingIDOfTheseThreeTypes;
 
             MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040B090,
@@ -139,7 +139,7 @@ namespace Map {
                 &BuildingsState::recomputeAllFearFactors)
             recomputeAllFearFactors;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (BuildingsState::*)(int, BuildingTypeInt), false,
+            MACRO_FUNCTION_RESOLVER(undefined4 (BuildingsState::*)(int, BuildingType), false,
                 Address::SHC_3BB0A8C1_0x0040B4E0, &BuildingsState::findBuildingOfTypeForPlayer)
             findBuildingOfTypeForPlayer;
 
@@ -183,15 +183,15 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x0040BC40, &BuildingsState::setupNextCandidateLocationComputeOffsets2)
             setupNextCandidateLocationComputeOffsets2;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int, ResourceTypeInt), false,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int, ResourceType), false,
                 Address::SHC_3BB0A8C1_0x0040BE70, &BuildingsState::buildingHasSpaceForResource)
             buildingHasSpaceForResource;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(BuildingTypeInt, int, int), false,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(BuildingType, int, int), false,
                 Address::SHC_3BB0A8C1_0x0040BEE0, &BuildingsState::meth_0x40bee0)
             meth_0x40bee0;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, ResourceTypeInt, int), false,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, ResourceType, int), false,
                 Address::SHC_3BB0A8C1_0x0040BF40, &BuildingsState::canBuildingStoreTheAmount)
             canBuildingStoreTheAmount;
 
@@ -199,11 +199,11 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x0040BFA0, &BuildingsState::getResourceCountThatCanBeDeposited)
             getResourceCountThatCanBeDeposited;
 
-            MACRO_FUNCTION_RESOLVER(BuildingTypeInt (BuildingsState::*)(ResourceTypeInt), false,
+            MACRO_FUNCTION_RESOLVER(BuildingType (BuildingsState::*)(ResourceType), false,
                 Address::SHC_3BB0A8C1_0x0040BFD0, &BuildingsState::getBuildingStorageTypeForResourceType)
             getBuildingStorageTypeForResourceType;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(ResourceTypeInt, int, int), false,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(ResourceType, int, int), false,
                 Address::SHC_3BB0A8C1_0x0040BFE0, &BuildingsState::getStorageBuildingForResourceTypeAndAmount)
             getStorageBuildingForResourceTypeAndAmount;
 
@@ -235,15 +235,15 @@ namespace Map {
                 &BuildingsState::recomputePlayerDataStocksBasedOnStorageBuildings)
             recomputePlayerDataStocksBasedOnStorageBuildings;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(CommandBuildingTypeInt, int*, int*), false,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(CommandBuildingType, int*, int*), false,
                 Address::SHC_3BB0A8C1_0x0040C5F0, &BuildingsState::getBuildingCostUnk)
             getBuildingCostUnk;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(UnitTypeInt, int*), false,
-                Address::SHC_3BB0A8C1_0x0040C800, &BuildingsState::getPriceForDisbandedUnitType)
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(UnitType, int*), false, Address::SHC_3BB0A8C1_0x0040C800,
+                &BuildingsState::getPriceForDisbandedUnitType)
             getPriceForDisbandedUnitType;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(BuildingTypeInt, int*, int*), false,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(BuildingType, int*, int*), false,
                 Address::SHC_3BB0A8C1_0x0040C9B0, &BuildingsState::resourceGainForKillingPitAndPitchDitch)
             resourceGainForKillingPitAndPitchDitch;
 
@@ -547,16 +547,15 @@ namespace Map {
                 void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0041B7C0, &BuildingsState::meth_0x41b7c0)
             meth_0x41b7c0;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (BuildingsState::*)(undefined4, int, int, int, int, int, CommandBuildingTypeInt), false,
-                Address::SHC_3BB0A8C1_0x0041B890, &BuildingsState::findQuarryPileLocation)
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(undefined4, int, int, int, int, int, CommandBuildingType),
+                false, Address::SHC_3BB0A8C1_0x0041B890, &BuildingsState::findQuarryPileLocation)
             findQuarryPileLocation;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int, int, int, int, BuildingTypeInt), false,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int, int, int, int, BuildingType), false,
                 Address::SHC_3BB0A8C1_0x0041B940, &BuildingsState::hasBuildingAsNeighbour)
             hasBuildingAsNeighbour;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(undefined4, int, int, int, BuildingTypeInt, int), false,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(undefined4, int, int, int, BuildingType, int), false,
                 Address::SHC_3BB0A8C1_0x0041BA00, &BuildingsState::findParticularBuilding)
             findParticularBuilding;
 
@@ -564,19 +563,19 @@ namespace Map {
                 &BuildingsState::getAreaForSurroundingTileUnk)
             getAreaForSurroundingTileUnk;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (BuildingsState::*)(int, int, ResourceTypeInt, int, int, int), false,
+            MACRO_FUNCTION_RESOLVER(undefined4 (BuildingsState::*)(int, int, ResourceType, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x0041BB30, &BuildingsState::addResourceToStockpile)
             addResourceToStockpile;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(ResourceTypeInt, int, int), false,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(ResourceType, int, int), false,
                 Address::SHC_3BB0A8C1_0x0041BC10, &BuildingsState::addResourceToGranary)
             addResourceToGranary;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(ResourceTypeInt, int, int), false,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(ResourceType, int, int), false,
                 Address::SHC_3BB0A8C1_0x0041BCA0, &BuildingsState::addResourceToArmory)
             addResourceToArmory;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, ResourceTypeInt, int, int), false,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, ResourceType, int, int), false,
                 Address::SHC_3BB0A8C1_0x0041BD70, &BuildingsState::processResourceLoss)
             processResourceLoss;
 
@@ -584,7 +583,7 @@ namespace Map {
                 &BuildingsState::subtractResourcesStoredInBuilding)
             subtractResourcesStoredInBuilding;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, BuildingTypeInt, int), false,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, BuildingType, int), false,
                 Address::SHC_3BB0A8C1_0x0041BFD0, &BuildingsState::processPlacementResourceLossForBuildingType)
             processPlacementResourceLossForBuildingType;
 
@@ -596,7 +595,7 @@ namespace Map {
                 &BuildingsState::FUN_0041c240)
             FUN_0041c240;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int, ResourceTypeInt, int), false,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int, ResourceType, int), false,
                 Address::SHC_3BB0A8C1_0x0041C310, &BuildingsState::processResourceGain)
             processResourceGain;
 
@@ -612,13 +611,12 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x0041C810, &BuildingsState::lightUpBuilding)
             lightUpBuilding;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(PackagedFileMagicNumInt, PackagedFileMagicNumInt), false,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(PackagedFileMagicNum, PackagedFileMagicNum), false,
                 Address::SHC_3BB0A8C1_0x00420BF0, &BuildingsState::meth_0x420bf0)
             meth_0x420bf0;
 
-            MACRO_FUNCTION_RESOLVER(
-                int (BuildingsState::*)(int, uint, uint, undefined4, BuildingTypeInt, uint, int, int), false,
-                Address::SHC_3BB0A8C1_0x00420D20, &BuildingsState::setupBuildingData)
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, uint, uint, undefined4, BuildingType, uint, int, int),
+                false, Address::SHC_3BB0A8C1_0x00420D20, &BuildingsState::setupBuildingData)
             setupBuildingData;
 
             MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(uint), false, Address::SHC_3BB0A8C1_0x00421890,
@@ -641,7 +639,7 @@ namespace Map {
                 &BuildingsState::giveBackResourceForDestroyedBuilding)
             giveBackResourceForDestroyedBuilding;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(ResourceTypeInt, int, int), false,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(ResourceType, int, int), false,
                 Address::SHC_3BB0A8C1_0x00422230, &BuildingsState::getBuildingThatCanStoreThisResource)
             getBuildingThatCanStoreThisResource;
 
@@ -677,7 +675,7 @@ namespace Map {
                 &BuildingsState::updateHeatmapBasedOnBuildingAccessibility)
             updateHeatmapBasedOnBuildingAccessibility;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(PackagedFileMagicNumInt, PackagedFileMagicNumInt), false,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(PackagedFileMagicNum, PackagedFileMagicNum), false,
                 Address::SHC_3BB0A8C1_0x00424310, &BuildingsState::FUN_00424310)
             FUN_00424310;
 

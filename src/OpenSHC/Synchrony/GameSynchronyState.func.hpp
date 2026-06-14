@@ -2,10 +2,10 @@
   path: 'OpenSHC/Synchrony/GameSynchronyState.func.hpp'
 */
 
-#include "OpenSHC/Commands/GameCommandParameterLocationInt.hpp"
-#include "OpenSHC/Commands/GameCommandParameterReadWriteInt.hpp"
-#include "OpenSHC/Commands/GameCommandTypeInt.hpp"
-#include "OpenSHC/DirectPlay/DPERRInt.hpp"
+#include "OpenSHC/Commands/GameCommandParameterLocation.hpp"
+#include "OpenSHC/Commands/GameCommandParameterReadWrite.hpp"
+#include "OpenSHC/Commands/GameCommandType.hpp"
+#include "OpenSHC/DirectPlay/DPERR.hpp"
 #include "OpenSHC/Synchrony/GameSynchronyState.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -17,10 +17,10 @@ namespace OpenSHC {
 namespace Synchrony {
     namespace GameSynchronyState_Func {
 
-        using OpenSHC::Commands::GameCommandParameterLocationInt;
-        using OpenSHC::Commands::GameCommandParameterReadWriteInt;
-        using OpenSHC::Commands::GameCommandTypeInt;
-        using OpenSHC::DirectPlay::DPERRInt;
+        using OpenSHC::Commands::GameCommandParameterLocation;
+        using OpenSHC::Commands::GameCommandParameterReadWrite;
+        using OpenSHC::Commands::GameCommandType;
+        using OpenSHC::DirectPlay::DPERR;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (GameSynchronyState::*)(int), false, Address::SHC_3BB0A8C1_0x004010B0,
@@ -39,7 +39,7 @@ namespace Synchrony {
             &GameSynchronyState::setMenuTypeBasedOnDirectPlayGUID)
         setMenuTypeBasedOnDirectPlayGUID;
 
-        MACRO_FUNCTION_RESOLVER(DPERRInt (GameSynchronyState::*)(LPVOID*, SIZE_T*), false,
+        MACRO_FUNCTION_RESOLVER(DPERR (GameSynchronyState::*)(LPVOID*, SIZE_T*), false,
             Address::SHC_3BB0A8C1_0x0047D6A0, &GameSynchronyState::createCompoundAddressBasedOnSelectedProvider)
         createCompoundAddressBasedOnSelectedProvider;
 
@@ -47,7 +47,7 @@ namespace Synchrony {
             &GameSynchronyState::setDPlaySessionNameValue)
         setDPlaySessionNameValue;
 
-        MACRO_FUNCTION_RESOLVER(DPERRInt (GameSynchronyState::*)(BOOLEnum), false, Address::SHC_3BB0A8C1_0x0047DB10,
+        MACRO_FUNCTION_RESOLVER(DPERR (GameSynchronyState::*)(BOOLEnum), false, Address::SHC_3BB0A8C1_0x0047DB10,
             &GameSynchronyState::initializeDirectPlayAndCreateOrJoinSession)
         initializeDirectPlayAndCreateOrJoinSession;
 
@@ -147,11 +147,11 @@ namespace Synchrony {
             &GameSynchronyState::clearGameCommandEntry)
         clearGameCommandEntry;
 
-        MACRO_FUNCTION_RESOLVER(int (GameSynchronyState::*)(GameCommandTypeInt), false,
-            Address::SHC_3BB0A8C1_0x004800E0, &GameSynchronyState::sendLongerDataSuchAsResync)
+        MACRO_FUNCTION_RESOLVER(int (GameSynchronyState::*)(GameCommandType), false, Address::SHC_3BB0A8C1_0x004800E0,
+            &GameSynchronyState::sendLongerDataSuchAsResync)
         sendLongerDataSuchAsResync;
 
-        MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(GameCommandTypeInt, DWORD, dword, void*), false,
+        MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(GameCommandType, DWORD, dword, void*), false,
             Address::SHC_3BB0A8C1_0x00480210, &GameSynchronyState::scheduleReceivedCommand)
         scheduleReceivedCommand;
 
@@ -167,8 +167,8 @@ namespace Synchrony {
             &GameSynchronyState::getPendingGameCommandsCount)
         getPendingGameCommandsCount;
 
-        MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(
-                                    void*, size_t, GameCommandParameterLocationInt, GameCommandParameterReadWriteInt),
+        MACRO_FUNCTION_RESOLVER(
+            void (GameSynchronyState::*)(void*, size_t, GameCommandParameterLocation, GameCommandParameterReadWrite),
             false, Address::SHC_3BB0A8C1_0x004805D0, &GameSynchronyState::serializeOrDeserializeCommandParameter)
         serializeOrDeserializeCommandParameter;
 
@@ -228,8 +228,8 @@ namespace Synchrony {
             Address::SHC_3BB0A8C1_0x00488540, &GameSynchronyState::renderDebugDataNetwork)
         renderDebugDataNetwork;
 
-        MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(GameCommandTypeInt), false,
-            Address::SHC_3BB0A8C1_0x00489100, &GameSynchronyState::queueCommand)
+        MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(GameCommandType), false, Address::SHC_3BB0A8C1_0x00489100,
+            &GameSynchronyState::queueCommand)
         queueCommand;
 
         MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x004892F0,

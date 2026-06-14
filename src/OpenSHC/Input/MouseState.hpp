@@ -9,7 +9,7 @@
 #pragma once
 
 #include "OpenSHC/Input/Mouse/ClickTypeBitMaskEnumByte.hpp"
-#include "OpenSHC/Input/Mouse/MouseClickInteractionInt.hpp"
+#include "OpenSHC/Input/Mouse/MouseClickInteraction.hpp"
 #include "OpenSHC/Input/Mouse/MouseXYUUStruct.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -19,7 +19,7 @@ namespace OpenSHC {
 namespace Input {
 
     using OpenSHC::Input::Mouse::ClickTypeBitMaskEnumByte;
-    using OpenSHC::Input::Mouse::MouseClickInteractionInt;
+    using OpenSHC::Input::Mouse::MouseClickInteraction;
     using OpenSHC::Input::Mouse::MouseXYUUStruct;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
@@ -161,7 +161,7 @@ namespace Input {
 
         void makeSelectedCursorTypeCurrent();
 
-        void updateMousePositionAndClicks(short xMousePos, short yMousePos, MouseClickInteractionInt clickType);
+        void updateMousePositionAndClicks(short xMousePos, short yMousePos, MouseClickInteraction clickType);
 
         void updateMouseWheelStatus(int delta);
 

@@ -8,22 +8,22 @@
 
 #pragma once
 
-#include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
-#include "OpenSHC/Game/Resources/ResourceTypeInt.hpp"
-#include "OpenSHC/UI/ChooseNetworkServiceProvider/ChooseNetworkServiceProviderButtonActionsInt.hpp"
-#include "OpenSHC/UI/Enums/SoundMenuClickTypeInt.hpp"
-#include "OpenSHC/UI/Multiplayer/FindingNetworkSessions_ButtonParametersInt.hpp"
+#include "OpenSHC/Commands/CommandBuildingType.hpp"
+#include "OpenSHC/Game/Resources/ResourceType.hpp"
+#include "OpenSHC/UI/ChooseNetworkServiceProvider/ChooseNetworkServiceProviderButtonActions.hpp"
+#include "OpenSHC/UI/Enums/SoundMenuClickType.hpp"
+#include "OpenSHC/UI/Multiplayer/FindingNetworkSessions_ButtonParameters.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "WinDef.h"
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::Commands::CommandBuildingTypeInt;
-    using OpenSHC::Game::Resources::ResourceTypeInt;
-    using OpenSHC::UI::ChooseNetworkServiceProvider::ChooseNetworkServiceProviderButtonActionsInt;
-    using OpenSHC::UI::Enums::SoundMenuClickTypeInt;
-    using OpenSHC::UI::Multiplayer::FindingNetworkSessions_ButtonParametersInt;
+    using OpenSHC::Commands::CommandBuildingType;
+    using OpenSHC::Game::Resources::ResourceType;
+    using OpenSHC::UI::ChooseNetworkServiceProvider::ChooseNetworkServiceProviderButtonActions;
+    using OpenSHC::UI::Enums::SoundMenuClickType;
+    using OpenSHC::UI::Multiplayer::FindingNetworkSessions_ButtonParameters;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     void __stdcall MenuView_IntroLogos_Prepare();
@@ -261,7 +261,7 @@ namespace UI {
 
     void __cdecl MenuItemActionHandler_MapEditorLandscaping_CategoryButtons(int param_1, ...);
 
-    void __cdecl MenuItemActionHandler_MapEditorLandscaping_GeneralButtons(CommandBuildingTypeInt param_1, ...);
+    void __cdecl MenuItemActionHandler_MapEditorLandscaping_GeneralButtons(CommandBuildingType param_1, ...);
 
     void __stdcall MenuView_BuildMenu_Prepare();
 
@@ -380,7 +380,7 @@ namespace UI {
 
     void __cdecl MenuItemActionHandler_MapEditorLandscaping_QueueCommandCallback();
 
-    void __cdecl MenuItemActionHandler_General_ToolbarButtonPressed(CommandBuildingTypeInt buttonID);
+    void __cdecl MenuItemActionHandler_General_ToolbarButtonPressed(CommandBuildingType buttonID);
 
     void __cdecl MenuItemActionHandler_InGameMenu_MainButtons(int param_1, ...);
 
@@ -432,9 +432,9 @@ namespace UI {
 
     BOOLEnum __cdecl HasEnoughGold(int param_1);
 
-    void __cdecl MenuItemRenderFunction_BuildingAndStatusMenu_WorkshopWeaponSelection(ResourceTypeInt _weapon, ...);
+    void __cdecl MenuItemRenderFunction_BuildingAndStatusMenu_WorkshopWeaponSelection(ResourceType _weapon, ...);
 
-    void __cdecl MenuItemActionHandler_BuildingAndStatusMenu_WorkshopWeaponSelection(ResourceTypeInt weapon, ...);
+    void __cdecl MenuItemActionHandler_BuildingAndStatusMenu_WorkshopWeaponSelection(ResourceType weapon, ...);
 
     void __cdecl MenuItemRenderFunction_BuildingAndStatusMenu_DrawbridgeOpenClose(int param_1, ...);
 
@@ -564,10 +564,10 @@ namespace UI {
     void __cdecl MenuItemActionHandler_Chat_TauntButtons(int param_1, ...);
 
     void __cdecl MenuItemActionHandler_ChooseNetworkServiceProvider_Buttons(
-        ChooseNetworkServiceProviderButtonActionsInt param_1, ...);
+        ChooseNetworkServiceProviderButtonActions param_1, ...);
 
     void __cdecl MenuItemActionHandler_FindingNetworkSessions_Buttons(
-        FindingNetworkSessions_ButtonParametersInt param_1, ...);
+        FindingNetworkSessions_ButtonParameters param_1, ...);
 
     void __cdecl MenuItemActionHandler_WaitingForHost_ConnectToLobby();
 
@@ -655,7 +655,7 @@ namespace UI {
 
     void __cdecl MenuItemActionHandler_VideoOptions_Main(int param_1, ...);
 
-    void __cdecl MenuItemActionHandler_SoundOptions_Buttons(SoundMenuClickTypeInt param_1, ...);
+    void __cdecl MenuItemActionHandler_SoundOptions_Buttons(SoundMenuClickType param_1, ...);
 
     void __cdecl MenuItemActionHandler_NetworkOptions_LeaveButtonUnk(int param_1, ...);
 

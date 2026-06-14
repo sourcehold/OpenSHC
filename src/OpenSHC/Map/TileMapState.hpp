@@ -8,14 +8,14 @@
 
 #pragma once
 
+#include "OpenSHC/Commands/CommandBuildingType.hpp"
 #include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
-#include "OpenSHC/Commands/CommandBuildingTypeShort.hpp"
 #include "OpenSHC/Game/Player/PlayerID.hpp"
-#include "OpenSHC/IO/PackagedFileMagicNumInt.hpp"
+#include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingFailReasonEnumInt.hpp"
-#include "OpenSHC/Map/Buildings/BuildingTypeInt.hpp"
-#include "OpenSHC/Map/LogicHelpers/Logic1Int.hpp"
-#include "OpenSHC/Map/LogicHelpers/Logic2Int.hpp"
+#include "OpenSHC/Map/Buildings/BuildingType.hpp"
+#include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
+#include "OpenSHC/Map/LogicHelpers/Logic2.hpp"
 #include "OpenSHC/Map/Moat.hpp"
 #include "OpenSHC/Map/PitchDitch.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -23,16 +23,16 @@
 namespace OpenSHC {
 namespace Map {
 
+    using OpenSHC::Commands::CommandBuildingType;
     using OpenSHC::Commands::CommandBuildingTypeInt;
-    using OpenSHC::Commands::CommandBuildingTypeShort;
     using OpenSHC::Game::Player::PlayerID;
-    using OpenSHC::IO::PackagedFileMagicNumInt;
+    using OpenSHC::IO::PackagedFileMagicNum;
     using OpenSHC::Map::Moat;
     using OpenSHC::Map::PitchDitch;
     using OpenSHC::Map::Buildings::BuildingFailReasonEnumInt;
-    using OpenSHC::Map::Buildings::BuildingTypeInt;
-    using OpenSHC::Map::LogicHelpers::Logic1Int;
-    using OpenSHC::Map::LogicHelpers::Logic2Int;
+    using OpenSHC::Map::Buildings::BuildingType;
+    using OpenSHC::Map::LogicHelpers::Logic1;
+    using OpenSHC::Map::LogicHelpers::Logic2;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
@@ -312,7 +312,7 @@ namespace Map {
 
         void destroyWallsOfPlayer(int playerID);
 
-        void isWallUnkPlacementAllowed(int playerID, uint x, uint y, CommandBuildingTypeInt param_4);
+        void isWallUnkPlacementAllowed(int playerID, uint x, uint y, CommandBuildingType param_4);
 
         void setupBuildingSizeIndexMappingForBuildingWithSize(int buildingSize);
 
@@ -323,7 +323,7 @@ namespace Map {
         void storeMinAndMaxHeightOfArea(uint x, uint y, int buildingWidthAndHeight);
 
         int isBuildingPlacementAllowedAtTile(
-            int tile, int playerID, CommandBuildingTypeInt commandBuildingType, int param_4);
+            int tile, int playerID, CommandBuildingType commandBuildingType, int param_4);
 
         void meth_0x4f9df0(int param_1, int param_2, int param_3);
 
@@ -335,7 +335,7 @@ namespace Map {
 
         undefined4 meth_0x4fa460(int param_1);
 
-        undefined4 getBuildingSizeForCommandBuildingType(CommandBuildingTypeInt commandBuildingType);
+        undefined4 getBuildingSizeForCommandBuildingType(CommandBuildingType commandBuildingType);
 
         void meth_0x4fa760(undefined4 param_1, int param_2, int param_3, undefined4 param_4, int param_5);
 
@@ -492,27 +492,27 @@ namespace Map {
         void checkWhetherThisWallBuildIsAllowed(int playerID, uint x1, uint y1, uint x2, uint y2, undefined4 command);
 
         void placeWalls(
-            int playerID, uint x1, uint y1, uint x2, uint y2, CommandBuildingTypeInt wallType, int tileCountUnk);
+            int playerID, uint x1, uint y1, uint x2, uint y2, CommandBuildingType wallType, int tileCountUnk);
 
-        void placeDefensiveStructurePart2Unk(int param_1, uint x, uint y, CommandBuildingTypeInt param_4);
+        void placeDefensiveStructurePart2Unk(int param_1, uint x, uint y, CommandBuildingType param_4);
 
         void setupBuildingSizeIndexMapping();
 
-        void checkBuildingCanBePlacedHere(int playerID, uint x, uint y__fertileLandCount,
-            CommandBuildingTypeShort commandBuildingType, int buildingSize);
+        void checkBuildingCanBePlacedHere(
+            int playerID, uint x, uint y__fertileLandCount, CommandBuildingType commandBuildingType, int buildingSize);
 
         void meth_0x504a30(int playerID, uint x, uint y);
 
         void meth_0x504ee0(int param_1, int param_2);
 
-        int setConstructionGFXLayerBasedOnPlacementChecks(int x, int y, CommandBuildingTypeInt type, int size);
+        int setConstructionGFXLayerBasedOnPlacementChecks(int x, int y, CommandBuildingType type, int size);
 
         void updateBuildingGraphicsLayer(int buildingID);
 
         void someUpdatePathLinkageRelatedCall(int buildingID);
 
         void placeWorkshopOrHovel(
-            int playerID, uint x, uint y, BuildingTypeInt type, uint size, int orientation, undefined4 averageHeight);
+            int playerID, uint x, uint y, BuildingType type, uint size, int orientation, undefined4 averageHeight);
 
         void placeSiegetowerPlaced(
             int param_1, uint param_2, uint param_3, undefined4 param_4, uint param_5, int param_6, undefined4 param_7);
@@ -563,7 +563,7 @@ namespace Map {
 
         void meth_0x508910(int param_1);
 
-        void renderPreviewMapperWithBrush(uint x, uint y, CommandBuildingTypeInt param_3);
+        void renderPreviewMapperWithBrush(uint x, uint y, CommandBuildingType param_3);
 
         void applyTreeToLogicalLayer(int treeID, int param_2);
 
@@ -586,7 +586,7 @@ namespace Map {
         void updateGameRelatedValue();
 
         void upgradeMapFormatLogicLayer(
-            PackagedFileMagicNumInt receivedMapVersion, PackagedFileMagicNumInt packagerMapVersion);
+            PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
 
         void setupTileMapSections();
 
@@ -598,14 +598,14 @@ namespace Map {
 
         void processMapOrientationChange();
 
-        void setTerrain(int playerID, int tile, uint yParam, uint brushType, Logic1Int flags1, Logic2Int flags2);
+        void setTerrain(int playerID, int tile, uint yParam, uint brushType, Logic1 flags1, Logic2 flags2);
 
         void placeMoat(undefined4 playerID, int tile, uint tileY);
 
         void placeKillingPit(
             int param_1, uint param_2, uint param_3, undefined4 param_4, uint param_5, int param_6, int param_7);
 
-        void placeKeep(int playerID, uint x, uint y, BuildingTypeInt type, uint size, int orientation, int xyValue);
+        void placeKeep(int playerID, uint x, uint y, BuildingType type, uint size, int orientation, int xyValue);
 
         void placeDrawbridge(int param_1, uint param_2, uint param_3, undefined4 param_4, uint param_5, int* param_6,
             undefined4 param_7);
@@ -620,7 +620,7 @@ namespace Map {
             int* param_6, undefined4 param_7);
 
         void placeApplefarm(
-            int playerID, uint x, uint y, BuildingTypeInt buildingType, undefined4 param_5, int param_6, int* param_7);
+            int playerID, uint x, uint y, BuildingType buildingType, undefined4 param_5, int param_6, int* param_7);
 
         void clearBuildingFromTerrain(int buildingID);
 
@@ -629,10 +629,10 @@ namespace Map {
         void placeTree(uint x, uint y, undefined4 treeType);
 
         BOOLEnum prepareAreaForBuildingPlacement(
-            int playerID, uint x, uint y, CommandBuildingTypeInt commandBuildingType, int buildingWidthOrHeight);
+            int playerID, uint x, uint y, CommandBuildingType commandBuildingType, int buildingWidthOrHeight);
 
         void placeBuilding(
-            PlayerID playerID, int x, int y, CommandBuildingTypeInt cbt, int buildingSize, int buildingOrientation);
+            PlayerID playerID, int x, int y, CommandBuildingType cbt, int buildingSize, int buildingOrientation);
 
         uint processDamageToBuilding(int tile, uint xPosition, uint yPosition, int damageUnk, int param_5, int playerID,
             BOOLEnum aiBuildDelayRelated, int unitID);

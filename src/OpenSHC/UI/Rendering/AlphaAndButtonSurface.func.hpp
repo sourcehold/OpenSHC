@@ -2,7 +2,7 @@
   path: 'OpenSHC/UI/Rendering/AlphaAndButtonSurface.func.hpp'
 */
 
-#include "OpenSHC/Rendering/Enums/RenderTargetInt.hpp"
+#include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/UI/Rendering/AlphaAndButtonSurface.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
@@ -10,7 +10,7 @@ namespace UI {
     namespace Rendering {
         namespace AlphaAndButtonSurface_Func {
 
-            using OpenSHC::Rendering::Enums::RenderTargetInt;
+            using OpenSHC::Rendering::Enums::RenderTarget;
             using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
             MACRO_FUNCTION_RESOLVER(void (AlphaAndButtonSurface::*)(int), false, Address::SHC_3BB0A8C1_0x004246E0,
@@ -41,7 +41,7 @@ namespace UI {
                 &AlphaAndButtonSurface::FUN_00463a00)
             FUN_00463a00;
 
-            MACRO_FUNCTION_RESOLVER(void (AlphaAndButtonSurface::*)(int, RenderTargetInt), false,
+            MACRO_FUNCTION_RESOLVER(void (AlphaAndButtonSurface::*)(int, RenderTarget), false,
                 Address::SHC_3BB0A8C1_0x00463A90, &AlphaAndButtonSurface::renderBasicButton)
             renderBasicButton;
 

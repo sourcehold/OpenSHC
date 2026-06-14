@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "OpenSHC/UI/Enums/DisplayElementIDInt.hpp"
+#include "OpenSHC/UI/Enums/DisplayElementID.hpp"
 #include "OpenSHC/UI/Rendering.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -17,7 +17,7 @@ namespace OpenSHC {
 namespace UI {
     namespace Rendering_Func {
 
-        using OpenSHC::UI::Enums::DisplayElementIDInt;
+        using OpenSHC::UI::Enums::DisplayElementID;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int posX, int posY, DWORD tileType), false,
@@ -421,7 +421,7 @@ namespace UI {
             &OpenSHC::UI::Rendering::RenderLoadAndSaveBar)
         RenderLoadAndSaveBar;
 
-        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(DisplayElementIDInt displayElementID, uint toggleValue), false,
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(DisplayElementID displayElementID, uint toggleValue), false,
             Address::SHC_3BB0A8C1_0x004AF6B0, &OpenSHC::UI::Rendering::TogglePlayerPingDisplayElementUnk)
         TogglePlayerPingDisplayElementUnk;
 

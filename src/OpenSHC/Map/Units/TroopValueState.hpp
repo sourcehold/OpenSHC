@@ -8,28 +8,26 @@
 
 #pragma once
 
-#include "OpenSHC/AI/Tribes/AITribeTypeShort.hpp"
-#include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
-#include "OpenSHC/IO/PackagedFileMagicNumInt.hpp"
+#include "OpenSHC/AI/Tribes/AITribeType.hpp"
+#include "OpenSHC/Commands/CommandBuildingType.hpp"
+#include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/AttackInfo.hpp"
-#include "OpenSHC/Map/Units/SomeTribeBehaviorTypeInt.hpp"
-#include "OpenSHC/Map/Units/SomeTribeBehaviorTypeShort.hpp"
-#include "OpenSHC/Map/Units/UnitInstructionTypeInt.hpp"
-#include "OpenSHC/Map/Units/UnitTypeInt.hpp"
+#include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
+#include "OpenSHC/Map/Units/UnitInstructionType.hpp"
+#include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::AI::Tribes::AITribeTypeShort;
-        using OpenSHC::Commands::CommandBuildingTypeInt;
-        using OpenSHC::IO::PackagedFileMagicNumInt;
+        using OpenSHC::AI::Tribes::AITribeType;
+        using OpenSHC::Commands::CommandBuildingType;
+        using OpenSHC::IO::PackagedFileMagicNum;
         using OpenSHC::Map::AttackInfo;
-        using OpenSHC::Map::Units::SomeTribeBehaviorTypeInt;
-        using OpenSHC::Map::Units::SomeTribeBehaviorTypeShort;
-        using OpenSHC::Map::Units::UnitInstructionTypeInt;
-        using OpenSHC::Map::Units::UnitTypeInt;
+        using OpenSHC::Map::Units::SomeTribeBehaviorType;
+        using OpenSHC::Map::Units::UnitInstructionType;
+        using OpenSHC::Map::Units::UnitType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
@@ -61,16 +59,16 @@ namespace Map {
 
             undefined4 FUN_00518350();
 
-            void sortAttackInfoTribeIDArrayBasedOn(int attackWave, int shrinkSize, int tribeSizeSumLimit,
-                SomeTribeBehaviorTypeInt someTribeTypeIdentifier);
+            void sortAttackInfoTribeIDArrayBasedOn(
+                int attackWave, int shrinkSize, int tribeSizeSumLimit, SomeTribeBehaviorType someTribeTypeIdentifier);
 
-            void applyTribeBehaviorTypes(SomeTribeBehaviorTypeInt tribeBehaviorType,
-                SomeTribeBehaviorTypeInt tribeBehaviorType2, int off1, int off2);
+            void applyTribeBehaviorTypes(
+                SomeTribeBehaviorType tribeBehaviorType, SomeTribeBehaviorType tribeBehaviorType2, int off1, int off2);
 
-            void FUN_00518930(SomeTribeBehaviorTypeShort param_1, undefined4 param_2, short param_3, short param_4);
+            void FUN_00518930(SomeTribeBehaviorType param_1, undefined4 param_2, short param_3, short param_4);
 
             void FUN_00518a10(
-                int param_1, int param_2, SomeTribeBehaviorTypeShort param_3, undefined4 param_4, undefined4 param_5);
+                int param_1, int param_2, SomeTribeBehaviorType param_3, undefined4 param_4, undefined4 param_5);
 
             BOOLEnum isLessThanPercentageOfTribesInAttackDying(int attackID, int leDyingPerc);
 
@@ -152,10 +150,10 @@ namespace Map {
 
             void FUN_0051b290();
 
-            int placeSiegeTentAndAssignEngineersUnk(int tribeID, CommandBuildingTypeInt commandBuildingType);
+            int placeSiegeTentAndAssignEngineersUnk(int tribeID, CommandBuildingType commandBuildingType);
 
             BOOLEnum placeSiegeTentOrTunnelAtSuitableLocationAndAssignEngineers(int tribeID,
-                CommandBuildingTypeInt commandBuildingType, uint strategicDistance, UnitInstructionTypeInt instruction);
+                CommandBuildingType commandBuildingType, uint strategicDistance, UnitInstructionType instruction);
 
             int placeTunnelEntrances(int tribeID);
 
@@ -167,7 +165,7 @@ namespace Map {
 
             void placeTunnelForEveryTunneler(int attackWave);
 
-            int addUnitToNewTribe(undefined4 unitID, int attackWave, AITribeTypeShort tribeType, undefined4 playerID);
+            int addUnitToNewTribe(undefined4 unitID, int attackWave, AITribeType tribeType, undefined4 playerID);
 
             void exitSiegeEquipmentUnk(int wave);
 
@@ -183,7 +181,7 @@ namespace Map {
 
             void meth_0x51c2d0();
 
-            int getValueOfTroopType(UnitTypeInt unitType);
+            int getValueOfTroopType(UnitType unitType);
 
             void FUN_0051c470();
 
@@ -229,8 +227,7 @@ namespace Map {
 
             void recomputeTotalTroopValueOfTroopsNearKeep();
 
-            void uselessFunction(
-                PackagedFileMagicNumInt receivedMapVersion, PackagedFileMagicNumInt packagerMapVersion);
+            void uselessFunction(PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
 
             void recountAttackTroopValue(int param_1);
 

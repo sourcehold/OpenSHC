@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/UI/Enums/MenuModalTypeInt.hpp"
 #include "OpenSHC/UI/MenuModal.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -16,6 +17,7 @@ namespace OpenSHC {
 namespace UI {
 
     using OpenSHC::UI::MenuModal;
+    using OpenSHC::UI::Enums::MenuModalType;
     using OpenSHC::UI::Enums::MenuModalTypeInt;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
@@ -59,11 +61,11 @@ namespace UI {
 
         void loadAllMenuElementsOfMenuModals();
 
-        MenuModal* findModalMenu(MenuModalTypeInt menuModalID);
+        MenuModal* findModalMenu(MenuModalType menuModalID);
 
-        void activateModalDialog(MenuModalTypeInt menuModalID, BOOLEnum retainOther);
+        void activateModalDialog(MenuModalType menuModalID, BOOLEnum retainOther);
 
-        void setExtraActiveModalDialog(MenuModalTypeInt menuModalID, int dialogX, int dialogY);
+        void setExtraActiveModalDialog(MenuModalType menuModalID, int dialogX, int dialogY);
 
         void handleActiveModalDialogUnk();
 
@@ -79,7 +81,7 @@ namespace UI {
 
         void renderMenuModal();
 
-        void activateModalDialog2(MenuModalTypeInt modalDialogID);
+        void activateModalDialog2(MenuModalType modalDialogID);
     };
 
     static_assert_cpp98_obj(sizeof(MenuModalComposition) == 124, MenuModalComposition);

@@ -10,6 +10,7 @@
 
 #include "OpenSHC/Rendering/ColorModeInt.hpp"
 #include "OpenSHC/Rendering/ScreenResolutionArrayStruct.hpp"
+#include "OpenSHC/Rendering/ScreenResolutionEnum.hpp"
 #include "OpenSHC/Rendering/ScreenResolutionEnumInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -23,6 +24,7 @@ namespace UI {
 
         using OpenSHC::Rendering::ColorModeInt;
         using OpenSHC::Rendering::ScreenResolutionArrayStruct;
+        using OpenSHC::Rendering::ScreenResolutionEnum;
         using OpenSHC::Rendering::ScreenResolutionEnumInt;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
@@ -129,7 +131,7 @@ namespace UI {
 
             void reinitWindow();
 
-            void prepareWindowAndDDraw_2Unk(BOOLEnum runAsExclusiveFullscreen, ScreenResolutionEnumInt resEnum);
+            void prepareWindowAndDDraw_2Unk(BOOLEnum runAsExclusiveFullscreen, ScreenResolutionEnum resEnum);
 
             void takeScreenshot(int param_1);
         };

@@ -8,9 +8,9 @@
 
 #pragma once
 
-#include "OpenSHC/IO/PackagedFileMagicNumInt.hpp"
+#include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Entities/Entity.hpp"
-#include "OpenSHC/Map/Entities/EntityTypeInt.hpp"
+#include "OpenSHC/Map/Entities/EntityType.hpp"
 #include "OpenSHC/Map/Entities/ExtraEntityInfo.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -18,9 +18,9 @@ namespace OpenSHC {
 namespace Map {
     namespace Entities {
 
-        using OpenSHC::IO::PackagedFileMagicNumInt;
+        using OpenSHC::IO::PackagedFileMagicNum;
         using OpenSHC::Map::Entities::Entity;
-        using OpenSHC::Map::Entities::EntityTypeInt;
+        using OpenSHC::Map::Entities::EntityType;
         using OpenSHC::Map::Entities::ExtraEntityInfo;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
@@ -51,9 +51,9 @@ namespace Map {
 
             void clearEntityArrayAndSec1077();
 
-            BOOLEnum meth_0x401150(int playerID, EntityTypeInt entityType);
+            BOOLEnum meth_0x401150(int playerID, EntityType entityType);
 
-            void setProjectileEntityValues2(int entityID, EntityTypeInt entityType);
+            void setProjectileEntityValues2(int entityID, EntityType entityType);
 
             void setEntityParameters(int entityID, undefined4 entityType, int gmLookupValue);
 
@@ -120,7 +120,7 @@ namespace Map {
                 int microX, int microY, int height, int destMicroX, int destMicroY, int destHeight);
 
             uint spawnProjectileEntity(int unitID, undefined4 playerID1, uint ownerColorUnk, int microX, int microY,
-                int totalHeight, int targetX, int targetY, int targetZUnk, EntityTypeInt entityType, int param_11);
+                int totalHeight, int targetX, int targetY, int targetZUnk, EntityType entityType, int param_11);
 
             void meth_0x405cf0(int entityID, int x, int y, int height, int targetX, int targetY, int targetZ);
 
@@ -142,7 +142,7 @@ namespace Map {
 
             BOOLEnum moveProjectileEntity(int entityID);
 
-            void FUN_00408770(PackagedFileMagicNumInt receivedMapVersion, PackagedFileMagicNumInt packagerMapVersion);
+            void FUN_00408770(PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
 
             void updateEntities();
         };

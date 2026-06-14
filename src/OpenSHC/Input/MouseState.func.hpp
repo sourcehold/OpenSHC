@@ -2,7 +2,7 @@
   path: 'OpenSHC/Input/MouseState.func.hpp'
 */
 
-#include "OpenSHC/Input/Mouse/MouseClickInteractionInt.hpp"
+#include "OpenSHC/Input/Mouse/MouseClickInteraction.hpp"
 #include "OpenSHC/Input/MouseState.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -11,14 +11,14 @@ namespace OpenSHC {
 namespace Input {
     namespace MouseState_Func {
 
-        using OpenSHC::Input::Mouse::MouseClickInteractionInt;
+        using OpenSHC::Input::Mouse::MouseClickInteraction;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         MACRO_FUNCTION_RESOLVER(
             void (MouseState::*)(), false, Address::SHC_3BB0A8C1_0x00467F80, &MouseState::makeSelectedCursorTypeCurrent)
         makeSelectedCursorTypeCurrent;
 
-        MACRO_FUNCTION_RESOLVER(void (MouseState::*)(short, short, MouseClickInteractionInt), false,
+        MACRO_FUNCTION_RESOLVER(void (MouseState::*)(short, short, MouseClickInteraction), false,
             Address::SHC_3BB0A8C1_0x00468030, &MouseState::updateMousePositionAndClicks)
         updateMousePositionAndClicks;
 

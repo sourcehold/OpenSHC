@@ -8,13 +8,13 @@
 
 #pragma once
 
-#include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
+#include "OpenSHC/Commands/CommandBuildingType.hpp"
 #include "OpenSHC/UI/HoveredStateElement.hpp"
 
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::Commands::CommandBuildingTypeInt;
+    using OpenSHC::Commands::CommandBuildingType;
     using OpenSHC::UI::HoveredStateElement;
 
 #pragma pack(push, 1)
@@ -39,7 +39,7 @@ namespace UI {
 
         void clearInvalidatedHoverStates();
 
-        void createHoverStateElement(int x, int y, CommandBuildingTypeInt type, int size, int flag);
+        void createHoverStateElement(int x, int y, CommandBuildingType type, int size, int flag);
 
         void calculateHoveredTile();
     };
