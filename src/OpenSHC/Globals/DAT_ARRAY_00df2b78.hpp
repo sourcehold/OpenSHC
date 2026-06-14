@@ -9,11 +9,13 @@
 #pragma once
 
 #include "winapi_32/WCHAR.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x00DF2B78
+// StructResolver::Instance<winapi_32::WCHAR[1000],14625656>::instance
+
 namespace OpenSHC {
 
 using winapi_32::WCHAR;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x00DF2B78
-// StructResolver::Instance<winapi_32::WCHAR[1000],14625656>::instance
 MACRO_STRUCT_RESOLVER(WCHAR[1000], false, Address::SHC_3BB0A8C1_0x00DF2B78) DAT_ARRAY_00df2b78;
 } // namespace OpenSHC

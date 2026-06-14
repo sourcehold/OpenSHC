@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/IO/FilePackager.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x00F2B3D0
+// StructResolver::Instance<OpenSHC::IO::FilePackager,15905744>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::IO::FilePackager;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x00F2B3D0
-// StructResolver::Instance<OpenSHC::IO::FilePackager,15905744>::instance
 MACRO_STRUCT_RESOLVER(FilePackager, false, Address::SHC_3BB0A8C1_0x00F2B3D0) FilePackagerObj;
 } // namespace OpenSHC

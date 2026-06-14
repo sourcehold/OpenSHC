@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/UI/MenuHandlerState.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x00F2B390
+// StructResolver::Instance<OpenSHC::UI::MenuHandlerState,15905680>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::UI::MenuHandlerState;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x00F2B390
-// StructResolver::Instance<OpenSHC::UI::MenuHandlerState,15905680>::instance
 MACRO_STRUCT_RESOLVER(MenuHandlerState, false, Address::SHC_3BB0A8C1_0x00F2B390) DAT_MenuHandlerState;
 } // namespace OpenSHC

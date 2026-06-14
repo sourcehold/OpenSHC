@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/UI/MenuView.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x00ED31D8
+// StructResolver::Instance<OpenSHC::UI::MenuView *,15544792>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::UI::MenuView;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x00ED31D8
-// StructResolver::Instance<OpenSHC::UI::MenuView *,15544792>::instance
 MACRO_STRUCT_RESOLVER(MenuView*, false, Address::SHC_3BB0A8C1_0x00ED31D8) DAT_MenuViewStackTop;
 } // namespace OpenSHC

@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/Map/Buildings/BuildingsState.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x00F98520
+// StructResolver::Instance<OpenSHC::Map::Buildings::BuildingsState,16352544>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::Map::Buildings::BuildingsState;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x00F98520
-// StructResolver::Instance<OpenSHC::Map::Buildings::BuildingsState,16352544>::instance
 MACRO_STRUCT_RESOLVER(BuildingsState, false, Address::SHC_3BB0A8C1_0x00F98520) DAT_BuildingsState;
 } // namespace OpenSHC

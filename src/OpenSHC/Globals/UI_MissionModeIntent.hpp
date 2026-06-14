@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x00DF422C
+// StructResolver::Instance<OpenSHC::WindowsHelper::Enums::BOOLEnum,14631468>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x00DF422C
-// StructResolver::Instance<OpenSHC::WindowsHelper::Enums::BOOLEnum,14631468>::instance
 MACRO_STRUCT_RESOLVER(BOOLEnum, false, Address::SHC_3BB0A8C1_0x00DF422C) UI_MissionModeIntent;
 } // namespace OpenSHC

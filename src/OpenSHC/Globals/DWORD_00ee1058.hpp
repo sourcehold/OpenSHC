@@ -9,9 +9,11 @@
 #pragma once
 
 #include "WinDef.h"
-namespace OpenSHC {
 
 // GLOBAL: STRONGHOLDCRUSADER 0x00EE1058
 // StructResolver::Instance<DWORD,15601752>::instance
+
+namespace OpenSHC {
+
 MACRO_STRUCT_RESOLVER(DWORD, false, Address::SHC_3BB0A8C1_0x00EE1058) DWORD_00ee1058;
 } // namespace OpenSHC

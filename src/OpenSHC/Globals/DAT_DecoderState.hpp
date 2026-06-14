@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/IO/DecoderState.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x00F2CC24
+// StructResolver::Instance<OpenSHC::IO::DecoderState,15911972>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::IO::DecoderState;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x00F2CC24
-// StructResolver::Instance<OpenSHC::IO::DecoderState,15911972>::instance
 MACRO_STRUCT_RESOLVER(DecoderState, false, Address::SHC_3BB0A8C1_0x00F2CC24) DAT_DecoderState;
 } // namespace OpenSHC

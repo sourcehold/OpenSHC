@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/Map/WildlifeState.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x00EE23D8
+// StructResolver::Instance<OpenSHC::Map::WildlifeState,15606744>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::Map::WildlifeState;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x00EE23D8
-// StructResolver::Instance<OpenSHC::Map::WildlifeState,15606744>::instance
 MACRO_STRUCT_RESOLVER(WildlifeState, false, Address::SHC_3BB0A8C1_0x00EE23D8) DAT_WildlifeState;
 } // namespace OpenSHC

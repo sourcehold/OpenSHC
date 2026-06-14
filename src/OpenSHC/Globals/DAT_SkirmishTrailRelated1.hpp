@@ -8,8 +8,10 @@
 
 #pragma once
 
+// GLOBAL: STRONGHOLDCRUSADER 0x00ED27C0
+// StructResolver::Instance<undefined4,15542208>::instance
+
 namespace OpenSHC {
 
-// GLOBAL: STRONGHOLDCRUSADER 0x00ED27C0
 MACRO_STRUCT_RESOLVER(undefined4, false, Address::SHC_3BB0A8C1_0x00ED27C0) DAT_SkirmishTrailRelated1;
 } // namespace OpenSHC

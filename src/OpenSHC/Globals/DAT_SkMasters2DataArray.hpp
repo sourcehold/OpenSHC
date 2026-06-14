@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/IO/SkMasterDataEntry.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x00DF6250
+// StructResolver::Instance<OpenSHC::IO::SkMasterDataEntry[250],14639696>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::IO::SkMasterDataEntry;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x00DF6250
-// StructResolver::Instance<OpenSHC::IO::SkMasterDataEntry[250],14639696>::instance
 MACRO_STRUCT_RESOLVER(SkMasterDataEntry[250], false, Address::SHC_3BB0A8C1_0x00DF6250) DAT_SkMasters2DataArray;
 } // namespace OpenSHC

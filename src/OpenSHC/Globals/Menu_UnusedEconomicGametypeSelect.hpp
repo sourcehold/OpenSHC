@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/UI/Menu.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x00B97580
+// StructResolver::Instance<OpenSHC::UI::Menu,12154240>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::UI::Menu;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x00B97580
-// StructResolver::Instance<OpenSHC::UI::Menu,12154240>::instance
 MACRO_STRUCT_RESOLVER(Menu, false, Address::SHC_3BB0A8C1_0x00B97580) Menu_UnusedEconomicGametypeSelect;
 } // namespace OpenSHC

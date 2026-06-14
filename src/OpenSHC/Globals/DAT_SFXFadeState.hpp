@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/Audio/SFX/SFXFadeStateInt.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x00B986FC
+// StructResolver::Instance<OpenSHC::Audio::SFX::SFXFadeStateInt,12158716>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::Audio::SFX::SFXFadeStateInt;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x00B986FC
-// StructResolver::Instance<OpenSHC::Audio::SFX::SFXFadeStateInt,12158716>::instance
 MACRO_STRUCT_RESOLVER(SFXFadeStateInt, false, Address::SHC_3BB0A8C1_0x00B986FC) DAT_SFXFadeState;
 } // namespace OpenSHC

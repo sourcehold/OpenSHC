@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/Map/TileMapState.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x01A93208
+// StructResolver::Instance<OpenSHC::Map::TileMapState,27865608>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::Map::TileMapState;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x01A93208
-// StructResolver::Instance<OpenSHC::Map::TileMapState,27865608>::instance
 MACRO_STRUCT_RESOLVER(TileMapState, false, Address::SHC_3BB0A8C1_0x01A93208) DAT_TileMapState;
 } // namespace OpenSHC

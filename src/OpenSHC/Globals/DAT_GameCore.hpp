@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/Game/GameCore.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x01FE7D10
+// StructResolver::Instance<OpenSHC::Game::GameCore,33455376>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::Game::GameCore;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x01FE7D10
-// StructResolver::Instance<OpenSHC::Game::GameCore,33455376>::instance
 MACRO_STRUCT_RESOLVER(GameCore, false, Address::SHC_3BB0A8C1_0x01FE7D10) DAT_GameCore;
 } // namespace OpenSHC

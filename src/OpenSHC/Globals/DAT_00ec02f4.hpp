@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/Game/CampaignInfoSubStructure1.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x00EC02F4
+// StructResolver::Instance<OpenSHC::Game::CampaignInfoSubStructure1,15467252>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::Game::CampaignInfoSubStructure1;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x00EC02F4
-// StructResolver::Instance<OpenSHC::Game::CampaignInfoSubStructure1,15467252>::instance
 MACRO_STRUCT_RESOLVER(CampaignInfoSubStructure1, false, Address::SHC_3BB0A8C1_0x00EC02F4) DAT_00ec02f4;
 } // namespace OpenSHC

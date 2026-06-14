@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/UI/Rendering/AlphaAndButtonSurface.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x00F2C7BC
+// StructResolver::Instance<OpenSHC::UI::Rendering::AlphaAndButtonSurface,15910844>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::UI::Rendering::AlphaAndButtonSurface;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x00F2C7BC
-// StructResolver::Instance<OpenSHC::UI::Rendering::AlphaAndButtonSurface,15910844>::instance
 MACRO_STRUCT_RESOLVER(AlphaAndButtonSurface, false, Address::SHC_3BB0A8C1_0x00F2C7BC) AlphaAndButtonSurfaceObj;
 } // namespace OpenSHC

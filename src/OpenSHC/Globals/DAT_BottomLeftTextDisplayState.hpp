@@ -9,12 +9,14 @@
 #pragma once
 
 #include "OpenSHC/UI/BottomLeftTextDisplayState.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x00EE106C
+// StructResolver::Instance<OpenSHC::UI::BottomLeftTextDisplayState,15601772>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::UI::BottomLeftTextDisplayState;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x00EE106C
-// StructResolver::Instance<OpenSHC::UI::BottomLeftTextDisplayState,15601772>::instance
 MACRO_STRUCT_RESOLVER(BottomLeftTextDisplayState, false, Address::SHC_3BB0A8C1_0x00EE106C)
 DAT_BottomLeftTextDisplayState;
 } // namespace OpenSHC
