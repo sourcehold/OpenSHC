@@ -1,4 +1,3 @@
-
 # Technical information
 
 ### Approach
@@ -10,16 +9,17 @@ The DLL is meant to be loaded by the UCP and only replace certain functions, whi
 
 We use [reccmp](https://github.com/isledecomp/reccmp) to verify compatibility of reimplemented code and the original game.
 
-Because the original game was compiled using an old compiler, you have to compile it using [this compiler](https://github.com/sourcehold/MSVC1400), which is included in the repository via a submodule.
+Because the original game was compiled using an old compiler, you have to compile it using [this compiler](https://github.com/sourcehold/MSVC1400-SP1), which is included in the repository via a submodule.
 
 If you made any advances or noticed something while implementing, please also add or update the status in [addresses-SHC-3BB0A8C1.txt](status/addresses-SHC-3BB0A8C1.txt).  
 The structure is simply `<address-enum> | <matching-percent> | <comment>`.  
 Should the address list change, please run the following command to recreate the file:
+
 ```sh
 python .\status\extract_header_and_update.py .\src\precomp\addresses-SHC-3BB0A8C1.hpp
 ```
-Percentages and comments should be kept, but always check the difference.
 
+Percentages and comments should be kept, but always check the difference.
 
 ### Prerequisites
 
@@ -37,7 +37,7 @@ Percentages and comments should be kept, but always check the difference.
    git clone --recursive https://github.com/sourcehold/OpenSHC.git
    ```
 
-   - Should NET Framework 3.5 be required, it can be easily installed on Windows 11 by running `mt.exe` (from the MSVC1400 repo), Windows 11 will ask to install the right version.
+   - Should NET Framework 3.5 be required, it can be easily installed on Windows 11 by running `mt.exe` (from the MSVC1400-SP1 repo), Windows 11 will ask to install the right version.
 
 2. Create a softlink to the original game executable with the name `_original` by running [softlink.bat](softlink.bat). It will request the full path to the game folder.
 3. Setup the needed Python environment to run `reccmp` for binary comparison by running [setup.bat](reccmp/dll/setup.bat) in the reccmp/dll folder (or the `setup.bat` in the reccmp/exe folder if binary comparison on the reimplemented .exe file is preferred)

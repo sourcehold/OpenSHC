@@ -11,7 +11,7 @@ The workflow involves extracting function signatures and decompiled code from Gh
 - Ghidra and access to the decompilation, in order to do a SARIF export of the ghidra repo.
 - ghidra-skink tool (github.com/gynt/ghidra-skink) to convert SARIF to C++ header files
 - OpenSHC project repository (github.com/sourcehold/OpenSHC)
-- MSVC1400 (Visual Studio 2005) compiler (included in OpenSHC)
+- MSVC1400-SP1 (Visual Studio 2005) compiler (included in OpenSHC)
 - reccmp-reccmp bytecode comparison tool (python package)
 
 ### Workflow Steps
@@ -42,13 +42,13 @@ This task can be semi-automated using a PyGhidra script which provides an API en
 
 Select a function to work on and adapt the decompiled code to work with the generated header files.
 
-This step involves fixing Ghidra's special helper functions, fixing any decompilation artifacts or errors, and ensuring the code compiles with the MSVC1400 toolchain. Start with simpler, leaf-node functions that have fewer dependencies.
+This step involves fixing Ghidra's special helper functions, fixing any decompilation artifacts or errors, and ensuring the code compiles with the MSVC1400-SP1 toolchain. Start with simpler, leaf-node functions that have fewer dependencies.
 
 #### 5. Integrate and Compile
 
-Add the refined .cpp file to the CMake build configuration which compiles the project using MSVC1400.
+Add the refined .cpp file to the CMake build configuration which compiles the project using MSVC1400-SP1.
 
-We use MSVC1400 specifically, as the exact compiler version affects bytecode generation. The compilation must succeed before proceeding to comparison.
+We use MSVC1400 (Service Pack 1) specifically, as the exact compiler version affects bytecode generation. The compilation must succeed before proceeding to comparison.
 
 #### 6. Compare Bytecode
 
@@ -64,7 +64,7 @@ Common sources of discrepancies include source code lines being in a different o
 
 #### 8. Iterate Until Sufficient Match
 
-Repeat steps 5 through 7 until the bytecode match reaches 100%. 
+Repeat steps 5 through 7 until the bytecode match reaches 100%.
 
 If progress is stuck after several tries, document any remaining discrepancies that cannot be resolved, as these may be acceptable artifacts such as optimizations.
 
