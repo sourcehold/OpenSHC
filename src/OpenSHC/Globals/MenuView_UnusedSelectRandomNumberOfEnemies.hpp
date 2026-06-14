@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::UI::MenuView;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x00B97A2C
+// StructResolver::Instance<OpenSHC::UI::MenuView,12155436>::instance
 MACRO_STRUCT_RESOLVER(MenuView, false, Address::SHC_3BB0A8C1_0x00B97A2C) MenuView_UnusedSelectRandomNumberOfEnemies;
 } // namespace OpenSHC

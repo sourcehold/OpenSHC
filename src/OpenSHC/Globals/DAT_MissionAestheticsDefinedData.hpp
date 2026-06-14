@@ -13,6 +13,8 @@ namespace OpenSHC {
 
 using OpenSHC::Game::MissionAestheticsDefinedData;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x00B3962C
+// StructResolver::Instance<OpenSHC::Game::MissionAestheticsDefinedData,11769388>::instance
 MACRO_STRUCT_RESOLVER(MissionAestheticsDefinedData, false, Address::SHC_3BB0A8C1_0x00B3962C)
 DAT_MissionAestheticsDefinedData;
 } // namespace OpenSHC

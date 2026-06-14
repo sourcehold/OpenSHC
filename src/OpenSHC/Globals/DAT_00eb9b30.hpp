@@ -10,5 +10,6 @@
 
 namespace OpenSHC {
 
+// GLOBAL: STRONGHOLDCRUSADER 0x00EB9B30
 MACRO_STRUCT_RESOLVER(undefined4, false, Address::SHC_3BB0A8C1_0x00EB9B30) DAT_00eb9b30;
 } // namespace OpenSHC

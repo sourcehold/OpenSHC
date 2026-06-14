@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::Input::InsertKeyState;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x00EE239C
+// StructResolver::Instance<OpenSHC::Input::InsertKeyState,15606684>::instance
 MACRO_STRUCT_RESOLVER(InsertKeyState, false, Address::SHC_3BB0A8C1_0x00EE239C) DAT_InsertKeyState;
 } // namespace OpenSHC

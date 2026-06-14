@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::Util::Timing::Stopwatch;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x0112B05C
+// StructResolver::Instance<OpenSHC::Util::Timing::Stopwatch,18002012>::instance
 MACRO_STRUCT_RESOLVER(Stopwatch, false, Address::SHC_3BB0A8C1_0x0112B05C) DAT_UnknownStopwatch;
 } // namespace OpenSHC

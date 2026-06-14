@@ -10,5 +10,6 @@
 
 namespace OpenSHC {
 
+// GLOBAL: STRONGHOLDCRUSADER 0x005A6E80
 MACRO_STRUCT_RESOLVER(GUID, false, Address::SHC_3BB0A8C1_0x005A6E80) IID_IDirectDraw7;
 } // namespace OpenSHC

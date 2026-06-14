@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::Rendering::CreditsRelatedStructure;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x00EC0348
+// StructResolver::Instance<OpenSHC::Rendering::CreditsRelatedStructure[24],15467336>::instance
 MACRO_STRUCT_RESOLVER(CreditsRelatedStructure[24], false, Address::SHC_3BB0A8C1_0x00EC0348) DAT_ARRAY_00ec0348;
 } // namespace OpenSHC

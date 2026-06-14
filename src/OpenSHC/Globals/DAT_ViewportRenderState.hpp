@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::Rendering::ViewportRenderState;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x021AEBD8
+// StructResolver::Instance<OpenSHC::Rendering::ViewportRenderState,35318744>::instance
 MACRO_STRUCT_RESOLVER(ViewportRenderState, false, Address::SHC_3BB0A8C1_0x021AEBD8) DAT_ViewportRenderState;
 } // namespace OpenSHC

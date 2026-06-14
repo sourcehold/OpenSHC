@@ -13,6 +13,8 @@ namespace OpenSHC {
 
 using OpenSHC::Game::Skirmish::SkirmishLobbySetupStructureLongName;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x00DF3878
+// StructResolver::Instance<OpenSHC::Game::Skirmish::SkirmishLobbySetupStructureLongName,14628984>::instance
 MACRO_STRUCT_RESOLVER(SkirmishLobbySetupStructureLongName, false, Address::SHC_3BB0A8C1_0x00DF3878)
 DAT_SkirmishLobbySetupStructureLongMapName;
 } // namespace OpenSHC

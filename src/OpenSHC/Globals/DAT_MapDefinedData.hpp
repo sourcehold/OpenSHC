@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::Map::MapDefinedData;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x00B601BC
+// StructResolver::Instance<OpenSHC::Map::MapDefinedData,11927996>::instance
 MACRO_STRUCT_RESOLVER(MapDefinedData, false, Address::SHC_3BB0A8C1_0x00B601BC) DAT_MapDefinedData;
 } // namespace OpenSHC

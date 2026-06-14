@@ -10,5 +10,6 @@
 
 namespace OpenSHC {
 
+// GLOBAL: STRONGHOLDCRUSADER 0x00D814D8
 MACRO_STRUCT_RESOLVER(int[116000], false, Address::SHC_3BB0A8C1_0x00D814D8) DAT_PictureNumToGmIDArray_UNUSED;
 } // namespace OpenSHC

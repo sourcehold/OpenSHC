@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::Audio::SoundEffectsHelperData1;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x00DF37F0
+// StructResolver::Instance<OpenSHC::Audio::SoundEffectsHelperData1,14628848>::instance
 MACRO_STRUCT_RESOLVER(SoundEffectsHelperData1, false, Address::SHC_3BB0A8C1_0x00DF37F0) DAT_SoundEffectsHelperData1;
 } // namespace OpenSHC

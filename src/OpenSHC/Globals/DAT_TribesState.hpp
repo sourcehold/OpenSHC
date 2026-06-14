@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::Map::Units::TribesState;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x01667F78
+// StructResolver::Instance<OpenSHC::Map::Units::TribesState,23494520>::instance
 MACRO_STRUCT_RESOLVER(TribesState, false, Address::SHC_3BB0A8C1_0x01667F78) DAT_TribesState;
 } // namespace OpenSHC

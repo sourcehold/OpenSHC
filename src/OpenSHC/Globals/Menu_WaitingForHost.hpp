@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::UI::Menu;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x00B97C88
+// StructResolver::Instance<OpenSHC::UI::Menu,12156040>::instance
 MACRO_STRUCT_RESOLVER(Menu, false, Address::SHC_3BB0A8C1_0x00B97C88) Menu_WaitingForHost;
 } // namespace OpenSHC

@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::UI::UIButtonDefinedData;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x00B333AC
+// StructResolver::Instance<OpenSHC::UI::UIButtonDefinedData,11744172>::instance
 MACRO_STRUCT_RESOLVER(UIButtonDefinedData, false, Address::SHC_3BB0A8C1_0x00B333AC) DAT_UIButtonDefinedData;
 } // namespace OpenSHC

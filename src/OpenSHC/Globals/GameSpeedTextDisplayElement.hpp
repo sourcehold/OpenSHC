@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::UI::DisplayElement;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x00DF4C98
+// StructResolver::Instance<OpenSHC::UI::DisplayElement,14634136>::instance
 MACRO_STRUCT_RESOLVER(DisplayElement, false, Address::SHC_3BB0A8C1_0x00DF4C98) GameSpeedTextDisplayElement;
 } // namespace OpenSHC

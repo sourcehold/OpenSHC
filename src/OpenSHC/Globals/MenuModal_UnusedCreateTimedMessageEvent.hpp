@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::UI::MenuModal;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x00DF4D80
+// StructResolver::Instance<OpenSHC::UI::MenuModal,14634368>::instance
 MACRO_STRUCT_RESOLVER(MenuModal, false, Address::SHC_3BB0A8C1_0x00DF4D80) MenuModal_UnusedCreateTimedMessageEvent;
 } // namespace OpenSHC

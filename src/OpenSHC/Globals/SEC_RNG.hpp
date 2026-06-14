@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::Random::RNG;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x01A279C0
+// StructResolver::Instance<OpenSHC::Random::RNG,27425216>::instance
 MACRO_STRUCT_RESOLVER(RNG, false, Address::SHC_3BB0A8C1_0x01A279C0) SEC_RNG;
 } // namespace OpenSHC

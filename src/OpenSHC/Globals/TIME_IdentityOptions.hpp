@@ -11,5 +11,7 @@
 #include "WinDef.h"
 namespace OpenSHC {
 
+// GLOBAL: STRONGHOLDCRUSADER 0x00DF4230
+// StructResolver::Instance<DWORD,14631472>::instance
 MACRO_STRUCT_RESOLVER(DWORD, false, Address::SHC_3BB0A8C1_0x00DF4230) TIME_IdentityOptions;
 } // namespace OpenSHC

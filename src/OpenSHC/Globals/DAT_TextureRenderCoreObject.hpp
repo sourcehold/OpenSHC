@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::UI::Rendering::TextureRenderCore;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x01FEA090
+// StructResolver::Instance<OpenSHC::UI::Rendering::TextureRenderCore,33464464>::instance
 MACRO_STRUCT_RESOLVER(TextureRenderCore, false, Address::SHC_3BB0A8C1_0x01FEA090) DAT_TextureRenderCoreObject;
 } // namespace OpenSHC

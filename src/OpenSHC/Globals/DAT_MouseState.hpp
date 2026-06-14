@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::Input::MouseState;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x00F2C9B0
+// StructResolver::Instance<OpenSHC::Input::MouseState,15911344>::instance
 MACRO_STRUCT_RESOLVER(MouseState, false, Address::SHC_3BB0A8C1_0x00F2C9B0) DAT_MouseState;
 } // namespace OpenSHC

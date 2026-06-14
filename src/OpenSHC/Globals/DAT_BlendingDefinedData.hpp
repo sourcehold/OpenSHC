@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::Rendering::BlendingDefinedData;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x00AB571C
+// StructResolver::Instance<OpenSHC::Rendering::BlendingDefinedData,11228956>::instance
 MACRO_STRUCT_RESOLVER(BlendingDefinedData, false, Address::SHC_3BB0A8C1_0x00AB571C) DAT_BlendingDefinedData;
 } // namespace OpenSHC

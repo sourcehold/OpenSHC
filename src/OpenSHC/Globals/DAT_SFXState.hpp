@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::Audio::SFX::SFXState;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x00F22500
+// StructResolver::Instance<OpenSHC::Audio::SFX::SFXState,15869184>::instance
 MACRO_STRUCT_RESOLVER(SFXState, false, Address::SHC_3BB0A8C1_0x00F22500) DAT_SFXState;
 } // namespace OpenSHC

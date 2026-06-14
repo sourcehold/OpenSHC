@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::UI::HoveredState;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x00F2C7D0
+// StructResolver::Instance<OpenSHC::UI::HoveredState,15910864>::instance
 MACRO_STRUCT_RESOLVER(HoveredState, false, Address::SHC_3BB0A8C1_0x00F2C7D0) DAT_HoveredState;
 } // namespace OpenSHC

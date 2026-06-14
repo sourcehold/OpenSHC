@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::IO::Graphics::ImageHeader;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x00B98790
+// StructResolver::Instance<OpenSHC::IO::Graphics::ImageHeader[66000],12158864>::instance
 MACRO_STRUCT_RESOLVER(ImageHeader[66000], false, Address::SHC_3BB0A8C1_0x00B98790) DAT_GMImageHeaders;
 } // namespace OpenSHC

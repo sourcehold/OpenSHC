@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::IO::LowLevelMemory;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x0165272C
+// StructResolver::Instance<OpenSHC::IO::LowLevelMemory,23406380>::instance
 MACRO_STRUCT_RESOLVER(LowLevelMemory, false, Address::SHC_3BB0A8C1_0x0165272C) DAT_LowLevelMemory;
 } // namespace OpenSHC

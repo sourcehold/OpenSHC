@@ -10,5 +10,6 @@
 
 namespace OpenSHC {
 
+// GLOBAL: STRONGHOLDCRUSADER 0x021AE7EC
 MACRO_STRUCT_RESOLVER(byte[1004], false, Address::SHC_3BB0A8C1_0x021AE7EC) UNK_UnusedTextLocation1;
 } // namespace OpenSHC

@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::Game::TroopDefinedData;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x00AB8E14
+// StructResolver::Instance<OpenSHC::Game::TroopDefinedData,11243028>::instance
 MACRO_STRUCT_RESOLVER(TroopDefinedData, false, Address::SHC_3BB0A8C1_0x00AB8E14) DAT_TroopDefinedData;
 } // namespace OpenSHC

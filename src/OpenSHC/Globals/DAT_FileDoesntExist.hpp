@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x00DF5570
+// StructResolver::Instance<OpenSHC::WindowsHelper::Enums::BOOLEnum,14636400>::instance
 MACRO_STRUCT_RESOLVER(BOOLEnum, false, Address::SHC_3BB0A8C1_0x00DF5570) DAT_FileDoesntExist;
 } // namespace OpenSHC

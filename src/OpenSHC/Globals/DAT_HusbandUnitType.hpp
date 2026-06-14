@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::Map::Units::UnitTypeInt;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x00B98438
+// StructResolver::Instance<OpenSHC::Map::Units::UnitTypeInt,12158008>::instance
 MACRO_STRUCT_RESOLVER(UnitTypeInt, false, Address::SHC_3BB0A8C1_0x00B98438) DAT_HusbandUnitType;
 } // namespace OpenSHC

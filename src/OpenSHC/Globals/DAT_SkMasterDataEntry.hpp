@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::IO::SkMasterDataEntry;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x00DF5658
+// StructResolver::Instance<OpenSHC::IO::SkMasterDataEntry,14636632>::instance
 MACRO_STRUCT_RESOLVER(SkMasterDataEntry, false, Address::SHC_3BB0A8C1_0x00DF5658) DAT_SkMasterDataEntry;
 } // namespace OpenSHC

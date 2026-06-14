@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::Audio::MissingResourceState;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x00EE1098
+// StructResolver::Instance<OpenSHC::Audio::MissingResourceState,15601816>::instance
 MACRO_STRUCT_RESOLVER(MissingResourceState, false, Address::SHC_3BB0A8C1_0x00EE1098) DAT_MissingResourceState;
 } // namespace OpenSHC

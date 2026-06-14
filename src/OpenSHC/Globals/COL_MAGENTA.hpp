@@ -10,5 +10,6 @@
 
 namespace OpenSHC {
 
+// GLOBAL: STRONGHOLDCRUSADER 0x00DF33A0
 MACRO_STRUCT_RESOLVER(ushort, false, Address::SHC_3BB0A8C1_0x00DF33A0) COL_MAGENTA;
 } // namespace OpenSHC

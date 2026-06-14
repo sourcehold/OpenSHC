@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::Text::TextEditorState;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x02403AF8
+// StructResolver::Instance<OpenSHC::Text::TextEditorState,37763832>::instance
 MACRO_STRUCT_RESOLVER(TextEditorState, false, Address::SHC_3BB0A8C1_0x02403AF8) DAT_TextEditorState;
 } // namespace OpenSHC

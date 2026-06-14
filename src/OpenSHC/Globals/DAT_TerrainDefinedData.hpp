@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::Map::TerrainDefinedData;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x00B48F54
+// StructResolver::Instance<OpenSHC::Map::TerrainDefinedData,11833172>::instance
 MACRO_STRUCT_RESOLVER(TerrainDefinedData, false, Address::SHC_3BB0A8C1_0x00B48F54) DAT_TerrainDefinedData;
 } // namespace OpenSHC

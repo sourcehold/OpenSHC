@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::UI::Rendering::PencilRenderCore;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x0191D720
+// StructResolver::Instance<OpenSHC::UI::Rendering::PencilRenderCore,26335008>::instance
 MACRO_STRUCT_RESOLVER(PencilRenderCore, false, Address::SHC_3BB0A8C1_0x0191D720) DAT_PencilRenderCore;
 } // namespace OpenSHC

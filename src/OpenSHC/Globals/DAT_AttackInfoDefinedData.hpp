@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::AI::AttackInfo::AttackInfoDefinedData;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x00B4C704
+// StructResolver::Instance<OpenSHC::AI::AttackInfo::AttackInfoDefinedData,11847428>::instance
 MACRO_STRUCT_RESOLVER(AttackInfoDefinedData, false, Address::SHC_3BB0A8C1_0x00B4C704) DAT_AttackInfoDefinedData;
 } // namespace OpenSHC

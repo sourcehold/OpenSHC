@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::AI::AIV::AIVDefinedData;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x00B46124
+// StructResolver::Instance<OpenSHC::AI::AIV::AIVDefinedData,11821348>::instance
 MACRO_STRUCT_RESOLVER(AIVDefinedData, false, Address::SHC_3BB0A8C1_0x00B46124) DAT_AIVDefinedData;
 } // namespace OpenSHC

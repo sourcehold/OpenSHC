@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::AI::AICState;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x023FC8E8
+// StructResolver::Instance<OpenSHC::AI::AICState,37734632>::instance
 MACRO_STRUCT_RESOLVER(AICState, false, Address::SHC_3BB0A8C1_0x023FC8E8) DAT_AICState;
 } // namespace OpenSHC

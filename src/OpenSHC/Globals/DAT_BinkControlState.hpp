@@ -13,5 +13,7 @@ namespace OpenSHC {
 
 using OpenSHC::Rendering::Bink::BinkControlClass;
 
+// GLOBAL: STRONGHOLDCRUSADER 0x02157518
+// StructResolver::Instance<OpenSHC::Rendering::Bink::BinkControlClass,34960664>::instance
 MACRO_STRUCT_RESOLVER(BinkControlClass, false, Address::SHC_3BB0A8C1_0x02157518) DAT_BinkControlState;
 } // namespace OpenSHC
