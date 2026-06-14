@@ -16,7 +16,7 @@ namespace Audio {
         // SIZE: 0x00000004
         typedef struct UnkSoundFlagsAndLoopCount {
 
-            int loopCount : 16;
+            unsigned int loopCount : 16;
             int reserved : 13;
             int unknownFlag1 : 1;
             int unknownFlag2 : 1;

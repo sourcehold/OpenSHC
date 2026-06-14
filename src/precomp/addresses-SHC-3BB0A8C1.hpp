@@ -17947,8 +17947,8 @@ enum {
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x0044AE90 = 0x0044AE90,
-    // label: PlayUnitSpeech
-    // location: OpenSHC/Global
+    // label: playUnitSpeech
+    // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x0044B210 = 0x0044B210,
     // type: /undefined *32
