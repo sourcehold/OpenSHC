@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/Game/GameStateStructures.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x0112B0B8
+// StructResolver::Instance<OpenSHC::Game::GameStateStructures,18002104>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::Game::GameStateStructures;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x0112B0B8
-// StructResolver::Instance<OpenSHC::Game::GameStateStructures,18002104>::instance
 MACRO_STRUCT_RESOLVER(GameStateStructures, false, Address::SHC_3BB0A8C1_0x0112B0B8) DAT_GameState;
 } // namespace OpenSHC

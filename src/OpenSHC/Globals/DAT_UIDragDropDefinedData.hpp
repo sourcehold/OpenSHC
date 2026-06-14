@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/UI/UIDragDropDefinedData.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x00B48EE4
+// StructResolver::Instance<OpenSHC::UI::UIDragDropDefinedData,11833060>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::UI::UIDragDropDefinedData;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x00B48EE4
-// StructResolver::Instance<OpenSHC::UI::UIDragDropDefinedData,11833060>::instance
 MACRO_STRUCT_RESOLVER(UIDragDropDefinedData, false, Address::SHC_3BB0A8C1_0x00B48EE4) DAT_UIDragDropDefinedData;
 } // namespace OpenSHC

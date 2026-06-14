@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/UI/DisplayElement.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x00DF4CBC
+// StructResolver::Instance<OpenSHC::UI::DisplayElement,14634172>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::UI::DisplayElement;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x00DF4CBC
-// StructResolver::Instance<OpenSHC::UI::DisplayElement,14634172>::instance
 MACRO_STRUCT_RESOLVER(DisplayElement, false, Address::SHC_3BB0A8C1_0x00DF4CBC) SomeMissionNumberUnkDisplayElement9;
 } // namespace OpenSHC

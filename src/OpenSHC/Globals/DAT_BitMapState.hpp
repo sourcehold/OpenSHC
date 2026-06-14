@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/IO/BitMapState.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x011BECB0
+// StructResolver::Instance<OpenSHC::IO::BitMapState,18607280>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::IO::BitMapState;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x011BECB0
-// StructResolver::Instance<OpenSHC::IO::BitMapState,18607280>::instance
 MACRO_STRUCT_RESOLVER(BitMapState, false, Address::SHC_3BB0A8C1_0x011BECB0) DAT_BitMapState;
 } // namespace OpenSHC

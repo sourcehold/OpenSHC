@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/UI/MenuModalComposition.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x02403678
+// StructResolver::Instance<OpenSHC::UI::MenuModalComposition,37762680>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::UI::MenuModalComposition;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x02403678
-// StructResolver::Instance<OpenSHC::UI::MenuModalComposition,37762680>::instance
 MACRO_STRUCT_RESOLVER(MenuModalComposition, false, Address::SHC_3BB0A8C1_0x02403678) DAT_MenuModalComposition2;
 } // namespace OpenSHC

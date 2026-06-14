@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/Synchrony/GameSynchronyState.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x0191D768
+// StructResolver::Instance<OpenSHC::Synchrony::GameSynchronyState,26335080>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::Synchrony::GameSynchronyState;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x0191D768
-// StructResolver::Instance<OpenSHC::Synchrony::GameSynchronyState,26335080>::instance
 MACRO_STRUCT_RESOLVER(GameSynchronyState, false, Address::SHC_3BB0A8C1_0x0191D768) DAT_GameSynchronyState;
 } // namespace OpenSHC

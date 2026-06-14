@@ -8,8 +8,10 @@
 
 #pragma once
 
+// GLOBAL: STRONGHOLDCRUSADER 0x00ED3138
+// StructResolver::Instance<dword,15544632>::instance
+
 namespace OpenSHC {
 
-// GLOBAL: STRONGHOLDCRUSADER 0x00ED3138
 MACRO_STRUCT_RESOLVER(dword, false, Address::SHC_3BB0A8C1_0x00ED3138) DWORD_00ed3138;
 } // namespace OpenSHC

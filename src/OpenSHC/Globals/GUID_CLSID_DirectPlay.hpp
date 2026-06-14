@@ -8,8 +8,10 @@
 
 #pragma once
 
+// GLOBAL: STRONGHOLDCRUSADER 0x005A6E40
+// StructResolver::Instance<GUID,5926464>::instance
+
 namespace OpenSHC {
 
-// GLOBAL: STRONGHOLDCRUSADER 0x005A6E40
 MACRO_STRUCT_RESOLVER(GUID, false, Address::SHC_3BB0A8C1_0x005A6E40) GUID_CLSID_DirectPlay;
 } // namespace OpenSHC

@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/Rendering/CreditsRelatedStructure2.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x00EB9B68
+// StructResolver::Instance<OpenSHC::Rendering::CreditsRelatedStructure2[288],15440744>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::Rendering::CreditsRelatedStructure2;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x00EB9B68
-// StructResolver::Instance<OpenSHC::Rendering::CreditsRelatedStructure2[288],15440744>::instance
 MACRO_STRUCT_RESOLVER(CreditsRelatedStructure2[288], false, Address::SHC_3BB0A8C1_0x00EB9B68) DAT_ARRAY_00eb9b68;
 } // namespace OpenSHC

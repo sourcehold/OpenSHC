@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/IO/Graphics/GFXRelatedBuffer1.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x00EC0840
+// StructResolver::Instance<OpenSHC::IO::Graphics::GFXRelatedBuffer1,15468608>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::IO::Graphics::GFXRelatedBuffer1;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x00EC0840
-// StructResolver::Instance<OpenSHC::IO::Graphics::GFXRelatedBuffer1,15468608>::instance
 MACRO_STRUCT_RESOLVER(GFXRelatedBuffer1, false, Address::SHC_3BB0A8C1_0x00EC0840) DAT_00ec0840;
 } // namespace OpenSHC

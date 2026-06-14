@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/Synchrony/ProtocolDefinedData.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x00B38B7C
+// StructResolver::Instance<OpenSHC::Synchrony::ProtocolDefinedData,11766652>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::Synchrony::ProtocolDefinedData;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x00B38B7C
-// StructResolver::Instance<OpenSHC::Synchrony::ProtocolDefinedData,11766652>::instance
 MACRO_STRUCT_RESOLVER(ProtocolDefinedData, false, Address::SHC_3BB0A8C1_0x00B38B7C) DAT_ProtocolDefinedData;
 } // namespace OpenSHC

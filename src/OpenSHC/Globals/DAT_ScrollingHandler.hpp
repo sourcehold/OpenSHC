@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/UI/ScrollingHandler.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x0112B070
+// StructResolver::Instance<OpenSHC::UI::ScrollingHandler,18002032>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::UI::ScrollingHandler;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x0112B070
-// StructResolver::Instance<OpenSHC::UI::ScrollingHandler,18002032>::instance
 MACRO_STRUCT_RESOLVER(ScrollingHandler, false, Address::SHC_3BB0A8C1_0x0112B070) DAT_ScrollingHandler;
 } // namespace OpenSHC

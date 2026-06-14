@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/Map/Navigation/PathFindingState.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x012BB8C8
+// StructResolver::Instance<OpenSHC::Map::Navigation::PathFindingState,19642568>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::Map::Navigation::PathFindingState;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x012BB8C8
-// StructResolver::Instance<OpenSHC::Map::Navigation::PathFindingState,19642568>::instance
 MACRO_STRUCT_RESOLVER(PathFindingState, false, Address::SHC_3BB0A8C1_0x012BB8C8) DAT_PathFindingState;
 } // namespace OpenSHC

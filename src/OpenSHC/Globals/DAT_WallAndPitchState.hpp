@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/Map/WallAndPitchState.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x00EE19D0
+// StructResolver::Instance<OpenSHC::Map::WallAndPitchState,15604176>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::Map::WallAndPitchState;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x00EE19D0
-// StructResolver::Instance<OpenSHC::Map::WallAndPitchState,15604176>::instance
 MACRO_STRUCT_RESOLVER(WallAndPitchState, false, Address::SHC_3BB0A8C1_0x00EE19D0) DAT_WallAndPitchState;
 } // namespace OpenSHC

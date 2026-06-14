@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/Map/Units/TroopValueState.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x01763348
+// StructResolver::Instance<OpenSHC::Map::Units::TroopValueState,24523592>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::Map::Units::TroopValueState;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x01763348
-// StructResolver::Instance<OpenSHC::Map::Units::TroopValueState,24523592>::instance
 MACRO_STRUCT_RESOLVER(TroopValueState, false, Address::SHC_3BB0A8C1_0x01763348) DAT_TroopValueState;
 } // namespace OpenSHC

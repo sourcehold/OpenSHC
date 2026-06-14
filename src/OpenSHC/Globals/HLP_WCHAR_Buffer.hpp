@@ -8,8 +8,10 @@
 
 #pragma once
 
+// GLOBAL: STRONGHOLDCRUSADER 0x00DF2978
+// StructResolver::Instance<ntddk_32::WCHAR[256],14625144>::instance
+
 namespace OpenSHC {
 
-// GLOBAL: STRONGHOLDCRUSADER 0x00DF2978
 MACRO_STRUCT_RESOLVER(WCHAR[256], false, Address::SHC_3BB0A8C1_0x00DF2978) HLP_WCHAR_Buffer;
 } // namespace OpenSHC

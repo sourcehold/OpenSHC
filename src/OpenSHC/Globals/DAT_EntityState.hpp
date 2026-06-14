@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/Map/Entities/EntityState.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x02350300
+// StructResolver::Instance<OpenSHC::Map::Entities::EntityState,37028608>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::Map::Entities::EntityState;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x02350300
-// StructResolver::Instance<OpenSHC::Map::Entities::EntityState,37028608>::instance
 MACRO_STRUCT_RESOLVER(EntityState, false, Address::SHC_3BB0A8C1_0x02350300) DAT_EntityState;
 } // namespace OpenSHC

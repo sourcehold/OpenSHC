@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/Text/UserTextHandler.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x01652740
+// StructResolver::Instance<OpenSHC::Text::UserTextHandler,23406400>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::Text::UserTextHandler;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x01652740
-// StructResolver::Instance<OpenSHC::Text::UserTextHandler,23406400>::instance
 MACRO_STRUCT_RESOLVER(UserTextHandler, false, Address::SHC_3BB0A8C1_0x01652740) DAT_UserTextHandlerState;
 } // namespace OpenSHC

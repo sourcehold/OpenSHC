@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/AI/AIVState.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x01866AB0
+// StructResolver::Instance<OpenSHC::AI::AIVState,25586352>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::AI::AIVState;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x01866AB0
-// StructResolver::Instance<OpenSHC::AI::AIVState,25586352>::instance
 MACRO_STRUCT_RESOLVER(AIVState, false, Address::SHC_3BB0A8C1_0x01866AB0) DAT_AIVState;
 } // namespace OpenSHC

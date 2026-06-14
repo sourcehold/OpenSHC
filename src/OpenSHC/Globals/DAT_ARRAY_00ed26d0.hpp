@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/Map/Navigation/Algorithms/XYPair.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x00ED26D0
+// StructResolver::Instance<OpenSHC::Map::Navigation::Algorithms::XYPair[21],15541968>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::Map::Navigation::Algorithms::XYPair;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x00ED26D0
-// StructResolver::Instance<OpenSHC::Map::Navigation::Algorithms::XYPair[21],15541968>::instance
 MACRO_STRUCT_RESOLVER(XYPair[21], false, Address::SHC_3BB0A8C1_0x00ED26D0) DAT_ARRAY_00ed26d0;
 } // namespace OpenSHC

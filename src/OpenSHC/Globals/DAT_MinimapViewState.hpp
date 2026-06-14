@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/UI/MinimapViewState.hpp"
+
+// GLOBAL: STRONGHOLDCRUSADER 0x01A31610
+// StructResolver::Instance<OpenSHC::UI::MinimapViewState,27465232>::instance
+
 namespace OpenSHC {
 
 using OpenSHC::UI::MinimapViewState;
 
-// GLOBAL: STRONGHOLDCRUSADER 0x01A31610
-// StructResolver::Instance<OpenSHC::UI::MinimapViewState,27465232>::instance
 MACRO_STRUCT_RESOLVER(MinimapViewState, false, Address::SHC_3BB0A8C1_0x01A31610) DAT_MinimapViewState;
 } // namespace OpenSHC
