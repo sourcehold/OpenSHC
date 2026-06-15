@@ -5,7 +5,7 @@ namespace Audio {
     namespace MSS {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00479A60
-        BOOLEnum SoundSystem::isSampleOrStreamPlaying(SHC_SoundStreamInt streamIndex)
+        BOOLEnum SoundSystem::isSampleOrStreamPlaying(SHC_SoundStream streamIndex)
         {
             if (!(this->waveOutOpenUnk_0x8 && this->streamActiveUnk_0x20[streamIndex])) {
                 return false;

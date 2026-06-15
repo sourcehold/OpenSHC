@@ -12,9 +12,8 @@ namespace Audio {
             }
 
             for (int i = 0; i < 5; ++i) {
-                unsigned int const copy = *((unsigned int*)&this->streamFlagsUnkAndLoopCount_0x34[i]) & 0x7fffffff;
-                this->streamFlagsUnkAndLoopCount_0x34[i] = *((UnkSoundFlagsAndLoopCount*)&copy);
-                MACRO_CALL_MEMBER(SoundSystem_Func::endSoundStream, this)(i);
+                this->streamFlagsUnkAndLoopCount_0x34[i].uninterruptable = false;
+                MACRO_CALL_MEMBER(SoundSystem_Func::endSoundStream, this)((SHC_SoundStream)i);
             }
 
             for (int i = 0; i < 31; ++i) {

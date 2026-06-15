@@ -12,7 +12,7 @@ namespace Audio {
             }
 
             for (int streamIndex = 0; streamIndex < 5; ++streamIndex) {
-                if (MACRO_CALL_MEMBER(SoundSystem_Func::isSampleOrStreamPlaying, this)(streamIndex)) {
+                if (MACRO_CALL_MEMBER(SoundSystem_Func::isSampleOrStreamPlaying, this)((SHC_SoundStream)streamIndex)) {
                     this->streamPaused_0x15c[streamIndex] = 1;
                     if (streamIndex == enums::SND_STR_MUSIC) {
                         AIL_stop_sample(this->musicSampleUnk_0x170);

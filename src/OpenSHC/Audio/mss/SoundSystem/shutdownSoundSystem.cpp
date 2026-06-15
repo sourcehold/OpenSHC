@@ -26,7 +26,7 @@ namespace Audio {
             for (int i = 0; i < 5; ++i) {
                 UnkSoundFlagsAndLoopCount const unkSoundFlagsAndLoopCount = { 0, 0, 0, 0, 0 };
                 this->streamFlagsUnkAndLoopCount_0x34[i] = unkSoundFlagsAndLoopCount;
-                MACRO_CALL_MEMBER(SoundSystem_Func::endSoundStream, this)(i);
+                MACRO_CALL_MEMBER(SoundSystem_Func::endSoundStream, this)((SHC_SoundStream)i);
             }
             for (int i = 0; i < 31; ++i) {
                 AIL_end_sample(this->sample_0x190[i]);

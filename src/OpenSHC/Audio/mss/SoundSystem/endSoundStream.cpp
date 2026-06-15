@@ -9,7 +9,7 @@ namespace Audio {
     namespace MSS {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004799A0
-        void SoundSystem::endSoundStream(SHC_SoundStreamInt sndStreamIndex)
+        void SoundSystem::endSoundStream(SHC_SoundStream sndStreamIndex)
         {
             if (!this->waveOutOpenUnk_0x8) {
                 return;
