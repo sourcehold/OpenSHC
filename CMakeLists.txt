@@ -32,7 +32,7 @@ function(file_dependent_read_list FILE LIST)
     set(${LIST} "${TEMP_LIST}" PARENT_SCOPE)
 endfunction()
 
-project ("OpenSHC")
+project ("OpenSHC" LANGUAGES C CXX ASM_MASM)
 
 # Name of exe and dll should be the same
 set(OPEN_SHC_NAME "OpenSHC")
@@ -158,9 +158,11 @@ target_file_copy_if_different(OpenSHC.exe.runnable "${CRUSADER_DIR}/Mss32.dll" "
 target_file_copy_if_different(OpenSHC.exe.runnable "${CRUSADER_DIR}/shfolder.dll" "$<TARGET_FILE_DIR:OpenSHC.exe>/shfolder.dll")
 
 
+# Add the asm file containing the game symbols as reference
+set(GAME_SYMBOLS_FILE ${CMAKE_SOURCE_DIR}/src/symbols/game.asm)
 
 # Create the OpenSHC.dll target, should not require the game
-add_library(OpenSHC.dll SHARED src/entry.cpp ${CORE_SOURCES} ${OPENSHC_SOURCES})
+add_library(OpenSHC.dll SHARED src/entry.cpp ${CORE_SOURCES} ${OPENSHC_SOURCES} ${GAME_SYMBOLS_FILE})
 set_target_properties(OpenSHC.dll PROPERTIES OUTPUT_NAME ${OPEN_SHC_NAME})
 set_target_properties(OpenSHC.dll PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/DLL")
 target_compile_definitions(OpenSHC.dll PRIVATE OPEN_SHC_DLL REIMPLEMENTED_CRT=0)
