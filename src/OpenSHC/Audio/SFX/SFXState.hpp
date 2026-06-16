@@ -88,6 +88,8 @@ namespace Audio {
 
             void playSpeechSFX(char* filename);
 
+            void playVictoryMusic678();
+
             void playSFXWeAreUnderAttack();
 
             void tweakVolume(int param_1, float param_2);

@@ -17905,6 +17905,8 @@ enum {
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x0044A5A0 = 0x0044A5A0,
+    // label: playVictoryMusic678
+    // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x0044A620 = 0x0044A620,
     // label: playSFXWeAreUnderAttack

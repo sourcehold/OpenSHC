@@ -145,7 +145,7 @@ namespace Audio {
                 void (SoundSystem::*)(int), false, Address::SHC_3BB0A8C1_0x0047AB10, &SoundSystem::playRandomMusic02)
             playRandomMusic02;
 
-            MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(), false, Address::SHC_3BB0A8C1_0x0044A620,
+            MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(), false, Address::SHC_3BB0A8C1_0x0047AF50,
                 &SoundSystem::handleBattleEndMusicTransition)
             handleBattleEndMusicTransition;
 

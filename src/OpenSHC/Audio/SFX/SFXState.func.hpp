@@ -88,6 +88,10 @@ namespace Audio {
             playSpeechSFX;
 
             MACRO_FUNCTION_RESOLVER(
+                void (SFXState::*)(), false, Address::SHC_3BB0A8C1_0x0044A620, &SFXState::playVictoryMusic678)
+            playVictoryMusic678;
+
+            MACRO_FUNCTION_RESOLVER(
                 void (SFXState::*)(), false, Address::SHC_3BB0A8C1_0x0044A6E0, &SFXState::playSFXWeAreUnderAttack)
             playSFXWeAreUnderAttack;
 
