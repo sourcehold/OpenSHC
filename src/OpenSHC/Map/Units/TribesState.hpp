@@ -63,8 +63,8 @@ namespace Map {
             void operator=(TribesState const&);
 
         public:
-            TribesState();
-            ~TribesState();
+            TribesState() {};
+            ~TribesState() {};
 
             // Constructor
             TribesState* Constructor_TribesState();

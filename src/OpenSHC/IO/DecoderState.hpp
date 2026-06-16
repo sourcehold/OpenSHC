@@ -31,8 +31,8 @@ namespace IO {
         void operator=(DecoderState const&);
 
     public:
-        DecoderState();
-        ~DecoderState();
+        DecoderState() {};
+        ~DecoderState() {};
 
         // Constructor
         DecoderState* Constructor_DecoderState();

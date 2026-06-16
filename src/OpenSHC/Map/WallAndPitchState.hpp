@@ -36,8 +36,8 @@ namespace Map {
         void operator=(WallAndPitchState const&);
 
     public:
-        WallAndPitchState();
-        ~WallAndPitchState();
+        WallAndPitchState() {};
+        ~WallAndPitchState() {};
 
         void meth_0x500c20(int buildingID);
 

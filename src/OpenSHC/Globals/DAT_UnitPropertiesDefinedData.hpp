@@ -19,3 +19,5 @@ using OpenSHC::Map::Units::UnitPropertiesDefinedData;
 
 MACRO_STRUCT_RESOLVER(UnitPropertiesDefinedData, false, Address::SHC_3BB0A8C1_0x00B4DF4C) DAT_UnitPropertiesDefinedData;
 } // namespace OpenSHC
+
+MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00B4DF4C);

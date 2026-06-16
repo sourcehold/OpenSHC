@@ -99,8 +99,8 @@ namespace Map {
             void operator=(UnitsState const&);
 
         public:
-            UnitsState();
-            ~UnitsState();
+            UnitsState() {};
+            ~UnitsState() {};
 
             // Constructor
             UnitsState* Constructor_UnitsState();

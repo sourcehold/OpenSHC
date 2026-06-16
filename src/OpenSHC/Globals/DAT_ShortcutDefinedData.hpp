@@ -19,3 +19,5 @@ using OpenSHC::UI::ShortcutDefinedData;
 
 MACRO_STRUCT_RESOLVER(ShortcutDefinedData, false, Address::SHC_3BB0A8C1_0x00B39344) DAT_ShortcutDefinedData;
 } // namespace OpenSHC
+
+MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00B39344);

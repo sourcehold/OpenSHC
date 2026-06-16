@@ -78,8 +78,8 @@ namespace AI {
         void operator=(AIVState const&);
 
     public:
-        AIVState();
-        ~AIVState();
+        AIVState() {};
+        ~AIVState() {};
 
         // Constructor
         AIVState* Constructor_AIVState();

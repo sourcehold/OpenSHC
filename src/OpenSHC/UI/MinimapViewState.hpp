@@ -53,8 +53,8 @@ namespace UI {
         void operator=(MinimapViewState const&);
 
     public:
-        MinimapViewState();
-        ~MinimapViewState();
+        MinimapViewState() {};
+        ~MinimapViewState() {};
 
         // Constructor
         MinimapViewState* Constructor_MinimapViewState();

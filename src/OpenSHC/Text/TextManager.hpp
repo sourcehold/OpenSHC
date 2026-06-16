@@ -69,8 +69,8 @@ namespace Text {
         void operator=(TextManager const&);
 
     public:
-        TextManager();
-        ~TextManager();
+        TextManager() {};
+        ~TextManager() {};
 
         void renderInGameText(char* textAddress, int xParam, int yParam, TextAlignment alignment, uint color1,
             uint color2, int fontSize, BOOLEnum keepOffsetX);

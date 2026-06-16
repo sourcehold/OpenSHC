@@ -31,8 +31,8 @@ namespace Util {
             void operator=(Stopwatch const&);
 
         public:
-            Stopwatch();
-            ~Stopwatch();
+            Stopwatch() {};
+            ~Stopwatch() {};
 
             // Constructor
             Stopwatch* Cosntructor_Stopwatch();

@@ -33,8 +33,8 @@ namespace UI {
             void operator=(AlphaAndButtonSurface const&);
 
         public:
-            AlphaAndButtonSurface();
-            ~AlphaAndButtonSurface();
+            AlphaAndButtonSurface() {};
+            ~AlphaAndButtonSurface() {};
 
             // Constructor
             AlphaAndButtonSurface* Constructor_AlphaAndButtonSurface();

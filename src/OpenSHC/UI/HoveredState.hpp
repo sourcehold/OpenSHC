@@ -29,8 +29,8 @@ namespace UI {
         void operator=(HoveredState const&);
 
     public:
-        HoveredState();
-        ~HoveredState();
+        HoveredState() {};
+        ~HoveredState() {};
 
         // Constructor
         HoveredState* Constructor_HoveredState();

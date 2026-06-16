@@ -46,8 +46,8 @@ namespace UI {
         void operator=(Menu const&);
 
     public:
-        Menu();
-        ~Menu();
+        Menu() {};
+        ~Menu() {};
 
         // Constructor
         Menu* Constructor_Menu(MenuItem* menuItemArrayAddress);

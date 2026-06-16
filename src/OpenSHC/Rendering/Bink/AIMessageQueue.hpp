@@ -42,8 +42,8 @@ namespace Rendering {
             void operator=(AIMessageQueue const&);
 
         public:
-            AIMessageQueue();
-            ~AIMessageQueue();
+            AIMessageQueue() {};
+            ~AIMessageQueue() {};
 
             void playVideoOverMap(char* binkFileName, char* sfxFileName);
 

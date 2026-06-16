@@ -19,3 +19,5 @@ using OpenSHC::UI::Menu;
 
 MACRO_STRUCT_RESOLVER(Menu, false, Address::SHC_3BB0A8C1_0x00B96518) Menu_UnusedChooseGameType;
 } // namespace OpenSHC
+
+MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00B96518);

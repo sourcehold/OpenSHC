@@ -114,8 +114,8 @@ namespace UI {
             void operator=(TextureRenderCore const&);
 
         public:
-            TextureRenderCore();
-            ~TextureRenderCore();
+            TextureRenderCore() {};
+            ~TextureRenderCore() {};
 
             // Constructor
             TextureRenderCore* Constructor_TextureRenderCore(

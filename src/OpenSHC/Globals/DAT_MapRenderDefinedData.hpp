@@ -19,3 +19,5 @@ using OpenSHC::Rendering::MapRenderDefinedData;
 
 MACRO_STRUCT_RESOLVER(MapRenderDefinedData, false, Address::SHC_3BB0A8C1_0x00B4421C) DAT_MapRenderDefinedData;
 } // namespace OpenSHC
+
+MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00B4421C);

@@ -19,3 +19,5 @@ using OpenSHC::Text::TextEditorState;
 
 MACRO_STRUCT_RESOLVER(TextEditorState, false, Address::SHC_3BB0A8C1_0x02403AF8) DAT_TextEditorState;
 } // namespace OpenSHC
+
+MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x02403AF8);

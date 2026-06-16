@@ -15,3 +15,5 @@ namespace OpenSHC {
 
 MACRO_STRUCT_RESOLVER(wchar_t[256], false, Address::SHC_3BB0A8C1_0x00DF2978) HLP_WCHAR_Buffer;
 } // namespace OpenSHC
+
+MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00DF2978);

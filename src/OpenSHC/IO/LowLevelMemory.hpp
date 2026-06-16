@@ -33,8 +33,8 @@ namespace IO {
         void operator=(LowLevelMemory const&);
 
     public:
-        LowLevelMemory();
-        ~LowLevelMemory();
+        LowLevelMemory() {};
+        ~LowLevelMemory() {};
 
         void moveLowerThreeBytesIntoParam2(undefined4* src, undefined3* dst);
 

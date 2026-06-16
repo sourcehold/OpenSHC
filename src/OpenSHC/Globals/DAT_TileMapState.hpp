@@ -19,3 +19,5 @@ using OpenSHC::Map::TileMapState;
 
 MACRO_STRUCT_RESOLVER(TileMapState, false, Address::SHC_3BB0A8C1_0x01A93208) DAT_TileMapState;
 } // namespace OpenSHC
+
+MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x01A93208);

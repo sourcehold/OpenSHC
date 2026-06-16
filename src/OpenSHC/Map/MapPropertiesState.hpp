@@ -182,8 +182,8 @@ namespace Map {
         void operator=(MapPropertiesState const&);
 
     public:
-        MapPropertiesState();
-        ~MapPropertiesState();
+        MapPropertiesState() {};
+        ~MapPropertiesState() {};
 
         BOOLEnum isParam1LessThan21(int param_1);
 

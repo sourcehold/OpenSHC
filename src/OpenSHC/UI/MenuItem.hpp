@@ -68,8 +68,8 @@ namespace UI {
         void operator=(MenuItem const&);
 
     public:
-        MenuItem();
-        ~MenuItem();
+        MenuItem() {};
+        ~MenuItem() {};
 
         BOOLEnum handleMenuElementsCallbacks();
 

@@ -19,3 +19,5 @@ using OpenSHC::Rendering::Bink::BinkControlClass;
 
 MACRO_STRUCT_RESOLVER(BinkControlClass, false, Address::SHC_3BB0A8C1_0x02157518) DAT_BinkControlState;
 } // namespace OpenSHC
+
+MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x02157518);

@@ -15,3 +15,5 @@ namespace OpenSHC {
 
 MACRO_STRUCT_RESOLVER(pointer, false, Address::SHC_3BB0A8C1_0x00AB9168) PTR_00ab9168;
 } // namespace OpenSHC
+
+MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00AB9168);

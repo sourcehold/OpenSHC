@@ -60,8 +60,8 @@ namespace IO {
         void operator=(ResourceManager const&);
 
     public:
-        ResourceManager();
-        ~ResourceManager();
+        ResourceManager() {};
+        ~ResourceManager() {};
 
         // Constructor
         ResourceManager* Constructor_ResourceManager();

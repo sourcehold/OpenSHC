@@ -19,3 +19,5 @@ using OpenSHC::UI::Rendering::AlphaAndButtonSurface;
 
 MACRO_STRUCT_RESOLVER(AlphaAndButtonSurface, false, Address::SHC_3BB0A8C1_0x00F2C7BC) AlphaAndButtonSurfaceObj;
 } // namespace OpenSHC
+
+MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00F2C7BC);

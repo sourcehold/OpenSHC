@@ -52,8 +52,8 @@ namespace UI {
         void operator=(MenuHandlerState const&);
 
     public:
-        MenuHandlerState();
-        ~MenuHandlerState();
+        MenuHandlerState() {};
+        ~MenuHandlerState() {};
 
         void setupBuildMenuState(dword param_1, dword param_2);
 

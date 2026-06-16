@@ -240,8 +240,8 @@ namespace Map {
         void operator=(TileMapState const&);
 
     public:
-        TileMapState();
-        ~TileMapState();
+        TileMapState() {};
+        ~TileMapState() {};
 
         // Constructor
         TileMapState* Constructor_TileMapState();

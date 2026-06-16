@@ -15,3 +15,5 @@ namespace OpenSHC {
 
 MACRO_STRUCT_RESOLVER(uint, false, Address::SHC_3BB0A8C1_0x00EE2394) TIME_ReceivedMessage_1;
 } // namespace OpenSHC
+
+MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00EE2394);

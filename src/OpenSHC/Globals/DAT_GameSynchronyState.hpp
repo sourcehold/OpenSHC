@@ -19,3 +19,5 @@ using OpenSHC::Synchrony::GameSynchronyState;
 
 MACRO_STRUCT_RESOLVER(GameSynchronyState, false, Address::SHC_3BB0A8C1_0x0191D768) DAT_GameSynchronyState;
 } // namespace OpenSHC
+
+MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x0191D768);

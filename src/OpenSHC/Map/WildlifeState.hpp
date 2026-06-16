@@ -33,8 +33,8 @@ namespace Map {
         void operator=(WildlifeState const&);
 
     public:
-        WildlifeState();
-        ~WildlifeState();
+        WildlifeState() {};
+        ~WildlifeState() {};
 
         // Constructor
         WildlifeState* Constructor_WildlifeState();

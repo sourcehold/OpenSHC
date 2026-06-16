@@ -153,8 +153,8 @@ namespace Input {
         void operator=(MouseState const&);
 
     public:
-        MouseState();
-        ~MouseState();
+        MouseState() {};
+        ~MouseState() {};
 
         // Constructor
         MouseState* Constructor_MouseState();

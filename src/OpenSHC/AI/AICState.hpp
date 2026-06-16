@@ -52,8 +52,8 @@ namespace AI {
         void operator=(AICState const&);
 
     public:
-        AICState();
-        ~AICState();
+        AICState() {};
+        ~AICState() {};
 
         // Constructor
         AICState* Constructor_AICState();

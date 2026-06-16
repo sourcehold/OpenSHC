@@ -227,8 +227,8 @@ namespace Game {
         void operator=(GameCore const&);
 
     public:
-        GameCore();
-        ~GameCore();
+        GameCore() {};
+        ~GameCore() {};
 
         // Constructor
         GameCore* Constructor_GameCore();

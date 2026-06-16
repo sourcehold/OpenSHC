@@ -15,3 +15,5 @@ namespace OpenSHC {
 
 MACRO_STRUCT_RESOLVER(byte[1004], false, Address::SHC_3BB0A8C1_0x00DF3D2C) UNK_Unused_00df3d2c;
 } // namespace OpenSHC
+
+MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00DF3D2C);

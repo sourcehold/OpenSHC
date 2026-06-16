@@ -104,8 +104,8 @@ namespace Text {
         void operator=(TextEditorState const&);
 
     public:
-        TextEditorState();
-        ~TextEditorState();
+        TextEditorState() {};
+        ~TextEditorState() {};
 
         // Constructor
         TextEditorState* Constructor_TextEditorState();

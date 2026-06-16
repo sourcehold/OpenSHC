@@ -15,3 +15,5 @@ namespace OpenSHC {
 
 MACRO_STRUCT_RESOLVER(undefined4, false, Address::SHC_3BB0A8C1_0x00B96114) DAT_IntroTransitionStep;
 } // namespace OpenSHC
+
+MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00B96114);

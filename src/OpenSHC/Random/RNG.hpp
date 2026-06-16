@@ -28,8 +28,8 @@ namespace Random {
         void operator=(RNG const&);
 
     public:
-        RNG();
-        ~RNG();
+        RNG() {};
+        ~RNG() {};
 
         // Constructor
         RNG* Constructor_RNG();

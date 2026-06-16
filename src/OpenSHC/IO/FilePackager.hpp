@@ -49,8 +49,8 @@ namespace IO {
         void operator=(FilePackager const&);
 
     public:
-        FilePackager();
-        ~FilePackager();
+        FilePackager() {};
+        ~FilePackager() {};
 
         // Constructor
         FilePackager* Constructor_FilePackager();

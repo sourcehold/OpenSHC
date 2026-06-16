@@ -33,8 +33,8 @@ namespace Game {
             void operator=(InGameEventUnionVersion const&);
 
         public:
-            InGameEventUnionVersion();
-            ~InGameEventUnionVersion();
+            InGameEventUnionVersion() {};
+            ~InGameEventUnionVersion() {};
 
             undefined4 resetEvent();
 

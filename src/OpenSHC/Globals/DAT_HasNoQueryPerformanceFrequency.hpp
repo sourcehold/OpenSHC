@@ -19,3 +19,5 @@ using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 MACRO_STRUCT_RESOLVER(BOOLEnum, false, Address::SHC_3BB0A8C1_0x00DF3398) DAT_HasNoQueryPerformanceFrequency;
 } // namespace OpenSHC
+
+MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00DF3398);

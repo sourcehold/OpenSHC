@@ -92,8 +92,8 @@ namespace Map {
             void operator=(PathFindingState const&);
 
         public:
-            PathFindingState();
-            ~PathFindingState();
+            PathFindingState() {};
+            ~PathFindingState() {};
 
             // Constructor
             PathFindingState* Constructor_PathFindingState();

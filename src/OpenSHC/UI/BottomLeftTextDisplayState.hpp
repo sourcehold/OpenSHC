@@ -35,8 +35,8 @@ namespace UI {
         void operator=(BottomLeftTextDisplayState const&);
 
     public:
-        BottomLeftTextDisplayState();
-        ~BottomLeftTextDisplayState();
+        BottomLeftTextDisplayState() {};
+        ~BottomLeftTextDisplayState() {};
 
         void setBottomLeftTextDisplayText(int messageTypeUnk, int textGroupIndex, int textNumInGroup,
             TextMessageBLLookupStructUnion param_4, int importanceUnk, int displayDurationUnk);

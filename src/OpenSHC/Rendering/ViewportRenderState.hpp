@@ -95,8 +95,8 @@ namespace Rendering {
         void operator=(ViewportRenderState const&);
 
     public:
-        ViewportRenderState();
-        ~ViewportRenderState();
+        ViewportRenderState() {};
+        ~ViewportRenderState() {};
 
         // Constructor
         ViewportRenderState* Constructor_ViewportRenderState();

@@ -45,8 +45,8 @@ namespace Map {
             void operator=(TroopValueState const&);
 
         public:
-            TroopValueState();
-            ~TroopValueState();
+            TroopValueState() {};
+            ~TroopValueState() {};
 
             // Constructor
             TroopValueState* Constructor_TroopValueState();

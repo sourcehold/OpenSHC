@@ -27,8 +27,8 @@ namespace Rendering {
         void operator=(WindowInformation const&);
 
     public:
-        WindowInformation();
-        ~WindowInformation();
+        WindowInformation() {};
+        ~WindowInformation() {};
 
         void storeWindowRectangleInfoUnk(LONG param_1, LONG param_2, LONG param_3, LONG param_4);
     };

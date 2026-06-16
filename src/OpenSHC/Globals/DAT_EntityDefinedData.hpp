@@ -19,3 +19,5 @@ using OpenSHC::Map::Entities::EntityDefinedData;
 
 MACRO_STRUCT_RESOLVER(EntityDefinedData, false, Address::SHC_3BB0A8C1_0x005B6004) DAT_EntityDefinedData;
 } // namespace OpenSHC
+
+MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x005B6004);

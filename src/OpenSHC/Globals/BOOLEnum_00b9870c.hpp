@@ -19,3 +19,5 @@ using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 MACRO_STRUCT_RESOLVER(BOOLEnum, false, Address::SHC_3BB0A8C1_0x00B9870C) BOOLEnum_00b9870c;
 } // namespace OpenSHC
+
+MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00B9870C);

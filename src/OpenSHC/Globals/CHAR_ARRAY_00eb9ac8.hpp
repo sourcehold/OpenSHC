@@ -15,3 +15,5 @@ namespace OpenSHC {
 
 MACRO_STRUCT_RESOLVER(char[32], false, Address::SHC_3BB0A8C1_0x00EB9AC8) CHAR_ARRAY_00eb9ac8;
 } // namespace OpenSHC
+
+MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00EB9AC8);

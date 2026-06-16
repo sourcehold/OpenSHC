@@ -19,3 +19,5 @@ using OpenSHC::UI::GreatestLordDefinedData;
 
 MACRO_STRUCT_RESOLVER(GreatestLordDefinedData, false, Address::SHC_3BB0A8C1_0x00B3933C) DAT_GreatestLordDefinedData;
 } // namespace OpenSHC
+
+MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00B3933C);

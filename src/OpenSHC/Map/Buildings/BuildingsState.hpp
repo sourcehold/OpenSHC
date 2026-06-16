@@ -82,8 +82,8 @@ namespace Map {
             void operator=(BuildingsState const&);
 
         public:
-            BuildingsState();
-            ~BuildingsState();
+            BuildingsState() {};
+            ~BuildingsState() {};
 
             // Constructor
             BuildingsState* Constructor_BuildingsState();

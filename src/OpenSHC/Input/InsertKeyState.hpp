@@ -24,8 +24,8 @@ namespace Input {
         void operator=(InsertKeyState const&);
 
     public:
-        InsertKeyState();
-        ~InsertKeyState();
+        InsertKeyState() {};
+        ~InsertKeyState() {};
 
         // Constructor
         InsertKeyState* Constructor_InsertKeyState();

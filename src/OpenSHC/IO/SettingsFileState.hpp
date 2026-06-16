@@ -23,8 +23,8 @@ namespace IO {
         void operator=(SettingsFileState const&);
 
     public:
-        SettingsFileState();
-        ~SettingsFileState();
+        SettingsFileState() {};
+        ~SettingsFileState() {};
 
         void readUserConfig();
 

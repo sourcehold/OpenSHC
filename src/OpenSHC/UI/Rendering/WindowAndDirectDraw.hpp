@@ -89,8 +89,8 @@ namespace UI {
             void operator=(WindowAndDirectDraw const&);
 
         public:
-            WindowAndDirectDraw();
-            ~WindowAndDirectDraw();
+            WindowAndDirectDraw() {};
+            ~WindowAndDirectDraw() {};
 
             // Constructor
             WindowAndDirectDraw* Constructor_WindowAndDirectDraw();

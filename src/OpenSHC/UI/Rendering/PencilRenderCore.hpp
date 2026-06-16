@@ -49,8 +49,8 @@ namespace UI {
             void operator=(PencilRenderCore const&);
 
         public:
-            PencilRenderCore();
-            ~PencilRenderCore();
+            PencilRenderCore() {};
+            ~PencilRenderCore() {};
 
             void setupPencilSurface();
 

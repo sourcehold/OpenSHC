@@ -19,3 +19,5 @@ using OpenSHC::UI::Menu;
 
 MACRO_STRUCT_RESOLVER(Menu, false, Address::SHC_3BB0A8C1_0x00B96BC0) Menu_Unknown27CampaignUnk;
 } // namespace OpenSHC
+
+MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00B96BC0);

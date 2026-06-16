@@ -36,8 +36,8 @@ namespace UI {
             void operator=(ButtonGmData const&);
 
         public:
-            ButtonGmData();
-            ~ButtonGmData();
+            ButtonGmData() {};
+            ~ButtonGmData() {};
 
             int getPictureNumberInGm(BOOLEnum buttonIsInteracting);
         };

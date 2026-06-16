@@ -28,8 +28,8 @@ namespace Input {
         void operator=(ModifierKeyState const&);
 
     public:
-        ModifierKeyState();
-        ~ModifierKeyState();
+        ModifierKeyState() {};
+        ~ModifierKeyState() {};
 
         // Constructor
         ModifierKeyState* Constructor_ModifierKeyState();

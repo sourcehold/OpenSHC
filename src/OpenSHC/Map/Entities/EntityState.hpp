@@ -43,8 +43,8 @@ namespace Map {
             void operator=(EntityState const&);
 
         public:
-            EntityState();
-            ~EntityState();
+            EntityState() {};
+            ~EntityState() {};
 
             // Constructor
             EntityState* Constructor_EntityState();

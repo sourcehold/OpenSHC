@@ -39,8 +39,8 @@ namespace Text {
         void operator=(UserTextHandler const&);
 
     public:
-        UserTextHandler();
-        ~UserTextHandler();
+        UserTextHandler() {};
+        ~UserTextHandler() {};
 
         void resetToTextIndex(undefined4 textIndex);
 

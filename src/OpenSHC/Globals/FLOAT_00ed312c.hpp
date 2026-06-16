@@ -15,3 +15,5 @@ namespace OpenSHC {
 
 MACRO_STRUCT_RESOLVER(float, false, Address::SHC_3BB0A8C1_0x00ED312C) FLOAT_00ed312c;
 } // namespace OpenSHC
+
+MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00ED312C);

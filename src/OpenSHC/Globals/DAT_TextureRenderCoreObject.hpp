@@ -19,3 +19,5 @@ using OpenSHC::UI::Rendering::TextureRenderCore;
 
 MACRO_STRUCT_RESOLVER(TextureRenderCore, false, Address::SHC_3BB0A8C1_0x01FEA090) DAT_TextureRenderCoreObject;
 } // namespace OpenSHC
+
+MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x01FEA090);

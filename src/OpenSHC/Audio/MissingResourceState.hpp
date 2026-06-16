@@ -27,8 +27,8 @@ namespace Audio {
         void operator=(MissingResourceState const&);
 
     public:
-        MissingResourceState();
-        ~MissingResourceState();
+        MissingResourceState() {};
+        ~MissingResourceState() {};
 
         void playResourceLackSFX(int resourceTextElement, ResourceLackSFX resourceType);
 

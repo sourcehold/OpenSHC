@@ -45,8 +45,8 @@ namespace Text {
         void operator=(FontSizeClass const&);
 
     public:
-        FontSizeClass();
-        ~FontSizeClass();
+        FontSizeClass() {};
+        ~FontSizeClass() {};
 
         void setupFontSizeClassObject(GmID fontGmID, int numberOfFontStartInGm, FontRenderType renderType,
             int baselineOffset, int lineHeight, int letterSpacing, int whiteSpaceWidth);

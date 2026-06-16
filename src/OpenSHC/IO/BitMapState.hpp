@@ -46,8 +46,8 @@ namespace IO {
         void operator=(BitMapState const&);
 
     public:
-        BitMapState();
-        ~BitMapState();
+        BitMapState() {};
+        ~BitMapState() {};
 
         // Constructor
         BitMapState* Constructor_BitMapState();

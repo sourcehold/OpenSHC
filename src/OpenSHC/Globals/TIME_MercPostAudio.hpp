@@ -17,3 +17,5 @@ namespace OpenSHC {
 
 MACRO_STRUCT_RESOLVER(DWORD, false, Address::SHC_3BB0A8C1_0x00DF3384) TIME_MercPostAudio;
 } // namespace OpenSHC
+
+MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00DF3384);

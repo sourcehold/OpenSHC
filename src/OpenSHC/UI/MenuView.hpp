@@ -36,8 +36,8 @@ namespace UI {
         void operator=(MenuView const&);
 
     public:
-        MenuView();
-        ~MenuView();
+        MenuView() {};
+        ~MenuView() {};
 
         // Constructor
         MenuView* Constructor_MenuView(

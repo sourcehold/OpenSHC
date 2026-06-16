@@ -19,3 +19,5 @@ using OpenSHC::Game::TroopDefinedData;
 
 MACRO_STRUCT_RESOLVER(TroopDefinedData, false, Address::SHC_3BB0A8C1_0x00AB8E14) DAT_TroopDefinedData;
 } // namespace OpenSHC
+
+MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00AB8E14);

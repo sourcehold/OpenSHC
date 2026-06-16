@@ -19,3 +19,5 @@ using OpenSHC::Map::Units::TribesState;
 
 MACRO_STRUCT_RESOLVER(TribesState, false, Address::SHC_3BB0A8C1_0x01667F78) DAT_TribesState;
 } // namespace OpenSHC
+
+MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x01667F78);

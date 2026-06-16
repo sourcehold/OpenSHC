@@ -19,3 +19,5 @@ using OpenSHC::UI::MenuModal;
 
 MACRO_STRUCT_RESOLVER(MenuModal, false, Address::SHC_3BB0A8C1_0x00DF47BC) MenuModal_MainMenuOptions;
 } // namespace OpenSHC
+
+MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00DF47BC);

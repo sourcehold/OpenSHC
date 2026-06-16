@@ -28,8 +28,8 @@ namespace Map {
             void operator=(DirectionAlgorithmState const&);
 
         public:
-            DirectionAlgorithmState();
-            ~DirectionAlgorithmState();
+            DirectionAlgorithmState() {};
+            ~DirectionAlgorithmState() {};
 
             int computeHealthPercentage(int param_1, int param_2);
 

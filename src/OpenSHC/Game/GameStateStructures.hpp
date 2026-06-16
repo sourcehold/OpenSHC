@@ -44,8 +44,8 @@ namespace Game {
         void operator=(GameStateStructures const&);
 
     public:
-        GameStateStructures();
-        ~GameStateStructures();
+        GameStateStructures() {};
+        ~GameStateStructures() {};
 
         bool isSameTeam(int playerID1, int playerID2);
 

@@ -73,8 +73,8 @@ namespace Audio {
             void operator=(SoundSystem const&);
 
         public:
-            SoundSystem();
-            ~SoundSystem();
+            SoundSystem() {};
+            ~SoundSystem() {};
 
             void meth_0x424700();
 

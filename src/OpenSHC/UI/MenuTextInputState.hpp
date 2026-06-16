@@ -78,8 +78,8 @@ namespace UI {
         void operator=(MenuTextInputState const&);
 
     public:
-        MenuTextInputState();
-        ~MenuTextInputState();
+        MenuTextInputState() {};
+        ~MenuTextInputState() {};
 
         // Constructor
         MenuTextInputState* Constructor_MenuTextInputState();

@@ -42,8 +42,8 @@ namespace UI {
         void operator=(MenuModal const&);
 
     public:
-        MenuModal();
-        ~MenuModal();
+        MenuModal() {};
+        ~MenuModal() {};
 
         // Constructor
         MenuModal* Constructor_MenuModal(MenuModalType menuModalId, int xPos, int yPos, int width, int height,

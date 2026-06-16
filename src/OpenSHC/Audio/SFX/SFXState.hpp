@@ -48,8 +48,8 @@ namespace Audio {
             void operator=(SFXState const&);
 
         public:
-            SFXState();
-            ~SFXState();
+            SFXState() {};
+            ~SFXState() {};
 
             // Constructor
             SFXState* Constructor_SFXState();

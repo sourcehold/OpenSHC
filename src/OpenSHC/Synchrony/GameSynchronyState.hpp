@@ -370,8 +370,8 @@ namespace Synchrony {
         void operator=(GameSynchronyState const&);
 
     public:
-        GameSynchronyState();
-        ~GameSynchronyState();
+        GameSynchronyState() {};
+        ~GameSynchronyState() {};
 
         // Constructor
         GameSynchronyState* Constructor_GameSynchronyState();

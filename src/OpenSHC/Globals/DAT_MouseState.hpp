@@ -19,3 +19,5 @@ using OpenSHC::Input::MouseState;
 
 MACRO_STRUCT_RESOLVER(MouseState, false, Address::SHC_3BB0A8C1_0x00F2C9B0) DAT_MouseState;
 } // namespace OpenSHC
+
+MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00F2C9B0);

@@ -53,8 +53,8 @@ namespace UI {
         void operator=(MenuModalComposition const&);
 
     public:
-        MenuModalComposition();
-        ~MenuModalComposition();
+        MenuModalComposition() {};
+        ~MenuModalComposition() {};
 
         // Constructor
         MenuModalComposition* Constructor_MenuModalComposition(int slot);

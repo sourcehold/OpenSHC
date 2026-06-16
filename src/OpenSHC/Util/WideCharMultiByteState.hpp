@@ -25,8 +25,8 @@ namespace Util {
         void operator=(WideCharMultiByteState const&);
 
     public:
-        WideCharMultiByteState();
-        ~WideCharMultiByteState();
+        WideCharMultiByteState() {};
+        ~WideCharMultiByteState() {};
 
         int wideCharToMultiByteComplete(LPSTR charOut, LPCWSTR wideCharIn);
 

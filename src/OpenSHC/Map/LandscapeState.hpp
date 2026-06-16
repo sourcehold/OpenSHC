@@ -50,8 +50,8 @@ namespace Map {
         void operator=(LandscapeState const&);
 
     public:
-        LandscapeState();
-        ~LandscapeState();
+        LandscapeState() {};
+        ~LandscapeState() {};
 
         // Constructor
         LandscapeState* Constructor_LandscapeState();

@@ -43,8 +43,8 @@ namespace UI {
         void operator=(DisplayElement const&);
 
     public:
-        DisplayElement();
-        ~DisplayElement();
+        DisplayElement() {};
+        ~DisplayElement() {};
 
         // Constructor
         DisplayElement* Constructor_DisplayElement(eOnScreenText elementID, int xPos, int yPos, dword elementState,

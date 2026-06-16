@@ -19,3 +19,5 @@ using OpenSHC::Game::GameCore;
 
 MACRO_STRUCT_RESOLVER(GameCore, false, Address::SHC_3BB0A8C1_0x01FE7D10) DAT_GameCore;
 } // namespace OpenSHC
+
+MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x01FE7D10);

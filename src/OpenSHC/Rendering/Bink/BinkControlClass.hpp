@@ -50,8 +50,8 @@ namespace Rendering {
             void operator=(BinkControlClass const&);
 
         public:
-            BinkControlClass();
-            ~BinkControlClass();
+            BinkControlClass() {};
+            ~BinkControlClass() {};
 
             void zeroBinkPtrAndLoadBinkSoundSystem(HDIGDRIVER drvrPtr);
 

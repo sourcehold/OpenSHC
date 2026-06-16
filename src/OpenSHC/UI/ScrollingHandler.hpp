@@ -48,8 +48,8 @@ namespace UI {
         void operator=(ScrollingHandler const&);
 
     public:
-        ScrollingHandler();
-        ~ScrollingHandler();
+        ScrollingHandler() {};
+        ~ScrollingHandler() {};
 
         // Constructor
         ScrollingHandler* Constructor_ScrollingHandler();

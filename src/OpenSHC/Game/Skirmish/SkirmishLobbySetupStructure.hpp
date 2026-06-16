@@ -50,8 +50,8 @@ namespace Game {
             void operator=(SkirmishLobbySetupStructure const&);
 
         public:
-            SkirmishLobbySetupStructure();
-            ~SkirmishLobbySetupStructure();
+            SkirmishLobbySetupStructure() {};
+            ~SkirmishLobbySetupStructure() {};
 
             void commitSkirmishSettings();
 
