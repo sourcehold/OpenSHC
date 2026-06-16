@@ -10910,7 +10910,7 @@ SHC_3BB0A8C1_0x0047A570 | 100.0% | Reimplemented
 SHC_3BB0A8C1_0x0047A580 | 100.0% | Reimplemented
 SHC_3BB0A8C1_0x0047A5E0 | 100.0% | Reimplemented
 SHC_3BB0A8C1_0x0047A630 | 100.0% | Reimplemented
-SHC_3BB0A8C1_0x0047A660 | 0.0% | Pending
+SHC_3BB0A8C1_0x0047A660 | 100.0% | Reimplemented
 SHC_3BB0A8C1_0x0047A690 | 100.0% | Reimplemented, but requires all used structs to be active
 SHC_3BB0A8C1_0x0047A790 | 0.0% | Pending
 SHC_3BB0A8C1_0x0047A9E0 | 100.0% | Reimplemented
