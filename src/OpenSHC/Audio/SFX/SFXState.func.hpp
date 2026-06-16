@@ -48,6 +48,10 @@ namespace Audio {
             someVolumeAdjustmentFunction;
 
             MACRO_FUNCTION_RESOLVER(
+                void (SFXState::*)(), false, Address::SHC_3BB0A8C1_0x00449FF0, &SFXState::FUN_00449ff0)
+            FUN_00449ff0;
+
+            MACRO_FUNCTION_RESOLVER(
                 void (SFXState::*)(), false, Address::SHC_3BB0A8C1_0x0044A050, &SFXState::meth_0x44a050)
             meth_0x44a050;
 
@@ -115,7 +119,7 @@ namespace Audio {
             updateAmbientSoundStream;
 
             MACRO_FUNCTION_RESOLVER(
-                void (SFXState::*)(), false, Address::SHC_3BB0A8C1_0x00449FF0, &SFXState::soundRelatedMethod1)
+                void (SFXState::*)(), false, Address::SHC_3BB0A8C1_0x0044C740, &SFXState::soundRelatedMethod1)
             soundRelatedMethod1;
 
         } // namespace SFXState_Func

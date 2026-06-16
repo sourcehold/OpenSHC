@@ -20,8 +20,9 @@ namespace Game {
             void (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x0046B300, &GameCore::setTabToSwitchTo)
         setTabToSwitchTo;
 
-        MACRO_FUNCTION_RESOLVER(void (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x0046B320, &GameCore::meth_0x46b320)
-        meth_0x46b320;
+        MACRO_FUNCTION_RESOLVER(
+            void (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x0046B320, &GameCore::swapBuildMenuTab)
+        swapBuildMenuTab;
 
         MACRO_FUNCTION_RESOLVER(
             void (GameCore::*)(MenuViewType, int), false, Address::SHC_3BB0A8C1_0x0046B340, &GameCore::switchToMenuView)
@@ -47,8 +48,9 @@ namespace Game {
             &GameCore::removeJesterAndLadyUnitsInCertainMissions)
         removeJesterAndLadyUnitsInCertainMissions;
 
-        MACRO_FUNCTION_RESOLVER(void (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x0046BC90, &GameCore::FUN_0046bc90)
-        FUN_0046bc90;
+        MACRO_FUNCTION_RESOLVER(
+            void (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x0046BC90, &GameCore::removeLadyAndJester)
+        removeLadyAndJester;
 
         MACRO_FUNCTION_RESOLVER(
             BOOLEnum (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x0046BD20, &GameCore::isGameHaltingMenuOpen)
@@ -66,8 +68,9 @@ namespace Game {
             &GameCore::switchToScenarioDescriptionMenuView)
         switchToScenarioDescriptionMenuView;
 
-        MACRO_FUNCTION_RESOLVER(void (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x00471A00, &GameCore::meth_0x471a00)
-        meth_0x471a00;
+        MACRO_FUNCTION_RESOLVER(
+            void (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x00471A00, &GameCore::incrementMission)
+        incrementMission;
 
         MACRO_FUNCTION_RESOLVER(
             void (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x00471AA0, &GameCore::hideOrUnhideUI)

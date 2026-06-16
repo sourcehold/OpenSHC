@@ -239,6 +239,8 @@ namespace Map {
 
         void FUN_004c2280();
 
+        void FUN_004c3110(char* param_1);
+
         void processSingleplayerEvents();
 
         void loadMap(char* mapName);

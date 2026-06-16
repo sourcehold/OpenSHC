@@ -223,6 +223,8 @@ namespace Map {
 
             void FUN_0051f5c0();
 
+            void meth_0051f950();
+
             void recountTotalTroopValue();
 
             void recomputeTotalTroopValueOfTroopsNearKeep();
@@ -230,6 +232,8 @@ namespace Map {
             void uselessFunction(PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
 
             void recountAttackTroopValue(int param_1);
+
+            void meth_0051fe80();
 
             void meth_0x51ff90(int param_1);
 

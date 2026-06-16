@@ -51,7 +51,7 @@ namespace Game {
 
         void clearMapAndTimeAndPlayerData();
 
-        void meth_0x455d90();
+        void clearCurrentResourcesAndStrongWalls();
 
         void resetVariousCountsAndStatisticsAndStartGoodsAndResources();
 
@@ -67,7 +67,7 @@ namespace Game {
 
         void setMonthAndYear(int month, int year);
 
-        void meth_0x4567a0();
+        void clearSignpostData();
 
         void computeSignPostEntryData();
 
@@ -204,11 +204,13 @@ namespace Game {
 
         void playSFXNoSpaceInTheStockPile(int playerID);
 
-        void FUN_00459bb0(int param_1);
+        void clearTribeHotKey(int hotkeyID);
 
         void fillWith0xFF();
 
         void assignSelectionToKey(int number, int tribeID);
+
+        void FUN_00459d80();
 
         void HandleActivateTacticalPowers(int param_1, int powerType, int param_3);
 

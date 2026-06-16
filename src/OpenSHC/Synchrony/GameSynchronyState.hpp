@@ -488,6 +488,8 @@ namespace Synchrony {
 
         void createMultiplayerLobbyUnk();
 
+        void FUN_0048c230();
+
         void queueSynchronizedAutosaveProtocol();
 
         void multiplayerSyncMessagesUnk();
@@ -497,6 +499,16 @@ namespace Synchrony {
         void checkGameSync();
 
         void recomputeHashesAndSendResync(int dontSendSyncCommand);
+
+        void FUN_0048da60();
+
+        void FUN_0048dc50();
+
+        void FUN_0048e680();
+
+        void FUN_0048f3d0();
+
+        void FUN_0048f4c0();
 
         void someMultiplayerMessageSending();
 

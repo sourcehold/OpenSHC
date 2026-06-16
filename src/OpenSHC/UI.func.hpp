@@ -556,6 +556,9 @@ namespace UI_Func {
         &OpenSHC::UI::MenuItemActionHandler_InGameMenu_UnitSelectionAndControlsUnk)
     MenuItemActionHandler_InGameMenu_UnitSelectionAndControlsUnk;
 
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00437CC0, &OpenSHC::UI::FUN_00437cc0)
+    FUN_00437cc0;
+
     MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00437ED0,
         &OpenSHC::UI::MenuItemActionHandler_InGameMenu_TriggerPlaceWallCommand)
     MenuItemActionHandler_InGameMenu_TriggerPlaceWallCommand;
@@ -719,7 +722,7 @@ namespace UI_Func {
         &OpenSHC::UI::MenuItemActionHandler_UnusedCreateSiege_SiegeThat)
     MenuItemActionHandler_UnusedCreateSiege_SiegeThat;
 
-    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00437CC0,
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00443A30,
         &OpenSHC::UI::MenuItemActionHandler_MapEditorLandscaping_QueueCommandCallback)
     MenuItemActionHandler_MapEditorLandscaping_QueueCommandCallback;
 
@@ -788,13 +791,16 @@ namespace UI_Func {
         &OpenSHC::UI::MenuItemActionHandler_TextEditor_TextInputRelatedUnk)
     MenuItemActionHandler_TextEditor_TextInputRelatedUnk;
 
-    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, ...), false, Address::SHC_3BB0A8C1_0x0045DB40,
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, ...), false, Address::SHC_3BB0A8C1_0x00462340,
         &OpenSHC::UI::MenuItemActionHandler_TextEditor_Buttons)
     MenuItemActionHandler_TextEditor_Buttons;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00463FF0,
         &OpenSHC::UI::MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)
     MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface;
+
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004641A0, &OpenSHC::UI::FUN_004641a0)
+    FUN_004641a0;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, ...), false, Address::SHC_3BB0A8C1_0x00464260,
         &OpenSHC::UI::MenuItemRenderFunction_ChooseRandomNumberOfEnemies_Main)
@@ -1269,7 +1275,7 @@ namespace UI_Func {
         &OpenSHC::UI::MenuItemActionHandler_SaveMap_ReturnKeySave)
     MenuItemActionHandler_SaveMap_ReturnKeySave;
 
-    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, ...), false, Address::SHC_3BB0A8C1_0x0048C230,
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, ...), false, Address::SHC_3BB0A8C1_0x00494950,
         &OpenSHC::UI::MenuItemActionHandler_General_LaunchOrQuitMultiplayerGameUnk)
     MenuItemActionHandler_General_LaunchOrQuitMultiplayerGameUnk;
 
@@ -1452,7 +1458,7 @@ namespace UI_Func {
         Address::SHC_3BB0A8C1_0x004AC6E0, &OpenSHC::UI::MenuModalRenderFunction_Allies)
     MenuModalRenderFunction_Allies;
 
-    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, ...), false, Address::SHC_3BB0A8C1_0x004641A0,
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, ...), false, Address::SHC_3BB0A8C1_0x004AC7A0,
         &OpenSHC::UI::MenuItemRenderFunction_Allies_Main)
     MenuItemRenderFunction_Allies_Main;
 

@@ -120,6 +120,8 @@ namespace Audio {
 
             void setupVolumeAndSoundID0xF0_100();
 
+            void FUN_0047a340();
+
             void setSection1079_28_4_(int param_1);
 
             void meth_0x47a580();

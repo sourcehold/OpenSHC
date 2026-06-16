@@ -342,6 +342,8 @@ namespace AI {
 
         void decideOnTribeAttackLocation(uint tribeID__moatWasHit);
 
+        void FUN_004d1d60(int param_1);
+
         void requestGoods(int playerID, ResourceType resourceType, undefined4 amount);
 
         void aiCreateSiegeUnits(int playerID);
@@ -381,6 +383,8 @@ namespace AI {
         BOOLEnum determineAIPlayerAttackRequestResponse(int playerID, undefined4 param_2, int requestedByPlayerID);
 
         void makeOutpostTribesAttack();
+
+        void FUN_004d39b0(int param_1);
 
         void aiRecruitUnits(int playerID);
 

@@ -13600,6 +13600,8 @@ enum {
     SHC_3BB0A8C1_0x00437CAC = 0x00437CAC,
     // type: /pointer
     SHC_3BB0A8C1_0x00437CB0 = 0x00437CB0,
+    // label: FUN_00437cc0
+    // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00437CC0 = 0x00437CC0,
     // label: MenuItemActionHandler_InGameMenu_TriggerPlaceWallCommand
@@ -17859,6 +17861,8 @@ enum {
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x00449F10 = 0x00449F10,
+    // label: FUN_00449ff0
+    // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x00449FF0 = 0x00449FF0,
     // type: function
@@ -18465,7 +18469,7 @@ enum {
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00455D40 = 0x00455D40,
-    // label: meth_0x455d90
+    // label: clearCurrentResourcesAndStrongWalls
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00455D90 = 0x00455D90,
@@ -18581,7 +18585,7 @@ enum {
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00456750 = 0x00456750,
-    // label: meth_0x4567a0
+    // label: clearSignpostData
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004567A0 = 0x004567A0,
@@ -19487,7 +19491,7 @@ enum {
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00459B50 = 0x00459B50,
-    // label: FUN_00459bb0
+    // label: clearTribeHotKey
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00459BB0 = 0x00459BB0,
@@ -19503,6 +19507,8 @@ enum {
     SHC_3BB0A8C1_0x00459C10 = 0x00459C10,
     // type: function
     SHC_3BB0A8C1_0x00459CC0 = 0x00459CC0,
+    // label: FUN_00459d80
+    // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00459D80 = 0x00459D80,
     // label: HandleActivateTacticalPowers
@@ -19645,6 +19651,8 @@ enum {
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x0045B3E0 = 0x0045B3E0,
+    // label: FUN_0045b4a0
+    // location:
     // type: function
     SHC_3BB0A8C1_0x0045B4A0 = 0x0045B4A0,
     // label: updateTrader
@@ -20029,6 +20037,8 @@ enum {
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045DAE0 = 0x0045DAE0,
+    // label: FUN_0045db40
+    // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045DB40 = 0x0045DB40,
     // type: /undefined *32
@@ -21495,6 +21505,8 @@ enum {
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004640D0 = 0x004640D0,
+    // label: FUN_004641a0
+    // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004641A0 = 0x004641A0,
     // label: MenuItemRenderFunction_ChooseRandomNumberOfEnemies_Main
@@ -22837,7 +22849,7 @@ enum {
     // location: OpenSHC/Game/GameCore
     // type: function
     SHC_3BB0A8C1_0x0046B300 = 0x0046B300,
-    // label: meth_0x46b320
+    // label: swapBuildMenuTab
     // location: OpenSHC/Game/GameCore
     // type: function
     SHC_3BB0A8C1_0x0046B320 = 0x0046B320,
@@ -22991,7 +23003,7 @@ enum {
     // location: OpenSHC/Game/GameCore
     // type: function
     SHC_3BB0A8C1_0x0046BBD0 = 0x0046BBD0,
-    // label: FUN_0046bc90
+    // label: removeLadyAndJester
     // location: OpenSHC/Game/GameCore
     // type: function
     SHC_3BB0A8C1_0x0046BC90 = 0x0046BC90,
@@ -23619,7 +23631,7 @@ enum {
     // location: OpenSHC/Game/GameCore
     // type: function
     SHC_3BB0A8C1_0x004718F0 = 0x004718F0,
-    // label: meth_0x471a00
+    // label: incrementMission
     // location: OpenSHC/Game/GameCore
     // type: function
     SHC_3BB0A8C1_0x00471A00 = 0x00471A00,
@@ -24815,6 +24827,8 @@ enum {
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A310 = 0x0047A310,
+    // label: FUN_0047a340
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A340 = 0x0047A340,
     // type: /undefined *32
@@ -26285,6 +26299,8 @@ enum {
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0048C150 = 0x0048C150,
+    // label: FUN_0048c230
+    // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0048C230 = 0x0048C230,
     // type: function
@@ -26317,8 +26333,12 @@ enum {
     SHC_3BB0A8C1_0x0048D250 = 0x0048D250,
     // type: function
     SHC_3BB0A8C1_0x0048D7C0 = 0x0048D7C0,
+    // label: FUN_0048da60
+    // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0048DA60 = 0x0048DA60,
+    // label: FUN_0048dc50
+    // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0048DC50 = 0x0048DC50,
     // type: function
@@ -26337,6 +26357,8 @@ enum {
     SHC_3BB0A8C1_0x0048E4A0 = 0x0048E4A0,
     // type: function
     SHC_3BB0A8C1_0x0048E4B0 = 0x0048E4B0,
+    // label: FUN_0048e680
+    // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0048E680 = 0x0048E680,
     // type: function
@@ -26379,10 +26401,14 @@ enum {
     SHC_3BB0A8C1_0x0048F3C8 = 0x0048F3C8,
     // type: /pointer
     SHC_3BB0A8C1_0x0048F3CC = 0x0048F3CC,
+    // label: FUN_0048f3d0
+    // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0048F3D0 = 0x0048F3D0,
     // type: function
     SHC_3BB0A8C1_0x0048F440 = 0x0048F440,
+    // label: FUN_0048f4c0
+    // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0048F4C0 = 0x0048F4C0,
     // label: MenuItemActionHandler_Chat_MostButtons
@@ -37936,6 +37962,8 @@ enum {
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004C2280 = 0x004C2280,
+    // label: FUN_004c3110
+    // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004C3110 = 0x004C3110,
     // label: processSingleplayerEvents
@@ -39604,6 +39632,8 @@ enum {
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D1A00 = 0x004D1A00,
+    // label: FUN_004d1d60
+    // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D1D60 = 0x004D1D60,
     // label: requestGoods
@@ -39694,6 +39724,8 @@ enum {
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D3960 = 0x004D3960,
+    // label: FUN_004d39b0
+    // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D39B0 = 0x004D39B0,
     // type: function
@@ -43206,6 +43238,8 @@ enum {
     SHC_3BB0A8C1_0x004F7140 = 0x004F7140,
     // type: function
     SHC_3BB0A8C1_0x004F7170 = 0x004F7170,
+    // label: meth_004f79d0
+    // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F79D0 = 0x004F79D0,
     // label: meth_0x4f7a80
@@ -50024,6 +50058,8 @@ enum {
     SHC_3BB0A8C1_0x0051F5E0 = 0x0051F5E0,
     // type: function
     SHC_3BB0A8C1_0x0051F630 = 0x0051F630,
+    // label: meth_0051f950
+    // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051F950 = 0x0051F950,
     // label: recountTotalTroopValue
@@ -50042,6 +50078,8 @@ enum {
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051FB90 = 0x0051FB90,
+    // label: meth_0051fe80
+    // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051FE80 = 0x0051FE80,
     // label: meth_0x51ff90
@@ -94788,6 +94826,8 @@ enum {
     SHC_3BB0A8C1_0x00DF51C8 = 0x00DF51C8,
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF51F0 = 0x00DF51F0,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00DF51F4 = 0x00DF51F4,
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF51F8 = 0x00DF51F8,
     // type: /undefined4

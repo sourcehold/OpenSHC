@@ -55,7 +55,7 @@ namespace Game {
         dword buildingandstatusmenuMenuTabToSwitchTo; // 0x00000028 length: 4
         dword landscapingmenuMenuTabToSwitchTo; // 0x0000002C length: 4
         dword field12_0x30; // 0x00000030 length: 4
-        ActiveMenuTab unknownActiveMenuTabToSwitchTo; // 0x00000034 length: 4
+        ActiveMenuTab secondaryActiveMenuTabToSwitchTo; // 0x00000034 length: 4
         BuildMenuTabTypeShort tabTypeSiegeSubset; // 0x00000038 length: 4
         dword historicCampaignNumber; // 0x0000003C length: 4
         int missionNumber1to20; // 0x00000040 length: 4
@@ -237,7 +237,7 @@ namespace Game {
 
         void setTabToSwitchTo();
 
-        void meth_0x46b320();
+        void swapBuildMenuTab();
 
         void switchToMenuView(MenuViewType menuID, int delay);
 
@@ -251,7 +251,7 @@ namespace Game {
 
         void removeJesterAndLadyUnitsInCertainMissions();
 
-        void FUN_0046bc90();
+        void removeLadyAndJester();
 
         BOOLEnum isGameHaltingMenuOpen();
 
@@ -261,7 +261,7 @@ namespace Game {
 
         void switchToScenarioDescriptionMenuView();
 
-        void meth_0x471a00();
+        void incrementMission();
 
         void hideOrUnhideUI();
     };

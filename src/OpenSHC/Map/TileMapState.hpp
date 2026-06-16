@@ -270,6 +270,8 @@ namespace Map {
 
         void updateLogicalTileMapRelatedSections();
 
+        void meth_004f79d0();
+
         void meth_0x4f7a80(int param_1, int param_2);
 
         void increaseHeightForTunnelSingleTile(int tile, uint x, uint y, int increment);

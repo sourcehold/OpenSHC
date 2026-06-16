@@ -295,6 +295,8 @@ namespace UI {
 
     void __cdecl MenuItemActionHandler_InGameMenu_UnitSelectionAndControlsUnk(int param_1, ...);
 
+    void __cdecl FUN_00437cc0();
+
     void __stdcall MenuItemActionHandler_InGameMenu_TriggerPlaceWallCommand();
 
     void __cdecl MenuItemActionHandler_BuildMenu_DeleteAction(int param_1, ...);
@@ -417,6 +419,8 @@ namespace UI {
     void __cdecl MenuItemActionHandler_TextEditor_Buttons(int param_1, ...);
 
     void __cdecl MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface();
+
+    void __cdecl FUN_004641a0();
 
     void __cdecl MenuItemRenderFunction_ChooseRandomNumberOfEnemies_Main(int param_1, ...);
 

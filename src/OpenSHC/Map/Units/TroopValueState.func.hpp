@@ -360,6 +360,10 @@ namespace Map {
                 void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051F5C0, &TroopValueState::FUN_0051f5c0)
             FUN_0051f5c0;
 
+            MACRO_FUNCTION_RESOLVER(
+                void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051F950, &TroopValueState::meth_0051f950)
+            meth_0051f950;
+
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051F9C0,
                 &TroopValueState::recountTotalTroopValue)
             recountTotalTroopValue;
@@ -375,6 +379,10 @@ namespace Map {
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051FB90,
                 &TroopValueState::recountAttackTroopValue)
             recountAttackTroopValue;
+
+            MACRO_FUNCTION_RESOLVER(
+                void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051FE80, &TroopValueState::meth_0051fe80)
+            meth_0051fe80;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051FF90,
                 &TroopValueState::meth_0x51ff90)
@@ -400,7 +408,7 @@ namespace Map {
                 &TroopValueState::meth_0x520cd0)
             meth_0x520cd0;
 
-            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051F950,
+            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x00520F70,
                 &TroopValueState::aiControlNonSkirmishUnitMovement)
             aiControlNonSkirmishUnitMovement;
 

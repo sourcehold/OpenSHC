@@ -150,6 +150,8 @@ namespace Text {
 
         void meth_0x45dae0(char* param_1);
 
+        void FUN_0045db40();
+
         undefined4 FUN_0045f080(undefined4 param_1);
 
         void meth_0x45f0d0(undefined4 param_1);

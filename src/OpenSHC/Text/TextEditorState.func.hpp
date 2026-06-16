@@ -90,6 +90,10 @@ namespace Text {
             void (TextEditorState::*)(char*), false, Address::SHC_3BB0A8C1_0x0045DAE0, &TextEditorState::meth_0x45dae0)
         meth_0x45dae0;
 
+        MACRO_FUNCTION_RESOLVER(
+            void (TextEditorState::*)(), false, Address::SHC_3BB0A8C1_0x0045DB40, &TextEditorState::FUN_0045db40)
+        FUN_0045db40;
+
         MACRO_FUNCTION_RESOLVER(undefined4 (TextEditorState::*)(undefined4), false, Address::SHC_3BB0A8C1_0x0045F080,
             &TextEditorState::FUN_0045f080)
         FUN_0045f080;

@@ -25,8 +25,8 @@ namespace Game {
         clearMapAndTimeAndPlayerData;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x00455D90,
-            &GameStateStructures::meth_0x455d90)
-        meth_0x455d90;
+            &GameStateStructures::clearCurrentResourcesAndStrongWalls)
+        clearCurrentResourcesAndStrongWalls;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x00455E10,
             &GameStateStructures::resetVariousCountsAndStatisticsAndStartGoodsAndResources)
@@ -57,8 +57,8 @@ namespace Game {
         setMonthAndYear;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x004567A0,
-            &GameStateStructures::meth_0x4567a0)
-        meth_0x4567a0;
+            &GameStateStructures::clearSignpostData)
+        clearSignpostData;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x00456810,
             &GameStateStructures::computeSignPostEntryData)
@@ -329,8 +329,8 @@ namespace Game {
         playSFXNoSpaceInTheStockPile;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(int), false, Address::SHC_3BB0A8C1_0x00459BB0,
-            &GameStateStructures::FUN_00459bb0)
-        FUN_00459bb0;
+            &GameStateStructures::clearTribeHotKey)
+        clearTribeHotKey;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x00459BE0,
             &GameStateStructures::fillWith0xFF)
@@ -339,6 +339,10 @@ namespace Game {
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(int, int), false, Address::SHC_3BB0A8C1_0x00459C10,
             &GameStateStructures::assignSelectionToKey)
         assignSelectionToKey;
+
+        MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x00459D80,
+            &GameStateStructures::FUN_00459d80)
+        FUN_00459d80;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x00459E40,
             &GameStateStructures::HandleActivateTacticalPowers)
@@ -404,11 +408,11 @@ namespace Game {
             Address::SHC_3BB0A8C1_0x0045C1C0, &GameStateStructures::meth_0x45c1c0)
         meth_0x45c1c0;
 
-        MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x0045B4A0,
+        MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x0045CA20,
             &GameStateStructures::processSingleTimeTick)
         processSingleTimeTick;
 
-        MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x00459D80,
+        MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x0045CD10,
             &GameStateStructures::processGameTick)
         processGameTick;
 

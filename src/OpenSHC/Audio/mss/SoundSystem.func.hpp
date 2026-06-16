@@ -106,6 +106,10 @@ namespace Audio {
             setupVolumeAndSoundID0xF0_100;
 
             MACRO_FUNCTION_RESOLVER(
+                void (SoundSystem::*)(), false, Address::SHC_3BB0A8C1_0x0047A340, &SoundSystem::FUN_0047a340)
+            FUN_0047a340;
+
+            MACRO_FUNCTION_RESOLVER(
                 void (SoundSystem::*)(int), false, Address::SHC_3BB0A8C1_0x0047A570, &SoundSystem::setSection1079_28_4_)
             setSection1079_28_4_;
 
@@ -210,7 +214,7 @@ namespace Audio {
             activateSoundFromMenuFuncUnk;
 
             MACRO_FUNCTION_RESOLVER(
-                void (SoundSystem::*)(), false, Address::SHC_3BB0A8C1_0x0047A340, &SoundSystem::playRandomAmbientMusic)
+                void (SoundSystem::*)(), false, Address::SHC_3BB0A8C1_0x0047B890, &SoundSystem::playRandomAmbientMusic)
             playRandomAmbientMusic;
 
             MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(), false, Address::SHC_3BB0A8C1_0x0047BF20,

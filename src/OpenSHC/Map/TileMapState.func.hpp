@@ -69,6 +69,10 @@ namespace Map {
         updateLogicalTileMapRelatedSections;
 
         MACRO_FUNCTION_RESOLVER(
+            void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x004F79D0, &TileMapState::meth_004f79d0)
+        meth_004f79d0;
+
+        MACRO_FUNCTION_RESOLVER(
             void (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004F7A80, &TileMapState::meth_0x4f7a80)
         meth_0x4f7a80;
 
@@ -464,7 +468,7 @@ namespace Map {
             &TileMapState::meth_0x5017c0)
         meth_0x5017c0;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x004F79D0,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x00501A20,
             &TileMapState::updateShowHiLayerOrResetChangedLayer)
         updateShowHiLayerOrResetChangedLayer;
 

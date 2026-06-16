@@ -586,6 +586,10 @@ namespace AI {
             void (AICState::*)(uint), false, Address::SHC_3BB0A8C1_0x004D1A00, &AICState::decideOnTribeAttackLocation)
         decideOnTribeAttackLocation;
 
+        MACRO_FUNCTION_RESOLVER(
+            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D1D60, &AICState::FUN_004d1d60)
+        FUN_004d1d60;
+
         MACRO_FUNCTION_RESOLVER(void (AICState::*)(int, ResourceType, undefined4), false,
             Address::SHC_3BB0A8C1_0x004D1F00, &AICState::requestGoods)
         requestGoods;
@@ -667,6 +671,10 @@ namespace AI {
         makeOutpostTribesAttack;
 
         MACRO_FUNCTION_RESOLVER(
+            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D39B0, &AICState::FUN_004d39b0)
+        FUN_004d39b0;
+
+        MACRO_FUNCTION_RESOLVER(
             void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D3AE0, &AICState::aiRecruitUnits)
         aiRecruitUnits;
 
@@ -711,7 +719,7 @@ namespace AI {
         selectAttackTarget;
 
         MACRO_FUNCTION_RESOLVER(
-            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D1D60, &AICState::aiBuyAndSellGoods)
+            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D48F0, &AICState::aiBuyAndSellGoods)
         aiBuyAndSellGoods;
 
         MACRO_FUNCTION_RESOLVER(

@@ -120,6 +120,10 @@ namespace Map {
             void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004C2280, &MapPropertiesState::FUN_004c2280)
         FUN_004c2280;
 
+        MACRO_FUNCTION_RESOLVER(void (MapPropertiesState::*)(char*), false, Address::SHC_3BB0A8C1_0x004C3110,
+            &MapPropertiesState::FUN_004c3110)
+        FUN_004c3110;
+
         MACRO_FUNCTION_RESOLVER(void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004C31A0,
             &MapPropertiesState::processSingleplayerEvents)
         processSingleplayerEvents;
@@ -128,7 +132,7 @@ namespace Map {
             void (MapPropertiesState::*)(char*), false, Address::SHC_3BB0A8C1_0x004C62C0, &MapPropertiesState::loadMap)
         loadMap;
 
-        MACRO_FUNCTION_RESOLVER(void (MapPropertiesState::*)(char*), false, Address::SHC_3BB0A8C1_0x004C3110,
+        MACRO_FUNCTION_RESOLVER(void (MapPropertiesState::*)(char*), false, Address::SHC_3BB0A8C1_0x004C6820,
             &MapPropertiesState::FUN_004c6820)
         FUN_004c6820;
 
