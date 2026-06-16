@@ -9,7 +9,7 @@ namespace Audio {
         // Test showed usage mostly for fading music out, during gameplay or during menu switches
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00479AF0
-        void SoundSystem::setStreamAndSampleVolumeUnk(SHC_SoundStreamInt sndStreamIndex, int volumeParam)
+        void SoundSystem::setStreamAndSampleVolumeUnk(SHC_SoundStream sndStreamIndex, int volumeParam)
         {
             if (!(this->waveOutOpenUnk_0x8 && this->streamActiveUnk_0x20[sndStreamIndex])) {
                 return;
