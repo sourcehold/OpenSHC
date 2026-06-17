@@ -12,35 +12,28 @@ namespace OpenSHC {
 namespace Audio {
     namespace MSS {
 
-        // setSomeSoundTime shoulld be checked in file... and any function activated
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0047AF50
         void SoundSystem::handleBattleEndMusicTransition()
         {
-            if (DAT_GameCore::ptr->gameMode_2 == Game::GM_EDITOR) {
+            if (DAT_GameCore::ptr->gameMode_2 == Game::GM_EDITOR
+                || DAT_GameCore::ptr->gameMode_2 == Game::GM_SIEGE_THAT) {
                 return;
             }
-            if (DAT_GameCore::ptr->gameMode_2 == Game::GM_SIEGE_THAT) {
-                return;
-            }
-            if (DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.field0_0x0 != 5) {
-                return;
-            }
-            if (DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.field6_0x18 != 0) {
+            if (DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.field0_0x0 != 5
+                || DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.field6_0x18 != 0) {
                 return;
             }
             DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.field6_0x18 = 1;
             if (DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.troopValueLevel == 0) {
-                return;
-            }
-            if (DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.volumeLevel - 1U > 4) {
-                return;
-            }
+                if (DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.volumeLevel - 1U > 4) {
+                    return;
+                }
 
-            MACRO_CALL_MEMBER(SoundSystem_Func::setSomeSoundTime, this)();
-            DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.field0_0x0 = 1;
-            if (DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.troopValueLevel == 0) {
-                return;
+                MACRO_CALL_MEMBER(SoundSystem_Func::setSomeSoundTime, this)();
+                DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.field0_0x0 = 1;
+                if (DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.troopValueLevel == 0) {
+                    return;
+                }
             }
 
             switch (DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.volumeLevel) {
