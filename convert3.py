@@ -1,11 +1,12 @@
 from typing import Dict, List
 from skink.architecture.enums import Enum, EnumResult
-from skink.export.project.project import Project
+from skink.export.project.project import DatatypeDatabasePlan, DefineddataDatabasePlan, FunctionDatabasePlan, Project, SymbolsDatabasePlan
 from skink.export.project.collection import ExportedContentCollection, ExportContents
 from skink.architecture.structs.struct import Struct
 from skink.architecture.unions.union import Union
 from skink.architecture.functionsignatures import FunctionSignature
 from skink.architecture.typedefs import Typedef
+from skink.sarif.symbols.symbol import SymbolResult
 from skink.sarif.datatypes.DataTypeResult import DataTypeResult
 from skink.sarif.datatypes.FunctionSignatureResult import FunctionSignatureResult
 from skink.sarif.datatypes.UnionResult import UnionResult
@@ -27,7 +28,7 @@ ctx.include.file_extension = ""
 
 import argparse
 parser = argparse.ArgumentParser()
-parser.add_argument("--sarif", required=False, default="Stronghold Crusader.exe.all.sarif")
+parser.add_argument("--sarif", required=False, default="Stronghold Crusader.exe.sarif")
 parser.add_argument("--clear-cache", required=False, action=argparse.BooleanOptionalAction, default=False)
 parser.add_argument("--output-dir", required=False, default='src')
 parser.add_argument("--verbose", default=False, action=argparse.BooleanOptionalAction)
@@ -47,17 +48,19 @@ if args.dry_run:
   print(args)
   exit(0)
 
-if args.clear_cache:
-  if pathlib.Path(".cached-symbols.bin").exists():
-    pathlib.Path(".cached-symbols.bin").unlink()
-  if pathlib.Path(".cached-objs.bin").exists():
-    pathlib.Path(".cached-objs.bin").unlink()
-
-project = Project(args.sarif, cache_objects=args.cache, cache_symbols_to_path=".cached-symbols.bin" if args.cache else None)
+project = Project(args.sarif,
+                  cache_objects=args.cache,
+                  cache_path=".cache" if args.cache else None)
 
 # TODO: permit_overwrite = False
 logging.log(logging.INFO, "processing all symbol results")
-project.process_all_symbol_results(log_progress=1000, store_symbol_result=True, permit_overwrite=True)
+project.build_database(plan_symbols=SymbolsDatabasePlan(store_symbol_result=True, permit_overwrite=True),
+                       plan_datatype=DatatypeDatabasePlan(location_rewriter=lambda x: x.replace("_HoldStrong", "OpenSHC"),
+                                                          filter=lambda x: x.properties.additionalProperties.location.startswith("/_HoldStrong")),
+                       plan_defineddata=DefineddataDatabasePlan(),
+                       plan_function=FunctionDatabasePlan(),
+                       clear_cache=args.clear_cache)
+#project.build_all_databases(log_progress=1000, store_symbol_result=True, permit_overwrite=True)
 logging.log(logging.INFO, "processing all symbol results: finished")
 
 # objs_i = 0
@@ -70,17 +73,23 @@ if pathlib.Path(".cached-objs.bin").exists() == False:
   objs: List[BasicResult] = []
   objs_i = 0
   for obj in project.find_all_by_location(location="/_HoldStrong", recursive=True, lookup_lsymbols=True):
-    objs_i += 1
-    objs.append(obj)
+    if obj not in objs:
+      objs_i += 1
+      objs.append(obj)
   logging.log(logging.INFO, "finding all by location: finished")
-  if args.cache:
-    with open(".cached-objs.bin", 'wb') as f:
-      pickle.dump(file=f, obj=objs)
+  # if args.cache:
+  #   with open(".cached-objs.bin", 'wb') as f:
+  #     pickle.dump(file=f, obj=objs)
 else:
   with open(".cached-objs.bin", 'rb') as f:
     objs = pickle.load(file=f)
 
-    
+# raise Exception()
+# objs2 = []
+# for obj in project.find_all_by_location2(location="/_HoldStrong", recursive=True, lookup_lsymbols=True):
+#   if obj not in objs2:
+#     objs2.append(obj)
+
 bc = BinaryContext(hash="3BB0A8C1", abbreviation="SHC", reccmp_binary="STRONGHOLDCRUSADER")
 exporter = Exporter(binary_context=bc,
                     transformation_rules=TransformationRules(use_regex = True, regex={"_HoldStrong": "OpenSHC"}),
@@ -171,6 +180,10 @@ def is_symbol_addr_in_useful_range(addr, include_code = True):
     return False
   return True
 
+#raise Exception()
+
+#collection.add(exporter.export_symbols_as_assembly(((addr, symb, ddr, "") for addr, symb, ddr in project.find_global_primary_symbol_defined_data_pairs_by_address() if is_symbol_addr_in_useful_range(addr, include_code=False)), destination="OpenSHC/Globals", namespace="OpenSHC"))
+
 for c in exporter.export_symbols(((addr, symb, ddr,) for addr, symb, ddr in project.find_global_primary_symbol_defined_data_pairs_by_address() if is_symbol_addr_in_useful_range(addr, include_code=False)), destination="OpenSHC/Globals", namespace="OpenSHC"):
   collection.add(c)
 
@@ -251,7 +264,7 @@ namespace Audio {
         // SIZE: 0x00000004
         typedef struct UnkSoundFlagsAndLoopCount {
 
-            int loopCount : 16;
+            unsigned int loopCount : 16;
             int reserved : 13;
             int unknownFlag1 : 1;
             int unknownFlag2 : 1;
