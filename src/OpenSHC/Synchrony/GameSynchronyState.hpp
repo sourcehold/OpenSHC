@@ -164,7 +164,7 @@ namespace Synchrony {
         undefined4 quitGameVoteRelated; // 0x00000C6C length: 4
         int field122_0xc70[9]; // 0x00000C70 length: 36
         int quitGameVoteRequestTime; // 0x00000C94 length: 4
-        int announcementReceivedByArray[9]; // 0x00000C98 length: 36
+        int announcementReceivedByPlayer[9]; // 0x00000C98 length: 36
         undefined4 saveRelated; // 0x00000CBC length: 4
         undefined4 shouldSendAnnouncementUnk; // 0x00000CC0 length: 4
         BOOLEnum announcementReceivedBool; // 0x00000CC4 length: 4
@@ -230,7 +230,7 @@ namespace Synchrony {
         int HASH_Unknown2[9][40]; // 0x00100868 length: 1440
         int HASH_AIVS[9][9]; // 0x00100E08 length: 324
         int HASH_HeatMaps[9][80]; // 0x00100F4C length: 2880
-        int receivedSyncStatusUnk[9]; // 0x00101A8C length: 36
+        int receivedSyncStatusByPlayerUnk[9]; // 0x00101A8C length: 36
         int syncStatus10Related[9]; // 0x00101AB0 length: 36
         undefined4 field196_0x101ad4; // 0x00101AD4 length: 4
         char receivedChatMessage[250]; // 0x00101AD8 length: 250
@@ -500,7 +500,7 @@ namespace Synchrony {
 
         void recomputeHashesAndSendResync(int dontSendSyncCommand);
 
-        void FUN_0048da60();
+        void checkLagAndSyncStatus();
 
         void FUN_0048dc50();
 
@@ -508,7 +508,7 @@ namespace Synchrony {
 
         void FUN_0048f3d0();
 
-        void FUN_0048f4c0();
+        void checkGameLagStatusAndKickAccordingly();
 
         void someMultiplayerMessageSending();
 

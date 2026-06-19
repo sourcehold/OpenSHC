@@ -268,9 +268,9 @@ namespace Synchrony {
             &GameSynchronyState::recomputeHashesAndSendResync)
         recomputeHashesAndSendResync;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0048DA60, &GameSynchronyState::FUN_0048da60)
-        FUN_0048da60;
+        MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0048DA60,
+            &GameSynchronyState::checkLagAndSyncStatus)
+        checkLagAndSyncStatus;
 
         MACRO_FUNCTION_RESOLVER(
             void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0048DC50, &GameSynchronyState::FUN_0048dc50)
@@ -284,9 +284,9 @@ namespace Synchrony {
             void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0048F3D0, &GameSynchronyState::FUN_0048f3d0)
         FUN_0048f3d0;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0048F4C0, &GameSynchronyState::FUN_0048f4c0)
-        FUN_0048f4c0;
+        MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0048F4C0,
+            &GameSynchronyState::checkGameLagStatusAndKickAccordingly)
+        checkGameLagStatusAndKickAccordingly;
 
         MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x00490340,
             &GameSynchronyState::someMultiplayerMessageSending)
