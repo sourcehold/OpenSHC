@@ -14,13 +14,11 @@
 #include "OpenSHC/Map/MapMetaInfo.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
-#include "HoldStrong_lib/StringObject.hpp"
 #include "crtdefs.h"
 
 namespace OpenSHC {
 namespace IO {
 
-    using HoldStrong_lib::StringObject;
     using OpenSHC::IO::FileResourceType;
     using OpenSHC::IO::FileResourceTypeInt;
     using OpenSHC::IO::Helpers::OPENFILENAMEA_Truncated;
@@ -116,11 +114,11 @@ namespace IO {
 
         int fileHashFunctionByteByByte();
 
-        StringObject* getDocumentsFolderString(StringObject* param_1, char param_2);
+        void* getDocumentsFolderString(void* param_1, char param_2);
 
-        void getSavesPath(StringObject* param_1, char param_2);
+        void getSavesPath(void* param_1, char param_2);
 
-        void getDocumentsMapsFolderString(StringObject* param_1, BOOLEnum prependUserPath);
+        void getDocumentsMapsFolderString(void* param_1, BOOLEnum prependUserPath);
 
         void discoverMapFiles(char* param_1);
 

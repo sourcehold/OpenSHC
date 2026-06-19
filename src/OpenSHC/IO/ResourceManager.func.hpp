@@ -6,13 +6,11 @@
 #include "OpenSHC/IO/ResourceManager.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
-#include "HoldStrong_lib/StringObject.hpp"
 #include "crtdefs.h"
 namespace OpenSHC {
 namespace IO {
     namespace ResourceManager_Func {
 
-        using HoldStrong_lib::StringObject;
         using OpenSHC::IO::FileResourceType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
@@ -116,16 +114,16 @@ namespace IO {
             &ResourceManager::fileHashFunctionByteByByte)
         fileHashFunctionByteByByte;
 
-        MACRO_FUNCTION_RESOLVER(StringObject* (ResourceManager::*)(StringObject*, char), false,
-            Address::SHC_3BB0A8C1_0x004778E0, &ResourceManager::getDocumentsFolderString)
+        MACRO_FUNCTION_RESOLVER(void* (ResourceManager::*)(void*, char), false, Address::SHC_3BB0A8C1_0x004778E0,
+            &ResourceManager::getDocumentsFolderString)
         getDocumentsFolderString;
 
-        MACRO_FUNCTION_RESOLVER(void (ResourceManager::*)(StringObject*, char), false, Address::SHC_3BB0A8C1_0x004779F0,
+        MACRO_FUNCTION_RESOLVER(void (ResourceManager::*)(void*, char), false, Address::SHC_3BB0A8C1_0x004779F0,
             &ResourceManager::getSavesPath)
         getSavesPath;
 
-        MACRO_FUNCTION_RESOLVER(void (ResourceManager::*)(StringObject*, BOOLEnum), false,
-            Address::SHC_3BB0A8C1_0x00477B00, &ResourceManager::getDocumentsMapsFolderString)
+        MACRO_FUNCTION_RESOLVER(void (ResourceManager::*)(void*, BOOLEnum), false, Address::SHC_3BB0A8C1_0x00477B00,
+            &ResourceManager::getDocumentsMapsFolderString)
         getDocumentsMapsFolderString;
 
         MACRO_FUNCTION_RESOLVER(void (ResourceManager::*)(char*), false, Address::SHC_3BB0A8C1_0x00477EE0,
