@@ -26333,7 +26333,7 @@ enum {
     SHC_3BB0A8C1_0x0048D250 = 0x0048D250,
     // type: function
     SHC_3BB0A8C1_0x0048D7C0 = 0x0048D7C0,
-    // label: FUN_0048da60
+    // label: checkLagAndSyncStatus
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0048DA60 = 0x0048DA60,
@@ -26407,7 +26407,7 @@ enum {
     SHC_3BB0A8C1_0x0048F3D0 = 0x0048F3D0,
     // type: function
     SHC_3BB0A8C1_0x0048F440 = 0x0048F440,
-    // label: FUN_0048f4c0
+    // label: checkGameLagStatusAndKickAccordingly
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0048F4C0 = 0x0048F4C0,
@@ -94122,7 +94122,7 @@ enum {
     // location:
     // type: /wchar_t[256]
     SHC_3BB0A8C1_0x00DF2978 = 0x00DF2978,
-    // type: winapi_32/WCHAR[1000]
+    // type: /wchar_t[1000]
     SHC_3BB0A8C1_0x00DF2B78 = 0x00DF2B78,
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF3348 = 0x00DF3348,
