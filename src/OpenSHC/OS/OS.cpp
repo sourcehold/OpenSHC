@@ -108,7 +108,7 @@ namespace OS {
     }
 
     // STUB: STRONGHOLDCRUSADER 0x005816C3
-    int _ucrt_open(char* _Filename, OpenFlagInt _OpenFlag, int _PMode) { return _open(_Filename, _OpenFlag, _PMode); }
+    int _ucrt_open(char* _Filename, int _OpenFlag, int _PMode) { return _open(_Filename, _OpenFlag, _PMode); }
 
     // STUB: STRONGHOLDCRUSADER 0x005816FB
     int _rand() { return rand(); }
