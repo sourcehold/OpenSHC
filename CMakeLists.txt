@@ -159,7 +159,7 @@ target_file_copy_if_different(OpenSHC.exe.runnable "${CRUSADER_DIR}/shfolder.dll
 
 
 # Add the asm file containing the game symbols as reference
-set(GAME_SYMBOLS_FILE ${CMAKE_SOURCE_DIR}/src/symbols/game.asm)
+set(GAME_SYMBOLS_FILE ${CMAKE_SOURCE_DIR}/src/symbols/data.asm)
 
 # Create the OpenSHC.dll target, should not require the game
 add_library(OpenSHC.dll SHARED src/entry.cpp ${CORE_SOURCES} ${OPENSHC_SOURCES} ${GAME_SYMBOLS_FILE})

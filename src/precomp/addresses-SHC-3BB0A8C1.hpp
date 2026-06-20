@@ -94066,7 +94066,7 @@ enum {
     SHC_3BB0A8C1_0x00B98710 = 0x00B98710,
     // label: DAT_GMImageHeaders
     // location:
-    // type: OpenSHC/IO/Graphics/ImageHeader[66000]
+    // type: OpenSHC/IO/Graphics/ImageHeaders
     SHC_3BB0A8C1_0x00B98790 = 0x00B98790,
     // type: /pointer[32]
     SHC_3BB0A8C1_0x00C9A490 = 0x00C9A490,
