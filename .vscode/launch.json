@@ -1,21 +1,24 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Debug OpenSHC.dll",
-            "type": "cppvsdbg",
-            "request": "launch",
-            "program": "${workspaceFolder}/_original/Stronghold Crusader.exe",
-            "args": [
-                "--ucp-verbosity",
-                "2",
-                "--ucp-console-verbosity",
-                "2"
-            ],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/_original",
-            // Note: build currently set target, so if this is the exe, nothing will change
-            "preLaunchTask": "CMake: build",
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug ghidra export",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "convert3.py",
+      "console": "integratedTerminal",
+      "args": "--sarif 'Stronghold Crusader.exe.short.sarif' --output-dir 'src' --overwrite-all --verbose"
+    },
+    {
+      "name": "Debug OpenSHC.dll",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/_original/Stronghold Crusader.exe",
+      "args": ["--ucp-verbosity", "2", "--ucp-console-verbosity", "2"],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}/_original",
+      // Note: build currently set target, so if this is the exe, nothing will change
+      "preLaunchTask": "CMake: build"
+    }
+  ]
 }

@@ -68,27 +68,15 @@ logging.log(logging.INFO, "processing all symbol results: finished")
 #   objs_i += 1
 #   print(objs_i)
 import pickle
-if pathlib.Path(".cached-objs.bin").exists() == False:
-  logging.log(logging.INFO, "finding all by location")
-  objs: List[BasicResult] = []
-  objs_i = 0
-  for obj in project.find_all_by_location(location="/_HoldStrong", recursive=True, lookup_lsymbols=True):
-    if obj not in objs:
-      objs_i += 1
-      objs.append(obj)
-  logging.log(logging.INFO, "finding all by location: finished")
-  # if args.cache:
-  #   with open(".cached-objs.bin", 'wb') as f:
-  #     pickle.dump(file=f, obj=objs)
-else:
-  with open(".cached-objs.bin", 'rb') as f:
-    objs = pickle.load(file=f)
+logging.log(logging.INFO, "finding all by location")
+objs: List[BasicResult] = []
+objs_i = 0
+for obj in project.find_all_by_location(location="/_HoldStrong", recursive=True, lookup_lsymbols=True):
+  if obj not in objs:
+    objs_i += 1
+    objs.append(obj)
+logging.log(logging.INFO, "finding all by location: finished")
 
-# raise Exception()
-# objs2 = []
-# for obj in project.find_all_by_location2(location="/_HoldStrong", recursive=True, lookup_lsymbols=True):
-#   if obj not in objs2:
-#     objs2.append(obj)
 
 bc = BinaryContext(hash="3BB0A8C1", abbreviation="SHC", reccmp_binary="STRONGHOLDCRUSADER")
 exporter = Exporter(binary_context=bc,
@@ -100,10 +88,13 @@ exporter = Exporter(binary_context=bc,
                                         (".*/binkw32/.*", "binkw32.h"),
                                         (".*inaddr.h", "WinSock.h"),
                                         (".*DirectPlay/dplay/.*", "dplay.h"),
-                                        (".*DirectPlay/dplobby/.*", "dplobby.h"),],
+                                        (".*DirectPlay/dplobby/.*", "dplobby.h"),
+                                        # ("HoldStrong_lib/StringObject.*", "<string>"),
+                                        ],
                     includes_exclude_regex=[".*Enums/WindowsVirtualKey.*",
                                             ".*Enums/GeneralWindowsMessage.*",
-                                            ".*Enums/FilePtrMoveMethod/*"],
+                                            ".*Enums/FilePtrMoveMethod/.*",
+                                            ".*winapi_32/.*"],
                     exclude_files_regex=[
                       ".*Enums/WindowsVirtualKey.*",
                       ".*Enums/GeneralWindowsMessage.*",
@@ -123,6 +114,8 @@ exporter = Exporter(binary_context=bc,
                       ("/_HoldStrong/WindowsHelper/Enums", "WindowsVirtualKeyInt"): ("/WinDef.h", "WPARAM"),
                       ("/_HoldStrong/WindowsHelper/Enums", "FilePtrMoveMethod"): ("/stdio.h", "DWORD"),
                       ("/_HoldStrong/WindowsHelper/Enums", "FilePtrMoveMethodInt"): ("/stdio.h", "DWORD"),
+                      ("/HoldStrong_lib", "StringObject"): ("/", "void *"),
+                      ("/HoldStrong_lib", "StringObject *"): ("/", "void *"),
                     },
                     inject_forwards_in_files={
                       "OpenSHC/UI/Menu.hpp": [("OpenSHC/UI/FwdMenuMenuItem.hpp",
@@ -172,7 +165,7 @@ def is_symbol_addr_in_useful_range(addr, include_code = True):
     return False
   if addr >= 0x00b93208 and addr < 0x00b94220:
     return False
-  if addr >= 0x00b94228 and addr < 0x00b95778:
+  if addr >= 0x00b94228 and addr < 0x00b95780:
     return False
   if addr >= 0x00b383f0 and addr < 0x00b3868c:
     return False
@@ -180,11 +173,45 @@ def is_symbol_addr_in_useful_range(addr, include_code = True):
     return False
   return True
 
-#raise Exception()
+from skink.export.mangler import build_extern_symbol
 
-#collection.add(exporter.export_symbols_as_assembly(((addr, symb, ddr, "") for addr, symb, ddr in project.find_global_primary_symbol_defined_data_pairs_by_address() if is_symbol_addr_in_useful_range(addr, include_code=False)), destination="OpenSHC/Globals", namespace="OpenSHC"))
+## raise Exception()
+# # DEBUGGING
+# asm_declarations = []
+# asm_addresses = []
+# for addr, symb, ddr, dt, isClass in project.find_global_primary_symbol_defined_data_pairs_by_address():
+#   primitive = True
+#   prop = ddr.properties.additionalProperties
+#   if prop.typeLocation == "/_HoldStrong":
+#     primitive = False
+#     ns = project.loc_name_to_parts(prop.typeLocation, prop.typeName)
 
-for c in exporter.export_symbols(((addr, symb, ddr,) for addr, symb, ddr in project.find_global_primary_symbol_defined_data_pairs_by_address() if is_symbol_addr_in_useful_range(addr, include_code=False)), destination="OpenSHC/Globals", namespace="OpenSHC"):
+def typedefFunc(loc: str, name: str, prefix: str):
+  if loc.startswith("/OpenSHC/"):
+    if name.endswith("Int"):
+      return "/", "int", ""
+    if name.endswith("Short"):
+      return "/", "short", ""
+    if name.endswith("Byte"):
+      return "/", "byte", ""
+    if name.startswith("IDirectPlay4A"):
+      return "/", name.replace("IDirectPlay4A", "IDirectPlay4"), "struct "
+
+  return loc, name, prefix
+
+asm = exporter.export_symbols_as_assembly(((addr, symb, ddr, dt, isClass) for addr, symb, ddr, dt, isClass in project.find_global_primary_symbol_defined_data_pairs_by_address() if is_symbol_addr_in_useful_range(addr, include_code=False)),
+      destination="symbols/data.asm", 
+      typedefs={
+        ('/OpenSHC/WindowsHelper/Enums', 'BOOLEnum'): ('/', 'int', ""),
+        ('/winnt', 'LARGE_INTEGER'): ('/', '_LARGE_INTEGER', "union "),
+        ('/OpenSHC/DirectPlay/dplay', 'IDirectPlay4A'): ("/", "IDirectPlay4", "struct "),
+      },
+      typedef_func=typedefFunc)
+collection.add(asm)
+
+collection.write_to_disk(pathlib.Path(args.output_dir), overwrite_all=args.overwrite_all, no_touch_warning="THIS FILE IS AUTO GENERATED\n  Communicate changes to the dev team (e.g. via a Pull Request).\n  Changes get lost otherwise.")
+
+for c in exporter.export_symbols(((addr, symb, ddr,) for addr, symb, ddr, dt, isClass in project.find_global_primary_symbol_defined_data_pairs_by_address() if is_symbol_addr_in_useful_range(addr, include_code=False)), destination="OpenSHC/Globals", namespace="OpenSHC"):
   collection.add(c)
 
 if args.export_helpers:
