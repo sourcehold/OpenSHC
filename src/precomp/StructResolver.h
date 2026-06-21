@@ -9,14 +9,15 @@ private:
 
     template <typename T, int gameAddress> struct Extern {
         static T instance;
+        static T* const ptr;
     };
 
     template <typename T, bool implemented, int gameAddress> struct InternalResolver;
     template <typename T, int gameAddress> struct InternalResolver<T, true, gameAddress> {
-        static T* const ptr;
+        typedef typename Instance<T, gameAddress> Holder;
     };
     template <typename T, int gameAddress> struct InternalResolver<T, false, gameAddress> {
-        static T* const ptr;
+        typedef typename Extern<T, gameAddress> Holder;
     };
 
     template <int address> struct AddressUsageKeeper {
@@ -38,17 +39,11 @@ public:
         static Initializer const initializer;
 
     public:
-        typedef typename InternalResolver<T, isImplemented, gameAddress> Ptr;
+        typedef typename InternalResolver<T, isImplemented, gameAddress>::Holder Holder;
     };
 };
 
-template <typename T, int gameAddress>
-T* const StructResolver::InternalResolver<T, false, gameAddress>::ptr
-    = &StructResolver::Extern<T, gameAddress>::instance;
-
-template <typename T, int gameAddress>
-T* const StructResolver::InternalResolver<T, true, gameAddress>::ptr
-    = &StructResolver::Instance<T, gameAddress>::instance;
+template <typename T, int address> T* const StructResolver::Extern<T, address>::ptr = &instance;
 
 template <int address> bool StructResolver::AddressUsageKeeper<address>::initialized = false;
 
@@ -59,24 +54,19 @@ typename StructResolver::Resolver<T, implemented, gameAddress>::Initializer cons
 template <typename T, bool implemented, int gameAddress>
 StructResolver::Resolver<T, implemented, gameAddress>::Initializer::Initializer()
 {
-    initialize(AddressUsageKeeper<gameAddress>::initialized, isImplemented, gameAddress, Ptr::ptr, getTypeName<T>());
+    initialize(AddressUsageKeeper<gameAddress>::initialized, isImplemented, gameAddress, Holder::ptr, getTypeName<T>());
 }
-
-// TODO: rather then adding a template to hold the ref which would require a long mangled name,
-//   if we have a generatable name, we use a macro to define an extern C and use this instead.
-//   In this case, the asm file only needs to be touched if the general constract of the address changes
-//   and should we only ever use the addresses of the globals, this might be never.
-//   However, if filtered and generated names are required, maybe it could also be possible to create a generator for
-//   the more complicated mangled names? Any general type change would need to also adept the ASM file.
 
 #define MACRO_STRUCT_RESOLVER(STRUCT_TYPE, IMPLEMENTED, GAME_ADDRESS)                                                  \
     template struct StructResolver::Resolver<STRUCT_TYPE, IMPLEMENTED, GAME_ADDRESS>;                                  \
-    typedef StructResolver::Resolver<STRUCT_TYPE, IMPLEMENTED, GAME_ADDRESS>::Ptr
+    typedef StructResolver::Resolver<STRUCT_TYPE, IMPLEMENTED, GAME_ADDRESS>::Holder
 
 #define MACRO_STRUCT_INSTANCE(GAME_ADDRESS)                                                                            \
     template <typename T> struct StructResolver::Instance<T, GAME_ADDRESS> {                                           \
         static T instance;                                                                                             \
+        static T* const ptr;                                                                                           \
     };                                                                                                                 \
+    template <typename T> T* const StructResolver::Instance<T, GAME_ADDRESS>::ptr = &instance;                         \
     template <typename T> T StructResolver::Instance<T, GAME_ADDRESS>::instance
 
 #endif // STRUCT_RESOLVER

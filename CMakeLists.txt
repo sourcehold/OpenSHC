@@ -158,7 +158,7 @@ target_file_copy_if_different(OpenSHC.exe.runnable "${CRUSADER_DIR}/Mss32.dll" "
 target_file_copy_if_different(OpenSHC.exe.runnable "${CRUSADER_DIR}/shfolder.dll" "$<TARGET_FILE_DIR:OpenSHC.exe>/shfolder.dll")
 
 
-# Add the asm file containing the game symbols as reference
+# Add the asm file containing the game globals symbols as reference
 set(GAME_SYMBOLS_FILE ${CMAKE_SOURCE_DIR}/src/symbols/data.asm)
 
 # Create the OpenSHC.dll target, should not require the game
