@@ -24,9 +24,10 @@ namespace Game {
             void (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x0046B320, &GameCore::swapBuildMenuTab)
         swapBuildMenuTab;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (GameCore::*)(MenuViewType, int), false, Address::SHC_3BB0A8C1_0x0046B340, &GameCore::switchToMenuView)
-        switchToMenuView;
+        // MACRO_FUNCTION_RESOLVER(
+        //     void (GameCore::*)(MenuViewType, int), false, Address::SHC_3BB0A8C1_0x0046B340,
+        //     &GameCore::switchToMenuView)
+        // switchToMenuView;
 
         MACRO_FUNCTION_RESOLVER(
             void (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x0046B980, &GameCore::processMenuViewSwitch)
@@ -64,9 +65,9 @@ namespace Game {
             void (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x004718F0, &GameCore::incrementMissionProgress)
         incrementMissionProgress;
 
-        MACRO_FUNCTION_RESOLVER(void (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x004719E0,
-            &GameCore::switchToScenarioDescriptionMenuView)
-        switchToScenarioDescriptionMenuView;
+        // MACRO_FUNCTION_RESOLVER(void (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x004719E0,
+        //     &GameCore::switchToScenarioDescriptionMenuView)
+        // switchToScenarioDescriptionMenuView;
 
         MACRO_FUNCTION_RESOLVER(
             void (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x00471A00, &GameCore::incrementMission)
