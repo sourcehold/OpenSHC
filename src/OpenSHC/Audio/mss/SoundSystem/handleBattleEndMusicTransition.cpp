@@ -25,7 +25,8 @@ namespace Audio {
             }
             DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.field6_0x18 = 1;
             if (DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.troopValueLevel == 0) {
-                if (DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.volumeLevel - 1U > 4) {
+                int const volumeLevel = DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.volumeLevel;
+                if (volumeLevel < 1 || volumeLevel > 5) {
                     return;
                 }
 
