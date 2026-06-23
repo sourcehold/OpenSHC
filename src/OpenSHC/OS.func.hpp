@@ -10,7 +10,6 @@
 
 #include "OpenSHC/OS.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
-#include "OpenSHC/WindowsHelper/Enums/OpenFlag.hpp"
 
 #include "crtdefs.h"
 #include "guiddef.h"
@@ -22,7 +21,6 @@ namespace OpenSHC {
 namespace OS_Func {
 
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-    using OpenSHC::WindowsHelper::Enums::OpenFlag;
 
     MACRO_FUNCTION_RESOLVER(int*(__stdcall*)(void* param_1, uint param_2), REIMPLEMENTED_CRT,
         Address::SHC_3BB0A8C1_0x004791B0, &OpenSHC::OS::basic_ofstream_write)
@@ -128,7 +126,7 @@ namespace OS_Func {
         Address::SHC_3BB0A8C1_0x005815C6, &OpenSHC::OS::_ucrt_read)
     _ucrt_read;
 
-    MACRO_FUNCTION_RESOLVER(int(__cdecl*)(char* _Filename, OpenFlag _OpenFlag, int _PMode), REIMPLEMENTED_CRT,
+    MACRO_FUNCTION_RESOLVER(int(__cdecl*)(char* _Filename, int _OpenFlag, int _PMode), REIMPLEMENTED_CRT,
         Address::SHC_3BB0A8C1_0x005816C3, &OpenSHC::OS::_ucrt_open)
     _ucrt_open;
 
