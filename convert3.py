@@ -114,8 +114,14 @@ exporter = Exporter(binary_context=bc,
                       ("/_HoldStrong/WindowsHelper/Enums", "WindowsVirtualKeyInt"): ("/WinDef.h", "WPARAM"),
                       ("/_HoldStrong/WindowsHelper/Enums", "FilePtrMoveMethod"): ("/stdio.h", "DWORD"),
                       ("/_HoldStrong/WindowsHelper/Enums", "FilePtrMoveMethodInt"): ("/stdio.h", "DWORD"),
+                      ("/_HoldStrong/WindowsHelper/Enums", "OpenFlag"): ("/", "int"),
+                      ("/_HoldStrong/WindowsHelper/Enums", "OpenFlagInt"): ("/", "int"),
                       ("/HoldStrong_lib", "StringObject"): ("/", "void *"),
                       ("/HoldStrong_lib", "StringObject *"): ("/", "void *"),
+                      ("/HoldStrong_lib", "StringObject *"): ("/", "void *"),
+                      ("/", "CHAR_CONST"): ("/", "char const"),
+                      ("/", "CHAR_CONST *"): ("/", "char const *"),
+                      
                     },
                     inject_forwards_in_files={
                       "OpenSHC/UI/Menu.hpp": [("OpenSHC/UI/FwdMenuMenuItem.hpp",
@@ -136,6 +142,9 @@ namespace UI {
 }
 }
 """)],
+                    },
+                    inject_includes_in_files={
+                      "OpenSHC/OS.hpp": ["fcntl.h", "sys/stat.h"],
                     })
 
 collection = ExportedContentCollection(ignore_duplicates=True)
@@ -297,6 +306,11 @@ namespace Audio {
             int unknownFlag2 : 1;
             int uninterruptable : 1;
 
+            static unsigned int const LOOP_COUNT_FIELD = 0x0000FFFF;
+            static unsigned int const UNKNOWN_FLAG_1 = 0x20000000;
+            static unsigned int const UNKNOWN_FLAG_2 = 0x40000000;
+            static unsigned int const UNINTERRUPTABLE = 0x80000000;
+
         } UnkSoundFlagsAndLoopCount;
 #pragma pack(pop)
 
@@ -306,6 +320,7 @@ namespace Audio {
 } // namespace OpenSHC
 """
   (output_dir / "OpenSHC/Audio/MSS/UnkSoundFlagsAndLoopCount.hpp").write_bytes(patch1.encode('utf-8'))
+  pass
 
 if not args.dry_run:
   # TODO: 
