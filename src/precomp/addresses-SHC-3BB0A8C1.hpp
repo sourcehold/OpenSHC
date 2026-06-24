@@ -19651,6 +19651,8 @@ enum {
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x0045B3E0 = 0x0045B3E0,
+    // type: function
+    SHC_3BB0A8C1_0x0045B460 = 0x0045B460,
     // label: FUN_0045b4a0
     // location:
     // type: function
@@ -22853,6 +22855,8 @@ enum {
     // location: OpenSHC/Game/GameCore
     // type: function
     SHC_3BB0A8C1_0x0046B320 = 0x0046B320,
+    // type: function
+    SHC_3BB0A8C1_0x0046B340 = 0x0046B340,
     // type: /pointer
     SHC_3BB0A8C1_0x0046B90C = 0x0046B90C,
     // type: /pointer
@@ -23631,6 +23635,8 @@ enum {
     // location: OpenSHC/Game/GameCore
     // type: function
     SHC_3BB0A8C1_0x004718F0 = 0x004718F0,
+    // type: function
+    SHC_3BB0A8C1_0x004719E0 = 0x004719E0,
     // label: incrementMission
     // location: OpenSHC/Game/GameCore
     // type: function
@@ -25109,15 +25115,6 @@ enum {
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047DB10 = 0x0047DB10,
-    // label: LAB_close_and_release_if_err
-    // location: OpenSHC/Synchrony/GameSynchronyState/initializeDirectPlayAndCreateOrJoinSession
-    SHC_3BB0A8C1_0x0047DD42 = 0x0047DD42,
-    // label: LAB_release
-    // location: OpenSHC/Synchrony/GameSynchronyState/initializeDirectPlayAndCreateOrJoinSession
-    SHC_3BB0A8C1_0x0047DD54 = 0x0047DD54,
-    // label: LAB_return
-    // location: OpenSHC/Synchrony/GameSynchronyState/initializeDirectPlayAndCreateOrJoinSession
-    SHC_3BB0A8C1_0x0047DDE3 = 0x0047DDE3,
     // label: setSessionDescription
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
@@ -41130,9 +41127,6 @@ enum {
     SHC_3BB0A8C1_0x004E3980 = 0x004E3980,
     // type: function
     SHC_3BB0A8C1_0x004E46C0 = 0x004E46C0,
-    // label: LAB_renderSomething
-    // location: OpenSHC/Rendering/ViewportRenderState/renderGmOverlayBuilding
-    SHC_3BB0A8C1_0x004E55E0 = 0x004E55E0,
     // type: /undefined *32
     SHC_3BB0A8C1_0x004E592C = 0x004E592C,
     // type: /undefined *32
@@ -43124,6 +43118,12 @@ enum {
     // location:
     // type: function
     SHC_3BB0A8C1_0x004F641D = 0x004F641D,
+    // type: function
+    SHC_3BB0A8C1_0x004F6424 = 0x004F6424,
+    // type: function
+    SHC_3BB0A8C1_0x004F6431 = 0x004F6431,
+    // type: function
+    SHC_3BB0A8C1_0x004F643A = 0x004F643A,
     // type: function
     SHC_3BB0A8C1_0x004F6441 = 0x004F6441,
     // type: /pointer
@@ -48292,9 +48292,6 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005160C0 = 0x005160C0,
-    // label: LAB_ClearBuilding
-    // location: OpenSHC/Map/TileMapState/prepareAreaForBuildingPlacement
-    SHC_3BB0A8C1_0x00516287 = 0x00516287,
     // label: placeBuilding
     // location: OpenSHC/Map/TileMapState
     // type: function
@@ -54622,9 +54619,6 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00532BA0 = 0x00532BA0,
-    // label: CODE_continueToNextUnit
-    // location: OpenSHC/Map/Units/UnitsState/recomputeTroopValuesForPlayer
-    SHC_3BB0A8C1_0x00532ED4 = 0x00532ED4,
     // type: /pointer
     SHC_3BB0A8C1_0x00532F10 = 0x00532F10,
     // type: /pointer
