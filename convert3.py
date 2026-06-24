@@ -104,6 +104,7 @@ exporter = Exporter(binary_context=bc,
                       ".*DirectDraw/.*",
                       ".*DirectPlay/dplay/.*",
                       ".*DirectPlay/dplobby/.*",
+                      ".*/WindowsHelper/Enums/OpenFlag.*",
                     ],
                     type_mapping={
                       ("/_HoldStrong/WindowsHelper/Enums", "GeneralWindowsMessage"): ("/WinDef.h", "UINT"),
@@ -208,7 +209,10 @@ def typedefFunc(loc: str, name: str, prefix: str):
 
   return loc, name, prefix
 
-asm = exporter.export_symbols_as_assembly(((addr, symb, ddr, dt, isClass) for addr, symb, ddr, dt, isClass in project.find_global_primary_symbol_defined_data_pairs_by_address() if is_symbol_addr_in_useful_range(addr, include_code=False)),
+all_addresses = list((addr, symb, ddr, dt, isClass) for addr, symb, ddr, dt, isClass in project.find_global_primary_symbol_defined_data_pairs_by_address() if is_symbol_addr_in_useful_range(addr, include_code=True))
+data_addresses = list((addr, symb, ddr, dt, isClass) for addr, symb, ddr, dt, isClass in all_addresses if is_symbol_addr_in_useful_range(addr, include_code=False))
+
+asm = exporter.export_symbols_as_assembly(data_addresses,
       destination="symbols/data.asm", 
       typedefs={
         ('/OpenSHC/WindowsHelper/Enums', 'BOOLEnum'): ('/', 'int', ""),
@@ -220,7 +224,7 @@ collection.add(asm)
 
 collection.write_to_disk(pathlib.Path(args.output_dir), overwrite_all=args.overwrite_all, no_touch_warning="THIS FILE IS AUTO GENERATED\n  Communicate changes to the dev team (e.g. via a Pull Request).\n  Changes get lost otherwise.")
 
-for c in exporter.export_symbols(((addr, symb, ddr,) for addr, symb, ddr, dt, isClass in project.find_global_primary_symbol_defined_data_pairs_by_address() if is_symbol_addr_in_useful_range(addr, include_code=False)), destination="OpenSHC/Globals", namespace="OpenSHC"):
+for c in exporter.export_symbols(((addr, symbol, ddr) for addr, symbol, ddr, dt, isClass in data_addresses), destination="OpenSHC/Globals", namespace="OpenSHC"):
   collection.add(c)
 
 if args.export_helpers:
@@ -234,7 +238,20 @@ for ns in namespaced_functions:
     reimplementation_unifier = "REIMPLEMENTED_CRT"
   collection.add(*exporter.export_namespace(ns, export_bodies=args.export_cpp, reimplementation_unifier=reimplementation_unifier))
 
-collection.add(exporter.export_addresses(project.yield_raw_objects()))
+addressables = []
+for addr, addressable in project.db_function.items():
+  if isinstance(addr, int) and addr > 0:
+    addressables.append(addressable)
+for addr, addressable in project.db_defineddata.items():
+  if isinstance(addr, int) and addr > 0:
+    addressables.append(addressable)
+for addr, addressable in project.db_sym.address_db.items():
+  if isinstance(addr, int) and addr > 0:
+    for a in addressable:
+      if a.extra:
+        addressables.append(a.extra)
+
+collection.add(exporter.export_addresses(addressables))
 
 class_paths = set(cls.location(ctx) for cls in clsses)
 
