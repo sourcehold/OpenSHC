@@ -84,7 +84,7 @@ namespace Audio {
 
             void PlaySpeechSFX(SpeechEffectID speechID);
 
-            void playWAVSFX(char* wav_filename);
+            void playWAVSFX(char const* wav_filename);
 
             void playOnSpeechSfxStream(char* filename);
 

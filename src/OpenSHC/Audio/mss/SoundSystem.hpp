@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "OpenSHC/Audio/MSS/UnkSoundFlagsAndLoopCount.hpp"
+#include "OpenSHC/Audio/MSS/SoundFlagsAndLoopCount.hpp"
 #include "OpenSHC/Audio/MSS/enums/SHC_SoundStream.hpp"
 #include "OpenSHC/DE/SHCDE/eMusicIDs.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -20,7 +20,7 @@ namespace OpenSHC {
 namespace Audio {
     namespace MSS {
 
-        using OpenSHC::Audio::MSS::UnkSoundFlagsAndLoopCount;
+        using OpenSHC::Audio::MSS::SoundFlagsAndLoopCount;
         using OpenSHC::Audio::MSS::enums::SHC_SoundStream;
         using OpenSHC::DE::SHCDE::eMusicIDs;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
@@ -35,7 +35,7 @@ namespace Audio {
             BOOLEnum waveOutOpenUnk_0x8; // 0x00000008 length: 4
             HSTREAM stream_0xc[5]; // 0x0000000C length: 20
             int streamActiveUnk_0x20[5]; // 0x00000020 length: 20
-            UnkSoundFlagsAndLoopCount streamFlagsUnkAndLoopCount_0x34[5]; // 0x00000034 length: 20
+            SoundFlagsAndLoopCount streamFlagsUnkAndLoopCount_0x34[5]; // 0x00000034 length: 20
             int streamFileVolumeNextUnk_0x48[5]; // 0x00000048 length: 20
             int streamFileVolumeCurrentUnk_0x5c[5]; // 0x0000005C length: 20
             int streamVolume[5]; // 0x00000070 length: 20
@@ -145,7 +145,7 @@ namespace Audio {
             void handleBattleEndMusicTransition();
 
             void playSoundStreamUnk(
-                SHC_SoundStream sndStreamIndex, char* filename, UnkSoundFlagsAndLoopCount flagsAndLoopCount);
+                SHC_SoundStream sndStreamIndex, char* filename, SoundFlagsAndLoopCount flagsAndLoopCount);
 
             void meth_0x47b250(char* filename);
 
@@ -165,13 +165,13 @@ namespace Audio {
 
             void meth_0x47b700(char* param_1);
 
-            void playSomeMusicUnk(char* filename, UnkSoundFlagsAndLoopCount flagsAndLoop);
+            void playSomeMusicUnk(char* filename, SoundFlagsAndLoopCount flagsAndLoop);
 
-            void playOnSfx1SoundStreamUnk(char* soundFileName, UnkSoundFlagsAndLoopCount flagsAndLoopCount);
+            void playOnSfx1SoundStreamUnk(char* soundFileName, SoundFlagsAndLoopCount flagsAndLoopCount);
 
-            void playSoundOnSfxSoundStream2(char* filename, UnkSoundFlagsAndLoopCount flagsAndLoopCount);
+            void playSoundOnSfxSoundStream2(char* filename, SoundFlagsAndLoopCount flagsAndLoopCount);
 
-            void playSoundOnStream3Unk(char* filename, UnkSoundFlagsAndLoopCount flagsAndLoopCount);
+            void playSoundOnStream3Unk(char* filename, SoundFlagsAndLoopCount flagsAndLoopCount);
 
             void activateSoundFromMenuFuncUnk();
 

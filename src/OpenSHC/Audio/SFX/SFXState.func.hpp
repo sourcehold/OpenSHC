@@ -80,7 +80,7 @@ namespace Audio {
             PlaySpeechSFX;
 
             MACRO_FUNCTION_RESOLVER(
-                void (SFXState::*)(char*), false, Address::SHC_3BB0A8C1_0x0044A460, &SFXState::playWAVSFX)
+                void (SFXState::*)(char const*), false, Address::SHC_3BB0A8C1_0x0044A460, &SFXState::playWAVSFX)
             playWAVSFX;
 
             MACRO_FUNCTION_RESOLVER(

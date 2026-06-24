@@ -22,6 +22,11 @@ namespace Audio {
             int unknownFlag2 : 1;
             int uninterruptable : 1;
 
+            static unsigned int const LOOP_COUNT_FIELD = 0x0000FFFF;
+            static unsigned int const UNKNOWN_FLAG_1 = 0x20000000;
+            static unsigned int const UNKNOWN_FLAG_2 = 0x40000000;
+            static unsigned int const UNINTERRUPTABLE = 0x80000000;
+
         } UnkSoundFlagsAndLoopCount;
 #pragma pack(pop)
 

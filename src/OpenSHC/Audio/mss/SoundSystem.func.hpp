@@ -2,8 +2,8 @@
   path: 'OpenSHC/Audio/MSS/SoundSystem.func.hpp'
 */
 
+#include "OpenSHC/Audio/MSS/SoundFlagsAndLoopCount.hpp"
 #include "OpenSHC/Audio/MSS/SoundSystem.hpp"
-#include "OpenSHC/Audio/MSS/UnkSoundFlagsAndLoopCount.hpp"
 #include "OpenSHC/Audio/MSS/enums/SHC_SoundStream.hpp"
 #include "OpenSHC/DE/SHCDE/eMusicIDs.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -12,7 +12,7 @@ namespace Audio {
     namespace MSS {
         namespace SoundSystem_Func {
 
-            using OpenSHC::Audio::MSS::UnkSoundFlagsAndLoopCount;
+            using OpenSHC::Audio::MSS::SoundFlagsAndLoopCount;
             using OpenSHC::Audio::MSS::enums::SHC_SoundStream;
             using OpenSHC::DE::SHCDE::eMusicIDs;
             using OpenSHC::WindowsHelper::Enums::BOOLEnum;
@@ -153,7 +153,7 @@ namespace Audio {
                 &SoundSystem::handleBattleEndMusicTransition)
             handleBattleEndMusicTransition;
 
-            MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(SHC_SoundStream, char*, UnkSoundFlagsAndLoopCount), false,
+            MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(SHC_SoundStream, char*, SoundFlagsAndLoopCount), false,
                 Address::SHC_3BB0A8C1_0x0047B060, &SoundSystem::playSoundStreamUnk)
             playSoundStreamUnk;
 
@@ -193,19 +193,19 @@ namespace Audio {
                 void (SoundSystem::*)(char*), false, Address::SHC_3BB0A8C1_0x0047B700, &SoundSystem::meth_0x47b700)
             meth_0x47b700;
 
-            MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(char*, UnkSoundFlagsAndLoopCount), false,
+            MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(char*, SoundFlagsAndLoopCount), false,
                 Address::SHC_3BB0A8C1_0x0047B760, &SoundSystem::playSomeMusicUnk)
             playSomeMusicUnk;
 
-            MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(char*, UnkSoundFlagsAndLoopCount), false,
+            MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(char*, SoundFlagsAndLoopCount), false,
                 Address::SHC_3BB0A8C1_0x0047B7D0, &SoundSystem::playOnSfx1SoundStreamUnk)
             playOnSfx1SoundStreamUnk;
 
-            MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(char*, UnkSoundFlagsAndLoopCount), false,
+            MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(char*, SoundFlagsAndLoopCount), false,
                 Address::SHC_3BB0A8C1_0x0047B800, &SoundSystem::playSoundOnSfxSoundStream2)
             playSoundOnSfxSoundStream2;
 
-            MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(char*, UnkSoundFlagsAndLoopCount), false,
+            MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(char*, SoundFlagsAndLoopCount), false,
                 Address::SHC_3BB0A8C1_0x0047B830, &SoundSystem::playSoundOnStream3Unk)
             playSoundOnStream3Unk;
 
