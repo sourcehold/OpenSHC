@@ -51,8 +51,7 @@ namespace Audio {
             void* sampleBufferPtrUnk_0x17c[2]; // 0x0000017C length: 8
             int sampleBufferSizeUnk_0x184; // 0x00000184 length: 4
             dword mbr_0x188; // 0x00000188 length: 4
-            dword mbr_0x18c; // 0x0000018C length: 4
-            HSAMPLE sample_0x190[31]; // 0x00000190 length: 124
+            HSAMPLE sample[32]; // 0x0000018C length: 128
             int sampleSoundIndex_0x20c[32]; // 0x0000020C length: 128
             int soundFileCurrSampleNum_0x28c[1000]; // 0x0000028C length: 4000
             void* soundFileDataPointerArray_0x122c[1000]; // 0x0000122C length: 4000
