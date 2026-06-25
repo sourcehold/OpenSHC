@@ -274,7 +274,7 @@ for obj in objs:
                                                  type="BOOL"))
     elif obj in enum_orphans:
       #if e.er.properties.additionalProperties.size == 4:
-      collection.add(exporter.export_enum(e))
+      collection.add(exporter.export_enum(e, hexvalue=e.name.endswith("BitwiseFlagEnum")))
       #else:
       #  collection.add(*exporter.export_sized_enum(e))
     else:
