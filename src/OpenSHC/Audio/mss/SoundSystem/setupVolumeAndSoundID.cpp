@@ -19,7 +19,7 @@ namespace Audio {
             // Indicator to handle as mission sound (?)
             if (soundIDInt == DE::SHCDE::MUSIC_TUNE_NARR1) {
                 // missionNumber1to20 might be unsigned, but found signs inconclusive
-                if (DAT_GameCore::ptr->missionNumber1to20 - 1U <= 19) {
+                if (1 <= DAT_GameCore::ptr->missionNumber1to20 && DAT_GameCore::ptr->missionNumber1to20 <= 20) {
                     // This makes the soundID "missionNumber1to20 + 46", which would use the enums 47 to 66.
                     // These are only filled by 4 enums for 4 mission intros, so this space could be made for 20.
                     soundIDInt = DAT_GameCore::ptr->missionNumber1to20 + 46;

@@ -2,6 +2,7 @@
 
 #include "OpenSHC/OS.func.hpp"
 #include "OpenSHC/Random/RNG.func.hpp"
+#include "OpenSHC/Audio/mss/SoundFlagsAndLoopCountBitwiseFlagEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_SFXDefinedData.hpp"
@@ -98,10 +99,10 @@ namespace Audio {
                     readFileBytes += MACRO_CALL(OS_Func::_ucrt_read)(this->musicSampleFileHandleUnk_0x174,
                         (void*)((int)this->sampleBufferPtrUnk_0x17c[_buffNum] + readFileBytes),
                         this->sampleBufferSizeUnk_0x184 - readFileBytes);
-                } else if (this->streamFlagsUnkAndLoopCount_0x34[0].loopCount == 1) {
+                } else if ((this->streamFlagsUnkAndLoopCount_0x34[0] & FLAG_SOUND_LOOP_COUNT_FIELD) == 1) {
                     MACRO_CALL_MEMBER(SoundSystem_Func::stopMusicPlayback, this)();
                     return;
-                } else if (this->streamFlagsUnkAndLoopCount_0x34[0].loopCount == 0) {
+                } else if ((this->streamFlagsUnkAndLoopCount_0x34[0] & FLAG_SOUND_LOOP_COUNT_FIELD) == 0) {
                     MACRO_CALL(OS_Func::_ucrt_lseek)(this->musicSampleFileHandleUnk_0x174, 0, FILE_BEGIN);
                     readFileBytes += MACRO_CALL(OS_Func::_ucrt_read)(this->musicSampleFileHandleUnk_0x174,
                         (void*)((int)this->sampleBufferPtrUnk_0x17c[_buffNum] + readFileBytes),

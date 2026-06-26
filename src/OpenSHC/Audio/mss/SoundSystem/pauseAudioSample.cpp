@@ -30,7 +30,7 @@ namespace Audio {
                 }
                 if (MACRO_CALL_MEMBER(SoundSystem_Func::getAndUpdateSampleStatus, this)(soundIndex)) {
                     this->samplePaused_0x31f4[this->soundFileCurrSampleNum_0x28c[soundIndex]] = 1;
-                    AIL_stop_sample(this->sample_0x190[this->soundFileCurrSampleNum_0x28c[soundIndex] + -1]);
+                    AIL_stop_sample(this->sample[this->soundFileCurrSampleNum_0x28c[soundIndex]]);
                 }
             }
         }

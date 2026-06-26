@@ -1,5 +1,4 @@
 #include "OpenSHC/Audio/MSS/SoundSystem.func.hpp"
-
 #include "OpenSHC/string-literals.hpp"
 
 namespace OpenSHC {
@@ -14,10 +13,9 @@ namespace Audio {
                 return;
             }
 
-            AIL_set_named_sample_file(this->sample_0x190[this->soundFileCurrSampleNum_0x28c[soundIndex] + -1],
-                s__wav_005a6cc4, this->soundFileDataPointerArray_0x122c[soundIndex],
-                this->soundFileSizes_0x21cc[soundIndex], 0);
-            AIL_start_sample(this->sample_0x190[this->soundFileCurrSampleNum_0x28c[soundIndex] + -1]);
+            AIL_set_named_sample_file(this->sample[this->soundFileCurrSampleNum_0x28c[soundIndex]], s__wav_005a6cc4,
+                this->soundFileDataPointerArray_0x122c[soundIndex], this->soundFileSizes_0x21cc[soundIndex], 0);
+            AIL_start_sample(this->sample[this->soundFileCurrSampleNum_0x28c[soundIndex]]);
         }
 
     }

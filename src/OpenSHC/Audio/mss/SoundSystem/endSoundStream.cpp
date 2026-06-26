@@ -1,6 +1,7 @@
 #include "../SoundSystem.func.hpp"
 
 #include "OpenSHC/OS.func.hpp"
+#include "OpenSHC/Audio/mss/SoundFlagsAndLoopCountBitwiseFlagEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_SoundEffectsHelperData1.hpp"
 
@@ -37,7 +38,7 @@ namespace Audio {
                 return;
             }
 
-            if (this->streamFlagsUnkAndLoopCount_0x34[sndStreamIndex].uninterruptable
+            if (this->streamFlagsUnkAndLoopCount_0x34[sndStreamIndex] & FLAG_SOUND_UNINTERRUPTABLE
                 && AIL_stream_status(this->stream_0xc[sndStreamIndex]) == SMP_PLAYING) {
                 return;
             }

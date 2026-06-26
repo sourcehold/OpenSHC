@@ -13,10 +13,10 @@ namespace Audio {
 
             this->sampleSndStructVolumePercentage_0x3174[this->soundFileCurrSampleNum_0x28c[soundIndex]]
                 = sampleVolumePercentage;
-            AIL_set_sample_volume(this->sample_0x190[this->soundFileCurrSampleNum_0x28c[soundIndex] + -1],
+            AIL_set_sample_volume(this->sample[this->soundFileCurrSampleNum_0x28c[soundIndex]],
                 (this->sampleVolume * sampleVolumePercentage) / 100);
-            AIL_set_sample_pan(this->sample_0x190[this->soundFileCurrSampleNum_0x28c[soundIndex] + -1], samplePan);
-            AIL_set_sample_loop_count(this->sample_0x190[this->soundFileCurrSampleNum_0x28c[soundIndex] + -1], 1);
+            AIL_set_sample_pan(this->sample[this->soundFileCurrSampleNum_0x28c[soundIndex]], samplePan);
+            AIL_set_sample_loop_count(this->sample[this->soundFileCurrSampleNum_0x28c[soundIndex]], 1);
         }
 
     }

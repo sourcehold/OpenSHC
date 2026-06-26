@@ -1,5 +1,7 @@
 #include "../SoundSystem.func.hpp"
 
+#include "OpenSHC/Audio/mss/SoundFlagsAndLoopCountBitwiseFlagEnum.hpp"
+
 namespace OpenSHC {
 namespace Audio {
     namespace MSS {
@@ -12,13 +14,13 @@ namespace Audio {
             }
 
             for (int i = 0; i < 5; ++i) {
-                this->streamFlagsUnkAndLoopCount_0x34[i].uninterruptable = false;
+                this->streamFlagsUnkAndLoopCount_0x34[i] &= ~FLAG_SOUND_UNINTERRUPTABLE;
                 MACRO_CALL_MEMBER(SoundSystem_Func::endSoundStream, this)((SHC_SoundStream)i);
             }
 
-            for (int i = 0; i < 31; ++i) {
-                AIL_end_sample(this->sample_0x190[i]);
-                this->sampleSoundIndex_0x20c[i + 1] = 0;
+            for (int i = 1; i < 32; ++i) {
+                AIL_end_sample(this->sample[i]);
+                this->sampleSoundIndex_0x20c[i] = 0;
             }
 
             for (int i = 1; i < this->loadedSoundsCountAndIndex_0x316c; ++i) {
