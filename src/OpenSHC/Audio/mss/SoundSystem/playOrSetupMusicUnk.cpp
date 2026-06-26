@@ -26,9 +26,7 @@ namespace Audio {
                 this->streamFileVolumeNextUnk_0x48[0]
                     = (((this->currIdSoundFileVolumeUnk_0x150 * someVolumeUnk) / 100) * this->mbr_0x14c) / 100;
             }
-            UnkSoundFlagsAndLoopCount const unkSoundFlagsAndLoopCount = {};
-            MACRO_CALL_MEMBER(SoundSystem_Func::playSoundStreamUnk, this)(
-                enums::SND_STR_MUSIC, filename, unkSoundFlagsAndLoopCount);
+            MACRO_CALL_MEMBER(SoundSystem_Func::playSoundStreamUnk, this)(enums::SND_STR_MUSIC, filename, 0);
             this->streamFileVolumeNextUnk_0x48[0]
                 = (((this->currIdSoundFileVolumeUnk_0x150 * someVolumeUnk) / 100) * this->mbr_0x14c) / 100;
         }
