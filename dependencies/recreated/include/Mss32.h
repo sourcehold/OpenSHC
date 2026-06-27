@@ -74,7 +74,7 @@ extern "C" __declspec(dllimport) void           __stdcall AIL_close_stream      
 extern "C" __declspec(dllimport) void           __stdcall AIL_start_stream                  (HSTREAM stream);
 extern "C" __declspec(dllimport) void           __stdcall AIL_pause_stream                  (HSTREAM stream, int onoff);
 extern "C" __declspec(dllimport) void           __stdcall AIL_set_stream_volume             (HSTREAM stream, int volume);                                                                   // SHC: Same as sample volume?
-extern "C" __declspec(dllimport) void           __stdcall AIL_set_stream_loop_count         (HSTREAM stream, unsigned int count);                                                           // SHC: Same as sample loop count?
+extern "C" __declspec(dllimport) void           __stdcall AIL_set_stream_loop_count         (HSTREAM stream, int count);                                                                    // SHC: Same as sample loop count?
 extern "C" __declspec(dllimport) int            __stdcall AIL_stream_status                 (HSTREAM stream);
 
 // SHC: Needs implementation

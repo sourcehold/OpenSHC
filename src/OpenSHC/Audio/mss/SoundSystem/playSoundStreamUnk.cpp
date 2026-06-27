@@ -55,10 +55,16 @@ namespace Audio {
 
             this->streamActiveUnk_0x20[sndStreamIndex] = true;
             this->streamFlagsUnkAndLoopCount_0x34[sndStreamIndex] = flagsAndLoopCount;
-            if ((flagsAndLoopCount & FLAG_SOUND_UNKNOWN_FLAG_1) && this->streamActiveUnk_0x20[0]) {
+            // "!sndStreamIndex" was required to get the full byte match. This might indicate that instead of using "0"
+            // directly to refer to the first/music stream, the just negate the given stream index, which is always 0.
+            // It might be a coincidence or the current re-implementation of this method lacks some other pattern, but
+            // it works for now and could be something to consider should other behaviors like this show up.
+            if ((flagsAndLoopCount & FLAG_SOUND_UNKNOWN_FLAG_1) && this->streamActiveUnk_0x20[!sndStreamIndex]) {
                 AIL_set_sample_volume(this->musicSampleUnk_0x170,
-                    this->streamVolume[0] * (this->streamFileVolumeNextUnk_0x48[0] / 2) / 100);
-                this->streamFileVolumeCurrentUnk_0x5c[0] = this->streamFileVolumeNextUnk_0x48[0] / 2;
+                    this->streamVolume[!sndStreamIndex] * (this->streamFileVolumeNextUnk_0x48[!sndStreamIndex] / 2)
+                        / 100);
+                this->streamFileVolumeCurrentUnk_0x5c[!sndStreamIndex]
+                    = this->streamFileVolumeNextUnk_0x48[!sndStreamIndex] / 2;
             }
             if (flagsAndLoopCount & (FLAG_SOUND_UNKNOWN_FLAG_2 | FLAG_SOUND_UNINTERRUPTABLE)) {
                 flagsAndLoopCount = 1;
