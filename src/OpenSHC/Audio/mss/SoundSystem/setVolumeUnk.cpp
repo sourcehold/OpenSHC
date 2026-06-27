@@ -13,13 +13,9 @@ namespace Audio {
 
             if (streamIndex == -1) {
                 this->sampleVolume = volume;
-                for (int i = 0; i < 31; ++i) {
-                    // TODO: A lot of structures of SoundSystem use an 32 element array. sample_0x190 for example
-                    //   uses 31 and might be "missing" its first element. The 0 seems to be used for "something" else
-                    //   in general. So either we should one day treat all these as "a value and a 31 element array" or
-                    //   like a single 32 array.
+                for (int i = 1; i < 32; ++i) {
                     AIL_set_sample_volume(
-                        this->sample_0x190[i], (this->sampleSndStructVolumePercentage_0x3174[i + 1] * volume) / 100);
+                        this->sample[i], (this->sampleSndStructVolumePercentage_0x3174[i] * volume) / 100);
                 }
                 return;
             }

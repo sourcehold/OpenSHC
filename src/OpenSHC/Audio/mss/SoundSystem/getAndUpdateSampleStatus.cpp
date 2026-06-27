@@ -14,8 +14,7 @@ namespace Audio {
                 return FALSE;
             }
 
-            unsigned int const status
-                = AIL_sample_status(this->sample_0x190[this->soundFileCurrSampleNum_0x28c[soundIndex] + -1]);
+            unsigned int const status = AIL_sample_status(this->sample[this->soundFileCurrSampleNum_0x28c[soundIndex]]);
             if (status == SMP_PLAYING) {
                 return TRUE;
             }
