@@ -27,10 +27,6 @@ namespace Synchrony {
             &GameSynchronyState::isAIPlayer)
         isAIPlayer;
 
-        MACRO_FUNCTION_RESOLVER(int (GameSynchronyState::*)(char*), false, Address::SHC_3BB0A8C1_0x00479C20,
-            &GameSynchronyState::meth_0x479c20)
-        meth_0x479c20;
-
         MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(GUID*), false, Address::SHC_3BB0A8C1_0x0047D4A0,
             &GameSynchronyState::getGUIDForSelectedProvider)
         getGUIDForSelectedProvider;

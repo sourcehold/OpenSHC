@@ -49,6 +49,10 @@ namespace Audio {
                 void (SoundSystem::*)(), false, Address::SHC_3BB0A8C1_0x00479B70, &SoundSystem::meth_0x479b70)
             meth_0x479b70;
 
+            MACRO_FUNCTION_RESOLVER(
+                int (SoundSystem::*)(char*), false, Address::SHC_3BB0A8C1_0x00479C20, &SoundSystem::meth_0x479c20)
+            meth_0x479c20;
+
             MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(int), false, Address::SHC_3BB0A8C1_0x00479C80,
                 &SoundSystem::findSamplePlaceForSoundUnk)
             findSamplePlaceForSoundUnk;

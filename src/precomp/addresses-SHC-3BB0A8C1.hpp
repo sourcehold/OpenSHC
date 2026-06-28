@@ -24774,7 +24774,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00479B70 = 0x00479B70,
     // label: meth_0x479c20
-    // location: OpenSHC/Synchrony/GameSynchronyState
+    // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00479C20 = 0x00479C20,
     // label: findSamplePlaceForSoundUnk

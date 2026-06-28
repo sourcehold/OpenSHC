@@ -91,6 +91,8 @@ namespace Audio {
 
             void meth_0x479b70();
 
+            int meth_0x479c20(char* fileName);
+
             void findSamplePlaceForSoundUnk(int soundIndex);
 
             void setupSampleForNextSound(int soundIndex, int sampleVolumePercentage, int samplePan);

@@ -378,8 +378,6 @@ namespace Synchrony {
 
         BOOLEnum isAIPlayer(int playerID);
 
-        int meth_0x479c20(char* fileName);
-
         void getGUIDForSelectedProvider(GUID* param_1);
 
         void setMenuTypeBasedOnDirectPlayGUID();
