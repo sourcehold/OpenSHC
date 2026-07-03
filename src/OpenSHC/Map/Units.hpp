@@ -12,7 +12,7 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        int __stdcall FUN_0051be20();
+        int __stdcall FindFirstOpponentWithKeep();
 
     } // namespace Units
 } // namespace Map

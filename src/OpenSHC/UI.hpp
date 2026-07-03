@@ -295,7 +295,7 @@ namespace UI {
 
     void __cdecl MenuItemActionHandler_InGameMenu_UnitSelectionAndControlsUnk(int param_1, ...);
 
-    void __cdecl FUN_00437cc0();
+    void __cdecl HandleWallTerrainMouseDrag();
 
     void __stdcall MenuItemActionHandler_InGameMenu_TriggerPlaceWallCommand();
 
@@ -347,7 +347,7 @@ namespace UI {
 
     void __cdecl MenuItemActionHandler_BuildingAndStatusMenu_ReturnToBuildMenu(int param_1, ...);
 
-    void __stdcall FUN_00440360();
+    void __stdcall CountPlayerUnitsByType();
 
     void __stdcall MenuView_UnusedHelpTextEditor_Prepare();
 
@@ -420,7 +420,7 @@ namespace UI {
 
     void __cdecl MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface();
 
-    void __cdecl FUN_004641a0();
+    void __cdecl RenderButtonImageWithBlending();
 
     void __cdecl MenuItemRenderFunction_ChooseRandomNumberOfEnemies_Main(int param_1, ...);
 
@@ -512,7 +512,7 @@ namespace UI {
 
     undefined4 __cdecl TicksSinceCounterStart();
 
-    void __stdcall FUN_00471a80();
+    void __stdcall exitToScenarioDescriptionMenu();
 
     void __cdecl MenuItemRenderFunction_NetworkSessions_Buttons(int param_1, ...);
 
@@ -675,7 +675,7 @@ namespace UI {
 
     void __cdecl MenuItemActionHandler_ProgressBarBox_LoadAndSaveGameButtonLogic(int param_1, ...);
 
-    void __cdecl FUN_00495800(int param_1);
+    void __cdecl ShowProgressBarSaveLoadDialog(int param_1);
 
     void __cdecl MenuItemActionHandler_OnlineVoteQuitAndQuitGame_Main(int param_1, ...);
 
@@ -761,7 +761,7 @@ namespace UI {
 
     void __cdecl MenuModalRenderFunction_ReceiveMapFrom(int x, int y, int width, int height);
 
-    void __stdcall FUN_004ac650();
+    void __stdcall buildEnemyPlayerList();
 
     void __cdecl MenuModalRenderFunction_Allies(int x, int y, int width, int height);
 
@@ -823,13 +823,13 @@ namespace UI {
 
     void __cdecl MenuItemRenderFunction_InGameMenu_BikMessagePlayerShield(int param_1, ...);
 
-    void __cdecl FUN_004b7f60(uint param_1, int param_2);
+    void __cdecl PlayMissionAestheticSFX(uint param_1, int param_2);
 
     void __stdcall MenuView_General_DoInitial_OnlySetMenuXY();
 
     void __stdcall MenuView_EditScenario_DoEveryFrame();
 
-    void __stdcall FUN_004b8210();
+    void __stdcall RestoreScenarioGold();
 
     void __cdecl MenuItemActionHandler_EditScenario_BaseMenuButtons(int param_1, ...);
 
@@ -856,7 +856,7 @@ namespace UI {
     void __cdecl MenuItemRenderFunction_NewInvasion_RepeatSlider(
         int param_1, int thumbXPos, int sliderValue, int thumbWidth, BOOLEnum isDragged);
 
-    void __stdcall FUN_004b9610();
+    void __stdcall CaptureCurrentTimeToUnknownTime01();
 
     void __cdecl MenuItemActionHandler_NewEventCondition_Main(int param_1, ...);
 
@@ -915,15 +915,15 @@ namespace UI {
 
     void __cdecl MenuItemRenderFunction_TriggerInvasion_Main(int param_1, ...);
 
-    void __cdecl FUN_004bc5f0(int param_1);
+    void __cdecl initTutorialStepTransition(int param_1);
 
-    void __cdecl FUN_004bc630(int param_1);
+    void __cdecl recordTutorialPlayerAction(int param_1);
 
-    void __stdcall FUN_004bc6c0();
+    void __stdcall resetTutorialActionTrackers();
 
-    void __cdecl FUN_004bc790(int param_1, int param_2);
+    void __cdecl renderAnimatedTutorialFloatOverlay(int param_1, int param_2);
 
-    void __cdecl FUN_004bc910(int param_1);
+    void __cdecl renderTutorialFloatForUIElement(int param_1);
 
     void __cdecl MenuModalRenderFunction_TutorialBox(int x, int y, int width, int height);
 
@@ -931,7 +931,7 @@ namespace UI {
 
     void __cdecl MenuItemRenderFunction_TutorialBox_Main(int param_1, ...);
 
-    void __stdcall FUN_004bd1b0();
+    void __stdcall updateTutorialStepAndProgress();
 
     void __stdcall MenuView_EditScenario_Prepare();
 
@@ -971,13 +971,13 @@ namespace UI {
 
     void __cdecl MenuItemActionHandler_Unknown27CampaignUnk_Main(int param_1, ...);
 
-    void __stdcall FUN_004d6f60();
+    void __stdcall ParseCampaignMapHotspotBitmap();
 
     void __cdecl MenuItemRenderFunction_ScenarioDescription_Main(int param_1, ...);
 
     void __cdecl MenuItemActionHandler_ScenarioDescription_Main(int param_1, ...);
 
-    void __cdecl FUN_004d8a20(char* param_1);
+    void __cdecl ReadMapHeaderFromFile(char* param_1);
 
     void __stdcall MenuView_CrusadeMissionIntro_Prepare();
 
@@ -997,7 +997,7 @@ namespace UI {
 
     void __cdecl MenuItemActionHandler_CrusadeEndscreen_Main(int param_1, ...);
 
-    void __cdecl FUN_004d9270(undefined4 param_1);
+    void __cdecl SetActiveCreditsSequenceIndex(undefined4 param_1);
 
     void __stdcall MenuView_RankingGames_Prepare();
 
@@ -1021,55 +1021,57 @@ namespace UI {
 
     void __cdecl MenuItemActionHandler_TacticalPowerBar_Main(int param_1, ...);
 
-    void __stdcall FUN_004da180();
+    void __stdcall StopCreditsPlaybackAndSounds();
 
-    void __stdcall FUN_004da200();
+    void __stdcall EndCreditsSegmentAndAdvanceToNext();
 
     void __stdcall resetCredits();
 
-    void __cdecl FUN_004da7a0(undefined4 param_1, undefined4 param_2);
+    void __cdecl AppendCreditsSoundEntry(undefined4 param_1, undefined4 param_2);
 
-    void __cdecl FUN_004da7e0(undefined4 param_1);
+    void __cdecl AppendCreditsCommand(undefined4 param_1);
 
-    void __stdcall FUN_004da810();
+    void __stdcall AppendCreditsListTerminator();
 
-    void __stdcall FUN_004da840();
+    void __stdcall AppendCreditsPauseCommand();
 
-    void __stdcall FUN_004da870();
+    void __stdcall AppendCreditsSegmentEndCommand();
 
-    void __stdcall FUN_004da8a0();
+    void __stdcall AppendCreditsClearImageCommand();
 
-    void __cdecl FUN_004da8d0(int param_1, int param_2, undefined4 param_3, undefined4 param_4, undefined4 param_5);
+    void __cdecl AppendCreditsImageTransitionCommand(
+        int param_1, int param_2, undefined4 param_3, undefined4 param_4, undefined4 param_5);
 
-    void __cdecl FUN_004da9a0(int param_1, int param_2);
+    void __cdecl AppendCreditsImageEndCommand(int param_1, int param_2);
 
-    void __cdecl FUN_004da9f0(int param_1, int param_2, undefined4 param_3, undefined4 param_4, undefined4 param_5,
-        undefined4 param_6, undefined4 param_7, undefined4 param_8);
+    void __cdecl AppendCreditsShowImageCommand(int param_1, int param_2, undefined4 param_3, undefined4 param_4,
+        undefined4 param_5, undefined4 param_6, undefined4 param_7, undefined4 param_8);
 
-    void __cdecl FUN_004daa80(undefined4 param_1, char* param_2, undefined4 param_3, undefined4 param_4,
-        undefined4 param_5, undefined4 param_6);
+    void __cdecl AppendCreditsBinkVideoCommand(undefined4 param_1, char* param_2, undefined4 param_3,
+        undefined4 param_4, undefined4 param_5, undefined4 param_6);
 
-    void __cdecl FUN_004dab00(int param_1, undefined4 param_2, undefined4 param_3);
+    void __cdecl AppendCreditsFixedImageCommand(int param_1, undefined4 param_2, undefined4 param_3);
 
-    void __cdecl FUN_004dab80(char* param_1, undefined4 param_2, int param_3, undefined4 param_4);
+    void __cdecl AppendCreditsBinkVideoWithAudioCommand(
+        char* param_1, undefined4 param_2, int param_3, undefined4 param_4);
 
-    void __cdecl FUN_004dabf0(undefined4 param_1, undefined4 param_2);
+    void __cdecl AppendCreditsSoundStreamCommand(undefined4 param_1, undefined4 param_2);
 
-    void __cdecl FUN_004dac30(int param_1, int param_2, undefined4 param_3, undefined4 param_4, undefined4 param_5,
-        undefined4 param_6, undefined4 param_7, undefined4 param_8);
+    void __cdecl AppendCreditsTextCommand(int param_1, int param_2, undefined4 param_3, undefined4 param_4,
+        undefined4 param_5, undefined4 param_6, undefined4 param_7, undefined4 param_8);
 
-    void __cdecl FUN_004dacf0(int param_1, int param_2);
+    void __cdecl AppendCreditsTextEndCommand(int param_1, int param_2);
 
-    void __stdcall FUN_004dafb0();
+    void __stdcall RenderTextPageProgressBar();
 
-    void __cdecl FUN_004db0d0(int param_1);
+    void __cdecl DisplayFullScreenTextPage(int param_1);
 
-    void __cdecl FUN_004db180(undefined4 param_1, undefined4 param_2);
+    void __cdecl BuildIntroLogoSequence(undefined4 param_1, undefined4 param_2);
 
     void __cdecl TrimStoredMenuString(int storedMenuStringIndex, undefined4 param_2, undefined4 param_3,
         int allowedWidth, undefined4 param_5, int fontSize);
 
-    void __cdecl FUN_004db390(float param_1);
+    void __cdecl RenderScrollingCreditsTextFrame(float param_1);
 
     void __stdcall MenuView_HistoricMissionPicture_Prepare();
 
@@ -1089,9 +1091,9 @@ namespace UI {
 
     void __stdcall MenuView_HistoricCampaignOutro_DoEveryFrame();
 
-    undefined4 __stdcall FUN_004dc140();
+    undefined4 __stdcall FindCampaignMapHotspotAtMouse();
 
-    void __stdcall FUN_004dc1c0();
+    void __stdcall BuildExtremeDemoIntroScript();
 
     void __stdcall MenuView_MissionFinishedTransition_DoEveryFrame();
 

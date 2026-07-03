@@ -244,7 +244,7 @@ namespace Map {
         ~TileMapState() {};
 
         // Constructor
-        TileMapState* Constructor_TileMapState();
+        TileMapState* constructTileMapState();
 
         void processEntityDamageToBuildingCollateralThunk(
             undefined4 tile, undefined4 x_2, undefined4 y_2, undefined4 damage, undefined4 playerID, undefined4 unused);
@@ -270,15 +270,15 @@ namespace Map {
 
         void updateLogicalTileMapRelatedSections();
 
-        void meth_004f79d0();
+        void rebuildShowHiLayerFromHeights();
 
-        void meth_0x4f7a80(int param_1, int param_2);
+        void computeTileLuminescence(int param_1, int param_2);
 
         void increaseHeightForTunnelSingleTile(int tile, uint x, uint y, int increment);
 
         int getNonFarmFieldBuildingHealthAtTileOr1000(int tile);
 
-        void meth_0x4f81d0(int param_1, uint param_2, uint param_3);
+        void resetTileToDefaultState(int param_1, uint param_2, uint param_3);
 
         uint getBuildingHurtSFXID(int buildingID);
 
@@ -286,116 +286,117 @@ namespace Map {
 
         void countPropertyInSurroundingTiles(int tile, int param_2, uint param_3);
 
-        undefined4 meth_0x4f85b0(int param_1, int param_2);
+        undefined4 isTileEnclosedByWallsOrGates(int param_1, int param_2);
 
-        undefined4 meth_0x4f8640(int param_1, int param_2);
+        undefined4 isTileEnclosedByWalls(int param_1, int param_2);
 
-        uint meth_0x4f86d0(int param_1, int param_2, int param_3);
+        uint isWallCornerForCardinalDirection(int param_1, int param_2, int param_3);
 
-        uint meth_0x4f8780(int param_1, int param_2, int param_3);
+        uint isWallCornerForDiagonalDirection(int param_1, int param_2, int param_3);
 
-        undefined4 meth_0x4f8840(int param_1, int param_2, int param_3);
+        undefined4 isWallConnectionHeightValid(int param_1, int param_2, int param_3);
 
-        undefined4 meth_0x4f8900(int param_1, int param_2);
+        undefined4 hasOnlyTowerNeighborsNoWalls(int param_1, int param_2);
 
-        uint meth_0x4f89c0(int param_1, int param_2, int param_3);
+        uint getWallFlagForOrientedDirection(int param_1, int param_2, int param_3);
 
-        uint meth_0x4f8a40(int param_1, int param_2, int param_3);
+        uint hasHigherNeighborWithFlagBit11(int param_1, int param_2, int param_3);
 
-        uint meth_0x4f8ac0(int param_1, int param_2, int param_3);
+        uint hasHigherPlainNeighborWithFlagBit8(int param_1, int param_2, int param_3);
 
         int getOrientationThatIsWallTowerOrGatehouse(uint x, uint y);
 
-        void previewWallDrawingUnk(int playerID, uint x1, uint y1, uint x2, uint y2, undefined4 command);
+        void renderWallDragPreview(int playerID, uint x1, uint y1, uint x2, uint y2, undefined4 command);
 
-        void meth_0x4f9000(int param_1, int param_2);
+        void reassignWallOwnershipForPlayer(int param_1, int param_2);
 
         void swapWallOwnership(int param_1, int param_2);
 
         void destroyWallsOfPlayer(int playerID);
 
-        void isWallUnkPlacementAllowed(int playerID, uint x, uint y, CommandBuildingType param_4);
+        void validateWallPlacementAtTile(int playerID, uint x, uint y, CommandBuildingType param_4);
 
         void setupBuildingSizeIndexMappingForBuildingWithSize(int buildingSize);
 
         void getBuildingSizeIndexMappingData(int buildingSizeTileIndex, int buildingWidthOrHeight);
 
-        BOOLEnum indexIsEdgeUnk(int counter, int size);
+        BOOLEnum isFootprintIndexOnEdge(int counter, int size);
 
         void storeMinAndMaxHeightOfArea(uint x, uint y, int buildingWidthAndHeight);
 
         int isBuildingPlacementAllowedAtTile(
             int tile, int playerID, CommandBuildingType commandBuildingType, int param_4);
 
-        void meth_0x4f9df0(int param_1, int param_2, int param_3);
+        void validateBuildingPlacementAtTile(int param_1, int param_2, int param_3);
 
-        void spawnEraserEntityEffectsUnk(undefined4 param_1, int param_2);
+        void spawnEraserTileEffect(undefined4 param_1, int param_2);
 
-        void meth_0x4fa000(int param_1, int param_2);
+        void determineBuildingPlacementRotation(int param_1, int param_2);
 
         void checkDrawbridgePlacement(int x, int y);
 
-        undefined4 meth_0x4fa460(int param_1);
+        undefined4 getRubbleGraphicStageForDamageLevel(int param_1);
 
         undefined4 getBuildingSizeForCommandBuildingType(CommandBuildingType commandBuildingType);
 
-        void meth_0x4fa760(undefined4 param_1, int param_2, int param_3, undefined4 param_4, int param_5);
+        void demolishBuildingsInConstructionFootprint(
+            undefined4 param_1, int param_2, int param_3, undefined4 param_4, int param_5);
 
-        void meth_0x4fa9d0(int param_1, int param_2, int param_3);
+        void markBuildingFootprintFlag(int param_1, int param_2, int param_3);
 
         void updateAreaBasedOnSurrounding(int x, int y, int buildingSize);
 
-        void meth_0x4faab0(int param_1, int param_2);
+        void clearBuildingTilesAndTrees(int param_1, int param_2);
 
-        void meth_0x4fab70(int x, int y, int size);
+        void clearBuildingFootprintAndResetUnits(int x, int y, int size);
 
-        void meth_0x4fac70(int x, int y, int param_3);
+        void clearBuildingFootprintAndRemoveSiegeTower(int x, int y, int param_3);
 
-        void meth_0x4fad20(int param_1, int param_2, int param_3);
+        void unmarkBuildingFootprintFlag(int param_1, int param_2, int param_3);
 
-        void meth_0x4fad70(int x, int y, int param_3);
+        void clearBuildingFootprintWithEdgeRubble(int x, int y, int param_3);
 
-        void meth_0x4fae50(int param_1, int param_2);
+        void clearFixedSizeTwoBuildingFootprint(int param_1, int param_2);
 
-        undefined4 meth_0x4faee0(int param_1);
+        undefined4 isUnitBlockingSizeFiveFootprint(int param_1);
 
-        void meth_0x4faf70(int param_1, int param_2);
+        void clearStockpileFootprintTiles(int param_1, int param_2);
 
         void setMiscDisplayLayer(int buildingID);
 
-        void meth_0x4fb360(int buildingID, int param_2);
+        void clearBuildingDisplayFlagsAndEntities(int buildingID, int param_2);
 
-        void FUN_004fb3f0(int x, int y, int type);
+        void spawnFloatingNumberAroundTile(int x, int y, int type);
 
         void placeRock(uint x, uint y, uint param_3);
 
-        void meth_0x4fb770(int rockID);
+        void applyRockGraphicsToFootprint(int rockID);
 
-        void meth_0x4fb8e0(int param_1);
+        void clearTreeFootprintFlags(int param_1);
 
-        void meth_0x4fb970(int param_1);
+        void clearRockFootprintFlags(int param_1);
 
-        void meth_0x4fb9e0(uint x, uint y, short param_3);
+        void renderWallPlacementPreview(uint x, uint y, short param_3);
 
         undefined4 getCastleBuildRangeForMapSize();
 
         void getTileForBrush(int square, int index, int* tilePointer, int* yPointer, int baseTile, uint y);
 
-        undefined4 meth_0x4fbe70(int param_1, uint param_2, uint param_3);
+        undefined4 isTileSuitableForBrushPlacement(int param_1, uint param_2, uint param_3);
 
-        void meth_0x4fc0b0(int param_1, int param_2, int param_3);
+        void computeTileCliffEdgeFlags(int param_1, int param_2, int param_3);
 
-        void meth_0x4fc280(int param_1, int param_2, int param_3);
+        void propagateCliffEdgeFlagFromNeighbor(int param_1, int param_2, int param_3);
 
-        void meth_0x4fc340();
+        void collectCliffEdgeTilesForClimbData();
 
         void generateDustClouds();
 
-        int meth_0x4fc650(uint param_1);
+        int computeWallCornerRenderRotation(uint param_1);
 
-        BOOLEnum meth_0x4fc7c0(int param_1, undefined4 param_2, int param_3);
+        BOOLEnum isCliffDropInDirection(int param_1, undefined4 param_2, int param_3);
 
-        void meth_0x4fc810(int param_1, uint param_2, uint param_3);
+        void computeClimbRampRotation(int param_1, uint param_2, uint param_3);
 
         void updateGFXLayers();
 
@@ -415,9 +416,9 @@ namespace Map {
 
         void recountTotalOwnedMoats();
 
-        void scanMoatsInGroupsOfThreeUnk();
+        void countMoatsOwnedByEachPlayer();
 
-        int countUnfinishedMoatUnk(int playerID);
+        int countUnfinishedMoatTilesForPlayer(int playerID);
 
         int getUnownedMoatCount();
 
@@ -431,23 +432,23 @@ namespace Map {
 
         int setXYBasedOnMoatID(int tile, int param_2, uint x, uint y);
 
-        undefined4 meth_0x500500(int moatID);
+        undefined4 advanceMoatFillProgress(int moatID);
 
-        void clearMoatIfUnk(int tile);
+        void clearMoatAtTileIfPresent(int tile);
 
-        void moatRelatedUpdateFunction();
+        void updateMoatCountdownTimers();
 
-        void meth_0x500680();
+        void resetMoatArray();
 
-        void meth_0x5006c0();
+        void clearInvalidMoatEntries();
 
-        void meth_0x500720(int param_1, undefined4 param_2);
+        void setMoatVisualStateAtTile(int param_1, undefined4 param_2);
 
-        void meth_0x500750(int param_1, undefined4 param_2);
+        void setMoatOwnerForAllMatching(int param_1, undefined4 param_2);
 
         void swapMoatOwnership(int param_1, int param_2);
 
-        void meth_0x5007d0();
+        void resetPitchDitchArray();
 
         int countPitchDitchesWithPlayerID0();
 
@@ -457,23 +458,23 @@ namespace Map {
 
         void swapPitchOwnership(int param_1, int param_2);
 
-        undefined4 meth_0x500980(uint x1, uint y1, uint x2, uint y2);
+        undefined4 findNearestValidDigTileNearTarget(uint x1, uint y1, uint x2, uint y2);
 
-        int meth_0x500b50(int param_1, int param_2, uint param_3);
+        int computeTileAlongAxisOffset(int param_1, int param_2, uint param_3);
 
-        void campaignRelatedNumber();
+        void setSignpostDistanceForCampaignMission();
 
-        void spreadAlgorithmForFlagsAndBraziers2Unk(int param_1, uint param_2, uint param_3);
+        void spreadFlagPlacementAlgorithm(int param_1, uint param_2, uint param_3);
 
-        void spreadAlgorithmForFlagsAndBraziersUnk(int playerID, uint x, uint y);
+        void spreadBrazierPlacementAlgorithm(int playerID, uint x, uint y);
 
-        void clearAndSetTileMapUnknown2Plus();
+        void forceFullTileMapRedraw();
 
-        void meth_0x5017c0(uint param_1, uint param_2, int param_3);
+        void useEraserBrush(uint param_1, uint param_2, int param_3);
 
         void updateShowHiLayerOrResetChangedLayer();
 
-        void changeMapOrientationUnk(int mapOrientation);
+        void changeMapOrientation(int mapOrientation);
 
         void increaseHeightForTunnelWithBrush(int tile, uint x, uint y, int increment);
 
@@ -481,37 +482,37 @@ namespace Map {
 
         void createPlateau(int tile, uint the_y, int param_3, int plateauHeightSetting);
 
-        void useBrush2(int param_1, uint param_2, uint param_3);
+        void useLevelBrush(int param_1, uint param_2, uint param_3);
 
         void setLand(int tile, uint y, uint brushType_y);
 
-        BOOLEnum meth_0x5024f0(int x, uint y, int cbt);
+        BOOLEnum isValidCastleSiteLocation(int x, uint y, int cbt);
 
-        void useBrush3(int param_1, uint param_2, uint param_3, undefined4 param_4);
+        void useTerrainHeightBrush(int param_1, uint param_2, uint param_3, undefined4 param_4);
 
-        byte meth_0x502950(int param_1, uint param_2);
+        byte getMaxWallHeightInBrushArea(int param_1, uint param_2);
 
-        void checkWhetherThisWallBuildIsAllowed(int playerID, uint x1, uint y1, uint x2, uint y2, undefined4 command);
+        void validateWallBuildPath(int playerID, uint x1, uint y1, uint x2, uint y2, undefined4 command);
 
         void placeWalls(
             int playerID, uint x1, uint y1, uint x2, uint y2, CommandBuildingType wallType, int tileCountUnk);
 
-        void placeDefensiveStructurePart2Unk(int param_1, uint x, uint y, CommandBuildingType param_4);
+        void placeDefensiveStructureTile(int param_1, uint x, uint y, CommandBuildingType param_4);
 
         void setupBuildingSizeIndexMapping();
 
         void checkBuildingCanBePlacedHere(
             int playerID, uint x, uint y__fertileLandCount, CommandBuildingType commandBuildingType, int buildingSize);
 
-        void meth_0x504a30(int playerID, uint x, uint y);
+        void evaluateBuildingPlacementAtCursor(int playerID, uint x, uint y);
 
-        void meth_0x504ee0(int param_1, int param_2);
+        void updateBuildingPlacementRotationPreview(int param_1, int param_2);
 
         int setConstructionGFXLayerBasedOnPlacementChecks(int x, int y, CommandBuildingType type, int size);
 
         void updateBuildingGraphicsLayer(int buildingID);
 
-        void someUpdatePathLinkageRelatedCall(int buildingID);
+        void updatePathLinkagesForBuilding(int buildingID);
 
         void placeWorkshopOrHovel(
             int playerID, uint x, uint y, BuildingType type, uint size, int orientation, undefined4 averageHeight);
@@ -519,13 +520,13 @@ namespace Map {
         void placeSiegetowerPlaced(
             int param_1, uint param_2, uint param_3, undefined4 param_4, uint param_5, int param_6, undefined4 param_7);
 
-        void placeSiegeTentUnk(
+        void placeSiegeTent(
             int param_1, uint param_2, uint param_3, undefined4 param_4, uint param_5, int param_6, undefined4 param_7);
 
         void placePositiveFearfactor(int playerID, uint x, uint y, undefined4 buildingType, undefined4 variation,
             uint buildingSize, undefined4 param_7, undefined4 height);
 
-        void meth_0x507060(int param_1, uint param_2, uint param_3, undefined4 param_4, undefined4 param_5,
+        void stampBuildingOntoTileMap(int param_1, uint param_2, uint param_3, undefined4 param_4, undefined4 param_5,
             uint param_6, undefined4 param_7, undefined4 param_8);
 
         void placeTower(
@@ -533,7 +534,7 @@ namespace Map {
 
         void upgradeTowerLogicLayer(int param_1);
 
-        void meth_0x507350(int tile);
+        void resetTileAndClearMoat(int tile);
 
         void placeGatehouseSmall(
             int param_1, uint param_2, uint param_3, undefined4 param_4, uint param_5, int param_6, undefined4 param_7);
@@ -559,17 +560,17 @@ namespace Map {
         void placeStockpile(
             int playerID, int x, int y, undefined4 buildingType, undefined4 param_5, int variation, int averageHeight);
 
-        void meth_0x508760(int param_1, int param_2);
+        void clearSizeFiveBuildingFootprintAndMoats(int param_1, int param_2);
 
-        void meth_0x508870(int param_1, int param_2);
+        void clearSizeFiveBuildingFootprint(int param_1, int param_2);
 
-        void meth_0x508910(int param_1);
+        void floodMoatUnderRemovedBuilding(int param_1);
 
         void renderPreviewMapperWithBrush(uint x, uint y, CommandBuildingType param_3);
 
         void applyTreeToLogicalLayer(int treeID, int param_2);
 
-        void meth_0x508ec0(uint param_1, uint param_2, uint param_3);
+        void eraseAreaWithBrush(uint param_1, uint param_2, uint param_3);
 
         void updateTextureTilemap();
 
@@ -626,7 +627,7 @@ namespace Map {
 
         void clearBuildingFromTerrain(int buildingID);
 
-        void createMoatSize5Unk(int param_1);
+        void createMoatForSizeFiveBuilding(int param_1);
 
         void placeTree(uint x, uint y, undefined4 treeType);
 

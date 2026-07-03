@@ -8,20 +8,20 @@ namespace Map {
     namespace WallAndPitchState_Func {
 
         MACRO_FUNCTION_RESOLVER(void (WallAndPitchState::*)(int), false, Address::SHC_3BB0A8C1_0x00500C20,
-            &WallAndPitchState::meth_0x500c20)
-        meth_0x500c20;
+            &WallAndPitchState::startBuildingDestructionConfirmation)
+        startBuildingDestructionConfirmation;
 
         MACRO_FUNCTION_RESOLVER(void (WallAndPitchState::*)(), false, Address::SHC_3BB0A8C1_0x00500C80,
             &WallAndPitchState::resetWallAndPitchState)
         resetWallAndPitchState;
 
         MACRO_FUNCTION_RESOLVER(void (WallAndPitchState::*)(int), false, Address::SHC_3BB0A8C1_0x00500CB0,
-            &WallAndPitchState::meth_0x500cb0)
-        meth_0x500cb0;
+            &WallAndPitchState::startEntityDestructionConfirmation)
+        startEntityDestructionConfirmation;
 
         MACRO_FUNCTION_RESOLVER(void (WallAndPitchState::*)(int), false, Address::SHC_3BB0A8C1_0x00500CF0,
-            &WallAndPitchState::meth_0x500cf0)
-        meth_0x500cf0;
+            &WallAndPitchState::startUnitDestructionConfirmation)
+        startUnitDestructionConfirmation;
 
         MACRO_FUNCTION_RESOLVER(void (WallAndPitchState::*)(), false, Address::SHC_3BB0A8C1_0x00500D30,
             &WallAndPitchState::resetWallPlacementInfo)
@@ -43,13 +43,13 @@ namespace Map {
             &WallAndPitchState::destroyPitch)
         destroyPitch;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (WallAndPitchState::*)(), false, Address::SHC_3BB0A8C1_0x00500F40, &WallAndPitchState::meth_0x500f40)
-        meth_0x500f40;
+        MACRO_FUNCTION_RESOLVER(void (WallAndPitchState::*)(), false, Address::SHC_3BB0A8C1_0x00500F40,
+            &WallAndPitchState::updateDestructionConfirmationCountdown)
+        updateDestructionConfirmationCountdown;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (WallAndPitchState::*)(), false, Address::SHC_3BB0A8C1_0x005118C0, &WallAndPitchState::meth_0x5118c0)
-        meth_0x5118c0;
+        MACRO_FUNCTION_RESOLVER(void (WallAndPitchState::*)(), false, Address::SHC_3BB0A8C1_0x005118C0,
+            &WallAndPitchState::confirmAndQueueDestructionCommand)
+        confirmAndQueueDestructionCommand;
 
     } // namespace WallAndPitchState_Func
 } // namespace Map

@@ -217,11 +217,11 @@ namespace Map {
 
             dword pathfindingRelated49ff20(uint x, uint y, int playerID, uint distanceUnk, int param_5);
 
-            dword meth_0x4a01d0(uint param_1, uint param_2, int param_3, uint param_4);
+            dword findBestAttackTileByPathCost(uint param_1, uint param_2, int param_3, uint param_4);
 
-            int meth_0x4a0460(int param_1, int param_2, int param_3, int param_4);
+            int findNearestEnemyBuildingWithinDistance(int param_1, int param_2, int param_3, int param_4);
 
-            int meth_0x4a06b0(int param_1, int param_2, int param_3, int param_4);
+            int findNearestEnemyUnitWithinDistance(int param_1, int param_2, int param_3, int param_4);
 
             int getGatehouseNearSomethingUnk(int param_1, int param_2, int param_3, int maxDistance);
 
@@ -251,7 +251,7 @@ namespace Map {
 
             BOOLEnum findAccessibleWallAndNearbyFreeTile(uint unitID, int tile, int* pFreeTile, int* pDefensesTile);
 
-            undefined4 meth_0x4a36b0(int param_1, int param_2, int param_3, int param_4);
+            undefined4 healUnitsOfPlayerWithinRadius(int param_1, int param_2, int param_3, int param_4);
 
             undefined4 certainDamageToUnitsUnk(int param_1, int param_2, int param_3, int param_4, undefined4 param_5);
 
@@ -268,25 +268,26 @@ namespace Map {
 
             void reprocessLadddermanWallData(int laddermanWalledDataID);
 
-            undefined4 meth_0x4a4c70(int param_1, int param_2);
+            undefined4 registerUnitOnClimbData(int param_1, int param_2);
 
-            void meth_0x4a52d0();
+            void clearActiveClimbDataOfType6And7();
 
             int calculateCanPlayerUnitsNavigateToAreaFromArea(
                 int playerID, dword fromArea, dword toArea, int permitClimb);
 
-            dword meth_0x4a58a0(int param_1, dword param_2, dword param_3);
+            dword findConnectingAreaBetweenTwoAreas(int param_1, dword param_2, dword param_3);
 
             BOOLEnum calculateCanReachUsingCachedAreaLogic(int tile1, int tile2);
 
-            undefined4 meth_0x4a5da0(int param_1, uint param_2, uint param_3, uint param_4, uint param_5);
+            undefined4 findBestAdjacentClimbTileToTarget(
+                int param_1, uint param_2, uint param_3, uint param_4, uint param_5);
 
             void updatePathLinkageLayerForEachBuildingAtEachTile();
 
             void updatePathLinkagesInAllEightDirections(int y, int tile);
 
-            void meth_0x4a6010(int param_1, uint param_2, uint param_3, int param_4, int param_5, int param_6,
-                int param_7, int param_8, int param_9);
+            void findBestAttackTargetTileWithHeightAndOwner(int param_1, uint param_2, uint param_3, int param_4,
+                int param_5, int param_6, int param_7, int param_8, int param_9);
 
             void storeDestinationOptionsUnk(int signpostID);
 
@@ -299,7 +300,7 @@ namespace Map {
 
             void computeAttackVectorsBasedOnXAndY(int playerID);
 
-            undefined4 meth_0x4a6ab0(int param_1, uint param_2, uint param_3);
+            undefined4 findCrossAreaBridgeTileToTarget(int param_1, uint param_2, uint param_3);
 
             int canNavigateFunctionReturnsArea(int playerID, dword targetArea, uint unitX, uint unitY);
 

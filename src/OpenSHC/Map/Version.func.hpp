@@ -101,17 +101,17 @@ namespace Map {
             &OpenSHC::Map::Version::UpdateDestroyedBuildingCountData)
         UpdateDestroyedBuildingCountData;
 
-        MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0045ACC0, &OpenSHC::Map::Version::FUN_0045acc0)
-        FUN_0045acc0;
+        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0045ACC0,
+            &OpenSHC::Map::Version::validateLadyAndJesterUnitRefs)
+        validateLadyAndJesterUnitRefs;
+
+        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0045AD10,
+            &OpenSHC::Map::Version::initPopularityAndRecruitableDefaults)
+        initPopularityAndRecruitableDefaults;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0045AD10, &OpenSHC::Map::Version::FUN_0045ad10)
-        FUN_0045ad10;
-
-        MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0045AE00, &OpenSHC::Map::Version::FUN_0045ae00)
-        FUN_0045ae00;
+            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0045AE00, &OpenSHC::Map::Version::resetTeams)
+        resetTeams;
 
         MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004F38A0,
             &OpenSHC::Map::Version::UpdateTreesOfCertainTypes)

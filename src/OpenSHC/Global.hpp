@@ -315,7 +315,7 @@ namespace Global {
 
     HRESULT __stdcall EnumDisplayModesCallback(DDSURFACEDESC* displayDesc, LPVOID userParam);
 
-    void __stdcall FUN_Useless();
+    void __stdcall DoNothing();
 
     byte __stdcall RotateByteLeft(byte value, int bits);
 
@@ -386,9 +386,9 @@ namespace Global {
 
     void __cdecl SumUnitPoints();
 
-    void __cdecl FUN_004bc690(int param_1, BuildingType buildingType);
+    void __cdecl SetTutorialBuildingActionState(int param_1, BuildingType buildingType);
 
-    void __stdcall FUN_004bc770();
+    void __stdcall SetTutorialHintActiveWithTimestamp();
 
     void __cdecl SetupSkirmishMode(int skirmishTrailMission);
 
@@ -499,11 +499,11 @@ namespace Global {
 
     undefined4 __cdecl SetStateToFreetimeWalking(int unitID, int shouldFindNewGoodThing, int param_3);
 
-    bool __cdecl FUN_00530d50(int param_1);
+    bool __cdecl CheckUnitProductionPaused(int param_1);
 
     int __cdecl ComputeGoodsProduced(int unitID, int goodsCount, BOOLEnum boost);
 
-    BuildingTypeShort* __stdcall FUN_00530e00();
+    BuildingTypeShort* __stdcall WarnIfPlayerLacksGranary();
 
     uint __stdcall TryPlayStockpileIsFullNoiseUnk();
 

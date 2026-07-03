@@ -73,16 +73,16 @@ namespace Game {
         calculateAttackVectorsToCampFireOfPlayer;
 
         MACRO_FUNCTION_RESOLVER(int (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x004568F0,
-            &GameStateStructures::meth_0x4568f0)
-        meth_0x4568f0;
+            &GameStateStructures::countActiveSignposts)
+        countActiveSignposts;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x004569E0,
-            &GameStateStructures::meth_0x4569e0)
-        meth_0x4569e0;
+            &GameStateStructures::hasAnySignpost)
+        hasAnySignpost;
 
         MACRO_FUNCTION_RESOLVER(int (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x00456AD0,
-            &GameStateStructures::meth_0x456ad0)
-        meth_0x456ad0;
+            &GameStateStructures::pickRandomAccessibleSignpostEntry)
+        pickRandomAccessibleSignpostEntry;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x00456C50,
             &GameStateStructures::clearDataAndSignpostDataIfNecessary)
@@ -93,12 +93,12 @@ namespace Game {
         addSignpostToBuildingEntryData;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(uint, int, int), false, Address::SHC_3BB0A8C1_0x00456FD0,
-            &GameStateStructures::meth_0x456fd0)
-        meth_0x456fd0;
+            &GameStateStructures::computeBuildingCategoryEntryPoint)
+        computeBuildingCategoryEntryPoint;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(int, int), false, Address::SHC_3BB0A8C1_0x004572A0,
-            &GameStateStructures::meth_0x4572a0)
-        meth_0x4572a0;
+            &GameStateStructures::validateBuildingCategoryReference)
+        validateBuildingCategoryReference;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (GameStateStructures::*)(int), false, Address::SHC_3BB0A8C1_0x004574C0,
             &GameStateStructures::checkKeepEnclosed)
@@ -117,12 +117,12 @@ namespace Game {
         unitsCanMoveFromKeepOfPlayerToAnotherArea;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (GameStateStructures::*)(int, int, int), false,
-            Address::SHC_3BB0A8C1_0x00457870, &GameStateStructures::meth_0x457870)
-        meth_0x457870;
+            Address::SHC_3BB0A8C1_0x00457870, &GameStateStructures::canKeepReachSignpostZone)
+        canKeepReachSignpostZone;
 
         MACRO_FUNCTION_RESOLVER(bool (GameStateStructures::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004578F0,
-            &GameStateStructures::meth_0x4578f0)
-        meth_0x4578f0;
+            &GameStateStructures::canKeepReachSignpostZoneViaPathfinder)
+        canKeepReachSignpostZoneViaPathfinder;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(uint), false, Address::SHC_3BB0A8C1_0x00457960,
             &GameStateStructures::updatePrimaryBuildingPlayerDataReferences)
@@ -177,16 +177,16 @@ namespace Game {
         moveUnitAroundCampfire;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x004586D0,
-            &GameStateStructures::meth_0x4586d0)
-        meth_0x4586d0;
+            &GameStateStructures::activateTraderState)
+        activateTraderState;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x004586F0,
-            &GameStateStructures::meth_0x4586f0)
-        meth_0x4586f0;
+            &GameStateStructures::resetTraderState)
+        resetTraderState;
 
         MACRO_FUNCTION_RESOLVER(int (GameStateStructures::*)(int), false, Address::SHC_3BB0A8C1_0x00458700,
-            &GameStateStructures::meth_0x458700)
-        meth_0x458700;
+            &GameStateStructures::findNextPlayerWithMarketplace)
+        findNextPlayerWithMarketplace;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (GameStateStructures::*)(ResourceType), false,
             Address::SHC_3BB0A8C1_0x00458740, &GameStateStructures::isResourceTypeTradeable)
@@ -213,8 +213,8 @@ namespace Game {
         getBuyPrice;
 
         MACRO_FUNCTION_RESOLVER(int (GameStateStructures::*)(int), false, Address::SHC_3BB0A8C1_0x004588D0,
-            &GameStateStructures::meth_0x4588d0)
-        meth_0x4588d0;
+            &GameStateStructures::getBuyPriceForOneUnit)
+        getBuyPriceForOneUnit;
 
         MACRO_FUNCTION_RESOLVER(int (GameStateStructures::*)(ResourceType), false, Address::SHC_3BB0A8C1_0x004588F0,
             &GameStateStructures::getSalePriceOfGood)
@@ -309,8 +309,8 @@ namespace Game {
         TeamToBitFlagsUnk;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x004597D0,
-            &GameStateStructures::meth_0x4597d0)
-        meth_0x4597d0;
+            &GameStateStructures::areActivePlayersMostlySameTeam)
+        areActivePlayersMostlySameTeam;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x004598B0,
             &GameStateStructures::recountStablesAndHorses)
@@ -341,8 +341,8 @@ namespace Game {
         assignSelectionToKey;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x00459D80,
-            &GameStateStructures::FUN_00459d80)
-        FUN_00459d80;
+            &GameStateStructures::computeArmySizeLimit)
+        computeArmySizeLimit;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x00459E40,
             &GameStateStructures::HandleActivateTacticalPowers)
@@ -377,8 +377,8 @@ namespace Game {
         clearEnemyRelatedStructures;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x0045B3E0,
-            &GameStateStructures::meth_0x45b3e0)
-        meth_0x45b3e0;
+            &GameStateStructures::initializeGameStateAfterMapLoad)
+        initializeGameStateAfterMapLoad;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(int), false, Address::SHC_3BB0A8C1_0x0045B460,
             &GameStateStructures::switchPlayerOwnership)
@@ -405,8 +405,8 @@ namespace Game {
         spawnPoisonCloudsAtRandomStorageOrArmyBuilding;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(PackagedFileMagicNum, PackagedFileMagicNum), false,
-            Address::SHC_3BB0A8C1_0x0045C1C0, &GameStateStructures::meth_0x45c1c0)
-        meth_0x45c1c0;
+            Address::SHC_3BB0A8C1_0x0045C1C0, &GameStateStructures::migrateGameStateForMapVersion)
+        migrateGameStateForMapVersion;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x0045CA20,
             &GameStateStructures::processSingleTimeTick)

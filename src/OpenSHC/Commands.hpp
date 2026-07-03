@@ -111,9 +111,9 @@ namespace Commands {
 
     void __stdcall ClickExtendRallyPoint();
 
-    void __stdcall FUN_00484960();
+    void __stdcall SiegeEngineRelated();
 
-    void __stdcall FUN_00484a00();
+    void __stdcall TribeRelated1();
 
     void __stdcall ReleaseDogs();
 
@@ -123,7 +123,7 @@ namespace Commands {
 
     void __stdcall DeselectUnit();
 
-    void __stdcall FUN_00484e10();
+    void __stdcall SetField45To100();
 
     void __stdcall ResyncZone();
 
@@ -135,7 +135,7 @@ namespace Commands {
 
     void __stdcall VoteKick_K_D_B_G_J();
 
-    void __stdcall FUN_00485210();
+    void __stdcall SyncPacketSizeAnnouncement();
 
     void __stdcall ShareAnnouncementWithHost();
 
@@ -145,7 +145,7 @@ namespace Commands {
 
     void __stdcall FlagsAndBraziersCommandUnk();
 
-    void __stdcall FUN_004855c0();
+    void __stdcall NotifyLaggingPlayer();
 
     void __stdcall SomeKindOfMultiplayerPingUnk();
 

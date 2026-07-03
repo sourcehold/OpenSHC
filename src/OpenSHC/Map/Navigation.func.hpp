@@ -14,8 +14,8 @@ namespace Map {
     namespace Navigation_Func {
 
         MACRO_FUNCTION_RESOLVER(int(__cdecl*)(int param_1, int param_2, int param_3, int param_4), false,
-            Address::SHC_3BB0A8C1_0x0049B8C0, &OpenSHC::Map::Navigation::FUN_0049b8c0)
-        FUN_0049b8c0;
+            Address::SHC_3BB0A8C1_0x0049B8C0, &OpenSHC::Map::Navigation::calcApproxEuclideanDistance)
+        calcApproxEuclideanDistance;
 
     } // namespace Navigation_Func
 } // namespace Map

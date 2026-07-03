@@ -68,13 +68,13 @@ namespace Map {
             &TileMapState::updateLogicalTileMapRelatedSections)
         updateLogicalTileMapRelatedSections;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x004F79D0, &TileMapState::meth_004f79d0)
-        meth_004f79d0;
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x004F79D0,
+            &TileMapState::rebuildShowHiLayerFromHeights)
+        rebuildShowHiLayerFromHeights;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004F7A80, &TileMapState::meth_0x4f7a80)
-        meth_0x4f7a80;
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004F7A80,
+            &TileMapState::computeTileLuminescence)
+        computeTileLuminescence;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, int), false, Address::SHC_3BB0A8C1_0x004F80E0,
             &TileMapState::increaseHeightForTunnelSingleTile)
@@ -85,8 +85,8 @@ namespace Map {
         getNonFarmFieldBuildingHealthAtTileOr1000;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint), false, Address::SHC_3BB0A8C1_0x004F81D0,
-            &TileMapState::meth_0x4f81d0)
-        meth_0x4f81d0;
+            &TileMapState::resetTileToDefaultState)
+        resetTileToDefaultState;
 
         MACRO_FUNCTION_RESOLVER(
             uint (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004F8210, &TileMapState::getBuildingHurtSFXID)
@@ -101,52 +101,52 @@ namespace Map {
         countPropertyInSurroundingTiles;
 
         MACRO_FUNCTION_RESOLVER(undefined4 (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004F85B0,
-            &TileMapState::meth_0x4f85b0)
-        meth_0x4f85b0;
+            &TileMapState::isTileEnclosedByWallsOrGates)
+        isTileEnclosedByWallsOrGates;
 
         MACRO_FUNCTION_RESOLVER(undefined4 (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004F8640,
-            &TileMapState::meth_0x4f8640)
-        meth_0x4f8640;
+            &TileMapState::isTileEnclosedByWalls)
+        isTileEnclosedByWalls;
 
         MACRO_FUNCTION_RESOLVER(uint (TileMapState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004F86D0,
-            &TileMapState::meth_0x4f86d0)
-        meth_0x4f86d0;
+            &TileMapState::isWallCornerForCardinalDirection)
+        isWallCornerForCardinalDirection;
 
         MACRO_FUNCTION_RESOLVER(uint (TileMapState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004F8780,
-            &TileMapState::meth_0x4f8780)
-        meth_0x4f8780;
+            &TileMapState::isWallCornerForDiagonalDirection)
+        isWallCornerForDiagonalDirection;
 
         MACRO_FUNCTION_RESOLVER(undefined4 (TileMapState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004F8840,
-            &TileMapState::meth_0x4f8840)
-        meth_0x4f8840;
+            &TileMapState::isWallConnectionHeightValid)
+        isWallConnectionHeightValid;
 
         MACRO_FUNCTION_RESOLVER(undefined4 (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004F8900,
-            &TileMapState::meth_0x4f8900)
-        meth_0x4f8900;
+            &TileMapState::hasOnlyTowerNeighborsNoWalls)
+        hasOnlyTowerNeighborsNoWalls;
 
         MACRO_FUNCTION_RESOLVER(uint (TileMapState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004F89C0,
-            &TileMapState::meth_0x4f89c0)
-        meth_0x4f89c0;
+            &TileMapState::getWallFlagForOrientedDirection)
+        getWallFlagForOrientedDirection;
 
         MACRO_FUNCTION_RESOLVER(uint (TileMapState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004F8A40,
-            &TileMapState::meth_0x4f8a40)
-        meth_0x4f8a40;
+            &TileMapState::hasHigherNeighborWithFlagBit11)
+        hasHigherNeighborWithFlagBit11;
 
         MACRO_FUNCTION_RESOLVER(uint (TileMapState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004F8AC0,
-            &TileMapState::meth_0x4f8ac0)
-        meth_0x4f8ac0;
+            &TileMapState::hasHigherPlainNeighborWithFlagBit8)
+        hasHigherPlainNeighborWithFlagBit8;
 
         MACRO_FUNCTION_RESOLVER(int (TileMapState::*)(uint, uint), false, Address::SHC_3BB0A8C1_0x004F8B50,
             &TileMapState::getOrientationThatIsWallTowerOrGatehouse)
         getOrientationThatIsWallTowerOrGatehouse;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, uint, uint, undefined4), false,
-            Address::SHC_3BB0A8C1_0x004F8BD0, &TileMapState::previewWallDrawingUnk)
-        previewWallDrawingUnk;
+            Address::SHC_3BB0A8C1_0x004F8BD0, &TileMapState::renderWallDragPreview)
+        renderWallDragPreview;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004F9000, &TileMapState::meth_0x4f9000)
-        meth_0x4f9000;
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004F9000,
+            &TileMapState::reassignWallOwnershipForPlayer)
+        reassignWallOwnershipForPlayer;
 
         MACRO_FUNCTION_RESOLVER(
             void (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004F9220, &TileMapState::swapWallOwnership)
@@ -157,8 +157,8 @@ namespace Map {
         destroyWallsOfPlayer;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, CommandBuildingType), false,
-            Address::SHC_3BB0A8C1_0x004F94A0, &TileMapState::isWallUnkPlacementAllowed)
-        isWallUnkPlacementAllowed;
+            Address::SHC_3BB0A8C1_0x004F94A0, &TileMapState::validateWallPlacementAtTile)
+        validateWallPlacementAtTile;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004F9590,
             &TileMapState::setupBuildingSizeIndexMappingForBuildingWithSize)
@@ -169,8 +169,8 @@ namespace Map {
         getBuildingSizeIndexMappingData;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004F9930,
-            &TileMapState::indexIsEdgeUnk)
-        indexIsEdgeUnk;
+            &TileMapState::isFootprintIndexOnEdge)
+        isFootprintIndexOnEdge;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(uint, uint, int), false, Address::SHC_3BB0A8C1_0x004F9980,
             &TileMapState::storeMinAndMaxHeightOfArea)
@@ -181,104 +181,104 @@ namespace Map {
         isBuildingPlacementAllowedAtTile;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004F9DF0,
-            &TileMapState::meth_0x4f9df0)
-        meth_0x4f9df0;
+            &TileMapState::validateBuildingPlacementAtTile)
+        validateBuildingPlacementAtTile;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(undefined4, int), false, Address::SHC_3BB0A8C1_0x004F9F00,
-            &TileMapState::spawnEraserEntityEffectsUnk)
-        spawnEraserEntityEffectsUnk;
+            &TileMapState::spawnEraserTileEffect)
+        spawnEraserTileEffect;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004FA000, &TileMapState::meth_0x4fa000)
-        meth_0x4fa000;
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004FA000,
+            &TileMapState::determineBuildingPlacementRotation)
+        determineBuildingPlacementRotation;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004FA2D0,
             &TileMapState::checkDrawbridgePlacement)
         checkDrawbridgePlacement;
 
-        MACRO_FUNCTION_RESOLVER(
-            undefined4 (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004FA460, &TileMapState::meth_0x4fa460)
-        meth_0x4fa460;
+        MACRO_FUNCTION_RESOLVER(undefined4 (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004FA460,
+            &TileMapState::getRubbleGraphicStageForDamageLevel)
+        getRubbleGraphicStageForDamageLevel;
 
         MACRO_FUNCTION_RESOLVER(undefined4 (TileMapState::*)(CommandBuildingType), false,
             Address::SHC_3BB0A8C1_0x004FA550, &TileMapState::getBuildingSizeForCommandBuildingType)
         getBuildingSizeForCommandBuildingType;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(undefined4, int, int, undefined4, int), false,
-            Address::SHC_3BB0A8C1_0x004FA760, &TileMapState::meth_0x4fa760)
-        meth_0x4fa760;
+            Address::SHC_3BB0A8C1_0x004FA760, &TileMapState::demolishBuildingsInConstructionFootprint)
+        demolishBuildingsInConstructionFootprint;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004FA9D0,
-            &TileMapState::meth_0x4fa9d0)
-        meth_0x4fa9d0;
+            &TileMapState::markBuildingFootprintFlag)
+        markBuildingFootprintFlag;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004FAA30,
             &TileMapState::updateAreaBasedOnSurrounding)
         updateAreaBasedOnSurrounding;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004FAAB0, &TileMapState::meth_0x4faab0)
-        meth_0x4faab0;
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004FAAB0,
+            &TileMapState::clearBuildingTilesAndTrees)
+        clearBuildingTilesAndTrees;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004FAB70,
-            &TileMapState::meth_0x4fab70)
-        meth_0x4fab70;
+            &TileMapState::clearBuildingFootprintAndResetUnits)
+        clearBuildingFootprintAndResetUnits;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004FAC70,
-            &TileMapState::meth_0x4fac70)
-        meth_0x4fac70;
+            &TileMapState::clearBuildingFootprintAndRemoveSiegeTower)
+        clearBuildingFootprintAndRemoveSiegeTower;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004FAD20,
-            &TileMapState::meth_0x4fad20)
-        meth_0x4fad20;
+            &TileMapState::unmarkBuildingFootprintFlag)
+        unmarkBuildingFootprintFlag;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004FAD70,
-            &TileMapState::meth_0x4fad70)
-        meth_0x4fad70;
+            &TileMapState::clearBuildingFootprintWithEdgeRubble)
+        clearBuildingFootprintWithEdgeRubble;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004FAE50, &TileMapState::meth_0x4fae50)
-        meth_0x4fae50;
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004FAE50,
+            &TileMapState::clearFixedSizeTwoBuildingFootprint)
+        clearFixedSizeTwoBuildingFootprint;
 
-        MACRO_FUNCTION_RESOLVER(
-            undefined4 (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004FAEE0, &TileMapState::meth_0x4faee0)
-        meth_0x4faee0;
+        MACRO_FUNCTION_RESOLVER(undefined4 (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004FAEE0,
+            &TileMapState::isUnitBlockingSizeFiveFootprint)
+        isUnitBlockingSizeFiveFootprint;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004FAF70, &TileMapState::meth_0x4faf70)
-        meth_0x4faf70;
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004FAF70,
+            &TileMapState::clearStockpileFootprintTiles)
+        clearStockpileFootprintTiles;
 
         MACRO_FUNCTION_RESOLVER(
             void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004FB0C0, &TileMapState::setMiscDisplayLayer)
         setMiscDisplayLayer;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004FB360, &TileMapState::meth_0x4fb360)
-        meth_0x4fb360;
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004FB360,
+            &TileMapState::clearBuildingDisplayFlagsAndEntities)
+        clearBuildingDisplayFlagsAndEntities;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (TileMapState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004FB3F0, &TileMapState::FUN_004fb3f0)
-        FUN_004fb3f0;
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004FB3F0,
+            &TileMapState::spawnFloatingNumberAroundTile)
+        spawnFloatingNumberAroundTile;
 
         MACRO_FUNCTION_RESOLVER(
             void (TileMapState::*)(uint, uint, uint), false, Address::SHC_3BB0A8C1_0x004FB4D0, &TileMapState::placeRock)
         placeRock;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004FB770, &TileMapState::meth_0x4fb770)
-        meth_0x4fb770;
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004FB770,
+            &TileMapState::applyRockGraphicsToFootprint)
+        applyRockGraphicsToFootprint;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004FB8E0, &TileMapState::meth_0x4fb8e0)
-        meth_0x4fb8e0;
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004FB8E0,
+            &TileMapState::clearTreeFootprintFlags)
+        clearTreeFootprintFlags;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004FB970, &TileMapState::meth_0x4fb970)
-        meth_0x4fb970;
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004FB970,
+            &TileMapState::clearRockFootprintFlags)
+        clearRockFootprintFlags;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(uint, uint, short), false, Address::SHC_3BB0A8C1_0x004FB9E0,
-            &TileMapState::meth_0x4fb9e0)
-        meth_0x4fb9e0;
+            &TileMapState::renderWallPlacementPreview)
+        renderWallPlacementPreview;
 
         MACRO_FUNCTION_RESOLVER(undefined4 (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x004FBC30,
             &TileMapState::getCastleBuildRangeForMapSize)
@@ -289,36 +289,36 @@ namespace Map {
         getTileForBrush;
 
         MACRO_FUNCTION_RESOLVER(undefined4 (TileMapState::*)(int, uint, uint), false, Address::SHC_3BB0A8C1_0x004FBE70,
-            &TileMapState::meth_0x4fbe70)
-        meth_0x4fbe70;
+            &TileMapState::isTileSuitableForBrushPlacement)
+        isTileSuitableForBrushPlacement;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004FC0B0,
-            &TileMapState::meth_0x4fc0b0)
-        meth_0x4fc0b0;
+            &TileMapState::computeTileCliffEdgeFlags)
+        computeTileCliffEdgeFlags;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004FC280,
-            &TileMapState::meth_0x4fc280)
-        meth_0x4fc280;
+            &TileMapState::propagateCliffEdgeFlagFromNeighbor)
+        propagateCliffEdgeFlagFromNeighbor;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x004FC340, &TileMapState::meth_0x4fc340)
-        meth_0x4fc340;
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x004FC340,
+            &TileMapState::collectCliffEdgeTilesForClimbData)
+        collectCliffEdgeTilesForClimbData;
 
         MACRO_FUNCTION_RESOLVER(
             void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x004FC490, &TileMapState::generateDustClouds)
         generateDustClouds;
 
-        MACRO_FUNCTION_RESOLVER(
-            int (TileMapState::*)(uint), false, Address::SHC_3BB0A8C1_0x004FC650, &TileMapState::meth_0x4fc650)
-        meth_0x4fc650;
+        MACRO_FUNCTION_RESOLVER(int (TileMapState::*)(uint), false, Address::SHC_3BB0A8C1_0x004FC650,
+            &TileMapState::computeWallCornerRenderRotation)
+        computeWallCornerRenderRotation;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (TileMapState::*)(int, undefined4, int), false,
-            Address::SHC_3BB0A8C1_0x004FC7C0, &TileMapState::meth_0x4fc7c0)
-        meth_0x4fc7c0;
+            Address::SHC_3BB0A8C1_0x004FC7C0, &TileMapState::isCliffDropInDirection)
+        isCliffDropInDirection;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint), false, Address::SHC_3BB0A8C1_0x004FC810,
-            &TileMapState::meth_0x4fc810)
-        meth_0x4fc810;
+            &TileMapState::computeClimbRampRotation)
+        computeClimbRampRotation;
 
         MACRO_FUNCTION_RESOLVER(
             void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x004FC9E0, &TileMapState::updateGFXLayers)
@@ -357,12 +357,12 @@ namespace Map {
         recountTotalOwnedMoats;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x005000E0,
-            &TileMapState::scanMoatsInGroupsOfThreeUnk)
-        scanMoatsInGroupsOfThreeUnk;
+            &TileMapState::countMoatsOwnedByEachPlayer)
+        countMoatsOwnedByEachPlayer;
 
-        MACRO_FUNCTION_RESOLVER(
-            int (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x00500180, &TileMapState::countUnfinishedMoatUnk)
-        countUnfinishedMoatUnk;
+        MACRO_FUNCTION_RESOLVER(int (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x00500180,
+            &TileMapState::countUnfinishedMoatTilesForPlayer)
+        countUnfinishedMoatTilesForPlayer;
 
         MACRO_FUNCTION_RESOLVER(
             int (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x00500210, &TileMapState::getUnownedMoatCount)
@@ -388,41 +388,41 @@ namespace Map {
             &TileMapState::setXYBasedOnMoatID)
         setXYBasedOnMoatID;
 
-        MACRO_FUNCTION_RESOLVER(
-            undefined4 (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x00500500, &TileMapState::meth_0x500500)
-        meth_0x500500;
+        MACRO_FUNCTION_RESOLVER(undefined4 (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x00500500,
+            &TileMapState::advanceMoatFillProgress)
+        advanceMoatFillProgress;
+
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x005005F0,
+            &TileMapState::clearMoatAtTileIfPresent)
+        clearMoatAtTileIfPresent;
 
         MACRO_FUNCTION_RESOLVER(
-            void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x005005F0, &TileMapState::clearMoatIfUnk)
-        clearMoatIfUnk;
+            void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x00500640, &TileMapState::updateMoatCountdownTimers)
+        updateMoatCountdownTimers;
 
         MACRO_FUNCTION_RESOLVER(
-            void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x00500640, &TileMapState::moatRelatedUpdateFunction)
-        moatRelatedUpdateFunction;
+            void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x00500680, &TileMapState::resetMoatArray)
+        resetMoatArray;
 
         MACRO_FUNCTION_RESOLVER(
-            void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x00500680, &TileMapState::meth_0x500680)
-        meth_0x500680;
-
-        MACRO_FUNCTION_RESOLVER(
-            void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x005006C0, &TileMapState::meth_0x5006c0)
-        meth_0x5006c0;
+            void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x005006C0, &TileMapState::clearInvalidMoatEntries)
+        clearInvalidMoatEntries;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, undefined4), false, Address::SHC_3BB0A8C1_0x00500720,
-            &TileMapState::meth_0x500720)
-        meth_0x500720;
+            &TileMapState::setMoatVisualStateAtTile)
+        setMoatVisualStateAtTile;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, undefined4), false, Address::SHC_3BB0A8C1_0x00500750,
-            &TileMapState::meth_0x500750)
-        meth_0x500750;
+            &TileMapState::setMoatOwnerForAllMatching)
+        setMoatOwnerForAllMatching;
 
         MACRO_FUNCTION_RESOLVER(
             void (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00500790, &TileMapState::swapMoatOwnership)
         swapMoatOwnership;
 
         MACRO_FUNCTION_RESOLVER(
-            void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x005007D0, &TileMapState::meth_0x5007d0)
-        meth_0x5007d0;
+            void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x005007D0, &TileMapState::resetPitchDitchArray)
+        resetPitchDitchArray;
 
         MACRO_FUNCTION_RESOLVER(int (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x00500800,
             &TileMapState::countPitchDitchesWithPlayerID0)
@@ -441,40 +441,40 @@ namespace Map {
         swapPitchOwnership;
 
         MACRO_FUNCTION_RESOLVER(undefined4 (TileMapState::*)(uint, uint, uint, uint), false,
-            Address::SHC_3BB0A8C1_0x00500980, &TileMapState::meth_0x500980)
-        meth_0x500980;
+            Address::SHC_3BB0A8C1_0x00500980, &TileMapState::findNearestValidDigTileNearTarget)
+        findNearestValidDigTileNearTarget;
 
         MACRO_FUNCTION_RESOLVER(int (TileMapState::*)(int, int, uint), false, Address::SHC_3BB0A8C1_0x00500B50,
-            &TileMapState::meth_0x500b50)
-        meth_0x500b50;
+            &TileMapState::computeTileAlongAxisOffset)
+        computeTileAlongAxisOffset;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x00500BB0, &TileMapState::campaignRelatedNumber)
-        campaignRelatedNumber;
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x00500BB0,
+            &TileMapState::setSignpostDistanceForCampaignMission)
+        setSignpostDistanceForCampaignMission;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint), false, Address::SHC_3BB0A8C1_0x00501180,
-            &TileMapState::spreadAlgorithmForFlagsAndBraziers2Unk)
-        spreadAlgorithmForFlagsAndBraziers2Unk;
+            &TileMapState::spreadFlagPlacementAlgorithm)
+        spreadFlagPlacementAlgorithm;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint), false, Address::SHC_3BB0A8C1_0x005011A0,
-            &TileMapState::spreadAlgorithmForFlagsAndBraziersUnk)
-        spreadAlgorithmForFlagsAndBraziersUnk;
+            &TileMapState::spreadBrazierPlacementAlgorithm)
+        spreadBrazierPlacementAlgorithm;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x005017A0,
-            &TileMapState::clearAndSetTileMapUnknown2Plus)
-        clearAndSetTileMapUnknown2Plus;
+        MACRO_FUNCTION_RESOLVER(
+            void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x005017A0, &TileMapState::forceFullTileMapRedraw)
+        forceFullTileMapRedraw;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(uint, uint, int), false, Address::SHC_3BB0A8C1_0x005017C0,
-            &TileMapState::meth_0x5017c0)
-        meth_0x5017c0;
+            &TileMapState::useEraserBrush)
+        useEraserBrush;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x00501A20,
             &TileMapState::updateShowHiLayerOrResetChangedLayer)
         updateShowHiLayerOrResetChangedLayer;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x00501B90,
-            &TileMapState::changeMapOrientationUnk)
-        changeMapOrientationUnk;
+        MACRO_FUNCTION_RESOLVER(
+            void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x00501B90, &TileMapState::changeMapOrientation)
+        changeMapOrientation;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, int), false, Address::SHC_3BB0A8C1_0x00501CD0,
             &TileMapState::increaseHeightForTunnelWithBrush)
@@ -488,37 +488,37 @@ namespace Map {
             &TileMapState::createPlateau)
         createPlateau;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (TileMapState::*)(int, uint, uint), false, Address::SHC_3BB0A8C1_0x00502110, &TileMapState::useBrush2)
-        useBrush2;
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint), false, Address::SHC_3BB0A8C1_0x00502110,
+            &TileMapState::useLevelBrush)
+        useLevelBrush;
 
         MACRO_FUNCTION_RESOLVER(
             void (TileMapState::*)(int, uint, uint), false, Address::SHC_3BB0A8C1_0x00502390, &TileMapState::setLand)
         setLand;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (TileMapState::*)(int, uint, int), false, Address::SHC_3BB0A8C1_0x005024F0,
-            &TileMapState::meth_0x5024f0)
-        meth_0x5024f0;
+            &TileMapState::isValidCastleSiteLocation)
+        isValidCastleSiteLocation;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, undefined4), false,
-            Address::SHC_3BB0A8C1_0x00502680, &TileMapState::useBrush3)
-        useBrush3;
+            Address::SHC_3BB0A8C1_0x00502680, &TileMapState::useTerrainHeightBrush)
+        useTerrainHeightBrush;
 
-        MACRO_FUNCTION_RESOLVER(
-            byte (TileMapState::*)(int, uint), false, Address::SHC_3BB0A8C1_0x00502950, &TileMapState::meth_0x502950)
-        meth_0x502950;
+        MACRO_FUNCTION_RESOLVER(byte (TileMapState::*)(int, uint), false, Address::SHC_3BB0A8C1_0x00502950,
+            &TileMapState::getMaxWallHeightInBrushArea)
+        getMaxWallHeightInBrushArea;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, uint, uint, undefined4), false,
-            Address::SHC_3BB0A8C1_0x005029D0, &TileMapState::checkWhetherThisWallBuildIsAllowed)
-        checkWhetherThisWallBuildIsAllowed;
+            Address::SHC_3BB0A8C1_0x005029D0, &TileMapState::validateWallBuildPath)
+        validateWallBuildPath;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, uint, uint, CommandBuildingType, int), false,
             Address::SHC_3BB0A8C1_0x00502F30, &TileMapState::placeWalls)
         placeWalls;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, CommandBuildingType), false,
-            Address::SHC_3BB0A8C1_0x005034A0, &TileMapState::placeDefensiveStructurePart2Unk)
-        placeDefensiveStructurePart2Unk;
+            Address::SHC_3BB0A8C1_0x005034A0, &TileMapState::placeDefensiveStructureTile)
+        placeDefensiveStructureTile;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x00503720,
             &TileMapState::setupBuildingSizeIndexMapping)
@@ -529,12 +529,12 @@ namespace Map {
         checkBuildingCanBePlacedHere;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint), false, Address::SHC_3BB0A8C1_0x00504A30,
-            &TileMapState::meth_0x504a30)
-        meth_0x504a30;
+            &TileMapState::evaluateBuildingPlacementAtCursor)
+        evaluateBuildingPlacementAtCursor;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00504EE0, &TileMapState::meth_0x504ee0)
-        meth_0x504ee0;
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00504EE0,
+            &TileMapState::updateBuildingPlacementRotationPreview)
+        updateBuildingPlacementRotationPreview;
 
         MACRO_FUNCTION_RESOLVER(int (TileMapState::*)(int, int, CommandBuildingType, int), false,
             Address::SHC_3BB0A8C1_0x00504F10, &TileMapState::setConstructionGFXLayerBasedOnPlacementChecks)
@@ -545,8 +545,8 @@ namespace Map {
         updateBuildingGraphicsLayer;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x00506AD0,
-            &TileMapState::someUpdatePathLinkageRelatedCall)
-        someUpdatePathLinkageRelatedCall;
+            &TileMapState::updatePathLinkagesForBuilding)
+        updatePathLinkagesForBuilding;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, BuildingType, uint, int, undefined4), false,
             Address::SHC_3BB0A8C1_0x00506BD0, &TileMapState::placeWorkshopOrHovel)
@@ -557,8 +557,8 @@ namespace Map {
         placeSiegetowerPlaced;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, undefined4, uint, int, undefined4), false,
-            Address::SHC_3BB0A8C1_0x00506E10, &TileMapState::placeSiegeTentUnk)
-        placeSiegeTentUnk;
+            Address::SHC_3BB0A8C1_0x00506E10, &TileMapState::placeSiegeTent)
+        placeSiegeTent;
 
         MACRO_FUNCTION_RESOLVER(
             void (TileMapState::*)(int, uint, uint, undefined4, undefined4, uint, undefined4, undefined4), false,
@@ -567,8 +567,8 @@ namespace Map {
 
         MACRO_FUNCTION_RESOLVER(
             void (TileMapState::*)(int, uint, uint, undefined4, undefined4, uint, undefined4, undefined4), false,
-            Address::SHC_3BB0A8C1_0x00507060, &TileMapState::meth_0x507060)
-        meth_0x507060;
+            Address::SHC_3BB0A8C1_0x00507060, &TileMapState::stampBuildingOntoTileMap)
+        stampBuildingOntoTileMap;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, undefined4, uint, int, undefined4), false,
             Address::SHC_3BB0A8C1_0x00507130, &TileMapState::placeTower)
@@ -579,8 +579,8 @@ namespace Map {
         upgradeTowerLogicLayer;
 
         MACRO_FUNCTION_RESOLVER(
-            void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x00507350, &TileMapState::meth_0x507350)
-        meth_0x507350;
+            void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x00507350, &TileMapState::resetTileAndClearMoat)
+        resetTileAndClearMoat;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, undefined4, uint, int, undefined4), false,
             Address::SHC_3BB0A8C1_0x00507420, &TileMapState::placeGatehouseSmall)
@@ -614,17 +614,17 @@ namespace Map {
             Address::SHC_3BB0A8C1_0x00508540, &TileMapState::placeStockpile)
         placeStockpile;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00508760, &TileMapState::meth_0x508760)
-        meth_0x508760;
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00508760,
+            &TileMapState::clearSizeFiveBuildingFootprintAndMoats)
+        clearSizeFiveBuildingFootprintAndMoats;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00508870, &TileMapState::meth_0x508870)
-        meth_0x508870;
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00508870,
+            &TileMapState::clearSizeFiveBuildingFootprint)
+        clearSizeFiveBuildingFootprint;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x00508910, &TileMapState::meth_0x508910)
-        meth_0x508910;
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x00508910,
+            &TileMapState::floodMoatUnderRemovedBuilding)
+        floodMoatUnderRemovedBuilding;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(uint, uint, CommandBuildingType), false,
             Address::SHC_3BB0A8C1_0x00508A00, &TileMapState::renderPreviewMapperWithBrush)
@@ -635,8 +635,8 @@ namespace Map {
         applyTreeToLogicalLayer;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(uint, uint, uint), false, Address::SHC_3BB0A8C1_0x00508EC0,
-            &TileMapState::meth_0x508ec0)
-        meth_0x508ec0;
+            &TileMapState::eraseAreaWithBrush)
+        eraseAreaWithBrush;
 
         MACRO_FUNCTION_RESOLVER(
             void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x00509180, &TileMapState::updateTextureTilemap)
@@ -734,9 +734,9 @@ namespace Map {
             &TileMapState::clearBuildingFromTerrain)
         clearBuildingFromTerrain;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x00515C80, &TileMapState::createMoatSize5Unk)
-        createMoatSize5Unk;
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x00515C80,
+            &TileMapState::createMoatForSizeFiveBuilding)
+        createMoatForSizeFiveBuilding;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(uint, uint, undefined4), false, Address::SHC_3BB0A8C1_0x00515DA0,
             &TileMapState::placeTree)

@@ -54,9 +54,9 @@ namespace Map {
         ~LandscapeState() {};
 
         // Constructor
-        LandscapeState* Constructor_LandscapeState();
+        LandscapeState* constructLandscapeState();
 
-        undefined4 mapUITreeTypeToLogicalTreeTypeUnk(undefined4 param_1);
+        undefined4 mapUITreeTypeToLogicalTreeType(undefined4 param_1);
 
         undefined4 getValueFrom0UpTo3ForTreeTypeAndTreeSeason(undefined4 treeType, int treeStage);
 
@@ -67,19 +67,19 @@ namespace Map {
 
         void setTreeStageRelatedValues(int treeID, int stage);
 
-        void removeTreeUnk(int treeID);
+        void removeTree(int treeID);
 
         void setCurrentTimeOnSomeTrees();
 
         int createRock(undefined4 x, undefined4 y, int rockType, undefined4 size, undefined4 orientation);
 
-        void meth_0x4f2220(int param_1);
+        void removeRock(int param_1);
 
         BOOLEnum lightUpTree(int tile, int playerID);
 
-        int FUN_004f2a10(int param_1);
+        int getRandomRockImageOffset(int param_1);
 
-        undefined4 FUN_004f2c20(int param_1);
+        undefined4 getTreeGrowthTargetStage(int param_1);
 
         void setTreeSpreadInterval();
 
@@ -87,17 +87,17 @@ namespace Map {
 
         undefined4 setupBabyTreeLocation(uint treeID, int treeType, uint x, uint y);
 
-        uint meth_0x4f2fb0(int treeID, int param_2);
+        uint isTreeAliveAndMatchingUID(int treeID, int param_2);
 
         BOOLEnum isTreeMatchingUIDAndOfCertainState(int treeID, int treeUID);
 
-        undefined4 meth_0x4f3010(int treeID, undefined4 param_2, int param_3);
+        undefined4 damageTreeAndTriggerDeathIfDepleted(int treeID, undefined4 param_2, int param_3);
 
-        void meth_0x4f3080(int treeID, int param_2);
+        void advanceTreeDecayState(int treeID, int param_2);
 
-        void meth_0x4f30d0(int x, int y);
+        void markNearbyTreesAsCrowTargets(int x, int y);
 
-        void spawnACrowUnk(int unitID);
+        void spawnCrowFromNearbyTree(int unitID);
 
         void placeAppleTree(int buildingID, undefined4 treeX, undefined4 treeY);
 
@@ -111,7 +111,8 @@ namespace Map {
 
         int findTree(int playerID, uint unitXPosition, uint unitYPosition);
 
-        void FUN_004f3d30(PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
+        void upgradeTreesAndRocksForMapVersion(
+            PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
 
         void updateTrees();
     };

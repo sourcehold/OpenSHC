@@ -76,11 +76,11 @@ namespace IO {
 
         BOOLEnum doesFileExist(char* filename);
 
-        void meth_0x46c450();
+        void setGfxFileFilter();
 
-        void meth_0x46c480();
+        void setHelpFileFilter();
 
-        void meth_0x46c4b0();
+        void setSoundFileFilter();
 
         int getSimpleFirst1024ByteSumOfFile(char* filename);
 
@@ -94,7 +94,7 @@ namespace IO {
 
         BOOLEnum doesFileOfActiveResourceExist();
 
-        void meth_0x471df0();
+        void resetOpenFileNameStruct();
 
         BOOLEnum readCurrentResourceIntoDestination(void* destination, size_t size);
 
@@ -104,13 +104,13 @@ namespace IO {
 
         BOOLEnum readNextPartOfCurrentResourceIntoMemory(void* destination, int partSize, char* fileExtension);
 
-        BOOLEnum meth_0x472080();
+        BOOLEnum showOpenGfxFileDialog();
 
-        BOOLEnum meth_0x4720c0(undefined4 param_1);
+        BOOLEnum showOpenHelpFileDialog(undefined4 param_1);
 
-        BOOLEnum meth_0x472100();
+        BOOLEnum showSaveHelpFileDialog();
 
-        BOOLEnum meth_0x472140();
+        BOOLEnum showOpenSoundFileDialog();
 
         int fileHashFunctionByteByByte();
 

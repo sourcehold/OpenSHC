@@ -75,19 +75,19 @@ namespace Game {
 
         void calculateAttackVectorsToCampFireOfPlayer(int playerID);
 
-        int meth_0x4568f0();
+        int countActiveSignposts();
 
-        BOOLEnum meth_0x4569e0();
+        BOOLEnum hasAnySignpost();
 
-        int meth_0x456ad0();
+        int pickRandomAccessibleSignpostEntry();
 
         void clearDataAndSignpostDataIfNecessary();
 
         void addSignpostToBuildingEntryData(int buildingID);
 
-        void meth_0x456fd0(uint param_1, int param_2, int param_3);
+        void computeBuildingCategoryEntryPoint(uint param_1, int param_2, int param_3);
 
-        void meth_0x4572a0(int playerID, int param_2);
+        void validateBuildingCategoryReference(int playerID, int param_2);
 
         BOOLEnum checkKeepEnclosed(int playerID);
 
@@ -97,9 +97,9 @@ namespace Game {
 
         BOOLEnum unitsCanMoveFromKeepOfPlayerToAnotherArea(int playerID);
 
-        BOOLEnum meth_0x457870(int param_1, int param_2, int param_3);
+        BOOLEnum canKeepReachSignpostZone(int param_1, int param_2, int param_3);
 
-        bool meth_0x4578f0(int param_1, int param_2, int param_3);
+        bool canKeepReachSignpostZoneViaPathfinder(int param_1, int param_2, int param_3);
 
         void updatePrimaryBuildingPlayerDataReferences(uint buildingID);
 
@@ -128,11 +128,11 @@ namespace Game {
 
         int moveUnitAroundCampfire(int unitID, int availablePeasants);
 
-        void meth_0x4586d0();
+        void activateTraderState();
 
-        void meth_0x4586f0();
+        void resetTraderState();
 
-        int meth_0x458700(int param_1);
+        int findNextPlayerWithMarketplace(int param_1);
 
         BOOLEnum isResourceTypeTradeable(ResourceType resourceType);
 
@@ -146,7 +146,7 @@ namespace Game {
 
         int getBuyPrice(undefined4 playerID, int resourceType, int amount);
 
-        int meth_0x4588d0(int param_1);
+        int getBuyPriceForOneUnit(int param_1);
 
         int getSalePriceOfGood(ResourceType param_1);
 
@@ -194,7 +194,7 @@ namespace Game {
 
         uint TeamToBitFlagsUnk(int unitID);
 
-        BOOLEnum meth_0x4597d0();
+        BOOLEnum areActivePlayersMostlySameTeam();
 
         void recountStablesAndHorses();
 
@@ -210,7 +210,7 @@ namespace Game {
 
         void assignSelectionToKey(int number, int tribeID);
 
-        void FUN_00459d80();
+        void computeArmySizeLimit();
 
         void HandleActivateTacticalPowers(int param_1, int powerType, int param_3);
 
@@ -228,7 +228,7 @@ namespace Game {
 
         void clearEnemyRelatedStructures();
 
-        void meth_0x45b3e0();
+        void initializeGameStateAfterMapLoad();
 
         void switchPlayerOwnership(int playerID);
 
@@ -242,7 +242,8 @@ namespace Game {
 
         void spawnPoisonCloudsAtRandomStorageOrArmyBuilding(int playerID, int count);
 
-        void meth_0x45c1c0(PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
+        void migrateGameStateForMapVersion(
+            PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
 
         void processSingleTimeTick();
 

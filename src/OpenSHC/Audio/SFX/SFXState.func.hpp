@@ -48,12 +48,12 @@ namespace Audio {
             someVolumeAdjustmentFunction;
 
             MACRO_FUNCTION_RESOLVER(
-                void (SFXState::*)(), false, Address::SHC_3BB0A8C1_0x00449FF0, &SFXState::FUN_00449ff0)
-            FUN_00449ff0;
+                void (SFXState::*)(), false, Address::SHC_3BB0A8C1_0x00449FF0, &SFXState::resetScheduledSoundRequests)
+            resetScheduledSoundRequests;
 
             MACRO_FUNCTION_RESOLVER(
-                void (SFXState::*)(), false, Address::SHC_3BB0A8C1_0x0044A050, &SFXState::meth_0x44a050)
-            meth_0x44a050;
+                void (SFXState::*)(), false, Address::SHC_3BB0A8C1_0x0044A050, &SFXState::resetAmbientEventCounters)
+            resetAmbientEventCounters;
 
             MACRO_FUNCTION_RESOLVER(
                 void (SFXState::*)(int), false, Address::SHC_3BB0A8C1_0x0044A0D0, &SFXState::notifyAmbientSoundEvent)

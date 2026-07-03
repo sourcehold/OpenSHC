@@ -67,7 +67,7 @@ namespace Map {
             ~TribesState() {};
 
             // Constructor
-            TribesState* Constructor_TribesState();
+            TribesState* constructTribesState();
 
             void giveUnitSelectionMoveInstructionNoMatchedSpeed(
                 undefined4 tribeID, undefined4 x, undefined4 y, undefined4 rallyBool, undefined4 doRally);
@@ -76,35 +76,35 @@ namespace Map {
 
             void clearAllTribes();
 
-            void FUN_00521210(int param_1, int param_2);
+            void reassignOwnerForTribesOfBehaviorType2(int param_1, int param_2);
 
             void swapTribeOwnership(int param_1, int param_2);
 
-            undefined4 meth_0x521280(int unitID, int param_2);
+            undefined4 moveUnitToBehaviorTarget(int unitID, int param_2);
 
-            void calculatePathPlanToUnitUnk(int targetUnitID, int unitID, int* unitCurrentX, int* unitCurrentY);
+            void predictUnitInterceptPosition(int targetUnitID, int unitID, int* unitCurrentX, int* unitCurrentY);
 
-            UnitType FUN_00521720(undefined4 tribeID, int* maximumCount);
+            UnitType getMajoritySelectedUnitType(undefined4 tribeID, int* maximumCount);
 
-            void meth_0x5217e0(int param_1);
+            void playUnitSelectionSound(int param_1);
 
-            void somethingTargetUnitSoundRelated(int selectionID, int unitID);
+            void playUnitCombatSpeechForTarget(int selectionID, int unitID);
 
-            void meth_0x521eb0(undefined4 param_1);
+            void playUnitSelectSpeech(undefined4 param_1);
 
-            void meth_0x521ef0(undefined4 param_1);
+            void playUnitMoveSpeech(undefined4 param_1);
 
-            void meth_0x522090(int param_1);
+            void playAttackCommandFeedback(int param_1);
 
-            void FUN_00522110(undefined4 param_1);
+            void playPatrolCommandSpeech(undefined4 param_1);
 
-            void FUN_00522150();
+            void playTunnelerCommandSpeech();
 
-            void meth_0x522160(undefined4 param_1);
+            void playWorkCommandSpeech(undefined4 param_1);
 
             void applyTribeBehaviorType(int attackWave, SomeTribeBehaviorType tribeBehaviorType);
 
-            void FUN_00522210(int param_1, int param_2, int param_3);
+            void updatePeasantSeatingAtBuilding(int param_1, int param_2, int param_3);
 
             uint tribeCorrespondsWithUID(int tribeID, uint tribeUID);
 
@@ -142,19 +142,19 @@ namespace Map {
 
             void addRallyPoint(int section1016ID, short destinationX, short destinationY, int step);
 
-            void temporarilyStoreTribeIfAllNewlySelectedUnitsPartOfThisTribe_And_AlwaysRememberStance(int playerID);
+            void snapshotSelectionTribeAndComputeStance(int playerID);
 
             void importStoredInfoFromSlot0(undefined4 param_1, int tribeID);
 
-            void meth_0x522ef0(undefined4 tribeID, int smallerSize);
+            void trimTribeToSize(undefined4 tribeID, int smallerSize);
 
-            void FUN_00522f70(
+            void spawnUnitsForAITribe(
                 undefined4 param_1, int param_2, int param_3, int param_4, UnitType param_5, int param_6, int param_7);
 
             dword spawnUnitsIntoNewTribe(undefined4 counter, int tribeType, int x, int y, int playerID,
                 UnitType unitType, UnitType unitType2, int unitType1Count, int unitType2Count);
 
-            dword meth_0x523190(short param_1, undefined4 param_2, int param_3, int param_4, int param_5,
+            dword createTribeWithSpawnedUnit(short param_1, undefined4 param_2, int param_3, int param_4, int param_5,
                 UnitType param_6, int param_7);
 
             dword spawnUnitsAroundLocation(
@@ -168,31 +168,32 @@ namespace Map {
 
             void setCamelSpawnXY(undefined4 x, undefined4 y);
 
-            undefined4 FUN_00523410(uint* param_1, uint* param_2);
+            undefined4 findRecentOrSignpostSpawnLocation(uint* param_1, uint* param_2);
 
-            undefined4 FUN_00523520();
+            undefined4 hasAvailableSpawnSlotForWildlifeOrMercs();
 
-            void meth_0x523590(int tribeID);
+            void updateAnimalHerdBehaviorState(int tribeID);
 
             int getNonDyingUnit(int tribeID);
 
             void countDeerEfficiently();
 
-            void meth_0x523730(int param_1);
+            void markTribeAsAnimalTribe(int param_1);
 
-            void meth_0x523750(int param_1);
+            void flagTribesOfType(int param_1);
 
-            void meth_0x523790(int param_1, int param_2);
+            void consumeFlaggedTribesOfType(int param_1, int param_2);
 
             void aiAssignNewUnitToTribe(int playerID, int unitType, int unitID);
 
-            int meth_0x523920(int param_1);
+            int scatterTribeUnitsRandomly(int param_1);
 
             void drawFlagsAndUnitDestinations(int tribeID);
 
-            void meth_0x523ef0(PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
+            void upgradeTribeArrayLayoutForMapVersion(
+                PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
 
-            undefined4 meth_0x523f70(int param_1);
+            undefined4 updateTribeRallyFlags(int param_1);
 
             void unsetRallyRelatedFlagOnUnits(int tribeID);
 
@@ -200,7 +201,7 @@ namespace Map {
 
             int getFirstUnitInTribeThatIsOnXTerrain(int selectionID);
 
-            undefined4 meth_0x524140(int param_1);
+            undefined4 tribeHasActiveLaddermanUnit(int param_1);
 
             undefined4 tribeContainsUnitThatCanClimb(int param_1);
 
@@ -211,23 +212,24 @@ namespace Map {
             undefined4 applyMoveCommandOrRallyCommandToTribe(
                 int tribeID, undefined4 x1, undefined4 y1, undefined4 isRallying, int storeAsRallyPoint);
 
-            undefined4 aiAttackWaveUnk(int tribeID, SomeTribeBehaviorType targetType);
+            undefined4 assignAttackTargetsForTribe(int tribeID, SomeTribeBehaviorType targetType);
 
-            undefined4 meth_0x524890(int param_1);
+            undefined4 stopTribeMovementAndCheckIdle(int param_1);
 
-            void meth_0x524930(int tribeID, int horseAndRamCount);
+            void sortTribePathDestinationsByCost(int tribeID, int horseAndRamCount);
 
-            undefined4 meth_0x524b30(int param_1);
+            undefined4 isTribeUnitBlockedByOtherUnit(int param_1);
 
             int getTribeAliveStatus(int tribeID);
 
-            undefined4 meth_0x524ca0(int param_1, uint param_2, uint param_3, uint param_4, uint param_5);
+            undefined4 isTribePathToDestinationClear(
+                int param_1, uint param_2, uint param_3, uint param_4, uint param_5);
 
-            void meth_0x524e20(int param_1);
+            void applyLadderDestructionToTribeUnits(int param_1);
 
             void applyUnitTopSpeedDelayBasedOnTribeSize(int tribeID, BOOLEnum param_2);
 
-            void FUN_00525090(int selectionID);
+            void playArcherCommandSpeech(int selectionID);
 
             BOOLEnum anyUnitsOfTribeAreOutsideCoverageOfPathFindingAlg(int tribeID, int algTileFlag);
 
@@ -235,17 +237,17 @@ namespace Map {
 
             void applyMovementDistanceToUnitsInTribeBasedOnUnitNumberInTribe(int param_1);
 
-            undefined4 meth_0x525210(int param_1);
+            undefined4 isTribeFreeOfTunnelingUnits(int param_1);
 
             void setTargetUnitForTribe(int tribeID);
 
-            void meth_0x525300(int param_1, undefined4 param_2);
+            void setStateForAllTribeUnits(int param_1, undefined4 param_2);
 
-            void meth_0x525370(int param_1);
+            void standUpAllTribeUnits(int param_1);
 
             BOOLEnum allUnitsReachedTheirDestination(int tribeID);
 
-            void makeUnitsDisappearUnk(int param_1);
+            void removeAllTribeUnits(int param_1);
 
             BOOLEnum addUnitToNewTribe(uint unitID);
 
@@ -263,11 +265,11 @@ namespace Map {
 
             BOOLEnum spawnDeerLionOrRabbit(int tribeID, int param_2, UnitType unitType);
 
-            undefined4 meth_0x5260b0(int param_1, int param_2, int param_3, int param_4);
+            undefined4 trySpawnAdditionalWildlifeForTribe(int param_1, int param_2, int param_3, int param_4);
 
             void respawnDeer();
 
-            void meth_0x5262a0();
+            void spawnWildlifeOrMercAtAvailableSlot();
 
             void upgradeMapTribesState(
                 PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
@@ -282,24 +284,24 @@ namespace Map {
 
             void updateTribeUnitAssignments();
 
-            void siegeThatRelatedUnk();
+            void spawnQueuedReinforcementWaves();
 
             undefined4 giveTribeAnInstruction(
                 int tribeID, UnitInstructionType unitInstructionType, int id__x__tile, int unitUID__Y, int param_5);
 
-            void meth_0x52a640(int param_1);
+            void moveTribeToNearbyClearTile(int param_1);
 
-            int meth_0x52a700(int param_1);
+            int moveTribeToIndexedNearbyTile(int param_1);
 
-            void unitAttackBuildingOrOtherUnitBasedOnStanceUnk(int tribeID);
+            void updateTribeCombatStanceBehavior(int tribeID);
 
             void processDeerMoving(int tribeID);
 
-            void meth_0x52b110(int param_1);
+            void updateLionWolfTribeBehavior(int param_1);
 
-            void meth_0x52b390(int param_1);
+            void updateRabbitTribeBehavior(int param_1);
 
-            void meth_0x52b630(int param_1);
+            void updateCamelTribeBehavior(int param_1);
 
             void updateTribes();
         };

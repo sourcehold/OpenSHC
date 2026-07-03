@@ -56,11 +56,11 @@ namespace Map {
 
         void __cdecl UpdateDestroyedBuildingCountData(int param_1);
 
-        void __stdcall FUN_0045acc0();
+        void __stdcall validateLadyAndJesterUnitRefs();
 
-        void __stdcall FUN_0045ad10();
+        void __stdcall initPopularityAndRecruitableDefaults();
 
-        void __stdcall FUN_0045ae00();
+        void __stdcall resetTeams();
 
         void __stdcall UpdateTreesOfCertainTypes();
 

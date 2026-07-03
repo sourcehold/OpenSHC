@@ -20,40 +20,40 @@ namespace Map {
         renderDebugDataMapData;
 
         MACRO_FUNCTION_RESOLVER(void (WildlifeState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x0052C570,
-            &WildlifeState::meth_0x52c570)
-        meth_0x52c570;
+            &WildlifeState::floodFillField13FromCell)
+        floodFillField13FromCell;
 
         MACRO_FUNCTION_RESOLVER(void (WildlifeState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x0052C810,
-            &WildlifeState::meth_0x52c810)
-        meth_0x52c810;
+            &WildlifeState::floodFillField20FromCell)
+        floodFillField20FromCell;
 
         MACRO_FUNCTION_RESOLVER(void (WildlifeState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x0052CAB0,
             &WildlifeState::findAndSetNewRallyPointForDeerAndLions)
         findAndSetNewRallyPointForDeerAndLions;
 
-        MACRO_FUNCTION_RESOLVER(
-            undefined4 (WildlifeState::*)(int), false, Address::SHC_3BB0A8C1_0x0052CFE0, &WildlifeState::meth_0x52cfe0)
-        meth_0x52cfe0;
+        MACRO_FUNCTION_RESOLVER(undefined4 (WildlifeState::*)(int), false, Address::SHC_3BB0A8C1_0x0052CFE0,
+            &WildlifeState::buildRallyPointPathForTribe)
+        buildRallyPointPathForTribe;
 
         MACRO_FUNCTION_RESOLVER(undefined4 (WildlifeState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0052D620,
-            &WildlifeState::meth_0x52d620)
-        meth_0x52d620;
+            &WildlifeState::hasAdjacentCellWithField24Or25)
+        hasAdjacentCellWithField24Or25;
 
         MACRO_FUNCTION_RESOLVER(undefined4 (WildlifeState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0052D690,
-            &WildlifeState::meth_0x52d690)
-        meth_0x52d690;
+            &WildlifeState::isSuitableWildlifeSpawnCell)
+        isSuitableWildlifeSpawnCell;
 
         MACRO_FUNCTION_RESOLVER(void (WildlifeState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x0052D720,
-            &WildlifeState::meth_0x52d720)
-        meth_0x52d720;
+            &WildlifeState::floodFillUnknownNonZero01FromCell)
+        floodFillUnknownNonZero01FromCell;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (WildlifeState::*)(), false, Address::SHC_3BB0A8C1_0x0052D9D0, &WildlifeState::meth_0x52d9d0)
-        meth_0x52d9d0;
+        MACRO_FUNCTION_RESOLVER(void (WildlifeState::*)(), false, Address::SHC_3BB0A8C1_0x0052D9D0,
+            &WildlifeState::floodFillCasDisFromSignpost)
+        floodFillCasDisFromSignpost;
 
-        MACRO_FUNCTION_RESOLVER(
-            int (WildlifeState::*)(), false, Address::SHC_3BB0A8C1_0x0052DD20, &WildlifeState::meth_0x52dd20)
-        meth_0x52dd20;
+        MACRO_FUNCTION_RESOLVER(int (WildlifeState::*)(), false, Address::SHC_3BB0A8C1_0x0052DD20,
+            &WildlifeState::getDistanceToNearestUnknownNonZero01FromSignpost)
+        getDistanceToNearestUnknownNonZero01FromSignpost;
 
         MACRO_FUNCTION_RESOLVER(
             void (WildlifeState::*)(), false, Address::SHC_3BB0A8C1_0x0052DF30, &WildlifeState::updateWildlife)

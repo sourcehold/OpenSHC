@@ -47,8 +47,8 @@ namespace UI {
         setSliderParameters2;
 
         MACRO_FUNCTION_RESOLVER(void (MenuModalComposition::*)(int, int, dword, dword, undefined*, undefined*), false,
-            Address::SHC_3BB0A8C1_0x004AA930, &MenuModalComposition::meth_0x4aa930)
-        meth_0x4aa930;
+            Address::SHC_3BB0A8C1_0x004AA930, &MenuModalComposition::setModalSliderParameters)
+        setModalSliderParameters;
 
         MACRO_FUNCTION_RESOLVER(void (MenuModalComposition::*)(), false, Address::SHC_3BB0A8C1_0x004B0B30,
             &MenuModalComposition::renderMenuModal)

@@ -342,7 +342,7 @@ namespace AI {
 
         void decideOnTribeAttackLocation(uint tribeID__moatWasHit);
 
-        void FUN_004d1d60(int param_1);
+        void sellExcessGoods(int param_1);
 
         void requestGoods(int playerID, ResourceType resourceType, undefined4 amount);
 
@@ -384,7 +384,7 @@ namespace AI {
 
         void makeOutpostTribesAttack();
 
-        void FUN_004d39b0(int param_1);
+        void buyRequiredGoods(int param_1);
 
         void aiRecruitUnits(int playerID);
 

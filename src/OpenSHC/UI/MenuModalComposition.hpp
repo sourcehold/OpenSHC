@@ -76,7 +76,7 @@ namespace UI {
         void setSliderParameters2(
             dword minimum, dword maximum, dword value, dword destination, undefined* callbackFunction);
 
-        void meth_0x4aa930(
+        void setModalSliderParameters(
             int param_1, int param_2, dword param_3, dword param_4, undefined* param_5, undefined* param_6);
 
         void renderMenuModal();

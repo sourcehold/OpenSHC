@@ -185,7 +185,7 @@ namespace UI {
 
             int loadGfxAtBufferEnd(char* fileName);
 
-            BOOLEnum FUN_004548d0(char* param_1);
+            BOOLEnum CheckGfxResourceExists(char* param_1);
 
             void renderLoadedGfx(int loadedGfxIndex, int xPos, int yPos);
 

@@ -17,9 +17,9 @@ namespace Audio {
             using OpenSHC::DE::SHCDE::eMusicIDs;
             using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (SoundSystem::*)(), false, Address::SHC_3BB0A8C1_0x00424700, &SoundSystem::meth_0x424700)
-            meth_0x424700;
+            MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(), false, Address::SHC_3BB0A8C1_0x00424700,
+                &SoundSystem::endSpeechStreamsAndResetLoopFlags)
+            endSpeechStreamsAndResetLoopFlags;
 
             MACRO_FUNCTION_RESOLVER(
                 void (SoundSystem::*)(), false, Address::SHC_3BB0A8C1_0x00467810, &SoundSystem::stopMusicPlayback)
@@ -45,13 +45,13 @@ namespace Audio {
                 Address::SHC_3BB0A8C1_0x00479AF0, &SoundSystem::setStreamAndSampleVolumeUnk)
             setStreamAndSampleVolumeUnk;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (SoundSystem::*)(), false, Address::SHC_3BB0A8C1_0x00479B70, &SoundSystem::meth_0x479b70)
-            meth_0x479b70;
+            MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(), false, Address::SHC_3BB0A8C1_0x00479B70,
+                &SoundSystem::restoreMusicVolumeAfterSpeechEnds)
+            restoreMusicVolumeAfterSpeechEnds;
 
-            MACRO_FUNCTION_RESOLVER(
-                int (SoundSystem::*)(char*), false, Address::SHC_3BB0A8C1_0x00479C20, &SoundSystem::meth_0x479c20)
-            meth_0x479c20;
+            MACRO_FUNCTION_RESOLVER(int (SoundSystem::*)(char*), false, Address::SHC_3BB0A8C1_0x00479C20,
+                &SoundSystem::loadSoundFileAndGetIndex)
+            loadSoundFileAndGetIndex;
 
             MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(int), false, Address::SHC_3BB0A8C1_0x00479C80,
                 &SoundSystem::findSamplePlaceForSoundUnk)
@@ -98,8 +98,8 @@ namespace Audio {
             setupVolumeAndSoundIDWithMultiplier;
 
             MACRO_FUNCTION_RESOLVER(
-                void (SoundSystem::*)(), false, Address::SHC_3BB0A8C1_0x0047A290, &SoundSystem::meth_0x47a290)
-            meth_0x47a290;
+                void (SoundSystem::*)(), false, Address::SHC_3BB0A8C1_0x0047A290, &SoundSystem::markMusicChangePending)
+            markMusicChangePending;
 
             MACRO_FUNCTION_RESOLVER(
                 void (SoundSystem::*)(), false, Address::SHC_3BB0A8C1_0x0047A2A0, &SoundSystem::setSomeSoundTime)
@@ -109,17 +109,17 @@ namespace Audio {
                 &SoundSystem::setupVolumeAndSoundID0xF0_100)
             setupVolumeAndSoundID0xF0_100;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (SoundSystem::*)(), false, Address::SHC_3BB0A8C1_0x0047A340, &SoundSystem::FUN_0047a340)
-            FUN_0047a340;
+            MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(), false, Address::SHC_3BB0A8C1_0x0047A340,
+                &SoundSystem::selectAndPlayMoodBasedMusic)
+            selectAndPlayMoodBasedMusic;
 
             MACRO_FUNCTION_RESOLVER(
                 void (SoundSystem::*)(int), false, Address::SHC_3BB0A8C1_0x0047A570, &SoundSystem::setSection1079_28_4_)
             setSection1079_28_4_;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (SoundSystem::*)(), false, Address::SHC_3BB0A8C1_0x0047A580, &SoundSystem::meth_0x47a580)
-            meth_0x47a580;
+            MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(), false, Address::SHC_3BB0A8C1_0x0047A580,
+                &SoundSystem::playBattleGloryMusicIfConditionsMet)
+            playBattleGloryMusicIfConditionsMet;
 
             MACRO_FUNCTION_RESOLVER(
                 void (SoundSystem::*)(), false, Address::SHC_3BB0A8C1_0x0047A5E0, &SoundSystem::playDarMehqOrGlory)
@@ -142,8 +142,8 @@ namespace Audio {
             playMusicUnk;
 
             MACRO_FUNCTION_RESOLVER(
-                void (SoundSystem::*)(), false, Address::SHC_3BB0A8C1_0x0047A9E0, &SoundSystem::meth_0x47a9e0)
-            meth_0x47a9e0;
+                void (SoundSystem::*)(), false, Address::SHC_3BB0A8C1_0x0047A9E0, &SoundSystem::stopAllActiveSounds)
+            stopAllActiveSounds;
 
             MACRO_FUNCTION_RESOLVER(
                 void (SoundSystem::*)(), false, Address::SHC_3BB0A8C1_0x0047AA70, &SoundSystem::endSpeechSoundStreams)
@@ -161,9 +161,9 @@ namespace Audio {
                 Address::SHC_3BB0A8C1_0x0047B060, &SoundSystem::playSoundStreamUnk)
             playSoundStreamUnk;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (SoundSystem::*)(char*), false, Address::SHC_3BB0A8C1_0x0047B250, &SoundSystem::meth_0x47b250)
-            meth_0x47b250;
+            MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(char*), false, Address::SHC_3BB0A8C1_0x0047B250,
+                &SoundSystem::playMusicFileByName)
+            playMusicFileByName;
 
             MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(char*, int), false, Address::SHC_3BB0A8C1_0x0047B2F0,
                 &SoundSystem::playOrSetupMusicUnk)
@@ -193,9 +193,9 @@ namespace Audio {
                 void (SoundSystem::*)(char*), false, Address::SHC_3BB0A8C1_0x0047B670, &SoundSystem::playSpeechSfx)
             playSpeechSfx;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (SoundSystem::*)(char*), false, Address::SHC_3BB0A8C1_0x0047B700, &SoundSystem::meth_0x47b700)
-            meth_0x47b700;
+            MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(char*), false, Address::SHC_3BB0A8C1_0x0047B700,
+                &SoundSystem::playAmbientStreamWithLoop)
+            playAmbientStreamWithLoop;
 
             MACRO_FUNCTION_RESOLVER(void (SoundSystem::*)(char*, SoundFlagsAndLoopCount), false,
                 Address::SHC_3BB0A8C1_0x0047B760, &SoundSystem::playSomeMusicUnk)

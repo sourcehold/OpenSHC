@@ -17,12 +17,12 @@ namespace Rendering_Func {
     ApplyBlending;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00453B00, &OpenSHC::Rendering::FUN_00453b00)
-    FUN_00453b00;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00453B00, &OpenSHC::Rendering::BlitMapImageWithVerticalClip)
+    BlitMapImageWithVerticalClip;
 
-    MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00454080, &OpenSHC::Rendering::FUN_00454080)
-    FUN_00454080;
+    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00454080,
+        &OpenSHC::Rendering::BlitMapImageWithVerticalClipAndYOffset)
+    BlitMapImageWithVerticalClipAndYOffset;
 
     MACRO_FUNCTION_RESOLVER(
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0046CF10, &OpenSHC::Rendering::TicksStartCounter)
@@ -33,12 +33,12 @@ namespace Rendering_Func {
     viewportBasedTileNumber;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004E0A50, &OpenSHC::Rendering::FUN_004e0a50)
-    FUN_004e0a50;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004E0A50, &OpenSHC::Rendering::ProcessCreditsScriptCommands)
+    ProcessCreditsScriptCommands;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004E12C0, &OpenSHC::Rendering::FUN_004e12c0)
-    FUN_004e12c0;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004E12C0, &OpenSHC::Rendering::RenderActiveCreditsElements)
+    RenderActiveCreditsElements;
 
 } // namespace Rendering_Func
 } // namespace OpenSHC

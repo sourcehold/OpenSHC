@@ -12,7 +12,7 @@ namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
-        int __cdecl FUN_0049b8c0(int param_1, int param_2, int param_3, int param_4);
+        int __cdecl calcApproxEuclideanDistance(int param_1, int param_2, int param_3, int param_4);
 
     } // namespace Navigation
 } // namespace Map

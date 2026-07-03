@@ -556,8 +556,9 @@ namespace UI_Func {
         &OpenSHC::UI::MenuItemActionHandler_InGameMenu_UnitSelectionAndControlsUnk)
     MenuItemActionHandler_InGameMenu_UnitSelectionAndControlsUnk;
 
-    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00437CC0, &OpenSHC::UI::FUN_00437cc0)
-    FUN_00437cc0;
+    MACRO_FUNCTION_RESOLVER(
+        void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00437CC0, &OpenSHC::UI::HandleWallTerrainMouseDrag)
+    HandleWallTerrainMouseDrag;
 
     MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00437ED0,
         &OpenSHC::UI::MenuItemActionHandler_InGameMenu_TriggerPlaceWallCommand)
@@ -659,8 +660,9 @@ namespace UI_Func {
         &OpenSHC::UI::MenuItemActionHandler_BuildingAndStatusMenu_ReturnToBuildMenu)
     MenuItemActionHandler_BuildingAndStatusMenu_ReturnToBuildMenu;
 
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00440360, &OpenSHC::UI::FUN_00440360)
-    FUN_00440360;
+    MACRO_FUNCTION_RESOLVER(
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00440360, &OpenSHC::UI::CountPlayerUnitsByType)
+    CountPlayerUnitsByType;
 
     MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004403D0,
         &OpenSHC::UI::MenuView_UnusedHelpTextEditor_Prepare)
@@ -799,8 +801,9 @@ namespace UI_Func {
         &OpenSHC::UI::MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)
     MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface;
 
-    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004641A0, &OpenSHC::UI::FUN_004641a0)
-    FUN_004641a0;
+    MACRO_FUNCTION_RESOLVER(
+        void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004641A0, &OpenSHC::UI::RenderButtonImageWithBlending)
+    RenderButtonImageWithBlending;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, ...), false, Address::SHC_3BB0A8C1_0x00464260,
         &OpenSHC::UI::MenuItemRenderFunction_ChooseRandomNumberOfEnemies_Main)
@@ -977,8 +980,9 @@ namespace UI_Func {
         undefined4(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0046CF90, &OpenSHC::UI::TicksSinceCounterStart)
     TicksSinceCounterStart;
 
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00471A80, &OpenSHC::UI::FUN_00471a80)
-    FUN_00471a80;
+    MACRO_FUNCTION_RESOLVER(
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00471A80, &OpenSHC::UI::exitToScenarioDescriptionMenu)
+    exitToScenarioDescriptionMenu;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, ...), false, Address::SHC_3BB0A8C1_0x0047C670,
         &OpenSHC::UI::MenuItemRenderFunction_NetworkSessions_Buttons)
@@ -1283,9 +1287,9 @@ namespace UI_Func {
         &OpenSHC::UI::MenuItemActionHandler_ProgressBarBox_LoadAndSaveGameButtonLogic)
     MenuItemActionHandler_ProgressBarBox_LoadAndSaveGameButtonLogic;
 
-    MACRO_FUNCTION_RESOLVER(
-        void(__cdecl*)(int param_1), false, Address::SHC_3BB0A8C1_0x00495800, &OpenSHC::UI::FUN_00495800)
-    FUN_00495800;
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1), false, Address::SHC_3BB0A8C1_0x00495800,
+        &OpenSHC::UI::ShowProgressBarSaveLoadDialog)
+    ShowProgressBarSaveLoadDialog;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, ...), false, Address::SHC_3BB0A8C1_0x00495860,
         &OpenSHC::UI::MenuItemActionHandler_OnlineVoteQuitAndQuitGame_Main)
@@ -1451,8 +1455,9 @@ namespace UI_Func {
         Address::SHC_3BB0A8C1_0x004AC4C0, &OpenSHC::UI::MenuModalRenderFunction_ReceiveMapFrom)
     MenuModalRenderFunction_ReceiveMapFrom;
 
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004AC650, &OpenSHC::UI::FUN_004ac650)
-    FUN_004ac650;
+    MACRO_FUNCTION_RESOLVER(
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004AC650, &OpenSHC::UI::buildEnemyPlayerList)
+    buildEnemyPlayerList;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int x, int y, int width, int height), false,
         Address::SHC_3BB0A8C1_0x004AC6E0, &OpenSHC::UI::MenuModalRenderFunction_Allies)
@@ -1574,9 +1579,9 @@ namespace UI_Func {
         &OpenSHC::UI::MenuItemRenderFunction_InGameMenu_BikMessagePlayerShield)
     MenuItemRenderFunction_InGameMenu_BikMessagePlayerShield;
 
-    MACRO_FUNCTION_RESOLVER(
-        void(__cdecl*)(uint param_1, int param_2), false, Address::SHC_3BB0A8C1_0x004B7F60, &OpenSHC::UI::FUN_004b7f60)
-    FUN_004b7f60;
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(uint param_1, int param_2), false, Address::SHC_3BB0A8C1_0x004B7F60,
+        &OpenSHC::UI::PlayMissionAestheticSFX)
+    PlayMissionAestheticSFX;
 
     MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004B8050,
         &OpenSHC::UI::MenuView_General_DoInitial_OnlySetMenuXY)
@@ -1586,8 +1591,9 @@ namespace UI_Func {
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004B8080, &OpenSHC::UI::MenuView_EditScenario_DoEveryFrame)
     MenuView_EditScenario_DoEveryFrame;
 
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004B8210, &OpenSHC::UI::FUN_004b8210)
-    FUN_004b8210;
+    MACRO_FUNCTION_RESOLVER(
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004B8210, &OpenSHC::UI::RestoreScenarioGold)
+    RestoreScenarioGold;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, ...), false, Address::SHC_3BB0A8C1_0x004B8220,
         &OpenSHC::UI::MenuItemActionHandler_EditScenario_BaseMenuButtons)
@@ -1634,8 +1640,9 @@ namespace UI_Func {
         Address::SHC_3BB0A8C1_0x004B9530, &OpenSHC::UI::MenuItemRenderFunction_NewInvasion_RepeatSlider)
     MenuItemRenderFunction_NewInvasion_RepeatSlider;
 
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004B9610, &OpenSHC::UI::FUN_004b9610)
-    FUN_004b9610;
+    MACRO_FUNCTION_RESOLVER(
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004B9610, &OpenSHC::UI::CaptureCurrentTimeToUnknownTime01)
+    CaptureCurrentTimeToUnknownTime01;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, ...), false, Address::SHC_3BB0A8C1_0x004B9620,
         &OpenSHC::UI::MenuItemActionHandler_NewEventCondition_Main)
@@ -1743,23 +1750,24 @@ namespace UI_Func {
     MenuItemRenderFunction_TriggerInvasion_Main;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__cdecl*)(int param_1), false, Address::SHC_3BB0A8C1_0x004BC5F0, &OpenSHC::UI::FUN_004bc5f0)
-    FUN_004bc5f0;
+        void(__cdecl*)(int param_1), false, Address::SHC_3BB0A8C1_0x004BC5F0, &OpenSHC::UI::initTutorialStepTransition)
+    initTutorialStepTransition;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__cdecl*)(int param_1), false, Address::SHC_3BB0A8C1_0x004BC630, &OpenSHC::UI::FUN_004bc630)
-    FUN_004bc630;
-
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004BC6C0, &OpenSHC::UI::FUN_004bc6c0)
-    FUN_004bc6c0;
+        void(__cdecl*)(int param_1), false, Address::SHC_3BB0A8C1_0x004BC630, &OpenSHC::UI::recordTutorialPlayerAction)
+    recordTutorialPlayerAction;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__cdecl*)(int param_1, int param_2), false, Address::SHC_3BB0A8C1_0x004BC790, &OpenSHC::UI::FUN_004bc790)
-    FUN_004bc790;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004BC6C0, &OpenSHC::UI::resetTutorialActionTrackers)
+    resetTutorialActionTrackers;
 
-    MACRO_FUNCTION_RESOLVER(
-        void(__cdecl*)(int param_1), false, Address::SHC_3BB0A8C1_0x004BC910, &OpenSHC::UI::FUN_004bc910)
-    FUN_004bc910;
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, int param_2), false, Address::SHC_3BB0A8C1_0x004BC790,
+        &OpenSHC::UI::renderAnimatedTutorialFloatOverlay)
+    renderAnimatedTutorialFloatOverlay;
+
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1), false, Address::SHC_3BB0A8C1_0x004BC910,
+        &OpenSHC::UI::renderTutorialFloatForUIElement)
+    renderTutorialFloatForUIElement;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int x, int y, int width, int height), false,
         Address::SHC_3BB0A8C1_0x004BCBA0, &OpenSHC::UI::MenuModalRenderFunction_TutorialBox)
@@ -1773,8 +1781,9 @@ namespace UI_Func {
         &OpenSHC::UI::MenuItemRenderFunction_TutorialBox_Main)
     MenuItemRenderFunction_TutorialBox_Main;
 
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004BD1B0, &OpenSHC::UI::FUN_004bd1b0)
-    FUN_004bd1b0;
+    MACRO_FUNCTION_RESOLVER(
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004BD1B0, &OpenSHC::UI::updateTutorialStepAndProgress)
+    updateTutorialStepAndProgress;
 
     MACRO_FUNCTION_RESOLVER(
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004BEC10, &OpenSHC::UI::MenuView_EditScenario_Prepare)
@@ -1852,8 +1861,9 @@ namespace UI_Func {
         &OpenSHC::UI::MenuItemActionHandler_Unknown27CampaignUnk_Main)
     MenuItemActionHandler_Unknown27CampaignUnk_Main;
 
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004D6F60, &OpenSHC::UI::FUN_004d6f60)
-    FUN_004d6f60;
+    MACRO_FUNCTION_RESOLVER(
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004D6F60, &OpenSHC::UI::ParseCampaignMapHotspotBitmap)
+    ParseCampaignMapHotspotBitmap;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, ...), false, Address::SHC_3BB0A8C1_0x004D8250,
         &OpenSHC::UI::MenuItemRenderFunction_ScenarioDescription_Main)
@@ -1864,8 +1874,8 @@ namespace UI_Func {
     MenuItemActionHandler_ScenarioDescription_Main;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__cdecl*)(char* param_1), false, Address::SHC_3BB0A8C1_0x004D8A20, &OpenSHC::UI::FUN_004d8a20)
-    FUN_004d8a20;
+        void(__cdecl*)(char* param_1), false, Address::SHC_3BB0A8C1_0x004D8A20, &OpenSHC::UI::ReadMapHeaderFromFile)
+    ReadMapHeaderFromFile;
 
     MACRO_FUNCTION_RESOLVER(
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004D8AB0, &OpenSHC::UI::MenuView_CrusadeMissionIntro_Prepare)
@@ -1903,9 +1913,9 @@ namespace UI_Func {
         &OpenSHC::UI::MenuItemActionHandler_CrusadeEndscreen_Main)
     MenuItemActionHandler_CrusadeEndscreen_Main;
 
-    MACRO_FUNCTION_RESOLVER(
-        void(__cdecl*)(undefined4 param_1), false, Address::SHC_3BB0A8C1_0x004D9270, &OpenSHC::UI::FUN_004d9270)
-    FUN_004d9270;
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(undefined4 param_1), false, Address::SHC_3BB0A8C1_0x004D9270,
+        &OpenSHC::UI::SetActiveCreditsSequenceIndex)
+    SetActiveCreditsSequenceIndex;
 
     MACRO_FUNCTION_RESOLVER(
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004D9700, &OpenSHC::UI::MenuView_RankingGames_Prepare)
@@ -1948,94 +1958,101 @@ namespace UI_Func {
         &OpenSHC::UI::MenuItemActionHandler_TacticalPowerBar_Main)
     MenuItemActionHandler_TacticalPowerBar_Main;
 
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004DA180, &OpenSHC::UI::FUN_004da180)
-    FUN_004da180;
+    MACRO_FUNCTION_RESOLVER(
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004DA180, &OpenSHC::UI::StopCreditsPlaybackAndSounds)
+    StopCreditsPlaybackAndSounds;
 
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004DA200, &OpenSHC::UI::FUN_004da200)
-    FUN_004da200;
+    MACRO_FUNCTION_RESOLVER(
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004DA200, &OpenSHC::UI::EndCreditsSegmentAndAdvanceToNext)
+    EndCreditsSegmentAndAdvanceToNext;
 
     MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004DA300, &OpenSHC::UI::resetCredits)
     resetCredits;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(undefined4 param_1, undefined4 param_2), false,
-        Address::SHC_3BB0A8C1_0x004DA7A0, &OpenSHC::UI::FUN_004da7a0)
-    FUN_004da7a0;
+        Address::SHC_3BB0A8C1_0x004DA7A0, &OpenSHC::UI::AppendCreditsSoundEntry)
+    AppendCreditsSoundEntry;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__cdecl*)(undefined4 param_1), false, Address::SHC_3BB0A8C1_0x004DA7E0, &OpenSHC::UI::FUN_004da7e0)
-    FUN_004da7e0;
+        void(__cdecl*)(undefined4 param_1), false, Address::SHC_3BB0A8C1_0x004DA7E0, &OpenSHC::UI::AppendCreditsCommand)
+    AppendCreditsCommand;
 
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004DA810, &OpenSHC::UI::FUN_004da810)
-    FUN_004da810;
+    MACRO_FUNCTION_RESOLVER(
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004DA810, &OpenSHC::UI::AppendCreditsListTerminator)
+    AppendCreditsListTerminator;
 
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004DA840, &OpenSHC::UI::FUN_004da840)
-    FUN_004da840;
+    MACRO_FUNCTION_RESOLVER(
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004DA840, &OpenSHC::UI::AppendCreditsPauseCommand)
+    AppendCreditsPauseCommand;
 
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004DA870, &OpenSHC::UI::FUN_004da870)
-    FUN_004da870;
+    MACRO_FUNCTION_RESOLVER(
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004DA870, &OpenSHC::UI::AppendCreditsSegmentEndCommand)
+    AppendCreditsSegmentEndCommand;
 
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004DA8A0, &OpenSHC::UI::FUN_004da8a0)
-    FUN_004da8a0;
+    MACRO_FUNCTION_RESOLVER(
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004DA8A0, &OpenSHC::UI::AppendCreditsClearImageCommand)
+    AppendCreditsClearImageCommand;
 
     MACRO_FUNCTION_RESOLVER(
         void(__cdecl*)(int param_1, int param_2, undefined4 param_3, undefined4 param_4, undefined4 param_5), false,
-        Address::SHC_3BB0A8C1_0x004DA8D0, &OpenSHC::UI::FUN_004da8d0)
-    FUN_004da8d0;
+        Address::SHC_3BB0A8C1_0x004DA8D0, &OpenSHC::UI::AppendCreditsImageTransitionCommand)
+    AppendCreditsImageTransitionCommand;
 
-    MACRO_FUNCTION_RESOLVER(
-        void(__cdecl*)(int param_1, int param_2), false, Address::SHC_3BB0A8C1_0x004DA9A0, &OpenSHC::UI::FUN_004da9a0)
-    FUN_004da9a0;
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, int param_2), false, Address::SHC_3BB0A8C1_0x004DA9A0,
+        &OpenSHC::UI::AppendCreditsImageEndCommand)
+    AppendCreditsImageEndCommand;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, int param_2, undefined4 param_3, undefined4 param_4,
                                 undefined4 param_5, undefined4 param_6, undefined4 param_7, undefined4 param_8),
-        false, Address::SHC_3BB0A8C1_0x004DA9F0, &OpenSHC::UI::FUN_004da9f0)
-    FUN_004da9f0;
+        false, Address::SHC_3BB0A8C1_0x004DA9F0, &OpenSHC::UI::AppendCreditsShowImageCommand)
+    AppendCreditsShowImageCommand;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(undefined4 param_1, char* param_2, undefined4 param_3, undefined4 param_4,
                                 undefined4 param_5, undefined4 param_6),
-        false, Address::SHC_3BB0A8C1_0x004DAA80, &OpenSHC::UI::FUN_004daa80)
-    FUN_004daa80;
+        false, Address::SHC_3BB0A8C1_0x004DAA80, &OpenSHC::UI::AppendCreditsBinkVideoCommand)
+    AppendCreditsBinkVideoCommand;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, undefined4 param_2, undefined4 param_3), false,
-        Address::SHC_3BB0A8C1_0x004DAB00, &OpenSHC::UI::FUN_004dab00)
-    FUN_004dab00;
+        Address::SHC_3BB0A8C1_0x004DAB00, &OpenSHC::UI::AppendCreditsFixedImageCommand)
+    AppendCreditsFixedImageCommand;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(char* param_1, undefined4 param_2, int param_3, undefined4 param_4), false,
-        Address::SHC_3BB0A8C1_0x004DAB80, &OpenSHC::UI::FUN_004dab80)
-    FUN_004dab80;
+        Address::SHC_3BB0A8C1_0x004DAB80, &OpenSHC::UI::AppendCreditsBinkVideoWithAudioCommand)
+    AppendCreditsBinkVideoWithAudioCommand;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(undefined4 param_1, undefined4 param_2), false,
-        Address::SHC_3BB0A8C1_0x004DABF0, &OpenSHC::UI::FUN_004dabf0)
-    FUN_004dabf0;
+        Address::SHC_3BB0A8C1_0x004DABF0, &OpenSHC::UI::AppendCreditsSoundStreamCommand)
+    AppendCreditsSoundStreamCommand;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, int param_2, undefined4 param_3, undefined4 param_4,
                                 undefined4 param_5, undefined4 param_6, undefined4 param_7, undefined4 param_8),
-        false, Address::SHC_3BB0A8C1_0x004DAC30, &OpenSHC::UI::FUN_004dac30)
-    FUN_004dac30;
+        false, Address::SHC_3BB0A8C1_0x004DAC30, &OpenSHC::UI::AppendCreditsTextCommand)
+    AppendCreditsTextCommand;
+
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, int param_2), false, Address::SHC_3BB0A8C1_0x004DACF0,
+        &OpenSHC::UI::AppendCreditsTextEndCommand)
+    AppendCreditsTextEndCommand;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__cdecl*)(int param_1, int param_2), false, Address::SHC_3BB0A8C1_0x004DACF0, &OpenSHC::UI::FUN_004dacf0)
-    FUN_004dacf0;
-
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004DAFB0, &OpenSHC::UI::FUN_004dafb0)
-    FUN_004dafb0;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004DAFB0, &OpenSHC::UI::RenderTextPageProgressBar)
+    RenderTextPageProgressBar;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__cdecl*)(int param_1), false, Address::SHC_3BB0A8C1_0x004DB0D0, &OpenSHC::UI::FUN_004db0d0)
-    FUN_004db0d0;
+        void(__cdecl*)(int param_1), false, Address::SHC_3BB0A8C1_0x004DB0D0, &OpenSHC::UI::DisplayFullScreenTextPage)
+    DisplayFullScreenTextPage;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(undefined4 param_1, undefined4 param_2), false,
-        Address::SHC_3BB0A8C1_0x004DB180, &OpenSHC::UI::FUN_004db180)
-    FUN_004db180;
+        Address::SHC_3BB0A8C1_0x004DB180, &OpenSHC::UI::BuildIntroLogoSequence)
+    BuildIntroLogoSequence;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int storedMenuStringIndex, undefined4 param_2, undefined4 param_3,
                                 int allowedWidth, undefined4 param_5, int fontSize),
         false, Address::SHC_3BB0A8C1_0x004DB300, &OpenSHC::UI::TrimStoredMenuString)
     TrimStoredMenuString;
 
-    MACRO_FUNCTION_RESOLVER(
-        void(__cdecl*)(float param_1), false, Address::SHC_3BB0A8C1_0x004DB390, &OpenSHC::UI::FUN_004db390)
-    FUN_004db390;
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(float param_1), false, Address::SHC_3BB0A8C1_0x004DB390,
+        &OpenSHC::UI::RenderScrollingCreditsTextFrame)
+    RenderScrollingCreditsTextFrame;
 
     MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004DB4F0,
         &OpenSHC::UI::MenuView_HistoricMissionPicture_Prepare)
@@ -2074,11 +2091,12 @@ namespace UI_Func {
     MenuView_HistoricCampaignOutro_DoEveryFrame;
 
     MACRO_FUNCTION_RESOLVER(
-        undefined4(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004DC140, &OpenSHC::UI::FUN_004dc140)
-    FUN_004dc140;
+        undefined4(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004DC140, &OpenSHC::UI::FindCampaignMapHotspotAtMouse)
+    FindCampaignMapHotspotAtMouse;
 
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004DC1C0, &OpenSHC::UI::FUN_004dc1c0)
-    FUN_004dc1c0;
+    MACRO_FUNCTION_RESOLVER(
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004DC1C0, &OpenSHC::UI::BuildExtremeDemoIntroScript)
+    BuildExtremeDemoIntroScript;
 
     MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004DC500,
         &OpenSHC::UI::MenuView_MissionFinishedTransition_DoEveryFrame)
