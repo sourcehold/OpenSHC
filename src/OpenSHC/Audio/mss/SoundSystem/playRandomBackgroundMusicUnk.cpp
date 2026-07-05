@@ -21,6 +21,12 @@ namespace Audio {
             if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.field0_0x0 != 5) {
                 return;
             }
+
+            // NOTE: Current state has a mismatch with the bytes of this condition: The following early return is
+            //   directly placed under it. So resolve this, one can move the first early return inside this if as or,
+            //   which will produce the proper code for this position, but messes with the rest of the function in such
+            //   a way that is produces a lower match. Due to the amount of time already spend, the function is kept in
+            //   this state and maybe one day tackled again when the last once are cleaned up.
             if (!MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()
                 && (DAT_GameCore::instance.currentMenuViewType != UI::Enums::MVT_SCENARIO_DESCRIPTION
                     || !DAT_GameCore::instance.field25_0x64)) {
@@ -124,7 +130,7 @@ namespace Audio {
                             }
                             return;
                         }
-                    } else if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.musicTracker != 0) {
+                    } else {
                         if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.musicTracker < 2) {
                             ++DAT_SoundEffectsHelperData1::instance.SEC_Section1079.musicTracker;
                             if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.musicTracker == 2) {

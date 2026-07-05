@@ -10261,7 +10261,7 @@ SHC_3BB0A8C1_0x0046B975 | 0.0% | Pending
 SHC_3BB0A8C1_0x0046B976 | 0.0% | Pending
 SHC_3BB0A8C1_0x0046B980 | 0.0% | Pending
 SHC_3BB0A8C1_0x0046BB20 | 0.0% | Pending
-SHC_3BB0A8C1_0x0046BB60 | 0.0% | Pending
+SHC_3BB0A8C1_0x0046BB60 | 100.0% | Reimplemented
 SHC_3BB0A8C1_0x0046BB80 | 0.0% | Pending
 SHC_3BB0A8C1_0x0046BBD0 | 0.0% | Pending
 SHC_3BB0A8C1_0x0046BC90 | 0.0% | Pending
@@ -10938,7 +10938,7 @@ SHC_3BB0A8C1_0x0047B800 | 100.0% | Reimplemented
 SHC_3BB0A8C1_0x0047B830 | 100.0% | Reimplemented
 SHC_3BB0A8C1_0x0047B870 | 100.0% | Reimplemented
 SHC_3BB0A8C1_0x0047B890 | 100.0% | Reimplemented
-SHC_3BB0A8C1_0x0047BF20 | 0.0% | Pending
+SHC_3BB0A8C1_0x0047BF20 | 97.5% | Reimplemented, but structural issue due to wrong hot path selection, which causes an early return body to not be placed at the end
 SHC_3BB0A8C1_0x0047C400 | 100.0% | Reimplemented
 SHC_3BB0A8C1_0x0047C5D0 | 0.0% | Pending
 SHC_3BB0A8C1_0x0047C670 | 0.0% | Pending
