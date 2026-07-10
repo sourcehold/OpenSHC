@@ -27,8 +27,8 @@ namespace Audio {
                 void (SFXState::*)(), false, Address::SHC_3BB0A8C1_0x00449B20, &SFXState::freeMemoryAt)
             freeMemoryAt;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (SFXState::*)(char*), false, Address::SHC_3BB0A8C1_0x00449B30, &SFXState::loadWavSounds)
+            MACRO_FUNCTION_RESOLVER(void (SFXState::*)(char[270][8][1000]), false, Address::SHC_3BB0A8C1_0x00449B30,
+                &SFXState::loadWavSounds)
             loadWavSounds;
 
             MACRO_FUNCTION_RESOLVER(void (SFXState::*)(SoundEffectID), false, Address::SHC_3BB0A8C1_0x00449C40,
