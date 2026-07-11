@@ -1,6 +1,6 @@
 # Clean Decomp Body
 
-Transforms decompiled C++ function code into project style while preserving the original structure and logic.
+Transforms decompiled C++ function implementations into the project's macro/global style while preserving the original logic.
 
 ## Workflow
 
@@ -16,7 +16,7 @@ Do not transform if:
 - The body is empty or contains no meaningful code.
 - The code already matches cleaned style:
   - Uses `MACRO_CALL` / `MACRO_CALL_MEMBER`.
-  - Uses `::instance` / `::ptr` global access.
+  - Uses `::instance` / `::ptr` for global access.
   - Uses `_Func` namespaces inside function macros.
   - Already uses correct namespaces and imports.
 
@@ -41,7 +41,14 @@ Do not:
 - Remove code.
 - Reorder code.
 
-Only apply the transformations below.
+Never invent:
+- namespaces
+- globals
+- singleton names
+- imports
+
+If a required transformation cannot be resolved from the implementation or project context, ask for clarification instead of guessing.
+Leave all code not covered by these transformation rules unchanged.
 
 ---
 
@@ -52,7 +59,7 @@ Apply transformations in this order:
 ### 1. Determine Context
 
 Identify:
-- Current class.
+- Current class if member function.
 - Existing imports.
 - Function and class namespaces.
 - Required function/global dependencies.
@@ -75,10 +82,27 @@ Rules:
 - Keep normal namespaces for classes and functions.
 - Only add `_Func` inside macro function references.
 - Use the resolved namespace to determine the required `.func.hpp` import.
+- Apply transformations recursively, including nested function calls.
 
 ---
 
-### 3. Global Access
+### 3. Member Field Access
+
+Member field access might appear through a global in the code, since many are singletons.
+
+Determine from the function signature whether the implementation is a member function: `<class>::<function>(<params>)`
+
+If so, identify the singleton/global representing the current class. For example: `DAT_<class>`
+
+Transform to `this` access:
+
+`DAT_<class>.field` → `this->field`
+
+If the required global cannot be identified, ask for clarification instead of guessing.
+
+---
+
+### 4. Global Access
 
 Convert globals for field access:
 
@@ -88,14 +112,11 @@ Only use pointer in cases of function calls or pointer assigns:
 
 `&DAT_Global` → `DAT_Global::ptr`
 
-Rules:
-- Keep global namespaces.
-- Replace globals belonging to the current class with `this`.
-- Ask if the current class global is uncertain.
+Keep global namespaces.
 
 ---
 
-### 4. Namespace Resolution
+### 5. Namespace Resolution
 
 Ensure classes, functions, and types use their correct namespaces after transformation.
 
@@ -107,18 +128,19 @@ Use namespace information to identify required imports.
 
 ---
 
-### 5. Imports
+### 6. Imports
 
 Add only required dependency imports.
 
 Rules:
 - The current file's relative `.func.hpp` import already exists. Do not add or modify it.
 - Add `.func.hpp` imports for called functions/classes.
-- Add global `.hpp` imports for accessed globals.
+- Add global `.hpp` imports for accessed globals. Not for the transformed class global.
 - Global imports always use `OpenSHC/Globals/<Name>.hpp`.
 - All new imports must use the full project path.
 - Do not add unused imports.
 - Preserve existing include grouping.
+- Do not duplicate existing imports.
 
 Example:
 
