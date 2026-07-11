@@ -1,6 +1,6 @@
 # Enable Local Function Development
 
-Configures `cmake/openshc-sources.txt.local` with selected `.cpp` implementations.
+Configure `cmake/openshc-sources.txt.local` with selected `.cpp` implementations.
 
 ## Input
 
@@ -15,55 +15,18 @@ Accepted formats:
 
 Mixed formats are allowed.
 
-On failure, abort without modifying files and report the input and reason.
-
 ---
 
 ## Resolve Inputs
 
-Deduplicate inputs while preserving order.
+Resolve each input using **Find Function Implementation**.
 
-### Function identifiers
+Rules:
 
-Resolve to `.cpp` implementation files under `src/`.
-
-Function only:
-
-Search for matching implementation filenames.
-
-If zero or multiple matches are found, abort and report matches.
-
-Class/function:
-
-Restrict the search to the matching class folder.
-
-Example:
-
-`AICState::wipeAICMemory`
-
-→
-
-`src/**/AICState/wipeAICMemory.cpp`
-
-If zero or multiple matches are found, abort and report matches.
-
-### Paths
-
-Verify the `.cpp` file exists.
-
-### Addresses
-
-Require an available CLI or optimized text-search tool.
-
-Use this tool to search all `.cpp` files under `src/` for:
-
-`FUNCTION: STRONGHOLDCRUSADER <hex-address>`
-
-The AI must not perform address searches by reading files individually.
-
-If no suitable search tool exists, abort.
-
-If zero or multiple matches are found, abort and report matches.
+- Deduplicate resolved paths while preserving input order.
+- If any input fails to resolve, abort.
+- Do not modify files on failure.
+- Report the failing input and reason.
 
 ---
 
