@@ -41,7 +41,7 @@ Extract the hexadecimal address from the function comment:
 Run:
 
 ```powershell
-reccmp/dll/run --wrap-quiet reccmp-reccmp --target STRONGHOLDCRUSADER --verbose <address> 2>$null
+$env:PYTHONIOENCODING="utf-8"; reccmp/dll/run --wrap-quiet reccmp-reccmp --target STRONGHOLDCRUSADER --verbose <address> 2>$null
 ```
 
 If the comparison fails or produces no output:
