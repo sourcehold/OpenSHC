@@ -33,8 +33,8 @@ namespace Audio {
         // SIZE: 0x00008E90
         class SFXState {
         public:
-            undefined4 DAT_SFXCounter1; // 0x00000000 length: 4
-            undefined4 highestSFXCounter; // 0x00000004 length: 4
+            int DAT_SFXCounter1; // 0x00000000 length: 4
+            int highestSFXCounter; // 0x00000004 length: 4
             pointer* DAT_SoundFileNameArrayMemoryPointer; // 0x00000008 length: 4
             char* DAT_SoundFileNamePointersArray[1000]; // 0x0000000C length: 4000
             int DAT_SoundVolumeArray[1000]; // 0x00000FAC length: 4000
