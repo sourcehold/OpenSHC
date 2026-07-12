@@ -54,7 +54,7 @@ namespace Audio {
 
             void freeMemoryAt();
 
-            void loadWavSounds(char(param_1)[270][8][1000]);
+            void loadWavSounds(char* param_1);
 
             void setUpSFXToPlayUnk(SoundEffectID sfxOffsetInArray);
 
