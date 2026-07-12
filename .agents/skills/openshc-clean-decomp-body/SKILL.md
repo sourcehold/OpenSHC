@@ -68,25 +68,7 @@ Use this information for all following transformations.
 
 ---
 
-### 2. Function Calls
-
-Replace direct calls:
-
-`Namespace::Function(args)` → `MACRO_CALL(Namespace_Func::Function)(args)`
-
-Replace member calls using global objects:
-
-`Namespace::Class::Function(&Global, args)` or `Namespace::Class::Function(Global, args)` → `MACRO_CALL_MEMBER(Namespace::Class_Func::Function, Global::ptr)(args)`
-
-Rules:
-- Keep normal namespaces for classes and functions.
-- Only add `_Func` inside macro function references.
-- Use the resolved namespace to determine the required `.func.hpp` import.
-- Apply transformations recursively, including nested function calls.
-
----
-
-### 3. Member Field Access
+### 2. Member Field Access
 
 Member field access might appear through a global in the code, since many are singletons.
 
@@ -102,7 +84,7 @@ If the required global cannot be identified, ask for clarification instead of gu
 
 ---
 
-### 4. Global Access
+### 3. Global Access
 
 Convert globals for field access:
 
@@ -113,6 +95,28 @@ Only use pointer in cases of function calls or pointer assigns:
 `&DAT_Global` → `DAT_Global::ptr`
 
 Keep global namespaces.
+
+---
+
+### 4. Function Calls
+
+Replace direct calls:
+
+`Namespace::Function(args)` → `MACRO_CALL(Namespace_Func::Function)(args)`
+
+Replace member calls using:
+
+- the "this" pointer if the current function is a member function of the same class:  
+`Namespace::Class::Function(&ClassObject, args)` or `Namespace::Class::Function(ClassObject, args)` → `MACRO_CALL_MEMBER(Namespace::Class_Func::Function, this)(args)`
+
+- global objects otherwise:  
+`Namespace::Class::Function(&Global, args)` or `Namespace::Class::Function(Global, args)` → `MACRO_CALL_MEMBER(Namespace::Class_Func::Function, Global::ptr)(args)`
+
+Rules:
+- Keep normal namespaces for classes and functions.
+- Only add `_Func` inside macro function references.
+- Use the resolved namespace to determine the required `.func.hpp` import.
+- Apply transformations recursively, including nested function calls.
 
 ---
 
