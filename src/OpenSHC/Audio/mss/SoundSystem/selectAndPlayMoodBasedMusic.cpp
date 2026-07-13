@@ -13,7 +13,7 @@ namespace Audio {
     namespace MSS {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0047a340
-        void SoundSystem::FUN_0047a340()
+        void SoundSystem::selectAndPlayMoodBasedMusic()
         {
             MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber1, SEC_RNG::ptr)();
             int someState;

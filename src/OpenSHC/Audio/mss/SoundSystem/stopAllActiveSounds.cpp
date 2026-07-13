@@ -9,7 +9,7 @@ namespace Audio {
     namespace MSS {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0047A9E0
-        void SoundSystem::meth_0x47a9e0()
+        void SoundSystem::stopAllActiveSounds()
         {
             if (!this->waveOutOpenUnk_0x8) {
                 return;

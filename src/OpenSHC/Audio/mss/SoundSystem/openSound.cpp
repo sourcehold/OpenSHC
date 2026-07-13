@@ -29,7 +29,7 @@ namespace Audio {
                 return;
             }
 
-            MACRO_CALL_MEMBER(SoundSystem_Func::meth_0x47b250, this)(filePath);
+            MACRO_CALL_MEMBER(SoundSystem_Func::playMusicFileByName, this)(filePath);
         }
 
     }

@@ -10,7 +10,7 @@ namespace Audio {
     namespace MSS {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0047B700
-        void SoundSystem::meth_0x47b700(char* param_1)
+        void SoundSystem::playAmbientStreamWithLoop(char* param_1)
         {
             if (!this->waveOutOpenUnk_0x8) {
                 return;

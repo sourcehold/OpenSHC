@@ -189,7 +189,7 @@ namespace Audio {
                             .totalEnemyUnitsCount
                     && DAT_TroopValueState::instance.attackInfo.lowTroopValueRelated == 0) {
                     MACRO_CALL_MEMBER(SoundSystem_Func::playRandomMusic02, this)(1);
-                    MACRO_CALL_MEMBER(SoundSystem_Func::meth_0x47a580, this)();
+                    MACRO_CALL_MEMBER(SoundSystem_Func::playBattleGloryMusicIfConditionsMet, this)();
                 }
 
                 if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.field0_0x0 == 5) {
@@ -224,7 +224,7 @@ namespace Audio {
                 if (DAT_SoundEffectsHelperData1::instance.field16_0x5c >= 6) {
                     DAT_SoundEffectsHelperData1::instance.field16_0x5c = 0;
                 }
-                MACRO_CALL_MEMBER(SoundSystem_Func::FUN_0047a340, this)();
+                MACRO_CALL_MEMBER(SoundSystem_Func::selectAndPlayMoodBasedMusic, this)();
             } else {
                 if (!MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()) {
                     return;
@@ -299,7 +299,7 @@ namespace Audio {
                 if (DAT_SoundEffectsHelperData1::instance.field16_0x5c >= 6) {
                     DAT_SoundEffectsHelperData1::instance.field16_0x5c = 0;
                 }
-                MACRO_CALL_MEMBER(SoundSystem_Func::FUN_0047a340, this)();
+                MACRO_CALL_MEMBER(SoundSystem_Func::selectAndPlayMoodBasedMusic, this)();
             }
         }
 

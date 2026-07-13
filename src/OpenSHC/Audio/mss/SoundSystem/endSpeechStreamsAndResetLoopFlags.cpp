@@ -8,7 +8,7 @@ namespace Audio {
     namespace MSS {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00424700
-        void SoundSystem::meth_0x424700()
+        void SoundSystem::endSpeechStreamsAndResetLoopFlags()
         {
             this->streamFlagsUnkAndLoopCount_0x34[4] = 0;
             this->streamFlagsUnkAndLoopCount_0x34[3] = 0;
