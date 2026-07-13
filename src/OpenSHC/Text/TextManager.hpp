@@ -117,9 +117,9 @@ namespace Text {
 
         void setupFontSizeClassObjects();
 
-        void meth_0x469f20(dword param_1, dword param_2);
+        void setTextClipRange(dword param_1, dword param_2);
 
-        void meth_0x469f40();
+        void resetTextClipRange();
 
         void trimText(char* text, int allowedWidth, int fontSize);
 
@@ -132,13 +132,13 @@ namespace Text {
         int renderPartOfNumberUnk(int numberToRenderUnk, int xPosUnk, int yPosUnk, int integerPartToRenderUnk,
             int bgr24, int digitSet, BOOL useCurrentXOffsetUnk);
 
-        int FUN_0046a4d0(int param_1, int param_2);
+        int calcRenderedNumberWidth(int param_1, int param_2);
 
         int getCharWidth(char char_, int fontSize);
 
         int computeTextWidth(char* text, int fontSize);
 
-        int meth_0x4716d0(int param_1, int param_2);
+        int computeNumberTextWidth(int param_1, int param_2);
 
         void loadCRTex();
 

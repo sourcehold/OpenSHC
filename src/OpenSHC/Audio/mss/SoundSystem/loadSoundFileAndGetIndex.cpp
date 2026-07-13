@@ -5,7 +5,7 @@ namespace Audio {
     namespace MSS {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00479c20
-        int SoundSystem::meth_0x479c20(char* fileName)
+        int SoundSystem::loadSoundFileAndGetIndex(char* fileName)
         {
             if (!this->waveOutOpenUnk_0x8) {
                 return -1;

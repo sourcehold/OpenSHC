@@ -59,23 +59,23 @@ namespace UI {
         // Constructor
         MinimapViewState* Constructor_MinimapViewState();
 
-        void FUN_004b5110();
+        void scrollViewportToMinimapClick();
 
-        void meth_0x4b51a0(int* param_1, int* param_2);
+        void convertMinimapClickToTileXY(int* param_1, int* param_2);
 
         void renderMinimapPreview(int screenX, int screenY);
 
-        void meth_0x4b5300();
+        void triggerMinimapRedraw();
 
-        void FUN_004b5330(uint param_1, int param_2, int param_3, uint param_4, int param_5);
+        void renderMinimapTileStripWithLuminescence(uint param_1, int param_2, int param_3, uint param_4, int param_5);
 
-        void setTileColorsUnk(uint param_1, int param_2, int param_3, int param_4, uint param_5);
+        void renderMinimapTileColors(uint param_1, int param_2, int param_3, int param_4, uint param_5);
 
-        void meth_0x4b5f70(uint param_1, int param_2, int param_3);
+        void locatePlayerKeepPositionsOnMinimap(uint param_1, int param_2, int param_3);
 
         void generateMinimapImage();
 
-        void createMapPreviewMiniMap_ConvertColorsUnk();
+        void convertLoadedMinimapColors();
 
         void setSpawnMoment(int x, int y);
 

@@ -68,9 +68,9 @@ namespace Audio {
 
             void someVolumeAdjustmentFunction(int param_1, int param_2, int param_3);
 
-            void FUN_00449ff0();
+            void resetScheduledSoundRequests();
 
-            void meth_0x44a050();
+            void resetAmbientEventCounters();
 
             void notifyAmbientSoundEvent(int ambientSoundType);
 

@@ -39,13 +39,13 @@ namespace Map {
         WallAndPitchState() {};
         ~WallAndPitchState() {};
 
-        void meth_0x500c20(int buildingID);
+        void startBuildingDestructionConfirmation(int buildingID);
 
         void resetWallAndPitchState();
 
-        void meth_0x500cb0(int entityID);
+        void startEntityDestructionConfirmation(int entityID);
 
-        void meth_0x500cf0(int unitID);
+        void startUnitDestructionConfirmation(int unitID);
 
         void resetWallPlacementInfo();
 
@@ -57,9 +57,9 @@ namespace Map {
 
         void destroyPitch(int playerID, int count, int amount);
 
-        void meth_0x500f40();
+        void updateDestructionConfirmationCountdown();
 
-        void meth_0x5118c0();
+        void confirmAndQueueDestructionCommand();
     };
 
     static_assert_cpp98_obj(sizeof(WallAndPitchState) == 2432, WallAndPitchState);

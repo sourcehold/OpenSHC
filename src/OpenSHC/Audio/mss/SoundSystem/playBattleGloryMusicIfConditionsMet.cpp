@@ -7,7 +7,7 @@ namespace Audio {
     namespace MSS {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0047A580
-        void SoundSystem::meth_0x47a580()
+        void SoundSystem::playBattleGloryMusicIfConditionsMet()
         {
             if (DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.field0_0x0 == 5
                 && DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.field6_0x18 == 0

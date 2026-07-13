@@ -20,12 +20,12 @@ namespace Text {
         getTextArrayPointer;
 
         MACRO_FUNCTION_RESOLVER(void (UserTextHandler::*)(undefined4, undefined4), false,
-            Address::SHC_3BB0A8C1_0x00469800, &UserTextHandler::FUN_00469800)
-        FUN_00469800;
+            Address::SHC_3BB0A8C1_0x00469800, &UserTextHandler::setTextEntryAndUpdateCursor)
+        setTextEntryAndUpdateCursor;
 
         MACRO_FUNCTION_RESOLVER(
-            int (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x00469860, &UserTextHandler::FUN_00469860)
-        FUN_00469860;
+            int (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x00469860, &UserTextHandler::getCurrentFontSize)
+        getCurrentFontSize;
 
         MACRO_FUNCTION_RESOLVER(
             void (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x00469870, &UserTextHandler::handleReturnKey)
@@ -40,28 +40,28 @@ namespace Text {
         handleLeftKey;
 
         MACRO_FUNCTION_RESOLVER(
-            void (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x004698C0, &UserTextHandler::FUN_004698c0)
-        FUN_004698c0;
+            void (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x004698C0, &UserTextHandler::resetCursorToStart)
+        resetCursorToStart;
 
         MACRO_FUNCTION_RESOLVER(
             void (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x004698D0, &UserTextHandler::moveCursorToEnd)
         moveCursorToEnd;
 
         MACRO_FUNCTION_RESOLVER(void (UserTextHandler::*)(int, int), false, Address::SHC_3BB0A8C1_0x004698F0,
-            &UserTextHandler::FUN_004698f0)
-        FUN_004698f0;
+            &UserTextHandler::shiftTextLeftAtCursor)
+        shiftTextLeftAtCursor;
 
         MACRO_FUNCTION_RESOLVER(void (UserTextHandler::*)(int, int), false, Address::SHC_3BB0A8C1_0x00469930,
-            &UserTextHandler::FUN_00469930)
-        FUN_00469930;
+            &UserTextHandler::shiftTextRightAtCursor)
+        shiftTextRightAtCursor;
 
         MACRO_FUNCTION_RESOLVER(void (UserTextHandler::*)(int), false, Address::SHC_3BB0A8C1_0x00469980,
             &UserTextHandler::handleCharacterIntoInputBuffer)
         handleCharacterIntoInputBuffer;
 
-        MACRO_FUNCTION_RESOLVER(
-            uint (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x004699E0, &UserTextHandler::FUN_004699e0)
-        FUN_004699e0;
+        MACRO_FUNCTION_RESOLVER(uint (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x004699E0,
+            &UserTextHandler::dequeueInputBufferChar)
+        dequeueInputBufferChar;
 
         MACRO_FUNCTION_RESOLVER(
             void (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x004715A0, &UserTextHandler::handleBackspace)
@@ -75,9 +75,9 @@ namespace Text {
             &UserTextHandler::copyIntoTextArray)
         copyIntoTextArray;
 
-        MACRO_FUNCTION_RESOLVER(
-            int (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x00472CB0, &UserTextHandler::FUN_00472cb0)
-        FUN_00472cb0;
+        MACRO_FUNCTION_RESOLVER(int (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x00472CB0,
+            &UserTextHandler::isTextInputAtCapacity)
+        isTextInputAtCapacity;
 
         MACRO_FUNCTION_RESOLVER(
             void (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x00472D00, &UserTextHandler::handleDeleteKey)

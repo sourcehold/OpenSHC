@@ -21,8 +21,8 @@ namespace Rendering {
         translateXYToTile;
 
         MACRO_FUNCTION_RESOLVER(int (ViewportRenderState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004092E0,
-            &ViewportRenderState::meth_0x4092e0)
-        meth_0x4092e0;
+            &ViewportRenderState::computeTileXOffset)
+        computeTileXOffset;
 
         MACRO_FUNCTION_RESOLVER(void (ViewportRenderState::*)(), false, Address::SHC_3BB0A8C1_0x004E2050,
             &ViewportRenderState::setTileSystemMemoryLookupArrays)
@@ -37,8 +37,8 @@ namespace Rendering {
         resetBatchedRender;
 
         MACRO_FUNCTION_RESOLVER(void (ViewportRenderState::*)(int), false, Address::SHC_3BB0A8C1_0x004E2630,
-            &ViewportRenderState::FUN_004e2630)
-        FUN_004e2630;
+            &ViewportRenderState::renderAssassinClimbingOverlay)
+        renderAssassinClimbingOverlay;
 
         MACRO_FUNCTION_RESOLVER(
             void (ViewportRenderState::*)(undefined4, undefined4, undefined4, undefined4, undefined4, undefined4, int),
@@ -78,16 +78,16 @@ namespace Rendering {
         focusOnTile;
 
         MACRO_FUNCTION_RESOLVER(void (ViewportRenderState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004E5ED0,
-            &ViewportRenderState::meth_0x4e5ed0)
-        meth_0x4e5ed0;
+            &ViewportRenderState::computeMouseTileFromScreenPosition)
+        computeMouseTileFromScreenPosition;
 
         MACRO_FUNCTION_RESOLVER(void (ViewportRenderState::*)(), false, Address::SHC_3BB0A8C1_0x004E6340,
-            &ViewportRenderState::meth_0x4e6340)
-        meth_0x4e6340;
+            &ViewportRenderState::clearAllFloatingLayerElements)
+        clearAllFloatingLayerElements;
 
         MACRO_FUNCTION_RESOLVER(void (ViewportRenderState::*)(GmID, int, int, int, int, int), false,
-            Address::SHC_3BB0A8C1_0x004E63A0, &ViewportRenderState::creataAFloatingLayerElement)
-        creataAFloatingLayerElement;
+            Address::SHC_3BB0A8C1_0x004E63A0, &ViewportRenderState::createFloatingLayerElement)
+        createFloatingLayerElement;
 
         MACRO_FUNCTION_RESOLVER(void (ViewportRenderState::*)(int, int, int, int), false,
             Address::SHC_3BB0A8C1_0x004E64D0, &ViewportRenderState::renderDebugDataMousePointing)
@@ -114,20 +114,20 @@ namespace Rendering {
         updateBuildingPreviewPosition;
 
         MACRO_FUNCTION_RESOLVER(void (ViewportRenderState::*)(), false, Address::SHC_3BB0A8C1_0x004E8C50,
-            &ViewportRenderState::meth_0x4e8c50)
-        meth_0x4e8c50;
+            &ViewportRenderState::saveFocusTileAndCenterPreview)
+        saveFocusTileAndCenterPreview;
 
         MACRO_FUNCTION_RESOLVER(void (ViewportRenderState::*)(), false, Address::SHC_3BB0A8C1_0x004E8C90,
-            &ViewportRenderState::meth_0x4e8c90)
-        meth_0x4e8c90;
+            &ViewportRenderState::restoreFocusTile)
+        restoreFocusTile;
 
         MACRO_FUNCTION_RESOLVER(void (ViewportRenderState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004E8CA0,
             &ViewportRenderState::focusOnCoordinate)
         focusOnCoordinate;
 
         MACRO_FUNCTION_RESOLVER(void (ViewportRenderState::*)(int, int, int, int, int), false,
-            Address::SHC_3BB0A8C1_0x004E8CC0, &ViewportRenderState::FUN_004e8cc0)
-        FUN_004e8cc0;
+            Address::SHC_3BB0A8C1_0x004E8CC0, &ViewportRenderState::createFloatingTextElement)
+        createFloatingTextElement;
 
         MACRO_FUNCTION_RESOLVER(
             void (ViewportRenderState::*)(), false, Address::SHC_3BB0A8C1_0x004E8CF0, &ViewportRenderState::renderMap)

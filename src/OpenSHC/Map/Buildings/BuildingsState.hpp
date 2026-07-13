@@ -86,9 +86,9 @@ namespace Map {
             ~BuildingsState() {};
 
             // Constructor
-            BuildingsState* Constructor_BuildingsState();
+            BuildingsState* constructBuildingsState();
 
-            undefined4 someArrayIndexingOnBuildingField0x120(int buildingID, int param_2, ResourceType param_3);
+            undefined4 getBuildingResourceAmountByUid(int buildingID, int param_2, ResourceType param_3);
 
             BuildingType convertCommandBuildingTypeToBuildingType(CommandBuildingType commandBuildingType);
 
@@ -96,7 +96,7 @@ namespace Map {
 
             undefined4 getBuildingHeightForBuildingID(int buildingID);
 
-            undefined4 GetBuildingHeightForBuildingID_type2(int buildingID);
+            undefined4 getBuildingHeightForBuildingID2(int buildingID);
 
             int getSpriteID(CommandBuildingType commandBuildingType);
 
@@ -128,14 +128,15 @@ namespace Map {
 
             int findNextBuildingForPlayerAndType(PlayerID playerID, BuildingType buildingType, int buildingID);
 
-            int meth_0x40ab90(int param_1, int param_2, int param_3);
+            int findNextBuildingIDForOwnerAndType(int param_1, int param_2, int param_3);
 
-            int meth_0x40ac00(int param_1, int param_2, int param_3, int param_4, int param_5);
+            int findNextBuildingForPlayerAndOneOfThreeTypes(
+                int param_1, int param_2, int param_3, int param_4, int param_5);
 
             int canNavigateToDefensiveBuilding(
                 int playerID, int buildingXPosition, int buildingYPosition, int buildingID);
 
-            int meth_0x40adb0(int param_1, int param_2, int param_3, int param_4);
+            int findNextReachableDefensiveBuildingForPlayer(int param_1, int param_2, int param_3, int param_4);
 
             int pickARandomBuildingOfType(int playerID, BuildingType buildingType);
 
@@ -144,7 +145,7 @@ namespace Map {
 
             int pickARandomPositiveFearFactorBuilding(int playerID);
 
-            int closestInnBuildingID(int unitID);
+            int findClosestInnBuildingID(int unitID);
 
             void recomputeAllFearFactors();
 
@@ -156,15 +157,15 @@ namespace Map {
 
             undefined4 prepareCampgroundCoords(int playerID);
 
-            undefined4 FUN_0040b720(int buildingID);
+            undefined4 hasBuildingEntranceFlagForOrientation(int buildingID);
 
-            undefined4 FUN_0040b7b0(int buildingID);
+            undefined4 hasBuildingExitFlagForOrientation(int buildingID);
 
-            uint meth_0x40b840(uint param_1, int param_2);
+            uint isBuildingPathBlockerOrDamageable(uint param_1, int param_2);
 
             BOOLEnum getBuildingHasHealthProperty(uint buildingID);
 
-            BOOLEnum trueIfAnyUnitsOnBuildingAreFromHumanPlayer(int buildingID);
+            BOOLEnum hasHumanPlayerUnitsOnBuilding(int buildingID);
 
             void setupBuildingEntrancesOffset(int buildingSize, int nudge, int try_, int offset);
 
@@ -172,7 +173,8 @@ namespace Map {
 
             BOOLEnum buildingHasSpaceForResource(int buildingID, ResourceType resourceType);
 
-            void meth_0x40bee0(BuildingType buildingType, int someCountdown, int playerID);
+            void extendResourceCountdownForPlayerBuildingsOfType(
+                BuildingType buildingType, int someCountdown, int playerID);
 
             int canBuildingStoreTheAmount(int buildingID, ResourceType resourceType, int storageLimit);
 
@@ -182,9 +184,9 @@ namespace Map {
 
             int getStorageBuildingForResourceTypeAndAmount(ResourceType resourceType, int amount, int owner);
 
-            uint ifArmoryReturnIDIfSpaceLeft(uint buildingID, undefined4 resourceID, int playerID, int resourceCount);
+            uint getArmoryIDIfSpaceLeft(uint buildingID, undefined4 resourceID, int playerID, int resourceCount);
 
-            int meth_0x40c0d0(int buildingID);
+            int computeArmoryRemainingCapacity(int buildingID);
 
             uint computeResourceSumForBuilding(int buildingID);
 
@@ -196,7 +198,7 @@ namespace Map {
 
             void recomputePlayerDataStocksBasedOnStorageBuildings();
 
-            void getBuildingCostUnk(CommandBuildingType commandBuildingType, int* pStone, int* pGold);
+            void getBuildingCost(CommandBuildingType commandBuildingType, int* pStone, int* pGold);
 
             void getPriceForDisbandedUnitType(UnitType unitType, int* outPrice);
 
@@ -209,75 +211,75 @@ namespace Map {
 
             int getFarmThatHasTile(int tile);
 
-            undefined4 meth_0x40cb90(int param_1);
+            undefined4 isFarmTileReadyForWheatStageChange(int param_1);
 
             void growWheat(int buildingID);
 
-            void unkWheatRelated1(int buildingID);
+            void updateWheatFieldTileGraphics(int buildingID);
 
             void harmWheatFarmsOfPlayer(int playerID);
 
-            void meth_0x40d120(int buildingID);
+            void setupBarracksCampgroundPositions(int buildingID);
 
-            void meth_0x40d400(int playerID);
+            void setupMercenaryPostCampgroundPositions(int playerID);
 
-            undefined4 getIsAnySpaceAvailableAtUnitRallyPoint(int playerID, int value0to6, int unitID);
+            undefined4 isSpaceAvailableAtUnitRallyPoint(int playerID, int value0to6, int unitID);
 
-            undefined4 ifAIUnitReturnKeepLocation(int playerID, int param_2, int unitID);
+            undefined4 getKeepLocationForAIUnit(int playerID, int param_2, int unitID);
 
             void createEntityForAssemblyPointsForActiveTabType();
 
-            void meth_0x40e040(int param_1);
+            void setupEngineersGuildCampgroundPositions(int param_1);
 
-            int someLaddermanFunction1(int playerIndex, int param_2);
+            int findFreeEngineerAssemblyTile(int playerIndex, int param_2);
 
-            void meth_0x40e330(int param_1);
+            void setupTunnelersGuildCampgroundPositions(int param_1);
 
-            undefined4 meth_0x40e410(int param_1, int param_2);
+            undefined4 findFreeTunnelerAssemblyTile(int param_1, int param_2);
 
-            undefined4 meth_0x40e610(int param_1, int param_2);
+            undefined4 findFreeCathedralAssemblyTile(int param_1, int param_2);
 
             void setTileRefsForOilSmelter(int buildingID);
 
-            undefined4 meth_0x40e900(int param_1, int param_2, int param_3);
+            undefined4 isEngineerNotAtAssignedWorkTile(int param_1, int param_2, int param_3);
 
-            uint FUN_0040e990(int buildingID);
+            uint getActiveEngineerForBuilding(int buildingID);
 
             undefined4 setNewOnFarmDestination(int buildingID);
 
             void growHops(int buildingID);
 
-            void meth_0x40edf0(int buildingID);
+            void updateHopsFieldTileGraphics(int buildingID);
 
-            void meth_0x40ef40(int param_1);
+            void harmHopFarmsOfPlayer(int param_1);
 
-            ushort* FUN_0040efd0(int param_1);
+            ushort* updateBuildingAreaTileGraphics(int param_1);
 
             void setDairyFarmCheeseCounter(int param_1);
 
-            void meth_0x40f090(int param_1);
+            void harmAppleFarmTreesOfPlayer(int param_1);
 
             void setSignpostDataForBuildings();
 
             void destroySignpostData(int buildingID);
 
-            int meth_0x40f360(int param_1, int param_2);
+            int updateBuildingSignpostCounter(int param_1, int param_2);
 
             void setBuildingToAppleFarm(int buildingID);
 
-            void setBuildingValueBasedOnBuildingStateBeing2();
+            void clearBuildingValueWhenStateIsTwo();
 
-            int FUN_0040f420(int param_1);
+            int getBuildingFlag3(int param_1);
 
-            int FUN_0040f440(int param_1);
+            int getBuildingFlag1(int param_1);
 
             undefined4 determinePeasantSitPosition(int campfireID, int availablePeasants);
 
-            void meth_0x40f4f0();
+            void refreshAllBuildingTileDisplays();
 
             BOOLEnum hasWorker(int buildingID, int workerSlot);
 
-            void meth_0x40f5c0(int buildingID, int unitID, int workerIndex);
+            void assignWorkerToBuilding(int buildingID, int unitID, int workerIndex);
 
             void updateNeededEmployeeCount(int buildingID);
 
@@ -289,7 +291,7 @@ namespace Map {
 
             void processBuildingIDsNeedPeasantsQueue(undefined4 playerID);
 
-            void meth_0x40fc40(int playerID);
+            void updateLordLadyJesterAndGhostUnits(int playerID);
 
             undefined4 getRequiredEngineerCountForSiegeBuilding(int buildingID);
 
@@ -297,27 +299,27 @@ namespace Map {
 
             BOOLEnum updateRepairCostAndReturnIfDamaged(int buildingIndex);
 
-            undefined4 meth_0x410440(int param_1, int param_2);
+            undefined4 canUnitReachBuildingPerimeter(int param_1, int param_2);
 
-            undefined4 FUN_004105f0(int param_1, int param_2);
+            undefined4 canUnitReachAdjacentTile(int param_1, int param_2);
 
             void processDamageToUnitsOnBuilding(int buildingID, int damageBonus);
 
-            void slaveFireRelated1(int buildingID, undefined4 playerID);
+            void spawnRandomFireEffectOnBuilding(int buildingID, undefined4 playerID);
 
-            undefined4 fireRelatedBuildingParameter(int buildingID);
+            undefined4 getBuildingFlammabilityFactor(int buildingID);
 
-            void meth_0x4109f0(int buildingID);
+            void extinguishBuildingFire(int buildingID);
 
-            int meth_0x410b10(int param_1);
+            int findClosestReachableAlliedBuilding(int param_1);
 
             undefined4 playerHasBurningBuilding(int playerID);
 
-            void meth_0x4173d0(int buildingID);
+            void validateBuildingTetheredUnits(int buildingID);
 
-            void meth_0x417450(int buildingID, int unitID);
+            void removeTetheredUnitFromBuilding(int buildingID, int unitID);
 
-            int requiredEngineersCount(int buildingID);
+            int getRequiredEngineersCount(int buildingID);
 
             void initBuildingCosts();
 
@@ -325,21 +327,21 @@ namespace Map {
 
             void processDamageFromKillingPit(int unitID);
 
-            void unkUpdatePathLinkageTileMap(int param_1);
+            void updatePathLinkageTileMap(int param_1);
 
-            void meth_0x419a30(int param_1);
+            void initializeGatePathfindingForOwner(int param_1);
 
-            void FUN_00419ac0();
+            void rebuildTileLogicLayerForGatesAndWalls();
 
-            void FUN_00419be0();
+            void rebuildTileLogicLayerForKeeps();
 
             void updatePathLinkageForGatesKeepsSiegeTowers();
 
             void updateEnemyBuildings(int playerID);
 
-            int AIfindBuildingToAttack(int param_1, int param_2, int param_3, int param_4);
+            int aiFindBuildingToAttack(int param_1, int param_2, int param_3, int param_4);
 
-            int FUN_00419fa0(int param_1, int param_2, int param_3, int param_4);
+            int findClosestEnemyBuildingWithinRadius(int param_1, int param_2, int param_3, int param_4);
 
             void destroyBuilding(int buildingID);
 
@@ -351,7 +353,7 @@ namespace Map {
 
             undefined4 determineBuildingEntranceFromCustomArea(int buildingID, int param_2, int param_3, int x, int y);
 
-            void meth_0x41b7c0(int param_1);
+            void computeBuildingEntranceFlagsForOrientations(int param_1);
 
             void findQuarryPileLocation(undefined4 playerID, int x, int y, int buildingSize, int pileSize, int tryUnk,
                 CommandBuildingType commandBuildingType);
@@ -361,7 +363,7 @@ namespace Map {
             int findParticularBuilding(
                 undefined4 param_1, int x, int y, int buildingSize, BuildingType buildingType, int buildingID);
 
-            int getAreaForSurroundingTileUnk(int x, int y, int buildingSize);
+            int findAccessibleAreaNearBuildingLocation(int x, int y, int buildingSize);
 
             undefined4 addResourceToStockpile(int buildingID, int buildingUID, ResourceType resourceType, int amount,
                 int maxCapacity, int recomputeResources);
@@ -378,28 +380,29 @@ namespace Map {
 
             void processWallBuildingLoss(int playerID, int highCount, int lowCount, int zero);
 
-            void FUN_0041c240(int param_1, int param_2);
+            void applyFoodLossPercentageToPlayer(int param_1, int param_2);
 
             BOOLEnum processResourceGain(int playerID, ResourceType resourceType, int amount);
 
-            void ApplyGateOrDrawbridgeOpenCloseChange(int buildingID, BOOLEnum param_2, BOOLEnum param_3);
+            void applyGateOrDrawbridgeOpenCloseChange(int buildingID, BOOLEnum param_2, BOOLEnum param_3);
 
             void sortBuildingIDsNeedPeasantsQueue(int playerID);
 
             undefined4 lightUpBuilding(int buildingID, int burnerPlayerID, int spareGrounds);
 
-            void meth_0x420bf0(PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
+            void upgradeBuildingsForMapVersion(
+                PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
 
             int setupBuildingData(int playerID, uint x, uint y, undefined4 averageHeight, BuildingType buildingType,
                 uint width, int playerID_dup, int variationIndex);
 
             void deleteBuilding(uint buildingID);
 
-            void someBuildingDestroyFunction(uint param_1);
+            void destroyBuildingAndLinkedDuplicates(uint param_1);
 
             int buildingIsAccessible(int buildingID, int amountUnk);
 
-            char meth_0x421be0(int buildingID, int param_2, int x, int y);
+            char resolveBuildingEntryAccessibility(int buildingID, int param_2, int x, int y);
 
             int giveBackResourceForDestroyedBuilding(int buildingID__negResourceType, int playerID, int param_3);
 
@@ -410,19 +413,20 @@ namespace Map {
 
             int findQuarryPileThatIsCloseAndHasMostStone(int playerID, int x, int y, int unitID);
 
-            void UpdateGateDrawBridgeOpenCloseLogic();
+            void updateGateDrawBridgeOpenCloseLogic();
 
             void checkBuildingsNeedPeasants(int playerID);
 
-            void randomFireSpreadToBuildingsUnk(int param_1, int param_2);
+            void spreadFireRandomlyToBuildings(int param_1, int param_2);
 
             void updateBuildings();
 
-            void meth_0x424220();
+            void recomputeAccessibilityForAllBuildings();
 
             void updateHeatmapBasedOnBuildingAccessibility(int playerID);
 
-            void FUN_00424310(PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
+            void applyVersionUpgradeAccessibilityRecompute(
+                PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
         };
 
         static_assert_cpp98_obj(sizeof(BuildingsState) == 1630344, BuildingsState);

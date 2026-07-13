@@ -14,8 +14,8 @@ namespace Map {
     namespace Units_Func {
 
         MACRO_FUNCTION_RESOLVER(
-            int(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0051BE20, &OpenSHC::Map::Units::FUN_0051be20)
-        FUN_0051be20;
+            int(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0051BE20, &OpenSHC::Map::Units::FindFirstOpponentWithKeep)
+        FindFirstOpponentWithKeep;
 
     } // namespace Units_Func
 } // namespace Map

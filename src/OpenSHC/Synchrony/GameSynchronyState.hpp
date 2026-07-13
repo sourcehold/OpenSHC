@@ -374,7 +374,7 @@ namespace Synchrony {
         ~GameSynchronyState() {};
 
         // Constructor
-        GameSynchronyState* Constructor_GameSynchronyState();
+        GameSynchronyState* constructGameSynchronyState();
 
         BOOLEnum isAIPlayer(int playerID);
 
@@ -390,7 +390,7 @@ namespace Synchrony {
 
         void setSessionDescription();
 
-        void meth_0x47dea0();
+        void setDirectPlaySessionDescription();
 
         void fetchSessionGUID(GUID* pGUID);
 
@@ -402,13 +402,13 @@ namespace Synchrony {
 
         void readGameSpyConfig();
 
-        void meth_0x47e5b0(int param_1);
+        void computeLatencyAdjustmentFromMatchTimes(int param_1);
 
         void decompressTooLongPacketData(void* source, void* destination);
 
-        int FUN_0047e830();
+        int countActiveHumanPlayers();
 
-        int aiPlayerCountUnk();
+        int countOccupiedPlayerSlots();
 
         int checkPlayerSetValid();
 
@@ -420,7 +420,7 @@ namespace Synchrony {
 
         void handleUnexpectedDPlayXResult();
 
-        undefined4 meth_0x47ede0();
+        undefined4 checkAllPlayersReadyAndCleanupSlots();
 
         void renderDebugDataSplitInfo(int x, int y, int width, int height);
 
@@ -428,9 +428,9 @@ namespace Synchrony {
 
         void clearChatEvents();
 
-        void renderInGameChatUnk(int param_1, int param_2, int param_3);
+        void renderInGameChat(int param_1, int param_2, int param_3);
 
-        void FUN_0047fb50(int xPos, int yPos, int param_3);
+        void renderChatMessageList(int xPos, int yPos, int param_3);
 
         void resetGameCommands();
 
@@ -453,13 +453,13 @@ namespace Synchrony {
 
         int getLordTypeForPlayer(int playerID);
 
-        void meth_0x486f20(int param_1);
+        void initializeFinalResultsForActivePlayers(int param_1);
 
         void invokeDirectPlayEnumConnections();
 
         void restartDPlaySessionEnumeration(BOOLEnum respectTimeout);
 
-        void createDirectPlayInterfaceModemUnk();
+        void createDirectPlayInterfaceModem();
 
         void setupSkirmishLobby();
 
@@ -470,7 +470,7 @@ namespace Synchrony {
 
         void sendSomeMultiplayerSyncMessageWithType(undefined4 syncPacketType2);
 
-        void processSyncPacketUnk();
+        void processSyncPacket();
 
         void sendSyncPacket126();
 
@@ -484,13 +484,13 @@ namespace Synchrony {
 
         void compareGameVersions();
 
-        void createMultiplayerLobbyUnk();
+        void initializeMultiplayerLobby();
 
-        void FUN_0048c230();
+        void initMultiplayerLobbyState();
 
         void queueSynchronizedAutosaveProtocol();
 
-        void multiplayerSyncMessagesUnk();
+        void sendPeriodicSyncMessages();
 
         undefined4 reorderTeamsAndPositions();
 
@@ -500,15 +500,15 @@ namespace Synchrony {
 
         void checkLagAndSyncStatus();
 
-        void FUN_0048dc50();
+        void broadcastDesyncResyncCommands();
 
-        void FUN_0048e680();
+        void sendPendingResyncCommandsInBudget();
 
-        void FUN_0048f3d0();
+        void advanceSyncStatusAndKickLaggers();
 
         void checkGameLagStatusAndKickAccordingly();
 
-        void someMultiplayerMessageSending();
+        void throttledMultiplayerSyncUpdate();
 
         void removePlayerFromLobby(int playerID);
 
@@ -520,7 +520,7 @@ namespace Synchrony {
 
         void handleCommandLineArguments(char* arguments);
 
-        void RenderInGameChatDisplayElementUnk(int posX, int posY, DWORD elementState);
+        void renderInGameChatDisplayElement(int posX, int posY, DWORD elementState);
     };
 
     static_assert_cpp98_obj(sizeof(GameSynchronyState) == 1090072, GameSynchronyState);

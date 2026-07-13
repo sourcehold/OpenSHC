@@ -185,7 +185,7 @@ namespace Map {
         MapPropertiesState() {};
         ~MapPropertiesState() {};
 
-        BOOLEnum isParam1LessThan21(int param_1);
+        BOOLEnum isValueInRangeOneToTwenty(int param_1);
 
         void importTradingCosts();
 
@@ -193,61 +193,62 @@ namespace Map {
 
         int getEventIDForTimeUntilDefeatEventType();
 
-        void FUN_004b7930();
+        void activateScenarioTypeEvents();
 
-        void meth_0x4b7980();
+        void determineScenarioMissionTypeAndResetEvents();
 
         void sumUnitPoints();
 
         void sumUnitCounts();
 
-        void meth_0x4ba7d0();
+        void sortEventsByDate();
 
-        void meth_0x4ba8b0(int param_1);
+        void removeEventAtIndex(int param_1);
 
         void commitBuildingAvailability();
 
         BOOLEnum isMapperAvailable(eMappers param_1);
 
-        int FUN_004bb0b0(int param_1);
+        int isMercRecruitableForBuildingType(int param_1);
 
         void resetEuroUnitRestrictions();
 
-        void meth_0x4bb990();
+        void pruneInvalidEventTriggerLinks();
 
         void openEventTriggerMenu(undefined4 eventType);
 
         void sumInvasionEventUnitCount();
 
-        void tweakMonthAndYearBasedOnSection1047();
+        void adjustEventMonthAndYearForSection1047();
 
-        void FUN_004bc1c0(int param_1, int param_2, int param_3, int param_4, int param_5, undefined4 param_6);
+        void spawnAttackWaveForPlayer(
+            int param_1, int param_2, int param_3, int param_4, int param_5, undefined4 param_6);
 
-        void meth_0x4bd980();
+        void createScenarioEventForNextMonth();
 
-        void meth_0x4bda80(int param_1);
+        void createChainedMissionOutcomeEvents(int param_1);
 
-        void computeSomeKindOfMissionCompletionScore();
+        void computeMissionCompletionScore();
 
         void setStartingYearAndStartingResources();
 
-        void meth_0x4beb20();
+        void updateEventYearsAndCommitBuildingAvailability();
 
-        void meth_0x4c1320();
+        void removeProcessedInvasionEvents();
 
-        void meth_0x4c13f0();
+        void spawnInvasionEventAttackWave();
 
-        void FUN_004c2280();
+        void updateMilitaryCampaignMissionState();
 
-        void FUN_004c3110(char* param_1);
+        void loadMapSiegeHeaderSections(char* param_1);
 
         void processSingleplayerEvents();
 
         void loadMap(char* mapName);
 
-        void FUN_004c6820(char* param_1);
+        void loadMapSiegeHeaderForMissionIndex(char* param_1);
 
-        void FUN_004c6880(int missionNumber);
+        void loadMissionMapAndSetLord(int missionNumber);
     };
 
     static_assert_cpp98_obj(sizeof(MapPropertiesState) == 83616, MapPropertiesState);

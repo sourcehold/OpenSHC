@@ -42,7 +42,7 @@ namespace Map {
             undefined4 unknownInitially0_01; // 0x00000008 length: 4
             undefined4 DAT_LastSelectedUnitID; // 0x0000000C length: 4
             undefined4 unitControlsRelated; // 0x00000010 length: 4
-            undefined4 field5_0x14; // 0x00000014 length: 4
+            BOOLEnum field5_0x14; // 0x00000014 length: 4
             undefined4 DAT_LostChimps; // 0x00000018 length: 4
             undefined4 unitDistanceComputationResultUnk; // 0x0000001C length: 4
             undefined4 totalUnitsInSelection; // 0x00000020 length: 4
@@ -51,8 +51,8 @@ namespace Map {
             byte DAT_SelectedUnitsBitFlags[400]; // 0x00000074 length: 400
             byte unusedBytes02[852]; // 0x00000204 length: 852
             BOOLEnum hasEngineerSelected; // 0x00000558 length: 4
-            undefined4 field14_0x55c; // 0x0000055C length: 4
-            undefined4 field15_0x560; // 0x00000560 length: 4
+            int field14_0x55c; // 0x0000055C length: 4
+            int field15_0x560; // 0x00000560 length: 4
             undefined4 selectionEuropeanArchers; // 0x00000564 length: 4
             undefined4 selectionSpearmen; // 0x00000568 length: 4
             undefined4 selectionMacemen; // 0x0000056C length: 4
@@ -71,7 +71,7 @@ namespace Map {
             int selectionShield; // 0x000005A0 length: 4
             int selectionMangonel; // 0x000005A4 length: 4
             int selectionBallista; // 0x000005A8 length: 4
-            int field34_0x5ac; // 0x000005AC length: 4
+            int nSelectionFireBallistas; // 0x000005AC length: 4
             int selectionArabArcher; // 0x000005B0 length: 4
             int selectionArabSlave; // 0x000005B4 length: 4
             int selectionArabSlinger; // 0x000005B8 length: 4
@@ -81,12 +81,12 @@ namespace Map {
             int selectionArabFireThrower; // 0x000005C8 length: 4
             int selectionFireBallista; // 0x000005CC length: 4
             int selectionSlots[8]; // 0x000005D0 length: 32
-            int field44_0x5f0; // 0x000005F0 length: 4
+            int nHasOwnedUnitInSelection; // 0x000005F0 length: 4
             undefined4 unknownX_01; // 0x000005F4 length: 4
             undefined4 unknownY_01; // 0x000005F8 length: 4
             byte unusedBytes03[8]; // 0x000005FC length: 8
-            undefined4 field48_0x604; // 0x00000604 length: 4
-            undefined4 field49_0x608; // 0x00000608 length: 4
+            dword field48_0x604; // 0x00000604 length: 4
+            uint field49_0x608; // 0x00000608 length: 4
             undefined4 DAT_EuroUnitAcquisitionFailReason; // 0x0000060C length: 4
             undefined4 DAT_EuroUnitRequiredResource; // 0x00000610 length: 4
             Unit units[2500]; // 0x00000614 length: 2920000
@@ -103,7 +103,7 @@ namespace Map {
             ~UnitsState() {};
 
             // Constructor
-            UnitsState* Constructor_UnitsState();
+            UnitsState* constructUnitsState();
 
             void clearAllUnits();
 
@@ -129,49 +129,49 @@ namespace Map {
 
             void setupUnitSharingTileIDs(int unitID, int unitCurrentTilePosition);
 
-            undefined4 meth_0x52f4e0(int unitID);
+            undefined4 isUnitRegisteredOnItsOwnTile(int unitID);
 
             BOOLEnum ifAnyUnitOnSameTileIsLadder(int unitID);
 
             undefined4 ifAnyUnitOnSameTileIsLadderInRightDirection(int tile, int y);
 
-            void FUN_0052f680(int tile);
+            void triggerDesyncIfTileUnitLinkageInvalid(int tile);
 
             void removeUnitsSameTileLinkageIfNoLongerApplicable();
 
             void calculateUnitMovementSpeed(int unitID);
 
-            undefined4 meth_0x52fbb0(int param_1);
+            undefined4 standUpIfSeated(int param_1);
 
-            undefined4 meth_0x52fbf0(int param_1);
+            undefined4 sitDownIfStanding(int param_1);
 
-            void meth_0x52fc30(int param_1, int param_2);
+            void setFacingDirectionTowardUnit(int param_1, int param_2);
 
-            void meth_0x52fca0(int param_1, int param_2, int param_3);
+            void setFacingDirectionTowardCoords(int param_1, int param_2, int param_3);
 
             undefined4 setUnitFacingDirectionTowardsTarget(int unitID, int targetUnitID);
 
-            void FUN_0052fe00(int param_1, int param_2);
+            void setFacingDirectionTowardUnitMicro(int param_1, int param_2);
 
             bool setUnitFacingDirectionForTargetXandY(int unitID, int targetX, int targetY);
 
             uint setUnitFacingDirectionBasedOnBuilding(int unitID, int buildingID);
 
-            BOOLEnum FUN_00530080(int param_1);
+            BOOLEnum isComputerManagedNonPeasant(int param_1);
 
             void playHurtSFXForUnit(int unitID);
 
-            int meth_0x5301f0(int param_1);
+            int countLivingNondyingUnitsForPlayer(int param_1);
 
-            void meth_0x530240(int param_1);
+            void triggerStoneTowerDeathForPlayer(int param_1);
 
             void killAllUnownedUnits();
 
-            void meth_0x530310();
+            void triggerDeathAnimationForAllWildlife();
 
             void killUnits(int playerID);
 
-            void meth_0x530400(int fromPlayer, int toPlayer);
+            void transferNonCourtUnitsToPlayer(int fromPlayer, int toPlayer);
 
             void makeCourtMemberUnitsDisappearAndSwapAllOtherUnitsOwnership(int param_1, int param_2);
 
@@ -181,9 +181,9 @@ namespace Map {
 
             void setMissionNumberSpecificLord(int missionNumber);
 
-            BOOLEnum checkIfCitizenUnitIsAliveBasedOnStateUnk(int param_1);
+            BOOLEnum checkIfCitizenUnitIsAliveBasedOnState(int param_1);
 
-            bool meth_0x531000(int param_1, int param_2);
+            bool shouldUnitsEngageInMelee(int param_1, int param_2);
 
             int ComputeDamageFearFactorBonus(int damage, int playerID);
 
@@ -199,9 +199,9 @@ namespace Map {
 
             int getArmySize(int playerID);
 
-            int distanceComputationForSomeOldCodeForSomeMissions(int param_1);
+            int computeDistanceToNearestEnemyForLegacyMissions(int param_1);
 
-            BOOLEnum FUN_00533090();
+            BOOLEnum returnFalseStub();
 
             void setRandomShootLocation(int unitID, int microX, int microY, int z);
 
@@ -211,17 +211,17 @@ namespace Map {
 
             BOOLEnum findClosestLaddermanWithLadderPosition(int unitID);
 
-            int meth_0x533810(int param_1, int param_2);
+            int findAndDestroyAdjacentEnemyLadder(int param_1, int param_2);
 
             BOOLEnum getDestination2EqualsGivenCoordinates(int unitID, int x, int y);
 
-            bool meth_0x533960(int param_1);
+            bool isAtSecondaryDestination(int param_1);
 
-            BOOLEnum unitReachedDestinationUnk(int unitID);
+            BOOLEnum hasUnitReachedDestination(int unitID);
 
-            BOOLEnum meth_0x5339f0(int param_1);
+            BOOLEnum hasTunnelerNotFinishedDigging(int param_1);
 
-            undefined4 ladderClimbRelatedUnk(int unitID, uint param_2, int param_3, int param_4);
+            undefined4 computeLadderClimbPath(int unitID, uint param_2, int param_3, int param_4);
 
             void changeDestinationByAmount(int unitID, int leftover);
 
@@ -229,42 +229,42 @@ namespace Map {
 
             void tracePathFromLadderExitSetDestination(int unitID);
 
-            void FUN_00533d50(int unitID);
+            void updateUnitFadeAndVisibilityNearStructures(int unitID);
 
-            void meth_0x533f90(int param_1);
+            void saveUnitStateBeforeInterruption(int param_1);
 
-            void meth_0x533fc0(int param_1);
+            void despawnUnreachableUnit(int param_1);
 
             void updateMicroPosition(int unitID);
 
             void adjustUnitMapOrientationRelatedPositionBasedOnMapOrientationCorrectedFacingDirection(int param_1);
 
-            void meth_0x534130(uint unitID);
+            void applyTunnelDamageAlongPathPlan(uint unitID);
 
             int stopUnitIfNextToTarget(int unitID);
 
-            undefined4 meth_0x534380(int param_1);
+            undefined4 isWorkplaceBuildingOnAdjacentTile(int param_1);
 
             undefined4 setWorkplaceBuildingEntryAsTarget(int unitID, int entryAngleUnk);
 
             BOOLEnum unitIsInMoat(int unitID);
 
-            void meth_0x534490(int param_1);
+            void stampOccupancyFlagOnSurroundingTiles(int param_1);
 
             void writeSixToTileMap1104InAllDirections(int unitID, undefined4 six);
 
-            int getUnitThatFulfillsSomeTimebasedAndLocationBasedCriteria(
+            int findEligibleUnitByTimeAndLocation(
                 int unitID, int playerID, int unitXPosition, int unitYPosition, int zero1, int zero2);
 
             int selectNewBlessingTarget(int unitID);
 
-            void meth_0x5347e0();
+            void applyDragBoxSelectionByPriority();
 
-            void meth_0x534d10();
+            void selectUnitsInDragBoxForCurrentPlayer();
 
-            void meth_0x534ee0();
+            void selectFirstUnitInDragBoxAnyPlayer();
 
-            void meth_0x5350b0(int param_1, int param_2);
+            void selectAllUnitsOfTypeForPlayer(int param_1, int param_2);
 
             void deselectAllUnitsOneByOne();
 
@@ -276,37 +276,37 @@ namespace Map {
 
             void recountUnitsInSelection();
 
-            int meth_0x535520();
+            int selectionContainsEngineersOnly();
 
-            BOOLEnum meth_0x535550();
+            BOOLEnum selectionHasEngineers();
 
-            BOOLEnum meth_0x535560();
+            BOOLEnum selectionHasArchers();
 
-            undefined4 meth_0x535580();
+            undefined4 selectionHasMobileAssaultUnits();
 
-            undefined4 meth_0x5355e0();
+            undefined4 selectionHasMixedAssaultAndInfantry();
 
-            uint meth_0x535680();
+            uint getSelectedEngineerCarryingResource();
 
-            int meth_0x535700();
+            int selectionContainsTunnelersOnly();
 
             BOOLEnum selectionContainsRangedOnlyUnits();
 
-            int meth_0x5357e0();
+            int selectionContainsLadermenOnly();
 
             BOOLEnum selectionContainsOnlyArabAssassins();
 
-            int meth_0x535840();
+            int selectionContainsShieldmenOnly();
 
-            undefined4 meth_0x535870();
+            undefined4 selectionHasShieldOrSiegeMobileUnits();
 
-            undefined4 meth_0x5358c0();
+            undefined4 selectionHasShieldOrSiegeTower();
 
-            undefined4 meth_0x535910();
+            undefined4 selectionHasNoRangedUnits();
 
-            undefined4 meth_0x535980();
+            undefined4 selectionHasFootSoldiers();
 
-            uint meth_0x5359c0();
+            uint getSelectedLordIDIfOwnedByCurrentPlayer();
 
             int createUnitSelection();
 
@@ -314,55 +314,55 @@ namespace Map {
 
             void playerMakeUnitSelection(int playerID, int tribeID);
 
-            void FUN_00535df0(undefined4 param_1);
+            void getFirstSelectedUnitID(undefined4 param_1);
 
-            void siegeEngineRelated(int playerID, int unitID, int tribeID);
+            void selectSiegeEngineAndPlayFeedback(int playerID, int unitID, int tribeID);
 
             void makeSelectionBasedOnShortcut(int section1099ID);
 
             BOOLEnum isUnitShortcutAvailable(int unitHotKeyNumber);
 
-            void tribeRelated1(int playerID, int tribeID);
+            void selectTribeUnitsForPlayer(int playerID, int tribeID);
 
             UnitType getUnitTypeOfFirstSelectedUnit();
 
-            undefined4 meth_0x536260();
+            undefined4 selectionHasMovableNonSiegeUnit();
 
-            uint meth_0x5362f0(int param_1, int param_2);
+            uint getFirstSelectedUnitOfEitherType(int param_1, int param_2);
 
-            int meth_0x536370();
+            int getMaxStoneAmmoInSelectedSiegeEngines();
 
-            undefined4 meth_0x536400();
+            undefined4 countSelectedCatapultsAndTrebuchets();
 
             uint returnFirstSelectedEngineer();
 
             uint getTunnelerIDOnlyIfFirstSelected();
 
-            uint meth_0x5365a0();
+            uint getFirstSelectedLadderUnitID();
 
             undefined4 canAUnitClimb();
 
-            uint meth_0x536690();
+            uint getFirstSelectedSiegeEngineID();
 
-            uint meth_0x536710();
+            uint getFirstSelectedCatapultOrTrebuchetID();
 
-            BOOLEnum meth_0x536780(int param_1);
+            BOOLEnum isTowerTileOvercrowdedByCurrentPlayer(int param_1);
 
             undefined4 checkAnySelectedUnitCannotClimb();
 
-            BOOLEnum meth_0x5369f0(int param_1);
+            BOOLEnum selectionHasUnmannedSiegeEngine(int param_1);
 
             int selectionContainsCombatUnit(uint unitID);
 
-            void FUN_00536c70();
+            void queueStopCommand();
 
-            void queueCommand0xF(undefined4 unitType);
+            void queueUnitTypeCommand(undefined4 unitType);
 
             void queueClickNavigateMenuOrEscape(undefined4 param_1);
 
-            void tribeRelated2(int playerID, uint unitID, int unitType);
+            void clearOrDeselectUnitFromSelection(int playerID, uint unitID, int unitType);
 
-            void meth_0x536de0();
+            void clearSelectionCountsAndPlayerIDs();
 
             void giveMoveCommand(int tribeID, int x, int y, int patrol, int matchUnitSpeeds);
 
@@ -371,16 +371,17 @@ namespace Map {
 
             void extendRallyPoint(int tribeID, int mouseX, int mouseY, int rallyCount);
 
-            void FUN_00537100(undefined4 param_1, undefined4 param_2);
+            void queueDisbandAndAttackCommand2Params(undefined4 param_1, undefined4 param_2);
 
-            void FUN_00537130(undefined4 param_1, undefined4 param_2, undefined4 param_3);
+            void queueDisbandAndAttackCommand3Params(undefined4 param_1, undefined4 param_2, undefined4 param_3);
 
-            void queueCommand_36d(undefined4 param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4);
+            void queueDisbandAndAttackCommand4Params(
+                undefined4 param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4);
 
-            void queueCommand_36_variation2(undefined4 param_1, UnitInstructionType instruction, undefined4 param_3,
-                undefined4 param_4, undefined4 param_5);
+            void queueDisbandAndAttackCommand5Params(undefined4 param_1, UnitInstructionType instruction,
+                undefined4 param_3, undefined4 param_4, undefined4 param_5);
 
-            void giveTribeAnInstruction2(
+            void relayTribeInstruction(
                 int tribeID, UnitInstructionType instructionType, int targetID_1, int targetID_2, int param_5);
 
             uint findFreeTileNearby(uint unitID, uint tile);
@@ -391,13 +392,13 @@ namespace Map {
 
             int getRawDeerCount();
 
-            void meth_0x537880(int param_1);
+            void findNearestShootableDeer(int param_1);
 
-            int meth_0x537a00(int param_1, int param_2, int param_3);
+            int findNearestIdleCowForPlayer(int param_1, int param_2, int param_3);
 
             int findClosestAnimalStoreResult(int maxDistance, BOOLEnum excludeCows, uint x, uint y);
 
-            int getClosestUnitIDUnk(int param_1, uint param_2, uint param_3, int param_4);
+            int findClosestEnemyByAreaAndRange(int param_1, uint param_2, uint param_3, int param_4);
 
             undefined4 tryAttackUnitID(int unitID_1, int unitID_2);
 
@@ -405,17 +406,17 @@ namespace Map {
 
             void setAIControlStatusTo100000();
 
-            int FUN_00537f60(int unitIndex, int* param_2);
+            int clearUnitPositionCommitState(int unitIndex, int* param_2);
 
             GmID getPeasantGmID(int unitID);
 
             undefined4 chooseHusbandAndWife(int* husbandID, int* wifeID);
 
-            undefined4 meth_0x53a070(int param_1);
+            undefined4 isWorkerAtProductionIdleState(int param_1);
 
-            int meth_0x53a150(int param_1);
+            int getWorkerBlockingStateIfStuck(int param_1);
 
-            int meth_0x53a4d0(int param_1);
+            int findActiveSiegeEngineForTribe(int param_1);
 
             int getLivingSelectableUnit(int playerID);
 
@@ -423,7 +424,7 @@ namespace Map {
 
             void setUnitValues(int unitID, UnitType unitType);
 
-            void updateUnitPositionUnk(int unitID);
+            void commitPendingUnitPosition(int unitID);
 
             void setupUnitSharingCurrentTilePosition(int unitID);
 
@@ -433,19 +434,19 @@ namespace Map {
 
             int prepareProjectileTarget(int shooterID, int targetID, int param_3);
 
-            undefined4 harassBuildingsAIUnk(int unitID);
+            undefined4 harassBuildingsWithSiegeAI(int unitID);
 
             BOOLEnum setDestinationForUnit(int unitID, uint x, uint y, int reusePathingInfo);
 
-            void meth_0x53d850(int unitID);
+            void resumeMovementAfterInterruption(int unitID);
 
             void exitLadder(int unitID);
 
             uint getUnitInHitBox(undefined4 param_1);
 
-            undefined4 setTargetedBuildingDestinationUnk(int unitID, int param_2);
+            undefined4 setDestinationNearTargetedBuilding(int unitID, int param_2);
 
-            int meth_0x53ddd0(int unitID);
+            int selectWorkerSpeechOrMoraleStateID(int unitID);
 
             void upgradeMapFormatForUnits(
                 PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
@@ -459,9 +460,9 @@ namespace Map {
 
             void commitUnitLocation(int unitID);
 
-            void someUnitMoveFunction(int unitID);
+            void resetUnitMovementState(int unitID);
 
-            void meth_0x53e8d0(int unitID);
+            void clearHiddenFlagAndUpdatePosition(int unitID);
 
             void setPositionOfUnit(int unitID, uint x, uint y, undefined4 height);
 
@@ -471,11 +472,11 @@ namespace Map {
 
             void processMeleeInitiation(int unitID);
 
-            void meth_0x54a770(int param_1);
+            void resumeMovementIfNoAttackTarget(int param_1);
 
-            dword findNearestEnemyAndHeadTowardsItUnk(int unitID);
+            dword findNearestEnemyAndHeadTowardsIt(int unitID);
 
-            BOOLEnum canShootTargetUnk(short* unitID);
+            BOOLEnum acquireShootTarget(short* unitID);
 
             BOOLEnum updateClimbing(int unitID);
 

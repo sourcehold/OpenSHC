@@ -13,8 +13,8 @@ namespace Map {
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (MapPropertiesState::*)(int), false, Address::SHC_3BB0A8C1_0x004B77E0,
-            &MapPropertiesState::isParam1LessThan21)
-        isParam1LessThan21;
+            &MapPropertiesState::isValueInRangeOneToTwenty)
+        isValueInRangeOneToTwenty;
 
         MACRO_FUNCTION_RESOLVER(void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004B7800,
             &MapPropertiesState::importTradingCosts)
@@ -28,13 +28,13 @@ namespace Map {
             &MapPropertiesState::getEventIDForTimeUntilDefeatEventType)
         getEventIDForTimeUntilDefeatEventType;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004B7930, &MapPropertiesState::FUN_004b7930)
-        FUN_004b7930;
+        MACRO_FUNCTION_RESOLVER(void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004B7930,
+            &MapPropertiesState::activateScenarioTypeEvents)
+        activateScenarioTypeEvents;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004B7980, &MapPropertiesState::meth_0x4b7980)
-        meth_0x4b7980;
+        MACRO_FUNCTION_RESOLVER(void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004B7980,
+            &MapPropertiesState::determineScenarioMissionTypeAndResetEvents)
+        determineScenarioMissionTypeAndResetEvents;
 
         MACRO_FUNCTION_RESOLVER(
             void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004B7FA0, &MapPropertiesState::sumUnitPoints)
@@ -44,13 +44,13 @@ namespace Map {
             void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004B8000, &MapPropertiesState::sumUnitCounts)
         sumUnitCounts;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004BA7D0, &MapPropertiesState::meth_0x4ba7d0)
-        meth_0x4ba7d0;
+        MACRO_FUNCTION_RESOLVER(void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004BA7D0,
+            &MapPropertiesState::sortEventsByDate)
+        sortEventsByDate;
 
         MACRO_FUNCTION_RESOLVER(void (MapPropertiesState::*)(int), false, Address::SHC_3BB0A8C1_0x004BA8B0,
-            &MapPropertiesState::meth_0x4ba8b0)
-        meth_0x4ba8b0;
+            &MapPropertiesState::removeEventAtIndex)
+        removeEventAtIndex;
 
         MACRO_FUNCTION_RESOLVER(void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004BAEC0,
             &MapPropertiesState::commitBuildingAvailability)
@@ -61,16 +61,16 @@ namespace Map {
         isMapperAvailable;
 
         MACRO_FUNCTION_RESOLVER(int (MapPropertiesState::*)(int), false, Address::SHC_3BB0A8C1_0x004BB0B0,
-            &MapPropertiesState::FUN_004bb0b0)
-        FUN_004bb0b0;
+            &MapPropertiesState::isMercRecruitableForBuildingType)
+        isMercRecruitableForBuildingType;
 
         MACRO_FUNCTION_RESOLVER(void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004BB900,
             &MapPropertiesState::resetEuroUnitRestrictions)
         resetEuroUnitRestrictions;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004BB990, &MapPropertiesState::meth_0x4bb990)
-        meth_0x4bb990;
+        MACRO_FUNCTION_RESOLVER(void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004BB990,
+            &MapPropertiesState::pruneInvalidEventTriggerLinks)
+        pruneInvalidEventTriggerLinks;
 
         MACRO_FUNCTION_RESOLVER(void (MapPropertiesState::*)(undefined4), false, Address::SHC_3BB0A8C1_0x004BB9F0,
             &MapPropertiesState::openEventTriggerMenu)
@@ -81,48 +81,48 @@ namespace Map {
         sumInvasionEventUnitCount;
 
         MACRO_FUNCTION_RESOLVER(void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004BC110,
-            &MapPropertiesState::tweakMonthAndYearBasedOnSection1047)
-        tweakMonthAndYearBasedOnSection1047;
+            &MapPropertiesState::adjustEventMonthAndYearForSection1047)
+        adjustEventMonthAndYearForSection1047;
 
         MACRO_FUNCTION_RESOLVER(void (MapPropertiesState::*)(int, int, int, int, int, undefined4), false,
-            Address::SHC_3BB0A8C1_0x004BC1C0, &MapPropertiesState::FUN_004bc1c0)
-        FUN_004bc1c0;
+            Address::SHC_3BB0A8C1_0x004BC1C0, &MapPropertiesState::spawnAttackWaveForPlayer)
+        spawnAttackWaveForPlayer;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004BD980, &MapPropertiesState::meth_0x4bd980)
-        meth_0x4bd980;
+        MACRO_FUNCTION_RESOLVER(void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004BD980,
+            &MapPropertiesState::createScenarioEventForNextMonth)
+        createScenarioEventForNextMonth;
 
         MACRO_FUNCTION_RESOLVER(void (MapPropertiesState::*)(int), false, Address::SHC_3BB0A8C1_0x004BDA80,
-            &MapPropertiesState::meth_0x4bda80)
-        meth_0x4bda80;
+            &MapPropertiesState::createChainedMissionOutcomeEvents)
+        createChainedMissionOutcomeEvents;
 
         MACRO_FUNCTION_RESOLVER(void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004BDE40,
-            &MapPropertiesState::computeSomeKindOfMissionCompletionScore)
-        computeSomeKindOfMissionCompletionScore;
+            &MapPropertiesState::computeMissionCompletionScore)
+        computeMissionCompletionScore;
 
         MACRO_FUNCTION_RESOLVER(void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004BE590,
             &MapPropertiesState::setStartingYearAndStartingResources)
         setStartingYearAndStartingResources;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004BEB20, &MapPropertiesState::meth_0x4beb20)
-        meth_0x4beb20;
+        MACRO_FUNCTION_RESOLVER(void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004BEB20,
+            &MapPropertiesState::updateEventYearsAndCommitBuildingAvailability)
+        updateEventYearsAndCommitBuildingAvailability;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004C1320, &MapPropertiesState::meth_0x4c1320)
-        meth_0x4c1320;
+        MACRO_FUNCTION_RESOLVER(void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004C1320,
+            &MapPropertiesState::removeProcessedInvasionEvents)
+        removeProcessedInvasionEvents;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004C13F0, &MapPropertiesState::meth_0x4c13f0)
-        meth_0x4c13f0;
+        MACRO_FUNCTION_RESOLVER(void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004C13F0,
+            &MapPropertiesState::spawnInvasionEventAttackWave)
+        spawnInvasionEventAttackWave;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004C2280, &MapPropertiesState::FUN_004c2280)
-        FUN_004c2280;
+        MACRO_FUNCTION_RESOLVER(void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004C2280,
+            &MapPropertiesState::updateMilitaryCampaignMissionState)
+        updateMilitaryCampaignMissionState;
 
         MACRO_FUNCTION_RESOLVER(void (MapPropertiesState::*)(char*), false, Address::SHC_3BB0A8C1_0x004C3110,
-            &MapPropertiesState::FUN_004c3110)
-        FUN_004c3110;
+            &MapPropertiesState::loadMapSiegeHeaderSections)
+        loadMapSiegeHeaderSections;
 
         MACRO_FUNCTION_RESOLVER(void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004C31A0,
             &MapPropertiesState::processSingleplayerEvents)
@@ -133,12 +133,12 @@ namespace Map {
         loadMap;
 
         MACRO_FUNCTION_RESOLVER(void (MapPropertiesState::*)(char*), false, Address::SHC_3BB0A8C1_0x004C6820,
-            &MapPropertiesState::FUN_004c6820)
-        FUN_004c6820;
+            &MapPropertiesState::loadMapSiegeHeaderForMissionIndex)
+        loadMapSiegeHeaderForMissionIndex;
 
         MACRO_FUNCTION_RESOLVER(void (MapPropertiesState::*)(int), false, Address::SHC_3BB0A8C1_0x004C6880,
-            &MapPropertiesState::FUN_004c6880)
-        FUN_004c6880;
+            &MapPropertiesState::loadMissionMapAndSetLord)
+        loadMissionMapAndSetLord;
 
     } // namespace MapPropertiesState_Func
 } // namespace Map

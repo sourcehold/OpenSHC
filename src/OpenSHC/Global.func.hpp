@@ -577,8 +577,8 @@ namespace Global_Func {
         Address::SHC_3BB0A8C1_0x00467BC0, &OpenSHC::Global::EnumDisplayModesCallback)
     EnumDisplayModesCallback;
 
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00469F10, &OpenSHC::Global::FUN_Useless)
-    FUN_Useless;
+    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00469F10, &OpenSHC::Global::DoNothing)
+    DoNothing;
 
     MACRO_FUNCTION_RESOLVER(byte(__stdcall*)(byte value, int bits), false, Address::SHC_3BB0A8C1_0x0046CE30,
         &OpenSHC::Global::RotateByteLeft)
@@ -710,11 +710,12 @@ namespace Global_Func {
     SumUnitPoints;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, BuildingType buildingType), false,
-        Address::SHC_3BB0A8C1_0x004BC690, &OpenSHC::Global::FUN_004bc690)
-    FUN_004bc690;
+        Address::SHC_3BB0A8C1_0x004BC690, &OpenSHC::Global::SetTutorialBuildingActionState)
+    SetTutorialBuildingActionState;
 
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004BC770, &OpenSHC::Global::FUN_004bc770)
-    FUN_004bc770;
+    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004BC770,
+        &OpenSHC::Global::SetTutorialHintActiveWithTimestamp)
+    SetTutorialHintActiveWithTimestamp;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int skirmishTrailMission), false, Address::SHC_3BB0A8C1_0x004C68D0,
         &OpenSHC::Global::SetupSkirmishMode)
@@ -929,17 +930,17 @@ namespace Global_Func {
         Address::SHC_3BB0A8C1_0x00530CF0, &OpenSHC::Global::SetStateToFreetimeWalking)
     SetStateToFreetimeWalking;
 
-    MACRO_FUNCTION_RESOLVER(
-        bool(__cdecl*)(int param_1), false, Address::SHC_3BB0A8C1_0x00530D50, &OpenSHC::Global::FUN_00530d50)
-    FUN_00530d50;
+    MACRO_FUNCTION_RESOLVER(bool(__cdecl*)(int param_1), false, Address::SHC_3BB0A8C1_0x00530D50,
+        &OpenSHC::Global::CheckUnitProductionPaused)
+    CheckUnitProductionPaused;
 
     MACRO_FUNCTION_RESOLVER(int(__cdecl*)(int unitID, int goodsCount, BOOLEnum boost), false,
         Address::SHC_3BB0A8C1_0x00530D70, &OpenSHC::Global::ComputeGoodsProduced)
     ComputeGoodsProduced;
 
-    MACRO_FUNCTION_RESOLVER(
-        BuildingTypeShort*(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00530E00, &OpenSHC::Global::FUN_00530e00)
-    FUN_00530e00;
+    MACRO_FUNCTION_RESOLVER(BuildingTypeShort*(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00530E00,
+        &OpenSHC::Global::WarnIfPlayerLacksGranary)
+    WarnIfPlayerLacksGranary;
 
     MACRO_FUNCTION_RESOLVER(
         uint(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00530EB0, &OpenSHC::Global::TryPlayStockpileIsFullNoiseUnk)

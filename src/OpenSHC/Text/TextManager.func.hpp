@@ -85,13 +85,13 @@ namespace Text {
             void (TextManager::*)(), false, Address::SHC_3BB0A8C1_0x00469E70, &TextManager::setupFontSizeClassObjects)
         setupFontSizeClassObjects;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (TextManager::*)(dword, dword), false, Address::SHC_3BB0A8C1_0x00469F20, &TextManager::meth_0x469f20)
-        meth_0x469f20;
+        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(dword, dword), false, Address::SHC_3BB0A8C1_0x00469F20,
+            &TextManager::setTextClipRange)
+        setTextClipRange;
 
         MACRO_FUNCTION_RESOLVER(
-            void (TextManager::*)(), false, Address::SHC_3BB0A8C1_0x00469F40, &TextManager::meth_0x469f40)
-        meth_0x469f40;
+            void (TextManager::*)(), false, Address::SHC_3BB0A8C1_0x00469F40, &TextManager::resetTextClipRange)
+        resetTextClipRange;
 
         MACRO_FUNCTION_RESOLVER(
             void (TextManager::*)(char*, int, int), false, Address::SHC_3BB0A8C1_0x00469F50, &TextManager::trimText)
@@ -113,9 +113,9 @@ namespace Text {
             Address::SHC_3BB0A8C1_0x0046A2C0, &TextManager::renderPartOfNumberUnk)
         renderPartOfNumberUnk;
 
-        MACRO_FUNCTION_RESOLVER(
-            int (TextManager::*)(int, int), false, Address::SHC_3BB0A8C1_0x0046A4D0, &TextManager::FUN_0046a4d0)
-        FUN_0046a4d0;
+        MACRO_FUNCTION_RESOLVER(int (TextManager::*)(int, int), false, Address::SHC_3BB0A8C1_0x0046A4D0,
+            &TextManager::calcRenderedNumberWidth)
+        calcRenderedNumberWidth;
 
         MACRO_FUNCTION_RESOLVER(
             int (TextManager::*)(char, int), false, Address::SHC_3BB0A8C1_0x0046A720, &TextManager::getCharWidth)
@@ -125,9 +125,9 @@ namespace Text {
             int (TextManager::*)(char*, int), false, Address::SHC_3BB0A8C1_0x00471690, &TextManager::computeTextWidth)
         computeTextWidth;
 
-        MACRO_FUNCTION_RESOLVER(
-            int (TextManager::*)(int, int), false, Address::SHC_3BB0A8C1_0x004716D0, &TextManager::meth_0x4716d0)
-        meth_0x4716d0;
+        MACRO_FUNCTION_RESOLVER(int (TextManager::*)(int, int), false, Address::SHC_3BB0A8C1_0x004716D0,
+            &TextManager::computeNumberTextWidth)
+        computeNumberTextWidth;
 
         MACRO_FUNCTION_RESOLVER(
             void (TextManager::*)(), false, Address::SHC_3BB0A8C1_0x00473870, &TextManager::loadCRTex)

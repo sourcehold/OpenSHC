@@ -56,13 +56,13 @@ namespace Text {
         int getWordStartingFromPos(
             char* text, int startAndRunIndex, char* wordReceiver, int maxWordBufferSize, int* wordStartIndexOutPtr);
 
-        void meth_0x469c40(char* text, int allowedWidth);
+        void wrapTextIntoLines(char* text, int allowedWidth);
 
         int getCharWidthUnk(byte charUnk);
 
         int getWidthOfWideText(LPWSTR wideText, int numberOfChars);
 
-        dword meth_0x471670(WCHAR wChar);
+        dword getWideCharWidth(WCHAR wChar);
 
         int renderText(char* text, int textLength, int xPos, int yPos, BGR24 color, int blendStrength);
 
@@ -78,7 +78,7 @@ namespace Text {
 
         void renderWideText(LPWSTR wideText, int textLength, int xPos, int yPos, BGR24 color, int blendStrength);
 
-        void meth_0x473830(undefined4 param_1, int param_2, int param_3, int param_4, int param_5);
+        void renderWideChar(undefined4 param_1, int param_2, int param_3, int param_4, int param_5);
     };
 
     static_assert_cpp98_obj(sizeof(FontSizeClass) == 36, FontSizeClass);

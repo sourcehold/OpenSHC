@@ -166,7 +166,7 @@ namespace Audio {
                     MACRO_CALL_MEMBER(SoundSystem_Func::setupVolumeAndSoundID, this)(
                         DE::SHCDE::MUSIC_TUNE_BATTLE_L2_GLORY1);
                 }
-                MACRO_CALL_MEMBER(SoundSystem_Func::meth_0x47a290, this)();
+                MACRO_CALL_MEMBER(SoundSystem_Func::markMusicChangePending, this)();
             } else {
                 switch (DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.volumeLevel) {
                 case 1:
@@ -174,7 +174,7 @@ namespace Audio {
                     return;
                 case 2:
                     MACRO_CALL_MEMBER(SoundSystem_Func::setupVolumeAndSoundID, this)(DE::SHCDE::MUSIC_TUNE_BATTLE2B);
-                    MACRO_CALL_MEMBER(SoundSystem_Func::meth_0x47a290, this)();
+                    MACRO_CALL_MEMBER(SoundSystem_Func::markMusicChangePending, this)();
                     return;
                 default:
                     return;

@@ -171,7 +171,7 @@ namespace Input {
 
         HCURSOR setCursor(DWORD cursorType);
 
-        void meth_0x468420();
+        void beginPointSelectionBox();
 
         void setupHitBox(int width, int height);
 
@@ -186,9 +186,9 @@ namespace Input {
         void loadAndSetCursor(int notAniDefaultCursorRef, int notAniDeleteCursorRef, int notAniDeleteNotCursorRef,
             int unused1, int unused2, int unused3, int unused4, int notAniUnknownCursorRef);
 
-        void meth_0x470b30();
+        void extendSelectionBoxToMouse();
 
-        void rightClickMenuUnk();
+        void updateRightDragCameraControl();
 
         void drawMouseBasedBox();
     };

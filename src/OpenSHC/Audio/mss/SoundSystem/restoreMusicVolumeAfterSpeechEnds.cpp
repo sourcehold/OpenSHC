@@ -14,7 +14,7 @@ namespace Audio {
         // lower the music volume, or that the music volume is currently lowered
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00479B70
-        void SoundSystem::meth_0x479b70()
+        void SoundSystem::restoreMusicVolumeAfterSpeechEnds()
         {
             if (!this->waveOutOpenUnk_0x8) {
                 return;

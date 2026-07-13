@@ -138,8 +138,8 @@ namespace UI {
             loadGfxAtBufferEnd;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (TextureRenderCore::*)(char*), false, Address::SHC_3BB0A8C1_0x004548D0,
-                &TextureRenderCore::FUN_004548d0)
-            FUN_004548d0;
+                &TextureRenderCore::CheckGfxResourceExists)
+            CheckGfxResourceExists;
 
             MACRO_FUNCTION_RESOLVER(void (TextureRenderCore::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x00454900,
                 &TextureRenderCore::renderLoadedGfx)

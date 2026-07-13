@@ -602,7 +602,7 @@ enum {
     SHC_3BB0A8C1_0x004010E0 = 0x004010E0,
     // type: function
     SHC_3BB0A8C1_0x00401120 = 0x00401120,
-    // label: meth_0x401150
+    // label: playerHasEntityOfType
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00401150 = 0x00401150,
@@ -630,11 +630,11 @@ enum {
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00401380 = 0x00401380,
-    // label: meth_0x401400
+    // label: markEntityDestroyed
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00401400 = 0x00401400,
-    // label: meth_0x401430
+    // label: tickEntityDecayCounter
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00401430 = 0x00401430,
@@ -656,11 +656,11 @@ enum {
     SHC_3BB0A8C1_0x004015D0 = 0x004015D0,
     // type: function
     SHC_3BB0A8C1_0x004015F0 = 0x004015F0,
-    // label: meth_0x401620
+    // label: recountActiveFires
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00401620 = 0x00401620,
-    // label: meth_0x401690
+    // label: flagUnitsWithActiveEntity
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00401690 = 0x00401690,
@@ -670,11 +670,11 @@ enum {
     SHC_3BB0A8C1_0x004016E0 = 0x004016E0,
     // type: function
     SHC_3BB0A8C1_0x00401730 = 0x00401730,
-    // label: meth_0x401880
+    // label: refreshPoisonCloudNearUnit
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00401880 = 0x00401880,
-    // label: meth_0x401910
+    // label: assignPoisonCloudTargetEntity
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00401910 = 0x00401910,
@@ -686,7 +686,7 @@ enum {
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00401A50 = 0x00401A50,
-    // label: meth_0x401ae0
+    // label: reassignEntitiesOwner
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00401AE0 = 0x00401AE0,
@@ -798,7 +798,7 @@ enum {
     // location: OpenSHC/Map/Entities
     // type: function
     SHC_3BB0A8C1_0x00402AB0 = 0x00402AB0,
-    // label: meth_0x402ae0
+    // label: updateEntityMicroMovement
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00402AE0 = 0x00402AE0,
@@ -812,7 +812,7 @@ enum {
     SHC_3BB0A8C1_0x00402BC8 = 0x00402BC8,
     // type: /pointer
     SHC_3BB0A8C1_0x00402BCC = 0x00402BCC,
-    // label: FUN_00402bd0
+    // label: angleToRotationFrameIndex
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00402BD0 = 0x00402BD0,
@@ -824,17 +824,17 @@ enum {
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00402DA0 = 0x00402DA0,
-    // label: meth_0x402e20
+    // label: computeLineOfSightDistance
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00402E20 = 0x00402E20,
     // type: function
     SHC_3BB0A8C1_0x00403200 = 0x00403200,
-    // label: meth_0x4036f0
+    // label: calculateEntityDrawOffset
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x004036F0 = 0x004036F0,
-    // label: meth_0x403790
+    // label: initializeSeagullMovementVector
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00403790 = 0x00403790,
@@ -846,7 +846,7 @@ enum {
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x004038B0 = 0x004038B0,
-    // label: FUN_00403900
+    // label: removeEntityFromTileLinkedList
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00403900 = 0x00403900,
@@ -854,7 +854,7 @@ enum {
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00403980 = 0x00403980,
-    // label: meth_0x4039b0
+    // label: activateProjectileEntity
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x004039B0 = 0x004039B0,
@@ -866,7 +866,7 @@ enum {
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00403A20 = 0x00403A20,
-    // label: meth_0x403ff0
+    // label: handleProjectileWallBounce
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00403FF0 = 0x00403FF0,
@@ -2046,11 +2046,11 @@ enum {
     // location: OpenSHC/Map/Entities
     // type: function
     SHC_3BB0A8C1_0x00405C00 = 0x00405C00,
-    // label: meth_0x405cf0
+    // label: setProjectileTargetPosition
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00405CF0 = 0x00405CF0,
-    // label: meth_0x405da0
+    // label: spawnProjectileImpactDebris
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00405DA0 = 0x00405DA0,
@@ -2798,7 +2798,7 @@ enum {
     SHC_3BB0A8C1_0x004081D4 = 0x004081D4,
     // type: /byte
     SHC_3BB0A8C1_0x004081D5 = 0x004081D5,
-    // label: meth_0x4081e0
+    // label: updateProjectileHeightAndCollision
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x004081E0 = 0x004081E0,
@@ -2818,7 +2818,7 @@ enum {
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x004084A0 = 0x004084A0,
-    // label: FUN_00408770
+    // label: handleMapVersionUpgrade
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00408770 = 0x00408770,
@@ -2994,7 +2994,7 @@ enum {
     // location: OpenSHC/Map/Navigation/DirectionAlgorithmState
     // type: function
     SHC_3BB0A8C1_0x004092C0 = 0x004092C0,
-    // label: meth_0x4092e0
+    // label: computeTileXOffset
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004092E0 = 0x004092E0,
@@ -3002,7 +3002,7 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00409300 = 0x00409300,
-    // label: someArrayIndexingOnBuildingField0x120
+    // label: getBuildingResourceAmountByUid
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00409330 = 0x00409330,
@@ -4176,7 +4176,7 @@ enum {
     SHC_3BB0A8C1_0x00409E75 = 0x00409E75,
     // type: /byte
     SHC_3BB0A8C1_0x00409E76 = 0x00409E76,
-    // label: GetBuildingHeightForBuildingID_type2
+    // label: getBuildingHeightForBuildingID2
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00409E80 = 0x00409E80,
@@ -4518,11 +4518,11 @@ enum {
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040AB30 = 0x0040AB30,
-    // label: meth_0x40ab90
+    // label: findNextBuildingIDForOwnerAndType
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040AB90 = 0x0040AB90,
-    // label: meth_0x40ac00
+    // label: findNextBuildingForPlayerAndOneOfThreeTypes
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040AC00 = 0x0040AC00,
@@ -4530,7 +4530,7 @@ enum {
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040AC80 = 0x0040AC80,
-    // label: meth_0x40adb0
+    // label: findNextReachableDefensiveBuildingForPlayer
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040ADB0 = 0x0040ADB0,
@@ -4548,7 +4548,7 @@ enum {
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040B090 = 0x0040B090,
-    // label: closestInnBuildingID
+    // label: findClosestInnBuildingID
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040B1A0 = 0x0040B1A0,
@@ -4574,15 +4574,15 @@ enum {
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040B660 = 0x0040B660,
-    // label: FUN_0040b720
+    // label: hasBuildingEntranceFlagForOrientation
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040B720 = 0x0040B720,
-    // label: FUN_0040b7b0
+    // label: hasBuildingExitFlagForOrientation
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040B7B0 = 0x0040B7B0,
-    // label: meth_0x40b840
+    // label: isBuildingPathBlockerOrDamageable
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040B840 = 0x0040B840,
@@ -4734,7 +4734,7 @@ enum {
     SHC_3BB0A8C1_0x0040B970 = 0x0040B970,
     // type: /byte
     SHC_3BB0A8C1_0x0040B971 = 0x0040B971,
-    // label: trueIfAnyUnitsOnBuildingAreFromHumanPlayer
+    // label: hasHumanPlayerUnitsOnBuilding
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040B980 = 0x0040B980,
@@ -4806,7 +4806,7 @@ enum {
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040BE70 = 0x0040BE70,
-    // label: meth_0x40bee0
+    // label: extendResourceCountdownForPlayerBuildingsOfType
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040BEE0 = 0x0040BEE0,
@@ -4826,11 +4826,11 @@ enum {
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040BFE0 = 0x0040BFE0,
-    // label: ifArmoryReturnIDIfSpaceLeft
+    // label: getArmoryIDIfSpaceLeft
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040C060 = 0x0040C060,
-    // label: meth_0x40c0d0
+    // label: computeArmoryRemainingCapacity
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040C0D0 = 0x0040C0D0,
@@ -4854,7 +4854,7 @@ enum {
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040C4B0 = 0x0040C4B0,
-    // label: getBuildingCostUnk
+    // label: getBuildingCost
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040C5F0 = 0x0040C5F0,
@@ -5474,7 +5474,7 @@ enum {
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040CB10 = 0x0040CB10,
-    // label: meth_0x40cb90
+    // label: isFarmTileReadyForWheatStageChange
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040CB90 = 0x0040CB90,
@@ -5484,7 +5484,7 @@ enum {
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040CC30 = 0x0040CC30,
-    // label: unkWheatRelated1
+    // label: updateWheatFieldTileGraphics
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040CF20 = 0x0040CF20,
@@ -5492,25 +5492,25 @@ enum {
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040D090 = 0x0040D090,
-    // label: meth_0x40d120
+    // label: setupBarracksCampgroundPositions
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040D120 = 0x0040D120,
     // type: function
     SHC_3BB0A8C1_0x0040D190 = 0x0040D190,
-    // label: meth_0x40d400
+    // label: setupMercenaryPostCampgroundPositions
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040D400 = 0x0040D400,
     // type: function
     SHC_3BB0A8C1_0x0040D470 = 0x0040D470,
-    // label: getIsAnySpaceAvailableAtUnitRallyPoint
+    // label: isSpaceAvailableAtUnitRallyPoint
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040D6E0 = 0x0040D6E0,
     // type: function
     SHC_3BB0A8C1_0x0040D910 = 0x0040D910,
-    // label: ifAIUnitReturnKeepLocation
+    // label: getKeepLocationForAIUnit
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040D9C0 = 0x0040D9C0,
@@ -5518,25 +5518,25 @@ enum {
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040DC70 = 0x0040DC70,
-    // label: meth_0x40e040
+    // label: setupEngineersGuildCampgroundPositions
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040E040 = 0x0040E040,
-    // label: someLaddermanFunction1
+    // label: findFreeEngineerAssemblyTile
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040E120 = 0x0040E120,
-    // label: meth_0x40e330
+    // label: setupTunnelersGuildCampgroundPositions
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040E330 = 0x0040E330,
-    // label: meth_0x40e410
+    // label: findFreeTunnelerAssemblyTile
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040E410 = 0x0040E410,
     // type: function
     SHC_3BB0A8C1_0x0040E550 = 0x0040E550,
-    // label: meth_0x40e610
+    // label: findFreeCathedralAssemblyTile
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040E610 = 0x0040E610,
@@ -5548,11 +5548,11 @@ enum {
     SHC_3BB0A8C1_0x0040E740 = 0x0040E740,
     // type: function
     SHC_3BB0A8C1_0x0040E760 = 0x0040E760,
-    // label: meth_0x40e900
+    // label: isEngineerNotAtAssignedWorkTile
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040E900 = 0x0040E900,
-    // label: FUN_0040e990
+    // label: getActiveEngineerForBuilding
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040E990 = 0x0040E990,
@@ -5566,17 +5566,17 @@ enum {
     SHC_3BB0A8C1_0x0040EBF0 = 0x0040EBF0,
     // type: function
     SHC_3BB0A8C1_0x0040EC20 = 0x0040EC20,
-    // label: meth_0x40edf0
+    // label: updateHopsFieldTileGraphics
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040EDF0 = 0x0040EDF0,
     // type: function
     SHC_3BB0A8C1_0x0040EE30 = 0x0040EE30,
-    // label: meth_0x40ef40
+    // label: harmHopFarmsOfPlayer
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040EF40 = 0x0040EF40,
-    // label: FUN_0040efd0
+    // label: updateBuildingAreaTileGraphics
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040EFD0 = 0x0040EFD0,
@@ -5584,7 +5584,7 @@ enum {
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040F040 = 0x0040F040,
-    // label: meth_0x40f090
+    // label: harmAppleFarmTreesOfPlayer
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040F090 = 0x0040F090,
@@ -5596,7 +5596,7 @@ enum {
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040F240 = 0x0040F240,
-    // label: meth_0x40f360
+    // label: updateBuildingSignpostCounter
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040F360 = 0x0040F360,
@@ -5604,15 +5604,15 @@ enum {
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040F3D0 = 0x0040F3D0,
-    // label: setBuildingValueBasedOnBuildingStateBeing2
+    // label: clearBuildingValueWhenStateIsTwo
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040F3F0 = 0x0040F3F0,
-    // label: FUN_0040f420
+    // label: getBuildingFlag3
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040F420 = 0x0040F420,
-    // label: FUN_0040f440
+    // label: getBuildingFlag1
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040F440 = 0x0040F440,
@@ -5620,7 +5620,7 @@ enum {
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040F460 = 0x0040F460,
-    // label: meth_0x40f4f0
+    // label: refreshAllBuildingTileDisplays
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040F4F0 = 0x0040F4F0,
@@ -5628,7 +5628,7 @@ enum {
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040F540 = 0x0040F540,
-    // label: meth_0x40f5c0
+    // label: assignWorkerToBuilding
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040F5C0 = 0x0040F5C0,
@@ -5656,7 +5656,7 @@ enum {
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040F9D0 = 0x0040F9D0,
-    // label: meth_0x40fc40
+    // label: updateLordLadyJesterAndGhostUnits
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040FC40 = 0x0040FC40,
@@ -5744,11 +5744,11 @@ enum {
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00410320 = 0x00410320,
-    // label: meth_0x410440
+    // label: canUnitReachBuildingPerimeter
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00410440 = 0x00410440,
-    // label: FUN_004105f0
+    // label: canUnitReachAdjacentTile
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x004105F0 = 0x004105F0,
@@ -5756,11 +5756,11 @@ enum {
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x004106D0 = 0x004106D0,
-    // label: slaveFireRelated1
+    // label: spawnRandomFireEffectOnBuilding
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00410800 = 0x00410800,
-    // label: fireRelatedBuildingParameter
+    // label: getBuildingFlammabilityFactor
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00410920 = 0x00410920,
@@ -5986,11 +5986,11 @@ enum {
     SHC_3BB0A8C1_0x004109E1 = 0x004109E1,
     // type: /byte
     SHC_3BB0A8C1_0x004109E2 = 0x004109E2,
-    // label: meth_0x4109f0
+    // label: extinguishBuildingFire
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x004109F0 = 0x004109F0,
-    // label: meth_0x410b10
+    // label: findClosestReachableAlliedBuilding
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00410B10 = 0x00410B10,
@@ -6196,11 +6196,11 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00416F80 = 0x00416F80,
-    // label: meth_0x4173d0
+    // label: validateBuildingTetheredUnits
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x004173D0 = 0x004173D0,
-    // label: meth_0x417450
+    // label: removeTetheredUnitFromBuilding
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00417450 = 0x00417450,
@@ -6296,7 +6296,7 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00418C80 = 0x00418C80,
-    // label: requiredEngineersCount
+    // label: getRequiredEngineersCount
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00418EC0 = 0x00418EC0,
@@ -6358,21 +6358,21 @@ enum {
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00419800 = 0x00419800,
-    // label: unkUpdatePathLinkageTileMap
+    // label: updatePathLinkageTileMap
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00419960 = 0x00419960,
-    // label: meth_0x419a30
+    // label: initializeGatePathfindingForOwner
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00419A30 = 0x00419A30,
-    // label: FUN_00419ac0
+    // label: rebuildTileLogicLayerForGatesAndWalls
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00419AC0 = 0x00419AC0,
     // type: function
     SHC_3BB0A8C1_0x00419AE0 = 0x00419AE0,
-    // label: FUN_00419be0
+    // label: rebuildTileLogicLayerForKeeps
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00419BE0 = 0x00419BE0,
@@ -6578,11 +6578,11 @@ enum {
     SHC_3BB0A8C1_0x00419EA1 = 0x00419EA1,
     // type: /byte
     SHC_3BB0A8C1_0x00419EA2 = 0x00419EA2,
-    // label: AIfindBuildingToAttack
+    // label: aiFindBuildingToAttack
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00419EB0 = 0x00419EB0,
-    // label: FUN_00419fa0
+    // label: findClosestEnemyBuildingWithinRadius
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00419FA0 = 0x00419FA0,
@@ -6884,7 +6884,7 @@ enum {
     // location: OpenSHC/IO
     // type: function
     SHC_3BB0A8C1_0x0041A740 = 0x0041A740,
-    // label: Constructor_BuildingsState
+    // label: constructBuildingsState
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041A760 = 0x0041A760,
@@ -6915,7 +6915,7 @@ enum {
     SHC_3BB0A8C1_0x0041B2B0 = 0x0041B2B0,
     // type: function
     SHC_3BB0A8C1_0x0041B6A0 = 0x0041B6A0,
-    // label: meth_0x41b7c0
+    // label: computeBuildingEntranceFlagsForOrientations
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041B7C0 = 0x0041B7C0,
@@ -6931,7 +6931,7 @@ enum {
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041BA00 = 0x0041BA00,
-    // label: getAreaForSurroundingTileUnk
+    // label: findAccessibleAreaNearBuildingLocation
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041BAB0 = 0x0041BAB0,
@@ -6967,7 +6967,7 @@ enum {
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041C190 = 0x0041C190,
-    // label: FUN_0041c240
+    // label: applyFoodLossPercentageToPlayer
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041C240 = 0x0041C240,
@@ -6975,7 +6975,7 @@ enum {
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041C310 = 0x0041C310,
-    // label: ApplyGateOrDrawbridgeOpenCloseChange
+    // label: applyGateOrDrawbridgeOpenCloseChange
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041C570 = 0x0041C570,
@@ -7117,7 +7117,7 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00420A30 = 0x00420A30,
-    // label: meth_0x420bf0
+    // label: upgradeBuildingsForMapVersion
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00420BF0 = 0x00420BF0,
@@ -7395,7 +7395,7 @@ enum {
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00421890 = 0x00421890,
-    // label: someBuildingDestroyFunction
+    // label: destroyBuildingAndLinkedDuplicates
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00421990 = 0x00421990,
@@ -7403,7 +7403,7 @@ enum {
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00421A40 = 0x00421A40,
-    // label: meth_0x421be0
+    // label: resolveBuildingEntryAccessibility
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00421BE0 = 0x00421BE0,
@@ -7425,7 +7425,7 @@ enum {
     SHC_3BB0A8C1_0x00422400 = 0x00422400,
     // type: function
     SHC_3BB0A8C1_0x00422430 = 0x00422430,
-    // label: UpdateGateDrawBridgeOpenCloseLogic
+    // label: updateGateDrawBridgeOpenCloseLogic
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x004224F0 = 0x004224F0,
@@ -7439,7 +7439,7 @@ enum {
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00422B80 = 0x00422B80,
-    // label: randomFireSpreadToBuildingsUnk
+    // label: spreadFireRandomlyToBuildings
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00422C60 = 0x00422C60,
@@ -7543,7 +7543,7 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004240D0 = 0x004240D0,
-    // label: meth_0x424220
+    // label: recomputeAccessibilityForAllBuildings
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00424220 = 0x00424220,
@@ -7551,7 +7551,7 @@ enum {
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00424270 = 0x00424270,
-    // label: FUN_00424310
+    // label: applyVersionUpgradeAccessibilityRecompute
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00424310 = 0x00424310,
@@ -7619,7 +7619,7 @@ enum {
     // location: OpenSHC/UI/Rendering/AlphaAndButtonSurface
     // type: function
     SHC_3BB0A8C1_0x004246E0 = 0x004246E0,
-    // label: meth_0x424700
+    // label: endSpeechStreamsAndResetLoopFlags
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00424700 = 0x00424700,
@@ -13600,7 +13600,7 @@ enum {
     SHC_3BB0A8C1_0x00437CAC = 0x00437CAC,
     // type: /pointer
     SHC_3BB0A8C1_0x00437CB0 = 0x00437CB0,
-    // label: FUN_00437cc0
+    // label: HandleWallTerrainMouseDrag
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00437CC0 = 0x00437CC0,
@@ -14788,7 +14788,7 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00440280 = 0x00440280,
-    // label: FUN_00440360
+    // label: CountPlayerUnitsByType
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00440360 = 0x00440360,
@@ -17861,13 +17861,13 @@ enum {
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x00449F10 = 0x00449F10,
-    // label: FUN_00449ff0
+    // label: resetScheduledSoundRequests
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x00449FF0 = 0x00449FF0,
     // type: function
     SHC_3BB0A8C1_0x0044A010 = 0x0044A010,
-    // label: meth_0x44a050
+    // label: resetAmbientEventCounters
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x0044A050 = 0x0044A050,
@@ -18339,11 +18339,11 @@ enum {
     // location: OpenSHC/Rendering
     // type: function
     SHC_3BB0A8C1_0x00453600 = 0x00453600,
-    // label: FUN_00453b00
+    // label: BlitMapImageWithVerticalClip
     // location: OpenSHC/Rendering
     // type: function
     SHC_3BB0A8C1_0x00453B00 = 0x00453B00,
-    // label: FUN_00454080
+    // label: BlitMapImageWithVerticalClipAndYOffset
     // location: OpenSHC/Rendering
     // type: function
     SHC_3BB0A8C1_0x00454080 = 0x00454080,
@@ -18359,7 +18359,7 @@ enum {
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x004547C0 = 0x004547C0,
-    // label: FUN_004548d0
+    // label: CheckGfxResourceExists
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x004548D0 = 0x004548D0,
@@ -18601,15 +18601,15 @@ enum {
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004568B0 = 0x004568B0,
-    // label: meth_0x4568f0
+    // label: countActiveSignposts
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004568F0 = 0x004568F0,
-    // label: meth_0x4569e0
+    // label: hasAnySignpost
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004569E0 = 0x004569E0,
-    // label: meth_0x456ad0
+    // label: pickRandomAccessibleSignpostEntry
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00456AD0 = 0x00456AD0,
@@ -18621,11 +18621,11 @@ enum {
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00456EF0 = 0x00456EF0,
-    // label: meth_0x456fd0
+    // label: computeBuildingCategoryEntryPoint
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00456FD0 = 0x00456FD0,
-    // label: meth_0x4572a0
+    // label: validateBuildingCategoryReference
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004572A0 = 0x004572A0,
@@ -19137,11 +19137,11 @@ enum {
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00457800 = 0x00457800,
-    // label: meth_0x457870
+    // label: canKeepReachSignpostZone
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00457870 = 0x00457870,
-    // label: meth_0x4578f0
+    // label: canKeepReachSignpostZoneViaPathfinder
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004578F0 = 0x004578F0,
@@ -19201,15 +19201,15 @@ enum {
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004585F0 = 0x004585F0,
-    // label: meth_0x4586d0
+    // label: activateTraderState
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004586D0 = 0x004586D0,
-    // label: meth_0x4586f0
+    // label: resetTraderState
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004586F0 = 0x004586F0,
-    // label: meth_0x458700
+    // label: findNextPlayerWithMarketplace
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00458700 = 0x00458700,
@@ -19243,7 +19243,7 @@ enum {
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004588A0 = 0x004588A0,
-    // label: meth_0x4588d0
+    // label: getBuyPriceForOneUnit
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004588D0 = 0x004588D0,
@@ -19469,7 +19469,7 @@ enum {
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00459740 = 0x00459740,
-    // label: meth_0x4597d0
+    // label: areActivePlayersMostlySameTeam
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004597D0 = 0x004597D0,
@@ -19507,7 +19507,7 @@ enum {
     SHC_3BB0A8C1_0x00459C10 = 0x00459C10,
     // type: function
     SHC_3BB0A8C1_0x00459CC0 = 0x00459CC0,
-    // label: FUN_00459d80
+    // label: computeArmySizeLimit
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00459D80 = 0x00459D80,
@@ -19609,15 +19609,15 @@ enum {
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x0045A060 = 0x0045A060,
-    // label: FUN_0045acc0
+    // label: validateLadyAndJesterUnitRefs
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x0045ACC0 = 0x0045ACC0,
-    // label: FUN_0045ad10
+    // label: initPopularityAndRecruitableDefaults
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x0045AD10 = 0x0045AD10,
-    // label: FUN_0045ae00
+    // label: resetTeams
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x0045AE00 = 0x0045AE00,
@@ -19647,13 +19647,13 @@ enum {
     SHC_3BB0A8C1_0x0045B1C0 = 0x0045B1C0,
     // type: function
     SHC_3BB0A8C1_0x0045B3A0 = 0x0045B3A0,
-    // label: meth_0x45b3e0
+    // label: initializeGameStateAfterMapLoad
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x0045B3E0 = 0x0045B3E0,
     // type: function
     SHC_3BB0A8C1_0x0045B460 = 0x0045B460,
-    // label: FUN_0045b4a0
+    // label: ProcessPeasantSpawnAndDespawnCycle
     // location:
     // type: function
     SHC_3BB0A8C1_0x0045B4A0 = 0x0045B4A0,
@@ -19761,7 +19761,7 @@ enum {
     SHC_3BB0A8C1_0x0045C1B8 = 0x0045C1B8,
     // type: /byte
     SHC_3BB0A8C1_0x0045C1B9 = 0x0045C1B9,
-    // label: meth_0x45c1c0
+    // label: migrateGameStateForMapVersion
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x0045C1C0 = 0x0045C1C0,
@@ -19783,7 +19783,7 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x0045D060 = 0x0045D060,
-    // label: meth_0x45d080
+    // label: setHelpWindowBounds
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D080 = 0x0045D080,
@@ -19791,15 +19791,15 @@ enum {
     // location: OpenSHC/UI/Rendering/AlphaAndButtonSurface
     // type: function
     SHC_3BB0A8C1_0x0045D0B0 = 0x0045D0B0,
-    // label: meth_0x45d0c0
+    // label: resetHelpStateFields
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D0C0 = 0x0045D0C0,
-    // label: meth_0x45d140
+    // label: findHelpSectionIndexByName
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D140 = 0x0045D140,
-    // label: meth_0x45d1a0
+    // label: findOrAddHelpSectionName
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D1A0 = 0x0045D1A0,
@@ -19975,7 +19975,7 @@ enum {
     SHC_3BB0A8C1_0x0045D364 = 0x0045D364,
     // type: /byte
     SHC_3BB0A8C1_0x0045D365 = 0x0045D365,
-    // label: meth_0x45d370
+    // label: loadHelpSectionGraphics
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D370 = 0x0045D370,
@@ -19983,7 +19983,7 @@ enum {
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D3C0 = 0x0045D3C0,
-    // label: meth_0x45d430
+    // label: renderHelpImageHotspots
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D430 = 0x0045D430,
@@ -19997,49 +19997,49 @@ enum {
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D6C0 = 0x0045D6C0,
-    // label: meth_0x45d740
+    // label: drawHelpWindowBackground
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D740 = 0x0045D740,
-    // label: meth_0x45d890
+    // label: findHelpGraphicIndexByName
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D890 = 0x0045D890,
-    // label: meth_0x45d8f0
+    // label: findOrAddHelpGraphicName
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D8F0 = 0x0045D8F0,
-    // label: FUN_0045d950
+    // label: getNextHelpSectionID
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D950 = 0x0045D950,
-    // label: FUN_0045d990
+    // label: getPrevHelpSectionID
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D990 = 0x0045D990,
-    // label: FUN_0045d9e0
+    // label: getHelpSectionText
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D9E0 = 0x0045D9E0,
-    // label: FUN_0045da20
+    // label: getNextHelpColorEntryIndex
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045DA20 = 0x0045DA20,
-    // label: FUN_0045da40
+    // label: getPrevHelpColorEntryIndex
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045DA40 = 0x0045DA40,
     // type: function
     SHC_3BB0A8C1_0x0045DA60 = 0x0045DA60,
-    // label: meth_0x45da80
+    // label: findSoundIndexByName
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045DA80 = 0x0045DA80,
-    // label: meth_0x45dae0
+    // label: findOrAddSoundName
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045DAE0 = 0x0045DAE0,
-    // label: FUN_0045db40
+    // label: saveHelpFileToResource
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045DB40 = 0x0045DB40,
@@ -20395,7 +20395,7 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x0045EF90 = 0x0045EF90,
-    // label: FUN_0045f080
+    // label: getHelpTokenAdvanceLength
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045F080 = 0x0045F080,
@@ -20433,7 +20433,7 @@ enum {
     SHC_3BB0A8C1_0x0045F0CC = 0x0045F0CC,
     // type: /byte
     SHC_3BB0A8C1_0x0045F0CD = 0x0045F0CD,
-    // label: meth_0x45f0d0
+    // label: insertHelpTextToken
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045F0D0 = 0x0045F0D0,
@@ -20445,7 +20445,7 @@ enum {
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045F130 = 0x0045F130,
-    // label: someKindOfTextEscape
+    // label: closeHelpDialogAndReturnToMenu
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045F240 = 0x0045F240,
@@ -20453,7 +20453,7 @@ enum {
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045F470 = 0x0045F470,
-    // label: meth_0x45f580
+    // label: loadAndParseHelpFile
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045F580 = 0x0045F580,
@@ -20461,7 +20461,7 @@ enum {
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045F5B0 = 0x0045F5B0,
-    // label: FUN_0045fdc0
+    // label: processHelpRichTextTokens
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045FDC0 = 0x0045FDC0,
@@ -20533,7 +20533,7 @@ enum {
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x004613E0 = 0x004613E0,
-    // label: meth_0x4614d0
+    // label: initializeAndLayoutHelpText
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x004614D0 = 0x004614D0,
@@ -20541,7 +20541,7 @@ enum {
     SHC_3BB0A8C1_0x004614F0 = 0x004614F0,
     // type: function
     SHC_3BB0A8C1_0x00461520 = 0x00461520,
-    // label: meth_0x461550
+    // label: renderHelpDialogIfOpen
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x00461550 = 0x00461550,
@@ -20591,39 +20591,39 @@ enum {
     SHC_3BB0A8C1_0x004619C4 = 0x004619C4,
     // type: /undefined *32
     SHC_3BB0A8C1_0x004619C8 = 0x004619C8,
-    // label: meth_0x4619d0
+    // label: loadAndLayoutHelpContent
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x004619D0 = 0x004619D0,
-    // label: meth_0x461a20
+    // label: openBuildingHelpDialog
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x00461A20 = 0x00461A20,
-    // label: meth_0x461b90
+    // label: openInGameHelpDialog
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x00461B90 = 0x00461B90,
-    // label: meth_0x461cf0
+    // label: openScenarioHelpDialog
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x00461CF0 = 0x00461CF0,
-    // label: meth_0x461e50
+    // label: openCreditsScrollDialog
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x00461E50 = 0x00461E50,
-    // label: meth_0x461f90
+    // label: openMapDescriptionEditorDialog
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x00461F90 = 0x00461F90,
-    // label: meth_0x4620f0
+    // label: setCustomHelpText
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x004620F0 = 0x004620F0,
-    // label: FUN_00462150
+    // label: popHelpDialogStack
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x00462150 = 0x00462150,
-    // label: meth_0x462190
+    // label: openUnusedHelpTextEditorDialog
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x00462190 = 0x00462190,
@@ -20897,7 +20897,7 @@ enum {
     // location: OpenSHC/UI/Rendering/AlphaAndButtonSurface
     // type: function
     SHC_3BB0A8C1_0x004630D0 = 0x004630D0,
-    // label: FUN_00463270
+    // label: ProcessBuildingClickBonus
     // location: OpenSHC/UI/Rendering/AlphaAndButtonSurface
     // type: function
     SHC_3BB0A8C1_0x00463270 = 0x00463270,
@@ -21491,7 +21491,7 @@ enum {
     SHC_3BB0A8C1_0x004639F9 = 0x004639F9,
     // type: /byte
     SHC_3BB0A8C1_0x004639FA = 0x004639FA,
-    // label: FUN_00463a00
+    // label: SelectUnitAndOpenStatusMenu
     // location: OpenSHC/UI/Rendering/AlphaAndButtonSurface
     // type: function
     SHC_3BB0A8C1_0x00463A00 = 0x00463A00,
@@ -21507,7 +21507,7 @@ enum {
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004640D0 = 0x004640D0,
-    // label: FUN_004641a0
+    // label: RenderButtonImageWithBlending
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004641A0 = 0x004641A0,
@@ -22023,7 +22023,7 @@ enum {
     // location: OpenSHC/Input/MouseState
     // type: function
     SHC_3BB0A8C1_0x00468370 = 0x00468370,
-    // label: meth_0x468420
+    // label: beginPointSelectionBox
     // location: OpenSHC/Input/MouseState
     // type: function
     SHC_3BB0A8C1_0x00468420 = 0x00468420,
@@ -22127,11 +22127,11 @@ enum {
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x004697E0 = 0x004697E0,
-    // label: FUN_00469800
+    // label: setTextEntryAndUpdateCursor
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x00469800 = 0x00469800,
-    // label: FUN_00469860
+    // label: getCurrentFontSize
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x00469860 = 0x00469860,
@@ -22147,7 +22147,7 @@ enum {
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x004698A0 = 0x004698A0,
-    // label: FUN_004698c0
+    // label: resetCursorToStart
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x004698C0 = 0x004698C0,
@@ -22155,11 +22155,11 @@ enum {
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x004698D0 = 0x004698D0,
-    // label: FUN_004698f0
+    // label: shiftTextLeftAtCursor
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x004698F0 = 0x004698F0,
-    // label: FUN_00469930
+    // label: shiftTextRightAtCursor
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x00469930 = 0x00469930,
@@ -22167,7 +22167,7 @@ enum {
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x00469980 = 0x00469980,
-    // label: FUN_004699e0
+    // label: dequeueInputBufferChar
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x004699E0 = 0x004699E0,
@@ -22187,7 +22187,7 @@ enum {
     SHC_3BB0A8C1_0x00469B90 = 0x00469B90,
     // type: function
     SHC_3BB0A8C1_0x00469BE0 = 0x00469BE0,
-    // label: meth_0x469c40
+    // label: wrapTextIntoLines
     // location: OpenSHC/Text/FontSizeClass
     // type: function
     SHC_3BB0A8C1_0x00469C40 = 0x00469C40,
@@ -22199,15 +22199,15 @@ enum {
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x00469E70 = 0x00469E70,
-    // label: FUN_Useless
+    // label: DoNothing
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00469F10 = 0x00469F10,
-    // label: meth_0x469f20
+    // label: setTextClipRange
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x00469F20 = 0x00469F20,
-    // label: meth_0x469f40
+    // label: resetTextClipRange
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x00469F40 = 0x00469F40,
@@ -22743,7 +22743,7 @@ enum {
     SHC_3BB0A8C1_0x0046A4C4 = 0x0046A4C4,
     // type: /undefined *32
     SHC_3BB0A8C1_0x0046A4C8 = 0x0046A4C8,
-    // label: FUN_0046a4d0
+    // label: calcRenderedNumberWidth
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x0046A4D0 = 0x0046A4D0,
@@ -23045,15 +23045,15 @@ enum {
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x0046C420 = 0x0046C420,
-    // label: meth_0x46c450
+    // label: setGfxFileFilter
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x0046C450 = 0x0046C450,
-    // label: meth_0x46c480
+    // label: setHelpFileFilter
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x0046C480 = 0x0046C480,
-    // label: meth_0x46c4b0
+    // label: setSoundFileFilter
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x0046C4B0 = 0x0046C4B0,
@@ -23091,7 +23091,7 @@ enum {
     // location: OpenSHC/Map/Navigation/DirectionAlgorithmState
     // type: function
     SHC_3BB0A8C1_0x0046C920 = 0x0046C920,
-    // label: FUN_0046c9a0
+    // label: calculateOrientationFromTiles
     // location: OpenSHC/Map/Navigation/DirectionAlgorithmState
     // type: function
     SHC_3BB0A8C1_0x0046C9A0 = 0x0046C9A0,
@@ -23115,7 +23115,7 @@ enum {
     // location: OpenSHC/Map/Navigation/DirectionAlgorithmState
     // type: function
     SHC_3BB0A8C1_0x0046CD30 = 0x0046CD30,
-    // label: FUN_0046cdf0
+    // label: computeMaskedBitAccumulator
     // location: OpenSHC/Map/Navigation/DirectionAlgorithmState
     // type: function
     SHC_3BB0A8C1_0x0046CDF0 = 0x0046CDF0,
@@ -23521,11 +23521,11 @@ enum {
     // location: OpenSHC/Input/MouseState
     // type: function
     SHC_3BB0A8C1_0x00470A00 = 0x00470A00,
-    // label: meth_0x470b30
+    // label: extendSelectionBoxToMouse
     // location: OpenSHC/Input/MouseState
     // type: function
     SHC_3BB0A8C1_0x00470B30 = 0x00470B30,
-    // label: rightClickMenuUnk
+    // label: updateRightDragCameraControl
     // location: OpenSHC/Input/MouseState
     // type: function
     SHC_3BB0A8C1_0x00470BC0 = 0x00470BC0,
@@ -23583,7 +23583,7 @@ enum {
     // location: OpenSHC/Text/FontSizeClass
     // type: function
     SHC_3BB0A8C1_0x00471610 = 0x00471610,
-    // label: meth_0x471670
+    // label: getWideCharWidth
     // location: OpenSHC/Text/FontSizeClass
     // type: function
     SHC_3BB0A8C1_0x00471670 = 0x00471670,
@@ -23591,7 +23591,7 @@ enum {
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x00471690 = 0x00471690,
-    // label: meth_0x4716d0
+    // label: computeNumberTextWidth
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x004716D0 = 0x004716D0,
@@ -23641,7 +23641,7 @@ enum {
     // location: OpenSHC/Game/GameCore
     // type: function
     SHC_3BB0A8C1_0x00471A00 = 0x00471A00,
-    // label: FUN_00471a80
+    // label: exitToScenarioDescriptionMenu
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00471A80 = 0x00471A80,
@@ -23673,7 +23673,7 @@ enum {
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x00471DC0 = 0x00471DC0,
-    // label: meth_0x471df0
+    // label: resetOpenFileNameStruct
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x00471DF0 = 0x00471DF0,
@@ -23693,19 +23693,19 @@ enum {
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x00471FC0 = 0x00471FC0,
-    // label: meth_0x472080
+    // label: showOpenGfxFileDialog
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x00472080 = 0x00472080,
-    // label: meth_0x4720c0
+    // label: showOpenHelpFileDialog
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x004720C0 = 0x004720C0,
-    // label: meth_0x472100
+    // label: showSaveHelpFileDialog
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x00472100 = 0x00472100,
-    // label: meth_0x472140
+    // label: showOpenSoundFileDialog
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x00472140 = 0x00472140,
@@ -23823,7 +23823,7 @@ enum {
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x00472C30 = 0x00472C30,
-    // label: FUN_00472cb0
+    // label: isTextInputAtCapacity
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x00472CB0 = 0x00472CB0,
@@ -23857,7 +23857,7 @@ enum {
     // location: OpenSHC/Text/FontSizeClass
     // type: function
     SHC_3BB0A8C1_0x004737B0 = 0x004737B0,
-    // label: meth_0x473830
+    // label: renderWideChar
     // location: OpenSHC/Text/FontSizeClass
     // type: function
     SHC_3BB0A8C1_0x00473830 = 0x00473830,
@@ -24769,11 +24769,11 @@ enum {
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00479AF0 = 0x00479AF0,
-    // label: meth_0x479b70
+    // label: restoreMusicVolumeAfterSpeechEnds
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00479B70 = 0x00479B70,
-    // label: meth_0x479c20
+    // label: loadSoundFileAndGetIndex
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00479C20 = 0x00479C20,
@@ -24821,7 +24821,7 @@ enum {
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A220 = 0x0047A220,
-    // label: meth_0x47a290
+    // label: markMusicChangePending
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A290 = 0x0047A290,
@@ -24833,7 +24833,7 @@ enum {
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A310 = 0x0047A310,
-    // label: FUN_0047a340
+    // label: selectAndPlayMoodBasedMusic
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A340 = 0x0047A340,
@@ -24851,7 +24851,7 @@ enum {
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A570 = 0x0047A570,
-    // label: meth_0x47a580
+    // label: playBattleGloryMusicIfConditionsMet
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A580 = 0x0047A580,
@@ -24875,7 +24875,7 @@ enum {
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A790 = 0x0047A790,
-    // label: meth_0x47a9e0
+    // label: stopAllActiveSounds
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A9E0 = 0x0047A9E0,
@@ -24903,7 +24903,7 @@ enum {
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B060 = 0x0047B060,
-    // label: meth_0x47b250
+    // label: playMusicFileByName
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B250 = 0x0047B250,
@@ -24939,7 +24939,7 @@ enum {
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B670 = 0x0047B670,
-    // label: meth_0x47b700
+    // label: playAmbientStreamWithLoop
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B700 = 0x0047B700,
@@ -25119,7 +25119,7 @@ enum {
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047DE00 = 0x0047DE00,
-    // label: meth_0x47dea0
+    // label: setDirectPlaySessionDescription
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047DEA0 = 0x0047DEA0,
@@ -25165,7 +25165,7 @@ enum {
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047E490 = 0x0047E490,
-    // label: meth_0x47e5b0
+    // label: computeLatencyAdjustmentFromMatchTimes
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047E5B0 = 0x0047E5B0,
@@ -25179,11 +25179,11 @@ enum {
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047E800 = 0x0047E800,
-    // label: FUN_0047e830
+    // label: countActiveHumanPlayers
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047E830 = 0x0047E830,
-    // label: aiPlayerCountUnk
+    // label: countOccupiedPlayerSlots
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047E890 = 0x0047E890,
@@ -25207,7 +25207,7 @@ enum {
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047EC10 = 0x0047EC10,
-    // label: meth_0x47ede0
+    // label: checkAllPlayersReadyAndCleanupSlots
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047EDE0 = 0x0047EDE0,
@@ -25227,11 +25227,11 @@ enum {
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047F7E0 = 0x0047F7E0,
-    // label: renderInGameChatUnk
+    // label: renderInGameChat
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047F860 = 0x0047F860,
-    // label: FUN_0047fb50
+    // label: renderChatMessageList
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047FB50 = 0x0047FB50,
@@ -25659,11 +25659,11 @@ enum {
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x00484850 = 0x00484850,
-    // label: FUN_00484960
+    // label: SiegeEngineRelated
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x00484960 = 0x00484960,
-    // label: FUN_00484a00
+    // label: TribeRelated1
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x00484A00 = 0x00484A00,
@@ -25683,7 +25683,7 @@ enum {
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x00484DA0 = 0x00484DA0,
-    // label: FUN_00484e10
+    // label: SetField45To100
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x00484E10 = 0x00484E10,
@@ -25707,7 +25707,7 @@ enum {
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x00485140 = 0x00485140,
-    // label: FUN_00485210
+    // label: SyncPacketSizeAnnouncement
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x00485210 = 0x00485210,
@@ -25727,7 +25727,7 @@ enum {
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x00485520 = 0x00485520,
-    // label: FUN_004855c0
+    // label: NotifyLaggingPlayer
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x004855C0 = 0x004855C0,
@@ -26065,7 +26065,7 @@ enum {
     SHC_3BB0A8C1_0x00486C40 = 0x00486C40,
     // type: function
     SHC_3BB0A8C1_0x00486C60 = 0x00486C60,
-    // label: meth_0x486f20
+    // label: initializeFinalResultsForActivePlayers
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x00486F20 = 0x00486F20,
@@ -26093,12 +26093,12 @@ enum {
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x00487390 = 0x00487390,
-    // label: createDirectPlayInterfaceModemUnk
+    // label: createDirectPlayInterfaceModem
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x004874B0 = 0x004874B0,
     // label: prt_487555_c0916b4a
-    // location: OpenSHC/Synchrony/GameSynchronyState/createDirectPlayInterfaceModemUnk/override
+    // location: OpenSHC/Synchrony/GameSynchronyState/createDirectPlayInterfaceModem/override
     SHC_3BB0A8C1_0x00487555 = 0x00487555,
     // label: setupSkirmishLobby
     // location: OpenSHC/Synchrony/GameSynchronyState
@@ -26120,7 +26120,7 @@ enum {
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x00487E30 = 0x00487E30,
-    // label: processSyncPacketUnk
+    // label: processSyncPacket
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x00488010 = 0x00488010,
@@ -26288,15 +26288,15 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x0048BF70 = 0x0048BF70,
-    // label: createMultiplayerLobbyUnk
+    // label: initializeMultiplayerLobby
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0048BF80 = 0x0048BF80,
-    // label: Constructor_GameSynchronyState
+    // label: constructGameSynchronyState
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0048C150 = 0x0048C150,
-    // label: FUN_0048c230
+    // label: initMultiplayerLobbyState
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0048C230 = 0x0048C230,
@@ -26306,7 +26306,7 @@ enum {
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0048C660 = 0x0048C660,
-    // label: multiplayerSyncMessagesUnk
+    // label: sendPeriodicSyncMessages
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0048C750 = 0x0048C750,
@@ -26334,7 +26334,7 @@ enum {
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0048DA60 = 0x0048DA60,
-    // label: FUN_0048dc50
+    // label: broadcastDesyncResyncCommands
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0048DC50 = 0x0048DC50,
@@ -26354,7 +26354,7 @@ enum {
     SHC_3BB0A8C1_0x0048E4A0 = 0x0048E4A0,
     // type: function
     SHC_3BB0A8C1_0x0048E4B0 = 0x0048E4B0,
-    // label: FUN_0048e680
+    // label: sendPendingResyncCommandsInBudget
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0048E680 = 0x0048E680,
@@ -26398,7 +26398,7 @@ enum {
     SHC_3BB0A8C1_0x0048F3C8 = 0x0048F3C8,
     // type: /pointer
     SHC_3BB0A8C1_0x0048F3CC = 0x0048F3CC,
-    // label: FUN_0048f3d0
+    // label: advanceSyncStatusAndKickLaggers
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0048F3D0 = 0x0048F3D0,
@@ -26534,7 +26534,7 @@ enum {
     SHC_3BB0A8C1_0x00490060 = 0x00490060,
     // type: function
     SHC_3BB0A8C1_0x00490080 = 0x00490080,
-    // label: someMultiplayerMessageSending
+    // label: throttledMultiplayerSyncUpdate
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x00490340 = 0x00490340,
@@ -27507,7 +27507,7 @@ enum {
     SHC_3BB0A8C1_0x00495230 = 0x00495230,
     // type: function
     SHC_3BB0A8C1_0x004954A0 = 0x004954A0,
-    // label: FUN_00495800
+    // label: ShowProgressBarSaveLoadDialog
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00495800 = 0x00495800,
@@ -27797,7 +27797,7 @@ enum {
     SHC_3BB0A8C1_0x0049B5B0 = 0x0049B5B0,
     // type: function
     SHC_3BB0A8C1_0x0049B6B0 = 0x0049B6B0,
-    // label: FUN_0049b8c0
+    // label: calcApproxEuclideanDistance
     // location: OpenSHC/Map/Navigation
     // type: function
     SHC_3BB0A8C1_0x0049B8C0 = 0x0049B8C0,
@@ -28153,17 +28153,17 @@ enum {
     SHC_3BB0A8C1_0x0049FF20 = 0x0049FF20,
     // type: function
     SHC_3BB0A8C1_0x004A0050 = 0x004A0050,
-    // label: meth_0x4a01d0
+    // label: findBestAttackTileByPathCost
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A01D0 = 0x004A01D0,
     // type: function
     SHC_3BB0A8C1_0x004A0300 = 0x004A0300,
-    // label: meth_0x4a0460
+    // label: findNearestEnemyBuildingWithinDistance
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A0460 = 0x004A0460,
-    // label: meth_0x4a06b0
+    // label: findNearestEnemyUnitWithinDistance
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A06B0 = 0x004A06B0,
@@ -28667,7 +28667,7 @@ enum {
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A3220 = 0x004A3220,
-    // label: meth_0x4a36b0
+    // label: healUnitsOfPlayerWithinRadius
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A36B0 = 0x004A36B0,
@@ -28711,7 +28711,7 @@ enum {
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A4BB0 = 0x004A4BB0,
-    // label: meth_0x4a4c70
+    // label: registerUnitOnClimbData
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A4C70 = 0x004A4C70,
@@ -28735,7 +28735,7 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004A5230 = 0x004A5230,
-    // label: meth_0x4a52d0
+    // label: clearActiveClimbDataOfType6And7
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A52D0 = 0x004A52D0,
@@ -28747,7 +28747,7 @@ enum {
     SHC_3BB0A8C1_0x004A5420 = 0x004A5420,
     // type: function
     SHC_3BB0A8C1_0x004A5770 = 0x004A5770,
-    // label: meth_0x4a58a0
+    // label: findConnectingAreaBetweenTwoAreas
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A58A0 = 0x004A58A0,
@@ -28759,7 +28759,7 @@ enum {
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A5B00 = 0x004A5B00,
-    // label: meth_0x4a5da0
+    // label: findBestAdjacentClimbTileToTarget
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A5DA0 = 0x004A5DA0,
@@ -28771,7 +28771,7 @@ enum {
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A5F90 = 0x004A5F90,
-    // label: meth_0x4a6010
+    // label: findBestAttackTargetTileWithHeightAndOwner
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A6010 = 0x004A6010,
@@ -28799,7 +28799,7 @@ enum {
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A69F0 = 0x004A69F0,
-    // label: meth_0x4a6ab0
+    // label: findCrossAreaBridgeTileToTarget
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A6AB0 = 0x004A6AB0,
@@ -29089,7 +29089,7 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004AA800 = 0x004AA800,
-    // label: meth_0x4aa930
+    // label: setModalSliderParameters
     // location: OpenSHC/UI/MenuModalComposition
     // type: function
     SHC_3BB0A8C1_0x004AA930 = 0x004AA930,
@@ -29441,7 +29441,7 @@ enum {
     // location: OpenSHC/Game/Skirmish
     // type: function
     SHC_3BB0A8C1_0x004AC570 = 0x004AC570,
-    // label: FUN_004ac650
+    // label: buildEnemyPlayerList
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004AC650 = 0x004AC650,
@@ -29555,7 +29555,7 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004AE720 = 0x004AE720,
-    // label: FUN_004ae7c0
+    // label: clearHoveredAI
     // location: OpenSHC/Synchrony
     // type: function
     SHC_3BB0A8C1_0x004AE7C0 = 0x004AE7C0,
@@ -29567,7 +29567,7 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004AE950 = 0x004AE950,
-    // label: FUN_004aea10
+    // label: syncPlayerGroupArrays
     // location: OpenSHC/Synchrony
     // type: function
     SHC_3BB0A8C1_0x004AEA10 = 0x004AEA10,
@@ -29627,7 +29627,7 @@ enum {
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004AF700 = 0x004AF700,
-    // label: RenderInGameChatDisplayElementUnk
+    // label: renderInGameChatDisplayElement
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x004AF800 = 0x004AF800,
@@ -30667,11 +30667,11 @@ enum {
     // location: OpenSHC/UI/MinimapViewState
     // type: function
     SHC_3BB0A8C1_0x004B5100 = 0x004B5100,
-    // label: FUN_004b5110
+    // label: scrollViewportToMinimapClick
     // location: OpenSHC/UI/MinimapViewState
     // type: function
     SHC_3BB0A8C1_0x004B5110 = 0x004B5110,
-    // label: meth_0x4b51a0
+    // label: convertMinimapClickToTileXY
     // location: OpenSHC/UI/MinimapViewState
     // type: function
     SHC_3BB0A8C1_0x004B51A0 = 0x004B51A0,
@@ -30679,23 +30679,23 @@ enum {
     // location: OpenSHC/UI/MinimapViewState
     // type: function
     SHC_3BB0A8C1_0x004B5280 = 0x004B5280,
-    // label: meth_0x4b5300
+    // label: triggerMinimapRedraw
     // location: OpenSHC/UI/MinimapViewState
     // type: function
     SHC_3BB0A8C1_0x004B5300 = 0x004B5300,
-    // label: FUN_004b5330
+    // label: renderMinimapTileStripWithLuminescence
     // location: OpenSHC/UI/MinimapViewState
     // type: function
     SHC_3BB0A8C1_0x004B5330 = 0x004B5330,
     // type: function
     SHC_3BB0A8C1_0x004B5480 = 0x004B5480,
-    // label: setTileColorsUnk
+    // label: renderMinimapTileColors
     // location: OpenSHC/UI/MinimapViewState
     // type: function
     SHC_3BB0A8C1_0x004B58D0 = 0x004B58D0,
     // type: function
     SHC_3BB0A8C1_0x004B5A20 = 0x004B5A20,
-    // label: meth_0x4b5f70
+    // label: locatePlayerKeepPositionsOnMinimap
     // location: OpenSHC/UI/MinimapViewState
     // type: function
     SHC_3BB0A8C1_0x004B5F70 = 0x004B5F70,
@@ -30703,7 +30703,7 @@ enum {
     // location: OpenSHC/UI/MinimapViewState
     // type: function
     SHC_3BB0A8C1_0x004B61F0 = 0x004B61F0,
-    // label: createMapPreviewMiniMap_ConvertColorsUnk
+    // label: convertLoadedMinimapColors
     // location: OpenSHC/UI/MinimapViewState
     // type: function
     SHC_3BB0A8C1_0x004B6320 = 0x004B6320,
@@ -30919,7 +30919,7 @@ enum {
     // location: OpenSHC/Game/ScenarioEvents/InGameEventUnionVersion
     // type: function
     SHC_3BB0A8C1_0x004B77A0 = 0x004B77A0,
-    // label: isParam1LessThan21
+    // label: isValueInRangeOneToTwenty
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004B77E0 = 0x004B77E0,
@@ -30935,11 +30935,11 @@ enum {
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004B78D0 = 0x004B78D0,
-    // label: FUN_004b7930
+    // label: activateScenarioTypeEvents
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004B7930 = 0x004B7930,
-    // label: meth_0x4b7980
+    // label: determineScenarioMissionTypeAndResetEvents
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004B7980 = 0x004B7980,
@@ -30957,7 +30957,7 @@ enum {
     // location: OpenSHC/Rendering/Bink/AIMessageQueue
     // type: function
     SHC_3BB0A8C1_0x004B7C90 = 0x004B7C90,
-    // label: FUN_004b7f60
+    // label: PlayMissionAestheticSFX
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004B7F60 = 0x004B7F60,
@@ -30981,7 +30981,7 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004B8200 = 0x004B8200,
-    // label: FUN_004b8210
+    // label: RestoreScenarioGold
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004B8210 = 0x004B8210,
@@ -31535,7 +31535,7 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004B9530 = 0x004B9530,
-    // label: FUN_004b9610
+    // label: CaptureCurrentTimeToUnknownTime01
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004B9610 = 0x004B9610,
@@ -32997,11 +32997,11 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004BA780 = 0x004BA780,
-    // label: meth_0x4ba7d0
+    // label: sortEventsByDate
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004BA7D0 = 0x004BA7D0,
-    // label: meth_0x4ba8b0
+    // label: removeEventAtIndex
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004BA8B0 = 0x004BA8B0,
@@ -33053,7 +33053,7 @@ enum {
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004BB010 = 0x004BB010,
-    // label: FUN_004bb0b0
+    // label: isMercRecruitableForBuildingType
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004BB0B0 = 0x004BB0B0,
@@ -33271,7 +33271,7 @@ enum {
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004BB900 = 0x004BB900,
-    // label: meth_0x4bb990
+    // label: pruneInvalidEventTriggerLinks
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004BB990 = 0x004BB990,
@@ -33851,11 +33851,11 @@ enum {
     SHC_3BB0A8C1_0x004BC100 = 0x004BC100,
     // type: /undefined *32
     SHC_3BB0A8C1_0x004BC104 = 0x004BC104,
-    // label: tweakMonthAndYearBasedOnSection1047
+    // label: adjustEventMonthAndYearForSection1047
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004BC110 = 0x004BC110,
-    // label: FUN_004bc1c0
+    // label: spawnAttackWaveForPlayer
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004BC1C0 = 0x004BC1C0,
@@ -34059,7 +34059,7 @@ enum {
     // location: OpenSHC/IO
     // type: function
     SHC_3BB0A8C1_0x004BC5B0 = 0x004BC5B0,
-    // label: FUN_004bc5f0
+    // label: initTutorialStepTransition
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004BC5F0 = 0x004BC5F0,
@@ -34067,29 +34067,29 @@ enum {
     // location: OpenSHC/Input
     // type: function
     SHC_3BB0A8C1_0x004BC620 = 0x004BC620,
-    // label: FUN_004bc630
+    // label: recordTutorialPlayerAction
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004BC630 = 0x004BC630,
-    // label: FUN_004bc690
+    // label: SetTutorialBuildingActionState
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004BC690 = 0x004BC690,
-    // label: FUN_004bc6c0
+    // label: resetTutorialActionTrackers
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004BC6C0 = 0x004BC6C0,
     // type: function
     SHC_3BB0A8C1_0x004BC6F0 = 0x004BC6F0,
-    // label: FUN_004bc770
+    // label: SetTutorialHintActiveWithTimestamp
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004BC770 = 0x004BC770,
-    // label: FUN_004bc790
+    // label: renderAnimatedTutorialFloatOverlay
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004BC790 = 0x004BC790,
-    // label: FUN_004bc910
+    // label: renderTutorialFloatForUIElement
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004BC910 = 0x004BC910,
@@ -34173,7 +34173,7 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004BD0F0 = 0x004BD0F0,
-    // label: FUN_004bd1b0
+    // label: updateTutorialStepAndProgress
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004BD1B0 = 0x004BD1B0,
@@ -34255,15 +34255,15 @@ enum {
     SHC_3BB0A8C1_0x004BD978 = 0x004BD978,
     // type: /pointer
     SHC_3BB0A8C1_0x004BD97C = 0x004BD97C,
-    // label: meth_0x4bd980
+    // label: createScenarioEventForNextMonth
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004BD980 = 0x004BD980,
-    // label: meth_0x4bda80
+    // label: createChainedMissionOutcomeEvents
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004BDA80 = 0x004BDA80,
-    // label: computeSomeKindOfMissionCompletionScore
+    // label: computeMissionCompletionScore
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004BDE40 = 0x004BDE40,
@@ -34507,7 +34507,7 @@ enum {
     // location: OpenSHC/Rendering/Bink/AIMessageQueue
     // type: function
     SHC_3BB0A8C1_0x004BEA90 = 0x004BEA90,
-    // label: meth_0x4beb20
+    // label: updateEventYearsAndCommitBuildingAvailability
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004BEB20 = 0x004BEB20,
@@ -37235,7 +37235,7 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004C1070 = 0x004C1070,
-    // label: meth_0x4c1320
+    // label: removeProcessedInvasionEvents
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004C1320 = 0x004C1320,
@@ -37243,7 +37243,7 @@ enum {
     SHC_3BB0A8C1_0x004C1370 = 0x004C1370,
     // type: function
     SHC_3BB0A8C1_0x004C1390 = 0x004C1390,
-    // label: meth_0x4c13f0
+    // label: spawnInvasionEventAttackWave
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004C13F0 = 0x004C13F0,
@@ -37955,11 +37955,11 @@ enum {
     SHC_3BB0A8C1_0x004C226F = 0x004C226F,
     // type: /byte
     SHC_3BB0A8C1_0x004C2270 = 0x004C2270,
-    // label: FUN_004c2280
+    // label: updateMilitaryCampaignMissionState
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004C2280 = 0x004C2280,
-    // label: FUN_004c3110
+    // label: loadMapSiegeHeaderSections
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004C3110 = 0x004C3110,
@@ -37983,11 +37983,11 @@ enum {
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004C62C0 = 0x004C62C0,
-    // label: FUN_004c6820
+    // label: loadMapSiegeHeaderForMissionIndex
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004C6820 = 0x004C6820,
-    // label: FUN_004c6880
+    // label: loadMissionMapAndSetLord
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004C6880 = 0x004C6880,
@@ -39629,7 +39629,7 @@ enum {
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D1A00 = 0x004D1A00,
-    // label: FUN_004d1d60
+    // label: sellExcessGoods
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D1D60 = 0x004D1D60,
@@ -39721,7 +39721,7 @@ enum {
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D3960 = 0x004D3960,
-    // label: FUN_004d39b0
+    // label: buyRequiredGoods
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D39B0 = 0x004D39B0,
@@ -40089,7 +40089,7 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004D6F20 = 0x004D6F20,
-    // label: FUN_004d6f60
+    // label: ParseCampaignMapHotspotBitmap
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004D6F60 = 0x004D6F60,
@@ -40413,7 +40413,7 @@ enum {
     SHC_3BB0A8C1_0x004D8A14 = 0x004D8A14,
     // type: /pointer
     SHC_3BB0A8C1_0x004D8A18 = 0x004D8A18,
-    // label: FUN_004d8a20
+    // label: ReadMapHeaderFromFile
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004D8A20 = 0x004D8A20,
@@ -40455,7 +40455,7 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004D9230 = 0x004D9230,
-    // label: FUN_004d9270
+    // label: SetActiveCreditsSequenceIndex
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004D9270 = 0x004D9270,
@@ -40585,11 +40585,11 @@ enum {
     SHC_3BB0A8C1_0x004DA17E = 0x004DA17E,
     // type: /byte
     SHC_3BB0A8C1_0x004DA17F = 0x004DA17F,
-    // label: FUN_004da180
+    // label: StopCreditsPlaybackAndSounds
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DA180 = 0x004DA180,
-    // label: FUN_004da200
+    // label: EndCreditsSegmentAndAdvanceToNext
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DA200 = 0x004DA200,
@@ -40625,67 +40625,67 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004DA750 = 0x004DA750,
-    // label: FUN_004da7a0
+    // label: AppendCreditsSoundEntry
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DA7A0 = 0x004DA7A0,
-    // label: FUN_004da7e0
+    // label: AppendCreditsCommand
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DA7E0 = 0x004DA7E0,
-    // label: FUN_004da810
+    // label: AppendCreditsListTerminator
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DA810 = 0x004DA810,
-    // label: FUN_004da840
+    // label: AppendCreditsPauseCommand
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DA840 = 0x004DA840,
-    // label: FUN_004da870
+    // label: AppendCreditsSegmentEndCommand
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DA870 = 0x004DA870,
-    // label: FUN_004da8a0
+    // label: AppendCreditsClearImageCommand
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DA8A0 = 0x004DA8A0,
-    // label: FUN_004da8d0
+    // label: AppendCreditsImageTransitionCommand
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DA8D0 = 0x004DA8D0,
-    // label: FUN_004da9a0
+    // label: AppendCreditsImageEndCommand
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DA9A0 = 0x004DA9A0,
-    // label: FUN_004da9f0
+    // label: AppendCreditsShowImageCommand
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DA9F0 = 0x004DA9F0,
-    // label: FUN_004daa80
+    // label: AppendCreditsBinkVideoCommand
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DAA80 = 0x004DAA80,
     // type: function
     SHC_3BB0A8C1_0x004DAAB0 = 0x004DAAB0,
-    // label: FUN_004dab00
+    // label: AppendCreditsFixedImageCommand
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DAB00 = 0x004DAB00,
-    // label: FUN_004dab80
+    // label: AppendCreditsBinkVideoWithAudioCommand
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DAB80 = 0x004DAB80,
     // type: function
     SHC_3BB0A8C1_0x004DABB0 = 0x004DABB0,
-    // label: FUN_004dabf0
+    // label: AppendCreditsSoundStreamCommand
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DABF0 = 0x004DABF0,
-    // label: FUN_004dac30
+    // label: AppendCreditsTextCommand
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DAC30 = 0x004DAC30,
-    // label: FUN_004dacf0
+    // label: AppendCreditsTextEndCommand
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DACF0 = 0x004DACF0,
@@ -40705,15 +40705,15 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004DAF50 = 0x004DAF50,
-    // label: FUN_004dafb0
+    // label: RenderTextPageProgressBar
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DAFB0 = 0x004DAFB0,
-    // label: FUN_004db0d0
+    // label: DisplayFullScreenTextPage
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DB0D0 = 0x004DB0D0,
-    // label: FUN_004db180
+    // label: BuildIntroLogoSequence
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DB180 = 0x004DB180,
@@ -40725,7 +40725,7 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DB300 = 0x004DB300,
-    // label: FUN_004db390
+    // label: RenderScrollingCreditsTextFrame
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DB390 = 0x004DB390,
@@ -40801,11 +40801,11 @@ enum {
     SHC_3BB0A8C1_0x004DC134 = 0x004DC134,
     // type: /pointer
     SHC_3BB0A8C1_0x004DC138 = 0x004DC138,
-    // label: FUN_004dc140
+    // label: FindCampaignMapHotspotAtMouse
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DC140 = 0x004DC140,
-    // label: FUN_004dc1c0
+    // label: BuildExtremeDemoIntroScript
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DC1C0 = 0x004DC1C0,
@@ -40861,7 +40861,7 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DFB90 = 0x004DFB90,
-    // label: FUN_004e0a50
+    // label: ProcessCreditsScriptCommands
     // location: OpenSHC/Rendering
     // type: function
     SHC_3BB0A8C1_0x004E0A50 = 0x004E0A50,
@@ -40955,7 +40955,7 @@ enum {
     SHC_3BB0A8C1_0x004E12AC = 0x004E12AC,
     // type: /undefined *32
     SHC_3BB0A8C1_0x004E12B0 = 0x004E12B0,
-    // label: FUN_004e12c0
+    // label: RenderActiveCreditsElements
     // location: OpenSHC/Rendering
     // type: function
     SHC_3BB0A8C1_0x004E12C0 = 0x004E12C0,
@@ -40991,7 +40991,7 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004E1F50 = 0x004E1F50,
-    // label: Constructor_ViewportRenderState
+    // label: constructViewportRenderState
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E1FA0 = 0x004E1FA0,
@@ -41011,7 +41011,7 @@ enum {
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E2600 = 0x004E2600,
-    // label: FUN_004e2630
+    // label: renderAssassinClimbingOverlay
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E2630 = 0x004E2630,
@@ -41519,7 +41519,7 @@ enum {
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E5E20 = 0x004E5E20,
-    // label: meth_0x4e5ed0
+    // label: computeMouseTileFromScreenPosition
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E5ED0 = 0x004E5ED0,
@@ -41605,13 +41605,13 @@ enum {
     SHC_3BB0A8C1_0x004E6335 = 0x004E6335,
     // type: /byte
     SHC_3BB0A8C1_0x004E6336 = 0x004E6336,
-    // label: meth_0x4e6340
+    // label: clearAllFloatingLayerElements
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E6340 = 0x004E6340,
     // type: function
     SHC_3BB0A8C1_0x004E6360 = 0x004E6360,
-    // label: creataAFloatingLayerElement
+    // label: createFloatingLayerElement
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E63A0 = 0x004E63A0,
@@ -41983,11 +41983,11 @@ enum {
     SHC_3BB0A8C1_0x004E8C4B = 0x004E8C4B,
     // type: /byte
     SHC_3BB0A8C1_0x004E8C4C = 0x004E8C4C,
-    // label: meth_0x4e8c50
+    // label: saveFocusTileAndCenterPreview
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E8C50 = 0x004E8C50,
-    // label: meth_0x4e8c90
+    // label: restoreFocusTile
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E8C90 = 0x004E8C90,
@@ -41995,7 +41995,7 @@ enum {
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E8CA0 = 0x004E8CA0,
-    // label: FUN_004e8cc0
+    // label: createFloatingTextElement
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E8CC0 = 0x004E8CC0,
@@ -42290,7 +42290,7 @@ enum {
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004F1860 = 0x004F1860,
-    // label: mapUITreeTypeToLogicalTreeTypeUnk
+    // label: mapUITreeTypeToLogicalTreeType
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F1A60 = 0x004F1A60,
@@ -42670,7 +42670,7 @@ enum {
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F2020 = 0x004F2020,
-    // label: removeTreeUnk
+    // label: removeTree
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F2070 = 0x004F2070,
@@ -42682,7 +42682,7 @@ enum {
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F2140 = 0x004F2140,
-    // label: meth_0x4f2220
+    // label: removeRock
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F2220 = 0x004F2220,
@@ -42786,7 +42786,7 @@ enum {
     // location: OpenSHC/Map/Trees
     // type: function
     SHC_3BB0A8C1_0x004F29C0 = 0x004F29C0,
-    // label: FUN_004f2a10
+    // label: getRandomRockImageOffset
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F2A10 = 0x004F2A10,
@@ -42854,7 +42854,7 @@ enum {
     // location: OpenSHC/Map/Rocks
     // type: function
     SHC_3BB0A8C1_0x004F2C00 = 0x004F2C00,
-    // label: FUN_004f2c20
+    // label: getTreeGrowthTargetStage
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F2C20 = 0x004F2C20,
@@ -42918,7 +42918,7 @@ enum {
     SHC_3BB0A8C1_0x004F2E00 = 0x004F2E00,
     // type: function
     SHC_3BB0A8C1_0x004F2E90 = 0x004F2E90,
-    // label: meth_0x4f2fb0
+    // label: isTreeAliveAndMatchingUID
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F2FB0 = 0x004F2FB0,
@@ -42926,19 +42926,19 @@ enum {
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F2FE0 = 0x004F2FE0,
-    // label: meth_0x4f3010
+    // label: damageTreeAndTriggerDeathIfDepleted
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F3010 = 0x004F3010,
-    // label: meth_0x4f3080
+    // label: advanceTreeDecayState
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F3080 = 0x004F3080,
-    // label: meth_0x4f30d0
+    // label: markNearbyTreesAsCrowTargets
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F30D0 = 0x004F30D0,
-    // label: spawnACrowUnk
+    // label: spawnCrowFromNearbyTree
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F3150 = 0x004F3150,
@@ -42976,7 +42976,7 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004F3900 = 0x004F3900,
-    // label: Constructor_LandscapeState
+    // label: constructLandscapeState
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F3930 = 0x004F3930,
@@ -42990,7 +42990,7 @@ enum {
     SHC_3BB0A8C1_0x004F3B90 = 0x004F3B90,
     // type: function
     SHC_3BB0A8C1_0x004F3C50 = 0x004F3C50,
-    // label: FUN_004f3d30
+    // label: upgradeTreesAndRocksForMapVersion
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F3D30 = 0x004F3D30,
@@ -43238,11 +43238,11 @@ enum {
     SHC_3BB0A8C1_0x004F7140 = 0x004F7140,
     // type: function
     SHC_3BB0A8C1_0x004F7170 = 0x004F7170,
-    // label: meth_004f79d0
+    // label: rebuildShowHiLayerFromHeights
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F79D0 = 0x004F79D0,
-    // label: meth_0x4f7a80
+    // label: computeTileLuminescence
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F7A80 = 0x004F7A80,
@@ -43270,7 +43270,7 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F8160 = 0x004F8160,
-    // label: meth_0x4f81d0
+    // label: resetTileToDefaultState
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F81D0 = 0x004F81D0,
@@ -43844,39 +43844,39 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F8530 = 0x004F8530,
-    // label: meth_0x4f85b0
+    // label: isTileEnclosedByWallsOrGates
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F85B0 = 0x004F85B0,
-    // label: meth_0x4f8640
+    // label: isTileEnclosedByWalls
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F8640 = 0x004F8640,
-    // label: meth_0x4f86d0
+    // label: isWallCornerForCardinalDirection
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F86D0 = 0x004F86D0,
-    // label: meth_0x4f8780
+    // label: isWallCornerForDiagonalDirection
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F8780 = 0x004F8780,
-    // label: meth_0x4f8840
+    // label: isWallConnectionHeightValid
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F8840 = 0x004F8840,
-    // label: meth_0x4f8900
+    // label: hasOnlyTowerNeighborsNoWalls
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F8900 = 0x004F8900,
-    // label: meth_0x4f89c0
+    // label: getWallFlagForOrientedDirection
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F89C0 = 0x004F89C0,
-    // label: meth_0x4f8a40
+    // label: hasHigherNeighborWithFlagBit11
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F8A40 = 0x004F8A40,
-    // label: meth_0x4f8ac0
+    // label: hasHigherPlainNeighborWithFlagBit8
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F8AC0 = 0x004F8AC0,
@@ -43884,11 +43884,11 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F8B50 = 0x004F8B50,
-    // label: previewWallDrawingUnk
+    // label: renderWallDragPreview
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F8BD0 = 0x004F8BD0,
-    // label: meth_0x4f9000
+    // label: reassignWallOwnershipForPlayer
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F9000 = 0x004F9000,
@@ -43900,7 +43900,7 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F93E0 = 0x004F93E0,
-    // label: isWallUnkPlacementAllowed
+    // label: validateWallPlacementAtTile
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F94A0 = 0x004F94A0,
@@ -43928,7 +43928,7 @@ enum {
     SHC_3BB0A8C1_0x004F9920 = 0x004F9920,
     // type: /pointer
     SHC_3BB0A8C1_0x004F9924 = 0x004F9924,
-    // label: indexIsEdgeUnk
+    // label: isFootprintIndexOnEdge
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F9930 = 0x004F9930,
@@ -44176,15 +44176,15 @@ enum {
     SHC_3BB0A8C1_0x004F9DE9 = 0x004F9DE9,
     // type: /byte
     SHC_3BB0A8C1_0x004F9DEA = 0x004F9DEA,
-    // label: meth_0x4f9df0
+    // label: validateBuildingPlacementAtTile
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F9DF0 = 0x004F9DF0,
-    // label: spawnEraserEntityEffectsUnk
+    // label: spawnEraserTileEffect
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F9F00 = 0x004F9F00,
-    // label: meth_0x4fa000
+    // label: determineBuildingPlacementRotation
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FA000 = 0x004FA000,
@@ -44192,7 +44192,7 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FA2D0 = 0x004FA2D0,
-    // label: meth_0x4fa460
+    // label: getRubbleGraphicStageForDamageLevel
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FA460 = 0x004FA460,
@@ -44882,13 +44882,13 @@ enum {
     SHC_3BB0A8C1_0x004FA759 = 0x004FA759,
     // type: /byte
     SHC_3BB0A8C1_0x004FA75A = 0x004FA75A,
-    // label: meth_0x4fa760
+    // label: demolishBuildingsInConstructionFootprint
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FA760 = 0x004FA760,
     // type: function
     SHC_3BB0A8C1_0x004FA8D0 = 0x004FA8D0,
-    // label: meth_0x4fa9d0
+    // label: markBuildingFootprintFlag
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FA9D0 = 0x004FA9D0,
@@ -44896,37 +44896,37 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FAA30 = 0x004FAA30,
-    // label: meth_0x4faab0
+    // label: clearBuildingTilesAndTrees
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FAAB0 = 0x004FAAB0,
     // type: function
     SHC_3BB0A8C1_0x004FAAE0 = 0x004FAAE0,
-    // label: meth_0x4fab70
+    // label: clearBuildingFootprintAndResetUnits
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FAB70 = 0x004FAB70,
-    // label: meth_0x4fac70
+    // label: clearBuildingFootprintAndRemoveSiegeTower
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FAC70 = 0x004FAC70,
-    // label: meth_0x4fad20
+    // label: unmarkBuildingFootprintFlag
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FAD20 = 0x004FAD20,
-    // label: meth_0x4fad70
+    // label: clearBuildingFootprintWithEdgeRubble
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FAD70 = 0x004FAD70,
-    // label: meth_0x4fae50
+    // label: clearFixedSizeTwoBuildingFootprint
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FAE50 = 0x004FAE50,
-    // label: meth_0x4faee0
+    // label: isUnitBlockingSizeFiveFootprint
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FAEE0 = 0x004FAEE0,
-    // label: meth_0x4faf70
+    // label: clearStockpileFootprintTiles
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FAF70 = 0x004FAF70,
@@ -45128,11 +45128,11 @@ enum {
     SHC_3BB0A8C1_0x004FB354 = 0x004FB354,
     // type: /pointer
     SHC_3BB0A8C1_0x004FB358 = 0x004FB358,
-    // label: meth_0x4fb360
+    // label: clearBuildingDisplayFlagsAndEntities
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FB360 = 0x004FB360,
-    // label: FUN_004fb3f0
+    // label: spawnFloatingNumberAroundTile
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FB3F0 = 0x004FB3F0,
@@ -45140,23 +45140,23 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FB4D0 = 0x004FB4D0,
-    // label: meth_0x4fb770
+    // label: applyRockGraphicsToFootprint
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FB770 = 0x004FB770,
     // type: function
     SHC_3BB0A8C1_0x004FB7D0 = 0x004FB7D0,
-    // label: meth_0x4fb8e0
+    // label: clearTreeFootprintFlags
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FB8E0 = 0x004FB8E0,
-    // label: meth_0x4fb970
+    // label: clearRockFootprintFlags
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FB970 = 0x004FB970,
     // type: function
     SHC_3BB0A8C1_0x004FB990 = 0x004FB990,
-    // label: meth_0x4fb9e0
+    // label: renderWallPlacementPreview
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FB9E0 = 0x004FB9E0,
@@ -45660,19 +45660,19 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FBD80 = 0x004FBD80,
-    // label: meth_0x4fbe70
+    // label: isTileSuitableForBrushPlacement
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FBE70 = 0x004FBE70,
-    // label: meth_0x4fc0b0
+    // label: computeTileCliffEdgeFlags
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FC0B0 = 0x004FC0B0,
-    // label: meth_0x4fc280
+    // label: propagateCliffEdgeFlagFromNeighbor
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FC280 = 0x004FC280,
-    // label: meth_0x4fc340
+    // label: collectCliffEdgeTilesForClimbData
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FC340 = 0x004FC340,
@@ -45680,15 +45680,15 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FC490 = 0x004FC490,
-    // label: meth_0x4fc650
+    // label: computeWallCornerRenderRotation
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FC650 = 0x004FC650,
-    // label: meth_0x4fc7c0
+    // label: isCliffDropInDirection
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FC7C0 = 0x004FC7C0,
-    // label: meth_0x4fc810
+    // label: computeClimbRampRotation
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FC810 = 0x004FC810,
@@ -46036,11 +46036,11 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005000A0 = 0x005000A0,
-    // label: scanMoatsInGroupsOfThreeUnk
+    // label: countMoatsOwnedByEachPlayer
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005000E0 = 0x005000E0,
-    // label: countUnfinishedMoatUnk
+    // label: countUnfinishedMoatTilesForPlayer
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500180 = 0x00500180,
@@ -46072,31 +46072,31 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005003D0 = 0x005003D0,
-    // label: meth_0x500500
+    // label: advanceMoatFillProgress
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500500 = 0x00500500,
-    // label: clearMoatIfUnk
+    // label: clearMoatAtTileIfPresent
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005005F0 = 0x005005F0,
-    // label: moatRelatedUpdateFunction
+    // label: updateMoatCountdownTimers
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500640 = 0x00500640,
-    // label: meth_0x500680
+    // label: resetMoatArray
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500680 = 0x00500680,
-    // label: meth_0x5006c0
+    // label: clearInvalidMoatEntries
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005006C0 = 0x005006C0,
-    // label: meth_0x500720
+    // label: setMoatVisualStateAtTile
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500720 = 0x00500720,
-    // label: meth_0x500750
+    // label: setMoatOwnerForAllMatching
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500750 = 0x00500750,
@@ -46104,7 +46104,7 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500790 = 0x00500790,
-    // label: meth_0x5007d0
+    // label: resetPitchDitchArray
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005007D0 = 0x005007D0,
@@ -46124,19 +46124,19 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500940 = 0x00500940,
-    // label: meth_0x500980
+    // label: findNearestValidDigTileNearTarget
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500980 = 0x00500980,
-    // label: meth_0x500b50
+    // label: computeTileAlongAxisOffset
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500B50 = 0x00500B50,
-    // label: campaignRelatedNumber
+    // label: setSignpostDistanceForCampaignMission
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500BB0 = 0x00500BB0,
-    // label: meth_0x500c20
+    // label: startBuildingDestructionConfirmation
     // location: OpenSHC/Map/WallAndPitchState
     // type: function
     SHC_3BB0A8C1_0x00500C20 = 0x00500C20,
@@ -46144,11 +46144,11 @@ enum {
     // location: OpenSHC/Map/WallAndPitchState
     // type: function
     SHC_3BB0A8C1_0x00500C80 = 0x00500C80,
-    // label: meth_0x500cb0
+    // label: startEntityDestructionConfirmation
     // location: OpenSHC/Map/WallAndPitchState
     // type: function
     SHC_3BB0A8C1_0x00500CB0 = 0x00500CB0,
-    // label: meth_0x500cf0
+    // label: startUnitDestructionConfirmation
     // location: OpenSHC/Map/WallAndPitchState
     // type: function
     SHC_3BB0A8C1_0x00500CF0 = 0x00500CF0,
@@ -46172,7 +46172,7 @@ enum {
     // location: OpenSHC/Map/WallAndPitchState
     // type: function
     SHC_3BB0A8C1_0x00500EE0 = 0x00500EE0,
-    // label: meth_0x500f40
+    // label: updateDestructionConfirmationCountdown
     // location: OpenSHC/Map/WallAndPitchState
     // type: function
     SHC_3BB0A8C1_0x00500F40 = 0x00500F40,
@@ -46202,11 +46202,11 @@ enum {
     // location: OpenSHC/UI/HoveredState
     // type: function
     SHC_3BB0A8C1_0x00501110 = 0x00501110,
-    // label: spreadAlgorithmForFlagsAndBraziers2Unk
+    // label: spreadFlagPlacementAlgorithm
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00501180 = 0x00501180,
-    // label: spreadAlgorithmForFlagsAndBraziersUnk
+    // label: spreadBrazierPlacementAlgorithm
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005011A0 = 0x005011A0,
@@ -46252,11 +46252,11 @@ enum {
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x00501760 = 0x00501760,
-    // label: clearAndSetTileMapUnknown2Plus
+    // label: forceFullTileMapRedraw
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005017A0 = 0x005017A0,
-    // label: meth_0x5017c0
+    // label: useEraserBrush
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005017C0 = 0x005017C0,
@@ -46264,7 +46264,7 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00501A20 = 0x00501A20,
-    // label: changeMapOrientationUnk
+    // label: changeMapOrientation
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00501B90 = 0x00501B90,
@@ -46296,7 +46296,7 @@ enum {
     SHC_3BB0A8C1_0x00501F50 = 0x00501F50,
     // type: function
     SHC_3BB0A8C1_0x00501FE0 = 0x00501FE0,
-    // label: useBrush2
+    // label: useLevelBrush
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00502110 = 0x00502110,
@@ -46304,19 +46304,19 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00502390 = 0x00502390,
-    // label: meth_0x5024f0
+    // label: isValidCastleSiteLocation
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005024F0 = 0x005024F0,
-    // label: useBrush3
+    // label: useTerrainHeightBrush
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00502680 = 0x00502680,
-    // label: meth_0x502950
+    // label: getMaxWallHeightInBrushArea
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00502950 = 0x00502950,
-    // label: checkWhetherThisWallBuildIsAllowed
+    // label: validateWallBuildPath
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005029D0 = 0x005029D0,
@@ -46392,7 +46392,7 @@ enum {
     SHC_3BB0A8C1_0x00503491 = 0x00503491,
     // type: /byte
     SHC_3BB0A8C1_0x00503492 = 0x00503492,
-    // label: placeDefensiveStructurePart2Unk
+    // label: placeDefensiveStructureTile
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005034A0 = 0x005034A0,
@@ -46706,7 +46706,7 @@ enum {
     SHC_3BB0A8C1_0x00504A26 = 0x00504A26,
     // type: /byte
     SHC_3BB0A8C1_0x00504A27 = 0x00504A27,
-    // label: meth_0x504a30
+    // label: evaluateBuildingPlacementAtCursor
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00504A30 = 0x00504A30,
@@ -46816,7 +46816,7 @@ enum {
     SHC_3BB0A8C1_0x00504ED0 = 0x00504ED0,
     // type: /byte
     SHC_3BB0A8C1_0x00504ED1 = 0x00504ED1,
-    // label: meth_0x504ee0
+    // label: updateBuildingPlacementRotationPreview
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00504EE0 = 0x00504EE0,
@@ -46838,7 +46838,7 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00506370 = 0x00506370,
-    // label: someUpdatePathLinkageRelatedCall
+    // label: updatePathLinkagesForBuilding
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00506AD0 = 0x00506AD0,
@@ -46850,7 +46850,7 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00506D40 = 0x00506D40,
-    // label: placeSiegeTentUnk
+    // label: placeSiegeTent
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00506E10 = 0x00506E10,
@@ -46858,7 +46858,7 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00506F40 = 0x00506F40,
-    // label: meth_0x507060
+    // label: stampBuildingOntoTileMap
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00507060 = 0x00507060,
@@ -46870,7 +46870,7 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00507280 = 0x00507280,
-    // label: meth_0x507350
+    // label: resetTileAndClearMoat
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00507350 = 0x00507350,
@@ -46948,15 +46948,15 @@ enum {
     SHC_3BB0A8C1_0x00508540 = 0x00508540,
     // type: function
     SHC_3BB0A8C1_0x00508590 = 0x00508590,
-    // label: meth_0x508760
+    // label: clearSizeFiveBuildingFootprintAndMoats
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00508760 = 0x00508760,
-    // label: meth_0x508870
+    // label: clearSizeFiveBuildingFootprint
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00508870 = 0x00508870,
-    // label: meth_0x508910
+    // label: floodMoatUnderRemovedBuilding
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00508910 = 0x00508910,
@@ -47564,7 +47564,7 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00508DD0 = 0x00508DD0,
-    // label: meth_0x508ec0
+    // label: eraseAreaWithBrush
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00508EC0 = 0x00508EC0,
@@ -47660,7 +47660,7 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00511850 = 0x00511850,
-    // label: meth_0x5118c0
+    // label: confirmAndQueueDestructionCommand
     // location: OpenSHC/Map/WallAndPitchState
     // type: function
     SHC_3BB0A8C1_0x005118C0 = 0x005118C0,
@@ -48276,7 +48276,7 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00515A20 = 0x00515A20,
-    // label: createMoatSize5Unk
+    // label: createMoatForSizeFiveBuilding
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00515C80 = 0x00515C80,
@@ -48284,7 +48284,7 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00515DA0 = 0x00515DA0,
-    // label: Constructor_TileMapState
+    // label: constructTileMapState
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00515F40 = 0x00515F40,
@@ -49262,7 +49262,7 @@ enum {
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00518130 = 0x00518130,
-    // label: FUN_00518180
+    // label: initializeAttackWaveSlot
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00518180 = 0x00518180,
@@ -49270,7 +49270,7 @@ enum {
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x005182A0 = 0x005182A0,
-    // label: FUN_00518350
+    // label: isAttackWaveComplete
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00518350 = 0x00518350,
@@ -49288,11 +49288,11 @@ enum {
     SHC_3BB0A8C1_0x00518870 = 0x00518870,
     // type: function
     SHC_3BB0A8C1_0x005188A0 = 0x005188A0,
-    // label: FUN_00518930
+    // label: assignBehaviorTypeToNearbyTribes
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00518930 = 0x00518930,
-    // label: FUN_00518a10
+    // label: assignBehaviorTypeAndLinkSupportTribe
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00518A10 = 0x00518A10,
@@ -49300,23 +49300,23 @@ enum {
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00518BB0 = 0x00518BB0,
-    // label: renderDebugDataZoneDataUnk
+    // label: renderAttackInfoDebugOverlay
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00518C50 = 0x00518C50,
-    // label: FUN_00519310
+    // label: computeAttackWaveTroopComposition
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00519310 = 0x00519310,
-    // label: FUN_00519690
+    // label: buildRallyPointsFromSiegeUnits
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00519690 = 0x00519690,
-    // label: FUN_00519790
+    // label: setRallyPointForLaddermenTribe
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00519790 = 0x00519790,
-    // label: FUN_00519850
+    // label: initializeAttackZoneSearch
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00519850 = 0x00519850,
@@ -49328,7 +49328,7 @@ enum {
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00519960 = 0x00519960,
-    // label: hack2related
+    // label: computeSiegeSpotScores
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00519990 = 0x00519990,
@@ -49352,7 +49352,7 @@ enum {
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00519DE0 = 0x00519DE0,
-    // label: meth_0x519e40
+    // label: findNearestAvailableScalePoint
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00519E40 = 0x00519E40,
@@ -49364,11 +49364,11 @@ enum {
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00519FB0 = 0x00519FB0,
-    // label: FUN_0051a0c0
+    // label: countAvailablePeopleValueSlots
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051A0C0 = 0x0051A0C0,
-    // label: FUN_0051a100
+    // label: countAvailableLordValueSlots
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051A100 = 0x0051A100,
@@ -49376,7 +49376,7 @@ enum {
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051A140 = 0x0051A140,
-    // label: findEnemyLordUnk
+    // label: findEnemyLord
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051A220 = 0x0051A220,
@@ -49384,7 +49384,7 @@ enum {
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051A2D0 = 0x0051A2D0,
-    // label: findEnemyTowersOrGatesUnk
+    // label: findEnemyTowersOrGates
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051A330 = 0x0051A330,
@@ -49408,15 +49408,15 @@ enum {
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051A780 = 0x0051A780,
-    // label: meth_0x51a8a0
+    // label: findNearestDiggableMoatPoint
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051A8A0 = 0x0051A8A0,
-    // label: meth_0x51a920
+    // label: findTribeWithMoatAttackBehavior
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051A920 = 0x0051A920,
-    // label: FUN_0051a9a0
+    // label: countAvailableHighValueSlots
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051A9A0 = 0x0051A9A0,
@@ -49426,7 +49426,7 @@ enum {
     SHC_3BB0A8C1_0x0051A9F0 = 0x0051A9F0,
     // type: function
     SHC_3BB0A8C1_0x0051AA40 = 0x0051AA40,
-    // label: FUN_0051ab10
+    // label: countAvailableArcherValueSlots
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051AB10 = 0x0051AB10,
@@ -49444,31 +49444,31 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x0051ACB0 = 0x0051ACB0,
-    // label: FUN_0051ace0
+    // label: expandAIZoneLayerStage1
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051ACE0 = 0x0051ACE0,
     // type: function
     SHC_3BB0A8C1_0x0051ACF0 = 0x0051ACF0,
-    // label: FUN_0051ae00
+    // label: expandAIZoneLayerStage2
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051AE00 = 0x0051AE00,
-    // label: FUN_0051ae90
+    // label: expandAIZoneLayerStage3
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051AE90 = 0x0051AE90,
-    // label: unkArcherRelated1
+    // label: findOrReserveArcherPointSlot
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051AF20 = 0x0051AF20,
-    // label: FUN_0051af70
+    // label: pruneStaleArcherPoints
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051AF70 = 0x0051AF70,
     // type: function
     SHC_3BB0A8C1_0x0051AF80 = 0x0051AF80,
-    // label: FUN_0051aff0
+    // label: claimArcherAttackPoint
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051AFF0 = 0x0051AFF0,
@@ -49476,7 +49476,7 @@ enum {
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051B0C0 = 0x0051B0C0,
-    // label: FUN_0051b110
+    // label: pruneStaleSupportPoints
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051B110 = 0x0051B110,
@@ -49490,13 +49490,13 @@ enum {
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051B240 = 0x0051B240,
-    // label: FUN_0051b290
+    // label: pruneStaleTentPoints
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051B290 = 0x0051B290,
     // type: function
     SHC_3BB0A8C1_0x0051B2A0 = 0x0051B2A0,
-    // label: placeSiegeTentAndAssignEngineersUnk
+    // label: placeSiegeTentAtAttackAngle
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051B310 = 0x0051B310,
@@ -49508,13 +49508,13 @@ enum {
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051B570 = 0x0051B570,
-    // label: FUN_0051b680
+    // label: clearAIInfoLayerOutsideStartZone
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051B680 = 0x0051B680,
     // type: function
     SHC_3BB0A8C1_0x0051B690 = 0x0051B690,
-    // label: FUN_0051b6c0
+    // label: playAttackAlarmSound
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051B6C0 = 0x0051B6C0,
@@ -49546,7 +49546,7 @@ enum {
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051BC70 = 0x0051BC70,
-    // label: exitSiegeEquipmentUnk
+    // label: exitSiegeEquipmentForWave
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051BD10 = 0x0051BD10,
@@ -49554,17 +49554,17 @@ enum {
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051BDE0 = 0x0051BDE0,
-    // label: FUN_0051be20
+    // label: FindFirstOpponentWithKeep
     // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x0051BE20 = 0x0051BE20,
-    // label: FUN_0051be60
+    // label: registerSpottedEnemyTile
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051BE60 = 0x0051BE60,
     // type: function
     SHC_3BB0A8C1_0x0051BEE0 = 0x0051BEE0,
-    // label: shouldLightPitchBecauseOfTroopValueUnk
+    // label: shouldLightPitchBasedOnTroopValue
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051BF20 = 0x0051BF20,
@@ -49576,7 +49576,7 @@ enum {
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051C1A0 = 0x0051C1A0,
-    // label: meth_0x51c2d0
+    // label: updateArcherBrazierProximityFlags
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051C2D0 = 0x0051C2D0,
@@ -49754,7 +49754,7 @@ enum {
     SHC_3BB0A8C1_0x0051C463 = 0x0051C463,
     // type: /byte
     SHC_3BB0A8C1_0x0051C464 = 0x0051C464,
-    // label: FUN_0051c470
+    // label: queueOilThrowForIdleArchers
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051C470 = 0x0051C470,
@@ -49794,13 +49794,13 @@ enum {
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051C800 = 0x0051C800,
-    // label: meth_0x51ca50
+    // label: collectArcherUnitsByLocation
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051CA50 = 0x0051CA50,
     // type: function
     SHC_3BB0A8C1_0x0051CAE0 = 0x0051CAE0,
-    // label: FUN_0051cbd0
+    // label: redeployArchersToDefensivePositions
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051CBD0 = 0x0051CBD0,
@@ -49812,11 +49812,11 @@ enum {
     SHC_3BB0A8C1_0x0051CCB0 = 0x0051CCB0,
     // type: function
     SHC_3BB0A8C1_0x0051CE50 = 0x0051CE50,
-    // label: FUN_0051cf90
+    // label: trySendMacemenTribeToAttack
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051CF90 = 0x0051CF90,
-    // label: FUN_0051d020
+    // label: trySendKnightTribeToAttack
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051D020 = 0x0051D020,
@@ -49824,15 +49824,15 @@ enum {
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051D0D0 = 0x0051D0D0,
-    // label: FUN_0051d1c0
+    // label: moveTribeToReachableNearbyTile
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051D1C0 = 0x0051D1C0,
-    // label: FUN_0051d2b0
+    // label: decideAndExecuteTribeAttackAction
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051D2B0 = 0x0051D2B0,
-    // label: moveUnitsToGateHouseUnk
+    // label: moveTribeToNearbyGatehouse
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051D450 = 0x0051D450,
@@ -49846,15 +49846,15 @@ enum {
     SHC_3BB0A8C1_0x0051D5D0 = 0x0051D5D0,
     // type: function
     SHC_3BB0A8C1_0x0051D5E0 = 0x0051D5E0,
-    // label: Constructor_TroopValueState
+    // label: constructTroopValueState
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051D680 = 0x0051D680,
-    // label: meth_0x51d690
+    // label: advanceAttackWaveStaging
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051D690 = 0x0051D690,
-    // label: meth_0x51d730
+    // label: updateActiveAttackWaveState
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051D730 = 0x0051D730,
@@ -50035,19 +50035,19 @@ enum {
     // label: LAB_0051f320__next_tile
     // location:
     SHC_3BB0A8C1_0x0051F320 = 0x0051F320,
-    // label: FUN_0051f340
+    // label: scanForArcherPoints
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051F340 = 0x0051F340,
     // type: function
     SHC_3BB0A8C1_0x0051F3D0 = 0x0051F3D0,
-    // label: FUN_0051f4b0
+    // label: scanForSupportPoints
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051F4B0 = 0x0051F4B0,
     // type: function
     SHC_3BB0A8C1_0x0051F4F0 = 0x0051F4F0,
-    // label: FUN_0051f5c0
+    // label: scanForSiegeTentPoints
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051F5C0 = 0x0051F5C0,
@@ -50055,7 +50055,7 @@ enum {
     SHC_3BB0A8C1_0x0051F5E0 = 0x0051F5E0,
     // type: function
     SHC_3BB0A8C1_0x0051F630 = 0x0051F630,
-    // label: meth_0051f950
+    // label: processSpottedEnemyTiles
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051F950 = 0x0051F950,
@@ -50075,11 +50075,11 @@ enum {
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051FB90 = 0x0051FB90,
-    // label: meth_0051fe80
+    // label: updateAttackInfoTick
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051FE80 = 0x0051FE80,
-    // label: meth_0x51ff90
+    // label: initializeOrAdvanceAttackWave
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051FF90 = 0x0051FF90,
@@ -50091,15 +50091,15 @@ enum {
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x005202B0 = 0x005202B0,
-    // label: meth_0x520450
+    // label: updateInProgressAttackWave
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00520450 = 0x00520450,
-    // label: meth_0x5205a0
+    // label: executeAttackWaveTargetAssignment
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x005205A0 = 0x005205A0,
-    // label: meth_0x520cd0
+    // label: executeDelayedAttackWaveTargetAssignment
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00520CD0 = 0x00520CD0,
@@ -50107,7 +50107,7 @@ enum {
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00520F70 = 0x00520F70,
-    // label: Constructor_TribesState
+    // label: constructTribesState
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00521180 = 0x00521180,
@@ -50115,7 +50115,7 @@ enum {
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005211B0 = 0x005211B0,
-    // label: FUN_00521210
+    // label: reassignOwnerForTribesOfBehaviorType2
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00521210 = 0x00521210,
@@ -50123,21 +50123,21 @@ enum {
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00521240 = 0x00521240,
-    // label: meth_0x521280
+    // label: moveUnitToBehaviorTarget
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00521280 = 0x00521280,
-    // label: calculatePathPlanToUnitUnk
+    // label: predictUnitInterceptPosition
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00521500 = 0x00521500,
     // type: function
     SHC_3BB0A8C1_0x00521690 = 0x00521690,
-    // label: FUN_00521720
+    // label: getMajoritySelectedUnitType
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00521720 = 0x00521720,
-    // label: meth_0x5217e0
+    // label: playUnitSelectionSound
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005217E0 = 0x005217E0,
@@ -50249,7 +50249,7 @@ enum {
     SHC_3BB0A8C1_0x00521A8E = 0x00521A8E,
     // type: /byte
     SHC_3BB0A8C1_0x00521A8F = 0x00521A8F,
-    // label: somethingTargetUnitSoundRelated
+    // label: playUnitCombatSpeechForTarget
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00521A90 = 0x00521A90,
@@ -50379,11 +50379,11 @@ enum {
     SHC_3BB0A8C1_0x00521EA5 = 0x00521EA5,
     // type: /byte
     SHC_3BB0A8C1_0x00521EA6 = 0x00521EA6,
-    // label: meth_0x521eb0
+    // label: playUnitSelectSpeech
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00521EB0 = 0x00521EB0,
-    // label: meth_0x521ef0
+    // label: playUnitMoveSpeech
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00521EF0 = 0x00521EF0,
@@ -50513,19 +50513,19 @@ enum {
     SHC_3BB0A8C1_0x00522082 = 0x00522082,
     // type: /byte
     SHC_3BB0A8C1_0x00522083 = 0x00522083,
-    // label: meth_0x522090
+    // label: playAttackCommandFeedback
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522090 = 0x00522090,
-    // label: FUN_00522110
+    // label: playPatrolCommandSpeech
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522110 = 0x00522110,
-    // label: FUN_00522150
+    // label: playTunnelerCommandSpeech
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522150 = 0x00522150,
-    // label: meth_0x522160
+    // label: playWorkCommandSpeech
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522160 = 0x00522160,
@@ -50535,7 +50535,7 @@ enum {
     SHC_3BB0A8C1_0x005221A0 = 0x005221A0,
     // type: function
     SHC_3BB0A8C1_0x005221C0 = 0x005221C0,
-    // label: FUN_00522210
+    // label: updatePeasantSeatingAtBuilding
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522210 = 0x00522210,
@@ -50613,7 +50613,7 @@ enum {
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522C50 = 0x00522C50,
-    // label: temporarilyStoreTribeIfAllNewlySelectedUnitsPartOfThisTribe_And_AlwaysRememberStance
+    // label: snapshotSelectionTribeAndComputeStance
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522CA0 = 0x00522CA0,
@@ -50621,11 +50621,11 @@ enum {
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522DD0 = 0x00522DD0,
-    // label: meth_0x522ef0
+    // label: trimTribeToSize
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522EF0 = 0x00522EF0,
-    // label: FUN_00522f70
+    // label: spawnUnitsForAITribe
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522F70 = 0x00522F70,
@@ -50633,7 +50633,7 @@ enum {
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00523030 = 0x00523030,
-    // label: meth_0x523190
+    // label: createTribeWithSpawnedUnit
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00523190 = 0x00523190,
@@ -50663,15 +50663,15 @@ enum {
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005233E0 = 0x005233E0,
-    // label: FUN_00523410
+    // label: findRecentOrSignpostSpawnLocation
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00523410 = 0x00523410,
-    // label: FUN_00523520
+    // label: hasAvailableSpawnSlotForWildlifeOrMercs
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00523520 = 0x00523520,
-    // label: meth_0x523590
+    // label: updateAnimalHerdBehaviorState
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00523590 = 0x00523590,
@@ -50683,15 +50683,15 @@ enum {
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005236A0 = 0x005236A0,
-    // label: meth_0x523730
+    // label: markTribeAsAnimalTribe
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00523730 = 0x00523730,
-    // label: meth_0x523750
+    // label: flagTribesOfType
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00523750 = 0x00523750,
-    // label: meth_0x523790
+    // label: consumeFlaggedTribesOfType
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00523790 = 0x00523790,
@@ -50699,7 +50699,7 @@ enum {
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005237F0 = 0x005237F0,
-    // label: meth_0x523920
+    // label: scatterTribeUnitsRandomly
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00523920 = 0x00523920,
@@ -50721,11 +50721,11 @@ enum {
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x00523EB0 = 0x00523EB0,
-    // label: meth_0x523ef0
+    // label: upgradeTribeArrayLayoutForMapVersion
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00523EF0 = 0x00523EF0,
-    // label: meth_0x523f70
+    // label: updateTribeRallyFlags
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00523F70 = 0x00523F70,
@@ -50741,7 +50741,7 @@ enum {
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005240D0 = 0x005240D0,
-    // label: meth_0x524140
+    // label: tribeHasActiveLaddermanUnit
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00524140 = 0x00524140,
@@ -50761,15 +50761,15 @@ enum {
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00524340 = 0x00524340,
-    // label: aiAttackWaveUnk
+    // label: assignAttackTargetsForTribe
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005244D0 = 0x005244D0,
-    // label: meth_0x524890
+    // label: stopTribeMovementAndCheckIdle
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00524890 = 0x00524890,
-    // label: meth_0x524930
+    // label: sortTribePathDestinationsByCost
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00524930 = 0x00524930,
@@ -50779,7 +50779,7 @@ enum {
     SHC_3BB0A8C1_0x00524A10 = 0x00524A10,
     // type: function
     SHC_3BB0A8C1_0x00524A30 = 0x00524A30,
-    // label: meth_0x524b30
+    // label: isTribeUnitBlockedByOtherUnit
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00524B30 = 0x00524B30,
@@ -50787,13 +50787,13 @@ enum {
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00524BF0 = 0x00524BF0,
-    // label: meth_0x524ca0
+    // label: isTribePathToDestinationClear
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00524CA0 = 0x00524CA0,
     // type: function
     SHC_3BB0A8C1_0x00524D80 = 0x00524D80,
-    // label: meth_0x524e20
+    // label: applyLadderDestructionToTribeUnits
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00524E20 = 0x00524E20,
@@ -50803,7 +50803,7 @@ enum {
     SHC_3BB0A8C1_0x00524EF0 = 0x00524EF0,
     // type: function
     SHC_3BB0A8C1_0x00525060 = 0x00525060,
-    // label: FUN_00525090
+    // label: playArcherCommandSpeech
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00525090 = 0x00525090,
@@ -50819,7 +50819,7 @@ enum {
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005251A0 = 0x005251A0,
-    // label: meth_0x525210
+    // label: isTribeFreeOfTunnelingUnits
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00525210 = 0x00525210,
@@ -50827,11 +50827,11 @@ enum {
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00525280 = 0x00525280,
-    // label: meth_0x525300
+    // label: setStateForAllTribeUnits
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00525300 = 0x00525300,
-    // label: meth_0x525370
+    // label: standUpAllTribeUnits
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00525370 = 0x00525370,
@@ -50839,7 +50839,7 @@ enum {
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005253F0 = 0x005253F0,
-    // label: makeUnitsDisappearUnk
+    // label: removeAllTribeUnits
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00525470 = 0x00525470,
@@ -50875,7 +50875,7 @@ enum {
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00525F20 = 0x00525F20,
-    // label: meth_0x5260b0
+    // label: trySpawnAdditionalWildlifeForTribe
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005260B0 = 0x005260B0,
@@ -50883,7 +50883,7 @@ enum {
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005261B0 = 0x005261B0,
-    // label: meth_0x5262a0
+    // label: spawnWildlifeOrMercAtAvailableSlot
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005262A0 = 0x005262A0,
@@ -50911,7 +50911,7 @@ enum {
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00527330 = 0x00527330,
-    // label: siegeThatRelatedUnk
+    // label: spawnQueuedReinforcementWaves
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00527440 = 0x00527440,
@@ -52817,15 +52817,15 @@ enum {
     SHC_3BB0A8C1_0x0052A637 = 0x0052A637,
     // type: /byte
     SHC_3BB0A8C1_0x0052A638 = 0x0052A638,
-    // label: meth_0x52a640
+    // label: moveTribeToNearbyClearTile
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x0052A640 = 0x0052A640,
-    // label: meth_0x52a700
+    // label: moveTribeToIndexedNearbyTile
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x0052A700 = 0x0052A700,
-    // label: unitAttackBuildingOrOtherUnitBasedOnStanceUnk
+    // label: updateTribeCombatStanceBehavior
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x0052A7D0 = 0x0052A7D0,
@@ -53093,15 +53093,15 @@ enum {
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x0052AD50 = 0x0052AD50,
-    // label: meth_0x52b110
+    // label: updateLionWolfTribeBehavior
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x0052B110 = 0x0052B110,
-    // label: meth_0x52b390
+    // label: updateRabbitTribeBehavior
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x0052B390 = 0x0052B390,
-    // label: meth_0x52b630
+    // label: updateCamelTribeBehavior
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x0052B630 = 0x0052B630,
@@ -53207,13 +53207,13 @@ enum {
     // location: OpenSHC/Map/WildlifeState
     // type: function
     SHC_3BB0A8C1_0x0052BF40 = 0x0052BF40,
-    // label: meth_0x52c570
+    // label: floodFillField13FromCell
     // location: OpenSHC/Map/WildlifeState
     // type: function
     SHC_3BB0A8C1_0x0052C570 = 0x0052C570,
     // type: function
     SHC_3BB0A8C1_0x0052C5D0 = 0x0052C5D0,
-    // label: meth_0x52c810
+    // label: floodFillField20FromCell
     // location: OpenSHC/Map/WildlifeState
     // type: function
     SHC_3BB0A8C1_0x0052C810 = 0x0052C810,
@@ -53229,7 +53229,7 @@ enum {
     SHC_3BB0A8C1_0x0052CD40 = 0x0052CD40,
     // type: function
     SHC_3BB0A8C1_0x0052CD60 = 0x0052CD60,
-    // label: meth_0x52cfe0
+    // label: buildRallyPointPathForTribe
     // location: OpenSHC/Map/WildlifeState
     // type: function
     SHC_3BB0A8C1_0x0052CFE0 = 0x0052CFE0,
@@ -53241,21 +53241,21 @@ enum {
     SHC_3BB0A8C1_0x0052D100 = 0x0052D100,
     // type: function
     SHC_3BB0A8C1_0x0052D3C0 = 0x0052D3C0,
-    // label: meth_0x52d620
+    // label: hasAdjacentCellWithField24Or25
     // location: OpenSHC/Map/WildlifeState
     // type: function
     SHC_3BB0A8C1_0x0052D620 = 0x0052D620,
-    // label: meth_0x52d690
+    // label: isSuitableWildlifeSpawnCell
     // location: OpenSHC/Map/WildlifeState
     // type: function
     SHC_3BB0A8C1_0x0052D690 = 0x0052D690,
-    // label: meth_0x52d720
+    // label: floodFillUnknownNonZero01FromCell
     // location: OpenSHC/Map/WildlifeState
     // type: function
     SHC_3BB0A8C1_0x0052D720 = 0x0052D720,
     // type: function
     SHC_3BB0A8C1_0x0052D780 = 0x0052D780,
-    // label: meth_0x52d9d0
+    // label: floodFillCasDisFromSignpost
     // location: OpenSHC/Map/WildlifeState
     // type: function
     SHC_3BB0A8C1_0x0052D9D0 = 0x0052D9D0,
@@ -53263,7 +53263,7 @@ enum {
     SHC_3BB0A8C1_0x0052DA40 = 0x0052DA40,
     // type: function
     SHC_3BB0A8C1_0x0052DAA0 = 0x0052DAA0,
-    // label: meth_0x52dd20
+    // label: getDistanceToNearestUnknownNonZero01FromSignpost
     // location: OpenSHC/Map/WildlifeState
     // type: function
     SHC_3BB0A8C1_0x0052DD20 = 0x0052DD20,
@@ -53343,7 +53343,7 @@ enum {
     SHC_3BB0A8C1_0x0052F440 = 0x0052F440,
     // type: function
     SHC_3BB0A8C1_0x0052F4A0 = 0x0052F4A0,
-    // label: meth_0x52f4e0
+    // label: isUnitRegisteredOnItsOwnTile
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052F4E0 = 0x0052F4E0,
@@ -53357,7 +53357,7 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052F5B0 = 0x0052F5B0,
-    // label: FUN_0052f680
+    // label: triggerDesyncIfTileUnitLinkageInvalid
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052F680 = 0x0052F680,
@@ -53371,19 +53371,19 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052F7E0 = 0x0052F7E0,
-    // label: meth_0x52fbb0
+    // label: standUpIfSeated
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052FBB0 = 0x0052FBB0,
-    // label: meth_0x52fbf0
+    // label: sitDownIfStanding
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052FBF0 = 0x0052FBF0,
-    // label: meth_0x52fc30
+    // label: setFacingDirectionTowardUnit
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052FC30 = 0x0052FC30,
-    // label: meth_0x52fca0
+    // label: setFacingDirectionTowardCoords
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052FCA0 = 0x0052FCA0,
@@ -53391,7 +53391,7 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052FD00 = 0x0052FD00,
-    // label: FUN_0052fe00
+    // label: setFacingDirectionTowardUnitMicro
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052FE00 = 0x0052FE00,
@@ -53403,7 +53403,7 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052FF80 = 0x0052FF80,
-    // label: FUN_00530080
+    // label: isComputerManagedNonPeasant
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00530080 = 0x00530080,
@@ -53411,13 +53411,13 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005300B0 = 0x005300B0,
-    // label: meth_0x5301f0
+    // label: countLivingNondyingUnitsForPlayer
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005301F0 = 0x005301F0,
     // type: function
     SHC_3BB0A8C1_0x00530210 = 0x00530210,
-    // label: meth_0x530240
+    // label: triggerStoneTowerDeathForPlayer
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00530240 = 0x00530240,
@@ -53425,7 +53425,7 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005302B0 = 0x005302B0,
-    // label: meth_0x530310
+    // label: triggerDeathAnimationForAllWildlife
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00530310 = 0x00530310,
@@ -53435,7 +53435,7 @@ enum {
     SHC_3BB0A8C1_0x00530390 = 0x00530390,
     // type: function
     SHC_3BB0A8C1_0x005303B0 = 0x005303B0,
-    // label: meth_0x530400
+    // label: transferNonCourtUnitsToPlayer
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00530400 = 0x00530400,
@@ -53731,7 +53731,7 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00530CF0 = 0x00530CF0,
-    // label: FUN_00530d50
+    // label: CheckUnitProductionPaused
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00530D50 = 0x00530D50,
@@ -53739,7 +53739,7 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00530D70 = 0x00530D70,
-    // label: FUN_00530e00
+    // label: WarnIfPlayerLacksGranary
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00530E00 = 0x00530E00,
@@ -53751,11 +53751,11 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00530F20 = 0x00530F20,
-    // label: checkIfCitizenUnitIsAliveBasedOnStateUnk
+    // label: checkIfCitizenUnitIsAliveBasedOnState
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00530FD0 = 0x00530FD0,
-    // label: meth_0x531000
+    // label: shouldUnitsEngageInMelee
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00531000 = 0x00531000,
@@ -54755,13 +54755,13 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00532F60 = 0x00532F60,
-    // label: distanceComputationForSomeOldCodeForSomeMissions
+    // label: computeDistanceToNearestEnemyForLegacyMissions
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00532F80 = 0x00532F80,
     // type: function
     SHC_3BB0A8C1_0x00533010 = 0x00533010,
-    // label: FUN_00533090
+    // label: returnFalseStub
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00533090 = 0x00533090,
@@ -54797,7 +54797,7 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00533630 = 0x00533630,
-    // label: meth_0x533810
+    // label: findAndDestroyAdjacentEnemyLadder
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00533810 = 0x00533810,
@@ -54805,19 +54805,19 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00533920 = 0x00533920,
-    // label: meth_0x533960
+    // label: isAtSecondaryDestination
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00533960 = 0x00533960,
-    // label: unitReachedDestinationUnk
+    // label: hasUnitReachedDestination
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005339A0 = 0x005339A0,
-    // label: meth_0x5339f0
+    // label: hasTunnelerNotFinishedDigging
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005339F0 = 0x005339F0,
-    // label: ladderClimbRelatedUnk
+    // label: computeLadderClimbPath
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00533A10 = 0x00533A10,
@@ -54833,7 +54833,7 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00533CA0 = 0x00533CA0,
-    // label: FUN_00533d50
+    // label: updateUnitFadeAndVisibilityNearStructures
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00533D50 = 0x00533D50,
@@ -54919,11 +54919,11 @@ enum {
     SHC_3BB0A8C1_0x00533F84 = 0x00533F84,
     // type: /byte
     SHC_3BB0A8C1_0x00533F85 = 0x00533F85,
-    // label: meth_0x533f90
+    // label: saveUnitStateBeforeInterruption
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00533F90 = 0x00533F90,
-    // label: meth_0x533fc0
+    // label: despawnUnreachableUnit
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00533FC0 = 0x00533FC0,
@@ -54949,7 +54949,7 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005340F0 = 0x005340F0,
-    // label: meth_0x534130
+    // label: applyTunnelDamageAlongPathPlan
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00534130 = 0x00534130,
@@ -54957,7 +54957,7 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00534240 = 0x00534240,
-    // label: meth_0x534380
+    // label: isWorkplaceBuildingOnAdjacentTile
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00534380 = 0x00534380,
@@ -54971,7 +54971,7 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00534460 = 0x00534460,
-    // label: meth_0x534490
+    // label: stampOccupancyFlagOnSurroundingTiles
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00534490 = 0x00534490,
@@ -54979,7 +54979,7 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00534520 = 0x00534520,
-    // label: getUnitThatFulfillsSomeTimebasedAndLocationBasedCriteria
+    // label: findEligibleUnitByTimeAndLocation
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005345A0 = 0x005345A0,
@@ -54989,7 +54989,7 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005346D0 = 0x005346D0,
-    // label: meth_0x5347e0
+    // label: applyDragBoxSelectionByPriority
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005347E0 = 0x005347E0,
@@ -55015,19 +55015,19 @@ enum {
     SHC_3BB0A8C1_0x00534D08 = 0x00534D08,
     // type: /pointer
     SHC_3BB0A8C1_0x00534D0C = 0x00534D0C,
-    // label: meth_0x534d10
+    // label: selectUnitsInDragBoxForCurrentPlayer
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00534D10 = 0x00534D10,
     // type: function
     SHC_3BB0A8C1_0x00534D80 = 0x00534D80,
-    // label: meth_0x534ee0
+    // label: selectFirstUnitInDragBoxAnyPlayer
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00534EE0 = 0x00534EE0,
     // type: function
     SHC_3BB0A8C1_0x00534F50 = 0x00534F50,
-    // label: meth_0x5350b0
+    // label: selectAllUnitsOfTypeForPlayer
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005350B0 = 0x005350B0,
@@ -55251,31 +55251,31 @@ enum {
     SHC_3BB0A8C1_0x00535513 = 0x00535513,
     // type: /byte
     SHC_3BB0A8C1_0x00535514 = 0x00535514,
-    // label: meth_0x535520
+    // label: selectionContainsEngineersOnly
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535520 = 0x00535520,
-    // label: meth_0x535550
+    // label: selectionHasEngineers
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535550 = 0x00535550,
-    // label: meth_0x535560
+    // label: selectionHasArchers
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535560 = 0x00535560,
-    // label: meth_0x535580
+    // label: selectionHasMobileAssaultUnits
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535580 = 0x00535580,
-    // label: meth_0x5355e0
+    // label: selectionHasMixedAssaultAndInfantry
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005355E0 = 0x005355E0,
-    // label: meth_0x535680
+    // label: getSelectedEngineerCarryingResource
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535680 = 0x00535680,
-    // label: meth_0x535700
+    // label: selectionContainsTunnelersOnly
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535700 = 0x00535700,
@@ -55283,7 +55283,7 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535730 = 0x00535730,
-    // label: meth_0x5357e0
+    // label: selectionContainsLadermenOnly
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005357E0 = 0x005357E0,
@@ -55291,27 +55291,27 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535810 = 0x00535810,
-    // label: meth_0x535840
+    // label: selectionContainsShieldmenOnly
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535840 = 0x00535840,
-    // label: meth_0x535870
+    // label: selectionHasShieldOrSiegeMobileUnits
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535870 = 0x00535870,
-    // label: meth_0x5358c0
+    // label: selectionHasShieldOrSiegeTower
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005358C0 = 0x005358C0,
-    // label: meth_0x535910
+    // label: selectionHasNoRangedUnits
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535910 = 0x00535910,
-    // label: meth_0x535980
+    // label: selectionHasFootSoldiers
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535980 = 0x00535980,
-    // label: meth_0x5359c0
+    // label: getSelectedLordIDIfOwnedByCurrentPlayer
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005359C0 = 0x005359C0,
@@ -55327,11 +55327,11 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535BC0 = 0x00535BC0,
-    // label: FUN_00535df0
+    // label: getFirstSelectedUnitID
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535DF0 = 0x00535DF0,
-    // label: siegeEngineRelated
+    // label: selectSiegeEngineAndPlayFeedback
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535E20 = 0x00535E20,
@@ -55343,7 +55343,7 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005360A0 = 0x005360A0,
-    // label: tribeRelated1
+    // label: selectTribeUnitsForPlayer
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536190 = 0x00536190,
@@ -55351,23 +55351,23 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005361F0 = 0x005361F0,
-    // label: meth_0x536260
+    // label: selectionHasMovableNonSiegeUnit
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536260 = 0x00536260,
     // type: function
     SHC_3BB0A8C1_0x00536280 = 0x00536280,
-    // label: meth_0x5362f0
+    // label: getFirstSelectedUnitOfEitherType
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005362F0 = 0x005362F0,
     // type: function
     SHC_3BB0A8C1_0x00536310 = 0x00536310,
-    // label: meth_0x536370
+    // label: getMaxStoneAmmoInSelectedSiegeEngines
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536370 = 0x00536370,
-    // label: meth_0x536400
+    // label: countSelectedCatapultsAndTrebuchets
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536400 = 0x00536400,
@@ -55381,7 +55381,7 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536530 = 0x00536530,
-    // label: meth_0x5365a0
+    // label: getFirstSelectedLadderUnitID
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005365A0 = 0x005365A0,
@@ -55391,15 +55391,15 @@ enum {
     SHC_3BB0A8C1_0x00536610 = 0x00536610,
     // type: function
     SHC_3BB0A8C1_0x00536630 = 0x00536630,
-    // label: meth_0x536690
+    // label: getFirstSelectedSiegeEngineID
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536690 = 0x00536690,
-    // label: meth_0x536710
+    // label: getFirstSelectedCatapultOrTrebuchetID
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536710 = 0x00536710,
-    // label: meth_0x536780
+    // label: isTowerTileOvercrowdedByCurrentPlayer
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536780 = 0x00536780,
@@ -55411,7 +55411,7 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536970 = 0x00536970,
-    // label: meth_0x5369f0
+    // label: selectionHasUnmannedSiegeEngine
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005369F0 = 0x005369F0,
@@ -55467,11 +55467,11 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536A60 = 0x00536A60,
-    // label: FUN_00536c70
+    // label: queueStopCommand
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536C70 = 0x00536C70,
-    // label: queueCommand0xF
+    // label: queueUnitTypeCommand
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536C90 = 0x00536C90,
@@ -55479,13 +55479,13 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536CC0 = 0x00536CC0,
-    // label: tribeRelated2
+    // label: clearOrDeselectUnitFromSelection
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536CF0 = 0x00536CF0,
     // type: function
     SHC_3BB0A8C1_0x00536DA0 = 0x00536DA0,
-    // label: meth_0x536de0
+    // label: clearSelectionCountsAndPlayerIDs
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536DE0 = 0x00536DE0,
@@ -55503,23 +55503,23 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005370C0 = 0x005370C0,
-    // label: FUN_00537100
+    // label: queueDisbandAndAttackCommand2Params
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00537100 = 0x00537100,
-    // label: FUN_00537130
+    // label: queueDisbandAndAttackCommand3Params
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00537130 = 0x00537130,
-    // label: queueCommand_36d
+    // label: queueDisbandAndAttackCommand4Params
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00537160 = 0x00537160,
-    // label: queueCommand_36_variation2
+    // label: queueDisbandAndAttackCommand5Params
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005371A0 = 0x005371A0,
-    // label: giveTribeAnInstruction2
+    // label: relayTribeInstruction
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005371E0 = 0x005371E0,
@@ -55539,7 +55539,7 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00537840 = 0x00537840,
-    // label: meth_0x537880
+    // label: findNearestShootableDeer
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00537880 = 0x00537880,
@@ -55547,7 +55547,7 @@ enum {
     SHC_3BB0A8C1_0x005378D0 = 0x005378D0,
     // type: function
     SHC_3BB0A8C1_0x005378F0 = 0x005378F0,
-    // label: meth_0x537a00
+    // label: findNearestIdleCowForPlayer
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00537A00 = 0x00537A00,
@@ -55557,7 +55557,7 @@ enum {
     SHC_3BB0A8C1_0x00537AA0 = 0x00537AA0,
     // type: function
     SHC_3BB0A8C1_0x00537B20 = 0x00537B20,
-    // label: getClosestUnitIDUnk
+    // label: findClosestEnemyByAreaAndRange
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00537C10 = 0x00537C10,
@@ -55575,7 +55575,7 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00537EE0 = 0x00537EE0,
-    // label: FUN_00537f60
+    // label: clearUnitPositionCommitState
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00537F60 = 0x00537F60,
@@ -63747,7 +63747,7 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x0053A020 = 0x0053A020,
-    // label: meth_0x53a070
+    // label: isWorkerAtProductionIdleState
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053A070 = 0x0053A070,
@@ -63829,7 +63829,7 @@ enum {
     SHC_3BB0A8C1_0x0053A148 = 0x0053A148,
     // type: /byte
     SHC_3BB0A8C1_0x0053A149 = 0x0053A149,
-    // label: meth_0x53a150
+    // label: getWorkerBlockingStateIfStuck
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053A150 = 0x0053A150,
@@ -63937,7 +63937,7 @@ enum {
     SHC_3BB0A8C1_0x0053A4C0 = 0x0053A4C0,
     // type: /byte
     SHC_3BB0A8C1_0x0053A4C1 = 0x0053A4C1,
-    // label: meth_0x53a4d0
+    // label: findActiveSiegeEngineForTribe
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053A4D0 = 0x0053A4D0,
@@ -64005,7 +64005,7 @@ enum {
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x0053B800 = 0x0053B800,
-    // label: Constructor_UnitsState
+    // label: constructUnitsState
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053B8B0 = 0x0053B8B0,
@@ -64013,7 +64013,7 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053B8E0 = 0x0053B8E0,
-    // label: updateUnitPositionUnk
+    // label: commitPendingUnitPosition
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053BB10 = 0x0053BB10,
@@ -64301,7 +64301,7 @@ enum {
     SHC_3BB0A8C1_0x0053D022 = 0x0053D022,
     // type: /byte
     SHC_3BB0A8C1_0x0053D023 = 0x0053D023,
-    // label: harassBuildingsAIUnk
+    // label: harassBuildingsWithSiegeAI
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053D030 = 0x0053D030,
@@ -64397,7 +64397,7 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053D3D0 = 0x0053D3D0,
-    // label: meth_0x53d850
+    // label: resumeMovementAfterInterruption
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053D850 = 0x0053D850,
@@ -64423,11 +64423,11 @@ enum {
     SHC_3BB0A8C1_0x0053DCB0 = 0x0053DCB0,
     // type: /undefined *32
     SHC_3BB0A8C1_0x0053DCB4 = 0x0053DCB4,
-    // label: setTargetedBuildingDestinationUnk
+    // label: setDestinationNearTargetedBuilding
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053DCC0 = 0x0053DCC0,
-    // label: meth_0x53ddd0
+    // label: selectWorkerSpeechOrMoraleStateID
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053DDD0 = 0x0053DDD0,
@@ -64495,11 +64495,11 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053E820 = 0x0053E820,
-    // label: someUnitMoveFunction
+    // label: resetUnitMovementState
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053E870 = 0x0053E870,
-    // label: meth_0x53e8d0
+    // label: clearHiddenFlagAndUpdatePosition
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053E8D0 = 0x0053E8D0,
@@ -65863,11 +65863,11 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00549C70 = 0x00549C70,
-    // label: meth_0x54a770
+    // label: resumeMovementIfNoAttackTarget
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0054A770 = 0x0054A770,
-    // label: findNearestEnemyAndHeadTowardsItUnk
+    // label: findNearestEnemyAndHeadTowardsIt
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0054A7B0 = 0x0054A7B0,
@@ -66293,7 +66293,7 @@ enum {
     SHC_3BB0A8C1_0x0054B0CB = 0x0054B0CB,
     // type: /byte
     SHC_3BB0A8C1_0x0054B0CC = 0x0054B0CC,
-    // label: canShootTargetUnk
+    // label: acquireShootTarget
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0054B0D0 = 0x0054B0D0,

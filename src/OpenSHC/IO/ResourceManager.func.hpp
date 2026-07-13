@@ -39,16 +39,16 @@ namespace IO {
         doesFileExist;
 
         MACRO_FUNCTION_RESOLVER(
-            void (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x0046C450, &ResourceManager::meth_0x46c450)
-        meth_0x46c450;
+            void (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x0046C450, &ResourceManager::setGfxFileFilter)
+        setGfxFileFilter;
 
         MACRO_FUNCTION_RESOLVER(
-            void (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x0046C480, &ResourceManager::meth_0x46c480)
-        meth_0x46c480;
+            void (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x0046C480, &ResourceManager::setHelpFileFilter)
+        setHelpFileFilter;
 
         MACRO_FUNCTION_RESOLVER(
-            void (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x0046C4B0, &ResourceManager::meth_0x46c4b0)
-        meth_0x46c4b0;
+            void (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x0046C4B0, &ResourceManager::setSoundFileFilter)
+        setSoundFileFilter;
 
         MACRO_FUNCTION_RESOLVER(int (ResourceManager::*)(char*), false, Address::SHC_3BB0A8C1_0x0046C4E0,
             &ResourceManager::getSimpleFirst1024ByteSumOfFile)
@@ -74,9 +74,9 @@ namespace IO {
             &ResourceManager::doesFileOfActiveResourceExist)
         doesFileOfActiveResourceExist;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x00471DF0, &ResourceManager::meth_0x471df0)
-        meth_0x471df0;
+        MACRO_FUNCTION_RESOLVER(void (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x00471DF0,
+            &ResourceManager::resetOpenFileNameStruct)
+        resetOpenFileNameStruct;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (ResourceManager::*)(void*, size_t), false, Address::SHC_3BB0A8C1_0x00471E50,
             &ResourceManager::readCurrentResourceIntoDestination)
@@ -94,21 +94,21 @@ namespace IO {
             Address::SHC_3BB0A8C1_0x00471FC0, &ResourceManager::readNextPartOfCurrentResourceIntoMemory)
         readNextPartOfCurrentResourceIntoMemory;
 
-        MACRO_FUNCTION_RESOLVER(
-            BOOLEnum (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x00472080, &ResourceManager::meth_0x472080)
-        meth_0x472080;
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x00472080,
+            &ResourceManager::showOpenGfxFileDialog)
+        showOpenGfxFileDialog;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (ResourceManager::*)(undefined4), false, Address::SHC_3BB0A8C1_0x004720C0,
-            &ResourceManager::meth_0x4720c0)
-        meth_0x4720c0;
+            &ResourceManager::showOpenHelpFileDialog)
+        showOpenHelpFileDialog;
 
-        MACRO_FUNCTION_RESOLVER(
-            BOOLEnum (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x00472100, &ResourceManager::meth_0x472100)
-        meth_0x472100;
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x00472100,
+            &ResourceManager::showSaveHelpFileDialog)
+        showSaveHelpFileDialog;
 
-        MACRO_FUNCTION_RESOLVER(
-            BOOLEnum (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x00472140, &ResourceManager::meth_0x472140)
-        meth_0x472140;
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x00472140,
+            &ResourceManager::showOpenSoundFileDialog)
+        showOpenSoundFileDialog;
 
         MACRO_FUNCTION_RESOLVER(int (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x00472180,
             &ResourceManager::fileHashFunctionByteByByte)

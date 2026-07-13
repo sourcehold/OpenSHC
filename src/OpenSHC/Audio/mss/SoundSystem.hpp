@@ -75,7 +75,7 @@ namespace Audio {
             SoundSystem() {};
             ~SoundSystem() {};
 
-            void meth_0x424700();
+            void endSpeechStreamsAndResetLoopFlags();
 
             void stopMusicPlayback();
 
@@ -89,9 +89,9 @@ namespace Audio {
 
             void setStreamAndSampleVolumeUnk(SHC_SoundStream sndStreamIndex, int volumeParam);
 
-            void meth_0x479b70();
+            void restoreMusicVolumeAfterSpeechEnds();
 
-            int meth_0x479c20(char* fileName);
+            int loadSoundFileAndGetIndex(char* fileName);
 
             void findSamplePlaceForSoundUnk(int soundIndex);
 
@@ -115,17 +115,17 @@ namespace Audio {
 
             void setupVolumeAndSoundIDWithMultiplier(eMusicIDs soundID, int soundMultiplier);
 
-            void meth_0x47a290();
+            void markMusicChangePending();
 
             void setSomeSoundTime();
 
             void setupVolumeAndSoundID0xF0_100();
 
-            void FUN_0047a340();
+            void selectAndPlayMoodBasedMusic();
 
             void setSection1079_28_4_(int param_1);
 
-            void meth_0x47a580();
+            void playBattleGloryMusicIfConditionsMet();
 
             void playDarMehqOrGlory();
 
@@ -137,7 +137,7 @@ namespace Audio {
 
             void playMusicUnk();
 
-            void meth_0x47a9e0();
+            void stopAllActiveSounds();
 
             void endSpeechSoundStreams();
 
@@ -148,7 +148,7 @@ namespace Audio {
             void playSoundStreamUnk(
                 SHC_SoundStream sndStreamIndex, char* filename, SoundFlagsAndLoopCount flagsAndLoopCount);
 
-            void meth_0x47b250(char* filename);
+            void playMusicFileByName(char* filename);
 
             void playOrSetupMusicUnk(char* filename, int someVolumeUnk);
 
@@ -164,7 +164,7 @@ namespace Audio {
 
             void playSpeechSfx(char* soundFileName);
 
-            void meth_0x47b700(char* param_1);
+            void playAmbientStreamWithLoop(char* param_1);
 
             void playSomeMusicUnk(char* filename, SoundFlagsAndLoopCount flagsAndLoop);
 

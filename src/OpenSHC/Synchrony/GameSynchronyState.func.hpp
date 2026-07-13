@@ -51,9 +51,9 @@ namespace Synchrony {
             &GameSynchronyState::setSessionDescription)
         setSessionDescription;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0047DEA0, &GameSynchronyState::meth_0x47dea0)
-        meth_0x47dea0;
+        MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0047DEA0,
+            &GameSynchronyState::setDirectPlaySessionDescription)
+        setDirectPlaySessionDescription;
 
         MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(GUID*), false, Address::SHC_3BB0A8C1_0x0047E010,
             &GameSynchronyState::fetchSessionGUID)
@@ -76,20 +76,20 @@ namespace Synchrony {
         readGameSpyConfig;
 
         MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(int), false, Address::SHC_3BB0A8C1_0x0047E5B0,
-            &GameSynchronyState::meth_0x47e5b0)
-        meth_0x47e5b0;
+            &GameSynchronyState::computeLatencyAdjustmentFromMatchTimes)
+        computeLatencyAdjustmentFromMatchTimes;
 
         MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(void*, void*), false, Address::SHC_3BB0A8C1_0x0047E800,
             &GameSynchronyState::decompressTooLongPacketData)
         decompressTooLongPacketData;
 
-        MACRO_FUNCTION_RESOLVER(
-            int (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0047E830, &GameSynchronyState::FUN_0047e830)
-        FUN_0047e830;
+        MACRO_FUNCTION_RESOLVER(int (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0047E830,
+            &GameSynchronyState::countActiveHumanPlayers)
+        countActiveHumanPlayers;
 
         MACRO_FUNCTION_RESOLVER(int (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0047E890,
-            &GameSynchronyState::aiPlayerCountUnk)
-        aiPlayerCountUnk;
+            &GameSynchronyState::countOccupiedPlayerSlots)
+        countOccupiedPlayerSlots;
 
         MACRO_FUNCTION_RESOLVER(int (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0047E8F0,
             &GameSynchronyState::checkPlayerSetValid)
@@ -112,8 +112,8 @@ namespace Synchrony {
         handleUnexpectedDPlayXResult;
 
         MACRO_FUNCTION_RESOLVER(undefined4 (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0047EDE0,
-            &GameSynchronyState::meth_0x47ede0)
-        meth_0x47ede0;
+            &GameSynchronyState::checkAllPlayersReadyAndCleanupSlots)
+        checkAllPlayersReadyAndCleanupSlots;
 
         MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(int, int, int, int), false,
             Address::SHC_3BB0A8C1_0x0047EED0, &GameSynchronyState::renderDebugDataSplitInfo)
@@ -128,12 +128,12 @@ namespace Synchrony {
         clearChatEvents;
 
         MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x0047F860,
-            &GameSynchronyState::renderInGameChatUnk)
-        renderInGameChatUnk;
+            &GameSynchronyState::renderInGameChat)
+        renderInGameChat;
 
         MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x0047FB50,
-            &GameSynchronyState::FUN_0047fb50)
-        FUN_0047fb50;
+            &GameSynchronyState::renderChatMessageList)
+        renderChatMessageList;
 
         MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x00480050,
             &GameSynchronyState::resetGameCommands)
@@ -177,8 +177,8 @@ namespace Synchrony {
         getLordTypeForPlayer;
 
         MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(int), false, Address::SHC_3BB0A8C1_0x00486F20,
-            &GameSynchronyState::meth_0x486f20)
-        meth_0x486f20;
+            &GameSynchronyState::initializeFinalResultsForActivePlayers)
+        initializeFinalResultsForActivePlayers;
 
         MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x00487250,
             &GameSynchronyState::invokeDirectPlayEnumConnections)
@@ -189,8 +189,8 @@ namespace Synchrony {
         restartDPlaySessionEnumeration;
 
         MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x004874B0,
-            &GameSynchronyState::createDirectPlayInterfaceModemUnk)
-        createDirectPlayInterfaceModemUnk;
+            &GameSynchronyState::createDirectPlayInterfaceModem)
+        createDirectPlayInterfaceModem;
 
         MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x00487650,
             &GameSynchronyState::setupSkirmishLobby)
@@ -209,8 +209,8 @@ namespace Synchrony {
         sendSomeMultiplayerSyncMessageWithType;
 
         MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x00488010,
-            &GameSynchronyState::processSyncPacketUnk)
-        processSyncPacketUnk;
+            &GameSynchronyState::processSyncPacket)
+        processSyncPacket;
 
         MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x004880E0,
             &GameSynchronyState::sendSyncPacket126)
@@ -237,20 +237,20 @@ namespace Synchrony {
         compareGameVersions;
 
         MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0048BF80,
-            &GameSynchronyState::createMultiplayerLobbyUnk)
-        createMultiplayerLobbyUnk;
+            &GameSynchronyState::initializeMultiplayerLobby)
+        initializeMultiplayerLobby;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0048C230, &GameSynchronyState::FUN_0048c230)
-        FUN_0048c230;
+        MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0048C230,
+            &GameSynchronyState::initMultiplayerLobbyState)
+        initMultiplayerLobbyState;
 
         MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0048C660,
             &GameSynchronyState::queueSynchronizedAutosaveProtocol)
         queueSynchronizedAutosaveProtocol;
 
         MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0048C750,
-            &GameSynchronyState::multiplayerSyncMessagesUnk)
-        multiplayerSyncMessagesUnk;
+            &GameSynchronyState::sendPeriodicSyncMessages)
+        sendPeriodicSyncMessages;
 
         MACRO_FUNCTION_RESOLVER(undefined4 (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0048C7B0,
             &GameSynchronyState::reorderTeamsAndPositions)
@@ -268,25 +268,25 @@ namespace Synchrony {
             &GameSynchronyState::checkLagAndSyncStatus)
         checkLagAndSyncStatus;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0048DC50, &GameSynchronyState::FUN_0048dc50)
-        FUN_0048dc50;
+        MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0048DC50,
+            &GameSynchronyState::broadcastDesyncResyncCommands)
+        broadcastDesyncResyncCommands;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0048E680, &GameSynchronyState::FUN_0048e680)
-        FUN_0048e680;
+        MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0048E680,
+            &GameSynchronyState::sendPendingResyncCommandsInBudget)
+        sendPendingResyncCommandsInBudget;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0048F3D0, &GameSynchronyState::FUN_0048f3d0)
-        FUN_0048f3d0;
+        MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0048F3D0,
+            &GameSynchronyState::advanceSyncStatusAndKickLaggers)
+        advanceSyncStatusAndKickLaggers;
 
         MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0048F4C0,
             &GameSynchronyState::checkGameLagStatusAndKickAccordingly)
         checkGameLagStatusAndKickAccordingly;
 
         MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x00490340,
-            &GameSynchronyState::someMultiplayerMessageSending)
-        someMultiplayerMessageSending;
+            &GameSynchronyState::throttledMultiplayerSyncUpdate)
+        throttledMultiplayerSyncUpdate;
 
         MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(int), false, Address::SHC_3BB0A8C1_0x00490380,
             &GameSynchronyState::removePlayerFromLobby)
@@ -309,8 +309,8 @@ namespace Synchrony {
         handleCommandLineArguments;
 
         MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(int, int, DWORD), false, Address::SHC_3BB0A8C1_0x004AF800,
-            &GameSynchronyState::RenderInGameChatDisplayElementUnk)
-        RenderInGameChatDisplayElementUnk;
+            &GameSynchronyState::renderInGameChatDisplayElement)
+        renderInGameChatDisplayElement;
 
     } // namespace GameSynchronyState_Func
 } // namespace Synchrony

@@ -39,8 +39,8 @@ namespace Input {
         setCursor;
 
         MACRO_FUNCTION_RESOLVER(
-            void (MouseState::*)(), false, Address::SHC_3BB0A8C1_0x00468420, &MouseState::meth_0x468420)
-        meth_0x468420;
+            void (MouseState::*)(), false, Address::SHC_3BB0A8C1_0x00468420, &MouseState::beginPointSelectionBox)
+        beginPointSelectionBox;
 
         MACRO_FUNCTION_RESOLVER(
             void (MouseState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004684D0, &MouseState::setupHitBox)
@@ -67,12 +67,12 @@ namespace Input {
         loadAndSetCursor;
 
         MACRO_FUNCTION_RESOLVER(
-            void (MouseState::*)(), false, Address::SHC_3BB0A8C1_0x00470B30, &MouseState::meth_0x470b30)
-        meth_0x470b30;
+            void (MouseState::*)(), false, Address::SHC_3BB0A8C1_0x00470B30, &MouseState::extendSelectionBoxToMouse)
+        extendSelectionBoxToMouse;
 
         MACRO_FUNCTION_RESOLVER(
-            void (MouseState::*)(), false, Address::SHC_3BB0A8C1_0x00470BC0, &MouseState::rightClickMenuUnk)
-        rightClickMenuUnk;
+            void (MouseState::*)(), false, Address::SHC_3BB0A8C1_0x00470BC0, &MouseState::updateRightDragCameraControl)
+        updateRightDragCameraControl;
 
         MACRO_FUNCTION_RESOLVER(
             void (MouseState::*)(), false, Address::SHC_3BB0A8C1_0x00472A90, &MouseState::drawMouseBasedBox)

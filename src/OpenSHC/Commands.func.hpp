@@ -212,12 +212,12 @@ namespace Commands_Func {
     ClickExtendRallyPoint;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00484960, &OpenSHC::Commands::FUN_00484960)
-    FUN_00484960;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00484960, &OpenSHC::Commands::SiegeEngineRelated)
+    SiegeEngineRelated;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00484A00, &OpenSHC::Commands::FUN_00484a00)
-    FUN_00484a00;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00484A00, &OpenSHC::Commands::TribeRelated1)
+    TribeRelated1;
 
     MACRO_FUNCTION_RESOLVER(
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00484A70, &OpenSHC::Commands::ReleaseDogs)
@@ -236,8 +236,8 @@ namespace Commands_Func {
     DeselectUnit;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00484E10, &OpenSHC::Commands::FUN_00484e10)
-    FUN_00484e10;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00484E10, &OpenSHC::Commands::SetField45To100)
+    SetField45To100;
 
     MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00484E70, &OpenSHC::Commands::ResyncZone)
     ResyncZone;
@@ -259,8 +259,8 @@ namespace Commands_Func {
     VoteKick_K_D_B_G_J;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00485210, &OpenSHC::Commands::FUN_00485210)
-    FUN_00485210;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00485210, &OpenSHC::Commands::SyncPacketSizeAnnouncement)
+    SyncPacketSizeAnnouncement;
 
     MACRO_FUNCTION_RESOLVER(
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004852D0, &OpenSHC::Commands::ShareAnnouncementWithHost)
@@ -279,8 +279,8 @@ namespace Commands_Func {
     FlagsAndBraziersCommandUnk;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004855C0, &OpenSHC::Commands::FUN_004855c0)
-    FUN_004855c0;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004855C0, &OpenSHC::Commands::NotifyLaggingPlayer)
+    NotifyLaggingPlayer;
 
     MACRO_FUNCTION_RESOLVER(
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00485650, &OpenSHC::Commands::SomeKindOfMultiplayerPingUnk)

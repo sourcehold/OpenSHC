@@ -17,8 +17,8 @@ namespace Map {
             calculateOrientation;
 
             MACRO_FUNCTION_RESOLVER(void (DirectionAlgorithmState::*)(int, int), false,
-                Address::SHC_3BB0A8C1_0x0046C9A0, &DirectionAlgorithmState::FUN_0046c9a0)
-            FUN_0046c9a0;
+                Address::SHC_3BB0A8C1_0x0046C9A0, &DirectionAlgorithmState::calculateOrientationFromTiles)
+            calculateOrientationFromTiles;
 
             MACRO_FUNCTION_RESOLVER(void (DirectionAlgorithmState::*)(int, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x0046C9E0, &DirectionAlgorithmState::calculatePreferredRelativeOrientation)
@@ -41,8 +41,8 @@ namespace Map {
             computeHash;
 
             MACRO_FUNCTION_RESOLVER(uint (DirectionAlgorithmState::*)(int, uint*, uint), false,
-                Address::SHC_3BB0A8C1_0x0046CDF0, &DirectionAlgorithmState::FUN_0046cdf0)
-            FUN_0046cdf0;
+                Address::SHC_3BB0A8C1_0x0046CDF0, &DirectionAlgorithmState::computeMaskedBitAccumulator)
+            computeMaskedBitAccumulator;
 
         } // namespace DirectionAlgorithmState_Func
     } // namespace Navigation

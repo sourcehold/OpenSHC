@@ -71,9 +71,9 @@ namespace Map {
                 &UnitsState::setupUnitSharingTileIDs)
             setupUnitSharingTileIDs;
 
-            MACRO_FUNCTION_RESOLVER(
-                undefined4 (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0052F4E0, &UnitsState::meth_0x52f4e0)
-            meth_0x52f4e0;
+            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0052F4E0,
+                &UnitsState::isUnitRegisteredOnItsOwnTile)
+            isUnitRegisteredOnItsOwnTile;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0052F550,
                 &UnitsState::ifAnyUnitOnSameTileIsLadder)
@@ -83,9 +83,9 @@ namespace Map {
                 &UnitsState::ifAnyUnitOnSameTileIsLadderInRightDirection)
             ifAnyUnitOnSameTileIsLadderInRightDirection;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0052F680, &UnitsState::FUN_0052f680)
-            FUN_0052f680;
+            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0052F680,
+                &UnitsState::triggerDesyncIfTileUnitLinkageInvalid)
+            triggerDesyncIfTileUnitLinkageInvalid;
 
             MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x0052F730,
                 &UnitsState::removeUnitsSameTileLinkageIfNoLongerApplicable)
@@ -96,28 +96,28 @@ namespace Map {
             calculateUnitMovementSpeed;
 
             MACRO_FUNCTION_RESOLVER(
-                undefined4 (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0052FBB0, &UnitsState::meth_0x52fbb0)
-            meth_0x52fbb0;
+                undefined4 (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0052FBB0, &UnitsState::standUpIfSeated)
+            standUpIfSeated;
 
-            MACRO_FUNCTION_RESOLVER(
-                undefined4 (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0052FBF0, &UnitsState::meth_0x52fbf0)
-            meth_0x52fbf0;
+            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0052FBF0,
+                &UnitsState::sitDownIfStanding)
+            sitDownIfStanding;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0052FC30, &UnitsState::meth_0x52fc30)
-            meth_0x52fc30;
+            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0052FC30,
+                &UnitsState::setFacingDirectionTowardUnit)
+            setFacingDirectionTowardUnit;
 
             MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x0052FCA0,
-                &UnitsState::meth_0x52fca0)
-            meth_0x52fca0;
+                &UnitsState::setFacingDirectionTowardCoords)
+            setFacingDirectionTowardCoords;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0052FD00,
                 &UnitsState::setUnitFacingDirectionTowardsTarget)
             setUnitFacingDirectionTowardsTarget;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0052FE00, &UnitsState::FUN_0052fe00)
-            FUN_0052fe00;
+            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0052FE00,
+                &UnitsState::setFacingDirectionTowardUnitMicro)
+            setFacingDirectionTowardUnitMicro;
 
             MACRO_FUNCTION_RESOLVER(bool (UnitsState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x0052FE90,
                 &UnitsState::setUnitFacingDirectionForTargetXandY)
@@ -127,37 +127,37 @@ namespace Map {
                 &UnitsState::setUnitFacingDirectionBasedOnBuilding)
             setUnitFacingDirectionBasedOnBuilding;
 
-            MACRO_FUNCTION_RESOLVER(
-                BOOLEnum (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00530080, &UnitsState::FUN_00530080)
-            FUN_00530080;
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00530080,
+                &UnitsState::isComputerManagedNonPeasant)
+            isComputerManagedNonPeasant;
 
             MACRO_FUNCTION_RESOLVER(
                 void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x005300B0, &UnitsState::playHurtSFXForUnit)
             playHurtSFXForUnit;
 
-            MACRO_FUNCTION_RESOLVER(
-                int (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x005301F0, &UnitsState::meth_0x5301f0)
-            meth_0x5301f0;
+            MACRO_FUNCTION_RESOLVER(int (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x005301F0,
+                &UnitsState::countLivingNondyingUnitsForPlayer)
+            countLivingNondyingUnitsForPlayer;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00530240, &UnitsState::meth_0x530240)
-            meth_0x530240;
+            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00530240,
+                &UnitsState::triggerStoneTowerDeathForPlayer)
+            triggerStoneTowerDeathForPlayer;
 
             MACRO_FUNCTION_RESOLVER(
                 void (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x005302B0, &UnitsState::killAllUnownedUnits)
             killAllUnownedUnits;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00530310, &UnitsState::meth_0x530310)
-            meth_0x530310;
+            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00530310,
+                &UnitsState::triggerDeathAnimationForAllWildlife)
+            triggerDeathAnimationForAllWildlife;
 
             MACRO_FUNCTION_RESOLVER(
                 void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00530390, &UnitsState::killUnits)
             killUnits;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00530400, &UnitsState::meth_0x530400)
-            meth_0x530400;
+            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00530400,
+                &UnitsState::transferNonCourtUnitsToPlayer)
+            transferNonCourtUnitsToPlayer;
 
             MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00530500,
                 &UnitsState::makeCourtMemberUnitsDisappearAndSwapAllOtherUnitsOwnership)
@@ -176,12 +176,12 @@ namespace Map {
             setMissionNumberSpecificLord;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00530FD0,
-                &UnitsState::checkIfCitizenUnitIsAliveBasedOnStateUnk)
-            checkIfCitizenUnitIsAliveBasedOnStateUnk;
+                &UnitsState::checkIfCitizenUnitIsAliveBasedOnState)
+            checkIfCitizenUnitIsAliveBasedOnState;
 
-            MACRO_FUNCTION_RESOLVER(
-                bool (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00531000, &UnitsState::meth_0x531000)
-            meth_0x531000;
+            MACRO_FUNCTION_RESOLVER(bool (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00531000,
+                &UnitsState::shouldUnitsEngageInMelee)
+            shouldUnitsEngageInMelee;
 
             MACRO_FUNCTION_RESOLVER(int (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x005311F0,
                 &UnitsState::ComputeDamageFearFactorBonus)
@@ -212,12 +212,12 @@ namespace Map {
             getArmySize;
 
             MACRO_FUNCTION_RESOLVER(int (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00532F80,
-                &UnitsState::distanceComputationForSomeOldCodeForSomeMissions)
-            distanceComputationForSomeOldCodeForSomeMissions;
+                &UnitsState::computeDistanceToNearestEnemyForLegacyMissions)
+            computeDistanceToNearestEnemyForLegacyMissions;
 
             MACRO_FUNCTION_RESOLVER(
-                BOOLEnum (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00533090, &UnitsState::FUN_00533090)
-            FUN_00533090;
+                BOOLEnum (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00533090, &UnitsState::returnFalseStub)
+            returnFalseStub;
 
             MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int, int, int, int), false, Address::SHC_3BB0A8C1_0x005330A0,
                 &UnitsState::setRandomShootLocation)
@@ -235,29 +235,29 @@ namespace Map {
                 &UnitsState::findClosestLaddermanWithLadderPosition)
             findClosestLaddermanWithLadderPosition;
 
-            MACRO_FUNCTION_RESOLVER(
-                int (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00533810, &UnitsState::meth_0x533810)
-            meth_0x533810;
+            MACRO_FUNCTION_RESOLVER(int (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00533810,
+                &UnitsState::findAndDestroyAdjacentEnemyLadder)
+            findAndDestroyAdjacentEnemyLadder;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x00533920,
                 &UnitsState::getDestination2EqualsGivenCoordinates)
             getDestination2EqualsGivenCoordinates;
 
-            MACRO_FUNCTION_RESOLVER(
-                bool (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00533960, &UnitsState::meth_0x533960)
-            meth_0x533960;
+            MACRO_FUNCTION_RESOLVER(bool (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00533960,
+                &UnitsState::isAtSecondaryDestination)
+            isAtSecondaryDestination;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x005339A0,
-                &UnitsState::unitReachedDestinationUnk)
-            unitReachedDestinationUnk;
+                &UnitsState::hasUnitReachedDestination)
+            hasUnitReachedDestination;
 
-            MACRO_FUNCTION_RESOLVER(
-                BOOLEnum (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x005339F0, &UnitsState::meth_0x5339f0)
-            meth_0x5339f0;
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x005339F0,
+                &UnitsState::hasTunnelerNotFinishedDigging)
+            hasTunnelerNotFinishedDigging;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(int, uint, int, int), false,
-                Address::SHC_3BB0A8C1_0x00533A10, &UnitsState::ladderClimbRelatedUnk)
-            ladderClimbRelatedUnk;
+                Address::SHC_3BB0A8C1_0x00533A10, &UnitsState::computeLadderClimbPath)
+            computeLadderClimbPath;
 
             MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00533B30,
                 &UnitsState::changeDestinationByAmount)
@@ -271,17 +271,17 @@ namespace Map {
                 &UnitsState::tracePathFromLadderExitSetDestination)
             tracePathFromLadderExitSetDestination;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00533D50, &UnitsState::FUN_00533d50)
-            FUN_00533d50;
+            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00533D50,
+                &UnitsState::updateUnitFadeAndVisibilityNearStructures)
+            updateUnitFadeAndVisibilityNearStructures;
+
+            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00533F90,
+                &UnitsState::saveUnitStateBeforeInterruption)
+            saveUnitStateBeforeInterruption;
 
             MACRO_FUNCTION_RESOLVER(
-                void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00533F90, &UnitsState::meth_0x533f90)
-            meth_0x533f90;
-
-            MACRO_FUNCTION_RESOLVER(
-                void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00533FC0, &UnitsState::meth_0x533fc0)
-            meth_0x533fc0;
+                void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00533FC0, &UnitsState::despawnUnreachableUnit)
+            despawnUnreachableUnit;
 
             MACRO_FUNCTION_RESOLVER(
                 void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00534030, &UnitsState::updateMicroPosition)
@@ -291,17 +291,17 @@ namespace Map {
                 &UnitsState::adjustUnitMapOrientationRelatedPositionBasedOnMapOrientationCorrectedFacingDirection)
             adjustUnitMapOrientationRelatedPositionBasedOnMapOrientationCorrectedFacingDirection;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (UnitsState::*)(uint), false, Address::SHC_3BB0A8C1_0x00534130, &UnitsState::meth_0x534130)
-            meth_0x534130;
+            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(uint), false, Address::SHC_3BB0A8C1_0x00534130,
+                &UnitsState::applyTunnelDamageAlongPathPlan)
+            applyTunnelDamageAlongPathPlan;
 
             MACRO_FUNCTION_RESOLVER(
                 int (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00534240, &UnitsState::stopUnitIfNextToTarget)
             stopUnitIfNextToTarget;
 
-            MACRO_FUNCTION_RESOLVER(
-                undefined4 (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00534380, &UnitsState::meth_0x534380)
-            meth_0x534380;
+            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00534380,
+                &UnitsState::isWorkplaceBuildingOnAdjacentTile)
+            isWorkplaceBuildingOnAdjacentTile;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x005343F0,
                 &UnitsState::setWorkplaceBuildingEntryAsTarget)
@@ -311,37 +311,37 @@ namespace Map {
                 BOOLEnum (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00534460, &UnitsState::unitIsInMoat)
             unitIsInMoat;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00534490, &UnitsState::meth_0x534490)
-            meth_0x534490;
+            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00534490,
+                &UnitsState::stampOccupancyFlagOnSurroundingTiles)
+            stampOccupancyFlagOnSurroundingTiles;
 
             MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int, undefined4), false, Address::SHC_3BB0A8C1_0x00534520,
                 &UnitsState::writeSixToTileMap1104InAllDirections)
             writeSixToTileMap1104InAllDirections;
 
             MACRO_FUNCTION_RESOLVER(int (UnitsState::*)(int, int, int, int, int, int), false,
-                Address::SHC_3BB0A8C1_0x005345A0, &UnitsState::getUnitThatFulfillsSomeTimebasedAndLocationBasedCriteria)
-            getUnitThatFulfillsSomeTimebasedAndLocationBasedCriteria;
+                Address::SHC_3BB0A8C1_0x005345A0, &UnitsState::findEligibleUnitByTimeAndLocation)
+            findEligibleUnitByTimeAndLocation;
 
             MACRO_FUNCTION_RESOLVER(
                 int (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x005346D0, &UnitsState::selectNewBlessingTarget)
             selectNewBlessingTarget;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x005347E0, &UnitsState::meth_0x5347e0)
-            meth_0x5347e0;
+            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x005347E0,
+                &UnitsState::applyDragBoxSelectionByPriority)
+            applyDragBoxSelectionByPriority;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00534D10, &UnitsState::meth_0x534d10)
-            meth_0x534d10;
+            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00534D10,
+                &UnitsState::selectUnitsInDragBoxForCurrentPlayer)
+            selectUnitsInDragBoxForCurrentPlayer;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00534EE0, &UnitsState::meth_0x534ee0)
-            meth_0x534ee0;
+            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00534EE0,
+                &UnitsState::selectFirstUnitInDragBoxAnyPlayer)
+            selectFirstUnitInDragBoxAnyPlayer;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x005350B0, &UnitsState::meth_0x5350b0)
-            meth_0x5350b0;
+            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x005350B0,
+                &UnitsState::selectAllUnitsOfTypeForPlayer)
+            selectAllUnitsOfTypeForPlayer;
 
             MACRO_FUNCTION_RESOLVER(
                 void (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535150, &UnitsState::deselectAllUnitsOneByOne)
@@ -363,69 +363,69 @@ namespace Map {
                 void (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535240, &UnitsState::recountUnitsInSelection)
             recountUnitsInSelection;
 
-            MACRO_FUNCTION_RESOLVER(
-                int (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535520, &UnitsState::meth_0x535520)
-            meth_0x535520;
+            MACRO_FUNCTION_RESOLVER(int (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535520,
+                &UnitsState::selectionContainsEngineersOnly)
+            selectionContainsEngineersOnly;
 
             MACRO_FUNCTION_RESOLVER(
-                BOOLEnum (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535550, &UnitsState::meth_0x535550)
-            meth_0x535550;
+                BOOLEnum (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535550, &UnitsState::selectionHasEngineers)
+            selectionHasEngineers;
 
             MACRO_FUNCTION_RESOLVER(
-                BOOLEnum (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535560, &UnitsState::meth_0x535560)
-            meth_0x535560;
+                BOOLEnum (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535560, &UnitsState::selectionHasArchers)
+            selectionHasArchers;
 
-            MACRO_FUNCTION_RESOLVER(
-                undefined4 (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535580, &UnitsState::meth_0x535580)
-            meth_0x535580;
+            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535580,
+                &UnitsState::selectionHasMobileAssaultUnits)
+            selectionHasMobileAssaultUnits;
 
-            MACRO_FUNCTION_RESOLVER(
-                undefined4 (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x005355E0, &UnitsState::meth_0x5355e0)
-            meth_0x5355e0;
+            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x005355E0,
+                &UnitsState::selectionHasMixedAssaultAndInfantry)
+            selectionHasMixedAssaultAndInfantry;
 
-            MACRO_FUNCTION_RESOLVER(
-                uint (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535680, &UnitsState::meth_0x535680)
-            meth_0x535680;
+            MACRO_FUNCTION_RESOLVER(uint (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535680,
+                &UnitsState::getSelectedEngineerCarryingResource)
+            getSelectedEngineerCarryingResource;
 
-            MACRO_FUNCTION_RESOLVER(
-                int (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535700, &UnitsState::meth_0x535700)
-            meth_0x535700;
+            MACRO_FUNCTION_RESOLVER(int (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535700,
+                &UnitsState::selectionContainsTunnelersOnly)
+            selectionContainsTunnelersOnly;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535730,
                 &UnitsState::selectionContainsRangedOnlyUnits)
             selectionContainsRangedOnlyUnits;
 
-            MACRO_FUNCTION_RESOLVER(
-                int (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x005357E0, &UnitsState::meth_0x5357e0)
-            meth_0x5357e0;
+            MACRO_FUNCTION_RESOLVER(int (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x005357E0,
+                &UnitsState::selectionContainsLadermenOnly)
+            selectionContainsLadermenOnly;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535810,
                 &UnitsState::selectionContainsOnlyArabAssassins)
             selectionContainsOnlyArabAssassins;
 
-            MACRO_FUNCTION_RESOLVER(
-                int (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535840, &UnitsState::meth_0x535840)
-            meth_0x535840;
+            MACRO_FUNCTION_RESOLVER(int (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535840,
+                &UnitsState::selectionContainsShieldmenOnly)
+            selectionContainsShieldmenOnly;
 
-            MACRO_FUNCTION_RESOLVER(
-                undefined4 (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535870, &UnitsState::meth_0x535870)
-            meth_0x535870;
+            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535870,
+                &UnitsState::selectionHasShieldOrSiegeMobileUnits)
+            selectionHasShieldOrSiegeMobileUnits;
 
-            MACRO_FUNCTION_RESOLVER(
-                undefined4 (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x005358C0, &UnitsState::meth_0x5358c0)
-            meth_0x5358c0;
+            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x005358C0,
+                &UnitsState::selectionHasShieldOrSiegeTower)
+            selectionHasShieldOrSiegeTower;
 
-            MACRO_FUNCTION_RESOLVER(
-                undefined4 (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535910, &UnitsState::meth_0x535910)
-            meth_0x535910;
+            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535910,
+                &UnitsState::selectionHasNoRangedUnits)
+            selectionHasNoRangedUnits;
 
-            MACRO_FUNCTION_RESOLVER(
-                undefined4 (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535980, &UnitsState::meth_0x535980)
-            meth_0x535980;
+            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535980,
+                &UnitsState::selectionHasFootSoldiers)
+            selectionHasFootSoldiers;
 
-            MACRO_FUNCTION_RESOLVER(
-                uint (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x005359C0, &UnitsState::meth_0x5359c0)
-            meth_0x5359c0;
+            MACRO_FUNCTION_RESOLVER(uint (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x005359C0,
+                &UnitsState::getSelectedLordIDIfOwnedByCurrentPlayer)
+            getSelectedLordIDIfOwnedByCurrentPlayer;
 
             MACRO_FUNCTION_RESOLVER(
                 int (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535A30, &UnitsState::createUnitSelection)
@@ -439,13 +439,13 @@ namespace Map {
                 &UnitsState::playerMakeUnitSelection)
             playerMakeUnitSelection;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (UnitsState::*)(undefined4), false, Address::SHC_3BB0A8C1_0x00535DF0, &UnitsState::FUN_00535df0)
-            FUN_00535df0;
+            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(undefined4), false, Address::SHC_3BB0A8C1_0x00535DF0,
+                &UnitsState::getFirstSelectedUnitID)
+            getFirstSelectedUnitID;
 
             MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x00535E20,
-                &UnitsState::siegeEngineRelated)
-            siegeEngineRelated;
+                &UnitsState::selectSiegeEngineAndPlayFeedback)
+            selectSiegeEngineAndPlayFeedback;
 
             MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00535FD0,
                 &UnitsState::makeSelectionBasedOnShortcut)
@@ -455,29 +455,29 @@ namespace Map {
                 &UnitsState::isUnitShortcutAvailable)
             isUnitShortcutAvailable;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00536190, &UnitsState::tribeRelated1)
-            tribeRelated1;
+            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00536190,
+                &UnitsState::selectTribeUnitsForPlayer)
+            selectTribeUnitsForPlayer;
 
             MACRO_FUNCTION_RESOLVER(UnitType (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x005361F0,
                 &UnitsState::getUnitTypeOfFirstSelectedUnit)
             getUnitTypeOfFirstSelectedUnit;
 
-            MACRO_FUNCTION_RESOLVER(
-                undefined4 (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00536260, &UnitsState::meth_0x536260)
-            meth_0x536260;
+            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00536260,
+                &UnitsState::selectionHasMovableNonSiegeUnit)
+            selectionHasMovableNonSiegeUnit;
 
-            MACRO_FUNCTION_RESOLVER(
-                uint (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x005362F0, &UnitsState::meth_0x5362f0)
-            meth_0x5362f0;
+            MACRO_FUNCTION_RESOLVER(uint (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x005362F0,
+                &UnitsState::getFirstSelectedUnitOfEitherType)
+            getFirstSelectedUnitOfEitherType;
 
-            MACRO_FUNCTION_RESOLVER(
-                int (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00536370, &UnitsState::meth_0x536370)
-            meth_0x536370;
+            MACRO_FUNCTION_RESOLVER(int (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00536370,
+                &UnitsState::getMaxStoneAmmoInSelectedSiegeEngines)
+            getMaxStoneAmmoInSelectedSiegeEngines;
 
-            MACRO_FUNCTION_RESOLVER(
-                undefined4 (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00536400, &UnitsState::meth_0x536400)
-            meth_0x536400;
+            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00536400,
+                &UnitsState::countSelectedCatapultsAndTrebuchets)
+            countSelectedCatapultsAndTrebuchets;
 
             MACRO_FUNCTION_RESOLVER(uint (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x005364C0,
                 &UnitsState::returnFirstSelectedEngineer)
@@ -487,57 +487,57 @@ namespace Map {
                 &UnitsState::getTunnelerIDOnlyIfFirstSelected)
             getTunnelerIDOnlyIfFirstSelected;
 
-            MACRO_FUNCTION_RESOLVER(
-                uint (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x005365A0, &UnitsState::meth_0x5365a0)
-            meth_0x5365a0;
+            MACRO_FUNCTION_RESOLVER(uint (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x005365A0,
+                &UnitsState::getFirstSelectedLadderUnitID)
+            getFirstSelectedLadderUnitID;
 
             MACRO_FUNCTION_RESOLVER(
                 undefined4 (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00536610, &UnitsState::canAUnitClimb)
             canAUnitClimb;
 
-            MACRO_FUNCTION_RESOLVER(
-                uint (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00536690, &UnitsState::meth_0x536690)
-            meth_0x536690;
+            MACRO_FUNCTION_RESOLVER(uint (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00536690,
+                &UnitsState::getFirstSelectedSiegeEngineID)
+            getFirstSelectedSiegeEngineID;
 
-            MACRO_FUNCTION_RESOLVER(
-                uint (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00536710, &UnitsState::meth_0x536710)
-            meth_0x536710;
+            MACRO_FUNCTION_RESOLVER(uint (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00536710,
+                &UnitsState::getFirstSelectedCatapultOrTrebuchetID)
+            getFirstSelectedCatapultOrTrebuchetID;
 
-            MACRO_FUNCTION_RESOLVER(
-                BOOLEnum (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00536780, &UnitsState::meth_0x536780)
-            meth_0x536780;
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00536780,
+                &UnitsState::isTowerTileOvercrowdedByCurrentPlayer)
+            isTowerTileOvercrowdedByCurrentPlayer;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00536970,
                 &UnitsState::checkAnySelectedUnitCannotClimb)
             checkAnySelectedUnitCannotClimb;
 
-            MACRO_FUNCTION_RESOLVER(
-                BOOLEnum (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x005369F0, &UnitsState::meth_0x5369f0)
-            meth_0x5369f0;
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x005369F0,
+                &UnitsState::selectionHasUnmannedSiegeEngine)
+            selectionHasUnmannedSiegeEngine;
 
             MACRO_FUNCTION_RESOLVER(int (UnitsState::*)(uint), false, Address::SHC_3BB0A8C1_0x00536A60,
                 &UnitsState::selectionContainsCombatUnit)
             selectionContainsCombatUnit;
 
             MACRO_FUNCTION_RESOLVER(
-                void (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00536C70, &UnitsState::FUN_00536c70)
-            FUN_00536c70;
+                void (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00536C70, &UnitsState::queueStopCommand)
+            queueStopCommand;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (UnitsState::*)(undefined4), false, Address::SHC_3BB0A8C1_0x00536C90, &UnitsState::queueCommand0xF)
-            queueCommand0xF;
+            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(undefined4), false, Address::SHC_3BB0A8C1_0x00536C90,
+                &UnitsState::queueUnitTypeCommand)
+            queueUnitTypeCommand;
 
             MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(undefined4), false, Address::SHC_3BB0A8C1_0x00536CC0,
                 &UnitsState::queueClickNavigateMenuOrEscape)
             queueClickNavigateMenuOrEscape;
 
             MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int, uint, int), false, Address::SHC_3BB0A8C1_0x00536CF0,
-                &UnitsState::tribeRelated2)
-            tribeRelated2;
+                &UnitsState::clearOrDeselectUnitFromSelection)
+            clearOrDeselectUnitFromSelection;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00536DE0, &UnitsState::meth_0x536de0)
-            meth_0x536de0;
+            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00536DE0,
+                &UnitsState::clearSelectionCountsAndPlayerIDs)
+            clearSelectionCountsAndPlayerIDs;
 
             MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int, int, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x00536E30, &UnitsState::giveMoveCommand)
@@ -552,25 +552,25 @@ namespace Map {
             extendRallyPoint;
 
             MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(undefined4, undefined4), false,
-                Address::SHC_3BB0A8C1_0x00537100, &UnitsState::FUN_00537100)
-            FUN_00537100;
+                Address::SHC_3BB0A8C1_0x00537100, &UnitsState::queueDisbandAndAttackCommand2Params)
+            queueDisbandAndAttackCommand2Params;
 
             MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(undefined4, undefined4, undefined4), false,
-                Address::SHC_3BB0A8C1_0x00537130, &UnitsState::FUN_00537130)
-            FUN_00537130;
+                Address::SHC_3BB0A8C1_0x00537130, &UnitsState::queueDisbandAndAttackCommand3Params)
+            queueDisbandAndAttackCommand3Params;
 
             MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(undefined4, undefined4, undefined4, undefined4), false,
-                Address::SHC_3BB0A8C1_0x00537160, &UnitsState::queueCommand_36d)
-            queueCommand_36d;
+                Address::SHC_3BB0A8C1_0x00537160, &UnitsState::queueDisbandAndAttackCommand4Params)
+            queueDisbandAndAttackCommand4Params;
 
             MACRO_FUNCTION_RESOLVER(
                 void (UnitsState::*)(undefined4, UnitInstructionType, undefined4, undefined4, undefined4), false,
-                Address::SHC_3BB0A8C1_0x005371A0, &UnitsState::queueCommand_36_variation2)
-            queueCommand_36_variation2;
+                Address::SHC_3BB0A8C1_0x005371A0, &UnitsState::queueDisbandAndAttackCommand5Params)
+            queueDisbandAndAttackCommand5Params;
 
             MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int, UnitInstructionType, int, int, int), false,
-                Address::SHC_3BB0A8C1_0x005371E0, &UnitsState::giveTribeAnInstruction2)
-            giveTribeAnInstruction2;
+                Address::SHC_3BB0A8C1_0x005371E0, &UnitsState::relayTribeInstruction)
+            relayTribeInstruction;
 
             MACRO_FUNCTION_RESOLVER(uint (UnitsState::*)(uint, uint), false, Address::SHC_3BB0A8C1_0x005371F0,
                 &UnitsState::findFreeTileNearby)
@@ -588,21 +588,21 @@ namespace Map {
                 int (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00537840, &UnitsState::getRawDeerCount)
             getRawDeerCount;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00537880, &UnitsState::meth_0x537880)
-            meth_0x537880;
+            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00537880,
+                &UnitsState::findNearestShootableDeer)
+            findNearestShootableDeer;
 
-            MACRO_FUNCTION_RESOLVER(
-                int (UnitsState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x00537A00, &UnitsState::meth_0x537a00)
-            meth_0x537a00;
+            MACRO_FUNCTION_RESOLVER(int (UnitsState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x00537A00,
+                &UnitsState::findNearestIdleCowForPlayer)
+            findNearestIdleCowForPlayer;
 
             MACRO_FUNCTION_RESOLVER(int (UnitsState::*)(int, BOOLEnum, uint, uint), false,
                 Address::SHC_3BB0A8C1_0x00537AA0, &UnitsState::findClosestAnimalStoreResult)
             findClosestAnimalStoreResult;
 
             MACRO_FUNCTION_RESOLVER(int (UnitsState::*)(int, uint, uint, int), false, Address::SHC_3BB0A8C1_0x00537C10,
-                &UnitsState::getClosestUnitIDUnk)
-            getClosestUnitIDUnk;
+                &UnitsState::findClosestEnemyByAreaAndRange)
+            findClosestEnemyByAreaAndRange;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00537D60,
                 &UnitsState::tryAttackUnitID)
@@ -616,9 +616,9 @@ namespace Map {
                 &UnitsState::setAIControlStatusTo100000)
             setAIControlStatusTo100000;
 
-            MACRO_FUNCTION_RESOLVER(
-                int (UnitsState::*)(int, int*), false, Address::SHC_3BB0A8C1_0x00537F60, &UnitsState::FUN_00537f60)
-            FUN_00537f60;
+            MACRO_FUNCTION_RESOLVER(int (UnitsState::*)(int, int*), false, Address::SHC_3BB0A8C1_0x00537F60,
+                &UnitsState::clearUnitPositionCommitState)
+            clearUnitPositionCommitState;
 
             MACRO_FUNCTION_RESOLVER(
                 GmID (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00539BE0, &UnitsState::getPeasantGmID)
@@ -628,17 +628,17 @@ namespace Map {
                 &UnitsState::chooseHusbandAndWife)
             chooseHusbandAndWife;
 
-            MACRO_FUNCTION_RESOLVER(
-                undefined4 (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0053A070, &UnitsState::meth_0x53a070)
-            meth_0x53a070;
+            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0053A070,
+                &UnitsState::isWorkerAtProductionIdleState)
+            isWorkerAtProductionIdleState;
 
-            MACRO_FUNCTION_RESOLVER(
-                int (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0053A150, &UnitsState::meth_0x53a150)
-            meth_0x53a150;
+            MACRO_FUNCTION_RESOLVER(int (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0053A150,
+                &UnitsState::getWorkerBlockingStateIfStuck)
+            getWorkerBlockingStateIfStuck;
 
-            MACRO_FUNCTION_RESOLVER(
-                int (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0053A4D0, &UnitsState::meth_0x53a4d0)
-            meth_0x53a4d0;
+            MACRO_FUNCTION_RESOLVER(int (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0053A4D0,
+                &UnitsState::findActiveSiegeEngineForTribe)
+            findActiveSiegeEngineForTribe;
 
             MACRO_FUNCTION_RESOLVER(
                 int (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0053A560, &UnitsState::getLivingSelectableUnit)
@@ -652,9 +652,9 @@ namespace Map {
                 &UnitsState::setUnitValues)
             setUnitValues;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0053BB10, &UnitsState::updateUnitPositionUnk)
-            updateUnitPositionUnk;
+            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0053BB10,
+                &UnitsState::commitPendingUnitPosition)
+            commitPendingUnitPosition;
 
             MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0053BB70,
                 &UnitsState::setupUnitSharingCurrentTilePosition)
@@ -673,16 +673,16 @@ namespace Map {
             prepareProjectileTarget;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0053D030,
-                &UnitsState::harassBuildingsAIUnk)
-            harassBuildingsAIUnk;
+                &UnitsState::harassBuildingsWithSiegeAI)
+            harassBuildingsWithSiegeAI;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(int, uint, uint, int), false,
                 Address::SHC_3BB0A8C1_0x0053D3D0, &UnitsState::setDestinationForUnit)
             setDestinationForUnit;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0053D850, &UnitsState::meth_0x53d850)
-            meth_0x53d850;
+            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0053D850,
+                &UnitsState::resumeMovementAfterInterruption)
+            resumeMovementAfterInterruption;
 
             MACRO_FUNCTION_RESOLVER(
                 void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0053D900, &UnitsState::exitLadder)
@@ -693,12 +693,12 @@ namespace Map {
             getUnitInHitBox;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0053DCC0,
-                &UnitsState::setTargetedBuildingDestinationUnk)
-            setTargetedBuildingDestinationUnk;
+                &UnitsState::setDestinationNearTargetedBuilding)
+            setDestinationNearTargetedBuilding;
 
-            MACRO_FUNCTION_RESOLVER(
-                int (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0053DDD0, &UnitsState::meth_0x53ddd0)
-            meth_0x53ddd0;
+            MACRO_FUNCTION_RESOLVER(int (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0053DDD0,
+                &UnitsState::selectWorkerSpeechOrMoraleStateID)
+            selectWorkerSpeechOrMoraleStateID;
 
             MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(PackagedFileMagicNum, PackagedFileMagicNum), false,
                 Address::SHC_3BB0A8C1_0x0053E390, &UnitsState::upgradeMapFormatForUnits)
@@ -721,12 +721,12 @@ namespace Map {
             commitUnitLocation;
 
             MACRO_FUNCTION_RESOLVER(
-                void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0053E870, &UnitsState::someUnitMoveFunction)
-            someUnitMoveFunction;
+                void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0053E870, &UnitsState::resetUnitMovementState)
+            resetUnitMovementState;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0053E8D0, &UnitsState::meth_0x53e8d0)
-            meth_0x53e8d0;
+            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0053E8D0,
+                &UnitsState::clearHiddenFlagAndUpdatePosition)
+            clearHiddenFlagAndUpdatePosition;
 
             MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int, uint, uint, undefined4), false,
                 Address::SHC_3BB0A8C1_0x0053E900, &UnitsState::setPositionOfUnit)
@@ -744,17 +744,17 @@ namespace Map {
                 void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00549C70, &UnitsState::processMeleeInitiation)
             processMeleeInitiation;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0054A770, &UnitsState::meth_0x54a770)
-            meth_0x54a770;
+            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0054A770,
+                &UnitsState::resumeMovementIfNoAttackTarget)
+            resumeMovementIfNoAttackTarget;
 
             MACRO_FUNCTION_RESOLVER(dword (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0054A7B0,
-                &UnitsState::findNearestEnemyAndHeadTowardsItUnk)
-            findNearestEnemyAndHeadTowardsItUnk;
+                &UnitsState::findNearestEnemyAndHeadTowardsIt)
+            findNearestEnemyAndHeadTowardsIt;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(short*), false, Address::SHC_3BB0A8C1_0x0054B0D0,
-                &UnitsState::canShootTargetUnk)
-            canShootTargetUnk;
+                &UnitsState::acquireShootTarget)
+            acquireShootTarget;
 
             MACRO_FUNCTION_RESOLVER(
                 BOOLEnum (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0054BFC0, &UnitsState::updateClimbing)

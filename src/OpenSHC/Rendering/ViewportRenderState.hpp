@@ -99,13 +99,13 @@ namespace Rendering {
         ~ViewportRenderState() {};
 
         // Constructor
-        ViewportRenderState* Constructor_ViewportRenderState();
+        ViewportRenderState* constructViewportRenderState();
 
         BOOLEnum xyAreValid(uint x, uint y);
 
         int translateXYToTile(int x, int y);
 
-        int meth_0x4092e0(int param_1, int param_2);
+        int computeTileXOffset(int param_1, int param_2);
 
         void setTileSystemMemoryLookupArrays();
 
@@ -113,7 +113,7 @@ namespace Rendering {
 
         void resetBatchedRender();
 
-        void FUN_004e2630(int param_1);
+        void renderAssassinClimbingOverlay(int param_1);
 
         void scheduleUnitForBatchedRendering(undefined4 unitIDOrStatus, undefined4 drawX, undefined4 drawY,
             undefined4 imageID, undefined4 blendStrength, undefined4 gmID, int param_7);
@@ -134,11 +134,11 @@ namespace Rendering {
 
         void focusOnTile(int tile);
 
-        void meth_0x4e5ed0(int param_1, int param_2);
+        void computeMouseTileFromScreenPosition(int param_1, int param_2);
 
-        void meth_0x4e6340();
+        void clearAllFloatingLayerElements();
 
-        void creataAFloatingLayerElement(GmID gmID, int imageID, int imageX, int imageY, int tile, int variation);
+        void createFloatingLayerElement(GmID gmID, int imageID, int imageX, int imageY, int tile, int variation);
 
         void renderDebugDataMousePointing(int x, int y, int width, int height);
 
@@ -153,13 +153,13 @@ namespace Rendering {
 
         void updateBuildingPreviewPosition(int mouseXScreenSpace, int mouseYScreenSpace);
 
-        void meth_0x4e8c50();
+        void saveFocusTileAndCenterPreview();
 
-        void meth_0x4e8c90();
+        void restoreFocusTile();
 
         void focusOnCoordinate(int x, int y);
 
-        void FUN_004e8cc0(int param_1, int param_2, int param_3, int param_4, int param_5);
+        void createFloatingTextElement(int param_1, int param_2, int param_3, int param_4, int param_5);
 
         void renderMap();
     };
