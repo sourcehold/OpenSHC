@@ -9,28 +9,28 @@
 #pragma once
 
 #include "OpenSHC/AI/AIC/AICSpecification.hpp"
-#include "OpenSHC/AI/AINervousDestroyBuildingCategory.hpp"
-#include "OpenSHC/AI/AIUnitBehaviourType.hpp"
-#include "OpenSHC/AI/AIVUnitType.hpp"
+#include "OpenSHC/AI/AINervousDestroyBuildingCategoryInt.hpp"
+#include "OpenSHC/AI/AIUnitBehaviourTypeInt.hpp"
+#include "OpenSHC/AI/AIVUnitTypeInt.hpp"
 #include "OpenSHC/AI/TileDistancePair.hpp"
-#include "OpenSHC/Commands/CommandBuildingType.hpp"
+#include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
 #include "OpenSHC/Game/Player/PlayerID.hpp"
-#include "OpenSHC/Game/Resources/ResourceType.hpp"
-#include "OpenSHC/Map/Units/UnitType.hpp"
+#include "OpenSHC/Game/Resources/ResourceTypeInt.hpp"
+#include "OpenSHC/Map/Units/UnitTypeInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::AI::AINervousDestroyBuildingCategory;
-    using OpenSHC::AI::AIUnitBehaviourType;
-    using OpenSHC::AI::AIVUnitType;
+    using OpenSHC::AI::AINervousDestroyBuildingCategoryInt;
+    using OpenSHC::AI::AIUnitBehaviourTypeInt;
+    using OpenSHC::AI::AIVUnitTypeInt;
     using OpenSHC::AI::TileDistancePair;
     using OpenSHC::AI::AIC::AICSpecification;
-    using OpenSHC::Commands::CommandBuildingType;
+    using OpenSHC::Commands::CommandBuildingTypeInt;
     using OpenSHC::Game::Player::PlayerID;
-    using OpenSHC::Game::Resources::ResourceType;
-    using OpenSHC::Map::Units::UnitType;
+    using OpenSHC::Game::Resources::ResourceTypeInt;
+    using OpenSHC::Map::Units::UnitTypeInt;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
@@ -120,31 +120,31 @@ namespace AI {
 
         uint aiShouldBuildPitchrig(PlayerID param_1);
 
-        BOOLEnum shouldNotBeBuildingHovel(PlayerID playerID, CommandBuildingType param_2);
+        BOOLEnum shouldNotBeBuildingHovel(PlayerID playerID, CommandBuildingTypeInt param_2);
 
-        BOOLEnum shouldWaitWithBuildingNegativeFearFactor(int param_1, CommandBuildingType param_2);
+        BOOLEnum shouldWaitWithBuildingNegativeFearFactor(int param_1, CommandBuildingTypeInt param_2);
 
-        BOOLEnum shouldWaitWithBuildingAPositiveFearFactor(int playerID, CommandBuildingType param_2);
+        BOOLEnum shouldWaitWithBuildingAPositiveFearFactor(int playerID, CommandBuildingTypeInt param_2);
 
         BOOLEnum destroyHouse(int playerID);
 
-        undefined4 shouldDestroyWoodCutterUnk(int playerID);
+        undefined4 aiMaybeDestroyWoodcutterHut(int playerID);
 
         undefined4 destroyBuildingIfNoWorker(int buildingID);
 
-        BOOLEnum shouldNotBuildMarketArmoryGranaryBarracksMercenarypost(int playerID, CommandBuildingType param_2);
+        BOOLEnum shouldNotBuildMarketArmoryGranaryBarracksMercenarypost(int playerID, CommandBuildingTypeInt param_2);
 
         void planToBuyWhenLowOnResourceAndSnoozeBuildings(int playerID);
 
         void setupWorkshopProductionType(int playerID, int buildingID);
 
-        void sellGoods(int playerID, ResourceType resourceType, int amount);
+        void sellGoods(int playerID, ResourceTypeInt resourceType, int amount);
 
-        BOOLEnum buyGoods(int playerID, ResourceType resourceType, int amount);
+        BOOLEnum buyGoods(int playerID, ResourceTypeInt resourceType, int amount);
 
-        AIUnitBehaviourType randomlySelectAttackUnitTypeToRecruit(int playerID);
+        AIUnitBehaviourTypeInt randomlySelectAttackUnitTypeToRecruit(int playerID);
 
-        UnitType getUnitTypeForUnitBehaviourType(int playerID, AIUnitBehaviourType unitBehaviourType);
+        UnitTypeInt getUnitTypeForUnitBehaviourType(int playerID, AIUnitBehaviourTypeInt unitBehaviourType);
 
         void generateSiegeCreationInformation(int playerID, int buildingID, int unitID);
 
@@ -158,7 +158,7 @@ namespace AI {
 
         void syncBehaviourType7UnitTribes(int param_1);
 
-        void addUnitToTribeType10_moatdiggersUnk(int unitID);
+        void aiAddUnitToMoatDiggerTribe(int unitID);
 
         undefined4 unitIDIsRangedOrArmored(int unitID);
 
@@ -207,13 +207,13 @@ namespace AI {
 
         void setAttackPrimeInfo(int playerID, int attackedPlayerID);
 
-        void recomputeDistancesToAttackedKeepRelated(int playerID, int useBorderDistance);
+        void recomputeAIPathCostToAttackedKeep(int playerID, int useBorderDistance);
 
         void recomputeAttackAIZone();
 
         void recomputeAIZonerLayer();
 
-        void computeAndStoreShortestDistanceToKeepUnk(int playerID);
+        void computeEnemyKeepApproachTile(int playerID);
 
         void setNextMoveLocationForUnits(int playerID);
 
@@ -223,7 +223,7 @@ namespace AI {
 
         void sendUnitsToPlayerIDsKeepIfPossible(int playerID1, short* playerID2);
 
-        void setRallyRelatedFlagOnAllAIAttackTribes(int param_1);
+        void clearRallyFlagOnAllAIAttackTribes(int param_1);
 
         void moveAttackTribesToLocations(short* playerID);
 
@@ -239,17 +239,17 @@ namespace AI {
 
         BOOLEnum processAttForceRallyPercentage(int playerID);
 
-        void useAITribe_0x12_toPlaceSiegeTentsAndAssignEngineers(CommandBuildingType playerID);
+        void useAITribe_0x12_toPlaceSiegeTentsAndAssignEngineers(CommandBuildingTypeInt playerID);
 
         void useAITribe_0xe_toPlaceTunnels(int playerID);
 
-        void aiAttackWave_tribe13Unk(int param_1);
+        void aiCommandTribe13DefensiveWave(int param_1);
 
-        void aiAttackWave_tribe12Unk(int param_1);
+        void aiCommandTribe12AggressiveApproach(int param_1);
 
         void setTribe0xCtoAggressiveAndAttack(int playerID);
 
-        void aiAttackWave_tribe11Unk(int playerID);
+        void aiCommandTribe11StandGroundToGate(int playerID);
 
         void sendAITribe_0xf_toAttackPatrol(int playerID);
 
@@ -257,7 +257,7 @@ namespace AI {
 
         void setEightTribe0xc0TribesToAggressiveAndAttack(int playerID);
 
-        void aiAttackWallsSmthUnk(int param_1);
+        void aiCommandWallAssaultTribes(int param_1);
 
         void setTribe0xbToAggressiveAndAttack(int playerID);
 
@@ -275,7 +275,7 @@ namespace AI {
 
         int countSiegeEngineUnits(int playerID);
 
-        void aiAttackWaveSiegeUnitsUnk(int playerID);
+        void aiCommandSiegeEngineTribes(int playerID);
 
         BOOLEnum yieldCowThrow(int playerID);
 
@@ -283,14 +283,14 @@ namespace AI {
 
         BOOLEnum hasNotEnoughSupplies(int playerID);
 
-        void setAttackWillingnessUnk(int param_1);
+        void aiRollAttackWillingness(int param_1);
 
         BOOLEnum teamIsWeakRelativeToEnemy(int playerID, BOOLEnum param_2);
 
-        void destroyAnyBuildingInCategory(int playerID, AINervousDestroyBuildingCategory buildingCategory);
+        void destroyAnyBuildingInCategory(int playerID, AINervousDestroyBuildingCategoryInt buildingCategory);
 
         BOOLEnum isResourceLargerOrEqualThanMinimumGoodsRequiredAfterTrade(
-            int playerID, ResourceType resourceType, int buffer);
+            int playerID, ResourceTypeInt resourceType, int buffer);
 
         BOOLEnum aiOfTypeInCurrentGame(int param_1);
 
@@ -332,19 +332,17 @@ namespace AI {
 
         void someChatMessageSelection();
 
-        int getCurrentDesiredAttackRaidUnitCount(int aiType, int playerID);
+        undefined getCurrentDesiredAttackRaidUnitCount();
 
         void renderDebugDataAiInfo(int x, int y, int width, int height);
 
         void setInitialAIC();
 
-        void aiGiveCommandToOutpostTribesUnk(int tribeID, int tribeUID);
+        void aiRegisterTribeAndAssignTarget(int tribeID, int tribeUID);
 
         void decideOnTribeAttackLocation(uint tribeID__moatWasHit);
 
-        void sellExcessGoods(int param_1);
-
-        void requestGoods(int playerID, ResourceType resourceType, undefined4 amount);
+        void requestGoods(int playerID, ResourceTypeInt resourceType, undefined4 amount);
 
         void aiCreateSiegeUnits(int playerID);
 
@@ -354,7 +352,7 @@ namespace AI {
 
         void addUnitToSmallestPatrolTribe(int unitID);
 
-        void addUnitToDefensiveTroopsTribeUnk(int unitID);
+        void aiAssignUnitToDefensiveTribe(int unitID);
 
         void addUnitToItsTribe(int unitID, int aiUnitBehaviourType);
 
@@ -366,7 +364,7 @@ namespace AI {
 
         void aiGiveRaidInstructions(int playerID);
 
-        void sendTribeToAIVLocationSlot(int tribeID, AIVUnitType aivUnitType, int slotIndex);
+        void sendTribeToAIVLocationSlot(int tribeID, AIVUnitTypeInt aivUnitType, int slotIndex);
 
         void computeAttackPossibilities(int playerID);
 
@@ -384,15 +382,13 @@ namespace AI {
 
         void makeOutpostTribesAttack();
 
-        void buyRequiredGoods(int param_1);
-
         void aiRecruitUnits(int playerID);
 
-        void assignMoatDiggersUnk(int playerID);
+        void aiAssignCombatUnitsToTribesOrMoat(int playerID);
 
         void addEngineersToTribe(int playerID);
 
-        void redirectTunnelersUnk(int param_1);
+        void aiReassignTunnelersToTribe(int param_1);
 
         void sendRangedUnitTribesToAIVSlotsOrKeepIfNervous(int playerID);
 
@@ -416,13 +412,13 @@ namespace AI {
 
         void updateAIBehaviour();
 
-        BOOLEnum shouldNotBeBuildingGranary(int playerID, CommandBuildingType param_2);
+        BOOLEnum shouldNotBeBuildingGranary(int playerID, CommandBuildingTypeInt param_2);
 
-        BOOLEnum shouldNotBeBuildingArmoury(PlayerID playerID, CommandBuildingType param_2);
+        BOOLEnum shouldNotBeBuildingArmoury(PlayerID playerID, CommandBuildingTypeInt param_2);
 
-        BOOLEnum shouldNotBuildKillingPits(int playerID, CommandBuildingType commandBuildingType);
+        BOOLEnum shouldNotBuildKillingPits(int playerID, CommandBuildingTypeInt commandBuildingType);
 
-        BOOLEnum woodCuttersHutWhileNoWoodAvailable(undefined4 playerID, CommandBuildingType param_2);
+        BOOLEnum woodCuttersHutWhileNoWoodAvailable(undefined4 playerID, CommandBuildingTypeInt param_2);
     };
 
     static_assert_cpp98_obj(sizeof(AICState) == 28048, AICState);

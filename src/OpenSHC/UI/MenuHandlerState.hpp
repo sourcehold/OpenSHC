@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "OpenSHC/UI/Enums/MenuViewType.hpp"
+#include "OpenSHC/UI/Enums/MenuViewTypeInt.hpp"
 #include "OpenSHC/UI/Menu.hpp"
 #include "OpenSHC/UI/MenuIDMenuElementAddressPair.hpp"
 #include "OpenSHC/UI/UC.hpp"
@@ -22,7 +22,7 @@ namespace UI {
     using OpenSHC::UI::MenuIDMenuElementAddressPair;
     using OpenSHC::UI::UC;
     using OpenSHC::UI::UCPointerStruct;
-    using OpenSHC::UI::Enums::MenuViewType;
+    using OpenSHC::UI::Enums::MenuViewTypeInt;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
@@ -64,7 +64,7 @@ namespace UI {
         void initializeUI(
             MenuIDMenuElementAddressPair* menuIDMenuElementAddressPair, UC* ucPtr, char* ptrStrongholdUCString);
 
-        void setupMenuForRendering(MenuViewType menuID);
+        void setupMenuForRendering(MenuViewTypeInt menuID);
     };
 
     static_assert_cpp98_obj(sizeof(MenuHandlerState) == 64, MenuHandlerState);

@@ -2,9 +2,9 @@
   path: 'OpenSHC/Text/TextManager.func.hpp'
 */
 
-#include "OpenSHC/DE/SHCDE/eTextSections.hpp"
+#include "OpenSHC/DE/SHCDE/eTextSectionsInt.hpp"
 #include "OpenSHC/Rendering/Colors/BGR24.hpp"
-#include "OpenSHC/Text/TextAlignment.hpp"
+#include "OpenSHC/Text/TextAlignmentInt.hpp"
 #include "OpenSHC/Text/TextManager.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -13,57 +13,58 @@ namespace OpenSHC {
 namespace Text {
     namespace TextManager_Func {
 
-        using OpenSHC::DE::SHCDE::eTextSections;
+        using OpenSHC::DE::SHCDE::eTextSectionsInt;
         using OpenSHC::Rendering::Colors::BGR24;
-        using OpenSHC::Text::TextAlignment;
+        using OpenSHC::Text::TextAlignmentInt;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(char*, int, int, TextAlignment, uint, uint, int, BOOLEnum), false,
-            Address::SHC_3BB0A8C1_0x00424320, &TextManager::renderInGameText)
+        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(char*, int, int, TextAlignmentInt, uint, uint, int, BOOLEnum),
+            false, Address::SHC_3BB0A8C1_0x00424320, &TextManager::renderInGameText)
         renderInGameText;
 
-        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(char*, int, int, TextAlignment, BGR24, int, BOOLEnum), false,
+        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(char*, int, int, TextAlignmentInt, BGR24, int, BOOLEnum), false,
             Address::SHC_3BB0A8C1_0x00424360, &TextManager::renderTextToScreen2)
         renderTextToScreen2;
 
         MACRO_FUNCTION_RESOLVER(
-            void (TextManager::*)(eTextSections, int, int, int, TextAlignment, uint, uint, int, BOOLEnum), false,
+            void (TextManager::*)(eTextSectionsInt, int, int, int, TextAlignmentInt, uint, uint, int, BOOLEnum), false,
             Address::SHC_3BB0A8C1_0x00424390, &TextManager::renderText)
         renderText;
 
-        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(eTextSections, int, int, int, TextAlignment, uint, int, BOOLEnum),
-            false, Address::SHC_3BB0A8C1_0x004243E0, &TextManager::renderText2)
+        MACRO_FUNCTION_RESOLVER(
+            void (TextManager::*)(eTextSectionsInt, int, int, int, TextAlignmentInt, uint, int, BOOLEnum), false,
+            Address::SHC_3BB0A8C1_0x004243E0, &TextManager::renderText2)
         renderText2;
 
         MACRO_FUNCTION_RESOLVER(
-            void (TextManager::*)(eTextSections, int, int, int, TextAlignment, uint, uint, int, BOOLEnum, int), false,
-            Address::SHC_3BB0A8C1_0x00424420, &TextManager::renderInGameText2)
+            void (TextManager::*)(eTextSectionsInt, int, int, int, TextAlignmentInt, uint, uint, int, BOOLEnum, int),
+            false, Address::SHC_3BB0A8C1_0x00424420, &TextManager::renderInGameText2)
         renderInGameText2;
 
         MACRO_FUNCTION_RESOLVER(
-            void (TextManager::*)(eTextSections, int, int, int, TextAlignment, uint, int, BOOLEnum, int), false,
+            void (TextManager::*)(eTextSectionsInt, int, int, int, TextAlignmentInt, uint, int, BOOLEnum, int), false,
             Address::SHC_3BB0A8C1_0x00424470, &TextManager::renderTextFromTextGroup)
         renderTextFromTextGroup;
 
-        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(eTextSections, int, int, int), false,
+        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(eTextSectionsInt, int, int, int), false,
             Address::SHC_3BB0A8C1_0x004244C0, &TextManager::renderMultilineText2)
         renderMultilineText2;
 
-        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(eTextSections, int, int, int, int, uint, int, int), false,
-            Address::SHC_3BB0A8C1_0x00424500, &TextManager::renderMultilineTextUnk)
-        renderMultilineTextUnk;
+        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(eTextSectionsInt, int, int, int, int, uint, int, int), false,
+            Address::SHC_3BB0A8C1_0x00424500, &TextManager::renderMultilineTextFromGroupWithBlend)
+        renderMultilineTextFromGroupWithBlend;
 
-        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(eTextSections, int, int, int, int, uint, int), false,
-            Address::SHC_3BB0A8C1_0x00424540, &TextManager::renderMultilineText2Unk)
-        renderMultilineText2Unk;
+        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(eTextSectionsInt, int, int, int, int, uint, int), false,
+            Address::SHC_3BB0A8C1_0x00424540, &TextManager::renderMultilineTextFromGroup)
+        renderMultilineTextFromGroup;
 
-        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(eTextSections, int, int, int, int, uint, uint, int, int), false,
-            Address::SHC_3BB0A8C1_0x00424580, &TextManager::renderMultilineText3Unk)
-        renderMultilineText3Unk;
+        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(eTextSectionsInt, int, int, int, int, uint, uint, int, int),
+            false, Address::SHC_3BB0A8C1_0x00424580, &TextManager::renderMultilineTextFromGroupWithShadow)
+        renderMultilineTextFromGroupWithShadow;
 
-        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(eTextSections, int, int, int, int, uint, int, int), false,
-            Address::SHC_3BB0A8C1_0x004245D0, &TextManager::renderMultilineText4Unk)
-        renderMultilineText4Unk;
+        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(eTextSectionsInt, int, int, int, int, uint, int, int), false,
+            Address::SHC_3BB0A8C1_0x004245D0, &TextManager::renderMultilineTextFromGroupNoSpacing)
+        renderMultilineTextFromGroupNoSpacing;
 
         MACRO_FUNCTION_RESOLVER(void (TextManager::*)(int, int, int, uint, uint, int, BOOLEnum), false,
             Address::SHC_3BB0A8C1_0x00424620, &TextManager::renderNumber)
@@ -73,12 +74,12 @@ namespace Text {
             Address::SHC_3BB0A8C1_0x00424650, &TextManager::renderLeftAlignedNumberToScreen)
         renderLeftAlignedNumberToScreen;
 
-        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(int, int, int, TextAlignment, uint, int, BOOLEnum), false,
+        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(int, int, int, TextAlignmentInt, uint, int, BOOLEnum), false,
             Address::SHC_3BB0A8C1_0x00424680, &TextManager::renderNumberToScreen)
         renderNumberToScreen;
 
-        MACRO_FUNCTION_RESOLVER(int (TextManager::*)(eTextSections, int, int), false, Address::SHC_3BB0A8C1_0x004246B0,
-            &TextManager::computeTextWidthForTextGroup)
+        MACRO_FUNCTION_RESOLVER(int (TextManager::*)(eTextSectionsInt, int, int), false,
+            Address::SHC_3BB0A8C1_0x004246B0, &TextManager::computeTextWidthForTextGroup)
         computeTextWidthForTextGroup;
 
         MACRO_FUNCTION_RESOLVER(
@@ -86,36 +87,36 @@ namespace Text {
         setupFontSizeClassObjects;
 
         MACRO_FUNCTION_RESOLVER(void (TextManager::*)(dword, dword), false, Address::SHC_3BB0A8C1_0x00469F20,
-            &TextManager::setTextClipRange)
-        setTextClipRange;
+            &TextManager::setTextManagerClipRange)
+        setTextManagerClipRange;
 
         MACRO_FUNCTION_RESOLVER(
-            void (TextManager::*)(), false, Address::SHC_3BB0A8C1_0x00469F40, &TextManager::resetTextClipRange)
-        resetTextClipRange;
+            void (TextManager::*)(), false, Address::SHC_3BB0A8C1_0x00469F40, &TextManager::resetTextManagerClipRange)
+        resetTextManagerClipRange;
 
         MACRO_FUNCTION_RESOLVER(
             void (TextManager::*)(char*, int, int), false, Address::SHC_3BB0A8C1_0x00469F50, &TextManager::trimText)
         trimText;
 
         MACRO_FUNCTION_RESOLVER(int (TextManager::*)(char*, int, int), false, Address::SHC_3BB0A8C1_0x00469F70,
-            &TextManager::getTextWidthTillCursorUnk)
-        getTextWidthTillCursorUnk;
+            &TextManager::getTextWidthTillCursor)
+        getTextWidthTillCursor;
 
         MACRO_FUNCTION_RESOLVER(
             void (TextManager::*)(int), false, Address::SHC_3BB0A8C1_0x00469FA0, &TextManager::fillIntegerTextBuffer)
         fillIntegerTextBuffer;
 
-        MACRO_FUNCTION_RESOLVER(char* (TextManager::*)(eTextSections, int), false, Address::SHC_3BB0A8C1_0x0046A050,
+        MACRO_FUNCTION_RESOLVER(char* (TextManager::*)(eTextSectionsInt, int), false, Address::SHC_3BB0A8C1_0x0046A050,
             &TextManager::getTextStringInGroupAtOffset)
         getTextStringInGroupAtOffset;
 
         MACRO_FUNCTION_RESOLVER(int (TextManager::*)(int, int, int, int, int, int, BOOL), false,
-            Address::SHC_3BB0A8C1_0x0046A2C0, &TextManager::renderPartOfNumberUnk)
-        renderPartOfNumberUnk;
+            Address::SHC_3BB0A8C1_0x0046A2C0, &TextManager::renderNumberDigitAtPlace)
+        renderNumberDigitAtPlace;
 
-        MACRO_FUNCTION_RESOLVER(int (TextManager::*)(int, int), false, Address::SHC_3BB0A8C1_0x0046A4D0,
-            &TextManager::calcRenderedNumberWidth)
-        calcRenderedNumberWidth;
+        MACRO_FUNCTION_RESOLVER(
+            int (TextManager::*)(int, int), false, Address::SHC_3BB0A8C1_0x0046A4D0, &TextManager::getNumberGfxWidth)
+        getNumberGfxWidth;
 
         MACRO_FUNCTION_RESOLVER(
             int (TextManager::*)(char, int), false, Address::SHC_3BB0A8C1_0x0046A720, &TextManager::getCharWidth)
@@ -125,48 +126,49 @@ namespace Text {
             int (TextManager::*)(char*, int), false, Address::SHC_3BB0A8C1_0x00471690, &TextManager::computeTextWidth)
         computeTextWidth;
 
-        MACRO_FUNCTION_RESOLVER(int (TextManager::*)(int, int), false, Address::SHC_3BB0A8C1_0x004716D0,
-            &TextManager::computeNumberTextWidth)
-        computeNumberTextWidth;
+        MACRO_FUNCTION_RESOLVER(
+            int (TextManager::*)(int, int), false, Address::SHC_3BB0A8C1_0x004716D0, &TextManager::getIntegerTextWidth)
+        getIntegerTextWidth;
 
         MACRO_FUNCTION_RESOLVER(
             void (TextManager::*)(), false, Address::SHC_3BB0A8C1_0x00473870, &TextManager::loadCRTex)
         loadCRTex;
 
         MACRO_FUNCTION_RESOLVER(void (TextManager::*)(char*, int, int, int, uint, int, int), false,
-            Address::SHC_3BB0A8C1_0x00473A70, &TextManager::renderMultilineText5Unk)
-        renderMultilineText5Unk;
+            Address::SHC_3BB0A8C1_0x00473A70, &TextManager::renderMultilineTextAtFontSize)
+        renderMultilineTextAtFontSize;
 
         MACRO_FUNCTION_RESOLVER(void (TextManager::*)(char*, int, int, int, uint, uint, int, int), false,
-            Address::SHC_3BB0A8C1_0x00473AC0, &TextManager::renderMultilineText6Unk)
-        renderMultilineText6Unk;
+            Address::SHC_3BB0A8C1_0x00473AC0, &TextManager::renderMultilineTextWithShadow)
+        renderMultilineTextWithShadow;
 
         MACRO_FUNCTION_RESOLVER(void (TextManager::*)(LPWSTR, int, int, int, uint, uint, int, int), false,
-            Address::SHC_3BB0A8C1_0x00473B50, &TextManager::renderMultilineWideTextUnk)
-        renderMultilineWideTextUnk;
+            Address::SHC_3BB0A8C1_0x00473B50, &TextManager::renderMultilineWideTextWithShadow)
+        renderMultilineWideTextWithShadow;
 
         MACRO_FUNCTION_RESOLVER(void (TextManager::*)(int, int, int, int, uint, int), false,
-            Address::SHC_3BB0A8C1_0x00473BE0, &TextManager::renderSomeSpecificTextUnk)
-        renderSomeSpecificTextUnk;
+            Address::SHC_3BB0A8C1_0x00473BE0, &TextManager::renderPartialMultilineTextWrapper)
+        renderPartialMultilineTextWrapper;
 
-        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(char*, int, int, TextAlignment, BGR24, int, BOOLEnum, int), false,
-            Address::SHC_3BB0A8C1_0x00474250, &TextManager::renderTextToScreen)
+        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(char*, int, int, TextAlignmentInt, BGR24, int, BOOLEnum, int),
+            false, Address::SHC_3BB0A8C1_0x00474250, &TextManager::renderTextToScreen)
         renderTextToScreen;
 
-        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(LPWSTR, int, int, TextAlignment, uint, int, BOOL, int), false,
+        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(LPWSTR, int, int, TextAlignmentInt, uint, int, BOOL, int), false,
             Address::SHC_3BB0A8C1_0x004742F0, &TextManager::renderWideText)
         renderWideText;
 
-        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(int, int, int, TextAlignment, uint, uint, int, BOOLEnum, int),
+        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(int, int, int, TextAlignmentInt, uint, uint, int, BOOLEnum, int),
             false, Address::SHC_3BB0A8C1_0x00474390, &TextManager::renderNumber2)
         renderNumber2;
 
-        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(int, int, int, TextAlignment, uint, int, BOOLEnum, int), false,
+        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(int, int, int, TextAlignmentInt, uint, int, BOOLEnum, int), false,
             Address::SHC_3BB0A8C1_0x00474430, &TextManager::renderNumberToScreen2)
         renderNumberToScreen2;
 
-        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(char*, int, int, TextAlignment, uint, uint, int, BOOLEnum, int),
-            false, Address::SHC_3BB0A8C1_0x00475E00, &TextManager::renderInGameTextWithShadow)
+        MACRO_FUNCTION_RESOLVER(
+            void (TextManager::*)(char*, int, int, TextAlignmentInt, uint, uint, int, BOOLEnum, int), false,
+            Address::SHC_3BB0A8C1_0x00475E00, &TextManager::renderInGameTextWithShadow)
         renderInGameTextWithShadow;
 
     } // namespace TextManager_Func

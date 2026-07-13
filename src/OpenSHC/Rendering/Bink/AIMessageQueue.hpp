@@ -49,7 +49,7 @@ namespace Rendering {
 
             void playAiLordMessage(int param_1, int param_2);
 
-            void playEventVideoBik(char* eventText, char* eventVideoBik, char* eventWavFile);
+            undefined playEventVideoBik();
 
             void prepareSFXandVFX(char* messageText, char* messageVfxFile, char* messageSfxFile, int param_4);
 

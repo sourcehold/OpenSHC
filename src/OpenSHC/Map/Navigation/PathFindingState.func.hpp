@@ -3,7 +3,7 @@
 */
 
 #include "OpenSHC/Map/Navigation/PathFindingState.hpp"
-#include "OpenSHC/Map/Units/UnitType.hpp"
+#include "OpenSHC/Map/Units/UnitTypeInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "WinDef.h"
@@ -12,7 +12,7 @@ namespace Map {
     namespace Navigation {
         namespace PathFindingState_Func {
 
-            using OpenSHC::Map::Units::UnitType;
+            using OpenSHC::Map::Units::UnitTypeInt;
             using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (PathFindingState::*)(), false, Address::SHC_3BB0A8C1_0x00496E20,
@@ -61,8 +61,8 @@ namespace Map {
             findLinkageBasedPathOrWalkRadius;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (PathFindingState::*)(int, int, int, int, int, int), false,
-                Address::SHC_3BB0A8C1_0x00497B80, &PathFindingState::findSuitableSpawnLocationUnk)
-            findSuitableSpawnLocationUnk;
+                Address::SHC_3BB0A8C1_0x00497B80, &PathFindingState::bfsFindReachableFreeTile)
+            bfsFindReachableFreeTile;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (PathFindingState::*)(uint, uint, uint, uint, int, BOOLEnum), false,
                 Address::SHC_3BB0A8C1_0x00498020, &PathFindingState::findPathUsingClimbingWithHeightMargin16)
@@ -85,24 +85,24 @@ namespace Map {
             updateSeparateAreaTileMap;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (PathFindingState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004999C0,
-                &PathFindingState::updatePathLinkageLayerBasedOnBuildingsUnk)
-            updatePathLinkageLayerBasedOnBuildingsUnk;
+                &PathFindingState::computeTilePathLinkageBits)
+            computeTilePathLinkageBits;
 
             MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00499DC0,
                 &PathFindingState::updatePathLinkageLayerAtTileForSomeLogicalReason)
             updatePathLinkageLayerAtTileForSomeLogicalReason;
 
             MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int), false, Address::SHC_3BB0A8C1_0x00499FA0,
-                &PathFindingState::updatePathLinkageTileMapRelatedToGates)
-            updatePathLinkageTileMapRelatedToGates;
+                &PathFindingState::setGatePassabilityLinkage)
+            setGatePassabilityLinkage;
 
             MACRO_FUNCTION_RESOLVER(undefined8 (PathFindingState::*)(int), false, Address::SHC_3BB0A8C1_0x0049A1C0,
-                &PathFindingState::updatePathLinkageTileMapRelatedToKeeps)
-            updatePathLinkageTileMapRelatedToKeeps;
+                &PathFindingState::setKeepEntranceLinkage)
+            setKeepEntranceLinkage;
 
             MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int), false, Address::SHC_3BB0A8C1_0x0049A2E0,
-                &PathFindingState::updatePathLinkageTileMapRelatedToSiegeTower)
-            updatePathLinkageTileMapRelatedToSiegeTower;
+                &PathFindingState::setSiegeTowerLinkage)
+            setSiegeTowerLinkage;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (PathFindingState::*)(uint, uint, uint, uint), false,
                 Address::SHC_3BB0A8C1_0x0049A370, &PathFindingState::tracePathPlanToDestinationViaUnoccupiedTiles)
@@ -129,8 +129,8 @@ namespace Map {
             getYSmallerThanYLimit;
 
             MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int, uint, uint), false,
-                Address::SHC_3BB0A8C1_0x0049B1D0, &PathFindingState::pathFindingDeerAndLionsUnk)
-            pathFindingDeerAndLionsUnk;
+                Address::SHC_3BB0A8C1_0x0049B1D0, &PathFindingState::findNearestTileInOriginArea)
+            findNearestTileInOriginArea;
 
             MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int, int, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x0049B5B0, &PathFindingState::algTunnelerFindTarget)
@@ -206,8 +206,8 @@ namespace Map {
             updateUnitDeathHeatmapIn3SpacesAroundTile;
 
             MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int, uint, uint, undefined4), false,
-                Address::SHC_3BB0A8C1_0x0049E510, &PathFindingState::recomputeALGPathFindingTileMapUnk)
-            recomputeALGPathFindingTileMapUnk;
+                Address::SHC_3BB0A8C1_0x0049E510, &PathFindingState::floodMarkAIInfoLayer)
+            floodMarkAIInfoLayer;
 
             MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int, uint, uint), false,
                 Address::SHC_3BB0A8C1_0x0049E9E0, &PathFindingState::updateAIZoneWithFloodFill0x20)
@@ -218,8 +218,8 @@ namespace Map {
             findAIZoneWithFlags;
 
             MACRO_FUNCTION_RESOLVER(int (PathFindingState::*)(int, uint, uint, int), false,
-                Address::SHC_3BB0A8C1_0x0049F040, &PathFindingState::findArcherRelatedAttackInfoIndex)
-            findArcherRelatedAttackInfoIndex;
+                Address::SHC_3BB0A8C1_0x0049F040, &PathFindingState::bfsFindAvailableArcherDefensePoint)
+            bfsFindAvailableArcherDefensePoint;
 
             MACRO_FUNCTION_RESOLVER(int (PathFindingState::*)(int, uint, uint, int), false,
                 Address::SHC_3BB0A8C1_0x0049F2D0, &PathFindingState::findSupportPointIndex)
@@ -234,32 +234,32 @@ namespace Map {
             findAppropriateLocationForSiegeTent;
 
             MACRO_FUNCTION_RESOLVER(dword (PathFindingState::*)(int, uint, uint, int), false,
-                Address::SHC_3BB0A8C1_0x0049FC00, &PathFindingState::pathFindingRelated)
-            pathFindingRelated;
+                Address::SHC_3BB0A8C1_0x0049FC00, &PathFindingState::bfsFindBestCostTileWithinRange)
+            bfsFindBestCostTileWithinRange;
 
             MACRO_FUNCTION_RESOLVER(dword (PathFindingState::*)(uint, uint, int, uint, int), false,
-                Address::SHC_3BB0A8C1_0x0049FF20, &PathFindingState::pathfindingRelated49ff20)
-            pathfindingRelated49ff20;
+                Address::SHC_3BB0A8C1_0x0049FF20, &PathFindingState::bfsFindBestTileMatchingAttackMarker)
+            bfsFindBestTileMatchingAttackMarker;
 
             MACRO_FUNCTION_RESOLVER(dword (PathFindingState::*)(uint, uint, int, uint), false,
-                Address::SHC_3BB0A8C1_0x004A01D0, &PathFindingState::findBestAttackTileByPathCost)
-            findBestAttackTileByPathCost;
+                Address::SHC_3BB0A8C1_0x004A01D0, &PathFindingState::findBestAttackPathTile)
+            findBestAttackPathTile;
 
             MACRO_FUNCTION_RESOLVER(int (PathFindingState::*)(int, int, int, int), false,
-                Address::SHC_3BB0A8C1_0x004A0460, &PathFindingState::findNearestEnemyBuildingWithinDistance)
-            findNearestEnemyBuildingWithinDistance;
+                Address::SHC_3BB0A8C1_0x004A0460, &PathFindingState::bfsFindNearestEnemyBuilding)
+            bfsFindNearestEnemyBuilding;
 
             MACRO_FUNCTION_RESOLVER(int (PathFindingState::*)(int, int, int, int), false,
-                Address::SHC_3BB0A8C1_0x004A06B0, &PathFindingState::findNearestEnemyUnitWithinDistance)
-            findNearestEnemyUnitWithinDistance;
+                Address::SHC_3BB0A8C1_0x004A06B0, &PathFindingState::bfsFindNearestEnemyUnit)
+            bfsFindNearestEnemyUnit;
 
             MACRO_FUNCTION_RESOLVER(int (PathFindingState::*)(int, int, int, int), false,
-                Address::SHC_3BB0A8C1_0x004A08E0, &PathFindingState::getGatehouseNearSomethingUnk)
-            getGatehouseNearSomethingUnk;
+                Address::SHC_3BB0A8C1_0x004A08E0, &PathFindingState::findNearestEnemyGatehouse)
+            findNearestEnemyGatehouse;
 
             MACRO_FUNCTION_RESOLVER(int (PathFindingState::*)(int, int, int, int), false,
-                Address::SHC_3BB0A8C1_0x004A0B20, &PathFindingState::findDistanceOrThreatLevelToUnitUnk)
-            findDistanceOrThreatLevelToUnitUnk;
+                Address::SHC_3BB0A8C1_0x004A0B20, &PathFindingState::bfsFindHighestPriorityEnemyUnit)
+            bfsFindHighestPriorityEnemyUnit;
 
             MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(), false, Address::SHC_3BB0A8C1_0x004A0E50,
                 &PathFindingState::setWalkabilityBorderLogicLayerForSmallerMapSizes)
@@ -270,12 +270,12 @@ namespace Map {
             aggressiveStanceTargetBuildingAtRange;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (PathFindingState::*)(int, uint, uint, int), false,
-                Address::SHC_3BB0A8C1_0x004A15B0, &PathFindingState::isEnemyTooCloseUnk)
-            isEnemyTooCloseUnk;
+                Address::SHC_3BB0A8C1_0x004A15B0, &PathFindingState::isEnemyTooClose)
+            isEnemyTooClose;
 
             MACRO_FUNCTION_RESOLVER(int (PathFindingState::*)(int, uint, uint), false, Address::SHC_3BB0A8C1_0x004A16C0,
-                &PathFindingState::tracePathToFriendlyDefensesAndReturnTileUnk)
-            tracePathToFriendlyDefensesAndReturnTileUnk;
+                &PathFindingState::bfsFindReachableFriendlyDefenseTile)
+            bfsFindReachableFriendlyDefenseTile;
 
             MACRO_FUNCTION_RESOLVER(dword (PathFindingState::*)(int, uint, uint), false,
                 Address::SHC_3BB0A8C1_0x004A19B0, &PathFindingState::findOwnedGatehouse)
@@ -286,8 +286,8 @@ namespace Map {
             isTileInRangeOfKeepRange;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (PathFindingState::*)(int, uint, uint, int), false,
-                Address::SHC_3BB0A8C1_0x004A1D30, &PathFindingState::findSomeSuitableLocationUnk)
-            findSomeSuitableLocationUnk;
+                Address::SHC_3BB0A8C1_0x004A1D30, &PathFindingState::bfsEnemyStructureWithinRange)
+            bfsEnemyStructureWithinRange;
 
             MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int), false, Address::SHC_3BB0A8C1_0x004A21B0,
                 &PathFindingState::placeCommemoratingStatueAtGoodLocation)
@@ -298,8 +298,8 @@ namespace Map {
             isSignPostWithinDistance;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (PathFindingState::*)(int, uint, uint, int, int), false,
-                Address::SHC_3BB0A8C1_0x004A2A90, &PathFindingState::spreadAlgorithmForFlagsAndBraziersUnk)
-            spreadAlgorithmForFlagsAndBraziersUnk;
+                Address::SHC_3BB0A8C1_0x004A2A90, &PathFindingState::findOrRemovePlayerFlagsAndBraziersBFS)
+            findOrRemovePlayerFlagsAndBraziersBFS;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (PathFindingState::*)(int, int, int), false,
                 Address::SHC_3BB0A8C1_0x004A2DD0, &PathFindingState::igniteFireAtTilesDistanceAway)
@@ -310,12 +310,12 @@ namespace Map {
             findAccessibleWallAndNearbyFreeTile;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (PathFindingState::*)(int, int, int, int), false,
-                Address::SHC_3BB0A8C1_0x004A36B0, &PathFindingState::healUnitsOfPlayerWithinRadius)
-            healUnitsOfPlayerWithinRadius;
+                Address::SHC_3BB0A8C1_0x004A36B0, &PathFindingState::bfsHealOwnerUnits)
+            bfsHealOwnerUnits;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (PathFindingState::*)(int, int, int, int, undefined4), false,
-                Address::SHC_3BB0A8C1_0x004A3B20, &PathFindingState::certainDamageToUnitsUnk)
-            certainDamageToUnitsUnk;
+                Address::SHC_3BB0A8C1_0x004A3B20, &PathFindingState::applyAreaDamageToEnemyUnits)
+            applyAreaDamageToEnemyUnits;
 
             MACRO_FUNCTION_RESOLVER(bool (PathFindingState::*)(undefined4, int, uint, uint, byte*, int*, int*), false,
                 Address::SHC_3BB0A8C1_0x004A4140, &PathFindingState::pathFindingToAttackCastleIncludingMoat)
@@ -342,28 +342,28 @@ namespace Map {
             reprocessLadddermanWallData;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (PathFindingState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004A4C70,
-                &PathFindingState::registerUnitOnClimbData)
-            registerUnitOnClimbData;
+                &PathFindingState::assignUnitToClimbPoint)
+            assignUnitToClimbPoint;
 
             MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(), false, Address::SHC_3BB0A8C1_0x004A52D0,
-                &PathFindingState::clearActiveClimbDataOfType6And7)
-            clearActiveClimbDataOfType6And7;
+                &PathFindingState::clearLaddermanClimbData)
+            clearLaddermanClimbData;
 
             MACRO_FUNCTION_RESOLVER(int (PathFindingState::*)(int, dword, dword, int), false,
                 Address::SHC_3BB0A8C1_0x004A5320, &PathFindingState::calculateCanPlayerUnitsNavigateToAreaFromArea)
             calculateCanPlayerUnitsNavigateToAreaFromArea;
 
             MACRO_FUNCTION_RESOLVER(dword (PathFindingState::*)(int, dword, dword), false,
-                Address::SHC_3BB0A8C1_0x004A58A0, &PathFindingState::findConnectingAreaBetweenTwoAreas)
-            findConnectingAreaBetweenTwoAreas;
+                Address::SHC_3BB0A8C1_0x004A58A0, &PathFindingState::traverseAreaConnectivityGraph)
+            traverseAreaConnectivityGraph;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (PathFindingState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004A5B00,
                 &PathFindingState::calculateCanReachUsingCachedAreaLogic)
             calculateCanReachUsingCachedAreaLogic;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (PathFindingState::*)(int, uint, uint, uint, uint), false,
-                Address::SHC_3BB0A8C1_0x004A5DA0, &PathFindingState::findBestAdjacentClimbTileToTarget)
-            findBestAdjacentClimbTileToTarget;
+                Address::SHC_3BB0A8C1_0x004A5DA0, &PathFindingState::findReachableTileNextToTarget)
+            findReachableTileNextToTarget;
 
             MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(), false, Address::SHC_3BB0A8C1_0x004A5F60,
                 &PathFindingState::updatePathLinkageLayerForEachBuildingAtEachTile)
@@ -374,12 +374,12 @@ namespace Map {
             updatePathLinkagesInAllEightDirections;
 
             MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int, uint, uint, int, int, int, int, int, int), false,
-                Address::SHC_3BB0A8C1_0x004A6010, &PathFindingState::findBestAttackTargetTileWithHeightAndOwner)
-            findBestAttackTargetTileWithHeightAndOwner;
+                Address::SHC_3BB0A8C1_0x004A6010, &PathFindingState::findBestSiegeTargetTile)
+            findBestSiegeTargetTile;
 
             MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int), false, Address::SHC_3BB0A8C1_0x004A6520,
-                &PathFindingState::storeDestinationOptionsUnk)
-            storeDestinationOptionsUnk;
+                &PathFindingState::storeDispersedMoveDestinations)
+            storeDispersedMoveDestinations;
 
             MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004A65E0,
                 &PathFindingState::setDestinationPairsBasedOnPreviousSearch)
@@ -389,7 +389,7 @@ namespace Map {
                 &PathFindingState::setMoveDestinationPairs)
             setMoveDestinationPairs;
 
-            MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int, int, int, UnitType, undefined4), false,
+            MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int, int, int, UnitTypeInt, undefined4), false,
                 Address::SHC_3BB0A8C1_0x004A67D0, &PathFindingState::spawnUnitAndAddToTribe)
             spawnUnitAndAddToTribe;
 
@@ -398,8 +398,8 @@ namespace Map {
             computeAttackVectorsBasedOnXAndY;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (PathFindingState::*)(int, uint, uint), false,
-                Address::SHC_3BB0A8C1_0x004A6AB0, &PathFindingState::findCrossAreaBridgeTileToTarget)
-            findCrossAreaBridgeTileToTarget;
+                Address::SHC_3BB0A8C1_0x004A6AB0, &PathFindingState::findClosestReachableTileForUnit)
+            findClosestReachableTileForUnit;
 
             MACRO_FUNCTION_RESOLVER(int (PathFindingState::*)(int, dword, uint, uint), false,
                 Address::SHC_3BB0A8C1_0x004A6DF0, &PathFindingState::canNavigateFunctionReturnsArea)
@@ -410,8 +410,8 @@ namespace Map {
             updateWalkLayerAndAIPathCostLayer;
 
             MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int, int, int, dword, int), false,
-                Address::SHC_3BB0A8C1_0x004A75B0, &PathFindingState::pathfindingForAttacksUnk)
-            pathfindingForAttacksUnk;
+                Address::SHC_3BB0A8C1_0x004A75B0, &PathFindingState::buildBuildingAttackApproachTiles)
+            buildBuildingAttackApproachTiles;
 
             MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(uint, undefined4, uint, uint, int, dword, int), false,
                 Address::SHC_3BB0A8C1_0x004A79A0, &PathFindingState::pathPlanningForTribe)

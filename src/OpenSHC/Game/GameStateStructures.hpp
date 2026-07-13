@@ -8,23 +8,23 @@
 
 #pragma once
 
-#include "OpenSHC/Commands/CommandBuildingType.hpp"
+#include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
 #include "OpenSHC/Game/Player/PlayerData.hpp"
-#include "OpenSHC/Game/Resources/ResourceType.hpp"
+#include "OpenSHC/Game/Resources/ResourceTypeInt.hpp"
 #include "OpenSHC/Game/State/MapAndTimeState.hpp"
 #include "OpenSHC/Game/State/UnitSelectionHotKeyEntry.hpp"
-#include "OpenSHC/IO/PackagedFileMagicNum.hpp"
+#include "OpenSHC/IO/PackagedFileMagicNumInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
 namespace Game {
 
-    using OpenSHC::Commands::CommandBuildingType;
+    using OpenSHC::Commands::CommandBuildingTypeInt;
     using OpenSHC::Game::Player::PlayerData;
-    using OpenSHC::Game::Resources::ResourceType;
+    using OpenSHC::Game::Resources::ResourceTypeInt;
     using OpenSHC::Game::State::MapAndTimeState;
     using OpenSHC::Game::State::UnitSelectionHotKeyEntry;
-    using OpenSHC::IO::PackagedFileMagicNum;
+    using OpenSHC::IO::PackagedFileMagicNumInt;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
@@ -51,7 +51,7 @@ namespace Game {
 
         void clearMapAndTimeAndPlayerData();
 
-        void clearCurrentResourcesAndStrongWalls();
+        void resetAllPlayerResources();
 
         void resetVariousCountsAndStatisticsAndStartGoodsAndResources();
 
@@ -67,7 +67,7 @@ namespace Game {
 
         void setMonthAndYear(int month, int year);
 
-        void clearSignpostData();
+        void resetSignpostState();
 
         void computeSignPostEntryData();
 
@@ -77,17 +77,17 @@ namespace Game {
 
         int countActiveSignposts();
 
-        BOOLEnum hasAnySignpost();
+        BOOLEnum hasAnyActiveSignpost();
 
-        int pickRandomAccessibleSignpostEntry();
+        int pickRandomSignpostInLargeZone();
 
         void clearDataAndSignpostDataIfNecessary();
 
         void addSignpostToBuildingEntryData(int buildingID);
 
-        void computeBuildingCategoryEntryPoint(uint param_1, int param_2, int param_3);
+        void setPlayerKeyBuildingRef(uint param_1, int param_2, int param_3);
 
-        void validateBuildingCategoryReference(int playerID, int param_2);
+        void validatePlayerKeyBuildingRef(int playerID, int param_2);
 
         BOOLEnum checkKeepEnclosed(int playerID);
 
@@ -97,9 +97,9 @@ namespace Game {
 
         BOOLEnum unitsCanMoveFromKeepOfPlayerToAnotherArea(int playerID);
 
-        BOOLEnum canKeepReachSignpostZone(int param_1, int param_2, int param_3);
+        BOOLEnum canReachSignpostFromKeep(int param_1, int param_2, int param_3);
 
-        bool canKeepReachSignpostZoneViaPathfinder(int param_1, int param_2, int param_3);
+        bool canReachSignpostFromKeepWithClimb(int param_1, int param_2, int param_3);
 
         void updatePrimaryBuildingPlayerDataReferences(uint buildingID);
 
@@ -110,7 +110,7 @@ namespace Game {
         void destroyPlayerCompletely(int playerID);
 
         undefined4 checkRequiredResourcesForBuildingOrPlanToBuy(
-            CommandBuildingType commandBuildingType, int playerID, BOOLEnum playResourceLackMsgUnk);
+            CommandBuildingTypeInt commandBuildingType, int playerID, BOOLEnum playResourceLackMsgUnk);
 
         int getWallTilesThatCanBeBuilt(int playerID, int wallMaterial);
 
@@ -128,37 +128,37 @@ namespace Game {
 
         int moveUnitAroundCampfire(int unitID, int availablePeasants);
 
-        void activateTraderState();
+        void enableTraderVisits();
 
-        void resetTraderState();
+        void disableTraderVisits();
 
         int findNextPlayerWithMarketplace(int param_1);
 
-        BOOLEnum isResourceTypeTradeable(ResourceType resourceType);
+        BOOLEnum isResourceTypeTradeable(ResourceTypeInt resourceType);
 
         BOOLEnum anyGoodsAreAllowedForSale();
 
-        int getNextGoodFilteringUnallowed(ResourceType param_1);
+        int getNextGoodFilteringUnallowed(ResourceTypeInt param_1);
 
-        int getPreviousGoodsFilteringUnallowed(ResourceType param_1);
+        int getPreviousGoodsFilteringUnallowed(ResourceTypeInt param_1);
 
         int getBatchBuyPrice(undefined4 playerID, int resourceType);
 
         int getBuyPrice(undefined4 playerID, int resourceType, int amount);
 
-        int getBuyPriceForOneUnit(int param_1);
+        int getResourceSellPrice(int param_1);
 
-        int getSalePriceOfGood(ResourceType param_1);
+        int getSalePriceOfGood(ResourceTypeInt param_1);
 
         int getSellPrice(int playerID, int resourceType, int amount);
 
-        int getSellResourceAmount(int playerID, int resourceType);
+        undefined getSellResourceAmount();
 
         void setVariousGameStateToInitialValues();
 
         void processPeasantsForBuildings();
 
-        void updateFoodTypesInStockForAllPlayers();
+        undefined updateFoodTypesInStockForAllPlayers();
 
         void processFoodConsumption();
 
@@ -192,25 +192,23 @@ namespace Game {
 
         int findAITeamMate(int playerID1);
 
-        uint TeamToBitFlagsUnk(int unitID);
+        uint getUnitTeammatesBitmask(int unitID);
 
-        BOOLEnum areActivePlayersMostlySameTeam();
+        BOOLEnum isOnlyOneTeamRemaining();
 
         void recountStablesAndHorses();
 
-        int linkageBetweenHorseUnitAndStableUnk(int playerID, int unitID);
+        int assignHorseUnitToStable(int playerID, int unitID);
 
         void spawnPoisonCloudsAroundBuilding(int buildingID);
 
         void playSFXNoSpaceInTheStockPile(int playerID);
 
-        void clearTribeHotKey(int hotkeyID);
+        void clearUnitSelectionHotkeyGroup(int param_1);
 
         void fillWith0xFF();
 
         void assignSelectionToKey(int number, int tribeID);
-
-        void computeArmySizeLimit();
 
         void HandleActivateTacticalPowers(int param_1, int powerType, int param_3);
 
@@ -222,13 +220,13 @@ namespace Game {
 
         int selectARandomBuildingOwnedByPlayer(int playerID);
 
-        void resetSomethingBuildingRelatedForAllPlayers();
+        void revalidateAllPlayerKeyBuildings();
 
         void computePopulationStatistics();
 
-        void clearEnemyRelatedStructures();
+        void resetGameStateForNewMap();
 
-        void initializeGameStateAfterMapLoad();
+        void initGameStateAfterMapLoad();
 
         void switchPlayerOwnership(int playerID);
 
@@ -243,7 +241,7 @@ namespace Game {
         void spawnPoisonCloudsAtRandomStorageOrArmyBuilding(int playerID, int count);
 
         void migrateGameStateForMapVersion(
-            PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
+            PackagedFileMagicNumInt receivedMapVersion, PackagedFileMagicNumInt packagerMapVersion);
 
         void processSingleTimeTick();
 

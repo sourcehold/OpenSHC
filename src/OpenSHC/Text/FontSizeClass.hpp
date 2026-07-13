@@ -8,10 +8,8 @@
 
 #pragma once
 
-#include "OpenSHC/IO/Graphics/GmID.hpp"
 #include "OpenSHC/IO/Graphics/GmIDInt.hpp"
 #include "OpenSHC/Rendering/Colors/BGR24.hpp"
-#include "OpenSHC/Text/FontRenderType.hpp"
 #include "OpenSHC/Text/FontRenderTypeInt.hpp"
 
 #include "WinDef.h"
@@ -19,10 +17,8 @@
 namespace OpenSHC {
 namespace Text {
 
-    using OpenSHC::IO::Graphics::GmID;
     using OpenSHC::IO::Graphics::GmIDInt;
     using OpenSHC::Rendering::Colors::BGR24;
-    using OpenSHC::Text::FontRenderType;
     using OpenSHC::Text::FontRenderTypeInt;
 
 #pragma pack(push, 1)
@@ -48,7 +44,7 @@ namespace Text {
         FontSizeClass() {};
         ~FontSizeClass() {};
 
-        void setupFontSizeClassObject(GmID fontGmID, int numberOfFontStartInGm, FontRenderType renderType,
+        void setupFontSizeClassObject(GmIDInt fontGmID, int numberOfFontStartInGm, FontRenderTypeInt renderType,
             int baselineOffset, int lineHeight, int letterSpacing, int whiteSpaceWidth);
 
         int getWidthOfText(char* text, int length);
@@ -56,9 +52,9 @@ namespace Text {
         int getWordStartingFromPos(
             char* text, int startAndRunIndex, char* wordReceiver, int maxWordBufferSize, int* wordStartIndexOutPtr);
 
-        void wrapTextIntoLines(char* text, int allowedWidth);
+        void wordWrapText(char* text, int allowedWidth);
 
-        int getCharWidthUnk(byte charUnk);
+        int getCharWidth(byte charUnk);
 
         int getWidthOfWideText(LPWSTR wideText, int numberOfChars);
 
@@ -66,15 +62,15 @@ namespace Text {
 
         int renderText(char* text, int textLength, int xPos, int yPos, BGR24 color, int blendStrength);
 
-        int renderMultilineTextUnk(
+        int renderWrappedMultilineText(
             char* text, int xPos, int yPos, int maxWidth, BGR24 color, int blendStrength, int modeUnk);
 
-        int renderMultilineWideTextUnk(
+        int renderWrappedMultilineWideText(
             LPWSTR _wideText, int xPos, int yPos, int maxWidth, uint color, int blendStrength, int modeUnk);
 
-        void renderSomeSpecificTextUnk(int lengthUnk, int otherBlendValueUnk, int xPos, int yPos, BGR24 color);
+        void renderPartialMultilineText(int lengthUnk, int otherBlendValueUnk, int xPos, int yPos, BGR24 color);
 
-        int renderCharUnk(char charId, int xPos, int yPosUnk, int bgr24, int blendStrengthUnk);
+        int renderTextCharGlyph(char charId, int xPos, int yPosUnk, int bgr24, int blendStrengthUnk);
 
         void renderWideText(LPWSTR wideText, int textLength, int xPos, int yPos, BGR24 color, int blendStrength);
 

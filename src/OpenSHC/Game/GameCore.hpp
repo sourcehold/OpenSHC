@@ -15,7 +15,6 @@
 #include "OpenSHC/Rendering/Enums/DirectDrawStatusInt.hpp"
 #include "OpenSHC/UI/ActiveMenuTab.hpp"
 #include "OpenSHC/UI/Enums/BuildMenuTabTypeShort.hpp"
-#include "OpenSHC/UI/Enums/MenuViewType.hpp"
 #include "OpenSHC/UI/Enums/MenuViewTypeInt.hpp"
 #include "OpenSHC/UI/MenuItemActionHandler.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -33,7 +32,6 @@ namespace Game {
     using OpenSHC::UI::ActiveMenuTab;
     using OpenSHC::UI::MenuItemActionHandler;
     using OpenSHC::UI::Enums::BuildMenuTabTypeShort;
-    using OpenSHC::UI::Enums::MenuViewType;
     using OpenSHC::UI::Enums::MenuViewTypeInt;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
@@ -54,8 +52,8 @@ namespace Game {
         ActiveMenuTab buildmenuMenuTabToSwitchTo; // 0x00000024 length: 4
         dword buildingandstatusmenuMenuTabToSwitchTo; // 0x00000028 length: 4
         dword landscapingmenuMenuTabToSwitchTo; // 0x0000002C length: 4
-        dword field12_0x30; // 0x00000030 length: 4
-        ActiveMenuTab secondaryActiveMenuTabToSwitchTo; // 0x00000034 length: 4
+        dword dwPreviousMenuTabType; // 0x00000030 length: 4
+        ActiveMenuTab unknownActiveMenuTabToSwitchTo; // 0x00000034 length: 4
         BuildMenuTabTypeShort tabTypeSiegeSubset; // 0x00000038 length: 4
         dword historicCampaignNumber; // 0x0000003C length: 4
         int missionNumber1to20; // 0x00000040 length: 4
@@ -71,7 +69,7 @@ namespace Game {
         GameMode2Int gameMode_2; // 0x00000068 length: 4
         int field27_0x6c; // 0x0000006C length: 4
         dword specialMultiplayerState; // 0x00000070 length: 4
-        dword field29_0x74; // 0x00000074 length: 4
+        dword dwMissionSelectedFlag; // 0x00000074 length: 4
         int mapU4Int1; // 0x00000078 length: 4
         int mapU4Int1_2; // 0x0000007C length: 4
         dword field32_0x80; // 0x00000080 length: 4
@@ -82,7 +80,7 @@ namespace Game {
         int battleLevel2; // 0x00000094 length: 4
         dword mapTimeInTicks; // 0x00000098 length: 4
         dword section1127; // 0x0000009C length: 4
-        dword field40_0xa0; // 0x000000A0 length: 4
+        dword dwSavedMapLoadTime; // 0x000000A0 length: 4
         BOOLEnum currentlyInGameUnk_0xa4; // 0x000000A4 length: 4
         dword gameSpeedMultiplicator; // 0x000000A8 length: 4
         dword performedGameTicksThisLoop; // 0x000000AC length: 4
@@ -106,7 +104,7 @@ namespace Game {
         int missionDifficulty_0; // 0x000000F4 length: 4
         dword field62_0xf8; // 0x000000F8 length: 4
         BOOLEnum solitaryAllBuildingsAreFree; // 0x000000FC length: 4
-        int field64_0x100; // 0x00000100 length: 4
+        int nMarketMenuSelection; // 0x00000100 length: 4
         dword field65_0x104; // 0x00000104 length: 4
         dword field66_0x108; // 0x00000108 length: 4
         dword unknownAlwaysZero; // 0x0000010C length: 4
@@ -122,13 +120,13 @@ namespace Game {
         int scribeAnimationFrame2; // 0x00000138 length: 4
         int taxestimeUnk; // 0x0000013C length: 4
         byte unused_0x140[4]; // 0x00000140 length: 4
-        int field80_0x144; // 0x00000144 length: 4
-        int field81_0x148; // 0x00000148 length: 4
+        int nPopularityMenuPage; // 0x00000144 length: 4
+        int nPopularityMenuMode; // 0x00000148 length: 4
         dword isBinkVideoPlaying; // 0x0000014C length: 4
         dword section1095; // 0x00000150 length: 4
         dword newPlayerID; // 0x00000154 length: 4
         dword hasMenuRenderedUnk; // 0x00000158 length: 4
-        dword field86_0x15c; // 0x0000015C length: 4
+        dword dwPeasantMenuFlag; // 0x0000015C length: 4
         int xbowProducible_logic; // 0x00000160 length: 4
         int pikeProducible_logic; // 0x00000164 length: 4
         int swordProducible_logic; // 0x00000168 length: 4
@@ -201,7 +199,7 @@ namespace Game {
         int selectedLordTypeUnk; // 0x00002314 length: 4
         int selectedLordType_2Unk; // 0x00002318 length: 4
         int selectedLordTypes[9]; // 0x0000231C length: 36
-        dword field159_0x2340; // 0x00002340 length: 4
+        dword dwSkirmishSetupValue; // 0x00002340 length: 4
         dword gamePausedLogical; // 0x00002344 length: 4
         int viewportFocusBeforeBarracksHotkey; // 0x00002348 length: 4
         int viewportFocusBeforeMercenaryHotkey; // 0x0000234C length: 4
@@ -233,17 +231,17 @@ namespace Game {
         // Constructor
         GameCore* Constructor_GameCore();
 
-        void setViewOnExitUnk();
+        void setMenuViewOnExit();
 
         void setTabToSwitchTo();
 
-        void swapBuildMenuTab();
+        void toggleSiegeTentBuildTab();
 
-        void switchToMenuView(MenuViewType menuID, int delay);
+        void switchToMenuView(MenuViewTypeInt menuID, int delay);
 
         void processMenuViewSwitch();
 
-        void viewportAndScrollingRelated();
+        void updateViewportScrollCountdown();
 
         BOOLEnum getAreWeInAInGameMenu();
 
@@ -251,17 +249,17 @@ namespace Game {
 
         void removeJesterAndLadyUnitsInCertainMissions();
 
-        void removeLadyAndJester();
+        void removePlayerLadyAndJester();
 
         BOOLEnum isGameHaltingMenuOpen();
 
-        void setStartDateUnk(int param_1);
+        void computeTrailMissionStartDates(int param_1);
 
         void incrementMissionProgress();
 
         void switchToScenarioDescriptionMenuView();
 
-        void incrementMission();
+        void advanceToNextMission();
 
         void hideOrUnhideUI();
     };

@@ -8,13 +8,13 @@
 
 #pragma once
 
-#include "OpenSHC/Audio/MSS/SoundFlagsAndLoopCount.hpp"
+#include "OpenSHC/Audio/MSS/UnkSoundFlagsAndLoopCount.hpp"
 #include "OpenSHC/Audio/MSS/enums/SHC_SoundStreamInt.hpp"
 
 namespace OpenSHC {
 namespace Rendering {
 
-    using OpenSHC::Audio::MSS::SoundFlagsAndLoopCount;
+    using OpenSHC::Audio::MSS::UnkSoundFlagsAndLoopCount;
     using OpenSHC::Audio::MSS::enums::SHC_SoundStreamInt;
 
 #pragma pack(push, 1)
@@ -29,7 +29,7 @@ namespace Rendering {
         int field5_0x14; // 0x00000014 length: 4
         int field6_0x18; // 0x00000018 length: 4
         undefined1 padding_0x1c[4]; // 0x0000001C length: 4
-        SoundFlagsAndLoopCount flagLoopCount; // 0x00000020 length: 4
+        UnkSoundFlagsAndLoopCount flagLoopCount; // 0x00000020 length: 4
         int binkObjIndex; // 0x00000024 length: 4
         int field13_0x28; // 0x00000028 length: 4
         int volume; // 0x0000002C length: 4

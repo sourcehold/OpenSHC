@@ -75,7 +75,7 @@ namespace UI {
 
         void prepareAndRenderMenuItems();
 
-        void resetMenuItemStateUnk();
+        void resetMenuItemInteractionState();
     };
 
     static_assert_cpp98_obj(sizeof(MenuItem) == 80, MenuItem);

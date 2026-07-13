@@ -9,13 +9,11 @@
 #pragma once
 
 #include "OpenSHC/WindowsHelper/cdeclVoidFunc.hpp"
-#include "OpenSHC/UI/Enums/MenuViewType.hpp"
 #include "OpenSHC/UI/Enums/MenuViewTypeInt.hpp"
 
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::UI::Enums::MenuViewType;
     using OpenSHC::UI::Enums::MenuViewTypeInt;
     using OpenSHC::WindowsHelper::cdeclVoidFunc;
 
@@ -40,10 +38,10 @@ namespace UI {
         ~MenuView() {};
 
         // Constructor
-        MenuView* Constructor_MenuView(
-            MenuViewType menuID, cdeclVoidFunc* prepareMenuView, cdeclVoidFunc* doInitial, cdeclVoidFunc* doEveryFrame);
+        MenuView* Constructor_MenuView(MenuViewTypeInt menuID, cdeclVoidFunc* prepareMenuView, cdeclVoidFunc* doInitial,
+            cdeclVoidFunc* doEveryFrame);
 
-        MenuView* Constructor_MenuView_Reduced(MenuViewType menuType);
+        MenuView* Constructor_MenuView_Reduced(MenuViewTypeInt menuType);
     };
 
     static_assert_cpp98_obj(sizeof(MenuView) == 24, MenuView);

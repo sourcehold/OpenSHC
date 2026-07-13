@@ -9,7 +9,7 @@
 #pragma once
 
 #include "OpenSHC/Rendering/Enums/RenderTargetInt.hpp"
-#include "OpenSHC/UI/Enums/RoundedBoxEdgeRoundingLevel.hpp"
+#include "OpenSHC/UI/Enums/RoundedBoxEdgeRoundingLevelInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
@@ -17,7 +17,7 @@ namespace UI {
     namespace Rendering {
 
         using OpenSHC::Rendering::Enums::RenderTargetInt;
-        using OpenSHC::UI::Enums::RoundedBoxEdgeRoundingLevel;
+        using OpenSHC::UI::Enums::RoundedBoxEdgeRoundingLevelInt;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
@@ -71,27 +71,27 @@ namespace UI {
             void drawScrollbar(
                 uint xPos, int yPos, int height, int thumbYPos, BOOLEnum isDragged, int thumbHeight, int blendStrength);
 
-            void renderUpDownButtonUnk(int isDownButtonUnk, int blendStrengthUnk);
+            void renderUpDownArrowButton(int isDownButtonUnk, int blendStrengthUnk);
 
             void drawTableCellBackground(BOOLEnum isSelected, int indexToGetStripes, int blendStrength);
 
             void drawColorBox(int left, int top, int right, int bottom, ushort color);
 
             void drawBoxWithRoundedEdgesAndColor(
-                int left, int top, int right, int bottom, ushort color, RoundedBoxEdgeRoundingLevel roundingLevel);
+                int left, int top, int right, int bottom, ushort color, RoundedBoxEdgeRoundingLevelInt roundingLevel);
 
             void drawBlendedBlackBox(int left, int top, int right, int bottom, int blendStrengh);
 
             void dimBox(int left, int top, int right, int bottom);
 
             void drawBoxWithRoundedEdges(
-                int left, int top, int right, int bottom, RoundedBoxEdgeRoundingLevel roundingLevel);
+                int left, int top, int right, int bottom, RoundedBoxEdgeRoundingLevelInt roundingLevel);
 
             void drawBorderBox(int left, int top, int right, int bottom, ushort color);
 
-            void drawDiagonalHeigherThanWideUnk();
+            void drawLineBresenhamSteep();
 
-            void drawDiagonalWiderThanHighUnk();
+            void drawLineBresenhamShallow();
 
             void drawPixelPattern4x4OverWholeScreen();
 

@@ -8,7 +8,6 @@
 
 #pragma once
 
-#include "OpenSHC/Audio/MSS/enums/SHC_SoundStream.hpp"
 #include "OpenSHC/Audio/MSS/enums/SHC_SoundStreamInt.hpp"
 #include "OpenSHC/Rendering/Bink/UnsortedBinkFlagInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -21,7 +20,6 @@ namespace OpenSHC {
 namespace Rendering {
     namespace Bink {
 
-        using OpenSHC::Audio::MSS::enums::SHC_SoundStream;
         using OpenSHC::Audio::MSS::enums::SHC_SoundStreamInt;
         using OpenSHC::Rendering::Bink::UnsortedBinkFlagInt;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
@@ -57,7 +55,7 @@ namespace Rendering {
 
             void stopBinkPlayback(int binkObjIndex);
 
-            void setBinkSndStreamAndStartTime(int binkObjIndex, SHC_SoundStream soundStreamIndexUnk);
+            void setBinkSndStreamAndStartTime(int binkObjIndex, SHC_SoundStreamInt soundStreamIndexUnk);
 
             void stopAllBinkPlayback();
 

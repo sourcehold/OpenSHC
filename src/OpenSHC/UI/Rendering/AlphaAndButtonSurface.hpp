@@ -8,14 +8,14 @@
 
 #pragma once
 
-#include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
+#include "OpenSHC/Rendering/Enums/RenderTargetInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
 namespace UI {
     namespace Rendering {
 
-        using OpenSHC::Rendering::Enums::RenderTarget;
+        using OpenSHC::Rendering::Enums::RenderTargetInt;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
@@ -45,15 +45,15 @@ namespace UI {
 
             void prepareButtonAndAlphaSurface();
 
-            BOOLEnum isMouseOnButtonImageUnk();
+            BOOLEnum isMouseOverButtonPixel();
 
-            void ProcessBuildingClickBonus(int buildingIndex);
+            void handleFriendlyBuildingClick(int buildingIndex);
 
             BOOLEnum openBuildingStatusMenuForBuildingID(int buildingID);
 
-            BOOLEnum SelectUnitAndOpenStatusMenu(int unitIndex);
+            BOOLEnum selectOwnUnit(int unitIndex);
 
-            void renderBasicButton(int reverseOrBlendStrength, RenderTarget renderSurface);
+            void renderBasicButton(int reverseOrBlendStrength, RenderTargetInt renderSurface);
         };
 
         static_assert_cpp98_obj(sizeof(AlphaAndButtonSurface) == 16, AlphaAndButtonSurface);

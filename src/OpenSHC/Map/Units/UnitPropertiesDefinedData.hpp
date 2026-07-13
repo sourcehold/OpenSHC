@@ -25,7 +25,8 @@ namespace Map {
         typedef struct UnitPropertiesDefinedData {
 
             byte ANIM_Frames_Shared_UnitClimbingDown[20]; // 0x00000000 length: 20
-            NoArgCallback* PTR_UpdateUnitFunctions[80]; // 0x00000014 length: 320
+            NoArgCallback* PTR_UpdateUnitFunctions; // 0x00000014 length: 4
+            undefined1 padding_0x18[316]; // 0x00000018 length: 316
             int DAT_SPRITE_ID[80]; // 0x00000154 length: 320
             int DAT_GRAPHIC_SIZE[80]; // 0x00000294 length: 320
             int DAT_COMPUTER_CONTROLLED[80]; // 0x000003D4 length: 320

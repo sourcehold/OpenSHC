@@ -2,25 +2,27 @@
   path: 'OpenSHC/Map/Units/TroopValueState.func.hpp'
 */
 
-#include "OpenSHC/AI/Tribes/AITribeType.hpp"
-#include "OpenSHC/Commands/CommandBuildingType.hpp"
-#include "OpenSHC/IO/PackagedFileMagicNum.hpp"
-#include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
+#include "OpenSHC/AI/Tribes/AITribeTypeShort.hpp"
+#include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
+#include "OpenSHC/IO/PackagedFileMagicNumInt.hpp"
+#include "OpenSHC/Map/Units/SomeTribeBehaviorTypeInt.hpp"
+#include "OpenSHC/Map/Units/SomeTribeBehaviorTypeShort.hpp"
 #include "OpenSHC/Map/Units/TroopValueState.hpp"
-#include "OpenSHC/Map/Units/UnitInstructionType.hpp"
-#include "OpenSHC/Map/Units/UnitType.hpp"
+#include "OpenSHC/Map/Units/UnitInstructionTypeInt.hpp"
+#include "OpenSHC/Map/Units/UnitTypeInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
 namespace Map {
     namespace Units {
         namespace TroopValueState_Func {
 
-            using OpenSHC::AI::Tribes::AITribeType;
-            using OpenSHC::Commands::CommandBuildingType;
-            using OpenSHC::IO::PackagedFileMagicNum;
-            using OpenSHC::Map::Units::SomeTribeBehaviorType;
-            using OpenSHC::Map::Units::UnitInstructionType;
-            using OpenSHC::Map::Units::UnitType;
+            using OpenSHC::AI::Tribes::AITribeTypeShort;
+            using OpenSHC::Commands::CommandBuildingTypeInt;
+            using OpenSHC::IO::PackagedFileMagicNumInt;
+            using OpenSHC::Map::Units::SomeTribeBehaviorTypeInt;
+            using OpenSHC::Map::Units::SomeTribeBehaviorTypeShort;
+            using OpenSHC::Map::Units::UnitInstructionTypeInt;
+            using OpenSHC::Map::Units::UnitTypeInt;
             using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
             MACRO_FUNCTION_RESOLVER(
@@ -28,56 +30,58 @@ namespace Map {
             clearAttackInfo;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00518180,
-                &TroopValueState::initializeAttackWaveSlot)
-            initializeAttackWaveSlot;
+                &TroopValueState::resetAttackAndAssignSignpost)
+            resetAttackAndAssignSignpost;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x005182A0,
                 &TroopValueState::searchTribeWithProperties)
             searchTribeWithProperties;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x00518350,
-                &TroopValueState::isAttackWaveComplete)
-            isAttackWaveComplete;
+                &TroopValueState::areAllAttacksFinished)
+            areAllAttacksFinished;
 
-            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int, int, int, SomeTribeBehaviorType), false,
+            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int, int, int, SomeTribeBehaviorTypeInt), false,
                 Address::SHC_3BB0A8C1_0x00518380, &TroopValueState::sortAttackInfoTribeIDArrayBasedOn)
             sortAttackInfoTribeIDArrayBasedOn;
 
-            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(SomeTribeBehaviorType, SomeTribeBehaviorType, int, int),
-                false, Address::SHC_3BB0A8C1_0x00518870, &TroopValueState::applyTribeBehaviorTypes)
+            MACRO_FUNCTION_RESOLVER(
+                void (TroopValueState::*)(SomeTribeBehaviorTypeInt, SomeTribeBehaviorTypeInt, int, int), false,
+                Address::SHC_3BB0A8C1_0x00518870, &TroopValueState::applyTribeBehaviorTypes)
             applyTribeBehaviorTypes;
 
-            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(SomeTribeBehaviorType, undefined4, short, short), false,
-                Address::SHC_3BB0A8C1_0x00518930, &TroopValueState::assignBehaviorTypeToNearbyTribes)
-            assignBehaviorTypeToNearbyTribes;
+            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(SomeTribeBehaviorTypeShort, undefined4, short, short),
+                false, Address::SHC_3BB0A8C1_0x00518930, &TroopValueState::assignBehaviorToReachableTribes)
+            assignBehaviorToReachableTribes;
 
-            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int, int, SomeTribeBehaviorType, undefined4, undefined4),
-                false, Address::SHC_3BB0A8C1_0x00518A10, &TroopValueState::assignBehaviorTypeAndLinkSupportTribe)
-            assignBehaviorTypeAndLinkSupportTribe;
+            MACRO_FUNCTION_RESOLVER(
+                void (TroopValueState::*)(int, int, SomeTribeBehaviorTypeShort, undefined4, undefined4), false,
+                Address::SHC_3BB0A8C1_0x00518A10, &TroopValueState::assignTribeBehaviorAndPairArchers)
+            assignTribeBehaviorAndPairArchers;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (TroopValueState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00518BB0,
                 &TroopValueState::isLessThanPercentageOfTribesInAttackDying)
             isLessThanPercentageOfTribesInAttackDying;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int, int, int, int), false,
-                Address::SHC_3BB0A8C1_0x00518C50, &TroopValueState::renderAttackInfoDebugOverlay)
-            renderAttackInfoDebugOverlay;
+                Address::SHC_3BB0A8C1_0x00518C50, &TroopValueState::renderAIAttackDebugOverlay)
+            renderAIAttackDebugOverlay;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x00519310,
-                &TroopValueState::computeAttackWaveTroopComposition)
-            computeAttackWaveTroopComposition;
+                &TroopValueState::computeAttackWaveScaling)
+            computeAttackWaveScaling;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x00519690,
-                &TroopValueState::buildRallyPointsFromSiegeUnits)
-            buildRallyPointsFromSiegeUnits;
+                &TroopValueState::buildSiegeRallyPoints)
+            buildSiegeRallyPoints;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x00519790,
-                &TroopValueState::setRallyPointForLaddermenTribe)
-            setRallyPointForLaddermenTribe;
+                &TroopValueState::setLaddermanRallyPoint)
+            setLaddermanRallyPoint;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x00519850,
-                &TroopValueState::initializeAttackZoneSearch)
-            initializeAttackZoneSearch;
+                &TroopValueState::initAttackInfoStartZone)
+            initAttackInfoStartZone;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x005198C0,
                 &TroopValueState::recomputeTargetedBuildingTilesArray)
@@ -88,8 +92,8 @@ namespace Map {
             getTileInTargetedBuildingTiles;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00519990,
-                &TroopValueState::computeSiegeSpotScores)
-            computeSiegeSpotScores;
+                &TroopValueState::hack2related)
+            hack2related;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x00519CC0,
                 &TroopValueState::findEnemyWalls)
@@ -100,8 +104,8 @@ namespace Map {
             setScale3;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x00519E40,
-                &TroopValueState::findNearestAvailableScalePoint)
-            findNearestAvailableScalePoint;
+                &TroopValueState::findAttackInfoScaleTarget)
+            findAttackInfoScaleTarget;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00519F50,
                 &TroopValueState::setTown2)
@@ -112,28 +116,28 @@ namespace Map {
             findEnemyBuildingsClosestToUnit;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051A0C0,
-                &TroopValueState::countAvailablePeopleValueSlots)
-            countAvailablePeopleValueSlots;
+                &TroopValueState::countAvailablePeopleTargets)
+            countAvailablePeopleTargets;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051A100,
-                &TroopValueState::countAvailableLordValueSlots)
-            countAvailableLordValueSlots;
+                &TroopValueState::countAvailableLordTargets)
+            countAvailableLordTargets;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051A140,
                 &TroopValueState::calculateTile2PeoplValueClosestToUnit)
             calculateTile2PeoplValueClosestToUnit;
 
             MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(undefined4), false, Address::SHC_3BB0A8C1_0x0051A220,
-                &TroopValueState::findEnemyLord)
-            findEnemyLord;
+                &TroopValueState::assignUnitToEnemyLordTarget)
+            assignUnitToEnemyLordTarget;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0051A2D0,
                 &TroopValueState::setGate2)
             setGate2;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051A330,
-                &TroopValueState::findEnemyTowersOrGates)
-            findEnemyTowersOrGates;
+                &TroopValueState::assignUnitToNearestEnemyGateTarget)
+            assignUnitToNearestEnemyGateTarget;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0051A550,
                 &TroopValueState::setWide3)
@@ -152,75 +156,76 @@ namespace Map {
             calculateTile2MoatValueClosestToUnit;
 
             MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051A8A0,
-                &TroopValueState::findNearestDiggableMoatPoint)
-            findNearestDiggableMoatPoint;
+                &TroopValueState::findMoatTileToDig)
+            findMoatTileToDig;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051A920,
-                &TroopValueState::findTribeWithMoatAttackBehavior)
-            findTribeWithMoatAttackBehavior;
+                &TroopValueState::findMoatDiggingTribeTarget)
+            findMoatDiggingTribeTarget;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051A9A0,
-                &TroopValueState::countAvailableHighValueSlots)
-            countAvailableHighValueSlots;
+                &TroopValueState::countAvailableHighTargets)
+            countAvailableHighTargets;
 
             MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051A9F0,
                 &TroopValueState::calculateHigh2ClostestToTribeTargetUnit)
             calculateHigh2ClostestToTribeTargetUnit;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051AB10,
-                &TroopValueState::countAvailableArcherValueSlots)
-            countAvailableArcherValueSlots;
+                &TroopValueState::countAvailableArcherTargets)
+            countAvailableArcherTargets;
 
             MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051AB60,
                 &TroopValueState::calculateArch2ClosestToTribeTargetUnit)
             calculateArch2ClosestToTribeTargetUnit;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051ACE0,
-                &TroopValueState::expandAIZoneLayerStage1)
-            expandAIZoneLayerStage1;
+                &TroopValueState::recomputeAIApproachLayer1)
+            recomputeAIApproachLayer1;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051AE00,
-                &TroopValueState::expandAIZoneLayerStage2)
-            expandAIZoneLayerStage2;
+                &TroopValueState::recomputeAIApproachLayer2)
+            recomputeAIApproachLayer2;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051AE90,
-                &TroopValueState::expandAIZoneLayerStage3)
-            expandAIZoneLayerStage3;
+                &TroopValueState::recomputeAIApproachLayer4)
+            recomputeAIApproachLayer4;
 
             MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051AF20,
-                &TroopValueState::findOrReserveArcherPointSlot)
-            findOrReserveArcherPointSlot;
+                &TroopValueState::findArcherPointIndexForTile)
+            findArcherPointIndexForTile;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051AF70,
-                &TroopValueState::pruneStaleArcherPoints)
-            pruneStaleArcherPoints;
+                &TroopValueState::validateAttackInfoEntries)
+            validateAttackInfoEntries;
 
             MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051AFF0,
-                &TroopValueState::claimArcherAttackPoint)
-            claimArcherAttackPoint;
+                &TroopValueState::assignTribeArcherAttackPosition)
+            assignTribeArcherAttackPosition;
 
             MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051B0C0,
                 &TroopValueState::getSupportPointIndex)
             getSupportPointIndex;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051B110,
-                &TroopValueState::pruneStaleSupportPoints)
-            pruneStaleSupportPoints;
+                &TroopValueState::validateSupportPointEntries)
+            validateSupportPointEntries;
 
             MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051B240,
                 &TroopValueState::getSiegeIndexForTile)
             getSiegeIndexForTile;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051B290,
-                &TroopValueState::pruneStaleTentPoints)
-            pruneStaleTentPoints;
+                &TroopValueState::validateTentPointEntries)
+            validateTentPointEntries;
 
-            MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(int, CommandBuildingType), false,
-                Address::SHC_3BB0A8C1_0x0051B310, &TroopValueState::placeSiegeTentAtAttackAngle)
-            placeSiegeTentAtAttackAngle;
+            MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(int, CommandBuildingTypeInt), false,
+                Address::SHC_3BB0A8C1_0x0051B310, &TroopValueState::placeSiegeTentAndOrderConstruction)
+            placeSiegeTentAndOrderConstruction;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (TroopValueState::*)(int, CommandBuildingType, uint, UnitInstructionType),
-                false, Address::SHC_3BB0A8C1_0x0051B420,
+            MACRO_FUNCTION_RESOLVER(
+                BOOLEnum (TroopValueState::*)(int, CommandBuildingTypeInt, uint, UnitInstructionTypeInt), false,
+                Address::SHC_3BB0A8C1_0x0051B420,
                 &TroopValueState::placeSiegeTentOrTunnelAtSuitableLocationAndAssignEngineers)
             placeSiegeTentOrTunnelAtSuitableLocationAndAssignEngineers;
 
@@ -233,8 +238,8 @@ namespace Map {
             clearAIInfoLayerOutsideStartZone;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051B6C0,
-                &TroopValueState::playAttackAlarmSound)
-            playAttackAlarmSound;
+                &TroopValueState::playAttackStartHorn)
+            playAttackStartHorn;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0051B710,
                 &TroopValueState::placeSiegeTentsAndAssignEngineers)
@@ -244,25 +249,25 @@ namespace Map {
                 &TroopValueState::placeTunnelForEveryTunneler)
             placeTunnelForEveryTunneler;
 
-            MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(undefined4, int, AITribeType, undefined4), false,
+            MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(undefined4, int, AITribeTypeShort, undefined4), false,
                 Address::SHC_3BB0A8C1_0x0051BC70, &TroopValueState::addUnitToNewTribe)
             addUnitToNewTribe;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051BD10,
-                &TroopValueState::exitSiegeEquipmentForWave)
-            exitSiegeEquipmentForWave;
+                &TroopValueState::commandSiegeCrewsExitEquipment)
+            commandSiegeCrewsExitEquipment;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051BDE0,
+            MACRO_FUNCTION_RESOLVER(undefined (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051BDE0,
                 &TroopValueState::getPlayerNot1AndHasKeep)
             getPlayerNot1AndHasKeep;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051BE60,
-                &TroopValueState::registerSpottedEnemyTile)
-            registerSpottedEnemyTile;
+                &TroopValueState::addAttackTargetTile)
+            addAttackTargetTile;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (TroopValueState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0051BF20,
-                &TroopValueState::shouldLightPitchBasedOnTroopValue)
-            shouldLightPitchBasedOnTroopValue;
+                &TroopValueState::shouldLightPitchBecauseOfTroopValue)
+            shouldLightPitchBecauseOfTroopValue;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051BF70,
                 &TroopValueState::giveLightPitchInstructionToUnitClosestToPitch)
@@ -273,16 +278,16 @@ namespace Map {
             lightPitchIfNecessary;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051C2D0,
-                &TroopValueState::updateArcherBrazierProximityFlags)
-            updateArcherBrazierProximityFlags;
+                &TroopValueState::updateArcherBrazierFlags)
+            updateArcherBrazierFlags;
 
-            MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(UnitType), false, Address::SHC_3BB0A8C1_0x0051C360,
+            MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(UnitTypeInt), false, Address::SHC_3BB0A8C1_0x0051C360,
                 &TroopValueState::getValueOfTroopType)
             getValueOfTroopType;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051C470,
-                &TroopValueState::queueOilThrowForIdleArchers)
-            queueOilThrowForIdleArchers;
+                &TroopValueState::aiEngineersThrowOil)
+            aiEngineersThrowOil;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051C570,
                 &TroopValueState::ifNecessaryThrowOilAutomatically)
@@ -293,52 +298,52 @@ namespace Map {
             commandUnitsToMoveToKeep;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051CA50,
-                &TroopValueState::collectArcherUnitsByLocation)
-            collectArcherUnitsByLocation;
+                &TroopValueState::collectAIArchersForRepositioning)
+            collectAIArchersForRepositioning;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051CBD0,
-                &TroopValueState::redeployArchersToDefensivePositions)
-            redeployArchersToDefensivePositions;
+                &TroopValueState::refillWallArcherPositions)
+            refillWallArcherPositions;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051CCB0,
                 &TroopValueState::assignMacemenAndKnightsNotFromPlayer1ToTribes)
             assignMacemenAndKnightsNotFromPlayer1ToTribes;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051CF90,
-                &TroopValueState::trySendMacemenTribeToAttack)
-            trySendMacemenTribeToAttack;
+                &TroopValueState::dispatchAggressiveMacemenTribe)
+            dispatchAggressiveMacemenTribe;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051D020,
-                &TroopValueState::trySendKnightTribeToAttack)
-            trySendKnightTribeToAttack;
+                &TroopValueState::dispatchAggressiveKnightTribe)
+            dispatchAggressiveKnightTribe;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051D0D0,
                 &TroopValueState::sendAttackingPatrolTribeToComputedDestination)
             sendAttackingPatrolTribeToComputedDestination;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051D1C0,
-                &TroopValueState::moveTribeToReachableNearbyTile)
-            moveTribeToReachableNearbyTile;
+                &TroopValueState::sendTribeAlongAttackPath)
+            sendTribeAlongAttackPath;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051D2B0,
-                &TroopValueState::decideAndExecuteTribeAttackAction)
-            decideAndExecuteTribeAttackAction;
+                &TroopValueState::decideTribeAttackTarget)
+            decideTribeAttackTarget;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051D450,
-                &TroopValueState::moveTribeToNearbyGatehouse)
-            moveTribeToNearbyGatehouse;
+                &TroopValueState::commandTribeMoveToNearestEnemyGatehouse)
+            commandTribeMoveToNearestEnemyGatehouse;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051D510,
                 &TroopValueState::moveTowardsParticularUnits)
             moveTowardsParticularUnits;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051D690,
-                &TroopValueState::advanceAttackWaveStaging)
-            advanceAttackWaveStaging;
+                &TroopValueState::dispatchAttackWavePeopleAssault)
+            dispatchAttackWavePeopleAssault;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051D730,
-                &TroopValueState::updateActiveAttackWaveState)
-            updateActiveAttackWaveState;
+                &TroopValueState::processSiegeRetreatWave)
+            processSiegeRetreatWave;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051D7F0,
                 &TroopValueState::updateTribeBehaviorBasedOnBehaviorType)
@@ -349,20 +354,16 @@ namespace Map {
             recomputeAttackInfo;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051F340,
-                &TroopValueState::scanForArcherPoints)
-            scanForArcherPoints;
+                &TroopValueState::computeAIArcherAttackPoints)
+            computeAIArcherAttackPoints;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051F4B0,
-                &TroopValueState::scanForSupportPoints)
-            scanForSupportPoints;
+                &TroopValueState::computeAISupportPoints)
+            computeAISupportPoints;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051F5C0,
-                &TroopValueState::scanForSiegeTentPoints)
-            scanForSiegeTentPoints;
-
-            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051F950,
-                &TroopValueState::processSpottedEnemyTiles)
-            processSpottedEnemyTiles;
+                &TroopValueState::computeAISiegeTentPoints)
+            computeAISiegeTentPoints;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051F9C0,
                 &TroopValueState::recountTotalTroopValue)
@@ -372,7 +373,7 @@ namespace Map {
                 &TroopValueState::recomputeTotalTroopValueOfTroopsNearKeep)
             recomputeTotalTroopValueOfTroopsNearKeep;
 
-            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(PackagedFileMagicNum, PackagedFileMagicNum), false,
+            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(PackagedFileMagicNumInt, PackagedFileMagicNumInt), false,
                 Address::SHC_3BB0A8C1_0x0051FB80, &TroopValueState::uselessFunction)
             uselessFunction;
 
@@ -380,13 +381,9 @@ namespace Map {
                 &TroopValueState::recountAttackTroopValue)
             recountAttackTroopValue;
 
-            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051FE80,
-                &TroopValueState::updateAttackInfoTick)
-            updateAttackInfoTick;
-
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051FF90,
-                &TroopValueState::initializeOrAdvanceAttackWave)
-            initializeOrAdvanceAttackWave;
+                &TroopValueState::startAttackWave)
+            startAttackWave;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int, int), false, Address::SHC_3BB0A8C1_0x005200A0,
                 &TroopValueState::aiRecomputeAttacks2)
@@ -397,18 +394,18 @@ namespace Map {
             aiRecomputeAttacks;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x00520450,
-                &TroopValueState::updateInProgressAttackWave)
-            updateInProgressAttackWave;
+                &TroopValueState::processSiegeAttackWave)
+            processSiegeAttackWave;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x005205A0,
-                &TroopValueState::executeAttackWaveTargetAssignment)
-            executeAttackWaveTargetAssignment;
+                &TroopValueState::runAiAttackWaveLogic)
+            runAiAttackWaveLogic;
 
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x00520CD0,
-                &TroopValueState::executeDelayedAttackWaveTargetAssignment)
-            executeDelayedAttackWaveTargetAssignment;
+                &TroopValueState::runAiAttackWaveLogicSimple)
+            runAiAttackWaveLogicSimple;
 
-            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x00520F70,
+            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051F950,
                 &TroopValueState::aiControlNonSkirmishUnitMovement)
             aiControlNonSkirmishUnitMovement;
 

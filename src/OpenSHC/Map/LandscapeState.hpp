@@ -8,10 +8,10 @@
 
 #pragma once
 
-#include "OpenSHC/IO/PackagedFileMagicNum.hpp"
+#include "OpenSHC/IO/PackagedFileMagicNumInt.hpp"
 #include "OpenSHC/Map/Rocks/Rock.hpp"
 #include "OpenSHC/Map/Trees/Tree.hpp"
-#include "OpenSHC/Map/Trees/TreeType.hpp"
+#include "OpenSHC/Map/Trees/TreeTypeInt.hpp"
 #include "OpenSHC/Map/WindState.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -20,11 +20,11 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::IO::PackagedFileMagicNum;
+    using OpenSHC::IO::PackagedFileMagicNumInt;
     using OpenSHC::Map::WindState;
     using OpenSHC::Map::Rocks::Rock;
     using OpenSHC::Map::Trees::Tree;
-    using OpenSHC::Map::Trees::TreeType;
+    using OpenSHC::Map::Trees::TreeTypeInt;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
@@ -33,7 +33,7 @@ namespace Map {
     class LandscapeState {
     public:
         undefined4 field0_0x0; // 0x00000000 length: 4
-        undefined4 field1_0x4; // 0x00000004 length: 4
+        undefined4 dwTreeStageUpdateFlag; // 0x00000004 length: 4
         undefined4 DAT_TotalOrganisms; // 0x00000008 length: 4
         int field3_0xc; // 0x0000000C length: 4
         int maxTreeCount; // 0x00000010 length: 4
@@ -54,18 +54,18 @@ namespace Map {
         ~LandscapeState() {};
 
         // Constructor
-        LandscapeState* constructLandscapeState();
+        LandscapeState* Constructor_LandscapeState();
 
-        undefined4 mapUITreeTypeToLogicalTreeType(undefined4 param_1);
+        undefined4 mapTreeBrushIDToLogicalType(undefined4 param_1);
 
         undefined4 getValueFrom0UpTo3ForTreeTypeAndTreeSeason(undefined4 treeType, int treeStage);
 
         void clearRocksAndTrees();
 
-        int createTree(undefined4 x, undefined4 y, TreeType treeType, undefined4 size, int stageRelatedValue,
+        int createTree(undefined4 x, undefined4 y, TreeTypeInt treeType, undefined4 size, int stageRelatedValue,
             undefined4 param_6, int stage);
 
-        void setTreeStageRelatedValues(int treeID, int stage);
+        void setTreeGrowthStageValues(int treeID, int stage);
 
         void removeTree(int treeID);
 
@@ -77,9 +77,9 @@ namespace Map {
 
         BOOLEnum lightUpTree(int tile, int playerID);
 
-        int getRandomRockImageOffset(int param_1);
+        int getRandomRockGfxOffset(int param_1);
 
-        undefined4 getTreeGrowthTargetStage(int param_1);
+        undefined4 getTreeVisualStage(int param_1);
 
         void setTreeSpreadInterval();
 
@@ -87,17 +87,17 @@ namespace Map {
 
         undefined4 setupBabyTreeLocation(uint treeID, int treeType, uint x, uint y);
 
-        uint isTreeAliveAndMatchingUID(int treeID, int param_2);
+        uint isTreeChoppable(int treeID, int param_2);
 
         BOOLEnum isTreeMatchingUIDAndOfCertainState(int treeID, int treeUID);
 
-        undefined4 damageTreeAndTriggerDeathIfDepleted(int treeID, undefined4 param_2, int param_3);
+        undefined4 chopTreeProgress(int treeID, undefined4 param_2, int param_3);
 
-        void advanceTreeDecayState(int treeID, int param_2);
+        void advanceTreeStumpRemoval(int treeID, int param_2);
 
-        void markNearbyTreesAsCrowTargets(int x, int y);
+        void markTreesNearTile(int x, int y);
 
-        void spawnCrowFromNearbyTree(int unitID);
+        void spawnCrowsFromNearbyTrees(int unitID);
 
         void placeAppleTree(int buildingID, undefined4 treeX, undefined4 treeY);
 
@@ -111,8 +111,8 @@ namespace Map {
 
         int findTree(int playerID, uint unitXPosition, uint unitYPosition);
 
-        void upgradeTreesAndRocksForMapVersion(
-            PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
+        void migrateLandscapeForMapVersion(
+            PackagedFileMagicNumInt receivedMapVersion, PackagedFileMagicNumInt packagerMapVersion);
 
         void updateTrees();
     };

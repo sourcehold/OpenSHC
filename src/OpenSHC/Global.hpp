@@ -8,15 +8,16 @@
 
 #pragma once
 
-#include "OpenSHC/AI/AIVUnitType.hpp"
-#include "OpenSHC/Game/Resources/ResourceType.hpp"
-#include "OpenSHC/Map/Buildings/BuildingType.hpp"
+#include "OpenSHC/AI/AIVUnitTypeInt.hpp"
+#include "OpenSHC/Game/Resources/ResourceTypeInt.hpp"
+#include "OpenSHC/Map/Buildings/BuildingTypeInt.hpp"
 #include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
-#include "OpenSHC/Map/Units/EuroRecruitableState.hpp"
-#include "OpenSHC/Map/Units/States/UnitState.hpp"
-#include "OpenSHC/Rendering/Enums/DirectDrawStatus.hpp"
+#include "OpenSHC/Map/Units/EuroRecruitableStateInt.hpp"
+#include "OpenSHC/Map/Units/States/UnitStateShort.hpp"
+#include "OpenSHC/Map/Units/UnitTypeInt.hpp"
+#include "OpenSHC/Rendering/Enums/DirectDrawStatusInt.hpp"
 #include "OpenSHC/UI/DisplayElement.hpp"
-#include "OpenSHC/UI/Enums/DisplayElementID.hpp"
+#include "OpenSHC/UI/Enums/DisplayElementIDInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "WinDef.h"
@@ -27,15 +28,16 @@
 namespace OpenSHC {
 namespace Global {
 
-    using OpenSHC::AI::AIVUnitType;
-    using OpenSHC::Game::Resources::ResourceType;
-    using OpenSHC::Map::Buildings::BuildingType;
+    using OpenSHC::AI::AIVUnitTypeInt;
+    using OpenSHC::Game::Resources::ResourceTypeInt;
+    using OpenSHC::Map::Buildings::BuildingTypeInt;
     using OpenSHC::Map::Buildings::BuildingTypeShort;
-    using OpenSHC::Map::Units::EuroRecruitableState;
-    using OpenSHC::Map::Units::States::UnitState;
-    using OpenSHC::Rendering::Enums::DirectDrawStatus;
+    using OpenSHC::Map::Units::EuroRecruitableStateInt;
+    using OpenSHC::Map::Units::UnitTypeInt;
+    using OpenSHC::Map::Units::States::UnitStateShort;
+    using OpenSHC::Rendering::Enums::DirectDrawStatusInt;
     using OpenSHC::UI::DisplayElement;
-    using OpenSHC::UI::Enums::DisplayElementID;
+    using OpenSHC::UI::Enums::DisplayElementIDInt;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     void __stdcall SetCurrentEntityID3000();
@@ -147,7 +149,7 @@ namespace Global {
 
     void __stdcall UpdateTower1();
 
-    void __stdcall UpdateBadBuildingCessPitOrDancingBearUnk();
+    void __stdcall resetBuildingDisplayAnimation();
 
     void __stdcall UpdateBadBuildingBurningStake();
 
@@ -215,7 +217,7 @@ namespace Global {
 
     void __stdcall DrawOuterMenuBorder();
 
-    void __stdcall MainMenu_Unknown21_Prepare();
+    void __stdcall MenuView_MainMenuModal21_Prepare();
 
     BOOLEnum __stdcall AModalDialogIsActiveButIsNotQuitting();
 
@@ -237,11 +239,13 @@ namespace Global {
 
     void __stdcall ClearSiegeInformationArray2();
 
-    void __cdecl LaunchSinglePlayerGameUnk(int param_1);
+    void __cdecl launchSinglePlayerGame(int param_1);
 
     void __stdcall InitializeBasicMap();
 
-    void __stdcall ResetSomeValuesFunctionUnk();
+    void __stdcall resetGameUIStateOnMenuSwitch();
+
+    undefined __cdecl AdjustViewPortAndMore();
 
     void __cdecl PlayPlacementWarning(undefined4 param_1);
 
@@ -257,6 +261,8 @@ namespace Global {
 
     int __cdecl ComputePlayerPoints1(int playerID);
 
+    void __stdcall PlayUnitSpeech(UnitTypeInt unitType, int actionID);
+
     int __cdecl ComputePlayerRanking(int playerID);
 
     int __cdecl GetPlayerAtRank(int rankingPosition);
@@ -269,11 +275,11 @@ namespace Global {
 
     void __stdcall PlaySFXVoices();
 
-    void __stdcall InitBlendFilterArraysUnk();
+    void __stdcall initBlendFilterTables();
 
     void __cdecl PrintToDestination(wchar_t* destination, wchar_t* format, ...);
 
-    EuroRecruitableState __cdecl IsEuroUnitRecruitableUnk(int barrackUnitIdUnk);
+    EuroRecruitableStateInt __cdecl getEuroUnitRecruitableState(int barrackUnitIdUnk);
 
     int __cdecl GetUnitRecruitPermission(int param_1);
 
@@ -294,9 +300,9 @@ namespace Global {
 
     void __cdecl ChangeRations(int playerID, int rationsSetting);
 
-    void __cdecl SetPlayerBuyingResultStateUnk(int state, ResourceType resourceTypePlus1);
+    void __cdecl setStorageFullEmptyNotification(int state, ResourceTypeInt resourceTypePlus1);
 
-    void __cdecl ProcessBuyOrSell(int playerID, int buyOrSell, ResourceType resourceType);
+    void __cdecl ProcessBuyOrSell(int playerID, int buyOrSell, ResourceTypeInt resourceType);
 
     void __cdecl TryAcquireAmmunitionOrPlanToBuyStone(int param_1, int param_2);
 
@@ -309,19 +315,19 @@ namespace Global {
 
     void __cdecl ReleaseDogs2(int param_1, int buildingID, int buildingUID);
 
-    void __stdcall SetEnoughGoldForRequestedUnitToTrueUnk();
+    void __stdcall setEnoughGoldForRequestedUnit();
 
-    void __stdcall SetSomeColorsUnk();
+    void __stdcall initNamedColorsForColorMode();
 
     HRESULT __stdcall EnumDisplayModesCallback(DDSURFACEDESC* displayDesc, LPVOID userParam);
 
-    void __stdcall DoNothing();
+    void __stdcall noOp();
 
     byte __stdcall RotateByteLeft(byte value, int bits);
 
     char* __cdecl GetStringBasedOnHardcodedMaps(char* mapName, int* hardcodedMapDescriptionGroupNum);
 
-    DirectDrawStatus __stdcall DetectDXVersionByLoadingDDRAW();
+    DirectDrawStatusInt __stdcall DetectDXVersionByLoadingDDRAW();
 
     byte __stdcall TestOSVersion();
 
@@ -331,9 +337,9 @@ namespace Global {
     bool __stdcall EnumSessionsCallback_addSession_async(
         DPSESSIONDESC2* lpThisSD, LPDWORD lpdwTimeOut, DWORD dwFlags, LPVOID lpContext);
 
-    BOOLEnum __stdcall DirectPlayModemRelated_MemoryAllocationFunction(int* param_1, undefined4 param_2, char* param_3);
+    BOOLEnum __stdcall enumModemAddressCallback(int* param_1, undefined4 param_2, char* param_3);
 
-    int __stdcall CompressOrCreateLengthPrefixedPacketUnk(int size, char* src, void* dst);
+    int __stdcall compressOrCreateLengthPrefixedPacket(int size, char* src, void* dst);
 
     int __stdcall ComputeSomeHashOnUnitArray();
 
@@ -341,9 +347,9 @@ namespace Global {
 
     void __cdecl MemCopyFromParameter(char* dest, size_t size, undefined4 playerID);
 
-    void __stdcall SetupPreviewMinimapDataUnk();
+    void __stdcall loadSelectedMapHeaderForPreview();
 
-    void __stdcall ProgressBarRelated();
+    void __stdcall showLoadSaveProgressBar();
 
     void __stdcall ClearPathFindingTileMaps();
 
@@ -366,19 +372,19 @@ namespace Global {
 
     void __cdecl ProcessAllyRequestingGoods(int askedPlayerID, int param_2, int amount, int askee);
 
-    void __cdecl ProcessAllyGoodsRequest(int param_1, ResourceType param_2, int param_3, int param_4);
+    void __cdecl ProcessAllyGoodsRequest(int param_1, ResourceTypeInt param_2, int param_3, int param_4);
 
     void __cdecl ProcessAllyDeniesRequest(int param_1, int param_2);
 
     DisplayElement* __cdecl FindDisplayElementWithID(int elementID);
 
     void __cdecl CheckDisplayElementByIDAndSetForUnlimitedDisplay(
-        DisplayElementID displayElementID, dword elementState);
+        DisplayElementIDInt displayElementID, dword elementState);
 
-    void __cdecl ActivateGameSpeedAndResourceLackDisplayElementUnk(
-        DisplayElementID elementId, dword elementState, int displayDuration);
+    void __cdecl activateDisplayElementForDuration(
+        DisplayElementIDInt elementId, dword elementState, int displayDuration);
 
-    BOOLEnum __cdecl GetIfDisplayElementStateNotZero(DisplayElementID displayElementID);
+    BOOLEnum __cdecl GetIfDisplayElementStateNotZero(DisplayElementIDInt displayElementID);
 
     LRESULT __stdcall WindowMsgProcessingFunc(HWND windowHandle, UINT message, WPARAM wParam, LPARAM lParam);
 
@@ -386,9 +392,9 @@ namespace Global {
 
     void __cdecl SumUnitPoints();
 
-    void __cdecl SetTutorialBuildingActionState(int param_1, BuildingType buildingType);
+    void __cdecl recordTutorialBuildingAction(int param_1, BuildingTypeInt buildingType);
 
-    void __stdcall SetTutorialHintActiveWithTimestamp();
+    void __stdcall triggerTutorialHighlight();
 
     void __cdecl SetupSkirmishMode(int skirmishTrailMission);
 
@@ -396,7 +402,7 @@ namespace Global {
 
     int __stdcall StoreTime();
 
-    AIVUnitType __stdcall GetUnitTypeIndexForUnitID(int unitID, int param_2);
+    AIVUnitTypeInt __stdcall GetUnitTypeIndexForUnitID(int unitID, int param_2);
 
     int __stdcall ChecksAndGenerateAITribesForPlayerIfNotExisting(int playerID, int maxAmount, BOOLEnum checkOnly);
 
@@ -420,7 +426,7 @@ namespace Global {
 
     int __cdecl ComputeSkMasterScore(int playerID);
 
-    void __cdecl ResetEventStatusUnk();
+    void __cdecl resetAndLoadScenarioEventConditions();
 
     void __cdecl TacticalPowersFill();
 
@@ -449,13 +455,14 @@ namespace Global {
 
     void __cdecl WriteMissionToScoresFile(char* param_1, int param_2);
 
-    void __stdcall renderSomethingMap3(int param_1, int param_2, int param_3, undefined4 param_4, int param_5);
+    void __stdcall renderBuildingAnimationSprite(
+        int param_1, int param_2, int param_3, undefined4 param_4, int param_5);
 
     int __stdcall SomeComputationWithSeparateAreas();
 
     void __stdcall VersioningFixTrees();
 
-    void __stdcall RemoveCertainRockTypesUnk();
+    void __stdcall removeStaleRocks();
 
     void __stdcall RemoveRocksBeyond1000();
 
@@ -481,7 +488,7 @@ namespace Global {
 
     void __cdecl DecrementTileMap1104();
 
-    void __stdcall ClearAnimalSpawnLocationsUnk();
+    void __stdcall clearAnimalSpawnLocations();
 
     void __cdecl updateLogicAndClimbData(int unitID);
 
@@ -493,21 +500,21 @@ namespace Global {
 
     void __stdcall UpdateBurningAnimal2();
 
-    void __cdecl IncrementAndOptionalUpdateAVValueRelated(int unitID, BOOLEnum updateAV);
+    void __cdecl incrementWorkTimerAndAverageAV(int unitID, BOOLEnum updateAV);
 
-    BOOLEnum __cdecl ConsiderHavingABreakNowUnk(int unitID, UnitState nextUnitState);
+    BOOLEnum __cdecl checkWorkerTakesRestBreak(int unitID, UnitStateShort nextUnitState);
 
     undefined4 __cdecl SetStateToFreetimeWalking(int unitID, int shouldFindNewGoodThing, int param_3);
 
-    bool __cdecl CheckUnitProductionPaused(int param_1);
+    bool __cdecl checkUnitField2fe(int param_1);
 
     int __cdecl ComputeGoodsProduced(int unitID, int goodsCount, BOOLEnum boost);
 
-    BuildingTypeShort* __stdcall WarnIfPlayerLacksGranary();
+    BuildingTypeShort* __stdcall checkPlayerGranaryPeriodicWarning();
 
-    uint __stdcall TryPlayStockpileIsFullNoiseUnk();
+    uint __stdcall playStockpileFullWarningSfx();
 
-    BuildingTypeShort* __stdcall PlaySound_StockpileIsFullMyLordUnk();
+    BuildingTypeShort* __stdcall playArmouryFullWarningVoice();
 
     BOOLEnum __cdecl CurrentUnitHasHealer();
 
@@ -517,7 +524,7 @@ namespace Global {
 
     void __stdcall UpdateShield();
 
-    BOOLEnum __cdecl ConsiderTakingABreakUnk(int unitID);
+    BOOLEnum __cdecl considerUnitTakingBreak(int unitID);
 
     void __stdcall UpdatePeasant();
 

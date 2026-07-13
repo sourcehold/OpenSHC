@@ -8,26 +8,28 @@
 
 #pragma once
 
-#include "OpenSHC/AI/Tribes/AITribeType.hpp"
-#include "OpenSHC/Commands/CommandBuildingType.hpp"
-#include "OpenSHC/IO/PackagedFileMagicNum.hpp"
+#include "OpenSHC/AI/Tribes/AITribeTypeShort.hpp"
+#include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
+#include "OpenSHC/IO/PackagedFileMagicNumInt.hpp"
 #include "OpenSHC/Map/AttackInfo.hpp"
-#include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
-#include "OpenSHC/Map/Units/UnitInstructionType.hpp"
-#include "OpenSHC/Map/Units/UnitType.hpp"
+#include "OpenSHC/Map/Units/SomeTribeBehaviorTypeInt.hpp"
+#include "OpenSHC/Map/Units/SomeTribeBehaviorTypeShort.hpp"
+#include "OpenSHC/Map/Units/UnitInstructionTypeInt.hpp"
+#include "OpenSHC/Map/Units/UnitTypeInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::AI::Tribes::AITribeType;
-        using OpenSHC::Commands::CommandBuildingType;
-        using OpenSHC::IO::PackagedFileMagicNum;
+        using OpenSHC::AI::Tribes::AITribeTypeShort;
+        using OpenSHC::Commands::CommandBuildingTypeInt;
+        using OpenSHC::IO::PackagedFileMagicNumInt;
         using OpenSHC::Map::AttackInfo;
-        using OpenSHC::Map::Units::SomeTribeBehaviorType;
-        using OpenSHC::Map::Units::UnitInstructionType;
-        using OpenSHC::Map::Units::UnitType;
+        using OpenSHC::Map::Units::SomeTribeBehaviorTypeInt;
+        using OpenSHC::Map::Units::SomeTribeBehaviorTypeShort;
+        using OpenSHC::Map::Units::UnitInstructionTypeInt;
+        using OpenSHC::Map::Units::UnitTypeInt;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
@@ -49,67 +51,67 @@ namespace Map {
             ~TroopValueState() {};
 
             // Constructor
-            TroopValueState* constructTroopValueState();
+            TroopValueState* Constructor_TroopValueState();
 
             void clearAttackInfo();
 
-            void initializeAttackWaveSlot(int param_1, int param_2);
+            void resetAttackAndAssignSignpost(int param_1, int param_2);
 
             BOOLEnum searchTribeWithProperties(int param_1);
 
-            undefined4 isAttackWaveComplete();
+            undefined4 areAllAttacksFinished();
 
-            void sortAttackInfoTribeIDArrayBasedOn(
-                int attackWave, int shrinkSize, int tribeSizeSumLimit, SomeTribeBehaviorType someTribeTypeIdentifier);
+            void sortAttackInfoTribeIDArrayBasedOn(int attackWave, int shrinkSize, int tribeSizeSumLimit,
+                SomeTribeBehaviorTypeInt someTribeTypeIdentifier);
 
-            void applyTribeBehaviorTypes(
-                SomeTribeBehaviorType tribeBehaviorType, SomeTribeBehaviorType tribeBehaviorType2, int off1, int off2);
+            void applyTribeBehaviorTypes(SomeTribeBehaviorTypeInt tribeBehaviorType,
+                SomeTribeBehaviorTypeInt tribeBehaviorType2, int off1, int off2);
 
-            void assignBehaviorTypeToNearbyTribes(
-                SomeTribeBehaviorType param_1, undefined4 param_2, short param_3, short param_4);
+            void assignBehaviorToReachableTribes(
+                SomeTribeBehaviorTypeShort param_1, undefined4 param_2, short param_3, short param_4);
 
-            void assignBehaviorTypeAndLinkSupportTribe(
-                int param_1, int param_2, SomeTribeBehaviorType param_3, undefined4 param_4, undefined4 param_5);
+            void assignTribeBehaviorAndPairArchers(
+                int param_1, int param_2, SomeTribeBehaviorTypeShort param_3, undefined4 param_4, undefined4 param_5);
 
             BOOLEnum isLessThanPercentageOfTribesInAttackDying(int attackID, int leDyingPerc);
 
-            void renderAttackInfoDebugOverlay(int x, int y, int width, int height);
+            void renderAIAttackDebugOverlay(int x, int y, int width, int height);
 
-            void computeAttackWaveTroopComposition();
+            void computeAttackWaveScaling();
 
-            void buildRallyPointsFromSiegeUnits(int tribeID);
+            void buildSiegeRallyPoints(int tribeID);
 
-            void setRallyPointForLaddermenTribe(int param_1);
+            void setLaddermanRallyPoint(int param_1);
 
-            void initializeAttackZoneSearch(int param_1);
+            void initAttackInfoStartZone(int param_1);
 
             void recomputeTargetedBuildingTilesArray(int playerID);
 
             BOOLEnum getTileInTargetedBuildingTiles(int tile);
 
-            void computeSiegeSpotScores(int attackedPlayerID, int attackingPlayerID);
+            void hack2related(int attackedPlayerID, int attackingPlayerID);
 
             undefined4 findEnemyWalls(int unitID);
 
             void setScale3(int one, int playerID);
 
-            undefined4 findNearestAvailableScalePoint(int unitID);
+            undefined4 findAttackInfoScaleTarget(int unitID);
 
             void setTown2(int param_1, int playerID);
 
             undefined4 findEnemyBuildingsClosestToUnit(int unitID);
 
-            void countAvailablePeopleValueSlots(int param_1);
+            void countAvailablePeopleTargets(int param_1);
 
-            void countAvailableLordValueSlots(int param_1);
+            void countAvailableLordTargets(int param_1);
 
             undefined4 calculateTile2PeoplValueClosestToUnit(int unitID);
 
-            int findEnemyLord(undefined4 param_1);
+            int assignUnitToEnemyLordTarget(undefined4 param_1);
 
             void setGate2(int param_1, int param_2);
 
-            undefined4 findEnemyTowersOrGates(int unitID);
+            undefined4 assignUnitToNearestEnemyGateTarget(int unitID);
 
             void setWide3(int param_1, int param_2);
 
@@ -119,134 +121,131 @@ namespace Map {
 
             undefined4 calculateTile2MoatValueClosestToUnit(int unitID);
 
-            int findNearestDiggableMoatPoint(int param_1);
+            int findMoatTileToDig(int param_1);
 
-            undefined4 findTribeWithMoatAttackBehavior();
+            undefined4 findMoatDiggingTribeTarget();
 
-            void countAvailableHighValueSlots(int param_1);
+            void countAvailableHighTargets(int param_1);
 
             int calculateHigh2ClostestToTribeTargetUnit(int tribeID);
 
-            void countAvailableArcherValueSlots(int param_1);
+            void countAvailableArcherTargets(int param_1);
 
             int calculateArch2ClosestToTribeTargetUnit(int tribeID);
 
-            void expandAIZoneLayerStage1();
+            void recomputeAIApproachLayer1();
 
-            void expandAIZoneLayerStage2();
+            void recomputeAIApproachLayer2();
 
-            void expandAIZoneLayerStage3();
+            void recomputeAIApproachLayer4();
 
-            int findOrReserveArcherPointSlot(int param_1);
+            int findArcherPointIndexForTile(int param_1);
 
-            void pruneStaleArcherPoints();
+            void validateAttackInfoEntries();
 
-            int claimArcherAttackPoint(int param_1);
+            int assignTribeArcherAttackPosition(int param_1);
 
             int getSupportPointIndex(int tile);
 
-            void pruneStaleSupportPoints();
+            void validateSupportPointEntries();
 
             int getSiegeIndexForTile(int tile);
 
-            void pruneStaleTentPoints();
+            void validateTentPointEntries();
 
-            int placeSiegeTentAtAttackAngle(int tribeID, CommandBuildingType commandBuildingType);
+            int placeSiegeTentAndOrderConstruction(int tribeID, CommandBuildingTypeInt commandBuildingType);
 
             BOOLEnum placeSiegeTentOrTunnelAtSuitableLocationAndAssignEngineers(int tribeID,
-                CommandBuildingType commandBuildingType, uint strategicDistance, UnitInstructionType instruction);
+                CommandBuildingTypeInt commandBuildingType, uint strategicDistance, UnitInstructionTypeInt instruction);
 
             int placeTunnelEntrances(int tribeID);
 
             void clearAIInfoLayerOutsideStartZone();
 
-            void playAttackAlarmSound();
+            void playAttackStartHorn();
 
             void placeSiegeTentsAndAssignEngineers(int param_1, int param_2);
 
             void placeTunnelForEveryTunneler(int attackWave);
 
-            int addUnitToNewTribe(undefined4 unitID, int attackWave, AITribeType tribeType, undefined4 playerID);
+            int addUnitToNewTribe(undefined4 unitID, int attackWave, AITribeTypeShort tribeType, undefined4 playerID);
 
-            void exitSiegeEquipmentForWave(int wave);
+            void commandSiegeCrewsExitEquipment(int wave);
 
-            BOOLEnum getPlayerNot1AndHasKeep(int playerID);
+            undefined getPlayerNot1AndHasKeep();
 
-            void registerSpottedEnemyTile(int param_1);
+            void addAttackTargetTile(int param_1);
 
-            BOOLEnum shouldLightPitchBasedOnTroopValue(int tile, int playerID);
+            BOOLEnum shouldLightPitchBecauseOfTroopValue(int tile, int playerID);
 
             undefined4 giveLightPitchInstructionToUnitClosestToPitch(int tile);
 
             void lightPitchIfNecessary(int unitID, int unitID2);
 
-            void updateArcherBrazierProximityFlags();
+            void updateArcherBrazierFlags();
 
-            int getValueOfTroopType(UnitType unitType);
+            int getValueOfTroopType(UnitTypeInt unitType);
 
-            void queueOilThrowForIdleArchers();
+            void aiEngineersThrowOil();
 
             undefined4 ifNecessaryThrowOilAutomatically(int param_1);
 
             void commandUnitsToMoveToKeep();
 
-            void collectArcherUnitsByLocation();
+            void collectAIArchersForRepositioning();
 
-            void redeployArchersToDefensivePositions();
+            void refillWallArcherPositions();
 
             void assignMacemenAndKnightsNotFromPlayer1ToTribes();
 
-            void trySendMacemenTribeToAttack();
+            void dispatchAggressiveMacemenTribe();
 
-            void trySendKnightTribeToAttack();
+            void dispatchAggressiveKnightTribe();
 
             void sendAttackingPatrolTribeToComputedDestination(int tribeID);
 
-            void moveTribeToReachableNearbyTile(int param_1);
+            void sendTribeAlongAttackPath(int param_1);
 
-            void decideAndExecuteTribeAttackAction(int tribeID);
+            void decideTribeAttackTarget(int tribeID);
 
-            undefined4 moveTribeToNearbyGatehouse(int param_1);
+            undefined4 commandTribeMoveToNearestEnemyGatehouse(int param_1);
 
             void moveTowardsParticularUnits(int param_1);
 
-            void advanceAttackWaveStaging(int param_1);
+            void dispatchAttackWavePeopleAssault(int param_1);
 
-            void updateActiveAttackWaveState(int attackWave);
+            void processSiegeRetreatWave(int attackWave);
 
             void updateTribeBehaviorBasedOnBehaviorType(int tribeID);
 
             void recomputeAttackInfo(int playerID, int attackedPlayerID);
 
-            void scanForArcherPoints();
+            void computeAIArcherAttackPoints();
 
-            void scanForSupportPoints();
+            void computeAISupportPoints();
 
-            void scanForSiegeTentPoints();
-
-            void processSpottedEnemyTiles();
+            void computeAISiegeTentPoints();
 
             void recountTotalTroopValue();
 
             void recomputeTotalTroopValueOfTroopsNearKeep();
 
-            void uselessFunction(PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
+            void uselessFunction(
+                PackagedFileMagicNumInt receivedMapVersion, PackagedFileMagicNumInt packagerMapVersion);
 
             void recountAttackTroopValue(int param_1);
 
-            void updateAttackInfoTick();
-
-            void initializeOrAdvanceAttackWave(int param_1);
+            void startAttackWave(int param_1);
 
             void aiRecomputeAttacks2(int param_1, int param_2);
 
             void aiRecomputeAttacks(undefined4 param_1, int param_2);
 
-            void updateInProgressAttackWave(int attackID);
+            void processSiegeAttackWave(int attackID);
 
-            void executeAttackWaveTargetAssignment(int param_1);
+            void runAiAttackWaveLogic(int param_1);
 
-            void executeDelayedAttackWaveTargetAssignment(int param_1);
+            void runAiAttackWaveLogicSimple(int param_1);
 
             void aiControlNonSkirmishUnitMovement();
         };

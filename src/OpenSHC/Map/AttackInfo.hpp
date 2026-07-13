@@ -51,7 +51,7 @@ namespace Map {
         int keepCon; // 0x00020DF8 length: 4
         int counter; // 0x00020DFC length: 4
         undefined1 padding_0x20e00[4]; // 0x00020E00 length: 4
-        int field86627_0x20e04; // 0x00020E04 length: 4
+        int nAttackWaveScaleFactor; // 0x00020E04 length: 4
         int index; // 0x00020E08 length: 4
         undefined1 padding_0x20e0c[340]; // 0x00020E0C length: 340
         int catapults; // 0x00020F60 length: 4
@@ -59,7 +59,7 @@ namespace Map {
         int pikemenSwordsmenAndMore; // 0x00020F68 length: 4
         int laddermen; // 0x00020F6C length: 4
         int spearmenAndMacemen; // 0x00020F70 length: 4
-        int field86974_0x20f74; // 0x00020F74 length: 4
+        int nAttackWaveCount; // 0x00020F74 length: 4
         int attacker; // 0x00020F78 length: 4
         undefined1 padding_0x20f7c[4]; // 0x00020F7C length: 4
         int aiTroops; // 0x00020F80 length: 4
@@ -69,7 +69,7 @@ namespace Map {
         int unknownOne_0x20f90; // 0x00020F90 length: 4
         int scaleZone; // 0x00020F94 length: 4
         int field86989_0x20f98; // 0x00020F98 length: 4
-        int field86990_0x20f9c; // 0x00020F9C length: 4
+        int nAttackStartedFlag; // 0x00020F9C length: 4
         int someCounter1; // 0x00020FA0 length: 4
         undefined1 padding_0x20fa4[4]; // 0x00020FA4 length: 4
         short nof_fpointsArray[50][8]; // 0x00020FA8 length: 800
@@ -78,22 +78,22 @@ namespace Map {
         int lowTroopValueRelated; // 0x00021C3C length: 4
         int size; // 0x00021C40 length: 4
         int value10; // 0x00021C44 length: 4
-        int field89417_0x21c48; // 0x00021C48 length: 4
-        int field89418_0x21c4c; // 0x00021C4C length: 4
+        int aiAttackWaveCounter; // 0x00021C48 length: 4
+        int aiAttackWaveTarget; // 0x00021C4C length: 4
         int casDis; // 0x00021C50 length: 4
         undefined1 padding_0x21c54[16036]; // 0x00021C54 length: 16036
         int zoneSize; // 0x00025AF8 length: 4
         int someDistanceLimit; // 0x00025AFC length: 4
-        int field105458_0x25b00; // 0x00025B00 length: 4
+        int nActiveAttackWaveCount; // 0x00025B00 length: 4
         int playerTotalTroopValueArray[9]; // 0x00025B04 length: 36
-        int field105460_0x25b28; // 0x00025B28 length: 4
+        int nTotalTroopValue; // 0x00025B28 length: 4
         int playerTotalTroopValueOfTroopsNearKeep[9]; // 0x00025B2C length: 36
         undefined1 padding_0x25b50[20480]; // 0x00025B50 length: 20480
         int someIntArray2[50]; // 0x0002AB50 length: 200
         undefined1 padding_0x2ac18[1596]; // 0x0002AC18 length: 1596
-        AttackInfoPitchRelated field127539_0x2b254[100]; // 0x0002B254 length: 800
-        int field127540_0x2b574; // 0x0002B574 length: 4
-        int field127541_0x2b578; // 0x0002B578 length: 4
+        AttackInfoPitchRelated pAttackTargetTiles[100]; // 0x0002B254 length: 800
+        int aiCastleDefenseState; // 0x0002B574 length: 4
+        int aiCastleDefenseTrigger; // 0x0002B578 length: 4
         short unitIDArray_0x2b57c[1000]; // 0x0002B57C length: 2000
         int unitIDIndex_0x2bd4c; // 0x0002BD4C length: 4
         int tileArray_0x2bd50[200]; // 0x0002BD50 length: 800
@@ -127,7 +127,7 @@ namespace Map {
         byte unknownByteArray02[50]; // 0x000308C2 length: 50
         byte attackWavePlayerIDArray[50]; // 0x000308F4 length: 50
         byte someSinglePlayerScore[50][10]; // 0x00030926 length: 500
-        short field127592_0x30b1a[50]; // 0x00030B1A length: 100
+        short pAiAttackWaveArray[50]; // 0x00030B1A length: 100
         undefined1 padding_0x30b7e[2]; // 0x00030B7E length: 2
         TribeSizesPerTribeType aiTribeSizesPerTribeType; // 0x00030B80 length: 160
         int supportPoints; // 0x00030C20 length: 4
@@ -158,7 +158,7 @@ namespace Map {
         int moat3; // 0x0003FC4C length: 4
         AttackInfoSubArrayElement1 moatValuesArray[562]; // 0x0003FC50 length: 8992
         int createTribeAmount; // 0x00041F70 length: 4
-        EngineerBuildingAndCountPair field127642_0x41f74[250]; // 0x00041F74 length: 2000
+        EngineerBuildingAndCountPair pSiegeEngineerAssignments[250]; // 0x00041F74 length: 2000
         undefined1 padding_0x42744[4]; // 0x00042744 length: 4
         int people1; // 0x00042748 length: 4
         int people2; // 0x0004274C length: 4
@@ -179,9 +179,9 @@ namespace Map {
         int unknownSignpostRelatedArray; // 0x0004690C length: 4
         undefined1 padding_0x46910[196]; // 0x00046910 length: 196
         int field128077_0x469d4; // 0x000469D4 length: 4
-        int field128078_0x469d8; // 0x000469D8 length: 4
-        int field128079_0x469dc; // 0x000469DC length: 4
-        int field128080_0x469e0; // 0x000469E0 length: 4
+        int aiAttackWaveMusicState; // 0x000469D8 length: 4
+        int enemyUnitsNearKeepCount; // 0x000469DC length: 4
+        int buildingsUnderAttackCount; // 0x000469E0 length: 4
         int knights; // 0x000469E4 length: 4
         int ranged; // 0x000469E8 length: 4
         undefined1 padding_0x469ec[8]; // 0x000469EC length: 8

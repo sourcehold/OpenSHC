@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "OpenSHC/UI/Enums/MenuItemHandleState.hpp"
+#include "OpenSHC/UI/Enums/MenuItemHandleStateInt.hpp"
 #include "OpenSHC/UI/FwdMenuMenuItem.hpp"
 #include "OpenSHC/UI/MenuItem.hpp"
 
@@ -16,7 +16,7 @@ namespace OpenSHC {
 namespace UI {
 
     using OpenSHC::UI::MenuItem;
-    using OpenSHC::UI::Enums::MenuItemHandleState;
+    using OpenSHC::UI::Enums::MenuItemHandleStateInt;
 
 #pragma pack(push, 1)
 
@@ -52,7 +52,7 @@ namespace UI {
         // Constructor
         Menu* Constructor_Menu(MenuItem* menuItemArrayAddress);
 
-        void handleMenuItems(MenuItemHandleState funcIndex);
+        void handleMenuItems(MenuItemHandleStateInt funcIndex);
 
         void updateMenuButtons();
 

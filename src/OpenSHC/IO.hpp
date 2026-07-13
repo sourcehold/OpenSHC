@@ -20,7 +20,7 @@ namespace IO {
 
     void __cdecl Base64EncodeInit(Base64State* state);
 
-    byte __stdcall Base64EncodeCharacterLookup(char param_1);
+    undefined __cdecl Base64EncodeCharacterLookup();
 
     int __cdecl Base64Encode(byte* input, int length, undefined* output, Base64State* state);
 

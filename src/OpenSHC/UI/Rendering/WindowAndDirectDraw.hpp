@@ -10,7 +10,6 @@
 
 #include "OpenSHC/Rendering/ColorModeInt.hpp"
 #include "OpenSHC/Rendering/ScreenResolutionArrayStruct.hpp"
-#include "OpenSHC/Rendering/ScreenResolutionEnum.hpp"
 #include "OpenSHC/Rendering/ScreenResolutionEnumInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -24,7 +23,6 @@ namespace UI {
 
         using OpenSHC::Rendering::ColorModeInt;
         using OpenSHC::Rendering::ScreenResolutionArrayStruct;
-        using OpenSHC::Rendering::ScreenResolutionEnum;
         using OpenSHC::Rendering::ScreenResolutionEnumInt;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
@@ -103,7 +101,7 @@ namespace UI {
 
             void finalizeDirectDrawShutdown();
 
-            void adjustForNotExclusiveFullscreenUnk(LPRECT destinationRect, LPRECT sourceRect);
+            void clampBlitRectsToScreen(LPRECT destinationRect, LPRECT sourceRect);
 
             BOOLEnum restoreDXSurfaces();
 
@@ -117,7 +115,7 @@ namespace UI {
 
             void createCrusaderWindow(HINSTANCE hInstance, LPCSTR windowName, uint cursorResource);
 
-            void prepareWindowAndDDrawUnk();
+            void reinitWindowAndDirectDraw();
 
             void renderBltAndFlip(int param_1);
 
@@ -131,7 +129,7 @@ namespace UI {
 
             void reinitWindow();
 
-            void prepareWindowAndDDraw_2Unk(BOOLEnum runAsExclusiveFullscreen, ScreenResolutionEnum resEnum);
+            void reinitWindowAndDirectDrawWithMode(BOOLEnum runAsExclusiveFullscreen, ScreenResolutionEnumInt resEnum);
 
             void takeScreenshot(int param_1);
         };

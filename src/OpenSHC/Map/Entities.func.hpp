@@ -37,13 +37,13 @@ namespace Map {
             &OpenSHC::Map::Entities::UpdateCrossbowArrowEntity)
         UpdateCrossbowArrowEntity;
 
-        MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00401E20, &OpenSHC::Map::Entities::UpdateEntity_20_37)
-        UpdateEntity_20_37;
+        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00401E20,
+            &OpenSHC::Map::Entities::UpdateBallistaBoltEntity)
+        UpdateBallistaBoltEntity;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00401EA0, &OpenSHC::Map::Entities::UpdateEntity_21)
-        UpdateEntity_21;
+            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00401EA0, &OpenSHC::Map::Entities::UpdateDustCloudEntity)
+        UpdateDustCloudEntity;
 
         MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00401FF0,
             &OpenSHC::Map::Entities::UpdateEntity_PoisonCloud)
@@ -54,16 +54,16 @@ namespace Map {
         UpdateEntity_CowFlying;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00402260, &OpenSHC::Map::Entities::UpdateEntity_26)
-        UpdateEntity_26;
+            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00402260, &OpenSHC::Map::Entities::UpdateExplosionEntity)
+        UpdateExplosionEntity;
 
         MACRO_FUNCTION_RESOLVER(
             void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00402330, &OpenSHC::Map::Entities::UpdateEntity_27)
         UpdateEntity_27;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004023A0, &OpenSHC::Map::Entities::UpdateEntity_28)
-        UpdateEntity_28;
+            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004023A0, &OpenSHC::Map::Entities::UpdateCrowEntity)
+        UpdateCrowEntity;
 
         MACRO_FUNCTION_RESOLVER(
             uint(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004023F0, &OpenSHC::Map::Entities::UpdateEntity_29)

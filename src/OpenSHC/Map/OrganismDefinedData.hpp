@@ -22,8 +22,10 @@ namespace Map {
     typedef struct OrganismDefinedData {
 
         undefined1 padding_0x0[4]; // 0x00000000 length: 4
-        NoArgCallback* PTR_FUN_UpdateTree[20]; // 0x00000004 length: 80
-        NoArgCallback* PTR_RockTypeFunctions[20]; // 0x00000054 length: 80
+        NoArgCallback* PTR_FUN_UpdateTree; // 0x00000004 length: 4
+        undefined1 padding_0x8[76]; // 0x00000008 length: 76
+        NoArgCallback* PTR_RockTypeFunctions; // 0x00000054 length: 4
+        undefined1 padding_0x58[76]; // 0x00000058 length: 76
         int DAT_TreeRelated1[20][7]; // 0x000000A4 length: 560
         int DAT_TreeRelated2[20][7]; // 0x000002D4 length: 560
         int DAT_TreeStageLevels[20][7]; // 0x00000504 length: 560

@@ -13,12 +13,12 @@ namespace OpenSHC {
 namespace Synchrony_Func {
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004AE7C0, &OpenSHC::Synchrony::clearHoveredAI)
-    clearHoveredAI;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004AE7C0, &OpenSHC::Synchrony::clearLobbyHoveredAI)
+    clearLobbyHoveredAI;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004AEA10, &OpenSHC::Synchrony::syncPlayerGroupArrays)
-    syncPlayerGroupArrays;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004AEA10, &OpenSHC::Synchrony::snapshotPlayerGroups)
+    snapshotPlayerGroups;
 
 } // namespace Synchrony_Func
 } // namespace OpenSHC

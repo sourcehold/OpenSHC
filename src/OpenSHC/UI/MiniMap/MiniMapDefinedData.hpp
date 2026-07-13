@@ -20,34 +20,34 @@ namespace UI {
         // SIZE: 0x000002C4
         typedef struct MiniMapDefinedData {
 
-            int field0_0x0[8]; // 0x00000000 length: 32
+            int tileColorsUnkCfg_0x0[8]; // 0x00000000 length: 32
             ushort field1_0x20[2]; // 0x00000020 length: 4
-            ushort field2_0x24[16]; // 0x00000024 length: 32
-            ushort field3_0x44[8]; // 0x00000044 length: 16
-            ushort field4_0x54[8]; // 0x00000054 length: 16
+            ushort tileColorsUnkCfg_0x24[16]; // 0x00000024 length: 32
+            ushort tileColorsUnkCfg_0x44[8]; // 0x00000044 length: 16
+            ushort tileColorsUnkCfg_0x54[8]; // 0x00000054 length: 16
             ushort field5_0x64[8]; // 0x00000064 length: 16
-            ushort field6_0x74[8]; // 0x00000074 length: 16
-            ushort field7_0x84[16]; // 0x00000084 length: 32
+            ushort minimapCfg_0x74[8]; // 0x00000074 length: 16
+            ushort tileColorsUnkCfg_0x84[16]; // 0x00000084 length: 32
             ushort DAT_MinimapColorArray[8]; // 0x000000A4 length: 16
-            ushort field9_0xb4[8]; // 0x000000B4 length: 16
+            ushort tileColorsUnkCfg_0xb4[8]; // 0x000000B4 length: 16
             ushort field10_0xc4[8]; // 0x000000C4 length: 16
-            ushort field11_0xd4[8]; // 0x000000D4 length: 16
-            ushort field12_0xe4[8]; // 0x000000E4 length: 16
-            ushort field13_0xf4[8]; // 0x000000F4 length: 16
-            ushort field14_0x104[16]; // 0x00000104 length: 32
-            ushort field15_0x124[16]; // 0x00000124 length: 32
-            ushort field16_0x144[8]; // 0x00000144 length: 16
-            ushort field17_0x154[8]; // 0x00000154 length: 16
-            ushort field18_0x164[8]; // 0x00000164 length: 16
-            ushort field19_0x174[8]; // 0x00000174 length: 16
-            ushort field20_0x184[52]; // 0x00000184 length: 104
+            ushort tileColorsUnkCfg_0xd4[8]; // 0x000000D4 length: 16
+            ushort tileColorsUnkCfg_0xe4[8]; // 0x000000E4 length: 16
+            ushort tileColorsUnkCfg_0xf4[8]; // 0x000000F4 length: 16
+            ushort tileColorsUnkCfg_0x104[16]; // 0x00000104 length: 32
+            ushort tileColorsUnkCfg_0x124[16]; // 0x00000124 length: 32
+            ushort minimapCfg_0x144[8]; // 0x00000144 length: 16
+            ushort tileColorsUnkCfg_0x154[8]; // 0x00000154 length: 16
+            ushort tileColorsUnkCfg_0x164[8]; // 0x00000164 length: 16
+            ushort tileColorsUnkCfg_0x174[8]; // 0x00000174 length: 16
+            ushort tileColorsUnkCfg_0x184[52]; // 0x00000184 length: 104
             ushort DAT_PlayerColorColors[2][2]; // 0x000001EC length: 8
             ushort DAT_AnimalMinimapColour_RGB15; // 0x000001F4 length: 2
             ushort DAT_AnimalMinimapColour_RGB16; // 0x000001F6 length: 2
             ushort field24_0x1f8; // 0x000001F8 length: 2
             ushort field25_0x1fa; // 0x000001FA length: 2
             ushort DAT_PlayerColorColors_entry2; // 0x000001FC length: 2
-            ushort field27_0x1fe; // 0x000001FE length: 2
+            ushort minimapCfg_0x1fe; // 0x000001FE length: 2
             ushort field28_0x200; // 0x00000200 length: 2
             ushort field29_0x202; // 0x00000202 length: 2
             ushort field30_0x204; // 0x00000204 length: 2
@@ -63,7 +63,7 @@ namespace UI {
             ushort field40_0x218; // 0x00000218 length: 2
             ushort field41_0x21a; // 0x0000021A length: 2
             ushort field42_0x21c; // 0x0000021C length: 2
-            ushort field43_0x21e; // 0x0000021E length: 2
+            ushort minimapCfg_0x21e; // 0x0000021E length: 2
             ushort field44_0x220; // 0x00000220 length: 2
             ushort field45_0x222; // 0x00000222 length: 2
             ushort field46_0x224; // 0x00000224 length: 2
@@ -110,9 +110,9 @@ namespace UI {
             ushort field87_0x276; // 0x00000276 length: 2
             ushort field88_0x278; // 0x00000278 length: 2
             ushort field89_0x27a; // 0x0000027A length: 2
-            MapColorRelatedStructure1 field90_0x27c[8]; // 0x0000027C length: 64
-            int field91_0x2bc; // 0x000002BC length: 4
-            int field92_0x2c0; // 0x000002C0 length: 4
+            MapColorRelatedStructure1 minimapCfg_0x27c[8]; // 0x0000027C length: 64
+            int inGameMenu_KeepEnclosedSymCfg_0x2bc; // 0x000002BC length: 4
+            int minimapCfg_0x2c0; // 0x000002C0 length: 4
 
         } MiniMapDefinedData;
 #pragma pack(pop)

@@ -36,21 +36,20 @@ namespace Map {
             void calculateOrientation(
                 int currentXPosition, int currentYPosition, int destinationXPosition, int destinationYPosition);
 
-            void calculateOrientationFromTiles(int param_1, int param_2);
+            void calculateOrientationBetweenTiles(int param_1, int param_2);
 
             void calculatePreferredRelativeOrientation(int param_1, int param_2, int param_3, int param_4);
 
-            void somethingWithProjectileDistance(int x, int y, int targetX, int targetY);
+            void computeOrientationToTarget(int x, int y, int targetX, int targetY);
 
             int setAxisBasedDistanceResult(
                 int destinationXPosition, int destinationYPosition, int fromXPosition, int fromYPosition);
 
-            int getMouseVectorLengthBasedOnDirection(
-                int param_1, int param_2, int param_3, int param_4, int orientation);
+            undefined getMouseVectorLengthBasedOnDirection();
 
             uint computeHash(int byteCount, int* address);
 
-            uint computeMaskedBitAccumulator(int param_1, uint* param_2, uint param_3);
+            uint computeMaskedRotatingHash(int param_1, uint* param_2, uint param_3);
         };
 
         static_assert_cpp98_obj(sizeof(DirectionAlgorithmState) == 20, DirectionAlgorithmState);

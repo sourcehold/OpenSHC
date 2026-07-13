@@ -30,7 +30,7 @@ namespace Rendering {
         WindowInformation() {};
         ~WindowInformation() {};
 
-        void storeWindowRectangleInfoUnk(LONG param_1, LONG param_2, LONG param_3, LONG param_4);
+        void storeGameWindowRect(LONG param_1, LONG param_2, LONG param_3, LONG param_4);
     };
 
     static_assert_cpp98_obj(sizeof(WindowInformation) == 64, WindowInformation);

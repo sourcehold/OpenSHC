@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "OpenSHC/IO/Graphics/GmID.hpp"
+#include "OpenSHC/IO/Graphics/GmIDInt.hpp"
 #include "OpenSHC/Map/Floaters/Floater.hpp"
 #include "OpenSHC/Map/Matrices/TranslationMatrixTriplet.hpp"
 #include "OpenSHC/Rendering/UnitRenderHelpStructure.hpp"
@@ -18,7 +18,7 @@
 namespace OpenSHC {
 namespace Rendering {
 
-    using OpenSHC::IO::Graphics::GmID;
+    using OpenSHC::IO::Graphics::GmIDInt;
     using OpenSHC::Map::Floaters::Floater;
     using OpenSHC::Map::Matrices::TranslationMatrixTriplet;
     using OpenSHC::Rendering::UnitRenderHelpStructure;
@@ -99,13 +99,13 @@ namespace Rendering {
         ~ViewportRenderState() {};
 
         // Constructor
-        ViewportRenderState* constructViewportRenderState();
+        ViewportRenderState* Constructor_ViewportRenderState();
 
         BOOLEnum xyAreValid(uint x, uint y);
 
         int translateXYToTile(int x, int y);
 
-        int computeTileXOffset(int param_1, int param_2);
+        int tileIndexToColumn(int param_1, int param_2);
 
         void setTileSystemMemoryLookupArrays();
 
@@ -113,7 +113,7 @@ namespace Rendering {
 
         void resetBatchedRender();
 
-        void renderAssassinClimbingOverlay(int param_1);
+        void renderAssassinClimbOverlay(int param_1);
 
         void scheduleUnitForBatchedRendering(undefined4 unitIDOrStatus, undefined4 drawX, undefined4 drawY,
             undefined4 imageID, undefined4 blendStrength, undefined4 gmID, int param_7);
@@ -128,22 +128,21 @@ namespace Rendering {
 
         void setViewportBasedOnMapSize();
 
-        void setupMouseTileXY2();
+        undefined setupMouseTileXY2();
 
-        void setupMouseTileXY();
+        undefined setupMouseTileXY();
 
         void focusOnTile(int tile);
 
-        void computeMouseTileFromScreenPosition(int param_1, int param_2);
+        void computeHoveredTileWithHeight(int param_1, int param_2);
 
-        void clearAllFloatingLayerElements();
+        void clearAllFloaters();
 
-        void createFloatingLayerElement(GmID gmID, int imageID, int imageX, int imageY, int tile, int variation);
+        void creataAFloatingLayerElement(GmIDInt gmID, int imageID, int imageX, int imageY, int tile, int variation);
 
         void renderDebugDataMousePointing(int x, int y, int width, int height);
 
-        void setupViewport(
-            undefined4 windowX, undefined4 windowY, undefined4 screenPixelWidth, undefined4 screenPixelHeight);
+        undefined setupViewport();
 
         void resetupViewport(int zoomUnk);
 
@@ -153,13 +152,13 @@ namespace Rendering {
 
         void updateBuildingPreviewPosition(int mouseXScreenSpace, int mouseYScreenSpace);
 
-        void saveFocusTileAndCenterPreview();
+        void centerBuildingPreview();
 
-        void restoreFocusTile();
+        void focusOnSavedTile();
 
         void focusOnCoordinate(int x, int y);
 
-        void createFloatingTextElement(int param_1, int param_2, int param_3, int param_4, int param_5);
+        void addFloatingDisplayElement(int param_1, int param_2, int param_3, int param_4, int param_5);
 
         void renderMap();
     };

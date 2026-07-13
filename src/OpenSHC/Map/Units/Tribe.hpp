@@ -39,7 +39,7 @@ namespace Map {
             short facingDirection_1; // 0x00000020 length: 2
             short facingDirection_2; // 0x00000022 length: 2
             short facingDirection_3; // 0x00000024 length: 2
-            short field24_0x26; // 0x00000026 length: 2
+            short nTribeMovementRunUpTime; // 0x00000026 length: 2
             SomeTribeBehaviorTypeShort tribeBehaviorType; // 0x00000028 length: 2
             undefined1 padding_0x2a[2]; // 0x0000002A length: 2
             short someUpdateUpperLimit; // 0x0000002C length: 2
@@ -54,7 +54,7 @@ namespace Map {
             short countdown2; // 0x000001E8 length: 2
             undefined1 padding_0x1ea[6]; // 0x000001EA length: 6
             short freeUnitSpeeds; // 0x000001F0 length: 2
-            short field56_0x1f2; // 0x000001F2 length: 2
+            short nPairedSupportTribeID; // 0x000001F2 length: 2
             int uid2; // 0x000001F4 length: 4
             short tribeID; // 0x000001F8 length: 2
             short minimumMovementSpeed; // 0x000001FA length: 2
@@ -62,30 +62,30 @@ namespace Map {
             short maximumMovementSpeed; // 0x000001FE length: 2
             short field62_0x200; // 0x00000200 length: 2
             short field63_0x202; // 0x00000202 length: 2
-            short field64_0x204; // 0x00000204 length: 2
+            short nAnimalBehaviorPhase; // 0x00000204 length: 2
             short isRallyingUnk; // 0x00000206 length: 2
             short field66_0x208; // 0x00000208 length: 2
             short unitsHealthPercentage; // 0x0000020A length: 2
             short field68_0x20c; // 0x0000020C length: 2
             short targetX; // 0x0000020E length: 2
             short targetY; // 0x00000210 length: 2
-            short field71_0x212; // 0x00000212 length: 2
+            short tribeInstructionActiveFlag_0x212; // 0x00000212 length: 2
             undefined1 padding_0x214[20]; // 0x00000214 length: 20
             UnitTypeShort unitType; // 0x00000228 length: 2
-            short field93_0x22a; // 0x0000022A length: 2
+            short nTribeStanceCheckValue; // 0x0000022A length: 2
             undefined1 padding_0x22c[12]; // 0x0000022C length: 12
             short rallyPointArray[9][2]; // 0x00000238 length: 36
             undefined1 padding_0x25c[4]; // 0x0000025C length: 4
             short currentRallyPointIndex; // 0x00000260 length: 2
             short rallyPointCount; // 0x00000262 length: 2
             undefined1 padding_0x264[20]; // 0x00000264 length: 20
-            short field133_0x278; // 0x00000278 length: 2
-            short field134_0x27a; // 0x0000027A length: 2
-            short unkIsAnimalTribe; // 0x0000027C length: 2
-            short field136_0x27e; // 0x0000027E length: 2
-            short field137_0x280; // 0x00000280 length: 2
-            short field138_0x282; // 0x00000282 length: 2
-            short field139_0x284; // 0x00000284 length: 2
+            short nScatterPhaseTimer; // 0x00000278 length: 2
+            short nTribeSpawnedFlag; // 0x0000027A length: 2
+            short nIsAnimalTribe; // 0x0000027C length: 2
+            short nAnimalMoveDelay; // 0x0000027E length: 2
+            short nAnimalSpawnCountHalf; // 0x00000280 length: 2
+            short nAnimalSpawnCount; // 0x00000282 length: 2
+            short nAnimalSpawnIndex; // 0x00000284 length: 2
             short unknownCounter01; // 0x00000286 length: 2
             undefined1 padding_0x288[2]; // 0x00000288 length: 2
             short unknownBool02; // 0x0000028A length: 2
@@ -113,7 +113,7 @@ namespace Map {
             UnitStanceEnumShort unitStance; // 0x000002B8 length: 2
             short orientation; // 0x000002BA length: 2
             short someCounter1; // 0x000002BC length: 2
-            short field168_0x2be; // 0x000002BE length: 2
+            short nTribeInstructionValue; // 0x000002BE length: 2
             short someUnitID; // 0x000002C0 length: 2
             undefined1 padding_0x2c2[2]; // 0x000002C2 length: 2
             int someUnitUID; // 0x000002C4 length: 4

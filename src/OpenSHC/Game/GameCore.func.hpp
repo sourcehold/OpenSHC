@@ -3,29 +3,29 @@
 */
 
 #include "OpenSHC/Game/GameCore.hpp"
-#include "OpenSHC/UI/Enums/MenuViewType.hpp"
+#include "OpenSHC/UI/Enums/MenuViewTypeInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
 namespace Game {
     namespace GameCore_Func {
 
-        using OpenSHC::UI::Enums::MenuViewType;
+        using OpenSHC::UI::Enums::MenuViewTypeInt;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         MACRO_FUNCTION_RESOLVER(
-            void (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x0046B2F0, &GameCore::setViewOnExitUnk)
-        setViewOnExitUnk;
+            void (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x0046B2F0, &GameCore::setMenuViewOnExit)
+        setMenuViewOnExit;
 
         MACRO_FUNCTION_RESOLVER(
             void (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x0046B300, &GameCore::setTabToSwitchTo)
         setTabToSwitchTo;
 
         MACRO_FUNCTION_RESOLVER(
-            void (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x0046B320, &GameCore::swapBuildMenuTab)
-        swapBuildMenuTab;
+            void (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x0046B320, &GameCore::toggleSiegeTentBuildTab)
+        toggleSiegeTentBuildTab;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (GameCore::*)(MenuViewType, int), false, Address::SHC_3BB0A8C1_0x0046B340, &GameCore::switchToMenuView)
+        MACRO_FUNCTION_RESOLVER(void (GameCore::*)(MenuViewTypeInt, int), false, Address::SHC_3BB0A8C1_0x0046B340,
+            &GameCore::switchToMenuView)
         switchToMenuView;
 
         MACRO_FUNCTION_RESOLVER(
@@ -33,8 +33,8 @@ namespace Game {
         processMenuViewSwitch;
 
         MACRO_FUNCTION_RESOLVER(
-            void (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x0046BB20, &GameCore::viewportAndScrollingRelated)
-        viewportAndScrollingRelated;
+            void (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x0046BB20, &GameCore::updateViewportScrollCountdown)
+        updateViewportScrollCountdown;
 
         MACRO_FUNCTION_RESOLVER(
             BOOLEnum (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x0046BB60, &GameCore::getAreWeInAInGameMenu)
@@ -49,16 +49,16 @@ namespace Game {
         removeJesterAndLadyUnitsInCertainMissions;
 
         MACRO_FUNCTION_RESOLVER(
-            void (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x0046BC90, &GameCore::removeLadyAndJester)
-        removeLadyAndJester;
+            void (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x0046BC90, &GameCore::removePlayerLadyAndJester)
+        removePlayerLadyAndJester;
 
         MACRO_FUNCTION_RESOLVER(
             BOOLEnum (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x0046BD20, &GameCore::isGameHaltingMenuOpen)
         isGameHaltingMenuOpen;
 
         MACRO_FUNCTION_RESOLVER(
-            void (GameCore::*)(int), false, Address::SHC_3BB0A8C1_0x0046BD50, &GameCore::setStartDateUnk)
-        setStartDateUnk;
+            void (GameCore::*)(int), false, Address::SHC_3BB0A8C1_0x0046BD50, &GameCore::computeTrailMissionStartDates)
+        computeTrailMissionStartDates;
 
         MACRO_FUNCTION_RESOLVER(
             void (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x004718F0, &GameCore::incrementMissionProgress)
@@ -69,8 +69,8 @@ namespace Game {
         switchToScenarioDescriptionMenuView;
 
         MACRO_FUNCTION_RESOLVER(
-            void (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x00471A00, &GameCore::incrementMission)
-        incrementMission;
+            void (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x00471A00, &GameCore::advanceToNextMission)
+        advanceToNextMission;
 
         MACRO_FUNCTION_RESOLVER(
             void (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x00471AA0, &GameCore::hideOrUnhideUI)

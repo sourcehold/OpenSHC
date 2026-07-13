@@ -9,14 +9,12 @@
 #pragma once
 
 #include "OpenSHC/IO/Graphics/GmIDInt.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
 namespace UI {
     namespace Rendering {
 
         using OpenSHC::IO::Graphics::GmIDInt;
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
 
@@ -39,7 +37,7 @@ namespace UI {
             ButtonGmData() {};
             ~ButtonGmData() {};
 
-            int getPictureNumberInGm(BOOLEnum buttonIsInteracting);
+            undefined getPictureNumberInGm();
         };
 
         static_assert_cpp98_obj(sizeof(ButtonGmData) == 28, ButtonGmData);

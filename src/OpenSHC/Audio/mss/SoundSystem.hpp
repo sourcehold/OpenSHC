@@ -8,9 +8,9 @@
 
 #pragma once
 
-#include "OpenSHC/Audio/MSS/SoundFlagsAndLoopCount.hpp"
-#include "OpenSHC/Audio/MSS/enums/SHC_SoundStream.hpp"
-#include "OpenSHC/DE/SHCDE/eMusicIDs.hpp"
+#include "OpenSHC/Audio/MSS/UnkSoundFlagsAndLoopCount.hpp"
+#include "OpenSHC/Audio/MSS/enums/SHC_SoundStreamInt.hpp"
+#include "OpenSHC/DE/SHCDE/eMusicIDsInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "Mss32.h"
@@ -20,9 +20,9 @@ namespace OpenSHC {
 namespace Audio {
     namespace MSS {
 
-        using OpenSHC::Audio::MSS::SoundFlagsAndLoopCount;
-        using OpenSHC::Audio::MSS::enums::SHC_SoundStream;
-        using OpenSHC::DE::SHCDE::eMusicIDs;
+        using OpenSHC::Audio::MSS::UnkSoundFlagsAndLoopCount;
+        using OpenSHC::Audio::MSS::enums::SHC_SoundStreamInt;
+        using OpenSHC::DE::SHCDE::eMusicIDsInt;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
@@ -35,7 +35,7 @@ namespace Audio {
             BOOLEnum waveOutOpenUnk_0x8; // 0x00000008 length: 4
             HSTREAM stream_0xc[5]; // 0x0000000C length: 20
             int streamActiveUnk_0x20[5]; // 0x00000020 length: 20
-            SoundFlagsAndLoopCount streamFlagsUnkAndLoopCount_0x34[5]; // 0x00000034 length: 20
+            UnkSoundFlagsAndLoopCount streamFlagsUnkAndLoopCount_0x34[5]; // 0x00000034 length: 20
             int streamFileVolumeNextUnk_0x48[5]; // 0x00000048 length: 20
             int streamFileVolumeCurrentUnk_0x5c[5]; // 0x0000005C length: 20
             int streamVolume[5]; // 0x00000070 length: 20
@@ -51,7 +51,8 @@ namespace Audio {
             void* sampleBufferPtrUnk_0x17c[2]; // 0x0000017C length: 8
             int sampleBufferSizeUnk_0x184; // 0x00000184 length: 4
             dword mbr_0x188; // 0x00000188 length: 4
-            HSAMPLE sample[32]; // 0x0000018C length: 128
+            dword mbr_0x18c; // 0x0000018C length: 4
+            HSAMPLE sample_0x190[31]; // 0x00000190 length: 124
             int sampleSoundIndex_0x20c[32]; // 0x0000020C length: 128
             int soundFileCurrSampleNum_0x28c[1000]; // 0x0000028C length: 4000
             void* soundFileDataPointerArray_0x122c[1000]; // 0x0000122C length: 4000
@@ -75,25 +76,23 @@ namespace Audio {
             SoundSystem() {};
             ~SoundSystem() {};
 
-            void endSpeechStreamsAndResetLoopFlags();
+            void stopSpeechStreams();
 
             void stopMusicPlayback();
 
-            void endSoundStreamsUnk();
+            void endAllSoundStreams();
 
-            void endSoundStream(SHC_SoundStream sndStreamIndex);
+            void endSoundStream(SHC_SoundStreamInt sndStreamIndex);
 
-            BOOLEnum isSampleOrStreamPlaying(SHC_SoundStream streamIndex);
+            BOOLEnum isSampleOrStreamPlaying(SHC_SoundStreamInt streamIndex);
 
             BOOLEnum shouldSoundXNotBePlaying();
 
-            void setStreamAndSampleVolumeUnk(SHC_SoundStream sndStreamIndex, int volumeParam);
+            void setSoundStreamVolume(SHC_SoundStreamInt sndStreamIndex, int volumeParam);
 
-            void restoreMusicVolumeAfterSpeechEnds();
+            void updateMusicStreamVolume();
 
-            int loadSoundFileAndGetIndex(char* fileName);
-
-            void findSamplePlaceForSoundUnk(int soundIndex);
+            void allocateSampleSlotForSound(int soundIndex);
 
             void setupSampleForNextSound(int soundIndex, int sampleVolumePercentage, int samplePan);
 
@@ -101,31 +100,29 @@ namespace Audio {
 
             void playSound(int soundIndex);
 
-            void setVolumeUnk(int streamIndex, int volume);
+            void setStreamOrSampleVolume(int streamIndex, int volume);
 
-            void deactivateSoundFromMenuFuncUnk();
+            void deactivateAllSound();
 
             void pauseAudioSample();
 
             void resumeAudioSample();
 
-            void mapLoadingAndLaunchGameRelated1();
+            void resetSoundAndBattleStateOnLaunch();
 
-            void setupVolumeAndSoundID(eMusicIDs soundID);
+            void setupVolumeAndSoundID(eMusicIDsInt soundID);
 
-            void setupVolumeAndSoundIDWithMultiplier(eMusicIDs soundID, int soundMultiplier);
+            void setupVolumeAndSoundIDWithMultiplier(eMusicIDsInt soundID, int soundMultiplier);
 
-            void markMusicChangePending();
+            void setSoundSystemFlag();
 
             void setSomeSoundTime();
 
             void setupVolumeAndSoundID0xF0_100();
 
-            void selectAndPlayMoodBasedMusic();
-
             void setSection1079_28_4_(int param_1);
 
-            void playBattleGloryMusicIfConditionsMet();
+            void playBattleGloryMusic();
 
             void playDarMehqOrGlory();
 
@@ -135,9 +132,9 @@ namespace Audio {
 
             void shutdownSoundSystem();
 
-            void playMusicUnk();
+            void serviceMusicStreamBuffer();
 
-            void stopAllActiveSounds();
+            void stopAllSpeechAndSamples();
 
             void endSpeechSoundStreams();
 
@@ -145,18 +142,18 @@ namespace Audio {
 
             void handleBattleEndMusicTransition();
 
-            void playSoundStreamUnk(
-                SHC_SoundStream sndStreamIndex, char* filename, SoundFlagsAndLoopCount flagsAndLoopCount);
+            void playSoundStreamOnSlot(
+                SHC_SoundStreamInt sndStreamIndex, char* filename, UnkSoundFlagsAndLoopCount flagsAndLoopCount);
 
-            void playMusicFileByName(char* filename);
+            void setCurrentSoundFile(char* filename);
 
-            void playOrSetupMusicUnk(char* filename, int someVolumeUnk);
+            void playMusicOnceWithVolume(char* filename, int someVolumeUnk);
 
-            void playOrEndMusicUnk(char* filename, int volume);
+            void playMusicLoopingWithVolume(char* filename, int volume);
 
             void openSound(char* filePath);
 
-            void playOnSfx1SoundStreamOnceOrOnRepeatUnk(char* filename);
+            void playSfx1StreamLooping(char* filename);
 
             void playSoundOnSoundStream2(char* filename);
 
@@ -164,21 +161,21 @@ namespace Audio {
 
             void playSpeechSfx(char* soundFileName);
 
-            void playAmbientStreamWithLoop(char* param_1);
+            void playSoundStreamFile(char* param_1);
 
-            void playSomeMusicUnk(char* filename, SoundFlagsAndLoopCount flagsAndLoop);
+            void playMusicFile(char* filename, UnkSoundFlagsAndLoopCount flagsAndLoop);
 
-            void playOnSfx1SoundStreamUnk(char* soundFileName, SoundFlagsAndLoopCount flagsAndLoopCount);
+            void playSfx1Stream(char* soundFileName, UnkSoundFlagsAndLoopCount flagsAndLoopCount);
 
-            void playSoundOnSfxSoundStream2(char* filename, SoundFlagsAndLoopCount flagsAndLoopCount);
+            void playSoundOnSfxSoundStream2(char* filename, UnkSoundFlagsAndLoopCount flagsAndLoopCount);
 
-            void playSoundOnStream3Unk(char* filename, SoundFlagsAndLoopCount flagsAndLoopCount);
+            void playSpeechOnStream(char* filename, UnkSoundFlagsAndLoopCount flagsAndLoopCount);
 
-            void activateSoundFromMenuFuncUnk();
+            void resumeMusicPlayback();
 
             void playRandomAmbientMusic();
 
-            void playRandomBackgroundMusicUnk();
+            void chooseNextBattleMusicTrack();
 
             void initMiles();
         };

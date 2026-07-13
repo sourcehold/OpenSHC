@@ -43,13 +43,13 @@ namespace Map {
             short drawWidth; // 0x00000018 length: 2
             short drawHeight1; // 0x0000001A length: 2
             undefined1 padding_0x1c[2]; // 0x0000001C length: 2
-            short spriteWidthUnk; // 0x0000001E length: 2
-            short spriteHeightUnk; // 0x00000020 length: 2
+            short nSpriteWidth; // 0x0000001E length: 2
+            short nSpriteHeight; // 0x00000020 length: 2
             short drawXOffset; // 0x00000022 length: 2
             short someDrawYOffset; // 0x00000024 length: 2
             short orientationRelatedPositionX; // 0x00000026 length: 2
             short orientationRelatedPositionY; // 0x00000028 length: 2
-            short field22_0x2a; // 0x0000002A length: 2
+            short renderSpriteBaseOffset; // 0x0000002A length: 2
             int unknownV; // 0x0000002C length: 4
             int field_0x30_animRelated; // 0x00000030 length: 4
             short isSelected; // 0x00000034 length: 2
@@ -63,15 +63,15 @@ namespace Map {
             undefined1 padding_0x4c[4]; // 0x0000004C length: 4
             BOOLEnum animationCycleNumberHasJustIncremented; // 0x00000050 length: 4
             short facingDirectionMapOrientationCorrected; // 0x00000054 length: 2
-            short field41_0x56; // 0x00000056 length: 2
-            short field42_0x58; // 0x00000058 length: 2
+            short nPeasantSubState; // 0x00000056 length: 2
+            short nTribeInstructionPending; // 0x00000058 length: 2
             short field43_0x5a; // 0x0000005A length: 2
-            int field44_0x5c; // 0x0000005C length: 4
-            int field45_0x60; // 0x00000060 length: 4
-            int field46_0x64; // 0x00000064 length: 4
+            int nClimbRenderOffset; // 0x0000005C length: 4
+            int ladderExitSavedValue; // 0x00000060 length: 4
+            int climbState; // 0x00000064 length: 4
             int vanish; // 0x00000068 length: 4
-            short field48_0x6c; // 0x0000006C length: 2
-            short field49_0x6e; // 0x0000006E length: 2
+            short unitControlOrderMode; // 0x0000006C length: 2
+            short unitControlValue; // 0x0000006E length: 2
             byte negativeHeight; // 0x00000070 length: 1
             byte antelopeBasedRngValue; // 0x00000071 length: 1
             undefined1 padding_0x72[2]; // 0x00000072 length: 2
@@ -83,12 +83,12 @@ namespace Map {
             undefined1 heightDiv10; // 0x00000082 length: 1
             undefined1 padding_0x83[1]; // 0x00000083 length: 1
             short field61_0x84; // 0x00000084 length: 2
-            short field62_0x86; // 0x00000086 length: 2
+            short renderPosOffsetY; // 0x00000086 length: 2
             short field63_0x88; // 0x00000088 length: 2
             short drawYOffset; // 0x0000008A length: 2
             UnitLogicStateShort logicalState; // 0x0000008C length: 2
             UnitTypeShort unitType; // 0x0000008E length: 2
-            short field67_0x90; // 0x00000090 length: 2
+            short nIsAttackingTarget; // 0x00000090 length: 2
             undefined1 padding_0x92[2]; // 0x00000092 length: 2
             short moveRelatedFlag; // 0x00000094 length: 2
             short owner; // 0x00000096 length: 2
@@ -112,17 +112,17 @@ namespace Map {
             short destinationYPosition; // 0x000000CA length: 2
             short ladderExitXPosition; // 0x000000CC length: 2
             short ladderExitYPosition; // 0x000000CE length: 2
-            short field103_0xd0; // 0x000000D0 length: 2
-            short field104_0xd2; // 0x000000D2 length: 2
+            short nDamageProcessValue; // 0x000000D0 length: 2
+            short nCatapultStateCounter; // 0x000000D2 length: 2
             int tile; // 0x000000D4 length: 4
             int destinationTilePosition; // 0x000000D8 length: 4
             int previousTilePosition; // 0x000000DC length: 4
             short mimicCurrentXPosition; // 0x000000E0 length: 2
             short mimicCurrentYPosition; // 0x000000E2 length: 2
             int nextTileUnk; // 0x000000E4 length: 4
-            int field111_0xe8; // 0x000000E8 length: 4
-            short destinationX_2Unk; // 0x000000EC length: 2
-            short destinationY_2Unk; // 0x000000EE length: 2
+            int nPositionUpdatedFlag; // 0x000000E8 length: 4
+            short nDestinationX; // 0x000000EC length: 2
+            short nDestinationY; // 0x000000EE length: 2
             short _someX_2; // 0x000000F0 length: 2
             short _someY_2; // 0x000000F2 length: 2
             short moveDelay; // 0x000000F4 length: 2
@@ -143,9 +143,9 @@ namespace Map {
             ushort nextUnitOnTheSameTile; // 0x000002A2 length: 2
             short isSelectable_OR_matchTime; // 0x000002A4 length: 2
             short closestEnemyMicroDistance; // 0x000002A6 length: 2
-            short field135_0x2a8; // 0x000002A8 length: 2
+            short nDestinationPathZone; // 0x000002A8 length: 2
             short targetShootRelated; // 0x000002AA length: 2
-            short field137_0x2ac; // 0x000002AC length: 2
+            short nWorkerProducingFlag; // 0x000002AC length: 2
             short graphicSize; // 0x000002AE length: 2
             int animationCycleNumber; // 0x000002B0 length: 4
             short facingDirection; // 0x000002B4 length: 2
@@ -155,7 +155,7 @@ namespace Map {
             short stateBasedSpeed; // 0x000002BE length: 2
             UnitStateUnion state; // 0x000002C0 length: 2
             UnitStateShort cachedState; // 0x000002C2 length: 2
-            short field150_0x2c4; // 0x000002C4 length: 2
+            short nArcherShootState; // 0x000002C4 length: 2
             UnitStateUnion state_3; // 0x000002C6 length: 2
             short updateTickTracker; // 0x000002C8 length: 2
             UnitTypeShort unitTypeToChangeInto; // 0x000002CA length: 2
@@ -178,12 +178,12 @@ namespace Map {
             int workRelatedC; // 0x000002F4 length: 4
             int av; // 0x000002F8 length: 4
             short working; // 0x000002FC length: 2
-            short field173_0x2fe; // 0x000002FE length: 2
-            short field174_0x300; // 0x00000300 length: 2
+            short nIsRestingFlag; // 0x000002FE length: 2
+            short nUnitRestState; // 0x00000300 length: 2
             short unknownDigMoatOrWallAttackFlag1015; // 0x00000302 length: 2
             short productivityMod100; // 0x00000304 length: 2
             short productivityDiv100; // 0x00000306 length: 2
-            short field178_0x308; // 0x00000308 length: 2
+            short nFadeBehindStructureState; // 0x00000308 length: 2
             short idle; // 0x0000030A length: 2
             short banked; // 0x0000030C length: 2
             short target; // 0x0000030E length: 2
@@ -193,7 +193,7 @@ namespace Map {
             int manningEngineerUIDRef; // 0x0000031C length: 4
             undefined1 padding_0x320[12]; // 0x00000320 length: 12
             byte unknownTestAgainst0_1; // 0x0000032C length: 1
-            char field199_0x32d; // 0x0000032D length: 1
+            char cRabbitState; // 0x0000032D length: 1
             byte disappearFadeAlphaCountdown; // 0x0000032E length: 1
             byte engineerManningSiegeStateRef_checkType; // 0x0000032F length: 1
             int someMatchTimeVariable; // 0x00000330 length: 4
@@ -203,18 +203,18 @@ namespace Map {
             short targetX_2; // 0x0000033A length: 2
             short targetY_2; // 0x0000033C length: 2
             short attackedUnitID; // 0x0000033E length: 2
-            int field210_0x340; // 0x00000340 length: 4
+            int nMeleeTargetRef; // 0x00000340 length: 4
             short shootTargetedUnit; // 0x00000344 length: 2
             short movementType_OR_targetUnitID; // 0x00000346 length: 2
             short workplaceBuildingTilePosition; // 0x00000348 length: 2
             short calculatedMovementSpeed; // 0x0000034A length: 2
             short movementSpeed; // 0x0000034C length: 2
             undefined1 padding_0x34e[2]; // 0x0000034E length: 2
-            int field218_0x350; // 0x00000350 length: 4
-            int field219_0x354; // 0x00000354 length: 4
+            int nUnitTickStamp; // 0x00000350 length: 4
+            int nUnitTickStampAlt; // 0x00000354 length: 4
             short unknownTestAgainst0_2; // 0x00000358 length: 2
             short distanceToEnemyUnitLadders; // 0x0000035A length: 2
-            short field222_0x35c; // 0x0000035C length: 2
+            short nClimbingStateFlag; // 0x0000035C length: 2
             short climbingDirection; // 0x0000035E length: 2
             short unitCanClimb; // 0x00000360 length: 2
             short stoneAmmunition; // 0x00000362 length: 2
@@ -226,10 +226,10 @@ namespace Map {
             short isDisappearingUnk; // 0x00000372 length: 2
             DestinationNeededEnumShort destinationNeeded; // 0x00000374 length: 2
             short unknownStateCopyClimbRelated; // 0x00000376 length: 2
-            short field234_0x378; // 0x00000378 length: 2
-            short field235_0x37a; // 0x0000037A length: 2
-            short field236_0x37c; // 0x0000037C length: 2
-            short field237_0x37e; // 0x0000037E length: 2
+            short nActiveMovementDirection; // 0x00000378 length: 2
+            short nMoveSubTileCounter; // 0x0000037A length: 2
+            short nMoveSubTileCounter2; // 0x0000037C length: 2
+            short nFarmerWorkFlag; // 0x0000037E length: 2
             short substate; // 0x00000380 length: 2
             undefined1 padding_0x382[2]; // 0x00000382 length: 2
             uint fixedRng; // 0x00000384 length: 4
@@ -241,7 +241,7 @@ namespace Map {
             short resourcesGatheredCount; // 0x00000394 length: 2
             short workerIndex; // 0x00000396 length: 2
             short buildingID; // 0x00000398 length: 2
-            short field253_0x39a; // 0x0000039A length: 2
+            short nShootTargetFlag; // 0x0000039A length: 2
             UnitInstructionTypeShort targetingType; // 0x0000039C length: 2
             short targetedUnitID__OR__engineerMannedSiegeEngineRef; // 0x0000039E length: 2
             int targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID; // 0x000003A0
@@ -251,29 +251,29 @@ namespace Map {
             uint targetedBuildingTile; // 0x000003A8 length: 4
             short lookForEnemy; // 0x000003AC length: 2
             short attackedBy; // 0x000003AE length: 2
-            short field263_0x3b0; // 0x000003B0 length: 2
+            short instructionActiveFlag; // 0x000003B0 length: 2
             short huntedBy; // 0x000003B2 length: 2
             short digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300; // 0x000003B4 length: 2
             short digTileY__OR__countLifeCycleEngineersSentToManSiegeEngine; // 0x000003B6 length: 2
             int digTileTarget; // 0x000003B8 length: 4
-            int field268_0x3bc; // 0x000003BC length: 4
+            int siegeTargetTile; // 0x000003BC length: 4
             short field269_0x3c0; // 0x000003C0 length: 2
-            char field270_0x3c2; // 0x000003C2 length: 1
+            char cDeerCamelState; // 0x000003C2 length: 1
             undefined1 padding_0x3c3[1]; // 0x000003C3 length: 1
-            byte field272_0x3c4; // 0x000003C4 length: 1
-            byte field273_0x3c5; // 0x000003C5 length: 1
-            short field274_0x3c6; // 0x000003C6 length: 2
+            byte bWorkerDestinationFlag; // 0x000003C4 length: 1
+            byte unitInstructionCode; // 0x000003C5 length: 1
+            short nActiveAnimFrame; // 0x000003C6 length: 2
             int health; // 0x000003C8 length: 4
             int maxHealth; // 0x000003CC length: 4
             byte occupancyOrFlag; // 0x000003D0 length: 1
             byte field278_0x3d1; // 0x000003D1 length: 1
-            short field279_0x3d2; // 0x000003D2 length: 2
+            short moveSpeedModifier; // 0x000003D2 length: 2
             short unknownBool01; // 0x000003D4 length: 2
             short horseOriginStablesBuildingIndexUnk; // 0x000003D6 length: 2
             short shootBeforeStop; // 0x000003D8 length: 2
             undefined1 padding_0x3da[2]; // 0x000003DA length: 2
-            short field285_0x3dc; // 0x000003DC length: 2
-            short field286_0x3de; // 0x000003DE length: 2
+            short nShootTargetScoreWeight; // 0x000003DC length: 2
+            short nShootTargetEvalValue; // 0x000003DE length: 2
             undefined1 horseOriginStableIDUnk; // 0x000003E0 length: 1
             undefined1 padding_0x3e1[3]; // 0x000003E1 length: 3
             int blessedAmount; // 0x000003E4 length: 4
@@ -284,10 +284,10 @@ namespace Map {
             char nextAttackHurtsWall; // 0x000003EE length: 1
             undefined1 poleturner_spearOrPike; // 0x000003EF length: 1
             short killedFlagUnk; // 0x000003F0 length: 2
-            short field299_0x3f2; // 0x000003F2 length: 2
-            short field300_0x3f4; // 0x000003F4 length: 2
+            short animalStateFlag; // 0x000003F2 length: 2
+            short nHealerCounter; // 0x000003F4 length: 2
             undefined1 padding_0x3f6[2]; // 0x000003F6 length: 2
-            byte field303_0x3f8; // 0x000003F8 length: 1
+            byte archerInstructionGateFlag; // 0x000003F8 length: 1
             undefined1 unkLadderClimbRelated; // 0x000003F9 length: 1
             byte fadeCounter; // 0x000003FA length: 1
             byte fadeType; // 0x000003FB length: 1
@@ -299,32 +299,32 @@ namespace Map {
             byte wasOnStoneGate; // 0x00000403 length: 1
             int currentTilePosition_2Unk; // 0x00000404 length: 4
             short counter; // 0x00000408 length: 2
-            short field315_0x40a; // 0x0000040A length: 2
+            short nFireWatchActiveFlag; // 0x0000040A length: 2
             bool isMatchingSpeed; // 0x0000040C length: 1
             undefined1 padding_0x40d[3]; // 0x0000040D length: 3
-            byte field320_0x410; // 0x00000410 length: 1
+            byte bQuarryWorkerState; // 0x00000410 length: 1
             undefined1 padding_0x411[1]; // 0x00000411 length: 1
             byte ownerOfAssassinScaledObject; // 0x00000412 length: 1
-            byte field323_0x413; // 0x00000413 length: 1
+            byte bHasAssignedTarget; // 0x00000413 length: 1
             short assassinHeightDifference; // 0x00000414 length: 2
             short assassinClimbingUpUnk_OR_previousFacingDirection; // 0x00000416 length: 2
-            short field326_0x418; // 0x00000418 length: 2
-            undefined2 field327_0x41a; // 0x0000041A length: 2
-            int field328_0x41c; // 0x0000041C length: 4
-            int field329_0x420; // 0x00000420 length: 4
+            short assassinDecayCounter; // 0x00000418 length: 2
+            undefined2 assassinTimer; // 0x0000041A length: 2
+            int nOverlayDrawX; // 0x0000041C length: 4
+            int nOverlayDrawY; // 0x00000420 length: 4
             short horseArcherShootingVariation; // 0x00000424 length: 2
             short horseArcherShootCheckInterval; // 0x00000426 length: 2
-            short field332_0x428; // 0x00000428 length: 2
+            short nActiveAnimCounter; // 0x00000428 length: 2
             short aiUnitBehaviourType; // 0x0000042A length: 2
             short rallyRelatedFlag; // 0x0000042C length: 2
             short engineerRelatedUnk; // 0x0000042E length: 2
-            short field336_0x430; // 0x00000430 length: 2
+            short nCountInTribePercentage; // 0x00000430 length: 2
             short siegeTargetPlayerID; // 0x00000432 length: 2
             short unknownLordTypeBasedMissionSpecificValue_01; // 0x00000434 length: 2
             short lastEncounteredEnemyUnitIDUnk; // 0x00000436 length: 2
             int assassinsMicroDistanceToEnemyUnk; // 0x00000438 length: 4
             int enemyNoticeFrequencyUnk; // 0x0000043C length: 4
-            ushort field342_0x440; // 0x00000440 length: 2
+            ushort wMoveSpeedAccumulator; // 0x00000440 length: 2
             short field343_0x442; // 0x00000442 length: 2
             short idleCounterUnk; // 0x00000444 length: 2
             short moveableUnk; // 0x00000446 length: 2

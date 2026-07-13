@@ -18,8 +18,8 @@ namespace UI {
         SomeSiegeUnitsComputation;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1), false, Address::SHC_3BB0A8C1_0x0042C540,
-            &OpenSHC::UI::Helpers::SomeSiegeRelatedCopying)
-        SomeSiegeRelatedCopying;
+            &OpenSHC::UI::Helpers::loadSiegeScenarioInfo)
+        loadSiegeScenarioInfo;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int taxesSettingUnk), false, Address::SHC_3BB0A8C1_0x00433560,
             &OpenSHC::UI::Helpers::SetTaxesSetting_unknown)
@@ -34,16 +34,16 @@ namespace UI {
         SomeUnitAndViewportCheck;
 
         MACRO_FUNCTION_RESOLVER(int(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0043E540,
-            &OpenSHC::UI::Helpers::SomePopularityRelatedComputation)
-        SomePopularityRelatedComputation;
+            &OpenSHC::UI::Helpers::getPopularityAdvisorIndex)
+        getPopularityAdvisorIndex;
 
-        MACRO_FUNCTION_RESOLVER(undefined4(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0043E5A0,
+        MACRO_FUNCTION_RESOLVER(undefined(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0043E5A0,
             &OpenSHC::UI::Helpers::SomeFearFactorComputation)
         SomeFearFactorComputation;
 
         MACRO_FUNCTION_RESOLVER(int(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0043E5F0,
-            &OpenSHC::UI::Helpers::SomeGoldRelatedComputation)
-        SomeGoldRelatedComputation;
+            &OpenSHC::UI::Helpers::getGoldAdvisorSpeechIndex)
+        getGoldAdvisorSpeechIndex;
 
     } // namespace Helpers_Func
 } // namespace UI

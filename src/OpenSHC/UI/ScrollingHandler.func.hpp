@@ -12,8 +12,8 @@ namespace UI {
         handleScrolling;
 
         MACRO_FUNCTION_RESOLVER(int (ScrollingHandler::*)(), false, Address::SHC_3BB0A8C1_0x00468C30,
-            &ScrollingHandler::getScrollDistanceBaseUnk)
-        getScrollDistanceBaseUnk;
+            &ScrollingHandler::getScrollDistanceBase)
+        getScrollDistanceBase;
 
     } // namespace ScrollingHandler_Func
 } // namespace UI

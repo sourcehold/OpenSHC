@@ -2,7 +2,7 @@
   path: 'OpenSHC/Input/MouseState.func.hpp'
 */
 
-#include "OpenSHC/Input/Mouse/MouseClickInteraction.hpp"
+#include "OpenSHC/Input/Mouse/MouseClickInteractionInt.hpp"
 #include "OpenSHC/Input/MouseState.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -11,14 +11,14 @@ namespace OpenSHC {
 namespace Input {
     namespace MouseState_Func {
 
-        using OpenSHC::Input::Mouse::MouseClickInteraction;
+        using OpenSHC::Input::Mouse::MouseClickInteractionInt;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         MACRO_FUNCTION_RESOLVER(
             void (MouseState::*)(), false, Address::SHC_3BB0A8C1_0x00467F80, &MouseState::makeSelectedCursorTypeCurrent)
         makeSelectedCursorTypeCurrent;
 
-        MACRO_FUNCTION_RESOLVER(void (MouseState::*)(short, short, MouseClickInteraction), false,
+        MACRO_FUNCTION_RESOLVER(void (MouseState::*)(short, short, MouseClickInteractionInt), false,
             Address::SHC_3BB0A8C1_0x00468030, &MouseState::updateMousePositionAndClicks)
         updateMousePositionAndClicks;
 
@@ -39,8 +39,8 @@ namespace Input {
         setCursor;
 
         MACRO_FUNCTION_RESOLVER(
-            void (MouseState::*)(), false, Address::SHC_3BB0A8C1_0x00468420, &MouseState::beginPointSelectionBox)
-        beginPointSelectionBox;
+            void (MouseState::*)(), false, Address::SHC_3BB0A8C1_0x00468420, &MouseState::computeMouseWorldPickBox)
+        computeMouseWorldPickBox;
 
         MACRO_FUNCTION_RESOLVER(
             void (MouseState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004684D0, &MouseState::setupHitBox)
@@ -67,12 +67,12 @@ namespace Input {
         loadAndSetCursor;
 
         MACRO_FUNCTION_RESOLVER(
-            void (MouseState::*)(), false, Address::SHC_3BB0A8C1_0x00470B30, &MouseState::extendSelectionBoxToMouse)
-        extendSelectionBoxToMouse;
+            void (MouseState::*)(), false, Address::SHC_3BB0A8C1_0x00470B30, &MouseState::updateMouseSelectionEndBox)
+        updateMouseSelectionEndBox;
 
         MACRO_FUNCTION_RESOLVER(
-            void (MouseState::*)(), false, Address::SHC_3BB0A8C1_0x00470BC0, &MouseState::updateRightDragCameraControl)
-        updateRightDragCameraControl;
+            void (MouseState::*)(), false, Address::SHC_3BB0A8C1_0x00470BC0, &MouseState::processRightClickDragGesture)
+        processRightClickDragGesture;
 
         MACRO_FUNCTION_RESOLVER(
             void (MouseState::*)(), false, Address::SHC_3BB0A8C1_0x00472A90, &MouseState::drawMouseBasedBox)

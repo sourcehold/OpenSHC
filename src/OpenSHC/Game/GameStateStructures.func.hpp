@@ -2,18 +2,18 @@
   path: 'OpenSHC/Game/GameStateStructures.func.hpp'
 */
 
-#include "OpenSHC/Commands/CommandBuildingType.hpp"
+#include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
 #include "OpenSHC/Game/GameStateStructures.hpp"
-#include "OpenSHC/Game/Resources/ResourceType.hpp"
-#include "OpenSHC/IO/PackagedFileMagicNum.hpp"
+#include "OpenSHC/Game/Resources/ResourceTypeInt.hpp"
+#include "OpenSHC/IO/PackagedFileMagicNumInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
 namespace Game {
     namespace GameStateStructures_Func {
 
-        using OpenSHC::Commands::CommandBuildingType;
-        using OpenSHC::Game::Resources::ResourceType;
-        using OpenSHC::IO::PackagedFileMagicNum;
+        using OpenSHC::Commands::CommandBuildingTypeInt;
+        using OpenSHC::Game::Resources::ResourceTypeInt;
+        using OpenSHC::IO::PackagedFileMagicNumInt;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         MACRO_FUNCTION_RESOLVER(bool (GameStateStructures::*)(int, int), false, Address::SHC_3BB0A8C1_0x00401090,
@@ -25,8 +25,8 @@ namespace Game {
         clearMapAndTimeAndPlayerData;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x00455D90,
-            &GameStateStructures::clearCurrentResourcesAndStrongWalls)
-        clearCurrentResourcesAndStrongWalls;
+            &GameStateStructures::resetAllPlayerResources)
+        resetAllPlayerResources;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x00455E10,
             &GameStateStructures::resetVariousCountsAndStatisticsAndStartGoodsAndResources)
@@ -57,8 +57,8 @@ namespace Game {
         setMonthAndYear;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x004567A0,
-            &GameStateStructures::clearSignpostData)
-        clearSignpostData;
+            &GameStateStructures::resetSignpostState)
+        resetSignpostState;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x00456810,
             &GameStateStructures::computeSignPostEntryData)
@@ -77,12 +77,12 @@ namespace Game {
         countActiveSignposts;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x004569E0,
-            &GameStateStructures::hasAnySignpost)
-        hasAnySignpost;
+            &GameStateStructures::hasAnyActiveSignpost)
+        hasAnyActiveSignpost;
 
         MACRO_FUNCTION_RESOLVER(int (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x00456AD0,
-            &GameStateStructures::pickRandomAccessibleSignpostEntry)
-        pickRandomAccessibleSignpostEntry;
+            &GameStateStructures::pickRandomSignpostInLargeZone)
+        pickRandomSignpostInLargeZone;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x00456C50,
             &GameStateStructures::clearDataAndSignpostDataIfNecessary)
@@ -93,12 +93,12 @@ namespace Game {
         addSignpostToBuildingEntryData;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(uint, int, int), false, Address::SHC_3BB0A8C1_0x00456FD0,
-            &GameStateStructures::computeBuildingCategoryEntryPoint)
-        computeBuildingCategoryEntryPoint;
+            &GameStateStructures::setPlayerKeyBuildingRef)
+        setPlayerKeyBuildingRef;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(int, int), false, Address::SHC_3BB0A8C1_0x004572A0,
-            &GameStateStructures::validateBuildingCategoryReference)
-        validateBuildingCategoryReference;
+            &GameStateStructures::validatePlayerKeyBuildingRef)
+        validatePlayerKeyBuildingRef;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (GameStateStructures::*)(int), false, Address::SHC_3BB0A8C1_0x004574C0,
             &GameStateStructures::checkKeepEnclosed)
@@ -117,12 +117,12 @@ namespace Game {
         unitsCanMoveFromKeepOfPlayerToAnotherArea;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (GameStateStructures::*)(int, int, int), false,
-            Address::SHC_3BB0A8C1_0x00457870, &GameStateStructures::canKeepReachSignpostZone)
-        canKeepReachSignpostZone;
+            Address::SHC_3BB0A8C1_0x00457870, &GameStateStructures::canReachSignpostFromKeep)
+        canReachSignpostFromKeep;
 
         MACRO_FUNCTION_RESOLVER(bool (GameStateStructures::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004578F0,
-            &GameStateStructures::canKeepReachSignpostZoneViaPathfinder)
-        canKeepReachSignpostZoneViaPathfinder;
+            &GameStateStructures::canReachSignpostFromKeepWithClimb)
+        canReachSignpostFromKeepWithClimb;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(uint), false, Address::SHC_3BB0A8C1_0x00457960,
             &GameStateStructures::updatePrimaryBuildingPlayerDataReferences)
@@ -140,7 +140,7 @@ namespace Game {
             &GameStateStructures::destroyPlayerCompletely)
         destroyPlayerCompletely;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (GameStateStructures::*)(CommandBuildingType, int, BOOLEnum), false,
+        MACRO_FUNCTION_RESOLVER(undefined4 (GameStateStructures::*)(CommandBuildingTypeInt, int, BOOLEnum), false,
             Address::SHC_3BB0A8C1_0x00457B80, &GameStateStructures::checkRequiredResourcesForBuildingOrPlanToBuy)
         checkRequiredResourcesForBuildingOrPlanToBuy;
 
@@ -177,18 +177,18 @@ namespace Game {
         moveUnitAroundCampfire;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x004586D0,
-            &GameStateStructures::activateTraderState)
-        activateTraderState;
+            &GameStateStructures::enableTraderVisits)
+        enableTraderVisits;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x004586F0,
-            &GameStateStructures::resetTraderState)
-        resetTraderState;
+            &GameStateStructures::disableTraderVisits)
+        disableTraderVisits;
 
         MACRO_FUNCTION_RESOLVER(int (GameStateStructures::*)(int), false, Address::SHC_3BB0A8C1_0x00458700,
             &GameStateStructures::findNextPlayerWithMarketplace)
         findNextPlayerWithMarketplace;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (GameStateStructures::*)(ResourceType), false,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (GameStateStructures::*)(ResourceTypeInt), false,
             Address::SHC_3BB0A8C1_0x00458740, &GameStateStructures::isResourceTypeTradeable)
         isResourceTypeTradeable;
 
@@ -196,11 +196,11 @@ namespace Game {
             &GameStateStructures::anyGoodsAreAllowedForSale)
         anyGoodsAreAllowedForSale;
 
-        MACRO_FUNCTION_RESOLVER(int (GameStateStructures::*)(ResourceType), false, Address::SHC_3BB0A8C1_0x004587A0,
+        MACRO_FUNCTION_RESOLVER(int (GameStateStructures::*)(ResourceTypeInt), false, Address::SHC_3BB0A8C1_0x004587A0,
             &GameStateStructures::getNextGoodFilteringUnallowed)
         getNextGoodFilteringUnallowed;
 
-        MACRO_FUNCTION_RESOLVER(int (GameStateStructures::*)(ResourceType), false, Address::SHC_3BB0A8C1_0x00458820,
+        MACRO_FUNCTION_RESOLVER(int (GameStateStructures::*)(ResourceTypeInt), false, Address::SHC_3BB0A8C1_0x00458820,
             &GameStateStructures::getPreviousGoodsFilteringUnallowed)
         getPreviousGoodsFilteringUnallowed;
 
@@ -213,10 +213,10 @@ namespace Game {
         getBuyPrice;
 
         MACRO_FUNCTION_RESOLVER(int (GameStateStructures::*)(int), false, Address::SHC_3BB0A8C1_0x004588D0,
-            &GameStateStructures::getBuyPriceForOneUnit)
-        getBuyPriceForOneUnit;
+            &GameStateStructures::getResourceSellPrice)
+        getResourceSellPrice;
 
-        MACRO_FUNCTION_RESOLVER(int (GameStateStructures::*)(ResourceType), false, Address::SHC_3BB0A8C1_0x004588F0,
+        MACRO_FUNCTION_RESOLVER(int (GameStateStructures::*)(ResourceTypeInt), false, Address::SHC_3BB0A8C1_0x004588F0,
             &GameStateStructures::getSalePriceOfGood)
         getSalePriceOfGood;
 
@@ -224,7 +224,7 @@ namespace Game {
             &GameStateStructures::getSellPrice)
         getSellPrice;
 
-        MACRO_FUNCTION_RESOLVER(int (GameStateStructures::*)(int, int), false, Address::SHC_3BB0A8C1_0x00458940,
+        MACRO_FUNCTION_RESOLVER(undefined (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x00458940,
             &GameStateStructures::getSellResourceAmount)
         getSellResourceAmount;
 
@@ -236,7 +236,7 @@ namespace Game {
             &GameStateStructures::processPeasantsForBuildings)
         processPeasantsForBuildings;
 
-        MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x00458A70,
+        MACRO_FUNCTION_RESOLVER(undefined (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x00458A70,
             &GameStateStructures::updateFoodTypesInStockForAllPlayers)
         updateFoodTypesInStockForAllPlayers;
 
@@ -305,20 +305,20 @@ namespace Game {
         findAITeamMate;
 
         MACRO_FUNCTION_RESOLVER(uint (GameStateStructures::*)(int), false, Address::SHC_3BB0A8C1_0x00459740,
-            &GameStateStructures::TeamToBitFlagsUnk)
-        TeamToBitFlagsUnk;
+            &GameStateStructures::getUnitTeammatesBitmask)
+        getUnitTeammatesBitmask;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x004597D0,
-            &GameStateStructures::areActivePlayersMostlySameTeam)
-        areActivePlayersMostlySameTeam;
+            &GameStateStructures::isOnlyOneTeamRemaining)
+        isOnlyOneTeamRemaining;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x004598B0,
             &GameStateStructures::recountStablesAndHorses)
         recountStablesAndHorses;
 
         MACRO_FUNCTION_RESOLVER(int (GameStateStructures::*)(int, int), false, Address::SHC_3BB0A8C1_0x00459930,
-            &GameStateStructures::linkageBetweenHorseUnitAndStableUnk)
-        linkageBetweenHorseUnitAndStableUnk;
+            &GameStateStructures::assignHorseUnitToStable)
+        assignHorseUnitToStable;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(int), false, Address::SHC_3BB0A8C1_0x00459A20,
             &GameStateStructures::spawnPoisonCloudsAroundBuilding)
@@ -329,8 +329,8 @@ namespace Game {
         playSFXNoSpaceInTheStockPile;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(int), false, Address::SHC_3BB0A8C1_0x00459BB0,
-            &GameStateStructures::clearTribeHotKey)
-        clearTribeHotKey;
+            &GameStateStructures::clearUnitSelectionHotkeyGroup)
+        clearUnitSelectionHotkeyGroup;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x00459BE0,
             &GameStateStructures::fillWith0xFF)
@@ -339,10 +339,6 @@ namespace Game {
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(int, int), false, Address::SHC_3BB0A8C1_0x00459C10,
             &GameStateStructures::assignSelectionToKey)
         assignSelectionToKey;
-
-        MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x00459D80,
-            &GameStateStructures::computeArmySizeLimit)
-        computeArmySizeLimit;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x00459E40,
             &GameStateStructures::HandleActivateTacticalPowers)
@@ -365,20 +361,20 @@ namespace Game {
         selectARandomBuildingOwnedByPlayer;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x0045AF00,
-            &GameStateStructures::resetSomethingBuildingRelatedForAllPlayers)
-        resetSomethingBuildingRelatedForAllPlayers;
+            &GameStateStructures::revalidateAllPlayerKeyBuildings)
+        revalidateAllPlayerKeyBuildings;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x0045AF30,
             &GameStateStructures::computePopulationStatistics)
         computePopulationStatistics;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x0045B1C0,
-            &GameStateStructures::clearEnemyRelatedStructures)
-        clearEnemyRelatedStructures;
+            &GameStateStructures::resetGameStateForNewMap)
+        resetGameStateForNewMap;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x0045B3E0,
-            &GameStateStructures::initializeGameStateAfterMapLoad)
-        initializeGameStateAfterMapLoad;
+            &GameStateStructures::initGameStateAfterMapLoad)
+        initGameStateAfterMapLoad;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(int), false, Address::SHC_3BB0A8C1_0x0045B460,
             &GameStateStructures::switchPlayerOwnership)
@@ -404,7 +400,7 @@ namespace Game {
             &GameStateStructures::spawnPoisonCloudsAtRandomStorageOrArmyBuilding)
         spawnPoisonCloudsAtRandomStorageOrArmyBuilding;
 
-        MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(PackagedFileMagicNum, PackagedFileMagicNum), false,
+        MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(PackagedFileMagicNumInt, PackagedFileMagicNumInt), false,
             Address::SHC_3BB0A8C1_0x0045C1C0, &GameStateStructures::migrateGameStateForMapVersion)
         migrateGameStateForMapVersion;
 

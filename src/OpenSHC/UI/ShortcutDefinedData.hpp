@@ -17,7 +17,7 @@ namespace UI {
 
         undefined4 DAT_ScreenshotFilenameVariant; // 0x00000000 length: 4
         undefined4 DAT_CyclingLordID; // 0x00000004 length: 4
-        char cheatCode[16]; // 0x00000008 length: 16
+        char DAT_CheatCodeString[16]; // 0x00000008 length: 16
         undefined1 padding_0x18[4]; // 0x00000018 length: 4
 
     } ShortcutDefinedData;

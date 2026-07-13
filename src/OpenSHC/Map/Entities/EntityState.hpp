@@ -8,21 +8,19 @@
 
 #pragma once
 
-#include "OpenSHC/IO/PackagedFileMagicNum.hpp"
+#include "OpenSHC/IO/PackagedFileMagicNumInt.hpp"
 #include "OpenSHC/Map/Entities/Entity.hpp"
-#include "OpenSHC/Map/Entities/EntityType.hpp"
+#include "OpenSHC/Map/Entities/EntityTypeInt.hpp"
 #include "OpenSHC/Map/Entities/ExtraEntityInfo.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
-
-#include "WinDef.h"
 
 namespace OpenSHC {
 namespace Map {
     namespace Entities {
 
-        using OpenSHC::IO::PackagedFileMagicNum;
+        using OpenSHC::IO::PackagedFileMagicNumInt;
         using OpenSHC::Map::Entities::Entity;
-        using OpenSHC::Map::Entities::EntityType;
+        using OpenSHC::Map::Entities::EntityTypeInt;
         using OpenSHC::Map::Entities::ExtraEntityInfo;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
@@ -31,14 +29,14 @@ namespace Map {
         // SIZE: 0x000AC5E8
         class EntityState {
         public:
-            undefined4 totalEntityCount; // 0x00000000 length: 4
+            undefined4 DAT_TotalEntityCount; // 0x00000000 length: 4
             undefined4 maxEntityCount; // 0x00000004 length: 4
             undefined4 every10Ticks; // 0x00000008 length: 4
-            int lineOfSightClearanceSteps; // 0x0000000C length: 4
-            undefined4 fireCount; // 0x00000010 length: 4
+            undefined4 dwLosTraceResultValue; // 0x0000000C length: 4
+            undefined4 DAT_FireCount; // 0x00000010 length: 4
             Entity entityArray[3000]; // 0x00000014 length: 696000
             ExtraEntityInfo seagullArray[100]; // 0x000A9ED4 length: 10000
-            DWORD classConstructionTime; // 0x000AC5E4 length: 4
+            undefined4 dwEntityStateInitTimeMs; // 0x000AC5E4 length: 4
 
         private:
             EntityState(EntityState const&);
@@ -53,19 +51,19 @@ namespace Map {
 
             void clearEntityArrayAndSec1077();
 
-            BOOLEnum playerHasEntityOfType(int playerID, EntityType entityType);
+            BOOLEnum playerHasEntityOfType(int playerID, EntityTypeInt entityType);
 
-            void setProjectileEntityValues2(int entityID, EntityType entityType);
+            void setProjectileEntityValues2(int entityID, EntityTypeInt entityType);
 
             void setEntityParameters(int entityID, undefined4 entityType, int gmLookupValue);
 
             void drawEntityEffect(int entityID, undefined4 entityType, int graphicType1, int graphicType2);
 
-            void markEntityDestroyed(int param_1);
+            void beginEntityDeath(int param_1);
 
-            void tickEntityDecayCounter(int param_1);
+            void tickEntityLifetime(int param_1);
 
-            void doSomethingWithOtherEntitiesOnTile(uint entityID);
+            void unlinkEntityFromTileChain(uint entityID);
 
             int getFireEntityIDAtTile(int tile);
 
@@ -73,42 +71,41 @@ namespace Map {
 
             void processFireDamageToUnitsAtTile(int tile, int playerID, int fireLowIntensity);
 
-            void recountActiveFires();
+            void rebuildFireTileOccupancy();
 
-            void flagUnitsWithActiveEntity();
+            void markUnitsWithActiveEntity();
 
-            int somethingWithSeparateAreas1(int unitID);
+            int findNearestReachablePoisonCow(int unitID);
 
-            void refreshPoisonCloudNearUnit(int param_1);
+            void refreshPoisonCloudsNearUnit(int param_1);
 
-            void assignPoisonCloudTargetEntity(int param_1);
+            void assignPoisonCloudToEntity(int param_1);
 
             void destroyEntitiesOnTile(int tile);
 
             undefined4 isBrazierNearby(int unitX, int unitY, int unitZ);
 
-            void reassignEntitiesOwner(int param_1, undefined4 param_2);
+            void reassignEntityOwnership(int param_1, undefined4 param_2);
 
             void swapEntityOwnership(int param_1, int param_2);
 
             void destroyEntitiesPart2(int param_1);
 
-            void updateEntityMicroMovement(int param_1);
+            void stepEntityMicroMovement(int param_1);
 
-            undefined4 angleToRotationFrameIndex(int param_1);
+            undefined heightDeltaToSpriteIndex();
 
             int math_atan_1(int entityType, double param_3, int param_4, int heightDifference);
 
             int computeVelocity(undefined4 param_2, double param_3, int param_4, int param_5);
 
-            uint computeLineOfSightDistance(
-                int x, int y, int height, int targetX, int targetY, int targetHeight, int param_7);
+            uint traceLineOfSight(int x, int y, int height, int targetX, int targetY, int targetHeight, int param_7);
 
-            void calculateEntityDrawOffset(int entityID);
+            void updateEntitySubtilePixelOffset(int entityID);
 
-            void initializeSeagullMovementVector(int ID_1077, int param_2, int param_3, int param_4, int param_5);
+            void setupSeagullMovement(int ID_1077, int param_2, int param_3, int param_4, int param_5);
 
-            void removeEntityFromTileLinkedList(int param_1);
+            void removeEntityFromTileList(int param_1);
 
             int activateProjectileEntity(int entityID);
 
@@ -117,18 +114,17 @@ namespace Map {
             void initializeProjectileVelocities(
                 int entityID, int x, int y, int height, int targetX, int targetY, int targetZ);
 
-            void handleProjectileWallBounce(int param_1);
+            void bounceProjectileOffWall(int param_1);
 
-            int arrowShootingRelated(
+            int checkProjectileLineOfSight(
                 int microX, int microY, int height, int destMicroX, int destMicroY, int destHeight);
 
             uint spawnProjectileEntity(int unitID, undefined4 playerID1, uint ownerColorUnk, int microX, int microY,
-                int totalHeight, int targetX, int targetY, int targetZUnk, EntityType entityType, int param_11);
+                int totalHeight, int targetX, int targetY, int targetZUnk, EntityTypeInt entityType, int param_11);
 
-            void setProjectileTargetPosition(
-                int entityID, int x, int y, int height, int targetX, int targetY, int targetZ);
+            void launchProjectileAt(int entityID, int x, int y, int height, int targetX, int targetY, int targetZ);
 
-            void spawnProjectileImpactDebris(int param_1);
+            void spawnProjectileImpactFragments(int param_1);
 
             int createSeagull(int x, int y);
 
@@ -136,7 +132,7 @@ namespace Map {
 
             undefined4 processEntityHitBuildingOrUnit(int entityID);
 
-            void updateProjectileHeightAndCollision(uint entityID, undefined4 param_2, int param_3, int param_4);
+            void updateProjectileHeight(uint entityID, undefined4 param_2, int param_3, int param_4);
 
             uint spawnEntityEffect2(
                 undefined4 microX, undefined4 microY, undefined4 height, undefined4 entityType, int gmLookupValue);
@@ -146,8 +142,8 @@ namespace Map {
 
             BOOLEnum moveProjectileEntity(int entityID);
 
-            void handleMapVersionUpgrade(
-                PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
+            void migrateEntityDataForMapVersion(
+                PackagedFileMagicNumInt receivedMapVersion, PackagedFileMagicNumInt packagerMapVersion);
 
             void updateEntities();
         };

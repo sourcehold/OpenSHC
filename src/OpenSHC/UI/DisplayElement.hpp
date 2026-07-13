@@ -9,18 +9,16 @@
 #pragma once
 
 #include "OpenSHC/UI/DisplayElementRenderFunc.hpp"
-#include "OpenSHC/DE/SHCDE/eOnScreenText.hpp"
+#include "OpenSHC/DE/SHCDE/eOnScreenTextInt.hpp"
 #include "OpenSHC/UI/Enums/DisplayElementIDInt.hpp"
-#include "OpenSHC/UI/Enums/DisplayElementPositionModifier.hpp"
 #include "OpenSHC/UI/Enums/DisplayElementPositionModifierInt.hpp"
 
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::DE::SHCDE::eOnScreenText;
+    using OpenSHC::DE::SHCDE::eOnScreenTextInt;
     using OpenSHC::UI::DisplayElementRenderFunc;
     using OpenSHC::UI::Enums::DisplayElementIDInt;
-    using OpenSHC::UI::Enums::DisplayElementPositionModifier;
     using OpenSHC::UI::Enums::DisplayElementPositionModifierInt;
 
 #pragma pack(push, 1)
@@ -47,8 +45,8 @@ namespace UI {
         ~DisplayElement() {};
 
         // Constructor
-        DisplayElement* Constructor_DisplayElement(eOnScreenText elementID, int xPos, int yPos, dword elementState,
-            DisplayElementRenderFunc* renderFunction, DisplayElementPositionModifier positionModifier);
+        DisplayElement* Constructor_DisplayElement(eOnScreenTextInt elementID, int xPos, int yPos, dword elementState,
+            DisplayElementRenderFunc* renderFunction, DisplayElementPositionModifierInt positionModifier);
     };
 
     static_assert_cpp98_obj(sizeof(DisplayElement) == 36, DisplayElement);

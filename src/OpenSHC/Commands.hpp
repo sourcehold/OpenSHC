@@ -51,7 +51,7 @@ namespace Commands {
 
     void __stdcall ClickPlaceRockOrTree();
 
-    void __stdcall ClickRaiseLand2Unk();
+    void __stdcall commandRaiseLand();
 
     void __stdcall ClickPlaceBuilding();
 
@@ -69,7 +69,7 @@ namespace Commands {
 
     void __stdcall ClickGiveUnitsInstruction();
 
-    void __stdcall ClickSomethingWithDrawBridgeUnk();
+    void __stdcall commandToggleDrawbridge();
 
     void __stdcall ClickBuyOrSell();
 
@@ -101,7 +101,7 @@ namespace Commands {
 
     void __stdcall ResyncStatus2();
 
-    void __stdcall ResetSyncStatusUnk();
+    void __stdcall resetSyncStatus();
 
     void __stdcall ClickRepairTower();
 
@@ -111,9 +111,9 @@ namespace Commands {
 
     void __stdcall ClickExtendRallyPoint();
 
-    void __stdcall SiegeEngineRelated();
+    void __stdcall marshalSiegeEngineCommand();
 
-    void __stdcall TribeRelated1();
+    void __stdcall marshalTribeUnitCommand();
 
     void __stdcall ReleaseDogs();
 
@@ -123,19 +123,19 @@ namespace Commands {
 
     void __stdcall DeselectUnit();
 
-    void __stdcall SetField45To100();
+    void __stdcall marshalSetMapTimeFlagCommand();
 
     void __stdcall ResyncZone();
 
-    void __stdcall KickPlayerUnk();
+    void __stdcall commandKickPlayer();
 
     void __stdcall CommandSelectionReplenishAmmo();
 
-    void __stdcall BroadCastSyncRelatedStatus();
+    void __stdcall commandBroadcastSyncStatus();
 
     void __stdcall VoteKick_K_D_B_G_J();
 
-    void __stdcall SyncPacketSizeAnnouncement();
+    void __stdcall marshalNetworkSyncCommand();
 
     void __stdcall ShareAnnouncementWithHost();
 
@@ -143,11 +143,11 @@ namespace Commands {
 
     void __stdcall SomePlayerNameUpdateCommand();
 
-    void __stdcall FlagsAndBraziersCommandUnk();
+    void __stdcall commandFlagsBraziers();
 
-    void __stdcall NotifyLaggingPlayer();
+    void __stdcall marshalLaggingPlayerCommand();
 
-    void __stdcall SomeKindOfMultiplayerPingUnk();
+    void __stdcall commandReportLaggingPlayerPing();
 
     void __stdcall ShareGameStatePartialHashes();
 
@@ -159,7 +159,7 @@ namespace Commands {
 
     void __stdcall StartReceivingMapFile();
 
-    void __stdcall MapSendingRelated();
+    void __stdcall commandMapFileTransferControl();
 
     void __stdcall HostAnnounceRoundTable();
 
@@ -183,7 +183,7 @@ namespace Commands {
 
     void __stdcall AutoSaveTriggered();
 
-    void __stdcall SetPlayerNameUnk();
+    void __stdcall commandSyncMapNameAndBeginLoad();
 
     void __stdcall CommandLoadMapHeader();
 
@@ -199,7 +199,7 @@ namespace Commands {
 
     void __stdcall SendResyncPlayerData();
 
-    void __stdcall SendResyncUnknown();
+    void __stdcall commandSendResyncGlobals();
 
     void __stdcall SendResyncEntity();
 
@@ -215,7 +215,7 @@ namespace Commands {
 
     void __stdcall CommandSwitchTeams();
 
-    void __stdcall SyncRelatedSomething();
+    void __stdcall commandSyncStatusExchange();
 
     void __stdcall SendQuitGameQuestion();
 

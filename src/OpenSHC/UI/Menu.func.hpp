@@ -2,16 +2,16 @@
   path: 'OpenSHC/UI/Menu.func.hpp'
 */
 
-#include "OpenSHC/UI/Enums/MenuItemHandleState.hpp"
+#include "OpenSHC/UI/Enums/MenuItemHandleStateInt.hpp"
 #include "OpenSHC/UI/Menu.hpp"
 namespace OpenSHC {
 namespace UI {
     namespace Menu_Func {
 
-        using OpenSHC::UI::Enums::MenuItemHandleState;
+        using OpenSHC::UI::Enums::MenuItemHandleStateInt;
 
         MACRO_FUNCTION_RESOLVER(
-            void (Menu::*)(MenuItemHandleState), false, Address::SHC_3BB0A8C1_0x004F6280, &Menu::handleMenuItems)
+            void (Menu::*)(MenuItemHandleStateInt), false, Address::SHC_3BB0A8C1_0x004F6280, &Menu::handleMenuItems)
         handleMenuItems;
 
         MACRO_FUNCTION_RESOLVER(void (Menu::*)(), false, Address::SHC_3BB0A8C1_0x004F6470, &Menu::updateMenuButtons)
