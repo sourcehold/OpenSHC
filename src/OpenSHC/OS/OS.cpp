@@ -42,7 +42,7 @@ namespace OS {
     int __stricmp(char* _Str1, char* _Str2) { return _stricmp(_Str1, _Str2); }
 
     // STUB: STRONGHOLDCRUSADER 0x0057FA62
-    int _atexit(void* param_1) { return atexit(reinterpret_cast<void(__cdecl*)()>(param_1)); }
+    int _atexit(_atexit_t* param_1) { return atexit(param_1); }
 
     // This seems to be the games main free function
     // STUB: STRONGHOLDCRUSADER 0x0057FA74
