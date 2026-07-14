@@ -16,37 +16,42 @@ namespace Audio {
             if (variationCount <= 0) {
                 return;
             }
-            // TODO: Currently looks unlikely, that they used two alternatives. But maybe the issue is somewhere else?
-            int _x = xPosition - DAT_ViewportRenderState::instance.viewportState.tileCenterX;
-            int _y = yPosition - DAT_ViewportRenderState::instance.viewportState.tileCenterY;
-            int _x2 = _x;
-            int _y2 = _y;
+            int x = xPosition - DAT_ViewportRenderState::instance.viewportState.tileCenterX;
+            int y = yPosition - DAT_ViewportRenderState::instance.viewportState.tileCenterY;
             if (DAT_TileMapState::instance.SEC_MapOrientation == 2) {
-                _x2 = _y;
-                _y2 = -_x;
+                int t = -x;
+                x = y;
+                y = t;
             } else if (DAT_TileMapState::instance.SEC_MapOrientation == 4) {
-                _x2 = -_x;
-                _y2 = -_y;
+                x = -x;
+                y = -y;
             } else if (DAT_TileMapState::instance.SEC_MapOrientation == 6) {
-                _x2 = -_y;
-                _y2 = _x;
+                int t = x;
+                x = -y;
+                y = t;
             }
 
-            int diff = _x2 - _y2;
-            // TODO: The required opcodes here are only produced when either ">> 1", or if both are unsigned and "/ 2".
-            // The negatives used suggest an int, but it really depends on what the tile center values contain.
-            int avg = (_x2 + _y2) >> 1;
-            if (-45 > diff || diff > 45 || -36 > avg || avg > 36) {
+            // An AI analysis suggests that this code is a screen transform. So the logic pre-filters sound outside this
+            // window and binds the actual computation to this. Somewhere in the code also needs to be the reason
+            // sound from the other map edge is played. Zoomed out the sound also happens mostly in the upper left.
+            // Although, this could be computation order.
+            // The required opcodes here are only produced when either ">> 1", or if both are unsigned and "/ 2". The
+            // negatives used suggest an int, but it really depends on what the tile center values contain. Apparently,
+            // division by ">>" creates a different rounding behavior (to lower) compared to "/" (to 0).
+            int horizontalScreenPos = x - y;
+            int verticalScreenPos = (x + y) >> 1;
+            if (-45 > horizontalScreenPos || horizontalScreenPos > 45 || -36 > verticalScreenPos
+                || verticalScreenPos > 36) {
                 return;
             }
-            int samplePan = diff * 2 + 62;
+            int samplePan = horizontalScreenPos * 2 + 62;
             if (samplePan < 0) {
                 samplePan = 0;
             } else if (127 < samplePan) {
                 samplePan = 127;
             }
-            // Without source compares it is unclear if the actually functions are the same, but the structure now is.
-            int _computedVolume = (int)(float)sqrt((double)(_x2 * _x2 + _y2 * _y2));
+            // Without source compares it is unclear if the actual functions are the same, but the structure now is.
+            int _computedVolume = (int)(float)sqrt((double)(x * x + y * y));
             _computedVolume = _computedVolume * 2;
             if (70 < _computedVolume) {
                 _computedVolume = 70;
