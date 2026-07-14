@@ -27,8 +27,8 @@ namespace IO {
         readMapOrSavFile;
 
         MACRO_FUNCTION_RESOLVER(void (FilePackager::*)(MapSectionAddress*, int), false,
-            Address::SHC_3BB0A8C1_0x004750E0, &FilePackager::readMapHeaderSiegeInfoUnk)
-        readMapHeaderSiegeInfoUnk;
+            Address::SHC_3BB0A8C1_0x004750E0, &FilePackager::readFilePackagerSectionByID)
+        readFilePackagerSectionByID;
 
         MACRO_FUNCTION_RESOLVER(
             void (FilePackager::*)(BOOLEnum), false, Address::SHC_3BB0A8C1_0x004752D0, &FilePackager::readMapHeader)

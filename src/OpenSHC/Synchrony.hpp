@@ -11,9 +11,9 @@
 namespace OpenSHC {
 namespace Synchrony {
 
-    void __stdcall clearHoveredAI();
+    void __stdcall clearLobbyHoveredAI();
 
-    void __stdcall syncPlayerGroupArrays();
+    void __stdcall snapshotPlayerGroups();
 
 } // namespace Synchrony
 } // namespace OpenSHC

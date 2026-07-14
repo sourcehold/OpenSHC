@@ -576,37 +576,53 @@ enum {
     SHC_3BB0A8C1_0x00400260 = 0x00400260,
     // type: PE/IMAGE_SECTION_HEADER
     SHC_3BB0A8C1_0x00400288 = 0x00400288,
+    // label: _HoldStrong::Rendering::ViewportRenderState::xyAreValid
     // label: xyAreValid
+    // location:
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x00401000 = 0x00401000,
+    // label: _HoldStrong::Rendering::ViewportRenderState::translateXYToTile
     // label: translateXYToTile
+    // location:
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x00401040 = 0x00401040,
+    // label: _HoldStrong::Map::TileMapState::processEntityDamageToBuildingCollateralThunk
     // label: processEntityDamageToBuildingCollateralThunk
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00401060 = 0x00401060,
+    // label: _HoldStrong::Game::GameStateStructures::isSameTeam
     // label: isSameTeam
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00401090 = 0x00401090,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::isAIPlayer
     // label: isAIPlayer
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x004010B0 = 0x004010B0,
+    // label: _HoldStrong::Map::Entities::EntityState::clearEntityArrayAndSec1077
     // label: clearEntityArrayAndSec1077
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x004010E0 = 0x004010E0,
     // type: function
     SHC_3BB0A8C1_0x00401120 = 0x00401120,
+    // label: _HoldStrong::Map::Entities::EntityState::meth_0x401150
     // label: playerHasEntityOfType
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00401150 = 0x00401150,
+    // label: _HoldStrong::Map::Entities::EntityState::setProjectileEntityValues2
     // label: setProjectileEntityValues2
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x004011D0 = 0x004011D0,
@@ -622,79 +638,115 @@ enum {
     SHC_3BB0A8C1_0x004012DC = 0x004012DC,
     // type: /undefined *32
     SHC_3BB0A8C1_0x004012E0 = 0x004012E0,
+    // label: _HoldStrong::Map::Entities::EntityState::setEntityParameters
     // label: setEntityParameters
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x004012F0 = 0x004012F0,
+    // label: _HoldStrong::Map::Entities::EntityState::drawEntityEffect
     // label: drawEntityEffect
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00401380 = 0x00401380,
-    // label: markEntityDestroyed
+    // label: _HoldStrong::Map::Entities::EntityState::meth_0x401400
+    // label: beginEntityDeath
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00401400 = 0x00401400,
-    // label: tickEntityDecayCounter
+    // label: _HoldStrong::Map::Entities::EntityState::meth_0x401430
+    // label: tickEntityLifetime
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00401430 = 0x00401430,
-    // label: doSomethingWithOtherEntitiesOnTile
+    // label: _HoldStrong::Map::Entities::EntityState::doSomethingWithOtherEntitiesOnTile
+    // label: unlinkEntityFromTileChain
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00401460 = 0x00401460,
+    // label: _HoldStrong::Map::Entities::EntityState::getFireEntityIDAtTile
     // label: getFireEntityIDAtTile
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00401540 = 0x00401540,
+    // label: _HoldStrong::Map::Entities::EntityState::updateAllFireEntitiesAtTile
     // label: updateAllFireEntitiesAtTile
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00401570 = 0x00401570,
+    // label: _HoldStrong::Map::Entities::EntityState::processFireDamageToUnitsAtTile
     // label: processFireDamageToUnitsAtTile
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x004015D0 = 0x004015D0,
     // type: function
     SHC_3BB0A8C1_0x004015F0 = 0x004015F0,
-    // label: recountActiveFires
+    // label: _HoldStrong::Map::Entities::EntityState::meth_0x401620
+    // label: rebuildFireTileOccupancy
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00401620 = 0x00401620,
-    // label: flagUnitsWithActiveEntity
+    // label: _HoldStrong::Map::Entities::EntityState::meth_0x401690
+    // label: markUnitsWithActiveEntity
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00401690 = 0x00401690,
-    // label: somethingWithSeparateAreas1
+    // label: _HoldStrong::Map::Entities::EntityState::somethingWithSeparateAreas1
+    // label: findNearestReachablePoisonCow
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x004016E0 = 0x004016E0,
     // type: function
     SHC_3BB0A8C1_0x00401730 = 0x00401730,
-    // label: refreshPoisonCloudNearUnit
+    // label: _HoldStrong::Map::Entities::EntityState::meth_0x401880
+    // label: refreshPoisonCloudsNearUnit
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00401880 = 0x00401880,
-    // label: assignPoisonCloudTargetEntity
+    // label: _HoldStrong::Map::Entities::EntityState::meth_0x401910
+    // label: assignPoisonCloudToEntity
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00401910 = 0x00401910,
+    // label: _HoldStrong::Map::Entities::EntityState::destroyEntitiesOnTile
     // label: destroyEntitiesOnTile
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x004019D0 = 0x004019D0,
+    // label: _HoldStrong::Map::Entities::EntityState::isBrazierNearby
     // label: isBrazierNearby
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00401A50 = 0x00401A50,
-    // label: reassignEntitiesOwner
+    // label: _HoldStrong::Map::Entities::EntityState::meth_0x401ae0
+    // label: reassignEntityOwnership
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00401AE0 = 0x00401AE0,
+    // label: _HoldStrong::Map::Entities::EntityState::swapEntityOwnership
     // label: swapEntityOwnership
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00401B20 = 0x00401B20,
+    // label: _HoldStrong::Map::Entities::EntityState::destroyEntitiesPart2
     // label: destroyEntitiesPart2
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00401B60 = 0x00401B60,
@@ -722,11 +774,15 @@ enum {
     // location: OpenSHC/Map/Entities
     // type: function
     SHC_3BB0A8C1_0x00401DB0 = 0x00401DB0,
-    // label: UpdateEntity_20_37
+    // label: UpdateBallistaBoltEntity
+    // label: _HoldStrong::Map::Entities::UpdateEntity_20_37
+    // location:
     // location: OpenSHC/Map/Entities
     // type: function
     SHC_3BB0A8C1_0x00401E20 = 0x00401E20,
-    // label: UpdateEntity_21
+    // label: UpdateDustCloudEntity
+    // label: _HoldStrong::Map::Entities::UpdateEntity_21
+    // location:
     // location: OpenSHC/Map/Entities
     // type: function
     SHC_3BB0A8C1_0x00401EA0 = 0x00401EA0,
@@ -738,7 +794,9 @@ enum {
     // location: OpenSHC/Map/Entities
     // type: function
     SHC_3BB0A8C1_0x00402180 = 0x00402180,
-    // label: UpdateEntity_26
+    // label: UpdateExplosionEntity
+    // label: _HoldStrong::Map::Entities::UpdateEntity_26
+    // location:
     // location: OpenSHC/Map/Entities
     // type: function
     SHC_3BB0A8C1_0x00402260 = 0x00402260,
@@ -746,7 +804,9 @@ enum {
     // location: OpenSHC/Map/Entities
     // type: function
     SHC_3BB0A8C1_0x00402330 = 0x00402330,
-    // label: UpdateEntity_28
+    // label: UpdateCrowEntity
+    // label: _HoldStrong::Map::Entities::UpdateEntity_28
+    // location:
     // location: OpenSHC/Map/Entities
     // type: function
     SHC_3BB0A8C1_0x004023A0 = 0x004023A0,
@@ -798,7 +858,9 @@ enum {
     // location: OpenSHC/Map/Entities
     // type: function
     SHC_3BB0A8C1_0x00402AB0 = 0x00402AB0,
-    // label: updateEntityMicroMovement
+    // label: _HoldStrong::Map::Entities::EntityState::meth_0x402ae0
+    // label: stepEntityMicroMovement
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00402AE0 = 0x00402AE0,
@@ -812,29 +874,39 @@ enum {
     SHC_3BB0A8C1_0x00402BC8 = 0x00402BC8,
     // type: /pointer
     SHC_3BB0A8C1_0x00402BCC = 0x00402BCC,
-    // label: angleToRotationFrameIndex
+    // label: heightDeltaToSpriteIndex
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00402BD0 = 0x00402BD0,
+    // label: _HoldStrong::Map::Entities::EntityState::math_atan_1
     // label: math_atan_1
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00402C50 = 0x00402C50,
+    // label: _HoldStrong::Map::Entities::EntityState::computeVelocity
     // label: computeVelocity
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00402DA0 = 0x00402DA0,
-    // label: computeLineOfSightDistance
+    // label: _HoldStrong::Map::Entities::EntityState::meth_0x402e20
+    // label: traceLineOfSight
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00402E20 = 0x00402E20,
     // type: function
     SHC_3BB0A8C1_0x00403200 = 0x00403200,
-    // label: calculateEntityDrawOffset
+    // label: _HoldStrong::Map::Entities::EntityState::meth_0x4036f0
+    // label: updateEntitySubtilePixelOffset
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x004036F0 = 0x004036F0,
-    // label: initializeSeagullMovementVector
+    // label: _HoldStrong::Map::Entities::EntityState::meth_0x403790
+    // label: setupSeagullMovement
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00403790 = 0x00403790,
@@ -846,27 +918,37 @@ enum {
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x004038B0 = 0x004038B0,
-    // label: removeEntityFromTileLinkedList
+    // label: removeEntityFromTileList
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00403900 = 0x00403900,
     // label: Constructor_EntityState
+    // label: _HoldStrong::Map::Entities::EntityState::Constructor_EntityState
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00403980 = 0x00403980,
+    // label: _HoldStrong::Map::Entities::EntityState::meth_0x4039b0
     // label: activateProjectileEntity
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x004039B0 = 0x004039B0,
+    // label: _HoldStrong::Map::Entities::EntityState::deleteEntity
     // label: deleteEntity
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x004039F0 = 0x004039F0,
+    // label: _HoldStrong::Map::Entities::EntityState::initializeProjectileVelocities
     // label: initializeProjectileVelocities
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00403A20 = 0x00403A20,
-    // label: handleProjectileWallBounce
+    // label: _HoldStrong::Map::Entities::EntityState::meth_0x403ff0
+    // label: bounceProjectileOffWall
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00403FF0 = 0x00403FF0,
@@ -1502,7 +1584,9 @@ enum {
     SHC_3BB0A8C1_0x004049F8 = 0x004049F8,
     // type: /byte
     SHC_3BB0A8C1_0x00404A00 = 0x00404A00,
-    // label: arrowShootingRelated
+    // label: _HoldStrong::Map::Entities::EntityState::arrowShootingRelated
+    // label: checkProjectileLineOfSight
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00404A10 = 0x00404A10,
@@ -1510,7 +1594,9 @@ enum {
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x00404A70 = 0x00404A70,
+    // label: _HoldStrong::Map::Entities::EntityState::spawnProjectileEntity
     // label: spawnProjectileEntity
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00404AE0 = 0x00404AE0,
@@ -2046,11 +2132,15 @@ enum {
     // location: OpenSHC/Map/Entities
     // type: function
     SHC_3BB0A8C1_0x00405C00 = 0x00405C00,
-    // label: setProjectileTargetPosition
+    // label: _HoldStrong::Map::Entities::EntityState::meth_0x405cf0
+    // label: launchProjectileAt
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00405CF0 = 0x00405CF0,
-    // label: spawnProjectileImpactDebris
+    // label: _HoldStrong::Map::Entities::EntityState::meth_0x405da0
+    // label: spawnProjectileImpactFragments
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00405DA0 = 0x00405DA0,
@@ -2686,11 +2776,15 @@ enum {
     SHC_3BB0A8C1_0x00406640 = 0x00406640,
     // type: /byte
     SHC_3BB0A8C1_0x00406648 = 0x00406648,
+    // label: _HoldStrong::Map::Entities::EntityState::createSeagull
     // label: createSeagull
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00406650 = 0x00406650,
+    // label: _HoldStrong::Map::Entities::EntityState::processSeaGulls
     // label: processSeaGulls
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00406900 = 0x00406900,
@@ -2706,7 +2800,9 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00407160 = 0x00407160,
+    // label: _HoldStrong::Map::Entities::EntityState::processEntityHitBuildingOrUnit
     // label: processEntityHitBuildingOrUnit
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00407190 = 0x00407190,
@@ -2798,7 +2894,9 @@ enum {
     SHC_3BB0A8C1_0x004081D4 = 0x004081D4,
     // type: /byte
     SHC_3BB0A8C1_0x004081D5 = 0x004081D5,
-    // label: updateProjectileHeightAndCollision
+    // label: _HoldStrong::Map::Entities::EntityState::meth_0x4081e0
+    // label: updateProjectileHeight
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x004081E0 = 0x004081E0,
@@ -2806,23 +2904,31 @@ enum {
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x00408250 = 0x00408250,
+    // label: _HoldStrong::Map::Entities::EntityState::spawnEntityEffect2
     // label: spawnEntityEffect2
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x004082A0 = 0x004082A0,
+    // label: _HoldStrong::Map::Entities::EntityState::spawnEntityEffect1
     // label: spawnEntityEffect1
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x004083A0 = 0x004083A0,
+    // label: _HoldStrong::Map::Entities::EntityState::moveProjectileEntity
     // label: moveProjectileEntity
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x004084A0 = 0x004084A0,
-    // label: handleMapVersionUpgrade
+    // label: migrateEntityDataForMapVersion
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00408770 = 0x00408770,
+    // label: _HoldStrong::Map::Entities::EntityState::updateEntities
     // label: updateEntities
+    // location:
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x004087C0 = 0x004087C0,
@@ -2940,27 +3046,39 @@ enum {
     SHC_3BB0A8C1_0x00408E04 = 0x00408E04,
     // type: /undefined *32
     SHC_3BB0A8C1_0x00408E08 = 0x00408E08,
+    // label: _HoldStrong::Rendering::Bink::BinkControlClass::zeroBinkPtrAndLoadBinkSoundSystem
     // label: zeroBinkPtrAndLoadBinkSoundSystem
+    // location:
     // location: OpenSHC/Rendering/Bink/BinkControlClass
     // type: function
     SHC_3BB0A8C1_0x00408E10 = 0x00408E10,
+    // label: _HoldStrong::Rendering::Bink::BinkControlClass::stopBinkPlayback
     // label: stopBinkPlayback
+    // location:
     // location: OpenSHC/Rendering/Bink/BinkControlClass
     // type: function
     SHC_3BB0A8C1_0x00408E30 = 0x00408E30,
+    // label: _HoldStrong::Rendering::Bink::BinkControlClass::setBinkSndStreamAndStartTime
     // label: setBinkSndStreamAndStartTime
+    // location:
     // location: OpenSHC/Rendering/Bink/BinkControlClass
     // type: function
     SHC_3BB0A8C1_0x00408E70 = 0x00408E70,
+    // label: _HoldStrong::Rendering::Bink::BinkControlClass::stopAllBinkPlayback
     // label: stopAllBinkPlayback
+    // location:
     // location: OpenSHC/Rendering/Bink/BinkControlClass
     // type: function
     SHC_3BB0A8C1_0x00408EB0 = 0x00408EB0,
+    // label: _HoldStrong::Rendering::Bink::BinkControlClass::playBINK
     // label: playBINK
+    // location:
     // location: OpenSHC/Rendering/Bink/BinkControlClass
     // type: function
     SHC_3BB0A8C1_0x00408ED0 = 0x00408ED0,
+    // label: _HoldStrong::Rendering::Bink::BinkControlClass::copyBinkToVideoBuffer
     // label: copyBinkToVideoBuffer
+    // location:
     // location: OpenSHC/Rendering/Bink/BinkControlClass
     // type: function
     SHC_3BB0A8C1_0x00408FC0 = 0x00408FC0,
@@ -2982,31 +3100,45 @@ enum {
     // label: prt_409195_f3096517
     // location: OpenSHC/Rendering/Bink/BinkControlClass/copyBinkToVideoBuffer/override
     SHC_3BB0A8C1_0x00409195 = 0x00409195,
+    // label: _HoldStrong::Rendering::Bink::BinkControlClass::processBinkFrames
     // label: processBinkFrames
+    // location:
     // location: OpenSHC/Rendering/Bink/BinkControlClass
     // type: function
     SHC_3BB0A8C1_0x00409200 = 0x00409200,
+    // label: _HoldStrong::Rendering::Bink::BinkControlClass::stopAllBinkPlaybackThunk
     // label: stopAllBinkPlaybackThunk
+    // location:
     // location: OpenSHC/Rendering/Bink/BinkControlClass
     // type: function
     SHC_3BB0A8C1_0x004092B0 = 0x004092B0,
+    // label: _HoldStrong::Map::Navigation::DirectionAlgorithmState::computeHealthPercentage
     // label: computeHealthPercentage
+    // location:
     // location: OpenSHC/Map/Navigation/DirectionAlgorithmState
     // type: function
     SHC_3BB0A8C1_0x004092C0 = 0x004092C0,
-    // label: computeTileXOffset
+    // label: _HoldStrong::Rendering::ViewportRenderState::meth_0x4092e0
+    // label: tileIndexToColumn
+    // location:
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004092E0 = 0x004092E0,
+    // label: _HoldStrong::Map::TileMapState::processDamageToBuildingThunk
     // label: processDamageToBuildingThunk
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00409300 = 0x00409300,
-    // label: getBuildingResourceAmountByUid
+    // label: _HoldStrong::Map::Buildings::BuildingsState::someArrayIndexingOnBuildingField0x120
+    // label: someArrayIndexingOnBuildingField0x120
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00409330 = 0x00409330,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::convertCommandBuildingTypeToBuildingType
     // label: convertCommandBuildingTypeToBuildingType
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00409370 = 0x00409370,
@@ -3856,7 +3988,9 @@ enum {
     SHC_3BB0A8C1_0x00409929 = 0x00409929,
     // type: /byte
     SHC_3BB0A8C1_0x0040992A = 0x0040992A,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::convertBuildingTypeToCommandBuildingType
     // label: convertBuildingTypeToCommandBuildingType
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00409930 = 0x00409930,
@@ -4074,7 +4208,9 @@ enum {
     SHC_3BB0A8C1_0x00409DA8 = 0x00409DA8,
     // type: /undefined *32
     SHC_3BB0A8C1_0x00409DAC = 0x00409DAC,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::getBuildingHeightForBuildingID
     // label: getBuildingHeightForBuildingID
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00409DB0 = 0x00409DB0,
@@ -4176,7 +4312,9 @@ enum {
     SHC_3BB0A8C1_0x00409E75 = 0x00409E75,
     // type: /byte
     SHC_3BB0A8C1_0x00409E76 = 0x00409E76,
-    // label: getBuildingHeightForBuildingID2
+    // label: GetBuildingHeightForBuildingID_type2
+    // label: _HoldStrong::Map::Buildings::BuildingsState::GetBuildingHeightForBuildingID_type2
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00409E80 = 0x00409E80,
@@ -4276,19 +4414,27 @@ enum {
     SHC_3BB0A8C1_0x00409F41 = 0x00409F41,
     // type: /byte
     SHC_3BB0A8C1_0x00409F42 = 0x00409F42,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::getSpriteID
     // label: getSpriteID
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00409F50 = 0x00409F50,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::getSpriteID2
     // label: getSpriteID2
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00409FF0 = 0x00409FF0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::clearBuildings
     // label: clearBuildings
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040A020 = 0x0040A020,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::displayPopularityAndGoldPopups
     // label: displayPopularityAndGoldPopups
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040A060 = 0x0040A060,
@@ -4360,7 +4506,9 @@ enum {
     SHC_3BB0A8C1_0x0040A254 = 0x0040A254,
     // type: /byte
     SHC_3BB0A8C1_0x0040A255 = 0x0040A255,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::spawnCrowForBuilding
     // label: spawnCrowForBuilding
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040A260 = 0x0040A260,
@@ -4478,111 +4626,159 @@ enum {
     SHC_3BB0A8C1_0x0040A3F9 = 0x0040A3F9,
     // type: /byte
     SHC_3BB0A8C1_0x0040A3FA = 0x0040A3FA,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::isFearFactorBuilding
     // label: isFearFactorBuilding
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040A400 = 0x0040A400,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::isReligiousBuilding
     // label: isReligiousBuilding
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040A4A0 = 0x0040A4A0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::copyPlayerDataArrayValues
     // label: copyPlayerDataArrayValues
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040A4E0 = 0x0040A4E0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::chooseProductionItemType
     // label: chooseProductionItemType
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040A8A0 = 0x0040A8A0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::getEmptyBuildingCount
     // label: getEmptyBuildingCount
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040A950 = 0x0040A950,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::countBuildingsForPlayer
     // label: countBuildingsForPlayer
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040A9B0 = 0x0040A9B0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::countFarms
     // label: countFarms
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040AA10 = 0x0040AA10,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::findFirstBuildingOfType
     // label: findFirstBuildingOfType
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040AA80 = 0x0040AA80,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::findFirstBuildingIDForPlayerAndType
     // label: findFirstBuildingIDForPlayerAndType
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040AAD0 = 0x0040AAD0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::findNextBuildingForPlayerAndType
     // label: findNextBuildingForPlayerAndType
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040AB30 = 0x0040AB30,
-    // label: findNextBuildingIDForOwnerAndType
+    // label: _HoldStrong::Map::Buildings::BuildingsState::meth_0x40ab90
+    // label: findNextOwnedBuildingOfType
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040AB90 = 0x0040AB90,
-    // label: findNextBuildingForPlayerAndOneOfThreeTypes
+    // label: _HoldStrong::Map::Buildings::BuildingsState::meth_0x40ac00
+    // label: findNextOwnedBuildingOfTypes
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040AC00 = 0x0040AC00,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::canNavigateToDefensiveBuilding
     // label: canNavigateToDefensiveBuilding
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040AC80 = 0x0040AC80,
-    // label: findNextReachableDefensiveBuildingForPlayer
+    // label: _HoldStrong::Map::Buildings::BuildingsState::meth_0x40adb0
+    // label: findNextReachableDefensiveBuilding
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040ADB0 = 0x0040ADB0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::pickARandomBuildingOfType
     // label: pickARandomBuildingOfType
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040AEF0 = 0x0040AEF0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::pickARandomBuildingIDOfTheseThreeTypes
     // label: pickARandomBuildingIDOfTheseThreeTypes
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040AFB0 = 0x0040AFB0,
     // type: function
     SHC_3BB0A8C1_0x0040B040 = 0x0040B040,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::pickARandomPositiveFearFactorBuilding
     // label: pickARandomPositiveFearFactorBuilding
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040B090 = 0x0040B090,
-    // label: findClosestInnBuildingID
+    // label: _HoldStrong::Map::Buildings::BuildingsState::closestInnBuildingID
+    // label: closestInnBuildingID
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040B1A0 = 0x0040B1A0,
     // type: function
     SHC_3BB0A8C1_0x0040B1E0 = 0x0040B1E0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::recomputeAllFearFactors
     // label: recomputeAllFearFactors
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040B260 = 0x0040B260,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::findBuildingOfTypeForPlayer
     // label: findBuildingOfTypeForPlayer
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040B4E0 = 0x0040B4E0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::removeSiegeBuildings
     // label: removeSiegeBuildings
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040B540 = 0x0040B540,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::setBuildingInitialEntryTileTry
     // label: setBuildingInitialEntryTileTry
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040B5D0 = 0x0040B5D0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::prepareCampgroundCoords
     // label: prepareCampgroundCoords
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040B660 = 0x0040B660,
-    // label: hasBuildingEntranceFlagForOrientation
+    // label: getBuildingOrientationFlag
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040B720 = 0x0040B720,
-    // label: hasBuildingExitFlagForOrientation
+    // label: getBuildingOrientationFlag2
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040B7B0 = 0x0040B7B0,
-    // label: isBuildingPathBlockerOrDamageable
+    // label: _HoldStrong::Map::Buildings::BuildingsState::meth_0x40b840
+    // label: isBuildingBlockingOrDestructible
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040B840 = 0x0040B840,
@@ -4658,7 +4854,9 @@ enum {
     SHC_3BB0A8C1_0x0040B8F8 = 0x0040B8F8,
     // type: /byte
     SHC_3BB0A8C1_0x0040B8F9 = 0x0040B8F9,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::getBuildingHasHealthProperty
     // label: getBuildingHasHealthProperty
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040B900 = 0x0040B900,
@@ -4734,11 +4932,15 @@ enum {
     SHC_3BB0A8C1_0x0040B970 = 0x0040B970,
     // type: /byte
     SHC_3BB0A8C1_0x0040B971 = 0x0040B971,
-    // label: hasHumanPlayerUnitsOnBuilding
+    // label: _HoldStrong::Map::Buildings::BuildingsState::trueIfAnyUnitsOnBuildingAreFromHumanPlayer
+    // label: trueIfAnyUnitsOnBuildingAreFromHumanPlayer
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040B980 = 0x0040B980,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::setupBuildingEntrancesOffset
     // label: setupBuildingEntrancesOffset
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040BA10 = 0x0040BA10,
@@ -4770,7 +4972,9 @@ enum {
     SHC_3BB0A8C1_0x0040BC1C = 0x0040BC1C,
     // type: /undefined *32[7]
     SHC_3BB0A8C1_0x0040BC20 = 0x0040BC20,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::setupNextCandidateLocationComputeOffsets2
     // label: setupNextCandidateLocationComputeOffsets2
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040BC40 = 0x0040BC40,
@@ -4802,59 +5006,87 @@ enum {
     SHC_3BB0A8C1_0x0040BE44 = 0x0040BE44,
     // type: /undefined *32[7]
     SHC_3BB0A8C1_0x0040BE48 = 0x0040BE48,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::buildingHasSpaceForResource
     // label: buildingHasSpaceForResource
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040BE70 = 0x0040BE70,
-    // label: extendResourceCountdownForPlayerBuildingsOfType
+    // label: _HoldStrong::Map::Buildings::BuildingsState::meth_0x40bee0
+    // label: raiseBuildingCountdownForType
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040BEE0 = 0x0040BEE0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::canBuildingStoreTheAmount
     // label: canBuildingStoreTheAmount
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040BF40 = 0x0040BF40,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::getResourceCountThatCanBeDeposited
     // label: getResourceCountThatCanBeDeposited
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040BFA0 = 0x0040BFA0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::getBuildingStorageTypeForResourceType
     // label: getBuildingStorageTypeForResourceType
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040BFD0 = 0x0040BFD0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::getStorageBuildingForResourceTypeAndAmount
     // label: getStorageBuildingForResourceTypeAndAmount
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040BFE0 = 0x0040BFE0,
-    // label: getArmoryIDIfSpaceLeft
+    // label: _HoldStrong::Map::Buildings::BuildingsState::ifArmoryReturnIDIfSpaceLeft
+    // label: ifArmoryReturnIDIfSpaceLeft
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040C060 = 0x0040C060,
-    // label: computeArmoryRemainingCapacity
+    // label: _HoldStrong::Map::Buildings::BuildingsState::meth_0x40c0d0
+    // label: getArmoryFreeCapacity
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040C0D0 = 0x0040C0D0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::computeResourceSumForBuilding
     // label: computeResourceSumForBuilding
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040C130 = 0x0040C130,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::hasLessWoodThanTheCostOfAWoodcuttersHutAndNoWoodcutters
     // label: hasLessWoodThanTheCostOfAWoodcuttersHutAndNoWoodcutters
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040C1A0 = 0x0040C1A0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::getResourceSpace
     // label: getResourceSpace
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040C1F0 = 0x0040C1F0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::countPlayerResources
     // label: countPlayerResources
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040C300 = 0x0040C300,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::recomputePlayerDataStocksBasedOnStorageBuildings
     // label: recomputePlayerDataStocksBasedOnStorageBuildings
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040C4B0 = 0x0040C4B0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::getBuildingCostUnk
     // label: getBuildingCost
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040C5F0 = 0x0040C5F0,
@@ -5270,7 +5502,9 @@ enum {
     SHC_3BB0A8C1_0x0040C7F7 = 0x0040C7F7,
     // type: /byte
     SHC_3BB0A8C1_0x0040C7F8 = 0x0040C7F8,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::getPriceForDisbandedUnitType
     // label: getPriceForDisbandedUnitType
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040C800 = 0x0040C800,
@@ -5458,153 +5692,215 @@ enum {
     SHC_3BB0A8C1_0x0040C9AB = 0x0040C9AB,
     // type: /byte
     SHC_3BB0A8C1_0x0040C9AC = 0x0040C9AC,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::resourceGainForKillingPitAndPitchDitch
     // label: resourceGainForKillingPitAndPitchDitch
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040C9B0 = 0x0040C9B0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::subtractPitchAndMoatFromStartingGoldInSiegeThatMode
     // label: subtractPitchAndMoatFromStartingGoldInSiegeThatMode
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040C9F0 = 0x0040C9F0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::hasEnoughGoldForMoat
     // label: hasEnoughGoldForMoat
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040CAC0 = 0x0040CAC0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::getFarmThatHasTile
     // label: getFarmThatHasTile
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040CB10 = 0x0040CB10,
-    // label: isFarmTileReadyForWheatStageChange
+    // label: _HoldStrong::Map::Buildings::BuildingsState::meth_0x40cb90
+    // label: hasFarmTileReadyToHarvest
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040CB90 = 0x0040CB90,
     // type: function
     SHC_3BB0A8C1_0x0040CBB0 = 0x0040CBB0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::growWheat
     // label: growWheat
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040CC30 = 0x0040CC30,
-    // label: updateWheatFieldTileGraphics
+    // label: _HoldStrong::Map::Buildings::BuildingsState::unkWheatRelated1
+    // label: updateWheatFieldCropGraphics
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040CF20 = 0x0040CF20,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::harmWheatFarmsOfPlayer
     // label: harmWheatFarmsOfPlayer
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040D090 = 0x0040D090,
-    // label: setupBarracksCampgroundPositions
+    // label: _HoldStrong::Map::Buildings::BuildingsState::meth_0x40d120
+    // label: computeBarracksParadePositions
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040D120 = 0x0040D120,
     // type: function
     SHC_3BB0A8C1_0x0040D190 = 0x0040D190,
-    // label: setupMercenaryPostCampgroundPositions
+    // label: _HoldStrong::Map::Buildings::BuildingsState::meth_0x40d400
+    // label: computeMercenaryParadePositions
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040D400 = 0x0040D400,
     // type: function
     SHC_3BB0A8C1_0x0040D470 = 0x0040D470,
-    // label: isSpaceAvailableAtUnitRallyPoint
+    // label: _HoldStrong::Map::Buildings::BuildingsState::getIsAnySpaceAvailableAtUnitRallyPoint
+    // label: getIsAnySpaceAvailableAtUnitRallyPoint
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040D6E0 = 0x0040D6E0,
     // type: function
     SHC_3BB0A8C1_0x0040D910 = 0x0040D910,
-    // label: getKeepLocationForAIUnit
+    // label: _HoldStrong::Map::Buildings::BuildingsState::ifAIUnitReturnKeepLocation
+    // label: ifAIUnitReturnKeepLocation
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040D9C0 = 0x0040D9C0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::createEntityForAssemblyPointsForActiveTabType
     // label: createEntityForAssemblyPointsForActiveTabType
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040DC70 = 0x0040DC70,
-    // label: setupEngineersGuildCampgroundPositions
+    // label: _HoldStrong::Map::Buildings::BuildingsState::meth_0x40e040
+    // label: computeEngineersCampgroundPositions
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040E040 = 0x0040E040,
-    // label: findFreeEngineerAssemblyTile
+    // label: _HoldStrong::Map::Buildings::BuildingsState::someLaddermanFunction1
+    // label: someLaddermanFunction1
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040E120 = 0x0040E120,
-    // label: setupTunnelersGuildCampgroundPositions
+    // label: _HoldStrong::Map::Buildings::BuildingsState::meth_0x40e330
+    // label: computeTunnelersCampgroundPositions
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040E330 = 0x0040E330,
-    // label: findFreeTunnelerAssemblyTile
+    // label: _HoldStrong::Map::Buildings::BuildingsState::meth_0x40e410
+    // label: findTunnelerMusterTile
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040E410 = 0x0040E410,
     // type: function
     SHC_3BB0A8C1_0x0040E550 = 0x0040E550,
-    // label: findFreeCathedralAssemblyTile
+    // label: _HoldStrong::Map::Buildings::BuildingsState::meth_0x40e610
+    // label: findCathedralMusterTile
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040E610 = 0x0040E610,
     // type: function
     SHC_3BB0A8C1_0x0040E660 = 0x0040E660,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::setTileRefsForOilSmelter
     // label: setTileRefsForOilSmelter
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040E740 = 0x0040E740,
     // type: function
     SHC_3BB0A8C1_0x0040E760 = 0x0040E760,
-    // label: isEngineerNotAtAssignedWorkTile
+    // label: _HoldStrong::Map::Buildings::BuildingsState::meth_0x40e900
+    // label: getWorkerSlotDestinationTile
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040E900 = 0x0040E900,
-    // label: getActiveEngineerForBuilding
+    // label: getActiveEngineerWorker
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040E990 = 0x0040E990,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::setNewOnFarmDestination
     // label: setNewOnFarmDestination
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040EA00 = 0x0040EA00,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::growHops
     // label: growHops
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040EBF0 = 0x0040EBF0,
     // type: function
     SHC_3BB0A8C1_0x0040EC20 = 0x0040EC20,
-    // label: updateHopsFieldTileGraphics
+    // label: _HoldStrong::Map::Buildings::BuildingsState::meth_0x40edf0
+    // label: updateFarmCropTileGraphics
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040EDF0 = 0x0040EDF0,
     // type: function
     SHC_3BB0A8C1_0x0040EE30 = 0x0040EE30,
-    // label: harmHopFarmsOfPlayer
+    // label: _HoldStrong::Map::Buildings::BuildingsState::meth_0x40ef40
+    // label: harvestHopFarm
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040EF40 = 0x0040EF40,
-    // label: updateBuildingAreaTileGraphics
+    // label: updateFarmFieldTileGraphics
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040EFD0 = 0x0040EFD0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::setDairyFarmCheeseCounter
     // label: setDairyFarmCheeseCounter
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040F040 = 0x0040F040,
-    // label: harmAppleFarmTreesOfPlayer
+    // label: _HoldStrong::Map::Buildings::BuildingsState::meth_0x40f090
+    // label: regrowAppleFarmOrchard
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040F090 = 0x0040F090,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::setSignpostDataForBuildings
     // label: setSignpostDataForBuildings
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040F1E0 = 0x0040F1E0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::destroySignpostData
     // label: destroySignpostData
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040F240 = 0x0040F240,
-    // label: updateBuildingSignpostCounter
+    // label: _HoldStrong::Map::Buildings::BuildingsState::meth_0x40f360
+    // label: setBuildingDisplayState
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040F360 = 0x0040F360,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::setBuildingToAppleFarm
     // label: setBuildingToAppleFarm
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040F3D0 = 0x0040F3D0,
-    // label: clearBuildingValueWhenStateIsTwo
+    // label: _HoldStrong::Map::Buildings::BuildingsState::setBuildingValueBasedOnBuildingStateBeing2
+    // label: setBuildingValueBasedOnBuildingStateBeing2
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040F3F0 = 0x0040F3F0,
@@ -5616,51 +5912,73 @@ enum {
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040F440 = 0x0040F440,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::determinePeasantSitPosition
     // label: determinePeasantSitPosition
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040F460 = 0x0040F460,
-    // label: refreshAllBuildingTileDisplays
+    // label: _HoldStrong::Map::Buildings::BuildingsState::meth_0x40f4f0
+    // label: refreshAllBuildingDisplayLayers
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040F4F0 = 0x0040F4F0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::hasWorker
     // label: hasWorker
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040F540 = 0x0040F540,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::meth_0x40f5c0
     // label: assignWorkerToBuilding
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040F5C0 = 0x0040F5C0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::updateNeededEmployeeCount
     // label: updateNeededEmployeeCount
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040F620 = 0x0040F620,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::getBuildingPriority
     // label: getBuildingPriority
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040F700 = 0x0040F700,
     // type: function
     SHC_3BB0A8C1_0x0040F730 = 0x0040F730,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::updateAllBuildingsSnoozedState
     // label: updateAllBuildingsSnoozedState
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040F750 = 0x0040F750,
     // type: function
     SHC_3BB0A8C1_0x0040F790 = 0x0040F790,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::applySnoozedStateBasedOnPlayerData
     // label: applySnoozedStateBasedOnPlayerData
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040F8A0 = 0x0040F8A0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::processBuildingIDsNeedPeasantsQueue
     // label: processBuildingIDsNeedPeasantsQueue
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040F9D0 = 0x0040F9D0,
-    // label: updateLordLadyJesterAndGhostUnits
+    // label: _HoldStrong::Map::Buildings::BuildingsState::meth_0x40fc40
+    // label: updatePlayerCourtUnits
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040FC40 = 0x0040FC40,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::getRequiredEngineerCountForSiegeBuilding
     // label: getRequiredEngineerCountForSiegeBuilding
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00410200 = 0x00410200,
@@ -5736,31 +6054,43 @@ enum {
     SHC_3BB0A8C1_0x00410285 = 0x00410285,
     // type: /byte
     SHC_3BB0A8C1_0x00410286 = 0x00410286,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::updateVisuallyActiveState
     // label: updateVisuallyActiveState
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00410290 = 0x00410290,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::updateRepairCostAndReturnIfDamaged
     // label: updateRepairCostAndReturnIfDamaged
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00410320 = 0x00410320,
-    // label: canUnitReachBuildingPerimeter
+    // label: _HoldStrong::Map::Buildings::BuildingsState::meth_0x410440
+    // label: canUnitReachBuilding
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00410440 = 0x00410440,
-    // label: canUnitReachAdjacentTile
+    // label: canUnitReachTileNeighbor
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x004105F0 = 0x004105F0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::processDamageToUnitsOnBuilding
     // label: processDamageToUnitsOnBuilding
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x004106D0 = 0x004106D0,
-    // label: spawnRandomFireEffectOnBuilding
+    // label: _HoldStrong::Map::Buildings::BuildingsState::slaveFireRelated1
+    // label: spawnBuildingFirePops
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00410800 = 0x00410800,
-    // label: getBuildingFlammabilityFactor
+    // label: _HoldStrong::Map::Buildings::BuildingsState::fireRelatedBuildingParameter
+    // label: getBuildingFireClass
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00410920 = 0x00410920,
@@ -5986,15 +6316,21 @@ enum {
     SHC_3BB0A8C1_0x004109E1 = 0x004109E1,
     // type: /byte
     SHC_3BB0A8C1_0x004109E2 = 0x004109E2,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::meth_0x4109f0
     // label: extinguishBuildingFire
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x004109F0 = 0x004109F0,
-    // label: findClosestReachableAlliedBuilding
+    // label: _HoldStrong::Map::Buildings::BuildingsState::meth_0x410b10
+    // label: findNearestReachableTeamBuilding
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00410B10 = 0x00410B10,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::playerHasBurningBuilding
     // label: playerHasBurningBuilding
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00410C40 = 0x00410C40,
@@ -6196,11 +6532,15 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00416F80 = 0x00416F80,
-    // label: validateBuildingTetheredUnits
+    // label: _HoldStrong::Map::Buildings::BuildingsState::meth_0x4173d0
+    // label: revalidateBuildingOccupants
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x004173D0 = 0x004173D0,
-    // label: removeTetheredUnitFromBuilding
+    // label: _HoldStrong::Map::Buildings::BuildingsState::meth_0x417450
+    // label: removeOccupantFromBuilding
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00417450 = 0x00417450,
@@ -6296,11 +6636,15 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00418C80 = 0x00418C80,
-    // label: getRequiredEngineersCount
+    // label: _HoldStrong::Map::Buildings::BuildingsState::requiredEngineersCount
+    // label: requiredEngineersCount
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00418EC0 = 0x00418EC0,
-    // label: UpdateBadBuildingCessPitOrDancingBearUnk
+    // label: _HoldStrong::Global::UpdateBadBuildingCessPitOrDancingBearUnk
+    // label: resetBuildingDisplayAnimation
+    // location:
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00418F70 = 0x00418F70,
@@ -6344,43 +6688,57 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004196D0 = 0x004196D0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::initBuildingCosts
     // label: initBuildingCosts
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00419780 = 0x00419780,
     // type: function
     SHC_3BB0A8C1_0x00419790 = 0x00419790,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::updatePathLinkageLayerForAllBuildings
     // label: updatePathLinkageLayerForAllBuildings
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x004197C0 = 0x004197C0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::processDamageFromKillingPit
     // label: processDamageFromKillingPit
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00419800 = 0x00419800,
-    // label: updatePathLinkageTileMap
+    // label: _HoldStrong::Map::Buildings::BuildingsState::unkUpdatePathLinkageTileMap
+    // label: unkUpdatePathLinkageTileMap
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00419960 = 0x00419960,
-    // label: initializeGatePathfindingForOwner
+    // label: _HoldStrong::Map::Buildings::BuildingsState::meth_0x419a30
+    // label: initPlayerGatehousePathLinks
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00419A30 = 0x00419A30,
-    // label: rebuildTileLogicLayerForGatesAndWalls
+    // label: applyWallMoatTilesToMap
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00419AC0 = 0x00419AC0,
     // type: function
     SHC_3BB0A8C1_0x00419AE0 = 0x00419AE0,
-    // label: rebuildTileLogicLayerForKeeps
+    // label: markKeepTilesInLogicLayer
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00419BE0 = 0x00419BE0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::updatePathLinkageForGatesKeepsSiegeTowers
     // label: updatePathLinkageForGatesKeepsSiegeTowers
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00419C70 = 0x00419C70,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::updateEnemyBuildings
     // label: updateEnemyBuildings
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00419D70 = 0x00419D70,
@@ -6578,11 +6936,13 @@ enum {
     SHC_3BB0A8C1_0x00419EA1 = 0x00419EA1,
     // type: /byte
     SHC_3BB0A8C1_0x00419EA2 = 0x00419EA2,
-    // label: aiFindBuildingToAttack
+    // label: AIfindBuildingToAttack
+    // label: _HoldStrong::Map::Buildings::BuildingsState::AIfindBuildingToAttack
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00419EB0 = 0x00419EB0,
-    // label: findClosestEnemyBuildingWithinRadius
+    // label: findNearestEnemyBuildingInRadius
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00419FA0 = 0x00419FA0,
@@ -6884,23 +7244,33 @@ enum {
     // location: OpenSHC/IO
     // type: function
     SHC_3BB0A8C1_0x0041A740 = 0x0041A740,
-    // label: constructBuildingsState
+    // label: Constructor_BuildingsState
+    // label: _HoldStrong::Map::Buildings::BuildingsState::Constructor_BuildingsState
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041A760 = 0x0041A760,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::destroyBuilding
     // label: destroyBuilding
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041A7A0 = 0x0041A7A0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::destroyBuildings
     // label: destroyBuildings
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041A860 = 0x0041A860,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::swapOwnersOfCastle
     // label: swapOwnersOfCastle
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041A8D0 = 0x0041A8D0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::determineBuildingEntranceFromKeepArea
     // label: determineBuildingEntranceFromKeepArea
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041ADE0 = 0x0041ADE0,
@@ -6909,81 +7279,115 @@ enum {
     SHC_3BB0A8C1_0x0041B11E = 0x0041B11E,
     // type: function
     SHC_3BB0A8C1_0x0041B190 = 0x0041B190,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::determineBuildingEntranceFromCustomArea
     // label: determineBuildingEntranceFromCustomArea
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041B2B0 = 0x0041B2B0,
     // type: function
     SHC_3BB0A8C1_0x0041B6A0 = 0x0041B6A0,
-    // label: computeBuildingEntranceFlagsForOrientations
+    // label: _HoldStrong::Map::Buildings::BuildingsState::meth_0x41b7c0
+    // label: updateBuildingBlockedAccessTiles
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041B7C0 = 0x0041B7C0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::findQuarryPileLocation
     // label: findQuarryPileLocation
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041B890 = 0x0041B890,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::hasBuildingAsNeighbour
     // label: hasBuildingAsNeighbour
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041B940 = 0x0041B940,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::findParticularBuilding
     // label: findParticularBuilding
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041BA00 = 0x0041BA00,
-    // label: findAccessibleAreaNearBuildingLocation
+    // label: _HoldStrong::Map::Buildings::BuildingsState::getAreaForSurroundingTileUnk
+    // label: getBuildingEntranceAreaID
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041BAB0 = 0x0041BAB0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::addResourceToStockpile
     // label: addResourceToStockpile
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041BB30 = 0x0041BB30,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::addResourceToGranary
     // label: addResourceToGranary
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041BC10 = 0x0041BC10,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::addResourceToArmory
     // label: addResourceToArmory
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041BCA0 = 0x0041BCA0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::processResourceLoss
     // label: processResourceLoss
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041BD70 = 0x0041BD70,
     // type: function
     SHC_3BB0A8C1_0x0041BE30 = 0x0041BE30,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::subtractResourcesStoredInBuilding
     // label: subtractResourcesStoredInBuilding
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041BF50 = 0x0041BF50,
     // type: function
     SHC_3BB0A8C1_0x0041BF90 = 0x0041BF90,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::processPlacementResourceLossForBuildingType
     // label: processPlacementResourceLossForBuildingType
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041BFD0 = 0x0041BFD0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::processWallBuildingLoss
     // label: processWallBuildingLoss
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041C190 = 0x0041C190,
-    // label: applyFoodLossPercentageToPlayer
+    // label: removeFoodResourcesByPercent
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041C240 = 0x0041C240,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::processResourceGain
     // label: processResourceGain
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041C310 = 0x0041C310,
-    // label: applyGateOrDrawbridgeOpenCloseChange
+    // label: ApplyGateOrDrawbridgeOpenCloseChange
+    // label: _HoldStrong::Map::Buildings::BuildingsState::ApplyGateOrDrawbridgeOpenCloseChange
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041C570 = 0x0041C570,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::sortBuildingIDsNeedPeasantsQueue
     // label: sortBuildingIDsNeedPeasantsQueue
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041C6F0 = 0x0041C6F0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::lightUpBuilding
     // label: lightUpBuilding
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041C810 = 0x0041C810,
@@ -7117,11 +7521,15 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00420A30 = 0x00420A30,
-    // label: upgradeBuildingsForMapVersion
+    // label: _HoldStrong::Map::Buildings::BuildingsState::meth_0x420bf0
+    // label: migrateBuildingsForMapVersion
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00420BF0 = 0x00420BF0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::setupBuildingData
     // label: setupBuildingData
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00420D20 = 0x00420D20,
@@ -7391,41 +7799,63 @@ enum {
     SHC_3BB0A8C1_0x00421881 = 0x00421881,
     // type: /byte
     SHC_3BB0A8C1_0x00421882 = 0x00421882,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::deleteBuilding
     // label: deleteBuilding
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00421890 = 0x00421890,
-    // label: destroyBuildingAndLinkedDuplicates
+    // label: _HoldStrong::Map::Buildings::BuildingsState::someBuildingDestroyFunction
+    // label: someBuildingDestroyFunction
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00421990 = 0x00421990,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::buildingIsAccessible
     // label: buildingIsAccessible
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00421A40 = 0x00421A40,
-    // label: resolveBuildingEntryAccessibility
+    // label: _HoldStrong::Map::Buildings::BuildingsState::meth_0x421be0
+    // label: checkBuildingAccessFromArea
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00421BE0 = 0x00421BE0,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::giveBackResourceForDestroyedBuilding
     // label: giveBackResourceForDestroyedBuilding
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00421D70 = 0x00421D70,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::getBuildingThatCanStoreThisResource
     // label: getBuildingThatCanStoreThisResource
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00422230 = 0x00422230,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::getArmoryWithSpaceLeft
     // label: getArmoryWithSpaceLeft
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00422370 = 0x00422370,
+    // label: findAccessibleArmoryWithSpace
+    // location:
+    // type: function
+    SHC_3BB0A8C1_0x00422396 = 0x00422396,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::findQuarryPileThatIsCloseAndHasMostStone
     // label: findQuarryPileThatIsCloseAndHasMostStone
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00422400 = 0x00422400,
     // type: function
     SHC_3BB0A8C1_0x00422430 = 0x00422430,
-    // label: updateGateDrawBridgeOpenCloseLogic
+    // label: UpdateGateDrawBridgeOpenCloseLogic
+    // label: _HoldStrong::Map::Buildings::BuildingsState::UpdateGateDrawBridgeOpenCloseLogic
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x004224F0 = 0x004224F0,
@@ -7435,17 +7865,23 @@ enum {
     SHC_3BB0A8C1_0x00422830 = 0x00422830,
     // type: function
     SHC_3BB0A8C1_0x00422A70 = 0x00422A70,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::checkBuildingsNeedPeasants
     // label: checkBuildingsNeedPeasants
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00422B80 = 0x00422B80,
-    // label: spreadFireRandomlyToBuildings
+    // label: _HoldStrong::Map::Buildings::BuildingsState::randomFireSpreadToBuildingsUnk
+    // label: igniteRandomPlayerBuildings
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00422C60 = 0x00422C60,
     // type: function
     SHC_3BB0A8C1_0x00422D10 = 0x00422D10,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::updateBuildings
     // label: updateBuildings
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00422E20 = 0x00422E20,
@@ -7543,83 +7979,122 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004240D0 = 0x004240D0,
-    // label: recomputeAccessibilityForAllBuildings
+    // label: _HoldStrong::Map::Buildings::BuildingsState::meth_0x424220
+    // label: recomputeAllBuildingAccessibility
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00424220 = 0x00424220,
+    // label: _HoldStrong::Map::Buildings::BuildingsState::updateHeatmapBasedOnBuildingAccessibility
     // label: updateHeatmapBasedOnBuildingAccessibility
+    // location:
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00424270 = 0x00424270,
-    // label: applyVersionUpgradeAccessibilityRecompute
+    // label: recomputeBuildingAccessibilityOnLoad
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x00424310 = 0x00424310,
+    // label: ?SetItem@CListCtrl@@QAEHHHIPB_WHIIJ@Z
+    // label: _HoldStrong::Text::TextManager::renderInGameText
     // label: renderInGameText
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x00424320 = 0x00424320,
+    // label: _HoldStrong::Text::TextManager::renderTextToScreen2
     // label: renderTextToScreen2
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x00424360 = 0x00424360,
+    // label: _HoldStrong::Text::TextManager::renderText
     // label: renderText
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x00424390 = 0x00424390,
+    // label: _HoldStrong::Text::TextManager::renderText2
     // label: renderText2
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x004243E0 = 0x004243E0,
+    // label: _HoldStrong::Text::TextManager::renderInGameText2
     // label: renderInGameText2
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x00424420 = 0x00424420,
+    // label: _HoldStrong::Text::TextManager::renderTextFromTextGroup
     // label: renderTextFromTextGroup
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x00424470 = 0x00424470,
+    // label: _HoldStrong::Text::TextManager::renderMultilineText2
     // label: renderMultilineText2
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x004244C0 = 0x004244C0,
-    // label: renderMultilineTextUnk
+    // label: _HoldStrong::Text::TextManager::renderMultilineTextUnk
+    // label: renderMultilineTextFromGroupWithBlend
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x00424500 = 0x00424500,
-    // label: renderMultilineText2Unk
+    // label: _HoldStrong::Text::TextManager::renderMultilineText2Unk
+    // label: renderMultilineTextFromGroup
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x00424540 = 0x00424540,
-    // label: renderMultilineText3Unk
+    // label: _HoldStrong::Text::TextManager::renderMultilineText3Unk
+    // label: renderMultilineTextFromGroupWithShadow
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x00424580 = 0x00424580,
-    // label: renderMultilineText4Unk
+    // label: _HoldStrong::Text::TextManager::renderMultilineText4Unk
+    // label: renderMultilineTextFromGroupNoSpacing
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x004245D0 = 0x004245D0,
+    // label: _HoldStrong::Text::TextManager::renderNumber
     // label: renderNumber
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x00424620 = 0x00424620,
+    // label: _HoldStrong::Text::TextManager::renderLeftAlignedNumberToScreen
     // label: renderLeftAlignedNumberToScreen
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x00424650 = 0x00424650,
+    // label: _HoldStrong::Text::TextManager::renderNumberToScreen
     // label: renderNumberToScreen
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x00424680 = 0x00424680,
+    // label: _HoldStrong::Text::TextManager::computeTextWidthForTextGroup
     // label: computeTextWidthForTextGroup
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x004246B0 = 0x004246B0,
+    // label: _HoldStrong::UI::Rendering::AlphaAndButtonSurface::renderNonInteractingButtonBackground
     // label: renderNonInteractingButtonBackground
+    // location:
     // location: OpenSHC/UI/Rendering/AlphaAndButtonSurface
     // type: function
     SHC_3BB0A8C1_0x004246E0 = 0x004246E0,
-    // label: endSpeechStreamsAndResetLoopFlags
+    // label: _HoldStrong::Audio::MSS::SoundSystem::meth_0x424700
+    // label: stopSpeechStreams
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00424700 = 0x00424700,
@@ -7801,11 +8276,15 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004266E0 = 0x004266E0,
-    // label: MenuItemRenderFunction_UnusedSetName_ButtonsUnk
+    // label: MenuItemRenderFunction_UnusedSetName_Buttons
+    // label: _HoldStrong::UI::MenuItemRenderFunction_UnusedSetName_ButtonsUnk
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00426750 = 0x00426750,
-    // label: MenuItemActionHandler_UnusedSetName_ButtonsUnk
+    // label: MenuItemActionHandler_UnusedSetName_Buttons
+    // label: _HoldStrong::UI::MenuItemActionHandler_UnusedSetName_ButtonsUnk
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004267F0 = 0x004267F0,
@@ -7841,15 +8320,21 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00426ED0 = 0x00426ED0,
-    // label: MenuView_UnusedSomeMissionStartUnk_Prepare
+    // label: MenuView_UnusedSomeMissionStart_Prepare
+    // label: _HoldStrong::UI::MenuView_UnusedSomeMissionStartUnk_Prepare
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00426F80 = 0x00426F80,
-    // label: MenuItemRenderFunction_UnusedSomeMissionStartUnk_General
+    // label: MenuItemRenderFunction_UnusedSomeMissionStart_General
+    // label: _HoldStrong::UI::MenuItemRenderFunction_UnusedSomeMissionStartUnk_General
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00426FB0 = 0x00426FB0,
-    // label: MenuItemActionHandler_UnusedSomeMissionStartUnk_General
+    // label: MenuItemActionHandler_UnusedSomeMissionStart_General
+    // label: _HoldStrong::UI::MenuItemActionHandler_UnusedSomeMissionStartUnk_General
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00427080 = 0x00427080,
@@ -7857,7 +8342,9 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00427110 = 0x00427110,
-    // label: MainMenu_Unknown21_Prepare
+    // label: MenuView_MainMenuModal21_Prepare
+    // label: _HoldStrong::Global::MainMenu_Unknown21_Prepare
+    // location:
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00427180 = 0x00427180,
@@ -7869,11 +8356,15 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00427210 = 0x00427210,
-    // label: MenuView_Unknown61ReturnToSkrimishMenuUnk_DoInitial
+    // label: MenuView_ReturnToSkirmishMenu61_DoInitial
+    // label: _HoldStrong::UI::MenuView_Unknown61ReturnToSkrimishMenuUnk_DoInitial
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00427240 = 0x00427240,
-    // label: MenuView_Unknown61ReturnToSkrimishMenuUnk_DoEveryFrame
+    // label: MenuView_ReturnToSkirmishMenu61_DoEveryFrame
+    // label: _HoldStrong::UI::MenuView_Unknown61ReturnToSkrimishMenuUnk_DoEveryFrame
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004272C0 = 0x004272C0,
@@ -8022,8 +8513,10 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00429A40 = 0x00429A40,
+    // label: sendChatMessageCommand
+    // location:
     // type: function
-    SHC_3BB0A8C1_0x0042A380 = 0x0042A380,
+    SHC_3BB0A8C1_0x0042A37B = 0x0042A37B,
     // type: /undefined *32
     SHC_3BB0A8C1_0x0042A460 = 0x0042A460,
     // type: /undefined *32
@@ -8080,7 +8573,9 @@ enum {
     SHC_3BB0A8C1_0x0042AC34 = 0x0042AC34,
     // type: /undefined *32
     SHC_3BB0A8C1_0x0042AC38 = 0x0042AC38,
-    // label: MenuItemRenderFunction_LobbyMenu_Unknown
+    // label: MenuItemRenderFunction_LobbyMenu_ConstructionCostText
+    // label: _HoldStrong::UI::MenuItemRenderFunction_LobbyMenu_Unknown
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x0042AC40 = 0x0042AC40,
@@ -8592,7 +9087,9 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x0042C060 = 0x0042C060,
-    // label: MenuView_Unknown33_DoEveryFrame
+    // label: MenuView_LobbyReadyLaunchGame_DoEveryFrame
+    // label: _HoldStrong::UI::MenuView_Unknown33_DoEveryFrame
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x0042C090 = 0x0042C090,
@@ -8608,11 +9105,15 @@ enum {
     SHC_3BB0A8C1_0x0042C2F0 = 0x0042C2F0,
     // type: function
     SHC_3BB0A8C1_0x0042C450 = 0x0042C450,
-    // label: SomeSiegeRelatedCopying
+    // label: _HoldStrong::UI::Helpers::SomeSiegeRelatedCopying
+    // label: loadSiegeScenarioInfo
+    // location:
     // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x0042C540 = 0x0042C540,
-    // label: LaunchSinglePlayerGameUnk
+    // label: _HoldStrong::Global::LaunchSinglePlayerGameUnk
+    // label: launchSinglePlayerGame
+    // location:
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x0042C620 = 0x0042C620,
@@ -9866,10 +10367,6 @@ enum {
     SHC_3BB0A8C1_0x0042E900 = 0x0042E900,
     // type: function
     SHC_3BB0A8C1_0x0042E95F = 0x0042E95F,
-    // type: function
-    SHC_3BB0A8C1_0x0042E96A = 0x0042E96A,
-    // type: function
-    SHC_3BB0A8C1_0x0042EA59 = 0x0042EA59,
     // label: MenuItemRenderFunction_MapEditorProperties_MapDescriptionBox
     // location: OpenSHC/UI
     // type: function
@@ -11254,10 +11751,6 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00430550 = 0x00430550,
-    // type: function
-    SHC_3BB0A8C1_0x004305B0 = 0x004305B0,
-    // type: function
-    SHC_3BB0A8C1_0x004305CF = 0x004305CF,
     // label: MenuItemActionHandler_UnusedChooseGameType_Main
     // location: OpenSHC/UI
     // type: function
@@ -12304,7 +12797,9 @@ enum {
     SHC_3BB0A8C1_0x00431989 = 0x00431989,
     // type: /byte
     SHC_3BB0A8C1_0x0043198A = 0x0043198A,
-    // label: ResetSomeValuesFunctionUnk
+    // label: _HoldStrong::Global::ResetSomeValuesFunctionUnk
+    // label: resetGameUIStateOnMenuSwitch
+    // location:
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00431990 = 0x00431990,
@@ -12320,11 +12815,15 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00433030 = 0x00433030,
-    // label: MenuItemActionHandler_BuildMenu_SomeKeepAndGranaryCheckUnk
+    // label: MenuItemActionHandler_BuildMenu_RedirectFromWitchHoistIfHasKeep
+    // label: _HoldStrong::UI::MenuItemActionHandler_BuildMenu_SomeKeepAndGranaryCheckUnk
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00433200 = 0x00433200,
-    // label: MenuItemActionHandler_InGameMenu_UnknownBinkRelated
+    // label: MenuItemActionHandler_InGameMenu_SkipBinkVideo
+    // label: _HoldStrong::UI::MenuItemActionHandler_InGameMenu_UnknownBinkRelated
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00433230 = 0x00433230,
@@ -12380,9 +12879,12 @@ enum {
     SHC_3BB0A8C1_0x00434120 = 0x00434120,
     // label: AdjustViewPortAndMore
     // location: OpenSHC/Global
+    // type: function
     SHC_3BB0A8C1_0x004341D9 = 0x004341D9,
     // type: function
     SHC_3BB0A8C1_0x004341E1 = 0x004341E1,
+    // type: function
+    SHC_3BB0A8C1_0x004341E7 = 0x004341E7,
     // type: /undefined *32
     SHC_3BB0A8C1_0x0043420C = 0x0043420C,
     // type: /undefined *32
@@ -12403,7 +12905,9 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00434230 = 0x00434230,
-    // label: MenuItemActionHandler_General_Unknown2
+    // label: MenuItemActionHandler_General_SetPreviousMenuTab
+    // label: _HoldStrong::UI::MenuItemActionHandler_General_Unknown2
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00434260 = 0x00434260,
@@ -12427,25 +12931,23 @@ enum {
     // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004347F0 = 0x004347F0,
-    // label: MenuItemActionHandler_InGameMenu_UnitSelectionAndControlsUnk
+    // label: MenuItemActionHandler_InGameMenu_UnitSelectionAndControls
+    // label: _HoldStrong::UI::MenuItemActionHandler_InGameMenu_UnitSelectionAndControlsUnk
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004348D0 = 0x004348D0,
     // type: function
-    SHC_3BB0A8C1_0x00434F28 = 0x00434F28,
-    // type: function
-    SHC_3BB0A8C1_0x00435324 = 0x00435324,
-    // type: function
-    SHC_3BB0A8C1_0x00435360 = 0x00435360,
-    // type: function
-    SHC_3BB0A8C1_0x00435753 = 0x00435753,
+    SHC_3BB0A8C1_0x00434FE0 = 0x00434FE0,
     // label: LAB_moveToTileUI
     // location:
     SHC_3BB0A8C1_0x004363CA = 0x004363CA,
     // type: function
-    SHC_3BB0A8C1_0x004368A3 = 0x004368A3,
-    // type: function
     SHC_3BB0A8C1_0x004369A0 = 0x004369A0,
+    // type: function
+    SHC_3BB0A8C1_0x0043783F = 0x0043783F,
+    // type: function
+    SHC_3BB0A8C1_0x00437851 = 0x00437851,
     // type: /pointer[2]
     SHC_3BB0A8C1_0x004378AC = 0x004378AC,
     // type: /byte[15]
@@ -13600,8 +14102,8 @@ enum {
     SHC_3BB0A8C1_0x00437CAC = 0x00437CAC,
     // type: /pointer
     SHC_3BB0A8C1_0x00437CB0 = 0x00437CB0,
-    // label: HandleWallTerrainMouseDrag
-    // location: OpenSHC/UI
+    // label: handleWallPlacementDrag
+    // location:
     // type: function
     SHC_3BB0A8C1_0x00437CC0 = 0x00437CC0,
     // label: MenuItemActionHandler_InGameMenu_TriggerPlaceWallCommand
@@ -13876,7 +14378,9 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004387D0 = 0x004387D0,
-    // label: MenuItemActionHandler_InGameMenu_RightClickMenuAndMaybeResets
+    // label: MenuItemActionHandler_InGameMenu_RightClickDragAndMouseReset
+    // label: _HoldStrong::UI::MenuItemActionHandler_InGameMenu_RightClickMenuAndMaybeResets
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00438B60 = 0x00438B60,
@@ -14346,7 +14850,9 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004398B0 = 0x004398B0,
-    // label: MenuItemActionHandler_BuildingAndStatusMenu_Unknown_Countdown
+    // label: MenuItemActionHandler_BuildingAndStatusMenu_SetCountdown
+    // label: _HoldStrong::UI::MenuItemActionHandler_BuildingAndStatusMenu_Unknown_Countdown
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x0043A850 = 0x0043A850,
@@ -14520,7 +15026,9 @@ enum {
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x0043CB90 = 0x0043CB90,
-    // label: RenderPeasantMenu_CurrentActionUnk
+    // label: _HoldStrong::UI::Rendering::RenderPeasantMenu_CurrentActionUnk
+    // label: renderUnitCurrentActionText
+    // location:
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x0043CC30 = 0x0043CC30,
@@ -14710,7 +15218,9 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x0043E4E0 = 0x0043E4E0,
-    // label: SomePopularityRelatedComputation
+    // label: _HoldStrong::UI::Helpers::SomePopularityRelatedComputation
+    // label: getPopularityAdvisorIndex
+    // location:
     // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x0043E540 = 0x0043E540,
@@ -14718,7 +15228,9 @@ enum {
     // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x0043E5A0 = 0x0043E5A0,
-    // label: SomeGoldRelatedComputation
+    // label: _HoldStrong::UI::Helpers::SomeGoldRelatedComputation
+    // label: getGoldAdvisorSpeechIndex
+    // location:
     // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x0043E5F0 = 0x0043E5F0,
@@ -14726,7 +15238,9 @@ enum {
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x0043E6C0 = 0x0043E6C0,
-    // label: MenuItemActionHandler_BuildingAndStatusMenu_PopularityMenuSwitchButtonUnk
+    // label: MenuItemActionHandler_BuildingAndStatusMenu_TogglePopularityPage
+    // label: _HoldStrong::UI::MenuItemActionHandler_BuildingAndStatusMenu_PopularityMenuSwitchButtonUnk
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x0043F2B0 = 0x0043F2B0,
@@ -14788,7 +15302,7 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00440280 = 0x00440280,
-    // label: CountPlayerUnitsByType
+    // label: countPlayerUnitsByType
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00440360 = 0x00440360,
@@ -14800,7 +15314,9 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00440400 = 0x00440400,
-    // label: MenuItemFunction_General_Unknown
+    // label: MenuItemFunction_ClearStopHandling
+    // label: _HoldStrong::UI::MenuItemFunction_General_Unknown
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00440410 = 0x00440410,
@@ -14836,7 +15352,9 @@ enum {
     SHC_3BB0A8C1_0x004409B0 = 0x004409B0,
     // type: /undefined *32
     SHC_3BB0A8C1_0x004409B4 = 0x004409B4,
-    // label: MenuView_Unknown61ReturnToSkrimishMenuUnk_Prepare
+    // label: MenuView_ReturnToSkirmishMenu61_Prepare
+    // label: _HoldStrong::UI::MenuView_Unknown61ReturnToSkrimishMenuUnk_Prepare
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004409C0 = 0x004409C0,
@@ -16692,8 +17210,6 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004451C0 = 0x004451C0,
-    // type: function
-    SHC_3BB0A8C1_0x0044544B = 0x0044544B,
     // type: /pointer
     SHC_3BB0A8C1_0x004467CC = 0x004467CC,
     // type: /pointer
@@ -17833,87 +18349,123 @@ enum {
     SHC_3BB0A8C1_0x00449B0C = 0x00449B0C,
     // type: /undefined *32
     SHC_3BB0A8C1_0x00449B10 = 0x00449B10,
+    // label: _HoldStrong::Audio::SFX::SFXState::freeMemoryAt
     // label: freeMemoryAt
+    // location:
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x00449B20 = 0x00449B20,
+    // label: _HoldStrong::Audio::SFX::SFXState::loadWavSounds
     // label: loadWavSounds
+    // location:
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x00449B30 = 0x00449B30,
-    // label: setUpSFXToPlayUnk
+    // label: _HoldStrong::Audio::SFX::SFXState::setUpSFXToPlayUnk
+    // label: scheduleSFXWithVariation
+    // location:
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x00449C40 = 0x00449C40,
+    // label: _HoldStrong::Audio::SFX::SFXState::setSoundWithVariation
     // label: setSoundWithVariation
+    // location:
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x00449CC0 = 0x00449CC0,
+    // label: _HoldStrong::Audio::SFX::SFXState::scheduleSFXVariation
     // label: scheduleSFXVariation
+    // location:
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x00449D50 = 0x00449D50,
+    // label: _HoldStrong::Audio::SFX::SFXState::playSFXAtLocation
     // label: playSFXAtLocation
+    // location:
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x00449DC0 = 0x00449DC0,
+    // label: _HoldStrong::Audio::SFX::SFXState::someVolumeAdjustmentFunction
     // label: someVolumeAdjustmentFunction
+    // location:
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x00449F10 = 0x00449F10,
-    // label: resetScheduledSoundRequests
-    // location: OpenSHC/Audio/SFX/SFXState
+    // label: resetSoundRequestSlots
+    // location:
     // type: function
     SHC_3BB0A8C1_0x00449FF0 = 0x00449FF0,
     // type: function
     SHC_3BB0A8C1_0x0044A010 = 0x0044A010,
-    // label: resetAmbientEventCounters
+    // label: _HoldStrong::Audio::SFX::SFXState::meth_0x44a050
+    // label: resetAmbientSoundCounters
+    // location:
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x0044A050 = 0x0044A050,
+    // label: _HoldStrong::Audio::SFX::SFXState::notifyAmbientSoundEvent
     // label: notifyAmbientSoundEvent
+    // location:
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x0044A0D0 = 0x0044A0D0,
-    // label: playAmbientSoundStreamUnk
+    // label: _HoldStrong::Audio::SFX::SFXState::playAmbientSoundStreamUnk
+    // label: playAmbientSFXStream
+    // location:
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x0044A0F0 = 0x0044A0F0,
-    // label: playAmbientSoundStream2Unk
+    // label: _HoldStrong::Audio::SFX::SFXState::playAmbientSoundStream2Unk
+    // label: playAmbientSFXStream2
+    // location:
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x0044A1B0 = 0x0044A1B0,
+    // label: _HoldStrong::Audio::SFX::SFXState::getSoundVolumeForFilename
     // label: getSoundVolumeForFilename
+    // location:
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x0044A240 = 0x0044A240,
+    // label: _HoldStrong::Audio::SFX::SFXState::playUnitSpeechEffect
     // label: playUnitSpeechEffect
+    // location:
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x0044A290 = 0x0044A290,
     // type: function
     SHC_3BB0A8C1_0x0044A360 = 0x0044A360,
     // label: PlaySpeechSFX
+    // label: _HoldStrong::Audio::SFX::SFXState::PlaySpeechSFX
+    // location:
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x0044A3A0 = 0x0044A3A0,
+    // label: _HoldStrong::Audio::SFX::SFXState::playWAVSFX
     // label: playWAVSFX
+    // location:
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x0044A460 = 0x0044A460,
+    // label: _HoldStrong::Audio::SFX::SFXState::playOnSpeechSfxStream
     // label: playOnSpeechSfxStream
+    // location:
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x0044A500 = 0x0044A500,
+    // label: _HoldStrong::Audio::SFX::SFXState::playSpeechSFX
     // label: playSpeechSFX
+    // location:
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x0044A5A0 = 0x0044A5A0,
-    // label: playVictoryMusic678
-    // location: OpenSHC/Audio/SFX/SFXState
+    // label: playVictoryMusicSequence
+    // location:
     // type: function
     SHC_3BB0A8C1_0x0044A620 = 0x0044A620,
+    // label: _HoldStrong::Audio::SFX::SFXState::playSFXWeAreUnderAttack
     // label: playSFXWeAreUnderAttack
+    // location:
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x0044A6E0 = 0x0044A6E0,
@@ -17942,19 +18494,25 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0044AAB0 = 0x0044AAB0,
     // label: Constructor_SFXState
+    // label: _HoldStrong::Audio::SFX::SFXState::Constructor_SFXState
+    // location:
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x0044AB70 = 0x0044AB70,
+    // label: _HoldStrong::Audio::SFX::SFXState::tweakVolume
     // label: tweakVolume
+    // location:
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x0044ABB0 = 0x0044ABB0,
+    // label: _HoldStrong::Audio::SFX::SFXState::readVolumeFileAndSetupSoundVolumes
     // label: readVolumeFileAndSetupSoundVolumes
+    // location:
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x0044AE90 = 0x0044AE90,
-    // label: playUnitSpeech
-    // location: OpenSHC/Audio/SFX/SFXState
+    // label: PlayUnitSpeech
+    // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x0044B210 = 0x0044B210,
     // type: /undefined *32
@@ -18177,11 +18735,15 @@ enum {
     SHC_3BB0A8C1_0x0044B840 = 0x0044B840,
     // type: function
     SHC_3BB0A8C1_0x0044B890 = 0x0044B890,
+    // label: _HoldStrong::Audio::SFX::SFXState::loadSFX
     // label: loadSFX
+    // location:
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x0044BCA0 = 0x0044BCA0,
+    // label: _HoldStrong::Audio::SFX::SFXState::updateAmbientSoundStream
     // label: updateAmbientSoundStream
+    // location:
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x0044BCE0 = 0x0044BCE0,
@@ -18205,71 +18767,105 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x0044C410 = 0x0044C410,
-    // label: soundRelatedMethod1
+    // label: _HoldStrong::Audio::SFX::SFXState::soundRelatedMethod1
+    // label: updateSFXAndPlayQueuedSounds
+    // location:
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x0044C740 = 0x0044C740,
     // label: Destructor_TextureRenderCore
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::Destructor_TextureRenderCore
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x0044C7E0 = 0x0044C7E0,
-    // label: drawLoadingBarUnk
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::drawLoadingBarUnk
+    // label: drawLoadingProgressBar
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x0044C850 = 0x0044C850,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::transformGmColorTableFromRGB555To565IfRequired
     // label: transformGmColorTableFromRGB555To565IfRequired
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x0044C8F0 = 0x0044C8F0,
-    // label: transformRawWithMarkerUnkToRGB555To565
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::transformRawWithMarkerUnkToRGB555To565
+    // label: convertImageRGB555ToRGB565
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x0044C940 = 0x0044C940,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::transformTgxFromRGB555ToRGB565
     // label: transformTgxFromRGB555ToRGB565
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x0044C9C0 = 0x0044C9C0,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::transformTileObjectToRGB565
     // label: transformTileObjectToRGB565
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x0044CAE0 = 0x0044CAE0,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::transformRawToRGB555To565
     // label: transformRawToRGB555To565
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x0044CB60 = 0x0044CB60,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::transformBGR24ToScreenColor
     // label: transformBGR24ToScreenColor
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x0044CBE0 = 0x0044CBE0,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::clearSomeMemory
     // label: clearSomeMemory
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x0044CC30 = 0x0044CC30,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::setMapSurfaceHeightRange
     // label: setMapSurfaceHeightRange
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x0044CCA0 = 0x0044CCA0,
-    // label: setMapSurfaceHeightRangeUnk
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::setMapSurfaceHeightRangeUnk
+    // label: setMapSurfaceHeightRangeFull
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x0044CCC0 = 0x0044CCC0,
-    // label: temporarySaveMapSurfaceHeightRangeUnk
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::temporarySaveMapSurfaceHeightRangeUnk
+    // label: saveMapSurfaceHeightRange
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x0044CCD0 = 0x0044CCD0,
-    // label: restoreMapSurfaceHeightRangeFromTemporaryUnk
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::restoreMapSurfaceHeightRangeFromTemporaryUnk
+    // label: restoreMapSurfaceHeightRange
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x0044CCF0 = 0x0044CCF0,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::setScreenMenuSurfaceHeightRange
     // label: setScreenMenuSurfaceHeightRange
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x0044CD10 = 0x0044CD10,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::setScreenMenuSurfaceHeightRangeToResolution
     // label: setScreenMenuSurfaceHeightRangeToResolution
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x0044CD30 = 0x0044CD30,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::drawBitmapFace
     // label: drawBitmapFace
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x0044CD40 = 0x0044CD40,
@@ -18277,13 +18873,17 @@ enum {
     SHC_3BB0A8C1_0x0044CDC0 = 0x0044CDC0,
     // type: function
     SHC_3BB0A8C1_0x0044CDD0 = 0x0044CDD0,
-    // label: renderFacesSmallUnk
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::renderFacesSmallUnk
+    // label: renderFaceHalfSize
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x0044CE00 = 0x0044CE00,
     // type: function
     SHC_3BB0A8C1_0x0044CE80 = 0x0044CE80,
-    // label: drawBitmapFaceWithBlendUnk
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::drawBitmapFaceWithBlendUnk
+    // label: drawBitmapFaceBlended
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x0044CEB0 = 0x0044CEB0,
@@ -18295,39 +18895,57 @@ enum {
     SHC_3BB0A8C1_0x0044D330 = 0x0044D330,
     // type: function
     SHC_3BB0A8C1_0x0044D340 = 0x0044D340,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::renderFunctionResponsibleForManyGameObjects
     // label: renderFunctionResponsibleForManyGameObjects
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x0044D3D0 = 0x0044D3D0,
-    // label: InitBlendFilterArraysUnk
+    // label: _HoldStrong::Global::InitBlendFilterArraysUnk
+    // label: initBlendFilterTables
+    // location:
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x0044E510 = 0x0044E510,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::renderInterfaceOrBuildingOccupationArea
     // label: renderInterfaceOrBuildingOccupationArea
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x0044E630 = 0x0044E630,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::renderBlendedBlackBox
     // label: renderBlendedBlackBox
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x0044F020 = 0x0044F020,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::renderGmWithPreparedAlphaMask
     // label: renderGmWithPreparedAlphaMask
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x0044F170 = 0x0044F170,
-    // label: renderTgxWithColorUnk
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::renderTgxWithColorUnk
+    // label: blitTgxAsSolidColor
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x0044F6F0 = 0x0044F6F0,
-    // label: renderTgxWithColorAndBlendingUnk
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::renderTgxWithColorAndBlendingUnk
+    // label: renderTgxTintedBlended
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x0044F850 = 0x0044F850,
-    // label: renderUnitAnimationUnk
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::renderUnitAnimationUnk
+    // label: blitUnitSpriteRLE
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x0044FBF0 = 0x0044FBF0,
-    // label: renderUnitAnimationWithBlendingUnk
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::renderUnitAnimationWithBlendingUnk
+    // label: blitUnitSpriteRLEBlended
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x00451E00 = 0x00451E00,
@@ -18339,55 +18957,75 @@ enum {
     // location: OpenSHC/Rendering
     // type: function
     SHC_3BB0A8C1_0x00453600 = 0x00453600,
-    // label: BlitMapImageWithVerticalClip
+    // label: blitGmSpriteToMapSurface
     // location: OpenSHC/Rendering
     // type: function
     SHC_3BB0A8C1_0x00453B00 = 0x00453B00,
-    // label: BlitMapImageWithVerticalClipAndYOffset
+    // label: blitGmSpriteToMapSurfacePartial
     // location: OpenSHC/Rendering
     // type: function
     SHC_3BB0A8C1_0x00454080 = 0x00454080,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::loadGfxFile
     // label: loadGfxFile
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x00454620 = 0x00454620,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::loadGFX8
     // label: loadGFX8
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x00454700 = 0x00454700,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::loadGfxAtBufferEnd
     // label: loadGfxAtBufferEnd
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x004547C0 = 0x004547C0,
-    // label: CheckGfxResourceExists
+    // label: gfxResourceExists
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x004548D0 = 0x004548D0,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::renderLoadedGfx
     // label: renderLoadedGfx
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x00454900 = 0x00454900,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::setRenderingRectToGameResolution
     // label: setRenderingRectToGameResolution
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x00454960 = 0x00454960,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::setRenderingRect
     // label: setRenderingRect
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x00454990 = 0x00454990,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::checkIfGfxTgxStartsWithTransparentPixels
     // label: checkIfGfxTgxStartsWithTransparentPixels
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x004549C0 = 0x004549C0,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::renderGfxTgxWithBlending
     // label: renderGfxTgxWithBlending
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x004549F0 = 0x004549F0,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::drawTgxOnFlaggedSurface
     // label: drawTgxOnFlaggedSurface
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x00454A60 = 0x00454A60,
-    // label: loadCampaignMapGfxUnk
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::loadCampaignMapGfxUnk
+    // label: loadCampaignMapPalettes
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x00454CB0 = 0x00454CB0,
@@ -18395,99 +19033,145 @@ enum {
     SHC_3BB0A8C1_0x00454CE0 = 0x00454CE0,
     // type: function
     SHC_3BB0A8C1_0x00454D20 = 0x00454D20,
-    // label: setMenuTabIndexUnk
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::setMenuTabIndexUnk
+    // label: setActiveMenuTabIndex
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x00454EE0 = 0x00454EE0,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::setActiveMenuTabIndexToZero
     // label: setActiveMenuTabIndexToZero
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x00454EF0 = 0x00454EF0,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::moveOverlappingMenuPartsToMapSurface
     // label: moveOverlappingMenuPartsToMapSurface
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x00454F00 = 0x00454F00,
     // label: Constructor_TextureRenderCore
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::Constructor_TextureRenderCore
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x00455050 = 0x00455050,
-    // label: transformUncompressedImageWithMarkerUnkToRGB565
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::transformUncompressedImageWithMarkerUnkToRGB565
+    // label: transformUncompressedImageWithMarkerToRGB565
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x00455250 = 0x00455250,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::transformTgxCompressedImageToRGB565
     // label: transformTgxCompressedImageToRGB565
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x00455270 = 0x00455270,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::transformTilesetToRGB565
     // label: transformTilesetToRGB565
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x00455290 = 0x00455290,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::transformUncompressedImageToRGB565
     // label: transformUncompressedImageToRGB565
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x004552E0 = 0x004552E0,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::renderGM
     // label: renderGM
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x00455300 = 0x00455300,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::renderGMWithBlending
     // label: renderGMWithBlending
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x00455390 = 0x00455390,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::drawTgxGmOnFlaggedSurface
     // label: drawTgxGmOnFlaggedSurface
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x004554A0 = 0x004554A0,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::renderTextChar
     // label: renderTextChar
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x00455540 = 0x00455540,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::renderGMWithAlphaMask
     // label: renderGMWithAlphaMask
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x004557B0 = 0x004557B0,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::drawGfxOnFlaggedSurface
     // label: drawGfxOnFlaggedSurface
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x004558E0 = 0x004558E0,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::adaptGmColorsToRGB565IfRequired
     // label: adaptGmColorsToRGB565IfRequired
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x00455930 = 0x00455930,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::loadGMFile
     // label: loadGMFile
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x004559B0 = 0x004559B0,
     // type: function
     SHC_3BB0A8C1_0x00455B70 = 0x00455B70,
+    // label: _HoldStrong::UI::Rendering::TextureRenderCore::loadGmFiles
     // label: loadGmFiles
+    // location:
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x00455C60 = 0x00455C60,
+    // label: _HoldStrong::Game::GameStateStructures::clearMapAndTimeAndPlayerData
     // label: clearMapAndTimeAndPlayerData
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00455D40 = 0x00455D40,
-    // label: clearCurrentResourcesAndStrongWalls
+    // label: _HoldStrong::Game::GameStateStructures::meth_0x455d90
+    // label: resetAllPlayerResources
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00455D90 = 0x00455D90,
+    // label: _HoldStrong::Game::GameStateStructures::resetVariousCountsAndStatisticsAndStartGoodsAndResources
     // label: resetVariousCountsAndStatisticsAndStartGoodsAndResources
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00455E10 = 0x00455E10,
     // type: function
     SHC_3BB0A8C1_0x00455E40 = 0x00455E40,
+    // label: _HoldStrong::Game::GameStateStructures::resetCountsAndStatistics
     // label: resetCountsAndStatistics
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004560F0 = 0x004560F0,
+    // label: _HoldStrong::Game::GameStateStructures::isFullIDEqualsToMinus1
     // label: isFullIDEqualsToMinus1
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004563B0 = 0x004563B0,
+    // label: _HoldStrong::Game::GameStateStructures::processUnitLossStatistic
     // label: processUnitLossStatistic
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004563D0 = 0x004563D0,
@@ -18573,63 +19257,93 @@ enum {
     SHC_3BB0A8C1_0x00456591 = 0x00456591,
     // type: /byte
     SHC_3BB0A8C1_0x00456592 = 0x00456592,
+    // label: _HoldStrong::Game::GameStateStructures::setLastEncounteredTroopUnit
     // label: setLastEncounteredTroopUnit
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004565A0 = 0x004565A0,
+    // label: _HoldStrong::Game::GameStateStructures::updateDateAndTime
     // label: updateDateAndTime
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00456670 = 0x00456670,
+    // label: _HoldStrong::Game::GameStateStructures::setMonthAndYear
     // label: setMonthAndYear
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00456750 = 0x00456750,
-    // label: clearSignpostData
+    // label: _HoldStrong::Game::GameStateStructures::meth_0x4567a0
+    // label: resetSignpostState
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004567A0 = 0x004567A0,
+    // label: _HoldStrong::Game::GameStateStructures::computeSignPostEntryData
     // label: computeSignPostEntryData
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00456810 = 0x00456810,
+    // label: _HoldStrong::Game::GameStateStructures::nof_fpoints_locationFinder
     // label: nof_fpoints_locationFinder
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00456870 = 0x00456870,
+    // label: _HoldStrong::Game::GameStateStructures::calculateAttackVectorsToCampFireOfPlayer
     // label: calculateAttackVectorsToCampFireOfPlayer
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004568B0 = 0x004568B0,
+    // label: _HoldStrong::Game::GameStateStructures::meth_0x4568f0
     // label: countActiveSignposts
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004568F0 = 0x004568F0,
-    // label: hasAnySignpost
+    // label: _HoldStrong::Game::GameStateStructures::meth_0x4569e0
+    // label: hasAnyActiveSignpost
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004569E0 = 0x004569E0,
-    // label: pickRandomAccessibleSignpostEntry
+    // label: _HoldStrong::Game::GameStateStructures::meth_0x456ad0
+    // label: pickRandomSignpostInLargeZone
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00456AD0 = 0x00456AD0,
+    // label: _HoldStrong::Game::GameStateStructures::clearDataAndSignpostDataIfNecessary
     // label: clearDataAndSignpostDataIfNecessary
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00456C50 = 0x00456C50,
+    // label: _HoldStrong::Game::GameStateStructures::addSignpostToBuildingEntryData
     // label: addSignpostToBuildingEntryData
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00456EF0 = 0x00456EF0,
-    // label: computeBuildingCategoryEntryPoint
+    // label: _HoldStrong::Game::GameStateStructures::meth_0x456fd0
+    // label: setPlayerKeyBuildingRef
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00456FD0 = 0x00456FD0,
-    // label: validateBuildingCategoryReference
+    // label: _HoldStrong::Game::GameStateStructures::meth_0x4572a0
+    // label: validatePlayerKeyBuildingRef
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004572A0 = 0x004572A0,
+    // label: _HoldStrong::Game::GameStateStructures::checkKeepEnclosed
     // label: checkKeepEnclosed
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004574C0 = 0x004574C0,
@@ -19125,155 +19839,225 @@ enum {
     SHC_3BB0A8C1_0x004576D3 = 0x004576D3,
     // type: /byte
     SHC_3BB0A8C1_0x004576D4 = 0x004576D4,
+    // label: _HoldStrong::Game::GameStateStructures::canNavigateFromKeepToKeep
     // label: canNavigateFromKeepToKeep
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004576E0 = 0x004576E0,
+    // label: _HoldStrong::Game::GameStateStructures::canUnitsNavigateFromKeepToKeep
     // label: canUnitsNavigateFromKeepToKeep
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00457770 = 0x00457770,
+    // label: _HoldStrong::Game::GameStateStructures::unitsCanMoveFromKeepOfPlayerToAnotherArea
     // label: unitsCanMoveFromKeepOfPlayerToAnotherArea
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00457800 = 0x00457800,
-    // label: canKeepReachSignpostZone
+    // label: _HoldStrong::Game::GameStateStructures::meth_0x457870
+    // label: canReachSignpostFromKeep
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00457870 = 0x00457870,
-    // label: canKeepReachSignpostZoneViaPathfinder
+    // label: _HoldStrong::Game::GameStateStructures::meth_0x4578f0
+    // label: canReachSignpostFromKeepWithClimb
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004578F0 = 0x004578F0,
+    // label: _HoldStrong::Game::GameStateStructures::updatePrimaryBuildingPlayerDataReferences
     // label: updatePrimaryBuildingPlayerDataReferences
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00457960 = 0x00457960,
+    // label: _HoldStrong::Game::GameStateStructures::changePlayerOwnership
     // label: changePlayerOwnership
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00457A70 = 0x00457A70,
+    // label: _HoldStrong::Game::GameStateStructures::swapOwnership
     // label: swapOwnership
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00457AD0 = 0x00457AD0,
+    // label: _HoldStrong::Game::GameStateStructures::destroyPlayerCompletely
     // label: destroyPlayerCompletely
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00457B40 = 0x00457B40,
+    // label: _HoldStrong::Game::GameStateStructures::checkRequiredResourcesForBuildingOrPlanToBuy
     // label: checkRequiredResourcesForBuildingOrPlanToBuy
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00457B80 = 0x00457B80,
+    // label: _HoldStrong::Game::GameStateStructures::getWallTilesThatCanBeBuilt
     // label: getWallTilesThatCanBeBuilt
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00457E80 = 0x00457E80,
+    // label: _HoldStrong::Game::GameStateStructures::showPopAndGoldPopup
     // label: showPopAndGoldPopup
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00457F20 = 0x00457F20,
+    // label: _HoldStrong::Game::GameStateStructures::createStatsPopUpEntities
     // label: createStatsPopUpEntities
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00457FD0 = 0x00457FD0,
+    // label: _HoldStrong::Game::GameStateStructures::displayPlayerTradeVisualEffect
     // label: displayPlayerTradeVisualEffect
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00458070 = 0x00458070,
+    // label: _HoldStrong::Game::GameStateStructures::spawnChicken
     // label: spawnChicken
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004580C0 = 0x004580C0,
     // type: function
     SHC_3BB0A8C1_0x004580F0 = 0x004580F0,
+    // label: _HoldStrong::Game::GameStateStructures::spawnMotherOrChild
     // label: spawnMotherOrChild
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00458280 = 0x00458280,
     // type: function
     SHC_3BB0A8C1_0x00458360 = 0x00458360,
+    // label: _HoldStrong::Game::GameStateStructures::playerHasACampground
     // label: playerHasACampground
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004585B0 = 0x004585B0,
+    // label: _HoldStrong::Game::GameStateStructures::moveUnitAroundCampfire
     // label: moveUnitAroundCampfire
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004585F0 = 0x004585F0,
-    // label: activateTraderState
+    // label: _HoldStrong::Game::GameStateStructures::meth_0x4586d0
+    // label: enableTraderVisits
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004586D0 = 0x004586D0,
-    // label: resetTraderState
+    // label: _HoldStrong::Game::GameStateStructures::meth_0x4586f0
+    // label: disableTraderVisits
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004586F0 = 0x004586F0,
+    // label: _HoldStrong::Game::GameStateStructures::meth_0x458700
     // label: findNextPlayerWithMarketplace
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00458700 = 0x00458700,
     // type: function
     SHC_3BB0A8C1_0x00458720 = 0x00458720,
+    // label: _HoldStrong::Game::GameStateStructures::isResourceTypeTradeable
     // label: isResourceTypeTradeable
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00458740 = 0x00458740,
+    // label: _HoldStrong::Game::GameStateStructures::anyGoodsAreAllowedForSale
     // label: anyGoodsAreAllowedForSale
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00458760 = 0x00458760,
+    // label: _HoldStrong::Game::GameStateStructures::getNextGoodFilteringUnallowed
     // label: getNextGoodFilteringUnallowed
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004587A0 = 0x004587A0,
     // type: function
     SHC_3BB0A8C1_0x004587C0 = 0x004587C0,
+    // label: _HoldStrong::Game::GameStateStructures::getPreviousGoodsFilteringUnallowed
     // label: getPreviousGoodsFilteringUnallowed
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00458820 = 0x00458820,
     // type: function
     SHC_3BB0A8C1_0x00458840 = 0x00458840,
+    // label: _HoldStrong::Game::GameStateStructures::getBatchBuyPrice
     // label: getBatchBuyPrice
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00458890 = 0x00458890,
+    // label: _HoldStrong::Game::GameStateStructures::getBuyPrice
     // label: getBuyPrice
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004588A0 = 0x004588A0,
-    // label: getBuyPriceForOneUnit
+    // label: _HoldStrong::Game::GameStateStructures::meth_0x4588d0
+    // label: getResourceSellPrice
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004588D0 = 0x004588D0,
+    // label: _HoldStrong::Game::GameStateStructures::getSalePriceOfGood
     // label: getSalePriceOfGood
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004588F0 = 0x004588F0,
+    // label: _HoldStrong::Game::GameStateStructures::getSellPrice
     // label: getSellPrice
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00458910 = 0x00458910,
+    // label: _HoldStrong::Game::GameStateStructures::getSellResourceAmount
     // label: getSellResourceAmount
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00458940 = 0x00458940,
+    // label: _HoldStrong::Game::GameStateStructures::setVariousGameStateToInitialValues
     // label: setVariousGameStateToInitialValues
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00458990 = 0x00458990,
+    // label: _HoldStrong::Game::GameStateStructures::processPeasantsForBuildings
     // label: processPeasantsForBuildings
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004589E0 = 0x004589E0,
+    // label: _HoldStrong::Game::GameStateStructures::updateFoodTypesInStockForAllPlayers
     // label: updateFoodTypesInStockForAllPlayers
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00458A70 = 0x00458A70,
     // type: function
     SHC_3BB0A8C1_0x00458A80 = 0x00458A80,
+    // label: _HoldStrong::Game::GameStateStructures::processFoodConsumption
     // label: processFoodConsumption
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00458AD0 = 0x00458AD0,
@@ -19287,43 +20071,63 @@ enum {
     SHC_3BB0A8C1_0x00458D44 = 0x00458D44,
     // type: /pointer
     SHC_3BB0A8C1_0x00458D48 = 0x00458D48,
+    // label: _HoldStrong::Game::GameStateStructures::updateAleRate
     // label: updateAleRate
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00458D50 = 0x00458D50,
+    // label: _HoldStrong::Game::GameStateStructures::computeAleCoverage
     // label: computeAleCoverage
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00458E20 = 0x00458E20,
+    // label: _HoldStrong::Game::GameStateStructures::updateCrowding
     // label: updateCrowding
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00458E60 = 0x00458E60,
+    // label: _HoldStrong::Game::GameStateStructures::updateFearFactorProductivity
     // label: updateFearFactorProductivity
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00458EC0 = 0x00458EC0,
+    // label: _HoldStrong::Game::GameStateStructures::recomputeReligionBonuses
     // label: recomputeReligionBonuses
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00458F70 = 0x00458F70,
+    // label: _HoldStrong::Game::GameStateStructures::calculateTaxIncomeForPlayer
     // label: calculateTaxIncomeForPlayer
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00459080 = 0x00459080,
+    // label: _HoldStrong::Game::GameStateStructures::calculateTaxBribeExpenseForPlayer
     // label: calculateTaxBribeExpenseForPlayer
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00459140 = 0x00459140,
+    // label: _HoldStrong::Game::GameStateStructures::getNumberToDisplayPlayerTaxIncome
     // label: getNumberToDisplayPlayerTaxIncome
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00459170 = 0x00459170,
+    // label: _HoldStrong::Game::GameStateStructures::getNumberToDisplayBribeIncome
     // label: getNumberToDisplayBribeIncome
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004591B0 = 0x004591B0,
+    // label: _HoldStrong::Game::GameStateStructures::despawnPeasantOrWorker
     // label: despawnPeasantOrWorker
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004591F0 = 0x004591F0,
@@ -19443,75 +20247,103 @@ enum {
     SHC_3BB0A8C1_0x00459484 = 0x00459484,
     // type: /byte
     SHC_3BB0A8C1_0x00459485 = 0x00459485,
+    // label: _HoldStrong::Game::GameStateStructures::spawnDrunkard
     // label: spawnDrunkard
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00459490 = 0x00459490,
     // type: function
     SHC_3BB0A8C1_0x00459550 = 0x00459550,
+    // label: _HoldStrong::Game::GameStateStructures::singlePlayerHasKeepAndGranaryCheck
     // label: singlePlayerHasKeepAndGranaryCheck
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004595D0 = 0x004595D0,
+    // label: _HoldStrong::Game::GameStateStructures::resetTeams
     // label: resetTeams
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00459640 = 0x00459640,
+    // label: _HoldStrong::Game::GameStateStructures::getTeamsDifferent
     // label: getTeamsDifferent
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004596D0 = 0x004596D0,
+    // label: _HoldStrong::Game::GameStateStructures::findAITeamMate
     // label: findAITeamMate
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00459700 = 0x00459700,
-    // label: TeamToBitFlagsUnk
+    // label: _HoldStrong::Game::GameStateStructures::TeamToBitFlagsUnk
+    // label: getUnitTeammatesBitmask
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00459740 = 0x00459740,
-    // label: areActivePlayersMostlySameTeam
+    // label: _HoldStrong::Game::GameStateStructures::meth_0x4597d0
+    // label: isOnlyOneTeamRemaining
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004597D0 = 0x004597D0,
+    // label: _HoldStrong::Game::GameStateStructures::recountStablesAndHorses
     // label: recountStablesAndHorses
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x004598B0 = 0x004598B0,
-    // label: linkageBetweenHorseUnitAndStableUnk
+    // label: _HoldStrong::Game::GameStateStructures::linkageBetweenHorseUnitAndStableUnk
+    // label: assignHorseUnitToStable
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00459930 = 0x00459930,
+    // label: _HoldStrong::Game::GameStateStructures::spawnPoisonCloudsAroundBuilding
     // label: spawnPoisonCloudsAroundBuilding
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00459A20 = 0x00459A20,
     // type: function
     SHC_3BB0A8C1_0x00459A40 = 0x00459A40,
+    // label: _HoldStrong::Game::GameStateStructures::playSFXNoSpaceInTheStockPile
     // label: playSFXNoSpaceInTheStockPile
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00459B50 = 0x00459B50,
-    // label: clearTribeHotKey
+    // label: clearUnitSelectionHotkeyGroup
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00459BB0 = 0x00459BB0,
+    // label: _HoldStrong::Game::GameStateStructures::fillWith0xFF
     // label: fillWith0xFF
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00459BE0 = 0x00459BE0,
     // type: function
     SHC_3BB0A8C1_0x00459BF0 = 0x00459BF0,
+    // label: _HoldStrong::Game::GameStateStructures::assignSelectionToKey
     // label: assignSelectionToKey
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00459C10 = 0x00459C10,
     // type: function
     SHC_3BB0A8C1_0x00459CC0 = 0x00459CC0,
-    // label: computeArmySizeLimit
-    // location: OpenSHC/Game/GameStateStructures
+    // label: computeIntervalFromAlivePlayerCount
+    // location:
     // type: function
     SHC_3BB0A8C1_0x00459D80 = 0x00459D80,
     // label: HandleActivateTacticalPowers
+    // label: _HoldStrong::Game::GameStateStructures::HandleActivateTacticalPowers
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00459E40 = 0x00459E40,
@@ -19605,77 +20437,105 @@ enum {
     SHC_3BB0A8C1_0x0045A05D = 0x0045A05D,
     // type: /byte
     SHC_3BB0A8C1_0x0045A05E = 0x0045A05E,
+    // label: _HoldStrong::Game::GameStateStructures::renderDebugDataCurrentPlayerData
     // label: renderDebugDataCurrentPlayerData
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x0045A060 = 0x0045A060,
-    // label: validateLadyAndJesterUnitRefs
+    // label: validateCourtUnitRefs
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x0045ACC0 = 0x0045ACC0,
-    // label: initPopularityAndRecruitableDefaults
+    // label: upgradeRecruitAvailability
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x0045AD10 = 0x0045AD10,
-    // label: resetTeams
+    // label: resetTeamsForVersion
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x0045AE00 = 0x0045AE00,
+    // label: _HoldStrong::Game::GameStateStructures::addBuildingInRegistry
     // label: addBuildingInRegistry
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x0045AE10 = 0x0045AE10,
+    // label: _HoldStrong::Game::GameStateStructures::resetBuildingsCurrentIndexCounter
     // label: resetBuildingsCurrentIndexCounter
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x0045AE70 = 0x0045AE70,
+    // label: _HoldStrong::Game::GameStateStructures::selectARandomBuildingOwnedByPlayer
     // label: selectARandomBuildingOwnedByPlayer
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x0045AEB0 = 0x0045AEB0,
-    // label: resetSomethingBuildingRelatedForAllPlayers
+    // label: _HoldStrong::Game::GameStateStructures::resetSomethingBuildingRelatedForAllPlayers
+    // label: revalidateAllPlayerKeyBuildings
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x0045AF00 = 0x0045AF00,
+    // label: _HoldStrong::Game::GameStateStructures::computePopulationStatistics
     // label: computePopulationStatistics
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x0045AF30 = 0x0045AF30,
-    // label: clearEnemyRelatedStructures
+    // label: _HoldStrong::Game::GameStateStructures::clearEnemyRelatedStructures
+    // label: resetGameStateForNewMap
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x0045B1C0 = 0x0045B1C0,
     // type: function
     SHC_3BB0A8C1_0x0045B3A0 = 0x0045B3A0,
-    // label: initializeGameStateAfterMapLoad
+    // label: _HoldStrong::Game::GameStateStructures::meth_0x45b3e0
+    // label: initGameStateAfterMapLoad
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x0045B3E0 = 0x0045B3E0,
+    // label: _HoldStrong::Game::GameStateStructures::switchPlayerOwnership
+    // location:
     // type: function
     SHC_3BB0A8C1_0x0045B460 = 0x0045B460,
-    // label: ProcessPeasantSpawnAndDespawnCycle
+    // label: updatePeasantSpawning
     // location:
     // type: function
     SHC_3BB0A8C1_0x0045B4A0 = 0x0045B4A0,
+    // label: _HoldStrong::Game::GameStateStructures::updateTrader
     // label: updateTrader
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x0045B6B0 = 0x0045B6B0,
+    // label: _HoldStrong::Game::GameStateStructures::getSalesPrice
     // label: getSalesPrice
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x0045B7F0 = 0x0045B7F0,
+    // label: _HoldStrong::Game::GameStateStructures::updatePopularity
     // label: updatePopularity
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x0045B830 = 0x0045B830,
     // type: function
     SHC_3BB0A8C1_0x0045B860 = 0x0045B860,
+    // label: _HoldStrong::Game::GameStateStructures::updateTaxing
     // label: updateTaxing
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x0045BF50 = 0x0045BF50,
+    // label: _HoldStrong::Game::GameStateStructures::spawnPoisonCloudsAtRandomStorageOrArmyBuilding
     // label: spawnPoisonCloudsAtRandomStorageOrArmyBuilding
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x0045C050 = 0x0045C050,
@@ -19761,7 +20621,9 @@ enum {
     SHC_3BB0A8C1_0x0045C1B8 = 0x0045C1B8,
     // type: /byte
     SHC_3BB0A8C1_0x0045C1B9 = 0x0045C1B9,
+    // label: _HoldStrong::Game::GameStateStructures::meth_0x45c1c0
     // label: migrateGameStateForMapVersion
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x0045C1C0 = 0x0045C1C0,
@@ -19771,11 +20633,15 @@ enum {
     SHC_3BB0A8C1_0x0045C9D0 = 0x0045C9D0,
     // type: function
     SHC_3BB0A8C1_0x0045C9E0 = 0x0045C9E0,
+    // label: _HoldStrong::Game::GameStateStructures::processSingleTimeTick
     // label: processSingleTimeTick
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x0045CA20 = 0x0045CA20,
+    // label: _HoldStrong::Game::GameStateStructures::processGameTick
     // label: processGameTick
+    // location:
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x0045CD10 = 0x0045CD10,
@@ -19783,27 +20649,39 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x0045D060 = 0x0045D060,
-    // label: setHelpWindowBounds
+    // label: _HoldStrong::Text::TextEditorState::meth_0x45d080
+    // label: setTextEditorFields
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D080 = 0x0045D080,
+    // label: _HoldStrong::UI::Rendering::AlphaAndButtonSurface::freeMemory
     // label: freeMemory
+    // location:
     // location: OpenSHC/UI/Rendering/AlphaAndButtonSurface
     // type: function
     SHC_3BB0A8C1_0x0045D0B0 = 0x0045D0B0,
-    // label: resetHelpStateFields
+    // label: _HoldStrong::Text::TextEditorState::meth_0x45d0c0
+    // label: resetTextEditorHandles
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D0C0 = 0x0045D0C0,
-    // label: findHelpSectionIndexByName
+    // label: _HoldStrong::Text::TextEditorState::meth_0x45d140
+    // label: findHelpSectionIndex
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D140 = 0x0045D140,
-    // label: findOrAddHelpSectionName
+    // label: _HoldStrong::Text::TextEditorState::meth_0x45d1a0
+    // label: findOrAddHelpSection
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D1A0 = 0x0045D1A0,
+    // label: _HoldStrong::Text::TextEditorState::parseHLPPart
     // label: parseHLPPart
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D200 = 0x0045D200,
@@ -19975,72 +20853,92 @@ enum {
     SHC_3BB0A8C1_0x0045D364 = 0x0045D364,
     // type: /byte
     SHC_3BB0A8C1_0x0045D365 = 0x0045D365,
-    // label: loadHelpSectionGraphics
+    // label: _HoldStrong::Text::TextEditorState::meth_0x45d370
+    // label: loadTextEditorGfxResources
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D370 = 0x0045D370,
+    // label: _HoldStrong::Text::TextEditorState::getWideCharPointer
     // label: getWideCharPointer
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D3C0 = 0x0045D3C0,
-    // label: renderHelpImageHotspots
+    // label: _HoldStrong::Text::TextEditorState::meth_0x45d430
+    // label: drawTextEditorGfxItems
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D430 = 0x0045D430,
     // type: function
     SHC_3BB0A8C1_0x0045D460 = 0x0045D460,
+    // label: _HoldStrong::Text::TextEditorState::bltTextToScreenIfNeedBe
     // label: bltTextToScreenIfNeedBe
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D690 = 0x0045D690,
+    // label: _HoldStrong::Text::TextEditorState::drawBorderStyle0x20
     // label: drawBorderStyle0x20
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D6C0 = 0x0045D6C0,
-    // label: drawHelpWindowBackground
+    // label: _HoldStrong::Text::TextEditorState::meth_0x45d740
+    // label: drawTextEditorBackground
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D740 = 0x0045D740,
-    // label: findHelpGraphicIndexByName
+    // label: _HoldStrong::Text::TextEditorState::meth_0x45d890
+    // label: findTextEditorGfxIndex
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D890 = 0x0045D890,
-    // label: findOrAddHelpGraphicName
+    // label: _HoldStrong::Text::TextEditorState::meth_0x45d8f0
+    // label: findOrAddTextEditorGfx
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D8F0 = 0x0045D8F0,
-    // label: getNextHelpSectionID
+    // label: getNextHelpPageId
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D950 = 0x0045D950,
-    // label: getPrevHelpSectionID
+    // label: getPrevHelpPageId
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D990 = 0x0045D990,
-    // label: getHelpSectionText
+    // label: getHelpPageText
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D9E0 = 0x0045D9E0,
-    // label: getNextHelpColorEntryIndex
+    // label: getNextHelpEntryIndex
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045DA20 = 0x0045DA20,
-    // label: getPrevHelpColorEntryIndex
+    // label: getPrevHelpEntryIndex
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045DA40 = 0x0045DA40,
     // type: function
     SHC_3BB0A8C1_0x0045DA60 = 0x0045DA60,
-    // label: findSoundIndexByName
+    // label: _HoldStrong::Text::TextEditorState::meth_0x45da80
+    // label: findTextEditorString1Index
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045DA80 = 0x0045DA80,
-    // label: findOrAddSoundName
+    // label: _HoldStrong::Text::TextEditorState::meth_0x45dae0
+    // label: findOrAddTextEditorString1
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045DAE0 = 0x0045DAE0,
-    // label: saveHelpFileToResource
-    // location: OpenSHC/Text/TextEditorState
+    // label: exportHelpSectionToMarkupFile
+    // location:
     // type: function
     SHC_3BB0A8C1_0x0045DB40 = 0x0045DB40,
     // type: /undefined *32
@@ -20395,7 +21293,7 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x0045EF90 = 0x0045EF90,
-    // label: getHelpTokenAdvanceLength
+    // label: getTextTokenSlotCount
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045F080 = 0x0045F080,
@@ -20433,35 +21331,49 @@ enum {
     SHC_3BB0A8C1_0x0045F0CC = 0x0045F0CC,
     // type: /byte
     SHC_3BB0A8C1_0x0045F0CD = 0x0045F0CD,
-    // label: insertHelpTextToken
+    // label: _HoldStrong::Text::TextEditorState::meth_0x45f0d0
+    // label: insertTextTokenSlots
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045F0D0 = 0x0045F0D0,
-    // label: MenuItemRenderFunction_DisplayScenarioHelpText_AnotherButtonUnk
+    // label: MenuItemRenderFunction_DisplayScenarioHelpText_ConditionalButton
+    // label: _HoldStrong::UI::MenuItemRenderFunction_DisplayScenarioHelpText_AnotherButtonUnk
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x0045F120 = 0x0045F120,
     // label: Constructor_TextEditorState
+    // label: _HoldStrong::Text::TextEditorState::Constructor_TextEditorState
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045F130 = 0x0045F130,
-    // label: closeHelpDialogAndReturnToMenu
+    // label: _HoldStrong::Text::TextEditorState::someKindOfTextEscape
+    // label: someKindOfTextEscape
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045F240 = 0x0045F240,
+    // label: _HoldStrong::Text::TextEditorState::readCrusaderHelpHlp
     // label: readCrusaderHelpHlp
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045F470 = 0x0045F470,
-    // label: loadAndParseHelpFile
+    // label: _HoldStrong::Text::TextEditorState::meth_0x45f580
+    // label: loadCrusaderHelpFile
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045F580 = 0x0045F580,
+    // label: _HoldStrong::Text::TextEditorState::parseHlp
     // label: parseHlp
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045F5B0 = 0x0045F5B0,
-    // label: processHelpRichTextTokens
+    // label: layoutHelpText
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045FDC0 = 0x0045FDC0,
@@ -20529,11 +21441,15 @@ enum {
     SHC_3BB0A8C1_0x004613D0 = 0x004613D0,
     // type: /pointer
     SHC_3BB0A8C1_0x004613D4 = 0x004613D4,
+    // label: _HoldStrong::Text::TextEditorState::setTextRenderingLogic
     // label: setTextRenderingLogic
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x004613E0 = 0x004613E0,
-    // label: initializeAndLayoutHelpText
+    // label: _HoldStrong::Text::TextEditorState::meth_0x4614d0
+    // label: rebuildHelpTextLayout
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x004614D0 = 0x004614D0,
@@ -20541,11 +21457,15 @@ enum {
     SHC_3BB0A8C1_0x004614F0 = 0x004614F0,
     // type: function
     SHC_3BB0A8C1_0x00461520 = 0x00461520,
-    // label: renderHelpDialogIfOpen
+    // label: _HoldStrong::Text::TextEditorState::meth_0x461550
+    // label: renderTextEditor
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x00461550 = 0x00461550,
-    // label: MenuItemActionHandler_TextEditor_TextInputRelatedUnk
+    // label: _HoldStrong::UI::MenuItemActionHandler_TextEditor_TextInputRelatedUnk
+    // label: processTextEditorInput
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00461570 = 0x00461570,
@@ -20591,39 +21511,55 @@ enum {
     SHC_3BB0A8C1_0x004619C4 = 0x004619C4,
     // type: /undefined *32
     SHC_3BB0A8C1_0x004619C8 = 0x004619C8,
+    // label: _HoldStrong::Text::TextEditorState::meth_0x4619d0
     // label: loadAndLayoutHelpContent
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x004619D0 = 0x004619D0,
-    // label: openBuildingHelpDialog
+    // label: _HoldStrong::Text::TextEditorState::meth_0x461a20
+    // label: openBuildingHelpText
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x00461A20 = 0x00461A20,
-    // label: openInGameHelpDialog
+    // label: _HoldStrong::Text::TextEditorState::meth_0x461b90
+    // label: openInGameHelpText
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x00461B90 = 0x00461B90,
-    // label: openScenarioHelpDialog
+    // label: _HoldStrong::Text::TextEditorState::meth_0x461cf0
+    // label: openScenarioHelpText
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x00461CF0 = 0x00461CF0,
-    // label: openCreditsScrollDialog
+    // label: _HoldStrong::Text::TextEditorState::meth_0x461e50
+    // label: openCreditsScroll
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x00461E50 = 0x00461E50,
-    // label: openMapDescriptionEditorDialog
+    // label: _HoldStrong::Text::TextEditorState::meth_0x461f90
+    // label: openMapDescriptionEditor
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x00461F90 = 0x00461F90,
-    // label: setCustomHelpText
+    // label: _HoldStrong::Text::TextEditorState::meth_0x4620f0
+    // label: displayRawText
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x004620F0 = 0x004620F0,
-    // label: popHelpDialogStack
+    // label: goBackInHelpHistory
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x00462150 = 0x00462150,
-    // label: openUnusedHelpTextEditorDialog
+    // label: _HoldStrong::Text::TextEditorState::meth_0x462190
+    // label: openHelpTextEditor
+    // location:
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x00462190 = 0x00462190,
@@ -20882,26 +21818,36 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x00462FDF = 0x00462FDF,
     // label: Constructor_AlphaAndButtonSurface
+    // label: _HoldStrong::UI::Rendering::AlphaAndButtonSurface::Constructor_AlphaAndButtonSurface
+    // location:
     // location: OpenSHC/UI/Rendering/AlphaAndButtonSurface
     // type: function
     SHC_3BB0A8C1_0x00462FE0 = 0x00462FE0,
+    // label: _HoldStrong::UI::Rendering::AlphaAndButtonSurface::prepareButtonAndAlphaSurface
     // label: prepareButtonAndAlphaSurface
+    // location:
     // location: OpenSHC/UI/Rendering/AlphaAndButtonSurface
     // type: function
     SHC_3BB0A8C1_0x00462FF0 = 0x00462FF0,
+    // label: _HoldStrong::UI::Rendering::ButtonGmData::getPictureNumberInGm
     // label: getPictureNumberInGm
+    // location:
     // location: OpenSHC/UI/Rendering/ButtonGmData
     // type: function
     SHC_3BB0A8C1_0x004630B0 = 0x004630B0,
-    // label: isMouseOnButtonImageUnk
+    // label: _HoldStrong::UI::Rendering::AlphaAndButtonSurface::isMouseOnButtonImageUnk
+    // label: isMouseOverButtonPixel
+    // location:
     // location: OpenSHC/UI/Rendering/AlphaAndButtonSurface
     // type: function
     SHC_3BB0A8C1_0x004630D0 = 0x004630D0,
-    // label: ProcessBuildingClickBonus
+    // label: handleFriendlyBuildingClick
     // location: OpenSHC/UI/Rendering/AlphaAndButtonSurface
     // type: function
     SHC_3BB0A8C1_0x00463270 = 0x00463270,
+    // label: _HoldStrong::UI::Rendering::AlphaAndButtonSurface::openBuildingStatusMenuForBuildingID
     // label: openBuildingStatusMenuForBuildingID
+    // location:
     // location: OpenSHC/UI/Rendering/AlphaAndButtonSurface
     // type: function
     SHC_3BB0A8C1_0x00463310 = 0x00463310,
@@ -21491,11 +22437,13 @@ enum {
     SHC_3BB0A8C1_0x004639F9 = 0x004639F9,
     // type: /byte
     SHC_3BB0A8C1_0x004639FA = 0x004639FA,
-    // label: SelectUnitAndOpenStatusMenu
+    // label: selectOwnUnit
     // location: OpenSHC/UI/Rendering/AlphaAndButtonSurface
     // type: function
     SHC_3BB0A8C1_0x00463A00 = 0x00463A00,
+    // label: _HoldStrong::UI::Rendering::AlphaAndButtonSurface::renderBasicButton
     // label: renderBasicButton
+    // location:
     // location: OpenSHC/UI/Rendering/AlphaAndButtonSurface
     // type: function
     SHC_3BB0A8C1_0x00463A90 = 0x00463A90,
@@ -21503,12 +22451,14 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00463FF0 = 0x00463FF0,
-    // label: RenderCurrentNotActiveButtonWithPossibleAlphaTexOnCurrentSurfaceUnk
+    // label: _HoldStrong::UI::Rendering::RenderCurrentNotActiveButtonWithPossibleAlphaTexOnCurrentSurfaceUnk
+    // label: renderInactiveButtonWithAlpha
+    // location:
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004640D0 = 0x004640D0,
-    // label: RenderButtonImageWithBlending
-    // location: OpenSHC/UI
+    // label: renderButtonGmPicture
+    // location:
     // type: function
     SHC_3BB0A8C1_0x004641A0 = 0x004641A0,
     // label: MenuItemRenderFunction_ChooseRandomNumberOfEnemies_Main
@@ -21519,7 +22469,9 @@ enum {
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x00464300 = 0x00464300,
-    // label: RenderCurrentButtonToScreenMenuWithBlendingUnk
+    // label: _HoldStrong::UI::Rendering::RenderCurrentButtonToScreenMenuWithBlendingUnk
+    // label: renderCurrentButtonBlendedToScreenMenu
+    // location:
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x00464370 = 0x00464370,
@@ -21607,7 +22559,9 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00464860 = 0x00464860,
-    // label: MenuItemActionHandler_BuildingAndStatusMenu_Unknown_Min1
+    // label: MenuItemActionHandler_BuildingAndStatusMenu_ResetSelectionA
+    // label: _HoldStrong::UI::MenuItemActionHandler_BuildingAndStatusMenu_Unknown_Min1
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004649C0 = 0x004649C0,
@@ -21615,11 +22569,15 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004649D0 = 0x004649D0,
-    // label: MenuItemActionHandler_BuildingAndStatusMenu_UnknownMin1Unk
+    // label: MenuItemActionHandler_BuildingAndStatusMenu_ResetSelectionB
+    // label: _HoldStrong::UI::MenuItemActionHandler_BuildingAndStatusMenu_UnknownMin1Unk
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00464D90 = 0x00464D90,
-    // label: IsEuroUnitRecruitableUnk
+    // label: _HoldStrong::Global::IsEuroUnitRecruitableUnk
+    // label: getEuroUnitRecruitableState
+    // location:
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00464DA0 = 0x00464DA0,
@@ -21751,7 +22709,9 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00465A20 = 0x00465A20,
-    // label: SetPlayerBuyingResultStateUnk
+    // label: _HoldStrong::Global::SetPlayerBuyingResultStateUnk
+    // label: setStorageFullEmptyNotification
+    // location:
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00465DB0 = 0x00465DB0,
@@ -21857,7 +22817,9 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00466D10 = 0x00466D10,
-    // label: SetEnoughGoldForRequestedUnitToTrueUnk
+    // label: _HoldStrong::Global::SetEnoughGoldForRequestedUnitToTrueUnk
+    // label: setEnoughGoldForRequestedUnit
+    // location:
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00466E00 = 0x00466E00,
@@ -21889,15 +22851,21 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00467670 = 0x00467670,
+    // label: HoldStrong_lib::std::bad_alloc::~bad_alloc
     // label: ~bad_alloc
+    // location:
     // location: HoldStrong_lib/std/bad_alloc
     // type: function
     SHC_3BB0A8C1_0x00467680 = 0x00467680,
-    // label: meth_0x4676b0
+    // label: HoldStrong_lib::std::locale::_Locimp::meth_0x4676b0
+    // label: _Locimp_Incref
+    // location:
     // location: HoldStrong_lib/std/locale/_Locimp
     // type: function
     SHC_3BB0A8C1_0x004676B0 = 0x004676B0,
-    // label: meth_0x4676e0
+    // label: HoldStrong_lib::meth_0x4676e0
+    // label: facet_Decref
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x004676E0 = 0x004676E0,
@@ -21905,31 +22873,45 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00467720 = 0x00467720,
-    // label: meth_0x467730
+    // label: HoldStrong_lib::std::locale::_Locimp::meth_0x467730
+    // label: releaseLocaleFacet
+    // location:
     // location: HoldStrong_lib/std/locale/_Locimp
     // type: function
     SHC_3BB0A8C1_0x00467730 = 0x00467730,
+    // label: HoldStrong_lib::std::codecvt<char,_char,_int>::virt_meth_0x467780
     // label: virt_meth_0x467780
+    // location:
     // location: HoldStrong_lib/std/codecvt<char,_char,_int>
     // type: function
     SHC_3BB0A8C1_0x00467780 = 0x00467780,
+    // label: HoldStrong_lib::std::codecvt<char,_char,_int>::virt_meth_0x467790
     // label: virt_meth_0x467790
+    // location:
     // location: HoldStrong_lib/std/codecvt<char,_char,_int>
     // type: function
     SHC_3BB0A8C1_0x00467790 = 0x00467790,
-    // label: meth_0x4677a0
+    // label: HoldStrong_lib::meth_0x4677a0
+    // label: getLocaleFacetRef
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x004677A0 = 0x004677A0,
+    // label: HoldStrong_lib::stdLib::ios::ios_base::~ios_base
     // label: ~ios_base
+    // location:
     // location: HoldStrong_lib/stdLib/ios/ios_base
     // type: function
     SHC_3BB0A8C1_0x004677E0 = 0x004677E0,
+    // label: _HoldStrong::Audio::MSS::SoundSystem::stopMusicPlayback
     // label: stopMusicPlayback
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00467810 = 0x00467810,
-    // label: endSoundStreamsUnk
+    // label: _HoldStrong::Audio::MSS::SoundSystem::endSoundStreamsUnk
+    // label: endAllSoundStreams
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00467830 = 0x00467830,
@@ -21937,19 +22919,27 @@ enum {
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x00467850 = 0x00467850,
-    // label: SetSomeColorsUnk
+    // label: _HoldStrong::Global::SetSomeColorsUnk
+    // label: initNamedColorsForColorMode
+    // location:
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00467890 = 0x00467890,
     // label: Constructor_WindowAndDirectDraw
+    // label: _HoldStrong::UI::Rendering::WindowAndDirectDraw::Constructor_WindowAndDirectDraw
+    // location:
     // location: OpenSHC/UI/Rendering/WindowAndDirectDraw
     // type: function
     SHC_3BB0A8C1_0x004679F0 = 0x004679F0,
+    // label: _HoldStrong::UI::Rendering::WindowAndDirectDraw::createWindow
     // label: createWindow
+    // location:
     // location: OpenSHC/UI/Rendering/WindowAndDirectDraw
     // type: function
     SHC_3BB0A8C1_0x00467A90 = 0x00467A90,
+    // label: _HoldStrong::UI::Rendering::WindowAndDirectDraw::getDeviceCapsAndSetup
     // label: getDeviceCapsAndSetup
+    // location:
     // location: OpenSHC/UI/Rendering/WindowAndDirectDraw
     // type: function
     SHC_3BB0A8C1_0x00467B40 = 0x00467B40,
@@ -21957,7 +22947,9 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00467BC0 = 0x00467BC0,
+    // label: _HoldStrong::UI::Rendering::WindowAndDirectDraw::releaseSurfacesAndDirectDraw
     // label: releaseSurfacesAndDirectDraw
+    // location:
     // location: OpenSHC/UI/Rendering/WindowAndDirectDraw
     // type: function
     SHC_3BB0A8C1_0x00467D80 = 0x00467D80,
@@ -21979,15 +22971,21 @@ enum {
     // label: prt_467e26_c34967f8
     // location: OpenSHC/UI/Rendering/WindowAndDirectDraw/releaseSurfacesAndDirectDraw/override
     SHC_3BB0A8C1_0x00467E26 = 0x00467E26,
+    // label: _HoldStrong::UI::Rendering::WindowAndDirectDraw::finalizeDirectDrawShutdown
     // label: finalizeDirectDrawShutdown
+    // location:
     // location: OpenSHC/UI/Rendering/WindowAndDirectDraw
     // type: function
     SHC_3BB0A8C1_0x00467E40 = 0x00467E40,
-    // label: adjustForNotExclusiveFullscreenUnk
+    // label: _HoldStrong::UI::Rendering::WindowAndDirectDraw::adjustForNotExclusiveFullscreenUnk
+    // label: clampBlitRectsToScreen
+    // location:
     // location: OpenSHC/UI/Rendering/WindowAndDirectDraw
     // type: function
     SHC_3BB0A8C1_0x00467E50 = 0x00467E50,
+    // label: _HoldStrong::UI::Rendering::WindowAndDirectDraw::restoreDXSurfaces
     // label: restoreDXSurfaces
+    // location:
     // location: OpenSHC/UI/Rendering/WindowAndDirectDraw
     // type: function
     SHC_3BB0A8C1_0x00467EC0 = 0x00467EC0,
@@ -21995,235 +22993,341 @@ enum {
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x00467F50 = 0x00467F50,
-    // label: storeWindowRectangleInfoUnk
+    // label: _HoldStrong::Rendering::WindowInformation::storeWindowRectangleInfoUnk
+    // label: storeGameWindowRect
+    // location:
     // location: OpenSHC/Rendering/WindowInformation
     // type: function
     SHC_3BB0A8C1_0x00467F60 = 0x00467F60,
+    // label: _HoldStrong::Input::MouseState::makeSelectedCursorTypeCurrent
     // label: makeSelectedCursorTypeCurrent
+    // location:
     // location: OpenSHC/Input/MouseState
     // type: function
     SHC_3BB0A8C1_0x00467F80 = 0x00467F80,
+    // label: _HoldStrong::Input::MouseState::updateMousePositionAndClicks
     // label: updateMousePositionAndClicks
+    // location:
     // location: OpenSHC/Input/MouseState
     // type: function
     SHC_3BB0A8C1_0x00468030 = 0x00468030,
+    // label: _HoldStrong::Input::MouseState::updateMouseWheelStatus
     // label: updateMouseWheelStatus
+    // location:
     // location: OpenSHC/Input/MouseState
     // type: function
     SHC_3BB0A8C1_0x004680B0 = 0x004680B0,
+    // label: _HoldStrong::Input::MouseState::isMouseInsideBox
     // label: isMouseInsideBox
+    // location:
     // location: OpenSHC/Input/MouseState
     // type: function
     SHC_3BB0A8C1_0x004680C0 = 0x004680C0,
+    // label: _HoldStrong::Input::MouseState::updateMouseStateBasedOnCursorAndTime
     // label: updateMouseStateBasedOnCursorAndTime
+    // location:
     // location: OpenSHC/Input/MouseState
     // type: function
     SHC_3BB0A8C1_0x00468100 = 0x00468100,
+    // label: _HoldStrong::Input::MouseState::setCursor
     // label: setCursor
+    // location:
     // location: OpenSHC/Input/MouseState
     // type: function
     SHC_3BB0A8C1_0x00468370 = 0x00468370,
-    // label: beginPointSelectionBox
+    // label: _HoldStrong::Input::MouseState::meth_0x468420
+    // label: computeMouseWorldPickBox
+    // location:
     // location: OpenSHC/Input/MouseState
     // type: function
     SHC_3BB0A8C1_0x00468420 = 0x00468420,
+    // label: _HoldStrong::Input::MouseState::setupHitBox
     // label: setupHitBox
+    // location:
     // location: OpenSHC/Input/MouseState
     // type: function
     SHC_3BB0A8C1_0x004684D0 = 0x004684D0,
+    // label: _HoldStrong::Input::MouseState::resetMouseCursorState
     // label: resetMouseCursorState
+    // location:
     // location: OpenSHC/Input/MouseState
     // type: function
     SHC_3BB0A8C1_0x00468590 = 0x00468590,
+    // label: _HoldStrong::Input::MouseState::renderPreviewAtMouseLocation
     // label: renderPreviewAtMouseLocation
+    // location:
     // location: OpenSHC/Input/MouseState
     // type: function
     SHC_3BB0A8C1_0x004685C0 = 0x004685C0,
+    // label: _HoldStrong::Input::MouseState::storeXYAndResetMouseState
     // label: storeXYAndResetMouseState
+    // location:
     // location: OpenSHC/Input/MouseState
     // type: function
     SHC_3BB0A8C1_0x004687F0 = 0x004687F0,
+    // label: _HoldStrong::Input::MouseState::resetMouseState2
     // label: resetMouseState2
+    // location:
     // location: OpenSHC/Input/MouseState
     // type: function
     SHC_3BB0A8C1_0x004689D0 = 0x004689D0,
     // label: Constructor_ModifierKeyState
+    // label: _HoldStrong::Input::ModifierKeyState::Constructor_ModifierKeyState
+    // location:
     // location: OpenSHC/Input/ModifierKeyState
     // type: function
     SHC_3BB0A8C1_0x00468A10 = 0x00468A10,
+    // label: _HoldStrong::Input::ModifierKeyState::updateCtrlShiftAltKeyStateMemory
     // label: updateCtrlShiftAltKeyStateMemory
+    // location:
     // location: OpenSHC/Input/ModifierKeyState
     // type: function
     SHC_3BB0A8C1_0x00468A20 = 0x00468A20,
     // label: Constructor_ScrollingHandler
+    // label: _HoldStrong::UI::ScrollingHandler::Constructor_ScrollingHandler
+    // location:
     // location: OpenSHC/UI/ScrollingHandler
     // type: function
     SHC_3BB0A8C1_0x00468A90 = 0x00468A90,
+    // label: _HoldStrong::UI::ScrollingHandler::handleScrolling
     // label: handleScrolling
+    // location:
     // location: OpenSHC/UI/ScrollingHandler
     // type: function
     SHC_3BB0A8C1_0x00468AD0 = 0x00468AD0,
-    // label: getScrollDistanceBaseUnk
+    // label: _HoldStrong::UI::ScrollingHandler::getScrollDistanceBaseUnk
+    // label: getScrollDistanceBase
+    // location:
     // location: OpenSHC/UI/ScrollingHandler
     // type: function
     SHC_3BB0A8C1_0x00468C30 = 0x00468C30,
     // label: Constructor_InsertKeyState
+    // label: _HoldStrong::Input::InsertKeyState::Constructor_InsertKeyState
+    // location:
     // location: OpenSHC/Input/InsertKeyState
     // type: function
     SHC_3BB0A8C1_0x00468C40 = 0x00468C40,
+    // label: _HoldStrong::UI::Rendering::PencilRenderCore::setupPencilSurface
     // label: setupPencilSurface
+    // location:
     // location: OpenSHC/UI/Rendering/PencilRenderCore
     // type: function
     SHC_3BB0A8C1_0x00468C50 = 0x00468C50,
+    // label: _HoldStrong::UI::Rendering::PencilRenderCore::setupPencil
     // label: setupPencil
+    // location:
     // location: OpenSHC/UI/Rendering/PencilRenderCore
     // type: function
     SHC_3BB0A8C1_0x00468C80 = 0x00468C80,
+    // label: _HoldStrong::UI::Rendering::PencilRenderCore::drawHorizontalLine
     // label: drawHorizontalLine
+    // location:
     // location: OpenSHC/UI/Rendering/PencilRenderCore
     // type: function
     SHC_3BB0A8C1_0x00468DE0 = 0x00468DE0,
+    // label: _HoldStrong::UI::Rendering::PencilRenderCore::drawVerticalLine
     // label: drawVerticalLine
+    // location:
     // location: OpenSHC/UI/Rendering/PencilRenderCore
     // type: function
     SHC_3BB0A8C1_0x00468E40 = 0x00468E40,
+    // label: _HoldStrong::UI::Rendering::PencilRenderCore::dimHorizontalLine
     // label: dimHorizontalLine
+    // location:
     // location: OpenSHC/UI/Rendering/PencilRenderCore
     // type: function
     SHC_3BB0A8C1_0x00468EA0 = 0x00468EA0,
+    // label: _HoldStrong::UI::Rendering::PencilRenderCore::drawCurrentPixel
     // label: drawCurrentPixel
+    // location:
     // location: OpenSHC/UI/Rendering/PencilRenderCore
     // type: function
     SHC_3BB0A8C1_0x00468F20 = 0x00468F20,
+    // label: _HoldStrong::UI::Rendering::PencilRenderCore::drawPixelPattern4x4
     // label: drawPixelPattern4x4
+    // location:
     // location: OpenSHC/UI/Rendering/PencilRenderCore
     // type: function
     SHC_3BB0A8C1_0x00468F70 = 0x00468F70,
+    // label: _HoldStrong::UI::Rendering::PencilRenderCore::drawHeaderBanner
     // label: drawHeaderBanner
+    // location:
     // location: OpenSHC/UI/Rendering/PencilRenderCore
     // type: function
     SHC_3BB0A8C1_0x00468FE0 = 0x00468FE0,
+    // label: _HoldStrong::UI::Rendering::PencilRenderCore::drawScrollbar
     // label: drawScrollbar
+    // location:
     // location: OpenSHC/UI/Rendering/PencilRenderCore
     // type: function
     SHC_3BB0A8C1_0x004690E0 = 0x004690E0,
-    // label: renderUpDownButtonUnk
+    // label: _HoldStrong::UI::Rendering::PencilRenderCore::renderUpDownButtonUnk
+    // label: renderUpDownArrowButton
+    // location:
     // location: OpenSHC/UI/Rendering/PencilRenderCore
     // type: function
     SHC_3BB0A8C1_0x00469290 = 0x00469290,
+    // label: _HoldStrong::UI::Rendering::PencilRenderCore::drawTableCellBackground
     // label: drawTableCellBackground
+    // location:
     // location: OpenSHC/UI/Rendering/PencilRenderCore
     // type: function
     SHC_3BB0A8C1_0x004692E0 = 0x004692E0,
+    // label: initTextInputBoxes
+    // location:
+    // type: function
+    SHC_3BB0A8C1_0x004694A0 = 0x004694A0,
+    // label: _HoldStrong::Text::UserTextHandler::resetToTextIndex
     // label: resetToTextIndex
+    // location:
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x00469790 = 0x00469790,
+    // label: _HoldStrong::Text::UserTextHandler::getCurrentText
     // label: getCurrentText
+    // location:
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x004697C0 = 0x004697C0,
+    // label: _HoldStrong::Text::UserTextHandler::getTextArrayPointer
     // label: getTextArrayPointer
+    // location:
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x004697E0 = 0x004697E0,
-    // label: setTextEntryAndUpdateCursor
+    // label: setTextBoxContent
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x00469800 = 0x00469800,
-    // label: getCurrentFontSize
+    // label: getCurrentTextBoxFontSize
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x00469860 = 0x00469860,
+    // label: _HoldStrong::Text::UserTextHandler::handleReturnKey
     // label: handleReturnKey
+    // location:
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x00469870 = 0x00469870,
+    // label: _HoldStrong::Text::UserTextHandler::handleRightKey
     // label: handleRightKey
+    // location:
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x00469880 = 0x00469880,
+    // label: _HoldStrong::Text::UserTextHandler::handleLeftKey
     // label: handleLeftKey
+    // location:
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x004698A0 = 0x004698A0,
-    // label: resetCursorToStart
+    // label: resetTextBoxCursor
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x004698C0 = 0x004698C0,
+    // label: _HoldStrong::Text::UserTextHandler::moveCursorToEnd
     // label: moveCursorToEnd
+    // location:
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x004698D0 = 0x004698D0,
-    // label: shiftTextLeftAtCursor
+    // label: removeTextBoxChars
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x004698F0 = 0x004698F0,
-    // label: shiftTextRightAtCursor
+    // label: insertCharSlotInTextBox
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x00469930 = 0x00469930,
+    // label: _HoldStrong::Text::UserTextHandler::handleCharacterIntoInputBuffer
     // label: handleCharacterIntoInputBuffer
+    // location:
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x00469980 = 0x00469980,
-    // label: dequeueInputBufferChar
+    // label: dequeueInputChar
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x004699E0 = 0x004699E0,
+    // label: _HoldStrong::Text::FontSizeClass::setupFontSizeClassObject
     // label: setupFontSizeClassObject
+    // location:
     // location: OpenSHC/Text/FontSizeClass
     // type: function
     SHC_3BB0A8C1_0x00469A30 = 0x00469A30,
+    // label: _HoldStrong::Text::FontSizeClass::getWidthOfText
     // label: getWidthOfText
+    // location:
     // location: OpenSHC/Text/FontSizeClass
     // type: function
     SHC_3BB0A8C1_0x00469A70 = 0x00469A70,
     // type: function
     SHC_3BB0A8C1_0x00469AD0 = 0x00469AD0,
+    // label: _HoldStrong::Text::FontSizeClass::getWordStartingFromPos
     // label: getWordStartingFromPos
+    // location:
     // location: OpenSHC/Text/FontSizeClass
     // type: function
     SHC_3BB0A8C1_0x00469B90 = 0x00469B90,
     // type: function
     SHC_3BB0A8C1_0x00469BE0 = 0x00469BE0,
-    // label: wrapTextIntoLines
+    // label: _HoldStrong::Text::FontSizeClass::meth_0x469c40
+    // label: wordWrapText
+    // location:
     // location: OpenSHC/Text/FontSizeClass
     // type: function
     SHC_3BB0A8C1_0x00469C40 = 0x00469C40,
-    // label: getCharWidthUnk
+    // label: _HoldStrong::Text::FontSizeClass::getCharWidthUnk
+    // label: getCharWidth
+    // location:
     // location: OpenSHC/Text/FontSizeClass
     // type: function
     SHC_3BB0A8C1_0x00469E10 = 0x00469E10,
+    // label: _HoldStrong::Text::TextManager::setupFontSizeClassObjects
     // label: setupFontSizeClassObjects
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x00469E70 = 0x00469E70,
-    // label: DoNothing
+    // label: _HoldStrong::Global::FUN_Useless
+    // label: noOp
+    // location:
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00469F10 = 0x00469F10,
-    // label: setTextClipRange
+    // label: _HoldStrong::Text::TextManager::meth_0x469f20
+    // label: setTextManagerClipRange
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x00469F20 = 0x00469F20,
-    // label: resetTextClipRange
+    // label: _HoldStrong::Text::TextManager::meth_0x469f40
+    // label: resetTextManagerClipRange
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x00469F40 = 0x00469F40,
+    // label: _HoldStrong::Text::TextManager::trimText
     // label: trimText
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x00469F50 = 0x00469F50,
-    // label: getTextWidthTillCursorUnk
+    // label: _HoldStrong::Text::TextManager::getTextWidthTillCursorUnk
+    // label: getTextWidthTillCursor
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x00469F70 = 0x00469F70,
+    // label: _HoldStrong::Text::TextManager::fillIntegerTextBuffer
     // label: fillIntegerTextBuffer
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x00469FA0 = 0x00469FA0,
+    // label: _HoldStrong::Text::TextManager::getTextStringInGroupAtOffset
     // label: getTextStringInGroupAtOffset
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x0046A050 = 0x0046A050,
@@ -22725,7 +23829,9 @@ enum {
     SHC_3BB0A8C1_0x0046A2B8 = 0x0046A2B8,
     // type: /pointer
     SHC_3BB0A8C1_0x0046A2BC = 0x0046A2BC,
-    // label: renderPartOfNumberUnk
+    // label: _HoldStrong::Text::TextManager::renderPartOfNumberUnk
+    // label: renderNumberDigitAtPlace
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x0046A2C0 = 0x0046A2C0,
@@ -22743,118 +23849,174 @@ enum {
     SHC_3BB0A8C1_0x0046A4C4 = 0x0046A4C4,
     // type: /undefined *32
     SHC_3BB0A8C1_0x0046A4C8 = 0x0046A4C8,
-    // label: calcRenderedNumberWidth
+    // label: getNumberGfxWidth
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x0046A4D0 = 0x0046A4D0,
+    // label: _HoldStrong::Text::TextManager::getCharWidth
     // label: getCharWidth
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x0046A720 = 0x0046A720,
+    // label: _HoldStrong::Random::RNG::setTimeBasedSeed
     // label: setTimeBasedSeed
+    // location:
     // location: OpenSHC/Random/RNG
     // type: function
     SHC_3BB0A8C1_0x0046A740 = 0x0046A740,
+    // label: _HoldStrong::Random::RNG::populateRNG1040
     // label: populateRNG1040
+    // location:
     // location: OpenSHC/Random/RNG
     // type: function
     SHC_3BB0A8C1_0x0046A760 = 0x0046A760,
+    // label: _HoldStrong::Random::RNG::nextRandomNumber2
     // label: nextRandomNumber2
+    // location:
     // location: OpenSHC/Random/RNG
     // type: function
     SHC_3BB0A8C1_0x0046A7D0 = 0x0046A7D0,
+    // label: _HoldStrong::Random::RNG::nextRandomNumber1
     // label: nextRandomNumber1
+    // location:
     // location: OpenSHC/Random/RNG
     // type: function
     SHC_3BB0A8C1_0x0046A800 = 0x0046A800,
+    // label: _HoldStrong::IO::LowLevelMemory::moveLowerThreeBytesIntoParam2
     // label: moveLowerThreeBytesIntoParam2
+    // location:
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x0046A830 = 0x0046A830,
-    // label: setMemoryToValue_0x001
+    // label: _HoldStrong::IO::LowLevelMemory::setMemoryToValue0x001
+    // label: setMemoryToValue0x001
+    // location:
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x0046A850 = 0x0046A850,
-    // label: setMemoryToValue_0x002
+    // label: _HoldStrong::IO::LowLevelMemory::setMemoryToValue0x002
+    // label: setMemoryToValue0x002
+    // location:
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x0046A890 = 0x0046A890,
-    // label: setMemoryToValue_0x004
+    // label: _HoldStrong::IO::LowLevelMemory::setMemoryToValue0x004
+    // label: setMemoryToValue0x004
+    // location:
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x0046A8D0 = 0x0046A8D0,
-    // label: setMemoryToValue_0x010
+    // label: _HoldStrong::IO::LowLevelMemory::setMemoryToValue0x010
+    // label: setMemoryToValue0x010
+    // location:
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x0046A910 = 0x0046A910,
-    // label: setMemoryToValue_0x100
+    // label: _HoldStrong::IO::LowLevelMemory::setMemoryToValue0x100
+    // label: setMemoryToValue0x100
+    // location:
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x0046A970 = 0x0046A970,
-    // label: copyData_0x001
+    // label: _HoldStrong::IO::LowLevelMemory::copyData0x001
+    // label: copyData0x001
+    // location:
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x0046AAF0 = 0x0046AAF0,
-    // label: copyData_0x010
+    // label: _HoldStrong::IO::LowLevelMemory::copyData0x010
+    // label: copyData0x010
+    // location:
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x0046AB30 = 0x0046AB30,
-    // label: copyData_0x100
+    // label: _HoldStrong::IO::LowLevelMemory::copyData0x100
+    // label: copyData0x100
+    // location:
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x0046ABA0 = 0x0046ABA0,
+    // label: _HoldStrong::IO::LowLevelMemory::copyStringUntilFirstDot
     // label: copyStringUntilFirstDot
+    // location:
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x0046AE50 = 0x0046AE50,
+    // label: _HoldStrong::IO::LowLevelMemory::putFileNameAndAppendFileExtension
     // label: putFileNameAndAppendFileExtension
+    // location:
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x0046AE80 = 0x0046AE80,
+    // label: _HoldStrong::IO::LowLevelMemory::isLordNameCallable
     // label: isLordNameCallable
+    // location:
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x0046AEC0 = 0x0046AEC0,
+    // label: _HoldStrong::Util::WideCharMultiByteState::wideCharToMultiByteComplete
     // label: wideCharToMultiByteComplete
+    // location:
     // location: OpenSHC/Util/WideCharMultiByteState
     // type: function
     SHC_3BB0A8C1_0x0046B080 = 0x0046B080,
+    // label: _HoldStrong::Util::WideCharMultiByteState::multiByteToWideCharacter
     // label: multiByteToWideCharacter
+    // location:
     // location: OpenSHC/Util/WideCharMultiByteState
     // type: function
     SHC_3BB0A8C1_0x0046B0D0 = 0x0046B0D0,
+    // label: _HoldStrong::Util::WideCharMultiByteState::wideCharToMultiByteWithSize
     // label: wideCharToMultiByteWithSize
+    // location:
     // location: OpenSHC/Util/WideCharMultiByteState
     // type: function
     SHC_3BB0A8C1_0x0046B110 = 0x0046B110,
+    // label: _HoldStrong::Util::WideCharMultiByteState::multiByteToWideCharThunk
     // label: multiByteToWideCharThunk
+    // location:
     // location: OpenSHC/Util/WideCharMultiByteState
     // type: function
     SHC_3BB0A8C1_0x0046B140 = 0x0046B140,
-    // label: wideCharToByteUnk
+    // label: _HoldStrong::Util::WideCharMultiByteState::wideCharToByteUnk
+    // label: wideCharToByte
+    // location:
     // location: OpenSHC/Util/WideCharMultiByteState
     // type: function
     SHC_3BB0A8C1_0x0046B170 = 0x0046B170,
+    // label: _HoldStrong::Util::WideCharMultiByteState::multiByteToWideCharThunk2
     // label: multiByteToWideCharThunk2
+    // location:
     // location: OpenSHC/Util/WideCharMultiByteState
     // type: function
     SHC_3BB0A8C1_0x0046B1B0 = 0x0046B1B0,
     // label: Constructor_GameCore
+    // label: _HoldStrong::Game::GameCore::Constructor_GameCore
+    // location:
     // location: OpenSHC/Game/GameCore
     // type: function
     SHC_3BB0A8C1_0x0046B1F0 = 0x0046B1F0,
-    // label: setViewOnExitUnk
+    // label: _HoldStrong::Game::GameCore::setViewOnExitUnk
+    // label: setMenuViewOnExit
+    // location:
     // location: OpenSHC/Game/GameCore
     // type: function
     SHC_3BB0A8C1_0x0046B2F0 = 0x0046B2F0,
+    // label: _HoldStrong::Game::GameCore::setTabToSwitchTo
     // label: setTabToSwitchTo
+    // location:
     // location: OpenSHC/Game/GameCore
     // type: function
     SHC_3BB0A8C1_0x0046B300 = 0x0046B300,
-    // label: swapBuildMenuTab
+    // label: _HoldStrong::Game::GameCore::meth_0x46b320
+    // label: toggleSiegeTentBuildTab
+    // location:
     // location: OpenSHC/Game/GameCore
     // type: function
     SHC_3BB0A8C1_0x0046B320 = 0x0046B320,
+    // label: _HoldStrong::Game::GameCore::switchToMenuView
+    // location:
     // type: function
     SHC_3BB0A8C1_0x0046B340 = 0x0046B340,
     // type: /pointer
@@ -22987,135 +24149,191 @@ enum {
     SHC_3BB0A8C1_0x0046B975 = 0x0046B975,
     // type: /byte
     SHC_3BB0A8C1_0x0046B976 = 0x0046B976,
+    // label: _HoldStrong::Game::GameCore::processMenuViewSwitch
     // label: processMenuViewSwitch
+    // location:
     // location: OpenSHC/Game/GameCore
     // type: function
     SHC_3BB0A8C1_0x0046B980 = 0x0046B980,
-    // label: viewportAndScrollingRelated
+    // label: _HoldStrong::Game::GameCore::viewportAndScrollingRelated
+    // label: updateViewportScrollCountdown
+    // location:
     // location: OpenSHC/Game/GameCore
     // type: function
     SHC_3BB0A8C1_0x0046BB20 = 0x0046BB20,
+    // label: _HoldStrong::Game::GameCore::getAreWeInAInGameMenu
     // label: getAreWeInAInGameMenu
+    // location:
     // location: OpenSHC/Game/GameCore
     // type: function
     SHC_3BB0A8C1_0x0046BB60 = 0x0046BB60,
+    // label: _HoldStrong::Game::GameCore::isInBuildingTab
     // label: isInBuildingTab
+    // location:
     // location: OpenSHC/Game/GameCore
     // type: function
     SHC_3BB0A8C1_0x0046BB80 = 0x0046BB80,
+    // label: _HoldStrong::Game::GameCore::removeJesterAndLadyUnitsInCertainMissions
     // label: removeJesterAndLadyUnitsInCertainMissions
+    // location:
     // location: OpenSHC/Game/GameCore
     // type: function
     SHC_3BB0A8C1_0x0046BBD0 = 0x0046BBD0,
-    // label: removeLadyAndJester
+    // label: removePlayerLadyAndJester
     // location: OpenSHC/Game/GameCore
     // type: function
     SHC_3BB0A8C1_0x0046BC90 = 0x0046BC90,
+    // label: _HoldStrong::Game::GameCore::isGameHaltingMenuOpen
     // label: isGameHaltingMenuOpen
+    // location:
     // location: OpenSHC/Game/GameCore
     // type: function
     SHC_3BB0A8C1_0x0046BD20 = 0x0046BD20,
-    // label: setStartDateUnk
+    // label: _HoldStrong::Game::GameCore::setStartDateUnk
+    // label: computeTrailMissionStartDates
+    // location:
     // location: OpenSHC/Game/GameCore
     // type: function
     SHC_3BB0A8C1_0x0046BD50 = 0x0046BD50,
     // type: function
     SHC_3BB0A8C1_0x0046BDB0 = 0x0046BDB0,
+    // label: _HoldStrong::IO::ResourceManager::loadMapMetaByID
     // label: loadMapMetaByID
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x0046C200 = 0x0046C200,
+    // label: _HoldStrong::IO::ResourceManager::getChecksumOfMapByName
     // label: getChecksumOfMapByName
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x0046C280 = 0x0046C280,
+    // label: _HoldStrong::IO::ResourceManager::getLoadedMapNameForIndex
     // label: getLoadedMapNameForIndex
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x0046C2E0 = 0x0046C2E0,
+    // label: _HoldStrong::IO::ResourceManager::getFileNameOfCurrentActiveResource
     // label: getFileNameOfCurrentActiveResource
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x0046C300 = 0x0046C300,
+    // label: _HoldStrong::IO::ResourceManager::loadConfigPathTxt
     // label: loadConfigPathTxt
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x0046C320 = 0x0046C320,
+    // label: _HoldStrong::IO::ResourceManager::doesFileExist
     // label: doesFileExist
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x0046C420 = 0x0046C420,
-    // label: setGfxFileFilter
+    // label: _HoldStrong::IO::ResourceManager::meth_0x46c450
+    // label: setupGfxFileDialog
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x0046C450 = 0x0046C450,
-    // label: setHelpFileFilter
+    // label: _HoldStrong::IO::ResourceManager::meth_0x46c480
+    // label: setupHelpFileDialog
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x0046C480 = 0x0046C480,
-    // label: setSoundFileFilter
+    // label: _HoldStrong::IO::ResourceManager::meth_0x46c4b0
+    // label: setupFxFileDialog
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x0046C4B0 = 0x0046C4B0,
-    // label: getSimpleFirst1024ByteSumOfFile
+    // label: _HoldStrong::IO::ResourceManager::getSimpleFirst1024ByteSumOfFile
+    // label: getSignedByteSumOfFile_or_minus1
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x0046C4E0 = 0x0046C4E0,
     // type: function
     SHC_3BB0A8C1_0x0046C520 = 0x0046C520,
     // label: Constructor_BitMapState
+    // label: _HoldStrong::IO::BitMapState::Constructor_BitMapState
+    // location:
     // location: OpenSHC/IO/BitMapState
     // type: function
     SHC_3BB0A8C1_0x0046C580 = 0x0046C580,
+    // label: _HoldStrong::IO::BitMapState::readBitmapFace
     // label: readBitmapFace
+    // location:
     // location: OpenSHC/IO/BitMapState
     // type: function
     SHC_3BB0A8C1_0x0046C5A0 = 0x0046C5A0,
     // type: function
     SHC_3BB0A8C1_0x0046C5F0 = 0x0046C5F0,
+    // label: _HoldStrong::IO::BitMapState::blitBitmap24BitToSurface565
     // label: blitBitmap24BitToSurface565
+    // location:
     // location: OpenSHC/IO/BitMapState
     // type: function
     SHC_3BB0A8C1_0x0046C680 = 0x0046C680,
+    // label: _HoldStrong::IO::BitMapState::blitPalettedBitmapToSurface565
     // label: blitPalettedBitmapToSurface565
+    // location:
     // location: OpenSHC/IO/BitMapState
     // type: function
     SHC_3BB0A8C1_0x0046C7A0 = 0x0046C7A0,
     // type: function
     SHC_3BB0A8C1_0x0046C7D0 = 0x0046C7D0,
+    // label: _HoldStrong::IO::BitMapState::copyBitmapToTextureBuffer
     // label: copyBitmapToTextureBuffer
+    // location:
     // location: OpenSHC/IO/BitMapState
     // type: function
     SHC_3BB0A8C1_0x0046C8D0 = 0x0046C8D0,
+    // label: _HoldStrong::Map::Navigation::DirectionAlgorithmState::calculateOrientation
     // label: calculateOrientation
+    // location:
     // location: OpenSHC/Map/Navigation/DirectionAlgorithmState
     // type: function
     SHC_3BB0A8C1_0x0046C920 = 0x0046C920,
-    // label: calculateOrientationFromTiles
+    // label: calculateOrientationBetweenTiles
     // location: OpenSHC/Map/Navigation/DirectionAlgorithmState
     // type: function
     SHC_3BB0A8C1_0x0046C9A0 = 0x0046C9A0,
+    // label: _HoldStrong::Map::Navigation::DirectionAlgorithmState::calculatePreferredRelativeOrientation
     // label: calculatePreferredRelativeOrientation
+    // location:
     // location: OpenSHC/Map/Navigation/DirectionAlgorithmState
     // type: function
     SHC_3BB0A8C1_0x0046C9E0 = 0x0046C9E0,
-    // label: somethingWithProjectileDistance
+    // label: _HoldStrong::Map::Navigation::DirectionAlgorithmState::somethingWithProjectileDistance
+    // label: computeOrientationToTarget
+    // location:
     // location: OpenSHC/Map/Navigation/DirectionAlgorithmState
     // type: function
     SHC_3BB0A8C1_0x0046CAA0 = 0x0046CAA0,
+    // label: _HoldStrong::Map::Navigation::DirectionAlgorithmState::setAxisBasedDistanceResult
     // label: setAxisBasedDistanceResult
+    // location:
     // location: OpenSHC/Map/Navigation/DirectionAlgorithmState
     // type: function
     SHC_3BB0A8C1_0x0046CC80 = 0x0046CC80,
+    // label: _HoldStrong::Map::Navigation::DirectionAlgorithmState::getMouseVectorLengthBasedOnDirection
     // label: getMouseVectorLengthBasedOnDirection
+    // location:
     // location: OpenSHC/Map/Navigation/DirectionAlgorithmState
     // type: function
     SHC_3BB0A8C1_0x0046CCD0 = 0x0046CCD0,
+    // label: _HoldStrong::Map::Navigation::DirectionAlgorithmState::computeHash
     // label: computeHash
+    // location:
     // location: OpenSHC/Map/Navigation/DirectionAlgorithmState
     // type: function
     SHC_3BB0A8C1_0x0046CD30 = 0x0046CD30,
-    // label: computeMaskedBitAccumulator
+    // label: computeMaskedRotatingHash
     // location: OpenSHC/Map/Navigation/DirectionAlgorithmState
     // type: function
     SHC_3BB0A8C1_0x0046CDF0 = 0x0046CDF0,
@@ -23138,14 +24356,20 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x0046CEB0 = 0x0046CEB0,
     // label: Cosntructor_Stopwatch
+    // label: _HoldStrong::Util::Timing::Stopwatch::Cosntructor_Stopwatch
+    // location:
     // location: OpenSHC/Util/Timing/Stopwatch
     // type: function
     SHC_3BB0A8C1_0x0046CEC0 = 0x0046CEC0,
+    // label: _HoldStrong::Util::Timing::Stopwatch::start
     // label: start
+    // location:
     // location: OpenSHC/Util/Timing/Stopwatch
     // type: function
     SHC_3BB0A8C1_0x0046CED0 = 0x0046CED0,
+    // label: _HoldStrong::Util::Timing::Stopwatch::stop
     // label: stop
+    // location:
     // location: OpenSHC/Util/Timing/Stopwatch
     // type: function
     SHC_3BB0A8C1_0x0046CEF0 = 0x0046CEF0,
@@ -23158,22 +24382,32 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0046CF90 = 0x0046CF90,
     // label: Constructor_FilePackager
+    // label: _HoldStrong::IO::FilePackager::Constructor_FilePackager
+    // location:
     // location: OpenSHC/IO/FilePackager
     // type: function
     SHC_3BB0A8C1_0x0046D070 = 0x0046D070,
+    // label: _HoldStrong::IO::FilePackager::copyFromOldToNewMapDirectory
     // label: copyFromOldToNewMapDirectory
+    // location:
     // location: OpenSHC/IO/FilePackager
     // type: function
     SHC_3BB0A8C1_0x0046D090 = 0x0046D090,
     // label: Constructor_DecoderState
+    // label: _HoldStrong::IO::DecoderState::Constructor_DecoderState
+    // location:
     // location: OpenSHC/IO/DecoderState
     // type: function
     SHC_3BB0A8C1_0x0046D140 = 0x0046D140,
+    // label: _HoldStrong::IO::DecoderState::compressRLE
     // label: compressRLE
+    // location:
     // location: OpenSHC/IO/DecoderState
     // type: function
     SHC_3BB0A8C1_0x0046D150 = 0x0046D150,
+    // label: _HoldStrong::IO::DecoderState::decompressRLE
     // label: decompressRLE
+    // location:
     // location: OpenSHC/IO/DecoderState
     // type: function
     SHC_3BB0A8C1_0x0046D200 = 0x0046D200,
@@ -23393,23 +24627,31 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x0046F570 = 0x0046F570,
-    // label: FUN_0046f610
+    // label: ostream_setVbaseVftable
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0046F610 = 0x0046F610,
-    // label: meth_0x46f620
+    // label: HoldStrong_lib::stdLib::ios::ios_base::meth_0x46f620
+    // label: ios_base_dtor
+    // location:
     // location: HoldStrong_lib/stdLib/ios/ios_base
     // type: function
     SHC_3BB0A8C1_0x0046F620 = 0x0046F620,
-    // label: meth_0x46f630
+    // label: HoldStrong_lib::stdLib::ios::basic_streambuf<char,_struct_std::char_traits<char>_>::meth_0x46f630
+    // label: streambuf_getActivePtr
+    // location:
     // location: HoldStrong_lib/stdLib/ios/basic_streambuf<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x0046F630 = 0x0046F630,
-    // label: meth_0x46f650
+    // label: HoldStrong_lib::stdLib::ios::basic_streambuf<char,_struct_std::char_traits<char>_>::meth_0x46f650
+    // label: streambuf_getLocaleRef
+    // location:
     // location: HoldStrong_lib/stdLib/ios/basic_streambuf<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x0046F650 = 0x0046F650,
-    // label: unwind_related_02
+    // label: HoldStrong_lib::unwind_related_02
+    // label: stl_ehUnwindReleaseLock
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0046F690 = 0x0046F690,
@@ -23417,22 +24659,34 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0046F6B0 = 0x0046F6B0,
+    // label: stl_badAllocCtor
+    // location:
+    // type: function
+    SHC_3BB0A8C1_0x0046F710 = 0x0046F710,
+    // label: _HoldStrong::UI::Rendering::WindowAndDirectDraw::cleanDirectDraw
     // label: cleanDirectDraw
+    // location:
     // location: OpenSHC/UI/Rendering/WindowAndDirectDraw
     // type: function
     SHC_3BB0A8C1_0x0046F730 = 0x0046F730,
+    // label: _HoldStrong::UI::Rendering::WindowAndDirectDraw::setWindowStyleRectAndPosition
     // label: setWindowStyleRectAndPosition
+    // location:
     // location: OpenSHC/UI/Rendering/WindowAndDirectDraw
     // type: function
     SHC_3BB0A8C1_0x0046F750 = 0x0046F750,
     // label: prt_46f77c_fef6e54e
     // location: OpenSHC/UI/Rendering/WindowAndDirectDraw/setWindowStyleRectAndPosition/override
     SHC_3BB0A8C1_0x0046F77C = 0x0046F77C,
+    // label: _HoldStrong::UI::Rendering::WindowAndDirectDraw::setupPreferredScreenResolution
     // label: setupPreferredScreenResolution
+    // location:
     // location: OpenSHC/UI/Rendering/WindowAndDirectDraw
     // type: function
     SHC_3BB0A8C1_0x0046F880 = 0x0046F880,
+    // label: _HoldStrong::UI::Rendering::WindowAndDirectDraw::initializeDirectDraw
     // label: initializeDirectDraw
+    // location:
     // location: OpenSHC/UI/Rendering/WindowAndDirectDraw
     // type: function
     SHC_3BB0A8C1_0x0046FA70 = 0x0046FA70,
@@ -23481,121 +24735,183 @@ enum {
     // label: prt_46fe9e_9b16d2f0
     // location: OpenSHC/UI/Rendering/WindowAndDirectDraw/initializeDirectDraw/override
     SHC_3BB0A8C1_0x0046FE9E = 0x0046FE9E,
+    // label: _HoldStrong::UI::Rendering::WindowAndDirectDraw::createCrusaderWindow
     // label: createCrusaderWindow
+    // location:
     // location: OpenSHC/UI/Rendering/WindowAndDirectDraw
     // type: function
     SHC_3BB0A8C1_0x0046FF50 = 0x0046FF50,
-    // label: prepareWindowAndDDrawUnk
+    // label: _HoldStrong::UI::Rendering::WindowAndDirectDraw::prepareWindowAndDDrawUnk
+    // label: reinitWindowAndDirectDraw
+    // location:
     // location: OpenSHC/UI/Rendering/WindowAndDirectDraw
     // type: function
     SHC_3BB0A8C1_0x0046FFB0 = 0x0046FFB0,
+    // label: _HoldStrong::UI::Rendering::WindowAndDirectDraw::renderBltAndFlip
     // label: renderBltAndFlip
+    // location:
     // location: OpenSHC/UI/Rendering/WindowAndDirectDraw
     // type: function
     SHC_3BB0A8C1_0x00470040 = 0x00470040,
+    // label: _HoldStrong::UI::Rendering::WindowAndDirectDraw::bltMapGameSurfaceToScreenMenuSurfaceComplete
     // label: bltMapGameSurfaceToScreenMenuSurfaceComplete
+    // location:
     // location: OpenSHC/UI/Rendering/WindowAndDirectDraw
     // type: function
     SHC_3BB0A8C1_0x00470610 = 0x00470610,
+    // label: _HoldStrong::UI::Rendering::WindowAndDirectDraw::bltMapGameSurfaceToScreenMenuSurface
     // label: bltMapGameSurfaceToScreenMenuSurface
+    // location:
     // location: OpenSHC/UI/Rendering/WindowAndDirectDraw
     // type: function
     SHC_3BB0A8C1_0x004706A0 = 0x004706A0,
+    // label: _HoldStrong::UI::Rendering::WindowAndDirectDraw::bltMapGameSurfaceToScreen
     // label: bltMapGameSurfaceToScreen
+    // location:
     // location: OpenSHC/UI/Rendering/WindowAndDirectDraw
     // type: function
     SHC_3BB0A8C1_0x004706E0 = 0x004706E0,
+    // label: _HoldStrong::UI::Rendering::WindowAndDirectDraw::bltScreenMenuSurfaceToScreen
     // label: bltScreenMenuSurfaceToScreen
+    // location:
     // location: OpenSHC/UI/Rendering/WindowAndDirectDraw
     // type: function
     SHC_3BB0A8C1_0x004707F0 = 0x004707F0,
+    // label: _HoldStrong::UI::Rendering::WindowAndDirectDraw::reinitWindow
     // label: reinitWindow
+    // location:
     // location: OpenSHC/UI/Rendering/WindowAndDirectDraw
     // type: function
     SHC_3BB0A8C1_0x004708F0 = 0x004708F0,
     // label: Constructor_MouseState
+    // label: _HoldStrong::Input::MouseState::Constructor_MouseState
+    // location:
     // location: OpenSHC/Input/MouseState
     // type: function
     SHC_3BB0A8C1_0x004709B0 = 0x004709B0,
+    // label: _HoldStrong::Input::MouseState::loadAndSetCursor
     // label: loadAndSetCursor
+    // location:
     // location: OpenSHC/Input/MouseState
     // type: function
     SHC_3BB0A8C1_0x00470A00 = 0x00470A00,
-    // label: extendSelectionBoxToMouse
+    // label: _HoldStrong::Input::MouseState::meth_0x470b30
+    // label: updateMouseSelectionEndBox
+    // location:
     // location: OpenSHC/Input/MouseState
     // type: function
     SHC_3BB0A8C1_0x00470B30 = 0x00470B30,
-    // label: updateRightDragCameraControl
+    // label: _HoldStrong::Input::MouseState::rightClickMenuUnk
+    // label: processRightClickDragGesture
+    // location:
     // location: OpenSHC/Input/MouseState
     // type: function
     SHC_3BB0A8C1_0x00470BC0 = 0x00470BC0,
+    // label: _HoldStrong::UI::Rendering::PencilRenderCore::drawColorBox
     // label: drawColorBox
+    // location:
     // location: OpenSHC/UI/Rendering/PencilRenderCore
     // type: function
     SHC_3BB0A8C1_0x00470E90 = 0x00470E90,
+    // label: _HoldStrong::UI::Rendering::PencilRenderCore::drawBoxWithRoundedEdgesAndColor
     // label: drawBoxWithRoundedEdgesAndColor
+    // location:
     // location: OpenSHC/UI/Rendering/PencilRenderCore
     // type: function
     SHC_3BB0A8C1_0x00470EE0 = 0x00470EE0,
     // type: function
     SHC_3BB0A8C1_0x00470FC0 = 0x00470FC0,
+    // label: _HoldStrong::UI::Rendering::PencilRenderCore::drawBlendedBlackBox
     // label: drawBlendedBlackBox
+    // location:
     // location: OpenSHC/UI/Rendering/PencilRenderCore
     // type: function
     SHC_3BB0A8C1_0x00471000 = 0x00471000,
+    // label: _HoldStrong::UI::Rendering::PencilRenderCore::dimBox
     // label: dimBox
+    // location:
     // location: OpenSHC/UI/Rendering/PencilRenderCore
     // type: function
     SHC_3BB0A8C1_0x00471050 = 0x00471050,
+    // label: _HoldStrong::UI::Rendering::PencilRenderCore::drawBoxWithRoundedEdges
     // label: drawBoxWithRoundedEdges
+    // location:
     // location: OpenSHC/UI/Rendering/PencilRenderCore
     // type: function
     SHC_3BB0A8C1_0x004710A0 = 0x004710A0,
+    // label: _HoldStrong::UI::Rendering::PencilRenderCore::drawBorderBox
     // label: drawBorderBox
+    // location:
     // location: OpenSHC/UI/Rendering/PencilRenderCore
     // type: function
     SHC_3BB0A8C1_0x004711B0 = 0x004711B0,
-    // label: drawDiagonalHeigherThanWideUnk
+    // label: _HoldStrong::UI::Rendering::PencilRenderCore::drawDiagonalHeigherThanWideUnk
+    // label: drawLineBresenhamSteep
+    // location:
     // location: OpenSHC/UI/Rendering/PencilRenderCore
     // type: function
     SHC_3BB0A8C1_0x00471220 = 0x00471220,
-    // label: drawDiagonalWiderThanHighUnk
+    // label: _HoldStrong::UI::Rendering::PencilRenderCore::drawDiagonalWiderThanHighUnk
+    // label: drawLineBresenhamShallow
+    // location:
     // location: OpenSHC/UI/Rendering/PencilRenderCore
     // type: function
     SHC_3BB0A8C1_0x00471280 = 0x00471280,
+    // label: _HoldStrong::UI::Rendering::PencilRenderCore::drawPixelPattern4x4OverWholeScreen
     // label: drawPixelPattern4x4OverWholeScreen
+    // location:
     // location: OpenSHC/UI/Rendering/PencilRenderCore
     // type: function
     SHC_3BB0A8C1_0x004712E0 = 0x004712E0,
+    // label: _HoldStrong::UI::Rendering::PencilRenderCore::drawBorderedBoxWithBlendedBackground
     // label: drawBorderedBoxWithBlendedBackground
+    // location:
     // location: OpenSHC/UI/Rendering/PencilRenderCore
     // type: function
     SHC_3BB0A8C1_0x00471340 = 0x00471340,
+    // label: _HoldStrong::UI::Rendering::PencilRenderCore::drawBorderedBoxWithCustomBlendedBackground
     // label: drawBorderedBoxWithCustomBlendedBackground
+    // location:
     // location: OpenSHC/UI/Rendering/PencilRenderCore
     // type: function
     SHC_3BB0A8C1_0x00471440 = 0x00471440,
+    // label: getCursorTextWidth
+    // location:
+    // type: function
+    SHC_3BB0A8C1_0x00471570 = 0x00471570,
+    // label: _HoldStrong::Text::UserTextHandler::handleBackspace
     // label: handleBackspace
+    // location:
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x004715A0 = 0x004715A0,
+    // label: _HoldStrong::Text::FontSizeClass::getWidthOfWideText
     // label: getWidthOfWideText
+    // location:
     // location: OpenSHC/Text/FontSizeClass
     // type: function
     SHC_3BB0A8C1_0x00471610 = 0x00471610,
+    // label: _HoldStrong::Text::FontSizeClass::meth_0x471670
     // label: getWideCharWidth
+    // location:
     // location: OpenSHC/Text/FontSizeClass
     // type: function
     SHC_3BB0A8C1_0x00471670 = 0x00471670,
+    // label: _HoldStrong::Text::TextManager::computeTextWidth
     // label: computeTextWidth
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x00471690 = 0x00471690,
-    // label: computeNumberTextWidth
+    // label: _HoldStrong::Text::TextManager::meth_0x4716d0
+    // label: getIntegerTextWidth
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x004716D0 = 0x004716D0,
+    // label: _HoldStrong::Audio::MissingResourceState::playResourceLackSFX
     // label: playResourceLackSFX
+    // location:
     // location: OpenSHC/Audio/MissingResourceState
     // type: function
     SHC_3BB0A8C1_0x00471720 = 0x00471720,
@@ -23612,190 +24928,280 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x00471804 = 0x00471804,
     // label: Constructor_RNG
+    // label: _HoldStrong::Random::RNG::Constructor_RNG
+    // location:
     // location: OpenSHC/Random/RNG
     // type: function
     SHC_3BB0A8C1_0x00471810 = 0x00471810,
+    // label: _HoldStrong::IO::LowLevelMemory::copyData
     // label: copyData
+    // location:
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x00471830 = 0x00471830,
+    // label: _HoldStrong::IO::LowLevelMemory::fillMemoryWithIntegerValue
     // label: fillMemoryWithIntegerValue
+    // location:
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x00471860 = 0x00471860,
+    // label: _HoldStrong::IO::LowLevelMemory::fillMemoryWithShortValue
     // label: fillMemoryWithShortValue
+    // location:
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x00471890 = 0x00471890,
+    // label: _HoldStrong::IO::LowLevelMemory::fillMemoryWithByteValue
     // label: fillMemoryWithByteValue
+    // location:
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x004718C0 = 0x004718C0,
+    // label: _HoldStrong::Game::GameCore::incrementMissionProgress
     // label: incrementMissionProgress
+    // location:
     // location: OpenSHC/Game/GameCore
     // type: function
     SHC_3BB0A8C1_0x004718F0 = 0x004718F0,
+    // label: _HoldStrong::Game::GameCore::switchToScenarioDescriptionMenuView
+    // location:
     // type: function
     SHC_3BB0A8C1_0x004719E0 = 0x004719E0,
-    // label: incrementMission
+    // label: _HoldStrong::Game::GameCore::meth_0x471a00
+    // label: advanceToNextMission
+    // location:
     // location: OpenSHC/Game/GameCore
     // type: function
     SHC_3BB0A8C1_0x00471A00 = 0x00471A00,
-    // label: exitToScenarioDescriptionMenu
+    // label: gotoScenarioDescription
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00471A80 = 0x00471A80,
+    // label: _HoldStrong::Game::GameCore::hideOrUnhideUI
     // label: hideOrUnhideUI
+    // location:
     // location: OpenSHC/Game/GameCore
     // type: function
     SHC_3BB0A8C1_0x00471AA0 = 0x00471AA0,
     // label: Constructor_ResourceManager
+    // label: _HoldStrong::IO::ResourceManager::Constructor_ResourceManager
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x00471BE0 = 0x00471BE0,
+    // label: _HoldStrong::IO::ResourceManager::syncLoadedMapNames
     // label: syncLoadedMapNames
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x00471C10 = 0x00471C10,
+    // label: _HoldStrong::IO::ResourceManager::swapMapDataWithNextMap
     // label: swapMapDataWithNextMap
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x00471C50 = 0x00471C50,
+    // label: _HoldStrong::IO::ResourceManager::replaceMapNameWith
     // label: replaceMapNameWith
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x00471CD0 = 0x00471CD0,
-    // label: getCurrentResourceCoreNameUnk
+    // label: _HoldStrong::IO::ResourceManager::getCurrentResourceCoreNameUnk
+    // label: getCurrentResourceBaseName
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x00471D30 = 0x00471D30,
+    // label: _HoldStrong::IO::ResourceManager::doesFileOfActiveResourceExist
     // label: doesFileOfActiveResourceExist
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x00471DC0 = 0x00471DC0,
-    // label: resetOpenFileNameStruct
+    // label: _HoldStrong::IO::ResourceManager::meth_0x471df0
+    // label: initOpenFileNameStruct
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x00471DF0 = 0x00471DF0,
+    // label: _HoldStrong::IO::ResourceManager::readCurrentResourceIntoDestination
     // label: readCurrentResourceIntoDestination
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x00471E50 = 0x00471E50,
+    // label: _HoldStrong::IO::ResourceManager::getCurrentResourceSize
     // label: getCurrentResourceSize
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x00471EB0 = 0x00471EB0,
+    // label: _HoldStrong::IO::ResourceManager::readFirstPartOfCurrentResourceIntoMemory
     // label: readFirstPartOfCurrentResourceIntoMemory
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x00471F10 = 0x00471F10,
+    // label: _HoldStrong::IO::ResourceManager::readNextPartOfCurrentResourceIntoMemory
     // label: readNextPartOfCurrentResourceIntoMemory
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x00471FC0 = 0x00471FC0,
-    // label: showOpenGfxFileDialog
+    // label: _HoldStrong::IO::ResourceManager::meth_0x472080
+    // label: showImportTgxDialog
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x00472080 = 0x00472080,
+    // label: _HoldStrong::IO::ResourceManager::meth_0x4720c0
     // label: showOpenHelpFileDialog
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x004720C0 = 0x004720C0,
+    // label: _HoldStrong::IO::ResourceManager::meth_0x472100
     // label: showSaveHelpFileDialog
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x00472100 = 0x00472100,
-    // label: showOpenSoundFileDialog
+    // label: _HoldStrong::IO::ResourceManager::meth_0x472140
+    // label: showImportSoundDialog
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x00472140 = 0x00472140,
+    // label: _HoldStrong::IO::ResourceManager::fileHashFunctionByteByByte
     // label: fileHashFunctionByteByByte
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x00472180 = 0x00472180,
     // type: function
     SHC_3BB0A8C1_0x004721D0 = 0x004721D0,
+    // label: _HoldStrong::IO::BitMapState::setBMPFacesToMagenta
     // label: setBMPFacesToMagenta
+    // location:
     // location: OpenSHC/IO/BitMapState
     // type: function
     SHC_3BB0A8C1_0x00472230 = 0x00472230,
     // type: function
     SHC_3BB0A8C1_0x00472240 = 0x00472240,
+    // label: _HoldStrong::IO::BitMapState::loadBitmapHeader
     // label: loadBitmapHeader
+    // location:
     // location: OpenSHC/IO/BitMapState
     // type: function
     SHC_3BB0A8C1_0x00472270 = 0x00472270,
+    // label: _HoldStrong::IO::BitMapState::loadAndBlitBitmap
     // label: loadAndBlitBitmap
+    // location:
     // location: OpenSHC/IO/BitMapState
     // type: function
     SHC_3BB0A8C1_0x004723E0 = 0x004723E0,
+    // label: _HoldStrong::IO::DecoderState::doImplode
     // label: doImplode
+    // location:
     // location: OpenSHC/IO/DecoderState
     // type: function
     SHC_3BB0A8C1_0x004724C0 = 0x004724C0,
+    // label: _HoldStrong::IO::DecoderState::doExplode
     // label: doExplode
+    // location:
     // location: OpenSHC/IO/DecoderState
     // type: function
     SHC_3BB0A8C1_0x004725A0 = 0x004725A0,
-    // label: meth_0x472680
+    // label: HoldStrong_lib::stdLib::ios::basic_streambuf<char,_struct_std::char_traits<char>_>::meth_0x472680
+    // label: basic_streambuf_dtor
+    // location:
     // location: HoldStrong_lib/stdLib/ios/basic_streambuf<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x00472680 = 0x00472680,
+    // label: HoldStrong_lib::stdLib::ios::basic_streambuf<char,_struct_std::char_traits<char>_>::virt_meth_0x472700
     // label: virt_meth_0x472700
+    // location:
     // location: HoldStrong_lib/stdLib/ios/basic_streambuf<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x00472700 = 0x00472700,
+    // label: HoldStrong_lib::stdLib::ios::basic_streambuf<char,_struct_std::char_traits<char>_>::virt_meth_0x472710
     // label: virt_meth_0x472710
+    // location:
     // location: HoldStrong_lib/stdLib/ios/basic_streambuf<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x00472710 = 0x00472710,
+    // label: HoldStrong_lib::stdLib::ios::basic_streambuf<char,_struct_std::char_traits<char>_>::virt_meth_0x472720
     // label: virt_meth_0x472720
+    // location:
     // location: HoldStrong_lib/stdLib/ios/basic_streambuf<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x00472720 = 0x00472720,
+    // label: HoldStrong_lib::stdLib::ios::basic_streambuf<char,_struct_std::char_traits<char>_>::virt_meth_0x472740
     // label: virt_meth_0x472740
+    // location:
     // location: HoldStrong_lib/stdLib/ios/basic_streambuf<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x00472740 = 0x00472740,
+    // label: HoldStrong_lib::stdLib::ios::basic_streambuf<char,_struct_std::char_traits<char>_>::virt_meth_0x472750
     // label: virt_meth_0x472750
+    // location:
     // location: HoldStrong_lib/stdLib/ios/basic_streambuf<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x00472750 = 0x00472750,
-    // label: meth_0x472760
+    // label: HoldStrong_lib::stdLib::ios::basic_streambuf<char,_struct_std::char_traits<char>_>::meth_0x472760
+    // label: streambufGetCurrentPtr
+    // location:
     // location: HoldStrong_lib/stdLib/ios/basic_streambuf<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x00472760 = 0x00472760,
+    // label: HoldStrong_lib::stdLib::ios::basic_streambuf<char,_struct_std::char_traits<char>_>::virt_meth_0x472780
     // label: virt_meth_0x472780
+    // location:
     // location: HoldStrong_lib/stdLib/ios/basic_streambuf<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x00472780 = 0x00472780,
+    // label: HoldStrong_lib::stdLib::ios::basic_streambuf<char,_struct_std::char_traits<char>_>::virt_meth_0x4727b0
     // label: virt_meth_0x4727b0
+    // location:
     // location: HoldStrong_lib/stdLib/ios/basic_streambuf<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x004727B0 = 0x004727B0,
+    // label: HoldStrong_lib::stdLib::ios::basic_streambuf<char,_struct_std::char_traits<char>_>::virt_meth_0x4727d0
     // label: virt_meth_0x4727d0
+    // location:
     // location: HoldStrong_lib/stdLib/ios/basic_streambuf<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x004727D0 = 0x004727D0,
+    // label:
+    // HoldStrong_lib::stdLib::ios::basic_ostream<char,_struct_std::char_traits<char>_>::~basic_ostream<char,_struct_std::char_traits<char>>
     // label: ~basic_ostream<char,_struct_std::char_traits<char>>
+    // location:
     // location: HoldStrong_lib/stdLib/ios/basic_ostream<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x004727F0 = 0x004727F0,
+    // label: HoldStrong_lib::stdLib::ios::basic_streambuf<char,_struct_std::char_traits<char>_>::virt_meth_0x472830
     // label: virt_meth_0x472830
+    // location:
     // location: HoldStrong_lib/stdLib/ios/basic_streambuf<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x00472830 = 0x00472830,
     // label: ??D?$_String_const_iterator@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QBEABDXZ
     // label: operator*
+    // label: std::_String_const_iterator<char,struct_std::char_traits<char>,class_std::allocator<char>_>::operator*
     // location:
     // location: std/_String_const_iterator<char,struct_std/char_traits<char>,class_std/allocator<char>_>
     // type: function
     SHC_3BB0A8C1_0x00472850 = 0x00472850,
-    // label: meth_0x472890
+    // label: HoldStrong_lib::StringObject::meth_0x472890
+    // label: stringFillRange
+    // location:
     // location: HoldStrong_lib/StringObject
     // type: function
     SHC_3BB0A8C1_0x00472890 = 0x00472890,
-    // label: meth_0x4728f0
+    // label: HoldStrong_lib::stdLib::ios::basic_streambuf<char,_struct_std::char_traits<char>_>::meth_0x4728f0
+    // label: streambufInitPointers
+    // location:
     // location: HoldStrong_lib/stdLib/ios/basic_streambuf<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x004728F0 = 0x004728F0,
@@ -23803,113 +25209,170 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00472950 = 0x00472950,
-    // label: prepareWindowAndDDraw_2Unk
+    // label: _HoldStrong::UI::Rendering::WindowAndDirectDraw::prepareWindowAndDDraw_2Unk
+    // label: reinitWindowAndDirectDrawWithMode
+    // location:
     // location: OpenSHC/UI/Rendering/WindowAndDirectDraw
     // type: function
     SHC_3BB0A8C1_0x004729B0 = 0x004729B0,
+    // label: _HoldStrong::Input::MouseState::drawMouseBasedBox
     // label: drawMouseBasedBox
+    // location:
     // location: OpenSHC/Input/MouseState
     // type: function
     SHC_3BB0A8C1_0x00472A90 = 0x00472A90,
+    // label: _HoldStrong::UI::Rendering::PencilRenderCore::drawLine
     // label: drawLine
+    // location:
     // location: OpenSHC/UI/Rendering/PencilRenderCore
     // type: function
     SHC_3BB0A8C1_0x00472B20 = 0x00472B20,
+    // label: _HoldStrong::Text::UserTextHandler::clearTextAndCursor
     // label: clearTextAndCursor
+    // location:
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x00472B90 = 0x00472B90,
+    // label: clearTextInputBox
+    // location:
+    // type: function
+    SHC_3BB0A8C1_0x00472BE0 = 0x00472BE0,
+    // label: _HoldStrong::Text::UserTextHandler::copyIntoTextArray
     // label: copyIntoTextArray
+    // location:
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x00472C30 = 0x00472C30,
-    // label: isTextInputAtCapacity
+    // label: checkTextBoxInputRoom
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x00472CB0 = 0x00472CB0,
+    // label: _HoldStrong::Text::UserTextHandler::handleDeleteKey
     // label: handleDeleteKey
+    // location:
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x00472D00 = 0x00472D00,
+    // label: _HoldStrong::Text::FontSizeClass::renderText
     // label: renderText
+    // location:
     // location: OpenSHC/Text/FontSizeClass
     // type: function
     SHC_3BB0A8C1_0x00472D60 = 0x00472D60,
     // type: function
     SHC_3BB0A8C1_0x00472DD0 = 0x00472DD0,
-    // label: renderMultilineTextUnk
+    // label: _HoldStrong::Text::FontSizeClass::renderMultilineTextUnk
+    // label: renderWrappedMultilineText
+    // location:
     // location: OpenSHC/Text/FontSizeClass
     // type: function
     SHC_3BB0A8C1_0x00472EF0 = 0x00472EF0,
-    // label: renderMultilineWideTextUnk
+    // label: _HoldStrong::Text::FontSizeClass::renderMultilineWideTextUnk
+    // label: renderWrappedMultilineWideText
+    // location:
     // location: OpenSHC/Text/FontSizeClass
     // type: function
     SHC_3BB0A8C1_0x00473300 = 0x00473300,
-    // label: renderSomeSpecificTextUnk
+    // label: _HoldStrong::Text::FontSizeClass::renderSomeSpecificTextUnk
+    // label: renderPartialMultilineText
+    // location:
     // location: OpenSHC/Text/FontSizeClass
     // type: function
     SHC_3BB0A8C1_0x004733A0 = 0x004733A0,
-    // label: renderCharUnk
+    // label: _HoldStrong::Text::FontSizeClass::renderCharUnk
+    // label: renderTextCharGlyph
+    // location:
     // location: OpenSHC/Text/FontSizeClass
     // type: function
     SHC_3BB0A8C1_0x00473640 = 0x00473640,
+    // label: _HoldStrong::Text::FontSizeClass::renderWideText
     // label: renderWideText
+    // location:
     // location: OpenSHC/Text/FontSizeClass
     // type: function
     SHC_3BB0A8C1_0x004737B0 = 0x004737B0,
+    // label: _HoldStrong::Text::FontSizeClass::meth_0x473830
     // label: renderWideChar
+    // location:
     // location: OpenSHC/Text/FontSizeClass
     // type: function
     SHC_3BB0A8C1_0x00473830 = 0x00473830,
+    // label: _HoldStrong::Text::TextManager::loadCRTex
     // label: loadCRTex
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x00473870 = 0x00473870,
-    // label: renderMultilineText5Unk
+    // label: _HoldStrong::Text::TextManager::renderMultilineText5Unk
+    // label: renderMultilineTextAtFontSize
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x00473A70 = 0x00473A70,
-    // label: renderMultilineText6Unk
+    // label: _HoldStrong::Text::TextManager::renderMultilineText6Unk
+    // label: renderMultilineTextWithShadow
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x00473AC0 = 0x00473AC0,
-    // label: renderMultilineWideTextUnk
+    // label: _HoldStrong::Text::TextManager::renderMultilineWideTextUnk
+    // label: renderMultilineWideTextWithShadow
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x00473B50 = 0x00473B50,
-    // label: renderSomeSpecificTextUnk
+    // label: _HoldStrong::Text::TextManager::renderSomeSpecificTextUnk
+    // label: renderPartialMultilineTextWrapper
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x00473BE0 = 0x00473BE0,
+    // label: _HoldStrong::IO::DecoderState::encodeData
     // label: encodeData
+    // location:
     // location: OpenSHC/IO/DecoderState
     // type: function
     SHC_3BB0A8C1_0x00473C10 = 0x00473C10,
+    // label: _HoldStrong::IO::DecoderState::decodeData
     // label: decodeData
+    // location:
     // location: OpenSHC/IO/DecoderState
     // type: function
     SHC_3BB0A8C1_0x00473C70 = 0x00473C70,
+    // label: HoldStrong_lib::stdLib::ios::basic_streambuf<char,_struct_std::char_traits<char>_>::virt_meth_0x473cf0
     // label: virt_meth_0x473cf0
+    // location:
     // location: HoldStrong_lib/stdLib/ios/basic_streambuf<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x00473CF0 = 0x00473CF0,
+    // label: HoldStrong_lib::stdLib::ios::basic_streambuf<char,_struct_std::char_traits<char>_>::virt_meth_0x473d90
     // label: virt_meth_0x473d90
+    // location:
     // location: HoldStrong_lib/stdLib/ios/basic_streambuf<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x00473D90 = 0x00473D90,
-    // label: meth_0x473e30
+    // label: HoldStrong_lib::StringObject::meth_0x473e30
+    // label: stringErase
+    // location:
     // location: HoldStrong_lib/StringObject
     // type: function
     SHC_3BB0A8C1_0x00473E30 = 0x00473E30,
-    // label: meth_0x473ec0
+    // label: HoldStrong_lib::StringObject::meth_0x473ec0
+    // label: stringShrinkToSmall
+    // location:
     // location: HoldStrong_lib/StringObject
     // type: function
     SHC_3BB0A8C1_0x00473EC0 = 0x00473EC0,
+    // label:
+    // HoldStrong_lib::stdLib::ios::basic_streambuf<char,_struct_std::char_traits<char>_>::basic_streambuf<char,_struct_std::char_traits<char>_>
     // label: basic_streambuf<char,_struct_std::char_traits<char>_>
+    // location:
     // location: HoldStrong_lib/stdLib/ios/basic_streambuf<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x00473F10 = 0x00473F10,
-    // label: meth_0x473fc0
+    // label: HoldStrong_lib::StringObject::meth_0x473fc0
+    // label: stringReserveGrow
+    // location:
     // location: HoldStrong_lib/StringObject
     // type: function
     SHC_3BB0A8C1_0x00473FC0 = 0x00473FC0,
@@ -23917,33 +25380,51 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0047403D = 0x0047403D,
+    // label: stl_ehFunclet_00474061
+    // location:
+    // type: function
+    SHC_3BB0A8C1_0x00474061 = 0x00474061,
+    // label: stl_stringAssignN
+    // location:
     // type: function
     SHC_3BB0A8C1_0x00474067 = 0x00474067,
     // label: Catch_All@004740d0
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x004740D0 = 0x004740D0,
+    // label: _HoldStrong::Text::UserTextHandler::handleCharacterCode
     // label: handleCharacterCode
+    // location:
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x00474110 = 0x00474110,
+    // label: _HoldStrong::Text::TextManager::renderTextToScreen
     // label: renderTextToScreen
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x00474250 = 0x00474250,
+    // label: _HoldStrong::Text::TextManager::renderWideText
     // label: renderWideText
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x004742F0 = 0x004742F0,
+    // label: _HoldStrong::Text::TextManager::renderNumber2
     // label: renderNumber2
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x00474390 = 0x00474390,
+    // label: _HoldStrong::Text::TextManager::renderNumberToScreen2
     // label: renderNumberToScreen2
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x00474430 = 0x00474430,
+    // label: _HoldStrong::IO::FilePackager::writeMapOrSaveFile
     // label: writeMapOrSaveFile
+    // location:
     // location: OpenSHC/IO/FilePackager
     // type: function
     SHC_3BB0A8C1_0x00474480 = 0x00474480,
@@ -24359,269 +25840,384 @@ enum {
     SHC_3BB0A8C1_0x00474A0F = 0x00474A0F,
     // type: /byte
     SHC_3BB0A8C1_0x00474A10 = 0x00474A10,
+    // label: _HoldStrong::IO::FilePackager::readMapOrSavFile
     // label: readMapOrSavFile
+    // location:
     // location: OpenSHC/IO/FilePackager
     // type: function
     SHC_3BB0A8C1_0x00474A20 = 0x00474A20,
     // type: function
     SHC_3BB0A8C1_0x00474F30 = 0x00474F30,
-    // label: readMapHeaderSiegeInfoUnk
+    // label: _HoldStrong::IO::FilePackager::readMapHeaderSiegeInfoUnk
+    // label: readFilePackagerSectionByID
+    // location:
     // location: OpenSHC/IO/FilePackager
     // type: function
     SHC_3BB0A8C1_0x004750E0 = 0x004750E0,
+    // label: _HoldStrong::IO::FilePackager::readMapHeader
     // label: readMapHeader
+    // location:
     // location: OpenSHC/IO/FilePackager
     // type: function
     SHC_3BB0A8C1_0x004752D0 = 0x004752D0,
+    // label: _HoldStrong::IO::FilePackager::unpackAIVFile
     // label: unpackAIVFile
+    // location:
     // location: OpenSHC/IO/FilePackager
     // type: function
     SHC_3BB0A8C1_0x00475690 = 0x00475690,
+    // label: HoldStrong_lib::StringObject::destruct
     // label: destruct
+    // location:
     // location: HoldStrong_lib/StringObject
     // type: function
     SHC_3BB0A8C1_0x00475880 = 0x00475880,
-    // label: meth_0x4758b0
+    // label: HoldStrong_lib::StringObject::meth_0x4758b0
+    // label: stringMakeIterator
+    // location:
     // location: HoldStrong_lib/StringObject
     // type: function
     SHC_3BB0A8C1_0x004758B0 = 0x004758B0,
-    // label: FUN_004758f0
+    // label: fputcReturnsNotEof
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x004758F0 = 0x004758F0,
+    // label: HoldStrong_lib::std::basic_filebuf<char,_struct_std::char_traits<char>_>::virt_meth_0x475910
     // label: virt_meth_0x475910
+    // location:
     // location: HoldStrong_lib/std/basic_filebuf<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x00475910 = 0x00475910,
+    // label: HoldStrong_lib::std::basic_filebuf<char,_struct_std::char_traits<char>_>::virt_meth_0x475940
     // label: virt_meth_0x475940
+    // location:
     // location: HoldStrong_lib/std/basic_filebuf<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x00475940 = 0x00475940,
+    // label: HoldStrong_lib::std::basic_filebuf<char,_struct_std::char_traits<char>_>::virt_meth_0x4759b0
     // label: virt_meth_0x4759b0
+    // location:
     // location: HoldStrong_lib/std/basic_filebuf<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x004759B0 = 0x004759B0,
+    // label: HoldStrong_lib::stdLib::ios::basic_streambuf<char,_struct_std::char_traits<char>_>::virt_meth_0x475a00
     // label: virt_meth_0x475a00
+    // location:
     // location: HoldStrong_lib/stdLib/ios/basic_streambuf<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x00475A00 = 0x00475A00,
-    // label: meth_0x475a80
+    // label: HoldStrong_lib::StringObject::meth_0x475a80
+    // label: stringInsert
+    // location:
     // location: HoldStrong_lib/StringObject
     // type: function
     SHC_3BB0A8C1_0x00475A80 = 0x00475A80,
+    // label: HoldStrong_lib::std::runtime_error::virt_meth_0x475b80
     // label: virt_meth_0x475b80
+    // location:
     // location: HoldStrong_lib/std/runtime_error
     // type: function
     SHC_3BB0A8C1_0x00475B80 = 0x00475B80,
+    // label: HoldStrong_lib::std::runtime_error::~runtime_error
     // label: ~runtime_error
+    // location:
     // location: HoldStrong_lib/std/runtime_error
     // type: function
     SHC_3BB0A8C1_0x00475B90 = 0x00475B90,
-    // label: meth_0x475be0
+    // label: HoldStrong_lib::cls_0x477080::meth_0x475be0
+    // label: localeInfoDtor
+    // location:
     // location: HoldStrong_lib/cls_0x477080
     // type: function
     SHC_3BB0A8C1_0x00475BE0 = 0x00475BE0,
+    // label: _HoldStrong::UI::Rendering::PencilRenderCore::drawHeaderTextBanner
     // label: drawHeaderTextBanner
+    // location:
     // location: OpenSHC/UI/Rendering/PencilRenderCore
     // type: function
     SHC_3BB0A8C1_0x00475CC0 = 0x00475CC0,
+    // label: _HoldStrong::Text::TextManager::renderInGameTextWithShadow
     // label: renderInGameTextWithShadow
+    // location:
     // location: OpenSHC/Text/TextManager
     // type: function
     SHC_3BB0A8C1_0x00475E00 = 0x00475E00,
+    // label: HoldStrong_lib::StringObject::cls_0x475e90_someBasicStr
     // label: cls_0x475e90_someBasicStr
+    // location:
     // location: HoldStrong_lib/StringObject
     // type: function
     SHC_3BB0A8C1_0x00475E90 = 0x00475E90,
+    // label: HoldStrong_lib::StringObject::someStringCopyOperation
     // label: someStringCopyOperation
+    // location:
     // location: HoldStrong_lib/StringObject
     // type: function
     SHC_3BB0A8C1_0x00475F40 = 0x00475F40,
+    // label: HoldStrong_lib::StringObject::append
     // label: append
+    // location:
     // location: HoldStrong_lib/StringObject
     // type: function
     SHC_3BB0A8C1_0x00476020 = 0x00476020,
-    // label: append2Unk
+    // label: HoldStrong_lib::StringObject::append2Unk
+    // label: stl_stringAssignCount
+    // location:
     // location: HoldStrong_lib/StringObject
     // type: function
     SHC_3BB0A8C1_0x00476110 = 0x00476110,
+    // label: _HoldStrong::Audio::MissingResourceState::renderResourceMissingText
     // label: renderResourceMissingText
+    // location:
     // location: OpenSHC/Audio/MissingResourceState
     // type: function
     SHC_3BB0A8C1_0x004761E0 = 0x004761E0,
+    // label: HoldStrong_lib::StringObject::cls_0x475e90_someBasicStr
     // label: cls_0x475e90_someBasicStr
+    // location:
     // location: HoldStrong_lib/StringObject
     // type: function
     SHC_3BB0A8C1_0x004762C0 = 0x004762C0,
+    // label: HoldStrong_lib::std::basic_filebuf<char,_struct_std::char_traits<char>_>::virt_meth_0x4762f0
     // label: virt_meth_0x4762f0
+    // location:
     // location: HoldStrong_lib/std/basic_filebuf<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x004762F0 = 0x004762F0,
-    // label: FUN_00476650
+    // label: appendCStringToStringObject
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00476650 = 0x00476650,
     // type: function
     SHC_3BB0A8C1_0x00476660 = 0x00476660,
-    // label: meth_0x476680
+    // label: HoldStrong_lib::stdLib::ios::basic_streambuf<char,_struct_std::char_traits<char>_>::meth_0x476680
+    // label: filebufSync
+    // location:
     // location: HoldStrong_lib/stdLib/ios/basic_streambuf<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x00476680 = 0x00476680,
     // type: function
     SHC_3BB0A8C1_0x00476720 = 0x00476720,
+    // label: HoldStrong_lib::std::logic_error::~logic_error
     // label: ~logic_error
+    // location:
     // location: HoldStrong_lib/std/logic_error
     // type: function
     SHC_3BB0A8C1_0x004769A0 = 0x004769A0,
     // label: meth_0x476a10
     // location: HoldStrong_lib/std/runtime_error
+    // type: function
     SHC_3BB0A8C1_0x00476A10 = 0x00476A10,
-    // label: meth_0x476a50
+    // label: HoldStrong_lib::StringObject::meth_0x476a50
+    // label: stringAssignCStr
+    // location:
     // location: HoldStrong_lib/StringObject
     // type: function
     SHC_3BB0A8C1_0x00476A50 = 0x00476A50,
+    // label: HoldStrong_lib::std::basic_filebuf<char,_struct_std::char_traits<char>_>::virt_meth_0x476a90
     // label: virt_meth_0x476a90
+    // location:
     // location: HoldStrong_lib/std/basic_filebuf<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x00476A90 = 0x00476A90,
+    // label: HoldStrong_lib::stdLib::ios::basic_streambuf<char,_struct_std::char_traits<char>_>::virt_meth_0x476e60
     // label: virt_meth_0x476e60
+    // location:
     // location: HoldStrong_lib/stdLib/ios/basic_streambuf<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x00476E60 = 0x00476E60,
+    // label: HoldStrong_lib::stdLib::ios::basic_streambuf<char,_struct_std::char_traits<char>_>::virt_meth_0x476f40
     // label: virt_meth_0x476f40
+    // location:
     // location: HoldStrong_lib/stdLib/ios/basic_streambuf<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x00476F40 = 0x00476F40,
-    // label: meth_0x477030
+    // label: HoldStrong_lib::stdLib::ios::basic_streambuf<char,_struct_std::char_traits<char>_>::meth_0x477030
+    // label: filebufClose
+    // location:
     // location: HoldStrong_lib/stdLib/ios/basic_streambuf<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x00477030 = 0x00477030,
+    // label: HoldStrong_lib::cls_0x477080::cls_0x477080
     // label: cls_0x477080
+    // location:
     // location: HoldStrong_lib/cls_0x477080
     // type: function
     SHC_3BB0A8C1_0x00477080 = 0x00477080,
+    // label: HoldStrong_lib::std::runtime_error::runtime_error
     // label: runtime_error
+    // location:
     // location: HoldStrong_lib/std/runtime_error
     // type: function
     SHC_3BB0A8C1_0x00477150 = 0x00477150,
+    // label: HoldStrong_lib::std::ctype<char>::ctype<char>
     // label: ctype<char>
+    // location:
     // location: HoldStrong_lib/std/ctype<char>
     // type: function
     SHC_3BB0A8C1_0x004771D0 = 0x004771D0,
+    // label: HoldStrong_lib::std::ctype<char>::virt_meth_0x4772d0
     // label: virt_meth_0x4772d0
+    // location:
     // location: HoldStrong_lib/std/ctype<char>
     // type: function
     SHC_3BB0A8C1_0x004772D0 = 0x004772D0,
+    // label: HoldStrong_lib::std::ctype<char>::virt_meth_0x4772f0
     // label: virt_meth_0x4772f0
+    // location:
     // location: HoldStrong_lib/std/ctype<char>
     // type: function
     SHC_3BB0A8C1_0x004772F0 = 0x004772F0,
+    // label: HoldStrong_lib::std::ctype<char>::virt_meth_0x477320
     // label: virt_meth_0x477320
+    // location:
     // location: HoldStrong_lib/std/ctype<char>
     // type: function
     SHC_3BB0A8C1_0x00477320 = 0x00477320,
+    // label: HoldStrong_lib::std::ctype<char>::virt_meth_0x477340
     // label: virt_meth_0x477340
+    // location:
     // location: HoldStrong_lib/std/ctype<char>
     // type: function
     SHC_3BB0A8C1_0x00477340 = 0x00477340,
+    // label: HoldStrong_lib::std::ctype<char>::virt_meth_0x477370
     // label: virt_meth_0x477370
+    // location:
     // location: HoldStrong_lib/std/ctype<char>
     // type: function
     SHC_3BB0A8C1_0x00477370 = 0x00477370,
+    // label: HoldStrong_lib::std::ctype<char>::virt_meth_0x477380
     // label: virt_meth_0x477380
+    // location:
     // location: HoldStrong_lib/std/ctype<char>
     // type: function
     SHC_3BB0A8C1_0x00477380 = 0x00477380,
+    // label: HoldStrong_lib::std::ctype<char>::virt_meth_0x4773b0
     // label: virt_meth_0x4773b0
+    // location:
     // location: HoldStrong_lib/std/ctype<char>
     // type: function
     SHC_3BB0A8C1_0x004773B0 = 0x004773B0,
+    // label: HoldStrong_lib::std::ctype<char>::virt_meth_0x4773f0
     // label: virt_meth_0x4773f0
+    // location:
     // location: HoldStrong_lib/std/ctype<char>
     // type: function
     SHC_3BB0A8C1_0x004773F0 = 0x004773F0,
+    // label: HoldStrong_lib::std::ctype<char>::virt_meth_0x477400
     // label: virt_meth_0x477400
+    // location:
     // location: HoldStrong_lib/std/ctype<char>
     // type: function
     SHC_3BB0A8C1_0x00477400 = 0x00477400,
+    // label: HoldStrong_lib::std::ctype<char>::virt_meth_0x477430
     // label: virt_meth_0x477430
+    // location:
     // location: HoldStrong_lib/std/ctype<char>
     // type: function
     SHC_3BB0A8C1_0x00477430 = 0x00477430,
+    // label: HoldStrong_lib::std::ctype<char>::~ctype<char>
     // label: ~ctype<char>
+    // location:
     // location: HoldStrong_lib/std/ctype<char>
     // type: function
     SHC_3BB0A8C1_0x00477470 = 0x00477470,
-    // label: FUN_004774c0
+    // label: ensureCtypeCharFacet
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x004774C0 = 0x004774C0,
-    // label: FUN_00477540
+    // label: iosBaseClearAndThrowOnError
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00477540 = 0x00477540,
     // label: ctor_0x477670
     // location:
     SHC_3BB0A8C1_0x00477670 = 0x00477670,
-    // label: FUN_00477690
+    // label: initIosBaseWithLocale
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00477690 = 0x00477690,
+    // label: HoldStrong_lib::StringObject::string_prependUserPathToString
     // label: string_prependUserPathToString
+    // location:
     // location: HoldStrong_lib/StringObject
     // type: function
     SHC_3BB0A8C1_0x00477710 = 0x00477710,
+    // label: _HoldStrong::IO::ResourceManager::getDocumentsFolderString
     // label: getDocumentsFolderString
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x004778E0 = 0x004778E0,
+    // label: _HoldStrong::IO::ResourceManager::getSavesPath
     // label: getSavesPath
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x004779F0 = 0x004779F0,
+    // label: _HoldStrong::IO::ResourceManager::getDocumentsMapsFolderString
     // label: getDocumentsMapsFolderString
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x00477B00 = 0x00477B00,
-    // label: meth_0x477c10
+    // label: HoldStrong_lib::cls_0x477c10::meth_0x477c10
+    // label: filebufDtor
+    // location:
     // location: HoldStrong_lib/cls_0x477c10
     // type: function
     SHC_3BB0A8C1_0x00477C10 = 0x00477C10,
+    // label: HoldStrong_lib::cls_0x477c10::virt_meth_0x477c80
     // label: virt_meth_0x477c80
+    // location:
     // location: HoldStrong_lib/cls_0x477c10
     // type: function
     SHC_3BB0A8C1_0x00477C80 = 0x00477C80,
-    // label: FUN_00477ca0
+    // label: getLocaleFacetByIndex
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00477CA0 = 0x00477CA0,
+    // label: HoldStrong_lib::std::codecvt<char,_char,_int>::codecvt<char,_char,_int>
     // label: codecvt<char,_char,_int>
+    // location:
     // location: HoldStrong_lib/std/codecvt<char,_char,_int>
     // type: function
     SHC_3BB0A8C1_0x00477DD0 = 0x00477DD0,
+    // label: HoldStrong_lib::std::codecvt<char,_char,_int>::virt_meth_0x477e60
     // label: virt_meth_0x477e60
+    // location:
     // location: HoldStrong_lib/std/codecvt<char,_char,_int>
     // type: function
     SHC_3BB0A8C1_0x00477E60 = 0x00477E60,
+    // label: HoldStrong_lib::std::codecvt<char,_char,_int>::virt_meth_0x477e80
     // label: virt_meth_0x477e80
+    // location:
     // location: HoldStrong_lib/std/codecvt<char,_char,_int>
     // type: function
     SHC_3BB0A8C1_0x00477E80 = 0x00477E80,
+    // label: HoldStrong_lib::std::codecvt<char,_char,_int>::virt_meth_0x477ea0
     // label: virt_meth_0x477ea0
+    // location:
     // location: HoldStrong_lib/std/codecvt<char,_char,_int>
     // type: function
     SHC_3BB0A8C1_0x00477EA0 = 0x00477EA0,
+    // label: HoldStrong_lib::std::locale::facet::~facet
     // label: ~facet
+    // location:
     // location: HoldStrong_lib/std/locale/facet
     // type: function
     SHC_3BB0A8C1_0x00477EC0 = 0x00477EC0,
+    // label: _HoldStrong::IO::ResourceManager::discoverMapFiles
     // label: discoverMapFiles
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x00477EE0 = 0x00477EE0,
     // type: function
     SHC_3BB0A8C1_0x00478010 = 0x00478010,
+    // label: _HoldStrong::IO::ResourceManager::resolveResourceFileName
     // label: resolveResourceFileName
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x00478360 = 0x00478360,
@@ -24669,19 +26265,23 @@ enum {
     SHC_3BB0A8C1_0x00478898 = 0x00478898,
     // type: /undefined *32
     SHC_3BB0A8C1_0x0047889C = 0x0047889C,
+    // label: _HoldStrong::IO::BitMapState::loadFacesBMP
     // label: loadFacesBMP
+    // location:
     // location: OpenSHC/IO/BitMapState
     // type: function
     SHC_3BB0A8C1_0x004788A0 = 0x004788A0,
-    // label: meth_0x478920
+    // label: HoldStrong_lib::std::basic_ofstream<char,_struct_std::char_traits<char>_>::meth_0x478920
+    // label: ofstreamDtor
+    // location:
     // location: HoldStrong_lib/std/basic_ofstream<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x00478920 = 0x00478920,
-    // label: FUN_00478990
+    // label: acquireAndReleaseLocaleFacet
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00478990 = 0x00478990,
-    // label: FUN_00478a50
+    // label: ensureCodecvtFacet
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00478A50 = 0x00478A50,
@@ -24689,27 +26289,34 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00478AC0 = 0x00478AC0,
+    // label: _HoldStrong::IO::ResourceManager::loadMapHeaders
     // label: loadMapHeaders
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x00478AE0 = 0x00478AE0,
+    // label: _HoldStrong::IO::ResourceManager::filterMapsIfMapLock
     // label: filterMapsIfMapLock
+    // location:
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x00478C60 = 0x00478C60,
-    // label: FUN_00478d30
+    // label: ostreamFlushViaRdbuf
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00478D30 = 0x00478D30,
+    // label:
+    // HoldStrong_lib::std::basic_ofstream<char,_struct_std::char_traits<char>_>::~basic_ofstream<char,_struct_std::char_traits<char>_>
     // label: ~basic_ofstream<char,_struct_std::char_traits<char>_>
+    // location:
     // location: HoldStrong_lib/std/basic_ofstream<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x00478D80 = 0x00478D80,
-    // label: FUN_00478dc0
+    // label: ostreamSentryConstructor
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00478DC0 = 0x00478DC0,
-    // label: FUN_00478e50
+    // label: ostreamFlushIfNeeded
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00478E50 = 0x00478E50,
@@ -24717,18 +26324,24 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00478EA3 = 0x00478EA3,
-    // label: FUN_00478eb0
+    // label: getLocaleFacetByIndexB
     // location: HoldStrong_lib/stdLib/ios
     // type: function
     SHC_3BB0A8C1_0x00478EB0 = 0x00478EB0,
+    // label: HoldStrong_lib::stdLib::ios::basic_streambuf<char,_struct_std::char_traits<char>_>::virt_meth_0x478fe0
     // label: virt_meth_0x478fe0
+    // location:
     // location: HoldStrong_lib/stdLib/ios/basic_streambuf<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x00478FE0 = 0x00478FE0,
-    // label: meth_0x479020
+    // label: HoldStrong_lib::stdLib::ios::basic_streambuf<char,_struct_std::char_traits<char>_>::meth_0x479020
+    // label: filebufOpen
+    // location:
     // location: HoldStrong_lib/stdLib/ios/basic_streambuf<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x00479020 = 0x00479020,
+    // label: stl_ostreamSentryDestructor
+    // location:
     // type: function
     SHC_3BB0A8C1_0x00479140 = 0x00479140,
     // label: basic_ofstream_write
@@ -24741,100 +26354,153 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00479330 = 0x00479330,
+    // label: stl_ehFunclet_00479361
+    // location:
+    // type: function
+    SHC_3BB0A8C1_0x00479361 = 0x00479361,
     // type: function
     SHC_3BB0A8C1_0x00479369 = 0x00479369,
+    // label: stl_iostreamFlushAndReleaseLock
+    // location:
+    // type: function
+    SHC_3BB0A8C1_0x00479372 = 0x00479372,
+    // label:
+    // HoldStrong_lib::std::basic_ofstream<char,_struct_std::char_traits<char>_>::basic_ofstream<char,_struct_std::char_traits<char>_>
     // label: basic_ofstream<char,_struct_std::char_traits<char>_>
+    // location:
     // location: HoldStrong_lib/std/basic_ofstream<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x00479400 = 0x00479400,
+    // label: _HoldStrong::UI::Rendering::WindowAndDirectDraw::takeScreenshot
     // label: takeScreenshot
+    // location:
     // location: OpenSHC/UI/Rendering/WindowAndDirectDraw
     // type: function
     SHC_3BB0A8C1_0x00479540 = 0x00479540,
     // type: function
     SHC_3BB0A8C1_0x00479790 = 0x00479790,
+    // label: _HoldStrong::Audio::MSS::SoundSystem::endSoundStream
     // label: endSoundStream
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x004799A0 = 0x004799A0,
+    // label: _HoldStrong::Audio::MSS::SoundSystem::isSampleOrStreamPlaying
     // label: isSampleOrStreamPlaying
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00479A60 = 0x00479A60,
+    // label: _HoldStrong::Audio::MSS::SoundSystem::shouldSoundXNotBePlaying
     // label: shouldSoundXNotBePlaying
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00479AB0 = 0x00479AB0,
-    // label: setStreamAndSampleVolumeUnk
+    // label: _HoldStrong::Audio::MSS::SoundSystem::setStreamAndSampleVolumeUnk
+    // label: setSoundStreamVolume
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00479AF0 = 0x00479AF0,
-    // label: restoreMusicVolumeAfterSpeechEnds
+    // label: _HoldStrong::Audio::MSS::SoundSystem::meth_0x479b70
+    // label: updateMusicStreamVolume
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00479B70 = 0x00479B70,
-    // label: loadSoundFileAndGetIndex
-    // location: OpenSHC/Audio/MSS/SoundSystem
+    // label: _HoldStrong::Synchrony::GameSynchronyState::meth_0x479c20
+    // label: loadSoundFile
+    // location:
+    // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x00479C20 = 0x00479C20,
-    // label: findSamplePlaceForSoundUnk
+    // label: _HoldStrong::Audio::MSS::SoundSystem::findSamplePlaceForSoundUnk
+    // label: allocateSampleSlotForSound
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00479C80 = 0x00479C80,
+    // label: _HoldStrong::Audio::MSS::SoundSystem::setupSampleForNextSound
     // label: setupSampleForNextSound
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00479CF0 = 0x00479CF0,
+    // label: _HoldStrong::Audio::MSS::SoundSystem::getAndUpdateSampleStatus
     // label: getAndUpdateSampleStatus
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00479D90 = 0x00479D90,
+    // label: _HoldStrong::Audio::MSS::SoundSystem::playSound
     // label: playSound
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00479DF0 = 0x00479DF0,
-    // label: setVolumeUnk
+    // label: _HoldStrong::Audio::MSS::SoundSystem::setVolumeUnk
+    // label: setStreamOrSampleVolume
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00479E60 = 0x00479E60,
-    // label: deactivateSoundFromMenuFuncUnk
+    // label: _HoldStrong::Audio::MSS::SoundSystem::deactivateSoundFromMenuFuncUnk
+    // label: deactivateAllSound
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00479F30 = 0x00479F30,
+    // label: _HoldStrong::Audio::MSS::SoundSystem::pauseAudioSample
     // label: pauseAudioSample
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x00479FC0 = 0x00479FC0,
+    // label: _HoldStrong::Audio::MSS::SoundSystem::resumeAudioSample
     // label: resumeAudioSample
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A080 = 0x0047A080,
-    // label: mapLoadingAndLaunchGameRelated1
+    // label: _HoldStrong::Audio::MSS::SoundSystem::mapLoadingAndLaunchGameRelated1
+    // label: resetSoundAndBattleStateOnLaunch
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A130 = 0x0047A130,
+    // label: _HoldStrong::Audio::MSS::SoundSystem::setupVolumeAndSoundID
     // label: setupVolumeAndSoundID
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A1B0 = 0x0047A1B0,
+    // label: _HoldStrong::Audio::MSS::SoundSystem::setupVolumeAndSoundIDWithMultiplier
     // label: setupVolumeAndSoundIDWithMultiplier
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A220 = 0x0047A220,
-    // label: markMusicChangePending
+    // label: _HoldStrong::Audio::MSS::SoundSystem::meth_0x47a290
+    // label: setSoundSystemFlag
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A290 = 0x0047A290,
+    // label: _HoldStrong::Audio::MSS::SoundSystem::setSomeSoundTime
     // label: setSomeSoundTime
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A2A0 = 0x0047A2A0,
+    // label: _HoldStrong::Audio::MSS::SoundSystem::setupVolumeAndSoundID0xF0_100
     // label: setupVolumeAndSoundID0xF0_100
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A310 = 0x0047A310,
-    // label: selectAndPlayMoodBasedMusic
-    // location: OpenSHC/Audio/MSS/SoundSystem
+    // label: selectRandomMusicTrack
+    // location:
     // type: function
     SHC_3BB0A8C1_0x0047A340 = 0x0047A340,
     // type: /undefined *32
@@ -24847,43 +26513,63 @@ enum {
     SHC_3BB0A8C1_0x0047A560 = 0x0047A560,
     // type: /undefined *32
     SHC_3BB0A8C1_0x0047A564 = 0x0047A564,
+    // label: _HoldStrong::Audio::MSS::SoundSystem::setSection1079_28_4_
     // label: setSection1079_28_4_
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A570 = 0x0047A570,
-    // label: playBattleGloryMusicIfConditionsMet
+    // label: _HoldStrong::Audio::MSS::SoundSystem::meth_0x47a580
+    // label: playBattleGloryMusic
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A580 = 0x0047A580,
+    // label: _HoldStrong::Audio::MSS::SoundSystem::playDarMehqOrGlory
     // label: playDarMehqOrGlory
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A5E0 = 0x0047A5E0,
+    // label: _HoldStrong::Audio::MSS::SoundSystem::playWinMusicVariation
     // label: playWinMusicVariation
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A630 = 0x0047A630,
+    // label: _HoldStrong::Audio::MSS::SoundSystem::setupLossMusic
     // label: setupLossMusic
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A660 = 0x0047A660,
+    // label: _HoldStrong::Audio::MSS::SoundSystem::shutdownSoundSystem
     // label: shutdownSoundSystem
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A690 = 0x0047A690,
-    // label: playMusicUnk
+    // label: _HoldStrong::Audio::MSS::SoundSystem::playMusicUnk
+    // label: serviceMusicStreamBuffer
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A790 = 0x0047A790,
-    // label: stopAllActiveSounds
+    // label: _HoldStrong::Audio::MSS::SoundSystem::meth_0x47a9e0
+    // label: stopAllSpeechAndSamples
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047A9E0 = 0x0047A9E0,
+    // label: _HoldStrong::Audio::MSS::SoundSystem::endSpeechSoundStreams
     // label: endSpeechSoundStreams
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047AA70 = 0x0047AA70,
+    // label: _HoldStrong::Audio::MSS::SoundSystem::playRandomMusic02
     // label: playRandomMusic02
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047AB10 = 0x0047AB10,
@@ -24895,27 +26581,39 @@ enum {
     SHC_3BB0A8C1_0x0047AF3C = 0x0047AF3C,
     // type: /pointer
     SHC_3BB0A8C1_0x0047AF40 = 0x0047AF40,
+    // label: _HoldStrong::Audio::MSS::SoundSystem::handleBattleEndMusicTransition
     // label: handleBattleEndMusicTransition
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047AF50 = 0x0047AF50,
-    // label: playSoundStreamUnk
+    // label: _HoldStrong::Audio::MSS::SoundSystem::playSoundStreamUnk
+    // label: playSoundStreamOnSlot
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B060 = 0x0047B060,
-    // label: playMusicFileByName
+    // label: _HoldStrong::Audio::MSS::SoundSystem::meth_0x47b250
+    // label: setCurrentSoundFile
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B250 = 0x0047B250,
-    // label: playOrSetupMusicUnk
+    // label: _HoldStrong::Audio::MSS::SoundSystem::playOrSetupMusicUnk
+    // label: playMusicOnceWithVolume
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B2F0 = 0x0047B2F0,
-    // label: playOrEndMusicUnk
+    // label: _HoldStrong::Audio::MSS::SoundSystem::playOrEndMusicUnk
+    // label: playMusicLoopingWithVolume
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B3C0 = 0x0047B3C0,
+    // label: _HoldStrong::Audio::MSS::SoundSystem::openSound
     // label: openSound
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B490 = 0x0047B490,
@@ -24923,58 +26621,86 @@ enum {
     // location: OpenSHC/Audio/MSS
     // type: function
     SHC_3BB0A8C1_0x0047B510 = 0x0047B510,
-    // label: playOnSfx1SoundStreamOnceOrOnRepeatUnk
+    // label: _HoldStrong::Audio::MSS::SoundSystem::playOnSfx1SoundStreamOnceOrOnRepeatUnk
+    // label: playSfx1StreamLooping
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B590 = 0x0047B590,
+    // label: _HoldStrong::Audio::MSS::SoundSystem::playSoundOnSoundStream2
     // label: playSoundOnSoundStream2
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B5C0 = 0x0047B5C0,
+    // label: _HoldStrong::Audio::MSS::SoundSystem::playSoundOnSpeechStream
     // label: playSoundOnSpeechStream
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B5F0 = 0x0047B5F0,
+    // label: _HoldStrong::Audio::MSS::SoundSystem::playSpeechSfx
     // label: playSpeechSfx
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B670 = 0x0047B670,
-    // label: playAmbientStreamWithLoop
+    // label: _HoldStrong::Audio::MSS::SoundSystem::meth_0x47b700
+    // label: playSoundStreamFile
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B700 = 0x0047B700,
-    // label: playSomeMusicUnk
+    // label: _HoldStrong::Audio::MSS::SoundSystem::playSomeMusicUnk
+    // label: playMusicFile
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B760 = 0x0047B760,
-    // label: playOnSfx1SoundStreamUnk
+    // label: _HoldStrong::Audio::MSS::SoundSystem::playOnSfx1SoundStreamUnk
+    // label: playSfx1Stream
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B7D0 = 0x0047B7D0,
+    // label: _HoldStrong::Audio::MSS::SoundSystem::playSoundOnSfxSoundStream2
     // label: playSoundOnSfxSoundStream2
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B800 = 0x0047B800,
-    // label: playSoundOnStream3Unk
+    // label: _HoldStrong::Audio::MSS::SoundSystem::playSoundOnStream3Unk
+    // label: playSpeechOnStream
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B830 = 0x0047B830,
-    // label: activateSoundFromMenuFuncUnk
+    // label: _HoldStrong::Audio::MSS::SoundSystem::activateSoundFromMenuFuncUnk
+    // label: resumeMusicPlayback
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B870 = 0x0047B870,
+    // label: _HoldStrong::Audio::MSS::SoundSystem::playRandomAmbientMusic
     // label: playRandomAmbientMusic
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047B890 = 0x0047B890,
-    // label: playRandomBackgroundMusicUnk
+    // label: _HoldStrong::Audio::MSS::SoundSystem::playRandomBackgroundMusicUnk
+    // label: chooseNextBattleMusicTrack
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047BF20 = 0x0047BF20,
+    // label: _HoldStrong::Audio::MSS::SoundSystem::initMiles
     // label: initMiles
+    // location:
     // location: OpenSHC/Audio/MSS/SoundSystem
     // type: function
     SHC_3BB0A8C1_0x0047C400 = 0x0047C400,
+    // label: ??8@YAHABU_GUID@@0@Z
+    // label: ?IsEqualGUID@@YAHABU_GUID@@0@Z
     // label: FID_conflict:IsEqualGUID
     // label: isEqualGUID
     // location:
@@ -24989,7 +26715,9 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x0047C860 = 0x0047C860,
-    // label: MenuItemActionHandler_ChooseNetworkServiceProvider_ProviderScrollbarUnk
+    // label: MenuItemActionHandler_ChooseNetworkServiceProvider_ProviderScrollbar
+    // label: _HoldStrong::UI::MenuItemActionHandler_ChooseNetworkServiceProvider_ProviderScrollbarUnk
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x0047CA80 = 0x0047CA80,
@@ -25043,7 +26771,9 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x0047CF50 = 0x0047CF50,
-    // label: MenuItemActionHandler_ChooseNetworkServiceProvider_ModemScrollbarUnk
+    // label: MenuItemActionHandler_ChooseNetworkServiceProvider_ModemScrollbar
+    // label: _HoldStrong::UI::MenuItemActionHandler_ChooseNetworkServiceProvider_ModemScrollbarUnk
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x0047D070 = 0x0047D070,
@@ -25091,11 +26821,15 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x0047D410 = 0x0047D410,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::getGUIDForSelectedProvider
     // label: getGUIDForSelectedProvider
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047D4A0 = 0x0047D4A0,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::setMenuTypeBasedOnDirectPlayGUID
     // label: setMenuTypeBasedOnDirectPlayGUID
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047D500 = 0x0047D500,
@@ -25103,23 +26837,42 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x0047D5B0 = 0x0047D5B0,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::createCompoundAddressBasedOnSelectedProvider
     // label: createCompoundAddressBasedOnSelectedProvider
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047D6A0 = 0x0047D6A0,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::setDPlaySessionNameValue
     // label: setDPlaySessionNameValue
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047DA70 = 0x0047DA70,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::initializeDirectPlayAndCreateOrJoinSession
     // label: initializeDirectPlayAndCreateOrJoinSession
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047DB10 = 0x0047DB10,
+    // label: LAB_close_and_release_if_err
+    // location: OpenSHC/Synchrony/GameSynchronyState/initializeDirectPlayAndCreateOrJoinSession
+    SHC_3BB0A8C1_0x0047DD42 = 0x0047DD42,
+    // label: LAB_release
+    // location: OpenSHC/Synchrony/GameSynchronyState/initializeDirectPlayAndCreateOrJoinSession
+    SHC_3BB0A8C1_0x0047DD54 = 0x0047DD54,
+    // label: LAB_return
+    // location: OpenSHC/Synchrony/GameSynchronyState/initializeDirectPlayAndCreateOrJoinSession
+    SHC_3BB0A8C1_0x0047DDE3 = 0x0047DDE3,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::setSessionDescription
     // label: setSessionDescription
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047DE00 = 0x0047DE00,
-    // label: setDirectPlaySessionDescription
+    // label: _HoldStrong::Synchrony::GameSynchronyState::meth_0x47dea0
+    // label: hostDirectPlaySession
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047DEA0 = 0x0047DEA0,
@@ -25127,25 +26880,35 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x0047DF40 = 0x0047DF40,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::fetchSessionGUID
     // label: fetchSessionGUID
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047E010 = 0x0047E010,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::resolveEqualEntries
     // label: resolveEqualEntries
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047E050 = 0x0047E050,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::clearSessionsList
     // label: clearSessionsList
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047E0E0 = 0x0047E0E0,
-    // label: DirectPlayModemRelated_MemoryAllocationFunction
+    // label: _HoldStrong::Global::DirectPlayModemRelated_MemoryAllocationFunction
+    // label: enumModemAddressCallback
+    // location:
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x0047E160 = 0x0047E160,
     // type: function
     SHC_3BB0A8C1_0x0047E1A0 = 0x0047E1A0,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::disconnectDPlay
     // label: disconnectDPlay
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047E240 = 0x0047E240,
@@ -25161,53 +26924,75 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x0047E420 = 0x0047E420,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::readGameSpyConfig
     // label: readGameSpyConfig
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047E490 = 0x0047E490,
-    // label: computeLatencyAdjustmentFromMatchTimes
+    // label: _HoldStrong::Synchrony::GameSynchronyState::meth_0x47e5b0
+    // label: resetMatchTimers
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047E5B0 = 0x0047E5B0,
     // type: function
     SHC_3BB0A8C1_0x0047E5D0 = 0x0047E5D0,
-    // label: CompressOrCreateLengthPrefixedPacketUnk
+    // label: _HoldStrong::Global::CompressOrCreateLengthPrefixedPacketUnk
+    // label: compressOrCreateLengthPrefixedPacket
+    // location:
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x0047E7E0 = 0x0047E7E0,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::decompressTooLongPacketData
     // label: decompressTooLongPacketData
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047E800 = 0x0047E800,
-    // label: countActiveHumanPlayers
+    // label: countActivePlayers
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047E830 = 0x0047E830,
-    // label: countOccupiedPlayerSlots
+    // label: _HoldStrong::Synchrony::GameSynchronyState::aiPlayerCountUnk
+    // label: countActivePlayers
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047E890 = 0x0047E890,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::checkPlayerSetValid
     // label: checkPlayerSetValid
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047E8F0 = 0x0047E8F0,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::countPlayersInSameTeam
     // label: countPlayersInSameTeam
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047EA40 = 0x0047EA40,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::translateMultiplayerIDsIntoPlayerIDs
     // label: translateMultiplayerIDsIntoPlayerIDs
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047EAF0 = 0x0047EAF0,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::addPlayerToCurrentPlayerArray
     // label: addPlayerToCurrentPlayerArray
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047EB80 = 0x0047EB80,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::handleUnexpectedDPlayXResult
     // label: handleUnexpectedDPlayXResult
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047EC10 = 0x0047EC10,
-    // label: checkAllPlayersReadyAndCleanupSlots
+    // label: _HoldStrong::Synchrony::GameSynchronyState::meth_0x47ede0
+    // label: areAllPlayersReady
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047EDE0 = 0x0047EDE0,
@@ -25215,23 +27000,31 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x0047EEB0 = 0x0047EEB0,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::renderDebugDataSplitInfo
     // label: renderDebugDataSplitInfo
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047EED0 = 0x0047EED0,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::addChatMessageToDisplayList
     // label: addChatMessageToDisplayList
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047F6A0 = 0x0047F6A0,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::clearChatEvents
     // label: clearChatEvents
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047F7E0 = 0x0047F7E0,
-    // label: renderInGameChat
+    // label: _HoldStrong::Synchrony::GameSynchronyState::renderInGameChatUnk
+    // label: renderChatMessagesFloatingOverlay
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047F860 = 0x0047F860,
-    // label: renderChatMessageList
+    // label: renderInGameChatMessages
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047FB50 = 0x0047FB50,
@@ -25251,35 +27044,51 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x0047FFE0 = 0x0047FFE0,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::resetGameCommands
     // label: resetGameCommands
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x00480050 = 0x00480050,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::clearGameCommandEntry
     // label: clearGameCommandEntry
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x004800B0 = 0x004800B0,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::sendLongerDataSuchAsResync
     // label: sendLongerDataSuchAsResync
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x004800E0 = 0x004800E0,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::scheduleReceivedCommand
     // label: scheduleReceivedCommand
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x00480210 = 0x00480210,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::getCommandIDFromCommandSelectionStuff
     // label: getCommandIDFromCommandSelectionStuff
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x00480440 = 0x00480440,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::getGameCommandArrayIndex
     // label: getGameCommandArrayIndex
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x00480570 = 0x00480570,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::getPendingGameCommandsCount
     // label: getPendingGameCommandsCount
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x00480580 = 0x00480580,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::serializeOrDeserializeCommandParameter
     // label: serializeOrDeserializeCommandParameter
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x004805D0 = 0x004805D0,
@@ -25355,7 +27164,9 @@ enum {
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x00481B50 = 0x00481B50,
-    // label: ClickRaiseLand2Unk
+    // label: _HoldStrong::Commands::ClickRaiseLand2Unk
+    // label: commandRaiseLand
+    // location:
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x00481C80 = 0x00481C80,
@@ -25463,7 +27274,9 @@ enum {
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x00482420 = 0x00482420,
-    // label: ClickSomethingWithDrawBridgeUnk
+    // label: _HoldStrong::Commands::ClickSomethingWithDrawBridgeUnk
+    // label: commandToggleDrawbridge
+    // location:
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x00482550 = 0x00482550,
@@ -25639,7 +27452,9 @@ enum {
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x004843F0 = 0x004843F0,
-    // label: ResetSyncStatusUnk
+    // label: _HoldStrong::Commands::ResetSyncStatusUnk
+    // label: resetSyncStatus
+    // location:
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x00484450 = 0x00484450,
@@ -25659,11 +27474,11 @@ enum {
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x00484850 = 0x00484850,
-    // label: SiegeEngineRelated
+    // label: marshalSiegeEngineCommand
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x00484960 = 0x00484960,
-    // label: TribeRelated1
+    // label: marshalTribeUnitCommand
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x00484A00 = 0x00484A00,
@@ -25683,7 +27498,7 @@ enum {
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x00484DA0 = 0x00484DA0,
-    // label: SetField45To100
+    // label: marshalSetMapTimeFlagCommand
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x00484E10 = 0x00484E10,
@@ -25691,7 +27506,9 @@ enum {
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x00484E70 = 0x00484E70,
-    // label: KickPlayerUnk
+    // label: _HoldStrong::Commands::KickPlayerUnk
+    // label: commandKickPlayer
+    // location:
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x00484F30 = 0x00484F30,
@@ -25699,7 +27516,9 @@ enum {
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x00485020 = 0x00485020,
-    // label: BroadCastSyncRelatedStatus
+    // label: _HoldStrong::Commands::BroadCastSyncRelatedStatus
+    // label: commandBroadcastSyncStatus
+    // location:
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x004850E0 = 0x004850E0,
@@ -25707,7 +27526,7 @@ enum {
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x00485140 = 0x00485140,
-    // label: SyncPacketSizeAnnouncement
+    // label: marshalNetworkSyncCommand
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x00485210 = 0x00485210,
@@ -25723,15 +27542,19 @@ enum {
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x00485380 = 0x00485380,
-    // label: FlagsAndBraziersCommandUnk
+    // label: _HoldStrong::Commands::FlagsAndBraziersCommandUnk
+    // label: commandFlagsBraziers
+    // location:
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x00485520 = 0x00485520,
-    // label: NotifyLaggingPlayer
+    // label: marshalLaggingPlayerCommand
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x004855C0 = 0x004855C0,
-    // label: SomeKindOfMultiplayerPingUnk
+    // label: _HoldStrong::Commands::SomeKindOfMultiplayerPingUnk
+    // label: commandReportLaggingPlayerPing
+    // location:
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x00485650 = 0x00485650,
@@ -25967,7 +27790,9 @@ enum {
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x00485CC0 = 0x00485CC0,
-    // label: MapSendingRelated
+    // label: _HoldStrong::Commands::MapSendingRelated
+    // label: commandMapFileTransferControl
+    // location:
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x00485E80 = 0x00485E80,
@@ -26007,11 +27832,15 @@ enum {
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x00486530 = 0x00486530,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::checkSkirmishGameDefeat
     // label: checkSkirmishGameDefeat
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x00486600 = 0x00486600,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::getLordTypeForPlayer
     // label: getLordTypeForPlayer
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x00486A70 = 0x00486A70,
@@ -26059,13 +27888,17 @@ enum {
     SHC_3BB0A8C1_0x00486AF0 = 0x00486AF0,
     // type: function
     SHC_3BB0A8C1_0x00486B10 = 0x00486B10,
+    // label: _HoldStrong::Game::Skirmish::SkirmishLobbySetupStructure::commitSkirmishSettings
     // label: commitSkirmishSettings
+    // location:
     // location: OpenSHC/Game/Skirmish/SkirmishLobbySetupStructure
     // type: function
     SHC_3BB0A8C1_0x00486C40 = 0x00486C40,
     // type: function
     SHC_3BB0A8C1_0x00486C60 = 0x00486C60,
-    // label: initializeFinalResultsForActivePlayers
+    // label: _HoldStrong::Synchrony::GameSynchronyState::meth_0x486f20
+    // label: applyPlayerNameInput
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x00486F20 = 0x00486F20,
@@ -26085,22 +27918,30 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00487200 = 0x00487200,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::invokeDirectPlayEnumConnections
     // label: invokeDirectPlayEnumConnections
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x00487250 = 0x00487250,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::restartDPlaySessionEnumeration
     // label: restartDPlaySessionEnumeration
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x00487390 = 0x00487390,
-    // label: createDirectPlayInterfaceModem
+    // label: _HoldStrong::Synchrony::GameSynchronyState::createDirectPlayInterfaceModemUnk
+    // label: createDirectPlayModemInterface
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x004874B0 = 0x004874B0,
     // label: prt_487555_c0916b4a
-    // location: OpenSHC/Synchrony/GameSynchronyState/createDirectPlayInterfaceModem/override
+    // location: OpenSHC/Synchrony/GameSynchronyState/createDirectPlayInterfaceModemUnk/override
     SHC_3BB0A8C1_0x00487555 = 0x00487555,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::setupSkirmishLobby
     // label: setupSkirmishLobby
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x00487650 = 0x00487650,
@@ -26108,27 +27949,39 @@ enum {
     SHC_3BB0A8C1_0x00487770 = 0x00487770,
     // type: function
     SHC_3BB0A8C1_0x00487800 = 0x00487800,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::determineGameTicksToPerform
     // label: determineGameTicksToPerform
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x00487A30 = 0x00487A30,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::transmitCommand
     // label: transmitCommand
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x00487C50 = 0x00487C50,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::sendSomeMultiplayerSyncMessageWithType
     // label: sendSomeMultiplayerSyncMessageWithType
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x00487E30 = 0x00487E30,
-    // label: processSyncPacket
+    // label: _HoldStrong::Synchrony::GameSynchronyState::processSyncPacketUnk
+    // label: updateTurnDelayFromSyncPacket
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x00488010 = 0x00488010,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::sendSyncPacket126
     // label: sendSyncPacket126
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x004880E0 = 0x004880E0,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::computeAndSetLatencyInformation
     // label: computeAndSetLatencyInformation
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x004882A0 = 0x004882A0,
@@ -26136,15 +27989,21 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00488480 = 0x00488480,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::renderDebugDataNetwork
     // label: renderDebugDataNetwork
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x00488540 = 0x00488540,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::queueCommand
     // label: queueCommand
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x00489100 = 0x00489100,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::processWaitingCommands
     // label: processWaitingCommands
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x004892F0 = 0x004892F0,
@@ -26172,7 +28031,9 @@ enum {
     SHC_3BB0A8C1_0x00489880 = 0x00489880,
     // type: function
     SHC_3BB0A8C1_0x00489A10 = 0x00489A10,
-    // label: SetPlayerNameUnk
+    // label: _HoldStrong::Commands::SetPlayerNameUnk
+    // label: commandSyncMapNameAndBeginLoad
+    // location:
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x00489AC0 = 0x00489AC0,
@@ -26206,7 +28067,9 @@ enum {
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x0048A460 = 0x0048A460,
-    // label: SendResyncUnknown
+    // label: _HoldStrong::Commands::SendResyncUnknown
+    // label: commandSendResyncGlobals
+    // location:
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x0048A510 = 0x0048A510,
@@ -26240,7 +28103,9 @@ enum {
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x0048ACB0 = 0x0048ACB0,
-    // label: SyncRelatedSomething
+    // label: _HoldStrong::Commands::SyncRelatedSomething
+    // label: commandSyncStatusExchange
+    // location:
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x0048B170 = 0x0048B170,
@@ -26278,7 +28143,9 @@ enum {
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x0048BC90 = 0x0048BC90,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::compareGameVersions
     // label: compareGameVersions
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0048BD40 = 0x0048BD40,
@@ -26288,37 +28155,49 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x0048BF70 = 0x0048BF70,
-    // label: initializeMultiplayerLobby
+    // label: _HoldStrong::Synchrony::GameSynchronyState::createMultiplayerLobbyUnk
+    // label: initMultiplayerLobby
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0048BF80 = 0x0048BF80,
-    // label: constructGameSynchronyState
+    // label: Constructor_GameSynchronyState
+    // label: _HoldStrong::Synchrony::GameSynchronyState::Constructor_GameSynchronyState
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0048C150 = 0x0048C150,
-    // label: initMultiplayerLobbyState
-    // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0048C230 = 0x0048C230,
     // type: function
     SHC_3BB0A8C1_0x0048C310 = 0x0048C310,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::queueSynchronizedAutosaveProtocol
     // label: queueSynchronizedAutosaveProtocol
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0048C660 = 0x0048C660,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::multiplayerSyncMessagesUnk
     // label: sendPeriodicSyncMessages
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0048C750 = 0x0048C750,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::reorderTeamsAndPositions
     // label: reorderTeamsAndPositions
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0048C7B0 = 0x0048C7B0,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::checkGameSync
     // label: checkGameSync
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0048CB00 = 0x0048CB00,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::recomputeHashesAndSendResync
     // label: recomputeHashesAndSendResync
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0048CC90 = 0x0048CC90,
@@ -26330,12 +28209,12 @@ enum {
     SHC_3BB0A8C1_0x0048D250 = 0x0048D250,
     // type: function
     SHC_3BB0A8C1_0x0048D7C0 = 0x0048D7C0,
-    // label: checkLagAndSyncStatus
-    // location: OpenSHC/Synchrony/GameSynchronyState
+    // label: detectDesyncAndShareSyncStatus
+    // location:
     // type: function
     SHC_3BB0A8C1_0x0048DA60 = 0x0048DA60,
-    // label: broadcastDesyncResyncCommands
-    // location: OpenSHC/Synchrony/GameSynchronyState
+    // label: hostSendResyncForDesyncedState
+    // location:
     // type: function
     SHC_3BB0A8C1_0x0048DC50 = 0x0048DC50,
     // type: function
@@ -26354,8 +28233,8 @@ enum {
     SHC_3BB0A8C1_0x0048E4A0 = 0x0048E4A0,
     // type: function
     SHC_3BB0A8C1_0x0048E4B0 = 0x0048E4B0,
-    // label: sendPendingResyncCommandsInBudget
-    // location: OpenSHC/Synchrony/GameSynchronyState
+    // label: hostSendResyncChunked
+    // location:
     // type: function
     SHC_3BB0A8C1_0x0048E680 = 0x0048E680,
     // type: function
@@ -26398,14 +28277,14 @@ enum {
     SHC_3BB0A8C1_0x0048F3C8 = 0x0048F3C8,
     // type: /pointer
     SHC_3BB0A8C1_0x0048F3CC = 0x0048F3CC,
-    // label: advanceSyncStatusAndKickLaggers
-    // location: OpenSHC/Synchrony/GameSynchronyState
+    // label: awaitAllPlayersSyncStatus
+    // location:
     // type: function
     SHC_3BB0A8C1_0x0048F3D0 = 0x0048F3D0,
     // type: function
     SHC_3BB0A8C1_0x0048F440 = 0x0048F440,
-    // label: checkGameLagStatusAndKickAccordingly
-    // location: OpenSHC/Synchrony/GameSynchronyState
+    // label: awaitAllPlayersAnnouncementAck
+    // location:
     // type: function
     SHC_3BB0A8C1_0x0048F4C0 = 0x0048F4C0,
     // label: MenuItemActionHandler_Chat_MostButtons
@@ -26512,6 +28391,10 @@ enum {
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x0048F870 = 0x0048F870,
+    // label: hostProcessPlayerJoin
+    // location:
+    // type: function
+    SHC_3BB0A8C1_0x0048F941 = 0x0048F941,
     // label: HostShareLobbyState
     // location: OpenSHC/Commands
     // type: function
@@ -26528,29 +28411,41 @@ enum {
     // location: OpenSHC/Commands
     // type: function
     SHC_3BB0A8C1_0x0048FFD0 = 0x0048FFD0,
+    // label: _HoldStrong::Game::Skirmish::SkirmishLobbySetupStructure::restoreSkirmishLobbySetup
     // label: restoreSkirmishLobbySetup
+    // location:
     // location: OpenSHC/Game/Skirmish/SkirmishLobbySetupStructure
     // type: function
     SHC_3BB0A8C1_0x00490060 = 0x00490060,
     // type: function
     SHC_3BB0A8C1_0x00490080 = 0x00490080,
-    // label: throttledMultiplayerSyncUpdate
+    // label: _HoldStrong::Synchrony::GameSynchronyState::someMultiplayerMessageSending
+    // label: someMultiplayerMessageSending
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x00490340 = 0x00490340,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::removePlayerFromLobby
     // label: removePlayerFromLobby
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x00490380 = 0x00490380,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::checkMultiplayerLaggingPlayers
     // label: checkMultiplayerLaggingPlayers
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x00490480 = 0x00490480,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::receiveAllTransmittedCommands
     // label: receiveAllTransmittedCommands
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x00490690 = 0x00490690,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::waitForMultiplayerHost
     // label: waitForMultiplayerHost
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x00490920 = 0x00490920,
@@ -26567,7 +28462,9 @@ enum {
     // label: LAB_Return
     // location: OpenSHC/UI/MenuItemActionHandler_FindingNetworkSessions_Buttons
     SHC_3BB0A8C1_0x0049102D = 0x0049102D,
+    // label: _HoldStrong::Synchrony::GameSynchronyState::handleCommandLineArguments
     // label: handleCommandLineArguments
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x00491040 = 0x00491040,
@@ -26584,22 +28481,32 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004914D0 = 0x004914D0,
     // label: Constructor_MenuTextInputState
+    // label: _HoldStrong::UI::MenuTextInputState::Constructor_MenuTextInputState
+    // location:
     // location: OpenSHC/UI/MenuTextInputState
     // type: function
     SHC_3BB0A8C1_0x00491680 = 0x00491680,
+    // label: _HoldStrong::UI::MenuTextInputState::activateModalDialogAndClearText
     // label: activateModalDialogAndClearText
+    // location:
     // location: OpenSHC/UI/MenuTextInputState
     // type: function
     SHC_3BB0A8C1_0x004916C0 = 0x004916C0,
+    // label: _HoldStrong::UI::MenuTextInputState::clearModalDialog2to6
     // label: clearModalDialog2to6
+    // location:
     // location: OpenSHC/UI/MenuTextInputState
     // type: function
     SHC_3BB0A8C1_0x00491730 = 0x00491730,
+    // label: _HoldStrong::UI::MenuTextInputState::clearAnyOtherModalDialogs
     // label: clearAnyOtherModalDialogs
+    // location:
     // location: OpenSHC/UI/MenuTextInputState
     // type: function
     SHC_3BB0A8C1_0x00491750 = 0x00491750,
-    // label: meth_0x4917c0
+    // label: _HoldStrong::UI::MenuTextInputState::meth_0x4917c0
+    // label: resetMenuTextInputModals
+    // location:
     // location: OpenSHC/UI/MenuTextInputState
     // type: function
     SHC_3BB0A8C1_0x004917C0 = 0x004917C0,
@@ -26789,7 +28696,9 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00492FD0 = 0x00492FD0,
-    // label: SetupPreviewMinimapDataUnk
+    // label: _HoldStrong::Global::SetupPreviewMinimapDataUnk
+    // label: loadSelectedMapHeaderForPreview
+    // location:
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00493050 = 0x00493050,
@@ -26885,8 +28794,6 @@ enum {
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x00493690 = 0x00493690,
-    // type: function
-    SHC_3BB0A8C1_0x004937A4 = 0x004937A4,
     // label: MenuModalRenderFunction_OnlineQuitGame
     // location: OpenSHC/UI
     // type: function
@@ -26909,15 +28816,21 @@ enum {
     SHC_3BB0A8C1_0x004938F8 = 0x004938F8,
     // type: /undefined *32
     SHC_3BB0A8C1_0x004938FC = 0x004938FC,
+    // label: _HoldStrong::UI::MenuTextInputState::popModalDialog
     // label: popModalDialog
+    // location:
     // location: OpenSHC/UI/MenuTextInputState
     // type: function
     SHC_3BB0A8C1_0x00493900 = 0x00493900,
+    // label: _HoldStrong::UI::MenuTextInputState::activateLoadOrSaveMapUI
     // label: activateLoadOrSaveMapUI
+    // location:
     // location: OpenSHC/UI/MenuTextInputState
     // type: function
     SHC_3BB0A8C1_0x00493980 = 0x00493980,
+    // label: _HoldStrong::UI::MenuTextInputState::loadOrSaveMap
     // label: loadOrSaveMap
+    // location:
     // location: OpenSHC/UI/MenuTextInputState
     // type: function
     SHC_3BB0A8C1_0x00493AC0 = 0x00493AC0,
@@ -27118,7 +29031,11 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00493E20 = 0x00493E20,
     // type: function
+    SHC_3BB0A8C1_0x00493EB9 = 0x00493EB9,
+    // type: function
     SHC_3BB0A8C1_0x0049404E = 0x0049404E,
+    // type: function
+    SHC_3BB0A8C1_0x00494059 = 0x00494059,
     // type: /undefined *32
     SHC_3BB0A8C1_0x00494064 = 0x00494064,
     // type: /undefined *32
@@ -27321,7 +29238,9 @@ enum {
     SHC_3BB0A8C1_0x004941E7 = 0x004941E7,
     // type: /byte
     SHC_3BB0A8C1_0x004941E8 = 0x004941E8,
-    // label: MenuItemActionHandler_NetworkOptions_LeaveButtonUnk
+    // label: MenuItemActionHandler_NetworkOptions_LeaveButton
+    // label: _HoldStrong::UI::MenuItemActionHandler_NetworkOptions_LeaveButtonUnk
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004941F0 = 0x004941F0,
@@ -27403,7 +29322,9 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00494920 = 0x00494920,
-    // label: MenuItemActionHandler_General_LaunchOrQuitMultiplayerGameUnk
+    // label: MenuItemActionHandler_General_LaunchOrQuitMultiplayerGame
+    // label: _HoldStrong::UI::MenuItemActionHandler_General_LaunchOrQuitMultiplayerGameUnk
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00494950 = 0x00494950,
@@ -27507,11 +29428,13 @@ enum {
     SHC_3BB0A8C1_0x00495230 = 0x00495230,
     // type: function
     SHC_3BB0A8C1_0x004954A0 = 0x004954A0,
-    // label: ShowProgressBarSaveLoadDialog
+    // label: openLoadSaveProgressDialog
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00495800 = 0x00495800,
-    // label: ProgressBarRelated
+    // label: _HoldStrong::Global::ProgressBarRelated
+    // label: showLoadSaveProgressBar
+    // location:
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00495840 = 0x00495840,
@@ -27529,15 +29452,21 @@ enum {
     SHC_3BB0A8C1_0x00495A20 = 0x00495A20,
     // type: /undefined *32
     SHC_3BB0A8C1_0x00495A24 = 0x00495A24,
+    // label: _HoldStrong::IO::SettingsFileState::readUserConfig
     // label: readUserConfig
+    // location:
     // location: OpenSHC/IO/SettingsFileState
     // type: function
     SHC_3BB0A8C1_0x00495A30 = 0x00495A30,
+    // label: _HoldStrong::IO::SettingsFileState::writeUserConfig
     // label: writeUserConfig
+    // location:
     // location: OpenSHC/IO/SettingsFileState
     // type: function
     SHC_3BB0A8C1_0x00496400 = 0x00496400,
+    // label: _HoldStrong::UI::MenuTextInputState::loadOrSaveGame
     // label: loadOrSaveGame
+    // location:
     // location: OpenSHC/UI/MenuTextInputState
     // type: function
     SHC_3BB0A8C1_0x004968A0 = 0x004968A0,
@@ -27651,11 +29580,15 @@ enum {
     SHC_3BB0A8C1_0x00496E19 = 0x00496E19,
     // type: /byte
     SHC_3BB0A8C1_0x00496E1A = 0x00496E1A,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::getComputationalTileIndex
     // label: getComputationalTileIndex
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x00496E20 = 0x00496E20,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::getTileInSearchQueue
     // label: getTileInSearchQueue
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x00496E30 = 0x00496E30,
@@ -27663,145 +29596,204 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00496E40 = 0x00496E40,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::bindPathPlanToAlgorithmStateAndReset
     // label: bindPathPlanToAlgorithmStateAndReset
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x00496EA0 = 0x00496EA0,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::findClosestTileToStartingTile
     // label: findClosestTileToStartingTile
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x00496EC0 = 0x00496EC0,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::findNextTileInExistingSearchThatIsModuloDistanceAway
     // label: findNextTileInExistingSearchThatIsModuloDistanceAway
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x00496F90 = 0x00496F90,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::pathFindingResultBased
     // label: pathFindingResultBased
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x00497080 = 0x00497080,
+    // label:
+    // _HoldStrong::Map::Navigation::PathFindingState::findNextTileByModuloAmongPreviousSearchNotOnDefensiveStructure
     // label: findNextTileByModuloAmongPreviousSearchNotOnDefensiveStructure
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x00497180 = 0x00497180,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::doMoveFromTileToTile
     // label: doMoveFromTileToTile
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x00497280 = 0x00497280,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::findNeighbourTileThatCanServeAsClimbPointClosestToXY
     // label: findNeighbourTileThatCanServeAsClimbPointClosestToXY
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004974D0 = 0x004974D0,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::findPositionForGivenClimbArea
     // label: findPositionForGivenClimbArea
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x00497690 = 0x00497690,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::findLinkageBasedPathOrWalkRadius
     // label: findLinkageBasedPathOrWalkRadius
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x00497740 = 0x00497740,
-    // label: findSuitableSpawnLocationUnk
+    // label: _HoldStrong::Map::Navigation::PathFindingState::findSuitableSpawnLocationUnk
+    // label: bfsFindReachableFreeTile
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x00497B80 = 0x00497B80,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::findPathUsingClimbingWithHeightMargin16
     // label: findPathUsingClimbingWithHeightMargin16
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x00498020 = 0x00498020,
     // type: function
     SHC_3BB0A8C1_0x00498170 = 0x00498170,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::pathFindingWithBuildingsIncluded
     // label: pathFindingWithBuildingsIncluded
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x00498400 = 0x00498400,
     // type: function
     SHC_3BB0A8C1_0x004985D0 = 0x004985D0,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::calculatePathKeepAndWallsGatesNotAllowed
     // label: calculatePathKeepAndWallsGatesNotAllowed
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x00498A40 = 0x00498A40,
     // type: function
     SHC_3BB0A8C1_0x00498B70 = 0x00498B70,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::commitUnitPathPlanUsingWalkLayer
     // label: commitUnitPathPlanUsingWalkLayer
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x00498FD0 = 0x00498FD0,
     // type: function
     SHC_3BB0A8C1_0x004990F0 = 0x004990F0,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::updateSeparateAreaTileMap
     // label: updateSeparateAreaTileMap
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004995E0 = 0x004995E0,
     // type: function
     SHC_3BB0A8C1_0x00499970 = 0x00499970,
-    // label: updatePathLinkageLayerBasedOnBuildingsUnk
+    // label: _HoldStrong::Map::Navigation::PathFindingState::updatePathLinkageLayerBasedOnBuildingsUnk
+    // label: computeTilePathLinkageBits
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004999C0 = 0x004999C0,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::updatePathLinkageLayerAtTileForSomeLogicalReason
     // label: updatePathLinkageLayerAtTileForSomeLogicalReason
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x00499DC0 = 0x00499DC0,
-    // label: updatePathLinkageTileMapRelatedToGates
+    // label: _HoldStrong::Map::Navigation::PathFindingState::updatePathLinkageTileMapRelatedToGates
+    // label: setGatePassabilityLinkage
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x00499FA0 = 0x00499FA0,
-    // label: updatePathLinkageTileMapRelatedToKeeps
+    // label: _HoldStrong::Map::Navigation::PathFindingState::updatePathLinkageTileMapRelatedToKeeps
+    // label: setKeepEntranceLinkage
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049A1C0 = 0x0049A1C0,
-    // label: updatePathLinkageTileMapRelatedToSiegeTower
+    // label: _HoldStrong::Map::Navigation::PathFindingState::updatePathLinkageTileMapRelatedToSiegeTower
+    // label: setSiegeTowerLinkage
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049A2E0 = 0x0049A2E0,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::tracePathPlanToDestinationViaUnoccupiedTiles
     // label: tracePathPlanToDestinationViaUnoccupiedTiles
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049A370 = 0x0049A370,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::reverseCurrentPathPlan
     // label: reverseCurrentPathPlan
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049A5E0 = 0x0049A5E0,
     // type: function
     SHC_3BB0A8C1_0x0049A610 = 0x0049A610,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::raiseLand2
     // label: raiseLand2
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049A6D0 = 0x0049A6D0,
     // type: function
     SHC_3BB0A8C1_0x0049A800 = 0x0049A800,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::updateWalkAndPathLayer
     // label: updateWalkAndPathLayer
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049AAD0 = 0x0049AAD0,
     // type: function
     SHC_3BB0A8C1_0x0049AC80 = 0x0049AC80,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::setChangedLayerZeroBasedOn40x40Layer
     // label: setChangedLayerZeroBasedOn40x40Layer
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049AF50 = 0x0049AF50,
     // type: function
     SHC_3BB0A8C1_0x0049B000 = 0x0049B000,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::getYSmallerThanYLimit
     // label: getYSmallerThanYLimit
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049B1C0 = 0x0049B1C0,
-    // label: pathFindingDeerAndLionsUnk
+    // label: _HoldStrong::Map::Navigation::PathFindingState::pathFindingDeerAndLionsUnk
+    // label: findNearestTileInOriginArea
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049B1D0 = 0x0049B1D0,
     // type: function
     SHC_3BB0A8C1_0x0049B2B0 = 0x0049B2B0,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::algTunnelerFindTarget
     // label: algTunnelerFindTarget
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049B5B0 = 0x0049B5B0,
     // type: function
     SHC_3BB0A8C1_0x0049B6B0 = 0x0049B6B0,
-    // label: calcApproxEuclideanDistance
+    // label: approximateEuclideanDistance
     // location: OpenSHC/Map/Navigation
     // type: function
     SHC_3BB0A8C1_0x0049B8C0 = 0x0049B8C0,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::findMapBorderEdgeTileAndStoreInSignpostData
     // label: findMapBorderEdgeTileAndStoreInSignpostData
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049B940 = 0x0049B940,
@@ -27809,7 +29801,9 @@ enum {
     SHC_3BB0A8C1_0x0049BA30 = 0x0049BA30,
     // type: function
     SHC_3BB0A8C1_0x0049BA90 = 0x0049BA90,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::findFurthestSeaTile
     // label: findFurthestSeaTile
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049BBF0 = 0x0049BBF0,
@@ -27817,11 +29811,15 @@ enum {
     SHC_3BB0A8C1_0x0049BCD0 = 0x0049BCD0,
     // type: function
     SHC_3BB0A8C1_0x0049BD40 = 0x0049BD40,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::getTileInSquareBrush
     // label: getTileInSquareBrush
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049BE60 = 0x0049BE60,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::setupBabyTreeLocationInfo
     // label: setupBabyTreeLocationInfo
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049C020 = 0x0049C020,
@@ -28035,47 +30033,63 @@ enum {
     SHC_3BB0A8C1_0x0049C360 = 0x0049C360,
     // type: /byte
     SHC_3BB0A8C1_0x0049C361 = 0x0049C361,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::findNoTreeInRange
     // label: findNoTreeInRange
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049C370 = 0x0049C370,
     // type: function
     SHC_3BB0A8C1_0x0049C4A0 = 0x0049C4A0,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::findDestinationCostLowerThan6
     // label: findDestinationCostLowerThan6
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049C5C0 = 0x0049C5C0,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::computeTotalUnitsWithinDistance
     // label: computeTotalUnitsWithinDistance
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049C690 = 0x0049C690,
     // type: function
     SHC_3BB0A8C1_0x0049C730 = 0x0049C730,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::computeNextRallyPointDestination
     // label: computeNextRallyPointDestination
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049CB00 = 0x0049CB00,
     // type: function
     SHC_3BB0A8C1_0x0049CBE0 = 0x0049CBE0,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::findDirectNeighbourWalkableTile
     // label: findDirectNeighbourWalkableTile
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049CD60 = 0x0049CD60,
     // type: function
     SHC_3BB0A8C1_0x0049CDB0 = 0x0049CDB0,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::findPathableTileWithoutUnitWithBuildingAtXY
     // label: findPathableTileWithoutUnitWithBuildingAtXY
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049CE40 = 0x0049CE40,
     // type: function
     SHC_3BB0A8C1_0x0049CF30 = 0x0049CF30,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::findFreeTileOnDefensiveStructure
     // label: findFreeTileOnDefensiveStructure
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049D0E0 = 0x0049D0E0,
     // type: function
     SHC_3BB0A8C1_0x0049D240 = 0x0049D240,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::findWalkableTileThatDoesNotContainUnit
     // label: findWalkableTileThatDoesNotContainUnit
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049D340 = 0x0049D340,
@@ -28083,63 +30097,89 @@ enum {
     SHC_3BB0A8C1_0x0049D470 = 0x0049D470,
     // type: function
     SHC_3BB0A8C1_0x0049D520 = 0x0049D520,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::someBinaryAlgFunctionPathFinding
     // label: someBinaryAlgFunctionPathFinding
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049D640 = 0x0049D640,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::findClosestFreeTileNearUnitOnBuilding
     // label: findClosestFreeTileNearUnitOnBuilding
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049D880 = 0x0049D880,
     // type: function
     SHC_3BB0A8C1_0x0049D970 = 0x0049D970,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::checkEnemyBuildingOrDefensiveStructureWithin12Tiles
     // label: checkEnemyBuildingOrDefensiveStructureWithin12Tiles
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049DB30 = 0x0049DB30,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::budgetFloodFillOnCertainPathLayer
     // label: budgetFloodFillOnCertainPathLayer
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049DDC0 = 0x0049DDC0,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::updateUnitDeathHeatmapIn3SpacesAroundTile
     // label: updateUnitDeathHeatmapIn3SpacesAroundTile
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049E0D0 = 0x0049E0D0,
-    // label: recomputeALGPathFindingTileMapUnk
+    // label: _HoldStrong::Map::Navigation::PathFindingState::recomputeALGPathFindingTileMapUnk
+    // label: floodMarkAIInfoLayer
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049E510 = 0x0049E510,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::updateAIZoneWithFloodFill0x20
     // label: updateAIZoneWithFloodFill0x20
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049E9E0 = 0x0049E9E0,
     // type: function
     SHC_3BB0A8C1_0x0049EB00 = 0x0049EB00,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::findAIZoneWithFlags
     // label: findAIZoneWithFlags
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049EDF0 = 0x0049EDF0,
     // type: function
     SHC_3BB0A8C1_0x0049EED0 = 0x0049EED0,
-    // label: findArcherRelatedAttackInfoIndex
+    // label: _HoldStrong::Map::Navigation::PathFindingState::findArcherRelatedAttackInfoIndex
+    // label: bfsFindAvailableArcherDefensePoint
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049F040 = 0x0049F040,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::findSupportPointIndex
     // label: findSupportPointIndex
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049F2D0 = 0x0049F2D0,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::algFindAttackAngle
     // label: algFindAttackAngle
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049F540 = 0x0049F540,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::findAppropriateLocationForSiegeTent
     // label: findAppropriateLocationForSiegeTent
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049F7D0 = 0x0049F7D0,
     // type: function
     SHC_3BB0A8C1_0x0049F9B0 = 0x0049F9B0,
-    // label: pathFindingRelated
+    // label: _HoldStrong::Map::Navigation::PathFindingState::pathFindingRelated
+    // label: bfsFindBestCostTileWithinRange
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049FC00 = 0x0049FC00,
@@ -28147,33 +30187,45 @@ enum {
     SHC_3BB0A8C1_0x0049FD10 = 0x0049FD10,
     // type: function
     SHC_3BB0A8C1_0x0049FD70 = 0x0049FD70,
-    // label: pathfindingRelated49ff20
+    // label: _HoldStrong::Map::Navigation::PathFindingState::pathfindingRelated49ff20
+    // label: bfsFindBestTileMatchingAttackMarker
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x0049FF20 = 0x0049FF20,
     // type: function
     SHC_3BB0A8C1_0x004A0050 = 0x004A0050,
-    // label: findBestAttackTileByPathCost
+    // label: _HoldStrong::Map::Navigation::PathFindingState::meth_0x4a01d0
+    // label: findBestAttackPathTile
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A01D0 = 0x004A01D0,
     // type: function
     SHC_3BB0A8C1_0x004A0300 = 0x004A0300,
-    // label: findNearestEnemyBuildingWithinDistance
+    // label: _HoldStrong::Map::Navigation::PathFindingState::meth_0x4a0460
+    // label: bfsFindNearestEnemyBuilding
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A0460 = 0x004A0460,
-    // label: findNearestEnemyUnitWithinDistance
+    // label: _HoldStrong::Map::Navigation::PathFindingState::meth_0x4a06b0
+    // label: bfsFindNearestEnemyUnit
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A06B0 = 0x004A06B0,
     // type: function
     SHC_3BB0A8C1_0x004A07C0 = 0x004A07C0,
-    // label: getGatehouseNearSomethingUnk
+    // label: _HoldStrong::Map::Navigation::PathFindingState::getGatehouseNearSomethingUnk
+    // label: findNearestEnemyGatehouse
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A08E0 = 0x004A08E0,
-    // label: findDistanceOrThreatLevelToUnitUnk
+    // label: _HoldStrong::Map::Navigation::PathFindingState::findDistanceOrThreatLevelToUnitUnk
+    // label: bfsFindHighestPriorityEnemyUnit
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A0B20 = 0x004A0B20,
@@ -28309,11 +30361,15 @@ enum {
     SHC_3BB0A8C1_0x004A0E4A = 0x004A0E4A,
     // type: /byte
     SHC_3BB0A8C1_0x004A0E4B = 0x004A0E4B,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::setWalkabilityBorderLogicLayerForSmallerMapSizes
     // label: setWalkabilityBorderLogicLayerForSmallerMapSizes
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A0E50 = 0x004A0E50,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::aggressiveStanceTargetBuildingAtRange
     // label: aggressiveStanceTargetBuildingAtRange
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A1230 = 0x004A1230,
@@ -28449,11 +30505,15 @@ enum {
     SHC_3BB0A8C1_0x004A15AE = 0x004A15AE,
     // type: /byte
     SHC_3BB0A8C1_0x004A15AF = 0x004A15AF,
-    // label: isEnemyTooCloseUnk
+    // label: _HoldStrong::Map::Navigation::PathFindingState::isEnemyTooCloseUnk
+    // label: isEnemyTooClose
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A15B0 = 0x004A15B0,
-    // label: tracePathToFriendlyDefensesAndReturnTileUnk
+    // label: _HoldStrong::Map::Navigation::PathFindingState::tracePathToFriendlyDefensesAndReturnTileUnk
+    // label: bfsFindReachableFriendlyDefenseTile
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A16C0 = 0x004A16C0,
@@ -28605,31 +30665,41 @@ enum {
     SHC_3BB0A8C1_0x004A19AD = 0x004A19AD,
     // type: /byte
     SHC_3BB0A8C1_0x004A19AE = 0x004A19AE,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::findOwnedGatehouse
     // label: findOwnedGatehouse
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A19B0 = 0x004A19B0,
     // type: function
     SHC_3BB0A8C1_0x004A1AF0 = 0x004A1AF0,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::isTileInRangeOfKeepRange
     // label: isTileInRangeOfKeepRange
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A1C40 = 0x004A1C40,
     // type: function
     SHC_3BB0A8C1_0x004A1CC0 = 0x004A1CC0,
-    // label: findSomeSuitableLocationUnk
+    // label: _HoldStrong::Map::Navigation::PathFindingState::findSomeSuitableLocationUnk
+    // label: bfsEnemyStructureWithinRange
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A1D30 = 0x004A1D30,
     // type: function
     SHC_3BB0A8C1_0x004A1E10 = 0x004A1E10,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::placeCommemoratingStatueAtGoodLocation
     // label: placeCommemoratingStatueAtGoodLocation
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A21B0 = 0x004A21B0,
     // type: function
     SHC_3BB0A8C1_0x004A22C0 = 0x004A22C0,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::isSignPostWithinDistance
     // label: isSignPostWithinDistance
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A2650 = 0x004A2650,
@@ -28637,7 +30707,9 @@ enum {
     SHC_3BB0A8C1_0x004A2740 = 0x004A2740,
     // type: function
     SHC_3BB0A8C1_0x004A27D0 = 0x004A27D0,
-    // label: spreadAlgorithmForFlagsAndBraziersUnk
+    // label: _HoldStrong::Map::Navigation::PathFindingState::spreadAlgorithmForFlagsAndBraziersUnk
+    // label: findOrRemovePlayerFlagsAndBraziersBFS
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A2A90 = 0x004A2A90,
@@ -28655,7 +30727,9 @@ enum {
     SHC_3BB0A8C1_0x004A2DC4 = 0x004A2DC4,
     // type: /pointer
     SHC_3BB0A8C1_0x004A2DC8 = 0x004A2DC8,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::igniteFireAtTilesDistanceAway
     // label: igniteFireAtTilesDistanceAway
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A2DD0 = 0x004A2DD0,
@@ -28663,11 +30737,15 @@ enum {
     SHC_3BB0A8C1_0x004A2F00 = 0x004A2F00,
     // type: function
     SHC_3BB0A8C1_0x004A31D0 = 0x004A31D0,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::findAccessibleWallAndNearbyFreeTile
     // label: findAccessibleWallAndNearbyFreeTile
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A3220 = 0x004A3220,
-    // label: healUnitsOfPlayerWithinRadius
+    // label: _HoldStrong::Map::Navigation::PathFindingState::meth_0x4a36b0
+    // label: bfsHealOwnerUnits
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A36B0 = 0x004A36B0,
@@ -28675,17 +30753,23 @@ enum {
     SHC_3BB0A8C1_0x004A37D0 = 0x004A37D0,
     // type: function
     SHC_3BB0A8C1_0x004A3860 = 0x004A3860,
-    // label: certainDamageToUnitsUnk
+    // label: _HoldStrong::Map::Navigation::PathFindingState::certainDamageToUnitsUnk
+    // label: applyAreaDamageToEnemyUnits
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A3B20 = 0x004A3B20,
     // type: function
     SHC_3BB0A8C1_0x004A3E80 = 0x004A3E80,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::pathFindingToAttackCastleIncludingMoat
     // label: pathFindingToAttackCastleIncludingMoat
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A4140 = 0x004A4140,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::computeAIZoneLayer
     // label: computeAIZoneLayer
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A4470 = 0x004A4470,
@@ -28695,23 +30779,33 @@ enum {
     SHC_3BB0A8C1_0x004A4550 = 0x004A4550,
     // type: function
     SHC_3BB0A8C1_0x004A46C0 = 0x004A46C0,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::setClimbBasedOnClosestClimbData
     // label: setClimbBasedOnClosestClimbData
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A4930 = 0x004A4930,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::isUsableClimbWallWithinArea
     // label: isUsableClimbWallWithinArea
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A4B30 = 0x004A4B30,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::clearLaddermanWalledData
     // label: clearLaddermanWalledData
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A4B80 = 0x004A4B80,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::reprocessLadddermanWallData
     // label: reprocessLadddermanWallData
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A4BB0 = 0x004A4BB0,
-    // label: registerUnitOnClimbData
+    // label: _HoldStrong::Map::Navigation::PathFindingState::meth_0x4a4c70
+    // label: assignUnitToClimbPoint
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A4C70 = 0x004A4C70,
@@ -28735,11 +30829,15 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004A5230 = 0x004A5230,
-    // label: clearActiveClimbDataOfType6And7
+    // label: _HoldStrong::Map::Navigation::PathFindingState::meth_0x4a52d0
+    // label: clearLaddermanClimbData
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A52D0 = 0x004A52D0,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::calculateCanPlayerUnitsNavigateToAreaFromArea
     // label: calculateCanPlayerUnitsNavigateToAreaFromArea
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A5320 = 0x004A5320,
@@ -28747,7 +30845,9 @@ enum {
     SHC_3BB0A8C1_0x004A5420 = 0x004A5420,
     // type: function
     SHC_3BB0A8C1_0x004A5770 = 0x004A5770,
-    // label: findConnectingAreaBetweenTwoAreas
+    // label: _HoldStrong::Map::Navigation::PathFindingState::meth_0x4a58a0
+    // label: traverseAreaConnectivityGraph
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A58A0 = 0x004A58A0,
@@ -28755,51 +30855,75 @@ enum {
     SHC_3BB0A8C1_0x004A5980 = 0x004A5980,
     // type: function
     SHC_3BB0A8C1_0x004A5A30 = 0x004A5A30,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::calculateCanReachUsingCachedAreaLogic
     // label: calculateCanReachUsingCachedAreaLogic
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A5B00 = 0x004A5B00,
-    // label: findBestAdjacentClimbTileToTarget
+    // label: _HoldStrong::Map::Navigation::PathFindingState::meth_0x4a5da0
+    // label: findReachableTileNextToTarget
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A5DA0 = 0x004A5DA0,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::updatePathLinkageLayerForEachBuildingAtEachTile
     // label: updatePathLinkageLayerForEachBuildingAtEachTile
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A5F60 = 0x004A5F60,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::updatePathLinkagesInAllEightDirections
     // label: updatePathLinkagesInAllEightDirections
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A5F90 = 0x004A5F90,
-    // label: findBestAttackTargetTileWithHeightAndOwner
+    // label: _HoldStrong::Map::Navigation::PathFindingState::meth_0x4a6010
+    // label: findBestSiegeTargetTile
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A6010 = 0x004A6010,
     // type: function
     SHC_3BB0A8C1_0x004A6120 = 0x004A6120,
-    // label: storeDestinationOptionsUnk
+    // label: _HoldStrong::Map::Navigation::PathFindingState::storeDestinationOptionsUnk
+    // label: storeDispersedMoveDestinations
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A6520 = 0x004A6520,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::setDestinationPairsBasedOnPreviousSearch
     // label: setDestinationPairsBasedOnPreviousSearch
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A65E0 = 0x004A65E0,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::setMoveDestinationPairs
     // label: setMoveDestinationPairs
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A66D0 = 0x004A66D0,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::spawnUnitAndAddToTribe
     // label: spawnUnitAndAddToTribe
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A67D0 = 0x004A67D0,
+    // label: floodFillReachableZones
+    // location:
     // type: function
     SHC_3BB0A8C1_0x004A6940 = 0x004A6940,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::computeAttackVectorsBasedOnXAndY
     // label: computeAttackVectorsBasedOnXAndY
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A69F0 = 0x004A69F0,
-    // label: findCrossAreaBridgeTileToTarget
+    // label: _HoldStrong::Map::Navigation::PathFindingState::meth_0x4a6ab0
+    // label: findClosestReachableTileForUnit
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A6AB0 = 0x004A6AB0,
@@ -28807,25 +30931,36 @@ enum {
     SHC_3BB0A8C1_0x004A6BE0 = 0x004A6BE0,
     // type: function
     SHC_3BB0A8C1_0x004A6C40 = 0x004A6C40,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::canNavigateFunctionReturnsArea
     // label: canNavigateFunctionReturnsArea
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A6DF0 = 0x004A6DF0,
     // type: function
     SHC_3BB0A8C1_0x004A6ED0 = 0x004A6ED0,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::updateWalkLayerAndAIPathCostLayer
     // label: updateWalkLayerAndAIPathCostLayer
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A7090 = 0x004A7090,
-    // label: pathfindingForAttacksUnk
+    // label: _HoldStrong::Map::Navigation::PathFindingState::pathfindingForAttacksUnk
+    // label: buildBuildingAttackApproachTiles
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A75B0 = 0x004A75B0,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::pathPlanningForTribe
     // label: pathPlanningForTribe
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A79A0 = 0x004A79A0,
+    // label:
+    // _HoldStrong::Map::Navigation::PathFindingState::findFreeSpaceNextToEnemyDefensiveStructureInSameAreaWithinDistance
     // label: findFreeSpaceNextToEnemyDefensiveStructureInSameAreaWithinDistance
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A7F50 = 0x004A7F50,
@@ -28835,21 +30970,30 @@ enum {
     SHC_3BB0A8C1_0x004A8220 = 0x004A8220,
     // type: function
     SHC_3BB0A8C1_0x004A8340 = 0x004A8340,
+    // label:
+    // _HoldStrong::Map::Navigation::PathFindingState::populateDestinationsArrayWithWallTileAndFreeTilePairInSameArea
     // label: populateDestinationsArrayWithWallTileAndFreeTilePairInSameArea
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A83B0 = 0x004A83B0,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::findUnitPreferredOrientationBasedConnectedTile
     // label: findUnitPreferredOrientationBasedConnectedTile
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A8780 = 0x004A8780,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::findBuildingAccessPoint
     // label: findBuildingAccessPoint
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A8860 = 0x004A8860,
     // type: function
     SHC_3BB0A8C1_0x004A8900 = 0x004A8900,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::pathfindingUpdate_0x4a8ab0
     // label: pathfindingUpdate_0x4a8ab0
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A8AB0 = 0x004A8AB0,
@@ -28985,73 +31129,105 @@ enum {
     SHC_3BB0A8C1_0x004A91F6 = 0x004A91F6,
     // type: /byte
     SHC_3BB0A8C1_0x004A91F7 = 0x004A91F7,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::isOpponentBuildingInRange
     // label: isOpponentBuildingInRange
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A9200 = 0x004A9200,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::clearAllLadderManWalledData
     // label: clearAllLadderManWalledData
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A94E0 = 0x004A94E0,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::createClimbData
     // label: createClimbData
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A9510 = 0x004A9510,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::updateClimbData
     // label: updateClimbData
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A9680 = 0x004A9680,
     // type: function
     SHC_3BB0A8C1_0x004A96B0 = 0x004A96B0,
     // label: Constructor_PathFindingState
+    // label: _HoldStrong::Map::Navigation::PathFindingState::Constructor_PathFindingState
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A9760 = 0x004A9760,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::traceAndCommitPathPlan
     // label: traceAndCommitPathPlan
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A97D0 = 0x004A97D0,
     // type: function
     SHC_3BB0A8C1_0x004A98C0 = 0x004A98C0,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::doPathfinding
     // label: doPathfinding
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A9B20 = 0x004A9B20,
+    // label: _HoldStrong::Map::Navigation::PathFindingState::retraceAndCommitPathPlan
     // label: retraceAndCommitPathPlan
+    // location:
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A9DD0 = 0x004A9DD0,
     // label: Constructor_MenuModal
+    // label: _HoldStrong::UI::MenuModal::Constructor_MenuModal
+    // location:
     // location: OpenSHC/UI/MenuModal
     // type: function
     SHC_3BB0A8C1_0x004A9E00 = 0x004A9E00,
     // label: Constructor_MenuModalComposition
+    // label: _HoldStrong::UI::MenuModalComposition::Constructor_MenuModalComposition
+    // location:
     // location: OpenSHC/UI/MenuModalComposition
     // type: function
     SHC_3BB0A8C1_0x004A9E60 = 0x004A9E60,
+    // label: _HoldStrong::UI::MenuModalComposition::loadAllMenuElementsOfMenuModals
     // label: loadAllMenuElementsOfMenuModals
+    // location:
     // location: OpenSHC/UI/MenuModalComposition
     // type: function
     SHC_3BB0A8C1_0x004A9E80 = 0x004A9E80,
     // type: function
     SHC_3BB0A8C1_0x004A9E90 = 0x004A9E90,
+    // label: _HoldStrong::UI::MenuModalComposition::findModalMenu
     // label: findModalMenu
+    // location:
     // location: OpenSHC/UI/MenuModalComposition
     // type: function
     SHC_3BB0A8C1_0x004A9EB0 = 0x004A9EB0,
+    // label: _HoldStrong::UI::MenuModalComposition::activateModalDialog
     // label: activateModalDialog
+    // location:
     // location: OpenSHC/UI/MenuModalComposition
     // type: function
     SHC_3BB0A8C1_0x004A9ED0 = 0x004A9ED0,
+    // label: _HoldStrong::UI::MenuModalComposition::setExtraActiveModalDialog
     // label: setExtraActiveModalDialog
+    // location:
     // location: OpenSHC/UI/MenuModalComposition
     // type: function
     SHC_3BB0A8C1_0x004AA0A0 = 0x004AA0A0,
-    // label: handleActiveModalDialogUnk
+    // label: _HoldStrong::UI::MenuModalComposition::handleActiveModalDialogUnk
+    // label: updateActiveModalDialogDrag
+    // location:
     // location: OpenSHC/UI/MenuModalComposition
     // type: function
     SHC_3BB0A8C1_0x004AA1F0 = 0x004AA1F0,
+    // label: _HoldStrong::UI::MenuModalComposition::fillWithMenuModalDimensions
     // label: fillWithMenuModalDimensions
+    // location:
     // location: OpenSHC/UI/MenuModalComposition
     // type: function
     SHC_3BB0A8C1_0x004AA3E0 = 0x004AA3E0,
@@ -29059,11 +31235,15 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004AA440 = 0x004AA440,
+    // label: _HoldStrong::UI::MenuModalComposition::setSliderParameters
     // label: setSliderParameters
+    // location:
     // location: OpenSHC/UI/MenuModalComposition
     // type: function
     SHC_3BB0A8C1_0x004AA480 = 0x004AA480,
+    // label: _HoldStrong::UI::MenuModalComposition::setSliderParameters2
     // label: setSliderParameters2
+    // location:
     // location: OpenSHC/UI/MenuModalComposition
     // type: function
     SHC_3BB0A8C1_0x004AA540 = 0x004AA540,
@@ -29089,7 +31269,9 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004AA800 = 0x004AA800,
-    // label: setModalSliderParameters
+    // label: _HoldStrong::UI::MenuModalComposition::meth_0x4aa930
+    // label: setupModalSlider
+    // location:
     // location: OpenSHC/UI/MenuModalComposition
     // type: function
     SHC_3BB0A8C1_0x004AA930 = 0x004AA930,
@@ -29109,7 +31291,9 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004AAA80 = 0x004AAA80,
-    // label: MenuModalRenderFunction_DebugDataZoneDataUnk
+    // label: MenuModalRenderFunction_DebugDataZoneData
+    // label: _HoldStrong::UI::MenuModalRenderFunction_DebugDataZoneDataUnk
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004AAAA0 = 0x004AAAA0,
@@ -29153,7 +31337,9 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004AB4E0 = 0x004AB4E0,
-    // label: MenuModalRenderFunction_UnusedSiegeAttackingForceUnk
+    // label: MenuModalRenderFunction_UnusedSiegeAttackingForce
+    // label: _HoldStrong::UI::MenuModalRenderFunction_UnusedSiegeAttackingForceUnk
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004AB510 = 0x004AB510,
@@ -29269,6 +31455,10 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004ABEB0 = 0x004ABEB0,
+    // type: function
+    SHC_3BB0A8C1_0x004ABF01 = 0x004ABF01,
+    // type: function
+    SHC_3BB0A8C1_0x004ABFB0 = 0x004ABFB0,
     // type: /undefined *32
     SHC_3BB0A8C1_0x004AC008 = 0x004AC008,
     // type: /undefined *32
@@ -29441,7 +31631,7 @@ enum {
     // location: OpenSHC/Game/Skirmish
     // type: function
     SHC_3BB0A8C1_0x004AC570 = 0x004AC570,
-    // label: buildEnemyPlayerList
+    // label: collectEnemyPlayerIDs
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004AC650 = 0x004AC650,
@@ -29555,7 +31745,7 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004AE720 = 0x004AE720,
-    // label: clearHoveredAI
+    // label: clearLobbyHoveredAI
     // location: OpenSHC/Synchrony
     // type: function
     SHC_3BB0A8C1_0x004AE7C0 = 0x004AE7C0,
@@ -29567,7 +31757,7 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004AE950 = 0x004AE950,
-    // label: syncPlayerGroupArrays
+    // label: snapshotPlayerGroups
     // location: OpenSHC/Synchrony
     // type: function
     SHC_3BB0A8C1_0x004AEA10 = 0x004AEA10,
@@ -29595,11 +31785,15 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004AEF70 = 0x004AEF70,
-    // label: MenuModalRenderFunction_DebugDataAivStateUnk
+    // label: MenuModalRenderFunction_DebugDataAivState
+    // label: _HoldStrong::UI::MenuModalRenderFunction_DebugDataAivStateUnk
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004AF4C0 = 0x004AF4C0,
     // label: Constructor_DisplayElement
+    // label: _HoldStrong::UI::DisplayElement::Constructor_DisplayElement
+    // location:
     // location: OpenSHC/UI/DisplayElement
     // type: function
     SHC_3BB0A8C1_0x004AF5E0 = 0x004AF5E0,
@@ -29611,11 +31805,15 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004AF650 = 0x004AF650,
-    // label: ActivateGameSpeedAndResourceLackDisplayElementUnk
+    // label: _HoldStrong::Global::ActivateGameSpeedAndResourceLackDisplayElementUnk
+    // label: activateDisplayElementForDuration
+    // location:
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004AF680 = 0x004AF680,
-    // label: TogglePlayerPingDisplayElementUnk
+    // label: _HoldStrong::UI::Rendering::TogglePlayerPingDisplayElementUnk
+    // label: togglePlayerPingDisplayElement
+    // location:
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004AF6B0 = 0x004AF6B0,
@@ -29623,11 +31821,15 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004AF6E0 = 0x004AF6E0,
-    // label: RenderDisplayElementsUnk
+    // label: _HoldStrong::UI::Rendering::RenderDisplayElementsUnk
+    // label: renderAllActiveDisplayElements
+    // location:
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004AF700 = 0x004AF700,
-    // label: renderInGameChatDisplayElement
+    // label: RenderInGameChatDisplayElement
+    // label: _HoldStrong::Synchrony::GameSynchronyState::RenderInGameChatDisplayElementUnk
+    // location:
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x004AF800 = 0x004AF800,
@@ -29643,11 +31845,15 @@ enum {
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004AF860 = 0x004AF860,
-    // label: RenderUnknownDisplayElement7
+    // label: _HoldStrong::UI::Rendering::RenderUnknownDisplayElement7
+    // label: renderStopwatchDurationDisplayElement
+    // location:
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004AFA50 = 0x004AFA50,
-    // label: RenderSomeMissionNumberUnkDisplayElement9
+    // label: _HoldStrong::UI::Rendering::RenderSomeMissionNumberUnkDisplayElement9
+    // label: renderMissionNumberDisplayElement
+    // location:
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004AFA80 = 0x004AFA80,
@@ -29663,7 +31869,9 @@ enum {
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004AFDA0 = 0x004AFDA0,
-    // label: RenderSomeMultiplayerInfoUnkDisplayElement19
+    // label: _HoldStrong::UI::Rendering::RenderSomeMultiplayerInfoUnkDisplayElement19
+    // label: renderMultiplayerResyncOverlayDisplayElement
+    // location:
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004AFE10 = 0x004AFE10,
@@ -29675,7 +31883,9 @@ enum {
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004B07C0 = 0x004B07C0,
-    // label: RenderUnknownDisplayElement25
+    // label: _HoldStrong::UI::Rendering::RenderUnknownDisplayElement25
+    // label: renderSkirmishPointsPerPlayerDebugOverlay
+    // location:
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004B0820 = 0x004B0820,
@@ -29683,7 +31893,9 @@ enum {
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004B0AC0 = 0x004B0AC0,
+    // label: _HoldStrong::UI::MenuModalComposition::renderMenuModal
     // label: renderMenuModal
+    // location:
     // location: OpenSHC/UI/MenuModalComposition
     // type: function
     SHC_3BB0A8C1_0x004B0B30 = 0x004B0B30,
@@ -29709,7 +31921,9 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004B0F70 = 0x004B0F70,
-    // label: MenuItemActionHandler_UnusedWinCondition_DeselectUnk
+    // label: MenuItemActionHandler_UnusedWinCondition_CloseModalOnClickOutside
+    // label: _HoldStrong::UI::MenuItemActionHandler_UnusedWinCondition_DeselectUnk
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004B1000 = 0x004B1000,
@@ -29731,8 +31945,6 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004B1410 = 0x004B1410,
-    // type: function
-    SHC_3BB0A8C1_0x004B1471 = 0x004B1471,
     // label: MenuItemActionHandler_AlliesSendAndRequestGoods_Main
     // location: OpenSHC/UI
     // type: function
@@ -29759,7 +31971,9 @@ enum {
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004B1C30 = 0x004B1C30,
-    // label: RenderPlayerPingUnkDisplayElement22
+    // label: _HoldStrong::UI::Rendering::RenderPlayerPingUnkDisplayElement22
+    // label: renderPlayerPingDisplayElement
+    // location:
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004B1D30 = 0x004B1D30,
@@ -29773,19 +31987,29 @@ enum {
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004B1EB0 = 0x004B1EB0,
-    // label: RenderNoRushDisplayElementUnk
+    // label: _HoldStrong::UI::Rendering::RenderNoRushDisplayElementUnk
+    // label: renderNoRushDisplayElement
+    // location:
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004B20B0 = 0x004B20B0,
+    // label: renderNoRushText
+    // location:
+    // type: function
+    SHC_3BB0A8C1_0x004B20D7 = 0x004B20D7,
     // label: RenderTimeUntilDefeatDisplayElement
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004B2280 = 0x004B2280,
-    // label: RenderSomeMultiplayerInfoUnkDisplayElement28
+    // label: _HoldStrong::UI::Rendering::RenderSomeMultiplayerInfoUnkDisplayElement28
+    // label: renderLaggingPlayerEjectOverlayDisplayElement
+    // location:
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004B2530 = 0x004B2530,
+    // label: _HoldStrong::UI::MenuModalComposition::activateModalDialog2
     // label: activateModalDialog2
+    // location:
     // location: OpenSHC/UI/MenuModalComposition
     // type: function
     SHC_3BB0A8C1_0x004B2820 = 0x004B2820,
@@ -30664,66 +32888,90 @@ enum {
     // type: /pointer
     SHC_3BB0A8C1_0x004B50FC = 0x004B50FC,
     // label: Constructor_MinimapViewState
+    // label: _HoldStrong::UI::MinimapViewState::Constructor_MinimapViewState
+    // location:
     // location: OpenSHC/UI/MinimapViewState
     // type: function
     SHC_3BB0A8C1_0x004B5100 = 0x004B5100,
-    // label: scrollViewportToMinimapClick
+    // label: moveViewportToMinimapClick
     // location: OpenSHC/UI/MinimapViewState
     // type: function
     SHC_3BB0A8C1_0x004B5110 = 0x004B5110,
-    // label: convertMinimapClickToTileXY
+    // label: _HoldStrong::UI::MinimapViewState::meth_0x4b51a0
+    // label: convertMinimapClickToTile
+    // location:
     // location: OpenSHC/UI/MinimapViewState
     // type: function
     SHC_3BB0A8C1_0x004B51A0 = 0x004B51A0,
+    // label: _HoldStrong::UI::MinimapViewState::renderMinimapPreview
     // label: renderMinimapPreview
+    // location:
     // location: OpenSHC/UI/MinimapViewState
     // type: function
     SHC_3BB0A8C1_0x004B5280 = 0x004B5280,
-    // label: triggerMinimapRedraw
+    // label: _HoldStrong::UI::MinimapViewState::meth_0x4b5300
+    // label: toggleMinimapState
+    // location:
     // location: OpenSHC/UI/MinimapViewState
     // type: function
     SHC_3BB0A8C1_0x004B5300 = 0x004B5300,
-    // label: renderMinimapTileStripWithLuminescence
+    // label: renderMinimap
     // location: OpenSHC/UI/MinimapViewState
     // type: function
     SHC_3BB0A8C1_0x004B5330 = 0x004B5330,
     // type: function
     SHC_3BB0A8C1_0x004B5480 = 0x004B5480,
+    // label: _HoldStrong::UI::MinimapViewState::setTileColorsUnk
     // label: renderMinimapTileColors
+    // location:
     // location: OpenSHC/UI/MinimapViewState
     // type: function
     SHC_3BB0A8C1_0x004B58D0 = 0x004B58D0,
     // type: function
     SHC_3BB0A8C1_0x004B5A20 = 0x004B5A20,
-    // label: locatePlayerKeepPositionsOnMinimap
+    // label: _HoldStrong::UI::MinimapViewState::meth_0x4b5f70
+    // label: renderMinimapContent
+    // location:
     // location: OpenSHC/UI/MinimapViewState
     // type: function
     SHC_3BB0A8C1_0x004B5F70 = 0x004B5F70,
+    // label: _HoldStrong::UI::MinimapViewState::generateMinimapImage
     // label: generateMinimapImage
+    // location:
     // location: OpenSHC/UI/MinimapViewState
     // type: function
     SHC_3BB0A8C1_0x004B61F0 = 0x004B61F0,
-    // label: convertLoadedMinimapColors
+    // label: _HoldStrong::UI::MinimapViewState::createMapPreviewMiniMap_ConvertColorsUnk
+    // label: expandMapPreviewMinimapToRGB
+    // location:
     // location: OpenSHC/UI/MinimapViewState
     // type: function
     SHC_3BB0A8C1_0x004B6320 = 0x004B6320,
     // type: function
     SHC_3BB0A8C1_0x004B63C0 = 0x004B63C0,
+    // label: _HoldStrong::UI::MinimapViewState::setSpawnMoment
     // label: setSpawnMoment
+    // location:
     // location: OpenSHC/UI/MinimapViewState
     // type: function
     SHC_3BB0A8C1_0x004B6430 = 0x004B6430,
+    // label: _HoldStrong::UI::MinimapViewState::clearOldSpawnMoment
     // label: clearOldSpawnMoment
+    // location:
     // location: OpenSHC/UI/MinimapViewState
     // type: function
     SHC_3BB0A8C1_0x004B6480 = 0x004B6480,
     // type: function
     SHC_3BB0A8C1_0x004B64D0 = 0x004B64D0,
-    // label: MenuItemRenderFunction_InGameMenu_MapEventIconUnk
+    // label: MenuItemRenderFunction_InGameMenu_MapEventIcon
+    // label: _HoldStrong::UI::MenuItemRenderFunction_InGameMenu_MapEventIconUnk
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004B6500 = 0x004B6500,
-    // label: MenuItemActionHandler_InGameMenu_MapEventIconUnk
+    // label: MenuItemActionHandler_InGameMenu_MapEventIconJumpTo
+    // label: _HoldStrong::UI::MenuItemActionHandler_InGameMenu_MapEventIconUnk
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004B6530 = 0x004B6530,
@@ -30737,15 +32985,21 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004B65F0 = 0x004B65F0,
+    // label: _HoldStrong::UI::MinimapViewState::setMapPropertyDependingOnMapSize
     // label: setMapPropertyDependingOnMapSize
+    // location:
     // location: OpenSHC/UI/MinimapViewState
     // type: function
     SHC_3BB0A8C1_0x004B6640 = 0x004B6640,
+    // label: _HoldStrong::UI::MinimapViewState::setTileColorsDependingOnMapSize
     // label: setTileColorsDependingOnMapSize
+    // location:
     // location: OpenSHC/UI/MinimapViewState
     // type: function
     SHC_3BB0A8C1_0x004B6680 = 0x004B6680,
+    // label: _HoldStrong::UI::MinimapViewState::drawMinimap
     // label: drawMinimap
+    // location:
     // location: OpenSHC/UI/MinimapViewState
     // type: function
     SHC_3BB0A8C1_0x004B66C0 = 0x004B66C0,
@@ -30891,55 +33145,79 @@ enum {
     SHC_3BB0A8C1_0x004B72F9 = 0x004B72F9,
     // type: /byte
     SHC_3BB0A8C1_0x004B72FA = 0x004B72FA,
+    // label: _HoldStrong::UI::MinimapViewState::renderMinimapMain
     // label: renderMinimapMain
+    // location:
     // location: OpenSHC/UI/MinimapViewState
     // type: function
     SHC_3BB0A8C1_0x004B7300 = 0x004B7300,
+    // label: _HoldStrong::UI::MinimapViewState::renderMinimapLandscaping
     // label: renderMinimapLandscaping
+    // location:
     // location: OpenSHC/UI/MinimapViewState
     // type: function
     SHC_3BB0A8C1_0x004B7460 = 0x004B7460,
+    // label: _HoldStrong::UI::MinimapViewState::renderMinimapEditor
     // label: renderMinimapEditor
+    // location:
     // location: OpenSHC/UI/MinimapViewState
     // type: function
     SHC_3BB0A8C1_0x004B7530 = 0x004B7530,
+    // label: _HoldStrong::UI::MinimapViewState::renderMiniMapForSaving
     // label: renderMiniMapForSaving
+    // location:
     // location: OpenSHC/UI/MinimapViewState
     // type: function
     SHC_3BB0A8C1_0x004B7600 = 0x004B7600,
+    // label: _HoldStrong::Map::Units::TribesState::giveUnitSelectionMoveInstructionNoMatchedSpeed
     // label: giveUnitSelectionMoveInstructionNoMatchedSpeed
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x004B7700 = 0x004B7700,
+    // label: _HoldStrong::Game::ScenarioEvents::InGameEventUnionVersion::resetEvent
     // label: resetEvent
+    // location:
     // location: OpenSHC/Game/ScenarioEvents/InGameEventUnionVersion
     // type: function
     SHC_3BB0A8C1_0x004B7730 = 0x004B7730,
+    // label: _HoldStrong::Game::ScenarioEvents::InGameEventUnionVersion::initializeScenarioEvent
     // label: initializeScenarioEvent
+    // location:
     // location: OpenSHC/Game/ScenarioEvents/InGameEventUnionVersion
     // type: function
     SHC_3BB0A8C1_0x004B77A0 = 0x004B77A0,
-    // label: isValueInRangeOneToTwenty
+    // label: _HoldStrong::Map::MapPropertiesState::isParam1LessThan21
+    // label: isParam1LessThan21
+    // location:
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004B77E0 = 0x004B77E0,
+    // label: _HoldStrong::Map::MapPropertiesState::importTradingCosts
     // label: importTradingCosts
+    // location:
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004B7800 = 0x004B7800,
+    // label: _HoldStrong::Map::MapPropertiesState::mapHasCertainEvent
     // label: mapHasCertainEvent
+    // location:
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004B7890 = 0x004B7890,
+    // label: _HoldStrong::Map::MapPropertiesState::getEventIDForTimeUntilDefeatEventType
     // label: getEventIDForTimeUntilDefeatEventType
+    // location:
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004B78D0 = 0x004B78D0,
-    // label: activateScenarioTypeEvents
+    // label: activateMatchingScenarioEvents
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004B7930 = 0x004B7930,
-    // label: determineScenarioMissionTypeAndResetEvents
+    // label: _HoldStrong::Map::MapPropertiesState::meth_0x4b7980
+    // label: checkScenarioSiegeEvents
+    // location:
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004B7980 = 0x004B7980,
@@ -30949,23 +33227,31 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004B7AB0 = 0x004B7AB0,
+    // label: _HoldStrong::Rendering::Bink::AIMessageQueue::playVideoOverMap
     // label: playVideoOverMap
+    // location:
     // location: OpenSHC/Rendering/Bink/AIMessageQueue
     // type: function
     SHC_3BB0A8C1_0x004B7AF0 = 0x004B7AF0,
+    // label: _HoldStrong::Rendering::Bink::AIMessageQueue::playAiLordMessage
     // label: playAiLordMessage
+    // location:
     // location: OpenSHC/Rendering/Bink/AIMessageQueue
     // type: function
     SHC_3BB0A8C1_0x004B7C90 = 0x004B7C90,
-    // label: PlayMissionAestheticSFX
+    // label: playMissionAestheticSFX
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004B7F60 = 0x004B7F60,
+    // label: _HoldStrong::Map::MapPropertiesState::sumUnitPoints
     // label: sumUnitPoints
+    // location:
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004B7FA0 = 0x004B7FA0,
+    // label: _HoldStrong::Map::MapPropertiesState::sumUnitCounts
     // label: sumUnitCounts
+    // location:
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004B8000 = 0x004B8000,
@@ -30981,7 +33267,7 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004B8200 = 0x004B8200,
-    // label: RestoreScenarioGold
+    // label: restoreScenarioGold
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004B8210 = 0x004B8210,
@@ -31535,7 +33821,7 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004B9530 = 0x004B9530,
-    // label: CaptureCurrentTimeToUnknownTime01
+    // label: captureCurrentTimeMs
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004B9610 = 0x004B9610,
@@ -32985,7 +35271,9 @@ enum {
     SHC_3BB0A8C1_0x004BA558 = 0x004BA558,
     // type: /byte
     SHC_3BB0A8C1_0x004BA559 = 0x004BA559,
-    // label: MenuItemActionHandler_UnusedCreateMessageEvent_Unknown
+    // label: MenuItemActionHandler_UnusedCreateMessageEvent_SetActionData
+    // label: _HoldStrong::UI::MenuItemActionHandler_UnusedCreateMessageEvent_Unknown
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004BA560 = 0x004BA560,
@@ -32997,11 +35285,15 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004BA780 = 0x004BA780,
-    // label: sortEventsByDate
+    // label: _HoldStrong::Map::MapPropertiesState::meth_0x4ba7d0
+    // label: sortScenarioEvents
+    // location:
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004BA7D0 = 0x004BA7D0,
-    // label: removeEventAtIndex
+    // label: _HoldStrong::Map::MapPropertiesState::meth_0x4ba8b0
+    // label: removeScenarioEvent
+    // location:
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004BA8B0 = 0x004BA8B0,
@@ -33045,15 +35337,19 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004BAE80 = 0x004BAE80,
+    // label: _HoldStrong::Map::MapPropertiesState::commitBuildingAvailability
     // label: commitBuildingAvailability
+    // location:
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004BAEC0 = 0x004BAEC0,
+    // label: _HoldStrong::Map::MapPropertiesState::isMapperAvailable
     // label: isMapperAvailable
+    // location:
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004BB010 = 0x004BB010,
-    // label: isMercRecruitableForBuildingType
+    // label: isMercRecruitable
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004BB0B0 = 0x004BB0B0,
@@ -33267,19 +35563,27 @@ enum {
     SHC_3BB0A8C1_0x004BB8F8 = 0x004BB8F8,
     // type: /undefined *32
     SHC_3BB0A8C1_0x004BB8FC = 0x004BB8FC,
+    // label: _HoldStrong::Map::MapPropertiesState::resetEuroUnitRestrictions
     // label: resetEuroUnitRestrictions
+    // location:
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004BB900 = 0x004BB900,
-    // label: pruneInvalidEventTriggerLinks
+    // label: _HoldStrong::Map::MapPropertiesState::meth_0x4bb990
+    // label: cleanupType3ScenarioEvents
+    // location:
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004BB990 = 0x004BB990,
+    // label: _HoldStrong::Map::MapPropertiesState::openEventTriggerMenu
     // label: openEventTriggerMenu
+    // location:
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004BB9F0 = 0x004BB9F0,
+    // label: _HoldStrong::Map::MapPropertiesState::sumInvasionEventUnitCount
     // label: sumInvasionEventUnitCount
+    // location:
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004BBA20 = 0x004BBA20,
@@ -33851,11 +36155,13 @@ enum {
     SHC_3BB0A8C1_0x004BC100 = 0x004BC100,
     // type: /undefined *32
     SHC_3BB0A8C1_0x004BC104 = 0x004BC104,
-    // label: adjustEventMonthAndYearForSection1047
+    // label: _HoldStrong::Map::MapPropertiesState::tweakMonthAndYearBasedOnSection1047
+    // label: tweakMonthAndYearBasedOnSection1047
+    // location:
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004BC110 = 0x004BC110,
-    // label: spawnAttackWaveForPlayer
+    // label: spawnScenarioInvasionWave
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004BC1C0 = 0x004BC1C0,
@@ -34059,7 +36365,7 @@ enum {
     // location: OpenSHC/IO
     // type: function
     SHC_3BB0A8C1_0x004BC5B0 = 0x004BC5B0,
-    // label: initTutorialStepTransition
+    // label: startTutorialTimer
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004BC5F0 = 0x004BC5F0,
@@ -34067,29 +36373,31 @@ enum {
     // location: OpenSHC/Input
     // type: function
     SHC_3BB0A8C1_0x004BC620 = 0x004BC620,
-    // label: recordTutorialPlayerAction
+    // label: trackTutorialEvent
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004BC630 = 0x004BC630,
-    // label: SetTutorialBuildingActionState
+    // label: recordTutorialBuildingAction
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004BC690 = 0x004BC690,
-    // label: resetTutorialActionTrackers
+    // label: resetTutorialTrackingState
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004BC6C0 = 0x004BC6C0,
+    // label: initTutorialStateMachine
+    // location:
     // type: function
     SHC_3BB0A8C1_0x004BC6F0 = 0x004BC6F0,
-    // label: SetTutorialHintActiveWithTimestamp
+    // label: triggerTutorialHighlight
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004BC770 = 0x004BC770,
-    // label: renderAnimatedTutorialFloatOverlay
+    // label: renderTutorialPointer
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004BC790 = 0x004BC790,
-    // label: renderTutorialFloatForUIElement
+    // label: showTutorialHintPointer
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004BC910 = 0x004BC910,
@@ -34173,7 +36481,7 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004BD0F0 = 0x004BD0F0,
-    // label: updateTutorialStepAndProgress
+    // label: updateTutorialStateMachine
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004BD1B0 = 0x004BD1B0,
@@ -34255,15 +36563,21 @@ enum {
     SHC_3BB0A8C1_0x004BD978 = 0x004BD978,
     // type: /pointer
     SHC_3BB0A8C1_0x004BD97C = 0x004BD97C,
-    // label: createScenarioEventForNextMonth
+    // label: _HoldStrong::Map::MapPropertiesState::meth_0x4bd980
+    // label: createScenarioEvent
+    // location:
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004BD980 = 0x004BD980,
-    // label: createChainedMissionOutcomeEvents
+    // label: _HoldStrong::Map::MapPropertiesState::meth_0x4bda80
+    // label: createLinkedScenarioEvents
+    // location:
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004BDA80 = 0x004BDA80,
-    // label: computeMissionCompletionScore
+    // label: _HoldStrong::Map::MapPropertiesState::computeSomeKindOfMissionCompletionScore
+    // label: computeSomeKindOfMissionCompletionScore
+    // location:
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004BDE40 = 0x004BDE40,
@@ -34485,29 +36799,41 @@ enum {
     SHC_3BB0A8C1_0x004BE585 = 0x004BE585,
     // type: /byte
     SHC_3BB0A8C1_0x004BE586 = 0x004BE586,
+    // label: _HoldStrong::Map::MapPropertiesState::setStartingYearAndStartingResources
     // label: setStartingYearAndStartingResources
+    // location:
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004BE590 = 0x004BE590,
+    // label: _HoldStrong::Rendering::Bink::AIMessageQueue::playEventVideoBik
     // label: playEventVideoBik
+    // location:
     // location: OpenSHC/Rendering/Bink/AIMessageQueue
     // type: function
     SHC_3BB0A8C1_0x004BE7E0 = 0x004BE7E0,
+    // label: _HoldStrong::Rendering::Bink::AIMessageQueue::prepareSFXandVFX
     // label: prepareSFXandVFX
+    // location:
     // location: OpenSHC/Rendering/Bink/AIMessageQueue
     // type: function
     SHC_3BB0A8C1_0x004BE8A0 = 0x004BE8A0,
+    // label: _HoldStrong::Rendering::Bink::AIMessageQueue::playNextStoredAIMessage
     // label: playNextStoredAIMessage
+    // location:
     // location: OpenSHC/Rendering/Bink/AIMessageQueue
     // type: function
     SHC_3BB0A8C1_0x004BE960 = 0x004BE960,
     // type: function
     SHC_3BB0A8C1_0x004BEA20 = 0x004BEA20,
+    // label: _HoldStrong::Rendering::Bink::AIMessageQueue::playBikVideoFromPlayer
     // label: playBikVideoFromPlayer
+    // location:
     // location: OpenSHC/Rendering/Bink/AIMessageQueue
     // type: function
     SHC_3BB0A8C1_0x004BEA90 = 0x004BEA90,
-    // label: updateEventYearsAndCommitBuildingAvailability
+    // label: _HoldStrong::Map::MapPropertiesState::meth_0x4beb20
+    // label: setupStartingYear
+    // location:
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004BEB20 = 0x004BEB20,
@@ -34749,7 +37075,9 @@ enum {
     SHC_3BB0A8C1_0x004BF711 = 0x004BF711,
     // type: /byte
     SHC_3BB0A8C1_0x004BF712 = 0x004BF712,
-    // label: MenuItemActionHandler_UnusedChooseMessageBox_Unknown
+    // label: MenuItemActionHandler_UnusedChooseMessageBox_SelectItem
+    // label: _HoldStrong::UI::MenuItemActionHandler_UnusedChooseMessageBox_Unknown
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004BF720 = 0x004BF720,
@@ -36137,7 +38465,9 @@ enum {
     SHC_3BB0A8C1_0x004BFE12 = 0x004BFE12,
     // type: /byte
     SHC_3BB0A8C1_0x004BFE13 = 0x004BFE13,
-    // label: MenuItemActionHandler_UnusedCreateMessageEvent_SetTextUnk
+    // label: MenuItemActionHandler_UnusedCreateMessageEvent_ConfirmOrEditDate
+    // label: _HoldStrong::UI::MenuItemActionHandler_UnusedCreateMessageEvent_SetTextUnk
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004BFE20 = 0x004BFE20,
@@ -37235,7 +39565,9 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004C1070 = 0x004C1070,
-    // label: removeProcessedInvasionEvents
+    // label: _HoldStrong::Map::MapPropertiesState::meth_0x4c1320
+    // label: migrateScenarioEventData
+    // location:
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004C1320 = 0x004C1320,
@@ -37243,7 +39575,9 @@ enum {
     SHC_3BB0A8C1_0x004C1370 = 0x004C1370,
     // type: function
     SHC_3BB0A8C1_0x004C1390 = 0x004C1390,
-    // label: spawnInvasionEventAttackWave
+    // label: _HoldStrong::Map::MapPropertiesState::meth_0x4c13f0
+    // label: setupScenarioInvasionData
+    // location:
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004C13F0 = 0x004C13F0,
@@ -37300,17 +39634,27 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004C1770 = 0x004C1770,
     // type: function
-    SHC_3BB0A8C1_0x004C17EA = 0x004C17EA,
+    SHC_3BB0A8C1_0x004C17B6 = 0x004C17B6,
+    // type: function
+    SHC_3BB0A8C1_0x004C17D0 = 0x004C17D0,
+    // type: function
+    SHC_3BB0A8C1_0x004C17DB = 0x004C17DB,
+    // type: function
+    SHC_3BB0A8C1_0x004C1817 = 0x004C1817,
     // type: function
     SHC_3BB0A8C1_0x004C19E6 = 0x004C19E6,
     // label: applyActionMarriage
     // location:
+    // type: function
     SHC_3BB0A8C1_0x004C1A7B = 0x004C1A7B,
     // label: applyActionJester
     // location:
+    // type: function
     SHC_3BB0A8C1_0x004C1AF2 = 0x004C1AF2,
     // type: function
-    SHC_3BB0A8C1_0x004C1B34 = 0x004C1B34,
+    SHC_3BB0A8C1_0x004C1B93 = 0x004C1B93,
+    // type: function
+    SHC_3BB0A8C1_0x004C1C90 = 0x004C1C90,
     // type: /undefined *32
     SHC_3BB0A8C1_0x004C20DC = 0x004C20DC,
     // type: /undefined *32
@@ -37955,18 +40299,26 @@ enum {
     SHC_3BB0A8C1_0x004C226F = 0x004C226F,
     // type: /byte
     SHC_3BB0A8C1_0x004C2270 = 0x004C2270,
-    // label: updateMilitaryCampaignMissionState
+    // label: updateVictoryDefeatState
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004C2280 = 0x004C2280,
-    // label: loadMapSiegeHeaderSections
-    // location: OpenSHC/Map/MapPropertiesState
+    // label: loadMapScenarioSections
+    // location:
     // type: function
     SHC_3BB0A8C1_0x004C3110 = 0x004C3110,
+    // label: _HoldStrong::Map::MapPropertiesState::processSingleplayerEvents
     // label: processSingleplayerEvents
+    // location:
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004C31A0 = 0x004C31A0,
+    // type: function
+    SHC_3BB0A8C1_0x004C35B0 = 0x004C35B0,
+    // type: function
+    SHC_3BB0A8C1_0x004C3650 = 0x004C3650,
+    // type: function
+    SHC_3BB0A8C1_0x004C5FB0 = 0x004C5FB0,
     // type: /undefined *32[25]
     SHC_3BB0A8C1_0x004C6134 = 0x004C6134,
     // type: /byte[40]
@@ -37975,19 +40327,23 @@ enum {
     SHC_3BB0A8C1_0x004C61C0 = 0x004C61C0,
     // type: /undefined *32[24]
     SHC_3BB0A8C1_0x004C623C = 0x004C623C,
+    // label: _HoldStrong::Rendering::Bink::AIMessageQueue::playNextStoredBinkVideo
     // label: playNextStoredBinkVideo
+    // location:
     // location: OpenSHC/Rendering/Bink/AIMessageQueue
     // type: function
     SHC_3BB0A8C1_0x004C62A0 = 0x004C62A0,
+    // label: _HoldStrong::Map::MapPropertiesState::loadMap
     // label: loadMap
+    // location:
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004C62C0 = 0x004C62C0,
-    // label: loadMapSiegeHeaderForMissionIndex
+    // label: loadMissionMapSiegeInfo
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004C6820 = 0x004C6820,
-    // label: loadMissionMapAndSetLord
+    // label: loadMissionMapByNumber
     // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004C6880 = 0x004C6880,
@@ -38005,79 +40361,117 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004C6CD0 = 0x004C6CD0,
+    // label: _HoldStrong::AI::AICState::wipeAICMemory
     // label: wipeAICMemory
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004C6D30 = 0x004C6D30,
+    // label: _HoldStrong::AI::AICState::setAICParameters_01
     // label: setAICParameters_01
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004C6D60 = 0x004C6D60,
+    // label: _HoldStrong::AI::AICState::setAICParameters_02
     // label: setAICParameters_02
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004C7120 = 0x004C7120,
+    // label: _HoldStrong::AI::AICState::setAICParameters_03
     // label: setAICParameters_03
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004C7520 = 0x004C7520,
+    // label: _HoldStrong::AI::AICState::setAICParameters_04
     // label: setAICParameters_04
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004C7910 = 0x004C7910,
+    // label: _HoldStrong::AI::AICState::setAICParameters_05
     // label: setAICParameters_05
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004C7D20 = 0x004C7D20,
+    // label: _HoldStrong::AI::AICState::setAICParameters_06
     // label: setAICParameters_06
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004C8110 = 0x004C8110,
+    // label: _HoldStrong::AI::AICState::setAICParameters_07
     // label: setAICParameters_07
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004C8530 = 0x004C8530,
+    // label: _HoldStrong::AI::AICState::setAICParameters_08
     // label: setAICParameters_08
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004C8920 = 0x004C8920,
+    // label: _HoldStrong::AI::AICState::setAICParameters_09
     // label: setAICParameters_09
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004C8D20 = 0x004C8D20,
+    // label: _HoldStrong::AI::AICState::setAICParameters_10
     // label: setAICParameters_10
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004C9120 = 0x004C9120,
+    // label: _HoldStrong::AI::AICState::setAICParameters_11
     // label: setAICParameters_11
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004C94F0 = 0x004C94F0,
+    // label: _HoldStrong::AI::AICState::setAICParameters_12
     // label: setAICParameters_12
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004C9900 = 0x004C9900,
+    // label: _HoldStrong::AI::AICState::setAICParameters_13
     // label: setAICParameters_13
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004C9CF0 = 0x004C9CF0,
+    // label: _HoldStrong::AI::AICState::setAICParameters_14
     // label: setAICParameters_14
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CA0C0 = 0x004CA0C0,
+    // label: _HoldStrong::AI::AICState::setAICParameters_15
     // label: setAICParameters_15
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CA4D0 = 0x004CA4D0,
+    // label: _HoldStrong::AI::AICState::setAICParameters_16
     // label: setAICParameters_16
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CA8A0 = 0x004CA8A0,
+    // label: _HoldStrong::AI::AICState::clearPlayerDataInformationChunk
     // label: clearPlayerDataInformationChunk
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CAC70 = 0x004CAC70,
+    // label: _HoldStrong::AI::AICState::setTargetForTribeBasedOnTargetChoiceLogic
     // label: setTargetForTribeBasedOnTargetChoiceLogic
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CACB0 = 0x004CACB0,
@@ -38085,59 +40479,87 @@ enum {
     SHC_3BB0A8C1_0x004CAD10 = 0x004CAD10,
     // type: function
     SHC_3BB0A8C1_0x004CAE20 = 0x004CAE20,
+    // label: _HoldStrong::AI::AICState::updateTaxesAndRationsForAI
     // label: updateTaxesAndRationsForAI
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CAEA0 = 0x004CAEA0,
+    // label: _HoldStrong::AI::AICState::setFoodBuyPlan
     // label: setFoodBuyPlan
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CB060 = 0x004CB060,
+    // label: _HoldStrong::AI::AICState::getAIBuildInterval
     // label: getAIBuildInterval
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CB120 = 0x004CB120,
+    // label: _HoldStrong::AI::AICState::getResourceRebuildDelay
     // label: getResourceRebuildDelay
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CB150 = 0x004CB150,
+    // label: _HoldStrong::AI::AICState::aiFarmChoice
     // label: aiFarmChoice
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CB180 = 0x004CB180,
+    // label: _HoldStrong::AI::AICState::setNextFarmTypeToBuild
     // label: setNextFarmTypeToBuild
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CB1B0 = 0x004CB1B0,
+    // label: _HoldStrong::AI::AICState::aiShouldBuildFarm
     // label: aiShouldBuildFarm
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CB220 = 0x004CB220,
+    // label: _HoldStrong::AI::AICState::aiShouldBuildWoodcutter
     // label: aiShouldBuildWoodcutter
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CB290 = 0x004CB290,
+    // label: _HoldStrong::AI::AICState::aiShouldBuildQuarry
     // label: aiShouldBuildQuarry
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CB330 = 0x004CB330,
+    // label: _HoldStrong::AI::AICState::aiRequiresExtraOxtethers
     // label: aiRequiresExtraOxtethers
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CB3A0 = 0x004CB3A0,
+    // label: _HoldStrong::AI::AICState::aiShouldBuildIronMine
     // label: aiShouldBuildIronMine
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CB4D0 = 0x004CB4D0,
+    // label: _HoldStrong::AI::AICState::aiShouldBuildPitchrig
     // label: aiShouldBuildPitchrig
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CB540 = 0x004CB540,
+    // label: _HoldStrong::AI::AICState::shouldNotBeBuildingHovel
     // label: shouldNotBeBuildingHovel
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CB5B0 = 0x004CB5B0,
+    // label: _HoldStrong::AI::AICState::shouldWaitWithBuildingNegativeFearFactor
     // label: shouldWaitWithBuildingNegativeFearFactor
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CB610 = 0x004CB610,
@@ -38417,7 +40839,9 @@ enum {
     SHC_3BB0A8C1_0x004CB6FA = 0x004CB6FA,
     // type: /byte
     SHC_3BB0A8C1_0x004CB6FB = 0x004CB6FB,
+    // label: _HoldStrong::AI::AICState::shouldWaitWithBuildingAPositiveFearFactor
     // label: shouldWaitWithBuildingAPositiveFearFactor
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CB700 = 0x004CB700,
@@ -38763,43 +41187,63 @@ enum {
     SHC_3BB0A8C1_0x004CB803 = 0x004CB803,
     // type: /byte
     SHC_3BB0A8C1_0x004CB804 = 0x004CB804,
+    // label: _HoldStrong::AI::AICState::destroyHouse
     // label: destroyHouse
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CB810 = 0x004CB810,
-    // label: shouldDestroyWoodCutterUnk
+    // label: _HoldStrong::AI::AICState::shouldDestroyWoodCutterUnk
+    // label: aiMaybeDestroyWoodcutterHut
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CB890 = 0x004CB890,
+    // label: _HoldStrong::AI::AICState::destroyBuildingIfNoWorker
     // label: destroyBuildingIfNoWorker
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CB940 = 0x004CB940,
+    // label: _HoldStrong::AI::AICState::shouldNotBuildMarketArmoryGranaryBarracksMercenarypost
     // label: shouldNotBuildMarketArmoryGranaryBarracksMercenarypost
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CB9F0 = 0x004CB9F0,
+    // label: _HoldStrong::AI::AICState::planToBuyWhenLowOnResourceAndSnoozeBuildings
     // label: planToBuyWhenLowOnResourceAndSnoozeBuildings
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CBA50 = 0x004CBA50,
+    // label: _HoldStrong::AI::AICState::setupWorkshopProductionType
     // label: setupWorkshopProductionType
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CBE30 = 0x004CBE30,
+    // label: _HoldStrong::AI::AICState::sellGoods
     // label: sellGoods
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CBFA0 = 0x004CBFA0,
+    // label: _HoldStrong::AI::AICState::buyGoods
     // label: buyGoods
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CC000 = 0x004CC000,
+    // label: _HoldStrong::AI::AICState::randomlySelectAttackUnitTypeToRecruit
     // label: randomlySelectAttackUnitTypeToRecruit
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CC070 = 0x004CC070,
+    // label: _HoldStrong::AI::AICState::getUnitTypeForUnitBehaviourType
     // label: getUnitTypeForUnitBehaviourType
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CC250 = 0x004CC250,
@@ -38807,57 +41251,83 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004CC390 = 0x004CC390,
+    // label: _HoldStrong::AI::AICState::generateSiegeCreationInformation
     // label: generateSiegeCreationInformation
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CC420 = 0x004CC420,
+    // label: _HoldStrong::AI::AICState::recruitEngineers
     // label: recruitEngineers
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CC520 = 0x004CC520,
+    // label: _HoldStrong::AI::AICState::assignRequiredIdleEngineersToNewTribe
     // label: assignRequiredIdleEngineersToNewTribe
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CC5A0 = 0x004CC5A0,
+    // label: _HoldStrong::AI::AICState::addEngineersToSelection
     // label: addEngineersToSelection
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CC680 = 0x004CC680,
     // type: function
     SHC_3BB0A8C1_0x004CC6B0 = 0x004CC6B0,
+    // label: _HoldStrong::AI::AICState::addUnitsToTribe166
     // label: addUnitsToTribe166
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CC720 = 0x004CC720,
+    // label: _HoldStrong::AI::AICState::syncBehaviourType7UnitTribes
     // label: syncBehaviourType7UnitTribes
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CC7B0 = 0x004CC7B0,
-    // label: addUnitToTribeType10_moatdiggersUnk
+    // label: _HoldStrong::AI::AICState::addUnitToTribeType10_moatdiggersUnk
+    // label: aiAddUnitToMoatDiggerTribe
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CC840 = 0x004CC840,
+    // label: _HoldStrong::AI::AICState::unitIDIsRangedOrArmored
     // label: unitIDIsRangedOrArmored
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CC8D0 = 0x004CC8D0,
+    // label: _HoldStrong::AI::AICState::createTribeForUnitType
     // label: createTribeForUnitType
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CC910 = 0x004CC910,
+    // label: _HoldStrong::AI::AICState::smallestTribeOfUnitType
     // label: smallestTribeOfUnitType
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CC990 = 0x004CC990,
+    // label: _HoldStrong::Map::Units::TribesState::getSmallestPatrolTribe
     // label: getSmallestPatrolTribe
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x004CCAF0 = 0x004CCAF0,
+    // label: _HoldStrong::AI::AICState::getDefensiveTribeForUnit
     // label: getDefensiveTribeForUnit
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CCBE0 = 0x004CCBE0,
+    // label: _HoldStrong::AI::AICState::addUnitToSmallestBehaviourTypeTribe
     // label: addUnitToSmallestBehaviourTypeTribe
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CCD20 = 0x004CCD20,
@@ -39235,111 +41705,163 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004CD070 = 0x004CD070,
+    // label: _HoldStrong::AI::AICState::sendUnitsToKeep
     // label: sendUnitsToKeep
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CD0C0 = 0x004CD0C0,
+    // label: _HoldStrong::AI::AICState::sendUnitsToCampfire
     // label: sendUnitsToCampfire
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CD110 = 0x004CD110,
+    // label: _HoldStrong::AI::AICState::digNearestMoat
     // label: digNearestMoat
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CD160 = 0x004CD160,
+    // label: _HoldStrong::AI::AICState::canNavigateUnitsFromTileToTargetTile
     // label: canNavigateUnitsFromTileToTargetTile
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CD250 = 0x004CD250,
+    // label: _HoldStrong::AI::AICState::recruitHarrassingSiegeEngines
     // label: recruitHarrassingSiegeEngines
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CD2A0 = 0x004CD2A0,
+    // label: _HoldStrong::AI::AICState::recruitSortieRangedUnits
     // label: recruitSortieRangedUnits
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CD560 = 0x004CD560,
+    // label: _HoldStrong::AI::AICState::recruitSortieMeleeUnits
     // label: recruitSortieMeleeUnits
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CD690 = 0x004CD690,
+    // label: _HoldStrong::AI::AICState::instructTribe166ToMove
     // label: instructTribe166ToMove
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CD7B0 = 0x004CD7B0,
+    // label: _HoldStrong::AI::AICState::giveMoveCommandToSortieUnits
     // label: giveMoveCommandToSortieUnits
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CD8F0 = 0x004CD8F0,
+    // label: _HoldStrong::AI::AICState::addBuildingToTargetableBuildings
     // label: addBuildingToTargetableBuildings
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CDA50 = 0x004CDA50,
+    // label: _HoldStrong::AI::AICState::selectBuildingFromAListOfBuildingTypes
     // label: selectBuildingFromAListOfBuildingTypes
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CDAB0 = 0x004CDAB0,
+    // label: _HoldStrong::AI::AICState::chooseRandomBuildingIDFromPlayersArrayOfBuildings
     // label: chooseRandomBuildingIDFromPlayersArrayOfBuildings
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CDB20 = 0x004CDB20,
+    // label: _HoldStrong::AI::AICState::getTargetableBuildingForPlayerID
     // label: getTargetableBuildingForPlayerID
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CDBC0 = 0x004CDBC0,
+    // label: _HoldStrong::AI::AICState::selectRandomBuildingIDFromListOfBuildingTypes
     // label: selectRandomBuildingIDFromListOfBuildingTypes
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CDCA0 = 0x004CDCA0,
+    // label: _HoldStrong::AI::AICState::shouldWeAttackOrWaitForTeammates
     // label: shouldWeAttackOrWaitForTeammates
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CDCF0 = 0x004CDCF0,
+    // label: _HoldStrong::AI::AICState::setCurrentAttackStrength
     // label: setCurrentAttackStrength
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CDE60 = 0x004CDE60,
+    // label: _HoldStrong::AI::AICState::setCurrentAttackRaidParameter
     // label: setCurrentAttackRaidParameter
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CDF10 = 0x004CDF10,
+    // label: _HoldStrong::AI::AICState::setAttackPrimeInfo
     // label: setAttackPrimeInfo
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CDFD0 = 0x004CDFD0,
-    // label: recomputeDistancesToAttackedKeepRelated
+    // label: _HoldStrong::AI::AICState::recomputeDistancesToAttackedKeepRelated
+    // label: recomputeAIPathCostToAttackedKeep
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CE040 = 0x004CE040,
+    // label: _HoldStrong::AI::AICState::recomputeAttackAIZone
     // label: recomputeAttackAIZone
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CE110 = 0x004CE110,
+    // label: _HoldStrong::AI::AICState::recomputeAIZonerLayer
     // label: recomputeAIZonerLayer
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CE1A0 = 0x004CE1A0,
-    // label: computeAndStoreShortestDistanceToKeepUnk
+    // label: _HoldStrong::AI::AICState::computeAndStoreShortestDistanceToKeepUnk
+    // label: computeEnemyKeepApproachTile
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CE200 = 0x004CE200,
     // type: function
     SHC_3BB0A8C1_0x004CE270 = 0x004CE270,
+    // label: _HoldStrong::AI::AICState::setNextMoveLocationForUnits
     // label: setNextMoveLocationForUnits
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CE3B0 = 0x004CE3B0,
+    // label: _HoldStrong::AI::AICState::removeOrganismsAndSetMoveDestinationPairs
     // label: removeOrganismsAndSetMoveDestinationPairs
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CE430 = 0x004CE430,
+    // label: _HoldStrong::AI::AICState::aiRetreatUnits
     // label: aiRetreatUnits
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CE4D0 = 0x004CE4D0,
     // type: function
     SHC_3BB0A8C1_0x004CE530 = 0x004CE530,
+    // label: _HoldStrong::AI::AICState::sendUnitsToPlayerIDsKeepIfPossible
     // label: sendUnitsToPlayerIDsKeepIfPossible
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CE5F0 = 0x004CE5F0,
@@ -39347,11 +41869,15 @@ enum {
     SHC_3BB0A8C1_0x004CE660 = 0x004CE660,
     // type: function
     SHC_3BB0A8C1_0x004CE6B0 = 0x004CE6B0,
-    // label: setRallyRelatedFlagOnAllAIAttackTribes
+    // label: _HoldStrong::AI::AICState::setRallyRelatedFlagOnAllAIAttackTribes
+    // label: clearRallyFlagOnAllAIAttackTribes
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CE790 = 0x004CE790,
+    // label: _HoldStrong::AI::AICState::moveAttackTribesToLocations
     // label: moveAttackTribesToLocations
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CE830 = 0x004CE830,
@@ -39359,197 +41885,289 @@ enum {
     SHC_3BB0A8C1_0x004CE860 = 0x004CE860,
     // type: function
     SHC_3BB0A8C1_0x004CE890 = 0x004CE890,
+    // label: _HoldStrong::AI::AICState::findAttackTribePositionAndPathToDefenses
     // label: findAttackTribePositionAndPathToDefenses
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CE930 = 0x004CE930,
+    // label: _HoldStrong::AI::AICState::makeUnitsGoDefensiveAndBackToSomeLocation
     // label: makeUnitsGoDefensiveAndBackToSomeLocation
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CEA50 = 0x004CEA50,
+    // label: _HoldStrong::AI::AICState::giveMoveCommandToAttackTribes
     // label: giveMoveCommandToAttackTribes
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CEB50 = 0x004CEB50,
     // type: function
     SHC_3BB0A8C1_0x004CEB80 = 0x004CEB80,
+    // label: _HoldStrong::AI::AICState::aiChoiceAttForceRallyPercentage
     // label: aiChoiceAttForceRallyPercentage
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CEC80 = 0x004CEC80,
+    // label: _HoldStrong::AI::AICState::percentageNonMovingTribesGTEAICSpecified
     // label: percentageNonMovingTribesGTEAICSpecified
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CED90 = 0x004CED90,
+    // label: _HoldStrong::AI::AICState::processAttForceRallyPercentage
     // label: processAttForceRallyPercentage
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CEEA0 = 0x004CEEA0,
+    // label: _HoldStrong::AI::AICState::useAITribe_0x12_toPlaceSiegeTentsAndAssignEngineers
     // label: useAITribe_0x12_toPlaceSiegeTentsAndAssignEngineers
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CEFD0 = 0x004CEFD0,
     // type: function
     SHC_3BB0A8C1_0x004CF060 = 0x004CF060,
+    // label: _HoldStrong::AI::AICState::useAITribe_0xe_toPlaceTunnels
     // label: useAITribe_0xe_toPlaceTunnels
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CF180 = 0x004CF180,
-    // label: aiAttackWave_tribe13Unk
+    // label: _HoldStrong::AI::AICState::aiAttackWave_tribe13Unk
+    // label: aiCommandTribe13DefensiveWave
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CF270 = 0x004CF270,
-    // label: aiAttackWave_tribe12Unk
+    // label: _HoldStrong::AI::AICState::aiAttackWave_tribe12Unk
+    // label: aiCommandTribe12AggressiveApproach
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CF2E0 = 0x004CF2E0,
+    // label: _HoldStrong::AI::AICState::setTribe0xCtoAggressiveAndAttack
     // label: setTribe0xCtoAggressiveAndAttack
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CF400 = 0x004CF400,
-    // label: aiAttackWave_tribe11Unk
+    // label: _HoldStrong::AI::AICState::aiAttackWave_tribe11Unk
+    // label: aiCommandTribe11StandGroundToGate
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CF470 = 0x004CF470,
+    // label: _HoldStrong::AI::AICState::sendAITribe_0xf_toAttackPatrol
     // label: sendAITribe_0xf_toAttackPatrol
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CF4F0 = 0x004CF4F0,
+    // label: _HoldStrong::AI::AICState::setTribe0x11ToAggressiveAndAttackIfConditionMet
     // label: setTribe0x11ToAggressiveAndAttackIfConditionMet
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CF560 = 0x004CF560,
+    // label: _HoldStrong::AI::AICState::setEightTribe0xc0TribesToAggressiveAndAttack
     // label: setEightTribe0xc0TribesToAggressiveAndAttack
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CF5E0 = 0x004CF5E0,
-    // label: aiAttackWallsSmthUnk
+    // label: _HoldStrong::AI::AICState::aiAttackWallsSmthUnk
+    // label: aiCommandWallAssaultTribes
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CF660 = 0x004CF660,
+    // label: _HoldStrong::AI::AICState::setTribe0xbToAggressiveAndAttack
     // label: setTribe0xbToAggressiveAndAttack
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CF6E0 = 0x004CF6E0,
+    // label: _HoldStrong::AI::AICState::sendTribeToAttack
     // label: sendTribeToAttack
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CF750 = 0x004CF750,
+    // label: _HoldStrong::AI::AICState::commandFourTribesToMove
     // label: commandFourTribesToMove
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CF7C0 = 0x004CF7C0,
     // type: function
     SHC_3BB0A8C1_0x004CF7F0 = 0x004CF7F0,
+    // label: _HoldStrong::AI::AICState::clearOutdatedAITribes
     // label: clearOutdatedAITribes
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CF870 = 0x004CF870,
+    // label: _HoldStrong::AI::AICState::giveSomeRaidCommand
     // label: giveSomeRaidCommand
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CF920 = 0x004CF920,
+    // label: _HoldStrong::AI::AICState::addRallyPointForTribe
     // label: addRallyPointForTribe
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CFA10 = 0x004CFA10,
+    // label: _HoldStrong::AI::AICState::disbandAIPlayerSiegeUnits
     // label: disbandAIPlayerSiegeUnits
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CFB20 = 0x004CFB20,
+    // label: _HoldStrong::AI::AICState::countSiegeEngineUnits
     // label: countSiegeEngineUnits
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CFBC0 = 0x004CFBC0,
-    // label: aiAttackWaveSiegeUnitsUnk
+    // label: _HoldStrong::AI::AICState::aiAttackWaveSiegeUnitsUnk
+    // label: aiCommandSiegeEngineTribes
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CFCD0 = 0x004CFCD0,
+    // label: _HoldStrong::AI::AICState::yieldCowThrow
     // label: yieldCowThrow
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CFF60 = 0x004CFF60,
+    // label: _HoldStrong::AI::AICState::hasNoTroopsOrAllAreDiggers
     // label: hasNoTroopsOrAllAreDiggers
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CFFD0 = 0x004CFFD0,
+    // label: _HoldStrong::AI::AICState::hasNotEnoughSupplies
     // label: hasNotEnoughSupplies
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D00A0 = 0x004D00A0,
-    // label: setAttackWillingnessUnk
+    // label: _HoldStrong::AI::AICState::setAttackWillingnessUnk
+    // label: aiRollAttackWillingness
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0110 = 0x004D0110,
+    // label: _HoldStrong::AI::AICState::teamIsWeakRelativeToEnemy
     // label: teamIsWeakRelativeToEnemy
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0190 = 0x004D0190,
+    // label: _HoldStrong::AI::AICState::destroyAnyBuildingInCategory
     // label: destroyAnyBuildingInCategory
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0280 = 0x004D0280,
+    // label: _HoldStrong::AI::AICState::isResourceLargerOrEqualThanMinimumGoodsRequiredAfterTrade
     // label: isResourceLargerOrEqualThanMinimumGoodsRequiredAfterTrade
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0520 = 0x004D0520,
+    // label: _HoldStrong::AI::AICState::aiOfTypeInCurrentGame
     // label: aiOfTypeInCurrentGame
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0580 = 0x004D0580,
+    // label: _HoldStrong::AI::AICState::shareGoldAmongTeamMembers
     // label: shareGoldAmongTeamMembers
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D05D0 = 0x004D05D0,
     // type: function
     SHC_3BB0A8C1_0x004D0720 = 0x004D0720,
+    // label: _HoldStrong::AI::AICState::playTauntToAttackedPlayerBikFromPlayer
     // label: playTauntToAttackedPlayerBikFromPlayer
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D07C0 = 0x004D07C0,
+    // label: _HoldStrong::AI::AICState::playAnger1BikFromPlayer
     // label: playAnger1BikFromPlayer
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0830 = 0x004D0830,
+    // label: _HoldStrong::AI::AICState::playPlayerKilledBiksFromKilledAndKillerPlayer
     // label: playPlayerKilledBiksFromKilledAndKillerPlayer
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D08B0 = 0x004D08B0,
     // type: function
     SHC_3BB0A8C1_0x004D0910 = 0x004D0910,
+    // label: _HoldStrong::AI::AICState::playGoodsRequestBikFromPlayerToPlayer
     // label: playGoodsRequestBikFromPlayerToPlayer
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0A20 = 0x004D0A20,
+    // label: _HoldStrong::AI::AICState::playThanksBikFromPlayerToPlayer
     // label: playThanksBikFromPlayerToPlayer
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0A80 = 0x004D0A80,
+    // label: _HoldStrong::AI::AICState::playNervous2BikFromPlayer
     // label: playNervous2BikFromPlayer
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0B10 = 0x004D0B10,
+    // label: _HoldStrong::AI::AICState::playGoodsNotSentBikFromPlayer
     // label: playGoodsNotSentBikFromPlayer
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0B70 = 0x004D0B70,
+    // label: _HoldStrong::AI::AICState::playGoodsSentBikFromPlayerToPlayer
     // label: playGoodsSentBikFromPlayerToPlayer
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0BB0 = 0x004D0BB0,
+    // label: _HoldStrong::AI::AICState::playAnger2BikFromPlayerToPlayer
     // label: playAnger2BikFromPlayerToPlayer
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0C00 = 0x004D0C00,
+    // label: _HoldStrong::AI::AICState::playVictory2BikFromPlayerToPlayer
     // label: playVictory2BikFromPlayerToPlayer
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0C70 = 0x004D0C70,
+    // label: _HoldStrong::AI::AICState::playNervous1BikFromPlayer
     // label: playNervous1BikFromPlayer
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0CF0 = 0x004D0CF0,
+    // label: _HoldStrong::AI::AICState::playRequestHelpBikFromPlayer
     // label: playRequestHelpBikFromPlayer
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0D40 = 0x004D0D40,
@@ -39577,37 +42195,53 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004D0F40 = 0x004D0F40,
+    // label: _HoldStrong::AI::AICState::playJokeBikFromAIToHuman
     // label: playJokeBikFromAIToHuman
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0F90 = 0x004D0F90,
+    // label: _HoldStrong::AI::AICState::playFriendlyVictoryBikFromPlayer
     // label: playFriendlyVictoryBikFromPlayer
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0FC0 = 0x004D0FC0,
+    // label: _HoldStrong::AI::AICState::playTeamWinningBikFromPlayer
     // label: playTeamWinningBikFromPlayer
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D1000 = 0x004D1000,
+    // label: _HoldStrong::AI::AICState::playNoHelpBikFromPlayer
     // label: playNoHelpBikFromPlayer
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D1050 = 0x004D1050,
+    // label: _HoldStrong::AI::AICState::setSomeTimeToNowIfInIngameMenu
     // label: setSomeTimeToNowIfInIngameMenu
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D1090 = 0x004D1090,
+    // label: _HoldStrong::AI::AICState::someChatMessageSelection
     // label: someChatMessageSelection
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D10B0 = 0x004D10B0,
     // type: function
     SHC_3BB0A8C1_0x004D11C0 = 0x004D11C0,
+    // label: _HoldStrong::AI::AICState::getCurrentDesiredAttackRaidUnitCount
     // label: getCurrentDesiredAttackRaidUnitCount
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D12A0 = 0x004D12A0,
+    // label: _HoldStrong::AI::AICState::renderDebugDataAiInfo
     // label: renderDebugDataAiInfo
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D1320 = 0x004D1320,
@@ -39617,27 +42251,37 @@ enum {
     SHC_3BB0A8C1_0x004D1700 = 0x004D1700,
     // type: function
     SHC_3BB0A8C1_0x004D1710 = 0x004D1710,
+    // label: _HoldStrong::AI::AICState::setInitialAIC
     // label: setInitialAIC
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D18B0 = 0x004D18B0,
-    // label: aiGiveCommandToOutpostTribesUnk
+    // label: _HoldStrong::AI::AICState::aiGiveCommandToOutpostTribesUnk
+    // label: aiRegisterTribeAndAssignTarget
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D1950 = 0x004D1950,
+    // label: _HoldStrong::AI::AICState::decideOnTribeAttackLocation
     // label: decideOnTribeAttackLocation
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D1A00 = 0x004D1A00,
-    // label: sellExcessGoods
-    // location: OpenSHC/AI/AICState
+    // label: aiSellSurplusGoods
+    // location:
     // type: function
     SHC_3BB0A8C1_0x004D1D60 = 0x004D1D60,
+    // label: _HoldStrong::AI::AICState::requestGoods
     // label: requestGoods
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D1F00 = 0x004D1F00,
+    // label: _HoldStrong::AI::AICState::aiCreateSiegeUnits
     // label: aiCreateSiegeUnits
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D2000 = 0x004D2000,
@@ -39645,155 +42289,225 @@ enum {
     SHC_3BB0A8C1_0x004D2080 = 0x004D2080,
     // type: function
     SHC_3BB0A8C1_0x004D20C0 = 0x004D20C0,
+    // label: _HoldStrong::AI::AICState::aiRecruitEngineerForOilDuty
     // label: aiRecruitEngineerForOilDuty
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D2500 = 0x004D2500,
+    // label: _HoldStrong::AI::AICState::assignUnitToATribe
     // label: assignUnitToATribe
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D2660 = 0x004D2660,
+    // label: _HoldStrong::AI::AICState::addUnitToSmallestPatrolTribe
     // label: addUnitToSmallestPatrolTribe
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D2730 = 0x004D2730,
-    // label: addUnitToDefensiveTroopsTribeUnk
+    // label: _HoldStrong::AI::AICState::addUnitToDefensiveTroopsTribeUnk
+    // label: aiAssignUnitToDefensiveTribe
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D2790 = 0x004D2790,
+    // label: _HoldStrong::AI::AICState::addUnitToItsTribe
     // label: addUnitToItsTribe
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D27E0 = 0x004D27E0,
+    // label: _HoldStrong::AI::AICState::ifHasTribe0SendUnitsToKeep
     // label: ifHasTribe0SendUnitsToKeep
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D2830 = 0x004D2830,
+    // label: _HoldStrong::AI::AICState::sendTribeAtOffset1ToCampfire
     // label: sendTribeAtOffset1ToCampfire
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D2870 = 0x004D2870,
+    // label: _HoldStrong::AI::AICState::aiGiveOuterPatrolCommand
     // label: aiGiveOuterPatrolCommand
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D28B0 = 0x004D28B0,
+    // label: _HoldStrong::AI::AICState::aiGiveRaidInstructions
     // label: aiGiveRaidInstructions
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D2A70 = 0x004D2A70,
+    // label: _HoldStrong::AI::AICState::sendTribeToAIVLocationSlot
     // label: sendTribeToAIVLocationSlot
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D2E00 = 0x004D2E00,
+    // label: _HoldStrong::AI::AICState::computeAttackPossibilities
     // label: computeAttackPossibilities
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D2EC0 = 0x004D2EC0,
+    // label: _HoldStrong::AI::AICState::moveAttackingUnitsToNextRallyPoint
     // label: moveAttackingUnitsToNextRallyPoint
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D2F80 = 0x004D2F80,
+    // label: _HoldStrong::AI::AICState::sendUnitsToAttackBreachedCastle
     // label: sendUnitsToAttackBreachedCastle
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D30E0 = 0x004D30E0,
+    // label: _HoldStrong::AI::AICState::updateAIStrengthState
     // label: updateAIStrengthState
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D3320 = 0x004D3320,
+    // label: _HoldStrong::AI::AICState::computeNervousness
     // label: computeNervousness
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D3780 = 0x004D3780,
+    // label: _HoldStrong::AI::AICState::determineAIPlayerHelp
     // label: determineAIPlayerHelp
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D3850 = 0x004D3850,
+    // label: _HoldStrong::AI::AICState::determineAIPlayerAttackRequestResponse
     // label: determineAIPlayerAttackRequestResponse
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D38C0 = 0x004D38C0,
     // label: Constructor_AICState
+    // label: _HoldStrong::AI::AICState::Constructor_AICState
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D3940 = 0x004D3940,
+    // label: _HoldStrong::AI::AICState::makeOutpostTribesAttack
     // label: makeOutpostTribesAttack
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D3960 = 0x004D3960,
-    // label: buyRequiredGoods
-    // location: OpenSHC/AI/AICState
+    // label: aiBuyNeededGoods
+    // location:
     // type: function
     SHC_3BB0A8C1_0x004D39B0 = 0x004D39B0,
     // type: function
     SHC_3BB0A8C1_0x004D39F0 = 0x004D39F0,
+    // label: _HoldStrong::AI::AICState::aiRecruitUnits
     // label: aiRecruitUnits
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D3AE0 = 0x004D3AE0,
-    // label: assignMoatDiggersUnk
+    // label: _HoldStrong::AI::AICState::assignMoatDiggersUnk
+    // label: aiAssignCombatUnitsToTribesOrMoat
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D3F20 = 0x004D3F20,
+    // label: _HoldStrong::AI::AICState::addEngineersToTribe
     // label: addEngineersToTribe
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D4040 = 0x004D4040,
-    // label: redirectTunnelersUnk
+    // label: _HoldStrong::AI::AICState::redirectTunnelersUnk
+    // label: aiReassignTunnelersToTribe
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D40B0 = 0x004D40B0,
+    // label: _HoldStrong::AI::AICState::sendRangedUnitTribesToAIVSlotsOrKeepIfNervous
     // label: sendRangedUnitTribesToAIVSlotsOrKeepIfNervous
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D4130 = 0x004D4130,
+    // label: _HoldStrong::AI::AICState::sendCertainUnitTribesToAIVSlotsOrKeepIfNervousAndNotEnclosed
     // label: sendCertainUnitTribesToAIVSlotsOrKeepIfNervousAndNotEnclosed
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D4220 = 0x004D4220,
+    // label: _HoldStrong::AI::AICState::sendWallPatrolUnitTribesToAIVLocations
     // label: sendWallPatrolUnitTribesToAIVLocations
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D4340 = 0x004D4340,
     // type: function
     SHC_3BB0A8C1_0x004D4400 = 0x004D4400,
+    // label: _HoldStrong::AI::AICState::sendOilMenForOilPickupOrToAIVLocations
     // label: sendOilMenForOilPickupOrToAIVLocations
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D44E0 = 0x004D44E0,
     // type: function
     SHC_3BB0A8C1_0x004D4530 = 0x004D4530,
+    // label: _HoldStrong::AI::AICState::abortAttackAndGoIdle
     // label: abortAttackAndGoIdle
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D45E0 = 0x004D45E0,
+    // label: _HoldStrong::AI::AICState::recreateEngineersTribe
     // label: recreateEngineersTribe
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D4630 = 0x004D4630,
+    // label: _HoldStrong::AI::AICState::selectAttackTarget
     // label: selectAttackTarget
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D4680 = 0x004D4680,
     // type: function
     SHC_3BB0A8C1_0x004D4870 = 0x004D4870,
+    // label: _HoldStrong::AI::AICState::aiBuyAndSellGoods
     // label: aiBuyAndSellGoods
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D48F0 = 0x004D48F0,
+    // label: _HoldStrong::AI::AICState::updateTribeLocations
     // label: updateTribeLocations
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D4940 = 0x004D4940,
+    // label: _HoldStrong::AI::AICState::updateAIPlayerState
     // label: updateAIPlayerState
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D49E0 = 0x004D49E0,
+    // label: _HoldStrong::IO::SettingsFileState::readSkMasters2
     // label: readSkMasters2
+    // location:
     // location: OpenSHC/IO/SettingsFileState
     // type: function
     SHC_3BB0A8C1_0x004D5010 = 0x004D5010,
+    // label: _HoldStrong::IO::SettingsFileState::writeSkMasters2
     // label: writeSkMasters2
+    // location:
     // location: OpenSHC/IO/SettingsFileState
     // type: function
     SHC_3BB0A8C1_0x004D5180 = 0x004D5180,
@@ -39807,7 +42521,9 @@ enum {
     SHC_3BB0A8C1_0x004D5370 = 0x004D5370,
     // type: function
     SHC_3BB0A8C1_0x004D53A0 = 0x004D53A0,
+    // label: _HoldStrong::AI::AICState::updateAIBehaviour
     // label: updateAIBehaviour
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D53E0 = 0x004D53E0,
@@ -40081,23 +42797,31 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004D6D20 = 0x004D6D20,
-    // label: MenuView_CampaignUnk_DoEveryFrame
+    // label: MenuView_Campaign27_DoEveryFrame
+    // label: _HoldStrong::UI::MenuView_CampaignUnk_DoEveryFrame
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004D6EF0 = 0x004D6EF0,
-    // label: MenuItemActionHandler_Unknown27CampaignUnk_Main
+    // label: MenuItemActionHandler_Campaign27_Continue
+    // label: _HoldStrong::UI::MenuItemActionHandler_Unknown27CampaignUnk_Main
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004D6F20 = 0x004D6F20,
-    // label: ParseCampaignMapHotspotBitmap
+    // label: loadCampaignMapHotspots
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004D6F60 = 0x004D6F60,
-    // label: ResetEventStatusUnk
+    // label: _HoldStrong::Global::ResetEventStatusUnk
+    // label: resetAndLoadScenarioEventConditions
+    // location:
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004D7200 = 0x004D7200,
-    // label: RenderMissionObjectivesUnk
+    // label: _HoldStrong::UI::Rendering::RenderMissionObjectivesUnk
+    // label: renderScenarioDescriptionContent
+    // location:
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004D76A0 = 0x004D76A0,
@@ -40342,7 +43066,11 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004D8250 = 0x004D8250,
     // type: function
-    SHC_3BB0A8C1_0x004D839E = 0x004D839E,
+    SHC_3BB0A8C1_0x004D82F0 = 0x004D82F0,
+    // type: function
+    SHC_3BB0A8C1_0x004D83A1 = 0x004D83A1,
+    // type: function
+    SHC_3BB0A8C1_0x004D83A4 = 0x004D83A4,
     // label: MenuItemActionHandler_ScenarioDescription_Main
     // location: OpenSHC/UI
     // type: function
@@ -40413,7 +43141,7 @@ enum {
     SHC_3BB0A8C1_0x004D8A14 = 0x004D8A14,
     // type: /pointer
     SHC_3BB0A8C1_0x004D8A18 = 0x004D8A18,
-    // label: ReadMapHeaderFromFile
+    // label: loadMapFileHeader
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004D8A20 = 0x004D8A20,
@@ -40455,7 +43183,7 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004D9230 = 0x004D9230,
-    // label: SetActiveCreditsSequenceIndex
+    // label: setCampaignMapField
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004D9270 = 0x004D9270,
@@ -40585,11 +43313,11 @@ enum {
     SHC_3BB0A8C1_0x004DA17E = 0x004DA17E,
     // type: /byte
     SHC_3BB0A8C1_0x004DA17F = 0x004DA17F,
-    // label: StopCreditsPlaybackAndSounds
+    // label: stopCreditsPlayback
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DA180 = 0x004DA180,
-    // label: EndCreditsSegmentAndAdvanceToNext
+    // label: advanceCreditsSequence
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DA200 = 0x004DA200,
@@ -40605,7 +43333,9 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004DA360 = 0x004DA360,
-    // label: RenderGfxHelperUnk
+    // label: _HoldStrong::UI::Rendering::RenderGfxHelperUnk
+    // label: renderMenuGfxAtPosition
+    // location:
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004DA570 = 0x004DA570,
@@ -40625,67 +43355,67 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004DA750 = 0x004DA750,
-    // label: AppendCreditsSoundEntry
+    // label: addCreditsSoundEntry
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DA7A0 = 0x004DA7A0,
-    // label: AppendCreditsCommand
+    // label: appendCreditsCommand
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DA7E0 = 0x004DA7E0,
-    // label: AppendCreditsListTerminator
+    // label: appendCreditsCmd0x20
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DA810 = 0x004DA810,
-    // label: AppendCreditsPauseCommand
+    // label: appendCreditsCmd0x1c
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DA840 = 0x004DA840,
-    // label: AppendCreditsSegmentEndCommand
+    // label: appendCreditsCmd0x1f
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DA870 = 0x004DA870,
-    // label: AppendCreditsClearImageCommand
+    // label: appendCreditsCmd0x28
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DA8A0 = 0x004DA8A0,
-    // label: AppendCreditsImageTransitionCommand
+    // label: addCreditsGfxElement
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DA8D0 = 0x004DA8D0,
-    // label: AppendCreditsImageEndCommand
+    // label: addCreditsSoundElement
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DA9A0 = 0x004DA9A0,
-    // label: AppendCreditsShowImageCommand
+    // label: addCreditsPositionedGfxElement
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DA9F0 = 0x004DA9F0,
-    // label: AppendCreditsBinkVideoCommand
+    // label: addCreditsBinkElementWithName
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DAA80 = 0x004DAA80,
     // type: function
     SHC_3BB0A8C1_0x004DAAB0 = 0x004DAAB0,
-    // label: AppendCreditsFixedImageCommand
+    // label: addCreditsImageElement
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DAB00 = 0x004DAB00,
-    // label: AppendCreditsBinkVideoWithAudioCommand
+    // label: addCreditsBinkElementWithVolume
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DAB80 = 0x004DAB80,
     // type: function
     SHC_3BB0A8C1_0x004DABB0 = 0x004DABB0,
-    // label: AppendCreditsSoundStreamCommand
+    // label: appendCreditsCommandWithSound
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DABF0 = 0x004DABF0,
-    // label: AppendCreditsTextCommand
+    // label: addCreditsTextStringElement
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DAC30 = 0x004DAC30,
-    // label: AppendCreditsTextEndCommand
+    // label: addCreditsTextStringSimple
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DACF0 = 0x004DACF0,
@@ -40705,15 +43435,15 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004DAF50 = 0x004DAF50,
-    // label: RenderTextPageProgressBar
+    // label: renderScrollingTextWithFade
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DAFB0 = 0x004DAFB0,
-    // label: DisplayFullScreenTextPage
+    // label: renderScrollingTextPage
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DB0D0 = 0x004DB0D0,
-    // label: BuildIntroLogoSequence
+    // label: buildIntroLogoSequence
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DB180 = 0x004DB180,
@@ -40725,11 +43455,13 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DB300 = 0x004DB300,
-    // label: RenderScrollingCreditsTextFrame
+    // label: renderAnimatedScrollingTextLine
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DB390 = 0x004DB390,
-    // label: RenderHistoryBookEdgeUnk
+    // label: _HoldStrong::UI::Rendering::RenderHistoryBookEdgeUnk
+    // label: renderAnimatedHistoryBookEdge
+    // location:
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004DB490 = 0x004DB490,
@@ -40801,11 +43533,11 @@ enum {
     SHC_3BB0A8C1_0x004DC134 = 0x004DC134,
     // type: /pointer
     SHC_3BB0A8C1_0x004DC138 = 0x004DC138,
-    // label: FindCampaignMapHotspotAtMouse
+    // label: getCreditsElementAtMouse
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DC140 = 0x004DC140,
-    // label: BuildExtremeDemoIntroScript
+    // label: buildExtremeDemoSequence
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DC1C0 = 0x004DC1C0,
@@ -40817,15 +43549,21 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DC9E0 = 0x004DC9E0,
-    // label: MenuView_Unknown26_CampaignRelatedUnk_Prepare
+    // label: MenuView_CampaignCredits26_Prepare
+    // label: _HoldStrong::UI::MenuView_Unknown26_CampaignRelatedUnk_Prepare
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DCC70 = 0x004DCC70,
-    // label: MenuView_CampaignUnk_Prepare
+    // label: MenuView_Campaign27_Prepare
+    // label: _HoldStrong::UI::MenuView_CampaignUnk_Prepare
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DCC90 = 0x004DCC90,
-    // label: MenuView_CampaignUnk_DoInitial
+    // label: MenuView_Campaign27_DoInitial
+    // label: _HoldStrong::UI::MenuView_CampaignUnk_DoInitial
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DD0C0 = 0x004DD0C0,
@@ -40861,7 +43599,7 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DFB90 = 0x004DFB90,
-    // label: ProcessCreditsScriptCommands
+    // label: processCreditsCommandSequence
     // location: OpenSHC/Rendering
     // type: function
     SHC_3BB0A8C1_0x004E0A50 = 0x004E0A50,
@@ -40955,7 +43693,7 @@ enum {
     SHC_3BB0A8C1_0x004E12AC = 0x004E12AC,
     // type: /undefined *32
     SHC_3BB0A8C1_0x004E12B0 = 0x004E12B0,
-    // label: RenderActiveCreditsElements
+    // label: renderCreditsScreen
     // location: OpenSHC/Rendering
     // type: function
     SHC_3BB0A8C1_0x004E12C0 = 0x004E12C0,
@@ -40979,11 +43717,15 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004E1B30 = 0x004E1B30,
-    // label: MenuView_Unknown26_CampaignRelatedUnk_DoInitial
+    // label: MenuView_CampaignCredits26_DoInitial
+    // label: _HoldStrong::UI::MenuView_Unknown26_CampaignRelatedUnk_DoInitial
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004E1E30 = 0x004E1E30,
-    // label: MenuView_Unknown26_CampaignRelatedUnk_DoEveryFrame
+    // label: MenuView_CampaignCredits26_DoEveryFrame
+    // label: _HoldStrong::UI::MenuView_Unknown26_CampaignRelatedUnk_DoEveryFrame
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004E1E70 = 0x004E1E70,
@@ -40991,11 +43733,15 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004E1F50 = 0x004E1F50,
-    // label: constructViewportRenderState
+    // label: Constructor_ViewportRenderState
+    // label: _HoldStrong::Rendering::ViewportRenderState::Constructor_ViewportRenderState
+    // location:
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E1FA0 = 0x004E1FA0,
+    // label: _HoldStrong::Rendering::ViewportRenderState::setTileSystemMemoryLookupArrays
     // label: setTileSystemMemoryLookupArrays
+    // location:
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E2050 = 0x004E2050,
@@ -41003,19 +43749,25 @@ enum {
     SHC_3BB0A8C1_0x004E21E0 = 0x004E21E0,
     // type: function
     SHC_3BB0A8C1_0x004E2460 = 0x004E2460,
+    // label: _HoldStrong::Rendering::ViewportRenderState::tweakValidTilesToExcludeMapBorders
     // label: tweakValidTilesToExcludeMapBorders
+    // location:
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E25A0 = 0x004E25A0,
+    // label: _HoldStrong::Rendering::ViewportRenderState::resetBatchedRender
     // label: resetBatchedRender
+    // location:
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E2600 = 0x004E2600,
-    // label: renderAssassinClimbingOverlay
+    // label: renderAssassinClimbOverlay
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E2630 = 0x004E2630,
+    // label: _HoldStrong::Rendering::ViewportRenderState::scheduleUnitForBatchedRendering
     // label: scheduleUnitForBatchedRendering
+    // location:
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E26D0 = 0x004E26D0,
@@ -41029,7 +43781,9 @@ enum {
     SHC_3BB0A8C1_0x004E2AC0 = 0x004E2AC0,
     // type: /undefined *32
     SHC_3BB0A8C1_0x004E2AC4 = 0x004E2AC4,
+    // label: _HoldStrong::Rendering::ViewportRenderState::renderGmOverlayBuilding2
     // label: renderGmOverlayBuilding2
+    // location:
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E2AD0 = 0x004E2AD0,
@@ -41117,16 +43871,23 @@ enum {
     SHC_3BB0A8C1_0x004E3868 = 0x004E3868,
     // type: /byte
     SHC_3BB0A8C1_0x004E3869 = 0x004E3869,
-    // label: renderSomethingMap3
+    // label: _HoldStrong::Global::renderSomethingMap3
+    // label: renderBuildingAnimationSprite
+    // location:
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004E3870 = 0x004E3870,
+    // label: _HoldStrong::Rendering::ViewportRenderState::renderGmOverlayBuilding
     // label: renderGmOverlayBuilding
+    // location:
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E3980 = 0x004E3980,
     // type: function
     SHC_3BB0A8C1_0x004E46C0 = 0x004E46C0,
+    // label: LAB_renderSomething
+    // location: OpenSHC/Rendering/ViewportRenderState/renderGmOverlayBuilding
+    SHC_3BB0A8C1_0x004E55E0 = 0x004E55E0,
     // type: /undefined *32
     SHC_3BB0A8C1_0x004E592C = 0x004E592C,
     // type: /undefined *32
@@ -41495,31 +44256,45 @@ enum {
     SHC_3BB0A8C1_0x004E5A88 = 0x004E5A88,
     // type: /byte
     SHC_3BB0A8C1_0x004E5A89 = 0x004E5A89,
+    // label: _HoldStrong::Rendering::ViewportRenderState::updateWaterAnimationFrames
     // label: updateWaterAnimationFrames
+    // location:
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E5A90 = 0x004E5A90,
+    // label: _HoldStrong::Rendering::ViewportRenderState::assignRandomTiles
     // label: assignRandomTiles
+    // location:
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E5B80 = 0x004E5B80,
+    // label: _HoldStrong::Rendering::ViewportRenderState::setViewportBasedOnMapSize
     // label: setViewportBasedOnMapSize
+    // location:
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E5C00 = 0x004E5C00,
+    // label: _HoldStrong::Rendering::ViewportRenderState::setupMouseTileXY2
     // label: setupMouseTileXY2
+    // location:
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E5D80 = 0x004E5D80,
+    // label: _HoldStrong::Rendering::ViewportRenderState::setupMouseTileXY
     // label: setupMouseTileXY
+    // location:
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E5DD0 = 0x004E5DD0,
+    // label: _HoldStrong::Rendering::ViewportRenderState::focusOnTile
     // label: focusOnTile
+    // location:
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E5E20 = 0x004E5E20,
-    // label: computeMouseTileFromScreenPosition
+    // label: _HoldStrong::Rendering::ViewportRenderState::meth_0x4e5ed0
+    // label: computeHoveredTileWithHeight
+    // location:
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E5ED0 = 0x004E5ED0,
@@ -41605,35 +44380,49 @@ enum {
     SHC_3BB0A8C1_0x004E6335 = 0x004E6335,
     // type: /byte
     SHC_3BB0A8C1_0x004E6336 = 0x004E6336,
-    // label: clearAllFloatingLayerElements
+    // label: _HoldStrong::Rendering::ViewportRenderState::meth_0x4e6340
+    // label: clearAllFloaters
+    // location:
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E6340 = 0x004E6340,
     // type: function
     SHC_3BB0A8C1_0x004E6360 = 0x004E6360,
-    // label: createFloatingLayerElement
+    // label: _HoldStrong::Rendering::ViewportRenderState::creataAFloatingLayerElement
+    // label: creataAFloatingLayerElement
+    // location:
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E63A0 = 0x004E63A0,
     // type: function
     SHC_3BB0A8C1_0x004E6410 = 0x004E6410,
+    // label: _HoldStrong::Rendering::ViewportRenderState::renderDebugDataMousePointing
     // label: renderDebugDataMousePointing
+    // location:
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E64D0 = 0x004E64D0,
+    // label: _HoldStrong::Rendering::ViewportRenderState::setupViewport
     // label: setupViewport
+    // location:
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E66F0 = 0x004E66F0,
+    // label: _HoldStrong::Rendering::ViewportRenderState::resetupViewport
     // label: resetupViewport
+    // location:
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E7770 = 0x004E7770,
+    // label: _HoldStrong::Rendering::ViewportRenderState::resetupViewportThunk
     // label: resetupViewportThunk
+    // location:
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E7800 = 0x004E7800,
+    // label: _HoldStrong::Rendering::ViewportRenderState::renderUnits
     // label: renderUnits
+    // location:
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E7810 = 0x004E7810,
@@ -41865,7 +44654,9 @@ enum {
     SHC_3BB0A8C1_0x004E8429 = 0x004E8429,
     // type: /byte
     SHC_3BB0A8C1_0x004E842A = 0x004E842A,
+    // label: _HoldStrong::Rendering::ViewportRenderState::updateBuildingPreviewPosition
     // label: updateBuildingPreviewPosition
+    // location:
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E8430 = 0x004E8430,
@@ -41983,23 +44774,31 @@ enum {
     SHC_3BB0A8C1_0x004E8C4B = 0x004E8C4B,
     // type: /byte
     SHC_3BB0A8C1_0x004E8C4C = 0x004E8C4C,
-    // label: saveFocusTileAndCenterPreview
+    // label: _HoldStrong::Rendering::ViewportRenderState::meth_0x4e8c50
+    // label: centerBuildingPreview
+    // location:
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E8C50 = 0x004E8C50,
-    // label: restoreFocusTile
+    // label: _HoldStrong::Rendering::ViewportRenderState::meth_0x4e8c90
+    // label: focusOnSavedTile
+    // location:
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E8C90 = 0x004E8C90,
+    // label: _HoldStrong::Rendering::ViewportRenderState::focusOnCoordinate
     // label: focusOnCoordinate
+    // location:
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E8CA0 = 0x004E8CA0,
-    // label: createFloatingTextElement
+    // label: addFloatingDisplayElement
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E8CC0 = 0x004E8CC0,
+    // label: _HoldStrong::Rendering::ViewportRenderState::renderMap
     // label: renderMap
+    // location:
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E8CF0 = 0x004E8CF0,
@@ -42012,31 +44811,13 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004EA050 = 0x004EA050,
     // type: function
-    SHC_3BB0A8C1_0x004EA8B6 = 0x004EA8B6,
-    // type: function
-    SHC_3BB0A8C1_0x004EA91D = 0x004EA91D,
-    // type: function
-    SHC_3BB0A8C1_0x004EAD4B = 0x004EAD4B,
-    // type: function
-    SHC_3BB0A8C1_0x004EADB1 = 0x004EADB1,
-    // type: function
-    SHC_3BB0A8C1_0x004EB0A8 = 0x004EB0A8,
-    // type: function
-    SHC_3BB0A8C1_0x004EB13F = 0x004EB13F,
-    // type: function
     SHC_3BB0A8C1_0x004EB200 = 0x004EB200,
     // type: function
-    SHC_3BB0A8C1_0x004EB3DF = 0x004EB3DF,
-    // type: function
     SHC_3BB0A8C1_0x004EB480 = 0x004EB480,
-    // type: function
-    SHC_3BB0A8C1_0x004EB5FC = 0x004EB5FC,
     // type: function
     SHC_3BB0A8C1_0x004EBB00 = 0x004EBB00,
     // type: function
     SHC_3BB0A8C1_0x004EC080 = 0x004EC080,
-    // type: function
-    SHC_3BB0A8C1_0x004EC70A = 0x004EC70A,
     // type: /undefined *32[8]
     SHC_3BB0A8C1_0x004EC878 = 0x004EC878,
     // type: /undefined *32[8]
@@ -42059,27 +44840,39 @@ enum {
     SHC_3BB0A8C1_0x004EC99C = 0x004EC99C,
     // type: /undefined *32[5]
     SHC_3BB0A8C1_0x004ECA1C = 0x004ECA1C,
+    // label: _HoldStrong::AI::AICState::shouldNotBeBuildingGranary
     // label: shouldNotBeBuildingGranary
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004ECA30 = 0x004ECA30,
+    // label: _HoldStrong::AI::AICState::shouldNotBeBuildingArmoury
     // label: shouldNotBeBuildingArmoury
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004ECA60 = 0x004ECA60,
+    // label: _HoldStrong::AI::AICState::shouldNotBuildKillingPits
     // label: shouldNotBuildKillingPits
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004ECA90 = 0x004ECA90,
+    // label: _HoldStrong::AI::AICState::woodCuttersHutWhileNoWoodAvailable
     // label: woodCuttersHutWhileNoWoodAvailable
+    // location:
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004ECAB0 = 0x004ECAB0,
+    // label: _HoldStrong::AI::AIVState::setAvailableAIV
     // label: setAvailableAIV
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004ECAD0 = 0x004ECAD0,
+    // label: _HoldStrong::AI::AIVState::hostChecksLobbyAIVAvailability
     // label: hostChecksLobbyAIVAvailability
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004ECBC0 = 0x004ECBC0,
@@ -42087,7 +44880,9 @@ enum {
     SHC_3BB0A8C1_0x004ECCA0 = 0x004ECCA0,
     // type: function
     SHC_3BB0A8C1_0x004ECD90 = 0x004ECD90,
+    // label: _HoldStrong::AI::AIVState::setAIVFilePresenceByFileHashArray
     // label: setAIVFilePresenceByFileHashArray
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004ECDB0 = 0x004ECDB0,
@@ -42095,19 +44890,27 @@ enum {
     SHC_3BB0A8C1_0x004ECDE0 = 0x004ECDE0,
     // type: function
     SHC_3BB0A8C1_0x004ECDF0 = 0x004ECDF0,
+    // label: _HoldStrong::AI::AIVState::syncAIPlayerNamesAndBuildIntervals
     // label: syncAIPlayerNamesAndBuildIntervals
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004ECE60 = 0x004ECE60,
+    // label: _HoldStrong::AI::AIVState::setupAIVMetadata
     // label: setupAIVMetadata
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004ECEF0 = 0x004ECEF0,
+    // label: _HoldStrong::AI::AIVState::setKeepOffsetAndOrientation
     // label: setKeepOffsetAndOrientation
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004ECF70 = 0x004ECF70,
+    // label: _HoldStrong::AI::AIVState::convertAIVBuildingTypeToCommandBuildingType
     // label: convertAIVBuildingTypeToCommandBuildingType
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004ECFE0 = 0x004ECFE0,
@@ -42141,31 +44944,45 @@ enum {
     SHC_3BB0A8C1_0x004ED0A4 = 0x004ED0A4,
     // type: /undefined *32
     SHC_3BB0A8C1_0x004ED0A8 = 0x004ED0A8,
+    // label: _HoldStrong::AI::AIVState::rotateAIV
     // label: rotateAIV
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004ED0B0 = 0x004ED0B0,
+    // label: _HoldStrong::AI::AIVState::aiPlaceFlag
     // label: aiPlaceFlag
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004ED240 = 0x004ED240,
+    // label: _HoldStrong::AI::AIVState::aiPlaceBrazier
     // label: aiPlaceBrazier
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004ED300 = 0x004ED300,
+    // label: _HoldStrong::AI::AIVState::incrementBuildingHeatMapTile
     // label: incrementBuildingHeatMapTile
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004ED3B0 = 0x004ED3B0,
+    // label: _HoldStrong::AI::AIVState::aiPlaceAIVBuilding
     // label: aiPlaceAIVBuilding
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004ED410 = 0x004ED410,
+    // label: _HoldStrong::AI::AIVState::clearTheHeatmaps
     // label: clearTheHeatmaps
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004EDC90 = 0x004EDC90,
+    // label: _HoldStrong::AI::AIVState::set0x13ValueTo10InHeatMap
     // label: set0x13ValueTo10InHeatMap
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004EDCB0 = 0x004EDCB0,
@@ -42173,33 +44990,45 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004EDD00 = 0x004EDD00,
+    // label: _HoldStrong::AI::AIVState::findSuitableLocationCloseToKeepAndPlaceBuilding
     // label: findSuitableLocationCloseToKeepAndPlaceBuilding
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004EDDF0 = 0x004EDDF0,
+    // label: _HoldStrong::AI::AIVState::findAppropriateWoodCutterLocation
     // label: findAppropriateWoodCutterLocation
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004EE140 = 0x004EE140,
     // type: function
     SHC_3BB0A8C1_0x004EE230 = 0x004EE230,
+    // label: _HoldStrong::AI::AIVState::findAppropriateBuildingLocationForResourceType
     // label: findAppropriateBuildingLocationForResourceType
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004EE430 = 0x004EE430,
+    // label: _HoldStrong::AI::AIVState::recomputeAIAvailableGridTiles
     // label: recomputeAIAvailableGridTiles
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004EE830 = 0x004EE830,
     // type: function
     SHC_3BB0A8C1_0x004EE920 = 0x004EE920,
+    // label: _HoldStrong::AI::AIVState::find2by2Location
     // label: find2by2Location
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004EEBD0 = 0x004EEBD0,
     // type: function
     SHC_3BB0A8C1_0x004EECC0 = 0x004EECC0,
+    // label: _HoldStrong::AI::AIVState::findAppropriateBuildingLocation
     // label: findAppropriateBuildingLocation
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004EEE10 = 0x004EEE10,
@@ -42207,11 +45036,15 @@ enum {
     SHC_3BB0A8C1_0x004EEEC0 = 0x004EEEC0,
     // type: function
     SHC_3BB0A8C1_0x004EEF20 = 0x004EEF20,
+    // label: _HoldStrong::AI::AIVState::wipeAIVsAndHeatMaps
     // label: wipeAIVsAndHeatMaps
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004EF090 = 0x004EF090,
+    // label: _HoldStrong::AI::AIVState::applyAIV
     // label: applyAIV
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004EF0D0 = 0x004EF0D0,
@@ -42222,7 +45055,9 @@ enum {
     // label: LAB_004ef450_continue
     // location:
     SHC_3BB0A8C1_0x004EF450 = 0x004EF450,
+    // label: _HoldStrong::AI::AIVState::computeAIVPlacementFit
     // label: computeAIVPlacementFit
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004EF8C0 = 0x004EF8C0,
@@ -42230,67 +45065,97 @@ enum {
     SHC_3BB0A8C1_0x004EF900 = 0x004EF900,
     // type: function
     SHC_3BB0A8C1_0x004EF920 = 0x004EF920,
+    // label: _HoldStrong::AI::AIVState::aiPlaceFarm
     // label: aiPlaceFarm
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004EFA60 = 0x004EFA60,
+    // label: _HoldStrong::AI::AIVState::aiPlaceWoodcuttershut
     // label: aiPlaceWoodcuttershut
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004EFAB0 = 0x004EFAB0,
+    // label: _HoldStrong::AI::AIVState::findSpotNearEngineersGuild
     // label: findSpotNearEngineersGuild
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004EFB90 = 0x004EFB90,
+    // label: _HoldStrong::AI::AIVState::aiPlaceAdditionalOxtether
     // label: aiPlaceAdditionalOxtether
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004EFC30 = 0x004EFC30,
+    // label: _HoldStrong::AI::AIVState::aiPlacePitchrig
     // label: aiPlacePitchrig
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004EFD90 = 0x004EFD90,
+    // label: _HoldStrong::AI::AIVState::aiPlaceIronMine
     // label: aiPlaceIronMine
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004EFE30 = 0x004EFE30,
+    // label: _HoldStrong::AI::AIVState::aiPlaceQuarryAndOxtether
     // label: aiPlaceQuarryAndOxtether
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004EFED0 = 0x004EFED0,
+    // label: _HoldStrong::AI::AIVState::executeDefaultCastleAIV
     // label: executeDefaultCastleAIV
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004F0060 = 0x004F0060,
     // type: function
     SHC_3BB0A8C1_0x004F0690 = 0x004F0690,
+    // label: _HoldStrong::AI::AIVState::recomputeHeatmaps
     // label: recomputeHeatmaps
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004F0E80 = 0x004F0E80,
     // type: function
     SHC_3BB0A8C1_0x004F1190 = 0x004F1190,
     // label: Constructor_AIVState
+    // label: _HoldStrong::AI::AIVState::Constructor_AIVState
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004F13E0 = 0x004F13E0,
+    // label: _HoldStrong::AI::AIVState::selectBestAIVwithRandomStart
     // label: selectBestAIVwithRandomStart
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004F13F0 = 0x004F13F0,
+    // label: _HoldStrong::AI::AIVState::tryPlaceAIVAndReturnFitPercentage
     // label: tryPlaceAIVAndReturnFitPercentage
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004F14F0 = 0x004F14F0,
+    // label: _HoldStrong::AI::AIVState::aiDecideOnNewBuildings
     // label: aiDecideOnNewBuildings
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004F15C0 = 0x004F15C0,
+    // label: _HoldStrong::AI::AIVState::updateBuildingsStateAndUpdateAIBuildingDecisions
     // label: updateBuildingsStateAndUpdateAIBuildingDecisions
+    // location:
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004F1860 = 0x004F1860,
-    // label: mapUITreeTypeToLogicalTreeType
+    // label: _HoldStrong::Map::LandscapeState::mapUITreeTypeToLogicalTreeTypeUnk
+    // label: mapTreeBrushIDToLogicalType
+    // location:
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F1A60 = 0x004F1A60,
@@ -42566,7 +45431,9 @@ enum {
     SHC_3BB0A8C1_0x004F1BD3 = 0x004F1BD3,
     // type: /byte
     SHC_3BB0A8C1_0x004F1BD4 = 0x004F1BD4,
+    // label: _HoldStrong::Map::LandscapeState::getValueFrom0UpTo3ForTreeTypeAndTreeSeason
     // label: getValueFrom0UpTo3ForTreeTypeAndTreeSeason
+    // location:
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F1BE0 = 0x004F1BE0,
@@ -42600,11 +45467,15 @@ enum {
     SHC_3BB0A8C1_0x004F1C4C = 0x004F1C4C,
     // type: /undefined *32
     SHC_3BB0A8C1_0x004F1C50 = 0x004F1C50,
+    // label: _HoldStrong::Map::LandscapeState::clearRocksAndTrees
     // label: clearRocksAndTrees
+    // location:
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F1C60 = 0x004F1C60,
+    // label: _HoldStrong::Map::LandscapeState::createTree
     // label: createTree
+    // location:
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F1CE0 = 0x004F1CE0,
@@ -42666,27 +45537,39 @@ enum {
     SHC_3BB0A8C1_0x004F2015 = 0x004F2015,
     // type: /byte
     SHC_3BB0A8C1_0x004F2016 = 0x004F2016,
-    // label: setTreeStageRelatedValues
+    // label: _HoldStrong::Map::LandscapeState::setTreeStageRelatedValues
+    // label: setTreeGrowthStageValues
+    // location:
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F2020 = 0x004F2020,
+    // label: _HoldStrong::Map::LandscapeState::removeTreeUnk
     // label: removeTree
+    // location:
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F2070 = 0x004F2070,
+    // label: _HoldStrong::Map::LandscapeState::setCurrentTimeOnSomeTrees
     // label: setCurrentTimeOnSomeTrees
+    // location:
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F20E0 = 0x004F20E0,
+    // label: _HoldStrong::Map::LandscapeState::createRock
     // label: createRock
+    // location:
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F2140 = 0x004F2140,
+    // label: _HoldStrong::Map::LandscapeState::meth_0x4f2220
     // label: removeRock
+    // location:
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F2220 = 0x004F2220,
+    // label: _HoldStrong::Map::LandscapeState::lightUpTree
     // label: lightUpTree
+    // location:
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F2280 = 0x004F2280,
@@ -42786,7 +45669,7 @@ enum {
     // location: OpenSHC/Map/Trees
     // type: function
     SHC_3BB0A8C1_0x004F29C0 = 0x004F29C0,
-    // label: getRandomRockImageOffset
+    // label: getRandomRockGfxOffset
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F2A10 = 0x004F2A10,
@@ -42854,7 +45737,7 @@ enum {
     // location: OpenSHC/Map/Rocks
     // type: function
     SHC_3BB0A8C1_0x004F2C00 = 0x004F2C00,
-    // label: getTreeGrowthTargetStage
+    // label: getTreeVisualStage
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F2C20 = 0x004F2C20,
@@ -42904,59 +45787,85 @@ enum {
     SHC_3BB0A8C1_0x004F2CB9 = 0x004F2CB9,
     // type: /byte
     SHC_3BB0A8C1_0x004F2CBA = 0x004F2CBA,
+    // label: _HoldStrong::Map::LandscapeState::setTreeSpreadInterval
     // label: setTreeSpreadInterval
+    // location:
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F2CC0 = 0x004F2CC0,
+    // label: _HoldStrong::Map::LandscapeState::killEveryFifthTree
     // label: killEveryFifthTree
+    // location:
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F2DA0 = 0x004F2DA0,
+    // label: _HoldStrong::Map::LandscapeState::setupBabyTreeLocation
     // label: setupBabyTreeLocation
+    // location:
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F2E00 = 0x004F2E00,
     // type: function
     SHC_3BB0A8C1_0x004F2E90 = 0x004F2E90,
-    // label: isTreeAliveAndMatchingUID
+    // label: _HoldStrong::Map::LandscapeState::meth_0x4f2fb0
+    // label: isTreeChoppable
+    // location:
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F2FB0 = 0x004F2FB0,
+    // label: _HoldStrong::Map::LandscapeState::isTreeMatchingUIDAndOfCertainState
     // label: isTreeMatchingUIDAndOfCertainState
+    // location:
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F2FE0 = 0x004F2FE0,
-    // label: damageTreeAndTriggerDeathIfDepleted
+    // label: _HoldStrong::Map::LandscapeState::meth_0x4f3010
+    // label: chopTreeProgress
+    // location:
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F3010 = 0x004F3010,
-    // label: advanceTreeDecayState
+    // label: _HoldStrong::Map::LandscapeState::meth_0x4f3080
+    // label: advanceTreeStumpRemoval
+    // location:
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F3080 = 0x004F3080,
-    // label: markNearbyTreesAsCrowTargets
+    // label: _HoldStrong::Map::LandscapeState::meth_0x4f30d0
+    // label: markTreesNearTile
+    // location:
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F30D0 = 0x004F30D0,
-    // label: spawnCrowFromNearbyTree
+    // label: _HoldStrong::Map::LandscapeState::spawnACrowUnk
+    // label: spawnCrowsFromNearbyTrees
+    // location:
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F3150 = 0x004F3150,
     // type: function
     SHC_3BB0A8C1_0x004F3180 = 0x004F3180,
+    // label: _HoldStrong::Map::LandscapeState::placeAppleTree
     // label: placeAppleTree
+    // location:
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F3560 = 0x004F3560,
+    // label: _HoldStrong::Map::LandscapeState::selectClosestTree
     // label: selectClosestTree
+    // location:
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F3610 = 0x004F3610,
+    // label: _HoldStrong::Map::LandscapeState::resetWind
     // label: resetWind
+    // location:
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F3700 = 0x004F3700,
+    // label: _HoldStrong::Map::LandscapeState::updateWind
     // label: updateWind
+    // location:
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F3730 = 0x004F3730,
@@ -42964,7 +45873,9 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004F37B0 = 0x004F37B0,
-    // label: RemoveCertainRockTypesUnk
+    // label: _HoldStrong::Global::RemoveCertainRockTypesUnk
+    // label: removeStaleRocks
+    // location:
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004F3840 = 0x004F3840,
@@ -42976,25 +45887,33 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004F3900 = 0x004F3900,
-    // label: constructLandscapeState
+    // label: Constructor_LandscapeState
+    // label: _HoldStrong::Map::LandscapeState::Constructor_LandscapeState
+    // location:
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F3930 = 0x004F3930,
+    // label: _HoldStrong::Map::LandscapeState::updateTreeStage
     // label: updateTreeStage
+    // location:
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F3960 = 0x004F3960,
+    // label: _HoldStrong::Map::LandscapeState::findTree
     // label: findTree
+    // location:
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F3B90 = 0x004F3B90,
     // type: function
     SHC_3BB0A8C1_0x004F3C50 = 0x004F3C50,
-    // label: upgradeTreesAndRocksForMapVersion
+    // label: migrateLandscapeForMapVersion
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F3D30 = 0x004F3D30,
+    // label: _HoldStrong::Map::LandscapeState::updateTrees
     // label: updateTrees
+    // location:
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F3D60 = 0x004F3D60,
@@ -43011,10 +45930,14 @@ enum {
     // type: /pointer
     SHC_3BB0A8C1_0x004F4018 = 0x004F4018,
     // label: Constructor_MenuView
+    // label: _HoldStrong::UI::MenuView::Constructor_MenuView
+    // location:
     // location: OpenSHC/UI/MenuView
     // type: function
     SHC_3BB0A8C1_0x004F4020 = 0x004F4020,
     // label: Constructor_MenuView_Reduced
+    // label: _HoldStrong::UI::MenuView::Constructor_MenuView_Reduced
+    // location:
     // location: OpenSHC/UI/MenuView
     // type: function
     SHC_3BB0A8C1_0x004F4050 = 0x004F4050,
@@ -43023,6 +45946,8 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004F4070 = 0x004F4070,
     // label: Constructor_Menu
+    // label: _HoldStrong::UI::Menu::Constructor_Menu
+    // location:
     // location: OpenSHC/UI/Menu
     // type: function
     SHC_3BB0A8C1_0x004F4100 = 0x004F4100,
@@ -43032,43 +45957,63 @@ enum {
     SHC_3BB0A8C1_0x004F4180 = 0x004F4180,
     // type: function
     SHC_3BB0A8C1_0x004F4270 = 0x004F4270,
+    // label: _HoldStrong::UI::MenuItem::handleMenuElementsCallbacks
     // label: handleMenuElementsCallbacks
+    // location:
     // location: OpenSHC/UI/MenuItem
     // type: function
     SHC_3BB0A8C1_0x004F4290 = 0x004F4290,
+    // label: _HoldStrong::UI::MenuItem::prepareAndRenderMenuItems
     // label: prepareAndRenderMenuItems
+    // location:
     // location: OpenSHC/UI/MenuItem
     // type: function
     SHC_3BB0A8C1_0x004F49D0 = 0x004F49D0,
-    // label: resetMenuItemStateUnk
+    // label: _HoldStrong::UI::MenuItem::resetMenuItemStateUnk
+    // label: resetMenuItemInteractionState
+    // location:
     // location: OpenSHC/UI/MenuItem
     // type: function
     SHC_3BB0A8C1_0x004F4C30 = 0x004F4C30,
+    // label: _HoldStrong::UI::MenuHandlerState::setupBuildMenuState
     // label: setupBuildMenuState
+    // location:
     // location: OpenSHC/UI/MenuHandlerState
     // type: function
     SHC_3BB0A8C1_0x004F4C60 = 0x004F4C60,
+    // label: _HoldStrong::UI::MenuHandlerState::startBuildMenuTransition
     // label: startBuildMenuTransition
+    // location:
     // location: OpenSHC/UI/MenuHandlerState
     // type: function
     SHC_3BB0A8C1_0x004F4C80 = 0x004F4C80,
+    // label: _HoldStrong::UI::MenuHandlerState::computeBuildMenuTransitionShift
     // label: computeBuildMenuTransitionShift
+    // location:
     // location: OpenSHC/UI/MenuHandlerState
     // type: function
     SHC_3BB0A8C1_0x004F4CD0 = 0x004F4CD0,
+    // label: UCPointerStruct::setUCValues
     // label: setUCValues
+    // location:
     // location: UCPointerStruct
     // type: function
     SHC_3BB0A8C1_0x004F4D70 = 0x004F4D70,
+    // label: _HoldStrong::UI::BottomLeftTextDisplayState::setBottomLeftTextDisplayText
     // label: setBottomLeftTextDisplayText
+    // location:
     // location: OpenSHC/UI/BottomLeftTextDisplayState
     // type: function
     SHC_3BB0A8C1_0x004F4E00 = 0x004F4E00,
+    // label: _HoldStrong::UI::BottomLeftTextDisplayState::hasPassedCountdownOrDuration
     // label: hasPassedCountdownOrDuration
+    // location:
     // location: OpenSHC/UI/BottomLeftTextDisplayState
     // type: function
     SHC_3BB0A8C1_0x004F4EF0 = 0x004F4EF0,
+    // label: _HoldStrong::UI::BottomLeftTextDisplayState::renderCurrentlyDisplayedTextConstructionCost
     // label: renderCurrentlyDisplayedTextConstructionCost
+    // location:
     // location: OpenSHC/UI/BottomLeftTextDisplayState
     // type: function
     SHC_3BB0A8C1_0x004F4F60 = 0x004F4F60,
@@ -43110,7 +46055,9 @@ enum {
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004F6210 = 0x004F6210,
+    // label: _HoldStrong::UI::Menu::handleMenuItems
     // label: handleMenuItems
+    // location:
     // location: OpenSHC/UI/Menu
     // type: function
     SHC_3BB0A8C1_0x004F6280 = 0x004F6280,
@@ -43134,11 +46081,15 @@ enum {
     SHC_3BB0A8C1_0x004F6460 = 0x004F6460,
     // type: /pointer
     SHC_3BB0A8C1_0x004F6464 = 0x004F6464,
+    // label: _HoldStrong::UI::Menu::updateMenuButtons
     // label: updateMenuButtons
+    // location:
     // location: OpenSHC/UI/Menu
     // type: function
     SHC_3BB0A8C1_0x004F6470 = 0x004F6470,
+    // label: _HoldStrong::UI::Menu::renderConstructionMenu
     // label: renderConstructionMenu
+    // location:
     // location: OpenSHC/UI/Menu
     // type: function
     SHC_3BB0A8C1_0x004F64A0 = 0x004F64A0,
@@ -43170,11 +46121,15 @@ enum {
     SHC_3BB0A8C1_0x004F69C8 = 0x004F69C8,
     // type: /undefined *32
     SHC_3BB0A8C1_0x004F69CC = 0x004F69CC,
+    // label: _HoldStrong::UI::Menu::loadMenuElements
     // label: loadMenuElements
+    // location:
     // location: OpenSHC/UI/Menu
     // type: function
     SHC_3BB0A8C1_0x004F69D0 = 0x004F69D0,
+    // label: _HoldStrong::UI::MenuHandlerState::initializeUI
     // label: initializeUI
+    // location:
     // location: OpenSHC/UI/MenuHandlerState
     // type: function
     SHC_3BB0A8C1_0x004F6A20 = 0x004F6A20,
@@ -43182,55 +46137,79 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004F6A60 = 0x004F6A60,
-    // label: MenuItemActionHandler_General_RemoveConditionalTextOrReleaseHoverUnk
+    // label: MenuItemActionHandler_General_ExpireBottomLeftText
+    // label: _HoldStrong::UI::MenuItemActionHandler_General_RemoveConditionalTextOrReleaseHoverUnk
+    // location:
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004F6A70 = 0x004F6A70,
+    // label: _HoldStrong::UI::MenuHandlerState::setupMenuForRendering
     // label: setupMenuForRendering
+    // location:
     // location: OpenSHC/UI/MenuHandlerState
     // type: function
     SHC_3BB0A8C1_0x004F6A80 = 0x004F6A80,
+    // label: _HoldStrong::Map::TileMapState::setChangedLayerToThreeAndMapping0x40x40
     // label: setChangedLayerToThreeAndMapping0x40x40
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F6AE0 = 0x004F6AE0,
+    // label: _HoldStrong::Map::TileMapState::setupMovementDirectionTranslationMatrix
     // label: setupMovementDirectionTranslationMatrix
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F6B20 = 0x004F6B20,
     // type: function
     SHC_3BB0A8C1_0x004F6C20 = 0x004F6C20,
+    // label: _HoldStrong::Map::TileMapState::setupLogicalMapBorders
     // label: setupLogicalMapBorders
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F6C60 = 0x004F6C60,
+    // label: _HoldStrong::Map::TileMapState::resetHeightAndMapBorders
     // label: resetHeightAndMapBorders
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F6CF0 = 0x004F6CF0,
     // type: function
     SHC_3BB0A8C1_0x004F6DC0 = 0x004F6DC0,
+    // label: _HoldStrong::Map::TileMapState::setMapSize
     // label: setMapSize
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F6F90 = 0x004F6F90,
+    // label: _HoldStrong::Map::TileMapState::triggerLoweredView
     // label: triggerLoweredView
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F6FD0 = 0x004F6FD0,
+    // label: _HoldStrong::Map::TileMapState::toggleFlatView
     // label: toggleFlatView
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F70B0 = 0x004F70B0,
+    // label: HoldStrong_lib::stdLib::ios::basic_streambuf<char,_struct_std::char_traits<char>_>::virt_meth_0x4f70d0
     // label: virt_meth_0x4f70d0
+    // location:
     // location: HoldStrong_lib/stdLib/ios/basic_streambuf<char,_struct_std/char_traits<char>_>
     // type: function
     SHC_3BB0A8C1_0x004F70D0 = 0x004F70D0,
+    // label: _HoldStrong::Map::TileMapState::setMapRotation
     // label: setMapRotation
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F70E0 = 0x004F70E0,
-    // label: updateLogicalTileMapRelatedSections
+    // label: _HoldStrong::Map::TileMapState::updateLogicalTileMapRelatedSections
+    // label: recomputeTileDisplayFlags
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F70F0 = 0x004F70F0,
@@ -43238,11 +46217,11 @@ enum {
     SHC_3BB0A8C1_0x004F7140 = 0x004F7140,
     // type: function
     SHC_3BB0A8C1_0x004F7170 = 0x004F7170,
-    // label: rebuildShowHiLayerFromHeights
-    // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F79D0 = 0x004F79D0,
+    // label: _HoldStrong::Map::TileMapState::meth_0x4f7a80
     // label: computeTileLuminescence
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F7A80 = 0x004F7A80,
@@ -43262,19 +46241,27 @@ enum {
     SHC_3BB0A8C1_0x004F80D4 = 0x004F80D4,
     // type: /pointer
     SHC_3BB0A8C1_0x004F80D8 = 0x004F80D8,
+    // label: _HoldStrong::Map::TileMapState::increaseHeightForTunnelSingleTile
     // label: increaseHeightForTunnelSingleTile
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F80E0 = 0x004F80E0,
+    // label: _HoldStrong::Map::TileMapState::getNonFarmFieldBuildingHealthAtTileOr1000
     // label: getNonFarmFieldBuildingHealthAtTileOr1000
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F8160 = 0x004F8160,
-    // label: resetTileToDefaultState
+    // label: _HoldStrong::Map::TileMapState::meth_0x4f81d0
+    // label: resetTileToTerrain
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F81D0 = 0x004F81D0,
+    // label: _HoldStrong::Map::TileMapState::getBuildingHurtSFXID
     // label: getBuildingHurtSFXID
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F8210 = 0x004F8210,
@@ -43478,7 +46465,9 @@ enum {
     SHC_3BB0A8C1_0x004F82F0 = 0x004F82F0,
     // type: /byte
     SHC_3BB0A8C1_0x004F82F1 = 0x004F82F1,
+    // label: _HoldStrong::Map::TileMapState::rotateFearFactorBuildingVariations
     // label: rotateFearFactorBuildingVariations
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F8300 = 0x004F8300,
@@ -43840,77 +46829,113 @@ enum {
     SHC_3BB0A8C1_0x004F8523 = 0x004F8523,
     // type: /byte
     SHC_3BB0A8C1_0x004F8524 = 0x004F8524,
+    // label: _HoldStrong::Map::TileMapState::countPropertyInSurroundingTiles
     // label: countPropertyInSurroundingTiles
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F8530 = 0x004F8530,
-    // label: isTileEnclosedByWallsOrGates
+    // label: _HoldStrong::Map::TileMapState::meth_0x4f85b0
+    // label: isSurroundedBySolidWalls
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F85B0 = 0x004F85B0,
-    // label: isTileEnclosedByWalls
+    // label: _HoldStrong::Map::TileMapState::meth_0x4f8640
+    // label: isSurroundedByWallsMask2
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F8640 = 0x004F8640,
-    // label: isWallCornerForCardinalDirection
+    // label: _HoldStrong::Map::TileMapState::meth_0x4f86d0
+    // label: getTileNeighborOffsets
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F86D0 = 0x004F86D0,
-    // label: isWallCornerForDiagonalDirection
+    // label: _HoldStrong::Map::TileMapState::meth_0x4f8780
+    // label: checkWallWalkConnection
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F8780 = 0x004F8780,
-    // label: isWallConnectionHeightValid
+    // label: _HoldStrong::Map::TileMapState::meth_0x4f8840
+    // label: checkAdjacentWallStep
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F8840 = 0x004F8840,
-    // label: hasOnlyTowerNeighborsNoWalls
+    // label: _HoldStrong::Map::TileMapState::meth_0x4f8900
+    // label: hasDitchNeighborNoWall
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F8900 = 0x004F8900,
-    // label: getWallFlagForOrientedDirection
+    // label: _HoldStrong::Map::TileMapState::meth_0x4f89c0
+    // label: getOrientedNeighborWallFlag
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F89C0 = 0x004F89C0,
-    // label: hasHigherNeighborWithFlagBit11
+    // label: _HoldStrong::Map::TileMapState::meth_0x4f8a40
+    // label: checkHigherNeighborFlag0x800
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F8A40 = 0x004F8A40,
-    // label: hasHigherPlainNeighborWithFlagBit8
+    // label: _HoldStrong::Map::TileMapState::meth_0x4f8ac0
+    // label: checkHigherNeighborWall
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F8AC0 = 0x004F8AC0,
+    // label: _HoldStrong::Map::TileMapState::getOrientationThatIsWallTowerOrGatehouse
     // label: getOrientationThatIsWallTowerOrGatehouse
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F8B50 = 0x004F8B50,
-    // label: renderWallDragPreview
+    // label: _HoldStrong::Map::TileMapState::previewWallDrawingUnk
+    // label: previewWallDragConstruction
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F8BD0 = 0x004F8BD0,
-    // label: reassignWallOwnershipForPlayer
+    // label: _HoldStrong::Map::TileMapState::meth_0x4f9000
+    // label: markWallTilesForOwner
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F9000 = 0x004F9000,
+    // label: _HoldStrong::Map::TileMapState::swapWallOwnership
     // label: swapWallOwnership
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F9220 = 0x004F9220,
+    // label: _HoldStrong::Map::TileMapState::destroyWallsOfPlayer
     // label: destroyWallsOfPlayer
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F93E0 = 0x004F93E0,
-    // label: validateWallPlacementAtTile
+    // label: _HoldStrong::Map::TileMapState::isWallUnkPlacementAllowed
+    // label: checkWallPlacementAllowed
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F94A0 = 0x004F94A0,
+    // label: _HoldStrong::Map::TileMapState::setupBuildingSizeIndexMappingForBuildingWithSize
     // label: setupBuildingSizeIndexMappingForBuildingWithSize
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F9590 = 0x004F9590,
     // type: function
     SHC_3BB0A8C1_0x004F9630 = 0x004F9630,
+    // label: _HoldStrong::Map::TileMapState::getBuildingSizeIndexMappingData
     // label: getBuildingSizeIndexMappingData
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F9880 = 0x004F9880,
@@ -43928,17 +46953,23 @@ enum {
     SHC_3BB0A8C1_0x004F9920 = 0x004F9920,
     // type: /pointer
     SHC_3BB0A8C1_0x004F9924 = 0x004F9924,
-    // label: isFootprintIndexOnEdge
+    // label: _HoldStrong::Map::TileMapState::indexIsEdgeUnk
+    // label: isGridEdgeIndex
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F9930 = 0x004F9930,
+    // label: _HoldStrong::Map::TileMapState::storeMinAndMaxHeightOfArea
     // label: storeMinAndMaxHeightOfArea
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F9980 = 0x004F9980,
     // type: function
     SHC_3BB0A8C1_0x004F99D0 = 0x004F99D0,
+    // label: _HoldStrong::Map::TileMapState::isBuildingPlacementAllowedAtTile
     // label: isBuildingPlacementAllowedAtTile
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F9A60 = 0x004F9A60,
@@ -44176,27 +47207,39 @@ enum {
     SHC_3BB0A8C1_0x004F9DE9 = 0x004F9DE9,
     // type: /byte
     SHC_3BB0A8C1_0x004F9DEA = 0x004F9DEA,
-    // label: validateBuildingPlacementAtTile
+    // label: _HoldStrong::Map::TileMapState::meth_0x4f9df0
+    // label: checkBuildingPlacementAtTile
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F9DF0 = 0x004F9DF0,
-    // label: spawnEraserTileEffect
+    // label: _HoldStrong::Map::TileMapState::spawnEraserEntityEffectsUnk
+    // label: eraseTileFeaturesAndSpawnDust
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F9F00 = 0x004F9F00,
-    // label: determineBuildingPlacementRotation
+    // label: _HoldStrong::Map::TileMapState::meth_0x4fa000
+    // label: computeBuildingPlacementRotation
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FA000 = 0x004FA000,
+    // label: _HoldStrong::Map::TileMapState::checkDrawbridgePlacement
     // label: checkDrawbridgePlacement
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FA2D0 = 0x004FA2D0,
-    // label: getRubbleGraphicStageForDamageLevel
+    // label: _HoldStrong::Map::TileMapState::meth_0x4fa460
+    // label: rotateFieldOrientationIndex
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FA460 = 0x004FA460,
+    // label: _HoldStrong::Map::TileMapState::getBuildingSizeForCommandBuildingType
     // label: getBuildingSizeForCommandBuildingType
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FA550 = 0x004FA550,
@@ -44882,55 +47925,79 @@ enum {
     SHC_3BB0A8C1_0x004FA759 = 0x004FA759,
     // type: /byte
     SHC_3BB0A8C1_0x004FA75A = 0x004FA75A,
-    // label: demolishBuildingsInConstructionFootprint
+    // label: _HoldStrong::Map::TileMapState::meth_0x4fa760
+    // label: destroyBuildingsUnderFootprint
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FA760 = 0x004FA760,
     // type: function
     SHC_3BB0A8C1_0x004FA8D0 = 0x004FA8D0,
-    // label: markBuildingFootprintFlag
+    // label: _HoldStrong::Map::TileMapState::meth_0x4fa9d0
+    // label: markBuildingFootprintTiles
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FA9D0 = 0x004FA9D0,
+    // label: _HoldStrong::Map::TileMapState::updateAreaBasedOnSurrounding
     // label: updateAreaBasedOnSurrounding
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FAA30 = 0x004FAA30,
-    // label: clearBuildingTilesAndTrees
+    // label: _HoldStrong::Map::TileMapState::meth_0x4faab0
+    // label: clearBuildingTilesOnRemove
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FAAB0 = 0x004FAAB0,
     // type: function
     SHC_3BB0A8C1_0x004FAAE0 = 0x004FAAE0,
-    // label: clearBuildingFootprintAndResetUnits
+    // label: _HoldStrong::Map::TileMapState::meth_0x4fab70
+    // label: clearBuildingFootprintWithRubble
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FAB70 = 0x004FAB70,
-    // label: clearBuildingFootprintAndRemoveSiegeTower
+    // label: _HoldStrong::Map::TileMapState::meth_0x4fac70
+    // label: clearBuildingFootprintAndTowers
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FAC70 = 0x004FAC70,
-    // label: unmarkBuildingFootprintFlag
+    // label: _HoldStrong::Map::TileMapState::meth_0x4fad20
+    // label: clearBuildingFootprintFlag
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FAD20 = 0x004FAD20,
-    // label: clearBuildingFootprintWithEdgeRubble
+    // label: _HoldStrong::Map::TileMapState::meth_0x4fad70
+    // label: clearBuildingFootprintWithRubbleSimple
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FAD70 = 0x004FAD70,
-    // label: clearFixedSizeTwoBuildingFootprint
+    // label: _HoldStrong::Map::TileMapState::meth_0x4fae50
+    // label: clearBuildingTilesSize2
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FAE50 = 0x004FAE50,
-    // label: isUnitBlockingSizeFiveFootprint
+    // label: _HoldStrong::Map::TileMapState::meth_0x4faee0
+    // label: isBuildingFootprintTileSet
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FAEE0 = 0x004FAEE0,
-    // label: clearStockpileFootprintTiles
+    // label: _HoldStrong::Map::TileMapState::meth_0x4faf70
+    // label: clearStockpilePathTiles
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FAF70 = 0x004FAF70,
+    // label: _HoldStrong::Map::TileMapState::setMiscDisplayLayer
     // label: setMiscDisplayLayer
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FB0C0 = 0x004FB0C0,
@@ -45128,39 +48195,53 @@ enum {
     SHC_3BB0A8C1_0x004FB354 = 0x004FB354,
     // type: /pointer
     SHC_3BB0A8C1_0x004FB358 = 0x004FB358,
-    // label: clearBuildingDisplayFlagsAndEntities
+    // label: _HoldStrong::Map::TileMapState::meth_0x4fb360
+    // label: clearBuildingDisplayTiles
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FB360 = 0x004FB360,
-    // label: spawnFloatingNumberAroundTile
+    // label: createPlacementFloatMarkers
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FB3F0 = 0x004FB3F0,
+    // label: _HoldStrong::Map::TileMapState::placeRock
     // label: placeRock
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FB4D0 = 0x004FB4D0,
-    // label: applyRockGraphicsToFootprint
+    // label: _HoldStrong::Map::TileMapState::meth_0x4fb770
+    // label: renderRockGraphics
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FB770 = 0x004FB770,
     // type: function
     SHC_3BB0A8C1_0x004FB7D0 = 0x004FB7D0,
-    // label: clearTreeFootprintFlags
+    // label: _HoldStrong::Map::TileMapState::meth_0x4fb8e0
+    // label: clearTreeTiles
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FB8E0 = 0x004FB8E0,
-    // label: clearRockFootprintFlags
+    // label: _HoldStrong::Map::TileMapState::meth_0x4fb970
+    // label: clearRockTiles
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FB970 = 0x004FB970,
     // type: function
     SHC_3BB0A8C1_0x004FB990 = 0x004FB990,
-    // label: renderWallPlacementPreview
+    // label: _HoldStrong::Map::TileMapState::meth_0x4fb9e0
+    // label: placeRockOnTiles
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FB9E0 = 0x004FB9E0,
+    // label: _HoldStrong::Map::TileMapState::getCastleBuildRangeForMapSize
     // label: getCastleBuildRangeForMapSize
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FBC30 = 0x004FBC30,
@@ -45656,61 +48737,89 @@ enum {
     SHC_3BB0A8C1_0x004FBD6F = 0x004FBD6F,
     // type: /byte
     SHC_3BB0A8C1_0x004FBD70 = 0x004FBD70,
+    // label: _HoldStrong::Map::TileMapState::getTileForBrush
     // label: getTileForBrush
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FBD80 = 0x004FBD80,
-    // label: isTileSuitableForBrushPlacement
+    // label: _HoldStrong::Map::TileMapState::meth_0x4fbe70
+    // label: checkTileHeightAgainstNeighbors
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FBE70 = 0x004FBE70,
-    // label: computeTileCliffEdgeFlags
+    // label: _HoldStrong::Map::TileMapState::meth_0x4fc0b0
+    // label: computeTileSlopeDirection
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FC0B0 = 0x004FC0B0,
-    // label: propagateCliffEdgeFlagFromNeighbor
+    // label: _HoldStrong::Map::TileMapState::meth_0x4fc280
+    // label: markTileBelowCliff
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FC280 = 0x004FC280,
-    // label: collectCliffEdgeTilesForClimbData
+    // label: _HoldStrong::Map::TileMapState::meth_0x4fc340
+    // label: collectClimbableCliffTiles
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FC340 = 0x004FC340,
+    // label: _HoldStrong::Map::TileMapState::generateDustClouds
     // label: generateDustClouds
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FC490 = 0x004FC490,
-    // label: computeWallCornerRenderRotation
+    // label: _HoldStrong::Map::TileMapState::meth_0x4fc650
+    // label: getCliffSpriteIndex
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FC650 = 0x004FC650,
-    // label: isCliffDropInDirection
+    // label: _HoldStrong::Map::TileMapState::meth_0x4fc7c0
+    // label: isSteepDropInDirection
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FC7C0 = 0x004FC7C0,
-    // label: computeClimbRampRotation
+    // label: _HoldStrong::Map::TileMapState::meth_0x4fc810
+    // label: computeSlopeEdgeSprite
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FC810 = 0x004FC810,
+    // label: _HoldStrong::Map::TileMapState::updateGFXLayers
     // label: updateGFXLayers
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FC9E0 = 0x004FC9E0,
-    // label: updateMacroLayerRelated
+    // label: _HoldStrong::Map::TileMapState::updateMacroLayerRelated
+    // label: recomputeMacroLayerRegion
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FDB00 = 0x004FDB00,
-    // label: updateMacroLayerRelated2
+    // label: _HoldStrong::Map::TileMapState::updateMacroLayerRelated2
+    // label: recomputeMacroLayerRegion2
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FF080 = 0x004FF080,
     // type: function
     SHC_3BB0A8C1_0x004FF420 = 0x004FF420,
+    // label: _HoldStrong::Map::TileMapState::setBitFlagBasedOnWallTowerGatehouseOrKeep
     // label: setBitFlagBasedOnWallTowerGatehouseOrKeep
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FF870 = 0x004FF870,
+    // label: _HoldStrong::Map::TileMapState::returnSomeHeight
     // label: returnSomeHeight
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FF990 = 0x004FF990,
@@ -45866,11 +48975,15 @@ enum {
     SHC_3BB0A8C1_0x004FFB02 = 0x004FFB02,
     // type: /byte
     SHC_3BB0A8C1_0x004FFB03 = 0x004FFB03,
+    // label: _HoldStrong::Map::TileMapState::getTotalHeightAtTile
     // label: getTotalHeightAtTile
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FFB10 = 0x004FFB10,
+    // label: _HoldStrong::Map::TileMapState::getTotalHeightAt
     // label: getTotalHeightAt
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FFBA0 = 0x004FFBA0,
@@ -45960,7 +49073,9 @@ enum {
     SHC_3BB0A8C1_0x004FFF01 = 0x004FFF01,
     // type: /byte
     SHC_3BB0A8C1_0x004FFF02 = 0x004FFF02,
+    // label: _HoldStrong::Map::TileMapState::getHeightAtTileIncludingOwnersBuildings
     // label: getHeightAtTileIncludingOwnersBuildings
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FFF10 = 0x004FFF10,
@@ -46032,23 +49147,37 @@ enum {
     SHC_3BB0A8C1_0x00500090 = 0x00500090,
     // type: /byte
     SHC_3BB0A8C1_0x00500091 = 0x00500091,
+    // label: _HoldStrong::Map::TileMapState::recountTotalOwnedMoats
     // label: recountTotalOwnedMoats
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005000A0 = 0x005000A0,
-    // label: countMoatsOwnedByEachPlayer
+    // label: _HoldStrong::Map::TileMapState::scanMoatsInGroupsOfThreeUnk
+    // label: countMoatTilesPerPlayer
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005000E0 = 0x005000E0,
+    // label: _HoldStrong::Map::TileMapState::countUnfinishedMoatUnk
     // label: countUnfinishedMoatTilesForPlayer
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500180 = 0x00500180,
+    // label: _HoldStrong::Map::TileMapState::getUnownedMoatCount
     // label: getUnownedMoatCount
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500210 = 0x00500210,
+    // label: busyWaitCountdown
+    // location:
+    // type: function
+    SHC_3BB0A8C1_0x00500220 = 0x00500220,
+    // label: _HoldStrong::Map::TileMapState::returnOwnedMoatAtTile
     // label: returnOwnedMoatAtTile
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500250 = 0x00500250,
@@ -46056,123 +49185,183 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00500290 = 0x00500290,
+    // label: _HoldStrong::Map::TileMapState::clearMoatFromMemory
     // label: clearMoatFromMemory
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005002D0 = 0x005002D0,
+    // label: _HoldStrong::Map::TileMapState::clearMoat
     // label: clearMoat
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500310 = 0x00500310,
+    // label: _HoldStrong::Map::TileMapState::findTileInSameAreaAndNoTooHeightDifference
     // label: findTileInSameAreaAndNoTooHeightDifference
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500370 = 0x00500370,
+    // label: _HoldStrong::Map::TileMapState::setXYBasedOnMoatID
     // label: setXYBasedOnMoatID
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005003D0 = 0x005003D0,
-    // label: advanceMoatFillProgress
+    // label: _HoldStrong::Map::TileMapState::meth_0x500500
+    // label: advanceMoatDigging
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500500 = 0x00500500,
-    // label: clearMoatAtTileIfPresent
+    // label: _HoldStrong::Map::TileMapState::clearMoatIfUnk
+    // label: clearMoatIfPresent
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005005F0 = 0x005005F0,
-    // label: updateMoatCountdownTimers
+    // label: _HoldStrong::Map::TileMapState::moatRelatedUpdateFunction
+    // label: updateMoatCounts
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500640 = 0x00500640,
+    // label: _HoldStrong::Map::TileMapState::meth_0x500680
     // label: resetMoatArray
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500680 = 0x00500680,
-    // label: clearInvalidMoatEntries
+    // label: _HoldStrong::Map::TileMapState::meth_0x5006c0
+    // label: purgeStaleMoats
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005006C0 = 0x005006C0,
-    // label: setMoatVisualStateAtTile
+    // label: _HoldStrong::Map::TileMapState::meth_0x500720
+    // label: setMoatValueAtTile
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500720 = 0x00500720,
-    // label: setMoatOwnerForAllMatching
+    // label: _HoldStrong::Map::TileMapState::meth_0x500750
+    // label: reassignMoatOwnership
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500750 = 0x00500750,
+    // label: _HoldStrong::Map::TileMapState::swapMoatOwnership
     // label: swapMoatOwnership
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500790 = 0x00500790,
-    // label: resetPitchDitchArray
+    // label: _HoldStrong::Map::TileMapState::meth_0x5007d0
+    // label: clearAllPitchDitches
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005007D0 = 0x005007D0,
+    // label: _HoldStrong::Map::TileMapState::countPitchDitchesWithPlayerID0
     // label: countPitchDitchesWithPlayerID0
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500800 = 0x00500800,
+    // label: _HoldStrong::Map::TileMapState::getPitchDitchIDForTile
     // label: getPitchDitchIDForTile
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500850 = 0x00500850,
+    // label: _HoldStrong::Map::TileMapState::destroyPitchDitch
     // label: destroyPitchDitch
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500890 = 0x00500890,
+    // label: _HoldStrong::Map::TileMapState::swapPitchOwnership
     // label: swapPitchOwnership
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500940 = 0x00500940,
-    // label: findNearestValidDigTileNearTarget
+    // label: _HoldStrong::Map::TileMapState::meth_0x500980
+    // label: findAdjacentReachableTile
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500980 = 0x00500980,
-    // label: computeTileAlongAxisOffset
+    // label: _HoldStrong::Map::TileMapState::meth_0x500b50
+    // label: offsetTileByDirectionSteps
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500B50 = 0x00500B50,
-    // label: setSignpostDistanceForCampaignMission
+    // label: _HoldStrong::Map::TileMapState::campaignRelatedNumber
+    // label: setSignpostDistanceForMode
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500BB0 = 0x00500BB0,
-    // label: startBuildingDestructionConfirmation
+    // label: _HoldStrong::Map::WallAndPitchState::meth_0x500c20
+    // label: beginBuildingPlacementUndo
+    // location:
     // location: OpenSHC/Map/WallAndPitchState
     // type: function
     SHC_3BB0A8C1_0x00500C20 = 0x00500C20,
+    // label: _HoldStrong::Map::WallAndPitchState::resetWallAndPitchState
     // label: resetWallAndPitchState
+    // location:
     // location: OpenSHC/Map/WallAndPitchState
     // type: function
     SHC_3BB0A8C1_0x00500C80 = 0x00500C80,
-    // label: startEntityDestructionConfirmation
+    // label: _HoldStrong::Map::WallAndPitchState::meth_0x500cb0
+    // label: beginEntityPlacementUndo
+    // location:
     // location: OpenSHC/Map/WallAndPitchState
     // type: function
     SHC_3BB0A8C1_0x00500CB0 = 0x00500CB0,
-    // label: startUnitDestructionConfirmation
+    // label: _HoldStrong::Map::WallAndPitchState::meth_0x500cf0
+    // label: beginUnitPlacementUndo
+    // location:
     // location: OpenSHC/Map/WallAndPitchState
     // type: function
     SHC_3BB0A8C1_0x00500CF0 = 0x00500CF0,
+    // label: _HoldStrong::Map::WallAndPitchState::resetWallPlacementInfo
     // label: resetWallPlacementInfo
+    // location:
     // location: OpenSHC/Map/WallAndPitchState
     // type: function
     SHC_3BB0A8C1_0x00500D30 = 0x00500D30,
+    // label: _HoldStrong::Map::WallAndPitchState::addWallPlacementInfoForTile
     // label: addWallPlacementInfoForTile
+    // location:
     // location: OpenSHC/Map/WallAndPitchState
     // type: function
     SHC_3BB0A8C1_0x00500D60 = 0x00500D60,
+    // label: _HoldStrong::Map::WallAndPitchState::placePitchDitch
     // label: placePitchDitch
+    // location:
     // location: OpenSHC/Map/WallAndPitchState
     // type: function
     SHC_3BB0A8C1_0x00500DD0 = 0x00500DD0,
+    // label: _HoldStrong::Map::WallAndPitchState::destroyWall
     // label: destroyWall
+    // location:
     // location: OpenSHC/Map/WallAndPitchState
     // type: function
     SHC_3BB0A8C1_0x00500E20 = 0x00500E20,
+    // label: _HoldStrong::Map::WallAndPitchState::destroyPitch
     // label: destroyPitch
+    // location:
     // location: OpenSHC/Map/WallAndPitchState
     // type: function
     SHC_3BB0A8C1_0x00500EE0 = 0x00500EE0,
-    // label: updateDestructionConfirmationCountdown
+    // label: _HoldStrong::Map::WallAndPitchState::meth_0x500f40
+    // label: tickPlacementUndoTimer
+    // location:
     // location: OpenSHC/Map/WallAndPitchState
     // type: function
     SHC_3BB0A8C1_0x00500F40 = 0x00500F40,
@@ -46188,25 +49377,35 @@ enum {
     SHC_3BB0A8C1_0x005010B8 = 0x005010B8,
     // type: /pointer
     SHC_3BB0A8C1_0x005010BC = 0x005010BC,
+    // label: _HoldStrong::UI::HoveredState::clearHoveredState
     // label: clearHoveredState
+    // location:
     // location: OpenSHC/UI/HoveredState
     // type: function
     SHC_3BB0A8C1_0x005010C0 = 0x005010C0,
     // type: function
     SHC_3BB0A8C1_0x005010D0 = 0x005010D0,
+    // label: _HoldStrong::UI::HoveredState::clearInvalidatedHoverStates
     // label: clearInvalidatedHoverStates
+    // location:
     // location: OpenSHC/UI/HoveredState
     // type: function
     SHC_3BB0A8C1_0x005010E0 = 0x005010E0,
+    // label: _HoldStrong::UI::HoveredState::createHoverStateElement
     // label: createHoverStateElement
+    // location:
     // location: OpenSHC/UI/HoveredState
     // type: function
     SHC_3BB0A8C1_0x00501110 = 0x00501110,
-    // label: spreadFlagPlacementAlgorithm
+    // label: _HoldStrong::Map::TileMapState::spreadAlgorithmForFlagsAndBraziers2Unk
+    // label: removePlayerFlagsAndBraziers
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00501180 = 0x00501180,
-    // label: spreadBrazierPlacementAlgorithm
+    // label: _HoldStrong::Map::TileMapState::spreadAlgorithmForFlagsAndBraziersUnk
+    // label: spreadPlayerFlagsAndBraziers
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005011A0 = 0x005011A0,
@@ -46214,11 +49413,15 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x005011C0 = 0x005011C0,
-    // label: UpgradeMapLogicToVersion_Unknown1
+    // label: _HoldStrong::Map::Version::UpgradeMapLogicToVersion_Unknown1
+    // label: upgradeMapClearInvalidDisplayFlag
+    // location:
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x005011F0 = 0x005011F0,
-    // label: UpgradeMapLogicToVersion_Unknown2
+    // label: _HoldStrong::Map::Version::UpgradeMapLogicToVersion_Unknown2
+    // label: upgradeMapFixSunkenStairs
+    // location:
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x00501350 = 0x00501350,
@@ -46248,23 +49451,33 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00501730 = 0x00501730,
-    // label: UpgradeMapLogicToVersion_Unknown3
+    // label: _HoldStrong::Map::Version::UpgradeMapLogicToVersion_Unknown3
+    // label: upgradeMapMarkCompletedMoats
+    // location:
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x00501760 = 0x00501760,
-    // label: forceFullTileMapRedraw
+    // label: _HoldStrong::Map::TileMapState::clearAndSetTileMapUnknown2Plus
+    // label: forceRedrawAllTileMapLayers
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005017A0 = 0x005017A0,
-    // label: useEraserBrush
+    // label: _HoldStrong::Map::TileMapState::meth_0x5017c0
+    // label: eraseMapTilesWithBrush
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005017C0 = 0x005017C0,
+    // label: _HoldStrong::Map::TileMapState::updateShowHiLayerOrResetChangedLayer
     // label: updateShowHiLayerOrResetChangedLayer
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00501A20 = 0x00501A20,
+    // label: _HoldStrong::Map::TileMapState::changeMapOrientationUnk
     // label: changeMapOrientation
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00501B90 = 0x00501B90,
@@ -46282,41 +49495,59 @@ enum {
     SHC_3BB0A8C1_0x00501CC4 = 0x00501CC4,
     // type: /pointer
     SHC_3BB0A8C1_0x00501CC8 = 0x00501CC8,
+    // label: _HoldStrong::Map::TileMapState::increaseHeightForTunnelWithBrush
     // label: increaseHeightForTunnelWithBrush
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00501CD0 = 0x00501CD0,
+    // label: _HoldStrong::Map::TileMapState::raiseLand
     // label: raiseLand
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00501D90 = 0x00501D90,
+    // label: _HoldStrong::Map::TileMapState::createPlateau
     // label: createPlateau
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00501F50 = 0x00501F50,
     // type: function
     SHC_3BB0A8C1_0x00501FE0 = 0x00501FE0,
-    // label: useLevelBrush
+    // label: _HoldStrong::Map::TileMapState::useBrush2
+    // label: useBrush2
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00502110 = 0x00502110,
+    // label: _HoldStrong::Map::TileMapState::setLand
     // label: setLand
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00502390 = 0x00502390,
-    // label: isValidCastleSiteLocation
+    // label: _HoldStrong::Map::TileMapState::meth_0x5024f0
+    // label: canPlaceTerrainFeatureAt
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005024F0 = 0x005024F0,
-    // label: useTerrainHeightBrush
+    // label: _HoldStrong::Map::TileMapState::useBrush3
+    // label: useBrush3
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00502680 = 0x00502680,
-    // label: getMaxWallHeightInBrushArea
+    // label: _HoldStrong::Map::TileMapState::meth_0x502950
+    // label: getMaxFootprintWallHeight
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00502950 = 0x00502950,
-    // label: validateWallBuildPath
+    // label: _HoldStrong::Map::TileMapState::checkWhetherThisWallBuildIsAllowed
+    // label: checkWhetherThisWallBuildIsAllowed
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005029D0 = 0x005029D0,
@@ -46354,7 +49585,9 @@ enum {
     SHC_3BB0A8C1_0x00502F29 = 0x00502F29,
     // type: /byte
     SHC_3BB0A8C1_0x00502F2A = 0x00502F2A,
+    // label: _HoldStrong::Map::TileMapState::placeWalls
     // label: placeWalls
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00502F30 = 0x00502F30,
@@ -46392,15 +49625,21 @@ enum {
     SHC_3BB0A8C1_0x00503491 = 0x00503491,
     // type: /byte
     SHC_3BB0A8C1_0x00503492 = 0x00503492,
-    // label: placeDefensiveStructureTile
+    // label: _HoldStrong::Map::TileMapState::placeDefensiveStructurePart2Unk
+    // label: placeWallTileStructure
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005034A0 = 0x005034A0,
+    // label: _HoldStrong::Map::TileMapState::setupBuildingSizeIndexMapping
     // label: setupBuildingSizeIndexMapping
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00503720 = 0x00503720,
+    // label: _HoldStrong::Map::TileMapState::checkBuildingCanBePlacedHere
     // label: checkBuildingCanBePlacedHere
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005037B0 = 0x005037B0,
@@ -46706,7 +49945,9 @@ enum {
     SHC_3BB0A8C1_0x00504A26 = 0x00504A26,
     // type: /byte
     SHC_3BB0A8C1_0x00504A27 = 0x00504A27,
-    // label: evaluateBuildingPlacementAtCursor
+    // label: _HoldStrong::Map::TileMapState::meth_0x504a30
+    // label: validateBuildingPlacement
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00504A30 = 0x00504A30,
@@ -46816,11 +50057,15 @@ enum {
     SHC_3BB0A8C1_0x00504ED0 = 0x00504ED0,
     // type: /byte
     SHC_3BB0A8C1_0x00504ED1 = 0x00504ED1,
-    // label: updateBuildingPlacementRotationPreview
+    // label: _HoldStrong::Map::TileMapState::meth_0x504ee0
+    // label: computePlacementRotationKeepFail
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00504EE0 = 0x00504EE0,
+    // label: _HoldStrong::Map::TileMapState::setConstructionGFXLayerBasedOnPlacementChecks
     // label: setConstructionGFXLayerBasedOnPlacementChecks
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00504F10 = 0x00504F10,
@@ -46834,43 +50079,63 @@ enum {
     SHC_3BB0A8C1_0x00505A10 = 0x00505A10,
     // type: function
     SHC_3BB0A8C1_0x005060C0 = 0x005060C0,
+    // label: _HoldStrong::Map::TileMapState::updateBuildingGraphicsLayer
     // label: updateBuildingGraphicsLayer
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00506370 = 0x00506370,
-    // label: updatePathLinkagesForBuilding
+    // label: _HoldStrong::Map::TileMapState::someUpdatePathLinkageRelatedCall
+    // label: updateBuildingPathLinkages
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00506AD0 = 0x00506AD0,
+    // label: _HoldStrong::Map::TileMapState::placeWorkshopOrHovel
     // label: placeWorkshopOrHovel
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00506BD0 = 0x00506BD0,
+    // label: _HoldStrong::Map::TileMapState::placeSiegetowerPlaced
     // label: placeSiegetowerPlaced
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00506D40 = 0x00506D40,
-    // label: placeSiegeTent
+    // label: _HoldStrong::Map::TileMapState::placeSiegeTentUnk
+    // label: stampBuildingTilesAndLinkages
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00506E10 = 0x00506E10,
+    // label: _HoldStrong::Map::TileMapState::placePositiveFearfactor
     // label: placePositiveFearfactor
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00506F40 = 0x00506F40,
-    // label: stampBuildingOntoTileMap
+    // label: _HoldStrong::Map::TileMapState::meth_0x507060
+    // label: placeBuildingOnTiles
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00507060 = 0x00507060,
+    // label: _HoldStrong::Map::TileMapState::placeTower
     // label: placeTower
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00507130 = 0x00507130,
+    // label: _HoldStrong::Map::TileMapState::upgradeTowerLogicLayer
     // label: upgradeTowerLogicLayer
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00507280 = 0x00507280,
-    // label: resetTileAndClearMoat
+    // label: _HoldStrong::Map::TileMapState::meth_0x507350
+    // label: resetTileTerrain
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00507350 = 0x00507350,
@@ -46908,59 +50173,83 @@ enum {
     SHC_3BB0A8C1_0x0050741D = 0x0050741D,
     // type: /byte
     SHC_3BB0A8C1_0x0050741E = 0x0050741E,
+    // label: _HoldStrong::Map::TileMapState::placeGatehouseSmall
     // label: placeGatehouseSmall
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00507420 = 0x00507420,
+    // label: _HoldStrong::Map::TileMapState::placeGatehouseLarge
     // label: placeGatehouseLarge
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00507560 = 0x00507560,
+    // label: _HoldStrong::Map::TileMapState::placeBarracks
     // label: placeBarracks
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005076A0 = 0x005076A0,
     // type: function
     SHC_3BB0A8C1_0x00507830 = 0x00507830,
+    // label: _HoldStrong::Map::TileMapState::placeEngineersguild
     // label: placeEngineersguild
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00507BD0 = 0x00507BD0,
     // type: function
     SHC_3BB0A8C1_0x00507D50 = 0x00507D50,
+    // label: _HoldStrong::Map::TileMapState::placeTunnelersguild
     // label: placeTunnelersguild
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00507E00 = 0x00507E00,
     // type: function
     SHC_3BB0A8C1_0x00507F80 = 0x00507F80,
+    // label: _HoldStrong::Map::TileMapState::placeOilsmelter
     // label: placeOilsmelter
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00508030 = 0x00508030,
+    // label: _HoldStrong::Map::TileMapState::placeQuarry
     // label: placeQuarry
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00508250 = 0x00508250,
+    // label: _HoldStrong::Map::TileMapState::placeStockpile
     // label: placeStockpile
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00508540 = 0x00508540,
     // type: function
     SHC_3BB0A8C1_0x00508590 = 0x00508590,
-    // label: clearSizeFiveBuildingFootprintAndMoats
+    // label: _HoldStrong::Map::TileMapState::meth_0x508760
+    // label: clearKeepTilesAndMoat
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00508760 = 0x00508760,
-    // label: clearSizeFiveBuildingFootprint
+    // label: _HoldStrong::Map::TileMapState::meth_0x508870
+    // label: clearSize5FootprintAndMoat
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00508870 = 0x00508870,
-    // label: floodMoatUnderRemovedBuilding
+    // label: _HoldStrong::Map::TileMapState::meth_0x508910
+    // label: applyKeepMoatTiles
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00508910 = 0x00508910,
+    // label: _HoldStrong::Map::TileMapState::renderPreviewMapperWithBrush
     // label: renderPreviewMapperWithBrush
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00508A00 = 0x00508A00,
@@ -47560,32 +50849,26 @@ enum {
     SHC_3BB0A8C1_0x00508DC2 = 0x00508DC2,
     // type: /byte
     SHC_3BB0A8C1_0x00508DC3 = 0x00508DC3,
+    // label: _HoldStrong::Map::TileMapState::applyTreeToLogicalLayer
     // label: applyTreeToLogicalLayer
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00508DD0 = 0x00508DD0,
-    // label: eraseAreaWithBrush
+    // label: _HoldStrong::Map::TileMapState::meth_0x508ec0
+    // label: eraseMapTilesWithBrushBounded
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00508EC0 = 0x00508EC0,
+    // label: _HoldStrong::Map::TileMapState::updateTextureTilemap
     // label: updateTextureTilemap
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00509180 = 0x00509180,
     // type: function
-    SHC_3BB0A8C1_0x00509930 = 0x00509930,
-    // type: function
     SHC_3BB0A8C1_0x0050A74E = 0x0050A74E,
-    // type: function
-    SHC_3BB0A8C1_0x0050AA13 = 0x0050AA13,
-    // type: function
-    SHC_3BB0A8C1_0x0050AD2B = 0x0050AD2B,
-    // type: function
-    SHC_3BB0A8C1_0x0050B063 = 0x0050B063,
-    // type: function
-    SHC_3BB0A8C1_0x0050C94B = 0x0050C94B,
-    // type: function
-    SHC_3BB0A8C1_0x0050CC8A = 0x0050CC8A,
     // type: function
     SHC_3BB0A8C1_0x0050CE38 = 0x0050CE38,
     // type: function
@@ -47602,8 +50885,6 @@ enum {
     SHC_3BB0A8C1_0x0050EEE0 = 0x0050EEE0,
     // type: function
     SHC_3BB0A8C1_0x0050FF1F = 0x0050FF1F,
-    // type: function
-    SHC_3BB0A8C1_0x005104F9 = 0x005104F9,
     // type: function
     SHC_3BB0A8C1_0x0051051E = 0x0051051E,
     // type: /pointer[2]
@@ -47628,39 +50909,55 @@ enum {
     SHC_3BB0A8C1_0x00510F10 = 0x00510F10,
     // type: /undefined *32[7]
     SHC_3BB0A8C1_0x00511004 = 0x00511004,
+    // label: _HoldStrong::Map::TileMapState::updateMacroLayer
     // label: updateMacroLayer
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00511020 = 0x00511020,
+    // label: _HoldStrong::Map::TileMapState::createMoat
     // label: createMoat
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005110B0 = 0x005110B0,
+    // label: _HoldStrong::Map::TileMapState::findNearestFriendlyMoatTileForDigging
     // label: findNearestFriendlyMoatTileForDigging
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005111D0 = 0x005111D0,
     // type: function
     SHC_3BB0A8C1_0x00511240 = 0x00511240,
+    // label: _HoldStrong::Map::TileMapState::removeMoat
     // label: removeMoat
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005113F0 = 0x005113F0,
+    // label: _HoldStrong::Map::TileMapState::updatePitchDitches
     // label: updatePitchDitches
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005114C0 = 0x005114C0,
     // type: function
     SHC_3BB0A8C1_0x005115C0 = 0x005115C0,
+    // label: _HoldStrong::Map::TileMapState::placePitchDitch
     // label: placePitchDitch
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005116E0 = 0x005116E0,
-    // label: updateGameRelatedValue
+    // label: _HoldStrong::Map::TileMapState::updateGameRelatedValue
+    // label: tickExpandingSignpostRadius
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00511850 = 0x00511850,
-    // label: confirmAndQueueDestructionCommand
+    // label: _HoldStrong::Map::WallAndPitchState::meth_0x5118c0
+    // label: commitPlacementUndo
+    // location:
     // location: OpenSHC/Map/WallAndPitchState
     // type: function
     SHC_3BB0A8C1_0x005118C0 = 0x005118C0,
@@ -47675,10 +50972,14 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x005119B4 = 0x005119B4,
     // label: Constructor_HoveredState
+    // label: _HoldStrong::UI::HoveredState::Constructor_HoveredState
+    // location:
     // location: OpenSHC/UI/HoveredState
     // type: function
     SHC_3BB0A8C1_0x005119C0 = 0x005119C0,
+    // label: _HoldStrong::UI::HoveredState::calculateHoveredTile
     // label: calculateHoveredTile
+    // location:
     // location: OpenSHC/UI/HoveredState
     // type: function
     SHC_3BB0A8C1_0x005119D0 = 0x005119D0,
@@ -48198,69 +51499,97 @@ enum {
     SHC_3BB0A8C1_0x00511D60 = 0x00511D60,
     // type: /pointer
     SHC_3BB0A8C1_0x00511D64 = 0x00511D64,
+    // label: _HoldStrong::Map::TileMapState::upgradeMapFormatLogicLayer
     // label: upgradeMapFormatLogicLayer
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00511D70 = 0x00511D70,
+    // label: _HoldStrong::Map::TileMapState::setupTileMapSections
     // label: setupTileMapSections
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00511DF0 = 0x00511DF0,
     // type: function
     SHC_3BB0A8C1_0x005120C0 = 0x005120C0,
+    // label: _HoldStrong::Map::TileMapState::setupAllMapSections
     // label: setupAllMapSections
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00512100 = 0x00512100,
     // type: function
     SHC_3BB0A8C1_0x00512180 = 0x00512180,
+    // label: _HoldStrong::Map::TileMapState::prepareMap
     // label: prepareMap
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00512450 = 0x00512450,
+    // label: _HoldStrong::Map::TileMapState::resetAreaBasedOnLogicalLayer
     // label: resetAreaBasedOnLogicalLayer
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005127B0 = 0x005127B0,
     // type: function
     SHC_3BB0A8C1_0x005127D0 = 0x005127D0,
+    // label: _HoldStrong::Map::TileMapState::processMapOrientationChange
     // label: processMapOrientationChange
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00512920 = 0x00512920,
+    // label: _HoldStrong::Map::TileMapState::setTerrain
     // label: setTerrain
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00512940 = 0x00512940,
+    // label: _HoldStrong::Map::TileMapState::placeMoat
     // label: placeMoat
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00514480 = 0x00514480,
+    // label: _HoldStrong::Map::TileMapState::placeKillingPit
     // label: placeKillingPit
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00514520 = 0x00514520,
+    // label: _HoldStrong::Map::TileMapState::placeKeep
     // label: placeKeep
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005146D0 = 0x005146D0,
     // type: function
     SHC_3BB0A8C1_0x00514BC0 = 0x00514BC0,
+    // label: _HoldStrong::Map::TileMapState::placeDrawbridge
     // label: placeDrawbridge
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00514DE0 = 0x00514DE0,
+    // label: _HoldStrong::Map::TileMapState::placeWheatfarm
     // label: placeWheatfarm
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00514F30 = 0x00514F30,
+    // label: _HoldStrong::Map::TileMapState::placeHopfarm
     // label: placeHopfarm
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005151C0 = 0x005151C0,
     // type: function
     SHC_3BB0A8C1_0x00515250 = 0x00515250,
+    // label: _HoldStrong::Map::TileMapState::placeDairyfarm
     // label: placeDairyfarm
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005154D0 = 0x005154D0,
@@ -48268,31 +51597,48 @@ enum {
     SHC_3BB0A8C1_0x005155E0 = 0x005155E0,
     // type: function
     SHC_3BB0A8C1_0x00515680 = 0x00515680,
+    // label: _HoldStrong::Map::TileMapState::placeApplefarm
     // label: placeApplefarm
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00515740 = 0x00515740,
+    // label: _HoldStrong::Map::TileMapState::clearBuildingFromTerrain
     // label: clearBuildingFromTerrain
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00515A20 = 0x00515A20,
-    // label: createMoatForSizeFiveBuilding
+    // label: _HoldStrong::Map::TileMapState::createMoatSize5Unk
+    // label: createKeepSurroundingMoat
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00515C80 = 0x00515C80,
+    // label: _HoldStrong::Map::TileMapState::placeTree
     // label: placeTree
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00515DA0 = 0x00515DA0,
-    // label: constructTileMapState
+    // label: Constructor_TileMapState
+    // label: _HoldStrong::Map::TileMapState::Constructor_TileMapState
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00515F40 = 0x00515F40,
+    // label: _HoldStrong::Map::TileMapState::prepareAreaForBuildingPlacement
     // label: prepareAreaForBuildingPlacement
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005160C0 = 0x005160C0,
+    // label: LAB_ClearBuilding
+    // location: OpenSHC/Map/TileMapState/prepareAreaForBuildingPlacement
+    SHC_3BB0A8C1_0x00516287 = 0x00516287,
+    // label: _HoldStrong::Map::TileMapState::placeBuilding
     // label: placeBuilding
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005162D0 = 0x005162D0,
@@ -48650,7 +51996,9 @@ enum {
     SHC_3BB0A8C1_0x00516B73 = 0x00516B73,
     // type: /byte
     SHC_3BB0A8C1_0x00516B74 = 0x00516B74,
+    // label: _HoldStrong::Map::TileMapState::processDamageToBuilding
     // label: processDamageToBuilding
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00516B80 = 0x00516B80,
@@ -48954,7 +52302,9 @@ enum {
     SHC_3BB0A8C1_0x00517789 = 0x00517789,
     // type: /byte
     SHC_3BB0A8C1_0x0051778A = 0x0051778A,
+    // label: _HoldStrong::Map::TileMapState::processEntityDamageToBuildingCollateral
     // label: processEntityDamageToBuildingCollateral
+    // location:
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00517790 = 0x00517790,
@@ -49258,23 +52608,29 @@ enum {
     SHC_3BB0A8C1_0x00518129 = 0x00518129,
     // type: /byte
     SHC_3BB0A8C1_0x0051812A = 0x0051812A,
+    // label: _HoldStrong::Map::Units::TroopValueState::clearAttackInfo
     // label: clearAttackInfo
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00518130 = 0x00518130,
-    // label: initializeAttackWaveSlot
+    // label: resetAttackAndAssignSignpost
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00518180 = 0x00518180,
+    // label: _HoldStrong::Map::Units::TroopValueState::searchTribeWithProperties
     // label: searchTribeWithProperties
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x005182A0 = 0x005182A0,
-    // label: isAttackWaveComplete
+    // label: areAllAttacksFinished
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00518350 = 0x00518350,
+    // label: _HoldStrong::Map::Units::TroopValueState::sortAttackInfoTribeIDArrayBasedOn
     // label: sortAttackInfoTribeIDArrayBasedOn
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00518380 = 0x00518380,
@@ -49282,53 +52638,65 @@ enum {
     SHC_3BB0A8C1_0x005185C0 = 0x005185C0,
     // type: function
     SHC_3BB0A8C1_0x00518690 = 0x00518690,
+    // label: _HoldStrong::Map::Units::TroopValueState::applyTribeBehaviorTypes
     // label: applyTribeBehaviorTypes
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00518870 = 0x00518870,
     // type: function
     SHC_3BB0A8C1_0x005188A0 = 0x005188A0,
-    // label: assignBehaviorTypeToNearbyTribes
+    // label: assignBehaviorToReachableTribes
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00518930 = 0x00518930,
-    // label: assignBehaviorTypeAndLinkSupportTribe
+    // label: assignTribeBehaviorAndPairArchers
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00518A10 = 0x00518A10,
+    // label: _HoldStrong::Map::Units::TroopValueState::isLessThanPercentageOfTribesInAttackDying
     // label: isLessThanPercentageOfTribesInAttackDying
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00518BB0 = 0x00518BB0,
-    // label: renderAttackInfoDebugOverlay
+    // label: _HoldStrong::Map::Units::TroopValueState::renderDebugDataZoneDataUnk
+    // label: renderAIAttackDebugOverlay
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00518C50 = 0x00518C50,
-    // label: computeAttackWaveTroopComposition
+    // label: computeAttackWaveScaling
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00519310 = 0x00519310,
-    // label: buildRallyPointsFromSiegeUnits
+    // label: buildSiegeRallyPoints
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00519690 = 0x00519690,
-    // label: setRallyPointForLaddermenTribe
+    // label: setLaddermanRallyPoint
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00519790 = 0x00519790,
-    // label: initializeAttackZoneSearch
+    // label: initAttackInfoStartZone
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00519850 = 0x00519850,
+    // label: _HoldStrong::Map::Units::TroopValueState::recomputeTargetedBuildingTilesArray
     // label: recomputeTargetedBuildingTilesArray
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x005198C0 = 0x005198C0,
+    // label: _HoldStrong::Map::Units::TroopValueState::getTileInTargetedBuildingTiles
     // label: getTileInTargetedBuildingTiles
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00519960 = 0x00519960,
-    // label: computeSiegeSpotScores
+    // label: _HoldStrong::Map::Units::TroopValueState::hack2related
+    // label: hack2related
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00519990 = 0x00519990,
@@ -49344,93 +52712,127 @@ enum {
     SHC_3BB0A8C1_0x00519BF0 = 0x00519BF0,
     // type: function
     SHC_3BB0A8C1_0x00519C40 = 0x00519C40,
+    // label: _HoldStrong::Map::Units::TroopValueState::findEnemyWalls
     // label: findEnemyWalls
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00519CC0 = 0x00519CC0,
+    // label: _HoldStrong::Map::Units::TroopValueState::setScale3
     // label: setScale3
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00519DE0 = 0x00519DE0,
-    // label: findNearestAvailableScalePoint
+    // label: _HoldStrong::Map::Units::TroopValueState::meth_0x519e40
+    // label: findAttackInfoScaleTarget
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00519E40 = 0x00519E40,
+    // label: _HoldStrong::Map::Units::TroopValueState::setTown2
     // label: setTown2
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00519F50 = 0x00519F50,
+    // label: _HoldStrong::Map::Units::TroopValueState::findEnemyBuildingsClosestToUnit
     // label: findEnemyBuildingsClosestToUnit
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00519FB0 = 0x00519FB0,
-    // label: countAvailablePeopleValueSlots
+    // label: countAvailablePeopleTargets
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051A0C0 = 0x0051A0C0,
-    // label: countAvailableLordValueSlots
+    // label: countAvailableLordTargets
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051A100 = 0x0051A100,
+    // label: _HoldStrong::Map::Units::TroopValueState::calculateTile2PeoplValueClosestToUnit
     // label: calculateTile2PeoplValueClosestToUnit
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051A140 = 0x0051A140,
-    // label: findEnemyLord
+    // label: _HoldStrong::Map::Units::TroopValueState::findEnemyLordUnk
+    // label: assignUnitToEnemyLordTarget
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051A220 = 0x0051A220,
+    // label: _HoldStrong::Map::Units::TroopValueState::setGate2
     // label: setGate2
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051A2D0 = 0x0051A2D0,
-    // label: findEnemyTowersOrGates
+    // label: _HoldStrong::Map::Units::TroopValueState::findEnemyTowersOrGatesUnk
+    // label: assignUnitToNearestEnemyGateTarget
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051A330 = 0x0051A330,
     // type: function
     SHC_3BB0A8C1_0x0051A490 = 0x0051A490,
+    // label: _HoldStrong::Map::Units::TroopValueState::setWide3
     // label: setWide3
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051A550 = 0x0051A550,
+    // label: _HoldStrong::Map::Units::TroopValueState::getClosestWideValueBasedOnPlayer
     // label: getClosestWideValueBasedOnPlayer
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051A5B0 = 0x0051A5B0,
     // type: function
     SHC_3BB0A8C1_0x0051A630 = 0x0051A630,
+    // label: _HoldStrong::Map::Units::TroopValueState::setMoat3
     // label: setMoat3
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051A720 = 0x0051A720,
+    // label: _HoldStrong::Map::Units::TroopValueState::calculateTile2MoatValueClosestToUnit
     // label: calculateTile2MoatValueClosestToUnit
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051A780 = 0x0051A780,
-    // label: findNearestDiggableMoatPoint
+    // label: _HoldStrong::Map::Units::TroopValueState::meth_0x51a8a0
+    // label: findMoatTileToDig
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051A8A0 = 0x0051A8A0,
-    // label: findTribeWithMoatAttackBehavior
+    // label: _HoldStrong::Map::Units::TroopValueState::meth_0x51a920
+    // label: findMoatDiggingTribeTarget
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051A920 = 0x0051A920,
-    // label: countAvailableHighValueSlots
+    // label: countAvailableHighTargets
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051A9A0 = 0x0051A9A0,
+    // label: _HoldStrong::Map::Units::TroopValueState::calculateHigh2ClostestToTribeTargetUnit
     // label: calculateHigh2ClostestToTribeTargetUnit
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051A9F0 = 0x0051A9F0,
     // type: function
     SHC_3BB0A8C1_0x0051AA40 = 0x0051AA40,
-    // label: countAvailableArcherValueSlots
+    // label: countAvailableArcherTargets
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051AB10 = 0x0051AB10,
+    // label: _HoldStrong::Map::Units::TroopValueState::calculateArch2ClosestToTribeTargetUnit
     // label: calculateArch2ClosestToTribeTargetUnit
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051AB60 = 0x0051AB60,
@@ -49444,39 +52846,43 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x0051ACB0 = 0x0051ACB0,
-    // label: expandAIZoneLayerStage1
+    // label: recomputeAIApproachLayer1
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051ACE0 = 0x0051ACE0,
     // type: function
     SHC_3BB0A8C1_0x0051ACF0 = 0x0051ACF0,
-    // label: expandAIZoneLayerStage2
+    // label: recomputeAIApproachLayer2
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051AE00 = 0x0051AE00,
-    // label: expandAIZoneLayerStage3
+    // label: recomputeAIApproachLayer4
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051AE90 = 0x0051AE90,
-    // label: findOrReserveArcherPointSlot
+    // label: _HoldStrong::Map::Units::TroopValueState::unkArcherRelated1
+    // label: findArcherPointIndexForTile
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051AF20 = 0x0051AF20,
-    // label: pruneStaleArcherPoints
+    // label: validateAttackInfoEntries
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051AF70 = 0x0051AF70,
     // type: function
     SHC_3BB0A8C1_0x0051AF80 = 0x0051AF80,
-    // label: claimArcherAttackPoint
+    // label: assignTribeArcherAttackPosition
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051AFF0 = 0x0051AFF0,
+    // label: _HoldStrong::Map::Units::TroopValueState::getSupportPointIndex
     // label: getSupportPointIndex
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051B0C0 = 0x0051B0C0,
-    // label: pruneStaleSupportPoints
+    // label: validateSupportPointEntries
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051B110 = 0x0051B110,
@@ -49486,25 +52892,33 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x0051B190 = 0x0051B190,
+    // label: _HoldStrong::Map::Units::TroopValueState::getSiegeIndexForTile
     // label: getSiegeIndexForTile
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051B240 = 0x0051B240,
-    // label: pruneStaleTentPoints
+    // label: validateTentPointEntries
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051B290 = 0x0051B290,
     // type: function
     SHC_3BB0A8C1_0x0051B2A0 = 0x0051B2A0,
-    // label: placeSiegeTentAtAttackAngle
+    // label: _HoldStrong::Map::Units::TroopValueState::placeSiegeTentAndAssignEngineersUnk
+    // label: placeSiegeTentAndOrderConstruction
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051B310 = 0x0051B310,
+    // label: _HoldStrong::Map::Units::TroopValueState::placeSiegeTentOrTunnelAtSuitableLocationAndAssignEngineers
     // label: placeSiegeTentOrTunnelAtSuitableLocationAndAssignEngineers
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051B420 = 0x0051B420,
+    // label: _HoldStrong::Map::Units::TroopValueState::placeTunnelEntrances
     // label: placeTunnelEntrances
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051B570 = 0x0051B570,
@@ -49514,7 +52928,7 @@ enum {
     SHC_3BB0A8C1_0x0051B680 = 0x0051B680,
     // type: function
     SHC_3BB0A8C1_0x0051B690 = 0x0051B690,
-    // label: playAttackAlarmSound
+    // label: playAttackStartHorn
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051B6C0 = 0x0051B6C0,
@@ -49526,7 +52940,9 @@ enum {
     SHC_3BB0A8C1_0x0051B708 = 0x0051B708,
     // type: /pointer
     SHC_3BB0A8C1_0x0051B70C = 0x0051B70C,
+    // label: _HoldStrong::Map::Units::TroopValueState::placeSiegeTentsAndAssignEngineers
     // label: placeSiegeTentsAndAssignEngineers
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051B710 = 0x0051B710,
@@ -49536,51 +52952,69 @@ enum {
     SHC_3BB0A8C1_0x0051B890 = 0x0051B890,
     // type: function
     SHC_3BB0A8C1_0x0051B900 = 0x0051B900,
+    // label: _HoldStrong::Map::Units::TroopValueState::placeTunnelForEveryTunneler
     // label: placeTunnelForEveryTunneler
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051BA30 = 0x0051BA30,
     // type: function
     SHC_3BB0A8C1_0x0051BA90 = 0x0051BA90,
+    // label: _HoldStrong::Map::Units::TroopValueState::addUnitToNewTribe
     // label: addUnitToNewTribe
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051BC70 = 0x0051BC70,
-    // label: exitSiegeEquipmentForWave
+    // label: _HoldStrong::Map::Units::TroopValueState::exitSiegeEquipmentUnk
+    // label: commandSiegeCrewsExitEquipment
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051BD10 = 0x0051BD10,
+    // label: _HoldStrong::Map::Units::TroopValueState::getPlayerNot1AndHasKeep
     // label: getPlayerNot1AndHasKeep
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051BDE0 = 0x0051BDE0,
-    // label: FindFirstOpponentWithKeep
+    // label: findFirstPlayerWithKeep
     // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x0051BE20 = 0x0051BE20,
-    // label: registerSpottedEnemyTile
+    // label: addAttackTargetTile
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051BE60 = 0x0051BE60,
     // type: function
     SHC_3BB0A8C1_0x0051BEE0 = 0x0051BEE0,
-    // label: shouldLightPitchBasedOnTroopValue
+    // label: _HoldStrong::Map::Units::TroopValueState::shouldLightPitchBecauseOfTroopValueUnk
+    // label: shouldLightPitchBecauseOfTroopValue
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051BF20 = 0x0051BF20,
+    // label: _HoldStrong::Map::Units::TroopValueState::giveLightPitchInstructionToUnitClosestToPitch
     // label: giveLightPitchInstructionToUnitClosestToPitch
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051BF70 = 0x0051BF70,
+    // label: _HoldStrong::Map::Units::TroopValueState::lightPitchIfNecessary
     // label: lightPitchIfNecessary
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051C1A0 = 0x0051C1A0,
-    // label: updateArcherBrazierProximityFlags
+    // label: _HoldStrong::Map::Units::TroopValueState::meth_0x51c2d0
+    // label: updateArcherBrazierFlags
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051C2D0 = 0x0051C2D0,
+    // label: _HoldStrong::Map::Units::TroopValueState::getValueOfTroopType
     // label: getValueOfTroopType
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051C360 = 0x0051C360,
@@ -49754,11 +53188,13 @@ enum {
     SHC_3BB0A8C1_0x0051C463 = 0x0051C463,
     // type: /byte
     SHC_3BB0A8C1_0x0051C464 = 0x0051C464,
-    // label: queueOilThrowForIdleArchers
+    // label: aiEngineersThrowOil
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051C470 = 0x0051C470,
+    // label: _HoldStrong::Map::Units::TroopValueState::ifNecessaryThrowOilAutomatically
     // label: ifNecessaryThrowOilAutomatically
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051C570 = 0x0051C570,
@@ -49790,53 +53226,65 @@ enum {
     SHC_3BB0A8C1_0x0051C7EF = 0x0051C7EF,
     // type: /byte
     SHC_3BB0A8C1_0x0051C7F0 = 0x0051C7F0,
+    // label: _HoldStrong::Map::Units::TroopValueState::commandUnitsToMoveToKeep
     // label: commandUnitsToMoveToKeep
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051C800 = 0x0051C800,
-    // label: collectArcherUnitsByLocation
+    // label: _HoldStrong::Map::Units::TroopValueState::meth_0x51ca50
+    // label: collectAIArchersForRepositioning
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051CA50 = 0x0051CA50,
     // type: function
     SHC_3BB0A8C1_0x0051CAE0 = 0x0051CAE0,
-    // label: redeployArchersToDefensivePositions
+    // label: refillWallArcherPositions
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051CBD0 = 0x0051CBD0,
     // type: function
     SHC_3BB0A8C1_0x0051CC00 = 0x0051CC00,
+    // label: _HoldStrong::Map::Units::TroopValueState::assignMacemenAndKnightsNotFromPlayer1ToTribes
     // label: assignMacemenAndKnightsNotFromPlayer1ToTribes
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051CCB0 = 0x0051CCB0,
     // type: function
     SHC_3BB0A8C1_0x0051CE50 = 0x0051CE50,
-    // label: trySendMacemenTribeToAttack
+    // label: dispatchAggressiveMacemenTribe
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051CF90 = 0x0051CF90,
-    // label: trySendKnightTribeToAttack
+    // label: dispatchAggressiveKnightTribe
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051D020 = 0x0051D020,
+    // label: _HoldStrong::Map::Units::TroopValueState::sendAttackingPatrolTribeToComputedDestination
     // label: sendAttackingPatrolTribeToComputedDestination
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051D0D0 = 0x0051D0D0,
-    // label: moveTribeToReachableNearbyTile
+    // label: sendTribeAlongAttackPath
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051D1C0 = 0x0051D1C0,
-    // label: decideAndExecuteTribeAttackAction
+    // label: decideTribeAttackTarget
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051D2B0 = 0x0051D2B0,
-    // label: moveTribeToNearbyGatehouse
+    // label: _HoldStrong::Map::Units::TroopValueState::moveUnitsToGateHouseUnk
+    // label: commandTribeMoveToNearestEnemyGatehouse
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051D450 = 0x0051D450,
+    // label: _HoldStrong::Map::Units::TroopValueState::moveTowardsParticularUnits
     // label: moveTowardsParticularUnits
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051D510 = 0x0051D510,
@@ -49846,19 +53294,27 @@ enum {
     SHC_3BB0A8C1_0x0051D5D0 = 0x0051D5D0,
     // type: function
     SHC_3BB0A8C1_0x0051D5E0 = 0x0051D5E0,
-    // label: constructTroopValueState
+    // label: Constructor_TroopValueState
+    // label: _HoldStrong::Map::Units::TroopValueState::Constructor_TroopValueState
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051D680 = 0x0051D680,
-    // label: advanceAttackWaveStaging
+    // label: _HoldStrong::Map::Units::TroopValueState::meth_0x51d690
+    // label: dispatchAttackWavePeopleAssault
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051D690 = 0x0051D690,
-    // label: updateActiveAttackWaveState
+    // label: _HoldStrong::Map::Units::TroopValueState::meth_0x51d730
+    // label: processSiegeRetreatWave
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051D730 = 0x0051D730,
+    // label: _HoldStrong::Map::Units::TroopValueState::updateTribeBehaviorBasedOnBehaviorType
     // label: updateTribeBehaviorBasedOnBehaviorType
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051D7F0 = 0x0051D7F0,
@@ -50020,7 +53476,9 @@ enum {
     SHC_3BB0A8C1_0x0051E2F2 = 0x0051E2F2,
     // type: /byte
     SHC_3BB0A8C1_0x0051E2F3 = 0x0051E2F3,
+    // label: _HoldStrong::Map::Units::TroopValueState::recomputeAttackInfo
     // label: recomputeAttackInfo
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051E300 = 0x0051E300,
@@ -50035,19 +53493,19 @@ enum {
     // label: LAB_0051f320__next_tile
     // location:
     SHC_3BB0A8C1_0x0051F320 = 0x0051F320,
-    // label: scanForArcherPoints
+    // label: computeAIArcherAttackPoints
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051F340 = 0x0051F340,
     // type: function
     SHC_3BB0A8C1_0x0051F3D0 = 0x0051F3D0,
-    // label: scanForSupportPoints
+    // label: computeAISupportPoints
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051F4B0 = 0x0051F4B0,
     // type: function
     SHC_3BB0A8C1_0x0051F4F0 = 0x0051F4F0,
-    // label: scanForSiegeTentPoints
+    // label: computeAISiegeTentPoints
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051F5C0 = 0x0051F5C0,
@@ -50055,89 +53513,121 @@ enum {
     SHC_3BB0A8C1_0x0051F5E0 = 0x0051F5E0,
     // type: function
     SHC_3BB0A8C1_0x0051F630 = 0x0051F630,
-    // label: processSpottedEnemyTiles
-    // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051F950 = 0x0051F950,
+    // label: _HoldStrong::Map::Units::TroopValueState::recountTotalTroopValue
     // label: recountTotalTroopValue
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051F9C0 = 0x0051F9C0,
+    // label: _HoldStrong::Map::Units::TroopValueState::recomputeTotalTroopValueOfTroopsNearKeep
     // label: recomputeTotalTroopValueOfTroopsNearKeep
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051FA70 = 0x0051FA70,
+    // label: _HoldStrong::Map::Units::TroopValueState::uselessFunction
     // label: uselessFunction
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051FB80 = 0x0051FB80,
+    // label: _HoldStrong::Map::Units::TroopValueState::recountAttackTroopValue
     // label: recountAttackTroopValue
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051FB90 = 0x0051FB90,
-    // label: updateAttackInfoTick
-    // location: OpenSHC/Map/Units/TroopValueState
+    // label: updateAICastleDefenseStateMachine
+    // location:
     // type: function
     SHC_3BB0A8C1_0x0051FE80 = 0x0051FE80,
-    // label: initializeOrAdvanceAttackWave
+    // label: _HoldStrong::Map::Units::TroopValueState::meth_0x51ff90
+    // label: startAttackWave
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051FF90 = 0x0051FF90,
+    // label: _HoldStrong::Map::Units::TroopValueState::aiRecomputeAttacks2
     // label: aiRecomputeAttacks2
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x005200A0 = 0x005200A0,
+    // label: _HoldStrong::Map::Units::TroopValueState::aiRecomputeAttacks
     // label: aiRecomputeAttacks
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x005202B0 = 0x005202B0,
-    // label: updateInProgressAttackWave
+    // label: _HoldStrong::Map::Units::TroopValueState::meth_0x520450
+    // label: processSiegeAttackWave
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00520450 = 0x00520450,
-    // label: executeAttackWaveTargetAssignment
+    // label: _HoldStrong::Map::Units::TroopValueState::meth_0x5205a0
+    // label: runAiAttackWaveLogic
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x005205A0 = 0x005205A0,
-    // label: executeDelayedAttackWaveTargetAssignment
+    // label: _HoldStrong::Map::Units::TroopValueState::meth_0x520cd0
+    // label: runAiAttackWaveLogicSimple
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00520CD0 = 0x00520CD0,
+    // label: _HoldStrong::Map::Units::TroopValueState::aiControlNonSkirmishUnitMovement
     // label: aiControlNonSkirmishUnitMovement
+    // location:
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00520F70 = 0x00520F70,
-    // label: constructTribesState
+    // label: Constructor_TribesState
+    // label: _HoldStrong::Map::Units::TribesState::Constructor_TribesState
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00521180 = 0x00521180,
+    // label: _HoldStrong::Map::Units::TribesState::clearAllTribes
     // label: clearAllTribes
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005211B0 = 0x005211B0,
-    // label: reassignOwnerForTribesOfBehaviorType2
+    // label: reassignTribeOwnership
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00521210 = 0x00521210,
+    // label: _HoldStrong::Map::Units::TribesState::swapTribeOwnership
     // label: swapTribeOwnership
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00521240 = 0x00521240,
-    // label: moveUnitToBehaviorTarget
+    // label: _HoldStrong::Map::Units::TribesState::meth_0x521280
+    // label: assignTribeUnitTarget
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00521280 = 0x00521280,
-    // label: predictUnitInterceptPosition
+    // label: _HoldStrong::Map::Units::TribesState::calculatePathPlanToUnitUnk
+    // label: projectPursuitInterceptAlongPathPlan
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00521500 = 0x00521500,
     // type: function
     SHC_3BB0A8C1_0x00521690 = 0x00521690,
-    // label: getMajoritySelectedUnitType
+    // label: getMostCommonSelectedUnitType
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00521720 = 0x00521720,
-    // label: playUnitSelectionSound
+    // label: _HoldStrong::Map::Units::TribesState::meth_0x5217e0
+    // label: playSelectedUnitOrderSpeech
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005217E0 = 0x005217E0,
@@ -50249,7 +53739,9 @@ enum {
     SHC_3BB0A8C1_0x00521A8E = 0x00521A8E,
     // type: /byte
     SHC_3BB0A8C1_0x00521A8F = 0x00521A8F,
-    // label: playUnitCombatSpeechForTarget
+    // label: _HoldStrong::Map::Units::TribesState::somethingTargetUnitSoundRelated
+    // label: playTribeSelectionSpeech
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00521A90 = 0x00521A90,
@@ -50379,11 +53871,15 @@ enum {
     SHC_3BB0A8C1_0x00521EA5 = 0x00521EA5,
     // type: /byte
     SHC_3BB0A8C1_0x00521EA6 = 0x00521EA6,
-    // label: playUnitSelectSpeech
+    // label: _HoldStrong::Map::Units::TribesState::meth_0x521eb0
+    // label: playUnitOrderSpeech0B
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00521EB0 = 0x00521EB0,
-    // label: playUnitMoveSpeech
+    // label: _HoldStrong::Map::Units::TribesState::meth_0x521ef0
+    // label: playAttackOrderSpeech
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00521EF0 = 0x00521EF0,
@@ -50513,197 +54009,280 @@ enum {
     SHC_3BB0A8C1_0x00522082 = 0x00522082,
     // type: /byte
     SHC_3BB0A8C1_0x00522083 = 0x00522083,
-    // label: playAttackCommandFeedback
+    // label: _HoldStrong::Map::Units::TribesState::meth_0x522090
+    // label: playSiegeOrEngineerOrderSpeech
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522090 = 0x00522090,
-    // label: playPatrolCommandSpeech
+    // label: playUnitOrderSpeech29
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522110 = 0x00522110,
-    // label: playTunnelerCommandSpeech
+    // label: playTunnelerDigSpeech
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522150 = 0x00522150,
-    // label: playWorkCommandSpeech
+    // label: _HoldStrong::Map::Units::TribesState::meth_0x522160
+    // label: playUnitOrderSpeech24
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522160 = 0x00522160,
+    // label: _HoldStrong::Map::Units::TribesState::applyTribeBehaviorType
     // label: applyTribeBehaviorType
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005221A0 = 0x005221A0,
     // type: function
     SHC_3BB0A8C1_0x005221C0 = 0x005221C0,
-    // label: updatePeasantSeatingAtBuilding
+    // label: selectPeasantsAtBuilding
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522210 = 0x00522210,
     // type: function
     SHC_3BB0A8C1_0x005222B0 = 0x005222B0,
+    // label: _HoldStrong::Map::Units::TribesState::tribeCorrespondsWithUID
     // label: tribeCorrespondsWithUID
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522360 = 0x00522360,
+    // label: _HoldStrong::Map::Units::TribesState::getUnitIDForIndexInTribe
     // label: getUnitIDForIndexInTribe
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522390 = 0x00522390,
+    // label: _HoldStrong::Map::Units::TribesState::getSpecificUnitFromTribe
     // label: getSpecificUnitFromTribe
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522410 = 0x00522410,
+    // label: _HoldStrong::Map::Units::TribesState::setWhetherTribeContainsAnyUnits
     // label: setWhetherTribeContainsAnyUnits
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005224E0 = 0x005224E0,
+    // label: _HoldStrong::Map::Units::TribesState::addUnitToSelected
     // label: addUnitToSelected
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522520 = 0x00522520,
+    // label: _HoldStrong::Map::Units::TribesState::unitIsSelectedByPlayer
     // label: unitIsSelectedByPlayer
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522550 = 0x00522550,
+    // label: _HoldStrong::Map::Units::TribesState::addUnitToTribe
     // label: addUnitToTribe
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522590 = 0x00522590,
+    // label: _HoldStrong::Map::Units::TribesState::removeUnitFromThisTribeIfInTribe
     // label: removeUnitFromThisTribeIfInTribe
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522630 = 0x00522630,
+    // label: _HoldStrong::Map::Units::TribesState::getAvailableTribeID
     // label: getAvailableTribeID
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522720 = 0x00522720,
+    // label: _HoldStrong::Map::Units::TribesState::createTribeForPlayer
     // label: createTribeForPlayer
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005227E0 = 0x005227E0,
+    // label: _HoldStrong::Map::Units::TribesState::createTribe
     // label: createTribe
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522890 = 0x00522890,
+    // label: _HoldStrong::Map::Units::TribesState::createPlayerTribe
     // label: createPlayerTribe
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522950 = 0x00522950,
+    // label: _HoldStrong::Map::Units::TribesState::addUnitsToTribeAndComputeMovementSpeed
     // label: addUnitsToTribeAndComputeMovementSpeed
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005229C0 = 0x005229C0,
+    // label: _HoldStrong::Map::Units::TribesState::addUnitToTribeAndUpdateTribeMovementSpeed
     // label: addUnitToTribeAndUpdateTribeMovementSpeed
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522B00 = 0x00522B00,
+    // label: _HoldStrong::Map::Units::TribesState::clearTribe
     // label: clearTribe
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522BC0 = 0x00522BC0,
+    // label: _HoldStrong::Map::Units::TribesState::queueUnitStance
     // label: queueUnitStance
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522BF0 = 0x00522BF0,
+    // label: _HoldStrong::Map::Units::TribesState::setUnitStance
     // label: setUnitStance
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522C20 = 0x00522C20,
+    // label: _HoldStrong::Map::Units::TribesState::addRallyPoint
     // label: addRallyPoint
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522C50 = 0x00522C50,
-    // label: snapshotSelectionTribeAndComputeStance
+    // label:
+    // _HoldStrong::Map::Units::TribesState::temporarilyStoreTribeIfAllNewlySelectedUnitsPartOfThisTribe_And_AlwaysRememberStance
+    // label: temporarilyStoreTribeIfAllNewlySelectedUnitsPartOfThisTribe_And_AlwaysRememberStance
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522CA0 = 0x00522CA0,
+    // label: _HoldStrong::Map::Units::TribesState::importStoredInfoFromSlot0
     // label: importStoredInfoFromSlot0
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522DD0 = 0x00522DD0,
-    // label: trimTribeToSize
+    // label: _HoldStrong::Map::Units::TribesState::meth_0x522ef0
+    // label: shrinkTribeToSize
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522EF0 = 0x00522EF0,
-    // label: spawnUnitsForAITribe
+    // label: spawnUnitsForTribe
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00522F70 = 0x00522F70,
+    // label: _HoldStrong::Map::Units::TribesState::spawnUnitsIntoNewTribe
     // label: spawnUnitsIntoNewTribe
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00523030 = 0x00523030,
-    // label: createTribeWithSpawnedUnit
+    // label: _HoldStrong::Map::Units::TribesState::meth_0x523190
+    // label: createTribeWithSpawn
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00523190 = 0x00523190,
+    // label: _HoldStrong::Map::Units::TribesState::spawnUnitsAroundLocation
     // label: spawnUnitsAroundLocation
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00523240 = 0x00523240,
-    // label: ClearAnimalSpawnLocationsUnk
+    // label: _HoldStrong::Global::ClearAnimalSpawnLocationsUnk
+    // label: clearAnimalSpawnLocations
+    // location:
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x005232E0 = 0x005232E0,
     // type: function
     SHC_3BB0A8C1_0x005232F0 = 0x005232F0,
+    // label: _HoldStrong::Map::Units::TribesState::storeDeerXAndYinMapInfo
     // label: storeDeerXAndYinMapInfo
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00523340 = 0x00523340,
+    // label: _HoldStrong::Map::Units::TribesState::storeLionXAndYInMapInfo
     // label: storeLionXAndYInMapInfo
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00523370 = 0x00523370,
+    // label: _HoldStrong::Map::Units::TribesState::setRabbitSpawnXY
     // label: setRabbitSpawnXY
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005233A0 = 0x005233A0,
+    // label: _HoldStrong::Map::Units::TribesState::setCamelSpawnXY
     // label: setCamelSpawnXY
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005233E0 = 0x005233E0,
-    // label: findRecentOrSignpostSpawnLocation
+    // label: findAiSpawnPoint
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00523410 = 0x00523410,
-    // label: hasAvailableSpawnSlotForWildlifeOrMercs
+    // label: hasRabbitOrMercSpawnAvailable
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00523520 = 0x00523520,
-    // label: updateAnimalHerdBehaviorState
+    // label: _HoldStrong::Map::Units::TribesState::meth_0x523590
+    // label: updateTribeAnimalScatter
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00523590 = 0x00523590,
+    // label: _HoldStrong::Map::Units::TribesState::getNonDyingUnit
     // label: getNonDyingUnit
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00523630 = 0x00523630,
+    // label: _HoldStrong::Map::Units::TribesState::countDeerEfficiently
     // label: countDeerEfficiently
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005236A0 = 0x005236A0,
-    // label: markTribeAsAnimalTribe
+    // label: _HoldStrong::Map::Units::TribesState::meth_0x523730
+    // label: markTribeAsAnimal
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00523730 = 0x00523730,
+    // label: _HoldStrong::Map::Units::TribesState::meth_0x523750
     // label: flagTribesOfType
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00523750 = 0x00523750,
-    // label: consumeFlaggedTribesOfType
+    // label: _HoldStrong::Map::Units::TribesState::meth_0x523790
+    // label: updateNTribesOfType
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00523790 = 0x00523790,
+    // label: _HoldStrong::Map::Units::TribesState::aiAssignNewUnitToTribe
     // label: aiAssignNewUnitToTribe
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005237F0 = 0x005237F0,
-    // label: scatterTribeUnitsRandomly
+    // label: _HoldStrong::Map::Units::TribesState::meth_0x523920
+    // label: disperseTribeToArea
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00523920 = 0x00523920,
+    // label: _HoldStrong::Map::Units::TribesState::drawFlagsAndUnitDestinations
     // label: drawFlagsAndUnitDestinations
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00523A30 = 0x00523A30,
@@ -50713,63 +54292,93 @@ enum {
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x00523E00 = 0x00523E00,
-    // label: UpgradeMapTribesStateVersionTo_Unknown1
+    // label: _HoldStrong::Map::Version::UpgradeMapTribesStateVersionTo_Unknown1
+    // label: upgradeMapInitTribeRallyFields
+    // location:
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x00523E30 = 0x00523E30,
-    // label: UpgradeMapTribesStateVersionTo_Unknown2
+    // label: _HoldStrong::Map::Version::UpgradeMapTribesStateVersionTo_Unknown2
+    // label: upgradeMapRefreshTribeHasUnits
+    // location:
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x00523EB0 = 0x00523EB0,
-    // label: upgradeTribeArrayLayoutForMapVersion
+    // label: _HoldStrong::Map::Units::TribesState::meth_0x523ef0
+    // label: migrateTribesForMapVersion
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00523EF0 = 0x00523EF0,
+    // label: _HoldStrong::Map::Units::TribesState::meth_0x523f70
     // label: updateTribeRallyFlags
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00523F70 = 0x00523F70,
+    // label: _HoldStrong::Map::Units::TribesState::unsetRallyRelatedFlagOnUnits
     // label: unsetRallyRelatedFlagOnUnits
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00524000 = 0x00524000,
+    // label: _HoldStrong::Map::Units::TribesState::isTribeAllAssassins
     // label: isTribeAllAssassins
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00524060 = 0x00524060,
+    // label: _HoldStrong::Map::Units::TribesState::getFirstUnitInTribeThatIsOnXTerrain
     // label: getFirstUnitInTribeThatIsOnXTerrain
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005240D0 = 0x005240D0,
-    // label: tribeHasActiveLaddermanUnit
+    // label: _HoldStrong::Map::Units::TribesState::meth_0x524140
+    // label: tribeHasDeployedLadder
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00524140 = 0x00524140,
+    // label: _HoldStrong::Map::Units::TribesState::tribeContainsUnitThatCanClimb
     // label: tribeContainsUnitThatCanClimb
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005241C0 = 0x005241C0,
+    // label: _HoldStrong::Map::Units::TribesState::selectionContainsHorses
     // label: selectionContainsHorses
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00524230 = 0x00524230,
+    // label: _HoldStrong::Map::Units::TribesState::getMajorityArcherTypeEuropeanOrArabian
     // label: getMajorityArcherTypeEuropeanOrArabian
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005242B0 = 0x005242B0,
+    // label: _HoldStrong::Map::Units::TribesState::applyMoveCommandOrRallyCommandToTribe
     // label: applyMoveCommandOrRallyCommandToTribe
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00524340 = 0x00524340,
-    // label: assignAttackTargetsForTribe
+    // label: _HoldStrong::Map::Units::TribesState::aiAttackWaveUnk
+    // label: commandTribeAttackWave
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005244D0 = 0x005244D0,
-    // label: stopTribeMovementAndCheckIdle
+    // label: _HoldStrong::Map::Units::TribesState::meth_0x524890
+    // label: stopTribeUnitsMoving
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00524890 = 0x00524890,
-    // label: sortTribePathDestinationsByCost
+    // label: _HoldStrong::Map::Units::TribesState::meth_0x524930
+    // label: buildTribeDestinationQueue
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00524930 = 0x00524930,
@@ -50779,119 +54388,173 @@ enum {
     SHC_3BB0A8C1_0x00524A10 = 0x00524A10,
     // type: function
     SHC_3BB0A8C1_0x00524A30 = 0x00524A30,
-    // label: isTribeUnitBlockedByOtherUnit
+    // label: _HoldStrong::Map::Units::TribesState::meth_0x524b30
+    // label: isTribeUnitBlocked
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00524B30 = 0x00524B30,
+    // label: _HoldStrong::Map::Units::TribesState::getTribeAliveStatus
     // label: getTribeAliveStatus
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00524BF0 = 0x00524BF0,
-    // label: isTribePathToDestinationClear
+    // label: _HoldStrong::Map::Units::TribesState::meth_0x524ca0
+    // label: canTribeReachAreaUnobstructed
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00524CA0 = 0x00524CA0,
     // type: function
     SHC_3BB0A8C1_0x00524D80 = 0x00524D80,
-    // label: applyLadderDestructionToTribeUnits
+    // label: _HoldStrong::Map::Units::TribesState::meth_0x524e20
+    // label: commandTribeClimbLadders
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00524E20 = 0x00524E20,
+    // label: _HoldStrong::Map::Units::TribesState::applyUnitTopSpeedDelayBasedOnTribeSize
     // label: applyUnitTopSpeedDelayBasedOnTribeSize
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00524EF0 = 0x00524EF0,
     // type: function
     SHC_3BB0A8C1_0x00525060 = 0x00525060,
-    // label: playArcherCommandSpeech
+    // label: playArcherOrderSpeech
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00525090 = 0x00525090,
+    // label: _HoldStrong::Map::Units::TribesState::anyUnitsOfTribeAreOutsideCoverageOfPathFindingAlg
     // label: anyUnitsOfTribeAreOutsideCoverageOfPathFindingAlg
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005250B0 = 0x005250B0,
+    // label: _HoldStrong::Map::Units::TribesState::applyMovementDistanceToUnitsInTribe
     // label: applyMovementDistanceToUnitsInTribe
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00525130 = 0x00525130,
+    // label: _HoldStrong::Map::Units::TribesState::applyMovementDistanceToUnitsInTribeBasedOnUnitNumberInTribe
     // label: applyMovementDistanceToUnitsInTribeBasedOnUnitNumberInTribe
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005251A0 = 0x005251A0,
-    // label: isTribeFreeOfTunnelingUnits
+    // label: _HoldStrong::Map::Units::TribesState::meth_0x525210
+    // label: tribeHasNoFinishedTunneler
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00525210 = 0x00525210,
+    // label: _HoldStrong::Map::Units::TribesState::setTargetUnitForTribe
     // label: setTargetUnitForTribe
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00525280 = 0x00525280,
-    // label: setStateForAllTribeUnits
+    // label: _HoldStrong::Map::Units::TribesState::meth_0x525300
+    // label: setTribeUnitsState
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00525300 = 0x00525300,
-    // label: standUpAllTribeUnits
+    // label: _HoldStrong::Map::Units::TribesState::meth_0x525370
+    // label: resetTribeUnitsToIdle
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00525370 = 0x00525370,
+    // label: _HoldStrong::Map::Units::TribesState::allUnitsReachedTheirDestination
     // label: allUnitsReachedTheirDestination
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005253F0 = 0x005253F0,
-    // label: removeAllTribeUnits
+    // label: _HoldStrong::Map::Units::TribesState::makeUnitsDisappearUnk
+    // label: makeTribeUnitsDisappear
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00525470 = 0x00525470,
+    // label: _HoldStrong::Map::Units::TribesState::addUnitToNewTribe
     // label: addUnitToNewTribe
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005254C0 = 0x005254C0,
+    // label: _HoldStrong::Map::Units::TribesState::removeSelectedUnitsFromTheirCurrentTribes
     // label: removeSelectedUnitsFromTheirCurrentTribes
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00525790 = 0x00525790,
+    // label: _HoldStrong::Map::Units::TribesState::clearTribesOfUnitType
     // label: clearTribesOfUnitType
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00525870 = 0x00525870,
+    // label: _HoldStrong::Map::Units::TribesState::clearTribesNotOfUnitType
     // label: clearTribesNotOfUnitType
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00525970 = 0x00525970,
+    // label: _HoldStrong::Map::Units::TribesState::removeUnitFromTribe
     // label: removeUnitFromTribe
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00525A70 = 0x00525A70,
+    // label: _HoldStrong::Map::Units::TribesState::popUnitFromTribe
     // label: popUnitFromTribe
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00525B70 = 0x00525B70,
+    // label: _HoldStrong::Map::Units::TribesState::createAnimal
     // label: createAnimal
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00525BA0 = 0x00525BA0,
+    // label: _HoldStrong::Map::Units::TribesState::spawnDeerLionOrRabbit
     // label: spawnDeerLionOrRabbit
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00525F20 = 0x00525F20,
-    // label: trySpawnAdditionalWildlifeForTribe
+    // label: _HoldStrong::Map::Units::TribesState::meth_0x5260b0
+    // label: maybeSpawnTribeAnimal
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005260B0 = 0x005260B0,
+    // label: _HoldStrong::Map::Units::TribesState::respawnDeer
     // label: respawnDeer
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005261B0 = 0x005261B0,
-    // label: spawnWildlifeOrMercAtAvailableSlot
+    // label: _HoldStrong::Map::Units::TribesState::meth_0x5262a0
+    // label: spawnRabbitAtValidPoint
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005262A0 = 0x005262A0,
+    // label: _HoldStrong::Map::Units::TribesState::upgradeMapTribesState
     // label: upgradeMapTribesState
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00526370 = 0x00526370,
+    // label: _HoldStrong::Map::Units::TribesState::giveTribeMoveInstruction
     // label: giveTribeMoveInstruction
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005263A0 = 0x005263A0,
@@ -50899,19 +54562,27 @@ enum {
     SHC_3BB0A8C1_0x005266F0 = 0x005266F0,
     // type: function
     SHC_3BB0A8C1_0x00526D50 = 0x00526D50,
+    // label: _HoldStrong::Map::Units::TribesState::commandUnitsToLocation
     // label: commandUnitsToLocation
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00526F00 = 0x00526F00,
+    // label: _HoldStrong::Map::Units::TribesState::computeTribePercentages
     // label: computeTribePercentages
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005270F0 = 0x005270F0,
+    // label: _HoldStrong::Map::Units::TribesState::updateTribeUnitAssignments
     // label: updateTribeUnitAssignments
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00527330 = 0x00527330,
-    // label: spawnQueuedReinforcementWaves
+    // label: _HoldStrong::Map::Units::TribesState::siegeThatRelatedUnk
+    // label: spawnScenarioAttackWaves
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00527440 = 0x00527440,
@@ -51025,7 +54696,9 @@ enum {
     SHC_3BB0A8C1_0x00527C74 = 0x00527C74,
     // type: /undefined *32
     SHC_3BB0A8C1_0x00527C78 = 0x00527C78,
+    // label: _HoldStrong::Map::Units::TribesState::giveTribeAnInstruction
     // label: giveTribeAnInstruction
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00527C80 = 0x00527C80,
@@ -52817,15 +56490,21 @@ enum {
     SHC_3BB0A8C1_0x0052A637 = 0x0052A637,
     // type: /byte
     SHC_3BB0A8C1_0x0052A638 = 0x0052A638,
-    // label: moveTribeToNearbyClearTile
+    // label: _HoldStrong::Map::Units::TribesState::meth_0x52a640
+    // label: scatterTribeToReachableSpot
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x0052A640 = 0x0052A640,
-    // label: moveTribeToIndexedNearbyTile
+    // label: _HoldStrong::Map::Units::TribesState::meth_0x52a700
+    // label: moveTribeToScatterSpot
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x0052A700 = 0x0052A700,
-    // label: updateTribeCombatStanceBehavior
+    // label: _HoldStrong::Map::Units::TribesState::unitAttackBuildingOrOtherUnitBasedOnStanceUnk
+    // label: updateTribeAttackBehaviour
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x0052A7D0 = 0x0052A7D0,
@@ -53089,23 +56768,33 @@ enum {
     SHC_3BB0A8C1_0x0052AD41 = 0x0052AD41,
     // type: /byte
     SHC_3BB0A8C1_0x0052AD42 = 0x0052AD42,
+    // label: _HoldStrong::Map::Units::TribesState::processDeerMoving
     // label: processDeerMoving
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x0052AD50 = 0x0052AD50,
-    // label: updateLionWolfTribeBehavior
+    // label: _HoldStrong::Map::Units::TribesState::meth_0x52b110
+    // label: updatePredatorTribeAI
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x0052B110 = 0x0052B110,
-    // label: updateRabbitTribeBehavior
+    // label: _HoldStrong::Map::Units::TribesState::meth_0x52b390
+    // label: updateRabbitTribeAI
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x0052B390 = 0x0052B390,
-    // label: updateCamelTribeBehavior
+    // label: _HoldStrong::Map::Units::TribesState::meth_0x52b630
+    // label: updateCamelTribeAI
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x0052B630 = 0x0052B630,
+    // label: _HoldStrong::Map::Units::TribesState::updateTribes
     // label: updateTribes
+    // location:
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x0052B860 = 0x0052B860,
@@ -53191,11 +56880,15 @@ enum {
     SHC_3BB0A8C1_0x0052B9E4 = 0x0052B9E4,
     // type: /pointer
     SHC_3BB0A8C1_0x0052B9E8 = 0x0052B9E8,
+    // label: _HoldStrong::Map::WildlifeState::clearWildlifeState
     // label: clearWildlifeState
+    // location:
     // location: OpenSHC/Map/WildlifeState
     // type: function
     SHC_3BB0A8C1_0x0052B9F0 = 0x0052B9F0,
+    // label: _HoldStrong::Map::WildlifeState::updateWildlifeGrid
     // label: updateWildlifeGrid
+    // location:
     // location: OpenSHC/Map/WildlifeState
     // type: function
     SHC_3BB0A8C1_0x0052BA10 = 0x0052BA10,
@@ -53203,23 +56896,31 @@ enum {
     SHC_3BB0A8C1_0x0052BB40 = 0x0052BB40,
     // type: function
     SHC_3BB0A8C1_0x0052BEA0 = 0x0052BEA0,
+    // label: _HoldStrong::Map::WildlifeState::renderDebugDataMapData
     // label: renderDebugDataMapData
+    // location:
     // location: OpenSHC/Map/WildlifeState
     // type: function
     SHC_3BB0A8C1_0x0052BF40 = 0x0052BF40,
-    // label: floodFillField13FromCell
+    // label: _HoldStrong::Map::WildlifeState::meth_0x52c570
+    // label: floodFillWildlifeDangerField
+    // location:
     // location: OpenSHC/Map/WildlifeState
     // type: function
     SHC_3BB0A8C1_0x0052C570 = 0x0052C570,
     // type: function
     SHC_3BB0A8C1_0x0052C5D0 = 0x0052C5D0,
-    // label: floodFillField20FromCell
+    // label: _HoldStrong::Map::WildlifeState::meth_0x52c810
+    // label: floodFillWildlifeGrazingField
+    // location:
     // location: OpenSHC/Map/WildlifeState
     // type: function
     SHC_3BB0A8C1_0x0052C810 = 0x0052C810,
     // type: function
     SHC_3BB0A8C1_0x0052C870 = 0x0052C870,
+    // label: _HoldStrong::Map::WildlifeState::findAndSetNewRallyPointForDeerAndLions
     // label: findAndSetNewRallyPointForDeerAndLions
+    // location:
     // location: OpenSHC/Map/WildlifeState
     // type: function
     SHC_3BB0A8C1_0x0052CAB0 = 0x0052CAB0,
@@ -53229,7 +56930,9 @@ enum {
     SHC_3BB0A8C1_0x0052CD40 = 0x0052CD40,
     // type: function
     SHC_3BB0A8C1_0x0052CD60 = 0x0052CD60,
-    // label: buildRallyPointPathForTribe
+    // label: _HoldStrong::Map::WildlifeState::meth_0x52cfe0
+    // label: buildWildlifeGrazingPath
+    // location:
     // location: OpenSHC/Map/WildlifeState
     // type: function
     SHC_3BB0A8C1_0x0052CFE0 = 0x0052CFE0,
@@ -53241,21 +56944,29 @@ enum {
     SHC_3BB0A8C1_0x0052D100 = 0x0052D100,
     // type: function
     SHC_3BB0A8C1_0x0052D3C0 = 0x0052D3C0,
-    // label: hasAdjacentCellWithField24Or25
+    // label: _HoldStrong::Map::WildlifeState::meth_0x52d620
+    // label: hasAdjacentWildlifeMarker
+    // location:
     // location: OpenSHC/Map/WildlifeState
     // type: function
     SHC_3BB0A8C1_0x0052D620 = 0x0052D620,
-    // label: isSuitableWildlifeSpawnCell
+    // label: _HoldStrong::Map::WildlifeState::meth_0x52d690
+    // label: isGoodGrazingCell
+    // location:
     // location: OpenSHC/Map/WildlifeState
     // type: function
     SHC_3BB0A8C1_0x0052D690 = 0x0052D690,
-    // label: floodFillUnknownNonZero01FromCell
+    // label: _HoldStrong::Map::WildlifeState::meth_0x52d720
+    // label: floodFillWildlifeClaimField
+    // location:
     // location: OpenSHC/Map/WildlifeState
     // type: function
     SHC_3BB0A8C1_0x0052D720 = 0x0052D720,
     // type: function
     SHC_3BB0A8C1_0x0052D780 = 0x0052D780,
-    // label: floodFillCasDisFromSignpost
+    // label: _HoldStrong::Map::WildlifeState::meth_0x52d9d0
+    // label: mapWildlifeFromAttackSignpost
+    // location:
     // location: OpenSHC/Map/WildlifeState
     // type: function
     SHC_3BB0A8C1_0x0052D9D0 = 0x0052D9D0,
@@ -53263,7 +56974,9 @@ enum {
     SHC_3BB0A8C1_0x0052DA40 = 0x0052DA40,
     // type: function
     SHC_3BB0A8C1_0x0052DAA0 = 0x0052DAA0,
-    // label: getDistanceToNearestUnknownNonZero01FromSignpost
+    // label: _HoldStrong::Map::WildlifeState::meth_0x52dd20
+    // label: distanceFromSignpostToClaimedCell
+    // location:
     // location: OpenSHC/Map/WildlifeState
     // type: function
     SHC_3BB0A8C1_0x0052DD20 = 0x0052DD20,
@@ -53272,10 +56985,14 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0052DDF0 = 0x0052DDF0,
     // label: Constructor_WildlifeState
+    // label: _HoldStrong::Map::WildlifeState::Constructor_WildlifeState
+    // location:
     // location: OpenSHC/Map/WildlifeState
     // type: function
     SHC_3BB0A8C1_0x0052DF10 = 0x0052DF10,
+    // label: _HoldStrong::Map::WildlifeState::updateWildlife
     // label: updateWildlife
+    // location:
     // location: OpenSHC/Map/WildlifeState
     // type: function
     SHC_3BB0A8C1_0x0052DF30 = 0x0052DF30,
@@ -53283,159 +57000,225 @@ enum {
     SHC_3BB0A8C1_0x0052DF50 = 0x0052DF50,
     // type: function
     SHC_3BB0A8C1_0x0052DF60 = 0x0052DF60,
+    // label: _HoldStrong::Map::WildlifeState::updateSection1034Info
     // label: updateSection1034Info
+    // location:
     // location: OpenSHC/Map/WildlifeState
     // type: function
     SHC_3BB0A8C1_0x0052E020 = 0x0052E020,
+    // label: _HoldStrong::Map::WildlifeState::updateNofFpoints
     // label: updateNofFpoints
+    // location:
     // location: OpenSHC/Map/WildlifeState
     // type: function
     SHC_3BB0A8C1_0x0052E120 = 0x0052E120,
     // type: function
     SHC_3BB0A8C1_0x0052E1A0 = 0x0052E1A0,
+    // label: _HoldStrong::Map::Units::UnitsState::clearAllUnits
     // label: clearAllUnits
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052E7B0 = 0x0052E7B0,
+    // label: _HoldStrong::Map::Units::UnitsState::assignPeasantToBuilding
     // label: assignPeasantToBuilding
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052E830 = 0x0052E830,
+    // label: _HoldStrong::Map::Units::UnitsState::euroRecruit
     // label: euroRecruit
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052E960 = 0x0052E960,
+    // label: _HoldStrong::Map::Units::UnitsState::nonEuroRecruit
     // label: nonEuroRecruit
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052EC10 = 0x0052EC10,
+    // label: _HoldStrong::Map::Units::UnitsState::disbandUnit
     // label: disbandUnit
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052EDC0 = 0x0052EDC0,
+    // label: _HoldStrong::Map::Units::UnitsState::assignNameToUnit
     // label: assignNameToUnit
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052EED0 = 0x0052EED0,
+    // label: _HoldStrong::Map::Units::UnitsState::removeUnitFromItsTribe
     // label: removeUnitFromItsTribe
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052F010 = 0x0052F010,
+    // label: _HoldStrong::Map::Units::UnitsState::makeUnitStopWalkingByClearingPathProgressState
     // label: makeUnitStopWalkingByClearingPathProgressState
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052F070 = 0x0052F070,
+    // label: _HoldStrong::Map::Units::UnitsState::checkUnitHasPropertyBasedOnUnitType
     // label: checkUnitHasPropertyBasedOnUnitType
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052F0A0 = 0x0052F0A0,
+    // label: _HoldStrong::Map::Units::UnitsState::recomputeUnitStandingHeight
     // label: recomputeUnitStandingHeight
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052F0D0 = 0x0052F0D0,
+    // label: _HoldStrong::Map::Units::UnitsState::setMoveDelayForUnitsOnSameTiles
     // label: setMoveDelayForUnitsOnSameTiles
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052F260 = 0x0052F260,
+    // label: _HoldStrong::Map::Units::UnitsState::setupUnitSharingTileIDs
     // label: setupUnitSharingTileIDs
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052F440 = 0x0052F440,
     // type: function
     SHC_3BB0A8C1_0x0052F4A0 = 0x0052F4A0,
-    // label: isUnitRegisteredOnItsOwnTile
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x52f4e0
+    // label: isUnitLinkedOnTile
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052F4E0 = 0x0052F4E0,
+    // label: _HoldStrong::Map::Units::UnitsState::ifAnyUnitOnSameTileIsLadder
     // label: ifAnyUnitOnSameTileIsLadder
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052F550 = 0x0052F550,
     // type: function
     SHC_3BB0A8C1_0x0052F570 = 0x0052F570,
+    // label: _HoldStrong::Map::Units::UnitsState::ifAnyUnitOnSameTileIsLadderInRightDirection
     // label: ifAnyUnitOnSameTileIsLadderInRightDirection
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052F5B0 = 0x0052F5B0,
-    // label: triggerDesyncIfTileUnitLinkageInvalid
+    // label: detectTileUnitDesync
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052F680 = 0x0052F680,
     // type: function
     SHC_3BB0A8C1_0x0052F6C0 = 0x0052F6C0,
+    // label: _HoldStrong::Map::Units::UnitsState::removeUnitsSameTileLinkageIfNoLongerApplicable
     // label: removeUnitsSameTileLinkageIfNoLongerApplicable
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052F730 = 0x0052F730,
+    // label: _HoldStrong::Map::Units::UnitsState::calculateUnitMovementSpeed
     // label: calculateUnitMovementSpeed
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052F7E0 = 0x0052F7E0,
-    // label: standUpIfSeated
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x52fbb0
+    // label: makeSeatedUnitStand
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052FBB0 = 0x0052FBB0,
-    // label: sitDownIfStanding
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x52fbf0
+    // label: makeUnitSit
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052FBF0 = 0x0052FBF0,
-    // label: setFacingDirectionTowardUnit
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x52fc30
+    // label: setUnitFacingTowardUnit
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052FC30 = 0x0052FC30,
-    // label: setFacingDirectionTowardCoords
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x52fca0
+    // label: setUnitFacingTowardPoint
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052FCA0 = 0x0052FCA0,
+    // label: _HoldStrong::Map::Units::UnitsState::setUnitFacingDirectionTowardsTarget
     // label: setUnitFacingDirectionTowardsTarget
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052FD00 = 0x0052FD00,
-    // label: setFacingDirectionTowardUnitMicro
+    // label: orientUnitTowardUnit
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052FE00 = 0x0052FE00,
+    // label: _HoldStrong::Map::Units::UnitsState::setUnitFacingDirectionForTargetXandY
     // label: setUnitFacingDirectionForTargetXandY
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052FE90 = 0x0052FE90,
+    // label: _HoldStrong::Map::Units::UnitsState::setUnitFacingDirectionBasedOnBuilding
     // label: setUnitFacingDirectionBasedOnBuilding
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0052FF80 = 0x0052FF80,
-    // label: isComputerManagedNonPeasant
+    // label: isUnitComputerManaged
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00530080 = 0x00530080,
+    // label: _HoldStrong::Map::Units::UnitsState::playHurtSFXForUnit
     // label: playHurtSFXForUnit
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005300B0 = 0x005300B0,
-    // label: countLivingNondyingUnitsForPlayer
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x5301f0
+    // label: countAlivePlayerUnits
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005301F0 = 0x005301F0,
     // type: function
     SHC_3BB0A8C1_0x00530210 = 0x00530210,
-    // label: triggerStoneTowerDeathForPlayer
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x530240
+    // label: killPlayerTowerUnits
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00530240 = 0x00530240,
+    // label: _HoldStrong::Map::Units::UnitsState::killAllUnownedUnits
     // label: killAllUnownedUnits
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005302B0 = 0x005302B0,
-    // label: triggerDeathAnimationForAllWildlife
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x530310
+    // label: removeWildlifeAnimals
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00530310 = 0x00530310,
+    // label: _HoldStrong::Map::Units::UnitsState::killUnits
     // label: killUnits
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00530390 = 0x00530390,
     // type: function
     SHC_3BB0A8C1_0x005303B0 = 0x005303B0,
-    // label: transferNonCourtUnitsToPlayer
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x530400
+    // label: reassignFarmAnimals
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00530400 = 0x00530400,
@@ -53559,7 +57342,9 @@ enum {
     SHC_3BB0A8C1_0x005304F4 = 0x005304F4,
     // type: /byte
     SHC_3BB0A8C1_0x005304F5 = 0x005304F5,
+    // label: _HoldStrong::Map::Units::UnitsState::makeCourtMemberUnitsDisappearAndSwapAllOtherUnitsOwnership
     // label: makeCourtMemberUnitsDisappearAndSwapAllOtherUnitsOwnership
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00530500 = 0x00530500,
@@ -53683,7 +57468,9 @@ enum {
     SHC_3BB0A8C1_0x00530648 = 0x00530648,
     // type: /byte
     SHC_3BB0A8C1_0x00530649 = 0x00530649,
+    // label: _HoldStrong::Map::Units::UnitsState::makeUnitsDisappearThatCannotReachTheKeep
     // label: makeUnitsDisappearThatCannotReachTheKeep
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00530650 = 0x00530650,
@@ -53701,11 +57488,15 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x005307B0 = 0x005307B0,
+    // label: _HoldStrong::Map::Units::UnitsState::setRandomNumberOnCows
     // label: setRandomNumberOnCows
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00530880 = 0x00530880,
+    // label: _HoldStrong::Map::Units::UnitsState::setMissionNumberSpecificLord
     // label: setMissionNumberSpecificLord
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005308F0 = 0x005308F0,
@@ -53719,11 +57510,15 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00530A90 = 0x00530A90,
-    // label: IncrementAndOptionalUpdateAVValueRelated
+    // label: _HoldStrong::Global::IncrementAndOptionalUpdateAVValueRelated
+    // label: incrementWorkTimerAndAverageAV
+    // location:
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00530B40 = 0x00530B40,
-    // label: ConsiderHavingABreakNowUnk
+    // label: _HoldStrong::Global::ConsiderHavingABreakNowUnk
+    // label: checkWorkerTakesRestBreak
+    // location:
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00530C40 = 0x00530C40,
@@ -53731,7 +57526,7 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00530CF0 = 0x00530CF0,
-    // label: CheckUnitProductionPaused
+    // label: checkUnitField2fe
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00530D50 = 0x00530D50,
@@ -53739,31 +57534,43 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00530D70 = 0x00530D70,
-    // label: WarnIfPlayerLacksGranary
+    // label: checkPlayerGranaryPeriodicWarning
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00530E00 = 0x00530E00,
-    // label: TryPlayStockpileIsFullNoiseUnk
+    // label: _HoldStrong::Global::TryPlayStockpileIsFullNoiseUnk
+    // label: playStockpileFullWarningSfx
+    // location:
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00530EB0 = 0x00530EB0,
-    // label: PlaySound_StockpileIsFullMyLordUnk
+    // label: _HoldStrong::Global::PlaySound_StockpileIsFullMyLordUnk
+    // label: playArmouryFullWarningVoice
+    // location:
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00530F20 = 0x00530F20,
+    // label: _HoldStrong::Map::Units::UnitsState::checkIfCitizenUnitIsAliveBasedOnStateUnk
     // label: checkIfCitizenUnitIsAliveBasedOnState
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00530FD0 = 0x00530FD0,
-    // label: shouldUnitsEngageInMelee
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x531000
+    // label: canUnitsEngageEachOther
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00531000 = 0x00531000,
     // label: ComputeDamageFearFactorBonus
+    // label: _HoldStrong::Map::Units::UnitsState::ComputeDamageFearFactorBonus
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005311F0 = 0x005311F0,
+    // label: _HoldStrong::Map::Units::UnitsState::processUnitAttackOtherUnit
     // label: processUnitAttackOtherUnit
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00531220 = 0x00531220,
@@ -54175,7 +57982,9 @@ enum {
     SHC_3BB0A8C1_0x00531914 = 0x00531914,
     // type: /byte
     SHC_3BB0A8C1_0x00531915 = 0x00531915,
+    // label: _HoldStrong::Map::Units::UnitsState::processEntityDamageToUnit
     // label: processEntityDamageToUnit
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00531920 = 0x00531920,
@@ -54433,7 +58242,9 @@ enum {
     SHC_3BB0A8C1_0x0053245D = 0x0053245D,
     // type: /byte
     SHC_3BB0A8C1_0x0053245E = 0x0053245E,
+    // label: _HoldStrong::Map::Units::UnitsState::processFireDamageToUnit
     // label: processFireDamageToUnit
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00532460 = 0x00532460,
@@ -54563,7 +58374,9 @@ enum {
     SHC_3BB0A8C1_0x005326F1 = 0x005326F1,
     // type: /byte
     SHC_3BB0A8C1_0x005326F2 = 0x005326F2,
+    // label: _HoldStrong::Map::Units::UnitsState::shootProjectile
     // label: shootProjectile
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00532700 = 0x00532700,
@@ -54615,10 +58428,15 @@ enum {
     SHC_3BB0A8C1_0x00532B98 = 0x00532B98,
     // type: /pointer
     SHC_3BB0A8C1_0x00532B9C = 0x00532B9C,
+    // label: _HoldStrong::Map::Units::UnitsState::recomputeTroopValuesForPlayer
     // label: recomputeTroopValuesForPlayer
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00532BA0 = 0x00532BA0,
+    // label: CODE_continueToNextUnit
+    // location: OpenSHC/Map/Units/UnitsState/recomputeTroopValuesForPlayer
+    SHC_3BB0A8C1_0x00532ED4 = 0x00532ED4,
     // type: /pointer
     SHC_3BB0A8C1_0x00532F10 = 0x00532F10,
     // type: /pointer
@@ -54751,21 +58569,27 @@ enum {
     SHC_3BB0A8C1_0x00532F5D = 0x00532F5D,
     // type: /byte
     SHC_3BB0A8C1_0x00532F5E = 0x00532F5E,
+    // label: _HoldStrong::Map::Units::UnitsState::getArmySize
     // label: getArmySize
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00532F60 = 0x00532F60,
-    // label: computeDistanceToNearestEnemyForLegacyMissions
+    // label: _HoldStrong::Map::Units::UnitsState::distanceComputationForSomeOldCodeForSomeMissions
+    // label: distanceComputationForSomeOldCodeForSomeMissions
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00532F80 = 0x00532F80,
     // type: function
     SHC_3BB0A8C1_0x00533010 = 0x00533010,
-    // label: returnFalseStub
+    // label: returnFalse
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00533090 = 0x00533090,
+    // label: _HoldStrong::Map::Units::UnitsState::setRandomShootLocation
     // label: setRandomShootLocation
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005330A0 = 0x005330A0,
@@ -54785,55 +58609,79 @@ enum {
     SHC_3BB0A8C1_0x0053348C = 0x0053348C,
     // type: /undefined *32
     SHC_3BB0A8C1_0x00533490 = 0x00533490,
+    // label: _HoldStrong::Map::Units::UnitsState::getRemainingRequiredEngineers
     // label: getRemainingRequiredEngineers
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005334A0 = 0x005334A0,
+    // label: _HoldStrong::Map::Units::UnitsState::checkTargetBuildingPossibilityOrState
     // label: checkTargetBuildingPossibilityOrState
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00533580 = 0x00533580,
+    // label: _HoldStrong::Map::Units::UnitsState::findClosestLaddermanWithLadderPosition
     // label: findClosestLaddermanWithLadderPosition
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00533630 = 0x00533630,
-    // label: findAndDestroyAdjacentEnemyLadder
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x533810
+    // label: findAndDestroyAdjacentLadder
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00533810 = 0x00533810,
+    // label: _HoldStrong::Map::Units::UnitsState::getDestination2EqualsGivenCoordinates
     // label: getDestination2EqualsGivenCoordinates
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00533920 = 0x00533920,
-    // label: isAtSecondaryDestination
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x533960
+    // label: isUnitAtDestination
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00533960 = 0x00533960,
-    // label: hasUnitReachedDestination
+    // label: _HoldStrong::Map::Units::UnitsState::unitReachedDestinationUnk
+    // label: unitReachedDestination
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005339A0 = 0x005339A0,
-    // label: hasTunnelerNotFinishedDigging
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x5339f0
+    // label: isTunnelerNotFinished
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005339F0 = 0x005339F0,
-    // label: computeLadderClimbPath
+    // label: _HoldStrong::Map::Units::UnitsState::ladderClimbRelatedUnk
+    // label: commitUnitLadderClimbPath
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00533A10 = 0x00533A10,
+    // label: _HoldStrong::Map::Units::UnitsState::changeDestinationByAmount
     // label: changeDestinationByAmount
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00533B30 = 0x00533B30,
+    // label: _HoldStrong::Map::Units::UnitsState::changeDestinationByLeftover
     // label: changeDestinationByLeftover
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00533C70 = 0x00533C70,
+    // label: _HoldStrong::Map::Units::UnitsState::tracePathFromLadderExitSetDestination
     // label: tracePathFromLadderExitSetDestination
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00533CA0 = 0x00533CA0,
-    // label: updateUnitFadeAndVisibilityNearStructures
+    // label: updateUnitFadeBehindStructures
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00533D50 = 0x00533D50,
@@ -54919,15 +58767,21 @@ enum {
     SHC_3BB0A8C1_0x00533F84 = 0x00533F84,
     // type: /byte
     SHC_3BB0A8C1_0x00533F85 = 0x00533F85,
-    // label: saveUnitStateBeforeInterruption
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x533f90
+    // label: markTunnelerFinishedDigging
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00533F90 = 0x00533F90,
-    // label: despawnUnreachableUnit
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x533fc0
+    // label: removeTrappedWallUnit
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00533FC0 = 0x00533FC0,
+    // label: _HoldStrong::Map::Units::UnitsState::updateMicroPosition
     // label: updateMicroPosition
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00534030 = 0x00534030,
@@ -54945,51 +58799,74 @@ enum {
     SHC_3BB0A8C1_0x005340E0 = 0x005340E0,
     // type: /pointer
     SHC_3BB0A8C1_0x005340E4 = 0x005340E4,
+    // label:
+    // _HoldStrong::Map::Units::UnitsState::adjustUnitMapOrientationRelatedPositionBasedOnMapOrientationCorrectedFacingDirection
     // label: adjustUnitMapOrientationRelatedPositionBasedOnMapOrientationCorrectedFacingDirection
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005340F0 = 0x005340F0,
-    // label: applyTunnelDamageAlongPathPlan
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x534130
+    // label: digTunnelAlongPath
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00534130 = 0x00534130,
+    // label: _HoldStrong::Map::Units::UnitsState::stopUnitIfNextToTarget
     // label: stopUnitIfNextToTarget
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00534240 = 0x00534240,
-    // label: isWorkplaceBuildingOnAdjacentTile
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x534380
+    // label: isUnitAdjacentToWorkplace
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00534380 = 0x00534380,
     // type: function
     SHC_3BB0A8C1_0x005343C0 = 0x005343C0,
+    // label: _HoldStrong::Map::Units::UnitsState::setWorkplaceBuildingEntryAsTarget
     // label: setWorkplaceBuildingEntryAsTarget
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005343F0 = 0x005343F0,
+    // label: _HoldStrong::Map::Units::UnitsState::unitIsInMoat
     // label: unitIsInMoat
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00534460 = 0x00534460,
-    // label: stampOccupancyFlagOnSurroundingTiles
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x534490
+    // label: markUnitTileOccupancy
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00534490 = 0x00534490,
+    // label: _HoldStrong::Map::Units::UnitsState::writeSixToTileMap1104InAllDirections
     // label: writeSixToTileMap1104InAllDirections
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00534520 = 0x00534520,
-    // label: findEligibleUnitByTimeAndLocation
+    // label: _HoldStrong::Map::Units::UnitsState::getUnitThatFulfillsSomeTimebasedAndLocationBasedCriteria
+    // label: getUnitThatFulfillsSomeTimebasedAndLocationBasedCriteria
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005345A0 = 0x005345A0,
     // type: function
     SHC_3BB0A8C1_0x005345D0 = 0x005345D0,
+    // label: _HoldStrong::Map::Units::UnitsState::selectNewBlessingTarget
     // label: selectNewBlessingTarget
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005346D0 = 0x005346D0,
-    // label: applyDragBoxSelectionByPriority
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x5347e0
+    // label: selectUnitsInDragBox
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005347E0 = 0x005347E0,
@@ -55015,39 +58892,55 @@ enum {
     SHC_3BB0A8C1_0x00534D08 = 0x00534D08,
     // type: /pointer
     SHC_3BB0A8C1_0x00534D0C = 0x00534D0C,
-    // label: selectUnitsInDragBoxForCurrentPlayer
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x534d10
+    // label: selectOwnUnitsInDragBox
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00534D10 = 0x00534D10,
     // type: function
     SHC_3BB0A8C1_0x00534D80 = 0x00534D80,
-    // label: selectFirstUnitInDragBoxAnyPlayer
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x534ee0
+    // label: selectSingleUnitInDragBox
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00534EE0 = 0x00534EE0,
     // type: function
     SHC_3BB0A8C1_0x00534F50 = 0x00534F50,
-    // label: selectAllUnitsOfTypeForPlayer
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x5350b0
+    // label: selectAllUnitsOfType
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005350B0 = 0x005350B0,
+    // label: _HoldStrong::Map::Units::UnitsState::deselectAllUnitsOneByOne
     // label: deselectAllUnitsOneByOne
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535150 = 0x00535150,
+    // label: _HoldStrong::Map::Units::UnitsState::deselectUnit
     // label: deselectUnit
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535190 = 0x00535190,
+    // label: _HoldStrong::Map::Units::UnitsState::filterUnitSelectionExcludeUnitType
     // label: filterUnitSelectionExcludeUnitType
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005351C0 = 0x005351C0,
+    // label: _HoldStrong::Map::Units::UnitsState::filterUnitSelectionForUnitType
     // label: filterUnitSelectionForUnitType
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535200 = 0x00535200,
+    // label: _HoldStrong::Map::Units::UnitsState::recountUnitsInSelection
     // label: recountUnitsInSelection
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535240 = 0x00535240,
@@ -55251,155 +59144,225 @@ enum {
     SHC_3BB0A8C1_0x00535513 = 0x00535513,
     // type: /byte
     SHC_3BB0A8C1_0x00535514 = 0x00535514,
-    // label: selectionContainsEngineersOnly
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x535520
+    // label: isSelectionOnlyEngineers
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535520 = 0x00535520,
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x535550
     // label: selectionHasEngineers
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535550 = 0x00535550,
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x535560
     // label: selectionHasArchers
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535560 = 0x00535560,
-    // label: selectionHasMobileAssaultUnits
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x535580
+    // label: selectionHasAdvancedUnit
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535580 = 0x00535580,
-    // label: selectionHasMixedAssaultAndInfantry
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x5355e0
+    // label: selectionHasSiegeAndOther
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005355E0 = 0x005355E0,
-    // label: getSelectedEngineerCarryingResource
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x535680
+    // label: findEngineerAtOilSmelter
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535680 = 0x00535680,
-    // label: selectionContainsTunnelersOnly
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x535700
+    // label: isSelectionOnlyTunnelers
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535700 = 0x00535700,
+    // label: _HoldStrong::Map::Units::UnitsState::selectionContainsRangedOnlyUnits
     // label: selectionContainsRangedOnlyUnits
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535730 = 0x00535730,
-    // label: selectionContainsLadermenOnly
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x5357e0
+    // label: isSelectionOnlyLaddermen
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005357E0 = 0x005357E0,
+    // label: _HoldStrong::Map::Units::UnitsState::selectionContainsOnlyArabAssassins
     // label: selectionContainsOnlyArabAssassins
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535810 = 0x00535810,
-    // label: selectionContainsShieldmenOnly
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x535840
+    // label: isSelectionOnlyShields
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535840 = 0x00535840,
-    // label: selectionHasShieldOrSiegeMobileUnits
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x535870
+    // label: selectionHasSiegeCoverAndOther
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535870 = 0x00535870,
-    // label: selectionHasShieldOrSiegeTower
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x5358c0
+    // label: selectionHasShieldOrTowerAndOther
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005358C0 = 0x005358C0,
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x535910
     // label: selectionHasNoRangedUnits
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535910 = 0x00535910,
-    // label: selectionHasFootSoldiers
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x535980
+    // label: selectionCanDigMoat
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535980 = 0x00535980,
-    // label: getSelectedLordIDIfOwnedByCurrentPlayer
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x5359c0
+    // label: getSelectedLordUnit
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005359C0 = 0x005359C0,
+    // label: _HoldStrong::Map::Units::UnitsState::createUnitSelection
     // label: createUnitSelection
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535A30 = 0x00535A30,
+    // label: _HoldStrong::Map::Units::UnitsState::createTribeFromSelectedUnits
     // label: createTribeFromSelectedUnits
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535B00 = 0x00535B00,
+    // label: _HoldStrong::Map::Units::UnitsState::playerMakeUnitSelection
     // label: playerMakeUnitSelection
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535BC0 = 0x00535BC0,
-    // label: getFirstSelectedUnitID
+    // label: queueTribeCommand
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535DF0 = 0x00535DF0,
-    // label: selectSiegeEngineAndPlayFeedback
+    // label: _HoldStrong::Map::Units::UnitsState::siegeEngineRelated
+    // label: assignUnitToTribeWithSiegeSpeech
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535E20 = 0x00535E20,
+    // label: _HoldStrong::Map::Units::UnitsState::makeSelectionBasedOnShortcut
     // label: makeSelectionBasedOnShortcut
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535FD0 = 0x00535FD0,
+    // label: _HoldStrong::Map::Units::UnitsState::isUnitShortcutAvailable
     // label: isUnitShortcutAvailable
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005360A0 = 0x005360A0,
-    // label: selectTribeUnitsForPlayer
+    // label: _HoldStrong::Map::Units::UnitsState::tribeRelated1
+    // label: selectAllTribeUnitsForPlayer
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536190 = 0x00536190,
+    // label: _HoldStrong::Map::Units::UnitsState::getUnitTypeOfFirstSelectedUnit
     // label: getUnitTypeOfFirstSelectedUnit
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005361F0 = 0x005361F0,
-    // label: selectionHasMovableNonSiegeUnit
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x536260
+    // label: selectionHasFieldUnit
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536260 = 0x00536260,
     // type: function
     SHC_3BB0A8C1_0x00536280 = 0x00536280,
-    // label: getFirstSelectedUnitOfEitherType
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x5362f0
+    // label: findSelectedUnitOfTypes
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005362F0 = 0x005362F0,
     // type: function
     SHC_3BB0A8C1_0x00536310 = 0x00536310,
-    // label: getMaxStoneAmmoInSelectedSiegeEngines
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x536370
+    // label: getMaxSelectedCatapultAmmo
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536370 = 0x00536370,
-    // label: countSelectedCatapultsAndTrebuchets
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x536400
+    // label: countSelectedStoneThrowers
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536400 = 0x00536400,
     // type: function
     SHC_3BB0A8C1_0x00536440 = 0x00536440,
+    // label: _HoldStrong::Map::Units::UnitsState::returnFirstSelectedEngineer
     // label: returnFirstSelectedEngineer
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005364C0 = 0x005364C0,
+    // label: _HoldStrong::Map::Units::UnitsState::getTunnelerIDOnlyIfFirstSelected
     // label: getTunnelerIDOnlyIfFirstSelected
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536530 = 0x00536530,
-    // label: getFirstSelectedLadderUnitID
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x5365a0
+    // label: getSelectedLadderUnit
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005365A0 = 0x005365A0,
+    // label: _HoldStrong::Map::Units::UnitsState::canAUnitClimb
     // label: canAUnitClimb
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536610 = 0x00536610,
     // type: function
     SHC_3BB0A8C1_0x00536630 = 0x00536630,
-    // label: getFirstSelectedSiegeEngineID
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x536690
+    // label: getSelectedSiegeEngine
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536690 = 0x00536690,
-    // label: getFirstSelectedCatapultOrTrebuchetID
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x536710
+    // label: getSelectedStoneThrower
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536710 = 0x00536710,
-    // label: isTowerTileOvercrowdedByCurrentPlayer
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x536780
+    // label: canCaptureTowerAtTile
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536780 = 0x00536780,
@@ -55407,11 +59370,15 @@ enum {
     SHC_3BB0A8C1_0x00536860 = 0x00536860,
     // type: function
     SHC_3BB0A8C1_0x005368D0 = 0x005368D0,
+    // label: _HoldStrong::Map::Units::UnitsState::checkAnySelectedUnitCannotClimb
     // label: checkAnySelectedUnitCannotClimb
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536970 = 0x00536970,
-    // label: selectionHasUnmannedSiegeEngine
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x5369f0
+    // label: canManSiegeEngine
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005369F0 = 0x005369F0,
@@ -55463,83 +59430,115 @@ enum {
     SHC_3BB0A8C1_0x00536A50 = 0x00536A50,
     // type: /byte
     SHC_3BB0A8C1_0x00536A51 = 0x00536A51,
+    // label: _HoldStrong::Map::Units::UnitsState::selectionContainsCombatUnit
     // label: selectionContainsCombatUnit
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536A60 = 0x00536A60,
-    // label: queueStopCommand
+    // label: queueUnitCommand0F
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536C70 = 0x00536C70,
-    // label: queueUnitTypeCommand
+    // label: _HoldStrong::Map::Units::UnitsState::queueCommand0xF
+    // label: queueCommand0xF
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536C90 = 0x00536C90,
+    // label: _HoldStrong::Map::Units::UnitsState::queueClickNavigateMenuOrEscape
     // label: queueClickNavigateMenuOrEscape
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536CC0 = 0x00536CC0,
-    // label: clearOrDeselectUnitFromSelection
+    // label: _HoldStrong::Map::Units::UnitsState::tribeRelated2
+    // label: clearUnitSelectionAndTribe
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536CF0 = 0x00536CF0,
     // type: function
     SHC_3BB0A8C1_0x00536DA0 = 0x00536DA0,
-    // label: clearSelectionCountsAndPlayerIDs
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x536de0
+    // label: clearSelectionCounts
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536DE0 = 0x00536DE0,
     // type: function
     SHC_3BB0A8C1_0x00536E10 = 0x00536E10,
+    // label: _HoldStrong::Map::Units::UnitsState::giveMoveCommand
     // label: giveMoveCommand
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536E30 = 0x00536E30,
+    // label: _HoldStrong::Map::Units::UnitsState::giveTribeMoveInstructionHumans
     // label: giveTribeMoveInstructionHumans
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00537070 = 0x00537070,
+    // label: _HoldStrong::Map::Units::UnitsState::extendRallyPoint
     // label: extendRallyPoint
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005370C0 = 0x005370C0,
-    // label: queueDisbandAndAttackCommand2Params
+    // label: queueDisbandAndAttackCommand
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00537100 = 0x00537100,
-    // label: queueDisbandAndAttackCommand3Params
+    // label: queueDisbandAndAttackUnitsCommand
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00537130 = 0x00537130,
-    // label: queueDisbandAndAttackCommand4Params
+    // label: _HoldStrong::Map::Units::UnitsState::queueCommand_36d
+    // label: queueCommand_36d
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00537160 = 0x00537160,
-    // label: queueDisbandAndAttackCommand5Params
+    // label: _HoldStrong::Map::Units::UnitsState::queueCommand_36_variation2
+    // label: queueCommand_36_variation2
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005371A0 = 0x005371A0,
-    // label: relayTribeInstruction
+    // label: _HoldStrong::Map::Units::UnitsState::giveTribeAnInstruction2
+    // label: giveTribeAnInstruction2
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005371E0 = 0x005371E0,
+    // label: _HoldStrong::Map::Units::UnitsState::findFreeTileNearby
     // label: findFreeTileNearby
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005371F0 = 0x005371F0,
+    // label: _HoldStrong::Map::Units::UnitsState::findTunnelTarget
     // label: findTunnelTarget
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00537700 = 0x00537700,
+    // label: _HoldStrong::Map::Units::UnitsState::getAliveLordForPlayer
     // label: getAliveLordForPlayer
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005377F0 = 0x005377F0,
+    // label: _HoldStrong::Map::Units::UnitsState::getRawDeerCount
     // label: getRawDeerCount
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00537840 = 0x00537840,
-    // label: findNearestShootableDeer
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x537880
+    // label: findNearestHuntableDeer
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00537880 = 0x00537880,
@@ -55547,35 +59546,47 @@ enum {
     SHC_3BB0A8C1_0x005378D0 = 0x005378D0,
     // type: function
     SHC_3BB0A8C1_0x005378F0 = 0x005378F0,
-    // label: findNearestIdleCowForPlayer
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x537a00
+    // label: findNearestIdleCow
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00537A00 = 0x00537A00,
+    // label: _HoldStrong::Map::Units::UnitsState::findClosestAnimalStoreResult
     // label: findClosestAnimalStoreResult
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00537AA0 = 0x00537AA0,
     // type: function
     SHC_3BB0A8C1_0x00537B20 = 0x00537B20,
-    // label: findClosestEnemyByAreaAndRange
+    // label: _HoldStrong::Map::Units::UnitsState::getClosestUnitIDUnk
+    // label: findClosestEnemyUnitInArea
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00537C10 = 0x00537C10,
     // type: function
     SHC_3BB0A8C1_0x00537C90 = 0x00537C90,
+    // label: _HoldStrong::Map::Units::UnitsState::tryAttackUnitID
     // label: tryAttackUnitID
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00537D60 = 0x00537D60,
+    // label: _HoldStrong::Map::Units::UnitsState::setTowerSiegeEngineToIdle
     // label: setTowerSiegeEngineToIdle
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00537E00 = 0x00537E00,
+    // label: _HoldStrong::Map::Units::UnitsState::setAIControlStatusTo100000
     // label: setAIControlStatusTo100000
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00537EE0 = 0x00537EE0,
-    // label: clearUnitPositionCommitState
+    // label: getUnitAnimationIndex
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00537F60 = 0x00537F60,
@@ -63399,7 +67410,9 @@ enum {
     SHC_3BB0A8C1_0x00539BD5 = 0x00539BD5,
     // type: /byte
     SHC_3BB0A8C1_0x00539BD6 = 0x00539BD6,
+    // label: _HoldStrong::Map::Units::UnitsState::getPeasantGmID
     // label: getPeasantGmID
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00539BE0 = 0x00539BE0,
@@ -63611,7 +67624,9 @@ enum {
     SHC_3BB0A8C1_0x00539DEB = 0x00539DEB,
     // type: /byte
     SHC_3BB0A8C1_0x00539DEC = 0x00539DEC,
+    // label: _HoldStrong::Map::Units::UnitsState::chooseHusbandAndWife
     // label: chooseHusbandAndWife
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00539DF0 = 0x00539DF0,
@@ -63747,7 +67762,9 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x0053A020 = 0x0053A020,
-    // label: isWorkerAtProductionIdleState
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x53a070
+    // label: isWorkerInProductionState
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053A070 = 0x0053A070,
@@ -63829,7 +67846,9 @@ enum {
     SHC_3BB0A8C1_0x0053A148 = 0x0053A148,
     // type: /byte
     SHC_3BB0A8C1_0x0053A149 = 0x0053A149,
-    // label: getWorkerBlockingStateIfStuck
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x53a150
+    // label: computeWorkerNextAction
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053A150 = 0x0053A150,
@@ -63937,15 +67956,21 @@ enum {
     SHC_3BB0A8C1_0x0053A4C0 = 0x0053A4C0,
     // type: /byte
     SHC_3BB0A8C1_0x0053A4C1 = 0x0053A4C1,
-    // label: findActiveSiegeEngineForTribe
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x53a4d0
+    // label: findPlayerOperationalSiegeEngine
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053A4D0 = 0x0053A4D0,
+    // label: _HoldStrong::Map::Units::UnitsState::getLivingSelectableUnit
     // label: getLivingSelectableUnit
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053A560 = 0x0053A560,
+    // label: _HoldStrong::Map::Units::UnitsState::renderDebugDataUnitData
     // label: renderDebugDataUnitData
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053A5B0 = 0x0053A5B0,
@@ -63955,7 +67980,9 @@ enum {
     SHC_3BB0A8C1_0x0053B1F0 = 0x0053B1F0,
     // type: function
     SHC_3BB0A8C1_0x0053B210 = 0x0053B210,
-    // label: UpgradeMapUnitsTo_UnknownVersion2
+    // label: _HoldStrong::Map::Version::UpgradeMapUnitsTo_UnknownVersion2
+    // label: upgradeMapRederiveUnitCombatAndHealth
+    // location:
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x0053B260 = 0x0053B260,
@@ -63973,7 +68000,9 @@ enum {
     SHC_3BB0A8C1_0x0053B380 = 0x0053B380,
     // type: function
     SHC_3BB0A8C1_0x0053B390 = 0x0053B390,
-    // label: UpgradeMapUnitsTo_UnknownVersion1
+    // label: _HoldStrong::Map::Version::UpgradeMapUnitsTo_UnknownVersion1
+    // label: upgradeMapRederiveUnitGraphicsAndStats
+    // location:
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x0053B3E0 = 0x0053B3E0,
@@ -64005,23 +68034,33 @@ enum {
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x0053B800 = 0x0053B800,
-    // label: constructUnitsState
+    // label: Constructor_UnitsState
+    // label: _HoldStrong::Map::Units::UnitsState::Constructor_UnitsState
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053B8B0 = 0x0053B8B0,
+    // label: _HoldStrong::Map::Units::UnitsState::setUnitValues
     // label: setUnitValues
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053B8E0 = 0x0053B8E0,
-    // label: commitPendingUnitPosition
+    // label: _HoldStrong::Map::Units::UnitsState::updateUnitPositionUnk
+    // label: commitUnitPositionUpdate
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053BB10 = 0x0053BB10,
+    // label: _HoldStrong::Map::Units::UnitsState::setupUnitSharingCurrentTilePosition
     // label: setupUnitSharingCurrentTilePosition
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053BB70 = 0x0053BB70,
+    // label: _HoldStrong::Map::Units::UnitsState::teleportUnitToUnitXAndY
     // label: teleportUnitToUnitXAndY
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053BB90 = 0x0053BB90,
@@ -64041,15 +68080,21 @@ enum {
     SHC_3BB0A8C1_0x0053C400 = 0x0053C400,
     // type: function
     SHC_3BB0A8C1_0x0053C590 = 0x0053C590,
-    // label: ConsiderTakingABreakUnk
+    // label: _HoldStrong::Global::ConsiderTakingABreakUnk
+    // label: considerUnitTakingBreak
+    // location:
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x0053CAC0 = 0x0053CAC0,
+    // label: _HoldStrong::Map::Units::UnitsState::getEnemyUnitIDNearby
     // label: getEnemyUnitIDNearby
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053CAE0 = 0x0053CAE0,
+    // label: _HoldStrong::Map::Units::UnitsState::prepareProjectileTarget
     // label: prepareProjectileTarget
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053CBD0 = 0x0053CBD0,
@@ -64301,7 +68346,9 @@ enum {
     SHC_3BB0A8C1_0x0053D022 = 0x0053D022,
     // type: /byte
     SHC_3BB0A8C1_0x0053D023 = 0x0053D023,
-    // label: harassBuildingsWithSiegeAI
+    // label: _HoldStrong::Map::Units::UnitsState::harassBuildingsAIUnk
+    // label: aiSiegeUnitPickTargetAndShoot
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053D030 = 0x0053D030,
@@ -64393,19 +68440,27 @@ enum {
     SHC_3BB0A8C1_0x0053D3C1 = 0x0053D3C1,
     // type: /byte
     SHC_3BB0A8C1_0x0053D3C2 = 0x0053D3C2,
+    // label: _HoldStrong::Map::Units::UnitsState::setDestinationForUnit
     // label: setDestinationForUnit
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053D3D0 = 0x0053D3D0,
-    // label: resumeMovementAfterInterruption
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x53d850
+    // label: resumeUnitMovement
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053D850 = 0x0053D850,
+    // label: _HoldStrong::Map::Units::UnitsState::exitLadder
     // label: exitLadder
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053D900 = 0x0053D900,
+    // label: _HoldStrong::Map::Units::UnitsState::getUnitInHitBox
     // label: getUnitInHitBox
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053D9C0 = 0x0053D9C0,
@@ -64423,11 +68478,15 @@ enum {
     SHC_3BB0A8C1_0x0053DCB0 = 0x0053DCB0,
     // type: /undefined *32
     SHC_3BB0A8C1_0x0053DCB4 = 0x0053DCB4,
-    // label: setDestinationNearTargetedBuilding
+    // label: _HoldStrong::Map::Units::UnitsState::setTargetedBuildingDestinationUnk
+    // label: setUnitDestinationNextToTargetBuilding
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053DCC0 = 0x0053DCC0,
-    // label: selectWorkerSpeechOrMoraleStateID
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x53ddd0
+    // label: computePeasantThoughtBubble
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053DDD0 = 0x0053DDD0,
@@ -64475,39 +68534,57 @@ enum {
     SHC_3BB0A8C1_0x0053E380 = 0x0053E380,
     // type: /pointer
     SHC_3BB0A8C1_0x0053E384 = 0x0053E384,
+    // label: _HoldStrong::Map::Units::UnitsState::upgradeMapFormatForUnits
     // label: upgradeMapFormatForUnits
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053E390 = 0x0053E390,
+    // label: _HoldStrong::Map::Units::UnitsState::spawnUnit
     // label: spawnUnit
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053E440 = 0x0053E440,
+    // label: _HoldStrong::Map::Units::UnitsState::changeUnitType
     // label: changeUnitType
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053E6C0 = 0x0053E6C0,
+    // label: _HoldStrong::Map::Units::UnitsState::deleteUnit
     // label: deleteUnit
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053E790 = 0x0053E790,
+    // label: _HoldStrong::Map::Units::UnitsState::commitUnitLocation
     // label: commitUnitLocation
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053E820 = 0x0053E820,
-    // label: resetUnitMovementState
+    // label: _HoldStrong::Map::Units::UnitsState::someUnitMoveFunction
+    // label: someUnitMoveFunction
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053E870 = 0x0053E870,
-    // label: clearHiddenFlagAndUpdatePosition
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x53e8d0
+    // label: revealHiddenUnit
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053E8D0 = 0x0053E8D0,
+    // label: _HoldStrong::Map::Units::UnitsState::setPositionOfUnit
     // label: setPositionOfUnit
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053E900 = 0x0053E900,
+    // label: _HoldStrong::Map::Units::UnitsState::commitMimmicLocation
     // label: commitMimmicLocation
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053E9F0 = 0x0053E9F0,
@@ -64523,8 +68600,6 @@ enum {
     SHC_3BB0A8C1_0x0053F08F = 0x0053F08F,
     // type: /pointer
     SHC_3BB0A8C1_0x0053F0AA = 0x0053F0AA,
-    // type: function
-    SHC_3BB0A8C1_0x0053F0BA = 0x0053F0BA,
     // type: /undefined *32
     SHC_3BB0A8C1_0x0053F8E0 = 0x0053F8E0,
     // type: /undefined *32
@@ -64657,7 +68732,9 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x0053F940 = 0x0053F940,
+    // label: _HoldStrong::Map::Units::UnitsState::ifOnADefensiveStructureSetDestinationInDirectionOfTarget
     // label: ifOnADefensiveStructureSetDestinationInDirectionOfTarget
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00540040 = 0x00540040,
@@ -65859,15 +69936,21 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00549B30 = 0x00549B30,
+    // label: _HoldStrong::Map::Units::UnitsState::processMeleeInitiation
     // label: processMeleeInitiation
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00549C70 = 0x00549C70,
-    // label: resumeMovementIfNoAttackTarget
+    // label: _HoldStrong::Map::Units::UnitsState::meth_0x54a770
+    // label: resumeUnitIfNotAttacking
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0054A770 = 0x0054A770,
-    // label: findNearestEnemyAndHeadTowardsIt
+    // label: _HoldStrong::Map::Units::UnitsState::findNearestEnemyAndHeadTowardsItUnk
+    // label: unitAcquireBestEnemyTargetAndPursue
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0054A7B0 = 0x0054A7B0,
@@ -66293,7 +70376,9 @@ enum {
     SHC_3BB0A8C1_0x0054B0CB = 0x0054B0CB,
     // type: /byte
     SHC_3BB0A8C1_0x0054B0CC = 0x0054B0CC,
-    // label: acquireShootTarget
+    // label: _HoldStrong::Map::Units::UnitsState::canShootTargetUnk
+    // label: acquireAndSetShootTarget
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0054B0D0 = 0x0054B0D0,
@@ -66963,19 +71048,27 @@ enum {
     SHC_3BB0A8C1_0x0054BFB2 = 0x0054BFB2,
     // type: /byte
     SHC_3BB0A8C1_0x0054BFB3 = 0x0054BFB3,
+    // label: _HoldStrong::Map::Units::UnitsState::updateClimbing
     // label: updateClimbing
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0054BFC0 = 0x0054BFC0,
+    // label: _HoldStrong::Map::Units::UnitsState::unitClimbing
     // label: unitClimbing
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0054C1C0 = 0x0054C1C0,
+    // label: _HoldStrong::Map::Units::UnitsState::handleUnitMovementWhenTargetingBuildings
     // label: handleUnitMovementWhenTargetingBuildings
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0054C4F0 = 0x0054C4F0,
+    // label: _HoldStrong::Map::Units::UnitsState::moveToFreeTileNearby
     // label: moveToFreeTileNearby
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0054C610 = 0x0054C610,
@@ -71539,7 +75632,9 @@ enum {
     SHC_3BB0A8C1_0x00578370 = 0x00578370,
     // type: function
     SHC_3BB0A8C1_0x00578B40 = 0x00578B40,
+    // label: _HoldStrong::Map::Units::UnitsState::processUnitMove
     // label: processUnitMove
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00578C40 = 0x00578C40,
@@ -71561,7 +75656,9 @@ enum {
     SHC_3BB0A8C1_0x005792F8 = 0x005792F8,
     // type: /pointer
     SHC_3BB0A8C1_0x005792FC = 0x005792FC,
+    // label: _HoldStrong::Map::Units::UnitsState::updateUnits
     // label: updateUnits
+    // location:
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00579300 = 0x00579300,
@@ -72144,42 +76241,52 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0057C8A9 = 0x0057C8A9,
     // label: _GetOrdinal@20
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057C8CE = 0x0057C8CE,
     // label: _ImageEntryToDataC@12
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057C94B = 0x0057C94B,
     // label: _strcmpiC@8
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057C987 = 0x0057C987,
     // label: _strncpyC@12
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057C9AE = 0x0057C9AE,
     // label: _GetProcAddressInternal@8
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057C9F0 = 0x0057C9F0,
     // label: _driveandpathC@12
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057CA56 = 0x0057CA56,
+    // label: _LoadGodot@0
     // label: checkLocationOfUnicowsDLL
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057CAF3 = 0x0057CAF3,
     // label: ResolveThunk
+    // label: _ResolveThunk@20
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057CCC0 = 0x0057CCC0,
-    // label: FUN_0057ce07
+    // label: crt_stub_setLastError_notImplemented
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057CE07 = 0x0057CE07,
-    // label: FUN_0057ce15
+    // label: crt_0057ce15
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057CE15 = 0x0057CE15,
@@ -72190,23 +76297,31 @@ enum {
     // label: FID_conflict:_GodotFailRemovePropA@8
     // label: FID_conflict:_GodotFaillstrcatW@8
     // label: FID_conflict:_GodotFaillstrcpyW@8
+    // label: _GodotFailEnableWindow@8
+    // label: _GodotFailGetCPInfo@8
+    // label: _GodotFailGetPropA@8
+    // label: _GodotFailGetWindowLongA@8
+    // label: _GodotFailRemovePropA@8
+    // label: _GodotFaillstrcatW@8
+    // label: _GodotFaillstrcpyW@8
     // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057CE22 = 0x0057CE22,
-    // label: FUN_0057ce52
+    // label: crt_0057ce52
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057CE52 = 0x0057CE52,
-    // label: FUN_0057ce5d
+    // label: crt_0057ce5d
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057CE5D = 0x0057CE5D,
     // label: _GodotFailGetProcAddress@8
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057CE6A = 0x0057CE6A,
-    // label: FUN_0057cea9
+    // label: crt_0057cea9
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057CEA9 = 0x0057CEA9,
@@ -72216,25 +76331,34 @@ enum {
     // label: FID_conflict:_GodotFailIsValidCodePage@4
     // label: FID_conflict:_GodotFailIsWindowUnicode@4
     // label: FID_conflict:_GodotFaillstrlenW@4
+    // label: _GodotFailEnumClipboardFormats@4
+    // label: _GodotFailGetClipboardData@4
+    // label: _GodotFailIsClipboardFormatAvailable@4
+    // label: _GodotFailIsValidCodePage@4
+    // label: _GodotFailIsWindowUnicode@4
+    // label: _GodotFaillstrlenW@4
     // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057CEB6 = 0x0057CEB6,
-    // label: FUN_0057cee6
+    // label: crt_0057cee6
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057CEE6 = 0x0057CEE6,
     // label: _GodotFailMultiByteToWideChar@24
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057CEF3 = 0x0057CEF3,
     // label: FID_conflict:_GodotFailExtTextOutW@32
     // label: FID_conflict:_GodotFailWideCharToMultiByte@32
+    // label: _GodotFailExtTextOutW@32
+    // label: _GodotFailWideCharToMultiByte@32
     // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057CF23 = 0x0057CF23,
-    // label: FUN_0057cf53
+    // label: crt_0057cf53
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057CF53 = 0x0057CF53,
@@ -72242,6 +76366,10 @@ enum {
     // label: FID_conflict:_GodotFailFindResourceW@12
     // label: FID_conflict:_GodotFailSetPropA@12
     // label: FID_conflict:_GodotFailSetWindowLongA@12
+    // label: _GodotFailDdeQueryConvInfo@12
+    // label: _GodotFailFindResourceW@12
+    // label: _GodotFailSetPropA@12
+    // label: _GodotFailSetWindowLongA@12
     // location:
     // location: HoldStrong_lib
     // type: function
@@ -72347,15 +76475,18 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0057E170 = 0x0057E170,
     // label: __Tolower
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057E180 = 0x0057E180,
     // label: __Getctype
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057E28F = 0x0057E28F,
     // label: ??0_Init_locks@std@@QAE@XZ
     // label: _Init_locks
+    // label: std::_Init_locks::_Init_locks
     // location:
     // location: std/_Init_locks
     // type: function
@@ -72366,29 +76497,35 @@ enum {
     SHC_3BB0A8C1_0x0057E319 = 0x0057E319,
     // label: ??0_Lockit@std@@QAE@H@Z
     // label: _Lockit
+    // label: std::_Lockit::_Lockit
     // location:
     // location: std/_Lockit
     // type: function
     SHC_3BB0A8C1_0x0057E342 = 0x0057E342,
+    // label: HoldStrong_lib::_Lockit::meth_0x57e363
     // label: meth_0x57e363
+    // location:
     // location: HoldStrong_lib/_Lockit
     // type: function
     SHC_3BB0A8C1_0x0057E363 = 0x0057E363,
     // label: ??1_Fac_node@std@@QAE@XZ
+    // label: std::_Fac_node::~_Fac_node
     // label: ~_Fac_node
     // location:
     // location: std/_Fac_node
     // type: function
     SHC_3BB0A8C1_0x0057E375 = 0x0057E375,
     // label: __Deletegloballocale
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057E38A = 0x0057E38A,
     // label: _tidy_global
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057E3A6 = 0x0057E3A6,
-    // label: FUN_0057e3d0
+    // label: crt_0057e3d0
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057E3D0 = 0x0057E3D0,
@@ -72399,16 +76536,19 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0057E3D6 = 0x0057E3D6,
     // label: ?_Locimp_dtor@_Locimp@locale@std@@CAXPAV123@@Z
+    // label: HoldStrong_lib::std::locale::_Locimp::_Locimp_dtor
     // label: _Locimp_dtor
     // location:
     // location: HoldStrong_lib/std/locale/_Locimp
     // type: function
     SHC_3BB0A8C1_0x0057E3FB = 0x0057E3FB,
     // label: __Fac_tidy
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057E45B = 0x0057E45B,
     // label: ?facet_Register@facet@locale@std@@CAXPAV123@@Z
+    // label: HoldStrong_lib::std::locale::facet::facet_Register
     // label: facet_Register
     // location:
     // location: HoldStrong_lib/std/locale/facet
@@ -72421,18 +76561,23 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0057E4D7 = 0x0057E4D7,
     // label: ??0_Locimp@locale@std@@AAE@_N@Z
+    // label: HoldStrong_lib::std::locale::_Locimp::_Locimp
     // label: _Locimp
     // location:
     // location: HoldStrong_lib/std/locale/_Locimp
     // type: function
     SHC_3BB0A8C1_0x0057E4FA = 0x0057E4FA,
     // label: ??1_Locimp@locale@std@@MAE@XZ
+    // label: HoldStrong_lib::std::locale::_Locimp::~_Locimp
     // label: ~_Locimp
     // location:
     // location: HoldStrong_lib/std/locale/_Locimp
     // type: function
     SHC_3BB0A8C1_0x0057E543 = 0x0057E543,
+    // label: ??_G_Locimp@locale@std@@MAEPAXI@Z
+    // label: HoldStrong_lib::std::locale::_Locimp::virt_meth_0x57e580
     // label: virt_meth_0x57e580
+    // location:
     // location: HoldStrong_lib/std/locale/_Locimp
     // type: function
     SHC_3BB0A8C1_0x0057E580 = 0x0057E580,
@@ -72449,44 +76594,58 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0057E636 = 0x0057E636,
     // label: ?_Callfns@ios_base@std@@AAEXW4event@12@@Z
+    // label: HoldStrong_lib::stdLib::ios::ios_base::_Callfns
     // label: _Callfns
     // location:
     // location: HoldStrong_lib/stdLib/ios/ios_base
     // type: function
     SHC_3BB0A8C1_0x0057E680 = 0x0057E680,
     // label: ?_Tidy@ios_base@std@@AAAXXZ
+    // label: HoldStrong_lib::stdLib::ios::ios_base::_Tidy
     // label: _Tidy
     // location:
     // location: HoldStrong_lib/stdLib/ios/ios_base
     // type: function
     SHC_3BB0A8C1_0x0057E6A2 = 0x0057E6A2,
     // label: ?_Ios_base_dtor@ios_base@std@@CAXPAV12@@Z
+    // label: HoldStrong_lib::stdLib::ios::ios_base::_Ios_base_dtor
     // label: _Ios_base_dtor
     // location:
     // location: HoldStrong_lib/stdLib/ios/ios_base
     // type: function
     SHC_3BB0A8C1_0x0057E6E8 = 0x0057E6E8,
+    // label: HoldStrong_lib::_Lockit::_Lockit
     // label: _Lockit
+    // location:
     // location: HoldStrong_lib/_Lockit
     // type: function
     SHC_3BB0A8C1_0x0057E726 = 0x0057E726,
+    // label: ??1_Mutex@std@@QAE@XZ
+    // location:
     // type: function
     SHC_3BB0A8C1_0x0057E73E = 0x0057E73E,
+    // label: HoldStrong_lib::LockClass1::acquireLock
     // label: acquireLock
+    // location:
     // location: HoldStrong_lib/LockClass1
     // type: function
     SHC_3BB0A8C1_0x0057E753 = 0x0057E753,
+    // label: HoldStrong_lib::LockClass1::releaseLock
     // label: releaseLock
+    // location:
     // location: HoldStrong_lib/LockClass1
     // type: function
     SHC_3BB0A8C1_0x0057E75C = 0x0057E75C,
     // label: ??0logic_error@std@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@1@@Z
+    // label: HoldStrong_lib::std::logic_error::logic_error
     // label: logic_error
     // location:
     // location: HoldStrong_lib/std/logic_error
     // type: function
     SHC_3BB0A8C1_0x0057E765 = 0x0057E765,
+    // label: HoldStrong_lib::std::logic_error::virt_meth_0x57e79a
     // label: virt_meth_0x57e79a
+    // location:
     // location: HoldStrong_lib/std/logic_error
     // type: function
     SHC_3BB0A8C1_0x0057E79A = 0x0057E79A,
@@ -72496,7 +76655,9 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057E7A8 = 0x0057E7A8,
+    // label: HoldStrong_lib::std::logic_error::virt_meth_0x57e7c5
     // label: virt_meth_0x57e7c5
+    // location:
     // location: HoldStrong_lib/std/logic_error
     // type: function
     SHC_3BB0A8C1_0x0057E7C5 = 0x0057E7C5,
@@ -72532,11 +76693,12 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057E8CC = 0x0057E8CC,
-    // label: FUN_0057e90b
+    // label: crt_0057e90b
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057E90B = 0x0057E90B,
     // label: __Toupper
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057E923 = 0x0057E923,
@@ -72558,15 +76720,15 @@ enum {
     // location: std
     // type: function
     SHC_3BB0A8C1_0x0057EBA1 = 0x0057EBA1,
-    // label: thunk_FUN_00586363
+    // label: ?__uncaught_exception@@YA_NXZ
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057EBFC = 0x0057EBFC,
-    // label: FUN_0057ec01
+    // label: crt_0057ec01
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057EC01 = 0x0057EC01,
-    // label: FUN_0057ec0c
+    // label: crt_0057ec0c
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057EC0C = 0x0057EC0C,
@@ -72584,13 +76746,13 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057EC2D = 0x0057EC2D,
-    // label: thunk_FUN_0057ec67
+    // label: crt_0057ec67
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057EC4D = 0x0057EC4D,
     // type: function
     SHC_3BB0A8C1_0x0057EC4F = 0x0057EC4F,
-    // label: FUN_0057ec67
+    // label: crt_0057ec67
     // location: HoldStrong_lib
     SHC_3BB0A8C1_0x0057EC67 = 0x0057EC67,
     // label: __init_pointers_FUN_0057ec72
@@ -72598,14 +76760,17 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0057EC72 = 0x0057EC72,
     // label: __cfltcvt_init
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057EC73 = 0x0057EC73,
     // label: __fpmath
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057ECD3 = 0x0057ECD3,
     // label: __isnan
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057ECF1 = 0x0057ECF1,
@@ -72637,7 +76802,7 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057EFF0 = 0x0057EFF0,
-    // label: FUN_0057f03f
+    // label: crt_0057f03f
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057F03F = 0x0057F03F,
@@ -72649,11 +76814,11 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057F120 = 0x0057F120,
-    // label: FUN_0057f16f
+    // label: crt_0057f16f
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057F16F = 0x0057F16F,
-    // label: FUN_0057f178
+    // label: crt_0057f178
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057F178 = 0x0057F178,
@@ -72661,117 +76826,142 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057F250 = 0x0057F250,
+    // label: crt_0057f29f
+    // location:
     // type: function
     SHC_3BB0A8C1_0x0057F29F = 0x0057F29F,
-    // label: FUN_0057f2a8
+    // label: crt_0057f2a8
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057F2A8 = 0x0057F2A8,
-    // label: FUN_0057f339
+    // label: crt_0057f339
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057F339 = 0x0057F339,
     // label: FID_conflict:__gmtime32
     // label: FID_conflict:__gmtime64
     // label: FID_conflict:__localtime32
-    // label: _localtime
+    // label: __gmtime32
+    // label: __gmtime64
+    // label: __localtime32
+    // label: __localtime64
     // location:
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057F5FE = 0x0057F5FE,
     // label: __time64
+    // location:
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057F622 = 0x0057F622,
     // label: _memset
+    // location:
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057F660 = 0x0057F660,
     // label: _sprintf
+    // location:
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057F6DA = 0x0057F6DA,
+    // label: @__security_check_cookie@4
     // label: __security_check_cookie
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057F755 = 0x0057F755,
     // label: ??0_LocaleUpdate@@QAE@PAUlocaleinfo_struct@@@Z
     // label: _LocaleUpdate
     // location:
-    // location: _LocaleUpdate
     // type: function
     SHC_3BB0A8C1_0x0057F764 = 0x0057F764,
     // label: ___ascii_stricmp
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057F7E6 = 0x0057F7E6,
     // label: __stricmp_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057F81B = 0x0057F81B,
     // label: __stricmp
+    // location:
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057F8EE = 0x0057F8EE,
-    // label: FUN_0057f93e
+    // label: crt_0057f93e
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057F93E = 0x0057F93E,
-    // label: FUN_0057f9f7
+    // label: ___onexitinit
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057F9F7 = 0x0057F9F7,
     // label: __onexit
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057FA26 = 0x0057FA26,
-    // label: FUN_0057fa5c
+    // label: crt_0057fa5c
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057FA5C = 0x0057FA5C,
     // label: _atexit
+    // location:
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057FA62 = 0x0057FA62,
+    // label: _free
     // label: _free_base
+    // location:
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057FA74 = 0x0057FA74,
-    // label: FUN_0057faca
+    // label: crt_0057faca
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057FACA = 0x0057FACA,
     // type: function
     SHC_3BB0A8C1_0x0057FAD3 = 0x0057FAD3,
     // label: __tolower_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057FB02 = 0x0057FB02,
     // label: __tolower
+    // label: _tolower
+    // location:
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057FC19 = 0x0057FC19,
-    // label: FUN_0057fc40
+    // label: crt_0057fc40
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057FC40 = 0x0057FC40,
     // label: _fclose
+    // location:
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0057FCB2 = 0x0057FCB2,
-    // label: FUN_0057fd26
+    // label: crt_ehFunclet_0057fd23
+    // location:
+    // type: function
+    SHC_3BB0A8C1_0x0057FD23 = 0x0057FD23,
+    // label: crt_0057fd26
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057FD26 = 0x0057FD26,
-    // label: FUN_0057fd2e
+    // label: crt_0057fd2e
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057FD2E = 0x0057FD2E,
     // label: _fread_s
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057FF34 = 0x0057FF34,
-    // label: FUN_0057ffc0
+    // label: crt_0057ffc0
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057FFC0 = 0x0057FFC0,
@@ -72780,102 +76970,116 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0057FFCA = 0x0057FFCA,
     // label: _V6_HeapAlloc
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0057FFE5 = 0x0057FFE5,
-    // label: FUN_0058002b
+    // label: crt_0058002b
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058002B = 0x0058002B,
     // label: _malloc
+    // location:
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00580034 = 0x00580034,
-    // label: FUN_005800f7
+    // label: crt_005800f7
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005800F7 = 0x005800F7,
     // label: _ftell
+    // location:
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0058028F = 0x0058028F,
-    // label: FUN_005802f3
+    // label: crt_005802f3
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005802F3 = 0x005802F3,
     // label: __fseek_nolock
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005802FD = 0x005802FD,
     // label: _fseek
+    // location:
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00580384 = 0x00580384,
-    // label: FUN_005803ff
+    // label: crt_005803ff
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005803FF = 0x005803FF,
     // label: __fsopen
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00580409 = 0x00580409,
-    // label: FUN_005804c3
+    // label: crt_005804c3
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005804C3 = 0x005804C3,
     // label: _fopen
+    // location:
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x005804CD = 0x005804CD,
     // label: __vswprintf_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005804E0 = 0x005804E0,
     // label: __vswprintf
+    // location:
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00580577 = 0x00580577,
-    // label: FUN_0058058e
+    // label: crt_0058058e
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058058E = 0x0058058E,
     // label: _fgetwc
+    // location:
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00580735 = 0x00580735,
-    // label: FUN_0058079e
+    // label: crt_0058079e
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058079E = 0x0058079E,
-    // label: FUN_005807a8
+    // label: crt_fwprintf_internal
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005807A8 = 0x005807A8,
-    // label: FUN_00580832
+    // label: crt_00580832
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00580832 = 0x00580832,
-    // label: FUN_0058083c
+    // label: crt_0058083c
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058083C = 0x0058083C,
     // label: _fwrite
+    // location:
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0058099B = 0x0058099B,
-    // label: FUN_00580a13
+    // label: crt_00580a13
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00580A13 = 0x00580A13,
     // label: _wcsncpy
+    // location:
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00580A1D = 0x00580A1D,
     // label: __wcsicmp_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00580A5A = 0x00580A5A,
     // label: __wcsicmp
+    // location:
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00580B69 = 0x00580B69,
@@ -72888,40 +77092,50 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00580C0B = 0x00580C0B,
     // label: ??0exception@std@@QAE@XZ
+    // label: HoldStrong_lib::std::exception::exception
     // label: exception
     // location:
     // location: HoldStrong_lib/std/exception
     // type: function
     SHC_3BB0A8C1_0x00580C10 = 0x00580C10,
     // label: ??0exception@std@@QAE@ABQBD@Z
+    // label: HoldStrong_lib::std::exception::exception
     // label: exception
     // location:
     // location: HoldStrong_lib/std/exception
     // type: function
     SHC_3BB0A8C1_0x00580C21 = 0x00580C21,
     // label: ??0exception@std@@QAE@ABQBDH@Z
+    // label: HoldStrong_lib::std::exception::exception
     // label: exception
     // location:
     // location: HoldStrong_lib/std/exception
     // type: function
     SHC_3BB0A8C1_0x00580C6F = 0x00580C6F,
     // label: ??0exception@std@@QAE@ABV01@@Z
+    // label: HoldStrong_lib::std::exception::exception
     // label: exception
     // location:
     // location: HoldStrong_lib/std/exception
     // type: function
     SHC_3BB0A8C1_0x00580C87 = 0x00580C87,
+    // label: ??1exception@@UAE@XZ
     // label: ??1exception@std@@UAE@XZ
+    // label: HoldStrong_lib::std::exception::~exception
     // label: ~exception
     // location:
     // location: HoldStrong_lib/std/exception
     // type: function
     SHC_3BB0A8C1_0x00580CDF = 0x00580CDF,
+    // label: HoldStrong_lib::std::exception::virt_meth_0x580cf5
     // label: virt_meth_0x580cf5
+    // location:
     // location: HoldStrong_lib/std/exception
     // type: function
     SHC_3BB0A8C1_0x00580CF5 = 0x00580CF5,
+    // label: HoldStrong_lib::std::bad_cast::bad_cast
     // label: bad_cast
+    // location:
     // location: HoldStrong_lib/std/bad_cast
     // type: function
     SHC_3BB0A8C1_0x00580D02 = 0x00580D02,
@@ -72931,7 +77145,9 @@ enum {
     // label: meth_0x580d33
     // location:
     SHC_3BB0A8C1_0x00580D33 = 0x00580D33,
+    // label: HoldStrong_lib::std::exception::virt_meth_0x580d3e
     // label: virt_meth_0x580d3e
+    // location:
     // location: HoldStrong_lib/std/exception
     // type: function
     SHC_3BB0A8C1_0x00580D3E = 0x00580D3E,
@@ -72940,16 +77156,21 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00580D5A = 0x00580D5A,
     // label: ??1type_info@@UAE@XZ
+    // label: HoldStrong_lib::type_info::~type_info
     // label: ~type_info
     // location:
     // location: HoldStrong_lib/type_info
     // type: function
     SHC_3BB0A8C1_0x00580D7C = 0x00580D7C,
+    // label: ??_Gtype_info@@UAEPAXI@Z
+    // label: HoldStrong_lib::type_info::virt_meth_0x580d8a
     // label: virt_meth_0x580d8a
+    // location:
     // location: HoldStrong_lib/type_info
     // type: function
     SHC_3BB0A8C1_0x00580D8A = 0x00580D8A,
     // label: ??8type_info@@QBE_NABV0@@Z
+    // label: HoldStrong_lib::type_info::operator==
     // label: operator==
     // location:
     // location: HoldStrong_lib/type_info
@@ -72960,10 +77181,12 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00580DC1 = 0x00580DC1,
     // label: _memcpy_s
+    // location:
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00580DC6 = 0x00580DC6,
     // label: _memmove_s
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00580E41 = 0x00580E41,
@@ -72971,7 +77194,7 @@ enum {
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00580E9C = 0x00580E9C,
-    // label: FUN_00580ea1
+    // label: crt_close_fd
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00580EA1 = 0x00580EA1,
@@ -72979,11 +77202,11 @@ enum {
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00580F38 = 0x00580F38,
-    // label: FUN_00580ffb
+    // label: crt_00580ffb
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00580FFB = 0x00580FFB,
-    // label: FUN_00581005
+    // label: crt_00581005
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00581005 = 0x00581005,
@@ -72994,10 +77217,12 @@ enum {
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x005815C6 = 0x005815C6,
-    // label: FUN_005816b9
+    // label: crt_005816b9
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005816B9 = 0x005816B9,
+    // label: ?_open@@YAHPBDHH@Z
+    // label: ?_wopen@@YAHPB_WHH@Z
     // label: FID_conflict:open
     // label: _ucrt_open
     // location:
@@ -73009,10 +77234,12 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x005816EE = 0x005816EE,
     // label: _rand
+    // location:
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x005816FB = 0x005816FB,
     // label: __freea
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058171D = 0x0058171D,
@@ -73023,14 +77250,16 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00581738 = 0x00581738,
     // label: __strlwr_s_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005818B9 = 0x005818B9,
     // label: __strlwr
+    // location:
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x005818EB = 0x005818EB,
-    // label: FUN_0058194d
+    // label: crt_0058194d
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058194D = 0x0058194D,
@@ -73038,11 +77267,12 @@ enum {
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00581F6F = 0x00581F6F,
-    // label: FUN_00582041
+    // label: crt_00582041
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00582041 = 0x00582041,
     // label: _memcpy
+    // location:
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00582050 = 0x00582050,
@@ -73078,6 +77308,8 @@ enum {
     SHC_3BB0A8C1_0x00582170 = 0x00582170,
     // type: /undefined *32
     SHC_3BB0A8C1_0x00582174 = 0x00582174,
+    // type: function
+    SHC_3BB0A8C1_0x00582178 = 0x00582178,
     // type: /pointer
     SHC_3BB0A8C1_0x005821C4 = 0x005821C4,
     // type: /pointer
@@ -73128,6 +77360,8 @@ enum {
     SHC_3BB0A8C1_0x0058230C = 0x0058230C,
     // type: /pointer
     SHC_3BB0A8C1_0x00582310 = 0x00582310,
+    // type: function
+    SHC_3BB0A8C1_0x00582314 = 0x00582314,
     // type: /pointer
     SHC_3BB0A8C1_0x00582360 = 0x00582360,
     // type: /pointer
@@ -73145,30 +77379,35 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0058239C = 0x0058239C,
     // label: __toupper_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005823B5 = 0x005823B5,
     // label: __toupper
+    // label: _toupper
+    // location:
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x005824CD = 0x005824CD,
-    // label: FUN_005824f4
+    // label: crt_005824f4
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005824F4 = 0x005824F4,
     // label: __invoke_watson
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005824FE = 0x005824FE,
-    // label: FUN_005825fa
+    // label: __invalid_parameter
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005825FA = 0x005825FA,
-    // label: FUN_0058261e
+    // label: __invalid_parameter_noinfo
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058261E = 0x0058261E,
     // label: ??0bad_alloc@std@@QAE@XZ
+    // label: HoldStrong_lib::std::bad_alloc::bad_alloc
     // label: bad_alloc
     // location:
     // location: HoldStrong_lib/std/bad_alloc
@@ -73181,6 +77420,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00582647 = 0x00582647,
     // label: __CxxThrowException@8
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005826B1 = 0x005826B1,
@@ -73206,6 +77446,8 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058285A = 0x0058285A,
+    // label: ?_CallMemberFunction1@@YGXPAX00@Z
+    // label: ?_CallMemberFunction2@@YGXPAX00H@Z
     // label: FID_conflict:CallMemberFunction1
     // label: FID_conflict:CallMemberFunction2
     // location:
@@ -73221,6 +77463,9 @@ enum {
     // label: FID_conflict:___CxxFrameHandler
     // label: FID_conflict:___CxxFrameHandler2
     // label: __CxxFrameHandler
+    // label: ___CxxFrameHandler
+    // label: ___CxxFrameHandler2
+    // label: ___CxxFrameHandler3
     // location:
     // location: HoldStrong_lib
     // type: function
@@ -73256,10 +77501,12 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00582B2E = 0x00582B2E,
     // label: __IsExceptionObjectToBeDestroyed
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00582B56 = 0x00582B56,
     // label: __FindAndUnlinkFrame
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00582B77 = 0x00582B77,
@@ -73270,106 +77517,121 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00582BC3 = 0x00582BC3,
     // label: __alldiv
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00582C30 = 0x00582C30,
     // label: __allmul
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00582CE0 = 0x00582CE0,
-    // label: FUN_00582d14
+    // label: crt_00582d14
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00582D14 = 0x00582D14,
-    // label: FUN_00582e43
+    // label: crt_00582e43
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00582E43 = 0x00582E43,
-    // label: FUN_00582e4b
+    // label: crt_00582e4b
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00582E4B = 0x00582E4B,
-    // label: FUN_00582f82
+    // label: crt_00582f82
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00582F82 = 0x00582F82,
-    // label: FUN_00582f8a
+    // label: crt_00582f8a
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00582F8A = 0x00582F8A,
     // label: _ungetc
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005830A8 = 0x005830A8,
-    // label: FUN_00583110
+    // label: crt_00583110
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00583110 = 0x00583110,
     // label: __flush
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058311A = 0x0058311A,
     // label: __fflush_nolock
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058317C = 0x0058317C,
     // label: _flsall
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005831BE = 0x005831BE,
-    // label: FUN_00583260
+    // label: crt_00583260
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00583260 = 0x00583260,
     // type: function
     SHC_3BB0A8C1_0x00583271 = 0x00583271,
-    // label: FUN_0058328f
+    // label: crt_0058328f
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058328F = 0x0058328F,
     // label: _fflush
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00583298 = 0x00583298,
-    // label: FUN_005832e1
+    // label: crt_005832e1
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005832E1 = 0x005832E1,
-    // label: FUN_005832eb
+    // label: __flushall
+    // label: crt_005832eb
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005832EB = 0x005832EB,
     // label: _setvbuf
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005832F4 = 0x005832F4,
-    // label: FUN_005833e8
+    // label: crt_005833e8
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005833E8 = 0x005833E8,
     // label: _fgetpos
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005833F2 = 0x005833F2,
     // label: _fsetpos
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058345D = 0x0058345D,
     // label: __alloca_probe
     // label: __chkstk
     // location:
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x005834A0 = 0x005834A0,
     // label: __strnicmp_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005834CB = 0x005834CB,
     // label: __strnicmp
+    // location:
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x005835BB = 0x005835BB,
     // label: _atol
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00583617 = 0x00583617,
@@ -73377,11 +77639,12 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00583628 = 0x00583628,
-    // label: FUN_00583630
+    // label: _strncpy
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00583630 = 0x00583630,
     // label: _memmove
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00583760 = 0x00583760,
@@ -73417,6 +77680,8 @@ enum {
     SHC_3BB0A8C1_0x00583880 = 0x00583880,
     // type: /undefined *32
     SHC_3BB0A8C1_0x00583884 = 0x00583884,
+    // type: function
+    SHC_3BB0A8C1_0x00583888 = 0x00583888,
     // type: /pointer
     SHC_3BB0A8C1_0x005838D4 = 0x005838D4,
     // type: /pointer
@@ -73453,6 +77718,8 @@ enum {
     SHC_3BB0A8C1_0x005839D0 = 0x005839D0,
     // type: /undefined *32[8]
     SHC_3BB0A8C1_0x00583A04 = 0x00583A04,
+    // type: function
+    SHC_3BB0A8C1_0x00583A24 = 0x00583A24,
     // type: /pointer
     SHC_3BB0A8C1_0x00583A70 = 0x00583A70,
     // type: /pointer
@@ -73470,50 +77737,56 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00583AAC = 0x00583AAC,
     // label: __amsg_exit
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00583AC5 = 0x00583AC5,
-    // label: FUN_00583ae9
+    // label: ___crtCorExitProcess
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00583AE9 = 0x00583AE9,
     // label: ___crtExitProcess
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00583B0F = 0x00583B0F,
-    // label: FUN_00583b24
+    // label: crt_00583b24
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00583B24 = 0x00583B24,
-    // label: FUN_00583b2d
+    // label: crt_00583b2d
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00583B2D = 0x00583B2D,
-    // label: FUN_00583b36
+    // label: __initterm
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00583B36 = 0x00583B36,
     // label: __initterm_e
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00583B4E = 0x00583B4E,
     // label: __get_osplatform
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00583B6E = 0x00583B6E,
     // label: __get_winmajor
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00583BA5 = 0x00583BA5,
     // label: __cinit
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00583BE1 = 0x00583BE1,
-    // label: FUN_00583c73
+    // label: crt_00583c73
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00583C73 = 0x00583C73,
-    // label: FUN_00583d40
+    // label: crt_00583d40
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00583D40 = 0x00583D40,
@@ -73524,6 +77797,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00583D55 = 0x00583D55,
     // label: __exit
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00583D66 = 0x00583D66,
@@ -73531,30 +77805,40 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00583D77 = 0x00583D77,
-    // label: FUN_00583d86
+    // label: __c_exit
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00583D86 = 0x00583D86,
     // label: __init_pointers
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00583D95 = 0x00583D95,
     // label: _fast_error_exit
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00583DE1 = 0x00583DE1,
     // label: _check_managed_app
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00583E05 = 0x00583E05,
+    // label: crt_00583e46
+    // location:
     // type: function
     SHC_3BB0A8C1_0x00583E46 = 0x00583E46,
+    // label: crt_00583ffc
+    // location:
     // type: function
-    SHC_3BB0A8C1_0x00584001 = 0x00584001,
+    SHC_3BB0A8C1_0x00583FFC = 0x00583FFC,
+    // label: crt_0058401b
+    // location:
     // type: function
     SHC_3BB0A8C1_0x0058401B = 0x0058401B,
     // label: entry
     // location:
+    // type: function
     SHC_3BB0A8C1_0x00584026 = 0x00584026,
     // label: ?__crtLCMapStringA_stat@@YAHPAUlocaleinfo_struct@@KKPBDHPADHHH@Z
     // label: __crtLCMapStringA_stat
@@ -73563,188 +77847,229 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00584030 = 0x00584030,
     // label: ___crtLCMapStringA
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005843D2 = 0x005843D2,
     // label: ___pctype_func
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00584415 = 0x00584415,
     // label: __isupper_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058443E = 0x0058443E,
     // label: _isupper
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058448D = 0x0058448D,
     // label: __islower_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005844B6 = 0x005844B6,
     // label: _islower
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00584505 = 0x00584505,
     // label: __isdigit_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058452E = 0x0058452E,
     // label: _isdigit
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058457D = 0x0058457D,
     // label: ___init_ctype
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005845A6 = 0x005845A6,
     // label: ____lc_codepage_func
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058493B = 0x0058493B,
     // label: ____lc_handle_func
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00584961 = 0x00584961,
     // label: __malloc_crt
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00584987 = 0x00584987,
     // label: __calloc_crt
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005849C7 = 0x005849C7,
     // label: __realloc_crt
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00584A0F = 0x00584A0F,
     // label: __recalloc_crt
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00584A5A = 0x00584A5A,
     // label: _strlen
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00584AB0 = 0x00584AB0,
     // label: __EH_prolog3
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00584B3B = 0x00584B3B,
     // label: __EH_prolog3_catch
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00584B6E = 0x00584B6E,
     // label: __EH_epilog3
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00584BA4 = 0x00584BA4,
     // label: ___freetlocinfo
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00584BB8 = 0x00584BB8,
     // label: ___addlocaleref
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00584CF8 = 0x00584CF8,
     // label: ___removelocaleref
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00584D7E = 0x00584D7E,
     // label: __copytlocinfo_nolock
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00584E0A = 0x00584E0A,
     // label: __updatetlocinfoEx_nolock
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00584E2E = 0x00584E2E,
     // label: ___updatetlocinfo
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00584E6C = 0x00584E6C,
-    // label: FUN_00584ed6
+    // label: crt_00584ed6
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00584ED6 = 0x00584ED6,
     // label: _sync_legacy_variables_lk
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00584EE2 = 0x00584EE2,
     // label: __strcats
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00584F35 = 0x00584F35,
     // label: ___lc_strtolc
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00584F73 = 0x00584F73,
     // label: ___lc_lctostr
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058509C = 0x0058509C,
     // label: __setlocale_get_all
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00585107 = 0x00585107,
     // label: __expandlocale
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00585278 = 0x00585278,
     // label: __setlocale_set_cat
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058544C = 0x0058544C,
     // label: __setlocale_nolock
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00585742 = 0x00585742,
     // label: _setlocale
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00585910 = 0x00585910,
-    // label: FUN_00585a3e
+    // label: crt_00585a3e
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00585A3E = 0x00585A3E,
-    // label: FUN_00585a4a
+    // label: crt_00585a4a
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00585A4A = 0x00585A4A,
     // type: function
     SHC_3BB0A8C1_0x00585A55 = 0x00585A55,
-    // label: FUN_00585a7b
+    // label: crt_00585a7b
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00585A7B = 0x00585A7B,
     // label: __wcstombs_l_helper
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00585A80 = 0x00585A80,
     // label: __wcstombs_s_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00585CC6 = 0x00585CC6,
     // label: _wcstombs_s
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00585D77 = 0x00585D77,
     // label: __wfsopen
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00585D95 = 0x00585D95,
-    // label: FUN_00585e51
+    // label: crt_00585e51
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00585E51 = 0x00585E51,
     // label: __mbstowcs_l_helper
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00585E5B = 0x00585E5B,
     // label: __mbstowcs_s_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00585FE3 = 0x00585FE3,
     // label: _mbstowcs_s
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005860D9 = 0x005860D9,
@@ -73756,36 +78081,39 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00586102 = 0x00586102,
     // label: ___TypeMatch
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00586124 = 0x00586124,
-    // label: FUN_00586180
+    // label: ___FrameUnwindFilter
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00586180 = 0x00586180,
     // label: __FrameUnwindToState
+    // label: ___FrameUnwindToState
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005861C4 = 0x005861C4,
-    // type: function
-    SHC_3BB0A8C1_0x00586260 = 0x00586260,
-    // label: FUN_0058628a
+    // label: crt_0058628a
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058628A = 0x0058628A,
-    // label: FUN_005862a5
+    // label: ?ExFilterRethrow@@YAHPAU_EXCEPTION_POINTERS@@@Z
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005862A5 = 0x005862A5,
     // label: ___DestructExceptionObject
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005862EA = 0x005862EA,
     // label: ___AdjustPointer
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058633E = 0x0058633E,
-    // label: FUN_00586363
+    // label: ?__uncaught_exception@@YA_NXZ
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00586363 = 0x00586363,
@@ -73811,19 +78139,21 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00586438 = 0x00586438,
+    // label: crt_005864f5
+    // location:
     // type: function
-    SHC_3BB0A8C1_0x00586537 = 0x00586537,
-    // label: FUN_0058655e
+    SHC_3BB0A8C1_0x005864F5 = 0x005864F5,
+    // label: crt_0058655e
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058655E = 0x0058655E,
     // label: ___BuildCatchObjectHelper
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005865D4 = 0x005865D4,
-    // type: function
-    SHC_3BB0A8C1_0x0058674B = 0x0058674B,
     // label: ___BuildCatchObject
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00586753 = 0x00586753,
@@ -73851,98 +78181,125 @@ enum {
     // location:
     SHC_3BB0A8C1_0x00586C98 = 0x00586C98,
     // label: __InternalCxxFrameHandler
+    // label: ___InternalCxxFrameHandler
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00586CB0 = 0x00586CB0,
     // label: _abort
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00586D94 = 0x00586D94,
     // label: __forcdecpt_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00586E87 = 0x00586E87,
     // label: __cropzeros_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00586EF8 = 0x00586EF8,
-    // label: FUN_00586f78
+    // label: __positive
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00586F78 = 0x00586F78,
     // label: __fassign_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00586F8E = 0x00586F8E,
-    // label: FUN_00586fce
+    // label: __fassign
+    // label: crt_00586fce
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00586FCE = 0x00586FCE,
     // label: __shift
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00586FE5 = 0x00586FE5,
-    // label: FUN_00587002
+    // label: __forcdecpt
+    // label: crt_00587002
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00587002 = 0x00587002,
-    // label: FUN_00587010
+    // label: __cropzeros
+    // label: crt_00587010
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00587010 = 0x00587010,
     // label: __cftoe2_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058701E = 0x0058701E,
     // label: __cftoe_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058718B = 0x0058718B,
     // label: __cftoe
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00587259 = 0x00587259,
     // label: __cftoa_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00587277 = 0x00587277,
     // label: __cftof2_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005875E8 = 0x005875E8,
     // label: __cftof_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005876DD = 0x005876DD,
     // label: __cftog_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00587796 = 0x00587796,
     // label: __cfltcvt_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058788E = 0x0058788E,
     // label: __cfltcvt
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00587914 = 0x00587914,
     // label: __initp_misc_cfltcvt_tab
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00587935 = 0x00587935,
     // label: __setdefaultprecision
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00587954 = 0x00587954,
     // label: __ms_p5_test_fdiv
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058797D = 0x0058797D,
     // label: __ms_p5_mp_test_fdiv
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005879B9 = 0x005879B9,
     // label: __set_exp
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005879E2 = 0x005879E2,
@@ -73951,30 +78308,37 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00587A0C = 0x00587A0C,
     // label: __raise_exc_ex
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00587ABB = 0x00587ABB,
     // label: __raise_exc
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00587D95 = 0x00587D95,
     // label: __handle_exc
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00587DB6 = 0x00587DB6,
     // label: __set_errno_from_matherr
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00587F97 = 0x00587F97,
     // label: __statfp
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00587FBF = 0x00587FBF,
     // label: __clrfp
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00587FCA = 0x00587FCA,
     // label: __ctrlfp
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00587FD6 = 0x00587FD6,
@@ -73986,13 +78350,23 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00588053 = 0x00588053,
+    // label: crt_00588098
+    // location:
+    // type: function
+    SHC_3BB0A8C1_0x00588098 = 0x00588098,
+    // label: crt_005880ae
+    // location:
     // type: function
     SHC_3BB0A8C1_0x005880AE = 0x005880AE,
-    // label: FUN_005880c5
+    // type: function
+    SHC_3BB0A8C1_0x005880B7 = 0x005880B7,
+    // type: function
+    SHC_3BB0A8C1_0x005880BF = 0x005880BF,
+    // label: __sse2_mathfcns_init
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005880C5 = 0x005880C5,
-    // label: FUN_005880e0
+    // label: crt_005880e0
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005880E0 = 0x005880E0,
@@ -74000,15 +78374,16 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005880FE = 0x005880FE,
-    // label: FUN_005885b5
+    // label: __load_CW
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005885B5 = 0x005885B5,
-    // label: FUN_005885cc
+    // label: __convertTOStoQNaN
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005885CC = 0x005885CC,
     // label: __fload_withFB
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005885E5 = 0x005885E5,
@@ -74018,15 +78393,22 @@ enum {
     SHC_3BB0A8C1_0x00588628 = 0x00588628,
     // type: function
     SHC_3BB0A8C1_0x0058863E = 0x0058863E,
+    // label: __math_exit
     // label: _math_FUN_0058864b
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058864B = 0x0058864B,
+    // label: __startTwoArgErrorHandling
+    // location:
+    // type: function
+    SHC_3BB0A8C1_0x00588730 = 0x00588730,
     // label: __startOneArgErrorHandling
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00588747 = 0x00588747,
-    // label: FUN_00588790
+    // label: crt_00588790
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00588790 = 0x00588790,
@@ -74034,141 +78416,156 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005887AE = 0x005887AE,
-    // label: FUN_005889f0
+    // label: crt_005889f0
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005889F0 = 0x005889F0,
-    // label: FUN_00588a0e
+    // label: crt_00588a0e
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00588A0E = 0x00588A0E,
+    // label: crt_00588ba0
+    // location:
     // type: function
     SHC_3BB0A8C1_0x00588BA0 = 0x00588BA0,
-    // label: FUN_00588bbe
+    // label: crt_00588bbe
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00588BBE = 0x00588BBE,
-    // label: FUN_00588d68
+    // label: crt_00588d68
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00588D68 = 0x00588D68,
-    // label: FUN_00589017
+    // label: crt_00589017
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00589017 = 0x00589017,
     // type: function
     SHC_3BB0A8C1_0x00589020 = 0x00589020,
     // label: _cvtdate
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005890B1 = 0x005890B1,
-    // label: FUN_005892a6
+    // label: crt_005892a6
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005892A6 = 0x005892A6,
     // label: ___tzset
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058947C = 0x0058947C,
-    // label: FUN_005894c2
+    // label: crt_005894c2
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005894C2 = 0x005894C2,
     // label: __isindst
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005894CB = 0x005894CB,
-    // label: FUN_00589503
+    // label: crt_00589503
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00589503 = 0x00589503,
     // label: __gmtime64_s
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058950C = 0x0058950C,
-    // label: FUN_00589748
+    // label: crt_00589748
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00589748 = 0x00589748,
     // label: __get_dstbias
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058977C = 0x0058977C,
-    // label: FUN_005897b0
+    // label: crt_005897b0
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005897B0 = 0x005897B0,
-    // label: FUN_005897e4
+    // label: crt_005897e4
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005897E4 = 0x005897E4,
-    // label: FUN_005897ea
+    // label: crt_005897ea
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005897EA = 0x005897EA,
-    // label: FUN_005897f0
+    // label: crt_005897f0
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005897F0 = 0x005897F0,
-    // label: FUN_005897f6
+    // label: crt_005897f6
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005897F6 = 0x005897F6,
-    // label: FUN_005897fc
+    // label: crt_005897fc
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005897FC = 0x005897FC,
-    // label: FUN_00589837
+    // label: __errno
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00589837 = 0x00589837,
-    // label: FUN_0058984a
+    // label: ___doserrno
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058984A = 0x0058984A,
-    // label: FUN_0058985d
+    // label: __dosmaperr
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058985D = 0x0058985D,
     // label: __allrem
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00589880 = 0x00589880,
     // label: ___getgmtimebuf
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00589932 = 0x00589932,
     // label: __aulldiv
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00589980 = 0x00589980,
     // label: _fastzero_I
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005899E8 = 0x005899E8,
     // type: function
     SHC_3BB0A8C1_0x00589A08 = 0x00589A08,
     // label: __VEC_memzero
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00589A3F = 0x00589A3F,
-    // label: FUN_00589ace
+    // label: crt_00589ace
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00589ACE = 0x00589ACE,
     // label: _write_char
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00589C2E = 0x00589C2E,
     // label: _write_multi_char
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00589C61 = 0x00589C61,
     // label: _write_string
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00589C85 = 0x00589C85,
-    // label: FUN_00589ccf
+    // label: crt_00589ccf
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00589CCF = 0x00589CCF,
@@ -74188,6 +78585,8 @@ enum {
     SHC_3BB0A8C1_0x0058A65B = 0x0058A65B,
     // type: /pointer
     SHC_3BB0A8C1_0x0058A65F = 0x0058A65F,
+    // label: ___report_gsfailure
+    // location:
     // type: function
     SHC_3BB0A8C1_0x0058A663 = 0x0058A663,
     // label: FID_conflict:CPtoLCID
@@ -74209,10 +78608,11 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0058A7EB = 0x0058A7EB,
     // label: ___updatetmbcinfo
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058A975 = 0x0058A975,
-    // label: FUN_0058aa10
+    // label: crt_0058aa10
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058AA10 = 0x0058AA10,
@@ -74222,33 +78622,36 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058AA19 = 0x0058AA19,
-    // label: FUN_0058aa93
+    // label: crt_0058aa93
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058AA93 = 0x0058AA93,
     // label: __setmbcp
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058AC6C = 0x0058AC6C,
-    // label: FUN_0058adcd
+    // label: crt_0058adcd
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058ADCD = 0x0058ADCD,
     // type: function
     SHC_3BB0A8C1_0x0058ADD8 = 0x0058ADD8,
     // label: ___initmbctable
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058AE06 = 0x0058AE06,
-    // label: FUN_0058ae24
+    // label: crt_0058ae24
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058AE24 = 0x0058AE24,
-    // label: FUN_0058ae90
+    // label: crt_0058ae90
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058AE90 = 0x0058AE90,
     // label: __encoded_null
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058AEFE = 0x0058AEFE,
@@ -74256,19 +78659,21 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058AF07 = 0x0058AF07,
-    // label: FUN_0058af75
+    // label: crt_0058af75
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058AF75 = 0x0058AF75,
-    // label: FUN_0058af7e
+    // label: ___set_flsgetvalue
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058AF7E = 0x0058AF7E,
-    // label: FUN_0058afb0
+    // label: __mtterm
+    // label: crt_0058afb0
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058AFB0 = 0x0058AFB0,
-    // label: FUN_0058afed
+    // label: crt_0058afed
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058AFED = 0x0058AFED,
@@ -74276,62 +78681,74 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058B0A3 = 0x0058B0A3,
-    // label: FUN_0058b0ac
+    // label: crt_0058b0ac
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058B0AC = 0x0058B0AC,
     // label: __getptd
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058B123 = 0x0058B123,
-    // label: FUN_0058b13b
+    // label: __freefls@4
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058B13B = 0x0058B13B,
-    // label: FUN_0058b247
+    // label: crt_0058b247
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058B247 = 0x0058B247,
-    // label: FUN_0058b253
+    // label: crt_0058b253
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058B253 = 0x0058B253,
     // label: __mtinit
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058B25C = 0x0058B25C,
     // label: __msize
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058B3E0 = 0x0058B3E0,
-    // label: FUN_0058b47a
+    // label: crt_0058b47a
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058B47A = 0x0058B47A,
     // label: __SEH_prolog4
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058B484 = 0x0058B484,
     // label: __SEH_epilog4
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058B4C9 = 0x0058B4C9,
-    // label: FUN_0058b4e0
+    // label: __except_handler4
+    // label: crt_0058b4e0
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058B4E0 = 0x0058B4E0,
     // label: ___heap_select
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058B676 = 0x0058B676,
     // label: __heap_init
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058B6D1 = 0x0058B6D1,
     // label: __mtinitlocks
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058B72B = 0x0058B72B,
+    // label: __mtdeletelocks
+    // location:
     // type: function
     SHC_3BB0A8C1_0x0058B774 = 0x0058B774,
     // label: Unlock
@@ -74339,18 +78756,21 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0058B7C9 = 0x0058B7C9,
     // label: __mtinitlocknum
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058B7DE = 0x0058B7DE,
-    // label: FUN_0058b898
+    // label: crt_0058b898
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058B898 = 0x0058B898,
     // label: __lock
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058B8A1 = 0x0058B8A1,
     // label: ___sbh_heap_init
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058B8D2 = 0x0058B8D2,
@@ -74359,146 +78779,174 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0058B91A = 0x0058B91A,
     // label: ___sbh_free_block
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058B945 = 0x0058B945,
     // label: ___sbh_alloc_new_region
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058BC59 = 0x0058BC59,
     // label: ___sbh_alloc_new_group
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058BD09 = 0x0058BD09,
     // label: ___sbh_resize_block
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058BE0F = 0x0058BE0F,
     // label: ___sbh_alloc_block
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058C0EE = 0x0058C0EE,
     // label: __isleadbyte_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058C3D1 = 0x0058C3D1,
     // label: _isleadbyte
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058C407 = 0x0058C407,
     // label: __isctype_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058C415 = 0x0058C415,
     // label: __fileno
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058C4CB = 0x0058C4CB,
     // label: __freebuf
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058C4F8 = 0x0058C4F8,
-    // label: FUN_0058c524
+    // label: crt_0058c524
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058C524 = 0x0058C524,
-    // label: FUN_0058c52a
+    // label: crt_0058c52a
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058C52A = 0x0058C52A,
-    // label: FUN_0058c5db
+    // label: ___endstdio
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058C5DB = 0x0058C5DB,
-    // label: FUN_0058c5fb
+    // label: crt_0058c5fb
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058C5FB = 0x0058C5FB,
-    // label: FUN_0058c637
+    // label: crt_0058c637
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058C637 = 0x0058C637,
-    // label: UnlockIORelatedLock
+    // label: HoldStrong_lib::UnlockIORelatedLock
+    // label: crt_unlockFileStream
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058C665 = 0x0058C665,
-    // label: IORelatedUnlockFunction
+    // label: HoldStrong_lib::IORelatedUnlockFunction
+    // label: crt_unlockFileByIndex
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058C69B = 0x0058C69B,
-    // label: FUN_0058c6c5
+    // label: crt_0058c6c5
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058C6C5 = 0x0058C6C5,
-    // label: FUN_0058c7e5
+    // label: crt_0058c7e5
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058C7E5 = 0x0058C7E5,
     // label: __FF_MSGBANNER
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058C985 = 0x0058C985,
-    // label: FUN_0058c9be
+    // label: crt_0058c9be
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058C9BE = 0x0058C9BE,
     // label: __callnewh
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058C9C8 = 0x0058C9C8,
     // label: __ioinit
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058C9EA = 0x0058C9EA,
-    // type: function
-    SHC_3BB0A8C1_0x0058CC35 = 0x0058CC35,
-    // label: FUN_0058cc3e
+    // label: crt_0058cc3e
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058CC3E = 0x0058CC3E,
-    // label: FUN_0058cede
+    // label: crt_0058cede
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058CEDE = 0x0058CEDE,
-    // label: FUN_0058d00b
+    // label: crt_0058d00b
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058D00B = 0x0058D00B,
     // label: __local_unwind4
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058D014 = 0x0058D014,
-    // label: FUN_0058d0a4
+    // label: crt_0058d0a4
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058D0A4 = 0x0058D0A4,
+    // label: __seh_longjmp_unwind4@4
+    // location:
+    // type: function
+    SHC_3BB0A8C1_0x0058D0EA = 0x0058D0EA,
     // label: @_EH4_CallFilterFunc@8
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058D106 = 0x0058D106,
+    // label: @_EH4_TransferToHandler@8
+    // label: _EH4_TransferToHandler
+    // location:
     // type: function
     SHC_3BB0A8C1_0x0058D11D = 0x0058D11D,
-    // label: FUN_0058d136
+    // label: @_EH4_GlobalUnwind@4
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058D136 = 0x0058D136,
     // label: @_EH4_LocalUnwind@16
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058D150 = 0x0058D150,
     // label: _write_char
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058D167 = 0x0058D167,
     // label: _write_multi_char
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058D18C = 0x0058D18C,
     // label: _write_string
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058D1B1 = 0x0058D1B1,
-    // label: FUN_0058d200
+    // label: crt_0058d200
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058D200 = 0x0058D200,
@@ -74518,27 +78966,31 @@ enum {
     SHC_3BB0A8C1_0x0058DB08 = 0x0058DB08,
     // type: /undefined *32
     SHC_3BB0A8C1_0x0058DB0C = 0x0058DB0C,
-    // label: FUN_0058db10
+    // label: crt_0058db10
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058DB10 = 0x0058DB10,
     // label: __mbtowc_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058DC42 = 0x0058DC42,
     // label: _mbtowc
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058DD55 = 0x0058DD55,
     // label: __stbuf
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058DD6C = 0x0058DD6C,
-    // label: FUN_0058de02
+    // label: __ftbuf
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058DE02 = 0x0058DE02,
     // label: __towlower_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058DE31 = 0x0058DE31,
@@ -74549,42 +79001,47 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0058DEDE = 0x0058DEDE,
     // label: _wcstol
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058E0D5 = 0x0058E0D5,
     // label: _strcpy_s
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058E0FE = 0x0058E0FE,
     // label: ?_Type_info_dtor@type_info@@CAXPAV1@@Z
+    // label: HoldStrong_lib::type_info::_Type_info_dtor
     // label: _Type_info_dtor
     // location:
     // location: HoldStrong_lib/type_info
     // type: function
     SHC_3BB0A8C1_0x0058E163 = 0x0058E163,
-    // label: FUN_0058e1ca
+    // label: crt_0058e1ca
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058E1CA = 0x0058E1CA,
     // label: _strcmp
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058E1E0 = 0x0058E1E0,
     // type: function
     SHC_3BB0A8C1_0x0058E224 = 0x0058E224,
-    // label: FUN_0058e268
+    // label: crt_0058e268
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058E268 = 0x0058E268,
-    // label: FUN_0058e2e5
+    // label: crt_0058e2e5
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058E2E5 = 0x0058E2E5,
-    // label: FUN_0058e366
+    // label: crt_0058e366
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058E366 = 0x0058E366,
     // label: ___lock_fhandle
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058E3D7 = 0x0058E3D7,
@@ -74592,14 +79049,21 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058E46E = 0x0058E46E,
-    // label: IORelatedUnlockFunction2
+    // label: HoldStrong_lib::IORelatedUnlockFunction2
+    // label: crt_unlock
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058E477 = 0x0058E477,
     // label: __alloc_osfhnd
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058E499 = 0x0058E499,
+    // label: crt_ehFunclet_0058e566
+    // location:
+    // type: function
+    SHC_3BB0A8C1_0x0058E566 = 0x0058E566,
     // label: __alloc_osfhnd_FUN_0058e56c
     // location: HoldStrong_lib
     // type: function
@@ -74614,11 +79078,11 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058E633 = 0x0058E633,
-    // label: FUN_0058e6b6
+    // label: crt_0058e6b6
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058E6B6 = 0x0058E6B6,
-    // label: FUN_0058e7c5
+    // label: crt_0058e7c5
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058E7C5 = 0x0058E7C5,
@@ -74628,16 +79092,23 @@ enum {
     SHC_3BB0A8C1_0x0058E7CF = 0x0058E7CF,
     // label: FID_conflict:__sopen_helper
     // label: FID_conflict:__wsopen_helper
+    // label: __sopen_helper
+    // label: __wsopen_helper
     // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058EF28 = 0x0058EF28,
-    // label: FUN_0058efc6
+    // label: crt_ehFunclet_0058efc1
+    // location:
+    // type: function
+    SHC_3BB0A8C1_0x0058EFC1 = 0x0058EFC1,
+    // label: crt_0058efc6
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058EFC6 = 0x0058EFC6,
     // label: FID_conflict:__sopen_s
     // label: FID_conflict:__wsopen_s
+    // label: __sopen_s
     // location:
     // location: HoldStrong_lib
     // type: function
@@ -74648,34 +79119,45 @@ enum {
     SHC_3BB0A8C1_0x0058F012 = 0x0058F012,
     // label: FID_conflict:__sopen_helper
     // label: FID_conflict:__wsopen_helper
+    // label: __sopen_helper
+    // label: __wsopen_helper
     // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058F76C = 0x0058F76C,
+    // label: crt_ehFunclet_0058f805
+    // location:
+    // type: function
+    SHC_3BB0A8C1_0x0058F805 = 0x0058F805,
     // label: __sopen_helper_FUN_0058f80a
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058F80A = 0x0058F80A,
     // label: __wsopen_s
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058F838 = 0x0058F838,
     // label: _strnlen
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058F856 = 0x0058F856,
     // label: __alloca_probe_16
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058F870 = 0x0058F870,
     // label: __alloca_probe_8
     // location:
+    // type: function
     SHC_3BB0A8C1_0x0058F886 = 0x0058F886,
     // label: __putwch_nolock
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058F89C = 0x0058F89C,
-    // label: FUN_0058f95e
+    // label: crt_0058f95e
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058F95E = 0x0058F95E,
@@ -74686,38 +79168,56 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0058F9DC = 0x0058F9DC,
     // label: __VEC_memcpy
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058FA43 = 0x0058FA43,
-    // label: FUN_0058fb26
+    // label: crt_0058fb26
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058FB26 = 0x0058FB26,
+    // label: ?terminate@@YAXXZ
     // label: EH_FUN_0058fb2e
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058FB2E = 0x0058FB2E,
+    // label: crt_ehFunclet_0058fb4e
+    // location:
     // type: function
-    SHC_3BB0A8C1_0x0058FB55 = 0x0058FB55,
-    // label: FUN_0058fb67
+    SHC_3BB0A8C1_0x0058FB4E = 0x0058FB4E,
+    // label: crt_ehFunclet_0058fb52
+    // location:
+    // type: function
+    SHC_3BB0A8C1_0x0058FB52 = 0x0058FB52,
+    // label: ?unexpected@@YAXXZ
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058FB67 = 0x0058FB67,
-    // label: FUN_0058fb7a
+    // label: ?_inconsistency@@YAXXZ
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058FB7A = 0x0058FB7A,
+    // label: crt_ehFunclet_0058fb9e
+    // location:
     // type: function
-    SHC_3BB0A8C1_0x0058FBA5 = 0x0058FBA5,
+    SHC_3BB0A8C1_0x0058FB9E = 0x0058FB9E,
+    // label: crt_ehFunclet_0058fba2
+    // location:
+    // type: function
+    SHC_3BB0A8C1_0x0058FBA2 = 0x0058FBA2,
     // label: __initp_eh_hooks
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058FBB1 = 0x0058FBB1,
     // label: __CallSettingFrame@12
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058FBD0 = 0x0058FBD0,
     // label: __getbuf
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058FC1C = 0x0058FC1C,
@@ -74725,15 +79225,16 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058FC60 = 0x0058FC60,
-    // label: FUN_0058fd37
+    // label: crt_0058fd37
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058FD37 = 0x0058FD37,
-    // label: FUN_0058fd41
+    // label: crt_0058fd41
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058FD41 = 0x0058FD41,
     // label: __ftelli64
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0059001B = 0x0059001B,
@@ -74742,18 +79243,21 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0059005B = 0x0059005B,
     // label: __fseeki64_nolock
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00590065 = 0x00590065,
     // label: __fseeki64
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005900FE = 0x005900FE,
-    // label: FUN_00590143
+    // label: crt_00590143
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00590143 = 0x00590143,
     // label: ___ascii_strnicmp
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00590150 = 0x00590150,
@@ -74764,6 +79268,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x005901B1 = 0x005901B1,
     // label: _strtol
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005903DC = 0x005903DC,
@@ -74771,59 +79276,77 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00590405 = 0x00590405,
-    // label: FUN_00590429
+    // label: crt_00590429
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00590429 = 0x00590429,
     // label: __ValidateImageBase
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00590450 = 0x00590450,
     // label: __FindPESection
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00590480 = 0x00590480,
     // label: __IsNonwritableInCurrentImage
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005904D0 = 0x005904D0,
+    // label: crt_ehFunclet_00590559
+    // location:
     // type: function
-    SHC_3BB0A8C1_0x00590570 = 0x00590570,
-    // label: FUN_0059058b
+    SHC_3BB0A8C1_0x00590559 = 0x00590559,
+    // label: crt_ehFunclet_0059056d
+    // location:
+    // type: function
+    SHC_3BB0A8C1_0x0059056D = 0x0059056D,
+    // label: crt_0059058b
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0059058B = 0x0059058B,
     // label: __initp_misc_winsig
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005906E9 = 0x005906E9,
     // label: _siglookup
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00590702 = 0x00590702,
     // label: ___get_sigabrt
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00590736 = 0x00590736,
     // label: _raise
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00590743 = 0x00590743,
+    // label: crt_ehFunclet_005908b1
+    // location:
+    // type: function
+    SHC_3BB0A8C1_0x005908B1 = 0x005908B1,
     // label: _raise_FUN_005908b7
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005908B7 = 0x005908B7,
     // type: function
     SHC_3BB0A8C1_0x005908C6 = 0x005908C6,
-    // label: FUN_005908f3
+    // label: crt_005908f3
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005908F3 = 0x005908F3,
     // label: ___getlocaleinfo
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005908FD = 0x005908FD,
-    // label: FUN_00590a57
+    // label: crt_00590a57
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00590A57 = 0x00590A57,
@@ -74832,52 +79355,68 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00590A61 = 0x00590A61,
     // label: ___crtInitCritSecNoSpinCount@8
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00590A6B = 0x00590A6B,
     // label: ___crtInitCritSecAndSpinCount
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00590A7B = 0x00590A7B,
+    // label: crt_ehFunclet_00590b01
+    // location:
     // type: function
-    SHC_3BB0A8C1_0x00590B30 = 0x00590B30,
+    SHC_3BB0A8C1_0x00590B01 = 0x00590B01,
+    // label: crt_ehFunclet_00590b18
+    // location:
+    // type: function
+    SHC_3BB0A8C1_0x00590B18 = 0x00590B18,
     // label: EH_FUN_00590b40
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00590B40 = 0x00590B40,
-    // label: FUN_00590b7d
+    // label: ___CxxSetUnhandledExceptionFilter
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00590B7D = 0x00590B7D,
     // label: __wincmdln
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00590B8B = 0x00590B8B,
     // label: __setenvp
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00590BE8 = 0x00590BE8,
     // label: _parse_cmdline
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00590CC3 = 0x00590CC3,
     // label: __setargv
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00590E5B = 0x00590E5B,
     // label: ___crtGetEnvironmentStringsA
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00590F14 = 0x00590F14,
     // label: ___security_init_cookie
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00591049 = 0x00591049,
     // label: ___ansicp
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005910DD = 0x005910DD,
     // label: ___convertcp
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00591124 = 0x00591124,
@@ -74888,58 +79427,76 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x005912D6 = 0x005912D6,
     // label: ___crtGetStringTypeA
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0059148E = 0x0059148E,
     // label: __calloc_impl
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005914CE = 0x005914CE,
-    // label: FUN_005915ca
+    // label: crt_ehFunclet_005915c5
+    // location:
+    // type: function
+    SHC_3BB0A8C1_0x005915C5 = 0x005915C5,
+    // label: crt_005915ca
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005915CA = 0x005915CA,
     // type: function
     SHC_3BB0A8C1_0x005915D3 = 0x005915D3,
     // label: _realloc
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005915EC = 0x005915EC,
+    // label: crt_ehFunclet_0059172a
+    // location:
+    // type: function
+    SHC_3BB0A8C1_0x0059172A = 0x0059172A,
     // label: _realloc_FUN_00591730
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00591730 = 0x00591730,
     // type: function
     SHC_3BB0A8C1_0x00591739 = 0x00591739,
-    // label: FUN_00591807
+    // label: crt_00591807
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00591807 = 0x00591807,
     // label: __get_lc_time
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00591880 = 0x00591880,
     // label: ___free_lc_time
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00591C99 = 0x00591C99,
     // label: ___init_time
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00591E29 = 0x00591E29,
     // label: ___free_lconv_num
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00591E9C = 0x00591E9C,
     // label: ___init_numeric
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00591EDC = 0x00591EDC,
     // label: ___free_lconv_mon
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005920A4 = 0x005920A4,
     // label: ___init_monetary
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0059212D = 0x0059212D,
@@ -74948,66 +79505,82 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x005923F1 = 0x005923F1,
     // label: _strcat_s
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005923F4 = 0x005923F4,
     // label: _strcspn
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00592470 = 0x00592470,
     // label: _strncpy_s
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005924B6 = 0x005924B6,
     // label: _TranslateName
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00592569 = 0x00592569,
     // label: _ProcessCodePage
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005925C9 = 0x005925C9,
     // label: _TestDefaultCountry
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00592640 = 0x00592640,
     // label: _LcidFromHexString
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0059265E = 0x0059265E,
     // label: _GetPrimaryLen
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00592690 = 0x00592690,
     // label: _CountryEnumProc@4
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005926AB = 0x005926AB,
     // label: _TestDefaultLanguage
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00592741 = 0x00592741,
     // label: _LangCountryEnumProc@4
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005927B3 = 0x005927B3,
     // label: _LanguageEnumProc@4
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00592983 = 0x00592983,
     // label: _GetLcidFromLangCountry
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00592A42 = 0x00592A42,
     // label: _GetLcidFromLanguage
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00592AA7 = 0x00592AA7,
     // label: ___get_qualified_locale
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00592AE3 = 0x00592AE3,
     // label: _memcmp
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00592CC6 = 0x00592CC6,
@@ -75076,10 +79649,12 @@ enum {
     // type: /pointer
     SHC_3BB0A8C1_0x00594342 = 0x00594342,
     // label: _strncmp
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00594346 = 0x00594346,
     // label: _strpbrk
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00594410 = 0x00594410,
@@ -75088,6 +79663,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00594450 = 0x00594450,
     // label: __wopenfile
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00594466 = 0x00594466,
@@ -75098,42 +79674,57 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x005946F2 = 0x005946F2,
     // label: _strrchr
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00594700 = 0x00594700,
     // label: FID_conflict:__atodbl_l
     // label: FID_conflict:__atoflt_l
+    // label: __atodbl_l
+    // label: __atoflt_l
     // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0059472D = 0x0059472D,
     // label: FID_conflict:__atodbl_l
     // label: FID_conflict:__atoflt_l
+    // label: __atodbl_l
+    // label: __atoflt_l
     // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005947D3 = 0x005947D3,
     // label: __fptostr
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00594879 = 0x00594879,
     // label: ___dtold
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00594936 = 0x00594936,
     // label: __fltout2
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005949F1 = 0x005949F1,
     // label: __alldvrm
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00594A80 = 0x00594A80,
     // label: __aullshr
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00594B60 = 0x00594B60,
+    // label: crt_00594b7f
+    // location:
+    // type: function
+    SHC_3BB0A8C1_0x00594B7F = 0x00594B7F,
     // label: __controlfp_s
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00594B88 = 0x00594B88,
@@ -75141,17 +79732,25 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00594BF2 = 0x00594BF2,
+    // label: crt_00594c27
+    // location:
+    // type: function
+    SHC_3BB0A8C1_0x00594C27 = 0x00594C27,
+    // label: crt_00594c32
+    // location:
     // type: function
     SHC_3BB0A8C1_0x00594C32 = 0x00594C32,
     // label: __get_sse2_info
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00594C42 = 0x00594C42,
-    // label: FUN_00594ca2
+    // label: ___sse2_available_init
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00594CA2 = 0x00594CA2,
     // label: ___libm_error_support
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00594CAF = 0x00594CAF,
@@ -75182,77 +79781,98 @@ enum {
     // type: /pointer
     SHC_3BB0A8C1_0x00594F5B = 0x00594F5B,
     // label: __87except
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00594F5F = 0x00594F5F,
     // label: __getenv_helper_nolock
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0059505B = 0x0059505B,
-    // label: FUN_005950dc
+    // label: __get_printf_count_output
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005950DC = 0x005950DC,
     // label: __wctomb_s_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005950F2 = 0x005950F2,
     // label: _wctomb_s
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00595251 = 0x00595251,
     // label: __aulldvrm
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00595270 = 0x00595270,
     // label: __iswctype_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00595305 = 0x00595305,
-    // label: FUN_00595387
+    // label: __fcloseall
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00595387 = 0x00595387,
-    // label: FUN_0059541d
+    // label: crt_0059541d
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0059541D = 0x0059541D,
-    // label: FUN_00595426
+    // label: crt_00595426
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00595426 = 0x00595426,
     // label: __set_error_mode
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005955E3 = 0x005955E3,
     // label: __mbsicmp_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00595629 = 0x00595629,
     // label: __mbsicmp
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00595843 = 0x00595843,
     // label: __mbsnbcmp_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00595856 = 0x00595856,
     // label: __mbsnbcmp
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005959BF = 0x005959BF,
     // label: __global_unwind2
     // location:
+    // type: function
     SHC_3BB0A8C1_0x005959D8 = 0x005959D8,
+    // label: crt_00595a3c
+    // location:
+    // type: function
+    SHC_3BB0A8C1_0x00595A3C = 0x00595A3C,
     // label: __local_unwind2
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00595A3D = 0x00595A3D,
     // label: __CallSettingFrame_FUN_00595ae4
+    // label: __NLG_Notify1
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00595AE4 = 0x00595AE4,
+    // label: __NLG_Notify
     // label: __local_unwind_FUN_00595aed
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00595AED = 0x00595AED,
@@ -75271,14 +79891,17 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00595CED = 0x00595CED,
     // label: ___crtLCMapStringW
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00595F4E = 0x00595F4E,
     // label: __wchartodigit
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00595F8E = 0x00595F8E,
     // label: __chsize_nolock
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00596110 = 0x00596110,
@@ -75291,10 +79914,13 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00596380 = 0x00596380,
     // label: ___initconout
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005963B4 = 0x005963B4,
     // label: CloseHandles_FUN_005963d3
+    // label: ___termcon
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005963D3 = 0x005963D3,
@@ -75305,6 +79931,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00596400 = 0x00596400,
     // label: ___crtGetLocaleInfoW
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0059653B = 0x0059653B,
@@ -75315,6 +79942,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00596576 = 0x00596576,
     // label: ___crtGetLocaleInfoA
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005966B3 = 0x005966B3,
@@ -75325,29 +79953,37 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x005966EE = 0x005966EE,
     // label: __ismbblead
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0059673F = 0x0059673F,
     // label: _xtoa_s@20
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00596752 = 0x00596752,
     // label: __itoa_s
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0059682D = 0x0059682D,
     // label: _wcsncmp
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00596855 = 0x00596855,
     // label: FID_conflict:__ld12tod
     // label: FID_conflict:__ld12tof
+    // label: __ld12tod
+    // label: __ld12tof
     // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0059688A = 0x0059688A,
     // label: FID_conflict:__ld12tod
     // label: FID_conflict:__ld12tof
+    // label: __ld12tod
+    // label: __ld12tof
     // location:
     // location: HoldStrong_lib
     // type: function
@@ -75385,26 +80021,32 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x005979CE = 0x005979CE,
     // label: __hw_cw
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00598294 = 0x00598294,
     // label: ___hw_cw_sse2
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00598322 = 0x00598322,
     // label: __control87
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005983C2 = 0x005983C2,
     // label: __mbsnbicoll_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005986C5 = 0x005986C5,
     // label: __mbsnbicoll
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005987B1 = 0x005987B1,
     // label: ___wtomb_environ
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005987C8 = 0x005987C8,
@@ -75415,6 +80057,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0059885D = 0x0059885D,
     // label: ___crtGetStringTypeW
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00598A81 = 0x00598A81,
@@ -75423,6 +80066,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00598ABF = 0x00598ABF,
     // label: ___mtold12
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00598C2F = 0x00598C2F,
@@ -75433,18 +80077,22 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00598DFB = 0x00598DFB,
     // label: ___crtCompareStringA
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00599184 = 0x00599184,
     // label: __strnicoll_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005991C4 = 0x005991C4,
     // label: _findenv
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005992BC = 0x005992BC,
     // label: _copy_environ
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00599309 = 0x00599309,
@@ -75453,20 +80101,24 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00599366 = 0x00599366,
     // label: __strdup
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005995B2 = 0x005995B2,
     // label: __mbschr_l
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00599602 = 0x00599602,
     // label: __mbschr
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005996BC = 0x005996BC,
     // type: function
     SHC_3BB0A8C1_0x005996D0 = 0x005996D0,
     // label: _strchr
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005996E0 = 0x005996E0,
@@ -75518,6 +80170,14 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00599920 = 0x00599920,
+    // label: crt_0059992b
+    // location:
+    // type: function
+    SHC_3BB0A8C1_0x0059992B = 0x0059992B,
+    // label: crt_00599950
+    // location:
+    // type: function
+    SHC_3BB0A8C1_0x00599950 = 0x00599950,
     // label: Unwind@00599970
     // location: HoldStrong_lib
     // type: function
@@ -75670,7 +80330,9 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00599C48 = 0x00599C48,
-    // label: ResourceStringLoadCxxFrameHandlerUnk
+    // label: HoldStrong_lib::ResourceStringLoadCxxFrameHandlerUnk
+    // label: crt_cxxFrameHandler_599c50
+    // location:
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00599C50 = 0x00599C50,
@@ -75894,6 +80556,10 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0059A10F = 0x0059A10F,
+    // label: crt_0059a117
+    // location:
+    // type: function
+    SHC_3BB0A8C1_0x0059A117 = 0x0059A117,
     // label: Unwind@0059a132
     // location: HoldStrong_lib
     // type: function
@@ -75922,7 +80588,9 @@ enum {
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059A1F0 = 0x0059A1F0,
-    // label: Constructor_MenuView_UnusedSomeMissionStartUnk
+    // label: Constructor_MenuView_UnusedMissionStart
+    // label: _HoldStrong::Global::Init::Constructor_MenuView_UnusedSomeMissionStartUnk
+    // location:
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059A220 = 0x0059A220,
@@ -75934,7 +80602,9 @@ enum {
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059A280 = 0x0059A280,
-    // label: Constructor_MenuView_Unknown21
+    // label: Constructor_MenuView_MainMenuModal21
+    // label: _HoldStrong::Global::Init::Constructor_MenuView_Unknown21
+    // location:
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059A2B0 = 0x0059A2B0,
@@ -75942,11 +80612,15 @@ enum {
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059A2E0 = 0x0059A2E0,
-    // label: Constructor_MenuView_Unknown33
+    // label: Constructor_MenuView_LobbyReadyLaunch33
+    // label: _HoldStrong::Global::Init::Constructor_MenuView_Unknown33
+    // location:
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059A310 = 0x0059A310,
-    // label: Constructor_MenuView_Unknown61ReturnToSkrimishMenuUnk
+    // label: Constructor_MenuView_ReturnToSkirmishMenu61
+    // label: _HoldStrong::Global::Init::Constructor_MenuView_Unknown61ReturnToSkrimishMenuUnk
+    // location:
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059A340 = 0x0059A340,
@@ -75954,7 +80628,9 @@ enum {
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059A370 = 0x0059A370,
-    // label: Constructor_MenuView_Unknown49DoesNothingUnk
+    // label: Constructor_MenuView_Placeholder49DoesNothing
+    // label: _HoldStrong::Global::Init::Constructor_MenuView_Unknown49DoesNothingUnk
+    // location:
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059A3A0 = 0x0059A3A0,
@@ -75998,11 +80674,15 @@ enum {
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059A580 = 0x0059A580,
-    // label: Constructor_MenuView_Unknown26_CampaignRelatedUnk
+    // label: Constructor_MenuView_CampaignCredits26
+    // label: _HoldStrong::Global::Init::Constructor_MenuView_Unknown26_CampaignRelatedUnk
+    // location:
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059A5B0 = 0x0059A5B0,
-    // label: Constructor_MenuView_CampaignUnk
+    // label: Constructor_MenuView_Campaign27
+    // label: _HoldStrong::Global::Init::Constructor_MenuView_CampaignUnk
+    // location:
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059A5E0 = 0x0059A5E0,
@@ -76098,7 +80778,9 @@ enum {
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059AA30 = 0x0059AA30,
-    // label: Constructor_Menu_Unknown_ManyThings
+    // label: Constructor_Menu_MultiItemShared
+    // label: _HoldStrong::Global::Init::Constructor_Menu_Unknown_ManyThings
+    // location:
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059AA60 = 0x0059AA60,
@@ -76130,7 +80812,9 @@ enum {
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059AAD0 = 0x0059AAD0,
-    // label: Constructor_Menu_UnusedSomeMissionStartUnk
+    // label: Constructor_Menu_UnusedMissionStart
+    // label: _HoldStrong::Global::Init::Constructor_Menu_UnusedSomeMissionStartUnk
+    // location:
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059AAE0 = 0x0059AAE0,
@@ -76230,11 +80914,15 @@ enum {
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059AC60 = 0x0059AC60,
-    // label: Constructor_Menu_Unknown26CampaignRelatedUnk
+    // label: Constructor_Menu_CampaignCredits26
+    // label: _HoldStrong::Global::Init::Constructor_Menu_Unknown26CampaignRelatedUnk
+    // location:
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059AC70 = 0x0059AC70,
-    // label: Constructor_Menu_Unknown27CampaignUnk
+    // label: Constructor_Menu_Campaign27
+    // label: _HoldStrong::Global::Init::Constructor_Menu_Unknown27CampaignUnk
+    // location:
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059AC80 = 0x0059AC80,
@@ -76274,7 +80962,9 @@ enum {
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059AD10 = 0x0059AD10,
-    // label: Constructor_Menu_GameLostUnk
+    // label: Constructor_Menu_GameLost
+    // label: _HoldStrong::Global::Init::Constructor_Menu_GameLostUnk
+    // location:
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059AD20 = 0x0059AD20,
@@ -76470,7 +81160,9 @@ enum {
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059B020 = 0x0059B020,
-    // label: Constructor_Menu_UnusedSiegeAttackingForceUnk
+    // label: Constructor_Menu_UnusedSiegeAttackingForce
+    // label: _HoldStrong::Global::Init::Constructor_Menu_UnusedSiegeAttackingForceUnk
+    // location:
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059B030 = 0x0059B030,
@@ -76550,7 +81242,9 @@ enum {
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059B220 = 0x0059B220,
-    // label: Constructor_MenuModal_DebugDataZoneDataUnk
+    // label: Constructor_MenuModal_DebugDataZoneData
+    // label: _HoldStrong::Global::Init::Constructor_MenuModal_DebugDataZoneDataUnk
+    // location:
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059B260 = 0x0059B260,
@@ -76670,7 +81364,9 @@ enum {
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059B9A0 = 0x0059B9A0,
-    // label: Constructor_MenuModal_UnusedSiegeAttackingForceUnk
+    // label: Constructor_MenuModal_UnusedSiegeAttackingForce
+    // label: _HoldStrong::Global::Init::Constructor_MenuModal_UnusedSiegeAttackingForceUnk
+    // location:
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059B9E0 = 0x0059B9E0,
@@ -76822,11 +81518,15 @@ enum {
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059C340 = 0x0059C340,
-    // label: Constructor_MenuModal_DebugDataAivStateUnk
+    // label: Constructor_MenuModal_DebugDataAivState
+    // label: _HoldStrong::Global::Init::Constructor_MenuModal_DebugDataAivStateUnk
+    // location:
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059C380 = 0x0059C380,
-    // label: CreateUnknownDisplayElement0
+    // label: CreateChatAnchorPlaceholderDisplayElement0
+    // label: _HoldStrong::Global::Init::CreateUnknownDisplayElement0
+    // location:
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059C3C0 = 0x0059C3C0,
@@ -76834,7 +81534,9 @@ enum {
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059C3E0 = 0x0059C3E0,
-    // label: CreateUnknownDisplayElement18
+    // label: CreateTopAnchorPlaceholderDisplayElement18
+    // label: _HoldStrong::Global::Init::CreateUnknownDisplayElement18
+    // location:
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059C400 = 0x0059C400,
@@ -76846,7 +81548,9 @@ enum {
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059C440 = 0x0059C440,
-    // label: CreateInGameChatDisplayElementUnk
+    // label: CreateInGameChatDisplayElement
+    // label: _HoldStrong::Global::Init::CreateInGameChatDisplayElementUnk
+    // location:
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059C460 = 0x0059C460,
@@ -76862,11 +81566,15 @@ enum {
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059C4C0 = 0x0059C4C0,
-    // label: CreateUnknownDisplayElement7
+    // label: CreateStopwatchDurationDisplayElement
+    // label: _HoldStrong::Global::Init::CreateUnknownDisplayElement7
+    // location:
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059C4E0 = 0x0059C4E0,
-    // label: CreateSomeMissionNumberUnkDisplayElement9
+    // label: CreateMissionNumberDisplayElement
+    // label: _HoldStrong::Global::Init::CreateSomeMissionNumberUnkDisplayElement9
+    // location:
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059C500 = 0x0059C500,
@@ -76882,7 +81590,9 @@ enum {
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059C560 = 0x0059C560,
-    // label: CreateSomeMultiplayerInfoUnkDisplayElement19
+    // label: CreateMultiplayerResyncOverlayDisplayElement
+    // label: _HoldStrong::Global::Init::CreateSomeMultiplayerInfoUnkDisplayElement19
+    // location:
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059C580 = 0x0059C580,
@@ -76894,7 +81604,9 @@ enum {
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059C5C0 = 0x0059C5C0,
-    // label: CreatePlayerPingUnkDisplayElement22
+    // label: CreatePlayerPingDisplayElement
+    // label: _HoldStrong::Global::Init::CreatePlayerPingUnkDisplayElement22
+    // location:
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059C5E0 = 0x0059C5E0,
@@ -76906,7 +81618,9 @@ enum {
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059C620 = 0x0059C620,
-    // label: CreateUnknownDisplayElement25
+    // label: CreateSkirmishPointsPerPlayerDebugOverlayElement
+    // label: _HoldStrong::Global::Init::CreateUnknownDisplayElement25
+    // location:
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059C640 = 0x0059C640,
@@ -76914,7 +81628,9 @@ enum {
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059C660 = 0x0059C660,
-    // label: CreateNoRushDisplayElementUnk
+    // label: CreateNoRushDisplayElement
+    // label: _HoldStrong::Global::Init::CreateNoRushDisplayElementUnk
+    // location:
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059C680 = 0x0059C680,
@@ -76922,7 +81638,9 @@ enum {
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059C6A0 = 0x0059C6A0,
-    // label: CreateSomeMultiplayerInfoUnkDisplayElement28
+    // label: CreateLaggingPlayerEjectOverlayDisplayElement
+    // label: _HoldStrong::Global::Init::CreateSomeMultiplayerInfoUnkDisplayElement28
+    // location:
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059C6C0 = 0x0059C6C0,
@@ -76930,7 +81648,9 @@ enum {
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059C6E0 = 0x0059C6E0,
-    // label: Constructor_UnknownClass1
+    // label: _HoldStrong::Global::Init::Constructor_UnknownClass1
+    // label: staticInit_emptyGlobalCtorA
+    // location:
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059C700 = 0x0059C700,
@@ -76970,7 +81690,9 @@ enum {
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059C820 = 0x0059C820,
-    // label: Constructor_UnusedClass1Unk
+    // label: _HoldStrong::Global::Init::Constructor_UnusedClass1Unk
+    // label: staticInit_emptyGlobalCtorB
+    // location:
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059C840 = 0x0059C840,
@@ -77002,7 +81724,9 @@ enum {
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059C920 = 0x0059C920,
-    // label: Constructor_Stopwatch_Unknown
+    // label: Constructor_Stopwatch
+    // label: _HoldStrong::Global::Init::Constructor_Stopwatch_Unknown
+    // location:
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059C940 = 0x0059C940,
@@ -77130,7 +81854,9 @@ enum {
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059CCE6 = 0x0059CCE6,
-    // label: Constructor_CreateLocaleMemoryRelated
+    // label: _HoldStrong::Global::Init::Constructor_CreateLocaleMemoryRelated
+    // label: staticInit_localeMemoryAtexit
+    // location:
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059CCFC = 0x0059CCFC,
@@ -77138,7 +81864,9 @@ enum {
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059CD08 = 0x0059CD08,
-    // label: Constructor_CRelated
+    // label: _HoldStrong::Global::Init::Constructor_CRelated
+    // label: staticInit_crtObjectAtexit
+    // location:
     // location: OpenSHC/Global/Init
     // type: function
     SHC_3BB0A8C1_0x0059CD1E = 0x0059CD1E,
@@ -77158,7 +81886,9 @@ enum {
     // location: OpenSHC/Meta
     // type: function
     SHC_3BB0A8C1_0x0059CD60 = 0x0059CD60,
-    // label: Destructor_MenuView_UnusedSomeMissionStartUnk
+    // label: Destructor_MenuView_UnusedMissionStart
+    // label: _HoldStrong::Meta::Destructor_MenuView_UnusedSomeMissionStartUnk
+    // location:
     // location: OpenSHC/Meta
     // type: function
     SHC_3BB0A8C1_0x0059CD70 = 0x0059CD70,
@@ -77170,7 +81900,9 @@ enum {
     // location: OpenSHC/Meta
     // type: function
     SHC_3BB0A8C1_0x0059CD90 = 0x0059CD90,
-    // label: Destructor_MenuView_Unknown21
+    // label: Destructor_MenuView_MainMenuModal21
+    // label: _HoldStrong::Meta::Destructor_MenuView_Unknown21
+    // location:
     // location: OpenSHC/Meta
     // type: function
     SHC_3BB0A8C1_0x0059CDA0 = 0x0059CDA0,
@@ -77178,11 +81910,15 @@ enum {
     // location: OpenSHC/Meta
     // type: function
     SHC_3BB0A8C1_0x0059CDB0 = 0x0059CDB0,
-    // label: Destructor_MenuView_Unknown33
+    // label: Destructor_MenuView_LobbyReadyLaunch33
+    // label: _HoldStrong::Meta::Destructor_MenuView_Unknown33
+    // location:
     // location: OpenSHC/Meta
     // type: function
     SHC_3BB0A8C1_0x0059CDC0 = 0x0059CDC0,
-    // label: Destructor_MenuView_Unknown61ReturnToSkrimishMenuUnk
+    // label: Destructor_MenuView_ReturnToSkirmishMenu61
+    // label: _HoldStrong::Meta::Destructor_MenuView_Unknown61ReturnToSkrimishMenuUnk
+    // location:
     // location: OpenSHC/Meta
     // type: function
     SHC_3BB0A8C1_0x0059CDD0 = 0x0059CDD0,
@@ -77190,7 +81926,9 @@ enum {
     // location: OpenSHC/Meta
     // type: function
     SHC_3BB0A8C1_0x0059CDE0 = 0x0059CDE0,
-    // label: Destructor_MenuView_Unknown49DoesNothingUnk
+    // label: Destructor_MenuView_Placeholder49DoesNothing
+    // label: _HoldStrong::Meta::Destructor_MenuView_Unknown49DoesNothingUnk
+    // location:
     // location: OpenSHC/Meta
     // type: function
     SHC_3BB0A8C1_0x0059CDF0 = 0x0059CDF0,
@@ -77234,11 +81972,15 @@ enum {
     // location: OpenSHC/Meta
     // type: function
     SHC_3BB0A8C1_0x0059CE90 = 0x0059CE90,
-    // label: Destructor_MenuView_Unknown26_CampaignRelatedUnk
+    // label: Destructor_MenuView_CampaignCredits26
+    // label: _HoldStrong::Meta::Destructor_MenuView_Unknown26_CampaignRelatedUnk
+    // location:
     // location: OpenSHC/Meta
     // type: function
     SHC_3BB0A8C1_0x0059CEA0 = 0x0059CEA0,
-    // label: Destructor_MenuView_CampaignUnk
+    // label: Destructor_MenuView_Campaign27
+    // label: _HoldStrong::Meta::Destructor_MenuView_CampaignUnk
+    // location:
     // location: OpenSHC/Meta
     // type: function
     SHC_3BB0A8C1_0x0059CEB0 = 0x0059CEB0,
@@ -77354,7 +82096,9 @@ enum {
     // location: OpenSHC/Meta
     // type: function
     SHC_3BB0A8C1_0x0059D070 = 0x0059D070,
-    // label: Destructor_MenuModal_DebugDataZoneDataUnk
+    // label: Destructor_MenuModal_DebugDataZoneData
+    // label: _HoldStrong::Meta::Destructor_MenuModal_DebugDataZoneDataUnk
+    // location:
     // location: OpenSHC/Meta
     // type: function
     SHC_3BB0A8C1_0x0059D080 = 0x0059D080,
@@ -77474,7 +82218,9 @@ enum {
     // location: OpenSHC/Meta
     // type: function
     SHC_3BB0A8C1_0x0059D250 = 0x0059D250,
-    // label: Destructor_MenuModal_UnusedSiegeAttackingForceUnk
+    // label: Destructor_MenuModal_UnusedSiegeAttackingForce
+    // label: _HoldStrong::Meta::Destructor_MenuModal_UnusedSiegeAttackingForceUnk
+    // location:
     // location: OpenSHC/Meta
     // type: function
     SHC_3BB0A8C1_0x0059D260 = 0x0059D260,
@@ -77578,7 +82324,9 @@ enum {
     // location: OpenSHC/Meta
     // type: function
     SHC_3BB0A8C1_0x0059D3F0 = 0x0059D3F0,
-    // label: Destructor_MenuModal_ReceiveMapFromUnk
+    // label: Destructor_MenuModal_ReceiveMapFrom
+    // label: _HoldStrong::Meta::Destructor_MenuModal_ReceiveMapFromUnk
+    // location:
     // location: OpenSHC/Meta
     // type: function
     SHC_3BB0A8C1_0x0059D400 = 0x0059D400,
@@ -77626,7 +82374,9 @@ enum {
     // location: OpenSHC/Meta
     // type: function
     SHC_3BB0A8C1_0x0059D4B0 = 0x0059D4B0,
-    // label: Destructor_MenuModal_DebugDataAivStateUnk
+    // label: Destructor_MenuModal_DebugDataAivState
+    // label: _HoldStrong::Meta::Destructor_MenuModal_DebugDataAivStateUnk
+    // location:
     // location: OpenSHC/Meta
     // type: function
     SHC_3BB0A8C1_0x0059D4C0 = 0x0059D4C0,
@@ -77702,7 +82452,9 @@ enum {
     // location: OpenSHC/Meta
     // type: function
     SHC_3BB0A8C1_0x0059D5E0 = 0x0059D5E0,
-    // label: Destructor_Stopwatch_Unknown
+    // label: Destructor_Stopwatch
+    // label: _HoldStrong::Meta::Destructor_Stopwatch_Unknown
+    // location:
     // location: OpenSHC/Meta
     // type: function
     SHC_3BB0A8C1_0x0059D5F0 = 0x0059D5F0,
@@ -78848,10 +83600,14 @@ enum {
     SHC_3BB0A8C1_0x0059E808 = 0x0059E808,
     // type: /undefined *32
     SHC_3BB0A8C1_0x0059E80C = 0x0059E80C,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x0059E814 = 0x0059E814,
     // type: /pointer
     SHC_3BB0A8C1_0x0059E818 = 0x0059E818,
     // type: /pointer
     SHC_3BB0A8C1_0x0059E81C = 0x0059E81C,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x0059E824 = 0x0059E824,
     // type: /string
     SHC_3BB0A8C1_0x0059E830 = 0x0059E830,
     // type: /double
@@ -81720,6 +86476,8 @@ enum {
     // location:
     // type: /char[24]
     SHC_3BB0A8C1_0x005A4DD8 = 0x005A4DD8,
+    // label: g_fVolumeTweakBase
+    // location:
     // type: /float
     SHC_3BB0A8C1_0x005A4DF0 = 0x005A4DF0,
     // type: /double
@@ -81754,14 +86512,22 @@ enum {
     SHC_3BB0A8C1_0x005A4EBC = 0x005A4EBC,
     // type: /string
     SHC_3BB0A8C1_0x005A4ECC = 0x005A4ECC,
+    // label: g_fAmbientFadeThresholdA
+    // location:
     // type: /float
     SHC_3BB0A8C1_0x005A4EDC = 0x005A4EDC,
+    // label: g_fAmbientFadeThresholdB
+    // location:
     // type: /float
     SHC_3BB0A8C1_0x005A4EE0 = 0x005A4EE0,
+    // label: g_fAmbientFadeThresholdC
+    // location:
     // type: /float
     SHC_3BB0A8C1_0x005A4EE4 = 0x005A4EE4,
     // type: /double
     SHC_3BB0A8C1_0x005A4EE8 = 0x005A4EE8,
+    // label: g_fAmbientFadeStep
+    // location:
     // type: /float
     SHC_3BB0A8C1_0x005A4EF0 = 0x005A4EF0,
     // type: /string
@@ -82439,19 +87205,19 @@ enum {
     // type: /string
     SHC_3BB0A8C1_0x005A61EC = 0x005A61EC,
     // label: vftable_meta_ptr
-    // location: std/basic_ostream<char,struct_std/char_traits<char>_>
+    // location: std/basic_ostream<char,std/char_traits<char>_>
     // type: /pointer
     SHC_3BB0A8C1_0x005A61F8 = 0x005A61F8,
     // label: vftable
-    // location: std/basic_ostream<char,struct_std/char_traits<char>_>
+    // location: std/basic_ostream<char,std/char_traits<char>_>
     // type: /pointer[1]
     SHC_3BB0A8C1_0x005A61FC = 0x005A61FC,
     // label: vftable_meta_ptr
-    // location: std/basic_ios<char,struct_std/char_traits<char>_>
+    // location: std/basic_ios<char,std/char_traits<char>_>
     // type: /pointer
     SHC_3BB0A8C1_0x005A6200 = 0x005A6200,
     // label: vftable
-    // location: std/basic_ios<char,struct_std/char_traits<char>_>
+    // location: std/basic_ios<char,std/char_traits<char>_>
     // type: /pointer[1]
     SHC_3BB0A8C1_0x005A6204 = 0x005A6204,
     // type: /string
@@ -82475,11 +87241,11 @@ enum {
     // type: /string
     SHC_3BB0A8C1_0x005A62A0 = 0x005A62A0,
     // label: vftable_meta_ptr
-    // location: std/basic_streambuf<char,struct_std/char_traits<char>_>
+    // location: std/basic_streambuf<char,std/char_traits<char>_>
     // type: /pointer
     SHC_3BB0A8C1_0x005A62BC = 0x005A62BC,
     // label: vftable
-    // location: std/basic_streambuf<char,struct_std/char_traits<char>_>
+    // location: std/basic_streambuf<char,std/char_traits<char>_>
     // type: /pointer[14]
     SHC_3BB0A8C1_0x005A62C0 = 0x005A62C0,
     // type: /string
@@ -82503,11 +87269,11 @@ enum {
     // type: /string
     SHC_3BB0A8C1_0x005A6348 = 0x005A6348,
     // label: vftable_meta_ptr
-    // location: std/basic_filebuf<char,struct_std/char_traits<char>_>
+    // location: std/basic_filebuf<char,std/char_traits<char>_>
     // type: /pointer
     SHC_3BB0A8C1_0x005A6354 = 0x005A6354,
     // label: vftable
-    // location: std/basic_filebuf<char,struct_std/char_traits<char>_>
+    // location: std/basic_filebuf<char,std/char_traits<char>_>
     // type: /pointer[14]
     SHC_3BB0A8C1_0x005A6358 = 0x005A6358,
     // label: vftable_meta_ptr
@@ -82585,11 +87351,11 @@ enum {
     // type: /string
     SHC_3BB0A8C1_0x005A6500 = 0x005A6500,
     // label: vftable_meta_ptr
-    // location: std/basic_ofstream<char,struct_std/char_traits<char>_>
+    // location: std/basic_ofstream<char,std/char_traits<char>_>
     // type: /pointer
     SHC_3BB0A8C1_0x005A650C = 0x005A650C,
     // label: vftable
-    // location: std/basic_ofstream<char,struct_std/char_traits<char>_>
+    // location: std/basic_ofstream<char,std/char_traits<char>_>
     // type: /pointer[1]
     SHC_3BB0A8C1_0x005A6510 = 0x005A6510,
     // type: /pointer
@@ -85254,12 +90020,20 @@ enum {
     SHC_3BB0A8C1_0x005AC10C = 0x005AC10C,
     // type: /string
     SHC_3BB0A8C1_0x005AC118 = 0x005AC118,
+    // label: g_SessionGuidPart1
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x005AC12C = 0x005AC12C,
+    // label: g_SessionGuidPart2
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x005AC130 = 0x005AC130,
+    // label: g_SessionGuidPart3
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x005AC134 = 0x005AC134,
+    // label: g_SessionGuidPart4
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x005AC138 = 0x005AC138,
     // label: vftable_meta_ptr
@@ -85308,6 +90082,8 @@ enum {
     SHC_3BB0A8C1_0x005AC19C = 0x005AC19C,
     // type: /undefined4
     SHC_3BB0A8C1_0x005AC1A0 = 0x005AC1A0,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x005AC1A4 = 0x005AC1A4,
     // type: ntddk_32/WCHAR[2]
     SHC_3BB0A8C1_0x005AC1D8 = 0x005AC1D8,
     // type: ntddk_32/WCHAR[2]
@@ -85364,6 +90140,10 @@ enum {
     // location: type_info
     // type: /pointer[1]
     SHC_3BB0A8C1_0x005AC264 = 0x005AC264,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x005AC268 = 0x005AC268,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x005AC26C = 0x005AC26C,
     // type: /int
     SHC_3BB0A8C1_0x005AC27C = 0x005AC27C,
     // type: /string
@@ -85566,6 +90346,8 @@ enum {
     SHC_3BB0A8C1_0x005ACE48 = 0x005ACE48,
     // type: /double
     SHC_3BB0A8C1_0x005ACE50 = 0x005ACE50,
+    // type: /undefined2
+    SHC_3BB0A8C1_0x005ACE58 = 0x005ACE58,
     // type: /longdouble
     SHC_3BB0A8C1_0x005ACE5A = 0x005ACE5A,
     // type: /double
@@ -89233,7 +94015,7 @@ enum {
     // type: /RTTIBaseClassDescriptor
     SHC_3BB0A8C1_0x005B29DC = 0x005B29DC,
     // label: RTTI_Complete_Object_Locator
-    // location: std/basic_ostream<char,struct_std/char_traits<char>_>
+    // location: std/basic_ostream<char,std/char_traits<char>_>
     // type: /RTTICompleteObjectLocator
     SHC_3BB0A8C1_0x005B29F8 = 0x005B29F8,
     // label: RTTI_Class_Hierarchy_Descriptor
@@ -89273,11 +94055,11 @@ enum {
     // type: /RTTIBaseClassDescriptor
     SHC_3BB0A8C1_0x005B2AC0 = 0x005B2AC0,
     // label: RTTI_Complete_Object_Locator
-    // location: std/basic_ios<char,struct_std/char_traits<char>_>
+    // location: std/basic_ios<char,std/char_traits<char>_>
     // type: /RTTICompleteObjectLocator
     SHC_3BB0A8C1_0x005B2ADC = 0x005B2ADC,
     // label: RTTI_Complete_Object_Locator
-    // location: std/basic_streambuf<char,struct_std/char_traits<char>_>
+    // location: std/basic_streambuf<char,std/char_traits<char>_>
     // type: /RTTICompleteObjectLocator
     SHC_3BB0A8C1_0x005B2AF0 = 0x005B2AF0,
     // label: RTTI_Class_Hierarchy_Descriptor
@@ -89293,7 +94075,7 @@ enum {
     // type: /RTTIBaseClassDescriptor
     SHC_3BB0A8C1_0x005B2B1C = 0x005B2B1C,
     // label: RTTI_Complete_Object_Locator
-    // location: std/basic_filebuf<char,struct_std/char_traits<char>_>
+    // location: std/basic_filebuf<char,std/char_traits<char>_>
     // type: /RTTICompleteObjectLocator
     SHC_3BB0A8C1_0x005B2B38 = 0x005B2B38,
     // label: RTTI_Class_Hierarchy_Descriptor
@@ -89373,7 +94155,7 @@ enum {
     // type: /RTTIBaseClassDescriptor
     SHC_3BB0A8C1_0x005B2CA4 = 0x005B2CA4,
     // label: RTTI_Complete_Object_Locator
-    // location: std/basic_ofstream<char,struct_std/char_traits<char>_>
+    // location: std/basic_ofstream<char,std/char_traits<char>_>
     // type: /RTTICompleteObjectLocator
     SHC_3BB0A8C1_0x005B2CC0 = 0x005B2CC0,
     // label: RTTI_Class_Hierarchy_Descriptor
@@ -91837,6 +96619,7 @@ enum {
     // label: RTTI_Type_Descriptor
     // label: class_std::basic_ostream<char,struct_std::char_traits<char>_>_RTTI_Type_Descriptor
     // location:
+    // location: std/basic_ostream<char,std/char_traits<char>_>
     // location: std/basic_ostream<char,struct_std/char_traits<char>_>
     // type: /TypeDescriptor
     SHC_3BB0A8C1_0x00B384C0 = 0x00B384C0,
@@ -91845,6 +96628,7 @@ enum {
     // label: RTTI_Type_Descriptor
     // label: class_std::basic_ios<char,struct_std::char_traits<char>_>_RTTI_Type_Descriptor
     // location:
+    // location: std/basic_ios<char,std/char_traits<char>_>
     // location: std/basic_ios<char,struct_std/char_traits<char>_>
     // type: /TypeDescriptor
     SHC_3BB0A8C1_0x00B384FC = 0x00B384FC,
@@ -91853,6 +96637,7 @@ enum {
     // label: RTTI_Type_Descriptor
     // label: class_std::basic_streambuf<char,struct_std::char_traits<char>_>_RTTI_Type_Descriptor
     // location:
+    // location: std/basic_streambuf<char,std/char_traits<char>_>
     // location: std/basic_streambuf<char,struct_std/char_traits<char>_>
     // type: /TypeDescriptor
     SHC_3BB0A8C1_0x00B38534 = 0x00B38534,
@@ -91861,6 +96646,7 @@ enum {
     // label: RTTI_Type_Descriptor
     // label: class_std::basic_filebuf<char,struct_std::char_traits<char>_>_RTTI_Type_Descriptor
     // location:
+    // location: std/basic_filebuf<char,std/char_traits<char>_>
     // location: std/basic_filebuf<char,struct_std/char_traits<char>_>
     // type: /TypeDescriptor
     SHC_3BB0A8C1_0x00B38570 = 0x00B38570,
@@ -91909,6 +96695,7 @@ enum {
     // label: RTTI_Type_Descriptor
     // label: class_std::basic_ofstream<char,struct_std::char_traits<char>_>_RTTI_Type_Descriptor
     // location:
+    // location: std/basic_ofstream<char,std/char_traits<char>_>
     // location: std/basic_ofstream<char,struct_std/char_traits<char>_>
     // type: /TypeDescriptor
     SHC_3BB0A8C1_0x00B38648 = 0x00B38648,
@@ -92012,6 +96799,9 @@ enum {
     // label: VFX_TauntAnimations
     // location:
     SHC_3BB0A8C1_0x00B3A090 = 0x00B3A090,
+    // label: g_AISpeechBikReactionTable
+    // location:
+    SHC_3BB0A8C1_0x00B3A200 = 0x00B3A200,
     // label: DAT_DifficultyEventMultipliers
     // location:
     SHC_3BB0A8C1_0x00B3B7E0 = 0x00B3B7E0,
@@ -92121,9 +96911,11 @@ enum {
     // type: OpenSHC/AI/AIV/AIVDefinedData
     SHC_3BB0A8C1_0x00B46124 = 0x00B46124,
     // label: DAT_AIVSectionAddressArray
+    // label: DAT_AIVSectionAddressArray_14
     // location:
     SHC_3BB0A8C1_0x00B46128 = 0x00B46128,
     // label: DAT_AIVFileNames
+    // label: DAT_AIVFileNames_16x8x50
     // location:
     SHC_3BB0A8C1_0x00B46358 = 0x00B46358,
     // label: DAT_BuildingLocationFindingOffsetArray
@@ -92699,6 +97491,8 @@ enum {
     SHC_3BB0A8C1_0x00B94350 = 0x00B94350,
     // type: /pointer
     SHC_3BB0A8C1_0x00B94360 = 0x00B94360,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00B94364 = 0x00B94364,
     // type: /pointer
     SHC_3BB0A8C1_0x00B94368 = 0x00B94368,
     // type: /pointer
@@ -92736,9 +97530,21 @@ enum {
     // type: /pointer
     SHC_3BB0A8C1_0x00B943C0 = 0x00B943C0,
     // type: /undefined4
+    SHC_3BB0A8C1_0x00B944F0 = 0x00B944F0,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00B94530 = 0x00B94530,
+    // type: /undefined4
     SHC_3BB0A8C1_0x00B94534 = 0x00B94534,
     // type: /undefined4
+    SHC_3BB0A8C1_0x00B94538 = 0x00B94538,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00B9453C = 0x00B9453C,
+    // type: /undefined4
     SHC_3BB0A8C1_0x00B94540 = 0x00B94540,
+    // label: g_dwCrtDateValue
+    // location:
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00B94544 = 0x00B94544,
     // type: /undefined4
     SHC_3BB0A8C1_0x00B94548 = 0x00B94548,
     // type: /undefined4
@@ -92755,6 +97561,8 @@ enum {
     SHC_3BB0A8C1_0x00B945E4 = 0x00B945E4,
     // type: /undefined4
     SHC_3BB0A8C1_0x00B945E8 = 0x00B945E8,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00B945EC = 0x00B945EC,
     // type: /pointer
     SHC_3BB0A8C1_0x00B94750 = 0x00B94750,
     // type: /pointer
@@ -92779,6 +97587,8 @@ enum {
     SHC_3BB0A8C1_0x00B94B88 = 0x00B94B88,
     // type: /undefined4
     SHC_3BB0A8C1_0x00B94BB8 = 0x00B94BB8,
+    // label: g_dwCrtPerThreadLocaleMask
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B94C78 = 0x00B94C78,
     // type: /undefined4
@@ -92799,10 +97609,16 @@ enum {
     SHC_3BB0A8C1_0x00B94D60 = 0x00B94D60,
     // type: /pointer
     SHC_3BB0A8C1_0x00B94D68 = 0x00B94D68,
+    // label: g_dwCrtNewHandlerSlot
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B94D70 = 0x00B94D70,
+    // label: g_dwCrtTlsIndex
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B94D74 = 0x00B94D74,
+    // label: g_dwCrtMultiThreadLockArray
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B94D80 = 0x00B94D80,
     // type: /undefined4
@@ -92816,17 +97632,23 @@ enum {
     // type: /undefined4
     SHC_3BB0A8C1_0x00B94EB0 = 0x00B94EB0,
     // type: /undefined4
+    SHC_3BB0A8C1_0x00B94ED0 = 0x00B94ED0,
+    // type: /undefined4
     SHC_3BB0A8C1_0x00B95120 = 0x00B95120,
     // type: /undefined4
     SHC_3BB0A8C1_0x00B95128 = 0x00B95128,
     // type: /pointer
     SHC_3BB0A8C1_0x00B9512C = 0x00B9512C,
+    // type: /pointer
+    SHC_3BB0A8C1_0x00B95134 = 0x00B95134,
     // type: /undefined1
     SHC_3BB0A8C1_0x00B951DC = 0x00B951DC,
     // type: /undefined1
     SHC_3BB0A8C1_0x00B951FC = 0x00B951FC,
     // type: /pointer
     SHC_3BB0A8C1_0x00B95218 = 0x00B95218,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00B95220 = 0x00B95220,
     // type: /undefined4
     SHC_3BB0A8C1_0x00B952A8 = 0x00B952A8,
     // type: /undefined4
@@ -92944,7 +97766,15 @@ enum {
     // type: /pointer
     SHC_3BB0A8C1_0x00B953A8 = 0x00B953A8,
     // type: /undefined4
+    SHC_3BB0A8C1_0x00B953C0 = 0x00B953C0,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00B953C4 = 0x00B953C4,
+    // type: /undefined4
     SHC_3BB0A8C1_0x00B953C8 = 0x00B953C8,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00B953CC = 0x00B953CC,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00B953D0 = 0x00B953D0,
     // type: /undefined4
     SHC_3BB0A8C1_0x00B953F8 = 0x00B953F8,
     // type: /undefined4
@@ -92981,6 +97811,8 @@ enum {
     SHC_3BB0A8C1_0x00B95464 = 0x00B95464,
     // type: /undefined4
     SHC_3BB0A8C1_0x00B95468 = 0x00B95468,
+    // label: g_dwCrtFpControl
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B9546C = 0x00B9546C,
     // type: /undefined4
@@ -93020,6 +97852,8 @@ enum {
     // type: /pointer
     SHC_3BB0A8C1_0x00B95760 = 0x00B95760,
     // type: /pointer
+    SHC_3BB0A8C1_0x00B95764 = 0x00B95764,
+    // type: /pointer
     SHC_3BB0A8C1_0x00B95768 = 0x00B95768,
     // type: winnls/MultiByteToWideChar *
     SHC_3BB0A8C1_0x00B9576C = 0x00B9576C,
@@ -93049,12 +97883,18 @@ enum {
     SHC_3BB0A8C1_0x00B95948 = 0x00B95948,
     // type: /int
     SHC_3BB0A8C1_0x00B95950 = 0x00B95950,
+    // label: g_dwCreditsInitFlag
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B95954 = 0x00B95954,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00B95958 = 0x00B95958,
     // label: DAT_UnknownGFXIndex
     // location:
     // type: /int
     SHC_3BB0A8C1_0x00B9595C = 0x00B9595C,
+    // label: g_dwMenuSelectedPlayerSlot
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B95960 = 0x00B95960,
     // label: DAT_MainMenuSwingSwordBool
@@ -93067,6 +97907,8 @@ enum {
     SHC_3BB0A8C1_0x00B95968 = 0x00B95968,
     // type: /int
     SHC_3BB0A8C1_0x00B95AB8 = 0x00B95AB8,
+    // label: g_nMainMenuCurrentItem
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00B95ABC = 0x00B95ABC,
     // label: TIME_IntroVideo_Prepare
@@ -93081,6 +97923,8 @@ enum {
     // location:
     // type: /int[21]
     SHC_3BB0A8C1_0x00B95AC8 = 0x00B95AC8,
+    // label: g_dwGameStartTimeMs
+    // location:
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00B95B1C = 0x00B95B1C,
     // label: DAT_HighlightedSkirmishType
@@ -93099,14 +97943,22 @@ enum {
     // location:
     // type: /int[9]
     SHC_3BB0A8C1_0x00B95B40 = 0x00B95B40,
+    // label: g_nGametypeSelectionFlag
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00B95B64 = 0x00B95B64,
+    // label: g_dwArmySwitchTabIndex
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B95B68 = 0x00B95B68,
     // type: /undefined4
     SHC_3BB0A8C1_0x00B95B6C = 0x00B95B6C,
+    // label: g_dwCreditsScrollCounter
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B95B70 = 0x00B95B70,
+    // label: g_dwMapListScrollRange
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B95B74 = 0x00B95B74,
     // label: DAT_MapNameCache
@@ -93115,6 +97967,8 @@ enum {
     SHC_3BB0A8C1_0x00B95B78 = 0x00B95B78,
     // type: /undefined4
     SHC_3BB0A8C1_0x00B95F64 = 0x00B95F64,
+    // label: g_nMenuViewInitFlag
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00B95F68 = 0x00B95F68,
     // type: /int
@@ -93135,28 +97989,48 @@ enum {
     // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B960C8 = 0x00B960C8,
+    // label: g_bAdvancedOptionsModalState
+    // location:
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00B960CC = 0x00B960CC,
     // label: DAT_IntroTimestamp
     // location:
     // type: /dword
     SHC_3BB0A8C1_0x00B960D8 = 0x00B960D8,
+    // label: g_dwLobbyMapListSelection
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B960DC = 0x00B960DC,
+    // label: g_dwCustomScenarioInitFlag
+    // location:
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00B960E4 = 0x00B960E4,
     // label: DAT_ButtonBackgroundBlendStrength
     // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B960E8 = 0x00B960E8,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00B960EC = 0x00B960EC,
+    // label: g_nLobbyScrollPosition
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00B960F0 = 0x00B960F0,
+    // label: g_dwLobbyMapDescScrollOffset
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B960F4 = 0x00B960F4,
     // type: /undefined4
     SHC_3BB0A8C1_0x00B960F8 = 0x00B960F8,
+    // label: g_dwHistoricMissionRowCount
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B96100 = 0x00B96100,
     // type: /undefined4
     SHC_3BB0A8C1_0x00B96108 = 0x00B96108,
     // type: /undefined4
     SHC_3BB0A8C1_0x00B9610C = 0x00B9610C,
+    // label: g_dwPlacementDragLastTile
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B96110 = 0x00B96110,
     // label: DAT_IntroTransitionStep
@@ -93171,8 +98045,12 @@ enum {
     // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B9611C = 0x00B9611C,
+    // label: g_nGranaryMenuValue
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00B96120 = 0x00B96120,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00B96124 = 0x00B96124,
     // label: Menu_SelectCrusade
     // location:
     // type: OpenSHC/UI/Menu
@@ -93795,26 +98673,44 @@ enum {
     // location:
     // type: OpenSHC/UI/Menu
     SHC_3BB0A8C1_0x00B983C0 = 0x00B983C0,
+    // label: g_bIntroLogosShown
+    // location:
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00B98404 = 0x00B98404,
     // label: BOOL_WasInteracting
     // location:
-    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
+    // type: WinDef/BOOL
     SHC_3BB0A8C1_0x00B98408 = 0x00B98408,
+    // label: g_dwViewKeepCycleIndex
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B9840C = 0x00B9840C,
     // label: TIME_PreviousClick
     // location:
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00B98418 = 0x00B98418,
+    // label: g_nDragSelectAnchorY
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B9841C = 0x00B9841C,
+    // label: g_nDragSelectAnchorX
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B98420 = 0x00B98420,
+    // label: g_nDragSelectActive
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B98424 = 0x00B98424,
+    // label: g_nChapelRenderCounterA
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B98428 = 0x00B98428,
+    // label: g_nChapelRenderCounterB
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B9842C = 0x00B9842C,
+    // label: g_nChapelRenderCounterC
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B98430 = 0x00B98430,
     // label: DAT_WifeUnitType
@@ -93825,6 +98721,8 @@ enum {
     // location:
     // type: OpenSHC/Map/Units/UnitTypeInt
     SHC_3BB0A8C1_0x00B98438 = 0x00B98438,
+    // label: g_nChapelMarriageResult
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B9843C = 0x00B9843C,
     // label: DAT_HusbandID
@@ -93835,6 +98733,8 @@ enum {
     // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B98444 = 0x00B98444,
+    // label: g_nReligionMenuRenderCounter
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B98448 = 0x00B98448,
     // type: /int
@@ -93843,12 +98743,16 @@ enum {
     SHC_3BB0A8C1_0x00B98450 = 0x00B98450,
     // type: /undefined4
     SHC_3BB0A8C1_0x00B98454 = 0x00B98454,
+    // label: g_nArmyMenuRenderCounter
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B9845C = 0x00B9845C,
     // label: DAT_UnitValueLossesPerEnemyPlayer
     // location:
     // type: /int[9]
     SHC_3BB0A8C1_0x00B98460 = 0x00B98460,
+    // label: g_nGenieSpeechStateA
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00B98484 = 0x00B98484,
     // label: Dat_UnitValueLossesHistoryPerEnemyPlayer
@@ -93974,6 +98878,8 @@ enum {
     // location:
     // type: /dword
     SHC_3BB0A8C1_0x00B98660 = 0x00B98660,
+    // label: g_nGenieSpeechStateC
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00B98664 = 0x00B98664,
     // label: DAT_CurrentPlayerRanking
@@ -94015,29 +98921,43 @@ enum {
     // label: DAT_StoredLossesTotal_10
     // location:
     SHC_3BB0A8C1_0x00B98694 = 0x00B98694,
+    // label: g_nGenieSpeechStateB
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00B98698 = 0x00B98698,
+    // label: g_nSfxVoiceCounter
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B9869C = 0x00B9869C,
     // label: DAT_LastSpeechSFXFilename
     // location:
     // type: /char[64]
     SHC_3BB0A8C1_0x00B986A0 = 0x00B986A0,
+    // label: g_dwBattleEndMusicState
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B986E0 = 0x00B986E0,
     // label: DAT_SFX_Cooldown_WeAreUnderAttack
     // location:
     SHC_3BB0A8C1_0x00B986E4 = 0x00B986E4,
+    // label: g_fVolumeTweakAccumA
+    // location:
     // type: /float
     SHC_3BB0A8C1_0x00B986E8 = 0x00B986E8,
+    // label: g_fVolumeTweakAccumB
+    // location:
     // type: /float
     SHC_3BB0A8C1_0x00B986EC = 0x00B986EC,
+    // label: g_dwSpeechMuteFlag
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00B986F0 = 0x00B986F0,
     // label: DAT_GL_Counter
     // location:
     // type: /int
     SHC_3BB0A8C1_0x00B986F4 = 0x00B986F4,
+    // label: g_fAmbientFadeAccum
+    // location:
     // type: /float
     SHC_3BB0A8C1_0x00B986F8 = 0x00B986F8,
     // label: DAT_SFXFadeState
@@ -94048,8 +98968,12 @@ enum {
     // location:
     // type: /float
     SHC_3BB0A8C1_0x00B98700 = 0x00B98700,
+    // label: g_fAmbientFadeCurrent
+    // location:
     // type: /float
     SHC_3BB0A8C1_0x00B98704 = 0x00B98704,
+    // label: g_dwAmbientFadeValue
+    // location:
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00B98708 = 0x00B98708,
     // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
@@ -94060,7 +98984,7 @@ enum {
     SHC_3BB0A8C1_0x00B98710 = 0x00B98710,
     // label: DAT_GMImageHeaders
     // location:
-    // type: OpenSHC/IO/Graphics/ImageHeaders
+    // type: OpenSHC/IO/Graphics/ImageHeader[66000]
     SHC_3BB0A8C1_0x00B98790 = 0x00B98790,
     // type: /pointer[32]
     SHC_3BB0A8C1_0x00C9A490 = 0x00C9A490,
@@ -94104,24 +99028,34 @@ enum {
     // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF2960 = 0x00DF2960,
+    // label: g_dwHelpBorderXOffset
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF2964 = 0x00DF2964,
+    // label: g_nHelpBorderHeightInset
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00DF2968 = 0x00DF2968,
+    // label: g_dwHelpBorderYOffset
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF296C = 0x00DF296C,
+    // label: g_nHelpBorderWidthInset
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00DF2970 = 0x00DF2970,
     // label: HLP_WCHAR_Buffer
     // location:
-    // type: /wchar_t[256]
+    // type: ntddk_32/WCHAR[256]
     SHC_3BB0A8C1_0x00DF2978 = 0x00DF2978,
-    // type: /wchar_t[1000]
+    // type: winapi_32/WCHAR[1000]
     SHC_3BB0A8C1_0x00DF2B78 = 0x00DF2B78,
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF3348 = 0x00DF3348,
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF334C = 0x00DF334C,
+    // label: g_nBuildingMenuMin1A
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF3350 = 0x00DF3350,
     // label: DAT_DisableMercPostPortraits
@@ -94130,16 +99064,28 @@ enum {
     SHC_3BB0A8C1_0x00DF3354 = 0x00DF3354,
     // label: DAT_EnoughGoldForRequestedUnit
     // location:
-    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
+    // type: WinDef/BOOL
     SHC_3BB0A8C1_0x00DF3358 = 0x00DF3358,
+    // label: g_nBuildingMenuMin1B
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00DF335C = 0x00DF335C,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00DF3360 = 0x00DF3360,
+    // label: g_dwLastPortraitClickTime
+    // location:
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00DF3364 = 0x00DF3364,
+    // label: g_nLastPortraitClickId
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00DF3368 = 0x00DF3368,
+    // label: g_nLastBarrackUnitId
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF3374 = 0x00DF3374,
+    // label: g_dwLastBarrackClickTime
+    // location:
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00DF3378 = 0x00DF3378,
     // label: TIME_ClickedMercUnitTypeMoment
@@ -94283,7 +99229,7 @@ enum {
     // label: DAT_Music_TotalTroopValue
     // location:
     SHC_3BB0A8C1_0x00DF37F4 = 0x00DF37F4,
-    // label: SEC_Section1079
+    // label: SEC_BattleMusicTensionState1079
     // location:
     SHC_3BB0A8C1_0x00DF37FC = 0x00DF37FC,
     // label: SND_SomeTimerResolution
@@ -94361,8 +99307,14 @@ enum {
     // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF4238 = 0x00DF4238,
+    // label: g_dwRoundtableSelection
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF423C = 0x00DF423C,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00DF4240 = 0x00DF4240,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00DF4244 = 0x00DF4244,
     // label: DAT_LobbyAddAICurrentlyHoveredAI
     // location:
     // type: /undefined4
@@ -94381,6 +99333,10 @@ enum {
     SHC_3BB0A8C1_0x00DF426C = 0x00DF426C,
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF4284 = 0x00DF4284,
+    // label: g_dwRoundtableInteractFlag
+    // location:
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00DF4288 = 0x00DF4288,
     // label: DAT_SentOrRequestedGoodsAmount
     // location:
     // type: /undefined4
@@ -94389,13 +99345,15 @@ enum {
     // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF4294 = 0x00DF4294,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00DF4298 = 0x00DF4298,
     // label: DAT_AlliesCount
     // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF429C = 0x00DF429C,
     // label: BOOL_RelatedToInitialGranaryAndKeepPlacement
     // location:
-    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
+    // type: ntddk_32/BOOL
     SHC_3BB0A8C1_0x00DF42A0 = 0x00DF42A0,
     // label: DAT_ModalMenuArrayPointerToStackTop
     // location:
@@ -94820,10 +99778,14 @@ enum {
     SHC_3BB0A8C1_0x00DF51C8 = 0x00DF51C8,
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF51F0 = 0x00DF51F0,
+    // label: g_nAlliesMenuValue
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF51F4 = 0x00DF51F4,
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF51F8 = 0x00DF51F8,
+    // label: g_nAlliesOrderValue
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF51FC = 0x00DF51FC,
     // type: /undefined4
@@ -94840,16 +99802,24 @@ enum {
     // location:
     // type: /int
     SHC_3BB0A8C1_0x00DF5528 = 0x00DF5528,
+    // label: g_dwPlayerInfoHoverActive
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF5530 = 0x00DF5530,
+    // label: g_nCurrentSignpostIndex
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF5538 = 0x00DF5538,
     // label: DAT_CheatCodeStringTrackerIndex
     // location:
     // type: /int
     SHC_3BB0A8C1_0x00DF553C = 0x00DF553C,
+    // label: g_dwTutorialPointerTimer
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF5540 = 0x00DF5540,
+    // label: g_bTutorialTimerStarted
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF5544 = 0x00DF5544,
     // label: INT_DisableTutorialRestrictions
@@ -94862,38 +99832,64 @@ enum {
     SHC_3BB0A8C1_0x00DF5550 = 0x00DF5550,
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF5554 = 0x00DF5554,
+    // label: g_dwTutorialGranaryHintActive
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF5558 = 0x00DF5558,
+    // label: g_dwTutorialMaxStep
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF555C = 0x00DF555C,
+    // label: g_dwTutorialManorhouseHintActive
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF5560 = 0x00DF5560,
+    // label: g_dwTutorialHighlightActive
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF5564 = 0x00DF5564,
+    // label: g_dwTutorialHighlightTime
+    // location:
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00DF5568 = 0x00DF5568,
+    // label: g_dwTutorialBoxPage
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF556C = 0x00DF556C,
     // label: DAT_FileDoesntExist
     // location:
     // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
     SHC_3BB0A8C1_0x00DF5570 = 0x00DF5570,
+    // label: g_nTutorialEventFlagA
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00DF5574 = 0x00DF5574,
     // label: TUT_RotateMapHappened
     // location:
     // type: /int
     SHC_3BB0A8C1_0x00DF5578 = 0x00DF5578,
+    // label: g_nTutorialEventCounterA
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00DF557C = 0x00DF557C,
+    // label: g_nTutorialEventFlagB
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00DF5580 = 0x00DF5580,
+    // label: g_nTutorialEventCounterB
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00DF5584 = 0x00DF5584,
+    // label: g_dwTutorialLastBuildingAction
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF5588 = 0x00DF5588,
+    // label: g_dwTutorialLastBuildingType
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF558C = 0x00DF558C,
+    // label: g_dwTutorialStateMachineStep
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF5590 = 0x00DF5590,
     // label: DAT_CopyOfScenarioGold
@@ -94906,8 +99902,22 @@ enum {
     // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF5638 = 0x00DF5638,
+    // label: g_dwTutorialBoxAnimCounter
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF5644 = 0x00DF5644,
+    // label: g_bTutorialBoxState
+    // location:
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00DF5648 = 0x00DF5648,
+    // label: g_nTutorialStateCurrent
+    // location:
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00DF5650 = 0x00DF5650,
+    // label: g_nTutorialStatePrev
+    // location:
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00DF5654 = 0x00DF5654,
     // label: DAT_SkMasterDataEntry
     // location:
     // type: OpenSHC/IO/SkMasterDataEntry
@@ -94944,30 +99954,46 @@ enum {
     SHC_3BB0A8C1_0x00EB0AF0 = 0x00EB0AF0,
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00EB0B18 = 0x00EB0B18,
+    // label: g_dwHistoricPictureGfx
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00EB0B20 = 0x00EB0B20,
+    // label: g_dwScenarioDescScrollPage
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00EB0B24 = 0x00EB0B24,
     // type: /int[48][4]
     SHC_3BB0A8C1_0x00EB0B28 = 0x00EB0B28,
+    // label: g_nScrollingTextY
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00EB0E28 = 0x00EB0E28,
     // type: /float
     SHC_3BB0A8C1_0x00EB0E2C = 0x00EB0E2C,
+    // label: g_nCreditsCmdField5
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00EB0E30 = 0x00EB0E30,
     // label: DAT_RenderRelatedY
     // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00EB0E3C = 0x00EB0E3C,
+    // label: g_dwCreditsPhase
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00EB0E40 = 0x00EB0E40,
+    // label: g_nGreatestLordScreenFlag
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00EB0E44 = 0x00EB0E44,
     // type: /int[250]
     SHC_3BB0A8C1_0x00EB0E48 = 0x00EB0E48,
+    // label: g_nCreditsSequenceIndex
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00EB1230 = 0x00EB1230,
+    // label: g_nCreditsCmdField4
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00EB1234 = 0x00EB1234,
     // type: /int[40]
@@ -94978,50 +100004,88 @@ enum {
     SHC_3BB0A8C1_0x00EB12D8 = 0x00EB12D8,
     // type: /int[250]
     SHC_3BB0A8C1_0x00EB96D8 = 0x00EB96D8,
+    // label: g_nCreditsAdvanceIndex
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00EB9AC0 = 0x00EB9AC0,
+    // label: g_dwCreditsAdvanceTimer
+    // location:
     // type: /dword
     SHC_3BB0A8C1_0x00EB9AC4 = 0x00EB9AC4,
     // label: CHAR_ARRAY_00eb9ac8
     // location:
     // type: /char[32]
     SHC_3BB0A8C1_0x00EB9AC8 = 0x00EB9AC8,
+    // label: g_nMapFileHeaderLoaded
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00EB9AE8 = 0x00EB9AE8,
     // label: DAT_UnknownBinkIndex
     // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00EB9AF0 = 0x00EB9AF0,
+    // label: g_nCreditsCmdX
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00EB9AF4 = 0x00EB9AF4,
+    // label: g_dwGreatestLordPageIndex
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00EB9AF8 = 0x00EB9AF8,
     // type: /int[4]
     SHC_3BB0A8C1_0x00EB9AFC = 0x00EB9AFC,
     // type: /undefined4
     SHC_3BB0A8C1_0x00EB9B0C = 0x00EB9B0C,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00EB9B10 = 0x00EB9B10,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00EB9B14 = 0x00EB9B14,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00EB9B18 = 0x00EB9B18,
+    // label: g_fTrimMenuStringScale
+    // location:
     // type: /float
     SHC_3BB0A8C1_0x00EB9B1C = 0x00EB9B1C,
+    // label: g_nTrimMenuStringFlag
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00EB9B20 = 0x00EB9B20,
+    // label: g_fTrimMenuStringWidth
+    // location:
     // type: /float
     SHC_3BB0A8C1_0x00EB9B24 = 0x00EB9B24,
+    // label: g_nTrimMenuStringResult
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00EB9B28 = 0x00EB9B28,
+    // label: g_nTrimMenuStringIndex
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00EB9B2C = 0x00EB9B2C,
+    // label: g_nTrimMenuStringParam2
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00EB9B30 = 0x00EB9B30,
+    // label: g_nTrimMenuStringParam3
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00EB9B34 = 0x00EB9B34,
+    // label: g_nTrimMenuStringAllowedWidth
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00EB9B38 = 0x00EB9B38,
+    // label: g_nTrimMenuStringParam5
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00EB9B3C = 0x00EB9B3C,
+    // label: g_nTrimMenuStringFontSize
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00EB9B40 = 0x00EB9B40,
     // type: /int
     SHC_3BB0A8C1_0x00EB9B44 = 0x00EB9B44,
+    // label: g_nCrusadeMapFlag
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00EB9B48 = 0x00EB9B48,
     // type: /int
@@ -95034,6 +100098,8 @@ enum {
     // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00EB9B58 = 0x00EB9B58,
+    // label: g_dwSkirmishAIOpponentCount
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00EB9B60 = 0x00EB9B60,
     // label: DAT_FinalResultsOrderByColumn
@@ -95052,6 +100118,8 @@ enum {
     SHC_3BB0A8C1_0x00EC02F4 = 0x00EC02F4,
     // type: OpenSHC/Rendering/CreditsRelatedStructure[24]
     SHC_3BB0A8C1_0x00EC0348 = 0x00EC0348,
+    // label: g_dwGreatestLordScreenMode
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00EC082C = 0x00EC082C,
     // label: DAT_CurrentMenuID_3
@@ -95062,6 +100130,8 @@ enum {
     SHC_3BB0A8C1_0x00EC0834 = 0x00EC0834,
     // type: /int
     SHC_3BB0A8C1_0x00EC0838 = 0x00EC0838,
+    // label: g_nCreditsDelayTimer
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00EC083C = 0x00EC083C,
     // type: OpenSHC/IO/Graphics/GFXRelatedBuffer1
@@ -95074,6 +100144,8 @@ enum {
     SHC_3BB0A8C1_0x00ED2778 = 0x00ED2778,
     // type: /int
     SHC_3BB0A8C1_0x00ED277C = 0x00ED277C,
+    // label: g_dwHistoricPictureState
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED2780 = 0x00ED2780,
     // type: /undefined4
@@ -95082,30 +100154,60 @@ enum {
     SHC_3BB0A8C1_0x00ED278C = 0x00ED278C,
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED2794 = 0x00ED2794,
+    // label: g_dwScenarioDescriptionMode
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED2798 = 0x00ED2798,
+    // label: g_nGameLostState
+    // location:
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00ED279C = 0x00ED279C,
+    // label: g_dwRankingGamesSelection
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED27A0 = 0x00ED27A0,
+    // label: g_nCreditsPlaybackState
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00ED27A4 = 0x00ED27A4,
+    // label: g_dwCrusadeMapTimeMs
+    // location:
     // type: /dword
     SHC_3BB0A8C1_0x00ED27A8 = 0x00ED27A8,
     // type: /int
     SHC_3BB0A8C1_0x00ED27B0 = 0x00ED27B0,
+    // label: g_dwMissionTransitionStartTime
+    // location:
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00ED27B4 = 0x00ED27B4,
+    // label: g_nCrusadeEndscreenState
+    // location:
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00ED27B8 = 0x00ED27B8,
+    // label: g_dwScenarioDescEditMode
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED27BC = 0x00ED27BC,
     // label: DAT_SkirmishTrailRelated1
     // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED27C0 = 0x00ED27C0,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00ED27C4 = 0x00ED27C4,
     // label: DAT_MissionScores
     // location:
     // type: /int[10]
     SHC_3BB0A8C1_0x00ED27C8 = 0x00ED27C8,
     // type: /int[250]
     SHC_3BB0A8C1_0x00ED27F0 = 0x00ED27F0,
+    // label: g_nCreditsAdvanceField
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED2BD8 = 0x00ED2BD8,
+    // label: g_nCrusadeMapState
+    // location:
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00ED2BDC = 0x00ED2BDC,
     // type: /int[250]
     SHC_3BB0A8C1_0x00ED2BE0 = 0x00ED2BE0,
     // type: /int[40]
@@ -95118,31 +100220,56 @@ enum {
     SHC_3BB0A8C1_0x00ED306C = 0x00ED306C,
     // type: /int[40]
     SHC_3BB0A8C1_0x00ED3070 = 0x00ED3070,
+    // label: g_nCampaignHotspotsLoaded
+    // location:
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00ED3110 = 0x00ED3110,
+    // label: g_nCampaignAnimReady
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00ED3114 = 0x00ED3114,
+    // label: g_nGreatestLordSaveNumber
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED3118 = 0x00ED3118,
+    // label: g_dwCrusadeMapTimerB
+    // location:
     // type: /dword
     SHC_3BB0A8C1_0x00ED311C = 0x00ED311C,
+    // label: g_dwRankingGamesCountdown
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED3120 = 0x00ED3120,
+    // label: g_dwCampaignMapSelection
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED3124 = 0x00ED3124,
     // label: DAT_TacticalPowersHelpTextDisplayBool
     // location:
+    // type: /undefined1
     SHC_3BB0A8C1_0x00ED3128 = 0x00ED3128,
     // type: /float
     SHC_3BB0A8C1_0x00ED312C = 0x00ED312C,
+    // label: g_dwCrusadeMapAnimTime
+    // location:
     // type: /dword
     SHC_3BB0A8C1_0x00ED3138 = 0x00ED3138,
     // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
     SHC_3BB0A8C1_0x00ED313C = 0x00ED313C,
+    // label: g_nCampaignAnimFrameCounter
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00ED3144 = 0x00ED3144,
+    // label: g_dwRenderCurrentTileLogic
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED3148 = 0x00ED3148,
+    // label: g_dwRenderCurrentTileWallGfx
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED314C = 0x00ED314C,
+    // label: g_dwRenderTileScreenY
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED3154 = 0x00ED3154,
     // label: DAT_RenderedUnitOwner
@@ -95163,8 +100290,12 @@ enum {
     // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED3168 = 0x00ED3168,
+    // label: g_nCurrentGmImageIndex
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED316C = 0x00ED316C,
+    // label: g_dwSpriteBlitClipCounter
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED3170 = 0x00ED3170,
     // label: DAT_GmImageAddressToBeRendered
@@ -95176,6 +100307,8 @@ enum {
     // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED3178 = 0x00ED3178,
+    // label: g_dwSpriteBlitRowMode
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED317C = 0x00ED317C,
     // label: DAT_CurrentlyRenderedSpriteID
@@ -95190,6 +100323,8 @@ enum {
     // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED319C = 0x00ED319C,
+    // label: g_dwTreeUpdateTime
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED31A0 = 0x00ED31A0,
     // label: DAT_MenuView_TriggerPrepare
@@ -95214,7 +100349,7 @@ enum {
     SHC_3BB0A8C1_0x00ED31B4 = 0x00ED31B4,
     // label: DAT_ButtonCurrentlyInteracting
     // location:
-    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
+    // type: ntddk_32/BOOL
     SHC_3BB0A8C1_0x00ED31B8 = 0x00ED31B8,
     // label: DAT_CurrentButtonGmDataIndex
     // location:
@@ -95236,6 +100371,8 @@ enum {
     // location:
     // type: /int
     SHC_3BB0A8C1_0x00ED31CC = 0x00ED31CC,
+    // label: g_nMinimapInteractionValue
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED31D0 = 0x00ED31D0,
     // label: BOOL_CurrentMenuClickState
@@ -95258,6 +100395,8 @@ enum {
     // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00EE0FB0 = 0x00EE0FB0,
+    // label: g_nSpecificUnitResult
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00EE0FB4 = 0x00EE0FB4,
     // label: DAT_Tribe_HighestID
@@ -95276,12 +100415,20 @@ enum {
     // location:
     // type: /uint
     SHC_3BB0A8C1_0x00EE0FC8 = 0x00EE0FC8,
+    // label: g_dwLastGranaryWarningTime
+    // location:
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00EE0FCC = 0x00EE0FCC,
+    // label: g_dwLastStockpileFullNoiseTime
+    // location:
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00EE0FD4 = 0x00EE0FD4,
-    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
+    // label: g_bStockpileFullNoiseState
+    // location:
+    // type: WinDef/BOOL
     SHC_3BB0A8C1_0x00EE0FD8 = 0x00EE0FD8,
+    // label: g_dwLastStockpileFullVoiceTime
+    // location:
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00EE0FDC = 0x00EE0FDC,
     // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
@@ -95314,38 +100461,68 @@ enum {
     SHC_3BB0A8C1_0x00EE1018 = 0x00EE1018,
     // type: /undefined4
     SHC_3BB0A8C1_0x00EE101C = 0x00EE101C,
+    // label: g_nMarriageExcludeUnitA
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00EE1028 = 0x00EE1028,
+    // label: g_nMarriageExcludeUnitB
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00EE102C = 0x00EE102C,
+    // label: g_nThoughtBubbleState
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00EE1030 = 0x00EE1030,
+    // label: g_nThoughtBubbleCounter
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00EE1034 = 0x00EE1034,
+    // label: g_nLastThoughtBubbleUnitId
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00EE1038 = 0x00EE1038,
     // label: TIME_LastGhostSoundMoment
     // location:
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00EE103C = 0x00EE103C,
+    // label: g_dwLastSiegeTowerActionTime
+    // location:
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00EE1040 = 0x00EE1040,
+    // label: g_dwLastBatteringRamActionTime
+    // location:
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00EE1044 = 0x00EE1044,
+    // label: g_dwLastMotherActionTimeA
+    // location:
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00EE1048 = 0x00EE1048,
+    // label: g_dwLastMotherActionTimeB
+    // location:
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00EE104C = 0x00EE104C,
+    // label: g_dwLastSpearmanActionTimeA
+    // location:
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00EE1050 = 0x00EE1050,
+    // label: g_dwLastSpearmanActionTimeB
+    // location:
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00EE1054 = 0x00EE1054,
+    // label: g_dwLastLionActionTime
+    // location:
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00EE1058 = 0x00EE1058,
+    // label: g_dwLastLordActionTime
+    // location:
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00EE105C = 0x00EE105C,
+    // label: g_dwLastSlaveActionTime
+    // location:
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00EE1060 = 0x00EE1060,
+    // label: g_dwLastAssassinActionTime
+    // location:
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00EE1064 = 0x00EE1064,
     // label: TIME_Sum_1
@@ -95356,8 +100533,12 @@ enum {
     // location:
     // type: OpenSHC/UI/BottomLeftTextDisplayState
     SHC_3BB0A8C1_0x00EE106C = 0x00EE106C,
+    // label: g_nUnitActionButtonX
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00EE1090 = 0x00EE1090,
+    // label: g_nUnitActionButtonY
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00EE1094 = 0x00EE1094,
     // label: DAT_MissingResourceState
@@ -95396,51 +100577,73 @@ enum {
     // label: DAT_WRS_Height
     // location:
     SHC_3BB0A8C1_0x00EE19F1 = 0x00EE19F1,
+    // label: FLAG_JokeAIMessage00
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00EE2350 = 0x00EE2350,
     // label: FLAG_ChristmasAIMessage01to04
     // location:
-    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
+    // type: WinDef/BOOL
     SHC_3BB0A8C1_0x00EE2354 = 0x00EE2354,
+    // label: FLAG_JokeAIMessage02
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00EE2358 = 0x00EE2358,
+    // label: FLAG_JokeAIMessage03
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00EE235C = 0x00EE235C,
+    // label: FLAG_JokeAIMessage04
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00EE2360 = 0x00EE2360,
     // label: FLAG_JokeAIMessage05
     // location:
-    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
+    // type: WinDef/BOOL
     SHC_3BB0A8C1_0x00EE2364 = 0x00EE2364,
     // label: FLAG_JokeAIMessage06
     // location:
-    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
+    // type: WinDef/BOOL
     SHC_3BB0A8C1_0x00EE2368 = 0x00EE2368,
+    // label: FLAG_JokeAIMessage07
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00EE236C = 0x00EE236C,
+    // label: FLAG_JokeAIMessage08
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00EE2370 = 0x00EE2370,
     // label: FLAG_JokeAIMessage09
     // location:
-    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
+    // type: WinDef/BOOL
     SHC_3BB0A8C1_0x00EE2374 = 0x00EE2374,
+    // label: FLAG_JokeAIMessage10
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00EE2378 = 0x00EE2378,
+    // label: FLAG_JokeAIMessage11
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00EE237C = 0x00EE237C,
     // label: FLAG_JokeAIMessage12
     // location:
-    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
+    // type: WinDef/BOOL
     SHC_3BB0A8C1_0x00EE2380 = 0x00EE2380,
+    // label: FLAG_JokeAIMessage13
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00EE2384 = 0x00EE2384,
+    // label: FLAG_JokeAIMessage14
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00EE2388 = 0x00EE2388,
+    // label: FLAG_JokeAIMessage15
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x00EE238C = 0x00EE238C,
     // label: FLAG_JokeAIMessage16
     // location:
-    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
+    // type: WinDef/BOOL
     SHC_3BB0A8C1_0x00EE2390 = 0x00EE2390,
     // label: TIME_ReceivedMessage_1
     // location:
@@ -95857,7 +101060,7 @@ enum {
     // label: DAT_LoadedSoundsCountAndIndex
     // location:
     SHC_3BB0A8C1_0x0112AF3C = 0x0112AF3C,
-    // label: SEC_Section1055
+    // label: SEC_CurrentSoundTrackState1055
     // location:
     SHC_3BB0A8C1_0x0112B044 = 0x0112B044,
     // label: DAT_CurrentSoundID
@@ -95917,10 +101120,10 @@ enum {
     // label: SEC_PlayerDatas
     // location:
     SHC_3BB0A8C1_0x0115BDF8 = 0x0115BDF8,
-    // label: SEC_Section1023
+    // label: SEC_MapSaveDataSection1023
     // location:
     SHC_3BB0A8C1_0x0117C78C = 0x0117C78C,
-    // label: SEC_Section1024
+    // label: SEC_GameTickState1024
     // location:
     SHC_3BB0A8C1_0x011BC95C = 0x011BC95C,
     // label: DAT_BitMapState
@@ -95934,6 +101137,12 @@ enum {
     // label: DAT_MapHeaderCache
     // location:
     SHC_3BB0A8C1_0x011BF144 = 0x011BF144,
+    // label: g_userDataPathOverrideFlag
+    // location:
+    SHC_3BB0A8C1_0x011BF90A = 0x011BF90A,
+    // label: g_userDataPathOverride
+    // location:
+    SHC_3BB0A8C1_0x011BF90B = 0x011BF90B,
     // label: DAT_CurrentActiveResourceID
     // location:
     SHC_3BB0A8C1_0x011BFCF4 = 0x011BFCF4,
@@ -96135,7 +101344,7 @@ enum {
     // label: SEC_SiegeInformation
     // location:
     SHC_3BB0A8C1_0x01653944 = 0x01653944,
-    // label: SEC_Section1067
+    // label: SEC_SiegeScoringConfig1067
     // location:
     SHC_3BB0A8C1_0x01653994 = 0x01653994,
     // label: SEC_StartingPopularity
@@ -96177,7 +101386,7 @@ enum {
     // label: SEC_EventsExtra
     // location:
     SHC_3BB0A8C1_0x0165F028 = 0x0165F028,
-    // label: SEC_Section1065
+    // label: SEC_TraderSettings1065
     // location:
     SHC_3BB0A8C1_0x01666D28 = 0x01666D28,
     // label: DAT_MapU3Int0
@@ -96189,13 +101398,13 @@ enum {
     // label: DAT_MapU3_MapType2_2Unk
     // location:
     SHC_3BB0A8C1_0x01666D94 = 0x01666D94,
-    // label: SEC_Section1090
+    // label: SEC_TimeUntilVictoryTotal1090
     // location:
     SHC_3BB0A8C1_0x01666D98 = 0x01666D98,
-    // label: SEC_Section1080
+    // label: SEC_TimeUntilVictoryElapsed1080
     // location:
     SHC_3BB0A8C1_0x01666D9C = 0x01666D9C,
-    // label: SEC_Section1081
+    // label: SEC_TimeUntilVictoryRelated1081
     // location:
     SHC_3BB0A8C1_0x01666DA0 = 0x01666DA0,
     // label: DAT_CurrentEventID
@@ -96243,7 +101452,7 @@ enum {
     // label: ALG_cls_0x519cc0_tile
     // location:
     SHC_3BB0A8C1_0x01763350 = 0x01763350,
-    // label: SEC_Section1091
+    // label: SEC_AttackInfoState1091
     // location:
     SHC_3BB0A8C1_0x01763354 = 0x01763354,
     // label: DAT_AIVState
@@ -96292,7 +101501,7 @@ enum {
     // label: DAT_AIV_InvalidBuildingCounter
     // location:
     SHC_3BB0A8C1_0x018C34C0 = 0x018C34C0,
-    // label: SEC_Section1115
+    // label: SEC_MapWoodAvailability1115
     // location:
     SHC_3BB0A8C1_0x018C34C4 = 0x018C34C4,
     // label: SEC_HeatMaps
@@ -96381,7 +101590,7 @@ enum {
     // label: DAT_CurrentGameMode
     // location:
     SHC_3BB0A8C1_0x0191DD80 = 0x0191DD80,
-    // label: SEC_Section1106
+    // label: SEC_MultiplayerLagState1106
     // location:
     SHC_3BB0A8C1_0x0191DD84 = 0x0191DD84,
     // label: DPLAY_PlayerNameStructure
@@ -96607,7 +101816,7 @@ enum {
     // label: DAT_SkirmishSettingRelated
     // location:
     SHC_3BB0A8C1_0x01A24658 = 0x01A24658,
-    // label: SEC_Section1084
+    // label: SEC_AdvancedRecruitToggle1084
     // location:
     SHC_3BB0A8C1_0x01A2465C = 0x01A2465C,
     // label: SEC_CurrentAdvantageBalance
@@ -96634,7 +101843,7 @@ enum {
     // label: DAT_ChatTauntOrMessage
     // location:
     SHC_3BB0A8C1_0x01A269F0 = 0x01A269F0,
-    // label: SEC_Section1093
+    // label: SEC_SkirmishPointsOption
     // location:
     SHC_3BB0A8C1_0x01A269F4 = 0x01A269F4,
     // label: DAT_AutoSaveEveryMinutes
@@ -96753,22 +101962,22 @@ enum {
     // label: SEC_GfxLayer
     // location:
     SHC_3BB0A8C1_0x01AE5688 = 0x01AE5688,
-    // label: SEC_TileMap1033
+    // label: SEC_AlphaGFXLayer1033
     // location:
     SHC_3BB0A8C1_0x01B0CAA8 = 0x01B0CAA8,
     // label: DAT_TileMapUnknown0
     // location:
     SHC_3BB0A8C1_0x01B33EC8 = 0x01B33EC8,
-    // label: SEC_TileMap1002
+    // label: SEC_PillarGFXLayer1002
     // location:
     SHC_3BB0A8C1_0x01B5B2E8 = 0x01B5B2E8,
-    // label: SEC_TileMap1009
+    // label: SEC_WallGFXLayer1009
     // location:
     SHC_3BB0A8C1_0x01B82708 = 0x01B82708,
     // label: DAT_TileMapUnknown1
     // location:
     SHC_3BB0A8C1_0x01BA9B28 = 0x01BA9B28,
-    // label: SEC_TileMap1008
+    // label: SEC_RandomLayer1008
     // location:
     SHC_3BB0A8C1_0x01BD0F48 = 0x01BD0F48,
     // label: SEC_LogicalTileMap1
@@ -96786,7 +101995,7 @@ enum {
     // label: SEC_BuildingID_TileMap
     // location:
     SHC_3BB0A8C1_0x01C95BB8 = 0x01C95BB8,
-    // label: SEC_TileMap1049
+    // label: SEC_BuildingWasLayer1049
     // location:
     SHC_3BB0A8C1_0x01CBCFD8 = 0x01CBCFD8,
     // label: SEC_UnitID_TileMap
@@ -96795,13 +102004,13 @@ enum {
     // label: EntityLayer
     // location:
     SHC_3BB0A8C1_0x01CF7E08 = 0x01CF7E08,
-    // label: SEC_TileMap1118
+    // label: SEC_EntityLayerLT25_1118
     // location:
     SHC_3BB0A8C1_0x01D1F228 = 0x01D1F228,
     // label: SEC_TerrainHeightTileMap1005
     // location:
     SHC_3BB0A8C1_0x01D32C38 = 0x01D32C38,
-    // label: SEC_TileMap1045
+    // label: SEC_DefaultHeightLayer1045
     // location:
     SHC_3BB0A8C1_0x01D46648 = 0x01D46648,
     // label: WallOwnerLayer
@@ -96810,16 +102019,16 @@ enum {
     // label: DAT_TileMapUnknown3
     // location:
     SHC_3BB0A8C1_0x01D6DA68 = 0x01D6DA68,
-    // label: SEC_TileMap1006
+    // label: SEC_ShowHiLayer1006
     // location:
     SHC_3BB0A8C1_0x01D81478 = 0x01D81478,
-    // label: SEC_TileMap1007
+    // label: SEC_MiscDisplayLayer1007
     // location:
     SHC_3BB0A8C1_0x01D94E88 = 0x01D94E88,
     // label: SEC_WallDamageAndWheatState_TileMap
     // location:
     SHC_3BB0A8C1_0x01DBC2A8 = 0x01DBC2A8,
-    // label: SEC_TileMap1036
+    // label: SEC_MacroLayer1036
     // location:
     SHC_3BB0A8C1_0x01DCFCB8 = 0x01DCFCB8,
     // label: SEC_SeparateArea_TileMap
@@ -96837,16 +102046,16 @@ enum {
     // label: ALG_PathFindingFlagTileMap
     // location:
     SHC_3BB0A8C1_0x01E6CD38 = 0x01E6CD38,
-    // label: SEC_TileMap1028
+    // label: SEC_AIZoneLayer1028
     // location:
     SHC_3BB0A8C1_0x01E94158 = 0x01E94158,
-    // label: SEC_TileMap1029
+    // label: SEC_AIInfoLayer1029
     // location:
     SHC_3BB0A8C1_0x01EA7B68 = 0x01EA7B68,
-    // label: SEC_TileMap1103
+    // label: SEC_UnitDeathHeatMap1103
     // location:
     SHC_3BB0A8C1_0x01EBB578 = 0x01EBB578,
-    // label: SEC_TileMap1104
+    // label: SEC_AttackPathMarkerLayer1104
     // location:
     SHC_3BB0A8C1_0x01ECEF88 = 0x01ECEF88,
     // label: SEC_PathfindingCostTileMap1105
@@ -96873,16 +102082,16 @@ enum {
     // label: DAT_PitchDitchCount
     // location:
     SHC_3BB0A8C1_0x01FE5B0C = 0x01FE5B0C,
-    // label: SEC_Section1082
+    // label: SEC_MapSaveSection1082
     // location:
     SHC_3BB0A8C1_0x01FE5B10 = 0x01FE5B10,
-    // label: SEC_Section1052
+    // label: SEC_DustCloudState1052
     // location:
     SHC_3BB0A8C1_0x01FE5B28 = 0x01FE5B28,
-    // label: SEC_Section1053
+    // label: SEC_DustCloudState1053
     // location:
     SHC_3BB0A8C1_0x01FE5B2C = 0x01FE5B2C,
-    // label: SEC_Section1054
+    // label: SEC_DustCloudState1054
     // location:
     SHC_3BB0A8C1_0x01FE5B30 = 0x01FE5B30,
     // label: DAT_TemporaryTerrainTypeArray
@@ -97004,10 +102213,10 @@ enum {
     // label: DAT_ActiveMenuTab_2
     // location:
     SHC_3BB0A8C1_0x01FE7D2C = 0x01FE7D2C,
-    // label: SEC_Section1047
+    // label: SEC_SaveField_MissionNumber1047
     // location:
     SHC_3BB0A8C1_0x01FE7D50 = 0x01FE7D50,
-    // label: SEC_Section1066
+    // label: SEC_SaveField_GameCore1066
     // location:
     SHC_3BB0A8C1_0x01FE7D70 = 0x01FE7D70,
     // label: SEC_GameMode2
@@ -97025,7 +102234,7 @@ enum {
     // label: SEC_MatchTime
     // location:
     SHC_3BB0A8C1_0x01FE7DA8 = 0x01FE7DA8,
-    // label: SEC_Section1127
+    // label: SEC_SaveField_GameStartMoment1127
     // location:
     SHC_3BB0A8C1_0x01FE7DAC = 0x01FE7DAC,
     // label: DAT_GameSpeedMultiplicator
@@ -97052,16 +102261,16 @@ enum {
     // label: DAT_GameSpeedLevel
     // location:
     SHC_3BB0A8C1_0x01FE7DD8 = 0x01FE7DD8,
-    // label: SEC_Section1074
+    // label: SEC_GameTimeTicks1074
     // location:
     SHC_3BB0A8C1_0x01FE7DE0 = 0x01FE7DE0,
-    // label: SEC_Section1076
+    // label: SEC_SingleplayerEventState1076
     // location:
     SHC_3BB0A8C1_0x01FE7DE4 = 0x01FE7DE4,
     // label: DAT_IsBinkVideoPlaying
     // location:
     SHC_3BB0A8C1_0x01FE7E5C = 0x01FE7E5C,
-    // label: SEC_Section1095
+    // label: SEC_SaveField_GameOverState1095
     // location:
     SHC_3BB0A8C1_0x01FE7E60 = 0x01FE7E60,
     // label: SEC_XbowProducible_logic
@@ -97157,7 +102366,7 @@ enum {
     // label: SEC_SkirmishTrailStartDateMonths
     // location:
     SHC_3BB0A8C1_0x01FE9CA0 = 0x01FE9CA0,
-    // label: SEC_Section1119
+    // label: SEC_SkirmishTypeAndBalanceState1119
     // location:
     SHC_3BB0A8C1_0x01FE9CA4 = 0x01FE9CA4,
     // label: SEC_SkirmishTrailProgress
@@ -97202,10 +102411,10 @@ enum {
     // label: TIME_Sum_2
     // location:
     SHC_3BB0A8C1_0x01FEA07C = 0x01FEA07C,
-    // label: SEC_Section1126
+    // label: SEC_GameTimeValue1126
     // location:
     SHC_3BB0A8C1_0x01FEA080 = 0x01FEA080,
-    // label: SEC_Section1136
+    // label: SEC_WinDefeatWindowState1136
     // location:
     SHC_3BB0A8C1_0x01FEA086 = 0x01FEA086,
     // label: DAT_TextureRenderCoreObject
@@ -97243,8 +102452,12 @@ enum {
     // location:
     SHC_3BB0A8C1_0x01FEA120 = 0x01FEA120,
     // label: DAT_BitmapsFaces
+    // label: g_bitmapsFacesPtr
     // location:
     SHC_3BB0A8C1_0x01FEA124 = 0x01FEA124,
+    // label: g_faceSizes_int20
+    // location:
+    SHC_3BB0A8C1_0x01FEA128 = 0x01FEA128,
     // label: GMFileHeaderColorpaletteArray
     // location:
     SHC_3BB0A8C1_0x01FEA5AC = 0x01FEA5AC,
@@ -97410,7 +102623,7 @@ enum {
     // label: SEC_EntityArray1025
     // location:
     SHC_3BB0A8C1_0x02350314 = 0x02350314,
-    // label: SEC_Section1077
+    // label: SEC_SeagullState1077
     // location:
     SHC_3BB0A8C1_0x023FA1D4 = 0x023FA1D4,
     // label: DAT_AICState
@@ -97423,10 +102636,10 @@ enum {
     // label: DAT_SomeTileDistancePairArrayRelatedTo1105
     // location:
     SHC_3BB0A8C1_0x023FFDBC = 0x023FFDBC,
-    // label: SEC_Section1134
+    // label: SEC_AITribeIdTracking1134
     // location:
     SHC_3BB0A8C1_0x02401EFC = 0x02401EFC,
-    // label: SEC_Section1135
+    // label: SEC_AITribeUidTracking1135
     // location:
     SHC_3BB0A8C1_0x024026CC = 0x024026CC,
     // label: DAT_SomeTime
@@ -97446,19 +102659,23 @@ enum {
     SHC_3BB0A8C1_0x02403AF8 = 0x02403AF8,
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x0242746C = 0x0242746C,
-    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
+    // type: WinDef/BOOL
     SHC_3BB0A8C1_0x02427470 = 0x02427470,
     // label: DAT_RenderMiniMapOrBinkFlag
     // location:
-    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
+    // type: WinDef/BOOL
     SHC_3BB0A8C1_0x02427474 = 0x02427474,
     // type: /int
     SHC_3BB0A8C1_0x02427478 = 0x02427478,
     // label: DAT_Locks
     // location:
     SHC_3BB0A8C1_0x024274E0 = 0x024274E0,
+    // label: g_dwCrtFacetList
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x024274E4 = 0x024274E4,
+    // label: g_dwCrtGlobalLocale
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x024274E8 = 0x024274E8,
     // type: /undefined4
@@ -97470,12 +102687,16 @@ enum {
     // label: INTERNAL_LocaleState
     // location:
     SHC_3BB0A8C1_0x02427504 = 0x02427504,
+    // type: /undefined1
+    SHC_3BB0A8C1_0x0242750C = 0x0242750C,
     // type: /undefined4
     SHC_3BB0A8C1_0x02427594 = 0x02427594,
     // label: INTERNAL_Locks2
     // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x02427598 = 0x02427598,
+    // label: g_nCrtFpuInitialized
+    // location:
     // type: /int
     SHC_3BB0A8C1_0x0242759C = 0x0242759C,
     // type: /undefined4
@@ -97489,10 +102710,18 @@ enum {
     SHC_3BB0A8C1_0x024275BC = 0x024275BC,
     // type: /undefined4
     SHC_3BB0A8C1_0x024275C8 = 0x024275C8,
+    // label: g_dwCrtEnvBlock
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x024275DC = 0x024275DC,
     // type: /undefined4
+    SHC_3BB0A8C1_0x024275E0 = 0x024275E0,
+    // type: /undefined4
     SHC_3BB0A8C1_0x024275E4 = 0x024275E4,
+    // type: /undefined1
+    SHC_3BB0A8C1_0x024275F4 = 0x024275F4,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x024275FC = 0x024275FC,
     // label: DAT_EnvironmentString
     // location:
     // type: winnt/LPCH
@@ -97501,8 +102730,18 @@ enum {
     SHC_3BB0A8C1_0x02427608 = 0x02427608,
     // type: /undefined4
     SHC_3BB0A8C1_0x0242760C = 0x0242760C,
+    // label: g_dwCrtHeapResizeThreshold
+    // location:
+    // type: /undefined4
+    SHC_3BB0A8C1_0x02427610 = 0x02427610,
+    // label: g_dwCrtLocaleInitialized
+    // location:
+    // type: /undefined4
+    SHC_3BB0A8C1_0x02427614 = 0x02427614,
     // type: /undefined4
     SHC_3BB0A8C1_0x02427618 = 0x02427618,
+    // type: /undefined2
+    SHC_3BB0A8C1_0x0242765C = 0x0242765C,
     // type: /undefined2
     SHC_3BB0A8C1_0x0242765E = 0x0242765E,
     // type: /undefined2
@@ -97520,6 +102759,8 @@ enum {
     // type: /undefined4
     SHC_3BB0A8C1_0x0242766C = 0x0242766C,
     // type: /undefined2
+    SHC_3BB0A8C1_0x024276B0 = 0x024276B0,
+    // type: /undefined2
     SHC_3BB0A8C1_0x024276B2 = 0x024276B2,
     // type: /undefined2
     SHC_3BB0A8C1_0x024276B4 = 0x024276B4,
@@ -97536,7 +102777,11 @@ enum {
     // type: /undefined4
     SHC_3BB0A8C1_0x024276C0 = 0x024276C0,
     // type: /undefined4
+    SHC_3BB0A8C1_0x024276C4 = 0x024276C4,
+    // type: /undefined4
     SHC_3BB0A8C1_0x024276C8 = 0x024276C8,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x024276CC = 0x024276CC,
     // label: DAT_ExceptionRecord
     // location:
     // type: winnt/EXCEPTION_RECORD
@@ -97549,6 +102794,8 @@ enum {
     // location:
     // type: excpt/_CONTEXT
     SHC_3BB0A8C1_0x02427728 = 0x02427728,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x024279F4 = 0x024279F4,
     // label: DAT_MbUlInfo
     // location:
     // type: /ushort[6]
@@ -97565,10 +102812,16 @@ enum {
     // location:
     // type: /int
     SHC_3BB0A8C1_0x02427A0C = 0x02427A0C,
+    // label: g_dwFlsAllocProc
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x02427A30 = 0x02427A30,
+    // label: g_dwFlsGetValueProc
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x02427A34 = 0x02427A34,
+    // label: g_dwFlsSetValueProc
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x02427A38 = 0x02427A38,
     // type: /undefined4
@@ -97577,12 +102830,18 @@ enum {
     // location:
     // type: winnt/HANDLE
     SHC_3BB0A8C1_0x02427A40 = 0x02427A40,
+    // label: g_dwCrtSbhHeap
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x02427B98 = 0x02427B98,
     // type: /undefined4
     SHC_3BB0A8C1_0x02427EB4 = 0x02427EB4,
     // type: /undefined4
+    SHC_3BB0A8C1_0x02427EB8 = 0x02427EB8,
+    // type: /undefined4
     SHC_3BB0A8C1_0x02427EBC = 0x02427EBC,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x02427EC0 = 0x02427EC0,
     // type: /undefined4
     SHC_3BB0A8C1_0x02427EC8 = 0x02427EC8,
     // type: /undefined4
@@ -97609,6 +102868,10 @@ enum {
     SHC_3BB0A8C1_0x02428000 = 0x02428000,
     // type: /undefined4
     SHC_3BB0A8C1_0x02428004 = 0x02428004,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x02428010 = 0x02428010,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x02428014 = 0x02428014,
     // type: /undefined4
     SHC_3BB0A8C1_0x02428018 = 0x02428018,
     // type: /undefined4
@@ -97667,6 +102930,8 @@ enum {
     SHC_3BB0A8C1_0x024280C0 = 0x024280C0,
     // type: /undefined4
     SHC_3BB0A8C1_0x024280C4 = 0x024280C4,
+    // label: g_dwCrtMaxFileHandles
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x024280CC = 0x024280CC,
     // label: DAT_Locks
@@ -97674,11 +102939,21 @@ enum {
     // type: /undefined4
     SHC_3BB0A8C1_0x024280E0 = 0x024280E0,
     // type: /undefined4
+    SHC_3BB0A8C1_0x024280E4 = 0x024280E4,
+    // label: g_dwCrtFileStreamTable
+    // location:
+    // type: /undefined4
     SHC_3BB0A8C1_0x024281E0 = 0x024281E0,
+    // label: g_dwCrtFlsCount
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x02429200 = 0x02429200,
+    // label: g_dwCrtSbhRegionCount
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x02429204 = 0x02429204,
+    // label: g_dwCrtSbhRegionTable
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x02429208 = 0x02429208,
     // type: /int
@@ -97689,6 +102964,8 @@ enum {
     SHC_3BB0A8C1_0x02429214 = 0x02429214,
     // type: /undefined4
     SHC_3BB0A8C1_0x02429218 = 0x02429218,
+    // label: g_dwCrtHeapSelect
+    // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x0242921C = 0x0242921C,
     // type: /undefined4
@@ -98141,10 +103418,356 @@ enum {
     SHC_3BB0A8C1_0x02490930 = 0x02490930,
     // type: /TerminatedUnicode
     SHC_3BB0A8C1_0x02490936 = 0x02490936,
+    // type: /dword
+    SHC_3BB0A8C1_0x02490950 = 0x02490950,
     // label: Rsrc_Manifest_1_409
     // location:
     // type: /byte[1708]
     SHC_3BB0A8C1_0x02490954 = 0x02490954,
+    // label: ExceptionList
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFF000 = 0xFFDFF000,
+    // label: StackBase
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFF004 = 0xFFDFF004,
+    // label: StackLimit
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFF008 = 0xFFDFF008,
+    // label: SubSystemTib
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFF00C = 0xFFDFF00C,
+    // label: FiberData
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFF010 = 0xFFDFF010,
+    // label: ArbitraryUserPointer
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFF014 = 0xFFDFF014,
+    // label: Self
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFF018 = 0xFFDFF018,
+    // label: EnvironmentPointer
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFF01C = 0xFFDFF01C,
+    // label: ClientId
+    // location:
+    // type: /CLIENT_ID
+    SHC_3BB0A8C1_0xFFDFF020 = 0xFFDFF020,
+    // label: ActiveRpcHandle
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFF028 = 0xFFDFF028,
+    // label: ThreadLocalStoragePointer
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFF02C = 0xFFDFF02C,
+    // label: ProcessEnvironmentBlock
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFF030 = 0xFFDFF030,
+    // label: LastErrorValue
+    // location:
+    // type: /dword
+    SHC_3BB0A8C1_0xFFDFF034 = 0xFFDFF034,
+    // label: CountOfOwnedCriticalSections
+    // location:
+    // type: /dword
+    SHC_3BB0A8C1_0xFFDFF038 = 0xFFDFF038,
+    // label: CsrClientThread
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFF03C = 0xFFDFF03C,
+    // label: Win32ThreadInfo
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFF040 = 0xFFDFF040,
+    // label: User32Reserved
+    // location:
+    // type: /dword[26]
+    SHC_3BB0A8C1_0xFFDFF044 = 0xFFDFF044,
+    // label: UserReserved
+    // location:
+    // type: /dword[5]
+    SHC_3BB0A8C1_0xFFDFF0AC = 0xFFDFF0AC,
+    // label: WOW32Reserved
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFF0C0 = 0xFFDFF0C0,
+    // label: CurrentLocale
+    // location:
+    // type: /dword
+    SHC_3BB0A8C1_0xFFDFF0C4 = 0xFFDFF0C4,
+    // label: FpSoftwareStatusRegister
+    // location:
+    // type: /dword
+    SHC_3BB0A8C1_0xFFDFF0C8 = 0xFFDFF0C8,
+    // label: SystemReserved1
+    // location:
+    // type: /void *32[54]
+    SHC_3BB0A8C1_0xFFDFF0CC = 0xFFDFF0CC,
+    // label: ExceptionCode
+    // location:
+    // type: /dword
+    SHC_3BB0A8C1_0xFFDFF1A4 = 0xFFDFF1A4,
+    // label: ActivationContextStackPointer
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFF1A8 = 0xFFDFF1A8,
+    // label: SpareBytes
+    // location:
+    // type: /uchar[36]
+    SHC_3BB0A8C1_0xFFDFF1AC = 0xFFDFF1AC,
+    // label: TxFsContext
+    // location:
+    // type: /dword
+    SHC_3BB0A8C1_0xFFDFF1D0 = 0xFFDFF1D0,
+    // label: GdiTebBatch
+    // location:
+    // type: /dword
+    SHC_3BB0A8C1_0xFFDFF1D4 = 0xFFDFF1D4,
+    // label: RealClientId
+    // location:
+    // type: /CLIENT_ID
+    SHC_3BB0A8C1_0xFFDFF6B4 = 0xFFDFF6B4,
+    // label: GdiCachedProcessHandle
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFF6BC = 0xFFDFF6BC,
+    // label: GdiClientPID
+    // location:
+    // type: /dword
+    SHC_3BB0A8C1_0xFFDFF6C0 = 0xFFDFF6C0,
+    // label: GdiCLientTID
+    // location:
+    // type: /dword
+    SHC_3BB0A8C1_0xFFDFF6C4 = 0xFFDFF6C4,
+    // label: GdiThreadLocalInfo
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFF6C8 = 0xFFDFF6C8,
+    // label: Win32ClientInfo
+    // location:
+    // type: /void *32[62]
+    SHC_3BB0A8C1_0xFFDFF6CC = 0xFFDFF6CC,
+    // label: glDispatchTable
+    // location:
+    // type: /void *32[233]
+    SHC_3BB0A8C1_0xFFDFF7C4 = 0xFFDFF7C4,
+    // label: glReserved1
+    // location:
+    // type: /void *32[29]
+    SHC_3BB0A8C1_0xFFDFFB68 = 0xFFDFFB68,
+    // label: glReserved2
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFBDC = 0xFFDFFBDC,
+    // label: glSectionInfo
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFBE0 = 0xFFDFFBE0,
+    // label: glSection
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFBE4 = 0xFFDFFBE4,
+    // label: glTable
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFBE8 = 0xFFDFFBE8,
+    // label: glCurrentRC
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFBEC = 0xFFDFFBEC,
+    // label: glContext
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFBF0 = 0xFFDFFBF0,
+    // label: LastStatusValue
+    // location:
+    // type: /dword
+    SHC_3BB0A8C1_0xFFDFFBF4 = 0xFFDFFBF4,
+    // label: StaticUnicodeBuffer
+    // location:
+    // type: /wchar16[261]
+    SHC_3BB0A8C1_0xFFDFFC00 = 0xFFDFFC00,
+    // label: DeallocationStack
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFE0C = 0xFFDFFE0C,
+    // label: TlsSlots
+    // location:
+    // type: /void *32[64]
+    SHC_3BB0A8C1_0xFFDFFE10 = 0xFFDFFE10,
+    // label: TlsLinks.Flink
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFF10 = 0xFFDFFF10,
+    // label: TlsLinks.Blink
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFF14 = 0xFFDFFF14,
+    // label: Vdm
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFF18 = 0xFFDFFF18,
+    // label: ReservedForNtRpc
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFF1C = 0xFFDFFF1C,
+    // label: DbgSsReserved
+    // location:
+    // type: /void *32[2]
+    SHC_3BB0A8C1_0xFFDFFF20 = 0xFFDFFF20,
+    // label: HardErrorMode
+    // location:
+    // type: /dword
+    SHC_3BB0A8C1_0xFFDFFF28 = 0xFFDFFF28,
+    // label: Instrumentation
+    // location:
+    // type: /void *32[9]
+    SHC_3BB0A8C1_0xFFDFFF2C = 0xFFDFFF2C,
+    // label: ActivityId
+    // location:
+    // type: /GUID
+    SHC_3BB0A8C1_0xFFDFFF50 = 0xFFDFFF50,
+    // label: SubProcessTag
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFF60 = 0xFFDFFF60,
+    // label: EtwLocalData
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFF64 = 0xFFDFFF64,
+    // label: EtwTraceData
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFF68 = 0xFFDFFF68,
+    // label: WinSockData
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFF6C = 0xFFDFFF6C,
+    // label: GdiBatchCount
+    // location:
+    // type: /dword
+    SHC_3BB0A8C1_0xFFDFFF70 = 0xFFDFFF70,
+    // label: IdealProcessorValue
+    // location:
+    // type: /dword
+    SHC_3BB0A8C1_0xFFDFFF74 = 0xFFDFFF74,
+    // label: GuaranteedStackBytes
+    // location:
+    // type: /dword
+    SHC_3BB0A8C1_0xFFDFFF78 = 0xFFDFFF78,
+    // label: ReservedForPerf
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFF7C = 0xFFDFFF7C,
+    // label: ReservedForOle
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFF80 = 0xFFDFFF80,
+    // label: WaitingOnLoaderLock
+    // location:
+    // type: /dword
+    SHC_3BB0A8C1_0xFFDFFF84 = 0xFFDFFF84,
+    // label: SavedPriorityState
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFF88 = 0xFFDFFF88,
+    // label: SoftPatchPtr1
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFF8C = 0xFFDFFF8C,
+    // label: ThreadPoolData
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFF90 = 0xFFDFFF90,
+    // label: TlsExpansionSlots
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFF94 = 0xFFDFFF94,
+    // label: MuiGeneration
+    // location:
+    // type: /dword
+    SHC_3BB0A8C1_0xFFDFFF98 = 0xFFDFFF98,
+    // label: IsImpersonating
+    // location:
+    // type: /dword
+    SHC_3BB0A8C1_0xFFDFFF9C = 0xFFDFFF9C,
+    // label: NlsCache
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFFA0 = 0xFFDFFFA0,
+    // label: pShimData
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFFA4 = 0xFFDFFFA4,
+    // label: HeapVirtualAffinity
+    // location:
+    // type: /dword
+    SHC_3BB0A8C1_0xFFDFFFA8 = 0xFFDFFFA8,
+    // label: CurrentTransactionHandle
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFFAC = 0xFFDFFFAC,
+    // label: ActiveFrame
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFFB0 = 0xFFDFFFB0,
+    // label: FlsData
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFFB4 = 0xFFDFFFB4,
+    // label: PreferredLanguages
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFFB8 = 0xFFDFFFB8,
+    // label: UserPrefLanguages
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFFBC = 0xFFDFFFBC,
+    // label: MergedPrefLanguages
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFFC0 = 0xFFDFFFC0,
+    // label: MuiImpersonation
+    // location:
+    // type: /dword
+    SHC_3BB0A8C1_0xFFDFFFC4 = 0xFFDFFFC4,
+    // label: CrossTebFlags
+    // location:
+    // type: /ushort
+    SHC_3BB0A8C1_0xFFDFFFC8 = 0xFFDFFFC8,
+    // label: SameTebFlags
+    // location:
+    // type: /ushort
+    SHC_3BB0A8C1_0xFFDFFFCA = 0xFFDFFFCA,
+    // label: TxnScopeEnterCallback
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFFCC = 0xFFDFFFCC,
+    // label: TxnScopeExitCallback
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFFD0 = 0xFFDFFFD0,
+    // label: TxnScopeContext
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFFD4 = 0xFFDFFFD4,
+    // label: LockCount
+    // location:
+    // type: /dword
+    SHC_3BB0A8C1_0xFFDFFFD8 = 0xFFDFFFD8,
+    // label: ResourceRetValue
+    // location:
+    // type: /void *32
+    SHC_3BB0A8C1_0xFFDFFFE0 = 0xFFDFFFE0,
 
 };
 }

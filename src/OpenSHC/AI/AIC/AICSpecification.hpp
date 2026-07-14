@@ -21,17 +21,17 @@ namespace AI {
         typedef struct AICSpecification {
 
             dword flagType; // 0x00000000 length: 4
-            dword unknown001; // 0x00000004 length: 4
-            dword unknown002; // 0x00000008 length: 4
-            dword unknown003; // 0x0000000C length: 4
-            dword unknown004; // 0x00000010 length: 4
-            dword unknown005; // 0x00000014 length: 4
+            dword aicReserved0; // 0x00000004 length: 4
+            dword aicReserved1; // 0x00000008 length: 4
+            dword aicReserved2; // 0x0000000C length: 4
+            dword aicPerLordFlag4; // 0x00000010 length: 4
+            dword aicPerLordFlag5; // 0x00000014 length: 4
             dword criticalPopularity; // 0x00000018 length: 4
             dword lowestPopularity; // 0x0000001C length: 4
             dword highestPopularity; // 0x00000020 length: 4
             dword taxesMin; // 0x00000024 length: 4
             dword taxesMax; // 0x00000028 length: 4
-            dword unknown011; // 0x0000002C length: 4
+            dword aicPerLordParam11; // 0x0000002C length: 4
             dword farm1; // 0x00000030 length: 4
             dword farm2; // 0x00000034 length: 4
             dword farm3; // 0x00000038 length: 4
@@ -92,8 +92,8 @@ namespace AI {
             dword defWallPatrolGroups; // 0x00000114 length: 4
             dword defSiegeEngineGoldThreshold; // 0x00000118 length: 4
             dword defSiegeEngineBuildDelay; // 0x0000011C length: 4
-            dword unknown072; // 0x00000120 length: 4
-            dword unknown073; // 0x00000124 length: 4
+            dword aicPerLordParam72; // 0x00000120 length: 4
+            dword aicPerLordParam73; // 0x00000124 length: 4
             dword recruitProbDefDefault; // 0x00000128 length: 4
             dword recruitProbDefWeak; // 0x0000012C length: 4
             dword recruitProbDefStrong; // 0x00000130 length: 4
@@ -149,10 +149,10 @@ namespace AI {
             dword AttForceRandom; // 0x000001F8 length: 4
             dword AttForceSupportAllyThreshold; // 0x000001FC length: 4
             dword AttForceRallyPercentage; // 0x00000200 length: 4
-            dword Unknown129; // 0x00000204 length: 4
+            dword dwMinRalliedTribesPercent; // 0x00000204 length: 4
             dword AttAssaultDelay; // 0x00000208 length: 4
             dword AttUnitPatrolRecommandDelay; // 0x0000020C length: 4
-            dword Unknown132; // 0x00000210 length: 4
+            dword dwAttackWillingnessBase; // 0x00000210 length: 4
             dword SiegeEngine1; // 0x00000214 length: 4
             dword SiegeEngine2; // 0x00000218 length: 4
             dword SiegeEngine3; // 0x0000021C length: 4
@@ -162,7 +162,7 @@ namespace AI {
             dword SiegeEngine7; // 0x0000022C length: 4
             dword SiegeEngine8; // 0x00000230 length: 4
             dword CowThrowInterval; // 0x00000234 length: 4
-            dword Unknown142; // 0x00000238 length: 4
+            dword aicUnused142; // 0x00000238 length: 4
             dword AttMaxEngineers; // 0x0000023C length: 4
             dword AttDiggingUnit; // 0x00000240 length: 4
             dword AttDiggingUnitMax; // 0x00000244 length: 4

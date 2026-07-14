@@ -19,22 +19,22 @@ namespace Game {
     // SIZE: 0x00005504
     typedef struct MissionAestheticsDefinedData {
 
-        char** field0_0x0; // 0x00000000 length: 4
-        char** field1_0x4; // 0x00000004 length: 4
-        char** field2_0x8; // 0x00000008 length: 4
-        char** field3_0xc; // 0x0000000C length: 4
-        char** field4_0x10; // 0x00000010 length: 4
-        char** field5_0x14; // 0x00000014 length: 4
-        char** field6_0x18; // 0x00000018 length: 4
+        char** processSingleplayerEventsCfg_0x0; // 0x00000000 length: 4
+        char** processSingleplayerEventsCfg_0x4; // 0x00000004 length: 4
+        char** processSingleplayerEventsCfg_0x8; // 0x00000008 length: 4
+        char** processSingleplayerEventsCfg_0xc; // 0x0000000C length: 4
+        char** processSingleplayerEventsCfg_0x10; // 0x00000010 length: 4
+        char** processSingleplayerEventsCfg_0x14; // 0x00000014 length: 4
+        char** processSingleplayerEventsCfg_0x18; // 0x00000018 length: 4
         char** field7_0x1c; // 0x0000001C length: 4
-        char** field8_0x20; // 0x00000020 length: 4
-        char** field9_0x24; // 0x00000024 length: 4
-        char** field10_0x28; // 0x00000028 length: 4
-        char** field11_0x2c; // 0x0000002C length: 4
-        char** field12_0x30; // 0x00000030 length: 4
-        char** field13_0x34; // 0x00000034 length: 4
-        char** field14_0x38; // 0x00000038 length: 4
-        char** field15_0x3c; // 0x0000003C length: 4
+        char** processSingleplayerEventsCfg_0x20; // 0x00000020 length: 4
+        char** processSingleplayerEventsCfg_0x24; // 0x00000024 length: 4
+        char** processSingleplayerEventsCfg_0x28; // 0x00000028 length: 4
+        char** processSingleplayerEventsCfg_0x2c; // 0x0000002C length: 4
+        char** processSingleplayerEventsCfg_0x30; // 0x00000030 length: 4
+        char** processSingleplayerEventsCfg_0x34; // 0x00000034 length: 4
+        char** processSingleplayerEventsCfg_0x38; // 0x00000038 length: 4
+        char** loadMissionMapByNumberCfg_0x3c; // 0x0000003C length: 4
         char** field16_0x40; // 0x00000040 length: 4
         char** field17_0x44; // 0x00000044 length: 4
         char** field18_0x48; // 0x00000048 length: 4
@@ -78,7 +78,7 @@ namespace Game {
         char** field56_0xe0; // 0x000000E0 length: 4
         char** field57_0xe4; // 0x000000E4 length: 4
         char** field58_0xe8; // 0x000000E8 length: 4
-        char** field59_0xec; // 0x000000EC length: 4
+        char** processSingleplayerEventsCfg_0xec; // 0x000000EC length: 4
         char** field60_0xf0; // 0x000000F0 length: 4
         char** field61_0xf4; // 0x000000F4 length: 4
         char** field62_0xf8; // 0x000000F8 length: 4
@@ -94,12 +94,12 @@ namespace Game {
         char** field72_0x120; // 0x00000120 length: 4
         char** field73_0x124; // 0x00000124 length: 4
         char** field74_0x128; // 0x00000128 length: 4
-        char** field75_0x12c; // 0x0000012C length: 4
+        char** playBikVideoFromPlayerCfg_0x12c; // 0x0000012C length: 4
         char** field76_0x130; // 0x00000130 length: 4
         char** field77_0x134; // 0x00000134 length: 4
         char** field78_0x138; // 0x00000138 length: 4
         char** field79_0x13c; // 0x0000013C length: 4
-        char** field80_0x140; // 0x00000140 length: 4
+        char** playMissionAestheticSFXCfg_0x140; // 0x00000140 length: 4
         char** field81_0x144; // 0x00000144 length: 4
         char** field82_0x148; // 0x00000148 length: 4
         char** field83_0x14c; // 0x0000014C length: 4
@@ -111,8 +111,8 @@ namespace Game {
         char** field89_0x164; // 0x00000164 length: 4
         char** field90_0x168; // 0x00000168 length: 4
         char** field91_0x16c; // 0x0000016C length: 4
-        int field92_0x170[5]; // 0x00000170 length: 20
-        char** field93_0x184; // 0x00000184 length: 4
+        int newEventCondition_MainCfg_0x170[5]; // 0x00000170 length: 20
+        char** playBikVideoFromPlayerCfg_0x184; // 0x00000184 length: 4
         char** field94_0x188; // 0x00000188 length: 4
         char** field95_0x18c; // 0x0000018C length: 4
         char** field96_0x190; // 0x00000190 length: 4
@@ -633,7 +633,7 @@ namespace Game {
         char** field611_0x99c; // 0x0000099C length: 4
         char** field612_0x9a0; // 0x000009A0 length: 4
         char** field613_0x9a4; // 0x000009A4 length: 4
-        char** field614_0x9a8; // 0x000009A8 length: 4
+        char** siegeAttackingForceAndStarCfg_0x9a8; // 0x000009A8 length: 4
         char** field615_0x9ac; // 0x000009AC length: 4
         char** field616_0x9b0; // 0x000009B0 length: 4
         char** field617_0x9b4; // 0x000009B4 length: 4
@@ -680,7 +680,7 @@ namespace Game {
         int field658_0xa58; // 0x00000A58 length: 4
         int field659_0xa5c; // 0x00000A5C length: 4
         int field660_0xa60; // 0x00000A60 length: 4
-        char** field661_0xa64; // 0x00000A64 length: 4
+        char** playBikVideoFromPlayerCfg_0xa64; // 0x00000A64 length: 4
         char** field662_0xa68; // 0x00000A68 length: 4
         char** field663_0xa6c; // 0x00000A6C length: 4
         char** field664_0xa70; // 0x00000A70 length: 4
@@ -1201,7 +1201,7 @@ namespace Game {
         char** field1179_0x127c; // 0x0000127C length: 4
         char** field1180_0x1280; // 0x00001280 length: 4
         char** field1181_0x1284; // 0x00001284 length: 4
-        char** field1182_0x1288; // 0x00001288 length: 4
+        char** siegeAttackingForceAndStarCfg_0x1288; // 0x00001288 length: 4
         char** field1183_0x128c; // 0x0000128C length: 4
         char** field1184_0x1290; // 0x00001290 length: 4
         char** field1185_0x1294; // 0x00001294 length: 4
@@ -1243,31 +1243,31 @@ namespace Game {
         char** field1221_0x1324; // 0x00001324 length: 4
         int field1222_0x1328[7]; // 0x00001328 length: 28
         int unknown3[914]; // 0x00001344 length: 3656
-        int field1224_0x218c[6]; // 0x0000218C length: 24
-        int field1225_0x21a4[4]; // 0x000021A4 length: 16
+        int buildingAvailability_ButtoCfg_0x218c[6]; // 0x0000218C length: 24
+        int someKindOfMissionCompletioCfg_0x21a4[4]; // 0x000021A4 length: 16
         int DAT_DifficultyEventMultipliers[4]; // 0x000021B4 length: 16
-        int field1227_0x21c4[40]; // 0x000021C4 length: 160
-        int field1228_0x2264[40]; // 0x00002264 length: 160
-        int field1229_0x2304[40]; // 0x00002304 length: 160
-        int field1230_0x23a4[40]; // 0x000023A4 length: 160
-        byte field1231_0x2444[32][100]; // 0x00002444 length: 3200
+        int newEventCondition_MainCfg_0x21c4[40]; // 0x000021C4 length: 160
+        int newEventCondition_MainCfg_0x2264[40]; // 0x00002264 length: 160
+        int newEventCondition_MainCfg_0x2304[40]; // 0x00002304 length: 160
+        int newEventCondition_MainCfg_0x23a4[40]; // 0x000023A4 length: 160
+        byte newEventCondition_MainCfg_0x2444[32][100]; // 0x00002444 length: 3200
         int field1232_0x30c4[25]; // 0x000030C4 length: 100
         int field1233_0x3128; // 0x00003128 length: 4
-        int field1234_0x312c[174]; // 0x0000312C length: 696
-        int field1235_0x33e4[25]; // 0x000033E4 length: 100
-        int field1236_0x3448[5]; // 0x00003448 length: 20
-        int field1237_0x345c[22]; // 0x0000345C length: 88
-        int field1238_0x34b4[40]; // 0x000034B4 length: 160
-        int field1239_0x3554[30]; // 0x00003554 length: 120
+        int buildingAvailability_ButtoCfg_0x312c[174]; // 0x0000312C length: 696
+        int newEventCondition_MainCfg_0x33e4[25]; // 0x000033E4 length: 100
+        int editScenario_BaseMenuButtoCfg_0x3448[5]; // 0x00003448 length: 20
+        int traderSettingsCfg_0x345c[22]; // 0x0000345C length: 88
+        int siegeAttackingForceAndStarCfg_0x34b4[40]; // 0x000034B4 length: 160
+        int siegeAttackingForceAndStarCfg_0x3554[30]; // 0x00003554 length: 120
         int DAT_InvasionUnitLimits[24]; // 0x000035CC length: 96
         int field1241_0x362c[10]; // 0x0000362C length: 40
         BuildingNameRelatedStruct DAT_BuildingNameRelatedStructArray[67]; // 0x00003654 length: 2680
         int ARRAY_BuildingAvailabilityStructIndexForName[69]; // 0x000040CC length: 276
         undefined1 padding_0x41e0[4]; // 0x000041E0 length: 4
-        char field1248_0x41e4[46][3][32]; // 0x000041E4 length: 4416
-        int field1249_0x5324[40]; // 0x00005324 length: 160
-        int field1250_0x53c4[40]; // 0x000053C4 length: 160
-        int field1251_0x5464[40]; // 0x00005464 length: 160
+        char updateTutorialStateMachineCfg_0x41e4[46][3][32]; // 0x000041E4 length: 4416
+        int updateTutorialStateMachineCfg_0x5324[40]; // 0x00005324 length: 160
+        int updateTutorialStateMachineCfg_0x53c4[40]; // 0x000053C4 length: 160
+        int updateTutorialStateMachineCfg_0x5464[40]; // 0x00005464 length: 160
 
     } MissionAestheticsDefinedData;
 #pragma pack(pop)

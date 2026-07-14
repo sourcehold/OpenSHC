@@ -9,7 +9,7 @@
 #pragma once
 
 #include "OpenSHC/AI/Siege/SiegeInformation.hpp"
-#include "OpenSHC/DE/SHCDE/eMappers.hpp"
+#include "OpenSHC/DE/SHCDE/eMappersInt.hpp"
 #include "OpenSHC/Game/Scenario/BarracksRecruitabilityShort.hpp"
 #include "OpenSHC/Game/ScenarioEvents/InGameEventExtra.hpp"
 #include "OpenSHC/Game/ScenarioEvents/InGameEventUnionVersion.hpp"
@@ -24,7 +24,7 @@ namespace OpenSHC {
 namespace Map {
 
     using OpenSHC::AI::Siege::SiegeInformation;
-    using OpenSHC::DE::SHCDE::eMappers;
+    using OpenSHC::DE::SHCDE::eMappersInt;
     using OpenSHC::Game::TradeableResourcesSection;
     using OpenSHC::Game::Scenario::BarracksRecruitabilityShort;
     using OpenSHC::Game::ScenarioEvents::InGameEventExtra;
@@ -48,7 +48,7 @@ namespace Map {
         SiegeGameModeRelatedSection SEC_Section1067; // 0x0000013C length: 28
         int SEC_StartingPopularity; // 0x00000158 length: 4
         short SEC_BuildingAvailability[100]; // 0x0000015C length: 200
-        undefined4 field8_0x224; // 0x00000224 length: 4
+        undefined4 dwBuildingAvailabilityCount; // 0x00000224 length: 4
         short buildingAvailabilityRelatedFlags[380]; // 0x00000228 length: 760
         short field10_0x520; // 0x00000520 length: 2
         short field11_0x522; // 0x00000522 length: 2
@@ -60,7 +60,7 @@ namespace Map {
         short field17_0x52e; // 0x0000052E length: 2
         short field18_0x530; // 0x00000530 length: 2
         short field19_0x532; // 0x00000532 length: 2
-        short field20_0x534; // 0x00000534 length: 2
+        short nBuildingAvailabilityArray; // 0x00000534 length: 2
         short field21_0x536; // 0x00000536 length: 2
         short field22_0x538; // 0x00000538 length: 2
         short field23_0x53a; // 0x0000053A length: 2
@@ -119,10 +119,10 @@ namespace Map {
         undefined4 SEC_Section1080; // 0x00013544 length: 4
         undefined4 SEC_Section1081; // 0x00013548 length: 4
         undefined1 padding_0x1354c[16]; // 0x0001354C length: 16
-        undefined4 field96_0x1355c; // 0x0001355C length: 4
-        int field97_0x13560; // 0x00013560 length: 4
+        undefined4 dwEventListScrollOffset; // 0x0001355C length: 4
+        int nSelectedEventIndex; // 0x00013560 length: 4
         undefined4 DAT_CurrentEventID; // 0x00013564 length: 4
-        undefined4 field99_0x13568; // 0x00013568 length: 4
+        undefined4 scenarioEditState_0x13568; // 0x00013568 length: 4
         undefined1 padding_0x1356c[4]; // 0x0001356C length: 4
         undefined4 invasionTroopIndex; // 0x00013570 length: 4
         int DAT_BuildingAvailabilityScrollbarOffset; // 0x00013574 length: 4
@@ -139,7 +139,7 @@ namespace Map {
         undefined4 DAT_MapEditorUnitPointsSum; // 0x00014544 length: 4
         undefined4 DAT_InvasionEventItemUnitCountSum; // 0x00014548 length: 4
         undefined1 padding_0x1454c[8]; // 0x0001454C length: 8
-        undefined4 field140_0x14554; // 0x00014554 length: 4
+        undefined4 dwMissionCompletionScore; // 0x00014554 length: 4
         undefined4 field141_0x14558; // 0x00014558 length: 4
         undefined4 field142_0x1455c; // 0x0001455C length: 4
         undefined4 field143_0x14560; // 0x00014560 length: 4
@@ -150,7 +150,7 @@ namespace Map {
         undefined4 field148_0x14574; // 0x00014574 length: 4
         undefined4 field149_0x14578; // 0x00014578 length: 4
         undefined4 field150_0x1457c; // 0x0001457C length: 4
-        undefined4 field151_0x14580; // 0x00014580 length: 4
+        undefined4 dwMissionScoreArray; // 0x00014580 length: 4
         undefined4 field152_0x14584; // 0x00014584 length: 4
         undefined4 field153_0x14588; // 0x00014588 length: 4
         undefined4 field154_0x1458c; // 0x0001458C length: 4
@@ -165,13 +165,13 @@ namespace Map {
         undefined4 field166_0x145b0; // 0x000145B0 length: 4
         undefined1 padding_0x145b4[4]; // 0x000145B4 length: 4
         undefined4 field171_0x145b8; // 0x000145B8 length: 4
-        undefined4 field172_0x145bc; // 0x000145BC length: 4
+        undefined4 dwMissionScorePercent; // 0x000145BC length: 4
         undefined4 field173_0x145c0; // 0x000145C0 length: 4
         undefined4 field174_0x145c4; // 0x000145C4 length: 4
-        undefined4 field175_0x145c8; // 0x000145C8 length: 4
+        undefined4 dwEnemyWeightedLosses; // 0x000145C8 length: 4
         undefined1 padding_0x145cc[4]; // 0x000145CC length: 4
-        undefined4 field180_0x145d0; // 0x000145D0 length: 4
-        undefined4 field181_0x145d4; // 0x000145D4 length: 4
+        undefined4 dwNewEventDialogX; // 0x000145D0 length: 4
+        undefined4 dwNewEventDialogY; // 0x000145D4 length: 4
         undefined1 padding_0x145d8[4]; // 0x000145D8 length: 4
         undefined4 eventType; // 0x000145DC length: 4
         IngameEventHeader invasionEvent; // 0x000145E0 length: 16
@@ -185,7 +185,7 @@ namespace Map {
         MapPropertiesState() {};
         ~MapPropertiesState() {};
 
-        BOOLEnum isValueInRangeOneToTwenty(int param_1);
+        BOOLEnum isParam1LessThan21(int param_1);
 
         void importTradingCosts();
 
@@ -193,62 +193,60 @@ namespace Map {
 
         int getEventIDForTimeUntilDefeatEventType();
 
-        void activateScenarioTypeEvents();
+        void activateMatchingScenarioEvents();
 
-        void determineScenarioMissionTypeAndResetEvents();
+        void checkScenarioSiegeEvents();
 
         void sumUnitPoints();
 
         void sumUnitCounts();
 
-        void sortEventsByDate();
+        void sortScenarioEvents();
 
-        void removeEventAtIndex(int param_1);
+        void removeScenarioEvent(int param_1);
 
         void commitBuildingAvailability();
 
-        BOOLEnum isMapperAvailable(eMappers param_1);
+        BOOLEnum isMapperAvailable(eMappersInt param_1);
 
-        int isMercRecruitableForBuildingType(int param_1);
+        int isMercRecruitable(int param_1);
 
         void resetEuroUnitRestrictions();
 
-        void pruneInvalidEventTriggerLinks();
+        void cleanupType3ScenarioEvents();
 
         void openEventTriggerMenu(undefined4 eventType);
 
         void sumInvasionEventUnitCount();
 
-        void adjustEventMonthAndYearForSection1047();
+        void tweakMonthAndYearBasedOnSection1047();
 
-        void spawnAttackWaveForPlayer(
+        void spawnScenarioInvasionWave(
             int param_1, int param_2, int param_3, int param_4, int param_5, undefined4 param_6);
 
-        void createScenarioEventForNextMonth();
+        void createScenarioEvent();
 
-        void createChainedMissionOutcomeEvents(int param_1);
+        void createLinkedScenarioEvents(int param_1);
 
-        void computeMissionCompletionScore();
+        void computeSomeKindOfMissionCompletionScore();
 
         void setStartingYearAndStartingResources();
 
-        void updateEventYearsAndCommitBuildingAvailability();
+        void setupStartingYear();
 
-        void removeProcessedInvasionEvents();
+        void migrateScenarioEventData();
 
-        void spawnInvasionEventAttackWave();
+        void setupScenarioInvasionData();
 
-        void updateMilitaryCampaignMissionState();
-
-        void loadMapSiegeHeaderSections(char* param_1);
+        void updateVictoryDefeatState();
 
         void processSingleplayerEvents();
 
         void loadMap(char* mapName);
 
-        void loadMapSiegeHeaderForMissionIndex(char* param_1);
+        void loadMissionMapSiegeInfo(char* param_1);
 
-        void loadMissionMapAndSetLord(int missionNumber);
+        void loadMissionMapByNumber(int missionNumber);
     };
 
     static_assert_cpp98_obj(sizeof(MapPropertiesState) == 83616, MapPropertiesState);

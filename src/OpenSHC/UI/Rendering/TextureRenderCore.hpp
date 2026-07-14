@@ -8,14 +8,14 @@
 
 #pragma once
 
-#include "OpenSHC/DE/SHCDE/eGM.hpp"
+#include "OpenSHC/DE/SHCDE/eGMInt.hpp"
 #include "OpenSHC/IO/Graphics/GMFileHeaderColorpalette.hpp"
 #include "OpenSHC/IO/Graphics/GfxRef.hpp"
-#include "OpenSHC/IO/Graphics/GmID.hpp"
+#include "OpenSHC/IO/Graphics/GmIDInt.hpp"
 #include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Rendering/Colors/RGB15.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTargetInt.hpp"
-#include "OpenSHC/Text/FontRenderType.hpp"
+#include "OpenSHC/Text/FontRenderTypeInt.hpp"
 #include "OpenSHC/UI/Rendering/Range.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -25,14 +25,14 @@ namespace OpenSHC {
 namespace UI {
     namespace Rendering {
 
-        using OpenSHC::DE::SHCDE::eGM;
+        using OpenSHC::DE::SHCDE::eGMInt;
         using OpenSHC::IO::Graphics::GfxRef;
         using OpenSHC::IO::Graphics::GMFileHeaderColorpalette;
-        using OpenSHC::IO::Graphics::GmID;
+        using OpenSHC::IO::Graphics::GmIDInt;
         using OpenSHC::Rendering::Colors::BGR24;
         using OpenSHC::Rendering::Colors::RGB15;
         using OpenSHC::Rendering::Enums::RenderTargetInt;
-        using OpenSHC::Text::FontRenderType;
+        using OpenSHC::Text::FontRenderTypeInt;
         using OpenSHC::UI::Rendering::Range;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
@@ -123,15 +123,15 @@ namespace UI {
 
             void Destructor_TextureRenderCore();
 
-            void drawLoadingBarUnk(GmID currentGmId, int barLengthUnk);
+            void drawLoadingProgressBar(GmIDInt currentGmId, int barLengthUnk);
 
             void transformGmColorTableFromRGB555To565IfRequired(int gmID);
 
-            void transformRawWithMarkerUnkToRGB555To565(int imageOffset, int imageSize);
+            void convertImageRGB555ToRGB565(int imageOffset, int imageSize);
 
             void transformTgxFromRGB555ToRGB565(ushort* tgxDataPtr, int tgxByteSize);
 
-            void transformTileObjectToRGB565(int imageOffset);
+            undefined transformTileObjectToRGB565();
 
             void transformRawToRGB555To565(int imageOffset, int imageSize);
 
@@ -141,11 +141,11 @@ namespace UI {
 
             void setMapSurfaceHeightRange(int start, int end);
 
-            void setMapSurfaceHeightRangeUnk();
+            void setMapSurfaceHeightRangeFull();
 
-            void temporarySaveMapSurfaceHeightRangeUnk();
+            void saveMapSurfaceHeightRange();
 
-            void restoreMapSurfaceHeightRangeFromTemporaryUnk();
+            void restoreMapSurfaceHeightRange();
 
             void setScreenMenuSurfaceHeightRange(int start, int end);
 
@@ -153,9 +153,9 @@ namespace UI {
 
             void drawBitmapFace(int bitmapFaceIndex, int xPos, int yPos);
 
-            void renderFacesSmallUnk(int facesIndex, int drawX, int drawY);
+            void renderFaceHalfSize(int facesIndex, int drawX, int drawY);
 
-            void drawBitmapFaceWithBlendUnk(int bitmapFaceIndex, int xPos, int yPos, int colorOrBlendOrGammaUnk);
+            void drawBitmapFaceBlended(int bitmapFaceIndex, int xPos, int yPos, int colorOrBlendOrGammaUnk);
 
             void renderFunctionResponsibleForManyGameObjects(
                 int drawX, int drawY, int imageWidth, int imageHeight, ushort* imageAddress);
@@ -168,15 +168,15 @@ namespace UI {
             void renderGmWithPreparedAlphaMask(
                 int x, int y, int width, int height, ushort* imageDataPtr, int blendStrength);
 
-            void renderTgxWithColorUnk(
+            void blitTgxAsSolidColor(
                 int xPos, int yPos, int width, int height, ushort* imageSource, ushort fillColorUnk);
 
-            void renderTgxWithColorAndBlendingUnk(int xPos, int yPos, int width, int height, ushort* imageSource,
+            void renderTgxTintedBlended(int xPos, int yPos, int width, int height, ushort* imageSource,
                 ushort fillColorUnk, int blendStrengthUnk);
 
-            void renderUnitAnimationUnk(int xPosition, int yPosition, int width, int height, byte* imageAddress);
+            void blitUnitSpriteRLE(int xPosition, int yPosition, int width, int height, byte* imageAddress);
 
-            void renderUnitAnimationWithBlendingUnk(
+            void blitUnitSpriteRLEBlended(
                 int xPosition, int yPosition, int width, int height, byte* imageAddress, int blendStrengthUnk);
 
             int loadGfxFile(char* tgxFileName);
@@ -185,7 +185,7 @@ namespace UI {
 
             int loadGfxAtBufferEnd(char* fileName);
 
-            BOOLEnum CheckGfxResourceExists(char* param_1);
+            undefined gfxResourceExists();
 
             void renderLoadedGfx(int loadedGfxIndex, int xPos, int yPos);
 
@@ -199,15 +199,15 @@ namespace UI {
 
             void drawTgxOnFlaggedSurface(int xPos, int yPos, int gfxWidth, int gfxHeight, ushort* tgxSourcePtr);
 
-            void loadCampaignMapGfxUnk();
+            void loadCampaignMapPalettes();
 
-            void setMenuTabIndexUnk(int indexToSetToMinusOne);
+            void setActiveMenuTabIndex(int indexToSetToMinusOne);
 
             void setActiveMenuTabIndexToZero();
 
             void moveOverlappingMenuPartsToMapSurface();
 
-            void transformUncompressedImageWithMarkerUnkToRGB565(int imageIndex);
+            void transformUncompressedImageWithMarkerToRGB565(int imageIndex);
 
             void transformTgxCompressedImageToRGB565(int imageIndex);
 
@@ -215,23 +215,23 @@ namespace UI {
 
             void transformUncompressedImageToRGB565(int imageIndex);
 
-            void renderGM(eGM gmID, int imageID, int drawX, int drawY);
+            void renderGM(eGMInt gmID, int imageID, int drawX, int drawY);
 
-            void renderGMWithBlending(GmID GmID, int imageID, int drawX, int drawY, int blendStrengthUnk);
+            void renderGMWithBlending(GmIDInt GmID, int imageID, int drawX, int drawY, int blendStrengthUnk);
 
-            void drawTgxGmOnFlaggedSurface(GmID gmId, int imageIndexInGm, int xPos, int yPos);
+            void drawTgxGmOnFlaggedSurface(GmIDInt gmId, int imageIndexInGm, int xPos, int yPos);
 
-            void renderTextChar(int xPos, int yPos, int imageId, FontRenderType renderType, int lineHeight,
+            void renderTextChar(int xPos, int yPos, int imageId, FontRenderTypeInt renderType, int lineHeight,
                 ushort fillColor, int blendStrength);
 
             void renderGMWithAlphaMask(
-                GmID gmID, int imageID, int xPos, int yPos, GmID maskGmID, int alphaImageID, int blendStrength);
+                GmIDInt gmID, int imageID, int xPos, int yPos, GmIDInt maskGmID, int alphaImageID, int blendStrength);
 
             void drawGfxOnFlaggedSurface(int gfxIndex, int xPos, int yPos);
 
             void adaptGmColorsToRGB565IfRequired(int gmID, int imageIndex);
 
-            void loadGMFile(GmID gmID, char* gmFileName);
+            void loadGMFile(GmIDInt gmID, char* gmFileName);
 
             void loadGmFiles(char* fileNameArray);
         };

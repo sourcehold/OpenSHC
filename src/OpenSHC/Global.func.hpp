@@ -8,16 +8,17 @@
 
 #pragma once
 
-#include "OpenSHC/AI/AIVUnitType.hpp"
-#include "OpenSHC/Game/Resources/ResourceType.hpp"
+#include "OpenSHC/AI/AIVUnitTypeInt.hpp"
+#include "OpenSHC/Game/Resources/ResourceTypeInt.hpp"
 #include "OpenSHC/Global.hpp"
-#include "OpenSHC/Map/Buildings/BuildingType.hpp"
+#include "OpenSHC/Map/Buildings/BuildingTypeInt.hpp"
 #include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
-#include "OpenSHC/Map/Units/EuroRecruitableState.hpp"
-#include "OpenSHC/Map/Units/States/UnitState.hpp"
-#include "OpenSHC/Rendering/Enums/DirectDrawStatus.hpp"
+#include "OpenSHC/Map/Units/EuroRecruitableStateInt.hpp"
+#include "OpenSHC/Map/Units/States/UnitStateShort.hpp"
+#include "OpenSHC/Map/Units/UnitTypeInt.hpp"
+#include "OpenSHC/Rendering/Enums/DirectDrawStatusInt.hpp"
 #include "OpenSHC/UI/DisplayElement.hpp"
-#include "OpenSHC/UI/Enums/DisplayElementID.hpp"
+#include "OpenSHC/UI/Enums/DisplayElementIDInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "WinDef.h"
@@ -28,15 +29,16 @@
 namespace OpenSHC {
 namespace Global_Func {
 
-    using OpenSHC::AI::AIVUnitType;
-    using OpenSHC::Game::Resources::ResourceType;
-    using OpenSHC::Map::Buildings::BuildingType;
+    using OpenSHC::AI::AIVUnitTypeInt;
+    using OpenSHC::Game::Resources::ResourceTypeInt;
+    using OpenSHC::Map::Buildings::BuildingTypeInt;
     using OpenSHC::Map::Buildings::BuildingTypeShort;
-    using OpenSHC::Map::Units::EuroRecruitableState;
-    using OpenSHC::Map::Units::States::UnitState;
-    using OpenSHC::Rendering::Enums::DirectDrawStatus;
+    using OpenSHC::Map::Units::EuroRecruitableStateInt;
+    using OpenSHC::Map::Units::UnitTypeInt;
+    using OpenSHC::Map::Units::States::UnitStateShort;
+    using OpenSHC::Rendering::Enums::DirectDrawStatusInt;
     using OpenSHC::UI::DisplayElement;
-    using OpenSHC::UI::Enums::DisplayElementID;
+    using OpenSHC::UI::Enums::DisplayElementIDInt;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     MACRO_FUNCTION_RESOLVER(
@@ -249,9 +251,9 @@ namespace Global_Func {
     MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00418C80, &OpenSHC::Global::UpdateTower1)
     UpdateTower1;
 
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00418F70,
-        &OpenSHC::Global::UpdateBadBuildingCessPitOrDancingBearUnk)
-    UpdateBadBuildingCessPitOrDancingBearUnk;
+    MACRO_FUNCTION_RESOLVER(
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00418F70, &OpenSHC::Global::resetBuildingDisplayAnimation)
+    resetBuildingDisplayAnimation;
 
     MACRO_FUNCTION_RESOLVER(
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00418F90, &OpenSHC::Global::UpdateBadBuildingBurningStake)
@@ -381,8 +383,8 @@ namespace Global_Func {
     DrawOuterMenuBorder;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00427180, &OpenSHC::Global::MainMenu_Unknown21_Prepare)
-    MainMenu_Unknown21_Prepare;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00427180, &OpenSHC::Global::MenuView_MainMenuModal21_Prepare)
+    MenuView_MainMenuModal21_Prepare;
 
     MACRO_FUNCTION_RESOLVER(BOOLEnum(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00427210,
         &OpenSHC::Global::AModalDialogIsActiveButIsNotQuitting)
@@ -424,17 +426,21 @@ namespace Global_Func {
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0042C190, &OpenSHC::Global::ClearSiegeInformationArray2)
     ClearSiegeInformationArray2;
 
-    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1), false, Address::SHC_3BB0A8C1_0x0042C620,
-        &OpenSHC::Global::LaunchSinglePlayerGameUnk)
-    LaunchSinglePlayerGameUnk;
+    MACRO_FUNCTION_RESOLVER(
+        void(__cdecl*)(int param_1), false, Address::SHC_3BB0A8C1_0x0042C620, &OpenSHC::Global::launchSinglePlayerGame)
+    launchSinglePlayerGame;
 
     MACRO_FUNCTION_RESOLVER(
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0042F010, &OpenSHC::Global::InitializeBasicMap)
     InitializeBasicMap;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00431990, &OpenSHC::Global::ResetSomeValuesFunctionUnk)
-    ResetSomeValuesFunctionUnk;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00431990, &OpenSHC::Global::resetGameUIStateOnMenuSwitch)
+    resetGameUIStateOnMenuSwitch;
+
+    MACRO_FUNCTION_RESOLVER(
+        undefined(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004341D9, &OpenSHC::Global::AdjustViewPortAndMore)
+    AdjustViewPortAndMore;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(undefined4 param_1), false, Address::SHC_3BB0A8C1_0x004380E0,
         &OpenSHC::Global::PlayPlacementWarning)
@@ -463,6 +469,10 @@ namespace Global_Func {
         int(__cdecl*)(int playerID), false, Address::SHC_3BB0A8C1_0x0044A830, &OpenSHC::Global::ComputePlayerPoints1)
     ComputePlayerPoints1;
 
+    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(UnitTypeInt unitType, int actionID), false,
+        Address::SHC_3BB0A8C1_0x0044B210, &OpenSHC::Global::PlayUnitSpeech)
+    PlayUnitSpeech;
+
     MACRO_FUNCTION_RESOLVER(
         int(__cdecl*)(int playerID), false, Address::SHC_3BB0A8C1_0x0044B680, &OpenSHC::Global::ComputePlayerRanking)
     ComputePlayerRanking;
@@ -488,16 +498,16 @@ namespace Global_Func {
     PlaySFXVoices;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0044E510, &OpenSHC::Global::InitBlendFilterArraysUnk)
-    InitBlendFilterArraysUnk;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0044E510, &OpenSHC::Global::initBlendFilterTables)
+    initBlendFilterTables;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(wchar_t* destination, wchar_t* format, ...), false,
         Address::SHC_3BB0A8C1_0x0045D060, &OpenSHC::Global::PrintToDestination)
     PrintToDestination;
 
-    MACRO_FUNCTION_RESOLVER(EuroRecruitableState(__cdecl*)(int barrackUnitIdUnk), false,
-        Address::SHC_3BB0A8C1_0x00464DA0, &OpenSHC::Global::IsEuroUnitRecruitableUnk)
-    IsEuroUnitRecruitableUnk;
+    MACRO_FUNCTION_RESOLVER(EuroRecruitableStateInt(__cdecl*)(int barrackUnitIdUnk), false,
+        Address::SHC_3BB0A8C1_0x00464DA0, &OpenSHC::Global::getEuroUnitRecruitableState)
+    getEuroUnitRecruitableState;
 
     MACRO_FUNCTION_RESOLVER(
         int(__cdecl*)(int param_1), false, Address::SHC_3BB0A8C1_0x00464E80, &OpenSHC::Global::GetUnitRecruitPermission)
@@ -536,11 +546,11 @@ namespace Global_Func {
         &OpenSHC::Global::ChangeRations)
     ChangeRations;
 
-    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int state, ResourceType resourceTypePlus1), false,
-        Address::SHC_3BB0A8C1_0x00465DB0, &OpenSHC::Global::SetPlayerBuyingResultStateUnk)
-    SetPlayerBuyingResultStateUnk;
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int state, ResourceTypeInt resourceTypePlus1), false,
+        Address::SHC_3BB0A8C1_0x00465DB0, &OpenSHC::Global::setStorageFullEmptyNotification)
+    setStorageFullEmptyNotification;
 
-    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int playerID, int buyOrSell, ResourceType resourceType), false,
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int playerID, int buyOrSell, ResourceTypeInt resourceType), false,
         Address::SHC_3BB0A8C1_0x00465E60, &OpenSHC::Global::ProcessBuyOrSell)
     ProcessBuyOrSell;
 
@@ -565,20 +575,19 @@ namespace Global_Func {
         Address::SHC_3BB0A8C1_0x00466430, &OpenSHC::Global::ReleaseDogs2)
     ReleaseDogs2;
 
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00466E00,
-        &OpenSHC::Global::SetEnoughGoldForRequestedUnitToTrueUnk)
-    SetEnoughGoldForRequestedUnitToTrueUnk;
+    MACRO_FUNCTION_RESOLVER(
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00466E00, &OpenSHC::Global::setEnoughGoldForRequestedUnit)
+    setEnoughGoldForRequestedUnit;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00467890, &OpenSHC::Global::SetSomeColorsUnk)
-    SetSomeColorsUnk;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00467890, &OpenSHC::Global::initNamedColorsForColorMode)
+    initNamedColorsForColorMode;
 
     MACRO_FUNCTION_RESOLVER(HRESULT(__stdcall*)(DDSURFACEDESC* displayDesc, LPVOID userParam), false,
         Address::SHC_3BB0A8C1_0x00467BC0, &OpenSHC::Global::EnumDisplayModesCallback)
     EnumDisplayModesCallback;
 
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00469F10, &OpenSHC::Global::DoNothing)
-    DoNothing;
+    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00469F10, &OpenSHC::Global::noOp) noOp;
 
     MACRO_FUNCTION_RESOLVER(byte(__stdcall*)(byte value, int bits), false, Address::SHC_3BB0A8C1_0x0046CE30,
         &OpenSHC::Global::RotateByteLeft)
@@ -588,7 +597,7 @@ namespace Global_Func {
         Address::SHC_3BB0A8C1_0x0046D390, &OpenSHC::Global::GetStringBasedOnHardcodedMaps)
     GetStringBasedOnHardcodedMaps;
 
-    MACRO_FUNCTION_RESOLVER(DirectDrawStatus(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0046F4F0,
+    MACRO_FUNCTION_RESOLVER(DirectDrawStatusInt(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0046F4F0,
         &OpenSHC::Global::DetectDXVersionByLoadingDDRAW)
     DetectDXVersionByLoadingDDRAW;
 
@@ -607,12 +616,12 @@ namespace Global_Func {
     EnumSessionsCallback_addSession_async;
 
     MACRO_FUNCTION_RESOLVER(BOOLEnum(__stdcall*)(int* param_1, undefined4 param_2, char* param_3), false,
-        Address::SHC_3BB0A8C1_0x0047E160, &OpenSHC::Global::DirectPlayModemRelated_MemoryAllocationFunction)
-    DirectPlayModemRelated_MemoryAllocationFunction;
+        Address::SHC_3BB0A8C1_0x0047E160, &OpenSHC::Global::enumModemAddressCallback)
+    enumModemAddressCallback;
 
     MACRO_FUNCTION_RESOLVER(int(__stdcall*)(int size, char* src, void* dst), false, Address::SHC_3BB0A8C1_0x0047E7E0,
-        &OpenSHC::Global::CompressOrCreateLengthPrefixedPacketUnk)
-    CompressOrCreateLengthPrefixedPacketUnk;
+        &OpenSHC::Global::compressOrCreateLengthPrefixedPacket)
+    compressOrCreateLengthPrefixedPacket;
 
     MACRO_FUNCTION_RESOLVER(
         int(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0047EEB0, &OpenSHC::Global::ComputeSomeHashOnUnitArray)
@@ -627,12 +636,12 @@ namespace Global_Func {
     MemCopyFromParameter;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00493050, &OpenSHC::Global::SetupPreviewMinimapDataUnk)
-    SetupPreviewMinimapDataUnk;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00493050, &OpenSHC::Global::loadSelectedMapHeaderForPreview)
+    loadSelectedMapHeaderForPreview;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00495840, &OpenSHC::Global::ProgressBarRelated)
-    ProgressBarRelated;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00495840, &OpenSHC::Global::showLoadSaveProgressBar)
+    showLoadSaveProgressBar;
 
     MACRO_FUNCTION_RESOLVER(
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00496E40, &OpenSHC::Global::ClearPathFindingTileMaps)
@@ -674,7 +683,7 @@ namespace Global_Func {
         Address::SHC_3BB0A8C1_0x004AD7C0, &OpenSHC::Global::ProcessAllyRequestingGoods)
     ProcessAllyRequestingGoods;
 
-    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, ResourceType param_2, int param_3, int param_4), false,
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, ResourceTypeInt param_2, int param_3, int param_4), false,
         Address::SHC_3BB0A8C1_0x004ADDD0, &OpenSHC::Global::ProcessAllyGoodsRequest)
     ProcessAllyGoodsRequest;
 
@@ -686,15 +695,15 @@ namespace Global_Func {
         &OpenSHC::Global::FindDisplayElementWithID)
     FindDisplayElementWithID;
 
-    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(DisplayElementID displayElementID, dword elementState), false,
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(DisplayElementIDInt displayElementID, dword elementState), false,
         Address::SHC_3BB0A8C1_0x004AF650, &OpenSHC::Global::CheckDisplayElementByIDAndSetForUnlimitedDisplay)
     CheckDisplayElementByIDAndSetForUnlimitedDisplay;
 
-    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(DisplayElementID elementId, dword elementState, int displayDuration), false,
-        Address::SHC_3BB0A8C1_0x004AF680, &OpenSHC::Global::ActivateGameSpeedAndResourceLackDisplayElementUnk)
-    ActivateGameSpeedAndResourceLackDisplayElementUnk;
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(DisplayElementIDInt elementId, dword elementState, int displayDuration),
+        false, Address::SHC_3BB0A8C1_0x004AF680, &OpenSHC::Global::activateDisplayElementForDuration)
+    activateDisplayElementForDuration;
 
-    MACRO_FUNCTION_RESOLVER(BOOLEnum(__cdecl*)(DisplayElementID displayElementID), false,
+    MACRO_FUNCTION_RESOLVER(BOOLEnum(__cdecl*)(DisplayElementIDInt displayElementID), false,
         Address::SHC_3BB0A8C1_0x004AF6E0, &OpenSHC::Global::GetIfDisplayElementStateNotZero)
     GetIfDisplayElementStateNotZero;
 
@@ -709,13 +718,13 @@ namespace Global_Func {
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004B8200, &OpenSHC::Global::SumUnitPoints)
     SumUnitPoints;
 
-    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, BuildingType buildingType), false,
-        Address::SHC_3BB0A8C1_0x004BC690, &OpenSHC::Global::SetTutorialBuildingActionState)
-    SetTutorialBuildingActionState;
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, BuildingTypeInt buildingType), false,
+        Address::SHC_3BB0A8C1_0x004BC690, &OpenSHC::Global::recordTutorialBuildingAction)
+    recordTutorialBuildingAction;
 
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004BC770,
-        &OpenSHC::Global::SetTutorialHintActiveWithTimestamp)
-    SetTutorialHintActiveWithTimestamp;
+    MACRO_FUNCTION_RESOLVER(
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004BC770, &OpenSHC::Global::triggerTutorialHighlight)
+    triggerTutorialHighlight;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int skirmishTrailMission), false, Address::SHC_3BB0A8C1_0x004C68D0,
         &OpenSHC::Global::SetupSkirmishMode)
@@ -728,8 +737,8 @@ namespace Global_Func {
     MACRO_FUNCTION_RESOLVER(int(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004C6CD0, &OpenSHC::Global::StoreTime)
     StoreTime;
 
-    MACRO_FUNCTION_RESOLVER(AIVUnitType(__stdcall*)(int unitID, int param_2), false, Address::SHC_3BB0A8C1_0x004CC390,
-        &OpenSHC::Global::GetUnitTypeIndexForUnitID)
+    MACRO_FUNCTION_RESOLVER(AIVUnitTypeInt(__stdcall*)(int unitID, int param_2), false,
+        Address::SHC_3BB0A8C1_0x004CC390, &OpenSHC::Global::GetUnitTypeIndexForUnitID)
     GetUnitTypeIndexForUnitID;
 
     MACRO_FUNCTION_RESOLVER(int(__stdcall*)(int playerID, int maxAmount, BOOLEnum checkOnly), false,
@@ -776,9 +785,9 @@ namespace Global_Func {
         int(__cdecl*)(int playerID), false, Address::SHC_3BB0A8C1_0x004D5780, &OpenSHC::Global::ComputeSkMasterScore)
     ComputeSkMasterScore;
 
-    MACRO_FUNCTION_RESOLVER(
-        void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004D7200, &OpenSHC::Global::ResetEventStatusUnk)
-    ResetEventStatusUnk;
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004D7200,
+        &OpenSHC::Global::resetAndLoadScenarioEventConditions)
+    resetAndLoadScenarioEventConditions;
 
     MACRO_FUNCTION_RESOLVER(
         void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004D9D90, &OpenSHC::Global::TacticalPowersFill)
@@ -831,8 +840,8 @@ namespace Global_Func {
     WriteMissionToScoresFile;
 
     MACRO_FUNCTION_RESOLVER(void(__stdcall*)(int param_1, int param_2, int param_3, undefined4 param_4, int param_5),
-        false, Address::SHC_3BB0A8C1_0x004E3870, &OpenSHC::Global::renderSomethingMap3)
-    renderSomethingMap3;
+        false, Address::SHC_3BB0A8C1_0x004E3870, &OpenSHC::Global::renderBuildingAnimationSprite)
+    renderBuildingAnimationSprite;
 
     MACRO_FUNCTION_RESOLVER(
         int(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004EDD00, &OpenSHC::Global::SomeComputationWithSeparateAreas)
@@ -843,8 +852,8 @@ namespace Global_Func {
     VersioningFixTrees;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004F3840, &OpenSHC::Global::RemoveCertainRockTypesUnk)
-    RemoveCertainRockTypesUnk;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004F3840, &OpenSHC::Global::removeStaleRocks)
+    removeStaleRocks;
 
     MACRO_FUNCTION_RESOLVER(
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004F3900, &OpenSHC::Global::RemoveRocksBeyond1000)
@@ -895,8 +904,8 @@ namespace Global_Func {
     DecrementTileMap1104;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x005232E0, &OpenSHC::Global::ClearAnimalSpawnLocationsUnk)
-    ClearAnimalSpawnLocationsUnk;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x005232E0, &OpenSHC::Global::clearAnimalSpawnLocations)
+    clearAnimalSpawnLocations;
 
     MACRO_FUNCTION_RESOLVER(
         void(__cdecl*)(int unitID), false, Address::SHC_3BB0A8C1_0x00530720, &OpenSHC::Global::updateLogicAndClimbData)
@@ -919,36 +928,36 @@ namespace Global_Func {
     UpdateBurningAnimal2;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int unitID, BOOLEnum updateAV), false, Address::SHC_3BB0A8C1_0x00530B40,
-        &OpenSHC::Global::IncrementAndOptionalUpdateAVValueRelated)
-    IncrementAndOptionalUpdateAVValueRelated;
+        &OpenSHC::Global::incrementWorkTimerAndAverageAV)
+    incrementWorkTimerAndAverageAV;
 
-    MACRO_FUNCTION_RESOLVER(BOOLEnum(__cdecl*)(int unitID, UnitState nextUnitState), false,
-        Address::SHC_3BB0A8C1_0x00530C40, &OpenSHC::Global::ConsiderHavingABreakNowUnk)
-    ConsiderHavingABreakNowUnk;
+    MACRO_FUNCTION_RESOLVER(BOOLEnum(__cdecl*)(int unitID, UnitStateShort nextUnitState), false,
+        Address::SHC_3BB0A8C1_0x00530C40, &OpenSHC::Global::checkWorkerTakesRestBreak)
+    checkWorkerTakesRestBreak;
 
     MACRO_FUNCTION_RESOLVER(undefined4(__cdecl*)(int unitID, int shouldFindNewGoodThing, int param_3), false,
         Address::SHC_3BB0A8C1_0x00530CF0, &OpenSHC::Global::SetStateToFreetimeWalking)
     SetStateToFreetimeWalking;
 
-    MACRO_FUNCTION_RESOLVER(bool(__cdecl*)(int param_1), false, Address::SHC_3BB0A8C1_0x00530D50,
-        &OpenSHC::Global::CheckUnitProductionPaused)
-    CheckUnitProductionPaused;
+    MACRO_FUNCTION_RESOLVER(
+        bool(__cdecl*)(int param_1), false, Address::SHC_3BB0A8C1_0x00530D50, &OpenSHC::Global::checkUnitField2fe)
+    checkUnitField2fe;
 
     MACRO_FUNCTION_RESOLVER(int(__cdecl*)(int unitID, int goodsCount, BOOLEnum boost), false,
         Address::SHC_3BB0A8C1_0x00530D70, &OpenSHC::Global::ComputeGoodsProduced)
     ComputeGoodsProduced;
 
     MACRO_FUNCTION_RESOLVER(BuildingTypeShort*(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00530E00,
-        &OpenSHC::Global::WarnIfPlayerLacksGranary)
-    WarnIfPlayerLacksGranary;
+        &OpenSHC::Global::checkPlayerGranaryPeriodicWarning)
+    checkPlayerGranaryPeriodicWarning;
 
     MACRO_FUNCTION_RESOLVER(
-        uint(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00530EB0, &OpenSHC::Global::TryPlayStockpileIsFullNoiseUnk)
-    TryPlayStockpileIsFullNoiseUnk;
+        uint(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00530EB0, &OpenSHC::Global::playStockpileFullWarningSfx)
+    playStockpileFullWarningSfx;
 
     MACRO_FUNCTION_RESOLVER(BuildingTypeShort*(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00530F20,
-        &OpenSHC::Global::PlaySound_StockpileIsFullMyLordUnk)
-    PlaySound_StockpileIsFullMyLordUnk;
+        &OpenSHC::Global::playArmouryFullWarningVoice)
+    playArmouryFullWarningVoice;
 
     MACRO_FUNCTION_RESOLVER(
         BOOLEnum(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0053A020, &OpenSHC::Global::CurrentUnitHasHealer)
@@ -965,8 +974,8 @@ namespace Global_Func {
     UpdateShield;
 
     MACRO_FUNCTION_RESOLVER(BOOLEnum(__cdecl*)(int unitID), false, Address::SHC_3BB0A8C1_0x0053CAC0,
-        &OpenSHC::Global::ConsiderTakingABreakUnk)
-    ConsiderTakingABreakUnk;
+        &OpenSHC::Global::considerUnitTakingBreak)
+    considerUnitTakingBreak;
 
     MACRO_FUNCTION_RESOLVER(
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0053EAA0, &OpenSHC::Global::UpdatePeasant)

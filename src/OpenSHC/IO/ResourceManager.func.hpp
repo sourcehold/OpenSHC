@@ -2,7 +2,7 @@
   path: 'OpenSHC/IO/ResourceManager.func.hpp'
 */
 
-#include "OpenSHC/IO/FileResourceType.hpp"
+#include "OpenSHC/IO/FileResourceTypeInt.hpp"
 #include "OpenSHC/IO/ResourceManager.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -11,7 +11,7 @@ namespace OpenSHC {
 namespace IO {
     namespace ResourceManager_Func {
 
-        using OpenSHC::IO::FileResourceType;
+        using OpenSHC::IO::FileResourceTypeInt;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         MACRO_FUNCTION_RESOLVER(void (ResourceManager::*)(dword), false, Address::SHC_3BB0A8C1_0x0046C200,
@@ -22,7 +22,7 @@ namespace IO {
             &ResourceManager::getChecksumOfMapByName)
         getChecksumOfMapByName;
 
-        MACRO_FUNCTION_RESOLVER(char* (ResourceManager::*)(int), false, Address::SHC_3BB0A8C1_0x0046C2E0,
+        MACRO_FUNCTION_RESOLVER(undefined (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x0046C2E0,
             &ResourceManager::getLoadedMapNameForIndex)
         getLoadedMapNameForIndex;
 
@@ -39,20 +39,20 @@ namespace IO {
         doesFileExist;
 
         MACRO_FUNCTION_RESOLVER(
-            void (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x0046C450, &ResourceManager::setGfxFileFilter)
-        setGfxFileFilter;
+            void (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x0046C450, &ResourceManager::setupGfxFileDialog)
+        setupGfxFileDialog;
 
         MACRO_FUNCTION_RESOLVER(
-            void (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x0046C480, &ResourceManager::setHelpFileFilter)
-        setHelpFileFilter;
+            void (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x0046C480, &ResourceManager::setupHelpFileDialog)
+        setupHelpFileDialog;
 
         MACRO_FUNCTION_RESOLVER(
-            void (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x0046C4B0, &ResourceManager::setSoundFileFilter)
-        setSoundFileFilter;
+            void (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x0046C4B0, &ResourceManager::setupFxFileDialog)
+        setupFxFileDialog;
 
         MACRO_FUNCTION_RESOLVER(int (ResourceManager::*)(char*), false, Address::SHC_3BB0A8C1_0x0046C4E0,
-            &ResourceManager::getSimpleFirst1024ByteSumOfFile)
-        getSimpleFirst1024ByteSumOfFile;
+            &ResourceManager::getSignedByteSumOfFile_or_minus1)
+        getSignedByteSumOfFile_or_minus1;
 
         MACRO_FUNCTION_RESOLVER(
             void (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x00471C10, &ResourceManager::syncLoadedMapNames)
@@ -67,16 +67,16 @@ namespace IO {
         replaceMapNameWith;
 
         MACRO_FUNCTION_RESOLVER(char* (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x00471D30,
-            &ResourceManager::getCurrentResourceCoreNameUnk)
-        getCurrentResourceCoreNameUnk;
+            &ResourceManager::getCurrentResourceBaseName)
+        getCurrentResourceBaseName;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x00471DC0,
             &ResourceManager::doesFileOfActiveResourceExist)
         doesFileOfActiveResourceExist;
 
         MACRO_FUNCTION_RESOLVER(void (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x00471DF0,
-            &ResourceManager::resetOpenFileNameStruct)
-        resetOpenFileNameStruct;
+            &ResourceManager::initOpenFileNameStruct)
+        initOpenFileNameStruct;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (ResourceManager::*)(void*, size_t), false, Address::SHC_3BB0A8C1_0x00471E50,
             &ResourceManager::readCurrentResourceIntoDestination)
@@ -95,8 +95,8 @@ namespace IO {
         readNextPartOfCurrentResourceIntoMemory;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x00472080,
-            &ResourceManager::showOpenGfxFileDialog)
-        showOpenGfxFileDialog;
+            &ResourceManager::showImportTgxDialog)
+        showImportTgxDialog;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (ResourceManager::*)(undefined4), false, Address::SHC_3BB0A8C1_0x004720C0,
             &ResourceManager::showOpenHelpFileDialog)
@@ -107,8 +107,8 @@ namespace IO {
         showSaveHelpFileDialog;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x00472140,
-            &ResourceManager::showOpenSoundFileDialog)
-        showOpenSoundFileDialog;
+            &ResourceManager::showImportSoundDialog)
+        showImportSoundDialog;
 
         MACRO_FUNCTION_RESOLVER(int (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x00472180,
             &ResourceManager::fileHashFunctionByteByByte)
@@ -130,7 +130,7 @@ namespace IO {
             &ResourceManager::discoverMapFiles)
         discoverMapFiles;
 
-        MACRO_FUNCTION_RESOLVER(void (ResourceManager::*)(FileResourceType, char*), false,
+        MACRO_FUNCTION_RESOLVER(void (ResourceManager::*)(FileResourceTypeInt, char*), false,
             Address::SHC_3BB0A8C1_0x00478360, &ResourceManager::resolveResourceFileName)
         resolveResourceFileName;
 

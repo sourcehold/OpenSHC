@@ -19,8 +19,8 @@ namespace Rendering {
                 &AIMessageQueue::playAiLordMessage)
             playAiLordMessage;
 
-            MACRO_FUNCTION_RESOLVER(void (AIMessageQueue::*)(char*, char*, char*), false,
-                Address::SHC_3BB0A8C1_0x004BE7E0, &AIMessageQueue::playEventVideoBik)
+            MACRO_FUNCTION_RESOLVER(undefined (AIMessageQueue::*)(), false, Address::SHC_3BB0A8C1_0x004BE7E0,
+                &AIMessageQueue::playEventVideoBik)
             playEventVideoBik;
 
             MACRO_FUNCTION_RESOLVER(void (AIMessageQueue::*)(char*, char*, char*, int), false,

@@ -10,7 +10,7 @@
 
 #include "OpenSHC/Map/ClimbData.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingStatePartB.hpp"
-#include "OpenSHC/Map/Units/UnitType.hpp"
+#include "OpenSHC/Map/Units/UnitTypeInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "WinDef.h"
@@ -21,7 +21,7 @@ namespace Map {
 
         using OpenSHC::Map::ClimbData;
         using OpenSHC::Map::Navigation::PathFindingStatePartB;
-        using OpenSHC::Map::Units::UnitType;
+        using OpenSHC::Map::Units::UnitTypeInt;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
@@ -52,21 +52,21 @@ namespace Map {
             undefined1 padding_0x50[12]; // 0x00000050 length: 12
             undefined4 ALGO_TotalTroopValue; // 0x0000005C length: 4
             undefined4 ALGO_TotalTroopCount; // 0x00000060 length: 4
-            undefined4 field34_0x64; // 0x00000064 length: 4
+            undefined4 dwUnitsWithinDistanceCount; // 0x00000064 length: 4
             undefined1 padding_0x68[4]; // 0x00000068 length: 4
             undefined4 toggleUpdateSeparateAreaTileMap; // 0x0000006C length: 4
             undefined4 field40_0x70; // 0x00000070 length: 4
-            undefined4 field41_0x74; // 0x00000074 length: 4
+            undefined4 dwAreaMapUpdateCounter; // 0x00000074 length: 4
             undefined4 DAT_lWys; // 0x00000078 length: 4
-            undefined4 field43_0x7c; // 0x0000007C length: 4
-            undefined4 notAllAssassinsUnk; // 0x00000080 length: 4
+            undefined4 dwPathfindingInProgressFlag; // 0x0000007C length: 4
+            undefined4 dwPathHasNonAssassinUnit; // 0x00000080 length: 4
             undefined4 climbIsIllegal; // 0x00000084 length: 4
-            undefined4 allAssassinsUnk; // 0x00000088 length: 4
+            undefined4 dwAllUnitsAreAssassinsFlag; // 0x00000088 length: 4
             undefined4 distance; // 0x0000008C length: 4
-            undefined4 field48_0x90; // 0x00000090 length: 4
-            undefined4 field49_0x94; // 0x00000094 length: 4
-            undefined4 field50_0x98; // 0x00000098 length: 4
-            undefined4 field51_0x9c; // 0x0000009C length: 4
+            undefined4 dwAreaReachCacheValid; // 0x00000090 length: 4
+            undefined4 dwPathPlanCommitCounter; // 0x00000094 length: 4
+            undefined4 dwAreaNavigationFlag; // 0x00000098 length: 4
+            undefined4 dwCatapultTargetPathDistance; // 0x0000009C length: 4
             undefined4 calculations; // 0x000000A0 length: 4
             undefined4 DAT_Mini_spreads; // 0x000000A4 length: 4
             undefined4 DAT_Easy; // 0x000000A8 length: 4
@@ -75,7 +75,7 @@ namespace Map {
             undefined4 searchMatchCounter; // 0x000000B4 length: 4
             undefined1 padding_0xb8[4]; // 0x000000B8 length: 4
             undefined4 DAT_Ass; // 0x000000BC length: 4
-            undefined4 field63_0xc0; // 0x000000C0 length: 4
+            undefined4 dwClimbDataAvailableFlag; // 0x000000C0 length: 4
             undefined4 DAT_Test_likely; // 0x000000C4 length: 4
             undefined4 DAT_Test_gatehouse; // 0x000000C8 length: 4
             undefined4 totalZones; // 0x000000CC length: 4
@@ -122,7 +122,7 @@ namespace Map {
             BOOLEnum findLinkageBasedPathOrWalkRadius(
                 uint x, uint y, int x2, int y2, int maxIterations, BOOLEnum continuePreviousSearch);
 
-            undefined4 findSuitableSpawnLocationUnk(int x, int y, int x2, int y2, int param_5, int param_6);
+            undefined4 bfsFindReachableFreeTile(int x, int y, int x2, int y2, int param_5, int param_6);
 
             BOOLEnum findPathUsingClimbingWithHeightMargin16(
                 uint x, uint y, uint x2, uint y2, int budget, BOOLEnum continueSearch);
@@ -136,15 +136,15 @@ namespace Map {
 
             BOOLEnum updateSeparateAreaTileMap(int forceUpdate);
 
-            BOOLEnum updatePathLinkageLayerBasedOnBuildingsUnk(int yUnk, int tile);
+            BOOLEnum computeTilePathLinkageBits(int yUnk, int tile);
 
             void updatePathLinkageLayerAtTileForSomeLogicalReason(int tile, int y);
 
-            void updatePathLinkageTileMapRelatedToGates(int buildingID);
+            void setGatePassabilityLinkage(int buildingID);
 
-            undefined8 updatePathLinkageTileMapRelatedToKeeps(int buildingID);
+            undefined8 setKeepEntranceLinkage(int buildingID);
 
-            void updatePathLinkageTileMapRelatedToSiegeTower(int param_1);
+            void setSiegeTowerLinkage(int param_1);
 
             BOOLEnum tracePathPlanToDestinationViaUnoccupiedTiles(uint x, uint y, uint destX, uint destY);
 
@@ -158,7 +158,7 @@ namespace Map {
 
             BOOLEnum getYSmallerThanYLimit();
 
-            void pathFindingDeerAndLionsUnk(int originArea, uint destinationX, uint destinationY);
+            void findNearestTileInOriginArea(int originArea, uint destinationX, uint destinationY);
 
             void algTunnelerFindTarget(int playerID, int targetPlayerID, int distance, int originX, int originY);
 
@@ -198,13 +198,13 @@ namespace Map {
 
             void updateUnitDeathHeatmapIn3SpacesAroundTile(uint x, uint y);
 
-            void recomputeALGPathFindingTileMapUnk(int someMax, uint x, uint y, undefined4 param_4);
+            void floodMarkAIInfoLayer(int someMax, uint x, uint y, undefined4 param_4);
 
             void updateAIZoneWithFloodFill0x20(int max, uint x, uint y);
 
             BOOLEnum findAIZoneWithFlags(int maxDistance, uint x, uint y, undefined4 aiInfoFlags);
 
-            int findArcherRelatedAttackInfoIndex(int max, uint x, uint y, int tribeID);
+            int bfsFindAvailableArcherDefensePoint(int max, uint x, uint y, int tribeID);
 
             int findSupportPointIndex(int max, uint x, uint y, int tribeID);
 
@@ -213,47 +213,48 @@ namespace Map {
             dword findAppropriateLocationForSiegeTent(
                 int distanceUnk, uint x, uint y, undefined4 selectionID, uint requiredDistanceFromAIZone, int playerID);
 
-            dword pathFindingRelated(int param_1, uint param_2, uint param_3, int param_4);
+            dword bfsFindBestCostTileWithinRange(int param_1, uint param_2, uint param_3, int param_4);
 
-            dword pathfindingRelated49ff20(uint x, uint y, int playerID, uint distanceUnk, int param_5);
+            dword bfsFindBestTileMatchingAttackMarker(uint x, uint y, int playerID, uint distanceUnk, int param_5);
 
-            dword findBestAttackTileByPathCost(uint param_1, uint param_2, int param_3, uint param_4);
+            dword findBestAttackPathTile(uint param_1, uint param_2, int param_3, uint param_4);
 
-            int findNearestEnemyBuildingWithinDistance(int param_1, int param_2, int param_3, int param_4);
+            int bfsFindNearestEnemyBuilding(int param_1, int param_2, int param_3, int param_4);
 
-            int findNearestEnemyUnitWithinDistance(int param_1, int param_2, int param_3, int param_4);
+            int bfsFindNearestEnemyUnit(int param_1, int param_2, int param_3, int param_4);
 
-            int getGatehouseNearSomethingUnk(int param_1, int param_2, int param_3, int maxDistance);
+            int findNearestEnemyGatehouse(int param_1, int param_2, int param_3, int maxDistance);
 
-            int findDistanceOrThreatLevelToUnitUnk(int param_1, int param_2, int param_3, int param_4);
+            int bfsFindHighestPriorityEnemyUnit(int param_1, int param_2, int param_3, int param_4);
 
             void setWalkabilityBorderLogicLayerForSmallerMapSizes();
 
             void aggressiveStanceTargetBuildingAtRange(int unitID, int maxDistance);
 
-            BOOLEnum isEnemyTooCloseUnk(int playerID, uint x, uint y, int requiredDistance);
+            BOOLEnum isEnemyTooClose(int playerID, uint x, uint y, int requiredDistance);
 
-            int tracePathToFriendlyDefensesAndReturnTileUnk(int playerID, uint x, uint y);
+            int bfsFindReachableFriendlyDefenseTile(int playerID, uint x, uint y);
 
             dword findOwnedGatehouse(int playerID, uint x, uint y);
 
             undefined4 isTileInRangeOfKeepRange(int playerID, uint x, uint y, int range);
 
-            undefined4 findSomeSuitableLocationUnk(int param_1, uint x, uint y, int param_4);
+            undefined4 bfsEnemyStructureWithinRange(int param_1, uint x, uint y, int param_4);
 
             void placeCommemoratingStatueAtGoodLocation(int playerID);
 
             BOOLEnum isSignPostWithinDistance(uint x, uint y, int limit);
 
-            undefined4 spreadAlgorithmForFlagsAndBraziersUnk(int playerID, uint x, uint y, int param_4, int param_5);
+            undefined4 findOrRemovePlayerFlagsAndBraziersBFS(int playerID, uint x, uint y, int param_4, int param_5);
 
             undefined4 igniteFireAtTilesDistanceAway(int tile, int maxDistance, int playerID);
 
             BOOLEnum findAccessibleWallAndNearbyFreeTile(uint unitID, int tile, int* pFreeTile, int* pDefensesTile);
 
-            undefined4 healUnitsOfPlayerWithinRadius(int param_1, int param_2, int param_3, int param_4);
+            undefined4 bfsHealOwnerUnits(int param_1, int param_2, int param_3, int param_4);
 
-            undefined4 certainDamageToUnitsUnk(int param_1, int param_2, int param_3, int param_4, undefined4 param_5);
+            undefined4 applyAreaDamageToEnemyUnits(
+                int param_1, int param_2, int param_3, int param_4, undefined4 param_5);
 
             bool pathFindingToAttackCastleIncludingMoat(undefined4 playerID, int wallOwnerPlayerID, uint x, uint y,
                 byte* out_successUnk, int* out_x, int* out_y);
@@ -268,45 +269,45 @@ namespace Map {
 
             void reprocessLadddermanWallData(int laddermanWalledDataID);
 
-            undefined4 registerUnitOnClimbData(int param_1, int param_2);
+            undefined4 assignUnitToClimbPoint(int param_1, int param_2);
 
-            void clearActiveClimbDataOfType6And7();
+            void clearLaddermanClimbData();
 
             int calculateCanPlayerUnitsNavigateToAreaFromArea(
                 int playerID, dword fromArea, dword toArea, int permitClimb);
 
-            dword findConnectingAreaBetweenTwoAreas(int param_1, dword param_2, dword param_3);
+            dword traverseAreaConnectivityGraph(int param_1, dword param_2, dword param_3);
 
             BOOLEnum calculateCanReachUsingCachedAreaLogic(int tile1, int tile2);
 
-            undefined4 findBestAdjacentClimbTileToTarget(
+            undefined4 findReachableTileNextToTarget(
                 int param_1, uint param_2, uint param_3, uint param_4, uint param_5);
 
             void updatePathLinkageLayerForEachBuildingAtEachTile();
 
             void updatePathLinkagesInAllEightDirections(int y, int tile);
 
-            void findBestAttackTargetTileWithHeightAndOwner(int param_1, uint param_2, uint param_3, int param_4,
-                int param_5, int param_6, int param_7, int param_8, int param_9);
+            void findBestSiegeTargetTile(int param_1, uint param_2, uint param_3, int param_4, int param_5, int param_6,
+                int param_7, int param_8, int param_9);
 
-            void storeDestinationOptionsUnk(int signpostID);
+            void storeDispersedMoveDestinations(int signpostID);
 
             void setDestinationPairsBasedOnPreviousSearch(int playerIDMin1, int attackedPlayerID);
 
             void setMoveDestinationPairs(int playerIDmin1, int playerID, int maxCost);
 
             void spawnUnitAndAddToTribe(
-                int playerID, int displayColor, int count, UnitType unitType, undefined4 tribeID);
+                int playerID, int displayColor, int count, UnitTypeInt unitType, undefined4 tribeID);
 
             void computeAttackVectorsBasedOnXAndY(int playerID);
 
-            undefined4 findCrossAreaBridgeTileToTarget(int param_1, uint param_2, uint param_3);
+            undefined4 findClosestReachableTileForUnit(int param_1, uint param_2, uint param_3);
 
             int canNavigateFunctionReturnsArea(int playerID, dword targetArea, uint unitX, uint unitY);
 
             void updateWalkLayerAndAIPathCostLayer(int limit, uint borderDistance, dword fromArea, int playerID);
 
-            void pathfindingForAttacksUnk(int tribeID, int buildingID, int param_3, dword param_4, int param_5);
+            void buildBuildingAttackApproachTiles(int tribeID, int buildingID, int param_3, dword param_4, int param_5);
 
             void pathPlanningForTribe(
                 uint tribeID, undefined4 targetUnitID, uint x, uint y, int unitCount, dword area, int playerID);

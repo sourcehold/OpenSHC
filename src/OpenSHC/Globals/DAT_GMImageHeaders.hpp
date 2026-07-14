@@ -8,16 +8,16 @@
 
 #pragma once
 
-#include "OpenSHC/IO/Graphics/ImageHeaders.hpp"
+#include "OpenSHC/IO/Graphics/ImageHeader.hpp"
 
 // GLOBAL: STRONGHOLDCRUSADER 0x00B98790
-// StructResolver::Instance<OpenSHC::IO::Graphics::ImageHeaders,12158864>::instance
+// StructResolver::Instance<OpenSHC::IO::Graphics::ImageHeader[66000],12158864>::instance
 
 namespace OpenSHC {
 
-using OpenSHC::IO::Graphics::ImageHeaders;
+using OpenSHC::IO::Graphics::ImageHeader;
 
-MACRO_STRUCT_RESOLVER(ImageHeaders, false, Address::SHC_3BB0A8C1_0x00B98790) DAT_GMImageHeaders;
+MACRO_STRUCT_RESOLVER(ImageHeader[66000], false, Address::SHC_3BB0A8C1_0x00B98790) DAT_GMImageHeaders;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00B98790);

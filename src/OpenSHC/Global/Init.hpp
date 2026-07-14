@@ -22,23 +22,23 @@ namespace Global {
 
         void __stdcall Constructor_MenuView_UnusedEconomicMissionSelect();
 
-        void __stdcall Constructor_MenuView_UnusedSomeMissionStartUnk();
+        void __stdcall Constructor_MenuView_UnusedMissionStart();
 
         void __stdcall Constructor_MenuView_UnusedOldTitleMenu();
 
         void __stdcall Constructor_MenuView_MpConnection();
 
-        void __stdcall Constructor_MenuView_Unknown21();
+        void __stdcall Constructor_MenuView_MainMenuModal21();
 
         void __stdcall Constructor_MenuView_LobbyMenu();
 
-        void __stdcall Constructor_MenuView_Unknown33();
+        void __stdcall Constructor_MenuView_LobbyReadyLaunch33();
 
-        void __stdcall Constructor_MenuView_Unknown61ReturnToSkrimishMenuUnk();
+        void __stdcall Constructor_MenuView_ReturnToSkirmishMenu61();
 
         void __stdcall Constructor_MenuView_SingleplayerMapChoice();
 
-        void __stdcall Constructor_MenuView_Unknown49DoesNothingUnk();
+        void __stdcall Constructor_MenuView_Placeholder49DoesNothing();
 
         void __stdcall Constructor_MenuView_MapEditorLandscaping();
 
@@ -60,9 +60,9 @@ namespace Global {
 
         void __stdcall Constructor_MenuView_UnusedCreateSiege();
 
-        void __stdcall Constructor_MenuView_Unknown26_CampaignRelatedUnk();
+        void __stdcall Constructor_MenuView_CampaignCredits26();
 
-        void __stdcall Constructor_MenuView_CampaignUnk();
+        void __stdcall Constructor_MenuView_Campaign27();
 
         void __stdcall Constructor_MenuView_ScenarioDescription();
 
@@ -110,7 +110,7 @@ namespace Global {
 
         void __stdcall Constructor_MenuView_CrusadeEndscreen();
 
-        void __stdcall Constructor_Menu_Unknown_ManyThings();
+        void __stdcall Constructor_Menu_MultiItemShared();
 
         void __stdcall Constructor_Menu_IntroLogos();
 
@@ -126,7 +126,7 @@ namespace Global {
 
         void __stdcall Constructor_Menu_CustomScenarios();
 
-        void __stdcall Constructor_Menu_UnusedSomeMissionStartUnk();
+        void __stdcall Constructor_Menu_UnusedMissionStart();
 
         void __stdcall Constructor_Menu_HistoricMissionSelect();
 
@@ -176,9 +176,9 @@ namespace Global {
 
         void __stdcall Constructor_Menu_UnusedCreateSiege();
 
-        void __stdcall Constructor_Menu_Unknown26CampaignRelatedUnk();
+        void __stdcall Constructor_Menu_CampaignCredits26();
 
-        void __stdcall Constructor_Menu_Unknown27CampaignUnk();
+        void __stdcall Constructor_Menu_Campaign27();
 
         void __stdcall Constructor_Menu_UnusedExtremeAd();
 
@@ -198,7 +198,7 @@ namespace Global {
 
         void __stdcall Constructor_Menu_MissionFinishedTransition();
 
-        void __stdcall Constructor_Menu_GameLostUnk();
+        void __stdcall Constructor_Menu_GameLost();
 
         void __stdcall Constructor_Menu_ChooseNetworkServiceProvider();
 
@@ -296,7 +296,7 @@ namespace Global {
 
         void __stdcall Constructor_Menu_StartGoods();
 
-        void __stdcall Constructor_Menu_UnusedSiegeAttackingForceUnk();
+        void __stdcall Constructor_Menu_UnusedSiegeAttackingForce();
 
         void __stdcall Constructor_Menu_NewInvasion();
 
@@ -336,7 +336,7 @@ namespace Global {
 
         void __stdcall Constructor_MenuModal_DebugDataUnitData();
 
-        void __stdcall Constructor_MenuModal_DebugDataZoneDataUnk();
+        void __stdcall Constructor_MenuModal_DebugDataZoneData();
 
         void __stdcall Constructor_MenuModal_DebugDataNetwork();
 
@@ -396,7 +396,7 @@ namespace Global {
 
         void __stdcall Constructor_MenuModal_StartGoods();
 
-        void __stdcall Constructor_MenuModal_UnusedSiegeAttackingForceUnk();
+        void __stdcall Constructor_MenuModal_UnusedSiegeAttackingForce();
 
         void __stdcall Constructor_MenuModal_NewInvasion();
 
@@ -472,19 +472,19 @@ namespace Global {
 
         void __stdcall Constructor_MenuModal_TacticalPowerBar();
 
-        void __stdcall Constructor_MenuModal_DebugDataAivStateUnk();
+        void __stdcall Constructor_MenuModal_DebugDataAivState();
 
-        void __stdcall CreateUnknownDisplayElement0();
+        void __stdcall CreateChatAnchorPlaceholderDisplayElement0();
 
         void __stdcall CreateBottomLeftDateDisplayElement();
 
-        void __stdcall CreateUnknownDisplayElement18();
+        void __stdcall CreateTopAnchorPlaceholderDisplayElement18();
 
         void __stdcall CreateInGameStartingGoodsCounterDisplayElement();
 
         void __stdcall CreateConnectAndPathLinkageInfoTextDisplayElement();
 
-        void __stdcall CreateInGameChatDisplayElementUnk();
+        void __stdcall CreateInGameChatDisplayElement();
 
         void __stdcall CreateResourceMissing1DisplayElement();
 
@@ -492,9 +492,9 @@ namespace Global {
 
         void __stdcall CreateDebugNumbersDisplayElement();
 
-        void __stdcall CreateUnknownDisplayElement7();
+        void __stdcall CreateStopwatchDurationDisplayElement();
 
-        void __stdcall CreateSomeMissionNumberUnkDisplayElement9();
+        void __stdcall CreateMissionNumberDisplayElement();
 
         void __stdcall CreateNoTreeGrowthTextDisplayElement();
 
@@ -502,31 +502,31 @@ namespace Global {
 
         void __stdcall CreateMissionWinDefeatBannerDisplayElement();
 
-        void __stdcall CreateSomeMultiplayerInfoUnkDisplayElement19();
+        void __stdcall CreateMultiplayerResyncOverlayDisplayElement();
 
         void __stdcall CreateKeepAndGranaryPlacementInfoDisplayElement();
 
         void __stdcall CreatePlayerInfoOnHoverDisplayElement();
 
-        void __stdcall CreatePlayerPingUnkDisplayElement22();
+        void __stdcall CreatePlayerPingDisplayElement();
 
         void __stdcall CreateGamePausedTextDisplayElement();
 
         void __stdcall CreateGameSpeedTextDisplayElement();
 
-        void __stdcall CreateUnknownDisplayElement25();
+        void __stdcall CreateSkirmishPointsPerPlayerDebugOverlayElement();
 
         void __stdcall CreateTimeUntilVictoryDisplayElement();
 
-        void __stdcall CreateNoRushDisplayElementUnk();
+        void __stdcall CreateNoRushDisplayElement();
 
         void __stdcall CreateTimeUntilDefeatDisplayElement();
 
-        void __stdcall CreateSomeMultiplayerInfoUnkDisplayElement28();
+        void __stdcall CreateLaggingPlayerEjectOverlayDisplayElement();
 
         void __stdcall CreatePeopleLeftToPlaceDisplayElement();
 
-        void __stdcall Constructor_UnknownClass1();
+        void __stdcall staticInit_emptyGlobalCtorA();
 
         void __stdcall Constructor_WindowAndDirectDraw();
 
@@ -546,7 +546,7 @@ namespace Global {
 
         void __stdcall Constructor_TextManagerObj();
 
-        void __stdcall Constructor_UnusedClass1Unk();
+        void __stdcall staticInit_emptyGlobalCtorB();
 
         void __stdcall Constructor_RNGState();
 
@@ -562,7 +562,7 @@ namespace Global {
 
         void __stdcall Constructor_Stopwatch_Gameloop();
 
-        void __stdcall Constructor_Stopwatch_Unknown();
+        void __stdcall Constructor_Stopwatch();
 
         void __stdcall Constructor_FilePackager();
 
@@ -626,11 +626,11 @@ namespace Global {
 
         void __cdecl Constructor_Locks();
 
-        void __stdcall Constructor_CreateLocaleMemoryRelated();
+        void __stdcall staticInit_localeMemoryAtexit();
 
         void __stdcall Constructor_Locks2();
 
-        void __stdcall Constructor_CRelated();
+        void __stdcall staticInit_crtObjectAtexit();
 
         void __stdcall Destructor_MenuView_MissionFinishedTransition();
 

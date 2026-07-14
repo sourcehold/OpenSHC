@@ -2,21 +2,21 @@
   path: 'OpenSHC/Map/LandscapeState.func.hpp'
 */
 
-#include "OpenSHC/IO/PackagedFileMagicNum.hpp"
+#include "OpenSHC/IO/PackagedFileMagicNumInt.hpp"
 #include "OpenSHC/Map/LandscapeState.hpp"
-#include "OpenSHC/Map/Trees/TreeType.hpp"
+#include "OpenSHC/Map/Trees/TreeTypeInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
 namespace Map {
     namespace LandscapeState_Func {
 
-        using OpenSHC::IO::PackagedFileMagicNum;
-        using OpenSHC::Map::Trees::TreeType;
+        using OpenSHC::IO::PackagedFileMagicNumInt;
+        using OpenSHC::Map::Trees::TreeTypeInt;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         MACRO_FUNCTION_RESOLVER(undefined4 (LandscapeState::*)(undefined4), false, Address::SHC_3BB0A8C1_0x004F1A60,
-            &LandscapeState::mapUITreeTypeToLogicalTreeType)
-        mapUITreeTypeToLogicalTreeType;
+            &LandscapeState::mapTreeBrushIDToLogicalType)
+        mapTreeBrushIDToLogicalType;
 
         MACRO_FUNCTION_RESOLVER(undefined4 (LandscapeState::*)(undefined4, int), false,
             Address::SHC_3BB0A8C1_0x004F1BE0, &LandscapeState::getValueFrom0UpTo3ForTreeTypeAndTreeSeason)
@@ -27,13 +27,13 @@ namespace Map {
         clearRocksAndTrees;
 
         MACRO_FUNCTION_RESOLVER(
-            int (LandscapeState::*)(undefined4, undefined4, TreeType, undefined4, int, undefined4, int), false,
+            int (LandscapeState::*)(undefined4, undefined4, TreeTypeInt, undefined4, int, undefined4, int), false,
             Address::SHC_3BB0A8C1_0x004F1CE0, &LandscapeState::createTree)
         createTree;
 
         MACRO_FUNCTION_RESOLVER(void (LandscapeState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004F2020,
-            &LandscapeState::setTreeStageRelatedValues)
-        setTreeStageRelatedValues;
+            &LandscapeState::setTreeGrowthStageValues)
+        setTreeGrowthStageValues;
 
         MACRO_FUNCTION_RESOLVER(
             void (LandscapeState::*)(int), false, Address::SHC_3BB0A8C1_0x004F2070, &LandscapeState::removeTree)
@@ -56,12 +56,12 @@ namespace Map {
         lightUpTree;
 
         MACRO_FUNCTION_RESOLVER(int (LandscapeState::*)(int), false, Address::SHC_3BB0A8C1_0x004F2A10,
-            &LandscapeState::getRandomRockImageOffset)
-        getRandomRockImageOffset;
+            &LandscapeState::getRandomRockGfxOffset)
+        getRandomRockGfxOffset;
 
         MACRO_FUNCTION_RESOLVER(undefined4 (LandscapeState::*)(int), false, Address::SHC_3BB0A8C1_0x004F2C20,
-            &LandscapeState::getTreeGrowthTargetStage)
-        getTreeGrowthTargetStage;
+            &LandscapeState::getTreeVisualStage)
+        getTreeVisualStage;
 
         MACRO_FUNCTION_RESOLVER(
             void (LandscapeState::*)(), false, Address::SHC_3BB0A8C1_0x004F2CC0, &LandscapeState::setTreeSpreadInterval)
@@ -76,28 +76,28 @@ namespace Map {
         setupBabyTreeLocation;
 
         MACRO_FUNCTION_RESOLVER(uint (LandscapeState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004F2FB0,
-            &LandscapeState::isTreeAliveAndMatchingUID)
-        isTreeAliveAndMatchingUID;
+            &LandscapeState::isTreeChoppable)
+        isTreeChoppable;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (LandscapeState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004F2FE0,
             &LandscapeState::isTreeMatchingUIDAndOfCertainState)
         isTreeMatchingUIDAndOfCertainState;
 
         MACRO_FUNCTION_RESOLVER(undefined4 (LandscapeState::*)(int, undefined4, int), false,
-            Address::SHC_3BB0A8C1_0x004F3010, &LandscapeState::damageTreeAndTriggerDeathIfDepleted)
-        damageTreeAndTriggerDeathIfDepleted;
+            Address::SHC_3BB0A8C1_0x004F3010, &LandscapeState::chopTreeProgress)
+        chopTreeProgress;
 
         MACRO_FUNCTION_RESOLVER(void (LandscapeState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004F3080,
-            &LandscapeState::advanceTreeDecayState)
-        advanceTreeDecayState;
+            &LandscapeState::advanceTreeStumpRemoval)
+        advanceTreeStumpRemoval;
 
         MACRO_FUNCTION_RESOLVER(void (LandscapeState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004F30D0,
-            &LandscapeState::markNearbyTreesAsCrowTargets)
-        markNearbyTreesAsCrowTargets;
+            &LandscapeState::markTreesNearTile)
+        markTreesNearTile;
 
         MACRO_FUNCTION_RESOLVER(void (LandscapeState::*)(int), false, Address::SHC_3BB0A8C1_0x004F3150,
-            &LandscapeState::spawnCrowFromNearbyTree)
-        spawnCrowFromNearbyTree;
+            &LandscapeState::spawnCrowsFromNearbyTrees)
+        spawnCrowsFromNearbyTrees;
 
         MACRO_FUNCTION_RESOLVER(void (LandscapeState::*)(int, undefined4, undefined4), false,
             Address::SHC_3BB0A8C1_0x004F3560, &LandscapeState::placeAppleTree)
@@ -123,9 +123,9 @@ namespace Map {
             &LandscapeState::findTree)
         findTree;
 
-        MACRO_FUNCTION_RESOLVER(void (LandscapeState::*)(PackagedFileMagicNum, PackagedFileMagicNum), false,
-            Address::SHC_3BB0A8C1_0x004F3D30, &LandscapeState::upgradeTreesAndRocksForMapVersion)
-        upgradeTreesAndRocksForMapVersion;
+        MACRO_FUNCTION_RESOLVER(void (LandscapeState::*)(PackagedFileMagicNumInt, PackagedFileMagicNumInt), false,
+            Address::SHC_3BB0A8C1_0x004F3D30, &LandscapeState::migrateLandscapeForMapVersion)
+        migrateLandscapeForMapVersion;
 
         MACRO_FUNCTION_RESOLVER(
             void (LandscapeState::*)(), false, Address::SHC_3BB0A8C1_0x004F3D60, &LandscapeState::updateTrees)

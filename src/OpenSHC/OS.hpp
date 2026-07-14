@@ -27,7 +27,7 @@ namespace OS {
 
     BOOLEnum __cdecl isEqualGUID(GUID* param_1, GUID* param_2);
 
-    tm* __cdecl _localtime(time_t* _Time);
+    tm* __cdecl __localtime64(__time32_t* _Time);
 
     __time64_t __cdecl __time64(__time64_t* _Time);
 
@@ -88,6 +88,8 @@ namespace OS {
     int __cdecl __toupper(int _C);
 
     int __cdecl _ucrt_lseek(int fileDescriptor, long lDistanceToMove, DWORD moveMethod);
+
+    undefined4 __stdcall __alloca_probe();
 
     int __cdecl __strnicmp(char* _Str1, char* _Str2, size_t _MaxCount);
 

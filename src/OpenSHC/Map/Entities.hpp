@@ -24,19 +24,19 @@ namespace Map {
 
         void __stdcall UpdateCrossbowArrowEntity();
 
-        void __stdcall UpdateEntity_20_37();
+        void __stdcall UpdateBallistaBoltEntity();
 
-        void __stdcall UpdateEntity_21();
+        void __stdcall UpdateDustCloudEntity();
 
         void __stdcall UpdateEntity_PoisonCloud();
 
         void __stdcall UpdateEntity_CowFlying();
 
-        void __stdcall UpdateEntity_26();
+        void __stdcall UpdateExplosionEntity();
 
         void __stdcall UpdateEntity_27();
 
-        void __stdcall UpdateEntity_28();
+        void __stdcall UpdateCrowEntity();
 
         uint __stdcall UpdateEntity_29();
 

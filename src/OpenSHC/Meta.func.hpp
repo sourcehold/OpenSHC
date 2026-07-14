@@ -29,8 +29,8 @@ namespace Meta_Func {
     Destructor_MenuView_UnusedEconomicMissionSelect;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059CD70,
-        &OpenSHC::Meta::Destructor_MenuView_UnusedSomeMissionStartUnk)
-    Destructor_MenuView_UnusedSomeMissionStartUnk;
+        &OpenSHC::Meta::Destructor_MenuView_UnusedMissionStart)
+    Destructor_MenuView_UnusedMissionStart;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059CD80,
         &OpenSHC::Meta::Destructor_MenuView_UnusedOldTitleMenu)
@@ -41,28 +41,28 @@ namespace Meta_Func {
     Destructor_MenuView_MpConnection;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059CDA0, &OpenSHC::Meta::Destructor_MenuView_Unknown21)
-    Destructor_MenuView_Unknown21;
+        void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059CDA0, &OpenSHC::Meta::Destructor_MenuView_MainMenuModal21)
+    Destructor_MenuView_MainMenuModal21;
 
     MACRO_FUNCTION_RESOLVER(
         void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059CDB0, &OpenSHC::Meta::Destructor_MenuView_LobbyMenu)
     Destructor_MenuView_LobbyMenu;
 
-    MACRO_FUNCTION_RESOLVER(
-        void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059CDC0, &OpenSHC::Meta::Destructor_MenuView_Unknown33)
-    Destructor_MenuView_Unknown33;
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059CDC0,
+        &OpenSHC::Meta::Destructor_MenuView_LobbyReadyLaunch33)
+    Destructor_MenuView_LobbyReadyLaunch33;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059CDD0,
-        &OpenSHC::Meta::Destructor_MenuView_Unknown61ReturnToSkrimishMenuUnk)
-    Destructor_MenuView_Unknown61ReturnToSkrimishMenuUnk;
+        &OpenSHC::Meta::Destructor_MenuView_ReturnToSkirmishMenu61)
+    Destructor_MenuView_ReturnToSkirmishMenu61;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059CDE0,
         &OpenSHC::Meta::Destructor_MenuView_SingleplayerMapChoice)
     Destructor_MenuView_SingleplayerMapChoice;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059CDF0,
-        &OpenSHC::Meta::Destructor_MenuView_Unknown49DoesNothingUnk)
-    Destructor_MenuView_Unknown49DoesNothingUnk;
+        &OpenSHC::Meta::Destructor_MenuView_Placeholder49DoesNothing)
+    Destructor_MenuView_Placeholder49DoesNothing;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059CE00,
         &OpenSHC::Meta::Destructor_MenuView_MapEditorLandscaping)
@@ -105,12 +105,12 @@ namespace Meta_Func {
     Destructor_MenuView_UnusedCreateSiege;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059CEA0,
-        &OpenSHC::Meta::Destructor_MenuView_Unknown26_CampaignRelatedUnk)
-    Destructor_MenuView_Unknown26_CampaignRelatedUnk;
+        &OpenSHC::Meta::Destructor_MenuView_CampaignCredits26)
+    Destructor_MenuView_CampaignCredits26;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059CEB0, &OpenSHC::Meta::Destructor_MenuView_CampaignUnk)
-    Destructor_MenuView_CampaignUnk;
+        void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059CEB0, &OpenSHC::Meta::Destructor_MenuView_Campaign27)
+    Destructor_MenuView_Campaign27;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059CEC0,
         &OpenSHC::Meta::Destructor_MenuView_ScenarioDescription)
@@ -221,8 +221,8 @@ namespace Meta_Func {
     Destructor_MenuModal_DebugDataUnitData;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059D080,
-        &OpenSHC::Meta::Destructor_MenuModal_DebugDataZoneDataUnk)
-    Destructor_MenuModal_DebugDataZoneDataUnk;
+        &OpenSHC::Meta::Destructor_MenuModal_DebugDataZoneData)
+    Destructor_MenuModal_DebugDataZoneData;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059D090,
         &OpenSHC::Meta::Destructor_MenuModal_DebugDataNetwork)
@@ -341,8 +341,8 @@ namespace Meta_Func {
     Destructor_MenuModal_StartGoods;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059D260,
-        &OpenSHC::Meta::Destructor_MenuModal_UnusedSiegeAttackingForceUnk)
-    Destructor_MenuModal_UnusedSiegeAttackingForceUnk;
+        &OpenSHC::Meta::Destructor_MenuModal_UnusedSiegeAttackingForce)
+    Destructor_MenuModal_UnusedSiegeAttackingForce;
 
     MACRO_FUNCTION_RESOLVER(
         void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059D270, &OpenSHC::Meta::Destructor_MenuModal_NewInvasion)
@@ -444,9 +444,9 @@ namespace Meta_Func {
         void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059D3F0, &OpenSHC::Meta::Destructor_MenuModal_SendMapTo)
     Destructor_MenuModal_SendMapTo;
 
-    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059D400,
-        &OpenSHC::Meta::Destructor_MenuModal_ReceiveMapFromUnk)
-    Destructor_MenuModal_ReceiveMapFromUnk;
+    MACRO_FUNCTION_RESOLVER(
+        void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059D400, &OpenSHC::Meta::Destructor_MenuModal_ReceiveMapFrom)
+    Destructor_MenuModal_ReceiveMapFrom;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059D410,
         &OpenSHC::Meta::Destructor_MenuModal_BasicAiLordSelect)
@@ -493,8 +493,8 @@ namespace Meta_Func {
     Destructor_MenuModal_TacticalPowerBar;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059D4C0,
-        &OpenSHC::Meta::Destructor_MenuModal_DebugDataAivStateUnk)
-    Destructor_MenuModal_DebugDataAivStateUnk;
+        &OpenSHC::Meta::Destructor_MenuModal_DebugDataAivState)
+    Destructor_MenuModal_DebugDataAivState;
 
     MACRO_FUNCTION_RESOLVER(
         void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059D4D0, &OpenSHC::Meta::Destructor_0059d4d0)
@@ -569,8 +569,8 @@ namespace Meta_Func {
     Destructor_Stopwatch_Gameloop;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059D5F0, &OpenSHC::Meta::Destructor_Stopwatch_Unknown)
-    Destructor_Stopwatch_Unknown;
+        void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059D5F0, &OpenSHC::Meta::Destructor_Stopwatch)
+    Destructor_Stopwatch;
 
     MACRO_FUNCTION_RESOLVER(
         void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0059D600, &OpenSHC::Meta::Destructor_0059d600)

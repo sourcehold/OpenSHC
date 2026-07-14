@@ -2,7 +2,7 @@
   path: 'OpenSHC/UI/Rendering/PencilRenderCore.func.hpp'
 */
 
-#include "OpenSHC/UI/Enums/RoundedBoxEdgeRoundingLevel.hpp"
+#include "OpenSHC/UI/Enums/RoundedBoxEdgeRoundingLevelInt.hpp"
 #include "OpenSHC/UI/Rendering/PencilRenderCore.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
@@ -10,7 +10,7 @@ namespace UI {
     namespace Rendering {
         namespace PencilRenderCore_Func {
 
-            using OpenSHC::UI::Enums::RoundedBoxEdgeRoundingLevel;
+            using OpenSHC::UI::Enums::RoundedBoxEdgeRoundingLevelInt;
             using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
             MACRO_FUNCTION_RESOLVER(void (PencilRenderCore::*)(), false, Address::SHC_3BB0A8C1_0x00468C50,
@@ -50,8 +50,8 @@ namespace UI {
             drawScrollbar;
 
             MACRO_FUNCTION_RESOLVER(void (PencilRenderCore::*)(int, int), false, Address::SHC_3BB0A8C1_0x00469290,
-                &PencilRenderCore::renderUpDownButtonUnk)
-            renderUpDownButtonUnk;
+                &PencilRenderCore::renderUpDownArrowButton)
+            renderUpDownArrowButton;
 
             MACRO_FUNCTION_RESOLVER(void (PencilRenderCore::*)(BOOLEnum, int, int), false,
                 Address::SHC_3BB0A8C1_0x004692E0, &PencilRenderCore::drawTableCellBackground)
@@ -61,8 +61,9 @@ namespace UI {
                 Address::SHC_3BB0A8C1_0x00470E90, &PencilRenderCore::drawColorBox)
             drawColorBox;
 
-            MACRO_FUNCTION_RESOLVER(void (PencilRenderCore::*)(int, int, int, int, ushort, RoundedBoxEdgeRoundingLevel),
-                false, Address::SHC_3BB0A8C1_0x00470EE0, &PencilRenderCore::drawBoxWithRoundedEdgesAndColor)
+            MACRO_FUNCTION_RESOLVER(
+                void (PencilRenderCore::*)(int, int, int, int, ushort, RoundedBoxEdgeRoundingLevelInt), false,
+                Address::SHC_3BB0A8C1_0x00470EE0, &PencilRenderCore::drawBoxWithRoundedEdgesAndColor)
             drawBoxWithRoundedEdgesAndColor;
 
             MACRO_FUNCTION_RESOLVER(void (PencilRenderCore::*)(int, int, int, int, int), false,
@@ -73,8 +74,8 @@ namespace UI {
                 Address::SHC_3BB0A8C1_0x00471050, &PencilRenderCore::dimBox)
             dimBox;
 
-            MACRO_FUNCTION_RESOLVER(void (PencilRenderCore::*)(int, int, int, int, RoundedBoxEdgeRoundingLevel), false,
-                Address::SHC_3BB0A8C1_0x004710A0, &PencilRenderCore::drawBoxWithRoundedEdges)
+            MACRO_FUNCTION_RESOLVER(void (PencilRenderCore::*)(int, int, int, int, RoundedBoxEdgeRoundingLevelInt),
+                false, Address::SHC_3BB0A8C1_0x004710A0, &PencilRenderCore::drawBoxWithRoundedEdges)
             drawBoxWithRoundedEdges;
 
             MACRO_FUNCTION_RESOLVER(void (PencilRenderCore::*)(int, int, int, int, ushort), false,
@@ -82,12 +83,12 @@ namespace UI {
             drawBorderBox;
 
             MACRO_FUNCTION_RESOLVER(void (PencilRenderCore::*)(), false, Address::SHC_3BB0A8C1_0x00471220,
-                &PencilRenderCore::drawDiagonalHeigherThanWideUnk)
-            drawDiagonalHeigherThanWideUnk;
+                &PencilRenderCore::drawLineBresenhamSteep)
+            drawLineBresenhamSteep;
 
             MACRO_FUNCTION_RESOLVER(void (PencilRenderCore::*)(), false, Address::SHC_3BB0A8C1_0x00471280,
-                &PencilRenderCore::drawDiagonalWiderThanHighUnk)
-            drawDiagonalWiderThanHighUnk;
+                &PencilRenderCore::drawLineBresenhamShallow)
+            drawLineBresenhamShallow;
 
             MACRO_FUNCTION_RESOLVER(void (PencilRenderCore::*)(), false, Address::SHC_3BB0A8C1_0x004712E0,
                 &PencilRenderCore::drawPixelPattern4x4OverWholeScreen)

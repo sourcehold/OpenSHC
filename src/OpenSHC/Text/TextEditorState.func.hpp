@@ -11,36 +11,36 @@ namespace Text {
     namespace TextEditorState_Func {
 
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(undefined4, undefined4, undefined4, undefined4), false,
-            Address::SHC_3BB0A8C1_0x0045D080, &TextEditorState::setHelpWindowBounds)
-        setHelpWindowBounds;
+            Address::SHC_3BB0A8C1_0x0045D080, &TextEditorState::setTextEditorFields)
+        setTextEditorFields;
 
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(), false, Address::SHC_3BB0A8C1_0x0045D0C0,
-            &TextEditorState::resetHelpStateFields)
-        resetHelpStateFields;
+            &TextEditorState::resetTextEditorHandles)
+        resetTextEditorHandles;
 
         MACRO_FUNCTION_RESOLVER(int (TextEditorState::*)(char*), false, Address::SHC_3BB0A8C1_0x0045D140,
-            &TextEditorState::findHelpSectionIndexByName)
-        findHelpSectionIndexByName;
+            &TextEditorState::findHelpSectionIndex)
+        findHelpSectionIndex;
 
         MACRO_FUNCTION_RESOLVER(int (TextEditorState::*)(char*), false, Address::SHC_3BB0A8C1_0x0045D1A0,
-            &TextEditorState::findOrAddHelpSectionName)
-        findOrAddHelpSectionName;
+            &TextEditorState::findOrAddHelpSection)
+        findOrAddHelpSection;
 
         MACRO_FUNCTION_RESOLVER(
             WCHAR (TextEditorState::*)(FILE*), false, Address::SHC_3BB0A8C1_0x0045D200, &TextEditorState::parseHLPPart)
         parseHLPPart;
 
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(), false, Address::SHC_3BB0A8C1_0x0045D370,
-            &TextEditorState::loadHelpSectionGraphics)
-        loadHelpSectionGraphics;
+            &TextEditorState::loadTextEditorGfxResources)
+        loadTextEditorGfxResources;
 
         MACRO_FUNCTION_RESOLVER(undefined* (TextEditorState::*)(int*), false, Address::SHC_3BB0A8C1_0x0045D3C0,
             &TextEditorState::getWideCharPointer)
         getWideCharPointer;
 
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(), false, Address::SHC_3BB0A8C1_0x0045D430,
-            &TextEditorState::renderHelpImageHotspots)
-        renderHelpImageHotspots;
+            &TextEditorState::drawTextEditorGfxItems)
+        drawTextEditorGfxItems;
 
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(), false, Address::SHC_3BB0A8C1_0x0045D690,
             &TextEditorState::bltTextToScreenIfNeedBe)
@@ -51,124 +51,120 @@ namespace Text {
         drawBorderStyle0x20;
 
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(), false, Address::SHC_3BB0A8C1_0x0045D740,
-            &TextEditorState::drawHelpWindowBackground)
-        drawHelpWindowBackground;
+            &TextEditorState::drawTextEditorBackground)
+        drawTextEditorBackground;
 
         MACRO_FUNCTION_RESOLVER(int (TextEditorState::*)(char*), false, Address::SHC_3BB0A8C1_0x0045D890,
-            &TextEditorState::findHelpGraphicIndexByName)
-        findHelpGraphicIndexByName;
+            &TextEditorState::findTextEditorGfxIndex)
+        findTextEditorGfxIndex;
 
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(char*), false, Address::SHC_3BB0A8C1_0x0045D8F0,
-            &TextEditorState::findOrAddHelpGraphicName)
-        findOrAddHelpGraphicName;
+            &TextEditorState::findOrAddTextEditorGfx)
+        findOrAddTextEditorGfx;
 
-        MACRO_FUNCTION_RESOLVER(int (TextEditorState::*)(int), false, Address::SHC_3BB0A8C1_0x0045D950,
-            &TextEditorState::getNextHelpSectionID)
-        getNextHelpSectionID;
+        MACRO_FUNCTION_RESOLVER(
+            int (TextEditorState::*)(int), false, Address::SHC_3BB0A8C1_0x0045D950, &TextEditorState::getNextHelpPageId)
+        getNextHelpPageId;
 
-        MACRO_FUNCTION_RESOLVER(int (TextEditorState::*)(int), false, Address::SHC_3BB0A8C1_0x0045D990,
-            &TextEditorState::getPrevHelpSectionID)
-        getPrevHelpSectionID;
+        MACRO_FUNCTION_RESOLVER(
+            int (TextEditorState::*)(int), false, Address::SHC_3BB0A8C1_0x0045D990, &TextEditorState::getPrevHelpPageId)
+        getPrevHelpPageId;
 
-        MACRO_FUNCTION_RESOLVER(char* (TextEditorState::*)(int), false, Address::SHC_3BB0A8C1_0x0045D9E0,
-            &TextEditorState::getHelpSectionText)
-        getHelpSectionText;
+        MACRO_FUNCTION_RESOLVER(
+            char* (TextEditorState::*)(int), false, Address::SHC_3BB0A8C1_0x0045D9E0, &TextEditorState::getHelpPageText)
+        getHelpPageText;
 
-        MACRO_FUNCTION_RESOLVER(int (TextEditorState::*)(int), false, Address::SHC_3BB0A8C1_0x0045DA20,
-            &TextEditorState::getNextHelpColorEntryIndex)
-        getNextHelpColorEntryIndex;
+        MACRO_FUNCTION_RESOLVER(undefined (TextEditorState::*)(), false, Address::SHC_3BB0A8C1_0x0045DA20,
+            &TextEditorState::getNextHelpEntryIndex)
+        getNextHelpEntryIndex;
 
-        MACRO_FUNCTION_RESOLVER(int (TextEditorState::*)(int), false, Address::SHC_3BB0A8C1_0x0045DA40,
-            &TextEditorState::getPrevHelpColorEntryIndex)
-        getPrevHelpColorEntryIndex;
+        MACRO_FUNCTION_RESOLVER(undefined (TextEditorState::*)(), false, Address::SHC_3BB0A8C1_0x0045DA40,
+            &TextEditorState::getPrevHelpEntryIndex)
+        getPrevHelpEntryIndex;
 
         MACRO_FUNCTION_RESOLVER(int (TextEditorState::*)(char*), false, Address::SHC_3BB0A8C1_0x0045DA80,
-            &TextEditorState::findSoundIndexByName)
-        findSoundIndexByName;
+            &TextEditorState::findTextEditorString1Index)
+        findTextEditorString1Index;
 
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(char*), false, Address::SHC_3BB0A8C1_0x0045DAE0,
-            &TextEditorState::findOrAddSoundName)
-        findOrAddSoundName;
+            &TextEditorState::findOrAddTextEditorString1)
+        findOrAddTextEditorString1;
 
-        MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(), false, Address::SHC_3BB0A8C1_0x0045DB40,
-            &TextEditorState::saveHelpFileToResource)
-        saveHelpFileToResource;
-
-        MACRO_FUNCTION_RESOLVER(undefined4 (TextEditorState::*)(undefined4), false, Address::SHC_3BB0A8C1_0x0045F080,
-            &TextEditorState::getHelpTokenAdvanceLength)
-        getHelpTokenAdvanceLength;
+        MACRO_FUNCTION_RESOLVER(undefined (TextEditorState::*)(), false, Address::SHC_3BB0A8C1_0x0045F080,
+            &TextEditorState::getTextTokenSlotCount)
+        getTextTokenSlotCount;
 
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(undefined4), false, Address::SHC_3BB0A8C1_0x0045F0D0,
-            &TextEditorState::insertHelpTextToken)
-        insertHelpTextToken;
+            &TextEditorState::insertTextTokenSlots)
+        insertTextTokenSlots;
 
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(), false, Address::SHC_3BB0A8C1_0x0045F240,
-            &TextEditorState::closeHelpDialogAndReturnToMenu)
-        closeHelpDialogAndReturnToMenu;
+            &TextEditorState::someKindOfTextEscape)
+        someKindOfTextEscape;
 
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(LPCSTR), false, Address::SHC_3BB0A8C1_0x0045F470,
             &TextEditorState::readCrusaderHelpHlp)
         readCrusaderHelpHlp;
 
         MACRO_FUNCTION_RESOLVER(undefined4 (TextEditorState::*)(FILE*), false, Address::SHC_3BB0A8C1_0x0045F580,
-            &TextEditorState::loadAndParseHelpFile)
-        loadAndParseHelpFile;
+            &TextEditorState::loadCrusaderHelpFile)
+        loadCrusaderHelpFile;
 
         MACRO_FUNCTION_RESOLVER(
             void (TextEditorState::*)(), false, Address::SHC_3BB0A8C1_0x0045F5B0, &TextEditorState::parseHlp)
         parseHlp;
 
-        MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(int), false, Address::SHC_3BB0A8C1_0x0045FDC0,
-            &TextEditorState::processHelpRichTextTokens)
-        processHelpRichTextTokens;
+        MACRO_FUNCTION_RESOLVER(
+            void (TextEditorState::*)(int), false, Address::SHC_3BB0A8C1_0x0045FDC0, &TextEditorState::layoutHelpText)
+        layoutHelpText;
 
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(), false, Address::SHC_3BB0A8C1_0x004613E0,
             &TextEditorState::setTextRenderingLogic)
         setTextRenderingLogic;
 
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(), false, Address::SHC_3BB0A8C1_0x004614D0,
-            &TextEditorState::initializeAndLayoutHelpText)
-        initializeAndLayoutHelpText;
+            &TextEditorState::rebuildHelpTextLayout)
+        rebuildHelpTextLayout;
 
-        MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(), false, Address::SHC_3BB0A8C1_0x00461550,
-            &TextEditorState::renderHelpDialogIfOpen)
-        renderHelpDialogIfOpen;
+        MACRO_FUNCTION_RESOLVER(
+            void (TextEditorState::*)(), false, Address::SHC_3BB0A8C1_0x00461550, &TextEditorState::renderTextEditor)
+        renderTextEditor;
 
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(), false, Address::SHC_3BB0A8C1_0x004619D0,
             &TextEditorState::loadAndLayoutHelpContent)
         loadAndLayoutHelpContent;
 
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(int), false, Address::SHC_3BB0A8C1_0x00461A20,
-            &TextEditorState::openBuildingHelpDialog)
-        openBuildingHelpDialog;
+            &TextEditorState::openBuildingHelpText)
+        openBuildingHelpText;
 
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(int), false, Address::SHC_3BB0A8C1_0x00461B90,
-            &TextEditorState::openInGameHelpDialog)
-        openInGameHelpDialog;
+            &TextEditorState::openInGameHelpText)
+        openInGameHelpText;
 
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(int), false, Address::SHC_3BB0A8C1_0x00461CF0,
-            &TextEditorState::openScenarioHelpDialog)
-        openScenarioHelpDialog;
+            &TextEditorState::openScenarioHelpText)
+        openScenarioHelpText;
 
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(int), false, Address::SHC_3BB0A8C1_0x00461E50,
-            &TextEditorState::openCreditsScrollDialog)
-        openCreditsScrollDialog;
+            &TextEditorState::openCreditsScroll)
+        openCreditsScroll;
 
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(int), false, Address::SHC_3BB0A8C1_0x00461F90,
-            &TextEditorState::openMapDescriptionEditorDialog)
-        openMapDescriptionEditorDialog;
+            &TextEditorState::openMapDescriptionEditor)
+        openMapDescriptionEditor;
 
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(char*, undefined4), false, Address::SHC_3BB0A8C1_0x004620F0,
-            &TextEditorState::setCustomHelpText)
-        setCustomHelpText;
+            &TextEditorState::displayRawText)
+        displayRawText;
 
         MACRO_FUNCTION_RESOLVER(
-            void (TextEditorState::*)(), false, Address::SHC_3BB0A8C1_0x00462150, &TextEditorState::popHelpDialogStack)
-        popHelpDialogStack;
+            void (TextEditorState::*)(), false, Address::SHC_3BB0A8C1_0x00462150, &TextEditorState::goBackInHelpHistory)
+        goBackInHelpHistory;
 
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(int), false, Address::SHC_3BB0A8C1_0x00462190,
-            &TextEditorState::openUnusedHelpTextEditorDialog)
-        openUnusedHelpTextEditorDialog;
+            &TextEditorState::openHelpTextEditor)
+        openHelpTextEditor;
 
     } // namespace TextEditorState_Func
 } // namespace Text

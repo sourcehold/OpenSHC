@@ -56,29 +56,29 @@ namespace Map {
 
         void __cdecl UpdateDestroyedBuildingCountData(int param_1);
 
-        void __stdcall validateLadyAndJesterUnitRefs();
+        void __stdcall validateCourtUnitRefs();
 
-        void __stdcall initPopularityAndRecruitableDefaults();
+        void __stdcall upgradeRecruitAvailability();
 
-        void __stdcall resetTeams();
+        void __stdcall resetTeamsForVersion();
 
         void __stdcall UpdateTreesOfCertainTypes();
 
-        void __stdcall UpgradeMapLogicToVersion_Unknown1();
+        void __stdcall upgradeMapClearInvalidDisplayFlag();
 
-        void __stdcall UpgradeMapLogicToVersion_Unknown2();
+        void __stdcall upgradeMapFixSunkenStairs();
 
-        void __stdcall UpgradeMapLogicToVersion_Unknown3();
+        void __stdcall upgradeMapMarkCompletedMoats();
 
         void __stdcall UpgradeMapTribesStateVersionTo_142();
 
-        void __stdcall UpgradeMapTribesStateVersionTo_Unknown1();
+        void __stdcall upgradeMapInitTribeRallyFields();
 
-        void __stdcall UpgradeMapTribesStateVersionTo_Unknown2();
+        void __stdcall upgradeMapRefreshTribeHasUnits();
 
         void __stdcall UpgradeMapUnitsTo_117();
 
-        void __stdcall UpgradeMapUnitsTo_UnknownVersion2();
+        void __stdcall upgradeMapRederiveUnitCombatAndHealth();
 
         void __stdcall UpgradeMapUnitsTo_114();
 
@@ -86,7 +86,7 @@ namespace Map {
 
         void __stdcall UpgradeMapUnitsTo_100();
 
-        void __stdcall UpgradeMapUnitsTo_UnknownVersion1();
+        void __stdcall upgradeMapRederiveUnitGraphicsAndStats();
 
         void __stdcall UpgradeMapUnitsAttackTileLogicTo_122();
 

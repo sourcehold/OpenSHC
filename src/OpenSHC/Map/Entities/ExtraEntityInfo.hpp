@@ -19,7 +19,7 @@ namespace Map {
             short entityID; // 0x00000000 length: 2
             short randomNumber; // 0x00000002 length: 2
             int entityUID; // 0x00000004 length: 4
-            short field3_0x8; // 0x00000008 length: 2
+            short seagullActiveState; // 0x00000008 length: 2
             short field4_0xa; // 0x0000000A length: 2
             short x; // 0x0000000C length: 2
             short y; // 0x0000000E length: 2
@@ -28,7 +28,7 @@ namespace Map {
             short angle; // 0x00000014 length: 2
             short unknownCounter_0x16; // 0x00000016 length: 2
             short someAngle; // 0x00000018 length: 2
-            short field12_0x1a; // 0x0000001A length: 2
+            short seagullFlapCounter; // 0x0000001A length: 2
             short angle_2; // 0x0000001C length: 2
             short numberBetween60And100; // 0x0000001E length: 2
             short field15_0x20; // 0x00000020 length: 2
@@ -41,9 +41,9 @@ namespace Map {
             short field22_0x2e; // 0x0000002E length: 2
             short field23_0x30; // 0x00000030 length: 2
             short field24_0x32; // 0x00000032 length: 2
-            short field25_0x34; // 0x00000034 length: 2
+            short seagullMoveCountdown; // 0x00000034 length: 2
             short someCountDown; // 0x00000036 length: 2
-            short field27_0x38; // 0x00000038 length: 2
+            short seagullMoveStepsLeft; // 0x00000038 length: 2
             short field28_0x3a; // 0x0000003A length: 2
             short field29_0x3c; // 0x0000003C length: 2
             short field30_0x3e; // 0x0000003E length: 2

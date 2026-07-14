@@ -101,53 +101,53 @@ namespace Map {
             &OpenSHC::Map::Version::UpdateDestroyedBuildingCountData)
         UpdateDestroyedBuildingCountData;
 
-        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0045ACC0,
-            &OpenSHC::Map::Version::validateLadyAndJesterUnitRefs)
-        validateLadyAndJesterUnitRefs;
+        MACRO_FUNCTION_RESOLVER(
+            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0045ACC0, &OpenSHC::Map::Version::validateCourtUnitRefs)
+        validateCourtUnitRefs;
 
         MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0045AD10,
-            &OpenSHC::Map::Version::initPopularityAndRecruitableDefaults)
-        initPopularityAndRecruitableDefaults;
+            &OpenSHC::Map::Version::upgradeRecruitAvailability)
+        upgradeRecruitAvailability;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0045AE00, &OpenSHC::Map::Version::resetTeams)
-        resetTeams;
+            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0045AE00, &OpenSHC::Map::Version::resetTeamsForVersion)
+        resetTeamsForVersion;
 
         MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004F38A0,
             &OpenSHC::Map::Version::UpdateTreesOfCertainTypes)
         UpdateTreesOfCertainTypes;
 
         MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x005011F0,
-            &OpenSHC::Map::Version::UpgradeMapLogicToVersion_Unknown1)
-        UpgradeMapLogicToVersion_Unknown1;
+            &OpenSHC::Map::Version::upgradeMapClearInvalidDisplayFlag)
+        upgradeMapClearInvalidDisplayFlag;
 
         MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00501350,
-            &OpenSHC::Map::Version::UpgradeMapLogicToVersion_Unknown2)
-        UpgradeMapLogicToVersion_Unknown2;
+            &OpenSHC::Map::Version::upgradeMapFixSunkenStairs)
+        upgradeMapFixSunkenStairs;
 
         MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00501760,
-            &OpenSHC::Map::Version::UpgradeMapLogicToVersion_Unknown3)
-        UpgradeMapLogicToVersion_Unknown3;
+            &OpenSHC::Map::Version::upgradeMapMarkCompletedMoats)
+        upgradeMapMarkCompletedMoats;
 
         MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00523E00,
             &OpenSHC::Map::Version::UpgradeMapTribesStateVersionTo_142)
         UpgradeMapTribesStateVersionTo_142;
 
         MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00523E30,
-            &OpenSHC::Map::Version::UpgradeMapTribesStateVersionTo_Unknown1)
-        UpgradeMapTribesStateVersionTo_Unknown1;
+            &OpenSHC::Map::Version::upgradeMapInitTribeRallyFields)
+        upgradeMapInitTribeRallyFields;
 
         MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00523EB0,
-            &OpenSHC::Map::Version::UpgradeMapTribesStateVersionTo_Unknown2)
-        UpgradeMapTribesStateVersionTo_Unknown2;
+            &OpenSHC::Map::Version::upgradeMapRefreshTribeHasUnits)
+        upgradeMapRefreshTribeHasUnits;
 
         MACRO_FUNCTION_RESOLVER(
             void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0053B1F0, &OpenSHC::Map::Version::UpgradeMapUnitsTo_117)
         UpgradeMapUnitsTo_117;
 
         MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0053B260,
-            &OpenSHC::Map::Version::UpgradeMapUnitsTo_UnknownVersion2)
-        UpgradeMapUnitsTo_UnknownVersion2;
+            &OpenSHC::Map::Version::upgradeMapRederiveUnitCombatAndHealth)
+        upgradeMapRederiveUnitCombatAndHealth;
 
         MACRO_FUNCTION_RESOLVER(
             void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0053B310, &OpenSHC::Map::Version::UpgradeMapUnitsTo_114)
@@ -162,8 +162,8 @@ namespace Map {
         UpgradeMapUnitsTo_100;
 
         MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0053B3E0,
-            &OpenSHC::Map::Version::UpgradeMapUnitsTo_UnknownVersion1)
-        UpgradeMapUnitsTo_UnknownVersion1;
+            &OpenSHC::Map::Version::upgradeMapRederiveUnitGraphicsAndStats)
+        upgradeMapRederiveUnitGraphicsAndStats;
 
         MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0053B4F0,
             &OpenSHC::Map::Version::UpgradeMapUnitsAttackTileLogicTo_122)

@@ -8,25 +8,23 @@
 
 #pragma once
 
-#include "OpenSHC/Audio/SFX/AmbientSFXType.hpp"
-#include "OpenSHC/Audio/SFX/SoundEffectID.hpp"
+#include "OpenSHC/Audio/SFX/AmbientSFXTypeInt.hpp"
+#include "OpenSHC/Audio/SFX/SoundEffectIDInt.hpp"
 #include "OpenSHC/Audio/SFX/SoundStructure1.hpp"
 #include "OpenSHC/Audio/SFX/SoundStructure2.hpp"
-#include "OpenSHC/Audio/SFX/SpeechEffectID.hpp"
-#include "OpenSHC/DE/SHCDE/eSFX.hpp"
-#include "OpenSHC/Map/Units/UnitType.hpp"
+#include "OpenSHC/Audio/SFX/SpeechEffectIDInt.hpp"
+#include "OpenSHC/DE/SHCDE/eSFXInt.hpp"
 
 namespace OpenSHC {
 namespace Audio {
     namespace SFX {
 
-        using OpenSHC::Audio::SFX::AmbientSFXType;
-        using OpenSHC::Audio::SFX::SoundEffectID;
+        using OpenSHC::Audio::SFX::AmbientSFXTypeInt;
+        using OpenSHC::Audio::SFX::SoundEffectIDInt;
         using OpenSHC::Audio::SFX::SoundStructure1;
         using OpenSHC::Audio::SFX::SoundStructure2;
-        using OpenSHC::Audio::SFX::SpeechEffectID;
-        using OpenSHC::DE::SHCDE::eSFX;
-        using OpenSHC::Map::Units::UnitType;
+        using OpenSHC::Audio::SFX::SpeechEffectIDInt;
+        using OpenSHC::DE::SHCDE::eSFXInt;
 
 #pragma pack(push, 1)
 
@@ -58,39 +56,35 @@ namespace Audio {
 
             void loadWavSounds(char* param_1);
 
-            void setUpSFXToPlayUnk(SoundEffectID sfxOffsetInArray);
+            void scheduleSFXWithVariation(SoundEffectIDInt sfxOffsetInArray);
 
             void setSoundWithVariation(int unknownSfxID, int volumePercentage);
 
             void scheduleSFXVariation(int sfxGroupID, int variationIndex);
 
-            void playSFXAtLocation(int xPosition, int yPosition, eSFX sfxOffsetInArray);
+            void playSFXAtLocation(int xPosition, int yPosition, eSFXInt sfxOffsetInArray);
 
             void someVolumeAdjustmentFunction(int param_1, int param_2, int param_3);
 
-            void resetScheduledSoundRequests();
-
-            void resetAmbientEventCounters();
+            undefined resetAmbientSoundCounters();
 
             void notifyAmbientSoundEvent(int ambientSoundType);
 
-            void playAmbientSoundStreamUnk(AmbientSFXType ambientSoundIndexUnk);
+            void playAmbientSFXStream(AmbientSFXTypeInt ambientSoundIndexUnk);
 
-            void playAmbientSoundStream2Unk(int ambientSoundIndexUnk);
+            void playAmbientSFXStream2(int ambientSoundIndexUnk);
 
             int getSoundVolumeForFilename(char* soundFileName);
 
             void playUnitSpeechEffect(uint speechEffectID);
 
-            void PlaySpeechSFX(SpeechEffectID speechID);
+            void PlaySpeechSFX(SpeechEffectIDInt speechID);
 
-            void playWAVSFX(char const* wav_filename);
+            void playWAVSFX(char* wav_filename);
 
             void playOnSpeechSfxStream(char* filename);
 
             void playSpeechSFX(char* filename);
-
-            void playVictoryMusic678();
 
             void playSFXWeAreUnderAttack();
 
@@ -98,13 +92,11 @@ namespace Audio {
 
             void readVolumeFileAndSetupSoundVolumes();
 
-            void playUnitSpeech(UnitType unitType, int actionID);
-
             void loadSFX();
 
             void updateAmbientSoundStream();
 
-            void soundRelatedMethod1();
+            void updateSFXAndPlayQueuedSounds();
         };
 
         static_assert_cpp98_obj(sizeof(SFXState) == 36496, SFXState);

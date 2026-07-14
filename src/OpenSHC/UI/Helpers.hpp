@@ -14,7 +14,7 @@ namespace UI {
 
         void __cdecl SomeSiegeUnitsComputation(int param_1);
 
-        void __cdecl SomeSiegeRelatedCopying(int param_1);
+        void __cdecl loadSiegeScenarioInfo(int param_1);
 
         void __cdecl SetTaxesSetting_unknown(int taxesSettingUnk);
 
@@ -22,11 +22,11 @@ namespace UI {
 
         undefined4 __cdecl SomeUnitAndViewportCheck(int unitID);
 
-        int __stdcall SomePopularityRelatedComputation();
+        int __stdcall getPopularityAdvisorIndex();
 
-        undefined4 __cdecl SomeFearFactorComputation();
+        undefined __cdecl SomeFearFactorComputation();
 
-        int __stdcall SomeGoldRelatedComputation();
+        int __stdcall getGoldAdvisorSpeechIndex();
 
     } // namespace Helpers
 } // namespace UI

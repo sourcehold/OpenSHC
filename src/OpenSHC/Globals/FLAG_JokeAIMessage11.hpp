@@ -1,0 +1,19 @@
+/**
+  THIS FILE IS AUTO GENERATED
+  Communicate changes to the dev team (e.g. via a Pull Request).
+  Changes get lost otherwise.
+
+  path: 'OpenSHC/Globals/FLAG_JokeAIMessage11.hpp'
+*/
+
+#pragma once
+
+// GLOBAL: STRONGHOLDCRUSADER 0x00EE237C
+// StructResolver::Instance<int,15606652>::instance
+
+namespace OpenSHC {
+
+MACRO_STRUCT_RESOLVER(int, false, Address::SHC_3BB0A8C1_0x00EE237C) FLAG_JokeAIMessage11;
+} // namespace OpenSHC
+
+MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00EE237C);

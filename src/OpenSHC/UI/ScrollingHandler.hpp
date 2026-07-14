@@ -56,7 +56,7 @@ namespace UI {
 
         void handleScrolling();
 
-        int getScrollDistanceBaseUnk();
+        int getScrollDistanceBase();
     };
 
     static_assert_cpp98_obj(sizeof(ScrollingHandler) == 72, ScrollingHandler);

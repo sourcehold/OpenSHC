@@ -92,8 +92,8 @@ namespace Commands_Func {
     ClickPlaceRockOrTree;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00481C80, &OpenSHC::Commands::ClickRaiseLand2Unk)
-    ClickRaiseLand2Unk;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00481C80, &OpenSHC::Commands::commandRaiseLand)
+    commandRaiseLand;
 
     MACRO_FUNCTION_RESOLVER(
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00481D90, &OpenSHC::Commands::ClickPlaceBuilding)
@@ -127,9 +127,9 @@ namespace Commands_Func {
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00482420, &OpenSHC::Commands::ClickGiveUnitsInstruction)
     ClickGiveUnitsInstruction;
 
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00482550,
-        &OpenSHC::Commands::ClickSomethingWithDrawBridgeUnk)
-    ClickSomethingWithDrawBridgeUnk;
+    MACRO_FUNCTION_RESOLVER(
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00482550, &OpenSHC::Commands::commandToggleDrawbridge)
+    commandToggleDrawbridge;
 
     MACRO_FUNCTION_RESOLVER(
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00482620, &OpenSHC::Commands::ClickBuyOrSell)
@@ -192,8 +192,8 @@ namespace Commands_Func {
     ResyncStatus2;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00484450, &OpenSHC::Commands::ResetSyncStatusUnk)
-    ResetSyncStatusUnk;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00484450, &OpenSHC::Commands::resetSyncStatus)
+    resetSyncStatus;
 
     MACRO_FUNCTION_RESOLVER(
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004844A0, &OpenSHC::Commands::ClickRepairTower)
@@ -212,12 +212,12 @@ namespace Commands_Func {
     ClickExtendRallyPoint;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00484960, &OpenSHC::Commands::SiegeEngineRelated)
-    SiegeEngineRelated;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00484960, &OpenSHC::Commands::marshalSiegeEngineCommand)
+    marshalSiegeEngineCommand;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00484A00, &OpenSHC::Commands::TribeRelated1)
-    TribeRelated1;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00484A00, &OpenSHC::Commands::marshalTribeUnitCommand)
+    marshalTribeUnitCommand;
 
     MACRO_FUNCTION_RESOLVER(
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00484A70, &OpenSHC::Commands::ReleaseDogs)
@@ -236,31 +236,31 @@ namespace Commands_Func {
     DeselectUnit;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00484E10, &OpenSHC::Commands::SetField45To100)
-    SetField45To100;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00484E10, &OpenSHC::Commands::marshalSetMapTimeFlagCommand)
+    marshalSetMapTimeFlagCommand;
 
     MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00484E70, &OpenSHC::Commands::ResyncZone)
     ResyncZone;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00484F30, &OpenSHC::Commands::KickPlayerUnk)
-    KickPlayerUnk;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00484F30, &OpenSHC::Commands::commandKickPlayer)
+    commandKickPlayer;
 
     MACRO_FUNCTION_RESOLVER(
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00485020, &OpenSHC::Commands::CommandSelectionReplenishAmmo)
     CommandSelectionReplenishAmmo;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004850E0, &OpenSHC::Commands::BroadCastSyncRelatedStatus)
-    BroadCastSyncRelatedStatus;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004850E0, &OpenSHC::Commands::commandBroadcastSyncStatus)
+    commandBroadcastSyncStatus;
 
     MACRO_FUNCTION_RESOLVER(
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00485140, &OpenSHC::Commands::VoteKick_K_D_B_G_J)
     VoteKick_K_D_B_G_J;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00485210, &OpenSHC::Commands::SyncPacketSizeAnnouncement)
-    SyncPacketSizeAnnouncement;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00485210, &OpenSHC::Commands::marshalNetworkSyncCommand)
+    marshalNetworkSyncCommand;
 
     MACRO_FUNCTION_RESOLVER(
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004852D0, &OpenSHC::Commands::ShareAnnouncementWithHost)
@@ -275,16 +275,16 @@ namespace Commands_Func {
     SomePlayerNameUpdateCommand;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00485520, &OpenSHC::Commands::FlagsAndBraziersCommandUnk)
-    FlagsAndBraziersCommandUnk;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00485520, &OpenSHC::Commands::commandFlagsBraziers)
+    commandFlagsBraziers;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004855C0, &OpenSHC::Commands::NotifyLaggingPlayer)
-    NotifyLaggingPlayer;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004855C0, &OpenSHC::Commands::marshalLaggingPlayerCommand)
+    marshalLaggingPlayerCommand;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00485650, &OpenSHC::Commands::SomeKindOfMultiplayerPingUnk)
-    SomeKindOfMultiplayerPingUnk;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00485650, &OpenSHC::Commands::commandReportLaggingPlayerPing)
+    commandReportLaggingPlayerPing;
 
     MACRO_FUNCTION_RESOLVER(
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004856E0, &OpenSHC::Commands::ShareGameStatePartialHashes)
@@ -307,8 +307,8 @@ namespace Commands_Func {
     StartReceivingMapFile;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00485E80, &OpenSHC::Commands::MapSendingRelated)
-    MapSendingRelated;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00485E80, &OpenSHC::Commands::commandMapFileTransferControl)
+    commandMapFileTransferControl;
 
     MACRO_FUNCTION_RESOLVER(
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00485F20, &OpenSHC::Commands::HostAnnounceRoundTable)
@@ -355,8 +355,8 @@ namespace Commands_Func {
     AutoSaveTriggered;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00489AC0, &OpenSHC::Commands::SetPlayerNameUnk)
-    SetPlayerNameUnk;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00489AC0, &OpenSHC::Commands::commandSyncMapNameAndBeginLoad)
+    commandSyncMapNameAndBeginLoad;
 
     MACRO_FUNCTION_RESOLVER(
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00489C80, &OpenSHC::Commands::CommandLoadMapHeader)
@@ -387,8 +387,8 @@ namespace Commands_Func {
     SendResyncPlayerData;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0048A510, &OpenSHC::Commands::SendResyncUnknown)
-    SendResyncUnknown;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0048A510, &OpenSHC::Commands::commandSendResyncGlobals)
+    commandSendResyncGlobals;
 
     MACRO_FUNCTION_RESOLVER(
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0048A710, &OpenSHC::Commands::SendResyncEntity)
@@ -418,8 +418,8 @@ namespace Commands_Func {
     CommandSwitchTeams;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0048B170, &OpenSHC::Commands::SyncRelatedSomething)
-    SyncRelatedSomething;
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0048B170, &OpenSHC::Commands::commandSyncStatusExchange)
+    commandSyncStatusExchange;
 
     MACRO_FUNCTION_RESOLVER(
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0048B280, &OpenSHC::Commands::SendQuitGameQuestion)

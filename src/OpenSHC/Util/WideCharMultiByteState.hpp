@@ -36,7 +36,7 @@ namespace Util {
 
         void multiByteToWideCharThunk(LPWSTR param_1, LPCSTR param_2, int param_3);
 
-        char wideCharToByteUnk(WCHAR wideChar);
+        char wideCharToByte(WCHAR wideChar);
 
         void multiByteToWideCharThunk2(undefined param_1);
     };

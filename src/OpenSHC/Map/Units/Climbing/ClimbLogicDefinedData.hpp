@@ -23,8 +23,8 @@ namespace Map {
             // SIZE: 0x000002BC
             typedef struct ClimbLogicDefinedData {
 
-                NoArgCallback* updateFunctions[10]; // 0x00000000 length: 40
-                undefined1 padding_0x28[4]; // 0x00000028 length: 4
+                NoArgCallback* updateFunctions; // 0x00000000 length: 4
+                undefined1 padding_0x4[40]; // 0x00000004 length: 40
                 int field5_0x2c[8]; // 0x0000002C length: 32
                 int field6_0x4c[55]; // 0x0000004C length: 220
                 undefined1 field7_0x128; // 0x00000128 length: 1

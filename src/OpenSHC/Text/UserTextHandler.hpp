@@ -48,9 +48,9 @@ namespace Text {
 
         int getTextArrayPointer(int param_1);
 
-        void setTextEntryAndUpdateCursor(undefined4 param_1, undefined4 param_2);
+        void setTextBoxContent(undefined4 param_1, undefined4 param_2);
 
-        int getCurrentFontSize();
+        int getCurrentTextBoxFontSize();
 
         void handleReturnKey();
 
@@ -58,17 +58,17 @@ namespace Text {
 
         void handleLeftKey();
 
-        void resetCursorToStart();
+        void resetTextBoxCursor();
 
         void moveCursorToEnd();
 
-        void shiftTextLeftAtCursor(int param_1, int param_2);
+        void removeTextBoxChars(int param_1, int param_2);
 
-        void shiftTextRightAtCursor(int param_1, int param_2);
+        void insertCharSlotInTextBox(int param_1, int param_2);
 
         void handleCharacterIntoInputBuffer(int characterCode);
 
-        uint dequeueInputBufferChar();
+        uint dequeueInputChar();
 
         void handleBackspace();
 
@@ -76,7 +76,7 @@ namespace Text {
 
         void copyIntoTextArray(char* param_1);
 
-        int isTextInputAtCapacity();
+        int checkTextBoxInputRoom();
 
         void handleDeleteKey();
 

@@ -26,8 +26,8 @@ namespace Util {
         multiByteToWideCharThunk;
 
         MACRO_FUNCTION_RESOLVER(char (WideCharMultiByteState::*)(WCHAR), false, Address::SHC_3BB0A8C1_0x0046B170,
-            &WideCharMultiByteState::wideCharToByteUnk)
-        wideCharToByteUnk;
+            &WideCharMultiByteState::wideCharToByte)
+        wideCharToByte;
 
         MACRO_FUNCTION_RESOLVER(void (WideCharMultiByteState::*)(undefined), false, Address::SHC_3BB0A8C1_0x0046B1B0,
             &WideCharMultiByteState::multiByteToWideCharThunk2)

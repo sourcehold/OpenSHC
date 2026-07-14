@@ -8,40 +8,40 @@ namespace UI {
     namespace MinimapViewState_Func {
 
         MACRO_FUNCTION_RESOLVER(void (MinimapViewState::*)(), false, Address::SHC_3BB0A8C1_0x004B5110,
-            &MinimapViewState::scrollViewportToMinimapClick)
-        scrollViewportToMinimapClick;
+            &MinimapViewState::moveViewportToMinimapClick)
+        moveViewportToMinimapClick;
 
         MACRO_FUNCTION_RESOLVER(void (MinimapViewState::*)(int*, int*), false, Address::SHC_3BB0A8C1_0x004B51A0,
-            &MinimapViewState::convertMinimapClickToTileXY)
-        convertMinimapClickToTileXY;
+            &MinimapViewState::convertMinimapClickToTile)
+        convertMinimapClickToTile;
 
         MACRO_FUNCTION_RESOLVER(void (MinimapViewState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004B5280,
             &MinimapViewState::renderMinimapPreview)
         renderMinimapPreview;
 
         MACRO_FUNCTION_RESOLVER(void (MinimapViewState::*)(), false, Address::SHC_3BB0A8C1_0x004B5300,
-            &MinimapViewState::triggerMinimapRedraw)
-        triggerMinimapRedraw;
+            &MinimapViewState::toggleMinimapState)
+        toggleMinimapState;
 
         MACRO_FUNCTION_RESOLVER(void (MinimapViewState::*)(uint, int, int, uint, int), false,
-            Address::SHC_3BB0A8C1_0x004B5330, &MinimapViewState::renderMinimapTileStripWithLuminescence)
-        renderMinimapTileStripWithLuminescence;
+            Address::SHC_3BB0A8C1_0x004B5330, &MinimapViewState::renderMinimap)
+        renderMinimap;
 
         MACRO_FUNCTION_RESOLVER(void (MinimapViewState::*)(uint, int, int, int, uint), false,
             Address::SHC_3BB0A8C1_0x004B58D0, &MinimapViewState::renderMinimapTileColors)
         renderMinimapTileColors;
 
         MACRO_FUNCTION_RESOLVER(void (MinimapViewState::*)(uint, int, int), false, Address::SHC_3BB0A8C1_0x004B5F70,
-            &MinimapViewState::locatePlayerKeepPositionsOnMinimap)
-        locatePlayerKeepPositionsOnMinimap;
+            &MinimapViewState::renderMinimapContent)
+        renderMinimapContent;
 
         MACRO_FUNCTION_RESOLVER(void (MinimapViewState::*)(), false, Address::SHC_3BB0A8C1_0x004B61F0,
             &MinimapViewState::generateMinimapImage)
         generateMinimapImage;
 
         MACRO_FUNCTION_RESOLVER(void (MinimapViewState::*)(), false, Address::SHC_3BB0A8C1_0x004B6320,
-            &MinimapViewState::convertLoadedMinimapColors)
-        convertLoadedMinimapColors;
+            &MinimapViewState::expandMapPreviewMinimapToRGB)
+        expandMapPreviewMinimapToRGB;
 
         MACRO_FUNCTION_RESOLVER(void (MinimapViewState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004B6430,
             &MinimapViewState::setSpawnMoment)

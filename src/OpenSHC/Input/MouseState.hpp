@@ -9,7 +9,7 @@
 #pragma once
 
 #include "OpenSHC/Input/Mouse/ClickTypeBitMaskEnumByte.hpp"
-#include "OpenSHC/Input/Mouse/MouseClickInteraction.hpp"
+#include "OpenSHC/Input/Mouse/MouseClickInteractionInt.hpp"
 #include "OpenSHC/Input/Mouse/MouseXYUUStruct.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -19,7 +19,7 @@ namespace OpenSHC {
 namespace Input {
 
     using OpenSHC::Input::Mouse::ClickTypeBitMaskEnumByte;
-    using OpenSHC::Input::Mouse::MouseClickInteraction;
+    using OpenSHC::Input::Mouse::MouseClickInteractionInt;
     using OpenSHC::Input::Mouse::MouseXYUUStruct;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
@@ -52,10 +52,10 @@ namespace Input {
         uint previousRightClickState; // 0x00000054 length: 4
         undefined4 scrollEventData; // 0x00000058 length: 4
         undefined4 field23_0x5c; // 0x0000005C length: 4
-        undefined4 field24_0x60; // 0x00000060 length: 4
-        undefined4 field25_0x64; // 0x00000064 length: 4
-        undefined4 field26_0x68; // 0x00000068 length: 4
-        undefined4 field27_0x6c; // 0x0000006C length: 4
+        undefined4 dwWorldPickBoxMinX; // 0x00000060 length: 4
+        undefined4 dwWorldPickBoxMinY; // 0x00000064 length: 4
+        undefined4 dwWorldPickBoxMaxX; // 0x00000068 length: 4
+        undefined4 dwWorldPickBoxMaxY; // 0x0000006C length: 4
         undefined4 left; // 0x00000070 length: 4
         undefined4 top; // 0x00000074 length: 4
         undefined4 right; // 0x00000078 length: 4
@@ -86,7 +86,7 @@ namespace Input {
         undefined4 index; // 0x00000168 length: 4
         undefined4 storedScreenSpaceX; // 0x0000016C length: 4
         undefined4 storedScreenSpaceY; // 0x00000170 length: 4
-        undefined4 field61_0x174; // 0x00000174 length: 4
+        undefined4 dwRightClickCounter; // 0x00000174 length: 4
         undefined4 field62_0x178; // 0x00000178 length: 4
         undefined4 field63_0x17c; // 0x0000017C length: 4
         undefined4 mouseBasedEvent; // 0x00000180 length: 4
@@ -100,10 +100,10 @@ namespace Input {
         undefined4 currentTime1; // 0x000001A0 length: 4
         undefined4 currentTime2; // 0x000001A4 length: 4
         undefined4 currentTime3; // 0x000001A8 length: 4
-        undefined4 field75_0x1ac; // 0x000001AC length: 4
+        undefined4 dwClickTimeDelta; // 0x000001AC length: 4
         undefined4 field76_0x1b0; // 0x000001B0 length: 4
         undefined4 field77_0x1b4; // 0x000001B4 length: 4
-        undefined4 field78_0x1b8; // 0x000001B8 length: 4
+        undefined4 dwPreviewModeFlag; // 0x000001B8 length: 4
         undefined4 field79_0x1bc; // 0x000001BC length: 4
         undefined4 field80_0x1c0; // 0x000001C0 length: 4
         undefined4 field81_0x1c4; // 0x000001C4 length: 4
@@ -161,7 +161,7 @@ namespace Input {
 
         void makeSelectedCursorTypeCurrent();
 
-        void updateMousePositionAndClicks(short xMousePos, short yMousePos, MouseClickInteraction clickType);
+        void updateMousePositionAndClicks(short xMousePos, short yMousePos, MouseClickInteractionInt clickType);
 
         void updateMouseWheelStatus(int delta);
 
@@ -171,7 +171,7 @@ namespace Input {
 
         HCURSOR setCursor(DWORD cursorType);
 
-        void beginPointSelectionBox();
+        void computeMouseWorldPickBox();
 
         void setupHitBox(int width, int height);
 
@@ -186,9 +186,9 @@ namespace Input {
         void loadAndSetCursor(int notAniDefaultCursorRef, int notAniDeleteCursorRef, int notAniDeleteNotCursorRef,
             int unused1, int unused2, int unused3, int unused4, int notAniUnknownCursorRef);
 
-        void extendSelectionBoxToMouse();
+        void updateMouseSelectionEndBox();
 
-        void updateRightDragCameraControl();
+        void processRightClickDragGesture();
 
         void drawMouseBasedBox();
     };

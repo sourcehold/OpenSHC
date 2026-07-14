@@ -2,19 +2,19 @@
   path: 'OpenSHC/Text/FontSizeClass.func.hpp'
 */
 
-#include "OpenSHC/IO/Graphics/GmID.hpp"
+#include "OpenSHC/IO/Graphics/GmIDInt.hpp"
 #include "OpenSHC/Rendering/Colors/BGR24.hpp"
-#include "OpenSHC/Text/FontRenderType.hpp"
+#include "OpenSHC/Text/FontRenderTypeInt.hpp"
 #include "OpenSHC/Text/FontSizeClass.hpp"
 namespace OpenSHC {
 namespace Text {
     namespace FontSizeClass_Func {
 
-        using OpenSHC::IO::Graphics::GmID;
+        using OpenSHC::IO::Graphics::GmIDInt;
         using OpenSHC::Rendering::Colors::BGR24;
-        using OpenSHC::Text::FontRenderType;
+        using OpenSHC::Text::FontRenderTypeInt;
 
-        MACRO_FUNCTION_RESOLVER(void (FontSizeClass::*)(GmID, int, FontRenderType, int, int, int, int), false,
+        MACRO_FUNCTION_RESOLVER(void (FontSizeClass::*)(GmIDInt, int, FontRenderTypeInt, int, int, int, int), false,
             Address::SHC_3BB0A8C1_0x00469A30, &FontSizeClass::setupFontSizeClassObject)
         setupFontSizeClassObject;
 
@@ -26,13 +26,13 @@ namespace Text {
             Address::SHC_3BB0A8C1_0x00469B90, &FontSizeClass::getWordStartingFromPos)
         getWordStartingFromPos;
 
-        MACRO_FUNCTION_RESOLVER(void (FontSizeClass::*)(char*, int), false, Address::SHC_3BB0A8C1_0x00469C40,
-            &FontSizeClass::wrapTextIntoLines)
-        wrapTextIntoLines;
+        MACRO_FUNCTION_RESOLVER(
+            void (FontSizeClass::*)(char*, int), false, Address::SHC_3BB0A8C1_0x00469C40, &FontSizeClass::wordWrapText)
+        wordWrapText;
 
         MACRO_FUNCTION_RESOLVER(
-            int (FontSizeClass::*)(byte), false, Address::SHC_3BB0A8C1_0x00469E10, &FontSizeClass::getCharWidthUnk)
-        getCharWidthUnk;
+            int (FontSizeClass::*)(byte), false, Address::SHC_3BB0A8C1_0x00469E10, &FontSizeClass::getCharWidth)
+        getCharWidth;
 
         MACRO_FUNCTION_RESOLVER(int (FontSizeClass::*)(LPWSTR, int), false, Address::SHC_3BB0A8C1_0x00471610,
             &FontSizeClass::getWidthOfWideText)
@@ -47,20 +47,20 @@ namespace Text {
         renderText;
 
         MACRO_FUNCTION_RESOLVER(int (FontSizeClass::*)(char*, int, int, int, BGR24, int, int), false,
-            Address::SHC_3BB0A8C1_0x00472EF0, &FontSizeClass::renderMultilineTextUnk)
-        renderMultilineTextUnk;
+            Address::SHC_3BB0A8C1_0x00472EF0, &FontSizeClass::renderWrappedMultilineText)
+        renderWrappedMultilineText;
 
         MACRO_FUNCTION_RESOLVER(int (FontSizeClass::*)(LPWSTR, int, int, int, uint, int, int), false,
-            Address::SHC_3BB0A8C1_0x00473300, &FontSizeClass::renderMultilineWideTextUnk)
-        renderMultilineWideTextUnk;
+            Address::SHC_3BB0A8C1_0x00473300, &FontSizeClass::renderWrappedMultilineWideText)
+        renderWrappedMultilineWideText;
 
         MACRO_FUNCTION_RESOLVER(void (FontSizeClass::*)(int, int, int, int, BGR24), false,
-            Address::SHC_3BB0A8C1_0x004733A0, &FontSizeClass::renderSomeSpecificTextUnk)
-        renderSomeSpecificTextUnk;
+            Address::SHC_3BB0A8C1_0x004733A0, &FontSizeClass::renderPartialMultilineText)
+        renderPartialMultilineText;
 
         MACRO_FUNCTION_RESOLVER(int (FontSizeClass::*)(char, int, int, int, int), false,
-            Address::SHC_3BB0A8C1_0x00473640, &FontSizeClass::renderCharUnk)
-        renderCharUnk;
+            Address::SHC_3BB0A8C1_0x00473640, &FontSizeClass::renderTextCharGlyph)
+        renderTextCharGlyph;
 
         MACRO_FUNCTION_RESOLVER(void (FontSizeClass::*)(LPWSTR, int, int, int, BGR24, int), false,
             Address::SHC_3BB0A8C1_0x004737B0, &FontSizeClass::renderWideText)

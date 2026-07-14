@@ -8,20 +8,20 @@ namespace Map {
     namespace WallAndPitchState_Func {
 
         MACRO_FUNCTION_RESOLVER(void (WallAndPitchState::*)(int), false, Address::SHC_3BB0A8C1_0x00500C20,
-            &WallAndPitchState::startBuildingDestructionConfirmation)
-        startBuildingDestructionConfirmation;
+            &WallAndPitchState::beginBuildingPlacementUndo)
+        beginBuildingPlacementUndo;
 
         MACRO_FUNCTION_RESOLVER(void (WallAndPitchState::*)(), false, Address::SHC_3BB0A8C1_0x00500C80,
             &WallAndPitchState::resetWallAndPitchState)
         resetWallAndPitchState;
 
         MACRO_FUNCTION_RESOLVER(void (WallAndPitchState::*)(int), false, Address::SHC_3BB0A8C1_0x00500CB0,
-            &WallAndPitchState::startEntityDestructionConfirmation)
-        startEntityDestructionConfirmation;
+            &WallAndPitchState::beginEntityPlacementUndo)
+        beginEntityPlacementUndo;
 
         MACRO_FUNCTION_RESOLVER(void (WallAndPitchState::*)(int), false, Address::SHC_3BB0A8C1_0x00500CF0,
-            &WallAndPitchState::startUnitDestructionConfirmation)
-        startUnitDestructionConfirmation;
+            &WallAndPitchState::beginUnitPlacementUndo)
+        beginUnitPlacementUndo;
 
         MACRO_FUNCTION_RESOLVER(void (WallAndPitchState::*)(), false, Address::SHC_3BB0A8C1_0x00500D30,
             &WallAndPitchState::resetWallPlacementInfo)
@@ -44,12 +44,12 @@ namespace Map {
         destroyPitch;
 
         MACRO_FUNCTION_RESOLVER(void (WallAndPitchState::*)(), false, Address::SHC_3BB0A8C1_0x00500F40,
-            &WallAndPitchState::updateDestructionConfirmationCountdown)
-        updateDestructionConfirmationCountdown;
+            &WallAndPitchState::tickPlacementUndoTimer)
+        tickPlacementUndoTimer;
 
         MACRO_FUNCTION_RESOLVER(void (WallAndPitchState::*)(), false, Address::SHC_3BB0A8C1_0x005118C0,
-            &WallAndPitchState::confirmAndQueueDestructionCommand)
-        confirmAndQueueDestructionCommand;
+            &WallAndPitchState::commitPlacementUndo)
+        commitPlacementUndo;
 
     } // namespace WallAndPitchState_Func
 } // namespace Map

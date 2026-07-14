@@ -13,17 +13,17 @@ namespace Rendering {
 
     void __cdecl ApplyBlending(int param_1);
 
-    void __stdcall BlitMapImageWithVerticalClip();
+    void __stdcall blitGmSpriteToMapSurface();
 
-    void __stdcall BlitMapImageWithVerticalClipAndYOffset();
+    void __stdcall blitGmSpriteToMapSurfacePartial();
 
     void __stdcall TicksStartCounter();
 
     int __stdcall viewportBasedTileNumber();
 
-    void __stdcall ProcessCreditsScriptCommands();
+    void __stdcall processCreditsCommandSequence();
 
-    void __stdcall RenderActiveCreditsElements();
+    void __stdcall renderCreditsScreen();
 
 } // namespace Rendering
 } // namespace OpenSHC

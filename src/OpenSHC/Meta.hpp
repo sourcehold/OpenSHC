@@ -19,23 +19,23 @@ namespace Meta {
 
     void __cdecl Destructor_MenuView_UnusedEconomicMissionSelect();
 
-    void __cdecl Destructor_MenuView_UnusedSomeMissionStartUnk();
+    void __cdecl Destructor_MenuView_UnusedMissionStart();
 
     void __cdecl Destructor_MenuView_UnusedOldTitleMenu();
 
     void __cdecl Destructor_MenuView_MpConnection();
 
-    void __cdecl Destructor_MenuView_Unknown21();
+    void __cdecl Destructor_MenuView_MainMenuModal21();
 
     void __cdecl Destructor_MenuView_LobbyMenu();
 
-    void __cdecl Destructor_MenuView_Unknown33();
+    void __cdecl Destructor_MenuView_LobbyReadyLaunch33();
 
-    void __cdecl Destructor_MenuView_Unknown61ReturnToSkrimishMenuUnk();
+    void __cdecl Destructor_MenuView_ReturnToSkirmishMenu61();
 
     void __cdecl Destructor_MenuView_SingleplayerMapChoice();
 
-    void __cdecl Destructor_MenuView_Unknown49DoesNothingUnk();
+    void __cdecl Destructor_MenuView_Placeholder49DoesNothing();
 
     void __cdecl Destructor_MenuView_MapEditorLandscaping();
 
@@ -57,9 +57,9 @@ namespace Meta {
 
     void __cdecl Destructor_MenuView_UnusedCreateSiege();
 
-    void __cdecl Destructor_MenuView_Unknown26_CampaignRelatedUnk();
+    void __cdecl Destructor_MenuView_CampaignCredits26();
 
-    void __cdecl Destructor_MenuView_CampaignUnk();
+    void __cdecl Destructor_MenuView_Campaign27();
 
     void __cdecl Destructor_MenuView_ScenarioDescription();
 
@@ -115,7 +115,7 @@ namespace Meta {
 
     void __cdecl Destructor_MenuModal_DebugDataUnitData();
 
-    void __cdecl Destructor_MenuModal_DebugDataZoneDataUnk();
+    void __cdecl Destructor_MenuModal_DebugDataZoneData();
 
     void __cdecl Destructor_MenuModal_DebugDataNetwork();
 
@@ -175,7 +175,7 @@ namespace Meta {
 
     void __cdecl Destructor_MenuModal_StartGoods();
 
-    void __cdecl Destructor_MenuModal_UnusedSiegeAttackingForceUnk();
+    void __cdecl Destructor_MenuModal_UnusedSiegeAttackingForce();
 
     void __cdecl Destructor_MenuModal_NewInvasion();
 
@@ -227,7 +227,7 @@ namespace Meta {
 
     void __cdecl Destructor_MenuModal_SendMapTo();
 
-    void __cdecl Destructor_MenuModal_ReceiveMapFromUnk();
+    void __cdecl Destructor_MenuModal_ReceiveMapFrom();
 
     void __cdecl Destructor_MenuModal_BasicAiLordSelect();
 
@@ -251,7 +251,7 @@ namespace Meta {
 
     void __cdecl Destructor_MenuModal_TacticalPowerBar();
 
-    void __cdecl Destructor_MenuModal_DebugDataAivStateUnk();
+    void __cdecl Destructor_MenuModal_DebugDataAivState();
 
     void __cdecl Destructor_0059d4d0();
 
@@ -289,7 +289,7 @@ namespace Meta {
 
     void __cdecl Destructor_Stopwatch_Gameloop();
 
-    void __cdecl Destructor_Stopwatch_Unknown();
+    void __cdecl Destructor_Stopwatch();
 
     void __cdecl Destructor_0059d600();
 

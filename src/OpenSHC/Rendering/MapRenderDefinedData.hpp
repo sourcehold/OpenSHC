@@ -221,15 +221,15 @@ namespace Rendering {
         int field202_0x4d0; // 0x000004D0 length: 4
         int field203_0x4d4; // 0x000004D4 length: 4
         int field204_0x4d8; // 0x000004D8 length: 4
-        int field205_0x4dc[12]; // 0x000004DC length: 48
+        int mapCfg_0x4dc[12]; // 0x000004DC length: 48
         undefined1 padding_0x50c[408]; // 0x0000050C length: 408
-        int field614_0x6a4[32]; // 0x000006A4 length: 128
-        byte field615_0x724[512]; // 0x00000724 length: 512
-        byte field616_0x924[512]; // 0x00000924 length: 512
-        byte field617_0xb24[256]; // 0x00000B24 length: 256
-        int field618_0xc24[16][16]; // 0x00000C24 length: 1024
-        int field619_0x1024[16][16]; // 0x00001024 length: 1024
-        int field620_0x1424[16][16]; // 0x00001424 length: 1024
+        int mapCfg_0x6a4[32]; // 0x000006A4 length: 128
+        byte mapCfg_0x724[512]; // 0x00000724 length: 512
+        byte mapCfg_0x924[512]; // 0x00000924 length: 512
+        byte mapCfg_0xb24[256]; // 0x00000B24 length: 256
+        int updateBuildingPreviewPositCfg_0xc24[16][16]; // 0x00000C24 length: 1024
+        int updateBuildingPreviewPositCfg_0x1024[16][16]; // 0x00001024 length: 1024
+        int updateBuildingPreviewPositCfg_0x1424[16][16]; // 0x00001424 length: 1024
         XYPair DAT_BuildingPreviewPositionRelatedOffsets[110][2]; // 0x00001824 length: 1760
 
     } MapRenderDefinedData;

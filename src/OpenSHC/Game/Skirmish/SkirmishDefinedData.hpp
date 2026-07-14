@@ -41,7 +41,7 @@ namespace Game {
             char** field6_0xb4; // 0x000000B4 length: 4
             char** field7_0xb8; // 0x000000B8 length: 4
             char** field8_0xbc; // 0x000000BC length: 4
-            char** field9_0xc0; // 0x000000C0 length: 4
+            char** addUnitToSmallestBehaviourCfg_0xc0; // 0x000000C0 length: 4
             char** field10_0xc4; // 0x000000C4 length: 4
             char** field11_0xc8; // 0x000000C8 length: 4
             char** field12_0xcc; // 0x000000CC length: 4
@@ -67,9 +67,9 @@ namespace Game {
             AIVUnitTypeMaxLocationPair AIVUnitTypeMaxLocationPairArray_GroundUnits[6]; // 0x00003C14 length: 48
             AIVUnitTypeMaxLocationPair AIVUnitTypeMaxLocationPairArray_PatrolUnits[3]; // 0x00003C44 length: 24
             int DAT_TribeTypeID[6]; // 0x00003C5C length: 24
-            BuildingTypeInt field35_0x3c74[46]; // 0x00003C74 length: 184
-            BuildingTypeInt field36_0x3d2c[46]; // 0x00003D2C length: 184
-            BuildingTypeInt field37_0x3de4[46]; // 0x00003DE4 length: 184
+            BuildingTypeInt targetableBuildingForPlayeCfg_0x3c74[46]; // 0x00003C74 length: 184
+            BuildingTypeInt chooseRandomBuildingIDFromCfg_0x3d2c[46]; // 0x00003D2C length: 184
+            BuildingTypeInt chooseRandomBuildingIDFromCfg_0x3de4[46]; // 0x00003DE4 length: 184
             int DAT_AttackTribes_AITribeType_MaxTribeCount_Mapping[11][2]; // 0x00003E9C length: 88
             int DAT_SiegeEngineCommandBuildingTypes[6]; // 0x00003EF4 length: 24
             int DAT_SiegeEngineUnitType[6]; // 0x00003F0C length: 24

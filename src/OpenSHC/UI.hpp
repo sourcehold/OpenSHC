@@ -8,22 +8,22 @@
 
 #pragma once
 
-#include "OpenSHC/Commands/CommandBuildingType.hpp"
-#include "OpenSHC/Game/Resources/ResourceType.hpp"
-#include "OpenSHC/UI/ChooseNetworkServiceProvider/ChooseNetworkServiceProviderButtonActions.hpp"
-#include "OpenSHC/UI/Enums/SoundMenuClickType.hpp"
-#include "OpenSHC/UI/Multiplayer/FindingNetworkSessions_ButtonParameters.hpp"
+#include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
+#include "OpenSHC/Game/Resources/ResourceTypeInt.hpp"
+#include "OpenSHC/UI/ChooseNetworkServiceProvider/ChooseNetworkServiceProviderButtonActionsInt.hpp"
+#include "OpenSHC/UI/Enums/SoundMenuClickTypeInt.hpp"
+#include "OpenSHC/UI/Multiplayer/FindingNetworkSessions_ButtonParametersInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "WinDef.h"
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::Commands::CommandBuildingType;
-    using OpenSHC::Game::Resources::ResourceType;
-    using OpenSHC::UI::ChooseNetworkServiceProvider::ChooseNetworkServiceProviderButtonActions;
-    using OpenSHC::UI::Enums::SoundMenuClickType;
-    using OpenSHC::UI::Multiplayer::FindingNetworkSessions_ButtonParameters;
+    using OpenSHC::Commands::CommandBuildingTypeInt;
+    using OpenSHC::Game::Resources::ResourceTypeInt;
+    using OpenSHC::UI::ChooseNetworkServiceProvider::ChooseNetworkServiceProviderButtonActionsInt;
+    using OpenSHC::UI::Enums::SoundMenuClickTypeInt;
+    using OpenSHC::UI::Multiplayer::FindingNetworkSessions_ButtonParametersInt;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     void __stdcall MenuView_IntroLogos_Prepare();
@@ -88,9 +88,9 @@ namespace UI {
 
     void __cdecl MenuModalRenderFunction_UnusedSetName(int x, int y, int width, int height);
 
-    void __cdecl MenuItemRenderFunction_UnusedSetName_ButtonsUnk(int param_1, ...);
+    void __cdecl MenuItemRenderFunction_UnusedSetName_Buttons(int param_1, ...);
 
-    void __cdecl MenuItemActionHandler_UnusedSetName_ButtonsUnk(int param_1, ...);
+    void __cdecl MenuItemActionHandler_UnusedSetName_Buttons(int param_1, ...);
 
     void __stdcall MenuView_HistoricMissionSelect_Prepare();
 
@@ -108,19 +108,19 @@ namespace UI {
 
     void __cdecl MenuItemActionHandler_UnusedEconomicMissionSelect_General(int param_1, ...);
 
-    void __stdcall MenuView_UnusedSomeMissionStartUnk_Prepare();
+    void __stdcall MenuView_UnusedSomeMissionStart_Prepare();
 
-    void __cdecl MenuItemRenderFunction_UnusedSomeMissionStartUnk_General(int param_1, ...);
+    void __cdecl MenuItemRenderFunction_UnusedSomeMissionStart_General(int param_1, ...);
 
-    void __cdecl MenuItemActionHandler_UnusedSomeMissionStartUnk_General(int param_1, ...);
+    void __cdecl MenuItemActionHandler_UnusedSomeMissionStart_General(int param_1, ...);
 
     void __stdcall MenuView_MpConnection_Prepare();
 
     void __stdcall MenuView_General_DoEveryFrame_FirstGfxCentered();
 
-    void __stdcall MenuView_Unknown61ReturnToSkrimishMenuUnk_DoInitial();
+    void __stdcall MenuView_ReturnToSkirmishMenu61_DoInitial();
 
-    void __stdcall MenuView_Unknown61ReturnToSkrimishMenuUnk_DoEveryFrame();
+    void __stdcall MenuView_ReturnToSkirmishMenu61_DoEveryFrame();
 
     void __stdcall MenuView_LobbyMenu_Prepare();
 
@@ -148,7 +148,7 @@ namespace UI {
 
     void __cdecl MenuItemActionHandler_LobbyMenu_SkirmishTypeAndBalance(int param_1, ...);
 
-    void __cdecl MenuItemRenderFunction_LobbyMenu_Unknown(int param_1, ...);
+    void __cdecl MenuItemRenderFunction_LobbyMenu_ConstructionCostText(int param_1, ...);
 
     void __cdecl MenuItemRenderFunction_LobbyMenu_ChatBox(int param_1, ...);
 
@@ -178,7 +178,7 @@ namespace UI {
 
     void __cdecl MenuItemRenderFunction_SelectCrusade_Main(int param_1, ...);
 
-    void __stdcall MenuView_Unknown33_DoEveryFrame();
+    void __stdcall MenuView_LobbyReadyLaunchGame_DoEveryFrame();
 
     void __cdecl MenuItemRenderFunction_SingleplayerMapChoice_ButtonsAndHands(int param_1, ...);
 
@@ -261,7 +261,7 @@ namespace UI {
 
     void __cdecl MenuItemActionHandler_MapEditorLandscaping_CategoryButtons(int param_1, ...);
 
-    void __cdecl MenuItemActionHandler_MapEditorLandscaping_GeneralButtons(CommandBuildingType param_1, ...);
+    void __cdecl MenuItemActionHandler_MapEditorLandscaping_GeneralButtons(CommandBuildingTypeInt param_1, ...);
 
     void __stdcall MenuView_BuildMenu_Prepare();
 
@@ -269,9 +269,9 @@ namespace UI {
 
     void __stdcall MenuView_BuildMenu_DoEveryFrame();
 
-    void __cdecl MenuItemActionHandler_BuildMenu_SomeKeepAndGranaryCheckUnk(int param_1, ...);
+    void __cdecl MenuItemActionHandler_BuildMenu_RedirectFromWitchHoistIfHasKeep(int param_1, ...);
 
-    void __cdecl MenuItemActionHandler_InGameMenu_UnknownBinkRelated(int param_1, ...);
+    void __cdecl MenuItemActionHandler_InGameMenu_SkipBinkVideo(int param_1, ...);
 
     void __stdcall RenderScribeFrame();
 
@@ -285,7 +285,7 @@ namespace UI {
 
     void __cdecl MenuItemRenderFunction_BuildMenu_BuildingKeepSubcategoryButton(int param_1, ...);
 
-    void __cdecl MenuItemActionHandler_General_Unknown2(int param_1, ...);
+    void __cdecl MenuItemActionHandler_General_SetPreviousMenuTab(int param_1, ...);
 
     void __cdecl MenuItemActionHandler_InGameMenu_MiniMapInteraction(int param_1, ...);
 
@@ -293,15 +293,13 @@ namespace UI {
 
     void __cdecl MenuItemActionHandler_InGameMenu_PeasantBuildAndRightClickMenuSelection(int param_1, ...);
 
-    void __cdecl MenuItemActionHandler_InGameMenu_UnitSelectionAndControlsUnk(int param_1, ...);
-
-    void __cdecl HandleWallTerrainMouseDrag();
+    void __cdecl MenuItemActionHandler_InGameMenu_UnitSelectionAndControls(int param_1, ...);
 
     void __stdcall MenuItemActionHandler_InGameMenu_TriggerPlaceWallCommand();
 
     void __cdecl MenuItemActionHandler_BuildMenu_DeleteAction(int param_1, ...);
 
-    void __cdecl MenuItemActionHandler_InGameMenu_RightClickMenuAndMaybeResets(int param_1, ...);
+    void __cdecl MenuItemActionHandler_InGameMenu_RightClickDragAndMouseReset(int param_1, ...);
 
     void __cdecl MenuItemRenderFunction_BuildMenu_UnitActionButtons(int mapperValue, ...);
 
@@ -315,7 +313,7 @@ namespace UI {
 
     void __stdcall MenuView_BuildingAndStatusMenu_DoInitial();
 
-    void __cdecl MenuItemActionHandler_BuildingAndStatusMenu_Unknown_Countdown();
+    void __cdecl MenuItemActionHandler_BuildingAndStatusMenu_SetCountdown();
 
     void __cdecl MenuItemActionHandler_BuildingAndStatusMenu_BuildingHelpTextButton();
 
@@ -331,7 +329,7 @@ namespace UI {
 
     void __cdecl MenuItemRenderFunction_BuildingAndStatusMenu_StatusMainMenuButtons(int param_1, ...);
 
-    void __cdecl MenuItemActionHandler_BuildingAndStatusMenu_PopularityMenuSwitchButtonUnk();
+    void __cdecl MenuItemActionHandler_BuildingAndStatusMenu_TogglePopularityPage();
 
     void __cdecl MenuItemRenderFunction_BuildingAndStatusMenu_PopularityMenuSwitchButton(int param_1, ...);
 
@@ -347,13 +345,13 @@ namespace UI {
 
     void __cdecl MenuItemActionHandler_BuildingAndStatusMenu_ReturnToBuildMenu(int param_1, ...);
 
-    void __stdcall CountPlayerUnitsByType();
+    void __stdcall countPlayerUnitsByType();
 
     void __stdcall MenuView_UnusedHelpTextEditor_Prepare();
 
     void __stdcall MenuView_UnusedHelpTextEditor_DoEveryFrame();
 
-    void __cdecl MenuItemFunction_General_Unknown(int param_1, ...);
+    void __cdecl MenuItemFunction_ClearStopHandling(int param_1, ...);
 
     void __cdecl MenuItemActionHandler_UnusedOldTitleMenu_General(int param_1, ...);
 
@@ -363,7 +361,7 @@ namespace UI {
 
     void __cdecl MenuItemActionHandler_CustomScenarios_Main(int param_1, ...);
 
-    void __stdcall MenuView_Unknown61ReturnToSkrimishMenuUnk_Prepare();
+    void __stdcall MenuView_ReturnToSkirmishMenu61_Prepare();
 
     void __cdecl MenuItemActionHandler_LobbyMenu_MapSelectHeader(int param_1, ...);
 
@@ -382,7 +380,7 @@ namespace UI {
 
     void __cdecl MenuItemActionHandler_MapEditorLandscaping_QueueCommandCallback();
 
-    void __cdecl MenuItemActionHandler_General_ToolbarButtonPressed(CommandBuildingType buttonID);
+    void __cdecl MenuItemActionHandler_General_ToolbarButtonPressed(CommandBuildingTypeInt buttonID);
 
     void __cdecl MenuItemActionHandler_InGameMenu_MainButtons(int param_1, ...);
 
@@ -412,15 +410,13 @@ namespace UI {
     void __cdecl MenuItemRenderFunction_TextEditor_Scrollbar(
         int param_1, int thumbYPos, int param_3, int thumbHeight, BOOLEnum isDragged);
 
-    void __cdecl MenuItemRenderFunction_DisplayScenarioHelpText_AnotherButtonUnk(int param_1, ...);
+    void __cdecl MenuItemRenderFunction_DisplayScenarioHelpText_ConditionalButton(int param_1, ...);
 
-    void __cdecl MenuItemActionHandler_TextEditor_TextInputRelatedUnk();
+    void __cdecl processTextEditorInput();
 
     void __cdecl MenuItemActionHandler_TextEditor_Buttons(int param_1, ...);
 
     void __cdecl MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface();
-
-    void __cdecl RenderButtonImageWithBlending();
 
     void __cdecl MenuItemRenderFunction_ChooseRandomNumberOfEnemies_Main(int param_1, ...);
 
@@ -428,17 +424,17 @@ namespace UI {
 
     void __cdecl MenuItemRenderFunction_MapEditorLandscaping_GeneralButtons(int param_1, ...);
 
-    void __cdecl MenuItemActionHandler_BuildingAndStatusMenu_Unknown_Min1();
+    void __cdecl MenuItemActionHandler_BuildingAndStatusMenu_ResetSelectionA();
 
     void __cdecl MenuItemRenderFunction_BuildingAndStatusMenu_BarracksWeaponAvailability(int param_1, ...);
 
-    void __cdecl MenuItemActionHandler_BuildingAndStatusMenu_UnknownMin1Unk();
+    void __cdecl MenuItemActionHandler_BuildingAndStatusMenu_ResetSelectionB();
 
     BOOLEnum __cdecl HasEnoughGold(int param_1);
 
-    void __cdecl MenuItemRenderFunction_BuildingAndStatusMenu_WorkshopWeaponSelection(ResourceType _weapon, ...);
+    void __cdecl MenuItemRenderFunction_BuildingAndStatusMenu_WorkshopWeaponSelection(ResourceTypeInt _weapon, ...);
 
-    void __cdecl MenuItemActionHandler_BuildingAndStatusMenu_WorkshopWeaponSelection(ResourceType weapon, ...);
+    void __cdecl MenuItemActionHandler_BuildingAndStatusMenu_WorkshopWeaponSelection(ResourceTypeInt weapon, ...);
 
     void __cdecl MenuItemRenderFunction_BuildingAndStatusMenu_DrawbridgeOpenClose(int param_1, ...);
 
@@ -512,13 +508,13 @@ namespace UI {
 
     undefined4 __cdecl TicksSinceCounterStart();
 
-    void __stdcall exitToScenarioDescriptionMenu();
+    void __stdcall gotoScenarioDescription();
 
     void __cdecl MenuItemRenderFunction_NetworkSessions_Buttons(int param_1, ...);
 
     void __cdecl MenuModalRenderFunction_ChooseNetworkServiceProvider(int x, int y, int width, int height);
 
-    void __cdecl MenuItemActionHandler_ChooseNetworkServiceProvider_ProviderScrollbarUnk(
+    void __cdecl MenuItemActionHandler_ChooseNetworkServiceProvider_ProviderScrollbar(
         int param_1, int param_2, int* minValue, int* maxValue, int* currentValue);
 
     void __cdecl MenuItemRenderFunction_ChooseNetworkServiceProvider_ProviderTableRows(int param_1, ...);
@@ -531,7 +527,7 @@ namespace UI {
 
     void __cdecl MenuItemRenderFunction_ChooseNetworkServiceProvider_YourIpDisplay(int param_1, ...);
 
-    void __cdecl MenuItemActionHandler_ChooseNetworkServiceProvider_ModemScrollbarUnk(
+    void __cdecl MenuItemActionHandler_ChooseNetworkServiceProvider_ModemScrollbar(
         int param_1, int param_2, int* minValue, int* maxValue, int* currentValue);
 
     void __cdecl MenuItemActionHandler_ChooseNetworkServiceProvider_ModemTableRows(int param_1, ...);
@@ -568,10 +564,10 @@ namespace UI {
     void __cdecl MenuItemActionHandler_Chat_TauntButtons(int param_1, ...);
 
     void __cdecl MenuItemActionHandler_ChooseNetworkServiceProvider_Buttons(
-        ChooseNetworkServiceProviderButtonActions param_1, ...);
+        ChooseNetworkServiceProviderButtonActionsInt param_1, ...);
 
     void __cdecl MenuItemActionHandler_FindingNetworkSessions_Buttons(
-        FindingNetworkSessions_ButtonParameters param_1, ...);
+        FindingNetworkSessions_ButtonParametersInt param_1, ...);
 
     void __cdecl MenuItemActionHandler_WaitingForHost_ConnectToLobby();
 
@@ -659,9 +655,9 @@ namespace UI {
 
     void __cdecl MenuItemActionHandler_VideoOptions_Main(int param_1, ...);
 
-    void __cdecl MenuItemActionHandler_SoundOptions_Buttons(SoundMenuClickType param_1, ...);
+    void __cdecl MenuItemActionHandler_SoundOptions_Buttons(SoundMenuClickTypeInt param_1, ...);
 
-    void __cdecl MenuItemActionHandler_NetworkOptions_LeaveButtonUnk(int param_1, ...);
+    void __cdecl MenuItemActionHandler_NetworkOptions_LeaveButton(int param_1, ...);
 
     void __cdecl MenuModalRenderFunction_LoadMap(int x, int y, int width, int height);
 
@@ -671,11 +667,11 @@ namespace UI {
 
     void __cdecl MenuItemActionHandler_SaveMap_ReturnKeySave(int param_1, ...);
 
-    void __cdecl MenuItemActionHandler_General_LaunchOrQuitMultiplayerGameUnk(int param_1, ...);
+    void __cdecl MenuItemActionHandler_General_LaunchOrQuitMultiplayerGame(int param_1, ...);
 
     void __cdecl MenuItemActionHandler_ProgressBarBox_LoadAndSaveGameButtonLogic(int param_1, ...);
 
-    void __cdecl ShowProgressBarSaveLoadDialog(int param_1);
+    void __cdecl openLoadSaveProgressDialog(int param_1);
 
     void __cdecl MenuItemActionHandler_OnlineVoteQuitAndQuitGame_Main(int param_1, ...);
 
@@ -697,7 +693,7 @@ namespace UI {
 
     void __cdecl MenuModalRenderFunction_DebugDataUnitData(int x, int y, int width, int height);
 
-    void __cdecl MenuModalRenderFunction_DebugDataZoneDataUnk(int x, int y, int width, int height);
+    void __cdecl MenuModalRenderFunction_DebugDataZoneData(int x, int y, int width, int height);
 
     void __cdecl MenuModalRenderFunction_DebugDataMousePointing(int x, int y, int width, int height);
 
@@ -719,7 +715,7 @@ namespace UI {
 
     void __cdecl MenuModalRenderFunction_StartGoods(int x, int y, int width, int height);
 
-    void __cdecl MenuModalRenderFunction_UnusedSiegeAttackingForceUnk(int x, int y, int width, int height);
+    void __cdecl MenuModalRenderFunction_UnusedSiegeAttackingForce(int x, int y, int width, int height);
 
     void __cdecl MenuModalRenderFunction_CreateOrTriggerInvasion(int x, int y, int width, int height);
 
@@ -761,7 +757,7 @@ namespace UI {
 
     void __cdecl MenuModalRenderFunction_ReceiveMapFrom(int x, int y, int width, int height);
 
-    void __stdcall buildEnemyPlayerList();
+    void __stdcall collectEnemyPlayerIDs();
 
     void __cdecl MenuModalRenderFunction_Allies(int x, int y, int width, int height);
 
@@ -791,11 +787,11 @@ namespace UI {
 
     void __cdecl MenuItemRenderFunction_Roundtable_Main(int param_1, ...);
 
-    void __cdecl MenuModalRenderFunction_DebugDataAivStateUnk(int x, int y, int width, int height);
+    void __cdecl MenuModalRenderFunction_DebugDataAivState(int x, int y, int width, int height);
 
     void __cdecl MenuItemActionHandler_OverlaySlider_Deselect(int param_1, ...);
 
-    void __cdecl MenuItemActionHandler_UnusedWinCondition_DeselectUnk(int param_1, ...);
+    void __cdecl MenuItemActionHandler_UnusedWinCondition_CloseModalOnClickOutside(int param_1, ...);
 
     void __cdecl MenuItemActionHandler_UnusedWinCondition_Options(int param_1, ...);
 
@@ -815,21 +811,21 @@ namespace UI {
 
     void __cdecl MenuModalRenderFunction_Roundtable(int x, int y, int width, int height);
 
-    void __cdecl MenuItemRenderFunction_InGameMenu_MapEventIconUnk(int param_1, ...);
+    void __cdecl MenuItemRenderFunction_InGameMenu_MapEventIcon(int param_1, ...);
 
-    void __cdecl MenuItemActionHandler_InGameMenu_MapEventIconUnk(int param_1, ...);
+    void __cdecl MenuItemActionHandler_InGameMenu_MapEventIconJumpTo(int param_1, ...);
 
     void __cdecl MenuItemRenderFunction_InGameMenu_KeepEnclosedSymbol(int param_1, ...);
 
     void __cdecl MenuItemRenderFunction_InGameMenu_BikMessagePlayerShield(int param_1, ...);
 
-    void __cdecl PlayMissionAestheticSFX(uint param_1, int param_2);
+    void __cdecl playMissionAestheticSFX(uint param_1, int param_2);
 
     void __stdcall MenuView_General_DoInitial_OnlySetMenuXY();
 
     void __stdcall MenuView_EditScenario_DoEveryFrame();
 
-    void __stdcall RestoreScenarioGold();
+    void __stdcall restoreScenarioGold();
 
     void __cdecl MenuItemActionHandler_EditScenario_BaseMenuButtons(int param_1, ...);
 
@@ -856,7 +852,7 @@ namespace UI {
     void __cdecl MenuItemRenderFunction_NewInvasion_RepeatSlider(
         int param_1, int thumbXPos, int sliderValue, int thumbWidth, BOOLEnum isDragged);
 
-    void __stdcall CaptureCurrentTimeToUnknownTime01();
+    void __stdcall captureCurrentTimeMs();
 
     void __cdecl MenuItemActionHandler_NewEventCondition_Main(int param_1, ...);
 
@@ -868,7 +864,7 @@ namespace UI {
     void __cdecl MenuItemRenderFunction_General_EventSlider(
         int param_1, int thumbYPos, int param_3, int thumbHeight, BOOL isDragged);
 
-    void __cdecl MenuItemActionHandler_UnusedCreateMessageEvent_Unknown(int index, ...);
+    void __cdecl MenuItemActionHandler_UnusedCreateMessageEvent_SetActionData(int index, ...);
 
     void __cdecl MenuItemActionHandler_SiegeAttackingForceAndStartGoods_Main(int param_1, ...);
 
@@ -915,15 +911,15 @@ namespace UI {
 
     void __cdecl MenuItemRenderFunction_TriggerInvasion_Main(int param_1, ...);
 
-    void __cdecl initTutorialStepTransition(int param_1);
+    void __cdecl startTutorialTimer(int param_1);
 
-    void __cdecl recordTutorialPlayerAction(int param_1);
+    void __cdecl trackTutorialEvent(int param_1);
 
-    void __stdcall resetTutorialActionTrackers();
+    void __stdcall resetTutorialTrackingState();
 
-    void __cdecl renderAnimatedTutorialFloatOverlay(int param_1, int param_2);
+    void __cdecl renderTutorialPointer(int param_1, int param_2);
 
-    void __cdecl renderTutorialFloatForUIElement(int param_1);
+    void __cdecl showTutorialHintPointer(int param_1);
 
     void __cdecl MenuModalRenderFunction_TutorialBox(int x, int y, int width, int height);
 
@@ -931,7 +927,7 @@ namespace UI {
 
     void __cdecl MenuItemRenderFunction_TutorialBox_Main(int param_1, ...);
 
-    void __stdcall updateTutorialStepAndProgress();
+    void __stdcall updateTutorialStateMachine();
 
     void __stdcall MenuView_EditScenario_Prepare();
 
@@ -939,13 +935,13 @@ namespace UI {
 
     void __cdecl MenuItemRenderFunction_EditScenario_TextBoxLike(int param_1, ...);
 
-    void __cdecl MenuItemActionHandler_UnusedChooseMessageBox_Unknown(int param_1, ...);
+    void __cdecl MenuItemActionHandler_UnusedChooseMessageBox_SelectItem(int param_1, ...);
 
     void __cdecl MenuItemActionHandler_NewInvasion_Buttons(int param_1, ...);
 
     void __cdecl MenuItemRenderFunction_NewInvasion_Buttons(int param_1, ...);
 
-    void __cdecl MenuItemActionHandler_UnusedCreateMessageEvent_SetTextUnk(int param_1, ...);
+    void __cdecl MenuItemActionHandler_UnusedCreateMessageEvent_ConfirmOrEditDate(int param_1, ...);
 
     void __cdecl MenuItemRenderFunction_General_EventButtonAndData(int param_1, ...);
 
@@ -967,17 +963,17 @@ namespace UI {
 
     void __cdecl MenuItemRenderFunction_MissionEndscreen_Main(int param_1, ...);
 
-    void __stdcall MenuView_CampaignUnk_DoEveryFrame();
+    void __stdcall MenuView_Campaign27_DoEveryFrame();
 
-    void __cdecl MenuItemActionHandler_Unknown27CampaignUnk_Main(int param_1, ...);
+    void __cdecl MenuItemActionHandler_Campaign27_Continue(int param_1, ...);
 
-    void __stdcall ParseCampaignMapHotspotBitmap();
+    void __stdcall loadCampaignMapHotspots();
 
     void __cdecl MenuItemRenderFunction_ScenarioDescription_Main(int param_1, ...);
 
     void __cdecl MenuItemActionHandler_ScenarioDescription_Main(int param_1, ...);
 
-    void __cdecl ReadMapHeaderFromFile(char* param_1);
+    void __cdecl loadMapFileHeader(char* param_1);
 
     void __stdcall MenuView_CrusadeMissionIntro_Prepare();
 
@@ -997,7 +993,7 @@ namespace UI {
 
     void __cdecl MenuItemActionHandler_CrusadeEndscreen_Main(int param_1, ...);
 
-    void __cdecl SetActiveCreditsSequenceIndex(undefined4 param_1);
+    void __cdecl setCampaignMapField(undefined4 param_1);
 
     void __stdcall MenuView_RankingGames_Prepare();
 
@@ -1021,57 +1017,56 @@ namespace UI {
 
     void __cdecl MenuItemActionHandler_TacticalPowerBar_Main(int param_1, ...);
 
-    void __stdcall StopCreditsPlaybackAndSounds();
+    void __stdcall stopCreditsPlayback();
 
-    void __stdcall EndCreditsSegmentAndAdvanceToNext();
+    void __stdcall advanceCreditsSequence();
 
     void __stdcall resetCredits();
 
-    void __cdecl AppendCreditsSoundEntry(undefined4 param_1, undefined4 param_2);
+    void __cdecl addCreditsSoundEntry(undefined4 param_1, undefined4 param_2);
 
-    void __cdecl AppendCreditsCommand(undefined4 param_1);
+    void __cdecl appendCreditsCommand(undefined4 param_1);
 
-    void __stdcall AppendCreditsListTerminator();
+    void __stdcall appendCreditsCmd0x20();
 
-    void __stdcall AppendCreditsPauseCommand();
+    void __stdcall appendCreditsCmd0x1c();
 
-    void __stdcall AppendCreditsSegmentEndCommand();
+    void __stdcall appendCreditsCmd0x1f();
 
-    void __stdcall AppendCreditsClearImageCommand();
+    void __stdcall appendCreditsCmd0x28();
 
-    void __cdecl AppendCreditsImageTransitionCommand(
+    void __cdecl addCreditsGfxElement(
         int param_1, int param_2, undefined4 param_3, undefined4 param_4, undefined4 param_5);
 
-    void __cdecl AppendCreditsImageEndCommand(int param_1, int param_2);
+    void __cdecl addCreditsSoundElement(int param_1, int param_2);
 
-    void __cdecl AppendCreditsShowImageCommand(int param_1, int param_2, undefined4 param_3, undefined4 param_4,
+    void __cdecl addCreditsPositionedGfxElement(int param_1, int param_2, undefined4 param_3, undefined4 param_4,
         undefined4 param_5, undefined4 param_6, undefined4 param_7, undefined4 param_8);
 
-    void __cdecl AppendCreditsBinkVideoCommand(undefined4 param_1, char* param_2, undefined4 param_3,
+    void __cdecl addCreditsBinkElementWithName(undefined4 param_1, char* param_2, undefined4 param_3,
         undefined4 param_4, undefined4 param_5, undefined4 param_6);
 
-    void __cdecl AppendCreditsFixedImageCommand(int param_1, undefined4 param_2, undefined4 param_3);
+    void __cdecl addCreditsImageElement(int param_1, undefined4 param_2, undefined4 param_3);
 
-    void __cdecl AppendCreditsBinkVideoWithAudioCommand(
-        char* param_1, undefined4 param_2, int param_3, undefined4 param_4);
+    void __cdecl addCreditsBinkElementWithVolume(char* param_1, undefined4 param_2, int param_3, undefined4 param_4);
 
-    void __cdecl AppendCreditsSoundStreamCommand(undefined4 param_1, undefined4 param_2);
+    void __cdecl appendCreditsCommandWithSound(undefined4 param_1, undefined4 param_2);
 
-    void __cdecl AppendCreditsTextCommand(int param_1, int param_2, undefined4 param_3, undefined4 param_4,
+    void __cdecl addCreditsTextStringElement(int param_1, int param_2, undefined4 param_3, undefined4 param_4,
         undefined4 param_5, undefined4 param_6, undefined4 param_7, undefined4 param_8);
 
-    void __cdecl AppendCreditsTextEndCommand(int param_1, int param_2);
+    void __cdecl addCreditsTextStringSimple(int param_1, int param_2);
 
-    void __stdcall RenderTextPageProgressBar();
+    void __stdcall renderScrollingTextWithFade();
 
-    void __cdecl DisplayFullScreenTextPage(int param_1);
+    void __cdecl renderScrollingTextPage(int param_1);
 
-    void __cdecl BuildIntroLogoSequence(undefined4 param_1, undefined4 param_2);
+    void __cdecl buildIntroLogoSequence(undefined4 param_1, undefined4 param_2);
 
     void __cdecl TrimStoredMenuString(int storedMenuStringIndex, undefined4 param_2, undefined4 param_3,
         int allowedWidth, undefined4 param_5, int fontSize);
 
-    void __cdecl RenderScrollingCreditsTextFrame(float param_1);
+    void __cdecl renderAnimatedScrollingTextLine(float param_1);
 
     void __stdcall MenuView_HistoricMissionPicture_Prepare();
 
@@ -1091,19 +1086,19 @@ namespace UI {
 
     void __stdcall MenuView_HistoricCampaignOutro_DoEveryFrame();
 
-    undefined4 __stdcall FindCampaignMapHotspotAtMouse();
+    undefined4 __stdcall getCreditsElementAtMouse();
 
-    void __stdcall BuildExtremeDemoIntroScript();
+    void __stdcall buildExtremeDemoSequence();
 
     void __stdcall MenuView_MissionFinishedTransition_DoEveryFrame();
 
     void __stdcall MenuView_GameLost_DoEveryFrame();
 
-    void __stdcall MenuView_Unknown26_CampaignRelatedUnk_Prepare();
+    void __stdcall MenuView_CampaignCredits26_Prepare();
 
-    void __stdcall MenuView_CampaignUnk_Prepare();
+    void __stdcall MenuView_Campaign27_Prepare();
 
-    void __stdcall MenuView_CampaignUnk_DoInitial();
+    void __stdcall MenuView_Campaign27_DoInitial();
 
     void __stdcall MenuView_ScenarioDescription_Prepare();
 
@@ -1129,15 +1124,15 @@ namespace UI {
 
     void __stdcall MenuView_MissionFinishedTransition_Prepare();
 
-    void __stdcall MenuView_Unknown26_CampaignRelatedUnk_DoInitial();
+    void __stdcall MenuView_CampaignCredits26_DoInitial();
 
-    void __stdcall MenuView_Unknown26_CampaignRelatedUnk_DoEveryFrame();
+    void __stdcall MenuView_CampaignCredits26_DoEveryFrame();
 
     void __stdcall MenuView_CrusadeEndscreen_DoEveryFrame();
 
     void __cdecl MenuItemActionHandler_General_DisplayConditionalText(int param_1, ...);
 
-    void __cdecl MenuItemActionHandler_General_RemoveConditionalTextOrReleaseHoverUnk(int param_1, ...);
+    void __cdecl MenuItemActionHandler_General_ExpireBottomLeftText(int param_1, ...);
 
 } // namespace UI
 } // namespace OpenSHC

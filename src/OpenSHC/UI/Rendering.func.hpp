@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "OpenSHC/UI/Enums/DisplayElementID.hpp"
+#include "OpenSHC/UI/Enums/DisplayElementIDInt.hpp"
 #include "OpenSHC/UI/Rendering.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -17,7 +17,7 @@ namespace OpenSHC {
 namespace UI {
     namespace Rendering_Func {
 
-        using OpenSHC::UI::Enums::DisplayElementID;
+        using OpenSHC::UI::Enums::DisplayElementIDInt;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int posX, int posY, DWORD tileType), false,
@@ -170,8 +170,8 @@ namespace UI {
         RenderBuildingMenu_Cathedral;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int unitID, int xPos, int yPos), false, Address::SHC_3BB0A8C1_0x0043CC30,
-            &OpenSHC::UI::Rendering::RenderPeasantMenu_CurrentActionUnk)
-        RenderPeasantMenu_CurrentActionUnk;
+            &OpenSHC::UI::Rendering::renderUnitCurrentActionText)
+        renderUnitCurrentActionText;
 
         MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0043CDB0,
             &OpenSHC::UI::Rendering::RenderBuildingMenu_Marketplace)
@@ -402,16 +402,16 @@ namespace UI {
         RenderTerrainTilesCenterPiece;
 
         MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004640D0,
-            &OpenSHC::UI::Rendering::RenderCurrentNotActiveButtonWithPossibleAlphaTexOnCurrentSurfaceUnk)
-        RenderCurrentNotActiveButtonWithPossibleAlphaTexOnCurrentSurfaceUnk;
+            &OpenSHC::UI::Rendering::renderInactiveButtonWithAlpha)
+        renderInactiveButtonWithAlpha;
 
         MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00464300,
             &OpenSHC::UI::Rendering::RenderCurrentButtonOnScreenMenu)
         RenderCurrentButtonOnScreenMenu;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int blendStrengthUnk), false, Address::SHC_3BB0A8C1_0x00464370,
-            &OpenSHC::UI::Rendering::RenderCurrentButtonToScreenMenuWithBlendingUnk)
-        RenderCurrentButtonToScreenMenuWithBlendingUnk;
+            &OpenSHC::UI::Rendering::renderCurrentButtonBlendedToScreenMenu)
+        renderCurrentButtonBlendedToScreenMenu;
 
         MACRO_FUNCTION_RESOLVER(uint(__cdecl*)(int red, int green, int blue), false, Address::SHC_3BB0A8C1_0x00467850,
             &OpenSHC::UI::Rendering::TransformToCurrentModeColor)
@@ -421,13 +421,13 @@ namespace UI {
             &OpenSHC::UI::Rendering::RenderLoadAndSaveBar)
         RenderLoadAndSaveBar;
 
-        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(DisplayElementID displayElementID, uint toggleValue), false,
-            Address::SHC_3BB0A8C1_0x004AF6B0, &OpenSHC::UI::Rendering::TogglePlayerPingDisplayElementUnk)
-        TogglePlayerPingDisplayElementUnk;
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(DisplayElementIDInt displayElementID, uint toggleValue), false,
+            Address::SHC_3BB0A8C1_0x004AF6B0, &OpenSHC::UI::Rendering::togglePlayerPingDisplayElement)
+        togglePlayerPingDisplayElement;
 
         MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004AF700,
-            &OpenSHC::UI::Rendering::RenderDisplayElementsUnk)
-        RenderDisplayElementsUnk;
+            &OpenSHC::UI::Rendering::renderAllActiveDisplayElements)
+        renderAllActiveDisplayElements;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int posX, int posY, DWORD elementState), false,
             Address::SHC_3BB0A8C1_0x004AF820, &OpenSHC::UI::Rendering::RenderResourceMissing1DisplayElement)
@@ -442,12 +442,12 @@ namespace UI {
         RenderDebugNumbersDisplayElement;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int posX, int posY, DWORD elementState), false,
-            Address::SHC_3BB0A8C1_0x004AFA50, &OpenSHC::UI::Rendering::RenderUnknownDisplayElement7)
-        RenderUnknownDisplayElement7;
+            Address::SHC_3BB0A8C1_0x004AFA50, &OpenSHC::UI::Rendering::renderStopwatchDurationDisplayElement)
+        renderStopwatchDurationDisplayElement;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int posX, int posY, DWORD MissionNumPlus1Unk), false,
-            Address::SHC_3BB0A8C1_0x004AFA80, &OpenSHC::UI::Rendering::RenderSomeMissionNumberUnkDisplayElement9)
-        RenderSomeMissionNumberUnkDisplayElement9;
+            Address::SHC_3BB0A8C1_0x004AFA80, &OpenSHC::UI::Rendering::renderMissionNumberDisplayElement)
+        renderMissionNumberDisplayElement;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int posX, int posY, DWORD elementState), false,
             Address::SHC_3BB0A8C1_0x004AFB00, &OpenSHC::UI::Rendering::RenderNoTreeGrowthTextDisplayElement)
@@ -462,8 +462,8 @@ namespace UI {
         RenderMissionWinDefeatBannerDisplayElement;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int posX, int posY, DWORD elementState), false,
-            Address::SHC_3BB0A8C1_0x004AFE10, &OpenSHC::UI::Rendering::RenderSomeMultiplayerInfoUnkDisplayElement19)
-        RenderSomeMultiplayerInfoUnkDisplayElement19;
+            Address::SHC_3BB0A8C1_0x004AFE10, &OpenSHC::UI::Rendering::renderMultiplayerResyncOverlayDisplayElement)
+        renderMultiplayerResyncOverlayDisplayElement;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int posX, int posY, DWORD elementState), false,
             Address::SHC_3BB0A8C1_0x004B0390, &OpenSHC::UI::Rendering::RenderPlayerInfoOnHoverDisplayElement)
@@ -474,8 +474,8 @@ namespace UI {
         RenderGameSpeedTextDisplayElement;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int posX, int posY, DWORD elementState), false,
-            Address::SHC_3BB0A8C1_0x004B0820, &OpenSHC::UI::Rendering::RenderUnknownDisplayElement25)
-        RenderUnknownDisplayElement25;
+            Address::SHC_3BB0A8C1_0x004B0820, &OpenSHC::UI::Rendering::renderSkirmishPointsPerPlayerDebugOverlay)
+        renderSkirmishPointsPerPlayerDebugOverlay;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int posX, int posY, DWORD elementState), false,
             Address::SHC_3BB0A8C1_0x004B0AC0, &OpenSHC::UI::Rendering::RenderPeopleLeftToPlaceDisplayElement)
@@ -487,8 +487,8 @@ namespace UI {
         RenderAndPlayKeepAndGranaryPlacementInfoDisplayElement;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int posX, int posY, DWORD elementState), false,
-            Address::SHC_3BB0A8C1_0x004B1D30, &OpenSHC::UI::Rendering::RenderPlayerPingUnkDisplayElement22)
-        RenderPlayerPingUnkDisplayElement22;
+            Address::SHC_3BB0A8C1_0x004B1D30, &OpenSHC::UI::Rendering::renderPlayerPingDisplayElement)
+        renderPlayerPingDisplayElement;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int posX, int posY, DWORD elementState), false,
             Address::SHC_3BB0A8C1_0x004B1E60, &OpenSHC::UI::Rendering::RenderGamePausedTextDisplayElement)
@@ -499,16 +499,16 @@ namespace UI {
         RenderTimeUntilVictoryDisplayElement;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int posX, int posY, DWORD elementState), false,
-            Address::SHC_3BB0A8C1_0x004B20B0, &OpenSHC::UI::Rendering::RenderNoRushDisplayElementUnk)
-        RenderNoRushDisplayElementUnk;
+            Address::SHC_3BB0A8C1_0x004B20B0, &OpenSHC::UI::Rendering::renderNoRushDisplayElement)
+        renderNoRushDisplayElement;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int posX, int posY, DWORD elementState), false,
             Address::SHC_3BB0A8C1_0x004B2280, &OpenSHC::UI::Rendering::RenderTimeUntilDefeatDisplayElement)
         RenderTimeUntilDefeatDisplayElement;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int posX, int posY, DWORD elementState), false,
-            Address::SHC_3BB0A8C1_0x004B2530, &OpenSHC::UI::Rendering::RenderSomeMultiplayerInfoUnkDisplayElement28)
-        RenderSomeMultiplayerInfoUnkDisplayElement28;
+            Address::SHC_3BB0A8C1_0x004B2530, &OpenSHC::UI::Rendering::renderLaggingPlayerEjectOverlayDisplayElement)
+        renderLaggingPlayerEjectOverlayDisplayElement;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int textNumInGroup), false, Address::SHC_3BB0A8C1_0x004BA910,
             &OpenSHC::UI::Rendering::RenderScenarioButtonWithText)
@@ -519,20 +519,20 @@ namespace UI {
         RenderGreatestLordScreen;
 
         MACRO_FUNCTION_RESOLVER(int(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004D76A0,
-            &OpenSHC::UI::Rendering::RenderMissionObjectivesUnk)
-        RenderMissionObjectivesUnk;
+            &OpenSHC::UI::Rendering::renderScenarioDescriptionContent)
+        renderScenarioDescriptionContent;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int loadedGfxIndex, int xPosInMenuRect, int yPosInMenuRect), false,
-            Address::SHC_3BB0A8C1_0x004DA570, &OpenSHC::UI::Rendering::RenderGfxHelperUnk)
-        RenderGfxHelperUnk;
+            Address::SHC_3BB0A8C1_0x004DA570, &OpenSHC::UI::Rendering::renderMenuGfxAtPosition)
+        renderMenuGfxAtPosition;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int gfxIndex, int x, int y, int blendStrength), false,
             Address::SHC_3BB0A8C1_0x004DA640, &OpenSHC::UI::Rendering::RenderMenuGfxHelper)
         RenderMenuGfxHelper;
 
         MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004DB490,
-            &OpenSHC::UI::Rendering::RenderHistoryBookEdgeUnk)
-        RenderHistoryBookEdgeUnk;
+            &OpenSHC::UI::Rendering::renderAnimatedHistoryBookEdge)
+        renderAnimatedHistoryBookEdge;
 
         MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004F4070,
             &OpenSHC::UI::Rendering::RenderNoViewsFoundWarning)

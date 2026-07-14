@@ -2,19 +2,19 @@
   path: 'OpenSHC/AI/AIVState.func.hpp'
 */
 
-#include "OpenSHC/AI/AIGridComputationResourceType.hpp"
-#include "OpenSHC/AI/AIV/AIVBuildingType2.hpp"
+#include "OpenSHC/AI/AIGridComputationResourceTypeInt.hpp"
+#include "OpenSHC/AI/AIV/AIVBuildingType2Int.hpp"
 #include "OpenSHC/AI/AIVState.hpp"
-#include "OpenSHC/Commands/CommandBuildingType.hpp"
+#include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
 #include "OpenSHC/Game/Player/PlayerID.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
 namespace AI {
     namespace AIVState_Func {
 
-        using OpenSHC::AI::AIGridComputationResourceType;
-        using OpenSHC::AI::AIV::AIVBuildingType2;
-        using OpenSHC::Commands::CommandBuildingType;
+        using OpenSHC::AI::AIGridComputationResourceTypeInt;
+        using OpenSHC::AI::AIV::AIVBuildingType2Int;
+        using OpenSHC::Commands::CommandBuildingTypeInt;
         using OpenSHC::Game::Player::PlayerID;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
@@ -42,7 +42,7 @@ namespace AI {
             &AIVState::setKeepOffsetAndOrientation)
         setKeepOffsetAndOrientation;
 
-        MACRO_FUNCTION_RESOLVER(CommandBuildingType (AIVState::*)(AIVBuildingType2), false,
+        MACRO_FUNCTION_RESOLVER(CommandBuildingTypeInt (AIVState::*)(AIVBuildingType2Int), false,
             Address::SHC_3BB0A8C1_0x004ECFE0, &AIVState::convertAIVBuildingTypeToCommandBuildingType)
         convertAIVBuildingTypeToCommandBuildingType;
 
@@ -73,7 +73,7 @@ namespace AI {
             void (AIVState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004EDCB0, &AIVState::set0x13ValueTo10InHeatMap)
         set0x13ValueTo10InHeatMap;
 
-        MACRO_FUNCTION_RESOLVER(int (AIVState::*)(PlayerID, CommandBuildingType), false,
+        MACRO_FUNCTION_RESOLVER(int (AIVState::*)(PlayerID, CommandBuildingTypeInt), false,
             Address::SHC_3BB0A8C1_0x004EDDF0, &AIVState::findSuitableLocationCloseToKeepAndPlaceBuilding)
         findSuitableLocationCloseToKeepAndPlaceBuilding;
 
@@ -81,7 +81,7 @@ namespace AI {
             &AIVState::findAppropriateWoodCutterLocation)
         findAppropriateWoodCutterLocation;
 
-        MACRO_FUNCTION_RESOLVER(void (AIVState::*)(int, AIGridComputationResourceType), false,
+        MACRO_FUNCTION_RESOLVER(void (AIVState::*)(int, AIGridComputationResourceTypeInt), false,
             Address::SHC_3BB0A8C1_0x004EE430, &AIVState::findAppropriateBuildingLocationForResourceType)
         findAppropriateBuildingLocationForResourceType;
 
@@ -109,7 +109,7 @@ namespace AI {
             int (AIVState::*)(int), false, Address::SHC_3BB0A8C1_0x004EF8C0, &AIVState::computeAIVPlacementFit)
         computeAIVPlacementFit;
 
-        MACRO_FUNCTION_RESOLVER(int (AIVState::*)(int, CommandBuildingType), false, Address::SHC_3BB0A8C1_0x004EFA60,
+        MACRO_FUNCTION_RESOLVER(int (AIVState::*)(int, CommandBuildingTypeInt), false, Address::SHC_3BB0A8C1_0x004EFA60,
             &AIVState::aiPlaceFarm)
         aiPlaceFarm;
 

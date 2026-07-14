@@ -8,7 +8,6 @@
 
 #pragma once
 
-#include "OpenSHC/IO/FileResourceType.hpp"
 #include "OpenSHC/IO/FileResourceTypeInt.hpp"
 #include "OpenSHC/IO/Helpers/OPENFILENAMEA_Truncated.hpp"
 #include "OpenSHC/Map/MapMetaInfo.hpp"
@@ -19,7 +18,6 @@
 namespace OpenSHC {
 namespace IO {
 
-    using OpenSHC::IO::FileResourceType;
     using OpenSHC::IO::FileResourceTypeInt;
     using OpenSHC::IO::Helpers::OPENFILENAMEA_Truncated;
     using OpenSHC::Map::MapMetaInfo;
@@ -68,7 +66,7 @@ namespace IO {
 
         dword getChecksumOfMapByName(char* mapNameAddress);
 
-        char* getLoadedMapNameForIndex(int mapIndex);
+        undefined getLoadedMapNameForIndex();
 
         char* getFileNameOfCurrentActiveResource();
 
@@ -76,13 +74,13 @@ namespace IO {
 
         BOOLEnum doesFileExist(char* filename);
 
-        void setGfxFileFilter();
+        void setupGfxFileDialog();
 
-        void setHelpFileFilter();
+        void setupHelpFileDialog();
 
-        void setSoundFileFilter();
+        void setupFxFileDialog();
 
-        int getSimpleFirst1024ByteSumOfFile(char* filename);
+        int getSignedByteSumOfFile_or_minus1(char* filename);
 
         void syncLoadedMapNames();
 
@@ -90,11 +88,11 @@ namespace IO {
 
         void replaceMapNameWith(dword id1, dword id2);
 
-        char* getCurrentResourceCoreNameUnk();
+        char* getCurrentResourceBaseName();
 
         BOOLEnum doesFileOfActiveResourceExist();
 
-        void resetOpenFileNameStruct();
+        void initOpenFileNameStruct();
 
         BOOLEnum readCurrentResourceIntoDestination(void* destination, size_t size);
 
@@ -104,13 +102,13 @@ namespace IO {
 
         BOOLEnum readNextPartOfCurrentResourceIntoMemory(void* destination, int partSize, char* fileExtension);
 
-        BOOLEnum showOpenGfxFileDialog();
+        BOOLEnum showImportTgxDialog();
 
         BOOLEnum showOpenHelpFileDialog(undefined4 param_1);
 
         BOOLEnum showSaveHelpFileDialog();
 
-        BOOLEnum showOpenSoundFileDialog();
+        BOOLEnum showImportSoundDialog();
 
         int fileHashFunctionByteByByte();
 
@@ -122,7 +120,7 @@ namespace IO {
 
         void discoverMapFiles(char* param_1);
 
-        void resolveResourceFileName(FileResourceType resourceType, char* shortFileName);
+        void resolveResourceFileName(FileResourceTypeInt resourceType, char* shortFileName);
 
         void loadMapHeaders(BOOLEnum drawLoadingBar);
 

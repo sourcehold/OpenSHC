@@ -45,23 +45,23 @@ namespace Map {
 
         void renderDebugDataMapData(int x, int y, int width, int height);
 
-        void floodFillField13FromCell(int param_1, int param_2, int param_3);
+        undefined floodFillWildlifeDangerField();
 
-        void floodFillField20FromCell(int param_1, int param_2, int param_3);
+        undefined floodFillWildlifeGrazingField();
 
         void findAndSetNewRallyPointForDeerAndLions(int tribeID, int always2or3or5, int always0or1);
 
-        undefined4 buildRallyPointPathForTribe(int param_1);
+        undefined4 buildWildlifeGrazingPath(int param_1);
 
-        undefined4 hasAdjacentCellWithField24Or25(int param_1, int param_2);
+        undefined4 hasAdjacentWildlifeMarker(int param_1, int param_2);
 
-        undefined4 isSuitableWildlifeSpawnCell(int param_1, int param_2);
+        undefined4 isGoodGrazingCell(int param_1, int param_2);
 
-        void floodFillUnknownNonZero01FromCell(int param_1, int param_2, int param_3);
+        void floodFillWildlifeClaimField(int param_1, int param_2, int param_3);
 
-        void floodFillCasDisFromSignpost();
+        undefined mapWildlifeFromAttackSignpost();
 
-        int getDistanceToNearestUnknownNonZero01FromSignpost();
+        int distanceFromSignpostToClaimedCell();
 
         void updateWildlife();
 

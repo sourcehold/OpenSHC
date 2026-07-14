@@ -8,16 +8,14 @@
 
 #pragma once
 
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+#include "WinDef.h"
 
 // GLOBAL: STRONGHOLDCRUSADER 0x02427474
-// StructResolver::Instance<OpenSHC::WindowsHelper::Enums::BOOLEnum,37909620>::instance
+// StructResolver::Instance<BOOL,37909620>::instance
 
 namespace OpenSHC {
 
-using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
-MACRO_STRUCT_RESOLVER(BOOLEnum, false, Address::SHC_3BB0A8C1_0x02427474) DAT_RenderMiniMapOrBinkFlag;
+MACRO_STRUCT_RESOLVER(BOOL, false, Address::SHC_3BB0A8C1_0x02427474) DAT_RenderMiniMapOrBinkFlag;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x02427474);

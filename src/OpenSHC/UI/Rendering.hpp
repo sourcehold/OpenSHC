@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "OpenSHC/UI/Enums/DisplayElementID.hpp"
+#include "OpenSHC/UI/Enums/DisplayElementIDInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "WinDef.h"
@@ -16,7 +16,7 @@ namespace OpenSHC {
 namespace UI {
     namespace Rendering {
 
-        using OpenSHC::UI::Enums::DisplayElementID;
+        using OpenSHC::UI::Enums::DisplayElementIDInt;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         void __cdecl RenderConnectAndPathLinkageInfoTextDisplayElement(int posX, int posY, DWORD tileType);
@@ -93,7 +93,7 @@ namespace UI {
 
         void __stdcall RenderBuildingMenu_Cathedral();
 
-        void __cdecl RenderPeasantMenu_CurrentActionUnk(int unitID, int xPos, int yPos);
+        void __cdecl renderUnitCurrentActionText(int unitID, int xPos, int yPos);
 
         void __stdcall RenderBuildingMenu_Marketplace();
 
@@ -209,19 +209,19 @@ namespace UI {
 
         void __stdcall RenderTerrainTilesCenterPiece();
 
-        void __stdcall RenderCurrentNotActiveButtonWithPossibleAlphaTexOnCurrentSurfaceUnk();
+        void __stdcall renderInactiveButtonWithAlpha();
 
         void __stdcall RenderCurrentButtonOnScreenMenu();
 
-        void __cdecl RenderCurrentButtonToScreenMenuWithBlendingUnk(int blendStrengthUnk);
+        void __cdecl renderCurrentButtonBlendedToScreenMenu(int blendStrengthUnk);
 
         uint __cdecl TransformToCurrentModeColor(int red, int green, int blue);
 
         void __cdecl RenderLoadAndSaveBar(int progressValueUnk);
 
-        void __cdecl TogglePlayerPingDisplayElementUnk(DisplayElementID displayElementID, uint toggleValue);
+        void __cdecl togglePlayerPingDisplayElement(DisplayElementIDInt displayElementID, uint toggleValue);
 
-        void __stdcall RenderDisplayElementsUnk();
+        void __stdcall renderAllActiveDisplayElements();
 
         void __cdecl RenderResourceMissing1DisplayElement(int posX, int posY, DWORD elementState);
 
@@ -229,9 +229,9 @@ namespace UI {
 
         void __cdecl RenderDebugNumbersDisplayElement(int posX, int posY, DWORD elementState);
 
-        void __cdecl RenderUnknownDisplayElement7(int posX, int posY, DWORD elementState);
+        void __cdecl renderStopwatchDurationDisplayElement(int posX, int posY, DWORD elementState);
 
-        void __cdecl RenderSomeMissionNumberUnkDisplayElement9(int posX, int posY, DWORD MissionNumPlus1Unk);
+        void __cdecl renderMissionNumberDisplayElement(int posX, int posY, DWORD MissionNumPlus1Unk);
 
         void __cdecl RenderNoTreeGrowthTextDisplayElement(int posX, int posY, DWORD elementState);
 
@@ -239,42 +239,42 @@ namespace UI {
 
         void __cdecl RenderMissionWinDefeatBannerDisplayElement(int posX, int posY, DWORD winDefeatState);
 
-        void __cdecl RenderSomeMultiplayerInfoUnkDisplayElement19(int posX, int posY, DWORD elementState);
+        void __cdecl renderMultiplayerResyncOverlayDisplayElement(int posX, int posY, DWORD elementState);
 
         void __cdecl RenderPlayerInfoOnHoverDisplayElement(int posX, int posY, DWORD elementState);
 
         void __cdecl RenderGameSpeedTextDisplayElement(int posX, int posY, DWORD elementState);
 
-        void __cdecl RenderUnknownDisplayElement25(int posX, int posY, DWORD elementState);
+        void __cdecl renderSkirmishPointsPerPlayerDebugOverlay(int posX, int posY, DWORD elementState);
 
         void __cdecl RenderPeopleLeftToPlaceDisplayElement(int posX, int posY, DWORD elementState);
 
         void __cdecl RenderAndPlayKeepAndGranaryPlacementInfoDisplayElement(
             int posX, int posY, DWORD whichBuildingIsMissing);
 
-        void __cdecl RenderPlayerPingUnkDisplayElement22(int posX, int posY, DWORD elementState);
+        void __cdecl renderPlayerPingDisplayElement(int posX, int posY, DWORD elementState);
 
         void __cdecl RenderGamePausedTextDisplayElement(int posX, int posY, DWORD elementState);
 
         void __cdecl RenderTimeUntilVictoryDisplayElement(int posX, int posY, DWORD elementState);
 
-        void __cdecl RenderNoRushDisplayElementUnk(int posX, int posY, DWORD elementState);
+        void __cdecl renderNoRushDisplayElement(int posX, int posY, DWORD elementState);
 
         void __cdecl RenderTimeUntilDefeatDisplayElement(int posX, int posY, DWORD elementState);
 
-        void __cdecl RenderSomeMultiplayerInfoUnkDisplayElement28(int posX, int posY, DWORD elementState);
+        void __cdecl renderLaggingPlayerEjectOverlayDisplayElement(int posX, int posY, DWORD elementState);
 
         void __cdecl RenderScenarioButtonWithText(int textNumInGroup);
 
         void __stdcall RenderGreatestLordScreen();
 
-        int __stdcall RenderMissionObjectivesUnk();
+        int __stdcall renderScenarioDescriptionContent();
 
-        void __cdecl RenderGfxHelperUnk(int loadedGfxIndex, int xPosInMenuRect, int yPosInMenuRect);
+        void __cdecl renderMenuGfxAtPosition(int loadedGfxIndex, int xPosInMenuRect, int yPosInMenuRect);
 
         void __cdecl RenderMenuGfxHelper(int gfxIndex, int x, int y, int blendStrength);
 
-        void __stdcall RenderHistoryBookEdgeUnk();
+        void __stdcall renderAnimatedHistoryBookEdge();
 
         void __stdcall RenderNoViewsFoundWarning();
 

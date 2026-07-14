@@ -2,7 +2,7 @@
   path: 'OpenSHC/UI/Rendering/AlphaAndButtonSurface.func.hpp'
 */
 
-#include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
+#include "OpenSHC/Rendering/Enums/RenderTargetInt.hpp"
 #include "OpenSHC/UI/Rendering/AlphaAndButtonSurface.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
@@ -10,7 +10,7 @@ namespace UI {
     namespace Rendering {
         namespace AlphaAndButtonSurface_Func {
 
-            using OpenSHC::Rendering::Enums::RenderTarget;
+            using OpenSHC::Rendering::Enums::RenderTargetInt;
             using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
             MACRO_FUNCTION_RESOLVER(void (AlphaAndButtonSurface::*)(int), false, Address::SHC_3BB0A8C1_0x004246E0,
@@ -26,22 +26,22 @@ namespace UI {
             prepareButtonAndAlphaSurface;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (AlphaAndButtonSurface::*)(), false, Address::SHC_3BB0A8C1_0x004630D0,
-                &AlphaAndButtonSurface::isMouseOnButtonImageUnk)
-            isMouseOnButtonImageUnk;
+                &AlphaAndButtonSurface::isMouseOverButtonPixel)
+            isMouseOverButtonPixel;
 
             MACRO_FUNCTION_RESOLVER(void (AlphaAndButtonSurface::*)(int), false, Address::SHC_3BB0A8C1_0x00463270,
-                &AlphaAndButtonSurface::ProcessBuildingClickBonus)
-            ProcessBuildingClickBonus;
+                &AlphaAndButtonSurface::handleFriendlyBuildingClick)
+            handleFriendlyBuildingClick;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (AlphaAndButtonSurface::*)(int), false, Address::SHC_3BB0A8C1_0x00463310,
                 &AlphaAndButtonSurface::openBuildingStatusMenuForBuildingID)
             openBuildingStatusMenuForBuildingID;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (AlphaAndButtonSurface::*)(int), false, Address::SHC_3BB0A8C1_0x00463A00,
-                &AlphaAndButtonSurface::SelectUnitAndOpenStatusMenu)
-            SelectUnitAndOpenStatusMenu;
+                &AlphaAndButtonSurface::selectOwnUnit)
+            selectOwnUnit;
 
-            MACRO_FUNCTION_RESOLVER(void (AlphaAndButtonSurface::*)(int, RenderTarget), false,
+            MACRO_FUNCTION_RESOLVER(void (AlphaAndButtonSurface::*)(int, RenderTargetInt), false,
                 Address::SHC_3BB0A8C1_0x00463A90, &AlphaAndButtonSurface::renderBasicButton)
             renderBasicButton;
 

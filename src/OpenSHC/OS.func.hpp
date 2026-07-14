@@ -30,9 +30,9 @@ namespace OS_Func {
         Address::SHC_3BB0A8C1_0x0047C5D0, &OpenSHC::OS::isEqualGUID)
     isEqualGUID;
 
-    MACRO_FUNCTION_RESOLVER(
-        tm*(__cdecl*)(time_t* _Time), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x0057F5FE, &OpenSHC::OS::_localtime)
-    _localtime;
+    MACRO_FUNCTION_RESOLVER(tm*(__cdecl*)(__time32_t * _Time), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x0057F5FE,
+        &OpenSHC::OS::__localtime64)
+    __localtime64;
 
     MACRO_FUNCTION_RESOLVER(__time64_t(__cdecl*)(__time64_t* _Time), REIMPLEMENTED_CRT,
         Address::SHC_3BB0A8C1_0x0057F622, &OpenSHC::OS::__time64)
@@ -152,6 +152,10 @@ namespace OS_Func {
     MACRO_FUNCTION_RESOLVER(int(__cdecl*)(int fileDescriptor, long lDistanceToMove, DWORD moveMethod),
         REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x0058277E, &OpenSHC::OS::_ucrt_lseek)
     _ucrt_lseek;
+
+    MACRO_FUNCTION_RESOLVER(
+        undefined4(__stdcall*)(), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x005834A0, &OpenSHC::OS::__alloca_probe)
+    __alloca_probe;
 
     MACRO_FUNCTION_RESOLVER(int(__cdecl*)(char* _Str1, char* _Str2, size_t _MaxCount), REIMPLEMENTED_CRT,
         Address::SHC_3BB0A8C1_0x005835BB, &OpenSHC::OS::__strnicmp)

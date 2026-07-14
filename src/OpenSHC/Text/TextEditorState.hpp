@@ -24,50 +24,79 @@ namespace Text {
     class TextEditorState {
     public:
         pointer* DAT_PointerToTemporaryTextMemory; // 0x00000000 length: 4
-        undefined4 customHelpTextLength; // 0x00000004 length: 4
-        undefined4 isDialogStateInitialized; // 0x00000008 length: 4
-        undefined4 helpDialogVariant; // 0x0000000C length: 4
-        undefined4 useInGameHelpHandler; // 0x00000010 length: 4
-        undefined4 savedMenuViewType; // 0x00000014 length: 4
-        undefined4 savedActiveMenuTab; // 0x00000018 length: 4
-        undefined4 savedMenuFlag; // 0x0000001C length: 4
-        BOOLEnum pendingCreditsFadeBorder; // 0x00000020 length: 4
-        BOOLEnum helpSectionParseSucceeded; // 0x00000024 length: 4
-        undefined4 currentHelpSectionID; // 0x00000028 length: 4
-        undefined4 helpSectionHistoryStack[30]; // 0x0000002C length: 120
+        undefined4 field1_0x4; // 0x00000004 length: 4
+        undefined4 field2_0x8; // 0x00000008 length: 4
+        undefined4 field3_0xc; // 0x0000000C length: 4
+        undefined4 field4_0x10; // 0x00000010 length: 4
+        undefined4 field5_0x14; // 0x00000014 length: 4
+        undefined4 field6_0x18; // 0x00000018 length: 4
+        undefined4 field7_0x1c; // 0x0000001C length: 4
+        BOOLEnum field8_0x20; // 0x00000020 length: 4
+        BOOLEnum field9_0x24; // 0x00000024 length: 4
+        undefined4 field10_0x28; // 0x00000028 length: 4
+        undefined4 field11_0x2c; // 0x0000002C length: 4
+        undefined4 field12_0x30; // 0x00000030 length: 4
+        undefined4 field13_0x34; // 0x00000034 length: 4
+        undefined4 field14_0x38; // 0x00000038 length: 4
+        undefined4 field15_0x3c; // 0x0000003C length: 4
+        undefined4 field16_0x40; // 0x00000040 length: 4
+        undefined4 field17_0x44; // 0x00000044 length: 4
+        undefined4 field18_0x48; // 0x00000048 length: 4
+        undefined4 field19_0x4c; // 0x0000004C length: 4
+        undefined4 field20_0x50; // 0x00000050 length: 4
+        undefined4 field21_0x54; // 0x00000054 length: 4
+        undefined4 field22_0x58; // 0x00000058 length: 4
+        undefined4 field23_0x5c; // 0x0000005C length: 4
+        undefined4 field24_0x60; // 0x00000060 length: 4
+        undefined4 field25_0x64; // 0x00000064 length: 4
+        undefined4 field26_0x68; // 0x00000068 length: 4
+        undefined4 field27_0x6c; // 0x0000006C length: 4
+        undefined4 field28_0x70; // 0x00000070 length: 4
+        undefined4 field29_0x74; // 0x00000074 length: 4
+        undefined4 field30_0x78; // 0x00000078 length: 4
+        undefined4 field31_0x7c; // 0x0000007C length: 4
+        undefined4 field32_0x80; // 0x00000080 length: 4
+        undefined4 field33_0x84; // 0x00000084 length: 4
+        undefined4 field34_0x88; // 0x00000088 length: 4
+        undefined4 field35_0x8c; // 0x0000008C length: 4
+        undefined4 field36_0x90; // 0x00000090 length: 4
+        undefined4 field37_0x94; // 0x00000094 length: 4
+        undefined4 field38_0x98; // 0x00000098 length: 4
+        undefined4 field39_0x9c; // 0x0000009C length: 4
+        undefined4 field40_0xa0; // 0x000000A0 length: 4
         undefined4 counter; // 0x000000A4 length: 4
-        undefined4 helpContentScrollOffsetY; // 0x000000A8 length: 4
-        undefined4 topVisibleLineIndex; // 0x000000AC length: 4
-        undefined4 dialogX; // 0x000000B0 length: 4
-        undefined4 dialogY; // 0x000000B4 length: 4
-        undefined4 dialogWidth; // 0x000000B8 length: 4
-        undefined4 dialogHeight; // 0x000000BC length: 4
-        undefined4 dialogContentX; // 0x000000C0 length: 4
-        undefined4 dialogContentY; // 0x000000C4 length: 4
-        undefined4 dialogContentHeight; // 0x000000C8 length: 4
-        undefined4 dialogContentWidth; // 0x000000CC length: 4
-        undefined4 helpContentScrollX; // 0x000000D0 length: 4
-        undefined4 helpContentScrollY; // 0x000000D4 length: 4
-        undefined4 activeHelpHotspotIndex; // 0x000000D8 length: 4
-        undefined4 helpDialogSubMode; // 0x000000DC length: 4
-        undefined4 useAlternateHelpTab; // 0x000000E0 length: 4
-        undefined4 isCustomTextMode; // 0x000000E4 length: 4
-        undefined4 useWideHelpLayout; // 0x000000E8 length: 4
-        undefined4 pendingTokenTypeToSkip; // 0x000000EC length: 4
-        undefined4 isTextHelpDialogMode; // 0x000000F0 length: 4
-        char* customHelpTextPointer; // 0x000000F4 length: 4
-        undefined4 isCustomHelpTextWide; // 0x000000F8 length: 4
-        undefined4 customHelpTextBufferSize; // 0x000000FC length: 4
-        undefined4 customTextMaxLength; // 0x00000100 length: 4
-        char soundFileNames[5][1000]; // 0x00000104 length: 5000
-        byte soundFilePlayedFlags[5]; // 0x0000148C length: 5
+        undefined4 field42_0xa8; // 0x000000A8 length: 4
+        undefined4 field43_0xac; // 0x000000AC length: 4
+        undefined4 field44_0xb0; // 0x000000B0 length: 4
+        undefined4 field45_0xb4; // 0x000000B4 length: 4
+        undefined4 field46_0xb8; // 0x000000B8 length: 4
+        undefined4 field47_0xbc; // 0x000000BC length: 4
+        undefined4 field48_0xc0; // 0x000000C0 length: 4
+        undefined4 field49_0xc4; // 0x000000C4 length: 4
+        undefined4 shortArray1Related; // 0x000000C8 length: 4
+        undefined4 field51_0xcc; // 0x000000CC length: 4
+        undefined4 field52_0xd0; // 0x000000D0 length: 4
+        undefined4 field53_0xd4; // 0x000000D4 length: 4
+        undefined4 field54_0xd8; // 0x000000D8 length: 4
+        undefined4 field55_0xdc; // 0x000000DC length: 4
+        undefined4 field56_0xe0; // 0x000000E0 length: 4
+        undefined4 field57_0xe4; // 0x000000E4 length: 4
+        undefined4 field58_0xe8; // 0x000000E8 length: 4
+        undefined4 field59_0xec; // 0x000000EC length: 4
+        undefined4 field60_0xf0; // 0x000000F0 length: 4
+        undefined4 field61_0xf4; // 0x000000F4 length: 4
+        undefined4 field62_0xf8; // 0x000000F8 length: 4
+        undefined4 field63_0xfc; // 0x000000FC length: 4
+        undefined4 field64_0x100; // 0x00000100 length: 4
+        char stringArray1[5][1000]; // 0x00000104 length: 5000
+        byte stringArray1Companion[5]; // 0x0000148C length: 5
         undefined1 padding_0x1491[3]; // 0x00001491 length: 3
-        undefined4 soundFileCount; // 0x00001494 length: 4
-        char graphicFileNames[20][1000]; // 0x00001498 length: 20000
-        undefined4 graphicFileCount; // 0x000062B8 length: 4
-        short lineLayoutTable[60000]; // 0x000062BC length: 120000
-        int imageHotspotCount; // 0x0002377C length: 4
-        short imageHotspotTable[50][4]; // 0x00023780 length: 400
+        undefined4 count1; // 0x00001494 length: 4
+        char stringArray2[20][1000]; // 0x00001498 length: 20000
+        undefined4 count2; // 0x000062B8 length: 4
+        short shortArray1[60000]; // 0x000062BC length: 120000
+        int shortArray1Count; // 0x0002377C length: 4
+        short shortArray1Companion2[50][4]; // 0x00023780 length: 400
         int intArray1[25]; // 0x00023910 length: 100
 
     private:
@@ -81,85 +110,83 @@ namespace Text {
         // Constructor
         TextEditorState* Constructor_TextEditorState();
 
-        void setHelpWindowBounds(undefined4 param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4);
+        void setTextEditorFields(undefined4 param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4);
 
-        void resetHelpStateFields();
+        void resetTextEditorHandles();
 
-        int findHelpSectionIndexByName(char* param_1);
+        int findHelpSectionIndex(char* param_1);
 
-        int findOrAddHelpSectionName(char* param_1);
+        int findOrAddHelpSection(char* param_1);
 
         WCHAR parseHLPPart(FILE* filePointer);
 
-        void loadHelpSectionGraphics();
+        void loadTextEditorGfxResources();
 
         undefined* getWideCharPointer(int* param_1);
 
-        void renderHelpImageHotspots();
+        void drawTextEditorGfxItems();
 
         void bltTextToScreenIfNeedBe();
 
         void drawBorderStyle0x20(int param_1, int param_2, int param_3, int param_4);
 
-        void drawHelpWindowBackground();
+        void drawTextEditorBackground();
 
-        int findHelpGraphicIndexByName(char* param_1);
+        int findTextEditorGfxIndex(char* param_1);
 
-        void findOrAddHelpGraphicName(char* param_1);
+        void findOrAddTextEditorGfx(char* param_1);
 
-        int getNextHelpSectionID(int param_1);
+        int getNextHelpPageId(int param_1);
 
-        int getPrevHelpSectionID(int param_1);
+        int getPrevHelpPageId(int param_1);
 
-        char* getHelpSectionText(int param_1);
+        char* getHelpPageText(int param_1);
 
-        int getNextHelpColorEntryIndex(int param_1);
+        undefined getNextHelpEntryIndex();
 
-        int getPrevHelpColorEntryIndex(int param_1);
+        undefined getPrevHelpEntryIndex();
 
-        int findSoundIndexByName(char* param_1);
+        int findTextEditorString1Index(char* param_1);
 
-        void findOrAddSoundName(char* param_1);
+        void findOrAddTextEditorString1(char* param_1);
 
-        void saveHelpFileToResource();
+        undefined getTextTokenSlotCount();
 
-        undefined4 getHelpTokenAdvanceLength(undefined4 param_1);
+        void insertTextTokenSlots(undefined4 param_1);
 
-        void insertHelpTextToken(undefined4 param_1);
-
-        void closeHelpDialogAndReturnToMenu();
+        void someKindOfTextEscape();
 
         void readCrusaderHelpHlp(LPCSTR param_1);
 
-        undefined4 loadAndParseHelpFile(FILE* param_1);
+        undefined4 loadCrusaderHelpFile(FILE* param_1);
 
         void parseHlp();
 
-        void processHelpRichTextTokens(int param_1);
+        void layoutHelpText(int param_1);
 
         void setTextRenderingLogic();
 
-        void initializeAndLayoutHelpText();
+        void rebuildHelpTextLayout();
 
-        void renderHelpDialogIfOpen();
+        void renderTextEditor();
 
         void loadAndLayoutHelpContent();
 
-        void openBuildingHelpDialog(int param_1);
+        void openBuildingHelpText(int param_1);
 
-        void openInGameHelpDialog(int param_1);
+        void openInGameHelpText(int param_1);
 
-        void openScenarioHelpDialog(int param_1);
+        void openScenarioHelpText(int param_1);
 
-        void openCreditsScrollDialog(int param_1);
+        void openCreditsScroll(int param_1);
 
-        void openMapDescriptionEditorDialog(int param_1);
+        void openMapDescriptionEditor(int param_1);
 
-        void setCustomHelpText(char* param_1, undefined4 param_2);
+        void displayRawText(char* param_1, undefined4 param_2);
 
-        void popHelpDialogStack();
+        void goBackInHelpHistory();
 
-        void openUnusedHelpTextEditorDialog(int param_1);
+        void openHelpTextEditor(int param_1);
     };
 
     static_assert_cpp98_obj(sizeof(TextEditorState) == 145780, TextEditorState);

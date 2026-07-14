@@ -77,7 +77,7 @@ namespace Game {
             int emenyHitArray[9]; // 0x000000CC length: 36
             int field43_0xf0; // 0x000000F0 length: 4
             int field44_0xf4; // 0x000000F4 length: 4
-            int field45_0xf8; // 0x000000F8 length: 4
+            int nMapTimeFlag; // 0x000000F8 length: 4
             DWORD gameOverTime; // 0x000000FC length: 4
             int drunkenManStatus; // 0x00000100 length: 4
             undefined1 padding_0x104[148]; // 0x00000104 length: 148
@@ -93,7 +93,7 @@ namespace Game {
             int yearChanged; // 0x0000033C length: 4
             int weekChanged; // 0x00000340 length: 4
             int strongWalls2; // 0x00000344 length: 4
-            int field601_0x348; // 0x00000348 length: 4
+            int nAdvancedOption1InGame; // 0x00000348 length: 4
             int counterForUpdatingSeparateAreaTileMaps; // 0x0000034C length: 4
             int totalGameTicksUnk; // 0x00000350 length: 4
             int treeSpreadCounter; // 0x00000354 length: 4
@@ -107,7 +107,7 @@ namespace Game {
             undefined1 padding_0x528[312]; // 0x00000528 length: 312
             int startGoods[25]; // 0x00000660 length: 100
             undefined1 padding_0x6c4[4]; // 0x000006C4 length: 4
-            int field1364_0x6c8; // 0x000006C8 length: 4
+            int nSiegeInformationArray; // 0x000006C8 length: 4
             int field1365_0x6cc; // 0x000006CC length: 4
             int field1366_0x6d0; // 0x000006D0 length: 4
             int field1367_0x6d4; // 0x000006D4 length: 4
@@ -134,14 +134,14 @@ namespace Game {
             int traderRelatedCounter2; // 0x00000728 length: 4
             int traderRelatedCounter1; // 0x0000072C length: 4
             int traderRelated2; // 0x00000730 length: 4
-            int field1394_0x734; // 0x00000734 length: 4
+            int nTraderUpdateTimer; // 0x00000734 length: 4
             undefined1 padding_0x738[72]; // 0x00000738 length: 72
             BuySellPair copyOfBuyAndSalesPrice[25]; // 0x00000780 length: 200
             BuySellPair buyAndSalesPriceArray[25]; // 0x00000848 length: 200
             int unknownResouceFlagArray1[25]; // 0x00000910 length: 100
             int unknownResourceFlagArray2[25]; // 0x00000974 length: 100
             int isResourceTradeable[25]; // 0x000009D8 length: 100
-            int field1472_0xa3c; // 0x00000A3C length: 4
+            int nDeerRespawnCounter; // 0x00000A3C length: 4
             short deerSpawnLocationsXY[4][2]; // 0x00000A40 length: 16
             int field1474_0xa50; // 0x00000A50 length: 4
             undefined1 padding_0xa54[800]; // 0x00000A54 length: 800
@@ -163,7 +163,7 @@ namespace Game {
             short scenarioTaxesSetting; // 0x00000DE6 length: 2
             short scenarioGold; // 0x00000DE8 length: 2
             short editScenarioExtraOptions; // 0x00000DEA length: 2
-            short field2293_0xdec; // 0x00000DEC length: 2
+            short nEventTimer; // 0x00000DEC length: 2
             short field2294_0xdee; // 0x00000DEE length: 2
             short field2295_0xdf0[4][2]; // 0x00000DF0 length: 16
             short field2296_0xe00; // 0x00000E00 length: 2
@@ -204,7 +204,7 @@ namespace Game {
             int field3146_0x26c8; // 0x000026C8 length: 4
             int field3147_0x26cc; // 0x000026CC length: 4
             int field3148_0x26d0; // 0x000026D0 length: 4
-            int field3149_0x26d4; // 0x000026D4 length: 4
+            int nSavedGameStateBackup; // 0x000026D4 length: 4
             int field3150_0x26d8; // 0x000026D8 length: 4
             int field3151_0x26dc; // 0x000026DC length: 4
             int field3152_0x26e0; // 0x000026E0 length: 4
@@ -246,28 +246,28 @@ namespace Game {
             int field3188_0x2770; // 0x00002770 length: 4
             int gameEventRelatedCountdown; // 0x00002774 length: 4
             int unk_signpostDistance; // 0x00002778 length: 4
-            int field3191_0x277c; // 0x0000277C length: 4
+            int nSpawnLocationCount; // 0x0000277C length: 4
             short rabbitSpawnXY[4][2]; // 0x00002780 length: 16
             int field3193_0x2790; // 0x00002790 length: 4
             short camelSpawnXY[4][2]; // 0x00002794 length: 16
-            int field3195_0x27a4; // 0x000027A4 length: 4
-            int field3196_0x27a8; // 0x000027A8 length: 4
-            int field3197_0x27ac; // 0x000027AC length: 4
+            int lordActionCounterA_0x27a4; // 0x000027A4 length: 4
+            int singleplayerEventFlag_0x27a8; // 0x000027A8 length: 4
+            int lordActionCounterB_0x27ac; // 0x000027AC length: 4
             int somePlayerID; // 0x000027B0 length: 4
             short playerIsAlive[9]; // 0x000027B4 length: 18
             short field3200_0x27c6; // 0x000027C6 length: 2
-            int field3201_0x27c8; // 0x000027C8 length: 4
+            int nTreeFireCounter; // 0x000027C8 length: 4
             int deerCount; // 0x000027CC length: 4
             int armySizeLimit; // 0x000027D0 length: 4
-            short field3204_0x27d4; // 0x000027D4 length: 2
-            short field3205_0x27d6; // 0x000027D6 length: 2
+            short victoryDefeatFlag_0x27d4; // 0x000027D4 length: 2
+            short victoryDefeatBitflags_0x27d6; // 0x000027D6 length: 2
             short yearCopy; // 0x000027D8 length: 2
             short monthCopy; // 0x000027DA length: 2
-            short field3208_0x27dc; // 0x000027DC length: 2
+            short victoryDefeatFlag2_0x27dc; // 0x000027DC length: 2
             short field3209_0x27de; // 0x000027DE length: 2
             int noDogs; // 0x000027E0 length: 4
-            int field3211_0x27e4; // 0x000027E4 length: 4
-            int field3212_0x27e8; // 0x000027E8 length: 4
+            int nAdvancedOption2InGame; // 0x000027E4 length: 4
+            int nAdvancedOption3InGame; // 0x000027E8 length: 4
             int noCowThrowing; // 0x000027EC length: 4
             int totalNoRushTicks; // 0x000027F0 length: 4
             int noRushTicksLeftUnk; // 0x000027F4 length: 4

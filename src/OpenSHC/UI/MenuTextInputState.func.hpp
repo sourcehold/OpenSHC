@@ -2,15 +2,15 @@
   path: 'OpenSHC/UI/MenuTextInputState.func.hpp'
 */
 
-#include "OpenSHC/UI/Enums/MenuModalType.hpp"
+#include "OpenSHC/UI/Enums/MenuModalTypeInt.hpp"
 #include "OpenSHC/UI/MenuTextInputState.hpp"
 namespace OpenSHC {
 namespace UI {
     namespace MenuTextInputState_Func {
 
-        using OpenSHC::UI::Enums::MenuModalType;
+        using OpenSHC::UI::Enums::MenuModalTypeInt;
 
-        MACRO_FUNCTION_RESOLVER(void (MenuTextInputState::*)(MenuModalType), false, Address::SHC_3BB0A8C1_0x004916C0,
+        MACRO_FUNCTION_RESOLVER(void (MenuTextInputState::*)(MenuModalTypeInt), false, Address::SHC_3BB0A8C1_0x004916C0,
             &MenuTextInputState::activateModalDialogAndClearText)
         activateModalDialogAndClearText;
 
@@ -22,9 +22,9 @@ namespace UI {
             &MenuTextInputState::clearAnyOtherModalDialogs)
         clearAnyOtherModalDialogs;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (MenuTextInputState::*)(), false, Address::SHC_3BB0A8C1_0x004917C0, &MenuTextInputState::meth_0x4917c0)
-        meth_0x4917c0;
+        MACRO_FUNCTION_RESOLVER(void (MenuTextInputState::*)(), false, Address::SHC_3BB0A8C1_0x004917C0,
+            &MenuTextInputState::resetMenuTextInputModals)
+        resetMenuTextInputModals;
 
         MACRO_FUNCTION_RESOLVER(void (MenuTextInputState::*)(), false, Address::SHC_3BB0A8C1_0x00493900,
             &MenuTextInputState::popModalDialog)
@@ -34,7 +34,7 @@ namespace UI {
             &MenuTextInputState::activateLoadOrSaveMapUI)
         activateLoadOrSaveMapUI;
 
-        MACRO_FUNCTION_RESOLVER(void (MenuTextInputState::*)(MenuModalType), false, Address::SHC_3BB0A8C1_0x00493AC0,
+        MACRO_FUNCTION_RESOLVER(void (MenuTextInputState::*)(MenuModalTypeInt), false, Address::SHC_3BB0A8C1_0x00493AC0,
             &MenuTextInputState::loadOrSaveMap)
         loadOrSaveMap;
 

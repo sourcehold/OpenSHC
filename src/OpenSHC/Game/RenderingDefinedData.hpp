@@ -149,7 +149,7 @@ namespace Game {
         MenuItem MenuItems_TriggerEventSlider[5]; // 0x0005081C length: 400
         MenuIDMenuElementAddressPair DAT_MenuViewIDMenuMapping[51]; // 0x000509AC length: 408
         TextMessageBLLookupStruct DAT_TextMessageLookupTable[422]; // 0x00050B44 length: 6752
-        int field114_0x525a4[27]; // 0x000525A4 length: 108
+        int currentlyDisplayedTextConsCfg_0x525a4[27]; // 0x000525A4 length: 108
         uint DAT_ColorTable1[9]; // 0x00052610 length: 36
         undefined1 padding_0x52634[100]; // 0x00052634 length: 100
         BGR24 DAT_ColorArray[9]; // 0x00052698 length: 36
@@ -172,9 +172,9 @@ namespace Game {
         undefined1 padding_0x53bac[8]; // 0x00053BAC length: 8
         int field451_0x53bb4[24]; // 0x00053BB4 length: 96
         int DAT_StartGoldPerFairnessLevel[3][5][2]; // 0x00053C14 length: 120
-        int field453_0x53c8c[20][20]; // 0x00053C8C length: 1600
+        int skirmishBalanceAndOrIntensCfg_0x53c8c[20][20]; // 0x00053C8C length: 1600
         undefined1 padding_0x542cc[440]; // 0x000542CC length: 440
-        int field894_0x54484[18][10]; // 0x00054484 length: 720
+        int skirmishBalanceAndOrIntensCfg_0x54484[18][10]; // 0x00054484 length: 720
         int DAT_BuyPricePerResource[26]; // 0x00054754 length: 104
         int DAT_SalesPricePerResource[25]; // 0x000547BC length: 100
         int DAT_NoRushTicks[5]; // 0x00054820 length: 20
@@ -200,10 +200,10 @@ namespace Game {
         int TROOP_VALUE_FIRETHROWER; // 0x000548D0 length: 4
         int TROOP_VALUE_S_FBALLISTA; // 0x000548D4 length: 4
         int TROOP_VALUE_CATAPULT; // 0x000548D8 length: 4
-        int field1003_0x548dc; // 0x000548DC length: 4
-        int field1004_0x548e0; // 0x000548E0 length: 4
-        int field1005_0x548e4; // 0x000548E4 length: 4
-        int field1006_0x548e8; // 0x000548E8 length: 4
+        int someSiegeUnitsComputationCfg_0x548dc; // 0x000548DC length: 4
+        int someSiegeUnitsComputationCfg_0x548e0; // 0x000548E0 length: 4
+        int someSiegeUnitsComputationCfg_0x548e4; // 0x000548E4 length: 4
+        int someSiegeUnitsComputationCfg_0x548e8; // 0x000548E8 length: 4
         int field1007_0x548ec; // 0x000548EC length: 4
         int field1008_0x548f0; // 0x000548F0 length: 4
         int field1009_0x548f4; // 0x000548F4 length: 4
@@ -224,10 +224,10 @@ namespace Game {
         int field1024_0x54930; // 0x00054930 length: 4
         int field1025_0x54934; // 0x00054934 length: 4
         int field1026_0x54938; // 0x00054938 length: 4
-        int field1027_0x5493c[24]; // 0x0005493C length: 96
-        int field1028_0x5499c[24]; // 0x0005499C length: 96
-        int field1029_0x549fc[24]; // 0x000549FC length: 96
-        UnitTypeInt field1030_0x54a5c[28]; // 0x00054A5C length: 112
+        int inGameMenu_ProcessScribeAnCfg_0x5493c[24]; // 0x0005493C length: 96
+        int inGameMenu_ProcessScribeAnCfg_0x5499c[24]; // 0x0005499C length: 96
+        int inGameMenu_ProcessScribeAnCfg_0x549fc[24]; // 0x000549FC length: 96
+        UnitTypeInt buildMenu_CurrentlySelecteCfg_0x54a5c[28]; // 0x00054A5C length: 112
         char* DAT_ChimpTgxArray[70]; // 0x00054ACC length: 280
         char* DAT_ChimpTgxSketchArray[80]; // 0x00054BE4 length: 320
         char* DAT_ChimpHelpArray[70]; // 0x00054D24 length: 280
@@ -235,22 +235,22 @@ namespace Game {
         char* DAT_BuildingHelpArray[108]; // 0x00054F54 length: 432
         char* DAT_BuildingBikArray[108]; // 0x00055104 length: 432
         char* DAT_BuildingTgxSketchArray[108]; // 0x000552B4 length: 432
-        ResourceTypeInt field1038_0x55464[8]; // 0x00055464 length: 32
-        int field1039_0x55484[8]; // 0x00055484 length: 32
+        ResourceTypeInt statusMenu_ResourcesCfg_0x55464[8]; // 0x00055464 length: 32
+        int statusMenu_ResourcesCfg_0x55484[8]; // 0x00055484 length: 32
         Position DAT_StockpileIconsPositionNudges[8]; // 0x000554A4 length: 64
-        int field1041_0x554e4[8]; // 0x000554E4 length: 32
-        int field1042_0x55504[8]; // 0x00055504 length: 32
-        Position field1043_0x55524[8]; // 0x00055524 length: 64
+        int statusMenu_WeaponsCfg_0x554e4[8]; // 0x000554E4 length: 32
+        int statusMenu_WeaponsCfg_0x55504[8]; // 0x00055504 length: 32
+        Position statusMenu_WeaponsCfg_0x55524[8]; // 0x00055524 length: 64
         int DAT_MarketStonksOrder[20]; // 0x00055564 length: 80
         ResourceTypeInt DAT_FoodTypes[8]; // 0x000555B4 length: 32
         int DAT_RawResourceTypes[4]; // 0x000555D4 length: 16
-        int field1047_0x555e4[8]; // 0x000555E4 length: 32
-        Position field1048_0x55604[25]; // 0x00055604 length: 200
-        int field1049_0x556cc[7][3]; // 0x000556CC length: 84
-        int field1050_0x55720[4]; // 0x00055720 length: 16
+        int buildingMenu_Marketplace_WCfg_0x555e4[8]; // 0x000555E4 length: 32
+        Position buildingMenu_Marketplace_TCfg_0x55604[25]; // 0x00055604 length: 200
+        int statusMenu_PopularityCfg_0x556cc[7][3]; // 0x000556CC length: 84
+        int statusMenu_FoodCfg_0x55720[4]; // 0x00055720 length: 16
         undefined1 padding_0x55730[68]; // 0x00055730 length: 68
         UnitTypeInt DAT_UnitTypeGroups[3][9]; // 0x00055774 length: 108
-        int field1120_0x557e0; // 0x000557E0 length: 4
+        int buildingMenu_ChapelAndChurCfg_0x557e0; // 0x000557E0 length: 4
 
     } RenderingDefinedData;
 #pragma pack(pop)

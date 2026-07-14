@@ -3,14 +3,14 @@
 */
 
 #include "OpenSHC/Audio/MissingResourceState.hpp"
-#include "OpenSHC/Audio/SFX/ResourceLackSFX.hpp"
+#include "OpenSHC/Audio/SFX/ResourceLackSFXInt.hpp"
 namespace OpenSHC {
 namespace Audio {
     namespace MissingResourceState_Func {
 
-        using OpenSHC::Audio::SFX::ResourceLackSFX;
+        using OpenSHC::Audio::SFX::ResourceLackSFXInt;
 
-        MACRO_FUNCTION_RESOLVER(void (MissingResourceState::*)(int, ResourceLackSFX), false,
+        MACRO_FUNCTION_RESOLVER(void (MissingResourceState::*)(int, ResourceLackSFXInt), false,
             Address::SHC_3BB0A8C1_0x00471720, &MissingResourceState::playResourceLackSFX)
         playResourceLackSFX;
 

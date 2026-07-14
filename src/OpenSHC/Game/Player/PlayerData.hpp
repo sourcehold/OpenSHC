@@ -43,14 +43,14 @@ namespace Game {
             int rationsSetting2; // 0x00000024 length: 4
             ResourceTypeInt marketSelectedResourceType; // 0x00000028 length: 4
             int storageAlmostFullOrEmptyUnk; // 0x0000002C length: 4
-            int field21_0x30; // 0x00000030 length: 4
+            int storageNotificationState; // 0x00000030 length: 4
             int someCount47; // 0x00000034 length: 4
             int someCount45; // 0x00000038 length: 4
             int textYOffset; // 0x0000003C length: 4
             short field25_0x40; // 0x00000040 length: 2
             short field26_0x42; // 0x00000042 length: 2
-            int field27_0x44; // 0x00000044 length: 4
-            short field28_0x48; // 0x00000048 length: 2
+            int lastKeepMenuEventTime; // 0x00000044 length: 4
+            short dogCageStatusFlag; // 0x00000048 length: 2
             undefined2 someCount32; // 0x0000004A length: 2
             undefined2 someCount33; // 0x0000004C length: 2
             undefined1 padding_0x4e[2]; // 0x0000004E length: 2
@@ -73,7 +73,7 @@ namespace Game {
             uint keepBuildingID; // 0x00000094 length: 4
             int someKeepRelatedX; // 0x00000098 length: 4
             int someKeepRelatedY; // 0x0000009C length: 4
-            int field65_0xa0; // 0x000000A0 length: 4
+            int nKeyBuildingRefArray; // 0x000000A0 length: 4
             int field66_0xa4; // 0x000000A4 length: 4
             undefined1 padding_0xa8[20]; // 0x000000A8 length: 20
             int firstStockpileRef; // 0x000000BC length: 4
@@ -164,10 +164,10 @@ namespace Game {
             int armySize; // 0x0000053C length: 4
             undefined1 padding_0x540[24]; // 0x00000540 length: 24
             XYPairShort campgroundLocationsUnk[6][72]; // 0x00000558 length: 1728
-            int field866_0xc18; // 0x00000C18 length: 4
+            int barracksParadePosIndex; // 0x00000C18 length: 4
             undefined1 padding_0xc1c[4]; // 0x00000C1C length: 4
             XYPairShort engineersCampgroundArray[25]; // 0x00000C20 length: 100
-            int field872_0xc84; // 0x00000C84 length: 4
+            int engineersCampgroundPosIndex; // 0x00000C84 length: 4
             undefined1 padding_0xc88[4]; // 0x00000C88 length: 4
             undefined4 someCount27; // 0x00000C8C length: 4
             XYPairShort buildingRelatedXYArray_1[25]; // 0x00000C90 length: 100
@@ -239,7 +239,7 @@ namespace Game {
             int populationRelatedCrowdingCountUnk; // 0x00002184 length: 4
             int taxesSetting; // 0x00002188 length: 4
             int rationsSetting; // 0x0000218C length: 4
-            int field979_0x2190; // 0x00002190 length: 4
+            int granaryMenuStateFlag; // 0x00002190 length: 4
             bool snoozedBuildings[100]; // 0x00002194 length: 100
             int lordID; // 0x000021F8 length: 4
             int lordUID; // 0x000021FC length: 4
@@ -301,7 +301,7 @@ namespace Game {
             short someCount59; // 0x000022C2 length: 2
             int someCount60; // 0x000022C4 length: 4
             int someUnitID01; // 0x000022C8 length: 4
-            int field1041_0x22cc; // 0x000022CC length: 4
+            int courtUnitUidTracker; // 0x000022CC length: 4
             int countInns; // 0x000022D0 length: 4
             int lastlastEncounteredEnemyPlayerID; // 0x000022D4 length: 4
             undefined1 padding_0x22d8[4]; // 0x000022D8 length: 4
@@ -363,10 +363,10 @@ namespace Game {
             int defWallPatrolRallyTimeHits; // 0x00002B54 length: 4
             int field1179_0x2b58; // 0x00002B58 length: 4
             int engineerCountRelated; // 0x00002B5C length: 4
-            int field1181_0x2b60; // 0x00002B60 length: 4
+            int aiSiegeRecruitFlag; // 0x00002B60 length: 4
             int closestEnemyDistanceToTheLord; // 0x00002B64 length: 4
             undefined1 padding_0x2b68[4]; // 0x00002B68 length: 4
-            int field1187_0x2b6c; // 0x00002B6C length: 4
+            int pendingUnitCounter_0x2b6c; // 0x00002B6C length: 4
             int outerPatrolRallyDelayTracker; // 0x00002B70 length: 4
             int aiStrengthState; // 0x00002B74 length: 4
             int raidRetargetDelayCounter; // 0x00002B78 length: 4
@@ -407,7 +407,7 @@ namespace Game {
             int totalAttackTroops; // 0x000030F0 length: 4
             AIStrengthTypeInt aiStrengthFeeling; // 0x000030F4 length: 4
             AIRecruitUnitChoiceInt aiRecruitUnitChoiceState; // 0x000030F8 length: 4
-            int field1250_0x30fc; // 0x000030FC length: 4
+            int aiRecruitCounter; // 0x000030FC length: 4
             int aiDefUnitChoiceIndex; // 0x00003100 length: 4
             int aiRaidUnitChoiceIndex; // 0x00003104 length: 4
             int aiAttUnitMainChoiceIndex; // 0x00003108 length: 4
@@ -425,7 +425,7 @@ namespace Game {
             int requestedAttackTargetUnk; // 0x00003850 length: 4
             int unitPatrolRecommandRelatedDelayValue; // 0x00003854 length: 4
             int aiCowThrowCounter; // 0x00003858 length: 4
-            int field1268_0x385c; // 0x0000385C length: 4
+            int aiTaxRationSetting; // 0x0000385C length: 4
             int aiResourceBuildingFocusIndicator; // 0x00003860 length: 4
             int aivCurrentPauseIndex; // 0x00003864 length: 4
             int aivCurrentPause; // 0x00003868 length: 4
@@ -461,7 +461,7 @@ namespace Game {
             int currentAttackWave; // 0x00003924 length: 4
             int countFarms; // 0x00003928 length: 4
             int someCountdown01; // 0x0000392C length: 4
-            int field1310_0x3930; // 0x00003930 length: 4
+            int nAiPlayerStateFlag; // 0x00003930 length: 4
             int someXPosition; // 0x00003934 length: 4
             int someYPosition; // 0x00003938 length: 4
             int totalTroopsType6; // 0x0000393C length: 4
