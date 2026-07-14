@@ -11,7 +11,7 @@
 #include "OpenSHC/Map/Navigation/Algorithms/XYPair.hpp"
 
 // GLOBAL: STRONGHOLDCRUSADER 0x00ED26D0
-// StructResolver::Instance<OpenSHC::Map::Navigation::Algorithms::XYPair[21],15541968>::instance
+// StructResolver::Instance<OpenSHC::Map::Navigation::Algorithms::XYPair [21],15541968>::instance
 
 namespace OpenSHC {
 

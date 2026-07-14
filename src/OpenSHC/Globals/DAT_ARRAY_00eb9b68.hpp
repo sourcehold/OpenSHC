@@ -11,7 +11,7 @@
 #include "OpenSHC/Rendering/CreditsRelatedStructure2.hpp"
 
 // GLOBAL: STRONGHOLDCRUSADER 0x00EB9B68
-// StructResolver::Instance<OpenSHC::Rendering::CreditsRelatedStructure2[288],15440744>::instance
+// StructResolver::Instance<OpenSHC::Rendering::CreditsRelatedStructure2 [288],15440744>::instance
 
 namespace OpenSHC {
 

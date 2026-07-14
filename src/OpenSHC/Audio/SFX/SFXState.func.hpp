@@ -20,7 +20,7 @@ namespace Audio {
             using OpenSHC::Map::Units::UnitType;
 
             MACRO_FUNCTION_RESOLVER(
-                void (SFXState::*)(int), false, Address::SHC_3BB0A8C1_0x00449B20, &SFXState::freeMemoryAt)
+                void (SFXState::*)(), false, Address::SHC_3BB0A8C1_0x00449B20, &SFXState::freeMemoryAt)
             freeMemoryAt;
 
             MACRO_FUNCTION_RESOLVER(

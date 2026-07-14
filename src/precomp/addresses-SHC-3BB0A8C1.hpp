@@ -93964,7 +93964,7 @@ enum {
     SHC_3BB0A8C1_0x00B98654 = 0x00B98654,
     // label: DAT_CurrentPlayerUnitLosses
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00B98658 = 0x00B98658,
     // label: DAT_IsKeepEnclosed
     // location:
@@ -94082,7 +94082,7 @@ enum {
     SHC_3BB0A8C1_0x00D7D250 = 0x00D7D250,
     // label: DAT_LoadingBarProgress
     // location:
-    // type: /undefined4
+    // type: /uint
     SHC_3BB0A8C1_0x00D7D2D0 = 0x00D7D2D0,
     // label: DAT_BlendFilterArrays
     // location:

@@ -21,8 +21,8 @@ namespace Audio {
             Address::SHC_3BB0A8C1_0x0047B510, &OpenSHC::Audio::MSS::SndSystemTimeCallback)
         SndSystemTimeCallback;
 
-        MACRO_FUNCTION_RESOLVER(undefined4(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0057E160,
-            &OpenSHC::Audio::MSS::RegisterMilesAILShutdown)
+        MACRO_FUNCTION_RESOLVER(
+            int(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0057E160, &OpenSHC::Audio::MSS::RegisterMilesAILShutdown)
         RegisterMilesAILShutdown;
 
     } // namespace MSS_Func

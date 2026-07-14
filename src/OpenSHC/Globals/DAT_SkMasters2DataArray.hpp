@@ -11,7 +11,7 @@
 #include "OpenSHC/IO/SkMasterDataEntry.hpp"
 
 // GLOBAL: STRONGHOLDCRUSADER 0x00DF6250
-// StructResolver::Instance<OpenSHC::IO::SkMasterDataEntry[250],14639696>::instance
+// StructResolver::Instance<OpenSHC::IO::SkMasterDataEntry [250],14639696>::instance
 
 namespace OpenSHC {
 

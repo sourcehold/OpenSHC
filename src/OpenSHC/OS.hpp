@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include "OpenSHC/OS/_atexit_t.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "crtdefs.h"
@@ -21,6 +22,7 @@
 namespace OpenSHC {
 namespace OS {
 
+    using OpenSHC::OS::_atexit_t;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     int* __stdcall basic_ofstream_write(void* param_1, uint param_2);
@@ -37,7 +39,7 @@ namespace OS {
 
     int __cdecl __stricmp(char* _Str1, char* _Str2);
 
-    int __cdecl _atexit(void* param_1);
+    int __cdecl _atexit(_atexit_t* param_1);
 
     void __cdecl _free_base(void* _Memory);
 

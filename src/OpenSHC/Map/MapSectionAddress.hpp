@@ -15,7 +15,7 @@ namespace Map {
     // SIZE: 0x00000010
     typedef struct MapSectionAddress {
 
-        pointer* address; // 0x00000000 length: 4
+        pointer address; // 0x00000000 length: 4
         undefined4 unknown; // 0x00000004 length: 4
         uint size; // 0x00000008 length: 4
         ushort compressed; // 0x0000000C length: 2

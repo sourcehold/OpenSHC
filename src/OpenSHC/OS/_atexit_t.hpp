@@ -3,16 +3,14 @@
   Communicate changes to the dev team (e.g. via a Pull Request).
   Changes get lost otherwise.
 
-  path: 'OpenSHC/Audio/MSS/SoundFlagsAndLoopCount.hpp'
+  path: 'OpenSHC/OS/_atexit_t.hpp'
 */
 
 #pragma once
 
 namespace OpenSHC {
-namespace Audio {
-    namespace MSS {
+namespace OS {
 
-        typedef int SoundFlagsAndLoopCount;
-    } // namespace MSS
-} // namespace Audio
+    typedef void(__cdecl _atexit_t)();
+} // namespace OS
 } // namespace OpenSHC

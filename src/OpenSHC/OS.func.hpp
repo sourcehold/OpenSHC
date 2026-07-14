@@ -9,6 +9,7 @@
 #pragma once
 
 #include "OpenSHC/OS.hpp"
+#include "OpenSHC/OS/_atexit_t.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "crtdefs.h"
@@ -20,6 +21,7 @@
 namespace OpenSHC {
 namespace OS_Func {
 
+    using OpenSHC::OS::_atexit_t;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     MACRO_FUNCTION_RESOLVER(int*(__stdcall*)(void* param_1, uint param_2), REIMPLEMENTED_CRT,
@@ -51,7 +53,7 @@ namespace OS_Func {
     __stricmp;
 
     MACRO_FUNCTION_RESOLVER(
-        int(__cdecl*)(void* param_1), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x0057FA62, &OpenSHC::OS::_atexit)
+        int(__cdecl*)(_atexit_t* param_1), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x0057FA62, &OpenSHC::OS::_atexit)
     _atexit;
 
     MACRO_FUNCTION_RESOLVER(

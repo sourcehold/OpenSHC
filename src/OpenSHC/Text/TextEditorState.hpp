@@ -23,7 +23,7 @@ namespace Text {
     // SIZE: 0x00023974
     class TextEditorState {
     public:
-        pointer* DAT_PointerToTemporaryTextMemory; // 0x00000000 length: 4
+        pointer DAT_PointerToTemporaryTextMemory; // 0x00000000 length: 4
         undefined4 customHelpTextLength; // 0x00000004 length: 4
         undefined4 isDialogStateInitialized; // 0x00000008 length: 4
         undefined4 helpDialogVariant; // 0x0000000C length: 4

@@ -21,7 +21,7 @@ namespace Audio {
             int scheduledPlayCounter; // 0x00000008 length: 4
             int field3_0xc; // 0x0000000C length: 4
             int baseVolumePercentageUnk; // 0x00000010 length: 4
-            pointer* pointerToFilename; // 0x00000014 length: 4
+            char* pointerToFilename; // 0x00000014 length: 4
 
         } SoundStructure1;
 #pragma pack(pop)

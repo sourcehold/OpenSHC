@@ -40,7 +40,7 @@ namespace UI {
         dword sliderValue; // 0x00000054 length: 4
         int* destination; // 0x00000058 length: 4
         short* destination2; // 0x0000005C length: 4
-        pointer* sliderCallbackFunction; // 0x00000060 length: 4
+        pointer sliderCallbackFunction; // 0x00000060 length: 4
         dword mbr_0x64; // 0x00000064 length: 4
         dword disappearAfter; // 0x00000068 length: 4
         dword mbr_0x6c; // 0x0000006C length: 4

@@ -222,17 +222,17 @@ namespace Map {
         undefined1 padding_0x554a4c[4]; // 0x00554A4C length: 4
         undefined2 field218_0x554a50; // 0x00554A50 length: 2
         undefined1 padding_0x554a52[6]; // 0x00554A52 length: 6
-        pointer* ptr_LogicLayer; // 0x00554A58 length: 4
-        pointer* ptr_TerrainTypeTileMap; // 0x00554A5C length: 4
-        pointer* ptr_TerrainHeightTileMap; // 0x00554A60 length: 4
-        pointer* ptr_ChangedLayer; // 0x00554A64 length: 4
-        pointer* ptr_MovementDirectionTranslationMatrix; // 0x00554A68 length: 4
-        pointer* ptr_OccupancyLayer; // 0x00554A6C length: 4
-        pointer* ptr_DamageLayer; // 0x00554A70 length: 4
-        pointer* ptr_PathConnectionLayer; // 0x00554A74 length: 4
-        pointer* ptr_AIZoneLayer; // 0x00554A78 length: 4
-        pointer* ptr_SpecialAreasArray; // 0x00554A7C length: 4
-        pointer* ptr_MiscDisplayLayer; // 0x00554A80 length: 4
+        pointer ptr_LogicLayer; // 0x00554A58 length: 4
+        pointer ptr_TerrainTypeTileMap; // 0x00554A5C length: 4
+        pointer ptr_TerrainHeightTileMap; // 0x00554A60 length: 4
+        pointer ptr_ChangedLayer; // 0x00554A64 length: 4
+        pointer ptr_MovementDirectionTranslationMatrix; // 0x00554A68 length: 4
+        pointer ptr_OccupancyLayer; // 0x00554A6C length: 4
+        pointer ptr_DamageLayer; // 0x00554A70 length: 4
+        pointer ptr_PathConnectionLayer; // 0x00554A74 length: 4
+        pointer ptr_AIZoneLayer; // 0x00554A78 length: 4
+        pointer ptr_SpecialAreasArray; // 0x00554A7C length: 4
+        pointer ptr_MiscDisplayLayer; // 0x00554A80 length: 4
         undefined1 padding_0x554a84[4]; // 0x00554A84 length: 4
 
     private:

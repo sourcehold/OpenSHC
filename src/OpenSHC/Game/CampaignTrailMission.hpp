@@ -15,7 +15,7 @@ namespace Game {
     // SIZE: 0x00000090
     typedef struct CampaignTrailMission {
 
-        pointer* mapNameAddress; // 0x00000000 length: 4
+        pointer mapNameAddress; // 0x00000000 length: 4
         int fairness; // 0x00000004 length: 4
         int startLevels; // 0x00000008 length: 4
         int numberOfPlayers; // 0x0000000C length: 4
