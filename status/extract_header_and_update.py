@@ -67,6 +67,8 @@ def read_existing_txt(txt_path):
     with txt_path.open("r", encoding="utf-8") as f:
         for i, line in enumerate(f, 1):
             line = line.rstrip("\n")
+            if not line: # skip empty lines
+                continue
 
             match = TXT_LINE_REGEX.match(line)
             if not match:
@@ -106,7 +108,9 @@ def write_output(txt_path, addresses, data_map):
                 comment = "Pending"
 
             # writing
-            f.write(format_line(addr, percent, comment) + "\n")
+            f.write("\n")
+            f.write(format_line(addr, percent, comment))
+            f.write("\n")
 
     # logging leftovers
     for leftover, (percent, comment) in data_map.items():
