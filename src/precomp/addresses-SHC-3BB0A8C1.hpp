@@ -17867,7 +17867,7 @@ enum {
     SHC_3BB0A8C1_0x00449FF0 = 0x00449FF0,
     // type: function
     SHC_3BB0A8C1_0x0044A010 = 0x0044A010,
-    // label: resetAmbientEventCounters
+    // label: Constructor_SFXState_resetAmbientEventCounters
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x0044A050 = 0x0044A050,

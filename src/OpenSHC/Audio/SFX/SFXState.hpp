@@ -68,7 +68,7 @@ namespace Audio {
 
             void resetScheduledSoundRequests();
 
-            void resetAmbientEventCounters();
+            void Constructor_SFXState_resetAmbientEventCounters();
 
             void notifyAmbientSoundEvent(int ambientSoundType);
 

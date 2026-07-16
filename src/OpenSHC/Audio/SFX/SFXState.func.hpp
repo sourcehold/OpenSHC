@@ -55,9 +55,9 @@ namespace Audio {
                 void (SFXState::*)(), false, Address::SHC_3BB0A8C1_0x00449FF0, &SFXState::resetScheduledSoundRequests)
             resetScheduledSoundRequests;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (SFXState::*)(), false, Address::SHC_3BB0A8C1_0x0044A050, &SFXState::resetAmbientEventCounters)
-            resetAmbientEventCounters;
+            MACRO_FUNCTION_RESOLVER(void (SFXState::*)(), false, Address::SHC_3BB0A8C1_0x0044A050,
+                &SFXState::Constructor_SFXState_resetAmbientEventCounters)
+            Constructor_SFXState_resetAmbientEventCounters;
 
             MACRO_FUNCTION_RESOLVER(
                 void (SFXState::*)(int), false, Address::SHC_3BB0A8C1_0x0044A0D0, &SFXState::notifyAmbientSoundEvent)
