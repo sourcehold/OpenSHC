@@ -13,6 +13,7 @@ namespace Map {
     namespace Buildings {
         typedef enum BuildingLogicalState {
 
+            BLS_INITIAL = 1, // 0x00000001
             BLS_NORMAL = 2, // 0x00000002
             BLS_REMOVE = 3 // 0x00000003
 

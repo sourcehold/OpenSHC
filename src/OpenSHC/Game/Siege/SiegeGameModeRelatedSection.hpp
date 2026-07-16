@@ -22,7 +22,7 @@ namespace Game {
             int field3_0xc; // 0x0000000C length: 4
             int field4_0x10; // 0x00000010 length: 4
             int field5_0x14; // 0x00000014 length: 4
-            int field6_0x18; // 0x00000018 length: 4
+            int tunnelersCount; // 0x00000018 length: 4
 
         } SiegeGameModeRelatedSection;
 #pragma pack(pop)

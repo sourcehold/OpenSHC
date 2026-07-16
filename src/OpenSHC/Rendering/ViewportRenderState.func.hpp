@@ -55,6 +55,10 @@ namespace Rendering {
             &ViewportRenderState::renderGmOverlayBuilding2)
         renderGmOverlayBuilding2;
 
+        MACRO_FUNCTION_RESOLVER(void (ViewportRenderState::*)(int, int, int, undefined4, int), false,
+            Address::SHC_3BB0A8C1_0x004E3870, &ViewportRenderState::renderBuildingAnimation)
+        renderBuildingAnimation;
+
         MACRO_FUNCTION_RESOLVER(void (ViewportRenderState::*)(int, int, int, int), false,
             Address::SHC_3BB0A8C1_0x004E3980, &ViewportRenderState::renderGmOverlayBuilding)
         renderGmOverlayBuilding;

@@ -73,8 +73,8 @@ namespace Map {
             int gfxOffsets[110]; // 0x0000354C length: 440
             int gfxOffsets3[110]; // 0x00003704 length: 440
             TruncatedInt spriteIDs2[110]; // 0x000038BC length: 440
-            short field39_0x3a74[110][2][2]; // 0x00003A74 length: 880
-            int field40_0x3de4[110]; // 0x00003DE4 length: 440
+            short spriteOffsets1[110][2][2]; // 0x00003A74 length: 880
+            int animAdvanceThrottles[110]; // 0x00003DE4 length: 440
             int DAT_BuildingHeights[110]; // 0x00003F9C length: 440
             int field42_0x4154[110]; // 0x00004154 length: 440
             byte field43_0x430c[312]; // 0x0000430C length: 312
@@ -117,18 +117,18 @@ namespace Map {
             byte field80_0x55a4[28]; // 0x000055A4 length: 28
             byte field81_0x55c0[20]; // 0x000055C0 length: 20
             byte field82_0x55d4[260]; // 0x000055D4 length: 260
-            byte field83_0x56d8[44]; // 0x000056D8 length: 44
-            byte field84_0x5704[12]; // 0x00005704 length: 12
-            byte field85_0x5710[28]; // 0x00005710 length: 28
-            byte field86_0x572c[32]; // 0x0000572C length: 32
-            byte field87_0x574c[56]; // 0x0000574C length: 56
-            byte field88_0x5784[16]; // 0x00005784 length: 16
+            byte animTannerSolitary[44]; // 0x000056D8 length: 44
+            byte animTanner[12]; // 0x00005704 length: 12
+            byte animTanner3[28]; // 0x00005710 length: 28
+            byte animTanner4[32]; // 0x0000572C length: 32
+            byte animTannerSolitary2[56]; // 0x0000574C length: 56
+            byte animTanner2[16]; // 0x00005784 length: 16
             byte field89_0x5794[92]; // 0x00005794 length: 92
             byte field90_0x57f0[36]; // 0x000057F0 length: 36
-            byte field91_0x5814[40]; // 0x00005814 length: 40
-            byte field92_0x583c[152]; // 0x0000583C length: 152
-            byte field93_0x58d4[152]; // 0x000058D4 length: 152
-            byte field94_0x596c[172]; // 0x0000596C length: 172
+            byte animTanner5[40]; // 0x00005814 length: 40
+            byte animTannerSolitary4[152]; // 0x0000583C length: 152
+            byte animTanner6[152]; // 0x000058D4 length: 152
+            byte animTanner7[172]; // 0x0000596C length: 172
             byte field95_0x5a18[52]; // 0x00005A18 length: 52
             byte field96_0x5a4c[36]; // 0x00005A4C length: 36
             byte field97_0x5a70[28]; // 0x00005A70 length: 28
@@ -260,9 +260,9 @@ namespace Map {
             int field384_0x9e9c[7][4]; // 0x00009E9C length: 112
             undefined1 padding_0x9f0c[16]; // 0x00009F0C length: 16
             int field401_0x9f1c[2][4]; // 0x00009F1C length: 32
-            XYPairShort DAT_BuildingPositionRelatedArray_1[25]; // 0x00009F3C length: 100
+            XYPairShort tunnelersGuildParadegroundLocationOffsets[25]; // 0x00009F3C length: 100
             undefined1 padding_0x9fa0[4]; // 0x00009FA0 length: 4
-            XYPairShort field407_0x9fa4[25]; // 0x00009FA4 length: 100
+            XYPairShort engineersParagroundOffsets[25]; // 0x00009FA4 length: 100
             undefined1 padding_0xa008[4]; // 0x0000A008 length: 4
             XYPairShort field412_0xa00c[16]; // 0x0000A00C length: 64
             int field413_0xa04c[16][13]; // 0x0000A04C length: 832

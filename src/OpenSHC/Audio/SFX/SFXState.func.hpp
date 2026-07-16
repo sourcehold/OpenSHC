@@ -5,7 +5,6 @@
 #include "OpenSHC/Audio/SFX/AmbientSFXType.hpp"
 #include "OpenSHC/Audio/SFX/SFXState.hpp"
 #include "OpenSHC/Audio/SFX/SoundEffectID.hpp"
-#include "OpenSHC/Audio/SFX/SpeechEffectID.hpp"
 #include "OpenSHC/DE/SHCDE/eSFX.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 namespace OpenSHC {
@@ -15,7 +14,6 @@ namespace Audio {
 
             using OpenSHC::Audio::SFX::AmbientSFXType;
             using OpenSHC::Audio::SFX::SoundEffectID;
-            using OpenSHC::Audio::SFX::SpeechEffectID;
             using OpenSHC::DE::SHCDE::eSFX;
             using OpenSHC::Map::Units::UnitType;
 
@@ -50,8 +48,8 @@ namespace Audio {
             playSFXAtLocation;
 
             MACRO_FUNCTION_RESOLVER(void (SFXState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x00449F10,
-                &SFXState::someVolumeAdjustmentFunction)
-            someVolumeAdjustmentFunction;
+                &SFXState::playSFXAtLocationFullVolume)
+            playSFXAtLocationFullVolume;
 
             MACRO_FUNCTION_RESOLVER(
                 void (SFXState::*)(), false, Address::SHC_3BB0A8C1_0x00449FF0, &SFXState::resetScheduledSoundRequests)
@@ -82,8 +80,8 @@ namespace Audio {
             playUnitSpeechEffect;
 
             MACRO_FUNCTION_RESOLVER(
-                void (SFXState::*)(SpeechEffectID), false, Address::SHC_3BB0A8C1_0x0044A3A0, &SFXState::PlaySpeechSFX)
-            PlaySpeechSFX;
+                void (SFXState::*)(char*), false, Address::SHC_3BB0A8C1_0x0044A5A0, &SFXState::playSpeechSFX)
+            playSpeechSFX;
 
             MACRO_FUNCTION_RESOLVER(
                 void (SFXState::*)(char const*), false, Address::SHC_3BB0A8C1_0x0044A460, &SFXState::playWAVSFX)
@@ -92,10 +90,6 @@ namespace Audio {
             MACRO_FUNCTION_RESOLVER(
                 void (SFXState::*)(char*), false, Address::SHC_3BB0A8C1_0x0044A500, &SFXState::playOnSpeechSfxStream)
             playOnSpeechSfxStream;
-
-            MACRO_FUNCTION_RESOLVER(
-                void (SFXState::*)(char*), false, Address::SHC_3BB0A8C1_0x0044A5A0, &SFXState::playSpeechSFX)
-            playSpeechSFX;
 
             MACRO_FUNCTION_RESOLVER(
                 void (SFXState::*)(), false, Address::SHC_3BB0A8C1_0x0044A620, &SFXState::playVictoryMusic678)

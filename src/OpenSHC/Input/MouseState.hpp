@@ -51,70 +51,51 @@ namespace Input {
         undefined4 previousMidClickStateUnk; // 0x00000050 length: 4
         uint previousRightClickState; // 0x00000054 length: 4
         undefined4 scrollEventData; // 0x00000058 length: 4
-        undefined4 field23_0x5c; // 0x0000005C length: 4
-        undefined4 field24_0x60; // 0x00000060 length: 4
-        undefined4 field25_0x64; // 0x00000064 length: 4
-        undefined4 field26_0x68; // 0x00000068 length: 4
-        undefined4 field27_0x6c; // 0x0000006C length: 4
-        undefined4 left; // 0x00000070 length: 4
-        undefined4 top; // 0x00000074 length: 4
-        undefined4 right; // 0x00000078 length: 4
-        undefined4 bottom; // 0x0000007C length: 4
+        int lastSetCursorType; // 0x0000005C length: 4
+        RECT selectionBox; // 0x00000060 length: 16
+        RECT previousSelectionBox; // 0x00000070 length: 16
         undefined4 hitboxXStart; // 0x00000080 length: 4
         undefined4 hitboxYStart; // 0x00000084 length: 4
         undefined4 hitboxXEnd; // 0x00000088 length: 4
         undefined4 hitboxYEnd; // 0x0000008C length: 4
-        int field36_0x90; // 0x00000090 length: 4
-        undefined4 field37_0x94; // 0x00000094 length: 4
+        int selectionBoxMode; // 0x00000090 length: 4
+        undefined4 field31_0x94; // 0x00000094 length: 4
         undefined1 padding_0x98[4]; // 0x00000098 length: 4
-        undefined4 field42_0x9c; // 0x0000009C length: 4
-        MouseXYUUStruct mouseXY[9]; // 0x000000A0 length: 144
-        undefined4 field44_0x130; // 0x00000130 length: 4
-        undefined4 field45_0x134; // 0x00000134 length: 4
-        undefined4 field46_0x138; // 0x00000138 length: 4
-        undefined4 field47_0x13c; // 0x0000013C length: 4
-        undefined4 field48_0x140; // 0x00000140 length: 4
-        undefined4 field49_0x144; // 0x00000144 length: 4
-        undefined4 field50_0x148; // 0x00000148 length: 4
-        undefined4 field51_0x14c; // 0x0000014C length: 4
-        undefined4 field52_0x150; // 0x00000150 length: 4
-        undefined4 field53_0x154; // 0x00000154 length: 4
-        undefined4 field54_0x158; // 0x00000158 length: 4
-        undefined4 field55_0x15c; // 0x0000015C length: 4
-        undefined4 field56_0x160; // 0x00000160 length: 4
-        undefined4 field57_0x164; // 0x00000164 length: 4
+        int previewEnabled; // 0x0000009C length: 4
+        MouseXYUUStruct mouseXY[10]; // 0x000000A0 length: 160
+        int mouseXY8[10]; // 0x00000140 length: 40
         undefined4 index; // 0x00000168 length: 4
         undefined4 storedScreenSpaceX; // 0x0000016C length: 4
         undefined4 storedScreenSpaceY; // 0x00000170 length: 4
-        undefined4 field61_0x174; // 0x00000174 length: 4
-        undefined4 field62_0x178; // 0x00000178 length: 4
-        undefined4 field63_0x17c; // 0x0000017C length: 4
+        undefined4 field42_0x174; // 0x00000174 length: 4
+        undefined4 field43_0x178; // 0x00000178 length: 4
+        undefined4 field44_0x17c; // 0x0000017C length: 4
         undefined4 mouseBasedEvent; // 0x00000180 length: 4
-        undefined4 field65_0x184; // 0x00000184 length: 4
-        undefined4 field66_0x188; // 0x00000188 length: 4
+        undefined4 field46_0x184; // 0x00000184 length: 4
+        undefined4 field47_0x188; // 0x00000188 length: 4
         undefined4 mapOrientationCopy1; // 0x0000018C length: 4
         undefined4 mapOrientationCopy2; // 0x00000190 length: 4
         undefined4 mapOrientationCopy3; // 0x00000194 length: 4
-        undefined4 field70_0x198; // 0x00000198 length: 4
-        undefined4 field71_0x19c; // 0x0000019C length: 4
+        undefined4 field51_0x198; // 0x00000198 length: 4
+        undefined4 field52_0x19c; // 0x0000019C length: 4
         undefined4 currentTime1; // 0x000001A0 length: 4
         undefined4 currentTime2; // 0x000001A4 length: 4
         undefined4 currentTime3; // 0x000001A8 length: 4
-        undefined4 field75_0x1ac; // 0x000001AC length: 4
-        undefined4 field76_0x1b0; // 0x000001B0 length: 4
-        undefined4 field77_0x1b4; // 0x000001B4 length: 4
-        undefined4 field78_0x1b8; // 0x000001B8 length: 4
-        undefined4 field79_0x1bc; // 0x000001BC length: 4
-        undefined4 field80_0x1c0; // 0x000001C0 length: 4
-        undefined4 field81_0x1c4; // 0x000001C4 length: 4
-        undefined4 field82_0x1c8; // 0x000001C8 length: 4
+        undefined4 field56_0x1ac; // 0x000001AC length: 4
+        undefined4 field57_0x1b0; // 0x000001B0 length: 4
+        undefined4 field58_0x1b4; // 0x000001B4 length: 4
+        undefined4 field59_0x1b8; // 0x000001B8 length: 4
+        undefined4 field60_0x1bc; // 0x000001BC length: 4
+        undefined4 field61_0x1c0; // 0x000001C0 length: 4
+        undefined4 field62_0x1c4; // 0x000001C4 length: 4
+        undefined4 field63_0x1c8; // 0x000001C8 length: 4
         int leftClickStartMoment; // 0x000001CC length: 4
         undefined4 dragReleaseX; // 0x000001D0 length: 4
         undefined4 dragReleaseY; // 0x000001D4 length: 4
-        undefined4 field86_0x1d8; // 0x000001D8 length: 4
-        int field87_0x1dc; // 0x000001DC length: 4
+        int resetPending; // 0x000001D8 length: 4
+        int field68_0x1dc; // 0x000001DC length: 4
         int waitCursorToggle; // 0x000001E0 length: 4
-        int field89_0x1e4; // 0x000001E4 length: 4
+        int field70_0x1e4; // 0x000001E4 length: 4
         undefined1 padding_0x1e8[8]; // 0x000001E8 length: 8
         undefined4 cursorType; // 0x000001F0 length: 4
         undefined2 mouseWindowX; // 0x000001F4 length: 2

@@ -9,7 +9,7 @@
 #pragma once
 
 // GLOBAL: STRONGHOLDCRUSADER 0x00DF33C0
-// StructResolver::Instance<ushort,14627776>::instance
+// StructResolver::Instance<unsigned short,14627776>::instance
 
 namespace OpenSHC {
 

@@ -229,7 +229,7 @@ namespace Map {
 
             void createEntityForAssemblyPointsForActiveTabType();
 
-            void setupEngineersGuildCampgroundPositions(int param_1);
+            void setupEngineersGuildParagroundPositions(int playerID);
 
             int findFreeEngineerAssemblyTile(int playerIndex, int param_2);
 
@@ -404,7 +404,7 @@ namespace Map {
 
             char resolveBuildingEntryAccessibility(int buildingID, int param_2, int x, int y);
 
-            int giveBackResourceForDestroyedBuilding(int buildingID__negResourceType, int playerID, int param_3);
+            void giveBackResourceForDestroyedBuilding(int buildingIDORIfNegResourceType, int playerID, int param_3);
 
             int getBuildingThatCanStoreThisResource(ResourceType resourceType, int amount, int playerID);
 

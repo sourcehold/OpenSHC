@@ -149,10 +149,10 @@ namespace AI {
             dword AttForceRandom; // 0x000001F8 length: 4
             dword AttForceSupportAllyThreshold; // 0x000001FC length: 4
             dword AttForceRallyPercentage; // 0x00000200 length: 4
-            dword Unknown129; // 0x00000204 length: 4
+            dword AttMovingTribesThreshold; // 0x00000204 length: 4
             dword AttAssaultDelay; // 0x00000208 length: 4
             dword AttUnitPatrolRecommandDelay; // 0x0000020C length: 4
-            dword Unknown132; // 0x00000210 length: 4
+            dword AttCoordinationPreference; // 0x00000210 length: 4
             dword SiegeEngine1; // 0x00000214 length: 4
             dword SiegeEngine2; // 0x00000218 length: 4
             dword SiegeEngine3; // 0x0000021C length: 4

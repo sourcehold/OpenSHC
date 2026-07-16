@@ -9,6 +9,7 @@
 #pragma once
 
 #include "OpenSHC/Game/Resources/ResourceTypeShort.hpp"
+#include "OpenSHC/Map/Buildings/BuildingLogicalStateShort.hpp"
 #include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
 
 namespace OpenSHC {
@@ -16,6 +17,7 @@ namespace Map {
     namespace Buildings {
 
         using OpenSHC::Game::Resources::ResourceTypeShort;
+        using OpenSHC::Map::Buildings::BuildingLogicalStateShort;
         using OpenSHC::Map::Buildings::BuildingTypeShort;
 
 #pragma pack(push, 1)
@@ -25,20 +27,20 @@ namespace Map {
             int spriteID; // 0x00000000 length: 4
             int spriteSheetID; // 0x00000004 length: 4
             int playerColorUnk; // 0x00000008 length: 4
-            short field3_0xc; // 0x0000000C length: 2
-            short field4_0xe; // 0x0000000E length: 2
-            int field5_0x10; // 0x00000010 length: 4
-            int field6_0x14; // 0x00000014 length: 4
-            int field7_0x18; // 0x00000018 length: 4
+            short spriteOffetX; // 0x0000000C length: 2
+            short spriteOffetY; // 0x0000000E length: 2
+            int animAdvanceThrottle; // 0x00000010 length: 4
+            int animStateCounterTracker; // 0x00000014 length: 4
+            int animStateCounter; // 0x00000018 length: 4
             int animationFrame; // 0x0000001C length: 4
             short animationIndex; // 0x00000020 length: 2
             short spriteID2; // 0x00000022 length: 2
             short unknownStockpileOrSignpostRelated; // 0x00000024 length: 2
-            short field12_0x26; // 0x00000026 length: 2
+            short renderAnimation; // 0x00000026 length: 2
             int field13_0x28; // 0x00000028 length: 4
             short field14_0x2c; // 0x0000002C length: 2
-            short field15_0x2e; // 0x0000002E length: 2
-            short field16_0x30; // 0x00000030 length: 2
+            short animationIncrement; // 0x0000002E length: 2
+            short animationActive; // 0x00000030 length: 2
             undefined1 padding_0x32[2]; // 0x00000032 length: 2
             int displayOwnerFlag; // 0x00000034 length: 4
             int field20_0x38; // 0x00000038 length: 4
@@ -88,7 +90,7 @@ namespace Map {
             int miscDisplayLayerTile; // 0x000000C8 length: 4
             short pathLinkageRelated1; // 0x000000CC length: 2
             short oldVisualActiveState; // 0x000000CE length: 2
-            short logicalState; // 0x000000D0 length: 2
+            BuildingLogicalStateShort logicalState; // 0x000000D0 length: 2
             BuildingTypeShort buildingType; // 0x000000D2 length: 2
             undefined1 padding_0xd4[2]; // 0x000000D4 length: 2
             short owner; // 0x000000D6 length: 2
@@ -114,7 +116,8 @@ namespace Map {
             short unitRefID; // 0x00000110 length: 2
             undefined1 padding_0x112[2]; // 0x00000112 length: 2
             int unitRefUID; // 0x00000114 length: 4
-            int killingPitTriggered; // 0x00000118 length: 4
+            short state; // 0x00000118 length: 2
+            short field117_0x11a; // 0x0000011A length: 2
             int killingPitField; // 0x0000011C length: 4
             int resourceArray_resourceTypePlus1[2]; // 0x00000120 length: 8
             int resourceWood; // 0x00000128 length: 4
@@ -145,9 +148,9 @@ namespace Map {
             short currentStoredResourceType; // 0x0000018C length: 2
             undefined1 someUID; // 0x0000018E length: 1
             undefined1 padding_0x18f[1]; // 0x0000018F length: 1
-            short field147_0x190; // 0x00000190 length: 2
+            short field148_0x190; // 0x00000190 length: 2
             undefined2 quarryStockpileID; // 0x00000192 length: 2
-            short field149_0x194; // 0x00000194 length: 2
+            short field150_0x194; // 0x00000194 length: 2
             short numberOfPopulationProvided; // 0x00000196 length: 2
             short buildingTypeBasedEmployeeCount; // 0x00000198 length: 2
             short currentEmployeeCount; // 0x0000019A length: 2
@@ -158,7 +161,7 @@ namespace Map {
             short workers[2]; // 0x000001B8 length: 4
             undefined1 padding_0x1bc[4]; // 0x000001BC length: 4
             short unitID; // 0x000001C0 length: 2
-            short field164_0x1c2; // 0x000001C2 length: 2
+            short field165_0x1c2; // 0x000001C2 length: 2
             short growCounter; // 0x000001C4 length: 2
             undefined1 padding_0x1c6[2]; // 0x000001C6 length: 2
             int tileRef1; // 0x000001C8 length: 4
@@ -202,21 +205,21 @@ namespace Map {
             int tunnelerCounter; // 0x0000025C length: 4
             short someX; // 0x00000260 length: 2
             short someY; // 0x00000262 length: 2
-            short field211_0x264; // 0x00000264 length: 2
+            short field212_0x264; // 0x00000264 length: 2
             undefined1 padding_0x266[2]; // 0x00000266 length: 2
             int oxTetherRelatedUnitUID; // 0x00000268 length: 4
             short oxTetherRelatedUnitID; // 0x0000026C length: 2
             undefined1 padding_0x26e[2]; // 0x0000026E length: 2
-            short field218_0x270; // 0x00000270 length: 2
-            short field219_0x272; // 0x00000272 length: 2
-            short field220_0x274; // 0x00000274 length: 2
-            short field221_0x276; // 0x00000276 length: 2
+            short field219_0x270; // 0x00000270 length: 2
+            short field220_0x272; // 0x00000272 length: 2
+            short field221_0x274; // 0x00000274 length: 2
+            short field222_0x276; // 0x00000276 length: 2
             int buildingProgress; // 0x00000278 length: 4
             uint timeAlive; // 0x0000027C length: 4
             undefined1 padding_0x280[4]; // 0x00000280 length: 4
             int hovelVisualStyle; // 0x00000284 length: 4
-            short field229_0x288; // 0x00000288 length: 2
-            short field230_0x28a; // 0x0000028A length: 2
+            short field230_0x288; // 0x00000288 length: 2
+            short field231_0x28a; // 0x0000028A length: 2
             short flag2; // 0x0000028C length: 2
             ResourceTypeShort producedItemTypeNext; // 0x0000028E length: 2
             ResourceTypeShort producedItemType; // 0x00000290 length: 2
@@ -226,8 +229,8 @@ namespace Map {
             byte containsSiegeMangonel1OrBallista2; // 0x00000295 length: 1
             bool sleeping; // 0x00000296 length: 1
             byte numberOfAnimals; // 0x00000297 length: 1
-            byte field240_0x298; // 0x00000298 length: 1
-            byte field241_0x299; // 0x00000299 length: 1
+            byte field241_0x298; // 0x00000298 length: 1
+            byte field242_0x299; // 0x00000299 length: 1
             short outpostRelatedUnk4; // 0x0000029A length: 2
             int ffBuildingVariation; // 0x0000029C length: 4
             undefined1 padding_0x2a0[2]; // 0x000002A0 length: 2
@@ -238,10 +241,10 @@ namespace Map {
             char randomOutpostField; // 0x000002A7 length: 1
             int uidWhenPlaced; // 0x000002A8 length: 4
             int attackWave; // 0x000002AC length: 4
-            short flagonsOfAleOrCheese; // 0x000002B0 length: 2
+            short flagonsOfAleOrCheeseOrReleaseDogs; // 0x000002B0 length: 2
             undefined1 padding_0x2b2[2]; // 0x000002B2 length: 2
             short unknownCounterTo10000_0x2b4; // 0x000002B4 length: 2
-            short field258_0x2b6; // 0x000002B6 length: 2
+            short field259_0x2b6; // 0x000002B6 length: 2
             short gateCloseOpenTimer; // 0x000002B8 length: 2
             short buildMonthOrBuildOrder; // 0x000002BA length: 2
             short unknownAccessibilityRelatedFlag; // 0x000002BC length: 2
@@ -249,15 +252,15 @@ namespace Map {
             short gateState2; // 0x000002C0 length: 2
             undefined1 padding_0x2c2[2]; // 0x000002C2 length: 2
             short cooldownTimer; // 0x000002C4 length: 2
-            short field267_0x2c6; // 0x000002C6 length: 2
-            short field268_0x2c8; // 0x000002C8 length: 2
+            short field268_0x2c6; // 0x000002C6 length: 2
+            short field269_0x2c8; // 0x000002C8 length: 2
             short quarryLinkedOxTethers[3]; // 0x000002CA length: 6
             short oxtetherLinkedQuarryID; // 0x000002D0 length: 2
             short laddermanDataID; // 0x000002D2 length: 2
-            short field272_0x2d4; // 0x000002D4 length: 2
+            short field273_0x2d4; // 0x000002D4 length: 2
             short idleTimerUnk; // 0x000002D6 length: 2
             short unknownSiegeTentRelated01; // 0x000002D8 length: 2
-            short field275_0x2da; // 0x000002DA length: 2
+            short field276_0x2da; // 0x000002DA length: 2
             short unknownTickRelatedValue; // 0x000002DC length: 2
             ushort ifFireThenResponsiblePlayer; // 0x000002DE length: 2
             short insideUnitID1; // 0x000002E0 length: 2
@@ -269,18 +272,18 @@ namespace Map {
             int insideUnitUID3; // 0x000002F0 length: 4
             int insideUnitUID4; // 0x000002F4 length: 4
             short hasUnitsOntop; // 0x000002F8 length: 2
-            short field287_0x2fa; // 0x000002FA length: 2
+            short field288_0x2fa; // 0x000002FA length: 2
             undefined1 padding_0x2fc[2]; // 0x000002FC length: 2
             short statueCommemoratingPlayerID; // 0x000002FE length: 2
             short outpostRelatedUnk1; // 0x00000300 length: 2
             short tribeID; // 0x00000302 length: 2
             int tribeUID; // 0x00000304 length: 4
-            short field294_0x308; // 0x00000308 length: 2
+            short field295_0x308; // 0x00000308 length: 2
             short outpostRelatedUnk05; // 0x0000030A length: 2
-            short field296_0x30c; // 0x0000030C length: 2
+            short field297_0x30c; // 0x0000030C length: 2
             short outpostRelatedUnk2; // 0x0000030E length: 2
             short outpostRelatedUnk3; // 0x00000310 length: 2
-            short field299_0x312; // 0x00000312 length: 2
+            short field300_0x312; // 0x00000312 length: 2
             undefined1 padding_0x314[2]; // 0x00000314 length: 2
             short outpostRelatedUnk06; // 0x00000316 length: 2
             short incByFourUnk; // 0x00000318 length: 2

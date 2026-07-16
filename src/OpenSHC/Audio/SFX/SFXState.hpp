@@ -12,7 +12,6 @@
 #include "OpenSHC/Audio/SFX/SoundEffectID.hpp"
 #include "OpenSHC/Audio/SFX/SoundStructure1.hpp"
 #include "OpenSHC/Audio/SFX/SoundStructure2.hpp"
-#include "OpenSHC/Audio/SFX/SpeechEffectID.hpp"
 #include "OpenSHC/DE/SHCDE/eSFX.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 
@@ -24,7 +23,6 @@ namespace Audio {
         using OpenSHC::Audio::SFX::SoundEffectID;
         using OpenSHC::Audio::SFX::SoundStructure1;
         using OpenSHC::Audio::SFX::SoundStructure2;
-        using OpenSHC::Audio::SFX::SpeechEffectID;
         using OpenSHC::DE::SHCDE::eSFX;
         using OpenSHC::Map::Units::UnitType;
 
@@ -66,7 +64,7 @@ namespace Audio {
 
             void playSFXAtLocation(int xPosition, int yPosition, eSFX sfxOffsetInArray);
 
-            void someVolumeAdjustmentFunction(int param_1, int param_2, int param_3);
+            void playSFXAtLocationFullVolume(int xPosition, int yPosition, int sfxOffsetInArray);
 
             void resetScheduledSoundRequests();
 
@@ -82,13 +80,11 @@ namespace Audio {
 
             void playUnitSpeechEffect(uint speechEffectID);
 
-            void PlaySpeechSFX(SpeechEffectID speechID);
+            void playSpeechSFX(char* filename);
 
             void playWAVSFX(char const* wav_filename);
 
             void playOnSpeechSfxStream(char* filename);
-
-            void playSpeechSFX(char* filename);
 
             void playVictoryMusic678();
 

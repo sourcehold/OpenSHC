@@ -10,8 +10,8 @@
 
 #include "OpenSHC/AI/AIVUnitType.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
+#include "OpenSHC/Map/Buildings/BuildingFailReasonEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
-#include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
 #include "OpenSHC/Map/Units/EuroRecruitableState.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/Rendering/Enums/DirectDrawStatus.hpp"
@@ -29,8 +29,8 @@ namespace Global {
 
     using OpenSHC::AI::AIVUnitType;
     using OpenSHC::Game::Resources::ResourceType;
+    using OpenSHC::Map::Buildings::BuildingFailReasonEnum;
     using OpenSHC::Map::Buildings::BuildingType;
-    using OpenSHC::Map::Buildings::BuildingTypeShort;
     using OpenSHC::Map::Units::EuroRecruitableState;
     using OpenSHC::Map::Units::States::UnitState;
     using OpenSHC::Rendering::Enums::DirectDrawStatus;
@@ -243,7 +243,7 @@ namespace Global {
 
     void __stdcall ResetSomeValuesFunctionUnk();
 
-    void __cdecl PlayPlacementWarning(undefined4 param_1);
+    void __cdecl PlayPlacementWarning(BuildingFailReasonEnum param_1);
 
     void __stdcall PlaceUnit();
 
@@ -294,7 +294,7 @@ namespace Global {
 
     void __cdecl ChangeRations(int playerID, int rationsSetting);
 
-    void __cdecl SetPlayerBuyingResultStateUnk(int state, ResourceType resourceTypePlus1);
+    void __cdecl SetStorageMarketFailState(int state, ResourceType resource);
 
     void __cdecl ProcessBuyOrSell(int playerID, int buyOrSell, ResourceType resourceType);
 
@@ -449,8 +449,6 @@ namespace Global {
 
     void __cdecl WriteMissionToScoresFile(char* param_1, int param_2);
 
-    void __stdcall renderSomethingMap3(int param_1, int param_2, int param_3, undefined4 param_4, int param_5);
-
     int __stdcall SomeComputationWithSeparateAreas();
 
     void __stdcall VersioningFixTrees();
@@ -503,11 +501,11 @@ namespace Global {
 
     int __cdecl ComputeGoodsProduced(int unitID, int goodsCount, BOOLEnum boost);
 
-    BuildingTypeShort* __stdcall WarnIfPlayerLacksGranary();
+    void __stdcall WarnIfPlayersGranaryIsFull();
 
-    uint __stdcall TryPlayStockpileIsFullNoiseUnk();
+    uint __stdcall PlayStockpileIsFullWarning();
 
-    BuildingTypeShort* __stdcall PlaySound_StockpileIsFullMyLordUnk();
+    void __stdcall PlayArmoryIsFullWarning();
 
     BOOLEnum __cdecl CurrentUnitHasHealer();
 

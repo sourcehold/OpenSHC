@@ -10,6 +10,7 @@
 
 #include "OpenSHC/Commands/CommandBuildingType.hpp"
 #include "OpenSHC/Game/Player/PlayerData.hpp"
+#include "OpenSHC/Game/Player/PlayerDataBuildingCategoryEnum.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/Game/State/MapAndTimeState.hpp"
 #include "OpenSHC/Game/State/UnitSelectionHotKeyEntry.hpp"
@@ -21,6 +22,7 @@ namespace Game {
 
     using OpenSHC::Commands::CommandBuildingType;
     using OpenSHC::Game::Player::PlayerData;
+    using OpenSHC::Game::Player::PlayerDataBuildingCategoryEnum;
     using OpenSHC::Game::Resources::ResourceType;
     using OpenSHC::Game::State::MapAndTimeState;
     using OpenSHC::Game::State::UnitSelectionHotKeyEntry;
@@ -85,7 +87,8 @@ namespace Game {
 
         void addSignpostToBuildingEntryData(int buildingID);
 
-        void computeBuildingCategoryEntryPoint(uint param_1, int param_2, int param_3);
+        void computeBuildingCategoryEntryPointAndDestroyEarlierBuilding(
+            uint buildingID, int playerID, PlayerDataBuildingCategoryEnum category);
 
         void validateBuildingCategoryReference(int playerID, int param_2);
 

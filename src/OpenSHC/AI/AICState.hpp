@@ -96,7 +96,7 @@ namespace AI {
 
         void setTargetForTribeBasedOnTargetChoiceLogic(int owner, int tribe);
 
-        void updateTaxesAndRationsForAI(int playerID);
+        void aiUpdateTaxesAndRations(int playerID);
 
         void setFoodBuyPlan(int playerID);
 
@@ -128,7 +128,7 @@ namespace AI {
 
         BOOLEnum destroyHouse(int playerID);
 
-        undefined4 shouldDestroyWoodCutterUnk(int playerID);
+        BOOLEnum shouldDestroyWoodCutterUnk(int playerID);
 
         undefined4 destroyBuildingIfNoWorker(int buildingID);
 
@@ -148,7 +148,7 @@ namespace AI {
 
         void generateSiegeCreationInformation(int playerID, int buildingID, int unitID);
 
-        void recruitEngineers(int playerID);
+        void aiRecruitEngineers(int playerID);
 
         int assignRequiredIdleEngineersToNewTribe(int playerID, int count);
 
@@ -158,7 +158,7 @@ namespace AI {
 
         void syncBehaviourType7UnitTribes(int param_1);
 
-        void addUnitToTribeType10_moatdiggersUnk(int unitID);
+        void aiAddUnitToMoatDiggerTribe(int unitID);
 
         undefined4 unitIDIsRangedOrArmored(int unitID);
 
@@ -181,9 +181,9 @@ namespace AI {
 
         void recruitHarrassingSiegeEngines(int playerID);
 
-        void recruitSortieRangedUnits(int playerID);
+        void aiRecruitSortieRangedUnits(int playerID);
 
-        void recruitSortieMeleeUnits(int playerID);
+        void aiRecruitSortieMeleeUnits(int playerID);
 
         void instructTribe166ToMove(int playerID);
 
@@ -199,7 +199,7 @@ namespace AI {
 
         int selectRandomBuildingIDFromListOfBuildingTypes(int playerID, undefined4 param_2);
 
-        undefined4 shouldWeAttackOrWaitForTeammates(int playerID);
+        BOOLEnum aiShouldAttackOrWaitForTeamCoordination(int playerID);
 
         void setCurrentAttackStrength(int playerID);
 
@@ -207,13 +207,13 @@ namespace AI {
 
         void setAttackPrimeInfo(int playerID, int attackedPlayerID);
 
-        void recomputeDistancesToAttackedKeepRelated(int playerID, int useBorderDistance);
+        void recomputeAIPathCostToAttackedKeep(int playerID, int useBorderDistance);
 
         void recomputeAttackAIZone();
 
         void recomputeAIZonerLayer();
 
-        void computeAndStoreShortestDistanceToKeepUnk(int playerID);
+        void computeEnemyKeepApproachTile(int playerID);
 
         void setNextMoveLocationForUnits(int playerID);
 
@@ -223,7 +223,7 @@ namespace AI {
 
         void sendUnitsToPlayerIDsKeepIfPossible(int playerID1, short* playerID2);
 
-        void setRallyRelatedFlagOnAllAIAttackTribes(int param_1);
+        void clearRallyFlagOnAllAIAttackTribes(int param_1);
 
         void moveAttackTribesToLocations(short* playerID);
 
@@ -243,13 +243,13 @@ namespace AI {
 
         void useAITribe_0xe_toPlaceTunnels(int playerID);
 
-        void aiAttackWave_tribe13Unk(int param_1);
+        void aiCommandTribe13DefensiveWave(int param_1);
 
-        void aiAttackWave_tribe12Unk(int param_1);
+        void aiCommandTribe12AggressiveApproach(int param_1);
 
         void setTribe0xCtoAggressiveAndAttack(int playerID);
 
-        void aiAttackWave_tribe11Unk(int playerID);
+        void aiCommandTribe11StandGroundToGate(int playerID);
 
         void sendAITribe_0xf_toAttackPatrol(int playerID);
 
@@ -257,7 +257,7 @@ namespace AI {
 
         void setEightTribe0xc0TribesToAggressiveAndAttack(int playerID);
 
-        void aiAttackWallsSmthUnk(int param_1);
+        void aiCommandWallAssaultTribes(int param_1);
 
         void setTribe0xbToAggressiveAndAttack(int playerID);
 
@@ -275,7 +275,7 @@ namespace AI {
 
         int countSiegeEngineUnits(int playerID);
 
-        void aiAttackWaveSiegeUnitsUnk(int playerID);
+        void aiCommandSiegeEngineTribes(int playerID);
 
         BOOLEnum yieldCowThrow(int playerID);
 
@@ -283,7 +283,7 @@ namespace AI {
 
         BOOLEnum hasNotEnoughSupplies(int playerID);
 
-        void setAttackWillingnessUnk(int param_1);
+        void setAttackCoordinationLevel(int playerID);
 
         BOOLEnum teamIsWeakRelativeToEnemy(int playerID, BOOLEnum param_2);
 
@@ -338,13 +338,13 @@ namespace AI {
 
         void setInitialAIC();
 
-        void aiGiveCommandToOutpostTribesUnk(int tribeID, int tribeUID);
+        void aiRegisterTribeAndAssignTarget(int tribeID, int tribeUID);
 
         void decideOnTribeAttackLocation(uint tribeID__moatWasHit);
 
         void sellExcessGoods(int param_1);
 
-        void requestGoods(int playerID, ResourceType resourceType, undefined4 amount);
+        void requestGoods(int playerID, ResourceType resourceType, int amount);
 
         void aiCreateSiegeUnits(int playerID);
 
@@ -354,7 +354,7 @@ namespace AI {
 
         void addUnitToSmallestPatrolTribe(int unitID);
 
-        void addUnitToDefensiveTroopsTribeUnk(int unitID);
+        void aiAssignUnitToDefensiveTribe(int unitID);
 
         void addUnitToItsTribe(int unitID, int aiUnitBehaviourType);
 
@@ -388,11 +388,11 @@ namespace AI {
 
         void aiRecruitUnits(int playerID);
 
-        void assignMoatDiggersUnk(int playerID);
+        void aiAssignMoatDiggers(int playerID);
 
         void addEngineersToTribe(int playerID);
 
-        void redirectTunnelersUnk(int param_1);
+        void aiReassignTunnelersToTribe(int param_1);
 
         void sendRangedUnitTribesToAIVSlotsOrKeepIfNervous(int playerID);
 

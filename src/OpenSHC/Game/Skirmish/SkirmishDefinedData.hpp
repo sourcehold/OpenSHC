@@ -67,9 +67,9 @@ namespace Game {
             AIVUnitTypeMaxLocationPair AIVUnitTypeMaxLocationPairArray_GroundUnits[6]; // 0x00003C14 length: 48
             AIVUnitTypeMaxLocationPair AIVUnitTypeMaxLocationPairArray_PatrolUnits[3]; // 0x00003C44 length: 24
             int DAT_TribeTypeID[6]; // 0x00003C5C length: 24
-            BuildingTypeInt field35_0x3c74[46]; // 0x00003C74 length: 184
-            BuildingTypeInt field36_0x3d2c[46]; // 0x00003D2C length: 184
-            BuildingTypeInt field37_0x3de4[46]; // 0x00003DE4 length: 184
+            BuildingTypeInt buildingTargetPrioritySet1[46]; // 0x00003C74 length: 184
+            BuildingTypeInt buildingTargetPrioritySet2[46]; // 0x00003D2C length: 184
+            BuildingTypeInt buildingTargetPrioritySet3[46]; // 0x00003DE4 length: 184
             int DAT_AttackTribes_AITribeType_MaxTribeCount_Mapping[11][2]; // 0x00003E9C length: 88
             int DAT_SiegeEngineCommandBuildingTypes[6]; // 0x00003EF4 length: 24
             int DAT_SiegeEngineUnitType[6]; // 0x00003F0C length: 24

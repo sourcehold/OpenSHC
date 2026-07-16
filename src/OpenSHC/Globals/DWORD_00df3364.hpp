@@ -11,7 +11,7 @@
 #include "WinDef.h"
 
 // GLOBAL: STRONGHOLDCRUSADER 0x00DF3364
-// StructResolver::Instance<DWORD,14627684>::instance
+// StructResolver::Instance<unsigned long,14627684>::instance
 
 namespace OpenSHC {
 

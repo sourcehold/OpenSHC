@@ -1580,8 +1580,8 @@ namespace UI_Func {
     MenuItemRenderFunction_InGameMenu_BikMessagePlayerShield;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(uint param_1, int param_2), false, Address::SHC_3BB0A8C1_0x004B7F60,
-        &OpenSHC::UI::PlayMissionAestheticSFX)
-    PlayMissionAestheticSFX;
+        &OpenSHC::UI::PlayAMessageFromAI)
+    PlayAMessageFromAI;
 
     MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004B8050,
         &OpenSHC::UI::MenuView_General_DoInitial_OnlySetMenuXY)

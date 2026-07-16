@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include "OpenSHC/AI/Siege/SiegeUnitCounts.hpp"
 #include "OpenSHC/Game/Market/BuySellPair.hpp"
 #include "OpenSHC/Game/Skirmish/AttackVector.hpp"
 #include "OpenSHC/Map/Location/Point8IntXY.hpp"
@@ -21,6 +22,7 @@ namespace OpenSHC {
 namespace Game {
     namespace State {
 
+        using OpenSHC::AI::Siege::SiegeUnitCounts;
         using OpenSHC::Game::Market::BuySellPair;
         using OpenSHC::Game::Skirmish::AttackVector;
         using OpenSHC::Map::Location::Point8IntXY;
@@ -106,44 +108,25 @@ namespace Game {
             XYPair somePairArray; // 0x00000520 length: 8
             undefined1 padding_0x528[312]; // 0x00000528 length: 312
             int startGoods[25]; // 0x00000660 length: 100
-            undefined1 padding_0x6c4[4]; // 0x000006C4 length: 4
-            int field1364_0x6c8; // 0x000006C8 length: 4
-            int field1365_0x6cc; // 0x000006CC length: 4
-            int field1366_0x6d0; // 0x000006D0 length: 4
-            int field1367_0x6d4; // 0x000006D4 length: 4
-            int field1368_0x6d8; // 0x000006D8 length: 4
-            int field1369_0x6dc; // 0x000006DC length: 4
-            int field1370_0x6e0; // 0x000006E0 length: 4
-            int field1371_0x6e4; // 0x000006E4 length: 4
-            int field1372_0x6e8; // 0x000006E8 length: 4
-            int field1373_0x6ec; // 0x000006EC length: 4
-            int field1374_0x6f0; // 0x000006F0 length: 4
-            int field1375_0x6f4; // 0x000006F4 length: 4
-            int field1376_0x6f8; // 0x000006F8 length: 4
-            int field1377_0x6fc; // 0x000006FC length: 4
-            int field1378_0x700; // 0x00000700 length: 4
-            int field1379_0x704; // 0x00000704 length: 4
-            int field1380_0x708; // 0x00000708 length: 4
-            int field1381_0x70c; // 0x0000070C length: 4
-            int field1382_0x710; // 0x00000710 length: 4
+            SiegeUnitCounts siegeInformation; // 0x000006C4 length: 80
             int startingPopularity; // 0x00000714 length: 4
             undefined1 padding_0x718[4]; // 0x00000718 length: 4
-            int field1388_0x71c; // 0x0000071C length: 4
-            int field1389_0x720; // 0x00000720 length: 4
+            int field1366_0x71c; // 0x0000071C length: 4
+            int field1367_0x720; // 0x00000720 length: 4
             int traderRelated1; // 0x00000724 length: 4
             int traderRelatedCounter2; // 0x00000728 length: 4
             int traderRelatedCounter1; // 0x0000072C length: 4
             int traderRelated2; // 0x00000730 length: 4
-            int field1394_0x734; // 0x00000734 length: 4
+            int field1372_0x734; // 0x00000734 length: 4
             undefined1 padding_0x738[72]; // 0x00000738 length: 72
             BuySellPair copyOfBuyAndSalesPrice[25]; // 0x00000780 length: 200
             BuySellPair buyAndSalesPriceArray[25]; // 0x00000848 length: 200
             int unknownResouceFlagArray1[25]; // 0x00000910 length: 100
             int unknownResourceFlagArray2[25]; // 0x00000974 length: 100
             int isResourceTradeable[25]; // 0x000009D8 length: 100
-            int field1472_0xa3c; // 0x00000A3C length: 4
+            int field1450_0xa3c; // 0x00000A3C length: 4
             short deerSpawnLocationsXY[4][2]; // 0x00000A40 length: 16
-            int field1474_0xa50; // 0x00000A50 length: 4
+            int countUpTo201; // 0x00000A50 length: 4
             undefined1 padding_0xa54[800]; // 0x00000A54 length: 800
             BOOLEnum gameOver; // 0x00000D74 length: 4
             int unknownCountdown01; // 0x00000D78 length: 4
@@ -152,7 +135,7 @@ namespace Game {
             int euroRecruitableCopy_index_1_b; // 0x00000D9C length: 4
             int euroRecruitableCopy_index_2; // 0x00000DA0 length: 4
             int euroRecruitableCopy_index_3_b; // 0x00000DA4 length: 4
-            int field2282_0xda8; // 0x00000DA8 length: 4
+            int field2260_0xda8; // 0x00000DA8 length: 4
             int euroRecruitableCopy_index_6_a; // 0x00000DAC length: 4
             int euroRecruitableCopy_index_1_a; // 0x00000DB0 length: 4
             int euroRecruitableCopy_index_3_a_and_6_b; // 0x00000DB4 length: 4
@@ -163,111 +146,111 @@ namespace Game {
             short scenarioTaxesSetting; // 0x00000DE6 length: 2
             short scenarioGold; // 0x00000DE8 length: 2
             short editScenarioExtraOptions; // 0x00000DEA length: 2
-            short field2293_0xdec; // 0x00000DEC length: 2
-            short field2294_0xdee; // 0x00000DEE length: 2
-            short field2295_0xdf0[4][2]; // 0x00000DF0 length: 16
-            short field2296_0xe00; // 0x00000E00 length: 2
-            short field2297_0xe02; // 0x00000E02 length: 2
+            short field2271_0xdec; // 0x00000DEC length: 2
+            short field2272_0xdee; // 0x00000DEE length: 2
+            short field2273_0xdf0[4][2]; // 0x00000DF0 length: 16
+            short field2274_0xe00; // 0x00000E00 length: 2
+            short field2275_0xe02; // 0x00000E02 length: 2
             short playerPopulationStatistics[9][300]; // 0x00000E04 length: 5400
             int populationIndex; // 0x0000231C length: 4
             undefined1 padding_0x2320[816]; // 0x00002320 length: 816
             int signpostsMapEdgeDataCounter; // 0x00002650 length: 4
-            int field3117_0x2654; // 0x00002654 length: 4
-            int field3118_0x2658; // 0x00002658 length: 4
-            int field3119_0x265c; // 0x0000265C length: 4
-            int field3120_0x2660; // 0x00002660 length: 4
-            int field3121_0x2664; // 0x00002664 length: 4
-            int field3122_0x2668; // 0x00002668 length: 4
-            int field3123_0x266c; // 0x0000266C length: 4
-            int field3124_0x2670; // 0x00002670 length: 4
-            int field3125_0x2674; // 0x00002674 length: 4
-            int field3126_0x2678; // 0x00002678 length: 4
-            int field3127_0x267c; // 0x0000267C length: 4
-            int field3128_0x2680; // 0x00002680 length: 4
-            int field3129_0x2684; // 0x00002684 length: 4
-            int field3130_0x2688; // 0x00002688 length: 4
-            int field3131_0x268c; // 0x0000268C length: 4
-            int field3132_0x2690; // 0x00002690 length: 4
-            int field3133_0x2694; // 0x00002694 length: 4
-            int field3134_0x2698; // 0x00002698 length: 4
-            int field3135_0x269c; // 0x0000269C length: 4
-            int field3136_0x26a0; // 0x000026A0 length: 4
-            int field3137_0x26a4; // 0x000026A4 length: 4
-            int field3138_0x26a8; // 0x000026A8 length: 4
-            int field3139_0x26ac; // 0x000026AC length: 4
-            int field3140_0x26b0; // 0x000026B0 length: 4
-            int field3141_0x26b4; // 0x000026B4 length: 4
-            int field3142_0x26b8; // 0x000026B8 length: 4
-            int field3143_0x26bc; // 0x000026BC length: 4
-            int field3144_0x26c0; // 0x000026C0 length: 4
-            int field3145_0x26c4; // 0x000026C4 length: 4
-            int field3146_0x26c8; // 0x000026C8 length: 4
-            int field3147_0x26cc; // 0x000026CC length: 4
-            int field3148_0x26d0; // 0x000026D0 length: 4
-            int field3149_0x26d4; // 0x000026D4 length: 4
-            int field3150_0x26d8; // 0x000026D8 length: 4
-            int field3151_0x26dc; // 0x000026DC length: 4
-            int field3152_0x26e0; // 0x000026E0 length: 4
-            int field3153_0x26e4; // 0x000026E4 length: 4
-            int field3154_0x26e8; // 0x000026E8 length: 4
-            int field3155_0x26ec; // 0x000026EC length: 4
-            int field3156_0x26f0; // 0x000026F0 length: 4
-            int field3157_0x26f4; // 0x000026F4 length: 4
-            int field3158_0x26f8; // 0x000026F8 length: 4
-            int field3159_0x26fc; // 0x000026FC length: 4
-            int field3160_0x2700; // 0x00002700 length: 4
-            int field3161_0x2704; // 0x00002704 length: 4
-            int field3162_0x2708; // 0x00002708 length: 4
-            int field3163_0x270c; // 0x0000270C length: 4
-            int field3164_0x2710; // 0x00002710 length: 4
-            int field3165_0x2714; // 0x00002714 length: 4
-            int field3166_0x2718; // 0x00002718 length: 4
-            int field3167_0x271c; // 0x0000271C length: 4
-            int field3168_0x2720; // 0x00002720 length: 4
-            int field3169_0x2724; // 0x00002724 length: 4
-            int field3170_0x2728; // 0x00002728 length: 4
-            int field3171_0x272c; // 0x0000272C length: 4
-            int field3172_0x2730; // 0x00002730 length: 4
-            int field3173_0x2734; // 0x00002734 length: 4
-            int field3174_0x2738; // 0x00002738 length: 4
-            int field3175_0x273c; // 0x0000273C length: 4
-            int field3176_0x2740; // 0x00002740 length: 4
-            int field3177_0x2744; // 0x00002744 length: 4
-            int field3178_0x2748; // 0x00002748 length: 4
-            int field3179_0x274c; // 0x0000274C length: 4
-            int field3180_0x2750; // 0x00002750 length: 4
-            int field3181_0x2754; // 0x00002754 length: 4
-            int field3182_0x2758; // 0x00002758 length: 4
-            int field3183_0x275c; // 0x0000275C length: 4
-            int field3184_0x2760; // 0x00002760 length: 4
-            int field3185_0x2764; // 0x00002764 length: 4
-            int field3186_0x2768; // 0x00002768 length: 4
-            int field3187_0x276c; // 0x0000276C length: 4
-            int field3188_0x2770; // 0x00002770 length: 4
+            int field3095_0x2654; // 0x00002654 length: 4
+            int field3096_0x2658; // 0x00002658 length: 4
+            int field3097_0x265c; // 0x0000265C length: 4
+            int field3098_0x2660; // 0x00002660 length: 4
+            int field3099_0x2664; // 0x00002664 length: 4
+            int field3100_0x2668; // 0x00002668 length: 4
+            int field3101_0x266c; // 0x0000266C length: 4
+            int field3102_0x2670; // 0x00002670 length: 4
+            int field3103_0x2674; // 0x00002674 length: 4
+            int field3104_0x2678; // 0x00002678 length: 4
+            int field3105_0x267c; // 0x0000267C length: 4
+            int field3106_0x2680; // 0x00002680 length: 4
+            int field3107_0x2684; // 0x00002684 length: 4
+            int field3108_0x2688; // 0x00002688 length: 4
+            int field3109_0x268c; // 0x0000268C length: 4
+            int field3110_0x2690; // 0x00002690 length: 4
+            int field3111_0x2694; // 0x00002694 length: 4
+            int field3112_0x2698; // 0x00002698 length: 4
+            int field3113_0x269c; // 0x0000269C length: 4
+            int field3114_0x26a0; // 0x000026A0 length: 4
+            int field3115_0x26a4; // 0x000026A4 length: 4
+            int field3116_0x26a8; // 0x000026A8 length: 4
+            int field3117_0x26ac; // 0x000026AC length: 4
+            int field3118_0x26b0; // 0x000026B0 length: 4
+            int field3119_0x26b4; // 0x000026B4 length: 4
+            int field3120_0x26b8; // 0x000026B8 length: 4
+            int field3121_0x26bc; // 0x000026BC length: 4
+            int field3122_0x26c0; // 0x000026C0 length: 4
+            int field3123_0x26c4; // 0x000026C4 length: 4
+            int field3124_0x26c8; // 0x000026C8 length: 4
+            int field3125_0x26cc; // 0x000026CC length: 4
+            int field3126_0x26d0; // 0x000026D0 length: 4
+            int field3127_0x26d4; // 0x000026D4 length: 4
+            int field3128_0x26d8; // 0x000026D8 length: 4
+            int field3129_0x26dc; // 0x000026DC length: 4
+            int field3130_0x26e0; // 0x000026E0 length: 4
+            int field3131_0x26e4; // 0x000026E4 length: 4
+            int field3132_0x26e8; // 0x000026E8 length: 4
+            int field3133_0x26ec; // 0x000026EC length: 4
+            int field3134_0x26f0; // 0x000026F0 length: 4
+            int field3135_0x26f4; // 0x000026F4 length: 4
+            int field3136_0x26f8; // 0x000026F8 length: 4
+            int field3137_0x26fc; // 0x000026FC length: 4
+            int field3138_0x2700; // 0x00002700 length: 4
+            int field3139_0x2704; // 0x00002704 length: 4
+            int field3140_0x2708; // 0x00002708 length: 4
+            int field3141_0x270c; // 0x0000270C length: 4
+            int field3142_0x2710; // 0x00002710 length: 4
+            int field3143_0x2714; // 0x00002714 length: 4
+            int field3144_0x2718; // 0x00002718 length: 4
+            int field3145_0x271c; // 0x0000271C length: 4
+            int field3146_0x2720; // 0x00002720 length: 4
+            int field3147_0x2724; // 0x00002724 length: 4
+            int field3148_0x2728; // 0x00002728 length: 4
+            int field3149_0x272c; // 0x0000272C length: 4
+            int field3150_0x2730; // 0x00002730 length: 4
+            int field3151_0x2734; // 0x00002734 length: 4
+            int field3152_0x2738; // 0x00002738 length: 4
+            int field3153_0x273c; // 0x0000273C length: 4
+            int field3154_0x2740; // 0x00002740 length: 4
+            int field3155_0x2744; // 0x00002744 length: 4
+            int field3156_0x2748; // 0x00002748 length: 4
+            int field3157_0x274c; // 0x0000274C length: 4
+            int field3158_0x2750; // 0x00002750 length: 4
+            int field3159_0x2754; // 0x00002754 length: 4
+            int field3160_0x2758; // 0x00002758 length: 4
+            int field3161_0x275c; // 0x0000275C length: 4
+            int field3162_0x2760; // 0x00002760 length: 4
+            int field3163_0x2764; // 0x00002764 length: 4
+            int field3164_0x2768; // 0x00002768 length: 4
+            int field3165_0x276c; // 0x0000276C length: 4
+            int field3166_0x2770; // 0x00002770 length: 4
             int gameEventRelatedCountdown; // 0x00002774 length: 4
             int unk_signpostDistance; // 0x00002778 length: 4
-            int field3191_0x277c; // 0x0000277C length: 4
+            int field3169_0x277c; // 0x0000277C length: 4
             short rabbitSpawnXY[4][2]; // 0x00002780 length: 16
-            int field3193_0x2790; // 0x00002790 length: 4
+            int field3171_0x2790; // 0x00002790 length: 4
             short camelSpawnXY[4][2]; // 0x00002794 length: 16
-            int field3195_0x27a4; // 0x000027A4 length: 4
-            int field3196_0x27a8; // 0x000027A8 length: 4
-            int field3197_0x27ac; // 0x000027AC length: 4
+            int field3173_0x27a4; // 0x000027A4 length: 4
+            int field3174_0x27a8; // 0x000027A8 length: 4
+            int field3175_0x27ac; // 0x000027AC length: 4
             int somePlayerID; // 0x000027B0 length: 4
             short playerIsAlive[9]; // 0x000027B4 length: 18
-            short field3200_0x27c6; // 0x000027C6 length: 2
-            int field3201_0x27c8; // 0x000027C8 length: 4
+            short field3178_0x27c6; // 0x000027C6 length: 2
+            int field3179_0x27c8; // 0x000027C8 length: 4
             int deerCount; // 0x000027CC length: 4
             int armySizeLimit; // 0x000027D0 length: 4
-            short field3204_0x27d4; // 0x000027D4 length: 2
-            short field3205_0x27d6; // 0x000027D6 length: 2
+            short field3182_0x27d4; // 0x000027D4 length: 2
+            short field3183_0x27d6; // 0x000027D6 length: 2
             short yearCopy; // 0x000027D8 length: 2
             short monthCopy; // 0x000027DA length: 2
-            short field3208_0x27dc; // 0x000027DC length: 2
-            short field3209_0x27de; // 0x000027DE length: 2
+            short field3186_0x27dc; // 0x000027DC length: 2
+            short field3187_0x27de; // 0x000027DE length: 2
             int noDogs; // 0x000027E0 length: 4
-            int field3211_0x27e4; // 0x000027E4 length: 4
-            int field3212_0x27e8; // 0x000027E8 length: 4
+            int field3189_0x27e4; // 0x000027E4 length: 4
+            int field3190_0x27e8; // 0x000027E8 length: 4
             int noCowThrowing; // 0x000027EC length: 4
             int totalNoRushTicks; // 0x000027F0 length: 4
             int noRushTicksLeftUnk; // 0x000027F4 length: 4

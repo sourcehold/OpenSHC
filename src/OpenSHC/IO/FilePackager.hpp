@@ -61,7 +61,7 @@ namespace IO {
 
         void readMapOrSavFile(MapSectionAddress* mapSectionAddrArray);
 
-        void readMapHeaderSiegeInfoUnk(MapSectionAddress* mapSectionAddrArray, int sectionID);
+        void readMapHeaderSectionByID(MapSectionAddress* mapSectionAddrArray, int sectionID);
 
         void readMapHeader(BOOLEnum loadPreviewUnk);
 

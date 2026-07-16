@@ -5518,7 +5518,7 @@ enum {
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040DC70 = 0x0040DC70,
-    // label: setupEngineersGuildCampgroundPositions
+    // label: setupEngineersGuildParagroundPositions
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0040E040 = 0x0040E040,
@@ -17857,7 +17857,7 @@ enum {
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x00449DC0 = 0x00449DC0,
-    // label: someVolumeAdjustmentFunction
+    // label: playSFXAtLocationFullVolume
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x00449F10 = 0x00449F10,
@@ -17893,7 +17893,7 @@ enum {
     SHC_3BB0A8C1_0x0044A290 = 0x0044A290,
     // type: function
     SHC_3BB0A8C1_0x0044A360 = 0x0044A360,
-    // label: PlaySpeechSFX
+    // label: playSpeechSFX
     // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x0044A3A0 = 0x0044A3A0,
@@ -18621,7 +18621,7 @@ enum {
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00456EF0 = 0x00456EF0,
-    // label: computeBuildingCategoryEntryPoint
+    // label: computeBuildingCategoryEntryPointAndDestroyEarlierBuilding
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00456FD0 = 0x00456FD0,
@@ -21751,7 +21751,7 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00465A20 = 0x00465A20,
-    // label: SetPlayerBuyingResultStateUnk
+    // label: SetStorageMarketFailState
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00465DB0 = 0x00465DB0,
@@ -24365,7 +24365,7 @@ enum {
     SHC_3BB0A8C1_0x00474A20 = 0x00474A20,
     // type: function
     SHC_3BB0A8C1_0x00474F30 = 0x00474F30,
-    // label: readMapHeaderSiegeInfoUnk
+    // label: readMapHeaderSectionByID
     // location: OpenSHC/IO/FilePackager
     // type: function
     SHC_3BB0A8C1_0x004750E0 = 0x004750E0,
@@ -30957,7 +30957,7 @@ enum {
     // location: OpenSHC/Rendering/Bink/AIMessageQueue
     // type: function
     SHC_3BB0A8C1_0x004B7C90 = 0x004B7C90,
-    // label: PlayMissionAestheticSFX
+    // label: PlayAMessageFromAI
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004B7F60 = 0x004B7F60,
@@ -38085,7 +38085,7 @@ enum {
     SHC_3BB0A8C1_0x004CAD10 = 0x004CAD10,
     // type: function
     SHC_3BB0A8C1_0x004CAE20 = 0x004CAE20,
-    // label: updateTaxesAndRationsForAI
+    // label: aiUpdateTaxesAndRations
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CAEA0 = 0x004CAEA0,
@@ -38811,7 +38811,7 @@ enum {
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CC420 = 0x004CC420,
-    // label: recruitEngineers
+    // label: aiRecruitEngineers
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CC520 = 0x004CC520,
@@ -38833,7 +38833,7 @@ enum {
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CC7B0 = 0x004CC7B0,
-    // label: addUnitToTribeType10_moatdiggersUnk
+    // label: aiAddUnitToMoatDiggerTribe
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CC840 = 0x004CC840,
@@ -39255,11 +39255,11 @@ enum {
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CD2A0 = 0x004CD2A0,
-    // label: recruitSortieRangedUnits
+    // label: aiRecruitSortieRangedUnits
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CD560 = 0x004CD560,
-    // label: recruitSortieMeleeUnits
+    // label: aiRecruitSortieMeleeUnits
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CD690 = 0x004CD690,
@@ -39291,7 +39291,7 @@ enum {
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CDCA0 = 0x004CDCA0,
-    // label: shouldWeAttackOrWaitForTeammates
+    // label: aiShouldAttackOrWaitForTeamCoordination
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CDCF0 = 0x004CDCF0,
@@ -39307,7 +39307,7 @@ enum {
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CDFD0 = 0x004CDFD0,
-    // label: recomputeDistancesToAttackedKeepRelated
+    // label: recomputeAIPathCostToAttackedKeep
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CE040 = 0x004CE040,
@@ -39319,7 +39319,7 @@ enum {
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CE1A0 = 0x004CE1A0,
-    // label: computeAndStoreShortestDistanceToKeepUnk
+    // label: computeEnemyKeepApproachTile
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CE200 = 0x004CE200,
@@ -39347,7 +39347,7 @@ enum {
     SHC_3BB0A8C1_0x004CE660 = 0x004CE660,
     // type: function
     SHC_3BB0A8C1_0x004CE6B0 = 0x004CE6B0,
-    // label: setRallyRelatedFlagOnAllAIAttackTribes
+    // label: clearRallyFlagOnAllAIAttackTribes
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CE790 = 0x004CE790,
@@ -39395,11 +39395,11 @@ enum {
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CF180 = 0x004CF180,
-    // label: aiAttackWave_tribe13Unk
+    // label: aiCommandTribe13DefensiveWave
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CF270 = 0x004CF270,
-    // label: aiAttackWave_tribe12Unk
+    // label: aiCommandTribe12AggressiveApproach
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CF2E0 = 0x004CF2E0,
@@ -39407,7 +39407,7 @@ enum {
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CF400 = 0x004CF400,
-    // label: aiAttackWave_tribe11Unk
+    // label: aiCommandTribe11StandGroundToGate
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CF470 = 0x004CF470,
@@ -39423,7 +39423,7 @@ enum {
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CF5E0 = 0x004CF5E0,
-    // label: aiAttackWallsSmthUnk
+    // label: aiCommandWallAssaultTribes
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CF660 = 0x004CF660,
@@ -39461,7 +39461,7 @@ enum {
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CFBC0 = 0x004CFBC0,
-    // label: aiAttackWaveSiegeUnitsUnk
+    // label: aiCommandSiegeEngineTribes
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CFCD0 = 0x004CFCD0,
@@ -39477,7 +39477,7 @@ enum {
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D00A0 = 0x004D00A0,
-    // label: setAttackWillingnessUnk
+    // label: setAttackCoordinationLevel
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0110 = 0x004D0110,
@@ -39621,7 +39621,7 @@ enum {
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D18B0 = 0x004D18B0,
-    // label: aiGiveCommandToOutpostTribesUnk
+    // label: aiRegisterTribeAndAssignTarget
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D1950 = 0x004D1950,
@@ -39657,7 +39657,7 @@ enum {
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D2730 = 0x004D2730,
-    // label: addUnitToDefensiveTroopsTribeUnk
+    // label: aiAssignUnitToDefensiveTribe
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D2790 = 0x004D2790,
@@ -39731,7 +39731,7 @@ enum {
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D3AE0 = 0x004D3AE0,
-    // label: assignMoatDiggersUnk
+    // label: aiAssignMoatDiggers
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D3F20 = 0x004D3F20,
@@ -39739,7 +39739,7 @@ enum {
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D4040 = 0x004D4040,
-    // label: redirectTunnelersUnk
+    // label: aiReassignTunnelersToTribe
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D40B0 = 0x004D40B0,
@@ -41117,8 +41117,8 @@ enum {
     SHC_3BB0A8C1_0x004E3868 = 0x004E3868,
     // type: /byte
     SHC_3BB0A8C1_0x004E3869 = 0x004E3869,
-    // label: renderSomethingMap3
-    // location: OpenSHC/Global
+    // label: renderBuildingAnimation
+    // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E3870 = 0x004E3870,
     // label: renderGmOverlayBuilding
@@ -53739,15 +53739,15 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00530D70 = 0x00530D70,
-    // label: WarnIfPlayerLacksGranary
+    // label: WarnIfPlayersGranaryIsFull
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00530E00 = 0x00530E00,
-    // label: TryPlayStockpileIsFullNoiseUnk
+    // label: PlayStockpileIsFullWarning
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00530EB0 = 0x00530EB0,
-    // label: PlaySound_StockpileIsFullMyLordUnk
+    // label: PlayArmoryIsFullWarning
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00530F20 = 0x00530F20,
@@ -95278,6 +95278,8 @@ enum {
     SHC_3BB0A8C1_0x00EE0FC8 = 0x00EE0FC8,
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00EE0FCC = 0x00EE0FCC,
+    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
+    SHC_3BB0A8C1_0x00EE0FD0 = 0x00EE0FD0,
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00EE0FD4 = 0x00EE0FD4,
     // type: OpenSHC/WindowsHelper/Enums/BOOLEnum

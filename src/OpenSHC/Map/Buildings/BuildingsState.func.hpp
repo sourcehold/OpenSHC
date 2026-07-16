@@ -302,8 +302,8 @@ namespace Map {
             createEntityForAssemblyPointsForActiveTabType;
 
             MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040E040,
-                &BuildingsState::setupEngineersGuildCampgroundPositions)
-            setupEngineersGuildCampgroundPositions;
+                &BuildingsState::setupEngineersGuildParagroundPositions)
+            setupEngineersGuildParagroundPositions;
 
             MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0040E120,
                 &BuildingsState::findFreeEngineerAssemblyTile)
@@ -641,7 +641,7 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x00421BE0, &BuildingsState::resolveBuildingEntryAccessibility)
             resolveBuildingEntryAccessibility;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x00421D70,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x00421D70,
                 &BuildingsState::giveBackResourceForDestroyedBuilding)
             giveBackResourceForDestroyedBuilding;
 

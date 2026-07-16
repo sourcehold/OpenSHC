@@ -11,8 +11,8 @@
 #include "OpenSHC/AI/AIVUnitType.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/Global.hpp"
+#include "OpenSHC/Map/Buildings/BuildingFailReasonEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
-#include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
 #include "OpenSHC/Map/Units/EuroRecruitableState.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/Rendering/Enums/DirectDrawStatus.hpp"
@@ -30,8 +30,8 @@ namespace Global_Func {
 
     using OpenSHC::AI::AIVUnitType;
     using OpenSHC::Game::Resources::ResourceType;
+    using OpenSHC::Map::Buildings::BuildingFailReasonEnum;
     using OpenSHC::Map::Buildings::BuildingType;
-    using OpenSHC::Map::Buildings::BuildingTypeShort;
     using OpenSHC::Map::Units::EuroRecruitableState;
     using OpenSHC::Map::Units::States::UnitState;
     using OpenSHC::Rendering::Enums::DirectDrawStatus;
@@ -436,7 +436,7 @@ namespace Global_Func {
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00431990, &OpenSHC::Global::ResetSomeValuesFunctionUnk)
     ResetSomeValuesFunctionUnk;
 
-    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(undefined4 param_1), false, Address::SHC_3BB0A8C1_0x004380E0,
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(BuildingFailReasonEnum param_1), false, Address::SHC_3BB0A8C1_0x004380E0,
         &OpenSHC::Global::PlayPlacementWarning)
     PlayPlacementWarning;
 
@@ -536,9 +536,9 @@ namespace Global_Func {
         &OpenSHC::Global::ChangeRations)
     ChangeRations;
 
-    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int state, ResourceType resourceTypePlus1), false,
-        Address::SHC_3BB0A8C1_0x00465DB0, &OpenSHC::Global::SetPlayerBuyingResultStateUnk)
-    SetPlayerBuyingResultStateUnk;
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int state, ResourceType resource), false, Address::SHC_3BB0A8C1_0x00465DB0,
+        &OpenSHC::Global::SetStorageMarketFailState)
+    SetStorageMarketFailState;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int playerID, int buyOrSell, ResourceType resourceType), false,
         Address::SHC_3BB0A8C1_0x00465E60, &OpenSHC::Global::ProcessBuyOrSell)
@@ -830,10 +830,6 @@ namespace Global_Func {
         &OpenSHC::Global::WriteMissionToScoresFile)
     WriteMissionToScoresFile;
 
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(int param_1, int param_2, int param_3, undefined4 param_4, int param_5),
-        false, Address::SHC_3BB0A8C1_0x004E3870, &OpenSHC::Global::renderSomethingMap3)
-    renderSomethingMap3;
-
     MACRO_FUNCTION_RESOLVER(
         int(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004EDD00, &OpenSHC::Global::SomeComputationWithSeparateAreas)
     SomeComputationWithSeparateAreas;
@@ -938,17 +934,17 @@ namespace Global_Func {
         Address::SHC_3BB0A8C1_0x00530D70, &OpenSHC::Global::ComputeGoodsProduced)
     ComputeGoodsProduced;
 
-    MACRO_FUNCTION_RESOLVER(BuildingTypeShort*(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00530E00,
-        &OpenSHC::Global::WarnIfPlayerLacksGranary)
-    WarnIfPlayerLacksGranary;
+    MACRO_FUNCTION_RESOLVER(
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00530E00, &OpenSHC::Global::WarnIfPlayersGranaryIsFull)
+    WarnIfPlayersGranaryIsFull;
 
     MACRO_FUNCTION_RESOLVER(
-        uint(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00530EB0, &OpenSHC::Global::TryPlayStockpileIsFullNoiseUnk)
-    TryPlayStockpileIsFullNoiseUnk;
+        uint(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00530EB0, &OpenSHC::Global::PlayStockpileIsFullWarning)
+    PlayStockpileIsFullWarning;
 
-    MACRO_FUNCTION_RESOLVER(BuildingTypeShort*(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00530F20,
-        &OpenSHC::Global::PlaySound_StockpileIsFullMyLordUnk)
-    PlaySound_StockpileIsFullMyLordUnk;
+    MACRO_FUNCTION_RESOLVER(
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00530F20, &OpenSHC::Global::PlayArmoryIsFullWarning)
+    PlayArmoryIsFullWarning;
 
     MACRO_FUNCTION_RESOLVER(
         BOOLEnum(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0053A020, &OpenSHC::Global::CurrentUnitHasHealer)

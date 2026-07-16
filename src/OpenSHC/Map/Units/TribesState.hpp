@@ -154,8 +154,8 @@ namespace Map {
             dword spawnUnitsIntoNewTribe(undefined4 counter, int tribeType, int x, int y, int playerID,
                 UnitType unitType, UnitType unitType2, int unitType1Count, int unitType2Count);
 
-            dword createTribeWithSpawnedUnit(short param_1, undefined4 param_2, int param_3, int param_4, int param_5,
-                UnitType param_6, int param_7);
+            dword createTribeWithSpawnedUnit(
+                short someIndex, undefined4 tribeType, int x, int y, int playerID, UnitType unitType, int count);
 
             dword spawnUnitsAroundLocation(
                 undefined4 param_1, int aroundX, int aroundY, int playerID, UnitType unitType, int count);

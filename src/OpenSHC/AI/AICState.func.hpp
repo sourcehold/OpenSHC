@@ -106,8 +106,8 @@ namespace AI {
         setTargetForTribeBasedOnTargetChoiceLogic;
 
         MACRO_FUNCTION_RESOLVER(
-            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CAEA0, &AICState::updateTaxesAndRationsForAI)
-        updateTaxesAndRationsForAI;
+            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CAEA0, &AICState::aiUpdateTaxesAndRations)
+        aiUpdateTaxesAndRations;
 
         MACRO_FUNCTION_RESOLVER(
             void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CB060, &AICState::setFoodBuyPlan)
@@ -169,8 +169,8 @@ namespace AI {
             BOOLEnum (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CB810, &AICState::destroyHouse)
         destroyHouse;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CB890,
-            &AICState::shouldDestroyWoodCutterUnk)
+        MACRO_FUNCTION_RESOLVER(
+            BOOLEnum (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CB890, &AICState::shouldDestroyWoodCutterUnk)
         shouldDestroyWoodCutterUnk;
 
         MACRO_FUNCTION_RESOLVER(undefined4 (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CB940,
@@ -210,8 +210,8 @@ namespace AI {
         generateSiegeCreationInformation;
 
         MACRO_FUNCTION_RESOLVER(
-            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CC520, &AICState::recruitEngineers)
-        recruitEngineers;
+            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CC520, &AICState::aiRecruitEngineers)
+        aiRecruitEngineers;
 
         MACRO_FUNCTION_RESOLVER(int (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004CC5A0,
             &AICState::assignRequiredIdleEngineersToNewTribe)
@@ -229,9 +229,9 @@ namespace AI {
             void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CC7B0, &AICState::syncBehaviourType7UnitTribes)
         syncBehaviourType7UnitTribes;
 
-        MACRO_FUNCTION_RESOLVER(void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CC840,
-            &AICState::addUnitToTribeType10_moatdiggersUnk)
-        addUnitToTribeType10_moatdiggersUnk;
+        MACRO_FUNCTION_RESOLVER(
+            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CC840, &AICState::aiAddUnitToMoatDiggerTribe)
+        aiAddUnitToMoatDiggerTribe;
 
         MACRO_FUNCTION_RESOLVER(
             undefined4 (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CC8D0, &AICState::unitIDIsRangedOrArmored)
@@ -274,12 +274,12 @@ namespace AI {
         recruitHarrassingSiegeEngines;
 
         MACRO_FUNCTION_RESOLVER(
-            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CD560, &AICState::recruitSortieRangedUnits)
-        recruitSortieRangedUnits;
+            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CD560, &AICState::aiRecruitSortieRangedUnits)
+        aiRecruitSortieRangedUnits;
 
         MACRO_FUNCTION_RESOLVER(
-            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CD690, &AICState::recruitSortieMeleeUnits)
-        recruitSortieMeleeUnits;
+            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CD690, &AICState::aiRecruitSortieMeleeUnits)
+        aiRecruitSortieMeleeUnits;
 
         MACRO_FUNCTION_RESOLVER(
             void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CD7B0, &AICState::instructTribe166ToMove)
@@ -309,9 +309,9 @@ namespace AI {
             &AICState::selectRandomBuildingIDFromListOfBuildingTypes)
         selectRandomBuildingIDFromListOfBuildingTypes;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CDCF0,
-            &AICState::shouldWeAttackOrWaitForTeammates)
-        shouldWeAttackOrWaitForTeammates;
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CDCF0,
+            &AICState::aiShouldAttackOrWaitForTeamCoordination)
+        aiShouldAttackOrWaitForTeamCoordination;
 
         MACRO_FUNCTION_RESOLVER(
             void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CDE60, &AICState::setCurrentAttackStrength)
@@ -326,8 +326,8 @@ namespace AI {
         setAttackPrimeInfo;
 
         MACRO_FUNCTION_RESOLVER(void (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004CE040,
-            &AICState::recomputeDistancesToAttackedKeepRelated)
-        recomputeDistancesToAttackedKeepRelated;
+            &AICState::recomputeAIPathCostToAttackedKeep)
+        recomputeAIPathCostToAttackedKeep;
 
         MACRO_FUNCTION_RESOLVER(
             void (AICState::*)(), false, Address::SHC_3BB0A8C1_0x004CE110, &AICState::recomputeAttackAIZone)
@@ -337,9 +337,9 @@ namespace AI {
             void (AICState::*)(), false, Address::SHC_3BB0A8C1_0x004CE1A0, &AICState::recomputeAIZonerLayer)
         recomputeAIZonerLayer;
 
-        MACRO_FUNCTION_RESOLVER(void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CE200,
-            &AICState::computeAndStoreShortestDistanceToKeepUnk)
-        computeAndStoreShortestDistanceToKeepUnk;
+        MACRO_FUNCTION_RESOLVER(
+            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CE200, &AICState::computeEnemyKeepApproachTile)
+        computeEnemyKeepApproachTile;
 
         MACRO_FUNCTION_RESOLVER(
             void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CE3B0, &AICState::setNextMoveLocationForUnits)
@@ -358,8 +358,8 @@ namespace AI {
         sendUnitsToPlayerIDsKeepIfPossible;
 
         MACRO_FUNCTION_RESOLVER(void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CE790,
-            &AICState::setRallyRelatedFlagOnAllAIAttackTribes)
-        setRallyRelatedFlagOnAllAIAttackTribes;
+            &AICState::clearRallyFlagOnAllAIAttackTribes)
+        clearRallyFlagOnAllAIAttackTribes;
 
         MACRO_FUNCTION_RESOLVER(
             void (AICState::*)(short*), false, Address::SHC_3BB0A8C1_0x004CE830, &AICState::moveAttackTribesToLocations)
@@ -398,20 +398,20 @@ namespace AI {
         useAITribe_0xe_toPlaceTunnels;
 
         MACRO_FUNCTION_RESOLVER(
-            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CF270, &AICState::aiAttackWave_tribe13Unk)
-        aiAttackWave_tribe13Unk;
+            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CF270, &AICState::aiCommandTribe13DefensiveWave)
+        aiCommandTribe13DefensiveWave;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CF2E0, &AICState::aiAttackWave_tribe12Unk)
-        aiAttackWave_tribe12Unk;
+        MACRO_FUNCTION_RESOLVER(void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CF2E0,
+            &AICState::aiCommandTribe12AggressiveApproach)
+        aiCommandTribe12AggressiveApproach;
 
         MACRO_FUNCTION_RESOLVER(void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CF400,
             &AICState::setTribe0xCtoAggressiveAndAttack)
         setTribe0xCtoAggressiveAndAttack;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CF470, &AICState::aiAttackWave_tribe11Unk)
-        aiAttackWave_tribe11Unk;
+        MACRO_FUNCTION_RESOLVER(void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CF470,
+            &AICState::aiCommandTribe11StandGroundToGate)
+        aiCommandTribe11StandGroundToGate;
 
         MACRO_FUNCTION_RESOLVER(
             void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CF4F0, &AICState::sendAITribe_0xf_toAttackPatrol)
@@ -426,8 +426,8 @@ namespace AI {
         setEightTribe0xc0TribesToAggressiveAndAttack;
 
         MACRO_FUNCTION_RESOLVER(
-            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CF660, &AICState::aiAttackWallsSmthUnk)
-        aiAttackWallsSmthUnk;
+            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CF660, &AICState::aiCommandWallAssaultTribes)
+        aiCommandWallAssaultTribes;
 
         MACRO_FUNCTION_RESOLVER(void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CF6E0,
             &AICState::setTribe0xbToAggressiveAndAttack)
@@ -462,8 +462,8 @@ namespace AI {
         countSiegeEngineUnits;
 
         MACRO_FUNCTION_RESOLVER(
-            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CFCD0, &AICState::aiAttackWaveSiegeUnitsUnk)
-        aiAttackWaveSiegeUnitsUnk;
+            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CFCD0, &AICState::aiCommandSiegeEngineTribes)
+        aiCommandSiegeEngineTribes;
 
         MACRO_FUNCTION_RESOLVER(
             BOOLEnum (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CFF60, &AICState::yieldCowThrow)
@@ -478,8 +478,8 @@ namespace AI {
         hasNotEnoughSupplies;
 
         MACRO_FUNCTION_RESOLVER(
-            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D0110, &AICState::setAttackWillingnessUnk)
-        setAttackWillingnessUnk;
+            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D0110, &AICState::setAttackCoordinationLevel)
+        setAttackCoordinationLevel;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, BOOLEnum), false, Address::SHC_3BB0A8C1_0x004D0190,
             &AICState::teamIsWeakRelativeToEnemy)
@@ -585,8 +585,8 @@ namespace AI {
         setInitialAIC;
 
         MACRO_FUNCTION_RESOLVER(void (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004D1950,
-            &AICState::aiGiveCommandToOutpostTribesUnk)
-        aiGiveCommandToOutpostTribesUnk;
+            &AICState::aiRegisterTribeAndAssignTarget)
+        aiRegisterTribeAndAssignTarget;
 
         MACRO_FUNCTION_RESOLVER(
             void (AICState::*)(uint), false, Address::SHC_3BB0A8C1_0x004D1A00, &AICState::decideOnTribeAttackLocation)
@@ -596,8 +596,8 @@ namespace AI {
             void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D1D60, &AICState::sellExcessGoods)
         sellExcessGoods;
 
-        MACRO_FUNCTION_RESOLVER(void (AICState::*)(int, ResourceType, undefined4), false,
-            Address::SHC_3BB0A8C1_0x004D1F00, &AICState::requestGoods)
+        MACRO_FUNCTION_RESOLVER(void (AICState::*)(int, ResourceType, int), false, Address::SHC_3BB0A8C1_0x004D1F00,
+            &AICState::requestGoods)
         requestGoods;
 
         MACRO_FUNCTION_RESOLVER(
@@ -616,9 +616,9 @@ namespace AI {
             void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D2730, &AICState::addUnitToSmallestPatrolTribe)
         addUnitToSmallestPatrolTribe;
 
-        MACRO_FUNCTION_RESOLVER(void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D2790,
-            &AICState::addUnitToDefensiveTroopsTribeUnk)
-        addUnitToDefensiveTroopsTribeUnk;
+        MACRO_FUNCTION_RESOLVER(
+            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D2790, &AICState::aiAssignUnitToDefensiveTribe)
+        aiAssignUnitToDefensiveTribe;
 
         MACRO_FUNCTION_RESOLVER(
             void (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004D27E0, &AICState::addUnitToItsTribe)
@@ -685,16 +685,16 @@ namespace AI {
         aiRecruitUnits;
 
         MACRO_FUNCTION_RESOLVER(
-            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D3F20, &AICState::assignMoatDiggersUnk)
-        assignMoatDiggersUnk;
+            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D3F20, &AICState::aiAssignMoatDiggers)
+        aiAssignMoatDiggers;
 
         MACRO_FUNCTION_RESOLVER(
             void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D4040, &AICState::addEngineersToTribe)
         addEngineersToTribe;
 
         MACRO_FUNCTION_RESOLVER(
-            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D40B0, &AICState::redirectTunnelersUnk)
-        redirectTunnelersUnk;
+            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D40B0, &AICState::aiReassignTunnelersToTribe)
+        aiReassignTunnelersToTribe;
 
         MACRO_FUNCTION_RESOLVER(void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D4130,
             &AICState::sendRangedUnitTribesToAIVSlotsOrKeepIfNervous)

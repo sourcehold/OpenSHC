@@ -3,7 +3,7 @@
   Communicate changes to the dev team (e.g. via a Pull Request).
   Changes get lost otherwise.
 
-  path: 'OpenSHC/AI/Siege/SiegeInformation.hpp'
+  path: 'OpenSHC/AI/Siege/SiegeUnitCounts.hpp'
 */
 
 #pragma once
@@ -14,7 +14,7 @@ namespace AI {
 
 #pragma pack(push, 1)
         // SIZE: 0x00000050
-        typedef struct SiegeInformation {
+        typedef struct SiegeUnitCounts {
 
             int archers; // 0x00000000 length: 4
             int field1_0x4; // 0x00000004 length: 4
@@ -37,10 +37,10 @@ namespace AI {
             int field18_0x48; // 0x00000048 length: 4
             int field19_0x4c; // 0x0000004C length: 4
 
-        } SiegeInformation;
+        } SiegeUnitCounts;
 #pragma pack(pop)
 
-        static_assert_cpp98_obj(sizeof(SiegeInformation) == 80, SiegeInformation);
+        static_assert_cpp98_obj(sizeof(SiegeUnitCounts) == 80, SiegeUnitCounts);
     } // namespace Siege
 } // namespace AI
 } // namespace OpenSHC

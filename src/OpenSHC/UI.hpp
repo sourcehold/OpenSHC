@@ -823,7 +823,7 @@ namespace UI {
 
     void __cdecl MenuItemRenderFunction_InGameMenu_BikMessagePlayerShield(int param_1, ...);
 
-    void __cdecl PlayMissionAestheticSFX(uint param_1, int param_2);
+    void __cdecl PlayAMessageFromAI(uint param_1, int param_2);
 
     void __stdcall MenuView_General_DoInitial_OnlySetMenuXY();
 
