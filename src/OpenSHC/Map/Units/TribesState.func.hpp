@@ -25,6 +25,12 @@ namespace Map {
             using OpenSHC::Map::Units::Instructions::UnitMatchSpeedEnum;
             using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
+            // Constructor
+
+            MACRO_FUNCTION_RESOLVER(TribesState* (TribesState::*)(), false, Address::SHC_3BB0A8C1_0x00521180,
+                &TribesState::constructTribesState)
+            constructTribesState;
+
             MACRO_FUNCTION_RESOLVER(void (TribesState::*)(undefined4, undefined4, undefined4, undefined4, undefined4),
                 false, Address::SHC_3BB0A8C1_0x004B7700, &TribesState::giveUnitSelectionMoveInstructionNoMatchedSpeed)
             giveUnitSelectionMoveInstructionNoMatchedSpeed;

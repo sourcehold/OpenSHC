@@ -13,6 +13,12 @@ namespace UI {
             using OpenSHC::Rendering::Enums::RenderTarget;
             using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
+            // Constructor
+
+            MACRO_FUNCTION_RESOLVER(AlphaAndButtonSurface* (AlphaAndButtonSurface::*)(), false,
+                Address::SHC_3BB0A8C1_0x00462FE0, &AlphaAndButtonSurface::Constructor_AlphaAndButtonSurface)
+            Constructor_AlphaAndButtonSurface;
+
             MACRO_FUNCTION_RESOLVER(void (AlphaAndButtonSurface::*)(int), false, Address::SHC_3BB0A8C1_0x004246E0,
                 &AlphaAndButtonSurface::renderNonInteractingButtonBackground)
             renderNonInteractingButtonBackground;

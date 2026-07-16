@@ -14,6 +14,12 @@ namespace Map {
         using OpenSHC::Map::Trees::TreeType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
+        // Constructor
+
+        MACRO_FUNCTION_RESOLVER(LandscapeState* (LandscapeState::*)(), false, Address::SHC_3BB0A8C1_0x004F3930,
+            &LandscapeState::constructLandscapeState)
+        constructLandscapeState;
+
         MACRO_FUNCTION_RESOLVER(undefined4 (LandscapeState::*)(undefined4), false, Address::SHC_3BB0A8C1_0x004F1A60,
             &LandscapeState::mapUITreeTypeToLogicalTreeType)
         mapUITreeTypeToLogicalTreeType;

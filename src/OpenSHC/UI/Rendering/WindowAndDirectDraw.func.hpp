@@ -16,6 +16,12 @@ namespace UI {
             using OpenSHC::Rendering::ScreenResolutionEnum;
             using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
+            // Constructor
+
+            MACRO_FUNCTION_RESOLVER(WindowAndDirectDraw* (WindowAndDirectDraw::*)(), false,
+                Address::SHC_3BB0A8C1_0x004679F0, &WindowAndDirectDraw::Constructor_WindowAndDirectDraw)
+            Constructor_WindowAndDirectDraw;
+
             MACRO_FUNCTION_RESOLVER(BOOLEnum (WindowAndDirectDraw::*)(LPCSTR, uint), false,
                 Address::SHC_3BB0A8C1_0x00467A90, &WindowAndDirectDraw::createWindow)
             createWindow;

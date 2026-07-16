@@ -14,6 +14,12 @@ namespace UI {
         using OpenSHC::UI::Enums::MenuModalType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
+        // Constructor
+
+        MACRO_FUNCTION_RESOLVER(MenuModalComposition* (MenuModalComposition::*)(int), false,
+            Address::SHC_3BB0A8C1_0x004A9E60, &MenuModalComposition::Constructor_MenuModalComposition)
+        Constructor_MenuModalComposition;
+
         MACRO_FUNCTION_RESOLVER(void (MenuModalComposition::*)(), false, Address::SHC_3BB0A8C1_0x004A9E80,
             &MenuModalComposition::loadAllMenuElementsOfMenuModals)
         loadAllMenuElementsOfMenuModals;

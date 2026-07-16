@@ -15,6 +15,12 @@ namespace Map {
             using OpenSHC::Map::Entities::EntityType;
             using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
+            // Constructor
+
+            MACRO_FUNCTION_RESOLVER(EntityState* (EntityState::*)(), false, Address::SHC_3BB0A8C1_0x00403980,
+                &EntityState::Constructor_EntityState)
+            Constructor_EntityState;
+
             MACRO_FUNCTION_RESOLVER(void (EntityState::*)(), false, Address::SHC_3BB0A8C1_0x004010E0,
                 &EntityState::clearEntityArrayAndSec1077)
             clearEntityArrayAndSec1077;

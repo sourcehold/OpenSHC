@@ -10,6 +10,12 @@ namespace IO {
 
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
+        // Constructor
+
+        MACRO_FUNCTION_RESOLVER(DecoderState* (DecoderState::*)(), false, Address::SHC_3BB0A8C1_0x0046D140,
+            &DecoderState::Constructor_DecoderState)
+        Constructor_DecoderState;
+
         MACRO_FUNCTION_RESOLVER(int (DecoderState::*)(char*, int*, int), false, Address::SHC_3BB0A8C1_0x0046D150,
             &DecoderState::compressRLE)
         compressRLE;

@@ -10,6 +10,12 @@ namespace UI {
 
         using OpenSHC::Commands::CommandBuildingType;
 
+        // Constructor
+
+        MACRO_FUNCTION_RESOLVER(HoveredState* (HoveredState::*)(), false, Address::SHC_3BB0A8C1_0x005119C0,
+            &HoveredState::Constructor_HoveredState)
+        Constructor_HoveredState;
+
         MACRO_FUNCTION_RESOLVER(
             void (HoveredState::*)(), false, Address::SHC_3BB0A8C1_0x005010C0, &HoveredState::clearHoveredState)
         clearHoveredState;

@@ -18,6 +18,12 @@ namespace AI {
         using OpenSHC::Game::Player::PlayerID;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
+        // Constructor
+
+        MACRO_FUNCTION_RESOLVER(
+            AIVState* (AIVState::*)(), false, Address::SHC_3BB0A8C1_0x004F13E0, &AIVState::Constructor_AIVState)
+        Constructor_AIVState;
+
         MACRO_FUNCTION_RESOLVER(
             void (AIVState::*)(), false, Address::SHC_3BB0A8C1_0x004ECAD0, &AIVState::setAvailableAIV)
         setAvailableAIV;

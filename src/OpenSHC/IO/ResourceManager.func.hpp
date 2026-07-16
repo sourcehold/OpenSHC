@@ -14,6 +14,12 @@ namespace IO {
         using OpenSHC::IO::FileResourceType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
+        // Constructor
+
+        MACRO_FUNCTION_RESOLVER(ResourceManager* (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x00471BE0,
+            &ResourceManager::Constructor_ResourceManager)
+        Constructor_ResourceManager;
+
         MACRO_FUNCTION_RESOLVER(void (ResourceManager::*)(dword), false, Address::SHC_3BB0A8C1_0x0046C200,
             &ResourceManager::loadMapMetaByID)
         loadMapMetaByID;

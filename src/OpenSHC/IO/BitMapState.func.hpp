@@ -7,6 +7,12 @@ namespace OpenSHC {
 namespace IO {
     namespace BitMapState_Func {
 
+        // Constructor
+
+        MACRO_FUNCTION_RESOLVER(BitMapState* (BitMapState::*)(), false, Address::SHC_3BB0A8C1_0x0046C580,
+            &BitMapState::Constructor_BitMapState)
+        Constructor_BitMapState;
+
         MACRO_FUNCTION_RESOLVER(void (BitMapState::*)(int, int, int, int), false, Address::SHC_3BB0A8C1_0x0046C5A0,
             &BitMapState::readBitmapFace)
         readBitmapFace;

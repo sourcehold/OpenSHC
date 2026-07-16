@@ -19,6 +19,12 @@ namespace Audio {
             using OpenSHC::DE::SHCDE::eSFX;
             using OpenSHC::Map::Units::UnitType;
 
+            // Constructor
+
+            MACRO_FUNCTION_RESOLVER(
+                SFXState* (SFXState::*)(), false, Address::SHC_3BB0A8C1_0x0044AB70, &SFXState::Constructor_SFXState)
+            Constructor_SFXState;
+
             MACRO_FUNCTION_RESOLVER(
                 void (SFXState::*)(), false, Address::SHC_3BB0A8C1_0x00449B20, &SFXState::freeMemoryAt)
             freeMemoryAt;

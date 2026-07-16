@@ -10,6 +10,12 @@ namespace UI {
 
         using OpenSHC::UI::Enums::MenuModalType;
 
+        // Constructor
+
+        MACRO_FUNCTION_RESOLVER(MenuTextInputState* (MenuTextInputState::*)(), false, Address::SHC_3BB0A8C1_0x00491680,
+            &MenuTextInputState::Constructor_MenuTextInputState)
+        Constructor_MenuTextInputState;
+
         MACRO_FUNCTION_RESOLVER(void (MenuTextInputState::*)(MenuModalType), false, Address::SHC_3BB0A8C1_0x004916C0,
             &MenuTextInputState::activateModalDialogAndClearText)
         activateModalDialogAndClearText;

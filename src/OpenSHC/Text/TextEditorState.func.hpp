@@ -10,6 +10,12 @@ namespace OpenSHC {
 namespace Text {
     namespace TextEditorState_Func {
 
+        // Constructor
+
+        MACRO_FUNCTION_RESOLVER(TextEditorState* (TextEditorState::*)(), false, Address::SHC_3BB0A8C1_0x0045F130,
+            &TextEditorState::Constructor_TextEditorState)
+        Constructor_TextEditorState;
+
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(undefined4, undefined4, undefined4, undefined4), false,
             Address::SHC_3BB0A8C1_0x0045D080, &TextEditorState::setHelpWindowBounds)
         setHelpWindowBounds;

@@ -21,6 +21,12 @@ namespace UI {
             using OpenSHC::Text::FontRenderType;
             using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
+            // Constructor
+
+            MACRO_FUNCTION_RESOLVER(TextureRenderCore* (TextureRenderCore::*)(int, int, int), false,
+                Address::SHC_3BB0A8C1_0x00455050, &TextureRenderCore::Constructor_TextureRenderCore)
+            Constructor_TextureRenderCore;
+
             MACRO_FUNCTION_RESOLVER(void (TextureRenderCore::*)(), false, Address::SHC_3BB0A8C1_0x0044C7E0,
                 &TextureRenderCore::Destructor_TextureRenderCore)
             Destructor_TextureRenderCore;

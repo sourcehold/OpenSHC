@@ -23,6 +23,12 @@ namespace Synchrony {
         using OpenSHC::DirectPlay::DPERR;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
+        // Constructor
+
+        MACRO_FUNCTION_RESOLVER(GameSynchronyState* (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0048C150,
+            &GameSynchronyState::constructGameSynchronyState)
+        constructGameSynchronyState;
+
         MACRO_FUNCTION_RESOLVER(BOOLEnum (GameSynchronyState::*)(int), false, Address::SHC_3BB0A8C1_0x004010B0,
             &GameSynchronyState::isAIPlayer)
         isAIPlayer;

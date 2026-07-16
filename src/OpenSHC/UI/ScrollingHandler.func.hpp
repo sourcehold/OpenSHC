@@ -7,6 +7,12 @@ namespace OpenSHC {
 namespace UI {
     namespace ScrollingHandler_Func {
 
+        // Constructor
+
+        MACRO_FUNCTION_RESOLVER(ScrollingHandler* (ScrollingHandler::*)(), false, Address::SHC_3BB0A8C1_0x00468A90,
+            &ScrollingHandler::Constructor_ScrollingHandler)
+        Constructor_ScrollingHandler;
+
         MACRO_FUNCTION_RESOLVER(
             void (ScrollingHandler::*)(), false, Address::SHC_3BB0A8C1_0x00468AD0, &ScrollingHandler::handleScrolling)
         handleScrolling;

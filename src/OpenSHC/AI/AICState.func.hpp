@@ -24,6 +24,12 @@ namespace AI {
         using OpenSHC::Map::Units::UnitType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
+        // Constructor
+
+        MACRO_FUNCTION_RESOLVER(
+            AICState* (AICState::*)(), false, Address::SHC_3BB0A8C1_0x004D3940, &AICState::Constructor_AICState)
+        Constructor_AICState;
+
         MACRO_FUNCTION_RESOLVER(void (AICState::*)(), false, Address::SHC_3BB0A8C1_0x004C6D30, &AICState::wipeAICMemory)
         wipeAICMemory;
 

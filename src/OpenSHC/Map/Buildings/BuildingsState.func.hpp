@@ -23,6 +23,12 @@ namespace Map {
             using OpenSHC::Map::Units::UnitType;
             using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
+            // Constructor
+
+            MACRO_FUNCTION_RESOLVER(BuildingsState* (BuildingsState::*)(), false, Address::SHC_3BB0A8C1_0x0041A760,
+                &BuildingsState::constructBuildingsState)
+            constructBuildingsState;
+
             MACRO_FUNCTION_RESOLVER(undefined4 (BuildingsState::*)(int, int, ResourceType), false,
                 Address::SHC_3BB0A8C1_0x00409330, &BuildingsState::getBuildingResourceAmountByUid)
             getBuildingResourceAmountByUid;

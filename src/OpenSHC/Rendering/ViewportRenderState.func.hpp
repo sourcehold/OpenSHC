@@ -12,6 +12,12 @@ namespace Rendering {
         using OpenSHC::IO::Graphics::GmID;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
+        // Constructor
+
+        MACRO_FUNCTION_RESOLVER(ViewportRenderState* (ViewportRenderState::*)(), false,
+            Address::SHC_3BB0A8C1_0x004E1FA0, &ViewportRenderState::constructViewportRenderState)
+        constructViewportRenderState;
+
         MACRO_FUNCTION_RESOLVER(BOOLEnum (ViewportRenderState::*)(uint, uint), false, Address::SHC_3BB0A8C1_0x00401000,
             &ViewportRenderState::xyAreValid)
         xyAreValid;

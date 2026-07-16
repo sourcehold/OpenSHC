@@ -14,6 +14,12 @@ namespace Input {
         using OpenSHC::Input::Mouse::MouseClickInteraction;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
+        // Constructor
+
+        MACRO_FUNCTION_RESOLVER(
+            MouseState* (MouseState::*)(), false, Address::SHC_3BB0A8C1_0x004709B0, &MouseState::Constructor_MouseState)
+        Constructor_MouseState;
+
         MACRO_FUNCTION_RESOLVER(
             void (MouseState::*)(), false, Address::SHC_3BB0A8C1_0x00467F80, &MouseState::makeSelectedCursorTypeCurrent)
         makeSelectedCursorTypeCurrent;

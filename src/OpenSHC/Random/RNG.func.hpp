@@ -7,6 +7,11 @@ namespace OpenSHC {
 namespace Random {
     namespace RNG_Func {
 
+        // Constructor
+
+        MACRO_FUNCTION_RESOLVER(RNG* (RNG::*)(), false, Address::SHC_3BB0A8C1_0x00471810, &RNG::Constructor_RNG)
+        Constructor_RNG;
+
         MACRO_FUNCTION_RESOLVER(void (RNG::*)(), false, Address::SHC_3BB0A8C1_0x0046A740, &RNG::setTimeBasedSeed)
         setTimeBasedSeed;
 

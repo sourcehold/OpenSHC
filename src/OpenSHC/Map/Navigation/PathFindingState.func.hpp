@@ -15,6 +15,12 @@ namespace Map {
             using OpenSHC::Map::Units::UnitType;
             using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
+            // Constructor
+
+            MACRO_FUNCTION_RESOLVER(PathFindingState* (PathFindingState::*)(), false, Address::SHC_3BB0A8C1_0x004A9760,
+                &PathFindingState::Constructor_PathFindingState)
+            Constructor_PathFindingState;
+
             MACRO_FUNCTION_RESOLVER(undefined4 (PathFindingState::*)(), false, Address::SHC_3BB0A8C1_0x00496E20,
                 &PathFindingState::getComputationalTileIndex)
             getComputationalTileIndex;

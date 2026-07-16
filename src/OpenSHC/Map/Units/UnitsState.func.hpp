@@ -23,6 +23,12 @@ namespace Map {
             using OpenSHC::Map::Units::Instructions::MatchSpeedInstructionEnum;
             using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
+            // Constructor
+
+            MACRO_FUNCTION_RESOLVER(UnitsState* (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x0053B8B0,
+                &UnitsState::constructUnitsState)
+            constructUnitsState;
+
             MACRO_FUNCTION_RESOLVER(
                 void (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x0052E7B0, &UnitsState::clearAllUnits)
             clearAllUnits;

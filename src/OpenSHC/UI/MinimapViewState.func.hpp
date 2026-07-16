@@ -7,6 +7,12 @@ namespace OpenSHC {
 namespace UI {
     namespace MinimapViewState_Func {
 
+        // Constructor
+
+        MACRO_FUNCTION_RESOLVER(MinimapViewState* (MinimapViewState::*)(), false, Address::SHC_3BB0A8C1_0x004B5100,
+            &MinimapViewState::Constructor_MinimapViewState)
+        Constructor_MinimapViewState;
+
         MACRO_FUNCTION_RESOLVER(void (MinimapViewState::*)(), false, Address::SHC_3BB0A8C1_0x004B5110,
             &MinimapViewState::scrollViewportToMinimapClick)
         scrollViewportToMinimapClick;

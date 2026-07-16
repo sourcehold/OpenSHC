@@ -10,6 +10,12 @@ namespace UI {
 
         using OpenSHC::UI::Enums::MenuItemHandleState;
 
+        // Constructor
+
+        MACRO_FUNCTION_RESOLVER(
+            Menu* (Menu::*)(MenuItem*), false, Address::SHC_3BB0A8C1_0x004F4100, &Menu::Constructor_Menu)
+        Constructor_Menu;
+
         MACRO_FUNCTION_RESOLVER(
             void (Menu::*)(MenuItemHandleState), false, Address::SHC_3BB0A8C1_0x004F6280, &Menu::handleMenuItems)
         handleMenuItems;

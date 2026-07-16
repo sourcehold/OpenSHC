@@ -22,6 +22,12 @@ namespace Map {
         using OpenSHC::Map::LogicHelpers::Logic2;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
+        // Constructor
+
+        MACRO_FUNCTION_RESOLVER(TileMapState* (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x00515F40,
+            &TileMapState::constructTileMapState)
+        constructTileMapState;
+
         MACRO_FUNCTION_RESOLVER(
             void (TileMapState::*)(undefined4, undefined4, undefined4, undefined4, undefined4, undefined4), false,
             Address::SHC_3BB0A8C1_0x00401060, &TileMapState::processEntityDamageToBuildingCollateralThunk)

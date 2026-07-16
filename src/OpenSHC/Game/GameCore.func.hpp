@@ -12,6 +12,12 @@ namespace Game {
         using OpenSHC::UI::Enums::MenuViewType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
+        // Constructor
+
+        MACRO_FUNCTION_RESOLVER(
+            GameCore* (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x0046B1F0, &GameCore::Constructor_GameCore)
+        Constructor_GameCore;
+
         MACRO_FUNCTION_RESOLVER(
             void (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x0046B2F0, &GameCore::setViewOnExitUnk)
         setViewOnExitUnk;

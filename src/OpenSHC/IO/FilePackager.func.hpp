@@ -14,6 +14,12 @@ namespace IO {
         using OpenSHC::Map::MapSectionAddress;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
+        // Constructor
+
+        MACRO_FUNCTION_RESOLVER(FilePackager* (FilePackager::*)(), false, Address::SHC_3BB0A8C1_0x0046D070,
+            &FilePackager::Constructor_FilePackager)
+        Constructor_FilePackager;
+
         MACRO_FUNCTION_RESOLVER(void (FilePackager::*)(), false, Address::SHC_3BB0A8C1_0x0046D090,
             &FilePackager::copyFromOldToNewMapDirectory)
         copyFromOldToNewMapDirectory;

@@ -7,6 +7,12 @@ namespace OpenSHC {
 namespace Map {
     namespace WildlifeState_Func {
 
+        // Constructor
+
+        MACRO_FUNCTION_RESOLVER(WildlifeState* (WildlifeState::*)(), false, Address::SHC_3BB0A8C1_0x0052DF10,
+            &WildlifeState::Constructor_WildlifeState)
+        Constructor_WildlifeState;
+
         MACRO_FUNCTION_RESOLVER(
             void (WildlifeState::*)(), false, Address::SHC_3BB0A8C1_0x0052B9F0, &WildlifeState::clearWildlifeState)
         clearWildlifeState;
