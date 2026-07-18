@@ -118,6 +118,8 @@ function Search-FunctionData {
     )
     Write-Verbose "Search-FunctionData"
 
+
+
     $funcHeaderContent = Get-Content -Path $FuncHeaderPath -Raw
     switch ($PSCmdlet.ParameterSetName) {
         'ByAddress' {
@@ -161,6 +163,8 @@ function Search-FunctionData {
     Write-Verbose "Address: $Address"
     Write-Verbose "Function: $Function"
 
+
+
     $sourceHeaderPath = $FuncHeaderPath -replace '\.func\.hpp$', '.hpp'
     Write-Verbose "Try extracting data from $sourceHeaderPath."
     $sourceHeaderContent = Get-Content -Path $sourceHeaderPath -Raw
@@ -171,6 +175,8 @@ function Search-FunctionData {
         }
     )
     Write-Verbose "Namespaces: $namespaces"
+
+
 
     if ($funcHeaderContent -match '(?s)\bnamespace\s+([A-Za-z_]\w*)_Func\s+\{') {
         $potentialClass = $Matches[1]
@@ -186,6 +192,8 @@ function Search-FunctionData {
     }
     Write-Verbose "Class: $potentialClass"
 
+
+
     $regexFuncSignature = "(?s)($([regex]::Escape($returnType))[^;]*?$([regex]::Escape($Function))\s*\(.*?\)\s*);"
     Write-Verbose "Function Signature Regex: $regexFuncSignature"
     if ($sourceHeaderContent -match $regexFuncSignature) {
@@ -200,11 +208,31 @@ function Search-FunctionData {
     }
     Write-Verbose "Signature: $signature"
 
+
+
     $implementationPath = Join-Path $($FuncHeaderPath -replace '\.func\.hpp$', '')  $($Function + '.cpp')
     Write-Verbose "Implementation Path: $implementationPath"
     $implementationExists = Test-Path $implementationPath
     Write-Verbose "Implementation Exists: $implementationExists"
 
+
+
+    $statusRegex = "^\s*SHC_[A-Fa-f0-9]{8}_0x$([regex]::Escape($Address))\s*\|\s*([\d]*\.?[\d]+)\s*%\s*\|\s*(.*)\s*$"
+    Write-Verbose "Status Regex: $statusRegex"
+    $statusMatch = Select-String -Path "./status/addresses-SHC-3BB0A8C1.txt" -Pattern "$statusRegex"
+    if ($null -eq $statusMatch) {
+        Fail "Did not find function status in ./status/addresses-SHC-3BB0A8C1.txt"
+    }
+    $statusNumber = [double]::Parse(
+        $statusMatch.Matches.Groups[1].Value,
+        [System.Globalization.CultureInfo]::InvariantCulture
+    )
+    $statusMessage = $statusMatch.Matches.Groups[2].Value
+    Write-Verbose "Status Number: $statusNumber"
+    Write-Verbose "Status Message: $statusMessage"
+
+
+    
     return [PSCustomObject]@{
         Namespaces               = $namespaces
         Class                    = $potentialClass
@@ -216,6 +244,8 @@ function Search-FunctionData {
         FuncHeader               = Convert-RelativePathToUnix -Path $FuncHeaderPath
         ImplementationFile       = Convert-RelativePathToUnix -Path $implementationPath
         ImplementationFileExists = $implementationExists
+        ImplementationStatus     = $statusNumber
+        ImplementationStatusMsg  = $statusMessage
     }
 }
 
