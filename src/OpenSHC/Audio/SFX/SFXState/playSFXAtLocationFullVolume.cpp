@@ -8,7 +8,7 @@ namespace Audio {
     namespace SFX {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00449F10
-        void SFXState::someVolumeAdjustmentFunction(int xPosition, int yPosition, int sfxOffsetInArray)
+        void SFXState::playSFXAtLocationFullVolume(int xPosition, int yPosition, int sfxOffsetInArray)
         {
             int variationCount = this->DAT_SoundStructures2[sfxOffsetInArray].variationCount;
             if (variationCount <= 0) {
