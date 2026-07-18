@@ -14,7 +14,7 @@ Accepted formats:
 
 ## Resolution
 
-Powershell script call: `tools/reimplementation-helper/Get-Function-Data.ps1 -Partial -Query <query>`
+Powershell script call: `tools/reimplementation-helper/Get-Function-Data.ps1 -Partial -Query <input>`
 
 - If a function name was requested and the resulting name is different, mention the partial match.
 - Use the implementation file and the exists parameter.

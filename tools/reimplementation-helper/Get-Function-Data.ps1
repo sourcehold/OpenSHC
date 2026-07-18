@@ -17,13 +17,13 @@ Function lookup query:
 Allows partial function name matches.
 
 .EXAMPLE
-.\Resolve-Function.ps1 -Query 1234ABCD
+.\script.ps1 -Query 1234ABCD
 
 .EXAMPLE
-.\Resolve-Function.ps1 -Query Namespace::Function -Verbose
+.\script.ps1 -Query Namespace::Function -Verbose
 
 .EXAMPLE
-.\Resolve-Function.ps1 -Query Func -Partial
+.\script.ps1 -Query Func -Partial
 
 .OUTPUTS
 PSCustomObject containing resolved function metadata.
