@@ -1,4 +1,6 @@
-## Tutorial 0: Getting Started
+## Tutorial 0: Getting Started (Windows)
+
+This tutorial is for Windows, for Linux see [here](reimplementation-tutorial-0-linux.md).
 
 ### Requirements
 
