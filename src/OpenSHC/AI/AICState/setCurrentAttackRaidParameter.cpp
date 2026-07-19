@@ -15,7 +15,7 @@ namespace AI {
         if (_aiType != AITA_NULL) {
             int _rng = (int)SEC_RNG::instance.currentNumber2;
             MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
-            AICSpecification const* spec = &this->DAT_AICArray[_aiType - 1];
+            AICSpecification const* spec = &this->aics[_aiType - 1];
             int _gold = DAT_GameState::instance.playerDataArray[playerID].currentResources[0xf];
             int _raidUnitsRandom = (int)spec->RaidUnitsRandom;
             if (_gold < 1000) {
