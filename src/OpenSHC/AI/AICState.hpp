@@ -38,13 +38,13 @@ namespace AI {
     // SIZE: 0x00006D90
     class AICState {
     public:
-        AICSpecification DAT_AICArray[20]; // 0x00000000 length: 13520
+        AICSpecification aics[20]; // 0x00000000 length: 13520
         undefined4 aiBorderTilesIndex; // 0x000034D0 length: 4
         TileDistancePair aiBorderTiles[1000]; // 0x000034D4 length: 8000
         byte unused01[512]; // 0x00005414 length: 512
         short tribeIDArray[1000]; // 0x00005614 length: 2000
         int tribeUIDArray[1000]; // 0x00005DE4 length: 4000
-        undefined4 DAT_SomeTime; // 0x00006D84 length: 4
+        undefined4 aiTauntResponseTimeWindow; // 0x00006D84 length: 4
         byte unused02[8]; // 0x00006D88 length: 8
 
     private:
@@ -108,9 +108,9 @@ namespace AI {
 
         int setNextFarmTypeToBuild(PlayerID playerID);
 
-        uint aiShouldBuildFarm(PlayerID playerID);
+        BOOLEnum aiShouldBuildFarm(int playerID);
 
-        uint aiShouldBuildWoodcutter(PlayerID playerID);
+        BOOLEnum aiShouldBuildWoodcutter(int playerID);
 
         uint aiShouldBuildQuarry(PlayerID playerID);
 
@@ -328,7 +328,7 @@ namespace AI {
 
         void playNoHelpBikFromPlayer(int playerID);
 
-        void setSomeTimeToNowIfInIngameMenu();
+        void setTriggerForAITauntResponse();
 
         void someChatMessageSelection();
 

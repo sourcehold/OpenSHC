@@ -130,11 +130,11 @@ namespace AI {
         setNextFarmTypeToBuild;
 
         MACRO_FUNCTION_RESOLVER(
-            uint (AICState::*)(PlayerID), false, Address::SHC_3BB0A8C1_0x004CB220, &AICState::aiShouldBuildFarm)
+            BOOLEnum (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CB220, &AICState::aiShouldBuildFarm)
         aiShouldBuildFarm;
 
         MACRO_FUNCTION_RESOLVER(
-            uint (AICState::*)(PlayerID), false, Address::SHC_3BB0A8C1_0x004CB290, &AICState::aiShouldBuildWoodcutter)
+            BOOLEnum (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CB290, &AICState::aiShouldBuildWoodcutter)
         aiShouldBuildWoodcutter;
 
         MACRO_FUNCTION_RESOLVER(
@@ -566,8 +566,8 @@ namespace AI {
         playNoHelpBikFromPlayer;
 
         MACRO_FUNCTION_RESOLVER(
-            void (AICState::*)(), false, Address::SHC_3BB0A8C1_0x004D1090, &AICState::setSomeTimeToNowIfInIngameMenu)
-        setSomeTimeToNowIfInIngameMenu;
+            void (AICState::*)(), false, Address::SHC_3BB0A8C1_0x004D1090, &AICState::setTriggerForAITauntResponse)
+        setTriggerForAITauntResponse;
 
         MACRO_FUNCTION_RESOLVER(
             void (AICState::*)(), false, Address::SHC_3BB0A8C1_0x004D10B0, &AICState::someChatMessageSelection)

@@ -39593,7 +39593,7 @@ enum {
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D1050 = 0x004D1050,
-    // label: setSomeTimeToNowIfInIngameMenu
+    // label: setTriggerForAITauntResponse
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D1090 = 0x004D1090,
