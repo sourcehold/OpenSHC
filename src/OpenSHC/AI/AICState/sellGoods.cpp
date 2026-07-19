@@ -23,6 +23,5 @@ namespace AI {
         MACRO_CALL_MEMBER(Game::GameStateStructures_Func::displayPlayerTradeVisualEffect, DAT_GameState::ptr)(
             playerID, 1, -amount, resourceType);
     }
-
 }
 }
