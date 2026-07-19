@@ -9,6 +9,7 @@ Every file in OpenSHC has a deterministic location. The reimplementation for fun
 Therefore, we create file: `OpenSHC/AI/AICState/setFoodBuyPlan.cpp` with the following contents
 
 {lineno-start=1}
+
 ```cpp
 #include "OpenSHC/AI/AICState.hpp"
 
@@ -23,6 +24,7 @@ namespace AI {
 Now, for `reccmp` to be able to associate this definition with the one in the original binary, we insert an annotation containing the address of this function in the original binary. You can find this address in `OpenSHC/AI/AICState.func.hpp`, which contains this:
 
 {lineno-start=1}
+
 ```cpp
         MACRO_FUNCTION_RESOLVER(
             void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CB060, &AICState::setFoodBuyPlan)
@@ -34,6 +36,7 @@ Now, for `reccmp` to be able to associate this definition with the one in the or
 Let's insert the annotation:
 
 {lineno-start=1}
+
 ```cpp
 #include "OpenSHC/AI/AICState.hpp"
 
@@ -49,16 +52,19 @@ namespace AI {
 Now, for the compiler to include this .cpp file in the compilation, we add it to `cmake/openshc-sources.txt.local` (use the .local file for local development):
 
 `cmake/openshc-sources.txt.local`:
+
 ```txt
 src/OpenSHC/AI/AICState/setFoodBuyPlan.cpp
 ```
 
 Now we are ready to compile:
+
 ```bash
 build.bat RelWithDebInfo OpenSHC.dll
 ```
 
 Hopefully the compiler output ends with:
+
 ```raw
 [ 88%] Building CXX object CMakeFiles/OpenSHC.dll.dir/src/OpenSHC/AI/AICState/setFoodBuyPlan.cpp.obj
 setFoodBuyPlan.cpp
@@ -67,10 +73,10 @@ setFoodBuyPlan.cpp
 Build completed successfully for preset "RelWithDebInfo" target "OpenSHC.dll".
 ```
 
-
 ### Step 2: getting an initial reimplementation
 
-Given succesful compilation, we can now use `reccmp` to inspect any differences with the original.  Note that we specify which function to give verbose output for (an assembly diff) by address:
+Given succesful compilation, we can now use `reccmp` to inspect any differences with the original. Note that we specify which function to give verbose output for (an assembly diff) by address:
+
 ```bash
 reccmp/dll/run reccmp-reccmp --target STRONGHOLDCRUSADER --verbose 0x004CB060
 ```
@@ -78,6 +84,7 @@ reccmp/dll/run reccmp-reccmp --target STRONGHOLDCRUSADER --verbose 0x004CB060
 Output:
 
 {lineno-start=1}
+
 ```diff
 
 ---
@@ -94,13 +101,14 @@ Note that `reccmp` processes our function until it finds the last `return` state
 I use Ghidra, which given the current state of the database gives:
 
 {lineno-start=1}
+
 ```cpp
 void __thiscall OpenSHC::AI::AICState::setFoodBuyPlan(AICState *this, int playerID)
 
 {
   int iVar1;
   int iVar2;
-  
+
   iVar1 = DAT_GameState.playerDataArray[playerID].aiType;
   if (iVar1 != 0) {
     iVar2 = (iVar1 + -1) * 0x2a4;
@@ -139,6 +147,7 @@ We could try to compile this directly, which would be a good starting point. Bec
 ### Step 3: understanding and tidying the basic reimplementation
 
 {lineno-start=1}
+
 ```cpp
 void __thiscall OpenSHC::AI::AICState::setFoodBuyPlan(AICState *this, int playerID)
 
@@ -146,7 +155,7 @@ void __thiscall OpenSHC::AI::AICState::setFoodBuyPlan(AICState *this, int player
   int _offset;
   int _aiType;
   int _preferredStock;
-  
+
   _aiType = DAT_GameState.playerDataArray[playerID].aiType;
   if (_aiType != 0) {
     _offset = (_aiType + -1) * 0x2a4;
@@ -190,9 +199,11 @@ Line 10-15 look quite ugly, they use binary offsets instead of accessing fields.
 #### Finding fields
 
 Assuming `_aiType` is 1, which is a valid ai type (the Rat), then `_offset` is 0. Then `_preferredStock` simplifies to `&DAT_AICState + 0x84` which gives us the field `DAT_AICState.minimumApples`. This last step can be figured out like so:
+
 1. Look for `DAT_AICState` in the project. Or visit `src/OpenSHC/Globals` and find `DAT_AICState.hpp`:
 
 {lineno-start=1}
+
 ```cpp
 #pragma once
 
@@ -204,25 +215,28 @@ using OpenSHC::AI::AICState;
 MACRO_STRUCT_RESOLVER(AICState, false, Address::SHC_3BB0A8C1_0x023FC8E8) DAT_AICState;
 } // namespace OpenSHC
 ```
+
 We see that `DAT_AICState` is of type `AICState`, which is defined in `OpenSHC/AI/AICState.hpp` as can we be seen from the `#include` statement (in this case this is actually the same class for which we are reimplementing a member function).
 
 2. Looking at the struct part of the class declaration, we can see some helpful annotations to trace offset `+ 0x84`.
 
 {lineno-start=1 emphasize-lines="4"}
+
 ```cpp
 // SIZE: 0x00006D90
 class AICState {
 public:
-    AICSpecification DAT_AICArray[20]; // 0x00000000 length: 13520
+    AICSpecification aics[20]; // 0x00000000 length: 13520
     undefined4 aiBorderTilesIndex; // 0x000034D0 length: 4
     TileDistancePair aiBorderTiles[1000]; // 0x000034D4 length: 8000
     byte unused01[512]; // 0x00005414 length: 512
     short tribeIDArray[1000]; // 0x00005614 length: 2000
     int tribeUIDArray[1000]; // 0x00005DE4 length: 4000
-    undefined4 DAT_SomeTime; // 0x00006D84 length: 4
+    undefined4 aiTauntResponseTimeWindow; // 0x00006D84 length: 4
     byte unused02[8]; // 0x00006D88 length: 8
 ```
-Note that `+ 0x84` is smaller than the first field's offset which is  `DAT_AICArray[20]` with offsets `0`. We have to look into `AICSpecification` in which we find `minimumApples` at offset `0x84`.
+
+Note that `+ 0x84` is smaller than the first field's offset which is `aics[20]` with offsets `0`. We have to look into `AICSpecification` in which we find `minimumApples` at offset `0x84`.
 
 ```cpp
 // SIZE: 0x000002A4
@@ -245,9 +259,10 @@ So the code in the function is accessing minimum apples.
 3. Let's rewrite our reimplementation (line 2 below, note `_offset` becomes useless):
 
 {lineno-start=1 emphasize-lines="2"}
+
 ```cpp
 _offset = (_aiType + -1) * 0x2a4;
-_preferredStock = *(int*)((int)&DAT_AICState.DAT_AICArray[_aiType - 1].minimumApples);
+_preferredStock = *(int*)((int)&DAT_AICState.aics[_aiType - 1].minimumApples);
 if ((-1 < _preferredStock)
     && (DAT_GameState.playerDataArray[playerID].currentResources[0xd] < _preferredStock)) {
     DAT_GameState.playerDataArray[playerID].resourcesToAcquireArray[0xd]
@@ -255,11 +270,12 @@ if ((-1 < _preferredStock)
 }
 ```
 
-
 #### Substituting enum values
+
 At line 4 we see the usage of `0xd`, which we can guess is the resource type for apples. Let's check in `src/OpenSHC/Game/Resources/ResourceType.hpp` to see if apples is associated with integer 0xd. Yes, see line 15:
 
 {lineno-start=1 emphasize-lines="15"}
+
 ```cpp
 typedef enum ResourceType {
 
@@ -281,6 +297,7 @@ typedef enum ResourceType {
 Furthermore, we can trace offset `+0x98 in line 6` to `tradeAmountFood`. Cleaning up our reimplementation (include ResourceType.hpp!):
 
 {lineno-start=1}
+
 ```cpp
 #include "OpenSHC/AI/AICState.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
@@ -300,11 +317,11 @@ namespace AI {
         _aiType = DAT_GameState.playerDataArray[playerID].aiType;
         if (_aiType != 0) {
             _offset = (_aiType + -1) * 0x2a4;
-            _preferredStock = *(int*)((int)&DAT_AICState.DAT_AICArray[_aiType - 1].minimumApples);
+            _preferredStock = *(int*)((int)&DAT_AICState.aics[_aiType - 1].minimumApples);
             if ((-1 < _preferredStock)
                 && (DAT_GameState.playerDataArray[playerID].currentResources[RT_APPLE] < _preferredStock)) {
                 DAT_GameState.playerDataArray[playerID].resourcesToAcquireArray[RT_APPLE]
-                    = *(int*)((int)&DAT_AICState.DAT_AICArray[_aiType - 1].tradeAmountFood);
+                    = *(int*)((int)&DAT_AICState.aics[_aiType - 1].tradeAmountFood);
             }
 ```
 
@@ -313,6 +330,7 @@ namespace AI {
 Before we recompile, we need to change how globals are referred to. OpenSHC refers to the global memory in the exe, so we use pointer access for structs `->` instead of `.`. Also, we need to explicitly mention we want the pointer with `::ptr`:
 
 {lineno-start=1}
+
 ```cpp
 #include "OpenSHC/AI/AICState.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
@@ -332,24 +350,26 @@ namespace AI {
         _aiType = DAT_GameState::ptr->playerDataArray[playerID].aiType;
         if (_aiType != 0) {
             _offset = (_aiType + -1) * 0x2a4;
-            _preferredStock = DAT_AICState::ptr->DAT_AICArray[_aiType - 1].minimumApples;
+            _preferredStock = DAT_AICState::ptr->aics[_aiType - 1].minimumApples;
             if ((-1 < _preferredStock)
                 && (DAT_GameState::ptr->playerDataArray[playerID].currentResources[RT_APPLE] < _preferredStock)) {
                 DAT_GameState::ptr->playerDataArray[playerID].resourcesToAcquireArray[RT_APPLE]
-                    = DAT_AICState::ptr->DAT_AICArray[_aiType - 1].tradeAmountFood;
+                    = DAT_AICState::ptr->aics[_aiType - 1].tradeAmountFood;
             }
 ```
 
 Also note we use DAT_GameState, so make sure to include that too:
+
 ```cpp
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 ```
 
 ### Step 5: compiling the reimplementation and comparing it to the original
 
-Patching everything up, we get something that looks like good code and that actually compiles with `.\build.bat RelWithDebInfo OpenSHC.dll`: 
+Patching everything up, we get something that looks like good code and that actually compiles with `.\build.bat RelWithDebInfo OpenSHC.dll`:
 
 {lineno-start=1}
+
 ```cpp
 #include "OpenSHC/AI/AICState.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
@@ -371,40 +391,40 @@ namespace AI {
         _aiType = DAT_GameState::ptr->playerDataArray[playerID].aiType;
         if (_aiType != 0) {
             // _offset = (_aiType + -1) * 0x2a4;
-            _preferredStock = DAT_AICState::ptr->DAT_AICArray[_aiType - 1].minimumApples;
+            _preferredStock = DAT_AICState::ptr->aics[_aiType - 1].minimumApples;
             if ((-1 < _preferredStock)
                 && (DAT_GameState::ptr->playerDataArray[playerID].currentResources[ResourceType::RT_APPLE]
                     < _preferredStock)) {
                 DAT_GameState::ptr->playerDataArray[playerID].resourcesToAcquireArray[ResourceType::RT_APPLE]
-                    = DAT_AICState::ptr->DAT_AICArray[_aiType - 1].tradeAmountFood;
+                    = DAT_AICState::ptr->aics[_aiType - 1].tradeAmountFood;
             }
-            _preferredStock = DAT_AICState::ptr->DAT_AICArray[_aiType - 1].minimumCheese;
+            _preferredStock = DAT_AICState::ptr->aics[_aiType - 1].minimumCheese;
             if ((0 < _preferredStock)
                 && (DAT_GameState::ptr->playerDataArray[playerID].currentResources[ResourceType::RT_CHEESE]
                     < _preferredStock)) {
                 DAT_GameState::ptr->playerDataArray[playerID].resourcesToAcquireArray[ResourceType::RT_CHEESE]
-                    = DAT_AICState::ptr->DAT_AICArray[_aiType - 1].tradeAmountFood;
+                    = DAT_AICState::ptr->aics[_aiType - 1].tradeAmountFood;
             }
-            _preferredStock = DAT_AICState::ptr->DAT_AICArray[_aiType - 1].minimumBread;
+            _preferredStock = DAT_AICState::ptr->aics[_aiType - 1].minimumBread;
             if ((0 < _preferredStock)
                 && (DAT_GameState::ptr->playerDataArray[playerID].currentResources[ResourceType::RT_BREAD]
                     < _preferredStock)) {
                 DAT_GameState::ptr->playerDataArray[playerID].resourcesToAcquireArray[ResourceType::RT_BREAD]
-                    = DAT_AICState::ptr->DAT_AICArray[_aiType - 1].tradeAmountFood;
+                    = DAT_AICState::ptr->aics[_aiType - 1].tradeAmountFood;
             }
-            _preferredStock = DAT_AICState::ptr->DAT_AICArray[_aiType - 1].minimumWheat;
+            _preferredStock = DAT_AICState::ptr->aics[_aiType - 1].minimumWheat;
             if ((0 < _preferredStock)
                 && (DAT_GameState::ptr->playerDataArray[playerID].currentResources[ResourceType::RT_WHEAT]
                     < _preferredStock)) {
                 DAT_GameState::ptr->playerDataArray[playerID].resourcesToAcquireArray[ResourceType::RT_WHEAT]
-                    = DAT_AICState::ptr->DAT_AICArray[_aiType - 1].tradeAmountFood;
+                    = DAT_AICState::ptr->aics[_aiType - 1].tradeAmountFood;
             }
-            _preferredStock = DAT_AICState::ptr->DAT_AICArray[_aiType - 1].minimumHop;
+            _preferredStock = DAT_AICState::ptr->aics[_aiType - 1].minimumHop;
             if ((0 < _preferredStock)
                 && (DAT_GameState::ptr->playerDataArray[playerID].currentResources[ResourceType::RT_HOPS]
                     < _preferredStock)) {
                 DAT_GameState::ptr->playerDataArray[playerID].resourcesToAcquireArray[ResourceType::RT_HOPS]
-                    = DAT_AICState::ptr->DAT_AICArray[_aiType - 1].tradeAmountFood;
+                    = DAT_AICState::ptr->aics[_aiType - 1].tradeAmountFood;
             }
         }
         return;
@@ -413,7 +433,6 @@ namespace AI {
 }
 
 ```
-
 
 Here is our first `reccmp`:
 
@@ -424,6 +443,7 @@ reccmp/dll/run reccmp-reccmp --target STRONGHOLDCRUSADER --verbose 0x004CB060
 Output:
 
 {lineno-start=1}
+
 ```diff
 
 ---
@@ -515,6 +535,7 @@ Let's try manual improvements first:
 Line 13 suggests `_aiType - 1` is cached in a register. Let's do that and insert that line after the `if (_aiType != 0)` check.
 
 {lineno-start=13}
+
 ```cpp
 int _aiType0 = _aiType - 1;
 ```
@@ -522,6 +543,7 @@ int _aiType0 = _aiType - 1;
 Great, 27% and we fixed this line specifically.
 
 #### Global access versus `this` pointer
+
 Note however dat we used `DAT_AICState` even though we could have used `this` as we are implementing a member function for `AICState` class.
 
 That change to our code (`DAT_AICState::ptr->` to `this->`) actually made the match worse: 22%! but it is much more likely the developers used `this` from a programmer's mindset point of view.
@@ -535,11 +557,13 @@ Also note that the difference is in registry usage not really in terms of functi
 At this point, I used Claude with the MCP tools provided in the OpenSHC repo to iteratively improve (see [this]() tutorial on how to set that up).
 
 AI prompt:
+
 > Using the available MCP tools, improve function `OpenSHC::AI::AICState::setFoodBuyPlan`
 
 After two iterations, it found a 100% matching solution and it documented our source code by itself:
 
 {lineno-start=1}
+
 ```cpp
 #include "OpenSHC/AI/AICState.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
@@ -571,43 +595,43 @@ namespace AI {
         // Check each food type and queue purchase if current stock is below minimum
 
         // Apples: special handling with >= 0 check (allows -1 to disable)
-        minimumStock = this->DAT_AICArray[aiConfigIndex].minimumApples;
+        minimumStock = this->aics[aiConfigIndex].minimumApples;
         if (minimumStock >= 0
             && DAT_GameState::ptr->playerDataArray[playerID].currentResources[ResourceType::RT_APPLE] < minimumStock) {
             DAT_GameState::ptr->playerDataArray[playerID].resourcesToAcquireArray[ResourceType::RT_APPLE]
-                = this->DAT_AICArray[aiConfigIndex].tradeAmountFood;
+                = this->aics[aiConfigIndex].tradeAmountFood;
         }
 
         // Cheese: standard check with > 0
-        minimumStock = this->DAT_AICArray[aiConfigIndex].minimumCheese;
+        minimumStock = this->aics[aiConfigIndex].minimumCheese;
         if (minimumStock > 0
             && DAT_GameState::ptr->playerDataArray[playerID].currentResources[ResourceType::RT_CHEESE] < minimumStock) {
             DAT_GameState::ptr->playerDataArray[playerID].resourcesToAcquireArray[ResourceType::RT_CHEESE]
-                = this->DAT_AICArray[aiConfigIndex].tradeAmountFood;
+                = this->aics[aiConfigIndex].tradeAmountFood;
         }
 
         // Bread: standard check with > 0
-        minimumStock = this->DAT_AICArray[aiConfigIndex].minimumBread;
+        minimumStock = this->aics[aiConfigIndex].minimumBread;
         if (minimumStock > 0
             && DAT_GameState::ptr->playerDataArray[playerID].currentResources[ResourceType::RT_BREAD] < minimumStock) {
             DAT_GameState::ptr->playerDataArray[playerID].resourcesToAcquireArray[ResourceType::RT_BREAD]
-                = this->DAT_AICArray[aiConfigIndex].tradeAmountFood;
+                = this->aics[aiConfigIndex].tradeAmountFood;
         }
 
         // Wheat: standard check with > 0
-        minimumStock = this->DAT_AICArray[aiConfigIndex].minimumWheat;
+        minimumStock = this->aics[aiConfigIndex].minimumWheat;
         if (minimumStock > 0
             && DAT_GameState::ptr->playerDataArray[playerID].currentResources[ResourceType::RT_WHEAT] < minimumStock) {
             DAT_GameState::ptr->playerDataArray[playerID].resourcesToAcquireArray[ResourceType::RT_WHEAT]
-                = this->DAT_AICArray[aiConfigIndex].tradeAmountFood;
+                = this->aics[aiConfigIndex].tradeAmountFood;
         }
 
         // Hops: standard check with > 0
-        minimumStock = this->DAT_AICArray[aiConfigIndex].minimumHop;
+        minimumStock = this->aics[aiConfigIndex].minimumHop;
         if (minimumStock > 0
             && DAT_GameState::ptr->playerDataArray[playerID].currentResources[ResourceType::RT_HOPS] < minimumStock) {
             DAT_GameState::ptr->playerDataArray[playerID].resourcesToAcquireArray[ResourceType::RT_HOPS]
-                = this->DAT_AICArray[aiConfigIndex].tradeAmountFood;
+                = this->aics[aiConfigIndex].tradeAmountFood;
         }
     }
 }
@@ -626,9 +650,11 @@ OpenSHC> reccmp/dll/run reccmp-reccmp --target STRONGHOLDCRUSADER --verbose 0x00
 ```
 
 #### Improving code style
+
 While the code is 100% matching, it can be improved in terms of style. Let's apply some code style changes that don't affect matching (always check!).
 
 {lineno-start=1}
+
 ```cpp
 #include "OpenSHC/AI/AICState.hpp"
 #include "OpenSHC/AI/AITypeA.hpp"
@@ -659,39 +685,39 @@ namespace AI {
         // Check each food type and queue purchase if current stock is below minimum
 
         // Apples: special handling with >= 0 check (allows -1 to disable)
-        int minimumApples = this->DAT_AICArray[aiConfigIndex].minimumApples;
+        int minimumApples = this->aics[aiConfigIndex].minimumApples;
         int* currentResources = DAT_GameState::ptr->playerDataArray[playerID].currentResources;
         if (minimumApples >= 0 && currentResources[ResourceType::RT_APPLE] < minimumApples) {
             DAT_GameState::ptr->playerDataArray[playerID].resourcesToAcquireArray[ResourceType::RT_APPLE]
-                = this->DAT_AICArray[aiConfigIndex].tradeAmountFood;
+                = this->aics[aiConfigIndex].tradeAmountFood;
         }
 
         // Cheese: standard check with > 0
-        int minimumCheese = this->DAT_AICArray[aiConfigIndex].minimumCheese;
+        int minimumCheese = this->aics[aiConfigIndex].minimumCheese;
         if (minimumCheese > 0 && currentResources[ResourceType::RT_CHEESE] < minimumCheese) {
             DAT_GameState::ptr->playerDataArray[playerID].resourcesToAcquireArray[ResourceType::RT_CHEESE]
-                = this->DAT_AICArray[aiConfigIndex].tradeAmountFood;
+                = this->aics[aiConfigIndex].tradeAmountFood;
         }
 
         // Bread: standard check with > 0
-        int minimumBread = this->DAT_AICArray[aiConfigIndex].minimumBread;
+        int minimumBread = this->aics[aiConfigIndex].minimumBread;
         if (minimumBread > 0 && currentResources[ResourceType::RT_BREAD] < minimumBread) {
             DAT_GameState::ptr->playerDataArray[playerID].resourcesToAcquireArray[ResourceType::RT_BREAD]
-                = this->DAT_AICArray[aiConfigIndex].tradeAmountFood;
+                = this->aics[aiConfigIndex].tradeAmountFood;
         }
 
         // Wheat: standard check with > 0
-        int minimumWheat = this->DAT_AICArray[aiConfigIndex].minimumWheat;
+        int minimumWheat = this->aics[aiConfigIndex].minimumWheat;
         if (minimumWheat > 0 && currentResources[ResourceType::RT_WHEAT] < minimumWheat) {
             DAT_GameState::ptr->playerDataArray[playerID].resourcesToAcquireArray[ResourceType::RT_WHEAT]
-                = this->DAT_AICArray[aiConfigIndex].tradeAmountFood;
+                = this->aics[aiConfigIndex].tradeAmountFood;
         }
 
         // Hops: standard check with > 0
-        int minimumHop = this->DAT_AICArray[aiConfigIndex].minimumHop;
+        int minimumHop = this->aics[aiConfigIndex].minimumHop;
         if (minimumHop > 0 && currentResources[ResourceType::RT_HOPS] < minimumHop) {
             DAT_GameState::ptr->playerDataArray[playerID].resourcesToAcquireArray[ResourceType::RT_HOPS]
-                = this->DAT_AICArray[aiConfigIndex].tradeAmountFood;
+                = this->aics[aiConfigIndex].tradeAmountFood;
         }
     }
 }
@@ -700,16 +726,19 @@ namespace AI {
 ```
 
 ### Step 8: Documentation and bug hunting
+
 Note that this 100% reimplementation also revealed a bug or quirk (or feature?): minimumApples permits 0 as a valid value for minimum stock, which doesn't make sense as can be seen one line later as `currentResources` being smaller than 0 doesn't make any sense (unless the AI cheats with negative stock values?).
 
 It is best practice to note down such oddities in code comments.
 
 ### Step 9: Preparing a Pull Request
-In the file `status/addresses-SHC-3BB0A8C1.txt`, we set entry `SHC_3BB0A8C1_0x004CB060`  to `100%` and change `Pending` into `Completed`. If we didn't achieve 100% in Step 7, we note here what prevented full reimplementation. For example, if the reimplementation appears to be functionally identical but optimizations that are only applied to exe files hinder 100%, write: `Functional reimplementation: compiler optimization prevented identical reimplementation`.
+
+In the file `status/addresses-SHC-3BB0A8C1.txt`, we set entry `SHC_3BB0A8C1_0x004CB060` to `100%` and change `Pending` into `Completed`. If we didn't achieve 100% in Step 7, we note here what prevented full reimplementation. For example, if the reimplementation appears to be functionally identical but optimizations that are only applied to exe files hinder 100%, write: `Functional reimplementation: compiler optimization prevented identical reimplementation`.
 
 ### Step 10: open the Pull Request
+
 The Pull Request should contain the changes to the .cpp file and the update to the txt file found under `status/`. The body of your Pull Request should contain the status of the reimplementation and the output of `reccmp` if not 100% (run `reccmp` without `--verbose` if you file multiple functions in the PR).
 
-
 ### Conclusion
+
 Happy reimplementing!
