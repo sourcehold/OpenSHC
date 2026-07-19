@@ -9,7 +9,7 @@ namespace OpenSHC {
 namespace AI {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CB220
-    BOOLEnum AICState::aiShouldBuildFarm(PlayerID playerID)
+    BOOLEnum AICState::aiShouldBuildFarm(int playerID)
     {
         int const _playerID = playerID;
         unsigned int aiType = DAT_GameState::instance.playerDataArray[_playerID].aiType;
@@ -22,11 +22,11 @@ namespace AI {
         if (_farmCount <= 0) {
             return TRUE;
         }
-        if (_farmCount >= (int)this->DAT_AICArray[aiType].maxFarms) {
+        if (_farmCount >= (int)this->aics[aiType].maxFarms) {
             return FALSE;
         }
         return DAT_GameState::instance.playerDataArray[_playerID].currentPopulation / _farmCount
-            >= (int)this->DAT_AICArray[aiType].populationPerFarm;
+            >= (int)this->aics[aiType].populationPerFarm;
     }
 }
 }

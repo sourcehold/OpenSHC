@@ -20,10 +20,10 @@ namespace AI {
         if (8 <= DAT_GameState::instance.playerDataArray[playerID].aiFarmIndex) {
             DAT_GameState::instance.playerDataArray[playerID].aiFarmIndex = 0;
         }
-        if ((&this->DAT_AICArray[_aiType].farm1)[DAT_GameState::instance.playerDataArray[playerID].aiFarmIndex] == 0) {
+        if ((&this->aics[_aiType].farm1)[DAT_GameState::instance.playerDataArray[playerID].aiFarmIndex] == 0) {
             DAT_GameState::instance.playerDataArray[playerID].aiFarmIndex = 0;
         }
-        return (&this->DAT_AICArray[_aiType].farm1)[DAT_GameState::instance.playerDataArray[playerID].aiFarmIndex];
+        return (&this->aics[_aiType].farm1)[DAT_GameState::instance.playerDataArray[playerID].aiFarmIndex];
     }
 }
 }

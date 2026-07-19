@@ -15,7 +15,7 @@ namespace AI {
         if (_aiType != AITA_NULL) {
             int _randomNumber = (int)SEC_RNG::instance.currentNumber2;
             MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
-            int _attForceRandom = (int)this->DAT_AICArray[_aiType - 1].AttForceRandom;
+            int _attForceRandom = (int)this->aics[_aiType - 1].AttForceRandom;
             int* _attackWave = &DAT_GameState::instance.playerDataArray[playerID].currentAttackWave;
             *_attackWave = *_attackWave + 1;
             int _currentGold = DAT_GameState::instance.playerDataArray[playerID].currentResources[0xf];

@@ -16,7 +16,7 @@ namespace AI {
         if (aiType == AITA_NULL) {
             return 0;
         }
-        AICSpecification const* spec = &this->DAT_AICArray[aiType - 1];
+        AICSpecification const* spec = &this->aics[aiType - 1];
         if ((int)spec->populationPerQuarry <= 0) {
             return 0;
         }
