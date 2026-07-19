@@ -20,7 +20,7 @@ import os
 import subprocess
 import tempfile
 from pathlib import Path
-from typing import Any, List, Sequence
+from typing import Any, List, Sequence, Tuple
 import difflib
 import re
 import sys
@@ -83,16 +83,20 @@ def compile_project(truncated: bool = True, no_output_on_succes: bool = True) ->
     except Exception as e:
         return False, "", str(e)
 
+
+
 @mcp.tool()
-def extract_function_assembly_diff(function_name: str) -> tuple[bool, Any, str, str]:
+def extract_multiple_functions_assembly_diffs(function_names: List[str], match_percentage_only: bool = False) -> tuple[bool, List[Any], str, str]:
     """
-    Extract assembly diff for a specific function, comparing the original binary to the reimplementation source code. Should be called after writing and compiling a cpp file, see 'compile_cpp_code_for_function'.
+    Extract assembly diff for multiple specific functions, comparing the original binary to the reimplementation source code.
+    Should be called after writing and compiling a cpp file, see 'compile_cpp_code_for_function'.
     
     Args:
-        function_name: Name of the function to extract, fully namespaced using '::'
+        function_names: List of names of the functions to extract, fully namespaced using '::'
+        match_percentage_only: False by default. If True only returns the % matching between original and reimplementation.
     
     Returns:
-        Tuple of (success, diff, stdout, stderr)
+        Tuple of (success, diffs of the functions, stdout, stderr)
     """
     cmd = [str(Path("reccmp") / "dll" / "run.bat"), "reccmp-reccmp", "--target", "STRONGHOLDCRUSADER", "--json", "diff.json"]
     
@@ -107,17 +111,41 @@ def extract_function_assembly_diff(function_name: str) -> tuple[bool, Any, str, 
         if result.returncode != 0:
             raise Exception(f"could not create diff: {result.stderr}, command: {' '.join(cmd)}")
     except Exception as e:
-        return False, "", "", f"could not execute reccmp/dll/run: {str(e)}"
+        return False, ["error"], "", f"could not execute reccmp/dll/run: {str(e)}"
     try:
         diff = json.loads(Path("reccmp/dll/diff.json").read_text())
     except Exception as e:
-        return False, "", "", f"could not load reccmp/dll/diff.json: {str(e)}"
+        return False, ["error"], "", f"could not load reccmp/dll/diff.json: {str(e)}"
     all_data = diff['data']
-    data = [entry for entry in all_data if entry['name'] == function_name]
-    if len(data) == 0:
-        return False, "", "", f"no function with name '{function_name}' in .pdb file. Cannot execute diff"
-    data = data[0]
-    return True, data, "", ""
+    results = []
+    for function_name in function_names:
+        data = [entry for entry in all_data if entry['name'] == function_name]
+        if len(data) == 0:
+            return False, ["error"], "", f"no function with name '{function_name}' in .pdb file. Cannot execute diff"
+        data = data[0]
+        if match_percentage_only:
+            data = {
+                'address': data['address'],
+                'name': data['name'],
+                'matching': data['matching']
+            }
+        results.append(data)
+    return True, results, "", ""
+
+
+@mcp.tool()
+def extract_function_assembly_diff(function_name: str) -> tuple[bool, List[Any], str, str]:
+    """
+    Extract assembly diff for a specific function, comparing the original binary to the reimplementation source code.
+    Should be called after writing and compiling a cpp file, see 'compile_cpp_code_for_function'.
+    
+    Args:
+        function_name: Name of the function to extract, fully namespaced using '::'
+    
+    Returns:
+        Tuple of (success, diff, stdout, stderr)
+    """
+    return extract_multiple_functions_assembly_diffs([function_name])
 
 def function_name_to_cpp_path(function_name: str, base_path = Path("src")) -> tuple[bool, str, str]:
     parts = function_name.split("::")
@@ -128,27 +156,15 @@ def function_name_to_cpp_path(function_name: str, base_path = Path("src")) -> tu
         path = path / part
     return True, f"{str(path)}.cpp", ""
 
-@mcp.tool()
-def compile_cpp_code_for_function(function_name: str, contents: str) -> tuple[bool, str, str]:
-    """
-    Write and compile cpp code for function identified by fully namespaced function name.
-    Includes the generated cpp file automatically in the cmake sources list.
-    
-    Args:
-        function_name: Name of the function to compile, fully namespaced using '::'
-        contents: New contents of the file
-    
-    Returns:
-        Tuple of (success, stdout, stderr)
-    """
+def write_source_for_function(function_name: str, contents: str, should_exist: bool = False):
     # Translate the function name into a path
     rstate, rresult, rerr = function_name_to_cpp_path(function_name=function_name)
     if not rstate:
         return rstate, "", f"could not resolve function name to file path: {rerr}"
     path = Path(rresult)
-    if not path.exists():
-        path.parent.mkdir(parents = True, exist_ok=True)
-    path.write_text(contents)
+    if should_exist and not path.exists():
+        return False, "", f"cpp file path does not exist: {str(path)}"
+    path.write_text(contents, newline="\n")
 
     # Ensure the cpp file is included in the build
     csentry = str(path).replace("\\", "/")
@@ -160,6 +176,45 @@ def compile_cpp_code_for_function(function_name: str, contents: str) -> tuple[bo
         lines.append(csentry)
     PATH_CMAKE_OPENSHC_SOURCES.write_text('\n'.join(lines) + '\n', newline='\n')
 
+    return True, "", ""
+
+@mcp.tool()
+def compile_cpp_code_for_function(function_name: str, contents: str) -> tuple[bool, str, str]:
+    """
+    Write and compile cpp code for function identified by fully namespaced function name.
+    
+    Args:
+        function_name: Name of the function to extract, fully namespaced using '::'
+        contents: New contents of the file
+    
+    Returns:
+        Tuple of (success, stdout, stderr)
+    """
+    rstate, rresult, rerr = write_source_for_function(function_name=function_name, contents=contents)
+
+    if not rstate:
+        return rstate, rresult, rerr
+    
+    # Compile the project and return the resulting state
+    return compile_project()
+
+@mcp.tool()
+def compile_cpp_codes_for_functions(function_contents: List[Tuple[str, str]]) -> Tuple[bool, str, str]:
+    """
+    Write and compile cpp code for multiple functions identified by fully namespaced function names.
+    
+    Args:
+        function_contents a tuple of:
+            function_name: Name of the function to extract, fully namespaced using '::'
+            contents: New contents of the file
+    
+    Returns:
+        Tuple of (success, stdout, stderr)
+    """
+    for function_name, contents in function_contents:
+        rstate, rresult, rerr = write_source_for_function(function_name=function_name, contents=contents)
+        if not rstate:
+            return rstate, rresult, rerr
     # Compile the project and return the resulting state
     return compile_project()
 
