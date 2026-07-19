@@ -16,7 +16,7 @@ namespace AI {
         }
 
         /* ugly because EAX is always 1 or higher */
-        return (&this->DAT_AICArray[(aiType - 1)].farm1)[DAT_GameState::instance.playerDataArray[playerID].aiFarmIndex];
+        return (&this->aics[(aiType - 1)].farm1)[DAT_GameState::instance.playerDataArray[playerID].aiFarmIndex];
     }
 }
 }
