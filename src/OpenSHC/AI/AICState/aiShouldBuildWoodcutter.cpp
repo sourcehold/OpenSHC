@@ -13,34 +13,35 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CB290
     uint AICState::aiShouldBuildWoodcutter(PlayerID playerID)
     {
-        if (DAT_AIVState::instance.mapExtraInfo.totalWoodAvailable < 1) {
+        if (DAT_AIVState::instance.mapExtraInfo.totalWoodAvailable <= 0) {
             return 0;
         }
-        int const aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
+        int aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
         if (aiType == AITA_NULL) {
             return 0;
         }
-        AICSpecification const* spec = &this->DAT_AICArray[aiType - 1];
-        if ((int)spec->populationPerWoodcutter <= 0) {
+        aiType -= 1;
+        // AICSpecification const* spec = &this->DAT_AICArray[aiType];
+        if ((int)this->DAT_AICArray[aiType].populationPerWoodcutter <= 0) {
             return 0;
         }
         int iVar3 = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::countBuildingsForPlayer,
             DAT_BuildingsState::ptr)(playerID, Map::Buildings::BT_WOODCUTTERSHUT, 1);
-        if (iVar3 < 1) {
+        if (iVar3 <= 0) {
             iVar3 = 1;
         } else {
-            if (iVar3 >= (int)spec->maxWoodcutters) {
+            if (iVar3 >= (int)this->DAT_AICArray[aiType].maxWoodcutters) {
                 return 0;
             }
-            if ((5 < iVar3) && (DAT_AIVState::instance.mapExtraInfo.totalWoodAvailable < 91)) {
+            if ((6 <= iVar3) && (DAT_AIVState::instance.mapExtraInfo.totalWoodAvailable <= 90)) {
                 return 0;
             }
-            if ((2 < iVar3) && (DAT_AIVState::instance.mapExtraInfo.totalWoodAvailable < 31)) {
+            if ((3 <= iVar3) && (DAT_AIVState::instance.mapExtraInfo.totalWoodAvailable <= 30)) {
                 return 0;
             }
         }
         return DAT_GameState::instance.playerDataArray[playerID].currentPopulation / iVar3
-            >= (int)spec->populationPerWoodcutter;
+            >= (int)this->DAT_AICArray[aiType].populationPerWoodcutter;
     }
 }
 }
