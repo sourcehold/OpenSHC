@@ -9,23 +9,24 @@ namespace OpenSHC {
 namespace AI {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CB220
-    uint AICState::aiShouldBuildFarm(PlayerID playerID)
+    BOOLEnum AICState::aiShouldBuildFarm(PlayerID playerID)
     {
-        int const aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
+        int const _playerID = playerID;
+        unsigned int aiType = DAT_GameState::instance.playerDataArray[_playerID].aiType;
         if (aiType == AITA_NULL) {
-            return 0;
+            return aiType; // return 0 => return
         }
-        int _farmCount
-            = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::countFarms, DAT_BuildingsState::ptr)(playerID, 1);
-        if (_farmCount < 1) {
-            return 1;
+        aiType -= 1;
+        int const _farmCount
+            = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::countFarms, DAT_BuildingsState::ptr)(_playerID, 1);
+        if (_farmCount <= 0) {
+            return TRUE;
         }
-        AICSpecification const* spec = &this->DAT_AICArray[aiType - 1];
-        if (_farmCount >= (int)spec->maxFarms) {
-            return 0;
+        if (_farmCount >= (int)this->DAT_AICArray[aiType].maxFarms) {
+            return FALSE;
         }
-        return DAT_GameState::instance.playerDataArray[playerID].currentPopulation / _farmCount
-            >= (int)spec->populationPerFarm;
+        return DAT_GameState::instance.playerDataArray[_playerID].currentPopulation / _farmCount
+            >= (int)this->DAT_AICArray[aiType].populationPerFarm;
     }
 }
 }

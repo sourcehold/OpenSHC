@@ -10,20 +10,20 @@ namespace AI {
     int AICState::setNextFarmTypeToBuild(PlayerID playerID)
 
     {
-        int const _aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
+        unsigned int _aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
         if (_aiType == AITA_NULL) {
             return 0;
         }
+        _aiType += -1;
         int* _ptrAiFarmIndex = &DAT_GameState::instance.playerDataArray[playerID].aiFarmIndex;
         *_ptrAiFarmIndex = *_ptrAiFarmIndex + 1;
-        if (7 < DAT_GameState::instance.playerDataArray[playerID].aiFarmIndex) {
+        if (8 <= DAT_GameState::instance.playerDataArray[playerID].aiFarmIndex) {
             DAT_GameState::instance.playerDataArray[playerID].aiFarmIndex = 0;
         }
-        if ((&this->DAT_AICArray[_aiType - 1].farm1)[DAT_GameState::instance.playerDataArray[playerID].aiFarmIndex]
-            == 0) {
+        if ((&this->DAT_AICArray[_aiType].farm1)[DAT_GameState::instance.playerDataArray[playerID].aiFarmIndex] == 0) {
             DAT_GameState::instance.playerDataArray[playerID].aiFarmIndex = 0;
         }
-        return (&this->DAT_AICArray[_aiType - 1].farm1)[DAT_GameState::instance.playerDataArray[playerID].aiFarmIndex];
+        return (&this->DAT_AICArray[_aiType].farm1)[DAT_GameState::instance.playerDataArray[playerID].aiFarmIndex];
     }
 }
 }
