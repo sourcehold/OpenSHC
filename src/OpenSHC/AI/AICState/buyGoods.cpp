@@ -24,6 +24,5 @@ namespace AI {
         }
         return FALSE;
     }
-
 }
 }
