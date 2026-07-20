@@ -1,11 +1,10 @@
+#include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/AI/AICState.hpp"
 #include "OpenSHC/AI/AITypeA.hpp"
 
-#include "OpenSHC/Map/Units/TribesState.func.hpp"
-
 #include "OpenSHC/Globals/DAT_GameState.hpp"
-#include "OpenSHC/Globals/DAT_TribesState.hpp"
 #include "OpenSHC/Globals/DAT_SkirmishDefinedData.hpp"
+#include "OpenSHC/Globals/DAT_TribesState.hpp"
 
 namespace OpenSHC {
 namespace AI {
@@ -23,8 +22,8 @@ namespace AI {
         int _tribeID = 0;
         int local_c = 0;
         short sVar4 = 1000;
-        if ((iVar3 < iVar6) &&
-            (((unitType == (short*)0x8 || (unitType == (short*)0xa)) || (unitType == (short*)0x11)))) {
+        if ((iVar3 < iVar6)
+            && (((unitType == (short*)0x8 || (unitType == (short*)0xa)) || (unitType == (short*)0x11)))) {
             iVar6 = iVar3;
         }
         iVar3 = DAT_SkirmishDefinedData::instance.DAT_AiTribeIDOffsetForUnitType[(int)unitType];
@@ -32,9 +31,11 @@ namespace AI {
             unitType = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs + iVar3;
             do {
                 int iVar5 = (int)*unitType;
-                if ((iVar5 == 0) ||
-                    (DAT_TribesState::instance.tribes[iVar5].uid != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[iVar3 + iVar7])) {
-                    _tribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(playerID);
+                if ((iVar5 == 0)
+                    || (DAT_TribesState::instance.tribes[iVar5].uid
+                        != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[iVar3 + iVar7])) {
+                    _tribeID = MACRO_CALL_MEMBER(
+                        Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(playerID);
                     goto LAB_004ccaae;
                 }
                 short sVar1 = DAT_TribesState::instance.tribes[iVar5].size;
@@ -48,9 +49,10 @@ namespace AI {
             } while (iVar7 < iVar6);
             iVar7 = local_c;
             if (_tribeID != 0) {
-LAB_004ccaae:
+            LAB_004ccaae:
                 DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[iVar3 + iVar7] = (short)_tribeID;
-                DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[iVar3 + iVar7] = DAT_TribesState::instance.tribes[_tribeID].uid;
+                DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[iVar3 + iVar7]
+                    = DAT_TribesState::instance.tribes[_tribeID].uid;
                 return _tribeID;
             }
         }

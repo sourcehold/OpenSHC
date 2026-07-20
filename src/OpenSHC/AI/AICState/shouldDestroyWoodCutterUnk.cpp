@@ -1,13 +1,12 @@
-#include "OpenSHC/AI/AICState.hpp"
-#include "OpenSHC/AI/AITypeA.hpp"
-
 #include "OpenSHC/AI/AIVState.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
+#include "OpenSHC/AI/AICState.hpp"
+#include "OpenSHC/AI/AITypeA.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 
-#include "OpenSHC/Globals/DAT_GameState.hpp"
-#include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_AIVState.hpp"
+#include "OpenSHC/Globals/DAT_BuildingsState.hpp"
+#include "OpenSHC/Globals/DAT_GameState.hpp"
 
 namespace OpenSHC {
 namespace AI {
@@ -20,9 +19,9 @@ namespace AI {
             return FALSE;
         }
         if (DAT_AIVState::instance.mapExtraInfo.totalWoodAvailable < 1) {
-            _hut = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::findFirstBuildingIDForPlayerAndType, DAT_BuildingsState::ptr)(playerID, Map::Buildings::BT_WOODCUTTERSHUT);
-        }
-        else {
+            _hut = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::findFirstBuildingIDForPlayerAndType,
+                DAT_BuildingsState::ptr)(playerID, Map::Buildings::BT_WOODCUTTERSHUT);
+        } else {
             if (DAT_GameState::instance.playerDataArray[playerID].currentResources[2] < 0x15) {
                 return FALSE;
             }
@@ -37,8 +36,11 @@ namespace AI {
         if (_hut == 0) {
             return FALSE;
         }
-        MACRO_CALL_MEMBER(AIVState_Func::set0x13ValueTo10InHeatMap, DAT_AIVState::ptr)((int)(short)DAT_BuildingsState::instance.buildings[_hut].x, (int)(short)DAT_BuildingsState::instance.buildings[_hut].y);
-        MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::giveBackResourceForDestroyedBuilding, DAT_BuildingsState::ptr)(_hut, playerID, 50);
+        MACRO_CALL_MEMBER(AIVState_Func::set0x13ValueTo10InHeatMap, DAT_AIVState::ptr)(
+            (int)(short)DAT_BuildingsState::instance.buildings[_hut].x,
+            (int)(short)DAT_BuildingsState::instance.buildings[_hut].y);
+        MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::giveBackResourceForDestroyedBuilding,
+            DAT_BuildingsState::ptr)(_hut, playerID, 50);
         MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(_hut);
         return TRUE;
     }
