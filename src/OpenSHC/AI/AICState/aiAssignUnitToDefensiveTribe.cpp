@@ -1,11 +1,10 @@
 #include "OpenSHC/AI/AICState.func.hpp"
+#include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/AI/AITypeA.hpp"
 
-#include "OpenSHC/Map/Units/TribesState.func.hpp"
-
 #include "OpenSHC/Globals/DAT_GameState.hpp"
-#include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
 
 namespace OpenSHC {
 namespace AI {
