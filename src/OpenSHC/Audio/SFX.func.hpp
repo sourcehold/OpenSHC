@@ -17,6 +17,10 @@ namespace Audio {
             &OpenSHC::Audio::SFX::UpdateUnitLossSpeechFeedback)
         UpdateUnitLossSpeechFeedback;
 
+        MACRO_FUNCTION_RESOLVER(int(__cdecl*)(int larger, int smaller), true, Address::SHC_3BB0A8C1_0x0044AAB0,
+            &OpenSHC::Audio::SFX::UpdateUnitLossSpeechFeedback_RelativeValueForGenie)
+        UpdateUnitLossSpeechFeedback_RelativeValueForGenie;
+
     } // namespace SFX_Func
 } // namespace Audio
 } // namespace OpenSHC

@@ -2,7 +2,6 @@
 
 #include "OpenSHC/AI/AICState.func.hpp"
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
-#include "OpenSHC/Game.func.hpp"
 #include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_AICState.hpp"
@@ -22,8 +21,6 @@
 namespace OpenSHC {
 namespace Audio {
     namespace SFX {
-
-        // TODO: "RelativeValueForGenie" content needs to be known by this function
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0044B840
         void __stdcall UpdateUnitLossSpeechFeedback()
@@ -54,31 +51,34 @@ namespace Audio {
                 }
             }
             DAT_CurrentPlayerUnitLossesHistory::instance[0] = DAT_CurrentPlayerUnitLosses::instance;
-            for (int i = 1; i < 9; ++i) {
-                Dat_UnitValueLossesHistoryPerEnemyPlayer::instance[i][0]
-                    = DAT_UnitValueLossesPerEnemyPlayer::instance[i];
-            }
             DAT_TotalUnitValueLossesEnemyHistory::instance[0] = 0;
             for (int i = 1; i < 9; ++i) {
                 DAT_TotalUnitValueLossesEnemyHistory::instance[0] += DAT_UnitValueLossesPerEnemyPlayer::instance[i];
+                Dat_UnitValueLossesHistoryPerEnemyPlayer::instance[i][0]
+                    = DAT_UnitValueLossesPerEnemyPlayer::instance[i];
             }
-            int iVar1 = DAT_CurrentPlayerUnitLosses::instance + DAT_TotalUnitValueLossesEnemyHistory::instance[0];
+            int iVar1
+                = DAT_CurrentPlayerUnitLossesHistory::instance[0] + DAT_TotalUnitValueLossesEnemyHistory::instance[0];
             int iVar2 = DAT_CurrentPlayerUnitLossesHistory::instance[1]
                 + DAT_TotalUnitValueLossesEnemyHistory::instance[1] + DAT_CurrentPlayerUnitLossesHistory::instance[2]
                 + DAT_TotalUnitValueLossesEnemyHistory::instance[2];
             if (DAT_GL_Counter::instance >= 2 && 50 > iVar1 && iVar2 > 150) {
-                int _relative1 = MACRO_CALL(Game_Func::RelativeValueForGenie)(
-                    DAT_CurrentPlayerUnitLossesHistory::instance[1] + DAT_CurrentPlayerUnitLossesHistory::instance[2],
-                    DAT_TotalUnitValueLossesEnemyHistory::instance[1]
-                        + DAT_TotalUnitValueLossesEnemyHistory::instance[2]);
+
+                int smallPlayerUnitLossesSum
+                    = DAT_CurrentPlayerUnitLossesHistory::instance[1] + DAT_CurrentPlayerUnitLossesHistory::instance[2];
+                int smallTotalEnemyUnitLossesSum = DAT_TotalUnitValueLossesEnemyHistory::instance[1]
+                    + DAT_TotalUnitValueLossesEnemyHistory::instance[2];
+                int _relative1 = MACRO_CALL(SFX_Func::UpdateUnitLossSpeechFeedback_RelativeValueForGenie)(
+                    smallPlayerUnitLossesSum, smallTotalEnemyUnitLossesSum);
+
                 int playerUnitLossesSum = 0;
                 int totalEnemyUnitLossesSum = 0;
                 for (int i = 1; i < 10; ++i) {
                     playerUnitLossesSum += DAT_CurrentPlayerUnitLossesHistory::instance[i];
                     totalEnemyUnitLossesSum += DAT_TotalUnitValueLossesEnemyHistory::instance[i];
                 }
-                int _relative2
-                    = MACRO_CALL(Game_Func::RelativeValueForGenie)(playerUnitLossesSum, totalEnemyUnitLossesSum);
+                int _relative2 = MACRO_CALL(SFX_Func::UpdateUnitLossSpeechFeedback_RelativeValueForGenie)(
+                    playerUnitLossesSum, totalEnemyUnitLossesSum);
 
                 if (_relative1 == 0 && _relative2 == 0) {
                     if (DAT_GameCore::instance.genieVoiceActive) {
@@ -158,10 +158,11 @@ namespace Audio {
             for (int i = 0; i < 9; ++i) {
                 DAT_UnitValueLossesPerEnemyPlayer::instance[i] = 0;
             }
-            if (1 < DAT_DestroyedBuildingsCount::instance
-                && 5 < DAT_DestroyedBuildingsCountHistory::instance[3] + DAT_DestroyedBuildingsCountHistory::instance[2]
+            if (DAT_DestroyedBuildingsCount::instance > 1
+                && DAT_DestroyedBuildingsCountHistory::instance[3] + DAT_DestroyedBuildingsCountHistory::instance[2]
                         + DAT_DestroyedBuildingsCountHistory::instance[1]
-                        + DAT_DestroyedBuildingsCountHistory::instance[0] + DAT_DestroyedBuildingsCount::instance) {
+                        + DAT_DestroyedBuildingsCountHistory::instance[0] + DAT_DestroyedBuildingsCount::instance
+                    > 5) {
                 if (DAT_GameCore::instance.genieVoiceActive) {
                     /* "Where is your Castle" */
                     MACRO_CALL_MEMBER(SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(s_Genie_41_wav_005a4e1c);
@@ -170,7 +171,6 @@ namespace Audio {
                 DAT_DestroyedBuildingsCountHistory::instance[0] = 0;
                 DAT_DestroyedBuildingsCountHistory::instance[1] = 0;
                 DAT_DestroyedBuildingsCountHistory::instance[2] = 0;
-                DAT_DestroyedBuildingsCountHistory::instance[3] = 0;
             }
             DAT_DestroyedBuildingsCountHistory::instance[3] = DAT_DestroyedBuildingsCountHistory::instance[2];
             DAT_DestroyedBuildingsCountHistory::instance[2] = DAT_DestroyedBuildingsCountHistory::instance[1];
@@ -178,6 +178,55 @@ namespace Audio {
             DAT_DestroyedBuildingsCountHistory::instance[0] = DAT_DestroyedBuildingsCount::instance;
             DAT_DestroyedBuildingsCount::instance = 0;
         }
+
+        // FUNCTION: STRONGHOLDCRUSADER 0x0044AAB0
+        int __cdecl UpdateUnitLossSpeechFeedback_RelativeValueForGenie(int larger, int smaller)
+        {
+            if (larger < 1) {
+                larger = 1;
+            }
+            if (smaller < 1) {
+                smaller = 1;
+            }
+            if (larger > smaller) {
+                int iVar1 = (larger * 100) / smaller;
+                if (iVar1 < 150) {
+                    return 0;
+                }
+                if (iVar1 < 170) {
+                    return 1;
+                }
+                if (iVar1 < 190) {
+                    return 2;
+                }
+                if (iVar1 < 210) {
+                    return 3;
+                }
+                if (iVar1 < 230) {
+                    return 4;
+                }
+                if (iVar1 < 250) {
+                    return 5;
+                }
+                if (iVar1 < 270) {
+                    return 6;
+                }
+                return 7;
+            } else {
+                int iVar1 = (smaller * 100) / larger;
+                if (iVar1 < 150) {
+                    return 0;
+                }
+                if (iVar1 < 190) {
+                    return -1;
+                }
+                if (iVar1 < 240) {
+                    return -2;
+                }
+                return -3;
+            }
+        }
+
     }
 }
 }
