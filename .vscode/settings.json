@@ -4,9 +4,7 @@
   "editor.formatOnSaveMode": "file",
   "editor.indentSize": 4,
   "editor.tabSize": 4,
-  "editor.rulers": [
-    120
-  ],
+  "editor.rulers": [120],
   "cmake.useCMakePresets": "always",
   "cmake.useVsDeveloperEnvironment": "never",
   "files.associations": {
@@ -61,5 +59,12 @@
     "cctype": "cpp",
     "csetjmp": "cpp",
     "cstdarg": "cpp"
-  }
+  },
+  "python-envs.pythonProjects": [
+    {
+      "path": ".",
+      "envManager": "ms-python.python:system",
+      "packageManager": "ms-python.python:pip"
+    }
+  ]
 }

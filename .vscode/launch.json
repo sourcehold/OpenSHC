@@ -18,6 +18,14 @@
       "program": "tools/import/ghidra-importer.py",
       "console": "integratedTerminal",
       "args": "--sarif 'Stronghold Crusader.exe.sarif' --output-dir 'src' --overwrite-all --verbose"
+    },
+    {
+      "name": "Debug ghidra function rewriter",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "tools/mcp/ghidra_scripts/functionrewriter/__main__.py",
+      "console": "integratedTerminal",
+      "args": ""
     }
   ]
 }
