@@ -16273,9 +16273,9 @@ SHC_3BB0A8C1_0x0044A0F0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0044A1B0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0044A240 | 0.0% | Pending
+SHC_3BB0A8C1_0x0044A240 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0044A290 | 0.0% | Pending
+SHC_3BB0A8C1_0x0044A290 | 100.0% | Reimplemented, security cookie and function present, but uses dlls version
 
 SHC_3BB0A8C1_0x0044A360 | 0.0% | Pending
 
@@ -16285,7 +16285,7 @@ SHC_3BB0A8C1_0x0044A460 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0044A500 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0044A5A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0044A5A0 | 100.0% | Reimplemented, security cookie and function present, but uses dlls version
 
 SHC_3BB0A8C1_0x0044A620 | 0.0% | Pending
 

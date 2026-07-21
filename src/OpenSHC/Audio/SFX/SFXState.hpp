@@ -38,7 +38,7 @@ namespace Audio {
             pointer DAT_SoundFileNameArrayMemoryPointer; // 0x00000008 length: 4
             char* DAT_SoundFileNamePointersArray[1000]; // 0x0000000C length: 4000
             int DAT_SoundVolumeArray[1000]; // 0x00000FAC length: 4000
-            undefined4 DAT_SoundTotalCount; // 0x00001F4C length: 4
+            int DAT_SoundTotalCount; // 0x00001F4C length: 4
             SoundStructure1 DAT_SoundStructures[1000]; // 0x00001F50 length: 24000
             SoundStructure2 DAT_SoundStructures2[270]; // 0x00007D10 length: 4320
             int ambientEventCounters[10][4]; // 0x00008DF0 length: 160
