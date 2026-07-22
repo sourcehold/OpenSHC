@@ -28,7 +28,7 @@ namespace OS {
     void* _memset(void* _Dst, int _Val, size_t _Size) { return memset(_Dst, _Val, _Size); }
 
     // STUB: STRONGHOLDCRUSADER 0x0057F6DA
-    int _sprintf(char* _Dest, char* _Format, ...)
+    int _sprintf(char* _Dest, char const* _Format, ...)
     {
         // needed for proxy
         va_list args;
