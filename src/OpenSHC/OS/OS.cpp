@@ -28,7 +28,7 @@ namespace OS {
     void* _memset(void* _Dst, int _Val, size_t _Size) { return memset(_Dst, _Val, _Size); }
 
     // STUB: STRONGHOLDCRUSADER 0x0057F6DA
-    int _sprintf(char* _Dest, char* _Format, ...)
+    int _sprintf(char* _Dest, char const* _Format, ...)
     {
         // needed for proxy
         va_list args;
@@ -39,7 +39,7 @@ namespace OS {
     }
 
     // STUB: STRONGHOLDCRUSADER 0x0057F8EE
-    int __stricmp(char* _Str1, char* _Str2) { return _stricmp(_Str1, _Str2); }
+    int __stricmp(char const* _Str1, char const* _Str2) { return _stricmp(_Str1, _Str2); }
 
     // STUB: STRONGHOLDCRUSADER 0x0057FA62
     int _atexit(_atexit_t* param_1) { return atexit(param_1); }

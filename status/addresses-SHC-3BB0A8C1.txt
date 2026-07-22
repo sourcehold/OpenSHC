@@ -16281,9 +16281,9 @@ SHC_3BB0A8C1_0x0044A360 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0044A3A0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0044A460 | 0.0% | Pending
+SHC_3BB0A8C1_0x0044A460 | 100.0% | Reimplemented, Security Cookie of DLL
 
-SHC_3BB0A8C1_0x0044A500 | 0.0% | Pending
+SHC_3BB0A8C1_0x0044A500 | 100.0% | Reimplemented, Security Cookie of DLL
 
 SHC_3BB0A8C1_0x0044A5A0 | 0.0% | Pending
 
