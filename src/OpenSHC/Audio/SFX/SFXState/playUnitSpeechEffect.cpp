@@ -5,6 +5,7 @@
 
 #include "OpenSHC/Audio/mss/SoundSystem.func.hpp"
 #include "OpenSHC/OS.func.hpp"
+#include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_LastSpeechSFXFilename.hpp"
@@ -38,10 +39,10 @@ namespace Audio {
 
             char fullSoundPath[64];
             if (DAT_GameCore::instance.historicCampaignNumber == 2) {
-                MACRO_CALL(OS_Func::_sprintf)(fullSoundPath, "fx\\speech\\%s",
+                MACRO_CALL(OS_Func::_sprintf)(fullSoundPath, s_fx_speech_s_005a4d68,
                     DAT_SpeechDefinedData::instance.DAT_SpeechEffectPathArray[iVar4 + speechEffectID].arabianSound);
             } else {
-                MACRO_CALL(OS_Func::_sprintf)(fullSoundPath, "fx\\speech\\%s",
+                MACRO_CALL(OS_Func::_sprintf)(fullSoundPath, s_fx_speech_s_005a4d68,
                     DAT_SpeechDefinedData::instance.DAT_SpeechEffectPathArray[iVar4 + speechEffectID].europeanSound);
             }
 
