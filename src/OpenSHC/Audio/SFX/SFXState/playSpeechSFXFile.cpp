@@ -5,6 +5,7 @@
 
 #include "OpenSHC/Audio/mss/SoundSystem.func.hpp"
 #include "OpenSHC/OS.func.hpp"
+#include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_LastSpeechSFXFilename.hpp"
 #include "OpenSHC/Globals/DAT_SoundSystemState.hpp"
@@ -27,7 +28,7 @@ namespace Audio {
             strcpy(DAT_LastSpeechSFXFilename::instance, filename);
 
             char _filePath[64];
-            MACRO_CALL(OS_Func::_sprintf)(_filePath, "fx\\speech\\%s", filename);
+            MACRO_CALL(OS_Func::_sprintf)(_filePath, s_fx_speech_s_005a4d68, filename);
             MACRO_CALL_MEMBER(MSS::SoundSystem_Func::playSoundOnSpeechStream, DAT_SoundSystemState::ptr)(_filePath);
         }
 
