@@ -15,7 +15,7 @@ namespace AI {
             return 0;
         }
 
-        return this->DAT_AICArray[(aiType - 1)].buildInterval;
+        return this->aics[(aiType - 1)].buildInterval;
     }
 }
 }
