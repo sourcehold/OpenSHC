@@ -8,49 +8,17 @@ Accepted formats:
 
 - Function: `wipeAICMemory`
 - Class/function: `AICState::wipeAICMemory`
-- Path: `src/OpenSHC/AI/AICState/wipeAICMemory.cpp`
 - Address: `0x004C6D30`
 
 ---
 
 ## Resolution
 
-### Function
+Powershell script call: `tools/reimplementation-helper/Get-Function-Data.ps1 -Partial -Query <input>`
 
-Search `src/**/*.cpp` for implementation filenames matching the function name.
-
-### Class/function
-
-Restrict the search to the class folder.
-
-Example:
-
-`AICState::wipeAICMemory` → `src/**/AICState/wipeAICMemory.cpp`
-
-### Path
-
-Verify that the `.cpp` file exists.
-
-### Address
-
-Requires an available CLI or optimized text-search tool.
-
-Search all `.cpp` files under `src/` for:
-
-`FUNCTION: STRONGHOLDCRUSADER <hex-address>`
-
-Requirements:
-
-- Use the search tool only.
-- Do not inspect files individually.
-
-### Match Rules
-
-For function, class/function, and address resolution:
-
-- One match → return path.
-- Zero matches → fail.
-- Multiple matches → fail and report matches.
+- If a function name was requested and the resulting name is different, mention the partial match.
+- Use the implementation file and the exists parameter.
+- Report failure if implementation file does not exist.
 
 ---
 
@@ -63,7 +31,6 @@ On failure:
 - Report:
   - Input.
   - Reason.
-  - Matches (if applicable).
 
 ---
 
