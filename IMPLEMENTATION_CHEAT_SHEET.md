@@ -170,3 +170,87 @@ Often, however, these indicate that the compiler optimized certain branches by r
 These are very hard to get right, since it is sometimes unclear which parts need to be unified and which code needs to be doubled at different positions.
 Despite this, still try to remove the GOTOs.
 They might be worth trying in very tricky cases, but they were usually seen as code smell even back then and were unlikely to be present in the code.
+
+## Functions
+
+### Implicit functions
+
+Certain structures produce functions via the compiler that we do not directly call in source.
+We simply accept those cases and the mismatches. Although, they should be mentioned in status texts.
+
+- Casts, from and to float values, will produce such functions. `__ftol2` for example converts a float to an integer.
+- `security_cookie` structures are placed by the compiler to safeguard against buffer overflows. This protection was active in the original and so it is here. The validation happens through such an implicit function.
+
+### Warnings
+
+The compiler can sometimes generate warnings due to the usage of old (according to MSVC) unsafe C functions.
+The assembly and source suggests its usage, however.
+In these cases, it is ok to disable the warning with a note at the top of the file.
+
+```cpp
+// disable deprecation warnings for strcpy
+#pragma warning(disable : 4996)
+```
+
+### Intrinsics
+
+Certain functions from the default library are handled differently by the compiler.
+They are replaced by specific assembly instructions or otherwise inlined.
+
+A list of all intrinsics can be found in `intrin.h` in the std library, but these are mainly very low level instructions.
+However, there are also C functions that can be replaced by intrinsics. The following attempts to extract these from the header:
+
+| Intrinsic | Does                                                                                           |
+| --------- | ---------------------------------------------------------------------------------------------- |
+| `memcpy`  | Copies a memory block. **Does not support overlapping regions** (use `memmove` for overlap).   |
+| `memset`  | Fills a memory block with a byte value.                                                        |
+| `memcmp`  | Compares two memory blocks byte-by-byte.                                                       |
+| `memchr`  | Searches memory for the first occurrence of a byte.                                            |
+| `strcpy`  | Copies a null-terminated C string.                                                             |
+| `strlen`  | Returns the length of a null-terminated string (excluding `\0`).                               |
+| `strcmp`  | Compares two null-terminated C strings.                                                        |
+| `strcat`  | Appends one null-terminated C string to another.                                               |
+| `strncpy` | Copies up to N characters from a string; **may not null-terminate** if the source is too long. |
+| `strncmp` | Compares up to N characters of two strings.                                                    |
+| `wcscpy`  | Copies a null-terminated wide-character string.                                                |
+| `wcslen`  | Returns the length of a null-terminated wide string.                                           |
+| `ceil`    | Rounds a floating-point value upward to the nearest integer value.                             |
+| `abs`     | Returns the absolute value of an `int`.                                                        |
+| `labs`    | Returns the absolute value of a `long`.                                                        |
+| `longjmp` | Restores a saved execution context created by `setjmp`, continuing execution from that point.  |
+| `_setjmp` | Saves the current execution context for later restoration with `longjmp`.                      |
+
+In cases where the decompiler seems to perform one of these actions via simple instructions, one can also try one of these functions.
+
+Example `strcpy`:
+```cpp
+char* pcVar2 = filePath;
+do {
+    char cVar1 = *pcVar2;
+    pcVar2[0x1127e54 - (int)filePath] = cVar1;
+    pcVar2 = pcVar2 + 1;
+} while (cVar1 != '\0');
+```
+
+Example `strcmp`:
+```cpp
+int iVar2 = 9;
+int bVar7 = true;
+char*pcVar5 = pcVar4;
+char* pcVar6 = "Null.wav";
+do {
+    if (iVar2 == 0) break;
+    iVar2 = iVar2 + -1;
+    bVar7 = *pcVar5 == *pcVar6;
+    pcVar5 = pcVar5 + 1;
+    pcVar6 = pcVar6 + 1;
+} while (bVar7);
+```
+
+### CRT Functions
+
+Crusader uses a rather small subset of std functions. The ones we are still resolving are all placed in `OpenSHC\OS.hpp`.
+A prominent example are `malloc` and `free`, where it is simply needed to use the games variants during hooking to avoid memory leaks,
+since the memory management in the std library is rather complex.
+
+For other std functions, mostly the math functions, we decided to just use the std library directly.
