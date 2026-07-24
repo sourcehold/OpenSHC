@@ -1,2 +1,3 @@
 mcp
 uv
+-e git+https://github.com/gynt/ghidra-cpp

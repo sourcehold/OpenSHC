@@ -8,10 +8,10 @@ This server provides tools for:
 - Generating assembly diffs
 
 Usage:
-    Claude:
-        add a mcpServers entry to the Claude Desktop App config file
-    Testing:
-        python decomp_mcp_server.py
+  Claude:
+    add a mcpServers entry to the Claude Desktop App config file
+  Testing:
+    python decomp_mcp_server.py
 """
 
 import asyncio
@@ -32,333 +32,361 @@ logging.basicConfig(stream=sys.stderr)
 
 from mcp.server.fastmcp import FastMCP
 from mcp.types import (
-    Resource,
-    Tool,
-    TextContent,
-    ImageContent,
-    EmbeddedResource,
-    LoggingLevel
+  Resource,
+  Tool,
+  TextContent,
+  ImageContent,
+  EmbeddedResource,
+  LoggingLevel
 )
 import mcp.server.stdio
 
 PATH_CMAKE_OPENSHC_SOURCES = Path("cmake/openshc-sources.txt.local")
 if not PATH_CMAKE_OPENSHC_SOURCES.exists():
-    raise Exception(f"could not find cmake core sources txt file: {str(PATH_CMAKE_OPENSHC_SOURCES)}")
+  raise Exception(f"could not find cmake core sources txt file: {str(PATH_CMAKE_OPENSHC_SOURCES)}")
 
 # Initialize MCP server
 mcp = FastMCP("decomp-helper")
 
 def compile_project(truncated: bool = True, no_output_on_succes: bool = True) -> tuple[bool, str, str]:
-    """
-    Compile the C++ project using MSVC. Must be executed after writing new cpp file contents.
-    
-    Returns:
-        Tuple of (success, stdout, stderr)
-    """
-    # Build compiler command
-    cmd = ["build.bat", "RelWithDebInfo", "OpenSHC.dll"]
-    
-    try:
-        result = subprocess.run(
-            cmd,
-            capture_output=True,
-            text=True,
-            cwd=".",
-            stdin=subprocess.DEVNULL,
-        )
-        code = result.returncode
-        stdout = result.stdout
-        stderr = result.stderr
-        if stderr and code == 0:
-            code = -1
-        if truncated:
-            needle1 = "-- Build files have been written to:"
-            if needle1 in stdout:
-                start = stdout.index(needle1)
-                eol_index = stdout.index("\n", start) + 1
-                stdout = stdout[eol_index:]
-        if no_output_on_succes and code == 0:
-            return True, "", ""
-        return False, stdout, stderr
-    except Exception as e:
-        return False, "", str(e)
+  """
+  Compile the C++ project using MSVC. Must be executed after writing new cpp file contents.
+  
+  Returns:
+    Tuple of (success, stdout, stderr)
+  """
+  # Build compiler command
+  cmd = ["build.bat", "RelWithDebInfo", "OpenSHC.dll"]
+  
+  try:
+    result = subprocess.run(
+      cmd,
+      capture_output=True,
+      text=True,
+      cwd=".",
+      stdin=subprocess.DEVNULL,
+    )
+    code = result.returncode
+    stdout = result.stdout
+    stderr = result.stderr
+    if stderr and code == 0:
+      code = -1
+    if truncated:
+      needle1 = "-- Build files have been written to:"
+      if needle1 in stdout:
+        start = stdout.index(needle1)
+        eol_index = stdout.index("\n", start) + 1
+        stdout = stdout[eol_index:]
+    if no_output_on_succes and code == 0:
+      return True, "", ""
+    return False, stdout, stderr
+  except Exception as e:
+    return False, "", str(e)
 
 
 
 @mcp.tool()
 def extract_multiple_functions_assembly_diffs(function_names: List[str], match_percentage_only: bool = False) -> tuple[bool, List[Any], str, str]:
-    """
-    Extract assembly diff for multiple specific functions, comparing the original binary to the reimplementation source code.
-    Should be called after writing and compiling a cpp file, see 'compile_cpp_code_for_function'.
-    
-    Args:
-        function_names: List of names of the functions to extract, fully namespaced using '::'
-        match_percentage_only: False by default. If True only returns the % matching between original and reimplementation.
-    
-    Returns:
-        Tuple of (success, diffs of the functions, stdout, stderr)
-    """
-    cmd = [str(Path("reccmp") / "dll" / "run.bat"), "reccmp-reccmp", "--target", "STRONGHOLDCRUSADER", "--json", "diff.json"]
-    
-    try:
-        result = subprocess.run(
-            cmd,
-            capture_output=True,
-            text=True,
-            cwd=".",
-            stdin=subprocess.DEVNULL,
-        )
-        if result.returncode != 0:
-            raise Exception(f"could not create diff: {result.stderr}, command: {' '.join(cmd)}")
-    except Exception as e:
-        return False, ["error"], "", f"could not execute reccmp/dll/run: {str(e)}"
-    try:
-        diff = json.loads(Path("reccmp/dll/diff.json").read_text())
-    except Exception as e:
-        return False, ["error"], "", f"could not load reccmp/dll/diff.json: {str(e)}"
-    all_data = diff['data']
-    results = []
-    for function_name in function_names:
-        data = [entry for entry in all_data if entry['name'] == function_name]
-        if len(data) == 0:
-            return False, ["error"], "", f"no function with name '{function_name}' in .pdb file. Cannot execute diff"
-        data = data[0]
-        if match_percentage_only:
-            data = {
-                'address': data['address'],
-                'name': data['name'],
-                'matching': data['matching']
-            }
-        results.append(data)
-    return True, results, "", ""
+  """
+  Extract assembly diff for multiple specific functions, comparing the original binary to the reimplementation source code.
+  Should be called after writing and compiling a cpp file, see 'compile_cpp_code_for_function'.
+  
+  Args:
+    function_names: List of names of the functions to extract, fully namespaced using '::'
+    match_percentage_only: False by default. If True only returns the % matching between original and reimplementation.
+  
+  Returns:
+    Tuple of (success, diffs of the functions, stdout, stderr)
+  """
+  cmd = [str(Path("reccmp") / "dll" / "run.bat"), "reccmp-reccmp", "--target", "STRONGHOLDCRUSADER", "--json", "diff.json"]
+  
+  try:
+    result = subprocess.run(
+      cmd,
+      capture_output=True,
+      text=True,
+      cwd=".",
+      stdin=subprocess.DEVNULL,
+    )
+    if result.returncode != 0:
+      raise Exception(f"could not create diff: {result.stderr}, command: {' '.join(cmd)}")
+  except Exception as e:
+    return False, ["error"], "", f"could not execute reccmp/dll/run: {str(e)}"
+  try:
+    diff = json.loads(Path("reccmp/dll/diff.json").read_text())
+  except Exception as e:
+    return False, ["error"], "", f"could not load reccmp/dll/diff.json: {str(e)}"
+  all_data = diff['data']
+  results = []
+  for function_name in function_names:
+    data = [entry for entry in all_data if entry['name'] == function_name]
+    if len(data) == 0:
+      return False, ["error"], "", f"no function with name '{function_name}' in .pdb file. Cannot execute diff"
+    data = data[0]
+    if match_percentage_only:
+      data = {
+        'address': data['address'],
+        'name': data['name'],
+        'matching': data['matching']
+      }
+    results.append(data)
+  return True, results, "", ""
 
 
 @mcp.tool()
 def extract_function_assembly_diff(function_name: str) -> tuple[bool, List[Any], str, str]:
-    """
-    Extract assembly diff for a specific function, comparing the original binary to the reimplementation source code.
-    Should be called after writing and compiling a cpp file, see 'compile_cpp_code_for_function'.
-    
-    Args:
-        function_name: Name of the function to extract, fully namespaced using '::'
-    
-    Returns:
-        Tuple of (success, diff, stdout, stderr)
-    """
-    return extract_multiple_functions_assembly_diffs([function_name])
+  """
+  Extract assembly diff for a specific function, comparing the original binary to the reimplementation source code.
+  Should be called after writing and compiling a cpp file, see 'compile_cpp_code_for_function'.
+  
+  Args:
+    function_name: Name of the function to extract, fully namespaced using '::'
+  
+  Returns:
+    Tuple of (success, diff, stdout, stderr)
+  """
+  return extract_multiple_functions_assembly_diffs([function_name])
 
 def function_name_to_cpp_path(function_name: str, base_path = Path("src")) -> tuple[bool, str, str]:
-    parts = function_name.split("::")
-    path = base_path
-    for part in parts:
-        if "." in part:
-            return False, "", "illegal character in cpp file path: ."
-        path = path / part
-    return True, f"{str(path)}.cpp", ""
+  parts = function_name.split("::")
+  path = base_path
+  for part in parts:
+    if "." in part:
+      return False, "", "illegal character in cpp file path: ."
+    path = path / part
+  return True, f"{str(path)}.cpp", ""
 
 def write_source_for_function(function_name: str, contents: str, should_exist: bool = False):
-    # Translate the function name into a path
-    rstate, rresult, rerr = function_name_to_cpp_path(function_name=function_name)
-    if not rstate:
-        return rstate, "", f"could not resolve function name to file path: {rerr}"
-    path = Path(rresult)
-    if should_exist and not path.exists():
-        return False, "", f"cpp file path does not exist: {str(path)}"
-    path.write_text(contents, newline="\n")
+  # Translate the function name into a path
+  rstate, rresult, rerr = function_name_to_cpp_path(function_name=function_name)
+  if not rstate:
+    return rstate, "", f"could not resolve function name to file path: {rerr}"
+  path = Path(rresult)
+  if should_exist and not path.exists():
+    return False, "", f"cpp file path does not exist: {str(path)}"
+  path.write_text(contents, newline="\n")
 
-    # Ensure the cpp file is included in the build
-    csentry = str(path).replace("\\", "/")
-    if not csentry.startswith("src/"):
-        return False, "", f"invalid cmake/openshc-sources.txt entry: {csentry}"
-    
-    lines = PATH_CMAKE_OPENSHC_SOURCES.read_text().splitlines(False)
-    if not csentry in lines:
-        lines.append(csentry)
-    PATH_CMAKE_OPENSHC_SOURCES.write_text('\n'.join(lines) + '\n', newline='\n')
+  # Ensure the cpp file is included in the build
+  csentry = str(path).replace("\\", "/")
+  if not csentry.startswith("src/"):
+    return False, "", f"invalid cmake/openshc-sources.txt entry: {csentry}"
+  
+  lines = PATH_CMAKE_OPENSHC_SOURCES.read_text().splitlines(False)
+  if not csentry in lines:
+    lines.append(csentry)
+  PATH_CMAKE_OPENSHC_SOURCES.write_text('\n'.join(lines) + '\n', newline='\n')
 
-    return True, "", ""
+  return True, "", ""
 
 @mcp.tool()
 def compile_cpp_code_for_function(function_name: str, contents: str) -> tuple[bool, str, str]:
-    """
-    Write and compile cpp code for function identified by fully namespaced function name.
-    
-    Args:
-        function_name: Name of the function to extract, fully namespaced using '::'
-        contents: New contents of the file
-    
-    Returns:
-        Tuple of (success, stdout, stderr)
-    """
-    rstate, rresult, rerr = write_source_for_function(function_name=function_name, contents=contents)
+  """
+  Write and compile cpp code for function identified by fully namespaced function name.
+  
+  Args:
+    function_name: Name of the function to extract, fully namespaced using '::'
+    contents: New contents of the file
+  
+  Returns:
+    Tuple of (success, stdout, stderr)
+  """
+  rstate, rresult, rerr = write_source_for_function(function_name=function_name, contents=contents)
 
-    if not rstate:
-        return rstate, rresult, rerr
-    
-    # Compile the project and return the resulting state
-    return compile_project()
+  if not rstate:
+    return rstate, rresult, rerr
+  
+  # Compile the project and return the resulting state
+  return compile_project()
 
 @mcp.tool()
 def compile_cpp_codes_for_functions(function_contents: List[Tuple[str, str]]) -> Tuple[bool, str, str]:
-    """
-    Write and compile cpp code for multiple functions identified by fully namespaced function names.
-    
-    Args:
-        function_contents a tuple of:
-            function_name: Name of the function to extract, fully namespaced using '::'
-            contents: New contents of the file
-    
-    Returns:
-        Tuple of (success, stdout, stderr)
-    """
-    for function_name, contents in function_contents:
-        rstate, rresult, rerr = write_source_for_function(function_name=function_name, contents=contents)
-        if not rstate:
-            return rstate, rresult, rerr
-    # Compile the project and return the resulting state
-    return compile_project()
+  """
+  Write and compile cpp code for multiple functions identified by fully namespaced function names.
+  
+  Args:
+    function_contents a tuple of:
+      function_name: Name of the function to extract, fully namespaced using '::'
+      contents: New contents of the file
+  
+  Returns:
+    Tuple of (success, stdout, stderr)
+  """
+  for function_name, contents in function_contents:
+    rstate, rresult, rerr = write_source_for_function(function_name=function_name, contents=contents)
+    if not rstate:
+      return rstate, rresult, rerr
+  # Compile the project and return the resulting state
+  return compile_project()
 
 @mcp.tool()
 def exclude_function_cpp_code_from_compilation(function_name: str) -> tuple[bool, str, str]:
-    """
-    Excludes the generated cpp file from the cmake sources list, avoiding its compilation.
-    
-    Args:
-        function_name: Name of the function to exclude, fully namespaced using '::'
-    
-    Returns:
-        Tuple of (success, stdout, stderr)
-    """
-    # Translate the function name into a path
-    rstate, rresult, rerr = function_name_to_cpp_path(function_name=function_name)
-    if not rstate:
-        return rstate, "", f"could not resolve function name to file path: {rerr}"
-    path = Path(rresult)
-    if not path.exists():
-        return False, "", f"could not resolve function name to file path, file does not exist: {rerr}"
+  """
+  Excludes the generated cpp file from the cmake sources list, avoiding its compilation.
+  
+  Args:
+    function_name: Name of the function to exclude, fully namespaced using '::'
+  
+  Returns:
+    Tuple of (success, stdout, stderr)
+  """
+  # Translate the function name into a path
+  rstate, rresult, rerr = function_name_to_cpp_path(function_name=function_name)
+  if not rstate:
+    return rstate, "", f"could not resolve function name to file path: {rerr}"
+  path = Path(rresult)
+  if not path.exists():
+    return False, "", f"could not resolve function name to file path, file does not exist: {rerr}"
 
-    # Ensure the cpp file is included in the build
-    csentry = str(path).replace("\\", "/")
-    if not csentry.startswith("src/"):
-        return False, "", f"invalid cmake/openshc-sources.txt entry: {csentry}"
-    
-    # Store a backup
-    i = 1
+  # Ensure the cpp file is included in the build
+  csentry = str(path).replace("\\", "/")
+  if not csentry.startswith("src/"):
+    return False, "", f"invalid cmake/openshc-sources.txt entry: {csentry}"
+  
+  # Store a backup
+  i = 1
+  pcandidate = PATH_CMAKE_OPENSHC_SOURCES.with_name(PATH_CMAKE_OPENSHC_SOURCES.name + f".{i:{0}>3}")
+  while pcandidate.exists():
+    i += 1
     pcandidate = PATH_CMAKE_OPENSHC_SOURCES.with_name(PATH_CMAKE_OPENSHC_SOURCES.name + f".{i:{0}>3}")
-    while pcandidate.exists():
-        i += 1
-        pcandidate = PATH_CMAKE_OPENSHC_SOURCES.with_name(PATH_CMAKE_OPENSHC_SOURCES.name + f".{i:{0}>3}")
-    pcandidate.write_text(PATH_CMAKE_OPENSHC_SOURCES.read_text())
+  pcandidate.write_text(PATH_CMAKE_OPENSHC_SOURCES.read_text())
 
-    # Produce the new file without the line
-    lines = PATH_CMAKE_OPENSHC_SOURCES.read_text().splitlines(False)
-    lines = [line for line in lines if not line.startswith(csentry)]
-    PATH_CMAKE_OPENSHC_SOURCES.write_text('\n'.join(lines) + '\n', newline='\n')
+  # Produce the new file without the line
+  lines = PATH_CMAKE_OPENSHC_SOURCES.read_text().splitlines(False)
+  lines = [line for line in lines if not line.startswith(csentry)]
+  PATH_CMAKE_OPENSHC_SOURCES.write_text('\n'.join(lines) + '\n', newline='\n')
 
-    return True, "cpp file excluded", ""
+  return True, "cpp file excluded", ""
 
 def read_function(function_name: str, base_path: Path = Path("src")):
-    rstate, rresult, rerr = function_name_to_cpp_path(function_name=function_name, base_path=base_path)
-    if not rstate:
-        return rstate, "", f"could not resolve function name to file path: {rerr}"
-    path = Path(rresult)
-    if not path.exists():
-        return False, "", f"cpp file path does not exist: {str(path)}"
-    try:
-        return True, path.read_text(), ""
-    except Exception as e:
-        return False, "", f"{e}"
+  rstate, rresult, rerr = function_name_to_cpp_path(function_name=function_name, base_path=base_path)
+  if not rstate:
+    return rstate, "", f"could not resolve function name to file path: {rerr}"
+  path = Path(rresult)
+  if not path.exists():
+    return False, "", f"cpp file path does not exist: {str(path)}"
+  try:
+    return True, path.read_text(), ""
+  except Exception as e:
+    return False, "", f"{e}"
 
 @mcp.tool()
 def read_cpp_code_for_function(function_name: str) -> tuple[bool, str, str]:
-    """
-    Read the cpp code for a function
-    
-    Args:
-        function_name: Name of the function to extract, fully namespaced using '::'
-    
-    Returns:
-        Tuple of (success, contents, stderr)
-    """
-    return read_function(function_name=function_name)
+  """
+  Read the cpp code for a function
+  
+  Args:
+    function_name: Name of the function to extract, fully namespaced using '::'
+  
+  Returns:
+    Tuple of (success, contents, stderr)
+  """
+  return read_function(function_name=function_name)
 
 @mcp.tool()
 def read_source_file(relative_path: str) -> tuple[bool, str, str]:
-    """
-    Read the C++ file contents of a file
-    
-    Args:
-        relative_path: Name of the file, usually starts with 'OpenSHC/'
-    
-    Returns:
-        Tuple of (success, contents, stderr)
-    """
-    src = Path("src")
-    path = (src / Path(relative_path)).resolve()
-    if not str(path).startswith(str(src.resolve())):
-        return False, "", "Cannot escape src/ directory"
-    if not path.exists():
-        return False, "", f" cpp file path does not exist: {str(path)}"
-    try:
-        return True, path.read_text(), ""
-    except Exception as e:
-        return False, "", f"{e}"
+  """
+  Read the C++ file contents of a file
+  
+  Args:
+    relative_path: Name of the file, usually starts with 'OpenSHC/'
+  
+  Returns:
+    Tuple of (success, contents, stderr)
+  """
+  src = Path("src")
+  path = (src / Path(relative_path)).resolve()
+  if not str(path).startswith(str(src.resolve())):
+    return False, "", "Cannot escape src/ directory"
+  if not path.exists():
+    return False, "", f" cpp file path does not exist: {str(path)}"
+  try:
+    return True, path.read_text(), ""
+  except Exception as e:
+    return False, "", f"{e}"
 
 @mcp.tool()
 def fetch_ghidra_function_decompilation(function_name: str) -> tuple[bool, str, str]:
-    """
-    Fetches decompilation of a function (json with additional information). Contains ghidra special functions.
-    
-    Args:
-        function_name: Name of the function to extract, fully namespaced using '::'
-    
-    Returns:
-        Tuple of (success, contents, stderr)
-    """
+  """
+  Fetches decompilation of a function (function body or json with additional information). Contains ghidra special functions.
+  
+  Args:
+    function_name: Name of the function to extract, fully namespaced using '::'
+  
+  Returns:
+    Tuple of (success, contents, stderr)
+  """
+  if "ghidracpp" in sys.modules:
     try:
-        resp = requests.get("http://127.0.0.1:11337/functions/decompile", params={
-            "name": function_name,
-        }, timeout=5)
-        resp.raise_for_status()
-        contents = resp.json()
-        return True, json.dumps(contents), ""
+      rw = ghidracpp.rewrite_function.rewrite_function(function=function_name)
+      return True, rw, ""
     except Exception as e:
-        return False, "", f"{e}"
+      return False, "", f"{e}"
+    
+  else:
+    try:
+      resp = requests.get("http://127.0.0.1:11337/functions/decompile", params={
+        "name": function_name,
+      }, timeout=5)
+      resp.raise_for_status()
+      contents = resp.json()
+      return True, json.dumps(contents), ""
+    except Exception as e:
+      return False, "", f"{e}"
 
 
 @mcp.tool()
 def fetch_cached_ghidra_function_decompilation(function_name: str) -> tuple[bool, str, str]:
-    """
-    Fetches cached decompilation of a function (json with additional information) containing ghidra special functions.
-    This should be used if 'fetch_ghidra_function_decompilation' isn't available or fails.
-    
-    Args:
-        function_name: Name of the function to extract, fully namespaced using '::'
-    
-    Returns:
-        Tuple of (success, contents, stderr)
-    """
-    return read_function(function_name=function_name, base_path=Path("tools") / "mcp" / "ghidra_scripts" / "decompilation")
+  """
+  Fetches cached decompilation of a function (json with additional information) containing ghidra special functions.
+  This should be used if 'fetch_ghidra_function_decompilation' isn't available or fails.
+  
+  Args:
+    function_name: Name of the function to extract, fully namespaced using '::'
+  
+  Returns:
+    Tuple of (success, contents, stderr)
+  """
+  return read_function(function_name=function_name, base_path=Path("tools") / "mcp" / "ghidra_scripts" / "decompilation")
 
 @mcp.tool()
 def find_source_file_containing_text(text: str, glob: str = "**/*") -> List[str]:
-    """
-    Returns a list of files in which 'text' can be found. The default file glob pattern is '**/*'.
-    
-    Args:
-        text: the text to find, no regex is supported
-        glob: the glob to use, useful to look in hpp or cpp files specifically
-    
-    Returns:
-        list of file path strings
-    """
-    results: List[str] = []
-    src = Path("src")
-    for f in src.glob(pattern=glob):
-        if f.is_file():
-            if text in f.read_text(encoding='UTF-8'):
-                results.append(str(f.relative_to(src)))
-    return results
+  """
+  Returns a list of files in which 'text' can be found. The default file glob pattern is '**/*'.
+  
+  Args:
+    text: the text to find, no regex is supported
+    glob: the glob to use, useful to look in hpp or cpp files specifically
+  
+  Returns:
+    list of file path strings
+  """
+  results: List[str] = []
+  src = Path("src")
+  for f in src.glob(pattern=glob):
+    if f.is_file():
+      if text in f.read_text(encoding='UTF-8'):
+        results.append(str(f.relative_to(src)))
+  return results
+
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument("--gzf", default="")
+parser.add_argument("--project-dir", default="")
+parser.add_argument("--project-name", default="")
 
 if __name__ == "__main__":
-    mcp.run(transport="stdio")
+  try:
+    import ghidracpp
+    import ghidracpp.rewrite_function
+    args = parser.parse_args()
+    if not args.gzf and not args.project_name:
+      raise Exception(f"must specify either --project-dir and --project-name or --gzf. Received: {args}")
+    if args.project_name:
+      ghidracpp.rewrite_function.initialize_ghidra_from_real_project(args.project_dir, args.project_name)
+    elif args.gzf:
+      ghidracpp.rewrite_function.initialize_ghidra_from_gzf(args.gzf)
+    print("ghidra-cpp is ready")
+  except:
+    print("ghidra-cpp not installed")
+
+  mcp.run(transport="stdio")
