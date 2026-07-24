@@ -168,8 +168,17 @@ These might be very large condition blocks the decompiler did not wrap.
 Often, however, these indicate that the compiler optimized certain branches by reusing the assembly code.
 
 These are very hard to get right, since it is sometimes unclear which parts need to be unified and which code needs to be doubled at different positions.
-Despite this, still try to remove the GOTOs.
+Another possibility are condition optimizations. If one branch can ensure that the next condition after the block will be always true for it, the compiler may optimize this to a GOTO into or after the next condition block from inside the current branch.  
+For example, one of two branches might set the variable that in the required
+source will be checked in the next condition. As a result, the compiler may prove that the condition is always true or false.
+
+Despite all these problems, still try to remove the GOTOs.
 They might be worth trying in very tricky cases, but they were usually seen as code smell even back then and were unlikely to be present in the code.
+
+### String Literals
+
+String literals are not resolved. Instead we use a big `string-literals.hpp` file.
+Make always sure to use a reference from this file instead of a string literal.
 
 ## Functions
 
