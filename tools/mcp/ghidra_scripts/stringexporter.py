@@ -7,8 +7,7 @@
 #@toolbar 
 #@runtime Jython
 
-
-
+from ghidra.program.model.data import Array
 import re
 PATTERN = re.compile("[^a-zA-Z0-9_]+")
 
@@ -20,11 +19,19 @@ sdump = ""
 
 cur = l.getCodeUnitAt(roRange.getMinAddress())
 while cur.getAddress() < roRange.getMaxAddress():
-	while cur.getDataType().toString() != "string":
+	while True:
+		if cur.getDataType().toString() == "string":
+			break;
+		if isinstance(cur.getDataType(), Array):
+			if cur.getDataType().getDataType().toString() == "char":
+				break;
 		cur = l.getCodeUnitAfter(cur.getAddress())
-	if cur.getLabel():
-		sdump += "// STRING: STRONGHOLDCRUSADER 0x00" + hex(cur.getAddress().getOffset())[2:-1] + "\n"
-		sdump += "char const * const " + PATTERN.sub("_", cur.getLabel()) + ' = "' + cur.getValue().replace("\\", "\\\\").replace("\n", "\\n").replace("\r", "\\r").replace('"', '\\"') + '";' + "\n\n"
+	try:
+		if cur.getLabel():
+			sdump += "// STRING: STRONGHOLDCRUSADER 0x00" + hex(cur.getAddress().getOffset())[2:-1] + "\n"
+			sdump += "char const * const " + PATTERN.sub("_", cur.getLabel()) + ' = "' + cur.getValue().replace("\\", "\\\\").replace("\n", "\\n").replace("\r", "\\r").replace('"', '\\"') + '";' + "\n\n"
+	except Exception as e:
+		print("failed at: " + cur.getAddress().toString())
 	cur = l.getCodeUnitAfter(cur.getAddress())
 
 with open(str(askFile("dump file", "select")), "w") as f:

@@ -1,9 +1,3 @@
-/**
-  This file contains the strings from the read-only (.rdata) memory of the original binary.
-  These strings were used as a literal somewhere in the source, hence `char const * const`.
-  The STRING annotations help reccmp-reccmp identify the correct usage of the string.
-*/
-
 // STRING: STRONGHOLDCRUSADER 0x0059e830
 char const* const s_bad_allocation_0059e830 = "bad allocation";
 
@@ -2409,6 +2403,87 @@ char const* const s_Path_linkage_005a25d8 = "Path linkage";
 // STRING: STRONGHOLDCRUSADER 0x005a25e8
 char const* const s_Connect_005a25e8 = "Connect";
 
+// STRING: STRONGHOLDCRUSADER 0x005a25f0
+char const* const SFX_CantPlaceThatThereMyLord = "placement_warning16.wav";
+
+// STRING: STRONGHOLDCRUSADER 0x005a2608
+char const* const s_placement_warning20_wav_005a2608 = "placement_warning20.wav";
+
+// STRING: STRONGHOLDCRUSADER 0x005a2620
+char const* const SFX_FarmsMustBePlacedOnOases = "placement_warning18.wav";
+
+// STRING: STRONGHOLDCRUSADER 0x005a2638
+char const* const s_placement_warning19_wav_005a2638 = "placement_warning19.wav";
+
+// STRING: STRONGHOLDCRUSADER 0x005a2650
+char const* const s_placement_warning21_wav_005a2650 = "placement_warning21.wav";
+
+// STRING: STRONGHOLDCRUSADER 0x005a2668
+char const* const SFX_NeedsToBePlacedAdjacentToGranary = "placement_warning6.wav";
+
+// STRING: STRONGHOLDCRUSADER 0x005a2680
+char const* const SFX_PitchrigMustBeBuiltOnOilInTheMarsh = "placement_warning5.wav";
+
+// STRING: STRONGHOLDCRUSADER 0x005a2698
+char const* const SFX_IronMineMustBeBuiltOnIronOre = "placement_warning4.wav";
+
+// STRING: STRONGHOLDCRUSADER 0x005a26b0
+char const* const SFX_NeedsToBePlacedAdjacentToArmory = "placement_warning3.wav";
+
+// STRING: STRONGHOLDCRUSADER 0x005a26c8
+char const* const SFX_NeedsToBePlacedAdjacentToStockpile = "placement_warning2.wav";
+
+// STRING: STRONGHOLDCRUSADER 0x005a26e0
+char const* const SFX_APeasantIsOnHisWay = "other_warning9.wav";
+
+// STRING: STRONGHOLDCRUSADER 0x005a26f4
+char const* const SFX_NeedsTwoMorePeople = "other_warning11.wav";
+
+// STRING: STRONGHOLDCRUSADER 0x005a2708
+char const* const SFX_NeedsOneMorePerson = "other_warning10.wav";
+
+// STRING: STRONGHOLDCRUSADER 0x005a271c
+char const* const SFX_ThisBuildingHasNoLaborSire = "other_warning8.wav";
+
+// STRING: STRONGHOLDCRUSADER 0x005a2730
+char const* const SFX_WorkHaltedMyLord = "other_warning12.wav";
+
+// STRING: STRONGHOLDCRUSADER 0x005a2744
+char const* const SFX_NotEnoughGoldForTunneler = "units_warning2.wav";
+
+// STRING: STRONGHOLDCRUSADER 0x005a2758
+char const* const SFX_NotEnoughGoldForApprentices = "units_warning1.wav";
+
+// STRING: STRONGHOLDCRUSADER 0x005a276c
+char const* const STR_EQUALS = " = ";
+
+// STRING: STRONGHOLDCRUSADER 0x005a2770
+char const* const STR_PERCENTAGE = "%";
+
+// STRING: STRONGHOLDCRUSADER 0x005a2774
+char const* const STR_CLOSE_BRACE = ")";
+
+// STRING: STRONGHOLDCRUSADER 0x005a2778
+char const* const STR_OPEN_BRACE = "(";
+
+// STRING: STRONGHOLDCRUSADER 0x005a277c
+char const* const STR_SLASH = "/";
+
+// STRING: STRONGHOLDCRUSADER 0x005a2780
+char const* const STR_FMT_D_SLASH_D = "%d/%d";
+
+// STRING: STRONGHOLDCRUSADER 0x005a2788
+char const* const SFX_TheRoundTable = "Genie_01.wav";
+
+// STRING: STRONGHOLDCRUSADER 0x005a2798
+char const* const SFX_ChooseYourAdversary = "Genie_03.wav";
+
+// STRING: STRONGHOLDCRUSADER 0x005a27a8
+char const* const STR_AutoBackupMap = "auto_backup_map.map";
+
+// STRING: STRONGHOLDCRUSADER 0x005a27bc
+char const* const STR_Mission22Map = "mission22.map";
+
 // STRING: STRONGHOLDCRUSADER 0x005a27cc
 char const* const SFX_YourAllies = "Genie_11.wav";
 
@@ -4055,6 +4130,9 @@ char const* const s_general_victory7_wav_005a4da8 = "general_victory7.wav";
 
 // STRING: STRONGHOLDCRUSADER 0x005a4dc0
 char const* const s_general_victory6_wav_005a4dc0 = "general_victory6.wav";
+
+// STRING: STRONGHOLDCRUSADER 0x005a4dd8
+char const* const s_General_Warning10_wav_005a4dd8 = "General_Warning10.wav";
 
 // STRING: STRONGHOLDCRUSADER 0x005a4e08
 char const* const s_fx_volume_txt_005a4e08 = "fx\\volume.txt";
@@ -9475,8 +9553,3 @@ char const* const s_GetLocaleInfoW_005b2804 = "GetLocaleInfoW";
 
 // STRING: STRONGHOLDCRUSADER 0x005b2814
 char const* const s_CompareStringW_005b2814 = "CompareStringW";
-
-// STRING: STRONGHOLDCRUSADER 0x00b932a0
-char const* const LIB_pkware_InfoString
-    = "PKWARE Data Compression Library for Win32\r\nCopyright 1989-1995 PKWARE Inc.  All Rights Reserved\r\nPatent No. "
-      "5,051,745\r\nPKWARE Data Compression Library Reg. U.S. Pat. and Tm. Off.\r\nVersion 1.11";
