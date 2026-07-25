@@ -106,7 +106,7 @@ namespace Audio {
             playSFXWeAreUnderAttack;
 
             MACRO_FUNCTION_RESOLVER(
-                void (SFXState::*)(int, float), false, Address::SHC_3BB0A8C1_0x0044ABB0, &SFXState::tweakVolume)
+                void (SFXState::*)(int, float, int), false, Address::SHC_3BB0A8C1_0x0044ABB0, &SFXState::tweakVolume)
             tweakVolume;
 
             MACRO_FUNCTION_RESOLVER(void (SFXState::*)(), false, Address::SHC_3BB0A8C1_0x0044AE90,

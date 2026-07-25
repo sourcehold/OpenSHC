@@ -16,8 +16,6 @@ namespace Game {
 
     void __cdecl UpdateUnitValueLoss(int value);
 
-    int __cdecl RelativeValueForGenie(int larger, int smaller);
-
     BOOLEnum __cdecl Tutorial_IsActionAllowed(undefined4 actionType, int actionParam);
 
 } // namespace Game

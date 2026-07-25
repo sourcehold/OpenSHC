@@ -12,6 +12,7 @@ tmp/
 # Ignore binary files and export files created from reverse engineering programs
 /*.7z
 /*.sarif
+/*.gzf # Ghidra project zip files
 /*.bin
 # Ignore the reccmp results overview
 /reccmp/**/*.json

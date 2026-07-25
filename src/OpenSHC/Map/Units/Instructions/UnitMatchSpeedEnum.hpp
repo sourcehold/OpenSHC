@@ -15,6 +15,7 @@ namespace Map {
             typedef enum UnitMatchSpeedEnum {
 
                 UMSE_FREE_UNIT_SPEEDS = -255, // 0x-00000FF
+                UMSE_0 = 0, // 0x00000000
                 UMSE_MATCH_UNIT_SPEEDS = 1 // 0x00000001
 
             } UnitMatchSpeedEnum;

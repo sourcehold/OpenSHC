@@ -17937,8 +17937,8 @@ enum {
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x0044AAA0 = 0x0044AAA0,
-    // label: RelativeValueForGenie
-    // location: OpenSHC/Game
+    // label: UpdateUnitLossSpeechFeedback_RelativeValueForGenie
+    // location: OpenSHC/Audio/SFX
     // type: function
     SHC_3BB0A8C1_0x0044AAB0 = 0x0044AAB0,
     // label: Constructor_SFXState
@@ -38850,7 +38850,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004CC990 = 0x004CC990,
     // label: getSmallestPatrolTribe
-    // location: OpenSHC/Map/Units/TribesState
+    // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CCAF0 = 0x004CCAF0,
     // label: getDefensiveTribeForUnit
@@ -94023,7 +94023,9 @@ enum {
     // location:
     // type: /char[64]
     SHC_3BB0A8C1_0x00B986A0 = 0x00B986A0,
-    // type: /undefined4
+    // label: DAT_VictoryMusicVariation
+    // location:
+    // type: /int
     SHC_3BB0A8C1_0x00B986E0 = 0x00B986E0,
     // label: DAT_SFX_Cooldown_WeAreUnderAttack
     // location:

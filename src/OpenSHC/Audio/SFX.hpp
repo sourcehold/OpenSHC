@@ -12,6 +12,8 @@ namespace OpenSHC {
 namespace Audio {
     namespace SFX {
 
+        int __cdecl UpdateUnitLossSpeechFeedback_RelativeValueForGenie(int larger, int smaller);
+
         void __stdcall UpdateUnitLossSpeechFeedback();
 
     } // namespace SFX

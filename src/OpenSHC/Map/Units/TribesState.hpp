@@ -72,8 +72,6 @@ namespace Map {
             void giveUnitSelectionMoveInstructionNoMatchedSpeed(
                 undefined4 tribeID, undefined4 x, undefined4 y, undefined4 rallyBool, undefined4 doRally);
 
-            int getSmallestPatrolTribe(int playerID, int tribeCount);
-
             void clearAllTribes();
 
             void reassignOwnerForTribesOfBehaviorType2(int param_1, int param_2);

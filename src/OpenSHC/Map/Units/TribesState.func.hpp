@@ -35,10 +35,6 @@ namespace Map {
                 false, Address::SHC_3BB0A8C1_0x004B7700, &TribesState::giveUnitSelectionMoveInstructionNoMatchedSpeed)
             giveUnitSelectionMoveInstructionNoMatchedSpeed;
 
-            MACRO_FUNCTION_RESOLVER(int (TribesState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004CCAF0,
-                &TribesState::getSmallestPatrolTribe)
-            getSmallestPatrolTribe;
-
             MACRO_FUNCTION_RESOLVER(
                 void (TribesState::*)(), false, Address::SHC_3BB0A8C1_0x005211B0, &TribesState::clearAllTribes)
             clearAllTribes;

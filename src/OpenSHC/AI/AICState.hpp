@@ -164,14 +164,16 @@ namespace AI {
 
         int createTribeForUnitType(int playerID, int unitSelectionTypeIndex);
 
-        int smallestTribeOfUnitType(int playerID, short* unitType);
+        int smallestTribeOfUnitType(int playerID, UnitType unitType);
+
+        int getSmallestPatrolTribe(int playerID, int tribeCount);
 
         int getDefensiveTribeForUnit(int playerID, int unitID);
 
         int addUnitToSmallestBehaviourTypeTribe(
             undefined4 playerID, undefined4 param_2, undefined4 aiUnitBehaviourType);
 
-        void sendUnitsToKeep(undefined4 tribeID, int playerID);
+        void sendUnitsToKeep(int tribeID, int playerID);
 
         void sendUnitsToCampfire(int tribeID, int playerID);
 
@@ -239,7 +241,7 @@ namespace AI {
 
         BOOLEnum processAttForceRallyPercentage(int playerID);
 
-        void useAITribe_0x12_toPlaceSiegeTentsAndAssignEngineers(CommandBuildingType playerID);
+        void useAITribe_0x12_toPlaceSiegeTentsAndAssignEngineers(int playerID);
 
         void useAITribe_0xe_toPlaceTunnels(int playerID);
 
@@ -340,7 +342,7 @@ namespace AI {
 
         void aiRegisterTribeAndAssignTarget(int tribeID, int tribeUID);
 
-        void decideOnTribeAttackLocation(uint tribeID__moatWasHit);
+        void decideOnTribeAttackLocation(uint tribeID_OR_moatWasHit);
 
         void sellExcessGoods(int param_1);
 

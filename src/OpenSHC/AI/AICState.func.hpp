@@ -241,9 +241,13 @@ namespace AI {
             int (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004CC910, &AICState::createTribeForUnitType)
         createTribeForUnitType;
 
-        MACRO_FUNCTION_RESOLVER(
-            int (AICState::*)(int, short*), false, Address::SHC_3BB0A8C1_0x004CC990, &AICState::smallestTribeOfUnitType)
+        MACRO_FUNCTION_RESOLVER(int (AICState::*)(int, UnitType), false, Address::SHC_3BB0A8C1_0x004CC990,
+            &AICState::smallestTribeOfUnitType)
         smallestTribeOfUnitType;
+
+        MACRO_FUNCTION_RESOLVER(
+            int (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004CCAF0, &AICState::getSmallestPatrolTribe)
+        getSmallestPatrolTribe;
 
         MACRO_FUNCTION_RESOLVER(
             int (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004CCBE0, &AICState::getDefensiveTribeForUnit)
@@ -254,7 +258,7 @@ namespace AI {
         addUnitToSmallestBehaviourTypeTribe;
 
         MACRO_FUNCTION_RESOLVER(
-            void (AICState::*)(undefined4, int), false, Address::SHC_3BB0A8C1_0x004CD0C0, &AICState::sendUnitsToKeep)
+            void (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004CD0C0, &AICState::sendUnitsToKeep)
         sendUnitsToKeep;
 
         MACRO_FUNCTION_RESOLVER(
@@ -389,7 +393,7 @@ namespace AI {
             &AICState::processAttForceRallyPercentage)
         processAttForceRallyPercentage;
 
-        MACRO_FUNCTION_RESOLVER(void (AICState::*)(CommandBuildingType), false, Address::SHC_3BB0A8C1_0x004CEFD0,
+        MACRO_FUNCTION_RESOLVER(void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CEFD0,
             &AICState::useAITribe_0x12_toPlaceSiegeTentsAndAssignEngineers)
         useAITribe_0x12_toPlaceSiegeTentsAndAssignEngineers;
 

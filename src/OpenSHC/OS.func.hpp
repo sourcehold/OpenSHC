@@ -44,11 +44,11 @@ namespace OS_Func {
         Address::SHC_3BB0A8C1_0x0057F660, &OpenSHC::OS::_memset)
     _memset;
 
-    MACRO_FUNCTION_RESOLVER(int(__cdecl*)(char* _Dest, char* _Format, ...), REIMPLEMENTED_CRT,
+    MACRO_FUNCTION_RESOLVER(int(__cdecl*)(char* _Dest, char const* _Format, ...), REIMPLEMENTED_CRT,
         Address::SHC_3BB0A8C1_0x0057F6DA, &OpenSHC::OS::_sprintf)
     _sprintf;
 
-    MACRO_FUNCTION_RESOLVER(int(__cdecl*)(char* _Str1, char* _Str2), REIMPLEMENTED_CRT,
+    MACRO_FUNCTION_RESOLVER(int(__cdecl*)(char const* _Str1, char const* _Str2), REIMPLEMENTED_CRT,
         Address::SHC_3BB0A8C1_0x0057F8EE, &OpenSHC::OS::__stricmp)
     __stricmp;
 
