@@ -81716,8 +81716,6 @@ enum {
     SHC_3BB0A8C1_0x005A4DA8 = 0x005A4DA8,
     // type: /string
     SHC_3BB0A8C1_0x005A4DC0 = 0x005A4DC0,
-    // label: SFX_WeAreUnderAttack
-    // location:
     // type: /char[24]
     SHC_3BB0A8C1_0x005A4DD8 = 0x005A4DD8,
     // type: /float
@@ -94029,6 +94027,7 @@ enum {
     SHC_3BB0A8C1_0x00B986E0 = 0x00B986E0,
     // label: DAT_SFX_Cooldown_WeAreUnderAttack
     // location:
+    // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00B986E4 = 0x00B986E4,
     // type: /float
     SHC_3BB0A8C1_0x00B986E8 = 0x00B986E8,

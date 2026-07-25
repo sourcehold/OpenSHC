@@ -13,6 +13,7 @@ tmp/
 /*.7z
 /*.sarif
 /*.gzf # Ghidra project zip files
+/*.zip # Sarif export zips
 /*.bin
 # Ignore the reccmp results overview
 /reccmp/**/*.json

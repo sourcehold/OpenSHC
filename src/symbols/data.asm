@@ -485,6 +485,8 @@ PUBLIC ?instance@?$Extern@$$BY0EA@D$0LJIGKA@@StructResolver@@2PADA
 
 PUBLIC ?instance@?$Extern@H$0LJIGOA@@StructResolver@@2HA
 
+PUBLIC ?instance@?$Extern@K$0LJIGOE@@StructResolver@@2KA
+
 PUBLIC ?instance@?$Extern@H$0LJIGPE@@StructResolver@@2HA
 
 PUBLIC ?instance@?$Extern@H$0LJIGPM@@StructResolver@@2HA
@@ -2083,6 +2085,8 @@ _TEXT SEGMENT
 ?instance@?$Extern@$$BY0EA@D$0LJIGKA@@StructResolver@@2PADA EQU 00B986A0h
 
 ?instance@?$Extern@H$0LJIGOA@@StructResolver@@2HA EQU 00B986E0h
+
+?instance@?$Extern@K$0LJIGOE@@StructResolver@@2KA EQU 00B986E4h
 
 ?instance@?$Extern@H$0LJIGPE@@StructResolver@@2HA EQU 00B986F4h
 
