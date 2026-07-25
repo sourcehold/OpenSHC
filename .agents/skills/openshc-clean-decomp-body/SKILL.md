@@ -156,6 +156,17 @@ Example:
 
 ---
 
+### 7. String-Literals
+
+String literals should be replaced by a string pointer from `OpenSHC/string-literals.hpp`.
+
+Rules:
+- Use a text or line search tool to find the proper variable in the header.
+- Do **not** read the whole `string-literals.hpp` in, since it is too big.
+- Import the header if a string literal is present.
+
+---
+
 ## File Structure
 
 Keep the existing file structure.
