@@ -139,23 +139,23 @@ function Search-FunctionData {
             Write-Verbose "Try extracting function data from $FuncHeaderPath using $Function."
             $regexResolver = "(?s)MACRO_FUNCTION_RESOLVER\s*\(([^(]*)[^;]*?(true|false),\s*Address::SHC_3BB0A8C1_0x([0-9A-Fa-f]+)[^;]*?\)\s*([A-Za-z_]?\w*$([regex]::Escape($Function))\w*)\s*;"
             Write-Verbose "Regex: $regexResolver"
-            if ($funcHeaderContent -match $regexResolver) {
-                $returnType = $Matches[1].Trim()
-                $enabled = ($Matches[2].Trim() -eq "true")
-                $Address = $Matches[3]
-                if ($Matches[4] -ne $Function) {
-                    if ($Partial) {
-                        Write-Verbose "Partial function match: $($Matches[4]) vs $Function. Use complete name."
-                        $Function = $Matches[4]
-                    }
-                    else {
-                        Fail "Partial function match: $($Matches[4]) vs $Function."
-                    }
-                }
-            }
-            else {
+
+            $matches = [regex]::Matches($funcHeaderContent, $regexResolver)
+            if ($matches.Count -eq 0) {
                 Fail "Function reference disappeared while resolving:`n$FuncHeaderPath"
             }
+            $selected = $matches | Sort-Object { $_.Groups[4].Value.Length - $Function.Length } | Select-Object -First 1
+            if (($selected.Groups[4].Value.Length - $Function.Length) -ne 0) {
+                if ($Partial) {
+                    Write-Verbose "Partial function match: $($Matches[4]) vs $Function. Use complete name."
+                } else {
+                    Fail "Partial function match: $($selected.Groups[4].Value) vs $Function."
+                }
+            }
+            $returnType = $selected.Groups[1].Value.Trim()
+            $enabled    = $selected.Groups[2].Value -eq "true"
+            $Address    = $selected.Groups[3].Value
+            $Function   = $selected.Groups[4].Value
         }
     }
     Write-Verbose "Return type: $returnType"
