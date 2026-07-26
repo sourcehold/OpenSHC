@@ -9,7 +9,7 @@ namespace OpenSHC {
 namespace AI {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CD0C0
-    void AICState::sendUnitsToKeep(undefined4 tribeID, int playerID)
+    void AICState::sendUnitsToKeep(int tribeID, int playerID)
     {
         int iVar1 = DAT_GameState::instance.playerDataArray[playerID].keep.id;
         if (0 < iVar1) {

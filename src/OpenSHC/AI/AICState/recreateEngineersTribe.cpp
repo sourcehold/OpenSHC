@@ -10,7 +10,7 @@ namespace AI {
     void AICState::recreateEngineersTribe(int playerID)
     {
         if (0 < DAT_GameState::instance.playerDataArray[playerID].totalAttackingEngineerTroops) {
-            int _tribeID = (int)DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[0x12];
+            int _tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[0x12];
             if ((_tribeID != 0)
                 && (DAT_TribesState::instance.tribes[_tribeID].uid
                     != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[0x12])) {
