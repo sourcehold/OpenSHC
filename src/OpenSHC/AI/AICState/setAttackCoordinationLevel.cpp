@@ -18,14 +18,14 @@ namespace AI {
             if (90 < _willingnessPercentage) {
                 _willingnessPercentage = 90;
             }
-            int _rng = (int)SEC_RNG::instance.currentNumber2;
+            int _rngMod100 = (int)(short)SEC_RNG::instance.currentNumber2 % 100;
             MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
-            if (_rng % 100 < _willingnessPercentage / 2) {
+            if (_rngMod100 < _willingnessPercentage / 2) {
                 DAT_GameState::instance.playerDataArray[playerID].aiAttackCoordinationLevel = 2;
                 return;
             }
             DAT_GameState::instance.playerDataArray[playerID].aiAttackCoordinationLevel
-                = (uint)(_rng % 100 < _willingnessPercentage);
+                = (uint)(_rngMod100 < _willingnessPercentage);
         }
     }
 }

@@ -19,43 +19,43 @@ namespace AI {
                 / _totalEnemyTroopValue);
         }
         DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy = _relativeStrength;
-        if (param_2 == FALSE) {
+        if (param_2 != FALSE) {
+            BOOLEnum BVar2
+                = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::checkKeepEnclosed, DAT_GameState::ptr)(playerID);
+            if (BVar2 != FALSE) {
+                if ((short)DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy < 0x46) {
+                    return TRUE;
+                }
+                return FALSE;
+            }
+            if ((int)DAT_GameCore::instance.mapTimeInTicks < 12000) {
+                if ((short)DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy < 300) {
+                    return TRUE;
+                }
+                return FALSE;
+            }
+            if ((short)DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy < 100) {
+                return TRUE;
+            }
+        } else {
             if (DAT_GameState::instance.playerDataArray[playerID].totalEnemyRangedTroopValue < 100) {
                 return FALSE;
             }
             BOOLEnum BVar2
                 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::checkKeepEnclosed, DAT_GameState::ptr)(playerID);
             if (BVar2 != FALSE) {
-                if (DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy < 50) {
+                if ((short)DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy < 50) {
                     return TRUE;
                 }
                 return FALSE;
             }
             if ((int)DAT_GameCore::instance.mapTimeInTicks < 12000) {
-                if (DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy < 250) {
+                if ((short)DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy < 250) {
                     return TRUE;
                 }
                 return FALSE;
             }
-            if (DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy < 75) {
-                return TRUE;
-            }
-        } else {
-            BOOLEnum BVar2
-                = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::checkKeepEnclosed, DAT_GameState::ptr)(playerID);
-            if (BVar2 != FALSE) {
-                if (DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy < 0x46) {
-                    return TRUE;
-                }
-                return FALSE;
-            }
-            if ((int)DAT_GameCore::instance.mapTimeInTicks < 12000) {
-                if (DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy < 300) {
-                    return TRUE;
-                }
-                return FALSE;
-            }
-            if (DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy < 100) {
+            if ((short)DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy < 75) {
                 return TRUE;
             }
         }

@@ -13,22 +13,17 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004D40B0
     void AICState::aiReassignTunnelersToTribe(int param_1)
     {
-        uint unitID = 1;
-        if (1 < (int)DAT_UnitsState::instance.maxUnitCount) {
-            Map::Units::Unit* psVar1 = &DAT_UnitsState::instance.units[1];
-            do {
-                if ((((psVar1->logicalState == Map::Units::ULS_NORMAL) && (psVar1->owner == param_1))
-                        && (psVar1->dying == 0))
-                    && ((psVar1->unitType == Map::Units::UT_TUNNELER && (psVar1->aiUnitBehaviourType == 0xf)))) {
-                    if (psVar1->tribeID != 0) {
-                        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::removeUnitFromTribe, DAT_TribesState::ptr)(
-                            unitID, (int)psVar1->tribeID);
-                    }
-                    MACRO_CALL_MEMBER(AICState_Func::addUnitToItsTribe, this)(unitID, 0xf);
+        for (int unitID = 1; unitID < (int)DAT_UnitsState::instance.maxUnitCount; unitID++) {
+            Map::Units::Unit* _pUnit = &DAT_UnitsState::instance.units[unitID];
+            if ((((_pUnit->logicalState == Map::Units::ULS_NORMAL) && (_pUnit->owner == param_1))
+                    && (_pUnit->dying == 0))
+                && ((_pUnit->unitType == Map::Units::UT_TUNNELER && (_pUnit->aiUnitBehaviourType == 0xf)))) {
+                if (_pUnit->tribeID != 0) {
+                    MACRO_CALL_MEMBER(Map::Units::TribesState_Func::removeUnitFromTribe, DAT_TribesState::ptr)(
+                        unitID, (int)_pUnit->tribeID);
                 }
-                unitID = unitID + 1;
-                psVar1 = psVar1 + 1;
-            } while ((int)unitID < (int)DAT_UnitsState::instance.maxUnitCount);
+                MACRO_CALL_MEMBER(AICState_Func::addUnitToItsTribe, this)(unitID, 0xf);
+            }
         }
     }
 }

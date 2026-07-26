@@ -41,7 +41,8 @@ namespace AI {
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(unitID, _tribeID);
                 return;
             }
-            _tribeID = MACRO_CALL_MEMBER(AICState_Func::smallestTribeOfUnitType, this)(_playerID, _unitTypeIndex);
+            _tribeID = MACRO_CALL_MEMBER(AICState_Func::smallestTribeOfUnitType, this)(
+                _playerID, (OpenSHC::Map::Units::UnitType)((int)_unitTypeIndex));
             MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(unitID, _tribeID);
         }
     }
