@@ -17,10 +17,11 @@ namespace AI {
         int iVar1 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::getAliveLordForPlayer, DAT_UnitsState::ptr)(
             killerPlayerID);
         if (iVar1 != 0) {
-            if (killedPlayerID == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
+            int _curPlayer = DAT_GameSynchronyState::instance.currentPlayerSlotID;
+            if (killedPlayerID == _curPlayer) {
                 iVar1 = 0xc;
             } else {
-                if (killerPlayerID == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
+                if (killerPlayerID == _curPlayer) {
                     MACRO_CALL_MEMBER(
                         Rendering::Bink::AIMessageQueue_Func::playBikVideoFromPlayer, DAT_VideoBikQueue::ptr)(
                         killedPlayerID, (int)DAT_GameState::instance.playerDataArray[killedPlayerID].aiType - 1, 7);
@@ -28,8 +29,7 @@ namespace AI {
                     do {
                         if ((DAT_GameState::instance.playerDataArray[i].aiType != AITA_NULL)
                             && (DAT_GameState::instance.mapAndTime.playerTeams[i]
-                                == DAT_GameState::instance.mapAndTime
-                                    .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID])) {
+                                == DAT_GameState::instance.mapAndTime.playerTeams[_curPlayer])) {
                             int iVar2 = MACRO_CALL_MEMBER(
                                 Map::Units::UnitsState_Func::getAliveLordForPlayer, DAT_UnitsState::ptr)(i);
                             if (iVar2 != 0) {
@@ -42,25 +42,21 @@ namespace AI {
                     } while (i < 9);
                     return;
                 }
-                iVar1 = DAT_GameState::instance.mapAndTime
-                            .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID];
-                if (iVar1 == DAT_GameState::instance.mapAndTime.playerTeams[killedPlayerID]) {
+                int _curTeam = DAT_GameState::instance.mapAndTime.playerTeams[_curPlayer];
+                if (_curTeam == DAT_GameState::instance.mapAndTime.playerTeams[killedPlayerID]) {
                     MACRO_CALL_MEMBER(
                         Rendering::Bink::AIMessageQueue_Func::playBikVideoFromPlayer, DAT_VideoBikQueue::ptr)(
                         killedPlayerID, (int)DAT_GameState::instance.playerDataArray[killedPlayerID].aiType - 1, 0x10);
                     return;
                 }
-                if (DAT_GameState::instance.mapAndTime.playerTeams[killerPlayerID] == iVar1) {
-                    MACRO_CALL_MEMBER(
-                        Rendering::Bink::AIMessageQueue_Func::playBikVideoFromPlayer, DAT_VideoBikQueue::ptr)(
-                        killedPlayerID, (int)DAT_GameState::instance.playerDataArray[killedPlayerID].aiType - 1, 7);
+                MACRO_CALL_MEMBER(Rendering::Bink::AIMessageQueue_Func::playBikVideoFromPlayer, DAT_VideoBikQueue::ptr)(
+                    killedPlayerID, (int)DAT_GameState::instance.playerDataArray[killedPlayerID].aiType - 1, 7);
+                if (DAT_GameState::instance.mapAndTime.playerTeams[killerPlayerID] == _curTeam) {
                     MACRO_CALL_MEMBER(
                         Rendering::Bink::AIMessageQueue_Func::playBikVideoFromPlayer, DAT_VideoBikQueue::ptr)(
                         killerPlayerID, (int)DAT_GameState::instance.playerDataArray[killerPlayerID].aiType - 1, 0x12);
                     return;
                 }
-                MACRO_CALL_MEMBER(Rendering::Bink::AIMessageQueue_Func::playBikVideoFromPlayer, DAT_VideoBikQueue::ptr)(
-                    killedPlayerID, (int)DAT_GameState::instance.playerDataArray[killedPlayerID].aiType - 1, 7);
                 iVar1 = 0xd;
             }
             MACRO_CALL_MEMBER(Rendering::Bink::AIMessageQueue_Func::playBikVideoFromPlayer, DAT_VideoBikQueue::ptr)(
