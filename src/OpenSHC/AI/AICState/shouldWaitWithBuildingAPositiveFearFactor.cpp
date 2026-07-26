@@ -9,7 +9,6 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CB700
     BOOLEnum AICState::shouldWaitWithBuildingAPositiveFearFactor(int playerID, Commands::CommandBuildingType param_2)
     {
-        int* piVar1;
         switch (param_2) {
         case Commands::CBT_COMMUNAL_GARDEN1:
         case Commands::CBT_COMMUNAL_GARDEN2:
@@ -39,8 +38,7 @@ namespace AI {
         case Commands::CBT_SMALL_POND_3:
         case Commands::CBT_LARGE_POND_3:
         case Commands::CBT_LARGE_POND_4:
-            piVar1 = &DAT_GameState::instance.playerDataArray[playerID].aivPositiveFearFactorDelay;
-            *piVar1 = *piVar1 + 1;
+            DAT_GameState::instance.playerDataArray[playerID].aivPositiveFearFactorDelay += 1;
             if (DAT_GameState::instance.playerDataArray[playerID].aivPositiveFearFactorDelay < 200) {
                 return TRUE;
             }

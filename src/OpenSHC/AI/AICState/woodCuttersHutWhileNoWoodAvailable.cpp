@@ -10,11 +10,8 @@ namespace AI {
     BOOLEnum AICState::woodCuttersHutWhileNoWoodAvailable(
         undefined4 playerID, Commands::CommandBuildingType commandBuildingType)
     {
-        if ((commandBuildingType == Commands::CBT_WOODCUTTERSHUT)
-            && (DAT_AIVState::instance.mapExtraInfo.totalWoodAvailable <= 0)) {
-            return TRUE;
-        }
-        return FALSE;
+        return ((commandBuildingType == Commands::CBT_WOODCUTTERSHUT)
+            && (DAT_AIVState::instance.mapExtraInfo.totalWoodAvailable <= 0));
     }
 }
 }

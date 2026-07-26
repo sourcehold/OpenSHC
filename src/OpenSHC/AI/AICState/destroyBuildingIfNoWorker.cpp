@@ -14,24 +14,30 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CB940
     undefined4 AICState::destroyBuildingIfNoWorker(int buildingID)
     {
-        short _value = DAT_BuildingsState::instance.buildings[buildingID].unknownTickRelatedValue;
-        int _owner = (int)DAT_BuildingsState::instance.buildings[buildingID].owner;
+        short _value;
+        int _owner;
+        _value = DAT_BuildingsState::instance.buildings[buildingID].unknownTickRelatedValue;
+        _owner = (int)DAT_BuildingsState::instance.buildings[buildingID].owner;
         if ((((0 < _value) && (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[_owner] == -1))
                 && (DAT_GameSynchronyState::instance.currentAIArray[_owner] != 0))
             && (DAT_GameSynchronyState::instance.DAT_CurrentGameMode != Game::GM_SOLITARY)) {
-            if (DAT_BuildingsState::instance.buildings[buildingID].workers[0] == 0) {
-                if (0x13 < _value) {
-                    MACRO_CALL_MEMBER(AIVState_Func::set0x13ValueTo10InHeatMap, DAT_AIVState::ptr)(
-                        (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x,
-                        (int)(short)DAT_BuildingsState::instance.buildings[buildingID].y);
-                    MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::giveBackResourceForDestroyedBuilding,
-                        DAT_BuildingsState::ptr)(buildingID, _owner, 0x32);
-                    MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(
-                        buildingID);
-                    return 1;
+            if (DAT_BuildingsState::instance.buildings[buildingID].workers[0] != 0) {
+LAB_CHECK_MONTH:
+                if (DAT_GameState::instance.mapAndTime.monthTicks == _owner) {
+                    DAT_BuildingsState::instance.buildings[buildingID].unknownTickRelatedValue = _value + -1;
                 }
-            } else if (DAT_GameState::instance.mapAndTime.monthTicks == _owner) {
-                DAT_BuildingsState::instance.buildings[buildingID].unknownTickRelatedValue = _value + -1;
+            } else {
+                if (!((short)0x14 <= _value)) {
+                    goto LAB_CHECK_MONTH;
+                }
+                MACRO_CALL_MEMBER(AIVState_Func::set0x13ValueTo10InHeatMap, DAT_AIVState::ptr)(
+                    (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x,
+                    (int)(short)DAT_BuildingsState::instance.buildings[buildingID].y);
+                MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::giveBackResourceForDestroyedBuilding,
+                    DAT_BuildingsState::ptr)(buildingID, _owner, 0x32);
+                MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(
+                    buildingID);
+                return 1;
             }
         }
         return 0;
