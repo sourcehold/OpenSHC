@@ -16307,7 +16307,7 @@ SHC_3BB0A8C1_0x0044AB70 | 100.0% | Reimplemented, requires SHC_3BB0A8C1_0x0044A0
 
 SHC_3BB0A8C1_0x0044ABB0 | 100.0% | Reimplemented, mismatches in float constants and functions 
 
-SHC_3BB0A8C1_0x0044AE90 | 0.0% | Pending
+SHC_3BB0A8C1_0x0044AE90 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0044B210 | 100.0% | Reimplemented, Security Cookie mismatches
 

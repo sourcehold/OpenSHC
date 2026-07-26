@@ -24,7 +24,6 @@ namespace Audio {
             long const _Size = MACRO_CALL(OS_Func::_ftell)(_File);
             MACRO_CALL(OS_Func::_fseek)(_File, 0, FILE_BEGIN);
 
-            // Maybe it is not char*?
             this->DAT_SoundFileNameArrayMemoryPointer = (char*)MACRO_CALL(OS_Func::_malloc)(_Size);
             MACRO_CALL(OS_Func::_fread)(this->DAT_SoundFileNameArrayMemoryPointer, 1, _Size, _File);
             MACRO_CALL(OS_Func::_fclose)(_File);
@@ -118,33 +117,35 @@ namespace Audio {
                     }
                     this->DAT_SoundVolumeArray[soundIndex] = 0;
 
-                    // Read numbers by: Reading first char, transform to int (-48) and then combine with (previous
-                    // int * 10), to handle number index.
+                    // Read numbers by: Reading first char, transform to int (-48) and then combine with previous
+                    // int * 10, to handle number index.
                     while ('0' <= this->DAT_SoundFileNameArrayMemoryPointer[fileIndex]
                         && this->DAT_SoundFileNameArrayMemoryPointer[fileIndex] <= '9') {
                         this->DAT_SoundVolumeArray[soundIndex] *= 10;
                         this->DAT_SoundVolumeArray[soundIndex]
                             += this->DAT_SoundFileNameArrayMemoryPointer[fileIndex] - 48;
                         ++fileIndex;
-                        if (fileIndex >= _Size) {
-                            this->DAT_SoundVolumeArray[soundIndex] += volume;
-                            if (this->DAT_SoundVolumeArray[soundIndex] < 0) {
-                                this->DAT_SoundVolumeArray[soundIndex] = 0;
-                            }
-                            if (127 < this->DAT_SoundVolumeArray[soundIndex]) {
-                                this->DAT_SoundVolumeArray[soundIndex] = 127;
-                            }
-                            goto break_parse;
+                        if (fileIndex < _Size) {
+                            continue;
                         }
+                        this->DAT_SoundVolumeArray[soundIndex] += volume;
+                        if (this->DAT_SoundVolumeArray[soundIndex] < 0) {
+                            this->DAT_SoundVolumeArray[soundIndex] = 0;
+                        }
+                        if (127 < this->DAT_SoundVolumeArray[soundIndex]) {
+                            this->DAT_SoundVolumeArray[soundIndex] = 127;
+                        }
+                        goto break_parse;
                     }
 
-                    // TODO: Register issues? Creating a temporary after sum produces the fitting structure, but messes
-                    // up all other registers.
                     this->DAT_SoundVolumeArray[soundIndex] += volume;
-                    if (this->DAT_SoundVolumeArray[soundIndex] < 0) {
-                        this->DAT_SoundVolumeArray[soundIndex] = 0;
-                    } else if (127 < this->DAT_SoundVolumeArray[soundIndex]) {
-                        this->DAT_SoundVolumeArray[soundIndex] = 127;
+
+                    // Applies enough register pressure to produce the fitting opcodes, but does not look very nice
+                    int& volumeRef = this->DAT_SoundVolumeArray[soundIndex];
+                    if (volumeRef < 0) {
+                        volumeRef = 0;
+                    } else if (127 < volumeRef) {
+                        volumeRef = 127;
                     }
                     while (this->DAT_SoundFileNameArrayMemoryPointer[fileIndex] != '\n'
                         && this->DAT_SoundFileNameArrayMemoryPointer[fileIndex] != '\r') {
