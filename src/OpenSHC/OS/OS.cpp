@@ -39,7 +39,7 @@ namespace OS {
     }
 
     // STUB: STRONGHOLDCRUSADER 0x0057F8EE
-    int __stricmp(char* _Str1, char* _Str2) { return _stricmp(_Str1, _Str2); }
+    int __stricmp(char const* _Str1, char const* _Str2) { return _stricmp(_Str1, _Str2); }
 
     // STUB: STRONGHOLDCRUSADER 0x0057FA62
     int _atexit(_atexit_t* param_1) { return atexit(param_1); }
