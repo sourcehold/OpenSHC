@@ -12,16 +12,16 @@ namespace AI {
     void AICState::setAttackPrimeInfo(int playerID, int attackedPlayerID)
     {
         int _tile = DAT_GameState::instance.playerDataArray[playerID].shortestDistanceTile;
-        DAT_TroopValueState::instance.attackInfo.startCon
-            = (int)(short)DAT_TileMapState::instance.PathConnectionLayer[_tile];
-        DAT_TroopValueState::instance.attackInfo.startZone = (int)(char)DAT_TileMapState::instance.AIZoneLayer[_tile];
-        DAT_TroopValueState::instance.attackInfo.zoneSize
-            = DAT_PathFindingState::instance
-                  .zoneSizesArray[(short)DAT_TileMapState::instance.PathConnectionLayer[_tile]];
+        int _zone = (int)(char)DAT_TileMapState::instance.AIZoneLayer[_tile];
+        int _pathCon = (int)(short)DAT_TileMapState::instance.PathConnectionLayer[_tile];
+        int _zoneSize = DAT_PathFindingState::instance.zoneSizesArray[_pathCon];
+        DAT_TroopValueState::instance.attackInfo.startCon = _pathCon;
+        int _attackedTile = DAT_GameState::instance.playerDataArray[attackedPlayerID].campground.tileEntry;
+        DAT_TroopValueState::instance.attackInfo.startZone = _zone;
+        DAT_TroopValueState::instance.attackInfo.zoneSize = _zoneSize;
         DAT_TroopValueState::instance.attackInfo.unknownOne_0x20f90 = 1;
         DAT_TroopValueState::instance.attackInfo.keepCon
-            = (int)(short)DAT_TileMapState::instance
-                  .PathConnectionLayer[DAT_GameState::instance.playerDataArray[attackedPlayerID].campground.tileEntry];
+            = (int)(short)DAT_TileMapState::instance.PathConnectionLayer[_attackedTile];
     }
 }
 }

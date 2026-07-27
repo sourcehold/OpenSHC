@@ -15,9 +15,9 @@ namespace AI {
     {
         int iVar2
             = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::getAliveLordForPlayer, DAT_UnitsState::ptr)(playerID);
-        int iVar1 = DAT_GameSynchronyState::instance.currentPlayerSlotID;
         if ((iVar2 != 0) && (DAT_GameState::instance.playerDataArray[playerID].someAiCountdown6 == 0)) {
             DAT_GameState::instance.playerDataArray[playerID].someAiCountdown6 = 0x30;
+            int iVar1 = DAT_GameSynchronyState::instance.currentPlayerSlotID;
             if ((DAT_GameState::instance.mapAndTime.playerTeams[playerID]
                     == DAT_GameState::instance.mapAndTime.playerTeams[iVar1])
                 && (DAT_GameState::instance.playerDataArray[iVar1].lordKilledByPlayerID == 0)) {

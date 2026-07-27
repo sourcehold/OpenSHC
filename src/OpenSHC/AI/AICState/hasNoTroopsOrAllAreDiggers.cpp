@@ -11,9 +11,10 @@ namespace AI {
         int _totalTroops;
         int _halfOfDiggingTroops;
 
-        int _totalMisc = DAT_GameState::instance.playerDataArray[playerID].totalUnitPatrolTroops
+        // reversed order to match orig
+        int _totalMisc = DAT_GameState::instance.playerDataArray[playerID].totalAssassinTroops
             + DAT_GameState::instance.playerDataArray[playerID].totalUnit2Troops
-            + DAT_GameState::instance.playerDataArray[playerID].totalAssassinTroops;
+            + DAT_GameState::instance.playerDataArray[playerID].totalUnitPatrolTroops;
         _halfOfDiggingTroops = 0;
         if (DAT_GameState::instance.playerDataArray[playerID].aiPlayerState == 6) {
             _totalMisc += DAT_GameState::instance.playerDataArray[playerID].totalDiggingUnitTroops;

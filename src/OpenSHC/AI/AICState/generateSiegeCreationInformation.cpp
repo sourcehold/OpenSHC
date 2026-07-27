@@ -17,15 +17,6 @@ namespace AI {
     using OpenSHC::Map::Units::UnitType;
     using OpenSHC::Map::Units::UnitTypeShort;
 
-    /*
-      WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names */
-
-    /*
-      WARNING: Enum "DPERRInt": Some values do not have unique names */
-
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000 */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004CC420
     void AICState ::generateSiegeCreationInformation(int playerID, int buildingID, int unitID)
 
@@ -73,7 +64,7 @@ namespace AI {
                 _engineIndexUnk = 0;
 
                 while ((_nextIndex = _engineIndexUnk + 1,
-                    *(int*)(playerID * 0x39f4 + iVar2 * 40 + 0x115eb14 + _engineIndexUnk * 4) < 1
+                    *(int*)(playerID * 0x39f4 + iVar2 * 40 + 0x115eb14 + _engineIndexUnk * 4) <= 0
                         || (buildingID
                             != *(int*)(playerID * 0x39f4 + 0x115f494 + (_engineIndexUnk + _siegeIndex * 5) * 0x14)))) {
 
