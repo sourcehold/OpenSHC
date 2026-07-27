@@ -18,20 +18,6 @@ namespace AI {
     using OpenSHC::Game::Resources::ResourceTypeInt;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    /*
-      Walks the AIC resource acquisition preference order (up to 25 entries in
-       DAT_ResourceAcquisitionPreferenceOrder) and attempts to buy the first resource for which the
-       player has a non-zero resourcesToAcquireArray entry and meets one of the spending conditions:
-       popularity is below the AIC minimum threshold (only checked for the first 4 entries), the AI is
-       nervous, or the canStartSpending flag is set. If the AI is nervous, entries 0-11 (non-weapon
-       resources) are skipped entirely so it only buys weapons. A special override fires first inside
-       the loop: if the building-destroy tracker is non-zero AND the player has fewer than 20 wood, the
-       resource type is forced to RT_WOOD regardless of the preference order. Before calling buyGoods()
-       the required gold is computed via getBuyPrice(); if the AI cannot afford the purchase it calls
-       requestGoods() from a teammate at double the desired amount instead. On a successful purchase
-       resourcesToAcquireArray for that resource is cleared and the function returns immediately,
-       buying at most one resource type per call. */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004D39B0
     void AICState ::buyRequiredGoods(int param_1)
 
@@ -51,9 +37,6 @@ namespace AI {
 
         playerID = param_1;
 
-        /*
-            buying */
-
         AVar1 = DAT_GameState::instance.playerDataArray[param_1].aiType;
 
         if (AVar1 == OpenSHC::AI::AIT_NULL) {
@@ -61,25 +44,16 @@ namespace AI {
             return;
         }
 
-        /*
-            reused! playerID now means a counter */
-
         param_1 = 0;
 
         do {
 
             resourceType = DAT_SkirmishDefinedData::instance.DAT_ResourceAcqusitionPreferenceOrder[param_1];
 
-            /*
-                  If nervous, only buy from entry 12 onwards, which are weapons */
-
-            if ((DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker < 1) || (12 < param_1)) {
+            if ((DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker <= 0) || (0xb < param_1)) {
 
                 if ((DAT_GameState::instance.playerDataArray[playerID].aiBuildingDestroyChoiceTracker != 0)
                     && (DAT_GameState::instance.playerDataArray[playerID].currentResources[2] < 20)) {
-
-                    /*
-                              if short on wood, buy wood! */
 
                     resourceType = OpenSHC::Game::Resources::RT_WOOD;
                 }
@@ -87,7 +61,7 @@ namespace AI {
                 amount = DAT_GameState::instance.playerDataArray[playerID].resourcesToAcquireArray[resourceType];
 
                 if ((amount != 0)
-                    && ((((param_1 < 4
+                    && ((((param_1 <= 3
                               && (DAT_GameState::instance.playerDataArray[playerID].popularity
                                   < *(int*)((int)this + (AVar1 + ~OpenSHC::AI::AIT_NULL) * 0x2a4 + 0x18)))
                              || (0 < DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker))
