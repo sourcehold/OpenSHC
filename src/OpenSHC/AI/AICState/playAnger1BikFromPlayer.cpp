@@ -17,18 +17,17 @@ namespace AI {
         int iVar2
             = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::getAliveLordForPlayer, DAT_UnitsState::ptr)(playerID);
         if (iVar2 != 0) {
-            int AVar1 = DAT_GameState::instance.playerDataArray[playerID].aiType;
-            if ((DAT_GameState::instance.mapAndTime.playerTeams[playerID]
-                    != DAT_GameState::instance.mapAndTime
-                        .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID])
-                && (DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID
-                    == DAT_GameSynchronyState::instance.currentPlayerSlotID)) {
+            int _playerTeam = DAT_GameState::instance.mapAndTime.playerTeams[playerID];
+            int AVar1 = DAT_GameState::instance.playerDataArray[playerID].aiType - 1;
+            int _curPlayer = DAT_GameSynchronyState::instance.currentPlayerSlotID;
+            if ((_playerTeam != DAT_GameState::instance.mapAndTime.playerTeams[_curPlayer])
+                && (DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID == _curPlayer)) {
                 DWORD DVar3 = timeGetTime();
                 if ((INT_ARRAY_00eb0af0::instance[playerID] == 0)
-                    || (599999 < DVar3 - INT_ARRAY_00eb0af0::instance[playerID])) {
+                    || (DVar3 - INT_ARRAY_00eb0af0::instance[playerID] >= 0x927c0)) {
                     INT_ARRAY_00eb0af0::instance[playerID] = DVar3;
                     MACRO_CALL_MEMBER(Rendering::Bink::AIMessageQueue_Func::playBikVideoFromPlayer,
-                        DAT_VideoBikQueue::ptr)(playerID, AVar1 - 1, 5);
+                        DAT_VideoBikQueue::ptr)(playerID, AVar1, 5);
                 }
             }
         }
