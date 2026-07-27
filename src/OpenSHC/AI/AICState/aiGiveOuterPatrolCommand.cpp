@@ -43,9 +43,9 @@ namespace AI {
                     if (((_tribeID != 0)
                             && (DAT_TribesState::instance.tribes[_tribeID].uid
                                 == DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[_index + 0xaa]))
-                        && ((DAT_TribesState::instance.tribes[_tribeID].percentageMovingUnk < 0xb
-                            && ((DAT_TribesState::instance.tribes[_tribeID].percentageShootingUnk < 0xb
-                                && (DAT_TribesState::instance.tribes[_tribeID].percentageAttackingUnk < 0xb)))))) {
+                        && ((DAT_TribesState::instance.tribes[_tribeID].percentageMovingUnk <= 0xa
+                            && ((DAT_TribesState::instance.tribes[_tribeID].percentageShootingUnk <= 0xa
+                                && (DAT_TribesState::instance.tribes[_tribeID].percentageAttackingUnk <= 0xa)))))) {
                         if (((int)this->aics[_aiType - 1].OuterPatrolGroupsMove == 0)
                             || (_buildingID = MACRO_CALL_MEMBER(AICState_Func::getTargetableBuildingForPlayerID, this)(
                                     playerID, _index),

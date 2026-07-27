@@ -10,9 +10,6 @@ namespace AI {
 
     using OpenSHC::AI::AIType;
 
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000 */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004CBA50
     void AICState ::planToBuyWhenLowOnResourceAndSnoozeBuildings(int playerID)
 
