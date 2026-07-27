@@ -1,6 +1,6 @@
 from typing import Dict, List
 from skink.architecture.enums import Enum, EnumResult
-from skink.export.project.project import DatatypeDatabasePlan, DefineddataDatabasePlan, FunctionDatabasePlan, Project, SymbolsDatabasePlan
+from skink.export.project.project import BasicDataTypeResult, DatatypeDatabasePlan, DefineddataDatabasePlan, FunctionDatabasePlan, Project, SymbolsDatabasePlan
 from skink.export.project.collection import ExportedContentCollection, ExportContents
 from skink.architecture.structs.struct import Struct
 from skink.architecture.unions.union import Union
@@ -15,7 +15,7 @@ from skink.sarif.datatypes.TypedefResult import AdditionalTypedefProperties, Mes
 import logging
 
 from skink.export.classes.collect import collect_classes, collect_namespaced_functions
-from skink.export.enums.enumfamilies import collect_enum_families
+from skink.export.enums.enumfamilies import EnumFamily, collect_enum_families
 import pathlib
 from skink.export.styles.style3.exporter import Exporter, BinaryContext, TransformationRules, FileRules
 
@@ -203,9 +203,37 @@ asm = exporter.export_symbols_as_assembly(data_addresses,
       typedef_func=typedefFunc)
 collection.add(asm)
 
-collection.write_to_disk(pathlib.Path(args.output_dir), overwrite_all=args.overwrite_all, no_touch_warning="THIS FILE IS AUTO GENERATED\n  Communicate changes to the dev team (e.g. via a Pull Request).\n  Changes get lost otherwise.")
+# collection.write_to_disk(pathlib.Path(args.output_dir), overwrite_all=args.overwrite_all, no_touch_warning="THIS FILE IS AUTO GENERATED\n  Communicate changes to the dev team (e.g. via a Pull Request).\n  Changes get lost otherwise.")
 
-for c in exporter.export_symbols(((addr, symbol, ddr) for addr, symbol, ddr, dt, isClass in data_addresses), destination="OpenSHC/Globals", namespace="OpenSHC"):
+enum_family_lookup: Dict[str, EnumFamily] = {}
+for fam in enum_families:
+ for child in fam.children:
+  n = child.properties.additionalProperties.name
+  if n in enum_family_lookup:
+    print(f"duplicate: {n}")
+  enum_family_lookup[n] = fam
+ 
+def fix_enum_type_symbol(dt: BasicDataTypeResult | None):
+  if not dt:
+    return ""
+  if dt.message.text == "DT.Enum":
+    n = dt.properties.additionalProperties.name
+    if n == "BOOLEnum":
+      return "int"
+    if n in enum_family_lookup:
+      size = dt.properties.additionalProperties.size
+      if size == 4:
+        return "int"
+      elif size == 2: 
+        return "short"
+      elif size == 1:
+        return "char"
+      else:
+        raise Exception(size)
+  return ""
+
+
+for c in exporter.export_symbols(((addr, symbol, ddr, fix_enum_type_symbol(dt)) for addr, symbol, ddr, dt, isClass in data_addresses), destination="OpenSHC/Globals", namespace="OpenSHC"):
   collection.add(c)
 
 if args.export_helpers:

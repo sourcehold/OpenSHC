@@ -11,7 +11,7 @@
 #include "OpenSHC/Map/Units/UnitTypeInt.hpp"
 
 // GLOBAL: STRONGHOLDCRUSADER 0x00B98438
-// StructResolver::Instance<OpenSHC::Map::Units::UnitTypeInt,12158008>::instance
+// StructResolver::Instance<int,12158008>::instance
 
 namespace OpenSHC {
 

@@ -11,7 +11,7 @@
 #include "OpenSHC/Audio/SFX/SFXFadeStateInt.hpp"
 
 // GLOBAL: STRONGHOLDCRUSADER 0x00B986FC
-// StructResolver::Instance<OpenSHC::Audio::SFX::SFXFadeStateInt,12158716>::instance
+// StructResolver::Instance<int,12158716>::instance
 
 namespace OpenSHC {
 
