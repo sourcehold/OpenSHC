@@ -16,10 +16,9 @@ namespace Audio {
         // SIZE: 0x00000094
         typedef struct UnitSpeechData {
 
-            int unk_1; // 0x00000000 length: 4
+            int numberOfVariations; // 0x00000000 length: 4
             char* filenames[18]; // 0x00000004 length: 72
-            int unk_2; // 0x0000004C length: 4
-            byte unk_3[68]; // 0x00000050 length: 68
+            int variationCounter[18]; // 0x0000004C length: 72
 
         } UnitSpeechData;
 #pragma pack(pop)

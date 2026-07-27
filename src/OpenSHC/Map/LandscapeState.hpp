@@ -89,7 +89,7 @@ namespace Map {
 
         uint isTreeAliveAndMatchingUID(int treeID, int param_2);
 
-        BOOLEnum isTreeMatchingUIDAndOfCertainState(int treeID, int treeUID);
+        BOOLEnum isTreeAdult(int treeID, int treeUID);
 
         undefined4 damageTreeAndTriggerDeathIfDepleted(int treeID, undefined4 param_2, int param_3);
 

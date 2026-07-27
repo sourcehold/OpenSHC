@@ -35,7 +35,7 @@ namespace Rendering {
         undefined1 padding_0xb8[4]; // 0x000000B8 length: 4
         undefined4 DAT_MapEditorDisplayLayer; // 0x000000BC length: 4
         uchar DAT_BinaryTileMap400x400[160000]; // 0x000000C0 length: 160000
-        short DAT_TileTranslationMatrix_YComponent[80400]; // 0x000271C0 length: 160800
+        short tileTranslationMatrix_YComponent[80400]; // 0x000271C0 length: 160800
         int field9_0x4e5e0; // 0x0004E5E0 length: 4
         undefined4 field10_0x4e5e4; // 0x0004E5E4 length: 4
         undefined4 field11_0x4e5e8; // 0x0004E5E8 length: 4

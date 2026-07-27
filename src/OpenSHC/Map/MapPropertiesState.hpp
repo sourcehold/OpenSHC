@@ -9,7 +9,7 @@
 #pragma once
 
 #include "OpenSHC/AI/Siege/SiegeUnitCounts.hpp"
-#include "OpenSHC/DE/SHCDE/eMappers.hpp"
+#include "OpenSHC/DE/SHCDE/eMappersSHCDE.hpp"
 #include "OpenSHC/Game/Scenario/BarracksRecruitabilityShort.hpp"
 #include "OpenSHC/Game/ScenarioEvents/InGameEventExtra.hpp"
 #include "OpenSHC/Game/ScenarioEvents/InGameEventUnionVersion.hpp"
@@ -24,7 +24,7 @@ namespace OpenSHC {
 namespace Map {
 
     using OpenSHC::AI::Siege::SiegeUnitCounts;
-    using OpenSHC::DE::SHCDE::eMappers;
+    using OpenSHC::DE::SHCDE::eMappersSHCDE;
     using OpenSHC::Game::TradeableResourcesSection;
     using OpenSHC::Game::Scenario::BarracksRecruitabilityShort;
     using OpenSHC::Game::ScenarioEvents::InGameEventExtra;
@@ -207,7 +207,7 @@ namespace Map {
 
         void commitBuildingAvailability();
 
-        BOOLEnum isMapperAvailable(eMappers param_1);
+        BOOLEnum isMapperAvailable(eMappersSHCDE param_1);
 
         int isMercRecruitableForBuildingType(int param_1);
 

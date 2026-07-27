@@ -54,7 +54,7 @@ namespace Map {
             undefined2 stageRelated1; // 0x00000072 length: 2
             undefined2 stageRelated2; // 0x00000074 length: 2
             short zeroUpTo2; // 0x00000076 length: 2
-            undefined2 stageRelatedVisual3; // 0x00000078 length: 2
+            undefined2 treeAdultHoodStageRelatedVisual3; // 0x00000078 length: 2
             undefined2 stageRelated4; // 0x0000007A length: 2
             short one; // 0x0000007C length: 2
             undefined1 padding_0x7e[2]; // 0x0000007E length: 2

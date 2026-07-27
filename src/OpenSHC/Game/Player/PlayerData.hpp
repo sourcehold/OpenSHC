@@ -421,9 +421,9 @@ namespace Game {
             int canStartSpending; // 0x00003974 length: 4
             short algoTreeCooldownUnk; // 0x00003978 length: 2
             short algoOasisCooldownUnk; // 0x0000397A length: 2
-            short algoBoulderCooldownUnk; // 0x0000397C length: 2
-            short algoIronCooldownUnk; // 0x0000397E length: 2
-            short algoOilCooldownUnk; // 0x00003980 length: 2
+            short algoBoulderCooldown; // 0x0000397C length: 2
+            short algoIronCooldown; // 0x0000397E length: 2
+            short algoOilCooldown; // 0x00003980 length: 2
             short availableTreeGridTiles; // 0x00003982 length: 2
             short availableOasisGridTiles; // 0x00003984 length: 2
             short availableBoulderGridTiles; // 0x00003986 length: 2

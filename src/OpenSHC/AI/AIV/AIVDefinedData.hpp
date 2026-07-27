@@ -10,6 +10,7 @@
 
 #include "OpenSHC/AI/AIV/AIVSectionAddress.hpp"
 #include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
+#include "OpenSHC/Map/Navigation/Algorithms/XYPair.hpp"
 
 namespace OpenSHC {
 namespace AI {
@@ -17,6 +18,7 @@ namespace AI {
 
         using OpenSHC::AI::AIV::AIVSectionAddress;
         using OpenSHC::Commands::CommandBuildingTypeInt;
+        using OpenSHC::Map::Navigation::Algorithms::XYPair;
 
 #pragma pack(push, 1)
         // SIZE: 0x00001CEC
@@ -27,11 +29,12 @@ namespace AI {
             undefined1 padding_0xe4[16]; // 0x000000E4 length: 16
             CommandBuildingTypeInt field21_0xf4[79]; // 0x000000F4 length: 316
             undefined1 padding_0x230[4]; // 0x00000230 length: 4
-            char DAT_AIVFileNames[16][8][50]; // 0x00000234 length: 6400
-            int DAT_BuildingLocationFindingOffsetArray[9][2]; // 0x00001B34 length: 72
-            int field28_0x1b7c[9][2]; // 0x00001B7C length: 72
-            int field29_0x1bc4[9]; // 0x00001BC4 length: 36
-            int field30_0x1be8[65]; // 0x00001BE8 length: 260
+            char aivFileNames[16][8][50]; // 0x00000234 length: 6400
+            XYPair offsetsForFiveByFiveAreaSpotCheck[9]; // 0x00001B34 length: 72
+            XYPair offsetsForClockwiseThreeByThreeAreaCheck[9]; // 0x00001B7C length: 72
+            XYPair offsetsForSpotCheckThreeByThreeAreaOnTheSide[4]; // 0x00001BC4 length: 32
+            XYPair tilesSelfAndRightThree[4]; // 0x00001BE4 length: 32
+            int field31_0x1c04[58]; // 0x00001C04 length: 232
 
         } AIVDefinedData;
 #pragma pack(pop)

@@ -3,7 +3,7 @@
   Communicate changes to the dev team (e.g. via a Pull Request).
   Changes get lost otherwise.
 
-  path: 'OpenSHC/DE/SHDE/eMappers.hpp'
+  path: 'OpenSHC/DE/SHDE/eMappersSHDE.hpp'
 */
 
 #pragma once
@@ -11,7 +11,7 @@
 namespace OpenSHC {
 namespace DE {
     namespace SHDE {
-        typedef enum eMappers {
+        typedef enum eMappersSHDE {
 
             M_MAPPER_NULL = 0, // 0x00000000
             M_MAPPER_AREA = 1, // 0x00000001
@@ -388,126 +388,11 @@ namespace DE {
             M_MAPPER_PLACE_ASSEMBLY_POINTE1 = 367, // 0x0000016F
             M_MAPPER_PLACE_ASSEMBLY_POINTE2 = 368, // 0x00000170
             M_MAPPER_PLACE_ASSEMBLY_POINTT1 = 369, // 0x00000171
-            M_END_OF_MAPPERS = 370, // 0x00000172
-            eMappersInt__M_MAPPER_CRENAL2 = 35, // 0x00000023
-            eMappersInt__M_MAPPER_OUTPOST_BEDOUIN = 53, // 0x00000035
-            eMappersInt__M_MAPPER_BEDOUIN_STOCKADE = 79, // 0x0000004F
-            eMappersInt__M_MAPPER_GENERIC = 108, // 0x0000006C
-            eMappersInt__M_MAPPER_QUARRYPILE = 109, // 0x0000006D
-            eMappersInt__M_MAPPER_SHRUB3A = 153, // 0x00000099
-            eMappersInt__M_MAPPER_SHRUB3B = 154, // 0x0000009A
-            eMappersInt__M_MAPPER_SHRUB3C = 155, // 0x0000009B
-            eMappersInt__M_MAPPER_SHRUB3D = 156, // 0x0000009C
-            eMappersInt__M_MAPPER_OUTPOST = 178, // 0x000000B2
-            eMappersInt__M_MAPPER_OUTPOST_ARAB = 179, // 0x000000B3
-            eMappersInt__M_MAPPER_STAIR1 = 181, // 0x000000B5
-            eMappersInt__M_MAPPER_STAIR2 = 182, // 0x000000B6
-            eMappersInt__M_MAPPER_STAIR3 = 183, // 0x000000B7
-            eMappersInt__M_MAPPER_STAIR4 = 184, // 0x000000B8
-            eMappersInt__M_MAPPER_STAIR5 = 185, // 0x000000B9
-            eMappersInt__M_MAPPER_STAIR6 = 186, // 0x000000BA
-            eMappersInt__M_MAPPER_DOCK = 195, // 0x000000C3
-            eMappersInt__M_MAPPER_DOCK2 = 196, // 0x000000C4
-            eMappersInt__M_MAPPER_DOCK3 = 197, // 0x000000C5
-            eMappersInt__M_MAPPER_DOCK4 = 198, // 0x000000C6
-            eMappersInt__M_MAPPER_POND5 = 265, // 0x00000109
-            eMappersInt__M_MAPPER_POND6 = 266, // 0x0000010A
-            eMappersInt__M_MAPPER_POND7 = 267, // 0x0000010B
-            eMappersInt__M_MAPPER_POND8 = 268, // 0x0000010C
-            eMappersInt__M_MAPPER_DUNES = 340, // 0x00000154
-            eMappersInt__M_MAPPER_SCRUBGRASS = 341, // 0x00000155
-            eMappersInt__M_MAPPER_WATERPOT = 342, // 0x00000156
-            eMappersInt__M_MAPPER_PEOPLE_ARAB_BOW = 350, // 0x0000015E
-            eMappersInt__M_MAPPER_PEOPLE_ARAB_SLAVE = 351, // 0x0000015F
-            eMappersInt__M_MAPPER_PEOPLE_ARAB_SLINGER = 352, // 0x00000160
-            eMappersInt__M_MAPPER_PEOPLE_ARAB_ASSASIN = 353, // 0x00000161
-            eMappersInt__M_MAPPER_PEOPLE_ARAB_HORSEMAN = 354, // 0x00000162
-            eMappersInt__M_MAPPER_PEOPLE_ARAB_SWORDSMAN = 355, // 0x00000163
-            eMappersInt__M_MAPPER_PEOPLE_ARAB_GRENADIER = 356, // 0x00000164
-            eMappersInt__M_MAPPER_PEOPLE_ARAB_BALLISTA = 357, // 0x00000165
-            eMappersInt__M_MAPPER_ARAB_BALLISTA = 358, // 0x00000166
-            eMappersInt__M_MAPPER_PLACE_ASSEMBLY_POINTM1 = 360, // 0x00000168
-            eMappersInt__M_MAPPER_PLACE_ASSEMBLY_POINTM2 = 361, // 0x00000169
-            eMappersInt__M_MAPPER_PLACE_ASSEMBLY_POINTM3 = 362, // 0x0000016A
-            eMappersInt__M_MAPPER_PLACE_ASSEMBLY_POINTM4 = 363, // 0x0000016B
-            eMappersInt__M_MAPPER_PLACE_ASSEMBLY_POINTM5 = 364, // 0x0000016C
-            eMappersInt__M_MAPPER_PLACE_ASSEMBLY_POINTM6 = 365, // 0x0000016D
-            eMappersInt__M_MAPPER_PLACE_ASSEMBLY_POINTM7 = 366, // 0x0000016E
-            eMappersInt__M_MAPPER_PLACE_ASSEMBLY_POINTK1 = 370, // 0x00000172
-            NAME_CONFLICT__eMappersInt_M_MAPPER_MENU_RETURN_TOWERS = 371, // 0x00000173
-            NAME_CONFLICT__eMappersInt_M_MAPPER_MENU_RETURN_GATEHOUSES = 372, // 0x00000174
-            NAME_CONFLICT__eMappersInt_M_MAPPER_MENU_RETURN_MILITARY = 373, // 0x00000175
-            NAME_CONFLICT__eMappersInt_M_MAPPER_MENU_RETURN_KEEPS = 374, // 0x00000176
-            NAME_CONFLICT__eMappersInt_M_MAPPER_MENU_RETURN_GOOD = 375, // 0x00000177
-            NAME_CONFLICT__eMappersInt_M_MAPPER_MENU_RETURN_BAD = 376, // 0x00000178
-            NAME_CONFLICT__eMappersInt_M_MAPPER_SUB_MENU_TOWERS = 377, // 0x00000179
-            NAME_CONFLICT__eMappersInt_M_MAPPER_SUB_MENU_MILITARY = 378, // 0x0000017A
-            NAME_CONFLICT__eMappersInt_M_MAPPER_SUB_MENU_GATEHOUSES = 379, // 0x0000017B
-            NAME_CONFLICT__eMappersInt_M_MAPPER_MARKER_POINT1 = 380, // 0x0000017C
-            NAME_CONFLICT__eMappersInt_M_MAPPER_MARKER_POINT2 = 381, // 0x0000017D
-            NAME_CONFLICT__eMappersInt_M_MAPPER_MARKER_POINT3 = 382, // 0x0000017E
-            NAME_CONFLICT__eMappersInt_M_MAPPER_MARKER_POINT4 = 383, // 0x0000017F
-            NAME_CONFLICT__eMappersInt_M_MAPPER_MARKER_POINT5 = 384, // 0x00000180
-            NAME_CONFLICT__eMappersInt_M_MAPPER_MARKER_POINT6 = 385, // 0x00000181
-            NAME_CONFLICT__eMappersInt_M_MAPPER_MARKER_POINT7 = 386, // 0x00000182
-            NAME_CONFLICT__eMappersInt_M_MAPPER_MARKER_POINT8 = 387, // 0x00000183
-            NAME_CONFLICT__eMappersInt_M_MAPPER_MARKER_POINT9 = 388, // 0x00000184
-            NAME_CONFLICT__eMappersInt_M_MAPPER_MARKER_POINT10 = 389, // 0x00000185
-            eMappersInt__M_MAPPER_PLACE_ASSEMBLY_POINTBS1 = 391, // 0x00000187
-            eMappersInt__M_MAPPER_PLACE_ASSEMBLY_POINTBS2 = 392, // 0x00000188
-            eMappersInt__M_MAPPER_PLACE_ASSEMBLY_POINTBS3 = 393, // 0x00000189
-            eMappersInt__M_MAPPER_PLACE_ASSEMBLY_POINTBS4 = 394, // 0x0000018A
-            eMappersInt__M_MAPPER_PLACE_ASSEMBLY_POINTBS5 = 395, // 0x0000018B
-            eMappersInt__M_MAPPER_PLACE_ASSEMBLY_POINTBS6 = 396, // 0x0000018C
-            eMappersInt__M_MAPPER_PLACE_ASSEMBLY_POINTBS7 = 397, // 0x0000018D
-            eMappersInt__M_MAPPER_PLACE_ASSEMBLY_POINTBS8 = 398, // 0x0000018E
-            eMappersInt__M_MAPPER_PEOPLE_BEDOUIN_CAMEL_LANCER = 400, // 0x00000190
-            eMappersInt__M_MAPPER_PEOPLE_BEDOUIN_HEALER = 401, // 0x00000191
-            eMappersInt__M_MAPPER_PEOPLE_BEDOUIN_EUNUCH = 402, // 0x00000192
-            eMappersInt__M_MAPPER_PEOPLE_BEDOUIN_AMBUSHER = 403, // 0x00000193
-            eMappersInt__M_MAPPER_PEOPLE_BEDOUIN_SKIRMISHER = 404, // 0x00000194
-            eMappersInt__M_MAPPER_PEOPLE_BEDOUIN_HEAVY_CAMEL = 405, // 0x00000195
-            eMappersInt__M_MAPPER_PEOPLE_BEDOUIN_SAPPER = 406, // 0x00000196
-            eMappersInt__M_MAPPER_PEOPLE_BEDOUIN_DEMOLISHER = 407, // 0x00000197
-            NAME_CONFLICT__eMappersInt_M_MAPPER_RUINS1 = 410, // 0x0000019A
-            NAME_CONFLICT__eMappersInt_M_MAPPER_RUINS2 = 411, // 0x0000019B
-            NAME_CONFLICT__eMappersInt_M_MAPPER_RUINS3 = 412, // 0x0000019C
-            NAME_CONFLICT__eMappersInt_M_MAPPER_RUINS4 = 413, // 0x0000019D
-            NAME_CONFLICT__eMappersInt_M_MAPPER_RUINS5 = 414, // 0x0000019E
-            NAME_CONFLICT__eMappersInt_M_MAPPER_RUINS6 = 415, // 0x0000019F
-            NAME_CONFLICT__eMappersInt_M_MAPPER_RUINS7 = 416, // 0x000001A0
-            NAME_CONFLICT__eMappersInt_M_MAPPER_RUINS8 = 417, // 0x000001A1
-            NAME_CONFLICT__eMappersInt_M_MAPPER_RUINS9 = 418, // 0x000001A2
-            NAME_CONFLICT__eMappersInt_M_MAPPER_RUINS10 = 419, // 0x000001A3
-            NAME_CONFLICT__eMappersInt_M_MAPPER_RUINS11 = 420, // 0x000001A4
-            NAME_CONFLICT__eMappersInt_M_MAPPER_RUINS12 = 421, // 0x000001A5
-            NAME_CONFLICT__eMappersInt_M_MAPPER_RUINS13 = 422, // 0x000001A6
-            eMappersInt__M_MAPPER_RUINS14 = 423, // 0x000001A7
-            eMappersInt__M_MAPPER_RUINS15 = 424, // 0x000001A8
-            eMappersInt__M_MAPPER_RUINS16 = 425, // 0x000001A9
-            eMappersInt__M_MAPPER_RUINS17 = 426, // 0x000001AA
-            eMappersInt__M_MAPPER_RUINS18 = 427, // 0x000001AB
-            eMappersInt__M_MAPPER_RUINS19 = 428, // 0x000001AC
-            eMappersInt__M_MAPPER_RUINS20 = 429, // 0x000001AD
-            eMappersInt__M_MAPPER_RUINS21 = 430, // 0x000001AE
-            eMappersInt__M_MAPPER_RUINS22 = 431, // 0x000001AF
-            eMappersInt__M_MAPPER_RUINS23 = 432, // 0x000001B0
-            eMappersInt__M_MAPPER_RUINS24 = 433, // 0x000001B1
-            eMappersInt__M_MAPPER_RUINS25 = 434, // 0x000001B2
-            eMappersInt__M_MAPPER_RUINS26 = 435, // 0x000001B3
-            eMappersInt__M_MAPPER_RUINS27 = 436, // 0x000001B4
-            eMappersInt__M_MAPPER_RUINS28 = 437, // 0x000001B5
-            eMappersInt__M_MAPPER_RUINS29 = 438, // 0x000001B6
-            eMappersInt__M_MAPPER_RUINS30 = 439, // 0x000001B7
-            eMappersInt__M_MAPPER_RUINS31 = 440, // 0x000001B8
-            eMappersInt__M_MAPPER_RUINS32 = 441, // 0x000001B9
-            eMappersInt__M_MAPPER_RUINS33 = 442, // 0x000001BA
-            eMappersInt__M_MAPPER_RUINS34 = 443, // 0x000001BB
-            NAME_CONFLICT__eMappersInt_M_END_OF_MAPPERS = 450 // 0x000001C2
+            M_END_OF_MAPPERS = 370 // 0x00000172
 
-        } eMappers;
+        } eMappersSHDE;
 
-        static_assert_cpp98_obj(sizeof(eMappers) == 4, eMappers);
+        static_assert_cpp98_obj(sizeof(eMappersSHDE) == 4, eMappersSHDE);
     } // namespace SHDE
 } // namespace DE
 } // namespace OpenSHC

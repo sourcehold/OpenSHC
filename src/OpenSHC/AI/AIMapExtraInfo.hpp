@@ -16,8 +16,8 @@ namespace AI {
     typedef struct AIMapExtraInfo {
 
         int totalWoodAvailable; // 0x00000000 length: 4
-        int someSeparateAreaValue; // 0x00000004 length: 4
-        int currentSuitableLocationOffsetArrayIndex_fixme; // 0x00000008 length: 4
+        int largestSeparateArea; // 0x00000004 length: 4
+        int algBuildingPlacementNudge; // 0x00000008 length: 4
         int algorithmIterationNumber; // 0x0000000C length: 4
         int playerTotalKillingPits[9]; // 0x00000010 length: 36
         byte unused01[764]; // 0x00000034 length: 764

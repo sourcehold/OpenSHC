@@ -100,7 +100,7 @@ namespace Audio {
 
             void playUnitSpeech(UnitType unitType, int actionID);
 
-            void loadSFX();
+            void loadSFX(int param_1);
 
             void updateAmbientSoundStream();
 

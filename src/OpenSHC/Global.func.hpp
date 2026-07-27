@@ -831,8 +831,8 @@ namespace Global_Func {
     WriteMissionToScoresFile;
 
     MACRO_FUNCTION_RESOLVER(
-        int(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004EDD00, &OpenSHC::Global::SomeComputationWithSeparateAreas)
-    SomeComputationWithSeparateAreas;
+        int(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004EDD00, &OpenSHC::Global::ComputeLargestSeparateArea)
+    ComputeLargestSeparateArea;
 
     MACRO_FUNCTION_RESOLVER(
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004F37B0, &OpenSHC::Global::VersioningFixTrees)

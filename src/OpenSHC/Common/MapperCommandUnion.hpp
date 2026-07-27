@@ -10,25 +10,25 @@
 
 #include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
 #include "OpenSHC/Commands/CommandBuildingTypeShort.hpp"
-#include "OpenSHC/DE/SHCDE/eMappersInt.hpp"
-#include "OpenSHC/DE/SHDE/eMappersInt.hpp"
+#include "OpenSHC/DE/SHCDE/eMappersSHCDEInt.hpp"
+#include "OpenSHC/DE/SHDE/eMappersSHDEInt.hpp"
 
 namespace OpenSHC {
 namespace Common {
 
     using OpenSHC::Commands::CommandBuildingTypeInt;
     using OpenSHC::Commands::CommandBuildingTypeShort;
-    using OpenSHC::DE::SHCDE::eMappersInt;
-    using OpenSHC::DE::SHDE::eMappersInt;
+    using OpenSHC::DE::SHCDE::eMappersSHCDEInt;
+    using OpenSHC::DE::SHDE::eMappersSHDEInt;
 
 #pragma pack(push, 1)
     // SIZE: 0x00000004
     typedef union MapperCommandUnion {
 
-        eMappersInt sh1; // 0x00000000 length: 4
+        eMappersSHDEInt sh1; // 0x00000000 length: 4
         CommandBuildingTypeInt shc; // 0x00000000 length: 4
         CommandBuildingTypeShort shcShort; // 0x00000000 length: 2
-        eMappersInt shcde; // 0x00000000 length: 4
+        eMappersSHCDEInt shcde; // 0x00000000 length: 4
 
     } MapperCommandUnion;
 #pragma pack(pop)

@@ -117,7 +117,8 @@ namespace Audio {
                 void (SFXState::*)(UnitType, int), false, Address::SHC_3BB0A8C1_0x0044B210, &SFXState::playUnitSpeech)
             playUnitSpeech;
 
-            MACRO_FUNCTION_RESOLVER(void (SFXState::*)(), false, Address::SHC_3BB0A8C1_0x0044BCA0, &SFXState::loadSFX)
+            MACRO_FUNCTION_RESOLVER(
+                void (SFXState::*)(int), false, Address::SHC_3BB0A8C1_0x0044BCA0, &SFXState::loadSFX)
             loadSFX;
 
             MACRO_FUNCTION_RESOLVER(

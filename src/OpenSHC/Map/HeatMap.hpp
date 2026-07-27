@@ -16,26 +16,26 @@ namespace Map {
     typedef struct HeatMap {
 
         int algorithmIterationNumber; // 0x00000000 length: 4
-        byte distanceToTheKeepCountUnk_fixme; // 0x00000004 length: 1
+        byte tilesNotPartOfLargestAreaCount; // 0x00000004 length: 1
         byte algorithmVisitCountUnk; // 0x00000005 length: 1
         byte woodRelatedCountdownTo0; // 0x00000006 length: 1
-        byte woodCount; // 0x00000007 length: 1
-        byte stoneCount; // 0x00000008 length: 1
+        byte treeCount; // 0x00000007 length: 1
+        byte bouldersCount; // 0x00000008 length: 1
         byte ironCount; // 0x00000009 length: 1
-        byte oilCount_1; // 0x0000000A length: 1
-        byte oilCount_2; // 0x0000000B length: 1
+        byte oilCount; // 0x0000000A length: 1
+        byte marshCount; // 0x0000000B length: 1
         byte lowestTerrainHeight; // 0x0000000C length: 1
         byte highestTerrainHeight; // 0x0000000D length: 1
         byte terrainDiffHigherThan12; // 0x0000000E length: 1
-        byte buildingOccupiedTilesCount; // 0x0000000F length: 1
+        byte structureCount; // 0x0000000F length: 1
         byte isNotNearEdgeUnk; // 0x00000010 length: 1
-        byte oasisUnk; // 0x00000011 length: 1
-        byte oasisthickUnk; // 0x00000012 length: 1
-        byte countdownFrom10to0; // 0x00000013 length: 1
-        byte field17_0x14; // 0x00000014 length: 1
+        byte oasisScrubCount; // 0x00000011 length: 1
+        byte oasisThickScrubCount; // 0x00000012 length: 1
+        byte destructionBasedPlacementCooldown; // 0x00000013 length: 1
+        byte unused_0x14; // 0x00000014 length: 1
         byte tileOwnership; // 0x00000015 length: 1
-        byte waterOrRockCountUnk; // 0x00000016 length: 1
-        byte field20_0x17; // 0x00000017 length: 1
+        byte impassableCount; // 0x00000016 length: 1
+        byte unused_0x17; // 0x00000017 length: 1
         short field21_0x18; // 0x00000018 length: 2
         short field22_0x1a; // 0x0000001A length: 2
         short field23_0x1c; // 0x0000001C length: 2

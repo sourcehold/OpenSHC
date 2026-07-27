@@ -64,8 +64,8 @@ namespace AI {
         aiPlaceBrazier;
 
         MACRO_FUNCTION_RESOLVER(void (AIVState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004ED3B0,
-            &AIVState::incrementBuildingHeatMapTile)
-        incrementBuildingHeatMapTile;
+            &AIVState::incrementStructureHeatMapTile)
+        incrementStructureHeatMapTile;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (AIVState::*)(PlayerID, int, int), false, Address::SHC_3BB0A8C1_0x004ED410,
             &AIVState::aiPlaceAIVBuilding)
@@ -76,32 +76,32 @@ namespace AI {
         clearTheHeatmaps;
 
         MACRO_FUNCTION_RESOLVER(
-            void (AIVState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004EDCB0, &AIVState::set0x13ValueTo10InHeatMap)
-        set0x13ValueTo10InHeatMap;
+            void (AIVState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004EDCB0, &AIVState::resetCountdownInHeatMap)
+        resetCountdownInHeatMap;
 
         MACRO_FUNCTION_RESOLVER(int (AIVState::*)(PlayerID, CommandBuildingType), false,
-            Address::SHC_3BB0A8C1_0x004EDDF0, &AIVState::findSuitableLocationCloseToKeepAndPlaceBuilding)
-        findSuitableLocationCloseToKeepAndPlaceBuilding;
+            Address::SHC_3BB0A8C1_0x004EDDF0, &AIVState::findSuitableFarmLocationAndPlaceFarm)
+        findSuitableFarmLocationAndPlaceFarm;
 
         MACRO_FUNCTION_RESOLVER(void (AIVState::*)(int), false, Address::SHC_3BB0A8C1_0x004EE140,
-            &AIVState::findAppropriateWoodCutterLocation)
-        findAppropriateWoodCutterLocation;
+            &AIVState::findAppropriateWoodCutterGridLocation)
+        findAppropriateWoodCutterGridLocation;
 
         MACRO_FUNCTION_RESOLVER(void (AIVState::*)(int, AIGridComputationResourceType), false,
-            Address::SHC_3BB0A8C1_0x004EE430, &AIVState::findAppropriateBuildingLocationForResourceType)
-        findAppropriateBuildingLocationForResourceType;
+            Address::SHC_3BB0A8C1_0x004EE430, &AIVState::findAppropriateGridLocationForResourceTypeBuilding)
+        findAppropriateGridLocationForResourceTypeBuilding;
 
         MACRO_FUNCTION_RESOLVER(
             void (AIVState::*)(int), false, Address::SHC_3BB0A8C1_0x004EE830, &AIVState::recomputeAIAvailableGridTiles)
         recomputeAIAvailableGridTiles;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (AIVState::*)(uint, uint), false, Address::SHC_3BB0A8C1_0x004EEBD0, &AIVState::find2by2Location)
-        find2by2Location;
+        MACRO_FUNCTION_RESOLVER(void (AIVState::*)(uint, uint), false, Address::SHC_3BB0A8C1_0x004EEBD0,
+            &AIVState::findSuitableGridLocationFittingCriteria)
+        findSuitableGridLocationFittingCriteria;
 
         MACRO_FUNCTION_RESOLVER(void (AIVState::*)(uint, uint), false, Address::SHC_3BB0A8C1_0x004EEE10,
-            &AIVState::findAppropriateBuildingLocation)
-        findAppropriateBuildingLocation;
+            &AIVState::findAppropriateGridLocationForBuilding)
+        findAppropriateGridLocationForBuilding;
 
         MACRO_FUNCTION_RESOLVER(
             void (AIVState::*)(), false, Address::SHC_3BB0A8C1_0x004EF090, &AIVState::wipeAIVsAndHeatMaps)
@@ -123,8 +123,8 @@ namespace AI {
             void (AIVState::*)(int), false, Address::SHC_3BB0A8C1_0x004EFAB0, &AIVState::aiPlaceWoodcuttershut)
         aiPlaceWoodcuttershut;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (AIVState::*)(int), false, Address::SHC_3BB0A8C1_0x004EFB90,
-            &AIVState::findSpotNearEngineersGuild)
+        MACRO_FUNCTION_RESOLVER(
+            BOOLEnum (AIVState::*)(int), false, Address::SHC_3BB0A8C1_0x004EFB90, &AIVState::findSpotNearEngineersGuild)
         findSpotNearEngineersGuild;
 
         MACRO_FUNCTION_RESOLVER(

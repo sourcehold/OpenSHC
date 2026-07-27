@@ -3,7 +3,7 @@
   Communicate changes to the dev team (e.g. via a Pull Request).
   Changes get lost otherwise.
 
-  path: 'OpenSHC/DE/SHCDE/eMappers.hpp'
+  path: 'OpenSHC/DE/SHCDE/eMappersSHCDE.hpp'
 */
 
 #pragma once
@@ -11,7 +11,7 @@
 namespace OpenSHC {
 namespace DE {
     namespace SHCDE {
-        typedef enum eMappers {
+        typedef enum eMappersSHCDE {
 
             M_MAPPER_NULL = 0, // 0x00000000
             M_MAPPER_AREA = 1, // 0x00000001
@@ -442,9 +442,9 @@ namespace DE {
             M_MAPPER_RUINS34 = 443, // 0x000001BB
             M_END_OF_MAPPERS = 450 // 0x000001C2
 
-        } eMappers;
+        } eMappersSHCDE;
 
-        static_assert_cpp98_obj(sizeof(eMappers) == 4, eMappers);
+        static_assert_cpp98_obj(sizeof(eMappersSHCDE) == 4, eMappersSHCDE);
     } // namespace SHCDE
 } // namespace DE
 } // namespace OpenSHC

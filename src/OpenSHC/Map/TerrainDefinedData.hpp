@@ -34,7 +34,7 @@ namespace Map {
         undefined1 padding_0xc8[8]; // 0x000000C8 length: 8
         undefined4 field23_0xd0; // 0x000000D0 length: 4
         undefined1 padding_0xd4[32]; // 0x000000D4 length: 32
-        Point8 DAT_CoordinateCardinalTranslationMatrix[8]; // 0x000000F4 length: 64
+        Point8 clockwiseCardinalTranslationMatrix[8]; // 0x000000F4 length: 64
         undefined1 padding_0x134[4]; // 0x00000134 length: 4
         int field61_0x138; // 0x00000138 length: 4
         XYPair field62_0x13c[4][3]; // 0x0000013C length: 96

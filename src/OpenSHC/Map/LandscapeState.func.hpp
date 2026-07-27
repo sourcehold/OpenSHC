@@ -86,8 +86,8 @@ namespace Map {
         isTreeAliveAndMatchingUID;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (LandscapeState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004F2FE0,
-            &LandscapeState::isTreeMatchingUIDAndOfCertainState)
-        isTreeMatchingUIDAndOfCertainState;
+            &LandscapeState::isTreeAdult)
+        isTreeAdult;
 
         MACRO_FUNCTION_RESOLVER(undefined4 (LandscapeState::*)(int, undefined4, int), false,
             Address::SHC_3BB0A8C1_0x004F3010, &LandscapeState::damageTreeAndTriggerDeathIfDepleted)

@@ -449,7 +449,7 @@ namespace Global {
 
     void __cdecl WriteMissionToScoresFile(char* param_1, int param_2);
 
-    int __stdcall SomeComputationWithSeparateAreas();
+    int __stdcall ComputeLargestSeparateArea();
 
     void __stdcall VersioningFixTrees();
 

@@ -42153,7 +42153,7 @@ enum {
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004ED300 = 0x004ED300,
-    // label: incrementBuildingHeatMapTile
+    // label: incrementStructureHeatMapTile
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004ED3B0 = 0x004ED3B0,
@@ -42165,25 +42165,25 @@ enum {
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004EDC90 = 0x004EDC90,
-    // label: set0x13ValueTo10InHeatMap
+    // label: resetCountdownInHeatMap
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004EDCB0 = 0x004EDCB0,
-    // label: SomeComputationWithSeparateAreas
+    // label: ComputeLargestSeparateArea
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x004EDD00 = 0x004EDD00,
-    // label: findSuitableLocationCloseToKeepAndPlaceBuilding
+    // label: findSuitableFarmLocationAndPlaceFarm
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004EDDF0 = 0x004EDDF0,
-    // label: findAppropriateWoodCutterLocation
+    // label: findAppropriateWoodCutterGridLocation
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004EE140 = 0x004EE140,
     // type: function
     SHC_3BB0A8C1_0x004EE230 = 0x004EE230,
-    // label: findAppropriateBuildingLocationForResourceType
+    // label: findAppropriateGridLocationForResourceTypeBuilding
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004EE430 = 0x004EE430,
@@ -42193,13 +42193,13 @@ enum {
     SHC_3BB0A8C1_0x004EE830 = 0x004EE830,
     // type: function
     SHC_3BB0A8C1_0x004EE920 = 0x004EE920,
-    // label: find2by2Location
+    // label: findSuitableGridLocationFittingCriteria
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004EEBD0 = 0x004EEBD0,
     // type: function
     SHC_3BB0A8C1_0x004EECC0 = 0x004EECC0,
-    // label: findAppropriateBuildingLocation
+    // label: findAppropriateGridLocationForBuilding
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004EEE10 = 0x004EEE10,
@@ -42922,7 +42922,7 @@ enum {
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F2FB0 = 0x004F2FB0,
-    // label: isTreeMatchingUIDAndOfCertainState
+    // label: isTreeAdult
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F2FE0 = 0x004F2FE0,
