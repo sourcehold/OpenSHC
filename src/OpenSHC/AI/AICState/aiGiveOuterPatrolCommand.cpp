@@ -46,19 +46,22 @@ namespace AI {
                         && ((DAT_TribesState::instance.tribes[_tribeID].percentageMovingUnk <= 0xa
                             && ((DAT_TribesState::instance.tribes[_tribeID].percentageShootingUnk <= 0xa
                                 && (DAT_TribesState::instance.tribes[_tribeID].percentageAttackingUnk <= 0xa)))))) {
+                        bool _hasTarget = true;
                         if (((int)this->aics[_aiType - 1].OuterPatrolGroupsMove == 0)
                             || (_buildingID = MACRO_CALL_MEMBER(AICState_Func::getTargetableBuildingForPlayerID, this)(
                                     playerID, _index),
                                 _buildingID == 0)) {
                             _buildingID2 = MACRO_CALL_MEMBER(
                                 AICState_Func::selectBuildingFromAListOfBuildingTypes, this)(playerID);
-                            if (_buildingID2 == 0)
-                                goto LAB_004d2a44;
-                            _tile = (int)DAT_BuildingsState::instance.buildings[_buildingID2].buildingEntryX
-                                + DAT_ViewportRenderState::instance
-                                      .translationMatrix[DAT_BuildingsState::instance.buildings[_buildingID2]
-                                              .buildingEntryY]
-                                      .addXgetTile;
+                            if (_buildingID2 == 0) {
+                                _hasTarget = false;
+                            } else {
+                                _tile = (int)DAT_BuildingsState::instance.buildings[_buildingID2].buildingEntryX
+                                    + DAT_ViewportRenderState::instance
+                                          .translationMatrix[DAT_BuildingsState::instance.buildings[_buildingID2]
+                                                  .buildingEntryY]
+                                          .addXgetTile;
+                            }
                         } else {
                             _tile = (int)DAT_BuildingsState::instance.buildings[_buildingID].buildingEntryX
                                 + DAT_ViewportRenderState::instance
@@ -66,7 +69,7 @@ namespace AI {
                                               .buildingEntryY]
                                       .addXgetTile;
                         }
-                        if (_tile != 0) {
+                        if (_hasTarget && _tile != 0) {
                             sVar2 = DAT_ViewportRenderState::instance.DAT_TileTranslationMatrix_YComponent[_tile];
                             iVar3 = DAT_ViewportRenderState::instance.translationMatrix[sVar2].addXgetTile;
                             _canNavigate = MACRO_CALL_MEMBER(AICState_Func::canNavigateUnitsFromTileToTargetTile, this)(
@@ -79,7 +82,6 @@ namespace AI {
                             }
                         }
                     }
-                LAB_004d2a44:
                     _index = _index + 1;
                     psVar4 = psVar4 + 1;
                 } while (_index < _count);
