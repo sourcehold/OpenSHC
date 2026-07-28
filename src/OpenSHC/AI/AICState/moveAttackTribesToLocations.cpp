@@ -19,7 +19,7 @@ namespace AI {
       decompilerscript: committed: 2025-01-30 21:57:43.216000 */
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CE830
-    void AICState ::moveAttackTribesToLocations(short* playerID)
+    void AICState ::moveAttackTribesToLocations(int playerID)
 
     {
 
@@ -27,7 +27,7 @@ namespace AI {
 
         int iVar2;
 
-        short* psVar3;
+        int psVar3;
 
         int tribeID;
 
@@ -55,11 +55,11 @@ namespace AI {
 
                 if (0 < iVar1) {
 
-                    playerID = DAT_GameState::instance.playerDataArray[(int)psVar3].aiTribeIDs + iVar2;
+                    short* __playerID = DAT_GameState::instance.playerDataArray[(int)psVar3].aiTribeIDs + iVar2;
 
                     do {
 
-                        tribeID = (int)*playerID;
+                        tribeID = (int)*__playerID;
 
                         if ((tribeID != 0)
                             && (DAT_TribesState::instance.tribes[tribeID].uid
@@ -85,7 +85,7 @@ namespace AI {
                             iVar4 = iVar4 + 1;
                         }
 
-                        playerID = playerID + 1;
+                        __playerID = __playerID + 1;
 
                         iVar5 = iVar5 + 1;
 

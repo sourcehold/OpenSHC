@@ -21,7 +21,7 @@ namespace AI {
        decompilerscript: committed: 2025-01-30 21:57:43.216000 */
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CE4D0
-    void AICState ::aiRetreatUnits(short* playerID)
+    void AICState ::aiRetreatUnits(int playerID)
 
     {
 
@@ -37,7 +37,7 @@ namespace AI {
 
         int _groupCount;
 
-        short* _playerID;
+        int _playerID;
 
         _playerID = playerID;
 
@@ -55,11 +55,12 @@ namespace AI {
 
                 if (0 < _groupCount) {
 
-                    playerID = DAT_GameState::instance.playerDataArray[(int)_playerID].aiTribeIDs + _aiBehaviourType;
+                    short* __playerID
+                        = DAT_GameState::instance.playerDataArray[(int)_playerID].aiTribeIDs + _aiBehaviourType;
 
                     do {
 
-                        _tribeID = (int)*playerID;
+                        _tribeID = (int)*__playerID;
 
                         if ((_tribeID != 0)
                             && (DAT_TribesState::instance.tribes[_tribeID].uid
@@ -104,7 +105,7 @@ namespace AI {
                             }
                         }
 
-                        playerID = playerID + 1;
+                        __playerID = __playerID + 1;
 
                         _counter = _counter + 1;
 
