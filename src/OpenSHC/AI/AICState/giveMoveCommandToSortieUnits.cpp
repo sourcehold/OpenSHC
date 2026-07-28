@@ -18,88 +18,64 @@ namespace AI {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CD8F0
     void AICState ::giveMoveCommandToSortieUnits(int playerID)
-
     {
-
-        int iVar1;
-
-        int _tribeID;
-
-        int _aiType;
-
-        int _unitID;
-
-        _aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
-
-        if (_aiType == 0) {
+        int _aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
+        if (_aiType == 0)
             return;
-        }
 
-        _tribeID = (int)DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[0xa7];
-
-        if (_tribeID == 0) {
+        int _tribeID = (int)DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[0xa7];
+        if (_tribeID == 0)
             return;
-        }
-
         if (DAT_TribesState::instance.tribes[_tribeID].uid
-            != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[0xa7]) {
+            != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[0xa7])
             return;
-        }
 
         if ((int)DAT_TribesState::instance.tribes[_tribeID].size
-            < DAT_GameState::instance.playerDataArray[playerID].totalTroopsType7 + -1) {
+            < DAT_GameState::instance.playerDataArray[playerID].totalTroopsType7 + -1)
             MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::syncBehaviourType7UnitTribes, this)(playerID);
-        }
 
         if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker > 0) {
-            goto LAB_sendToKeep;
+            // nervous: send to keep then set stance
+            MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToKeep, this)(_tribeID, playerID);
+            DAT_TribesState::instance.tribes[_tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
+            return;
         }
 
-        /*
-              SortieUnitMeleeMin */
-
         if ((int)DAT_TribesState::instance.tribes[_tribeID].size
-            < *(int*)((int)this + (_aiType + -1) * 0x2a4 + 0x154))
-            goto LAB_004cda3c;
+            < *(int*)((int)this + (_aiType + -1) * 0x2a4 + 0x154)) {
+            // tribe too small: just set stance
+            DAT_TribesState::instance.tribes[_tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
+            return;
+        }
 
-        _unitID = DAT_GameState::instance.playerDataArray[playerID].lastEncounteredTroopUnitID;
-
+        int _unitID = DAT_GameState::instance.playerDataArray[playerID].lastEncounteredTroopUnitID;
+        int iVar1;
         if (((_unitID != 0)
                 && (DAT_GameState::instance.playerDataArray[playerID].lastEncounteredTroopUnitUID
                     == DAT_UnitsState::instance.units[_unitID].uid))
             && (iVar1 = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
                     DAT_PathFindingState::ptr)(playerID,
-                    (dword)((
-                        int)((int)(short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance
-                            .units[DAT_TribesState::instance.tribes[_tribeID].selectionTargetUnitID]
-                            .tile])),
+                    (dword)((int)((int)(short)DAT_TileMapState::instance
+                            .PathConnectionLayer[DAT_UnitsState::instance
+                                    .units[DAT_TribesState::instance.tribes[_tribeID].selectionTargetUnitID].tile])),
                     (dword)((int)((int)(short)DAT_TileMapState::instance
                             .PathConnectionLayer[DAT_UnitsState::instance.units[_unitID].tile])),
                     0),
                 iVar1 != 0)) {
-
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::unsetRallyRelatedFlagOnUnits,
                 DAT_TribesState::ptr)(_tribeID);
-
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction,
-                DAT_TribesState::ptr)(_tribeID, (uint)((int)((int)DAT_UnitsState::instance.units[_unitID].x)),
+                DAT_TribesState::ptr)(_tribeID,
+                (uint)((int)((int)DAT_UnitsState::instance.units[_unitID].x)),
                 (uint)((int)((int)DAT_UnitsState::instance.units[_unitID].y)), 0, 0,
                 OpenSHC::Map::Units::Instructions::UMSE_0);
-
             DAT_TribesState::instance.tribes[_tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
-
             return;
         }
 
-    LAB_sendToKeep:
         MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToKeep, this)(_tribeID, playerID);
-
-    LAB_004cda3c:
         DAT_TribesState::instance.tribes[_tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
-
-        return;
     }
-
 }
 }

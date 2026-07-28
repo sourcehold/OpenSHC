@@ -8,14 +8,12 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CFFD0
     BOOLEnum AICState::hasNoTroopsOrAllAreDiggers(int playerID)
     {
-        int _totalTroops;
-        int _halfOfDiggingTroops;
-
-        // reversed order to match orig
         int _totalMisc = DAT_GameState::instance.playerDataArray[playerID].totalAssassinTroops
             + DAT_GameState::instance.playerDataArray[playerID].totalUnit2Troops
             + DAT_GameState::instance.playerDataArray[playerID].totalUnitPatrolTroops;
-        _halfOfDiggingTroops = 0;
+        int _halfOfDiggingTroops = 0;
+        int _totalTroops;
+
         if (DAT_GameState::instance.playerDataArray[playerID].aiPlayerState == 6) {
             _totalMisc += DAT_GameState::instance.playerDataArray[playerID].totalDiggingUnitTroops;
             int _attackTicker = DAT_GameState::instance.playerDataArray[playerID].attackTicker;
@@ -48,8 +46,11 @@ namespace AI {
                 + DAT_GameState::instance.playerDataArray[playerID].totalUnitSiegeDefTroops
                 + DAT_GameState::instance.playerDataArray[playerID].totalMaxDefaultTroops;
         }
-        if ((1 < _totalTroops) && ((4 < _totalTroops) || (_halfOfDiggingTroops <= _totalTroops + _totalTroops))) {
-            return FALSE;
+
+        if (1 < _totalTroops) {
+            if (4 < _totalTroops || _halfOfDiggingTroops <= _totalTroops + _totalTroops) {
+                return FALSE;
+            }
         }
         return TRUE;
     }
