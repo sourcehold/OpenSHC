@@ -23,7 +23,7 @@ namespace AI {
       decompilerscript: committed: 2025-01-30 21:57:43.216000 */
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CE5F0
-    void AICState ::sendUnitsToPlayerIDsKeepIfPossible(int playerID1, short* playerID2)
+    void AICState ::sendUnitsToPlayerIDsKeepIfPossible(int playerID1, int playerID2)
 
     {
 
@@ -49,7 +49,7 @@ namespace AI {
 
         uint _p1_keepCampfireY;
 
-        short* _playerID2;
+        int _playerID2;
 
         _playerID2 = playerID2;
 
@@ -92,11 +92,12 @@ namespace AI {
                 /*
                         fixme: reused parameter */
 
-                playerID2 = DAT_GameState::instance.playerDataArray[playerID1].aiTribeIDs + _aiTribeBehaviourTypeOffset;
+                short* __playerID2
+                    = DAT_GameState::instance.playerDataArray[playerID1].aiTribeIDs + _aiTribeBehaviourTypeOffset;
 
                 do {
 
-                    _tribeID = (int)*playerID2;
+                    _tribeID = (int)*__playerID2;
 
                     if ((_tribeID != 0)
                         && (DAT_TribesState::instance.tribes[_tribeID].uid
@@ -147,7 +148,7 @@ namespace AI {
                         }
                     }
 
-                    playerID2 = playerID2 + 1;
+                    __playerID2 = __playerID2 + 1;
 
                     _counter = _counter + 1;
 
