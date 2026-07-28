@@ -24,25 +24,22 @@ namespace AI {
         int _smallestTribeOffset = 0;
         short _smallestTribeSize = 1000;
         dword _groupsCount;
-        switch (_tribeTypeOffset) {
-        case 0xf:
+
+        if (_tribeTypeOffset == 0xf) {
             _groupsCount = this->aics[AVar1 - 1].AttUnitPatrolGroupsCount;
-            break;
-        default:
-            goto switchD_004ccd78_caseD_10;
-        case 0xba:
+        } else if (_tribeTypeOffset == 0xba) {
             _groupsCount = this->aics[AVar1 - 1].AttUnitBackupGroupsCount;
-            break;
-        case 0xbe:
+        } else if (_tribeTypeOffset == 0xbe) {
             _groupsCount = this->aics[AVar1 - 1].AttUnitSiegeDefGroupsCount;
-            break;
-        case 0xc0:
+        } else if (_tribeTypeOffset == 0xc0) {
             _groupsCount = this->aics[AVar1 - 1].AttMainGroupsCount;
+        } else {
+            _groupsCount = 1;
         }
+
         int _selectedTribe;
         int _selectedSlot;
-        if (((int)_groupsCount < 1) || (_groupsCount == 1)) {
-        switchD_004ccd78_caseD_10:
+        if ((int)_groupsCount < 1 || _groupsCount == 1) {
             int _tribeID_groupsCount1
                 = (int)DAT_GameState::instance.playerDataArray[_playerID].aiTribeIDs[_tribeTypeOffset];
             if ((_tribeID_groupsCount1 != 0)

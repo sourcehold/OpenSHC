@@ -12,39 +12,29 @@ namespace AI {
 
     using OpenSHC::Map::Units::Behavior::UnitStanceEnum;
 
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000 */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004CF920
     undefined4 AICState ::giveSomeRaidCommand(int tribeIndex, int tribeType)
 
     {
+        int _tribeOffset = tribeIndex * 0x334;
+        int _attacked = DAT_TribesState::instance.tribes[tribeIndex].owner;
+        int _targetBuildingID = (int)DAT_TribesState::instance.tribes[tribeIndex].targetBuildingID;
 
-        int _chosenBuildingID;
+        if (tribeType != 0xba && tribeType != 0x12 && tribeType != 0xe && tribeType != 0xd) {
 
-        int _targetBuildingID;
-
-        int _attacked;
-
-        _targetBuildingID = (int)DAT_TribesState::instance.tribes[tribeIndex].targetBuildingID;
-
-        if ((((tribeType != 0xba) && (tribeType != 0x12)) && (tribeType != 0xe)) && (tribeType != 0xd)) {
-
-            if (((_targetBuildingID != 0)
-                    && (DAT_BuildingsState::instance.buildings[_targetBuildingID].uid
-                        == DAT_TribesState::instance.tribes[tribeIndex].targetBuildingUID))
-                && (DAT_BuildingsState::instance.buildings[_targetBuildingID].fireDuration == 0)) {
-
+            if (_targetBuildingID != 0
+                && DAT_BuildingsState::instance.buildings[_targetBuildingID].uid
+                    == DAT_TribesState::instance.tribes[tribeIndex].targetBuildingUID
+                && DAT_BuildingsState::instance.buildings[_targetBuildingID].fireDuration == 0) {
                 return (undefined4)(1);
             }
 
-            _attacked = DAT_GameState::instance.playerDataArray[DAT_TribesState::instance.tribes[tribeIndex].owner]
-                            .attackedPlayerID;
+            int _attackedPlayerID = DAT_GameState::instance.playerDataArray[_attacked].attackedPlayerID;
 
             DAT_TribesState::instance.tribes[tribeIndex].targetBuildingID = 0;
 
-            _chosenBuildingID = MACRO_CALL_MEMBER(
-                OpenSHC::AI::AICState_Func::chooseRandomBuildingIDFromPlayersArrayOfBuildings, this)(_attacked);
+            int _chosenBuildingID = MACRO_CALL_MEMBER(
+                OpenSHC::AI::AICState_Func::chooseRandomBuildingIDFromPlayersArrayOfBuildings, this)(_attackedPlayerID);
 
             if (_chosenBuildingID != 0) {
 
@@ -52,12 +42,13 @@ namespace AI {
                     DAT_UnitsState::ptr)(tribeIndex, 9, (undefined4)((int)(_chosenBuildingID)),
                     (undefined4)((int)(DAT_BuildingsState::instance.buildings[_chosenBuildingID].uid)));
 
+                // Store UID before targetBuildingID (matching orig order)
                 DAT_TribesState::instance.tribes[tribeIndex].targetBuildingUID
                     = DAT_BuildingsState::instance.buildings[_chosenBuildingID].uid;
 
-                DAT_TribesState::instance.tribes[tribeIndex].targetBuildingID = (short)_chosenBuildingID;
-
                 DAT_TribesState::instance.tribes[tribeIndex].unitStance = OpenSHC::Map::Units::Behavior::USE_DEFENSIVE;
+
+                DAT_TribesState::instance.tribes[tribeIndex].targetBuildingID = (short)_chosenBuildingID;
 
                 return (undefined4)(1);
             }

@@ -9,25 +9,17 @@ namespace AI {
 
     using OpenSHC::Game::Skirmish::SkirmishDefinedData;
 
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000 */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004CC8D0
     undefined4 AICState ::unitIDIsRangedOrArmored(int unitID)
 
     {
+        int _unitType = (int)(short)DAT_UnitsState::instance.units[unitID].unitType;
 
-        SkirmishDefinedData* pSVar1;
-
-        pSVar1 = DAT_SkirmishDefinedData::ptr;
+        SkirmishDefinedData* pSVar1 = DAT_SkirmishDefinedData::ptr;
 
         do {
-
-            if (pSVar1->DAT_UnitTypes_RangedAndArmored[0]
-                == (int)(short)DAT_UnitsState::instance.units[unitID].unitType) {
-
+            if (pSVar1->DAT_UnitTypes_RangedAndArmored[0] == _unitType)
                 return (undefined4)(1);
-            }
 
             pSVar1 = (SkirmishDefinedData*)(pSVar1->DAT_UnitTypes_RangedAndArmored + 1);
 
