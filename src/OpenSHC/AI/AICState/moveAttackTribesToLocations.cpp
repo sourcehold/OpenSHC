@@ -15,89 +15,55 @@ namespace AI {
     using OpenSHC::Map::Units::Behavior::UnitStanceEnum;
     using OpenSHC::Map::Units::Instructions::UnitMatchSpeedEnum;
 
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000 */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004CE830
-    void AICState ::moveAttackTribesToLocations(int playerID)
-
+    void AICState::moveAttackTribesToLocations(int playerID)
     {
+        if (DAT_GameState::instance.playerDataArray[playerID].aiType == OpenSHC::AI::AIT_NULL)
+            return;
 
-        int iVar1;
+        int _destIndex = 0;
 
-        int iVar2;
+        for (int _index = 0; _index < 11; _index++) {
+            int* _mappingPtr
+                = DAT_SkirmishDefinedData::instance.DAT_AttackTribes_AITribeType_MaxTribeCount_Mapping[_index] + 1;
 
-        int psVar3;
+            int const _tribeTypeStart = (*(int (*)[2])(_mappingPtr + -1))[0];
+            int _tribeIndex = 0;
+            int const _maxTribeCount = *_mappingPtr;
 
-        int tribeID;
+            if (0 < _maxTribeCount) {
+                short* _tribeIDPtr = &DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[_tribeTypeStart];
 
-        int iVar4;
+                do {
+                    int const _tribeID = (int)*_tribeIDPtr;
 
-        int iVar5;
+                    if ((_tribeID != 0)
+                        && (DAT_TribesState::instance.tribes[_tribeID].uid
+                            == DAT_GameState::instance.playerDataArray[playerID]
+                                .aiTribeUIDs[_tribeIndex + _tribeTypeStart])) {
 
-        int* local_c;
+                        DAT_TribesState::instance.tribes[_tribeID].unitStance
+                            = OpenSHC::Map::Units::Behavior::USE_DEFENSIVE;
 
-        psVar3 = playerID;
+                        MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction,
+                            DAT_TribesState::ptr)(_tribeID,
+                            (uint)((int)(DAT_GameState::instance.mapAndTime
+                                    .aiTribeMoveDestinationXYPairArray1[playerID * 5][_destIndex]
+                                    .xOffset)),
+                            (uint)((int)(DAT_GameState::instance.mapAndTime
+                                    .aiTribeMoveDestinationXYPairArray1[playerID * 5][_destIndex]
+                                    .yOffset)),
+                            0, 0, OpenSHC::Map::Units::Instructions::UMSE_0);
 
-        if (DAT_GameState::instance.playerDataArray[(int)playerID].aiType != OpenSHC::AI::AIT_NULL) {
+                        _destIndex = _destIndex + 1;
+                    }
 
-            iVar4 = 0;
+                    _tribeIDPtr = _tribeIDPtr + 1;
+                    _tribeIndex = _tribeIndex + 1;
 
-            local_c = DAT_SkirmishDefinedData::instance.DAT_AttackTribes_AITribeType_MaxTribeCount_Mapping[0] + 1;
-
-            do {
-
-                iVar1 = *local_c;
-
-                iVar2 = (*(int (*)[2])(local_c + -1))[0];
-
-                iVar5 = 0;
-
-                if (0 < iVar1) {
-
-                    short* __playerID = DAT_GameState::instance.playerDataArray[(int)psVar3].aiTribeIDs + iVar2;
-
-                    do {
-
-                        tribeID = (int)*__playerID;
-
-                        if ((tribeID != 0)
-                            && (DAT_TribesState::instance.tribes[tribeID].uid
-                                == DAT_GameState::instance.playerDataArray[(int)psVar3].aiTribeUIDs[iVar5 + iVar2])) {
-
-                            DAT_TribesState::instance.tribes[tribeID].unitStance
-                                = OpenSHC::Map::Units::Behavior::USE_DEFENSIVE;
-
-                            /*
-                                          fixme: array too small?
-                                */
-
-                            MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction,
-                                DAT_TribesState::ptr)(tribeID,
-                                (uint)((int)(DAT_GameState::instance.mapAndTime
-                                        .aiTribeMoveDestinationXYPairArray1[(int)psVar3 * 5][iVar4]
-                                        .xOffset)),
-                                (uint)((int)(DAT_GameState::instance.mapAndTime
-                                        .aiTribeMoveDestinationXYPairArray1[(int)psVar3 * 5][iVar4]
-                                        .yOffset)),
-                                0, 0, OpenSHC::Map::Units::Instructions::UMSE_0);
-
-                            iVar4 = iVar4 + 1;
-                        }
-
-                        __playerID = __playerID + 1;
-
-                        iVar5 = iVar5 + 1;
-
-                    } while (iVar5 < iVar1);
-                }
-
-                local_c = local_c + 2;
-
-            } while ((int)local_c < 0xb42a2c);
+                } while (_tribeIndex < _maxTribeCount);
+            }
         }
-
-        return;
     }
 
 }
