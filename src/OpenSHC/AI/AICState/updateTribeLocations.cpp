@@ -11,15 +11,10 @@ namespace AI {
     using OpenSHC::AI::AIType;
     using OpenSHC::AI::AITypeInt;
 
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000 */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004D4940
     void AICState ::updateTribeLocations(int playerID)
 
     {
-
-        int* piVar1;
 
         AITypeInt AVar2;
 
@@ -27,20 +22,14 @@ namespace AI {
 
         if (AVar2 != OpenSHC::AI::AIT_NULL) {
 
-            piVar1 = &DAT_GameState::instance.playerDataArray[playerID].defWallPatrolRallyTimeWaitCounter;
+            DAT_GameState::instance.playerDataArray[playerID].defWallPatrolRallyTimeWaitCounter =
+                DAT_GameState::instance.playerDataArray[playerID].defWallPatrolRallyTimeWaitCounter + 1;
 
-            *piVar1 = *piVar1 + 1;
+            if (DAT_GameState::instance.playerDataArray[playerID].defWallPatrolRallyTimeWaitCounter
+                >= *(int*)((int)this + AVar2 * 0x2a4 - 0x194)) {
 
-            /*
-                  defWallPatrolRallyTime
-                */
-
-            if (*(int*)((int)DAT_EntityState::instance.seagullArray + AVar2 * 0x2a4 + 0x2580)
-                <= DAT_GameState::instance.playerDataArray[playerID].defWallPatrolRallyTimeWaitCounter) {
-
-                piVar1 = &DAT_GameState::instance.playerDataArray[playerID].defWallPatrolRallyTimeHits;
-
-                *piVar1 = *piVar1 + 1;
+                DAT_GameState::instance.playerDataArray[playerID].defWallPatrolRallyTimeHits =
+                    DAT_GameState::instance.playerDataArray[playerID].defWallPatrolRallyTimeHits + 1;
 
                 DAT_GameState::instance.playerDataArray[playerID].defWallPatrolRallyTimeWaitCounter = 0;
             }

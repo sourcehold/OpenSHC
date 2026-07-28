@@ -22,129 +22,73 @@ namespace AI {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CBE30
     void AICState ::setupWorkshopProductionType(int playerID, int buildingID)
-
     {
+        AITypeInt AVar1 = DAT_GameState::instance.playerDataArray[playerID].aiType;
 
-        AITypeInt AVar1;
-
-        int _aiTypeMin1;
-
-        ResourceTypeShort RVar2;
-
-        BuildingTypeShort _buildingType;
-
-        AVar1 = DAT_GameState::instance.playerDataArray[playerID].aiType;
-
-        if (AVar1 == OpenSHC::AI::AIT_NULL) {
+        if (AVar1 == OpenSHC::AI::AIT_NULL)
             return;
-        }
 
-        _buildingType = DAT_BuildingsState::instance.buildings[buildingID].buildingType;
-
-        _aiTypeMin1 = AVar1 + ~OpenSHC::AI::AIT_NULL;
-        RVar2 = OpenSHC::Game::Resources::RT_SWORD;
+        BuildingTypeShort _buildingType = DAT_BuildingsState::instance.buildings[buildingID].buildingType;
+        int _aiTypeMin1 = AVar1 + ~OpenSHC::AI::AIT_NULL;
 
         if (_buildingType == OpenSHC::Map::Buildings::BT_BLACKSMITH) {
-
             _aiTypeMin1 = *(int*)((int)this + _aiTypeMin1 * 0x2a4 + 200);
-
             if (_aiTypeMin1 == -999) {
-
                 _aiTypeMin1 = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::chooseProductionItemType,
                     DAT_BuildingsState::ptr)((int)DAT_BuildingsState::instance.buildings[buildingID].owner,
                     OpenSHC::Map::Buildings::BT_BLACKSMITH);
-
                 DAT_BuildingsState::instance.buildings[buildingID].producedItemType = (ResourceTypeShort)_aiTypeMin1;
-
-                DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext
-                    = (ResourceTypeShort)_aiTypeMin1;
-
+                DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext = (ResourceTypeShort)_aiTypeMin1;
                 return;
             }
-
-            RVar2 = OpenSHC::Game::Resources::RT_SWORD;
-
-            if (_aiTypeMin1 == 0x16)
-                goto LAB_004cbf6a;
-
-            DAT_BuildingsState::instance.buildings[buildingID].producedItemType = OpenSHC::Game::Resources::RT_MACE;
-
-            DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext
-                = OpenSHC::Game::Resources::RT_MACE;
-
+            if (_aiTypeMin1 == 0x16) {
+                DAT_BuildingsState::instance.buildings[buildingID].producedItemType = OpenSHC::Game::Resources::RT_SWORD;
+                DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext = OpenSHC::Game::Resources::RT_SWORD;
+            } else {
+                DAT_BuildingsState::instance.buildings[buildingID].producedItemType = OpenSHC::Game::Resources::RT_MACE;
+                DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext = OpenSHC::Game::Resources::RT_MACE;
+            }
             return;
         }
 
-        // orig: cmp dx, 0xe; jne 0x5a (skip poleturner block to fletcher/end)
-        // poleturner falls through, fletcher and end are jumped to
         if (_buildingType == OpenSHC::Map::Buildings::BT_POLETURNER) {
-
             _aiTypeMin1 = *(int*)((int)this + _aiTypeMin1 * 0x2a4 + 0xd0);
-
             if (_aiTypeMin1 == -999) {
-
                 _aiTypeMin1 = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::chooseProductionItemType,
                     DAT_BuildingsState::ptr)((int)DAT_BuildingsState::instance.buildings[buildingID].owner,
                     OpenSHC::Map::Buildings::BT_POLETURNER);
-
                 DAT_BuildingsState::instance.buildings[buildingID].producedItemType = (ResourceTypeShort)_aiTypeMin1;
-
-                DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext
-                    = (ResourceTypeShort)_aiTypeMin1;
-
+                DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext = (ResourceTypeShort)_aiTypeMin1;
                 return;
             }
-
-            RVar2 = OpenSHC::Game::Resources::RT_SPEAR;
-
-            if (_aiTypeMin1 == 0x13)
-                goto LAB_004cbf6a;
-
-            DAT_BuildingsState::instance.buildings[buildingID].producedItemType = OpenSHC::Game::Resources::RT_PIKE;
-
-            DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext = OpenSHC::Game::Resources::RT_PIKE;
-
+            if (_aiTypeMin1 == 0x13) {
+                DAT_BuildingsState::instance.buildings[buildingID].producedItemType = OpenSHC::Game::Resources::RT_SPEAR;
+                DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext = OpenSHC::Game::Resources::RT_SPEAR;
+            } else {
+                DAT_BuildingsState::instance.buildings[buildingID].producedItemType = OpenSHC::Game::Resources::RT_PIKE;
+                DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext = OpenSHC::Game::Resources::RT_PIKE;
+            }
             return;
         }
 
         if (_buildingType == OpenSHC::Map::Buildings::BT_FLETCHER) {
-
             _aiTypeMin1 = *(int*)((int)this + _aiTypeMin1 * 0x2a4 + 0xcc);
-
             if (_aiTypeMin1 == -999) {
-
-                _aiTypeMin1
-                    = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::chooseProductionItemType,
-                        DAT_BuildingsState::ptr)((int)DAT_BuildingsState::instance.buildings[buildingID].owner,
-                        OpenSHC::Map::Buildings::BT_FLETCHER);
-
-                DAT_BuildingsState::instance.buildings[buildingID].producedItemType
-                    = (ResourceTypeShort)_aiTypeMin1;
-
-                DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext
-                    = (ResourceTypeShort)_aiTypeMin1;
-
+                _aiTypeMin1 = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::chooseProductionItemType,
+                    DAT_BuildingsState::ptr)((int)DAT_BuildingsState::instance.buildings[buildingID].owner,
+                    OpenSHC::Map::Buildings::BT_FLETCHER);
+                DAT_BuildingsState::instance.buildings[buildingID].producedItemType = (ResourceTypeShort)_aiTypeMin1;
+                DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext = (ResourceTypeShort)_aiTypeMin1;
                 return;
             }
-
-            RVar2 = OpenSHC::Game::Resources::RT_BOW;
-
-            if (_aiTypeMin1 == 0x11)
-                goto LAB_004cbf6a;
-
-            DAT_BuildingsState::instance.buildings[buildingID].producedItemType
-                = OpenSHC::Game::Resources::RT_CROSSBOW;
-
-            DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext
-                = OpenSHC::Game::Resources::RT_CROSSBOW;
+            if (_aiTypeMin1 == 0x11) {
+                DAT_BuildingsState::instance.buildings[buildingID].producedItemType = OpenSHC::Game::Resources::RT_BOW;
+                DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext = OpenSHC::Game::Resources::RT_BOW;
+            } else {
+                DAT_BuildingsState::instance.buildings[buildingID].producedItemType = OpenSHC::Game::Resources::RT_CROSSBOW;
+                DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext = OpenSHC::Game::Resources::RT_CROSSBOW;
+            }
         }
-
-        return;
-
-    LAB_004cbf6a:
-        DAT_BuildingsState::instance.buildings[buildingID].producedItemType = RVar2;
-
-        DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext = RVar2;
 
         return;
     }

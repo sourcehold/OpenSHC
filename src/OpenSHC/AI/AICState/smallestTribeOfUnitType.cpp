@@ -35,7 +35,10 @@ namespace AI {
                         != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[iVar3 + iVar7])) {
                     _tribeID = MACRO_CALL_MEMBER(
                         Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(playerID);
-                    goto LAB_004ccaae;
+                    DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[iVar3 + iVar7] = (short)_tribeID;
+                    DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[iVar3 + iVar7]
+                        = DAT_TribesState::instance.tribes[_tribeID].uid;
+                    return _tribeID;
                 }
                 short sVar1 = DAT_TribesState::instance.tribes[iVar5].size;
                 if (sVar1 < sVar4) {
@@ -48,7 +51,6 @@ namespace AI {
             } while (iVar7 < iVar6);
             iVar7 = local_c;
             if (_tribeID != 0) {
-            LAB_004ccaae:
                 DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[iVar3 + iVar7] = (short)_tribeID;
                 DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[iVar3 + iVar7]
                     = DAT_TribesState::instance.tribes[_tribeID].uid;

@@ -23,26 +23,23 @@ namespace AI {
                 break;
             if ((_unitType == DAT_SkirmishDefinedData::instance.DefenseTribesUnitTypeArray[_index + 1])
                 || (_unitType2 == DAT_SkirmishDefinedData::instance.DefenseTribesUnitTypeArray[_index + 1])) {
-                _index = _index + 1;
-                break;
+                _index = _index + 1; break;
             }
             if ((_unitType == DAT_SkirmishDefinedData::instance.DefenseTribesUnitTypeArray[_index + 2])
                 || (_unitType2 == DAT_SkirmishDefinedData::instance.DefenseTribesUnitTypeArray[_index + 2])) {
-                _index = _index + 2;
-                break;
+                _index = _index + 2; break;
             }
             if ((_unitType == DAT_SkirmishDefinedData::instance.DefenseTribesUnitTypeArray[_index + 3])
                 || (_unitType2 == DAT_SkirmishDefinedData::instance.DefenseTribesUnitTypeArray[_index + 3])) {
-                _index = _index + 3;
-                break;
+                _index = _index + 3; break;
             }
             if ((_unitType == DAT_SkirmishDefinedData::instance.DefenseTribesUnitTypeArray[_index + 4])
                 || (_unitType2 == DAT_SkirmishDefinedData::instance.DefenseTribesUnitTypeArray[_index + 4])) {
-                _index = _index + 4;
-                break;
+                _index = _index + 4; break;
             }
             _index = _index + 5;
         } while (_index < 0x14);
+
         int _tribeIndex;
         if (_index < 1) {
             _tribeIndex = 0xb4;
@@ -54,19 +51,16 @@ namespace AI {
             _tribeIndex = 0xb7;
         } else if (_index < 0xf) {
             _tribeIndex = 0xb8;
-        } else {
-            if (19 < _index) {
-                return 0;
-            }
+        } else if (_index < 0x14) {
             _tribeIndex = 0xb9;
+        } else {
+            return 0;
         }
+
         short* _pTribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs + _tribeIndex;
         int _tribeID = (int)*_pTribeID;
-        if ((_tribeID == 0)
-            || (DAT_TribesState::instance.tribes[_tribeID].uid
-                != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[_tribeIndex])) {
-            _tribeID
-                = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(playerID);
+        if ((_tribeID == 0) || (DAT_TribesState::instance.tribes[_tribeID].uid != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[_tribeIndex])) {
+            _tribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(playerID);
             int _tribeUID = DAT_TribesState::instance.tribes[_tribeID].uid;
             *_pTribeID = (short)_tribeID;
             DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[_tribeIndex] = _tribeUID;

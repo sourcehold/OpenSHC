@@ -13,78 +13,38 @@ namespace AI {
     using OpenSHC::AI::AIVUnitType;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    /*
-      [doc]
-       @param slotIndex int slotIndex to browse to
-       decompilerscript: committed: 2025-01-30 21:57:43.216000 */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004D2E00
     void AICState ::sendTribeToAIVLocationSlot(int tribeID, AIVUnitType aivUnitType, int slotIndex)
-
     {
+        int _owner = DAT_TribesState::instance.tribes[tribeID].owner;
+        int _tile = 0;
+        int _slotIndex = 0;
+        int* _ptrSlot = (int*)(_owner * 0x39f4 + 0x115eb14 + aivUnitType * 0x28);
 
-        int _slotIndex;
-
-        BOOLEnum _canNavigate;
-
-        int* _ptrSlot;
-
-        int _tile;
-
-        int _x;
-
-        int _owner;
-
-        short _y;
-
-        /*
-            all experimental, heavy local reuse... */
-
-        _owner = DAT_TribesState::instance.tribes[tribeID].owner;
-
-        _tile = 0;
-
-        _slotIndex = 0;
-
-        /*
-            aivUnitLocationSlots */
-
-        _ptrSlot = (int*)(_owner * 0x39f4 + 0x115eb14 + aivUnitType * 0x28);
-
-        while ((*_ptrSlot == 0 || (slotIndex = slotIndex + -1, -1 < slotIndex))) {
-
+        // Find the slot at slotIndex, skipping empty entries
+        while (*_ptrSlot == 0 || (slotIndex = slotIndex + -1, -1 < slotIndex)) {
             _slotIndex = _slotIndex + 1;
-
             _ptrSlot = _ptrSlot + 1;
-
-            if (9 < _slotIndex) {
-
-            LAB_004d2e6d:
-                _y = DAT_ViewportRenderState::instance.DAT_TileTranslationMatrix_YComponent[_tile];
-
-                _x = DAT_ViewportRenderState::instance.translationMatrix[_y].addXgetTile;
-
-                _canNavigate = MACRO_CALL_MEMBER(
-                    OpenSHC::AI::AICState_Func::canNavigateUnitsFromTileToTargetTile, this)(tribeID, _tile);
-
-                if (_canNavigate == FALSE) {
-
-                    MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToKeep, this)(tribeID, _owner);
-
-                    return;
-                }
-
-                MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::commandUnitsToLocation, DAT_TribesState::ptr)(
-                    tribeID, (uint)((int)(_tile - _x)), (uint)((int)((int)_y)), 0);
-
-                return;
-            }
+            if (9 < _slotIndex)
+                break;
         }
 
-        _tile = DAT_GameState::instance.playerDataArray[_owner].aivUnitLocationSlots[aivUnitType][_slotIndex];
+        if (_slotIndex <= 9)
+            _tile = DAT_GameState::instance.playerDataArray[_owner].aivUnitLocationSlots[aivUnitType][_slotIndex];
 
-        goto LAB_004d2e6d;
+        short _y = DAT_ViewportRenderState::instance.DAT_TileTranslationMatrix_YComponent[_tile];
+        int _x = DAT_ViewportRenderState::instance.translationMatrix[_y].addXgetTile;
+
+        BOOLEnum _canNavigate = MACRO_CALL_MEMBER(
+            OpenSHC::AI::AICState_Func::canNavigateUnitsFromTileToTargetTile, this)(tribeID, _tile);
+
+        if (_canNavigate == FALSE) {
+            MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToKeep, this)(tribeID, _owner);
+            return;
+        }
+
+        MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::commandUnitsToLocation, DAT_TribesState::ptr)(
+            tribeID, (uint)((int)(_tile - _x)), (uint)((int)((int)_y)), 0);
     }
-
 }
 }

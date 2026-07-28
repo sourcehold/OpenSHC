@@ -11,91 +11,64 @@ namespace AI {
 
     using OpenSHC::Map::Buildings::BuildingTypeInt;
 
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000 */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004CDB20
     int AICState ::chooseRandomBuildingIDFromPlayersArrayOfBuildings(int playerID)
 
     {
 
-        int _chosenBuilding;
+        int _count = DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildingsTracker;
 
-        int _selectionIndex;
+        int _chosenBuilding = 0;
 
-        int _chosenBuildingTypeIndex;
+        int _chosenBuildingTypeIndex = 46;
 
-        short* _ptr_buildingIDArray;
+        if (0 < _count) {
 
-        int _buildingID;
+            int _rng = (int)(unsigned char)SEC_RNG::instance.currentNumber2 & 7;
 
-        BuildingTypeInt _buildingType;
-
-        bool bVar1;
-
-        _selectionIndex = DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildingsTracker;
-
-        _chosenBuilding = 0;
-
-        _chosenBuildingTypeIndex = 46;
-
-        if (0 < _selectionIndex) {
-
-            _ptr_buildingIDArray = DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildings;
-
-            playerID = _selectionIndex;
+            short* _ptr = DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildings;
 
             do {
 
-                _buildingID = (int)*_ptr_buildingIDArray;
+                int _buildingID = (int)*_ptr;
 
-                if ((_buildingID != 0) && (_selectionIndex = 0, 0 < _chosenBuildingTypeIndex)) {
+                if (_buildingID != 0) {
 
-                    _buildingType
-                        = (BuildingTypeInt)(short)DAT_BuildingsState::instance.buildings[_buildingID].buildingType;
+                    int _selectionIndex = 0;
 
-                    do {
+                    if (0 < _chosenBuildingTypeIndex) {
 
-                        if (((byte)SEC_RNG::instance.currentNumber2 & 7) < 2) {
+                        BuildingTypeInt _buildingType =
+                            (BuildingTypeInt)(short)DAT_BuildingsState::instance.buildings[_buildingID].buildingType;
 
-                            bVar1 = _buildingType
-                                == DAT_SkirmishDefinedData::instance.buildingTargetPrioritySet3[_selectionIndex];
+                        do {
 
-                        }
+                            BuildingTypeInt _cmpType;
 
-                        else if (((byte)SEC_RNG::instance.currentNumber2 & 7) < 4) {
+                            if (_rng < 2) {
+                                _cmpType = DAT_SkirmishDefinedData::instance.buildingTargetPrioritySet3[_selectionIndex];
+                            } else if (_rng < 4) {
+                                _cmpType = DAT_SkirmishDefinedData::instance.buildingTargetPrioritySet2[_selectionIndex];
+                            } else {
+                                _cmpType = DAT_SkirmishDefinedData::instance.buildingTargetPrioritySet1[_selectionIndex];
+                            }
 
-                            bVar1 = _buildingType
-                                == DAT_SkirmishDefinedData::instance.buildingTargetPrioritySet2[_selectionIndex];
+                            if (_buildingType == _cmpType) {
+                                _chosenBuilding = _buildingID;
+                                _chosenBuildingTypeIndex = _selectionIndex;
+                            }
 
-                        }
+                            _selectionIndex = _selectionIndex + 1;
 
-                        else {
-
-                            bVar1 = _buildingType
-                                == DAT_SkirmishDefinedData::instance.buildingTargetPrioritySet1[_selectionIndex];
-                        }
-
-                        if (bVar1) {
-
-                            /*
-                                          very unique way to break from a loop ;) */
-
-                            _chosenBuilding = _buildingID;
-
-                            _chosenBuildingTypeIndex = _selectionIndex;
-                        }
-
-                        _selectionIndex = _selectionIndex + 1;
-
-                    } while (_selectionIndex < _chosenBuildingTypeIndex);
+                        } while (_selectionIndex < _chosenBuildingTypeIndex);
+                    }
                 }
 
-                _ptr_buildingIDArray = _ptr_buildingIDArray + 1;
+                _ptr = _ptr + 1;
 
-                playerID = playerID + -1;
+                _count = _count - 1;
 
-            } while (playerID != 0);
+            } while (_count != 0);
         }
 
         return _chosenBuilding;

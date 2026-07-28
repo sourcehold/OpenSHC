@@ -15,27 +15,25 @@ namespace AI {
     BOOLEnum AICState::shouldDestroyWoodCutterUnk(int playerID)
     {
         int _hut;
-        if (DAT_GameState::instance.playerDataArray[playerID].aiType == AITA_NULL) {
+        if (DAT_GameState::instance.playerDataArray[playerID].aiType == AITA_NULL)
             return FALSE;
-        }
-        if (DAT_AIVState::instance.mapExtraInfo.totalWoodAvailable < 1) {
+
+        if (DAT_AIVState::instance.mapExtraInfo.totalWoodAvailable <= 0) {
             _hut = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::findFirstBuildingIDForPlayerAndType,
                 DAT_BuildingsState::ptr)(playerID, Map::Buildings::BT_WOODCUTTERSHUT);
         } else {
-            if (DAT_GameState::instance.playerDataArray[playerID].currentResources[2] < 0x15) {
+            if (DAT_GameState::instance.playerDataArray[playerID].currentResources[2] <= 0x14)
                 return FALSE;
-            }
-            if (DAT_GameState::instance.playerDataArray[playerID].noLabourerBuildingCount < 2) {
+            if (DAT_GameState::instance.playerDataArray[playerID].noLabourerBuildingCount < 2)
                 return FALSE;
-            }
-            if (DAT_GameState::instance.playerDataArray[playerID].someCount10 < 25) {
+            if (DAT_GameState::instance.playerDataArray[playerID].someCount10 < 25)
                 return FALSE;
-            }
             _hut = DAT_GameState::instance.playerDataArray[playerID].someCount11;
         }
-        if (_hut == 0) {
+
+        if (_hut == 0)
             return FALSE;
-        }
+
         MACRO_CALL_MEMBER(AIVState_Func::set0x13ValueTo10InHeatMap, DAT_AIVState::ptr)(
             (int)(short)DAT_BuildingsState::instance.buildings[_hut].x,
             (int)(short)DAT_BuildingsState::instance.buildings[_hut].y);
