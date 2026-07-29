@@ -27,18 +27,17 @@ namespace AI {
             return 0;
         }
 
-        int _nonMoving = 0;
+        int const _aiIndex = _aiType - 1;
         int _activeTribes = 0;
-        int _index = 0;
-        int _maxTribeCount = (int)DAT_SkirmishDefinedData::instance.MaxAttackTribes1[_index].tribeCount;
+        int _nonMoving = 0;
 
-        for (; _index < 11; _index++) {
+        for (int _index = 0; _index < 11; _index++) {
 
             int const _tribeTypeStart = (int)DAT_SkirmishDefinedData::instance.MaxAttackTribes1[_index].tribeType;
-            int _tribeIndex = 0;
-            _maxTribeCount = (int)DAT_SkirmishDefinedData::instance.MaxAttackTribes1[_index].tribeCount;
 
-            for (; _tribeIndex < _maxTribeCount; _tribeIndex++) {
+            int const _maxTribeCount = (int)DAT_SkirmishDefinedData::instance.MaxAttackTribes1[_index].tribeCount;
+
+            for (int _tribeIndex = 0; _tribeIndex < _maxTribeCount; _tribeIndex++) {
 
                 int const _tribeID
                     = (int)DAT_GameState::instance.playerDataArray[param_1].aiTribeIDs[_tribeTypeStart + _tribeIndex];
@@ -54,12 +53,12 @@ namespace AI {
             }
         }
 
-        if (0 < _activeTribes) {
+        if (_activeTribes <= 0) {
 
-            return (uint)(((int)this->aics[_aiType - 1].AttForceRallyPercentage) <= (_nonMoving * 100) / _activeTribes);
+            return 0;
         }
 
-        return 0;
+        return (uint)((_nonMoving * 100) / _activeTribes >= (int)this->aics[_aiIndex].AttForceRallyPercentage);
     }
 
 }
