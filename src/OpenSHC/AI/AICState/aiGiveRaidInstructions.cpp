@@ -50,7 +50,7 @@ namespace AI {
 #define DO_MOVE_TO_TILE(_tile, _tribeID3)                                                                              \
     do {                                                                                                               \
         if ((_tile) != 0) {                                                                                            \
-            short sVar2_ = DAT_ViewportRenderState::instance.DAT_TileTranslationMatrix_YComponent[(_tile)];            \
+            short sVar2_ = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[(_tile)];                \
             int iVar4_ = DAT_ViewportRenderState::instance.translationMatrix[sVar2_].addXgetTile;                      \
             BOOLEnum BVar5_ = MACRO_CALL_MEMBER(                                                                       \
                 OpenSHC::AI::AICState_Func::canNavigateUnitsFromTileToTargetTile, this)((_tribeID3), (_tile));         \

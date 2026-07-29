@@ -54,11 +54,12 @@ namespace AI {
             int _unitID = MACRO_CALL_MEMBER(
                 OpenSHC::Map::Units::TribesState_Func::getUnitIDForIndexInTribe, DAT_TribesState::ptr)(_tribeID, 0);
             if ((_unitID != 0)
-                && MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::pathFindingToAttackCastleIncludingMoat,
+                && MACRO_CALL_MEMBER(
+                    OpenSHC::Map::Navigation::PathFindingState_Func::pathFindingToAttackCastleIncludingMoat,
                     DAT_PathFindingState::ptr)(DAT_TribesState::instance.tribes[_tribeID].owner, _targetPlayer,
                     (uint)((int)((int)DAT_UnitsState::instance.units[_unitID].x)),
-                    (uint)((int)((int)DAT_UnitsState::instance.units[_unitID].y)), (byte*)&tribeID_OR_moatWasHit,
-                    &_x, &_y)) {
+                    (uint)((int)((int)DAT_UnitsState::instance.units[_unitID].y)), (byte*)&tribeID_OR_moatWasHit, &_x,
+                    &_y)) {
                 if ((char)tribeID_OR_moatWasHit != '\0') {
                     MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::relayTribeInstruction, DAT_UnitsState::ptr)(
                         _tribeID, ((UnitInstructionType)0x23),
@@ -91,8 +92,9 @@ namespace AI {
                 return;
             }
 
-            int _buildingID = MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::selectARandomBuildingOwnedByPlayer,
-                DAT_GameState::ptr)(_targetPlayer);
+            int _buildingID
+                = MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::selectARandomBuildingOwnedByPlayer,
+                    DAT_GameState::ptr)(_targetPlayer);
             if (_buildingID != 0) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::relayTribeInstruction, DAT_UnitsState::ptr)(
                     _tribeID, OpenSHC::Map::Units::UIT_ATTACK_BUILDING, _buildingID,
@@ -116,8 +118,9 @@ namespace AI {
             return;
         }
 
-        int _buildingID_2 = MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::selectARandomBuildingOwnedByPlayer,
-            DAT_GameState::ptr)(_targetPlayer);
+        int _buildingID_2
+            = MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::selectARandomBuildingOwnedByPlayer,
+                DAT_GameState::ptr)(_targetPlayer);
 
         int _destinationTile;
         int _destinationX2;
@@ -125,8 +128,8 @@ namespace AI {
 
         if (_buildingID_2 == 0) {
             int iVar5 = DAT_ViewportRenderState::instance
-                        .translationMatrix[DAT_GameState::instance.playerDataArray[_targetPlayer].campground.yEntry]
-                        .addXgetTile;
+                            .translationMatrix[DAT_GameState::instance.playerDataArray[_targetPlayer].campground.yEntry]
+                            .addXgetTile;
             _destinationTile = iVar5 + DAT_GameState::instance.playerDataArray[_targetPlayer].campground.xEntry;
         } else {
             int iVar5 = (int)DAT_TribesState::instance.tribes[_tribeID].selectionTargetUnitID;
@@ -145,16 +148,19 @@ namespace AI {
                 if (DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile2OrAHelper == 0) {
                     // was LAB_004d1d11
                     int iVar5b = DAT_ViewportRenderState::instance
-                                .translationMatrix[DAT_GameState::instance.playerDataArray[_targetPlayer].campground.yEntry]
-                                .addXgetTile;
-                    _destinationTile = iVar5b + DAT_GameState::instance.playerDataArray[_targetPlayer].campground.xEntry;
+                                     .translationMatrix[DAT_GameState::instance.playerDataArray[_targetPlayer]
+                                             .campground.yEntry]
+                                     .addXgetTile;
+                    _destinationTile
+                        = iVar5b + DAT_GameState::instance.playerDataArray[_targetPlayer].campground.xEntry;
                 }
             }
         }
 
         if (_destinationTile != 0) {
-            _destinationY2 = (int)DAT_ViewportRenderState::instance.DAT_TileTranslationMatrix_YComponent[_destinationTile];
-            _destinationX2 = _destinationTile - DAT_ViewportRenderState::instance.translationMatrix[_destinationY2].addXgetTile;
+            _destinationY2 = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_destinationTile];
+            _destinationX2
+                = _destinationTile - DAT_ViewportRenderState::instance.translationMatrix[_destinationY2].addXgetTile;
             BOOLEnum BVar4 = MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::canNavigateUnitsFromTileToTargetTile, this)(
                 _tribeID, _destinationTile);
             if (BVar4 != FALSE) {

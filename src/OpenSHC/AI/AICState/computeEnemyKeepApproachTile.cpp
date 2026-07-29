@@ -76,9 +76,9 @@ namespace AI {
                     _tile
                         - DAT_ViewportRenderState::instance
                             .translationMatrix[DAT_ViewportRenderState::instance
-                                    .DAT_TileTranslationMatrix_YComponent[_tile]]
+                                    .tileTranslationMatrix_YComponent[_tile]]
                             .addXgetTile,
-                    (int)((int)(DAT_ViewportRenderState::instance.DAT_TileTranslationMatrix_YComponent[_tile])));
+                    (int)((int)(DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile])));
 
                 /*
                         avoiding unit death areas */
@@ -126,7 +126,7 @@ namespace AI {
 
         if (0 < _shortestDistanceTile) {
 
-            _y = DAT_ViewportRenderState::instance.DAT_TileTranslationMatrix_YComponent[_shortestDistanceTile];
+            _y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_shortestDistanceTile];
 
             DAT_GameState::instance.playerDataArray[playerID].shortestDistanceY = (int)_y;
 

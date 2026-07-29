@@ -175,7 +175,7 @@ namespace AI {
 
                         if (0 < _tile) {
 
-                            y1 = (uint)DAT_ViewportRenderState::instance.DAT_TileTranslationMatrix_YComponent[_tile];
+                            y1 = (uint)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile];
 
                             x1 = _tile - DAT_ViewportRenderState::instance.translationMatrix[y1].addXgetTile;
 
