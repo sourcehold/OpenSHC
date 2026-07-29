@@ -16521,7 +16521,7 @@ SHC_3BB0A8C1_0x0044B840 | 84.0% | Reimplemented, but heavy register mismatch. Lo
 
 SHC_3BB0A8C1_0x0044B890 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0044BCA0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0044BCA0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0044BCE0 | 84.0% | Reimplemented, heavy register mismatch, likely to a failure to reimplement one of the original loops
 
