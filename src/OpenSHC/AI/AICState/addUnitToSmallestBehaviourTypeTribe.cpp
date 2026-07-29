@@ -19,7 +19,7 @@ namespace AI {
             return 0;
         }
         int _tribeTypeOffset
-            = DAT_SkirmishDefinedData::instance.DAT_AIUnitBehaviourTypeMapping[(int)aiUnitBehaviourType + -10];
+            = DAT_SkirmishDefinedData::instance.AIUnitBehaviourTypeMapping[(int)aiUnitBehaviourType + -10];
         int _smallestTribe = 0;
         int _smallestTribeOffset = 0;
         short _smallestTribeSize = 1000;

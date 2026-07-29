@@ -18,10 +18,10 @@ namespace AI {
         SkirmishDefinedData* pSVar1 = DAT_SkirmishDefinedData::ptr;
 
         do {
-            if (pSVar1->DAT_UnitTypes_RangedAndArmored[0] == _unitType)
+            if (pSVar1->RangedAndArmoredUnits[0] == _unitType)
                 return (undefined4)(1);
 
-            pSVar1 = (SkirmishDefinedData*)(pSVar1->DAT_UnitTypes_RangedAndArmored + 1);
+            pSVar1 = (SkirmishDefinedData*)(pSVar1->RangedAndArmoredUnits + 1);
 
         } while ((int)pSVar1 < 0xb3eb50);
 

@@ -55,7 +55,7 @@ namespace AI {
                 _siegeIndex = 3;
             }
 
-            iVar2 = DAT_SkirmishDefinedData::instance.DAT_SiegeEngineMetaInfoArray[_siegeIndex].slot;
+            iVar2 = DAT_SkirmishDefinedData::instance.SiegeEngineMetaInfoArray[_siegeIndex].slot;
 
             _goal = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount[iVar2];
 

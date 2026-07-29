@@ -23,11 +23,9 @@ namespace AI {
 
                 if (_index != 8) {
 
-                    int _groupCount
-                        = DAT_SkirmishDefinedData::instance.DAT_BreachTribeTypes_TribeGroupCount_Mapping[_index][1];
+                    int _groupCount = DAT_SkirmishDefinedData::instance.MaxBreachTribes[_index][1];
 
-                    int _tribeType
-                        = DAT_SkirmishDefinedData::instance.DAT_BreachTribeTypes_TribeGroupCount_Mapping[_index][0];
+                    int _tribeType = DAT_SkirmishDefinedData::instance.MaxBreachTribes[_index][0];
 
                     int _offset = 0;
 

@@ -21,8 +21,7 @@ namespace AI {
 
     {
 
-        AIVUnitTypeInt* _ptr
-            = &DAT_SkirmishDefinedData::instance.AIVUnitTypeMaxLocationPairArray_RangedUnits[0].aivUnitType;
+        AIVUnitTypeInt* _ptr = &DAT_SkirmishDefinedData::instance.MaxAIVLocationForRangedUnits[0].aivUnitType;
 
         do {
 

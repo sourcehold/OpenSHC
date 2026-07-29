@@ -21,8 +21,7 @@ namespace AI {
             return;
 
         for (int _index1 = 0; _index1 < 11; _index1++) {
-            int* _mappingPtr
-                = DAT_SkirmishDefinedData::instance.DAT_AttackTribes_AITribeType_MaxTribeCount_Mapping[_index1] + 1;
+            int* _mappingPtr = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[_index1] + 1;
             int const _maxTribeCount = *_mappingPtr;
             int const _tribeTypeStart = (*(int (*)[2])(_mappingPtr - 1))[0];
             int _tribeIndex = 0;

@@ -42,8 +42,7 @@ namespace AI {
 
             _counter = 0;
 
-            _ptrGroupCount
-                = DAT_SkirmishDefinedData::instance.DAT_AttackTribes_AITribeType_MaxTribeCount_Mapping[0] + 1;
+            _ptrGroupCount = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[0] + 1;
 
             do {
 
