@@ -55,7 +55,7 @@ namespace AI {
                 OpenSHC::Map::Navigation::PathFindingState_Func::tracePathToFriendlyDefensesAndReturnTileUnk,
                 DAT_PathFindingState::ptr)(playerID, local_8, local_4);
             if (0 < _tile) {
-                short _y = DAT_ViewportRenderState::instance.DAT_TileTranslationMatrix_YComponent[_tile];
+                short _y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile];
                 DAT_GameState::instance.playerDataArray[playerID].someTile = _tile;
                 int iVar2 = DAT_ViewportRenderState::instance.translationMatrix[_y].addXgetTile;
                 DAT_GameState::instance.playerDataArray[playerID].someY = (int)_y;

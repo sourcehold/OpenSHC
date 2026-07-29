@@ -70,7 +70,7 @@ namespace AI {
                                       .addXgetTile;
                         }
                         if (_hasTarget && _tile != 0) {
-                            sVar2 = DAT_ViewportRenderState::instance.DAT_TileTranslationMatrix_YComponent[_tile];
+                            sVar2 = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile];
                             iVar3 = DAT_ViewportRenderState::instance.translationMatrix[sVar2].addXgetTile;
                             _canNavigate = MACRO_CALL_MEMBER(AICState_Func::canNavigateUnitsFromTileToTargetTile, this)(
                                 _tribeID, _tile);
