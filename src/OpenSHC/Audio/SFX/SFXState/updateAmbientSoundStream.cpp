@@ -11,9 +11,9 @@
 #include "OpenSHC/Globals/DAT_SFXFadeState.hpp"
 #include "OpenSHC/Globals/DAT_SoundSystemState.hpp"
 #include "OpenSHC/Globals/DAT_SpeechDefinedData.hpp"
-#include "OpenSHC/Globals/DWORD_00b98708.hpp"
 #include "OpenSHC/Globals/FLOAT_00b986f8.hpp"
 #include "OpenSHC/Globals/FLOAT_00b98704.hpp"
+#include "OpenSHC/Globals/FLOAT_00b98708.hpp"
 #include "OpenSHC/Globals/SEC_RNG.hpp"
 
 namespace OpenSHC {
@@ -30,15 +30,15 @@ namespace Audio {
         {
             int local_54 = -1;
             int iVar8 = 0;
-            DWORD_00b98708::instance = (float)timeGetTime();
-            if (DWORD_00b98708::instance == FLOAT_00b98704::instance) {
-                FLOAT_00b98704::instance = DWORD_00b98708::instance - 1.0f;
+            FLOAT_00b98708::instance = (float)timeGetTime();
+            if (FLOAT_00b98708::instance == FLOAT_00b98704::instance) {
+                FLOAT_00b98704::instance = FLOAT_00b98708::instance - 1.0f;
             }
-            float _fadeDelta = (DWORD_00b98708::instance - FLOAT_00b98704::instance) * 0.0625f;
+            float _fadeDelta = (FLOAT_00b98708::instance - FLOAT_00b98704::instance) * 0.0625f;
             if (_fadeDelta > 20.0) {
                 _fadeDelta = 20.0;
             }
-            FLOAT_00b98704::instance = DWORD_00b98708::instance;
+            FLOAT_00b98704::instance = FLOAT_00b98708::instance;
             if (DAT_SpeechDefinedData::instance.currentStreamID == -1) {
                 DAT_SFXFadeDeltaAccumulator::instance += _fadeDelta;
             } else {
@@ -183,13 +183,18 @@ namespace Audio {
                     continue;
                 }
                 if (iVar8 == 0) {
-                    _prioritySortedList[0].index = iVar9;
-                    _prioritySortedList[0].ambientEventCounterRescaled
+                    _prioritySortedList[iVar8].index = iVar9;
+                    _prioritySortedList[iVar8].ambientEventCounterRescaled
                         = DAT_SFXAmbientEventCountersRescaled::instance[iVar9];
-                    iVar8 = 1;
+                    ++iVar8;
                     continue;
                 }
 
+                // This structure may have been one loop. I was unable to create it.
+                // The closets I managed to do was running the loop as long as iVar7 < iVar8 and having the condition
+                // after be iVar7 >= iVar8. This created almost the required structure, but the condition was wrong,
+                // since it would require and equals. So the most likely thing is that the original was able to proof
+                // that iVar7 could never be bigger then iVar8. I have no idea how they managed to do that.
                 int iVar7 = 0;
                 if (iVar8 > 0) {
                     while (DAT_SFXAmbientEventCountersRescaled::instance[iVar9]
