@@ -23,55 +23,59 @@ namespace AI {
       decompilerscript: committed: 2025-01-30 21:57:43.216000 */
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CF2E0
-    void AICState ::aiCommandTribe12AggressiveApproach(int param_1)
-
+    void AICState ::aiCommandTribe12AggressiveApproach(int playerID)
     {
+        if (DAT_GameState::instance.playerDataArray[playerID].aiType == OpenSHC::AI::AIT_NULL) {
+            return;
+        }
 
-        int iVar1;
+        int tribeID = (int)DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[0xc];
 
-        BOOLEnum BVar2;
+        if (tribeID == 0) {
+            return;
+        }
 
-        int tribeID;
+        if (DAT_TribesState::instance.tribes[tribeID].uid
+            != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[0xc]) {
+            return;
+        }
 
-        if ((((DAT_GameState::instance.playerDataArray[param_1].aiType != OpenSHC::AI::AIT_NULL)
-                 && (tribeID = (int)DAT_GameState::instance.playerDataArray[param_1].aiTribeIDs[0xc], tribeID != 0))
-                && (DAT_TribesState::instance.tribes[tribeID].uid
-                    == DAT_GameState::instance.playerDataArray[param_1].aiTribeUIDs[0xc]))
-            && (iVar1 = (int)DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID, iVar1 != 0)) {
+        int targetUnitID = (int)DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
 
-            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findLinkageBasedPathOrWalkRadius,
-                DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[iVar1].x,
-                (uint)((int)((int)DAT_UnitsState::instance.units[iVar1].y)), -1, -1, 10000, FALSE);
+        if (targetUnitID == 0) {
+            return;
+        }
 
-            iVar1 = DAT_GameState::instance.playerDataArray[param_1].attackedPlayerID;
+        MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findLinkageBasedPathOrWalkRadius,
+            DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[targetUnitID].x,
+            (uint)((int)((int)DAT_UnitsState::instance.units[targetUnitID].y)), -1, -1, 10000, FALSE);
 
-            DAT_TribesState::instance.tribes[tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
+        int attackedPlayerID = DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID;
 
-            BVar2 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findDestinationCostLowerThan6,
-                DAT_PathFindingState::ptr)(iVar1, 200);
+        DAT_TribesState::instance.tribes[tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
 
-            if (((BVar2 != FALSE)
-                    || (BVar2 = MACRO_CALL_MEMBER(
-                            OpenSHC::Map::Navigation::PathFindingState_Func::findDestinationCostLowerThan6,
-                            DAT_PathFindingState::ptr)(
-                            DAT_GameState::instance.playerDataArray[param_1].attackedPlayerID, (int)((int)(150))),
-                        BVar2 != FALSE))
-                || ((BVar2
-                    = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findDestinationCostLowerThan6,
-                        DAT_PathFindingState::ptr)(
-                        DAT_GameState::instance.playerDataArray[param_1].attackedPlayerID, 100),
-                    BVar2 != FALSE
-                        || (BVar2 = MACRO_CALL_MEMBER(
-                                OpenSHC::Map::Navigation::PathFindingState_Func::findDestinationCostLowerThan6,
-                                DAT_PathFindingState::ptr)(
-                                DAT_GameState::instance.playerDataArray[param_1].attackedPlayerID, (int)((int)(50))),
-                            BVar2 != FALSE)))) {
+        // Try progressively smaller search costs; stop at the first one that finds a destination.
+        // The later probes deliberately re-read attackedPlayerID, as the calls may update it.
+        if ((MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findDestinationCostLowerThan6,
+                 DAT_PathFindingState::ptr)(attackedPlayerID, 200)
+                != FALSE)
+            || (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findDestinationCostLowerThan6,
+                    DAT_PathFindingState::ptr)(
+                    DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID, 150)
+                != FALSE)
+            || (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findDestinationCostLowerThan6,
+                    DAT_PathFindingState::ptr)(
+                    DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID, 100)
+                != FALSE)
+            || (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findDestinationCostLowerThan6,
+                    DAT_PathFindingState::ptr)(
+                    DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID, 50)
+                != FALSE)) {
 
-                MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction,
-                    DAT_TribesState::ptr)(tribeID, (uint)((int)(DAT_PathFindingState::instance.ALG_ResultX)),
-                    (uint)((int)(DAT_PathFindingState::instance.ALG_ResultY)), 0, 0,
-                    OpenSHC::Map::Units::Instructions::UMSE_0);
-            }
+            MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(
+                tribeID, (uint)((int)(DAT_PathFindingState::instance.ALG_ResultX)),
+                (uint)((int)(DAT_PathFindingState::instance.ALG_ResultY)), 0, 0,
+                OpenSHC::Map::Units::Instructions::UMSE_0);
         }
 
         return;
