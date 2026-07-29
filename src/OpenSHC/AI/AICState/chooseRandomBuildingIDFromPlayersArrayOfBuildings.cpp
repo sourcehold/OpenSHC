@@ -38,19 +38,22 @@ namespace AI {
 
                     if (0 < _chosenBuildingTypeIndex) {
 
-                        BuildingTypeInt _buildingType =
-                            (BuildingTypeInt)(short)DAT_BuildingsState::instance.buildings[_buildingID].buildingType;
+                        BuildingTypeInt _buildingType
+                            = (BuildingTypeInt)(short)DAT_BuildingsState::instance.buildings[_buildingID].buildingType;
 
                         do {
 
                             BuildingTypeInt _cmpType;
 
                             if (_rng < 2) {
-                                _cmpType = DAT_SkirmishDefinedData::instance.buildingTargetPrioritySet3[_selectionIndex];
+                                _cmpType
+                                    = DAT_SkirmishDefinedData::instance.BuildingTargetPrioritySet3[_selectionIndex];
                             } else if (_rng < 4) {
-                                _cmpType = DAT_SkirmishDefinedData::instance.buildingTargetPrioritySet2[_selectionIndex];
+                                _cmpType
+                                    = DAT_SkirmishDefinedData::instance.BuildingTargetPrioritySet2[_selectionIndex];
                             } else {
-                                _cmpType = DAT_SkirmishDefinedData::instance.buildingTargetPrioritySet1[_selectionIndex];
+                                _cmpType
+                                    = DAT_SkirmishDefinedData::instance.BuildingTargetPrioritySet1[_selectionIndex];
                             }
 
                             if (_buildingType == _cmpType) {

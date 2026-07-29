@@ -45,7 +45,7 @@ namespace AI {
 
         local_10 = 0;
 
-        local_c = DAT_SkirmishDefinedData::instance.DAT_AttackTribes_AITribeType_MaxTribeCount_Mapping[0] + 1;
+        local_c = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[0] + 1;
 
         do {
 
