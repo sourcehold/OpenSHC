@@ -32,11 +32,11 @@ namespace AI {
         if (_slotIndex <= 9)
             _tile = DAT_GameState::instance.playerDataArray[_owner].aivUnitLocationSlots[aivUnitType][_slotIndex];
 
-        short _y = DAT_ViewportRenderState::instance.DAT_TileTranslationMatrix_YComponent[_tile];
+        short _y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile];
         int _x = DAT_ViewportRenderState::instance.translationMatrix[_y].addXgetTile;
 
-        BOOLEnum _canNavigate = MACRO_CALL_MEMBER(
-            OpenSHC::AI::AICState_Func::canNavigateUnitsFromTileToTargetTile, this)(tribeID, _tile);
+        BOOLEnum _canNavigate
+            = MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::canNavigateUnitsFromTileToTargetTile, this)(tribeID, _tile);
 
         if (_canNavigate == FALSE) {
             MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToKeep, this)(tribeID, _owner);

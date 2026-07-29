@@ -24,43 +24,35 @@ namespace AI {
         int _destIndex = 0;
 
         for (int _index = 0; _index < 11; _index++) {
-            int* _mappingPtr = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[_index] + 1;
-
-            int const _tribeTypeStart = (*(int (*)[2])(_mappingPtr + -1))[0];
+            int const _tribeTypeStart = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[_index].tribeType;
             int _tribeIndex = 0;
-            int const _maxTribeCount = *_mappingPtr;
+            int const _maxTribeCount = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[_index].tribeCount;
 
-            if (0 < _maxTribeCount) {
-                short* _tribeIDPtr = &DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[_tribeTypeStart];
+            for (; _tribeIndex < _maxTribeCount; _tribeIndex++) {
 
-                do {
-                    int const _tribeID = (int)*_tribeIDPtr;
+                int const _tribeID
+                    = (int)DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[_tribeTypeStart + _tribeIndex];
 
-                    if ((_tribeID != 0)
-                        && (DAT_TribesState::instance.tribes[_tribeID].uid
-                            == DAT_GameState::instance.playerDataArray[playerID]
-                                .aiTribeUIDs[_tribeIndex + _tribeTypeStart])) {
+                if ((_tribeID != 0)
+                    && (DAT_TribesState::instance.tribes[_tribeID].uid
+                        == DAT_GameState::instance.playerDataArray[playerID]
+                            .aiTribeUIDs[_tribeIndex + _tribeTypeStart])) {
 
-                        DAT_TribesState::instance.tribes[_tribeID].unitStance
-                            = OpenSHC::Map::Units::Behavior::USE_DEFENSIVE;
+                    DAT_TribesState::instance.tribes[_tribeID].unitStance
+                        = OpenSHC::Map::Units::Behavior::USE_DEFENSIVE;
 
-                        MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction,
-                            DAT_TribesState::ptr)(_tribeID,
-                            (uint)((int)(DAT_GameState::instance.mapAndTime
-                                    .aiTribeMoveDestinationXYPairArray1[playerID * 5][_destIndex]
-                                    .xOffset)),
-                            (uint)((int)(DAT_GameState::instance.mapAndTime
-                                    .aiTribeMoveDestinationXYPairArray1[playerID * 5][_destIndex]
-                                    .yOffset)),
-                            0, 0, OpenSHC::Map::Units::Instructions::UMSE_0);
+                    MACRO_CALL_MEMBER(
+                        OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(_tribeID,
+                        (uint)((int)(DAT_GameState::instance.mapAndTime
+                                .aiTribeMoveDestinationXYPairArray1[playerID * 5][_destIndex]
+                                .xOffset)),
+                        (uint)((int)(DAT_GameState::instance.mapAndTime
+                                .aiTribeMoveDestinationXYPairArray1[playerID * 5][_destIndex]
+                                .yOffset)),
+                        0, 0, OpenSHC::Map::Units::Instructions::UMSE_0);
 
-                        _destIndex = _destIndex + 1;
-                    }
-
-                    _tribeIDPtr = _tribeIDPtr + 1;
-                    _tribeIndex = _tribeIndex + 1;
-
-                } while (_tribeIndex < _maxTribeCount);
+                    _destIndex = _destIndex + 1;
+                }
             }
         }
     }
