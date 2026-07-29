@@ -354,10 +354,10 @@ namespace AI {
         removeOrganismsAndSetMoveDestinationPairs;
 
         MACRO_FUNCTION_RESOLVER(
-            void (AICState::*)(short*), false, Address::SHC_3BB0A8C1_0x004CE4D0, &AICState::aiRetreatUnits)
+            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CE4D0, &AICState::aiRetreatUnits)
         aiRetreatUnits;
 
-        MACRO_FUNCTION_RESOLVER(void (AICState::*)(int, short*), false, Address::SHC_3BB0A8C1_0x004CE5F0,
+        MACRO_FUNCTION_RESOLVER(void (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004CE5F0,
             &AICState::sendUnitsToPlayerIDsKeepIfPossible)
         sendUnitsToPlayerIDsKeepIfPossible;
 
@@ -366,7 +366,7 @@ namespace AI {
         clearRallyFlagOnAllAIAttackTribes;
 
         MACRO_FUNCTION_RESOLVER(
-            void (AICState::*)(short*), false, Address::SHC_3BB0A8C1_0x004CE830, &AICState::moveAttackTribesToLocations)
+            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CE830, &AICState::moveAttackTribesToLocations)
         moveAttackTribesToLocations;
 
         MACRO_FUNCTION_RESOLVER(void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CE930,

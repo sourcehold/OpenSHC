@@ -20,12 +20,12 @@
       "args": "--sarif 'Stronghold Crusader.exe.sarif' --output-dir 'src' --overwrite-all --verbose"
     },
     {
-      "name": "Debug ghidra function rewriter",
+      "name": "Debug status txt",
       "type": "debugpy",
       "request": "launch",
-      "program": "tools/mcp/ghidra_scripts/functionrewriter/__main__.py",
+      "program": "status/extract_header_and_update.py",
       "console": "integratedTerminal",
-      "args": ""
+      "args": "status/addresses-SHC-3BB0A8C1.txt"
     }
   ]
 }

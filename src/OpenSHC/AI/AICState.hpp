@@ -221,13 +221,13 @@ namespace AI {
 
         void removeOrganismsAndSetMoveDestinationPairs(int playerID);
 
-        void aiRetreatUnits(short* playerID);
+        void aiRetreatUnits(int playerID);
 
-        void sendUnitsToPlayerIDsKeepIfPossible(int playerID1, short* playerID2);
+        void sendUnitsToPlayerIDsKeepIfPossible(int playerID1, int playerID2);
 
         void clearRallyFlagOnAllAIAttackTribes(int param_1);
 
-        void moveAttackTribesToLocations(short* playerID);
+        void moveAttackTribesToLocations(int playerID);
 
         void findAttackTribePositionAndPathToDefenses(int playerID);
 

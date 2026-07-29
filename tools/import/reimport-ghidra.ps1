@@ -66,6 +66,6 @@ if ($DryRun) {
     clang-format -i @$FileListFile
 
     # Update table of progress
-    python status\extract_header_and_update.py status\addresses-SHC-3BB0A8C1.txt
+    python status\extract_header_and_update.py src\precomp\addresses-SHC-3BB0A8C1.hpp
 }
 

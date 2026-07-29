@@ -55,7 +55,7 @@ def read_header_addresses(file_path):
     return matches
 
 
-def read_existing_txt(txt_path):
+def read_existing_txt(txt_path, deduplicate = True):
     data_map = {}
 
     if not txt_path.exists():
@@ -78,7 +78,10 @@ def read_existing_txt(txt_path):
             name, percent, comment = match.groups()
 
             if name in data_map:
-                logging.warning(f"Duplicate entry ignored at line {i}: {name}")
+                if deduplicate:
+                    if percent > data_map[name][0]:
+                        data_map[name] = (percent, comment)
+                logging.warning(f"Duplicate entry ignored at line {i}: {name} {percent} {comment}")
                 continue
 
             data_map[name] = (percent, comment)

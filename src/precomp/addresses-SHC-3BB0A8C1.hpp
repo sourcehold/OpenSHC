@@ -94051,7 +94051,7 @@ enum {
     SHC_3BB0A8C1_0x00B98700 = 0x00B98700,
     // type: /float
     SHC_3BB0A8C1_0x00B98704 = 0x00B98704,
-    // type: WinDef/DWORD
+    // type: /float
     SHC_3BB0A8C1_0x00B98708 = 0x00B98708,
     // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
     SHC_3BB0A8C1_0x00B9870C = 0x00B9870C,
