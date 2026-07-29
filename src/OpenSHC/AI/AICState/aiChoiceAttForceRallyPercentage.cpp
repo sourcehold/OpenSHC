@@ -20,70 +20,43 @@ namespace AI {
 
     {
 
-        AITypeInt AVar1;
+        AITypeInt _aiType = DAT_GameState::instance.playerDataArray[param_1].aiType;
 
-        int iVar2;
-
-        int iVar3;
-
-        short* psVar4;
-
-        int local_14;
-
-        int local_10;
-
-        int* local_c;
-
-        AVar1 = DAT_GameState::instance.playerDataArray[param_1].aiType;
-
-        if (AVar1 == OpenSHC::AI::AIT_NULL) {
+        if (_aiType == OpenSHC::AI::AIT_NULL) {
 
             return 0;
         }
 
-        local_14 = 0;
+        int _nonMoving = 0;
+        int _activeTribes = 0;
+        int _index = 0;
+        int _maxTribeCount = (int)DAT_SkirmishDefinedData::instance.MaxAttackTribes1[_index].tribeCount;
 
-        local_10 = 0;
+        for (; _index < 11; _index++) {
 
-        local_c = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[0] + 1;
+            int const _tribeTypeStart = (int)DAT_SkirmishDefinedData::instance.MaxAttackTribes1[_index].tribeType;
+            int _tribeIndex = 0;
+            _maxTribeCount = (int)DAT_SkirmishDefinedData::instance.MaxAttackTribes1[_index].tribeCount;
 
-        do {
+            for (; _tribeIndex < _maxTribeCount; _tribeIndex++) {
 
-            iVar3 = 0;
+                int const _tribeID
+                    = (int)DAT_GameState::instance.playerDataArray[param_1].aiTribeIDs[_tribeTypeStart + _tribeIndex];
 
-            if (0 < *local_c) {
+                if (((_tribeID != 0)
+                        && (DAT_TribesState::instance.tribes[_tribeID].uid
+                            == DAT_GameState::instance.playerDataArray[param_1]
+                                .aiTribeUIDs[_tribeIndex + _tribeTypeStart]))
+                    && (_activeTribes += 1, DAT_TribesState::instance.tribes[_tribeID].percentageMovingUnk < 0x14)) {
 
-                psVar4 = DAT_GameState::instance.playerDataArray[param_1].aiTribeIDs + (*(int (*)[2])(local_c + -1))[0];
-
-                do {
-
-                    iVar2 = (int)*psVar4;
-
-                    if (((iVar2 != 0)
-                            && (DAT_TribesState::instance.tribes[iVar2].uid
-                                == DAT_GameState::instance.playerDataArray[param_1]
-                                    .aiTribeUIDs[iVar3 + (*(int (*)[2])(local_c + -1))[0]]))
-                        && (local_14 = local_14 + 1,
-                            DAT_TribesState::instance.tribes[iVar2].percentageMovingUnk < 0x14)) {
-
-                        local_10 = local_10 + 1;
-                    }
-
-                    iVar3 = iVar3 + 1;
-
-                    psVar4 = psVar4 + 1;
-
-                } while (iVar3 < *local_c);
+                    _nonMoving += 1;
+                }
             }
+        }
 
-            local_c = local_c + 2;
+        if (0 < _activeTribes) {
 
-        } while ((int)local_c < 0xb42a2c);
-
-        if (0 < local_14) {
-
-            return (uint)(*(int*)((int)this + (AVar1 + ~OpenSHC::AI::AIT_NULL) * 0x2a4 + 0x200)
-                <= (local_10 * 100) / local_14);
+            return (uint)(((int)this->aics[_aiType - 1].AttForceRallyPercentage) <= (_nonMoving * 100) / _activeTribes);
         }
 
         return 0;
