@@ -16,20 +16,20 @@ namespace AI {
     {
         uint local_8 = 0;
         uint local_4 = 0;
-        int* local_c = DAT_SkirmishDefinedData::instance.DAT_AttackTribes_AITribeType_MaxTribeCount_Mapping[0] + 1;
+        int* local_c = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[0] + 1;
 
         bool _found = false;
         do {
             int iVar2 = 0;
             if (0 < *local_c) {
-                short* psVar3 = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs
-                    + (*(int (*)[2])(local_c + -1))[0];
+                short* psVar3
+                    = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs + (*(int (*)[2])(local_c + -1))[0];
                 do {
                     int iVar1 = (int)*psVar3;
                     if ((iVar1 != 0)
                         && (DAT_TribesState::instance.tribes[iVar1].uid
                             == DAT_GameState::instance.playerDataArray[playerID]
-                                   .aiTribeUIDs[iVar2 + (*(int (*)[2])(local_c + -1))[0]])) {
+                                .aiTribeUIDs[iVar2 + (*(int (*)[2])(local_c + -1))[0]])) {
                         iVar2 = (int)DAT_TribesState::instance.tribes[iVar1].selectionTargetUnitID;
                         local_8 = (uint)DAT_UnitsState::instance.units[iVar2].x;
                         local_4 = (uint)DAT_UnitsState::instance.units[iVar2].y;

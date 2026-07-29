@@ -61,7 +61,7 @@ namespace AI {
             /*
                   defWallPatrolGroups */
 
-            _ptr = &DAT_SkirmishDefinedData::instance.AIVUnitTypeMaxLocationPairArray_PatrolUnits[0].aivUnitType;
+            _ptr = &DAT_SkirmishDefinedData::instance.MaxAIVLocationForPatrolUnits[0].aivUnitType;
 
             do {
 

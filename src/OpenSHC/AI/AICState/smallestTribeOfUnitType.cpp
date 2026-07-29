@@ -25,7 +25,7 @@ namespace AI {
         if ((iVar3 < iVar6) && (((unitType == 0x8 || (unitType == 0xa)) || (unitType == 0x11)))) {
             iVar6 = iVar3;
         }
-        iVar3 = DAT_SkirmishDefinedData::instance.DAT_AiTribeIDOffsetForUnitType[(int)unitType];
+        iVar3 = DAT_SkirmishDefinedData::instance.AITribeIDOffsetForUnitType[(int)unitType];
         if (0 < iVar6) {
             short* _aiTribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs + iVar3;
             do {

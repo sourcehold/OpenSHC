@@ -27,7 +27,7 @@ namespace AI {
             return;
 
         int iVar3 = (AVar1 + ~OpenSHC::AI::AIT_NULL) * 0x2a4;
-        AIResourceTradeCategoryInt* local_18 = &DAT_SkirmishDefinedData::instance.DAT_AIResourceTradeAICMapping[0].aic;
+        AIResourceTradeCategoryInt* local_18 = &DAT_SkirmishDefinedData::instance.AIResourceTradeAICMapping[0].aic;
 
         do {
             ResourceType resourceType

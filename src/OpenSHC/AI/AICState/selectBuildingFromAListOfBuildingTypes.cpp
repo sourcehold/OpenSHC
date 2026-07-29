@@ -46,7 +46,7 @@ namespace AI {
                     do {
 
                         if ((int)(short)DAT_BuildingsState::instance.buildings[_buildingID].buildingType
-                            == DAT_SkirmishDefinedData::instance.buildingTargetPrioritySet1[_loopCounter]) {
+                            == DAT_SkirmishDefinedData::instance.BuildingTargetPrioritySet1[_loopCounter]) {
 
                             /*
                                           fancy break statement? */

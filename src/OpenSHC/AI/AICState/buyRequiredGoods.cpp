@@ -48,7 +48,7 @@ namespace AI {
 
         do {
 
-            resourceType = DAT_SkirmishDefinedData::instance.DAT_ResourceAcqusitionPreferenceOrder[param_1];
+            resourceType = DAT_SkirmishDefinedData::instance.ResourceAcquisitionPreferenceOrder[param_1];
 
             if ((DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker <= 0) || (0xb < param_1)) {
 
