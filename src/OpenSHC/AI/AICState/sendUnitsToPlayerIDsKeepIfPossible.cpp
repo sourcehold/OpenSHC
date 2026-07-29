@@ -16,6 +16,11 @@ namespace AI {
     using OpenSHC::Map::Units::Behavior::UnitStanceEnum;
     using OpenSHC::Map::Units::Instructions::UnitMatchSpeedEnum;
 
+    /**
+     * I seem unable to make this match better than 75.42% even though this function flow is dumb: _ghX and _ghY are
+     * only specified if not navigatable, which is checked twice for some reason.
+     */
+
     // FUNCTION: STRONGHOLDCRUSADER 0x004CE5F0
     void AICState::sendUnitsToPlayerIDsKeepIfPossible(int playerID1, int playerID2)
     {
@@ -39,8 +44,6 @@ namespace AI {
             _ghY = (uint)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_gatehouseTile];
             _ghX = _gatehouseTile - DAT_ViewportRenderState::instance.translationMatrix[_ghY].addXgetTile;
         }
-
-        int* _mappingPtr = &DAT_SkirmishDefinedData::instance.MaxAttackTribes1[0].tribeCount;
 
         for (int _index = 0; _index < 11; _index++) {
             int const _tribeTypeStart = (int)DAT_SkirmishDefinedData::instance.MaxAttackTribes1[_index].tribeType;
