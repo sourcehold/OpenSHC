@@ -129,7 +129,7 @@ namespace AI {
                                                         .aiSiegeCreationInformation[0][_engineIndex]
                                                         .delay)) {
                                                 int _y = (int)DAT_ViewportRenderState::instance
-                                                             .DAT_TileTranslationMatrix_YComponent[_location];
+                                                             .tileTranslationMatrix_YComponent[_location];
                                                 int _placeTile = _location
                                                     - DAT_ViewportRenderState::instance.translationMatrix[_y]
                                                           .addXgetTile;

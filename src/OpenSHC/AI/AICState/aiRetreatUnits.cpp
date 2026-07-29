@@ -21,42 +21,35 @@ namespace AI {
             return;
 
         for (int _index1 = 0; _index1 < 11; _index1++) {
-            int* _mappingPtr = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[_index1] + 1;
-            int const _maxTribeCount = *_mappingPtr;
-            int const _tribeTypeStart = (*(int (*)[2])(_mappingPtr - 1))[0];
+            int const _tribeTypeStart = (int)DAT_SkirmishDefinedData::instance.MaxAttackTribes1[_index1].tribeType;
             int _tribeIndex = 0;
+            int const _maxTribeCount = (int)DAT_SkirmishDefinedData::instance.MaxAttackTribes1[_index1].tribeCount;
 
-            if (0 < _maxTribeCount) {
+            for (; _tribeIndex < _maxTribeCount; _tribeIndex++) {
+                int const _tribeID
+                    = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[_tribeTypeStart + _tribeIndex];
 
-                for (; _tribeIndex < _maxTribeCount; _tribeIndex++) {
-                    int const _tribeID
-                        = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[_tribeTypeStart + _tribeIndex];
+                if ((_tribeID != 0)
+                    && (DAT_TribesState::instance.tribes[_tribeID].uid
+                        == DAT_GameState::instance.playerDataArray[playerID]
+                            .aiTribeUIDs[_tribeTypeStart + _tribeIndex])) {
 
-                    if ((_tribeID != 0)
-                        && (DAT_TribesState::instance.tribes[_tribeID].uid
-                            == DAT_GameState::instance.playerDataArray[playerID]
-                                .aiTribeUIDs[_tribeIndex + _tribeTypeStart])) {
+                    DAT_TribesState::instance.tribes[_tribeID].unitStance
+                        = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
 
-                        DAT_TribesState::instance.tribes[_tribeID].unitStance
-                            = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
-
-                        if (_tribeTypeStart == 0xbe) {
-                            MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToCampfire, this)(
-                                _tribeID, playerID);
-                        } else if (_tribeTypeStart == 0xd) {
+                    if (_tribeTypeStart == 0xbe) {
+                        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToCampfire, this)(_tribeID, playerID);
+                    } else if (_tribeTypeStart == 0xd) {
+                        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToCampfire, this)(_tribeID, playerID);
+                    } else {
+                        int const _hasHorses
+                            = MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::selectionContainsHorses,
+                                DAT_TribesState::ptr)(_tribeID);
+                        if (_hasHorses != FALSE) {
                             MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToCampfire, this)(
                                 _tribeID, playerID);
                         } else {
-                            int const _hasHorses
-                                = MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::selectionContainsHorses,
-                                    DAT_TribesState::ptr)(_tribeID);
-                            if (_hasHorses != FALSE) {
-                                MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToCampfire, this)(
-                                    _tribeID, playerID);
-                            } else {
-                                MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToKeep, this)(
-                                    _tribeID, playerID);
-                            }
+                            MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToKeep, this)(_tribeID, playerID);
                         }
                     }
                 }
