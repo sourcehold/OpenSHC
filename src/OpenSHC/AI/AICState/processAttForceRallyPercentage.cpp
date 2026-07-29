@@ -29,7 +29,7 @@ namespace AI {
         int _tribeTotal = 0;
         int _notReallyMoving = 0;
 
-        int* local_c = DAT_SkirmishDefinedData::instance.DAT_AttackTribes_AITribeType_MaxTribeCount_Mapping[0] + 1;
+        int* local_c = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[0] + 1;
 
         do {
             int iVar2 = (*(int (*)[2])(local_c + -1))[0];
@@ -68,8 +68,8 @@ namespace AI {
         } while ((int)local_c < 0xb42a2c);
 
         if (0 < _tribeTotal) {
-            return (BOOLEnum)((_notReallyMoving * 100) / _tribeTotal
-                >= *(int*)((int)this + _aiTypeMinus1 * 0x2a4 + 0x200));
+            return (
+                BOOLEnum)((_notReallyMoving * 100) / _tribeTotal >= *(int*)((int)this + _aiTypeMinus1 * 0x2a4 + 0x200));
         }
 
         return FALSE;

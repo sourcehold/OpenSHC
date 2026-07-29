@@ -81,7 +81,7 @@ namespace AI {
 
                         if (_candidateBuilding != 0) {
 
-                            _pTargets = DAT_SkirmishDefinedData::instance.buildingTargetPrioritySet1;
+                            _pTargets = DAT_SkirmishDefinedData::instance.BuildingTargetPrioritySet1;
 
                             do {
 

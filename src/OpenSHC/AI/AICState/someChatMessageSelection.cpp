@@ -133,8 +133,8 @@ namespace AI {
                     do {
 
                         iVar3 = iVar3
-                            + DAT_SkirmishDefinedData::instance.DAT_BreachTribeTypes_TribeGroupCount_Mapping
-                                  [DAT_GameState::instance.playerDataArray[aiStack_24[iVar4]].aiType
+                            + DAT_SkirmishDefinedData::instance
+                                  .MaxBreachTribes[DAT_GameState::instance.playerDataArray[aiStack_24[iVar4]].aiType
                                       + OpenSHC::AI::AIT_FREDERICK][0];
 
                         iVar4 = iVar4 + 1;
@@ -156,15 +156,15 @@ namespace AI {
                             iVar3 = aiStack_24[iVar4];
 
                             iVar5 = iVar5
-                                - DAT_SkirmishDefinedData::instance.DAT_BreachTribeTypes_TribeGroupCount_Mapping
-                                      [DAT_GameState::instance.playerDataArray[iVar3].aiType
+                                - DAT_SkirmishDefinedData::instance
+                                      .MaxBreachTribes[DAT_GameState::instance.playerDataArray[iVar3].aiType
                                           + OpenSHC::AI::AIT_FREDERICK][0];
 
                             if (iVar5 < 0) {
 
                                 DAT_GameSynchronyState::instance.DAT_ChatTauntOrMessage = -2
-                                    - DAT_SkirmishDefinedData::instance.DAT_BreachTribeTypes_TribeGroupCount_Mapping
-                                          [DAT_GameState::instance.playerDataArray[iVar3].aiType
+                                    - DAT_SkirmishDefinedData::instance
+                                          .MaxBreachTribes[DAT_GameState::instance.playerDataArray[iVar3].aiType
                                               + OpenSHC::AI::AIT_FREDERICK][1];
 
                                 DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray[1] = 1;

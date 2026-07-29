@@ -92,10 +92,10 @@ namespace AI {
 
                     do {
 
-                        if (*piVar4 == DAT_SkirmishDefinedData::instance.DAT_SiegeEngineUnitType[iVar2]) {
+                        if (*piVar4 == DAT_SkirmishDefinedData::instance.SiegeEngineUnitType[iVar2]) {
 
                             _requiredEngineers
-                                = DAT_SkirmishDefinedData::instance.DAT_SiegeEngineTypeRequiredEngineers[iVar2];
+                                = DAT_SkirmishDefinedData::instance.SiegeEngineTypeRequiredEngineers[iVar2];
 
                             break;
                         }
@@ -146,13 +146,13 @@ namespace AI {
                         do {
 
                             if (*_siegeEngineUnitType
-                                == DAT_SkirmishDefinedData::instance.DAT_SiegeEngineUnitType[_counterTill6]) {
+                                == DAT_SkirmishDefinedData::instance.SiegeEngineUnitType[_counterTill6]) {
 
-                                _requiredEngineers = DAT_SkirmishDefinedData::instance
-                                                         .DAT_SiegeEngineTypeRequiredEngineers[_counterTill6];
+                                _requiredEngineers
+                                    = DAT_SkirmishDefinedData::instance.SiegeEngineTypeRequiredEngineers[_counterTill6];
 
                                 _siegeEngineType = (CommandBuildingType)DAT_SkirmishDefinedData::instance
-                                                       .DAT_SiegeEngineCommandBuildingTypes[_counterTill6];
+                                                       .SiegeEngineCommandBuildingTypes[_counterTill6];
 
                                 break;
                             }

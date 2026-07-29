@@ -40,7 +40,7 @@ namespace AI {
             _ghX = _gatehouseTile - DAT_ViewportRenderState::instance.translationMatrix[_ghY].addXgetTile;
         }
 
-        int* _mappingPtr = DAT_SkirmishDefinedData::instance.DAT_AttackTribes_AITribeType_MaxTribeCount_Mapping[0] + 1;
+        int* _mappingPtr = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[0] + 1;
 
         do {
             int const _maxTribeCount = *_mappingPtr;

@@ -42,7 +42,7 @@ namespace AI {
         _enclosed = MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::checkKeepEnclosed, DAT_GameState::ptr)(
             playerID);
 
-        _ptr = &DAT_SkirmishDefinedData::instance.AIVUnitTypeMaxLocationPairArray_GroundUnits[0].aivUnitType;
+        _ptr = &DAT_SkirmishDefinedData::instance.MaxAIVLocationForGroundUnits[0].aivUnitType;
 
         do {
 
