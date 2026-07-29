@@ -11,19 +11,31 @@ namespace OpenSHC {
 namespace AI {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CF270
-    void AICState::aiCommandTribe13DefensiveWave(int param_1)
+    void AICState::aiCommandTribe13DefensiveWave(int playerID)
     {
-        int tribeID;
-        if ((DAT_GameState::instance.playerDataArray[param_1].aiType != AITA_NULL)
-            && (tribeID = (int)DAT_GameState::instance.playerDataArray[param_1].aiTribeIDs[0xd], tribeID != 0)) {
-            if ((DAT_TribesState::instance.tribes[tribeID].uid
-                    == DAT_GameState::instance.playerDataArray[param_1].aiTribeUIDs[0xd])
-                && (DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID != 0)) {
-                DAT_TribesState::instance.tribes[tribeID].unitStance = Map::Units::Behavior::USE_DEFENSIVE;
-                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::assignAttackTargetsForTribe, DAT_TribesState::ptr)(
-                    tribeID, Map::Units::STBT_0x3f4);
-            }
+        if (DAT_GameState::instance.playerDataArray[playerID].aiType == AITA_NULL) {
+            return;
         }
+
+        int tribeID = (int)DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[0xd];
+
+        if (tribeID == 0) {
+            return;
+        }
+
+        if (DAT_TribesState::instance.tribes[tribeID].uid
+            != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[0xd]) {
+            return;
+        }
+
+        if (DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID == 0) {
+            return;
+        }
+
+        DAT_TribesState::instance.tribes[tribeID].unitStance = Map::Units::Behavior::USE_DEFENSIVE;
+
+        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::assignAttackTargetsForTribe, DAT_TribesState::ptr)(
+            tribeID, Map::Units::STBT_0x3f4);
     }
 }
 }
