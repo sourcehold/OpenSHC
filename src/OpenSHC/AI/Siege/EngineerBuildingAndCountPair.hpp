@@ -8,19 +8,19 @@
 
 #pragma once
 
-#include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
+#include "OpenSHC/Commands/MappersEnum.hpp"
 
 namespace OpenSHC {
 namespace AI {
     namespace Siege {
 
-        using OpenSHC::Commands::CommandBuildingTypeInt;
+        using OpenSHC::Commands::MappersEnum;
 
 #pragma pack(push, 1)
         // SIZE: 0x00000008
         typedef struct EngineerBuildingAndCountPair {
 
-            CommandBuildingTypeInt engineerBuildingType; // 0x00000000 length: 4
+            MappersEnum engineerBuildingType; // 0x00000000 length: 4
             int engineerCount; // 0x00000004 length: 4
 
         } EngineerBuildingAndCountPair;

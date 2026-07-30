@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
+#include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingTypeInt.hpp"
 #include "OpenSHC/Map/Units/UnitTypeInt.hpp"
 
@@ -16,7 +16,7 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Commands::CommandBuildingTypeInt;
+        using OpenSHC::Commands::MappersEnum;
         using OpenSHC::Map::Buildings::BuildingTypeInt;
         using OpenSHC::Map::Units::UnitTypeInt;
 
@@ -27,7 +27,7 @@ namespace Map {
             int slot; // 0x00000000 length: 4
             UnitTypeInt unitType; // 0x00000004 length: 4
             BuildingTypeInt buildingType; // 0x00000008 length: 4
-            CommandBuildingTypeInt commandBuildingType; // 0x0000000C length: 4
+            MappersEnum commandBuildingType; // 0x0000000C length: 4
 
         } EngineerSiegeEngineMapping;
 #pragma pack(pop)

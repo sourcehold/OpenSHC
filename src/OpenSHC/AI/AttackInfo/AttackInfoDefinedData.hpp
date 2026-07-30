@@ -10,7 +10,7 @@
 
 #include "OpenSHC/AI/Tribes/AITribeTypeInt.hpp"
 #include "OpenSHC/AI/Tribes/AITribeTypeShort.hpp"
-#include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
+#include "OpenSHC/Commands/MappersEnum.hpp"
 
 namespace OpenSHC {
 namespace AI {
@@ -18,7 +18,7 @@ namespace AI {
 
         using OpenSHC::AI::Tribes::AITribeTypeInt;
         using OpenSHC::AI::Tribes::AITribeTypeShort;
-        using OpenSHC::Commands::CommandBuildingTypeInt;
+        using OpenSHC::Commands::MappersEnum;
 
 #pragma pack(push, 1)
         // SIZE: 0x00000A34
@@ -29,7 +29,7 @@ namespace AI {
             int DAT_AttackWaveDurationPerAttacker[10]; // 0x00000050 length: 40
             int field3_0x78[10]; // 0x00000078 length: 40
             int field4_0xa0[10]; // 0x000000A0 length: 40
-            CommandBuildingTypeInt field5_0xc8[5]; // 0x000000C8 length: 20
+            MappersEnum field5_0xc8[5]; // 0x000000C8 length: 20
             int field6_0xdc; // 0x000000DC length: 4
             int field7_0xe0; // 0x000000E0 length: 4
             int field8_0xe4; // 0x000000E4 length: 4

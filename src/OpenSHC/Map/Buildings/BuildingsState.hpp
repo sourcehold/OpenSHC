@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "OpenSHC/Commands/CommandBuildingType.hpp"
+#include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Game/Player/PlayerID.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
@@ -22,7 +22,7 @@ namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
-        using OpenSHC::Commands::CommandBuildingType;
+        using OpenSHC::Commands::MappersEnum;
         using OpenSHC::Game::Player::PlayerID;
         using OpenSHC::Game::Resources::ResourceType;
         using OpenSHC::IO::PackagedFileMagicNum;
@@ -90,17 +90,17 @@ namespace Map {
 
             undefined4 getBuildingResourceAmountByUid(int buildingID, int param_2, ResourceType param_3);
 
-            BuildingType convertCommandBuildingTypeToBuildingType(CommandBuildingType commandBuildingType);
+            BuildingType convertCommandBuildingTypeToBuildingType(MappersEnum commandBuildingType);
 
-            CommandBuildingType convertBuildingTypeToCommandBuildingType(BuildingType buildingType);
+            MappersEnum convertBuildingTypeToCommandBuildingType(BuildingType buildingType);
 
             undefined4 getBuildingHeightForBuildingID(int buildingID);
 
             undefined4 getBuildingHeightForBuildingID2(int buildingID);
 
-            int getSpriteID(CommandBuildingType commandBuildingType);
+            int getSpriteID(MappersEnum commandBuildingType);
 
-            int getSpriteID2(CommandBuildingType commandBuildingType);
+            int getSpriteID2(MappersEnum commandBuildingType);
 
             void clearBuildings();
 
@@ -198,7 +198,7 @@ namespace Map {
 
             void recomputePlayerDataStocksBasedOnStorageBuildings();
 
-            void getBuildingCost(CommandBuildingType commandBuildingType, int* pStone, int* pGold);
+            void getBuildingCost(MappersEnum commandBuildingType, int* pStone, int* pGold);
 
             void getPriceForDisbandedUnitType(UnitType unitType, int* outPrice);
 
@@ -356,7 +356,7 @@ namespace Map {
             void computeBuildingEntranceFlagsForOrientations(int param_1);
 
             void findQuarryPileLocation(undefined4 playerID, int x, int y, int buildingSize, int pileSize, int tryUnk,
-                CommandBuildingType commandBuildingType);
+                MappersEnum commandBuildingType);
 
             BOOLEnum hasBuildingAsNeighbour(int playerID, int x, int y, int size, BuildingType type);
 

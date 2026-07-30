@@ -2,7 +2,7 @@
   path: 'OpenSHC/Map/Buildings/BuildingsState.func.hpp'
 */
 
-#include "OpenSHC/Commands/CommandBuildingType.hpp"
+#include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Game/Player/PlayerID.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
@@ -15,7 +15,7 @@ namespace Map {
     namespace Buildings {
         namespace BuildingsState_Func {
 
-            using OpenSHC::Commands::CommandBuildingType;
+            using OpenSHC::Commands::MappersEnum;
             using OpenSHC::Game::Player::PlayerID;
             using OpenSHC::Game::Resources::ResourceType;
             using OpenSHC::IO::PackagedFileMagicNum;
@@ -33,11 +33,11 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x00409330, &BuildingsState::getBuildingResourceAmountByUid)
             getBuildingResourceAmountByUid;
 
-            MACRO_FUNCTION_RESOLVER(BuildingType (BuildingsState::*)(CommandBuildingType), false,
+            MACRO_FUNCTION_RESOLVER(BuildingType (BuildingsState::*)(MappersEnum), false,
                 Address::SHC_3BB0A8C1_0x00409370, &BuildingsState::convertCommandBuildingTypeToBuildingType)
             convertCommandBuildingTypeToBuildingType;
 
-            MACRO_FUNCTION_RESOLVER(CommandBuildingType (BuildingsState::*)(BuildingType), false,
+            MACRO_FUNCTION_RESOLVER(MappersEnum (BuildingsState::*)(BuildingType), false,
                 Address::SHC_3BB0A8C1_0x00409930, &BuildingsState::convertBuildingTypeToCommandBuildingType)
             convertBuildingTypeToCommandBuildingType;
 
@@ -49,12 +49,12 @@ namespace Map {
                 &BuildingsState::getBuildingHeightForBuildingID2)
             getBuildingHeightForBuildingID2;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(CommandBuildingType), false,
-                Address::SHC_3BB0A8C1_0x00409F50, &BuildingsState::getSpriteID)
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(MappersEnum), false, Address::SHC_3BB0A8C1_0x00409F50,
+                &BuildingsState::getSpriteID)
             getSpriteID;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(CommandBuildingType), false,
-                Address::SHC_3BB0A8C1_0x00409FF0, &BuildingsState::getSpriteID2)
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(MappersEnum), false, Address::SHC_3BB0A8C1_0x00409FF0,
+                &BuildingsState::getSpriteID2)
             getSpriteID2;
 
             MACRO_FUNCTION_RESOLVER(
@@ -241,7 +241,7 @@ namespace Map {
                 &BuildingsState::recomputePlayerDataStocksBasedOnStorageBuildings)
             recomputePlayerDataStocksBasedOnStorageBuildings;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(CommandBuildingType, int*, int*), false,
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(MappersEnum, int*, int*), false,
                 Address::SHC_3BB0A8C1_0x0040C5F0, &BuildingsState::getBuildingCost)
             getBuildingCost;
 
@@ -553,8 +553,8 @@ namespace Map {
                 &BuildingsState::computeBuildingEntranceFlagsForOrientations)
             computeBuildingEntranceFlagsForOrientations;
 
-            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(undefined4, int, int, int, int, int, CommandBuildingType),
-                false, Address::SHC_3BB0A8C1_0x0041B890, &BuildingsState::findQuarryPileLocation)
+            MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(undefined4, int, int, int, int, int, MappersEnum), false,
+                Address::SHC_3BB0A8C1_0x0041B890, &BuildingsState::findQuarryPileLocation)
             findQuarryPileLocation;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int, int, int, int, BuildingType), false,

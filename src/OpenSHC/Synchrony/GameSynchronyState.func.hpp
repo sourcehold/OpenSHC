@@ -5,13 +5,13 @@
 #include "OpenSHC/Commands/GameCommandParameterLocation.hpp"
 #include "OpenSHC/Commands/GameCommandParameterReadWrite.hpp"
 #include "OpenSHC/Commands/GameCommandType.hpp"
-#include "OpenSHC/DirectPlay/DPERR.hpp"
 #include "OpenSHC/Synchrony/GameSynchronyState.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "WinDef.h"
 #include "basetsd.h"
 #include "crtdefs.h"
+#include "dplay.h"
 #include "guiddef.h"
 namespace OpenSHC {
 namespace Synchrony {
@@ -20,7 +20,6 @@ namespace Synchrony {
         using OpenSHC::Commands::GameCommandParameterLocation;
         using OpenSHC::Commands::GameCommandParameterReadWrite;
         using OpenSHC::Commands::GameCommandType;
-        using OpenSHC::DirectPlay::DPERR;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // Constructor

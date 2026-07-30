@@ -55,7 +55,7 @@ namespace OS {
 
     int __cdecl _fseek(FILE* _File, long _Offset, DWORD _Origin);
 
-    FILE* __cdecl _fopen(char* _Filename, char* _Mode);
+    FILE* __cdecl _fopen(char const* _Filename, char const* _Mode);
 
     int __cdecl __vswprintf(wchar_t* _Dest, wchar_t* _Format, va_list _Args);
 

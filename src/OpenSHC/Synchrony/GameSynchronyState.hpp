@@ -13,8 +13,6 @@
 #include "OpenSHC/Commands/GameCommandParameterReadWrite.hpp"
 #include "OpenSHC/Commands/GameCommandSchedulingInt.hpp"
 #include "OpenSHC/Commands/GameCommandType.hpp"
-#include "OpenSHC/DirectPlay/DPERR.hpp"
-#include "OpenSHC/DirectPlay/DPERRInt.hpp"
 #include "OpenSHC/Game/GameModeInt.hpp"
 #include "OpenSHC/Game/Skirmish/SkirmishStatistics.hpp"
 #include "OpenSHC/Synchrony/HashContainer.hpp"
@@ -43,8 +41,6 @@ namespace Synchrony {
     using OpenSHC::Commands::GameCommandParameterReadWrite;
     using OpenSHC::Commands::GameCommandSchedulingInt;
     using OpenSHC::Commands::GameCommandType;
-    using OpenSHC::DirectPlay::DPERR;
-    using OpenSHC::DirectPlay::DPERRInt;
     using OpenSHC::Game::GameModeInt;
     using OpenSHC::Game::Skirmish::SkirmishStatistics;
     using OpenSHC::Synchrony::HashContainer;

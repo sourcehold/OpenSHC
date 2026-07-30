@@ -84,7 +84,7 @@ namespace OS_Func {
         Address::SHC_3BB0A8C1_0x00580384, &OpenSHC::OS::_fseek)
     _fseek;
 
-    MACRO_FUNCTION_RESOLVER(FILE*(__cdecl*)(char* _Filename, char* _Mode), REIMPLEMENTED_CRT,
+    MACRO_FUNCTION_RESOLVER(FILE*(__cdecl*)(char const* _Filename, char const* _Mode), REIMPLEMENTED_CRT,
         Address::SHC_3BB0A8C1_0x005804CD, &OpenSHC::OS::_fopen)
     _fopen;
 

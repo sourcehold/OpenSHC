@@ -5,7 +5,7 @@
 #include "OpenSHC/AI/AIGridComputationResourceType.hpp"
 #include "OpenSHC/AI/AIV/AIVBuildingType2.hpp"
 #include "OpenSHC/AI/AIVState.hpp"
-#include "OpenSHC/Commands/CommandBuildingType.hpp"
+#include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Game/Player/PlayerID.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
@@ -14,7 +14,7 @@ namespace AI {
 
         using OpenSHC::AI::AIGridComputationResourceType;
         using OpenSHC::AI::AIV::AIVBuildingType2;
-        using OpenSHC::Commands::CommandBuildingType;
+        using OpenSHC::Commands::MappersEnum;
         using OpenSHC::Game::Player::PlayerID;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
@@ -48,8 +48,8 @@ namespace AI {
             &AIVState::setKeepOffsetAndOrientation)
         setKeepOffsetAndOrientation;
 
-        MACRO_FUNCTION_RESOLVER(CommandBuildingType (AIVState::*)(AIVBuildingType2), false,
-            Address::SHC_3BB0A8C1_0x004ECFE0, &AIVState::convertAIVBuildingTypeToCommandBuildingType)
+        MACRO_FUNCTION_RESOLVER(MappersEnum (AIVState::*)(AIVBuildingType2), false, Address::SHC_3BB0A8C1_0x004ECFE0,
+            &AIVState::convertAIVBuildingTypeToCommandBuildingType)
         convertAIVBuildingTypeToCommandBuildingType;
 
         MACRO_FUNCTION_RESOLVER(void (AIVState::*)(int), false, Address::SHC_3BB0A8C1_0x004ED0B0, &AIVState::rotateAIV)
@@ -79,8 +79,8 @@ namespace AI {
             void (AIVState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004EDCB0, &AIVState::resetCountdownInHeatMap)
         resetCountdownInHeatMap;
 
-        MACRO_FUNCTION_RESOLVER(int (AIVState::*)(PlayerID, CommandBuildingType), false,
-            Address::SHC_3BB0A8C1_0x004EDDF0, &AIVState::findSuitableFarmLocationAndPlaceFarm)
+        MACRO_FUNCTION_RESOLVER(int (AIVState::*)(PlayerID, MappersEnum), false, Address::SHC_3BB0A8C1_0x004EDDF0,
+            &AIVState::findSuitableFarmLocationAndPlaceFarm)
         findSuitableFarmLocationAndPlaceFarm;
 
         MACRO_FUNCTION_RESOLVER(void (AIVState::*)(int), false, Address::SHC_3BB0A8C1_0x004EE140,
@@ -115,8 +115,8 @@ namespace AI {
             int (AIVState::*)(int), false, Address::SHC_3BB0A8C1_0x004EF8C0, &AIVState::computeAIVPlacementFit)
         computeAIVPlacementFit;
 
-        MACRO_FUNCTION_RESOLVER(int (AIVState::*)(int, CommandBuildingType), false, Address::SHC_3BB0A8C1_0x004EFA60,
-            &AIVState::aiPlaceFarm)
+        MACRO_FUNCTION_RESOLVER(
+            int (AIVState::*)(int, MappersEnum), false, Address::SHC_3BB0A8C1_0x004EFA60, &AIVState::aiPlaceFarm)
         aiPlaceFarm;
 
         MACRO_FUNCTION_RESOLVER(

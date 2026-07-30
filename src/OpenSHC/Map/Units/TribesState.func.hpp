@@ -2,7 +2,7 @@
   path: 'OpenSHC/Map/Units/TribesState.func.hpp'
 */
 
-#include "OpenSHC/Commands/CommandBuildingType.hpp"
+#include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Units/Behavior/UnitStanceEnum.hpp"
 #include "OpenSHC/Map/Units/Instructions/UnitMatchSpeedEnum.hpp"
@@ -16,7 +16,7 @@ namespace Map {
     namespace Units {
         namespace TribesState_Func {
 
-            using OpenSHC::Commands::CommandBuildingType;
+            using OpenSHC::Commands::MappersEnum;
             using OpenSHC::IO::PackagedFileMagicNum;
             using OpenSHC::Map::Units::SomeTribeBehaviorType;
             using OpenSHC::Map::Units::UnitInstructionType;
@@ -396,7 +396,7 @@ namespace Map {
                 int (TribesState::*)(int), false, Address::SHC_3BB0A8C1_0x00525B70, &TribesState::popUnitFromTribe)
             popUnitFromTribe;
 
-            MACRO_FUNCTION_RESOLVER(dword (TribesState::*)(CommandBuildingType, uint, uint, int), false,
+            MACRO_FUNCTION_RESOLVER(dword (TribesState::*)(MappersEnum, uint, uint, int), false,
                 Address::SHC_3BB0A8C1_0x00525BA0, &TribesState::createAnimal)
             createAnimal;
 

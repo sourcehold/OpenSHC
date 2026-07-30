@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "OpenSHC/Commands/CommandBuildingType.hpp"
+#include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Game/Player/PlayerData.hpp"
 #include "OpenSHC/Game/Player/PlayerDataBuildingCategoryEnum.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
@@ -20,7 +20,7 @@
 namespace OpenSHC {
 namespace Game {
 
-    using OpenSHC::Commands::CommandBuildingType;
+    using OpenSHC::Commands::MappersEnum;
     using OpenSHC::Game::Player::PlayerData;
     using OpenSHC::Game::Player::PlayerDataBuildingCategoryEnum;
     using OpenSHC::Game::Resources::ResourceType;
@@ -113,7 +113,7 @@ namespace Game {
         void destroyPlayerCompletely(int playerID);
 
         undefined4 checkRequiredResourcesForBuildingOrPlanToBuy(
-            CommandBuildingType commandBuildingType, int playerID, BOOLEnum playResourceLackMsgUnk);
+            MappersEnum commandBuildingType, int playerID, BOOLEnum playResourceLackMsgUnk);
 
         int getWallTilesThatCanBeBuilt(int playerID, int wallMaterial);
 

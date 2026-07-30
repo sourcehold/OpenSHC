@@ -2,7 +2,7 @@
   path: 'OpenSHC/Game/GameStateStructures.func.hpp'
 */
 
-#include "OpenSHC/Commands/CommandBuildingType.hpp"
+#include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Game/GameStateStructures.hpp"
 #include "OpenSHC/Game/Player/PlayerDataBuildingCategoryEnum.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
@@ -12,7 +12,7 @@ namespace OpenSHC {
 namespace Game {
     namespace GameStateStructures_Func {
 
-        using OpenSHC::Commands::CommandBuildingType;
+        using OpenSHC::Commands::MappersEnum;
         using OpenSHC::Game::Player::PlayerDataBuildingCategoryEnum;
         using OpenSHC::Game::Resources::ResourceType;
         using OpenSHC::IO::PackagedFileMagicNum;
@@ -143,7 +143,7 @@ namespace Game {
             &GameStateStructures::destroyPlayerCompletely)
         destroyPlayerCompletely;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (GameStateStructures::*)(CommandBuildingType, int, BOOLEnum), false,
+        MACRO_FUNCTION_RESOLVER(undefined4 (GameStateStructures::*)(MappersEnum, int, BOOLEnum), false,
             Address::SHC_3BB0A8C1_0x00457B80, &GameStateStructures::checkRequiredResourcesForBuildingOrPlanToBuy)
         checkRequiredResourcesForBuildingOrPlanToBuy;
 

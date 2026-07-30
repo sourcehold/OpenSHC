@@ -8,13 +8,13 @@
 
 #pragma once
 
-#include "OpenSHC/Commands/CommandBuildingType.hpp"
+#include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/UI/HoveredStateElement.hpp"
 
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::Commands::CommandBuildingType;
+    using OpenSHC::Commands::MappersEnum;
     using OpenSHC::UI::HoveredStateElement;
 
 #pragma pack(push, 1)
@@ -39,7 +39,7 @@ namespace UI {
 
         void clearInvalidatedHoverStates();
 
-        void createHoverStateElement(int x, int y, CommandBuildingType type, int size, int flag);
+        void createHoverStateElement(int x, int y, MappersEnum type, int size, int flag);
 
         void calculateHoveredTile();
     };

@@ -13,7 +13,7 @@
 #include "OpenSHC/AI/AIV/AIVBuildingType2.hpp"
 #include "OpenSHC/AI/AIV/AIVBuildingType2Short.hpp"
 #include "OpenSHC/AI/AIV/AIVSpec.hpp"
-#include "OpenSHC/Commands/CommandBuildingType.hpp"
+#include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Game/Player/PlayerID.hpp"
 #include "OpenSHC/Map/HeatMap.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -26,7 +26,7 @@ namespace AI {
     using OpenSHC::AI::AIV::AIVBuildingType2;
     using OpenSHC::AI::AIV::AIVBuildingType2Short;
     using OpenSHC::AI::AIV::AIVSpec;
-    using OpenSHC::Commands::CommandBuildingType;
+    using OpenSHC::Commands::MappersEnum;
     using OpenSHC::Game::Player::PlayerID;
     using OpenSHC::Map::HeatMap;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
@@ -96,7 +96,7 @@ namespace AI {
 
         void setKeepOffsetAndOrientation(int aiID, int keepX, int keepY);
 
-        CommandBuildingType convertAIVBuildingTypeToCommandBuildingType(AIVBuildingType2 param_1);
+        MappersEnum convertAIVBuildingTypeToCommandBuildingType(AIVBuildingType2 param_1);
 
         void rotateAIV(int orientation);
 
@@ -112,7 +112,7 @@ namespace AI {
 
         void resetCountdownInHeatMap(int x, int y);
 
-        int findSuitableFarmLocationAndPlaceFarm(PlayerID playerID, CommandBuildingType commandBuildingType);
+        int findSuitableFarmLocationAndPlaceFarm(PlayerID playerID, MappersEnum commandBuildingType);
 
         void findAppropriateWoodCutterGridLocation(int playerID);
 
@@ -131,7 +131,7 @@ namespace AI {
 
         int computeAIVPlacementFit(int playerID);
 
-        int aiPlaceFarm(int playerID, CommandBuildingType buildingType);
+        int aiPlaceFarm(int playerID, MappersEnum buildingType);
 
         void aiPlaceWoodcuttershut(int playerID);
 

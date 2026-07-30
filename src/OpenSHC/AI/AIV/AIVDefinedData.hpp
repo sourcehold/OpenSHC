@@ -9,7 +9,7 @@
 #pragma once
 
 #include "OpenSHC/AI/AIV/AIVSectionAddress.hpp"
-#include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
+#include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Map/Navigation/Algorithms/XYPair.hpp"
 
 namespace OpenSHC {
@@ -17,7 +17,7 @@ namespace AI {
     namespace AIV {
 
         using OpenSHC::AI::AIV::AIVSectionAddress;
-        using OpenSHC::Commands::CommandBuildingTypeInt;
+        using OpenSHC::Commands::MappersEnum;
         using OpenSHC::Map::Navigation::Algorithms::XYPair;
 
 #pragma pack(push, 1)
@@ -27,7 +27,7 @@ namespace AI {
             undefined1 padding_0x0[4]; // 0x00000000 length: 4
             AIVSectionAddress DAT_AIVSectionAddressArray[14]; // 0x00000004 length: 224
             undefined1 padding_0xe4[16]; // 0x000000E4 length: 16
-            CommandBuildingTypeInt field21_0xf4[79]; // 0x000000F4 length: 316
+            MappersEnum field21_0xf4[79]; // 0x000000F4 length: 316
             undefined1 padding_0x230[4]; // 0x00000230 length: 4
             char aivFileNames[16][8][50]; // 0x00000234 length: 6400
             XYPair offsetsForFiveByFiveAreaSpotCheck[9]; // 0x00001B34 length: 72

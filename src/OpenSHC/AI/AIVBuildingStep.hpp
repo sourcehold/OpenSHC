@@ -10,14 +10,14 @@
 
 #include "OpenSHC/AI/AIV/AIVBuildLocationUnion.hpp"
 #include "OpenSHC/AI/AIVBuildingStepStatusByte.hpp"
-#include "OpenSHC/Commands/CommandBuildingTypeShort.hpp"
+#include "OpenSHC/Commands/MappersEnumShort.hpp"
 
 namespace OpenSHC {
 namespace AI {
 
     using OpenSHC::AI::AIVBuildingStepStatusByte;
     using OpenSHC::AI::AIV::AIVBuildLocationUnion;
-    using OpenSHC::Commands::CommandBuildingTypeShort;
+    using OpenSHC::Commands::MappersEnumShort;
 
 #pragma pack(push, 1)
     // SIZE: 0x0000000C
@@ -25,7 +25,7 @@ namespace AI {
 
         AIVBuildingStepStatusByte buildStatus; // 0x00000000 length: 1
         byte wait; // 0x00000001 length: 1
-        CommandBuildingTypeShort buildingType; // 0x00000002 length: 2
+        MappersEnumShort buildingType; // 0x00000002 length: 2
         short quantity; // 0x00000004 length: 2
         short flag3; // 0x00000006 length: 2
         AIVBuildLocationUnion location; // 0x00000008 length: 4

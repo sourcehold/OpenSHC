@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "OpenSHC/Commands/CommandBuildingType.hpp"
+#include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/UI/ChooseNetworkServiceProvider/ChooseNetworkServiceProviderButtonActions.hpp"
 #include "OpenSHC/UI/Enums/SoundMenuClickType.hpp"
@@ -19,7 +19,7 @@
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::Commands::CommandBuildingType;
+    using OpenSHC::Commands::MappersEnum;
     using OpenSHC::Game::Resources::ResourceType;
     using OpenSHC::UI::ChooseNetworkServiceProvider::ChooseNetworkServiceProviderButtonActions;
     using OpenSHC::UI::Enums::SoundMenuClickType;
@@ -261,7 +261,7 @@ namespace UI {
 
     void __cdecl MenuItemActionHandler_MapEditorLandscaping_CategoryButtons(int param_1, ...);
 
-    void __cdecl MenuItemActionHandler_MapEditorLandscaping_GeneralButtons(CommandBuildingType param_1, ...);
+    void __cdecl MenuItemActionHandler_MapEditorLandscaping_GeneralButtons(MappersEnum param_1, ...);
 
     void __stdcall MenuView_BuildMenu_Prepare();
 
@@ -382,7 +382,7 @@ namespace UI {
 
     void __cdecl MenuItemActionHandler_MapEditorLandscaping_QueueCommandCallback();
 
-    void __cdecl MenuItemActionHandler_General_ToolbarButtonPressed(CommandBuildingType buttonID);
+    void __cdecl MenuItemActionHandler_General_ToolbarButtonPressed(MappersEnum buttonID);
 
     void __cdecl MenuItemActionHandler_InGameMenu_MainButtons(int param_1, ...);
 

@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "OpenSHC/Commands/CommandBuildingType.hpp"
+#include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Units/Behavior/UnitStanceEnum.hpp"
 #include "OpenSHC/Map/Units/Instructions/UnitMatchSpeedEnum.hpp"
@@ -23,7 +23,7 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Commands::CommandBuildingType;
+        using OpenSHC::Commands::MappersEnum;
         using OpenSHC::IO::PackagedFileMagicNum;
         using OpenSHC::Map::Units::SomeTribeBehaviorType;
         using OpenSHC::Map::Units::Tribe;
@@ -259,7 +259,7 @@ namespace Map {
 
             int popUnitFromTribe(int tribeID);
 
-            dword createAnimal(CommandBuildingType animalType, uint x, uint y, int tile);
+            dword createAnimal(MappersEnum animalType, uint x, uint y, int tile);
 
             BOOLEnum spawnDeerLionOrRabbit(int tribeID, int param_2, UnitType unitType);
 

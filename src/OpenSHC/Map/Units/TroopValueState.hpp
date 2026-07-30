@@ -9,7 +9,7 @@
 #pragma once
 
 #include "OpenSHC/AI/Tribes/AITribeType.hpp"
-#include "OpenSHC/Commands/CommandBuildingType.hpp"
+#include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/AttackInfo.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
@@ -22,7 +22,7 @@ namespace Map {
     namespace Units {
 
         using OpenSHC::AI::Tribes::AITribeType;
-        using OpenSHC::Commands::CommandBuildingType;
+        using OpenSHC::Commands::MappersEnum;
         using OpenSHC::IO::PackagedFileMagicNum;
         using OpenSHC::Map::AttackInfo;
         using OpenSHC::Map::Units::SomeTribeBehaviorType;
@@ -151,10 +151,10 @@ namespace Map {
 
             void pruneStaleTentPoints();
 
-            int placeSiegeTentAtAttackAngle(int tribeID, CommandBuildingType commandBuildingType);
+            int placeSiegeTentAtAttackAngle(int tribeID, MappersEnum commandBuildingType);
 
-            BOOLEnum placeSiegeTentOrTunnelAtSuitableLocationAndAssignEngineers(int tribeID,
-                CommandBuildingType commandBuildingType, uint strategicDistance, UnitInstructionType instruction);
+            BOOLEnum placeSiegeTentOrTunnelAtSuitableLocationAndAssignEngineers(
+                int tribeID, MappersEnum commandBuildingType, uint strategicDistance, UnitInstructionType instruction);
 
             int placeTunnelEntrances(int tribeID);
 

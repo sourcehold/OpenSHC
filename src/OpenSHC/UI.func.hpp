@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "OpenSHC/Commands/CommandBuildingType.hpp"
+#include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/UI.hpp"
 #include "OpenSHC/UI/ChooseNetworkServiceProvider/ChooseNetworkServiceProviderButtonActions.hpp"
@@ -20,7 +20,7 @@
 namespace OpenSHC {
 namespace UI_Func {
 
-    using OpenSHC::Commands::CommandBuildingType;
+    using OpenSHC::Commands::MappersEnum;
     using OpenSHC::Game::Resources::ResourceType;
     using OpenSHC::UI::ChooseNetworkServiceProvider::ChooseNetworkServiceProviderButtonActions;
     using OpenSHC::UI::Enums::SoundMenuClickType;
@@ -489,7 +489,7 @@ namespace UI_Func {
         &OpenSHC::UI::MenuItemActionHandler_MapEditorLandscaping_CategoryButtons)
     MenuItemActionHandler_MapEditorLandscaping_CategoryButtons;
 
-    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(CommandBuildingType param_1, ...), false, Address::SHC_3BB0A8C1_0x004314E0,
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(MappersEnum param_1, ...), false, Address::SHC_3BB0A8C1_0x004314E0,
         &OpenSHC::UI::MenuItemActionHandler_MapEditorLandscaping_GeneralButtons)
     MenuItemActionHandler_MapEditorLandscaping_GeneralButtons;
 
@@ -728,7 +728,7 @@ namespace UI_Func {
         &OpenSHC::UI::MenuItemActionHandler_MapEditorLandscaping_QueueCommandCallback)
     MenuItemActionHandler_MapEditorLandscaping_QueueCommandCallback;
 
-    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(CommandBuildingType buttonID), false, Address::SHC_3BB0A8C1_0x00444410,
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(MappersEnum buttonID), false, Address::SHC_3BB0A8C1_0x00444410,
         &OpenSHC::UI::MenuItemActionHandler_General_ToolbarButtonPressed)
     MenuItemActionHandler_General_ToolbarButtonPressed;
 

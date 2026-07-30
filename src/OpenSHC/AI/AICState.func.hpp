@@ -6,7 +6,7 @@
 #include "OpenSHC/AI/AINervousDestroyBuildingCategory.hpp"
 #include "OpenSHC/AI/AIUnitBehaviourType.hpp"
 #include "OpenSHC/AI/AIVUnitType.hpp"
-#include "OpenSHC/Commands/CommandBuildingType.hpp"
+#include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Game/Player/PlayerID.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
@@ -18,7 +18,7 @@ namespace AI {
         using OpenSHC::AI::AINervousDestroyBuildingCategory;
         using OpenSHC::AI::AIUnitBehaviourType;
         using OpenSHC::AI::AIVUnitType;
-        using OpenSHC::Commands::CommandBuildingType;
+        using OpenSHC::Commands::MappersEnum;
         using OpenSHC::Game::Player::PlayerID;
         using OpenSHC::Game::Resources::ResourceType;
         using OpenSHC::Map::Units::UnitType;
@@ -153,16 +153,16 @@ namespace AI {
             uint (AICState::*)(PlayerID), false, Address::SHC_3BB0A8C1_0x004CB540, &AICState::aiShouldBuildPitchrig)
         aiShouldBuildPitchrig;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(PlayerID, CommandBuildingType), false,
-            Address::SHC_3BB0A8C1_0x004CB5B0, &AICState::shouldNotBeBuildingHovel)
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(PlayerID, MappersEnum), false, Address::SHC_3BB0A8C1_0x004CB5B0,
+            &AICState::shouldNotBeBuildingHovel)
         shouldNotBeBuildingHovel;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, CommandBuildingType), false,
-            Address::SHC_3BB0A8C1_0x004CB610, &AICState::shouldWaitWithBuildingNegativeFearFactor)
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, MappersEnum), false, Address::SHC_3BB0A8C1_0x004CB610,
+            &AICState::shouldWaitWithBuildingNegativeFearFactor)
         shouldWaitWithBuildingNegativeFearFactor;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, CommandBuildingType), false,
-            Address::SHC_3BB0A8C1_0x004CB700, &AICState::shouldWaitWithBuildingAPositiveFearFactor)
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, MappersEnum), false, Address::SHC_3BB0A8C1_0x004CB700,
+            &AICState::shouldWaitWithBuildingAPositiveFearFactor)
         shouldWaitWithBuildingAPositiveFearFactor;
 
         MACRO_FUNCTION_RESOLVER(
@@ -177,8 +177,8 @@ namespace AI {
             &AICState::destroyBuildingIfNoWorker)
         destroyBuildingIfNoWorker;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, CommandBuildingType), false,
-            Address::SHC_3BB0A8C1_0x004CB9F0, &AICState::shouldNotBuildMarketArmoryGranaryBarracksMercenarypost)
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, MappersEnum), false, Address::SHC_3BB0A8C1_0x004CB9F0,
+            &AICState::shouldNotBuildMarketArmoryGranaryBarracksMercenarypost)
         shouldNotBuildMarketArmoryGranaryBarracksMercenarypost;
 
         MACRO_FUNCTION_RESOLVER(void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CBA50,
@@ -381,7 +381,7 @@ namespace AI {
             void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CEB50, &AICState::giveMoveCommandToAttackTribes)
         giveMoveCommandToAttackTribes;
 
-        MACRO_FUNCTION_RESOLVER(uint (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CEC80,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CEC80,
             &AICState::aiChoiceAttForceRallyPercentage)
         aiChoiceAttForceRallyPercentage;
 
@@ -744,19 +744,19 @@ namespace AI {
             void (AICState::*)(), false, Address::SHC_3BB0A8C1_0x004D53E0, &AICState::updateAIBehaviour)
         updateAIBehaviour;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, CommandBuildingType), false,
-            Address::SHC_3BB0A8C1_0x004ECA30, &AICState::shouldNotBeBuildingGranary)
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, MappersEnum), false, Address::SHC_3BB0A8C1_0x004ECA30,
+            &AICState::shouldNotBeBuildingGranary)
         shouldNotBeBuildingGranary;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(PlayerID, CommandBuildingType), false,
-            Address::SHC_3BB0A8C1_0x004ECA60, &AICState::shouldNotBeBuildingArmoury)
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(PlayerID, MappersEnum), false, Address::SHC_3BB0A8C1_0x004ECA60,
+            &AICState::shouldNotBeBuildingArmoury)
         shouldNotBeBuildingArmoury;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, CommandBuildingType), false,
-            Address::SHC_3BB0A8C1_0x004ECA90, &AICState::shouldNotBuildKillingPits)
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, MappersEnum), false, Address::SHC_3BB0A8C1_0x004ECA90,
+            &AICState::shouldNotBuildKillingPits)
         shouldNotBuildKillingPits;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(undefined4, CommandBuildingType), false,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(undefined4, MappersEnum), false,
             Address::SHC_3BB0A8C1_0x004ECAB0, &AICState::woodCuttersHutWhileNoWoodAvailable)
         woodCuttersHutWhileNoWoodAvailable;
 

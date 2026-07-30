@@ -8,12 +8,12 @@
 
 #pragma once
 
-#include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
+#include "OpenSHC/Commands/MappersEnumInt.hpp"
 
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::Commands::CommandBuildingTypeInt;
+    using OpenSHC::Commands::MappersEnumInt;
 
 #pragma pack(push, 1)
     // SIZE: 0x00000018
@@ -21,7 +21,7 @@ namespace UI {
 
         int x; // 0x00000000 length: 4
         int y; // 0x00000004 length: 4
-        CommandBuildingTypeInt type; // 0x00000008 length: 4
+        MappersEnumInt type; // 0x00000008 length: 4
         int size; // 0x0000000C length: 4
         int time; // 0x00000010 length: 4
         int rotationOrExtraInfo; // 0x00000014 length: 4

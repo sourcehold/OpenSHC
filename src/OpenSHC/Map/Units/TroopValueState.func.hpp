@@ -3,7 +3,7 @@
 */
 
 #include "OpenSHC/AI/Tribes/AITribeType.hpp"
-#include "OpenSHC/Commands/CommandBuildingType.hpp"
+#include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
 #include "OpenSHC/Map/Units/TroopValueState.hpp"
@@ -16,7 +16,7 @@ namespace Map {
         namespace TroopValueState_Func {
 
             using OpenSHC::AI::Tribes::AITribeType;
-            using OpenSHC::Commands::CommandBuildingType;
+            using OpenSHC::Commands::MappersEnum;
             using OpenSHC::IO::PackagedFileMagicNum;
             using OpenSHC::Map::Units::SomeTribeBehaviorType;
             using OpenSHC::Map::Units::UnitInstructionType;
@@ -221,12 +221,12 @@ namespace Map {
                 &TroopValueState::pruneStaleTentPoints)
             pruneStaleTentPoints;
 
-            MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(int, CommandBuildingType), false,
-                Address::SHC_3BB0A8C1_0x0051B310, &TroopValueState::placeSiegeTentAtAttackAngle)
+            MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(int, MappersEnum), false, Address::SHC_3BB0A8C1_0x0051B310,
+                &TroopValueState::placeSiegeTentAtAttackAngle)
             placeSiegeTentAtAttackAngle;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (TroopValueState::*)(int, CommandBuildingType, uint, UnitInstructionType),
-                false, Address::SHC_3BB0A8C1_0x0051B420,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (TroopValueState::*)(int, MappersEnum, uint, UnitInstructionType), false,
+                Address::SHC_3BB0A8C1_0x0051B420,
                 &TroopValueState::placeSiegeTentOrTunnelAtSuitableLocationAndAssignEngineers)
             placeSiegeTentOrTunnelAtSuitableLocationAndAssignEngineers;
 

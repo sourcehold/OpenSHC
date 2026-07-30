@@ -13,7 +13,7 @@
 #include "OpenSHC/AI/AIUnitBehaviourType.hpp"
 #include "OpenSHC/AI/AIVUnitType.hpp"
 #include "OpenSHC/AI/TileDistancePair.hpp"
-#include "OpenSHC/Commands/CommandBuildingType.hpp"
+#include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Game/Player/PlayerID.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
@@ -27,7 +27,7 @@ namespace AI {
     using OpenSHC::AI::AIVUnitType;
     using OpenSHC::AI::TileDistancePair;
     using OpenSHC::AI::AIC::AICSpecification;
-    using OpenSHC::Commands::CommandBuildingType;
+    using OpenSHC::Commands::MappersEnum;
     using OpenSHC::Game::Player::PlayerID;
     using OpenSHC::Game::Resources::ResourceType;
     using OpenSHC::Map::Units::UnitType;
@@ -120,11 +120,11 @@ namespace AI {
 
         uint aiShouldBuildPitchrig(PlayerID param_1);
 
-        BOOLEnum shouldNotBeBuildingHovel(PlayerID playerID, CommandBuildingType param_2);
+        BOOLEnum shouldNotBeBuildingHovel(PlayerID playerID, MappersEnum param_2);
 
-        BOOLEnum shouldWaitWithBuildingNegativeFearFactor(int param_1, CommandBuildingType param_2);
+        BOOLEnum shouldWaitWithBuildingNegativeFearFactor(int param_1, MappersEnum param_2);
 
-        BOOLEnum shouldWaitWithBuildingAPositiveFearFactor(int playerID, CommandBuildingType param_2);
+        BOOLEnum shouldWaitWithBuildingAPositiveFearFactor(int playerID, MappersEnum param_2);
 
         BOOLEnum destroyHouse(int playerID);
 
@@ -132,7 +132,7 @@ namespace AI {
 
         undefined4 destroyBuildingIfNoWorker(int buildingID);
 
-        BOOLEnum shouldNotBuildMarketArmoryGranaryBarracksMercenarypost(int playerID, CommandBuildingType param_2);
+        BOOLEnum shouldNotBuildMarketArmoryGranaryBarracksMercenarypost(int playerID, MappersEnum param_2);
 
         void planToBuyWhenLowOnResourceAndSnoozeBuildings(int playerID);
 
@@ -235,7 +235,7 @@ namespace AI {
 
         void giveMoveCommandToAttackTribes(int playerID);
 
-        uint aiChoiceAttForceRallyPercentage(int param_1);
+        BOOLEnum aiChoiceAttForceRallyPercentage(int param_1);
 
         BOOLEnum percentageNonMovingTribesGTEAICSpecified(int playerID);
 
@@ -418,13 +418,13 @@ namespace AI {
 
         void updateAIBehaviour();
 
-        BOOLEnum shouldNotBeBuildingGranary(int playerID, CommandBuildingType param_2);
+        BOOLEnum shouldNotBeBuildingGranary(int playerID, MappersEnum param_2);
 
-        BOOLEnum shouldNotBeBuildingArmoury(PlayerID playerID, CommandBuildingType param_2);
+        BOOLEnum shouldNotBeBuildingArmoury(PlayerID playerID, MappersEnum param_2);
 
-        BOOLEnum shouldNotBuildKillingPits(int playerID, CommandBuildingType commandBuildingType);
+        BOOLEnum shouldNotBuildKillingPits(int playerID, MappersEnum commandBuildingType);
 
-        BOOLEnum woodCuttersHutWhileNoWoodAvailable(undefined4 playerID, CommandBuildingType param_2);
+        BOOLEnum woodCuttersHutWhileNoWoodAvailable(undefined4 playerID, MappersEnum param_2);
     };
 
     static_assert_cpp98_obj(sizeof(AICState) == 28048, AICState);

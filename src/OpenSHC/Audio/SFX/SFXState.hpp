@@ -35,7 +35,7 @@ namespace Audio {
         public:
             int DAT_SFXCounter1; // 0x00000000 length: 4
             int highestSFXCounter; // 0x00000004 length: 4
-            pointer DAT_SoundFileNameArrayMemoryPointer; // 0x00000008 length: 4
+            char* DAT_SoundFileNameArrayMemoryPointer; // 0x00000008 length: 4
             char* DAT_SoundFileNamePointersArray[1000]; // 0x0000000C length: 4000
             int DAT_SoundVolumeArray[1000]; // 0x00000FAC length: 4000
             int DAT_SoundTotalCount; // 0x00001F4C length: 4

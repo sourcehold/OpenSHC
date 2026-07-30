@@ -8,14 +8,14 @@
 
 #pragma once
 
-#include "OpenSHC/Commands/CommandBuildingTypeInt.hpp"
+#include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/UI/Enums/TextMessageBLLookupStructButtonTextEnumInt.hpp"
 #include "OpenSHC/UI/TextMessageBLLookupStructUnitsTextTypeInt.hpp"
 
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::Commands::CommandBuildingTypeInt;
+    using OpenSHC::Commands::MappersEnum;
     using OpenSHC::UI::TextMessageBLLookupStructUnitsTextTypeInt;
     using OpenSHC::UI::Enums::TextMessageBLLookupStructButtonTextEnumInt;
 
@@ -23,7 +23,7 @@ namespace UI {
     // SIZE: 0x00000004
     typedef union TextMessageBLLookupStructUnion {
 
-        CommandBuildingTypeInt buildingType; // 0x00000000 length: 4
+        MappersEnum buildingType; // 0x00000000 length: 4
         TextMessageBLLookupStructUnitsTextTypeInt unitsAndWeaponsType; // 0x00000000 length: 4
         TextMessageBLLookupStructButtonTextEnumInt buttonText; // 0x00000000 length: 4
 
