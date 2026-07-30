@@ -256,6 +256,10 @@ do {
 } while (bVar7);
 ```
 
+#### Known special cases
+
+- `memset` so far was seen optimizing a "set all bytes to zero" case, if it was smaller then a unknown amount. In all known cases it used `EAX` for this. Would still recommend to try `memset` for cases with a register filling multiple memory locations.
+
 ### CRT Functions
 
 Crusader uses a rather small subset of std functions. The ones we are still resolving are all placed in `OpenSHC\OS.hpp`.
