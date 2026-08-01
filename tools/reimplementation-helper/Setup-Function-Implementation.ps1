@@ -81,6 +81,8 @@ $content = @(
     ""
 )
 Write-Verbose "Content:`n`n$($content | Out-String)"
+
+New-Item -ItemType Directory -Path (Split-Path $functionData.ImplementationFile -Parent) -Force | Out-Null
 Set-Content -Path $functionData.ImplementationFile -Value $content
 
 return $functionData.ImplementationFile
