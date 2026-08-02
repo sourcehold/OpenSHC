@@ -20571,7 +20571,7 @@ SHC_3BB0A8C1_0x0046C5A0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0046C5F0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0046C680 | 0.0% | Pending
+SHC_3BB0A8C1_0x0046C680 | 100.0% | Reimplemented, but mismatch if COL_MAGENTA not active due to diff in handling of "smaller then int" extern values
 
 SHC_3BB0A8C1_0x0046C7A0 | 0.0% | Pending
 
