@@ -36,17 +36,17 @@ namespace IO {
         LowLevelMemory() {};
         ~LowLevelMemory() {};
 
-        void moveLowerThreeBytesIntoParam2(undefined4* src, undefined3* dst);
+        void moveLowerThreeBytesIntoParam2(void* src, void* dst);
 
-        void setMemoryToValue_0x001();
+        void fillMemory_setMemoryToValue_0x001();
 
-        void setMemoryToValue_0x002();
+        void fillMemory_setMemoryToValue_0x002();
 
-        void setMemoryToValue_0x004();
+        void fillMemory_setMemoryToValue_0x004();
 
-        void setMemoryToValue_0x010();
+        void fillMemory_setMemoryToValue_0x010();
 
-        void setMemoryToValue_0x100();
+        void fillMemory_setMemoryToValue_0x100();
 
         void copyData_0x001();
 
@@ -62,11 +62,11 @@ namespace IO {
 
         void copyData(size_t size, void* src, void* destination);
 
-        void fillMemoryWithIntegerValue(size_t size, int value, void* destination);
+        void fillMemory_IntegerValue(size_t size, int value, void* destination);
 
-        void fillMemoryWithShortValue(size_t size, ushort shortValue, void* dst);
+        void fillMemory_ShortValue(size_t size, ushort shortValue, void* dst);
 
-        void fillMemoryWithByteValue(size_t size, uchar value, void* destination);
+        void fillMemory_ByteValue(size_t size, uchar value, void* destination);
     };
 
     static_assert_cpp98_obj(sizeof(LowLevelMemory) == 20, LowLevelMemory);

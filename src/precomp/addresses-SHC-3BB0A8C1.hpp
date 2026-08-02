@@ -22771,23 +22771,23 @@ enum {
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x0046A830 = 0x0046A830,
-    // label: setMemoryToValue_0x001
+    // label: fillMemory_setMemoryToValue_0x001
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x0046A850 = 0x0046A850,
-    // label: setMemoryToValue_0x002
+    // label: fillMemory_setMemoryToValue_0x002
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x0046A890 = 0x0046A890,
-    // label: setMemoryToValue_0x004
+    // label: fillMemory_setMemoryToValue_0x004
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x0046A8D0 = 0x0046A8D0,
-    // label: setMemoryToValue_0x010
+    // label: fillMemory_setMemoryToValue_0x010
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x0046A910 = 0x0046A910,
-    // label: setMemoryToValue_0x100
+    // label: fillMemory_setMemoryToValue_0x100
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x0046A970 = 0x0046A970,
@@ -23619,15 +23619,15 @@ enum {
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x00471830 = 0x00471830,
-    // label: fillMemoryWithIntegerValue
+    // label: fillMemory_IntegerValue
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x00471860 = 0x00471860,
-    // label: fillMemoryWithShortValue
+    // label: fillMemory_ShortValue
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x00471890 = 0x00471890,
-    // label: fillMemoryWithByteValue
+    // label: fillMemory_ByteValue
     // location: OpenSHC/IO/LowLevelMemory
     // type: function
     SHC_3BB0A8C1_0x004718C0 = 0x004718C0,
@@ -92663,6 +92663,8 @@ enum {
     SHC_3BB0A8C1_0x00B941B4 = 0x00B941B4,
     // type: /string
     SHC_3BB0A8C1_0x00B941B8 = 0x00B941B8,
+    // type: /double
+    SHC_3BB0A8C1_0x00B941C0 = 0x00B941C0,
     // type: /char[16]
     SHC_3BB0A8C1_0x00B941D0 = 0x00B941D0,
     // type: /char[16]
@@ -93912,14 +93914,10 @@ enum {
     // location:
     // type: /dword
     SHC_3BB0A8C1_0x00B98618 = 0x00B98618,
-    // label: DAT_DestroyedBuildingsCount
-    // location:
-    // type: /int
-    SHC_3BB0A8C1_0x00B9861C = 0x00B9861C,
     // label: DAT_DestroyedBuildingsCountHistory
     // location:
-    // type: /int[4]
-    SHC_3BB0A8C1_0x00B98620 = 0x00B98620,
+    // type: /int[5]
+    SHC_3BB0A8C1_0x00B9861C = 0x00B9861C,
     // label: DAT_StoredDestroyedBuildingsCount_2
     // location:
     SHC_3BB0A8C1_0x00B98624 = 0x00B98624,
@@ -94162,11 +94160,11 @@ enum {
     // label: COLOUR_WHITE
     // label: COL_WHITE
     // location:
-    // type: /ushort
+    // type: OpenSHC/IO/Helpers/ColorUnion
     SHC_3BB0A8C1_0x00DF338C = 0x00DF338C,
     // label: COL_MODERATE_GREEN
     // location:
-    // type: /ushort
+    // type: OpenSHC/IO/Helpers/ColorUnion
     SHC_3BB0A8C1_0x00DF3390 = 0x00DF3390,
     // label: FLOAT_Between1And5
     // location:
@@ -94178,29 +94176,29 @@ enum {
     SHC_3BB0A8C1_0x00DF3398 = 0x00DF3398,
     // label: COL_BLUE
     // location:
-    // type: /ushort
+    // type: OpenSHC/IO/Helpers/ColorUnion
     SHC_3BB0A8C1_0x00DF339C = 0x00DF339C,
     // label: COL_MAGENTA
     // location:
-    // type: /ushort
+    // type: OpenSHC/IO/Helpers/ColorUnion
     SHC_3BB0A8C1_0x00DF33A0 = 0x00DF33A0,
     // label: COL_VIVID_BLUE
     // location:
-    // type: /ushort
+    // type: OpenSHC/IO/Helpers/ColorUnion
     SHC_3BB0A8C1_0x00DF33A4 = 0x00DF33A4,
     // label: COL_DARK_GRAYISH_GREEN
     // location:
-    // type: /ushort
+    // type: OpenSHC/IO/Helpers/ColorUnion
     SHC_3BB0A8C1_0x00DF33A8 = 0x00DF33A8,
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF33AC = 0x00DF33AC,
     // label: COL_DARK_CYAN_GREY
     // location:
-    // type: /ushort
+    // type: OpenSHC/IO/Helpers/ColorUnion
     SHC_3BB0A8C1_0x00DF33B0 = 0x00DF33B0,
     // label: COL_VERY_SOFT_YELLOW
     // location:
-    // type: /ushort
+    // type: OpenSHC/IO/Helpers/ColorUnion
     SHC_3BB0A8C1_0x00DF33B4 = 0x00DF33B4,
     // label: FLOAT_Between1and0dot2
     // location:
@@ -94208,15 +94206,15 @@ enum {
     SHC_3BB0A8C1_0x00DF33B8 = 0x00DF33B8,
     // label: COL_DARK_LIME
     // location:
-    // type: /ushort
+    // type: OpenSHC/IO/Helpers/ColorUnion
     SHC_3BB0A8C1_0x00DF33BC = 0x00DF33BC,
     // label: COL_DARK_RED
     // location:
-    // type: /ushort
+    // type: OpenSHC/IO/Helpers/ColorUnion
     SHC_3BB0A8C1_0x00DF33C0 = 0x00DF33C0,
     // label: COL_RED
     // location:
-    // type: /ushort
+    // type: OpenSHC/IO/Helpers/ColorUnion
     SHC_3BB0A8C1_0x00DF33C4 = 0x00DF33C4,
     // label: TIME_QueryMargin
     // location:
@@ -94224,27 +94222,27 @@ enum {
     SHC_3BB0A8C1_0x00DF33C8 = 0x00DF33C8,
     // label: COL_LIME
     // location:
-    // type: /ushort
+    // type: OpenSHC/IO/Helpers/ColorUnion
     SHC_3BB0A8C1_0x00DF33CC = 0x00DF33CC,
     // label: COL_BLACK
     // location:
-    // type: /ushort
+    // type: OpenSHC/IO/Helpers/ColorUnion
     SHC_3BB0A8C1_0x00DF33D0 = 0x00DF33D0,
     // label: COL_BRIGHT_YELLOW
     // location:
-    // type: /ushort
+    // type: OpenSHC/IO/Helpers/ColorUnion
     SHC_3BB0A8C1_0x00DF33D4 = 0x00DF33D4,
     // label: COL_GREYISH_YELLOW
     // location:
-    // type: /ushort
+    // type: OpenSHC/IO/Helpers/ColorUnion
     SHC_3BB0A8C1_0x00DF33D8 = 0x00DF33D8,
     // label: COL_VERY_DARK_GREY
     // location:
-    // type: /ushort
+    // type: OpenSHC/IO/Helpers/ColorUnion
     SHC_3BB0A8C1_0x00DF33DC = 0x00DF33DC,
     // label: COL_DARK_GREEN
     // location:
-    // type: /ushort
+    // type: OpenSHC/IO/Helpers/ColorUnion
     SHC_3BB0A8C1_0x00DF33E0 = 0x00DF33E0,
     // label: DAT_PerformanceCounterFrequency
     // location:
@@ -94252,7 +94250,7 @@ enum {
     SHC_3BB0A8C1_0x00DF33E8 = 0x00DF33E8,
     // label: COL_LIGHT_GREY
     // location:
-    // type: /ushort
+    // type: OpenSHC/IO/Helpers/ColorUnion
     SHC_3BB0A8C1_0x00DF33F0 = 0x00DF33F0,
     // label: DAT_CurrentResourceCoreName
     // location:

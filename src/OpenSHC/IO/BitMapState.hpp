@@ -20,7 +20,7 @@ namespace IO {
     public:
         dword mbr_0x0; // 0x00000000 length: 4
         dword mbr_0x4; // 0x00000004 length: 4
-        dword total; // 0x00000008 length: 4
+        int total; // 0x00000008 length: 4
         dword high; // 0x0000000C length: 4
         dword size; // 0x00000010 length: 4
         dword biBitCount; // 0x00000014 length: 4
@@ -38,7 +38,7 @@ namespace IO {
         undefined1 padding_0x44a[2]; // 0x0000044A length: 2
         BITMAPINFOHEADER bitmapInfoHeader; // 0x0000044C length: 40
         dword address; // 0x00000474 length: 4
-        void* surface; // 0x00000478 length: 4
+        ushort* surface; // 0x00000478 length: 4
         dword mbr_0x47c; // 0x0000047C length: 4
 
     private:
@@ -52,7 +52,7 @@ namespace IO {
         // Constructor
         BitMapState* Constructor_BitMapState();
 
-        void readBitmapFace(int param_1, int param_2, int param_3, int faceIndex);
+        void readBitmapFace(uchar* surface, int x, int y, int faceIndex);
 
         void blitBitmap24BitToSurface565(int addExtra);
 

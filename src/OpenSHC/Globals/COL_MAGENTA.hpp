@@ -8,12 +8,16 @@
 
 #pragma once
 
+#include "OpenSHC/IO/Helpers/ColorUnion.hpp"
+
 // GLOBAL: STRONGHOLDCRUSADER 0x00DF33A0
-// StructResolver::Instance<unsigned short,14627744>::instance
+// StructResolver::Instance<OpenSHC::IO::Helpers::ColorUnion,14627744>::instance
 
 namespace OpenSHC {
 
-MACRO_STRUCT_RESOLVER(ushort, false, Address::SHC_3BB0A8C1_0x00DF33A0) COL_MAGENTA;
+using OpenSHC::IO::Helpers::ColorUnion;
+
+MACRO_STRUCT_RESOLVER(ColorUnion, false, Address::SHC_3BB0A8C1_0x00DF33A0) COL_MAGENTA;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00DF33A0);

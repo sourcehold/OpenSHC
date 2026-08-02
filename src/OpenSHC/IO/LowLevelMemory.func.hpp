@@ -12,29 +12,29 @@ namespace IO {
 
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-        MACRO_FUNCTION_RESOLVER(void (LowLevelMemory::*)(undefined4*, undefined3*), false,
-            Address::SHC_3BB0A8C1_0x0046A830, &LowLevelMemory::moveLowerThreeBytesIntoParam2)
+        MACRO_FUNCTION_RESOLVER(void (LowLevelMemory::*)(void*, void*), false, Address::SHC_3BB0A8C1_0x0046A830,
+            &LowLevelMemory::moveLowerThreeBytesIntoParam2)
         moveLowerThreeBytesIntoParam2;
 
         MACRO_FUNCTION_RESOLVER(void (LowLevelMemory::*)(), false, Address::SHC_3BB0A8C1_0x0046A850,
-            &LowLevelMemory::setMemoryToValue_0x001)
-        setMemoryToValue_0x001;
+            &LowLevelMemory::fillMemory_setMemoryToValue_0x001)
+        fillMemory_setMemoryToValue_0x001;
 
         MACRO_FUNCTION_RESOLVER(void (LowLevelMemory::*)(), false, Address::SHC_3BB0A8C1_0x0046A890,
-            &LowLevelMemory::setMemoryToValue_0x002)
-        setMemoryToValue_0x002;
+            &LowLevelMemory::fillMemory_setMemoryToValue_0x002)
+        fillMemory_setMemoryToValue_0x002;
 
         MACRO_FUNCTION_RESOLVER(void (LowLevelMemory::*)(), false, Address::SHC_3BB0A8C1_0x0046A8D0,
-            &LowLevelMemory::setMemoryToValue_0x004)
-        setMemoryToValue_0x004;
+            &LowLevelMemory::fillMemory_setMemoryToValue_0x004)
+        fillMemory_setMemoryToValue_0x004;
 
         MACRO_FUNCTION_RESOLVER(void (LowLevelMemory::*)(), false, Address::SHC_3BB0A8C1_0x0046A910,
-            &LowLevelMemory::setMemoryToValue_0x010)
-        setMemoryToValue_0x010;
+            &LowLevelMemory::fillMemory_setMemoryToValue_0x010)
+        fillMemory_setMemoryToValue_0x010;
 
         MACRO_FUNCTION_RESOLVER(void (LowLevelMemory::*)(), false, Address::SHC_3BB0A8C1_0x0046A970,
-            &LowLevelMemory::setMemoryToValue_0x100)
-        setMemoryToValue_0x100;
+            &LowLevelMemory::fillMemory_setMemoryToValue_0x100)
+        fillMemory_setMemoryToValue_0x100;
 
         MACRO_FUNCTION_RESOLVER(
             void (LowLevelMemory::*)(), false, Address::SHC_3BB0A8C1_0x0046AAF0, &LowLevelMemory::copyData_0x001)
@@ -65,16 +65,16 @@ namespace IO {
         copyData;
 
         MACRO_FUNCTION_RESOLVER(void (LowLevelMemory::*)(size_t, int, void*), false, Address::SHC_3BB0A8C1_0x00471860,
-            &LowLevelMemory::fillMemoryWithIntegerValue)
-        fillMemoryWithIntegerValue;
+            &LowLevelMemory::fillMemory_IntegerValue)
+        fillMemory_IntegerValue;
 
         MACRO_FUNCTION_RESOLVER(void (LowLevelMemory::*)(size_t, ushort, void*), false,
-            Address::SHC_3BB0A8C1_0x00471890, &LowLevelMemory::fillMemoryWithShortValue)
-        fillMemoryWithShortValue;
+            Address::SHC_3BB0A8C1_0x00471890, &LowLevelMemory::fillMemory_ShortValue)
+        fillMemory_ShortValue;
 
         MACRO_FUNCTION_RESOLVER(void (LowLevelMemory::*)(size_t, uchar, void*), false, Address::SHC_3BB0A8C1_0x004718C0,
-            &LowLevelMemory::fillMemoryWithByteValue)
-        fillMemoryWithByteValue;
+            &LowLevelMemory::fillMemory_ByteValue)
+        fillMemory_ByteValue;
 
     } // namespace LowLevelMemory_Func
 } // namespace IO

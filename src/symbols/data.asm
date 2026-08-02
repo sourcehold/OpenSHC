@@ -463,9 +463,7 @@ PUBLIC ?instance@?$Extern@$$BY09H$0LJIFPA@@StructResolver@@2PAHA
 
 PUBLIC ?instance@?$Extern@I$0LJIGBI@@StructResolver@@2IA
 
-PUBLIC ?instance@?$Extern@H$0LJIGBM@@StructResolver@@2HA
-
-PUBLIC ?instance@?$Extern@$$BY03H$0LJIGCA@@StructResolver@@2PAHA
+PUBLIC ?instance@?$Extern@$$BY04H$0LJIGBM@@StructResolver@@2PAHA
 
 PUBLIC ?instance@?$Extern@$$BY09H$0LJIGDA@@StructResolver@@2PAHA
 
@@ -529,51 +527,51 @@ PUBLIC ?instance@?$Extern@K$0NPDDIE@@StructResolver@@2KA
 
 PUBLIC ?instance@?$Extern@I$0NPDDII@@StructResolver@@2IA
 
-PUBLIC ?instance@?$Extern@G$0NPDDIM@@StructResolver@@2GA
+PUBLIC ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDIM@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A
 
-PUBLIC ?instance@?$Extern@G$0NPDDJA@@StructResolver@@2GA
+PUBLIC ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDJA@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A
 
 PUBLIC ?instance@?$Extern@M$0NPDDJE@@StructResolver@@2MA
 
 PUBLIC ?instance@?$Extern@H$0NPDDJI@@StructResolver@@2HA
 
-PUBLIC ?instance@?$Extern@G$0NPDDJM@@StructResolver@@2GA
+PUBLIC ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDJM@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A
 
-PUBLIC ?instance@?$Extern@G$0NPDDKA@@StructResolver@@2GA
+PUBLIC ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDKA@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A
 
-PUBLIC ?instance@?$Extern@G$0NPDDKE@@StructResolver@@2GA
+PUBLIC ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDKE@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A
 
-PUBLIC ?instance@?$Extern@G$0NPDDKI@@StructResolver@@2GA
+PUBLIC ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDKI@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A
 
-PUBLIC ?instance@?$Extern@G$0NPDDLA@@StructResolver@@2GA
+PUBLIC ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDLA@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A
 
-PUBLIC ?instance@?$Extern@G$0NPDDLE@@StructResolver@@2GA
+PUBLIC ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDLE@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A
 
 PUBLIC ?instance@?$Extern@M$0NPDDLI@@StructResolver@@2MA
 
-PUBLIC ?instance@?$Extern@G$0NPDDLM@@StructResolver@@2GA
+PUBLIC ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDLM@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A
 
-PUBLIC ?instance@?$Extern@G$0NPDDMA@@StructResolver@@2GA
+PUBLIC ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDMA@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A
 
-PUBLIC ?instance@?$Extern@G$0NPDDME@@StructResolver@@2GA
+PUBLIC ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDME@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A
 
 PUBLIC ?instance@?$Extern@I$0NPDDMI@@StructResolver@@2IA
 
-PUBLIC ?instance@?$Extern@G$0NPDDMM@@StructResolver@@2GA
+PUBLIC ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDMM@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A
 
-PUBLIC ?instance@?$Extern@G$0NPDDNA@@StructResolver@@2GA
+PUBLIC ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDNA@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A
 
-PUBLIC ?instance@?$Extern@G$0NPDDNE@@StructResolver@@2GA
+PUBLIC ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDNE@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A
 
-PUBLIC ?instance@?$Extern@G$0NPDDNI@@StructResolver@@2GA
+PUBLIC ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDNI@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A
 
-PUBLIC ?instance@?$Extern@G$0NPDDNM@@StructResolver@@2GA
+PUBLIC ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDNM@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A
 
-PUBLIC ?instance@?$Extern@G$0NPDDOA@@StructResolver@@2GA
+PUBLIC ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDOA@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A
 
 PUBLIC ?instance@?$Extern@T_LARGE_INTEGER@@$0NPDDOI@@StructResolver@@2T_LARGE_INTEGER@@A
 
-PUBLIC ?instance@?$Extern@G$0NPDDPA@@StructResolver@@2GA
+PUBLIC ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDPA@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A
 
 PUBLIC ?instance@?$Extern@$$BY0DOJ@D$0NPDDPH@@StructResolver@@2PADA
 
@@ -2064,9 +2062,7 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@I$0LJIGBI@@StructResolver@@2IA EQU 00B98618h
 
-?instance@?$Extern@H$0LJIGBM@@StructResolver@@2HA EQU 00B9861Ch
-
-?instance@?$Extern@$$BY03H$0LJIGCA@@StructResolver@@2PAHA EQU 00B98620h
+?instance@?$Extern@$$BY04H$0LJIGBM@@StructResolver@@2PAHA EQU 00B9861Ch
 
 ?instance@?$Extern@$$BY09H$0LJIGDA@@StructResolver@@2PAHA EQU 00B98630h
 
@@ -2130,51 +2126,51 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@I$0NPDDII@@StructResolver@@2IA EQU 00DF3388h
 
-?instance@?$Extern@G$0NPDDIM@@StructResolver@@2GA EQU 00DF338Ch
+?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDIM@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A EQU 00DF338Ch
 
-?instance@?$Extern@G$0NPDDJA@@StructResolver@@2GA EQU 00DF3390h
+?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDJA@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A EQU 00DF3390h
 
 ?instance@?$Extern@M$0NPDDJE@@StructResolver@@2MA EQU 00DF3394h
 
 ?instance@?$Extern@H$0NPDDJI@@StructResolver@@2HA EQU 00DF3398h
 
-?instance@?$Extern@G$0NPDDJM@@StructResolver@@2GA EQU 00DF339Ch
+?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDJM@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A EQU 00DF339Ch
 
-?instance@?$Extern@G$0NPDDKA@@StructResolver@@2GA EQU 00DF33A0h
+?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDKA@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A EQU 00DF33A0h
 
-?instance@?$Extern@G$0NPDDKE@@StructResolver@@2GA EQU 00DF33A4h
+?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDKE@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A EQU 00DF33A4h
 
-?instance@?$Extern@G$0NPDDKI@@StructResolver@@2GA EQU 00DF33A8h
+?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDKI@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A EQU 00DF33A8h
 
-?instance@?$Extern@G$0NPDDLA@@StructResolver@@2GA EQU 00DF33B0h
+?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDLA@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A EQU 00DF33B0h
 
-?instance@?$Extern@G$0NPDDLE@@StructResolver@@2GA EQU 00DF33B4h
+?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDLE@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A EQU 00DF33B4h
 
 ?instance@?$Extern@M$0NPDDLI@@StructResolver@@2MA EQU 00DF33B8h
 
-?instance@?$Extern@G$0NPDDLM@@StructResolver@@2GA EQU 00DF33BCh
+?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDLM@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A EQU 00DF33BCh
 
-?instance@?$Extern@G$0NPDDMA@@StructResolver@@2GA EQU 00DF33C0h
+?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDMA@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A EQU 00DF33C0h
 
-?instance@?$Extern@G$0NPDDME@@StructResolver@@2GA EQU 00DF33C4h
+?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDME@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A EQU 00DF33C4h
 
 ?instance@?$Extern@I$0NPDDMI@@StructResolver@@2IA EQU 00DF33C8h
 
-?instance@?$Extern@G$0NPDDMM@@StructResolver@@2GA EQU 00DF33CCh
+?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDMM@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A EQU 00DF33CCh
 
-?instance@?$Extern@G$0NPDDNA@@StructResolver@@2GA EQU 00DF33D0h
+?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDNA@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A EQU 00DF33D0h
 
-?instance@?$Extern@G$0NPDDNE@@StructResolver@@2GA EQU 00DF33D4h
+?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDNE@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A EQU 00DF33D4h
 
-?instance@?$Extern@G$0NPDDNI@@StructResolver@@2GA EQU 00DF33D8h
+?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDNI@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A EQU 00DF33D8h
 
-?instance@?$Extern@G$0NPDDNM@@StructResolver@@2GA EQU 00DF33DCh
+?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDNM@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A EQU 00DF33DCh
 
-?instance@?$Extern@G$0NPDDOA@@StructResolver@@2GA EQU 00DF33E0h
+?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDOA@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A EQU 00DF33E0h
 
 ?instance@?$Extern@T_LARGE_INTEGER@@$0NPDDOI@@StructResolver@@2T_LARGE_INTEGER@@A EQU 00DF33E8h
 
-?instance@?$Extern@G$0NPDDPA@@StructResolver@@2GA EQU 00DF33F0h
+?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDPA@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A EQU 00DF33F0h
 
 ?instance@?$Extern@$$BY0DOJ@D$0NPDDPH@@StructResolver@@2PADA EQU 00DF33F7h
 

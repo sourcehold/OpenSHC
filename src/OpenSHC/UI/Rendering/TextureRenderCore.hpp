@@ -68,36 +68,18 @@ namespace UI {
             int gmAndGfxImageDataBufferSize_0x8c; // 0x0000008C length: 4
             void* gmAndGfxImageDataBuffer; // 0x00000090 length: 4
             void* bitmapsFaces_0x94; // 0x00000094 length: 4
-            int field69_0x98; // 0x00000098 length: 4
-            int field70_0x9c; // 0x0000009C length: 4
-            int field71_0xa0; // 0x000000A0 length: 4
-            int field72_0xa4; // 0x000000A4 length: 4
-            int field73_0xa8; // 0x000000A8 length: 4
-            int field74_0xac; // 0x000000AC length: 4
-            int field75_0xb0; // 0x000000B0 length: 4
-            int field76_0xb4; // 0x000000B4 length: 4
-            int field77_0xb8; // 0x000000B8 length: 4
-            int field78_0xbc; // 0x000000BC length: 4
-            int field79_0xc0; // 0x000000C0 length: 4
-            int field80_0xc4; // 0x000000C4 length: 4
-            int field81_0xc8; // 0x000000C8 length: 4
-            int field82_0xcc; // 0x000000CC length: 4
-            int field83_0xd0; // 0x000000D0 length: 4
-            int field84_0xd4; // 0x000000D4 length: 4
-            int field85_0xd8; // 0x000000D8 length: 4
-            int field86_0xdc; // 0x000000DC length: 4
-            int field87_0xe0; // 0x000000E0 length: 4
-            int unknownPlayerDependentRenderValue[9]; // 0x000000E4 length: 36
-            int field89_0x108; // 0x00000108 length: 4
-            int field90_0x10c; // 0x0000010C length: 4
-            int field91_0x110; // 0x00000110 length: 4
-            int field92_0x114; // 0x00000114 length: 4
-            int field93_0x118; // 0x00000118 length: 4
-            int field94_0x11c; // 0x0000011C length: 4
-            int field95_0x120; // 0x00000120 length: 4
-            int field96_0x124; // 0x00000124 length: 4
-            int field97_0x128; // 0x00000128 length: 4
-            int field98_0x12c; // 0x0000012C length: 4
+            int field69_0x98[20]; // 0x00000098 length: 80
+            int unknownPlayerDependentRenderValue[8]; // 0x000000E8 length: 32
+            int field71_0x108; // 0x00000108 length: 4
+            int field72_0x10c; // 0x0000010C length: 4
+            int field73_0x110; // 0x00000110 length: 4
+            int field74_0x114; // 0x00000114 length: 4
+            int field75_0x118; // 0x00000118 length: 4
+            int field76_0x11c; // 0x0000011C length: 4
+            int field77_0x120; // 0x00000120 length: 4
+            int field78_0x124; // 0x00000124 length: 4
+            int field79_0x128; // 0x00000128 length: 4
+            int field80_0x12c; // 0x0000012C length: 4
             undefined1 padding_0x130[1004]; // 0x00000130 length: 1004
             GMFileHeaderColorpalette gmFileHeaderColorpaletteArray[240]; // 0x0000051C length: 1249920
             char gmFileNameArray_UNUSEDUnk_0x13179c[240][1001]; // 0x0013179C length: 240240
