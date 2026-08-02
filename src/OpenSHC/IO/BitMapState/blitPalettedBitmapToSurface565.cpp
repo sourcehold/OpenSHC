@@ -1,21 +1,21 @@
 #include "../BitMapState.func.hpp"
 
-#include "OpenSHC/Globals/COL_MAGENTA.hpp"
 #include "OpenSHC/Globals/DAT_WindowAndDirectDraw.hpp"
 
 namespace OpenSHC {
 namespace IO {
 
-    // FUNCTION: STRONGHOLDCRUSADER 0x0046C680
-    void BitMapState::blitBitmap24BitToSurface565(int addExtra)
+    // FUNCTION: STRONGHOLDCRUSADER 0x0046C7A0
+    void BitMapState::blitPalettedBitmapToSurface565(int param_1)
     {
         for (int y = this->high - 1; y >= 0; y -= this->step) {
-            int local_4 = 0;
+            int _counter = 0;
             for (int x = 0; x < this->total; x += this->step2) {
+                unsigned char index = ((unsigned char*)this->address)[this->stride8bit * y + x];
 
-                unsigned short blue = ((unsigned char*)(this->address + this->stride24bit * y + x * 3))[0] >> 3;
+                unsigned short blue = this->palette[index][0] >> 3;
 
-                unsigned short green = ((unsigned char*)(this->address + this->stride24bit * y + x * 3))[1];
+                unsigned short green = this->palette[index][1];
                 if (this->mbr_0x18 == 0 && DAT_WindowAndDirectDraw::instance.colorBitMode == Rendering::RGB_565) {
                     green >>= 2;
                 } else {
@@ -23,26 +23,26 @@ namespace IO {
                 }
                 green <<= 5;
 
-                unsigned short red = ((unsigned char*)(this->address + this->stride24bit * y + x * 3))[2] >> 3;
+                unsigned short red = this->palette[index][2] >> 3;
                 if (this->mbr_0x18 == 0 && DAT_WindowAndDirectDraw::instance.colorBitMode == Rendering::RGB_565) {
                     red <<= 11;
                 } else {
                     red <<= 10;
                 }
 
-                unsigned short uVar3 = red + green + blue;
+                unsigned short _outcome = red + green + blue;
                 if (DAT_WindowAndDirectDraw::instance.colorBitMode != Rendering::RGB_565 || this->mbr_0x18 != 0) {
-                    uVar3 |= 0x8000;
-                    if (uVar3 == 0xfc1f) {
-                        uVar3 = COL_MAGENTA::instance.shortValue;
+                    _outcome |= 0x8000;
+                    if (_outcome == 0xfc1f) {
+                        _outcome = 0xf81f; // NOTE: Standard Magenta for RGB555 instead of the value of COL_MAGENTA
                     }
                 }
-                *this->surface = uVar3;
+                *this->surface = _outcome;
                 ++this->surface;
-                ++local_4;
+                ++_counter;
             }
-            if (addExtra != 0) {
-                this->surface += (this->mbr_0x47c - local_4);
+            if (param_1 != 0) {
+                this->surface += (this->mbr_0x47c - _counter);
             }
         }
         this->mbr_0x18 = 0;
