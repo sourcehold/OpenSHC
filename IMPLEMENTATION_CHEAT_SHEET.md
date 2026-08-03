@@ -163,6 +163,8 @@ Exceptions are:
 If you see a repeating logic structure, that, for example, increments by a value in its logic every repeat,
 you might have found an unrolled loop. Therefore, try to reproduce the logic in loop form and see how the compiler behaves.
 
+If GOTOs are present that clearly jump to the start of a loop, but the logic does not allow to do this without a GOTO, for example from a loop inside a loop, you might be able to move the continue or break condition to the outside. Methods could be placing a fitting condition related to the contained loop conditions after the loop or using a boolean flag that then functions as conditional. Both can sometimes be optimized away.
+
 ### GOTO
 
 A function may contain multiple GOTOs.
