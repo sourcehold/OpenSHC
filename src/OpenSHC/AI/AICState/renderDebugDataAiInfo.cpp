@@ -143,7 +143,7 @@ namespace AI {
 
                 if (_playerData->aiType == OpenSHC::AI::AIT_NULL) {
 
-                    iVar1 = DAT_AIVState::instance.SEC_AIVS[_playerData->aivID].castleID;
+                    iVar1 = DAT_AIVState::instance.aivs[_playerData->aivID].castleID;
 
                     pcVar2 = "AIV:n/a";
 
@@ -151,7 +151,7 @@ namespace AI {
 
                 else {
 
-                    iVar1 = DAT_AIVState::instance.SEC_AIVS[_playerData->aivID].castleID;
+                    iVar1 = DAT_AIVState::instance.aivs[_playerData->aivID].castleID;
 
                     pcVar2 = "AIV: %d";
                 }

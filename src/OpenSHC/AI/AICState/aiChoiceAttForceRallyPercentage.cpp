@@ -16,7 +16,7 @@ namespace AI {
       decompilerscript: committed: 2025-01-30 21:57:43.216000 */
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CEC80
-    uint AICState ::aiChoiceAttForceRallyPercentage(int param_1)
+    BOOLEnum AICState ::aiChoiceAttForceRallyPercentage(int param_1)
 
     {
 

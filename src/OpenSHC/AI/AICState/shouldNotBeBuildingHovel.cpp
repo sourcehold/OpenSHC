@@ -1,5 +1,5 @@
 #include "OpenSHC/AI/AICState.hpp"
-#include "OpenSHC/Commands/CommandBuildingType.hpp"
+#include "OpenSHC/Commands/MappersEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 
@@ -7,9 +7,9 @@ namespace OpenSHC {
 namespace AI {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CB5B0
-    BOOLEnum AICState::shouldNotBeBuildingHovel(PlayerID playerID, Commands::CommandBuildingType param_2)
+    BOOLEnum AICState::shouldNotBeBuildingHovel(PlayerID playerID, Commands::MappersEnum param_2)
     {
-        if (param_2 != Commands::CBT_HOVEL) {
+        if (param_2 != Commands::M_MAPPER_HOVEL) {
             return FALSE;
         }
 

@@ -21,7 +21,7 @@ namespace AI {
 
         DAT_TroopValueState::instance.attackInfo.playerInfo[0].currentPlayerID_OR_attackedPlayerID_OR_one = 1;
 
-        MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemoryWithByteValue, DAT_LowLevelMemory::ptr)(
+        MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
             80400, '\0', (void*)((int)(DAT_TileMapState::instance.AIZoneLayer)));
 
         MACRO_CALL_MEMBER(
