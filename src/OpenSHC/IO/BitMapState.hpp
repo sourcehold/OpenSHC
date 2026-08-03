@@ -25,7 +25,7 @@ namespace IO {
         dword size; // 0x00000010 length: 4
         dword biBitCount; // 0x00000014 length: 4
         dword mbr_0x18; // 0x00000018 length: 4
-        byte palette[1024]; // 0x0000001C length: 1024
+        byte palette[256][4]; // 0x0000001C length: 1024
         dword paletteSize; // 0x0000041C length: 4
         dword paletteStart; // 0x00000420 length: 4
         dword step2; // 0x00000424 length: 4

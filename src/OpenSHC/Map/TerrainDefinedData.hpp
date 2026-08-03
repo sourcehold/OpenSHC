@@ -29,7 +29,7 @@ namespace Map {
 
         undefined1 padding_0x0[12]; // 0x00000000 length: 12
         int field12_0xc[37]; // 0x0000000C length: 148
-        int DAT_BrushSizeArray[8]; // 0x000000A0 length: 32
+        int BrushSizeArray[8]; // 0x000000A0 length: 32
         XYPair field14_0xc0; // 0x000000C0 length: 8
         undefined1 padding_0xc8[8]; // 0x000000C8 length: 8
         undefined4 field23_0xd0; // 0x000000D0 length: 4
@@ -37,13 +37,13 @@ namespace Map {
         Point8 clockwiseCardinalTranslationMatrix[8]; // 0x000000F4 length: 64
         undefined1 padding_0x134[4]; // 0x00000134 length: 4
         int field61_0x138; // 0x00000138 length: 4
-        XYPair field62_0x13c[4][3]; // 0x0000013C length: 96
+        XYPair BuildingPartsOffsets[4][3]; // 0x0000013C length: 96
         XYPair field63_0x19c[4]; // 0x0000019C length: 32
         XYPair DAT_Stockpile_BuildingPartsOffsets[4]; // 0x000001BC length: 32
-        XYPair DAT_Stockpile_PathableOffsets[9]; // 0x000001DC length: 72
+        XYPair StockpilePathableOffsets[9]; // 0x000001DC length: 72
         undefined1 padding_0x224[64]; // 0x00000224 length: 64
         XYPair field130_0x264[3][12]; // 0x00000264 length: 288
-        Point8IntXY field131_0x384[8]; // 0x00000384 length: 64
+        Point8IntXY unkXYOffsets_0x384[8]; // 0x00000384 length: 64
         Point8IntXY field132_0x3c4[8]; // 0x000003C4 length: 64
         undefined1 padding_0x404[64]; // 0x00000404 length: 64
         XYPair field197_0x444[24]; // 0x00000444 length: 192
@@ -64,9 +64,9 @@ namespace Map {
         undefined1 padding_0x8b0[4]; // 0x000008B0 length: 4
         int field1001_0x8b4[25]; // 0x000008B4 length: 100
         undefined1 padding_0x918[4]; // 0x00000918 length: 4
-        XYPair field1006_0x91c[4][36]; // 0x0000091C length: 1152
-        XYPair field1007_0xd9c[2][24]; // 0x00000D9C length: 384
-        XYPair field1008_0xf1c[8]; // 0x00000F1C length: 64
+        XYPair WheatFarmTiles[4][36]; // 0x0000091C length: 1152
+        XYPair HopFarmProperty1[2][24]; // 0x00000D9C length: 384
+        XYPair AppleFarmOffsets[8]; // 0x00000F1C length: 64
         WheatFarmFieldSpec field1009_0xf5c[4][27]; // 0x00000F5C length: 1296
         undefined1 padding_0x146c[1280]; // 0x0000146C length: 1280
         XYPair field2290_0x196c[4]; // 0x0000196C length: 32
@@ -82,12 +82,12 @@ namespace Map {
         undefined1 padding_0x1d88[164]; // 0x00001D88 length: 164
         int DAT_SomeOrientationOrderArray[8]; // 0x00001E2C length: 32
         int field2465_0x1e4c[32]; // 0x00001E4C length: 128
-        XYPair field2466_0x1ecc[4][9]; // 0x00001ECC length: 288
+        XYPair drawBridgeOffsets[4][9]; // 0x00001ECC length: 288
         int field2467_0x1fec[4][25]; // 0x00001FEC length: 400
-        int field2468_0x217c[7][4]; // 0x0000217C length: 112
+        int TowerTileOffsetsBySize[7][4]; // 0x0000217C length: 112
         int field2469_0x21ec[4][25]; // 0x000021EC length: 400
-        int field2470_0x237c[4][25]; // 0x0000237C length: 400
-        int field2471_0x250c[26]; // 0x0000250C length: 104
+        int DrawbridgeOrientationMapping[4][25]; // 0x0000237C length: 400
+        int DrawbridgeTileMoatProperty[26]; // 0x0000250C length: 104
         int orientationRelativeBuildingTileOffset2[60]; // 0x00002574 length: 240
         int orientationRelativeBuildingTileOffset1[64]; // 0x00002664 length: 256
         XYPair field2474_0x2764[501]; // 0x00002764 length: 4008

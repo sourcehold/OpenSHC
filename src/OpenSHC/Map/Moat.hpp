@@ -19,11 +19,11 @@ namespace Map {
         undefined1 padding_0x2[2]; // 0x00000002 length: 2
         undefined2 x; // 0x00000004 length: 2
         undefined2 y; // 0x00000006 length: 2
-        short field5_0x8; // 0x00000008 length: 2
+        short zeroOrTwo; // 0x00000008 length: 2
         undefined1 padding_0xa[2]; // 0x0000000A length: 2
         byte owner; // 0x0000000C length: 1
-        byte field9_0xd; // 0x0000000D length: 1
-        byte field10_0xe; // 0x0000000E length: 1
+        byte fillProgress; // 0x0000000D length: 1
+        byte stage; // 0x0000000E length: 1
         byte someCountDown; // 0x0000000F length: 1
 
     } Moat;

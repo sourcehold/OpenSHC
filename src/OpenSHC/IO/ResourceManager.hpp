@@ -122,7 +122,7 @@ namespace IO {
 
         void discoverMapFiles(char* param_1);
 
-        void resolveResourceFileName(FileResourceType resourceType, char* shortFileName);
+        void resolveResourceFileName(FileResourceType resourceType, char const* shortFileName);
 
         void loadMapHeaders(BOOLEnum drawLoadingBar);
 

@@ -416,7 +416,7 @@ namespace Game {
             int lastEncounteredTroopUnitID; // 0x00003948 length: 4
             int lastEncounteredTroopUnitUID; // 0x0000394C length: 4
             short mercenaryAssemblyPoints[7][2]; // 0x00003950 length: 28
-            int field992_0x396c; // 0x0000396C length: 4
+            int moatsOwned; // 0x0000396C length: 4
             int attackTicker; // 0x00003970 length: 4
             int canStartSpending; // 0x00003974 length: 4
             short algoTreeCooldownUnk; // 0x00003978 length: 2

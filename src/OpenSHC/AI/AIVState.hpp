@@ -131,7 +131,7 @@ namespace AI {
 
         int computeAIVPlacementFit(int playerID);
 
-        int aiPlaceFarm(int playerID, MappersEnum buildingType);
+        BOOLEnum aiPlaceFarm(int playerID, MappersEnum buildingType);
 
         void aiPlaceWoodcuttershut(int playerID);
 

@@ -41,7 +41,7 @@ namespace Map {
         undefined4 y; // 0x00000018 length: 4
         Tree trees[2000]; // 0x0000001C length: 312000
         WindState wind; // 0x0004C2DC length: 28
-        Rock SEC_RockArray1038[4000]; // 0x0004C2F8 length: 128000
+        Rock rocks[4000]; // 0x0004C2F8 length: 128000
         DWORD creationTime; // 0x0006B6F8 length: 4
         undefined1 padding_0x6b6fc[4]; // 0x0006B6FC length: 4
 
@@ -58,7 +58,7 @@ namespace Map {
 
         undefined4 mapUITreeTypeToLogicalTreeType(undefined4 param_1);
 
-        undefined4 getValueFrom0UpTo3ForTreeTypeAndTreeSeason(undefined4 treeType, int treeStage);
+        undefined4 getValueFrom0UpTo3ForTreeTypeAndTreeStage(undefined4 treeType, int treeStage);
 
         void clearRocksAndTrees();
 

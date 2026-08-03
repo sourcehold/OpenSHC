@@ -11,7 +11,6 @@
 #include "WinDef.h"
 #include "basetsd.h"
 #include "crtdefs.h"
-#include "dplay.h"
 #include "guiddef.h"
 namespace OpenSHC {
 namespace Synchrony {
@@ -40,15 +39,15 @@ namespace Synchrony {
             &GameSynchronyState::setMenuTypeBasedOnDirectPlayGUID)
         setMenuTypeBasedOnDirectPlayGUID;
 
-        MACRO_FUNCTION_RESOLVER(DPERR (GameSynchronyState::*)(LPVOID*, SIZE_T*), false,
-            Address::SHC_3BB0A8C1_0x0047D6A0, &GameSynchronyState::createCompoundAddressBasedOnSelectedProvider)
+        MACRO_FUNCTION_RESOLVER(int (GameSynchronyState::*)(LPVOID*, SIZE_T*), false, Address::SHC_3BB0A8C1_0x0047D6A0,
+            &GameSynchronyState::createCompoundAddressBasedOnSelectedProvider)
         createCompoundAddressBasedOnSelectedProvider;
 
         MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0047DA70,
             &GameSynchronyState::setDPlaySessionNameValue)
         setDPlaySessionNameValue;
 
-        MACRO_FUNCTION_RESOLVER(DPERR (GameSynchronyState::*)(BOOLEnum), false, Address::SHC_3BB0A8C1_0x0047DB10,
+        MACRO_FUNCTION_RESOLVER(int (GameSynchronyState::*)(BOOLEnum), false, Address::SHC_3BB0A8C1_0x0047DB10,
             &GameSynchronyState::initializeDirectPlayAndCreateOrJoinSession)
         initializeDirectPlayAndCreateOrJoinSession;
 

@@ -445,8 +445,8 @@ namespace Map {
                 &PathFindingState::pathfindingUpdate_0x4a8ab0)
             pathfindingUpdate_0x4a8ab0;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (PathFindingState::*)(int, uint, uint, int, undefined4, undefined4, int),
-                false, Address::SHC_3BB0A8C1_0x004A9200, &PathFindingState::isOpponentBuildingInRange)
+            MACRO_FUNCTION_RESOLVER(undefined4 (PathFindingState::*)(int, int, int, int, int, int, int), false,
+                Address::SHC_3BB0A8C1_0x004A9200, &PathFindingState::isOpponentBuildingInRange)
             isOpponentBuildingInRange;
 
             MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(), false, Address::SHC_3BB0A8C1_0x004A94E0,

@@ -116,7 +116,7 @@ namespace AI {
         computeAIVPlacementFit;
 
         MACRO_FUNCTION_RESOLVER(
-            int (AIVState::*)(int, MappersEnum), false, Address::SHC_3BB0A8C1_0x004EFA60, &AIVState::aiPlaceFarm)
+            BOOLEnum (AIVState::*)(int, MappersEnum), false, Address::SHC_3BB0A8C1_0x004EFA60, &AIVState::aiPlaceFarm)
         aiPlaceFarm;
 
         MACRO_FUNCTION_RESOLVER(

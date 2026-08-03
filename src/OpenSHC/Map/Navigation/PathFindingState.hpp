@@ -324,7 +324,7 @@ namespace Map {
             void pathfindingUpdate_0x4a8ab0(int param_1);
 
             undefined4 isOpponentBuildingInRange(
-                int playerID, uint x, uint y, int range, undefined4 param_5, undefined4 param_6, int keepRange);
+                int playerID, int x, int y, int range, int param_5, int param_6, int keepRange);
 
             void clearAllLadderManWalledData();
 

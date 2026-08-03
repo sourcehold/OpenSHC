@@ -757,8 +757,8 @@ namespace AI {
         shouldNotBuildKillingPits;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(undefined4, MappersEnum), false,
-            Address::SHC_3BB0A8C1_0x004ECAB0, &AICState::woodCuttersHutWhileNoWoodAvailable)
-        woodCuttersHutWhileNoWoodAvailable;
+            Address::SHC_3BB0A8C1_0x004ECAB0, &AICState::mapperIsWoodCuttersHutWhileNoWoodAvailable)
+        mapperIsWoodCuttersHutWhileNoWoodAvailable;
 
     } // namespace AICState_Func
 } // namespace AI

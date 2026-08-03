@@ -42071,7 +42071,7 @@ enum {
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004ECA90 = 0x004ECA90,
-    // label: woodCuttersHutWhileNoWoodAvailable
+    // label: mapperIsWoodCuttersHutWhileNoWoodAvailable
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004ECAB0 = 0x004ECAB0,
@@ -42566,7 +42566,7 @@ enum {
     SHC_3BB0A8C1_0x004F1BD3 = 0x004F1BD3,
     // type: /byte
     SHC_3BB0A8C1_0x004F1BD4 = 0x004F1BD4,
-    // label: getValueFrom0UpTo3ForTreeTypeAndTreeSeason
+    // label: getValueFrom0UpTo3ForTreeTypeAndTreeStage
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F1BE0 = 0x004F1BE0,
@@ -43840,7 +43840,7 @@ enum {
     SHC_3BB0A8C1_0x004F8523 = 0x004F8523,
     // type: /byte
     SHC_3BB0A8C1_0x004F8524 = 0x004F8524,
-    // label: countPropertyInSurroundingTiles
+    // label: countLogicPropertyInSurroundingTiles
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F8530 = 0x004F8530,
@@ -43872,11 +43872,11 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F89C0 = 0x004F89C0,
-    // label: hasHigherNeighborWithFlagBit11
+    // label: hasHigherNeighborWithStairs
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F8A40 = 0x004F8A40,
-    // label: hasHigherPlainNeighborWithFlagBit8
+    // label: hasHigherPlainNeighborWithWallOrGatehouse
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004F8AC0 = 0x004F8AC0,
@@ -44882,7 +44882,7 @@ enum {
     SHC_3BB0A8C1_0x004FA759 = 0x004FA759,
     // type: /byte
     SHC_3BB0A8C1_0x004FA75A = 0x004FA75A,
-    // label: demolishBuildingsInConstructionFootprint
+    // label: demolishBuildingsInKeepsConstructionFootprint
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x004FA760 = 0x004FA760,
@@ -46056,11 +46056,11 @@ enum {
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00500290 = 0x00500290,
-    // label: clearMoatFromMemory
+    // label: clearMoatData
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005002D0 = 0x005002D0,
-    // label: clearMoat
+    // label: clearMoatDataAtTile
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500310 = 0x00500310,
@@ -46072,11 +46072,11 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005003D0 = 0x005003D0,
-    // label: advanceMoatFillProgress
+    // label: advanceMoatDigProgress
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500500 = 0x00500500,
-    // label: clearMoatAtTileIfPresent
+    // label: clearMoat
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005005F0 = 0x005005F0,
@@ -46108,7 +46108,7 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005007D0 = 0x005007D0,
-    // label: countPitchDitchesWithPlayerID0
+    // label: countUnownedPitchDitches
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500800 = 0x00500800,
@@ -46952,7 +46952,7 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00508760 = 0x00508760,
-    // label: clearSizeFiveBuildingFootprint
+    // label: clearDrawBridgeWater
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00508870 = 0x00508870,
@@ -47560,7 +47560,7 @@ enum {
     SHC_3BB0A8C1_0x00508DC2 = 0x00508DC2,
     // type: /byte
     SHC_3BB0A8C1_0x00508DC3 = 0x00508DC3,
-    // label: applyTreeToLogicalLayer
+    // label: applyTreeBrushToLogicalLayer
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00508DD0 = 0x00508DD0,
@@ -47568,7 +47568,7 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00508EC0 = 0x00508EC0,
-    // label: updateTextureTilemap
+    // label: updateGfxLayer
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00509180 = 0x00509180,
@@ -47632,7 +47632,7 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00511020 = 0x00511020,
-    // label: createMoat
+    // label: createMoatData
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x005110B0 = 0x005110B0,
@@ -48232,7 +48232,7 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00512940 = 0x00512940,
-    // label: placeMoat
+    // label: planMoat
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00514480 = 0x00514480,
@@ -48276,7 +48276,7 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00515A20 = 0x00515A20,
-    // label: createMoatForSizeFiveBuilding
+    // label: createWaterForDrawBridge
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00515C80 = 0x00515C80,
@@ -48284,7 +48284,7 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00515DA0 = 0x00515DA0,
-    // label: constructTileMapState
+    // label: Constructor_TileMapState
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00515F40 = 0x00515F40,

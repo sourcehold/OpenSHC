@@ -424,7 +424,7 @@ namespace AI {
 
         BOOLEnum shouldNotBuildKillingPits(int playerID, MappersEnum commandBuildingType);
 
-        BOOLEnum woodCuttersHutWhileNoWoodAvailable(undefined4 playerID, MappersEnum param_2);
+        BOOLEnum mapperIsWoodCuttersHutWhileNoWoodAvailable(undefined4 playerID, MappersEnum param_2);
     };
 
     static_assert_cpp98_obj(sizeof(AICState) == 28048, AICState);

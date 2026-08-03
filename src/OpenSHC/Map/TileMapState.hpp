@@ -83,40 +83,40 @@ namespace Map {
         undefined4 someYLike; // 0x00500228 length: 4
         undefined4 someYLikeLimit; // 0x0050022C length: 4
         byte mapping40x40[40][40]; // 0x00500230 length: 1600
-        Moat SEC_MoatArray[16000]; // 0x00500870 length: 256000
-        undefined4 maxMoatsCount; // 0x0053F070 length: 4
+        Moat moats[16000]; // 0x00500870 length: 256000
+        undefined4 currentMoatCount; // 0x0053F070 length: 4
         undefined4 moatTileCount; // 0x0053F074 length: 4
         undefined4 ALG_MoatXResult; // 0x0053F078 length: 4
         undefined4 ALG_MoatYResult; // 0x0053F07C length: 4
         int someMoatTile; // 0x0053F080 length: 4
-        PitchDitch SEC_PitchDitches[4000]; // 0x0053F084 length: 80000
+        PitchDitch pitchDitches[4000]; // 0x0053F084 length: 80000
         undefined4 maxPitchDitchCount; // 0x00552904 length: 4
         undefined1 padding_0x552908[4]; // 0x00552908 length: 4
         short specialAreasArray[8]; // 0x0055290C length: 16
-        undefined4 field58_0x55291c; // 0x0055291C length: 4
+        undefined4 temporaryTerrainTypeIndex; // 0x0055291C length: 4
         undefined4 SEC_Section1052; // 0x00552920 length: 4
         undefined4 SEC_Section1053; // 0x00552924 length: 4
         undefined4 SEC_Section1054; // 0x00552928 length: 4
-        int DAT_TemporaryTerrainTypeArray[1000]; // 0x0055292C length: 4000
-        int DAT_TemporaryTerrainTypeBinaryArray[1000]; // 0x005538CC length: 4000
+        int temporaryTerrainTypeArray[1000]; // 0x0055292C length: 4000
+        int temporaryTerrainTypeBinaryArray[1000]; // 0x005538CC length: 4000
         undefined4 forceUpdateLogicalAndMiscDisplayLayers; // 0x0055486C length: 4
         undefined4 forceUpdateTextureTilemap; // 0x00554870 length: 4
         undefined4 forceUpdateGFXLayers; // 0x00554874 length: 4
         undefined4 forceUpdateMacroLayerFlag; // 0x00554878 length: 4
         undefined4 field68_0x55487c; // 0x0055487C length: 4
         undefined1 padding_0x554880[8]; // 0x00554880 length: 8
-        undefined4 DAT_PlacedBuildingID; // 0x00554888 length: 4
+        undefined4 placedBuildingID; // 0x00554888 length: 4
         undefined4 field78_0x55488c; // 0x0055488C length: 4
         undefined4 rockOrientation; // 0x00554890 length: 4
         undefined4 field80_0x554894; // 0x00554894 length: 4
         undefined4 lastTime; // 0x00554898 length: 4
-        int SEC_MapOrientation; // 0x0055489C length: 4
+        int mapOrientation; // 0x0055489C length: 4
         undefined4 DAT_FutureMapOrientation; // 0x005548A0 length: 4
-        undefined4 field84_0x5548a4; // 0x005548A4 length: 4
-        undefined4 field85_0x5548a8; // 0x005548A8 length: 4
-        undefined4 field86_0x5548ac; // 0x005548AC length: 4
-        undefined4 field87_0x5548b0; // 0x005548B0 length: 4
-        undefined4 field88_0x5548b4; // 0x005548B4 length: 4
+        int field84_0x5548a4; // 0x005548A4 length: 4
+        int field85_0x5548a8; // 0x005548A8 length: 4
+        int field86_0x5548ac; // 0x005548AC length: 4
+        int field87_0x5548b0; // 0x005548B0 length: 4
+        int field88_0x5548b4; // 0x005548B4 length: 4
         undefined4 refreshCertainTileMap; // 0x005548B8 length: 4
         undefined4 refreshCertainTileMap_old; // 0x005548BC length: 4
         undefined4 counter1; // 0x005548C0 length: 4
@@ -151,7 +151,7 @@ namespace Map {
         BOOLEnum buildingPlacementFail; // 0x00554934 length: 4
         BuildingFailReasonEnumInt buildingPlacementFailReason; // 0x00554938 length: 4
         undefined4 placementWarning; // 0x0055493C length: 4
-        undefined4 DAT_UIBuildingRotation; // 0x00554940 length: 4
+        undefined4 uiBuildingRotation; // 0x00554940 length: 4
         undefined4 field127_0x554944; // 0x00554944 length: 4
         undefined4 buildingSpriteSheetID_1; // 0x00554948 length: 4
         undefined4 buildingSpriteID1; // 0x0055494C length: 4
@@ -242,7 +242,7 @@ namespace Map {
         ~TileMapState() {};
 
         // Constructor
-        TileMapState* constructTileMapState();
+        TileMapState* Constructor_TileMapState();
 
         void processEntityDamageToBuildingCollateralThunk(
             undefined4 tile, undefined4 x_2, undefined4 y_2, undefined4 damage, undefined4 playerID, undefined4 unused);
@@ -270,7 +270,7 @@ namespace Map {
 
         void rebuildShowHiLayerFromHeights();
 
-        void computeTileLuminescence(int param_1, int param_2);
+        void computeTileLuminescence(int tile, int param_2);
 
         void increaseHeightForTunnelSingleTile(int tile, uint x, uint y, int increment);
 
@@ -282,25 +282,25 @@ namespace Map {
 
         void rotateFearFactorBuildingVariations();
 
-        void countPropertyInSurroundingTiles(int tile, int param_2, uint param_3);
+        void countLogicPropertyInSurroundingTiles(int tile, int y, uint logic1);
 
-        undefined4 isTileEnclosedByWallsOrGates(int param_1, int param_2);
+        BOOLEnum isTileEnclosedByWallsOrGates(int param_1, int param_2);
 
         undefined4 isTileEnclosedByWalls(int param_1, int param_2);
 
-        uint isWallCornerForCardinalDirection(int param_1, int param_2, int param_3);
+        BOOLEnum isWallCornerForCardinalDirection(int param_1, int param_2, int param_3);
 
         uint isWallCornerForDiagonalDirection(int param_1, int param_2, int param_3);
 
-        undefined4 isWallConnectionHeightValid(int param_1, int param_2, int param_3);
+        BOOLEnum isWallConnectionHeightValid(int tile, int y, int param_3);
 
-        undefined4 hasOnlyTowerNeighborsNoWalls(int param_1, int param_2);
+        BOOLEnum hasOnlyTowerNeighborsNoWalls(int tile, int y);
 
-        uint getWallFlagForOrientedDirection(int param_1, int param_2, int param_3);
+        uint getWallFlagForOrientedDirection(int tile, int y, int twoOrFour);
 
-        uint hasHigherNeighborWithFlagBit11(int param_1, int param_2, int param_3);
+        BOOLEnum hasHigherNeighborWithStairs(int tile, int y, int direction);
 
-        uint hasHigherPlainNeighborWithFlagBit8(int param_1, int param_2, int param_3);
+        BOOLEnum hasHigherPlainNeighborWithWallOrGatehouse(int param_1, int param_2, int param_3);
 
         int getOrientationThatIsWallTowerOrGatehouse(uint x, uint y);
 
@@ -334,20 +334,20 @@ namespace Map {
 
         undefined4 getRubbleGraphicStageForDamageLevel(int param_1);
 
-        undefined4 getBuildingSizeForCommandBuildingType(MappersEnum commandBuildingType);
+        int getBuildingSizeForCommandBuildingType(MappersEnum commandBuildingType);
 
-        void demolishBuildingsInConstructionFootprint(
+        void demolishBuildingsInKeepsConstructionFootprint(
             undefined4 param_1, int param_2, int param_3, undefined4 param_4, int param_5);
 
         void markBuildingFootprintFlag(int param_1, int param_2, int param_3);
 
         void updateAreaBasedOnSurrounding(int x, int y, int buildingSize);
 
-        void clearBuildingTilesAndTrees(int param_1, int param_2);
+        void clearBuildingTilesAndTrees(int buildingID, int surfaceArea);
 
         void clearBuildingFootprintAndResetUnits(int x, int y, int size);
 
-        void clearBuildingFootprintAndRemoveSiegeTower(int x, int y, int param_3);
+        void clearBuildingFootprintAndRemoveSiegeTower(int x, int y, int size);
 
         void unmarkBuildingFootprintFlag(int param_1, int param_2, int param_3);
 
@@ -355,9 +355,9 @@ namespace Map {
 
         void clearFixedSizeTwoBuildingFootprint(int param_1, int param_2);
 
-        undefined4 isUnitBlockingSizeFiveFootprint(int param_1);
+        BOOLEnum isUnitBlockingSizeFiveFootprint(int buildingID);
 
-        void clearStockpileFootprintTiles(int param_1, int param_2);
+        void clearStockpileFootprintTiles(int x, int y);
 
         void setMiscDisplayLayer(int buildingID);
 
@@ -369,9 +369,9 @@ namespace Map {
 
         void applyRockGraphicsToFootprint(int rockID);
 
-        void clearTreeFootprintFlags(int param_1);
+        void clearTreeFootprintFlags(int treeID);
 
-        void clearRockFootprintFlags(int param_1);
+        void clearRockFootprintFlags(int rockID);
 
         void renderWallPlacementPreview(uint x, uint y, short param_3);
 
@@ -379,9 +379,9 @@ namespace Map {
 
         void getTileForBrush(int square, int index, int* tilePointer, int* yPointer, int baseTile, uint y);
 
-        undefined4 isTileSuitableForBrushPlacement(int param_1, uint param_2, uint param_3);
+        BOOLEnum isTileSuitableForBrushPlacement(int tile, uint x, uint y);
 
-        void computeTileCliffEdgeFlags(int param_1, int param_2, int param_3);
+        void computeTileCliffEdgeFlags(int tile, int param_2, int param_3);
 
         void propagateCliffEdgeFlagFromNeighbor(int param_1, int param_2, int param_3);
 
@@ -391,9 +391,9 @@ namespace Map {
 
         int computeWallCornerRenderRotation(uint param_1);
 
-        BOOLEnum isCliffDropInDirection(int param_1, undefined4 param_2, int param_3);
+        BOOLEnum isCliffDropInDirection(int tile, undefined4 param_2, int y);
 
-        void computeClimbRampRotation(int param_1, uint param_2, uint param_3);
+        void computeClimbRampRotation(int tile, uint x, uint y);
 
         void updateGFXLayers();
 
@@ -421,17 +421,17 @@ namespace Map {
 
         int returnOwnedMoatAtTile(int targetedTile);
 
-        void clearMoatFromMemory(uint param_1);
+        void clearMoatData(uint moatID);
 
-        void clearMoat(int x, int y);
+        void clearMoatDataAtTile(int x, int y);
 
         BOOLEnum findTileInSameAreaAndNoTooHeightDifference(int area, int tile, int yUnk);
 
         int setXYBasedOnMoatID(int tile, int param_2, uint x, uint y);
 
-        undefined4 advanceMoatFillProgress(int moatID);
+        undefined4 advanceMoatDigProgress(int moatID);
 
-        void clearMoatAtTileIfPresent(int tile);
+        void clearMoat(int tile);
 
         void updateMoatCountdownTimers();
 
@@ -439,7 +439,7 @@ namespace Map {
 
         void clearInvalidMoatEntries();
 
-        void setMoatVisualStateAtTile(int param_1, undefined4 param_2);
+        void setMoatVisualStateAtTile(int tile, undefined4 zeroOrTwo);
 
         void setMoatOwnerForAllMatching(int param_1, undefined4 param_2);
 
@@ -447,7 +447,7 @@ namespace Map {
 
         void resetPitchDitchArray();
 
-        int countPitchDitchesWithPlayerID0();
+        int countUnownedPitchDitches();
 
         int getPitchDitchIDForTile(int tile);
 
@@ -487,13 +487,13 @@ namespace Map {
 
         void useTerrainHeightBrush(int param_1, uint param_2, uint param_3, undefined4 param_4);
 
-        byte getMaxWallHeightInBrushArea(int param_1, uint param_2);
+        int getMaxWallHeightInBrushArea(int param_1, uint param_2);
 
         void validateWallBuildPath(int playerID, uint x1, uint y1, uint x2, uint y2, undefined4 command);
 
         void placeWalls(int playerID, uint x1, uint y1, uint x2, uint y2, MappersEnum wallType, int tileCountUnk);
 
-        void placeDefensiveStructureTile(int param_1, uint x, uint y, MappersEnum param_4);
+        void placeDefensiveStructureTile(int playerID, uint x, uint y, MappersEnum param_4);
 
         void setupBuildingSizeIndexMapping();
 
@@ -558,21 +558,21 @@ namespace Map {
 
         void clearSizeFiveBuildingFootprintAndMoats(int param_1, int param_2);
 
-        void clearSizeFiveBuildingFootprint(int param_1, int param_2);
+        void clearDrawBridgeWater(int x, int y);
 
         void floodMoatUnderRemovedBuilding(int param_1);
 
         void renderPreviewMapperWithBrush(uint x, uint y, MappersEnum param_3);
 
-        void applyTreeToLogicalLayer(int treeID, int param_2);
+        void applyTreeBrushToLogicalLayer(int treeID, int noVariation);
 
         void eraseAreaWithBrush(uint param_1, uint param_2, uint param_3);
 
-        void updateTextureTilemap();
+        void updateGfxLayer();
 
         void updateMacroLayer();
 
-        int createMoat(undefined4 playerID, uint x, uint y, int param_4);
+        int createMoatData(undefined4 playerID, uint x, uint y, int filled);
 
         BOOLEnum findNearestFriendlyMoatTileForDigging(int playerID, int unitID, int number);
 
@@ -599,18 +599,18 @@ namespace Map {
 
         void setTerrain(int playerID, int tile, uint yParam, uint brushType, Logic1 flags1, Logic2 flags2);
 
-        void placeMoat(undefined4 playerID, int tile, uint tileY);
+        void planMoat(undefined4 playerID, int tile, uint tileY);
 
         void placeKillingPit(
             int param_1, uint param_2, uint param_3, undefined4 param_4, uint param_5, int param_6, int param_7);
 
         void placeKeep(int playerID, uint x, uint y, BuildingType type, uint size, int orientation, int xyValue);
 
-        void placeDrawbridge(int param_1, uint param_2, uint param_3, undefined4 param_4, uint param_5, int* param_6,
-            undefined4 param_7);
+        void placeDrawbridge(int playerID, uint x, uint y, undefined4 buildingType, uint width, int* orientation,
+            undefined4 averageHeight);
 
-        void placeWheatfarm(int param_1, uint param_2, uint param_3, undefined4 param_4, undefined4 param_5,
-            int param_6, undefined4 param_7);
+        void placeWheatfarm(int playerID, uint x, uint y, undefined4 buildingType, undefined4 param_5, int variation,
+            undefined4 averageHeight);
 
         void placeHopfarm(
             int param_1, uint param_2, uint param_3, undefined4 param_4, undefined4 param_5, int param_6, int param_7);
@@ -623,7 +623,7 @@ namespace Map {
 
         void clearBuildingFromTerrain(int buildingID);
 
-        void createMoatForSizeFiveBuilding(int param_1);
+        void createWaterForDrawBridge(int buildingID);
 
         void placeTree(uint x, uint y, undefined4 treeType);
 

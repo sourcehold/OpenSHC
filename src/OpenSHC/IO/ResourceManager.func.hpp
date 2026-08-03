@@ -136,7 +136,7 @@ namespace IO {
             &ResourceManager::discoverMapFiles)
         discoverMapFiles;
 
-        MACRO_FUNCTION_RESOLVER(void (ResourceManager::*)(FileResourceType, char*), false,
+        MACRO_FUNCTION_RESOLVER(void (ResourceManager::*)(FileResourceType, char const*), false,
             Address::SHC_3BB0A8C1_0x00478360, &ResourceManager::resolveResourceFileName)
         resolveResourceFileName;
 

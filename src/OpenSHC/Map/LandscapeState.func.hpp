@@ -25,8 +25,8 @@ namespace Map {
         mapUITreeTypeToLogicalTreeType;
 
         MACRO_FUNCTION_RESOLVER(undefined4 (LandscapeState::*)(undefined4, int), false,
-            Address::SHC_3BB0A8C1_0x004F1BE0, &LandscapeState::getValueFrom0UpTo3ForTreeTypeAndTreeSeason)
-        getValueFrom0UpTo3ForTreeTypeAndTreeSeason;
+            Address::SHC_3BB0A8C1_0x004F1BE0, &LandscapeState::getValueFrom0UpTo3ForTreeTypeAndTreeStage)
+        getValueFrom0UpTo3ForTreeTypeAndTreeStage;
 
         MACRO_FUNCTION_RESOLVER(
             void (LandscapeState::*)(), false, Address::SHC_3BB0A8C1_0x004F1C60, &LandscapeState::clearRocksAndTrees)

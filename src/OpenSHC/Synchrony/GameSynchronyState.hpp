@@ -358,7 +358,7 @@ namespace Synchrony {
         undefined4 commandDelay; // 0x00109EE8 length: 4
         int MBR_SelectedGameCommands[100][2]; // 0x00109EEC length: 800
         undefined4 MBR_someIndex; // 0x0010A20C length: 4
-        DPERRInt DPLAYX_SendAndReceiveREsult; // 0x0010A210 length: 4
+        int DPLAYX_SendAndReceiveREsult; // 0x0010A210 length: 4
         undefined4 DAT_TickCount; // 0x0010A214 length: 4
 
     private:
@@ -378,11 +378,11 @@ namespace Synchrony {
 
         void setMenuTypeBasedOnDirectPlayGUID();
 
-        DPERR createCompoundAddressBasedOnSelectedProvider(LPVOID* pCompoundAddress, SIZE_T* param_2);
+        int createCompoundAddressBasedOnSelectedProvider(LPVOID* pCompoundAddress, SIZE_T* param_2);
 
         void setDPlaySessionNameValue();
 
-        DPERR initializeDirectPlayAndCreateOrJoinSession(BOOLEnum join);
+        int initializeDirectPlayAndCreateOrJoinSession(BOOLEnum join);
 
         void setSessionDescription();
 
