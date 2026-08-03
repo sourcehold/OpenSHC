@@ -47,7 +47,7 @@ namespace AI {
 
         _movingFewerThan20Percent = 0;
 
-        _ptrSize = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[0] + 1;
+        _ptrSize = &DAT_SkirmishDefinedData::instance.MaxAttackTribes1[0].tribeCount;
 
         do {
 

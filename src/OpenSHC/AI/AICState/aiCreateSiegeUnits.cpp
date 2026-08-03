@@ -7,7 +7,7 @@
 #include "OpenSHC/AI/AIType.hpp"
 #include "OpenSHC/AI/AITypeInt.hpp"
 #include "OpenSHC/AI/Tribes/AITribeType.hpp"
-#include "OpenSHC/Commands/CommandBuildingType.hpp"
+#include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
@@ -30,7 +30,7 @@ namespace AI {
     using OpenSHC::AI::AIType;
     using OpenSHC::AI::AITypeInt;
     using OpenSHC::AI::Tribes::AITribeType;
-    using OpenSHC::Commands::CommandBuildingType;
+    using OpenSHC::Commands::MappersEnum;
     using OpenSHC::Map::Buildings::BuildingType;
     using OpenSHC::Map::Buildings::BuildingTypeShort;
     using OpenSHC::Map::Units::SomeTribeBehaviorType;
@@ -161,7 +161,7 @@ namespace AI {
                                                 } else {
                                                     MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::placeBuilding,
                                                         DAT_TileMapState::ptr)(playerID, _placeTile, _y,
-                                                        (CommandBuildingType)((
+                                                        (MappersEnum)((
                                                             int)((uint)(ushort)(short)DAT_SkirmishDefinedData::instance
                                                                 .SiegeEngineMetaInfoArray[_siegeInfoIndex]
                                                                 .commandBuildingType)),
@@ -172,10 +172,10 @@ namespace AI {
                                                             + 0xf;
                                                         *_pGold = *_pGold - _requiredGold;
                                                         int _newBuildingID
-                                                            = DAT_TileMapState::instance.DAT_PlacedBuildingID;
+                                                            = DAT_TileMapState::instance.placedBuildingID;
                                                         int _newUID = DAT_BuildingsState::instance
                                                                           .buildings[DAT_TileMapState::instance
-                                                                                  .DAT_PlacedBuildingID]
+                                                                                  .placedBuildingID]
                                                                           .uid;
                                                         DAT_GameState::instance.playerDataArray[playerID]
                                                             .aiSiegeCreationInformation[_siegeInfoIndex][_slotIndex]

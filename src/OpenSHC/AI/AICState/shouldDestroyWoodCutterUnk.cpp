@@ -34,7 +34,7 @@ namespace AI {
         if (_hut == 0)
             return FALSE;
 
-        MACRO_CALL_MEMBER(AIVState_Func::set0x13ValueTo10InHeatMap, DAT_AIVState::ptr)(
+        MACRO_CALL_MEMBER(AIVState_Func::resetCountdownInHeatMap, DAT_AIVState::ptr)(
             (int)(short)DAT_BuildingsState::instance.buildings[_hut].x,
             (int)(short)DAT_BuildingsState::instance.buildings[_hut].y);
         MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::giveBackResourceForDestroyedBuilding,

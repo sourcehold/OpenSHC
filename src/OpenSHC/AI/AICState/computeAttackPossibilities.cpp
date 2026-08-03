@@ -26,7 +26,7 @@ namespace AI {
 
         piVar1 = &DAT_GameState::instance.playerDataArray[playerID];
 
-        MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemoryWithByteValue, DAT_LowLevelMemory::ptr)(
+        MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
             80400, '\0', (void*)((int)(DAT_TileMapState::instance.AIInfoLayer)));
 
         MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAttackPrimeInfo, this)(playerID, piVar1->attackedPlayerID);
