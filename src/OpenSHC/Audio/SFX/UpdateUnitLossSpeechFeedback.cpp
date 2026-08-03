@@ -7,7 +7,6 @@
 #include "OpenSHC/Globals/DAT_AICState.hpp"
 #include "OpenSHC/Globals/DAT_CurrentPlayerUnitLosses.hpp"
 #include "OpenSHC/Globals/DAT_CurrentPlayerUnitLossesHistory.hpp"
-#include "OpenSHC/Globals/DAT_DestroyedBuildingsCount.hpp"
 #include "OpenSHC/Globals/DAT_DestroyedBuildingsCountHistory.hpp"
 #include "OpenSHC/Globals/DAT_GL_Counter.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -158,25 +157,26 @@ namespace Audio {
             for (int i = 0; i < 9; ++i) {
                 DAT_UnitValueLossesPerEnemyPlayer::instance[i] = 0;
             }
-            if (DAT_DestroyedBuildingsCount::instance > 1
-                && DAT_DestroyedBuildingsCountHistory::instance[3] + DAT_DestroyedBuildingsCountHistory::instance[2]
+            if (DAT_DestroyedBuildingsCountHistory::instance[0] > 1
+                && DAT_DestroyedBuildingsCountHistory::instance[4] + DAT_DestroyedBuildingsCountHistory::instance[3]
+                        + DAT_DestroyedBuildingsCountHistory::instance[2]
                         + DAT_DestroyedBuildingsCountHistory::instance[1]
-                        + DAT_DestroyedBuildingsCountHistory::instance[0] + DAT_DestroyedBuildingsCount::instance
+                        + DAT_DestroyedBuildingsCountHistory::instance[0]
                     > 5) {
                 if (DAT_GameCore::instance.genieVoiceActive) {
                     /* "Where is your Castle" */
                     MACRO_CALL_MEMBER(SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(s_Genie_41_wav_005a4e1c);
                 }
-                DAT_DestroyedBuildingsCount::instance = 0;
                 DAT_DestroyedBuildingsCountHistory::instance[0] = 0;
                 DAT_DestroyedBuildingsCountHistory::instance[1] = 0;
                 DAT_DestroyedBuildingsCountHistory::instance[2] = 0;
+                DAT_DestroyedBuildingsCountHistory::instance[3] = 0;
             }
+            DAT_DestroyedBuildingsCountHistory::instance[4] = DAT_DestroyedBuildingsCountHistory::instance[3];
             DAT_DestroyedBuildingsCountHistory::instance[3] = DAT_DestroyedBuildingsCountHistory::instance[2];
             DAT_DestroyedBuildingsCountHistory::instance[2] = DAT_DestroyedBuildingsCountHistory::instance[1];
             DAT_DestroyedBuildingsCountHistory::instance[1] = DAT_DestroyedBuildingsCountHistory::instance[0];
-            DAT_DestroyedBuildingsCountHistory::instance[0] = DAT_DestroyedBuildingsCount::instance;
-            DAT_DestroyedBuildingsCount::instance = 0;
+            DAT_DestroyedBuildingsCountHistory::instance[0] = 0;
         }
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0044AAB0
