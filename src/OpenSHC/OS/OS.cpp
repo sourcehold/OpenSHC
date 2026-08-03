@@ -67,7 +67,7 @@ namespace OS {
     int __cdecl _fseek(FILE* _File, long _Offset, DWORD _Origin) { return fseek(_File, _Offset, _Origin); }
 
     // STUB: STRONGHOLDCRUSADER 0x005804CD
-    FILE* _fopen(char* _Filename, char* _Mode) { return fopen(_Filename, _Mode); }
+    FILE* _fopen(char const* _Filename, char const* _Mode) { return fopen(_Filename, _Mode); }
 
     // STUB: STRONGHOLDCRUSADER 0x00580577
     int __vswprintf(wchar_t* _Dest, wchar_t* _Format, va_list _Args) { return _vswprintf(_Dest, _Format, _Args); }
