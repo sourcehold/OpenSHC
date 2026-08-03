@@ -16,7 +16,7 @@ namespace AI {
     {
         uint local_8 = 0;
         uint local_4 = 0;
-        int* local_c = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[0] + 1;
+        int* local_c = &DAT_SkirmishDefinedData::instance.MaxAttackTribes1[0].tribeCount;
 
         bool _found = false;
         do {

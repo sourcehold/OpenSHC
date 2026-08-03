@@ -4,7 +4,7 @@
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/AI/Tribes/AITribeType.hpp"
-#include "OpenSHC/Commands/CommandBuildingType.hpp"
+#include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
 #include "OpenSHC/Map/Units/Unit.hpp"
@@ -24,7 +24,7 @@ namespace OpenSHC {
 namespace AI {
 
     using OpenSHC::AI::Tribes::AITribeType;
-    using OpenSHC::Commands::CommandBuildingType;
+    using OpenSHC::Commands::MappersEnum;
     using OpenSHC::Map::Buildings::BuildingType;
     using OpenSHC::Map::Units::SomeTribeBehaviorType;
     using OpenSHC::Map::Units::Unit;
@@ -65,7 +65,7 @@ namespace AI {
 
         int _aicEnginesArrayIndex;
 
-        CommandBuildingType _siegeEngineToBuild;
+        MappersEnum _siegeEngineToBuild;
 
         _aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
 
@@ -171,8 +171,7 @@ namespace AI {
                         _aicEnginesArrayIndex
                             = DAT_GameState::instance.playerDataArray[playerID].harrassingSiegeEnginesIndex;
 
-                        _siegeEngineToBuild
-                            = *(CommandBuildingType*)((int)this + (iVar1 + _aicEnginesArrayIndex) * 4 + 0x1cc);
+                        _siegeEngineToBuild = *(MappersEnum*)((int)this + (iVar1 + _aicEnginesArrayIndex) * 4 + 0x1cc);
 
                         DAT_GameState::instance.playerDataArray[playerID].harrassingSiegeEnginesIndex
                             = _aicEnginesArrayIndex + 1;
@@ -185,9 +184,9 @@ namespace AI {
                             return;
                         }
 
-                        iVar1 = DAT_AIVState::instance.DAT_BuildingAppropriateGridYPosition * 5;
+                        iVar1 = DAT_AIVState::instance.buildingAppropriateGridYPosition * 5;
 
-                        _aicEnginesArrayIndex = DAT_AIVState::instance.DAT_BuildingApproriateGridXPosition * 5;
+                        _aicEnginesArrayIndex = DAT_AIVState::instance.buildingAppropriateGridYPosition * 5;
 
                         DAT_TribesState::instance.tribes[_tribeID].tribeType = OpenSHC::AI::Tribes::AITT_ENGINEERS;
 
@@ -200,15 +199,15 @@ namespace AI {
                         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::placeBuilding, DAT_TileMapState::ptr)(
                             playerID, _aicEnginesArrayIndex, iVar1, _siegeEngineToBuild, 3, 0xf);
 
-                        _buildingID = DAT_TileMapState::instance.DAT_PlacedBuildingID;
+                        _buildingID = DAT_TileMapState::instance.placedBuildingID;
 
                         if (DAT_TileMapState::instance.buildingPlacementFail != FALSE) {
 
                             return;
                         }
 
-                        DAT_BuildingsState::instance.buildings[DAT_TileMapState::instance.DAT_PlacedBuildingID]
-                            .attackWave = 0;
+                        DAT_BuildingsState::instance.buildings[DAT_TileMapState::instance.placedBuildingID].attackWave
+                            = 0;
 
                         DAT_BuildingsState::instance.buildings[_buildingID].unknownSiegeTentRelated01 = 2;
 

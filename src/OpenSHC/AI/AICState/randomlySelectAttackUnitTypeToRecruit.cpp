@@ -72,7 +72,7 @@ namespace AI {
         /*
             clear out flags */
 
-        piVar1 = DAT_SkirmishDefinedData::instance.attackUnitRequired[0] + 1;
+        piVar1 = &DAT_SkirmishDefinedData::instance.attackUnitRequired[0].required;
 
         do {
 
@@ -97,18 +97,18 @@ namespace AI {
 
             _index = 1;
 
-            DAT_SkirmishDefinedData::instance.attackUnitRequired[0][1] = 1;
+            DAT_SkirmishDefinedData::instance.attackUnitRequired[0].required = 1;
         }
 
         _maxDiggingUnits = this->aics[_aiType + ~OpenSHC::AI::AIT_NULL].AttDiggingUnitMax;
 
         if (((_maxDiggingUnits != 0)
                 && (DAT_GameState::instance.playerDataArray[playerID].totalDiggingUnitTroops < (int)_maxDiggingUnits))
-            && (5 < DAT_GameState::instance.playerDataArray[_attackedPlayerID].field992_0x396c)) {
+            && (5 < DAT_GameState::instance.playerDataArray[_attackedPlayerID].moatsOwned)) {
 
             _index = _index + 1;
 
-            DAT_SkirmishDefinedData::instance.attackUnitRequired[1][1] = 1;
+            DAT_SkirmishDefinedData::instance.attackUnitRequired[1].required = 1;
         }
 
         _maxAssassins = this->aics[_aiType + ~OpenSHC::AI::AIT_NULL].AttMaxAssassins;
@@ -118,7 +118,7 @@ namespace AI {
 
             _index = _index + 1;
 
-            DAT_SkirmishDefinedData::instance.attackUnitRequired[2][1] = 1;
+            DAT_SkirmishDefinedData::instance.attackUnitRequired[2].required = 1;
         }
 
         _maxUnit2 = this->aics[_aiType + ~OpenSHC::AI::AIT_NULL].AttUnit2Max;
@@ -127,7 +127,7 @@ namespace AI {
 
             _index = _index + 1;
 
-            DAT_SkirmishDefinedData::instance.attackUnitRequired[3][1] = 1;
+            DAT_SkirmishDefinedData::instance.attackUnitRequired[3].required = 1;
         }
 
         _maxLaddermen = this->aics[_aiType + ~OpenSHC::AI::AIT_NULL].AttMaxLaddermen;
@@ -137,7 +137,7 @@ namespace AI {
 
             _index = _index + 1;
 
-            DAT_SkirmishDefinedData::instance.attackUnitRequired[4][1] = 1;
+            DAT_SkirmishDefinedData::instance.attackUnitRequired[4].required = 1;
         }
 
         _maxTunnelers = this->aics[_aiType + ~OpenSHC::AI::AIT_NULL].AttMaxTunnelers;
@@ -147,7 +147,7 @@ namespace AI {
 
             _index = _index + 1;
 
-            DAT_SkirmishDefinedData::instance.attackUnitRequired[5][1] = 1;
+            DAT_SkirmishDefinedData::instance.attackUnitRequired[5].required = 1;
         }
 
         _maxUnitPatrol = this->aics[_aiType + ~OpenSHC::AI::AIT_NULL].AttUnitPatrolMax;
@@ -157,7 +157,7 @@ namespace AI {
 
             _index = _index + 1;
 
-            DAT_SkirmishDefinedData::instance.attackUnitRequired[6][1] = 1;
+            DAT_SkirmishDefinedData::instance.attackUnitRequired[6].required = 1;
         }
 
         _maxEngineers = this->aics[_aiType + ~OpenSHC::AI::AIT_NULL].AttUnitBackupMax;
@@ -167,7 +167,7 @@ namespace AI {
 
             _index = _index + 1;
 
-            DAT_SkirmishDefinedData::instance.attackUnitRequired[7][1] = 1;
+            DAT_SkirmishDefinedData::instance.attackUnitRequired[7].required = 1;
         }
 
         _maxEngineers = this->aics[_aiType + ~OpenSHC::AI::AIT_NULL].AttUnitEngageMax;
@@ -177,7 +177,7 @@ namespace AI {
 
             _index = _index + 1;
 
-            DAT_SkirmishDefinedData::instance.attackUnitRequired[8][1] = 1;
+            DAT_SkirmishDefinedData::instance.attackUnitRequired[8].required = 1;
         }
 
         _maxEngineers = this->aics[_aiType + ~OpenSHC::AI::AIT_NULL].AttUnitSiegeDefMax;
@@ -187,7 +187,7 @@ namespace AI {
 
             _index = _index + 1;
 
-            DAT_SkirmishDefinedData::instance.attackUnitRequired[9][1] = 1;
+            DAT_SkirmishDefinedData::instance.attackUnitRequired[9].required = 1;
         }
 
         _maxEngineers = this->aics[_aiType + ~OpenSHC::AI::AIT_NULL].AttMaxDefault;
@@ -197,7 +197,7 @@ namespace AI {
 
             _index = _index + 1;
 
-            DAT_SkirmishDefinedData::instance.attackUnitRequired[10][1] = 1;
+            DAT_SkirmishDefinedData::instance.attackUnitRequired[10].required = 1;
         }
 
         if (_index != 0) {
@@ -210,11 +210,12 @@ namespace AI {
 
             do {
 
-                if (DAT_SkirmishDefinedData::instance.attackUnitRequired[_index2][1] != 0) {
+                if (DAT_SkirmishDefinedData::instance.attackUnitRequired[_index2].required != 0) {
 
                     if (_rng == 0) {
 
-                        return (AIUnitBehaviourType)(DAT_SkirmishDefinedData::instance.attackUnitRequired[_index2][0]);
+                        return (AIUnitBehaviourType)(DAT_SkirmishDefinedData::instance.attackUnitRequired[_index2]
+                                .unitBehaviourType);
                     }
 
                     _rng = _rng + -1;

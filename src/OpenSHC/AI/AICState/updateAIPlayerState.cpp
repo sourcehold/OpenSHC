@@ -43,7 +43,7 @@ namespace AI {
                 iVar5 != 0)) {
             MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::clearRallyFlagOnAllAIAttackTribes, this)(playerID);
             MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToPlayerIDsKeepIfPossible, this)(
-                playerID, (short*)((int)(DAT_GameState::instance.playerDataArray[playerID].playerID_askerUnk)));
+                playerID, ((int)(DAT_GameState::instance.playerDataArray[playerID].playerID_askerUnk)));
             return;
         }
 
@@ -53,7 +53,7 @@ namespace AI {
             BOOLEnum _shouldAttack = MACRO_CALL_MEMBER(
                 OpenSHC::AI::AICState_Func::aiShouldAttackOrWaitForTeamCoordination, this)(playerID);
             if (_shouldAttack == FALSE) {
-                MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::aiRetreatUnits, this)((short*)playerID);
+                MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::aiRetreatUnits, this)(playerID);
                 return;
             }
             DAT_GameState::instance.playerDataArray[playerID].attackTicker = 0;
@@ -111,7 +111,7 @@ namespace AI {
                 DAT_BuildingsState::ptr)(playerID);
             MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::computeEnemyKeepApproachTile, this)(playerID);
             if (0 < DAT_GameState::instance.playerDataArray[playerID].shortestDistanceTile) {
-                MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::moveAttackTribesToLocations, this)((short*)playerID);
+                MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::moveAttackTribesToLocations, this)(playerID);
                 return;
             }
             // state 1 with no path: reset to 0

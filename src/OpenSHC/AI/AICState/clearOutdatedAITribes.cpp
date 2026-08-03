@@ -23,13 +23,13 @@ namespace AI {
 
                 if (_index != 8) {
 
-                    int _groupCount = DAT_SkirmishDefinedData::instance.MaxBreachTribes[_index][1];
+                    int _tribeCount = DAT_SkirmishDefinedData::instance.MaxBreachTribes[_index].tribeCount;
 
-                    int _tribeType = DAT_SkirmishDefinedData::instance.MaxBreachTribes[_index][0];
+                    int _tribeType = DAT_SkirmishDefinedData::instance.MaxBreachTribes[_index].tribeType;
 
                     int _offset = 0;
 
-                    if (0 < _groupCount) {
+                    if (0 < _tribeCount) {
 
                         short* _ptrTribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs + _tribeType;
 
@@ -49,7 +49,7 @@ namespace AI {
 
                             _ptrTribeID = _ptrTribeID + 1;
 
-                        } while (_offset < _groupCount);
+                        } while (_offset < _tribeCount);
                     }
                 }
 

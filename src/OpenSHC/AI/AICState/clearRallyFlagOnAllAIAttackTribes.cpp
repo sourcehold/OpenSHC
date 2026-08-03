@@ -33,24 +33,21 @@ namespace AI {
 
         if (DAT_GameState::instance.playerDataArray[param_1].aiType != OpenSHC::AI::AIT_NULL) {
 
-            _ptrTribeCount = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[0] + 1;
-
             do {
-
-                /*
-                        first iteration: 3 */
-
-                _tribeCount = *_ptrTribeCount;
-
-                /*
-                        first iteration: 186 */
-
-                _tribeType = (*(int (*)[2])(_ptrTribeCount + -1))[0];
 
                 /*
                         first iteration: 0 */
 
                 _counter = 0;
+
+                _tribeCount = DAT_SkirmishDefinedData::instance.MaxBreachTribes[_counter].tribeCount;
+
+                _tribeType = DAT_SkirmishDefinedData::instance.MaxBreachTribes[_counter].tribeType;
+
+                /*
+                        first iteration: 186 */
+
+                // _tribeType = (*(int (*)[2])(_ptrTribeCount + -1))[0];
 
                 if (0 < _tribeCount) {
 

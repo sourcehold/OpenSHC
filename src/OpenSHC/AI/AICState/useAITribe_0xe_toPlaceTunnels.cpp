@@ -3,7 +3,7 @@
 #include "OpenSHC/Map/Units/TroopValueState.func.hpp"
 #include "OpenSHC/AI/AIType.hpp"
 #include "OpenSHC/AI/Tribes/AITribeType.hpp"
-#include "OpenSHC/Commands/CommandBuildingType.hpp"
+#include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
 #include "OpenSHC/Map/Units/UnitInstructionType.hpp"
 
@@ -16,7 +16,7 @@ namespace AI {
 
     using OpenSHC::AI::AIType;
     using OpenSHC::AI::Tribes::AITribeType;
-    using OpenSHC::Commands::CommandBuildingType;
+    using OpenSHC::Commands::MappersEnum;
     using OpenSHC::Map::Units::SomeTribeBehaviorType;
     using OpenSHC::Map::Units::UnitInstructionType;
 
@@ -66,8 +66,8 @@ namespace AI {
 
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::
                                       placeSiegeTentOrTunnelAtSuitableLocationAndAssignEngineers,
-                    DAT_TroopValueState::ptr)(_tribeID, OpenSHC::Commands::CBT_TUNNEL_ENTRANCE, (uint)((int)(50)),
-                    (UnitInstructionType)((int)(21)));
+                    DAT_TroopValueState::ptr)(_tribeID, OpenSHC::Commands::M_MAPPER_TUNNEL_CONSTRUCTION,
+                    (uint)((int)(50)), (UnitInstructionType)((int)(21)));
 
                 _size = DAT_TribesState::instance.tribes[_aiTribeID].size;
             }
