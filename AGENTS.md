@@ -53,6 +53,8 @@ Preserve the existing project structure and coding style. Avoid architectural ch
 
 When reimplementing a function, first inspect neighboring implementations and established project patterns. Use decompiler output as a reference, but do not rely on it as the only source of truth.
 
+The C++ level and style is C++98/C++03. Do not use features and structures of C++11 or later.
+
 ## Reimplementation Structure
 
 Function and struct resolvers are used as proxies in place of the original game functions and structs.

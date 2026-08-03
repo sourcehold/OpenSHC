@@ -93,11 +93,12 @@ SEC_RNG::ptr->currentNumber1 % 4
 ### Variables
 
 - Ghidra declares all variables at the start of a function. Please try to declare them when needed. Helps the readability.
+- Always prefer direct usage of parameters and member variables over the creation of a local temporary on first attempts. Real local variables are rare.
+  - This may even include cases that can get pretty long in our style, like a variable access providing the index for an array.
+  - If this does not work and the assembly suggests otherwise, attempt to create a local variable.
 - The assembly may contain multiple assigns of the same value to the same variable within the same boundary. This might be optimization suggesting there was only one assign.
 - The decompiler may suggest multiple assigns of the same value to the same variable within the same boundary. If this is not present in the assembly, it might be an artifact.
-- Sometimes, the decompiler may suggest a temporary variable while the compiler requires the direct usage of the variable for the byte-match.
-  - This may even include cases that can get pretty long in our style, like a variable access providing the index for an array.
-- If a variable is stored in a temporary, before it is directly being incremented or decremented by one, suggests a post-increment/decrement, even more if the temporary is then used after.
+- If a variable is stored in a temporary, before it is directly being incremented or decremented by one, suggests a post-increment/decrement, even more if the temporary is used after this.
 
 ### Conditionals
 
@@ -142,7 +143,7 @@ if (1 < DAT_SoundSystemState.loadedSoundsCountAndIndex_0x316c) {
 }
 ```
 
-This can and should be simplified to a default for-block with array index access:
+It should always be attempted to simplify this logic to a default for-block with array index access:
 ```cpp
 for (int soundIndex = 1; soundIndex < this->loadedSoundsCountAndIndex_0x316c; ++soundIndex) {
     if (this->soundFileCurrSampleNum_0x28c[soundIndex] < 0 || !this->samplePaused_0x31f4[soundIndex]) {
@@ -153,10 +154,11 @@ for (int soundIndex = 1; soundIndex < this->loadedSoundsCountAndIndex_0x316c; ++
 }
 ```
 
-This covers most cases like this.
+This covers most cases.
 
-An exception is when the update parts of the pointer and index are not the last instructions before the loop condition.
-This indicates manual handling like in a while loop.
+Exceptions are:
+ - when the logic has not initial condition check before the loop body. This suggests the usage of a do-while loop.
+ - when the update parts of the pointer and index are not the last instructions before the loop condition. This indicates manual handling like in a while loop.
 
 If you see a repeating logic structure, that, for example, increments by a value in its logic every repeat,
 you might have found an unrolled loop. Therefore, try to reproduce the logic in loop form and see how the compiler behaves.
