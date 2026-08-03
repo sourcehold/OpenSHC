@@ -42,7 +42,7 @@ namespace AI {
         if ((DAT_GameState::instance.playerDataArray[param_1].aiType != OpenSHC::AI::AIT_NULL)
             && (DAT_GameState::instance.playerDataArray[param_1].someTile != 0)) {
 
-            local_c = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[0] + 1;
+            local_c = &DAT_SkirmishDefinedData::instance.MaxAttackTribes1[0].tribeCount;
 
             do {
 

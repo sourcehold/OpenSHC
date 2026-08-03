@@ -67,7 +67,7 @@ namespace AI {
         _defendingLordIndex = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::getAliveLordForPlayer,
             DAT_UnitsState::ptr)(DAT_GameState::instance.playerDataArray[attackingPlayerIndex].attackedPlayerID);
 
-        _ptrGroupCount = (int (*)[2])(DAT_SkirmishDefinedData::instance.MaxBreachTribes[0] + 1);
+        _ptrGroupCount = (int (*)[2])(&DAT_SkirmishDefinedData::instance.MaxBreachTribes[0].tribeCount);
 
         do {
 

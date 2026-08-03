@@ -61,7 +61,7 @@ namespace AI {
         *(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + playerID * 0x177bc + -0x10)
             = _attackedPlayerID;
 
-        MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemoryWithByteValue, DAT_LowLevelMemory::ptr)(
+        MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
             80400, '\0', (void*)((int)(DAT_TileMapState::instance.AIZoneLayer)));
 
         BVar1 = MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::canNavigateFromKeepToKeep,

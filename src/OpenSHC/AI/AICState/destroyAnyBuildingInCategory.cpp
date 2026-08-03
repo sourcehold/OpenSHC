@@ -38,12 +38,12 @@ namespace AI {
                             || BVar1 == Map::Buildings::BT_APOTHECARY || BVar1 == Map::Buildings::BT_CHAPEL
                             || BVar1 == Map::Buildings::BT_CHURCH || BVar1 == Map::Buildings::BT_CATHEDRAL);
                     } else if (buildingCategory == AINDBC_GATEHOUSES_TOWERS_GUILDS) {
-                        _matches = (BVar1 == Map::Buildings::BT_GATEHOUSELARGE || BVar1 == Map::Buildings::BT_GATEHOUSESMALL
-                            || BVar1 == Map::Buildings::BT_DRAWBRIDGE || BVar1 == Map::Buildings::BT_TOWER1
-                            || BVar1 == Map::Buildings::BT_TOWER2 || BVar1 == Map::Buildings::BT_TOWER3
-                            || BVar1 == Map::Buildings::BT_TOWER4 || BVar1 == Map::Buildings::BT_TOWER5
-                            || BVar1 == Map::Buildings::BT_ENGINEERSGUILD || BVar1 == Map::Buildings::BT_TUNNELERSGUILD
-                            || BVar1 == Map::Buildings::BT_OILSMELTER);
+                        _matches = (BVar1 == Map::Buildings::BT_GATEHOUSELARGE
+                            || BVar1 == Map::Buildings::BT_GATEHOUSESMALL || BVar1 == Map::Buildings::BT_DRAWBRIDGE
+                            || BVar1 == Map::Buildings::BT_TOWER1 || BVar1 == Map::Buildings::BT_TOWER2
+                            || BVar1 == Map::Buildings::BT_TOWER3 || BVar1 == Map::Buildings::BT_TOWER4
+                            || BVar1 == Map::Buildings::BT_TOWER5 || BVar1 == Map::Buildings::BT_ENGINEERSGUILD
+                            || BVar1 == Map::Buildings::BT_TUNNELERSGUILD || BVar1 == Map::Buildings::BT_OILSMELTER);
                     } else if (buildingCategory == AINDBC_BARRACKS_MERCPOST_STABLES) {
                         _matches = (BVar1 == Map::Buildings::BT_MERCENARYPOST || BVar1 == Map::Buildings::BT_BARRACKS
                             || BVar1 == Map::Buildings::BT_STABLES);
@@ -62,8 +62,8 @@ namespace AI {
                     if (_matches) {
                         MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::giveBackResourceForDestroyedBuilding,
                             DAT_BuildingsState::ptr)(_buildingID, playerID, 0x32);
-                        MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(
-                            _buildingID);
+                        MACRO_CALL_MEMBER(
+                            Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(_buildingID);
                     }
                 }
                 _buildingID = _buildingID + 1;

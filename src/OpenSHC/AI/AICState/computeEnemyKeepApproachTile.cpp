@@ -56,7 +56,7 @@ namespace AI {
 
         this->aiBorderTilesIndex = 0;
 
-        MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemoryWithByteValue, DAT_LowLevelMemory::ptr)(
+        MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
             8000, '\0', (void*)((int)(this->aiBorderTiles)));
 
         MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::recomputeAIPathCostToAttackedKeep, this)(playerID, 1);

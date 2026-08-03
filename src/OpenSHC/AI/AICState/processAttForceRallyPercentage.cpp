@@ -29,7 +29,7 @@ namespace AI {
         int _tribeTotal = 0;
         int _notReallyMoving = 0;
 
-        int* local_c = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[0] + 1;
+        int* local_c = &DAT_SkirmishDefinedData::instance.MaxAttackTribes1[0].tribeCount;
 
         do {
             int iVar2 = (*(int (*)[2])(local_c + -1))[0];

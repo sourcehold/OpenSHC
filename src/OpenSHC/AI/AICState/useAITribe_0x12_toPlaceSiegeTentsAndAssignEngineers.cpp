@@ -4,7 +4,7 @@
 #include "OpenSHC/AI/AIType.hpp"
 #include "OpenSHC/AI/AITypeInt.hpp"
 #include "OpenSHC/AI/Tribes/AITribeType.hpp"
-#include "OpenSHC/Commands/CommandBuildingType.hpp"
+#include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
 #include "OpenSHC/Map/Units/UnitInstructionType.hpp"
 
@@ -19,7 +19,7 @@ namespace AI {
     using OpenSHC::AI::AIType;
     using OpenSHC::AI::AITypeInt;
     using OpenSHC::AI::Tribes::AITribeType;
-    using OpenSHC::Commands::CommandBuildingType;
+    using OpenSHC::Commands::MappersEnum;
     using OpenSHC::Map::Units::SomeTribeBehaviorType;
     using OpenSHC::Map::Units::UnitInstructionType;
 
@@ -43,7 +43,7 @@ namespace AI {
 
         int* piVar4;
 
-        CommandBuildingType _siegeEngineType;
+        MappersEnum _siegeEngineType;
 
         int iVar5;
 
@@ -132,7 +132,7 @@ namespace AI {
                     /*
                               fixme: parameter reuse */
 
-                    _siegeEngineType = (CommandBuildingType)playerID;
+                    _siegeEngineType = (MappersEnum)playerID;
 
                     do {
 
@@ -151,8 +151,9 @@ namespace AI {
                                 _requiredEngineers
                                     = DAT_SkirmishDefinedData::instance.SiegeEngineTypeRequiredEngineers[_counterTill6];
 
-                                _siegeEngineType = (CommandBuildingType)DAT_SkirmishDefinedData::instance
-                                                       .SiegeEngineCommandBuildingTypes[_counterTill6];
+                                _siegeEngineType
+                                    = (MappersEnum)
+                                          DAT_SkirmishDefinedData::instance.SiegeEngineMappersEnums[_counterTill6];
 
                                 break;
                             }
