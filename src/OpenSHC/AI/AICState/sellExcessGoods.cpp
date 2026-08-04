@@ -14,6 +14,7 @@ namespace AI {
 
     using OpenSHC::AI::AIType;
     using OpenSHC::AI::AITypeInt;
+    using OpenSHC::AI::AIC::AICSpecification;
     using OpenSHC::AI::Trading::AIResourceTradeCategory;
     using OpenSHC::AI::Trading::AIResourceTradeCategoryInt;
     using OpenSHC::AI::Trading::ResourceAICResourceMappingEntry;
@@ -22,90 +23,83 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004D1D60
     void AICState ::sellExcessGoods(int param_1)
     {
-        AITypeInt AVar1 = DAT_GameState::instance.playerDataArray[param_1].aiType;
-        if (AVar1 == OpenSHC::AI::AIT_NULL)
+        AITypeInt aiType = DAT_GameState::instance.playerDataArray[param_1].aiType;
+        if (aiType == OpenSHC::AI::AIT_NULL)
             return;
 
-        int iVar3 = (AVar1 + ~OpenSHC::AI::AIT_NULL) * 0x2a4;
-        AIResourceTradeCategoryInt* local_18 = &DAT_SkirmishDefinedData::instance.AIResourceTradeAICMapping[0].aic;
+        int aicIndex = aiType - 1;
+        AICSpecification& aic = this->aics[aicIndex];
+        int nervousActions = DAT_GameState::instance.playerDataArray[param_1].aiNervousActionsTracker;
+        int& goldResource = DAT_GameState::instance.playerDataArray[param_1].currentResources[0xf];
+        int& popularity = DAT_GameState::instance.playerDataArray[param_1].popularity;
 
-        do {
-            ResourceType resourceType
-                = (OpenSHC::Game::Resources::ResourceType)((ResourceAICResourceMappingEntry*)(local_18 + -1))->game;
-            AIResourceTradeCategoryInt AVar2 = *local_18;
+        for (int entryIndex = 0; entryIndex < 20; entryIndex = entryIndex + 1) {
+            ResourceType resourceType = (OpenSHC::Game::Resources::ResourceType)DAT_SkirmishDefinedData::instance
+                                            .AIResourceTradeAICMapping[entryIndex]
+                                            .game;
+            AIResourceTradeCategoryInt category
+                = DAT_SkirmishDefinedData::instance.AIResourceTradeAICMapping[entryIndex].aic;
+            int variance = aic.maxResourceVariance;
+            int& currentResource = DAT_GameState::instance.playerDataArray[param_1].currentResources[resourceType];
 
-            int iVar6 = *(int*)((int)this + iVar3 + 0xc0);
-            int iVar5;
-            if (AVar2 == OpenSHC::AI::Trading::AIRTC_WOOD) {
-                iVar5 = *(int*)((int)this + iVar3 + 0xac);
-            } else if (AVar2 == OpenSHC::AI::Trading::AIRTC_FOOD) {
-                iVar5 = *(int*)((int)this + iVar3 + 0x80);
-            } else if (AVar2 == OpenSHC::AI::Trading::AIRTC_STONE) {
-                iVar5 = *(int*)((int)this + iVar3 + 0xb0);
-            } else if (AVar2 == OpenSHC::AI::Trading::AIRTC_WEAPONS) {
-                iVar5 = *(int*)((int)this + iVar3 + 0xb8);
-            } else if (AVar2 == OpenSHC::AI::Trading::AIRTC_ALE) {
-                iVar5 = *(int*)((int)this + iVar3 + 0xbc);
+            int amount;
+            if (category == OpenSHC::AI::Trading::AIRTC_WOOD) {
+                amount = aic.maxWood;
+            } else if (category == OpenSHC::AI::Trading::AIRTC_FOOD) {
+                amount = aic.maxFood;
+            } else if (category == OpenSHC::AI::Trading::AIRTC_STONE) {
+                amount = aic.maxStone;
+            } else if (category == OpenSHC::AI::Trading::AIRTC_WEAPONS) {
+                amount = aic.maxEquipment;
+            } else if (category == OpenSHC::AI::Trading::AIRTC_ALE) {
+                amount = aic.maxBeer;
             } else {
-                iVar5 = *(int*)((int)this + iVar3 + 0xb4);
+                amount = aic.maxResourceOther;
             }
 
-            uint uVar4 = iVar5 + iVar6;
+            amount = amount + variance;
 
-            if ((DAT_GameState::instance.playerDataArray[param_1].aiNervousActionsTracker <= 0)
-                || (DAT_GameState::instance.playerDataArray[param_1].currentResources[0xf] >= 0x1f4)) {
+            if ((nervousActions > 0) && (goldResource < 0x1f4)) {
 
-                if (DAT_GameState::instance.playerDataArray[param_1].popularity < *(int*)((int)this + iVar3 + 0x18)) {
-                    if (AVar2 != OpenSHC::AI::Trading::AIRTC_FOOD) {
-                        if (AVar2 == OpenSHC::AI::Trading::AIRTC_WEAPONS) {
-                            uVar4 = 0;
-                            iVar6 = 0;
-                        } else {
-                            uVar4 = (int)(uVar4 + ((int)uVar4 >> 0x1f & 3U)) >> 2;
-                            iVar6 = 0;
-                        }
-                    } else {
-                        iVar6 = 0;
-                    }
+                if (category == OpenSHC::AI::Trading::AIRTC_FOOD) {
+                    amount = amount / 4;
                 } else {
-                    uVar4 = uVar4
+                    amount = ((category != OpenSHC::AI::Trading::AIRTC_WEAPONS) - 1) & 10000;
+                }
+                variance = 0;
+
+            } else {
+                if (popularity < aic.criticalPopularity) {
+                    if (category != OpenSHC::AI::Trading::AIRTC_FOOD) {
+                        if (category == OpenSHC::AI::Trading::AIRTC_WEAPONS) {
+                            amount = 0;
+                        } else {
+                            amount = amount / 4;
+                        }
+                    }
+                    variance = 0;
+                } else {
+                    amount = amount
                         + DAT_GameState::instance.playerDataArray[param_1].resourcesToAcquireArray[resourceType];
                 }
-
-            } else if (AVar2 == OpenSHC::AI::Trading::AIRTC_FOOD) {
-                uVar4 = (int)(uVar4 + ((int)uVar4 >> 0x1f & 3U)) >> 2;
-                iVar6 = 0;
-            } else {
-                uVar4 = (AVar2 != OpenSHC::AI::Trading::AIRTC_WEAPONS) - 1 & 10000;
-                iVar6 = 0;
             }
 
-            // Check no-sell list (was LAB_004d1e81)
-            {
-                int iVar5_2 = 0;
-                ResourceType* pRVar7 = (ResourceType*)((int)this + iVar3 + 0xd4);
-                do {
-                    if (resourceType == *pRVar7) {
-                        uVar4 = 0;
-                        iVar6 = 0;
-                        break;
-                    }
-                    iVar5_2 = iVar5_2 + 1;
-                    pRVar7 = pRVar7 + 1;
-                } while (iVar5_2 < 0xf);
+            int* sellResourceList = &aic.sellResource01;
+            for (int sellResourceIndex = 0; sellResourceIndex < 0xf; sellResourceIndex = sellResourceIndex + 1) {
+                if (resourceType == sellResourceList[sellResourceIndex]) {
+                    amount = 0;
+                    variance = 0;
+                    break;
+                }
             }
 
-            if ((int)uVar4 < DAT_GameState::instance.playerDataArray[param_1].currentResources[resourceType]) {
+            if (currentResource > amount) {
                 MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sellGoods, this)(param_1, resourceType,
-                    (DAT_GameState::instance.playerDataArray[param_1].currentResources[resourceType] - uVar4) + iVar6);
+                    (DAT_GameState::instance.playerDataArray[param_1].currentResources[resourceType] - amount)
+                        + variance);
                 return;
             }
-
-            local_18 = local_18 + 2;
-            if (0xb4252b < (int)local_18)
-                return;
-
-        } while (true);
+        }
     }
 }
 }
