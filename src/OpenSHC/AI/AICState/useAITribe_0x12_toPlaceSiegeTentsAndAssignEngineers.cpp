@@ -151,9 +151,8 @@ namespace AI {
                                 _requiredEngineers
                                     = DAT_SkirmishDefinedData::instance.SiegeEngineTypeRequiredEngineers[_counterTill6];
 
-                                _siegeEngineType
-                                    = (MappersEnum)
-                                          DAT_SkirmishDefinedData::instance.SiegeEngineMappersEnums[_counterTill6];
+                                _siegeEngineType = (MappersEnum)DAT_SkirmishDefinedData::instance
+                                                       .SiegeEngineCommandBuildingTypes[_counterTill6];
 
                                 break;
                             }
