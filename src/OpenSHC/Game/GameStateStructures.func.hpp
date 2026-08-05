@@ -18,7 +18,7 @@ namespace Game {
         using OpenSHC::IO::PackagedFileMagicNum;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-        MACRO_FUNCTION_RESOLVER(bool (GameStateStructures::*)(int, int), false, Address::SHC_3BB0A8C1_0x00401090,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (GameStateStructures::*)(int, int), false, Address::SHC_3BB0A8C1_0x00401090,
             &GameStateStructures::isSameTeam)
         isSameTeam;
 
@@ -38,7 +38,7 @@ namespace Game {
             &GameStateStructures::resetCountsAndStatistics)
         resetCountsAndStatistics;
 
-        MACRO_FUNCTION_RESOLVER(bool (GameStateStructures::*)(int), false, Address::SHC_3BB0A8C1_0x004563B0,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (GameStateStructures::*)(int), false, Address::SHC_3BB0A8C1_0x004563B0,
             &GameStateStructures::isFullIDEqualsToMinus1)
         isFullIDEqualsToMinus1;
 
@@ -123,8 +123,8 @@ namespace Game {
             Address::SHC_3BB0A8C1_0x00457870, &GameStateStructures::canKeepReachSignpostZone)
         canKeepReachSignpostZone;
 
-        MACRO_FUNCTION_RESOLVER(bool (GameStateStructures::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004578F0,
-            &GameStateStructures::canKeepReachSignpostZoneViaPathfinder)
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (GameStateStructures::*)(int, int, int), false,
+            Address::SHC_3BB0A8C1_0x004578F0, &GameStateStructures::canKeepReachSignpostZoneViaPathfinder)
         canKeepReachSignpostZoneViaPathfinder;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(uint), false, Address::SHC_3BB0A8C1_0x00457960,
@@ -308,8 +308,8 @@ namespace Game {
         findAITeamMate;
 
         MACRO_FUNCTION_RESOLVER(uint (GameStateStructures::*)(int), false, Address::SHC_3BB0A8C1_0x00459740,
-            &GameStateStructures::TeamToBitFlagsUnk)
-        TeamToBitFlagsUnk;
+            &GameStateStructures::teamToBitFlagsUnk)
+        teamToBitFlagsUnk;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x004597D0,
             &GameStateStructures::areActivePlayersMostlySameTeam)

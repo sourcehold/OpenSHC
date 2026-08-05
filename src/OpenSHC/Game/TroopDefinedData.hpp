@@ -28,7 +28,7 @@ namespace Game {
         undefined1 padding_0x108[264]; // 0x00000108 length: 264
         int field279_0x210[38]; // 0x00000210 length: 152
         int field280_0x2a8; // 0x000002A8 length: 4
-        ResourceTypeInt DAT_MarketResourceCycleArray[21]; // 0x000002AC length: 84
+        ResourceTypeInt MarketResourceCycleArray[21]; // 0x000002AC length: 84
         uint DAT_BarracksUnitCost[7]; // 0x00000300 length: 28
         undefined1 padding_0x31c[12]; // 0x0000031C length: 12
         int DAT_NonEuroUnitCost[11]; // 0x00000328 length: 44

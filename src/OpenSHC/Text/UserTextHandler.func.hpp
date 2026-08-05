@@ -7,6 +7,10 @@ namespace OpenSHC {
 namespace Text {
     namespace UserTextHandler_Func {
 
+        MACRO_FUNCTION_RESOLVER(
+            void (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x004694A0, &UserTextHandler::FUN_004694a0)
+        FUN_004694a0;
+
         MACRO_FUNCTION_RESOLVER(void (UserTextHandler::*)(undefined4), false, Address::SHC_3BB0A8C1_0x00469790,
             &UserTextHandler::resetToTextIndex)
         resetToTextIndex;
@@ -63,6 +67,10 @@ namespace Text {
             &UserTextHandler::dequeueInputBufferChar)
         dequeueInputBufferChar;
 
+        MACRO_FUNCTION_RESOLVER(int (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x00471570,
+            &UserTextHandler::getTextWidthUntilCurrentCursor)
+        getTextWidthUntilCurrentCursor;
+
         MACRO_FUNCTION_RESOLVER(
             void (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x004715A0, &UserTextHandler::handleBackspace)
         handleBackspace;
@@ -70,6 +78,10 @@ namespace Text {
         MACRO_FUNCTION_RESOLVER(
             void (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x00472B90, &UserTextHandler::clearTextAndCursor)
         clearTextAndCursor;
+
+        MACRO_FUNCTION_RESOLVER(
+            void (UserTextHandler::*)(int), false, Address::SHC_3BB0A8C1_0x00472BE0, &UserTextHandler::clearEntry)
+        clearEntry;
 
         MACRO_FUNCTION_RESOLVER(void (UserTextHandler::*)(char*), false, Address::SHC_3BB0A8C1_0x00472C30,
             &UserTextHandler::copyIntoTextArray)

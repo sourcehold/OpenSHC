@@ -19,7 +19,7 @@ namespace Rendering {
 
     void __stdcall TicksStartCounter();
 
-    int __stdcall viewportBasedTileNumber();
+    int __cdecl ViewportBasedTileNumber();
 
     void __stdcall ProcessCreditsScriptCommands();
 

@@ -333,8 +333,6 @@ namespace Global {
 
     BOOLEnum __stdcall DirectPlayModemRelated_MemoryAllocationFunction(int* param_1, undefined4 param_2, char* param_3);
 
-    int __stdcall CompressOrCreateLengthPrefixedPacketUnk(int size, char* src, void* dst);
-
     int __stdcall ComputeSomeHashOnUnitArray();
 
     void __stdcall UpgradeOldSection1124();

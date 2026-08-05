@@ -83,6 +83,10 @@ namespace Synchrony {
             &GameSynchronyState::computeLatencyAdjustmentFromMatchTimes)
         computeLatencyAdjustmentFromMatchTimes;
 
+        MACRO_FUNCTION_RESOLVER(int (GameSynchronyState::*)(int, char*, void*), false, Address::SHC_3BB0A8C1_0x0047E7E0,
+            &GameSynchronyState::compressOrCreateLengthPrefixedPacketUnk)
+        compressOrCreateLengthPrefixedPacketUnk;
+
         MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(void*, void*), false, Address::SHC_3BB0A8C1_0x0047E800,
             &GameSynchronyState::decompressTooLongPacketData)
         decompressTooLongPacketData;

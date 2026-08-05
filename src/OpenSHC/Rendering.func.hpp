@@ -29,8 +29,8 @@ namespace Rendering_Func {
     TicksStartCounter;
 
     MACRO_FUNCTION_RESOLVER(
-        int(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004B2A60, &OpenSHC::Rendering::viewportBasedTileNumber)
-    viewportBasedTileNumber;
+        int(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004B2A60, &OpenSHC::Rendering::ViewportBasedTileNumber)
+    ViewportBasedTileNumber;
 
     MACRO_FUNCTION_RESOLVER(
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004E0A50, &OpenSHC::Rendering::ProcessCreditsScriptCommands)

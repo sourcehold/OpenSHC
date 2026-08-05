@@ -610,10 +610,6 @@ namespace Global_Func {
         Address::SHC_3BB0A8C1_0x0047E160, &OpenSHC::Global::DirectPlayModemRelated_MemoryAllocationFunction)
     DirectPlayModemRelated_MemoryAllocationFunction;
 
-    MACRO_FUNCTION_RESOLVER(int(__stdcall*)(int size, char* src, void* dst), false, Address::SHC_3BB0A8C1_0x0047E7E0,
-        &OpenSHC::Global::CompressOrCreateLengthPrefixedPacketUnk)
-    CompressOrCreateLengthPrefixedPacketUnk;
-
     MACRO_FUNCTION_RESOLVER(
         int(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0047EEB0, &OpenSHC::Global::ComputeSomeHashOnUnitArray)
     ComputeSomeHashOnUnitArray;

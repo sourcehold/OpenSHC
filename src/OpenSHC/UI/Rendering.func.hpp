@@ -518,7 +518,7 @@ namespace UI {
             &OpenSHC::UI::Rendering::RenderGreatestLordScreen)
         RenderGreatestLordScreen;
 
-        MACRO_FUNCTION_RESOLVER(int(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004D76A0,
+        MACRO_FUNCTION_RESOLVER(int(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004D76A0,
             &OpenSHC::UI::Rendering::RenderMissionObjectivesUnk)
         RenderMissionObjectivesUnk;
 

@@ -47,7 +47,7 @@ namespace Map {
         SiegeUnitCounts SEC_SiegeInformation; // 0x000000EC length: 80
         SiegeGameModeRelatedSection SEC_Section1067; // 0x0000013C length: 28
         int SEC_StartingPopularity; // 0x00000158 length: 4
-        short SEC_BuildingAvailability[100]; // 0x0000015C length: 200
+        short buildingAvailability[100]; // 0x0000015C length: 200
         undefined4 field8_0x224; // 0x00000224 length: 4
         short buildingAvailabilityRelatedFlags[380]; // 0x00000228 length: 760
         short field10_0x520; // 0x00000520 length: 2

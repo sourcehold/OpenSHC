@@ -20,7 +20,6 @@
 #include "OpenSHC/UI/MenuItemRenderFunction.hpp"
 #include "OpenSHC/UI/MenuItemSecondItemTypeData.hpp"
 #include "OpenSHC/UI/UnknownMenuSubStruct.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -36,7 +35,6 @@ namespace UI {
     using OpenSHC::UI::Enums::MenuItemRenderFunctionTypeInt;
     using OpenSHC::UI::Enums::MenuItemTypeInt;
     using OpenSHC::UI::Enums::UserControlIDShort;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
 
@@ -71,7 +69,7 @@ namespace UI {
         MenuItem() {};
         ~MenuItem() {};
 
-        BOOLEnum handleMenuElementsCallbacks();
+        int handleMenuElementsCallbacks();
 
         void prepareAndRenderMenuItems();
 

@@ -26,5 +26,9 @@ namespace IO {
 
     BOOLEnum __cdecl FileExists(char* param_1);
 
+    void __cdecl readSkMasters2();
+
+    void __cdecl WriteSkMasters2();
+
 } // namespace IO
 } // namespace OpenSHC

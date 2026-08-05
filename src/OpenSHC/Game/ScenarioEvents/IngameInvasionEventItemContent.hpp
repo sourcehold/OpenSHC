@@ -24,7 +24,11 @@ namespace Game {
             int repeatMonths; // 0x00000070 length: 4
             int crusaderArabian; // 0x00000074 length: 4
             int markerIDUnk; // 0x00000078 length: 4
-            undefined1 padding_0x7c[52]; // 0x0000007C length: 52
+            undefined1 padding_0x7c[36]; // 0x0000007C length: 36
+            int field44_0xa0; // 0x000000A0 length: 4
+            undefined1 padding_0xa4[4]; // 0x000000A4 length: 4
+            int field49_0xa8; // 0x000000A8 length: 4
+            undefined1 padding_0xac[4]; // 0x000000AC length: 4
 
         } IngameInvasionEventItemContent;
 #pragma pack(pop)

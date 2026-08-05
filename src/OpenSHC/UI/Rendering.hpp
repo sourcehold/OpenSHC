@@ -268,7 +268,7 @@ namespace UI {
 
         void __stdcall RenderGreatestLordScreen();
 
-        int __stdcall RenderMissionObjectivesUnk();
+        int __cdecl RenderMissionObjectivesUnk();
 
         void __cdecl RenderGfxHelperUnk(int loadedGfxIndex, int xPosInMenuRect, int yPosInMenuRect);
 

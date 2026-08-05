@@ -29,10 +29,6 @@ namespace IO {
         void readUserConfig();
 
         void writeUserConfig();
-
-        void readSkMasters2();
-
-        void writeSkMasters2();
     };
 
     static_assert_cpp98_obj(sizeof(SettingsFileState) == 2, SettingsFileState);

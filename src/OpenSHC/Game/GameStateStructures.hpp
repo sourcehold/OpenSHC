@@ -34,7 +34,7 @@ namespace Game {
     // SIZE: 0x00093BF4
     class GameStateStructures {
     public:
-        UnitSelectionHotKeyEntry section1099Array[10]; // 0x00000000 length: 200000
+        UnitSelectionHotKeyEntry hotkeyTribes[10]; // 0x00000000 length: 200000
         PlayerData playerDataArray[9]; // 0x00030D40 length: 133524
         MapAndTimeState mapAndTime; // 0x000516D4 length: 262608
         int gameTicksLoadBalancer; // 0x000918A4 length: 4
@@ -49,7 +49,7 @@ namespace Game {
         GameStateStructures() {};
         ~GameStateStructures() {};
 
-        bool isSameTeam(int playerID1, int playerID2);
+        BOOLEnum isSameTeam(int playerID1, int playerID2);
 
         void clearMapAndTimeAndPlayerData();
 
@@ -59,7 +59,7 @@ namespace Game {
 
         void resetCountsAndStatistics();
 
-        bool isFullIDEqualsToMinus1(int param_1);
+        BOOLEnum isFullIDEqualsToMinus1(int param_1);
 
         void processUnitLossStatistic(int playerID, int unitID);
 
@@ -100,9 +100,9 @@ namespace Game {
 
         BOOLEnum unitsCanMoveFromKeepOfPlayerToAnotherArea(int playerID);
 
-        BOOLEnum canKeepReachSignpostZone(int param_1, int param_2, int param_3);
+        BOOLEnum canKeepReachSignpostZone(int playerID, int param_2, int param_3);
 
-        bool canKeepReachSignpostZoneViaPathfinder(int param_1, int param_2, int param_3);
+        BOOLEnum canKeepReachSignpostZoneViaPathfinder(int param_1, int param_2, int param_3);
 
         void updatePrimaryBuildingPlayerDataReferences(uint buildingID);
 
@@ -195,7 +195,7 @@ namespace Game {
 
         int findAITeamMate(int playerID1);
 
-        uint TeamToBitFlagsUnk(int unitID);
+        uint teamToBitFlagsUnk(int unitID);
 
         BOOLEnum areActivePlayersMostlySameTeam();
 

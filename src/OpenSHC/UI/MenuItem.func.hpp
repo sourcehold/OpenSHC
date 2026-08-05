@@ -3,15 +3,12 @@
 */
 
 #include "OpenSHC/UI/MenuItem.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
 namespace UI {
     namespace MenuItem_Func {
 
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
         MACRO_FUNCTION_RESOLVER(
-            BOOLEnum (MenuItem::*)(), false, Address::SHC_3BB0A8C1_0x004F4290, &MenuItem::handleMenuElementsCallbacks)
+            int (MenuItem::*)(), false, Address::SHC_3BB0A8C1_0x004F4290, &MenuItem::handleMenuElementsCallbacks)
         handleMenuElementsCallbacks;
 
         MACRO_FUNCTION_RESOLVER(

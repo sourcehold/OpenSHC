@@ -172,9 +172,9 @@ namespace Game {
         undefined1 padding_0x53bac[8]; // 0x00053BAC length: 8
         int field451_0x53bb4[24]; // 0x00053BB4 length: 96
         int DAT_StartGoldPerFairnessLevel[3][5][2]; // 0x00053C14 length: 120
-        int field453_0x53c8c[20][20]; // 0x00053C8C length: 1600
+        int SkirmishIntensityRelatedArray[4][5][20]; // 0x00053C8C length: 1600
         undefined1 padding_0x542cc[440]; // 0x000542CC length: 440
-        int field894_0x54484[18][10]; // 0x00054484 length: 720
+        int SkirmishIntensityRelatedArray2[18][10]; // 0x00054484 length: 720
         int DAT_BuyPricePerResource[26]; // 0x00054754 length: 104
         int DAT_SalesPricePerResource[25]; // 0x000547BC length: 100
         int DAT_NoRushTicks[5]; // 0x00054820 length: 20

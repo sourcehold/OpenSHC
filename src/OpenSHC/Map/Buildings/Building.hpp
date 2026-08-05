@@ -223,7 +223,7 @@ namespace Map {
             short flag2; // 0x0000028C length: 2
             ResourceTypeShort producedItemTypeNext; // 0x0000028E length: 2
             ResourceTypeShort producedItemType; // 0x00000290 length: 2
-            undefined1 padding_0x292[1]; // 0x00000292 length: 1
+            byte field235_0x292; // 0x00000292 length: 1
             byte drawbridgeState2; // 0x00000293 length: 1
             byte drawBridgeState1; // 0x00000294 length: 1
             byte containsSiegeMangonel1OrBallista2; // 0x00000295 length: 1

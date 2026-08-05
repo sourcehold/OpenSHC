@@ -11,7 +11,7 @@
 namespace OpenSHC {
 namespace Input {
 
-    undefined4 __cdecl getCurrentTutorialStep();
+    undefined4 __cdecl GetCurrentTutorialStep();
 
 } // namespace Input
 } // namespace OpenSHC

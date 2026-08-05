@@ -37,5 +37,11 @@ namespace IO_Func {
         BOOLEnum(__cdecl*)(char* param_1), false, Address::SHC_3BB0A8C1_0x004BC5B0, &OpenSHC::IO::FileExists)
     FileExists;
 
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004D5010, &OpenSHC::IO::readSkMasters2)
+    readSkMasters2;
+
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004D5180, &OpenSHC::IO::WriteSkMasters2)
+    WriteSkMasters2;
+
 } // namespace IO_Func
 } // namespace OpenSHC

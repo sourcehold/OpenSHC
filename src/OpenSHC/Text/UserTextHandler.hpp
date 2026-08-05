@@ -42,6 +42,8 @@ namespace Text {
         UserTextHandler() {};
         ~UserTextHandler() {};
 
+        void FUN_004694a0();
+
         void resetToTextIndex(undefined4 textIndex);
 
         char* getCurrentText();
@@ -70,9 +72,13 @@ namespace Text {
 
         uint dequeueInputBufferChar();
 
+        int getTextWidthUntilCurrentCursor();
+
         void handleBackspace();
 
         void clearTextAndCursor();
+
+        void clearEntry(int param_1);
 
         void copyIntoTextArray(char* param_1);
 

@@ -49,7 +49,8 @@ namespace Map {
             short size; // 0x00000034 length: 2
             short size2Unk; // 0x00000036 length: 2
             short unitSelectionBitMasked[200]; // 0x00000038 length: 400
-            undefined1 padding_0x1c8[12]; // 0x000001C8 length: 12
+            byte field35_0x1c8; // 0x000001C8 length: 1
+            undefined1 padding_0x1c9[11]; // 0x000001C9 length: 11
             short someUnitArray[10]; // 0x000001D4 length: 20
             short countdown2; // 0x000001E8 length: 2
             undefined1 padding_0x1ea[6]; // 0x000001EA length: 6

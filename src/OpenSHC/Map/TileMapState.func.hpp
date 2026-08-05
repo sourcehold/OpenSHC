@@ -67,6 +67,10 @@ namespace Map {
         toggleFlatView;
 
         MACRO_FUNCTION_RESOLVER(
+            void (TileMapState::*)(undefined4), false, Address::SHC_3BB0A8C1_0x004F70D0, &TileMapState::noop1)
+        noop1;
+
+        MACRO_FUNCTION_RESOLVER(
             void (TileMapState::*)(undefined4), false, Address::SHC_3BB0A8C1_0x004F70E0, &TileMapState::setMapRotation)
         setMapRotation;
 

@@ -264,6 +264,8 @@ namespace Map {
 
         void toggleFlatView(int param_1);
 
+        void noop1(undefined4 param_1);
+
         void setMapRotation(undefined4 newRotation);
 
         void updateLogicalTileMapRelatedSections();
