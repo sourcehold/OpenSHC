@@ -37,7 +37,7 @@ namespace IO {
         // Constructor
         DecoderState* Constructor_DecoderState();
 
-        int compressRLE(char* src, int* dst, int size);
+        int compressRLE(char* src, char* dst, int size);
 
         int decompressRLE(void* param_1, undefined* param_2);
 

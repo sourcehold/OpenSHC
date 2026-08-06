@@ -16,7 +16,7 @@ namespace IO {
             &DecoderState::Constructor_DecoderState)
         Constructor_DecoderState;
 
-        MACRO_FUNCTION_RESOLVER(int (DecoderState::*)(char*, int*, int), false, Address::SHC_3BB0A8C1_0x0046D150,
+        MACRO_FUNCTION_RESOLVER(int (DecoderState::*)(char*, char*, int), false, Address::SHC_3BB0A8C1_0x0046D150,
             &DecoderState::compressRLE)
         compressRLE;
 
