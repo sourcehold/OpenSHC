@@ -24,7 +24,7 @@ namespace IO {
             &DecoderState::decompressRLE)
         decompressRLE;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (DecoderState::*)(int*, int*, undefined*, undefined*), false,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (DecoderState::*)(int*, int*, undefined*, undefined*, unsigned int), false,
             Address::SHC_3BB0A8C1_0x004724C0, &DecoderState::doImplode)
         doImplode;
 
