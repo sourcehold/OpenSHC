@@ -28,8 +28,8 @@ namespace IO {
             Address::SHC_3BB0A8C1_0x004724C0, &DecoderState::doImplode)
         doImplode;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (DecoderState::*)(int*, undefined*, int*, undefined*), false,
-            Address::SHC_3BB0A8C1_0x004725A0, &DecoderState::doExplode)
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (DecoderState::*)(int*, undefined*, unsigned int, undefined*, unsigned int),
+            false, Address::SHC_3BB0A8C1_0x004725A0, &DecoderState::doExplode)
         doExplode;
 
         MACRO_FUNCTION_RESOLVER(int (DecoderState::*)(int, undefined*, undefined*), false,
