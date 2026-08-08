@@ -20,8 +20,8 @@ namespace IO {
             &DecoderState::compressRLE)
         compressRLE;
 
-        MACRO_FUNCTION_RESOLVER(int (DecoderState::*)(void*, undefined*), false, Address::SHC_3BB0A8C1_0x0046D200,
-            &DecoderState::decompressRLE)
+        MACRO_FUNCTION_RESOLVER(
+            int (DecoderState::*)(char*, char*), false, Address::SHC_3BB0A8C1_0x0046D200, &DecoderState::decompressRLE)
         decompressRLE;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (DecoderState::*)(int*, int*, undefined*, undefined*, unsigned int), false,

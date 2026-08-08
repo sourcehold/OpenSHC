@@ -39,7 +39,7 @@ namespace IO {
 
         int compressRLE(char* src, char* dst, int size);
 
-        int decompressRLE(void* param_1, undefined* param_2);
+        int decompressRLE(char* src, char* dst);
 
         BOOLEnum doImplode(int* ptrHash, int* ptrSize, undefined* src, undefined* dst, unsigned int sizeUncompressed);
 
