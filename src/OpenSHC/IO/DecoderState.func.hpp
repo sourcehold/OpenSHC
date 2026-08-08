@@ -16,20 +16,20 @@ namespace IO {
             &DecoderState::Constructor_DecoderState)
         Constructor_DecoderState;
 
-        MACRO_FUNCTION_RESOLVER(int (DecoderState::*)(char*, int*, int), false, Address::SHC_3BB0A8C1_0x0046D150,
+        MACRO_FUNCTION_RESOLVER(int (DecoderState::*)(char*, char*, int), false, Address::SHC_3BB0A8C1_0x0046D150,
             &DecoderState::compressRLE)
         compressRLE;
 
-        MACRO_FUNCTION_RESOLVER(int (DecoderState::*)(void*, undefined*), false, Address::SHC_3BB0A8C1_0x0046D200,
-            &DecoderState::decompressRLE)
+        MACRO_FUNCTION_RESOLVER(
+            int (DecoderState::*)(char*, char*), false, Address::SHC_3BB0A8C1_0x0046D200, &DecoderState::decompressRLE)
         decompressRLE;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (DecoderState::*)(int*, int*, undefined*, undefined*), false,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (DecoderState::*)(int*, int*, undefined*, undefined*, unsigned int), false,
             Address::SHC_3BB0A8C1_0x004724C0, &DecoderState::doImplode)
         doImplode;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (DecoderState::*)(int*, undefined*, int*, undefined*), false,
-            Address::SHC_3BB0A8C1_0x004725A0, &DecoderState::doExplode)
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (DecoderState::*)(int*, undefined*, unsigned int, undefined*, unsigned int),
+            false, Address::SHC_3BB0A8C1_0x004725A0, &DecoderState::doExplode)
         doExplode;
 
         MACRO_FUNCTION_RESOLVER(int (DecoderState::*)(int, undefined*, undefined*), false,

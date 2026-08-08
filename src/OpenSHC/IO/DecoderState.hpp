@@ -37,13 +37,14 @@ namespace IO {
         // Constructor
         DecoderState* Constructor_DecoderState();
 
-        int compressRLE(char* src, int* dst, int size);
+        int compressRLE(char* src, char* dst, int size);
 
-        int decompressRLE(void* param_1, undefined* param_2);
+        int decompressRLE(char* src, char* dst);
 
-        BOOLEnum doImplode(int* ptrHash, int* ptrSize, undefined* src, undefined* dst);
+        BOOLEnum doImplode(int* ptrHash, int* ptrSize, undefined* src, undefined* dst, unsigned int sizeUncompressed);
 
-        BOOLEnum doExplode(int* hash, undefined* src, int* decompressedSize, undefined* dst);
+        BOOLEnum doExplode(
+            int* hash, undefined* src, unsigned int sizeCompressed, undefined* dst, unsigned int sizeUncompressed);
 
         int encodeData(int sizeUncompressed, undefined* src, undefined* dst);
 

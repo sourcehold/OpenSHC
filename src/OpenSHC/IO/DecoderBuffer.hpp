@@ -15,9 +15,9 @@ namespace IO {
 
         using OpenSHC::IO::Helpers::BufferHelper;
 
-        uint __cdecl ReadBufferAndComputeHash(char* buf, uint* size, BufferHelper* param);
+        uint __cdecl ReadBufferAndComputeHash(char* buf, uint* size, void* param);
 
-        void __cdecl WriteBufferAndComputeHash(char* buf, uint* size, BufferHelper* param);
+        void __cdecl WriteBufferAndComputeHash(char* buf, uint* size, void* param);
 
     } // namespace DecoderBuffer
 } // namespace IO
