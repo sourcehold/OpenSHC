@@ -113,9 +113,29 @@ namespace Map {
             void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0045AE00, &OpenSHC::Map::Version::resetTeams)
         resetTeams;
 
+        MACRO_FUNCTION_RESOLVER(
+            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00486AD0, &OpenSHC::Map::Version::UpgradeOldSection1124)
+        UpgradeOldSection1124;
+
+        MACRO_FUNCTION_RESOLVER(
+            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004F37B0, &OpenSHC::Map::Version::UpdateFixTrees2)
+        UpdateFixTrees2;
+
+        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004F3840,
+            &OpenSHC::Map::Version::UpgradeRemoveCertainRockTypesUnk)
+        UpgradeRemoveCertainRockTypesUnk;
+
         MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004F38A0,
             &OpenSHC::Map::Version::UpdateTreesOfCertainTypes)
         UpdateTreesOfCertainTypes;
+
+        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004F3900,
+            &OpenSHC::Map::Version::UpgradeRemoveRocksBeyond1000)
+        UpgradeRemoveRocksBeyond1000;
+
+        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x005011C0,
+            &OpenSHC::Map::Version::UpgradeMapLogicToVersion_125)
+        UpgradeMapLogicToVersion_125;
 
         MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x005011F0,
             &OpenSHC::Map::Version::UpgradeMapLogicToVersion_Unknown1)
@@ -124,6 +144,26 @@ namespace Map {
         MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00501350,
             &OpenSHC::Map::Version::UpgradeMapLogicToVersion_Unknown2)
         UpgradeMapLogicToVersion_Unknown2;
+
+        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00501440,
+            &OpenSHC::Map::Version::UpgradeMapLogicToVersion_128)
+        UpgradeMapLogicToVersion_128;
+
+        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00501490,
+            &OpenSHC::Map::Version::UpgradeMapLogicToVersion_102)
+        UpgradeMapLogicToVersion_102;
+
+        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x005014F0,
+            &OpenSHC::Map::Version::UpgradeMapLogicToVersion_120)
+        UpgradeMapLogicToVersion_120;
+
+        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x005016D0,
+            &OpenSHC::Map::Version::UpgradeMapLogicToVersion_145)
+        UpgradeMapLogicToVersion_145;
+
+        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00501730,
+            &OpenSHC::Map::Version::UpgradeMapLogicToVersion_147)
+        UpgradeMapLogicToVersion_147;
 
         MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00501760,
             &OpenSHC::Map::Version::UpgradeMapLogicToVersion_Unknown3)

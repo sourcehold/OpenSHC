@@ -33,7 +33,7 @@ namespace Map {
                 &PathFindingState::bindPathPlanToAlgorithmStateAndReset)
             bindPathPlanToAlgorithmStateAndReset;
 
-            MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int), false, Address::SHC_3BB0A8C1_0x00496EC0,
+            MACRO_FUNCTION_RESOLVER(int (PathFindingState::*)(int), false, Address::SHC_3BB0A8C1_0x00496EC0,
                 &PathFindingState::findClosestTileToStartingTile)
             findClosestTileToStartingTile;
 

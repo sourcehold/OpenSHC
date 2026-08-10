@@ -90,7 +90,7 @@ namespace Text {
         void renderTextFromTextGroup(eTextSections offsetIndex, int numInGroup, int xParam, int yParam,
             TextAlignment alignment, uint color, int fontSize, BOOLEnum keepOffsetX, int blendStrength);
 
-        void renderMultilineText2(eTextSections param_1, int param_2, int param_3, int param_4);
+        int renderMultilineText2(eTextSections param_1, int param_2, int param_3, int param_4);
 
         void renderMultilineTextUnk(eTextSections textOffsetIndex, int textNumInGroup, int xPos, int yPos, int maxWidth,
             uint color, int fontSize, int blendStrength);

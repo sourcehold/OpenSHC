@@ -146,6 +146,8 @@ namespace AI {
 
         UnitType getUnitTypeForUnitBehaviourType(int playerID, AIUnitBehaviourType unitBehaviourType);
 
+        AIVUnitType getUnitTypeIndexForUnitID(int unitID, int param_2);
+
         void generateSiegeCreationInformation(int playerID, int buildingID, int unitID);
 
         void aiRecruitEngineers(int playerID);
@@ -172,6 +174,10 @@ namespace AI {
 
         int addUnitToSmallestBehaviourTypeTribe(
             undefined4 playerID, undefined4 param_2, undefined4 aiUnitBehaviourType);
+
+        int checksAndGenerateAITribesForPlayerIfNotExisting(int playerID, int maxAmount, BOOLEnum checkOnly);
+
+        BOOLEnum checkTribeActivityPercentages(int tribeID, BOOLEnum ignoreShooting, BOOLEnum includeMoving);
 
         void sendUnitsToKeep(int tribeID, int playerID);
 
@@ -321,6 +327,18 @@ namespace AI {
         void playNervous1BikFromPlayer(int playerID);
 
         void playRequestHelpBikFromPlayer(int playerID);
+
+        void playWillNotHelp1BikFromPlayerToPlayer(int playerID, int targetPlayerID);
+
+        void playWillNotHelp2BikFromPlayerToPlayer(int playerID, int targetPlayerID);
+
+        void playWillHelpBikFromPlayerToPlayer(int playerID, int targetPlayerID);
+
+        void playWillNotAttack1BikFromPlayerToPlayer(int playerID, int targetPlayerID);
+
+        void playWillNotAttack2BikFromPlayerToPlayer(int playerID, int targetPlayerID);
+
+        void playWillAttackBikFromPlayerToPlayer(int playerID, int targetPlayerID);
 
         void playJokeBikFromAIToHuman(int playerID, int aiType);
 

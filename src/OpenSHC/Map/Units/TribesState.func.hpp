@@ -200,6 +200,10 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x00523240, &TribesState::spawnUnitsAroundLocation)
             spawnUnitsAroundLocation;
 
+            MACRO_FUNCTION_RESOLVER(void (TribesState::*)(), false, Address::SHC_3BB0A8C1_0x005232E0,
+                &TribesState::clearAnimalSpawnLocationsUnk)
+            clearAnimalSpawnLocationsUnk;
+
             MACRO_FUNCTION_RESOLVER(void (TribesState::*)(undefined4, undefined4), false,
                 Address::SHC_3BB0A8C1_0x00523340, &TribesState::storeDeerXAndYinMapInfo)
             storeDeerXAndYinMapInfo;

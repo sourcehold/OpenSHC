@@ -205,6 +205,10 @@ namespace AI {
             Address::SHC_3BB0A8C1_0x004CC250, &AICState::getUnitTypeForUnitBehaviourType)
         getUnitTypeForUnitBehaviourType;
 
+        MACRO_FUNCTION_RESOLVER(AIVUnitType (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004CC390,
+            &AICState::getUnitTypeIndexForUnitID)
+        getUnitTypeIndexForUnitID;
+
         MACRO_FUNCTION_RESOLVER(void (AICState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004CC420,
             &AICState::generateSiegeCreationInformation)
         generateSiegeCreationInformation;
@@ -256,6 +260,14 @@ namespace AI {
         MACRO_FUNCTION_RESOLVER(int (AICState::*)(undefined4, undefined4, undefined4), false,
             Address::SHC_3BB0A8C1_0x004CCD20, &AICState::addUnitToSmallestBehaviourTypeTribe)
         addUnitToSmallestBehaviourTypeTribe;
+
+        MACRO_FUNCTION_RESOLVER(int (AICState::*)(int, int, BOOLEnum), false, Address::SHC_3BB0A8C1_0x004CCFB0,
+            &AICState::checksAndGenerateAITribesForPlayerIfNotExisting)
+        checksAndGenerateAITribesForPlayerIfNotExisting;
+
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, BOOLEnum, BOOLEnum), false,
+            Address::SHC_3BB0A8C1_0x004CD070, &AICState::checkTribeActivityPercentages)
+        checkTribeActivityPercentages;
 
         MACRO_FUNCTION_RESOLVER(
             void (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004CD0C0, &AICState::sendUnitsToKeep)
@@ -552,6 +564,30 @@ namespace AI {
         MACRO_FUNCTION_RESOLVER(
             void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D0D40, &AICState::playRequestHelpBikFromPlayer)
         playRequestHelpBikFromPlayer;
+
+        MACRO_FUNCTION_RESOLVER(void (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004D0DB0,
+            &AICState::playWillNotHelp1BikFromPlayerToPlayer)
+        playWillNotHelp1BikFromPlayerToPlayer;
+
+        MACRO_FUNCTION_RESOLVER(void (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004D0E00,
+            &AICState::playWillNotHelp2BikFromPlayerToPlayer)
+        playWillNotHelp2BikFromPlayerToPlayer;
+
+        MACRO_FUNCTION_RESOLVER(void (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004D0E50,
+            &AICState::playWillHelpBikFromPlayerToPlayer)
+        playWillHelpBikFromPlayerToPlayer;
+
+        MACRO_FUNCTION_RESOLVER(void (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004D0EA0,
+            &AICState::playWillNotAttack1BikFromPlayerToPlayer)
+        playWillNotAttack1BikFromPlayerToPlayer;
+
+        MACRO_FUNCTION_RESOLVER(void (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004D0EF0,
+            &AICState::playWillNotAttack2BikFromPlayerToPlayer)
+        playWillNotAttack2BikFromPlayerToPlayer;
+
+        MACRO_FUNCTION_RESOLVER(void (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004D0F40,
+            &AICState::playWillAttackBikFromPlayerToPlayer)
+        playWillAttackBikFromPlayerToPlayer;
 
         MACRO_FUNCTION_RESOLVER(
             void (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004D0F90, &AICState::playJokeBikFromAIToHuman)

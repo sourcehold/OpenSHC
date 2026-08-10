@@ -45,7 +45,7 @@ namespace Text {
             Address::SHC_3BB0A8C1_0x00424470, &TextManager::renderTextFromTextGroup)
         renderTextFromTextGroup;
 
-        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(eTextSections, int, int, int), false,
+        MACRO_FUNCTION_RESOLVER(int (TextManager::*)(eTextSections, int, int, int), false,
             Address::SHC_3BB0A8C1_0x004244C0, &TextManager::renderMultilineText2)
         renderMultilineText2;
 

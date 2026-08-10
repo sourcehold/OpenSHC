@@ -980,10 +980,6 @@ namespace UI_Func {
         undefined4(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0046CF90, &OpenSHC::UI::TicksSinceCounterStart)
     TicksSinceCounterStart;
 
-    MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00471A80, &OpenSHC::UI::exitToScenarioDescriptionMenu)
-    exitToScenarioDescriptionMenu;
-
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, ...), false, Address::SHC_3BB0A8C1_0x0047C670,
         &OpenSHC::UI::MenuItemRenderFunction_NetworkSessions_Buttons)
     MenuItemRenderFunction_NetworkSessions_Buttons;

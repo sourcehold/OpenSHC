@@ -2699,7 +2699,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00406FD0 = 0x00406FD0,
     // label: IgniteFireAtMiniTile_Convenience
-    // location: OpenSHC/Map
+    // location: OpenSHC/Map/Entities
     // type: function
     SHC_3BB0A8C1_0x00407130 = 0x00407130,
     // label: SetPlaceOnFire
@@ -6001,27 +6001,27 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00410C60 = 0x00410C60,
     // label: UpdateHovel
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00410CA0 = 0x00410CA0,
     // label: UpdateWoodcuttersHut
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00410D20 = 0x00410D20,
     // label: UpdatePitchRig
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00410EE0 = 0x00410EE0,
     // label: UpdateMercenaryPost
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x004113C0 = 0x004113C0,
     // label: UpdateBarracks
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00411480 = 0x00411480,
     // label: UpdateOutpostBuilding
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00411540 = 0x00411540,
     // type: function
@@ -6117,83 +6117,83 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x00412356 = 0x00412356,
     // label: UpdateStockpile
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00412360 = 0x00412360,
     // label: UpdateArmory
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00412730 = 0x00412730,
     // label: UpdateFletchersWorkshop
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00412D50 = 0x00412D50,
     // label: UpdateBlacksmithsWorkshop
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x004130D0 = 0x004130D0,
     // label: UpdatePoleturnersWorkshop
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x004138D0 = 0x004138D0,
     // label: UpdateArmorersWorkshop
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00413DC0 = 0x00413DC0,
     // label: UpdateTannersWorkshop
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x004140B0 = 0x004140B0,
     // label: UpdateBakery
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00414720 = 0x00414720,
     // label: UpdateBrewery
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00414B60 = 0x00414B60,
     // label: UpdateGranary
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00415110 = 0x00415110,
     // label: UpdateInn
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x004156F0 = 0x004156F0,
     // label: UpdateApothecary
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00415A80 = 0x00415A80,
     // label: UpdateTunnelersGuild
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00415BF0 = 0x00415BF0,
     // label: UpdateMarketplace
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00415C90 = 0x00415C90,
     // label: UpdateOilSmelter
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00415E80 = 0x00415E80,
     // label: UpdateWheatFarm
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00416540 = 0x00416540,
     // label: UpdateHopsFarm
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00416630 = 0x00416630,
     // label: UpdateAppleFarm
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00416720 = 0x00416720,
     // label: UpdateDairyFarm
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x004167E0 = 0x004167E0,
     // label: UpdateMill
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00416F80 = 0x00416F80,
     // label: validateBuildingTetheredUnits
@@ -6205,95 +6205,95 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00417450 = 0x00417450,
     // label: UpdateStables
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x004174E0 = 0x004174E0,
     // label: UpdateBuildingShared2
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00417740 = 0x00417740,
     // label: UpdateCathedral
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x004177E0 = 0x004177E0,
     // label: UpdateKeepManorHouse
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x004178E0 = 0x004178E0,
     // label: UpdateKeepStoneKeep
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x004179B0 = 0x004179B0,
     // label: UpdateKeepStronghold
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00417AA0 = 0x00417AA0,
     // label: UpdateDrawBridge
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00417B90 = 0x00417B90,
     // label: UpdateTunnel
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00417FD0 = 0x00417FD0,
     // label: UpdateBuildingShared1
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x004180E0 = 0x004180E0,
     // label: UpdateCampGround
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00418100 = 0x00418100,
     // label: UpdateParadeGround2
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x004184A0 = 0x004184A0,
     // label: UpdateParadeGround3
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x004184D0 = 0x004184D0,
     // label: UpdateParadeGround4
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00418500 = 0x00418500,
     // label: UpdateBadBuildingGallows
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00418530 = 0x00418530,
     // label: UpdateBadBuildingStocks
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00418640 = 0x00418640,
     // label: UpdateGoodBuildingMaypole
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00418740 = 0x00418740,
     // label: UpdateGoodBuildingGarden
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00418880 = 0x00418880,
     // label: UpdatePlacedSiegeTower
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x004188C0 = 0x004188C0,
     // label: UpdateWellOrWaterpot
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00418900 = 0x00418900,
     // label: UpdateKeepDoorLeft
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x004189A0 = 0x004189A0,
     // label: UpdateKeepDoorRight
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00418A60 = 0x00418A60,
     // label: UpdateKeepDoor
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00418B20 = 0x00418B20,
     // label: UpdateTower1
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00418C80 = 0x00418C80,
     // label: getRequiredEngineersCount
@@ -6301,47 +6301,47 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00418EC0 = 0x00418EC0,
     // label: UpdateBadBuildingCessPitOrDancingBearUnk
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00418F70 = 0x00418F70,
     // label: UpdateBadBuildingBurningStake
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00418F90 = 0x00418F90,
     // label: UpdateBadBuildingGibbet
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x004190D0 = 0x004190D0,
     // label: UpdateBadBuildingDungeon
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00419190 = 0x00419190,
     // label: UpdateBadBuildingStretchingRack
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00419290 = 0x00419290,
     // label: UpdateBadBuildingRackFlogging
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00419340 = 0x00419340,
     // label: UpdateBadBuildingChoppingBlock
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00419370 = 0x00419370,
     // label: UpdateBadBuildingDunkingStool
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00419420 = 0x00419420,
     // label: UpdateGoodBuildingStatue
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00419630 = 0x00419630,
     // label: UpdateGoodBuildingShrine
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00419670 = 0x00419670,
-    // label: UpdateDancingBear
-    // location: OpenSHC/Global
+    // label: UpdateGoodBuildingDancingBear
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x004196D0 = 0x004196D0,
     // label: initBuildingCosts
@@ -7032,25 +7032,25 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x0041C9F4 = 0x0041C9F4,
     // label: UpdateOxTether
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x0041CA00 = 0x0041CA00,
     // label: UpdateIronMine
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x0041CC70 = 0x0041CC70,
     // label: UpdateQuarry
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x0041D510 = 0x0041D510,
     // label: UpdateFireBallistaBuilding
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x0041E240 = 0x0041E240,
     // type: function
     SHC_3BB0A8C1_0x0041E3F0 = 0x0041E3F0,
     // label: UpdateKillingPit
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x0041E650 = 0x0041E650,
     // type: /undefined *32
@@ -7064,57 +7064,57 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x0041E860 = 0x0041E860,
     // label: UpdateTower2
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x0041E870 = 0x0041E870,
     // label: UpdateTower3
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x0041EB00 = 0x0041EB00,
     // type: function
     SHC_3BB0A8C1_0x0041EC80 = 0x0041EC80,
     // label: UpdateTower4
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x0041EDA0 = 0x0041EDA0,
     // type: function
     SHC_3BB0A8C1_0x0041EF30 = 0x0041EF30,
     // label: UpdateTower5
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x0041F110 = 0x0041F110,
     // type: function
     SHC_3BB0A8C1_0x0041F290 = 0x0041F290,
     // label: UpdateCatapultBuilding
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x0041F3B0 = 0x0041F3B0,
     // label: UpdateTrebutchetBuilding
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x0041F7C0 = 0x0041F7C0,
     // type: function
     SHC_3BB0A8C1_0x0041F9A0 = 0x0041F9A0,
     // label: UpdateSiegeTowerBuilding
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x0041FC90 = 0x0041FC90,
     // type: function
     SHC_3BB0A8C1_0x0041FE50 = 0x0041FE50,
     // label: UpdateBatteringRamBuilding
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00420120 = 0x00420120,
     // type: function
     SHC_3BB0A8C1_0x004202E0 = 0x004202E0,
     // label: UpdateShieldBuilding
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x004205B0 = 0x004205B0,
     // type: function
     SHC_3BB0A8C1_0x00420760 = 0x00420760,
     // label: UpdateDogCage
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00420A30 = 0x00420A30,
     // label: upgradeBuildingsForMapVersion
@@ -7526,21 +7526,21 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x0042336C = 0x0042336C,
     // label: UpdateHuntersPost
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00423370 = 0x00423370,
     // label: UpdateGateHouseLarge
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x004238B0 = 0x004238B0,
     // type: function
     SHC_3BB0A8C1_0x00423A20 = 0x00423A20,
     // label: UpdateGateHouseSmall
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x00423CD0 = 0x00423CD0,
     // label: UpdateWoodGate1
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x004240D0 = 0x004240D0,
     // label: recomputeAccessibilityForAllBuildings
@@ -7985,7 +7985,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00428AC0 = 0x00428AC0,
     // label: QueueChangeGameIntensityOrBalance
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00429630 = 0x00429630,
     // label: CallbackSetMultiplayerSpeedLevel
@@ -20009,8 +20009,8 @@ enum {
     SHC_3BB0A8C1_0x0045B3E0 = 0x0045B3E0,
     // type: function
     SHC_3BB0A8C1_0x0045B460 = 0x0045B460,
-    // label: ProcessPeasantSpawnAndDespawnCycle
-    // location:
+    // label: processPeasantSpawnAndDespawnCycle
+    // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x0045B4A0 = 0x0045B4A0,
     // label: updateTrader
@@ -22028,7 +22028,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00465360 = 0x00465360,
     // label: OpenOrCloseDrawbridge
-    // location: OpenSHC/Map
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x004653B0 = 0x004653B0,
     // label: MenuItemRenderFunction_BuildingAndStatusMenu_GatehouseOpenClose
@@ -22040,7 +22040,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00465480 = 0x00465480,
     // label: GateOpenOrClose
-    // location: OpenSHC/Map
+    // location: OpenSHC/Map/Buildings
     // type: function
     SHC_3BB0A8C1_0x004654F0 = 0x004654F0,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_TaxSlider
@@ -22068,7 +22068,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004656A0 = 0x004656A0,
     // label: QueueChangeTaxes
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00465700 = 0x00465700,
     // label: MenuItemRenderFunction_BuildingAndStatusMenu_TaxArrowButtons
@@ -23479,8 +23479,8 @@ enum {
     // location: OpenSHC/Map/Navigation/DirectionAlgorithmState
     // type: function
     SHC_3BB0A8C1_0x0046CDF0 = 0x0046CDF0,
-    // label: RotateByteLeft
-    // location: OpenSHC/Global
+    // label: rotateByteLeft
+    // location: OpenSHC/Map/Navigation/DirectionAlgorithmState
     // type: function
     SHC_3BB0A8C1_0x0046CE30 = 0x0046CE30,
     // type: /undefined *32
@@ -24006,7 +24006,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00471A00 = 0x00471A00,
     // label: exitToScenarioDescriptionMenu
-    // location: OpenSHC/UI
+    // location: OpenSHC/Game/GameCore
     // type: function
     SHC_3BB0A8C1_0x00471A80 = 0x00471A80,
     // label: hideOrUnhideUI
@@ -25652,87 +25652,87 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004805D0 = 0x004805D0,
     // label: InitialAnnounceReply
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00480640 = 0x00480640,
     // label: AnnounceGameVersion
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00480680 = 0x00480680,
     // label: AnnouncePlayerInformationSuchAsNameLordTypeAndAvailableAIVS
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00480710 = 0x00480710,
     // label: ShareGameSeedAndMultiplayerSettingsAndStartGame
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00480980 = 0x00480980,
     // label: CommandCheckSync
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00480B10 = 0x00480B10,
     // label: AnnounceTeamsAndPositions
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00480BE0 = 0x00480BE0,
     // label: ClickNavigateMenuOrEscape
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00480DB0 = 0x00480DB0,
     // label: MakeUnitSelection
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00480E60 = 0x00480E60,
     // label: ClickMoveUnit
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00480F00 = 0x00480F00,
     // label: ClickErase
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00481050 = 0x00481050,
     // label: ClickSetLand
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00481120 = 0x00481120,
     // label: ClickRaiseLand
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00481250 = 0x00481250,
     // label: ClickSetTerrain
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x004813C0 = 0x004813C0,
     // label: ClickHeightEqualize
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00481580 = 0x00481580,
     // label: ClickTerrainHeightMinOrMax
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x004816F0 = 0x004816F0,
     // label: ClickCreatePlateau
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00481860 = 0x00481860,
     // label: ClickPlaceWall
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x004819D0 = 0x004819D0,
     // label: ClickPlaceRockOrTree
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00481B50 = 0x00481B50,
     // label: ClickRaiseLand2Unk
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00481C80 = 0x00481C80,
     // label: ClickPlaceBuilding
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00481D90 = 0x00481D90,
     // label: ClickDestroyBuilding
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00481F40 = 0x00481F40,
     // type: /pointer
@@ -25808,83 +25808,83 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004821D5 = 0x004821D5,
     // label: ClickRecruitUnit
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x004821E0 = 0x004821E0,
     // label: _REMOVED_COMMAND1_
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00482280 = 0x00482280,
     // label: ClickSetBuildingProductionType
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00482290 = 0x00482290,
     // label: ClickChangeTaxes
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00482360 = 0x00482360,
     // label: ClickChangeRations
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x004823C0 = 0x004823C0,
     // label: ClickGiveUnitsInstruction
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00482420 = 0x00482420,
     // label: ClickSomethingWithDrawBridgeUnk
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00482550 = 0x00482550,
     // label: ClickBuyOrSell
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00482620 = 0x00482620,
     // label: ClickDestroy
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x004826C0 = 0x004826C0,
     // label: ClickPlaceSiegeTent
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x004827E0 = 0x004827E0,
     // label: ClickBuildingSleep
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00482A40 = 0x00482A40,
     // label: ClickCreateAnimal
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00482AA0 = 0x00482AA0,
     // label: ClickOpenOrCloseGate
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00482BB0 = 0x00482BB0,
     // label: ShareDesyncedHashes
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00482C80 = 0x00482C80,
     // label: CommandChangeMapSelection
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00483290 = 0x00483290,
     // label: AcknowledgeMapExistence
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x004833F0 = 0x004833F0,
     // label: ShareMSVMapIndex
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x004834B0 = 0x004834B0,
     // label: ClickInitOrChangeGameIntensityAndBalance
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00483570 = 0x00483570,
     // label: SharePlayerName
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00483850 = 0x00483850,
     // label: SendResyncCharLayer
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00483A00 = 0x00483A00,
     // type: /undefined *32
@@ -25964,7 +25964,7 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x004840B4 = 0x004840B4,
     // label: ResyncShortLayer
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x004840C0 = 0x004840C0,
     // type: /undefined *32
@@ -26004,115 +26004,115 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x004843EC = 0x004843EC,
     // label: ResyncStatus2
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x004843F0 = 0x004843F0,
     // label: ResetSyncStatusUnk
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00484450 = 0x00484450,
     // label: ClickRepairTower
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x004844A0 = 0x004844A0,
     // label: CommandSpawnEntity
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x004845B0 = 0x004845B0,
     // label: ClickUnitStance
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x004847B0 = 0x004847B0,
     // label: ClickExtendRallyPoint
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00484850 = 0x00484850,
     // label: SiegeEngineRelated
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00484960 = 0x00484960,
     // label: TribeRelated1
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00484A00 = 0x00484A00,
     // label: ReleaseDogs
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00484A70 = 0x00484A70,
     // label: RemoveTowerSiegeEngine
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00484B10 = 0x00484B10,
     // label: DestroyWallOrPitch
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00484C40 = 0x00484C40,
     // label: DeselectUnit
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00484DA0 = 0x00484DA0,
     // label: SetField45To100
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00484E10 = 0x00484E10,
     // label: ResyncZone
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00484E70 = 0x00484E70,
     // label: KickPlayerUnk
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00484F30 = 0x00484F30,
     // label: CommandSelectionReplenishAmmo
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00485020 = 0x00485020,
     // label: BroadCastSyncRelatedStatus
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x004850E0 = 0x004850E0,
     // label: VoteKick_K_D_B_G_J
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00485140 = 0x00485140,
     // label: SyncPacketSizeAnnouncement
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00485210 = 0x00485210,
     // label: ShareAnnouncementWithHost
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x004852D0 = 0x004852D0,
     // label: CloseModalDialogForEveryone
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00485330 = 0x00485330,
     // label: SomePlayerNameUpdateCommand
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00485380 = 0x00485380,
     // label: FlagsAndBraziersCommandUnk
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00485520 = 0x00485520,
     // label: NotifyLaggingPlayer
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x004855C0 = 0x004855C0,
     // label: SomeKindOfMultiplayerPingUnk
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00485650 = 0x00485650,
     // label: ShareGameStatePartialHashes
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x004856E0 = 0x004856E0,
     // label: ResyncStatusStart
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00485790 = 0x00485790,
     // label: SetUnitAssemblyPoint
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00485830 = 0x00485830,
     // type: /pointer
@@ -26328,27 +26328,27 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x00485C02 = 0x00485C02,
     // label: StartSendingMapFile
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00485C10 = 0x00485C10,
     // label: StartReceivingMapFile
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00485CC0 = 0x00485CC0,
     // label: MapSendingRelated
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00485E80 = 0x00485E80,
     // label: HostAnnounceRoundTable
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00485F20 = 0x00485F20,
     // label: AddAIPlayer
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00486040 = 0x00486040,
     // label: SendPlayerToPlayerRequestOrResponse
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00486140 = 0x00486140,
     // type: /undefined *32
@@ -26364,15 +26364,15 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x00486318 = 0x00486318,
     // label: ShareAIVHash
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00486320 = 0x00486320,
     // label: UpdateSkirmishGameMenuFaceBitmap
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x004863A0 = 0x004863A0,
     // label: ActiveTacticalPowers
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00486530 = 0x00486530,
     // label: checkSkirmishGameDefeat
@@ -26420,7 +26420,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x00486ACF = 0x00486ACF,
     // label: UpgradeOldSection1124
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x00486AD0 = 0x00486AD0,
     // type: function
@@ -26517,117 +26517,117 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004892F0 = 0x004892F0,
     // label: InitialAnnounceToHost
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x004893C0 = 0x004893C0,
     // label: AssignPlayerIDToPlayerSlot
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00489410 = 0x00489410,
     // label: TriggerLobbyPlayerInformationRefresh
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x004894F0 = 0x004894F0,
     // label: ClickTauntOrChat
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x004895E0 = 0x004895E0,
     // type: function
     SHC_3BB0A8C1_0x00489810 = 0x00489810,
     // label: AutoSaveTriggered
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00489880 = 0x00489880,
     // type: function
     SHC_3BB0A8C1_0x00489A10 = 0x00489A10,
     // label: SetPlayerNameUnk
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00489AC0 = 0x00489AC0,
     // label: CommandLoadMapHeader
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00489C80 = 0x00489C80,
     // label: SubmitMSVMapIndexAndProperties
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00489E30 = 0x00489E30,
     // type: function
     SHC_3BB0A8C1_0x0048A050 = 0x0048A050,
     // label: ResyncChimp
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x0048A0E0 = 0x0048A0E0,
     // label: SendResyncBuilding
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x0048A1F0 = 0x0048A1F0,
     // label: SendResyncVeg
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x0048A2A0 = 0x0048A2A0,
     // label: SendResyncTribe
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x0048A350 = 0x0048A350,
     // label: SendResyncPlayerData
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x0048A460 = 0x0048A460,
     // label: SendResyncUnknown
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x0048A510 = 0x0048A510,
     // label: SendResyncEntity
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x0048A710 = 0x0048A710,
     // label: SendResyncIntLayer
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x0048A7C0 = 0x0048A7C0,
     // label: DestroyPlayer
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x0048A8A0 = 0x0048A8A0,
     // type: function
     SHC_3BB0A8C1_0x0048A9F0 = 0x0048A9F0,
     // label: ResyncMoat
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x0048AA80 = 0x0048AA80,
     // label: ResyncTeleClimb
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x0048AB40 = 0x0048AB40,
     // label: ResyncPitch
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x0048ABF0 = 0x0048ABF0,
     // label: CommandSwitchTeams
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x0048ACB0 = 0x0048ACB0,
     // label: SyncRelatedSomething
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x0048B170 = 0x0048B170,
     // label: SendQuitGameQuestion
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x0048B280 = 0x0048B280,
     // label: ShareQuitGameVote
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x0048B330 = 0x0048B330,
     // label: VoteKick_SEND_L_E_C_A_F_H_ZAP
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x0048B4E0 = 0x0048B4E0,
     // type: function
     SHC_3BB0A8C1_0x0048B5B0 = 0x0048B5B0,
     // label: ShareMapHashForMapName
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x0048B6C0 = 0x0048B6C0,
     // type: function
@@ -26635,15 +26635,15 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0048B850 = 0x0048B850,
     // label: ShareMapPart
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x0048B8F0 = 0x0048B8F0,
     // label: ResyncVillage
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x0048BBE0 = 0x0048BBE0,
     // label: ResyncAIZone
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x0048BC90 = 0x0048BC90,
     // label: compareGameVersions
@@ -26877,23 +26877,23 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0048F850 = 0x0048F850,
     // label: AskForPlayerSlotAssignment
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x0048F870 = 0x0048F870,
     // label: HostShareLobbyState
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x0048FAA0 = 0x0048FAA0,
     // label: ResyncStartCS_CS_Sub
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x0048FC20 = 0x0048FC20,
     // label: ResyncResumeCS
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x0048FCB0 = 0x0048FCB0,
     // label: HostRemoveAIPlayerBySlotID
-    // location: OpenSHC/Commands
+    // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x0048FFD0 = 0x0048FFD0,
     // label: restoreSkirmishLobbySetup
@@ -29084,23 +29084,23 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004A4C70 = 0x004A4C70,
     // label: UpdateLadderManState01
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Navigation
     // type: function
     SHC_3BB0A8C1_0x004A4D60 = 0x004A4D60,
     // label: UpdateLadderManState03
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Navigation
     // type: function
     SHC_3BB0A8C1_0x004A4E40 = 0x004A4E40,
     // label: UpdateLadderManState04
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Navigation
     // type: function
     SHC_3BB0A8C1_0x004A4F90 = 0x004A4F90,
     // label: UpdateLadderManState05
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Navigation
     // type: function
     SHC_3BB0A8C1_0x004A50E0 = 0x004A50E0,
     // label: UpdateLadderManState07
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Navigation
     // type: function
     SHC_3BB0A8C1_0x004A5230 = 0x004A5230,
     // label: clearActiveClimbDataOfType6And7
@@ -31313,8 +31313,8 @@ enum {
     SHC_3BB0A8C1_0x004B7980 = 0x004B7980,
     // type: function
     SHC_3BB0A8C1_0x004B79A0 = 0x004B79A0,
-    // label: GetDifficultyMultipliedValue
-    // location: OpenSHC/Global
+    // label: getDifficultyMultipliedValue
+    // location: OpenSHC/Map/MapPropertiesState
     // type: function
     SHC_3BB0A8C1_0x004B7AB0 = 0x004B7AB0,
     // label: playVideoOverMap
@@ -37667,10 +37667,6 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004C1770 = 0x004C1770,
-    // type: function
-    SHC_3BB0A8C1_0x004C17EA = 0x004C17EA,
-    // type: function
-    SHC_3BB0A8C1_0x004C19E6 = 0x004C19E6,
     // label: applyActionMarriage
     // location:
     SHC_3BB0A8C1_0x004C1A7B = 0x004C1A7B,
@@ -37678,7 +37674,7 @@ enum {
     // location:
     SHC_3BB0A8C1_0x004C1AF2 = 0x004C1AF2,
     // type: function
-    SHC_3BB0A8C1_0x004C1B34 = 0x004C1B34,
+    SHC_3BB0A8C1_0x004C1C90 = 0x004C1C90,
     // type: /undefined *32
     SHC_3BB0A8C1_0x004C20DC = 0x004C20DC,
     // type: /undefined *32
@@ -39399,8 +39395,8 @@ enum {
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CC250 = 0x004CC250,
-    // label: GetUnitTypeIndexForUnitID
-    // location: OpenSHC/Global
+    // label: getUnitTypeIndexForUnitID
+    // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CC390 = 0x004CC390,
     // label: generateSiegeCreationInformation
@@ -39823,12 +39819,12 @@ enum {
     SHC_3BB0A8C1_0x004CCFA0 = 0x004CCFA0,
     // type: /byte
     SHC_3BB0A8C1_0x004CCFA1 = 0x004CCFA1,
-    // label: ChecksAndGenerateAITribesForPlayerIfNotExisting
-    // location: OpenSHC/Global
+    // label: checksAndGenerateAITribesForPlayerIfNotExisting
+    // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CCFB0 = 0x004CCFB0,
-    // label: CheckTribeActivityPercentages
-    // location: OpenSHC/Global
+    // label: checkTribeActivityPercentages
+    // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004CD070 = 0x004CD070,
     // label: sendUnitsToKeep
@@ -40149,28 +40145,28 @@ enum {
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0D40 = 0x004D0D40,
-    // label: PlayWillNotHelp1BikFromPlayerToPlayer
-    // location: OpenSHC/Global
+    // label: playWillNotHelp1BikFromPlayerToPlayer
+    // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0DB0 = 0x004D0DB0,
-    // label: PlayWillNotHelp2BikFromPlayerToPlayer
-    // location: OpenSHC/Global
+    // label: playWillNotHelp2BikFromPlayerToPlayer
+    // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0E00 = 0x004D0E00,
-    // label: PlayWillHelpBikFromPlayerToPlayer
-    // location: OpenSHC/Global
+    // label: playWillHelpBikFromPlayerToPlayer
+    // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0E50 = 0x004D0E50,
-    // label: PlayWillNotAttack1BikFromPlayerToPlayer
-    // location: OpenSHC/Global
+    // label: playWillNotAttack1BikFromPlayerToPlayer
+    // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0EA0 = 0x004D0EA0,
-    // label: PlayWillNotAttack2BikFromPlayerToPlayer
-    // location: OpenSHC/Global
+    // label: playWillNotAttack2BikFromPlayerToPlayer
+    // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0EF0 = 0x004D0EF0,
-    // label: PlayWillAttackBikFromPlayerToPlayer
-    // location: OpenSHC/Global
+    // label: playWillAttackBikFromPlayerToPlayer
+    // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D0F40 = 0x004D0F40,
     // label: playJokeBikFromAIToHuman
@@ -43866,20 +43862,20 @@ enum {
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F3730 = 0x004F3730,
-    // label: VersioningFixTrees
-    // location: OpenSHC/Global
+    // label: UpdateFixTrees2
+    // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x004F37B0 = 0x004F37B0,
-    // label: RemoveCertainRockTypesUnk
-    // location: OpenSHC/Global
+    // label: UpgradeRemoveCertainRockTypesUnk
+    // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x004F3840 = 0x004F3840,
     // label: UpdateTreesOfCertainTypes
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x004F38A0 = 0x004F38A0,
-    // label: RemoveRocksBeyond1000
-    // location: OpenSHC/Global
+    // label: UpgradeRemoveRocksBeyond1000
+    // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x004F3900 = 0x004F3900,
     // label: constructLandscapeState
@@ -46949,8 +46945,8 @@ enum {
     // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500250 = 0x00500250,
-    // label: ReturnMoatIDForPlayerIDs
-    // location: OpenSHC/Global
+    // label: returnMoatIDForPlayerIDs
+    // location: OpenSHC/Map/TileMapState
     // type: function
     SHC_3BB0A8C1_0x00500290 = 0x00500290,
     // label: clearMoatData
@@ -47108,7 +47104,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x005011A0 = 0x005011A0,
     // label: UpgradeMapLogicToVersion_125
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x005011C0 = 0x005011C0,
     // label: UpgradeMapLogicToVersion_Unknown1
@@ -47120,15 +47116,15 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00501350 = 0x00501350,
     // label: UpgradeMapLogicToVersion_128
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x00501440 = 0x00501440,
     // label: UpgradeMapLogicToVersion_102
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x00501490 = 0x00501490,
     // label: UpgradeMapLogicToVersion_120
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x005014F0 = 0x005014F0,
     // type: function
@@ -47136,13 +47132,13 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00501550 = 0x00501550,
     // label: UpgradeMapLogicToVersion_145
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x005016D0 = 0x005016D0,
     // type: function
     SHC_3BB0A8C1_0x005016E0 = 0x005016E0,
     // label: UpgradeMapLogicToVersion_147
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x00501730 = 0x00501730,
     // label: UpgradeMapLogicToVersion_Unknown3
@@ -51681,12 +51677,12 @@ enum {
     SHC_3BB0A8C1_0x0051AB60 = 0x0051AB60,
     // type: function
     SHC_3BB0A8C1_0x0051ABB0 = 0x0051ABB0,
-    // label: AttackInfoHasHigh2Building
-    // location: OpenSHC/Global
+    // label: attackInfoHasHigh2Building
+    // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051AC80 = 0x0051AC80,
-    // label: AttackInfoHasArch2Building
-    // location: OpenSHC/Global
+    // label: attackInfoHasArch2Building
+    // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051ACB0 = 0x0051ACB0,
     // label: expandAIZoneLayerStage1
@@ -51727,8 +51723,8 @@ enum {
     SHC_3BB0A8C1_0x0051B110 = 0x0051B110,
     // type: function
     SHC_3BB0A8C1_0x0051B120 = 0x0051B120,
-    // label: AssignTribeToSupportPoint
-    // location: OpenSHC/Global
+    // label: assignTribeToSupportPoint
+    // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051B190 = 0x0051B190,
     // label: getSiegeIndexForTile
@@ -52886,8 +52882,8 @@ enum {
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00523240 = 0x00523240,
-    // label: ClearAnimalSpawnLocationsUnk
-    // location: OpenSHC/Global
+    // label: clearAnimalSpawnLocationsUnk
+    // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x005232E0 = 0x005232E0,
     // type: function
@@ -55934,16 +55930,16 @@ enum {
     SHC_3BB0A8C1_0x00530650 = 0x00530650,
     // type: function
     SHC_3BB0A8C1_0x00530690 = 0x00530690,
-    // label: updateLogicAndClimbData
-    // location: OpenSHC/Global
+    // label: UpdateLogicAndClimbData
+    // location: OpenSHC/Map/Navigation
     // type: function
     SHC_3BB0A8C1_0x00530720 = 0x00530720,
-    // label: detachLadderman
+    // label: DetachLadderman
     // location: OpenSHC/Global
     // type: function
     SHC_3BB0A8C1_0x00530760 = 0x00530760,
     // label: UpdateSiegeTent
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x005307B0 = 0x005307B0,
     // label: setRandomNumberOnCows
@@ -55957,11 +55953,11 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00530990 = 0x00530990,
     // label: UpdateBurningAnimal1
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x005309E0 = 0x005309E0,
     // label: UpdateBurningAnimal2
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00530A90 = 0x00530A90,
     // label: IncrementAndOptionalUpdateAVValueRelated
@@ -66271,23 +66267,23 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0053BB90 = 0x0053BB90,
     // label: UpdateBurningMan
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x0053BC20 = 0x0053BC20,
     // label: UpdateCamel
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x0053BE00 = 0x0053BE00,
     // label: UpdateShield
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x0053C300 = 0x0053C300,
     // type: function
     SHC_3BB0A8C1_0x0053C400 = 0x0053C400,
     // type: function
     SHC_3BB0A8C1_0x0053C590 = 0x0053C590,
-    // label: ConsiderTakingABreakUnk
-    // location: OpenSHC/Global
+    // label: UpdateWorker_ConsiderTakingABreakUnk
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x0053CAC0 = 0x0053CAC0,
     // label: getEnemyUnitIDNearby
@@ -66757,7 +66753,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0053E9F0 = 0x0053E9F0,
     // label: UpdatePeasant
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x0053EAA0 = 0x0053EAA0,
     // type: /pointer
@@ -66899,7 +66895,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x0053F930 = 0x0053F930,
     // label: UpdateOx
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x0053F940 = 0x0053F940,
     // label: ifOnADefensiveStructureSetDestinationInDirectionOfTarget
@@ -66989,27 +66985,27 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x005401CA = 0x005401CA,
     // label: UpdateMiner
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x005401D0 = 0x005401D0,
     // label: UpdateHealer
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00540440 = 0x00540440,
     // label: UpdateInnkeeper
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00540EC0 = 0x00540EC0,
     // label: UpdateMerchant
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x005416B0 = 0x005416B0,
     // label: UpdateMerchantHorse
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00541A30 = 0x00541A30,
     // label: UpdateDeer
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00541DE0 = 0x00541DE0,
     // type: /undefined *32
@@ -67457,7 +67453,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x00542629 = 0x00542629,
     // label: UpdateRabbit
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00542630 = 0x00542630,
     // type: /undefined *32
@@ -67901,23 +67897,23 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x00542D05 = 0x00542D05,
     // label: UpdateCow
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00542D10 = 0x00542D10,
     // label: UpdateFireWatch
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00543340 = 0x00543340,
     // label: UpdateGhost
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00543B80 = 0x00543B80,
     // label: UpdateLady
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00543DC0 = 0x00543DC0,
     // label: UpdateSiegeTower
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00544750 = 0x00544750,
     // type: function
@@ -67925,7 +67921,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x005455E0 = 0x005455E0,
     // label: UpdateBatteringRam
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x005459B0 = 0x005459B0,
     // type: function
@@ -67935,7 +67931,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00545F00 = 0x00545F00,
     // label: UpdateChicken
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x005464F0 = 0x005464F0,
     // type: /undefined *32
@@ -67955,7 +67951,7 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x00546BBC = 0x00546BBC,
     // label: UpdateMother
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00546BC0 = 0x00546BC0,
     // type: /undefined *32
@@ -68001,7 +67997,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x005477B6 = 0x005477B6,
     // label: UpdateChild
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x005477C0 = 0x005477C0,
     // type: /undefined *32
@@ -68061,7 +68057,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x00549083 = 0x00549083,
     // label: UpdateJuggler
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00549090 = 0x00549090,
     // type: /undefined *32
@@ -68085,7 +68081,7 @@ enum {
     // type: /pointer
     SHC_3BB0A8C1_0x00549644 = 0x00549644,
     // label: UpdateFireEater
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00549650 = 0x00549650,
     // type: /undefined *32
@@ -69225,79 +69221,79 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0054C610 = 0x0054C610,
     // label: UpdateWoodcutter
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x0054C710 = 0x0054C710,
     // label: UpdateFletcher
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x0054D8F0 = 0x0054D8F0,
     // label: UpdateTunneler
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x0054E6C0 = 0x0054E6C0,
     // label: UpdateHunter
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x0054F860 = 0x0054F860,
     // label: UpdateQuarryMason
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00550A50 = 0x00550A50,
     // label: UpdateQuarryWorker
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00550D70 = 0x00550D70,
     // label: UpdatePitchman
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00551980 = 0x00551980,
     // label: UpdateWheatFarmer
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x005521D0 = 0x005521D0,
     // label: UpdateHopsFarmer
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00552F80 = 0x00552F80,
     // label: UpdateAppleFarmer
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00553AE0 = 0x00553AE0,
     // label: UpdateDairyFarmer
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00554500 = 0x00554500,
     // label: UpdateMiller
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00554CC0 = 0x00554CC0,
     // label: UpdateBaker
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00555880 = 0x00555880,
     // label: UpdateBrewer
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x005565D0 = 0x005565D0,
     // label: UpdatePoleTurner
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00557230 = 0x00557230,
     // label: UpdateBlacksmith
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00557F70 = 0x00557F70,
     // label: UpdateArmorer
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00558CB0 = 0x00558CB0,
     // label: UpdateTanner
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x005598D0 = 0x005598D0,
     // label: UpdateCrusaderArcher
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x0055A800 = 0x0055A800,
     // type: /undefined *32
@@ -69599,7 +69595,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x0055C7A9 = 0x0055C7A9,
     // label: UpdateCrossbowman
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x0055C7B0 = 0x0055C7B0,
     // type: /undefined *32
@@ -69889,7 +69885,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x0055DA4F = 0x0055DA4F,
     // label: UpdateSpearman
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x0055DA50 = 0x0055DA50,
     // type: /undefined *32
@@ -70187,7 +70183,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x0055F101 = 0x0055F101,
     // label: UpdatePikeman
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x0055F110 = 0x0055F110,
     // type: /undefined *32
@@ -70479,7 +70475,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x005606FD = 0x005606FD,
     // label: UpdateMaceman
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00560700 = 0x00560700,
     // type: /undefined *32
@@ -70775,7 +70771,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x00561C09 = 0x00561C09,
     // label: UpdateSwordsman
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00561C10 = 0x00561C10,
     // type: /undefined *32
@@ -71055,7 +71051,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x00562A9A = 0x00562A9A,
     // label: UpdateKnight
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00562AA0 = 0x00562AA0,
     // type: /undefined *32
@@ -71333,7 +71329,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x00563906 = 0x00563906,
     // label: UpdateLadderman
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00563910 = 0x00563910,
     // type: /undefined *32
@@ -71611,7 +71607,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x0056424E = 0x0056424E,
     // label: UpdateEngineer
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00564250 = 0x00564250,
     // type: /undefined *32
@@ -71921,19 +71917,19 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x00566005 = 0x00566005,
     // label: UpdateMinerIronFetcher
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00566010 = 0x00566010,
     // label: UpdatePriest
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00566750 = 0x00566750,
     // label: UpdateDrunkard
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00567320 = 0x00567320,
     // label: UpdateMonk
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00567640 = 0x00567640,
     // type: /undefined *32
@@ -72215,7 +72211,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x0056831E = 0x0056831E,
     // label: UpdateCatapult
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00568320 = 0x00568320,
     // type: function
@@ -72223,13 +72219,13 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00569300 = 0x00569300,
     // label: UpdateTrebuchet
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00569410 = 0x00569410,
     // type: function
     SHC_3BB0A8C1_0x0056A360 = 0x0056A360,
     // label: UpdateMangonel
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x0056A3F0 = 0x0056A3F0,
     // type: function
@@ -72237,25 +72233,25 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0056AF20 = 0x0056AF20,
     // label: UpdateLion
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x0056B0E0 = 0x0056B0E0,
     // label: UpdateHunterDog
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x0056B970 = 0x0056B970,
     // label: UpdateLord
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x0056C560 = 0x0056C560,
     // type: function
     SHC_3BB0A8C1_0x0056DAC0 = 0x0056DAC0,
     // label: UpdateJester
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x0056E190 = 0x0056E190,
     // label: UpdateBallista
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x0056ECD0 = 0x0056ECD0,
     // type: function
@@ -72265,11 +72261,11 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0056F910 = 0x0056F910,
     // label: UpdateCageDog
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x0056F9B0 = 0x0056F9B0,
     // label: UpdateArabianArcher
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00570400 = 0x00570400,
     // type: /undefined *32
@@ -72561,7 +72557,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x00571BFF = 0x00571BFF,
     // label: UpdateSlave
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00571C00 = 0x00571C00,
     // type: /undefined *32
@@ -72853,7 +72849,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x00572E75 = 0x00572E75,
     // label: UpdateSlinger
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00572E80 = 0x00572E80,
     // type: /undefined *32
@@ -72899,7 +72895,7 @@ enum {
     // type: /byte[124]
     SHC_3BB0A8C1_0x00574454 = 0x00574454,
     // label: UpdateAssassin
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x005744D0 = 0x005744D0,
     // type: /undefined *32
@@ -73200,12 +73196,12 @@ enum {
     SHC_3BB0A8C1_0x00575818 = 0x00575818,
     // type: /byte
     SHC_3BB0A8C1_0x00575819 = 0x00575819,
-    // label: HorseArcher_DoShooting
-    // location: OpenSHC/Global
+    // label: UpdateHorseArcher_DoShooting
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00575820 = 0x00575820,
     // label: UpdateArabianSwordsman
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00575C40 = 0x00575C40,
     // type: /undefined *32
@@ -73485,7 +73481,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x005769E6 = 0x005769E6,
     // label: UpdateFireThrower
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x005769F0 = 0x005769F0,
     // type: /undefined *32
@@ -73775,7 +73771,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x00577CBF = 0x00577CBF,
     // label: UpdateFireBallista
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00577CC0 = 0x00577CC0,
     // type: function
@@ -74083,7 +74079,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x0057AB43 = 0x0057AB43,
     // label: UpdateHorseArcher
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x0057AB50 = 0x0057AB50,
     // type: /undefined *32
@@ -97324,6 +97320,8 @@ enum {
     SHC_3BB0A8C1_0x00EC02F4 = 0x00EC02F4,
     // type: OpenSHC/Rendering/CreditsRelatedStructure[24]
     SHC_3BB0A8C1_0x00EC0348 = 0x00EC0348,
+    // type: /int
+    SHC_3BB0A8C1_0x00EC0828 = 0x00EC0828,
     // type: /undefined4
     SHC_3BB0A8C1_0x00EC082C = 0x00EC082C,
     // label: DAT_CurrentMenuID_3
@@ -97349,9 +97347,13 @@ enum {
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED2780 = 0x00ED2780,
     // type: /undefined4
+    SHC_3BB0A8C1_0x00ED2784 = 0x00ED2784,
+    // type: /undefined4
     SHC_3BB0A8C1_0x00ED2788 = 0x00ED2788,
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED278C = 0x00ED278C,
+    // type: /int
+    SHC_3BB0A8C1_0x00ED2790 = 0x00ED2790,
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED2794 = 0x00ED2794,
     // type: /undefined4

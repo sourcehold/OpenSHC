@@ -44,6 +44,10 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x0046CDF0, &DirectionAlgorithmState::computeMaskedBitAccumulator)
             computeMaskedBitAccumulator;
 
+            MACRO_FUNCTION_RESOLVER(byte (DirectionAlgorithmState::*)(byte, int), false,
+                Address::SHC_3BB0A8C1_0x0046CE30, &DirectionAlgorithmState::rotateByteLeft)
+            rotateByteLeft;
+
         } // namespace DirectionAlgorithmState_Func
     } // namespace Navigation
 } // namespace Map

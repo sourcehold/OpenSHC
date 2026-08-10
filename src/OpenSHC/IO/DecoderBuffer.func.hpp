@@ -16,7 +16,7 @@ namespace IO {
 
         using OpenSHC::IO::Helpers::BufferHelper;
 
-        MACRO_FUNCTION_RESOLVER(uint(__cdecl*)(char* buf, uint* size, BufferHelper* param), false,
+        MACRO_FUNCTION_RESOLVER(uint(__cdecl*)(char* buf, uint* size, void* param), false,
             Address::SHC_3BB0A8C1_0x0046D270, &OpenSHC::IO::DecoderBuffer::ReadBufferAndComputeHash)
         ReadBufferAndComputeHash;
 

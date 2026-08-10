@@ -36,8 +36,12 @@ namespace Map {
             &MapPropertiesState::determineScenarioMissionTypeAndResetEvents)
         determineScenarioMissionTypeAndResetEvents;
 
+        MACRO_FUNCTION_RESOLVER(int (MapPropertiesState::*)(int), false, Address::SHC_3BB0A8C1_0x004B7AB0,
+            &MapPropertiesState::getDifficultyMultipliedValue)
+        getDifficultyMultipliedValue;
+
         MACRO_FUNCTION_RESOLVER(
-            void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004B7FA0, &MapPropertiesState::sumUnitPoints)
+            int (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004B7FA0, &MapPropertiesState::sumUnitPoints)
         sumUnitPoints;
 
         MACRO_FUNCTION_RESOLVER(

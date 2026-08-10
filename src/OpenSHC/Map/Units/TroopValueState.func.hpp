@@ -181,6 +181,14 @@ namespace Map {
                 &TroopValueState::calculateArch2ClosestToTribeTargetUnit)
             calculateArch2ClosestToTribeTargetUnit;
 
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051AC80,
+                &TroopValueState::attackInfoHasHigh2Building)
+            attackInfoHasHigh2Building;
+
+            MACRO_FUNCTION_RESOLVER(undefined4 (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051ACB0,
+                &TroopValueState::attackInfoHasArch2Building)
+            attackInfoHasArch2Building;
+
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051ACE0,
                 &TroopValueState::expandAIZoneLayerStage1)
             expandAIZoneLayerStage1;
@@ -212,6 +220,10 @@ namespace Map {
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051B110,
                 &TroopValueState::pruneStaleSupportPoints)
             pruneStaleSupportPoints;
+
+            MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(uint, uint, int), false, Address::SHC_3BB0A8C1_0x0051B190,
+                &TroopValueState::assignTribeToSupportPoint)
+            assignTribeToSupportPoint;
 
             MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051B240,
                 &TroopValueState::getSiegeIndexForTile)

@@ -104,7 +104,7 @@ namespace Map {
 
             void bindPathPlanToAlgorithmStateAndReset(byte* pPathPlan);
 
-            void findClosestTileToStartingTile(int param_1);
+            int findClosestTileToStartingTile(int param_1);
 
             void findNextTileInExistingSearchThatIsModuloDistanceAway(int modulo, int x, int y);
 

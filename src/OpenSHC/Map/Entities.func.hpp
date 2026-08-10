@@ -121,6 +121,10 @@ namespace Map {
             void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00406FD0, &OpenSHC::Map::Entities::UpdateEntityType8)
         UpdateEntityType8;
 
+        MACRO_FUNCTION_RESOLVER(uint(__cdecl*)(int playerID, int miniTileX, int miniTileY, int tileHeightMin8, int two),
+            false, Address::SHC_3BB0A8C1_0x00407130, &OpenSHC::Map::Entities::IgniteFireAtMiniTile_Convenience)
+        IgniteFireAtMiniTile_Convenience;
+
     } // namespace Entities_Func
 } // namespace Map
 } // namespace OpenSHC

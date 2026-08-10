@@ -387,6 +387,10 @@ namespace Game {
             &GameStateStructures::switchPlayerOwnership)
         switchPlayerOwnership;
 
+        MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x0045B4A0,
+            &GameStateStructures::processPeasantSpawnAndDespawnCycle)
+        processPeasantSpawnAndDespawnCycle;
+
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(), false, Address::SHC_3BB0A8C1_0x0045B6B0,
             &GameStateStructures::updateTrader)
         updateTrader;

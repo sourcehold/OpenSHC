@@ -62,11 +62,31 @@ namespace Map {
 
         void __stdcall resetTeams();
 
+        void __stdcall UpgradeOldSection1124();
+
+        void __stdcall UpdateFixTrees2();
+
+        void __stdcall UpgradeRemoveCertainRockTypesUnk();
+
         void __stdcall UpdateTreesOfCertainTypes();
+
+        void __stdcall UpgradeRemoveRocksBeyond1000();
+
+        void __stdcall UpgradeMapLogicToVersion_125();
 
         void __stdcall UpgradeMapLogicToVersion_Unknown1();
 
         void __stdcall UpgradeMapLogicToVersion_Unknown2();
+
+        void __stdcall UpgradeMapLogicToVersion_128();
+
+        void __stdcall UpgradeMapLogicToVersion_102();
+
+        void __stdcall UpgradeMapLogicToVersion_120();
+
+        void __stdcall UpgradeMapLogicToVersion_145();
+
+        void __stdcall UpgradeMapLogicToVersion_147();
 
         void __stdcall UpgradeMapLogicToVersion_Unknown3();
 

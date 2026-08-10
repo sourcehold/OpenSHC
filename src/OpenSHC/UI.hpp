@@ -512,8 +512,6 @@ namespace UI {
 
     undefined4 __cdecl TicksSinceCounterStart();
 
-    void __stdcall exitToScenarioDescriptionMenu();
-
     void __cdecl MenuItemRenderFunction_NetworkSessions_Buttons(int param_1, ...);
 
     void __cdecl MenuModalRenderFunction_ChooseNetworkServiceProvider(int x, int y, int width, int height);

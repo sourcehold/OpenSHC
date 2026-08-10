@@ -79,6 +79,10 @@ namespace Game {
         incrementMission;
 
         MACRO_FUNCTION_RESOLVER(
+            void (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x00471A80, &GameCore::exitToScenarioDescriptionMenu)
+        exitToScenarioDescriptionMenu;
+
+        MACRO_FUNCTION_RESOLVER(
             void (GameCore::*)(), false, Address::SHC_3BB0A8C1_0x00471AA0, &GameCore::hideOrUnhideUI)
         hideOrUnhideUI;
 

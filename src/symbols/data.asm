@@ -1429,6 +1429,8 @@ PUBLIC ?instance@?$Extern@UCampaignInfoSubStructure1@Game@OpenSHC@@$0OMACPE@@Str
 
 PUBLIC ?instance@?$Extern@$$BY0BI@UCreditsRelatedStructure@Rendering@OpenSHC@@$0OMADEI@@StructResolver@@2PAUCreditsRelatedStructure@Rendering@OpenSHC@@A
 
+PUBLIC ?instance@?$Extern@H$0OMAICI@@StructResolver@@2HA
+
 PUBLIC ?instance@?$Extern@I$0OMAICM@@StructResolver@@2IA
 
 PUBLIC ?instance@?$Extern@M$0OMAIDE@@StructResolver@@2MA
@@ -1449,9 +1451,13 @@ PUBLIC ?instance@?$Extern@H$0ONCHHM@@StructResolver@@2HA
 
 PUBLIC ?instance@?$Extern@I$0ONCHIA@@StructResolver@@2IA
 
+PUBLIC ?instance@?$Extern@I$0ONCHIE@@StructResolver@@2IA
+
 PUBLIC ?instance@?$Extern@I$0ONCHII@@StructResolver@@2IA
 
 PUBLIC ?instance@?$Extern@I$0ONCHIM@@StructResolver@@2IA
+
+PUBLIC ?instance@?$Extern@H$0ONCHJA@@StructResolver@@2HA
 
 PUBLIC ?instance@?$Extern@I$0ONCHJE@@StructResolver@@2IA
 
@@ -3048,6 +3054,8 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@$$BY0BI@UCreditsRelatedStructure@Rendering@OpenSHC@@$0OMADEI@@StructResolver@@2PAUCreditsRelatedStructure@Rendering@OpenSHC@@A EQU 00EC0348h
 
+?instance@?$Extern@H$0OMAICI@@StructResolver@@2HA EQU 00EC0828h
+
 ?instance@?$Extern@I$0OMAICM@@StructResolver@@2IA EQU 00EC082Ch
 
 ?instance@?$Extern@M$0OMAIDE@@StructResolver@@2MA EQU 00EC0834h
@@ -3068,9 +3076,13 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@I$0ONCHIA@@StructResolver@@2IA EQU 00ED2780h
 
+?instance@?$Extern@I$0ONCHIE@@StructResolver@@2IA EQU 00ED2784h
+
 ?instance@?$Extern@I$0ONCHII@@StructResolver@@2IA EQU 00ED2788h
 
 ?instance@?$Extern@I$0ONCHIM@@StructResolver@@2IA EQU 00ED278Ch
+
+?instance@?$Extern@H$0ONCHJA@@StructResolver@@2HA EQU 00ED2790h
 
 ?instance@?$Extern@I$0ONCHJE@@StructResolver@@2IA EQU 00ED2794h
 

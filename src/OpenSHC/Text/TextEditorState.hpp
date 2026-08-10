@@ -89,7 +89,7 @@ namespace Text {
 
         int findOrAddHelpSectionName(char* param_1);
 
-        WCHAR parseHLPPart(FILE* filePointer);
+        uint parseHLPPart(FILE* filePointer);
 
         void loadHelpSectionGraphics();
 
@@ -105,7 +105,7 @@ namespace Text {
 
         int findHelpGraphicIndexByName(char* param_1);
 
-        void findOrAddHelpGraphicName(char* param_1);
+        int findOrAddHelpGraphicName(char* param_1);
 
         int getNextHelpSectionID(int param_1);
 
@@ -119,7 +119,7 @@ namespace Text {
 
         int findSoundIndexByName(char* param_1);
 
-        void findOrAddSoundName(char* param_1);
+        int findOrAddSoundName(char* param_1);
 
         void saveHelpFileToResource();
 
@@ -129,13 +129,13 @@ namespace Text {
 
         void closeHelpDialogAndReturnToMenu();
 
-        void readCrusaderHelpHlp(LPCSTR param_1);
+        int readCrusaderHelpHlp(LPCSTR param_1);
 
         undefined4 loadAndParseHelpFile(FILE* param_1);
 
         void parseHlp();
 
-        void processHelpRichTextTokens(int param_1);
+        int processHelpRichTextTokens(int param_1);
 
         void setTextRenderingLogic();
 

@@ -131,6 +131,10 @@ namespace Map {
 
             int calculateArch2ClosestToTribeTargetUnit(int tribeID);
 
+            BOOLEnum attackInfoHasHigh2Building(int buildingID);
+
+            undefined4 attackInfoHasArch2Building(int buildingID);
+
             void expandAIZoneLayerStage1();
 
             void expandAIZoneLayerStage2();
@@ -146,6 +150,8 @@ namespace Map {
             int getSupportPointIndex(int tile);
 
             void pruneStaleSupportPoints();
+
+            int assignTribeToSupportPoint(uint x, uint y, int tribeID);
 
             int getSiegeIndexForTile(int tile);
 

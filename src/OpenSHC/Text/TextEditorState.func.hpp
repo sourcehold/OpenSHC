@@ -33,7 +33,7 @@ namespace Text {
         findOrAddHelpSectionName;
 
         MACRO_FUNCTION_RESOLVER(
-            WCHAR (TextEditorState::*)(FILE*), false, Address::SHC_3BB0A8C1_0x0045D200, &TextEditorState::parseHLPPart)
+            uint (TextEditorState::*)(FILE*), false, Address::SHC_3BB0A8C1_0x0045D200, &TextEditorState::parseHLPPart)
         parseHLPPart;
 
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(), false, Address::SHC_3BB0A8C1_0x0045D370,
@@ -64,7 +64,7 @@ namespace Text {
             &TextEditorState::findHelpGraphicIndexByName)
         findHelpGraphicIndexByName;
 
-        MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(char*), false, Address::SHC_3BB0A8C1_0x0045D8F0,
+        MACRO_FUNCTION_RESOLVER(int (TextEditorState::*)(char*), false, Address::SHC_3BB0A8C1_0x0045D8F0,
             &TextEditorState::findOrAddHelpGraphicName)
         findOrAddHelpGraphicName;
 
@@ -92,7 +92,7 @@ namespace Text {
             &TextEditorState::findSoundIndexByName)
         findSoundIndexByName;
 
-        MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(char*), false, Address::SHC_3BB0A8C1_0x0045DAE0,
+        MACRO_FUNCTION_RESOLVER(int (TextEditorState::*)(char*), false, Address::SHC_3BB0A8C1_0x0045DAE0,
             &TextEditorState::findOrAddSoundName)
         findOrAddSoundName;
 
@@ -112,7 +112,7 @@ namespace Text {
             &TextEditorState::closeHelpDialogAndReturnToMenu)
         closeHelpDialogAndReturnToMenu;
 
-        MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(LPCSTR), false, Address::SHC_3BB0A8C1_0x0045F470,
+        MACRO_FUNCTION_RESOLVER(int (TextEditorState::*)(LPCSTR), false, Address::SHC_3BB0A8C1_0x0045F470,
             &TextEditorState::readCrusaderHelpHlp)
         readCrusaderHelpHlp;
 
@@ -124,7 +124,7 @@ namespace Text {
             void (TextEditorState::*)(), false, Address::SHC_3BB0A8C1_0x0045F5B0, &TextEditorState::parseHlp)
         parseHlp;
 
-        MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(int), false, Address::SHC_3BB0A8C1_0x0045FDC0,
+        MACRO_FUNCTION_RESOLVER(int (TextEditorState::*)(int), false, Address::SHC_3BB0A8C1_0x0045FDC0,
             &TextEditorState::processHelpRichTextTokens)
         processHelpRichTextTokens;
 

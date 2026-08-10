@@ -38,7 +38,7 @@ namespace Rendering {
             &ViewportRenderState::tweakValidTilesToExcludeMapBorders)
         tweakValidTilesToExcludeMapBorders;
 
-        MACRO_FUNCTION_RESOLVER(void (ViewportRenderState::*)(), false, Address::SHC_3BB0A8C1_0x004E2600,
+        MACRO_FUNCTION_RESOLVER(int (ViewportRenderState::*)(), false, Address::SHC_3BB0A8C1_0x004E2600,
             &ViewportRenderState::resetBatchedRender)
         resetBatchedRender;
 

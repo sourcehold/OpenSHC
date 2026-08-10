@@ -125,7 +125,7 @@ namespace Map {
                 &UnitsState::setFacingDirectionTowardUnitMicro)
             setFacingDirectionTowardUnitMicro;
 
-            MACRO_FUNCTION_RESOLVER(bool (UnitsState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x0052FE90,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x0052FE90,
                 &UnitsState::setUnitFacingDirectionForTargetXandY)
             setUnitFacingDirectionForTargetXandY;
 
@@ -249,7 +249,7 @@ namespace Map {
                 &UnitsState::getDestination2EqualsGivenCoordinates)
             getDestination2EqualsGivenCoordinates;
 
-            MACRO_FUNCTION_RESOLVER(bool (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00533960,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00533960,
                 &UnitsState::isAtSecondaryDestination)
             isAtSecondaryDestination;
 
@@ -594,7 +594,7 @@ namespace Map {
                 int (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00537840, &UnitsState::getRawDeerCount)
             getRawDeerCount;
 
-            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00537880,
+            MACRO_FUNCTION_RESOLVER(int (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00537880,
                 &UnitsState::findNearestShootableDeer)
             findNearestShootableDeer;
 

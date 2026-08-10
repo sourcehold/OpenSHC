@@ -33,8 +33,8 @@ namespace Map {
             Address::SHC_3BB0A8C1_0x00401060, &TileMapState::processEntityDamageToBuildingCollateralThunk)
         processEntityDamageToBuildingCollateralThunk;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (TileMapState::*)(undefined4, undefined4, undefined4, undefined4, undefined4, undefined4, BOOLEnum),
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (TileMapState::*)(
+                                    undefined4, undefined4, undefined4, undefined4, undefined4, undefined4, BOOLEnum),
             false, Address::SHC_3BB0A8C1_0x00409300, &TileMapState::processDamageToBuildingThunk)
         processDamageToBuildingThunk;
 
@@ -326,7 +326,7 @@ namespace Map {
             Address::SHC_3BB0A8C1_0x004FC7C0, &TileMapState::isCliffDropInDirection)
         isCliffDropInDirection;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint), false, Address::SHC_3BB0A8C1_0x004FC810,
+        MACRO_FUNCTION_RESOLVER(int (TileMapState::*)(int, uint, uint), false, Address::SHC_3BB0A8C1_0x004FC810,
             &TileMapState::computeClimbRampRotation)
         computeClimbRampRotation;
 
@@ -381,6 +381,10 @@ namespace Map {
         MACRO_FUNCTION_RESOLVER(
             int (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x00500250, &TileMapState::returnOwnedMoatAtTile)
         returnOwnedMoatAtTile;
+
+        MACRO_FUNCTION_RESOLVER(int (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00500290,
+            &TileMapState::returnMoatIDForPlayerIDs)
+        returnMoatIDForPlayerIDs;
 
         MACRO_FUNCTION_RESOLVER(
             void (TileMapState::*)(uint), false, Address::SHC_3BB0A8C1_0x005002D0, &TileMapState::clearMoatData)
@@ -462,7 +466,7 @@ namespace Map {
             &TileMapState::setSignpostDistanceForCampaignMission)
         setSignpostDistanceForCampaignMission;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint), false, Address::SHC_3BB0A8C1_0x00501180,
+        MACRO_FUNCTION_RESOLVER(int (TileMapState::*)(int, uint, uint), false, Address::SHC_3BB0A8C1_0x00501180,
             &TileMapState::spreadFlagPlacementAlgorithm)
         spreadFlagPlacementAlgorithm;
 
@@ -760,7 +764,7 @@ namespace Map {
             Address::SHC_3BB0A8C1_0x005162D0, &TileMapState::placeBuilding)
         placeBuilding;
 
-        MACRO_FUNCTION_RESOLVER(uint (TileMapState::*)(int, uint, uint, int, int, int, BOOLEnum, int), false,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (TileMapState::*)(int, uint, uint, int, int, int, BOOLEnum, int), false,
             Address::SHC_3BB0A8C1_0x00516B80, &TileMapState::processDamageToBuilding)
         processDamageToBuilding;
 

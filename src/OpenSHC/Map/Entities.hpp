@@ -66,6 +66,9 @@ namespace Map {
 
         void __stdcall UpdateEntityType8();
 
+        uint __cdecl IgniteFireAtMiniTile_Convenience(
+            int playerID, int miniTileX, int miniTileY, int tileHeightMin8, int two);
+
     } // namespace Entities
 } // namespace Map
 } // namespace OpenSHC

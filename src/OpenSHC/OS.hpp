@@ -47,7 +47,7 @@ namespace OS {
 
     int __cdecl _fclose(FILE* _File);
 
-    void __cdecl _fread(void* dstBuffer, size_t elSize, size_t count, FILE* file);
+    size_t __cdecl _fread(void* dstBuffer, size_t elSize, size_t count, FILE* file);
 
     void* __cdecl _malloc(size_t _Size);
 

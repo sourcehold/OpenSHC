@@ -158,6 +158,8 @@ namespace Map {
             dword spawnUnitsAroundLocation(
                 undefined4 param_1, int aroundX, int aroundY, int playerID, UnitType unitType, int count);
 
+            void clearAnimalSpawnLocationsUnk();
+
             void storeDeerXAndYinMapInfo(undefined4 x, undefined4 y);
 
             void storeLionXAndYInMapInfo(undefined4 x, undefined4 y);

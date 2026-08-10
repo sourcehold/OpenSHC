@@ -26,7 +26,7 @@ namespace IO {
             Buffer buffer1; // 0x0000000C length: 12
             Buffer buffer2; // 0x00000018 length: 12
             int imploding1orexploding2; // 0x00000024 length: 4
-            uint hash; // 0x00000028 length: 4
+            ulong hash; // 0x00000028 length: 4
             int compressedSize; // 0x0000002C length: 4
             BOOLEnum underflow; // 0x00000030 length: 4
 

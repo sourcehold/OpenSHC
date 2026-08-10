@@ -235,6 +235,8 @@ namespace Game {
 
         void switchPlayerOwnership(int playerID);
 
+        void processPeasantSpawnAndDespawnCycle();
+
         void updateTrader();
 
         int getSalesPrice(int playerID, int resourceType);

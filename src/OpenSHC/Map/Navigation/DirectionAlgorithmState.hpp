@@ -51,6 +51,8 @@ namespace Map {
             uint computeHash(int byteCount, int* address);
 
             uint computeMaskedBitAccumulator(int param_1, uint* param_2, uint param_3);
+
+            byte rotateByteLeft(byte value, int bits);
         };
 
         static_assert_cpp98_obj(sizeof(DirectionAlgorithmState) == 20, DirectionAlgorithmState);

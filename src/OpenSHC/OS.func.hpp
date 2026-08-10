@@ -68,8 +68,8 @@ namespace OS_Func {
         int(__cdecl*)(FILE* _File), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x0057FCB2, &OpenSHC::OS::_fclose)
     _fclose;
 
-    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(void* dstBuffer, size_t elSize, size_t count, FILE* file), REIMPLEMENTED_CRT,
-        Address::SHC_3BB0A8C1_0x0057FFCA, &OpenSHC::OS::_fread)
+    MACRO_FUNCTION_RESOLVER(size_t(__cdecl*)(void* dstBuffer, size_t elSize, size_t count, FILE* file),
+        REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x0057FFCA, &OpenSHC::OS::_fread)
     _fread;
 
     MACRO_FUNCTION_RESOLVER(

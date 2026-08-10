@@ -263,6 +263,8 @@ namespace Game {
 
         void incrementMission();
 
+        void exitToScenarioDescriptionMenu();
+
         void hideOrUnhideUI();
     };
 

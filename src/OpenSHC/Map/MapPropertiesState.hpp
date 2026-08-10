@@ -108,8 +108,8 @@ namespace Map {
         short SEC_SwordProducible_save; // 0x000005A6 length: 2
         short SEC_MaceProducible_save; // 0x000005A8 length: 2
         undefined1 padding_0x5aa[2]; // 0x000005AA length: 2
-        int SEC_EventsCount; // 0x000005AC length: 4
-        InGameEventUnionVersion SEC_Events[200]; // 0x000005B0 length: 45600
+        int eventsCount; // 0x000005AC length: 4
+        InGameEventUnionVersion scenarioEvents[200]; // 0x000005B0 length: 45600
         InGameEventExtra SEC_EventsExtra[200]; // 0x0000B7D0 length: 32000
         TradeableResourcesSection SEC_Section1065; // 0x000134D0 length: 100
         int scenarionMissionType; // 0x00013534 length: 4
@@ -121,7 +121,7 @@ namespace Map {
         undefined1 padding_0x1354c[16]; // 0x0001354C length: 16
         undefined4 field96_0x1355c; // 0x0001355C length: 4
         int field97_0x13560; // 0x00013560 length: 4
-        undefined4 DAT_CurrentEventID; // 0x00013564 length: 4
+        undefined4 currentEventID; // 0x00013564 length: 4
         undefined4 field99_0x13568; // 0x00013568 length: 4
         undefined1 padding_0x1356c[4]; // 0x0001356C length: 4
         undefined4 invasionTroopIndex; // 0x00013570 length: 4
@@ -197,7 +197,9 @@ namespace Map {
 
         void determineScenarioMissionTypeAndResetEvents();
 
-        void sumUnitPoints();
+        int getDifficultyMultipliedValue(int param_1);
+
+        int sumUnitPoints();
 
         void sumUnitCounts();
 

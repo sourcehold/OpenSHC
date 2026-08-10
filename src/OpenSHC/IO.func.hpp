@@ -25,7 +25,7 @@ namespace IO_Func {
         void(__cdecl*)(Base64State* state), false, Address::SHC_3BB0A8C1_0x00487080, &OpenSHC::IO::Base64EncodeInit)
     Base64EncodeInit;
 
-    MACRO_FUNCTION_RESOLVER(byte(__stdcall*)(char param_1), false, Address::SHC_3BB0A8C1_0x00487090,
+    MACRO_FUNCTION_RESOLVER(byte(__cdecl*)(char param_1), false, Address::SHC_3BB0A8C1_0x00487090,
         &OpenSHC::IO::Base64EncodeCharacterLookup)
     Base64EncodeCharacterLookup;
 

@@ -38,17 +38,17 @@ namespace Map {
         class UnitsState {
         public:
             uint maxUnitCount; // 0x00000000 length: 4
-            uint DAT_UnitCount; // 0x00000004 length: 4
+            uint unitCount; // 0x00000004 length: 4
             undefined4 unknownInitially0_01; // 0x00000008 length: 4
-            undefined4 DAT_LastSelectedUnitID; // 0x0000000C length: 4
+            undefined4 lastSelectedUnitID; // 0x0000000C length: 4
             undefined4 unitControlsRelated; // 0x00000010 length: 4
             BOOLEnum field5_0x14; // 0x00000014 length: 4
-            undefined4 DAT_LostChimps; // 0x00000018 length: 4
+            undefined4 lostChimps; // 0x00000018 length: 4
             undefined4 unitDistanceComputationResultUnk; // 0x0000001C length: 4
             undefined4 totalUnitsInSelection; // 0x00000020 length: 4
             int unitCountOfSelection[9]; // 0x00000024 length: 36
             byte unusedBytes01[44]; // 0x00000048 length: 44
-            byte DAT_SelectedUnitsBitFlags[400]; // 0x00000074 length: 400
+            byte selectedUnitsBitFlags[400]; // 0x00000074 length: 400
             byte unusedBytes02[852]; // 0x00000204 length: 852
             BOOLEnum hasEngineerSelected; // 0x00000558 length: 4
             int field14_0x55c; // 0x0000055C length: 4
@@ -87,8 +87,8 @@ namespace Map {
             byte unusedBytes03[8]; // 0x000005FC length: 8
             dword field48_0x604; // 0x00000604 length: 4
             uint field49_0x608; // 0x00000608 length: 4
-            undefined4 DAT_EuroUnitAcquisitionFailReason; // 0x0000060C length: 4
-            undefined4 DAT_EuroUnitRequiredResource; // 0x00000610 length: 4
+            undefined4 euroUnitAcquisitionFailReason; // 0x0000060C length: 4
+            undefined4 euroUnitRequiredResource; // 0x00000610 length: 4
             Unit units[2500]; // 0x00000614 length: 2920000
             short unusedUnitIDArray[2500]; // 0x002C9454 length: 5000
             int unusedUnitIDArrayIndex; // 0x002CA7DC length: 4
@@ -153,7 +153,7 @@ namespace Map {
 
             void setFacingDirectionTowardUnitMicro(int param_1, int param_2);
 
-            bool setUnitFacingDirectionForTargetXandY(int unitID, int targetX, int targetY);
+            BOOLEnum setUnitFacingDirectionForTargetXandY(int unitID, int targetX, int targetY);
 
             uint setUnitFacingDirectionBasedOnBuilding(int unitID, int buildingID);
 
@@ -215,7 +215,7 @@ namespace Map {
 
             BOOLEnum getDestination2EqualsGivenCoordinates(int unitID, int x, int y);
 
-            bool isAtSecondaryDestination(int param_1);
+            BOOLEnum isAtSecondaryDestination(int param_1);
 
             BOOLEnum hasUnitReachedDestination(int unitID);
 
@@ -392,7 +392,7 @@ namespace Map {
 
             int getRawDeerCount();
 
-            void findNearestShootableDeer(int param_1);
+            int findNearestShootableDeer(int param_1);
 
             int findNearestIdleCowForPlayer(int param_1, int param_2, int param_3);
 

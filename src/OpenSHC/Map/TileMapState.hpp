@@ -247,8 +247,9 @@ namespace Map {
         void processEntityDamageToBuildingCollateralThunk(
             undefined4 tile, undefined4 x_2, undefined4 y_2, undefined4 damage, undefined4 playerID, undefined4 unused);
 
-        void processDamageToBuildingThunk(undefined4 targetedTile, undefined4 targetedTileX, undefined4 targetedTileY,
-            undefined4 damage, undefined4 param_5, undefined4 playerID, BOOLEnum aiBuildDelayRelated);
+        BOOLEnum processDamageToBuildingThunk(undefined4 targetedTile, undefined4 targetedTileX,
+            undefined4 targetedTileY, undefined4 damage, undefined4 param_5, undefined4 playerID,
+            BOOLEnum aiBuildDelayRelated);
 
         void setChangedLayerToThreeAndMapping0x40x40();
 
@@ -395,7 +396,7 @@ namespace Map {
 
         BOOLEnum isCliffDropInDirection(int tile, undefined4 param_2, int y);
 
-        void computeClimbRampRotation(int tile, uint x, uint y);
+        int computeClimbRampRotation(int tile, uint x, uint y);
 
         void updateGFXLayers();
 
@@ -422,6 +423,8 @@ namespace Map {
         int getUnownedMoatCount();
 
         int returnOwnedMoatAtTile(int targetedTile);
+
+        int returnMoatIDForPlayerIDs(int playerID, int playerID2);
 
         void clearMoatData(uint moatID);
 
@@ -463,7 +466,7 @@ namespace Map {
 
         void setSignpostDistanceForCampaignMission();
 
-        void spreadFlagPlacementAlgorithm(int param_1, uint param_2, uint param_3);
+        int spreadFlagPlacementAlgorithm(int param_1, uint param_2, uint param_3);
 
         void spreadBrazierPlacementAlgorithm(int playerID, uint x, uint y);
 
@@ -634,8 +637,8 @@ namespace Map {
 
         void placeBuilding(PlayerID playerID, int x, int y, MappersEnum cbt, int buildingSize, int buildingOrientation);
 
-        uint processDamageToBuilding(int tile, uint xPosition, uint yPosition, int damageUnk, int param_5, int playerID,
-            BOOLEnum aiBuildDelayRelated, int unitID);
+        BOOLEnum processDamageToBuilding(int tile, uint xPosition, uint yPosition, int damageUnk, int param_5,
+            int playerID, BOOLEnum aiBuildDelayRelated, int unitID);
 
         void processEntityDamageToBuildingCollateral(
             int tile, uint x_2, uint y_2, int damage, int playerID, undefined4 unused, int unitID);
