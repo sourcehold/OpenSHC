@@ -168,7 +168,9 @@ set_target_properties(OpenSHC.dll PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_B
 target_compile_definitions(OpenSHC.dll PRIVATE OPEN_SHC_DLL REIMPLEMENTED_CRT=0)
 target_precompile_headers(OpenSHC.dll PRIVATE $<$<COMPILE_LANGUAGE:CXX>:${PCH_FILE}>)
 
-
+# Set per file compiler flags
+file_dependent_read_list("${CMAKE_SOURCE_DIR}/cmake/compiler-flags-gl.txt" COMPILER_FLAG_GL_FILES)
+set_source_files_properties(${COMPILER_FLAG_GL_FILES} PROPERTIES COMPILE_OPTIONS /GL)
 
 # Create custom target that deploys the DLL and the required UCP files to the modules folder
 add_custom_target(OpenSHC.dll.deploy DEPENDS OpenSHC.dll)
