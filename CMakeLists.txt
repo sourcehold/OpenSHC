@@ -168,7 +168,16 @@ set_target_properties(OpenSHC.dll PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_B
 target_compile_definitions(OpenSHC.dll PRIVATE OPEN_SHC_DLL REIMPLEMENTED_CRT=0)
 target_precompile_headers(OpenSHC.dll PRIVATE $<$<COMPILE_LANGUAGE:CXX>:${PCH_FILE}>)
 
-
+# Set per file compiler flags, such as /GL
+# Some class methods do not clobber the ECX register and calling such methods repeatedly means
+# in assembly that a 'mov ecx, offset' instruction is ommitted. This appears to be difficult to reconstruct
+# in our reimplementation for two reasons: we have a one function per cpp file approach, which makes it more unlikely
+# that the compiler knows about the ECX optimization, and second, we don't know the original source code's file structure.
+# Perhaps they had multiple implementations per cpp file, but we need more cases to prove this is the case.
+# For now, we set the /GL flag for a select number of files. Setting the /GL flag in *both* the caller and callee function
+# implementation removes the unnecessary mov ecx instruction from the callers code.
+file_dependent_read_list("${CMAKE_SOURCE_DIR}/cmake/compiler-flags-gl.txt" COMPILER_FLAG_GL_FILES)
+set_source_files_properties(${COMPILER_FLAG_GL_FILES} PROPERTIES COMPILE_OPTIONS /GL)
 
 # Create custom target that deploys the DLL and the required UCP files to the modules folder
 add_custom_target(OpenSHC.dll.deploy DEPENDS OpenSHC.dll)

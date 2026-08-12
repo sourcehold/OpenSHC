@@ -1,0 +1,6 @@
+src/OpenSHC/IO/LowLevelMemory/copyData.cpp
+src/OpenSHC/IO/LowLevelMemory/fillMemory_ByteValue.cpp
+src/OpenSHC/IO/DecoderState/encodeData.cpp
+src/OpenSHC/IO/DecoderState/decodeData.cpp
+src/OpenSHC/IO/DecoderState/swapMapDataWithNextMap.cpp
+src/OpenSHC/UI/Rendering/WindowAndDirectDraw/takeScreenshot.cpp
