@@ -217,6 +217,12 @@ function Search-FunctionData {
 
 
 
+    $sourceHeaderPathUnix = Convert-RelativePathToUnix -Path $sourceHeaderPath
+    $funcHeaderPathUnix = Convert-RelativePathToUnix -Path $FuncHeaderPath
+    $implementationPathUnix = Convert-RelativePathToUnix -Path $implementationPath
+
+
+
     $statusRegex = "^\s*SHC_[A-Fa-f0-9]{8}_0x$([regex]::Escape($Address))\s*\|\s*([\d]*\.?[\d]+)\s*%\s*\|\s*(.*)\s*$"
     Write-Verbose "Status Regex: $statusRegex"
     $statusMatch = Select-String -Path "./status/addresses-SHC-3BB0A8C1.txt" -Pattern "$statusRegex"
@@ -232,6 +238,11 @@ function Search-FunctionData {
     Write-Verbose "Status Message: $statusMessage"
 
 
+
+    $glOptimization = Select-String -Path "./cmake/compiler-flags-gl.txt" -Pattern ($implementationPathUnix -replace '^\./', '') -SimpleMatch -Quiet
+    Write-Verbose "GL Optimization: $glOptimization"
+
+
     
     return [PSCustomObject]@{
         Namespaces               = $namespaces
@@ -240,12 +251,13 @@ function Search-FunctionData {
         Address                  = $Address
         Enabled                  = $enabled
         Signature                = $signature
-        SourceHeader             = Convert-RelativePathToUnix -Path $sourceHeaderPath
-        FuncHeader               = Convert-RelativePathToUnix -Path $FuncHeaderPath
-        ImplementationFile       = Convert-RelativePathToUnix -Path $implementationPath
+        SourceHeader             = $sourceHeaderPathUnix
+        FuncHeader               = $funcHeaderPathUnix
+        ImplementationFile       = $implementationPathUnix
         ImplementationFileExists = $implementationExists
         ImplementationStatus     = $statusNumber
         ImplementationStatusMsg  = $statusMessage
+        GLOptimization           = $glOptimization
     }
 }
 
