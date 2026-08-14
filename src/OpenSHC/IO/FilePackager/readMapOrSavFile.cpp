@@ -199,11 +199,12 @@ namespace IO {
             MACRO_CALL(OS_Func::_ucrt_read)(_fileDescriptor, &this->directorySize, sizeof(this->directorySize));
         }
 
-        if (this->directorySize == 2036) {
+        if (this->directorySize == sizeof(this->directorySize) + sizeof(this->oldDirectory)) {
             MACRO_CALL(OS_Func::_ucrt_read)(_fileDescriptor, &this->oldDirectory, sizeof(this->oldDirectory));
             MACRO_CALL_MEMBER(FilePackager_Func::copyFromOldToNewMapDirectory, this)();
         } else {
-            MACRO_CALL(OS_Func::_ucrt_read)(_fileDescriptor, &this->directory, this->directorySize - 4);
+            MACRO_CALL(OS_Func::_ucrt_read)(
+                _fileDescriptor, &this->directory, this->directorySize - sizeof(this->directorySize));
         }
 
         MACRO_CALL(OS_Func::_ucrt_read)(_fileDescriptor, this->tempMem, this->directory.filePayloadSize);
