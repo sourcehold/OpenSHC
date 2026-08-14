@@ -201,6 +201,11 @@ It is hard to find these cases. I one situation, local variables that were used 
 
 ## Functions
 
+### Parameters
+
+Parameters might not be pushed like normal in certain cases.
+Usually, if two functions are followed by each other, the parameters are pushed for the first function, then the call is executed and then parameters for the second function are pushed. If parameters for the second function are pushed before the first call, it might indicate that the first call was executed in place of a variable, to directly feed the return into the second function.
+
 ### Implicit functions
 
 Certain structures produce functions via the compiler that we do not directly call in source.
