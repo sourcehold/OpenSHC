@@ -116,6 +116,8 @@ exporter = Exporter(binary_context=bc,
                       ("/HoldStrong_lib", "StringObject *"): ("/", "void *"),
                       ("/", "CHAR_CONST"): ("/", "char const"),
                       ("/", "CHAR_CONST *"): ("/", "char const *"),
+                      ("/", "VOID_CONST"): ("/", "void const"),
+                      ("/", "VOID_CONST *"): ("/", "void const *"),
                       
                     },
                     inject_forwards_in_files={

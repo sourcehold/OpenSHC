@@ -73,7 +73,7 @@ namespace UI {
 
         void locatePlayerKeepPositionsOnMinimap(uint param_1, int param_2, int param_3);
 
-        void generateMinimapImage();
+        int generateMinimapImage();
 
         void convertLoadedMinimapColors();
 

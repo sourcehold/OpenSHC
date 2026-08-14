@@ -12,6 +12,8 @@
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/UI.hpp"
 #include "OpenSHC/UI/ChooseNetworkServiceProvider/ChooseNetworkServiceProviderButtonActions.hpp"
+#include "OpenSHC/UI/DisplayElement.hpp"
+#include "OpenSHC/UI/Enums/DisplayElementID.hpp"
 #include "OpenSHC/UI/Enums/SoundMenuClickType.hpp"
 #include "OpenSHC/UI/Multiplayer/FindingNetworkSessions_ButtonParameters.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -22,7 +24,9 @@ namespace UI_Func {
 
     using OpenSHC::Commands::MappersEnum;
     using OpenSHC::Game::Resources::ResourceType;
+    using OpenSHC::UI::DisplayElement;
     using OpenSHC::UI::ChooseNetworkServiceProvider::ChooseNetworkServiceProviderButtonActions;
+    using OpenSHC::UI::Enums::DisplayElementID;
     using OpenSHC::UI::Enums::SoundMenuClickType;
     using OpenSHC::UI::Multiplayer::FindingNetworkSessions_ButtonParameters;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
@@ -54,6 +58,9 @@ namespace UI_Func {
     MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00424B10,
         &OpenSHC::UI::MenuView_GameStartEnterName_DoEveryFrame)
     MenuView_GameStartEnterName_DoEveryFrame;
+
+    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00424BD0, &OpenSHC::UI::LoadTGX_shc_back)
+    LoadTGX_shc_back;
 
     MACRO_FUNCTION_RESOLVER(
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00424C40, &OpenSHC::UI::MenuView_MainMenu_Prepare)
@@ -206,6 +213,10 @@ namespace UI_Func {
     MACRO_FUNCTION_RESOLVER(
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00427110, &OpenSHC::UI::MenuView_MpConnection_Prepare)
     MenuView_MpConnection_Prepare;
+
+    MACRO_FUNCTION_RESOLVER(
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00427180, &OpenSHC::UI::MainMenu_Unknown21_Prepare)
+    MainMenu_Unknown21_Prepare;
 
     MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004271E0,
         &OpenSHC::UI::MenuView_General_DoEveryFrame_FirstGfxCentered)
@@ -679,6 +690,10 @@ namespace UI_Func {
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, ...), false, Address::SHC_3BB0A8C1_0x00440420,
         &OpenSHC::UI::MenuItemActionHandler_UnusedOldTitleMenu_General)
     MenuItemActionHandler_UnusedOldTitleMenu_General;
+
+    MACRO_FUNCTION_RESOLVER(
+        HCURSOR(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00440430, &OpenSHC::UI::SetCursorDependingOnProgramState)
+    SetCursorDependingOnProgramState;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(void* param_1), false, Address::SHC_3BB0A8C1_0x00440560,
         &OpenSHC::UI::MenuView_GameStartEnterName_Prepare)
@@ -1515,6 +1530,14 @@ namespace UI_Func {
         Address::SHC_3BB0A8C1_0x004AF4C0, &OpenSHC::UI::MenuModalRenderFunction_DebugDataAivStateUnk)
     MenuModalRenderFunction_DebugDataAivStateUnk;
 
+    MACRO_FUNCTION_RESOLVER(DisplayElement*(__cdecl*)(int elementID), false, Address::SHC_3BB0A8C1_0x004AF630,
+        &OpenSHC::UI::FindDisplayElementWithID)
+    FindDisplayElementWithID;
+
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(DisplayElementID elementId, dword elementState, int displayDuration), false,
+        Address::SHC_3BB0A8C1_0x004AF680, &OpenSHC::UI::ActivateGameSpeedAndResourceLackDisplayElementUnk)
+    ActivateGameSpeedAndResourceLackDisplayElementUnk;
+
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, ...), false, Address::SHC_3BB0A8C1_0x004B0F70,
         &OpenSHC::UI::MenuItemActionHandler_OverlaySlider_Deselect)
     MenuItemActionHandler_OverlaySlider_Deselect;
@@ -1757,6 +1780,10 @@ namespace UI_Func {
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004BC6C0, &OpenSHC::UI::resetTutorialActionTrackers)
     resetTutorialActionTrackers;
 
+    MACRO_FUNCTION_RESOLVER(
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004BC770, &OpenSHC::UI::SetTutorialHintActiveWithTimestamp)
+    SetTutorialHintActiveWithTimestamp;
+
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, int param_2), false, Address::SHC_3BB0A8C1_0x004BC790,
         &OpenSHC::UI::renderAnimatedTutorialFloatOverlay)
     renderAnimatedTutorialFloatOverlay;
@@ -1942,6 +1969,9 @@ namespace UI_Func {
         &OpenSHC::UI::MenuItemActionHandler_DeleteGameRecord_Main)
     MenuItemActionHandler_DeleteGameRecord_Main;
 
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004D9D90, &OpenSHC::UI::TacticalPowersFill)
+    TacticalPowersFill;
+
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int x, int y, int width, int height), false,
         Address::SHC_3BB0A8C1_0x004D9DB0, &OpenSHC::UI::MenuModalRenderFunction_TacticalPowerBar)
     MenuModalRenderFunction_TacticalPowerBar;
@@ -2040,6 +2070,9 @@ namespace UI_Func {
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(undefined4 param_1, undefined4 param_2), false,
         Address::SHC_3BB0A8C1_0x004DB180, &OpenSHC::UI::BuildIntroLogoSequence)
     BuildIntroLogoSequence;
+
+    MACRO_FUNCTION_RESOLVER(int(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004DB210, &OpenSHC::UI::PrepareHistoryBook)
+    PrepareHistoryBook;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int storedMenuStringIndex, undefined4 param_2, undefined4 param_3,
                                 int allowedWidth, undefined4 param_5, int fontSize),

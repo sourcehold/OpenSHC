@@ -17,6 +17,8 @@ namespace Rendering {
 
     void __stdcall BlitMapImageWithVerticalClipAndYOffset();
 
+    void __stdcall InitializeColors();
+
     void __stdcall TicksStartCounter();
 
     int __cdecl ViewportBasedTileNumber();

@@ -207,6 +207,8 @@ namespace UI {
 
         void __stdcall RenderStatusMenu_Army();
 
+        void __stdcall InitBlendFilterArraysUnk();
+
         void __stdcall RenderTerrainTilesCenterPiece();
 
         void __stdcall RenderCurrentNotActiveButtonWithPossibleAlphaTexOnCurrentSurfaceUnk();
@@ -222,6 +224,8 @@ namespace UI {
         void __cdecl TogglePlayerPingDisplayElementUnk(DisplayElementID displayElementID, uint toggleValue);
 
         void __stdcall RenderDisplayElementsUnk();
+
+        void __cdecl RenderInGameChatDisplayElement(int posX, int posY, DWORD elementState);
 
         void __cdecl RenderResourceMissing1DisplayElement(int posX, int posY, DWORD elementState);
 

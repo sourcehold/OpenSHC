@@ -104,6 +104,8 @@ namespace Audio {
 
             void updateAmbientSoundStream();
 
+            void playSFXVoices();
+
             void soundRelatedMethod1();
         };
 

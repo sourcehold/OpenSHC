@@ -117,7 +117,7 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x00402C50, &EntityState::math_atan_1)
             math_atan_1;
 
-            MACRO_FUNCTION_RESOLVER(int (EntityState::*)(undefined4, double, int, int), false,
+            MACRO_FUNCTION_RESOLVER(int (EntityState::*)(int, double, int, int), false,
                 Address::SHC_3BB0A8C1_0x00402DA0, &EntityState::computeVelocity)
             computeVelocity;
 

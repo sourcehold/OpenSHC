@@ -13,6 +13,10 @@ namespace OpenSHC {
 namespace Map {
     namespace Version_Func {
 
+        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004038A0,
+            &OpenSHC::Map::Version::UpgradeSetCurrentEntityID3000)
+        UpgradeSetCurrentEntityID3000;
+
         MACRO_FUNCTION_RESOLVER(
             void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004038B0, &OpenSHC::Map::Version::SetFlagEntityColor)
         SetFlagEntityColor;
@@ -73,6 +77,10 @@ namespace Map {
             &OpenSHC::Map::Version::UpgradeLogicAndDisplayLayerForDairyFarms)
         UpgradeLogicAndDisplayLayerForDairyFarms;
 
+        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0041A460,
+            &OpenSHC::Map::Version::UpgradeDestroyDrawbridgesInFirst10Buildings)
+        UpgradeDestroyDrawbridgesInFirst10Buildings;
+
         MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0041A520,
             &OpenSHC::Map::Version::UpgradePitchDitchBuildingIntoPitchDitchObject)
         UpgradePitchDitchBuildingIntoPitchDitchObject;
@@ -84,6 +92,10 @@ namespace Map {
         MACRO_FUNCTION_RESOLVER(
             void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0041A5F0, &OpenSHC::Map::Version::UpgradeBuildingField4)
         UpgradeBuildingField4;
+
+        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0041A620,
+            &OpenSHC::Map::Version::UpgradeClearBuildings1000AndHigher)
+        UpgradeClearBuildings1000AndHigher;
 
         MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0041A650,
             &OpenSHC::Map::Version::UpgradeKnightsAndStables)

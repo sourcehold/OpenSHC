@@ -216,6 +216,8 @@ namespace Map {
 
             void moveTowardsParticularUnits(int param_1);
 
+            void decrementTileMap1104();
+
             void advanceAttackWaveStaging(int param_1);
 
             void updateActiveAttackWaveState(int attackWave);

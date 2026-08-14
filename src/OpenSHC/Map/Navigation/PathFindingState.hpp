@@ -102,6 +102,8 @@ namespace Map {
 
             int getTileInSearchQueue(int index);
 
+            void clearPathFindingTileMaps();
+
             void bindPathPlanToAlgorithmStateAndReset(byte* pPathPlan);
 
             int findClosestTileToStartingTile(int param_1);
@@ -142,7 +144,7 @@ namespace Map {
 
             void updatePathLinkageTileMapRelatedToGates(int buildingID);
 
-            undefined8 updatePathLinkageTileMapRelatedToKeeps(int buildingID);
+            void updatePathLinkageTileMapRelatedToKeeps(int buildingID);
 
             void updatePathLinkageTileMapRelatedToSiegeTower(int param_1);
 

@@ -123,6 +123,10 @@ namespace Synchrony {
             &GameSynchronyState::checkAllPlayersReadyAndCleanupSlots)
         checkAllPlayersReadyAndCleanupSlots;
 
+        MACRO_FUNCTION_RESOLVER(int (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x0047EEB0,
+            &GameSynchronyState::computeSomeHashOnUnitArray)
+        computeSomeHashOnUnitArray;
+
         MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(int, int, int, int), false,
             Address::SHC_3BB0A8C1_0x0047EED0, &GameSynchronyState::renderDebugDataSplitInfo)
         renderDebugDataSplitInfo;
@@ -315,10 +319,6 @@ namespace Synchrony {
         MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(char*), false, Address::SHC_3BB0A8C1_0x00491040,
             &GameSynchronyState::handleCommandLineArguments)
         handleCommandLineArguments;
-
-        MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(int, int, DWORD), false, Address::SHC_3BB0A8C1_0x004AF800,
-            &GameSynchronyState::renderInGameChatDisplayElement)
-        renderInGameChatDisplayElement;
 
     } // namespace GameSynchronyState_Func
 } // namespace Synchrony

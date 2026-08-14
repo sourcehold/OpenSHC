@@ -79,6 +79,10 @@ namespace AI {
             void (AIVState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004EDCB0, &AIVState::resetCountdownInHeatMap)
         resetCountdownInHeatMap;
 
+        MACRO_FUNCTION_RESOLVER(
+            int (AIVState::*)(), false, Address::SHC_3BB0A8C1_0x004EDD00, &AIVState::computeLargestSeparateArea)
+        computeLargestSeparateArea;
+
         MACRO_FUNCTION_RESOLVER(int (AIVState::*)(PlayerID, MappersEnum), false, Address::SHC_3BB0A8C1_0x004EDDF0,
             &AIVState::findSuitableFarmLocationAndPlaceFarm)
         findSuitableFarmLocationAndPlaceFarm;

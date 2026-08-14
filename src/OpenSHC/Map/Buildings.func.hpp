@@ -329,14 +329,6 @@ namespace Map {
             void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004240D0, &OpenSHC::Map::Buildings::UpdateWoodGate1)
         UpdateWoodGate1;
 
-        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(undefined4 param_1, int buildingID, int value, int buildingUID), false,
-            Address::SHC_3BB0A8C1_0x004653B0, &OpenSHC::Map::Buildings::OpenOrCloseDrawbridge)
-        OpenOrCloseDrawbridge;
-
-        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(undefined4 playerID, int buildingID, int newGateState, int buildingUID),
-            false, Address::SHC_3BB0A8C1_0x004654F0, &OpenSHC::Map::Buildings::GateOpenOrClose)
-        GateOpenOrClose;
-
     } // namespace Buildings_Func
 } // namespace Map
 } // namespace OpenSHC

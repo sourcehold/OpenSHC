@@ -838,8 +838,8 @@ enum {
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00403790 = 0x00403790,
-    // label: SetCurrentEntityID3000
-    // location: OpenSHC/Global
+    // label: UpgradeSetCurrentEntityID3000
+    // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x004038A0 = 0x004038A0,
     // label: SetFlagEntityColor
@@ -1951,11 +1951,11 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x00405125 = 0x00405125,
     // label: SomeFireSpreadFunction
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Entities
     // type: function
     SHC_3BB0A8C1_0x00405130 = 0x00405130,
     // label: IgniteFireAtMiniTile
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Entities
     // type: function
     SHC_3BB0A8C1_0x004052E0 = 0x004052E0,
     // type: /pointer
@@ -2031,7 +2031,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004054D5 = 0x004054D5,
     // label: AFireSpreadFunction
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Entities
     // type: function
     SHC_3BB0A8C1_0x004054E0 = 0x004054E0,
     // label: UpdateFireEntity
@@ -2703,7 +2703,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00407130 = 0x00407130,
     // label: SetPlaceOnFire
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Entities
     // type: function
     SHC_3BB0A8C1_0x00407160 = 0x00407160,
     // label: processEntityHitBuildingOrUnit
@@ -6850,8 +6850,8 @@ enum {
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x0041A420 = 0x0041A420,
-    // label: DestroyDrawbridgesInFirst10Buildings
-    // location: OpenSHC/Global
+    // label: UpgradeDestroyDrawbridgesInFirst10Buildings
+    // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x0041A460 = 0x0041A460,
     // label: UpgradePitchDitchBuildingIntoPitchDitchObject
@@ -6866,8 +6866,8 @@ enum {
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x0041A5F0 = 0x0041A5F0,
-    // label: ClearBuildings1000AndHigher
-    // location: OpenSHC/Global
+    // label: UpgradeClearBuildings1000AndHigher
+    // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x0041A620 = 0x0041A620,
     // label: UpgradeKnightsAndStables
@@ -7652,11 +7652,11 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00424B10 = 0x00424B10,
     // label: LoadTGX_shc_back
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00424BD0 = 0x00424BD0,
     // label: DrawOuterMenuBorder
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x00424BE0 = 0x00424BE0,
     // label: MenuView_MainMenu_Prepare
@@ -7858,7 +7858,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00427110 = 0x00427110,
     // label: MainMenu_Unknown21_Prepare
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00427180 = 0x00427180,
     // label: MenuView_General_DoEveryFrame_FirstGfxCentered
@@ -7866,7 +7866,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004271E0 = 0x004271E0,
     // label: AModalDialogIsActiveButIsNotQuitting
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x00427210 = 0x00427210,
     // label: MenuView_Unknown61ReturnToSkrimishMenuUnk_DoInitial
@@ -7882,7 +7882,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00427320 = 0x00427320,
     // label: InitSkirmishLobbyData
-    // location: OpenSHC/Global
+    // location: OpenSHC/Synchrony
     // type: function
     SHC_3BB0A8C1_0x004274F0 = 0x004274F0,
     // label: MenuView_General_DoInitial_DefaultMainMenuStructure
@@ -7937,7 +7937,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x0042804F = 0x0042804F,
     // label: ResetAiVariationArrayValue
-    // location: OpenSHC/Global
+    // location: OpenSHC/Synchrony
     // type: function
     SHC_3BB0A8C1_0x00428050 = 0x00428050,
     // label: MenuItemRenderFunction_General_MenuMiniMap
@@ -7945,13 +7945,13 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00428150 = 0x00428150,
     // label: PutPlayerIntoRandomSlot
-    // location: OpenSHC/Global
+    // location: OpenSHC/Synchrony
     // type: function
     SHC_3BB0A8C1_0x00428480 = 0x00428480,
     // type: function
     SHC_3BB0A8C1_0x00428590 = 0x00428590,
     // label: RemovePositionOfPlayer
-    // location: OpenSHC/Global
+    // location: OpenSHC/Synchrony/Actions
     // type: function
     SHC_3BB0A8C1_0x004285C0 = 0x004285C0,
     // label: MenuItemRenderFunction_LobbyMenu_MapDesc
@@ -7989,11 +7989,11 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00429630 = 0x00429630,
     // label: CallbackSetMultiplayerSpeedLevel
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x00429650 = 0x00429650,
     // label: SetupSkirmishBalanceAndOrIntensity
-    // location: OpenSHC/Global
+    // location: OpenSHC/Game/Skirmish
     // type: function
     SHC_3BB0A8C1_0x00429710 = 0x00429710,
     // type: function
@@ -8045,7 +8045,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0042A840 = 0x0042A840,
     // label: SetAIPlayerNickNames
-    // location: OpenSHC/Global
+    // location: OpenSHC/Synchrony
     // type: function
     SHC_3BB0A8C1_0x0042A8E0 = 0x0042A8E0,
     // type: /undefined *32
@@ -8085,7 +8085,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0042AC40 = 0x0042AC40,
     // label: GetPlayerPosition
-    // location: OpenSHC/Global
+    // location: OpenSHC/Synchrony
     // type: function
     SHC_3BB0A8C1_0x0042AC60 = 0x0042AC60,
     // type: function
@@ -8597,7 +8597,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0042C090 = 0x0042C090,
     // label: ClearSiegeInformationArray2
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x0042C190 = 0x0042C190,
     // label: SomeSiegeUnitsComputation
@@ -8613,7 +8613,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0042C540 = 0x0042C540,
     // label: LaunchSinglePlayerGameUnk
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Actions
     // type: function
     SHC_3BB0A8C1_0x0042C620 = 0x0042C620,
     // type: function
@@ -9905,7 +9905,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0042EFE0 = 0x0042EFE0,
     // label: InitializeBasicMap
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x0042F010 = 0x0042F010,
     // label: MenuItemRenderFunction_NewMapMaptype_Buttons
@@ -12305,7 +12305,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x0043198A = 0x0043198A,
     // label: ResetSomeValuesFunctionUnk
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map
     // type: function
     SHC_3BB0A8C1_0x00431990 = 0x00431990,
     // label: MenuView_BuildMenu_Prepare
@@ -12378,9 +12378,6 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00434120 = 0x00434120,
-    // label: AdjustViewPortAndMore
-    // location: OpenSHC/Global
-    SHC_3BB0A8C1_0x004341D9 = 0x004341D9,
     // type: function
     SHC_3BB0A8C1_0x004341E1 = 0x004341E1,
     // type: /undefined *32
@@ -13965,7 +13962,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00437ED0 = 0x00437ED0,
     // label: PlayPlacementWarning
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004380E0 = 0x004380E0,
     // type: /undefined *32
@@ -13995,7 +13992,7 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x004381C8 = 0x004381C8,
     // label: PlaceUnit
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Actions
     // type: function
     SHC_3BB0A8C1_0x004381D0 = 0x004381D0,
     // type: function
@@ -14691,7 +14688,7 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x00439724 = 0x00439724,
     // label: HandleBuildingSelectionSpeech
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x00439730 = 0x00439730,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_StopBuildingOrPeasantBinkPlayback
@@ -15165,7 +15162,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00440420 = 0x00440420,
     // label: SetCursorDependingOnProgramState
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00440430 = 0x00440430,
     // label: MenuView_GameStartEnterName_Prepare
@@ -15221,13 +15218,13 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00440E50 = 0x00440E50,
     // label: DisplayMapDescriptionAndAllocatePlayersToSlots
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004410D0 = 0x004410D0,
     // type: function
     SHC_3BB0A8C1_0x00441140 = 0x00441140,
     // label: LaunchSkirmishGame
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Actions
     // type: function
     SHC_3BB0A8C1_0x00441270 = 0x00441270,
     // type: function
@@ -18278,7 +18275,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0044A720 = 0x0044A720,
     // label: ComputePlayerPoints1
-    // location: OpenSHC/Global
+    // location: OpenSHC/Audio/SFX
     // type: function
     SHC_3BB0A8C1_0x0044A830 = 0x0044A830,
     // label: UpdateUnitValueLoss
@@ -18512,19 +18509,19 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x0044B674 = 0x0044B674,
     // label: ComputePlayerRanking
-    // location: OpenSHC/Global
+    // location: OpenSHC/Audio/SFX
     // type: function
     SHC_3BB0A8C1_0x0044B680 = 0x0044B680,
     // label: GetPlayerAtRank
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/GreatestLord
     // type: function
     SHC_3BB0A8C1_0x0044B760 = 0x0044B760,
     // label: IfAiGreatestLordGetAiType
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/GreatestLord
     // type: function
     SHC_3BB0A8C1_0x0044B7D0 = 0x0044B7D0,
     // label: GetLowestRankedAlivePlayer
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/GreatestLord
     // type: function
     SHC_3BB0A8C1_0x0044B800 = 0x0044B800,
     // label: UpdateUnitLossSpeechFeedback
@@ -18554,11 +18551,11 @@ enum {
     // type: /pointer
     SHC_3BB0A8C1_0x0044C3F4 = 0x0044C3F4,
     // label: ComputeCurrentPlayerRanking
-    // location: OpenSHC/Global
+    // location: OpenSHC/Audio/SFX
     // type: function
     SHC_3BB0A8C1_0x0044C400 = 0x0044C400,
-    // label: PlaySFXVoices
-    // location: OpenSHC/Global
+    // label: playSFXVoices
+    // location: OpenSHC/Audio/SFX/SFXState
     // type: function
     SHC_3BB0A8C1_0x0044C410 = 0x0044C410,
     // label: soundRelatedMethod1
@@ -18656,7 +18653,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0044D3D0 = 0x0044D3D0,
     // label: InitBlendFilterArraysUnk
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x0044E510 = 0x0044E510,
     // label: renderInterfaceOrBuildingOccupationArea
@@ -19867,7 +19864,7 @@ enum {
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00459D80 = 0x00459D80,
-    // label: HandleActivateTacticalPowers
+    // label: handleActivateTacticalPowers
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x00459E40 = 0x00459E40,
@@ -21976,15 +21973,15 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00464D90 = 0x00464D90,
     // label: IsEuroUnitRecruitableUnk
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x00464DA0 = 0x00464DA0,
     // label: GetUnitRecruitPermission
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x00464E80 = 0x00464E80,
     // label: ProcessRecruitUnit
-    // location: OpenSHC/Global
+    // location: OpenSHC/Synchrony/Actions
     // type: function
     SHC_3BB0A8C1_0x00464EF0 = 0x00464EF0,
     // label: HasEnoughGold
@@ -21992,19 +21989,19 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00465040 = 0x00465040,
     // label: CheckIfEnoughGoldForLadderman
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x00465080 = 0x00465080,
     // label: CheckIfEnoughGoldForMonk
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004650A0 = 0x004650A0,
     // label: CheckGoldResource
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004650C0 = 0x004650C0,
     // label: CheckIfEnoughGoldForTunneler
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004650F0 = 0x004650F0,
     // label: MenuItemRenderFunction_BuildingAndStatusMenu_WorkshopWeaponSelection
@@ -22016,7 +22013,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00465200 = 0x00465200,
     // label: SetBuildingProductionType
-    // location: OpenSHC/Global
+    // location: OpenSHC/Synchrony/Actions
     // type: function
     SHC_3BB0A8C1_0x004652A0 = 0x004652A0,
     // label: MenuItemRenderFunction_BuildingAndStatusMenu_DrawbridgeOpenClose
@@ -22028,7 +22025,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00465360 = 0x00465360,
     // label: OpenOrCloseDrawbridge
-    // location: OpenSHC/Map/Buildings
+    // location: OpenSHC/Synchrony/Actions
     // type: function
     SHC_3BB0A8C1_0x004653B0 = 0x004653B0,
     // label: MenuItemRenderFunction_BuildingAndStatusMenu_GatehouseOpenClose
@@ -22040,7 +22037,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00465480 = 0x00465480,
     // label: GateOpenOrClose
-    // location: OpenSHC/Map/Buildings
+    // location: OpenSHC/Synchrony/Actions
     // type: function
     SHC_3BB0A8C1_0x004654F0 = 0x004654F0,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_TaxSlider
@@ -22076,7 +22073,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004657B0 = 0x004657B0,
     // label: ChangeTaxes
-    // location: OpenSHC/Global
+    // location: OpenSHC/Synchrony/Actions
     // type: function
     SHC_3BB0A8C1_0x00465800 = 0x00465800,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_ChangeRations
@@ -22084,7 +22081,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00465820 = 0x00465820,
     // label: ChangeRations
-    // location: OpenSHC/Global
+    // location: OpenSHC/Synchrony/Actions
     // type: function
     SHC_3BB0A8C1_0x00465890 = 0x00465890,
     // label: MenuItemRenderFunction_BuildingAndStatusMenu_GeneralButtonRender
@@ -22108,19 +22105,19 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00465A20 = 0x00465A20,
     // label: SetStorageMarketFailState
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Actions
     // type: function
     SHC_3BB0A8C1_0x00465DB0 = 0x00465DB0,
     // label: ProcessBuyOrSell
-    // location: OpenSHC/Global
+    // location: OpenSHC/Synchrony/Actions
     // type: function
     SHC_3BB0A8C1_0x00465E60 = 0x00465E60,
     // label: TryAcquireAmmunitionOrPlanToBuyStone
-    // location: OpenSHC/Global
+    // location: OpenSHC/Synchrony/Actions
     // type: function
     SHC_3BB0A8C1_0x00465F20 = 0x00465F20,
     // label: SelectionReplenishAmmo
-    // location: OpenSHC/Global
+    // location: OpenSHC/Synchrony/Actions
     // type: function
     SHC_3BB0A8C1_0x00465F90 = 0x00465F90,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_BuildingSleep
@@ -22128,7 +22125,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004660B0 = 0x004660B0,
     // label: ProcessBuildingSleepUpdate
-    // location: OpenSHC/Global
+    // location: OpenSHC/Synchrony/Actions
     // type: function
     SHC_3BB0A8C1_0x004660F0 = 0x004660F0,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_RepairBuildingButton
@@ -22136,15 +22133,15 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00466160 = 0x00466160,
     // label: ProcessTowerRepair
-    // location: OpenSHC/Global
+    // location: OpenSHC/Synchrony/Actions
     // type: function
     SHC_3BB0A8C1_0x00466260 = 0x00466260,
     // label: MenuItemRenderFunction_BuildingAndStatusMenu_RepairBuildingButton
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00466320 = 0x00466320,
-    // label: ReleaseDogs2
-    // location: OpenSHC/Global
+    // label: ProcessReleaseDogs
+    // location: OpenSHC/Synchrony/Actions
     // type: function
     SHC_3BB0A8C1_0x00466430 = 0x00466430,
     // type: function
@@ -22214,7 +22211,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00466D10 = 0x00466D10,
     // label: SetEnoughGoldForRequestedUnitToTrueUnk
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x00466E00 = 0x00466E00,
     // label: DisableMercPostPortraits
@@ -22293,8 +22290,8 @@ enum {
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x00467850 = 0x00467850,
-    // label: SetSomeColorsUnk
-    // location: OpenSHC/Global
+    // label: InitializeColors
+    // location: OpenSHC/Rendering
     // type: function
     SHC_3BB0A8C1_0x00467890 = 0x00467890,
     // label: Constructor_WindowAndDirectDraw
@@ -22310,7 +22307,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00467B40 = 0x00467B40,
     // label: EnumDisplayModesCallback
-    // location: OpenSHC/Global
+    // location: OpenSHC/Synchrony
     // type: function
     SHC_3BB0A8C1_0x00467BC0 = 0x00467BC0,
     // label: releaseSurfacesAndDirectDraw
@@ -25468,7 +25465,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0047D500 = 0x0047D500,
     // label: EnumConnectionsCallback
-    // location: OpenSHC/Global
+    // location: OpenSHC/Synchrony
     // type: function
     SHC_3BB0A8C1_0x0047D5B0 = 0x0047D5B0,
     // label: createCompoundAddressBasedOnSelectedProvider
@@ -25492,7 +25489,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0047DEA0 = 0x0047DEA0,
     // label: EnumSessionsCallback_addSession_async
-    // location: OpenSHC/Global
+    // location: OpenSHC/Synchrony
     // type: function
     SHC_3BB0A8C1_0x0047DF40 = 0x0047DF40,
     // label: fetchSessionGUID
@@ -25507,8 +25504,8 @@ enum {
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047E0E0 = 0x0047E0E0,
-    // label: DirectPlayModemRelated_MemoryAllocationFunction
-    // location: OpenSHC/Global
+    // label: DirectPlayModemRelated_MemoryAllocationCallback
+    // location: OpenSHC/Synchrony
     // type: function
     SHC_3BB0A8C1_0x0047E160 = 0x0047E160,
     // type: function
@@ -25579,8 +25576,8 @@ enum {
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047EDE0 = 0x0047EDE0,
-    // label: ComputeSomeHashOnUnitArray
-    // location: OpenSHC/Global
+    // label: computeSomeHashOnUnitArray
+    // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0047EEB0 = 0x0047EEB0,
     // label: renderDebugDataSplitInfo
@@ -26501,7 +26498,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004882A0 = 0x004882A0,
     // label: MemCopyFromParameter
-    // location: OpenSHC/Global
+    // location: OpenSHC/Synchrony
     // type: function
     SHC_3BB0A8C1_0x00488480 = 0x00488480,
     // label: renderDebugDataNetwork
@@ -27158,7 +27155,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00492FD0 = 0x00492FD0,
     // label: SetupPreviewMinimapDataUnk
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x00493050 = 0x00493050,
     // label: MenuModalRenderFunction_SaveMap
@@ -27880,7 +27877,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00495800 = 0x00495800,
     // label: ProgressBarRelated
-    // location: OpenSHC/Global
+    // location: OpenSHC/Synchrony
     // type: function
     SHC_3BB0A8C1_0x00495840 = 0x00495840,
     // label: MenuItemActionHandler_OnlineVoteQuitAndQuitGame_Main
@@ -28027,8 +28024,8 @@ enum {
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x00496E30 = 0x00496E30,
-    // label: ClearPathFindingTileMaps
-    // location: OpenSHC/Global
+    // label: clearPathFindingTileMaps
+    // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x00496E40 = 0x00496E40,
     // label: bindPathPlanToAlgorithmStateAndReset
@@ -29822,11 +29819,11 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004AC7A0 = 0x004AC7A0,
     // label: ProcessAllyAcceptsRequest
-    // location: OpenSHC/Global
+    // location: OpenSHC/Synchrony/Actions
     // type: function
     SHC_3BB0A8C1_0x004AD110 = 0x004AD110,
     // label: ProcessAllyDeniesRequest2
-    // location: OpenSHC/Global
+    // location: OpenSHC/Synchrony/Actions
     // type: function
     SHC_3BB0A8C1_0x004AD1E0 = 0x004AD1E0,
     // label: MenuModalRenderFunction_AlliesOrder
@@ -29834,7 +29831,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004AD2B0 = 0x004AD2B0,
     // label: ProcessAllyRequestAttackDefense
-    // location: OpenSHC/Global
+    // location: OpenSHC/Synchrony/Actions
     // type: function
     SHC_3BB0A8C1_0x004AD2F0 = 0x004AD2F0,
     // label: MenuItemRenderFunction_AlliesOrder_Main
@@ -29846,7 +29843,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004AD780 = 0x004AD780,
     // label: ProcessAllyRequestingGoods
-    // location: OpenSHC/Global
+    // location: OpenSHC/Synchrony/Actions
     // type: function
     SHC_3BB0A8C1_0x004AD7C0 = 0x004AD7C0,
     // label: MenuItemRenderFunction_AlliesSendAndRequestGoods_Main
@@ -29858,7 +29855,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004ADD90 = 0x004ADD90,
     // label: ProcessAllyGoodsRequest
-    // location: OpenSHC/Global
+    // location: OpenSHC/Synchrony/Actions
     // type: function
     SHC_3BB0A8C1_0x004ADDD0 = 0x004ADDD0,
     // type: /pointer
@@ -29906,7 +29903,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004AE002 = 0x004AE002,
     // label: ProcessAllyDeniesRequest
-    // location: OpenSHC/Global
+    // location: OpenSHC/Synchrony/Actions
     // type: function
     SHC_3BB0A8C1_0x004AE010 = 0x004AE010,
     // label: MenuModalRenderFunction_ChooseRandomNumberOfEnemies
@@ -29972,15 +29969,15 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004AF5E0 = 0x004AF5E0,
     // label: FindDisplayElementWithID
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004AF630 = 0x004AF630,
     // label: CheckDisplayElementByIDAndSetForUnlimitedDisplay
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004AF650 = 0x004AF650,
     // label: ActivateGameSpeedAndResourceLackDisplayElementUnk
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004AF680 = 0x004AF680,
     // label: TogglePlayerPingDisplayElementUnk
@@ -29988,15 +29985,15 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004AF6B0 = 0x004AF6B0,
     // label: GetIfDisplayElementStateNotZero
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004AF6E0 = 0x004AF6E0,
     // label: RenderDisplayElementsUnk
     // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004AF700 = 0x004AF700,
-    // label: renderInGameChatDisplayElement
-    // location: OpenSHC/Synchrony/GameSynchronyState
+    // label: RenderInGameChatDisplayElement
+    // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004AF800 = 0x004AF800,
     // label: RenderResourceMissing1DisplayElement
@@ -31346,7 +31343,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004B8080 = 0x004B8080,
     // label: SumUnitPoints
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004B8200 = 0x004B8200,
     // label: RestoreScenarioGold
@@ -34440,7 +34437,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004BC630 = 0x004BC630,
     // label: SetTutorialBuildingActionState
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004BC690 = 0x004BC690,
     // label: resetTutorialActionTrackers
@@ -34450,7 +34447,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004BC6F0 = 0x004BC6F0,
     // label: SetTutorialHintActiveWithTimestamp
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004BC770 = 0x004BC770,
     // label: renderAnimatedTutorialFloatOverlay
@@ -38584,17 +38581,17 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004C6880 = 0x004C6880,
     // label: SetupSkirmishMode
-    // location: OpenSHC/Global
+    // location: OpenSHC/Game/Skirmish
     // type: function
     SHC_3BB0A8C1_0x004C68D0 = 0x004C68D0,
     // label: LoadSkirmishCampaignData
-    // location: OpenSHC/Global
+    // location: OpenSHC/Synchrony
     // type: function
     SHC_3BB0A8C1_0x004C6B20 = 0x004C6B20,
     // type: function
     SHC_3BB0A8C1_0x004C6B90 = 0x004C6B90,
-    // label: StoreTime
-    // location: OpenSHC/Global
+    // label: StoreLocalTime
+    // location: OpenSHC/Game/Skirmish
     // type: function
     SHC_3BB0A8C1_0x004C6CD0 = 0x004C6CD0,
     // label: wipeAICMemory
@@ -40204,7 +40201,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004D1320 = 0x004D1320,
     // label: StoreCurrentGameIntoTemporarySKMasterEntry
-    // location: OpenSHC/Global
+    // location: OpenSHC/Game/Skirmish
     // type: function
     SHC_3BB0A8C1_0x004D1700 = 0x004D1700,
     // type: function
@@ -40390,7 +40387,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004D5180 = 0x004D5180,
     // label: StoreGameIntoSKMasters
-    // location: OpenSHC/Global
+    // location: OpenSHC/Game/Skirmish
     // type: function
     SHC_3BB0A8C1_0x004D52A0 = 0x004D52A0,
     // label: SkirmishLeaderboard_DeleteEntry
@@ -40408,7 +40405,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004D55D0 = 0x004D55D0,
     // label: ComputeSkMasterScore
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/GreatestLord
     // type: function
     SHC_3BB0A8C1_0x004D5780 = 0x004D5780,
     // label: RenderGreatestLordScreen
@@ -40686,7 +40683,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004D6F60 = 0x004D6F60,
     // label: ResetEventStatusUnk
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004D7200 = 0x004D7200,
     // label: RenderMissionObjectivesUnk
@@ -40950,7 +40947,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004D9D60 = 0x004D9D60,
     // label: TacticalPowersFill
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004D9D90 = 0x004D9D90,
     // label: MenuModalRenderFunction_TacticalPowerBar
@@ -41040,7 +41037,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004DA310 = 0x004DA310,
     // label: ColorEntireScreen
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004DA360 = 0x004DA360,
     // label: RenderGfxHelperUnk
@@ -41052,15 +41049,15 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004DA640 = 0x004DA640,
     // label: DrawLoadedMenuStringHelper
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004DA670 = 0x004DA670,
     // label: DrawLoadedMenuStringHelperWithBlending
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004DA6E0 = 0x004DA6E0,
     // label: StoreStringInMenuStringArray
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004DA750 = 0x004DA750,
     // label: AppendCreditsSoundEntry
@@ -41128,19 +41125,19 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004DACF0 = 0x004DACF0,
     // label: InsertElementIntoAnArrayAt_ec0348
-    // location: OpenSHC/Global
+    // location: OpenSHC/Rendering/Credits
     // type: function
     SHC_3BB0A8C1_0x004DAD40 = 0x004DAD40,
     // label: InsertElementIntoArrayAt_ec0348_3
-    // location: OpenSHC/Global
+    // location: OpenSHC/Rendering/Credits
     // type: function
     SHC_3BB0A8C1_0x004DAE00 = 0x004DAE00,
     // label: InsertElementIntoArrayAt_ec0348_2
-    // location: OpenSHC/Global
+    // location: OpenSHC/Rendering/Credits
     // type: function
     SHC_3BB0A8C1_0x004DAE90 = 0x004DAE90,
     // label: LoadScoresFileToMemory
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004DAF50 = 0x004DAF50,
     // label: RenderTextPageProgressBar
@@ -41156,7 +41153,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004DB180 = 0x004DB180,
     // label: PrepareHistoryBook
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DB210 = 0x004DB210,
     // label: TrimStoredMenuString
@@ -41398,7 +41395,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004E12C0 = 0x004E12C0,
     // label: WriteMissionToScoresFile
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004E1810 = 0x004E1810,
     // label: MenuView_UnusedExtremeAd_Prepare
@@ -43071,8 +43068,8 @@ enum {
     // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004EDCB0 = 0x004EDCB0,
-    // label: ComputeLargestSeparateArea
-    // location: OpenSHC/Global
+    // label: computeLargestSeparateArea
+    // location: OpenSHC/AI/AIVState
     // type: function
     SHC_3BB0A8C1_0x004EDD00 = 0x004EDD00,
     // label: findSuitableFarmLocationAndPlaceFarm
@@ -52081,8 +52078,8 @@ enum {
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051D510 = 0x0051D510,
-    // label: DecrementTileMap1104
-    // location: OpenSHC/Global
+    // label: decrementTileMap1104
+    // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051D5D0 = 0x0051D5D0,
     // type: function
@@ -55935,7 +55932,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00530720 = 0x00530720,
     // label: DetachLadderman
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00530760 = 0x00530760,
     // label: UpdateSiegeTent
@@ -55961,35 +55958,35 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00530A90 = 0x00530A90,
     // label: IncrementAndOptionalUpdateAVValueRelated
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00530B40 = 0x00530B40,
     // label: ConsiderHavingABreakNowUnk
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00530C40 = 0x00530C40,
     // label: SetStateToFreetimeWalking
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00530CF0 = 0x00530CF0,
     // label: CheckUnitProductionPaused
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00530D50 = 0x00530D50,
     // label: ComputeGoodsProduced
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00530D70 = 0x00530D70,
     // label: WarnIfPlayersGranaryIsFull
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00530E00 = 0x00530E00,
     // label: PlayStockpileIsFullWarning
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00530EB0 = 0x00530EB0,
     // label: PlayArmoryIsFullWarning
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00530F20 = 0x00530F20,
     // label: checkIfCitizenUnitIsAliveBasedOnState
@@ -65985,7 +65982,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x0053A018 = 0x0053A018,
     // label: CurrentUnitHasHealer
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x0053A020 = 0x0053A020,
     // label: isWorkerAtProductionIdleState
@@ -68097,7 +68094,7 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x00549B24 = 0x00549B24,
     // label: SetRestingForUnit
-    // location: OpenSHC/Global
+    // location: OpenSHC/Map/Units
     // type: function
     SHC_3BB0A8C1_0x00549B30 = 0x00549B30,
     // label: processMeleeInitiation
@@ -74357,7 +74354,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x0057B9BE = 0x0057B9BE,
     // label: PlayJokeVideoBasedOnCurrentTimeAndPlayTime
-    // location: OpenSHC/Global
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x0057B9C0 = 0x0057B9C0,
     // label: WinMain
@@ -75246,7 +75243,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x005816C3 = 0x005816C3,
     // label: SetRNGSeed
-    // location: OpenSHC/Global
+    // location: OpenSHC/Random
     // type: function
     SHC_3BB0A8C1_0x005816EE = 0x005816EE,
     // label: _rand
@@ -75429,8 +75426,8 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005826B1 = 0x005826B1,
-    // label: GetFilePtrPos
-    // location: OpenSHC/Global
+    // label: _tell
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x005826FB = 0x005826FB,
     // label: _ucrt_lseek_nolock_unknown

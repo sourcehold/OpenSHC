@@ -397,6 +397,10 @@ namespace UI {
             void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00447FA0, &OpenSHC::UI::Rendering::RenderStatusMenu_Army)
         RenderStatusMenu_Army;
 
+        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0044E510,
+            &OpenSHC::UI::Rendering::InitBlendFilterArraysUnk)
+        InitBlendFilterArraysUnk;
+
         MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00452900,
             &OpenSHC::UI::Rendering::RenderTerrainTilesCenterPiece)
         RenderTerrainTilesCenterPiece;
@@ -428,6 +432,10 @@ namespace UI {
         MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004AF700,
             &OpenSHC::UI::Rendering::RenderDisplayElementsUnk)
         RenderDisplayElementsUnk;
+
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int posX, int posY, DWORD elementState), false,
+            Address::SHC_3BB0A8C1_0x004AF800, &OpenSHC::UI::Rendering::RenderInGameChatDisplayElement)
+        RenderInGameChatDisplayElement;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int posX, int posY, DWORD elementState), false,
             Address::SHC_3BB0A8C1_0x004AF820, &OpenSHC::UI::Rendering::RenderResourceMissing1DisplayElement)

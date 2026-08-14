@@ -105,8 +105,21 @@ namespace Map {
             void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00402AB0, &OpenSHC::Map::Entities::UpdateBrazierEntity)
         UpdateBrazierEntity;
 
+        MACRO_FUNCTION_RESOLVER(uint(__cdecl*)(int param_1, int x, int y, int param_4, int param_5), false,
+            Address::SHC_3BB0A8C1_0x00405130, &OpenSHC::Map::Entities::SomeFireSpreadFunction)
+        SomeFireSpreadFunction;
+
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00405680, &OpenSHC::Map::Entities::UpdateFireEntity)
+            uint(__cdecl*)(int playerID, int miniTileX, int miniTileY, int tileHeightMin8, int two, int fireIntensity),
+            false, Address::SHC_3BB0A8C1_0x004052E0, &OpenSHC::Map::Entities::IgniteFireAtMiniTile)
+        IgniteFireAtMiniTile;
+
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int playerID, int x, int y, int height, int param_5, int param_6), false,
+            Address::SHC_3BB0A8C1_0x004054E0, &OpenSHC::Map::Entities::AFireSpreadFunction)
+        AFireSpreadFunction;
+
+        MACRO_FUNCTION_RESOLVER(
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00405680, &OpenSHC::Map::Entities::UpdateFireEntity)
         UpdateFireEntity;
 
         MACRO_FUNCTION_RESOLVER(
@@ -124,6 +137,10 @@ namespace Map {
         MACRO_FUNCTION_RESOLVER(uint(__cdecl*)(int playerID, int miniTileX, int miniTileY, int tileHeightMin8, int two),
             false, Address::SHC_3BB0A8C1_0x00407130, &OpenSHC::Map::Entities::IgniteFireAtMiniTile_Convenience)
         IgniteFireAtMiniTile_Convenience;
+
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int playerID, int x, int y, int height, int param_5), false,
+            Address::SHC_3BB0A8C1_0x00407160, &OpenSHC::Map::Entities::SetPlaceOnFire)
+        SetPlaceOnFire;
 
     } // namespace Entities_Func
 } // namespace Map

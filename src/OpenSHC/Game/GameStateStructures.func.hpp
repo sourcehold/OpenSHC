@@ -348,8 +348,8 @@ namespace Game {
         computeArmySizeLimit;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x00459E40,
-            &GameStateStructures::HandleActivateTacticalPowers)
-        HandleActivateTacticalPowers;
+            &GameStateStructures::handleActivateTacticalPowers)
+        handleActivateTacticalPowers;
 
         MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(int, int, int, int), false,
             Address::SHC_3BB0A8C1_0x0045A060, &GameStateStructures::renderDebugDataCurrentPlayerData)

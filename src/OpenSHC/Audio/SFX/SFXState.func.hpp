@@ -126,6 +126,10 @@ namespace Audio {
             updateAmbientSoundStream;
 
             MACRO_FUNCTION_RESOLVER(
+                void (SFXState::*)(), false, Address::SHC_3BB0A8C1_0x0044C410, &SFXState::playSFXVoices)
+            playSFXVoices;
+
+            MACRO_FUNCTION_RESOLVER(
                 void (SFXState::*)(), false, Address::SHC_3BB0A8C1_0x0044C740, &SFXState::soundRelatedMethod1)
             soundRelatedMethod1;
 

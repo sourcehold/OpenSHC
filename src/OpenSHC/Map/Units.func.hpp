@@ -9,16 +9,22 @@
 #pragma once
 
 #include "OpenSHC/Map/Units.hpp"
+#include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
 namespace Map {
     namespace Units_Func {
 
+        using OpenSHC::Map::Units::States::UnitState;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         MACRO_FUNCTION_RESOLVER(
             int(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0051BE20, &OpenSHC::Map::Units::FindFirstOpponentWithKeep)
         FindFirstOpponentWithKeep;
+
+        MACRO_FUNCTION_RESOLVER(
+            void(__cdecl*)(int unitID), false, Address::SHC_3BB0A8C1_0x00530760, &OpenSHC::Map::Units::DetachLadderman)
+        DetachLadderman;
 
         MACRO_FUNCTION_RESOLVER(
             void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x005307B0, &OpenSHC::Map::Units::UpdateSiegeTent)
@@ -31,6 +37,42 @@ namespace Map {
         MACRO_FUNCTION_RESOLVER(
             void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00530A90, &OpenSHC::Map::Units::UpdateBurningAnimal2)
         UpdateBurningAnimal2;
+
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int unitID, BOOLEnum updateAV), false, Address::SHC_3BB0A8C1_0x00530B40,
+            &OpenSHC::Map::Units::IncrementAndOptionalUpdateAVValueRelated)
+        IncrementAndOptionalUpdateAVValueRelated;
+
+        MACRO_FUNCTION_RESOLVER(BOOLEnum(__cdecl*)(int unitID, UnitState nextUnitState), false,
+            Address::SHC_3BB0A8C1_0x00530C40, &OpenSHC::Map::Units::ConsiderHavingABreakNowUnk)
+        ConsiderHavingABreakNowUnk;
+
+        MACRO_FUNCTION_RESOLVER(undefined4(__cdecl*)(int unitID, int shouldFindNewGoodThing, int param_3), false,
+            Address::SHC_3BB0A8C1_0x00530CF0, &OpenSHC::Map::Units::SetStateToFreetimeWalking)
+        SetStateToFreetimeWalking;
+
+        MACRO_FUNCTION_RESOLVER(bool(__cdecl*)(int param_1), false, Address::SHC_3BB0A8C1_0x00530D50,
+            &OpenSHC::Map::Units::CheckUnitProductionPaused)
+        CheckUnitProductionPaused;
+
+        MACRO_FUNCTION_RESOLVER(int(__cdecl*)(int unitID, int goodsCount, BOOLEnum boost), false,
+            Address::SHC_3BB0A8C1_0x00530D70, &OpenSHC::Map::Units::ComputeGoodsProduced)
+        ComputeGoodsProduced;
+
+        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00530E00,
+            &OpenSHC::Map::Units::WarnIfPlayersGranaryIsFull)
+        WarnIfPlayersGranaryIsFull;
+
+        MACRO_FUNCTION_RESOLVER(uint(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00530EB0,
+            &OpenSHC::Map::Units::PlayStockpileIsFullWarning)
+        PlayStockpileIsFullWarning;
+
+        MACRO_FUNCTION_RESOLVER(
+            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00530F20, &OpenSHC::Map::Units::PlayArmoryIsFullWarning)
+        PlayArmoryIsFullWarning;
+
+        MACRO_FUNCTION_RESOLVER(
+            BOOLEnum(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0053A020, &OpenSHC::Map::Units::CurrentUnitHasHealer)
+        CurrentUnitHasHealer;
 
         MACRO_FUNCTION_RESOLVER(
             void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0053BC20, &OpenSHC::Map::Units::UpdateBurningMan)
@@ -127,6 +169,10 @@ namespace Map {
         MACRO_FUNCTION_RESOLVER(
             void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00549650, &OpenSHC::Map::Units::UpdateFireEater)
         UpdateFireEater;
+
+        MACRO_FUNCTION_RESOLVER(undefined4(__cdecl*)(int unitID), false, Address::SHC_3BB0A8C1_0x00549B30,
+            &OpenSHC::Map::Units::SetRestingForUnit)
+        SetRestingForUnit;
 
         MACRO_FUNCTION_RESOLVER(
             void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0054C710, &OpenSHC::Map::Units::UpdateWoodcutter)

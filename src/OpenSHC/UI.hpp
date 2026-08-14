@@ -11,6 +11,8 @@
 #include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/UI/ChooseNetworkServiceProvider/ChooseNetworkServiceProviderButtonActions.hpp"
+#include "OpenSHC/UI/DisplayElement.hpp"
+#include "OpenSHC/UI/Enums/DisplayElementID.hpp"
 #include "OpenSHC/UI/Enums/SoundMenuClickType.hpp"
 #include "OpenSHC/UI/Multiplayer/FindingNetworkSessions_ButtonParameters.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -21,7 +23,9 @@ namespace UI {
 
     using OpenSHC::Commands::MappersEnum;
     using OpenSHC::Game::Resources::ResourceType;
+    using OpenSHC::UI::DisplayElement;
     using OpenSHC::UI::ChooseNetworkServiceProvider::ChooseNetworkServiceProviderButtonActions;
+    using OpenSHC::UI::Enums::DisplayElementID;
     using OpenSHC::UI::Enums::SoundMenuClickType;
     using OpenSHC::UI::Multiplayer::FindingNetworkSessions_ButtonParameters;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
@@ -39,6 +43,8 @@ namespace UI {
     void __stdcall MenuView_IntroVideo_DoEveryFrame();
 
     void __stdcall MenuView_GameStartEnterName_DoEveryFrame();
+
+    void __stdcall LoadTGX_shc_back();
 
     void __stdcall MenuView_MainMenu_Prepare();
 
@@ -115,6 +121,8 @@ namespace UI {
     void __cdecl MenuItemActionHandler_UnusedSomeMissionStartUnk_General(int param_1, ...);
 
     void __stdcall MenuView_MpConnection_Prepare();
+
+    void __stdcall MainMenu_Unknown21_Prepare();
 
     void __stdcall MenuView_General_DoEveryFrame_FirstGfxCentered();
 
@@ -356,6 +364,8 @@ namespace UI {
     void __cdecl MenuItemFunction_General_Unknown(int param_1, ...);
 
     void __cdecl MenuItemActionHandler_UnusedOldTitleMenu_General(int param_1, ...);
+
+    HCURSOR __stdcall SetCursorDependingOnProgramState();
 
     void __cdecl MenuView_GameStartEnterName_Prepare(void* param_1);
 
@@ -791,6 +801,11 @@ namespace UI {
 
     void __cdecl MenuModalRenderFunction_DebugDataAivStateUnk(int x, int y, int width, int height);
 
+    DisplayElement* __cdecl FindDisplayElementWithID(int elementID);
+
+    void __cdecl ActivateGameSpeedAndResourceLackDisplayElementUnk(
+        DisplayElementID elementId, dword elementState, int displayDuration);
+
     void __cdecl MenuItemActionHandler_OverlaySlider_Deselect(int param_1, ...);
 
     void __cdecl MenuItemActionHandler_UnusedWinCondition_DeselectUnk(int param_1, ...);
@@ -919,6 +934,8 @@ namespace UI {
 
     void __stdcall resetTutorialActionTrackers();
 
+    void __stdcall SetTutorialHintActiveWithTimestamp();
+
     void __cdecl renderAnimatedTutorialFloatOverlay(int param_1, int param_2);
 
     void __cdecl renderTutorialFloatForUIElement(int param_1);
@@ -1013,6 +1030,8 @@ namespace UI {
 
     void __cdecl MenuItemActionHandler_DeleteGameRecord_Main(int param_1, ...);
 
+    void __cdecl TacticalPowersFill();
+
     void __cdecl MenuModalRenderFunction_TacticalPowerBar(int x, int y, int width, int height);
 
     void __cdecl MenuItemRenderFunction_TacticalPowerBar_Main(int param_1, ...);
@@ -1065,6 +1084,8 @@ namespace UI {
     void __cdecl DisplayFullScreenTextPage(int param_1);
 
     void __cdecl BuildIntroLogoSequence(undefined4 param_1, undefined4 param_2);
+
+    int __cdecl PrepareHistoryBook();
 
     void __cdecl TrimStoredMenuString(int storedMenuStringIndex, undefined4 param_2, undefined4 param_3,
         int allowedWidth, undefined4 param_5, int fontSize);

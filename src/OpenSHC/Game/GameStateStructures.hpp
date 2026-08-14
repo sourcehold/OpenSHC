@@ -215,7 +215,7 @@ namespace Game {
 
         void computeArmySizeLimit();
 
-        void HandleActivateTacticalPowers(int param_1, int powerType, int param_3);
+        void handleActivateTacticalPowers(int param_1, int powerType, int param_3);
 
         void renderDebugDataCurrentPlayerData(int x, int y, int width, int height);
 

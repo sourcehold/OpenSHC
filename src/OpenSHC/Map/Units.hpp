@@ -8,20 +8,42 @@
 
 #pragma once
 
+#include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
 namespace Map {
     namespace Units {
 
+        using OpenSHC::Map::Units::States::UnitState;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         int __stdcall FindFirstOpponentWithKeep();
+
+        void __cdecl DetachLadderman(int unitID);
 
         void __stdcall UpdateSiegeTent();
 
         void __stdcall UpdateBurningAnimal1();
 
         void __stdcall UpdateBurningAnimal2();
+
+        void __cdecl IncrementAndOptionalUpdateAVValueRelated(int unitID, BOOLEnum updateAV);
+
+        BOOLEnum __cdecl ConsiderHavingABreakNowUnk(int unitID, UnitState nextUnitState);
+
+        undefined4 __cdecl SetStateToFreetimeWalking(int unitID, int shouldFindNewGoodThing, int param_3);
+
+        bool __cdecl CheckUnitProductionPaused(int param_1);
+
+        int __cdecl ComputeGoodsProduced(int unitID, int goodsCount, BOOLEnum boost);
+
+        void __stdcall WarnIfPlayersGranaryIsFull();
+
+        uint __stdcall PlayStockpileIsFullWarning();
+
+        void __stdcall PlayArmoryIsFullWarning();
+
+        BOOLEnum __cdecl CurrentUnitHasHealer();
 
         void __stdcall UpdateBurningMan();
 
@@ -70,6 +92,8 @@ namespace Map {
         void __stdcall UpdateJuggler();
 
         void __stdcall UpdateFireEater();
+
+        undefined4 __cdecl SetRestingForUnit(int unitID);
 
         void __cdecl UpdateWoodcutter();
 

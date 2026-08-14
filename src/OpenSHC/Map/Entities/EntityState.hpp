@@ -99,7 +99,7 @@ namespace Map {
 
             int math_atan_1(int entityType, double param_3, int param_4, int heightDifference);
 
-            int computeVelocity(undefined4 param_2, double param_3, int param_4, int param_5);
+            int computeVelocity(int param_2, double param_3, int param_4, int param_5);
 
             uint computeLineOfSightDistance(
                 int x, int y, int height, int targetX, int targetY, int targetHeight, int param_7);

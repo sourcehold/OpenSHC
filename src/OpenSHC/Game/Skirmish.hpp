@@ -8,11 +8,24 @@
 
 #pragma once
 
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
 namespace Game {
     namespace Skirmish {
 
+        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
+
+        void __stdcall SetupSkirmishBalanceAndOrIntensity();
+
         void __cdecl RecalculateAllies();
+
+        void __cdecl SetupSkirmishMode(int skirmishTrailMission);
+
+        int __stdcall StoreLocalTime();
+
+        BOOLEnum __cdecl StoreCurrentGameIntoTemporarySKMasterEntry(int score);
+
+        void __cdecl StoreGameIntoSKMasters(int score);
 
         void __cdecl SkirmishLeaderboard_DeleteEntry(int index);
 

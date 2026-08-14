@@ -18,6 +18,7 @@
 #include "stdio.h"
 #include "time.h"
 #include "vadefs.h"
+#include "winnt.h"
 namespace OpenSHC {
 namespace OS_Func {
 
@@ -139,7 +140,7 @@ namespace OS_Func {
         char*(__cdecl*)(char* string), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x005818EB, &OpenSHC::OS::__strlwr)
     __strlwr;
 
-    MACRO_FUNCTION_RESOLVER(undefined4(__cdecl*)(int fileDescriptor, void* src, uint size), REIMPLEMENTED_CRT,
+    MACRO_FUNCTION_RESOLVER(int(__cdecl*)(int fileDescriptor, void const* src, uint size), REIMPLEMENTED_CRT,
         Address::SHC_3BB0A8C1_0x00581F6F, &OpenSHC::OS::_ucrt_write)
     _ucrt_write;
 
@@ -150,6 +151,10 @@ namespace OS_Func {
     MACRO_FUNCTION_RESOLVER(
         int(__cdecl*)(int _C), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x005824CD, &OpenSHC::OS::__toupper)
     __toupper;
+
+    MACRO_FUNCTION_RESOLVER(
+        int(__cdecl*)(HANDLE hFile), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x005826FB, &OpenSHC::OS::_tell)
+    _tell;
 
     MACRO_FUNCTION_RESOLVER(int(__cdecl*)(int fileDescriptor, long lDistanceToMove, DWORD moveMethod),
         REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x0058277E, &OpenSHC::OS::_ucrt_lseek)

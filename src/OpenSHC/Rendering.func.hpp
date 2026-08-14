@@ -25,6 +25,10 @@ namespace Rendering_Func {
     BlitMapImageWithVerticalClipAndYOffset;
 
     MACRO_FUNCTION_RESOLVER(
+        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00467890, &OpenSHC::Rendering::InitializeColors)
+    InitializeColors;
+
+    MACRO_FUNCTION_RESOLVER(
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0046CF10, &OpenSHC::Rendering::TicksStartCounter)
     TicksStartCounter;
 

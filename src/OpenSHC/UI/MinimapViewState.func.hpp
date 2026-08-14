@@ -41,7 +41,7 @@ namespace UI {
             &MinimapViewState::locatePlayerKeepPositionsOnMinimap)
         locatePlayerKeepPositionsOnMinimap;
 
-        MACRO_FUNCTION_RESOLVER(void (MinimapViewState::*)(), false, Address::SHC_3BB0A8C1_0x004B61F0,
+        MACRO_FUNCTION_RESOLVER(int (MinimapViewState::*)(), false, Address::SHC_3BB0A8C1_0x004B61F0,
             &MinimapViewState::generateMinimapImage)
         generateMinimapImage;
 

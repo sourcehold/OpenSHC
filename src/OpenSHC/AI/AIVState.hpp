@@ -112,6 +112,8 @@ namespace AI {
 
         void resetCountdownInHeatMap(int x, int y);
 
+        int computeLargestSeparateArea();
+
         int findSuitableFarmLocationAndPlaceFarm(PlayerID playerID, MappersEnum commandBuildingType);
 
         void findAppropriateWoodCutterGridLocation(int playerID);

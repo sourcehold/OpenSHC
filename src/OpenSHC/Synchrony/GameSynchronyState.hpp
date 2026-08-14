@@ -417,6 +417,8 @@ namespace Synchrony {
 
         undefined4 checkAllPlayersReadyAndCleanupSlots();
 
+        int computeSomeHashOnUnitArray();
+
         void renderDebugDataSplitInfo(int x, int y, int width, int height);
 
         void addChatMessageToDisplayList(int subjectPlayerID, int objectPlayerID);
@@ -514,8 +516,6 @@ namespace Synchrony {
         void waitForMultiplayerHost();
 
         void handleCommandLineArguments(char* arguments);
-
-        void renderInGameChatDisplayElement(int posX, int posY, DWORD elementState);
     };
 
     static_assert_cpp98_obj(sizeof(GameSynchronyState) == 1090072, GameSynchronyState);

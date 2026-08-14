@@ -1,3 +1,10 @@
+param(
+    [string]$CppFilesFilter = "",
+    [bool]$CppFilesFilterRecurse = $false,
+    [bool]$Enable = $true,
+    [string]$AddressFilter = ""
+)
+
 function Enable-Reimplemented-Functions {
     param(
         [string]$CppFilesFilter = "",
@@ -26,11 +33,11 @@ function Enable-Reimplemented-Functions {
             ForEach-Object {
                 (Get-Content -Path $_ -Raw) -replace
                     "(?s)(MACRO_FUNCTION_RESOLVER\b(?:(?!MACRO_FUNCTION_RESOLVER).)*?),\s*$target(\s*, Address::SHC_3BB0A8C1_$address)", "`$1, $replacement`$2" |
-                    Set-Content -Path $_
+                    Set-Content -Path $_ -NoNewLine
             }
     }
 }
 
 if ($MyInvocation.InvocationName -ne '.') {
-    & Enable-Reimplemented-Functions
+    & Enable-Reimplemented-Functions -CppFilesFilter $CppFilesFilter -Enable $Enable -CppFilesFilterRecurse $CppFilesFilterRecurse -AddressFilter $AddressFilter
 }

@@ -12,6 +12,8 @@ namespace OpenSHC {
 namespace Map {
     namespace Version {
 
+        void __stdcall UpgradeSetCurrentEntityID3000();
+
         void __stdcall SetFlagEntityColor();
 
         void __stdcall deleteSeagull();
@@ -42,11 +44,15 @@ namespace Map {
 
         void __stdcall UpgradeLogicAndDisplayLayerForDairyFarms();
 
+        void __stdcall UpgradeDestroyDrawbridgesInFirst10Buildings();
+
         void __stdcall UpgradePitchDitchBuildingIntoPitchDitchObject();
 
         void __stdcall UpgradeKillingPitField();
 
         void __stdcall UpgradeBuildingField4();
+
+        void __stdcall UpgradeClearBuildings1000AndHigher();
 
         void __stdcall UpgradeKnightsAndStables();
 

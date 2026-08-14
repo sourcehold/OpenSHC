@@ -350,6 +350,10 @@ namespace Map {
                 &TroopValueState::moveTowardsParticularUnits)
             moveTowardsParticularUnits;
 
+            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051D5D0,
+                &TroopValueState::decrementTileMap1104)
+            decrementTileMap1104;
+
             MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051D690,
                 &TroopValueState::advanceAttackWaveStaging)
             advanceAttackWaveStaging;

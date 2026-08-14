@@ -19,6 +19,7 @@
 #include "sys/stat.h"
 #include "time.h"
 #include "vadefs.h"
+#include "winnt.h"
 namespace OpenSHC {
 namespace OS {
 
@@ -83,11 +84,13 @@ namespace OS {
 
     char* __cdecl __strlwr(char* string);
 
-    undefined4 __cdecl _ucrt_write(int fileDescriptor, void* src, uint size);
+    int __cdecl _ucrt_write(int fileDescriptor, void const* src, uint size);
 
     void* __cdecl _memcpy(void* _Dst, void* _Src, size_t _Size);
 
     int __cdecl __toupper(int _C);
+
+    int __cdecl _tell(HANDLE hFile);
 
     int __cdecl _ucrt_lseek(int fileDescriptor, long lDistanceToMove, DWORD moveMethod);
 

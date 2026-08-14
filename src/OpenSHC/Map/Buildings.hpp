@@ -170,10 +170,6 @@ namespace Map {
 
         void __stdcall UpdateWoodGate1();
 
-        void __cdecl OpenOrCloseDrawbridge(undefined4 param_1, int buildingID, int value, int buildingUID);
-
-        void __cdecl GateOpenOrClose(undefined4 playerID, int buildingID, int newGateState, int buildingUID);
-
     } // namespace Buildings
 } // namespace Map
 } // namespace OpenSHC

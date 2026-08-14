@@ -58,7 +58,14 @@ namespace Map {
 
         void __stdcall UpdateBrazierEntity();
 
-        void __stdcall UpdateFireEntity();
+        uint __cdecl SomeFireSpreadFunction(int param_1, int x, int y, int param_4, int param_5);
+
+        uint __cdecl IgniteFireAtMiniTile(
+            int playerID, int miniTileX, int miniTileY, int tileHeightMin8, int two, int fireIntensity);
+
+        void __cdecl AFireSpreadFunction(int playerID, int x, int y, int height, int param_5, int param_6);
+
+        void __cdecl UpdateFireEntity();
 
         void __stdcall UpdateFirethrowEntity();
 
@@ -68,6 +75,8 @@ namespace Map {
 
         uint __cdecl IgniteFireAtMiniTile_Convenience(
             int playerID, int miniTileX, int miniTileY, int tileHeightMin8, int two);
+
+        void __cdecl SetPlaceOnFire(int playerID, int x, int y, int height, int param_5);
 
     } // namespace Entities
 } // namespace Map

@@ -29,6 +29,10 @@ namespace Map {
                 &PathFindingState::getTileInSearchQueue)
             getTileInSearchQueue;
 
+            MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(), false, Address::SHC_3BB0A8C1_0x00496E40,
+                &PathFindingState::clearPathFindingTileMaps)
+            clearPathFindingTileMaps;
+
             MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(byte*), false, Address::SHC_3BB0A8C1_0x00496EA0,
                 &PathFindingState::bindPathPlanToAlgorithmStateAndReset)
             bindPathPlanToAlgorithmStateAndReset;
@@ -102,7 +106,7 @@ namespace Map {
                 &PathFindingState::updatePathLinkageTileMapRelatedToGates)
             updatePathLinkageTileMapRelatedToGates;
 
-            MACRO_FUNCTION_RESOLVER(undefined8 (PathFindingState::*)(int), false, Address::SHC_3BB0A8C1_0x0049A1C0,
+            MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int), false, Address::SHC_3BB0A8C1_0x0049A1C0,
                 &PathFindingState::updatePathLinkageTileMapRelatedToKeeps)
             updatePathLinkageTileMapRelatedToKeeps;
 
