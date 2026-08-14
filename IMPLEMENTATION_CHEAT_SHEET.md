@@ -195,9 +195,9 @@ Make always sure to use a reference from this file instead of a string literal.
 
 ### Blocks and Scopes
 
-Many blocks come naturally with the usage of other structures. However, either by being in the original source or maybe be via inlined functions, it can happen that a block it added to the logical function flow.
+Many blocks come naturally with the usage of other structures. However, either by being in the original source or maybe via inlined functions, it can happen that a block is added to the logical function flow.
 
-It is hard to find these cases. I one situation, local variables that were used as local buffers whose pointers were send into functions had the issue of adding to the stack size. The lifetime of such just seem to naturally extend to the end of the block. Wrapping these statements into inline blocks solved this case.
+It is hard to find these cases. I one situation, local variables that were used as local buffers whose pointers were send into functions had the issue of adding to the stack size. The lifetime of such just seems to naturally extend to the end of the block. Wrapping these statements into inline blocks solved this case.
 
 ## Functions
 
