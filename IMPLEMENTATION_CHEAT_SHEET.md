@@ -154,11 +154,20 @@ for (int soundIndex = 1; soundIndex < this->loadedSoundsCountAndIndex_0x316c; ++
 }
 ```
 
-This covers most cases.
+This covers a lot of cases.
 
 Exceptions are:
  - when the logic has not initial condition check before the loop body. This suggests the usage of a do-while loop.
  - when the update parts of the pointer and index are not the last instructions before the loop condition. This indicates manual handling like in a while loop.
+ - when it might lack a counter variable and the index loop simply does not match. This case might indicate a pointer increment loop.  
+ Another sign for this could be the storing of the start of an array before the array is incremented. The main pointer is then often reset using this temporary. This may should up in opcodes like this:
+    ```
+        MOV     EDX,   dword ptr [ESP + 0x20] <--
+        MOV     dword ptr [ESI + 0xc],  EBX
+        MOV     dword ptr [ESI + 0x24], EBX
+        MOV     dword ptr [ESP + 0x20], EDX <--
+    ```
+    Note the seemingly redundant storing. This structure is followed by a loop where the main array is incremented and a temp used to reset it.
 
 If you see a repeating logic structure, that, for example, increments by a value in its logic every repeat,
 you might have found an unrolled loop. Therefore, try to reproduce the logic in loop form and see how the compiler behaves.
@@ -183,6 +192,12 @@ They might be worth trying in very tricky cases, but they were usually seen as c
 
 String literals are not resolved. Instead we use a big `string-literals.hpp` file.
 Make always sure to use a reference from this file instead of a string literal.
+
+### Blocks and Scopes
+
+Many blocks come naturally with the usage of other structures. However, either by being in the original source or maybe be via inlined functions, it can happen that a block it added to the logical function flow.
+
+It is hard to find these cases. I one situation, local variables that were used as local buffers whose pointers were send into functions had the issue of adding to the stack size. The lifetime of such just seem to naturally extend to the end of the block. Wrapping these statements into inline blocks solved this case.
 
 ## Functions
 
