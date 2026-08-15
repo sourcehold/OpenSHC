@@ -2,6 +2,7 @@
 
 #include "OpenSHC/IO/DecoderBuffer.func.hpp"
 #include "OpenSHC/OS.func.hpp"
+#include "OpenSHC/IO/Helpers/BufferHelper.hpp"
 
 #include "pklib.h"
 
@@ -10,7 +11,7 @@ namespace IO {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004725A0
     BOOLEnum DecoderState::doExplode(
-        int* hash, undefined* src, unsigned int sizeCompressed, undefined* dst, unsigned int sizeUncompressed)
+        int* hash, undefined* src, int sizeCompressed, undefined* dst, int sizeUncompressed)
     {
         BOOLEnum _status = TRUE;
         HGLOBAL hMem = GlobalAlloc(GHND, sizeof(TCmpStruct));

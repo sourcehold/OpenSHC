@@ -43,7 +43,8 @@ namespace IO {
 
         BOOLEnum doImplode(int* ptrHash, int* ptrSize, undefined* src, undefined* dst, int sizeUncompressed);
 
-        BOOLEnum doExplode(int* hash, uchar* src, int sizeCompressed, uchar* dst, int sizeUncompressed);
+        BOOLEnum doExplode(
+            int* hash, undefined* src, unsigned int sizeCompressed, undefined* dst, unsigned int sizeUncompressed);
 
         int encodeData(int sizeUncompressed, undefined* src, undefined* dst);
 

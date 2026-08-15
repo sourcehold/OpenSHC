@@ -4,7 +4,7 @@ namespace OpenSHC {
 namespace IO {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x0046D150
-    int DecoderState::compressRLE(char* src, char* dst, int inputSize)
+    int DecoderState::compressRLE(char* src, void* dst, int inputSize)
     {
 
         /*
