@@ -128,6 +128,9 @@ namespace OS {
     // STUB: STRONGHOLDCRUSADER 0x005824CD
     int __cdecl __toupper(int _C) { return toupper(_C); }
 
+    // STUB: STRONGHOLDCRUSADER 0x005826FB
+    int __cdecl _ucrt_tell(int handle) { return _tell(handle); }
+
     // STUB: STRONGHOLDCRUSADER 0x0058277E
     int _ucrt_lseek(int fileDescriptor, long lDistanceToMove, DWORD moveMethod)
     {
