@@ -237,9 +237,9 @@ namespace Synchrony {
             void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00484DA0, &OpenSHC::Synchrony::Commands::DeselectUnit)
         DeselectUnit;
 
-        MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00484E10, &OpenSHC::Synchrony::Commands::SetField45To100)
-        SetField45To100;
+        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00484E10,
+            &OpenSHC::Synchrony::Commands::TriggerRecalculationOfUnitSameTileLinkage)
+        TriggerRecalculationOfUnitSameTileLinkage;
 
         MACRO_FUNCTION_RESOLVER(
             void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00484E70, &OpenSHC::Synchrony::Commands::ResyncZone)

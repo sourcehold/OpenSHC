@@ -30,7 +30,7 @@ namespace IO {
     // SIZE: 0x000FC794
     class ResourceManager {
     public:
-        dword mapFileCounter; // 0x00000000 length: 4
+        int mapFileCounter; // 0x00000000 length: 4
         int loadPositionInCurrentResource; // 0x00000004 length: 4
         char strFile[4]; // 0x00000008 length: 4
         dword currentSectionIndex; // 0x0000000C length: 4
@@ -50,8 +50,8 @@ namespace IO {
         undefined1 padding_0x80d06[2]; // 0x00080D06 length: 2
         int fileHandle; // 0x00080D08 length: 4
         MapMetaInfo mapMetaInfoArray[500]; // 0x00080D0C length: 6000
-        byte mapNames[500][1001]; // 0x0008247C length: 500500
-        uint loadedMapsCount; // 0x000FC790 length: 4
+        char mapNames[500][1001]; // 0x0008247C length: 500500
+        int loadedMapsCount; // 0x000FC790 length: 4
 
     private:
         ResourceManager(ResourceManager const&);
@@ -68,7 +68,7 @@ namespace IO {
 
         dword getChecksumOfMapByName(char* mapNameAddress);
 
-        char* getLoadedMapNameForIndex(int mapIndex);
+        char* mapNames_getLoadedMapNameForIndex(int mapIndex);
 
         char* getFileNameOfCurrentActiveResource();
 
@@ -84,7 +84,7 @@ namespace IO {
 
         int getSimpleFirst1024ByteSumOfFile(char* filename);
 
-        void syncLoadedMapNames();
+        void mapNames_syncLoadedMapNames();
 
         void swapMapDataWithNextMap(int _mapFileIndex);
 

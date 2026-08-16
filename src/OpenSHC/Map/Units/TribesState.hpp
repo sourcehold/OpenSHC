@@ -299,7 +299,7 @@ namespace Map {
 
             void updateLionWolfTribeBehavior(int param_1);
 
-            void updateRabbitTribeBehavior(int param_1);
+            void updateRabbitTribeBehavior(int tribeID);
 
             void updateCamelTribeBehavior(int param_1);
 

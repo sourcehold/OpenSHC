@@ -8,6 +8,7 @@ param(
     [bool]$MakeBackup = $true,
     [bool]$Interactive = $false,
     [bool]$DryRun = $false,
+    [bool]$GenerateSarif = $false,
     [string]$ScriptPath = "tools\import\ghidra-importer.py"
 )
 
@@ -49,6 +50,7 @@ if ($DryRun) {
     & python $pyArgs
 } else {
     
+    Write-Output "Backing up or deleting existing hpp files"
     # Backup or delete existing hpp files
     $hppFiles = Get-ChildItem -File -Recurse "$OutputDir\OpenSHC\*.hpp" | Where-Object {$_.Name -ne "string-literals.hpp"}
     if ($MakeBackup) {
@@ -57,14 +59,22 @@ if ($DryRun) {
         $hppFiles | Remove-Item
     }
 
+    if($GenerateSarif) {
+        Write-Output "Generating sarif file from gzf"
+        & python .\tools\import\gzftosarif.py --sarif $Sarif
+    }
+
+    Write-Output "Converting sarif to .hpp files"
     # Execute the export
     & python $pyArgs
 
+    Write-Output "Applying clang-format"
     # Efficiently format all hpp files by providing a file list to clang-format
     $FileListFile = New-TemporaryFile
     Get-ChildItem -File -Recurse "$OutputDir\*.hpp" | ForEach-Object { $_.FullName} | Join-String -Separator `n | Set-Content -Path $FileListFile
     clang-format -i @$FileListFile
 
+    Write-Output "Updating status tracker"
     # Update table of progress
     python status\extract_header_and_update.py src\precomp\addresses-SHC-3BB0A8C1.hpp
 }

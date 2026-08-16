@@ -67,7 +67,7 @@ namespace UI {
 
         void setExtraActiveModalDialog(MenuModalType menuModalID, int dialogX, int dialogY);
 
-        void handleActiveModalDialogUnk();
+        void update();
 
         void fillWithMenuModalDimensions(int* xPtr, int* yPtr, int* widthPtr, int* heigthPtr);
 

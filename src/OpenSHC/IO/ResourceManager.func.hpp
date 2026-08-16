@@ -29,8 +29,8 @@ namespace IO {
         getChecksumOfMapByName;
 
         MACRO_FUNCTION_RESOLVER(char* (ResourceManager::*)(int), false, Address::SHC_3BB0A8C1_0x0046C2E0,
-            &ResourceManager::getLoadedMapNameForIndex)
-        getLoadedMapNameForIndex;
+            &ResourceManager::mapNames_getLoadedMapNameForIndex)
+        mapNames_getLoadedMapNameForIndex;
 
         MACRO_FUNCTION_RESOLVER(char* (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x0046C300,
             &ResourceManager::getFileNameOfCurrentActiveResource)
@@ -60,9 +60,9 @@ namespace IO {
             &ResourceManager::getSimpleFirst1024ByteSumOfFile)
         getSimpleFirst1024ByteSumOfFile;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x00471C10, &ResourceManager::syncLoadedMapNames)
-        syncLoadedMapNames;
+        MACRO_FUNCTION_RESOLVER(void (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x00471C10,
+            &ResourceManager::mapNames_syncLoadedMapNames)
+        mapNames_syncLoadedMapNames;
 
         MACRO_FUNCTION_RESOLVER(void (ResourceManager::*)(int), false, Address::SHC_3BB0A8C1_0x00471C50,
             &ResourceManager::swapMapDataWithNextMap)

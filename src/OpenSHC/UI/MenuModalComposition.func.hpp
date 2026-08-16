@@ -36,9 +36,9 @@ namespace UI {
             Address::SHC_3BB0A8C1_0x004AA0A0, &MenuModalComposition::setExtraActiveModalDialog)
         setExtraActiveModalDialog;
 
-        MACRO_FUNCTION_RESOLVER(void (MenuModalComposition::*)(), false, Address::SHC_3BB0A8C1_0x004AA1F0,
-            &MenuModalComposition::handleActiveModalDialogUnk)
-        handleActiveModalDialogUnk;
+        MACRO_FUNCTION_RESOLVER(
+            void (MenuModalComposition::*)(), false, Address::SHC_3BB0A8C1_0x004AA1F0, &MenuModalComposition::update)
+        update;
 
         MACRO_FUNCTION_RESOLVER(void (MenuModalComposition::*)(int*, int*, int*, int*), false,
             Address::SHC_3BB0A8C1_0x004AA3E0, &MenuModalComposition::fillWithMenuModalDimensions)

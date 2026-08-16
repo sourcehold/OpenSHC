@@ -289,7 +289,7 @@ namespace Synchrony {
         undefined4 field261_0x109298; // 0x00109298 length: 4
         undefined4 kickDueToLagStatusUnk; // 0x0010929C length: 4
         int skirmishAutoSaveEveryMinutes; // 0x001092A0 length: 4
-        undefined4 DAT_TimeRelated1; // 0x001092A4 length: 4
+        undefined4 timeSkirmishGameStart; // 0x001092A4 length: 4
         int DAT_MapU4Int2_2; // 0x001092A8 length: 4
         undefined4 DAT_HashCountdown; // 0x001092AC length: 4
         undefined4 field267_0x1092b0; // 0x001092B0 length: 4

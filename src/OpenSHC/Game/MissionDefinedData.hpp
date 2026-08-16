@@ -42,21 +42,23 @@ namespace Game {
         int field23_0x7d4[18][2]; // 0x000007D4 length: 144
         char field24_0x864[20][32]; // 0x00000864 length: 640
         int field25_0xae4[5]; // 0x00000AE4 length: 20
-        int field26_0xaf8[2]; // 0x00000AF8 length: 8
-        int field27_0xb00[20]; // 0x00000B00 length: 80
+        bool field26_0xaf8; // 0x00000AF8 length: 1
+        byte field27_0xaf9[3]; // 0x00000AF9 length: 3
+        int field28_0xafc; // 0x00000AFC length: 4
+        int field29_0xb00[20]; // 0x00000B00 length: 80
         int sortColumn; // 0x00000B50 length: 4
-        int field29_0xb54[26]; // 0x00000B54 length: 104
-        int field30_0xbbc[50][2]; // 0x00000BBC length: 400
-        int field31_0xd4c[30][2]; // 0x00000D4C length: 240
-        int field32_0xe3c[30][2]; // 0x00000E3C length: 240
-        int field33_0xf2c[50]; // 0x00000F2C length: 200
-        int field34_0xff4[50][4]; // 0x00000FF4 length: 800
-        int field35_0x1314[22]; // 0x00001314 length: 88
+        int field31_0xb54[26]; // 0x00000B54 length: 104
+        int field32_0xbbc[50][2]; // 0x00000BBC length: 400
+        int field33_0xd4c[30][2]; // 0x00000D4C length: 240
+        int field34_0xe3c[30][2]; // 0x00000E3C length: 240
+        int field35_0xf2c[50]; // 0x00000F2C length: 200
+        int field36_0xff4[50][4]; // 0x00000FF4 length: 800
+        int field37_0x1314[22]; // 0x00001314 length: 88
         undefined4 descending; // 0x0000136C length: 4
-        int field37_0x1370; // 0x00001370 length: 4
+        int field39_0x1370; // 0x00001370 length: 4
         undefined1 padding_0x1374[8]; // 0x00001374 length: 8
-        int field46_0x137c[50]; // 0x0000137C length: 200
-        char field47_0x1444[20][32]; // 0x00001444 length: 640
+        int field48_0x137c[50]; // 0x0000137C length: 200
+        char field49_0x1444[20][32]; // 0x00001444 length: 640
 
     } MissionDefinedData;
 #pragma pack(pop)

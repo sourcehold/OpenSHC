@@ -124,7 +124,7 @@ namespace Synchrony {
 
         void __stdcall DeselectUnit();
 
-        void __stdcall SetField45To100();
+        void __stdcall TriggerRecalculationOfUnitSameTileLinkage();
 
         void __stdcall ResyncZone();
 

@@ -23386,7 +23386,7 @@ enum {
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x0046C280 = 0x0046C280,
-    // label: getLoadedMapNameForIndex
+    // label: mapNames_getLoadedMapNameForIndex
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x0046C2E0 = 0x0046C2E0,
@@ -24014,7 +24014,7 @@ enum {
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x00471BE0 = 0x00471BE0,
-    // label: syncLoadedMapNames
+    // label: mapNames_syncLoadedMapNames
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x00471C10 = 0x00471C10,
@@ -26048,7 +26048,7 @@ enum {
     // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00484DA0 = 0x00484DA0,
-    // label: SetField45To100
+    // label: TriggerRecalculationOfUnitSameTileLinkage
     // location: OpenSHC/Synchrony/Commands
     // type: function
     SHC_3BB0A8C1_0x00484E10 = 0x00484E10,
@@ -29412,7 +29412,7 @@ enum {
     // location: OpenSHC/UI/MenuModalComposition
     // type: function
     SHC_3BB0A8C1_0x004AA0A0 = 0x004AA0A0,
-    // label: handleActiveModalDialogUnk
+    // label: update
     // location: OpenSHC/UI/MenuModalComposition
     // type: function
     SHC_3BB0A8C1_0x004AA1F0 = 0x004AA1F0,

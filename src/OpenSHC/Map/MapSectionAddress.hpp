@@ -17,7 +17,7 @@ namespace Map {
 
         pointer address; // 0x00000000 length: 4
         undefined4 unknown; // 0x00000004 length: 4
-        uint size; // 0x00000008 length: 4
+        int size; // 0x00000008 length: 4
         short compressed; // 0x0000000C length: 2
         short sectionId; // 0x0000000E length: 2
 
