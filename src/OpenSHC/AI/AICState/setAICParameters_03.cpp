@@ -13,8 +13,8 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004C7520
     void AICState::setAICParameters_03(int param_1)
     {
-        this->aics[param_1].minimumWheat = 0xffffffff;
-        this->aics[param_1].minimumHop = 0xffffffff;
+        this->aics[param_1].minimumWheat = -1;
+        this->aics[param_1].minimumHop = -1;
         this->aics[param_1].flagType = 0xc;
         this->aics[param_1].unknown002 = 0;
         this->aics[param_1].unknown001 = 0;
@@ -84,8 +84,10 @@ namespace AI {
         this->aics[param_1].RecruitInterval = 1;
         this->aics[param_1].RecruitIntervalStrong = 4;
         this->aics[param_1].SortieUnitRangedMin = 4;
-        this->aics[param_1].OuterPatrolRallyDelay = 0x14;
         this->aics[param_1].SortieUnitMeleeMin = 5;
+        this->aics[param_1].SortieUnitRanged = 0x17;
+        this->aics[param_1].SortieUnitMelee = 0x1a;
+        this->aics[param_1].OuterPatrolRallyDelay = 0x14;
         this->aics[param_1].RaidUnitsRandom = 5;
         this->aics[param_1].recruitProbRaidStrong = 0;
         this->aics[param_1].recruitProbAttackWeak = 0;
@@ -103,14 +105,12 @@ namespace AI {
         this->aics[param_1].RaidRetargetDelay = 3;
         this->aics[param_1].AttForceBase = 10;
         this->aics[param_1].AttForceRandom = 10;
-        this->aics[param_1].SortieUnitRanged = 0x17;
+        this->aics[param_1].AttForceSupportAllyThreshold = 10;
+        this->aics[param_1].AttForceRallyPercentage = 0x3c;
         this->aics[param_1].DefUnit1 = 0x17;
         this->aics[param_1].DefUnit2 = 0x17;
         this->aics[param_1].DefUnit3 = 0x17;
-        this->aics[param_1].SortieUnitMelee = 0x1a;
         this->aics[param_1].RaidUnit1 = 0x1a;
-        this->aics[param_1].AttForceSupportAllyThreshold = 10;
-        this->aics[param_1].AttForceRallyPercentage = 0x3c;
         this->aics[param_1].AttMovingTribesThreshold = 100;
         this->aics[param_1].AttAssaultDelay = 5;
         this->aics[param_1].AttUnitPatrolRecommandDelay = 0xf;

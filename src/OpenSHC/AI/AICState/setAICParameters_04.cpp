@@ -17,8 +17,8 @@ namespace AI {
         this->aics[param_1].unknown005 = 1;
         this->aics[param_1].farm2 = 0x20;
         this->aics[param_1].farm4 = 0x20;
-        this->aics[param_1].minimumWheat = 0xffffffff;
-        this->aics[param_1].minimumHop = 0xffffffff;
+        this->aics[param_1].minimumWheat = -1;
+        this->aics[param_1].minimumHop = -1;
         this->aics[param_1].flagType = 0xd;
         this->aics[param_1].unknown002 = 0;
         this->aics[param_1].unknown001 = 0;
@@ -91,7 +91,9 @@ namespace AI {
         this->aics[param_1].SortieUnitRangedMin = 8;
         this->aics[param_1].SortieUnitRanged = 0x46;
         this->aics[param_1].SortieUnitMeleeMin = 6;
+        this->aics[param_1].SortieUnitMelee = 0x19;
         this->aics[param_1].DefDiggingUnitMax = 8;
+        this->aics[param_1].DefDiggingUnit = 0x19;
         this->aics[param_1].DefWalls = 0x50;
         this->aics[param_1].DefTotal = 100;
         this->aics[param_1].OuterPatrolGroupsMove = 1;
@@ -104,11 +106,9 @@ namespace AI {
         this->aics[param_1].RaidUnit2 = 0x4a;
         this->aics[param_1].HarassingSiegeEngine1 = 0xbe;
         this->aics[param_1].RaidRetargetDelay = 5;
+        this->aics[param_1].AttForceBase = 0x28;
         this->aics[param_1].AttForceRandom = 0xf;
         this->aics[param_1].AttForceSupportAllyThreshold = 0x1e;
-        this->aics[param_1].SortieUnitMelee = 0x19;
-        this->aics[param_1].DefDiggingUnit = 0x19;
-        this->aics[param_1].AttForceBase = 0x28;
         this->aics[param_1].AttForceRallyPercentage = 0x50;
         this->aics[param_1].AttMovingTribesThreshold = 100;
         this->aics[param_1].AttAssaultDelay = 0xc;
