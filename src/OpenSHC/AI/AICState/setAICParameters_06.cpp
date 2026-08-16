@@ -14,13 +14,13 @@ namespace AI {
 
     {
 
-        this->aics[param_1].minimumCheese = 0xffffffff;
+        this->aics[param_1].minimumCheese = -1;
 
-        this->aics[param_1].minimumBread = 0xffffffff;
+        this->aics[param_1].minimumBread = -1;
 
-        this->aics[param_1].minimumWheat = 0xffffffff;
+        this->aics[param_1].minimumWheat = -1;
 
-        this->aics[param_1].minimumHop = 0xffffffff;
+        this->aics[param_1].minimumHop = -1;
 
         this->aics[param_1].taxesMax = 0xc;
 
@@ -142,8 +142,6 @@ namespace AI {
 
         this->aics[param_1].unknown072 = 100;
 
-        this->aics[param_1].SortieUnitRangedMin = 7;
-
         this->aics[param_1].unknown073 = 0x14;
 
         this->aics[param_1].recruitProbRaidWeak = 0x14;
@@ -156,7 +154,13 @@ namespace AI {
 
         this->aics[param_1].RecruitIntervalStrong = 0;
 
+        this->aics[param_1].SortieUnitRangedMin = 7;
+
         this->aics[param_1].SortieUnitMeleeMin = 5;
+
+        this->aics[param_1].SortieUnitRanged = 0x46;
+
+        this->aics[param_1].SortieUnitMelee = 0x4b;
 
         this->aics[param_1].OuterPatrolGroupsCount = 2;
 
@@ -176,8 +180,6 @@ namespace AI {
 
         this->aics[param_1].RecruitIntervalWeak = 1;
 
-        this->aics[param_1].SortieUnitMelee = 0x4b;
-
         this->aics[param_1].DefDiggingUnitMax = 4;
 
         this->aics[param_1].DefDiggingUnit = 0x47;
@@ -192,19 +194,17 @@ namespace AI {
 
         this->aics[param_1].DefUnit1 = 0x4c;
 
-        this->aics[param_1].RaidUnitsBase = 0x1e;
-
-        this->aics[param_1].RaidUnitsRandom = 0x1e;
-
-        this->aics[param_1].RaidUnit1 = 0x47;
-
-        this->aics[param_1].SortieUnitRanged = 0x46;
-
         this->aics[param_1].DefUnit2 = 0x46;
 
         this->aics[param_1].DefUnit3 = 0x46;
 
         this->aics[param_1].DefUnit4 = 0x46;
+
+        this->aics[param_1].RaidUnitsBase = 0x1e;
+
+        this->aics[param_1].RaidUnitsRandom = 0x1e;
+
+        this->aics[param_1].RaidUnit1 = 0x47;
 
         this->aics[param_1].HarassingSiegeEngine1 = 0x166;
 

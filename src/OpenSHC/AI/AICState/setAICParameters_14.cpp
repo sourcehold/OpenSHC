@@ -150,6 +150,8 @@ namespace AI {
 
         this->aics[param_1].DefDiggingUnitMax = 4;
 
+        this->aics[param_1].DefDiggingUnit = 0x1a;
+
         this->aics[param_1].RaidUnitsRandom = 4;
 
         this->aics[param_1].RaidRetargetDelay = 4;
@@ -164,6 +166,10 @@ namespace AI {
 
         this->aics[param_1].SortieUnitMeleeMin = 10;
 
+        this->aics[param_1].SortieUnitRanged = 0x17;
+
+        this->aics[param_1].SortieUnitMelee = 0x1a;
+
         this->aics[param_1].DefTotal = 0x32;
 
         this->aics[param_1].RaidUnitsBase = 10;
@@ -173,8 +179,6 @@ namespace AI {
         this->aics[param_1].recruitProbAttackWeak = 0;
 
         this->aics[param_1].RecruitIntervalWeak = 1;
-
-        this->aics[param_1].SortieUnitRanged = 0x17;
 
         this->aics[param_1].DefWalls = 0x28;
 
@@ -199,10 +203,6 @@ namespace AI {
         this->aics[param_1].HarassingSiegeEngine1 = 0xbe;
 
         this->aics[param_1].HarassingSiegeEngine2 = 0x166;
-
-        this->aics[param_1].SortieUnitMelee = 0x1a;
-
-        this->aics[param_1].DefDiggingUnit = 0x1a;
 
         this->aics[param_1].RaidUnit1 = 0x1a;
 
