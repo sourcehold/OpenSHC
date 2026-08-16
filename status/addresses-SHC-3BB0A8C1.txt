@@ -21357,7 +21357,7 @@ SHC_3BB0A8C1_0x00471F10 | 100.0% | Reimplemented, needs LowLevelMemory functions
 
 SHC_3BB0A8C1_0x00471FC0 | 100.0% | Reimplemented, needs LowLevelMemory functions active
 
-SHC_3BB0A8C1_0x00472080 | 0.0% | Pending
+SHC_3BB0A8C1_0x00472080 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004720C0 | 0.0% | Pending
 
