@@ -21343,7 +21343,7 @@ SHC_3BB0A8C1_0x00471C50 | 100.0% | Reimplemented, requires called function and s
 
 SHC_3BB0A8C1_0x00471CD0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00471D30 | 0.0% | Pending
+SHC_3BB0A8C1_0x00471D30 | 81.1% | Reimplemented, but register diffs; logic is sound
 
 SHC_3BB0A8C1_0x00471DC0 | 0.0% | Pending
 
