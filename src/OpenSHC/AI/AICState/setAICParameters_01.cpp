@@ -13,16 +13,15 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004C6D60
     void AICState::setAICParameters_01(int aicID)
     {
-        this->aics[aicID].populationPerFarm = 6;
-        this->aics[aicID].minimumCheese = 0xffffffff;
-        this->aics[aicID].minimumBread = 0xffffffff;
-        this->aics[aicID].minimumWheat = 0xffffffff;
-        this->aics[aicID].minimumHop = 0xffffffff;
+        this->aics[aicID].minimumCheese = -1;
+        this->aics[aicID].minimumBread = -1;
+        this->aics[aicID].minimumWheat = -1;
+        this->aics[aicID].minimumHop = -1;
         this->aics[aicID].aiRequestDelay = 0x12;
         this->aics[aicID].populationPerQuarry = 0x12;
+        this->aics[aicID].populationPerFarm = 6;
         this->aics[aicID].maxWoodcutters = 6;
         this->aics[aicID].maxFarms = 6;
-        this->aics[aicID].sellResource09 = 0x12;
         this->aics[aicID].flagType = 0xc;
         this->aics[aicID].unknown002 = 0;
         this->aics[aicID].unknown001 = 0;
@@ -30,8 +29,8 @@ namespace AI {
         this->aics[aicID].unknown004 = 0;
         this->aics[aicID].unknown005 = 0;
         this->aics[aicID].criticalPopularity = 4000;
-        this->aics[aicID].lowestPopularity = 0x157c;
-        this->aics[aicID].highestPopularity = 0x1d4c;
+        this->aics[aicID].lowestPopularity = 5500;
+        this->aics[aicID].highestPopularity = 7500;
         this->aics[aicID].taxesMin = 3;
         this->aics[aicID].taxesMax = 10;
         this->aics[aicID].farm1 = 0x20;
@@ -66,6 +65,7 @@ namespace AI {
         this->aics[aicID].sellResource05 = 9;
         this->aics[aicID].sellResource06 = 0xe;
         this->aics[aicID].sellResource07 = 0x10;
+        this->aics[aicID].sellResource09 = 0x12;
         this->aics[aicID].sellResource11 = 0x14;
         this->aics[aicID].sellResource12 = 0x15;
         this->aics[aicID].sellResource13 = 0x16;
