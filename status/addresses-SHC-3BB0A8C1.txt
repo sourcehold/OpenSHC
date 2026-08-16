@@ -21347,7 +21347,7 @@ SHC_3BB0A8C1_0x00471D30 | 81.1% | Reimplemented, but register diffs; logic is so
 
 SHC_3BB0A8C1_0x00471DC0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00471DF0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00471DF0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00471E50 | 0.0% | Pending
 
