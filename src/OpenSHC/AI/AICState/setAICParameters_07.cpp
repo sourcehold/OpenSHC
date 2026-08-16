@@ -14,13 +14,13 @@ namespace AI {
 
     {
 
-        this->aics[param_1].minimumCheese = 0xffffffff;
+        this->aics[param_1].minimumCheese = -1;
 
-        this->aics[param_1].minimumBread = 0xffffffff;
+        this->aics[param_1].minimumBread = -1;
 
-        this->aics[param_1].minimumWheat = 0xffffffff;
+        this->aics[param_1].minimumWheat = -1;
 
-        this->aics[param_1].minimumHop = 0xffffffff;
+        this->aics[param_1].minimumHop = -1;
 
         this->aics[param_1].maxEquipment = 5;
 
