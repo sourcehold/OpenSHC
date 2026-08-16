@@ -47,7 +47,6 @@ if __name__ == "__main__":
     initialize_ghidra_from_gzf(args.gzf)
 
     opts = sarif.SarifProgramOptions()
-    opts.setMemoryBlocks(False)
     opts.setInstructions(False)
     opts.setMemoryContents(False)
 
