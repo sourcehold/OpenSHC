@@ -22,10 +22,6 @@ namespace AI {
 
         this->aics[param_1].minimumHop = -1;
 
-        this->aics[param_1].maxEquipment = 5;
-
-        this->aics[param_1].maxResourceVariance = 5;
-
         this->aics[param_1].flagType = 10;
 
         this->aics[param_1].unknown002 = 0;
@@ -74,7 +70,11 @@ namespace AI {
 
         this->aics[param_1].maxResourceOther = 10;
 
+        this->aics[param_1].maxEquipment = 5;
+
         this->aics[param_1].maxBeer = 0x14;
+
+        this->aics[param_1].maxResourceVariance = 5;
 
         this->aics[param_1].recruitGoldThreshold = 200;
 
