@@ -75,5 +75,19 @@ namespace IO {
         }
     }
 
+    // FUNCTION: STRONGHOLDCRUSADER 0x00477B00
+    std::string ResourceManager::paths_getDocumentsMapsFolderString(bool prependUserPath)
+    {
+        std::string suffix(this->paths_getDocumentsFolderString(false));
+        suffix.append(s_Maps__005a6454);
+        std::string userPath;
+        string_prependUserPathToString(userPath, suffix.c_str(), CSIDL_PERSONAL);
+        if (prependUserPath) {
+            return userPath;
+        } else {
+            return suffix;
+        }
+    }
+
 } // namespace IO
 } // namespace OpenSHC
