@@ -138,7 +138,10 @@ namespace OS {
     }
 
     // STUB: STRONGHOLDCRUSADER 0x005835BB
-    int __strnicmp(char* _Str1, char* _Str2, size_t _MaxCount) { return _strnicmp(_Str1, _Str2, _MaxCount); }
+    int __strnicmp(char const* _Str1, char const* _Str2, size_t _MaxCount)
+    {
+        return _strnicmp(_Str1, _Str2, _MaxCount);
+    }
 
     // STUB: STRONGHOLDCRUSADER 0x00583D55
     void _exit(int _Code) { exit(_Code); }
