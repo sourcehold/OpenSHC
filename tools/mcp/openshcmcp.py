@@ -46,7 +46,7 @@ if not PATH_CMAKE_OPENSHC_SOURCES.exists():
   raise Exception(f"could not find cmake core sources txt file: {str(PATH_CMAKE_OPENSHC_SOURCES)}")
 
 # Initialize MCP server
-mcp = FastMCP("decomp-helper")
+mcp = FastMCP("openshc-mcp")
 
 def compile_project(truncated: bool = True, no_output_on_succes: bool = True) -> tuple[bool, str, str]:
   """
@@ -346,7 +346,11 @@ def fetch_cached_ghidra_function_decompilation(function_name: str) -> tuple[bool
   Returns:
     Tuple of (success, contents, stderr)
   """
+  status, result, errMsg = read_function(function_name=function_name, base_path=Path("tmp") / "ghidra-cpp" / "src")
+  if status:
+    return status, result, errMsg
   return read_function(function_name=function_name, base_path=Path("tools") / "mcp" / "ghidra_scripts" / "decompilation")
+
 
 @mcp.tool()
 def find_source_file_containing_text(text: str, glob: str = "**/*") -> List[str]:
