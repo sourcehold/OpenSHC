@@ -22009,11 +22009,11 @@ SHC_3BB0A8C1_0x00477670 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00477690 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00477710 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x00477710 | 100.0% | Reimplemented; static helper, not resolver due to optimized call convention
 
 SHC_3BB0A8C1_0x004778E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004779F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004779F0 | 100.0% | Reimplemented; Return value optimization, always needs SHC_3BB0A8C1_0x004778E0 active
 
 SHC_3BB0A8C1_0x00477B00 | 0.0% | Pending
 

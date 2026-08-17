@@ -291,3 +291,27 @@ A prominent example are `malloc` and `free`, where it is simply needed to use th
 since the memory management in the std library is rather complex.
 
 For other std functions, mostly the math functions, we decided to just use the std library directly.
+
+### Copy Elision and Return Value Optimization
+
+The compiler may use copy elision and return value optimization.
+
+The return value optimization may appear if a function returns an object, but instead of putting the whole object on the stack, the function receives a hidden pointer to memory from the caller. This memory is then initialized and the pointer to it is also return.  
+The actual function signature will only have the object as value return.
+
+Example in Ghidra:
+```cpp
+std::string* paths_getDocumentsFolderString(std::string* out, bool param_2);
+```
+
+Actual signature:
+```cpp
+std::string paths_getDocumentsFolderString(bool param_2);
+```
+
+This structure can be reproduced. However, this can not be said about the resulting Copy Elision.  
+If the value is assigned to another object, the compiler tries to avoid creating a copy.
+
+**This only works if the function is called directly. Any form of indirection via pointer or resolver will not optimize. This is a fundamental limitation of the MSVC2005 compiler.**
+
+As a result, such cases do not use the resolver. The limitation through this is accepted, although, it should be noted in the status entry for the caller.

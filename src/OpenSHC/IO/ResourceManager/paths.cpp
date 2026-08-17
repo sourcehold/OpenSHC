@@ -59,5 +59,21 @@ namespace IO {
         }
     }
 
+    // Return Value Optimization is not compatible with the resolver, therefore, the call needs to be direct.
+
+    // FUNCTION: STRONGHOLDCRUSADER 0x004779F0
+    std::string ResourceManager::paths_getSavesPath(bool param_2)
+    {
+        std::string suffix(this->paths_getDocumentsFolderString(false));
+        suffix.append(s_Saves__005a644c);
+        std::string userPath;
+        string_prependUserPathToString(userPath, suffix.c_str(), CSIDL_PERSONAL);
+        if (param_2) {
+            return userPath;
+        } else {
+            return suffix;
+        }
+    }
+
 } // namespace IO
 } // namespace OpenSHC
