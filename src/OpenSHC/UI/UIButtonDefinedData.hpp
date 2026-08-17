@@ -32,7 +32,7 @@ namespace UI {
         int field10_0x28; // 0x00000028 length: 4
         int field11_0x2c; // 0x0000002C length: 4
         undefined1 padding_0x30[4]; // 0x00000030 length: 4
-        ButtonGmData DAT_ButtonGmDataArray[650]; // 0x00000034 length: 18200
+        ButtonGmData ButtonGmDataArray[650]; // 0x00000034 length: 18200
         char wavEuropeanUnitRecruitment[7][32]; // 0x0000474C length: 224
         char wavArabianUnitRecruitment[7][32]; // 0x0000482C length: 224
 

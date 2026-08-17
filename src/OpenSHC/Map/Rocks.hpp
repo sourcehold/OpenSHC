@@ -12,37 +12,37 @@ namespace OpenSHC {
 namespace Map {
     namespace Rocks {
 
-        void __stdcall UpdateRockFunc1();
+        void __cdecl UpdateRockFunc1();
 
-        void __stdcall UpdateRockFunc2();
+        void __cdecl UpdateRockFunc2();
 
-        void __stdcall UpdateRockFunc3();
+        void __cdecl UpdateRockFunc3();
 
-        void __stdcall UpdateRockFunc4();
+        void __cdecl UpdateRockFunc4();
 
-        void __stdcall UpdateRockFunc5();
+        void __cdecl UpdateRockFunc5();
 
-        void __stdcall UpdateRockFunc6();
+        void __cdecl UpdateRockFunc6();
 
-        void __stdcall UpdateRockFunc7();
+        void __cdecl UpdateRockFunc7();
 
-        void __stdcall UpdateRockFunc8();
+        void __cdecl UpdateRockFunc8();
 
-        void __stdcall UpdateRockFunc9();
+        void __cdecl UpdateRockFunc9();
 
-        void __stdcall UpdateRockFunc10();
+        void __cdecl UpdateRockFunc10();
 
-        void __stdcall UpdateRockFunc11();
+        void __cdecl UpdateRockFunc11();
 
-        void __stdcall UpdateRockFunc12();
+        void __cdecl UpdateRockFunc12();
 
-        void __stdcall UpdateRockFunc13();
+        void __cdecl UpdateRockFunc13();
 
-        void __stdcall UpdateRockFunc14();
+        void __cdecl UpdateRockFunc14();
 
-        void __stdcall UpdateRockFunc15();
+        void __cdecl UpdateRockFunc15();
 
-        void __stdcall UpdateRockFunc16();
+        void __cdecl UpdateRockFunc16();
 
     } // namespace Rocks
 } // namespace Map

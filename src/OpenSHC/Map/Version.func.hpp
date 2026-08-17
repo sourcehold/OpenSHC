@@ -130,14 +130,14 @@ namespace Map {
         UpgradeOldSection1124;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004F37B0, &OpenSHC::Map::Version::UpdateFixTrees2)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004F37B0, &OpenSHC::Map::Version::UpdateFixTrees2)
         UpdateFixTrees2;
 
         MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004F3840,
             &OpenSHC::Map::Version::UpgradeRemoveCertainRockTypesUnk)
         UpgradeRemoveCertainRockTypesUnk;
 
-        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004F38A0,
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004F38A0,
             &OpenSHC::Map::Version::UpdateTreesOfCertainTypes)
         UpdateTreesOfCertainTypes;
 

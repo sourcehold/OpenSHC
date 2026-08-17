@@ -17,8 +17,8 @@ namespace UI {
 
         int field0_0x0[11]; // 0x00000000 length: 44
         int field1_0x2c[22]; // 0x0000002C length: 88
-        byte DAT_UserTextHandler_CharacterFilter_B_1_8_9[256]; // 0x00000084 length: 256
-        byte DAT_UserTextHandler_CharacterFilter_A_2_3[256]; // 0x00000184 length: 256
+        byte UserTextHandler_CharacterFilter_B_1_8_9[256]; // 0x00000084 length: 256
+        byte UserTextHandler_CharacterFilter_A_2_3[256]; // 0x00000184 length: 256
         short field4_0x284[2][256]; // 0x00000284 length: 1024
         int field5_0x684[8][2]; // 0x00000684 length: 64
         int field6_0x6c4[10]; // 0x000006C4 length: 40

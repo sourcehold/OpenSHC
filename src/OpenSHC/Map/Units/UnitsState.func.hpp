@@ -238,8 +238,8 @@ namespace Map {
             checkTargetBuildingPossibilityOrState;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00533630,
-                &UnitsState::findClosestLaddermanWithLadderPosition)
-            findClosestLaddermanWithLadderPosition;
+                &UnitsState::findAndAttackNearbyEnemyLaddermanInPosition)
+            findAndAttackNearbyEnemyLaddermanInPosition;
 
             MACRO_FUNCTION_RESOLVER(int (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00533810,
                 &UnitsState::findAndDestroyAdjacentEnemyLadder)

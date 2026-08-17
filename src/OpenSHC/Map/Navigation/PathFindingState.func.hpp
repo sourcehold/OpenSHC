@@ -340,16 +340,16 @@ namespace Map {
             setClimbBasedOnClosestClimbData;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (PathFindingState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004A4B30,
-                &PathFindingState::isUsableClimbWallWithinArea)
-            isUsableClimbWallWithinArea;
+                &PathFindingState::isUsableClimbWithinArea)
+            isUsableClimbWithinArea;
 
             MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int), false, Address::SHC_3BB0A8C1_0x004A4B80,
-                &PathFindingState::clearLaddermanWalledData)
-            clearLaddermanWalledData;
+                &PathFindingState::clearClimbData)
+            clearClimbData;
 
             MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int), false, Address::SHC_3BB0A8C1_0x004A4BB0,
-                &PathFindingState::reprocessLadddermanWallData)
-            reprocessLadddermanWallData;
+                &PathFindingState::recountUnitsUsingClimbData)
+            recountUnitsUsingClimbData;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (PathFindingState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004A4C70,
                 &PathFindingState::registerUnitOnClimbData)
@@ -454,8 +454,8 @@ namespace Map {
             isOpponentBuildingInRange;
 
             MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(), false, Address::SHC_3BB0A8C1_0x004A94E0,
-                &PathFindingState::clearAllLadderManWalledData)
-            clearAllLadderManWalledData;
+                &PathFindingState::clearAllClimbData)
+            clearAllClimbData;
 
             MACRO_FUNCTION_RESOLVER(int (PathFindingState::*)(int, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x004A9510, &PathFindingState::createClimbData)

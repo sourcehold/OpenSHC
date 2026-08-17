@@ -14,59 +14,59 @@ namespace Map {
     namespace Entities_Func {
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00401BA0, &OpenSHC::Map::Entities::UpdateArrowEntity)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00401BA0, &OpenSHC::Map::Entities::UpdateArrowEntity)
         UpdateArrowEntity;
 
-        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00401C30,
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00401C30,
             &OpenSHC::Map::Entities::UpdateCatapultProjectileEntity)
         UpdateCatapultProjectileEntity;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00401CC0, &OpenSHC::Map::Entities::UpdatePebbleEntity)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00401CC0, &OpenSHC::Map::Entities::UpdatePebbleEntity)
         UpdatePebbleEntity;
 
-        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00401D20,
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00401D20,
             &OpenSHC::Map::Entities::UpdateFirethrowSecondaryEntity)
         UpdateFirethrowSecondaryEntity;
 
-        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00401D70,
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00401D70,
             &OpenSHC::Map::Entities::UpdateArrowsSecondaryEntity)
         UpdateArrowsSecondaryEntity;
 
-        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00401DB0,
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00401DB0,
             &OpenSHC::Map::Entities::UpdateCrossbowArrowEntity)
         UpdateCrossbowArrowEntity;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00401E20, &OpenSHC::Map::Entities::UpdateEntity_20_37)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00401E20, &OpenSHC::Map::Entities::UpdateEntity_20_37)
         UpdateEntity_20_37;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00401EA0, &OpenSHC::Map::Entities::UpdateEntity_21)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00401EA0, &OpenSHC::Map::Entities::UpdateEntity_21)
         UpdateEntity_21;
 
-        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00401FF0,
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00401FF0,
             &OpenSHC::Map::Entities::UpdateEntity_PoisonCloud)
         UpdateEntity_PoisonCloud;
 
-        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00402180,
-            &OpenSHC::Map::Entities::UpdateEntity_CowFlying)
+        MACRO_FUNCTION_RESOLVER(
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00402180, &OpenSHC::Map::Entities::UpdateEntity_CowFlying)
         UpdateEntity_CowFlying;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00402260, &OpenSHC::Map::Entities::UpdateEntity_26)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00402260, &OpenSHC::Map::Entities::UpdateEntity_26)
         UpdateEntity_26;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00402330, &OpenSHC::Map::Entities::UpdateEntity_27)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00402330, &OpenSHC::Map::Entities::UpdateEntity_27)
         UpdateEntity_27;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004023A0, &OpenSHC::Map::Entities::UpdateEntity_28)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004023A0, &OpenSHC::Map::Entities::UpdateEntity_28)
         UpdateEntity_28;
 
         MACRO_FUNCTION_RESOLVER(
-            uint(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004023F0, &OpenSHC::Map::Entities::UpdateEntity_29)
+            uint(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004023F0, &OpenSHC::Map::Entities::UpdateEntity_29)
         UpdateEntity_29;
 
         MACRO_FUNCTION_RESOLVER(
@@ -74,11 +74,11 @@ namespace Map {
         UpdateEntity_30;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00402580, &OpenSHC::Map::Entities::UpdateEntity_31)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00402580, &OpenSHC::Map::Entities::UpdateEntity_31)
         UpdateEntity_31;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00402620, &OpenSHC::Map::Entities::UpdateEntity_32)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00402620, &OpenSHC::Map::Entities::UpdateEntity_32)
         UpdateEntity_32;
 
         MACRO_FUNCTION_RESOLVER(
@@ -86,23 +86,23 @@ namespace Map {
         UpdateEntity_40;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00402730, &OpenSHC::Map::Entities::UpdateEntity_41)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00402730, &OpenSHC::Map::Entities::UpdateEntity_41)
         UpdateEntity_41;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00402820, &OpenSHC::Map::Entities::UpdateEntity_42_43)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00402820, &OpenSHC::Map::Entities::UpdateEntity_42_43)
         UpdateEntity_42_43;
 
-        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00402900,
-            &OpenSHC::Map::Entities::UpdateFlag_1_2_4_Entity)
+        MACRO_FUNCTION_RESOLVER(
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00402900, &OpenSHC::Map::Entities::UpdateFlag_1_2_4_Entity)
         UpdateFlag_1_2_4_Entity;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00402A20, &OpenSHC::Map::Entities::UpdateFlag3Entity)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00402A20, &OpenSHC::Map::Entities::UpdateFlag3Entity)
         UpdateFlag3Entity;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00402AB0, &OpenSHC::Map::Entities::UpdateBrazierEntity)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00402AB0, &OpenSHC::Map::Entities::UpdateBrazierEntity)
         UpdateBrazierEntity;
 
         MACRO_FUNCTION_RESOLVER(uint(__cdecl*)(int param_1, int x, int y, int param_4, int param_5), false,
@@ -123,15 +123,15 @@ namespace Map {
         UpdateFireEntity;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00405B70, &OpenSHC::Map::Entities::UpdateFirethrowEntity)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00405B70, &OpenSHC::Map::Entities::UpdateFirethrowEntity)
         UpdateFirethrowEntity;
 
-        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00405C00,
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00405C00,
             &OpenSHC::Map::Entities::UpdateHeadsOnSpikesEntity)
         UpdateHeadsOnSpikesEntity;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00406FD0, &OpenSHC::Map::Entities::UpdateEntityType8)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00406FD0, &OpenSHC::Map::Entities::UpdateEntityType8)
         UpdateEntityType8;
 
         MACRO_FUNCTION_RESOLVER(uint(__cdecl*)(int playerID, int miniTileX, int miniTileY, int tileHeightMin8, int two),

@@ -12,51 +12,51 @@ namespace OpenSHC {
 namespace Map {
     namespace Entities {
 
-        void __stdcall UpdateArrowEntity();
+        void __cdecl UpdateArrowEntity();
 
-        void __stdcall UpdateCatapultProjectileEntity();
+        void __cdecl UpdateCatapultProjectileEntity();
 
-        void __stdcall UpdatePebbleEntity();
+        void __cdecl UpdatePebbleEntity();
 
-        void __stdcall UpdateFirethrowSecondaryEntity();
+        void __cdecl UpdateFirethrowSecondaryEntity();
 
-        void __stdcall UpdateArrowsSecondaryEntity();
+        void __cdecl UpdateArrowsSecondaryEntity();
 
-        void __stdcall UpdateCrossbowArrowEntity();
+        void __cdecl UpdateCrossbowArrowEntity();
 
-        void __stdcall UpdateEntity_20_37();
+        void __cdecl UpdateEntity_20_37();
 
-        void __stdcall UpdateEntity_21();
+        void __cdecl UpdateEntity_21();
 
-        void __stdcall UpdateEntity_PoisonCloud();
+        void __cdecl UpdateEntity_PoisonCloud();
 
-        void __stdcall UpdateEntity_CowFlying();
+        void __cdecl UpdateEntity_CowFlying();
 
-        void __stdcall UpdateEntity_26();
+        void __cdecl UpdateEntity_26();
 
-        void __stdcall UpdateEntity_27();
+        void __cdecl UpdateEntity_27();
 
-        void __stdcall UpdateEntity_28();
+        void __cdecl UpdateEntity_28();
 
-        uint __stdcall UpdateEntity_29();
+        uint __cdecl UpdateEntity_29();
 
         void __stdcall UpdateEntity_30();
 
-        void __stdcall UpdateEntity_31();
+        void __cdecl UpdateEntity_31();
 
-        void __stdcall UpdateEntity_32();
+        void __cdecl UpdateEntity_32();
 
         void __stdcall UpdateEntity_40();
 
-        void __stdcall UpdateEntity_41();
+        void __cdecl UpdateEntity_41();
 
-        void __stdcall UpdateEntity_42_43();
+        void __cdecl UpdateEntity_42_43();
 
-        void __stdcall UpdateFlag_1_2_4_Entity();
+        void __cdecl UpdateFlag_1_2_4_Entity();
 
-        void __stdcall UpdateFlag3Entity();
+        void __cdecl UpdateFlag3Entity();
 
-        void __stdcall UpdateBrazierEntity();
+        void __cdecl UpdateBrazierEntity();
 
         uint __cdecl SomeFireSpreadFunction(int param_1, int x, int y, int param_4, int param_5);
 
@@ -67,11 +67,11 @@ namespace Map {
 
         void __cdecl UpdateFireEntity();
 
-        void __stdcall UpdateFirethrowEntity();
+        void __cdecl UpdateFirethrowEntity();
 
-        void __stdcall UpdateHeadsOnSpikesEntity();
+        void __cdecl UpdateHeadsOnSpikesEntity();
 
-        void __stdcall UpdateEntityType8();
+        void __cdecl UpdateEntityType8();
 
         uint __cdecl IgniteFireAtMiniTile_Convenience(
             int playerID, int miniTileX, int miniTileY, int tileHeightMin8, int two);

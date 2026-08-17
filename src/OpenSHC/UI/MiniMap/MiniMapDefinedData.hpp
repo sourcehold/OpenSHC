@@ -28,7 +28,7 @@ namespace UI {
             ushort field5_0x64[8]; // 0x00000064 length: 16
             ushort field6_0x74[8]; // 0x00000074 length: 16
             ushort field7_0x84[16]; // 0x00000084 length: 32
-            ushort DAT_MinimapColorArray[8]; // 0x000000A4 length: 16
+            ushort MinimapColorArray[8]; // 0x000000A4 length: 16
             ushort field9_0xb4[8]; // 0x000000B4 length: 16
             ushort field10_0xc4[8]; // 0x000000C4 length: 16
             ushort field11_0xd4[8]; // 0x000000D4 length: 16
@@ -41,12 +41,12 @@ namespace UI {
             ushort field18_0x164[8]; // 0x00000164 length: 16
             ushort field19_0x174[8]; // 0x00000174 length: 16
             ushort field20_0x184[52]; // 0x00000184 length: 104
-            ushort DAT_PlayerColorColors[2][2]; // 0x000001EC length: 8
-            ushort DAT_AnimalMinimapColour_RGB15; // 0x000001F4 length: 2
-            ushort DAT_AnimalMinimapColour_RGB16; // 0x000001F6 length: 2
+            ushort PlayerColorColors[2][2]; // 0x000001EC length: 8
+            ushort AnimalMinimapColour_RGB15; // 0x000001F4 length: 2
+            ushort AnimalMinimapColour_RGB16; // 0x000001F6 length: 2
             ushort field24_0x1f8; // 0x000001F8 length: 2
             ushort field25_0x1fa; // 0x000001FA length: 2
-            ushort DAT_PlayerColorColors_entry2; // 0x000001FC length: 2
+            ushort PlayerColorColors_entry2; // 0x000001FC length: 2
             ushort field27_0x1fe; // 0x000001FE length: 2
             ushort field28_0x200; // 0x00000200 length: 2
             ushort field29_0x202; // 0x00000202 length: 2

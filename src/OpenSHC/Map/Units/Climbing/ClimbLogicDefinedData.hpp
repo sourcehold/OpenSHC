@@ -31,11 +31,11 @@ namespace Map {
                 undefined1 field8_0x129; // 0x00000129 length: 1
                 undefined1 field9_0x12a; // 0x0000012A length: 1
                 undefined1 field10_0x12b; // 0x0000012B length: 1
-                byte DAT_BitFlagHelperForPathLinkage[8]; // 0x0000012C length: 8
-                byte DAT_DirectionArray[8]; // 0x00000134 length: 8
+                byte BitFlagHelperForPathLinkage[8]; // 0x0000012C length: 8
+                byte DirectionArray[8]; // 0x00000134 length: 8
                 int field13_0x13c[8][3]; // 0x0000013C length: 96
-                XYPair DAT_CardinalHorizontalFirstSearchOrder[4]; // 0x0000019C length: 32
-                XYPair DAT_OrderedOrientationBasedCardinalDirectionList[8][4]; // 0x000001BC length: 256
+                XYPair CardinalHorizontalFirstSearchOrder[4]; // 0x0000019C length: 32
+                XYPair OrderedOrientationBasedCardinalDirectionList[8][4]; // 0x000001BC length: 256
 
             } ClimbLogicDefinedData;
 #pragma pack(pop)

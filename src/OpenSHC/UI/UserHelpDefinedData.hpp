@@ -22,7 +22,7 @@ namespace UI {
     typedef struct UserHelpDefinedData {
 
         undefined1 padding_0x0[4]; // 0x00000000 length: 4
-        char HLP_HelpSections[500][1000]; // 0x00000004 length: 500000
+        char HelpSections[500][1000]; // 0x00000004 length: 500000
         UnkHelpTextRelatedFontStruct field5_0x7a124[9]; // 0x0007A124 length: 72
         HelpTextRelatedColorStruct field6_0x7a16c[13]; // 0x0007A16C length: 208
 

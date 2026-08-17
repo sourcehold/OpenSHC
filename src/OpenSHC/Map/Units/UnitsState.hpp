@@ -82,8 +82,8 @@ namespace Map {
             int selectionFireBallista; // 0x000005CC length: 4
             int selectionSlots[8]; // 0x000005D0 length: 32
             int nHasOwnedUnitInSelection; // 0x000005F0 length: 4
-            undefined4 unknownX_01; // 0x000005F4 length: 4
-            undefined4 unknownY_01; // 0x000005F8 length: 4
+            undefined4 climbX2; // 0x000005F4 length: 4
+            undefined4 climbY2; // 0x000005F8 length: 4
             byte unusedBytes03[8]; // 0x000005FC length: 8
             dword field48_0x604; // 0x00000604 length: 4
             uint field49_0x608; // 0x00000608 length: 4
@@ -209,7 +209,7 @@ namespace Map {
 
             BOOLEnum checkTargetBuildingPossibilityOrState(int unitID);
 
-            BOOLEnum findClosestLaddermanWithLadderPosition(int unitID);
+            BOOLEnum findAndAttackNearbyEnemyLaddermanInPosition(int unitID);
 
             int findAndDestroyAdjacentEnemyLadder(int param_1, int param_2);
 

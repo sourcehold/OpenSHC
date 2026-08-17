@@ -22,12 +22,12 @@ namespace Audio {
         // SIZE: 0x000004EC
         typedef struct SFXDefinedData {
 
-            MMRESULT SND_SomeTimerIdentifier; // 0x00000000 length: 4
-            MusicSfx DAT_SFX_Pointers[116]; // 0x00000004 length: 928
+            MMRESULT SomeTimerIdentifier; // 0x00000000 length: 4
+            MusicSfx Pointers[116]; // 0x00000004 length: 928
             int field2_0x3a4[8][8]; // 0x000003A4 length: 256
             int field3_0x4a4[8]; // 0x000004A4 length: 32
             uint field4_0x4c4[6]; // 0x000004C4 length: 24
-            int DAT_LastUsedSpeechStream; // 0x000004DC length: 4
+            int lastUsedSpeechStream; // 0x000004DC length: 4
             int field6_0x4e0; // 0x000004E0 length: 4
             int field7_0x4e4; // 0x000004E4 length: 4
             undefined1 padding_0x4e8[4]; // 0x000004E8 length: 4

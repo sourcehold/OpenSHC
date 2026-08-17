@@ -80,8 +80,8 @@ namespace Map {
             undefined4 DAT_Test_gatehouse; // 0x000000C8 length: 4
             undefined4 totalZones; // 0x000000CC length: 4
             undefined1 padding_0xd0[8]; // 0x000000D0 length: 8
-            undefined4 DAT_NumberOfLadderTeleports; // 0x000000D8 length: 4
-            undefined4 DAT_GreatestLadderLoading; // 0x000000DC length: 4
+            undefined4 numberOfClimbTeleports; // 0x000000D8 length: 4
+            undefined4 debugGreatestClimbLoading; // 0x000000DC length: 4
             int zoneSizesArray[1000]; // 0x000000E0 length: 4000
             undefined4 sum; // 0x00001080 length: 4
             ClimbData climbData[200]; // 0x00001084 length: 103200
@@ -264,11 +264,11 @@ namespace Map {
 
             int setClimbBasedOnClosestClimbData(int unitID, int ladderWallGroup, int ladderArea);
 
-            BOOLEnum isUsableClimbWallWithinArea(int area, int wallDataID);
+            BOOLEnum isUsableClimbWithinArea(int area, int wallDataID);
 
-            void clearLaddermanWalledData(int param_1);
+            void clearClimbData(int param_1);
 
-            void reprocessLadddermanWallData(int laddermanWalledDataID);
+            void recountUnitsUsingClimbData(int climbDataID);
 
             undefined4 registerUnitOnClimbData(int param_1, int param_2);
 
@@ -328,7 +328,7 @@ namespace Map {
             undefined4 isOpponentBuildingInRange(
                 int playerID, int x, int y, int range, int param_5, int param_6, int keepRange);
 
-            void clearAllLadderManWalledData();
+            void clearAllClimbData();
 
             int createClimbData(int size, int buildingID, int unitID, int direction);
 

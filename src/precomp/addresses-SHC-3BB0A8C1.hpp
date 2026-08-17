@@ -29064,15 +29064,15 @@ enum {
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A4930 = 0x004A4930,
-    // label: isUsableClimbWallWithinArea
+    // label: isUsableClimbWithinArea
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A4B30 = 0x004A4B30,
-    // label: clearLaddermanWalledData
+    // label: clearClimbData
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A4B80 = 0x004A4B80,
-    // label: reprocessLadddermanWallData
+    // label: recountUnitsUsingClimbData
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A4BB0 = 0x004A4BB0,
@@ -29080,23 +29080,23 @@ enum {
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A4C70 = 0x004A4C70,
-    // label: UpdateLadderManState01
+    // label: UpdateClimbDataState01
     // location: OpenSHC/Map/Navigation
     // type: function
     SHC_3BB0A8C1_0x004A4D60 = 0x004A4D60,
-    // label: UpdateLadderManState03
+    // label: UpdateClimbDataState03
     // location: OpenSHC/Map/Navigation
     // type: function
     SHC_3BB0A8C1_0x004A4E40 = 0x004A4E40,
-    // label: UpdateLadderManState04
+    // label: UpdateClimbDataState04
     // location: OpenSHC/Map/Navigation
     // type: function
     SHC_3BB0A8C1_0x004A4F90 = 0x004A4F90,
-    // label: UpdateLadderManState05
+    // label: UpdateClimbDataState05
     // location: OpenSHC/Map/Navigation
     // type: function
     SHC_3BB0A8C1_0x004A50E0 = 0x004A50E0,
-    // label: UpdateLadderManState07
+    // label: UpdateClimbDataState07
     // location: OpenSHC/Map/Navigation
     // type: function
     SHC_3BB0A8C1_0x004A5230 = 0x004A5230,
@@ -29354,7 +29354,7 @@ enum {
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A9200 = 0x004A9200,
-    // label: clearAllLadderManWalledData
+    // label: clearAllClimbData
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A94E0 = 0x004A94E0,
@@ -55927,7 +55927,7 @@ enum {
     SHC_3BB0A8C1_0x00530650 = 0x00530650,
     // type: function
     SHC_3BB0A8C1_0x00530690 = 0x00530690,
-    // label: UpdateLogicAndClimbData
+    // label: UpdateLadderman_SetClimbData
     // location: OpenSHC/Map/Navigation
     // type: function
     SHC_3BB0A8C1_0x00530720 = 0x00530720,
@@ -57031,7 +57031,7 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00533580 = 0x00533580,
-    // label: findClosestLaddermanWithLadderPosition
+    // label: findAndAttackNearbyEnemyLaddermanInPosition
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00533630 = 0x00533630,
@@ -96520,10 +96520,7 @@ enum {
     SHC_3BB0A8C1_0x00DF33F0 = 0x00DF33F0,
     // label: DAT_CurrentResourceCoreName
     // location:
-    // type: /char[1001]
-    SHC_3BB0A8C1_0x00DF33F7 = 0x00DF33F7,
-    // label: DAT_CurrentResourceCoreNameUnk
-    // location:
+    // type: /char[1000]
     SHC_3BB0A8C1_0x00DF33F8 = 0x00DF33F8,
     // label: LIB_00df37e0
     // location:
@@ -96622,7 +96619,7 @@ enum {
     // location:
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00DF4234 = 0x00DF4234,
-    // label: DAT_CurrentLaddermanWalledDataID
+    // label: DAT_CurrentClimbDataID
     // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF4238 = 0x00DF4238,
@@ -97601,6 +97598,8 @@ enum {
     // location:
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00EE103C = 0x00EE103C,
+    // label: TIME_LastSiegeTowerWarningMoment
+    // location:
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00EE1040 = 0x00EE1040,
     // type: WinDef/DWORD

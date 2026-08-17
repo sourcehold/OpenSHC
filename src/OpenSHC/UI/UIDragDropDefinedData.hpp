@@ -19,8 +19,8 @@ namespace UI {
     // SIZE: 0x0000006C
     typedef struct UIDragDropDefinedData {
 
-        BOOLEnum DAT_MenuView_TriggerInitial; // 0x00000000 length: 4
-        byte DAT_UI_DragTicks[100]; // 0x00000004 length: 100
+        BOOLEnum MenuView_TriggerInitial; // 0x00000000 length: 4
+        byte UI_DragTicks[100]; // 0x00000004 length: 100
         undefined1 padding_0x68[4]; // 0x00000068 length: 4
 
     } UIDragDropDefinedData;

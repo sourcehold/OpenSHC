@@ -70,11 +70,11 @@ namespace Map {
 
         void __stdcall UpgradeOldSection1124();
 
-        void __stdcall UpdateFixTrees2();
+        void __cdecl UpdateFixTrees2();
 
         void __stdcall UpgradeRemoveCertainRockTypesUnk();
 
-        void __stdcall UpdateTreesOfCertainTypes();
+        void __cdecl UpdateTreesOfCertainTypes();
 
         void __stdcall UpgradeRemoveRocksBeyond1000();
 

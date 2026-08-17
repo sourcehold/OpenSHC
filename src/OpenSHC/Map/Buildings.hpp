@@ -12,49 +12,49 @@ namespace OpenSHC {
 namespace Map {
     namespace Buildings {
 
-        void __stdcall UpdateHovel();
+        void __cdecl UpdateHovel();
 
-        void __stdcall UpdateWoodcuttersHut();
+        void __cdecl UpdateWoodcuttersHut();
 
-        void __stdcall UpdatePitchRig();
+        void __cdecl UpdatePitchRig();
 
-        void __stdcall UpdateMercenaryPost();
+        void __cdecl UpdateMercenaryPost();
 
-        void __stdcall UpdateBarracks();
+        void __cdecl UpdateBarracks();
 
-        void __stdcall UpdateOutpostBuilding();
+        void __cdecl UpdateOutpostBuilding();
 
-        void __stdcall UpdateStockpile();
+        void __cdecl UpdateStockpile();
 
-        void __stdcall UpdateArmory();
+        void __cdecl UpdateArmory();
 
-        void __stdcall UpdateFletchersWorkshop();
+        void __cdecl UpdateFletchersWorkshop();
 
-        void __stdcall UpdateBlacksmithsWorkshop();
+        void __cdecl UpdateBlacksmithsWorkshop();
 
-        void __stdcall UpdatePoleturnersWorkshop();
+        void __cdecl UpdatePoleturnersWorkshop();
 
-        void __stdcall UpdateArmorersWorkshop();
+        void __cdecl UpdateArmorersWorkshop();
 
-        void __stdcall UpdateTannersWorkshop();
+        void __cdecl UpdateTannersWorkshop();
 
-        void __stdcall UpdateBakery();
+        void __cdecl UpdateBakery();
 
-        void __stdcall UpdateBrewery();
+        void __cdecl UpdateBrewery();
 
-        void __stdcall UpdateGranary();
+        void __cdecl UpdateGranary();
 
-        void __stdcall UpdateInn();
+        void __cdecl UpdateInn();
 
-        void __stdcall UpdateApothecary();
+        void __cdecl UpdateApothecary();
 
-        void __stdcall UpdateTunnelersGuild();
+        void __cdecl UpdateTunnelersGuild();
 
-        void __stdcall UpdateMarketplace();
+        void __cdecl UpdateMarketplace();
 
-        void __stdcall UpdateOilSmelter();
+        void __cdecl UpdateOilSmelter();
 
-        void __stdcall UpdateWheatFarm();
+        void __cdecl UpdateWheatFarm();
 
         void __stdcall UpdateHopsFarm();
 
@@ -62,113 +62,113 @@ namespace Map {
 
         void __stdcall UpdateDairyFarm();
 
-        void __stdcall UpdateMill();
+        void __cdecl UpdateMill();
 
-        void __stdcall UpdateStables();
+        void __cdecl UpdateStables();
 
-        void __stdcall UpdateBuildingShared2();
+        void __cdecl UpdateBuildingShared2();
 
-        void __stdcall UpdateCathedral();
+        void __cdecl UpdateCathedral();
 
         void __stdcall UpdateKeepManorHouse();
 
-        void __stdcall UpdateKeepStoneKeep();
+        void __cdecl UpdateKeepStoneKeep();
 
-        void __stdcall UpdateKeepStronghold();
+        void __cdecl UpdateKeepStronghold();
 
-        void __stdcall UpdateDrawBridge();
+        void __cdecl UpdateDrawBridge();
 
-        void __stdcall UpdateTunnel();
+        void __cdecl UpdateTunnel();
 
-        void __stdcall UpdateBuildingShared1();
+        void __cdecl UpdateBuildingShared1();
 
-        void __stdcall UpdateCampGround();
+        void __cdecl UpdateCampGround();
 
-        void __stdcall UpdateParadeGround2();
+        void __cdecl UpdateParadeGround2();
 
-        void __stdcall UpdateParadeGround3();
+        void __cdecl UpdateParadeGround3();
 
-        void __stdcall UpdateParadeGround4();
+        void __cdecl UpdateParadeGround4();
 
-        void __stdcall UpdateBadBuildingGallows();
+        void __cdecl UpdateBadBuildingGallows();
 
-        void __stdcall UpdateBadBuildingStocks();
+        void __cdecl UpdateBadBuildingStocks();
 
-        void __stdcall UpdateGoodBuildingMaypole();
+        void __cdecl UpdateGoodBuildingMaypole();
 
-        void __stdcall UpdateGoodBuildingGarden();
+        void __cdecl UpdateGoodBuildingGarden();
 
-        void __stdcall UpdatePlacedSiegeTower();
+        void __cdecl UpdatePlacedSiegeTower();
 
-        void __stdcall UpdateWellOrWaterpot();
+        void __cdecl UpdateWellOrWaterpot();
 
-        void __stdcall UpdateKeepDoorLeft();
+        void __cdecl UpdateKeepDoorLeft();
 
-        void __stdcall UpdateKeepDoorRight();
+        void __cdecl UpdateKeepDoorRight();
 
-        void __stdcall UpdateKeepDoor();
+        void __cdecl UpdateKeepDoor();
 
-        void __stdcall UpdateTower1();
+        void __cdecl UpdateTower1();
 
-        void __stdcall UpdateBadBuildingCessPitOrDancingBearUnk();
+        void __cdecl UpdateBadBuildingCessPitOrDancingBearUnk();
 
-        void __stdcall UpdateBadBuildingBurningStake();
+        void __cdecl UpdateBadBuildingBurningStake();
 
-        void __stdcall UpdateBadBuildingGibbet();
+        void __cdecl UpdateBadBuildingGibbet();
 
-        void __stdcall UpdateBadBuildingDungeon();
+        void __cdecl UpdateBadBuildingDungeon();
 
-        void __stdcall UpdateBadBuildingStretchingRack();
+        void __cdecl UpdateBadBuildingStretchingRack();
 
-        void __stdcall UpdateBadBuildingRackFlogging();
+        void __cdecl UpdateBadBuildingRackFlogging();
 
-        void __stdcall UpdateBadBuildingChoppingBlock();
+        void __cdecl UpdateBadBuildingChoppingBlock();
 
         void __stdcall UpdateBadBuildingDunkingStool();
 
-        void __stdcall UpdateGoodBuildingStatue();
+        void __cdecl UpdateGoodBuildingStatue();
 
-        void __stdcall UpdateGoodBuildingShrine();
+        void __cdecl UpdateGoodBuildingShrine();
 
-        void __stdcall UpdateGoodBuildingDancingBear();
+        void __cdecl UpdateGoodBuildingDancingBear();
 
-        void __stdcall UpdateOxTether();
+        void __cdecl UpdateOxTether();
 
-        void __stdcall UpdateIronMine();
+        void __cdecl UpdateIronMine();
 
-        void __stdcall UpdateQuarry();
+        void __cdecl UpdateQuarry();
 
-        void __stdcall UpdateFireBallistaBuilding();
+        void __cdecl UpdateFireBallistaBuilding();
 
-        void __stdcall UpdateKillingPit();
+        void __cdecl UpdateKillingPit();
 
-        void __stdcall UpdateTower2();
+        void __cdecl UpdateTower2();
 
-        void __stdcall UpdateTower3();
+        void __cdecl UpdateTower3();
 
-        void __stdcall UpdateTower4();
+        void __cdecl UpdateTower4();
 
-        void __stdcall UpdateTower5();
+        void __cdecl UpdateTower5();
 
-        void __stdcall UpdateCatapultBuilding();
+        void __cdecl UpdateCatapultBuilding();
 
-        void __stdcall UpdateTrebutchetBuilding();
+        void __cdecl UpdateTrebutchetBuilding();
 
-        void __stdcall UpdateSiegeTowerBuilding();
+        void __cdecl UpdateSiegeTowerBuilding();
 
-        void __stdcall UpdateBatteringRamBuilding();
+        void __cdecl UpdateBatteringRamBuilding();
 
-        void __stdcall UpdateShieldBuilding();
+        void __cdecl UpdateShieldBuilding();
 
-        void __stdcall UpdateDogCage();
+        void __cdecl UpdateDogCage();
 
-        void __stdcall UpdateHuntersPost();
+        void __cdecl UpdateHuntersPost();
 
-        void __stdcall UpdateGateHouseLarge();
+        void __cdecl UpdateGateHouseLarge();
 
-        void __stdcall UpdateGateHouseSmall();
+        void __cdecl UpdateGateHouseSmall();
 
-        void __stdcall UpdateWoodGate1();
+        void __cdecl UpdateWoodGate1();
 
     } // namespace Buildings
 } // namespace Map

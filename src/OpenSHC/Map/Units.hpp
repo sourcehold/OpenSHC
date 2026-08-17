@@ -21,11 +21,11 @@ namespace Map {
 
         void __cdecl DetachLadderman(int unitID);
 
-        void __stdcall UpdateSiegeTent();
+        void __cdecl UpdateSiegeTent();
 
-        void __stdcall UpdateBurningAnimal1();
+        void __cdecl UpdateBurningAnimal1();
 
-        void __stdcall UpdateBurningAnimal2();
+        void __cdecl UpdateBurningAnimal2();
 
         void __cdecl IncrementAndOptionalUpdateAVValueRelated(int unitID, BOOLEnum updateAV);
 
@@ -45,153 +45,153 @@ namespace Map {
 
         BOOLEnum __cdecl CurrentUnitHasHealer();
 
-        void __stdcall UpdateBurningMan();
+        void __cdecl UpdateBurningMan();
 
-        void __stdcall UpdateCamel();
+        void __cdecl UpdateCamel();
 
-        void __stdcall UpdateShield();
+        void __cdecl UpdateShield();
 
         BOOLEnum __cdecl UpdateWorker_ConsiderTakingABreakUnk(int unitID);
 
-        void __stdcall UpdatePeasant();
+        void __cdecl UpdatePeasant();
 
-        void __stdcall UpdateOx();
+        void __cdecl UpdateOx();
 
-        void __stdcall UpdateMiner();
+        void __cdecl UpdateMiner();
 
-        void __stdcall UpdateHealer();
+        void __cdecl UpdateHealer();
 
-        void __stdcall UpdateInnkeeper();
+        void __cdecl UpdateInnkeeper();
 
-        void __stdcall UpdateMerchant();
+        void __cdecl UpdateMerchant();
 
         void __stdcall UpdateMerchantHorse();
 
-        void __stdcall UpdateDeer();
+        void __cdecl UpdateDeer();
 
-        void __stdcall UpdateRabbit();
+        void __cdecl UpdateRabbit();
 
-        void __stdcall UpdateCow();
+        void __cdecl UpdateCow();
 
-        void __stdcall UpdateFireWatch();
+        void __cdecl UpdateFireWatch();
 
-        void __stdcall UpdateGhost();
+        void __cdecl UpdateGhost();
 
-        void __stdcall UpdateLady();
+        void __cdecl UpdateLady();
 
-        void __stdcall UpdateSiegeTower();
+        void __cdecl UpdateSiegeTower();
 
         void __stdcall UpdateBatteringRam();
 
-        void __stdcall UpdateChicken();
+        void __cdecl UpdateChicken();
 
-        void __stdcall UpdateMother();
+        void __cdecl UpdateMother();
 
-        void __stdcall UpdateChild();
+        void __cdecl UpdateChild();
 
-        void __stdcall UpdateJuggler();
+        void __cdecl UpdateJuggler();
 
-        void __stdcall UpdateFireEater();
+        void __cdecl UpdateFireEater();
 
         undefined4 __cdecl SetRestingForUnit(int unitID);
 
         void __cdecl UpdateWoodcutter();
 
-        void __stdcall UpdateFletcher();
+        void __cdecl UpdateFletcher();
 
-        void __stdcall UpdateTunneler();
+        void __cdecl UpdateTunneler();
 
-        void __stdcall UpdateHunter();
+        void __cdecl UpdateHunter();
 
         void __stdcall UpdateQuarryMason();
 
         void __stdcall UpdateQuarryWorker();
 
-        void __stdcall UpdatePitchman();
+        void __cdecl UpdatePitchman();
 
-        void __stdcall UpdateWheatFarmer();
+        void __cdecl UpdateWheatFarmer();
 
-        void __stdcall UpdateHopsFarmer();
+        void __cdecl UpdateHopsFarmer();
 
-        void __stdcall UpdateAppleFarmer();
+        void __cdecl UpdateAppleFarmer();
 
-        void __stdcall UpdateDairyFarmer();
+        void __cdecl UpdateDairyFarmer();
 
-        void __stdcall UpdateMiller();
+        void __cdecl UpdateMiller();
 
-        void __stdcall UpdateBaker();
+        void __cdecl UpdateBaker();
 
-        void __stdcall UpdateBrewer();
+        void __cdecl UpdateBrewer();
 
-        void __stdcall UpdatePoleTurner();
+        void __cdecl UpdatePoleTurner();
 
-        void __stdcall UpdateBlacksmith();
+        void __cdecl UpdateBlacksmith();
 
-        void __stdcall UpdateArmorer();
+        void __cdecl UpdateArmorer();
 
-        void __stdcall UpdateTanner();
+        void __cdecl UpdateTanner();
 
-        void __stdcall UpdateCrusaderArcher();
+        void __cdecl UpdateCrusaderArcher();
 
-        void __stdcall UpdateCrossbowman();
+        void __cdecl UpdateCrossbowman();
 
-        void __stdcall UpdateSpearman();
+        void __cdecl UpdateSpearman();
 
-        void __stdcall UpdatePikeman();
+        void __cdecl UpdatePikeman();
 
-        void __stdcall UpdateMaceman();
+        void __cdecl UpdateMaceman();
 
-        void __stdcall UpdateSwordsman();
+        void __cdecl UpdateSwordsman();
 
-        void __stdcall UpdateKnight();
+        void __cdecl UpdateKnight();
 
-        void __stdcall UpdateLadderman();
+        void __cdecl UpdateLadderman();
 
-        void __stdcall UpdateEngineer();
+        void __cdecl UpdateEngineer();
 
-        void __stdcall UpdateMinerIronFetcher();
+        void __cdecl UpdateMinerIronFetcher();
 
-        void __stdcall UpdatePriest();
+        void __cdecl UpdatePriest();
 
         void __stdcall UpdateDrunkard();
 
-        void __stdcall UpdateMonk();
+        void __cdecl UpdateMonk();
 
-        void __stdcall UpdateCatapult();
+        void __cdecl UpdateCatapult();
 
         void __stdcall UpdateTrebuchet();
 
-        void __stdcall UpdateMangonel();
+        void __cdecl UpdateMangonel();
 
-        void __stdcall UpdateLion();
+        void __cdecl UpdateLion();
 
-        void __stdcall UpdateHunterDog();
+        void __cdecl UpdateHunterDog();
 
-        void __stdcall UpdateLord();
+        void __cdecl UpdateLord();
 
-        void __stdcall UpdateJester();
+        void __cdecl UpdateJester();
 
-        void __stdcall UpdateBallista();
+        void __cdecl UpdateBallista();
 
-        void __stdcall UpdateCageDog();
+        void __cdecl UpdateCageDog();
 
-        void __stdcall UpdateArabianArcher();
+        void __cdecl UpdateArabianArcher();
 
-        void __stdcall UpdateSlave();
+        void __cdecl UpdateSlave();
 
-        void __stdcall UpdateSlinger();
+        void __cdecl UpdateSlinger();
 
-        void __stdcall UpdateAssassin();
+        void __cdecl UpdateAssassin();
 
         void __cdecl UpdateHorseArcher_DoShooting(short* unitID);
 
-        void __stdcall UpdateArabianSwordsman();
+        void __cdecl UpdateArabianSwordsman();
 
-        void __stdcall UpdateFireThrower();
+        void __cdecl UpdateFireThrower();
 
-        void __stdcall UpdateFireBallista();
+        void __cdecl UpdateFireBallista();
 
-        void __stdcall UpdateHorseArcher();
+        void __cdecl UpdateHorseArcher();
 
     } // namespace Units
 } // namespace Map

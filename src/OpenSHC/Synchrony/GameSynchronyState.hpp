@@ -221,7 +221,7 @@ namespace Synchrony {
         int HASH_Entities[9][3000]; // 0x000C0E48 length: 108000
         HashDataContainer HASH_LogicalTileMap[9]; // 0x000DB428 length: 138240
         int HASH_Moats[9][160]; // 0x000FD028 length: 5760
-        int HASH_LaddermanWalledData[9][200]; // 0x000FE6A8 length: 7200
+        int HASH_ClimbData[9][200]; // 0x000FE6A8 length: 7200
         int HASH_PitchDitches[9][40]; // 0x001002C8 length: 1440
         int HASH_Unknown2[9][40]; // 0x00100868 length: 1440
         int HASH_AIVS[9][9]; // 0x00100E08 length: 324

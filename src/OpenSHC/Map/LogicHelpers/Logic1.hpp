@@ -36,6 +36,7 @@ namespace Map {
             L_RIVER = 1048576, // 0x00100000
             L_FORD = 2097152, // 0x00200000
             L_CRENEL_VARIATIONUnk = 4194304, // 0x00400000
+            L_CLIMBABLE = 8388608, // 0x00800000
             L_FARM_FIELD_WHEAT = 16777216, // 0x01000000
             L_FARM_FIELD_HOP = 33554432, // 0x02000000
             L_FARM_FIELD_APPLE = 67108864, // 0x04000000

@@ -12,19 +12,19 @@ namespace OpenSHC {
 namespace Map {
     namespace Trees {
 
-        void __stdcall UpdateTree1();
+        void __cdecl UpdateTree1();
 
-        void __stdcall UpdateTree5();
+        void __cdecl UpdateTree5();
 
-        void __stdcall UpdateAppleTree();
+        void __cdecl UpdateAppleTree();
 
-        void __stdcall UpdateTree16();
+        void __cdecl UpdateTree16();
 
-        void __stdcall UpdateTree17();
+        void __cdecl UpdateTree17();
 
-        void __stdcall UpdateTree18();
+        void __cdecl UpdateTree18();
 
-        void __stdcall UpdateTree19();
+        void __cdecl UpdateTree19();
 
     } // namespace Trees
 } // namespace Map

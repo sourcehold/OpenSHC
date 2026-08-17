@@ -3,7 +3,7 @@
   Communicate changes to the dev team (e.g. via a Pull Request).
   Changes get lost otherwise.
 
-  path: 'OpenSHC/Globals/DAT_CurrentLaddermanWalledDataID.hpp'
+  path: 'OpenSHC/Globals/DAT_CurrentClimbDataID.hpp'
 */
 
 #pragma once
@@ -13,7 +13,7 @@
 
 namespace OpenSHC {
 
-MACRO_STRUCT_RESOLVER(undefined4, false, Address::SHC_3BB0A8C1_0x00DF4238) DAT_CurrentLaddermanWalledDataID;
+MACRO_STRUCT_RESOLVER(undefined4, false, Address::SHC_3BB0A8C1_0x00DF4238) DAT_CurrentClimbDataID;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00DF4238);

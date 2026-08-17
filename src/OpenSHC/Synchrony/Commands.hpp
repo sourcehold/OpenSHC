@@ -12,235 +12,235 @@ namespace OpenSHC {
 namespace Synchrony {
     namespace Commands {
 
-        void __stdcall QueueChangeGameIntensityOrBalance();
+        void __cdecl QueueChangeGameIntensityOrBalance();
 
-        void __stdcall QueueChangeTaxes();
+        void __cdecl QueueChangeTaxes();
 
-        void __stdcall InitialAnnounceReply();
+        void __cdecl InitialAnnounceReply();
 
-        void __stdcall AnnounceGameVersion();
+        void __cdecl AnnounceGameVersion();
 
-        void __stdcall AnnouncePlayerInformationSuchAsNameLordTypeAndAvailableAIVS();
+        void __cdecl AnnouncePlayerInformationSuchAsNameLordTypeAndAvailableAIVS();
 
-        void __stdcall ShareGameSeedAndMultiplayerSettingsAndStartGame();
+        void __cdecl ShareGameSeedAndMultiplayerSettingsAndStartGame();
 
-        void __stdcall CommandCheckSync();
+        void __cdecl CommandCheckSync();
 
-        void __stdcall AnnounceTeamsAndPositions();
+        void __cdecl AnnounceTeamsAndPositions();
 
-        void __stdcall ClickNavigateMenuOrEscape();
+        void __cdecl ClickNavigateMenuOrEscape();
 
-        void __stdcall MakeUnitSelection();
+        void __cdecl MakeUnitSelection();
 
-        void __stdcall ClickMoveUnit();
+        void __cdecl ClickMoveUnit();
 
-        void __stdcall ClickErase();
+        void __cdecl ClickErase();
 
-        void __stdcall ClickSetLand();
+        void __cdecl ClickSetLand();
 
-        void __stdcall ClickRaiseLand();
+        void __cdecl ClickRaiseLand();
 
-        void __stdcall ClickSetTerrain();
+        void __cdecl ClickSetTerrain();
 
-        void __stdcall ClickHeightEqualize();
+        void __cdecl ClickHeightEqualize();
 
-        void __stdcall ClickTerrainHeightMinOrMax();
+        void __cdecl ClickTerrainHeightMinOrMax();
 
-        void __stdcall ClickCreatePlateau();
+        void __cdecl ClickCreatePlateau();
 
-        void __stdcall ClickPlaceWall();
+        void __cdecl ClickPlaceWall();
 
-        void __stdcall ClickPlaceRockOrTree();
+        void __cdecl ClickPlaceRockOrTree();
 
-        void __stdcall ClickRaiseLand2Unk();
+        void __cdecl ClickRaiseLand2Unk();
 
-        void __stdcall ClickPlaceBuilding();
+        void __cdecl ClickPlaceBuilding();
 
-        void __stdcall ClickDestroyBuilding();
+        void __cdecl ClickDestroyBuilding();
 
-        void __stdcall ClickRecruitUnit();
+        void __cdecl ClickRecruitUnit();
 
-        void __stdcall _REMOVED_COMMAND1_();
+        void __cdecl _REMOVED_COMMAND1_();
 
-        void __stdcall ClickSetBuildingProductionType();
+        void __cdecl ClickSetBuildingProductionType();
 
-        void __stdcall ClickChangeTaxes();
+        void __cdecl ClickChangeTaxes();
 
-        void __stdcall ClickChangeRations();
+        void __cdecl ClickChangeRations();
 
-        void __stdcall ClickGiveUnitsInstruction();
+        void __cdecl ClickGiveUnitsInstruction();
 
-        void __stdcall ClickSomethingWithDrawBridgeUnk();
+        void __cdecl ClickSomethingWithDrawBridgeUnk();
 
-        void __stdcall ClickBuyOrSell();
+        void __cdecl ClickBuyOrSell();
 
-        void __stdcall ClickDestroy();
+        void __cdecl ClickDestroy();
 
-        void __stdcall ClickPlaceSiegeTent();
+        void __cdecl ClickPlaceSiegeTent();
 
-        void __stdcall ClickBuildingSleep();
+        void __cdecl ClickBuildingSleep();
 
-        void __stdcall ClickCreateAnimal();
+        void __cdecl ClickCreateAnimal();
 
-        void __stdcall ClickOpenOrCloseGate();
+        void __cdecl ClickOpenOrCloseGate();
 
-        void __stdcall ShareDesyncedHashes();
+        void __cdecl ShareDesyncedHashes();
 
-        void __stdcall CommandChangeMapSelection();
+        void __cdecl CommandChangeMapSelection();
 
-        void __stdcall AcknowledgeMapExistence();
+        void __cdecl AcknowledgeMapExistence();
 
-        void __stdcall ShareMSVMapIndex();
+        void __cdecl ShareMSVMapIndex();
 
-        void __stdcall ClickInitOrChangeGameIntensityAndBalance();
+        void __cdecl ClickInitOrChangeGameIntensityAndBalance();
 
         void __stdcall SharePlayerName();
 
-        void __stdcall SendResyncCharLayer();
+        void __cdecl SendResyncCharLayer();
 
-        void __stdcall ResyncShortLayer();
+        void __cdecl ResyncShortLayer();
 
-        void __stdcall ResyncStatus2();
+        void __cdecl ResyncStatus2();
 
-        void __stdcall ResetSyncStatusUnk();
+        void __cdecl ResetSyncStatusUnk();
 
-        void __stdcall ClickRepairTower();
+        void __cdecl ClickRepairTower();
 
-        void __stdcall CommandSpawnEntity();
+        void __cdecl CommandSpawnEntity();
 
-        void __stdcall ClickUnitStance();
+        void __cdecl ClickUnitStance();
 
-        void __stdcall ClickExtendRallyPoint();
+        void __cdecl ClickExtendRallyPoint();
 
-        void __stdcall SiegeEngineRelated();
+        void __cdecl SiegeEngineRelated();
 
-        void __stdcall TribeRelated1();
+        void __cdecl TribeRelated1();
 
-        void __stdcall ReleaseDogs();
+        void __cdecl ReleaseDogs();
 
-        void __stdcall RemoveTowerSiegeEngine();
+        void __cdecl RemoveTowerSiegeEngine();
 
-        void __stdcall DestroyWallOrPitch();
+        void __cdecl DestroyWallOrPitch();
 
-        void __stdcall DeselectUnit();
+        void __cdecl DeselectUnit();
 
-        void __stdcall TriggerRecalculationOfUnitSameTileLinkage();
+        void __cdecl TriggerRecalculationOfUnitSameTileLinkage();
 
-        void __stdcall ResyncZone();
+        void __cdecl ResyncZone();
 
-        void __stdcall KickPlayerUnk();
+        void __cdecl KickPlayerUnk();
 
-        void __stdcall CommandSelectionReplenishAmmo();
+        void __cdecl CommandSelectionReplenishAmmo();
 
-        void __stdcall BroadCastSyncRelatedStatus();
+        void __cdecl BroadCastSyncRelatedStatus();
 
-        void __stdcall VoteKick_K_D_B_G_J();
+        void __cdecl VoteKick_K_D_B_G_J();
 
-        void __stdcall SyncPacketSizeAnnouncement();
+        void __cdecl SyncPacketSizeAnnouncement();
 
-        void __stdcall ShareAnnouncementWithHost();
+        void __cdecl ShareAnnouncementWithHost();
 
-        void __stdcall CloseModalDialogForEveryone();
+        void __cdecl CloseModalDialogForEveryone();
 
-        void __stdcall SomePlayerNameUpdateCommand();
+        void __cdecl SomePlayerNameUpdateCommand();
 
-        void __stdcall FlagsAndBraziersCommandUnk();
+        void __cdecl FlagsAndBraziersCommandUnk();
 
-        void __stdcall NotifyLaggingPlayer();
+        void __cdecl NotifyLaggingPlayer();
 
-        void __stdcall SomeKindOfMultiplayerPingUnk();
+        void __cdecl SomeKindOfMultiplayerPingUnk();
 
-        void __stdcall ShareGameStatePartialHashes();
+        void __cdecl ShareGameStatePartialHashes();
 
-        void __stdcall ResyncStatusStart();
+        void __cdecl ResyncStatusStart();
 
-        void __stdcall SetUnitAssemblyPoint();
+        void __cdecl SetUnitAssemblyPoint();
 
-        void __stdcall StartSendingMapFile();
+        void __cdecl StartSendingMapFile();
 
         void __stdcall StartReceivingMapFile();
 
-        void __stdcall MapSendingRelated();
+        void __cdecl MapSendingRelated();
 
-        void __stdcall HostAnnounceRoundTable();
+        void __cdecl HostAnnounceRoundTable();
 
-        void __stdcall AddAIPlayer();
+        void __cdecl AddAIPlayer();
 
-        void __stdcall SendPlayerToPlayerRequestOrResponse();
+        void __cdecl SendPlayerToPlayerRequestOrResponse();
 
-        void __stdcall ShareAIVHash();
+        void __cdecl ShareAIVHash();
 
-        void __stdcall UpdateSkirmishGameMenuFaceBitmap();
+        void __cdecl UpdateSkirmishGameMenuFaceBitmap();
 
-        void __stdcall ActiveTacticalPowers();
+        void __cdecl ActiveTacticalPowers();
 
-        void __stdcall InitialAnnounceToHost();
+        void __cdecl InitialAnnounceToHost();
 
-        void __stdcall AssignPlayerIDToPlayerSlot();
+        void __cdecl AssignPlayerIDToPlayerSlot();
 
-        void __stdcall TriggerLobbyPlayerInformationRefresh();
+        void __cdecl TriggerLobbyPlayerInformationRefresh();
 
-        void __stdcall ClickTauntOrChat();
+        void __cdecl ClickTauntOrChat();
 
-        void __stdcall AutoSaveTriggered();
+        void __cdecl AutoSaveTriggered();
 
-        void __stdcall SetPlayerNameUnk();
+        void __cdecl SetPlayerNameUnk();
 
-        void __stdcall CommandLoadMapHeader();
+        void __cdecl CommandLoadMapHeader();
 
-        void __stdcall SubmitMSVMapIndexAndProperties();
+        void __cdecl SubmitMSVMapIndexAndProperties();
 
-        void __stdcall ResyncChimp();
+        void __cdecl ResyncChimp();
 
-        void __stdcall SendResyncBuilding();
+        void __cdecl SendResyncBuilding();
 
-        void __stdcall SendResyncVeg();
+        void __cdecl SendResyncVeg();
 
-        void __stdcall SendResyncTribe();
+        void __cdecl SendResyncTribe();
 
-        void __stdcall SendResyncPlayerData();
+        void __cdecl SendResyncPlayerData();
 
-        void __stdcall SendResyncUnknown();
+        void __cdecl SendResyncUnknown();
 
-        void __stdcall SendResyncEntity();
+        void __cdecl SendResyncEntity();
 
-        void __stdcall SendResyncIntLayer();
+        void __cdecl SendResyncIntLayer();
 
-        void __stdcall DestroyPlayer();
+        void __cdecl DestroyPlayer();
 
-        void __stdcall ResyncMoat();
+        void __cdecl ResyncMoat();
 
-        void __stdcall ResyncTeleClimb();
+        void __cdecl ResyncTeleClimb();
 
-        void __stdcall ResyncPitch();
+        void __cdecl ResyncPitch();
 
-        void __stdcall CommandSwitchTeams();
+        void __cdecl CommandSwitchTeams();
 
-        void __stdcall SyncRelatedSomething();
+        void __cdecl SyncRelatedSomething();
 
-        void __stdcall SendQuitGameQuestion();
+        void __cdecl SendQuitGameQuestion();
 
-        void __stdcall ShareQuitGameVote();
+        void __cdecl ShareQuitGameVote();
 
-        void __stdcall VoteKick_SEND_L_E_C_A_F_H_ZAP();
+        void __cdecl VoteKick_SEND_L_E_C_A_F_H_ZAP();
 
-        void __stdcall ShareMapHashForMapName();
+        void __cdecl ShareMapHashForMapName();
 
-        void __stdcall ShareMapPart();
+        void __cdecl ShareMapPart();
 
-        void __stdcall ResyncVillage();
+        void __cdecl ResyncVillage();
 
-        void __stdcall ResyncAIZone();
+        void __cdecl ResyncAIZone();
 
-        void __stdcall AskForPlayerSlotAssignment();
+        void __cdecl AskForPlayerSlotAssignment();
 
-        void __stdcall HostShareLobbyState();
+        void __cdecl HostShareLobbyState();
 
         void __cdecl ResyncStartCS_CS_Sub();
 
-        void __stdcall ResyncResumeCS();
+        void __cdecl ResyncResumeCS();
 
-        void __stdcall HostRemoveAIPlayerBySlotID();
+        void __cdecl HostRemoveAIPlayerBySlotID();
 
     } // namespace Commands
 } // namespace Synchrony

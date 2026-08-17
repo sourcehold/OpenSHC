@@ -573,7 +573,7 @@ PUBLIC ?instance@?$Extern@T_LARGE_INTEGER@@$0NPDDOI@@StructResolver@@2T_LARGE_IN
 
 PUBLIC ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDPA@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A
 
-PUBLIC ?instance@?$Extern@$$BY0DOJ@D$0NPDDPH@@StructResolver@@2PADA
+PUBLIC ?instance@?$Extern@$$BY0DOI@D$0NPDDPI@@StructResolver@@2PADA
 
 PUBLIC ?instance@?$Extern@I$0NPDHOA@@StructResolver@@2IA
 
@@ -946,6 +946,8 @@ PUBLIC ?instance@?$Extern@I$0OOAPME@@StructResolver@@2IA
 PUBLIC ?instance@?$Extern@I$0OOAPMI@@StructResolver@@2IA
 
 PUBLIC ?instance@?$Extern@K$0OOBADM@@StructResolver@@2KA
+
+PUBLIC ?instance@?$Extern@K$0OOBAEA@@StructResolver@@2KA
 
 PUBLIC ?instance@?$Extern@I$0OOBAGI@@StructResolver@@2IA
 
@@ -1573,8 +1575,6 @@ PUBLIC ?instance@?$Extern@I$0OOBADE@@StructResolver@@2IA
 
 PUBLIC ?instance@?$Extern@H$0OOBADI@@StructResolver@@2HA
 
-PUBLIC ?instance@?$Extern@K$0OOBAEA@@StructResolver@@2KA
-
 PUBLIC ?instance@?$Extern@K$0OOBAEE@@StructResolver@@2KA
 
 PUBLIC ?instance@?$Extern@K$0OOBAEI@@StructResolver@@2KA
@@ -2198,7 +2198,7 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDPA@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A EQU 00DF33F0h
 
-?instance@?$Extern@$$BY0DOJ@D$0NPDDPH@@StructResolver@@2PADA EQU 00DF33F7h
+?instance@?$Extern@$$BY0DOI@D$0NPDDPI@@StructResolver@@2PADA EQU 00DF33F8h
 
 ?instance@?$Extern@I$0NPDHOA@@StructResolver@@2IA EQU 00DF37E0h
 
@@ -2571,6 +2571,8 @@ _TEXT SEGMENT
 ?instance@?$Extern@I$0OOAPMI@@StructResolver@@2IA EQU 00EE0FC8h
 
 ?instance@?$Extern@K$0OOBADM@@StructResolver@@2KA EQU 00EE103Ch
+
+?instance@?$Extern@K$0OOBAEA@@StructResolver@@2KA EQU 00EE1040h
 
 ?instance@?$Extern@I$0OOBAGI@@StructResolver@@2IA EQU 00EE1068h
 
@@ -3197,8 +3199,6 @@ _TEXT SEGMENT
 ?instance@?$Extern@I$0OOBADE@@StructResolver@@2IA EQU 00EE1034h
 
 ?instance@?$Extern@H$0OOBADI@@StructResolver@@2HA EQU 00EE1038h
-
-?instance@?$Extern@K$0OOBAEA@@StructResolver@@2KA EQU 00EE1040h
 
 ?instance@?$Extern@K$0OOBAEE@@StructResolver@@2KA EQU 00EE1044h
 
