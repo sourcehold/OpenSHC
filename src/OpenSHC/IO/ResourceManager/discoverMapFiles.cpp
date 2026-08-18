@@ -19,7 +19,6 @@ namespace IO {
     // FUNCTION: STRONGHOLDCRUSADER 0x00477EE0
     void ResourceManager::discoverMapFiles(char* param_1)
     {
-        // TODO: are these really set here, or is it part of the loops down there?
         BOOLEnum _hasSwapped = TRUE;
         int _mapIndex = 0;
 
@@ -55,8 +54,10 @@ namespace IO {
         MACRO_CALL_MEMBER(LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
             500000, 0, this->loadedMapNames);
 
+        HANDLE _handle;
+
         WIN32_FIND_DATAA _win32FindData;
-        HANDLE _handle = FindFirstFileA(param_1, &_win32FindData);
+        _handle = FindFirstFileA(param_1, &_win32FindData);
         if (_handle == INVALID_HANDLE_VALUE) {
             return;
         }
@@ -65,17 +66,19 @@ namespace IO {
             MACRO_CALL_MEMBER(LowLevelMemory_Func::copyStringUntilFirstDot, DAT_LowLevelMemory::ptr)(
                 _win32FindData.cFileName, this->loadedMapNames[this->mapFileCounter]);
 
-            FILETIME_UNION currentFileTime;
-            currentFileTime.ft_struct = _win32FindData.ftLastWriteTime;
-            currentFileTime.ft_scalar += filetimeBias.ft_scalar;
+            {
+                FILETIME_UNION currentFileTime;
+                currentFileTime.ft_struct = _win32FindData.ftLastWriteTime;
+                currentFileTime.ft_scalar += filetimeBias.ft_scalar;
 
-            WORD fatDate;
-            WORD fatTime;
-            FileTimeToDosDateTime(&currentFileTime.ft_struct, &fatDate, &fatTime);
+                WORD fatDate;
+                WORD fatTime;
+                FileTimeToDosDateTime(&currentFileTime.ft_struct, &fatDate, &fatTime);
 
-            // this might indicate that they used a struct here to handle the time
-            // although other usages use it like a number
-            this->mapFileTimes[this->mapFileCounter] = fatDate << 16 | fatTime;
+                // this might indicate that they used a struct here to handle the time
+                // although other usages use it like a number
+                this->mapFileTimes[this->mapFileCounter] = (fatDate << 16) + fatTime;
+            }
 
             // since all strings are of type ptr, I can not get the length of the string during runtime via sizeof
             // "magic numbers" here consider the length of "mission" and in relation to that
@@ -85,17 +88,12 @@ namespace IO {
                 && this->loadedMapNames[this->mapFileCounter][7] >= '0'
                 && this->loadedMapNames[this->mapFileCounter][7] <= '9') {
 
-                // TODO still issues, logic discards certain maps if it is a mission map, but the current logic does not
-                // properly reproduce the binary. Also, other issues in the function
-
-                bool discard = true;
-
                 if (this->loadedMapNames[this->mapFileCounter][7] == '1') {
                     if (this->loadedMapNames[this->mapFileCounter][8] < '0'
                         || this->loadedMapNames[this->mapFileCounter][8] > '9'
                         || this->loadedMapNames[this->mapFileCounter][9] != '\0') {
                         if (this->loadedMapNames[this->mapFileCounter][8] != '\0') {
-                            discard = false;
+                            goto keepMap;
                         }
                     }
                 } else if (this->loadedMapNames[this->mapFileCounter][7] == '2') {
@@ -103,7 +101,7 @@ namespace IO {
                         || this->loadedMapNames[this->mapFileCounter][8] > '1'
                         || this->loadedMapNames[this->mapFileCounter][9] != '\0') {
                         if (this->loadedMapNames[this->mapFileCounter][8] != '\0') {
-                            discard = false;
+                            goto keepMap;
                         }
                     }
                 } else if (this->loadedMapNames[this->mapFileCounter][7] == '3') {
@@ -111,41 +109,39 @@ namespace IO {
                         || this->loadedMapNames[this->mapFileCounter][8] > '7'
                         || this->loadedMapNames[this->mapFileCounter][9] != '\0') {
                         if (this->loadedMapNames[this->mapFileCounter][8] != '\0') {
-                            discard = false;
+                            goto keepMap;
                         }
                     }
                 } else {
                     if (this->loadedMapNames[this->mapFileCounter][8] != '\0') {
-                        discard = false;
+                        goto keepMap;
                     }
                 }
 
-                if (discard) {
-                    MACRO_CALL_MEMBER(LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                        1000, '\0', this->loadedMapNames[this->mapFileCounter]);
-                    --this->mapFileCounter;
-                }
+                MACRO_CALL_MEMBER(LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
+                    1000, '\0', this->loadedMapNames[this->mapFileCounter]);
+                --this->mapFileCounter;
+
+            keepMap:; // best matching solution so far
             }
 
             ++this->mapFileCounter;
-            if (FindNextFileA(_handle, &_win32FindData) == 0) {
-                if (!_originalMaps) {
-                    break;
-                }
-                if (local_22c != 0) {
-                    break;
-                }
-                local_22c = 1;
+            if (FindNextFileA(_handle, &_win32FindData)) {
+                continue;
+            }
+            if (!_originalMaps || local_22c) {
+                break;
+            }
+            local_22c = 1;
 
-                // required, otherwise copy elision will not work
-                std::string path(this->paths_getDocumentsMapsFolderString(TRUE));
-                path.append(s__map_005a648c);
+            // required, otherwise copy elision will not work
+            std::string path(this->paths_getDocumentsMapsFolderString(TRUE));
+            path.append(s__map_005a648c);
 
-                // does this truly overwrite?
-                _handle = FindFirstFileA(path.c_str(), &_win32FindData);
-                if (_handle == INVALID_HANDLE_VALUE) {
-                    break;
-                }
+            // does this truly overwrite?
+            _handle = FindFirstFileA(path.c_str(), &_win32FindData);
+            if (_handle == INVALID_HANDLE_VALUE) {
+                break;
             }
         }
 
@@ -163,10 +159,11 @@ namespace IO {
                         break;
                     }
 
+                    int receiver;
                     char* _Str2 = MACRO_CALL(Global_Func::GetStringBasedOnHardcodedMaps)(
-                        this->loadedMapNames[_currentMapIndex + 1], &local_22c);
+                        this->loadedMapNames[_currentMapIndex + 1], &receiver);
                     char* _Str1 = MACRO_CALL(Global_Func::GetStringBasedOnHardcodedMaps)(
-                        this->loadedMapNames[_currentMapIndex], &_missionMaps);
+                        this->loadedMapNames[_currentMapIndex], &receiver);
                     if (MACRO_CALL(OS_Func::__stricmp)(_Str1, _Str2) > 0) {
                         MACRO_CALL_MEMBER(ResourceManager_Func::swapMapDataWithNextMap, this)(_currentMapIndex);
                         _hasSwapped = TRUE;
