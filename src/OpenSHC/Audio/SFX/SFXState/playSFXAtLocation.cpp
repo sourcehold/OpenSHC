@@ -18,14 +18,14 @@ namespace Audio {
             }
             int x = xPosition - DAT_ViewportRenderState::instance.viewportState.tileCenterX;
             int y = yPosition - DAT_ViewportRenderState::instance.viewportState.tileCenterY;
-            if (DAT_TileMapState::instance.SEC_MapOrientation == 2) {
+            if (DAT_TileMapState::instance.mapOrientation == 2) {
                 int t = -x;
                 x = y;
                 y = t;
-            } else if (DAT_TileMapState::instance.SEC_MapOrientation == 4) {
+            } else if (DAT_TileMapState::instance.mapOrientation == 4) {
                 x = -x;
                 y = -y;
-            } else if (DAT_TileMapState::instance.SEC_MapOrientation == 6) {
+            } else if (DAT_TileMapState::instance.mapOrientation == 6) {
                 int t = x;
                 x = -y;
                 y = t;
