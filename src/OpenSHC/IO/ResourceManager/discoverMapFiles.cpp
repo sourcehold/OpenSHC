@@ -138,6 +138,9 @@ namespace IO {
             std::string path(this->paths_getDocumentsMapsFolderString(TRUE));
             path.append(s__map_005a648c);
 
+            // FIXME: Assuming it did not get lost in the recomp process, since the func does not perfectly match, then
+            //   this is a resource leak here. The older handle does not get closed properly
+
             // does this truly overwrite?
             _handle = FindFirstFileA(path.c_str(), &_win32FindData);
             if (_handle == INVALID_HANDLE_VALUE) {
