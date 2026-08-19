@@ -17,7 +17,7 @@ namespace IO {
     } FILETIME_UNION;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00477EE0
-    void ResourceManager::discoverMapFiles(char* param_1)
+    void ResourceManager::discoverMapFiles(char const* param_1)
     {
         BOOLEnum _hasSwapped = TRUE;
         int _mapIndex = 0;
