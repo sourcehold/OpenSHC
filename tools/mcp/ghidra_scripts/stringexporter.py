@@ -15,7 +15,7 @@ PATTERN = re.compile("[^a-zA-Z0-9_]+")
 l = getCurrentProgram().getListing()
 roRange = getCurrentProgram().getMemory().getBlocks()[2].getAddressRange()
 
-sdump = ""
+sdump = "#pragma once\n\n"
 
 cur = l.getCodeUnitAt(roRange.getMinAddress())
 while cur.getAddress() < roRange.getMaxAddress():
