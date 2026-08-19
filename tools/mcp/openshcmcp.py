@@ -41,6 +41,10 @@ from mcp.types import (
 )
 import mcp.server.stdio
 
+import os
+cwd = Path(os.path.dirname(os.path.realpath(__file__)))
+os.chdir(str((cwd / "../..").resolve()))
+
 PATH_CMAKE_OPENSHC_SOURCES = Path("cmake/openshc-sources.txt.local")
 if not PATH_CMAKE_OPENSHC_SOURCES.exists():
   raise Exception(f"could not find cmake core sources txt file: {str(PATH_CMAKE_OPENSHC_SOURCES)}")
