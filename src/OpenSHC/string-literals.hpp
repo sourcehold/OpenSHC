@@ -2457,22 +2457,22 @@ char const * const SFX_NotEnoughGoldForTunneler = SFX_NOTENOUGHGOLDFORTUNNELER;
 char const * const SFX_NotEnoughGoldForApprentices = SFX_NOTENOUGHGOLDFORAPPRENTICES;
 
 // STRING: STRONGHOLDCRUSADER 0x005a276c
-char const * const STR_EQUALS = STR_EQUALS;
+char const * const s_equals_005a276c = S_EQUALS_005A276C;
 
 // STRING: STRONGHOLDCRUSADER 0x005a2770
-char const * const STR_PERCENTAGE = STR_PERCENTAGE;
+char const * const s_percentage_005a2770 = S_PERCENTAGE_005A2770;
 
 // STRING: STRONGHOLDCRUSADER 0x005a2774
-char const * const STR_CLOSE_BRACE = STR_CLOSE_BRACE;
+char const * const s_brace_open_005a2774 = S_BRACE_OPEN_005A2774;
 
 // STRING: STRONGHOLDCRUSADER 0x005a2778
-char const * const STR_OPEN_BRACE = STR_OPEN_BRACE;
+char const * const s_brace_close_005a2778 = S_BRACE_CLOSE_005A2778;
 
 // STRING: STRONGHOLDCRUSADER 0x005a277c
-char const * const STR_SLASH = STR_SLASH;
+char const * const s_slash_forward_005a277c = S_SLASH_FORWARD_005A277C;
 
 // STRING: STRONGHOLDCRUSADER 0x005a2780
-char const * const STR_FMT_D_SLASH_D = STR_FMT_D_SLASH_D;
+char const * const s_perc_d_slash_perc_d_005a2780 = S_PERC_D_SLASH_PERC_D_005A2780;
 
 // STRING: STRONGHOLDCRUSADER 0x005a2788
 char const * const SFX_TheRoundTable = SFX_THEROUNDTABLE;
