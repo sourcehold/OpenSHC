@@ -121,15 +121,15 @@ namespace IO {
             &ResourceManager::fileHashFunctionByteByByte)
         fileHashFunctionByteByByte;
 
-        MACRO_FUNCTION_RESOLVER(std::string (ResourceManager::*)(std::string, bool), false,
-            Address::SHC_3BB0A8C1_0x004778E0, &ResourceManager::paths_getDocumentsFolderString)
+        MACRO_FUNCTION_RESOLVER(std::string (ResourceManager::*)(bool), false, Address::SHC_3BB0A8C1_0x004778E0,
+            &ResourceManager::paths_getDocumentsFolderString)
         paths_getDocumentsFolderString;
 
-        MACRO_FUNCTION_RESOLVER(void (ResourceManager::*)(std::string, bool), false, Address::SHC_3BB0A8C1_0x004779F0,
+        MACRO_FUNCTION_RESOLVER(std::string (ResourceManager::*)(bool), false, Address::SHC_3BB0A8C1_0x004779F0,
             &ResourceManager::paths_getSavesPath)
         paths_getSavesPath;
 
-        MACRO_FUNCTION_RESOLVER(void (ResourceManager::*)(std::string, bool), false, Address::SHC_3BB0A8C1_0x00477B00,
+        MACRO_FUNCTION_RESOLVER(std::string (ResourceManager::*)(bool), false, Address::SHC_3BB0A8C1_0x00477B00,
             &ResourceManager::paths_getDocumentsMapsFolderString)
         paths_getDocumentsMapsFolderString;
 

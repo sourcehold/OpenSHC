@@ -115,11 +115,11 @@ namespace IO {
 
         int fileHashFunctionByteByByte();
 
-        std::string paths_getDocumentsFolderString(std::string param_1, bool param_2);
+        std::string paths_getDocumentsFolderString(bool param_2);
 
-        void paths_getSavesPath(std::string param_1, bool param_2);
+        std::string paths_getSavesPath(bool param_2);
 
-        void paths_getDocumentsMapsFolderString(std::string param_1, bool prependUserPath);
+        std::string paths_getDocumentsMapsFolderString(bool prependUserPath);
 
         void discoverMapFiles(char const* param_1);
 
