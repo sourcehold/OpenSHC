@@ -18,7 +18,11 @@ pragma_once = """#pragma once
 
 """ 
 sdump = pragma_once + '#include "OpenSHC/string-macros.hpp"\n\n'
-mdump = pragma_once
+mdump = pragma_once + """#define S_GM "gm\\\\"
+
+#define S_FX "fx\\\\"
+
+"""
 
 cur = l.getCodeUnitAt(roRange.getMinAddress())
 while cur.getAddress() < roRange.getMaxAddress():
