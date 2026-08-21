@@ -4,11 +4,10 @@
 #include "../ResourceManager.func.hpp"
 
 #include "OpenSHC/IO/FileResourceType.hpp"
+#include "OpenSHC/string-macros.hpp"
 
 namespace OpenSHC {
 namespace IO {
-
-    // TODO: Decide how to deal with string literals that need to be split
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00478360
     void ResourceManager::resolveResourceFileName(FileResourceType resourceType, char const* shortFileName)
@@ -16,27 +15,27 @@ namespace IO {
         this->currentActiveResourceType = resourceType;
         switch (resourceType) {
         case FRT_GM:
-            strcpy(this->resourceFileNameArray[resourceType], "gm\\");
+            strcpy(this->resourceFileNameArray[resourceType], S_GM);
             strcat(this->resourceFileNameArray[resourceType], shortFileName);
             return;
 
         case FRT_SCENARIOS:
-            strcpy(this->resourceFileNameArray[resourceType], "scenarios\\");
+            strcpy(this->resourceFileNameArray[resourceType], S_SCENARIOS__005A64F4);
             strcat(this->resourceFileNameArray[resourceType], shortFileName);
             return;
 
         case FRT_GFX:
-            strcpy(this->resourceFileNameArray[resourceType], "gfx\\");
+            strcpy(this->resourceFileNameArray[resourceType], S_GFX__005A5A1C);
             strcat(this->resourceFileNameArray[resourceType], shortFileName);
             return;
 
         case FRT_GFX8:
-            strcpy(this->resourceFileNameArray[resourceType], "gfx8\\");
+            strcpy(this->resourceFileNameArray[resourceType], S_GFX8__005A64EC);
             strcat(this->resourceFileNameArray[resourceType], shortFileName);
             return;
 
         case FRT_CASTLES:
-            strcpy(this->resourceFileNameArray[resourceType], "castles\\");
+            strcpy(this->resourceFileNameArray[resourceType], S_CASTLES__005A64E0);
             strcat(this->resourceFileNameArray[resourceType], shortFileName);
             return;
 
@@ -49,27 +48,27 @@ namespace IO {
         }
 
         case FRT_HELP:
-            strcpy(this->resourceFileNameArray[resourceType], "help\\");
+            strcpy(this->resourceFileNameArray[resourceType], S_HELP__005A5A24);
             strcat(this->resourceFileNameArray[resourceType], shortFileName);
             return;
 
         case FRT_BINKS:
-            strcpy(this->resourceFileNameArray[resourceType], "binks\\");
+            strcpy(this->resourceFileNameArray[resourceType], S_BINKS__005A64D8);
             strcat(this->resourceFileNameArray[resourceType], shortFileName);
             return;
 
         case FRT_FX:
-            strcpy(this->resourceFileNameArray[resourceType], "fx\\");
+            strcpy(this->resourceFileNameArray[resourceType], S_FX__005A5A2C);
             strcat(this->resourceFileNameArray[resourceType], shortFileName);
             return;
 
         case FRT_GFX_SPEECH: // FIXME: Wrong name? Should be FRT_FX_SPEECH, or not?
-            strcpy(this->resourceFileNameArray[resourceType], "fx\\speech\\");
+            strcpy(this->resourceFileNameArray[resourceType], S_FX_SPEECH__005A64CC);
             strcat(this->resourceFileNameArray[resourceType], shortFileName);
             return;
 
         case FRT_MAPS: {
-            strcpy(this->resourceFileNameArray[resourceType], "maps\\");
+            strcpy(this->resourceFileNameArray[resourceType], S_MAPS__005A64C4);
             strcat(this->resourceFileNameArray[resourceType], shortFileName);
 
             if (MACRO_CALL_MEMBER(ResourceManager_Func::doesFileExist, this)(
@@ -84,7 +83,7 @@ namespace IO {
         }
 
         case FRT_SCORES:
-            strcpy(this->resourceFileNameArray[resourceType], "scores\\");
+            strcpy(this->resourceFileNameArray[resourceType], S_SCORES__005A64BC);
             strcat(this->resourceFileNameArray[resourceType], shortFileName);
             return;
 
