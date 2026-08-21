@@ -190,8 +190,15 @@ They might be worth trying in very tricky cases, but they were usually seen as c
 
 ### String Literals
 
-String literals are not resolved. Instead we use a big `string-literals.hpp` file.
-Make always sure to use a reference from this file instead of a string literal.
+String literals are not resolved. Instead we use tow big files, `string-macros.hpp` and `string-literals.hpp`.
+`string-macros.hpp` is the ground truth. However, when ever possible, using the pointers from `string-literals.hpp` is preferred.
+
+There is one known case that requires using only the macros:
+Only literals can by split up into multiple parts and be moved into registers to copy a string, for example via "strcpy".
+In this case, use the macros for the strings and **DO NOT** include `string-literals.hpp`, since this might cause different behavior.
+Should a mixture of pointers and macros be required, because the macro to not produce the fitting structure, still only use the macros from `string-macros.hpp`. Create a string pointer in the cpp file and use this for the pointer.
+
+Make always sure to use a reference from this files instead of a direct string literal.
 
 ### Blocks and Scopes
 
