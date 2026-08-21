@@ -38,9 +38,9 @@ while cur.getAddress() < roRange.getMaxAddress():
 			s_label = PATTERN.sub("_", cur.getLabel())
 			m_label = s_label.upper()
 			v = cur.getValue().replace("\\", "\\\\").replace("\n", "\\n").replace("\r", "\\r").replace('"', '\\"')
-			sdump += "// STRING: STRONGHOLDCRUSADER 0x00" + hex(cur.getAddress().getOffset())[2:-1] + "\n"
+			sdump += "// 0x00" + hex(cur.getAddress().getOffset())[2:-1] + "\n"
 			sdump += "char const * const " + s_label + ' = ' + m_label + ';' + "\n\n"
-			mdump += "// 0x00" + hex(cur.getAddress().getOffset())[2:-1] + "\n"
+			mdump += "// STRING: STRONGHOLDCRUSADER 0x00" + hex(cur.getAddress().getOffset())[2:-1] + "\n"
 			mdump += "#define "+ m_label + ' "' + v + '"' + "\n\n"
 	except Exception as e:
 		print("failed at: " + cur.getAddress().toString())

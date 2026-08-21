@@ -2,9555 +2,9555 @@
 
 #include "OpenSHC/string-macros.hpp"
 
-// STRING: STRONGHOLDCRUSADER 0x0059e830
+// 0x0059e830
 char const * const s_bad_allocation_0059e830 = S_BAD_ALLOCATION_0059E830;
 
-// STRING: STRONGHOLDCRUSADER 0x0059e8a0
+// 0x0059e8a0
 char const * const SFX_BuildingsAreOnFireSire = SFX_BUILDINGSAREONFIRESIRE;
 
-// STRING: STRONGHOLDCRUSADER 0x0059e8b8
+// 0x0059e8b8
 char const * const SFX_WeLostControlOfAGatehouse = SFX_WELOSTCONTROLOFAGATEHOUSE;
 
-// STRING: STRONGHOLDCRUSADER 0x0059e8d0
+// 0x0059e8d0
 char const * const s_ponds_sketch_tgx_0059e8d0 = S_PONDS_SKETCH_TGX_0059E8D0;
 
-// STRING: STRONGHOLDCRUSADER 0x0059e8e4
+// 0x0059e8e4
 char const * const s_dancing_bear_sketch_tgx_0059e8e4 = S_DANCING_BEAR_SKETCH_TGX_0059E8E4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059e8fc
+// 0x0059e8fc
 char const * const s_statue_sketch_tgx_0059e8fc = S_STATUE_SKETCH_TGX_0059E8FC;
 
-// STRING: STRONGHOLDCRUSADER 0x0059e910
+// 0x0059e910
 char const * const s_dog_cage_sketch_tgx_0059e910 = S_DOG_CAGE_SKETCH_TGX_0059E910;
 
-// STRING: STRONGHOLDCRUSADER 0x0059e924
+// 0x0059e924
 char const * const s_ducking_stool_sketch_tgx_0059e924 = S_DUCKING_STOOL_SKETCH_TGX_0059E924;
 
-// STRING: STRONGHOLDCRUSADER 0x0059e940
+// 0x0059e940
 char const * const s_chopping_block_sketch_tgx_0059e940 = S_CHOPPING_BLOCK_SKETCH_TGX_0059E940;
 
-// STRING: STRONGHOLDCRUSADER 0x0059e95c
+// 0x0059e95c
 char const * const s_stretching_rack_sketch_tgx_0059e95c = S_STRETCHING_RACK_SKETCH_TGX_0059E95C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059e978
+// 0x0059e978
 char const * const s_dungeon_sketch_tgx_0059e978 = S_DUNGEON_SKETCH_TGX_0059E978;
 
-// STRING: STRONGHOLDCRUSADER 0x0059e98c
+// 0x0059e98c
 char const * const s_gibbet_sketch_tgx_0059e98c = S_GIBBET_SKETCH_TGX_0059E98C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059e9a0
+// 0x0059e9a0
 char const * const s_stake_sketch_tgx_0059e9a0 = S_STAKE_SKETCH_TGX_0059E9A0;
 
-// STRING: STRONGHOLDCRUSADER 0x0059e9b4
+// 0x0059e9b4
 char const * const s_cess_pit_sketch_tgx_0059e9b4 = S_CESS_PIT_SKETCH_TGX_0059E9B4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059e9c8
+// 0x0059e9c8
 char const * const s_waterpot_sketch_tgx_0059e9c8 = S_WATERPOT_SKETCH_TGX_0059E9C8;
 
-// STRING: STRONGHOLDCRUSADER 0x0059e9dc
+// 0x0059e9dc
 char const * const s_killing_pits_sketch_tgx_0059e9dc = S_KILLING_PITS_SKETCH_TGX_0059E9DC;
 
-// STRING: STRONGHOLDCRUSADER 0x0059e9f4
+// 0x0059e9f4
 char const * const s_gardens_sketch_tgx_0059e9f4 = S_GARDENS_SKETCH_TGX_0059E9F4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ea08
+// 0x0059ea08
 char const * const s_maypole_sketch_tgx_0059ea08 = S_MAYPOLE_SKETCH_TGX_0059EA08;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ea1c
+// 0x0059ea1c
 char const * const s_stocks_sketch_tgx_0059ea1c = S_STOCKS_SKETCH_TGX_0059EA1C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ea30
+// 0x0059ea30
 char const * const s_gallows_sketch_tgx_0059ea30 = S_GALLOWS_SKETCH_TGX_0059EA30;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ea44
+// 0x0059ea44
 char const * const s_tower_sketch_tgx_0059ea44 = S_TOWER_SKETCH_TGX_0059EA44;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ea58
+// 0x0059ea58
 char const * const s_campfire_sketch_tgx_0059ea58 = S_CAMPFIRE_SKETCH_TGX_0059EA58;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ea6c
+// 0x0059ea6c
 char const * const s_keep_sketch_tgx_0059ea6c = S_KEEP_SKETCH_TGX_0059EA6C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ea7c
+// 0x0059ea7c
 char const * const s_church_sketch_tgx_0059ea7c = S_CHURCH_SKETCH_TGX_0059EA7C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ea90
+// 0x0059ea90
 char const * const s_stables_sketch_tgx_0059ea90 = S_STABLES_SKETCH_TGX_0059EA90;
 
-// STRING: STRONGHOLDCRUSADER 0x0059eaa4
+// 0x0059eaa4
 char const * const s_mill_sketch_tgx_0059eaa4 = S_MILL_SKETCH_TGX_0059EAA4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059eab4
+// 0x0059eab4
 char const * const s_dairy_sketch_tgx_0059eab4 = S_DAIRY_SKETCH_TGX_0059EAB4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059eac8
+// 0x0059eac8
 char const * const s_fruit_sketch_tgx_0059eac8 = S_FRUIT_SKETCH_TGX_0059EAC8;
 
-// STRING: STRONGHOLDCRUSADER 0x0059eadc
+// 0x0059eadc
 char const * const s_hop_sketch_tgx_0059eadc = S_HOP_SKETCH_TGX_0059EADC;
 
-// STRING: STRONGHOLDCRUSADER 0x0059eaec
+// 0x0059eaec
 char const * const s_wheat_sketch_tgx_0059eaec = S_WHEAT_SKETCH_TGX_0059EAEC;
 
-// STRING: STRONGHOLDCRUSADER 0x0059eb00
+// 0x0059eb00
 char const * const s_oil_smelter_sketch_tgx_0059eb00 = S_OIL_SMELTER_SKETCH_TGX_0059EB00;
 
-// STRING: STRONGHOLDCRUSADER 0x0059eb18
+// 0x0059eb18
 char const * const s_well_sketch_tgx_0059eb18 = S_WELL_SKETCH_TGX_0059EB18;
 
-// STRING: STRONGHOLDCRUSADER 0x0059eb28
+// 0x0059eb28
 char const * const s_tunnelors_guild_sketch_tgx_0059eb28 = S_TUNNELORS_GUILD_SKETCH_TGX_0059EB28;
 
-// STRING: STRONGHOLDCRUSADER 0x0059eb44
+// 0x0059eb44
 char const * const s_healers_sketch_tgx_0059eb44 = S_HEALERS_SKETCH_TGX_0059EB44;
 
-// STRING: STRONGHOLDCRUSADER 0x0059eb58
+// 0x0059eb58
 char const * const s_inn_sketch_tgx_0059eb58 = S_INN_SKETCH_TGX_0059EB58;
 
-// STRING: STRONGHOLDCRUSADER 0x0059eb68
+// 0x0059eb68
 char const * const s_quarry_sketch_tgx_0059eb68 = S_QUARRY_SKETCH_TGX_0059EB68;
 
-// STRING: STRONGHOLDCRUSADER 0x0059eb7c
+// 0x0059eb7c
 char const * const s_bakery_sketch_tgx_0059eb7c = S_BAKERY_SKETCH_TGX_0059EB7C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059eb90
+// 0x0059eb90
 char const * const s_tanner_building_sketch_tgx_0059eb90 = S_TANNER_BUILDING_SKETCH_TGX_0059EB90;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ebac
+// 0x0059ebac
 char const * const s_pole_sketch_tgx_0059ebac = S_POLE_SKETCH_TGX_0059EBAC;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ebbc
+// 0x0059ebbc
 char const * const s_bsmith_sketch_tgx_0059ebbc = S_BSMITH_SKETCH_TGX_0059EBBC;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ebd0
+// 0x0059ebd0
 char const * const s_fletcher_building_sketch_tgx_0059ebd0 = S_FLETCHER_BUILDING_SKETCH_TGX_0059EBD0;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ebf0
+// 0x0059ebf0
 char const * const s_hunter_hut_sketch_tgx_0059ebf0 = S_HUNTER_HUT_SKETCH_TGX_0059EBF0;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ec08
+// 0x0059ec08
 char const * const s_pitch_sketch_tgx_0059ec08 = S_PITCH_SKETCH_TGX_0059EC08;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ec1c
+// 0x0059ec1c
 char const * const s_iron_sketch_tgx_0059ec1c = S_IRON_SKETCH_TGX_0059EC1C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ec2c
+// 0x0059ec2c
 char const * const s_woodcutter_hut_sketch_tgx_0059ec2c = S_WOODCUTTER_HUT_SKETCH_TGX_0059EC2C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ec48
+// 0x0059ec48
 char const * const s_house_sketch_tgx_0059ec48 = S_HOUSE_SKETCH_TGX_0059EC48;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ec5c
+// 0x0059ec5c
 char const * const s_st105_bear_cave_bik_0059ec5c = S_ST105_BEAR_CAVE_BIK_0059EC5C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ec70
+// 0x0059ec70
 char const * const s_st104_pond_bik_0059ec70 = S_ST104_POND_BIK_0059EC70;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ec80
+// 0x0059ec80
 char const * const s_st103_dancing_bear_bik_0059ec80 = S_ST103_DANCING_BEAR_BIK_0059EC80;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ec98
+// 0x0059ec98
 char const * const s_st102_bee_hive_bik_0059ec98 = S_ST102_BEE_HIVE_BIK_0059EC98;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ecac
+// 0x0059ecac
 char const * const s_st101_shrine_bik_0059ecac = S_ST101_SHRINE_BIK_0059ECAC;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ecc0
+// 0x0059ecc0
 char const * const s_st100_statue_bik_0059ecc0 = S_ST100_STATUE_BIK_0059ECC0;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ecd4
+// 0x0059ecd4
 char const * const s_st99_dog_cage_bik_0059ecd4 = S_ST99_DOG_CAGE_BIK_0059ECD4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ece8
+// 0x0059ece8
 char const * const s_st98_dunking_stool_bik_0059ece8 = S_ST98_DUNKING_STOOL_BIK_0059ECE8;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ed00
+// 0x0059ed00
 char const * const s_st97_chopping_block_bik_0059ed00 = S_ST97_CHOPPING_BLOCK_BIK_0059ED00;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ed18
+// 0x0059ed18
 char const * const s_st96_rack_flogging_bik_0059ed18 = S_ST96_RACK_FLOGGING_BIK_0059ED18;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ed30
+// 0x0059ed30
 char const * const s_st95_rack_stretching_bik_0059ed30 = S_ST95_RACK_STRETCHING_BIK_0059ED30;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ed4c
+// 0x0059ed4c
 char const * const s_st94_dungeon_bik_0059ed4c = S_ST94_DUNGEON_BIK_0059ED4C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ed60
+// 0x0059ed60
 char const * const s_st93_gibbet_bik_0059ed60 = S_ST93_GIBBET_BIK_0059ED60;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ed70
+// 0x0059ed70
 char const * const s_st92_burning_stake_bik_0059ed70 = S_ST92_BURNING_STAKE_BIK_0059ED70;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ed88
+// 0x0059ed88
 char const * const s_st91_cess_pit_bik_0059ed88 = S_ST91_CESS_PIT_BIK_0059ED88;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ed9c
+// 0x0059ed9c
 char const * const s_st85_tunnel_construction_bik_0059ed9c = S_ST85_TUNNEL_CONSTRUCTION_BIK_0059ED9C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059edbc
+// 0x0059edbc
 char const * const s_st84_portable_shield_bik_0059edbc = S_ST84_PORTABLE_SHIELD_BIK_0059EDBC;
 
-// STRING: STRONGHOLDCRUSADER 0x0059edd8
+// 0x0059edd8
 char const * const s_st83_battering_ram_bik_0059edd8 = S_ST83_BATTERING_RAM_BIK_0059EDD8;
 
-// STRING: STRONGHOLDCRUSADER 0x0059edf0
+// 0x0059edf0
 char const * const s_st82_siege_tower_bik_0059edf0 = S_ST82_SIEGE_TOWER_BIK_0059EDF0;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ee08
+// 0x0059ee08
 char const * const s_st81_trebuchet_bik_0059ee08 = S_ST81_TREBUCHET_BIK_0059EE08;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ee1c
+// 0x0059ee1c
 char const * const s_st80_catapult_bik_0059ee1c = S_ST80_CATAPULT_BIK_0059EE1C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ee30
+// 0x0059ee30
 char const * const s_st78_tower5_bik_0059ee30 = S_ST78_TOWER5_BIK_0059EE30;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ee40
+// 0x0059ee40
 char const * const s_st77_tower4_bik_0059ee40 = S_ST77_TOWER4_BIK_0059EE40;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ee50
+// 0x0059ee50
 char const * const s_st76_tower3_bik_0059ee50 = S_ST76_TOWER3_BIK_0059EE50;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ee60
+// 0x0059ee60
 char const * const s_st75_tower2_bik_0059ee60 = S_ST75_TOWER2_BIK_0059EE60;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ee70
+// 0x0059ee70
 char const * const s_st74_tower1_bik_0059ee70 = S_ST74_TOWER1_BIK_0059EE70;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ee80
+// 0x0059ee80
 char const * const s_st73_keepdoor_bik_0059ee80 = S_ST73_KEEPDOOR_BIK_0059EE80;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ee94
+// 0x0059ee94
 char const * const s_st72_keepdoor_right_bik_0059ee94 = S_ST72_KEEPDOOR_RIGHT_BIK_0059EE94;
 
-// STRING: STRONGHOLDCRUSADER 0x0059eeac
+// 0x0059eeac
 char const * const s_st71_keepdoor_left_bik_0059eeac = S_ST71_KEEPDOOR_LEFT_BIK_0059EEAC;
 
-// STRING: STRONGHOLDCRUSADER 0x0059eec4
+// 0x0059eec4
 char const * const s_st68_pitch_ditch_bik_0059eec4 = S_ST68_PITCH_DITCH_BIK_0059EEC4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059eedc
+// 0x0059eedc
 char const * const s_st67_killing_pit_bik_0059eedc = S_ST67_KILLING_PIT_BIK_0059EEDC;
 
-// STRING: STRONGHOLDCRUSADER 0x0059eef4
+// 0x0059eef4
 char const * const s_st66_garden_bik_0059eef4 = S_ST66_GARDEN_BIK_0059EEF4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ef04
+// 0x0059ef04
 char const * const s_st65_maypole_bik_0059ef04 = S_ST65_MAYPOLE_BIK_0059EF04;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ef18
+// 0x0059ef18
 char const * const s_st63_stocks_bik_0059ef18 = S_ST63_STOCKS_BIK_0059EF18;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ef28
+// 0x0059ef28
 char const * const s_st62_gallows_bik_0059ef28 = S_ST62_GALLOWS_BIK_0059EF28;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ef3c
+// 0x0059ef3c
 char const * const s_st61_tower_bik_0059ef3c = S_ST61_TOWER_BIK_0059EF3C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ef4c
+// 0x0059ef4c
 char const * const s_st60_gatehouse_bik_0059ef4c = S_ST60_GATEHOUSE_BIK_0059EF4C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ef60
+// 0x0059ef60
 char const * const s_st59_paradeground_tun_bik_0059ef60 = S_ST59_PARADEGROUND_TUN_BIK_0059EF60;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ef7c
+// 0x0059ef7c
 char const * const s_st58_paradeground_hvy_bik_0059ef7c = S_ST58_PARADEGROUND_HVY_BIK_0059EF7C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ef98
+// 0x0059ef98
 char const * const s_st57_paradeground_lgt_bik_0059ef98 = S_ST57_PARADEGROUND_LGT_BIK_0059EF98;
 
-// STRING: STRONGHOLDCRUSADER 0x0059efb4
+// 0x0059efb4
 char const * const s_st56_paradeground_miss_bik_0059efb4 = S_ST56_PARADEGROUND_MISS_BIK_0059EFB4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059efd0
+// 0x0059efd0
 char const * const s_st55_campground_bik_0059efd0 = S_ST55_CAMPGROUND_BIK_0059EFD0;
 
-// STRING: STRONGHOLDCRUSADER 0x0059efe4
+// 0x0059efe4
 char const * const s_st53_paradeground_eng_bik_0059efe4 = S_ST53_PARADEGROUND_ENG_BIK_0059EFE4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f000
+// 0x0059f000
 char const * const s_st52_signpost_bik_0059f000 = S_ST52_SIGNPOST_BIK_0059F000;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f014
+// 0x0059f014
 char const * const s_st51_paradeground_oil_bik_0059f014 = S_ST51_PARADEGROUND_OIL_BIK_0059F014;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f030
+// 0x0059f030
 char const * const s_st50_tunnel_entrance_bik_0059f030 = S_ST50_TUNNEL_ENTRANCE_BIK_0059F030;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f04c
+// 0x0059f04c
 char const * const s_st49_drawbridge_bik_0059f04c = S_ST49_DRAWBRIDGE_BIK_0059F04C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f060
+// 0x0059f060
 char const * const s_st48_gate_postern_bik_0059f060 = S_ST48_GATE_POSTERN_BIK_0059F060;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f078
+// 0x0059f078
 char const * const s_st47_gate_wood_bik_0059f078 = S_ST47_GATE_WOOD_BIK_0059F078;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f08c
+// 0x0059f08c
 char const * const s_st46_gate_inner_bik_0059f08c = S_ST46_GATE_INNER_BIK_0059F08C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f0a0
+// 0x0059f0a0
 char const * const s_st45_gate_main_bik_0059f0a0 = S_ST45_GATE_MAIN_BIK_0059F0A0;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f0b4
+// 0x0059f0b4
 char const * const s_st44_keep5_bik_0059f0b4 = S_ST44_KEEP5_BIK_0059F0B4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f0c4
+// 0x0059f0c4
 char const * const s_st43_keep4_bik_0059f0c4 = S_ST43_KEEP4_BIK_0059F0C4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f0d4
+// 0x0059f0d4
 char const * const s_st42_keep3_bik_0059f0d4 = S_ST42_KEEP3_BIK_0059F0D4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f0e4
+// 0x0059f0e4
 char const * const s_st41_keep2_bik_0059f0e4 = S_ST41_KEEP2_BIK_0059F0E4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f0f4
+// 0x0059f0f4
 char const * const s_st40_keep1_bik_0059f0f4 = S_ST40_KEEP1_BIK_0059F0F4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f104
+// 0x0059f104
 char const * const s_st36_church1_bik_0059f104 = S_ST36_CHURCH1_BIK_0059F104;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f118
+// 0x0059f118
 char const * const s_st35_stables_bik_0059f118 = S_ST35_STABLES_BIK_0059F118;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f12c
+// 0x0059f12c
 char const * const s_st34_mill_bik_0059f12c = S_ST34_MILL_BIK_0059F12C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f13c
+// 0x0059f13c
 char const * const s_st33_cattlefarm_bik_0059f13c = S_ST33_CATTLEFARM_BIK_0059F13C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f150
+// 0x0059f150
 char const * const s_st32_applefarm_bik_0059f150 = S_ST32_APPLEFARM_BIK_0059F150;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f164
+// 0x0059f164
 char const * const s_st31_hopsfarm_bik_0059f164 = S_ST31_HOPSFARM_BIK_0059F164;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f178
+// 0x0059f178
 char const * const s_st30_wheatfarm_bik_0059f178 = S_ST30_WHEATFARM_BIK_0059F178;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f18c
+// 0x0059f18c
 char const * const s_st28_oil_smelter_bik_0059f18c = S_ST28_OIL_SMELTER_BIK_0059F18C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f1a4
+// 0x0059f1a4
 char const * const s_st26_tradepost_bik_0059f1a4 = S_ST26_TRADEPOST_BIK_0059F1A4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f1b8
+// 0x0059f1b8
 char const * const s_st25_tunnellers_guild_bik_0059f1b8 = S_ST25_TUNNELLERS_GUILD_BIK_0059F1B8;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f1d4
+// 0x0059f1d4
 char const * const s_st24_engineers_guild_bik_0059f1d4 = S_ST24_ENGINEERS_GUILD_BIK_0059F1D4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f1f0
+// 0x0059f1f0
 char const * const s_st23_healer_bik_0059f1f0 = S_ST23_HEALER_BIK_0059F1F0;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f200
+// 0x0059f200
 char const * const s_st22_inn_bik_0059f200 = S_ST22_INN_BIK_0059F200;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f210
+// 0x0059f210
 char const * const s_st21_quarrypile_bik_0059f210 = S_ST21_QUARRYPILE_BIK_0059F210;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f224
+// 0x0059f224
 char const * const s_st20_quarry_bik_0059f224 = S_ST20_QUARRY_BIK_0059F224;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f234
+// 0x0059f234
 char const * const s_st19_granary_bik_0059f234 = S_ST19_GRANARY_BIK_0059F234;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f248
+// 0x0059f248
 char const * const s_st18_brewers_workshop_bik_0059f248 = S_ST18_BREWERS_WORKSHOP_BIK_0059F248;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f264
+// 0x0059f264
 char const * const s_st17_bakers_workshop_bik_0059f264 = S_ST17_BAKERS_WORKSHOP_BIK_0059F264;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f280
+// 0x0059f280
 char const * const s_st16_tanners_workshop_bik_0059f280 = S_ST16_TANNERS_WORKSHOP_BIK_0059F280;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f29c
+// 0x0059f29c
 char const * const s_st15_armourers_workshop_bik_0059f29c = S_ST15_ARMOURERS_WORKSHOP_BIK_0059F29C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f2b8
+// 0x0059f2b8
 char const * const s_st14_poleturners_workshop_bik_0059f2b8 = S_ST14_POLETURNERS_WORKSHOP_BIK_0059F2B8;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f2d8
+// 0x0059f2d8
 char const * const s_st13_blacksmiths_workshop_bik_0059f2d8 = S_ST13_BLACKSMITHS_WORKSHOP_BIK_0059F2D8;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f2f8
+// 0x0059f2f8
 char const * const s_st12_fletchers_workshop_bik_0059f2f8 = S_ST12_FLETCHERS_WORKSHOP_BIK_0059F2F8;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f314
+// 0x0059f314
 char const * const s_st11_armoury_bik_0059f314 = S_ST11_ARMOURY_BIK_0059F314;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f328
+// 0x0059f328
 char const * const s_st10_goods_yard_bik_0059f328 = S_ST10_GOODS_YARD_BIK_0059F328;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f33c
+// 0x0059f33c
 char const * const s_st08_barracks_bik_0059f33c = S_ST08_BARRACKS_BIK_0059F33C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f350
+// 0x0059f350
 char const * const s_st07_hunters_hut_bik_0059f350 = S_ST07_HUNTERS_HUT_BIK_0059F350;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f368
+// 0x0059f368
 char const * const s_st06_pitch_digger_bik_0059f368 = S_ST06_PITCH_DIGGER_BIK_0059F368;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f380
+// 0x0059f380
 char const * const s_st05_iron_mine_bik_0059f380 = S_ST05_IRON_MINE_BIK_0059F380;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f394
+// 0x0059f394
 char const * const s_st04_oxen_base_bik_0059f394 = S_ST04_OXEN_BASE_BIK_0059F394;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f3a8
+// 0x0059f3a8
 char const * const s_st03_woodcutters_hut_bik_0059f3a8 = S_ST03_WOODCUTTERS_HUT_BIK_0059F3A8;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f3c4
+// 0x0059f3c4
 char const * const s_st02_house_bik_0059f3c4 = S_ST02_HOUSE_BIK_0059F3C4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f3d4
+// 0x0059f3d4
 char const * const s_st105_bear_cave_hlp_0059f3d4 = S_ST105_BEAR_CAVE_HLP_0059F3D4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f3e8
+// 0x0059f3e8
 char const * const s_st99_dog_cage_hlp_0059f3e8 = S_ST99_DOG_CAGE_HLP_0059F3E8;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f3fc
+// 0x0059f3fc
 char const * const s_st85_tunnel_construction_hlp_0059f3fc = S_ST85_TUNNEL_CONSTRUCTION_HLP_0059F3FC;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f41c
+// 0x0059f41c
 char const * const s_st84_portable_shield_hlp_0059f41c = S_ST84_PORTABLE_SHIELD_HLP_0059F41C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f438
+// 0x0059f438
 char const * const s_st83_battering_ram_hlp_0059f438 = S_ST83_BATTERING_RAM_HLP_0059F438;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f450
+// 0x0059f450
 char const * const s_st82_siege_tower_hlp_0059f450 = S_ST82_SIEGE_TOWER_HLP_0059F450;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f468
+// 0x0059f468
 char const * const s_st81_trebuchet_hlp_0059f468 = S_ST81_TREBUCHET_HLP_0059F468;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f47c
+// 0x0059f47c
 char const * const s_st80_catapult_hlp_0059f47c = S_ST80_CATAPULT_HLP_0059F47C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f490
+// 0x0059f490
 char const * const s_st78_tower5_hlp_0059f490 = S_ST78_TOWER5_HLP_0059F490;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f4a0
+// 0x0059f4a0
 char const * const s_st77_tower4_hlp_0059f4a0 = S_ST77_TOWER4_HLP_0059F4A0;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f4b0
+// 0x0059f4b0
 char const * const s_st76_tower3_hlp_0059f4b0 = S_ST76_TOWER3_HLP_0059F4B0;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f4c0
+// 0x0059f4c0
 char const * const s_st75_tower2_hlp_0059f4c0 = S_ST75_TOWER2_HLP_0059F4C0;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f4d0
+// 0x0059f4d0
 char const * const s_st74_tower1_hlp_0059f4d0 = S_ST74_TOWER1_HLP_0059F4D0;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f4e0
+// 0x0059f4e0
 char const * const s_st73_keepdoor_hlp_0059f4e0 = S_ST73_KEEPDOOR_HLP_0059F4E0;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f4f4
+// 0x0059f4f4
 char const * const s_st72_keepdoor_right_hlp_0059f4f4 = S_ST72_KEEPDOOR_RIGHT_HLP_0059F4F4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f50c
+// 0x0059f50c
 char const * const s_st71_keepdoor_left_hlp_0059f50c = S_ST71_KEEPDOOR_LEFT_HLP_0059F50C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f524
+// 0x0059f524
 char const * const s_st70_water_pot_hlp_0059f524 = S_ST70_WATER_POT_HLP_0059F524;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f538
+// 0x0059f538
 char const * const s_st68_pitch_ditch_hlp_0059f538 = S_ST68_PITCH_DITCH_HLP_0059F538;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f550
+// 0x0059f550
 char const * const s_st67_killing_pit_hlp_0059f550 = S_ST67_KILLING_PIT_HLP_0059F550;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f568
+// 0x0059f568
 char const * const s_st65_good_things_hlp_0059f568 = S_ST65_GOOD_THINGS_HLP_0059F568;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f580
+// 0x0059f580
 char const * const s_st62_bad_things_hlp_0059f580 = S_ST62_BAD_THINGS_HLP_0059F580;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f594
+// 0x0059f594
 char const * const s_st61_tower_hlp_0059f594 = S_ST61_TOWER_HLP_0059F594;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f5a4
+// 0x0059f5a4
 char const * const s_st55_campground_hlp_0059f5a4 = S_ST55_CAMPGROUND_HLP_0059F5A4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f5b8
+// 0x0059f5b8
 char const * const s_st52_signpost_hlp_0059f5b8 = S_ST52_SIGNPOST_HLP_0059F5B8;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f5cc
+// 0x0059f5cc
 char const * const s_st50_tunnel_entrance_hlp_0059f5cc = S_ST50_TUNNEL_ENTRANCE_HLP_0059F5CC;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f5e8
+// 0x0059f5e8
 char const * const s_st49_drawbridge_hlp_0059f5e8 = S_ST49_DRAWBRIDGE_HLP_0059F5E8;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f5fc
+// 0x0059f5fc
 char const * const s_st60_gatehouse_hlp_0059f5fc = S_ST60_GATEHOUSE_HLP_0059F5FC;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f610
+// 0x0059f610
 char const * const s_st40_keep_hlp_0059f610 = S_ST40_KEEP_HLP_0059F610;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f620
+// 0x0059f620
 char const * const s_st36_church_hlp_0059f620 = S_ST36_CHURCH_HLP_0059F620;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f630
+// 0x0059f630
 char const * const s_st35_stables_hlp_0059f630 = S_ST35_STABLES_HLP_0059F630;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f644
+// 0x0059f644
 char const * const s_st34_mill_hlp_0059f644 = S_ST34_MILL_HLP_0059F644;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f654
+// 0x0059f654
 char const * const s_st33_cattlefarm_hlp_0059f654 = S_ST33_CATTLEFARM_HLP_0059F654;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f668
+// 0x0059f668
 char const * const s_st32_applefarm_hlp_0059f668 = S_ST32_APPLEFARM_HLP_0059F668;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f67c
+// 0x0059f67c
 char const * const s_st31_hopsfarm_hlp_0059f67c = S_ST31_HOPSFARM_HLP_0059F67C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f690
+// 0x0059f690
 char const * const s_st30_wheatfarm_hlp_0059f690 = S_ST30_WHEATFARM_HLP_0059F690;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f6a4
+// 0x0059f6a4
 char const * const s_st28_oil_smelter_hlp_0059f6a4 = S_ST28_OIL_SMELTER_HLP_0059F6A4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f6bc
+// 0x0059f6bc
 char const * const s_st27_well_hlp_0059f6bc = S_ST27_WELL_HLP_0059F6BC;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f6cc
+// 0x0059f6cc
 char const * const s_st26_tradepost_hlp_0059f6cc = S_ST26_TRADEPOST_HLP_0059F6CC;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f6e0
+// 0x0059f6e0
 char const * const s_st25_tunnellers_guild_hlp_0059f6e0 = S_ST25_TUNNELLERS_GUILD_HLP_0059F6E0;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f6fc
+// 0x0059f6fc
 char const * const s_st24_engineers_guild_hlp_0059f6fc = S_ST24_ENGINEERS_GUILD_HLP_0059F6FC;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f718
+// 0x0059f718
 char const * const s_st23_healer_hlp_0059f718 = S_ST23_HEALER_HLP_0059F718;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f728
+// 0x0059f728
 char const * const s_st22_inn_hlp_0059f728 = S_ST22_INN_HLP_0059F728;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f738
+// 0x0059f738
 char const * const s_st21_quarrypile_hlp_0059f738 = S_ST21_QUARRYPILE_HLP_0059F738;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f74c
+// 0x0059f74c
 char const * const s_st20_quarry_hlp_0059f74c = S_ST20_QUARRY_HLP_0059F74C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f75c
+// 0x0059f75c
 char const * const s_st19_granary_hlp_0059f75c = S_ST19_GRANARY_HLP_0059F75C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f770
+// 0x0059f770
 char const * const s_st18_brewers_workshop_hlp_0059f770 = S_ST18_BREWERS_WORKSHOP_HLP_0059F770;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f78c
+// 0x0059f78c
 char const * const s_st17_bakers_workshop_hlp_0059f78c = S_ST17_BAKERS_WORKSHOP_HLP_0059F78C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f7a8
+// 0x0059f7a8
 char const * const s_st16_tanners_workshop_hlp_0059f7a8 = S_ST16_TANNERS_WORKSHOP_HLP_0059F7A8;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f7c4
+// 0x0059f7c4
 char const * const s_st15_armourers_workshop_hlp_0059f7c4 = S_ST15_ARMOURERS_WORKSHOP_HLP_0059F7C4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f7e0
+// 0x0059f7e0
 char const * const s_st14_poleturners_workshop_hlp_0059f7e0 = S_ST14_POLETURNERS_WORKSHOP_HLP_0059F7E0;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f800
+// 0x0059f800
 char const * const s_st13_blacksmiths_workshop_hlp_0059f800 = S_ST13_BLACKSMITHS_WORKSHOP_HLP_0059F800;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f820
+// 0x0059f820
 char const * const s_st12_fletchers_workshop_hlp_0059f820 = S_ST12_FLETCHERS_WORKSHOP_HLP_0059F820;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f83c
+// 0x0059f83c
 char const * const s_st11_armoury_hlp_0059f83c = S_ST11_ARMOURY_HLP_0059F83C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f850
+// 0x0059f850
 char const * const s_st10_goods_yard_hlp_0059f850 = S_ST10_GOODS_YARD_HLP_0059F850;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f864
+// 0x0059f864
 char const * const s_st09_barracks_hlp_0059f864 = S_ST09_BARRACKS_HLP_0059F864;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f878
+// 0x0059f878
 char const * const s_st08_mercenary_post_hlp_0059f878 = S_ST08_MERCENARY_POST_HLP_0059F878;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f890
+// 0x0059f890
 char const * const s_st07_hunters_hut_hlp_0059f890 = S_ST07_HUNTERS_HUT_HLP_0059F890;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f8a8
+// 0x0059f8a8
 char const * const s_st06_pitch_digger_hlp_0059f8a8 = S_ST06_PITCH_DIGGER_HLP_0059F8A8;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f8c0
+// 0x0059f8c0
 char const * const s_st05_iron_mine_hlp_0059f8c0 = S_ST05_IRON_MINE_HLP_0059F8C0;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f8d4
+// 0x0059f8d4
 char const * const s_st04_oxen_base_hlp_0059f8d4 = S_ST04_OXEN_BASE_HLP_0059F8D4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f8e8
+// 0x0059f8e8
 char const * const s_st03_woodcutters_hut_hlp_0059f8e8 = S_ST03_WOODCUTTERS_HUT_HLP_0059F8E8;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f904
+// 0x0059f904
 char const * const s_st02_house_hlp_0059f904 = S_ST02_HOUSE_HLP_0059F904;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f914
+// 0x0059f914
 char const * const s_chimp66_fireeater_bik_0059f914 = S_CHIMP66_FIREEATER_BIK_0059F914;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f92c
+// 0x0059f92c
 char const * const s_chimp65_juggler_bik_0059f92c = S_CHIMP65_JUGGLER_BIK_0059F92C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f940
+// 0x0059f940
 char const * const s_chimp64_child_bik_0059f940 = S_CHIMP64_CHILD_BIK_0059F940;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f954
+// 0x0059f954
 char const * const s_chimp63_mother_bik_0059f954 = S_CHIMP63_MOTHER_BIK_0059F954;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f968
+// 0x0059f968
 char const * const s_chimp62_chicken_bik_0059f968 = S_CHIMP62_CHICKEN_BIK_0059F968;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f97c
+// 0x0059f97c
 char const * const s_chimp61_ballista_bik_0059f97c = S_CHIMP61_BALLISTA_BIK_0059F97C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f994
+// 0x0059f994
 char const * const s_chimp60_portable_shield_bik_0059f994 = S_CHIMP60_PORTABLE_SHIELD_BIK_0059F994;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f9b0
+// 0x0059f9b0
 char const * const s_chimp59_battering_ram_bik_0059f9b0 = S_CHIMP59_BATTERING_RAM_BIK_0059F9B0;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f9cc
+// 0x0059f9cc
 char const * const s_chimp58_siege_tower_bik_0059f9cc = S_CHIMP58_SIEGE_TOWER_BIK_0059F9CC;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f9e4
+// 0x0059f9e4
 char const * const s_chimp57_jester_bik_0059f9e4 = S_CHIMP57_JESTER_BIK_0059F9E4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059f9f8
+// 0x0059f9f8
 char const * const s_chimp56_lady_bik_0059f9f8 = S_CHIMP56_LADY_BIK_0059F9F8;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fa0c
+// 0x0059fa0c
 char const * const s_chimp55_lord_bik_0059fa0c = S_CHIMP55_LORD_BIK_0059FA0C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fa20
+// 0x0059fa20
 char const * const s_chimp52_dog_bik_0059fa20 = S_CHIMP52_DOG_BIK_0059FA20;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fa30
+// 0x0059fa30
 char const * const s_chimp51_cow_bik_0059fa30 = S_CHIMP51_COW_BIK_0059FA30;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fa40
+// 0x0059fa40
 char const * const s_chimp50_siege_tent_bik_0059fa40 = S_CHIMP50_SIEGE_TENT_BIK_0059FA40;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fa58
+// 0x0059fa58
 char const * const s_chimp49_seagull_bik_0059fa58 = S_CHIMP49_SEAGULL_BIK_0059FA58;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fa6c
+// 0x0059fa6c
 char const * const s_chimp48_crow_bik_0059fa6c = S_CHIMP48_CROW_BIK_0059FA6C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fa80
+// 0x0059fa80
 char const * const s_chimp47_bear_bik_0059fa80 = S_CHIMP47_BEAR_BIK_0059FA80;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fa94
+// 0x0059fa94
 char const * const s_chimp46_rabbit_bik_0059fa94 = S_CHIMP46_RABBIT_BIK_0059FA94;
 
-// STRING: STRONGHOLDCRUSADER 0x0059faa8
+// 0x0059faa8
 char const * const s_chimp45_wolf_bik_0059faa8 = S_CHIMP45_WOLF_BIK_0059FAA8;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fabc
+// 0x0059fabc
 char const * const s_chimp44_deer_bik_0059fabc = S_CHIMP44_DEER_BIK_0059FABC;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fad0
+// 0x0059fad0
 char const * const s_chimp43_trader_horse_bik_0059fad0 = S_CHIMP43_TRADER_HORSE_BIK_0059FAD0;
 
-// STRING: STRONGHOLDCRUSADER 0x0059faec
+// 0x0059faec
 char const * const s_chimp42_trader_bik_0059faec = S_CHIMP42_TRADER_BIK_0059FAEC;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fb00
+// 0x0059fb00
 char const * const s_chimp41_mangonel_bik_0059fb00 = S_CHIMP41_MANGONEL_BIK_0059FB00;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fb18
+// 0x0059fb18
 char const * const s_chimp40_trebuchet_bik_0059fb18 = S_CHIMP40_TREBUCHET_BIK_0059FB18;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fb30
+// 0x0059fb30
 char const * const s_chimp39_catapult_bik_0059fb30 = S_CHIMP39_CATAPULT_BIK_0059FB30;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fb48
+// 0x0059fb48
 char const * const s_chimp37_monk_bik_0059fb48 = S_CHIMP37_MONK_BIK_0059FB48;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fb5c
+// 0x0059fb5c
 char const * const s_chimp36_innkeeper_bik_0059fb5c = S_CHIMP36_INNKEEPER_BIK_0059FB5C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fb74
+// 0x0059fb74
 char const * const s_chimp35_drunkard_bik_0059fb74 = S_CHIMP35_DRUNKARD_BIK_0059FB74;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fb8c
+// 0x0059fb8c
 char const * const s_chimp34_healer_bik_0059fb8c = S_CHIMP34_HEALER_BIK_0059FB8C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fba0
+// 0x0059fba0
 char const * const s_chimp33_preist_bik_0059fba0 = S_CHIMP33_PREIST_BIK_0059FBA0;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fbb4
+// 0x0059fbb4
 char const * const s_chimp32_miner2_bik_0059fbb4 = S_CHIMP32_MINER2_BIK_0059FBB4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fbc8
+// 0x0059fbc8
 char const * const s_chimp31_miner1_bik_0059fbc8 = S_CHIMP31_MINER1_BIK_0059FBC8;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fbdc
+// 0x0059fbdc
 char const * const s_chimp30_engineer_bik_0059fbdc = S_CHIMP30_ENGINEER_BIK_0059FBDC;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fbf4
+// 0x0059fbf4
 char const * const s_chimp29_ladderman_bik_0059fbf4 = S_CHIMP29_LADDERMAN_BIK_0059FBF4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fc0c
+// 0x0059fc0c
 char const * const s_chimp28_knight_bik_0059fc0c = S_CHIMP28_KNIGHT_BIK_0059FC0C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fc20
+// 0x0059fc20
 char const * const s_chimp27_swordsman_bik_0059fc20 = S_CHIMP27_SWORDSMAN_BIK_0059FC20;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fc38
+// 0x0059fc38
 char const * const s_chimp26_maceman_bik_0059fc38 = S_CHIMP26_MACEMAN_BIK_0059FC38;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fc4c
+// 0x0059fc4c
 char const * const s_chimp25_pikeman_bik_0059fc4c = S_CHIMP25_PIKEMAN_BIK_0059FC4C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fc60
+// 0x0059fc60
 char const * const s_chimp24_spearman_bik_0059fc60 = S_CHIMP24_SPEARMAN_BIK_0059FC60;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fc78
+// 0x0059fc78
 char const * const s_chimp23_xbowman_bik_0059fc78 = S_CHIMP23_XBOWMAN_BIK_0059FC78;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fc8c
+// 0x0059fc8c
 char const * const s_chimp22_archer_bik_0059fc8c = S_CHIMP22_ARCHER_BIK_0059FC8C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fca0
+// 0x0059fca0
 char const * const s_chimp21_tanner_bik_0059fca0 = S_CHIMP21_TANNER_BIK_0059FCA0;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fcb4
+// 0x0059fcb4
 char const * const s_chimp20_armourer_bik_0059fcb4 = S_CHIMP20_ARMOURER_BIK_0059FCB4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fccc
+// 0x0059fccc
 char const * const s_chimp19_blacksmith_bik_0059fccc = S_CHIMP19_BLACKSMITH_BIK_0059FCCC;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fce4
+// 0x0059fce4
 char const * const s_chimp18_poleturner_bik_0059fce4 = S_CHIMP18_POLETURNER_BIK_0059FCE4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fcfc
+// 0x0059fcfc
 char const * const s_chimp17_brewer_bik_0059fcfc = S_CHIMP17_BREWER_BIK_0059FCFC;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fd10
+// 0x0059fd10
 char const * const s_chimp16_baker_bik_0059fd10 = S_CHIMP16_BAKER_BIK_0059FD10;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fd24
+// 0x0059fd24
 char const * const s_chimp15_miller_bik_0059fd24 = S_CHIMP15_MILLER_BIK_0059FD24;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fd38
+// 0x0059fd38
 char const * const s_chimp14_farmer_cattle_bik_0059fd38 = S_CHIMP14_FARMER_CATTLE_BIK_0059FD38;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fd54
+// 0x0059fd54
 char const * const s_chimp13_farmer_apples_bik_0059fd54 = S_CHIMP13_FARMER_APPLES_BIK_0059FD54;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fd70
+// 0x0059fd70
 char const * const s_chimp12_farmer_hops_bik_0059fd70 = S_CHIMP12_FARMER_HOPS_BIK_0059FD70;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fd88
+// 0x0059fd88
 char const * const s_chimp11_farmer_wheat_bik_0059fd88 = S_CHIMP11_FARMER_WHEAT_BIK_0059FD88;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fda4
+// 0x0059fda4
 char const * const s_chimp10_pitchman_bik_0059fda4 = S_CHIMP10_PITCHMAN_BIK_0059FDA4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fdbc
+// 0x0059fdbc
 char const * const s_chimp09_quarry_ox_bik_0059fdbc = S_CHIMP09_QUARRY_OX_BIK_0059FDBC;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fdd4
+// 0x0059fdd4
 char const * const s_chimp08_quarry_grunt_bik_0059fdd4 = S_CHIMP08_QUARRY_GRUNT_BIK_0059FDD4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fdf0
+// 0x0059fdf0
 char const * const s_chimp07_quarry_mason_bik_0059fdf0 = S_CHIMP07_QUARRY_MASON_BIK_0059FDF0;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fe0c
+// 0x0059fe0c
 char const * const s_chimp06_hunter_bik_0059fe0c = S_CHIMP06_HUNTER_BIK_0059FE0C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fe20
+// 0x0059fe20
 char const * const s_chimp05_tunneler_bik_0059fe20 = S_CHIMP05_TUNNELER_BIK_0059FE20;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fe38
+// 0x0059fe38
 char const * const s_chimp04_fletcher_bik_0059fe38 = S_CHIMP04_FLETCHER_BIK_0059FE38;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fe50
+// 0x0059fe50
 char const * const s_chimp03_woodcutter_bik_0059fe50 = S_CHIMP03_WOODCUTTER_BIK_0059FE50;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fe68
+// 0x0059fe68
 char const * const s_chimp02_burning_man_bik_0059fe68 = S_CHIMP02_BURNING_MAN_BIK_0059FE68;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fe80
+// 0x0059fe80
 char const * const s_chimp01_peasant_bik_0059fe80 = S_CHIMP01_PEASANT_BIK_0059FE80;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fe94
+// 0x0059fe94
 char const * const s_chimp66_fireeater_hlp_0059fe94 = S_CHIMP66_FIREEATER_HLP_0059FE94;
 
-// STRING: STRONGHOLDCRUSADER 0x0059feac
+// 0x0059feac
 char const * const s_chimp65_juggler_hlp_0059feac = S_CHIMP65_JUGGLER_HLP_0059FEAC;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fec0
+// 0x0059fec0
 char const * const s_chimp64_child_hlp_0059fec0 = S_CHIMP64_CHILD_HLP_0059FEC0;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fed4
+// 0x0059fed4
 char const * const s_chimp63_mother_hlp_0059fed4 = S_CHIMP63_MOTHER_HLP_0059FED4;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fee8
+// 0x0059fee8
 char const * const s_chimp62_chicken_hlp_0059fee8 = S_CHIMP62_CHICKEN_HLP_0059FEE8;
 
-// STRING: STRONGHOLDCRUSADER 0x0059fefc
+// 0x0059fefc
 char const * const s_chimp61_ballista_hlp_0059fefc = S_CHIMP61_BALLISTA_HLP_0059FEFC;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ff14
+// 0x0059ff14
 char const * const s_chimp60_portable_shield_hlp_0059ff14 = S_CHIMP60_PORTABLE_SHIELD_HLP_0059FF14;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ff30
+// 0x0059ff30
 char const * const s_chimp59_battering_ram_hlp_0059ff30 = S_CHIMP59_BATTERING_RAM_HLP_0059FF30;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ff4c
+// 0x0059ff4c
 char const * const s_chimp58_siege_tower_hlp_0059ff4c = S_CHIMP58_SIEGE_TOWER_HLP_0059FF4C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ff64
+// 0x0059ff64
 char const * const s_chimp57_jester_hlp_0059ff64 = S_CHIMP57_JESTER_HLP_0059FF64;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ff78
+// 0x0059ff78
 char const * const s_chimp56_lady_hlp_0059ff78 = S_CHIMP56_LADY_HLP_0059FF78;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ff8c
+// 0x0059ff8c
 char const * const s_chimp55_lord_hlp_0059ff8c = S_CHIMP55_LORD_HLP_0059FF8C;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ffa0
+// 0x0059ffa0
 char const * const s_chimp52_dog_hlp_0059ffa0 = S_CHIMP52_DOG_HLP_0059FFA0;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ffb0
+// 0x0059ffb0
 char const * const s_chimp51_cow_hlp_0059ffb0 = S_CHIMP51_COW_HLP_0059FFB0;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ffc0
+// 0x0059ffc0
 char const * const s_chimp50_siege_tent_hlp_0059ffc0 = S_CHIMP50_SIEGE_TENT_HLP_0059FFC0;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ffd8
+// 0x0059ffd8
 char const * const s_chimp49_seagull_hlp_0059ffd8 = S_CHIMP49_SEAGULL_HLP_0059FFD8;
 
-// STRING: STRONGHOLDCRUSADER 0x0059ffec
+// 0x0059ffec
 char const * const s_chimp48_crow_hlp_0059ffec = S_CHIMP48_CROW_HLP_0059FFEC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0000
+// 0x005a0000
 char const * const s_chimp47_bear_hlp_005a0000 = S_CHIMP47_BEAR_HLP_005A0000;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0014
+// 0x005a0014
 char const * const s_chimp46_rabbit_hlp_005a0014 = S_CHIMP46_RABBIT_HLP_005A0014;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0028
+// 0x005a0028
 char const * const s_chimp45_wolf_hlp_005a0028 = S_CHIMP45_WOLF_HLP_005A0028;
 
-// STRING: STRONGHOLDCRUSADER 0x005a003c
+// 0x005a003c
 char const * const s_chimp44_deer_hlp_005a003c = S_CHIMP44_DEER_HLP_005A003C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0050
+// 0x005a0050
 char const * const s_chimp43_trader_horse_hlp_005a0050 = S_CHIMP43_TRADER_HORSE_HLP_005A0050;
 
-// STRING: STRONGHOLDCRUSADER 0x005a006c
+// 0x005a006c
 char const * const s_chimp42_trader_hlp_005a006c = S_CHIMP42_TRADER_HLP_005A006C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0080
+// 0x005a0080
 char const * const s_chimp41_mangonel_hlp_005a0080 = S_CHIMP41_MANGONEL_HLP_005A0080;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0098
+// 0x005a0098
 char const * const s_chimp40_trebuchet_hlp_005a0098 = S_CHIMP40_TREBUCHET_HLP_005A0098;
 
-// STRING: STRONGHOLDCRUSADER 0x005a00b0
+// 0x005a00b0
 char const * const s_chimp39_catapult_hlp_005a00b0 = S_CHIMP39_CATAPULT_HLP_005A00B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a00c8
+// 0x005a00c8
 char const * const s_chimp37_monk_hlp_005a00c8 = S_CHIMP37_MONK_HLP_005A00C8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a00dc
+// 0x005a00dc
 char const * const s_chimp36_innkeeper_hlp_005a00dc = S_CHIMP36_INNKEEPER_HLP_005A00DC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a00f4
+// 0x005a00f4
 char const * const s_chimp35_drunkard_hlp_005a00f4 = S_CHIMP35_DRUNKARD_HLP_005A00F4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a010c
+// 0x005a010c
 char const * const s_chimp34_healer_hlp_005a010c = S_CHIMP34_HEALER_HLP_005A010C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0120
+// 0x005a0120
 char const * const s_chimp33_preist_hlp_005a0120 = S_CHIMP33_PREIST_HLP_005A0120;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0134
+// 0x005a0134
 char const * const s_chimp32_miner2_hlp_005a0134 = S_CHIMP32_MINER2_HLP_005A0134;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0148
+// 0x005a0148
 char const * const s_chimp31_miner1_hlp_005a0148 = S_CHIMP31_MINER1_HLP_005A0148;
 
-// STRING: STRONGHOLDCRUSADER 0x005a015c
+// 0x005a015c
 char const * const s_chimp30_engineer_hlp_005a015c = S_CHIMP30_ENGINEER_HLP_005A015C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0174
+// 0x005a0174
 char const * const s_chimp29_ladderman_hlp_005a0174 = S_CHIMP29_LADDERMAN_HLP_005A0174;
 
-// STRING: STRONGHOLDCRUSADER 0x005a018c
+// 0x005a018c
 char const * const s_chimp28_knight_hlp_005a018c = S_CHIMP28_KNIGHT_HLP_005A018C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a01a0
+// 0x005a01a0
 char const * const s_chimp27_swordsman_hlp_005a01a0 = S_CHIMP27_SWORDSMAN_HLP_005A01A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a01b8
+// 0x005a01b8
 char const * const s_chimp26_maceman_hlp_005a01b8 = S_CHIMP26_MACEMAN_HLP_005A01B8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a01cc
+// 0x005a01cc
 char const * const s_chimp25_pikeman_hlp_005a01cc = S_CHIMP25_PIKEMAN_HLP_005A01CC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a01e0
+// 0x005a01e0
 char const * const s_chimp24_spearman_hlp_005a01e0 = S_CHIMP24_SPEARMAN_HLP_005A01E0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a01f8
+// 0x005a01f8
 char const * const s_chimp23_xbowman_hlp_005a01f8 = S_CHIMP23_XBOWMAN_HLP_005A01F8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a020c
+// 0x005a020c
 char const * const s_chimp22_archer_hlp_005a020c = S_CHIMP22_ARCHER_HLP_005A020C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0220
+// 0x005a0220
 char const * const s_chimp21_tanner_hlp_005a0220 = S_CHIMP21_TANNER_HLP_005A0220;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0234
+// 0x005a0234
 char const * const s_chimp20_armourer_hlp_005a0234 = S_CHIMP20_ARMOURER_HLP_005A0234;
 
-// STRING: STRONGHOLDCRUSADER 0x005a024c
+// 0x005a024c
 char const * const s_chimp19_blacksmith_hlp_005a024c = S_CHIMP19_BLACKSMITH_HLP_005A024C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0264
+// 0x005a0264
 char const * const s_chimp18_poleturner_hlp_005a0264 = S_CHIMP18_POLETURNER_HLP_005A0264;
 
-// STRING: STRONGHOLDCRUSADER 0x005a027c
+// 0x005a027c
 char const * const s_chimp17_brewer_hlp_005a027c = S_CHIMP17_BREWER_HLP_005A027C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0290
+// 0x005a0290
 char const * const s_chimp16_baker_hlp_005a0290 = S_CHIMP16_BAKER_HLP_005A0290;
 
-// STRING: STRONGHOLDCRUSADER 0x005a02a4
+// 0x005a02a4
 char const * const s_chimp15_miller_hlp_005a02a4 = S_CHIMP15_MILLER_HLP_005A02A4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a02b8
+// 0x005a02b8
 char const * const s_chimp14_farmer_cattle_hlp_005a02b8 = S_CHIMP14_FARMER_CATTLE_HLP_005A02B8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a02d4
+// 0x005a02d4
 char const * const s_chimp13_farmer_apples_hlp_005a02d4 = S_CHIMP13_FARMER_APPLES_HLP_005A02D4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a02f0
+// 0x005a02f0
 char const * const s_chimp12_farmer_hops_hlp_005a02f0 = S_CHIMP12_FARMER_HOPS_HLP_005A02F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0308
+// 0x005a0308
 char const * const s_chimp11_farmer_wheat_hlp_005a0308 = S_CHIMP11_FARMER_WHEAT_HLP_005A0308;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0324
+// 0x005a0324
 char const * const s_chimp10_pitchman_hlp_005a0324 = S_CHIMP10_PITCHMAN_HLP_005A0324;
 
-// STRING: STRONGHOLDCRUSADER 0x005a033c
+// 0x005a033c
 char const * const s_chimp09_quarry_ox_hlp_005a033c = S_CHIMP09_QUARRY_OX_HLP_005A033C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0354
+// 0x005a0354
 char const * const s_chimp08_quarry_grunt_hlp_005a0354 = S_CHIMP08_QUARRY_GRUNT_HLP_005A0354;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0370
+// 0x005a0370
 char const * const s_chimp07_quarry_mason_hlp_005a0370 = S_CHIMP07_QUARRY_MASON_HLP_005A0370;
 
-// STRING: STRONGHOLDCRUSADER 0x005a038c
+// 0x005a038c
 char const * const s_chimp06_hunter_hlp_005a038c = S_CHIMP06_HUNTER_HLP_005A038C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a03a0
+// 0x005a03a0
 char const * const s_chimp05_tunneler_hlp_005a03a0 = S_CHIMP05_TUNNELER_HLP_005A03A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a03b8
+// 0x005a03b8
 char const * const s_chimp04_fletcher_hlp_005a03b8 = S_CHIMP04_FLETCHER_HLP_005A03B8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a03d0
+// 0x005a03d0
 char const * const s_chimp03_woodcutter_hlp_005a03d0 = S_CHIMP03_WOODCUTTER_HLP_005A03D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a03e8
+// 0x005a03e8
 char const * const s_chimp02_burning_man_hlp_005a03e8 = S_CHIMP02_BURNING_MAN_HLP_005A03E8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0400
+// 0x005a0400
 char const * const s_chimp01_peasant_hlp_005a0400 = S_CHIMP01_PEASANT_HLP_005A0400;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0414
+// 0x005a0414
 char const * const s_mother_sketch_tgx_005a0414 = S_MOTHER_SKETCH_TGX_005A0414;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0428
+// 0x005a0428
 char const * const s_chicken_sketch_tgx_005a0428 = S_CHICKEN_SKETCH_TGX_005A0428;
 
-// STRING: STRONGHOLDCRUSADER 0x005a043c
+// 0x005a043c
 char const * const s_jester_sketch_tgx_005a043c = S_JESTER_SKETCH_TGX_005A043C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0450
+// 0x005a0450
 char const * const s_ghost_sketch_tgx_005a0450 = S_GHOST_SKETCH_TGX_005A0450;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0464
+// 0x005a0464
 char const * const s_firewatch_sketch_tgx_005a0464 = S_FIREWATCH_SKETCH_TGX_005A0464;
 
-// STRING: STRONGHOLDCRUSADER 0x005a047c
+// 0x005a047c
 char const * const s_innkeeper_sketch_tgx_005a047c = S_INNKEEPER_SKETCH_TGX_005A047C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0494
+// 0x005a0494
 char const * const s_drunk_sketch_tgx_005a0494 = S_DRUNK_SKETCH_TGX_005A0494;
 
-// STRING: STRONGHOLDCRUSADER 0x005a04a8
+// 0x005a04a8
 char const * const s_healer_sketch_tgx_005a04a8 = S_HEALER_SKETCH_TGX_005A04A8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a04bc
+// 0x005a04bc
 char const * const s_priest_sketch_tgx_005a04bc = S_PRIEST_SKETCH_TGX_005A04BC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a04d0
+// 0x005a04d0
 char const * const s_iron_miner_sketch_tgx_005a04d0 = S_IRON_MINER_SKETCH_TGX_005A04D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a04e8
+// 0x005a04e8
 char const * const s_tanner_sketch_tgx_005a04e8 = S_TANNER_SKETCH_TGX_005A04E8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a04fc
+// 0x005a04fc
 char const * const s_armourer_sketch_tgx_005a04fc = S_ARMOURER_SKETCH_TGX_005A04FC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0510
+// 0x005a0510
 char const * const s_blacksmith_sketch_tgx_005a0510 = S_BLACKSMITH_SKETCH_TGX_005A0510;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0528
+// 0x005a0528
 char const * const s_poleturner_sketch_tgx_005a0528 = S_POLETURNER_SKETCH_TGX_005A0528;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0540
+// 0x005a0540
 char const * const s_brewer_sketch_tgx_005a0540 = S_BREWER_SKETCH_TGX_005A0540;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0554
+// 0x005a0554
 char const * const s_baker_sketch_tgx_005a0554 = S_BAKER_SKETCH_TGX_005A0554;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0568
+// 0x005a0568
 char const * const s_child_sketch_tgx_005a0568 = S_CHILD_SKETCH_TGX_005A0568;
 
-// STRING: STRONGHOLDCRUSADER 0x005a057c
+// 0x005a057c
 char const * const s_farmer_sketch_tgx_005a057c = S_FARMER_SKETCH_TGX_005A057C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0590
+// 0x005a0590
 char const * const s_pitchworker_sketch_tgx_005a0590 = S_PITCHWORKER_SKETCH_TGX_005A0590;
 
-// STRING: STRONGHOLDCRUSADER 0x005a05a8
+// 0x005a05a8
 char const * const s_ox_tether_sketch_tgx_005a05a8 = S_OX_TETHER_SKETCH_TGX_005A05A8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a05c0
+// 0x005a05c0
 char const * const s_stonemason_sketch_tgx_005a05c0 = S_STONEMASON_SKETCH_TGX_005A05C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a05d8
+// 0x005a05d8
 char const * const s_hunter_sketch_tgx_005a05d8 = S_HUNTER_SKETCH_TGX_005A05D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a05ec
+// 0x005a05ec
 char const * const s_tunnelor_sketch_tgx_005a05ec = S_TUNNELOR_SKETCH_TGX_005A05EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0600
+// 0x005a0600
 char const * const s_fletcher_sketch_tgx_005a0600 = S_FLETCHER_SKETCH_TGX_005A0600;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0614
+// 0x005a0614
 char const * const s_woodcutter_sketch_tgx_005a0614 = S_WOODCUTTER_SKETCH_TGX_005A0614;
 
-// STRING: STRONGHOLDCRUSADER 0x005a062c
+// 0x005a062c
 char const * const s_null_chimp_sketch_tgx_005a062c = S_NULL_CHIMP_SKETCH_TGX_005A062C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0648
+// 0x005a0648
 char const * const s_chimp00_null_tgxchimp00_null_tgx_005a0648 = S_CHIMP00_NULL_TGXCHIMP00_NULL_TGX_005A0648;
 
-// STRING: STRONGHOLDCRUSADER 0x005a06fc
+// 0x005a06fc
 char const * const s_chimp66_fireeater_tgx_005a06fc = S_CHIMP66_FIREEATER_TGX_005A06FC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0714
+// 0x005a0714
 char const * const s_chimp65_juggler_tgx_005a0714 = S_CHIMP65_JUGGLER_TGX_005A0714;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0728
+// 0x005a0728
 char const * const s_chimp64_child_tgx_005a0728 = S_CHIMP64_CHILD_TGX_005A0728;
 
-// STRING: STRONGHOLDCRUSADER 0x005a073c
+// 0x005a073c
 char const * const s_chimp63_mother_tgx_005a073c = S_CHIMP63_MOTHER_TGX_005A073C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0750
+// 0x005a0750
 char const * const s_chimp62_chicken_tgx_005a0750 = S_CHIMP62_CHICKEN_TGX_005A0750;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0764
+// 0x005a0764
 char const * const s_chimp61_ballista_tgx_005a0764 = S_CHIMP61_BALLISTA_TGX_005A0764;
 
-// STRING: STRONGHOLDCRUSADER 0x005a077c
+// 0x005a077c
 char const * const s_chimp60_portable_shield_tgx_005a077c = S_CHIMP60_PORTABLE_SHIELD_TGX_005A077C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0798
+// 0x005a0798
 char const * const s_chimp59_battering_ram_tgx_005a0798 = S_CHIMP59_BATTERING_RAM_TGX_005A0798;
 
-// STRING: STRONGHOLDCRUSADER 0x005a07b4
+// 0x005a07b4
 char const * const s_chimp58_siege_tower_tgx_005a07b4 = S_CHIMP58_SIEGE_TOWER_TGX_005A07B4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a07cc
+// 0x005a07cc
 char const * const s_chimp57_jester_tgx_005a07cc = S_CHIMP57_JESTER_TGX_005A07CC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a07e0
+// 0x005a07e0
 char const * const s_chimp56_lady_tgx_005a07e0 = S_CHIMP56_LADY_TGX_005A07E0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a07f4
+// 0x005a07f4
 char const * const s_chimp55_lord_tgx_005a07f4 = S_CHIMP55_LORD_TGX_005A07F4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0808
+// 0x005a0808
 char const * const s_chimp54_ghost_tgx_005a0808 = S_CHIMP54_GHOST_TGX_005A0808;
 
-// STRING: STRONGHOLDCRUSADER 0x005a081c
+// 0x005a081c
 char const * const s_chimp52_dog_tgx_005a081c = S_CHIMP52_DOG_TGX_005A081C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a082c
+// 0x005a082c
 char const * const s_chimp51_cow_tgx_005a082c = S_CHIMP51_COW_TGX_005A082C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a083c
+// 0x005a083c
 char const * const s_chimp50_siege_tent_tgx_005a083c = S_CHIMP50_SIEGE_TENT_TGX_005A083C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0854
+// 0x005a0854
 char const * const s_chimp49_seagull_tgx_005a0854 = S_CHIMP49_SEAGULL_TGX_005A0854;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0868
+// 0x005a0868
 char const * const s_chimp48_crow_tgx_005a0868 = S_CHIMP48_CROW_TGX_005A0868;
 
-// STRING: STRONGHOLDCRUSADER 0x005a087c
+// 0x005a087c
 char const * const s_chimp47_bear_tgx_005a087c = S_CHIMP47_BEAR_TGX_005A087C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0890
+// 0x005a0890
 char const * const s_chimp46_rabbit_tgx_005a0890 = S_CHIMP46_RABBIT_TGX_005A0890;
 
-// STRING: STRONGHOLDCRUSADER 0x005a08a4
+// 0x005a08a4
 char const * const s_chimp45_wolf_tgx_005a08a4 = S_CHIMP45_WOLF_TGX_005A08A4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a08b8
+// 0x005a08b8
 char const * const s_chimp44_deer_tgx_005a08b8 = S_CHIMP44_DEER_TGX_005A08B8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a08cc
+// 0x005a08cc
 char const * const s_chimp43_trader_horse_tgx_005a08cc = S_CHIMP43_TRADER_HORSE_TGX_005A08CC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a08e8
+// 0x005a08e8
 char const * const s_chimp42_trader_tgx_005a08e8 = S_CHIMP42_TRADER_TGX_005A08E8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a08fc
+// 0x005a08fc
 char const * const s_chimp41_mangonel_tgx_005a08fc = S_CHIMP41_MANGONEL_TGX_005A08FC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0914
+// 0x005a0914
 char const * const s_chimp40_trebuchet_tgx_005a0914 = S_CHIMP40_TREBUCHET_TGX_005A0914;
 
-// STRING: STRONGHOLDCRUSADER 0x005a092c
+// 0x005a092c
 char const * const s_chimp39_catapult_tgx_005a092c = S_CHIMP39_CATAPULT_TGX_005A092C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0944
+// 0x005a0944
 char const * const s_chimp37_monk_tgx_005a0944 = S_CHIMP37_MONK_TGX_005A0944;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0958
+// 0x005a0958
 char const * const s_chimp36_innkeeper_tgx_005a0958 = S_CHIMP36_INNKEEPER_TGX_005A0958;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0970
+// 0x005a0970
 char const * const s_chimp35_drunkard_tgx_005a0970 = S_CHIMP35_DRUNKARD_TGX_005A0970;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0988
+// 0x005a0988
 char const * const s_chimp34_healer_tgx_005a0988 = S_CHIMP34_HEALER_TGX_005A0988;
 
-// STRING: STRONGHOLDCRUSADER 0x005a099c
+// 0x005a099c
 char const * const s_chimp33_preist_tgx_005a099c = S_CHIMP33_PREIST_TGX_005A099C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a09b0
+// 0x005a09b0
 char const * const s_chimp32_miner2_tgx_005a09b0 = S_CHIMP32_MINER2_TGX_005A09B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a09c4
+// 0x005a09c4
 char const * const s_chimp31_miner1_tgx_005a09c4 = S_CHIMP31_MINER1_TGX_005A09C4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a09d8
+// 0x005a09d8
 char const * const s_chimp30_engineer_tgx_005a09d8 = S_CHIMP30_ENGINEER_TGX_005A09D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a09f0
+// 0x005a09f0
 char const * const s_chimp29_ladderman_tgx_005a09f0 = S_CHIMP29_LADDERMAN_TGX_005A09F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0a08
+// 0x005a0a08
 char const * const s_chimp28_knight_tgx_005a0a08 = S_CHIMP28_KNIGHT_TGX_005A0A08;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0a1c
+// 0x005a0a1c
 char const * const s_chimp27_swordsman_tgx_005a0a1c = S_CHIMP27_SWORDSMAN_TGX_005A0A1C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0a34
+// 0x005a0a34
 char const * const s_chimp26_maceman_tgx_005a0a34 = S_CHIMP26_MACEMAN_TGX_005A0A34;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0a48
+// 0x005a0a48
 char const * const s_chimp25_pikeman_tgx_005a0a48 = S_CHIMP25_PIKEMAN_TGX_005A0A48;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0a5c
+// 0x005a0a5c
 char const * const s_chimp24_spearman_tgx_005a0a5c = S_CHIMP24_SPEARMAN_TGX_005A0A5C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0a74
+// 0x005a0a74
 char const * const s_chimp23_xbowman_tgx_005a0a74 = S_CHIMP23_XBOWMAN_TGX_005A0A74;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0a88
+// 0x005a0a88
 char const * const s_chimp22_archer_tgx_005a0a88 = S_CHIMP22_ARCHER_TGX_005A0A88;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0a9c
+// 0x005a0a9c
 char const * const s_chimp21_tanner_tgx_005a0a9c = S_CHIMP21_TANNER_TGX_005A0A9C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0ab0
+// 0x005a0ab0
 char const * const s_chimp20_armourer_tgx_005a0ab0 = S_CHIMP20_ARMOURER_TGX_005A0AB0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0ac8
+// 0x005a0ac8
 char const * const s_chimp19_blacksmith_tgx_005a0ac8 = S_CHIMP19_BLACKSMITH_TGX_005A0AC8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0ae0
+// 0x005a0ae0
 char const * const s_chimp18_poleturner_tgx_005a0ae0 = S_CHIMP18_POLETURNER_TGX_005A0AE0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0af8
+// 0x005a0af8
 char const * const s_chimp17_brewer_tgx_005a0af8 = S_CHIMP17_BREWER_TGX_005A0AF8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0b0c
+// 0x005a0b0c
 char const * const s_chimp16_baker_tgx_005a0b0c = S_CHIMP16_BAKER_TGX_005A0B0C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0b20
+// 0x005a0b20
 char const * const s_chimp15_miller_tgx_005a0b20 = S_CHIMP15_MILLER_TGX_005A0B20;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0b34
+// 0x005a0b34
 char const * const s_chimp14_farmer_cattle_tgx_005a0b34 = S_CHIMP14_FARMER_CATTLE_TGX_005A0B34;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0b50
+// 0x005a0b50
 char const * const s_chimp13_farmer_apples_tgx_005a0b50 = S_CHIMP13_FARMER_APPLES_TGX_005A0B50;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0b6c
+// 0x005a0b6c
 char const * const s_chimp12_farmer_hops_tgx_005a0b6c = S_CHIMP12_FARMER_HOPS_TGX_005A0B6C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0b84
+// 0x005a0b84
 char const * const s_chimp11_farmer_wheat_tgx_005a0b84 = S_CHIMP11_FARMER_WHEAT_TGX_005A0B84;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0ba0
+// 0x005a0ba0
 char const * const s_chimp10_pitchman_tgx_005a0ba0 = S_CHIMP10_PITCHMAN_TGX_005A0BA0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0bb8
+// 0x005a0bb8
 char const * const s_chimp09_quarry_ox_tgx_005a0bb8 = S_CHIMP09_QUARRY_OX_TGX_005A0BB8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0bd0
+// 0x005a0bd0
 char const * const s_chimp08_quarry_grunt_tgx_005a0bd0 = S_CHIMP08_QUARRY_GRUNT_TGX_005A0BD0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0bec
+// 0x005a0bec
 char const * const s_chimp07_quarry_mason_tgx_005a0bec = S_CHIMP07_QUARRY_MASON_TGX_005A0BEC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0c08
+// 0x005a0c08
 char const * const s_chimp06_hunter_tgx_005a0c08 = S_CHIMP06_HUNTER_TGX_005A0C08;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0c1c
+// 0x005a0c1c
 char const * const s_chimp05_tunneler_tgx_005a0c1c = S_CHIMP05_TUNNELER_TGX_005A0C1C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0c34
+// 0x005a0c34
 char const * const s_chimp04_fletcher_tgx_005a0c34 = S_CHIMP04_FLETCHER_TGX_005A0C34;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0c4c
+// 0x005a0c4c
 char const * const s_chimp03_woodcutter_tgx_005a0c4c = S_CHIMP03_WOODCUTTER_TGX_005A0C4C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0c64
+// 0x005a0c64
 char const * const s_chimp02_burning_man_tgx_005a0c64 = S_CHIMP02_BURNING_MAN_TGX_005A0C64;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0c7c
+// 0x005a0c7c
 char const * const s_chimp01_peasant_tgx_005a0c7c = S_CHIMP01_PEASANT_TGX_005A0C7C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0c90
+// 0x005a0c90
 char const * const s_chimp00_null_tgx_005a0c90 = S_CHIMP00_NULL_TGX_005A0C90;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0ca4
+// 0x005a0ca4
 char const * const s_UC_BLD_OUTPOST_ARAB_005a0ca4 = S_UC_BLD_OUTPOST_ARAB_005A0CA4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0cb8
+// 0x005a0cb8
 char const * const s_UC_BLD_OUTPOST_005a0cb8 = S_UC_BLD_OUTPOST_005A0CB8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0cc8
+// 0x005a0cc8
 char const * const s_UC_BLD_ARAB_BALLISTA_005a0cc8 = S_UC_BLD_ARAB_BALLISTA_005A0CC8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0ce0
+// 0x005a0ce0
 char const * const s_UC_BLD_WATERPOT_005a0ce0 = S_UC_BLD_WATERPOT_005A0CE0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0cf0
+// 0x005a0cf0
 char const * const s_UC_PLP_ARAB_BALLISTA_005a0cf0 = S_UC_PLP_ARAB_BALLISTA_005A0CF0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0d08
+// 0x005a0d08
 char const * const s_UC_PLP_ARAB_GRENADIER_005a0d08 = S_UC_PLP_ARAB_GRENADIER_005A0D08;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0d20
+// 0x005a0d20
 char const * const s_UC_PLP_ARAB_SWORDSMEN_005a0d20 = S_UC_PLP_ARAB_SWORDSMEN_005A0D20;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0d38
+// 0x005a0d38
 char const * const s_UC_PLP_ARAB_HORSEMAN_005a0d38 = S_UC_PLP_ARAB_HORSEMAN_005A0D38;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0d50
+// 0x005a0d50
 char const * const s_UC_PLP_ARAB_ASSASIN_005a0d50 = S_UC_PLP_ARAB_ASSASIN_005A0D50;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0d64
+// 0x005a0d64
 char const * const s_UC_PLP_ARAB_SLINGER_005a0d64 = S_UC_PLP_ARAB_SLINGER_005A0D64;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0d78
+// 0x005a0d78
 char const * const s_UC_PLP_ARAB_SLAVE_005a0d78 = S_UC_PLP_ARAB_SLAVE_005A0D78;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0d8c
+// 0x005a0d8c
 char const * const s_UC_PLP_ARAB_ARCHER_005a0d8c = S_UC_PLP_ARAB_ARCHER_005A0D8C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0da0
+// 0x005a0da0
 char const * const s_UC_HEADS_ON_SPIKES_005a0da0 = S_UC_HEADS_ON_SPIKES_005A0DA0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0db4
+// 0x005a0db4
 char const * const s_UC_POND_LARGE_005a0db4 = S_UC_POND_LARGE_005A0DB4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0dc4
+// 0x005a0dc4
 char const * const s_UC_BEAR_CAVE_005a0dc4 = S_UC_BEAR_CAVE_005A0DC4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0dd4
+// 0x005a0dd4
 char const * const s_UC_POND_005a0dd4 = S_UC_POND_005A0DD4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0ddc
+// 0x005a0ddc
 char const * const s_UC_DANCING_BEAR_005a0ddc = S_UC_DANCING_BEAR_005A0DDC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0dec
+// 0x005a0dec
 char const * const s_UC_BEE_HIVE_005a0dec = S_UC_BEE_HIVE_005A0DEC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0df8
+// 0x005a0df8
 char const * const s_UC_SHRINE_005a0df8 = S_UC_SHRINE_005A0DF8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0e04
+// 0x005a0e04
 char const * const s_UC_STATUE_005a0e04 = S_UC_STATUE_005A0E04;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0e10
+// 0x005a0e10
 char const * const s_UC_DOG_CAGE_005a0e10 = S_UC_DOG_CAGE_005A0E10;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0e1c
+// 0x005a0e1c
 char const * const s_UC_DUNKING_STOOL_005a0e1c = S_UC_DUNKING_STOOL_005A0E1C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0e30
+// 0x005a0e30
 char const * const s_UC_CHOPPING_BLOCK_005a0e30 = S_UC_CHOPPING_BLOCK_005A0E30;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0e44
+// 0x005a0e44
 char const * const s_UC_RACK_FLOGGING_005a0e44 = S_UC_RACK_FLOGGING_005A0E44;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0e58
+// 0x005a0e58
 char const * const s_UC_RACK_STRETCHING_005a0e58 = S_UC_RACK_STRETCHING_005A0E58;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0e6c
+// 0x005a0e6c
 char const * const s_UC_DUNGEON_005a0e6c = S_UC_DUNGEON_005A0E6C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0e78
+// 0x005a0e78
 char const * const s_UC_GIBBET_005a0e78 = S_UC_GIBBET_005A0E78;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0e84
+// 0x005a0e84
 char const * const s_UC_BURNING_STAKE_005a0e84 = S_UC_BURNING_STAKE_005A0E84;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0e98
+// 0x005a0e98
 char const * const s_UC_CESS_PIT_005a0e98 = S_UC_CESS_PIT_005A0E98;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0ea4
+// 0x005a0ea4
 char const * const s_UC_BACK_005a0ea4 = S_UC_BACK_005A0EA4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0eac
+// 0x005a0eac
 char const * const s_UC_BUILD_005a0eac = S_UC_BUILD_005A0EAC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0eb8
+// 0x005a0eb8
 char const * const s_UC_STOP_005a0eb8 = S_UC_STOP_005A0EB8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0ec0
+// 0x005a0ec0
 char const * const s_UC_STANCE_AGGRESSIVE_005a0ec0 = S_UC_STANCE_AGGRESSIVE_005A0EC0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0ed8
+// 0x005a0ed8
 char const * const s_UC_STANCE_DEFENSIVE_005a0ed8 = S_UC_STANCE_DEFENSIVE_005A0ED8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0eec
+// 0x005a0eec
 char const * const s_UC_STANCE_STAND_005a0eec = S_UC_STANCE_STAND_005A0EEC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0efc
+// 0x005a0efc
 char const * const s_UC_TTS_TUNNELERS_005a0efc = S_UC_TTS_TUNNELERS_005A0EFC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0f10
+// 0x005a0f10
 char const * const s_UC_PLP_TUNNELERS_005a0f10 = S_UC_PLP_TUNNELERS_005A0F10;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0f24
+// 0x005a0f24
 char const * const s_UC_PLP_PORTABLE_SHIELDS_005a0f24 = S_UC_PLP_PORTABLE_SHIELDS_005A0F24;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0f3c
+// 0x005a0f3c
 char const * const s_UC_PLP_SIEGE_TOWERS_005a0f3c = S_UC_PLP_SIEGE_TOWERS_005A0F3C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0f50
+// 0x005a0f50
 char const * const s_UC_PLP_BATTERING_RAM_005a0f50 = S_UC_PLP_BATTERING_RAM_005A0F50;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0f68
+// 0x005a0f68
 char const * const s_UC_PLP_TREBUCHETS_005a0f68 = S_UC_PLP_TREBUCHETS_005A0F68;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0f7c
+// 0x005a0f7c
 char const * const s_UC_PLP_CATAPULTS_005a0f7c = S_UC_PLP_CATAPULTS_005A0F7C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0f90
+// 0x005a0f90
 char const * const s_UC_PLP_MONKS_005a0f90 = S_UC_PLP_MONKS_005A0F90;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0fa0
+// 0x005a0fa0
 char const * const s_UC_PLP_ENGINEERS_POTS_005a0fa0 = S_UC_PLP_ENGINEERS_POTS_005A0FA0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0fb8
+// 0x005a0fb8
 char const * const s_UC_PLP_ENGINEERS_005a0fb8 = S_UC_PLP_ENGINEERS_005A0FB8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0fcc
+// 0x005a0fcc
 char const * const s_UC_PLP_LADDERMEN_005a0fcc = S_UC_PLP_LADDERMEN_005A0FCC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0fe0
+// 0x005a0fe0
 char const * const s_UC_PLP_KNIGHTS_005a0fe0 = S_UC_PLP_KNIGHTS_005A0FE0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a0ff0
+// 0x005a0ff0
 char const * const s_UC_PLP_SWORDSMEN_005a0ff0 = S_UC_PLP_SWORDSMEN_005A0FF0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1004
+// 0x005a1004
 char const * const s_UC_PLP_XBOWMEN_005a1004 = S_UC_PLP_XBOWMEN_005A1004;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1014
+// 0x005a1014
 char const * const s_UC_PLP_MACEMEN_005a1014 = S_UC_PLP_MACEMEN_005A1014;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1024
+// 0x005a1024
 char const * const s_UC_PLP_PIKEMEN_005a1024 = S_UC_PLP_PIKEMEN_005A1024;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1034
+// 0x005a1034
 char const * const s_UC_PLP_SPEARMEN_005a1034 = S_UC_PLP_SPEARMEN_005A1034;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1044
+// 0x005a1044
 char const * const s_UC_PLP_ARCHERS_005a1044 = S_UC_PLP_ARCHERS_005A1044;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1054
+// 0x005a1054
 char const * const s_UC_TTS_LADDERMEN_005a1054 = S_UC_TTS_LADDERMEN_005A1054;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1068
+// 0x005a1068
 char const * const s_UC_TTS_MONKS_005a1068 = S_UC_TTS_MONKS_005A1068;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1078
+// 0x005a1078
 char const * const s_UC_TTS_KNIGHTS_005a1078 = S_UC_TTS_KNIGHTS_005A1078;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1088
+// 0x005a1088
 char const * const s_UC_TTS_XBOWMEN_005a1088 = S_UC_TTS_XBOWMEN_005A1088;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1098
+// 0x005a1098
 char const * const s_UC_TTS_SWORDSMEN_005a1098 = S_UC_TTS_SWORDSMEN_005A1098;
 
-// STRING: STRONGHOLDCRUSADER 0x005a10ac
+// 0x005a10ac
 char const * const s_UC_TTS_MACEMEN_005a10ac = S_UC_TTS_MACEMEN_005A10AC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a10bc
+// 0x005a10bc
 char const * const s_UC_TTS_PIKEMEN_005a10bc = S_UC_TTS_PIKEMEN_005A10BC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a10cc
+// 0x005a10cc
 char const * const s_UC_TTS_ENGINEERS_005a10cc = S_UC_TTS_ENGINEERS_005A10CC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a10e0
+// 0x005a10e0
 char const * const s_UC_TTS_ARCHERS_005a10e0 = S_UC_TTS_ARCHERS_005A10E0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a10f0
+// 0x005a10f0
 char const * const s_UC_TTS_SPEARMEN_005a10f0 = S_UC_TTS_SPEARMEN_005A10F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1100
+// 0x005a1100
 char const * const s_UC_BLD_GRANARY_KEEPS_ONLY_005a1100 = S_UC_BLD_GRANARY_KEEPS_ONLY_005A1100;
 
-// STRING: STRONGHOLDCRUSADER 0x005a111c
+// 0x005a111c
 char const * const s_UC_KEEPS_ONLY_005a111c = S_UC_KEEPS_ONLY_005A111C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a112c
+// 0x005a112c
 char const * const s_UC_BLD_RUINS13_005a112c = S_UC_BLD_RUINS13_005A112C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a113c
+// 0x005a113c
 char const * const s_UC_BLD_RUINS12_005a113c = S_UC_BLD_RUINS12_005A113C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a114c
+// 0x005a114c
 char const * const s_UC_BLD_RUINS11_005a114c = S_UC_BLD_RUINS11_005A114C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a115c
+// 0x005a115c
 char const * const s_UC_BLD_RUINS10_005a115c = S_UC_BLD_RUINS10_005A115C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a116c
+// 0x005a116c
 char const * const s_UC_BLD_RUINS9_005a116c = S_UC_BLD_RUINS9_005A116C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a117c
+// 0x005a117c
 char const * const s_UC_BLD_RUINS8_005a117c = S_UC_BLD_RUINS8_005A117C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a118c
+// 0x005a118c
 char const * const s_UC_BLD_RUINS7_005a118c = S_UC_BLD_RUINS7_005A118C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a119c
+// 0x005a119c
 char const * const s_UC_BLD_RUINS6_005a119c = S_UC_BLD_RUINS6_005A119C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a11ac
+// 0x005a11ac
 char const * const s_UC_BLD_RUINS5_005a11ac = S_UC_BLD_RUINS5_005A11AC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a11bc
+// 0x005a11bc
 char const * const s_UC_BLD_RUINS4_005a11bc = S_UC_BLD_RUINS4_005A11BC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a11cc
+// 0x005a11cc
 char const * const s_UC_BLD_RUINS3_005a11cc = S_UC_BLD_RUINS3_005A11CC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a11dc
+// 0x005a11dc
 char const * const s_UC_BLD_RUINS2_005a11dc = S_UC_BLD_RUINS2_005A11DC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a11ec
+// 0x005a11ec
 char const * const s_UC_BLD_RUINS1_005a11ec = S_UC_BLD_RUINS1_005A11EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a11fc
+// 0x005a11fc
 char const * const s_UC_MAP_KEEP8_005a11fc = S_UC_MAP_KEEP8_005A11FC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a120c
+// 0x005a120c
 char const * const s_UC_MAP_KEEP7_005a120c = S_UC_MAP_KEEP7_005A120C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a121c
+// 0x005a121c
 char const * const s_UC_MAP_KEEP6_005a121c = S_UC_MAP_KEEP6_005A121C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a122c
+// 0x005a122c
 char const * const s_UC_MAP_KEEP5_005a122c = S_UC_MAP_KEEP5_005A122C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a123c
+// 0x005a123c
 char const * const s_UC_MAP_KEEP4_005a123c = S_UC_MAP_KEEP4_005A123C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a124c
+// 0x005a124c
 char const * const s_UC_MAP_KEEP3_005a124c = S_UC_MAP_KEEP3_005A124C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a125c
+// 0x005a125c
 char const * const s_UC_MAP_KEEP2_005a125c = S_UC_MAP_KEEP2_005A125C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a126c
+// 0x005a126c
 char const * const s_UC_MAP_KEEP1_005a126c = S_UC_MAP_KEEP1_005A126C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a127c
+// 0x005a127c
 char const * const s_UC_PITCH_DITCH_005a127c = S_UC_PITCH_DITCH_005A127C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a128c
+// 0x005a128c
 char const * const s_UC_LAUNCHCOW_005a128c = S_UC_LAUNCHCOW_005A128C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a129c
+// 0x005a129c
 char const * const s_UC_ATTACKHERE_005a129c = S_UC_ATTACKHERE_005A129C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a12ac
+// 0x005a12ac
 char const * const s_UC_TUNNELHERE_005a12ac = S_UC_TUNNELHERE_005A12AC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a12bc
+// 0x005a12bc
 char const * const s_UC_DISBAND_005a12bc = S_UC_DISBAND_005A12BC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a12c8
+// 0x005a12c8
 char const * const s_UC_PATROL_005a12c8 = S_UC_PATROL_005A12C8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a12d4
+// 0x005a12d4
 char const * const s_UC_BLD_POUR_OIL_005a12d4 = S_UC_BLD_POUR_OIL_005A12D4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a12e4
+// 0x005a12e4
 char const * const s_UC_BLD_BALLISTA_005a12e4 = S_UC_BLD_BALLISTA_005A12E4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a12f4
+// 0x005a12f4
 char const * const s_UC_MAP_ESTUARY_005a12f4 = S_UC_MAP_ESTUARY_005A12F4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1304
+// 0x005a1304
 char const * const s_UC_MAP_SIGNPOST_005a1304 = S_UC_MAP_SIGNPOST_005A1304;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1314
+// 0x005a1314
 char const * const s_UC_MAP_BIGROCK5_005a1314 = S_UC_MAP_BIGROCK5_005A1314;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1324
+// 0x005a1324
 char const * const s_UC_MAP_BIGROCK4_005a1324 = S_UC_MAP_BIGROCK4_005A1324;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1334
+// 0x005a1334
 char const * const s_UC_MAP_BIGROCK3_005a1334 = S_UC_MAP_BIGROCK3_005A1334;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1344
+// 0x005a1344
 char const * const s_UC_MAP_BIGROCK2_005a1344 = S_UC_MAP_BIGROCK2_005A1344;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1354
+// 0x005a1354
 char const * const s_UC_MAP_BIGROCK1_005a1354 = S_UC_MAP_BIGROCK1_005A1354;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1364
+// 0x005a1364
 char const * const s_UC_MAP_RIPPLE_005a1364 = S_UC_MAP_RIPPLE_005A1364;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1374
+// 0x005a1374
 char const * const s_UC_MAP_FOAM_005a1374 = S_UC_MAP_FOAM_005A1374;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1380
+// 0x005a1380
 char const * const s_UC_MAP_FORD_005a1380 = S_UC_MAP_FORD_005A1380;
 
-// STRING: STRONGHOLDCRUSADER 0x005a138c
+// 0x005a138c
 char const * const s_UC_MAP_RIVER_005a138c = S_UC_MAP_RIVER_005A138C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a139c
+// 0x005a139c
 char const * const s_UC_MAP_OIL_005a139c = S_UC_MAP_OIL_005A139C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a13a8
+// 0x005a13a8
 char const * const s_UC_MAP_MARSH_005a13a8 = S_UC_MAP_MARSH_005A13A8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a13b8
+// 0x005a13b8
 char const * const s_UC_MAP_BEACH_005a13b8 = S_UC_MAP_BEACH_005A13B8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a13c8
+// 0x005a13c8
 char const * const s_UC_MAP_SHALLOW_005a13c8 = S_UC_MAP_SHALLOW_005A13C8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a13d8
+// 0x005a13d8
 char const * const s_UC_MAP_SEA_005a13d8 = S_UC_MAP_SEA_005A13D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a13e4
+// 0x005a13e4
 char const * const s_UC_MAP_CROW_005a13e4 = S_UC_MAP_CROW_005A13E4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a13f0
+// 0x005a13f0
 char const * const s_UC_MAP_SEAGULL_005a13f0 = S_UC_MAP_SEAGULL_005A13F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1400
+// 0x005a1400
 char const * const s_UC_MAP_BEAR_005a1400 = S_UC_MAP_BEAR_005A1400;
 
-// STRING: STRONGHOLDCRUSADER 0x005a140c
+// 0x005a140c
 char const * const s_UC_MAP_RABBIT_005a140c = S_UC_MAP_RABBIT_005A140C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a141c
+// 0x005a141c
 char const * const s_UC_MAP_WOLF_005a141c = S_UC_MAP_WOLF_005A141C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1428
+// 0x005a1428
 char const * const s_UC_MAP_DEER_005a1428 = S_UC_MAP_DEER_005A1428;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1434
+// 0x005a1434
 char const * const s_UC_MAP_SHRUB2_005a1434 = S_UC_MAP_SHRUB2_005A1434;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1444
+// 0x005a1444
 char const * const s_UC_MAP_SHRUB1E_005a1444 = S_UC_MAP_SHRUB1E_005A1444;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1454
+// 0x005a1454
 char const * const s_UC_MAP_SHRUB1D_005a1454 = S_UC_MAP_SHRUB1D_005A1454;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1464
+// 0x005a1464
 char const * const s_UC_MAP_SHRUB1C_005a1464 = S_UC_MAP_SHRUB1C_005A1464;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1474
+// 0x005a1474
 char const * const s_UC_MAP_SHRUB1B_005a1474 = S_UC_MAP_SHRUB1B_005A1474;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1484
+// 0x005a1484
 char const * const s_UC_MAP_SHRUB1A_005a1484 = S_UC_MAP_SHRUB1A_005A1484;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1494
+// 0x005a1494
 char const * const s_UC_MAP_BIRCH_005a1494 = S_UC_MAP_BIRCH_005A1494;
 
-// STRING: STRONGHOLDCRUSADER 0x005a14a4
+// 0x005a14a4
 char const * const s_UC_MAP_PINE_005a14a4 = S_UC_MAP_PINE_005A14A4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a14b0
+// 0x005a14b0
 char const * const s_UC_MAP_OAK_005a14b0 = S_UC_MAP_OAK_005A14B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a14bc
+// 0x005a14bc
 char const * const s_UC_MAP_CHESTNUT_005a14bc = S_UC_MAP_CHESTNUT_005A14BC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a14cc
+// 0x005a14cc
 char const * const s_UC_MAP_STONES_005a14cc = S_UC_MAP_STONES_005A14CC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a14dc
+// 0x005a14dc
 char const * const s_UC_MAP_DIRT_005a14dc = S_UC_MAP_DIRT_005A14DC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a14e8
+// 0x005a14e8
 char const * const s_UC_MAP_IRON_005a14e8 = S_UC_MAP_IRON_005A14E8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a14f4
+// 0x005a14f4
 char const * const s_UC_MAP_BOULDERS_005a14f4 = S_UC_MAP_BOULDERS_005A14F4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1504
+// 0x005a1504
 char const * const s_UC_MAP_PEBBLES_005a1504 = S_UC_MAP_PEBBLES_005A1504;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1514
+// 0x005a1514
 char const * const s_UC_MAP_ROCKS_005a1514 = S_UC_MAP_ROCKS_005A1514;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1524
+// 0x005a1524
 char const * const s_UC_MAP_GRASS_005a1524 = S_UC_MAP_GRASS_005A1524;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1534
+// 0x005a1534
 char const * const s_UC_MAP_LAND_005a1534 = S_UC_MAP_LAND_005A1534;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1540
+// 0x005a1540
 char const * const s_UC_MAP_HI_PLAIN_005a1540 = S_UC_MAP_HI_PLAIN_005A1540;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1550
+// 0x005a1550
 char const * const s_UC_MAP_MID_PLAIN_005a1550 = S_UC_MAP_MID_PLAIN_005A1550;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1564
+// 0x005a1564
 char const * const s_UC_MAP_HILL_005a1564 = S_UC_MAP_HILL_005A1564;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1570
+// 0x005a1570
 char const * const s_UC_MAP_MOUNTAIN_005a1570 = S_UC_MAP_MOUNTAIN_005A1570;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1580
+// 0x005a1580
 char const * const s_UC_MAP_EQUALIZE_005a1580 = S_UC_MAP_EQUALIZE_005A1580;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1590
+// 0x005a1590
 char const * const s_UC_MAP_MAX_005a1590 = S_UC_MAP_MAX_005A1590;
 
-// STRING: STRONGHOLDCRUSADER 0x005a159c
+// 0x005a159c
 char const * const s_UC_MAP_MIN_005a159c = S_UC_MAP_MIN_005A159C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a15a8
+// 0x005a15a8
 char const * const s_UC_MAP_LOWER_005a15a8 = S_UC_MAP_LOWER_005A15A8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a15b8
+// 0x005a15b8
 char const * const s_UC_MAP_RAISE_005a15b8 = S_UC_MAP_RAISE_005A15B8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a15c8
+// 0x005a15c8
 char const * const s_UC_MAP_DELETE_005a15c8 = S_UC_MAP_DELETE_005A15C8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a15d8
+// 0x005a15d8
 char const * const s_UC_MAP_SNAP_005a15d8 = S_UC_MAP_SNAP_005A15D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a15e4
+// 0x005a15e4
 char const * const s_UC_MAP_BRUSH_005a15e4 = S_UC_MAP_BRUSH_005A15E4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a15f4
+// 0x005a15f4
 char const * const s_UC_MAP_GAME_005a15f4 = S_UC_MAP_GAME_005A15F4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1600
+// 0x005a1600
 char const * const s_UC_MAP_FEATURE_005a1600 = S_UC_MAP_FEATURE_005A1600;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1610
+// 0x005a1610
 char const * const s_UC_MAP_WATER_005a1610 = S_UC_MAP_WATER_005A1610;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1620
+// 0x005a1620
 char const * const s_UC_MAP_ANIMAL_005a1620 = S_UC_MAP_ANIMAL_005A1620;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1630
+// 0x005a1630
 char const * const s_UC_MAP_OBJ_005a1630 = S_UC_MAP_OBJ_005A1630;
 
-// STRING: STRONGHOLDCRUSADER 0x005a163c
+// 0x005a163c
 char const * const s_UC_MAP_LANDTYPE_005a163c = S_UC_MAP_LANDTYPE_005A163C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a164c
+// 0x005a164c
 char const * const s_UC_MAP_HEIGHT_005a164c = S_UC_MAP_HEIGHT_005A164C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a165c
+// 0x005a165c
 char const * const s_UC_GATE2_EAST_005a165c = S_UC_GATE2_EAST_005A165C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a166c
+// 0x005a166c
 char const * const s_UC_GATE2_NORTH_005a166c = S_UC_GATE2_NORTH_005A166C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a167c
+// 0x005a167c
 char const * const s_UC_GATE1_EAST_005a167c = S_UC_GATE1_EAST_005A167C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a168c
+// 0x005a168c
 char const * const s_UC_GATE1_NORTH_005a168c = S_UC_GATE1_NORTH_005A168C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a169c
+// 0x005a169c
 char const * const s_UC_WOODGATE_WEST_005a169c = S_UC_WOODGATE_WEST_005A169C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a16b0
+// 0x005a16b0
 char const * const s_UC_WOODGATE_SOUTH_005a16b0 = S_UC_WOODGATE_SOUTH_005A16B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a16c4
+// 0x005a16c4
 char const * const s_UC_WOODGATE_EAST_005a16c4 = S_UC_WOODGATE_EAST_005A16C4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a16d8
+// 0x005a16d8
 char const * const s_UC_WOODGATE_NORTH_005a16d8 = S_UC_WOODGATE_NORTH_005A16D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a16ec
+// 0x005a16ec
 char const * const s_UC_GATEDIRC3_005a16ec = S_UC_GATEDIRC3_005A16EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a16fc
+// 0x005a16fc
 char const * const s_UC_GATEDIRC2_005a16fc = S_UC_GATEDIRC2_005A16FC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a170c
+// 0x005a170c
 char const * const s_UC_GATEDIRC1_005a170c = S_UC_GATEDIRC1_005A170C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a171c
+// 0x005a171c
 char const * const s_UC_BLD_OIL_SMELTER_005a171c = S_UC_BLD_OIL_SMELTER_005A171C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1730
+// 0x005a1730
 char const * const s_UC_BLD_PORTABLE_SHIELD_005a1730 = S_UC_BLD_PORTABLE_SHIELD_005A1730;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1748
+// 0x005a1748
 char const * const s_UC_BLD_BATTERING_RAM_005a1748 = S_UC_BLD_BATTERING_RAM_005A1748;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1760
+// 0x005a1760
 char const * const s_UC_BLD_SIEGE_TOWER_005a1760 = S_UC_BLD_SIEGE_TOWER_005A1760;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1774
+// 0x005a1774
 char const * const s_UC_BLD_TREBUCHET_005a1774 = S_UC_BLD_TREBUCHET_005A1774;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1788
+// 0x005a1788
 char const * const s_UC_BLD_CATAPULT_005a1788 = S_UC_BLD_CATAPULT_005A1788;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1798
+// 0x005a1798
 char const * const s_UC_BLD_MANGONEL_005a1798 = S_UC_BLD_MANGONEL_005A1798;
 
-// STRING: STRONGHOLDCRUSADER 0x005a17a8
+// 0x005a17a8
 char const * const s_UC_SUB_GARDENS_005a17a8 = S_UC_SUB_GARDENS_005A17A8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a17b8
+// 0x005a17b8
 char const * const s_UC_DIG_MOATS_005a17b8 = S_UC_DIG_MOATS_005A17B8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a17c8
+// 0x005a17c8
 char const * const s_UC_SUB_MOATS_005a17c8 = S_UC_SUB_MOATS_005A17C8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a17d8
+// 0x005a17d8
 char const * const s_UC_SUB_FARMS_005a17d8 = S_UC_SUB_FARMS_005A17D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a17e8
+// 0x005a17e8
 char const * const s_UC_SUB_AMUSEMENTS_005a17e8 = S_UC_SUB_AMUSEMENTS_005A17E8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a17fc
+// 0x005a17fc
 char const * const s_UC_SUB_PUNISHMENTS_005a17fc = S_UC_SUB_PUNISHMENTS_005A17FC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1810
+// 0x005a1810
 char const * const s_UC_SUB_CHURCHES_005a1810 = S_UC_SUB_CHURCHES_005A1810;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1820
+// 0x005a1820
 char const * const s_UC_SUB_WORKSHOPS_005a1820 = S_UC_SUB_WORKSHOPS_005A1820;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1834
+// 0x005a1834
 char const * const s_UC_SUB_DECORATION_005a1834 = S_UC_SUB_DECORATION_005A1834;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1848
+// 0x005a1848
 char const * const s_UC_SUB_MILITARY_005a1848 = S_UC_SUB_MILITARY_005A1848;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1858
+// 0x005a1858
 char const * const s_UC_SUB_GATEHOUSES_005a1858 = S_UC_SUB_GATEHOUSES_005A1858;
 
-// STRING: STRONGHOLDCRUSADER 0x005a186c
+// 0x005a186c
 char const * const s_UC_SUB_KEEPS_005a186c = S_UC_SUB_KEEPS_005A186C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a187c
+// 0x005a187c
 char const * const s_UC_SUB_TOWERS_005a187c = S_UC_SUB_TOWERS_005A187C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a188c
+// 0x005a188c
 char const * const s_UC_BLD_JOUSTING_005a188c = S_UC_BLD_JOUSTING_005A188C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a189c
+// 0x005a189c
 char const * const s_UC_BLD_FAIR_005a189c = S_UC_BLD_FAIR_005A189C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a18a8
+// 0x005a18a8
 char const * const s_UC_BLD_FLOGGINGHORSE_005a18a8 = S_UC_BLD_FLOGGINGHORSE_005A18A8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a18c0
+// 0x005a18c0
 char const * const s_UC_BLD_STAKE_005a18c0 = S_UC_BLD_STAKE_005A18C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a18d0
+// 0x005a18d0
 char const * const s_UC_BLD_DUNKINGSTOOL_005a18d0 = S_UC_BLD_DUNKINGSTOOL_005A18D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a18e4
+// 0x005a18e4
 char const * const s_UC_BLD_THUMBSCREW_005a18e4 = S_UC_BLD_THUMBSCREW_005A18E4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a18f8
+// 0x005a18f8
 char const * const s_UC_BLD_FINGERPRESS_005a18f8 = S_UC_BLD_FINGERPRESS_005A18F8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a190c
+// 0x005a190c
 char const * const s_UC_BLD_GARDEN_12_005a190c = S_UC_BLD_GARDEN_12_005A190C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1920
+// 0x005a1920
 char const * const s_UC_BLD_GARDEN_11_005a1920 = S_UC_BLD_GARDEN_11_005A1920;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1934
+// 0x005a1934
 char const * const s_UC_BLD_GARDEN_10_005a1934 = S_UC_BLD_GARDEN_10_005A1934;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1948
+// 0x005a1948
 char const * const s_UC_BLD_GARDEN_9_005a1948 = S_UC_BLD_GARDEN_9_005A1948;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1958
+// 0x005a1958
 char const * const s_UC_BLD_GARDEN_8_005a1958 = S_UC_BLD_GARDEN_8_005A1958;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1968
+// 0x005a1968
 char const * const s_UC_BLD_GARDEN_7_005a1968 = S_UC_BLD_GARDEN_7_005A1968;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1978
+// 0x005a1978
 char const * const s_UC_BLD_GARDEN_6_005a1978 = S_UC_BLD_GARDEN_6_005A1978;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1988
+// 0x005a1988
 char const * const s_UC_BLD_GARDEN_5_005a1988 = S_UC_BLD_GARDEN_5_005A1988;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1998
+// 0x005a1998
 char const * const s_UC_BLD_GARDEN_4_005a1998 = S_UC_BLD_GARDEN_4_005A1998;
 
-// STRING: STRONGHOLDCRUSADER 0x005a19a8
+// 0x005a19a8
 char const * const s_UC_BLD_GARDEN_3_005a19a8 = S_UC_BLD_GARDEN_3_005A19A8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a19b8
+// 0x005a19b8
 char const * const s_UC_BLD_GARDEN_2_005a19b8 = S_UC_BLD_GARDEN_2_005A19B8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a19c8
+// 0x005a19c8
 char const * const s_UC_BLD_GARDEN_1_005a19c8 = S_UC_BLD_GARDEN_1_005A19C8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a19d8
+// 0x005a19d8
 char const * const s_UC_BLD_CHURCH_3_005a19d8 = S_UC_BLD_CHURCH_3_005A19D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a19e8
+// 0x005a19e8
 char const * const s_UC_BLD_CHURCH_2_005a19e8 = S_UC_BLD_CHURCH_2_005A19E8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a19f8
+// 0x005a19f8
 char const * const s_UC_BLD_CHURCH_1_005a19f8 = S_UC_BLD_CHURCH_1_005A19F8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1a08
+// 0x005a1a08
 char const * const s_UC_BLD_DWELLING_005a1a08 = S_UC_BLD_DWELLING_005A1A08;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1a18
+// 0x005a1a18
 char const * const s_UC_AMUSEMENTS_005a1a18 = S_UC_AMUSEMENTS_005A1A18;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1a28
+// 0x005a1a28
 char const * const s_UC_PUNISHMENTS_005a1a28 = S_UC_PUNISHMENTS_005A1A28;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1a38
+// 0x005a1a38
 char const * const s_UC_GARDEN_005a1a38 = S_UC_GARDEN_005A1A38;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1a44
+// 0x005a1a44
 char const * const s_UC_BANNER_005a1a44 = S_UC_BANNER_005A1A44;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1a50
+// 0x005a1a50
 char const * const s_UC_CREST_2_005a1a50 = S_UC_CREST_2_005A1A50;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1a5c
+// 0x005a1a5c
 char const * const s_UC_CREST_005a1a5c = S_UC_CREST_005A1A5C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1a68
+// 0x005a1a68
 char const * const s_UC_FLAG_3_005a1a68 = S_UC_FLAG_3_005A1A68;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1a74
+// 0x005a1a74
 char const * const s_UC_FLAG_2_005a1a74 = S_UC_FLAG_2_005A1A74;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1a80
+// 0x005a1a80
 char const * const s_UC_FLAG_1_005a1a80 = S_UC_FLAG_1_005A1A80;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1a8c
+// 0x005a1a8c
 char const * const s_UC_MILITARY_BUILDINGS_005a1a8c = S_UC_MILITARY_BUILDINGS_005A1A8C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1aa4
+// 0x005a1aa4
 char const * const s_UC_CASTLE_DECORATIONS_005a1aa4 = S_UC_CASTLE_DECORATIONS_005A1AA4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1abc
+// 0x005a1abc
 char const * const s_UC_ANTIMOAT_005a1abc = S_UC_ANTIMOAT_005A1ABC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1ac8
+// 0x005a1ac8
 char const * const s_UC_BLD_STOCKS_005a1ac8 = S_UC_BLD_STOCKS_005A1AC8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1ad8
+// 0x005a1ad8
 char const * const s_UC_BLD_TROOP_TARGETS_005a1ad8 = S_UC_BLD_TROOP_TARGETS_005A1AD8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1af0
+// 0x005a1af0
 char const * const s_UC_BLD_ARCHERY_TARGETS_005a1af0 = S_UC_BLD_ARCHERY_TARGETS_005A1AF0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1b08
+// 0x005a1b08
 char const * const s_UC_BLD_MAYPOLE_005a1b08 = S_UC_BLD_MAYPOLE_005A1B08;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1b18
+// 0x005a1b18
 char const * const s_UC_BLD_GALLOWS_005a1b18 = S_UC_BLD_GALLOWS_005A1B18;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1b28
+// 0x005a1b28
 char const * const s_UC_BLD_PARAPETS_005a1b28 = S_UC_BLD_PARAPETS_005A1B28;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1b38
+// 0x005a1b38
 char const * const s_UC_BLD_BARRED_WINDOWS_005a1b38 = S_UC_BLD_BARRED_WINDOWS_005A1B38;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1b50
+// 0x005a1b50
 char const * const s_UC_BLD_LATRINES_005a1b50 = S_UC_BLD_LATRINES_005A1B50;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1b60
+// 0x005a1b60
 char const * const s_UC_BLD_TUNNELER_005a1b60 = S_UC_BLD_TUNNELER_005A1B60;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1b70
+// 0x005a1b70
 char const * const s_UC_BLD_ENGINEER_005a1b70 = S_UC_BLD_ENGINEER_005A1B70;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1b80
+// 0x005a1b80
 char const * const s_UC_BLD_HEALER_005a1b80 = S_UC_BLD_HEALER_005A1B80;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1b90
+// 0x005a1b90
 char const * const s_UC_BLD_INN_005a1b90 = S_UC_BLD_INN_005A1B90;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1b9c
+// 0x005a1b9c
 char const * const s_UC_BLD_CHURCHS_005a1b9c = S_UC_BLD_CHURCHS_005A1B9C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1bac
+// 0x005a1bac
 char const * const s_UC_BLD_OX_TETHER_005a1bac = S_UC_BLD_OX_TETHER_005A1BAC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1bc0
+// 0x005a1bc0
 char const * const s_UC_BLD_FARM_HUNTER_005a1bc0 = S_UC_BLD_FARM_HUNTER_005A1BC0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1bd4
+// 0x005a1bd4
 char const * const s_UC_BLD_FARM_COWS_005a1bd4 = S_UC_BLD_FARM_COWS_005A1BD4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1be8
+// 0x005a1be8
 char const * const s_UC_BLD_FARM_HOPS_005a1be8 = S_UC_BLD_FARM_HOPS_005A1BE8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1bfc
+// 0x005a1bfc
 char const * const s_UC_BLD_FARM_APPLE_005a1bfc = S_UC_BLD_FARM_APPLE_005A1BFC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1c10
+// 0x005a1c10
 char const * const s_UC_BLD_FARM_WHEAT_005a1c10 = S_UC_BLD_FARM_WHEAT_005A1C10;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1c24
+// 0x005a1c24
 char const * const s_UC_BLD_BREWER_005a1c24 = S_UC_BLD_BREWER_005A1C24;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1c34
+// 0x005a1c34
 char const * const s_UC_BLD_BAKER_005a1c34 = S_UC_BLD_BAKER_005A1C34;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1c44
+// 0x005a1c44
 char const * const s_UC_BLD_POLETURNER_005a1c44 = S_UC_BLD_POLETURNER_005A1C44;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1c58
+// 0x005a1c58
 char const * const s_UC_BLD_FLETCHER_005a1c58 = S_UC_BLD_FLETCHER_005A1C58;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1c68
+// 0x005a1c68
 char const * const s_UC_BLD_TANNER_005a1c68 = S_UC_BLD_TANNER_005A1C68;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1c78
+// 0x005a1c78
 char const * const s_UC_BLD_ARMOURER_005a1c78 = S_UC_BLD_ARMOURER_005A1C78;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1c88
+// 0x005a1c88
 char const * const s_UC_BLD_BLACKSMITH_005a1c88 = S_UC_BLD_BLACKSMITH_005A1C88;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1c9c
+// 0x005a1c9c
 char const * const s_UC_BLD_TRADEPOST_005a1c9c = S_UC_BLD_TRADEPOST_005A1C9C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1cb0
+// 0x005a1cb0
 char const * const s_UC_BLD_MILL_005a1cb0 = S_UC_BLD_MILL_005A1CB0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1cbc
+// 0x005a1cbc
 char const * const s_UC_BLD_WELL_005a1cbc = S_UC_BLD_WELL_005A1CBC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1cc8
+// 0x005a1cc8
 char const * const s_UC_BLD_GRANARY_005a1cc8 = S_UC_BLD_GRANARY_005A1CC8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1cd8
+// 0x005a1cd8
 char const * const s_UC_BLD_STOCKPILE_005a1cd8 = S_UC_BLD_STOCKPILE_005A1CD8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1cec
+// 0x005a1cec
 char const * const s_UC_BLD_PITCH_DUGOUT_005a1cec = S_UC_BLD_PITCH_DUGOUT_005A1CEC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1d00
+// 0x005a1d00
 char const * const s_UC_BLD_IRONMINE_005a1d00 = S_UC_BLD_IRONMINE_005A1D00;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1d10
+// 0x005a1d10
 char const * const s_UC_BLD_WOODCUTTER_005a1d10 = S_UC_BLD_WOODCUTTER_005A1D10;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1d24
+// 0x005a1d24
 char const * const s_UC_BLD_QUARRY_005a1d24 = S_UC_BLD_QUARRY_005A1D24;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1d34
+// 0x005a1d34
 char const * const s_UC_BLD_HOUSE_005a1d34 = S_UC_BLD_HOUSE_005A1D34;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1d44
+// 0x005a1d44
 char const * const s_UC_BLD_HOVEL_005a1d44 = S_UC_BLD_HOVEL_005A1D44;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1d54
+// 0x005a1d54
 char const * const s_UC_WORKSHOPS_005a1d54 = S_UC_WORKSHOPS_005A1D54;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1d64
+// 0x005a1d64
 char const * const s_UC_FARMS_005a1d64 = S_UC_FARMS_005A1D64;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1d70
+// 0x005a1d70
 char const * const s_UC_KEEPS_E_005a1d70 = S_UC_KEEPS_E_005A1D70;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1d7c
+// 0x005a1d7c
 char const * const s_UC_KEEPS_D_005a1d7c = S_UC_KEEPS_D_005A1D7C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1d88
+// 0x005a1d88
 char const * const s_UC_KEEPS_C_005a1d88 = S_UC_KEEPS_C_005A1D88;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1d94
+// 0x005a1d94
 char const * const s_UC_KEEPS_B_005a1d94 = S_UC_KEEPS_B_005A1D94;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1da0
+// 0x005a1da0
 char const * const s_UC_KEEPS_A_005a1da0 = S_UC_KEEPS_A_005A1DA0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1dac
+// 0x005a1dac
 char const * const s_UC_MOAT_005a1dac = S_UC_MOAT_005A1DAC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1db4
+// 0x005a1db4
 char const * const s_UC_DRAWBRIDGE_005a1db4 = S_UC_DRAWBRIDGE_005A1DB4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1dc4
+// 0x005a1dc4
 char const * const s_UC_GATE_LARGE_STONE_005a1dc4 = S_UC_GATE_LARGE_STONE_005A1DC4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1dd8
+// 0x005a1dd8
 char const * const s_UC_GATE_SMALL_STONE_005a1dd8 = S_UC_GATE_SMALL_STONE_005A1DD8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1dec
+// 0x005a1dec
 char const * const s_UC_GATE_LARGE_WOODEN_005a1dec = S_UC_GATE_LARGE_WOODEN_005A1DEC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1e04
+// 0x005a1e04
 char const * const s_UC_GATE_SMALL_WOODEN_005a1e04 = S_UC_GATE_SMALL_WOODEN_005A1E04;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1e1c
+// 0x005a1e1c
 char const * const s_UC_TOWER_F_005a1e1c = S_UC_TOWER_F_005A1E1C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1e28
+// 0x005a1e28
 char const * const s_UC_TOWER_E_005a1e28 = S_UC_TOWER_E_005A1E28;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1e34
+// 0x005a1e34
 char const * const s_UC_TOWER_D_005a1e34 = S_UC_TOWER_D_005A1E34;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1e40
+// 0x005a1e40
 char const * const s_UC_TOWER_C_005a1e40 = S_UC_TOWER_C_005A1E40;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1e4c
+// 0x005a1e4c
 char const * const s_UC_TOWER_B_005a1e4c = S_UC_TOWER_B_005A1E4C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1e58
+// 0x005a1e58
 char const * const s_UC_TOWER_A_005a1e58 = S_UC_TOWER_A_005A1E58;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1e64
+// 0x005a1e64
 char const * const s_UC_SIEGE_TENT_3_005a1e64 = S_UC_SIEGE_TENT_3_005A1E64;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1e74
+// 0x005a1e74
 char const * const s_UC_SIEGE_TENT_2_005a1e74 = S_UC_SIEGE_TENT_2_005A1E74;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1e84
+// 0x005a1e84
 char const * const s_UC_SIEGE_TENT_1_005a1e84 = S_UC_SIEGE_TENT_1_005A1E84;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1e94
+// 0x005a1e94
 char const * const s_UC_KILLING_PITS_005a1e94 = S_UC_KILLING_PITS_005A1E94;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1ea4
+// 0x005a1ea4
 char const * const s_UC_BRAZIER_005a1ea4 = S_UC_BRAZIER_005A1EA4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1eb0
+// 0x005a1eb0
 char const * const s_UC_WALL_WOODEN_005a1eb0 = S_UC_WALL_WOODEN_005A1EB0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1ec0
+// 0x005a1ec0
 char const * const s_UC_WALL_STAIRS_005a1ec0 = S_UC_WALL_STAIRS_005A1EC0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1ed0
+// 0x005a1ed0
 char const * const s_UC_WALL_CRENAL_005a1ed0 = S_UC_WALL_CRENAL_005A1ED0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1ee0
+// 0x005a1ee0
 char const * const s_UC_WALL_SINGLE_005a1ee0 = S_UC_WALL_SINGLE_005A1EE0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1ef0
+// 0x005a1ef0
 char const * const s_UC_BLD_STABLES_005a1ef0 = S_UC_BLD_STABLES_005A1EF0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1f00
+// 0x005a1f00
 char const * const s_UC_BLD_BARRACKS_WOOD_005a1f00 = S_UC_BLD_BARRACKS_WOOD_005A1F00;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1f18
+// 0x005a1f18
 char const * const s_UC_BLD_BARRACKS_STONE_005a1f18 = S_UC_BLD_BARRACKS_STONE_005A1F18;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1f30
+// 0x005a1f30
 char const * const s_UC_BLD_ARMOURY_005a1f30 = S_UC_BLD_ARMOURY_005A1F30;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1f40
+// 0x005a1f40
 char const * const s_UC_KEEPS_005a1f40 = S_UC_KEEPS_005A1F40;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1f4c
+// 0x005a1f4c
 char const * const s_UC_GATEHOUSES_005a1f4c = S_UC_GATEHOUSES_005A1F4C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1f5c
+// 0x005a1f5c
 char const * const s_UC_TOWERS_005a1f5c = S_UC_TOWERS_005A1F5C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1f68
+// 0x005a1f68
 char const * const s_logo2_tgx_005a1f68 = S_LOGO2_TGX_005A1F68;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1f74
+// 0x005a1f74
 char const * const s_logo1_tgx_005a1f74 = S_LOGO1_TGX_005A1F74;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1f80
+// 0x005a1f80
 char const * const s_intro_bik_005a1f80 = S_INTRO_BIK_005A1F80;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1f8c
+// 0x005a1f8c
 char const * const s_shc_back_tgx_005a1f8c = S_SHC_BACK_TGX_005A1F8C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1f9c
+// 0x005a1f9c
 char const * const s_frontend_main2_tgx_005a1f9c = S_FRONTEND_MAIN2_TGX_005A1F9C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1fb0
+// 0x005a1fb0
 char const * const s_frontend_main_tgx_005a1fb0 = S_FRONTEND_MAIN_TGX_005A1FB0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1fc4
+// 0x005a1fc4
 char const * const s_richard_swordswing_bik_005a1fc4 = S_RICHARD_SWORDSWING_BIK_005A1FC4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1fdc
+// 0x005a1fdc
 char const * const s_V1_d_005a1fdc = S_V1_D_005A1FDC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1fe4
+// 0x005a1fe4
 char const * const s_richard_ambient_bik_005a1fe4 = S_RICHARD_AMBIENT_BIK_005A1FE4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a1ff8
+// 0x005a1ff8
 char const * const s_Crusader_tutorial_map_005a1ff8 = S_CRUSADER_TUTORIAL_MAP_005A1FF8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2010
+// 0x005a2010
 char const * const s_frontend_combat2_tgx_005a2010 = S_FRONTEND_COMBAT2_TGX_005A2010;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2028
+// 0x005a2028
 char const * const s_frontend_combat_tgx_005a2028 = S_FRONTEND_COMBAT_TGX_005A2028;
 
-// STRING: STRONGHOLDCRUSADER 0x005a203c
+// 0x005a203c
 char const * const s_frontend_economics2_tgx_005a203c = S_FRONTEND_ECONOMICS2_TGX_005A203C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2054
+// 0x005a2054
 char const * const s_frontend_economics_tgx_005a2054 = S_FRONTEND_ECONOMICS_TGX_005A2054;
 
-// STRING: STRONGHOLDCRUSADER 0x005a206c
+// 0x005a206c
 char const * const s_frontend_builder2_tgx_005a206c = S_FRONTEND_BUILDER2_TGX_005A206C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2084
+// 0x005a2084
 char const * const s_frontend_builder_tgx_005a2084 = S_FRONTEND_BUILDER_TGX_005A2084;
 
-// STRING: STRONGHOLDCRUSADER 0x005a209c
+// 0x005a209c
 char const * const s_credits_hlp_005a209c = S_CREDITS_HLP_005A209C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a20a8
+// 0x005a20a8
 char const * const s_end_credit_tgx_005a20a8 = S_END_CREDIT_TGX_005A20A8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a20b8
+// 0x005a20b8
 char const * const s_credits_4_tgx_005a20b8 = S_CREDITS_4_TGX_005A20B8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a20c8
+// 0x005a20c8
 char const * const s_credits_3_tgx_005a20c8 = S_CREDITS_3_TGX_005A20C8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a20d8
+// 0x005a20d8
 char const * const s_credits_2_tgx_005a20d8 = S_CREDITS_2_TGX_005A20D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a20e8
+// 0x005a20e8
 char const * const s_credits_1_tgx_005a20e8 = S_CREDITS_1_TGX_005A20E8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a20f8
+// 0x005a20f8
 char const * const s_demo_buy_it_screen_tgx_005a20f8 = S_DEMO_BUY_IT_SCREEN_TGX_005A20F8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2110
+// 0x005a2110
 char const * const s_gm_fly_tgx_005a2110 = S_GM_FLY_TGX_005A2110;
 
-// STRING: STRONGHOLDCRUSADER 0x005a211c
+// 0x005a211c
 char const * const s_multi_background_tgx_005a211c = S_MULTI_BACKGROUND_TGX_005A211C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2134
+// 0x005a2134
 char const * const s_frontend_combat3_tgx_005a2134 = S_FRONTEND_COMBAT3_TGX_005A2134;
 
-// STRING: STRONGHOLDCRUSADER 0x005a214c
+// 0x005a214c
 char const * const s_pick_opponent_large_tgx_005a214c = S_PICK_OPPONENT_LARGE_TGX_005A214C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2164
+// 0x005a2164
 char const * const s_pick_opponent_normal_tgx_005a2164 = S_PICK_OPPONENT_NORMAL_TGX_005A2164;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2180
+// 0x005a2180
 char const * const s_tslice8b_tgx_005a2180 = S_TSLICE8B_TGX_005A2180;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2190
+// 0x005a2190
 char const * const s_tslice7b_tgx_005a2190 = S_TSLICE7B_TGX_005A2190;
 
-// STRING: STRONGHOLDCRUSADER 0x005a21a0
+// 0x005a21a0
 char const * const s_tslice6b_tgx_005a21a0 = S_TSLICE6B_TGX_005A21A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a21b0
+// 0x005a21b0
 char const * const s_tslice5b_tgx_005a21b0 = S_TSLICE5B_TGX_005A21B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a21c0
+// 0x005a21c0
 char const * const s_tslice4b_tgx_005a21c0 = S_TSLICE4B_TGX_005A21C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a21d0
+// 0x005a21d0
 char const * const s_tslice3b_tgx_005a21d0 = S_TSLICE3B_TGX_005A21D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a21e0
+// 0x005a21e0
 char const * const s_tslice2b_tgx_005a21e0 = S_TSLICE2B_TGX_005A21E0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a21f0
+// 0x005a21f0
 char const * const s_tslice1b_tgx_005a21f0 = S_TSLICE1B_TGX_005A21F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2200
+// 0x005a2200
 char const * const s_tslice8_tgx_005a2200 = S_TSLICE8_TGX_005A2200;
 
-// STRING: STRONGHOLDCRUSADER 0x005a220c
+// 0x005a220c
 char const * const s_tslice7_tgx_005a220c = S_TSLICE7_TGX_005A220C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2218
+// 0x005a2218
 char const * const s_tslice6_tgx_005a2218 = S_TSLICE6_TGX_005A2218;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2224
+// 0x005a2224
 char const * const s_tslice5_tgx_005a2224 = S_TSLICE5_TGX_005A2224;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2230
+// 0x005a2230
 char const * const s_tslice4_tgx_005a2230 = S_TSLICE4_TGX_005A2230;
 
-// STRING: STRONGHOLDCRUSADER 0x005a223c
+// 0x005a223c
 char const * const s_tslice3_tgx_005a223c = S_TSLICE3_TGX_005A223C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2248
+// 0x005a2248
 char const * const s_tslice2_tgx_005a2248 = S_TSLICE2_TGX_005A2248;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2254
+// 0x005a2254
 char const * const s_tslice1_tgx_005a2254 = S_TSLICE1_TGX_005A2254;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2260
+// 0x005a2260
 char const * const s_table_tgx_005a2260 = S_TABLE_TGX_005A2260;
 
-// STRING: STRONGHOLDCRUSADER 0x005a226c
+// 0x005a226c
 char const * const s_firefly_small_tgx_005a226c = S_FIREFLY_SMALL_TGX_005A226C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2280
+// 0x005a2280
 char const * const s___005a2280 = S___005A2280;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2284
+// 0x005a2284
 char const * const s__s__d_005a2284 = S__S__D_005A2284;
 
-// STRING: STRONGHOLDCRUSADER 0x005a228c
+// 0x005a228c
 char const * const s__s__s_005a228c = S__S__S_005A228C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2294
+// 0x005a2294
 char const * const s__map_005a2294 = S__MAP_005A2294;
 
-// STRING: STRONGHOLDCRUSADER 0x005a229c
+// 0x005a229c
 char const * const s__02d_02d_02d__02d_02d_005a229c = S__02D_02D_02D__02D_02D_005A229C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a22b8
+// 0x005a22b8
 char const * const s_Crusader_005a22b8 = S_CRUSADER_005A22B8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a22c4
+// 0x005a22c4
 char const * const s_FireFly_s_005a22c4 = S_FIREFLY_S_005A22C4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a22d8
+// 0x005a22d8
 char const * const s_Continue_005a22d8 = S_CONTINUE_005A22D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a22e4
+// 0x005a22e4
 char const * const s_Test_map_005a22e4 = S_TEST_MAP_005A22E4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a22f0
+// 0x005a22f0
 char const * const s_Game_Paused_005a22f0 = S_GAME_PAUSED_005A22F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a22fc
+// 0x005a22fc
 char const * const s__dx_d_005a22fc = S__DX_D_005A22FC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2304
+// 0x005a2304
 char const * const s___005a2304 = S___005A2304;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2308
+// 0x005a2308
 char const * const s_edge1680l_tgx_005a2308 = S_EDGE1680L_TGX_005A2308;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2318
+// 0x005a2318
 char const * const s_edge1360l_tgx_005a2318 = S_EDGE1360L_TGX_005A2318;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2328
+// 0x005a2328
 char const * const s_edge1366l_tgx_005a2328 = S_EDGE1366L_TGX_005A2328;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2338
+// 0x005a2338
 char const * const s_edge2560l_tgx_005a2338 = S_EDGE2560L_TGX_005A2338;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2348
+// 0x005a2348
 char const * const s_edge1920l_tgx_005a2348 = S_EDGE1920L_TGX_005A2348;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2358
+// 0x005a2358
 char const * const s_edge1440l_tgx_005a2358 = S_EDGE1440L_TGX_005A2358;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2368
+// 0x005a2368
 char const * const s_edge1600l_tgx_005a2368 = S_EDGE1600L_TGX_005A2368;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2378
+// 0x005a2378
 char const * const s_edge1280l_tgx_005a2378 = S_EDGE1280L_TGX_005A2378;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2388
+// 0x005a2388
 char const * const s_edge1024l_tgx_005a2388 = S_EDGE1024L_TGX_005A2388;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2398
+// 0x005a2398
 char const * const s_edge1680r_tgx_005a2398 = S_EDGE1680R_TGX_005A2398;
 
-// STRING: STRONGHOLDCRUSADER 0x005a23a8
+// 0x005a23a8
 char const * const s_edge1360r_tgx_005a23a8 = S_EDGE1360R_TGX_005A23A8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a23b8
+// 0x005a23b8
 char const * const s_edge1366r_tgx_005a23b8 = S_EDGE1366R_TGX_005A23B8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a23c8
+// 0x005a23c8
 char const * const s_edge2560r_tgx_005a23c8 = S_EDGE2560R_TGX_005A23C8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a23d8
+// 0x005a23d8
 char const * const s_edge1920r_tgx_005a23d8 = S_EDGE1920R_TGX_005A23D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a23e8
+// 0x005a23e8
 char const * const s_edge1440r_tgx_005a23e8 = S_EDGE1440R_TGX_005A23E8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a23f8
+// 0x005a23f8
 char const * const s_edge1600r_tgx_005a23f8 = S_EDGE1600R_TGX_005A23F8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2408
+// 0x005a2408
 char const * const s_edge1280r_tgx_005a2408 = S_EDGE1280R_TGX_005A2408;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2418
+// 0x005a2418
 char const * const s_edge1024r_tgx_005a2418 = S_EDGE1024R_TGX_005A2418;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2428
+// 0x005a2428
 char const * const s_edge_military_1680r_tgx_005a2428 = S_EDGE_MILITARY_1680R_TGX_005A2428;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2440
+// 0x005a2440
 char const * const s_edge_military_1680l_tgx_005a2440 = S_EDGE_MILITARY_1680L_TGX_005A2440;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2458
+// 0x005a2458
 char const * const s_edge_military_1360r_tgx_005a2458 = S_EDGE_MILITARY_1360R_TGX_005A2458;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2470
+// 0x005a2470
 char const * const s_edge_military_1360l_tgx_005a2470 = S_EDGE_MILITARY_1360L_TGX_005A2470;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2488
+// 0x005a2488
 char const * const s_edge_military_1366r_tgx_005a2488 = S_EDGE_MILITARY_1366R_TGX_005A2488;
 
-// STRING: STRONGHOLDCRUSADER 0x005a24a0
+// 0x005a24a0
 char const * const s_edge_military_1366l_tgx_005a24a0 = S_EDGE_MILITARY_1366L_TGX_005A24A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a24b8
+// 0x005a24b8
 char const * const s_edge_military_2560r_tgx_005a24b8 = S_EDGE_MILITARY_2560R_TGX_005A24B8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a24d0
+// 0x005a24d0
 char const * const s_edge_military_2560l_tgx_005a24d0 = S_EDGE_MILITARY_2560L_TGX_005A24D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a24e8
+// 0x005a24e8
 char const * const s_edge_military_1920r_tgx_005a24e8 = S_EDGE_MILITARY_1920R_TGX_005A24E8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2500
+// 0x005a2500
 char const * const s_edge_military_1920l_tgx_005a2500 = S_EDGE_MILITARY_1920L_TGX_005A2500;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2518
+// 0x005a2518
 char const * const s_edge_military_1440r_tgx_005a2518 = S_EDGE_MILITARY_1440R_TGX_005A2518;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2530
+// 0x005a2530
 char const * const s_edge_military_1440l_tgx_005a2530 = S_EDGE_MILITARY_1440L_TGX_005A2530;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2548
+// 0x005a2548
 char const * const s_edge_military_1600r_tgx_005a2548 = S_EDGE_MILITARY_1600R_TGX_005A2548;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2560
+// 0x005a2560
 char const * const s_edge_military_1600l_tgx_005a2560 = S_EDGE_MILITARY_1600L_TGX_005A2560;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2578
+// 0x005a2578
 char const * const s_edge_military_1280r_tgx_005a2578 = S_EDGE_MILITARY_1280R_TGX_005A2578;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2590
+// 0x005a2590
 char const * const s_edge_military_1280l_tgx_005a2590 = S_EDGE_MILITARY_1280L_TGX_005A2590;
 
-// STRING: STRONGHOLDCRUSADER 0x005a25a8
+// 0x005a25a8
 char const * const s_edge_military_1024r_tgx_005a25a8 = S_EDGE_MILITARY_1024R_TGX_005A25A8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a25c0
+// 0x005a25c0
 char const * const s_edge_military_1024l_tgx_005a25c0 = S_EDGE_MILITARY_1024L_TGX_005A25C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a25d8
+// 0x005a25d8
 char const * const s_Path_linkage_005a25d8 = S_PATH_LINKAGE_005A25D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a25e8
+// 0x005a25e8
 char const * const s_Connect_005a25e8 = S_CONNECT_005A25E8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a25f0
+// 0x005a25f0
 char const * const SFX_CantPlaceThatThereMyLord = SFX_CANTPLACETHATTHEREMYLORD;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2608
+// 0x005a2608
 char const * const s_placement_warning20_wav_005a2608 = S_PLACEMENT_WARNING20_WAV_005A2608;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2620
+// 0x005a2620
 char const * const SFX_FarmsMustBePlacedOnOases = SFX_FARMSMUSTBEPLACEDONOASES;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2638
+// 0x005a2638
 char const * const s_placement_warning19_wav_005a2638 = S_PLACEMENT_WARNING19_WAV_005A2638;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2650
+// 0x005a2650
 char const * const s_placement_warning21_wav_005a2650 = S_PLACEMENT_WARNING21_WAV_005A2650;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2668
+// 0x005a2668
 char const * const SFX_NeedsToBePlacedAdjacentToGranary = SFX_NEEDSTOBEPLACEDADJACENTTOGRANARY;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2680
+// 0x005a2680
 char const * const SFX_PitchrigMustBeBuiltOnOilInTheMarsh = SFX_PITCHRIGMUSTBEBUILTONOILINTHEMARSH;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2698
+// 0x005a2698
 char const * const SFX_IronMineMustBeBuiltOnIronOre = SFX_IRONMINEMUSTBEBUILTONIRONORE;
 
-// STRING: STRONGHOLDCRUSADER 0x005a26b0
+// 0x005a26b0
 char const * const SFX_NeedsToBePlacedAdjacentToArmory = SFX_NEEDSTOBEPLACEDADJACENTTOARMORY;
 
-// STRING: STRONGHOLDCRUSADER 0x005a26c8
+// 0x005a26c8
 char const * const SFX_NeedsToBePlacedAdjacentToStockpile = SFX_NEEDSTOBEPLACEDADJACENTTOSTOCKPILE;
 
-// STRING: STRONGHOLDCRUSADER 0x005a26e0
+// 0x005a26e0
 char const * const SFX_APeasantIsOnHisWay = SFX_APEASANTISONHISWAY;
 
-// STRING: STRONGHOLDCRUSADER 0x005a26f4
+// 0x005a26f4
 char const * const SFX_NeedsTwoMorePeople = SFX_NEEDSTWOMOREPEOPLE;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2708
+// 0x005a2708
 char const * const SFX_NeedsOneMorePerson = SFX_NEEDSONEMOREPERSON;
 
-// STRING: STRONGHOLDCRUSADER 0x005a271c
+// 0x005a271c
 char const * const SFX_ThisBuildingHasNoLaborSire = SFX_THISBUILDINGHASNOLABORSIRE;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2730
+// 0x005a2730
 char const * const SFX_WorkHaltedMyLord = SFX_WORKHALTEDMYLORD;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2744
+// 0x005a2744
 char const * const SFX_NotEnoughGoldForTunneler = SFX_NOTENOUGHGOLDFORTUNNELER;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2758
+// 0x005a2758
 char const * const SFX_NotEnoughGoldForApprentices = SFX_NOTENOUGHGOLDFORAPPRENTICES;
 
-// STRING: STRONGHOLDCRUSADER 0x005a276c
+// 0x005a276c
 char const * const s_equals_005a276c = S_EQUALS_005A276C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2770
+// 0x005a2770
 char const * const s_percentage_005a2770 = S_PERCENTAGE_005A2770;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2774
+// 0x005a2774
 char const * const s_brace_open_005a2774 = S_BRACE_OPEN_005A2774;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2778
+// 0x005a2778
 char const * const s_brace_close_005a2778 = S_BRACE_CLOSE_005A2778;
 
-// STRING: STRONGHOLDCRUSADER 0x005a277c
+// 0x005a277c
 char const * const s_slash_forward_005a277c = S_SLASH_FORWARD_005A277C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2780
+// 0x005a2780
 char const * const s_perc_d_slash_perc_d_005a2780 = S_PERC_D_SLASH_PERC_D_005A2780;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2788
+// 0x005a2788
 char const * const SFX_TheRoundTable = SFX_THEROUNDTABLE;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2798
+// 0x005a2798
 char const * const SFX_ChooseYourAdversary = SFX_CHOOSEYOURADVERSARY;
 
-// STRING: STRONGHOLDCRUSADER 0x005a27a8
+// 0x005a27a8
 char const * const STR_AutoBackupMap = STR_AUTOBACKUPMAP;
 
-// STRING: STRONGHOLDCRUSADER 0x005a27bc
+// 0x005a27bc
 char const * const STR_Mission22Map = STR_MISSION22MAP;
 
-// STRING: STRONGHOLDCRUSADER 0x005a27cc
+// 0x005a27cc
 char const * const SFX_YourAllies = SFX_YOURALLIES;
 
-// STRING: STRONGHOLDCRUSADER 0x005a27dc
+// 0x005a27dc
 char const * const s_religion_sketch_tgx_005a27dc = S_RELIGION_SKETCH_TGX_005A27DC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a27f0
+// 0x005a27f0
 char const * const s_churchs_tgx_005a27f0 = S_CHURCHS_TGX_005A27F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a27fc
+// 0x005a27fc
 char const * const s_armys26_tgx_005a27fc = S_ARMYS26_TGX_005A27FC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2808
+// 0x005a2808
 char const * const s_armys25_tgx_005a2808 = S_ARMYS25_TGX_005A2808;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2814
+// 0x005a2814
 char const * const s_armys24_tgx_005a2814 = S_ARMYS24_TGX_005A2814;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2820
+// 0x005a2820
 char const * const s_armys23_tgx_005a2820 = S_ARMYS23_TGX_005A2820;
 
-// STRING: STRONGHOLDCRUSADER 0x005a282c
+// 0x005a282c
 char const * const s_armys22_tgx_005a282c = S_ARMYS22_TGX_005A282C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2838
+// 0x005a2838
 char const * const s_armys21_tgx_005a2838 = S_ARMYS21_TGX_005A2838;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2844
+// 0x005a2844
 char const * const s_armys20_tgx_005a2844 = S_ARMYS20_TGX_005A2844;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2850
+// 0x005a2850
 char const * const s_armys19_tgx_005a2850 = S_ARMYS19_TGX_005A2850;
 
-// STRING: STRONGHOLDCRUSADER 0x005a285c
+// 0x005a285c
 char const * const s_armys18_tgx_005a285c = S_ARMYS18_TGX_005A285C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2868
+// 0x005a2868
 char const * const s_armys17_tgx_005a2868 = S_ARMYS17_TGX_005A2868;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2874
+// 0x005a2874
 char const * const s_armys16_tgx_005a2874 = S_ARMYS16_TGX_005A2874;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2880
+// 0x005a2880
 char const * const s_armys15_tgx_005a2880 = S_ARMYS15_TGX_005A2880;
 
-// STRING: STRONGHOLDCRUSADER 0x005a288c
+// 0x005a288c
 char const * const s_armys14_tgx_005a288c = S_ARMYS14_TGX_005A288C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2898
+// 0x005a2898
 char const * const s_armys13_tgx_005a2898 = S_ARMYS13_TGX_005A2898;
 
-// STRING: STRONGHOLDCRUSADER 0x005a28a4
+// 0x005a28a4
 char const * const s_armys12_tgx_005a28a4 = S_ARMYS12_TGX_005A28A4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a28b0
+// 0x005a28b0
 char const * const s_armys11_tgx_005a28b0 = S_ARMYS11_TGX_005A28B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a28bc
+// 0x005a28bc
 char const * const s_armys10_tgx_005a28bc = S_ARMYS10_TGX_005A28BC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a28c8
+// 0x005a28c8
 char const * const s_armys9_tgx_005a28c8 = S_ARMYS9_TGX_005A28C8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a28d4
+// 0x005a28d4
 char const * const s_armys8_tgx_005a28d4 = S_ARMYS8_TGX_005A28D4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a28e0
+// 0x005a28e0
 char const * const s_armys7_tgx_005a28e0 = S_ARMYS7_TGX_005A28E0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a28ec
+// 0x005a28ec
 char const * const s_armys6_tgx_005a28ec = S_ARMYS6_TGX_005A28EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a28f8
+// 0x005a28f8
 char const * const s_armys5_tgx_005a28f8 = S_ARMYS5_TGX_005A28F8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2904
+// 0x005a2904
 char const * const s_armys4_tgx_005a2904 = S_ARMYS4_TGX_005A2904;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2910
+// 0x005a2910
 char const * const s_armys3_tgx_005a2910 = S_ARMYS3_TGX_005A2910;
 
-// STRING: STRONGHOLDCRUSADER 0x005a291c
+// 0x005a291c
 char const * const s_armys2_tgx_005a291c = S_ARMYS2_TGX_005A291C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2928
+// 0x005a2928
 char const * const s_armys1_tgx_005a2928 = S_ARMYS1_TGX_005A2928;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2934
+// 0x005a2934
 char const * const s_armyrbd_tgx_005a2934 = S_ARMYRBD_TGX_005A2934;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2940
+// 0x005a2940
 char const * const s_armylbd_tgx_005a2940 = S_ARMYLBD_TGX_005A2940;
 
-// STRING: STRONGHOLDCRUSADER 0x005a294c
+// 0x005a294c
 char const * const s_armybar_tgx_005a294c = S_ARMYBAR_TGX_005A294C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2958
+// 0x005a2958
 char const * const s_armysbar_tgx_005a2958 = S_ARMYSBAR_TGX_005A2958;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2968
+// 0x005a2968
 char const * const s_food_sketch_tgx_005a2968 = S_FOOD_SKETCH_TGX_005A2968;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2978
+// 0x005a2978
 char const * const s_population_sketch_tgx_005a2978 = S_POPULATION_SKETCH_TGX_005A2978;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2990
+// 0x005a2990
 char const * const s_popgraph_tgx_005a2990 = S_POPGRAPH_TGX_005A2990;
 
-// STRING: STRONGHOLDCRUSADER 0x005a29a0
+// 0x005a29a0
 char const * const SFX_PeopleWorshipYouAsKindestMan = SFX_PEOPLEWORSHIPYOUASKINDESTMAN;
 
-// STRING: STRONGHOLDCRUSADER 0x005a29b4
+// 0x005a29b4
 char const * const SFX_PeopleThinkYouAreReallyNice = SFX_PEOPLETHINKYOUAREREALLYNICE;
 
-// STRING: STRONGHOLDCRUSADER 0x005a29c8
+// 0x005a29c8
 char const * const SFX_PeopleThinkYouAreFantastic = SFX_PEOPLETHINKYOUAREFANTASTIC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a29dc
+// 0x005a29dc
 char const * const SFX_PeopleAreNotAfraidOfYouAtAll = SFX_PEOPLEARENOTAFRAIDOFYOUATALL;
 
-// STRING: STRONGHOLDCRUSADER 0x005a29f0
+// 0x005a29f0
 char const * const SFX_PeopleTrustYouMyLord = SFX_PEOPLETRUSTYOUMYLORD;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2a04
+// 0x005a2a04
 char const * const SFX_PeopleAreALittleAfraid = SFX_PEOPLEAREALITTLEAFRAID;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2a18
+// 0x005a2a18
 char const * const SFX_PeopleAreFrightened = SFX_PEOPLEAREFRIGHTENED;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2a2c
+// 0x005a2a2c
 char const * const SFX_PeopleAreVeryScared = SFX_PEOPLEAREVERYSCARED;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2a40
+// 0x005a2a40
 char const * const SFX_PeopleTrembleAtYourName = SFX_PEOPLETREMBLEATYOURNAME;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2a54
+// 0x005a2a54
 char const * const SFX_CruellestTyrantInTheKingdom = SFX_CRUELLESTTYRANTINTHEKINGDOM;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2a68
+// 0x005a2a68
 char const * const s_fearfneg_tgx_005a2a68 = S_FEARFNEG_TGX_005A2A68;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2a78
+// 0x005a2a78
 char const * const s_fearfpos_tgx_005a2a78 = S_FEARFPOS_TGX_005A2A78;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2a88
+// 0x005a2a88
 char const * const s_popularity_sketch_tgx_005a2a88 = S_POPULARITY_SKETCH_TGX_005A2A88;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2aa0
+// 0x005a2aa0
 char const * const s_shield2_tgx_005a2aa0 = S_SHIELD2_TGX_005A2AA0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2aac
+// 0x005a2aac
 char const * const s_shield1_tgx_005a2aac = S_SHIELD1_TGX_005A2AAC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2ab8
+// 0x005a2ab8
 char const * const s_wedding_sketch_tgx_005a2ab8 = S_WEDDING_SKETCH_TGX_005A2AB8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2acc
+// 0x005a2acc
 char const * const s_food_warning5_wav_005a2acc = S_FOOD_WARNING5_WAV_005A2ACC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2ae0
+// 0x005a2ae0
 char const * const s_aengineer_pouroil9_wav_005a2ae0 = S_AENGINEER_POUROIL9_WAV_005A2AE0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2af8
+// 0x005a2af8
 char const * const s_engineer_pouroil9_wav_005a2af8 = S_ENGINEER_POUROIL9_WAV_005A2AF8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2b10
+// 0x005a2b10
 char const * const s_aengineer_pouroil8_wav_005a2b10 = S_AENGINEER_POUROIL8_WAV_005A2B10;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2b28
+// 0x005a2b28
 char const * const s_engineer_pouroil8_wav_005a2b28 = S_ENGINEER_POUROIL8_WAV_005A2B28;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2b40
+// 0x005a2b40
 char const * const s_aengineer_pouroil7_wav_005a2b40 = S_AENGINEER_POUROIL7_WAV_005A2B40;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2b58
+// 0x005a2b58
 char const * const s_engineer_pouroil7_wav_005a2b58 = S_ENGINEER_POUROIL7_WAV_005A2B58;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2b70
+// 0x005a2b70
 char const * const s_aengineer_pouroil1_wav_005a2b70 = S_AENGINEER_POUROIL1_WAV_005A2B70;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2b88
+// 0x005a2b88
 char const * const s_engineer_pouroil1_wav_005a2b88 = S_ENGINEER_POUROIL1_WAV_005A2B88;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2ba0
+// 0x005a2ba0
 char const * const s_aengineer_launchcow6_wav_005a2ba0 = S_AENGINEER_LAUNCHCOW6_WAV_005A2BA0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2bbc
+// 0x005a2bbc
 char const * const s_engineer_launchcow6_wav_005a2bbc = S_ENGINEER_LAUNCHCOW6_WAV_005A2BBC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2bd4
+// 0x005a2bd4
 char const * const s_aengineer_launchcow5_wav_005a2bd4 = S_AENGINEER_LAUNCHCOW5_WAV_005A2BD4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2bf0
+// 0x005a2bf0
 char const * const s_engineer_launchcow5_wav_005a2bf0 = S_ENGINEER_LAUNCHCOW5_WAV_005A2BF0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2c08
+// 0x005a2c08
 char const * const s_aengineer_launchcow4_wav_005a2c08 = S_AENGINEER_LAUNCHCOW4_WAV_005A2C08;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2c24
+// 0x005a2c24
 char const * const s_engineer_launchcow4_wav_005a2c24 = S_ENGINEER_LAUNCHCOW4_WAV_005A2C24;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2c3c
+// 0x005a2c3c
 char const * const s_aengineer_launchcow3_wav_005a2c3c = S_AENGINEER_LAUNCHCOW3_WAV_005A2C3C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2c58
+// 0x005a2c58
 char const * const s_engineer_launchcow3_wav_005a2c58 = S_ENGINEER_LAUNCHCOW3_WAV_005A2C58;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2c70
+// 0x005a2c70
 char const * const s_aengineer_launchcow2_wav_005a2c70 = S_AENGINEER_LAUNCHCOW2_WAV_005A2C70;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2c8c
+// 0x005a2c8c
 char const * const s_engineer_launchcow2_wav_005a2c8c = S_ENGINEER_LAUNCHCOW2_WAV_005A2C8C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2ca4
+// 0x005a2ca4
 char const * const s_aengineer_launchcow1_wav_005a2ca4 = S_AENGINEER_LAUNCHCOW1_WAV_005A2CA4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2cc0
+// 0x005a2cc0
 char const * const s_engineer_launchcow1_wav_005a2cc0 = S_ENGINEER_LAUNCHCOW1_WAV_005A2CC0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2cd8
+// 0x005a2cd8
 char const * const s_aengineer_manoil1_wav_005a2cd8 = S_AENGINEER_MANOIL1_WAV_005A2CD8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2cf0
+// 0x005a2cf0
 char const * const s_engineer_manoil1_wav_005a2cf0 = S_ENGINEER_MANOIL1_WAV_005A2CF0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2d08
+// 0x005a2d08
 char const * const s_aengineer_mansmelter1_wav_005a2d08 = S_AENGINEER_MANSMELTER1_WAV_005A2D08;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2d24
+// 0x005a2d24
 char const * const s_engineer_mansmelter1_wav_005a2d24 = S_ENGINEER_MANSMELTER1_WAV_005A2D24;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2d40
+// 0x005a2d40
 char const * const s_aengineer_pouroil6_wav_005a2d40 = S_AENGINEER_POUROIL6_WAV_005A2D40;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2d58
+// 0x005a2d58
 char const * const s_engineer_pouroil6_wav_005a2d58 = S_ENGINEER_POUROIL6_WAV_005A2D58;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2d70
+// 0x005a2d70
 char const * const s_aengineer_pouroil5_wav_005a2d70 = S_AENGINEER_POUROIL5_WAV_005A2D70;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2d88
+// 0x005a2d88
 char const * const s_engineer_pouroil5_wav_005a2d88 = S_ENGINEER_POUROIL5_WAV_005A2D88;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2da0
+// 0x005a2da0
 char const * const s_aengineer_pouroil4_wav_005a2da0 = S_AENGINEER_POUROIL4_WAV_005A2DA0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2db8
+// 0x005a2db8
 char const * const s_engineer_pouroil4_wav_005a2db8 = S_ENGINEER_POUROIL4_WAV_005A2DB8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2dd0
+// 0x005a2dd0
 char const * const s_aengineer_pouroil3_wav_005a2dd0 = S_AENGINEER_POUROIL3_WAV_005A2DD0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2de8
+// 0x005a2de8
 char const * const s_engineer_pouroil3_wav_005a2de8 = S_ENGINEER_POUROIL3_WAV_005A2DE8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2e00
+// 0x005a2e00
 char const * const s_aengineer_pouroil2_wav_005a2e00 = S_AENGINEER_POUROIL2_WAV_005A2E00;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2e18
+// 0x005a2e18
 char const * const s_engineer_pouroil2_wav_005a2e18 = S_ENGINEER_POUROIL2_WAV_005A2E18;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2e30
+// 0x005a2e30
 char const * const s_aengineer_exit1_wav_005a2e30 = S_AENGINEER_EXIT1_WAV_005A2E30;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2e44
+// 0x005a2e44
 char const * const s_engineer_exit1_wav_005a2e44 = S_ENGINEER_EXIT1_WAV_005A2E44;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2e58
+// 0x005a2e58
 char const * const s_aengineer_build1_wav_005a2e58 = S_AENGINEER_BUILD1_WAV_005A2E58;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2e70
+// 0x005a2e70
 char const * const s_engineer_build1_wav_005a2e70 = S_ENGINEER_BUILD1_WAV_005A2E70;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2e84
+// 0x005a2e84
 char const * const s_aengineer_manequip1_wav_005a2e84 = S_AENGINEER_MANEQUIP1_WAV_005A2E84;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2e9c
+// 0x005a2e9c
 char const * const s_engineer_manequip1_wav_005a2e9c = S_ENGINEER_MANEQUIP1_WAV_005A2E9C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2eb4
+// 0x005a2eb4
 char const * const s_aengineer_ram1_wav_005a2eb4 = S_AENGINEER_RAM1_WAV_005A2EB4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2ec8
+// 0x005a2ec8
 char const * const s_engineer_ram1_wav_005a2ec8 = S_ENGINEER_RAM1_WAV_005A2EC8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2edc
+// 0x005a2edc
 char const * const s_aengineer_balis1_wav_005a2edc = S_AENGINEER_BALIS1_WAV_005A2EDC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2ef4
+// 0x005a2ef4
 char const * const s_engineer_balis1_wav_005a2ef4 = S_ENGINEER_BALIS1_WAV_005A2EF4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2f08
+// 0x005a2f08
 char const * const s_aengineer_treb1_wav_005a2f08 = S_AENGINEER_TREB1_WAV_005A2F08;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2f1c
+// 0x005a2f1c
 char const * const s_engineer_treb1_wav_005a2f1c = S_ENGINEER_TREB1_WAV_005A2F1C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2f30
+// 0x005a2f30
 char const * const s_aengineer_catplt1_wav_005a2f30 = S_AENGINEER_CATPLT1_WAV_005A2F30;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2f48
+// 0x005a2f48
 char const * const s_engineer_catplt1_wav_005a2f48 = S_ENGINEER_CATPLT1_WAV_005A2F48;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2f60
+// 0x005a2f60
 char const * const s_aengineer_mang1_wav_005a2f60 = S_AENGINEER_MANG1_WAV_005A2F60;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2f74
+// 0x005a2f74
 char const * const s_engineer_mang1_wav_005a2f74 = S_ENGINEER_MANG1_WAV_005A2F74;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2f88
+// 0x005a2f88
 char const * const s_aengineer_equip4_wav_005a2f88 = S_AENGINEER_EQUIP4_WAV_005A2F88;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2fa0
+// 0x005a2fa0
 char const * const s_engineer_equip4_wav_005a2fa0 = S_ENGINEER_EQUIP4_WAV_005A2FA0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2fb4
+// 0x005a2fb4
 char const * const s_aengineer_equip3_wav_005a2fb4 = S_AENGINEER_EQUIP3_WAV_005A2FB4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2fcc
+// 0x005a2fcc
 char const * const s_engineer_equip3_wav_005a2fcc = S_ENGINEER_EQUIP3_WAV_005A2FCC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2fe0
+// 0x005a2fe0
 char const * const s_aengineer_equip2_wav_005a2fe0 = S_AENGINEER_EQUIP2_WAV_005A2FE0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a2ff8
+// 0x005a2ff8
 char const * const s_engineer_equip2_wav_005a2ff8 = S_ENGINEER_EQUIP2_WAV_005A2FF8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a300c
+// 0x005a300c
 char const * const s_aengineer_equip1_wav_005a300c = S_AENGINEER_EQUIP1_WAV_005A300C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3024
+// 0x005a3024
 char const * const s_engineer_equip1_wav_005a3024 = S_ENGINEER_EQUIP1_WAV_005A3024;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3038
+// 0x005a3038
 char const * const s_aengineer_mshield_wav_005a3038 = S_AENGINEER_MSHIELD_WAV_005A3038;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3050
+// 0x005a3050
 char const * const s_engineer_mshield_wav_005a3050 = S_ENGINEER_MSHIELD_WAV_005A3050;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3068
+// 0x005a3068
 char const * const s_aengineer_mram_wav_005a3068 = S_AENGINEER_MRAM_WAV_005A3068;
 
-// STRING: STRONGHOLDCRUSADER 0x005a307c
+// 0x005a307c
 char const * const s_engineer_mram_wav_005a307c = S_ENGINEER_MRAM_WAV_005A307C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3090
+// 0x005a3090
 char const * const s_aengineer_mtower_wav_005a3090 = S_AENGINEER_MTOWER_WAV_005A3090;
 
-// STRING: STRONGHOLDCRUSADER 0x005a30a8
+// 0x005a30a8
 char const * const s_engineer_mtower_wav_005a30a8 = S_ENGINEER_MTOWER_WAV_005A30A8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a30bc
+// 0x005a30bc
 char const * const s_aengineer_mcatplt_wav_005a30bc = S_AENGINEER_MCATPLT_WAV_005A30BC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a30d4
+// 0x005a30d4
 char const * const s_engineer_mcatplt_wav_005a30d4 = S_ENGINEER_MCATPLT_WAV_005A30D4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a30ec
+// 0x005a30ec
 char const * const s_aengineer_sbalis_wav_005a30ec = S_AENGINEER_SBALIS_WAV_005A30EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3104
+// 0x005a3104
 char const * const s_engineer_sbalis_wav_005a3104 = S_ENGINEER_SBALIS_WAV_005A3104;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3118
+// 0x005a3118
 char const * const s_aengineer_sshield_wav_005a3118 = S_AENGINEER_SSHIELD_WAV_005A3118;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3130
+// 0x005a3130
 char const * const s_engineer_sshield_wav_005a3130 = S_ENGINEER_SSHIELD_WAV_005A3130;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3148
+// 0x005a3148
 char const * const s_aengineer_sram_wav_005a3148 = S_AENGINEER_SRAM_WAV_005A3148;
 
-// STRING: STRONGHOLDCRUSADER 0x005a315c
+// 0x005a315c
 char const * const s_engineer_sram_wav_005a315c = S_ENGINEER_SRAM_WAV_005A315C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3170
+// 0x005a3170
 char const * const s_aengineer_stower_wav_005a3170 = S_AENGINEER_STOWER_WAV_005A3170;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3188
+// 0x005a3188
 char const * const s_engineer_stower_wav_005a3188 = S_ENGINEER_STOWER_WAV_005A3188;
 
-// STRING: STRONGHOLDCRUSADER 0x005a319c
+// 0x005a319c
 char const * const s_aengineer_streb_wav_005a319c = S_AENGINEER_STREB_WAV_005A319C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a31b0
+// 0x005a31b0
 char const * const s_engineer_streb_wav_005a31b0 = S_ENGINEER_STREB_WAV_005A31B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a31c4
+// 0x005a31c4
 char const * const s_aengineer_scatplt_wav_005a31c4 = S_AENGINEER_SCATPLT_WAV_005A31C4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a31dc
+// 0x005a31dc
 char const * const s_engineer_scatplt_wav_005a31dc = S_ENGINEER_SCATPLT_WAV_005A31DC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a31f4
+// 0x005a31f4
 char const * const s_aengineer_sman_wav_005a31f4 = S_AENGINEER_SMAN_WAV_005A31F4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3208
+// 0x005a3208
 char const * const SFX_MangonelReadySire = SFX_MANGONELREADYSIRE;
 
-// STRING: STRONGHOLDCRUSADER 0x005a321c
+// 0x005a321c
 char const * const s_ahorse_disband1_wav_005a321c = S_AHORSE_DISBAND1_WAV_005A321C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3230
+// 0x005a3230
 char const * const s_asword_disband1_wav_005a3230 = S_ASWORD_DISBAND1_WAV_005A3230;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3244
+// 0x005a3244
 char const * const s_agrenadier_disband1_wav_005a3244 = S_AGRENADIER_DISBAND1_WAV_005A3244;
 
-// STRING: STRONGHOLDCRUSADER 0x005a325c
+// 0x005a325c
 char const * const s_aslave_disband1_wav_005a325c = S_ASLAVE_DISBAND1_WAV_005A325C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3270
+// 0x005a3270
 char const * const s_aassasin_disband1_wav_005a3270 = S_AASSASIN_DISBAND1_WAV_005A3270;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3288
+// 0x005a3288
 char const * const s_asling_disband1_wav_005a3288 = S_ASLING_DISBAND1_WAV_005A3288;
 
-// STRING: STRONGHOLDCRUSADER 0x005a329c
+// 0x005a329c
 char const * const s_abow_disband1_wav_005a329c = S_ABOW_DISBAND1_WAV_005A329C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a32b0
+// 0x005a32b0
 char const * const s_engineer_disband1_wav_005a32b0 = S_ENGINEER_DISBAND1_WAV_005A32B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a32c8
+// 0x005a32c8
 char const * const s_ladder_disband1_wav_005a32c8 = S_LADDER_DISBAND1_WAV_005A32C8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a32dc
+// 0x005a32dc
 char const * const s_tunnel_disband1_wav_005a32dc = S_TUNNEL_DISBAND1_WAV_005A32DC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a32f0
+// 0x005a32f0
 char const * const s_monk_disband1_wav_005a32f0 = S_MONK_DISBAND1_WAV_005A32F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3304
+// 0x005a3304
 char const * const s_knight_disband1_wav_005a3304 = S_KNIGHT_DISBAND1_WAV_005A3304;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3318
+// 0x005a3318
 char const * const s_sword_disband1_wav_005a3318 = S_SWORD_DISBAND1_WAV_005A3318;
 
-// STRING: STRONGHOLDCRUSADER 0x005a332c
+// 0x005a332c
 char const * const s_pike_disband1_wav_005a332c = S_PIKE_DISBAND1_WAV_005A332C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3340
+// 0x005a3340
 char const * const s_mace_disband1_wav_005a3340 = S_MACE_DISBAND1_WAV_005A3340;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3354
+// 0x005a3354
 char const * const s_spear_disband1_wav_005a3354 = S_SPEAR_DISBAND1_WAV_005A3354;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3368
+// 0x005a3368
 char const * const s_cross_disband1_wav_005a3368 = S_CROSS_DISBAND1_WAV_005A3368;
 
-// STRING: STRONGHOLDCRUSADER 0x005a337c
+// 0x005a337c
 char const * const s_arch_disband1_wav_005a337c = S_ARCH_DISBAND1_WAV_005A337C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3390
+// 0x005a3390
 char const * const s_tunnel_digtunnel2_wav_005a3390 = S_TUNNEL_DIGTUNNEL2_WAV_005A3390;
 
-// STRING: STRONGHOLDCRUSADER 0x005a33a8
+// 0x005a33a8
 char const * const s_tunnel_digtunnel1_wav_005a33a8 = S_TUNNEL_DIGTUNNEL1_WAV_005A33A8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a33c0
+// 0x005a33c0
 char const * const SFX_LaddermanGetThoseLaddersUp = SFX_LADDERMANGETTHOSELADDERSUP;
 
-// STRING: STRONGHOLDCRUSADER 0x005a33d8
+// 0x005a33d8
 char const * const SFX_LaddermanLaddersReady = SFX_LADDERMANLADDERSREADY;
 
-// STRING: STRONGHOLDCRUSADER 0x005a33f0
+// 0x005a33f0
 char const * const SFX_LaddermanToTheWalls = SFX_LADDERMANTOTHEWALLS;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3408
+// 0x005a3408
 char const * const s_spear_ladder3_wav_005a3408 = S_SPEAR_LADDER3_WAV_005A3408;
 
-// STRING: STRONGHOLDCRUSADER 0x005a341c
+// 0x005a341c
 char const * const s_spear_ladder2_wav_005a341c = S_SPEAR_LADDER2_WAV_005A341C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3430
+// 0x005a3430
 char const * const s_spear_ladder1_wav_005a3430 = S_SPEAR_LADDER1_WAV_005A3430;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3444
+// 0x005a3444
 char const * const s_abow_atk_eqp1_wav_005a3444 = S_ABOW_ATK_EQP1_WAV_005A3444;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3458
+// 0x005a3458
 char const * const s_arch_atk_eqp1_wav_005a3458 = S_ARCH_ATK_EQP1_WAV_005A3458;
 
-// STRING: STRONGHOLDCRUSADER 0x005a346c
+// 0x005a346c
 char const * const s_abow_light_pitch1_wav_005a346c = S_ABOW_LIGHT_PITCH1_WAV_005A346C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3484
+// 0x005a3484
 char const * const s_arch_light_pitch1_wav_005a3484 = S_ARCH_LIGHT_PITCH1_WAV_005A3484;
 
-// STRING: STRONGHOLDCRUSADER 0x005a349c
+// 0x005a349c
 char const * const s_asling_atknt_wav_005a349c = S_ASLING_ATKNT_WAV_005A349C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a34b0
+// 0x005a34b0
 char const * const s_abow_atknt_wav_005a34b0 = S_ABOW_ATKNT_WAV_005A34B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a34c0
+// 0x005a34c0
 char const * const s_cross_atknt_wav_005a34c0 = S_CROSS_ATKNT_WAV_005A34C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a34d0
+// 0x005a34d0
 char const * const s_arch_atknt_wav_005a34d0 = S_ARCH_ATKNT_WAV_005A34D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a34e0
+// 0x005a34e0
 char const * const s_ahorse_atka1_wav_005a34e0 = S_AHORSE_ATKA1_WAV_005A34E0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a34f4
+// 0x005a34f4
 char const * const s_asling_atka1_wav_005a34f4 = S_ASLING_ATKA1_WAV_005A34F4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3508
+// 0x005a3508
 char const * const s_abow_atka1_wav_005a3508 = S_ABOW_ATKA1_WAV_005A3508;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3518
+// 0x005a3518
 char const * const s_cross_atka1_wav_005a3518 = S_CROSS_ATKA1_WAV_005A3518;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3528
+// 0x005a3528
 char const * const s_arch_atka1_wav_005a3528 = S_ARCH_ATKA1_WAV_005A3528;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3538
+// 0x005a3538
 char const * const s_ahorse_atkm4_wav_005a3538 = S_AHORSE_ATKM4_WAV_005A3538;
 
-// STRING: STRONGHOLDCRUSADER 0x005a354c
+// 0x005a354c
 char const * const s_agrenadier_atkm4_wav_005a354c = S_AGRENADIER_ATKM4_WAV_005A354C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3564
+// 0x005a3564
 char const * const s_asling_atkm4_wav_005a3564 = S_ASLING_ATKM4_WAV_005A3564;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3578
+// 0x005a3578
 char const * const s_abow_atkm4_wav_005a3578 = S_ABOW_ATKM4_WAV_005A3578;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3588
+// 0x005a3588
 char const * const s_cross_atkm4_wav_005a3588 = S_CROSS_ATKM4_WAV_005A3588;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3598
+// 0x005a3598
 char const * const s_arch_atkm4_wav_005a3598 = S_ARCH_ATKM4_WAV_005A3598;
 
-// STRING: STRONGHOLDCRUSADER 0x005a35a8
+// 0x005a35a8
 char const * const s_ahorse_atkm3_wav_005a35a8 = S_AHORSE_ATKM3_WAV_005A35A8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a35bc
+// 0x005a35bc
 char const * const s_agrenadier_atkm3_wav_005a35bc = S_AGRENADIER_ATKM3_WAV_005A35BC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a35d4
+// 0x005a35d4
 char const * const s_asling_atkm3_wav_005a35d4 = S_ASLING_ATKM3_WAV_005A35D4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a35e8
+// 0x005a35e8
 char const * const s_abow_atkm3_wav_005a35e8 = S_ABOW_ATKM3_WAV_005A35E8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a35f8
+// 0x005a35f8
 char const * const s_cross_atkm3_wav_005a35f8 = S_CROSS_ATKM3_WAV_005A35F8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3608
+// 0x005a3608
 char const * const s_arch_atkm3_wav_005a3608 = S_ARCH_ATKM3_WAV_005A3608;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3618
+// 0x005a3618
 char const * const s_ahorse_atkm2_wav_005a3618 = S_AHORSE_ATKM2_WAV_005A3618;
 
-// STRING: STRONGHOLDCRUSADER 0x005a362c
+// 0x005a362c
 char const * const s_agrenadier_atkm2_wav_005a362c = S_AGRENADIER_ATKM2_WAV_005A362C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3644
+// 0x005a3644
 char const * const s_asling_atkm2_wav_005a3644 = S_ASLING_ATKM2_WAV_005A3644;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3658
+// 0x005a3658
 char const * const s_abow_atkm2_wav_005a3658 = S_ABOW_ATKM2_WAV_005A3658;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3668
+// 0x005a3668
 char const * const s_cross_atkm2_wav_005a3668 = S_CROSS_ATKM2_WAV_005A3668;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3678
+// 0x005a3678
 char const * const s_arch_atkm2_wav_005a3678 = S_ARCH_ATKM2_WAV_005A3678;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3688
+// 0x005a3688
 char const * const s_ahorse_atkm1_wav_005a3688 = S_AHORSE_ATKM1_WAV_005A3688;
 
-// STRING: STRONGHOLDCRUSADER 0x005a369c
+// 0x005a369c
 char const * const s_agrenadier_atkm1_wav_005a369c = S_AGRENADIER_ATKM1_WAV_005A369C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a36b4
+// 0x005a36b4
 char const * const s_asling_atkm1_wav_005a36b4 = S_ASLING_ATKM1_WAV_005A36B4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a36c8
+// 0x005a36c8
 char const * const s_abow_atkm1_wav_005a36c8 = S_ABOW_ATKM1_WAV_005A36C8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a36d8
+// 0x005a36d8
 char const * const s_cross_atkm1_wav_005a36d8 = S_CROSS_ATKM1_WAV_005A36D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a36e8
+// 0x005a36e8
 char const * const s_arch_atkm1_wav_005a36e8 = S_ARCH_ATKM1_WAV_005A36E8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a36f8
+// 0x005a36f8
 char const * const s_asword_atkw4_wav_005a36f8 = S_ASWORD_ATKW4_WAV_005A36F8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a370c
+// 0x005a370c
 char const * const s_aassasin_atkw4_wav_005a370c = S_AASSASIN_ATKW4_WAV_005A370C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3720
+// 0x005a3720
 char const * const s_engineer_atkw4_wav_005a3720 = S_ENGINEER_ATKW4_WAV_005A3720;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3734
+// 0x005a3734
 char const * const s_ladder_atkw4_wav_005a3734 = S_LADDER_ATKW4_WAV_005A3734;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3748
+// 0x005a3748
 char const * const s_tunnel_atkw4_wav_005a3748 = S_TUNNEL_ATKW4_WAV_005A3748;
 
-// STRING: STRONGHOLDCRUSADER 0x005a375c
+// 0x005a375c
 char const * const s_monk_atkw4_wav_005a375c = S_MONK_ATKW4_WAV_005A375C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a376c
+// 0x005a376c
 char const * const s_knight_atkw4_wav_005a376c = S_KNIGHT_ATKW4_WAV_005A376C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3780
+// 0x005a3780
 char const * const s_sword_atkw4_wav_005a3780 = S_SWORD_ATKW4_WAV_005A3780;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3790
+// 0x005a3790
 char const * const s_pike_atkw4_wav_005a3790 = S_PIKE_ATKW4_WAV_005A3790;
 
-// STRING: STRONGHOLDCRUSADER 0x005a37a0
+// 0x005a37a0
 char const * const s_mace_atkw4_wav_005a37a0 = S_MACE_ATKW4_WAV_005A37A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a37b0
+// 0x005a37b0
 char const * const s_spear_atkw4_wav_005a37b0 = S_SPEAR_ATKW4_WAV_005A37B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a37c0
+// 0x005a37c0
 char const * const s_asword_atkw3_wav_005a37c0 = S_ASWORD_ATKW3_WAV_005A37C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a37d4
+// 0x005a37d4
 char const * const s_aassasin_atkw3_wav_005a37d4 = S_AASSASIN_ATKW3_WAV_005A37D4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a37e8
+// 0x005a37e8
 char const * const s_engineer_atkw3_wav_005a37e8 = S_ENGINEER_ATKW3_WAV_005A37E8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a37fc
+// 0x005a37fc
 char const * const s_ladder_atkw3_wav_005a37fc = S_LADDER_ATKW3_WAV_005A37FC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3810
+// 0x005a3810
 char const * const s_tunnel_atkw3_wav_005a3810 = S_TUNNEL_ATKW3_WAV_005A3810;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3824
+// 0x005a3824
 char const * const s_monk_atkw3_wav_005a3824 = S_MONK_ATKW3_WAV_005A3824;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3834
+// 0x005a3834
 char const * const s_knight_atkw3_wav_005a3834 = S_KNIGHT_ATKW3_WAV_005A3834;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3848
+// 0x005a3848
 char const * const s_sword_atkw3_wav_005a3848 = S_SWORD_ATKW3_WAV_005A3848;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3858
+// 0x005a3858
 char const * const s_pike_atkw3_wav_005a3858 = S_PIKE_ATKW3_WAV_005A3858;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3868
+// 0x005a3868
 char const * const s_mace_atkw3_wav_005a3868 = S_MACE_ATKW3_WAV_005A3868;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3878
+// 0x005a3878
 char const * const s_spear_atkw3_wav_005a3878 = S_SPEAR_ATKW3_WAV_005A3878;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3888
+// 0x005a3888
 char const * const s_asword_atkw2_wav_005a3888 = S_ASWORD_ATKW2_WAV_005A3888;
 
-// STRING: STRONGHOLDCRUSADER 0x005a389c
+// 0x005a389c
 char const * const s_aassasin_atkw2_wav_005a389c = S_AASSASIN_ATKW2_WAV_005A389C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a38b0
+// 0x005a38b0
 char const * const s_engineer_atkw2_wav_005a38b0 = S_ENGINEER_ATKW2_WAV_005A38B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a38c4
+// 0x005a38c4
 char const * const s_ladder_atkw2_wav_005a38c4 = S_LADDER_ATKW2_WAV_005A38C4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a38d8
+// 0x005a38d8
 char const * const s_tunnel_atkw2_wav_005a38d8 = S_TUNNEL_ATKW2_WAV_005A38D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a38ec
+// 0x005a38ec
 char const * const s_monk_atkw2_wav_005a38ec = S_MONK_ATKW2_WAV_005A38EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a38fc
+// 0x005a38fc
 char const * const s_knight_atkw2_wav_005a38fc = S_KNIGHT_ATKW2_WAV_005A38FC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3910
+// 0x005a3910
 char const * const s_sword_atkw2_wav_005a3910 = S_SWORD_ATKW2_WAV_005A3910;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3920
+// 0x005a3920
 char const * const s_pike_atkw2_wav_005a3920 = S_PIKE_ATKW2_WAV_005A3920;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3930
+// 0x005a3930
 char const * const s_mace_atkw2_wav_005a3930 = S_MACE_ATKW2_WAV_005A3930;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3940
+// 0x005a3940
 char const * const s_spear_atkw2_wav_005a3940 = S_SPEAR_ATKW2_WAV_005A3940;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3950
+// 0x005a3950
 char const * const s_asword_atkw1_wav_005a3950 = S_ASWORD_ATKW1_WAV_005A3950;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3964
+// 0x005a3964
 char const * const s_aassasin_atkw1_wav_005a3964 = S_AASSASIN_ATKW1_WAV_005A3964;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3978
+// 0x005a3978
 char const * const s_engineer_atkw1_wav_005a3978 = S_ENGINEER_ATKW1_WAV_005A3978;
 
-// STRING: STRONGHOLDCRUSADER 0x005a398c
+// 0x005a398c
 char const * const s_ladder_atkw1_wav_005a398c = S_LADDER_ATKW1_WAV_005A398C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a39a0
+// 0x005a39a0
 char const * const s_tunnel_atkw1_wav_005a39a0 = S_TUNNEL_ATKW1_WAV_005A39A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a39b4
+// 0x005a39b4
 char const * const s_monk_atkw1_wav_005a39b4 = S_MONK_ATKW1_WAV_005A39B4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a39c4
+// 0x005a39c4
 char const * const s_knight_atkw1_wav_005a39c4 = S_KNIGHT_ATKW1_WAV_005A39C4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a39d8
+// 0x005a39d8
 char const * const s_sword_atkw1_wav_005a39d8 = S_SWORD_ATKW1_WAV_005A39D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a39e8
+// 0x005a39e8
 char const * const s_pike_atkw1_wav_005a39e8 = S_PIKE_ATKW1_WAV_005A39E8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a39f8
+// 0x005a39f8
 char const * const s_mace_atkw1_wav_005a39f8 = S_MACE_ATKW1_WAV_005A39F8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3a08
+// 0x005a3a08
 char const * const s_spear_atkw1_wav_005a3a08 = S_SPEAR_ATKW1_WAV_005A3A08;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3a18
+// 0x005a3a18
 char const * const s_aassasin_atks4_wav_005a3a18 = S_AASSASIN_ATKS4_WAV_005A3A18;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3a2c
+// 0x005a3a2c
 char const * const s_engineer_atks4_wav_005a3a2c = S_ENGINEER_ATKS4_WAV_005A3A2C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3a40
+// 0x005a3a40
 char const * const s_ladder_atks4_wav_005a3a40 = S_LADDER_ATKS4_WAV_005A3A40;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3a54
+// 0x005a3a54
 char const * const s_tunnel_atks4_wav_005a3a54 = S_TUNNEL_ATKS4_WAV_005A3A54;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3a68
+// 0x005a3a68
 char const * const s_monk_atks4_wav_005a3a68 = S_MONK_ATKS4_WAV_005A3A68;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3a78
+// 0x005a3a78
 char const * const s_knight_atks4_wav_005a3a78 = S_KNIGHT_ATKS4_WAV_005A3A78;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3a8c
+// 0x005a3a8c
 char const * const s_sword_atks4_wav_005a3a8c = S_SWORD_ATKS4_WAV_005A3A8C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3a9c
+// 0x005a3a9c
 char const * const s_pike_atks4_wav_005a3a9c = S_PIKE_ATKS4_WAV_005A3A9C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3aac
+// 0x005a3aac
 char const * const s_mace_atks4_wav_005a3aac = S_MACE_ATKS4_WAV_005A3AAC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3abc
+// 0x005a3abc
 char const * const s_spear_atks4_wav_005a3abc = S_SPEAR_ATKS4_WAV_005A3ABC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3acc
+// 0x005a3acc
 char const * const s_aassasin_atks3_wav_005a3acc = S_AASSASIN_ATKS3_WAV_005A3ACC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3ae0
+// 0x005a3ae0
 char const * const s_engineer_atks3_wav_005a3ae0 = S_ENGINEER_ATKS3_WAV_005A3AE0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3af4
+// 0x005a3af4
 char const * const s_ladder_atks3_wav_005a3af4 = S_LADDER_ATKS3_WAV_005A3AF4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3b08
+// 0x005a3b08
 char const * const s_tunnel_atks3_wav_005a3b08 = S_TUNNEL_ATKS3_WAV_005A3B08;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3b1c
+// 0x005a3b1c
 char const * const s_monk_atks3_wav_005a3b1c = S_MONK_ATKS3_WAV_005A3B1C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3b2c
+// 0x005a3b2c
 char const * const s_knight_atks3_wav_005a3b2c = S_KNIGHT_ATKS3_WAV_005A3B2C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3b40
+// 0x005a3b40
 char const * const s_sword_atks3_wav_005a3b40 = S_SWORD_ATKS3_WAV_005A3B40;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3b50
+// 0x005a3b50
 char const * const s_pike_atks3_wav_005a3b50 = S_PIKE_ATKS3_WAV_005A3B50;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3b60
+// 0x005a3b60
 char const * const s_mace_atks3_wav_005a3b60 = S_MACE_ATKS3_WAV_005A3B60;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3b70
+// 0x005a3b70
 char const * const s_spear_atks3_wav_005a3b70 = S_SPEAR_ATKS3_WAV_005A3B70;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3b80
+// 0x005a3b80
 char const * const s_aslave_atks2_wav_005a3b80 = S_ASLAVE_ATKS2_WAV_005A3B80;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3b94
+// 0x005a3b94
 char const * const s_aassasin_atks2_wav_005a3b94 = S_AASSASIN_ATKS2_WAV_005A3B94;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3ba8
+// 0x005a3ba8
 char const * const s_engineer_atks2_wav_005a3ba8 = S_ENGINEER_ATKS2_WAV_005A3BA8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3bbc
+// 0x005a3bbc
 char const * const s_ladder_atks2_wav_005a3bbc = S_LADDER_ATKS2_WAV_005A3BBC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3bd0
+// 0x005a3bd0
 char const * const s_tunnel_atks2_wav_005a3bd0 = S_TUNNEL_ATKS2_WAV_005A3BD0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3be4
+// 0x005a3be4
 char const * const s_monk_atks2_wav_005a3be4 = S_MONK_ATKS2_WAV_005A3BE4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3bf4
+// 0x005a3bf4
 char const * const s_knight_atks2_wav_005a3bf4 = S_KNIGHT_ATKS2_WAV_005A3BF4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3c08
+// 0x005a3c08
 char const * const s_sword_atks2_wav_005a3c08 = S_SWORD_ATKS2_WAV_005A3C08;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3c18
+// 0x005a3c18
 char const * const s_pike_atks2_wav_005a3c18 = S_PIKE_ATKS2_WAV_005A3C18;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3c28
+// 0x005a3c28
 char const * const s_mace_atks2_wav_005a3c28 = S_MACE_ATKS2_WAV_005A3C28;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3c38
+// 0x005a3c38
 char const * const s_spear_atks2_wav_005a3c38 = S_SPEAR_ATKS2_WAV_005A3C38;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3c48
+// 0x005a3c48
 char const * const s_aslave_atks1_wav_005a3c48 = S_ASLAVE_ATKS1_WAV_005A3C48;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3c5c
+// 0x005a3c5c
 char const * const s_aassasin_atks1_wav_005a3c5c = S_AASSASIN_ATKS1_WAV_005A3C5C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3c70
+// 0x005a3c70
 char const * const s_engineer_atks1_wav_005a3c70 = S_ENGINEER_ATKS1_WAV_005A3C70;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3c84
+// 0x005a3c84
 char const * const s_ladder_atks1_wav_005a3c84 = S_LADDER_ATKS1_WAV_005A3C84;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3c98
+// 0x005a3c98
 char const * const s_tunnel_atks1_wav_005a3c98 = S_TUNNEL_ATKS1_WAV_005A3C98;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3cac
+// 0x005a3cac
 char const * const s_monk_atks1_wav_005a3cac = S_MONK_ATKS1_WAV_005A3CAC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3cbc
+// 0x005a3cbc
 char const * const s_knight_atks1_wav_005a3cbc = S_KNIGHT_ATKS1_WAV_005A3CBC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3cd0
+// 0x005a3cd0
 char const * const s_sword_atks1_wav_005a3cd0 = S_SWORD_ATKS1_WAV_005A3CD0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3ce0
+// 0x005a3ce0
 char const * const s_pike_atks1_wav_005a3ce0 = S_PIKE_ATKS1_WAV_005A3CE0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3cf0
+// 0x005a3cf0
 char const * const s_mace_atks1_wav_005a3cf0 = S_MACE_ATKS1_WAV_005A3CF0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3d00
+// 0x005a3d00
 char const * const s_spear_atks1_wav_005a3d00 = S_SPEAR_ATKS1_WAV_005A3D00;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3d10
+// 0x005a3d10
 char const * const s_ahorse_atkh1_wav_005a3d10 = S_AHORSE_ATKH1_WAV_005A3D10;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3d24
+// 0x005a3d24
 char const * const s_agrenadier_atkh1_wav_005a3d24 = S_AGRENADIER_ATKH1_WAV_005A3D24;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3d3c
+// 0x005a3d3c
 char const * const s_asling_atkh1_wav_005a3d3c = S_ASLING_ATKH1_WAV_005A3D3C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3d50
+// 0x005a3d50
 char const * const s_abow_atkh1_wav_005a3d50 = S_ABOW_ATKH1_WAV_005A3D50;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3d60
+// 0x005a3d60
 char const * const s_cross_atkh1_wav_005a3d60 = S_CROSS_ATKH1_WAV_005A3D60;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3d70
+// 0x005a3d70
 char const * const s_arch_atkh1_wav_005a3d70 = S_ARCH_ATKH1_WAV_005A3D70;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3d80
+// 0x005a3d80
 char const * const s_aslave_moat5_wav_005a3d80 = S_ASLAVE_MOAT5_WAV_005A3D80;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3d94
+// 0x005a3d94
 char const * const s_spear_moat5_wav_005a3d94 = S_SPEAR_MOAT5_WAV_005A3D94;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3da4
+// 0x005a3da4
 char const * const s_aslave_moat4_wav_005a3da4 = S_ASLAVE_MOAT4_WAV_005A3DA4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3db8
+// 0x005a3db8
 char const * const s_spear_moat4_wav_005a3db8 = S_SPEAR_MOAT4_WAV_005A3DB8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3dc8
+// 0x005a3dc8
 char const * const s_asword_moat3_wav_005a3dc8 = S_ASWORD_MOAT3_WAV_005A3DC8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3ddc
+// 0x005a3ddc
 char const * const s_aslave_moat3_wav_005a3ddc = S_ASLAVE_MOAT3_WAV_005A3DDC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3df0
+// 0x005a3df0
 char const * const s_engineer_moat3_wav_005a3df0 = S_ENGINEER_MOAT3_WAV_005A3DF0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3e04
+// 0x005a3e04
 char const * const s_ladder_moat3_wav_005a3e04 = S_LADDER_MOAT3_WAV_005A3E04;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3e18
+// 0x005a3e18
 char const * const s_tunnel_moat3_wav_005a3e18 = S_TUNNEL_MOAT3_WAV_005A3E18;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3e2c
+// 0x005a3e2c
 char const * const s_monk_moat3_wav_005a3e2c = S_MONK_MOAT3_WAV_005A3E2C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3e3c
+// 0x005a3e3c
 char const * const s_knight_moat3_wav_005a3e3c = S_KNIGHT_MOAT3_WAV_005A3E3C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3e50
+// 0x005a3e50
 char const * const s_sword_moat3_wav_005a3e50 = S_SWORD_MOAT3_WAV_005A3E50;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3e60
+// 0x005a3e60
 char const * const s_pike_moat3_wav_005a3e60 = S_PIKE_MOAT3_WAV_005A3E60;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3e70
+// 0x005a3e70
 char const * const s_mace_moat3_wav_005a3e70 = S_MACE_MOAT3_WAV_005A3E70;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3e80
+// 0x005a3e80
 char const * const s_spear_moat3_wav_005a3e80 = S_SPEAR_MOAT3_WAV_005A3E80;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3e90
+// 0x005a3e90
 char const * const s_cross_moat3_wav_005a3e90 = S_CROSS_MOAT3_WAV_005A3E90;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3ea0
+// 0x005a3ea0
 char const * const s_arch_moat3_wav_005a3ea0 = S_ARCH_MOAT3_WAV_005A3EA0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3eb0
+// 0x005a3eb0
 char const * const s_asword_moat2_wav_005a3eb0 = S_ASWORD_MOAT2_WAV_005A3EB0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3ec4
+// 0x005a3ec4
 char const * const s_aslave_moat2_wav_005a3ec4 = S_ASLAVE_MOAT2_WAV_005A3EC4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3ed8
+// 0x005a3ed8
 char const * const s_engineer_moat2_wav_005a3ed8 = S_ENGINEER_MOAT2_WAV_005A3ED8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3eec
+// 0x005a3eec
 char const * const s_ladder_moat2_wav_005a3eec = S_LADDER_MOAT2_WAV_005A3EEC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3f00
+// 0x005a3f00
 char const * const s_tunnel_moat2_wav_005a3f00 = S_TUNNEL_MOAT2_WAV_005A3F00;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3f14
+// 0x005a3f14
 char const * const s_monk_moat2_wav_005a3f14 = S_MONK_MOAT2_WAV_005A3F14;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3f24
+// 0x005a3f24
 char const * const s_knight_moat2_wav_005a3f24 = S_KNIGHT_MOAT2_WAV_005A3F24;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3f38
+// 0x005a3f38
 char const * const s_sword_moat2_wav_005a3f38 = S_SWORD_MOAT2_WAV_005A3F38;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3f48
+// 0x005a3f48
 char const * const s_pike_moat2_wav_005a3f48 = S_PIKE_MOAT2_WAV_005A3F48;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3f58
+// 0x005a3f58
 char const * const s_mace_moat2_wav_005a3f58 = S_MACE_MOAT2_WAV_005A3F58;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3f68
+// 0x005a3f68
 char const * const s_spear_moat2_wav_005a3f68 = S_SPEAR_MOAT2_WAV_005A3F68;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3f78
+// 0x005a3f78
 char const * const s_cross_moat2_wav_005a3f78 = S_CROSS_MOAT2_WAV_005A3F78;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3f88
+// 0x005a3f88
 char const * const s_arch_moat2_wav_005a3f88 = S_ARCH_MOAT2_WAV_005A3F88;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3f98
+// 0x005a3f98
 char const * const s_ahorse_moat1_wav_005a3f98 = S_AHORSE_MOAT1_WAV_005A3F98;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3fac
+// 0x005a3fac
 char const * const s_asword_moat1_wav_005a3fac = S_ASWORD_MOAT1_WAV_005A3FAC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3fc0
+// 0x005a3fc0
 char const * const s_agrenadier_moat1_wav_005a3fc0 = S_AGRENADIER_MOAT1_WAV_005A3FC0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3fd8
+// 0x005a3fd8
 char const * const s_aslave_moat1_wav_005a3fd8 = S_ASLAVE_MOAT1_WAV_005A3FD8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a3fec
+// 0x005a3fec
 char const * const s_aassasin_moat1_wav_005a3fec = S_AASSASIN_MOAT1_WAV_005A3FEC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4000
+// 0x005a4000
 char const * const s_asling_moat1_wav_005a4000 = S_ASLING_MOAT1_WAV_005A4000;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4014
+// 0x005a4014
 char const * const s_abow_moat1_wav_005a4014 = S_ABOW_MOAT1_WAV_005A4014;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4024
+// 0x005a4024
 char const * const s_engineer_moat1_wav_005a4024 = S_ENGINEER_MOAT1_WAV_005A4024;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4038
+// 0x005a4038
 char const * const s_ladder_moat1_wav_005a4038 = S_LADDER_MOAT1_WAV_005A4038;
 
-// STRING: STRONGHOLDCRUSADER 0x005a404c
+// 0x005a404c
 char const * const s_tunnel_moat1_wav_005a404c = S_TUNNEL_MOAT1_WAV_005A404C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4060
+// 0x005a4060
 char const * const s_monk_moat1_wav_005a4060 = S_MONK_MOAT1_WAV_005A4060;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4070
+// 0x005a4070
 char const * const s_knight_moat1_wav_005a4070 = S_KNIGHT_MOAT1_WAV_005A4070;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4084
+// 0x005a4084
 char const * const s_sword_moat1_wav_005a4084 = S_SWORD_MOAT1_WAV_005A4084;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4094
+// 0x005a4094
 char const * const s_pike_moat1_wav_005a4094 = S_PIKE_MOAT1_WAV_005A4094;
 
-// STRING: STRONGHOLDCRUSADER 0x005a40a4
+// 0x005a40a4
 char const * const s_mace_moat1_wav_005a40a4 = S_MACE_MOAT1_WAV_005A40A4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a40b4
+// 0x005a40b4
 char const * const s_spear_moat1_wav_005a40b4 = S_SPEAR_MOAT1_WAV_005A40B4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a40c4
+// 0x005a40c4
 char const * const s_cross_moat1_wav_005a40c4 = S_CROSS_MOAT1_WAV_005A40C4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a40d4
+// 0x005a40d4
 char const * const s_arch_moat1_wav_005a40d4 = S_ARCH_MOAT1_WAV_005A40D4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a40e4
+// 0x005a40e4
 char const * const s_ahorse_m5_wav_005a40e4 = S_AHORSE_M5_WAV_005A40E4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a40f4
+// 0x005a40f4
 char const * const s_asword_m5_wav_005a40f4 = S_ASWORD_M5_WAV_005A40F4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4104
+// 0x005a4104
 char const * const s_agrenadier_m5_wav_005a4104 = S_AGRENADIER_M5_WAV_005A4104;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4118
+// 0x005a4118
 char const * const s_aslave_m5_wav_005a4118 = S_ASLAVE_M5_WAV_005A4118;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4128
+// 0x005a4128
 char const * const s_aassasin_m5_wav_005a4128 = S_AASSASIN_M5_WAV_005A4128;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4138
+// 0x005a4138
 char const * const s_asling_m5_wav_005a4138 = S_ASLING_M5_WAV_005A4138;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4148
+// 0x005a4148
 char const * const s_abow_m5_wav_005a4148 = S_ABOW_M5_WAV_005A4148;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4154
+// 0x005a4154
 char const * const s_engineer_m5_wav_005a4154 = S_ENGINEER_M5_WAV_005A4154;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4164
+// 0x005a4164
 char const * const s_ladder_m5_wav_005a4164 = S_LADDER_M5_WAV_005A4164;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4174
+// 0x005a4174
 char const * const s_tunnel_m5_wav_005a4174 = S_TUNNEL_M5_WAV_005A4174;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4184
+// 0x005a4184
 char const * const s_monk_m5_wav_005a4184 = S_MONK_M5_WAV_005A4184;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4190
+// 0x005a4190
 char const * const s_knight_m5_wav_005a4190 = S_KNIGHT_M5_WAV_005A4190;
 
-// STRING: STRONGHOLDCRUSADER 0x005a41a0
+// 0x005a41a0
 char const * const s_sword_m5_wav_005a41a0 = S_SWORD_M5_WAV_005A41A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a41b0
+// 0x005a41b0
 char const * const s_pike_m5_wav_005a41b0 = S_PIKE_M5_WAV_005A41B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a41bc
+// 0x005a41bc
 char const * const s_mace_m5_wav_005a41bc = S_MACE_M5_WAV_005A41BC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a41c8
+// 0x005a41c8
 char const * const s_spear_m5_wav_005a41c8 = S_SPEAR_M5_WAV_005A41C8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a41d8
+// 0x005a41d8
 char const * const s_cross_m5_wav_005a41d8 = S_CROSS_M5_WAV_005A41D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a41e8
+// 0x005a41e8
 char const * const s_arch_m5_wav_005a41e8 = S_ARCH_M5_WAV_005A41E8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a41f4
+// 0x005a41f4
 char const * const s_ahorse_m4_wav_005a41f4 = S_AHORSE_M4_WAV_005A41F4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4204
+// 0x005a4204
 char const * const s_asword_m4_wav_005a4204 = S_ASWORD_M4_WAV_005A4204;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4214
+// 0x005a4214
 char const * const s_agrenadier_m4_wav_005a4214 = S_AGRENADIER_M4_WAV_005A4214;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4228
+// 0x005a4228
 char const * const s_aslave_m4_wav_005a4228 = S_ASLAVE_M4_WAV_005A4228;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4238
+// 0x005a4238
 char const * const s_aassasin_m4_wav_005a4238 = S_AASSASIN_M4_WAV_005A4238;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4248
+// 0x005a4248
 char const * const s_asling_m4_wav_005a4248 = S_ASLING_M4_WAV_005A4248;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4258
+// 0x005a4258
 char const * const s_abow_m4_wav_005a4258 = S_ABOW_M4_WAV_005A4258;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4264
+// 0x005a4264
 char const * const s_engineer_m4_wav_005a4264 = S_ENGINEER_M4_WAV_005A4264;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4274
+// 0x005a4274
 char const * const s_ladder_m4_wav_005a4274 = S_LADDER_M4_WAV_005A4274;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4284
+// 0x005a4284
 char const * const s_tunnel_m4_wav_005a4284 = S_TUNNEL_M4_WAV_005A4284;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4294
+// 0x005a4294
 char const * const s_monk_m4_wav_005a4294 = S_MONK_M4_WAV_005A4294;
 
-// STRING: STRONGHOLDCRUSADER 0x005a42a0
+// 0x005a42a0
 char const * const s_knight_m4_wav_005a42a0 = S_KNIGHT_M4_WAV_005A42A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a42b0
+// 0x005a42b0
 char const * const s_sword_m4_wav_005a42b0 = S_SWORD_M4_WAV_005A42B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a42c0
+// 0x005a42c0
 char const * const s_pike_m4_wav_005a42c0 = S_PIKE_M4_WAV_005A42C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a42cc
+// 0x005a42cc
 char const * const s_mace_m4_wav_005a42cc = S_MACE_M4_WAV_005A42CC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a42d8
+// 0x005a42d8
 char const * const s_spear_m4_wav_005a42d8 = S_SPEAR_M4_WAV_005A42D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a42e8
+// 0x005a42e8
 char const * const s_cross_m4_wav_005a42e8 = S_CROSS_M4_WAV_005A42E8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a42f8
+// 0x005a42f8
 char const * const s_arch_m4_wav_005a42f8 = S_ARCH_M4_WAV_005A42F8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4304
+// 0x005a4304
 char const * const s_ahorse_m3_wav_005a4304 = S_AHORSE_M3_WAV_005A4304;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4314
+// 0x005a4314
 char const * const s_asword_m3_wav_005a4314 = S_ASWORD_M3_WAV_005A4314;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4324
+// 0x005a4324
 char const * const s_agrenadier_m3_wav_005a4324 = S_AGRENADIER_M3_WAV_005A4324;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4338
+// 0x005a4338
 char const * const s_aassasin_m3_wav_005a4338 = S_AASSASIN_M3_WAV_005A4338;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4348
+// 0x005a4348
 char const * const s_asling_m3_wav_005a4348 = S_ASLING_M3_WAV_005A4348;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4358
+// 0x005a4358
 char const * const s_abow_m3_wav_005a4358 = S_ABOW_M3_WAV_005A4358;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4364
+// 0x005a4364
 char const * const s_engineer_m3_wav_005a4364 = S_ENGINEER_M3_WAV_005A4364;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4374
+// 0x005a4374
 char const * const s_ladder_m3_wav_005a4374 = S_LADDER_M3_WAV_005A4374;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4384
+// 0x005a4384
 char const * const s_tunnel_m3_wav_005a4384 = S_TUNNEL_M3_WAV_005A4384;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4394
+// 0x005a4394
 char const * const s_monk_m3_wav_005a4394 = S_MONK_M3_WAV_005A4394;
 
-// STRING: STRONGHOLDCRUSADER 0x005a43a0
+// 0x005a43a0
 char const * const s_knight_m3_wav_005a43a0 = S_KNIGHT_M3_WAV_005A43A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a43b0
+// 0x005a43b0
 char const * const s_sword_m3_wav_005a43b0 = S_SWORD_M3_WAV_005A43B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a43c0
+// 0x005a43c0
 char const * const s_pike_m3_wav_005a43c0 = S_PIKE_M3_WAV_005A43C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a43cc
+// 0x005a43cc
 char const * const s_mace_m3_wav_005a43cc = S_MACE_M3_WAV_005A43CC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a43d8
+// 0x005a43d8
 char const * const s_spear_m3_wav_005a43d8 = S_SPEAR_M3_WAV_005A43D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a43e8
+// 0x005a43e8
 char const * const s_cross_m3_wav_005a43e8 = S_CROSS_M3_WAV_005A43E8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a43f8
+// 0x005a43f8
 char const * const s_arch_m3_wav_005a43f8 = S_ARCH_M3_WAV_005A43F8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4404
+// 0x005a4404
 char const * const s_ahorse_m2_wav_005a4404 = S_AHORSE_M2_WAV_005A4404;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4414
+// 0x005a4414
 char const * const s_asword_m2_wav_005a4414 = S_ASWORD_M2_WAV_005A4414;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4424
+// 0x005a4424
 char const * const s_agrenadier_m2_wav_005a4424 = S_AGRENADIER_M2_WAV_005A4424;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4438
+// 0x005a4438
 char const * const s_aslave_m2_wav_005a4438 = S_ASLAVE_M2_WAV_005A4438;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4448
+// 0x005a4448
 char const * const s_aassasin_m2_wav_005a4448 = S_AASSASIN_M2_WAV_005A4448;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4458
+// 0x005a4458
 char const * const s_asling_m2_wav_005a4458 = S_ASLING_M2_WAV_005A4458;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4468
+// 0x005a4468
 char const * const s_abow_m2_wav_005a4468 = S_ABOW_M2_WAV_005A4468;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4474
+// 0x005a4474
 char const * const s_engineer_m2_wav_005a4474 = S_ENGINEER_M2_WAV_005A4474;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4484
+// 0x005a4484
 char const * const s_ladder_m2_wav_005a4484 = S_LADDER_M2_WAV_005A4484;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4494
+// 0x005a4494
 char const * const s_tunnel_m2_wav_005a4494 = S_TUNNEL_M2_WAV_005A4494;
 
-// STRING: STRONGHOLDCRUSADER 0x005a44a4
+// 0x005a44a4
 char const * const s_monk_m2_wav_005a44a4 = S_MONK_M2_WAV_005A44A4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a44b0
+// 0x005a44b0
 char const * const s_knight_m2_wav_005a44b0 = S_KNIGHT_M2_WAV_005A44B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a44c0
+// 0x005a44c0
 char const * const s_sword_m2_wav_005a44c0 = S_SWORD_M2_WAV_005A44C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a44d0
+// 0x005a44d0
 char const * const s_pike_m2_wav_005a44d0 = S_PIKE_M2_WAV_005A44D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a44dc
+// 0x005a44dc
 char const * const s_mace_m2_wav_005a44dc = S_MACE_M2_WAV_005A44DC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a44e8
+// 0x005a44e8
 char const * const s_spear_m2_wav_005a44e8 = S_SPEAR_M2_WAV_005A44E8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a44f8
+// 0x005a44f8
 char const * const s_cross_m2_wav_005a44f8 = S_CROSS_M2_WAV_005A44F8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4508
+// 0x005a4508
 char const * const s_arch_m2_wav_005a4508 = S_ARCH_M2_WAV_005A4508;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4514
+// 0x005a4514
 char const * const s_ahorse_m1_wav_005a4514 = S_AHORSE_M1_WAV_005A4514;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4524
+// 0x005a4524
 char const * const s_asword_m1_wav_005a4524 = S_ASWORD_M1_WAV_005A4524;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4534
+// 0x005a4534
 char const * const s_agrenadier_m1_wav_005a4534 = S_AGRENADIER_M1_WAV_005A4534;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4548
+// 0x005a4548
 char const * const s_aslave_m1_wav_005a4548 = S_ASLAVE_M1_WAV_005A4548;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4558
+// 0x005a4558
 char const * const s_aassasin_m1_wav_005a4558 = S_AASSASIN_M1_WAV_005A4558;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4568
+// 0x005a4568
 char const * const s_asling_m1_wav_005a4568 = S_ASLING_M1_WAV_005A4568;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4578
+// 0x005a4578
 char const * const s_abow_m1_wav_005a4578 = S_ABOW_M1_WAV_005A4578;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4584
+// 0x005a4584
 char const * const s_engineer_m1_wav_005a4584 = S_ENGINEER_M1_WAV_005A4584;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4594
+// 0x005a4594
 char const * const s_ladder_m1_wav_005a4594 = S_LADDER_M1_WAV_005A4594;
 
-// STRING: STRONGHOLDCRUSADER 0x005a45a4
+// 0x005a45a4
 char const * const s_tunnel_m1_wav_005a45a4 = S_TUNNEL_M1_WAV_005A45A4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a45b4
+// 0x005a45b4
 char const * const s_monk_m1_wav_005a45b4 = S_MONK_M1_WAV_005A45B4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a45c0
+// 0x005a45c0
 char const * const s_knight_m1_wav_005a45c0 = S_KNIGHT_M1_WAV_005A45C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a45d0
+// 0x005a45d0
 char const * const s_sword_m1_wav_005a45d0 = S_SWORD_M1_WAV_005A45D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a45e0
+// 0x005a45e0
 char const * const s_pike_m1_wav_005a45e0 = S_PIKE_M1_WAV_005A45E0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a45ec
+// 0x005a45ec
 char const * const s_mace_m1_wav_005a45ec = S_MACE_M1_WAV_005A45EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a45f8
+// 0x005a45f8
 char const * const s_spear_m1_wav_005a45f8 = S_SPEAR_M1_WAV_005A45F8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4608
+// 0x005a4608
 char const * const s_cross_m1_wav_005a4608 = S_CROSS_M1_WAV_005A4608;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4618
+// 0x005a4618
 char const * const s_arch_m1_wav_005a4618 = S_ARCH_M1_WAV_005A4618;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4624
+// 0x005a4624
 char const * const s_ahorse_s6_wav_005a4624 = S_AHORSE_S6_WAV_005A4624;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4634
+// 0x005a4634
 char const * const s_asword_s6_wav_005a4634 = S_ASWORD_S6_WAV_005A4634;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4644
+// 0x005a4644
 char const * const s_agrenadier_s6_wav_005a4644 = S_AGRENADIER_S6_WAV_005A4644;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4658
+// 0x005a4658
 char const * const s_aassasin_s6_wav_005a4658 = S_AASSASIN_S6_WAV_005A4658;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4668
+// 0x005a4668
 char const * const s_asling_s6_wav_005a4668 = S_ASLING_S6_WAV_005A4668;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4678
+// 0x005a4678
 char const * const s_abow_s6_wav_005a4678 = S_ABOW_S6_WAV_005A4678;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4684
+// 0x005a4684
 char const * const s_engineer_s6_wav_005a4684 = S_ENGINEER_S6_WAV_005A4684;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4694
+// 0x005a4694
 char const * const s_ladder_s6_wav_005a4694 = S_LADDER_S6_WAV_005A4694;
 
-// STRING: STRONGHOLDCRUSADER 0x005a46a4
+// 0x005a46a4
 char const * const s_tunnel_s6_wav_005a46a4 = S_TUNNEL_S6_WAV_005A46A4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a46b4
+// 0x005a46b4
 char const * const s_monk_s6_wav_005a46b4 = S_MONK_S6_WAV_005A46B4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a46c0
+// 0x005a46c0
 char const * const s_knight_s6_wav_005a46c0 = S_KNIGHT_S6_WAV_005A46C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a46d0
+// 0x005a46d0
 char const * const s_sword_s6_wav_005a46d0 = S_SWORD_S6_WAV_005A46D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a46e0
+// 0x005a46e0
 char const * const s_pike_s6_wav_005a46e0 = S_PIKE_S6_WAV_005A46E0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a46ec
+// 0x005a46ec
 char const * const s_mace_s6_wav_005a46ec = S_MACE_S6_WAV_005A46EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a46f8
+// 0x005a46f8
 char const * const s_spear_s6_wav_005a46f8 = S_SPEAR_S6_WAV_005A46F8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4708
+// 0x005a4708
 char const * const s_cross_s6_wav_005a4708 = S_CROSS_S6_WAV_005A4708;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4718
+// 0x005a4718
 char const * const s_arch_s6_wav_005a4718 = S_ARCH_S6_WAV_005A4718;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4724
+// 0x005a4724
 char const * const s_ahorse_s5_wav_005a4724 = S_AHORSE_S5_WAV_005A4724;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4734
+// 0x005a4734
 char const * const s_asword_s5_wav_005a4734 = S_ASWORD_S5_WAV_005A4734;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4744
+// 0x005a4744
 char const * const s_agrenadier_s5_wav_005a4744 = S_AGRENADIER_S5_WAV_005A4744;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4758
+// 0x005a4758
 char const * const s_aassasin_s5_wav_005a4758 = S_AASSASIN_S5_WAV_005A4758;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4768
+// 0x005a4768
 char const * const s_asling_s5_wav_005a4768 = S_ASLING_S5_WAV_005A4768;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4778
+// 0x005a4778
 char const * const s_abow_s5_wav_005a4778 = S_ABOW_S5_WAV_005A4778;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4784
+// 0x005a4784
 char const * const s_engineer_s5_wav_005a4784 = S_ENGINEER_S5_WAV_005A4784;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4794
+// 0x005a4794
 char const * const s_ladder_s5_wav_005a4794 = S_LADDER_S5_WAV_005A4794;
 
-// STRING: STRONGHOLDCRUSADER 0x005a47a4
+// 0x005a47a4
 char const * const s_tunnel_s5_wav_005a47a4 = S_TUNNEL_S5_WAV_005A47A4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a47b4
+// 0x005a47b4
 char const * const s_monk_s5_wav_005a47b4 = S_MONK_S5_WAV_005A47B4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a47c0
+// 0x005a47c0
 char const * const s_knight_s5_wav_005a47c0 = S_KNIGHT_S5_WAV_005A47C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a47d0
+// 0x005a47d0
 char const * const s_sword_s5_wav_005a47d0 = S_SWORD_S5_WAV_005A47D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a47e0
+// 0x005a47e0
 char const * const s_pike_s5_wav_005a47e0 = S_PIKE_S5_WAV_005A47E0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a47ec
+// 0x005a47ec
 char const * const s_mace_s5_wav_005a47ec = S_MACE_S5_WAV_005A47EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a47f8
+// 0x005a47f8
 char const * const s_spear_s5_wav_005a47f8 = S_SPEAR_S5_WAV_005A47F8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4808
+// 0x005a4808
 char const * const s_cross_s5_wav_005a4808 = S_CROSS_S5_WAV_005A4808;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4818
+// 0x005a4818
 char const * const s_arch_s5_wav_005a4818 = S_ARCH_S5_WAV_005A4818;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4824
+// 0x005a4824
 char const * const s_ahorse_s4_wav_005a4824 = S_AHORSE_S4_WAV_005A4824;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4834
+// 0x005a4834
 char const * const s_asword_s4_wav_005a4834 = S_ASWORD_S4_WAV_005A4834;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4844
+// 0x005a4844
 char const * const s_agrenadier_s4_wav_005a4844 = S_AGRENADIER_S4_WAV_005A4844;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4858
+// 0x005a4858
 char const * const s_aassasin_s4_wav_005a4858 = S_AASSASIN_S4_WAV_005A4858;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4868
+// 0x005a4868
 char const * const s_asling_s4_wav_005a4868 = S_ASLING_S4_WAV_005A4868;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4878
+// 0x005a4878
 char const * const s_abow_s4_wav_005a4878 = S_ABOW_S4_WAV_005A4878;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4884
+// 0x005a4884
 char const * const s_engineer_s4_wav_005a4884 = S_ENGINEER_S4_WAV_005A4884;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4894
+// 0x005a4894
 char const * const s_ladder_s4_wav_005a4894 = S_LADDER_S4_WAV_005A4894;
 
-// STRING: STRONGHOLDCRUSADER 0x005a48a4
+// 0x005a48a4
 char const * const s_tunnel_s4_wav_005a48a4 = S_TUNNEL_S4_WAV_005A48A4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a48b4
+// 0x005a48b4
 char const * const s_monk_s4_wav_005a48b4 = S_MONK_S4_WAV_005A48B4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a48c0
+// 0x005a48c0
 char const * const s_knight_s4_wav_005a48c0 = S_KNIGHT_S4_WAV_005A48C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a48d0
+// 0x005a48d0
 char const * const s_sword_s4_wav_005a48d0 = S_SWORD_S4_WAV_005A48D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a48e0
+// 0x005a48e0
 char const * const s_pike_s4_wav_005a48e0 = S_PIKE_S4_WAV_005A48E0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a48ec
+// 0x005a48ec
 char const * const s_mace_s4_wav_005a48ec = S_MACE_S4_WAV_005A48EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a48f8
+// 0x005a48f8
 char const * const s_spear_s4_wav_005a48f8 = S_SPEAR_S4_WAV_005A48F8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4908
+// 0x005a4908
 char const * const s_cross_s4_wav_005a4908 = S_CROSS_S4_WAV_005A4908;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4918
+// 0x005a4918
 char const * const s_arch_s4_wav_005a4918 = S_ARCH_S4_WAV_005A4918;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4924
+// 0x005a4924
 char const * const s_ahorse_s3_wav_005a4924 = S_AHORSE_S3_WAV_005A4924;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4934
+// 0x005a4934
 char const * const s_asword_s3_wav_005a4934 = S_ASWORD_S3_WAV_005A4934;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4944
+// 0x005a4944
 char const * const s_agrenadier_s3_wav_005a4944 = S_AGRENADIER_S3_WAV_005A4944;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4958
+// 0x005a4958
 char const * const s_aassasin_s3_wav_005a4958 = S_AASSASIN_S3_WAV_005A4958;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4968
+// 0x005a4968
 char const * const s_asling_s3_wav_005a4968 = S_ASLING_S3_WAV_005A4968;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4978
+// 0x005a4978
 char const * const s_abow_s3_wav_005a4978 = S_ABOW_S3_WAV_005A4978;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4984
+// 0x005a4984
 char const * const s_engineer_s3_wav_005a4984 = S_ENGINEER_S3_WAV_005A4984;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4994
+// 0x005a4994
 char const * const s_ladder_s3_wav_005a4994 = S_LADDER_S3_WAV_005A4994;
 
-// STRING: STRONGHOLDCRUSADER 0x005a49a4
+// 0x005a49a4
 char const * const s_tunnel_s3_wav_005a49a4 = S_TUNNEL_S3_WAV_005A49A4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a49b4
+// 0x005a49b4
 char const * const s_monk_s3_wav_005a49b4 = S_MONK_S3_WAV_005A49B4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a49c0
+// 0x005a49c0
 char const * const s_knight_s3_wav_005a49c0 = S_KNIGHT_S3_WAV_005A49C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a49d0
+// 0x005a49d0
 char const * const s_sword_s3_wav_005a49d0 = S_SWORD_S3_WAV_005A49D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a49e0
+// 0x005a49e0
 char const * const s_pike_s3_wav_005a49e0 = S_PIKE_S3_WAV_005A49E0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a49ec
+// 0x005a49ec
 char const * const s_mace_s3_wav_005a49ec = S_MACE_S3_WAV_005A49EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a49f8
+// 0x005a49f8
 char const * const s_spear_s3_wav_005a49f8 = S_SPEAR_S3_WAV_005A49F8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4a08
+// 0x005a4a08
 char const * const s_cross_s3_wav_005a4a08 = S_CROSS_S3_WAV_005A4A08;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4a18
+// 0x005a4a18
 char const * const s_arch_s3_wav_005a4a18 = S_ARCH_S3_WAV_005A4A18;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4a24
+// 0x005a4a24
 char const * const s_ahorse_s2_wav_005a4a24 = S_AHORSE_S2_WAV_005A4A24;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4a34
+// 0x005a4a34
 char const * const s_asword_s2_wav_005a4a34 = S_ASWORD_S2_WAV_005A4A34;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4a44
+// 0x005a4a44
 char const * const s_agrenadier_s2_wav_005a4a44 = S_AGRENADIER_S2_WAV_005A4A44;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4a58
+// 0x005a4a58
 char const * const s_aslave_s2_wav_005a4a58 = S_ASLAVE_S2_WAV_005A4A58;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4a68
+// 0x005a4a68
 char const * const s_aassasin_s2_wav_005a4a68 = S_AASSASIN_S2_WAV_005A4A68;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4a78
+// 0x005a4a78
 char const * const s_asling_s2_wav_005a4a78 = S_ASLING_S2_WAV_005A4A78;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4a88
+// 0x005a4a88
 char const * const s_abow_s2_wav_005a4a88 = S_ABOW_S2_WAV_005A4A88;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4a94
+// 0x005a4a94
 char const * const s_engineer_s2_wav_005a4a94 = S_ENGINEER_S2_WAV_005A4A94;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4aa4
+// 0x005a4aa4
 char const * const s_ladder_s2_wav_005a4aa4 = S_LADDER_S2_WAV_005A4AA4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4ab4
+// 0x005a4ab4
 char const * const s_tunnel_s2_wav_005a4ab4 = S_TUNNEL_S2_WAV_005A4AB4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4ac4
+// 0x005a4ac4
 char const * const s_monk_s2_wav_005a4ac4 = S_MONK_S2_WAV_005A4AC4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4ad0
+// 0x005a4ad0
 char const * const s_knight_s2_wav_005a4ad0 = S_KNIGHT_S2_WAV_005A4AD0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4ae0
+// 0x005a4ae0
 char const * const s_sword_s2_wav_005a4ae0 = S_SWORD_S2_WAV_005A4AE0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4af0
+// 0x005a4af0
 char const * const s_pike_s2_wav_005a4af0 = S_PIKE_S2_WAV_005A4AF0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4afc
+// 0x005a4afc
 char const * const s_mace_s2_wav_005a4afc = S_MACE_S2_WAV_005A4AFC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4b08
+// 0x005a4b08
 char const * const s_spear_s2_wav_005a4b08 = S_SPEAR_S2_WAV_005A4B08;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4b18
+// 0x005a4b18
 char const * const s_cross_s2_wav_005a4b18 = S_CROSS_S2_WAV_005A4B18;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4b28
+// 0x005a4b28
 char const * const s_arch_s2_wav_005a4b28 = S_ARCH_S2_WAV_005A4B28;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4b34
+// 0x005a4b34
 char const * const s_ahorse_s1_wav_005a4b34 = S_AHORSE_S1_WAV_005A4B34;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4b44
+// 0x005a4b44
 char const * const s_asword_s1_wav_005a4b44 = S_ASWORD_S1_WAV_005A4B44;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4b54
+// 0x005a4b54
 char const * const s_agrenadier_s1_wav_005a4b54 = S_AGRENADIER_S1_WAV_005A4B54;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4b68
+// 0x005a4b68
 char const * const s_aslave_s1_wav_005a4b68 = S_ASLAVE_S1_WAV_005A4B68;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4b78
+// 0x005a4b78
 char const * const s_aassasin_s1_wav_005a4b78 = S_AASSASIN_S1_WAV_005A4B78;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4b88
+// 0x005a4b88
 char const * const s_asling_s1_wav_005a4b88 = S_ASLING_S1_WAV_005A4B88;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4b98
+// 0x005a4b98
 char const * const s_abow_s1_wav_005a4b98 = S_ABOW_S1_WAV_005A4B98;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4ba4
+// 0x005a4ba4
 char const * const s_engineer_s1_wav_005a4ba4 = S_ENGINEER_S1_WAV_005A4BA4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4bb4
+// 0x005a4bb4
 char const * const s_ladder_s1_wav_005a4bb4 = S_LADDER_S1_WAV_005A4BB4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4bc4
+// 0x005a4bc4
 char const * const s_tunnel_s1_wav_005a4bc4 = S_TUNNEL_S1_WAV_005A4BC4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4bd4
+// 0x005a4bd4
 char const * const s_monk_s1_wav_005a4bd4 = S_MONK_S1_WAV_005A4BD4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4be0
+// 0x005a4be0
 char const * const s_knight_s1_wav_005a4be0 = S_KNIGHT_S1_WAV_005A4BE0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4bf0
+// 0x005a4bf0
 char const * const s_sword_s1_wav_005a4bf0 = S_SWORD_S1_WAV_005A4BF0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4c00
+// 0x005a4c00
 char const * const s_pike_s1_wav_005a4c00 = S_PIKE_S1_WAV_005A4C00;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4c0c
+// 0x005a4c0c
 char const * const s_mace_s1_wav_005a4c0c = S_MACE_S1_WAV_005A4C0C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4c18
+// 0x005a4c18
 char const * const s_spear_s1_wav_005a4c18 = S_SPEAR_S1_WAV_005A4C18;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4c28
+// 0x005a4c28
 char const * const s_cross_s1_wav_005a4c28 = S_CROSS_S1_WAV_005A4C28;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4c38
+// 0x005a4c38
 char const * const s_arch_s1_wav_005a4c38 = S_ARCH_S1_WAV_005A4C38;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4c44
+// 0x005a4c44
 char const * const s_fx_birdsloop_02_wav_005a4c44 = S_FX_BIRDSLOOP_02_WAV_005A4C44;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4c58
+// 0x005a4c58
 char const * const s_fx_birdsloop_01_wav_005a4c58 = S_FX_BIRDSLOOP_01_WAV_005A4C58;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4c6c
+// 0x005a4c6c
 char const * const s_fx_streamlp_02_wav_005a4c6c = S_FX_STREAMLP_02_WAV_005A4C6C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4c80
+// 0x005a4c80
 char const * const s_fx_waterfalllp_01_wav_005a4c80 = S_FX_WATERFALLLP_01_WAV_005A4C80;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4c98
+// 0x005a4c98
 char const * const s_fx_firelp_1_wav_005a4c98 = S_FX_FIRELP_1_WAV_005A4C98;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4ca8
+// 0x005a4ca8
 char const * const s_fx_ocean_short3_wav_005a4ca8 = S_FX_OCEAN_SHORT3_WAV_005A4CA8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4cbc
+// 0x005a4cbc
 char const * const s_fx_ocean_short2_wav_005a4cbc = S_FX_OCEAN_SHORT2_WAV_005A4CBC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4cd0
+// 0x005a4cd0
 char const * const s_fx_ocean_short1_wav_005a4cd0 = S_FX_OCEAN_SHORT1_WAV_005A4CD0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4ce4
+// 0x005a4ce4
 char const * const s_fx_gust1_22k_wav_005a4ce4 = S_FX_GUST1_22K_WAV_005A4CE4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4cf8
+// 0x005a4cf8
 char const * const s_Null_wav_005a4cf8 = S_NULL_WAV_005A4CF8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4d04
+// 0x005a4d04
 char const * const s_fx_wind_short5_wav_005a4d04 = S_FX_WIND_SHORT5_WAV_005A4D04;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4d18
+// 0x005a4d18
 char const * const s_fx_wind_short4wav_005a4d18 = S_FX_WIND_SHORT4WAV_005A4D18;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4d2c
+// 0x005a4d2c
 char const * const s_fx_wind_short3_wav_005a4d2c = S_FX_WIND_SHORT3_WAV_005A4D2C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4d40
+// 0x005a4d40
 char const * const s_fx_wind_short2_wav_005a4d40 = S_FX_WIND_SHORT2_WAV_005A4D40;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4d54
+// 0x005a4d54
 char const * const s_fx_wind_short1_wav_005a4d54 = S_FX_WIND_SHORT1_WAV_005A4D54;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4d68
+// 0x005a4d68
 char const * const s_fx_speech_s_005a4d68 = S_FX_SPEECH_S_005A4D68;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4d78
+// 0x005a4d78
 char const * const s_buildingwreck_01_wav_005a4d78 = S_BUILDINGWRECK_01_WAV_005A4D78;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4d90
+// 0x005a4d90
 char const * const s_general_victory8_wav_005a4d90 = S_GENERAL_VICTORY8_WAV_005A4D90;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4da8
+// 0x005a4da8
 char const * const s_general_victory7_wav_005a4da8 = S_GENERAL_VICTORY7_WAV_005A4DA8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4dc0
+// 0x005a4dc0
 char const * const s_general_victory6_wav_005a4dc0 = S_GENERAL_VICTORY6_WAV_005A4DC0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4dd8
+// 0x005a4dd8
 char const * const s_General_Warning10_wav_005a4dd8 = S_GENERAL_WARNING10_WAV_005A4DD8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4e08
+// 0x005a4e08
 char const * const s_fx_volume_txt_005a4e08 = S_FX_VOLUME_TXT_005A4E08;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4e18
+// 0x005a4e18
 char const * const s_rb_005a4e18 = S_RB_005A4E18;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4e1c
+// 0x005a4e1c
 char const * const s_Genie_41_wav_005a4e1c = S_GENIE_41_WAV_005A4E1C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4e2c
+// 0x005a4e2c
 char const * const s_Genie_44_wav_005a4e2c = S_GENIE_44_WAV_005A4E2C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4e3c
+// 0x005a4e3c
 char const * const s_Genie_43_wav_005a4e3c = S_GENIE_43_WAV_005A4E3C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4e4c
+// 0x005a4e4c
 char const * const s_Genie_42_wav_005a4e4c = S_GENIE_42_WAV_005A4E4C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4e5c
+// 0x005a4e5c
 char const * const s_Genie_39_wav_005a4e5c = S_GENIE_39_WAV_005A4E5C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4e6c
+// 0x005a4e6c
 char const * const s_Genie_38_wav_005a4e6c = S_GENIE_38_WAV_005A4E6C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4e7c
+// 0x005a4e7c
 char const * const s_Genie_37_wav_005a4e7c = S_GENIE_37_WAV_005A4E7C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4e8c
+// 0x005a4e8c
 char const * const s_Genie_34_wav_005a4e8c = S_GENIE_34_WAV_005A4E8C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4e9c
+// 0x005a4e9c
 char const * const s_Genie_32_wav_005a4e9c = S_GENIE_32_WAV_005A4E9C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4eac
+// 0x005a4eac
 char const * const s_Genie_31_wav_005a4eac = S_GENIE_31_WAV_005A4EAC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4ebc
+// 0x005a4ebc
 char const * const s_Genie_30_wav_005a4ebc = S_GENIE_30_WAV_005A4EBC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4ecc
+// 0x005a4ecc
 char const * const s_Genie_29_wav_005a4ecc = S_GENIE_29_WAV_005A4ECC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4ef4
+// 0x005a4ef4
 char const * const s_Genie_22_wav_005a4ef4 = S_GENIE_22_WAV_005A4EF4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4f04
+// 0x005a4f04
 char const * const s_Genie_21_wav_005a4f04 = S_GENIE_21_WAV_005A4F04;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4f14
+// 0x005a4f14
 char const * const s_Genie_20_wav_005a4f14 = S_GENIE_20_WAV_005A4F14;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4f24
+// 0x005a4f24
 char const * const s_Genie_19_wav_005a4f24 = S_GENIE_19_WAV_005A4F24;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4f34
+// 0x005a4f34
 char const * const s_Genie_18_wav_005a4f34 = S_GENIE_18_WAV_005A4F34;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4f44
+// 0x005a4f44
 char const * const s_Genie_17_wav_005a4f44 = S_GENIE_17_WAV_005A4F44;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4f54
+// 0x005a4f54
 char const * const s_Genie_16_wav_005a4f54 = S_GENIE_16_WAV_005A4F54;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4f64
+// 0x005a4f64
 char const * const SFX_YouAreTheGreatestLord = SFX_YOUARETHEGREATESTLORD;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4f74
+// 0x005a4f74
 char const * const s_Genie_25_wav_005a4f74 = S_GENIE_25_WAV_005A4F74;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4f84
+// 0x005a4f84
 char const * const SFX_FeelThePower = SFX_FEELTHEPOWER;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4f94
+// 0x005a4f94
 char const * const s_Genie_45_wav_005a4f94 = S_GENIE_45_WAV_005A4F94;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4fa4
+// 0x005a4fa4
 char const * const s_campaign_map_england_black_act_005a4fa4 = S_CAMPAIGN_MAP_ENGLAND_BLACK_ACT_005A4FA4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4fc4
+// 0x005a4fc4
 char const * const s_campaign_map_england_yellow_act_005a4fc4 = S_CAMPAIGN_MAP_ENGLAND_YELLOW_ACT_005A4FC4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a4fe4
+// 0x005a4fe4
 char const * const s_campaign_map_england_orange_act_005a4fe4 = S_CAMPAIGN_MAP_ENGLAND_ORANGE_ACT_005A4FE4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5004
+// 0x005a5004
 char const * const s_campaign_map_england_red_act_005a5004 = S_CAMPAIGN_MAP_ENGLAND_RED_ACT_005A5004;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5024
+// 0x005a5024
 char const * const s_campaign_map_england_blue_act_005a5024 = S_CAMPAIGN_MAP_ENGLAND_BLUE_ACT_005A5024;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5044
+// 0x005a5044
 char const * const s_campaign_map_england_basic_act_005a5044 = S_CAMPAIGN_MAP_ENGLAND_BASIC_ACT_005A5044;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5064
+// 0x005a5064
 char const * const s_act_005a5064 = S_ACT_005A5064;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5068
+// 0x005a5068
 char const * const s_gm1_005a5068 = S_GM1_005A5068;
 
-// STRING: STRONGHOLDCRUSADER 0x005a506c
+// 0x005a506c
 char const * const s_null_005a506c = S_NULL_005A506C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5074
+// 0x005a5074
 char const * const s_food_warning3_wav_005a5074 = S_FOOD_WARNING3_WAV_005A5074;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5088
+// 0x005a5088
 char const * const s_food_warning2_wav_005a5088 = S_FOOD_WARNING2_WAV_005A5088;
 
-// STRING: STRONGHOLDCRUSADER 0x005a509c
+// 0x005a509c
 char const * const s_food_warning4_wav_005a509c = S_FOOD_WARNING4_WAV_005A509C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a50b0
+// 0x005a50b0
 char const * const s_space_warning5_wav_005a50b0 = S_SPACE_WARNING5_WAV_005A50B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a50c4
+// 0x005a50c4
 char const * const s_PdLim__005a50c4 = S_PDLIM__005A50C4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a50cc
+// 0x005a50cc
 char const * const s_OrLim__005a50cc = S_ORLIM__005A50CC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a50d4
+// 0x005a50d4
 char const * const s_MoLim__005a50d4 = S_MOLIM__005A50D4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a50dc
+// 0x005a50dc
 char const * const s_FlLim__005a50dc = S_FLLIM__005A50DC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a50e4
+// 0x005a50e4
 char const * const s_StLim__005a50e4 = S_STLIM__005A50E4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a50ec
+// 0x005a50ec
 char const * const s_ChLim__005a50ec = S_CHLIM__005A50EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a50f4
+// 0x005a50f4
 char const * const s_Troops__005a50f4 = S_TROOPS__005A50F4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5100
+// 0x005a5100
 char const * const s_Enemy_hit__005a5100 = S_ENEMY_HIT__005A5100;
 
-// STRING: STRONGHOLDCRUSADER 0x005a510c
+// 0x005a510c
 char const * const s_Mini_spreads__005a510c = S_MINI_SPREADS__005A510C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a511c
+// 0x005a511c
 char const * const s_Spreads__005a511c = S_SPREADS__005A511C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5128
+// 0x005a5128
 char const * const s_Test_gatehouse__005a5128 = S_TEST_GATEHOUSE__005A5128;
 
-// STRING: STRONGHOLDCRUSADER 0x005a513c
+// 0x005a513c
 char const * const s_Test_likely__005a513c = S_TEST_LIKELY__005A513C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a514c
+// 0x005a514c
 char const * const s_1Wys__005a514c = S_1WYS__005A514C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5154
+// 0x005a5154
 char const * const s_Ass__005a5154 = S_ASS__005A5154;
 
-// STRING: STRONGHOLDCRUSADER 0x005a515c
+// 0x005a515c
 char const * const s_Xm__005a515c = S_XM__005A515C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5160
+// 0x005a5160
 char const * const s_Hard__005a5160 = S_HARD__005A5160;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5168
+// 0x005a5168
 char const * const s_Easy__005a5168 = S_EASY__005A5168;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5170
+// 0x005a5170
 char const * const s_Fires_005a5170 = S_FIRES_005A5170;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5178
+// 0x005a5178
 char const * const s_gate_links_005a5178 = S_GATE_LINKS_005A5178;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5184
+// 0x005a5184
 char const * const s_Moat_tiles_005a5184 = S_MOAT_TILES_005A5184;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5190
+// 0x005a5190
 char const * const s_skipped_isos_005a5190 = S_SKIPPED_ISOS_005A5190;
 
-// STRING: STRONGHOLDCRUSADER 0x005a51a0
+// 0x005a51a0
 char const * const s_fcn_mtribe_005a51a0 = S_FCN_MTRIBE_005A51A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a51ac
+// 0x005a51ac
 char const * const s_Ale_rate_005a51ac = S_ALE_RATE_005A51AC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a51b8
+// 0x005a51b8
 char const * const s_lord_killed_005a51b8 = S_LORD_KILLED_005A51B8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a51c8
+// 0x005a51c8
 char const * const s_vclock_005a51c8 = S_VCLOCK_005A51C8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a51d0
+// 0x005a51d0
 char const * const s_capacity_005a51d0 = S_CAPACITY_005A51D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a51dc
+// 0x005a51dc
 char const * const s_crowding_005a51dc = S_CROWDING_005A51DC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a51e8
+// 0x005a51e8
 char const * const s_popular__005a51e8 = S_POPULAR__005A51E8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a51f4
+// 0x005a51f4
 char const * const s_enemies_005a51f4 = S_ENEMIES_005A51F4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5200
+// 0x005a5200
 char const * const s_power_005a5200 = S_POWER_005A5200;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5208
+// 0x005a5208
 char const * const s_lightning_count_005a5208 = S_LIGHTNING_COUNT_005A5208;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5218
+// 0x005a5218
 char const * const s_last_food_005a5218 = S_LAST_FOOD_005A5218;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5224
+// 0x005a5224
 char const * const s_Pop_005a5224 = S_POP_005A5224;
 
-// STRING: STRONGHOLDCRUSADER 0x005a522c
+// 0x005a522c
 char const * const s_Total_chimps_005a522c = S_TOTAL_CHIMPS_005A522C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a523c
+// 0x005a523c
 char const * const s_CRC_005a523c = S_CRC_005A523C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5244
+// 0x005a5244
 char const * const s_new_organisms_005a5244 = S_NEW_ORGANISMS_005A5244;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5254
+// 0x005a5254
 char const * const s_Total_organisms_005a5254 = S_TOTAL_ORGANISMS_005A5254;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5268
+// 0x005a5268
 char const * const s_player_005a5268 = S_PLAYER_005A5268;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5270
+// 0x005a5270
 char const * const s_LIGHTBLUE_005a5270 = S_LIGHTBLUE_005A5270;
 
-// STRING: STRONGHOLDCRUSADER 0x005a527c
+// 0x005a527c
 char const * const s_DARKORANGE_005a527c = S_DARKORANGE_005A527C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5288
+// 0x005a5288
 char const * const s_LIGHTORANGE_005a5288 = S_LIGHTORANGE_005A5288;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5294
+// 0x005a5294
 char const * const s_ORANGE_005a5294 = S_ORANGE_005A5294;
 
-// STRING: STRONGHOLDCRUSADER 0x005a529c
+// 0x005a529c
 char const * const s_GREY_005a529c = S_GREY_005A529C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a52a4
+// 0x005a52a4
 char const * const s_CYAN_005a52a4 = S_CYAN_005A52A4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a52ac
+// 0x005a52ac
 char const * const s_YELLOW_005a52ac = S_YELLOW_005A52AC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a52b4
+// 0x005a52b4
 char const * const s_GREEN_005a52b4 = S_GREEN_005A52B4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a52bc
+// 0x005a52bc
 char const * const s_BLUE_005a52bc = S_BLUE_005A52BC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a52c4
+// 0x005a52c4
 char const * const s_RED_005a52c4 = S_RED_005A52C4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a52c8
+// 0x005a52c8
 char const * const s_WHITE_005a52c8 = S_WHITE_005A52C8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a52d0
+// 0x005a52d0
 char const * const s_BLACK_005a52d0 = S_BLACK_005A52D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a52d8
+// 0x005a52d8
 char const * const s_Stronghold_44_aa_005a52d8 = S_STRONGHOLD_44_AA_005A52D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a52ec
+// 0x005a52ec
 char const * const s_Stronghold_30_aa_005a52ec = S_STRONGHOLD_30_AA_005A52EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5300
+// 0x005a5300
 char const * const s_Stronghold_24_aa_005a5300 = S_STRONGHOLD_24_AA_005A5300;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5314
+// 0x005a5314
 char const * const s_Stronghold_16_aa_005a5314 = S_STRONGHOLD_16_AA_005A5314;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5328
+// 0x005a5328
 char const * const s_Stronghold_14_aa_005a5328 = S_STRONGHOLD_14_AA_005A5328;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5510
+// 0x005a5510
 char const * const s_wb_005a5510 = S_WB_005A5510;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5514
+// 0x005a5514
 char const * const s_Here_005a5514 = S_HERE_005A5514;
 
-// STRING: STRONGHOLDCRUSADER 0x005a551c
+// 0x005a551c
 char const * const s_Right_005a551c = S_RIGHT_005A551C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5524
+// 0x005a5524
 char const * const s_NEXT_005a5524 = S_NEXT_005A5524;
 
-// STRING: STRONGHOLDCRUSADER 0x005a552c
+// 0x005a552c
 char const * const s_PREV_005a552c = S_PREV_005A552C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5534
+// 0x005a5534
 char const * const s_Left_005a5534 = S_LEFT_005A5534;
 
-// STRING: STRONGHOLDCRUSADER 0x005a553c
+// 0x005a553c
 char const * const s_INCLUDE_005a553c = S_INCLUDE_005A553C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5544
+// 0x005a5544
 char const * const s_STRING_005a5544 = S_STRING_005A5544;
 
-// STRING: STRONGHOLDCRUSADER 0x005a554c
+// 0x005a554c
 char const * const s_SOUND_005a554c = S_SOUND_005A554C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5554
+// 0x005a5554
 char const * const s__CENTRE_005a5554 = S__CENTRE_005A5554;
 
-// STRING: STRONGHOLDCRUSADER 0x005a555c
+// 0x005a555c
 char const * const s_CENTRE_005a555c = S_CENTRE_005A555C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5564
+// 0x005a5564
 char const * const s__LINK_005a5564 = S__LINK_005A5564;
 
-// STRING: STRONGHOLDCRUSADER 0x005a556c
+// 0x005a556c
 char const * const s_LINK_005a556c = S_LINK_005A556C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5574
+// 0x005a5574
 char const * const s_LINKCLR_005a5574 = S_LINKCLR_005A5574;
 
-// STRING: STRONGHOLDCRUSADER 0x005a557c
+// 0x005a557c
 char const * const s_COLOUR_005a557c = S_COLOUR_005A557C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5584
+// 0x005a5584
 char const * const s_FONT_005a5584 = S_FONT_005A5584;
 
-// STRING: STRONGHOLDCRUSADER 0x005a558c
+// 0x005a558c
 char const * const s_PIC_005a558c = S_PIC_005A558C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5590
+// 0x005a5590
 char const * const s_Include_005a5590 = S_INCLUDE_005A5590;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5598
+// 0x005a5598
 char const * const s_String_005a5598 = S_STRING_005A5598;
 
-// STRING: STRONGHOLDCRUSADER 0x005a55a0
+// 0x005a55a0
 char const * const s_Sound_005a55a0 = S_SOUND_005A55A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a55a8
+// 0x005a55a8
 char const * const s_LinkClr_005a55a8 = S_LINKCLR_005A55A8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a55b0
+// 0x005a55b0
 char const * const s_Colour_005a55b0 = S_COLOUR_005A55B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a55b8
+// 0x005a55b8
 char const * const s__Centre_005a55b8 = S__CENTRE_005A55B8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a55c0
+// 0x005a55c0
 char const * const s_Centre_005a55c0 = S_CENTRE_005A55C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a55c8
+// 0x005a55c8
 char const * const s_Font_005a55c8 = S_FONT_005A55C8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a55d0
+// 0x005a55d0
 char const * const s__Link_005a55d0 = S__LINK_005A55D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a55d8
+// 0x005a55d8
 char const * const s_Link_005a55d8 = S_LINK_005A55D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a55e4
+// 0x005a55e4
 char const * const s_ScrSize_005a55e4 = S_SCRSIZE_005A55E4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a55ec
+// 0x005a55ec
 char const * const s_Save_005a55ec = S_SAVE_005A55EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a55f4
+// 0x005a55f4
 char const * const s_Load_005a55f4 = S_LOAD_005A55F4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a55fc
+// 0x005a55fc
 char const * const s_New_Page_005a55fc = S_NEW_PAGE_005A55FC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5608
+// 0x005a5608
 char const * const s_Symbols_005a5608 = S_SYMBOLS_005A5608;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5620
+// 0x005a5620
 char const * const s_crusader_help_hlp_005a5620 = S_CRUSADER_HELP_HLP_005A5620;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5728
+// 0x005a5728
 char const * const s_st99_dog_cage_tgx_005a5728 = S_ST99_DOG_CAGE_TGX_005A5728;
 
-// STRING: STRONGHOLDCRUSADER 0x005a585c
+// 0x005a585c
 char const * const s_Select_help_file_to_include_005a585c = S_SELECT_HELP_FILE_TO_INCLUDE_005A585C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5878
+// 0x005a5878
 char const * const s_Select_help_file_to_link_to_005a5878 = S_SELECT_HELP_FILE_TO_LINK_TO_005A5878;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5894
+// 0x005a5894
 char const * const s_Select_help_file_to_load_005a5894 = S_SELECT_HELP_FILE_TO_LOAD_005A5894;
 
-// STRING: STRONGHOLDCRUSADER 0x005a58b0
+// 0x005a58b0
 char const * const s_other_warning7_wav_005a58b0 = S_OTHER_WARNING7_WAV_005A58B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a58c4
+// 0x005a58c4
 char const * const s_other_warning5_wav_005a58c4 = S_OTHER_WARNING5_WAV_005A58C4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a58d8
+// 0x005a58d8
 char const * const s_units_warning3_wav_005a58d8 = S_UNITS_WARNING3_WAV_005A58D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a58ec
+// 0x005a58ec
 char const * const s_space_warning7_wav_005a58ec = S_SPACE_WARNING7_WAV_005A58EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5900
+// 0x005a5900
 char const * const s_space_warning6_wav_005a5900 = S_SPACE_WARNING6_WAV_005A5900;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5914
+// 0x005a5914
 char const * const s_space_warning4_wav_005a5914 = S_SPACE_WARNING4_WAV_005A5914;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5928
+// 0x005a5928
 char const * const s_space_warning3_wav_005a5928 = S_SPACE_WARNING3_WAV_005A5928;
 
-// STRING: STRONGHOLDCRUSADER 0x005a593c
+// 0x005a593c
 char const * const s_space_warning1_wav_005a593c = S_SPACE_WARNING1_WAV_005A593C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5950
+// 0x005a5950
 char const * const s_space_warning2_wav_005a5950 = S_SPACE_WARNING2_WAV_005A5950;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5964
+// 0x005a5964
 char const * const s_space_warning8_wav_005a5964 = S_SPACE_WARNING8_WAV_005A5964;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5978
+// 0x005a5978
 char const * const s_other_warning6_wav_005a5978 = S_OTHER_WARNING6_WAV_005A5978;
 
-// STRING: STRONGHOLDCRUSADER 0x005a598c
+// 0x005a598c
 char const * const s_Genie_26_wav_005a598c = S_GENIE_26_WAV_005A598C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a599c
+// 0x005a599c
 char const * const s_Genie_27_wav_005a599c = S_GENIE_27_WAV_005A599C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a59c8
+// 0x005a59c8
 char const * const s_FFwinClass_005a59c8 = S_FFWINCLASS_005A59C8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a59d4
+// 0x005a59d4
 char const * const s_1181_005a59d4 = S_1181_005A59D4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a59dc
+// 0x005a59dc
 char const * const s_Game_load_string_005a59dc = S_GAME_LOAD_STRING_005A59DC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a59f0
+// 0x005a59f0
 char const * const s_Campaign_name_string_005a59f0 = S_CAMPAIGN_NAME_STRING_005A59F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5a08
+// 0x005a5a08
 char const * const s__s_005a5a08 = S__S_005A5A08;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5a0c
+// 0x005a5a0c
 char const * const s_configpath_txt_005a5a0c = S_CONFIGPATH_TXT_005A5A0C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5a1c
+// 0x005a5a1c
 char const * const s_gfx__005a5a1c = S_GFX__005A5A1C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5a24
+// 0x005a5a24
 char const * const s_help__005a5a24 = S_HELP__005A5A24;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5a2c
+// 0x005a5a2c
 char const * const s_fx__005a5a2c = S_FX__005A5A2C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5a48
+// 0x005a5a48
 char const * const s_Wide_Open_Plain_005a5a48 = S_WIDE_OPEN_PLAIN_005A5A48;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5a58
+// 0x005a5a58
 char const * const s_Wazirs_Fortress_005a5a58 = S_WAZIRS_FORTRESS_005A5A58;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5a68
+// 0x005a5a68
 char const * const s_Ultimate_Victory_005a5a68 = S_ULTIMATE_VICTORY_005A5A68;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5a7c
+// 0x005a5a7c
 char const * const s_Three_Little_Pigs_005a5a7c = S_THREE_LITTLE_PIGS_005A5A7C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5a90
+// 0x005a5a90
 char const * const s_The_Host_005a5a90 = S_THE_HOST_005A5A90;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5a9c
+// 0x005a5a9c
 char const * const s_Swampy_Island_005a5a9c = S_SWAMPY_ISLAND_005A5A9C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5aac
+// 0x005a5aac
 char const * const s_Spider_Island_005a5aac = S_SPIDER_ISLAND_005A5AAC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5abc
+// 0x005a5abc
 char const * const s_Snake_River_005a5abc = S_SNAKE_RIVER_005A5ABC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5ac8
+// 0x005a5ac8
 char const * const s_Rivers_Fork_005a5ac8 = S_RIVERS_FORK_005A5AC8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5ad4
+// 0x005a5ad4
 char const * const s_Phoenix_005a5ad4 = S_PHOENIX_005A5AD4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5adc
+// 0x005a5adc
 char const * const s_MP_Valley_of_the_Lords_005a5adc = S_MP_VALLEY_OF_THE_LORDS_005A5ADC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5af4
+// 0x005a5af4
 char const * const s_MP_Two_Falls_005a5af4 = S_MP_TWO_FALLS_005A5AF4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5b04
+// 0x005a5b04
 char const * const s_MP_The_Rocky_Divide_005a5b04 = S_MP_THE_ROCKY_DIVIDE_005A5B04;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5b18
+// 0x005a5b18
 char const * const s_MP_Surrounded_005a5b18 = S_MP_SURROUNDED_005A5B18;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5b28
+// 0x005a5b28
 char const * const s_MP_Snake_River_005a5b28 = S_MP_SNAKE_RIVER_005A5B28;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5b38
+// 0x005a5b38
 char const * const s_MP_Slopes_of_Doom_005a5b38 = S_MP_SLOPES_OF_DOOM_005A5B38;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5b4c
+// 0x005a5b4c
 char const * const s_MP_No_Where_to_Hide_005a5b4c = S_MP_NO_WHERE_TO_HIDE_005A5B4C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5b60
+// 0x005a5b60
 char const * const s_MP_No_Mans_Land_005a5b60 = S_MP_NO_MANS_LAND_005A5B60;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5b70
+// 0x005a5b70
 char const * const s_MP_Downhill_Scrum_005a5b70 = S_MP_DOWNHILL_SCRUM_005A5B70;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5b84
+// 0x005a5b84
 char const * const s_MP_Divided_005a5b84 = S_MP_DIVIDED_005A5B84;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5b90
+// 0x005a5b90
 char const * const s_Look_Out_005a5b90 = S_LOOK_OUT_005A5B90;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5b9c
+// 0x005a5b9c
 char const * const s_Lionheart_005a5b9c = S_LIONHEART_005A5B9C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5ba8
+// 0x005a5ba8
 char const * const s_Jealous_Neighbours_005a5ba8 = S_JEALOUS_NEIGHBOURS_005A5BA8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5bbc
+// 0x005a5bbc
 char const * const s_Fury_Bay_005a5bbc = S_FURY_BAY_005A5BBC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5bc8
+// 0x005a5bc8
 char const * const s_Enclosure_005a5bc8 = S_ENCLOSURE_005A5BC8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5bd4
+// 0x005a5bd4
 char const * const s_Divided_005a5bd4 = S_DIVIDED_005A5BD4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5bdc
+// 0x005a5bdc
 char const * const s_Crossroads_005a5bdc = S_CROSSROADS_005A5BDC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5be8
+// 0x005a5be8
 char const * const s_Coastal_Trap_005a5be8 = S_COASTAL_TRAP_005A5BE8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5bf8
+// 0x005a5bf8
 char const * const s_Bird_In_Flight_005a5bf8 = S_BIRD_IN_FLIGHT_005A5BF8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5c08
+// 0x005a5c08
 char const * const s_Best_Friends_005a5c08 = S_BEST_FRIENDS_005A5C08;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5c18
+// 0x005a5c18
 char const * const s_Wall_of_Iron_005a5c18 = S_WALL_OF_IRON_005A5C18;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5c28
+// 0x005a5c28
 char const * const s_Watering_Holes_005a5c28 = S_WATERING_HOLES_005A5C28;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5c38
+// 0x005a5c38
 char const * const s_West_Coast_005a5c38 = S_WEST_COAST_005A5C38;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5c44
+// 0x005a5c44
 char const * const s_Upwards_Alliance_005a5c44 = S_UPWARDS_ALLIANCE_005A5C44;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5c58
+// 0x005a5c58
 char const * const s_Two_in_a_bed_005a5c58 = S_TWO_IN_A_BED_005A5C58;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5c68
+// 0x005a5c68
 char const * const s_Tilos_005a5c68 = S_TILOS_005A5C68;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5c70
+// 0x005a5c70
 char const * const s_The_Dunes_005a5c70 = S_THE_DUNES_005A5C70;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5c7c
+// 0x005a5c7c
 char const * const s_The_Wet_Lands_005a5c7c = S_THE_WET_LANDS_005A5C7C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5c8c
+// 0x005a5c8c
 char const * const s_The_Trench_005a5c8c = S_THE_TRENCH_005A5C8C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5c98
+// 0x005a5c98
 char const * const s_The_River_005a5c98 = S_THE_RIVER_005A5C98;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5ca4
+// 0x005a5ca4
 char const * const s_The_Last_Stand_005a5ca4 = S_THE_LAST_STAND_005A5CA4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5cb4
+// 0x005a5cb4
 char const * const s_The_Killing_Plains_005a5cb4 = S_THE_KILLING_PLAINS_005A5CB4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5cc8
+// 0x005a5cc8
 char const * const s_The_Guardians_005a5cc8 = S_THE_GUARDIANS_005A5CC8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5cd8
+// 0x005a5cd8
 char const * const s_The_Great_lake_005a5cd8 = S_THE_GREAT_LAKE_005A5CD8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5ce8
+// 0x005a5ce8
 char const * const s_The_Forest_Oasis_005a5ce8 = S_THE_FOREST_OASIS_005A5CE8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5cfc
+// 0x005a5cfc
 char const * const s_The_ford_across_the_river_005a5cfc = S_THE_FORD_ACROSS_THE_RIVER_005A5CFC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5d18
+// 0x005a5d18
 char const * const s_Trapesac_Island_005a5d18 = S_TRAPESAC_ISLAND_005A5D18;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5d28
+// 0x005a5d28
 char const * const s_Target_Zone_005a5d28 = S_TARGET_ZONE_005A5D28;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5d34
+// 0x005a5d34
 char const * const s_Too_Close_For_Comfort_005a5d34 = S_TOO_CLOSE_FOR_COMFORT_005A5D34;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5d4c
+// 0x005a5d4c
 char const * const s_The_Bulls_Eye_005a5d4c = S_THE_BULLS_EYE_005A5D4C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5d5c
+// 0x005a5d5c
 char const * const s_The_Valley_005a5d5c = S_THE_VALLEY_005A5D5C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5d68
+// 0x005a5d68
 char const * const s_Thasos_005a5d68 = S_THASOS_005A5D68;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5d70
+// 0x005a5d70
 char const * const s_Tripoli_005a5d70 = S_TRIPOLI_005A5D70;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5d78
+// 0x005a5d78
 char const * const s_Tyre_005a5d78 = S_TYRE_005A5D78;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5d80
+// 0x005a5d80
 char const * const s_Small_Island_005a5d80 = S_SMALL_ISLAND_005A5D80;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5d90
+// 0x005a5d90
 char const * const s_Small_Barren_Desert_005a5d90 = S_SMALL_BARREN_DESERT_005A5D90;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5da4
+// 0x005a5da4
 char const * const s_Strati_005a5da4 = S_STRATI_005A5DA4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5dac
+// 0x005a5dac
 char const * const s_Sleeping_With_The_Enemy_005a5dac = S_SLEEPING_WITH_THE_ENEMY_005A5DAC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5dc4
+// 0x005a5dc4
 char const * const s_Rock_Face_005a5dc4 = S_ROCK_FACE_005A5DC4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5dd0
+// 0x005a5dd0
 char const * const s_Region_of_Corinth_005a5dd0 = S_REGION_OF_CORINTH_005A5DD0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5de4
+// 0x005a5de4
 char const * const s_Reed_Sea_005a5de4 = S_REED_SEA_005A5DE4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5df0
+// 0x005a5df0
 char const * const s_Rocky_Oasis_005a5df0 = S_ROCKY_OASIS_005A5DF0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5dfc
+// 0x005a5dfc
 char const * const s_Riverside_Rampage_005a5dfc = S_RIVERSIDE_RAMPAGE_005A5DFC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5e10
+// 0x005a5e10
 char const * const s_Province_of_Bodrum_005a5e10 = S_PROVINCE_OF_BODRUM_005A5E10;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5e24
+// 0x005a5e24
 char const * const s_Pig_in_a_Poke_005a5e24 = S_PIG_IN_A_POKE_005A5E24;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5e34
+// 0x005a5e34
 char const * const s_Piggy_in_the_middle_005a5e34 = S_PIGGY_IN_THE_MIDDLE_005A5E34;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5e48
+// 0x005a5e48
 char const * const s_Oasis_by_the_Sea_005a5e48 = S_OASIS_BY_THE_SEA_005A5E48;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5e5c
+// 0x005a5e5c
 char const * const s_Oasis_Struggle_005a5e5c = S_OASIS_STRUGGLE_005A5E5C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5e6c
+// 0x005a5e6c
 char const * const s_Melos_005a5e6c = S_MELOS_005A5E6C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5e74
+// 0x005a5e74
 char const * const s_Marshy_Mayhem_005a5e74 = S_MARSHY_MAYHEM_005A5E74;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5e84
+// 0x005a5e84
 char const * const s_North_vs_South_005a5e84 = S_NORTH_VS_SOUTH_005A5E84;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5e94
+// 0x005a5e94
 char const * const s_No_Escape_005a5e94 = S_NO_ESCAPE_005A5E94;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5ea0
+// 0x005a5ea0
 char const * const s_Litani_and_Jordan_005a5ea0 = S_LITANI_AND_JORDAN_005A5EA0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5eb4
+// 0x005a5eb4
 char const * const s_Lake_Qaddas_005a5eb4 = S_LAKE_QADDAS_005A5EB4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5ec0
+// 0x005a5ec0
 char const * const s_Lakes_of_Konya_005a5ec0 = S_LAKES_OF_KONYA_005A5EC0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5ed0
+// 0x005a5ed0
 char const * const s_Lacus_Magnus_005a5ed0 = S_LACUS_MAGNUS_005A5ED0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5ee0
+// 0x005a5ee0
 char const * const s_Land_of_the_Cactus_005a5ee0 = S_LAND_OF_THE_CACTUS_005A5EE0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5ef4
+// 0x005a5ef4
 char const * const s_Large_Island_005a5ef4 = S_LARGE_ISLAND_005A5EF4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5f04
+// 0x005a5f04
 char const * const s_Large_Barren_Desert_005a5f04 = S_LARGE_BARREN_DESERT_005A5F04;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5f18
+// 0x005a5f18
 char const * const s_Love_Thy_Neighbour_005a5f18 = S_LOVE_THY_NEIGHBOUR_005A5F18;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5f2c
+// 0x005a5f2c
 char const * const s_Its_just_not_fair_005a5f2c = S_ITS_JUST_NOT_FAIR_005A5F2C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5f40
+// 0x005a5f40
 char const * const s_In_The_Shadow_005a5f40 = S_IN_THE_SHADOW_005A5F40;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5f50
+// 0x005a5f50
 char const * const s_In_The_canyons_005a5f50 = S_IN_THE_CANYONS_005A5F50;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5f60
+// 0x005a5f60
 char const * const s_Its_a_jungle_out_there_005a5f60 = S_ITS_A_JUNGLE_OUT_THERE_005A5F60;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5f78
+// 0x005a5f78
 char const * const s_Island_Hoppin_005a5f78 = S_ISLAND_HOPPIN_005A5F78;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5f88
+// 0x005a5f88
 char const * const s_Inches_Apart_005a5f88 = S_INCHES_APART_005A5F88;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5f98
+// 0x005a5f98
 char const * const s_Hidden_Crater_005a5f98 = S_HIDDEN_CRATER_005A5F98;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5fa8
+// 0x005a5fa8
 char const * const s_Hills_of_Antioch_005a5fa8 = S_HILLS_OF_ANTIOCH_005A5FA8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5fbc
+// 0x005a5fbc
 char const * const s_Halys_River_005a5fbc = S_HALYS_RIVER_005A5FBC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5fc8
+// 0x005a5fc8
 char const * const s_Hilltop_Hideout_005a5fc8 = S_HILLTOP_HIDEOUT_005A5FC8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5fd8
+// 0x005a5fd8
 char const * const s_Hell_On_The_Hill_005a5fd8 = S_HELL_ON_THE_HILL_005A5FD8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a5fec
+// 0x005a5fec
 char const * const s_Height_Advantage_005a5fec = S_HEIGHT_ADVANTAGE_005A5FEC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6000
+// 0x005a6000
 char const * const s_Happy_Land_005a6000 = S_HAPPY_LAND_005A6000;
 
-// STRING: STRONGHOLDCRUSADER 0x005a600c
+// 0x005a600c
 char const * const s_Great_Euphrates_005a600c = S_GREAT_EUPHRATES_005A600C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a601c
+// 0x005a601c
 char const * const s_Green_Haven_005a601c = S_GREEN_HAVEN_005A601C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6028
+// 0x005a6028
 char const * const s_Green_Belt_005a6028 = S_GREEN_BELT_005A6028;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6034
+// 0x005a6034
 char const * const s_Flood_Plains_of_Jordan_005a6034 = S_FLOOD_PLAINS_OF_JORDAN_005A6034;
 
-// STRING: STRONGHOLDCRUSADER 0x005a604c
+// 0x005a604c
 char const * const s_Edessa_005a604c = S_EDESSA_005A604C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6054
+// 0x005a6054
 char const * const s_Empty_Handed_005a6054 = S_EMPTY_HANDED_005A6054;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6064
+// 0x005a6064
 char const * const s_Dunes_of_Nicaea_005a6064 = S_DUNES_OF_NICAEA_005A6064;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6074
+// 0x005a6074
 char const * const s_Drawn_and_Quartered_005a6074 = S_DRAWN_AND_QUARTERED_005A6074;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6088
+// 0x005a6088
 char const * const s_Desert_Island_Blues_005a6088 = S_DESERT_ISLAND_BLUES_005A6088;
 
-// STRING: STRONGHOLDCRUSADER 0x005a609c
+// 0x005a609c
 char const * const s_Craggy_Cliffs_005a609c = S_CRAGGY_CLIFFS_005A609C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a60ac
+// 0x005a60ac
 char const * const s_Coconut_Twist_005a60ac = S_COCONUT_TWIST_005A60AC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a60bc
+// 0x005a60bc
 char const * const s_Caesarea_Swampland_005a60bc = S_CAESAREA_SWAMPLAND_005A60BC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a60d0
+// 0x005a60d0
 char const * const s_Cyclades_005a60d0 = S_CYCLADES_005A60D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a60dc
+// 0x005a60dc
 char const * const s_Crusader_Demo_005a60dc = S_CRUSADER_DEMO_005A60DC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a60ec
+// 0x005a60ec
 char const * const s_Canyons_005a60ec = S_CANYONS_005A60EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a60f4
+// 0x005a60f4
 char const * const s_Cactus_Valley_005a60f4 = S_CACTUS_VALLEY_005A60F4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6104
+// 0x005a6104
 char const * const s_Crete_Peninsula_005a6104 = S_CRETE_PENINSULA_005A6104;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6114
+// 0x005a6114
 char const * const s_Close_Encounters_005a6114 = S_CLOSE_ENCOUNTERS_005A6114;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6128
+// 0x005a6128
 char const * const s_Centre_of_the_Oasis_005a6128 = S_CENTRE_OF_THE_OASIS_005A6128;
 
-// STRING: STRONGHOLDCRUSADER 0x005a613c
+// 0x005a613c
 char const * const s_Broken_Dune_005a613c = S_BROKEN_DUNE_005A613C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6148
+// 0x005a6148
 char const * const s_Bow_Ridge_005a6148 = S_BOW_RIDGE_005A6148;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6154
+// 0x005a6154
 char const * const s_Border_Patrol_005a6154 = S_BORDER_PATROL_005A6154;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6164
+// 0x005a6164
 char const * const s_Arnon_River_005a6164 = S_ARNON_RIVER_005A6164;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6170
+// 0x005a6170
 char const * const s_Armenia_005a6170 = S_ARMENIA_005A6170;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6178
+// 0x005a6178
 char const * const s_A_Mighty_Oasis_005a6178 = S_A_MIGHTY_OASIS_005A6178;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6188
+// 0x005a6188
 char const * const s_Antioch_005a6188 = S_ANTIOCH_005A6188;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6190
+// 0x005a6190
 char const * const s_A_Friend_Indeed_005a6190 = S_A_FRIEND_INDEED_005A6190;
 
-// STRING: STRONGHOLDCRUSADER 0x005a61a0
+// 0x005a61a0
 char const * const s_A_New_Land_005a61a0 = S_A_NEW_LAND_005A61A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a61ac
+// 0x005a61ac
 char const * const s_A_resourceful_divide_005a61ac = S_A_RESOURCEFUL_DIVIDE_005A61AC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a61c4
+// 0x005a61c4
 char const * const s_DirectDrawCreateEx_005a61c4 = S_DIRECTDRAWCREATEEX_005A61C4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a61d8
+// 0x005a61d8
 char const * const s_DirectDrawCreate_005a61d8 = S_DIRECTDRAWCREATE_005A61D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a61ec
+// 0x005a61ec
 char const * const s_DDRAW_DLL_005a61ec = S_DDRAW_DLL_005A61EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6208
+// 0x005a6208
 char const * const s_Vid__d__sys__d_005a6208 = S_VID__D__SYS__D_005A6208;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6218
+// 0x005a6218
 char const * const s_scimitar_ani_005a6218 = S_SCIMITAR_ANI_005A6218;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6228
+// 0x005a6228
 char const * const s_delete_not_ani_005a6228 = S_DELETE_NOT_ANI_005A6228;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6238
+// 0x005a6238
 char const * const s_hand_ani_005a6238 = S_HAND_ANI_005A6238;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6244
+// 0x005a6244
 char const * const s_jester_ani_005a6244 = S_JESTER_ANI_005A6244;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6250
+// 0x005a6250
 char const * const s_delete_ani_005a6250 = S_DELETE_ANI_005A6250;
 
-// STRING: STRONGHOLDCRUSADER 0x005a625c
+// 0x005a625c
 char const * const s_sword_ani_005a625c = S_SWORD_ANI_005A625C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6268
+// 0x005a6268
 char const * const s_Select_TGX_file_to_import_005a6268 = S_SELECT_TGX_FILE_TO_IMPORT_005A6268;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6284
+// 0x005a6284
 char const * const s_Select_help_file_to_save_005a6284 = S_SELECT_HELP_FILE_TO_SAVE_005A6284;
 
-// STRING: STRONGHOLDCRUSADER 0x005a62a0
+// 0x005a62a0
 char const * const s_Select_sound_file_to_import_005a62a0 = S_SELECT_SOUND_FILE_TO_IMPORT_005A62A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a62f8
+// 0x005a62f8
 char const * const s_SPANISH_005a62f8 = S_SPANISH_005A62F8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6300
+// 0x005a6300
 char const * const s_italian_005a6300 = S_ITALIAN_005A6300;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6308
+// 0x005a6308
 char const * const s_french_005a6308 = S_FRENCH_005A6308;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6310
+// 0x005a6310
 char const * const s_german_005a6310 = S_GERMAN_005A6310;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6318
+// 0x005a6318
 char const * const s_american_005a6318 = S_AMERICAN_005A6318;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6324
+// 0x005a6324
 char const * const s_english_005a6324 = S_ENGLISH_005A6324;
 
-// STRING: STRONGHOLDCRUSADER 0x005a632c
+// 0x005a632c
 char const * const s_polish_005a632c = S_POLISH_005A632C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6334
+// 0x005a6334
 char const * const s_cr_tex_005a6334 = S_CR_TEX_005A6334;
 
-// STRING: STRONGHOLDCRUSADER 0x005a633c
+// 0x005a633c
 char const * const s_Err_raw__d_005a633c = S_ERR_RAW__D_005A633C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6348
+// 0x005a6348
 char const * const s_Err_cmp__d_005a6348 = S_ERR_CMP__D_005A6348;
 
-// STRING: STRONGHOLDCRUSADER 0x005a63a8
+// 0x005a63a8
 char const * const s_bad_locale_name_005a63a8 = S_BAD_LOCALE_NAME_005A63A8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a63e8
+// 0x005a63e8
 char const * const s_C_005a63e8 = S_C_005A63E8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a63ec
+// 0x005a63ec
 char const * const s_ios_base_eofbit_set_005a63ec = S_IOS_BASE_EOFBIT_SET_005A63EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6404
+// 0x005a6404
 char const * const s_ios_base_failbit_set_005a6404 = S_IOS_BASE_FAILBIT_SET_005A6404;
 
-// STRING: STRONGHOLDCRUSADER 0x005a641c
+// 0x005a641c
 char const * const s_ios_base_badbit_set_005a641c = S_IOS_BASE_BADBIT_SET_005A641C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6434
+// 0x005a6434
 char const * const s__Stronghold_Crusader__005a6434 = S__STRONGHOLD_CRUSADER__005A6434;
 
-// STRING: STRONGHOLDCRUSADER 0x005a644c
+// 0x005a644c
 char const * const s_Saves__005a644c = S_SAVES__005A644C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6454
+// 0x005a6454
 char const * const s_Maps__005a6454 = S_MAPS__005A6454;
 
-// STRING: STRONGHOLDCRUSADER 0x005a645c
+// 0x005a645c
 char const * const s_bad_cast_005a645c = S_BAD_CAST_005A645C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a648c
+// 0x005a648c
 char const * const s__map_005a648c = S__MAP_005A648C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6494
+// 0x005a6494
 char const * const s_mission_005a6494 = S_MISSION_005A6494;
 
-// STRING: STRONGHOLDCRUSADER 0x005a649c
+// 0x005a649c
 char const * const s_mapsExtreme_map_005a649c = S_MAPSEXTREME_MAP_005A649C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a64b0
+// 0x005a64b0
 char const * const s_maps_map_005a64b0 = S_MAPS_MAP_005A64B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a64bc
+// 0x005a64bc
 char const * const s_scores__005a64bc = S_SCORES__005A64BC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a64c4
+// 0x005a64c4
 char const * const s_maps__005a64c4 = S_MAPS__005A64C4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a64cc
+// 0x005a64cc
 char const * const s_fx_speech__005a64cc = S_FX_SPEECH__005A64CC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a64d8
+// 0x005a64d8
 char const * const s_binks__005a64d8 = S_BINKS__005A64D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a64e0
+// 0x005a64e0
 char const * const s_castles__005a64e0 = S_CASTLES__005A64E0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a64ec
+// 0x005a64ec
 char const * const s_gfx8__005a64ec = S_GFX8__005A64EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a64f4
+// 0x005a64f4
 char const * const s_scenarios__005a64f4 = S_SCENARIOS__005A64F4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6500
+// 0x005a6500
 char const * const s_faces_bmp_005a6500 = S_FACES_BMP_005A6500;
 
-// STRING: STRONGHOLDCRUSADER 0x005a651c
+// 0x005a651c
 char const * const DAT_BMP_MagicValue = DAT_BMP_MAGICVALUE;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6520
+// 0x005a6520
 char const * const s_screen_capture__03d_bmp_005a6520 = S_SCREEN_CAPTURE__03D_BMP_005A6520;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6538
+// 0x005a6538
 char const * const s_screen_capture_bmp_005a6538 = S_SCREEN_CAPTURE_BMP_005A6538;
 
-// STRING: STRONGHOLDCRUSADER 0x005a654c
+// 0x005a654c
 char const * const s_fx_music_flt_19_raw_005a654c = S_FX_MUSIC_FLT_19_RAW_005A654C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6560
+// 0x005a6560
 char const * const s_fx_music_flt_18_raw_005a6560 = S_FX_MUSIC_FLT_18_RAW_005A6560;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6574
+// 0x005a6574
 char const * const s_fx_music_flt_17_raw_005a6574 = S_FX_MUSIC_FLT_17_RAW_005A6574;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6588
+// 0x005a6588
 char const * const s_fx_music_flt_16_raw_005a6588 = S_FX_MUSIC_FLT_16_RAW_005A6588;
 
-// STRING: STRONGHOLDCRUSADER 0x005a659c
+// 0x005a659c
 char const * const s_fx_music_flt_15_raw_005a659c = S_FX_MUSIC_FLT_15_RAW_005A659C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a65b0
+// 0x005a65b0
 char const * const s_fx_music_flt_14_raw_005a65b0 = S_FX_MUSIC_FLT_14_RAW_005A65B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a65c4
+// 0x005a65c4
 char const * const s_fx_music_flt_13_raw_005a65c4 = S_FX_MUSIC_FLT_13_RAW_005A65C4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a65d8
+// 0x005a65d8
 char const * const s_fx_music_flt_12_raw_005a65d8 = S_FX_MUSIC_FLT_12_RAW_005A65D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a65ec
+// 0x005a65ec
 char const * const s_fx_music_flt_11_raw_005a65ec = S_FX_MUSIC_FLT_11_RAW_005A65EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6600
+// 0x005a6600
 char const * const s_fx_music_flt_10_raw_005a6600 = S_FX_MUSIC_FLT_10_RAW_005A6600;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6614
+// 0x005a6614
 char const * const s_fx_music_flt_09_raw_005a6614 = S_FX_MUSIC_FLT_09_RAW_005A6614;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6628
+// 0x005a6628
 char const * const s_fx_music_flt_08_raw_005a6628 = S_FX_MUSIC_FLT_08_RAW_005A6628;
 
-// STRING: STRONGHOLDCRUSADER 0x005a663c
+// 0x005a663c
 char const * const s_fx_music_flt_06_raw_005a663c = S_FX_MUSIC_FLT_06_RAW_005A663C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6650
+// 0x005a6650
 char const * const s_fx_music_flt_05_raw_005a6650 = S_FX_MUSIC_FLT_05_RAW_005A6650;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6664
+// 0x005a6664
 char const * const s_fx_music_flt_03_raw_005a6664 = S_FX_MUSIC_FLT_03_RAW_005A6664;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6678
+// 0x005a6678
 char const * const s_fx_music_flt_02_raw_005a6678 = S_FX_MUSIC_FLT_02_RAW_005A6678;
 
-// STRING: STRONGHOLDCRUSADER 0x005a668c
+// 0x005a668c
 char const * const s_fx_music_flt_01_raw_005a668c = S_FX_MUSIC_FLT_01_RAW_005A668C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a66a0
+// 0x005a66a0
 char const * const s_fx_music_oud_24_raw_005a66a0 = S_FX_MUSIC_OUD_24_RAW_005A66A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a66b4
+// 0x005a66b4
 char const * const s_fx_music_oud_23_raw_005a66b4 = S_FX_MUSIC_OUD_23_RAW_005A66B4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a66c8
+// 0x005a66c8
 char const * const s_fx_music_oud_22_raw_005a66c8 = S_FX_MUSIC_OUD_22_RAW_005A66C8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a66dc
+// 0x005a66dc
 char const * const s_fx_music_oud_21_raw_005a66dc = S_FX_MUSIC_OUD_21_RAW_005A66DC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a66f0
+// 0x005a66f0
 char const * const s_fx_music_oud_19_raw_005a66f0 = S_FX_MUSIC_OUD_19_RAW_005A66F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6704
+// 0x005a6704
 char const * const s_fx_music_oud_18_raw_005a6704 = S_FX_MUSIC_OUD_18_RAW_005A6704;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6718
+// 0x005a6718
 char const * const s_fx_music_oud_17_raw_005a6718 = S_FX_MUSIC_OUD_17_RAW_005A6718;
 
-// STRING: STRONGHOLDCRUSADER 0x005a672c
+// 0x005a672c
 char const * const s_fx_music_oud_16_raw_005a672c = S_FX_MUSIC_OUD_16_RAW_005A672C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6740
+// 0x005a6740
 char const * const s_fx_music_oud_15_raw_005a6740 = S_FX_MUSIC_OUD_15_RAW_005A6740;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6754
+// 0x005a6754
 char const * const s_fx_music_oud_14_raw_005a6754 = S_FX_MUSIC_OUD_14_RAW_005A6754;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6768
+// 0x005a6768
 char const * const s_fx_music_oud_13_raw_005a6768 = S_FX_MUSIC_OUD_13_RAW_005A6768;
 
-// STRING: STRONGHOLDCRUSADER 0x005a677c
+// 0x005a677c
 char const * const s_fx_music_oud_12_raw_005a677c = S_FX_MUSIC_OUD_12_RAW_005A677C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6790
+// 0x005a6790
 char const * const s_fx_music_oud_11_raw_005a6790 = S_FX_MUSIC_OUD_11_RAW_005A6790;
 
-// STRING: STRONGHOLDCRUSADER 0x005a67a4
+// 0x005a67a4
 char const * const s_fx_music_oud_20_raw_005a67a4 = S_FX_MUSIC_OUD_20_RAW_005A67A4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a67b8
+// 0x005a67b8
 char const * const s_fx_music_oud_09_raw_005a67b8 = S_FX_MUSIC_OUD_09_RAW_005A67B8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a67cc
+// 0x005a67cc
 char const * const s_fx_music_oud_08_raw_005a67cc = S_FX_MUSIC_OUD_08_RAW_005A67CC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a67e0
+// 0x005a67e0
 char const * const s_fx_music_oud_07_raw_005a67e0 = S_FX_MUSIC_OUD_07_RAW_005A67E0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a67f4
+// 0x005a67f4
 char const * const s_fx_music_oud_06_raw_005a67f4 = S_FX_MUSIC_OUD_06_RAW_005A67F4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6808
+// 0x005a6808
 char const * const s_fx_music_oud_05_raw_005a6808 = S_FX_MUSIC_OUD_05_RAW_005A6808;
 
-// STRING: STRONGHOLDCRUSADER 0x005a681c
+// 0x005a681c
 char const * const s_fx_music_oud_04_raw_005a681c = S_FX_MUSIC_OUD_04_RAW_005A681C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6830
+// 0x005a6830
 char const * const s_fx_music_oud_03_raw_005a6830 = S_FX_MUSIC_OUD_03_RAW_005A6830;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6844
+// 0x005a6844
 char const * const s_fx_music_oud_02_raw_005a6844 = S_FX_MUSIC_OUD_02_RAW_005A6844;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6858
+// 0x005a6858
 char const * const s_fx_music_oud_01_raw_005a6858 = S_FX_MUSIC_OUD_01_RAW_005A6858;
 
-// STRING: STRONGHOLDCRUSADER 0x005a686c
+// 0x005a686c
 char const * const s_fx_music_flt_07_raw_005a686c = S_FX_MUSIC_FLT_07_RAW_005A686C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6880
+// 0x005a6880
 char const * const s_fx_music_flt_narr1_raw_005a6880 = S_FX_MUSIC_FLT_NARR1_RAW_005A6880;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6898
+// 0x005a6898
 char const * const s_fx_music_solovln_01_raw_005a6898 = S_FX_MUSIC_SOLOVLN_01_RAW_005A6898;
 
-// STRING: STRONGHOLDCRUSADER 0x005a68b0
+// 0x005a68b0
 char const * const s_fx_music_flt_04_raw_005a68b0 = S_FX_MUSIC_FLT_04_RAW_005A68B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a68c4
+// 0x005a68c4
 char const * const s_fx_music_crusader_raw_005a68c4 = S_FX_MUSIC_CRUSADER_RAW_005A68C4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a68dc
+// 0x005a68dc
 char const * const s_fx_music_bigloss2_raw_005a68dc = S_FX_MUSIC_BIGLOSS2_RAW_005A68DC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a68f4
+// 0x005a68f4
 char const * const s_fx_music_bigloss1_raw_005a68f4 = S_FX_MUSIC_BIGLOSS1_RAW_005A68F4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a690c
+// 0x005a690c
 char const * const s_fx_music_bigwin3_raw_005a690c = S_FX_MUSIC_BIGWIN3_RAW_005A690C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6924
+// 0x005a6924
 char const * const s_fx_music_bigwin2_raw_005a6924 = S_FX_MUSIC_BIGWIN2_RAW_005A6924;
 
-// STRING: STRONGHOLDCRUSADER 0x005a693c
+// 0x005a693c
 char const * const s_fx_music_bigwin1_raw_005a693c = S_FX_MUSIC_BIGWIN1_RAW_005A693C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6954
+// 0x005a6954
 char const * const s_fx_music_drumloop1b_raw_005a6954 = S_FX_MUSIC_DRUMLOOP1B_RAW_005A6954;
 
-// STRING: STRONGHOLDCRUSADER 0x005a696c
+// 0x005a696c
 char const * const s_fx_music_drumloop1a_raw_005a696c = S_FX_MUSIC_DRUMLOOP1A_RAW_005A696C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6984
+// 0x005a6984
 char const * const s_fx_music_glory_06_raw_005a6984 = S_FX_MUSIC_GLORY_06_RAW_005A6984;
 
-// STRING: STRONGHOLDCRUSADER 0x005a699c
+// 0x005a699c
 char const * const s_fx_music_glory_05_raw_005a699c = S_FX_MUSIC_GLORY_05_RAW_005A699C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a69b4
+// 0x005a69b4
 char const * const s_fx_music_glory_04_raw_005a69b4 = S_FX_MUSIC_GLORY_04_RAW_005A69B4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a69cc
+// 0x005a69cc
 char const * const s_fx_music_glory_03_raw_005a69cc = S_FX_MUSIC_GLORY_03_RAW_005A69CC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a69e4
+// 0x005a69e4
 char const * const s_fx_music_glory_02_raw_005a69e4 = S_FX_MUSIC_GLORY_02_RAW_005A69E4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a69fc
+// 0x005a69fc
 char const * const s_fx_music_glory_01_raw_005a69fc = S_FX_MUSIC_GLORY_01_RAW_005A69FC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6a14
+// 0x005a6a14
 char const * const s_fx_music_honor_05_raw_005a6a14 = S_FX_MUSIC_HONOR_05_RAW_005A6A14;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6a2c
+// 0x005a6a2c
 char const * const s_fx_music_honor_04_raw_005a6a2c = S_FX_MUSIC_HONOR_04_RAW_005A6A2C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6a44
+// 0x005a6a44
 char const * const s_fx_music_honor_03_raw_005a6a44 = S_FX_MUSIC_HONOR_03_RAW_005A6A44;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6a5c
+// 0x005a6a5c
 char const * const s_fx_music_honor_02_raw_005a6a5c = S_FX_MUSIC_HONOR_02_RAW_005A6A5C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6a74
+// 0x005a6a74
 char const * const s_fx_music_percloop1_raw_005a6a74 = S_FX_MUSIC_PERCLOOP1_RAW_005A6A74;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6a8c
+// 0x005a6a8c
 char const * const s_fx_music_drumloop1c_raw_005a6a8c = S_FX_MUSIC_DRUMLOOP1C_RAW_005A6A8C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6aa4
+// 0x005a6aa4
 char const * const s_fx_music_suspense2c_raw_005a6aa4 = S_FX_MUSIC_SUSPENSE2C_RAW_005A6AA4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6abc
+// 0x005a6abc
 char const * const s_fx_music_suspense2b_raw_005a6abc = S_FX_MUSIC_SUSPENSE2B_RAW_005A6ABC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6ad4
+// 0x005a6ad4
 char const * const s_fx_music_suspense2a_raw_005a6ad4 = S_FX_MUSIC_SUSPENSE2A_RAW_005A6AD4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6aec
+// 0x005a6aec
 char const * const s_fx_music_suspense1b_raw_005a6aec = S_FX_MUSIC_SUSPENSE1B_RAW_005A6AEC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6b04
+// 0x005a6b04
 char const * const s_fx_music_suspense1a_raw_005a6b04 = S_FX_MUSIC_SUSPENSE1A_RAW_005A6B04;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6b1c
+// 0x005a6b1c
 char const * const s_fx_music_end_music_raw_005a6b1c = S_FX_MUSIC_END_MUSIC_RAW_005A6B1C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6b34
+// 0x005a6b34
 char const * const s_fx_music_cameltoe_raw_005a6b34 = S_FX_MUSIC_CAMELTOE_RAW_005A6B34;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6b4c
+// 0x005a6b4c
 char const * const s_fx_music_dar_meshq_raw_005a6b4c = S_FX_MUSIC_DAR_MESHQ_RAW_005A6B4C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6b64
+// 0x005a6b64
 char const * const s_fx_music_sandalmaker_raw_005a6b64 = S_FX_MUSIC_SANDALMAKER_RAW_005A6B64;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6b80
+// 0x005a6b80
 char const * const s_fx_music_caravan_raw_005a6b80 = S_FX_MUSIC_CARAVAN_RAW_005A6B80;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6b98
+// 0x005a6b98
 char const * const s_fx_music_thelastdrop_raw_005a6b98 = S_FX_MUSIC_THELASTDROP_RAW_005A6B98;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6bb4
+// 0x005a6bb4
 char const * const s_fx_music_crusader_solo_raw_005a6bb4 = S_FX_MUSIC_CRUSADER_SOLO_RAW_005A6BB4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6bd0
+// 0x005a6bd0
 char const * const s_fx_music_trancefusion_raw_005a6bd0 = S_FX_MUSIC_TRANCEFUSION_RAW_005A6BD0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6bec
+// 0x005a6bec
 char const * const s_fx_music_caravan_ambient_raw_005a6bec = S_FX_MUSIC_CARAVAN_AMBIENT_RAW_005A6BEC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6c0c
+// 0x005a6c0c
 char const * const s_fx_music_apaneintheglass_raw_005a6c0c = S_FX_MUSIC_APANEINTHEGLASS_RAW_005A6C0C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6c2c
+// 0x005a6c2c
 char const * const s_fx_music_stainedglass1_raw_005a6c2c = S_FX_MUSIC_STAINEDGLASS1_RAW_005A6C2C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6c48
+// 0x005a6c48
 char const * const s_fx_music_monks1_raw_005a6c48 = S_FX_MUSIC_MONKS1_RAW_005A6C48;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6c5c
+// 0x005a6c5c
 char const * const s_fx_music_null_raw_005a6c5c = S_FX_MUSIC_NULL_RAW_005A6C5C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6c70
+// 0x005a6c70
 char const * const s_fx_music_astrongspice_raw_005a6c70 = S_FX_MUSIC_ASTRONGSPICE_RAW_005A6C70;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6c8c
+// 0x005a6c8c
 char const * const s_fx_music_sand_wedgie_raw_005a6c8c = S_FX_MUSIC_SAND_WEDGIE_RAW_005A6C8C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6ca8
+// 0x005a6ca8
 char const * const s_fx_music_demopiece_22k_raw_005a6ca8 = S_FX_MUSIC_DEMOPIECE_22K_RAW_005A6CA8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6cc4
+// 0x005a6cc4
 char const * const s__wav_005a6cc4 = S__WAV_005A6CC4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6ccc
+// 0x005a6ccc
 char const * const s_General_Warning4_wav_005a6ccc = S_GENERAL_WARNING4_WAV_005A6CCC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6ce4
+// 0x005a6ce4
 char const * const s_General_Warning15_wav_005a6ce4 = S_GENERAL_WARNING15_WAV_005A6CE4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6cfc
+// 0x005a6cfc
 char const * const s_miles_005a6cfc = S_MILES_005A6CFC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6d04
+// 0x005a6d04
 char const * const s_insult20_wav_005a6d04 = S_INSULT20_WAV_005A6D04;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6d14
+// 0x005a6d14
 char const * const s_insult19_wav_005a6d14 = S_INSULT19_WAV_005A6D14;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6d24
+// 0x005a6d24
 char const * const s_insult18_wav_005a6d24 = S_INSULT18_WAV_005A6D24;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6d34
+// 0x005a6d34
 char const * const s_insult17_wav_005a6d34 = S_INSULT17_WAV_005A6D34;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6d44
+// 0x005a6d44
 char const * const s_insult16_wav_005a6d44 = S_INSULT16_WAV_005A6D44;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6d54
+// 0x005a6d54
 char const * const s_insult15_wav_005a6d54 = S_INSULT15_WAV_005A6D54;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6d64
+// 0x005a6d64
 char const * const s_insult14_wav_005a6d64 = S_INSULT14_WAV_005A6D64;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6d74
+// 0x005a6d74
 char const * const s_insult13_wav_005a6d74 = S_INSULT13_WAV_005A6D74;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6d84
+// 0x005a6d84
 char const * const s_insult12_wav_005a6d84 = S_INSULT12_WAV_005A6D84;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6d94
+// 0x005a6d94
 char const * const s_insult11_wav_005a6d94 = S_INSULT11_WAV_005A6D94;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6da4
+// 0x005a6da4
 char const * const s_insult10_wav_005a6da4 = S_INSULT10_WAV_005A6DA4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6db4
+// 0x005a6db4
 char const * const s_insult9_wav_005a6db4 = S_INSULT9_WAV_005A6DB4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6dc0
+// 0x005a6dc0
 char const * const s_insult8_wav_005a6dc0 = S_INSULT8_WAV_005A6DC0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6dcc
+// 0x005a6dcc
 char const * const s_insult7_wav_005a6dcc = S_INSULT7_WAV_005A6DCC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6dd8
+// 0x005a6dd8
 char const * const s_insult6_wav_005a6dd8 = S_INSULT6_WAV_005A6DD8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6de4
+// 0x005a6de4
 char const * const s_insult5_wav_005a6de4 = S_INSULT5_WAV_005A6DE4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6df0
+// 0x005a6df0
 char const * const s_insult4_wav_005a6df0 = S_INSULT4_WAV_005A6DF0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6dfc
+// 0x005a6dfc
 char const * const s_insult3_wav_005a6dfc = S_INSULT3_WAV_005A6DFC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6e08
+// 0x005a6e08
 char const * const s_insult2_wav_005a6e08 = S_INSULT2_WAV_005A6E08;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6e14
+// 0x005a6e14
 char const * const s_insult1_wav_005a6e14 = S_INSULT1_WAV_005A6E14;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6f00
+// 0x005a6f00
 char const * const s__d_d_d_d_005a6f00 = S__D_D_D_D_005A6F00;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6f10
+// 0x005a6f10
 char const * const s__d_d_d_d____d_d_d_d_005a6f10 = S__D_D_D_D____D_D_D_D_005A6F10;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6f30
+// 0x005a6f30
 char const * const s_Stronghold_s_005a6f30 = S_STRONGHOLD_S_005A6F30;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6f54
+// 0x005a6f54
 char const * const s_aphex_exe_005a6f54 = S_APHEX_EXE_005A6F54;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6f60
+// 0x005a6f60
 char const * const s___005a6f60 = S___005A6F60;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6f64
+// 0x005a6f64
 char const * const s_InstDir_005a6f64 = S_INSTDIR_005A6F64;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6f6c
+// 0x005a6f6c
 char const * const s_Software_GameSpy_GameSpy_Arcade_005a6f6c = S_SOFTWARE_GAMESPY_GAMESPY_ARCADE_005A6F6C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6f8c
+// 0x005a6f8c
 char const * const s_Error_DirectPlay_unknown__x_005a6f8c = S_ERROR_DIRECTPLAY_UNKNOWN__X_005A6F8C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6fa8
+// 0x005a6fa8
 char const * const s_First_split_zone__005a6fa8 = S_FIRST_SPLIT_ZONE__005A6FA8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6fbc
+// 0x005a6fbc
 char const * const s_Total_split_zones__005a6fbc = S_TOTAL_SPLIT_ZONES__005A6FBC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6fd4
+// 0x005a6fd4
 char const * const s_First_split_pitch_ditch__005a6fd4 = S_FIRST_SPLIT_PITCH_DITCH__005A6FD4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a6ff0
+// 0x005a6ff0
 char const * const s_Total_split_pitch_ditchs__005a6ff0 = S_TOTAL_SPLIT_PITCH_DITCHS__005A6FF0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a700c
+// 0x005a700c
 char const * const s_First_split_teleport__005a700c = S_FIRST_SPLIT_TELEPORT__005A700C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7024
+// 0x005a7024
 char const * const s_Total_split_teleports__005a7024 = S_TOTAL_SPLIT_TELEPORTS__005A7024;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7040
+// 0x005a7040
 char const * const s_First_split_moat__005a7040 = S_FIRST_SPLIT_MOAT__005A7040;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7054
+// 0x005a7054
 char const * const s_Total_split_moats__005a7054 = S_TOTAL_SPLIT_MOATS__005A7054;
 
-// STRING: STRONGHOLDCRUSADER 0x005a706c
+// 0x005a706c
 char const * const s_First_split_fly__005a706c = S_FIRST_SPLIT_FLY__005A706C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7080
+// 0x005a7080
 char const * const s_Total_split_flies__005a7080 = S_TOTAL_SPLIT_FLIES__005A7080;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7098
+// 0x005a7098
 char const * const s_First_split_layer__005a7098 = S_FIRST_SPLIT_LAYER__005A7098;
 
-// STRING: STRONGHOLDCRUSADER 0x005a70b0
+// 0x005a70b0
 char const * const s_Total_split_layers__005a70b0 = S_TOTAL_SPLIT_LAYERS__005A70B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a70c8
+// 0x005a70c8
 char const * const s_First_split_element__005a70c8 = S_FIRST_SPLIT_ELEMENT__005A70C8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a70e0
+// 0x005a70e0
 char const * const s_Total_split_elements__005a70e0 = S_TOTAL_SPLIT_ELEMENTS__005A70E0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a70f8
+// 0x005a70f8
 char const * const s_First_split_player__005a70f8 = S_FIRST_SPLIT_PLAYER__005A70F8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7110
+// 0x005a7110
 char const * const s_Total_split_players__005a7110 = S_TOTAL_SPLIT_PLAYERS__005A7110;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7128
+// 0x005a7128
 char const * const s_First_split_tribe__005a7128 = S_FIRST_SPLIT_TRIBE__005A7128;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7140
+// 0x005a7140
 char const * const s_Total_split_tribes__005a7140 = S_TOTAL_SPLIT_TRIBES__005A7140;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7158
+// 0x005a7158
 char const * const s_First_split_veg__005a7158 = S_FIRST_SPLIT_VEG__005A7158;
 
-// STRING: STRONGHOLDCRUSADER 0x005a716c
+// 0x005a716c
 char const * const s_Total_split_veg__005a716c = S_TOTAL_SPLIT_VEG__005A716C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7180
+// 0x005a7180
 char const * const s_First_split_structure__005a7180 = S_FIRST_SPLIT_STRUCTURE__005A7180;
 
-// STRING: STRONGHOLDCRUSADER 0x005a719c
+// 0x005a719c
 char const * const s_Total_split_structures__005a719c = S_TOTAL_SPLIT_STRUCTURES__005A719C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a71b8
+// 0x005a71b8
 char const * const s_First_split_chimp__005a71b8 = S_FIRST_SPLIT_CHIMP__005A71B8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a71d0
+// 0x005a71d0
 char const * const s_Total_split_chimps__005a71d0 = S_TOTAL_SPLIT_CHIMPS__005A71D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a71e8
+// 0x005a71e8
 char const * const s_Total_split_data_items__005a71e8 = S_TOTAL_SPLIT_DATA_ITEMS__005A71E8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7204
+// 0x005a7204
 char const * const s___Game_elements_005a7204 = S___GAME_ELEMENTS_005A7204;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7218
+// 0x005a7218
 char const * const s___Players_005a7218 = S___PLAYERS_005A7218;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7224
+// 0x005a7224
 char const * const s___Tribes_005a7224 = S___TRIBES_005A7224;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7230
+// 0x005a7230
 char const * const s___Vegetation_005a7230 = S___VEGETATION_005A7230;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7240
+// 0x005a7240
 char const * const s___Structures_005a7240 = S___STRUCTURES_005A7240;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7250
+// 0x005a7250
 char const * const s___Chimps_005a7250 = S___CHIMPS_005A7250;
 
-// STRING: STRONGHOLDCRUSADER 0x005a725c
+// 0x005a725c
 char const * const s_Splinter_box_005a725c = S_SPLINTER_BOX_005A725C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7270
+// 0x005a7270
 char const * const s_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdef_005a7270 = S_ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEF_005A7270;
 
-// STRING: STRONGHOLDCRUSADER 0x005a72b4
+// 0x005a72b4
 char const * const s_packet_size_d_new_size_d_type__005a72b4 = S_PACKET_SIZE_D_NEW_SIZE_D_TYPE__005A72B4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a72d8
+// 0x005a72d8
 char const * const s_ID_d_OF_d_M_d_S_d_005a72d8 = S_ID_D_OF_D_M_D_S_D_005A72D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a72f0
+// 0x005a72f0
 char const * const s_GT__005a72f0 = S_GT__005A72F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a72f8
+// 0x005a72f8
 char const * const s_Multi_Op__005a72f8 = S_MULTI_OP__005A72F8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7304
+// 0x005a7304
 char const * const s___005a7304 = S___005A7304;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7308
+// 0x005a7308
 char const * const s_Battle_Level__005a7308 = S_BATTLE_LEVEL__005A7308;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7318
+// 0x005a7318
 char const * const s_Clans__005a7318 = S_CLANS__005A7318;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7320
+// 0x005a7320
 char const * const s_cl_time_diff__005a7320 = S_CL_TIME_DIFF__005A7320;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7330
+// 0x005a7330
 char const * const s_pending_chores__005a7330 = S_PENDING_CHORES__005A7330;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7344
+// 0x005a7344
 char const * const s_chore_latency__005a7344 = S_CHORE_LATENCY__005A7344;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7354
+// 0x005a7354
 char const * const s_random_no__005a7354 = S_RANDOM_NO__005A7354;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7360
+// 0x005a7360
 char const * const s_id_count__005a7360 = S_ID_COUNT__005A7360;
 
-// STRING: STRONGHOLDCRUSADER 0x005a736c
+// 0x005a736c
 char const * const s_Structs__005a736c = S_STRUCTS__005A736C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7378
+// 0x005a7378
 char const * const s_Chimps__005a7378 = S_CHIMPS__005A7378;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7384
+// 0x005a7384
 char const * const s_ZONE__005a7384 = S_ZONE__005A7384;
 
-// STRING: STRONGHOLDCRUSADER 0x005a738c
+// 0x005a738c
 char const * const s_PIDI__005a738c = S_PIDI__005A738C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7394
+// 0x005a7394
 char const * const s_TELE__005a7394 = S_TELE__005A7394;
 
-// STRING: STRONGHOLDCRUSADER 0x005a739c
+// 0x005a739c
 char const * const s_MOAT__005a739c = S_MOAT__005A739C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a73a4
+// 0x005a73a4
 char const * const s_FLY__005a73a4 = S_FLY__005A73A4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a73ac
+// 0x005a73ac
 char const * const s_LAY__005a73ac = S_LAY__005A73AC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a73b4
+// 0x005a73b4
 char const * const s_GAM__005a73b4 = S_GAM__005A73B4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a73bc
+// 0x005a73bc
 char const * const s_PLA__005a73bc = S_PLA__005A73BC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a73c4
+// 0x005a73c4
 char const * const s_TRI__005a73c4 = S_TRI__005A73C4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a73cc
+// 0x005a73cc
 char const * const s_VEG__005a73cc = S_VEG__005A73CC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a73d4
+// 0x005a73d4
 char const * const s_STR__005a73d4 = S_STR__005A73D4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a73dc
+// 0x005a73dc
 char const * const s_CHI__005a73dc = S_CHI__005A73DC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a73e4
+// 0x005a73e4
 char const * const s_Game_in_sync_005a73e4 = S_GAME_IN_SYNC_005A73E4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a73f4
+// 0x005a73f4
 char const * const s_GAME_SPLINTERED_005a73f4 = S_GAME_SPLINTERED_005A73F4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7408
+// 0x005a7408
 char const * const s_GAME_SPLINTERED___Resyncing_005a7408 = S_GAME_SPLINTERED___RESYNCING_005A7408;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7424
+// 0x005a7424
 char const * const s_Crc_times_005a7424 = S_CRC_TIMES_005A7424;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7430
+// 0x005a7430
 char const * const s_Crcs_005a7430 = S_CRCS_005A7430;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7438
+// 0x005a7438
 char const * const s_Logical_speed__005a7438 = S_LOGICAL_SPEED__005A7438;
 
-// STRING: STRONGHOLDCRUSADER 0x005a744c
+// 0x005a744c
 char const * const s_Relative_time__005a744c = S_RELATIVE_TIME__005A744C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a745c
+// 0x005a745c
 char const * const s___005a745c = S___005A745C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7460
+// 0x005a7460
 char const * const s_p_005a7460 = S_P_005A7460;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7464
+// 0x005a7464
 char const * const s_Timings_005a7464 = S_TIMINGS_005A7464;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7470
+// 0x005a7470
 char const * const s_Adv__005a7470 = S_ADV__005A7470;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7478
+// 0x005a7478
 char const * const s_Chores_used__005a7478 = S_CHORES_USED__005A7478;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7488
+// 0x005a7488
 char const * const s_Packets_in__005a7488 = S_PACKETS_IN__005A7488;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7498
+// 0x005a7498
 char const * const s__msv_005a7498 = S__MSV_005A7498;
 
-// STRING: STRONGHOLDCRUSADER 0x005a74a0
+// 0x005a74a0
 char const * const s_Glob__d_005a74a0 = S_GLOB__D_005A74A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a74a8
+// 0x005a74a8
 char const * const s_Contestant_005a74a8 = S_CONTESTANT_005A74A8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a74b4
+// 0x005a74b4
 char const * const s_autosave_005a74b4 = S_AUTOSAVE_005A74B4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a74c0
+// 0x005a74c0
 char const * const s_DP_SYS_Message___x_005a74c0 = S_DP_SYS_MESSAGE___X_005A74C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a74d4
+// 0x005a74d4
 char const * const s__name_005a74d4 = S__NAME_005A74D4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a74dc
+// 0x005a74dc
 char const * const s__host_005a74dc = S__HOST_005A74DC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a74e4
+// 0x005a74e4
 char const * const s__connect_005a74e4 = S__CONNECT_005A74E4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a74f0
+// 0x005a74f0
 char const * const s_1600x900_005a74f0 = S_1600X900_005A74F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a74fc
+// 0x005a74fc
 char const * const s_1680x1050_005a74fc = S_1680X1050_005A74FC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7508
+// 0x005a7508
 char const * const s_1360x768_005a7508 = S_1360X768_005A7508;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7514
+// 0x005a7514
 char const * const s_1366x768_005a7514 = S_1366X768_005A7514;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7520
+// 0x005a7520
 char const * const s_2560x1600_005a7520 = S_2560X1600_005A7520;
 
-// STRING: STRONGHOLDCRUSADER 0x005a752c
+// 0x005a752c
 char const * const s_2560x1440_005a752c = S_2560X1440_005A752C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7538
+// 0x005a7538
 char const * const s_1920x1200_005a7538 = S_1920X1200_005A7538;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7544
+// 0x005a7544
 char const * const s_1920x1080_005a7544 = S_1920X1080_005A7544;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7550
+// 0x005a7550
 char const * const s_1440x900_005a7550 = S_1440X900_005A7550;
 
-// STRING: STRONGHOLDCRUSADER 0x005a755c
+// 0x005a755c
 char const * const s_1280x720_005a755c = S_1280X720_005A755C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7568
+// 0x005a7568
 char const * const s_1600x1200_005a7568 = S_1600X1200_005A7568;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7574
+// 0x005a7574
 char const * const s_1280x1024_005a7574 = S_1280X1024_005A7574;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7580
+// 0x005a7580
 char const * const s_1024x768_005a7580 = S_1024X768_005A7580;
 
-// STRING: STRONGHOLDCRUSADER 0x005a758c
+// 0x005a758c
 char const * const s_1024x600_005a758c = S_1024X600_005A758C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7598
+// 0x005a7598
 char const * const s_800x600_005a7598 = S_800X600_005A7598;
 
-// STRING: STRONGHOLDCRUSADER 0x005a75a0
+// 0x005a75a0
 char const * const s__sav_005a75a0 = S__SAV_005A75A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a75a8
+// 0x005a75a8
 char const * const s__tmp_005a75a8 = S__TMP_005A75A8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a75b0
+// 0x005a75b0
 char const * const s_maps_tmp_005a75b0 = S_MAPS_TMP_005A75B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a75bc
+// 0x005a75bc
 char const * const s_crusader_cfg_005a75bc = S_CRUSADER_CFG_005A75BC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a75cc
+// 0x005a75cc
 char const * const s__sav_005a75cc = S__SAV_005A75CC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a75d4
+// 0x005a75d4
 char const * const s__msv_005a75d4 = S__MSV_005A75D4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a75dc
+// 0x005a75dc
 char const * const s_400x400_005a75dc = S_400X400_005A75DC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a75e4
+// 0x005a75e4
 char const * const s_300x300_005a75e4 = S_300X300_005A75E4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a75ec
+// 0x005a75ec
 char const * const s_200x200_005a75ec = S_200X200_005A75EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a75f4
+// 0x005a75f4
 char const * const s_160x160_005a75f4 = S_160X160_005A75F4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a75fc
+// 0x005a75fc
 char const * const s_King_of_the_Hill_005a75fc = S_KING_OF_THE_HILL_005A75FC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7610
+// 0x005a7610
 char const * const s_Multi_005a7610 = S_MULTI_005A7610;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7618
+// 0x005a7618
 char const * const s_Single_005a7618 = S_SINGLE_005A7618;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7620
+// 0x005a7620
 char const * const s_Just_Build_005a7620 = S_JUST_BUILD_005A7620;
 
-// STRING: STRONGHOLDCRUSADER 0x005a762c
+// 0x005a762c
 char const * const s_Economic_005a762c = S_ECONOMIC_005A762C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7638
+// 0x005a7638
 char const * const s_Invasion_005a7638 = S_INVASION_005A7638;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7644
+// 0x005a7644
 char const * const s_Siege_005a7644 = S_SIEGE_005A7644;
 
-// STRING: STRONGHOLDCRUSADER 0x005a764c
+// 0x005a764c
 char const * const s_Mission_005a764c = S_MISSION_005A764C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7654
+// 0x005a7654
 char const * const s_Playable_005a7654 = S_PLAYABLE_005A7654;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7660
+// 0x005a7660
 char const * const s_Editable_005a7660 = S_EDITABLE_005A7660;
 
-// STRING: STRONGHOLDCRUSADER 0x005a766c
+// 0x005a766c
 char const * const s__d__s_005a766c = S__D__S_005A766C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7674
+// 0x005a7674
 char const * const s__d__s___005a7674 = S__D__S___005A7674;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7680
+// 0x005a7680
 char const * const s_Genie_02_wav_005a7680 = S_GENIE_02_WAV_005A7680;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7690
+// 0x005a7690
 char const * const s_genie_04_wav_005a7690 = S_GENIE_04_WAV_005A7690;
 
-// STRING: STRONGHOLDCRUSADER 0x005a76a0
+// 0x005a76a0
 char const * const s_genie_10_wav_005a76a0 = S_GENIE_10_WAV_005A76A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a76b0
+// 0x005a76b0
 char const * const s_genie_09_wav_005a76b0 = S_GENIE_09_WAV_005A76B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a76c0
+// 0x005a76c0
 char const * const s_genie_08_wav_005a76c0 = S_GENIE_08_WAV_005A76C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a76d0
+// 0x005a76d0
 char const * const s_genie_07_wav_005a76d0 = S_GENIE_07_WAV_005A76D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a76e0
+// 0x005a76e0
 char const * const s_genie_06_wav_005a76e0 = S_GENIE_06_WAV_005A76E0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a76f0
+// 0x005a76f0
 char const * const s_genie_05_wav_005a76f0 = S_GENIE_05_WAV_005A76F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7700
+// 0x005a7700
 char const * const s_Genie_14_wav_005a7700 = S_GENIE_14_WAV_005A7700;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7710
+// 0x005a7710
 char const * const s_Genie_13_wav_005a7710 = S_GENIE_13_WAV_005A7710;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7720
+// 0x005a7720
 char const * const s___Success_005a7720 = S___SUCCESS_005A7720;
 
-// STRING: STRONGHOLDCRUSADER 0x005a772c
+// 0x005a772c
 char const * const s_Total_Success_005a772c = S_TOTAL_SUCCESS_005A772C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a773c
+// 0x005a773c
 char const * const s_Can_t_place_keep_005a773c = S_CAN_T_PLACE_KEEP_005A773C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7750
+// 0x005a7750
 char const * const s_File_missing_005a7750 = S_FILE_MISSING_005A7750;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7760
+// 0x005a7760
 char const * const s_Village_Placement_Success_005a7760 = S_VILLAGE_PLACEMENT_SUCCESS_005A7760;
 
-// STRING: STRONGHOLDCRUSADER 0x005a777c
+// 0x005a777c
 char const * const s_Mission___005a777c = S_MISSION___005A777C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7788
+// 0x005a7788
 char const * const s_Mission___Defaults_005a7788 = S_MISSION___DEFAULTS_005A7788;
 
-// STRING: STRONGHOLDCRUSADER 0x005a779c
+// 0x005a779c
 char const * const s_No_tree_growth_005a779c = S_NO_TREE_GROWTH_005A779C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a77ac
+// 0x005a77ac
 char const * const s_other_warning2_wav_005a77ac = S_OTHER_WARNING2_WAV_005A77AC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a77c0
+// 0x005a77c0
 char const * const s_other_warning1_wav_005a77c0 = S_OTHER_WARNING1_WAV_005A77C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a77d4
+// 0x005a77d4
 char const * const s_ms_005a77d4 = S_MS_005A77D4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a77d8
+// 0x005a77d8
 char const * const s_battlehorn_wav_005a77d8 = S_BATTLEHORN_WAV_005A77D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a77e8
+// 0x005a77e8
 char const * const s_game_running_wav_005a77e8 = S_GAME_RUNNING_WAV_005A77E8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a77fc
+// 0x005a77fc
 char const * const s_game_paused_wav_005a77fc = S_GAME_PAUSED_WAV_005A77FC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a780c
+// 0x005a780c
 char const * const s_bad_soldier_nevous_bik_005a780c = S_BAD_SOLDIER_NEVOUS_BIK_005A780C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7824
+// 0x005a7824
 char const * const s_bad_soldier_taunt_bik_005a7824 = S_BAD_SOLDIER_TAUNT_BIK_005A7824;
 
-// STRING: STRONGHOLDCRUSADER 0x005a783c
+// 0x005a783c
 char const * const s_pg_vict3_bik_005a783c = S_PG_VICT3_BIK_005A783C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a784c
+// 0x005a784c
 char const * const s_wf_vict2_bik_005a784c = S_WF_VICT2_BIK_005A784C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a785c
+// 0x005a785c
 char const * const s_pg_vict2_bik_005a785c = S_PG_VICT2_BIK_005A785C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a786c
+// 0x005a786c
 char const * const s_sn_vict1_bik_005a786c = S_SN_VICT1_BIK_005A786C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a787c
+// 0x005a787c
 char const * const s_nazir_natural_bik_005a787c = S_NAZIR_NATURAL_BIK_005A787C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7890
+// 0x005a7890
 char const * const s_richard_natural_bik_005a7890 = S_RICHARD_NATURAL_BIK_005A7890;
 
-// STRING: STRONGHOLDCRUSADER 0x005a78a4
+// 0x005a78a4
 char const * const s_sultan_natural_bik_005a78a4 = S_SULTAN_NATURAL_BIK_005A78A4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a78b8
+// 0x005a78b8
 char const * const s_saladin_natural_bik_005a78b8 = S_SALADIN_NATURAL_BIK_005A78B8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a78cc
+// 0x005a78cc
 char const * const s_wf_vict1_bik_005a78cc = S_WF_VICT1_BIK_005A78CC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a78dc
+// 0x005a78dc
 char const * const s_pg_vict1_bik_005a78dc = S_PG_VICT1_BIK_005A78DC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a78ec
+// 0x005a78ec
 char const * const s_sn_vict2_bik_005a78ec = S_SN_VICT2_BIK_005A78EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a78fc
+// 0x005a78fc
 char const * const s_rt_vict1_bik_005a78fc = S_RT_VICT1_BIK_005A78FC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a790c
+// 0x005a790c
 char const * const s_ma_natural_bik_005a790c = S_MA_NATURAL_BIK_005A790C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a791c
+// 0x005a791c
 char const * const s_vizir_natural_bik_005a791c = S_VIZIR_NATURAL_BIK_005A791C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7930
+// 0x005a7930
 char const * const s_richard_anger_bik_005a7930 = S_RICHARD_ANGER_BIK_005A7930;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7944
+// 0x005a7944
 char const * const s_rt_plead3_bik_005a7944 = S_RT_PLEAD3_BIK_005A7944;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7954
+// 0x005a7954
 char const * const s_fred_nervous_bik_005a7954 = S_FRED_NERVOUS_BIK_005A7954;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7968
+// 0x005a7968
 char const * const s_wf_plead2_bik_005a7968 = S_WF_PLEAD2_BIK_005A7968;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7978
+// 0x005a7978
 char const * const s_pg_plead2_bik_005a7978 = S_PG_PLEAD2_BIK_005A7978;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7988
+// 0x005a7988
 char const * const s_rt_plead2_bik_005a7988 = S_RT_PLEAD2_BIK_005A7988;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7998
+// 0x005a7998
 char const * const s_sheriff_nervous_bik_005a7998 = S_SHERIFF_NERVOUS_BIK_005A7998;
 
-// STRING: STRONGHOLDCRUSADER 0x005a79ac
+// 0x005a79ac
 char const * const s_nazir_nervous_bik_005a79ac = S_NAZIR_NERVOUS_BIK_005A79AC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a79c0
+// 0x005a79c0
 char const * const s_vizir_nervous_bik_005a79c0 = S_VIZIR_NERVOUS_BIK_005A79C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a79d4
+// 0x005a79d4
 char const * const s_sultan_nervous_bik_005a79d4 = S_SULTAN_NERVOUS_BIK_005A79D4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a79e8
+// 0x005a79e8
 char const * const s_bad_arab_nervous_bik_005a79e8 = S_BAD_ARAB_NERVOUS_BIK_005A79E8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7a00
+// 0x005a7a00
 char const * const s_saladin_nervous_bik_005a7a00 = S_SALADIN_NERVOUS_BIK_005A7A00;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7a14
+// 0x005a7a14
 char const * const s_wf_plead1_bik_005a7a14 = S_WF_PLEAD1_BIK_005A7A14;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7a24
+// 0x005a7a24
 char const * const s_pg_plead1_bik_005a7a24 = S_PG_PLEAD1_BIK_005A7A24;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7a34
+// 0x005a7a34
 char const * const s_sn_plead2_bik_005a7a34 = S_SN_PLEAD2_BIK_005A7A34;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7a44
+// 0x005a7a44
 char const * const s_rt_plead1_bik_005a7a44 = S_RT_PLEAD1_BIK_005A7A44;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7a54
+// 0x005a7a54
 char const * const s_abbot_nervous_bik_005a7a54 = S_ABBOT_NERVOUS_BIK_005A7A54;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7a68
+// 0x005a7a68
 char const * const s_emir_nervous_bik_005a7a68 = S_EMIR_NERVOUS_BIK_005A7A68;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7a7c
+// 0x005a7a7c
 char const * const s_philip_anger_bik_005a7a7c = S_PHILIP_ANGER_BIK_005A7A7C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7a90
+// 0x005a7a90
 char const * const s_abbot_angry_bik_005a7a90 = S_ABBOT_ANGRY_BIK_005A7A90;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7aa0
+// 0x005a7aa0
 char const * const s_ma_nervous_bik_005a7aa0 = S_MA_NERVOUS_BIK_005A7AA0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7ab0
+// 0x005a7ab0
 char const * const s_emir_angry_bik_005a7ab0 = S_EMIR_ANGRY_BIK_005A7AB0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7ac0
+// 0x005a7ac0
 char const * const s_philip_nervous_bik_005a7ac0 = S_PHILIP_NERVOUS_BIK_005A7AC0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7ad4
+// 0x005a7ad4
 char const * const s_fred_anger_bik_005a7ad4 = S_FRED_ANGER_BIK_005A7AD4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7ae4
+// 0x005a7ae4
 char const * const s_richard_nervous_bik_005a7ae4 = S_RICHARD_NERVOUS_BIK_005A7AE4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7af8
+// 0x005a7af8
 char const * const s_sultan_anger_bik_005a7af8 = S_SULTAN_ANGER_BIK_005A7AF8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7b0c
+// 0x005a7b0c
 char const * const s_saladin_angry_bik_005a7b0c = S_SALADIN_ANGRY_BIK_005A7B0C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7b20
+// 0x005a7b20
 char const * const s_wf_anger1_bik_005a7b20 = S_WF_ANGER1_BIK_005A7B20;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7b30
+// 0x005a7b30
 char const * const s_pg_anger1_bik_005a7b30 = S_PG_ANGER1_BIK_005A7B30;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7b40
+// 0x005a7b40
 char const * const s_sn_anger1_bik_005a7b40 = S_SN_ANGER1_BIK_005A7B40;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7b50
+// 0x005a7b50
 char const * const s_rt_anger1_bik_005a7b50 = S_RT_ANGER1_BIK_005A7B50;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7b60
+// 0x005a7b60
 char const * const s_abbot_natural_bik_005a7b60 = S_ABBOT_NATURAL_BIK_005A7B60;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7b74
+// 0x005a7b74
 char const * const s_ma_angry_bik_005a7b74 = S_MA_ANGRY_BIK_005A7B74;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7b84
+// 0x005a7b84
 char const * const s_sheriff_anger_bik_005a7b84 = S_SHERIFF_ANGER_BIK_005A7B84;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7b98
+// 0x005a7b98
 char const * const s_fred_natural_bik_005a7b98 = S_FRED_NATURAL_BIK_005A7B98;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7bac
+// 0x005a7bac
 char const * const s_bad_arab_natural_bik_005a7bac = S_BAD_ARAB_NATURAL_BIK_005A7BAC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7bc4
+// 0x005a7bc4
 char const * const s_sheriff_natural_bik_005a7bc4 = S_SHERIFF_NATURAL_BIK_005A7BC4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7bd8
+// 0x005a7bd8
 char const * const s_nazir_taunt_bik_005a7bd8 = S_NAZIR_TAUNT_BIK_005A7BD8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7be8
+// 0x005a7be8
 char const * const s_emir_natural_bik_005a7be8 = S_EMIR_NATURAL_BIK_005A7BE8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7bfc
+// 0x005a7bfc
 char const * const s_vizir_angry_bik_005a7bfc = S_VIZIR_ANGRY_BIK_005A7BFC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7c0c
+// 0x005a7c0c
 char const * const s_philip_taunt_bik_005a7c0c = S_PHILIP_TAUNT_BIK_005A7C0C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7c20
+// 0x005a7c20
 char const * const s_bad_arab_anger_bik_005a7c20 = S_BAD_ARAB_ANGER_BIK_005A7C20;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7c34
+// 0x005a7c34
 char const * const s_wf_taunt2_bik_005a7c34 = S_WF_TAUNT2_BIK_005A7C34;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7c44
+// 0x005a7c44
 char const * const s_pg_taunt2_bik_005a7c44 = S_PG_TAUNT2_BIK_005A7C44;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7c54
+// 0x005a7c54
 char const * const s_sn_taunt2_bik_005a7c54 = S_SN_TAUNT2_BIK_005A7C54;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7c64
+// 0x005a7c64
 char const * const s_rt_taunt1_bik_005a7c64 = S_RT_TAUNT1_BIK_005A7C64;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7c74
+// 0x005a7c74
 char const * const s_abbot_confident_bik_005a7c74 = S_ABBOT_CONFIDENT_BIK_005A7C74;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7c88
+// 0x005a7c88
 char const * const s_ma_taunt_bik_005a7c88 = S_MA_TAUNT_BIK_005A7C88;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7c98
+// 0x005a7c98
 char const * const s_sheriff_taunt_bik_005a7c98 = S_SHERIFF_TAUNT_BIK_005A7C98;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7cac
+// 0x005a7cac
 char const * const s_nazir_angry_bik_005a7cac = S_NAZIR_ANGRY_BIK_005A7CAC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7cbc
+// 0x005a7cbc
 char const * const s_emir_taunt_bik_005a7cbc = S_EMIR_TAUNT_BIK_005A7CBC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7ccc
+// 0x005a7ccc
 char const * const s_vizir_taunt_bik_005a7ccc = S_VIZIR_TAUNT_BIK_005A7CCC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7cdc
+// 0x005a7cdc
 char const * const s_philip_natural_bik_005a7cdc = S_PHILIP_NATURAL_BIK_005A7CDC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7cf0
+// 0x005a7cf0
 char const * const s_fred_taunt_bik_005a7cf0 = S_FRED_TAUNT_BIK_005A7CF0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7d00
+// 0x005a7d00
 char const * const s_richard_taunting_bik_005a7d00 = S_RICHARD_TAUNTING_BIK_005A7D00;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7d18
+// 0x005a7d18
 char const * const s_sultan_taunt_bik_005a7d18 = S_SULTAN_TAUNT_BIK_005A7D18;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7d2c
+// 0x005a7d2c
 char const * const s_bad_arab_taunt_bik_005a7d2c = S_BAD_ARAB_TAUNT_BIK_005A7D2C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7d40
+// 0x005a7d40
 char const * const s_saladin_taunting_bik_005a7d40 = S_SALADIN_TAUNTING_BIK_005A7D40;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7d58
+// 0x005a7d58
 char const * const s_wf_taunt1_bik_005a7d58 = S_WF_TAUNT1_BIK_005A7D58;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7d68
+// 0x005a7d68
 char const * const s_pg_taunt1_bik_005a7d68 = S_PG_TAUNT1_BIK_005A7D68;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7d78
+// 0x005a7d78
 char const * const s_sn_taunt1_bik_005a7d78 = S_SN_TAUNT1_BIK_005A7D78;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7d88
+// 0x005a7d88
 char const * const s_rt_taunt2_bik_005a7d88 = S_RT_TAUNT2_BIK_005A7D88;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7d98
+// 0x005a7d98
 char const * const s_null_bik_005a7d98 = S_NULL_BIK_005A7D98;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7da4
+// 0x005a7da4
 char const * const s_ab_willattack_01_wav_005a7da4 = S_AB_WILLATTACK_01_WAV_005A7DA4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7dbc
+// 0x005a7dbc
 char const * const s_ma_willattack_01_wav_005a7dbc = S_MA_WILLATTACK_01_WAV_005A7DBC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7dd4
+// 0x005a7dd4
 char const * const s_sh_willattack_01_wav_005a7dd4 = S_SH_WILLATTACK_01_WAV_005A7DD4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7dec
+// 0x005a7dec
 char const * const s_ni_willattack_01_wav_005a7dec = S_NI_WILLATTACK_01_WAV_005A7DEC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7e04
+// 0x005a7e04
 char const * const s_em_willattack_01_wav_005a7e04 = S_EM_WILLATTACK_01_WAV_005A7E04;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7e1c
+// 0x005a7e1c
 char const * const s_wa_willattack_01_wav_005a7e1c = S_WA_WILLATTACK_01_WAV_005A7E1C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7e34
+// 0x005a7e34
 char const * const s_ph_willattack_01_wav_005a7e34 = S_PH_WILLATTACK_01_WAV_005A7E34;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7e4c
+// 0x005a7e4c
 char const * const s_fr_willattack_01_wav_005a7e4c = S_FR_WILLATTACK_01_WAV_005A7E4C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7e64
+// 0x005a7e64
 char const * const s_ri_willattack_01_wav_005a7e64 = S_RI_WILLATTACK_01_WAV_005A7E64;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7e7c
+// 0x005a7e7c
 char const * const s_su_willattack_01_wav_005a7e7c = S_SU_WILLATTACK_01_WAV_005A7E7C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7e94
+// 0x005a7e94
 char const * const s_ca_willattack_01_wav_005a7e94 = S_CA_WILLATTACK_01_WAV_005A7E94;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7eac
+// 0x005a7eac
 char const * const s_sa_willattack_01_wav_005a7eac = S_SA_WILLATTACK_01_WAV_005A7EAC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7ec4
+// 0x005a7ec4
 char const * const s_all_willattack_01_wav_005a7ec4 = S_ALL_WILLATTACK_01_WAV_005A7EC4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7edc
+// 0x005a7edc
 char const * const s_ab_helpsent_01_wav_005a7edc = S_AB_HELPSENT_01_WAV_005A7EDC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7ef0
+// 0x005a7ef0
 char const * const s_ma_helpsent_01_wav_005a7ef0 = S_MA_HELPSENT_01_WAV_005A7EF0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7f04
+// 0x005a7f04
 char const * const s_sh_helpsent_01_wav_005a7f04 = S_SH_HELPSENT_01_WAV_005A7F04;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7f18
+// 0x005a7f18
 char const * const s_ni_helpsent_01_wav_005a7f18 = S_NI_HELPSENT_01_WAV_005A7F18;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7f2c
+// 0x005a7f2c
 char const * const s_em_helpsent_01_wav_005a7f2c = S_EM_HELPSENT_01_WAV_005A7F2C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7f40
+// 0x005a7f40
 char const * const s_wa_helpsent_01_wav_005a7f40 = S_WA_HELPSENT_01_WAV_005A7F40;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7f54
+// 0x005a7f54
 char const * const s_ph_helpsent_01_wav_005a7f54 = S_PH_HELPSENT_01_WAV_005A7F54;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7f68
+// 0x005a7f68
 char const * const s_fr_helpsent_01_wav_005a7f68 = S_FR_HELPSENT_01_WAV_005A7F68;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7f7c
+// 0x005a7f7c
 char const * const s_ri_helpsent_01_wav_005a7f7c = S_RI_HELPSENT_01_WAV_005A7F7C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7f90
+// 0x005a7f90
 char const * const s_su_helpsent_01_wav_005a7f90 = S_SU_HELPSENT_01_WAV_005A7F90;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7fa4
+// 0x005a7fa4
 char const * const s_ca_helpsent_01_wav_005a7fa4 = S_CA_HELPSENT_01_WAV_005A7FA4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7fb8
+// 0x005a7fb8
 char const * const s_sa_helpsent_01_wav_005a7fb8 = S_SA_HELPSENT_01_WAV_005A7FB8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7fcc
+// 0x005a7fcc
 char const * const s_all_helpsent_01_wav_005a7fcc = S_ALL_HELPSENT_01_WAV_005A7FCC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7fe0
+// 0x005a7fe0
 char const * const s_ab_team_losing_01_wav_005a7fe0 = S_AB_TEAM_LOSING_01_WAV_005A7FE0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a7ff8
+// 0x005a7ff8
 char const * const s_ma_team_losing_01_wav_005a7ff8 = S_MA_TEAM_LOSING_01_WAV_005A7FF8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8010
+// 0x005a8010
 char const * const s_sh_team_losing_01_wav_005a8010 = S_SH_TEAM_LOSING_01_WAV_005A8010;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8028
+// 0x005a8028
 char const * const s_ni_team_losing_01_wav_005a8028 = S_NI_TEAM_LOSING_01_WAV_005A8028;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8040
+// 0x005a8040
 char const * const s_em_team_losing_01_wav_005a8040 = S_EM_TEAM_LOSING_01_WAV_005A8040;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8058
+// 0x005a8058
 char const * const s_wa_team_losing_01_wav_005a8058 = S_WA_TEAM_LOSING_01_WAV_005A8058;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8070
+// 0x005a8070
 char const * const s_ph_team_losing_01_wav_005a8070 = S_PH_TEAM_LOSING_01_WAV_005A8070;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8088
+// 0x005a8088
 char const * const s_fr_team_losing_01_wav_005a8088 = S_FR_TEAM_LOSING_01_WAV_005A8088;
 
-// STRING: STRONGHOLDCRUSADER 0x005a80a0
+// 0x005a80a0
 char const * const s_ri_team_losing_01_wav_005a80a0 = S_RI_TEAM_LOSING_01_WAV_005A80A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a80b8
+// 0x005a80b8
 char const * const s_su_team_losing_01_wav_005a80b8 = S_SU_TEAM_LOSING_01_WAV_005A80B8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a80d0
+// 0x005a80d0
 char const * const s_ca_team_losing_01_wav_005a80d0 = S_CA_TEAM_LOSING_01_WAV_005A80D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a80e8
+// 0x005a80e8
 char const * const s_sa_team_losing_01_wav_005a80e8 = S_SA_TEAM_LOSING_01_WAV_005A80E8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8100
+// 0x005a8100
 char const * const s_all_team_losing_01_wav_005a8100 = S_ALL_TEAM_LOSING_01_WAV_005A8100;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8118
+// 0x005a8118
 char const * const s_ab_team_winning_01_wav_005a8118 = S_AB_TEAM_WINNING_01_WAV_005A8118;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8130
+// 0x005a8130
 char const * const s_ma_team_winning_01_wav_005a8130 = S_MA_TEAM_WINNING_01_WAV_005A8130;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8148
+// 0x005a8148
 char const * const s_sh_team_winning_01_wav_005a8148 = S_SH_TEAM_WINNING_01_WAV_005A8148;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8160
+// 0x005a8160
 char const * const s_ni_team_winning_01_wav_005a8160 = S_NI_TEAM_WINNING_01_WAV_005A8160;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8178
+// 0x005a8178
 char const * const s_em_team_winning_01_wav_005a8178 = S_EM_TEAM_WINNING_01_WAV_005A8178;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8190
+// 0x005a8190
 char const * const s_wa_team_winning_01_wav_005a8190 = S_WA_TEAM_WINNING_01_WAV_005A8190;
 
-// STRING: STRONGHOLDCRUSADER 0x005a81a8
+// 0x005a81a8
 char const * const s_ph_team_winning_01_wav_005a81a8 = S_PH_TEAM_WINNING_01_WAV_005A81A8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a81c0
+// 0x005a81c0
 char const * const s_fr_team_winning_01_wav_005a81c0 = S_FR_TEAM_WINNING_01_WAV_005A81C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a81d8
+// 0x005a81d8
 char const * const s_ri_team_winning_01_wav_005a81d8 = S_RI_TEAM_WINNING_01_WAV_005A81D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a81f0
+// 0x005a81f0
 char const * const s_su_team_winning_01_wav_005a81f0 = S_SU_TEAM_WINNING_01_WAV_005A81F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8208
+// 0x005a8208
 char const * const s_ca_team_winning_01_wav_005a8208 = S_CA_TEAM_WINNING_01_WAV_005A8208;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8220
+// 0x005a8220
 char const * const s_sa_team_winning_01_wav_005a8220 = S_SA_TEAM_WINNING_01_WAV_005A8220;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8238
+// 0x005a8238
 char const * const s_all_team_winning_01_wav_005a8238 = S_ALL_TEAM_WINNING_01_WAV_005A8238;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8250
+// 0x005a8250
 char const * const s_ab_sent_01_wav_005a8250 = S_AB_SENT_01_WAV_005A8250;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8260
+// 0x005a8260
 char const * const s_ma_sent_01_wav_005a8260 = S_MA_SENT_01_WAV_005A8260;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8270
+// 0x005a8270
 char const * const s_sh_sent_01_wav_005a8270 = S_SH_SENT_01_WAV_005A8270;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8280
+// 0x005a8280
 char const * const s_ni_sent_01_wav_005a8280 = S_NI_SENT_01_WAV_005A8280;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8290
+// 0x005a8290
 char const * const s_em_sent_01_wav_005a8290 = S_EM_SENT_01_WAV_005A8290;
 
-// STRING: STRONGHOLDCRUSADER 0x005a82a0
+// 0x005a82a0
 char const * const s_wa_sent_01_wav_005a82a0 = S_WA_SENT_01_WAV_005A82A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a82b0
+// 0x005a82b0
 char const * const s_ph_sent_01_wav_005a82b0 = S_PH_SENT_01_WAV_005A82B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a82c0
+// 0x005a82c0
 char const * const s_fr_sent_01_wav_005a82c0 = S_FR_SENT_01_WAV_005A82C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a82d0
+// 0x005a82d0
 char const * const s_ri_sent_01_wav_005a82d0 = S_RI_SENT_01_WAV_005A82D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a82e0
+// 0x005a82e0
 char const * const s_su_sent_01_wav_005a82e0 = S_SU_SENT_01_WAV_005A82E0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a82f0
+// 0x005a82f0
 char const * const s_ca_sent_01_wav_005a82f0 = S_CA_SENT_01_WAV_005A82F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8300
+// 0x005a8300
 char const * const s_sa_sent_01_wav_005a8300 = S_SA_SENT_01_WAV_005A8300;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8310
+// 0x005a8310
 char const * const s_all_sent_01_wav_005a8310 = S_ALL_SENT_01_WAV_005A8310;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8320
+// 0x005a8320
 char const * const s_ab_notsent_01_wav_005a8320 = S_AB_NOTSENT_01_WAV_005A8320;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8334
+// 0x005a8334
 char const * const s_ma_notsent_01_wav_005a8334 = S_MA_NOTSENT_01_WAV_005A8334;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8348
+// 0x005a8348
 char const * const s_sh_notsent_01_wav_005a8348 = S_SH_NOTSENT_01_WAV_005A8348;
 
-// STRING: STRONGHOLDCRUSADER 0x005a835c
+// 0x005a835c
 char const * const s_ni_notsent_01_wav_005a835c = S_NI_NOTSENT_01_WAV_005A835C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8370
+// 0x005a8370
 char const * const s_em_notsent_01_wav_005a8370 = S_EM_NOTSENT_01_WAV_005A8370;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8384
+// 0x005a8384
 char const * const s_wa_notsent_01_wav_005a8384 = S_WA_NOTSENT_01_WAV_005A8384;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8398
+// 0x005a8398
 char const * const s_ph_notsent_01_wav_005a8398 = S_PH_NOTSENT_01_WAV_005A8398;
 
-// STRING: STRONGHOLDCRUSADER 0x005a83ac
+// 0x005a83ac
 char const * const s_fr_notsent_01_wav_005a83ac = S_FR_NOTSENT_01_WAV_005A83AC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a83c0
+// 0x005a83c0
 char const * const s_ri_notsent_01_wav_005a83c0 = S_RI_NOTSENT_01_WAV_005A83C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a83d4
+// 0x005a83d4
 char const * const s_su_notsent_01_wav_005a83d4 = S_SU_NOTSENT_01_WAV_005A83D4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a83e8
+// 0x005a83e8
 char const * const s_ca_notsent_01_wav_005a83e8 = S_CA_NOTSENT_01_WAV_005A83E8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a83fc
+// 0x005a83fc
 char const * const s_sa_notsent_01_wav_005a83fc = S_SA_NOTSENT_01_WAV_005A83FC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8410
+// 0x005a8410
 char const * const s_all_notsent_01_wav_005a8410 = S_ALL_NOTSENT_01_WAV_005A8410;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8424
+// 0x005a8424
 char const * const s_ab_nohelp_02_wav_005a8424 = S_AB_NOHELP_02_WAV_005A8424;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8438
+// 0x005a8438
 char const * const s_ma_nohelp_02_wav_005a8438 = S_MA_NOHELP_02_WAV_005A8438;
 
-// STRING: STRONGHOLDCRUSADER 0x005a844c
+// 0x005a844c
 char const * const s_sh_nohelp_02_wav_005a844c = S_SH_NOHELP_02_WAV_005A844C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8460
+// 0x005a8460
 char const * const s_ni_nohelp_02_wav_005a8460 = S_NI_NOHELP_02_WAV_005A8460;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8474
+// 0x005a8474
 char const * const s_em_nohelp_02_wav_005a8474 = S_EM_NOHELP_02_WAV_005A8474;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8488
+// 0x005a8488
 char const * const s_wa_nohelp_02_wav_005a8488 = S_WA_NOHELP_02_WAV_005A8488;
 
-// STRING: STRONGHOLDCRUSADER 0x005a849c
+// 0x005a849c
 char const * const s_ph_nohelp_02_wav_005a849c = S_PH_NOHELP_02_WAV_005A849C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a84b0
+// 0x005a84b0
 char const * const s_fr_nohelp_02_wav_005a84b0 = S_FR_NOHELP_02_WAV_005A84B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a84c4
+// 0x005a84c4
 char const * const s_ri_nohelp_02_wav_005a84c4 = S_RI_NOHELP_02_WAV_005A84C4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a84d8
+// 0x005a84d8
 char const * const s_su_nohelp_02_wav_005a84d8 = S_SU_NOHELP_02_WAV_005A84D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a84ec
+// 0x005a84ec
 char const * const s_ca_nohelp_02_wav_005a84ec = S_CA_NOHELP_02_WAV_005A84EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8500
+// 0x005a8500
 char const * const s_sa_nohelp_02_wav_005a8500 = S_SA_NOHELP_02_WAV_005A8500;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8514
+// 0x005a8514
 char const * const s_all_nohelp_02_wav_005a8514 = S_ALL_NOHELP_02_WAV_005A8514;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8528
+// 0x005a8528
 char const * const s_ab_nohelp_01_wav_005a8528 = S_AB_NOHELP_01_WAV_005A8528;
 
-// STRING: STRONGHOLDCRUSADER 0x005a853c
+// 0x005a853c
 char const * const s_ma_nohelp_01_wav_005a853c = S_MA_NOHELP_01_WAV_005A853C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8550
+// 0x005a8550
 char const * const s_sh_nohelp_01_wav_005a8550 = S_SH_NOHELP_01_WAV_005A8550;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8564
+// 0x005a8564
 char const * const s_ni_nohelp_01_wav_005a8564 = S_NI_NOHELP_01_WAV_005A8564;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8578
+// 0x005a8578
 char const * const s_em_nohelp_01_wav_005a8578 = S_EM_NOHELP_01_WAV_005A8578;
 
-// STRING: STRONGHOLDCRUSADER 0x005a858c
+// 0x005a858c
 char const * const s_wa_nohelp_01_wav_005a858c = S_WA_NOHELP_01_WAV_005A858C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a85a0
+// 0x005a85a0
 char const * const s_ph_nohelp_01_wav_005a85a0 = S_PH_NOHELP_01_WAV_005A85A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a85b4
+// 0x005a85b4
 char const * const s_fr_nohelp_01_wav_005a85b4 = S_FR_NOHELP_01_WAV_005A85B4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a85c8
+// 0x005a85c8
 char const * const s_ri_nohelp_01_wav_005a85c8 = S_RI_NOHELP_01_WAV_005A85C8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a85dc
+// 0x005a85dc
 char const * const s_su_nohelp_01_wav_005a85dc = S_SU_NOHELP_01_WAV_005A85DC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a85f0
+// 0x005a85f0
 char const * const s_ca_nohelp_01_wav_005a85f0 = S_CA_NOHELP_01_WAV_005A85F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8604
+// 0x005a8604
 char const * const s_sa_nohelp_01_wav_005a8604 = S_SA_NOHELP_01_WAV_005A8604;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8618
+// 0x005a8618
 char const * const s_all_nohelp_01_wav_005a8618 = S_ALL_NOHELP_01_WAV_005A8618;
 
-// STRING: STRONGHOLDCRUSADER 0x005a862c
+// 0x005a862c
 char const * const s_ab_noattack_02_wav_005a862c = S_AB_NOATTACK_02_WAV_005A862C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8640
+// 0x005a8640
 char const * const s_ma_noattack_02_wav_005a8640 = S_MA_NOATTACK_02_WAV_005A8640;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8654
+// 0x005a8654
 char const * const s_sh_noattack_02_wav_005a8654 = S_SH_NOATTACK_02_WAV_005A8654;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8668
+// 0x005a8668
 char const * const s_ni_noattack_02_wav_005a8668 = S_NI_NOATTACK_02_WAV_005A8668;
 
-// STRING: STRONGHOLDCRUSADER 0x005a867c
+// 0x005a867c
 char const * const s_em_noattack_02_wav_005a867c = S_EM_NOATTACK_02_WAV_005A867C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8690
+// 0x005a8690
 char const * const s_wa_noattack_02_wav_005a8690 = S_WA_NOATTACK_02_WAV_005A8690;
 
-// STRING: STRONGHOLDCRUSADER 0x005a86a4
+// 0x005a86a4
 char const * const s_ph_noattack_02_wav_005a86a4 = S_PH_NOATTACK_02_WAV_005A86A4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a86b8
+// 0x005a86b8
 char const * const s_fr_noattack_02_wav_005a86b8 = S_FR_NOATTACK_02_WAV_005A86B8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a86cc
+// 0x005a86cc
 char const * const s_ri_noattack_02_wav_005a86cc = S_RI_NOATTACK_02_WAV_005A86CC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a86e0
+// 0x005a86e0
 char const * const s_su_noattack_02_wav_005a86e0 = S_SU_NOATTACK_02_WAV_005A86E0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a86f4
+// 0x005a86f4
 char const * const s_ca_noattack_02_wav_005a86f4 = S_CA_NOATTACK_02_WAV_005A86F4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8708
+// 0x005a8708
 char const * const s_sa_noattack_02_wav_005a8708 = S_SA_NOATTACK_02_WAV_005A8708;
 
-// STRING: STRONGHOLDCRUSADER 0x005a871c
+// 0x005a871c
 char const * const s_all_noattack_02_wav_005a871c = S_ALL_NOATTACK_02_WAV_005A871C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8730
+// 0x005a8730
 char const * const s_ab_noattack_01_wav_005a8730 = S_AB_NOATTACK_01_WAV_005A8730;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8744
+// 0x005a8744
 char const * const s_ma_noattack_01_wav_005a8744 = S_MA_NOATTACK_01_WAV_005A8744;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8758
+// 0x005a8758
 char const * const s_sh_noattack_01_wav_005a8758 = S_SH_NOATTACK_01_WAV_005A8758;
 
-// STRING: STRONGHOLDCRUSADER 0x005a876c
+// 0x005a876c
 char const * const s_ni_noattack_01_wav_005a876c = S_NI_NOATTACK_01_WAV_005A876C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8780
+// 0x005a8780
 char const * const s_em_noattack_01_wav_005a8780 = S_EM_NOATTACK_01_WAV_005A8780;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8794
+// 0x005a8794
 char const * const s_wa_noattack_01_wav_005a8794 = S_WA_NOATTACK_01_WAV_005A8794;
 
-// STRING: STRONGHOLDCRUSADER 0x005a87a8
+// 0x005a87a8
 char const * const s_ph_noattack_01_wav_005a87a8 = S_PH_NOATTACK_01_WAV_005A87A8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a87bc
+// 0x005a87bc
 char const * const s_fr_noattack_01_wav_005a87bc = S_FR_NOATTACK_01_WAV_005A87BC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a87d0
+// 0x005a87d0
 char const * const s_ri_noattack_01_wav_005a87d0 = S_RI_NOATTACK_01_WAV_005A87D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a87e4
+// 0x005a87e4
 char const * const s_su_noattack_01_wav_005a87e4 = S_SU_NOATTACK_01_WAV_005A87E4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a87f8
+// 0x005a87f8
 char const * const s_ca_noattack_01_wav_005a87f8 = S_CA_NOATTACK_01_WAV_005A87F8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a880c
+// 0x005a880c
 char const * const s_sa_noattack_01_wav_005a880c = S_SA_NOATTACK_01_WAV_005A880C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8820
+// 0x005a8820
 char const * const s_all_noattack_01_wav_005a8820 = S_ALL_NOATTACK_01_WAV_005A8820;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8834
+// 0x005a8834
 char const * const s_ab_siege_01_wav_005a8834 = S_AB_SIEGE_01_WAV_005A8834;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8844
+// 0x005a8844
 char const * const s_ma_siege_01_wav_005a8844 = S_MA_SIEGE_01_WAV_005A8844;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8854
+// 0x005a8854
 char const * const s_sh_siege_01_wav_005a8854 = S_SH_SIEGE_01_WAV_005A8854;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8864
+// 0x005a8864
 char const * const s_ni_siege_01_wav_005a8864 = S_NI_SIEGE_01_WAV_005A8864;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8874
+// 0x005a8874
 char const * const s_em_siege_01_wav_005a8874 = S_EM_SIEGE_01_WAV_005A8874;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8884
+// 0x005a8884
 char const * const s_wa_siege_01_wav_005a8884 = S_WA_SIEGE_01_WAV_005A8884;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8894
+// 0x005a8894
 char const * const s_ph_siege_01_wav_005a8894 = S_PH_SIEGE_01_WAV_005A8894;
 
-// STRING: STRONGHOLDCRUSADER 0x005a88a4
+// 0x005a88a4
 char const * const s_fr_siege_01_wav_005a88a4 = S_FR_SIEGE_01_WAV_005A88A4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a88b4
+// 0x005a88b4
 char const * const s_ri_siege_01_wav_005a88b4 = S_RI_SIEGE_01_WAV_005A88B4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a88c4
+// 0x005a88c4
 char const * const s_su_siege_01_wav_005a88c4 = S_SU_SIEGE_01_WAV_005A88C4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a88d4
+// 0x005a88d4
 char const * const s_ca_siege_01_wav_005a88d4 = S_CA_SIEGE_01_WAV_005A88D4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a88e4
+// 0x005a88e4
 char const * const s_sa_siege_01_wav_005a88e4 = S_SA_SIEGE_01_WAV_005A88E4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a88f4
+// 0x005a88f4
 char const * const s_all_siege_01_wav_005a88f4 = S_ALL_SIEGE_01_WAV_005A88F4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8908
+// 0x005a8908
 char const * const s_ab_add_player_01_wav_005a8908 = S_AB_ADD_PLAYER_01_WAV_005A8908;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8920
+// 0x005a8920
 char const * const s_ma_add_player_01_wav_005a8920 = S_MA_ADD_PLAYER_01_WAV_005A8920;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8938
+// 0x005a8938
 char const * const s_sh_add_player_01_wav_005a8938 = S_SH_ADD_PLAYER_01_WAV_005A8938;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8950
+// 0x005a8950
 char const * const s_ni_add_player_01_wav_005a8950 = S_NI_ADD_PLAYER_01_WAV_005A8950;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8968
+// 0x005a8968
 char const * const s_em_add_player_01_wav_005a8968 = S_EM_ADD_PLAYER_01_WAV_005A8968;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8980
+// 0x005a8980
 char const * const s_wa_add_player_01_wav_005a8980 = S_WA_ADD_PLAYER_01_WAV_005A8980;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8998
+// 0x005a8998
 char const * const s_ph_add_player_01_wav_005a8998 = S_PH_ADD_PLAYER_01_WAV_005A8998;
 
-// STRING: STRONGHOLDCRUSADER 0x005a89b0
+// 0x005a89b0
 char const * const s_fr_add_player_01_wav_005a89b0 = S_FR_ADD_PLAYER_01_WAV_005A89B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a89c8
+// 0x005a89c8
 char const * const s_ri_add_player_01_wav_005a89c8 = S_RI_ADD_PLAYER_01_WAV_005A89C8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a89e0
+// 0x005a89e0
 char const * const s_su_add_player_01_wav_005a89e0 = S_SU_ADD_PLAYER_01_WAV_005A89E0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a89f8
+// 0x005a89f8
 char const * const s_ca_add_player_01_wav_005a89f8 = S_CA_ADD_PLAYER_01_WAV_005A89F8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8a10
+// 0x005a8a10
 char const * const s_sa_add_player_01_wav_005a8a10 = S_SA_ADD_PLAYER_01_WAV_005A8A10;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8a28
+// 0x005a8a28
 char const * const s_wf_add_player_wav_005a8a28 = S_WF_ADD_PLAYER_WAV_005A8A28;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8a3c
+// 0x005a8a3c
 char const * const s_pg_add_player_wav_005a8a3c = S_PG_ADD_PLAYER_WAV_005A8A3C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8a50
+// 0x005a8a50
 char const * const s_sn_add_player_wav_005a8a50 = S_SN_ADD_PLAYER_WAV_005A8A50;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8a64
+// 0x005a8a64
 char const * const s_rt_add_player_wav_005a8a64 = S_RT_ADD_PLAYER_WAV_005A8A64;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8a78
+// 0x005a8a78
 char const * const s_all_add_player_01_wav_005a8a78 = S_ALL_ADD_PLAYER_01_WAV_005A8A78;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8a90
+// 0x005a8a90
 char const * const s_ab_kick_player_01_wav_005a8a90 = S_AB_KICK_PLAYER_01_WAV_005A8A90;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8aa8
+// 0x005a8aa8
 char const * const s_ma_kick_player_01_wav_005a8aa8 = S_MA_KICK_PLAYER_01_WAV_005A8AA8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8ac0
+// 0x005a8ac0
 char const * const s_sh_kick_player_01_wav_005a8ac0 = S_SH_KICK_PLAYER_01_WAV_005A8AC0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8ad8
+// 0x005a8ad8
 char const * const s_ni_kick_player_01_wav_005a8ad8 = S_NI_KICK_PLAYER_01_WAV_005A8AD8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8af0
+// 0x005a8af0
 char const * const s_em_kick_player_01_wav_005a8af0 = S_EM_KICK_PLAYER_01_WAV_005A8AF0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8b08
+// 0x005a8b08
 char const * const s_wa_kick_player_01_wav_005a8b08 = S_WA_KICK_PLAYER_01_WAV_005A8B08;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8b20
+// 0x005a8b20
 char const * const s_ph_kick_player_01_wav_005a8b20 = S_PH_KICK_PLAYER_01_WAV_005A8B20;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8b38
+// 0x005a8b38
 char const * const s_fr_kick_player_01_wav_005a8b38 = S_FR_KICK_PLAYER_01_WAV_005A8B38;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8b50
+// 0x005a8b50
 char const * const s_ri_kick_player_01_wav_005a8b50 = S_RI_KICK_PLAYER_01_WAV_005A8B50;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8b68
+// 0x005a8b68
 char const * const s_su_kick_player_01_wav_005a8b68 = S_SU_KICK_PLAYER_01_WAV_005A8B68;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8b80
+// 0x005a8b80
 char const * const s_ca_kick_player_01_wav_005a8b80 = S_CA_KICK_PLAYER_01_WAV_005A8B80;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8b98
+// 0x005a8b98
 char const * const s_sa_kick_player_01_wav_005a8b98 = S_SA_KICK_PLAYER_01_WAV_005A8B98;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8bb0
+// 0x005a8bb0
 char const * const s_wf_kick_player_wav_005a8bb0 = S_WF_KICK_PLAYER_WAV_005A8BB0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8bc4
+// 0x005a8bc4
 char const * const s_pg_kick_player_wav_005a8bc4 = S_PG_KICK_PLAYER_WAV_005A8BC4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8bd8
+// 0x005a8bd8
 char const * const s_sn_kick_player_wav_005a8bd8 = S_SN_KICK_PLAYER_WAV_005A8BD8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8bec
+// 0x005a8bec
 char const * const s_rt_kick_player_wav_005a8bec = S_RT_KICK_PLAYER_WAV_005A8BEC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8c00
+// 0x005a8c00
 char const * const s_all_kick_player_01_wav_005a8c00 = S_ALL_KICK_PLAYER_01_WAV_005A8C00;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8c18
+// 0x005a8c18
 char const * const s_ab_extra_01_wav_005a8c18 = S_AB_EXTRA_01_WAV_005A8C18;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8c28
+// 0x005a8c28
 char const * const s_ma_extra_01_wav_005a8c28 = S_MA_EXTRA_01_WAV_005A8C28;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8c38
+// 0x005a8c38
 char const * const s_sh_extra_01_wav_005a8c38 = S_SH_EXTRA_01_WAV_005A8C38;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8c48
+// 0x005a8c48
 char const * const s_ni_extra_01_wav_005a8c48 = S_NI_EXTRA_01_WAV_005A8C48;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8c58
+// 0x005a8c58
 char const * const s_em_extra_01_wav_005a8c58 = S_EM_EXTRA_01_WAV_005A8C58;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8c68
+// 0x005a8c68
 char const * const s_wa_extra_01_wav_005a8c68 = S_WA_EXTRA_01_WAV_005A8C68;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8c78
+// 0x005a8c78
 char const * const s_ph_extra_01_wav_005a8c78 = S_PH_EXTRA_01_WAV_005A8C78;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8c88
+// 0x005a8c88
 char const * const s_fr_extra_01_wav_005a8c88 = S_FR_EXTRA_01_WAV_005A8C88;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8c98
+// 0x005a8c98
 char const * const s_ri_extra_01_wav_005a8c98 = S_RI_EXTRA_01_WAV_005A8C98;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8ca8
+// 0x005a8ca8
 char const * const s_su_extra_01_wav_005a8ca8 = S_SU_EXTRA_01_WAV_005A8CA8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8cb8
+// 0x005a8cb8
 char const * const s_ca_extra_01_wav_005a8cb8 = S_CA_EXTRA_01_WAV_005A8CB8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8cc8
+// 0x005a8cc8
 char const * const s_sa_extra_01_wav_005a8cc8 = S_SA_EXTRA_01_WAV_005A8CC8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8cd8
+// 0x005a8cd8
 char const * const s_all_extra_01_wav_005a8cd8 = S_ALL_EXTRA_01_WAV_005A8CD8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8cec
+// 0x005a8cec
 char const * const s_ab_help_01_wav_005a8cec = S_AB_HELP_01_WAV_005A8CEC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8cfc
+// 0x005a8cfc
 char const * const s_ma_help_01_wav_005a8cfc = S_MA_HELP_01_WAV_005A8CFC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8d0c
+// 0x005a8d0c
 char const * const s_sh_help_01_wav_005a8d0c = S_SH_HELP_01_WAV_005A8D0C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8d1c
+// 0x005a8d1c
 char const * const s_ni_help_01_wav_005a8d1c = S_NI_HELP_01_WAV_005A8D1C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8d2c
+// 0x005a8d2c
 char const * const s_em_help_01_wav_005a8d2c = S_EM_HELP_01_WAV_005A8D2C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8d3c
+// 0x005a8d3c
 char const * const s_wa_help_01_wav_005a8d3c = S_WA_HELP_01_WAV_005A8D3C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8d4c
+// 0x005a8d4c
 char const * const s_ph_help_01_wav_005a8d4c = S_PH_HELP_01_WAV_005A8D4C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8d5c
+// 0x005a8d5c
 char const * const s_fr_help_01_wav_005a8d5c = S_FR_HELP_01_WAV_005A8D5C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8d6c
+// 0x005a8d6c
 char const * const s_ri_help_01_wav_005a8d6c = S_RI_HELP_01_WAV_005A8D6C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8d7c
+// 0x005a8d7c
 char const * const s_su_help_01_wav_005a8d7c = S_SU_HELP_01_WAV_005A8D7C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8d8c
+// 0x005a8d8c
 char const * const s_ca_help_01_wav_005a8d8c = S_CA_HELP_01_WAV_005A8D8C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8d9c
+// 0x005a8d9c
 char const * const s_sa_help_01_wav_005a8d9c = S_SA_HELP_01_WAV_005A8D9C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8dac
+// 0x005a8dac
 char const * const s_all_help_01_wav_005a8dac = S_ALL_HELP_01_WAV_005A8DAC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8dbc
+// 0x005a8dbc
 char const * const s_ab_boast_01_wav_005a8dbc = S_AB_BOAST_01_WAV_005A8DBC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8dcc
+// 0x005a8dcc
 char const * const s_ma_boast_01_wav_005a8dcc = S_MA_BOAST_01_WAV_005A8DCC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8ddc
+// 0x005a8ddc
 char const * const s_sh_boast_01_wav_005a8ddc = S_SH_BOAST_01_WAV_005A8DDC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8dec
+// 0x005a8dec
 char const * const s_ni_boast_01_wav_005a8dec = S_NI_BOAST_01_WAV_005A8DEC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8dfc
+// 0x005a8dfc
 char const * const s_em_boast_01_wav_005a8dfc = S_EM_BOAST_01_WAV_005A8DFC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8e0c
+// 0x005a8e0c
 char const * const s_wa_boast_01_wav_005a8e0c = S_WA_BOAST_01_WAV_005A8E0C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8e1c
+// 0x005a8e1c
 char const * const s_ph_boast_01_wav_005a8e1c = S_PH_BOAST_01_WAV_005A8E1C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8e2c
+// 0x005a8e2c
 char const * const s_fr_boast_01_wav_005a8e2c = S_FR_BOAST_01_WAV_005A8E2C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8e3c
+// 0x005a8e3c
 char const * const s_ri_boast_01_wav_005a8e3c = S_RI_BOAST_01_WAV_005A8E3C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8e4c
+// 0x005a8e4c
 char const * const s_su_boast_01_wav_005a8e4c = S_SU_BOAST_01_WAV_005A8E4C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8e5c
+// 0x005a8e5c
 char const * const s_ca_boast_01_wav_005a8e5c = S_CA_BOAST_01_WAV_005A8E5C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8e6c
+// 0x005a8e6c
 char const * const s_sa_boast_01_wav_005a8e6c = S_SA_BOAST_01_WAV_005A8E6C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8e7c
+// 0x005a8e7c
 char const * const s_all_boast_01_wav_005a8e7c = S_ALL_BOAST_01_WAV_005A8E7C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8e90
+// 0x005a8e90
 char const * const s_ab_congrats_01_wav_005a8e90 = S_AB_CONGRATS_01_WAV_005A8E90;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8ea4
+// 0x005a8ea4
 char const * const s_ma_congrats_01_wav_005a8ea4 = S_MA_CONGRATS_01_WAV_005A8EA4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8eb8
+// 0x005a8eb8
 char const * const s_sh_congrats_01_wav_005a8eb8 = S_SH_CONGRATS_01_WAV_005A8EB8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8ecc
+// 0x005a8ecc
 char const * const s_ni_congrats_01_wav_005a8ecc = S_NI_CONGRATS_01_WAV_005A8ECC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8ee0
+// 0x005a8ee0
 char const * const s_em_congrats_01_wav_005a8ee0 = S_EM_CONGRATS_01_WAV_005A8EE0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8ef4
+// 0x005a8ef4
 char const * const s_wa_congrats_01_wav_005a8ef4 = S_WA_CONGRATS_01_WAV_005A8EF4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8f08
+// 0x005a8f08
 char const * const s_ph_congrats_01_wav_005a8f08 = S_PH_CONGRATS_01_WAV_005A8F08;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8f1c
+// 0x005a8f1c
 char const * const s_fr_congrats_01_wav_005a8f1c = S_FR_CONGRATS_01_WAV_005A8F1C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8f30
+// 0x005a8f30
 char const * const s_ri_congrats_01_wav_005a8f30 = S_RI_CONGRATS_01_WAV_005A8F30;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8f44
+// 0x005a8f44
 char const * const s_su_congrats_01_wav_005a8f44 = S_SU_CONGRATS_01_WAV_005A8F44;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8f58
+// 0x005a8f58
 char const * const s_ca_congrats_01_wav_005a8f58 = S_CA_CONGRATS_01_WAV_005A8F58;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8f6c
+// 0x005a8f6c
 char const * const s_sa_congrats_01_wav_005a8f6c = S_SA_CONGRATS_01_WAV_005A8F6C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8f80
+// 0x005a8f80
 char const * const s_all_congrats_01_wav_005a8f80 = S_ALL_CONGRATS_01_WAV_005A8F80;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8f94
+// 0x005a8f94
 char const * const s_ab_ally_death_01_wav_005a8f94 = S_AB_ALLY_DEATH_01_WAV_005A8F94;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8fac
+// 0x005a8fac
 char const * const s_ma_ally_death_01_wav_005a8fac = S_MA_ALLY_DEATH_01_WAV_005A8FAC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8fc4
+// 0x005a8fc4
 char const * const s_sh_ally_death_01_wav_005a8fc4 = S_SH_ALLY_DEATH_01_WAV_005A8FC4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8fdc
+// 0x005a8fdc
 char const * const s_ni_ally_death_01_wav_005a8fdc = S_NI_ALLY_DEATH_01_WAV_005A8FDC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a8ff4
+// 0x005a8ff4
 char const * const s_em_ally_death_01_wav_005a8ff4 = S_EM_ALLY_DEATH_01_WAV_005A8FF4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a900c
+// 0x005a900c
 char const * const s_wa_ally_death_01_wav_005a900c = S_WA_ALLY_DEATH_01_WAV_005A900C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9024
+// 0x005a9024
 char const * const s_ph_ally_death_01_wav_005a9024 = S_PH_ALLY_DEATH_01_WAV_005A9024;
 
-// STRING: STRONGHOLDCRUSADER 0x005a903c
+// 0x005a903c
 char const * const s_fr_ally_death_01_wav_005a903c = S_FR_ALLY_DEATH_01_WAV_005A903C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9054
+// 0x005a9054
 char const * const s_ri_ally_death_01_wav_005a9054 = S_RI_ALLY_DEATH_01_WAV_005A9054;
 
-// STRING: STRONGHOLDCRUSADER 0x005a906c
+// 0x005a906c
 char const * const s_su_ally_death_01_wav_005a906c = S_SU_ALLY_DEATH_01_WAV_005A906C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9084
+// 0x005a9084
 char const * const s_ca_ally_death_01_wav_005a9084 = S_CA_ALLY_DEATH_01_WAV_005A9084;
 
-// STRING: STRONGHOLDCRUSADER 0x005a909c
+// 0x005a909c
 char const * const s_sa_ally_death_01_wav_005a909c = S_SA_ALLY_DEATH_01_WAV_005A909C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a90b4
+// 0x005a90b4
 char const * const s_pg_plead_02_wav_005a90b4 = S_PG_PLEAD_02_WAV_005A90B4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a90c4
+// 0x005a90c4
 char const * const s_rt_anger_02_wav_005a90c4 = S_RT_ANGER_02_WAV_005A90C4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a90d4
+// 0x005a90d4
 char const * const s_all_ally_death_01_wav_005a90d4 = S_ALL_ALLY_DEATH_01_WAV_005A90D4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a90ec
+// 0x005a90ec
 char const * const s_ab_thanks_01_wav_005a90ec = S_AB_THANKS_01_WAV_005A90EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9100
+// 0x005a9100
 char const * const s_ma_thanks_01_wav_005a9100 = S_MA_THANKS_01_WAV_005A9100;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9114
+// 0x005a9114
 char const * const s_sh_thanks_01_wav_005a9114 = S_SH_THANKS_01_WAV_005A9114;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9128
+// 0x005a9128
 char const * const s_ni_thanks_01_wav_005a9128 = S_NI_THANKS_01_WAV_005A9128;
 
-// STRING: STRONGHOLDCRUSADER 0x005a913c
+// 0x005a913c
 char const * const s_em_thanks_01_wav_005a913c = S_EM_THANKS_01_WAV_005A913C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9150
+// 0x005a9150
 char const * const s_wa_thanks_01_wav_005a9150 = S_WA_THANKS_01_WAV_005A9150;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9164
+// 0x005a9164
 char const * const s_ph_thanks_01_wav_005a9164 = S_PH_THANKS_01_WAV_005A9164;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9178
+// 0x005a9178
 char const * const s_fr_thanks_01_wav_005a9178 = S_FR_THANKS_01_WAV_005A9178;
 
-// STRING: STRONGHOLDCRUSADER 0x005a918c
+// 0x005a918c
 char const * const s_ri_thanks_01_wav_005a918c = S_RI_THANKS_01_WAV_005A918C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a91a0
+// 0x005a91a0
 char const * const s_su_thanks_01_wav_005a91a0 = S_SU_THANKS_01_WAV_005A91A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a91b4
+// 0x005a91b4
 char const * const s_ca_thanks_01_wav_005a91b4 = S_CA_THANKS_01_WAV_005A91B4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a91c8
+// 0x005a91c8
 char const * const s_sa_thanks_01_wav_005a91c8 = S_SA_THANKS_01_WAV_005A91C8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a91dc
+// 0x005a91dc
 char const * const s_all_thanks_01_wav_005a91dc = S_ALL_THANKS_01_WAV_005A91DC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a91f0
+// 0x005a91f0
 char const * const s_ab_req_01_wav_005a91f0 = S_AB_REQ_01_WAV_005A91F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9200
+// 0x005a9200
 char const * const s_ma_req_01_wav_005a9200 = S_MA_REQ_01_WAV_005A9200;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9210
+// 0x005a9210
 char const * const s_sh_req_01_wav_005a9210 = S_SH_REQ_01_WAV_005A9210;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9220
+// 0x005a9220
 char const * const s_ni_req_01_wav_005a9220 = S_NI_REQ_01_WAV_005A9220;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9230
+// 0x005a9230
 char const * const s_em_req_01_wav_005a9230 = S_EM_REQ_01_WAV_005A9230;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9240
+// 0x005a9240
 char const * const s_wa_req_01_wav_005a9240 = S_WA_REQ_01_WAV_005A9240;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9250
+// 0x005a9250
 char const * const s_ph_req_01_wav_005a9250 = S_PH_REQ_01_WAV_005A9250;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9260
+// 0x005a9260
 char const * const s_fr_req_01_wav_005a9260 = S_FR_REQ_01_WAV_005A9260;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9270
+// 0x005a9270
 char const * const s_ri_req_01_wav_005a9270 = S_RI_REQ_01_WAV_005A9270;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9280
+// 0x005a9280
 char const * const s_su_req_01_wav_005a9280 = S_SU_REQ_01_WAV_005A9280;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9290
+// 0x005a9290
 char const * const s_ca_req_01_wav_005a9290 = S_CA_REQ_01_WAV_005A9290;
 
-// STRING: STRONGHOLDCRUSADER 0x005a92a0
+// 0x005a92a0
 char const * const s_sa_req_01_wav_005a92a0 = S_SA_REQ_01_WAV_005A92A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a92b0
+// 0x005a92b0
 char const * const s_all_req_01_wav_005a92b0 = S_ALL_REQ_01_WAV_005A92B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a92c0
+// 0x005a92c0
 char const * const s_ab_vict_04_wav_005a92c0 = S_AB_VICT_04_WAV_005A92C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a92d0
+// 0x005a92d0
 char const * const s_ma_vict_04_wav_005a92d0 = S_MA_VICT_04_WAV_005A92D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a92e0
+// 0x005a92e0
 char const * const s_sh_vict_04_wav_005a92e0 = S_SH_VICT_04_WAV_005A92E0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a92f0
+// 0x005a92f0
 char const * const s_ni_vict_04_wav_005a92f0 = S_NI_VICT_04_WAV_005A92F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9300
+// 0x005a9300
 char const * const s_em_vict_04_wav_005a9300 = S_EM_VICT_04_WAV_005A9300;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9310
+// 0x005a9310
 char const * const s_wa_vict_04_wav_005a9310 = S_WA_VICT_04_WAV_005A9310;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9320
+// 0x005a9320
 char const * const s_ph_vict_04_wav_005a9320 = S_PH_VICT_04_WAV_005A9320;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9330
+// 0x005a9330
 char const * const s_fr_vict_04_wav_005a9330 = S_FR_VICT_04_WAV_005A9330;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9340
+// 0x005a9340
 char const * const s_ri_vict_04_wav_005a9340 = S_RI_VICT_04_WAV_005A9340;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9350
+// 0x005a9350
 char const * const s_su_vict_04_wav_005a9350 = S_SU_VICT_04_WAV_005A9350;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9360
+// 0x005a9360
 char const * const s_ca_vict_04_wav_005a9360 = S_CA_VICT_04_WAV_005A9360;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9370
+// 0x005a9370
 char const * const s_sa_vict_04_wav_005a9370 = S_SA_VICT_04_WAV_005A9370;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9380
+// 0x005a9380
 char const * const s_pg_taunt_02_wav_005a9380 = S_PG_TAUNT_02_WAV_005A9380;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9390
+// 0x005a9390
 char const * const s_sn_vict_04_wav_005a9390 = S_SN_VICT_04_WAV_005A9390;
 
-// STRING: STRONGHOLDCRUSADER 0x005a93a0
+// 0x005a93a0
 char const * const s_rt_vict_03_wav_005a93a0 = S_RT_VICT_03_WAV_005A93A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a93b0
+// 0x005a93b0
 char const * const s_all_vict_04_wav_005a93b0 = S_ALL_VICT_04_WAV_005A93B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a93c0
+// 0x005a93c0
 char const * const s_ab_vict_03_wav_005a93c0 = S_AB_VICT_03_WAV_005A93C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a93d0
+// 0x005a93d0
 char const * const s_ma_vict_03_wav_005a93d0 = S_MA_VICT_03_WAV_005A93D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a93e0
+// 0x005a93e0
 char const * const s_sh_vict_03_wav_005a93e0 = S_SH_VICT_03_WAV_005A93E0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a93f0
+// 0x005a93f0
 char const * const s_ni_vict_03_wav_005a93f0 = S_NI_VICT_03_WAV_005A93F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9400
+// 0x005a9400
 char const * const s_em_vict_03_wav_005a9400 = S_EM_VICT_03_WAV_005A9400;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9410
+// 0x005a9410
 char const * const s_wa_vict_03_wav_005a9410 = S_WA_VICT_03_WAV_005A9410;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9420
+// 0x005a9420
 char const * const s_ph_vict_03_wav_005a9420 = S_PH_VICT_03_WAV_005A9420;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9430
+// 0x005a9430
 char const * const s_fr_vict_03_wav_005a9430 = S_FR_VICT_03_WAV_005A9430;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9440
+// 0x005a9440
 char const * const s_ri_vict_03_wav_005a9440 = S_RI_VICT_03_WAV_005A9440;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9450
+// 0x005a9450
 char const * const s_su_vict_03_wav_005a9450 = S_SU_VICT_03_WAV_005A9450;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9460
+// 0x005a9460
 char const * const s_ca_vict_03_wav_005a9460 = S_CA_VICT_03_WAV_005A9460;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9470
+// 0x005a9470
 char const * const s_sa_vict_03_wav_005a9470 = S_SA_VICT_03_WAV_005A9470;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9480
+// 0x005a9480
 char const * const s_wf_vict_01_wav_005a9480 = S_WF_VICT_01_WAV_005A9480;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9490
+// 0x005a9490
 char const * const s_pg_vict_03_wav_005a9490 = S_PG_VICT_03_WAV_005A9490;
 
-// STRING: STRONGHOLDCRUSADER 0x005a94a0
+// 0x005a94a0
 char const * const s_sn_vict_03_wav_005a94a0 = S_SN_VICT_03_WAV_005A94A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a94b0
+// 0x005a94b0
 char const * const s_rt_vict_04_wav_005a94b0 = S_RT_VICT_04_WAV_005A94B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a94c0
+// 0x005a94c0
 char const * const s_all_vict_03_wav_005a94c0 = S_ALL_VICT_03_WAV_005A94C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a94d0
+// 0x005a94d0
 char const * const s_ab_vict_02_wav_005a94d0 = S_AB_VICT_02_WAV_005A94D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a94e0
+// 0x005a94e0
 char const * const s_ma_vict_02_wav_005a94e0 = S_MA_VICT_02_WAV_005A94E0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a94f0
+// 0x005a94f0
 char const * const s_sh_vict_02_wav_005a94f0 = S_SH_VICT_02_WAV_005A94F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9500
+// 0x005a9500
 char const * const s_ni_vict_02_wav_005a9500 = S_NI_VICT_02_WAV_005A9500;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9510
+// 0x005a9510
 char const * const s_em_vict_02_wav_005a9510 = S_EM_VICT_02_WAV_005A9510;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9520
+// 0x005a9520
 char const * const s_wa_vict_02_wav_005a9520 = S_WA_VICT_02_WAV_005A9520;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9530
+// 0x005a9530
 char const * const s_ph_vict_02_wav_005a9530 = S_PH_VICT_02_WAV_005A9530;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9540
+// 0x005a9540
 char const * const s_fr_vict_02_wav_005a9540 = S_FR_VICT_02_WAV_005A9540;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9550
+// 0x005a9550
 char const * const s_ri_vict_02_wav_005a9550 = S_RI_VICT_02_WAV_005A9550;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9560
+// 0x005a9560
 char const * const s_su_vict_02_wav_005a9560 = S_SU_VICT_02_WAV_005A9560;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9570
+// 0x005a9570
 char const * const s_ca_vict_02_wav_005a9570 = S_CA_VICT_02_WAV_005A9570;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9580
+// 0x005a9580
 char const * const s_sa_vict_02_wav_005a9580 = S_SA_VICT_02_WAV_005A9580;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9590
+// 0x005a9590
 char const * const s_wf_taunt_04_wav_005a9590 = S_WF_TAUNT_04_WAV_005A9590;
 
-// STRING: STRONGHOLDCRUSADER 0x005a95a0
+// 0x005a95a0
 char const * const s_pg_vict_02_wav_005a95a0 = S_PG_VICT_02_WAV_005A95A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a95b0
+// 0x005a95b0
 char const * const s_sn_taunt_03_wav_005a95b0 = S_SN_TAUNT_03_WAV_005A95B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a95c0
+// 0x005a95c0
 char const * const s_rt_vict_02_wav_005a95c0 = S_RT_VICT_02_WAV_005A95C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a95d0
+// 0x005a95d0
 char const * const s_all_vict_02_wav_005a95d0 = S_ALL_VICT_02_WAV_005A95D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a95e0
+// 0x005a95e0
 char const * const s_ab_vict_01_wav_005a95e0 = S_AB_VICT_01_WAV_005A95E0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a95f0
+// 0x005a95f0
 char const * const s_ma_vict_01_wav_005a95f0 = S_MA_VICT_01_WAV_005A95F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9600
+// 0x005a9600
 char const * const s_sh_vict_01_wav_005a9600 = S_SH_VICT_01_WAV_005A9600;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9610
+// 0x005a9610
 char const * const s_ni_vict_01_wav_005a9610 = S_NI_VICT_01_WAV_005A9610;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9620
+// 0x005a9620
 char const * const s_em_vict_01_wav_005a9620 = S_EM_VICT_01_WAV_005A9620;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9630
+// 0x005a9630
 char const * const s_wa_vict_01_wav_005a9630 = S_WA_VICT_01_WAV_005A9630;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9640
+// 0x005a9640
 char const * const s_ph_vict_01_wav_005a9640 = S_PH_VICT_01_WAV_005A9640;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9650
+// 0x005a9650
 char const * const s_fr_vict_01_wav_005a9650 = S_FR_VICT_01_WAV_005A9650;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9660
+// 0x005a9660
 char const * const s_ri_vict_01_wav_005a9660 = S_RI_VICT_01_WAV_005A9660;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9670
+// 0x005a9670
 char const * const s_su_vict_01_wav_005a9670 = S_SU_VICT_01_WAV_005A9670;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9680
+// 0x005a9680
 char const * const s_ca_vict_01_wav_005a9680 = S_CA_VICT_01_WAV_005A9680;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9690
+// 0x005a9690
 char const * const s_sa_vict_01_wav_005a9690 = S_SA_VICT_01_WAV_005A9690;
 
-// STRING: STRONGHOLDCRUSADER 0x005a96a0
+// 0x005a96a0
 char const * const s_wf_vict_02_wav_005a96a0 = S_WF_VICT_02_WAV_005A96A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a96b0
+// 0x005a96b0
 char const * const s_pg_vict_01_wav_005a96b0 = S_PG_VICT_01_WAV_005A96B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a96c0
+// 0x005a96c0
 char const * const s_sn_vict_02_wav_005a96c0 = S_SN_VICT_02_WAV_005A96C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a96d0
+// 0x005a96d0
 char const * const s_rt_vict_01_wav_005a96d0 = S_RT_VICT_01_WAV_005A96D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a96e0
+// 0x005a96e0
 char const * const s_all_vict_01_wav_005a96e0 = S_ALL_VICT_01_WAV_005A96E0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a96f0
+// 0x005a96f0
 char const * const s_ab_nervous_02_wav_005a96f0 = S_AB_NERVOUS_02_WAV_005A96F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9704
+// 0x005a9704
 char const * const s_ma_nervous_02_wav_005a9704 = S_MA_NERVOUS_02_WAV_005A9704;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9718
+// 0x005a9718
 char const * const s_sh_nervous_02_wav_005a9718 = S_SH_NERVOUS_02_WAV_005A9718;
 
-// STRING: STRONGHOLDCRUSADER 0x005a972c
+// 0x005a972c
 char const * const s_ni_nervous_02_wav_005a972c = S_NI_NERVOUS_02_WAV_005A972C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9740
+// 0x005a9740
 char const * const s_em_nervous_02_wav_005a9740 = S_EM_NERVOUS_02_WAV_005A9740;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9754
+// 0x005a9754
 char const * const s_wa_nervous_02_wav_005a9754 = S_WA_NERVOUS_02_WAV_005A9754;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9768
+// 0x005a9768
 char const * const s_ph_nervous_02_wav_005a9768 = S_PH_NERVOUS_02_WAV_005A9768;
 
-// STRING: STRONGHOLDCRUSADER 0x005a977c
+// 0x005a977c
 char const * const s_fr_nervous_02_wav_005a977c = S_FR_NERVOUS_02_WAV_005A977C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9790
+// 0x005a9790
 char const * const s_ri_nervous_02_wav_005a9790 = S_RI_NERVOUS_02_WAV_005A9790;
 
-// STRING: STRONGHOLDCRUSADER 0x005a97a4
+// 0x005a97a4
 char const * const s_su_nervous_02_wav_005a97a4 = S_SU_NERVOUS_02_WAV_005A97A4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a97b8
+// 0x005a97b8
 char const * const s_ca_nervous_02_wav_005a97b8 = S_CA_NERVOUS_02_WAV_005A97B8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a97cc
+// 0x005a97cc
 char const * const s_sa_nervous_02_wav_005a97cc = S_SA_NERVOUS_02_WAV_005A97CC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a97e0
+// 0x005a97e0
 char const * const s_wf_plead_04_wav_005a97e0 = S_WF_PLEAD_04_WAV_005A97E0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a97f0
+// 0x005a97f0
 char const * const s_pg_plead_04_wav_005a97f0 = S_PG_PLEAD_04_WAV_005A97F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9800
+// 0x005a9800
 char const * const s_sn_plead_03_wav_005a9800 = S_SN_PLEAD_03_WAV_005A9800;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9810
+// 0x005a9810
 char const * const s_rt_plead_03_wav_005a9810 = S_RT_PLEAD_03_WAV_005A9810;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9820
+// 0x005a9820
 char const * const s_all_plead_03_wav_005a9820 = S_ALL_PLEAD_03_WAV_005A9820;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9834
+// 0x005a9834
 char const * const s_ab_nervous_01_wav_005a9834 = S_AB_NERVOUS_01_WAV_005A9834;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9848
+// 0x005a9848
 char const * const s_ma_nervous_01_wav_005a9848 = S_MA_NERVOUS_01_WAV_005A9848;
 
-// STRING: STRONGHOLDCRUSADER 0x005a985c
+// 0x005a985c
 char const * const s_sh_nervous_01_wav_005a985c = S_SH_NERVOUS_01_WAV_005A985C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9870
+// 0x005a9870
 char const * const s_ni_nervous_01_wav_005a9870 = S_NI_NERVOUS_01_WAV_005A9870;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9884
+// 0x005a9884
 char const * const s_em_nervous_01_wav_005a9884 = S_EM_NERVOUS_01_WAV_005A9884;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9898
+// 0x005a9898
 char const * const s_wa_nervous_01_wav_005a9898 = S_WA_NERVOUS_01_WAV_005A9898;
 
-// STRING: STRONGHOLDCRUSADER 0x005a98ac
+// 0x005a98ac
 char const * const s_ph_nervous_01_wav_005a98ac = S_PH_NERVOUS_01_WAV_005A98AC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a98c0
+// 0x005a98c0
 char const * const s_fr_nervous_01_wav_005a98c0 = S_FR_NERVOUS_01_WAV_005A98C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a98d4
+// 0x005a98d4
 char const * const s_ri_nervous_01_wav_005a98d4 = S_RI_NERVOUS_01_WAV_005A98D4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a98e8
+// 0x005a98e8
 char const * const s_su_nervous_01_wav_005a98e8 = S_SU_NERVOUS_01_WAV_005A98E8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a98fc
+// 0x005a98fc
 char const * const s_ca_nervous_01_wav_005a98fc = S_CA_NERVOUS_01_WAV_005A98FC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9910
+// 0x005a9910
 char const * const s_sa_nervous_01_wav_005a9910 = S_SA_NERVOUS_01_WAV_005A9910;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9924
+// 0x005a9924
 char const * const s_wf_plead_03_wav_005a9924 = S_WF_PLEAD_03_WAV_005A9924;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9934
+// 0x005a9934
 char const * const s_pg_plead_03_wav_005a9934 = S_PG_PLEAD_03_WAV_005A9934;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9944
+// 0x005a9944
 char const * const s_sn_plead_04_wav_005a9944 = S_SN_PLEAD_04_WAV_005A9944;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9954
+// 0x005a9954
 char const * const s_rt_plead_04_wav_005a9954 = S_RT_PLEAD_04_WAV_005A9954;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9964
+// 0x005a9964
 char const * const s_all_plead_02_wav_005a9964 = S_ALL_PLEAD_02_WAV_005A9964;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9978
+// 0x005a9978
 char const * const s_ab_plead_01_wav_005a9978 = S_AB_PLEAD_01_WAV_005A9978;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9988
+// 0x005a9988
 char const * const s_ma_plead_01_wav_005a9988 = S_MA_PLEAD_01_WAV_005A9988;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9998
+// 0x005a9998
 char const * const s_sh_plead_01_wav_005a9998 = S_SH_PLEAD_01_WAV_005A9998;
 
-// STRING: STRONGHOLDCRUSADER 0x005a99a8
+// 0x005a99a8
 char const * const s_ni_plead_01_wav_005a99a8 = S_NI_PLEAD_01_WAV_005A99A8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a99b8
+// 0x005a99b8
 char const * const s_em_plead_01_wav_005a99b8 = S_EM_PLEAD_01_WAV_005A99B8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a99c8
+// 0x005a99c8
 char const * const s_wa_plead_01_wav_005a99c8 = S_WA_PLEAD_01_WAV_005A99C8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a99d8
+// 0x005a99d8
 char const * const s_ph_plead_01_wav_005a99d8 = S_PH_PLEAD_01_WAV_005A99D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a99e8
+// 0x005a99e8
 char const * const s_fr_plead_01_wav_005a99e8 = S_FR_PLEAD_01_WAV_005A99E8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a99f8
+// 0x005a99f8
 char const * const s_ri_plead_01_wav_005a99f8 = S_RI_PLEAD_01_WAV_005A99F8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9a08
+// 0x005a9a08
 char const * const s_su_plead_01_wav_005a9a08 = S_SU_PLEAD_01_WAV_005A9A08;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9a18
+// 0x005a9a18
 char const * const s_ca_plead_01_wav_005a9a18 = S_CA_PLEAD_01_WAV_005A9A18;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9a28
+// 0x005a9a28
 char const * const s_sa_plead_01_wav_005a9a28 = S_SA_PLEAD_01_WAV_005A9A28;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9a38
+// 0x005a9a38
 char const * const s_wf_plead_01_wav_005a9a38 = S_WF_PLEAD_01_WAV_005A9A38;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9a48
+// 0x005a9a48
 char const * const s_pg_plead_01_wav_005a9a48 = S_PG_PLEAD_01_WAV_005A9A48;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9a58
+// 0x005a9a58
 char const * const s_sn_plead_01_wav_005a9a58 = S_SN_PLEAD_01_WAV_005A9A58;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9a68
+// 0x005a9a68
 char const * const s_rt_plead_01_wav_005a9a68 = S_RT_PLEAD_01_WAV_005A9A68;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9a78
+// 0x005a9a78
 char const * const s_all_plead_01_wav_005a9a78 = S_ALL_PLEAD_01_WAV_005A9A78;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9a8c
+// 0x005a9a8c
 char const * const s_ab_anger_02_wav_005a9a8c = S_AB_ANGER_02_WAV_005A9A8C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9a9c
+// 0x005a9a9c
 char const * const s_ma_anger_02_wav_005a9a9c = S_MA_ANGER_02_WAV_005A9A9C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9aac
+// 0x005a9aac
 char const * const s_sh_anger_02_wav_005a9aac = S_SH_ANGER_02_WAV_005A9AAC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9abc
+// 0x005a9abc
 char const * const s_ni_anger_02_wav_005a9abc = S_NI_ANGER_02_WAV_005A9ABC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9acc
+// 0x005a9acc
 char const * const s_em_anger_02_wav_005a9acc = S_EM_ANGER_02_WAV_005A9ACC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9adc
+// 0x005a9adc
 char const * const s_wa_anger_02_wav_005a9adc = S_WA_ANGER_02_WAV_005A9ADC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9aec
+// 0x005a9aec
 char const * const s_ph_anger_02_wav_005a9aec = S_PH_ANGER_02_WAV_005A9AEC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9afc
+// 0x005a9afc
 char const * const s_fr_anger_02_wav_005a9afc = S_FR_ANGER_02_WAV_005A9AFC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9b0c
+// 0x005a9b0c
 char const * const s_ri_anger_02_wav_005a9b0c = S_RI_ANGER_02_WAV_005A9B0C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9b1c
+// 0x005a9b1c
 char const * const s_su_anger_02_wav_005a9b1c = S_SU_ANGER_02_WAV_005A9B1C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9b2c
+// 0x005a9b2c
 char const * const s_ca_anger_02_wav_005a9b2c = S_CA_ANGER_02_WAV_005A9B2C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9b3c
+// 0x005a9b3c
 char const * const s_sa_anger_02_wav_005a9b3c = S_SA_ANGER_02_WAV_005A9B3C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9b4c
+// 0x005a9b4c
 char const * const s_wf_anger_02_wav_005a9b4c = S_WF_ANGER_02_WAV_005A9B4C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9b5c
+// 0x005a9b5c
 char const * const s_pg_anger_02_wav_005a9b5c = S_PG_ANGER_02_WAV_005A9B5C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9b6c
+// 0x005a9b6c
 char const * const s_sn_anger_04_wav_005a9b6c = S_SN_ANGER_04_WAV_005A9B6C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9b7c
+// 0x005a9b7c
 char const * const s_rt_anger_01_wav_005a9b7c = S_RT_ANGER_01_WAV_005A9B7C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9b8c
+// 0x005a9b8c
 char const * const s_all_anger_02_wav_005a9b8c = S_ALL_ANGER_02_WAV_005A9B8C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9ba0
+// 0x005a9ba0
 char const * const s_ab_anger_01_wav_005a9ba0 = S_AB_ANGER_01_WAV_005A9BA0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9bb0
+// 0x005a9bb0
 char const * const s_ma_anger_01_wav_005a9bb0 = S_MA_ANGER_01_WAV_005A9BB0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9bc0
+// 0x005a9bc0
 char const * const s_sh_anger_01_wav_005a9bc0 = S_SH_ANGER_01_WAV_005A9BC0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9bd0
+// 0x005a9bd0
 char const * const s_ni_anger_01_wav_005a9bd0 = S_NI_ANGER_01_WAV_005A9BD0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9be0
+// 0x005a9be0
 char const * const s_em_anger_01_wav_005a9be0 = S_EM_ANGER_01_WAV_005A9BE0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9bf0
+// 0x005a9bf0
 char const * const s_wa_anger_01_wav_005a9bf0 = S_WA_ANGER_01_WAV_005A9BF0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9c00
+// 0x005a9c00
 char const * const s_ph_anger_01_wav_005a9c00 = S_PH_ANGER_01_WAV_005A9C00;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9c10
+// 0x005a9c10
 char const * const s_fr_anger_01_wav_005a9c10 = S_FR_ANGER_01_WAV_005A9C10;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9c20
+// 0x005a9c20
 char const * const s_ri_anger_01_wav_005a9c20 = S_RI_ANGER_01_WAV_005A9C20;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9c30
+// 0x005a9c30
 char const * const s_su_anger_01_wav_005a9c30 = S_SU_ANGER_01_WAV_005A9C30;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9c40
+// 0x005a9c40
 char const * const s_ca_anger_01_wav_005a9c40 = S_CA_ANGER_01_WAV_005A9C40;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9c50
+// 0x005a9c50
 char const * const s_sa_anger_01_wav_005a9c50 = S_SA_ANGER_01_WAV_005A9C50;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9c60
+// 0x005a9c60
 char const * const s_wf_anger_04_wav_005a9c60 = S_WF_ANGER_04_WAV_005A9C60;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9c70
+// 0x005a9c70
 char const * const s_pg_anger_04_wav_005a9c70 = S_PG_ANGER_04_WAV_005A9C70;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9c80
+// 0x005a9c80
 char const * const s_sn_anger_03_wav_005a9c80 = S_SN_ANGER_03_WAV_005A9C80;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9c90
+// 0x005a9c90
 char const * const s_rt_anger_04_wav_005a9c90 = S_RT_ANGER_04_WAV_005A9C90;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9ca0
+// 0x005a9ca0
 char const * const s_all_anger_01_wav_005a9ca0 = S_ALL_ANGER_01_WAV_005A9CA0;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9cb4
+// 0x005a9cb4
 char const * const s_ab_taunt_04_wav_005a9cb4 = S_AB_TAUNT_04_WAV_005A9CB4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9cc4
+// 0x005a9cc4
 char const * const s_ma_taunt_04_wav_005a9cc4 = S_MA_TAUNT_04_WAV_005A9CC4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9cd4
+// 0x005a9cd4
 char const * const s_sh_taunt_04_wav_005a9cd4 = S_SH_TAUNT_04_WAV_005A9CD4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9ce4
+// 0x005a9ce4
 char const * const s_ni_taunt_04_wav_005a9ce4 = S_NI_TAUNT_04_WAV_005A9CE4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9cf4
+// 0x005a9cf4
 char const * const s_em_taunt_04_wav_005a9cf4 = S_EM_TAUNT_04_WAV_005A9CF4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9d04
+// 0x005a9d04
 char const * const s_wa_taunt_04_wav_005a9d04 = S_WA_TAUNT_04_WAV_005A9D04;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9d14
+// 0x005a9d14
 char const * const s_ph_taunt_04_wav_005a9d14 = S_PH_TAUNT_04_WAV_005A9D14;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9d24
+// 0x005a9d24
 char const * const s_fr_taunt_04_wav_005a9d24 = S_FR_TAUNT_04_WAV_005A9D24;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9d34
+// 0x005a9d34
 char const * const s_ri_taunt_04_wav_005a9d34 = S_RI_TAUNT_04_WAV_005A9D34;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9d44
+// 0x005a9d44
 char const * const s_su_taunt_04_wav_005a9d44 = S_SU_TAUNT_04_WAV_005A9D44;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9d54
+// 0x005a9d54
 char const * const s_ca_taunt_04_wav_005a9d54 = S_CA_TAUNT_04_WAV_005A9D54;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9d64
+// 0x005a9d64
 char const * const s_sa_taunt_04_wav_005a9d64 = S_SA_TAUNT_04_WAV_005A9D64;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9d74
+// 0x005a9d74
 char const * const s_wf_taunt_06_wav_005a9d74 = S_WF_TAUNT_06_WAV_005A9D74;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9d84
+// 0x005a9d84
 char const * const s_pg_taunt_07_wav_005a9d84 = S_PG_TAUNT_07_WAV_005A9D84;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9d94
+// 0x005a9d94
 char const * const s_sn_taunt_07_wav_005a9d94 = S_SN_TAUNT_07_WAV_005A9D94;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9da4
+// 0x005a9da4
 char const * const s_rt_taunt_08_wav_005a9da4 = S_RT_TAUNT_08_WAV_005A9DA4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9db4
+// 0x005a9db4
 char const * const s_all_taunt_04_wav_005a9db4 = S_ALL_TAUNT_04_WAV_005A9DB4;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9dc8
+// 0x005a9dc8
 char const * const s_ab_taunt_03_wav_005a9dc8 = S_AB_TAUNT_03_WAV_005A9DC8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9dd8
+// 0x005a9dd8
 char const * const s_ma_taunt_03_wav_005a9dd8 = S_MA_TAUNT_03_WAV_005A9DD8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9de8
+// 0x005a9de8
 char const * const s_sh_taunt_03_wav_005a9de8 = S_SH_TAUNT_03_WAV_005A9DE8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9df8
+// 0x005a9df8
 char const * const s_ni_taunt_03_wav_005a9df8 = S_NI_TAUNT_03_WAV_005A9DF8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9e08
+// 0x005a9e08
 char const * const s_em_taunt_03_wav_005a9e08 = S_EM_TAUNT_03_WAV_005A9E08;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9e18
+// 0x005a9e18
 char const * const s_wa_taunt_03_wav_005a9e18 = S_WA_TAUNT_03_WAV_005A9E18;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9e28
+// 0x005a9e28
 char const * const s_ph_taunt_03_wav_005a9e28 = S_PH_TAUNT_03_WAV_005A9E28;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9e38
+// 0x005a9e38
 char const * const s_fr_taunt_03_wav_005a9e38 = S_FR_TAUNT_03_WAV_005A9E38;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9e48
+// 0x005a9e48
 char const * const s_ri_taunt_03_wav_005a9e48 = S_RI_TAUNT_03_WAV_005A9E48;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9e58
+// 0x005a9e58
 char const * const s_su_taunt_03_wav_005a9e58 = S_SU_TAUNT_03_WAV_005A9E58;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9e68
+// 0x005a9e68
 char const * const s_ca_taunt_03_wav_005a9e68 = S_CA_TAUNT_03_WAV_005A9E68;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9e78
+// 0x005a9e78
 char const * const s_sa_taunt_03_wav_005a9e78 = S_SA_TAUNT_03_WAV_005A9E78;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9e88
+// 0x005a9e88
 char const * const s_wf_taunt_05_wav_005a9e88 = S_WF_TAUNT_05_WAV_005A9E88;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9e98
+// 0x005a9e98
 char const * const s_pg_taunt_06_wav_005a9e98 = S_PG_TAUNT_06_WAV_005A9E98;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9ea8
+// 0x005a9ea8
 char const * const s_sn_taunt_05_wav_005a9ea8 = S_SN_TAUNT_05_WAV_005A9EA8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9eb8
+// 0x005a9eb8
 char const * const s_rt_taunt_05_wav_005a9eb8 = S_RT_TAUNT_05_WAV_005A9EB8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9ec8
+// 0x005a9ec8
 char const * const s_all_taunt_03_wav_005a9ec8 = S_ALL_TAUNT_03_WAV_005A9EC8;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9edc
+// 0x005a9edc
 char const * const s_ab_taunt_02_wav_005a9edc = S_AB_TAUNT_02_WAV_005A9EDC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9eec
+// 0x005a9eec
 char const * const s_ma_taunt_02_wav_005a9eec = S_MA_TAUNT_02_WAV_005A9EEC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9efc
+// 0x005a9efc
 char const * const s_sh_taunt_02_wav_005a9efc = S_SH_TAUNT_02_WAV_005A9EFC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9f0c
+// 0x005a9f0c
 char const * const s_ni_taunt_02_wav_005a9f0c = S_NI_TAUNT_02_WAV_005A9F0C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9f1c
+// 0x005a9f1c
 char const * const s_em_taunt_02_wav_005a9f1c = S_EM_TAUNT_02_WAV_005A9F1C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9f2c
+// 0x005a9f2c
 char const * const s_wa_taunt_02_wav_005a9f2c = S_WA_TAUNT_02_WAV_005A9F2C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9f3c
+// 0x005a9f3c
 char const * const s_ph_taunt_02_wav_005a9f3c = S_PH_TAUNT_02_WAV_005A9F3C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9f4c
+// 0x005a9f4c
 char const * const s_fr_taunt_02_wav_005a9f4c = S_FR_TAUNT_02_WAV_005A9F4C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9f5c
+// 0x005a9f5c
 char const * const s_ri_taunt_02_wav_005a9f5c = S_RI_TAUNT_02_WAV_005A9F5C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9f6c
+// 0x005a9f6c
 char const * const s_su_taunt_02_wav_005a9f6c = S_SU_TAUNT_02_WAV_005A9F6C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9f7c
+// 0x005a9f7c
 char const * const s_ca_taunt_02_wav_005a9f7c = S_CA_TAUNT_02_WAV_005A9F7C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9f8c
+// 0x005a9f8c
 char const * const s_sa_taunt_02_wav_005a9f8c = S_SA_TAUNT_02_WAV_005A9F8C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9f9c
+// 0x005a9f9c
 char const * const s_wf_taunt_02_wav_005a9f9c = S_WF_TAUNT_02_WAV_005A9F9C;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9fac
+// 0x005a9fac
 char const * const s_pg_taunt_04_wav_005a9fac = S_PG_TAUNT_04_WAV_005A9FAC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9fbc
+// 0x005a9fbc
 char const * const s_sn_taunt_04_wav_005a9fbc = S_SN_TAUNT_04_WAV_005A9FBC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9fcc
+// 0x005a9fcc
 char const * const s_rt_taunt_02_wav_005a9fcc = S_RT_TAUNT_02_WAV_005A9FCC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9fdc
+// 0x005a9fdc
 char const * const s_all_taunt_02_wav_005a9fdc = S_ALL_TAUNT_02_WAV_005A9FDC;
 
-// STRING: STRONGHOLDCRUSADER 0x005a9ff0
+// 0x005a9ff0
 char const * const s_ab_taunt_01_wav_005a9ff0 = S_AB_TAUNT_01_WAV_005A9FF0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa000
+// 0x005aa000
 char const * const s_ma_taunt_01_wav_005aa000 = S_MA_TAUNT_01_WAV_005AA000;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa010
+// 0x005aa010
 char const * const s_sh_taunt_01_wav_005aa010 = S_SH_TAUNT_01_WAV_005AA010;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa020
+// 0x005aa020
 char const * const s_ni_taunt_01_wav_005aa020 = S_NI_TAUNT_01_WAV_005AA020;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa030
+// 0x005aa030
 char const * const s_em_taunt_01_wav_005aa030 = S_EM_TAUNT_01_WAV_005AA030;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa040
+// 0x005aa040
 char const * const s_wa_taunt_01_wav_005aa040 = S_WA_TAUNT_01_WAV_005AA040;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa050
+// 0x005aa050
 char const * const s_ph_taunt_01_wav_005aa050 = S_PH_TAUNT_01_WAV_005AA050;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa060
+// 0x005aa060
 char const * const s_fr_taunt_01_wav_005aa060 = S_FR_TAUNT_01_WAV_005AA060;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa070
+// 0x005aa070
 char const * const s_ri_taunt_01_wav_005aa070 = S_RI_TAUNT_01_WAV_005AA070;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa080
+// 0x005aa080
 char const * const s_su_taunt_01_wav_005aa080 = S_SU_TAUNT_01_WAV_005AA080;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa090
+// 0x005aa090
 char const * const s_ca_taunt_01_wav_005aa090 = S_CA_TAUNT_01_WAV_005AA090;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa0a0
+// 0x005aa0a0
 char const * const s_sa_taunt_01_wav_005aa0a0 = S_SA_TAUNT_01_WAV_005AA0A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa0b0
+// 0x005aa0b0
 char const * const s_wf_taunt_01_wav_005aa0b0 = S_WF_TAUNT_01_WAV_005AA0B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa0c0
+// 0x005aa0c0
 char const * const s_pg_taunt_03_wav_005aa0c0 = S_PG_TAUNT_03_WAV_005AA0C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa0d0
+// 0x005aa0d0
 char const * const s_sn_taunt_01_wav_005aa0d0 = S_SN_TAUNT_01_WAV_005AA0D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa0e0
+// 0x005aa0e0
 char const * const s_rt_taunt_01_wav_005aa0e0 = S_RT_TAUNT_01_WAV_005AA0E0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa0f0
+// 0x005aa0f0
 char const * const s_all_taunt_01_wav_005aa0f0 = S_ALL_TAUNT_01_WAV_005AA0F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa104
+// 0x005aa104
 char const * const s_general_message38_wav_005aa104 = S_GENERAL_MESSAGE38_WAV_005AA104;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa11c
+// 0x005aa11c
 char const * const s_general_message37_wav_005aa11c = S_GENERAL_MESSAGE37_WAV_005AA11C;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa134
+// 0x005aa134
 char const * const s_general_message36_wav_005aa134 = S_GENERAL_MESSAGE36_WAV_005AA134;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa14c
+// 0x005aa14c
 char const * const s_general_message35_wav_005aa14c = S_GENERAL_MESSAGE35_WAV_005AA14C;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa164
+// 0x005aa164
 char const * const s_general_message34_wav_005aa164 = S_GENERAL_MESSAGE34_WAV_005AA164;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa17c
+// 0x005aa17c
 char const * const s_general_message33_wav_005aa17c = S_GENERAL_MESSAGE33_WAV_005AA17C;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa194
+// 0x005aa194
 char const * const s_general_message32_wav_005aa194 = S_GENERAL_MESSAGE32_WAV_005AA194;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa1ac
+// 0x005aa1ac
 char const * const s_general_message31_wav_005aa1ac = S_GENERAL_MESSAGE31_WAV_005AA1AC;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa1c4
+// 0x005aa1c4
 char const * const s_general_message30_wav_005aa1c4 = S_GENERAL_MESSAGE30_WAV_005AA1C4;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa1dc
+// 0x005aa1dc
 char const * const s_general_message29_wav_005aa1dc = S_GENERAL_MESSAGE29_WAV_005AA1DC;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa1f4
+// 0x005aa1f4
 char const * const s_general_message28_wav_005aa1f4 = S_GENERAL_MESSAGE28_WAV_005AA1F4;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa20c
+// 0x005aa20c
 char const * const s_general_message27_wav_005aa20c = S_GENERAL_MESSAGE27_WAV_005AA20C;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa224
+// 0x005aa224
 char const * const s_general_message26_wav_005aa224 = S_GENERAL_MESSAGE26_WAV_005AA224;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa23c
+// 0x005aa23c
 char const * const s_general_message25_wav_005aa23c = S_GENERAL_MESSAGE25_WAV_005AA23C;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa254
+// 0x005aa254
 char const * const s_general_message24_wav_005aa254 = S_GENERAL_MESSAGE24_WAV_005AA254;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa26c
+// 0x005aa26c
 char const * const s_general_message23_wav_005aa26c = S_GENERAL_MESSAGE23_WAV_005AA26C;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa284
+// 0x005aa284
 char const * const s_null_wav_005aa284 = S_NULL_WAV_005AA284;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa290
+// 0x005aa290
 char const * const s_general_message1_wav_005aa290 = S_GENERAL_MESSAGE1_WAV_005AA290;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa2a8
+// 0x005aa2a8
 char const * const s_general_message8_wav_005aa2a8 = S_GENERAL_MESSAGE8_WAV_005AA2A8;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa2c0
+// 0x005aa2c0
 char const * const s_general_message3_wav_005aa2c0 = S_GENERAL_MESSAGE3_WAV_005AA2C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa2d8
+// 0x005aa2d8
 char const * const s_general_message7_wav_005aa2d8 = S_GENERAL_MESSAGE7_WAV_005AA2D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa2f0
+// 0x005aa2f0
 char const * const s_general_message6_wav_005aa2f0 = S_GENERAL_MESSAGE6_WAV_005AA2F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa308
+// 0x005aa308
 char const * const s_general_message5_wav_005aa308 = S_GENERAL_MESSAGE5_WAV_005AA308;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa320
+// 0x005aa320
 char const * const s_general_message4_wav_005aa320 = S_GENERAL_MESSAGE4_WAV_005AA320;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa338
+// 0x005aa338
 char const * const s_enemy_attack_24_wav_005aa338 = S_ENEMY_ATTACK_24_WAV_005AA338;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa34c
+// 0x005aa34c
 char const * const s_enemy_attack_23_wav_005aa34c = S_ENEMY_ATTACK_23_WAV_005AA34C;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa360
+// 0x005aa360
 char const * const s_enemy_attack22_wav_005aa360 = S_ENEMY_ATTACK22_WAV_005AA360;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa374
+// 0x005aa374
 char const * const s_enemy_attack21_wav_005aa374 = S_ENEMY_ATTACK21_WAV_005AA374;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa388
+// 0x005aa388
 char const * const s_enemy_attack20_wav_005aa388 = S_ENEMY_ATTACK20_WAV_005AA388;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa39c
+// 0x005aa39c
 char const * const s_enemy_attack19_wav_005aa39c = S_ENEMY_ATTACK19_WAV_005AA39C;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa3b0
+// 0x005aa3b0
 char const * const s_enemy_attack18_wav_005aa3b0 = S_ENEMY_ATTACK18_WAV_005AA3B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa3c4
+// 0x005aa3c4
 char const * const s_enemy_attack17_wav_005aa3c4 = S_ENEMY_ATTACK17_WAV_005AA3C4;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa3d8
+// 0x005aa3d8
 char const * const s_ap_narra_005aa3d8 = S_AP_NARRA_005AA3D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa3e4
+// 0x005aa3e4
 char const * const s_ap_milit_005aa3e4 = S_AP_MILIT_005AA3E4;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa3f0
+// 0x005aa3f0
 char const * const s_ap_civil_005aa3f0 = S_AP_CIVIL_005AA3F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa3fc
+// 0x005aa3fc
 char const * const s_ap_event_005aa3fc = S_AP_EVENT_005AA3FC;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa408
+// 0x005aa408
 char const * const s_wf_vict_005aa408 = S_WF_VICT_005AA408;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa410
+// 0x005aa410
 char const * const s_wf_plead_005aa410 = S_WF_PLEAD_005AA410;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa41c
+// 0x005aa41c
 char const * const s_wf_anger_005aa41c = S_WF_ANGER_005AA41C;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa428
+// 0x005aa428
 char const * const s_wf_taunt_005aa428 = S_WF_TAUNT_005AA428;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa434
+// 0x005aa434
 char const * const s_pg_vict_005aa434 = S_PG_VICT_005AA434;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa43c
+// 0x005aa43c
 char const * const s_pg_plead_005aa43c = S_PG_PLEAD_005AA43C;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa448
+// 0x005aa448
 char const * const s_pg_anger_005aa448 = S_PG_ANGER_005AA448;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa454
+// 0x005aa454
 char const * const s_pg_taunt_005aa454 = S_PG_TAUNT_005AA454;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa460
+// 0x005aa460
 char const * const s_sn_vict_005aa460 = S_SN_VICT_005AA460;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa468
+// 0x005aa468
 char const * const s_sn_plead_005aa468 = S_SN_PLEAD_005AA468;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa474
+// 0x005aa474
 char const * const s_sn_anger_005aa474 = S_SN_ANGER_005AA474;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa480
+// 0x005aa480
 char const * const s_sn_taunt_005aa480 = S_SN_TAUNT_005AA480;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa48c
+// 0x005aa48c
 char const * const s_rt_vict_005aa48c = S_RT_VICT_005AA48C;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa494
+// 0x005aa494
 char const * const s_rt_plead_005aa494 = S_RT_PLEAD_005AA494;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa4a0
+// 0x005aa4a0
 char const * const s_rt_anger_005aa4a0 = S_RT_ANGER_005AA4A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa4ac
+// 0x005aa4ac
 char const * const s_rt_taunt_005aa4ac = S_RT_TAUNT_005AA4AC;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa4b8
+// 0x005aa4b8
 char const * const s_adviser_005aa4b8 = S_ADVISER_005AA4B8;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa4c0
+// 0x005aa4c0
 char const * const s_briefing_005aa4c0 = S_BRIEFING_005AA4C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa4cc
+// 0x005aa4cc
 char const * const s_titles_005aa4cc = S_TITLES_005AA4CC;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa4d4
+// 0x005aa4d4
 char const * const s_tutor_005aa4d4 = S_TUTOR_005AA4D4;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa4dc
+// 0x005aa4dc
 char const * const s_action_fire_bik_005aa4dc = S_ACTION_FIRE_BIK_005AA4DC;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa4ec
+// 0x005aa4ec
 char const * const s_action_steal_bread_bik_005aa4ec = S_ACTION_STEAL_BREAD_BIK_005AA4EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa504
+// 0x005aa504
 char const * const s_action_jester_bik_005aa504 = S_ACTION_JESTER_BIK_005AA504;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa518
+// 0x005aa518
 char const * const s_action_marriage_bik_005aa518 = S_ACTION_MARRIAGE_BIK_005AA518;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa52c
+// 0x005aa52c
 char const * const s_action_archers_bik_005aa52c = S_ACTION_ARCHERS_BIK_005AA52C;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa540
+// 0x005aa540
 char const * const s_action_mad_cows_bik_005aa540 = S_ACTION_MAD_COWS_BIK_005AA540;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa554
+// 0x005aa554
 char const * const s_action_bandits_bik_005aa554 = S_ACTION_BANDITS_BIK_005AA554;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa568
+// 0x005aa568
 char const * const s_action_wolves_bik_005aa568 = S_ACTION_WOLVES_BIK_005AA568;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa57c
+// 0x005aa57c
 char const * const s_action_rabbits_bik_005aa57c = S_ACTION_RABBITS_BIK_005AA57C;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa590
+// 0x005aa590
 char const * const s_action_trees_die_bik_005aa590 = S_ACTION_TREES_DIE_BIK_005AA590;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa5a8
+// 0x005aa5a8
 char const * const s_action_apples_die_bik_005aa5a8 = S_ACTION_APPLES_DIE_BIK_005AA5A8;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa5c0
+// 0x005aa5c0
 char const * const s_action_hops_die_bik_005aa5c0 = S_ACTION_HOPS_DIE_BIK_005AA5C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa5d4
+// 0x005aa5d4
 char const * const s_action_wheat_die_bik_005aa5d4 = S_ACTION_WHEAT_DIE_BIK_005AA5D4;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa5ec
+// 0x005aa5ec
 char const * const s_action_plague_bik_005aa5ec = S_ACTION_PLAGUE_BIK_005AA5EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa600
+// 0x005aa600
 char const * const s_action_fair_bik_005aa600 = S_ACTION_FAIR_BIK_005AA600;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa610
+// 0x005aa610
 char const * const s_crusaders_mission4e_map_005aa610 = S_CRUSADERS_MISSION4E_MAP_005AA610;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa628
+// 0x005aa628
 char const * const s_crusaders_mission4d_map_005aa628 = S_CRUSADERS_MISSION4D_MAP_005AA628;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa640
+// 0x005aa640
 char const * const s_crusaders_mission4c_map_005aa640 = S_CRUSADERS_MISSION4C_MAP_005AA640;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa658
+// 0x005aa658
 char const * const s_crusaders_mission4b_map_005aa658 = S_CRUSADERS_MISSION4B_MAP_005AA658;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa670
+// 0x005aa670
 char const * const s_crusaders_mission4a_map_005aa670 = S_CRUSADERS_MISSION4A_MAP_005AA670;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa688
+// 0x005aa688
 char const * const s_crusaders_mission3e_map_005aa688 = S_CRUSADERS_MISSION3E_MAP_005AA688;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa6a0
+// 0x005aa6a0
 char const * const s_crusaders_mission3d_map_005aa6a0 = S_CRUSADERS_MISSION3D_MAP_005AA6A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa6b8
+// 0x005aa6b8
 char const * const s_crusaders_mission3c_map_005aa6b8 = S_CRUSADERS_MISSION3C_MAP_005AA6B8;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa6d0
+// 0x005aa6d0
 char const * const s_crusaders_mission3b_map_005aa6d0 = S_CRUSADERS_MISSION3B_MAP_005AA6D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa6e8
+// 0x005aa6e8
 char const * const s_crusaders_mission3a_map_005aa6e8 = S_CRUSADERS_MISSION3A_MAP_005AA6E8;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa700
+// 0x005aa700
 char const * const s_crusaders_mission2e_map_005aa700 = S_CRUSADERS_MISSION2E_MAP_005AA700;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa718
+// 0x005aa718
 char const * const s_crusaders_mission2d_map_005aa718 = S_CRUSADERS_MISSION2D_MAP_005AA718;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa730
+// 0x005aa730
 char const * const s_crusaders_mission2c_map_005aa730 = S_CRUSADERS_MISSION2C_MAP_005AA730;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa748
+// 0x005aa748
 char const * const s_crusaders_mission2b_map_005aa748 = S_CRUSADERS_MISSION2B_MAP_005AA748;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa760
+// 0x005aa760
 char const * const s_crusaders_mission2a_map_005aa760 = S_CRUSADERS_MISSION2A_MAP_005AA760;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa778
+// 0x005aa778
 char const * const s_crusaders_mission1e_map_005aa778 = S_CRUSADERS_MISSION1E_MAP_005AA778;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa790
+// 0x005aa790
 char const * const s_crusaders_mission1d_map_005aa790 = S_CRUSADERS_MISSION1D_MAP_005AA790;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa7a8
+// 0x005aa7a8
 char const * const s_crusaders_mission1c_map_005aa7a8 = S_CRUSADERS_MISSION1C_MAP_005AA7A8;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa7c0
+// 0x005aa7c0
 char const * const s_crusaders_mission1b_map_005aa7c0 = S_CRUSADERS_MISSION1B_MAP_005AA7C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa7d8
+// 0x005aa7d8
 char const * const s_crusaders_mission1a_map_005aa7d8 = S_CRUSADERS_MISSION1A_MAP_005AA7D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa7f0
+// 0x005aa7f0
 char const * const s__d_005aa7f0 = S__D_005AA7F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa7f4
+// 0x005aa7f4
 char const * const s__x_005aa7f4 = S__X_005AA7F4;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa7f8
+// 0x005aa7f8
 char const * const s_x_005aa7f8 = S_X_005AA7F8;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa7fc
+// 0x005aa7fc
 char const * const s___005aa7fc = S___005AA7FC;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa800
+// 0x005aa800
 char const * const s__s_s_005aa800 = S__S_S_005AA800;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa808
+// 0x005aa808
 char const * const s_infidel_attack_wav_005aa808 = S_INFIDEL_ATTACK_WAV_005AA808;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa81c
+// 0x005aa81c
 char const * const s_good_soldier_nervous_bik_005aa81c = S_GOOD_SOLDIER_NERVOUS_BIK_005AA81C;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa838
+// 0x005aa838
 char const * const s_arabian_attack_wav_005aa838 = S_ARABIAN_ATTACK_WAV_005AA838;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa84c
+// 0x005aa84c
 char const * const s_Random_Events11_wav_005aa84c = S_RANDOM_EVENTS11_WAV_005AA84C;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa860
+// 0x005aa860
 char const * const s_Random_Events9_wav_005aa860 = S_RANDOM_EVENTS9_WAV_005AA860;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa874
+// 0x005aa874
 char const * const s_Random_Events8_wav_005aa874 = S_RANDOM_EVENTS8_WAV_005AA874;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa888
+// 0x005aa888
 char const * const s_Random_Events2_wav_005aa888 = S_RANDOM_EVENTS2_WAV_005AA888;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa89c
+// 0x005aa89c
 char const * const s_Random_Events13_wav_005aa89c = S_RANDOM_EVENTS13_WAV_005AA89C;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa8b0
+// 0x005aa8b0
 char const * const s_Random_Events12_wav_005aa8b0 = S_RANDOM_EVENTS12_WAV_005AA8B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa8c4
+// 0x005aa8c4
 char const * const s_Random_Events6_wav_005aa8c4 = S_RANDOM_EVENTS6_WAV_005AA8C4;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa8d8
+// 0x005aa8d8
 char const * const s_Random_Events7_wav_005aa8d8 = S_RANDOM_EVENTS7_WAV_005AA8D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa8ec
+// 0x005aa8ec
 char const * const s_Random_Events1_wav_005aa8ec = S_RANDOM_EVENTS1_WAV_005AA8EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa900
+// 0x005aa900
 char const * const s_Ap_Milit42_wav_005aa900 = S_AP_MILIT42_WAV_005AA900;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa910
+// 0x005aa910
 char const * const s_Ap_Milit41_wav_005aa910 = S_AP_MILIT41_WAV_005AA910;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa920
+// 0x005aa920
 char const * const s_Ap_Milit40_wav_005aa920 = S_AP_MILIT40_WAV_005AA920;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa930
+// 0x005aa930
 char const * const s_Ap_Milit39_wav_005aa930 = S_AP_MILIT39_WAV_005AA930;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa940
+// 0x005aa940
 char const * const s_Ap_Milit38_wav_005aa940 = S_AP_MILIT38_WAV_005AA940;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa950
+// 0x005aa950
 char const * const s_Ap_Milit37_wav_005aa950 = S_AP_MILIT37_WAV_005AA950;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa960
+// 0x005aa960
 char const * const s_Ap_Milit36_wav_005aa960 = S_AP_MILIT36_WAV_005AA960;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa970
+// 0x005aa970
 char const * const s_Ap_Milit35_wav_005aa970 = S_AP_MILIT35_WAV_005AA970;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa980
+// 0x005aa980
 char const * const s_Ap_Milit34_wav_005aa980 = S_AP_MILIT34_WAV_005AA980;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa990
+// 0x005aa990
 char const * const s_Ap_Milit33_wav_005aa990 = S_AP_MILIT33_WAV_005AA990;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa9a0
+// 0x005aa9a0
 char const * const s_Ap_Milit32_wav_005aa9a0 = S_AP_MILIT32_WAV_005AA9A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa9b0
+// 0x005aa9b0
 char const * const s_Ap_Milit30_wav_005aa9b0 = S_AP_MILIT30_WAV_005AA9B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa9c0
+// 0x005aa9c0
 char const * const s_Ap_Milit29_wav_005aa9c0 = S_AP_MILIT29_WAV_005AA9C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa9d0
+// 0x005aa9d0
 char const * const s_Ap_Milit28_wav_005aa9d0 = S_AP_MILIT28_WAV_005AA9D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa9e0
+// 0x005aa9e0
 char const * const s_Ap_Milit27_wav_005aa9e0 = S_AP_MILIT27_WAV_005AA9E0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aa9f0
+// 0x005aa9f0
 char const * const s_Ap_Milit26_wav_005aa9f0 = S_AP_MILIT26_WAV_005AA9F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aaa00
+// 0x005aaa00
 char const * const s_Ap_Milit25_wav_005aaa00 = S_AP_MILIT25_WAV_005AAA00;
 
-// STRING: STRONGHOLDCRUSADER 0x005aaa10
+// 0x005aaa10
 char const * const s_good_soldier_taunt_bik_005aaa10 = S_GOOD_SOLDIER_TAUNT_BIK_005AAA10;
 
-// STRING: STRONGHOLDCRUSADER 0x005aaa28
+// 0x005aaa28
 char const * const s_Ap_Milit24_wav_005aaa28 = S_AP_MILIT24_WAV_005AAA28;
 
-// STRING: STRONGHOLDCRUSADER 0x005aaa38
+// 0x005aaa38
 char const * const s_Ap_Milit23_wav_005aaa38 = S_AP_MILIT23_WAV_005AAA38;
 
-// STRING: STRONGHOLDCRUSADER 0x005aaa48
+// 0x005aaa48
 char const * const s_Ap_Milit22_wav_005aaa48 = S_AP_MILIT22_WAV_005AAA48;
 
-// STRING: STRONGHOLDCRUSADER 0x005aaa58
+// 0x005aaa58
 char const * const s_Ap_Milit21_wav_005aaa58 = S_AP_MILIT21_WAV_005AAA58;
 
-// STRING: STRONGHOLDCRUSADER 0x005aaa68
+// 0x005aaa68
 char const * const s_good_arab_nervous_bik_005aaa68 = S_GOOD_ARAB_NERVOUS_BIK_005AAA68;
 
-// STRING: STRONGHOLDCRUSADER 0x005aaa80
+// 0x005aaa80
 char const * const s_general_warning16_wav_005aaa80 = S_GENERAL_WARNING16_WAV_005AAA80;
 
-// STRING: STRONGHOLDCRUSADER 0x005aaa98
+// 0x005aaa98
 char const * const s_Random_Events10_wav_005aaa98 = S_RANDOM_EVENTS10_WAV_005AAA98;
 
-// STRING: STRONGHOLDCRUSADER 0x005aaaac
+// 0x005aaaac
 char const * const s_Random_Events5_wav_005aaaac = S_RANDOM_EVENTS5_WAV_005AAAAC;
 
-// STRING: STRONGHOLDCRUSADER 0x005aaac0
+// 0x005aaac0
 char const * const s_Random_Events4_wav_005aaac0 = S_RANDOM_EVENTS4_WAV_005AAAC0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aaad4
+// 0x005aaad4
 char const * const s_Random_Events3_wav_005aaad4 = S_RANDOM_EVENTS3_WAV_005AAAD4;
 
-// STRING: STRONGHOLDCRUSADER 0x005aaae8
+// 0x005aaae8
 char const * const s_ap_civil12_bik_005aaae8 = S_AP_CIVIL12_BIK_005AAAE8;
 
-// STRING: STRONGHOLDCRUSADER 0x005aac60
+// 0x005aac60
 char const * const s_SK_ABBOT_005aac60 = S_SK_ABBOT_005AAC60;
 
-// STRING: STRONGHOLDCRUSADER 0x005aac6c
+// 0x005aac6c
 char const * const s_SK_MARSHAL_005aac6c = S_SK_MARSHAL_005AAC6C;
 
-// STRING: STRONGHOLDCRUSADER 0x005aac78
+// 0x005aac78
 char const * const s_SK_SHERIFF_005aac78 = S_SK_SHERIFF_005AAC78;
 
-// STRING: STRONGHOLDCRUSADER 0x005aac84
+// 0x005aac84
 char const * const s_SK_NIZAR_005aac84 = S_SK_NIZAR_005AAC84;
 
-// STRING: STRONGHOLDCRUSADER 0x005aac90
+// 0x005aac90
 char const * const s_SK_EMIR_005aac90 = S_SK_EMIR_005AAC90;
 
-// STRING: STRONGHOLDCRUSADER 0x005aac98
+// 0x005aac98
 char const * const s_SK_WAZIR_005aac98 = S_SK_WAZIR_005AAC98;
 
-// STRING: STRONGHOLDCRUSADER 0x005aaca4
+// 0x005aaca4
 char const * const s_SK_PHILLIP_005aaca4 = S_SK_PHILLIP_005AACA4;
 
-// STRING: STRONGHOLDCRUSADER 0x005aacb0
+// 0x005aacb0
 char const * const s_SK_FREDERICK_005aacb0 = S_SK_FREDERICK_005AACB0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aacc0
+// 0x005aacc0
 char const * const s_SK_RICHARD_005aacc0 = S_SK_RICHARD_005AACC0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aaccc
+// 0x005aaccc
 char const * const s_SK_SULTAN_005aaccc = S_SK_SULTAN_005AACCC;
 
-// STRING: STRONGHOLDCRUSADER 0x005aacd8
+// 0x005aacd8
 char const * const s_SK_CALIPH_005aacd8 = S_SK_CALIPH_005AACD8;
 
-// STRING: STRONGHOLDCRUSADER 0x005aace4
+// 0x005aace4
 char const * const s_SK_SALADIN_005aace4 = S_SK_SALADIN_005AACE4;
 
-// STRING: STRONGHOLDCRUSADER 0x005aacf0
+// 0x005aacf0
 char const * const s_SK_WOLF_005aacf0 = S_SK_WOLF_005AACF0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aacf8
+// 0x005aacf8
 char const * const s_SK_PIG_005aacf8 = S_SK_PIG_005AACF8;
 
-// STRING: STRONGHOLDCRUSADER 0x005aad00
+// 0x005aad00
 char const * const s_SK_SNAKE_005aad00 = S_SK_SNAKE_005AAD00;
 
-// STRING: STRONGHOLDCRUSADER 0x005aad0c
+// 0x005aad0c
 char const * const s_SK_RAT_005aad0c = S_SK_RAT_005AAD0C;
 
-// STRING: STRONGHOLDCRUSADER 0x005aad14
+// 0x005aad14
 char const * const s_SK_NULL_005aad14 = S_SK_NULL_005AAD14;
 
-// STRING: STRONGHOLDCRUSADER 0x005aad1c
+// 0x005aad1c
 char const * const s_Df_d_d_005aad1c = S_DF_D_D_005AAD1C;
 
-// STRING: STRONGHOLDCRUSADER 0x005aad28
+// 0x005aad28
 char const * const s_Hr_d_d_005aad28 = S_HR_D_D_005AAD28;
 
-// STRING: STRONGHOLDCRUSADER 0x005aad34
+// 0x005aad34
 char const * const s_Sg_d_d_005aad34 = S_SG_D_D_005AAD34;
 
-// STRING: STRONGHOLDCRUSADER 0x005aad40
+// 0x005aad40
 char const * const s_E_d_d_005aad40 = S_E_D_D_005AAD40;
 
-// STRING: STRONGHOLDCRUSADER 0x005aad48
+// 0x005aad48
 char const * const s_AIV___d_005aad48 = S_AIV___D_005AAD48;
 
-// STRING: STRONGHOLDCRUSADER 0x005aad50
+// 0x005aad50
 char const * const s_AIV_n_a_005aad50 = S_AIV_N_A_005AAD50;
 
-// STRING: STRONGHOLDCRUSADER 0x005aad58
+// 0x005aad58
 char const * const s_Atk_d_W_d_005aad58 = S_ATK_D_W_D_005AAD58;
 
-// STRING: STRONGHOLDCRUSADER 0x005aad64
+// 0x005aad64
 char const * const s_P__005aad64 = S_P__005AAD64;
 
-// STRING: STRONGHOLDCRUSADER 0x005aad68
+// 0x005aad68
 char const * const s_Strong_005aad68 = S_STRONG_005AAD68;
 
-// STRING: STRONGHOLDCRUSADER 0x005aad70
+// 0x005aad70
 char const * const s_Normal_005aad70 = S_NORMAL_005AAD70;
 
-// STRING: STRONGHOLDCRUSADER 0x005aad78
+// 0x005aad78
 char const * const s_Weak_005aad78 = S_WEAK_005AAD78;
 
-// STRING: STRONGHOLDCRUSADER 0x005aad80
+// 0x005aad80
 char const * const s_skmasters2_dat_005aad80 = S_SKMASTERS2_DAT_005AAD80;
 
-// STRING: STRONGHOLDCRUSADER 0x005aada4
+// 0x005aada4
 char const * const s_defeat_stocks_tgx_005aada4 = S_DEFEAT_STOCKS_TGX_005AADA4;
 
-// STRING: STRONGHOLDCRUSADER 0x005aadb8
+// 0x005aadb8
 char const * const s_defeat_snake_tgx_005aadb8 = S_DEFEAT_SNAKE_TGX_005AADB8;
 
-// STRING: STRONGHOLDCRUSADER 0x005aadcc
+// 0x005aadcc
 char const * const s_defeat_ruins_tgx_005aadcc = S_DEFEAT_RUINS_TGX_005AADCC;
 
-// STRING: STRONGHOLDCRUSADER 0x005aade0
+// 0x005aade0
 char const * const s_defeat_rat_tgx_005aade0 = S_DEFEAT_RAT_TGX_005AADE0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aadf0
+// 0x005aadf0
 char const * const s_defeat_pig_tgx_005aadf0 = S_DEFEAT_PIG_TGX_005AADF0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aae00
+// 0x005aae00
 char const * const s_defeat_general_tgx_005aae00 = S_DEFEAT_GENERAL_TGX_005AAE00;
 
-// STRING: STRONGHOLDCRUSADER 0x005aae14
+// 0x005aae14
 char const * const s_defeat_baddies_tgx_005aae14 = S_DEFEAT_BADDIES_TGX_005AAE14;
 
-// STRING: STRONGHOLDCRUSADER 0x005aae28
+// 0x005aae28
 char const * const s_victory_stockpile_tgx_005aae28 = S_VICTORY_STOCKPILE_TGX_005AAE28;
 
-// STRING: STRONGHOLDCRUSADER 0x005aae40
+// 0x005aae40
 char const * const s_victory_snake_tgx_005aae40 = S_VICTORY_SNAKE_TGX_005AAE40;
 
-// STRING: STRONGHOLDCRUSADER 0x005aae54
+// 0x005aae54
 char const * const s_victory_resources_tgx_005aae54 = S_VICTORY_RESOURCES_TGX_005AAE54;
 
-// STRING: STRONGHOLDCRUSADER 0x005aae6c
+// 0x005aae6c
 char const * const s_victory_rat_tgx_005aae6c = S_VICTORY_RAT_TGX_005AAE6C;
 
-// STRING: STRONGHOLDCRUSADER 0x005aae7c
+// 0x005aae7c
 char const * const s_victory_pig_tgx_005aae7c = S_VICTORY_PIG_TGX_005AAE7C;
 
-// STRING: STRONGHOLDCRUSADER 0x005aae8c
+// 0x005aae8c
 char const * const s_victory_military_small_tgx_005aae8c = S_VICTORY_MILITARY_SMALL_TGX_005AAE8C;
 
-// STRING: STRONGHOLDCRUSADER 0x005aaea8
+// 0x005aaea8
 char const * const s_victory_military_big_tgx_005aaea8 = S_VICTORY_MILITARY_BIG_TGX_005AAEA8;
 
-// STRING: STRONGHOLDCRUSADER 0x005aaec4
+// 0x005aaec4
 char const * const s_victory_economic_tgx_005aaec4 = S_VICTORY_ECONOMIC_TGX_005AAEC4;
 
-// STRING: STRONGHOLDCRUSADER 0x005aaedc
+// 0x005aaedc
 char const * const s_victory_banquet_tgx_005aaedc = S_VICTORY_BANQUET_TGX_005AAEDC;
 
-// STRING: STRONGHOLDCRUSADER 0x005aaef0
+// 0x005aaef0
 char const * const s_crusader_lose_bik_005aaef0 = S_CRUSADER_LOSE_BIK_005AAEF0;
 
-// STRING: STRONGHOLDCRUSADER 0x005aaf04
+// 0x005aaf04
 char const * const s_arabian_lose_bik_005aaf04 = S_ARABIAN_LOSE_BIK_005AAF04;
 
-// STRING: STRONGHOLDCRUSADER 0x005aaf18
+// 0x005aaf18
 char const * const s____M_d_d_sav_005aaf18 = S____M_D_D_SAV_005AAF18;
 
-// STRING: STRONGHOLDCRUSADER 0x005aaf2c
+// 0x005aaf2c
 char const * const s____d_005aaf2c = S____D_005AAF2C;
 
-// STRING: STRONGHOLDCRUSADER 0x005aaf3c
+// 0x005aaf3c
 char const * const s__s__d____s__d_005aaf3c = S__S__D____S__D_005AAF3C;
 
-// STRING: STRONGHOLDCRUSADER 0x005aaf4c
+// 0x005aaf4c
 char const * const s_gfx8_campaign_map_england_hotspo_005aaf4c = S_GFX8_CAMPAIGN_MAP_ENGLAND_HOTSPO_005AAF4C;
 
-// STRING: STRONGHOLDCRUSADER 0x005aaf74
+// 0x005aaf74
 char const * const s___005aaf74 = S___005AAF74;
 
-// STRING: STRONGHOLDCRUSADER 0x005aaf78
+// 0x005aaf78
 char const * const s___005aaf78 = S___005AAF78;
 
-// STRING: STRONGHOLDCRUSADER 0x005aaf7c
+// 0x005aaf7c
 char const * const s_mission_d_hlp_005aaf7c = S_MISSION_D_HLP_005AAF7C;
 
-// STRING: STRONGHOLDCRUSADER 0x005aaf8c
+// 0x005aaf8c
 char const * const s_skirmish_background_tgx_005aaf8c = S_SKIRMISH_BACKGROUND_TGX_005AAF8C;
 
-// STRING: STRONGHOLDCRUSADER 0x005aafa4
+// 0x005aafa4
 char const * const s_skirmish_trail_tgx_005aafa4 = S_SKIRMISH_TRAIL_TGX_005AAFA4;
 
-// STRING: STRONGHOLDCRUSADER 0x005aafb8
+// 0x005aafb8
 char const * const s_skirmish_trail2_tgx_005aafb8 = S_SKIRMISH_TRAIL2_TGX_005AAFB8;
 
-// STRING: STRONGHOLDCRUSADER 0x005aafcc
+// 0x005aafcc
 char const * const s_shcx_map_tgx_005aafcc = S_SHCX_MAP_TGX_005AAFCC;
 
-// STRING: STRONGHOLDCRUSADER 0x005aafdc
+// 0x005aafdc
 char const * const s_lose_screen_arab_tgx_005aafdc = S_LOSE_SCREEN_ARAB_TGX_005AAFDC;
 
-// STRING: STRONGHOLDCRUSADER 0x005aaff4
+// 0x005aaff4
 char const * const s_lose_screen_crusader_tgx_005aaff4 = S_LOSE_SCREEN_CRUSADER_TGX_005AAFF4;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab010
+// 0x005ab010
 char const * const s_win_screen_arab_tgx_005ab010 = S_WIN_SCREEN_ARAB_TGX_005AB010;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab024
+// 0x005ab024
 char const * const s_win_screen_crusader_tgx_005ab024 = S_WIN_SCREEN_CRUSADER_TGX_005AB024;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab040
+// 0x005ab040
 char const * const s_pc7_tgx_005ab040 = S_PC7_TGX_005AB040;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab048
+// 0x005ab048
 char const * const s_pc6_tgx_005ab048 = S_PC6_TGX_005AB048;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab050
+// 0x005ab050
 char const * const s_pc5_tgx_005ab050 = S_PC5_TGX_005AB050;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab058
+// 0x005ab058
 char const * const s_pc4_tgx_005ab058 = S_PC4_TGX_005AB058;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab060
+// 0x005ab060
 char const * const s_pc3_tgx_005ab060 = S_PC3_TGX_005AB060;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab068
+// 0x005ab068
 char const * const s_pc2_tgx_005ab068 = S_PC2_TGX_005AB068;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab070
+// 0x005ab070
 char const * const s_pc1_tgx_005ab070 = S_PC1_TGX_005AB070;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab078
+// 0x005ab078
 char const * const s_pc0_tgx_005ab078 = S_PC0_TGX_005AB078;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab080
+// 0x005ab080
 char const * const s_sand_tgx_005ab080 = S_SAND_TGX_005AB080;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab0a0
+// 0x005ab0a0
 char const * const s_m_dpic_tgx_005ab0a0 = S_M_DPIC_TGX_005AB0A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab0b8
+// 0x005ab0b8
 char const * const s_m_dmap_tgx_005ab0b8 = S_M_DMAP_TGX_005AB0B8;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab0c8
+// 0x005ab0c8
 char const * const s_c4pic_tgx_005ab0c8 = S_C4PIC_TGX_005AB0C8;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab0d4
+// 0x005ab0d4
 char const * const s_c3pic_tgx_005ab0d4 = S_C3PIC_TGX_005AB0D4;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab0e0
+// 0x005ab0e0
 char const * const s_c2pic_tgx_005ab0e0 = S_C2PIC_TGX_005AB0E0;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab0ec
+// 0x005ab0ec
 char const * const s_c1pic_tgx_005ab0ec = S_C1PIC_TGX_005AB0EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab114
+// 0x005ab114
 char const * const s_fx_speech_intro_03_wav_005ab114 = S_FX_SPEECH_INTRO_03_WAV_005AB114;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab12c
+// 0x005ab12c
 char const * const s_fx_speech_intro_02_wav_005ab12c = S_FX_SPEECH_INTRO_02_WAV_005AB12C;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab144
+// 0x005ab144
 char const * const s_fx_speech_intro_01_wav_005ab144 = S_FX_SPEECH_INTRO_01_WAV_005AB144;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab15c
+// 0x005ab15c
 char const * const s_fx_speech_after_04_wav_005ab15c = S_FX_SPEECH_AFTER_04_WAV_005AB15C;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab174
+// 0x005ab174
 char const * const s_fx_speech_after_03_wav_005ab174 = S_FX_SPEECH_AFTER_03_WAV_005AB174;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab18c
+// 0x005ab18c
 char const * const s_fx_speech_after_02_wav_005ab18c = S_FX_SPEECH_AFTER_02_WAV_005AB18C;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab1a4
+// 0x005ab1a4
 char const * const s_fx_speech_after_01_wav_005ab1a4 = S_FX_SPEECH_AFTER_01_WAV_005AB1A4;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab1bc
+// 0x005ab1bc
 char const * const s_p2_tgx_005ab1bc = S_P2_TGX_005AB1BC;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab1c4
+// 0x005ab1c4
 char const * const s_p1_tgx_005ab1c4 = S_P1_TGX_005AB1C4;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab1cc
+// 0x005ab1cc
 char const * const s_p3_tgx_005ab1cc = S_P3_TGX_005AB1CC;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab1d4
+// 0x005ab1d4
 char const * const s_p4_tgx_005ab1d4 = S_P4_TGX_005AB1D4;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab1dc
+// 0x005ab1dc
 char const * const s_logo_280x100_tgx_005ab1dc = S_LOGO_280X100_TGX_005AB1DC;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab1f0
+// 0x005ab1f0
 char const * const s_demo4_tgx_005ab1f0 = S_DEMO4_TGX_005AB1F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab1fc
+// 0x005ab1fc
 char const * const s_demo3_tgx_005ab1fc = S_DEMO3_TGX_005AB1FC;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab208
+// 0x005ab208
 char const * const s_demo2_tgx_005ab208 = S_DEMO2_TGX_005AB208;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab214
+// 0x005ab214
 char const * const s_demo1_tgx_005ab214 = S_DEMO1_TGX_005AB214;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab220
+// 0x005ab220
 char const * const s_bullet2_tgx_005ab220 = S_BULLET2_TGX_005AB220;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab22c
+// 0x005ab22c
 char const * const s_map_wolf_tgx_005ab22c = S_MAP_WOLF_TGX_005AB22C;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab23c
+// 0x005ab23c
 char const * const s_map_snake_tgx_005ab23c = S_MAP_SNAKE_TGX_005AB23C;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab24c
+// 0x005ab24c
 char const * const s_map_rat_tgx_005ab24c = S_MAP_RAT_TGX_005AB24C;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab258
+// 0x005ab258
 char const * const s_map_pig_tgx_005ab258 = S_MAP_PIG_TGX_005AB258;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab264
+// 0x005ab264
 char const * const s_campaign_map_england_20_tgx_005ab264 = S_CAMPAIGN_MAP_ENGLAND_20_TGX_005AB264;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab280
+// 0x005ab280
 char const * const s_campaign_map_england_19_tgx_005ab280 = S_CAMPAIGN_MAP_ENGLAND_19_TGX_005AB280;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab29c
+// 0x005ab29c
 char const * const s_campaign_map_england_18_tgx_005ab29c = S_CAMPAIGN_MAP_ENGLAND_18_TGX_005AB29C;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab2b8
+// 0x005ab2b8
 char const * const s_campaign_map_england_17_tgx_005ab2b8 = S_CAMPAIGN_MAP_ENGLAND_17_TGX_005AB2B8;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab2d4
+// 0x005ab2d4
 char const * const s_campaign_map_england_16_tgx_005ab2d4 = S_CAMPAIGN_MAP_ENGLAND_16_TGX_005AB2D4;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab2f0
+// 0x005ab2f0
 char const * const s_campaign_map_england_15_tgx_005ab2f0 = S_CAMPAIGN_MAP_ENGLAND_15_TGX_005AB2F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab30c
+// 0x005ab30c
 char const * const s_campaign_map_england_14_tgx_005ab30c = S_CAMPAIGN_MAP_ENGLAND_14_TGX_005AB30C;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab328
+// 0x005ab328
 char const * const s_campaign_map_england_13_tgx_005ab328 = S_CAMPAIGN_MAP_ENGLAND_13_TGX_005AB328;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab344
+// 0x005ab344
 char const * const s_campaign_map_england_12_tgx_005ab344 = S_CAMPAIGN_MAP_ENGLAND_12_TGX_005AB344;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab360
+// 0x005ab360
 char const * const s_campaign_map_england_11_tgx_005ab360 = S_CAMPAIGN_MAP_ENGLAND_11_TGX_005AB360;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab37c
+// 0x005ab37c
 char const * const s_campaign_map_england_10_tgx_005ab37c = S_CAMPAIGN_MAP_ENGLAND_10_TGX_005AB37C;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab398
+// 0x005ab398
 char const * const s_campaign_map_england_09_tgx_005ab398 = S_CAMPAIGN_MAP_ENGLAND_09_TGX_005AB398;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab3b4
+// 0x005ab3b4
 char const * const s_campaign_map_england_08_tgx_005ab3b4 = S_CAMPAIGN_MAP_ENGLAND_08_TGX_005AB3B4;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab3d0
+// 0x005ab3d0
 char const * const s_campaign_map_england_07_tgx_005ab3d0 = S_CAMPAIGN_MAP_ENGLAND_07_TGX_005AB3D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab3ec
+// 0x005ab3ec
 char const * const s_campaign_map_england_06_tgx_005ab3ec = S_CAMPAIGN_MAP_ENGLAND_06_TGX_005AB3EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab408
+// 0x005ab408
 char const * const s_campaign_map_england_05_tgx_005ab408 = S_CAMPAIGN_MAP_ENGLAND_05_TGX_005AB408;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab424
+// 0x005ab424
 char const * const s_campaign_map_england_04_tgx_005ab424 = S_CAMPAIGN_MAP_ENGLAND_04_TGX_005AB424;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab440
+// 0x005ab440
 char const * const s_campaign_map_england_03_tgx_005ab440 = S_CAMPAIGN_MAP_ENGLAND_03_TGX_005AB440;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab45c
+// 0x005ab45c
 char const * const s_campaign_map_england_02_tgx_005ab45c = S_CAMPAIGN_MAP_ENGLAND_02_TGX_005AB45C;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab478
+// 0x005ab478
 char const * const s_campaign_map_england_01_tgx_005ab478 = S_CAMPAIGN_MAP_ENGLAND_01_TGX_005AB478;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab494
+// 0x005ab494
 char const * const s_campaign_map_england_tgx_005ab494 = S_CAMPAIGN_MAP_ENGLAND_TGX_005AB494;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab4b0
+// 0x005ab4b0
 char const * const s_briefing_back12_tgx_005ab4b0 = S_BRIEFING_BACK12_TGX_005AB4B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab4c4
+// 0x005ab4c4
 char const * const s_briefing_back11_tgx_005ab4c4 = S_BRIEFING_BACK11_TGX_005AB4C4;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab4d8
+// 0x005ab4d8
 char const * const s_briefing_back10_tgx_005ab4d8 = S_BRIEFING_BACK10_TGX_005AB4D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab4ec
+// 0x005ab4ec
 char const * const s_briefing_back9_tgx_005ab4ec = S_BRIEFING_BACK9_TGX_005AB4EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab500
+// 0x005ab500
 char const * const s_briefing_back8_tgx_005ab500 = S_BRIEFING_BACK8_TGX_005AB500;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab514
+// 0x005ab514
 char const * const s_briefing_back7_tgx_005ab514 = S_BRIEFING_BACK7_TGX_005AB514;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab528
+// 0x005ab528
 char const * const s_briefing_back6_tgx_005ab528 = S_BRIEFING_BACK6_TGX_005AB528;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab53c
+// 0x005ab53c
 char const * const s_briefing_back5_tgx_005ab53c = S_BRIEFING_BACK5_TGX_005AB53C;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab550
+// 0x005ab550
 char const * const s_briefing_back4_tgx_005ab550 = S_BRIEFING_BACK4_TGX_005AB550;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab564
+// 0x005ab564
 char const * const s_briefing_back3_tgx_005ab564 = S_BRIEFING_BACK3_TGX_005AB564;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab578
+// 0x005ab578
 char const * const s_briefing_back2_tgx_005ab578 = S_BRIEFING_BACK2_TGX_005AB578;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab58c
+// 0x005ab58c
 char const * const s_briefing_back1_tgx_005ab58c = S_BRIEFING_BACK1_TGX_005AB58C;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab5a0
+// 0x005ab5a0
 char const * const s_briefing_back0_tgx_005ab5a0 = S_BRIEFING_BACK0_TGX_005AB5A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab5b4
+// 0x005ab5b4
 char const * const s_briefing_screen_background_tgx_005ab5b4 = S_BRIEFING_SCREEN_BACKGROUND_TGX_005AB5B4;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab5d4
+// 0x005ab5d4
 char const * const s___005ab5d4 = S___005AB5D4;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab5d8
+// 0x005ab5d8
 char const * const s_n__Chr__005ab5d8 = S_N__CHR__005AB5D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab5e4
+// 0x005ab5e4
 char const * const s_A_D__005ab5e4 = S_A_D__005AB5E4;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab5ec
+// 0x005ab5ec
 char const * const s_fx_speech_ca_add_player_01_wav_005ab5ec = S_FX_SPEECH_CA_ADD_PLAYER_01_WAV_005AB5EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab60c
+// 0x005ab60c
 char const * const s_fx_speech_ri_congrats_01_wav_005ab60c = S_FX_SPEECH_RI_CONGRATS_01_WAV_005AB60C;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab62c
+// 0x005ab62c
 char const * const s_fx_speech_su_congrats_01_wav_005ab62c = S_FX_SPEECH_SU_CONGRATS_01_WAV_005AB62C;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab64c
+// 0x005ab64c
 char const * const s_fx_speech_sa_extra_01_wav_005ab64c = S_FX_SPEECH_SA_EXTRA_01_WAV_005AB64C;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab668
+// 0x005ab668
 char const * const s_fx_speech_wf_anger_04_wav_005ab668 = S_FX_SPEECH_WF_ANGER_04_WAV_005AB668;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab684
+// 0x005ab684
 char const * const s_fx_speech_pg_add_player_wav_005ab684 = S_FX_SPEECH_PG_ADD_PLAYER_WAV_005AB684;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab6a0
+// 0x005ab6a0
 char const * const s_fx_speech_sn_add_player_wav_005ab6a0 = S_FX_SPEECH_SN_ADD_PLAYER_WAV_005AB6A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab6bc
+// 0x005ab6bc
 char const * const s_fx_speech_rt_anger_04_wav_005ab6bc = S_FX_SPEECH_RT_ANGER_04_WAV_005AB6BC;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab6d8
+// 0x005ab6d8
 char const * const s_jesterlast_tgx_005ab6d8 = S_JESTERLAST_TGX_005AB6D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab6e8
+// 0x005ab6e8
 char const * const s_endframe8_tgx_005ab6e8 = S_ENDFRAME8_TGX_005AB6E8;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab6f8
+// 0x005ab6f8
 char const * const s_endframe7_tgx_005ab6f8 = S_ENDFRAME7_TGX_005AB6F8;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab708
+// 0x005ab708
 char const * const s_endframe6_tgx_005ab708 = S_ENDFRAME6_TGX_005AB708;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab718
+// 0x005ab718
 char const * const s_endframe5_tgx_005ab718 = S_ENDFRAME5_TGX_005AB718;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab728
+// 0x005ab728
 char const * const s_endframe4_tgx_005ab728 = S_ENDFRAME4_TGX_005AB728;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab738
+// 0x005ab738
 char const * const s_endframe3_tgx_005ab738 = S_ENDFRAME3_TGX_005AB738;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab748
+// 0x005ab748
 char const * const s_endframe2_tgx_005ab748 = S_ENDFRAME2_TGX_005AB748;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab758
+// 0x005ab758
 char const * const s_endframe1_tgx_005ab758 = S_ENDFRAME1_TGX_005AB758;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab768
+// 0x005ab768
 char const * const s_sktrail_win_tgx_005ab768 = S_SKTRAIL_WIN_TGX_005AB768;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab778
+// 0x005ab778
 char const * const s_1___005ab778 = S_1___005AB778;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab780
+// 0x005ab780
 char const * const s_2___005ab780 = S_2___005AB780;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab788
+// 0x005ab788
 char const * const s_3___005ab788 = S_3___005AB788;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab790
+// 0x005ab790
 char const * const s__d_d_005ab790 = S__D_D_005AB790;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab798
+// 0x005ab798
 char const * const s__d_0_d_005ab798 = S__D_0_D_005AB798;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab7a0
+// 0x005ab7a0
 char const * const s__s__005ab7a0 = S__S__005AB7A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab7a8
+// 0x005ab7a8
 char const * const s___005ab7a8 = S___005AB7A8;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab7b8
+// 0x005ab7b8
 char const * const s_sco_005ab7b8 = S_SCO_005AB7B8;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab7bc
+// 0x005ab7bc
 char const * const s_general_victory2_wav_005ab7bc = S_GENERAL_VICTORY2_WAV_005AB7BC;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab7d4
+// 0x005ab7d4
 char const * const s_general_victory1_wav_005ab7d4 = S_GENERAL_VICTORY1_WAV_005AB7D4;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab7ec
+// 0x005ab7ec
 char const * const s_crusader_win_bik_005ab7ec = S_CRUSADER_WIN_BIK_005AB7EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab800
+// 0x005ab800
 char const * const s_arabian_win_bik_005ab800 = S_ARABIAN_WIN_BIK_005AB800;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab810
+// 0x005ab810
 char const * const s_Damage_Layer___d__d_005ab810 = S_DAMAGE_LAYER___D__D_005AB810;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab828
+// 0x005ab828
 char const * const s_Logic2_Layer___x__x_005ab828 = S_LOGIC2_LAYER___X__X_005AB828;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab840
+// 0x005ab840
 char const * const s_Logic_Layer___x__x_005ab840 = S_LOGIC_LAYER___X__X_005AB840;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab854
+// 0x005ab854
 char const * const s_Chimp___d_Struct___d_Fly___d_005ab854 = S_CHIMP___D_STRUCT___D_FLY___D_005AB854;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab874
+// 0x005ab874
 char const * const s_Tile_centre__x_d_y_d_005ab874 = S_TILE_CENTRE__X_D_Y_D_005AB874;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab88c
+// 0x005ab88c
 char const * const s_Mouse__x_d__y_d__off_d_005ab88c = S_MOUSE__X_D__Y_D__OFF_D_005AB88C;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab8a4
+// 0x005ab8a4
 char const * const s_Mouse_Atom_Ref___d_005ab8a4 = S_MOUSE_ATOM_REF___D_005AB8A4;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab8b8
+// 0x005ab8b8
 char const * const s_Genie_35_wav_005ab8b8 = S_GENIE_35_WAV_005AB8B8;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab8c8
+// 0x005ab8c8
 char const * const s_No_views_have_been_found__005ab8c8 = S_NO_VIEWS_HAVE_BEEN_FOUND__005AB8C8;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab8e4
+// 0x005ab8e4
 char const * const s_stronghold_uc_005ab8e4 = S_STRONGHOLD_UC_005AB8E4;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab8f4
+// 0x005ab8f4
 char const * const s_placement_warning1_wav_005ab8f4 = S_PLACEMENT_WARNING1_WAV_005AB8F4;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab90c
+// 0x005ab90c
 char const * const s_Genie_24_wav_005ab90c = S_GENIE_24_WAV_005AB90C;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab91c
+// 0x005ab91c
 char const * const s_Genie_23_wav_005ab91c = S_GENIE_23_WAV_005AB91C;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab92c
+// 0x005ab92c
 char const * const s_Genie_36_wav_005ab92c = S_GENIE_36_WAV_005AB92C;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab93c
+// 0x005ab93c
 char const * const s_Points___d___d___d___d___d___d____005ab93c = S_POINTS___D___D___D___D___D___D____005AB93C;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab968
+// 0x005ab968
 char const * const s_killed_d_lost_d_AI_troops_d_005ab968 = S_KILLED_D_LOST_D_AI_TROOPS_D_005AB968;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab988
+// 0x005ab988
 char const * const s_ai_troops__A_d_X_d_S_d_P_d_M_005ab988 = S_AI_TROOPS__A_D_X_D_S_D_P_D_M_005AB988;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab9c8
+// 0x005ab9c8
 char const * const s_Tent_points_d__Next_d_005ab9c8 = S_TENT_POINTS_D__NEXT_D_005AB9C8;
 
-// STRING: STRONGHOLDCRUSADER 0x005ab9e4
+// 0x005ab9e4
 char const * const s_Support_points_d__Next_d_005ab9e4 = S_SUPPORT_POINTS_D__NEXT_D_005AB9E4;
 
-// STRING: STRONGHOLDCRUSADER 0x005aba00
+// 0x005aba00
 char const * const s_Archer_points_d__Next_d_005aba00 = S_ARCHER_POINTS_D__NEXT_D_005ABA00;
 
-// STRING: STRONGHOLDCRUSADER 0x005aba1c
+// 0x005aba1c
 char const * const s_Wide_d_d_d__005aba1c = S_WIDE_D_D_D__005ABA1C;
 
-// STRING: STRONGHOLDCRUSADER 0x005aba2c
+// 0x005aba2c
 char const * const s_High_d_d_d__Arch_d_d_d__P_005aba2c = S_HIGH_D_D_D__ARCH_D_D_D__P_005ABA2C;
 
-// STRING: STRONGHOLDCRUSADER 0x005aba60
+// 0x005aba60
 char const * const s_Town_d_d__Gate_d_d__Moat_d__005aba60 = S_TOWN_D_D__GATE_D_D__MOAT_D__005ABA60;
 
-// STRING: STRONGHOLDCRUSADER 0x005aba94
+// 0x005aba94
 char const * const s_Hack_d_d_d__Scale_d_d_d__005aba94 = S_HACK_D_D_D__SCALE_D_D_D__005ABA94;
 
-// STRING: STRONGHOLDCRUSADER 0x005abac0
+// 0x005abac0
 char const * const s_zone_size__005abac0 = S_ZONE_SIZE__005ABAC0;
 
-// STRING: STRONGHOLDCRUSADER 0x005abacc
+// 0x005abacc
 char const * const s_cas_dis__005abacc = S_CAS_DIS__005ABACC;
 
-// STRING: STRONGHOLDCRUSADER 0x005abad8
+// 0x005abad8
 char const * const s_Keep_con__005abad8 = S_KEEP_CON__005ABAD8;
 
-// STRING: STRONGHOLDCRUSADER 0x005abae4
+// 0x005abae4
 char const * const s_Start_con__005abae4 = S_START_CON__005ABAE4;
 
-// STRING: STRONGHOLDCRUSADER 0x005abaf0
+// 0x005abaf0
 char const * const s_nof_tribes__005abaf0 = S_NOF_TRIBES__005ABAF0;
 
-// STRING: STRONGHOLDCRUSADER 0x005abb00
+// 0x005abb00
 char const * const s_inv_count__005abb00 = S_INV_COUNT__005ABB00;
 
-// STRING: STRONGHOLDCRUSADER 0x005abb0c
+// 0x005abb0c
 char const * const s_nof_fpoints__005abb0c = S_NOF_FPOINTS__005ABB0C;
 
-// STRING: STRONGHOLDCRUSADER 0x005abb1c
+// 0x005abb1c
 char const * const s_keep_POS__005abb1c = S_KEEP_POS__005ABB1C;
 
-// STRING: STRONGHOLDCRUSADER 0x005abb28
+// 0x005abb28
 char const * const s_Scale_zone__005abb28 = S_SCALE_ZONE__005ABB28;
 
-// STRING: STRONGHOLDCRUSADER 0x005abb38
+// 0x005abb38
 char const * const s_Start_zone__005abb38 = S_START_ZONE__005ABB38;
 
-// STRING: STRONGHOLDCRUSADER 0x005abb48
+// 0x005abb48
 char const * const s_Biggest_zone__005abb48 = S_BIGGEST_ZONE__005ABB48;
 
-// STRING: STRONGHOLDCRUSADER 0x005abb58
+// 0x005abb58
 char const * const s_drumhorn_wav_005abb58 = S_DRUMHORN_WAV_005ABB58;
 
-// STRING: STRONGHOLDCRUSADER 0x005abb68
+// 0x005abb68
 char const * const s_Mace_s4_wav_005abb68 = S_MACE_S4_WAV_005ABB68;
 
-// STRING: STRONGHOLDCRUSADER 0x005abb74
+// 0x005abb74
 char const * const s_Slink_005abb74 = S_SLINK_005ABB74;
 
-// STRING: STRONGHOLDCRUSADER 0x005abb7c
+// 0x005abb7c
 char const * const s_Siege_005abb7c = S_SIEGE_005ABB7C;
 
-// STRING: STRONGHOLDCRUSADER 0x005abb84
+// 0x005abb84
 char const * const s_Panic_005abb84 = S_PANIC_005ABB84;
 
-// STRING: STRONGHOLDCRUSADER 0x005abb8c
+// 0x005abb8c
 char const * const s_Route_005abb8c = S_ROUTE_005ABB8C;
 
-// STRING: STRONGHOLDCRUSADER 0x005abb94
+// 0x005abb94
 char const * const s_Deer_005abb94 = S_DEER_005ABB94;
 
-// STRING: STRONGHOLDCRUSADER 0x005abb9c
+// 0x005abb9c
 char const * const s_Mankind_005abb9c = S_MANKIND_005ABB9C;
 
-// STRING: STRONGHOLDCRUSADER 0x005abba8
+// 0x005abba8
 char const * const s_Humans_005abba8 = S_HUMANS_005ABBA8;
 
-// STRING: STRONGHOLDCRUSADER 0x005abbb4
+// 0x005abbb4
 char const * const s_Farmland_005abbb4 = S_FARMLAND_005ABBB4;
 
-// STRING: STRONGHOLDCRUSADER 0x005abbc0
+// 0x005abbc0
 char const * const s_Chimps_005abbc0 = S_CHIMPS_005ABBC0;
 
-// STRING: STRONGHOLDCRUSADER 0x005abbcc
+// 0x005abbcc
 char const * const s_Connect_005abbcc = S_CONNECT_005ABBCC;
 
-// STRING: STRONGHOLDCRUSADER 0x005abbd8
+// 0x005abbd8
 char const * const s_placement_warning10_wav_005abbd8 = S_PLACEMENT_WARNING10_WAV_005ABBD8;
 
-// STRING: STRONGHOLDCRUSADER 0x005abbf0
+// 0x005abbf0
 char const * const s_placement_warning11_wav_005abbf0 = S_PLACEMENT_WARNING11_WAV_005ABBF0;
 
-// STRING: STRONGHOLDCRUSADER 0x005abc08
+// 0x005abc08
 char const * const s_placement_warning12_wav_005abc08 = S_PLACEMENT_WARNING12_WAV_005ABC08;
 
-// STRING: STRONGHOLDCRUSADER 0x005abc20
+// 0x005abc20
 char const * const s_SA_005abc20 = S_SA_005ABC20;
 
-// STRING: STRONGHOLDCRUSADER 0x005abc24
+// 0x005abc24
 char const * const s_Tribe_005abc24 = S_TRIBE_005ABC24;
 
-// STRING: STRONGHOLDCRUSADER 0x005abc2c
+// 0x005abc2c
 char const * const s_Bless_005abc2c = S_BLESS_005ABC2C;
 
-// STRING: STRONGHOLDCRUSADER 0x005abc34
+// 0x005abc34
 char const * const s_Av_005abc34 = S_AV_005ABC34;
 
-// STRING: STRONGHOLDCRUSADER 0x005abc38
+// 0x005abc38
 char const * const s_Working_005abc38 = S_WORKING_005ABC38;
 
-// STRING: STRONGHOLDCRUSADER 0x005abc44
+// 0x005abc44
 char const * const s_Banked_005abc44 = S_BANKED_005ABC44;
 
-// STRING: STRONGHOLDCRUSADER 0x005abc4c
+// 0x005abc4c
 char const * const s_Target_005abc4c = S_TARGET_005ABC4C;
 
-// STRING: STRONGHOLDCRUSADER 0x005abc54
+// 0x005abc54
 char const * const s_Idle_005abc54 = S_IDLE_005ABC54;
 
-// STRING: STRONGHOLDCRUSADER 0x005abc5c
+// 0x005abc5c
 char const * const s_was_on_stone_gate_005abc5c = S_WAS_ON_STONE_GATE_005ABC5C;
 
-// STRING: STRONGHOLDCRUSADER 0x005abc70
+// 0x005abc70
 char const * const s_vanish_005abc70 = S_VANISH_005ABC70;
 
-// STRING: STRONGHOLDCRUSADER 0x005abc78
+// 0x005abc78
 char const * const s_seated_005abc78 = S_SEATED_005ABC78;
 
-// STRING: STRONGHOLDCRUSADER 0x005abc80
+// 0x005abc80
 char const * const s_target_type_005abc80 = S_TARGET_TYPE_005ABC80;
 
-// STRING: STRONGHOLDCRUSADER 0x005abc90
+// 0x005abc90
 char const * const s_Hunted_By_005abc90 = S_HUNTED_BY_005ABC90;
 
-// STRING: STRONGHOLDCRUSADER 0x005abc9c
+// 0x005abc9c
 char const * const s_Hps_005abc9c = S_HPS_005ABC9C;
 
-// STRING: STRONGHOLDCRUSADER 0x005abca4
+// 0x005abca4
 char const * const s_Attacked_By_005abca4 = S_ATTACKED_BY_005ABCA4;
 
-// STRING: STRONGHOLDCRUSADER 0x005abcb4
+// 0x005abcb4
 char const * const s_Look_4_enemy_005abcb4 = S_LOOK_4_ENEMY_005ABCB4;
 
-// STRING: STRONGHOLDCRUSADER 0x005abcc4
+// 0x005abcc4
 char const * const s_gfx_no_005abcc4 = S_GFX_NO_005ABCC4;
 
-// STRING: STRONGHOLDCRUSADER 0x005abccc
+// 0x005abccc
 char const * const s_anim_frame_no_005abccc = S_ANIM_FRAME_NO_005ABCCC;
 
-// STRING: STRONGHOLDCRUSADER 0x005abcdc
+// 0x005abcdc
 char const * const s_ai_status_005abcdc = S_AI_STATUS_005ABCDC;
 
-// STRING: STRONGHOLDCRUSADER 0x005abce8
+// 0x005abce8
 char const * const s_z_005abce8 = S_Z_005ABCE8;
 
-// STRING: STRONGHOLDCRUSADER 0x005abcec
+// 0x005abcec
 char const * const s_jump_005abcec = S_JUMP_005ABCEC;
 
-// STRING: STRONGHOLDCRUSADER 0x005abcf4
+// 0x005abcf4
 char const * const s_facing_005abcf4 = S_FACING_005ABCF4;
 
-// STRING: STRONGHOLDCRUSADER 0x005abcfc
+// 0x005abcfc
 char const * const s_enemyD_005abcfc = S_ENEMYD_005ABCFC;
 
-// STRING: STRONGHOLDCRUSADER 0x005abd04
+// 0x005abd04
 char const * const s_sloth__005abd04 = S_SLOTH__005ABD04;
 
-// STRING: STRONGHOLDCRUSADER 0x005abd0c
+// 0x005abd0c
 char const * const s_elbowed__005abd0c = S_ELBOWED__005ABD0C;
 
-// STRING: STRONGHOLDCRUSADER 0x005abd18
+// 0x005abd18
 char const * const s_using_teleport__005abd18 = S_USING_TELEPORT__005ABD18;
 
-// STRING: STRONGHOLDCRUSADER 0x005abd2c
+// 0x005abd2c
 char const * const s_next_chimp__005abd2c = S_NEXT_CHIMP__005ABD2C;
 
-// STRING: STRONGHOLDCRUSADER 0x005abd3c
+// 0x005abd3c
 char const * const s_dying__005abd3c = S_DYING__005ABD3C;
 
-// STRING: STRONGHOLDCRUSADER 0x005abd44
+// 0x005abd44
 char const * const s_status__005abd44 = S_STATUS__005ABD44;
 
-// STRING: STRONGHOLDCRUSADER 0x005abd50
+// 0x005abd50
 char const * const s_player__005abd50 = S_PLAYER__005ABD50;
 
-// STRING: STRONGHOLDCRUSADER 0x005abd5c
+// 0x005abd5c
 char const * const s_type__005abd5c = S_TYPE__005ABD5C;
 
-// STRING: STRONGHOLDCRUSADER 0x005abd64
+// 0x005abd64
 char const * const s_Watching_chimp__005abd64 = S_WATCHING_CHIMP__005ABD64;
 
-// STRING: STRONGHOLDCRUSADER 0x005abd78
+// 0x005abd78
 char const * const s_Lost_chimps__005abd78 = S_LOST_CHIMPS__005ABD78;
 
-// STRING: STRONGHOLDCRUSADER 0x005abd88
+// 0x005abd88
 char const * const s_total_zones__005abd88 = S_TOTAL_ZONES__005ABD88;
 
-// STRING: STRONGHOLDCRUSADER 0x005abd98
+// 0x005abd98
 char const * const s_greatest_loading__005abd98 = S_GREATEST_LOADING__005ABD98;
 
-// STRING: STRONGHOLDCRUSADER 0x005abdac
+// 0x005abdac
 char const * const s_No_of_teleports__005abdac = S_NO_OF_TELEPORTS__005ABDAC;
 
-// STRING: STRONGHOLDCRUSADER 0x005abdc0
+// 0x005abdc0
 char const * const s_Total_flies__005abdc0 = S_TOTAL_FLIES__005ABDC0;
 
-// STRING: STRONGHOLDCRUSADER 0x005abdd0
+// 0x005abdd0
 char const * const s_Total_chimps__005abdd0 = S_TOTAL_CHIMPS__005ABDD0;
 
-// STRING: STRONGHOLDCRUSADER 0x005abde0
+// 0x005abde0
 char const * const s_Not_watching_a_chimp_005abde0 = S_NOT_WATCHING_A_CHIMP_005ABDE0;
 
-// STRING: STRONGHOLDCRUSADER 0x005abdf8
+// 0x005abdf8
 char const * const s_General_Warning5_wav_005abdf8 = S_GENERAL_WARNING5_WAV_005ABDF8;
 
-// STRING: STRONGHOLDCRUSADER 0x005abe10
+// 0x005abe10
 char const * const s_General_Warning6_wav_005abe10 = S_GENERAL_WARNING6_WAV_005ABE10;
 
-// STRING: STRONGHOLDCRUSADER 0x005abe28
+// 0x005abe28
 char const * const s_General_Warning11_wav_005abe28 = S_GENERAL_WARNING11_WAV_005ABE28;
 
-// STRING: STRONGHOLDCRUSADER 0x005abe40
+// 0x005abe40
 char const * const s_General_Warning17_wav_005abe40 = S_GENERAL_WARNING17_WAV_005ABE40;
 
-// STRING: STRONGHOLDCRUSADER 0x005abe58
+// 0x005abe58
 char const * const s_General_Warning12_wav_005abe58 = S_GENERAL_WARNING12_WAV_005ABE58;
 
-// STRING: STRONGHOLDCRUSADER 0x005abe70
+// 0x005abe70
 char const * const s_general_victory5_wav_005abe70 = S_GENERAL_VICTORY5_WAV_005ABE70;
 
-// STRING: STRONGHOLDCRUSADER 0x005abe88
+// 0x005abe88
 char const * const s_general_victory4_wav_005abe88 = S_GENERAL_VICTORY4_WAV_005ABE88;
 
-// STRING: STRONGHOLDCRUSADER 0x005abea0
+// 0x005abea0
 char const * const s_general_victory3_wav_005abea0 = S_GENERAL_VICTORY3_WAV_005ABEA0;
 
-// STRING: STRONGHOLDCRUSADER 0x005abeb8
+// 0x005abeb8
 char const * const s_general_warning1_wav_005abeb8 = S_GENERAL_WARNING1_WAV_005ABEB8;
 
-// STRING: STRONGHOLDCRUSADER 0x005abed0
+// 0x005abed0
 char const * const s__s__d__s_005abed0 = S__S__D__S_005ABED0;
 
-// STRING: STRONGHOLDCRUSADER 0x005abedc
+// 0x005abedc
 char const * const s_General_Warning18_wav_005abedc = S_GENERAL_WARNING18_WAV_005ABEDC;
 
-// STRING: STRONGHOLDCRUSADER 0x005abef4
+// 0x005abef4
 char const * const s_open_005abef4 = S_OPEN_005ABEF4;
 
-// STRING: STRONGHOLDCRUSADER 0x005abefc
+// 0x005abefc
 char const * const s__svc_strongholdce_005abefc = S__SVC_STRONGHOLDCE_005ABEFC;
 
-// STRING: STRONGHOLDCRUSADER 0x005abf10
+// 0x005abf10
 char const * const s_frontend_loading_tgx_005abf10 = S_FRONTEND_LOADING_TGX_005ABF10;
 
-// STRING: STRONGHOLDCRUSADER 0x005abf28
+// 0x005abf28
 char const * const s_Stronghold_Crusader_is_already_r_005abf28 = S_STRONGHOLD_CRUSADER_IS_ALREADY_R_005ABF28;
 
-// STRING: STRONGHOLDCRUSADER 0x005abf50
+// 0x005abf50
 char const * const s_Stronghold_Crusader_Error_005abf50 = S_STRONGHOLD_CRUSADER_ERROR_005ABF50;
 
-// STRING: STRONGHOLDCRUSADER 0x005abf6c
+// 0x005abf6c
 char const * const s_Global_FireflyStrongholdCrusader_005abf6c = S_GLOBAL_FIREFLYSTRONGHOLDCRUSADER_005ABF6C;
 
-// STRING: STRONGHOLDCRUSADER 0x005abf98
+// 0x005abf98
 char const * const s_kernel32_dll_005abf98 = S_KERNEL32_DLL_005ABF98;
 
-// STRING: STRONGHOLDCRUSADER 0x005abfa8
+// 0x005abfa8
 char const * const s_WideCharToMultiByte_005abfa8 = S_WIDECHARTOMULTIBYTE_005ABFA8;
 
-// STRING: STRONGHOLDCRUSADER 0x005abfbc
+// 0x005abfbc
 char const * const s_MultiByteToWideChar_005abfbc = S_MULTIBYTETOWIDECHAR_005ABFBC;
 
-// STRING: STRONGHOLDCRUSADER 0x005abfd0
+// 0x005abfd0
 char const * const s_GetProcAddress_005abfd0 = S_GETPROCADDRESS_005ABFD0;
 
-// STRING: STRONGHOLDCRUSADER 0x005abfe0
+// 0x005abfe0
 char const * const s_user32_dll_005abfe0 = S_USER32_DLL_005ABFE0;
 
-// STRING: STRONGHOLDCRUSADER 0x005abfec
+// 0x005abfec
 char const * const s_SetWindowLongA_005abfec = S_SETWINDOWLONGA_005ABFEC;
 
-// STRING: STRONGHOLDCRUSADER 0x005abffc
+// 0x005abffc
 char const * const s_GetShortPathNameW_005abffc = S_GETSHORTPATHNAMEW_005ABFFC;
 
-// STRING: STRONGHOLDCRUSADER 0x005ac010
+// 0x005ac010
 char const * const s_msvfw32_dll_005ac010 = S_MSVFW32_DLL_005AC010;
 
-// STRING: STRONGHOLDCRUSADER 0x005ac01c
+// 0x005ac01c
 char const * const s_sensapi_dll_005ac01c = S_SENSAPI_DLL_005AC01C;
 
-// STRING: STRONGHOLDCRUSADER 0x005ac028
+// 0x005ac028
 char const * const s_oledlg_dll_005ac028 = S_OLEDLG_DLL_005AC028;
 
-// STRING: STRONGHOLDCRUSADER 0x005ac034
+// 0x005ac034
 char const * const s_oleacc_dll_005ac034 = S_OLEACC_DLL_005AC034;
 
-// STRING: STRONGHOLDCRUSADER 0x005ac040
+// 0x005ac040
 char const * const s_secur32_dll_005ac040 = S_SECUR32_DLL_005AC040;
 
-// STRING: STRONGHOLDCRUSADER 0x005ac04c
+// 0x005ac04c
 char const * const s_avicap32_dll_005ac04c = S_AVICAP32_DLL_005AC04C;
 
-// STRING: STRONGHOLDCRUSADER 0x005ac05c
+// 0x005ac05c
 char const * const s_winspool_drv_005ac05c = S_WINSPOOL_DRV_005AC05C;
 
-// STRING: STRONGHOLDCRUSADER 0x005ac06c
+// 0x005ac06c
 char const * const s_winmm_dll_005ac06c = S_WINMM_DLL_005AC06C;
 
-// STRING: STRONGHOLDCRUSADER 0x005ac078
+// 0x005ac078
 char const * const s_rasapi32_dll_005ac078 = S_RASAPI32_DLL_005AC078;
 
-// STRING: STRONGHOLDCRUSADER 0x005ac088
+// 0x005ac088
 char const * const s_mpr_dll_005ac088 = S_MPR_DLL_005AC088;
 
-// STRING: STRONGHOLDCRUSADER 0x005ac090
+// 0x005ac090
 char const * const s_version_dll_005ac090 = S_VERSION_DLL_005AC090;
 
-// STRING: STRONGHOLDCRUSADER 0x005ac09c
+// 0x005ac09c
 char const * const s_comdlg32_dll_005ac09c = S_COMDLG32_DLL_005AC09C;
 
-// STRING: STRONGHOLDCRUSADER 0x005ac0ac
+// 0x005ac0ac
 char const * const s_shell32_dll_005ac0ac = S_SHELL32_DLL_005AC0AC;
 
-// STRING: STRONGHOLDCRUSADER 0x005ac0b8
+// 0x005ac0b8
 char const * const s_advapi32_dll_005ac0b8 = S_ADVAPI32_DLL_005AC0B8;
 
-// STRING: STRONGHOLDCRUSADER 0x005ac0c8
+// 0x005ac0c8
 char const * const s_gdi32_dll_005ac0c8 = S_GDI32_DLL_005AC0C8;
 
-// STRING: STRONGHOLDCRUSADER 0x005ac0d4
+// 0x005ac0d4
 char const * const s_unicows_dll_005ac0d4 = S_UNICOWS_DLL_005AC0D4;
 
-// STRING: STRONGHOLDCRUSADER 0x005ac0e0
+// 0x005ac0e0
 char const * const s_security_dll_005ac0e0 = S_SECURITY_DLL_005AC0E0;
 
-// STRING: STRONGHOLDCRUSADER 0x005ac0f0
+// 0x005ac0f0
 char const * const s_ntdll_dll_005ac0f0 = S_NTDLL_DLL_005AC0F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005ac0fc
+// 0x005ac0fc
 char const * const s_LdrUnloadDll_005ac0fc = S_LDRUNLOADDLL_005AC0FC;
 
-// STRING: STRONGHOLDCRUSADER 0x005ac10c
+// 0x005ac10c
 char const * const s_GetCPInfo_005ac10c = S_GETCPINFO_005AC10C;
 
-// STRING: STRONGHOLDCRUSADER 0x005ac118
+// 0x005ac118
 char const * const s_IsValidCodePage_005ac118 = S_ISVALIDCODEPAGE_005AC118;
 
-// STRING: STRONGHOLDCRUSADER 0x005ac144
+// 0x005ac144
 char const * const s___005ac144 = S___005AC144;
 
-// STRING: STRONGHOLDCRUSADER 0x005ac170
+// 0x005ac170
 char const * const s_string_too_long_005ac170 = S_STRING_TOO_LONG_005AC170;
 
-// STRING: STRONGHOLDCRUSADER 0x005ac180
+// 0x005ac180
 char const * const s_invalid_string_position_005ac180 = S_INVALID_STRING_POSITION_005AC180;
 
-// STRING: STRONGHOLDCRUSADER 0x005ac198
+// 0x005ac198
 char const * const s_r_005ac198 = S_R_005AC198;
 
-// STRING: STRONGHOLDCRUSADER 0x005ac240
+// 0x005ac240
 char const * const s_Unknown_exception_005ac240 = S_UNKNOWN_EXCEPTION_005AC240;
 
-// STRING: STRONGHOLDCRUSADER 0x005ac288
+// 0x005ac288
 char const * const s_CorExitProcess_005ac288 = S_COREXITPROCESS_005AC288;
 
-// STRING: STRONGHOLDCRUSADER 0x005ac298
+// 0x005ac298
 char const * const s_mscoree_dll_005ac298 = S_MSCOREE_DLL_005AC298;
 
-// STRING: STRONGHOLDCRUSADER 0x005acab0
+// 0x005acab0
 char const * const s_LC_TIME_005acab0 = S_LC_TIME_005ACAB0;
 
-// STRING: STRONGHOLDCRUSADER 0x005acab8
+// 0x005acab8
 char const * const s_LC_NUMERIC_005acab8 = S_LC_NUMERIC_005ACAB8;
 
-// STRING: STRONGHOLDCRUSADER 0x005acac4
+// 0x005acac4
 char const * const s_LC_MONETARY_005acac4 = S_LC_MONETARY_005ACAC4;
 
-// STRING: STRONGHOLDCRUSADER 0x005acad0
+// 0x005acad0
 char const * const s_LC_CTYPE_005acad0 = S_LC_CTYPE_005ACAD0;
 
-// STRING: STRONGHOLDCRUSADER 0x005acadc
+// 0x005acadc
 char const * const s_LC_COLLATE_005acadc = S_LC_COLLATE_005ACADC;
 
-// STRING: STRONGHOLDCRUSADER 0x005acbdc
+// 0x005acbdc
 char const * const s_bad_exception_005acbdc = S_BAD_EXCEPTION_005ACBDC;
 
-// STRING: STRONGHOLDCRUSADER 0x005acbec
+// 0x005acbec
 char const * const s_e_000_005acbec = S_E_000_005ACBEC;
 
-// STRING: STRONGHOLDCRUSADER 0x005acc08
+// 0x005acc08
 char const * const s_IsProcessorFeaturePresent_005acc08 = S_ISPROCESSORFEATUREPRESENT_005ACC08;
 
-// STRING: STRONGHOLDCRUSADER 0x005acc24
+// 0x005acc24
 char const * const s_KERNEL32_005acc24 = S_KERNEL32_005ACC24;
 
-// STRING: STRONGHOLDCRUSADER 0x005acc78
+// 0x005acc78
 char const * const s_modf_005acc78 = S_MODF_005ACC78;
 
-// STRING: STRONGHOLDCRUSADER 0x005acc88
+// 0x005acc88
 char const * const s_floor_005acc88 = S_FLOOR_005ACC88;
 
-// STRING: STRONGHOLDCRUSADER 0x005acc90
+// 0x005acc90
 char const * const s_ceil_005acc90 = S_CEIL_005ACC90;
 
-// STRING: STRONGHOLDCRUSADER 0x005acc98
+// 0x005acc98
 char const * const s_tan_005acc98 = S_TAN_005ACC98;
 
-// STRING: STRONGHOLDCRUSADER 0x005acc9c
+// 0x005acc9c
 char const * const s_cos_005acc9c = S_COS_005ACC9C;
 
-// STRING: STRONGHOLDCRUSADER 0x005acca0
+// 0x005acca0
 char const * const s_sin_005acca0 = S_SIN_005ACCA0;
 
-// STRING: STRONGHOLDCRUSADER 0x005accb4
+// 0x005accb4
 char const * const s_atan_005accb4 = S_ATAN_005ACCB4;
 
-// STRING: STRONGHOLDCRUSADER 0x005accbc
+// 0x005accbc
 char const * const s_acos_005accbc = S_ACOS_005ACCBC;
 
-// STRING: STRONGHOLDCRUSADER 0x005accc4
+// 0x005accc4
 char const * const s_asin_005accc4 = S_ASIN_005ACCC4;
 
-// STRING: STRONGHOLDCRUSADER 0x005acce4
+// 0x005acce4
 char const * const s_log10_005acce4 = S_LOG10_005ACCE4;
 
-// STRING: STRONGHOLDCRUSADER 0x005accec
+// 0x005accec
 char const * const s_log_005accec = S_LOG_005ACCEC;
 
-// STRING: STRONGHOLDCRUSADER 0x005accf0
+// 0x005accf0
 char const * const s_pow_005accf0 = S_POW_005ACCF0;
 
-// STRING: STRONGHOLDCRUSADER 0x005accf4
+// 0x005accf4
 char const * const s_exp_005accf4 = S_EXP_005ACCF4;
 
-// STRING: STRONGHOLDCRUSADER 0x005af690
+// 0x005af690
 char const * const s_TZ_005af690 = S_TZ_005AF690;
 
-// STRING: STRONGHOLDCRUSADER 0x005af6e4
+// 0x005af6e4
 char const * const s__null__005af6e4 = S__NULL__005AF6E4;
 
-// STRING: STRONGHOLDCRUSADER 0x005af754
+// 0x005af754
 char const * const s__mixcrt_005af754 = S__MIXCRT_005AF754;
 
-// STRING: STRONGHOLDCRUSADER 0x005af75c
+// 0x005af75c
 char const * const s_EncodePointer_005af75c = S_ENCODEPOINTER_005AF75C;
 
-// STRING: STRONGHOLDCRUSADER 0x005af76c
+// 0x005af76c
 char const * const s_KERNEL32_DLL_005af76c = S_KERNEL32_DLL_005AF76C;
 
-// STRING: STRONGHOLDCRUSADER 0x005af77c
+// 0x005af77c
 char const * const s_DecodePointer_005af77c = S_DECODEPOINTER_005AF77C;
 
-// STRING: STRONGHOLDCRUSADER 0x005af78c
+// 0x005af78c
 char const * const s_FlsFree_005af78c = S_FLSFREE_005AF78C;
 
-// STRING: STRONGHOLDCRUSADER 0x005af794
+// 0x005af794
 char const * const s_FlsSetValue_005af794 = S_FLSSETVALUE_005AF794;
 
-// STRING: STRONGHOLDCRUSADER 0x005af7a0
+// 0x005af7a0
 char const * const s_FlsGetValue_005af7a0 = S_FLSGETVALUE_005AF7A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005af7ac
+// 0x005af7ac
 char const * const s_FlsAlloc_005af7ac = S_FLSALLOC_005AF7AC;
 
-// STRING: STRONGHOLDCRUSADER 0x005afcbc
+// 0x005afcbc
 char const * const s_R6008___not_enough_space_for_arg_005afcbc = S_R6008___NOT_ENOUGH_SPACE_FOR_ARG_005AFCBC;
 
-// STRING: STRONGHOLDCRUSADER 0x005afd18
+// 0x005afd18
 char const * const s_Microsoft_Visual_C__Runtime_Lib_005afd18 = S_MICROSOFT_VISUAL_C__RUNTIME_LIB_005AFD18;
 
-// STRING: STRONGHOLDCRUSADER 0x005afd40
+// 0x005afd40
 char const * const s__005afd40 = S__005AFD40;
 
-// STRING: STRONGHOLDCRUSADER 0x005afd44
+// 0x005afd44
 char const * const s__program_name_unknown__005afd44 = S__PROGRAM_NAME_UNKNOWN__005AFD44;
 
-// STRING: STRONGHOLDCRUSADER 0x005afd5c
+// 0x005afd5c
 char const * const s_Runtime_Error__Program__005afd5c = S_RUNTIME_ERROR__PROGRAM__005AFD5C;
 
-// STRING: STRONGHOLDCRUSADER 0x005afd78
+// 0x005afd78
 char const * const s_ccs__005afd78 = S_CCS__005AFD78;
 
-// STRING: STRONGHOLDCRUSADER 0x005afd80
+// 0x005afd80
 char const * const s_UTF_8_005afd80 = S_UTF_8_005AFD80;
 
-// STRING: STRONGHOLDCRUSADER 0x005afd88
+// 0x005afd88
 char const * const s_UTF_16LE_005afd88 = S_UTF_16LE_005AFD88;
 
-// STRING: STRONGHOLDCRUSADER 0x005afd94
+// 0x005afd94
 char const * const s_UNICODE_005afd94 = S_UNICODE_005AFD94;
 
-// STRING: STRONGHOLDCRUSADER 0x005afd9c
+// 0x005afd9c
 char const * const s_InitializeCriticalSectionAndSpin_005afd9c = S_INITIALIZECRITICALSECTIONANDSPIN_005AFD9C;
 
-// STRING: STRONGHOLDCRUSADER 0x005afdc4
+// 0x005afdc4
 char const * const s_HH_mm_ss_005afdc4 = S_HH_MM_SS_005AFDC4;
 
-// STRING: STRONGHOLDCRUSADER 0x005afdd0
+// 0x005afdd0
 char const * const s_dddd__MMMM_dd__yyyy_005afdd0 = S_DDDD__MMMM_DD__YYYY_005AFDD0;
 
-// STRING: STRONGHOLDCRUSADER 0x005afde4
+// 0x005afde4
 char const * const s_MM_dd_yy_005afde4 = S_MM_DD_YY_005AFDE4;
 
-// STRING: STRONGHOLDCRUSADER 0x005afdf0
+// 0x005afdf0
 char const * const s_PM_005afdf0 = S_PM_005AFDF0;
 
-// STRING: STRONGHOLDCRUSADER 0x005afdf4
+// 0x005afdf4
 char const * const s_AM_005afdf4 = S_AM_005AFDF4;
 
-// STRING: STRONGHOLDCRUSADER 0x005afdf8
+// 0x005afdf8
 char const * const s_December_005afdf8 = S_DECEMBER_005AFDF8;
 
-// STRING: STRONGHOLDCRUSADER 0x005afe04
+// 0x005afe04
 char const * const s_November_005afe04 = S_NOVEMBER_005AFE04;
 
-// STRING: STRONGHOLDCRUSADER 0x005afe10
+// 0x005afe10
 char const * const s_October_005afe10 = S_OCTOBER_005AFE10;
 
-// STRING: STRONGHOLDCRUSADER 0x005afe18
+// 0x005afe18
 char const * const s_September_005afe18 = S_SEPTEMBER_005AFE18;
 
-// STRING: STRONGHOLDCRUSADER 0x005afe24
+// 0x005afe24
 char const * const s_August_005afe24 = S_AUGUST_005AFE24;
 
-// STRING: STRONGHOLDCRUSADER 0x005afe2c
+// 0x005afe2c
 char const * const s_July_005afe2c = S_JULY_005AFE2C;
 
-// STRING: STRONGHOLDCRUSADER 0x005afe34
+// 0x005afe34
 char const * const s_June_005afe34 = S_JUNE_005AFE34;
 
-// STRING: STRONGHOLDCRUSADER 0x005afe3c
+// 0x005afe3c
 char const * const s_April_005afe3c = S_APRIL_005AFE3C;
 
-// STRING: STRONGHOLDCRUSADER 0x005afe44
+// 0x005afe44
 char const * const s_March_005afe44 = S_MARCH_005AFE44;
 
-// STRING: STRONGHOLDCRUSADER 0x005afe4c
+// 0x005afe4c
 char const * const s_February_005afe4c = S_FEBRUARY_005AFE4C;
 
-// STRING: STRONGHOLDCRUSADER 0x005afe58
+// 0x005afe58
 char const * const s_January_005afe58 = S_JANUARY_005AFE58;
 
-// STRING: STRONGHOLDCRUSADER 0x005afe60
+// 0x005afe60
 char const * const s_Dec_005afe60 = S_DEC_005AFE60;
 
-// STRING: STRONGHOLDCRUSADER 0x005afe64
+// 0x005afe64
 char const * const s_Nov_005afe64 = S_NOV_005AFE64;
 
-// STRING: STRONGHOLDCRUSADER 0x005afe68
+// 0x005afe68
 char const * const s_Oct_005afe68 = S_OCT_005AFE68;
 
-// STRING: STRONGHOLDCRUSADER 0x005afe6c
+// 0x005afe6c
 char const * const s_Sep_005afe6c = S_SEP_005AFE6C;
 
-// STRING: STRONGHOLDCRUSADER 0x005afe70
+// 0x005afe70
 char const * const s_Aug_005afe70 = S_AUG_005AFE70;
 
-// STRING: STRONGHOLDCRUSADER 0x005afe74
+// 0x005afe74
 char const * const s_Jul_005afe74 = S_JUL_005AFE74;
 
-// STRING: STRONGHOLDCRUSADER 0x005afe78
+// 0x005afe78
 char const * const s_Jun_005afe78 = S_JUN_005AFE78;
 
-// STRING: STRONGHOLDCRUSADER 0x005afe7c
+// 0x005afe7c
 char const * const s_May_005afe7c = S_MAY_005AFE7C;
 
-// STRING: STRONGHOLDCRUSADER 0x005afe80
+// 0x005afe80
 char const * const s_Apr_005afe80 = S_APR_005AFE80;
 
-// STRING: STRONGHOLDCRUSADER 0x005afe84
+// 0x005afe84
 char const * const s_Mar_005afe84 = S_MAR_005AFE84;
 
-// STRING: STRONGHOLDCRUSADER 0x005afe88
+// 0x005afe88
 char const * const s_Feb_005afe88 = S_FEB_005AFE88;
 
-// STRING: STRONGHOLDCRUSADER 0x005afe8c
+// 0x005afe8c
 char const * const s_Jan_005afe8c = S_JAN_005AFE8C;
 
-// STRING: STRONGHOLDCRUSADER 0x005afe90
+// 0x005afe90
 char const * const s_Saturday_005afe90 = S_SATURDAY_005AFE90;
 
-// STRING: STRONGHOLDCRUSADER 0x005afe9c
+// 0x005afe9c
 char const * const s_Friday_005afe9c = S_FRIDAY_005AFE9C;
 
-// STRING: STRONGHOLDCRUSADER 0x005afea4
+// 0x005afea4
 char const * const s_Thursday_005afea4 = S_THURSDAY_005AFEA4;
 
-// STRING: STRONGHOLDCRUSADER 0x005afeb0
+// 0x005afeb0
 char const * const s_Wednesday_005afeb0 = S_WEDNESDAY_005AFEB0;
 
-// STRING: STRONGHOLDCRUSADER 0x005afebc
+// 0x005afebc
 char const * const s_Tuesday_005afebc = S_TUESDAY_005AFEBC;
 
-// STRING: STRONGHOLDCRUSADER 0x005afec4
+// 0x005afec4
 char const * const s_Monday_005afec4 = S_MONDAY_005AFEC4;
 
-// STRING: STRONGHOLDCRUSADER 0x005afecc
+// 0x005afecc
 char const * const s_Sunday_005afecc = S_SUNDAY_005AFECC;
 
-// STRING: STRONGHOLDCRUSADER 0x005afed4
+// 0x005afed4
 char const * const s_Sat_005afed4 = S_SAT_005AFED4;
 
-// STRING: STRONGHOLDCRUSADER 0x005afed8
+// 0x005afed8
 char const * const s_Fri_005afed8 = S_FRI_005AFED8;
 
-// STRING: STRONGHOLDCRUSADER 0x005afedc
+// 0x005afedc
 char const * const s_Thu_005afedc = S_THU_005AFEDC;
 
-// STRING: STRONGHOLDCRUSADER 0x005afee0
+// 0x005afee0
 char const * const s_Wed_005afee0 = S_WED_005AFEE0;
 
-// STRING: STRONGHOLDCRUSADER 0x005afee4
+// 0x005afee4
 char const * const s_Tue_005afee4 = S_TUE_005AFEE4;
 
-// STRING: STRONGHOLDCRUSADER 0x005afee8
+// 0x005afee8
 char const * const s_Mon_005afee8 = S_MON_005AFEE8;
 
-// STRING: STRONGHOLDCRUSADER 0x005afeec
+// 0x005afeec
 char const * const s_Sun_005afeec = S_SUN_005AFEEC;
 
-// STRING: STRONGHOLDCRUSADER 0x005affd4
+// 0x005affd4
 char const * const s_britain_005affd4 = S_BRITAIN_005AFFD4;
 
-// STRING: STRONGHOLDCRUSADER 0x005affdc
+// 0x005affdc
 char const * const s_america_005affdc = S_AMERICA_005AFFDC;
 
-// STRING: STRONGHOLDCRUSADER 0x005affe8
+// 0x005affe8
 char const * const s_us_005affe8 = S_US_005AFFE8;
 
-// STRING: STRONGHOLDCRUSADER 0x005b00bc
+// 0x005b00bc
 char const * const s_spanish_guatemala_005b00bc = S_SPANISH_GUATEMALA_005B00BC;
 
-// STRING: STRONGHOLDCRUSADER 0x005b00d0
+// 0x005b00d0
 char const * const s_spanish_el_salvador_005b00d0 = S_SPANISH_EL_SALVADOR_005B00D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005b00e4
+// 0x005b00e4
 char const * const s_spanish_ecuador_005b00e4 = S_SPANISH_ECUADOR_005B00E4;
 
-// STRING: STRONGHOLDCRUSADER 0x005b00f4
+// 0x005b00f4
 char const * const s_spanish_dominican_republic_005b00f4 = S_SPANISH_DOMINICAN_REPUBLIC_005B00F4;
 
-// STRING: STRONGHOLDCRUSADER 0x005b0344
+// 0x005b0344
 char const * const s_chinese_traditional_005b0344 = S_CHINESE_TRADITIONAL_005B0344;
 
-// STRING: STRONGHOLDCRUSADER 0x005b0358
+// 0x005b0358
 char const * const s_chinese_singapore_005b0358 = S_CHINESE_SINGAPORE_005B0358;
 
-// STRING: STRONGHOLDCRUSADER 0x005b036c
+// 0x005b036c
 char const * const s_chinese_simplified_005b036c = S_CHINESE_SIMPLIFIED_005B036C;
 
-// STRING: STRONGHOLDCRUSADER 0x005b0380
+// 0x005b0380
 char const * const s_chinese_hongkong_005b0380 = S_CHINESE_HONGKONG_005B0380;
 
-// STRING: STRONGHOLDCRUSADER 0x005b0394
+// 0x005b0394
 char const * const s_chinese_005b0394 = S_CHINESE_005B0394;
 
-// STRING: STRONGHOLDCRUSADER 0x005b039c
+// 0x005b039c
 char const * const s_chi_005b039c = S_CHI_005B039C;
 
-// STRING: STRONGHOLDCRUSADER 0x005b03a0
+// 0x005b03a0
 char const * const s_chh_005b03a0 = S_CHH_005B03A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005b03a4
+// 0x005b03a4
 char const * const s_canadian_005b03a4 = S_CANADIAN_005B03A4;
 
-// STRING: STRONGHOLDCRUSADER 0x005b03b0
+// 0x005b03b0
 char const * const s_belgian_005b03b0 = S_BELGIAN_005B03B0;
 
-// STRING: STRONGHOLDCRUSADER 0x005b03b8
+// 0x005b03b8
 char const * const s_australian_005b03b8 = S_AUSTRALIAN_005B03B8;
 
-// STRING: STRONGHOLDCRUSADER 0x005b03c4
+// 0x005b03c4
 char const * const s_american_english_005b03c4 = S_AMERICAN_ENGLISH_005B03C4;
 
-// STRING: STRONGHOLDCRUSADER 0x005b03d8
+// 0x005b03d8
 char const * const s_american_english_005b03d8 = S_AMERICAN_ENGLISH_005B03D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005b06c4
+// 0x005b06c4
 char const * const s_OCP_005b06c4 = S_OCP_005B06C4;
 
-// STRING: STRONGHOLDCRUSADER 0x005b06c8
+// 0x005b06c8
 char const * const s_ACP_005b06c8 = S_ACP_005B06C8;
 
-// STRING: STRONGHOLDCRUSADER 0x005b06cc
+// 0x005b06cc
 char const * const s_Norwegian_Nynorsk_005b06cc = S_NORWEGIAN_NYNORSK_005B06CC;
 
-// STRING: STRONGHOLDCRUSADER 0x005b0788
+// 0x005b0788
 char const * const s_exp10_005b0788 = S_EXP10_005B0788;
 
-// STRING: STRONGHOLDCRUSADER 0x005b1ffc
+// 0x005b1ffc
 char const * const s_GetProcessWindowStation_005b1ffc = S_GETPROCESSWINDOWSTATION_005B1FFC;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2014
+// 0x005b2014
 char const * const s_GetUserObjectInformationA_005b2014 = S_GETUSEROBJECTINFORMATIONA_005B2014;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2030
+// 0x005b2030
 char const * const s_GetLastActivePopup_005b2030 = S_GETLASTACTIVEPOPUP_005B2030;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2044
+// 0x005b2044
 char const * const s_GetActiveWindow_005b2044 = S_GETACTIVEWINDOW_005B2044;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2054
+// 0x005b2054
 char const * const s_MessageBoxA_005b2054 = S_MESSAGEBOXA_005B2054;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2060
+// 0x005b2060
 char const * const s_USER32_DLL_005b2060 = S_USER32_DLL_005B2060;
 
-// STRING: STRONGHOLDCRUSADER 0x005b206c
+// 0x005b206c
 char const * const s_Complete_Object_Locator__005b206c = S_COMPLETE_OBJECT_LOCATOR__005B206C;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2088
+// 0x005b2088
 char const * const s_Class_Hierarchy_Descriptor__005b2088 = S_CLASS_HIERARCHY_DESCRIPTOR__005B2088;
 
-// STRING: STRONGHOLDCRUSADER 0x005b20a8
+// 0x005b20a8
 char const * const s_Base_Class_Array__005b20a8 = S_BASE_CLASS_ARRAY__005B20A8;
 
-// STRING: STRONGHOLDCRUSADER 0x005b20bc
+// 0x005b20bc
 char const * const s_Base_Class_Descriptor_at___005b20bc = S_BASE_CLASS_DESCRIPTOR_AT___005B20BC;
 
-// STRING: STRONGHOLDCRUSADER 0x005b20d8
+// 0x005b20d8
 char const * const s_Type_Descriptor__005b20d8 = S_TYPE_DESCRIPTOR__005B20D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005b20ec
+// 0x005b20ec
 char const * const s__local_static_thread_guard__005b20ec = S__LOCAL_STATIC_THREAD_GUARD__005B20EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2108
+// 0x005b2108
 char const * const s__managed_vector_copy_constructor_005b2108 = S__MANAGED_VECTOR_COPY_CONSTRUCTOR_005B2108;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2134
+// 0x005b2134
 char const * const s__vector_vbase_copy_constructor_i_005b2134 = S__VECTOR_VBASE_COPY_CONSTRUCTOR_I_005B2134;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2160
+// 0x005b2160
 char const * const s__vector_copy_constructor_iterato_005b2160 = S__VECTOR_COPY_CONSTRUCTOR_ITERATO_005B2160;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2184
+// 0x005b2184
 char const * const s__dynamic_atexit_destructor_for___005b2184 = S__DYNAMIC_ATEXIT_DESTRUCTOR_FOR___005B2184;
 
-// STRING: STRONGHOLDCRUSADER 0x005b21a8
+// 0x005b21a8
 char const * const s__dynamic_initializer_for___005b21a8 = S__DYNAMIC_INITIALIZER_FOR___005B21A8;
 
-// STRING: STRONGHOLDCRUSADER 0x005b21c4
+// 0x005b21c4
 char const * const s__eh_vector_vbase_copy_constructo_005b21c4 = S__EH_VECTOR_VBASE_COPY_CONSTRUCTO_005B21C4;
 
-// STRING: STRONGHOLDCRUSADER 0x005b21f0
+// 0x005b21f0
 char const * const s__eh_vector_copy_constructor_iter_005b21f0 = S__EH_VECTOR_COPY_CONSTRUCTOR_ITER_005B21F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2218
+// 0x005b2218
 char const * const s__managed_vector_destructor_itera_005b2218 = S__MANAGED_VECTOR_DESTRUCTOR_ITERA_005B2218;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2240
+// 0x005b2240
 char const * const s__managed_vector_constructor_iter_005b2240 = S__MANAGED_VECTOR_CONSTRUCTOR_ITER_005B2240;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2268
+// 0x005b2268
 char const * const s__placement_delete__closure__005b2268 = S__PLACEMENT_DELETE__CLOSURE__005B2268;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2288
+// 0x005b2288
 char const * const s__placement_delete_closure__005b2288 = S__PLACEMENT_DELETE_CLOSURE__005B2288;
 
-// STRING: STRONGHOLDCRUSADER 0x005b22a4
+// 0x005b22a4
 char const * const s__omni_callsig__005b22a4 = S__OMNI_CALLSIG__005B22A4;
 
-// STRING: STRONGHOLDCRUSADER 0x005b22b4
+// 0x005b22b4
 char const * const s_delete__005b22b4 = S_DELETE__005B22B4;
 
-// STRING: STRONGHOLDCRUSADER 0x005b22c0
+// 0x005b22c0
 char const * const s_new__005b22c0 = S_NEW__005B22C0;
 
-// STRING: STRONGHOLDCRUSADER 0x005b22c8
+// 0x005b22c8
 char const * const s__local_vftable_constructor_closu_005b22c8 = S__LOCAL_VFTABLE_CONSTRUCTOR_CLOSU_005B22C8;
 
-// STRING: STRONGHOLDCRUSADER 0x005b22ec
+// 0x005b22ec
 char const * const s__local_vftable__005b22ec = S__LOCAL_VFTABLE__005B22EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005b22fc
+// 0x005b22fc
 char const * const s__RTTI_005b22fc = S__RTTI_005B22FC;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2304
+// 0x005b2304
 char const * const s__EH_005b2304 = S__EH_005B2304;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2308
+// 0x005b2308
 char const * const s__udt_returning__005b2308 = S__UDT_RETURNING__005B2308;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2318
+// 0x005b2318
 char const * const s__copy_constructor_closure__005b2318 = S__COPY_CONSTRUCTOR_CLOSURE__005B2318;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2334
+// 0x005b2334
 char const * const s__eh_vector_vbase_constructor_ite_005b2334 = S__EH_VECTOR_VBASE_CONSTRUCTOR_ITE_005B2334;
 
-// STRING: STRONGHOLDCRUSADER 0x005b235c
+// 0x005b235c
 char const * const s__eh_vector_destructor_iterator__005b235c = S__EH_VECTOR_DESTRUCTOR_ITERATOR__005B235C;
 
-// STRING: STRONGHOLDCRUSADER 0x005b237c
+// 0x005b237c
 char const * const s__eh_vector_constructor_iterator__005b237c = S__EH_VECTOR_CONSTRUCTOR_ITERATOR__005B237C;
 
-// STRING: STRONGHOLDCRUSADER 0x005b23a0
+// 0x005b23a0
 char const * const s__virtual_displacement_map__005b23a0 = S__VIRTUAL_DISPLACEMENT_MAP__005B23A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005b23bc
+// 0x005b23bc
 char const * const s__vector_vbase_constructor_iterat_005b23bc = S__VECTOR_VBASE_CONSTRUCTOR_ITERAT_005B23BC;
 
-// STRING: STRONGHOLDCRUSADER 0x005b23e0
+// 0x005b23e0
 char const * const s__vector_destructor_iterator__005b23e0 = S__VECTOR_DESTRUCTOR_ITERATOR__005B23E0;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2400
+// 0x005b2400
 char const * const s__vector_constructor_iterator__005b2400 = S__VECTOR_CONSTRUCTOR_ITERATOR__005B2400;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2420
+// 0x005b2420
 char const * const s__scalar_deleting_destructor__005b2420 = S__SCALAR_DELETING_DESTRUCTOR__005B2420;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2440
+// 0x005b2440
 char const * const s__default_constructor_closure__005b2440 = S__DEFAULT_CONSTRUCTOR_CLOSURE__005B2440;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2460
+// 0x005b2460
 char const * const s__vector_deleting_destructor__005b2460 = S__VECTOR_DELETING_DESTRUCTOR__005B2460;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2480
+// 0x005b2480
 char const * const s__vbase_destructor__005b2480 = S__VBASE_DESTRUCTOR__005B2480;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2494
+// 0x005b2494
 char const * const s__string__005b2494 = S__STRING__005B2494;
 
-// STRING: STRONGHOLDCRUSADER 0x005b24a0
+// 0x005b24a0
 char const * const s__local_static_guard__005b24a0 = S__LOCAL_STATIC_GUARD__005B24A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005b24b8
+// 0x005b24b8
 char const * const s__typeof__005b24b8 = S__TYPEOF__005B24B8;
 
-// STRING: STRONGHOLDCRUSADER 0x005b24c4
+// 0x005b24c4
 char const * const s__vcall__005b24c4 = S__VCALL__005B24C4;
 
-// STRING: STRONGHOLDCRUSADER 0x005b24cc
+// 0x005b24cc
 char const * const s__vbtable__005b24cc = S__VBTABLE__005B24CC;
 
-// STRING: STRONGHOLDCRUSADER 0x005b24d8
+// 0x005b24d8
 char const * const s__vftable__005b24d8 = S__VFTABLE__005B24D8;
 
-// STRING: STRONGHOLDCRUSADER 0x005b24e4
+// 0x005b24e4
 char const * const s___005b24e4 = S___005B24E4;
 
-// STRING: STRONGHOLDCRUSADER 0x005b24e8
+// 0x005b24e8
 char const * const s___005b24e8 = S___005B24E8;
 
-// STRING: STRONGHOLDCRUSADER 0x005b24ec
+// 0x005b24ec
 char const * const s___005b24ec = S___005B24EC;
 
-// STRING: STRONGHOLDCRUSADER 0x005b24f0
+// 0x005b24f0
 char const * const s___005b24f0 = S___005B24F0;
 
-// STRING: STRONGHOLDCRUSADER 0x005b24f4
+// 0x005b24f4
 char const * const s___005b24f4 = S___005B24F4;
 
-// STRING: STRONGHOLDCRUSADER 0x005b24f8
+// 0x005b24f8
 char const * const s___005b24f8 = S___005B24F8;
 
-// STRING: STRONGHOLDCRUSADER 0x005b24fc
+// 0x005b24fc
 char const * const s___005b24fc = S___005B24FC;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2500
+// 0x005b2500
 char const * const s___005b2500 = S___005B2500;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2504
+// 0x005b2504
 char const * const s___005b2504 = S___005B2504;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2508
+// 0x005b2508
 char const * const s___005b2508 = S___005B2508;
 
-// STRING: STRONGHOLDCRUSADER 0x005b250c
+// 0x005b250c
 char const * const s___005b250c = S___005B250C;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2510
+// 0x005b2510
 char const * const s___005b2510 = S___005B2510;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2514
+// 0x005b2514
 char const * const s___005b2514 = S___005B2514;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2518
+// 0x005b2518
 char const * const s___005b2518 = S___005B2518;
 
-// STRING: STRONGHOLDCRUSADER 0x005b251c
+// 0x005b251c
 char const * const s___005b251c = S___005B251C;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2520
+// 0x005b2520
 char const * const s___005b2520 = S___005B2520;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2524
+// 0x005b2524
 char const * const s___005b2524 = S___005B2524;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2528
+// 0x005b2528
 char const * const s___005b2528 = S___005B2528;
 
-// STRING: STRONGHOLDCRUSADER 0x005b252c
+// 0x005b252c
 char const * const s___005b252c = S___005B252C;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2530
+// 0x005b2530
 char const * const s___005b2530 = S___005B2530;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2534
+// 0x005b2534
 char const * const s___005b2534 = S___005B2534;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2538
+// 0x005b2538
 char const * const s___005b2538 = S___005B2538;
 
-// STRING: STRONGHOLDCRUSADER 0x005b253c
+// 0x005b253c
 char const * const s___005b253c = S___005B253C;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2540
+// 0x005b2540
 char const * const s___005b2540 = S___005B2540;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2544
+// 0x005b2544
 char const * const s___005b2544 = S___005B2544;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2548
+// 0x005b2548
 char const * const s___005b2548 = S___005B2548;
 
-// STRING: STRONGHOLDCRUSADER 0x005b254c
+// 0x005b254c
 char const * const s___005b254c = S___005B254C;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2550
+// 0x005b2550
 char const * const s_operator_005b2550 = S_OPERATOR_005B2550;
 
-// STRING: STRONGHOLDCRUSADER 0x005b255c
+// 0x005b255c
 char const * const s___005b255c = S___005B255C;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2560
+// 0x005b2560
 char const * const s___005b2560 = S___005B2560;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2564
+// 0x005b2564
 char const * const s___005b2564 = S___005B2564;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2568
+// 0x005b2568
 char const * const s___005b2568 = S___005B2568;
 
-// STRING: STRONGHOLDCRUSADER 0x005b256c
+// 0x005b256c
 char const * const s___005b256c = S___005B256C;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2570
+// 0x005b2570
 char const * const s_delete_005b2570 = S_DELETE_005B2570;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2578
+// 0x005b2578
 char const * const s_new_005b2578 = S_NEW_005B2578;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2580
+// 0x005b2580
 char const * const s___unaligned_005b2580 = S___UNALIGNED_005B2580;
 
-// STRING: STRONGHOLDCRUSADER 0x005b258c
+// 0x005b258c
 char const * const s___restrict_005b258c = S___RESTRICT_005B258C;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2598
+// 0x005b2598
 char const * const s___ptr64_005b2598 = S___PTR64_005B2598;
 
-// STRING: STRONGHOLDCRUSADER 0x005b25a0
+// 0x005b25a0
 char const * const s___clrcall_005b25a0 = S___CLRCALL_005B25A0;
 
-// STRING: STRONGHOLDCRUSADER 0x005b25ac
+// 0x005b25ac
 char const * const s___fastcall_005b25ac = S___FASTCALL_005B25AC;
 
-// STRING: STRONGHOLDCRUSADER 0x005b25b8
+// 0x005b25b8
 char const * const s___thiscall_005b25b8 = S___THISCALL_005B25B8;
 
-// STRING: STRONGHOLDCRUSADER 0x005b25c4
+// 0x005b25c4
 char const * const s___stdcall_005b25c4 = S___STDCALL_005B25C4;
 
-// STRING: STRONGHOLDCRUSADER 0x005b25d0
+// 0x005b25d0
 char const * const s___pascal_005b25d0 = S___PASCAL_005B25D0;
 
-// STRING: STRONGHOLDCRUSADER 0x005b25dc
+// 0x005b25dc
 char const * const s___cdecl_005b25dc = S___CDECL_005B25DC;
 
-// STRING: STRONGHOLDCRUSADER 0x005b25e4
+// 0x005b25e4
 char const * const s___based__005b25e4 = S___BASED__005B25E4;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2770
+// 0x005b2770
 char const * const s_CONOUT__005b2770 = S_CONOUT__005B2770;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2778
+// 0x005b2778
 char const * const s_1_QNAN_005b2778 = S_1_QNAN_005B2778;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2780
+// 0x005b2780
 char const * const s_1_INF_005b2780 = S_1_INF_005B2780;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2788
+// 0x005b2788
 char const * const s_1_IND_005b2788 = S_1_IND_005B2788;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2790
+// 0x005b2790
 char const * const s_1_SNAN_005b2790 = S_1_SNAN_005B2790;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2798
+// 0x005b2798
 char const * const s_LCMapStringW_005b2798 = S_LCMAPSTRINGW_005B2798;
 
-// STRING: STRONGHOLDCRUSADER 0x005b27a8
+// 0x005b27a8
 char const * const s_CreateFileW_005b27a8 = S_CREATEFILEW_005B27A8;
 
-// STRING: STRONGHOLDCRUSADER 0x005b27b4
+// 0x005b27b4
 char const * const s_WriteConsoleW_005b27b4 = S_WRITECONSOLEW_005B27B4;
 
-// STRING: STRONGHOLDCRUSADER 0x005b27c4
+// 0x005b27c4
 char const * const s_FreeEnvironmentStringsW_005b27c4 = S_FREEENVIRONMENTSTRINGSW_005B27C4;
 
-// STRING: STRONGHOLDCRUSADER 0x005b27dc
+// 0x005b27dc
 char const * const s_GetEnvironmentStringsW_005b27dc = S_GETENVIRONMENTSTRINGSW_005B27DC;
 
-// STRING: STRONGHOLDCRUSADER 0x005b27f4
+// 0x005b27f4
 char const * const s_GetStringTypeW_005b27f4 = S_GETSTRINGTYPEW_005B27F4;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2804
+// 0x005b2804
 char const * const s_GetLocaleInfoW_005b2804 = S_GETLOCALEINFOW_005B2804;
 
-// STRING: STRONGHOLDCRUSADER 0x005b2814
+// 0x005b2814
 char const * const s_CompareStringW_005b2814 = S_COMPARESTRINGW_005B2814;
 
