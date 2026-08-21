@@ -55,7 +55,10 @@ namespace OS {
     int _fclose(FILE* _File) { return fclose(_File); }
 
     // STUB: STRONGHOLDCRUSADER 0x0057FFCA
-    void _fread(void* dstBuffer, size_t elSize, size_t count, FILE* file) { fread(dstBuffer, elSize, count, file); }
+    size_t _fread(void* dstBuffer, size_t elSize, size_t count, FILE* file)
+    {
+        return fread(dstBuffer, elSize, count, file);
+    }
 
     // STUB: STRONGHOLDCRUSADER 0x00580034
     void* _malloc(size_t _Size) { return malloc(_Size); }
@@ -117,7 +120,7 @@ namespace OS {
     char* __strlwr(char* string) { return _strlwr(string); }
 
     // STUB: STRONGHOLDCRUSADER 0x00581F6F
-    undefined4 _ucrt_write(int fileDescriptor, void* src, uint size) { return _write(fileDescriptor, src, size); }
+    int _ucrt_write(int fileDescriptor, void const* src, uint size) { return _write(fileDescriptor, src, size); }
 
     // STUB: STRONGHOLDCRUSADER 0x00582050
     void* _memcpy(void* _Dst, void* _Src, size_t _Size) { return memcpy(_Dst, _Src, _Size); }
