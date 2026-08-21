@@ -22,8 +22,8 @@ namespace Map {
             Constructor_EntityState;
 
             MACRO_FUNCTION_RESOLVER(void (EntityState::*)(), false, Address::SHC_3BB0A8C1_0x004010E0,
-                &EntityState::clearEntityArrayAndSec1077)
-            clearEntityArrayAndSec1077;
+                &EntityState::clearEntityArrayAndSeagullArray)
+            clearEntityArrayAndSeagullArray;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (EntityState::*)(int, EntityType), false, Address::SHC_3BB0A8C1_0x00401150,
                 &EntityState::playerHasEntityOfType)

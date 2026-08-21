@@ -50,7 +50,7 @@ namespace Map {
             Address::SHC_3BB0A8C1_0x00530CF0, &OpenSHC::Map::Units::SetStateToFreetimeWalking)
         SetStateToFreetimeWalking;
 
-        MACRO_FUNCTION_RESOLVER(bool(__cdecl*)(int param_1), false, Address::SHC_3BB0A8C1_0x00530D50,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum(__cdecl*)(int param_1), false, Address::SHC_3BB0A8C1_0x00530D50,
             &OpenSHC::Map::Units::CheckUnitProductionPaused)
         CheckUnitProductionPaused;
 
@@ -170,7 +170,7 @@ namespace Map {
             void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00549650, &OpenSHC::Map::Units::UpdateFireEater)
         UpdateFireEater;
 
-        MACRO_FUNCTION_RESOLVER(undefined4(__cdecl*)(int unitID), false, Address::SHC_3BB0A8C1_0x00549B30,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum(__cdecl*)(int unitID), false, Address::SHC_3BB0A8C1_0x00549B30,
             &OpenSHC::Map::Units::SetRestingForUnit)
         SetRestingForUnit;
 

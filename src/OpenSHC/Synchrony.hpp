@@ -44,8 +44,6 @@ namespace Synchrony {
 
     void __stdcall ProgressBarRelated();
 
-    void __stdcall clearHoveredAI();
-
     void __stdcall syncPlayerGroupArrays();
 
     void __cdecl LoadSkirmishCampaignData(int missionID);

@@ -57,8 +57,8 @@ namespace UI {
         SetTaxesSetting_unknown;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(undefined4 param_1), false, Address::SHC_3BB0A8C1_0x00434340,
-            &OpenSHC::UI::Helpers::SetTribesStateField_0x1C)
-        SetTribesStateField_0x1C;
+            &OpenSHC::UI::Helpers::SetTribesPatrolButtonPressed)
+        SetTribesPatrolButtonPressed;
 
         MACRO_FUNCTION_RESOLVER(undefined4(__cdecl*)(int unitID), false, Address::SHC_3BB0A8C1_0x004347F0,
             &OpenSHC::UI::Helpers::SomeUnitAndViewportCheck)
@@ -119,6 +119,10 @@ namespace UI {
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00493050,
             &OpenSHC::UI::Helpers::SetupPreviewMinimapDataUnk)
         SetupPreviewMinimapDataUnk;
+
+        MACRO_FUNCTION_RESOLVER(
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004AE7C0, &OpenSHC::UI::Helpers::ClearLobbyHoveredAI)
+        ClearLobbyHoveredAI;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(DisplayElementID displayElementID, dword elementState), false,
             Address::SHC_3BB0A8C1_0x004AF650, &OpenSHC::UI::Helpers::CheckDisplayElementByIDAndSetForUnlimitedDisplay)

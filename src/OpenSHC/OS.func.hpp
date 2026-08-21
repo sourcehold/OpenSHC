@@ -18,7 +18,6 @@
 #include "stdio.h"
 #include "time.h"
 #include "vadefs.h"
-#include "winnt.h"
 namespace OpenSHC {
 namespace OS_Func {
 
@@ -153,8 +152,8 @@ namespace OS_Func {
     __toupper;
 
     MACRO_FUNCTION_RESOLVER(
-        int(__cdecl*)(HANDLE hFile), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x005826FB, &OpenSHC::OS::_tell)
-    _tell;
+        int(__cdecl*)(int handle), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x005826FB, &OpenSHC::OS::_ucrt_tell)
+    _ucrt_tell;
 
     MACRO_FUNCTION_RESOLVER(int(__cdecl*)(int fileDescriptor, long lDistanceToMove, DWORD moveMethod),
         REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x0058277E, &OpenSHC::OS::_ucrt_lseek)

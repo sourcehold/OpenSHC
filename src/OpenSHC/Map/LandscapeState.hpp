@@ -101,7 +101,7 @@ namespace Map {
 
         void placeAppleTree(int buildingID, undefined4 treeX, undefined4 treeY);
 
-        int selectClosestTree(int xPosition, int yPosition, int param_3);
+        int selectClosestAppleTree(int xPosition, int yPosition, int param_3);
 
         void resetWind();
 

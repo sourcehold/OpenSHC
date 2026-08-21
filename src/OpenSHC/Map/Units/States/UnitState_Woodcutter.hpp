@@ -3,7 +3,7 @@
   Communicate changes to the dev team (e.g. via a Pull Request).
   Changes get lost otherwise.
 
-  path: 'OpenSHC/Map/Units/States/WoodcutterStateEnum.hpp'
+  path: 'OpenSHC/Map/Units/States/UnitState_Woodcutter.hpp'
 */
 
 #pragma once
@@ -12,7 +12,7 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
         namespace States {
-            typedef enum WoodcutterStateEnum {
+            typedef enum UnitState_Woodcutter {
 
                 WSE_WAITING = 0, // 0x00000000
                 WSE_GOING_TO_CHOP_WOOD = 1, // 0x00000001
@@ -27,9 +27,9 @@ namespace Map {
                 WSE_RESTING = 10, // 0x0000000A
                 WSE_ATTACKING = 106 // 0x0000006A
 
-            } WoodcutterStateEnum;
+            } UnitState_Woodcutter;
 
-            static_assert_cpp98_obj(sizeof(WoodcutterStateEnum) == 4, WoodcutterStateEnum);
+            static_assert_cpp98_obj(sizeof(UnitState_Woodcutter) == 4, UnitState_Woodcutter);
         } // namespace States
     } // namespace Units
 } // namespace Map

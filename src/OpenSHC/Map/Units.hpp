@@ -33,7 +33,7 @@ namespace Map {
 
         undefined4 __cdecl SetStateToFreetimeWalking(int unitID, int shouldFindNewGoodThing, int param_3);
 
-        bool __cdecl CheckUnitProductionPaused(int param_1);
+        BOOLEnum __cdecl CheckUnitProductionPaused(int param_1);
 
         int __cdecl ComputeGoodsProduced(int unitID, int goodsCount, BOOLEnum boost);
 
@@ -93,7 +93,7 @@ namespace Map {
 
         void __cdecl UpdateFireEater();
 
-        undefined4 __cdecl SetRestingForUnit(int unitID);
+        BOOLEnum __cdecl SetRestingForUnit(int unitID);
 
         void __cdecl UpdateWoodcutter();
 

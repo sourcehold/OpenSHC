@@ -15,6 +15,7 @@
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "crtdefs.h"
+#include "winnt.h"
 
 namespace OpenSHC {
 namespace IO {
@@ -106,7 +107,7 @@ namespace IO {
 
         BOOLEnum showOpenGfxFileDialog();
 
-        BOOLEnum showOpenHelpFileDialog(undefined4 param_1);
+        BOOLEnum showOpenHelpFileDialog(LPCSTR param_1);
 
         BOOLEnum showSaveHelpFileDialog();
 
@@ -114,19 +115,19 @@ namespace IO {
 
         int fileHashFunctionByteByByte();
 
-        void* getDocumentsFolderString(void* param_1, char param_2);
+        std::string paths_getDocumentsFolderString(std::string param_1, bool param_2);
 
-        void getSavesPath(void* param_1, char param_2);
+        void paths_getSavesPath(std::string param_1, bool param_2);
 
-        void getDocumentsMapsFolderString(void* param_1, BOOLEnum prependUserPath);
+        void paths_getDocumentsMapsFolderString(std::string param_1, bool prependUserPath);
 
-        void discoverMapFiles(char* param_1);
+        void discoverMapFiles(char const* param_1);
 
         void resolveResourceFileName(FileResourceType resourceType, char const* shortFileName);
 
         void loadMapHeaders(BOOLEnum drawLoadingBar);
 
-        void filterMapsIfMapLock();
+        void mapNames_filterMapsIfMapLock();
     };
 
     static_assert_cpp98_obj(sizeof(ResourceManager) == 1034132, ResourceManager);

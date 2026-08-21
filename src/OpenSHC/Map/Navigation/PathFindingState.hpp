@@ -257,7 +257,7 @@ namespace Map {
 
             undefined4 certainDamageToUnitsUnk(int param_1, int param_2, int param_3, int param_4, undefined4 param_5);
 
-            bool pathFindingToAttackCastleIncludingMoat(undefined4 playerID, int wallOwnerPlayerID, uint x, uint y,
+            BOOLEnum pathFindingToAttackCastleIncludingMoat(undefined4 playerID, int wallOwnerPlayerID, uint x, uint y,
                 byte* out_successUnk, int* out_x, int* out_y);
 
             void computeAIZoneLayer(int attackedPlayerID, int canReachKeep);

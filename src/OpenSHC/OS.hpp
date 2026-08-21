@@ -19,7 +19,6 @@
 #include "sys/stat.h"
 #include "time.h"
 #include "vadefs.h"
-#include "winnt.h"
 namespace OpenSHC {
 namespace OS {
 
@@ -90,7 +89,7 @@ namespace OS {
 
     int __cdecl __toupper(int _C);
 
-    int __cdecl _tell(HANDLE hFile);
+    int __cdecl _ucrt_tell(int handle);
 
     int __cdecl _ucrt_lseek(int fileDescriptor, long lDistanceToMove, DWORD moveMethod);
 

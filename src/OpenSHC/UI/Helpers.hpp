@@ -39,7 +39,7 @@ namespace UI {
 
         void __cdecl SetTaxesSetting_unknown(int taxesSettingUnk);
 
-        void __cdecl SetTribesStateField_0x1C(undefined4 param_1);
+        void __cdecl SetTribesPatrolButtonPressed(undefined4 param_1);
 
         undefined4 __cdecl SomeUnitAndViewportCheck(int unitID);
 
@@ -70,6 +70,8 @@ namespace UI {
         void __stdcall SetEnoughGoldForRequestedUnitToTrueUnk();
 
         void __cdecl SetupPreviewMinimapDataUnk();
+
+        void __cdecl ClearLobbyHoveredAI();
 
         void __cdecl CheckDisplayElementByIDAndSetForUnlimitedDisplay(
             DisplayElementID displayElementID, dword elementState);

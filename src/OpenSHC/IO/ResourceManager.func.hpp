@@ -7,6 +7,7 @@
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "crtdefs.h"
+#include "winnt.h"
 namespace OpenSHC {
 namespace IO {
     namespace ResourceManager_Func {
@@ -104,7 +105,7 @@ namespace IO {
             &ResourceManager::showOpenGfxFileDialog)
         showOpenGfxFileDialog;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (ResourceManager::*)(undefined4), false, Address::SHC_3BB0A8C1_0x004720C0,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (ResourceManager::*)(LPCSTR), false, Address::SHC_3BB0A8C1_0x004720C0,
             &ResourceManager::showOpenHelpFileDialog)
         showOpenHelpFileDialog;
 
@@ -120,19 +121,19 @@ namespace IO {
             &ResourceManager::fileHashFunctionByteByByte)
         fileHashFunctionByteByByte;
 
-        MACRO_FUNCTION_RESOLVER(void* (ResourceManager::*)(void*, char), false, Address::SHC_3BB0A8C1_0x004778E0,
-            &ResourceManager::getDocumentsFolderString)
-        getDocumentsFolderString;
+        MACRO_FUNCTION_RESOLVER(std::string (ResourceManager::*)(std::string, bool), false,
+            Address::SHC_3BB0A8C1_0x004778E0, &ResourceManager::paths_getDocumentsFolderString)
+        paths_getDocumentsFolderString;
 
-        MACRO_FUNCTION_RESOLVER(void (ResourceManager::*)(void*, char), false, Address::SHC_3BB0A8C1_0x004779F0,
-            &ResourceManager::getSavesPath)
-        getSavesPath;
+        MACRO_FUNCTION_RESOLVER(void (ResourceManager::*)(std::string, bool), false, Address::SHC_3BB0A8C1_0x004779F0,
+            &ResourceManager::paths_getSavesPath)
+        paths_getSavesPath;
 
-        MACRO_FUNCTION_RESOLVER(void (ResourceManager::*)(void*, BOOLEnum), false, Address::SHC_3BB0A8C1_0x00477B00,
-            &ResourceManager::getDocumentsMapsFolderString)
-        getDocumentsMapsFolderString;
+        MACRO_FUNCTION_RESOLVER(void (ResourceManager::*)(std::string, bool), false, Address::SHC_3BB0A8C1_0x00477B00,
+            &ResourceManager::paths_getDocumentsMapsFolderString)
+        paths_getDocumentsMapsFolderString;
 
-        MACRO_FUNCTION_RESOLVER(void (ResourceManager::*)(char*), false, Address::SHC_3BB0A8C1_0x00477EE0,
+        MACRO_FUNCTION_RESOLVER(void (ResourceManager::*)(char const*), false, Address::SHC_3BB0A8C1_0x00477EE0,
             &ResourceManager::discoverMapFiles)
         discoverMapFiles;
 
@@ -144,9 +145,9 @@ namespace IO {
             &ResourceManager::loadMapHeaders)
         loadMapHeaders;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x00478C60, &ResourceManager::filterMapsIfMapLock)
-        filterMapsIfMapLock;
+        MACRO_FUNCTION_RESOLVER(void (ResourceManager::*)(), false, Address::SHC_3BB0A8C1_0x00478C60,
+            &ResourceManager::mapNames_filterMapsIfMapLock)
+        mapNames_filterMapsIfMapLock;
 
     } // namespace ResourceManager_Func
 } // namespace IO

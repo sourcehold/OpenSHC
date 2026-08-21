@@ -3,7 +3,7 @@
   Communicate changes to the dev team (e.g. via a Pull Request).
   Changes get lost otherwise.
 
-  path: 'OpenSHC/Map/Units/States/WheatFarmerStateEnum.hpp'
+  path: 'OpenSHC/Map/Units/States/UnitState_WheatFarmer.hpp'
 */
 
 #pragma once
@@ -12,7 +12,7 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
         namespace States {
-            typedef enum WheatFarmerStateEnum {
+            typedef enum UnitState_WheatFarmer {
 
                 WFSE_WAITING_0 = 0, // 0x00000000
                 WFSE_WAITING_1 = 1, // 0x00000001
@@ -27,9 +27,9 @@ namespace Map {
                 WFSE_TAKING_GOODS_TO_STORE = 10, // 0x0000000A
                 WFSE_ATTACKING = 106 // 0x0000006A
 
-            } WheatFarmerStateEnum;
+            } UnitState_WheatFarmer;
 
-            static_assert_cpp98_obj(sizeof(WheatFarmerStateEnum) == 4, WheatFarmerStateEnum);
+            static_assert_cpp98_obj(sizeof(UnitState_WheatFarmer) == 4, UnitState_WheatFarmer);
         } // namespace States
     } // namespace Units
 } // namespace Map

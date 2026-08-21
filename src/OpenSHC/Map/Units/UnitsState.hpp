@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/IO/Graphics/GmID.hpp"
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Entities/EntityType.hpp"
@@ -23,6 +24,7 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
+        using OpenSHC::Game::Resources::ResourceType;
         using OpenSHC::IO::PackagedFileMagicNum;
         using OpenSHC::IO::Graphics::GmID;
         using OpenSHC::Map::Entities::EntityType;
@@ -183,7 +185,7 @@ namespace Map {
 
             BOOLEnum checkIfCitizenUnitIsAliveBasedOnState(int param_1);
 
-            bool shouldUnitsEngageInMelee(int param_1, int param_2);
+            BOOLEnum shouldUnitsEngageInMelee(int param_1, int param_2);
 
             int ComputeDamageFearFactorBonus(int damage, int playerID);
 
@@ -406,7 +408,7 @@ namespace Map {
 
             void setAIControlStatusTo100000();
 
-            int clearUnitPositionCommitState(int unitIndex, int* param_2);
+            int getUnitStateTextParameterAndResourceType(int unitIndex, ResourceType* pResourceType);
 
             GmID getPeasantGmID(int unitID);
 
@@ -476,7 +478,7 @@ namespace Map {
 
             dword findNearestEnemyAndHeadTowardsIt(int unitID);
 
-            BOOLEnum acquireShootTarget(short* unitID);
+            BOOLEnum acquireShootTarget(int unitID);
 
             BOOLEnum updateClimbing(int unitID);
 

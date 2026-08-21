@@ -596,7 +596,7 @@ enum {
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x004010B0 = 0x004010B0,
-    // label: clearEntityArrayAndSec1077
+    // label: clearEntityArrayAndSeagullArray
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x004010E0 = 0x004010E0,
@@ -12412,7 +12412,7 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x00434300 = 0x00434300,
-    // label: SetTribesStateField_0x1C
+    // label: SetTribesPatrolButtonPressed
     // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x00434340 = 0x00434340,
@@ -24936,15 +24936,15 @@ enum {
     // location: HoldStrong_lib/StringObject
     // type: function
     SHC_3BB0A8C1_0x00477710 = 0x00477710,
-    // label: getDocumentsFolderString
+    // label: paths_getDocumentsFolderString
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x004778E0 = 0x004778E0,
-    // label: getSavesPath
+    // label: paths_getSavesPath
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x004779F0 = 0x004779F0,
-    // label: getDocumentsMapsFolderString
+    // label: paths_getDocumentsMapsFolderString
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x00477B00 = 0x00477B00,
@@ -25058,7 +25058,7 @@ enum {
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x00478AE0 = 0x00478AE0,
-    // label: filterMapsIfMapLock
+    // label: mapNames_filterMapsIfMapLock
     // location: OpenSHC/IO/ResourceManager
     // type: function
     SHC_3BB0A8C1_0x00478C60 = 0x00478C60,
@@ -29920,8 +29920,8 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004AE720 = 0x004AE720,
-    // label: clearHoveredAI
-    // location: OpenSHC/Synchrony
+    // label: ClearLobbyHoveredAI
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004AE7C0 = 0x004AE7C0,
     // label: MenuItemActionHandler_AiLordSelect_Main
@@ -43847,7 +43847,7 @@ enum {
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F3560 = 0x004F3560,
-    // label: selectClosestTree
+    // label: selectClosestAppleTree
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F3610 = 0x004F3610,
@@ -57813,7 +57813,7 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00537EE0 = 0x00537EE0,
-    // label: clearUnitPositionCommitState
+    // label: getUnitStateTextParameterAndResourceType
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00537F60 = 0x00537F60,
@@ -75426,7 +75426,7 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x005826B1 = 0x005826B1,
-    // label: _tell
+    // label: _ucrt_tell
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x005826FB = 0x005826FB,
@@ -82794,27 +82794,27 @@ enum {
     // location:
     // type: /char[20]
     SHC_3BB0A8C1_0x005A2758 = 0x005A2758,
-    // label: STR_EQUALS
+    // label: s_equals_005a276c
     // location:
     // type: /char[4]
     SHC_3BB0A8C1_0x005A276C = 0x005A276C,
-    // label: STR_PERCENTAGE
+    // label: s_percentage_005a2770
     // location:
     // type: /char[4]
     SHC_3BB0A8C1_0x005A2770 = 0x005A2770,
-    // label: STR_CLOSE_BRACE
+    // label: s_brace_open_005a2774
     // location:
     // type: /char[4]
     SHC_3BB0A8C1_0x005A2774 = 0x005A2774,
-    // label: STR_OPEN_BRACE
+    // label: s_brace_close_005a2778
     // location:
     // type: /char[4]
     SHC_3BB0A8C1_0x005A2778 = 0x005A2778,
-    // label: STR_SLASH
+    // label: s_slash_forward_005a277c
     // location:
     // type: /char[4]
     SHC_3BB0A8C1_0x005A277C = 0x005A277C,
-    // label: STR_FMT_D_SLASH_D
+    // label: s_perc_d_slash_perc_d_005a2780
     // location:
     // type: /char[8]
     SHC_3BB0A8C1_0x005A2780 = 0x005A2780,

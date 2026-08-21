@@ -327,8 +327,8 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x004A3B20, &PathFindingState::certainDamageToUnitsUnk)
             certainDamageToUnitsUnk;
 
-            MACRO_FUNCTION_RESOLVER(bool (PathFindingState::*)(undefined4, int, uint, uint, byte*, int*, int*), false,
-                Address::SHC_3BB0A8C1_0x004A4140, &PathFindingState::pathFindingToAttackCastleIncludingMoat)
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (PathFindingState::*)(undefined4, int, uint, uint, byte*, int*, int*),
+                false, Address::SHC_3BB0A8C1_0x004A4140, &PathFindingState::pathFindingToAttackCastleIncludingMoat)
             pathFindingToAttackCastleIncludingMoat;
 
             MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004A4470,

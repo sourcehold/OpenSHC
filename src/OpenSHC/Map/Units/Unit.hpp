@@ -182,7 +182,7 @@ namespace Map {
             int av; // 0x000002F8 length: 4
             short working; // 0x000002FC length: 2
             short field166_0x2fe; // 0x000002FE length: 2
-            short field167_0x300; // 0x00000300 length: 2
+            short unitTypeSpecificRestingState; // 0x00000300 length: 2
             short unknownDigMoatOrWallAttackFlag1015; // 0x00000302 length: 2
             short productivityMod100; // 0x00000304 length: 2
             short productivityDiv100; // 0x00000306 length: 2
@@ -194,7 +194,7 @@ namespace Map {
             short targetY; // 0x00000312 length: 2
             short manningEngineerRef[4]; // 0x00000314 length: 8
             int manningEngineerUIDRef[4]; // 0x0000031C length: 16
-            byte unknownTestAgainst0_1; // 0x0000032C length: 1
+            byte isStalked; // 0x0000032C length: 1
             char field180_0x32d; // 0x0000032D length: 1
             byte disappearFadeAlphaCountdown; // 0x0000032E length: 1
             byte engineerManningSiegeStateRef_checkType; // 0x0000032F length: 1

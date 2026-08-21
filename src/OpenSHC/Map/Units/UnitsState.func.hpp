@@ -2,6 +2,7 @@
   path: 'OpenSHC/Map/Units/UnitsState.func.hpp'
 */
 
+#include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/IO/Graphics/GmID.hpp"
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Entities/EntityType.hpp"
@@ -15,6 +16,7 @@ namespace Map {
     namespace Units {
         namespace UnitsState_Func {
 
+            using OpenSHC::Game::Resources::ResourceType;
             using OpenSHC::IO::PackagedFileMagicNum;
             using OpenSHC::IO::Graphics::GmID;
             using OpenSHC::Map::Entities::EntityType;
@@ -185,7 +187,7 @@ namespace Map {
                 &UnitsState::checkIfCitizenUnitIsAliveBasedOnState)
             checkIfCitizenUnitIsAliveBasedOnState;
 
-            MACRO_FUNCTION_RESOLVER(bool (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00531000,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00531000,
                 &UnitsState::shouldUnitsEngageInMelee)
             shouldUnitsEngageInMelee;
 
@@ -622,9 +624,9 @@ namespace Map {
                 &UnitsState::setAIControlStatusTo100000)
             setAIControlStatusTo100000;
 
-            MACRO_FUNCTION_RESOLVER(int (UnitsState::*)(int, int*), false, Address::SHC_3BB0A8C1_0x00537F60,
-                &UnitsState::clearUnitPositionCommitState)
-            clearUnitPositionCommitState;
+            MACRO_FUNCTION_RESOLVER(int (UnitsState::*)(int, ResourceType*), false, Address::SHC_3BB0A8C1_0x00537F60,
+                &UnitsState::getUnitStateTextParameterAndResourceType)
+            getUnitStateTextParameterAndResourceType;
 
             MACRO_FUNCTION_RESOLVER(
                 GmID (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00539BE0, &UnitsState::getPeasantGmID)
@@ -758,8 +760,8 @@ namespace Map {
                 &UnitsState::findNearestEnemyAndHeadTowardsIt)
             findNearestEnemyAndHeadTowardsIt;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(short*), false, Address::SHC_3BB0A8C1_0x0054B0D0,
-                &UnitsState::acquireShootTarget)
+            MACRO_FUNCTION_RESOLVER(
+                BOOLEnum (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0054B0D0, &UnitsState::acquireShootTarget)
             acquireShootTarget;
 
             MACRO_FUNCTION_RESOLVER(

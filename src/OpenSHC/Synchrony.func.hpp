@@ -68,10 +68,6 @@ namespace Synchrony_Func {
     ProgressBarRelated;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004AE7C0, &OpenSHC::Synchrony::clearHoveredAI)
-    clearHoveredAI;
-
-    MACRO_FUNCTION_RESOLVER(
         void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004AEA10, &OpenSHC::Synchrony::syncPlayerGroupArrays)
     syncPlayerGroupArrays;
 
