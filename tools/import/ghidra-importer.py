@@ -83,7 +83,7 @@ exporter = Exporter(binary_context=bc,
                                         (".*inaddr.h", "WinSock.h"),
                                         (".*DirectPlay/dplay/.*", "dplay.h"),
                                         (".*DirectPlay/dplobby/.*", "dplobby.h"),
-                                        # ("HoldStrong_lib/StringObject.*", "<string>"),
+                                        ("HoldStrong_lib/StringObject.*", "<string>"),
                                         ],
                     includes_exclude_regex=[".*Enums/WindowsVirtualKey.*",
                                             ".*Enums/GeneralWindowsMessage.*",
@@ -111,9 +111,8 @@ exporter = Exporter(binary_context=bc,
                       ("/_HoldStrong/WindowsHelper/Enums", "FilePtrMoveMethodInt"): ("/stdio.h", "DWORD"),
                       ("/_HoldStrong/WindowsHelper/Enums", "OpenFlag"): ("/", "int"),
                       ("/_HoldStrong/WindowsHelper/Enums", "OpenFlagInt"): ("/", "int"),
-                      ("/HoldStrong_lib", "StringObject"): ("/", "void *"),
-                      ("/HoldStrong_lib", "StringObject *"): ("/", "void *"),
-                      ("/HoldStrong_lib", "StringObject *"): ("/", "void *"),
+                      ("/HoldStrong_lib", "StringObject"): ("/", "std::string"),
+                      ("/HoldStrong_lib", "StringObject *"): ("/", "std::string"),
                       ("/", "CHAR_CONST"): ("/", "char const"),
                       ("/", "CHAR_CONST *"): ("/", "char const *"),
                       ("/", "VOID_CONST"): ("/", "void const"),
@@ -142,6 +141,11 @@ namespace UI {
                     },
                     inject_includes_in_files={
                       "OpenSHC/OS.hpp": ["fcntl.h", "sys/stat.h"],
+                    },
+                    zap_parameter_indices = {
+                      0x004778E0: (1,),
+                      0x004779F0: (1,),
+                      0x00477B00: (1,),
                     })
 
 collection = ExportedContentCollection(ignore_duplicates=True)
