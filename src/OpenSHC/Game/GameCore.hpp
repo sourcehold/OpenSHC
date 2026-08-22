@@ -26,6 +26,13 @@
 namespace OpenSHC {
 namespace Game {
 
+    struct ScenarioProgress {
+        int progressCallToArms;
+        int progressSaladinsConquest;
+        int progressTheKingsCrusade;
+        int progressCrusaderStates;
+    };
+
     using OpenSHC::Game::GameMode2Int;
     using OpenSHC::Game::ScenarioProgress;
     using OpenSHC::Game::TrailTypeInt;

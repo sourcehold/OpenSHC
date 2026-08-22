@@ -311,7 +311,7 @@ do {
 
 #### Known special cases
 
-- `memset` so far was seen optimizing a "set all bytes to zero" case, if it was smaller then a unknown amount. In all known cases it used `EAX` for this. Would still recommend to try `memset` for cases with a register filling multiple memory locations.
+- `memset` so far was seen optimizing a "set all bytes to zero" case, if it was smaller then a unknown amount. In all known cases it used `EAX` for this. Would still recommend to try `memset` for cases with a register filling multiple **byte-sized** memory locations.
 
 ### CRT Functions
 
@@ -344,3 +344,13 @@ If the value is assigned to another object, the compiler tries to avoid creating
 **This only works if the function is called directly. Any form of indirection via pointer or resolver will not optimize. This is a fundamental limitation of the MSVC2005 compiler.**
 
 As a result, such cases do not use the resolver. The limitation through this is accepted, although, it should be noted in the status entry for the caller.
+
+### Stack
+
+The stack of the function is an important orientation for decompilation.
+The reference point is the `esp` register, which points to the top of the stack. The stack grows **downwards** from the top, so actions that grow the stack reduce the `esp` register, for example `push` reduces the `esp` register by 4 and grows the stack by 4.
+
+Naturally, the stack reserved for the function indicated by `sub esp, <number>` at the start and `add esp, <number>` at the end of the function, need to match. This can be achieved by adding or removing locals or shrinking or growing arrays within the logical boundaries of the function. **It must never break the logic**.  
+At best, not only the stack fits, but variables are also at the correct positions and sizes within.
+
+If the stack usage shows a proper order in the function (i.e. the initial array occupies the first part in the allocated function stack, which means it requires the highest `[esp + <number>]` to reach), it might be sometimes good to fit one "side" of the stack first and then experiment with the rest of the function that has a non-fitting stack usage.
