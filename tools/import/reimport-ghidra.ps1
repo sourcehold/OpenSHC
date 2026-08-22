@@ -52,7 +52,7 @@ if ($DryRun) {
     
     Write-Output "Backing up or deleting existing hpp files"
     # Backup or delete existing hpp files
-    $hppFiles = Get-ChildItem -File -Recurse "$OutputDir\OpenSHC\*.hpp" | Where-Object {$_.Name -ne "string-literals.hpp"}
+    $hppFiles = Get-ChildItem -File -Recurse "$OutputDir\OpenSHC\*.hpp" | Where-Object {$_.Name -ne "string-literals.hpp"} | Where-Object {$_.Name -ne "string-macros.hpp"}
     if ($MakeBackup) {
         $hppFiles | Backup-Item -Move $true
     } else {
