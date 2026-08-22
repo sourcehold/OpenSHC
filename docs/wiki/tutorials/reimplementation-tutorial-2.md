@@ -26,18 +26,18 @@ namespace AI {
         int _aiType;
 
         _aivID = 1;
-        pAVar1 = this->SEC_AIVS;
+        pAVar1 = this->aivs;
         do {
             pAVar1 = pAVar1 + 1;
             if (pAVar1->playerID == 0) {
-                this->SEC_AIVS[_aivID].playerID = playerID;
+                this->aivs[_aivID].playerID = playerID;
                 _aiType = DAT_GameState::ptr->playerDataArray[playerID].aiType;
-                this->SEC_AIVS[_aivID].currentStepGoal = 0;
-                this->SEC_AIVS[_aivID].aivPoorCounter = 0;
-                this->SEC_AIVS[_aivID].aivSubType = 0;
-                this->SEC_AIVS[_aivID].aiType = _aiType;
+                this->aivs[_aivID].currentStepGoal = 0;
+                this->aivs[_aivID].aivPoorCounter = 0;
+                this->aivs[_aivID].aivSubType = 0;
+                this->aivs[_aivID].aiType = _aiType;
                 _buildIntervalUnk = AICState::getAIBuildInterval(DAT_AICState::ptr, playerID);
-                this->SEC_AIVS[_aivID].aivPoorLimit_OR_AIC_buildInterval = _buildIntervalUnk;
+                this->aivs[_aivID].aivPoorLimit_OR_AIC_buildInterval = _buildIntervalUnk;
                 this->aivCount = this->aivCount + 1;
                 return _aivID;
             }
@@ -302,19 +302,19 @@ namespace AI {
     int AIVState::setupAIVMetadata(int playerID)
     {
         int aivID = 1;
-        AIVSpec* pSlot = &this->SEC_AIVS[1];
+        AIVSpec* pSlot = &this->aivs[1];
         do {
             if (pSlot->playerID == 0) {
-                this->SEC_AIVS[aivID].playerID = playerID;
-                this->SEC_AIVS[aivID].aivPoorCounter = 0;
+                this->aivs[aivID].playerID = playerID;
+                this->aivs[aivID].aivPoorCounter = 0;
 
                 int aiType = DAT_GameState::ptr->playerDataArray[playerID].aiType;
-                this->SEC_AIVS[aivID].aiType = aiType;
+                this->aivs[aivID].aiType = aiType;
 
-                this->SEC_AIVS[aivID].aivSubType = 0;
-                this->SEC_AIVS[aivID].currentStepGoal = 0;
+                this->aivs[aivID].aivSubType = 0;
+                this->aivs[aivID].currentStepGoal = 0;
 
-                this->SEC_AIVS[aivID].aivPoorLimit_OR_AIC_buildInterval
+                this->aivs[aivID].aivPoorLimit_OR_AIC_buildInterval
                     = MACRO_CALL_MEMBER(AICState_Func::getAIBuildInterval, DAT_AICState::ptr)(playerID);
 
                 this->aivCount = this->aivCount + 1;
@@ -354,16 +354,16 @@ This is the right order:
 {lineno-start=1}
 
 ```cpp
-this->SEC_AIVS[aivID].playerID = playerID;
+this->aivs[aivID].playerID = playerID;
 
 int aiType = DAT_GameState::ptr->playerDataArray[playerID].aiType;
-this->SEC_AIVS[aivID].aiType = aiType;
+this->aivs[aivID].aiType = aiType;
 
-this->SEC_AIVS[aivID].currentStepGoal = 0;
-this->SEC_AIVS[aivID].aivPoorCounter = 0;
-this->SEC_AIVS[aivID].aivSubType = 0;
+this->aivs[aivID].currentStepGoal = 0;
+this->aivs[aivID].aivPoorCounter = 0;
+this->aivs[aivID].aivSubType = 0;
 
-this->SEC_AIVS[aivID].aivPoorLimit_OR_AIC_buildInterval
+this->aivs[aivID].aivPoorLimit_OR_AIC_buildInterval
     = MACRO_CALL_MEMBER(AICState_Func::getAIBuildInterval, DAT_AICState::ptr)(playerID);
 
 this->aivCount = this->aivCount + 1;
