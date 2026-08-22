@@ -40,5 +40,6 @@ if errorlevel 1 (
 )
 
 :: --- Proxy all arguments to actual CMake ---
+echo cmake !ARGS!
 cmake !ARGS!
 exit /b %errorlevel%
