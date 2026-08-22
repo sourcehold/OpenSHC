@@ -68,15 +68,15 @@ namespace IO {
         DAT_GameCore::instance.mapU4Int1 = 0;
 
         for (int i = 0; i < 9; ++i) {
-            DAT_BlendingDefinedData::instance.SEC_PlayerSlotUnitColor[i]
-                = DAT_BlendingDefinedData::instance.DAT_DefaultPlayerSlotUnitColor[i];
+            DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[i]
+                = DAT_BlendingDefinedData::instance.DefaultPlayerSlotUnitColor[i];
         }
 
         MACRO_CALL_MEMBER(Game::GameStateStructures_Func::fillWith0xFF, DAT_GameState::ptr)();
 
         DAT_GameCore::instance.mapU4Int3_balanced = 0;
-        DAT_GameState::instance.mapAndTime.field3186_0x27e4 = 0;
-        DAT_GameState::instance.mapAndTime.field3187_0x27e8 = 0;
+        DAT_GameState::instance.mapAndTime.skirmishExtremeMode = 0;
+        DAT_GameState::instance.mapAndTime.skirmishExtremeMode2 = 0;
         DAT_GameCore::instance.isVictoryOrDefeatUnk = 0;
         DAT_GameCore::instance.altRToggleMinimapHideWildlife = 0;
 

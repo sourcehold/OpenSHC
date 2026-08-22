@@ -17,10 +17,10 @@ namespace Audio {
         {
             MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber1, SEC_RNG::ptr)();
             int someState;
-            if (DAT_GameSynchronyState::instance.DAT_CurrentGameMode == Game::GM_SOLITARY
+            if (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY
                 || 50 <= DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                         .currentPopulation
-                || (DAT_GameSynchronyState::instance.DAT_CurrentGameMode == Game::GM_SKIRMISH_SINGLE_PLAYER
+                || (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SKIRMISH_SINGLE_PLAYER
                     && DAT_GameCore::instance.gameMode_2 == Game::GM_CAMPAIGN_MISSION)) {
                 someState = SEC_RNG::instance.currentNumber1 % 5;
             } else {

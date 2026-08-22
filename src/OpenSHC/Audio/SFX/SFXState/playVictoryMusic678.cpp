@@ -14,7 +14,7 @@ namespace Audio {
         // FUNCTION: STRONGHOLDCRUSADER 0x0044A620
         void SFXState::playVictoryMusic678()
         {
-            if (DAT_GameSynchronyState::instance.DAT_CurrentGameMode != Game::GM_SOLITARY) {
+            if (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY) {
                 return;
             }
             if (DAT_GameCore::instance.gameMode_2 == Game::GM_EDITOR) {

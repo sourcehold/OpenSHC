@@ -141,6 +141,7 @@ namespace UI {
                     },
                     inject_includes_in_files={
                       "OpenSHC/OS.hpp": ["fcntl.h", "sys/stat.h"],
+                      "OpenSHC/IO/DecoderBuffer.hpp": ["OpenSHC/IO/Helpers/BufferHelper.hpp"]
                     },
                     zap_parameter_indices = {
                       0x004778E0: (1,),

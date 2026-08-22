@@ -40,10 +40,10 @@ namespace Audio {
                     || DAT_GameCore::ptr->currentMenuViewType == UI::Enums::MVT_SCENARIO_DESCRIPTION) {
                     if (this->sec_Section1055_0x3274 == 50) {
                         MACRO_CALL_MEMBER(SoundSystem_Func::openSound, this)(
-                            DAT_SFXDefinedData::ptr->DAT_SFX_Pointers[72].musicFile);
+                            DAT_SFXDefinedData::ptr->Pointers[72].musicFile);
                     } else if (this->sec_Section1055_0x3274 == 72) {
                         MACRO_CALL_MEMBER(SoundSystem_Func::openSound, this)(
-                            DAT_SFXDefinedData::ptr->DAT_SFX_Pointers[50].musicFile);
+                            DAT_SFXDefinedData::ptr->Pointers[50].musicFile);
                     }
                 }
 
@@ -65,7 +65,7 @@ namespace Audio {
                             }
                             DAT_SoundEffectsHelperData1::ptr->DAT_RandomVariationCurrentPlayingMusic_02 = _selection;
                             MACRO_CALL_MEMBER(SoundSystem_Func::openSound, this)(
-                                DAT_SFXDefinedData::ptr->DAT_SFX_Pointers[_selection + 97].musicFile);
+                                DAT_SFXDefinedData::ptr->Pointers[_selection + 97].musicFile);
                             --DAT_SoundEffectsHelperData1::ptr->field13_0x50;
                             if (DAT_SoundEffectsHelperData1::ptr->field13_0x50 > 3) {
                                 DAT_SoundEffectsHelperData1::ptr->field13_0x50 = 0;
@@ -83,7 +83,7 @@ namespace Audio {
                             }
                             DAT_SoundEffectsHelperData1::ptr->DAT_RandomVariationCurrentPlayingMusic_01 = _selection;
                             MACRO_CALL_MEMBER(SoundSystem_Func::openSound, this)(
-                                DAT_SFXDefinedData::ptr->DAT_SFX_Pointers[_selection + 73].musicFile);
+                                DAT_SFXDefinedData::ptr->Pointers[_selection + 73].musicFile);
                             DAT_SoundEffectsHelperData1::ptr->DAT_NegativeCountdownMin1ToMin4Becomes0 += -1;
                             if (DAT_SoundEffectsHelperData1::ptr->DAT_NegativeCountdownMin1ToMin4Becomes0 > 3) {
                                 DAT_SoundEffectsHelperData1::ptr->DAT_NegativeCountdownMin1ToMin4Becomes0 = 0;

@@ -77,7 +77,7 @@ namespace Audio {
             unsigned int const uPeriod = min(max(_timeCaps.wPeriodMin, 10), _timeCaps.wPeriodMax);
             DAT_SoundEffectsHelperData1::instance.SND_SomeTimerResolution = uPeriod;
             timeBeginPeriod(uPeriod);
-            DAT_SFXDefinedData::instance.SND_SomeTimerIdentifier
+            DAT_SFXDefinedData::instance.SomeTimerIdentifier
                 = timeSetEvent(50, uPeriod, MSS_Func::SndSystemTimeCallback::get(), 0, 0x1);
         }
 

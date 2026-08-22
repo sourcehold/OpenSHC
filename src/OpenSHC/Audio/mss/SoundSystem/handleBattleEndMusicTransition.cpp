@@ -39,7 +39,7 @@ namespace Audio {
 
             switch (DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.volumeLevel) {
             case 1:
-                if (DAT_GameSynchronyState::ptr->DAT_CurrentGameMode != Game::GM_SOLITARY) {
+                if (DAT_GameSynchronyState::ptr->currentGameMode != Game::GM_SOLITARY) {
                     MACRO_CALL_MEMBER(SoundSystem_Func::setSomeSoundTime, this)();
                     DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.field0_0x0 = 1;
                 } else {
@@ -51,7 +51,7 @@ namespace Audio {
                 break;
             case 2:
                 MACRO_CALL_MEMBER(SoundSystem_Func::setSomeSoundTime, this)();
-                if (DAT_GameSynchronyState::ptr->DAT_CurrentGameMode == Game::GM_SOLITARY) {
+                if (DAT_GameSynchronyState::ptr->currentGameMode == Game::GM_SOLITARY) {
                     MACRO_CALL_MEMBER(SoundSystem_Func::setupVolumeAndSoundIDWithMultiplier, this)(
                         (eMusicIDs)(DAT_SoundEffectsHelperData1::ptr->DAT_WinMusicVariation
                             + DE::SHCDE::MUSIC_TUNE_WIN1),

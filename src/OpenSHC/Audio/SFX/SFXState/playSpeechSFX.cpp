@@ -28,8 +28,8 @@ namespace Audio {
             }
 
             char fullSoundPath[64];
-            MACRO_CALL(OS_Func::_sprintf)(fullSoundPath, s_fx_speech_s_005a4d68,
-                DAT_SpeechDefinedData::instance.DAT_SpeechEffectFileArray[speechID]);
+            MACRO_CALL(OS_Func::_sprintf)(
+                fullSoundPath, s_fx_speech_s_005a4d68, DAT_SpeechDefinedData::instance.SpeechEffectFileArray[speechID]);
             if (!MACRO_CALL(OS_Func::__stricmp)(fullSoundPath, DAT_LastSpeechSFXFilename::instance)) {
                 if (MACRO_CALL_MEMBER(MSS::SoundSystem_Func::isSampleOrStreamPlaying, DAT_SoundSystemState::ptr)(
                         MSS::enums::SND_STR_SPEECH_1)

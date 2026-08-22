@@ -12,19 +12,19 @@ namespace AI {
     int AIVState::setupAIVMetadata(int playerID)
     {
         for (int aivID = 1; aivID < 9; ++aivID) {
-            if (this->SEC_AIVS[aivID].playerID != 0) {
+            if (this->aivs[aivID].playerID != 0) {
                 continue;
             }
 
-            this->SEC_AIVS[aivID].playerID = playerID;
+            this->aivs[aivID].playerID = playerID;
 
-            this->SEC_AIVS[aivID].aiType = DAT_GameState::ptr->playerDataArray[playerID].aiType;
+            this->aivs[aivID].aiType = DAT_GameState::ptr->playerDataArray[playerID].aiType;
 
-            this->SEC_AIVS[aivID].currentStepGoal = 0;
-            this->SEC_AIVS[aivID].aivPoorCounter = 0;
-            this->SEC_AIVS[aivID].aivSubType = 0;
+            this->aivs[aivID].currentStepGoal = 0;
+            this->aivs[aivID].aivPoorCounter = 0;
+            this->aivs[aivID].aivSubType = 0;
 
-            this->SEC_AIVS[aivID].aivPoorLimit_OR_AIC_buildInterval
+            this->aivs[aivID].aivPoorLimit_OR_AIC_buildInterval
                 = MACRO_CALL_MEMBER(AICState_Func::getAIBuildInterval, DAT_AICState::ptr)(playerID);
 
             ++this->aivCount;

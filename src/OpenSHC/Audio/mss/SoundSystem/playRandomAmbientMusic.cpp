@@ -23,26 +23,26 @@ namespace Audio {
         // FUNCTION: STRONGHOLDCRUSADER 0x0047B890
         void SoundSystem::playRandomAmbientMusic()
         {
-            if (DAT_GameSynchronyState::instance.DAT_CurrentGameMode == Game::GM_SOLITARY
+            if (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY
                 && MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()
                 && DAT_GameCore::instance.currentMenuViewType != UI::Enums::MVT_MAP_EDITOR_LANDSCAPING) {
                 if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                            .campgroundBuildingID
+                            .campground.id
                         <= 0
                     || DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                             .lordID
                         <= 0) {
-                    DAT_TroopValueState::instance.attackInfo.field128079_0x469dc = 0;
+                    DAT_TroopValueState::instance.attackInfo.field128058_0x469dc = 0;
                 } else {
-                    if (0 < DAT_TroopValueState::instance.attackInfo.field128080_0x469e0
-                        && DAT_TroopValueState::instance.attackInfo.field128078_0x469d8 == 1) {
-                        DAT_TroopValueState::instance.attackInfo.field128078_0x469d8 = 2;
+                    if (0 < DAT_TroopValueState::instance.attackInfo.field128059_0x469e0
+                        && DAT_TroopValueState::instance.attackInfo.field128057_0x469d8 == 1) {
+                        DAT_TroopValueState::instance.attackInfo.field128057_0x469d8 = 2;
                         /* "the enemy has breached the walls!" */
                         MACRO_CALL_MEMBER(SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
                             s_General_Warning15_wav_005a6ce4);
                     }
-                    if (DAT_TroopValueState::instance.attackInfo.field128079_0x469dc != 0) {
-                        DAT_TroopValueState::instance.attackInfo.field128079_0x469dc = 0;
+                    if (DAT_TroopValueState::instance.attackInfo.field128058_0x469dc != 0) {
+                        DAT_TroopValueState::instance.attackInfo.field128058_0x469dc = 0;
                         if (90000 < timeGetTime()
                                 - DAT_SoundEffectsHelperData1::instance
                                     .DAT_enemyInsideCastleSoundWarningCooldownTimer) {
@@ -92,14 +92,14 @@ namespace Audio {
                     this->someSoundTime_0x158 = timeGetTime();
                     this->mbr_0x3280 = 0;
                 }
-                if (DAT_SFXDefinedData::instance.DAT_SFX_Pointers[this->currentSoundID_0x3278].unknownFlag_0x4) {
+                if (DAT_SFXDefinedData::instance.Pointers[this->currentSoundID_0x3278].unknownFlag_0x4) {
                     MACRO_CALL_MEMBER(SoundSystem_Func::playOrSetupMusicUnk, this)(
-                        DAT_SFXDefinedData::instance.DAT_SFX_Pointers[this->currentSoundID_0x3278].musicFile,
+                        DAT_SFXDefinedData::instance.Pointers[this->currentSoundID_0x3278].musicFile,
                         this->currentSoundIDVolumeUnk_0x327c);
                     this->sec_Section1055_0x3274 = this->currentSoundID_0x3278;
                 } else {
                     MACRO_CALL_MEMBER(SoundSystem_Func::playOrEndMusicUnk, this)(
-                        DAT_SFXDefinedData::instance.DAT_SFX_Pointers[this->currentSoundID_0x3278].musicFile,
+                        DAT_SFXDefinedData::instance.Pointers[this->currentSoundID_0x3278].musicFile,
                         this->currentSoundIDVolumeUnk_0x327c);
                     this->sec_Section1055_0x3274 = this->currentSoundID_0x3278;
                     this->currentSoundID_0x3278 = 0;
@@ -110,8 +110,8 @@ namespace Audio {
                     || (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_SCENARIO_DESCRIPTION
                         && DAT_GameCore::instance.field25_0x64 != 0))
                 && DAT_GameCore::instance.gameMode_2 != Game::GM_CRUSADER_TUTORIAL
-                && DAT_GameSynchronyState::instance.DAT_CurrentGameMode == Game::GM_SOLITARY) {
-                if (DAT_TroopValueState::instance.attackInfo.field105458_0x25b00 != 0
+                && DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY) {
+                if (DAT_TroopValueState::instance.attackInfo.field105440_0x25b00 != 0
                     && 0 < DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                             .totalEnemyUnitsCount) {
                     if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.field7_0x1c) {
@@ -119,7 +119,7 @@ namespace Audio {
                     } else {
                         MACRO_CALL_MEMBER(SoundSystem_Func::playRandomMusic02, this)(1);
                     }
-                    DAT_TroopValueState::instance.attackInfo.field105458_0x25b00 = 0;
+                    DAT_TroopValueState::instance.attackInfo.field105440_0x25b00 = 0;
                 }
                 if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.field0_0x0 == 5) {
                     if ((DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
@@ -229,7 +229,7 @@ namespace Audio {
                 if (!MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()) {
                     return;
                 }
-                if (DAT_GameSynchronyState::instance.DAT_CurrentGameMode == Game::GM_SOLITARY) {
+                if (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY) {
                     return;
                 }
 
