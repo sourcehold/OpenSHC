@@ -190,8 +190,15 @@ They might be worth trying in very tricky cases, but they were usually seen as c
 
 ### String Literals
 
-String literals are not resolved. Instead we use a big `string-literals.hpp` file.
-Make always sure to use a reference from this file instead of a string literal.
+String literals are not resolved. Instead we use tow big files, `string-macros.hpp` and `string-literals.hpp`.
+`string-macros.hpp` is the ground truth. However, when ever possible, using the pointers from `string-literals.hpp` is preferred.
+
+There is one known case that requires using only the macros:
+Only literals can by split up into multiple parts and be moved into registers to copy a string, for example via "strcpy".
+In this case, use the macros for the strings and **DO NOT** include `string-literals.hpp`, since this might cause different behavior.
+Should a mixture of pointers and macros be required, because the macro to not produce the fitting structure, still only use the macros from `string-macros.hpp`. Create a string pointer in the cpp file and use this for the pointer.
+
+Make always sure to use a reference from this files instead of a direct string literal.
 
 ### Blocks and Scopes
 
@@ -291,3 +298,27 @@ A prominent example are `malloc` and `free`, where it is simply needed to use th
 since the memory management in the std library is rather complex.
 
 For other std functions, mostly the math functions, we decided to just use the std library directly.
+
+### Copy Elision and Return Value Optimization
+
+The compiler may use copy elision and return value optimization.
+
+The return value optimization may appear if a function returns an object, but instead of putting the whole object on the stack, the function receives a hidden pointer to memory from the caller. This memory is then initialized and the pointer to it is also return.  
+The actual function signature will only have the object as value return.
+
+Example in Ghidra:
+```cpp
+std::string* paths_getDocumentsFolderString(std::string* out, bool param_2);
+```
+
+Actual signature:
+```cpp
+std::string paths_getDocumentsFolderString(bool param_2);
+```
+
+This structure can be reproduced. However, this can not be said about the resulting Copy Elision.  
+If the value is assigned to another object, the compiler tries to avoid creating a copy.
+
+**This only works if the function is called directly. Any form of indirection via pointer or resolver will not optimize. This is a fundamental limitation of the MSVC2005 compiler.**
+
+As a result, such cases do not use the resolver. The limitation through this is accepted, although, it should be noted in the status entry for the caller.
