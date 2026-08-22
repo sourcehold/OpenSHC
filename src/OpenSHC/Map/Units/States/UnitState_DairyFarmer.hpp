@@ -14,13 +14,13 @@ namespace Map {
         namespace States {
             typedef enum UnitState_DairyFarmer {
 
-                WAITING_0 = 0, // 0x00000000
-                WAITING_1 = 1, // 0x00000001
-                GOING_TO_WORKPLACE = 2, // 0x00000002
-                WORKING = 3, // 0x00000003
-                AWAIT_STORE_SPACE = 4, // 0x00000004
-                TAKING_GOODS_TO_STORE = 5, // 0x00000005
-                ATTACKING = 106 // 0x0000006A
+                USDF_WAITING_0 = 0, // 0x00000000
+                USDF_WAITING_1 = 1, // 0x00000001
+                USDF_GOING_TO_WORKPLACE = 2, // 0x00000002
+                USDF_WORKING = 3, // 0x00000003
+                USDF_AWAIT_STORE_SPACE = 4, // 0x00000004
+                USDF_TAKING_GOODS_TO_STORE = 5, // 0x00000005
+                USDF_ATTACKING = 106 // 0x0000006A
 
             } UnitState_DairyFarmer;
 

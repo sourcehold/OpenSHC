@@ -14,18 +14,18 @@ namespace Map {
         namespace States {
             typedef enum UnitState_WheatFarmer {
 
-                WFSE_WAITING_0 = 0, // 0x00000000
-                WFSE_WAITING_1 = 1, // 0x00000001
-                WFSE_GOING_TO_WORKPLACE = 2, // 0x00000002
-                WFSE_WORKING_3 = 3, // 0x00000003
-                WFSE_WORKING_4 = 4, // 0x00000004
-                WFSE_WORKING_5 = 5, // 0x00000005
-                WFSE_WORKING_6 = 6, // 0x00000006
-                WFSE_WORKING_7 = 7, // 0x00000007
-                WFSE_WORKING_8 = 8, // 0x00000008
-                WFSE_AWAITING_STORE_SPACE = 9, // 0x00000009
-                WFSE_TAKING_GOODS_TO_STORE = 10, // 0x0000000A
-                WFSE_ATTACKING = 106 // 0x0000006A
+                USWF_WAITING_0 = 0, // 0x00000000
+                USWF_WAITING_1 = 1, // 0x00000001
+                USWF_GOING_TO_WORKPLACE = 2, // 0x00000002
+                USWF_WORKING_3 = 3, // 0x00000003
+                USWF_WORKING_4 = 4, // 0x00000004
+                USWF_WORKING_5 = 5, // 0x00000005
+                USWF_WORKING_6 = 6, // 0x00000006
+                USWF_WORKING_7 = 7, // 0x00000007
+                USWF_WORKING_8 = 8, // 0x00000008
+                USWF_AWAITING_STORE_SPACE = 9, // 0x00000009
+                USWF_TAKING_GOODS_TO_STORE = 10, // 0x0000000A
+                USWF_ATTACKING = 106 // 0x0000006A
 
             } UnitState_WheatFarmer;
 

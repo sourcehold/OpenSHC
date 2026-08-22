@@ -14,14 +14,14 @@ namespace Map {
         namespace States {
             typedef enum UnitState_QuarryWorker {
 
-                WORKING_0 = 0, // 0x00000000
-                WAITING_1 = 1, // 0x00000001
-                AWAITING_STORE_SPACE = 2, // 0x00000002
-                TAKING_GOODS_TO_STORE = 3, // 0x00000003
-                GOING_TO_WORKPLACE = 4, // 0x00000004
-                RESTING = 5, // 0x00000005
-                WAITING_6 = 6, // 0x00000006
-                ATTACKING = 106 // 0x0000006A
+                USQW_WORKING_0 = 0, // 0x00000000
+                USQW_WAITING_1 = 1, // 0x00000001
+                USQW_AWAITING_STORE_SPACE = 2, // 0x00000002
+                USQW_TAKING_GOODS_TO_STORE = 3, // 0x00000003
+                USQW_GOING_TO_WORKPLACE = 4, // 0x00000004
+                USQW_RESTING = 5, // 0x00000005
+                USQW_WAITING_6 = 6, // 0x00000006
+                USQW_ATTACKING = 106 // 0x0000006A
 
             } UnitState_QuarryWorker;
 
