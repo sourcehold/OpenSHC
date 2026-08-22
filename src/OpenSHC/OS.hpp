@@ -93,7 +93,7 @@ namespace OS {
 
     int __cdecl _ucrt_lseek(int fileDescriptor, long lDistanceToMove, DWORD moveMethod);
 
-    int __cdecl __strnicmp(char* _Str1, char* _Str2, size_t _MaxCount);
+    int __cdecl __strnicmp(char const* _Str1, char const* _Str2, size_t _MaxCount);
 
     void __cdecl _exit(int _Code);
 

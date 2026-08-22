@@ -159,7 +159,7 @@ namespace OS_Func {
         REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x0058277E, &OpenSHC::OS::_ucrt_lseek)
     _ucrt_lseek;
 
-    MACRO_FUNCTION_RESOLVER(int(__cdecl*)(char* _Str1, char* _Str2, size_t _MaxCount), REIMPLEMENTED_CRT,
+    MACRO_FUNCTION_RESOLVER(int(__cdecl*)(char const* _Str1, char const* _Str2, size_t _MaxCount), REIMPLEMENTED_CRT,
         Address::SHC_3BB0A8C1_0x005835BB, &OpenSHC::OS::__strnicmp)
     __strnicmp;
 
