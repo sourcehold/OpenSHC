@@ -7,11 +7,8 @@ namespace Rendering {
         // FUNCTION: STRONGHOLDCRUSADER 0x00408EB0
         void BinkControlClass::stopAllBinkPlayback()
         {
-            int binkObjIndex = 0;
-            do {
+            for (int binkObjIndex = 0; binkObjIndex < 2; binkObjIndex++)
                 MACRO_CALL_MEMBER(BinkControlClass_Func::stopBinkPlayback, this)(binkObjIndex);
-                binkObjIndex = binkObjIndex + 1;
-            } while (binkObjIndex < 2);
         }
 
     } // namespace Bink
