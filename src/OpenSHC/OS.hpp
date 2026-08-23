@@ -15,7 +15,6 @@
 #include "fcntl.h"
 #include "guiddef.h"
 #include "mbstring.h"
-#include "mtdll.h"
 #include "stdio.h"
 #include "sys/stat.h"
 #include "time.h"
@@ -80,6 +79,8 @@ namespace OS {
 
     int __cdecl _ucrt_open(char* _Filename, int _OpenFlag, int _PMode);
 
+    void __cdecl _srand(ulong param_1);
+
     int __cdecl _rand();
 
     char* __cdecl __strlwr(char* string);
@@ -97,8 +98,6 @@ namespace OS {
     int __cdecl __strnicmp(char const* _Str1, char const* _Str2, size_t _MaxCount);
 
     void __cdecl _exit(int _Code);
-
-    _ptiddata __cdecl __getptd();
 
 } // namespace OS
 } // namespace OpenSHC

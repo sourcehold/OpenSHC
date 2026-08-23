@@ -75242,8 +75242,8 @@ enum {
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x005816C3 = 0x005816C3,
-    // label: SetRNGSeed
-    // location: OpenSHC/Random
+    // label: _srand
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x005816EE = 0x005816EE,
     // label: _rand
@@ -76527,7 +76527,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0058B0AC = 0x0058B0AC,
     // label: __getptd
-    // location: OpenSHC/OS
+    // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058B123 = 0x0058B123,
     // label: FUN_0058b13b
