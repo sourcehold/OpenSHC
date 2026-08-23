@@ -24229,9 +24229,9 @@ SHC_3BB0A8C1_0x00495A20 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00495A24 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00495A30 | 100.0% | Reimplemented, used stack struct trick
+SHC_3BB0A8C1_0x00495A30 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00496400 | 0.0% | Pending
+SHC_3BB0A8C1_0x00496400 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004968A0 | 0.0% | Pending
 
