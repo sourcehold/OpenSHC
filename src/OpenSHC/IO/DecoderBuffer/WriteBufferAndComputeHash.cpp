@@ -9,7 +9,7 @@ namespace IO {
     namespace DecoderBuffer {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0046D300
-        void __cdecl WriteBufferAndComputeHash(char* buf, unsigned int* size, void* param)
+        void WriteBufferAndComputeHash(char* buf, unsigned int* size, void* param)
         {
             uint bytesToWrite = *size;
             BufferHelper* bufferHelper = (BufferHelper*)param;

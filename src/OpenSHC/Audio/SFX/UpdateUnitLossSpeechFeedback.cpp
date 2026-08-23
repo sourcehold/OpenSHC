@@ -22,7 +22,7 @@ namespace Audio {
     namespace SFX {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0044B840
-        void __stdcall UpdateUnitLossSpeechFeedback()
+        void UpdateUnitLossSpeechFeedback()
         {
             if (DAT_GameCore::instance.currentMenuViewType != UI::Enums::MVT_BUILD_MENU) {
                 return;
@@ -180,7 +180,7 @@ namespace Audio {
         }
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0044AAB0
-        int __cdecl UpdateUnitLossSpeechFeedback_RelativeValueForGenie(int larger, int smaller)
+        int UpdateUnitLossSpeechFeedback_RelativeValueForGenie(int larger, int smaller)
         {
             if (larger < 1) {
                 larger = 1;

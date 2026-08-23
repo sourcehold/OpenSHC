@@ -6,6 +6,6 @@ namespace OpenSHC {
 namespace Input {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004BC620
-    undefined4 __cdecl OpenSHC::Input::GetCurrentTutorialStep(void) { return DAT_TutorialCurrentStep::instance; }
+    undefined4 OpenSHC::Input::GetCurrentTutorialStep(void) { return DAT_TutorialCurrentStep::instance; }
 }
 }
