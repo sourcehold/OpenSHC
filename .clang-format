@@ -29,4 +29,5 @@ IncludeCategories:
   - Regex:           .*
     Priority:        3
     SortPriority:    5
+MaxEmptyLinesToKeep: 1
 ...
