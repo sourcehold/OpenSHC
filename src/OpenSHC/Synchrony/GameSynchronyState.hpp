@@ -396,7 +396,7 @@ namespace Synchrony {
 
         int compressOrCreateLengthPrefixedPacketUnk(int size, char* src, void* dst);
 
-        void decompressTooLongPacketData(void* source, void* destination);
+        void decompressTooLongPacketData(byte* source, byte* destination);
 
         int countActiveHumanPlayers();
 

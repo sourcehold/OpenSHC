@@ -23494,7 +23494,7 @@ enum {
     SHC_3BB0A8C1_0x0046CEAC = 0x0046CEAC,
     // type: /undefined *32
     SHC_3BB0A8C1_0x0046CEB0 = 0x0046CEB0,
-    // label: Cosntructor_Stopwatch
+    // label: Constructor_Stopwatch
     // location: OpenSHC/Util/Timing/Stopwatch
     // type: function
     SHC_3BB0A8C1_0x0046CEC0 = 0x0046CEC0,
@@ -52345,7 +52345,7 @@ enum {
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x00520F70 = 0x00520F70,
-    // label: constructTribesState
+    // label: Constructor_TribesState
     // location: OpenSHC/Map/Units/TribesState
     // type: function
     SHC_3BB0A8C1_0x00521180 = 0x00521180,
@@ -57705,7 +57705,7 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536A60 = 0x00536A60,
-    // label: queueStopCommand
+    // label: queueEscapeCommand
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00536C70 = 0x00536C70,

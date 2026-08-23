@@ -356,7 +356,7 @@ namespace Map {
 
             int selectionContainsCombatUnit(uint unitID);
 
-            void queueStopCommand();
+            void queueEscapeCommand();
 
             void queueUnitTypeCommand(undefined4 unitType);
 

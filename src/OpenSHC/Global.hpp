@@ -17,7 +17,7 @@ namespace Global {
 
     using OpenSHC::Rendering::Enums::DirectDrawStatus;
 
-    void __cdecl PrintToDestination(wchar_t* destination, wchar_t* format, va_list args);
+    void __cdecl PrintToDestination(wchar_t* destination, wchar_t* format, ...);
 
     void __cdecl DoNothing();
 

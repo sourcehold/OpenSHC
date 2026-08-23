@@ -18,7 +18,7 @@ namespace Global_Func {
 
     using OpenSHC::Rendering::Enums::DirectDrawStatus;
 
-    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(wchar_t* destination, wchar_t* format, va_list args), false,
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(wchar_t* destination, wchar_t* format, ...), false,
         Address::SHC_3BB0A8C1_0x0045D060, &OpenSHC::Global::PrintToDestination)
     PrintToDestination;
 

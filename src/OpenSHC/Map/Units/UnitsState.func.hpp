@@ -528,8 +528,8 @@ namespace Map {
             selectionContainsCombatUnit;
 
             MACRO_FUNCTION_RESOLVER(
-                void (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00536C70, &UnitsState::queueStopCommand)
-            queueStopCommand;
+                void (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00536C70, &UnitsState::queueEscapeCommand)
+            queueEscapeCommand;
 
             MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(undefined4), false, Address::SHC_3BB0A8C1_0x00536C90,
                 &UnitsState::queueUnitTypeCommand)

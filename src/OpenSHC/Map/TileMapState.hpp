@@ -245,11 +245,10 @@ namespace Map {
         TileMapState* Constructor_TileMapState();
 
         void processEntityDamageToBuildingCollateralThunk(
-            undefined4 tile, undefined4 x_2, undefined4 y_2, undefined4 damage, undefined4 playerID, undefined4 unused);
+            int tile, uint x_2, uint y_2, int damage, int playerID, undefined4 unused);
 
-        BOOLEnum processDamageToBuildingThunk(undefined4 targetedTile, undefined4 targetedTileX,
-            undefined4 targetedTileY, undefined4 damage, undefined4 param_5, undefined4 playerID,
-            BOOLEnum aiBuildDelayRelated);
+        BOOLEnum processDamageToBuildingThunk(int targetedTile, uint targetedTileX, uint targetedTileY, int damage,
+            int param_5, int playerID, BOOLEnum aiBuildDelayRelated);
 
         void setChangedLayerToThreeAndMapping0x40x40();
 

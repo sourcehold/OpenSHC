@@ -8,16 +8,16 @@
 
 #pragma once
 
+#include "OpenSHC/UI/Callbacks/MenuItemActionHandlerUnion.hpp"
+#include "OpenSHC/UI/Callbacks/MenuItemRenderFunctionUnion.hpp"
 #include "OpenSHC/UI/Enums/MenuItemRenderFunctionTypeInt.hpp"
 #include "OpenSHC/UI/Enums/MenuItemTypeInt.hpp"
 #include "OpenSHC/UI/Enums/UserControlIDShort.hpp"
 #include "OpenSHC/UI/FwdMenuMenuItem.hpp"
 #include "OpenSHC/UI/Menu.hpp"
-#include "OpenSHC/UI/MenuItemActionHandler.hpp"
 #include "OpenSHC/UI/MenuItemCallbackParameter.hpp"
 #include "OpenSHC/UI/MenuItemFirstItemTypeData.hpp"
 #include "OpenSHC/UI/MenuItemPosition.hpp"
-#include "OpenSHC/UI/MenuItemRenderFunction.hpp"
 #include "OpenSHC/UI/MenuItemSecondItemTypeData.hpp"
 #include "OpenSHC/UI/UnknownMenuSubStruct.hpp"
 
@@ -25,13 +25,13 @@ namespace OpenSHC {
 namespace UI {
 
     using OpenSHC::UI::Menu;
-    using OpenSHC::UI::MenuItemActionHandler;
     using OpenSHC::UI::MenuItemCallbackParameter;
     using OpenSHC::UI::MenuItemFirstItemTypeData;
     using OpenSHC::UI::MenuItemPosition;
-    using OpenSHC::UI::MenuItemRenderFunction;
     using OpenSHC::UI::MenuItemSecondItemTypeData;
     using OpenSHC::UI::UnknownMenuSubStruct;
+    using OpenSHC::UI::Callbacks::MenuItemActionHandlerUnion;
+    using OpenSHC::UI::Callbacks::MenuItemRenderFunctionUnion;
     using OpenSHC::UI::Enums::MenuItemRenderFunctionTypeInt;
     using OpenSHC::UI::Enums::MenuItemTypeInt;
     using OpenSHC::UI::Enums::UserControlIDShort;
@@ -45,9 +45,9 @@ namespace UI {
         MenuItemPosition position; // 0x00000004 length: 8
         int itemWidth; // 0x0000000C length: 4
         int itemHeight; // 0x00000010 length: 4
-        MenuItemActionHandler* menuItemActionHandler; // 0x00000014 length: 4
+        MenuItemActionHandlerUnion menuItemActionHandler; // 0x00000014 length: 4
         MenuItemCallbackParameter callbackParameter; // 0x00000018 length: 4
-        MenuItemRenderFunction* menuItemRenderFunction; // 0x0000001C length: 4
+        MenuItemRenderFunctionUnion menuItemRenderFunction; // 0x0000001C length: 4
         MenuItemFirstItemTypeData firstItemTypeData; // 0x00000020 length: 4
         MenuItemRenderFunctionTypeInt menuItemRenderFunctionType; // 0x00000024 length: 4
         int testNotEqualZero; // 0x00000028 length: 4

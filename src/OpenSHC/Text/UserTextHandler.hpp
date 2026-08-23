@@ -44,7 +44,7 @@ namespace Text {
 
         void FUN_004694a0();
 
-        void resetToTextIndex(undefined4 textIndex);
+        void resetToTextIndex(int textIndex);
 
         char* getCurrentText();
 
