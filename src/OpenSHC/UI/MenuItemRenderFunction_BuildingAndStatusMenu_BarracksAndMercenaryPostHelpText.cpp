@@ -5,7 +5,7 @@
 namespace OpenSHC {
 
 // FUNCTION: STRONGHOLDCRUSADER 0x0043A8C0
-void UI::MenuItemRenderFunction_BuildingAndStatusMenu_BarracksAndMercenaryPostHelpText(int param_1, va_list args)
+void UI::MenuItemRenderFunction_BuildingAndStatusMenu_BarracksAndMercenaryPostHelpText(int param_1, ...)
 {
     if (DAT_BuildingsState::instance.field24_0x18e04c != 0) {
         MACRO_CALL(OpenSHC::UI_Func::

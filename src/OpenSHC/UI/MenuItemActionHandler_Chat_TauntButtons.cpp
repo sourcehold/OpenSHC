@@ -9,7 +9,7 @@ namespace OpenSHC {
 using OpenSHC::Commands::GameCommandType;
 
 // FUNCTION: STRONGHOLDCRUSADER 0x0048F850
-void UI::MenuItemActionHandler_Chat_TauntButtons(int param_1, va_list args)
+void UI::MenuItemActionHandler_Chat_TauntButtons(int param_1, ...)
 {
     DAT_GameSynchronyState::instance.DAT_ChatTauntOrMessage = param_1;
     MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(

@@ -5,7 +5,7 @@
 namespace OpenSHC {
 
 // FUNCTION: STRONGHOLDCRUSADER 0x0047D3F0
-void UI::MenuItemActionHandler_FindingNetworkSessions_TableRows(int param_1, va_list args)
+void UI::MenuItemActionHandler_FindingNetworkSessions_TableRows(int param_1, ...)
 
 {
     if (DAT_GameSynchronyState::instance.scrollBarItemOffset + param_1
