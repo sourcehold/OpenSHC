@@ -14,9 +14,9 @@ namespace UI {
 
         int __cdecl GetPlayerAtRank(int rankingPosition);
 
-        int __stdcall IfAiGreatestLordGetAiType();
+        int __cdecl IfAiGreatestLordGetAiType();
 
-        int __stdcall GetLowestRankedAlivePlayer();
+        int __cdecl GetLowestRankedAlivePlayer();
 
         int __cdecl ComputeSkMasterScore(int playerID);
 

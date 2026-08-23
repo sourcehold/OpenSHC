@@ -31,189 +31,189 @@ namespace UI {
 
         void __cdecl RenderBuildingMenu_RecruitingBuilding();
 
-        void __stdcall RenderBuildingMenu_Keep();
+        void __cdecl RenderBuildingMenu_Keep();
 
-        void __stdcall RenderBuildingMenu_Inn();
+        void __cdecl RenderBuildingMenu_Inn();
 
         void __cdecl RenderBuildingMenu_Granary();
 
-        void __stdcall RenderBuildingMenu_Fletcher();
+        void __cdecl RenderBuildingMenu_Fletcher();
 
-        void __stdcall RenderBuildingMenu_Blacksmith();
+        void __cdecl RenderBuildingMenu_Blacksmith();
 
-        void __stdcall RenderBuildingMenu_Poleturner();
+        void __cdecl RenderBuildingMenu_Poleturner();
 
-        void __stdcall RenderBuildingMenu_Armourer();
+        void __cdecl RenderBuildingMenu_Armourer();
 
-        void __stdcall RenderBuildingMenu_Tanner();
+        void __cdecl RenderBuildingMenu_Tanner();
 
-        void __stdcall RenderBuildingMenu_Bakery();
+        void __cdecl RenderBuildingMenu_Bakery();
 
-        void __stdcall RenderBuildingMenu_Brewery();
+        void __cdecl RenderBuildingMenu_Brewery();
 
-        void __stdcall RenderBuildingMenu_Outpost();
+        void __cdecl RenderBuildingMenu_Outpost();
 
         void __cdecl RenderBuildingMenu_House();
 
-        void __stdcall RenderBuildingMenu_WoodcutterShut();
+        void __cdecl RenderBuildingMenu_WoodcutterShut();
 
-        void __stdcall RenderBuildingMenu_OxThether();
+        void __cdecl RenderBuildingMenu_OxThether();
 
-        void __stdcall RenderBuildingMenu_Quarry();
+        void __cdecl RenderBuildingMenu_Quarry();
 
-        void __stdcall RenderBuildingMenu_Ironmine();
+        void __cdecl RenderBuildingMenu_Ironmine();
 
-        void __stdcall RenderBuildingMenu_PitchRig();
+        void __cdecl RenderBuildingMenu_PitchRig();
 
-        void __stdcall RenderBuildingMenu_HuntersHut();
+        void __cdecl RenderBuildingMenu_HuntersHut();
 
-        void __stdcall RenderBuildingMenu_Apothecary();
+        void __cdecl RenderBuildingMenu_Apothecary();
 
-        void __stdcall RenderBuildingMenu_Wheatfarm();
+        void __cdecl RenderBuildingMenu_Wheatfarm();
 
-        void __stdcall RenderBuildingMenu_Hopfarm();
+        void __cdecl RenderBuildingMenu_Hopfarm();
 
-        void __stdcall RenderBuildingMenu_Applefarm();
+        void __cdecl RenderBuildingMenu_Applefarm();
 
-        void __stdcall RenderBuildingMenu_Diaryfarm();
+        void __cdecl RenderBuildingMenu_Diaryfarm();
 
-        void __stdcall RenderBuildingMenu_Mill();
+        void __cdecl RenderBuildingMenu_Mill();
 
-        void __stdcall RenderBuildingMenu_ChapelAndChurch();
+        void __cdecl RenderBuildingMenu_ChapelAndChurch();
 
-        void __stdcall RenderBuildingMenu_Stockpile();
+        void __cdecl RenderBuildingMenu_Stockpile();
 
-        void __stdcall RenderBuildingMenu_Armory();
+        void __cdecl RenderBuildingMenu_Armory();
 
-        void __stdcall RenderBuildingMenu_Quarry_Stonepile();
+        void __cdecl RenderBuildingMenu_Quarry_Stonepile();
 
-        void __stdcall RenderBuildingMenu_Engineersguild();
+        void __cdecl RenderBuildingMenu_Engineersguild();
 
-        void __stdcall RenderBuildingMenu_Tunnelersguild();
+        void __cdecl RenderBuildingMenu_Tunnelersguild();
 
-        void __stdcall RenderBuildingMenu_Cathedral();
+        void __cdecl RenderBuildingMenu_Cathedral();
 
         void __cdecl RenderPeasantMenu_CurrentActionUnk(int unitID, int xPos, int yPos);
 
-        void __stdcall RenderBuildingMenu_Marketplace();
+        void __cdecl RenderBuildingMenu_Marketplace();
 
-        void __stdcall RenderBuildingMenu_Marketplace_Stonks();
+        void __cdecl RenderBuildingMenu_Marketplace_Stonks();
 
-        void __stdcall RenderBuildingMenu_Marketplace_Food();
+        void __cdecl RenderBuildingMenu_Marketplace_Food();
 
-        void __stdcall RenderBuildingMenu_Marketplace_Resource();
+        void __cdecl RenderBuildingMenu_Marketplace_Resource();
 
-        void __stdcall RenderBuildingMenu_Marketplace_Weapons();
+        void __cdecl RenderBuildingMenu_Marketplace_Weapons();
 
-        void __stdcall RenderBuildingMenu_Marketplace_Trade();
+        void __cdecl RenderBuildingMenu_Marketplace_Trade();
 
-        void __stdcall RenderBuildingMenu_Well();
+        void __cdecl RenderBuildingMenu_Well();
 
-        void __stdcall RenderBuildingMenu_WaterPot();
+        void __cdecl RenderBuildingMenu_WaterPot();
 
-        void __stdcall RenderBuildingMenu_Oilsmelter();
+        void __cdecl RenderBuildingMenu_Oilsmelter();
 
-        void __stdcall RenderBuildingMenu_Stables();
+        void __cdecl RenderBuildingMenu_Stables();
 
-        void __stdcall RenderBuildingMenu_Drawbridge();
+        void __cdecl RenderBuildingMenu_Drawbridge();
 
-        void __stdcall RenderBuildingMenu_Unused_PosternGate();
+        void __cdecl RenderBuildingMenu_Unused_PosternGate();
 
-        void __stdcall RenderBuildingMenu_TunnelEntrance();
+        void __cdecl RenderBuildingMenu_TunnelEntrance();
 
-        void __stdcall RenderBuildingMenu_Signpost();
+        void __cdecl RenderBuildingMenu_Signpost();
 
-        void __stdcall RenderBuildingMenu_KillingPit();
+        void __cdecl RenderBuildingMenu_KillingPit();
 
-        void __stdcall RenderBuildingMenu_Campfire();
+        void __cdecl RenderBuildingMenu_Campfire();
 
-        void __stdcall RenderBuildingMenu_Gallows();
+        void __cdecl RenderBuildingMenu_Gallows();
 
-        void __stdcall RenderBuildingMenu_Stocks();
+        void __cdecl RenderBuildingMenu_Stocks();
 
-        void __stdcall RenderBuildingMenu_Unused_Witchhoist();
+        void __cdecl RenderBuildingMenu_Unused_Witchhoist();
 
-        void __stdcall RenderBuildingMenu_Maypole();
+        void __cdecl RenderBuildingMenu_Maypole();
 
-        void __stdcall RenderBuildingMenu_Gardens();
+        void __cdecl RenderBuildingMenu_Gardens();
 
-        void __stdcall RenderBuildingMenu_TrainingGrounds();
+        void __cdecl RenderBuildingMenu_TrainingGrounds();
 
-        void __stdcall RenderBuildingMenu_CessPit();
+        void __cdecl RenderBuildingMenu_CessPit();
 
-        void __stdcall RenderBuildingMenu_BurningStake();
+        void __cdecl RenderBuildingMenu_BurningStake();
 
-        void __stdcall RenderBuildingMenu_Gibbet();
+        void __cdecl RenderBuildingMenu_Gibbet();
 
-        void __stdcall RenderBuildingMenu_Dungeon();
+        void __cdecl RenderBuildingMenu_Dungeon();
 
-        void __stdcall RenderBuildingMenu_StretchingRack();
+        void __cdecl RenderBuildingMenu_StretchingRack();
 
-        void __stdcall RenderBuildingMenu_Unused_FloggingRack();
+        void __cdecl RenderBuildingMenu_Unused_FloggingRack();
 
-        void __stdcall RenderBuildingMenu_ChoppingBlock();
+        void __cdecl RenderBuildingMenu_ChoppingBlock();
 
-        void __stdcall RenderBuildingMenu_DunkingStool();
+        void __cdecl RenderBuildingMenu_DunkingStool();
 
-        void __stdcall RenderBuildingMenu_DogCage();
+        void __cdecl RenderBuildingMenu_DogCage();
 
-        void __stdcall RenderBuildingMenu_Statue();
+        void __cdecl RenderBuildingMenu_Statue();
 
-        void __stdcall RenderBuildingMenu_Shrine();
+        void __cdecl RenderBuildingMenu_Shrine();
 
-        void __stdcall RenderBuildingMenu_Unused_BeeHive();
+        void __cdecl RenderBuildingMenu_Unused_BeeHive();
 
-        void __stdcall RenderBuildingMenu_DancingBear();
+        void __cdecl RenderBuildingMenu_DancingBear();
 
-        void __stdcall RenderBuildingMenu_Unused_Pond();
+        void __cdecl RenderBuildingMenu_Unused_Pond();
 
-        void __stdcall RenderBuildingMenu_Unused_BearCave();
+        void __cdecl RenderBuildingMenu_Unused_BearCave();
 
-        void __stdcall RenderBuildingMenu_Siegetent_Catapult();
+        void __cdecl RenderBuildingMenu_Siegetent_Catapult();
 
-        void __stdcall RenderBuildingMenu_Siegetent_Fireballista();
+        void __cdecl RenderBuildingMenu_Siegetent_Fireballista();
 
-        void __stdcall RenderBuildingMenu_Siegetent_Trebuchet();
+        void __cdecl RenderBuildingMenu_Siegetent_Trebuchet();
 
-        void __stdcall RenderBuildingMenu_Siegetent_Siegetower();
+        void __cdecl RenderBuildingMenu_Siegetent_Siegetower();
 
-        void __stdcall RenderBuildingMenu_Siegetent_BatteringRam();
+        void __cdecl RenderBuildingMenu_Siegetent_BatteringRam();
 
-        void __stdcall RenderBuildingMenu_Siegetent_Shield();
+        void __cdecl RenderBuildingMenu_Siegetent_Shield();
 
-        void __stdcall RenderBuildingMenu_RenderTowerAndGateHealth();
+        void __cdecl RenderBuildingMenu_RenderTowerAndGateHealth();
 
-        void __stdcall RenderStatusMenu_Popularity();
+        void __cdecl RenderStatusMenu_Popularity();
 
-        void __stdcall RenderStatusMenu_FearFactor();
+        void __cdecl RenderStatusMenu_FearFactor();
 
-        void __stdcall RenderStatusMenu_Population();
+        void __cdecl RenderStatusMenu_Population();
 
-        void __stdcall RenderStatusMenu_Food();
+        void __cdecl RenderStatusMenu_Food();
 
-        void __stdcall RenderStatusMenu_Resources();
+        void __cdecl RenderStatusMenu_Resources();
 
-        void __stdcall RenderStatusMenu_Religion();
+        void __cdecl RenderStatusMenu_Religion();
 
-        void __stdcall RenderStatusMenu_Weapons();
+        void __cdecl RenderStatusMenu_Weapons();
 
-        void __stdcall RenderStatusMenu_Chimp();
+        void __cdecl RenderStatusMenu_Chimp();
 
-        void __stdcall RenderBuildingMenu_Gatehouse();
+        void __cdecl RenderBuildingMenu_Gatehouse();
 
-        void __stdcall RenderBuildingMenu_Tower();
+        void __cdecl RenderBuildingMenu_Tower();
 
-        void __stdcall RenderStatusMenu_Overview();
+        void __cdecl RenderStatusMenu_Overview();
 
-        void __stdcall RenderStatusMenu_Army();
+        void __cdecl RenderStatusMenu_Army();
 
-        void __stdcall InitBlendFilterArraysUnk();
+        void __cdecl InitBlendFilterArraysUnk();
 
-        void __stdcall RenderTerrainTilesCenterPiece();
+        void __cdecl RenderTerrainTilesCenterPiece();
 
-        void __stdcall RenderCurrentNotActiveButtonWithPossibleAlphaTexOnCurrentSurfaceUnk();
+        void __cdecl RenderCurrentNotActiveButtonWithPossibleAlphaTexOnCurrentSurfaceUnk();
 
-        void __stdcall RenderCurrentButtonOnScreenMenu();
+        void __cdecl RenderCurrentButtonOnScreenMenu();
 
         void __cdecl RenderCurrentButtonToScreenMenuWithBlendingUnk(int blendStrengthUnk);
 
@@ -223,7 +223,7 @@ namespace UI {
 
         void __cdecl TogglePlayerPingDisplayElementUnk(DisplayElementID displayElementID, uint toggleValue);
 
-        void __stdcall RenderDisplayElementsUnk();
+        void __cdecl RenderDisplayElementsUnk();
 
         void __cdecl RenderInGameChatDisplayElement(int posX, int posY, DWORD elementState);
 
@@ -270,7 +270,7 @@ namespace UI {
 
         void __cdecl RenderScenarioButtonWithText(int textNumInGroup);
 
-        void __stdcall RenderGreatestLordScreen();
+        void __cdecl RenderGreatestLordScreen();
 
         int __cdecl RenderMissionObjectivesUnk();
 
@@ -278,11 +278,11 @@ namespace UI {
 
         void __cdecl RenderMenuGfxHelper(int gfxIndex, int x, int y, int blendStrength);
 
-        void __stdcall RenderHistoryBookEdgeUnk();
+        void __cdecl RenderHistoryBookEdgeUnk();
 
-        void __stdcall RenderNoViewsFoundWarning();
+        void __cdecl RenderNoViewsFoundWarning();
 
-        void __stdcall RenderCurrentMenuView();
+        void __cdecl RenderCurrentMenuView();
 
     } // namespace Rendering
 } // namespace UI

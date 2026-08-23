@@ -178,7 +178,7 @@ namespace Synchrony {
         ClickInitOrChangeGameIntensityAndBalance;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00483850, &OpenSHC::Synchrony::Commands::SharePlayerName)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00483850, &OpenSHC::Synchrony::Commands::SharePlayerName)
         SharePlayerName;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00483A00,
@@ -305,7 +305,7 @@ namespace Synchrony {
             &OpenSHC::Synchrony::Commands::StartSendingMapFile)
         StartSendingMapFile;
 
-        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00485CC0,
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00485CC0,
             &OpenSHC::Synchrony::Commands::StartReceivingMapFile)
         StartReceivingMapFile;
 

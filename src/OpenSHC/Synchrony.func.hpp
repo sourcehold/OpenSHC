@@ -22,7 +22,7 @@ namespace Synchrony_Func {
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004274F0, &OpenSHC::Synchrony::InitSkirmishLobbyData)
+        void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004274F0, &OpenSHC::Synchrony::InitSkirmishLobbyData)
     InitSkirmishLobbyData;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int playerID), false, Address::SHC_3BB0A8C1_0x00428050,
@@ -34,7 +34,7 @@ namespace Synchrony_Func {
     PutPlayerIntoRandomSlot;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0042A8E0, &OpenSHC::Synchrony::SetAIPlayerNickNames)
+        void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0042A8E0, &OpenSHC::Synchrony::SetAIPlayerNickNames)
     SetAIPlayerNickNames;
 
     MACRO_FUNCTION_RESOLVER(
@@ -64,11 +64,11 @@ namespace Synchrony_Func {
     MemCopyFromParameter;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00495840, &OpenSHC::Synchrony::ProgressBarRelated)
+        void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00495840, &OpenSHC::Synchrony::ProgressBarRelated)
     ProgressBarRelated;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004AEA10, &OpenSHC::Synchrony::syncPlayerGroupArrays)
+        void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004AEA10, &OpenSHC::Synchrony::syncPlayerGroupArrays)
     syncPlayerGroupArrays;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int missionID), false, Address::SHC_3BB0A8C1_0x004C6B20,

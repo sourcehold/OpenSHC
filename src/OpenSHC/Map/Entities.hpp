@@ -40,13 +40,13 @@ namespace Map {
 
         uint __cdecl UpdateEntity_29();
 
-        void __stdcall UpdateEntity_30();
+        void __cdecl UpdateEntity_30();
 
         void __cdecl UpdateEntity_31();
 
         void __cdecl UpdateEntity_32();
 
-        void __stdcall UpdateEntity_40();
+        void __cdecl UpdateEntity_40();
 
         void __cdecl UpdateEntity_41();
 

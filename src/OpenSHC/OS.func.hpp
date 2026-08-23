@@ -15,6 +15,7 @@
 #include "crtdefs.h"
 #include "guiddef.h"
 #include "mbstring.h"
+#include "mtdll.h"
 #include "stdio.h"
 #include "time.h"
 #include "vadefs.h"
@@ -166,6 +167,10 @@ namespace OS_Func {
     MACRO_FUNCTION_RESOLVER(
         void(__cdecl*)(int _Code), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x00583D55, &OpenSHC::OS::_exit)
     _exit;
+
+    MACRO_FUNCTION_RESOLVER(
+        _ptiddata(__cdecl*)(), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x0058B123, &OpenSHC::OS::__getptd)
+    __getptd;
 
 } // namespace OS_Func
 } // namespace OpenSHC

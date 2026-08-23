@@ -303,52 +303,49 @@ namespace Synchrony {
         int unknownPlayerInfoArray_01[9]; // 0x001092D0 length: 36
         int DAT_ReceivedAIVFileAvailabilityPerAIArray[9][20]; // 0x001092F4 length: 720
         SkirmishStatistics finalResults; // 0x001095C4 length: 1912
-        char ipRelatedArray[20]; // 0x00109D3C length: 20
-        char ipRelatedArray2[20]; // 0x00109D50 length: 20
-        char ipRelatedArray3[20]; // 0x00109D64 length: 20
-        char ipRelatedArray4[20]; // 0x00109D78 length: 20
+        char ipRelatedArray[4][20]; // 0x00109D3C length: 80
         int ipArrayIndex; // 0x00109D8C length: 4
         undefined4 DAT_TwoIfNotHost; // 0x00109D90 length: 4
         undefined4 DAT_MapFileReceivingState; // 0x00109D94 length: 4
-        short field285_0x109d98[9]; // 0x00109D98 length: 18
+        short field282_0x109d98[9]; // 0x00109D98 length: 18
         undefined1 padding_0x109daa[2]; // 0x00109DAA length: 2
         int mapSendingFileSize; // 0x00109DAC length: 4
         int mapSendingByteBufferAddress[9]; // 0x00109DB0 length: 36
         FILE* mapSendingFileHandles[9]; // 0x00109DD4 length: 36
         FILE* FILEPTR_ReceivedMapFile; // 0x00109DF8 length: 4
-        int field292_0x109dfc[9]; // 0x00109DFC length: 36
-        int field293_0x109e20[9]; // 0x00109E20 length: 36
+        int field289_0x109dfc[9]; // 0x00109DFC length: 36
+        int field290_0x109e20[9]; // 0x00109E20 length: 36
         byte DAT_RoundTableOrderArray[9]; // 0x00109E44 length: 9
         byte DAT_PlayerGroupArray[9]; // 0x00109E4D length: 9
         byte playerGroupArray2Unk[9]; // 0x00109E56 length: 9
-        byte field297_0x109e5f[9]; // 0x00109E5F length: 9
+        byte field294_0x109e5f[9]; // 0x00109E5F length: 9
         byte playerPositionsArray[8]; // 0x00109E68 length: 8
         undefined4 protocolInvokerPlayerID; // 0x00109E70 length: 4
         undefined4 currentPlayerSlotID; // 0x00109E74 length: 4
         undefined4 DAT_SomePlayerID; // 0x00109E78 length: 4
-        undefined4 field302_0x109e7c; // 0x00109E7C length: 4
-        byte field303_0x109e80[9]; // 0x00109E80 length: 9
+        undefined4 field299_0x109e7c; // 0x00109E7C length: 4
+        byte field300_0x109e80[9]; // 0x00109E80 length: 9
         undefined1 padding_0x109e89[3]; // 0x00109E89 length: 3
-        int field307_0x109e8c; // 0x00109E8C length: 4
+        int field304_0x109e8c; // 0x00109E8C length: 4
         undefined1 padding_0x109e90[4]; // 0x00109E90 length: 4
-        undefined4 field312_0x109e94; // 0x00109E94 length: 4
-        undefined4 field313_0x109e98; // 0x00109E98 length: 4
+        undefined4 field309_0x109e94; // 0x00109E94 length: 4
+        undefined4 field310_0x109e98; // 0x00109E98 length: 4
         undefined4 mapTimeInTicksSinglePlayer; // 0x00109E9C length: 4
-        undefined4 field315_0x109ea0; // 0x00109EA0 length: 4
-        undefined4 field316_0x109ea4; // 0x00109EA4 length: 4
-        undefined4 field317_0x109ea8; // 0x00109EA8 length: 4
-        undefined4 field318_0x109eac; // 0x00109EAC length: 4
-        undefined4 field319_0x109eb0; // 0x00109EB0 length: 4
-        undefined4 field320_0x109eb4; // 0x00109EB4 length: 4
-        undefined4 field321_0x109eb8; // 0x00109EB8 length: 4
-        int field322_0x109ebc; // 0x00109EBC length: 4
-        int field323_0x109ec0; // 0x00109EC0 length: 4
+        undefined4 field312_0x109ea0; // 0x00109EA0 length: 4
+        undefined4 field313_0x109ea4; // 0x00109EA4 length: 4
+        undefined4 field314_0x109ea8; // 0x00109EA8 length: 4
+        undefined4 field315_0x109eac; // 0x00109EAC length: 4
+        undefined4 field316_0x109eb0; // 0x00109EB0 length: 4
+        undefined4 field317_0x109eb4; // 0x00109EB4 length: 4
+        undefined4 field318_0x109eb8; // 0x00109EB8 length: 4
+        int field319_0x109ebc; // 0x00109EBC length: 4
+        int field320_0x109ec0; // 0x00109EC0 length: 4
         undefined4 receivedCommandMapTimeInTicks; // 0x00109EC4 length: 4
         undefined1 padding_0x109ec8[4]; // 0x00109EC8 length: 4
-        int field329_0x109ecc; // 0x00109ECC length: 4
+        int field326_0x109ecc; // 0x00109ECC length: 4
         undefined4 otherTime1; // 0x00109ED0 length: 4
         undefined4 now2; // 0x00109ED4 length: 4
-        dword field332_0x109ed8; // 0x00109ED8 length: 4
+        dword field329_0x109ed8; // 0x00109ED8 length: 4
         undefined4 MBR_GameCommandID; // 0x00109EDC length: 4
         undefined4 DAT_GameCommandArrayIndex; // 0x00109EE0 length: 4
         undefined4 DAT_CommandParameterOffset; // 0x00109EE4 length: 4

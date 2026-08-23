@@ -19,7 +19,7 @@ namespace Text {
             char* (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x004697C0, &UserTextHandler::getCurrentText)
         getCurrentText;
 
-        MACRO_FUNCTION_RESOLVER(int (UserTextHandler::*)(int), false, Address::SHC_3BB0A8C1_0x004697E0,
+        MACRO_FUNCTION_RESOLVER(char* (UserTextHandler::*)(int), false, Address::SHC_3BB0A8C1_0x004697E0,
             &UserTextHandler::getTextArrayPointer)
         getTextArrayPointer;
 

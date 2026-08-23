@@ -1506,7 +1506,7 @@ enum {
     // location: OpenSHC/Map/Entities/EntityState
     // type: function
     SHC_3BB0A8C1_0x00404A10 = 0x00404A10,
-    // label: deleteSeagull
+    // label: DeleteSeagull
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x00404A70 = 0x00404A70,
@@ -19962,15 +19962,15 @@ enum {
     // location: OpenSHC/Game/GameStateStructures
     // type: function
     SHC_3BB0A8C1_0x0045A060 = 0x0045A060,
-    // label: validateLadyAndJesterUnitRefs
+    // label: ValidateLadyAndJesterUnitRefs
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x0045ACC0 = 0x0045ACC0,
-    // label: initPopularityAndRecruitableDefaults
+    // label: InitPopularityAndRecruitableDefaults
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x0045AD10 = 0x0045AD10,
-    // label: resetTeams
+    // label: ResetTeams
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x0045AE00 = 0x0045AE00,
@@ -29806,7 +29806,7 @@ enum {
     // location: OpenSHC/Game/Skirmish
     // type: function
     SHC_3BB0A8C1_0x004AC570 = 0x004AC570,
-    // label: buildEnemyPlayerList
+    // label: BuildEnemyPlayerList
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004AC650 = 0x004AC650,
@@ -34424,7 +34424,7 @@ enum {
     // location: OpenSHC/IO
     // type: function
     SHC_3BB0A8C1_0x004BC5B0 = 0x004BC5B0,
-    // label: initTutorialStepTransition
+    // label: InitTutorialStepTransition
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004BC5F0 = 0x004BC5F0,
@@ -34440,7 +34440,7 @@ enum {
     // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004BC690 = 0x004BC690,
-    // label: resetTutorialActionTrackers
+    // label: ResetTutorialActionTrackers
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004BC6C0 = 0x004BC6C0,
@@ -41030,7 +41030,7 @@ enum {
     SHC_3BB0A8C1_0x004DA200 = 0x004DA200,
     // type: function
     SHC_3BB0A8C1_0x004DA2A0 = 0x004DA2A0,
-    // label: resetCredits
+    // label: ResetCredits
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004DA300 = 0x004DA300,
@@ -76527,7 +76527,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0058B0AC = 0x0058B0AC,
     // label: __getptd
-    // location: HoldStrong_lib
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x0058B123 = 0x0058B123,
     // label: FUN_0058b13b

@@ -9,6 +9,7 @@
 #pragma once
 
 #include "OpenSHC/Game/GameMode2Int.hpp"
+#include "OpenSHC/Game/ScenarioProgress.hpp"
 #include "OpenSHC/Game/TrailTypeInt.hpp"
 #include "OpenSHC/Map/MapLockStateInt.hpp"
 #include "OpenSHC/Map/Navigation/Algorithms/XYPair.hpp"
@@ -26,6 +27,7 @@ namespace OpenSHC {
 namespace Game {
 
     using OpenSHC::Game::GameMode2Int;
+    using OpenSHC::Game::ScenarioProgress;
     using OpenSHC::Game::TrailTypeInt;
     using OpenSHC::Map::MapLockStateInt;
     using OpenSHC::Map::Navigation::Algorithms::XYPair;
@@ -59,30 +61,27 @@ namespace Game {
         BuildMenuTabTypeShort tabTypeSiegeSubset; // 0x00000038 length: 4
         dword historicCampaignNumber; // 0x0000003C length: 4
         int missionNumber1to20; // 0x00000040 length: 4
-        int progressCallToArms; // 0x00000044 length: 4
-        int progressSaladinsConquest; // 0x00000048 length: 4
-        int progressTheKingsCrusade; // 0x0000004C length: 4
-        int progressCrusaderStates; // 0x00000050 length: 4
+        ScenarioProgress scenarioProgress; // 0x00000044 length: 16
         dword furthestMission; // 0x00000054 length: 4
         dword unlockAllHistoricalCampaigns; // 0x00000058 length: 4
         dword unused1; // 0x0000005C length: 4
         dword section1066; // 0x00000060 length: 4
-        dword field25_0x64; // 0x00000064 length: 4
+        dword field22_0x64; // 0x00000064 length: 4
         GameMode2Int gameMode_2; // 0x00000068 length: 4
-        int field27_0x6c; // 0x0000006C length: 4
+        int field24_0x6c; // 0x0000006C length: 4
         dword specialMultiplayerState; // 0x00000070 length: 4
-        dword field29_0x74; // 0x00000074 length: 4
+        dword field26_0x74; // 0x00000074 length: 4
         int mapU4Int1; // 0x00000078 length: 4
         int mapU4Int1_2; // 0x0000007C length: 4
-        dword field32_0x80; // 0x00000080 length: 4
+        dword field29_0x80; // 0x00000080 length: 4
         int battleLevel; // 0x00000084 length: 4
         dword cowPoisonTrackerUnk; // 0x00000088 length: 4
         int someSoundMatchTime_1; // 0x0000008C length: 4
-        dword field36_0x90; // 0x00000090 length: 4
+        dword field33_0x90; // 0x00000090 length: 4
         int battleLevel2; // 0x00000094 length: 4
         dword mapTimeInTicks; // 0x00000098 length: 4
         dword section1127; // 0x0000009C length: 4
-        dword field40_0xa0; // 0x000000A0 length: 4
+        dword field37_0xa0; // 0x000000A0 length: 4
         BOOLEnum currentlyInGameUnk_0xa4; // 0x000000A4 length: 4
         dword gameSpeedMultiplicator; // 0x000000A8 length: 4
         dword performedGameTicksThisLoop; // 0x000000AC length: 4
@@ -97,18 +96,18 @@ namespace Game {
         BOOLEnum isTimeHalted; // 0x000000D0 length: 4
         dword section1076; // 0x000000D4 length: 4
         dword isTimeHalted2; // 0x000000D8 length: 4
-        dword field55_0xdc; // 0x000000DC length: 4
+        dword field52_0xdc; // 0x000000DC length: 4
         int missionDifficulty; // 0x000000E0 length: 4
         int missionDifficulty2; // 0x000000E4 length: 4
         int missionDifficulty_2; // 0x000000E8 length: 4
         int missionDifficulty_3; // 0x000000EC length: 4
         int missionDifficulty_1; // 0x000000F0 length: 4
         int missionDifficulty_0; // 0x000000F4 length: 4
-        dword field62_0xf8; // 0x000000F8 length: 4
+        dword field59_0xf8; // 0x000000F8 length: 4
         BOOLEnum solitaryAllBuildingsAreFree; // 0x000000FC length: 4
-        int field64_0x100; // 0x00000100 length: 4
-        dword field65_0x104; // 0x00000104 length: 4
-        dword field66_0x108; // 0x00000108 length: 4
+        int field61_0x100; // 0x00000100 length: 4
+        dword field62_0x104; // 0x00000104 length: 4
+        dword field63_0x108; // 0x00000108 length: 4
         dword unknownAlwaysZero; // 0x0000010C length: 4
         dword unknownAlwaysZero02; // 0x00000110 length: 4
         int unknownAlwaysZero03; // 0x00000114 length: 4
@@ -122,13 +121,13 @@ namespace Game {
         int scribeAnimationFrame2; // 0x00000138 length: 4
         int taxestimeUnk; // 0x0000013C length: 4
         byte unused_0x140[4]; // 0x00000140 length: 4
-        int field80_0x144; // 0x00000144 length: 4
-        int field81_0x148; // 0x00000148 length: 4
+        int field77_0x144; // 0x00000144 length: 4
+        int field78_0x148; // 0x00000148 length: 4
         dword isBinkVideoPlaying; // 0x0000014C length: 4
         dword section1095; // 0x00000150 length: 4
         dword newPlayerID; // 0x00000154 length: 4
         dword hasMenuRenderedUnk; // 0x00000158 length: 4
-        dword field86_0x15c; // 0x0000015C length: 4
+        dword field83_0x15c; // 0x0000015C length: 4
         int xbowProducible_logic; // 0x00000160 length: 4
         int pikeProducible_logic; // 0x00000164 length: 4
         int swordProducible_logic; // 0x00000168 length: 4
@@ -160,7 +159,7 @@ namespace Game {
         int savedMapBalance; // 0x00001D8C length: 4
         MapLockStateInt U3_mapLockedState; // 0x00001D90 length: 4
         MapLockStateInt savedMapLocked; // 0x00001D94 length: 4
-        dword field118_0x1d98; // 0x00001D98 length: 4
+        dword field115_0x1d98; // 0x00001D98 length: 4
         int mapU3EndInt; // 0x00001D9C length: 4
         int savedMapEndInt2; // 0x00001DA0 length: 4
         int canBeginMainLoop; // 0x00001DA4 length: 4
@@ -182,14 +181,14 @@ namespace Game {
         int warchestTrailStartDatesInMonths[50]; // 0x0000206C length: 200
         dword warchestTrailYearReached; // 0x00002134 length: 4
         dword warchestTrailStartDateMonths; // 0x00002138 length: 4
-        dword field140_0x213c; // 0x0000213C length: 4
+        dword field137_0x213c; // 0x0000213C length: 4
         dword warchestTrailProgress; // 0x00002140 length: 4
         int furthestExtremeTrailMission; // 0x00002144 length: 4
         int extremeTrailMonthsTakenOrChicken[50]; // 0x00002148 length: 200
         int extremeTrailStartDatesInMonths[50]; // 0x00002210 length: 200
         dword extremeTrailYearReached; // 0x000022D8 length: 4
         dword extremeTrailStartDateMonths; // 0x000022DC length: 4
-        dword field147_0x22e0; // 0x000022E0 length: 4
+        dword field144_0x22e0; // 0x000022E0 length: 4
         int extremeTrailProgress; // 0x000022E4 length: 4
         int lordIconUnk; // 0x000022E8 length: 4
         int lordIcons[9]; // 0x000022EC length: 36
@@ -197,7 +196,7 @@ namespace Game {
         int selectedLordTypeUnk; // 0x00002314 length: 4
         int selectedLordType_2Unk; // 0x00002318 length: 4
         int selectedLordTypes[9]; // 0x0000231C length: 36
-        dword field155_0x2340; // 0x00002340 length: 4
+        dword field152_0x2340; // 0x00002340 length: 4
         dword gamePausedLogical; // 0x00002344 length: 4
         int viewportFocusBeforeBarracksHotkey; // 0x00002348 length: 4
         int viewportFocusBeforeMercenaryHotkey; // 0x0000234C length: 4
@@ -206,7 +205,7 @@ namespace Game {
         int viewportFocusBeforeKeepHotkey; // 0x00002358 length: 4
         int viewportFocusBeforeArmoryHotkey; // 0x0000235C length: 4
         int viewportFocusBeforeEngineersGuildHotkey; // 0x00002360 length: 4
-        int field164_0x2364; // 0x00002364 length: 4
+        int field161_0x2364; // 0x00002364 length: 4
         BOOLEnum genieVoiceActive; // 0x00002368 length: 4
         uint timeSum_2; // 0x0000236C length: 4
         dword gameDuration; // 0x00002370 length: 4

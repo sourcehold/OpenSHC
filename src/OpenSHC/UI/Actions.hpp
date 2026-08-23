@@ -17,7 +17,7 @@ namespace UI {
 
         void __cdecl LaunchSinglePlayerGameUnk(int param_1);
 
-        void __stdcall PlaceUnit();
+        void __cdecl PlaceUnit();
 
         void __cdecl LaunchSkirmishGame(int whichCastle);
 

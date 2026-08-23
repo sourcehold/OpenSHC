@@ -29,61 +29,61 @@ namespace Map {
         // SIZE: 0x000CC670
         class PathFindingState {
         public:
-            undefined4 maxClimbDataCount; // 0x00000000 length: 4
-            undefined4 searchGeneration; // 0x00000004 length: 4
-            undefined4 unitX; // 0x00000008 length: 4
-            undefined4 unitY; // 0x0000000C length: 4
-            undefined4 destinationX; // 0x00000010 length: 4
-            undefined4 destinationY; // 0x00000014 length: 4
-            undefined4 climbX; // 0x00000018 length: 4
-            undefined4 climbY; // 0x0000001C length: 4
-            undefined4 mappingYRelated; // 0x00000020 length: 4
-            undefined4 yLimit; // 0x00000024 length: 4
-            undefined4 field10_0x28; // 0x00000028 length: 4
-            undefined4 ALG_TargetX; // 0x0000002C length: 4
-            undefined4 ALG_TargetY; // 0x00000030 length: 4
-            undefined4 ALG_TargetTile; // 0x00000034 length: 4
-            undefined4 resultX; // 0x00000038 length: 4
-            undefined4 resultY; // 0x0000003C length: 4
-            undefined4 resultTile; // 0x00000040 length: 4
-            undefined4 ALG_ResultX; // 0x00000044 length: 4
-            undefined4 ALG_ResultY; // 0x00000048 length: 4
-            undefined4 ALG_ResultTile; // 0x0000004C length: 4
+            int maxClimbDataCount; // 0x00000000 length: 4
+            int searchGeneration; // 0x00000004 length: 4
+            int unitX; // 0x00000008 length: 4
+            int unitY; // 0x0000000C length: 4
+            int destinationX; // 0x00000010 length: 4
+            int destinationY; // 0x00000014 length: 4
+            int climbX; // 0x00000018 length: 4
+            int climbY; // 0x0000001C length: 4
+            int mappingYRelated; // 0x00000020 length: 4
+            int yLimit; // 0x00000024 length: 4
+            int field10_0x28; // 0x00000028 length: 4
+            int ALG_TargetX; // 0x0000002C length: 4
+            int ALG_TargetY; // 0x00000030 length: 4
+            int ALG_TargetTile; // 0x00000034 length: 4
+            int resultX; // 0x00000038 length: 4
+            int resultY; // 0x0000003C length: 4
+            int resultTile; // 0x00000040 length: 4
+            int ALG_ResultX; // 0x00000044 length: 4
+            int ALG_ResultY; // 0x00000048 length: 4
+            int ALG_ResultTile; // 0x0000004C length: 4
             undefined1 padding_0x50[12]; // 0x00000050 length: 12
-            undefined4 ALGO_TotalTroopValue; // 0x0000005C length: 4
-            undefined4 ALGO_TotalTroopCount; // 0x00000060 length: 4
-            undefined4 field34_0x64; // 0x00000064 length: 4
+            int ALGO_TotalTroopValue; // 0x0000005C length: 4
+            int ALGO_TotalTroopCount; // 0x00000060 length: 4
+            int field34_0x64; // 0x00000064 length: 4
             undefined1 padding_0x68[4]; // 0x00000068 length: 4
-            undefined4 toggleUpdateSeparateAreaTileMap; // 0x0000006C length: 4
-            undefined4 field40_0x70; // 0x00000070 length: 4
-            undefined4 field41_0x74; // 0x00000074 length: 4
-            undefined4 DAT_lWys; // 0x00000078 length: 4
-            undefined4 field43_0x7c; // 0x0000007C length: 4
-            undefined4 notAllAssassinsUnk; // 0x00000080 length: 4
-            undefined4 climbIsIllegal; // 0x00000084 length: 4
-            undefined4 allAssassinsUnk; // 0x00000088 length: 4
-            undefined4 distance; // 0x0000008C length: 4
-            undefined4 field48_0x90; // 0x00000090 length: 4
-            undefined4 field49_0x94; // 0x00000094 length: 4
-            undefined4 field50_0x98; // 0x00000098 length: 4
-            undefined4 field51_0x9c; // 0x0000009C length: 4
-            undefined4 calculations; // 0x000000A0 length: 4
-            undefined4 DAT_Mini_spreads; // 0x000000A4 length: 4
-            undefined4 DAT_Easy; // 0x000000A8 length: 4
-            undefined4 DAT_Hard; // 0x000000AC length: 4
-            undefined4 searchNonmatchCount; // 0x000000B0 length: 4
-            undefined4 searchMatchCounter; // 0x000000B4 length: 4
+            int toggleUpdateSeparateAreaTileMap; // 0x0000006C length: 4
+            int field40_0x70; // 0x00000070 length: 4
+            int field41_0x74; // 0x00000074 length: 4
+            int DAT_lWys; // 0x00000078 length: 4
+            int field43_0x7c; // 0x0000007C length: 4
+            int notAllAssassinsUnk; // 0x00000080 length: 4
+            int climbIsIllegal; // 0x00000084 length: 4
+            int allAssassinsUnk; // 0x00000088 length: 4
+            int distance; // 0x0000008C length: 4
+            int field48_0x90; // 0x00000090 length: 4
+            int field49_0x94; // 0x00000094 length: 4
+            int field50_0x98; // 0x00000098 length: 4
+            int field51_0x9c; // 0x0000009C length: 4
+            int calculations; // 0x000000A0 length: 4
+            int DAT_Mini_spreads; // 0x000000A4 length: 4
+            int DAT_Easy; // 0x000000A8 length: 4
+            int DAT_Hard; // 0x000000AC length: 4
+            int searchNonmatchCount; // 0x000000B0 length: 4
+            int searchMatchCounter; // 0x000000B4 length: 4
             undefined1 padding_0xb8[4]; // 0x000000B8 length: 4
-            undefined4 DAT_Ass; // 0x000000BC length: 4
-            undefined4 field63_0xc0; // 0x000000C0 length: 4
-            undefined4 DAT_Test_likely; // 0x000000C4 length: 4
-            undefined4 DAT_Test_gatehouse; // 0x000000C8 length: 4
-            undefined4 totalZones; // 0x000000CC length: 4
+            int DAT_Ass; // 0x000000BC length: 4
+            int field63_0xc0; // 0x000000C0 length: 4
+            int DAT_Test_likely; // 0x000000C4 length: 4
+            int DAT_Test_gatehouse; // 0x000000C8 length: 4
+            int totalZones; // 0x000000CC length: 4
             undefined1 padding_0xd0[8]; // 0x000000D0 length: 8
-            undefined4 numberOfClimbTeleports; // 0x000000D8 length: 4
-            undefined4 debugGreatestClimbLoading; // 0x000000DC length: 4
+            int numberOfClimbTeleports; // 0x000000D8 length: 4
+            int debugGreatestClimbLoading; // 0x000000DC length: 4
             int zoneSizesArray[1000]; // 0x000000E0 length: 4000
-            undefined4 sum; // 0x00001080 length: 4
+            int sum; // 0x00001080 length: 4
             ClimbData climbData[200]; // 0x00001084 length: 103200
             PathFindingStatePartB searchQueue; // 0x0001A3A4 length: 729804
 

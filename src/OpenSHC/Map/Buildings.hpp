@@ -56,11 +56,11 @@ namespace Map {
 
         void __cdecl UpdateWheatFarm();
 
-        void __stdcall UpdateHopsFarm();
+        void __cdecl UpdateHopsFarm();
 
-        void __stdcall UpdateAppleFarm();
+        void __cdecl UpdateAppleFarm();
 
-        void __stdcall UpdateDairyFarm();
+        void __cdecl UpdateDairyFarm();
 
         void __cdecl UpdateMill();
 
@@ -70,7 +70,7 @@ namespace Map {
 
         void __cdecl UpdateCathedral();
 
-        void __stdcall UpdateKeepManorHouse();
+        void __cdecl UpdateKeepManorHouse();
 
         void __cdecl UpdateKeepStoneKeep();
 
@@ -124,7 +124,7 @@ namespace Map {
 
         void __cdecl UpdateBadBuildingChoppingBlock();
 
-        void __stdcall UpdateBadBuildingDunkingStool();
+        void __cdecl UpdateBadBuildingDunkingStool();
 
         void __cdecl UpdateGoodBuildingStatue();
 

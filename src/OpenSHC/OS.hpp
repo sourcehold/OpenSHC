@@ -15,6 +15,7 @@
 #include "fcntl.h"
 #include "guiddef.h"
 #include "mbstring.h"
+#include "mtdll.h"
 #include "stdio.h"
 #include "sys/stat.h"
 #include "time.h"
@@ -96,6 +97,8 @@ namespace OS {
     int __cdecl __strnicmp(char const* _Str1, char const* _Str2, size_t _MaxCount);
 
     void __cdecl _exit(int _Code);
+
+    _ptiddata __cdecl __getptd();
 
 } // namespace OS
 } // namespace OpenSHC

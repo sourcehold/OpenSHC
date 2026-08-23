@@ -23,9 +23,9 @@ namespace UI {
         using OpenSHC::UI::Enums::DisplayElementID;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-        void __stdcall DrawOuterMenuBorder();
+        void __cdecl DrawOuterMenuBorder();
 
-        BOOLEnum __stdcall AModalDialogIsActiveButIsNotQuitting();
+        BOOLEnum __cdecl AModalDialogIsActiveButIsNotQuitting();
 
         void __cdecl CallbackSetMultiplayerSpeedLevel();
 
@@ -35,7 +35,7 @@ namespace UI {
 
         void __cdecl SomeSiegeRelatedCopying(int param_1);
 
-        void __stdcall InitializeBasicMap();
+        void __cdecl InitializeBasicMap();
 
         void __cdecl SetTaxesSetting_unknown(int taxesSettingUnk);
 
@@ -47,27 +47,27 @@ namespace UI {
 
         void __cdecl HandleBuildingSelectionSpeech(int buildingIndexUnk);
 
-        int __stdcall SomePopularityRelatedComputation();
+        int __cdecl SomePopularityRelatedComputation();
 
         undefined4 __cdecl SomeFearFactorComputation();
 
-        int __stdcall SomeGoldRelatedComputation();
+        int __cdecl SomeGoldRelatedComputation();
 
-        void __stdcall DisplayMapDescriptionAndAllocatePlayersToSlots();
+        void __cdecl DisplayMapDescriptionAndAllocatePlayersToSlots();
 
         EuroRecruitableState __cdecl IsEuroUnitRecruitableUnk(int barrackUnitIdUnk);
 
         int __cdecl GetUnitRecruitPermission(int param_1);
 
-        void __stdcall CheckIfEnoughGoldForLadderman();
+        void __cdecl CheckIfEnoughGoldForLadderman();
 
-        void __stdcall CheckIfEnoughGoldForMonk();
+        void __cdecl CheckIfEnoughGoldForMonk();
 
         BOOLEnum __cdecl CheckGoldResource(int param_1);
 
-        void __stdcall CheckIfEnoughGoldForTunneler();
+        void __cdecl CheckIfEnoughGoldForTunneler();
 
-        void __stdcall SetEnoughGoldForRequestedUnitToTrueUnk();
+        void __cdecl SetEnoughGoldForRequestedUnitToTrueUnk();
 
         void __cdecl SetupPreviewMinimapDataUnk();
 
@@ -98,7 +98,7 @@ namespace UI {
 
         void __cdecl WriteMissionToScoresFile(char* param_1, int param_2);
 
-        void __stdcall PlayJokeVideoBasedOnCurrentTimeAndPlayTime();
+        void __cdecl PlayJokeVideoBasedOnCurrentTimeAndPlayTime();
 
     } // namespace Helpers
 } // namespace UI

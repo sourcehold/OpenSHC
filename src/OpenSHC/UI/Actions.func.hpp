@@ -21,7 +21,7 @@ namespace UI {
         LaunchSinglePlayerGameUnk;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004381D0, &OpenSHC::UI::Actions::PlaceUnit)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004381D0, &OpenSHC::UI::Actions::PlaceUnit)
         PlaceUnit;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int whichCastle), false, Address::SHC_3BB0A8C1_0x00441270,

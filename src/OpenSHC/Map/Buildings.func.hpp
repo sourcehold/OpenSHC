@@ -102,15 +102,15 @@ namespace Map {
         UpdateWheatFarm;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00416630, &OpenSHC::Map::Buildings::UpdateHopsFarm)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00416630, &OpenSHC::Map::Buildings::UpdateHopsFarm)
         UpdateHopsFarm;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00416720, &OpenSHC::Map::Buildings::UpdateAppleFarm)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00416720, &OpenSHC::Map::Buildings::UpdateAppleFarm)
         UpdateAppleFarm;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004167E0, &OpenSHC::Map::Buildings::UpdateDairyFarm)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004167E0, &OpenSHC::Map::Buildings::UpdateDairyFarm)
         UpdateDairyFarm;
 
         MACRO_FUNCTION_RESOLVER(
@@ -130,7 +130,7 @@ namespace Map {
         UpdateCathedral;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004178E0, &OpenSHC::Map::Buildings::UpdateKeepManorHouse)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004178E0, &OpenSHC::Map::Buildings::UpdateKeepManorHouse)
         UpdateKeepManorHouse;
 
         MACRO_FUNCTION_RESOLVER(
@@ -237,7 +237,7 @@ namespace Map {
             &OpenSHC::Map::Buildings::UpdateBadBuildingChoppingBlock)
         UpdateBadBuildingChoppingBlock;
 
-        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00419420,
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00419420,
             &OpenSHC::Map::Buildings::UpdateBadBuildingDunkingStool)
         UpdateBadBuildingDunkingStool;
 

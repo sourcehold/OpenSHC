@@ -25,10 +25,10 @@ namespace UI {
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00424BE0, &OpenSHC::UI::Helpers::DrawOuterMenuBorder)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00424BE0, &OpenSHC::UI::Helpers::DrawOuterMenuBorder)
         DrawOuterMenuBorder;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00427210,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00427210,
             &OpenSHC::UI::Helpers::AModalDialogIsActiveButIsNotQuitting)
         AModalDialogIsActiveButIsNotQuitting;
 
@@ -49,7 +49,7 @@ namespace UI {
         SomeSiegeRelatedCopying;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0042F010, &OpenSHC::UI::Helpers::InitializeBasicMap)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0042F010, &OpenSHC::UI::Helpers::InitializeBasicMap)
         InitializeBasicMap;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int taxesSettingUnk), false, Address::SHC_3BB0A8C1_0x00433560,
@@ -72,7 +72,7 @@ namespace UI {
             &OpenSHC::UI::Helpers::HandleBuildingSelectionSpeech)
         HandleBuildingSelectionSpeech;
 
-        MACRO_FUNCTION_RESOLVER(int(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0043E540,
+        MACRO_FUNCTION_RESOLVER(int(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0043E540,
             &OpenSHC::UI::Helpers::SomePopularityRelatedComputation)
         SomePopularityRelatedComputation;
 
@@ -80,11 +80,11 @@ namespace UI {
             &OpenSHC::UI::Helpers::SomeFearFactorComputation)
         SomeFearFactorComputation;
 
-        MACRO_FUNCTION_RESOLVER(int(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0043E5F0,
-            &OpenSHC::UI::Helpers::SomeGoldRelatedComputation)
+        MACRO_FUNCTION_RESOLVER(
+            int(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0043E5F0, &OpenSHC::UI::Helpers::SomeGoldRelatedComputation)
         SomeGoldRelatedComputation;
 
-        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004410D0,
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004410D0,
             &OpenSHC::UI::Helpers::DisplayMapDescriptionAndAllocatePlayersToSlots)
         DisplayMapDescriptionAndAllocatePlayersToSlots;
 
@@ -96,23 +96,23 @@ namespace UI {
             &OpenSHC::UI::Helpers::GetUnitRecruitPermission)
         GetUnitRecruitPermission;
 
-        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00465080,
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00465080,
             &OpenSHC::UI::Helpers::CheckIfEnoughGoldForLadderman)
         CheckIfEnoughGoldForLadderman;
 
-        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004650A0,
-            &OpenSHC::UI::Helpers::CheckIfEnoughGoldForMonk)
+        MACRO_FUNCTION_RESOLVER(
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004650A0, &OpenSHC::UI::Helpers::CheckIfEnoughGoldForMonk)
         CheckIfEnoughGoldForMonk;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum(__cdecl*)(int param_1), false, Address::SHC_3BB0A8C1_0x004650C0,
             &OpenSHC::UI::Helpers::CheckGoldResource)
         CheckGoldResource;
 
-        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004650F0,
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004650F0,
             &OpenSHC::UI::Helpers::CheckIfEnoughGoldForTunneler)
         CheckIfEnoughGoldForTunneler;
 
-        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00466E00,
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00466E00,
             &OpenSHC::UI::Helpers::SetEnoughGoldForRequestedUnitToTrueUnk)
         SetEnoughGoldForRequestedUnitToTrueUnk;
 
@@ -170,7 +170,7 @@ namespace UI {
             &OpenSHC::UI::Helpers::WriteMissionToScoresFile)
         WriteMissionToScoresFile;
 
-        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0057B9C0,
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0057B9C0,
             &OpenSHC::UI::Helpers::PlayJokeVideoBasedOnCurrentTimeAndPlayTime)
         PlayJokeVideoBasedOnCurrentTimeAndPlayTime;
 

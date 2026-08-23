@@ -48,7 +48,7 @@ namespace Text {
 
         char* getCurrentText();
 
-        int getTextArrayPointer(int param_1);
+        char* getTextArrayPointer(int param_1);
 
         void setTextEntryAndUpdateCursor(undefined4 param_1, undefined4 param_2);
 

@@ -94,7 +94,7 @@ namespace Synchrony {
 
         void __cdecl ClickInitOrChangeGameIntensityAndBalance();
 
-        void __stdcall SharePlayerName();
+        void __cdecl SharePlayerName();
 
         void __cdecl SendResyncCharLayer();
 
@@ -158,7 +158,7 @@ namespace Synchrony {
 
         void __cdecl StartSendingMapFile();
 
-        void __stdcall StartReceivingMapFile();
+        void __cdecl StartReceivingMapFile();
 
         void __cdecl MapSendingRelated();
 

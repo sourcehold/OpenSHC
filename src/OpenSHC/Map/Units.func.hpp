@@ -19,7 +19,7 @@ namespace Map {
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         MACRO_FUNCTION_RESOLVER(
-            int(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0051BE20, &OpenSHC::Map::Units::FindFirstOpponentWithKeep)
+            int(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0051BE20, &OpenSHC::Map::Units::FindFirstOpponentWithKeep)
         FindFirstOpponentWithKeep;
 
         MACRO_FUNCTION_RESOLVER(
@@ -58,16 +58,16 @@ namespace Map {
             Address::SHC_3BB0A8C1_0x00530D70, &OpenSHC::Map::Units::ComputeGoodsProduced)
         ComputeGoodsProduced;
 
-        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00530E00,
-            &OpenSHC::Map::Units::WarnIfPlayersGranaryIsFull)
+        MACRO_FUNCTION_RESOLVER(
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00530E00, &OpenSHC::Map::Units::WarnIfPlayersGranaryIsFull)
         WarnIfPlayersGranaryIsFull;
 
-        MACRO_FUNCTION_RESOLVER(uint(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00530EB0,
-            &OpenSHC::Map::Units::PlayStockpileIsFullWarning)
+        MACRO_FUNCTION_RESOLVER(
+            uint(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00530EB0, &OpenSHC::Map::Units::PlayStockpileIsFullWarning)
         PlayStockpileIsFullWarning;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00530F20, &OpenSHC::Map::Units::PlayArmoryIsFullWarning)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00530F20, &OpenSHC::Map::Units::PlayArmoryIsFullWarning)
         PlayArmoryIsFullWarning;
 
         MACRO_FUNCTION_RESOLVER(
@@ -115,7 +115,7 @@ namespace Map {
         UpdateMerchant;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00541A30, &OpenSHC::Map::Units::UpdateMerchantHorse)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00541A30, &OpenSHC::Map::Units::UpdateMerchantHorse)
         UpdateMerchantHorse;
 
         MACRO_FUNCTION_RESOLVER(
@@ -147,7 +147,7 @@ namespace Map {
         UpdateSiegeTower;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x005459B0, &OpenSHC::Map::Units::UpdateBatteringRam)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x005459B0, &OpenSHC::Map::Units::UpdateBatteringRam)
         UpdateBatteringRam;
 
         MACRO_FUNCTION_RESOLVER(
@@ -191,11 +191,11 @@ namespace Map {
         UpdateHunter;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00550A50, &OpenSHC::Map::Units::UpdateQuarryMason)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00550A50, &OpenSHC::Map::Units::UpdateQuarryMason)
         UpdateQuarryMason;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00550D70, &OpenSHC::Map::Units::UpdateQuarryWorker)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00550D70, &OpenSHC::Map::Units::UpdateQuarryWorker)
         UpdateQuarryWorker;
 
         MACRO_FUNCTION_RESOLVER(
@@ -291,7 +291,7 @@ namespace Map {
         UpdatePriest;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00567320, &OpenSHC::Map::Units::UpdateDrunkard)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00567320, &OpenSHC::Map::Units::UpdateDrunkard)
         UpdateDrunkard;
 
         MACRO_FUNCTION_RESOLVER(
@@ -303,7 +303,7 @@ namespace Map {
         UpdateCatapult;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00569410, &OpenSHC::Map::Units::UpdateTrebuchet)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00569410, &OpenSHC::Map::Units::UpdateTrebuchet)
         UpdateTrebuchet;
 
         MACRO_FUNCTION_RESOLVER(

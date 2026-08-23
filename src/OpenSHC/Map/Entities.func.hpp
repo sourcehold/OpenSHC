@@ -70,7 +70,7 @@ namespace Map {
         UpdateEntity_29;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004024F0, &OpenSHC::Map::Entities::UpdateEntity_30)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004024F0, &OpenSHC::Map::Entities::UpdateEntity_30)
         UpdateEntity_30;
 
         MACRO_FUNCTION_RESOLVER(
@@ -82,7 +82,7 @@ namespace Map {
         UpdateEntity_32;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00402660, &OpenSHC::Map::Entities::UpdateEntity_40)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00402660, &OpenSHC::Map::Entities::UpdateEntity_40)
         UpdateEntity_40;
 
         MACRO_FUNCTION_RESOLVER(

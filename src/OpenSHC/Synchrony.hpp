@@ -20,13 +20,13 @@ namespace Synchrony {
 
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    void __stdcall InitSkirmishLobbyData();
+    void __cdecl InitSkirmishLobbyData();
 
     void __cdecl ResetAiVariationArrayValue(int playerID);
 
     void __cdecl PutPlayerIntoRandomSlot(int param_1);
 
-    void __stdcall SetAIPlayerNickNames();
+    void __cdecl SetAIPlayerNickNames();
 
     int __cdecl GetPlayerPosition(int playerID);
 
@@ -42,9 +42,9 @@ namespace Synchrony {
 
     void __cdecl MemCopyFromParameter(char* dest, size_t size, undefined4 playerID);
 
-    void __stdcall ProgressBarRelated();
+    void __cdecl ProgressBarRelated();
 
-    void __stdcall syncPlayerGroupArrays();
+    void __cdecl syncPlayerGroupArrays();
 
     void __cdecl LoadSkirmishCampaignData(int missionID);
 

@@ -11,7 +11,7 @@
 namespace OpenSHC {
 namespace Map {
 
-    void __stdcall ResetSomeValuesFunctionUnk();
+    void __cdecl ResetSomeValuesFunctionUnk();
 
 } // namespace Map
 } // namespace OpenSHC

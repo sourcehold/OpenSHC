@@ -12,121 +12,121 @@ namespace OpenSHC {
 namespace Map {
     namespace Version {
 
-        void __stdcall UpgradeSetCurrentEntityID3000();
+        void __cdecl UpgradeSetCurrentEntityID3000();
 
-        void __stdcall SetFlagEntityColor();
+        void __cdecl SetFlagEntityColor();
 
-        void __stdcall deleteSeagull();
+        void __cdecl DeleteSeagull();
 
-        void __stdcall UpgradeFirst25Entities();
+        void __cdecl UpgradeFirst25Entities();
 
-        void __stdcall SetUndamagedBuildingHealthToValue();
+        void __cdecl SetUndamagedBuildingHealthToValue();
 
-        void __stdcall UpgradeFirst9Buildings();
+        void __cdecl UpgradeFirst9Buildings();
 
-        void __stdcall UpgradeBuildingField1();
+        void __cdecl UpgradeBuildingField1();
 
-        void __stdcall UpgradeBuildingFlag1();
+        void __cdecl UpgradeBuildingFlag1();
 
         void __cdecl UpgradeBuildingProperties1(int version);
 
-        void __stdcall SetDairyCheeseToZero();
+        void __cdecl SetDairyCheeseToZero();
 
-        void __stdcall UpgradeTowerLogicLayer();
+        void __cdecl UpgradeTowerLogicLayer();
 
-        void __stdcall SetHovelBuildOrder();
+        void __cdecl SetHovelBuildOrder();
 
-        void __stdcall SetBuildingsEmployeeCountToValue();
+        void __cdecl SetBuildingsEmployeeCountToValue();
 
-        void __stdcall UpgradeBuildingField2();
+        void __cdecl UpgradeBuildingField2();
 
-        void __stdcall UpgradeSolitaryMapBuildingField3();
+        void __cdecl UpgradeSolitaryMapBuildingField3();
 
-        void __stdcall UpgradeLogicAndDisplayLayerForDairyFarms();
+        void __cdecl UpgradeLogicAndDisplayLayerForDairyFarms();
 
-        void __stdcall UpgradeDestroyDrawbridgesInFirst10Buildings();
+        void __cdecl UpgradeDestroyDrawbridgesInFirst10Buildings();
 
-        void __stdcall UpgradePitchDitchBuildingIntoPitchDitchObject();
+        void __cdecl UpgradePitchDitchBuildingIntoPitchDitchObject();
 
-        void __stdcall UpgradeKillingPitField();
+        void __cdecl UpgradeKillingPitField();
 
-        void __stdcall UpgradeBuildingField4();
+        void __cdecl UpgradeBuildingField4();
 
-        void __stdcall UpgradeClearBuildings1000AndHigher();
+        void __cdecl UpgradeClearBuildings1000AndHigher();
 
-        void __stdcall UpgradeKnightsAndStables();
+        void __cdecl UpgradeKnightsAndStables();
 
-        void __stdcall UpgradeOutpostField();
+        void __cdecl UpgradeOutpostField();
 
         void __cdecl UpdateUnitLossData(int lossValue, int playerID);
 
         void __cdecl UpdateDestroyedBuildingCountData(int param_1);
 
-        void __stdcall validateLadyAndJesterUnitRefs();
+        void __cdecl ValidateLadyAndJesterUnitRefs();
 
-        void __stdcall initPopularityAndRecruitableDefaults();
+        void __cdecl InitPopularityAndRecruitableDefaults();
 
-        void __stdcall resetTeams();
+        void __cdecl ResetTeams();
 
-        void __stdcall UpgradeOldSection1124();
+        void __cdecl UpgradeOldSection1124();
 
         void __cdecl UpdateFixTrees2();
 
-        void __stdcall UpgradeRemoveCertainRockTypesUnk();
+        void __cdecl UpgradeRemoveCertainRockTypesUnk();
 
         void __cdecl UpdateTreesOfCertainTypes();
 
-        void __stdcall UpgradeRemoveRocksBeyond1000();
+        void __cdecl UpgradeRemoveRocksBeyond1000();
 
-        void __stdcall UpgradeMapLogicToVersion_125();
+        void __cdecl UpgradeMapLogicToVersion_125();
 
-        void __stdcall UpgradeMapLogicToVersion_Unknown1();
+        void __cdecl UpgradeMapLogicToVersion_Unknown1();
 
-        void __stdcall UpgradeMapLogicToVersion_Unknown2();
+        void __cdecl UpgradeMapLogicToVersion_Unknown2();
 
-        void __stdcall UpgradeMapLogicToVersion_128();
+        void __cdecl UpgradeMapLogicToVersion_128();
 
-        void __stdcall UpgradeMapLogicToVersion_102();
+        void __cdecl UpgradeMapLogicToVersion_102();
 
-        void __stdcall UpgradeMapLogicToVersion_120();
+        void __cdecl UpgradeMapLogicToVersion_120();
 
-        void __stdcall UpgradeMapLogicToVersion_145();
+        void __cdecl UpgradeMapLogicToVersion_145();
 
-        void __stdcall UpgradeMapLogicToVersion_147();
+        void __cdecl UpgradeMapLogicToVersion_147();
 
-        void __stdcall UpgradeMapLogicToVersion_Unknown3();
+        void __cdecl UpgradeMapLogicToVersion_Unknown3();
 
-        void __stdcall UpgradeMapTribesStateVersionTo_142();
+        void __cdecl UpgradeMapTribesStateVersionTo_142();
 
-        void __stdcall UpgradeMapTribesStateVersionTo_Unknown1();
+        void __cdecl UpgradeMapTribesStateVersionTo_Unknown1();
 
-        void __stdcall UpgradeMapTribesStateVersionTo_Unknown2();
+        void __cdecl UpgradeMapTribesStateVersionTo_Unknown2();
 
-        void __stdcall UpgradeMapUnitsTo_117();
+        void __cdecl UpgradeMapUnitsTo_117();
 
-        void __stdcall UpgradeMapUnitsTo_UnknownVersion2();
+        void __cdecl UpgradeMapUnitsTo_UnknownVersion2();
 
-        void __stdcall UpgradeMapUnitsTo_114();
+        void __cdecl UpgradeMapUnitsTo_114();
 
-        void __stdcall UpgradeMapUnitsTo_112();
+        void __cdecl UpgradeMapUnitsTo_112();
 
-        void __stdcall UpgradeMapUnitsTo_100();
+        void __cdecl UpgradeMapUnitsTo_100();
 
-        void __stdcall UpgradeMapUnitsTo_UnknownVersion1();
+        void __cdecl UpgradeMapUnitsTo_UnknownVersion1();
 
-        void __stdcall UpgradeMapUnitsAttackTileLogicTo_122();
+        void __cdecl UpgradeMapUnitsAttackTileLogicTo_122();
 
-        void __stdcall UpgradeMapUnitsTo_130();
+        void __cdecl UpgradeMapUnitsTo_130();
 
-        void __stdcall UpgradeMapUnitsTo_149();
+        void __cdecl UpgradeMapUnitsTo_149();
 
-        void __stdcall UpgradeMapUnitsTo_154();
+        void __cdecl UpgradeMapUnitsTo_154();
 
-        void __stdcall UpgradeMapUnitsTo_155();
+        void __cdecl UpgradeMapUnitsTo_155();
 
-        void __stdcall UpgradeMapUnitsLordHealthTo_169();
+        void __cdecl UpgradeMapUnitsLordHealthTo_169();
 
-        void __stdcall UpgradeMapUnitsTo_170();
+        void __cdecl UpgradeMapUnitsTo_170();
 
     } // namespace Version
 } // namespace Map

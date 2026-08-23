@@ -17,7 +17,7 @@ namespace Map {
         using OpenSHC::Map::Units::States::UnitState;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-        int __stdcall FindFirstOpponentWithKeep();
+        int __cdecl FindFirstOpponentWithKeep();
 
         void __cdecl DetachLadderman(int unitID);
 
@@ -37,11 +37,11 @@ namespace Map {
 
         int __cdecl ComputeGoodsProduced(int unitID, int goodsCount, BOOLEnum boost);
 
-        void __stdcall WarnIfPlayersGranaryIsFull();
+        void __cdecl WarnIfPlayersGranaryIsFull();
 
-        uint __stdcall PlayStockpileIsFullWarning();
+        uint __cdecl PlayStockpileIsFullWarning();
 
-        void __stdcall PlayArmoryIsFullWarning();
+        void __cdecl PlayArmoryIsFullWarning();
 
         BOOLEnum __cdecl CurrentUnitHasHealer();
 
@@ -65,7 +65,7 @@ namespace Map {
 
         void __cdecl UpdateMerchant();
 
-        void __stdcall UpdateMerchantHorse();
+        void __cdecl UpdateMerchantHorse();
 
         void __cdecl UpdateDeer();
 
@@ -81,7 +81,7 @@ namespace Map {
 
         void __cdecl UpdateSiegeTower();
 
-        void __stdcall UpdateBatteringRam();
+        void __cdecl UpdateBatteringRam();
 
         void __cdecl UpdateChicken();
 
@@ -103,9 +103,9 @@ namespace Map {
 
         void __cdecl UpdateHunter();
 
-        void __stdcall UpdateQuarryMason();
+        void __cdecl UpdateQuarryMason();
 
-        void __stdcall UpdateQuarryWorker();
+        void __cdecl UpdateQuarryWorker();
 
         void __cdecl UpdatePitchman();
 
@@ -153,13 +153,13 @@ namespace Map {
 
         void __cdecl UpdatePriest();
 
-        void __stdcall UpdateDrunkard();
+        void __cdecl UpdateDrunkard();
 
         void __cdecl UpdateMonk();
 
         void __cdecl UpdateCatapult();
 
-        void __stdcall UpdateTrebuchet();
+        void __cdecl UpdateTrebuchet();
 
         void __cdecl UpdateMangonel();
 
