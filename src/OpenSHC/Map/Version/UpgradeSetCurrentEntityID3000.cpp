@@ -6,7 +6,7 @@ namespace OpenSHC {
 namespace Map {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004038A0
-    void Version ::UpgradeSetCurrentEntityID3000() { DAT_CurrentEntityID::instance = 3000; }
+    void Version::UpgradeSetCurrentEntityID3000() { DAT_CurrentEntityID::instance = 3000; }
 
 }
 }
