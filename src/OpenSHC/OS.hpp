@@ -35,7 +35,7 @@ namespace OS {
 
     void* __cdecl _memset(void* _Dst, int _Val, size_t _Size);
 
-    int __cdecl _sprintf(char* _Dest, char const* _Format, ...);
+    int __cdecl _sprintf(char* _Dest, char const* _Format, va_list args);
 
     int __cdecl __stricmp(char const* _Str1, char const* _Str2);
 

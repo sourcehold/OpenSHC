@@ -134,7 +134,7 @@ namespace Text {
 
         int calcRenderedNumberWidth(int param_1, int param_2);
 
-        int getCharWidth(char char_, int fontSize);
+        int getCharWidth(char character, int fontSize);
 
         int computeTextWidth(char* text, int fontSize);
 

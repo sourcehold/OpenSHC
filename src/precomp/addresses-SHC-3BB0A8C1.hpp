@@ -97398,6 +97398,7 @@ enum {
     SHC_3BB0A8C1_0x00ED3124 = 0x00ED3124,
     // label: DAT_TacticalPowersHelpTextDisplayBool
     // location:
+    // type: /bool
     SHC_3BB0A8C1_0x00ED3128 = 0x00ED3128,
     // type: /float
     SHC_3BB0A8C1_0x00ED312C = 0x00ED312C,

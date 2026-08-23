@@ -887,6 +887,8 @@ PUBLIC ?instance@?$Extern@$$BY09H$0ONCHMI@@StructResolver@@2PAHA
 
 PUBLIC ?instance@?$Extern@I$0ONDAGM@@StructResolver@@2IA
 
+PUBLIC ?instance@?$Extern@_N$0ONDBCI@@StructResolver@@2_NA
+
 PUBLIC ?instance@?$Extern@I$0ONDBFI@@StructResolver@@2IA
 
 PUBLIC ?instance@?$Extern@I$0ONDBGA@@StructResolver@@2IA
@@ -2511,6 +2513,8 @@ _TEXT SEGMENT
 ?instance@?$Extern@$$BY09H$0ONCHMI@@StructResolver@@2PAHA EQU 00ED27C8h
 
 ?instance@?$Extern@I$0ONDAGM@@StructResolver@@2IA EQU 00ED306Ch
+
+?instance@?$Extern@_N$0ONDBCI@@StructResolver@@2_NA EQU 00ED3128h
 
 ?instance@?$Extern@I$0ONDBFI@@StructResolver@@2IA EQU 00ED3158h
 
