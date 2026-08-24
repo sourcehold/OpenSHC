@@ -1,0 +1,38 @@
+#include "OpenSHC/Audio/SFX/SFXState.func.hpp"
+#include "OpenSHC/Map/Units/TribesState.func.hpp"
+#include "OpenSHC/Map/Units/UnitsState.func.hpp"
+#include "OpenSHC/Map/Units/UnitType.hpp"
+
+#include "OpenSHC/Globals/DAT_SFXState.hpp"
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
+
+namespace OpenSHC {
+namespace Map {
+    namespace Units {
+
+        using OpenSHC::Map::Units::UnitType;
+
+        /*
+          decompilerscript: committed: 2025-01-30 21:57:43.216000
+         */
+
+        // FUNCTION: STRONGHOLDCRUSADER 0x00522160
+        void TribesState::playWorkCommandSpeech(undefined4 param_1)
+
+        {
+            UnitType unitType;
+            int actionID;
+
+            MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::selectionContainsCombatUnit, DAT_UnitsState::ptr)(
+                1);
+            actionID = 0x24;
+            unitType = MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::getMajoritySelectedUnitType, this)(
+                param_1, (int*)&param_1);
+            MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)(
+                unitType, actionID);
+            return;
+        }
+
+    }
+}
+}
