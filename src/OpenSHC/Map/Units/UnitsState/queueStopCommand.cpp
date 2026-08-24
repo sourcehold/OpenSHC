@@ -11,7 +11,7 @@ namespace Map {
         using OpenSHC::Commands::GameCommandType;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00536C70
-        void UnitsState::queueStopCommand()
+        void UnitsState::queueEscapeCommand()
         {
             DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = 0;
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
