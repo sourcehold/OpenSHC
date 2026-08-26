@@ -11,7 +11,6 @@ namespace Synchrony {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00429630
     void Commands::QueueChangeGameIntensityOrBalance()
-
     {
         MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
             OpenSHC::Commands::GCT_CHANGE_GAME_INTENSITY_OR_BALANCE);
