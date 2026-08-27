@@ -1,4 +1,4 @@
-#include "OpenSHC/Map/TileMapState.func.hpp"
+#include "../TileMapState.func.hpp"
 
 namespace OpenSHC {
 namespace Map {

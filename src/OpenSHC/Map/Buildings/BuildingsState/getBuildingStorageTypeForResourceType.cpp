@@ -1,4 +1,5 @@
-#include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
+#include "../BuildingsState.func.hpp"
+
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 

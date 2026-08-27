@@ -1,4 +1,4 @@
-#include "OpenSHC/Rendering/Bink/BinkControlClass.func.hpp"
+#include "../BinkControlClass.func.hpp"
 
 namespace OpenSHC {
 namespace Rendering {

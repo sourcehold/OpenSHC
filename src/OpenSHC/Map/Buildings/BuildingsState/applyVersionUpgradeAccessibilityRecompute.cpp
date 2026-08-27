@@ -1,4 +1,5 @@
-#include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
+#include "../BuildingsState.func.hpp"
+
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 
 namespace OpenSHC {
