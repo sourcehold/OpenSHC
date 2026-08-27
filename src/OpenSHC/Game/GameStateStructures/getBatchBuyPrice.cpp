@@ -1,4 +1,4 @@
-#include "OpenSHC/Game/GameStateStructures.func.hpp"
+#include "../GameStateStructures.func.hpp"
 
 namespace OpenSHC {
 namespace Game {
