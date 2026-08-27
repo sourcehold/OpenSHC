@@ -8,13 +8,8 @@ namespace OpenSHC {
 
 using OpenSHC::Game::GameMode2;
 
-/*
-  decompilerscript: committed: 2025-01-30 21:57:43.216000
- */
-
 // FUNCTION: STRONGHOLDCRUSADER 0x00434230
 void UI::MenuItemRenderFunction_BuildMenu_BuildingKeepSubcategoryButton(int param_1, ...)
-
 {
     if ((DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_EDITOR)
         && (DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_SIEGE_THAT)) {
@@ -24,7 +19,6 @@ void UI::MenuItemRenderFunction_BuildMenu_BuildingKeepSubcategoryButton(int para
     DAT_ButtonUnknownZero::instance = 0;
     MACRO_CALL(
         OpenSHC::UI_Func::MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
-    return;
 }
 
 }

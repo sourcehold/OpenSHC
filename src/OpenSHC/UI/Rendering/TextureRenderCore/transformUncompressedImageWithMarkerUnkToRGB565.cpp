@@ -1,12 +1,4 @@
-// ============================================================================
-// Program   : Stronghold Crusader.exe
-// Namespace : _HoldStrong::UI::Rendering::TextureRenderCore
-// Function  : transformUncompressedImageWithMarkerUnkToRGB565
-// Address   : 00455250
-// Signature : void __thiscall transformUncompressedImageWithMarkerUnkToRGB565(TextureRenderCore * this, int imageIndex)
-// ============================================================================
-
-#include "OpenSHC/UI/Rendering/TextureRenderCore.hpp"
+#include "../TextureRenderCore.func.hpp"
 
 #include "OpenSHC/Globals/DAT_GMImageOffsets.hpp"
 #include "OpenSHC/Globals/DAT_GMImageSizes.hpp"
@@ -18,7 +10,7 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00455250
         void TextureRenderCore::transformUncompressedImageWithMarkerUnkToRGB565(int imageIndex)
         {
-            transformRawWithMarkerUnkToRGB555To565(
+            MACRO_CALL_MEMBER(TextureRenderCore_Func::transformRawWithMarkerUnkToRGB555To565, this)(
                 DAT_GMImageOffsets::instance[imageIndex], DAT_GMImageSizes::instance[imageIndex]);
         }
 

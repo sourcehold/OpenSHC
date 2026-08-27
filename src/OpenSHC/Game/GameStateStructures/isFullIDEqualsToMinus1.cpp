@@ -1,4 +1,5 @@
-#include "OpenSHC/Game/GameStateStructures.func.hpp"
+#include "../GameStateStructures.func.hpp"
+
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
