@@ -5,10 +5,6 @@
 
 namespace OpenSHC {
 
-/*
-  decompilerscript: committed: 2025-01-30 21:57:43.216000
- */
-
 // FUNCTION: STRONGHOLDCRUSADER 0x0043F2C0
 void UI::MenuItemRenderFunction_BuildingAndStatusMenu_PopularityMenuSwitchButton(int param_1, ...)
 
@@ -19,9 +15,7 @@ void UI::MenuItemRenderFunction_BuildingAndStatusMenu_PopularityMenuSwitchButton
         }
         MACRO_CALL(OpenSHC::UI_Func::
                 MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
-        return;
     }
-    return;
 }
 
 }

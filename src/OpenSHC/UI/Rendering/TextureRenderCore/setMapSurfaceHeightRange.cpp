@@ -1,4 +1,4 @@
-#include "OpenSHC/UI/Rendering/TextureRenderCore.hpp"
+#include "../TextureRenderCore.func.hpp"
 
 namespace OpenSHC {
 namespace UI {

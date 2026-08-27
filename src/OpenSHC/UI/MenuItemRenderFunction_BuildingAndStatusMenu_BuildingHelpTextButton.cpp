@@ -9,13 +9,8 @@ namespace OpenSHC {
 
 using OpenSHC::UI::Enums::BuildingsAndStatusMenuTabType;
 
-/*
-  decompilerscript: committed: 2025-01-30 21:57:43.216000
- */
-
 // FUNCTION: STRONGHOLDCRUSADER 0x0043A880
 void UI::MenuItemRenderFunction_BuildingAndStatusMenu_BuildingHelpTextButton(int param_1, ...)
-
 {
     DAT_ButtonUnknownZero::instance = 0;
     if ((DAT_GameCore::instance.activeMenuTab.tabType == OpenSHC::UI::Enums::BASMTT_BARRACKS_OR_MPMENU_MODEM)
@@ -24,9 +19,7 @@ void UI::MenuItemRenderFunction_BuildingAndStatusMenu_BuildingHelpTextButton(int
     } else if (DAT_BuildingsState::instance.field24_0x18e04c != 0) {
         MACRO_CALL(OpenSHC::UI_Func::
                 MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
-        return;
     }
-    return;
 }
 
 }
