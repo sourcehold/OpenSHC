@@ -1,4 +1,4 @@
-#include "OpenSHC/Text/TextEditorState.func.hpp"
+#include "../TextEditorState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_UserHelpDefinedData.hpp"
 
