@@ -137,7 +137,7 @@ namespace Map {
                 &EntityState::removeEntityFromTileLinkedList)
             removeEntityFromTileLinkedList;
 
-            MACRO_FUNCTION_RESOLVER(int (EntityState::*)(int), false, Address::SHC_3BB0A8C1_0x004039B0,
+            MACRO_FUNCTION_RESOLVER(void (EntityState::*)(int), false, Address::SHC_3BB0A8C1_0x004039B0,
                 &EntityState::activateProjectileEntity)
             activateProjectileEntity;
 

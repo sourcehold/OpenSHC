@@ -52,6 +52,8 @@ if not PATH_CMAKE_OPENSHC_SOURCES.exists():
 # Initialize MCP server
 mcp = FastMCP("openshc-mcp")
 
+
+@mcp.tool()
 def compile_project(truncated: bool = True, no_output_on_succes: bool = True) -> tuple[bool, str, str]:
   """
   Compile the C++ project using MSVC. Must be executed after writing new cpp file contents.
@@ -160,6 +162,8 @@ def function_name_to_cpp_path(function_name: str, base_path = Path("src")) -> tu
     path = path / part
   return True, f"{str(path)}.cpp", ""
 
+
+@mcp.tool()
 def write_source_for_function(function_name: str, contents: str, should_exist: bool = False):
   # Translate the function name into a path
   rstate, rresult, rerr = function_name_to_cpp_path(function_name=function_name)
@@ -181,6 +185,7 @@ def write_source_for_function(function_name: str, contents: str, should_exist: b
   PATH_CMAKE_OPENSHC_SOURCES.write_text('\n'.join(lines) + '\n', newline='\n')
 
   return True, "", ""
+
 
 @mcp.tool()
 def compile_cpp_code_for_function(function_name: str, contents: str) -> tuple[bool, str, str]:

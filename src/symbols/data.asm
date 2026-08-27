@@ -855,7 +855,7 @@ PUBLIC ?instance@?$Extern@I$0NPFGDI@@StructResolver@@2IA
 
 PUBLIC ?instance@?$Extern@USkMasterDataEntry@IO@OpenSHC@@$0NPFGFI@@StructResolver@@2USkMasterDataEntry@IO@OpenSHC@@A
 
-PUBLIC ?instance@?$Extern@H$0NPGCEI@@StructResolver@@2HA
+PUBLIC ?instance@?$Extern@M$0NPGCEI@@StructResolver@@2MA
 
 PUBLIC ?instance@?$Extern@H$0NPGCEM@@StructResolver@@2HA
 
@@ -2482,7 +2482,7 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@USkMasterDataEntry@IO@OpenSHC@@$0NPFGFI@@StructResolver@@2USkMasterDataEntry@IO@OpenSHC@@A EQU 00DF5658h
 
-?instance@?$Extern@H$0NPGCEI@@StructResolver@@2HA EQU 00DF6248h
+?instance@?$Extern@M$0NPGCEI@@StructResolver@@2MA EQU 00DF6248h
 
 ?instance@?$Extern@H$0NPGCEM@@StructResolver@@2HA EQU 00DF624Ch
 

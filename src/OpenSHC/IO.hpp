@@ -20,9 +20,9 @@ namespace IO {
 
     void __cdecl Base64EncodeInit(Base64State* state);
 
-    byte __cdecl Base64EncodeCharacterLookup(char param_1);
+    char __cdecl Base64Encode_CharacterLookup(char param_1);
 
-    int __cdecl Base64Encode(byte* input, int length, undefined* output, Base64State* state);
+    int __cdecl Base64Encode(char* input, int length, char* output, Base64State* state);
 
     BOOLEnum __cdecl FileExists(char* param_1);
 

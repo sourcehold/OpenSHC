@@ -319,7 +319,7 @@ namespace Synchrony {
         byte DAT_PlayerGroupArray[9]; // 0x00109E4D length: 9
         byte playerGroupArray2Unk[9]; // 0x00109E56 length: 9
         byte field294_0x109e5f[9]; // 0x00109E5F length: 9
-        byte playerPositionsArray[8]; // 0x00109E68 length: 8
+        char playerPositionsArray[8]; // 0x00109E68 length: 8
         undefined4 protocolInvokerPlayerID; // 0x00109E70 length: 4
         undefined4 currentPlayerSlotID; // 0x00109E74 length: 4
         undefined4 DAT_SomePlayerID; // 0x00109E78 length: 4

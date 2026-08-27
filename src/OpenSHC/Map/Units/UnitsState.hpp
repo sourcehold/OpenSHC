@@ -55,7 +55,7 @@ namespace Map {
             BOOLEnum hasEngineerSelected; // 0x00000558 length: 4
             int field14_0x55c; // 0x0000055C length: 4
             int field15_0x560; // 0x00000560 length: 4
-            undefined4 selectionEuropeanArchers; // 0x00000564 length: 4
+            int selectionEuropeanArchers; // 0x00000564 length: 4
             undefined4 selectionSpearmen; // 0x00000568 length: 4
             undefined4 selectionMacemen; // 0x0000056C length: 4
             undefined4 selectionCrossbowmen; // 0x00000570 length: 4
@@ -105,7 +105,7 @@ namespace Map {
             ~UnitsState() {};
 
             // Constructor
-            UnitsState* constructUnitsState();
+            UnitsState* Constructor_UnitsState();
 
             void clearAllUnits();
 
@@ -278,7 +278,7 @@ namespace Map {
 
             void recountUnitsInSelection();
 
-            int selectionContainsEngineersOnly();
+            BOOLEnum selectionContainsEngineersOnly();
 
             BOOLEnum selectionHasEngineers();
 

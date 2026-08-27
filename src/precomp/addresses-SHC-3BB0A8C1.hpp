@@ -18712,7 +18712,7 @@ enum {
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x004547C0 = 0x004547C0,
-    // label: CheckGfxResourceExists
+    // label: checkGfxResourceExists
     // location: OpenSHC/UI/Rendering/TextureRenderCore
     // type: function
     SHC_3BB0A8C1_0x004548D0 = 0x004548D0,
@@ -26438,7 +26438,7 @@ enum {
     // location: OpenSHC/IO
     // type: function
     SHC_3BB0A8C1_0x00487080 = 0x00487080,
-    // label: Base64EncodeCharacterLookup
+    // label: Base64Encode_CharacterLookup
     // location: OpenSHC/IO
     // type: function
     SHC_3BB0A8C1_0x00487090 = 0x00487090,
@@ -66243,7 +66243,7 @@ enum {
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x0053B800 = 0x0053B800,
-    // label: constructUnitsState
+    // label: Constructor_UnitsState
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x0053B8B0 = 0x0053B8B0,
@@ -97185,7 +97185,7 @@ enum {
     SHC_3BB0A8C1_0x00DF5AD0 = 0x00DF5AD0,
     // label: DAT_SkMasters2Data_Version
     // location:
-    // type: /int
+    // type: /float
     SHC_3BB0A8C1_0x00DF6248 = 0x00DF6248,
     // label: DAT_SkMasters2Data_Count
     // location:

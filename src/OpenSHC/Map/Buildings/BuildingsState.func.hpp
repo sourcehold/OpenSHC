@@ -29,7 +29,7 @@ namespace Map {
                 &BuildingsState::constructBuildingsState)
             constructBuildingsState;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (BuildingsState::*)(int, int, ResourceType), false,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int, ResourceType), false,
                 Address::SHC_3BB0A8C1_0x00409330, &BuildingsState::getBuildingResourceAmountByUid)
             getBuildingResourceAmountByUid;
 
@@ -73,7 +73,7 @@ namespace Map {
                 &BuildingsState::isFearFactorBuilding)
             isFearFactorBuilding;
 
-            MACRO_FUNCTION_RESOLVER(uint (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040A4A0,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040A4A0,
                 &BuildingsState::isReligiousBuilding)
             isReligiousBuilding;
 

@@ -73,7 +73,7 @@ namespace Map {
             TribesState* Constructor_TribesState();
 
             void giveUnitSelectionMoveInstructionNoMatchedSpeed(
-                undefined4 tribeID, undefined4 x, undefined4 y, undefined4 rallyBool, undefined4 doRally);
+                int tribeID, uint x, uint y, int rallyBool, int doRally);
 
             void clearAllTribes();
 

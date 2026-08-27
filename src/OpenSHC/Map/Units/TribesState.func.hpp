@@ -31,8 +31,8 @@ namespace Map {
                 &TribesState::Constructor_TribesState)
             Constructor_TribesState;
 
-            MACRO_FUNCTION_RESOLVER(void (TribesState::*)(undefined4, undefined4, undefined4, undefined4, undefined4),
-                false, Address::SHC_3BB0A8C1_0x004B7700, &TribesState::giveUnitSelectionMoveInstructionNoMatchedSpeed)
+            MACRO_FUNCTION_RESOLVER(void (TribesState::*)(int, uint, uint, int, int), false,
+                Address::SHC_3BB0A8C1_0x004B7700, &TribesState::giveUnitSelectionMoveInstructionNoMatchedSpeed)
             giveUnitSelectionMoveInstructionNoMatchedSpeed;
 
             MACRO_FUNCTION_RESOLVER(

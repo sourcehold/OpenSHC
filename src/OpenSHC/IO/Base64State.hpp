@@ -16,7 +16,8 @@ namespace IO {
     typedef struct Base64State {
 
         int phase; // 0x00000000 length: 4
-        int carryByte; // 0x00000004 length: 4
+        char carryByte; // 0x00000004 length: 1
+        byte unused[3]; // 0x00000005 length: 3
         int lineCharacterCounter; // 0x00000008 length: 4
 
     } Base64State;

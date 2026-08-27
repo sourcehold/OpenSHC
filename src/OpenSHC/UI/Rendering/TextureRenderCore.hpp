@@ -161,13 +161,13 @@ namespace UI {
             void renderUnitAnimationWithBlendingUnk(
                 int xPosition, int yPosition, int width, int height, byte* imageAddress, int blendStrengthUnk);
 
-            int loadGfxFile(char* tgxFileName);
+            int loadGfxFile(char const* tgxFileName);
 
             int loadGFX8(char* gfx8Filename);
 
             int loadGfxAtBufferEnd(char* fileName);
 
-            BOOLEnum CheckGfxResourceExists(char* param_1);
+            BOOLEnum checkGfxResourceExists(char* param_1);
 
             void renderLoadedGfx(int loadedGfxIndex, int xPos, int yPos);
 
