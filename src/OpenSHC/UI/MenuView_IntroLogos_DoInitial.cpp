@@ -12,10 +12,13 @@ using OpenSHC::UI::Menu;
 // FUNCTION: STRONGHOLDCRUSADER 0x00424770
 void UI::MenuView_IntroLogos_DoInitial()
 {
-    DAT_MenuHandlerState::instance.y = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
-    DAT_MenuHandlerState::instance.x = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
-    DAT_MenuHandlerState::instance.currentMenu->yPosition = DAT_MenuHandlerState::instance.y;
-    DAT_MenuHandlerState::instance.currentMenu->xPosition = DAT_MenuHandlerState::instance.x;
+    int y = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
+    int x = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
+    Menu* pMVar1 = DAT_MenuHandlerState::instance.currentMenu;
+    pMVar1->xPosition = x;
+    pMVar1->yPosition = y;
+    DAT_MenuHandlerState::instance.x = x;
+    DAT_MenuHandlerState::instance.y = y;
 
     DAT_IntroTimestamp::instance = timeGetTime();
 }
