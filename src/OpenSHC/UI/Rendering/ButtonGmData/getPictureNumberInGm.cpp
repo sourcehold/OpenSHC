@@ -1,4 +1,5 @@
-#include "OpenSHC/UI/Rendering/ButtonGmData.func.hpp"
+#include "../ButtonGmData.func.hpp"
+
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
