@@ -23051,9 +23051,9 @@ SHC_3BB0A8C1_0x00486F20 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00487080 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00487090 | 0.0% | Pending
+SHC_3BB0A8C1_0x00487090 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004870B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004870B0 | 100.0% | Reimplemented, requires SHC_3BB0A8C1_0x00487090 to be active
 
 SHC_3BB0A8C1_0x00487200 | 0.0% | Pending
 

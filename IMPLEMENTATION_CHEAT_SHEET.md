@@ -122,6 +122,28 @@ SEC_RNG::ptr->currentNumber1 % 4
   ```
   Once 4 are reached, the switch is probably converted to a table lookup.  
   This structure shows up as if-else chain in the decompiler, so do not be confused and check the assembly if the conditions are repeated checks of the same value. 
+- A switch is in the end just a structure with a scope that allows to jump to certain cases. Inside this scope, other structures are fully legal. This is allowed, for example:
+  ```cpp
+  switch(value) {
+    ++value; // never executed
+  case 0: {
+      // do something
+      break;
+  }
+      while (value < 3) {
+      case 1: {
+          // do something
+      }
+      case 2: {
+          // do something
+      }
+      }
+  default: {
+      // do something
+  }
+  }
+  ```
+  Consider this, should a switch structure arise with strange fallthrough and loops, like SHC_3BB0A8C1_0x004870B0.
 
 ### Loops
 
