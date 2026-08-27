@@ -18335,7 +18335,7 @@ SHC_3BB0A8C1_0x0045D430 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0045D460 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0045D690 | 0.0% | Pending
+SHC_3BB0A8C1_0x0045D690 | 60.0% | Probably needs to be part of 0x004403d0
 
 SHC_3BB0A8C1_0x0045D6C0 | 0.0% | Pending
 
