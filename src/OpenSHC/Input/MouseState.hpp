@@ -32,10 +32,10 @@ namespace Input {
         undefined4 time0; // 0x00000004 length: 4
         BOOLEnum anyActivity; // 0x00000008 length: 4
         undefined4 flag; // 0x0000000C length: 4
-        undefined4 screenSpaceX; // 0x00000010 length: 4
-        undefined4 screenSpaceY; // 0x00000014 length: 4
-        undefined4 cursorPosX; // 0x00000018 length: 4
-        undefined4 cursorPosY; // 0x0000001C length: 4
+        int screenSpaceX; // 0x00000010 length: 4
+        int screenSpaceY; // 0x00000014 length: 4
+        int cursorPosX; // 0x00000018 length: 4
+        int cursorPosY; // 0x0000001C length: 4
         undefined4 previousScreenSpaceX; // 0x00000020 length: 4
         undefined4 previousScreenSpaceY; // 0x00000024 length: 4
         BOOLEnum draggingStopped; // 0x00000028 length: 4
@@ -46,7 +46,7 @@ namespace Input {
         undefined4 rightClickStart; // 0x0000003C length: 4
         BOOLEnum leftClickState; // 0x00000040 length: 4
         BOOLEnum midClickState; // 0x00000044 length: 4
-        BOOLEnum rightClickState; // 0x00000048 length: 4
+        int rightClickState; // 0x00000048 length: 4
         BOOLEnum previousLeftClickState; // 0x0000004C length: 4
         undefined4 previousMidClickStateUnk; // 0x00000050 length: 4
         uint previousRightClickState; // 0x00000054 length: 4
@@ -64,7 +64,7 @@ namespace Input {
         int previewEnabled; // 0x0000009C length: 4
         MouseXYUUStruct mouseXY[10]; // 0x000000A0 length: 160
         int mouseXY8[10]; // 0x00000140 length: 40
-        undefined4 index; // 0x00000168 length: 4
+        int index; // 0x00000168 length: 4
         undefined4 storedScreenSpaceX; // 0x0000016C length: 4
         undefined4 storedScreenSpaceY; // 0x00000170 length: 4
         undefined4 field42_0x174; // 0x00000174 length: 4
@@ -98,9 +98,9 @@ namespace Input {
         int field70_0x1e4; // 0x000001E4 length: 4
         undefined1 padding_0x1e8[8]; // 0x000001E8 length: 8
         undefined4 cursorType; // 0x000001F0 length: 4
-        undefined2 mouseWindowX; // 0x000001F4 length: 2
-        undefined2 mouseWindowY; // 0x000001F6 length: 2
-        undefined2 mouseWheelDelta; // 0x000001F8 length: 2
+        short mouseWindowX; // 0x000001F4 length: 2
+        short mouseWindowY; // 0x000001F6 length: 2
+        short mouseWheelDelta; // 0x000001F8 length: 2
         ClickTypeBitMaskEnumByte mouseClickTypes; // 0x000001FA length: 1
         undefined1 padding1; // 0x000001FB length: 1
         HCURSOR currentDefaultCursor; // 0x000001FC length: 4
