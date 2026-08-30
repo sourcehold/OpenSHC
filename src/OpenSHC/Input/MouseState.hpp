@@ -81,8 +81,8 @@ namespace Input {
         undefined4 currentTime1; // 0x000001A0 length: 4
         undefined4 currentTime2; // 0x000001A4 length: 4
         undefined4 currentTime3; // 0x000001A8 length: 4
-        undefined4 field56_0x1ac; // 0x000001AC length: 4
-        undefined4 field57_0x1b0; // 0x000001B0 length: 4
+        int field56_0x1ac; // 0x000001AC length: 4
+        int field57_0x1b0; // 0x000001B0 length: 4
         undefined4 field58_0x1b4; // 0x000001B4 length: 4
         undefined4 field59_0x1b8; // 0x000001B8 length: 4
         undefined4 field60_0x1bc; // 0x000001BC length: 4
