@@ -16,7 +16,7 @@ namespace Map {
         for (int _buildingID = 1; _buildingID < 2000; _buildingID++) {
             if (DAT_BuildingsState::instance.buildings[_buildingID].logicalState != ((BuildingLogicalState)0)) {
                 DAT_BuildingsState::instance.buildings[_buildingID].uidWhenPlaced
-                    = DAT_BuildingsState::instance.buildings[_buildingID].someUID;
+                    = DAT_BuildingsState::instance.buildings[_buildingID].uidPlaced;
             }
         }
     }

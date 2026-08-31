@@ -11,7 +11,7 @@ namespace Map {
         using OpenSHC::Map::Buildings::BuildingTypeShort;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0040A4A0
-        uint BuildingsState::isReligiousBuilding(int buildingID)
+        BOOLEnum BuildingsState::isReligiousBuilding(int buildingID)
         {
             // fixme: logic is correct but original is written differently apparently.
             return this->buildings[buildingID].buildingType == Buildings::BT_CHAPEL
