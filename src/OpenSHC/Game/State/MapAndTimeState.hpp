@@ -12,6 +12,7 @@
 #include "OpenSHC/Game/Market/BuySellPair.hpp"
 #include "OpenSHC/Game/Signpost/SignpostLocation.hpp"
 #include "OpenSHC/Game/Skirmish/AttackVector.hpp"
+#include "OpenSHC/Map/Location/Point4ShortXY.hpp"
 #include "OpenSHC/Map/Location/Point8IntXY.hpp"
 #include "OpenSHC/Map/Navigation/Algorithms/XYPair.hpp"
 #include "OpenSHC/Map/Navigation/Algorithms/XYTileObject.hpp"
@@ -27,6 +28,7 @@ namespace Game {
         using OpenSHC::Game::Market::BuySellPair;
         using OpenSHC::Game::Signpost::SignpostLocation;
         using OpenSHC::Game::Skirmish::AttackVector;
+        using OpenSHC::Map::Location::Point4ShortXY;
         using OpenSHC::Map::Location::Point8IntXY;
         using OpenSHC::Map::Navigation::Algorithms::XYPair;
         using OpenSHC::Map::Navigation::Algorithms::XYTileObject;
@@ -151,7 +153,7 @@ namespace Game {
             short editScenarioExtraOptions; // 0x00000DEA length: 2
             short eventCountdownRabbitInfestation; // 0x00000DEC length: 2
             short field2269_0xdee; // 0x00000DEE length: 2
-            short field2270_0xdf0[4][2]; // 0x00000DF0 length: 16
+            Point4ShortXY lionLocationsXY[4]; // 0x00000DF0 length: 16
             short unitLadyRelated; // 0x00000E00 length: 2
             short unitJesterRelated; // 0x00000E02 length: 2
             short playerPopulationStatistics[9][300]; // 0x00000E04 length: 5400

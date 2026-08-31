@@ -1315,11 +1315,15 @@ PUBLIC ?instance@?$Extern@I$0NPFCAA@@StructResolver@@2IA
 
 PUBLIC ?instance@?$Extern@I$0NPFFDA@@StructResolver@@2IA
 
+PUBLIC ?instance@?$Extern@K$0NPFFDE@@StructResolver@@2KA
+
 PUBLIC ?instance@?$Extern@I$0NPFFDI@@StructResolver@@2IA
 
 PUBLIC ?instance@?$Extern@I$0NPFFEA@@StructResolver@@2IA
 
 PUBLIC ?instance@?$Extern@I$0NPFFEE@@StructResolver@@2IA
+
+PUBLIC ?instance@?$Extern@K$0NPFFEI@@StructResolver@@2KA
 
 PUBLIC ?instance@?$Extern@I$0NPFFFE@@StructResolver@@2IA
 
@@ -2942,11 +2946,15 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@I$0NPFFDA@@StructResolver@@2IA EQU 00DF5530h
 
+?instance@?$Extern@K$0NPFFDE@@StructResolver@@2KA EQU 00DF5534h
+
 ?instance@?$Extern@I$0NPFFDI@@StructResolver@@2IA EQU 00DF5538h
 
 ?instance@?$Extern@I$0NPFFEA@@StructResolver@@2IA EQU 00DF5540h
 
 ?instance@?$Extern@I$0NPFFEE@@StructResolver@@2IA EQU 00DF5544h
+
+?instance@?$Extern@K$0NPFFEI@@StructResolver@@2KA EQU 00DF5548h
 
 ?instance@?$Extern@I$0NPFFFE@@StructResolver@@2IA EQU 00DF5554h
 

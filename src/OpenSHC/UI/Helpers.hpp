@@ -80,6 +80,8 @@ namespace UI {
 
         void __cdecl SumUnitPoints();
 
+        undefined4 __cdecl GetCurrentTutorialStep();
+
         void __cdecl SetTutorialBuildingActionState(int param_1, BuildingType buildingType);
 
         void __cdecl ResetEventStatusUnk();

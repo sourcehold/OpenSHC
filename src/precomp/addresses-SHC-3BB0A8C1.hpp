@@ -23184,15 +23184,15 @@ enum {
     // location: OpenSHC/Util/WideCharMultiByteState
     // type: function
     SHC_3BB0A8C1_0x0046B110 = 0x0046B110,
-    // label: multiByteToWideCharThunk
+    // label: multiByteToWideCharWithSize
     // location: OpenSHC/Util/WideCharMultiByteState
     // type: function
     SHC_3BB0A8C1_0x0046B140 = 0x0046B140,
-    // label: wideCharToByteUnk
+    // label: singleWideCharToMultiByte
     // location: OpenSHC/Util/WideCharMultiByteState
     // type: function
     SHC_3BB0A8C1_0x0046B170 = 0x0046B170,
-    // label: multiByteToWideCharThunk2
+    // label: singleMultiByteToWideChar
     // location: OpenSHC/Util/WideCharMultiByteState
     // type: function
     SHC_3BB0A8C1_0x0046B1B0 = 0x0046B1B0,
@@ -34429,7 +34429,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004BC5F0 = 0x004BC5F0,
     // label: GetCurrentTutorialStep
-    // location: OpenSHC/Input
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004BC620 = 0x004BC620,
     // label: recordTutorialPlayerAction
@@ -97104,6 +97104,8 @@ enum {
     SHC_3BB0A8C1_0x00DF5528 = 0x00DF5528,
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF5530 = 0x00DF5530,
+    // type: WinDef/DWORD
+    SHC_3BB0A8C1_0x00DF5534 = 0x00DF5534,
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF5538 = 0x00DF5538,
     // label: DAT_CheatCodeStringTrackerIndex
@@ -97114,6 +97116,8 @@ enum {
     SHC_3BB0A8C1_0x00DF5540 = 0x00DF5540,
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF5544 = 0x00DF5544,
+    // type: WinDef/DWORD
+    SHC_3BB0A8C1_0x00DF5548 = 0x00DF5548,
     // label: INT_DisableTutorialRestrictions
     // location:
     // type: /int

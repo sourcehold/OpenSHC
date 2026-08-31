@@ -136,6 +136,10 @@ namespace UI {
             void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004B8200, &OpenSHC::UI::Helpers::SumUnitPoints)
         SumUnitPoints;
 
+        MACRO_FUNCTION_RESOLVER(undefined4(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004BC620,
+            &OpenSHC::UI::Helpers::GetCurrentTutorialStep)
+        GetCurrentTutorialStep;
+
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, BuildingType buildingType), false,
             Address::SHC_3BB0A8C1_0x004BC690, &OpenSHC::UI::Helpers::SetTutorialBuildingActionState)
         SetTutorialBuildingActionState;

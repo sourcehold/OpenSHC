@@ -33,8 +33,8 @@ namespace Text {
         undefined4 savedMenuFlag; // 0x0000001C length: 4
         BOOLEnum pendingCreditsFadeBorder; // 0x00000020 length: 4
         BOOLEnum helpSectionParseSucceeded; // 0x00000024 length: 4
-        undefined4 currentHelpSectionID; // 0x00000028 length: 4
-        undefined4 helpSectionHistoryStack[30]; // 0x0000002C length: 120
+        int currentHelpSectionID; // 0x00000028 length: 4
+        int helpSectionHistoryStack[30]; // 0x0000002C length: 120
         undefined4 counter; // 0x000000A4 length: 4
         undefined4 helpContentScrollOffsetY; // 0x000000A8 length: 4
         undefined4 topVisibleLineIndex; // 0x000000AC length: 4
@@ -131,7 +131,7 @@ namespace Text {
 
         int readCrusaderHelpHlp(LPCSTR param_1);
 
-        undefined4 loadAndParseHelpFile(FILE* param_1);
+        BOOLEnum loadAndParseHelpFile(char const* param_1);
 
         void parseHlp();
 

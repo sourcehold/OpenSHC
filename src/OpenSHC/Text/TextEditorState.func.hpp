@@ -3,12 +3,15 @@
 */
 
 #include "OpenSHC/Text/TextEditorState.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "mbstring.h"
 #include "winnt.h"
 namespace OpenSHC {
 namespace Text {
     namespace TextEditorState_Func {
+
+        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // Constructor
 
@@ -116,7 +119,7 @@ namespace Text {
             &TextEditorState::readCrusaderHelpHlp)
         readCrusaderHelpHlp;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (TextEditorState::*)(FILE*), false, Address::SHC_3BB0A8C1_0x0045F580,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (TextEditorState::*)(char const*), false, Address::SHC_3BB0A8C1_0x0045F580,
             &TextEditorState::loadAndParseHelpFile)
         loadAndParseHelpFile;
 
