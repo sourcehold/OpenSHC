@@ -30,15 +30,15 @@ namespace Util {
 
         int wideCharToMultiByteComplete(LPSTR charOut, LPCWSTR wideCharIn);
 
-        void multiByteToWideCharacter(LPWSTR param_1, LPCSTR param_2);
+        int multiByteToWideCharacter(LPWSTR lpWideCharStr, LPCSTR lpMultiByteStr);
 
         int wideCharToMultiByteWithSize(LPSTR lpMultiByteStr, LPWSTR lpWideCharStr, int numOfSymbols);
 
-        void multiByteToWideCharThunk(LPWSTR param_1, LPCSTR param_2, int param_3);
+        int multiByteToWideCharWithSize(LPWSTR lpWideCharStr, LPCSTR lpMultiByteStr, int numberOfSymbols);
 
-        char wideCharToByteUnk(WCHAR wideChar);
+        char singleWideCharToMultiByte(WCHAR wideChar);
 
-        void multiByteToWideCharThunk2(char const param_1);
+        WCHAR singleMultiByteToWideChar(char character);
     };
 
     static_assert_cpp98_obj(sizeof(WideCharMultiByteState) == 1, WideCharMultiByteState);
