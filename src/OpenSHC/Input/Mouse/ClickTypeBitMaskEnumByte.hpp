@@ -13,7 +13,7 @@
 namespace OpenSHC {
 namespace Input {
     namespace Mouse {
-        typedef byte ClickTypeBitMaskEnumByte;
+        typedef char ClickTypeBitMaskEnumByte;
 
         static_assert_cpp98_obj(sizeof(ClickTypeBitMaskEnumByte) == 1, ClickTypeBitMaskEnumByte);
     } // namespace Mouse
