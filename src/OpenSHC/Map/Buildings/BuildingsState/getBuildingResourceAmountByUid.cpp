@@ -9,7 +9,7 @@ namespace Map {
         using OpenSHC::Game::Resources::ResourceType;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00409330
-        undefined4 BuildingsState::getBuildingResourceAmountByUid(int buildingID, int param_2, ResourceType param_3)
+        int BuildingsState::getBuildingResourceAmountByUid(int buildingID, int param_2, ResourceType param_3)
         {
             if (this->buildings[buildingID].uid != param_2) {
                 return 0;
