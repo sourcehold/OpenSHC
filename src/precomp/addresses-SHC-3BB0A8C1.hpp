@@ -34538,7 +34538,7 @@ enum {
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004BD0F0 = 0x004BD0F0,
-    // label: updateTutorialStepAndProgress
+    // label: UpdateTutorialStepAndProgress
     // location: OpenSHC/UI
     // type: function
     SHC_3BB0A8C1_0x004BD1B0 = 0x004BD1B0,
@@ -40378,7 +40378,7 @@ enum {
     // location: OpenSHC/AI/AICState
     // type: function
     SHC_3BB0A8C1_0x004D49E0 = 0x004D49E0,
-    // label: readSkMasters2
+    // label: ReadSkMasters2
     // location: OpenSHC/IO
     // type: function
     SHC_3BB0A8C1_0x004D5010 = 0x004D5010,
@@ -55997,7 +55997,7 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00531000 = 0x00531000,
-    // label: ComputeDamageFearFactorBonus
+    // label: computeDamageFearFactorBonus
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005311F0 = 0x005311F0,
@@ -95412,11 +95412,15 @@ enum {
     // type: /undefined4
     SHC_3BB0A8C1_0x00B960E8 = 0x00B960E8,
     // type: /int
+    SHC_3BB0A8C1_0x00B960EC = 0x00B960EC,
+    // type: /int
     SHC_3BB0A8C1_0x00B960F0 = 0x00B960F0,
     // type: /undefined4
     SHC_3BB0A8C1_0x00B960F4 = 0x00B960F4,
     // type: /undefined4
     SHC_3BB0A8C1_0x00B960F8 = 0x00B960F8,
+    // type: /int
+    SHC_3BB0A8C1_0x00B960FC = 0x00B960FC,
     // type: /undefined4
     SHC_3BB0A8C1_0x00B96100 = 0x00B96100,
     // type: /undefined4
@@ -95439,6 +95443,8 @@ enum {
     SHC_3BB0A8C1_0x00B9611C = 0x00B9611C,
     // type: /int
     SHC_3BB0A8C1_0x00B96120 = 0x00B96120,
+    // type: /int
+    SHC_3BB0A8C1_0x00B96124 = 0x00B96124,
     // label: Menu_SelectCrusade
     // location:
     // type: OpenSHC/UI/Menu
@@ -96061,12 +96067,18 @@ enum {
     // location:
     // type: OpenSHC/UI/Menu
     SHC_3BB0A8C1_0x00B983C0 = 0x00B983C0,
+    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
+    SHC_3BB0A8C1_0x00B98404 = 0x00B98404,
     // label: BOOL_WasInteracting
     // location:
     // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
     SHC_3BB0A8C1_0x00B98408 = 0x00B98408,
     // type: /undefined4
     SHC_3BB0A8C1_0x00B9840C = 0x00B9840C,
+    // type: WinDef/DWORD
+    SHC_3BB0A8C1_0x00B98410 = 0x00B98410,
+    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
+    SHC_3BB0A8C1_0x00B98414 = 0x00B98414,
     // label: TIME_PreviousClick
     // location:
     // type: WinDef/DWORD
@@ -96109,6 +96121,8 @@ enum {
     SHC_3BB0A8C1_0x00B98450 = 0x00B98450,
     // type: /undefined4
     SHC_3BB0A8C1_0x00B98454 = 0x00B98454,
+    // type: /int
+    SHC_3BB0A8C1_0x00B98458 = 0x00B98458,
     // type: /undefined4
     SHC_3BB0A8C1_0x00B9845C = 0x00B9845C,
     // label: DAT_UnitValueLossesPerEnemyPlayer
@@ -96399,10 +96413,16 @@ enum {
     SHC_3BB0A8C1_0x00DF3358 = 0x00DF3358,
     // type: /int
     SHC_3BB0A8C1_0x00DF335C = 0x00DF335C,
+    // type: /int
+    SHC_3BB0A8C1_0x00DF3360 = 0x00DF3360,
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00DF3364 = 0x00DF3364,
     // type: /int
     SHC_3BB0A8C1_0x00DF3368 = 0x00DF3368,
+    // type: WinDef/DWORD
+    SHC_3BB0A8C1_0x00DF336C = 0x00DF336C,
+    // type: WinDef/DWORD
+    SHC_3BB0A8C1_0x00DF3370 = 0x00DF3370,
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF3374 = 0x00DF3374,
     // type: WinDef/DWORD
@@ -96625,6 +96645,10 @@ enum {
     SHC_3BB0A8C1_0x00DF4238 = 0x00DF4238,
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF423C = 0x00DF423C,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00DF4240 = 0x00DF4240,
+    // type: /int
+    SHC_3BB0A8C1_0x00DF4244 = 0x00DF4244,
     // label: DAT_LobbyAddAICurrentlyHoveredAI
     // location:
     // type: /undefined4
@@ -96643,14 +96667,20 @@ enum {
     SHC_3BB0A8C1_0x00DF426C = 0x00DF426C,
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF4284 = 0x00DF4284,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00DF4288 = 0x00DF4288,
     // label: DAT_SentOrRequestedGoodsAmount
     // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF428C = 0x00DF428C,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00DF4290 = 0x00DF4290,
     // label: DAT_EnemyArrayIndex
     // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF4294 = 0x00DF4294,
+    // type: /undefined4
+    SHC_3BB0A8C1_0x00DF4298 = 0x00DF4298,
     // label: DAT_AlliesCount
     // location:
     // type: /undefined4
@@ -97102,6 +97132,8 @@ enum {
     // location:
     // type: /int
     SHC_3BB0A8C1_0x00DF5528 = 0x00DF5528,
+    // type: /int
+    SHC_3BB0A8C1_0x00DF552C = 0x00DF552C,
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF5530 = 0x00DF5530,
     // type: WinDef/DWORD
@@ -97172,8 +97204,20 @@ enum {
     // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF5638 = 0x00DF5638,
+    // type: /int
+    SHC_3BB0A8C1_0x00DF563C = 0x00DF563C,
+    // type: /int
+    SHC_3BB0A8C1_0x00DF5640 = 0x00DF5640,
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF5644 = 0x00DF5644,
+    // type: /int
+    SHC_3BB0A8C1_0x00DF5648 = 0x00DF5648,
+    // type: WinDef/DWORD
+    SHC_3BB0A8C1_0x00DF564C = 0x00DF564C,
+    // type: /int
+    SHC_3BB0A8C1_0x00DF5650 = 0x00DF5650,
+    // type: /int
+    SHC_3BB0A8C1_0x00DF5654 = 0x00DF5654,
     // label: DAT_SkMasterDataEntry
     // location:
     // type: OpenSHC/IO/SkMasterDataEntry
@@ -97356,6 +97400,8 @@ enum {
     SHC_3BB0A8C1_0x00ED2794 = 0x00ED2794,
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED2798 = 0x00ED2798,
+    // type: /int
+    SHC_3BB0A8C1_0x00ED279C = 0x00ED279C,
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED27A0 = 0x00ED27A0,
     // type: /int
@@ -97364,12 +97410,18 @@ enum {
     SHC_3BB0A8C1_0x00ED27A8 = 0x00ED27A8,
     // type: /int
     SHC_3BB0A8C1_0x00ED27B0 = 0x00ED27B0,
+    // type: WinDef/DWORD
+    SHC_3BB0A8C1_0x00ED27B4 = 0x00ED27B4,
+    // type: /int
+    SHC_3BB0A8C1_0x00ED27B8 = 0x00ED27B8,
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED27BC = 0x00ED27BC,
     // label: DAT_SkirmishTrailRelated1
     // location:
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED27C0 = 0x00ED27C0,
+    // type: /int
+    SHC_3BB0A8C1_0x00ED27C4 = 0x00ED27C4,
     // label: DAT_MissionScores
     // location:
     // type: /int[10]
@@ -97378,6 +97430,8 @@ enum {
     SHC_3BB0A8C1_0x00ED27F0 = 0x00ED27F0,
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED2BD8 = 0x00ED2BD8,
+    // type: /int
+    SHC_3BB0A8C1_0x00ED2BDC = 0x00ED2BDC,
     // type: /int[250]
     SHC_3BB0A8C1_0x00ED2BE0 = 0x00ED2BE0,
     // type: /int[40]
@@ -97390,6 +97444,8 @@ enum {
     SHC_3BB0A8C1_0x00ED306C = 0x00ED306C,
     // type: /int[40]
     SHC_3BB0A8C1_0x00ED3070 = 0x00ED3070,
+    // type: /int
+    SHC_3BB0A8C1_0x00ED3110 = 0x00ED3110,
     // type: /int
     SHC_3BB0A8C1_0x00ED3114 = 0x00ED3114,
     // type: /undefined4
@@ -97406,10 +97462,16 @@ enum {
     SHC_3BB0A8C1_0x00ED3128 = 0x00ED3128,
     // type: /float
     SHC_3BB0A8C1_0x00ED312C = 0x00ED312C,
+    // type: /int
+    SHC_3BB0A8C1_0x00ED3130 = 0x00ED3130,
+    // type: /int
+    SHC_3BB0A8C1_0x00ED3134 = 0x00ED3134,
     // type: /dword
     SHC_3BB0A8C1_0x00ED3138 = 0x00ED3138,
     // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
     SHC_3BB0A8C1_0x00ED313C = 0x00ED313C,
+    // type: /int
+    SHC_3BB0A8C1_0x00ED3140 = 0x00ED3140,
     // type: /int
     SHC_3BB0A8C1_0x00ED3144 = 0x00ED3144,
     // type: /undefined4

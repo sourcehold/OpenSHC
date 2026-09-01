@@ -192,8 +192,8 @@ namespace Map {
             shouldUnitsEngageInMelee;
 
             MACRO_FUNCTION_RESOLVER(int (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x005311F0,
-                &UnitsState::ComputeDamageFearFactorBonus)
-            ComputeDamageFearFactorBonus;
+                &UnitsState::computeDamageFearFactorBonus)
+            computeDamageFearFactorBonus;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00531220,
                 &UnitsState::processUnitAttackOtherUnit)

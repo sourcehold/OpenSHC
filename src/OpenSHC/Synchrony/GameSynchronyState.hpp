@@ -97,7 +97,7 @@ namespace Synchrony {
         int DAT_CurrentPlayerFullIDArray2[9]; // 0x000006CC length: 36
         int somePlayerRelatedArray[9]; // 0x000006F0 length: 36
         int currentAIArray[9]; // 0x00000714 length: 36
-        int SEC_AIVariationArray[9]; // 0x00000738 length: 36
+        int aiVariationArray[9]; // 0x00000738 length: 36
         byte field48_0x75c[9]; // 0x0000075C length: 9
         byte field49_0x765[3][9]; // 0x00000765 length: 27
         BOOLEnum displayYourIP; // 0x00000780 length: 4

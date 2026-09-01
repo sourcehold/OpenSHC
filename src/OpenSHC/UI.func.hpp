@@ -1806,8 +1806,8 @@ namespace UI_Func {
     MenuItemRenderFunction_TutorialBox_Main;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004BD1B0, &OpenSHC::UI::updateTutorialStepAndProgress)
-    updateTutorialStepAndProgress;
+        void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004BD1B0, &OpenSHC::UI::UpdateTutorialStepAndProgress)
+    UpdateTutorialStepAndProgress;
 
     MACRO_FUNCTION_RESOLVER(
         void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004BEC10, &OpenSHC::UI::MenuView_EditScenario_Prepare)

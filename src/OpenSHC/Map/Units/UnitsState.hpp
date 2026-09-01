@@ -187,7 +187,7 @@ namespace Map {
 
             BOOLEnum shouldUnitsEngageInMelee(int param_1, int param_2);
 
-            int ComputeDamageFearFactorBonus(int damage, int playerID);
+            int computeDamageFearFactorBonus(int damage, int playerID);
 
             undefined4 processUnitAttackOtherUnit(int unitID, int unit2ID);
 

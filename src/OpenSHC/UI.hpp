@@ -948,7 +948,7 @@ namespace UI {
 
     void __cdecl MenuItemRenderFunction_TutorialBox_Main(int param_1, ...);
 
-    void __cdecl updateTutorialStepAndProgress();
+    void __cdecl UpdateTutorialStepAndProgress();
 
     void __cdecl MenuView_EditScenario_Prepare();
 
