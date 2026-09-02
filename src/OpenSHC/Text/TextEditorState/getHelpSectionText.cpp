@@ -15,7 +15,7 @@ namespace Text {
             }
             _entry++;
         }
-        return (char*)NULL;
+        return NULL;
     }
 
 }

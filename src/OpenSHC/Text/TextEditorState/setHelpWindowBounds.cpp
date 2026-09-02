@@ -11,7 +11,6 @@ namespace Text {
         this->dialogContentY = param_2;
         this->dialogContentHeight = param_3;
         this->dialogContentWidth = param_4;
-        return;
     }
 
 }
