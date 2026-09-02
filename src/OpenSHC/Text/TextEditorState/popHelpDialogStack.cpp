@@ -1,22 +1,22 @@
 #include "../TextEditorState.func.hpp"
 
+#include <string.h>
+
 namespace OpenSHC {
 namespace Text {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00462150
     void TextEditorState::popHelpDialogStack()
     {
-        this->currentHelpSectionID = this->helpSectionHistoryStack[0];
-        for (int iVar1 = 29; iVar1 != 0; iVar1 = iVar1 + -1) {
-            this->helpSectionHistoryStack[iVar1] = this->helpSectionHistoryStack[iVar1 + 1];
-        }
+        int iVar1 = this->helpSectionHistoryStack[0];
+        memcpy(&this->helpSectionHistoryStack[0], &this->helpSectionHistoryStack[1], 29 * sizeof(int));
         this->helpSectionHistoryStack[29] = -1;
-        if (this->helpSectionHistoryStack[0] == -1) {
+        this->currentHelpSectionID = iVar1;
+        if (iVar1 == -1) {
             MACRO_CALL_MEMBER(OpenSHC::Text::TextEditorState_Func::closeHelpDialogAndReturnToMenu, this)();
             return;
         }
         MACRO_CALL_MEMBER(OpenSHC::Text::TextEditorState_Func::loadAndLayoutHelpContent, this)();
-        return;
     }
 
 }
