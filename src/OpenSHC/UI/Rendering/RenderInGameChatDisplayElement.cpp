@@ -10,7 +10,7 @@ namespace UI {
     void Rendering::RenderInGameChatDisplayElement(int posX, int posY, DWORD elementState)
     {
         MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::renderInGameChat, DAT_GameSynchronyState::ptr)(
-            posX, posY, (int)((int)(elementState)));
+            posX, posY, elementState);
     }
 
 }
