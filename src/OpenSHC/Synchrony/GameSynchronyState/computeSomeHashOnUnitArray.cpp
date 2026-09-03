@@ -10,8 +10,8 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x0047EEB0
     int GameSynchronyState::computeSomeHashOnUnitArray()
     {
-        return (int)(MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::computeHash,
-            DAT_DirectionAlgorithmState::ptr)(2920000, (int*)((int)(DAT_UnitsState::instance.units))));
+        return MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::computeHash,
+            DAT_DirectionAlgorithmState::ptr)(2920000, (int*)((int)(DAT_UnitsState::instance.units)));
     }
 
 }
