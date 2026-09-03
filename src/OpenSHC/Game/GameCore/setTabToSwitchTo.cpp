@@ -5,6 +5,7 @@ namespace OpenSHC {
 namespace Game {
 
     using OpenSHC::UI::Enums::MenuViewType;
+
     // FUNCTION: STRONGHOLDCRUSADER 0x0046B300
     void GameCore::setTabToSwitchTo()
     {
