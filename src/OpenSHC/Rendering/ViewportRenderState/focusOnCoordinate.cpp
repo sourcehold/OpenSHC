@@ -1,4 +1,4 @@
-#include "../ViewportRenderState.func.hpp"
+#include "OpenSHC/Rendering/ViewportRenderState.func.hpp"
 
 namespace OpenSHC {
 namespace Rendering {

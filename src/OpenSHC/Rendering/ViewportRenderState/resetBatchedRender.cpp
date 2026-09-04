@@ -1,15 +1,10 @@
-#include "../ViewportRenderState.func.hpp"
+#include "OpenSHC/Rendering/ViewportRenderState.func.hpp"
 
 namespace OpenSHC {
 namespace Rendering {
 
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004E2600
     int ViewportRenderState::resetBatchedRender()
-
     {
         this->unitBatchedRenderCounterUntil6 = 1;
         this->unitRender1 = 0;
