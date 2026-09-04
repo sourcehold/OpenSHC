@@ -9,7 +9,6 @@ namespace Rendering {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004C62A0
         void AIMessageQueue::playNextStoredBinkVideo()
-
         {
             if (this->messagePlaying_0x0 != FALSE) {
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::Bink::AIMessageQueue_Func::playNextStoredAIMessage, this)();

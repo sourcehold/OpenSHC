@@ -7,7 +7,7 @@ namespace Map {
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004B77E0
-    BOOLEnum MapPropertiesState::isValueInRangeOneToTwenty(int param_1) { return param_1 + -1 < 0x14; }
+    BOOLEnum MapPropertiesState::isValueInRangeOneToTwenty(int param_1) { return param_1 + -1 < 20; }
 
 }
 }
