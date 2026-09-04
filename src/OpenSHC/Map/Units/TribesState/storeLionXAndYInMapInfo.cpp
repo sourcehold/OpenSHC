@@ -1,39 +1,25 @@
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
-
-
+#include "OpenSHC/Map/Location/Point4ShortXY.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 
 namespace OpenSHC {
 namespace Map {
-namespace Units {
+    namespace Units {
 
+        using OpenSHC::Map::Location::Point4ShortXY;
 
+        // FUNCTION: STRONGHOLDCRUSADER 0x00523370
+        void TribesState::storeLionXAndYInMapInfo(undefined4 x, undefined4 y)
+        {
+            for (int i = 0; i < 4; i++) {
+                if (DAT_GameState::instance.mapAndTime.lionLocationsXY[i].x == 0) {
+                    DAT_GameState::instance.mapAndTime.lionLocationsXY[i].x = x;
+                    DAT_GameState::instance.mapAndTime.lionLocationsXY[i].y = y;
+                }
+            }
+        }
 
-
-/* 
-  decompilerscript: committed: 2025-01-30 21:57:43.216000
- */
-
-
-// FUNCTION: STRONGHOLDCRUSADER 0x00523370
-void TribesState::storeLionXAndYInMapInfo(undefined4 x,undefined4 y)
-
-{
-short (*pasVar1) [2];
-
-pasVar1 = DAT_GameState::instance.mapAndTime.field2270_0xdf0;
-do {
-if ((*pasVar1)[0] == 0) {
-(*pasVar1)[0] = (short)x;
-(*pasVar1)[1] = (short)y;
-}
-pasVar1 = pasVar1 + 1;
-} while ((int)pasVar1 < 0x117d58c);
-return;
-}
-
-
-}
+    }
 }
 }
