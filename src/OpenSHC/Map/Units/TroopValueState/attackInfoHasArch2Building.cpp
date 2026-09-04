@@ -1,42 +1,23 @@
 #include "OpenSHC/Map/Units/TroopValueState.func.hpp"
 
-
-
-
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 
 namespace OpenSHC {
 namespace Map {
-namespace Units {
+    namespace Units {
 
+        // FUNCTION: STRONGHOLDCRUSADER 0x0051ACB0
+        undefined4 TroopValueState::attackInfoHasArch2Building(int buildingID)
+        {
+            for (int i = 0; i < 1000; i++) {
+                // fixme: this function doesn't use this-> (would be not 100% matching!)
+                if (buildingID == DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[i].buildingID) {
+                    return TRUE;
+                }
+            }
+            return FALSE;
+        }
 
-
-
-/* 
-  WARNING: Enum "MappersEnum": Some values do not have unique names
- */
-
-/* 
-  decompilerscript: committed: 2025-01-30 21:57:43.216000
- */
-
-
-// FUNCTION: STRONGHOLDCRUSADER 0x0051ACB0
-undefined4 TroopValueState::attackInfoHasArch2Building(int buildingID)
-
-{
-int *piVar1;
-
-piVar1 = &this->attackInfo.arch2ValuesArray[0].buildingID;
-do {
-if (buildingID == *piVar1) {
-return(undefined4)( 1);
-}
-piVar1 = piVar1 + 4;
-} while ((int)piVar1 < 0x177e994);
-return(undefined4)( 0);
-}
-
-
-}
+    }
 }
 }
