@@ -9,7 +9,7 @@ namespace IO {
     namespace DecoderBuffer {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0046D270
-        unsigned int __cdecl ReadBufferAndComputeHash(char* buf, unsigned int* size, void* param)
+        unsigned int ReadBufferAndComputeHash(char* buf, unsigned int* size, void* param)
         {
             uint bytesToLoad = *size;
             BufferHelper* bufferHelper = (BufferHelper*)param;
