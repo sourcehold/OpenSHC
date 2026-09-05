@@ -62,11 +62,11 @@ namespace Text {
             Address::SHC_3BB0A8C1_0x00473640, &FontSizeClass::renderCharUnk)
         renderCharUnk;
 
-        MACRO_FUNCTION_RESOLVER(void (FontSizeClass::*)(LPWSTR, int, int, int, BGR24, int), false,
+        MACRO_FUNCTION_RESOLVER(int (FontSizeClass::*)(LPWSTR, int, int, int, BGR24, int), false,
             Address::SHC_3BB0A8C1_0x004737B0, &FontSizeClass::renderWideText)
         renderWideText;
 
-        MACRO_FUNCTION_RESOLVER(int (FontSizeClass::*)(undefined4, int, int, int, int), false,
+        MACRO_FUNCTION_RESOLVER(int (FontSizeClass::*)(WCHAR, int, int, int, int), false,
             Address::SHC_3BB0A8C1_0x00473830, &FontSizeClass::renderWideChar)
         renderWideChar;
 

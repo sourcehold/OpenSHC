@@ -76,9 +76,9 @@ namespace Text {
 
         int renderCharUnk(byte charId, int xPos, int yPosUnk, int bgr24, int blendStrengthUnk);
 
-        void renderWideText(LPWSTR wideText, int textLength, int xPos, int yPos, BGR24 color, int blendStrength);
+        int renderWideText(LPWSTR wideText, int textLength, int xPos, int yPos, BGR24 color, int blendStrength);
 
-        int renderWideChar(undefined4 param_1, int param_2, int param_3, int param_4, int param_5);
+        int renderWideChar(WCHAR wideChar, int xPos, int yPos, int bgr24, int blendStrengthUnk);
     };
 
     static_assert_cpp98_obj(sizeof(FontSizeClass) == 36, FontSizeClass);
