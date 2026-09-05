@@ -21435,9 +21435,9 @@ SHC_3BB0A8C1_0x00472DD0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00472EF0 | 55.0% | Severe Register Issues, seem functional, but can not be considered done
 
-SHC_3BB0A8C1_0x00473300 | 0.0% | Pending
+SHC_3BB0A8C1_0x00473300 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004733A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004733A0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00473640 | 0.0% | Pending
 
