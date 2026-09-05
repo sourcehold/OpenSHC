@@ -107,6 +107,8 @@ def main():
     original = pe.get_data(args.address - pe.OPTIONAL_HEADER.ImageBase, 0xb5)
     assert original[:6] == bytes.fromhex('55 8b ec 51 53 56')
     assert original[-3:] == bytes.fromhex('c2 08 00'), 'Unexpected native function'
+    assert compiled == original, 'Compiled function differs from the original 181 bytes'
+    print('PASS: all 181 function bytes match the original, including prologue and epilogue')
     rng = random.Random(0x46cd30)
     lengths = [-2147483648, -65, -4, -1] + list(range(132))
     lengths += [255, 256, 257, 1023, 1024, 4095, 4096, 65535, 65536]

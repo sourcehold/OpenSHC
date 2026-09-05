@@ -7,8 +7,29 @@ No original game bytes or executable are distributed here.
 The routine adds each complete little-endian 32-bit word to an unsigned accumulator,
 then rotates the accumulator left by one bit. It ignores the final one to three
 bytes, returns zero for signed lengths below four, and does not use `this` or RNG.
-The native function unrolls blocks of sixteen words; the C++ uses one equivalent
-loop. This is a behavioral reimplementation, not a byte-identical match.
+The native function unrolls blocks of sixteen words. The implementation uses
+MSVC inline assembly, following the existing IO/DecoderState codec pattern, to
+preserve those blocks, the tail loop and register/stack behavior. Compiling with
+MSVC 2005 SP1 `/O2` produces an exact match for all 181 bytes in both variants.
+The checker requires that byte match in addition to the independent behavior tests.
+
+The corresponding high-level operation is:
+
+```cpp
+uint hash = 0;
+while (byteCount >= 4) {
+    hash += static_cast<uint>(*address++);
+    hash = (hash << 1) | (hash >> 31);
+    byteCount -= 4;
+}
+return hash;
+```
+
+The initial PR used this compact loop directly, which passed behavior checks but
+produced very different code (33 bytes and a reported reccmp score of 0%). The
+current version preserves the native structure instead. The byte comparison is
+against the compiled function's relocation-free object section; it is not a
+claim that the entire linked DLL has been compared or tested in game.
 
 From a checkout with the project's MSVC 2005 SP1 toolchain and dependencies, compile
 the actual source with the normal project headers. These PowerShell commands use
