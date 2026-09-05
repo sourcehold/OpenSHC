@@ -46,7 +46,7 @@ namespace Input {
         undefined4 rightClickStart; // 0x0000003C length: 4
         BOOLEnum leftClickState; // 0x00000040 length: 4
         BOOLEnum midClickState; // 0x00000044 length: 4
-        int rightClickState; // 0x00000048 length: 4
+        BOOLEnum rightClickState; // 0x00000048 length: 4
         BOOLEnum previousLeftClickState; // 0x0000004C length: 4
         undefined4 previousMidClickStateUnk; // 0x00000050 length: 4
         uint previousRightClickState; // 0x00000054 length: 4
