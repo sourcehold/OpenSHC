@@ -29,6 +29,7 @@ For the recommended method of using SARIF files in Ghidra, see:
 The Game itself
 ------------------
 - :doc:`Load balancing of the core game engine <wiki/load-balancing-table>`
+- :doc:`Market pricing and goods trading <wiki/market-trading>`
 - Game Mechanics
 - AI Behavior
 - Graphics and Sound Systems
