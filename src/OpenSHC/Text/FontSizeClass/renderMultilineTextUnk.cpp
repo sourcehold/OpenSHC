@@ -15,14 +15,15 @@ namespace Text {
         int _runXPos = xPos;
         int _runYPos = yPos;
 
-        int const maxXPosition = maxWidth + xPos;
+        int maxXPosition = xPos + maxWidth;
 
         int finalTextWidth = 0;
         int _nextWordCutStartIndex = 0;
         int writtenWords = 0;
         int local_68 = 0;
+        int _wordWidth = 0;
 
-        int singleLineHeight = (this->lineHeight_0x14 * 38) / 32;
+        int singleLineHeight = (this->lineHeight_0x14 * 38) >> 5;
         int yLineOffset = singleLineHeight;
         int whiteSpaceWidth = this->whiteSpaceWidth_0x1c;
 
@@ -41,7 +42,7 @@ namespace Text {
         }
 
         if (_widthOfWholeText <= maxWidth) {
-            DAT_TextManagerObject::instance.field1_0x4 = singleLineHeight;
+            DAT_TextManagerObject::instance.field1_0x4 += singleLineHeight;
             if (modeUnk == 0) {
                 MACRO_CALL_MEMBER(FontSizeClass_Func::renderText, this)(
                     text, _textLength, _runXPos, _runYPos, color, blendStrength);

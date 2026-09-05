@@ -35,7 +35,7 @@ namespace Text {
         int fontStartImageId_0x8; // 0x00000008 length: 4
         FontRenderTypeInt renderType_0xc; // 0x0000000C length: 4
         int baselineOffset_0x10; // 0x00000010 length: 4
-        dword lineHeight_0x14; // 0x00000014 length: 4
+        int lineHeight_0x14; // 0x00000014 length: 4
         int letterSpacing_0x18; // 0x00000018 length: 4
         int whiteSpaceWidth_0x1c; // 0x0000001C length: 4
         HGDIOBJ hgdiobj; // 0x00000020 length: 4

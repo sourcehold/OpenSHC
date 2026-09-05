@@ -56,7 +56,7 @@ namespace Text {
         GameLanguageInt gameLanguage; // 0x00000044 length: 4
         FontSizeClass fontSizeClassArray[20]; // 0x00000048 length: 720
         char stringArray1[32][128]; // 0x00000318 length: 4096
-        dword count1; // 0x00001318 length: 4
+        int count1; // 0x00001318 length: 4
         undefined1 padding_0x131c[4]; // 0x0000131C length: 4
         char integerTextBuffer[20]; // 0x00001320 length: 20
         char field26_0x1334[20]; // 0x00001334 length: 20
