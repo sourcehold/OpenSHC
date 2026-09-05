@@ -58,7 +58,7 @@ namespace Text {
             Address::SHC_3BB0A8C1_0x004733A0, &FontSizeClass::renderSomeSpecificTextUnk)
         renderSomeSpecificTextUnk;
 
-        MACRO_FUNCTION_RESOLVER(int (FontSizeClass::*)(char, int, int, int, int), false,
+        MACRO_FUNCTION_RESOLVER(int (FontSizeClass::*)(byte, int, int, int, int), false,
             Address::SHC_3BB0A8C1_0x00473640, &FontSizeClass::renderCharUnk)
         renderCharUnk;
 

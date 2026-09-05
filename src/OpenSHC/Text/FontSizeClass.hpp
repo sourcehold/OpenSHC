@@ -74,7 +74,7 @@ namespace Text {
 
         void renderSomeSpecificTextUnk(int lengthUnk, int otherBlendValueUnk, int xPos, int yPos, BGR24 color);
 
-        int renderCharUnk(char charId, int xPos, int yPosUnk, int bgr24, int blendStrengthUnk);
+        int renderCharUnk(byte charId, int xPos, int yPosUnk, int bgr24, int blendStrengthUnk);
 
         void renderWideText(LPWSTR wideText, int textLength, int xPos, int yPos, BGR24 color, int blendStrength);
 
