@@ -38,6 +38,33 @@ receive routine does not reconstruct a higher epoch. Long-duration recording
 and replay must preserve that distinction rather than assuming identical wire
 and internal formats. This observation does not establish a reproduced wrap bug.
 
+## System messages bypass command dispatch
+
+After a successful `IDirectPlay4A::Receive`, the receiver compares the sender
+with zero (`DPID_SYSMSG`). Its system-type switch begins at `0x490735`
+(Extreme `0x490895`). Failed receives and ordinary nonzero senders branch away
+before this point. Values below also agree with the DirectX SDK `dplay.h`:
+
+- `DPSYS_DESTROYPLAYERORGROUP` (`5`) reads the handle at message offset 8 and
+  calls the identity translator at `0x490755`. The next call is
+  `removePlayerFromLobby` at `0x49075B`, without reloading ECX. This is another
+  concrete native caller requiring this reimplementation to retain ECX.
+- `DPSYS_HOST` (`0x101`) sets `isHost`, resets the hash countdown, assigns a new
+  `timeGetTime()` value to the autosave timer and clears both nine-entry player
+  timing arrays. Chat and out-of-match lobby ordering also change. A host-only
+  transition can therefore change native scheduling state without a changed
+  player roster or any timed command.
+- `DPSYS_CREATEPLAYERORGROUP` (`3`) and `DPSYS_SESSIONLOST` (`0x31`) fall through
+  to the next receive iteration without special handling in this switch. This
+  describes the original routine; it does not imply that a transport or replay
+  implementation may disregard the broader connection lifecycle.
+
+Polling roster and synchronization fields at simulation boundaries cannot
+establish that no system event occurred between them. Recorder diagnostics can
+observe the type-switch entry before mutation, but replaying those events still
+requires their semantics and timing. DirectPlay system structures can contain
+process pointers; copying their bytes is not a portable replay format.
+
 ## Why one save and a timed-command log are insufficient
 
 The original save section table does not cover active mode or the full network
