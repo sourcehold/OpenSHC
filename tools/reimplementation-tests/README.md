@@ -27,9 +27,19 @@ return hash;
 
 The initial PR used this compact loop directly, which passed behavior checks but
 produced very different code (33 bytes and a reported reccmp score of 0%). The
-current version preserves the native structure instead. The byte comparison is
-against the compiled function's relocation-free object section; it is not a
-claim that the entire linked DLL has been compared or tested in game.
+current version preserves the native structure instead. The checker compares
+the compiled function's relocation-free object section. A separate isolated
+RelWithDebInfo `OpenSHC.dll` build also reports **100% reccmp matching** for
+`0x46CD30`; this does not certify the rest of the DLL or live gameplay.
+
+For that linked comparison, select this source in
+`cmake/openshc-sources.txt.local`, build the `OpenSHC.dll` target, and from
+`reccmp/dll` run `reccmp-reccmp --target STRONGHOLDCRUSADER --verbose 0x46cd30`.
+The local comparison used reccmp 0.1.6 and temporarily appended `/MANIFEST:NO`
+to the shared RelWithDebInfo linker flags to avoid the legacy manifest-tool
+failure previously encountered in this environment. That build-only change is
+not part of the PR. Unselected source files can produce missing-symbol warnings;
+the selected hash routine matched. No deploy target was run.
 
 From a checkout with the project's MSVC 2005 SP1 toolchain and dependencies, compile
 the actual source with the normal project headers. These PowerShell commands use
