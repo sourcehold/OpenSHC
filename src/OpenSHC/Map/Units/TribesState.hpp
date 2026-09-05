@@ -107,7 +107,7 @@ namespace Map {
 
             void updatePeasantSeatingAtBuilding(int param_1, int param_2, int param_3);
 
-            uint tribeCorrespondsWithUID(int tribeID, uint tribeUID);
+            BOOLEnum tribeCorrespondsWithUID(int tribeID, uint tribeUID);
 
             int getUnitIDForIndexInTribe(int tribeID, int unitSelectionIndex);
 
@@ -115,11 +115,11 @@ namespace Map {
 
             int setWhetherTribeContainsAnyUnits(int tribeID);
 
-            void addUnitToSelected(uint unitID);
+            void addUnitToSelected(int unitID);
 
             BOOLEnum unitIsSelectedByPlayer(uint tribeID);
 
-            int addUnitToTribe(uint unitID, int tribeID);
+            void addUnitToTribe(uint unitID, int tribeID);
 
             void removeUnitFromThisTribeIfInTribe(uint unitID, int tribeID);
 

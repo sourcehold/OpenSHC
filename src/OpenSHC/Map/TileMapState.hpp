@@ -84,7 +84,7 @@ namespace Map {
         undefined4 someYLikeLimit; // 0x0050022C length: 4
         byte mapping40x40[40][40]; // 0x00500230 length: 1600
         Moat moats[16000]; // 0x00500870 length: 256000
-        undefined4 currentMoatCount; // 0x0053F070 length: 4
+        int currentMoatCount; // 0x0053F070 length: 4
         undefined4 moatTileCount; // 0x0053F074 length: 4
         undefined4 ALG_MoatXResult; // 0x0053F078 length: 4
         undefined4 ALG_MoatYResult; // 0x0053F07C length: 4
@@ -179,8 +179,8 @@ namespace Map {
         int showNoRubbleWhenDestroyingBuilding; // 0x005549A4 length: 4
         undefined4 field155_0x5549a8; // 0x005549A8 length: 4
         undefined4 field156_0x5549ac; // 0x005549AC length: 4
-        undefined4 wallPlacementCost; // 0x005549B0 length: 4
-        undefined4 DAT_TempBuildingRotation; // 0x005549B4 length: 4
+        int wallPlacementCost; // 0x005549B0 length: 4
+        int DAT_TempBuildingRotation; // 0x005549B4 length: 4
         int field159_0x5549b8; // 0x005549B8 length: 4
         undefined4 unknownTime_0x5549bc; // 0x005549BC length: 4
         undefined4 field161_0x5549c0; // 0x005549C0 length: 4
@@ -201,7 +201,7 @@ namespace Map {
         undefined4 field183_0x554a00; // 0x00554A00 length: 4
         undefined4 field184_0x554a04; // 0x00554A04 length: 4
         undefined4 field185_0x554a08; // 0x00554A08 length: 4
-        undefined4 mapSize; // 0x00554A0C length: 4
+        int mapSize; // 0x00554A0C length: 4
         undefined4 field187_0x554a10; // 0x00554A10 length: 4
         undefined4 field188_0x554a14; // 0x00554A14 length: 4
         undefined1 padding_0x554a18[4]; // 0x00554A18 length: 4
@@ -210,9 +210,9 @@ namespace Map {
         undefined4 field195_0x554a24; // 0x00554A24 length: 4
         undefined1 padding_0x554a28[8]; // 0x00554A28 length: 8
         int field204_0x554a30; // 0x00554A30 length: 4
-        undefined4 DAT_SomeX; // 0x00554A34 length: 4
-        undefined4 DAT_SomeY; // 0x00554A38 length: 4
-        undefined4 DAT_SomeTile; // 0x00554A3C length: 4
+        int DAT_SomeX; // 0x00554A34 length: 4
+        int DAT_SomeY; // 0x00554A38 length: 4
+        int DAT_SomeTile; // 0x00554A3C length: 4
         undefined1 bitFlag; // 0x00554A40 length: 1
         undefined1 padding_0x554a41[3]; // 0x00554A41 length: 3
         undefined4 DAT_CardinalTilesAroundTile; // 0x00554A44 length: 4

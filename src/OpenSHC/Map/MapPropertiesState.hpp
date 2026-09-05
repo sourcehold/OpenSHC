@@ -50,55 +50,7 @@ namespace Map {
         short buildingAvailability[100]; // 0x0000015C length: 200
         undefined4 field8_0x224; // 0x00000224 length: 4
         short buildingAvailabilityRelatedFlags[380]; // 0x00000228 length: 760
-        short field10_0x520; // 0x00000520 length: 2
-        short field11_0x522; // 0x00000522 length: 2
-        short field12_0x524; // 0x00000524 length: 2
-        short field13_0x526; // 0x00000526 length: 2
-        short field14_0x528; // 0x00000528 length: 2
-        short field15_0x52a; // 0x0000052A length: 2
-        short field16_0x52c; // 0x0000052C length: 2
-        short field17_0x52e; // 0x0000052E length: 2
-        short field18_0x530; // 0x00000530 length: 2
-        short field19_0x532; // 0x00000532 length: 2
-        short field20_0x534; // 0x00000534 length: 2
-        short field21_0x536; // 0x00000536 length: 2
-        short field22_0x538; // 0x00000538 length: 2
-        short field23_0x53a; // 0x0000053A length: 2
-        short field24_0x53c; // 0x0000053C length: 2
-        short field25_0x53e; // 0x0000053E length: 2
-        short field26_0x540; // 0x00000540 length: 2
-        short field27_0x542; // 0x00000542 length: 2
-        short field28_0x544; // 0x00000544 length: 2
-        short field29_0x546; // 0x00000546 length: 2
-        short field30_0x548; // 0x00000548 length: 2
-        short field31_0x54a; // 0x0000054A length: 2
-        short field32_0x54c; // 0x0000054C length: 2
-        short field33_0x54e; // 0x0000054E length: 2
-        short field34_0x550; // 0x00000550 length: 2
-        short field35_0x552; // 0x00000552 length: 2
-        short field36_0x554; // 0x00000554 length: 2
-        short field37_0x556; // 0x00000556 length: 2
-        short field38_0x558; // 0x00000558 length: 2
-        short field39_0x55a; // 0x0000055A length: 2
-        short field40_0x55c; // 0x0000055C length: 2
-        short field41_0x55e; // 0x0000055E length: 2
-        short field42_0x560; // 0x00000560 length: 2
-        short field43_0x562; // 0x00000562 length: 2
-        short field44_0x564; // 0x00000564 length: 2
-        short field45_0x566; // 0x00000566 length: 2
-        short field46_0x568; // 0x00000568 length: 2
-        short field47_0x56a; // 0x0000056A length: 2
-        short field48_0x56c; // 0x0000056C length: 2
-        short field49_0x56e; // 0x0000056E length: 2
-        short field50_0x570; // 0x00000570 length: 2
-        short field51_0x572; // 0x00000572 length: 2
-        short field52_0x574; // 0x00000574 length: 2
-        short field53_0x576; // 0x00000576 length: 2
-        short field54_0x578; // 0x00000578 length: 2
-        short field55_0x57a; // 0x0000057A length: 2
-        short field56_0x57c; // 0x0000057C length: 2
-        short field57_0x57e; // 0x0000057E length: 2
-        undefined1 padding_0x580[2]; // 0x00000580 length: 2
+        short buildingAvailabilityArray2[49]; // 0x00000520 length: 98
         BarracksRecruitabilityShort barracksRecruitability; // 0x00000582 length: 14
         short SEC_MercRecruitable[7]; // 0x00000590 length: 14
         short SEC_XbowProducible_save; // 0x0000059E length: 2
@@ -119,10 +71,10 @@ namespace Map {
         undefined4 SEC_Section1080; // 0x00013544 length: 4
         undefined4 SEC_Section1081; // 0x00013548 length: 4
         undefined1 padding_0x1354c[16]; // 0x0001354C length: 16
-        undefined4 field96_0x1355c; // 0x0001355C length: 4
-        int field97_0x13560; // 0x00013560 length: 4
+        undefined4 field47_0x1355c; // 0x0001355C length: 4
+        int field48_0x13560; // 0x00013560 length: 4
         undefined4 currentEventID; // 0x00013564 length: 4
-        undefined4 field99_0x13568; // 0x00013568 length: 4
+        undefined4 field50_0x13568; // 0x00013568 length: 4
         undefined1 padding_0x1356c[4]; // 0x0001356C length: 4
         undefined4 invasionTroopIndex; // 0x00013570 length: 4
         int DAT_BuildingAvailabilityScrollbarOffset; // 0x00013574 length: 4
@@ -131,7 +83,7 @@ namespace Map {
         undefined4 indexStored; // 0x00013580 length: 4
         undefined1 padding_0x13584[8]; // 0x00013584 length: 8
         undefined4 value; // 0x0001358C length: 4
-        undefined4 field118_0x13590; // 0x00013590 length: 4
+        undefined4 field69_0x13590; // 0x00013590 length: 4
         undefined1 padding_0x13594[8]; // 0x00013594 length: 8
         undefined4 total; // 0x0001359C length: 4
         int unknownArray_01[1000]; // 0x000135A0 length: 4000
@@ -139,39 +91,39 @@ namespace Map {
         undefined4 DAT_MapEditorUnitPointsSum; // 0x00014544 length: 4
         undefined4 DAT_InvasionEventItemUnitCountSum; // 0x00014548 length: 4
         undefined1 padding_0x1454c[8]; // 0x0001454C length: 8
-        undefined4 field140_0x14554; // 0x00014554 length: 4
-        undefined4 field141_0x14558; // 0x00014558 length: 4
-        undefined4 field142_0x1455c; // 0x0001455C length: 4
-        undefined4 field143_0x14560; // 0x00014560 length: 4
-        undefined4 field144_0x14564; // 0x00014564 length: 4
-        undefined4 field145_0x14568; // 0x00014568 length: 4
-        undefined4 field146_0x1456c; // 0x0001456C length: 4
-        undefined4 field147_0x14570; // 0x00014570 length: 4
-        undefined4 field148_0x14574; // 0x00014574 length: 4
-        undefined4 field149_0x14578; // 0x00014578 length: 4
-        undefined4 field150_0x1457c; // 0x0001457C length: 4
-        undefined4 field151_0x14580; // 0x00014580 length: 4
-        undefined4 field152_0x14584; // 0x00014584 length: 4
-        undefined4 field153_0x14588; // 0x00014588 length: 4
-        undefined4 field154_0x1458c; // 0x0001458C length: 4
-        undefined4 field155_0x14590; // 0x00014590 length: 4
-        undefined4 field156_0x14594; // 0x00014594 length: 4
+        undefined4 field91_0x14554; // 0x00014554 length: 4
+        undefined4 field92_0x14558; // 0x00014558 length: 4
+        undefined4 field93_0x1455c; // 0x0001455C length: 4
+        undefined4 field94_0x14560; // 0x00014560 length: 4
+        undefined4 field95_0x14564; // 0x00014564 length: 4
+        undefined4 field96_0x14568; // 0x00014568 length: 4
+        undefined4 field97_0x1456c; // 0x0001456C length: 4
+        undefined4 field98_0x14570; // 0x00014570 length: 4
+        undefined4 field99_0x14574; // 0x00014574 length: 4
+        undefined4 field100_0x14578; // 0x00014578 length: 4
+        undefined4 field101_0x1457c; // 0x0001457C length: 4
+        undefined4 field102_0x14580; // 0x00014580 length: 4
+        undefined4 field103_0x14584; // 0x00014584 length: 4
+        undefined4 field104_0x14588; // 0x00014588 length: 4
+        undefined4 field105_0x1458c; // 0x0001458C length: 4
+        undefined4 field106_0x14590; // 0x00014590 length: 4
+        undefined4 field107_0x14594; // 0x00014594 length: 4
         undefined1 padding_0x14598[4]; // 0x00014598 length: 4
-        undefined4 field161_0x1459c; // 0x0001459C length: 4
-        undefined4 field162_0x145a0; // 0x000145A0 length: 4
-        undefined4 field163_0x145a4; // 0x000145A4 length: 4
-        undefined4 field164_0x145a8; // 0x000145A8 length: 4
-        undefined4 field165_0x145ac; // 0x000145AC length: 4
-        undefined4 field166_0x145b0; // 0x000145B0 length: 4
+        undefined4 field112_0x1459c; // 0x0001459C length: 4
+        undefined4 field113_0x145a0; // 0x000145A0 length: 4
+        undefined4 field114_0x145a4; // 0x000145A4 length: 4
+        undefined4 field115_0x145a8; // 0x000145A8 length: 4
+        undefined4 field116_0x145ac; // 0x000145AC length: 4
+        undefined4 field117_0x145b0; // 0x000145B0 length: 4
         undefined1 padding_0x145b4[4]; // 0x000145B4 length: 4
-        undefined4 field171_0x145b8; // 0x000145B8 length: 4
-        undefined4 field172_0x145bc; // 0x000145BC length: 4
-        undefined4 field173_0x145c0; // 0x000145C0 length: 4
-        undefined4 field174_0x145c4; // 0x000145C4 length: 4
-        undefined4 field175_0x145c8; // 0x000145C8 length: 4
+        undefined4 field122_0x145b8; // 0x000145B8 length: 4
+        undefined4 field123_0x145bc; // 0x000145BC length: 4
+        undefined4 field124_0x145c0; // 0x000145C0 length: 4
+        undefined4 field125_0x145c4; // 0x000145C4 length: 4
+        undefined4 field126_0x145c8; // 0x000145C8 length: 4
         undefined1 padding_0x145cc[4]; // 0x000145CC length: 4
-        undefined4 field180_0x145d0; // 0x000145D0 length: 4
-        undefined4 field181_0x145d4; // 0x000145D4 length: 4
+        undefined4 field131_0x145d0; // 0x000145D0 length: 4
+        undefined4 field132_0x145d4; // 0x000145D4 length: 4
         undefined1 padding_0x145d8[4]; // 0x000145D8 length: 4
         undefined4 eventType; // 0x000145DC length: 4
         IngameEventHeader invasionEvent; // 0x000145E0 length: 16
@@ -189,7 +141,7 @@ namespace Map {
 
         void importTradingCosts();
 
-        undefined4 mapHasCertainEvent();
+        BOOLEnum mapHasCertainEvent();
 
         int getEventIDForTimeUntilDefeatEventType();
 
@@ -219,7 +171,7 @@ namespace Map {
 
         void openEventTriggerMenu(undefined4 eventType);
 
-        void sumInvasionEventUnitCount();
+        int sumInvasionEventUnitCount();
 
         void adjustEventMonthAndYearForSection1047();
 

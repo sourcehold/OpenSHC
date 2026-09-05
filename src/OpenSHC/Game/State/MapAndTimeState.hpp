@@ -130,7 +130,7 @@ namespace Game {
             int unknownResourceFlagArray2[25]; // 0x00000974 length: 100
             int isResourceTradeable[25]; // 0x000009D8 length: 100
             int deerCount; // 0x00000A3C length: 4
-            short deerSpawnLocationsXY[4][2]; // 0x00000A40 length: 16
+            Point4ShortXY deerSpawnLocationsXY[4]; // 0x00000A40 length: 16
             int countUpTo201; // 0x00000A50 length: 4
             undefined1 padding_0xa54[800]; // 0x00000A54 length: 800
             BOOLEnum gameOver; // 0x00000D74 length: 4
@@ -237,7 +237,7 @@ namespace Game {
             int field3166_0x277c; // 0x0000277C length: 4
             short rabbitSpawnXY[4][2]; // 0x00002780 length: 16
             int field3168_0x2790; // 0x00002790 length: 4
-            short camelSpawnXY[4][2]; // 0x00002794 length: 16
+            Point4ShortXY camelSpawnXY[4]; // 0x00002794 length: 16
             int field3170_0x27a4; // 0x000027A4 length: 4
             int field3171_0x27a8; // 0x000027A8 length: 4
             int field3172_0x27ac; // 0x000027AC length: 4

@@ -7624,59 +7624,59 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00424700 = 0x00424700,
     // label: MenuView_IntroLogos_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/IntroLogos
     // type: function
     SHC_3BB0A8C1_0x00424720 = 0x00424720,
     // label: MenuView_IntroLogos_DoInitial
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/IntroLogos
     // type: function
     SHC_3BB0A8C1_0x00424770 = 0x00424770,
     // label: MenuView_IntroLogos_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/IntroLogos
     // type: function
     SHC_3BB0A8C1_0x004247A0 = 0x004247A0,
     // label: MenuItemActionHandler_IntroLogos_General
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/IntroLogos
     // type: function
     SHC_3BB0A8C1_0x00424990 = 0x00424990,
     // label: MenuView_IntroVideo_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/IntroVideo
     // type: function
     SHC_3BB0A8C1_0x00424A50 = 0x00424A50,
     // label: MenuView_IntroVideo_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/IntroVideo
     // type: function
     SHC_3BB0A8C1_0x00424AD0 = 0x00424AD0,
     // label: MenuView_GameStartEnterName_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/GameStartEnterName
     // type: function
     SHC_3BB0A8C1_0x00424B10 = 0x00424B10,
     // label: LoadTGX_shc_back
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x00424BD0 = 0x00424BD0,
     // label: DrawOuterMenuBorder
-    // location: OpenSHC/UI/Helpers
+    // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x00424BE0 = 0x00424BE0,
     // label: MenuView_MainMenu_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/MainMenu
     // type: function
     SHC_3BB0A8C1_0x00424C40 = 0x00424C40,
     // label: MenuView_MainMenu_DoInitial
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/MainMenu
     // type: function
     SHC_3BB0A8C1_0x00424CD0 = 0x00424CD0,
     // label: MenuView_MainMenu_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/MainMenu
     // type: function
     SHC_3BB0A8C1_0x00424DA0 = 0x00424DA0,
     // label: MenuItemRenderFunction_MainMenu_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/MainMenu
     // type: function
     SHC_3BB0A8C1_0x00424F50 = 0x00424F50,
     // label: MenuItemActionHandler_MainMenu_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/MainMenu
     // type: function
     SHC_3BB0A8C1_0x004251A0 = 0x004251A0,
     // type: /undefined *32
@@ -7698,19 +7698,19 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x004254F0 = 0x004254F0,
     // label: MenuView_HistoricCampaignSelect_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/HistoricCampaignSelect
     // type: function
     SHC_3BB0A8C1_0x00425500 = 0x00425500,
     // label: MenuView_HistoricCampaignSelect_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/HistoricCampaignSelect
     // type: function
     SHC_3BB0A8C1_0x00425580 = 0x00425580,
     // label: MenuItemRenderFunction_HistoricCampaignSelect_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/HistoricCampaignSelect
     // type: function
     SHC_3BB0A8C1_0x004255D0 = 0x004255D0,
     // label: MenuItemActionHandler_HistoricCampaignSelect_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/HistoricCampaignSelect
     // type: function
     SHC_3BB0A8C1_0x00425720 = 0x00425720,
     // type: /undefined *32
@@ -7724,15 +7724,15 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x004259CC = 0x004259CC,
     // label: MenuView_UnusedEconomicGametypeSelect_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/UnusedEconomicGametypeSelect
     // type: function
     SHC_3BB0A8C1_0x004259D0 = 0x004259D0,
     // label: MenuView_UnusedEconomicGametypeSelect_DoInitial
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/UnusedEconomicGametypeSelect
     // type: function
     SHC_3BB0A8C1_0x00425A40 = 0x00425A40,
     // label: MenuItemRenderFunction_UnusedEconomicGametypeSelect_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Unused
     // type: function
     SHC_3BB0A8C1_0x00425AD0 = 0x00425AD0,
     // type: /pointer
@@ -7744,7 +7744,7 @@ enum {
     // type: /pointer
     SHC_3BB0A8C1_0x00425C10 = 0x00425C10,
     // label: MenuItemActionHandler_UnusedEconomicGametypeSelect_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Unused
     // type: function
     SHC_3BB0A8C1_0x00425C20 = 0x00425C20,
     // type: /undefined *32
@@ -7758,111 +7758,111 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x00425E94 = 0x00425E94,
     // label: MenuView_CustomScenarios_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/CustomScenarios
     // type: function
     SHC_3BB0A8C1_0x00425EA0 = 0x00425EA0,
     // label: MenuView_General_DoInitial_BlackBoxDefaultBorderAndPicture
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/General
     // type: function
     SHC_3BB0A8C1_0x00425F60 = 0x00425F60,
     // label: MenuView_CustomScenarios_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/CustomScenarios
     // type: function
     SHC_3BB0A8C1_0x00425FF0 = 0x00425FF0,
     // label: MenuItemRenderFunction_CustomScenarios_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/CustomScenarios
     // type: function
     SHC_3BB0A8C1_0x00426060 = 0x00426060,
     // label: MenuView_Credits_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/Credits
     // type: function
     SHC_3BB0A8C1_0x004261E0 = 0x004261E0,
     // label: MenuView_Credits_DoInitial
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/Credits
     // type: function
     SHC_3BB0A8C1_0x004262B0 = 0x004262B0,
     // label: MenuView_Credits_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/Credits
     // type: function
     SHC_3BB0A8C1_0x00426340 = 0x00426340,
     // label: MenuView_UnusedDemoBuyItScreen_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/UnusedDemoBuyItScreen
     // type: function
     SHC_3BB0A8C1_0x00426570 = 0x00426570,
     // label: MenuView_UnusedDemoBuyItScreen_DoInitial
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/UnusedDemoBuyItScreen
     // type: function
     SHC_3BB0A8C1_0x00426600 = 0x00426600,
     // label: MenuView_UnusedDemoBuyItScreen_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/UnusedDemoBuyItScreen
     // type: function
     SHC_3BB0A8C1_0x004266A0 = 0x004266A0,
     // label: MenuModalRenderFunction_UnusedSetName
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/UnusedSetName
     // type: function
     SHC_3BB0A8C1_0x004266E0 = 0x004266E0,
     // label: MenuItemRenderFunction_UnusedSetName_ButtonsUnk
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Unused
     // type: function
     SHC_3BB0A8C1_0x00426750 = 0x00426750,
     // label: MenuItemActionHandler_UnusedSetName_ButtonsUnk
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Unused
     // type: function
     SHC_3BB0A8C1_0x004267F0 = 0x004267F0,
     // label: MenuView_HistoricMissionSelect_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/HistoricMissionSelect
     // type: function
     SHC_3BB0A8C1_0x00426830 = 0x00426830,
     // label: MenuView_MissionSelect_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/MissionSelect
     // type: function
     SHC_3BB0A8C1_0x004268C0 = 0x004268C0,
     // label: MenuItemRenderFunction_HistoricMissionSelect_MissionRows
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/HistoricMissionSelect
     // type: function
     SHC_3BB0A8C1_0x004269E0 = 0x004269E0,
     // label: MenuItemActionHandler_HistoricMissionSelect_General
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/HistoricMissionSelect
     // type: function
     SHC_3BB0A8C1_0x00426B80 = 0x00426B80,
     // label: MenuView_UnusedEconomicMissionSelect_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/UnusedEconomicMissionSelect
     // type: function
     SHC_3BB0A8C1_0x00426C50 = 0x00426C50,
     // label: MenuItemRenderFunction_HistoricAndEconomicMissionSelect_NextAndBackHands
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/HistoricAndEconomicMissionSelect
     // type: function
     SHC_3BB0A8C1_0x00426CA0 = 0x00426CA0,
     // label: MenuItemRenderFunction_UnusedEconomicMissionSelect_MissionSelect
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Unused
     // type: function
     SHC_3BB0A8C1_0x00426D30 = 0x00426D30,
     // label: MenuItemActionHandler_UnusedEconomicMissionSelect_General
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Unused
     // type: function
     SHC_3BB0A8C1_0x00426ED0 = 0x00426ED0,
     // label: MenuView_UnusedSomeMissionStartUnk_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/UnusedSomeMissionStartUnk
     // type: function
     SHC_3BB0A8C1_0x00426F80 = 0x00426F80,
     // label: MenuItemRenderFunction_UnusedSomeMissionStartUnk_General
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Unused
     // type: function
     SHC_3BB0A8C1_0x00426FB0 = 0x00426FB0,
     // label: MenuItemActionHandler_UnusedSomeMissionStartUnk_General
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Unused
     // type: function
     SHC_3BB0A8C1_0x00427080 = 0x00427080,
     // label: MenuView_MpConnection_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/MpConnection
     // type: function
     SHC_3BB0A8C1_0x00427110 = 0x00427110,
     // label: MainMenu_Unknown21_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x00427180 = 0x00427180,
     // label: MenuView_General_DoEveryFrame_FirstGfxCentered
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/General
     // type: function
     SHC_3BB0A8C1_0x004271E0 = 0x004271E0,
     // label: AModalDialogIsActiveButIsNotQuitting
@@ -7870,15 +7870,15 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00427210 = 0x00427210,
     // label: MenuView_Unknown61ReturnToSkrimishMenuUnk_DoInitial
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/Unknown61ReturnToSkrimishMenuUnk
     // type: function
     SHC_3BB0A8C1_0x00427240 = 0x00427240,
     // label: MenuView_Unknown61ReturnToSkrimishMenuUnk_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/Unknown61ReturnToSkrimishMenuUnk
     // type: function
     SHC_3BB0A8C1_0x004272C0 = 0x004272C0,
     // label: MenuView_LobbyMenu_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/LobbyMenu
     // type: function
     SHC_3BB0A8C1_0x00427320 = 0x00427320,
     // label: InitSkirmishLobbyData
@@ -7886,15 +7886,15 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004274F0 = 0x004274F0,
     // label: MenuView_General_DoInitial_DefaultMainMenuStructure
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/General
     // type: function
     SHC_3BB0A8C1_0x004276F0 = 0x004276F0,
     // label: MenuItemRenderFunction_LobbyMenu_MapSelectHeader
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/LobbyMenu
     // type: function
     SHC_3BB0A8C1_0x00427740 = 0x00427740,
     // label: MenuItemRenderFunction_LobbyMenu_PlayerListAndNpcButtons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/LobbyMenu
     // type: function
     SHC_3BB0A8C1_0x00427810 = 0x00427810,
     // label: renderPlayerEntryInLobby
@@ -7941,7 +7941,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00428050 = 0x00428050,
     // label: MenuItemRenderFunction_General_MenuMiniMap
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/General
     // type: function
     SHC_3BB0A8C1_0x00428150 = 0x00428150,
     // label: PutPlayerIntoRandomSlot
@@ -7955,11 +7955,11 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004285C0 = 0x004285C0,
     // label: MenuItemRenderFunction_LobbyMenu_MapDesc
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/LobbyMenu
     // type: function
     SHC_3BB0A8C1_0x004285F0 = 0x004285F0,
     // label: MenuItemActionHandler_LobbyMenu_MapDescScrollbar
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/LobbyMenu
     // type: function
     SHC_3BB0A8C1_0x00428980 = 0x00428980,
     // type: /undefined *32
@@ -7977,11 +7977,11 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x00428A50 = 0x00428A50,
     // label: MenuItemRenderFunction_LobbyMenu_MapDescScrollbar
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/LobbyMenu
     // type: function
     SHC_3BB0A8C1_0x00428A60 = 0x00428A60,
     // label: MenuItemRenderFunction_General_AdvancedGameOptions
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/General
     // type: function
     SHC_3BB0A8C1_0x00428AC0 = 0x00428AC0,
     // label: QueueChangeGameIntensityOrBalance
@@ -8019,7 +8019,7 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x00429A3C = 0x00429A3C,
     // label: MenuItemActionHandler_General_AdvancedGameOptions
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/General
     // type: function
     SHC_3BB0A8C1_0x00429A40 = 0x00429A40,
     // type: function
@@ -8037,11 +8037,11 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x0042A474 = 0x0042A474,
     // label: MenuItemRenderFunction_LobbyMenu_SkirmishTypeAndBalance
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/LobbyMenu
     // type: function
     SHC_3BB0A8C1_0x0042A480 = 0x0042A480,
     // label: MenuItemActionHandler_LobbyMenu_SkirmishTypeAndBalance
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/LobbyMenu
     // type: function
     SHC_3BB0A8C1_0x0042A840 = 0x0042A840,
     // label: SetAIPlayerNickNames
@@ -8081,7 +8081,7 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x0042AC38 = 0x0042AC38,
     // label: MenuItemRenderFunction_LobbyMenu_Unknown
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/LobbyMenu
     // type: function
     SHC_3BB0A8C1_0x0042AC40 = 0x0042AC40,
     // label: GetPlayerPosition
@@ -8091,11 +8091,11 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0042AC70 = 0x0042AC70,
     // label: MenuItemRenderFunction_LobbyMenu_ChatBox
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/LobbyMenu
     // type: function
     SHC_3BB0A8C1_0x0042AC90 = 0x0042AC90,
     // label: MenuItemRenderFunction_LobbyMenu_NonBoxedButtons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/LobbyMenu
     // type: function
     SHC_3BB0A8C1_0x0042AE90 = 0x0042AE90,
     // type: /undefined *32
@@ -8533,15 +8533,15 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x0042B460 = 0x0042B460,
     // label: MenuItemActionHandler_LobbyMenu_MapSelectTable
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/LobbyMenu
     // type: function
     SHC_3BB0A8C1_0x0042B470 = 0x0042B470,
     // label: MenuItemRenderFunction_LobbyMenu_MapSelectTable
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/LobbyMenu
     // type: function
     SHC_3BB0A8C1_0x0042B4C0 = 0x0042B4C0,
     // label: MenuItemActionHandler_LobbyMenu_MapSelectScrollbar
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/LobbyMenu
     // type: function
     SHC_3BB0A8C1_0x0042B7B0 = 0x0042B7B0,
     // type: /undefined *32
@@ -8559,41 +8559,41 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x0042B8E0 = 0x0042B8E0,
     // label: MenuItemRenderFunction_LobbyMenu_MapSelectScrollbar
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/LobbyMenu
     // type: function
     SHC_3BB0A8C1_0x0042B8F0 = 0x0042B8F0,
     // label: MenuView_UnusedSelectRandomNumberOfEnemies_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/UnusedSelectRandomNumberOfEnemies
     // type: function
     SHC_3BB0A8C1_0x0042B960 = 0x0042B960,
     // label: MenuItemActionHandler_UnusedSelectRandomNumberOfEnemies_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Unused
     // type: function
     SHC_3BB0A8C1_0x0042BA50 = 0x0042BA50,
     // label: MenuView_General_Prepare_SwordShieldAndBorder
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/General
     // type: function
     SHC_3BB0A8C1_0x0042BB70 = 0x0042BB70,
     // label: MenuView_SelectCrusade_DoInitial
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/SelectCrusade
     // type: function
     SHC_3BB0A8C1_0x0042BB90 = 0x0042BB90,
     // label: MenuView_SelectCrusade_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/SelectCrusade
     // type: function
     SHC_3BB0A8C1_0x0042BBF0 = 0x0042BBF0,
     // label: MenuItemActionHandler_SelectCrusade_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/SelectCrusade
     // type: function
     SHC_3BB0A8C1_0x0042BF00 = 0x0042BF00,
     // type: function
     SHC_3BB0A8C1_0x0042BFC0 = 0x0042BFC0,
     // label: MenuItemRenderFunction_SelectCrusade_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/SelectCrusade
     // type: function
     SHC_3BB0A8C1_0x0042C060 = 0x0042C060,
     // label: MenuView_Unknown33_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/Unknown33
     // type: function
     SHC_3BB0A8C1_0x0042C090 = 0x0042C090,
     // label: ClearSiegeInformationArray2
@@ -8629,7 +8629,7 @@ enum {
     // type: /pointer
     SHC_3BB0A8C1_0x0042D13C = 0x0042D13C,
     // label: MenuItemRenderFunction_SingleplayerMapChoice_ButtonsAndHands
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/SinglePlayerMapChoice
     // type: function
     SHC_3BB0A8C1_0x0042D140 = 0x0042D140,
     // type: /undefined *32
@@ -9015,7 +9015,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x0042D633 = 0x0042D633,
     // label: MenuItemActionHandler_SingleplayerMapChoice_ButtonsAndHands
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/SinglePlayerMapChoice
     // type: function
     SHC_3BB0A8C1_0x0042D640 = 0x0042D640,
     // type: /undefined *32
@@ -9401,43 +9401,43 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x0042D995 = 0x0042D995,
     // label: MenuItemRenderFunction_SingleplayerMapChoice_MapTable
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/SinglePlayerMapChoice
     // type: function
     SHC_3BB0A8C1_0x0042D9A0 = 0x0042D9A0,
     // label: MenuItemRenderFunction_SingleplayerMapChoice_MapTableHeader
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/SinglePlayerMapChoice
     // type: function
     SHC_3BB0A8C1_0x0042DBB0 = 0x0042DBB0,
     // label: MenuItemRenderFunction_SingleplayerMapChoice_Scrollbar
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/SinglePlayerMapChoice
     // type: function
     SHC_3BB0A8C1_0x0042DC60 = 0x0042DC60,
     // label: MenuView_UnusedOldTitleMenu_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/UnusedOldTitleMenu
     // type: function
     SHC_3BB0A8C1_0x0042DCB0 = 0x0042DCB0,
     // label: MenuView_UnusedOldTitleMenu_DoInitial
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/UnusedOldTitleMenu
     // type: function
     SHC_3BB0A8C1_0x0042DD00 = 0x0042DD00,
     // label: MenuItemRenderFunction_UnusedOldTitleMenu_ExitButton
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Unused
     // type: function
     SHC_3BB0A8C1_0x0042DE20 = 0x0042DE20,
     // label: MenuItemRenderFunction_UnusedOldTitleMenu_ContinueButton
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Unused
     // type: function
     SHC_3BB0A8C1_0x0042DEB0 = 0x0042DEB0,
     // label: MenuItemRenderFunction_UnusedOldTitleMenu_TestMapButton
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Unused
     // type: function
     SHC_3BB0A8C1_0x0042DF40 = 0x0042DF40,
     // label: MenuView_MapEditorProperties_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/MapEditorProperties
     // type: function
     SHC_3BB0A8C1_0x0042DFD0 = 0x0042DFD0,
     // label: MenuView_MapEditorProperties_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/MapEditorProperties
     // type: function
     SHC_3BB0A8C1_0x0042E0D0 = 0x0042E0D0,
     // type: /undefined *32
@@ -9861,7 +9861,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x0042E8F4 = 0x0042E8F4,
     // label: MenuItemRenderFunction_MapEditorProperties_MainButtons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/MapEditorProperties
     // type: function
     SHC_3BB0A8C1_0x0042E900 = 0x0042E900,
     // type: function
@@ -9871,15 +9871,15 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0042EA59 = 0x0042EA59,
     // label: MenuItemRenderFunction_MapEditorProperties_MapDescriptionBox
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/MapEditorProperties
     // type: function
     SHC_3BB0A8C1_0x0042EBC0 = 0x0042EBC0,
     // label: MenuItemActionHandler_MapEditorProperties_MapDescriptionBox
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/MapEditorProperties
     // type: function
     SHC_3BB0A8C1_0x0042EDF0 = 0x0042EDF0,
     // label: MenuItemActionHandler_MapEditorProperties_MapDescriptionScrollbar
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/MapEditorProperties
     // type: function
     SHC_3BB0A8C1_0x0042EE80 = 0x0042EE80,
     // type: /undefined *32
@@ -9897,11 +9897,11 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x0042EF78 = 0x0042EF78,
     // label: MenuItemRenderFunction_MapEditorProperties_MapDescriptionScrollbar
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/MapEditorProperties
     // type: function
     SHC_3BB0A8C1_0x0042EF80 = 0x0042EF80,
     // label: MenuView_NewMapMaptype_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/NewMapMaptype
     // type: function
     SHC_3BB0A8C1_0x0042EFE0 = 0x0042EFE0,
     // label: InitializeBasicMap
@@ -9909,11 +9909,11 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0042F010 = 0x0042F010,
     // label: MenuItemRenderFunction_NewMapMaptype_Buttons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/NewMapMaptype
     // type: function
     SHC_3BB0A8C1_0x0042F140 = 0x0042F140,
     // label: MenuItemActionHandler_NewMapMaptype_Buttons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/NewMapMaptype
     // type: function
     SHC_3BB0A8C1_0x0042F2B0 = 0x0042F2B0,
     // type: /undefined *32
@@ -9931,11 +9931,11 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x0042F3C0 = 0x0042F3C0,
     // label: MenuView_NewMapMapsize_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/NewMapMapsize
     // type: function
     SHC_3BB0A8C1_0x0042F3D0 = 0x0042F3D0,
     // label: MenuView_NewMapMapsize_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/NewMapMapsize
     // type: function
     SHC_3BB0A8C1_0x0042F3F0 = 0x0042F3F0,
     // type: /undefined *32
@@ -10351,21 +10351,21 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x0042F7E4 = 0x0042F7E4,
     // label: MenuItemRenderFunction_NewMapMapsize_Buttons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/NewMapMapsize
     // type: function
     SHC_3BB0A8C1_0x0042F7F0 = 0x0042F7F0,
     // label: MenuItemActionHandler_NewMapMapsize_Buttons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/NewMapMapsize
     // type: function
     SHC_3BB0A8C1_0x0042F940 = 0x0042F940,
     // type: function
     SHC_3BB0A8C1_0x0042FA10 = 0x0042FA10,
     // label: MenuView_UnusedChooseAvailableKeeps_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/UnusedChooseAvailableKeeps
     // type: function
     SHC_3BB0A8C1_0x0042FAA0 = 0x0042FAA0,
     // label: MenuView_UnusedChooseAvailableKeeps_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/UnusedChooseAvailableKeeps
     // type: function
     SHC_3BB0A8C1_0x0042FAC0 = 0x0042FAC0,
     // type: /undefined *32
@@ -10781,11 +10781,11 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x0042FEB4 = 0x0042FEB4,
     // label: MenuItemRenderFunction_UnusedChooseAvailableKeeps_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Unused
     // type: function
     SHC_3BB0A8C1_0x0042FEC0 = 0x0042FEC0,
     // label: MenuItemActionHandler_UnusedChooseAvailableKeeps_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Unused
     // type: function
     SHC_3BB0A8C1_0x00430050 = 0x00430050,
     // type: /pointer
@@ -10831,11 +10831,11 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004300F4 = 0x004300F4,
     // label: MenuView_General_DoInitial_ScreenToBlack
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/General
     // type: function
     SHC_3BB0A8C1_0x00430100 = 0x00430100,
     // label: MenuView_UnusedChooseGameType_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/UnusedChooseGameType
     // type: function
     SHC_3BB0A8C1_0x00430150 = 0x00430150,
     // type: /undefined *32
@@ -11250,8 +11250,8 @@ enum {
     SHC_3BB0A8C1_0x00430543 = 0x00430543,
     // type: /byte
     SHC_3BB0A8C1_0x00430544 = 0x00430544,
-    // label: MenuItemRenderFunctio_UnusedChooseGameType_Mainn
-    // location: OpenSHC/UI
+    // label: MenuItemRenderFunction_UnusedChooseGameType_Main
+    // location: OpenSHC/UI/MenuItems/Unused
     // type: function
     SHC_3BB0A8C1_0x00430550 = 0x00430550,
     // type: function
@@ -11259,7 +11259,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004305CF = 0x004305CF,
     // label: MenuItemActionHandler_UnusedChooseGameType_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Unused
     // type: function
     SHC_3BB0A8C1_0x004305D0 = 0x004305D0,
     // type: /undefined *32
@@ -11329,11 +11329,11 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x00430686 = 0x00430686,
     // label: MenuView_UnusedCreateSiege_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/UnusedCreateSiege
     // type: function
     SHC_3BB0A8C1_0x00430690 = 0x00430690,
     // label: MenuView_UnusedCreateSiege_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/UnusedCreateSiege
     // type: function
     SHC_3BB0A8C1_0x004306D0 = 0x004306D0,
     // type: /undefined *32
@@ -11749,29 +11749,29 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x00430BEC = 0x00430BEC,
     // label: MenuItemRenderFunction_UnusedCreateSiege_SiegeThat
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Unused
     // type: function
     SHC_3BB0A8C1_0x00430BF0 = 0x00430BF0,
     // type: /undefined4
     SHC_3BB0A8C1_0x00430CB8 = 0x00430CB8,
     // label: MenuView_MapEditorLandscaping_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/MapEditorLandscaping
     // type: function
     SHC_3BB0A8C1_0x00430CC0 = 0x00430CC0,
     // label: MenuView_MapEditorLandscaping_DoInitial
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/MapEditorLandscaping
     // type: function
     SHC_3BB0A8C1_0x00430CE0 = 0x00430CE0,
     // label: MenuView_MapEditorLandscaping_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/MapEditorLandscaping
     // type: function
     SHC_3BB0A8C1_0x004313C0 = 0x004313C0,
     // label: MenuItemActionHandler_MapEditorLandscaping_CategoryButtons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/MapEditorLandscaping
     // type: function
     SHC_3BB0A8C1_0x00431460 = 0x00431460,
     // label: MenuItemActionHandler_MapEditorLandscaping_GeneralButtons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/MapEditorLandscaping
     // type: function
     SHC_3BB0A8C1_0x004314E0 = 0x004314E0,
     // type: /undefined *32
@@ -12309,31 +12309,31 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00431990 = 0x00431990,
     // label: MenuView_BuildMenu_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/BuildMenu
     // type: function
     SHC_3BB0A8C1_0x00431A90 = 0x00431A90,
     // label: MenuView_BuildMenu_DoInitial
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/BuildMenu
     // type: function
     SHC_3BB0A8C1_0x00431B60 = 0x00431B60,
     // label: MenuView_BuildMenu_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/BuildMenu
     // type: function
     SHC_3BB0A8C1_0x00433030 = 0x00433030,
     // label: MenuItemActionHandler_BuildMenu_SomeKeepAndGranaryCheckUnk
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildMenu
     // type: function
     SHC_3BB0A8C1_0x00433200 = 0x00433200,
     // label: MenuItemActionHandler_InGameMenu_UnknownBinkRelated
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/InGameMenu
     // type: function
     SHC_3BB0A8C1_0x00433230 = 0x00433230,
     // label: RenderScribeFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x00433260 = 0x00433260,
     // label: MenuItemActionHandler_InGameMenu_ProcessScribeAnimationChange
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/InGameMenu
     // type: function
     SHC_3BB0A8C1_0x00433370 = 0x00433370,
     // type: /pointer
@@ -12349,17 +12349,17 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00433560 = 0x00433560,
     // label: MenuItemActionHandler_InGameMenu_ViewToKeeps
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/InGameMenu
     // type: function
     SHC_3BB0A8C1_0x004335A0 = 0x004335A0,
     // type: function
     SHC_3BB0A8C1_0x00433630 = 0x00433630,
     // label: RenderGoldValue
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x00433780 = 0x00433780,
     // label: RenderConnectAndPathLinkageInfoTextDisplayElement
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/DisplayElements
     // type: function
     SHC_3BB0A8C1_0x00433BC0 = 0x00433BC0,
     // label: TransformAndRenderPercentage
@@ -12367,15 +12367,15 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00433C20 = 0x00433C20,
     // label: RenderBottomLeftDateDisplayElement
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/DisplayElements
     // type: function
     SHC_3BB0A8C1_0x00433D00 = 0x00433D00,
     // label: RenderStartingGoodDisplayElement
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/DisplayElements
     // type: function
     SHC_3BB0A8C1_0x00433DA0 = 0x00433DA0,
     // label: MenuItemActionHandler_InGameMenu_Scrolling
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/InGameMenu
     // type: function
     SHC_3BB0A8C1_0x00434120 = 0x00434120,
     // type: function
@@ -12397,19 +12397,19 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x00434228 = 0x00434228,
     // label: MenuItemRenderFunction_BuildMenu_BuildingKeepSubcategoryButton
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildMenu
     // type: function
     SHC_3BB0A8C1_0x00434230 = 0x00434230,
     // label: MenuItemActionHandler_General_Unknown2
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/General
     // type: function
     SHC_3BB0A8C1_0x00434260 = 0x00434260,
     // label: MenuItemActionHandler_InGameMenu_MiniMapInteraction
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/InGameMenu
     // type: function
     SHC_3BB0A8C1_0x00434270 = 0x00434270,
     // label: MenuItemRenderFunction_BuildMenu_MiniMapInteraction
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildMenu
     // type: function
     SHC_3BB0A8C1_0x00434300 = 0x00434300,
     // label: SetTribesPatrolButtonPressed
@@ -12417,7 +12417,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00434340 = 0x00434340,
     // label: MenuItemActionHandler_InGameMenu_PeasantBuildAndRightClickMenuSelection
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/InGameMenu
     // type: function
     SHC_3BB0A8C1_0x00434350 = 0x00434350,
     // label: SomeUnitAndViewportCheck
@@ -12425,7 +12425,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004347F0 = 0x004347F0,
     // label: MenuItemActionHandler_InGameMenu_UnitSelectionAndControlsUnk
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/InGameMenu
     // type: function
     SHC_3BB0A8C1_0x004348D0 = 0x004348D0,
     // type: function
@@ -13954,11 +13954,11 @@ enum {
     // type: /pointer
     SHC_3BB0A8C1_0x00437CB0 = 0x00437CB0,
     // label: HandleWallTerrainMouseDrag
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x00437CC0 = 0x00437CC0,
     // label: MenuItemActionHandler_InGameMenu_TriggerPlaceWallCommand
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/InGameMenu
     // type: function
     SHC_3BB0A8C1_0x00437ED0 = 0x00437ED0,
     // label: PlayPlacementWarning
@@ -14226,15 +14226,15 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004387CF = 0x004387CF,
     // label: MenuItemActionHandler_BuildMenu_DeleteAction
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildMenu
     // type: function
     SHC_3BB0A8C1_0x004387D0 = 0x004387D0,
     // label: MenuItemActionHandler_InGameMenu_RightClickMenuAndMaybeResets
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/InGameMenu
     // type: function
     SHC_3BB0A8C1_0x00438B60 = 0x00438B60,
     // label: MenuItemRenderFunction_BuildMenu_UnitActionButtons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildMenu
     // type: function
     SHC_3BB0A8C1_0x00438BE0 = 0x00438BE0,
     // type: /undefined *32
@@ -14594,7 +14594,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x00439151 = 0x00439151,
     // label: MenuItemRenderFunction_BuildMenu_CurrentlySelectedTroops
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildMenu
     // type: function
     SHC_3BB0A8C1_0x00439160 = 0x00439160,
     // type: /undefined *32
@@ -14652,15 +14652,15 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x00439380 = 0x00439380,
     // label: MenuItemRenderFunction_BuildMenu_CurrentlySelectedTroopsDeselectHelper
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildMenu
     // type: function
     SHC_3BB0A8C1_0x00439390 = 0x00439390,
     // label: MenuItemActionHandler_BuildMenu_CurrentlySelectedTroops
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildMenu
     // type: function
     SHC_3BB0A8C1_0x004393C0 = 0x004393C0,
     // label: RenderBuildingMenu_WorkshopWeaponProduction
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x00439440 = 0x00439440,
     // type: /undefined *32
@@ -14692,51 +14692,51 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00439730 = 0x00439730,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_StopBuildingOrPeasantBinkPlayback
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x00439890 = 0x00439890,
     // label: MenuView_BuildingAndStatusMenu_DoInitial
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x004398B0 = 0x004398B0,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_Unknown_Countdown
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x0043A850 = 0x0043A850,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_BuildingHelpTextButton
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x0043A860 = 0x0043A860,
     // label: MenuItemRenderFunction_BuildingAndStatusMenu_BuildingHelpTextButton
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x0043A880 = 0x0043A880,
     // label: MenuItemRenderFunction_BuildingAndStatusMenu_BarracksAndMercenaryPostHelpText
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x0043A8C0 = 0x0043A8C0,
     // label: RenderBuildingMenu_RecruitingBuilding
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043A8D0 = 0x0043A8D0,
     // label: MenuItemRenderFunction_BuildingAndStatusMenu_AvailablePeasantsTextUpperRight
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x0043A8E0 = 0x0043A8E0,
     // label: MenuItemRenderFunction_BuildingAndStatusMenu_AvailablePeasantsTextDownRight
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x0043A960 = 0x0043A960,
     // label: RenderBuildingMenu_Keep
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043A9F0 = 0x0043A9F0,
     // label: RenderBuildingMenu_Inn
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043AF40 = 0x0043AF40,
     // label: RenderBuildingMenu_Granary
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043B3B0 = 0x0043B3B0,
     // type: /undefined *32
@@ -14760,117 +14760,117 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x0043B908 = 0x0043B908,
     // label: RenderBuildingMenu_Fletcher
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043B910 = 0x0043B910,
     // label: RenderBuildingMenu_Blacksmith
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043B950 = 0x0043B950,
     // label: RenderBuildingMenu_Poleturner
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043B990 = 0x0043B990,
     // label: RenderBuildingMenu_Armourer
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043B9D0 = 0x0043B9D0,
     // label: RenderBuildingMenu_Tanner
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043BA80 = 0x0043BA80,
     // label: RenderBuildingMenu_Bakery
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043BB30 = 0x0043BB30,
     // label: RenderBuildingMenu_Brewery
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043BB70 = 0x0043BB70,
     // label: RenderBuildingMenu_Outpost
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043BBB0 = 0x0043BBB0,
     // label: RenderBuildingMenu_House
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043BD60 = 0x0043BD60,
     // label: RenderBuildingMenu_WoodcutterShut
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043BDE0 = 0x0043BDE0,
     // label: RenderBuildingMenu_OxThether
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043BE20 = 0x0043BE20,
     // label: RenderBuildingMenu_Quarry
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043BEA0 = 0x0043BEA0,
     // label: RenderBuildingMenu_Ironmine
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043BEE0 = 0x0043BEE0,
     // label: RenderBuildingMenu_PitchRig
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043BF20 = 0x0043BF20,
     // label: RenderBuildingMenu_HuntersHut
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043BF60 = 0x0043BF60,
     // label: RenderBuildingMenu_Apothecary
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043BFA0 = 0x0043BFA0,
     // label: RenderBuildingMenu_Wheatfarm
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043C0A0 = 0x0043C0A0,
     // label: RenderBuildingMenu_Hopfarm
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043C0E0 = 0x0043C0E0,
     // label: RenderBuildingMenu_Applefarm
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043C120 = 0x0043C120,
     // label: RenderBuildingMenu_Diaryfarm
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043C160 = 0x0043C160,
     // label: RenderBuildingMenu_Mill
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043C1A0 = 0x0043C1A0,
     // label: RenderBuildingMenu_ChapelAndChurch
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043C1E0 = 0x0043C1E0,
     // label: RenderBuildingMenu_Stockpile
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043C6A0 = 0x0043C6A0,
     // type: function
     SHC_3BB0A8C1_0x0043C700 = 0x0043C700,
     // label: RenderBuildingMenu_Armory
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043C840 = 0x0043C840,
     // label: RenderBuildingMenu_Quarry_Stonepile
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043C9F0 = 0x0043C9F0,
     // label: RenderBuildingMenu_Engineersguild
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043CA70 = 0x0043CA70,
     // label: RenderBuildingMenu_Tunnelersguild
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043CB00 = 0x0043CB00,
     // label: RenderBuildingMenu_Cathedral
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043CB90 = 0x0043CB90,
     // label: RenderPeasantMenu_CurrentActionUnk
@@ -14878,189 +14878,189 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0043CC30 = 0x0043CC30,
     // label: RenderBuildingMenu_Marketplace
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043CDB0 = 0x0043CDB0,
     // label: RenderBuildingMenu_Marketplace_Stonks
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043CE30 = 0x0043CE30,
     // type: function
     SHC_3BB0A8C1_0x0043CE80 = 0x0043CE80,
     // label: RenderBuildingMenu_Marketplace_Food
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043D070 = 0x0043D070,
     // label: RenderBuildingMenu_Marketplace_Resource
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043D120 = 0x0043D120,
     // label: RenderBuildingMenu_Marketplace_Weapons
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043D1D0 = 0x0043D1D0,
     // label: RenderBuildingMenu_Marketplace_Trade
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043D280 = 0x0043D280,
     // label: RenderBuildingMenu_Well
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043D420 = 0x0043D420,
     // label: RenderBuildingMenu_WaterPot
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043D460 = 0x0043D460,
     // label: RenderBuildingMenu_Oilsmelter
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043D4A0 = 0x0043D4A0,
     // label: RenderBuildingMenu_Stables
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043D520 = 0x0043D520,
     // label: RenderBuildingMenu_Drawbridge
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043D690 = 0x0043D690,
     // label: RenderBuildingMenu_Unused_PosternGate
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043D6D0 = 0x0043D6D0,
     // label: RenderBuildingMenu_TunnelEntrance
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043D710 = 0x0043D710,
     // label: RenderBuildingMenu_Signpost
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043D750 = 0x0043D750,
     // label: RenderBuildingMenu_KillingPit
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043D790 = 0x0043D790,
     // label: RenderBuildingMenu_Campfire
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043D7D0 = 0x0043D7D0,
     // label: RenderBuildingMenu_Gallows
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043D850 = 0x0043D850,
     // label: RenderBuildingMenu_Stocks
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043D890 = 0x0043D890,
     // label: RenderBuildingMenu_Unused_Witchhoist
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043D8D0 = 0x0043D8D0,
     // label: RenderBuildingMenu_Maypole
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043D910 = 0x0043D910,
     // label: RenderBuildingMenu_Gardens
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043D950 = 0x0043D950,
     // label: RenderBuildingMenu_TrainingGrounds
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043D990 = 0x0043D990,
     // label: RenderBuildingMenu_CessPit
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043D9D0 = 0x0043D9D0,
     // label: RenderBuildingMenu_BurningStake
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043DA10 = 0x0043DA10,
     // label: RenderBuildingMenu_Gibbet
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043DA50 = 0x0043DA50,
     // label: RenderBuildingMenu_Dungeon
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043DA90 = 0x0043DA90,
     // label: RenderBuildingMenu_StretchingRack
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043DAD0 = 0x0043DAD0,
     // label: RenderBuildingMenu_Unused_FloggingRack
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043DB10 = 0x0043DB10,
     // label: RenderBuildingMenu_ChoppingBlock
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043DB50 = 0x0043DB50,
     // label: RenderBuildingMenu_DunkingStool
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043DB90 = 0x0043DB90,
     // label: RenderBuildingMenu_DogCage
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043DBD0 = 0x0043DBD0,
     // label: RenderBuildingMenu_Statue
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043DC60 = 0x0043DC60,
     // label: RenderBuildingMenu_Shrine
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043DD30 = 0x0043DD30,
     // label: RenderBuildingMenu_Unused_BeeHive
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043DD70 = 0x0043DD70,
     // label: RenderBuildingMenu_DancingBear
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043DDB0 = 0x0043DDB0,
     // label: RenderBuildingMenu_Unused_Pond
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043DDF0 = 0x0043DDF0,
     // label: RenderBuildingMenu_Unused_BearCave
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043DE30 = 0x0043DE30,
     // label: RenderBuildingMenu_Siegetent_Catapult
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043DE70 = 0x0043DE70,
     // label: RenderBuildingMenu_Siegetent_Fireballista
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043DF40 = 0x0043DF40,
     // label: RenderBuildingMenu_Siegetent_Trebuchet
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043E010 = 0x0043E010,
     // label: RenderBuildingMenu_Siegetent_Siegetower
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043E0E0 = 0x0043E0E0,
     // label: RenderBuildingMenu_Siegetent_BatteringRam
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043E1B0 = 0x0043E1B0,
     // label: RenderBuildingMenu_Siegetent_Shield
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043E280 = 0x0043E280,
     // label: RenderBuildingMenu_RenderTowerAndGateHealth
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x0043E350 = 0x0043E350,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_StatusMenuButtons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x0043E490 = 0x0043E490,
     // label: MenuItemRenderFunction_BuildingAndStatusMenu_StatusMainMenuButtons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x0043E4E0 = 0x0043E4E0,
     // label: SomePopularityRelatedComputation
@@ -15076,107 +15076,107 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0043E5F0 = 0x0043E5F0,
     // label: RenderStatusMenu_Popularity
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/StatusMenus
     // type: function
     SHC_3BB0A8C1_0x0043E6C0 = 0x0043E6C0,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_PopularityMenuSwitchButtonUnk
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x0043F2B0 = 0x0043F2B0,
     // label: MenuItemRenderFunction_BuildingAndStatusMenu_PopularityMenuSwitchButton
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x0043F2C0 = 0x0043F2C0,
     // label: RenderStatusMenu_FearFactor
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/StatusMenus
     // type: function
     SHC_3BB0A8C1_0x0043F2F0 = 0x0043F2F0,
     // label: RenderStatusMenu_Population
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/StatusMenus
     // type: function
     SHC_3BB0A8C1_0x0043F6A0 = 0x0043F6A0,
     // type: function
     SHC_3BB0A8C1_0x0043F930 = 0x0043F930,
     // label: RenderStatusMenu_Food
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/StatusMenus
     // type: function
     SHC_3BB0A8C1_0x0043FAC0 = 0x0043FAC0,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_DisableFoodType
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x0043FBB0 = 0x0043FBB0,
     // label: MenuItemRenderFunction_BuildingAndStatusMenu_DisableFoodType
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x0043FBF0 = 0x0043FBF0,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_ArmySwitchButton
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x0043FC80 = 0x0043FC80,
     // label: MenuItemRenderFunction_BuildingAndStatusMenu_ArmyStatusSwitchButton
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x0043FCA0 = 0x0043FCA0,
     // label: MenuItemRenderFunction_BuildingAndStatusMenu_ArmyStatusReturn
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x0043FCB0 = 0x0043FCB0,
     // label: RenderStatusMenu_Resources
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/StatusMenus
     // type: function
     SHC_3BB0A8C1_0x0043FD30 = 0x0043FD30,
     // type: function
     SHC_3BB0A8C1_0x0043FD90 = 0x0043FD90,
     // label: RenderStatusMenu_Religion
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/StatusMenus
     // type: function
     SHC_3BB0A8C1_0x0043FE10 = 0x0043FE10,
     // label: RenderStatusMenu_Weapons
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/StatusMenus
     // type: function
     SHC_3BB0A8C1_0x004401A0 = 0x004401A0,
     // type: function
     SHC_3BB0A8C1_0x00440200 = 0x00440200,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_ReturnToBuildMenu
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x00440280 = 0x00440280,
     // label: CountPlayerUnitsByType
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x00440360 = 0x00440360,
     // label: MenuView_UnusedHelpTextEditor_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/UnusedHelpTextEditor
     // type: function
     SHC_3BB0A8C1_0x004403D0 = 0x004403D0,
     // label: MenuView_UnusedHelpTextEditor_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/UnusedHelpTextEditor
     // type: function
     SHC_3BB0A8C1_0x00440400 = 0x00440400,
     // label: MenuItemFunction_General_Unknown
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/General
     // type: function
     SHC_3BB0A8C1_0x00440410 = 0x00440410,
     // label: MenuItemActionHandler_UnusedOldTitleMenu_General
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Unused
     // type: function
     SHC_3BB0A8C1_0x00440420 = 0x00440420,
     // label: SetCursorDependingOnProgramState
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x00440430 = 0x00440430,
     // label: MenuView_GameStartEnterName_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/GameStartEnterName
     // type: function
     SHC_3BB0A8C1_0x00440560 = 0x00440560,
     // type: function
     SHC_3BB0A8C1_0x00440600 = 0x00440600,
     // label: MenuView_GameStartEnterName_DoInitial
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/GameStartEnterName
     // type: function
     SHC_3BB0A8C1_0x004406F0 = 0x004406F0,
     // label: MenuItemActionHandler_CustomScenarios_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/CustomScenarios
     // type: function
     SHC_3BB0A8C1_0x00440770 = 0x00440770,
     // type: /undefined *32
@@ -15190,11 +15190,11 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x004409B4 = 0x004409B4,
     // label: MenuView_Unknown61ReturnToSkrimishMenuUnk_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/Unknown61ReturnToSkrimishMenuUnk
     // type: function
     SHC_3BB0A8C1_0x004409C0 = 0x004409C0,
     // label: MenuItemActionHandler_LobbyMenu_MapSelectHeader
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/LobbyMenu
     // type: function
     SHC_3BB0A8C1_0x00440A50 = 0x00440A50,
     // type: function
@@ -15214,11 +15214,11 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00440DD0 = 0x00440DD0,
     // label: MenuItemActionHandler_LobbyMenu_PlayerListAndNpcButtons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/LobbyMenu
     // type: function
     SHC_3BB0A8C1_0x00440E50 = 0x00440E50,
     // label: DisplayMapDescriptionAndAllocatePlayersToSlots
-    // location: OpenSHC/UI/Helpers
+    // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004410D0 = 0x004410D0,
     // type: function
@@ -15234,7 +15234,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00442300 = 0x00442300,
     // label: MenuItemActionHandler_LobbyMenu_LobbyscreenStartButtonClick
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/LobbyMenu
     // type: function
     SHC_3BB0A8C1_0x00442640 = 0x00442640,
     // type: function
@@ -15678,7 +15678,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x00442C2D = 0x00442C2D,
     // label: MenuItemActionHandler_SingleplayerMapChoice_MapTable
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/SinglePlayerMapChoice
     // type: function
     SHC_3BB0A8C1_0x00442C30 = 0x00442C30,
     // type: function
@@ -15686,7 +15686,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00442EB0 = 0x00442EB0,
     // label: MenuItemActionHandler_SingleplayerMapChoice_Scrollbar
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/SinglePlayerMapChoice
     // type: function
     SHC_3BB0A8C1_0x00442F40 = 0x00442F40,
     // type: /undefined *32
@@ -15704,7 +15704,7 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x00443060 = 0x00443060,
     // label: MenuItemActionHandler_MapEditorProperties_MainButtons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/MapEditorProperties
     // type: function
     SHC_3BB0A8C1_0x00443070 = 0x00443070,
     // type: /undefined *32
@@ -15814,7 +15814,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004437D9 = 0x004437D9,
     // label: MenuItemActionHandler_UnusedCreateSiege_SiegeThat
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Unused
     // type: function
     SHC_3BB0A8C1_0x004437E0 = 0x004437E0,
     // type: /undefined *32
@@ -15902,7 +15902,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x00443A2E = 0x00443A2E,
     // label: MenuItemActionHandler_MapEditorLandscaping_QueueCommandCallback
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/MapEditorLandscaping
     // type: function
     SHC_3BB0A8C1_0x00443A30 = 0x00443A30,
     // type: /undefined *32
@@ -16422,7 +16422,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x0044440B = 0x0044440B,
     // label: MenuItemActionHandler_General_ToolbarButtonPressed
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/General
     // type: function
     SHC_3BB0A8C1_0x00444410 = 0x00444410,
     // type: /undefined *32
@@ -16962,7 +16962,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x00444B72 = 0x00444B72,
     // label: MenuItemActionHandler_InGameMenu_MainButtons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/InGameMenu
     // type: function
     SHC_3BB0A8C1_0x00444B80 = 0x00444B80,
     // type: /undefined *32
@@ -17042,7 +17042,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004451BE = 0x004451BE,
     // label: MenuItemActionHandler_InGameMenu_TriggerPlaceBuildingCommand
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/InGameMenu
     // type: function
     SHC_3BB0A8C1_0x004451C0 = 0x004451C0,
     // type: function
@@ -17520,7 +17520,7 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x0044691C = 0x0044691C,
     // label: MenuItemActionHandler_BuildMenu_UnitActionButtons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildMenu
     // type: function
     SHC_3BB0A8C1_0x00446920 = 0x00446920,
     // type: /undefined *32
@@ -17606,7 +17606,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x00446BFE = 0x00446BFE,
     // label: MenuView_BuildingAndStatusMenu_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x00446C00 = 0x00446C00,
     // label: playPopularitySFX
@@ -17839,7 +17839,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004476AD = 0x004476AD,
     // label: MenuItemRenderFunction_BuildingAndStatusMenu_BuildingWorkStatus
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x004476B0 = 0x004476B0,
     // type: /undefined *32
@@ -17931,37 +17931,37 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x00447A4C = 0x00447A4C,
     // label: RenderStatusMenu_Chimp
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/StatusMenus
     // type: function
     SHC_3BB0A8C1_0x00447A50 = 0x00447A50,
     // label: RenderBuildingMenu_Gatehouse
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x00447CF0 = 0x00447CF0,
     // label: RenderBuildingMenu_Tower
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/BuildingMenus
     // type: function
     SHC_3BB0A8C1_0x00447D30 = 0x00447D30,
     // label: RenderStatusMenu_Overview
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/StatusMenus
     // type: function
     SHC_3BB0A8C1_0x00447DC0 = 0x00447DC0,
     // label: RenderStatusMenu_Army
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/StatusMenus
     // type: function
     SHC_3BB0A8C1_0x00447FA0 = 0x00447FA0,
     // label: MenuView_LobbyMenu_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/LobbyMenu
     // type: function
     SHC_3BB0A8C1_0x004482F0 = 0x004482F0,
     // type: function
     SHC_3BB0A8C1_0x004489F0 = 0x004489F0,
     // label: MenuView_SingleplayerMapChoice_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/SingleplayerMapChoice
     // type: function
     SHC_3BB0A8C1_0x00448D40 = 0x00448D40,
     // label: MenuView_SingleplayerMapChoice_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/SingleplayerMapChoice
     // type: function
     SHC_3BB0A8C1_0x00448E90 = 0x00448E90,
     // type: /pointer
@@ -17973,7 +17973,7 @@ enum {
     // type: /pointer
     SHC_3BB0A8C1_0x00449280 = 0x00449280,
     // label: MenuItemActionHandler_SingleplayerMapChoice_MapTableHeader
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/SinglePlayerMapChoice
     // type: function
     SHC_3BB0A8C1_0x00449290 = 0x00449290,
     // type: function
@@ -17991,7 +17991,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00449410 = 0x00449410,
     // label: MenuView_BuildingAndStatusMenu_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x004494E0 = 0x004494E0,
     // type: /undefined *32
@@ -20433,7 +20433,7 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x0045DE38 = 0x0045DE38,
     // label: MenuItemRenderFunction_TextEditor_Buttons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/TextEditor
     // type: function
     SHC_3BB0A8C1_0x0045DE40 = 0x0045DE40,
     // type: /undefined *32
@@ -20727,7 +20727,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x0045EDEB = 0x0045EDEB,
     // label: MenuItemActionHandler_TextEditor_Scrollbar
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/TextEditor
     // type: function
     SHC_3BB0A8C1_0x0045EDF0 = 0x0045EDF0,
     // type: /undefined *32
@@ -20745,7 +20745,7 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x0045EF84 = 0x0045EF84,
     // label: MenuItemRenderFunction_TextEditor_Scrollbar
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/TextEditor
     // type: function
     SHC_3BB0A8C1_0x0045EF90 = 0x0045EF90,
     // label: getHelpTokenAdvanceLength
@@ -20791,7 +20791,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0045F0D0 = 0x0045F0D0,
     // label: MenuItemRenderFunction_DisplayScenarioHelpText_AnotherButtonUnk
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/DisplayScenarioHelpText
     // type: function
     SHC_3BB0A8C1_0x0045F120 = 0x0045F120,
     // label: Constructor_TextEditorState
@@ -20899,7 +20899,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00461550 = 0x00461550,
     // label: MenuItemActionHandler_TextEditor_TextInputRelatedUnk
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/TextEditor
     // type: function
     SHC_3BB0A8C1_0x00461570 = 0x00461570,
     // type: function
@@ -20981,7 +20981,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00462190 = 0x00462190,
     // label: MenuItemActionHandler_TextEditor_Buttons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/TextEditor
     // type: function
     SHC_3BB0A8C1_0x00462340 = 0x00462340,
     // type: function
@@ -21853,7 +21853,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00463A90 = 0x00463A90,
     // label: MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/General
     // type: function
     SHC_3BB0A8C1_0x00463FF0 = 0x00463FF0,
     // label: RenderCurrentNotActiveButtonWithPossibleAlphaTexOnCurrentSurfaceUnk
@@ -21861,11 +21861,11 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004640D0 = 0x004640D0,
     // label: RenderButtonImageWithBlending
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004641A0 = 0x004641A0,
     // label: MenuItemRenderFunction_ChooseRandomNumberOfEnemies_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/ChooseRandomNumberOfEnemies
     // type: function
     SHC_3BB0A8C1_0x00464260 = 0x00464260,
     // label: RenderCurrentButtonOnScreenMenu
@@ -21877,7 +21877,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00464370 = 0x00464370,
     // label: MenuItemRenderFunction_InGameMenu_MainButtons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/InGameMenu
     // type: function
     SHC_3BB0A8C1_0x004643F0 = 0x004643F0,
     // type: /undefined *32
@@ -21957,19 +21957,19 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x00464856 = 0x00464856,
     // label: MenuItemRenderFunction_MapEditorLandscaping_GeneralButtons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/MapEditorLandscaping
     // type: function
     SHC_3BB0A8C1_0x00464860 = 0x00464860,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_Unknown_Min1
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x004649C0 = 0x004649C0,
     // label: MenuItemRenderFunction_BuildingAndStatusMenu_BarracksWeaponAvailability
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x004649D0 = 0x004649D0,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_UnknownMin1Unk
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x00464D90 = 0x00464D90,
     // label: IsEuroUnitRecruitableUnk
@@ -21985,7 +21985,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00464EF0 = 0x00464EF0,
     // label: HasEnoughGold
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x00465040 = 0x00465040,
     // label: CheckIfEnoughGoldForLadderman
@@ -22005,11 +22005,11 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004650F0 = 0x004650F0,
     // label: MenuItemRenderFunction_BuildingAndStatusMenu_WorkshopWeaponSelection
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x00465110 = 0x00465110,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_WorkshopWeaponSelection
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x00465200 = 0x00465200,
     // label: SetBuildingProductionType
@@ -22017,11 +22017,11 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004652A0 = 0x004652A0,
     // label: MenuItemRenderFunction_BuildingAndStatusMenu_DrawbridgeOpenClose
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x004652D0 = 0x004652D0,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_DrawbridgeOpenClose
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x00465360 = 0x00465360,
     // label: OpenOrCloseDrawbridge
@@ -22029,11 +22029,11 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004653B0 = 0x004653B0,
     // label: MenuItemRenderFunction_BuildingAndStatusMenu_GatehouseOpenClose
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x004653F0 = 0x004653F0,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_GatehouseOpenClose
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x00465480 = 0x00465480,
     // label: GateOpenOrClose
@@ -22041,7 +22041,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004654F0 = 0x004654F0,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_TaxSlider
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x00465560 = 0x00465560,
     // type: /undefined *32
@@ -22057,11 +22057,11 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x00465624 = 0x00465624,
     // label: MenuItemRenderFunction_BuildingAndStatusMenu_HorizontalSlider
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x00465630 = 0x00465630,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_TaxArrowButtons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x004656A0 = 0x004656A0,
     // label: QueueChangeTaxes
@@ -22069,7 +22069,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00465700 = 0x00465700,
     // label: MenuItemRenderFunction_BuildingAndStatusMenu_TaxArrowButtons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x004657B0 = 0x004657B0,
     // label: ChangeTaxes
@@ -22077,7 +22077,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00465800 = 0x00465800,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_ChangeRations
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x00465820 = 0x00465820,
     // label: ChangeRations
@@ -22085,23 +22085,23 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00465890 = 0x00465890,
     // label: MenuItemRenderFunction_BuildingAndStatusMenu_GeneralButtonRender
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x004658B0 = 0x004658B0,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_MarketMenuChangeButtons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x00465920 = 0x00465920,
     // label: MenuItemRenderFunction_BuildingAndStatusMenu_SelectBuySellGoods
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x00465950 = 0x00465950,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_SelectBuySellGoods
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x004659E0 = 0x004659E0,
     // label: MenuItemRenderFunction_BuildingAndStatusMenu_BuySellMenuButtonsAndHands
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x00465A20 = 0x00465A20,
     // label: SetStorageMarketFailState
@@ -22121,7 +22121,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00465F90 = 0x00465F90,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_BuildingSleep
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x004660B0 = 0x004660B0,
     // label: ProcessBuildingSleepUpdate
@@ -22129,7 +22129,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004660F0 = 0x004660F0,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_RepairBuildingButton
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x00466160 = 0x00466160,
     // label: ProcessTowerRepair
@@ -22137,7 +22137,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00466260 = 0x00466260,
     // label: MenuItemRenderFunction_BuildingAndStatusMenu_RepairBuildingButton
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x00466320 = 0x00466320,
     // label: ProcessReleaseDogs
@@ -22147,15 +22147,15 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00466480 = 0x00466480,
     // label: MenuItemRenderFunction_BuildingAndStatusMenu_OutpostUnitSelection
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x00466620 = 0x00466620,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_OutpostUnitSelection
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x00466710 = 0x00466710,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_OutpostSliderSize
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x00466730 = 0x00466730,
     // type: /undefined *32
@@ -22171,7 +22171,7 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x00466804 = 0x00466804,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_OutpostSliderDelay
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x00466810 = 0x00466810,
     // type: /undefined *32
@@ -22187,27 +22187,27 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x004668E4 = 0x004668E4,
     // label: MenuItemRenderFunction_BuildMenu_BuildingIcons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildMenu
     // type: function
     SHC_3BB0A8C1_0x004668F0 = 0x004668F0,
     // label: MenuItemRenderFunction_BuildMenu_BuildingSubcategoryButton
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildMenu
     // type: function
     SHC_3BB0A8C1_0x00466920 = 0x00466920,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_BarrackUnitPortraits
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x00466950 = 0x00466950,
     // label: MenuItemRenderFunction_BuildingAndStatusMenu_MercenaryPostPortraits
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x00466AB0 = 0x00466AB0,
     // label: MenuItemRenderFunction_BuildingAndStatusMenu_EngineerAndMonkPortraits
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x00466C20 = 0x00466C20,
     // label: MenuItemRenderFunction_BuildingAndStatusMenu_TunnelerPortrait
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x00466D10 = 0x00466D10,
     // label: SetEnoughGoldForRequestedUnitToTrueUnk
@@ -22215,27 +22215,27 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00466E00 = 0x00466E00,
     // label: DisableMercPostPortraits
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x00466E10 = 0x00466E10,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_EngineerAndMonkPortraits
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x00466E20 = 0x00466E20,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_TunnelerPortrait
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x00466F60 = 0x00466F60,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_BuySellMenuButtonsAndHands
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x00467040 = 0x00467040,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_BarrackMenuClick
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x004672F0 = 0x004672F0,
     // label: MenuItemActionHandler_BuildingAndStatusMenu_MercenaryPostPortraits
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAndStatusMenu
     // type: function
     SHC_3BB0A8C1_0x004674C0 = 0x004674C0,
     // label: unwindMethod__0x467670
@@ -23511,7 +23511,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0046CF10 = 0x0046CF10,
     // label: TicksSinceCounterStart
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x0046CF90 = 0x0046CF90,
     // label: Constructor_FilePackager
@@ -25347,15 +25347,15 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0047C5D0 = 0x0047C5D0,
     // label: MenuItemRenderFunction_NetworkSessions_Buttons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/NetworkSessions
     // type: function
     SHC_3BB0A8C1_0x0047C670 = 0x0047C670,
     // label: MenuModalRenderFunction_ChooseNetworkServiceProvider
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/ChooseNetworkServiceProvider
     // type: function
     SHC_3BB0A8C1_0x0047C860 = 0x0047C860,
     // label: MenuItemActionHandler_ChooseNetworkServiceProvider_ProviderScrollbarUnk
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/ChooseNetworkServiceProvider
     // type: function
     SHC_3BB0A8C1_0x0047CA80 = 0x0047CA80,
     // type: /undefined *32
@@ -25371,11 +25371,11 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x0047CB20 = 0x0047CB20,
     // label: MenuItemRenderFunction_ChooseNetworkServiceProvider_ProviderTableRows
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/ChooseNetworkServiceProvider
     // type: function
     SHC_3BB0A8C1_0x0047CB30 = 0x0047CB30,
     // label: MenuItemActionHandler_General_TextInputDisplay
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/General
     // type: function
     SHC_3BB0A8C1_0x0047CC10 = 0x0047CC10,
     // type: /pointer
@@ -25387,7 +25387,7 @@ enum {
     // type: /pointer
     SHC_3BB0A8C1_0x0047CC90 = 0x0047CC90,
     // label: MenuItemRenderFunction_General_TextInputDisplay
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/General
     // type: function
     SHC_3BB0A8C1_0x0047CCA0 = 0x0047CCA0,
     // type: /undefined *32
@@ -25401,15 +25401,15 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x0047CED4 = 0x0047CED4,
     // label: MenuItemRenderFunction_ChooseNetworkServiceProvider_InputLabels
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/ChooseNetworkServiceProvider
     // type: function
     SHC_3BB0A8C1_0x0047CEE0 = 0x0047CEE0,
     // label: MenuItemRenderFunction_ChooseNetworkServiceProvider_YourIpDisplay
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/ChooseNetworkServiceProvider
     // type: function
     SHC_3BB0A8C1_0x0047CF50 = 0x0047CF50,
     // label: MenuItemActionHandler_ChooseNetworkServiceProvider_ModemScrollbarUnk
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/ChooseNetworkServiceProvider
     // type: function
     SHC_3BB0A8C1_0x0047D070 = 0x0047D070,
     // type: /pointer
@@ -25421,19 +25421,19 @@ enum {
     // type: /pointer
     SHC_3BB0A8C1_0x0047D0DC = 0x0047D0DC,
     // label: MenuItemActionHandler_ChooseNetworkServiceProvider_ModemTableRows
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/ChooseNetworkServiceProvider
     // type: function
     SHC_3BB0A8C1_0x0047D0E0 = 0x0047D0E0,
     // label: MenuItemRenderFunction_ChooseNetworkServiceProvider_ModemTableRows
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/ChooseNetworkServiceProvider
     // type: function
     SHC_3BB0A8C1_0x0047D100 = 0x0047D100,
     // label: MenuModalRenderFunction_FindingNetworkSessions
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/FindingNetworkSessions
     // type: function
     SHC_3BB0A8C1_0x0047D190 = 0x0047D190,
     // label: MenuItemActionHandler_FindingNetworkSessions_Scrollbar
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/FindingNetworkSessions
     // type: function
     SHC_3BB0A8C1_0x0047D330 = 0x0047D330,
     // type: /undefined *32
@@ -25449,11 +25449,11 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x0047D3E0 = 0x0047D3E0,
     // label: MenuItemActionHandler_FindingNetworkSessions_TableRows
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/FindingNetworkSessions
     // type: function
     SHC_3BB0A8C1_0x0047D3F0 = 0x0047D3F0,
     // label: MenuItemRenderFunction_FindingNetworkSessions_TableRows
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/FindingNetworkSessions
     // type: function
     SHC_3BB0A8C1_0x0047D410 = 0x0047D410,
     // label: getGUIDForSelectedProvider
@@ -25515,15 +25515,15 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0047E240 = 0x0047E240,
     // label: MenuModalRenderFunction_WaitingForHost
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/WaitingForHost
     // type: function
     SHC_3BB0A8C1_0x0047E3A0 = 0x0047E3A0,
     // label: MenuItemActionHandler_WaitingForHost_Button
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/WaitingForHost
     // type: function
     SHC_3BB0A8C1_0x0047E3E0 = 0x0047E3E0,
     // label: MenuItemRenderFunction_WaitingForHost_Button
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/WaitingForHost
     // type: function
     SHC_3BB0A8C1_0x0047E420 = 0x0047E420,
     // label: readGameSpyConfig
@@ -25603,17 +25603,17 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0047FBA0 = 0x0047FBA0,
     // label: MenuItemRenderFunction_Chat_MostButtons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Chat
     // type: function
     SHC_3BB0A8C1_0x0047FD50 = 0x0047FD50,
     // type: function
     SHC_3BB0A8C1_0x0047FEA0 = 0x0047FEA0,
     // label: MenuItemActionHandler_Chat_SendMessageToPlayer
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Chat
     // type: function
     SHC_3BB0A8C1_0x0047FFA0 = 0x0047FFA0,
     // label: MenuItemRenderFunction_Chat_TauntButtons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Chat
     // type: function
     SHC_3BB0A8C1_0x0047FFE0 = 0x0047FFE0,
     // label: resetGameCommands
@@ -26447,7 +26447,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004870B0 = 0x004870B0,
     // label: MenuItemActionHandler_ChooseNetworkServiceProvider_ProviderTableRows
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/ChooseNetworkServiceProvider
     // type: function
     SHC_3BB0A8C1_0x00487200 = 0x00487200,
     // label: invokeDirectPlayEnumConnections
@@ -26650,7 +26650,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0048BD80 = 0x0048BD80,
     // label: MenuItemActionHandler_FindingNetworkSessions_EnumerateDPlaySessions
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/FindingNetworkSessions
     // type: function
     SHC_3BB0A8C1_0x0048BF70 = 0x0048BF70,
     // label: initializeMultiplayerLobby
@@ -26774,7 +26774,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x0048F4C0 = 0x0048F4C0,
     // label: MenuItemActionHandler_Chat_MostButtons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Chat
     // type: function
     SHC_3BB0A8C1_0x0048F590 = 0x0048F590,
     // type: /undefined *32
@@ -26870,7 +26870,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x0048F842 = 0x0048F842,
     // label: MenuItemActionHandler_Chat_TauntButtons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Chat
     // type: function
     SHC_3BB0A8C1_0x0048F850 = 0x0048F850,
     // label: AskForPlayerSlotAssignment
@@ -26920,17 +26920,17 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00490920 = 0x00490920,
     // label: MenuItemActionHandler_ChooseNetworkServiceProvider_Buttons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/ChooseNetworkServiceProvider
     // type: function
     SHC_3BB0A8C1_0x004909E0 = 0x004909E0,
     // type: function
     SHC_3BB0A8C1_0x00490C20 = 0x00490C20,
     // label: MenuItemActionHandler_FindingNetworkSessions_Buttons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/FindingNetworkSessions
     // type: function
     SHC_3BB0A8C1_0x00490D90 = 0x00490D90,
     // label: LAB_Return
-    // location: OpenSHC/UI/MenuItemActionHandler_FindingNetworkSessions_Buttons
+    // location: OpenSHC/UI/MenuItems/FindingNetworkSessions/MenuItemActionHandler_FindingNetworkSessions_Buttons
     SHC_3BB0A8C1_0x0049102D = 0x0049102D,
     // label: handleCommandLineArguments
     // location: OpenSHC/Synchrony/GameSynchronyState
@@ -26945,7 +26945,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00491270 = 0x00491270,
     // label: MenuItemActionHandler_WaitingForHost_ConnectToLobby
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/WaitingForHost
     // type: function
     SHC_3BB0A8C1_0x004914D0 = 0x004914D0,
     // label: Constructor_MenuTextInputState
@@ -26969,51 +26969,51 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004917C0 = 0x004917C0,
     // label: MenuModalRenderFunction_OptionsMenu
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/OptionsMenu
     // type: function
     SHC_3BB0A8C1_0x00491810 = 0x00491810,
     // label: MenuItemRenderFunction_OptionsMenu_Buttons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/OptionsMenu
     // type: function
     SHC_3BB0A8C1_0x00491840 = 0x00491840,
     // label: MenuItemRenderFunction_OptionsMenu_SubOptionsButtons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/OptionsMenu
     // type: function
     SHC_3BB0A8C1_0x00491A30 = 0x00491A30,
     // label: MenuModalRenderFunction_IdentityOptions
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/IdentityOptions
     // type: function
     SHC_3BB0A8C1_0x00491AC0 = 0x00491AC0,
     // label: MenuModalRenderFunction_EnterTitleOnGameStart
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/EnterTitleOnGameStart
     // type: function
     SHC_3BB0A8C1_0x00491BF0 = 0x00491BF0,
     // label: MenuItemActionHandler_EnterTitleOnGameStart_Button
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/EnterTitleOnGameStart
     // type: function
     SHC_3BB0A8C1_0x00491C20 = 0x00491C20,
     // label: MenuItemRenderFunction_EnterTitleOnGameStart_Button
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/EnterTitleOnGameStart
     // type: function
     SHC_3BB0A8C1_0x00491C50 = 0x00491C50,
     // label: MenuItemActionHandler_IdentityOptions_LordIcons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/IdentityOptions
     // type: function
     SHC_3BB0A8C1_0x00491CE0 = 0x00491CE0,
     // label: MenuItemRenderFunction_IdentityOptions_LordIcons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/IdentityOptions
     // type: function
     SHC_3BB0A8C1_0x00491D70 = 0x00491D70,
     // label: MenuModalRenderFunction_GameplayOptions
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/GameplayOptions
     // type: function
     SHC_3BB0A8C1_0x00491E80 = 0x00491E80,
     // label: MenuItemRenderFunction_GameplayOptions_Buttons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/GameplayOptions
     // type: function
     SHC_3BB0A8C1_0x00491EB0 = 0x00491EB0,
     // label: MenuItemActionHandler_GameplayOptions_SpeedSlider
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/GameplayOptions
     // type: function
     SHC_3BB0A8C1_0x00491FD0 = 0x00491FD0,
     // type: /undefined *32
@@ -27029,15 +27029,15 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x00492070 = 0x00492070,
     // label: MenuItemRenderFunction_GameplayOptions_SpeedSlider
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/GameplayOptions
     // type: function
     SHC_3BB0A8C1_0x00492080 = 0x00492080,
     // label: MenuModalRenderFunction_VideoOptions
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/VideoOptions
     // type: function
     SHC_3BB0A8C1_0x00492120 = 0x00492120,
     // label: MenuItemRenderFunction_VideoOptions_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/VideoOptions
     // type: function
     SHC_3BB0A8C1_0x00492170 = 0x00492170,
     // type: /undefined *32
@@ -27071,15 +27071,15 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x00492658 = 0x00492658,
     // label: MenuModalRenderFunction_SoundOptions
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/SoundOptions
     // type: function
     SHC_3BB0A8C1_0x00492660 = 0x00492660,
     // label: MenuItemRenderFunction_SoundOptions_Buttons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/SoundOptions
     // type: function
     SHC_3BB0A8C1_0x00492690 = 0x00492690,
     // label: MenuItemActionHandler_SoundOptions_VolumeSlider
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/SoundOptions
     // type: function
     SHC_3BB0A8C1_0x00492890 = 0x00492890,
     // type: /pointer
@@ -27091,19 +27091,19 @@ enum {
     // type: /pointer
     SHC_3BB0A8C1_0x004929BC = 0x004929BC,
     // label: MenuItemRenderFunction_SoundOptions_VolumeSlider
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/SoundOptions
     // type: function
     SHC_3BB0A8C1_0x004929C0 = 0x004929C0,
     // label: MenuModalRenderFunction_NetworkOptions
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/NetworkOptions
     // type: function
     SHC_3BB0A8C1_0x00492A60 = 0x00492A60,
     // label: MenuItemRenderFunction_SaveLoadMap_Buttons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/SaveLoadMap
     // type: function
     SHC_3BB0A8C1_0x00492A90 = 0x00492A90,
     // label: MenuItemActionHandler_SaveLoadMap_Scrollbar
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/SaveLoadMap
     // type: function
     SHC_3BB0A8C1_0x00492BA0 = 0x00492BA0,
     // type: /undefined *32
@@ -27121,15 +27121,15 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x00492C5C = 0x00492C5C,
     // label: MenuItemRenderFunction_SaveLoadMap_Scrollbar
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/SaveLoadMap
     // type: function
     SHC_3BB0A8C1_0x00492C60 = 0x00492C60,
     // label: MenuItemRenderFunction_SaveLoadMap_TableContent
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/SaveLoadMap
     // type: function
     SHC_3BB0A8C1_0x00492C90 = 0x00492C90,
     // label: MenuItemActionHandler_SaveLoadMap_TableHeader
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/SaveLoadMap
     // type: function
     SHC_3BB0A8C1_0x00492DE0 = 0x00492DE0,
     // type: function
@@ -27151,7 +27151,7 @@ enum {
     // type: /pointer
     SHC_3BB0A8C1_0x00492FC4 = 0x00492FC4,
     // label: MenuItemRenderFunction_SaveLoadMap_TableHeader
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/SaveLoadMap
     // type: function
     SHC_3BB0A8C1_0x00492FD0 = 0x00492FD0,
     // label: SetupPreviewMinimapDataUnk
@@ -27159,19 +27159,19 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00493050 = 0x00493050,
     // label: MenuModalRenderFunction_SaveMap
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/SaveMap
     // type: function
     SHC_3BB0A8C1_0x004931A0 = 0x004931A0,
     // label: MenuItemActionHandler_SaveMap_TableContent
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/SaveMap
     // type: function
     SHC_3BB0A8C1_0x004932A0 = 0x004932A0,
     // label: MenuItemRenderFunction_SaveMap_InputTextDisplay
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/SaveMap
     // type: function
     SHC_3BB0A8C1_0x004932E0 = 0x004932E0,
     // label: MenuModalRenderFunction_YesNoDialog
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/YesNoDialog
     // type: function
     SHC_3BB0A8C1_0x00493390 = 0x00493390,
     // type: /pointer
@@ -27239,11 +27239,11 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004934E5 = 0x004934E5,
     // label: MenuItemRenderFunction_General_GameOptionsTextButton
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/General
     // type: function
     SHC_3BB0A8C1_0x004934F0 = 0x004934F0,
     // label: MenuModalRenderFunction_ProgressBarBox
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/ProgressBarBox
     // type: function
     SHC_3BB0A8C1_0x00493560 = 0x00493560,
     // label: RenderLoadAndSaveBar
@@ -27253,15 +27253,15 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004937A4 = 0x004937A4,
     // label: MenuModalRenderFunction_OnlineQuitGame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/OnlineQuitGame
     // type: function
     SHC_3BB0A8C1_0x004937B0 = 0x004937B0,
     // label: MenuModalRenderFunction_OnlineVoteQuitGame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/OnlineVoteQuitGame
     // type: function
     SHC_3BB0A8C1_0x004937E0 = 0x004937E0,
     // label: MenuItemRenderFunction_OnlineVoteQuitAndQuitGame_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/OnlineVoteQuitAndQuitGame
     // type: function
     SHC_3BB0A8C1_0x00493850 = 0x00493850,
     // type: /undefined *32
@@ -27287,7 +27287,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00493AC0 = 0x00493AC0,
     // label: MenuItemActionHandler_OptionsMenu_SubOptionsButtons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/OptionsMenu
     // type: function
     SHC_3BB0A8C1_0x00493BD0 = 0x00493BD0,
     // type: /undefined *32
@@ -27389,11 +27389,11 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x00493D2D = 0x00493D2D,
     // label: MenuItemActionHandler_IdentityOptions_Confirm
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/IdentityOptions
     // type: function
     SHC_3BB0A8C1_0x00493D30 = 0x00493D30,
     // label: MenuItemActionHandler_GameplayOptions_Buttons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/GameplayOptions
     // type: function
     SHC_3BB0A8C1_0x00493D80 = 0x00493D80,
     // type: /undefined *32
@@ -27479,7 +27479,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x00493E17 = 0x00493E17,
     // label: MenuItemActionHandler_VideoOptions_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/VideoOptions
     // type: function
     SHC_3BB0A8C1_0x00493E20 = 0x00493E20,
     // type: function
@@ -27579,7 +27579,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004940AA = 0x004940AA,
     // label: MenuItemActionHandler_SoundOptions_Buttons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/SoundOptions
     // type: function
     SHC_3BB0A8C1_0x004940B0 = 0x004940B0,
     // type: /undefined *32
@@ -27687,15 +27687,15 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004941E8 = 0x004941E8,
     // label: MenuItemActionHandler_NetworkOptions_LeaveButtonUnk
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/NetworkOptions
     // type: function
     SHC_3BB0A8C1_0x004941F0 = 0x004941F0,
     // label: MenuModalRenderFunction_LoadMap
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/LoadMap
     // type: function
     SHC_3BB0A8C1_0x00494210 = 0x00494210,
     // label: MenuItemActionHandler_SaveLoadMap_Buttons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/SaveLoadMap
     // type: function
     SHC_3BB0A8C1_0x004943B0 = 0x004943B0,
     // type: function
@@ -27761,15 +27761,15 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004948BF = 0x004948BF,
     // label: MenuItemActionHandler_LoadMap_TableContent
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/LoadMap
     // type: function
     SHC_3BB0A8C1_0x004948C0 = 0x004948C0,
     // label: MenuItemActionHandler_SaveMap_ReturnKeySave
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/SaveMap
     // type: function
     SHC_3BB0A8C1_0x00494920 = 0x00494920,
     // label: MenuItemActionHandler_General_LaunchOrQuitMultiplayerGameUnk
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/General
     // type: function
     SHC_3BB0A8C1_0x00494950 = 0x00494950,
     // type: function
@@ -27861,7 +27861,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004950A9 = 0x004950A9,
     // label: MenuItemActionHandler_ProgressBarBox_LoadAndSaveGameButtonLogic
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/ProgressBarBox
     // type: function
     SHC_3BB0A8C1_0x004950B0 = 0x004950B0,
     // type: function
@@ -27873,7 +27873,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004954A0 = 0x004954A0,
     // label: ShowProgressBarSaveLoadDialog
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x00495800 = 0x00495800,
     // label: ProgressBarRelated
@@ -27881,7 +27881,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x00495840 = 0x00495840,
     // label: MenuItemActionHandler_OnlineVoteQuitAndQuitGame_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/OnlineVoteQuitAndQuitGame
     // type: function
     SHC_3BB0A8C1_0x00495860 = 0x00495860,
     // type: /undefined *32
@@ -27907,7 +27907,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004968A0 = 0x004968A0,
     // label: MenuItemActionHandler_OptionsMenu_Buttons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/OptionsMenu
     // type: function
     SHC_3BB0A8C1_0x00496B80 = 0x00496B80,
     // type: /undefined *32
@@ -29421,7 +29421,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004AA3E0 = 0x004AA3E0,
     // label: MenuModalRenderFunction_OverlaySlider
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/OverlaySlider
     // type: function
     SHC_3BB0A8C1_0x004AA440 = 0x004AA440,
     // label: setSliderParameters
@@ -29433,7 +29433,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004AA540 = 0x004AA540,
     // label: MenuItemActionHandler_OverlaySlider_Slider
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/OverlaySlider
     // type: function
     SHC_3BB0A8C1_0x004AA600 = 0x004AA600,
     // type: /undefined *32
@@ -29451,7 +29451,7 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x004AA7F0 = 0x004AA7F0,
     // label: MenuItemRenderFunction_OverlaySlider_Slider
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/OverlaySlider
     // type: function
     SHC_3BB0A8C1_0x004AA800 = 0x004AA800,
     // label: setModalSliderParameters
@@ -29459,91 +29459,91 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004AA930 = 0x004AA930,
     // label: MenuItemRenderFunction_UnusedWinCondition_Options
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Unused
     // type: function
     SHC_3BB0A8C1_0x004AA970 = 0x004AA970,
     // label: MenuModalRenderFunction_DebugDataCurrentPlayerData
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/DebugDataCurrentPlayerData
     // type: function
     SHC_3BB0A8C1_0x004AAA40 = 0x004AAA40,
     // label: MenuModalRenderFunction_DebugDataAiInfo
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/DebugDataAiInfo
     // type: function
     SHC_3BB0A8C1_0x004AAA60 = 0x004AAA60,
     // label: MenuModalRenderFunction_DebugDataUnitData
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/DebugDataUnitData
     // type: function
     SHC_3BB0A8C1_0x004AAA80 = 0x004AAA80,
     // label: MenuModalRenderFunction_DebugDataZoneDataUnk
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/DebugDataZoneDataUnk
     // type: function
     SHC_3BB0A8C1_0x004AAAA0 = 0x004AAAA0,
     // label: MenuModalRenderFunction_DebugDataMousePointing
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/DebugDataMousePointing
     // type: function
     SHC_3BB0A8C1_0x004AAAC0 = 0x004AAAC0,
     // label: MenuModalRenderFunction_DebugDataNetwork
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/DebugDataNetwork
     // type: function
     SHC_3BB0A8C1_0x004AAAE0 = 0x004AAAE0,
     // label: MenuModalRenderFunction_DebugDataSplitInfo
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/DebugDataSplitInfo
     // type: function
     SHC_3BB0A8C1_0x004AAB00 = 0x004AAB00,
     // label: MenuModalRenderFunction_DebugDataMapData
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/DebugDataMapData
     // type: function
     SHC_3BB0A8C1_0x004AAB20 = 0x004AAB20,
     // label: MenuModalRenderFunction_TextEditor
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/TextEditor
     // type: function
     SHC_3BB0A8C1_0x004AAB40 = 0x004AAB40,
     // label: MenuModalRenderFunction_CreditsScroll
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/CreditsScroll
     // type: function
     SHC_3BB0A8C1_0x004AAB50 = 0x004AAB50,
     // label: MenuModalRenderFunction_DisplayAiLordMessage
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/DisplayAiLordMessage
     // type: function
     SHC_3BB0A8C1_0x004AB440 = 0x004AB440,
     // label: MenuModalRenderFunction_UnusedChooseMessageBox
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/UnusedChooseMessageBox
     // type: function
     SHC_3BB0A8C1_0x004AB460 = 0x004AB460,
     // label: MenuModalRenderFunction_TraderSettings
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/TraderSettings
     // type: function
     SHC_3BB0A8C1_0x004AB4B0 = 0x004AB4B0,
     // label: MenuModalRenderFunction_StartGoods
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/StartGoods
     // type: function
     SHC_3BB0A8C1_0x004AB4E0 = 0x004AB4E0,
     // label: MenuModalRenderFunction_UnusedSiegeAttackingForceUnk
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/UnusedSiegeAttackingForceUnk
     // type: function
     SHC_3BB0A8C1_0x004AB510 = 0x004AB510,
     // label: MenuModalRenderFunction_CreateOrTriggerInvasion
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/CreateOrTriggerInvasion
     // type: function
     SHC_3BB0A8C1_0x004AB540 = 0x004AB540,
     // label: MenuModalRenderFunction_UnusedCreateTimedMessageEvent
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/UnusedCreateTimedMessageEvent
     // type: function
     SHC_3BB0A8C1_0x004AB570 = 0x004AB570,
     // label: MenuModalRenderFunction_UnusedCreateMessageEvent
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/UnusedCreateMessageEvent
     // type: function
     SHC_3BB0A8C1_0x004AB680 = 0x004AB680,
     // label: MenuModalRenderFunction_NewEvent
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/NewEvent
     // type: function
     SHC_3BB0A8C1_0x004AB790 = 0x004AB790,
     // label: MenuModalRenderFunction_NewEventCondition
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/NewEventCondition
     // type: function
     SHC_3BB0A8C1_0x004ABA20 = 0x004ABA20,
     // label: MenuModalRenderFunction_NewEventAction
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/NewEventAction
     // type: function
     SHC_3BB0A8C1_0x004ABAB0 = 0x004ABAB0,
     // type: /pointer
@@ -29603,35 +29603,35 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004ABB91 = 0x004ABB91,
     // label: MenuModalRenderFunction_BuildingAvailability
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/BuildingAvailability
     // type: function
     SHC_3BB0A8C1_0x004ABBA0 = 0x004ABBA0,
     // label: MenuModalRenderFunction_DisableTroops
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/DisableTroops
     // type: function
     SHC_3BB0A8C1_0x004ABCB0 = 0x004ABCB0,
     // label: MenuModalRenderFunction_DisableWeapon
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/DisableWeapon
     // type: function
     SHC_3BB0A8C1_0x004ABCE0 = 0x004ABCE0,
     // label: MenuModalRenderFunction_TutorialBox_Thunk
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/TutorialBox
     // type: function
     SHC_3BB0A8C1_0x004ABD10 = 0x004ABD10,
     // label: MenuModalRenderFunction_Chat
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/Chat
     // type: function
     SHC_3BB0A8C1_0x004ABD20 = 0x004ABD20,
     // label: MenuModalRenderFunction_SkirmishConnectionOptions
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/SkirmishConnectionOptions
     // type: function
     SHC_3BB0A8C1_0x004ABE50 = 0x004ABE50,
     // label: MenuModalRenderFunction_SkirmishPlayOptions
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/SkirmishPlayOptions
     // type: function
     SHC_3BB0A8C1_0x004ABE80 = 0x004ABE80,
     // label: MenuItemActionHandler_EditorMapTypeQuickChange_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/EditorMapTypeQuickChange
     // type: function
     SHC_3BB0A8C1_0x004ABEB0 = 0x004ABEB0,
     // type: /undefined *32
@@ -29693,7 +29693,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004AC037 = 0x004AC037,
     // label: MenuItemRenderFunction_EditorMapTypeQuickChange_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/EditorMapTypeQuickChange
     // type: function
     SHC_3BB0A8C1_0x004AC040 = 0x004AC040,
     // type: /undefined *32
@@ -29783,23 +29783,23 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004AC24F = 0x004AC24F,
     // label: MenuModalRenderFunction_TriggerEvent
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/TriggerEvent
     // type: function
     SHC_3BB0A8C1_0x004AC250 = 0x004AC250,
     // label: MenuModalRenderFunction_TriggerEventSlider
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/TriggerEventSlider
     // type: function
     SHC_3BB0A8C1_0x004AC280 = 0x004AC280,
     // label: MenuModalRenderFunction_SendMapTo
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/SendMapTo
     // type: function
     SHC_3BB0A8C1_0x004AC310 = 0x004AC310,
     // label: MenuItemRenderFunction_SendReceiveMap_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/SendReceiveMap
     // type: function
     SHC_3BB0A8C1_0x004AC440 = 0x004AC440,
     // label: MenuModalRenderFunction_ReceiveMapFrom
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/ReceiveMapFrom
     // type: function
     SHC_3BB0A8C1_0x004AC4C0 = 0x004AC4C0,
     // label: RecalculateAllies
@@ -29807,15 +29807,15 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004AC570 = 0x004AC570,
     // label: BuildEnemyPlayerList
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004AC650 = 0x004AC650,
     // label: MenuModalRenderFunction_Allies
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/Allies
     // type: function
     SHC_3BB0A8C1_0x004AC6E0 = 0x004AC6E0,
     // label: MenuItemRenderFunction_Allies_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Allies
     // type: function
     SHC_3BB0A8C1_0x004AC7A0 = 0x004AC7A0,
     // label: ProcessAllyAcceptsRequest
@@ -29827,7 +29827,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004AD1E0 = 0x004AD1E0,
     // label: MenuModalRenderFunction_AlliesOrder
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/AlliesOrder
     // type: function
     SHC_3BB0A8C1_0x004AD2B0 = 0x004AD2B0,
     // label: ProcessAllyRequestAttackDefense
@@ -29835,11 +29835,11 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004AD2F0 = 0x004AD2F0,
     // label: MenuItemRenderFunction_AlliesOrder_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/AlliesOrder
     // type: function
     SHC_3BB0A8C1_0x004AD480 = 0x004AD480,
     // label: MenuModalRenderFunction_AlliesRequestGoods
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/AlliesRequestGoods
     // type: function
     SHC_3BB0A8C1_0x004AD780 = 0x004AD780,
     // label: ProcessAllyRequestingGoods
@@ -29847,11 +29847,11 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004AD7C0 = 0x004AD7C0,
     // label: MenuItemRenderFunction_AlliesSendAndRequestGoods_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/AlliesSendAndRequestGoods
     // type: function
     SHC_3BB0A8C1_0x004AD920 = 0x004AD920,
     // label: MenuModalRenderFunction_AlliesSendGoods
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/AlliesSendGoods
     // type: function
     SHC_3BB0A8C1_0x004ADD90 = 0x004ADD90,
     // label: ProcessAllyGoodsRequest
@@ -29907,17 +29907,17 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004AE010 = 0x004AE010,
     // label: MenuModalRenderFunction_ChooseRandomNumberOfEnemies
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/ChooseRandomNumberOfEnemies
     // type: function
     SHC_3BB0A8C1_0x004AE070 = 0x004AE070,
     // label: MenuModalRenderFunction_GreatestLord
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/GreatestLord
     // type: function
     SHC_3BB0A8C1_0x004AE0F0 = 0x004AE0F0,
     // type: function
     SHC_3BB0A8C1_0x004AE4F0 = 0x004AE4F0,
     // label: MenuItemRenderFunction_GreatestLord_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/GreatestLord
     // type: function
     SHC_3BB0A8C1_0x004AE720 = 0x004AE720,
     // label: ClearLobbyHoveredAI
@@ -29925,11 +29925,11 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004AE7C0 = 0x004AE7C0,
     // label: MenuItemActionHandler_AiLordSelect_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/AiLordSelect
     // type: function
     SHC_3BB0A8C1_0x004AE7D0 = 0x004AE7D0,
     // label: MenuItemRenderFunction_AiLordSelect_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/AiLordSelect
     // type: function
     SHC_3BB0A8C1_0x004AE950 = 0x004AE950,
     // label: syncPlayerGroupArrays
@@ -29937,7 +29937,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004AEA10 = 0x004AEA10,
     // label: MenuItemActionHandler_Roundtable_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Roundtable
     // type: function
     SHC_3BB0A8C1_0x004AEA50 = 0x004AEA50,
     // type: function
@@ -29957,11 +29957,11 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x004AEF60 = 0x004AEF60,
     // label: MenuItemRenderFunction_Roundtable_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Roundtable
     // type: function
     SHC_3BB0A8C1_0x004AEF70 = 0x004AEF70,
     // label: MenuModalRenderFunction_DebugDataAivStateUnk
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/DebugDataAivStateUnk
     // type: function
     SHC_3BB0A8C1_0x004AF4C0 = 0x004AF4C0,
     // label: Constructor_DisplayElement
@@ -29969,83 +29969,83 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004AF5E0 = 0x004AF5E0,
     // label: FindDisplayElementWithID
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/DisplayElements
     // type: function
     SHC_3BB0A8C1_0x004AF630 = 0x004AF630,
     // label: CheckDisplayElementByIDAndSetForUnlimitedDisplay
-    // location: OpenSHC/UI/Helpers
+    // location: OpenSHC/UI/DisplayElements
     // type: function
     SHC_3BB0A8C1_0x004AF650 = 0x004AF650,
     // label: ActivateGameSpeedAndResourceLackDisplayElementUnk
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/DisplayElements
     // type: function
     SHC_3BB0A8C1_0x004AF680 = 0x004AF680,
     // label: TogglePlayerPingDisplayElementUnk
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/DisplayElements
     // type: function
     SHC_3BB0A8C1_0x004AF6B0 = 0x004AF6B0,
     // label: GetIfDisplayElementStateNotZero
-    // location: OpenSHC/UI/Helpers
+    // location: OpenSHC/UI/DisplayElements
     // type: function
     SHC_3BB0A8C1_0x004AF6E0 = 0x004AF6E0,
     // label: RenderDisplayElementsUnk
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/DisplayElements
     // type: function
     SHC_3BB0A8C1_0x004AF700 = 0x004AF700,
     // label: RenderInGameChatDisplayElement
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/DisplayElements
     // type: function
     SHC_3BB0A8C1_0x004AF800 = 0x004AF800,
     // label: RenderResourceMissing1DisplayElement
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/DisplayElements
     // type: function
     SHC_3BB0A8C1_0x004AF820 = 0x004AF820,
     // label: RenderResourceMissing2DisplayElement
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/DisplayElements
     // type: function
     SHC_3BB0A8C1_0x004AF840 = 0x004AF840,
     // label: RenderDebugNumbersDisplayElement
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/DisplayElements
     // type: function
     SHC_3BB0A8C1_0x004AF860 = 0x004AF860,
     // label: RenderUnknownDisplayElement7
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/DisplayElements
     // type: function
     SHC_3BB0A8C1_0x004AFA50 = 0x004AFA50,
     // label: RenderSomeMissionNumberUnkDisplayElement9
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/DisplayElements
     // type: function
     SHC_3BB0A8C1_0x004AFA80 = 0x004AFA80,
     // label: RenderNoTreeGrowthTextDisplayElement
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/DisplayElements
     // type: function
     SHC_3BB0A8C1_0x004AFB00 = 0x004AFB00,
     // label: RenderInGameWinDefeatWindowDisplayElement
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/DisplayElements
     // type: function
     SHC_3BB0A8C1_0x004AFB30 = 0x004AFB30,
     // label: RenderMissionWinDefeatBannerDisplayElement
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/DisplayElements
     // type: function
     SHC_3BB0A8C1_0x004AFDA0 = 0x004AFDA0,
     // label: RenderSomeMultiplayerInfoUnkDisplayElement19
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/DisplayElements
     // type: function
     SHC_3BB0A8C1_0x004AFE10 = 0x004AFE10,
     // label: RenderPlayerInfoOnHoverDisplayElement
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/DisplayElements
     // type: function
     SHC_3BB0A8C1_0x004B0390 = 0x004B0390,
     // label: RenderGameSpeedTextDisplayElement
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/DisplayElements
     // type: function
     SHC_3BB0A8C1_0x004B07C0 = 0x004B07C0,
     // label: RenderUnknownDisplayElement25
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/DisplayElements
     // type: function
     SHC_3BB0A8C1_0x004B0820 = 0x004B0820,
     // label: RenderPeopleLeftToPlaceDisplayElement
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/DisplayElements
     // type: function
     SHC_3BB0A8C1_0x004B0AC0 = 0x004B0AC0,
     // label: renderMenuModal
@@ -30071,83 +30071,83 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x004B0F68 = 0x004B0F68,
     // label: MenuItemActionHandler_OverlaySlider_Deselect
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/OverlaySlider
     // type: function
     SHC_3BB0A8C1_0x004B0F70 = 0x004B0F70,
     // label: MenuItemActionHandler_UnusedWinCondition_DeselectUnk
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Unused
     // type: function
     SHC_3BB0A8C1_0x004B1000 = 0x004B1000,
     // label: MenuItemActionHandler_UnusedWinCondition_Options
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Unused
     // type: function
     SHC_3BB0A8C1_0x004B1090 = 0x004B1090,
     // label: MenuItemActionHandler_SendReceiveMap_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/SendReceiveMap
     // type: function
     SHC_3BB0A8C1_0x004B10D0 = 0x004B10D0,
     // type: function
     SHC_3BB0A8C1_0x004B11A0 = 0x004B11A0,
     // label: MenuItemActionHandler_Allies_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Allies
     // type: function
     SHC_3BB0A8C1_0x004B12D0 = 0x004B12D0,
     // label: MenuItemActionHandler_AlliesOrder_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/AlliesOrder
     // type: function
     SHC_3BB0A8C1_0x004B1410 = 0x004B1410,
     // type: function
     SHC_3BB0A8C1_0x004B1471 = 0x004B1471,
     // label: MenuItemActionHandler_AlliesSendAndRequestGoods_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/AlliesSendAndRequestGoods
     // type: function
     SHC_3BB0A8C1_0x004B14C0 = 0x004B14C0,
     // label: MenuItemActionHandler_ChooseRandomNumberOfEnemies_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/ChooseRandomNumberOfEnemies
     // type: function
     SHC_3BB0A8C1_0x004B18D0 = 0x004B18D0,
     // type: function
     SHC_3BB0A8C1_0x004B1900 = 0x004B1900,
     // label: MenuItemActionHandler_GreatestLord_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/GreatestLord
     // type: function
     SHC_3BB0A8C1_0x004B1990 = 0x004B1990,
     // label: MenuModalRenderFunction_AiLordSelect
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/AiLordSelect
     // type: function
     SHC_3BB0A8C1_0x004B19E0 = 0x004B19E0,
     // label: MenuModalRenderFunction_Roundtable
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/Roundtable
     // type: function
     SHC_3BB0A8C1_0x004B1AC0 = 0x004B1AC0,
     // label: RenderAndPlayKeepAndGranaryPlacementInfoDisplayElement
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/DisplayElements
     // type: function
     SHC_3BB0A8C1_0x004B1C30 = 0x004B1C30,
     // label: RenderPlayerPingUnkDisplayElement22
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/DisplayElements
     // type: function
     SHC_3BB0A8C1_0x004B1D30 = 0x004B1D30,
     // type: function
     SHC_3BB0A8C1_0x004B1D90 = 0x004B1D90,
     // label: RenderGamePausedTextDisplayElement
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/DisplayElements
     // type: function
     SHC_3BB0A8C1_0x004B1E60 = 0x004B1E60,
     // label: RenderTimeUntilVictoryDisplayElement
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/DisplayElements
     // type: function
     SHC_3BB0A8C1_0x004B1EB0 = 0x004B1EB0,
     // label: RenderNoRushDisplayElementUnk
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/DisplayElements
     // type: function
     SHC_3BB0A8C1_0x004B20B0 = 0x004B20B0,
     // label: RenderTimeUntilDefeatDisplayElement
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/DisplayElements
     // type: function
     SHC_3BB0A8C1_0x004B2280 = 0x004B2280,
     // label: RenderSomeMultiplayerInfoUnkDisplayElement28
-    // location: OpenSHC/UI/Rendering
+    // location: OpenSHC/UI/DisplayElements
     // type: function
     SHC_3BB0A8C1_0x004B2530 = 0x004B2530,
     // label: activateModalDialog2
@@ -31085,21 +31085,21 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004B64D0 = 0x004B64D0,
     // label: MenuItemRenderFunction_InGameMenu_MapEventIconUnk
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/InGameMenu
     // type: function
     SHC_3BB0A8C1_0x004B6500 = 0x004B6500,
     // label: MenuItemActionHandler_InGameMenu_MapEventIconUnk
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/InGameMenu
     // type: function
     SHC_3BB0A8C1_0x004B6530 = 0x004B6530,
     // type: function
     SHC_3BB0A8C1_0x004B6560 = 0x004B6560,
     // label: MenuItemRenderFunction_InGameMenu_KeepEnclosedSymbol
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/InGameMenu
     // type: function
     SHC_3BB0A8C1_0x004B65A0 = 0x004B65A0,
     // label: MenuItemRenderFunction_InGameMenu_BikMessagePlayerShield
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/InGameMenu
     // type: function
     SHC_3BB0A8C1_0x004B65F0 = 0x004B65F0,
     // label: setMapPropertyDependingOnMapSize
@@ -31323,7 +31323,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004B7C90 = 0x004B7C90,
     // label: PlayAMessageFromAI
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004B7F60 = 0x004B7F60,
     // label: sumUnitPoints
@@ -31335,11 +31335,11 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004B8000 = 0x004B8000,
     // label: MenuView_General_DoInitial_OnlySetMenuXY
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/General
     // type: function
     SHC_3BB0A8C1_0x004B8050 = 0x004B8050,
     // label: MenuView_EditScenario_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/EditScenario
     // type: function
     SHC_3BB0A8C1_0x004B8080 = 0x004B8080,
     // label: SumUnitPoints
@@ -31347,11 +31347,11 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004B8200 = 0x004B8200,
     // label: RestoreScenarioGold
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004B8210 = 0x004B8210,
     // label: MenuItemActionHandler_EditScenario_BaseMenuButtons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/EditScenario
     // type: function
     SHC_3BB0A8C1_0x004B8220 = 0x004B8220,
     // type: /undefined *32
@@ -31729,7 +31729,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004B8988 = 0x004B8988,
     // label: MenuItemActionHandler_EditScenario_DateYearBox
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/EditScenario
     // type: function
     SHC_3BB0A8C1_0x004B8990 = 0x004B8990,
     // type: /undefined *32
@@ -31749,7 +31749,7 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x004B8A44 = 0x004B8A44,
     // label: MenuItemActionHandler_EditScenario_Scrollbar
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/EditScenario
     // type: function
     SHC_3BB0A8C1_0x004B8A50 = 0x004B8A50,
     // type: /undefined *32
@@ -31765,23 +31765,23 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x004B8B0C = 0x004B8B0C,
     // label: MenuItemActionHandler_EditScenario_EventAndInvasionList
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/EditScenario
     // type: function
     SHC_3BB0A8C1_0x004B8B10 = 0x004B8B10,
     // label: MenuItemRenderFunction_EditScenario_EventAndInvasionList
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/EditScenario
     // type: function
     SHC_3BB0A8C1_0x004B8BF0 = 0x004B8BF0,
     // label: MenuItemActionHandler_EditScenario_UpDownButtons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/EditScenario
     // type: function
     SHC_3BB0A8C1_0x004B9020 = 0x004B9020,
     // label: MenuItemRenderFunction_EditScenario_UpDownButtons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/EditScenario
     // type: function
     SHC_3BB0A8C1_0x004B9060 = 0x004B9060,
     // label: MenuItemActionHandler_NewInvasion_UnitButtons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/NewInvasion
     // type: function
     SHC_3BB0A8C1_0x004B9110 = 0x004B9110,
     // type: /undefined *32
@@ -31833,7 +31833,7 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x004B92C0 = 0x004B92C0,
     // label: MenuItemRenderFunction_NewInvasion_UnitButtons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/NewInvasion
     // type: function
     SHC_3BB0A8C1_0x004B92D0 = 0x004B92D0,
     // type: /undefined *32
@@ -31885,7 +31885,7 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x004B949C = 0x004B949C,
     // label: MenuItemActionHandler_NewInvasion_RepeatSlider
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/NewInvasion
     // type: function
     SHC_3BB0A8C1_0x004B94A0 = 0x004B94A0,
     // type: /pointer
@@ -31897,15 +31897,15 @@ enum {
     // type: /pointer
     SHC_3BB0A8C1_0x004B9528 = 0x004B9528,
     // label: MenuItemRenderFunction_NewInvasion_RepeatSlider
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/NewInvasion
     // type: function
     SHC_3BB0A8C1_0x004B9530 = 0x004B9530,
     // label: CaptureCurrentTimeToUnknownTime01
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004B9610 = 0x004B9610,
     // label: MenuItemActionHandler_NewEventCondition_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/NewEventCondition
     // type: function
     SHC_3BB0A8C1_0x004B9620 = 0x004B9620,
     // type: /pointer
@@ -32517,7 +32517,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004B9BF3 = 0x004B9BF3,
     // label: MenuItemActionHandler_NewEventAction_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/NewEventAction
     // type: function
     SHC_3BB0A8C1_0x004B9C00 = 0x004B9C00,
     // type: /pointer
@@ -32921,7 +32921,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004B9E4F = 0x004B9E4F,
     // label: MenuItemActionHandler_General_EventSlider
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/General
     // type: function
     SHC_3BB0A8C1_0x004B9E50 = 0x004B9E50,
     // type: /undefined *32
@@ -33237,7 +33237,7 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x004BA3B4 = 0x004BA3B4,
     // label: MenuItemRenderFunction_General_EventSlider
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/General
     // type: function
     SHC_3BB0A8C1_0x004BA3C0 = 0x004BA3C0,
     // type: /pointer
@@ -33351,15 +33351,15 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004BA559 = 0x004BA559,
     // label: MenuItemActionHandler_UnusedCreateMessageEvent_Unknown
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Unused
     // type: function
     SHC_3BB0A8C1_0x004BA560 = 0x004BA560,
     // label: MenuItemActionHandler_SiegeAttackingForceAndStartGoods_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/SiegeAttackingForceAndStartGoods
     // type: function
     SHC_3BB0A8C1_0x004BA5C0 = 0x004BA5C0,
     // label: MenuItemActionHandler_TraderSettings
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/TraderSettings
     // type: function
     SHC_3BB0A8C1_0x004BA780 = 0x004BA780,
     // label: sortEventsByDate
@@ -33375,19 +33375,19 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004BA910 = 0x004BA910,
     // label: MenuItemRenderFunction_UnusedCreateMessageEvent_Buttons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Unused
     // type: function
     SHC_3BB0A8C1_0x004BA980 = 0x004BA980,
     // label: MenuItemRenderFunction_EditScenario_StartDateMonth
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/EditScenario
     // type: function
     SHC_3BB0A8C1_0x004BAC20 = 0x004BAC20,
     // label: MenuItemRenderFunction_EditScenario_StartDate
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/EditScenario
     // type: function
     SHC_3BB0A8C1_0x004BAC90 = 0x004BAC90,
     // label: MenuItemActionHandler_General_MessageScrollbar
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/General
     // type: function
     SHC_3BB0A8C1_0x004BAD70 = 0x004BAD70,
     // type: /undefined *32
@@ -33403,11 +33403,11 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x004BAE2C = 0x004BAE2C,
     // label: MenuItemRenderFunction_General_Scrollbar
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/General
     // type: function
     SHC_3BB0A8C1_0x004BAE30 = 0x004BAE30,
     // label: MenuItemRenderFunction_General_MessageScrollbarUpDown
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/General
     // type: function
     SHC_3BB0A8C1_0x004BAE80 = 0x004BAE80,
     // label: commitBuildingAvailability
@@ -33423,7 +33423,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004BB0B0 = 0x004BB0B0,
     // label: MenuItemRenderFunction_BuildingAvailability_Buttons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAvailability
     // type: function
     SHC_3BB0A8C1_0x004BB0D0 = 0x004BB0D0,
     // type: /undefined *32
@@ -33489,7 +33489,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004BB2B1 = 0x004BB2B1,
     // label: MenuItemActionHandler_BuildingAvailability_Buttons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAvailability
     // type: function
     SHC_3BB0A8C1_0x004BB2C0 = 0x004BB2C0,
     // type: /pointer
@@ -33577,11 +33577,11 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004BB3D9 = 0x004BB3D9,
     // label: MenuItemRenderFunction_BuildingAvailability_TableRows
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAvailability
     // type: function
     SHC_3BB0A8C1_0x004BB3E0 = 0x004BB3E0,
     // label: MenuItemActionHandler_BuildingAvailability_Scrollbar
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/BuildingAvailability
     // type: function
     SHC_3BB0A8C1_0x004BB480 = 0x004BB480,
     // type: /undefined *32
@@ -33597,27 +33597,27 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x004BB530 = 0x004BB530,
     // label: MenuItemActionHandler_DisableEuroTroops_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/DisableEuroTroops
     // type: function
     SHC_3BB0A8C1_0x004BB540 = 0x004BB540,
     // label: MenuItemRenderFunction_DisableEuroTroops_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/DisableEuroTroops
     // type: function
     SHC_3BB0A8C1_0x004BB570 = 0x004BB570,
     // label: MenuItemActionHandler_DisableArabTroops_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/DisableArabTroops
     // type: function
     SHC_3BB0A8C1_0x004BB650 = 0x004BB650,
     // label: MenuItemRenderFunction_DisableArabTroops_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/DisableArabTroops
     // type: function
     SHC_3BB0A8C1_0x004BB680 = 0x004BB680,
     // label: MenuItemActionHandler_DisableWeapon_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/DisableWeapon
     // type: function
     SHC_3BB0A8C1_0x004BB740 = 0x004BB740,
     // label: MenuItemRenderFunction_DisableWeapon_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/DisableWeapon
     // type: function
     SHC_3BB0A8C1_0x004BB7B0 = 0x004BB7B0,
     // type: /undefined *32
@@ -33651,7 +33651,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004BBA30 = 0x004BBA30,
     // label: MenuItemRenderFunction_General_CreateEventCallbackFunction
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/General
     // type: function
     SHC_3BB0A8C1_0x004BBA60 = 0x004BBA60,
     // type: /undefined *32
@@ -34113,7 +34113,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004BBD84 = 0x004BBD84,
     // label: MenuItemActionHandler_TriggerInvasion_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/TriggerInvasion
     // type: function
     SHC_3BB0A8C1_0x004BBD90 = 0x004BBD90,
     // type: /undefined *32
@@ -34165,7 +34165,7 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x004BBF34 = 0x004BBF34,
     // label: MenuItemRenderFunction_TriggerInvasion_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/TriggerInvasion
     // type: function
     SHC_3BB0A8C1_0x004BBF40 = 0x004BBF40,
     // type: /undefined *32
@@ -34425,15 +34425,15 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004BC5B0 = 0x004BC5B0,
     // label: InitTutorialStepTransition
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004BC5F0 = 0x004BC5F0,
     // label: GetCurrentTutorialStep
     // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004BC620 = 0x004BC620,
-    // label: recordTutorialPlayerAction
-    // location: OpenSHC/UI
+    // label: RecordTutorialPlayerAction
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004BC630 = 0x004BC630,
     // label: SetTutorialBuildingActionState
@@ -34441,21 +34441,21 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004BC690 = 0x004BC690,
     // label: ResetTutorialActionTrackers
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004BC6C0 = 0x004BC6C0,
     // type: function
     SHC_3BB0A8C1_0x004BC6F0 = 0x004BC6F0,
     // label: SetTutorialHintActiveWithTimestamp
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004BC770 = 0x004BC770,
-    // label: renderAnimatedTutorialFloatOverlay
-    // location: OpenSHC/UI
+    // label: RenderAnimatedTutorialFloatOverlay
+    // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004BC790 = 0x004BC790,
-    // label: renderTutorialFloatForUIElement
-    // location: OpenSHC/UI
+    // label: RenderTutorialFloatForUIElement
+    // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004BC910 = 0x004BC910,
     // type: /undefined *32
@@ -34527,19 +34527,19 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004BCB9E = 0x004BCB9E,
     // label: MenuModalRenderFunction_TutorialBox
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/TutorialBox
     // type: function
     SHC_3BB0A8C1_0x004BCBA0 = 0x004BCBA0,
     // label: MenuItemActionHandler_TutorialBox_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/TutorialBox
     // type: function
     SHC_3BB0A8C1_0x004BCEC0 = 0x004BCEC0,
     // label: MenuItemRenderFunction_TutorialBox_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/TutorialBox
     // type: function
     SHC_3BB0A8C1_0x004BD0F0 = 0x004BD0F0,
     // label: UpdateTutorialStepAndProgress
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004BD1B0 = 0x004BD1B0,
     // type: /pointer
@@ -34877,15 +34877,15 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004BEB20 = 0x004BEB20,
     // label: MenuView_EditScenario_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/EditScenario
     // type: function
     SHC_3BB0A8C1_0x004BEC10 = 0x004BEC10,
     // label: MenuItemRenderFunction_EditScenario_BaseMenuButtons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/EditScenario
     // type: function
     SHC_3BB0A8C1_0x004BEC40 = 0x004BEC40,
     // label: MenuItemRenderFunction_EditScenario_TextBoxLike
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/EditScenario
     // type: function
     SHC_3BB0A8C1_0x004BF1D0 = 0x004BF1D0,
     // type: /undefined *32
@@ -35115,11 +35115,11 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004BF712 = 0x004BF712,
     // label: MenuItemActionHandler_UnusedChooseMessageBox_Unknown
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Unused
     // type: function
     SHC_3BB0A8C1_0x004BF720 = 0x004BF720,
     // label: MenuItemActionHandler_NewInvasion_Buttons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/NewInvasion
     // type: function
     SHC_3BB0A8C1_0x004BF760 = 0x004BF760,
     // type: /undefined *32
@@ -35585,7 +35585,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004BFA57 = 0x004BFA57,
     // label: MenuItemRenderFunction_NewInvasion_Buttons
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/NewInvasion
     // type: function
     SHC_3BB0A8C1_0x004BFA60 = 0x004BFA60,
     // type: /undefined *32
@@ -36503,15 +36503,15 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004BFE13 = 0x004BFE13,
     // label: MenuItemActionHandler_UnusedCreateMessageEvent_SetTextUnk
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Unused
     // type: function
     SHC_3BB0A8C1_0x004BFE20 = 0x004BFE20,
     // label: MenuItemRenderFunction_General_EventButtonAndData
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/General
     // type: function
     SHC_3BB0A8C1_0x004BFFA0 = 0x004BFFA0,
     // label: MenuItemActionHandler_NewEvent_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/NewEvent
     // type: function
     SHC_3BB0A8C1_0x004C0040 = 0x004C0040,
     // type: /undefined *32
@@ -36733,7 +36733,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004C01A6 = 0x004C01A6,
     // label: MenuItemRenderFunction_NewEventCondition_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/NewEventCondition
     // type: function
     SHC_3BB0A8C1_0x004C01B0 = 0x004C01B0,
     // type: /undefined *32
@@ -37171,7 +37171,7 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004C085D = 0x004C085D,
     // label: MenuItemRenderFunction_NewEventAction_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/NewEventAction
     // type: function
     SHC_3BB0A8C1_0x004C0860 = 0x004C0860,
     // type: /undefined *32
@@ -37593,11 +37593,11 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004C0CE7 = 0x004C0CE7,
     // label: MenuItemRenderFunction_SiegeAttackingForceAndStartGoods_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/SiegeAttackingForceAndStartGoods
     // type: function
     SHC_3BB0A8C1_0x004C0CF0 = 0x004C0CF0,
     // label: MenuItemRenderFunction_TraderSettings
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/TraderSettings
     // type: function
     SHC_3BB0A8C1_0x004C1070 = 0x004C1070,
     // label: removeProcessedInvasionEvents
@@ -37661,7 +37661,7 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x004C1764 = 0x004C1764,
     // label: MenuItemActionHandler_General_CreateEventCallbackFunction
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/General
     // type: function
     SHC_3BB0A8C1_0x004C1770 = 0x004C1770,
     // label: applyActionMarriage
@@ -40401,7 +40401,7 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004D53E0 = 0x004D53E0,
     // label: MenuView_GameLost_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/GameLost
     // type: function
     SHC_3BB0A8C1_0x004D55D0 = 0x004D55D0,
     // label: ComputeSkMasterScore
@@ -40449,7 +40449,7 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x004D6BBC = 0x004D6BBC,
     // label: MenuItemActionHandler_MissionEndscreen_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/MissionEndscreen
     // type: function
     SHC_3BB0A8C1_0x004D6BC0 = 0x004D6BC0,
     // type: /undefined *32
@@ -40667,19 +40667,19 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004D6D14 = 0x004D6D14,
     // label: MenuItemRenderFunction_MissionEndscreen_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/MissionEndscreen
     // type: function
     SHC_3BB0A8C1_0x004D6D20 = 0x004D6D20,
     // label: MenuView_CampaignUnk_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/CampaignUnk
     // type: function
     SHC_3BB0A8C1_0x004D6EF0 = 0x004D6EF0,
     // label: MenuItemActionHandler_Unknown27CampaignUnk_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/Unknown27CampaignUnk
     // type: function
     SHC_3BB0A8C1_0x004D6F20 = 0x004D6F20,
     // label: ParseCampaignMapHotspotBitmap
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004D6F60 = 0x004D6F60,
     // label: ResetEventStatusUnk
@@ -40773,13 +40773,13 @@ enum {
     // type: /pointer
     SHC_3BB0A8C1_0x004D822C = 0x004D822C,
     // label: MenuItemRenderFunction_ScenarioDescription_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/ScenarioDescription
     // type: function
     SHC_3BB0A8C1_0x004D8250 = 0x004D8250,
     // type: function
     SHC_3BB0A8C1_0x004D839E = 0x004D839E,
     // label: MenuItemActionHandler_ScenarioDescription_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/ScenarioDescription
     // type: function
     SHC_3BB0A8C1_0x004D8570 = 0x004D8570,
     // type: /undefined *32
@@ -40849,49 +40849,49 @@ enum {
     // type: /pointer
     SHC_3BB0A8C1_0x004D8A18 = 0x004D8A18,
     // label: ReadMapHeaderFromFile
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004D8A20 = 0x004D8A20,
     // label: MenuView_CrusadeMissionIntro_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/CrusadeMissionIntro
     // type: function
     SHC_3BB0A8C1_0x004D8AB0 = 0x004D8AB0,
     // label: RenderPlayerAvatars
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004D8AE0 = 0x004D8AE0,
     // label: MenuItemRenderFunction_CrusadeMissionIntro_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/CrusadeMissionIntro
     // type: function
     SHC_3BB0A8C1_0x004D8BB0 = 0x004D8BB0,
     // label: MenuItemActionHandler_CrusadeMissionIntro_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/CrusadeMissionIntro
     // type: function
     SHC_3BB0A8C1_0x004D8C10 = 0x004D8C10,
     // label: MenuView_CrusadeMap_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/CrusadeMap
     // type: function
     SHC_3BB0A8C1_0x004D8CB0 = 0x004D8CB0,
     // type: function
     SHC_3BB0A8C1_0x004D8DC0 = 0x004D8DC0,
     // label: MenuItemRenderFunction_General_CrusadeMapAndEndscreen
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/General
     // type: function
     SHC_3BB0A8C1_0x004D8DF0 = 0x004D8DF0,
     // label: MenuItemActionHandler_CrusadeMap_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/CrusadeMap
     // type: function
     SHC_3BB0A8C1_0x004D8EC0 = 0x004D8EC0,
     // label: MenuView_CrusadeEndscreen_DoInitial
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/CrusadeEndscreen
     // type: function
     SHC_3BB0A8C1_0x004D91D0 = 0x004D91D0,
     // label: MenuItemActionHandler_CrusadeEndscreen_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/CrusadeEndscreen
     // type: function
     SHC_3BB0A8C1_0x004D9230 = 0x004D9230,
     // label: SetActiveCreditsSequenceIndex
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Credits
     // type: function
     SHC_3BB0A8C1_0x004D9270 = 0x004D9270,
     // label: Skirmish_SortAIOpponentOrder
@@ -40905,19 +40905,19 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004D9520 = 0x004D9520,
     // label: MenuView_RankingGames_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/RankingGames
     // type: function
     SHC_3BB0A8C1_0x004D9700 = 0x004D9700,
     // label: MenuItemActionHandler_RankingGames_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/RankingGames
     // type: function
     SHC_3BB0A8C1_0x004D9730 = 0x004D9730,
     // label: MenuItemRenderFunction_RankingGames_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/RankingGames
     // type: function
     SHC_3BB0A8C1_0x004D99F0 = 0x004D99F0,
     // label: MenuItemActionHandler_RankingGames_Scrollbar
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/RankingGames
     // type: function
     SHC_3BB0A8C1_0x004D9B30 = 0x004D9B30,
     // type: /undefined *32
@@ -40935,27 +40935,27 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x004D9C08 = 0x004D9C08,
     // label: MenuItemRenderFunction_RankingGames_Scrollbar
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/RankingGames
     // type: function
     SHC_3BB0A8C1_0x004D9C10 = 0x004D9C10,
     // label: MenuModalRenderFunctionMenuModal_DeleteGameRecord
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/DeleteGameRecord
     // type: function
     SHC_3BB0A8C1_0x004D9CC0 = 0x004D9CC0,
     // label: MenuItemActionHandler_DeleteGameRecord_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/DeleteGameRecord
     // type: function
     SHC_3BB0A8C1_0x004D9D60 = 0x004D9D60,
     // label: TacticalPowersFill
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004D9D90 = 0x004D9D90,
     // label: MenuModalRenderFunction_TacticalPowerBar
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuModals/TacticalPowerBar
     // type: function
     SHC_3BB0A8C1_0x004D9DB0 = 0x004D9DB0,
     // label: MenuItemRenderFunction_TacticalPowerBar_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/TacticalPowerBar
     // type: function
     SHC_3BB0A8C1_0x004D9EC0 = 0x004D9EC0,
     // type: /undefined *32
@@ -40979,7 +40979,7 @@ enum {
     // type: /undefined *32
     SHC_3BB0A8C1_0x004DA048 = 0x004DA048,
     // label: MenuItemActionHandler_TacticalPowerBar_Main
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/TacticalPowerBar
     // type: function
     SHC_3BB0A8C1_0x004DA050 = 0x004DA050,
     // type: /undefined *32
@@ -41021,17 +41021,17 @@ enum {
     // type: /byte
     SHC_3BB0A8C1_0x004DA17F = 0x004DA17F,
     // label: StopCreditsPlaybackAndSounds
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Credits
     // type: function
     SHC_3BB0A8C1_0x004DA180 = 0x004DA180,
     // label: EndCreditsSegmentAndAdvanceToNext
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Credits
     // type: function
     SHC_3BB0A8C1_0x004DA200 = 0x004DA200,
     // type: function
     SHC_3BB0A8C1_0x004DA2A0 = 0x004DA2A0,
     // label: ResetCredits
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Credits
     // type: function
     SHC_3BB0A8C1_0x004DA300 = 0x004DA300,
     // type: function
@@ -41049,11 +41049,11 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004DA640 = 0x004DA640,
     // label: DrawLoadedMenuStringHelper
-    // location: OpenSHC/UI/Helpers
+    // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004DA670 = 0x004DA670,
     // label: DrawLoadedMenuStringHelperWithBlending
-    // location: OpenSHC/UI/Helpers
+    // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004DA6E0 = 0x004DA6E0,
     // label: StoreStringInMenuStringArray
@@ -41061,79 +41061,79 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004DA750 = 0x004DA750,
     // label: AppendCreditsSoundEntry
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Credits
     // type: function
     SHC_3BB0A8C1_0x004DA7A0 = 0x004DA7A0,
     // label: AppendCreditsCommand
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Credits
     // type: function
     SHC_3BB0A8C1_0x004DA7E0 = 0x004DA7E0,
     // label: AppendCreditsListTerminator
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Credits
     // type: function
     SHC_3BB0A8C1_0x004DA810 = 0x004DA810,
     // label: AppendCreditsPauseCommand
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Credits
     // type: function
     SHC_3BB0A8C1_0x004DA840 = 0x004DA840,
     // label: AppendCreditsSegmentEndCommand
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Credits
     // type: function
     SHC_3BB0A8C1_0x004DA870 = 0x004DA870,
     // label: AppendCreditsClearImageCommand
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Credits
     // type: function
     SHC_3BB0A8C1_0x004DA8A0 = 0x004DA8A0,
     // label: AppendCreditsImageTransitionCommand
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Credits
     // type: function
     SHC_3BB0A8C1_0x004DA8D0 = 0x004DA8D0,
     // label: AppendCreditsImageEndCommand
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Credits
     // type: function
     SHC_3BB0A8C1_0x004DA9A0 = 0x004DA9A0,
     // label: AppendCreditsShowImageCommand
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Credits
     // type: function
     SHC_3BB0A8C1_0x004DA9F0 = 0x004DA9F0,
     // label: AppendCreditsBinkVideoCommand
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Credits
     // type: function
     SHC_3BB0A8C1_0x004DAA80 = 0x004DAA80,
     // type: function
     SHC_3BB0A8C1_0x004DAAB0 = 0x004DAAB0,
     // label: AppendCreditsFixedImageCommand
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Credits
     // type: function
     SHC_3BB0A8C1_0x004DAB00 = 0x004DAB00,
     // label: AppendCreditsBinkVideoWithAudioCommand
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Credits
     // type: function
     SHC_3BB0A8C1_0x004DAB80 = 0x004DAB80,
     // type: function
     SHC_3BB0A8C1_0x004DABB0 = 0x004DABB0,
     // label: AppendCreditsSoundStreamCommand
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Credits
     // type: function
     SHC_3BB0A8C1_0x004DABF0 = 0x004DABF0,
     // label: AppendCreditsTextCommand
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Credits
     // type: function
     SHC_3BB0A8C1_0x004DAC30 = 0x004DAC30,
     // label: AppendCreditsTextEndCommand
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Credits
     // type: function
     SHC_3BB0A8C1_0x004DACF0 = 0x004DACF0,
     // label: InsertElementIntoAnArrayAt_ec0348
-    // location: OpenSHC/Rendering/Credits
+    // location: OpenSHC/UI/Credits
     // type: function
     SHC_3BB0A8C1_0x004DAD40 = 0x004DAD40,
     // label: InsertElementIntoArrayAt_ec0348_3
-    // location: OpenSHC/Rendering/Credits
+    // location: OpenSHC/UI/Credits
     // type: function
     SHC_3BB0A8C1_0x004DAE00 = 0x004DAE00,
     // label: InsertElementIntoArrayAt_ec0348_2
-    // location: OpenSHC/Rendering/Credits
+    // location: OpenSHC/UI/Credits
     // type: function
     SHC_3BB0A8C1_0x004DAE90 = 0x004DAE90,
     // label: LoadScoresFileToMemory
@@ -41141,27 +41141,27 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004DAF50 = 0x004DAF50,
     // label: RenderTextPageProgressBar
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004DAFB0 = 0x004DAFB0,
     // label: DisplayFullScreenTextPage
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Rendering
     // type: function
     SHC_3BB0A8C1_0x004DB0D0 = 0x004DB0D0,
     // label: BuildIntroLogoSequence
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004DB180 = 0x004DB180,
     // label: PrepareHistoryBook
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004DB210 = 0x004DB210,
     // label: TrimStoredMenuString
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004DB300 = 0x004DB300,
     // label: RenderScrollingCreditsTextFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Credits
     // type: function
     SHC_3BB0A8C1_0x004DB390 = 0x004DB390,
     // label: RenderHistoryBookEdgeUnk
@@ -41169,27 +41169,27 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004DB490 = 0x004DB490,
     // label: MenuView_HistoricMissionPicture_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/HistoricMissionPicture
     // type: function
     SHC_3BB0A8C1_0x004DB4F0 = 0x004DB4F0,
     // label: MenuView_General_DoInitial_BlackBorderAndGfx
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/General
     // type: function
     SHC_3BB0A8C1_0x004DB5C0 = 0x004DB5C0,
     // label: MenuView_HistoricMissionPicture_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/HistoricMissionPicture
     // type: function
     SHC_3BB0A8C1_0x004DB600 = 0x004DB600,
     // label: MenuView_HistoricMissionIntro_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/HistoricMissionIntro
     // type: function
     SHC_3BB0A8C1_0x004DB7B0 = 0x004DB7B0,
     // label: MenuView_HistoricMissionIntro_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/HistoricMissionIntro
     // type: function
     SHC_3BB0A8C1_0x004DB8B0 = 0x004DB8B0,
     // label: MenuView_HistoricCampaignIntro_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/HistoricCampaignIntro
     // type: function
     SHC_3BB0A8C1_0x004DBAF0 = 0x004DBAF0,
     // type: /pointer
@@ -41201,7 +41201,7 @@ enum {
     // type: /pointer
     SHC_3BB0A8C1_0x004DBBB0 = 0x004DBBB0,
     // label: MenuView_HistoricCampaignIntro_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/HistoricCampaignIntro
     // type: function
     SHC_3BB0A8C1_0x004DBBC0 = 0x004DBBC0,
     // type: /pointer
@@ -41213,7 +41213,7 @@ enum {
     // type: /pointer
     SHC_3BB0A8C1_0x004DBE2C = 0x004DBE2C,
     // label: MenuView_HistoricCampaignOutro_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/HistoricCampaignOutro
     // type: function
     SHC_3BB0A8C1_0x004DBE30 = 0x004DBE30,
     // type: /pointer
@@ -41225,7 +41225,7 @@ enum {
     // type: /pointer
     SHC_3BB0A8C1_0x004DBEF0 = 0x004DBEF0,
     // label: MenuView_HistoricCampaignOutro_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/HistoricCampaignOutro
     // type: function
     SHC_3BB0A8C1_0x004DBF00 = 0x004DBF00,
     // type: /pointer
@@ -41237,63 +41237,63 @@ enum {
     // type: /pointer
     SHC_3BB0A8C1_0x004DC138 = 0x004DC138,
     // label: FindCampaignMapHotspotAtMouse
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004DC140 = 0x004DC140,
     // label: BuildExtremeDemoIntroScript
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004DC1C0 = 0x004DC1C0,
     // label: MenuView_MissionFinishedTransition_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/MissionFinishedTransition
     // type: function
     SHC_3BB0A8C1_0x004DC500 = 0x004DC500,
     // label: MenuView_GameLost_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/GameLost
     // type: function
     SHC_3BB0A8C1_0x004DC9E0 = 0x004DC9E0,
     // label: MenuView_Unknown26_CampaignRelatedUnk_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/Unknown26
     // type: function
     SHC_3BB0A8C1_0x004DCC70 = 0x004DCC70,
     // label: MenuView_CampaignUnk_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/CampaignUnk
     // type: function
     SHC_3BB0A8C1_0x004DCC90 = 0x004DCC90,
     // label: MenuView_CampaignUnk_DoInitial
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/CampaignUnk
     // type: function
     SHC_3BB0A8C1_0x004DD0C0 = 0x004DD0C0,
     // label: MenuView_ScenarioDescription_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/ScenarioDescription
     // type: function
     SHC_3BB0A8C1_0x004DD100 = 0x004DD100,
     // label: MenuView_ScenarioDescription_DoInitial
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/ScenarioDescription
     // type: function
     SHC_3BB0A8C1_0x004DD300 = 0x004DD300,
     // label: MenuView_ScenarioDescription_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/ScenarioDescription
     // type: function
     SHC_3BB0A8C1_0x004DD350 = 0x004DD350,
     // label: MenuView_General_DoInitial_CrusadeAndRankMenu
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/General
     // type: function
     SHC_3BB0A8C1_0x004DD750 = 0x004DD750,
     // label: MenuView_CrusadeMissionIntro_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/CrusadeMissionIntro
     // type: function
     SHC_3BB0A8C1_0x004DD7B0 = 0x004DD7B0,
     // label: MenuView_CrusadeMap_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/CrusadeMap
     // type: function
     SHC_3BB0A8C1_0x004DE300 = 0x004DE300,
     // label: MenuView_CrusadeEndscreen_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/CrusadeEndscreen
     // type: function
     SHC_3BB0A8C1_0x004DF2E0 = 0x004DF2E0,
     // label: MenuView_RankingGames_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/RankingGames
     // type: function
     SHC_3BB0A8C1_0x004DFB90 = 0x004DFB90,
     // label: ProcessCreditsScriptCommands
@@ -41399,31 +41399,31 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004E1810 = 0x004E1810,
     // label: MenuView_UnusedExtremeAd_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/UnusedExtremeAd
     // type: function
     SHC_3BB0A8C1_0x004E1A20 = 0x004E1A20,
     // label: MenuView_UnusedExtremeAd_DoInitial
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/UnusedExtremeAd
     // type: function
     SHC_3BB0A8C1_0x004E1A50 = 0x004E1A50,
     // label: MenuView_UnusedExtremeAd_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/UnusedExtremeAd
     // type: function
     SHC_3BB0A8C1_0x004E1AA0 = 0x004E1AA0,
     // label: MenuView_MissionFinishedTransition_Prepare
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/MissionFinishedTransition
     // type: function
     SHC_3BB0A8C1_0x004E1B30 = 0x004E1B30,
     // label: MenuView_Unknown26_CampaignRelatedUnk_DoInitial
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/Unknown26
     // type: function
     SHC_3BB0A8C1_0x004E1E30 = 0x004E1E30,
     // label: MenuView_Unknown26_CampaignRelatedUnk_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/Unknown26
     // type: function
     SHC_3BB0A8C1_0x004E1E70 = 0x004E1E70,
     // label: MenuView_CrusadeEndscreen_DoEveryFrame
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuViews/CrusadeEndscreen
     // type: function
     SHC_3BB0A8C1_0x004E1F50 = 0x004E1F50,
     // label: constructViewportRenderState
@@ -43875,7 +43875,7 @@ enum {
     // location: OpenSHC/Map/Version
     // type: function
     SHC_3BB0A8C1_0x004F3900 = 0x004F3900,
-    // label: constructLandscapeState
+    // label: Construct_LandscapeState
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F3930 = 0x004F3930,
@@ -44069,11 +44069,11 @@ enum {
     // type: function
     SHC_3BB0A8C1_0x004F6A20 = 0x004F6A20,
     // label: MenuItemActionHandler_General_DisplayConditionalText
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/General
     // type: function
     SHC_3BB0A8C1_0x004F6A60 = 0x004F6A60,
     // label: MenuItemActionHandler_General_RemoveConditionalTextOrReleaseHoverUnk
-    // location: OpenSHC/UI
+    // location: OpenSHC/UI/MenuItems/General
     // type: function
     SHC_3BB0A8C1_0x004F6A70 = 0x004F6A70,
     // label: setupMenuForRendering
@@ -97350,7 +97350,7 @@ enum {
     // location:
     // type: /int
     SHC_3BB0A8C1_0x00EB9B64 = 0x00EB9B64,
-    // type: OpenSHC/Rendering/CreditsRelatedStructure2[288]
+    // type: OpenSHC/UI/Credits/CreditsRelatedStructure2[288]
     SHC_3BB0A8C1_0x00EB9B68 = 0x00EB9B68,
     // type: /int
     SHC_3BB0A8C1_0x00EC02E8 = 0x00EC02E8,
@@ -97360,7 +97360,7 @@ enum {
     SHC_3BB0A8C1_0x00EC02EC = 0x00EC02EC,
     // type: OpenSHC/Game/CampaignInfoSubStructure1
     SHC_3BB0A8C1_0x00EC02F4 = 0x00EC02F4,
-    // type: OpenSHC/Rendering/CreditsRelatedStructure[24]
+    // type: OpenSHC/UI/Credits/CreditsRelatedStructure[24]
     SHC_3BB0A8C1_0x00EC0348 = 0x00EC0348,
     // type: /int
     SHC_3BB0A8C1_0x00EC0828 = 0x00EC0828,

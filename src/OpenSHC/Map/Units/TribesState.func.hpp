@@ -99,7 +99,7 @@ namespace Map {
                 &TribesState::updatePeasantSeatingAtBuilding)
             updatePeasantSeatingAtBuilding;
 
-            MACRO_FUNCTION_RESOLVER(uint (TribesState::*)(int, uint), false, Address::SHC_3BB0A8C1_0x00522360,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (TribesState::*)(int, uint), false, Address::SHC_3BB0A8C1_0x00522360,
                 &TribesState::tribeCorrespondsWithUID)
             tribeCorrespondsWithUID;
 
@@ -116,7 +116,7 @@ namespace Map {
             setWhetherTribeContainsAnyUnits;
 
             MACRO_FUNCTION_RESOLVER(
-                void (TribesState::*)(uint), false, Address::SHC_3BB0A8C1_0x00522520, &TribesState::addUnitToSelected)
+                void (TribesState::*)(int), false, Address::SHC_3BB0A8C1_0x00522520, &TribesState::addUnitToSelected)
             addUnitToSelected;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (TribesState::*)(uint), false, Address::SHC_3BB0A8C1_0x00522550,
@@ -124,7 +124,7 @@ namespace Map {
             unitIsSelectedByPlayer;
 
             MACRO_FUNCTION_RESOLVER(
-                int (TribesState::*)(uint, int), false, Address::SHC_3BB0A8C1_0x00522590, &TribesState::addUnitToTribe)
+                void (TribesState::*)(uint, int), false, Address::SHC_3BB0A8C1_0x00522590, &TribesState::addUnitToTribe)
             addUnitToTribe;
 
             MACRO_FUNCTION_RESOLVER(void (TribesState::*)(uint, int), false, Address::SHC_3BB0A8C1_0x00522630,

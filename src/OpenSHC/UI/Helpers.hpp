@@ -11,8 +11,9 @@
 #include "OpenSHC/Map/Buildings/BuildingFailReasonEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Units/EuroRecruitableState.hpp"
-#include "OpenSHC/UI/Enums/DisplayElementID.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
+#include "WinDef.h"
 namespace OpenSHC {
 namespace UI {
     namespace Helpers {
@@ -20,10 +21,11 @@ namespace UI {
         using OpenSHC::Map::Buildings::BuildingFailReasonEnum;
         using OpenSHC::Map::Buildings::BuildingType;
         using OpenSHC::Map::Units::EuroRecruitableState;
-        using OpenSHC::UI::Enums::DisplayElementID;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-        void __cdecl DrawOuterMenuBorder();
+        void __cdecl LoadTGX_shc_back();
+
+        void __cdecl MainMenu_Unknown21_Prepare();
 
         BOOLEnum __cdecl AModalDialogIsActiveButIsNotQuitting();
 
@@ -43,6 +45,8 @@ namespace UI {
 
         undefined4 __cdecl SomeUnitAndViewportCheck(int unitID);
 
+        void __cdecl HandleWallTerrainMouseDrag();
+
         void __cdecl PlayPlacementWarning(BuildingFailReasonEnum param_1);
 
         void __cdecl HandleBuildingSelectionSpeech(int buildingIndexUnk);
@@ -53,11 +57,15 @@ namespace UI {
 
         int __cdecl SomeGoldRelatedComputation();
 
-        void __cdecl DisplayMapDescriptionAndAllocatePlayersToSlots();
+        void __cdecl CountPlayerUnitsByType();
+
+        HCURSOR __cdecl SetCursorDependingOnProgramState();
 
         EuroRecruitableState __cdecl IsEuroUnitRecruitableUnk(int barrackUnitIdUnk);
 
         int __cdecl GetUnitRecruitPermission(int param_1);
+
+        BOOLEnum __cdecl HasEnoughGold(int param_1);
 
         void __cdecl CheckIfEnoughGoldForLadderman();
 
@@ -69,34 +77,64 @@ namespace UI {
 
         void __cdecl SetEnoughGoldForRequestedUnitToTrueUnk();
 
+        void __cdecl DisableMercPostPortraits();
+
+        undefined4 __cdecl TicksSinceCounterStart();
+
         void __cdecl SetupPreviewMinimapDataUnk();
+
+        void __cdecl ShowProgressBarSaveLoadDialog(int param_1);
+
+        void __cdecl BuildEnemyPlayerList();
 
         void __cdecl ClearLobbyHoveredAI();
 
-        void __cdecl CheckDisplayElementByIDAndSetForUnlimitedDisplay(
-            DisplayElementID displayElementID, dword elementState);
-
-        BOOLEnum __cdecl GetIfDisplayElementStateNotZero(DisplayElementID displayElementID);
+        void __cdecl PlayAMessageFromAI(uint aiType, int param_2);
 
         void __cdecl SumUnitPoints();
 
+        void __cdecl RestoreScenarioGold();
+
+        void __cdecl CaptureCurrentTimeToUnknownTime01();
+
+        void __cdecl InitTutorialStepTransition(int param_1);
+
         undefined4 __cdecl GetCurrentTutorialStep();
+
+        void __cdecl RecordTutorialPlayerAction(int param_1);
 
         void __cdecl SetTutorialBuildingActionState(int param_1, BuildingType buildingType);
 
+        void __cdecl ResetTutorialActionTrackers();
+
+        void __cdecl SetTutorialHintActiveWithTimestamp();
+
+        void __cdecl UpdateTutorialStepAndProgress();
+
+        void __cdecl ParseCampaignMapHotspotBitmap();
+
         void __cdecl ResetEventStatusUnk();
 
+        void __cdecl ReadMapHeaderFromFile(char* param_1);
+
+        void __cdecl TacticalPowersFill();
+
         void __cdecl ColorEntireScreen(ushort color);
-
-        void __cdecl DrawLoadedMenuStringHelper(int loadedMenuStringIndex, int xPos, int yPos, int maxWidth, uint color,
-            int fontSize, BOOLEnum isSingleLine);
-
-        void __cdecl DrawLoadedMenuStringHelperWithBlending(int loadedMenuStringIndex, int xPos, int yPos, int maxWidth,
-            uint color, int fontSize, BOOLEnum isSingleLine, int blendStrength);
 
         void __cdecl StoreStringInMenuStringArray(char* textToStore);
 
         void __cdecl LoadScoresFileToMemory(char* filename);
+
+        void __cdecl BuildIntroLogoSequence(undefined4 param_1, undefined4 param_2);
+
+        int __cdecl PrepareHistoryBook();
+
+        void __cdecl TrimStoredMenuString(int storedMenuStringIndex, undefined4 param_2, undefined4 param_3,
+            int allowedWidth, undefined4 param_5, int fontSize);
+
+        undefined4 __cdecl FindCampaignMapHotspotAtMouse();
+
+        void __cdecl BuildExtremeDemoIntroScript();
 
         void __cdecl WriteMissionToScoresFile(char* param_1, int param_2);
 

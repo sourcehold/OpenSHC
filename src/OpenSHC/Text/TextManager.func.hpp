@@ -165,8 +165,9 @@ namespace Text {
             Address::SHC_3BB0A8C1_0x00474430, &TextManager::renderNumberToScreen2)
         renderNumberToScreen2;
 
-        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(char*, int, int, TextAlignment, uint, uint, int, BOOLEnum, int),
-            false, Address::SHC_3BB0A8C1_0x00475E00, &TextManager::renderInGameTextWithShadow)
+        MACRO_FUNCTION_RESOLVER(
+            void (TextManager::*)(char const*, int, int, TextAlignment, uint, uint, int, BOOLEnum, int), false,
+            Address::SHC_3BB0A8C1_0x00475E00, &TextManager::renderInGameTextWithShadow)
         renderInGameTextWithShadow;
 
     } // namespace TextManager_Func

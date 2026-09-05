@@ -56,17 +56,17 @@ namespace Synchrony {
     // SIZE: 0x0010A218
     class GameSynchronyState {
     public:
-        undefined4 scrollBarItemCount; // 0x00000000 length: 4
-        undefined4 scrollBarItemOffset; // 0x00000004 length: 4
-        undefined4 selectedProviderIndex; // 0x00000008 length: 4
+        int scrollBarItemCount; // 0x00000000 length: 4
+        int scrollBarItemOffset; // 0x00000004 length: 4
+        int selectedProviderIndex; // 0x00000008 length: 4
         GUID* guids[10]; // 0x0000000C length: 40
         LPCWSTR providerNames[10]; // 0x00000034 length: 40
-        undefined4 modemScrollbarCount; // 0x0000005C length: 4
-        undefined4 modemScrollBarOffset; // 0x00000060 length: 4
-        undefined4 modemScrollbarIndex; // 0x00000064 length: 4
+        int modemScrollbarCount; // 0x0000005C length: 4
+        int modemScrollBarOffset; // 0x00000060 length: 4
+        int modemScrollbarIndex; // 0x00000064 length: 4
         char* stringPointerArray[29]; // 0x00000068 length: 116
         undefined1 padding_0xdc[4]; // 0x000000DC length: 4
-        undefined4 DPLAY_SessionsCount; // 0x000000E0 length: 4
+        int DPLAY_SessionsCount; // 0x000000E0 length: 4
         int scrollBarIndex; // 0x000000E4 length: 4
         GUID* DPLAY_SessionGUIDs[50]; // 0x000000E8 length: 200
         WCHAR* DPLAY_SessionNames[50]; // 0x000001B0 length: 200
@@ -79,8 +79,8 @@ namespace Synchrony {
         BOOLEnum useTCPIP; // 0x0000028C length: 4
         char connectTarget[30]; // 0x00000290 length: 30
         undefined1 padding_0x2ae[2]; // 0x000002AE length: 2
-        undefined4 connectPort; // 0x000002B0 length: 4
-        undefined4 willHost; // 0x000002B4 length: 4
+        int connectPort; // 0x000002B0 length: 4
+        int willHost; // 0x000002B4 length: 4
         char shellExecuteTarget[600]; // 0x000002B8 length: 600
         int field32_0x510; // 0x00000510 length: 4
         BOOLEnum openOnClose; // 0x00000514 length: 4
@@ -105,16 +105,16 @@ namespace Synchrony {
         IN_ADDR lanIP; // 0x00000788 length: 4
         IN_ADDR wanIP; // 0x0000078C length: 4
         BOOLEnum isHost; // 0x00000790 length: 4
-        undefined4 DAT_HostPlayerSlotID; // 0x00000794 length: 4
-        undefined4 DAT_HostAnnounced; // 0x00000798 length: 4
+        int DAT_HostPlayerSlotID; // 0x00000794 length: 4
+        int DAT_HostAnnounced; // 0x00000798 length: 4
         byte field57_0x79c[254]; // 0x0000079C length: 254
         WCHAR DPLAYX_SessionName[250]; // 0x0000089A length: 500
         WCHAR DPLAY_PlayerShortName[125]; // 0x00000A8E length: 250
         int packetsReceived; // 0x00000B88 length: 4
-        undefined4 transmissionCounterUnk; // 0x00000B8C length: 4
+        int transmissionCounterUnk; // 0x00000B8C length: 4
         undefined4 field62_0xb90; // 0x00000B90 length: 4
         undefined4 DAT_GameHalted; // 0x00000B94 length: 4
-        undefined4 syncStatus; // 0x00000B98 length: 4
+        int syncStatus; // 0x00000B98 length: 4
         undefined4 field65_0xb9c; // 0x00000B9C length: 4
         undefined4 field66_0xba0; // 0x00000BA0 length: 4
         undefined4 field67_0xba4; // 0x00000BA4 length: 4

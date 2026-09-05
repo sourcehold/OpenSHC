@@ -1473,13 +1473,13 @@ PUBLIC ?instance@?$Extern@H$0OLJLEM@@StructResolver@@2HA
 
 PUBLIC ?instance@?$Extern@I$0OLJLGA@@StructResolver@@2IA
 
-PUBLIC ?instance@?$Extern@$$BY0BCA@UCreditsRelatedStructure2@Rendering@OpenSHC@@$0OLJLGI@@StructResolver@@2PAUCreditsRelatedStructure2@Rendering@OpenSHC@@A
+PUBLIC ?instance@?$Extern@$$BY0BCA@UCreditsRelatedStructure2@Credits@UI@OpenSHC@@$0OLJLGI@@StructResolver@@2PAUCreditsRelatedStructure2@Credits@UI@OpenSHC@@A
 
 PUBLIC ?instance@?$Extern@H$0OMACOI@@StructResolver@@2HA
 
 PUBLIC ?instance@?$Extern@UCampaignInfoSubStructure1@Game@OpenSHC@@$0OMACPE@@StructResolver@@2UCampaignInfoSubStructure1@Game@OpenSHC@@A
 
-PUBLIC ?instance@?$Extern@$$BY0BI@UCreditsRelatedStructure@Rendering@OpenSHC@@$0OMADEI@@StructResolver@@2PAUCreditsRelatedStructure@Rendering@OpenSHC@@A
+PUBLIC ?instance@?$Extern@$$BY0BI@UCreditsRelatedStructure@Credits@UI@OpenSHC@@$0OMADEI@@StructResolver@@2PAUCreditsRelatedStructure@Credits@UI@OpenSHC@@A
 
 PUBLIC ?instance@?$Extern@H$0OMAICI@@StructResolver@@2HA
 
@@ -3166,13 +3166,13 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@I$0OLJLGA@@StructResolver@@2IA EQU 00EB9B60h
 
-?instance@?$Extern@$$BY0BCA@UCreditsRelatedStructure2@Rendering@OpenSHC@@$0OLJLGI@@StructResolver@@2PAUCreditsRelatedStructure2@Rendering@OpenSHC@@A EQU 00EB9B68h
+?instance@?$Extern@$$BY0BCA@UCreditsRelatedStructure2@Credits@UI@OpenSHC@@$0OLJLGI@@StructResolver@@2PAUCreditsRelatedStructure2@Credits@UI@OpenSHC@@A EQU 00EB9B68h
 
 ?instance@?$Extern@H$0OMACOI@@StructResolver@@2HA EQU 00EC02E8h
 
 ?instance@?$Extern@UCampaignInfoSubStructure1@Game@OpenSHC@@$0OMACPE@@StructResolver@@2UCampaignInfoSubStructure1@Game@OpenSHC@@A EQU 00EC02F4h
 
-?instance@?$Extern@$$BY0BI@UCreditsRelatedStructure@Rendering@OpenSHC@@$0OMADEI@@StructResolver@@2PAUCreditsRelatedStructure@Rendering@OpenSHC@@A EQU 00EC0348h
+?instance@?$Extern@$$BY0BI@UCreditsRelatedStructure@Credits@UI@OpenSHC@@$0OMADEI@@StructResolver@@2PAUCreditsRelatedStructure@Credits@UI@OpenSHC@@A EQU 00EC0348h
 
 ?instance@?$Extern@H$0OMAICI@@StructResolver@@2HA EQU 00EC0828h
 

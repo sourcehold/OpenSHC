@@ -54,7 +54,7 @@ namespace Map {
         ~LandscapeState() {};
 
         // Constructor
-        LandscapeState* constructLandscapeState();
+        LandscapeState* Construct_LandscapeState();
 
         undefined4 mapUITreeTypeToLogicalTreeType(undefined4 param_1);
 
@@ -87,7 +87,7 @@ namespace Map {
 
         undefined4 setupBabyTreeLocation(uint treeID, int treeType, uint x, uint y);
 
-        uint isTreeAliveAndMatchingUID(int treeID, int param_2);
+        BOOLEnum isTreeAliveAndMatchingUID(int treeID, int param_2);
 
         BOOLEnum isTreeAdult(int treeID, int treeUID);
 
