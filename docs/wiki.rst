@@ -33,7 +33,7 @@ The Game itself
 - AI Behavior
 - Graphics and Sound Systems
 - Modding Support
-- Multiplayer Architecture
+- :doc:`Multiplayer command ownership and replay boundaries <wiki/multiplayer-command-flow>`
 
 (Coming Soon!)
 
