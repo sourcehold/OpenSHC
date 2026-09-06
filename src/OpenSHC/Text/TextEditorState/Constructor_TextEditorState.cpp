@@ -24,6 +24,7 @@ namespace Text {
         this->DAT_PointerToTemporaryTextMemory = MACRO_CALL(OS_Func::_malloc)(40000);
         this->customTextMaxLength = -1;
 
+        // FIXME:: Requires a finishing zero case, or it will not set the counter
         for (int counter = 0; counter < 500; ++counter) {
             if (strlen(DAT_UserHelpDefinedData::instance.HelpSections[counter])) {
                 continue;
