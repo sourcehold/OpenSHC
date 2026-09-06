@@ -58,7 +58,7 @@ namespace Text {
         char* customHelpTextPointer; // 0x000000F4 length: 4
         undefined4 isCustomHelpTextWide; // 0x000000F8 length: 4
         undefined4 customHelpTextBufferSize; // 0x000000FC length: 4
-        undefined4 customTextMaxLength; // 0x00000100 length: 4
+        int customTextMaxLength; // 0x00000100 length: 4
         char soundFileNames[5][1000]; // 0x00000104 length: 5000
         byte soundFilePlayedFlags[5]; // 0x0000148C length: 5
         undefined1 padding_0x1491[3]; // 0x00001491 length: 3
@@ -68,7 +68,12 @@ namespace Text {
         short lineLayoutTable[60000]; // 0x000062BC length: 120000
         int imageHotspotCount; // 0x0002377C length: 4
         short imageHotspotTable[50][4]; // 0x00023780 length: 400
-        int intArray1[25]; // 0x00023910 length: 100
+        int intArray1[20]; // 0x00023910 length: 80
+        int unknown_0x23960; // 0x00023960 length: 4
+        int unknown_0x23964; // 0x00023964 length: 4
+        int unknown_0x23968; // 0x00023968 length: 4
+        int unknown_0x2396C; // 0x0002396C length: 4
+        int unknown_0x23970; // 0x00023970 length: 4
 
     private:
         TextEditorState(TextEditorState const&);
