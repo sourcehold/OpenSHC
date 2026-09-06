@@ -35,7 +35,7 @@ namespace Text {
         BOOLEnum helpSectionParseSucceeded; // 0x00000024 length: 4
         int currentHelpSectionID; // 0x00000028 length: 4
         int helpSectionHistoryStack[30]; // 0x0000002C length: 120
-        undefined4 counter; // 0x000000A4 length: 4
+        int counter; // 0x000000A4 length: 4
         undefined4 helpContentScrollOffsetY; // 0x000000A8 length: 4
         undefined4 topVisibleLineIndex; // 0x000000AC length: 4
         undefined4 dialogX; // 0x000000B0 length: 4
