@@ -86,7 +86,7 @@ namespace Text {
         // Constructor
         TextEditorState* Constructor_TextEditorState();
 
-        void setHelpWindowBounds(undefined4 param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4);
+        void setHelpWindowBounds(undefined4 x, undefined4 y, undefined4 height, undefined4 width);
 
         void resetHelpStateFields();
 
