@@ -21,7 +21,7 @@ namespace OpenSHC {
 namespace Audio {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x0044A720
-    void ResetGreatestLordGenieSpeechState()
+    void __cdecl ResetGreatestLordGenieSpeechState()
     {
         DAT_CurrentPlayerRanking::instance = -1;
         INT_00b98698::instance = -1;
