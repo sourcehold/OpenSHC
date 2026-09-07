@@ -330,6 +330,8 @@ you might have found an unrolled loop. Therefore, try to reproduce the logic in 
 
 If GOTOs are present that clearly jump to the start of a loop, but the logic does not allow to do this without a GOTO, for example from a loop inside a loop, you might be able to move the continue or break condition to the outside. Methods could be placing a fitting condition related to the contained loop conditions after the loop or using a boolean flag that then functions as conditional. Both can sometimes be optimized away.
 
+If an explicit loop condition is removed from the compiler, it is able to prove all paths through the loop. If such a case happens where the condition is actually eliminated from the re-implementation, the re-implementation might be missing a condition that is present in the logic somewhere, but removed from the loop condition itself. The optimization pass failed to detect the resulting predictable loop in this latter case and the condition remains.
+
 A global used as a running counter alongside the loop index is usually incremented inside the loop, even when its final
 value is a constant. Ghidra shows the folded result: `DAT_CurrentUnitSlotID = 2500;` placed around the loop is really
 `DAT_CurrentUnitSlotID = 1;` before it and `DAT_CurrentUnitSlotID += 1;` as the first statement of the body. This was
@@ -371,6 +373,7 @@ unrolled body, write `for (int i = 1; i != 2500; ++i)` instead of `i < 2500` (SH
   { ...; return; } }`. A `for (...; i++)` with the same body does not produce it. Together with `int i = 0;`
   declared where the original's `xor esi, esi` sits (here before an earlier early-return test, which then compares
   against that zero register) this took `generateSiegeCreationInformation` from 39.4% to 100%.
+
 
 ### GOTO
 
