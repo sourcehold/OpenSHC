@@ -1,4 +1,5 @@
-#include "OpenSHC/Map/Units/TribesState.func.hpp"
+#include "../TribesState.func.hpp"
+
 #include "OpenSHC/Map/Units/TribesState.hpp"
 
 namespace OpenSHC {

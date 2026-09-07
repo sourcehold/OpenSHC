@@ -10,7 +10,6 @@ namespace UI {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004F4C30
     void MenuItem::resetMenuItemStateUnk()
-
     {
         MenuItemTypeInt MVar1;
 
@@ -23,7 +22,6 @@ namespace UI {
         if ((MVar1 == OpenSHC::UI::Enums::MIT_SLIDERUnk) || (MVar1 == OpenSHC::UI::Enums::MIT_SCROLLBARUnk)) {
             (this->secondItemTypeData).buttonState.currentButtonPictureInGm_0xc = -1000;
         }
-        return;
     }
 
 }

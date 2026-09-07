@@ -1,4 +1,4 @@
-#include "OpenSHC/Map/Units/TribesState.func.hpp"
+#include "../TribesState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_UnitSelectionDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"

@@ -1,4 +1,5 @@
-#include "OpenSHC/Map/Units/TribesState.func.hpp"
+#include "../TribesState.func.hpp"
+
 #include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
 #include "OpenSHC/Commands/GameCommandType.hpp"
 

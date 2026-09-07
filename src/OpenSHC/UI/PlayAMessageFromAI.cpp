@@ -16,13 +16,11 @@ namespace OpenSHC {
 
 // FUNCTION: STRONGHOLDCRUSADER 0x004B7F60
 void UI::PlayAMessageFromAI(uint param_1, int param_2)
-
 {
     if ((param_1 < 0x11) && (param_2 - 1U < 0x21)) {
         MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
             (char const*)DAT_MissionAestheticsDefinedData::instance.field92_0x170[param_2 * 0x11 + param_1 + -0xc]);
     }
-    return;
 }
 
 }

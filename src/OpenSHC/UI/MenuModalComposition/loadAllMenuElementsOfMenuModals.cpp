@@ -11,13 +11,8 @@ namespace UI {
     using OpenSHC::UI::Menu;
     using OpenSHC::UI::MenuModal;
 
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004A9E80
     void MenuModalComposition::loadAllMenuElementsOfMenuModals()
-
     {
         MenuModal* pMVar1;
 
@@ -27,7 +22,6 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Menu_Func::loadMenuElements, pMVar1->pointerToMenu)(0);
             }
         }
-        return;
     }
 
 }

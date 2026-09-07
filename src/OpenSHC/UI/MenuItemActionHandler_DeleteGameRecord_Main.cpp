@@ -12,13 +12,8 @@ namespace OpenSHC {
 using OpenSHC::UI::Enums::MenuModalType;
 using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-/*
-  decompilerscript: committed: 2025-01-30 21:57:43.216000
- */
-
 // FUNCTION: STRONGHOLDCRUSADER 0x004D9D60
 void UI::MenuItemActionHandler_DeleteGameRecord_Main(int param_1, ...)
-
 {
     if (param_1 == 0x16) {
         MACRO_CALL(OpenSHC::Game::Skirmish_Func::SkirmishLeaderboard_DeleteEntry)(DAT_00ed2788::instance);
@@ -26,7 +21,6 @@ void UI::MenuItemActionHandler_DeleteGameRecord_Main(int param_1, ...)
     }
     MACRO_CALL_MEMBER(OpenSHC::UI::MenuModalComposition_Func::activateModalDialog, DAT_MenuModalComposition1::ptr)(
         OpenSHC::UI::Enums::MMT_NONE, FALSE);
-    return;
 }
 
 }

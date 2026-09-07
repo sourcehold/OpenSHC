@@ -1,23 +1,10 @@
 #include "OpenSHC/Map/MapPropertiesState.func.hpp"
 
-
-
-
-
 namespace OpenSHC {
 namespace Map {
 
-
-
-
-/* 
-  decompilerscript: committed: 2025-01-30 21:57:43.216000
- */
-
-
 // FUNCTION: STRONGHOLDCRUSADER 0x004B7890
 undefined4 MapPropertiesState::mapHasCertainEvent()
-
 {
 int iVar1;
 int *piVar2;
@@ -35,7 +22,6 @@ piVar2 = piVar2 + 0x39;
 }
 return(undefined4)( 0);
 }
-
 
 }
 }

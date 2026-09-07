@@ -10,8 +10,6 @@
 #include "OpenSHC/Rendering/ScreenResolutionEnum.hpp"
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
 
-
-
 #include "OpenSHC/Globals/DAT_PencilRenderCore.hpp"
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
 #include "OpenSHC/Globals/DAT_WindowAndDirectDraw.hpp"
@@ -30,15 +28,8 @@ using OpenSHC::DE::SHCDE::eTextSections;
 using OpenSHC::Rendering::Enums::RenderTarget;
 using OpenSHC::Rendering::ScreenResolutionEnum;
 
-
-/* 
-  decompilerscript: committed: 2025-01-30 21:57:43.216000
- */
-
-
 // FUNCTION: STRONGHOLDCRUSADER 0x004B20B0
 void Rendering::RenderNoRushDisplayElementUnk(int posX,int posY,DWORD elementState)
-
 {
 char *pcVar1;
 int left;
@@ -55,7 +46,7 @@ int iVar4;
 int blendStrength;
 
 if (DAT_GameState::instance.mapAndTime.skirmishNoRushTicks == 0) {
-/* 
+/*
   Plays pa paam pa pa pa paam
  */
 
@@ -127,18 +118,16 @@ alignment = OpenSHC::Text::TTA_CENTER;
 xParam = iVar2;
 yParam = posY;
 pcVar1 = MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_MISC, 7);
-MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(pcVar1, xParam, yParam, alignment, foregroundColor, backgroundColor, 
+MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(pcVar1, xParam, yParam, alignment, foregroundColor, backgroundColor,
 fontSize, keepOffsetX, blendStrength);
 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBorderBox, DAT_PencilRenderCore::ptr)(left + -1, posY + 0x12, iVar3 + 1 + iVar2, posY + 0x18, (ushort)((int)(
 COL_BLACK::instance.shortValue)));
-MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(left, posY + 0x13, 
+MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(left, posY + 0x13,
 ((DAT_GameState::instance.mapAndTime.skirmishNoRushTicks * (iVar4 + 0x32)) /
 DAT_GameState::instance.mapAndTime.skirmishNoRushTicksLeft - iVar3) + iVar2, posY + 0x17, (ushort)((int)(
 COL_DARK_LIME::instance.shortValue)));
 DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
-return;
 }
-
 
 }
 }
