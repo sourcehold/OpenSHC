@@ -35,8 +35,8 @@ namespace Text {
             &TextEditorState::findOrAddHelpSectionName)
         findOrAddHelpSectionName;
 
-        MACRO_FUNCTION_RESOLVER(
-            uint (TextEditorState::*)(FILE*), false, Address::SHC_3BB0A8C1_0x0045D200, &TextEditorState::parseHLPPart)
+        MACRO_FUNCTION_RESOLVER(LPCWSTR (TextEditorState::*)(FILE*), false, Address::SHC_3BB0A8C1_0x0045D200,
+            &TextEditorState::parseHLPPart)
         parseHLPPart;
 
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(), false, Address::SHC_3BB0A8C1_0x0045D370,

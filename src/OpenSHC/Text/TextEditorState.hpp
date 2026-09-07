@@ -94,7 +94,7 @@ namespace Text {
 
         int findOrAddHelpSectionName(char* param_1);
 
-        uint parseHLPPart(FILE* filePointer);
+        LPCWSTR parseHLPPart(FILE* filePointer);
 
         void loadHelpSectionGraphics();
 
