@@ -10,7 +10,7 @@ namespace Map {
     void WildlifeState::clearWildlifeState()
     {
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            256000, '\0', this);
+            256000, 0, &this->grid[0][0]);
     }
 
 }

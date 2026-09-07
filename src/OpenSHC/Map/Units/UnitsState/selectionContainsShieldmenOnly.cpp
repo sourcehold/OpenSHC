@@ -1,27 +1,27 @@
-#include "OpenSHC/Map/Units/UnitsState.func.hpp"
+#include "../UnitsState.func.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00535840
         int UnitsState::selectionContainsShieldmenOnly()
-
         {
+            int result = FALSE;
+            // I tried simplifying this with an early-return but didn't work
             if (this->selectionShield != 0) {
-                int* piVar2 = (int*)&this->selectionEuropeanArchers;
-                for (int iVar1 = 0; iVar1 < 0x1b; iVar1++) {
-                    if ((iVar1 != 0xf) && (piVar2[iVar1] != 0)) {
+                // This really is field pointer increment style. I tried a for loop over the fields as a int[]
+                // but that didn't work
+                int* pUnitSelection = (int*)&this->selectionEuropeanArchers;
+                for (int index = 0; index <= 26; index++) {
+                    if ((index != 15) && (*pUnitSelection != 0)) {
                         return FALSE;
                     }
+                    pUnitSelection++;
                 }
-                return TRUE;
+                result = TRUE;
             }
-            return FALSE;
+            return result;
         }
 
     }

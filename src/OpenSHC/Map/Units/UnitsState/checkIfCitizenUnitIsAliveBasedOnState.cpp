@@ -1,38 +1,31 @@
-#include "OpenSHC/Map/Units/UnitsState.func.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+#include "../UnitsState.func.hpp"
+
 #include "OpenSHC/Map/Units/States/UnitStateShort.hpp"
-
-
-
-
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
 namespace Map {
-namespace Units {
+    namespace Units {
 
-using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-using OpenSHC::Map::Units::States::UnitStateShort;
+        using OpenSHC::Map::Units::States::UnitState;
+        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
+        // FUNCTION: STRONGHOLDCRUSADER 0x00530FD0
+        BOOLEnum UnitsState::checkIfCitizenUnitIsAliveBasedOnState(int param_1)
+        {
+            short _state = (unsigned short)this->units[param_1].state.generic;
+            if ((0x6f <= _state)) {
+                if (_state <= 0x74) {
+                    return TRUE;
+                } else {
+                    return FALSE;
+                }
 
-/* 
-  decompilerscript: committed: 2025-01-30 21:57:43.216000
- */
+            } else {
+                return FALSE;
+            }
+        }
 
-
-// FUNCTION: STRONGHOLDCRUSADER 0x00530FD0
-BOOLEnum UnitsState::checkIfCitizenUnitIsAliveBasedOnState(int param_1)
-
-{
-UnitStateShort _state;
-
-_state = this->units[param_1].state.generic;
-if ((0x6e < (short)_state) && ((short)_state < 0x75)) {
-return TRUE;
-}
-return FALSE;
-}
-
-
-}
+    }
 }
 }

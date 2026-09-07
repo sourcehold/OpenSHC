@@ -2,40 +2,28 @@
 #include "OpenSHC/Map/Units/Unit.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 
-
-
-#include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_CurrentUnitSlotID.hpp"
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
 
 namespace OpenSHC {
 namespace Map {
 
-using OpenSHC::Map::Units::Unit;
-using OpenSHC::Map::Units::UnitLogicState;
+    using OpenSHC::Map::Units::Unit;
+    using OpenSHC::Map::Units::UnitLogicState;
 
-
-/* 
-  decompilerscript: committed: 2025-01-30 21:57:43.216000
- */
-
-
-// FUNCTION: STRONGHOLDCRUSADER 0x0053B340
-void Version::UpgradeMapUnitsTo_112()
-
-{
-Unit * psVar1;
-
-psVar1 = &DAT_UnitsState::instance.units[1];
-DAT_CurrentUnitSlotID::instance = 2500;
-do {
-if (psVar1->logicalState == OpenSHC::Map::Units::ULS_NORMAL) {
-psVar1->buildingID = psVar1->workplaceBuildingID_1;
-}
-psVar1 = psVar1 + 0x248;
-} while ((int)psVar1 < 0x16516c4);
-return;
-}
-
+    // FUNCTION: STRONGHOLDCRUSADER 0x0053B340
+    void Version::UpgradeMapUnitsTo_112()
+    {
+        DAT_CurrentUnitSlotID::instance = 2500;
+        // fixme: the reimplementation always unrolls this for loop (because 2499/3 = 833), but the original isn't
+        // unrolled
+        for (int _unitID = 1; _unitID < 2500; _unitID++) {
+            if (DAT_UnitsState::instance.units[_unitID].logicalState == Units::ULS_NORMAL) {
+                DAT_UnitsState::instance.units[_unitID].buildingID
+                    = DAT_UnitsState::instance.units[_unitID].workplaceBuildingID_1;
+            }
+        }
+    }
 
 }
 }
