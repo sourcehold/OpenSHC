@@ -29,7 +29,7 @@ namespace Util {
             &WideCharMultiByteState::singleWideCharToMultiByte)
         singleWideCharToMultiByte;
 
-        MACRO_FUNCTION_RESOLVER(void (WideCharMultiByteState::*)(char), false, Address::SHC_3BB0A8C1_0x0046B1B0,
+        MACRO_FUNCTION_RESOLVER(WCHAR (WideCharMultiByteState::*)(char), false, Address::SHC_3BB0A8C1_0x0046B1B0,
             &WideCharMultiByteState::singleMultiByteToWideChar)
         singleMultiByteToWideChar;
 

@@ -143,9 +143,9 @@ namespace Map {
 
             void calculateUnitMovementSpeed(int unitID);
 
-            undefined4 standUpIfSeated(int param_1);
+            BOOLEnum standUpIfSeated(int param_1);
 
-            undefined4 sitDownIfStanding(int param_1);
+            BOOLEnum sitDownIfStanding(int param_1);
 
             void setFacingDirectionTowardUnit(int param_1, int param_2);
 
@@ -294,7 +294,7 @@ namespace Map {
 
             BOOLEnum selectionContainsRangedOnlyUnits();
 
-            int selectionContainsLadermenOnly();
+            int selectionContainsLaddermenOnly();
 
             BOOLEnum selectionContainsOnlyArabAssassins();
 

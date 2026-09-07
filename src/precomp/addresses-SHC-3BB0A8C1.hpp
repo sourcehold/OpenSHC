@@ -57521,7 +57521,7 @@ enum {
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x00535730 = 0x00535730,
-    // label: selectionContainsLadermenOnly
+    // label: selectionContainsLaddermenOnly
     // location: OpenSHC/Map/Units/UnitsState
     // type: function
     SHC_3BB0A8C1_0x005357E0 = 0x005357E0,

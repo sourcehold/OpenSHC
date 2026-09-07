@@ -104,11 +104,11 @@ namespace Map {
             calculateUnitMovementSpeed;
 
             MACRO_FUNCTION_RESOLVER(
-                undefined4 (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0052FBB0, &UnitsState::standUpIfSeated)
+                BOOLEnum (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0052FBB0, &UnitsState::standUpIfSeated)
             standUpIfSeated;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0052FBF0,
-                &UnitsState::sitDownIfStanding)
+            MACRO_FUNCTION_RESOLVER(
+                BOOLEnum (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0052FBF0, &UnitsState::sitDownIfStanding)
             sitDownIfStanding;
 
             MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0052FC30,
@@ -404,8 +404,8 @@ namespace Map {
             selectionContainsRangedOnlyUnits;
 
             MACRO_FUNCTION_RESOLVER(int (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x005357E0,
-                &UnitsState::selectionContainsLadermenOnly)
-            selectionContainsLadermenOnly;
+                &UnitsState::selectionContainsLaddermenOnly)
+            selectionContainsLaddermenOnly;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(), false, Address::SHC_3BB0A8C1_0x00535810,
                 &UnitsState::selectionContainsOnlyArabAssassins)

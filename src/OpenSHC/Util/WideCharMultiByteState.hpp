@@ -38,7 +38,7 @@ namespace Util {
 
         char singleWideCharToMultiByte(WCHAR wideChar);
 
-        void singleMultiByteToWideChar(char character);
+        WCHAR singleMultiByteToWideChar(char character);
     };
 
     static_assert_cpp98_obj(sizeof(WideCharMultiByteState) == 1, WideCharMultiByteState);
