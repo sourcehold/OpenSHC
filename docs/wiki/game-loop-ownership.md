@@ -82,6 +82,10 @@ That distinction is preserved in the C++ implementation.
   returned building ID controls the lord's state and target writes. Thus the
   maintenance phase owns inputs to gameplay decisions, even on a paused call.
   This establishes a dependency, not a reproduced desynchronization cause.
+  The tick passes `forceUpdate = 0`; nonzero callers force the count to zero
+  and mark the map dirty before the decrement. Preparation and
+  `traceAndCommitPathPlan` also call this owner. Equal countdown samples alone
+  therefore cannot establish equal call history.
 - Commands are constructed/received before they are selected and executed.
   Their handlers run before the tick call in `WinMain`; the selector's limit
   of 100 applies to one selection invocation, not to a unique match-clock value.
