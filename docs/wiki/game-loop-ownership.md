@@ -67,6 +67,21 @@ That distinction is preserved in the C++ implementation.
 
 ## Cross-boundary dependencies
 
+- Navigation maintenance has its own schedule. `updateSeparateAreaTileMap`
+  (`4995E0`) decrements `MapAndTimeState::counterForUpdatingSeparateAreaTileMaps`
+  (`117CAD8`) per invocation. It returns while the count is positive, otherwise
+  resets it to 200 and checks `PathFindingState + 6C`. A dirty map increments
+  the revision at `+74`, clears that flag and rebuilds connectivity regions,
+  zone sizes and building linkage. The countdown is serialized in section 1023;
+  it is not derived solely from the match clock.
+  `canUnitReachAdjacentTile` (`4105F0`) reads the unit's and neighboring tiles'
+  connectivity regions and passes them to the navigation query (`4A5320`).
+  That adjacent-tile query is called by the unit-controls UI (`4348D0`). There
+  is also a simulation consumer: `UpdateLord` calls
+  `canNavigateToDefensiveBuilding` (`40AC80`) at `56C8A1` and `56D0E9`; its
+  returned building ID controls the lord's state and target writes. Thus the
+  maintenance phase owns inputs to gameplay decisions, even on a paused call.
+  This establishes a dependency, not a reproduced desynchronization cause.
 - Commands are constructed/received before they are selected and executed.
   Their handlers run before the tick call in `WinMain`; the selector's limit
   of 100 applies to one selection invocation, not to a unique match-clock value.
@@ -94,6 +109,30 @@ That distinction is preserved in the C++ implementation.
 The Bink library owns its internal allocations; clearing a game-side handle is
 not proof of leak-free library behavior. Likewise, classifying these direct
 writes does not certify every downstream menu handler as simulation-neutral.
+
+## Scheduling is distinct from network agreement
+
+`determineGameTicksToPerform` (`487A30`) owns how much work the outer loop
+attempts before rendering. It returns zero outside a match or when
+`DAT_GameHalted` is set. Otherwise it uses elapsed milliseconds, carry and game
+speed to choose the budget. Its single-player path updates synchrony's local
+clock from the match clock; its multiplayer path first calls the peer-time
+adjustment routine (`47E5B0`). The logical pause field checked inside
+`processGameTick` is a different gate. A zero work budget, a network halt and
+a paused tick must therefore be distinguished when tracing a stalled game.
+
+The budget does not itself certify agreement between peers. Timed-command
+selection owns due/order decisions; immediate receive handlers can mutate state
+outside that selection; synchronization checks and replacement transfers have
+their own owners. The [command/network reconstruction (PR #220)](https://github.com/sourcehold/OpenSHC/pull/220)
+describes those paths. Following the chain requires comparing the first differing
+decision and its inputs, not inferring a transport defect from a later checksum.
+
+One concrete question is whether a clock-only trace has omitted intervening
+maintenance calls. Another is whether recovery has restored the state consumed
+by the next command or tick. The navigation dependency above explains why these
+are separate proof obligations. Neither observation establishes that the
+original multiplayer synchronization algorithm is faulty.
 
 ## Scope of the reconstruction
 
