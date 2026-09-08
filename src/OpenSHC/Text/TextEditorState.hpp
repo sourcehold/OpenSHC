@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include "OpenSHC/UI/Enums/MenuViewTypeInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "mbstring.h"
@@ -24,6 +25,7 @@ namespace Text {
         short unknown3;
     };
 
+    using OpenSHC::UI::Enums::MenuViewTypeInt;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
@@ -36,7 +38,7 @@ namespace Text {
         undefined4 isDialogStateInitialized; // 0x00000008 length: 4
         undefined4 helpDialogVariant; // 0x0000000C length: 4
         undefined4 useInGameHelpHandler; // 0x00000010 length: 4
-        undefined4 savedMenuViewType; // 0x00000014 length: 4
+        MenuViewTypeInt savedMenuViewType; // 0x00000014 length: 4
         undefined4 savedActiveMenuTab; // 0x00000018 length: 4
         undefined4 savedMenuFlag; // 0x0000001C length: 4
         BOOLEnum pendingCreditsFadeBorder; // 0x00000020 length: 4
