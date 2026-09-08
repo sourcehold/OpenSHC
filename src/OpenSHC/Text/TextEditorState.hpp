@@ -23,7 +23,7 @@ namespace Text {
     // SIZE: 0x00023974
     class TextEditorState {
     public:
-        pointer DAT_PointerToTemporaryTextMemory; // 0x00000000 length: 4
+        LPWSTR DAT_PointerToTemporaryTextMemory; // 0x00000000 length: 4
         undefined4 customHelpTextLength; // 0x00000004 length: 4
         undefined4 isDialogStateInitialized; // 0x00000008 length: 4
         undefined4 helpDialogVariant; // 0x0000000C length: 4
@@ -94,11 +94,11 @@ namespace Text {
 
         int findOrAddHelpSectionName(char* param_1);
 
-        LPCWSTR parseHLPPart(FILE* filePointer);
+        LPWSTR parseHLPPart(FILE* filePointer);
 
         void loadHelpSectionGraphics();
 
-        undefined* getWideCharPointer(int* param_1);
+        uint getWideCharOrWideCharPointer(int* param_1);
 
         void renderHelpImageHotspots();
 

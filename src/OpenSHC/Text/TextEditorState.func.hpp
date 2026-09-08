@@ -35,17 +35,17 @@ namespace Text {
             &TextEditorState::findOrAddHelpSectionName)
         findOrAddHelpSectionName;
 
-        MACRO_FUNCTION_RESOLVER(LPCWSTR (TextEditorState::*)(FILE*), false, Address::SHC_3BB0A8C1_0x0045D200,
-            &TextEditorState::parseHLPPart)
+        MACRO_FUNCTION_RESOLVER(
+            LPWSTR (TextEditorState::*)(FILE*), false, Address::SHC_3BB0A8C1_0x0045D200, &TextEditorState::parseHLPPart)
         parseHLPPart;
 
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(), false, Address::SHC_3BB0A8C1_0x0045D370,
             &TextEditorState::loadHelpSectionGraphics)
         loadHelpSectionGraphics;
 
-        MACRO_FUNCTION_RESOLVER(undefined* (TextEditorState::*)(int*), false, Address::SHC_3BB0A8C1_0x0045D3C0,
-            &TextEditorState::getWideCharPointer)
-        getWideCharPointer;
+        MACRO_FUNCTION_RESOLVER(uint (TextEditorState::*)(int*), false, Address::SHC_3BB0A8C1_0x0045D3C0,
+            &TextEditorState::getWideCharOrWideCharPointer)
+        getWideCharOrWideCharPointer;
 
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(), false, Address::SHC_3BB0A8C1_0x0045D430,
             &TextEditorState::renderHelpImageHotspots)
