@@ -1,0 +1,108 @@
+# Game-loop ownership
+
+This describes the original Crusader 1.41 executable with SHA-256
+`3bb0a8c1e72331b3a30a5aa93ed94beca0081b476b04c1960e26d5b45387ac5a`.
+Addresses identify original instructions, not replacement DLL addresses.
+Extreme must be inspected separately.
+
+## The outer iteration
+
+`WinMain` (`57BE10`) owns the Windows message pump and the budget of calls into
+the game. A pending Windows message takes the dispatch path instead of the
+ordinary update/render path. An unfocused solitary/single-player game takes a
+waiting path; multiplayer can continue without focus.
+
+The ordinary path has this order:
+
+1. Time-based message/video selection, modifier keys, menu transitions, ambient
+   music, network receive, and focused mouse/cursor updates.
+2. Synchrony chooses `gameTicksThisLoop` (`487A30`). Synchronized autosave and
+   viewport bookkeeping run before the inner loop.
+3. For each budgeted iteration: execute waiting commands (`4892F0`), call
+   `processGameTick` (`45CD10`), receive network traffic (`490690`), process Bink
+   frames (`409200`), and update tactical help (`4D9D90`). `DAT_GameHalted` can
+   break the loop before `performedGameTicksThisLoop` increments.
+4. Lag checks, focused menu/input handling, world rendering, another Bink
+   processing call, menu rendering, audio and display presentation.
+
+Consequently, a rendered frame, a command batch, a call to `processGameTick`, and
+a match-clock increment are distinct events. A zero budget omits step 3 but not
+all menu, input, audio or receive activity. Multiple budgeted iterations occur
+before the next ordinary render/input pass.
+
+The existing [WinMain reconstruction (PR #202)](https://github.com/sourcehold/OpenSHC/pull/202)
+contains this outer call order. The implementation here complements that work
+by reconstructing the tick coordinator it calls.
+
+## The tick orchestrator
+
+[processGameTick.cpp](../../src/OpenSHC/Game/GameStateStructures/processGameTick.cpp)
+preserves the original order and delegates subsystem work through existing
+resolvers. It does not implement those subsystems again.
+
+| Phase | Native evidence | Owner and behavior |
+| --- | --- | --- |
+| Save/synchronization | `45CD10`–`45CDE3` | Synchrony may service a host state machine, advance a client handshake and queue its reply, or return without world work. |
+| Timed external decision | `45CDE4`–`45CE15` | An expired quit-vote request queues a command using Windows time. This precedes the clock gate. |
+| Clock advancement | `45CE16`–`45CE68` | In-game/menu/pause checks guard RNG2, RNG1, match-clock increment, then `processSingleTimeTick` (`45CA20`). |
+| Map maintenance | `45CE69`–`45CEF7` | Orientation, height/view layers, navigation, building linkage, siege starting costs and minimap markers. This phase does not require a clock increment. |
+| World admission | `45CEF8`–`45CF55` | Rotation/refresh can bypass the later logical/menu pause test. Editor halt and in-game checks follow. |
+| World update | `45CF56`–`45D055` | Reset statistics; wind/navigation; buildings; terrain/events; defeat/AI; units/entities; food/population; tribes/wildlife; remaining map/UI bookkeeping. |
+
+The two pause gates are not interchangeable. A height/view refresh can set
+`DAT_RotateMapOrPullDownTerrain`, permitting world updates without a clock
+increment. A negative logical-pause value also has explicit behavior at the
+later gate: it is reset to zero. A replacement must preserve these branches
+even if their ownership would be different in a redesigned engine.
+
+`processSingleTimeTick` is itself an owner of scheduled game work, rather than
+just an integer increment: it dispatches work from `gameTicksLoadBalancer`,
+advances its [200-step cycle](load-balancing-table.md) and handles
+calendar/network timing. The subsequent
+world phase must not be mistaken for the only simulation owner.
+
+The native calendar call uses the global game-state receiver. The statistics,
+food/population and final army-limit calls use the incoming `this` receiver.
+That distinction is preserved in the C++ implementation.
+
+## Cross-boundary dependencies
+
+- Commands are constructed/received before they are selected and executed.
+  Their handlers run before the tick call in `WinMain`; the selector's limit
+  of 100 applies to one selection invocation, not to a unique match-clock value.
+- `updateBuildings` reads `performedGameTicksThisLoop` to derive
+  `isFirstTickInLoop`. This is an explicit dependency on outer-loop grouping.
+  The direct readers found are armory/granary visual activity and
+  `updateVisuallyActiveState` (`410290`); the mill temporarily forces this flag
+  while updating its visual activity. These writes identify the next ownership
+  boundary, not proof that every downstream reader is presentation-only.
+- The field `BuildingsState::unknownCountdown01` is not a time counter in its
+  observed writers. `setupBuildingData` (`420D20`) decrements it;
+  `updateBuildings` (`422E20`, store at `423333`) rebuilds it as
+  `2000 - structCount`. AI placement compares it with remaining-capacity
+  thresholds. Its reset to 2000 during preparation is distinct from restoring
+  serialized scheduling fields.
+- Crusader's `TacticalPowersFill` (`4D9D90`) decrements a help-display timeout
+  and clears the display flag when it reaches zero. This function does not
+  replenish an army or execute a tactical action.
+- `processBinkFrames` operates on two Bink slots and their sound/end-of-video
+  flags. `stopBinkPlayback` (`408E30`) calls `BinkClose` and clears the slot's
+  handle. Closing slot 1 also clears `GameCore::isBinkVideoPlaying` and sets
+  `GameCore::countdown` to 1. The latter is consumed by viewport/menu refresh
+  bookkeeping (`46BB20`, `WinMain`), rather than the match clock.
+
+The Bink library owns its internal allocations; clearing a game-side handle is
+not proof of leak-free library behavior. Likewise, classifying these direct
+writes does not certify every downstream menu handler as simulation-neutral.
+
+## Scope of the reconstruction
+
+The tick also has callers outside `WinMain`, including map preparation
+(`512778`) and UI/editor paths (`42FA04`, `4ABFA4`). Entering or returning from it
+alone does not establish an ordinary match step, a complete load, or a safe
+point to replace the world beneath an outer caller.
+
+This orchestration map establishes where to inspect a state difference: the
+responsible subsystem, the phase in which it runs, its input fields, and their
+writers. It does not attribute a particular desynchronization to an unmeasured
+counter, frame grouping, resource leak or callback.
