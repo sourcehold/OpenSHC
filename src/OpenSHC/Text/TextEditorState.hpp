@@ -16,6 +16,14 @@
 namespace OpenSHC {
 namespace Text {
 
+    // TODO: Needs proper place (and name?)
+    struct ImageHotspot {
+        short xPos;
+        short yPos;
+        short imageRelated;
+        short unknown3;
+    };
+
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
@@ -42,10 +50,10 @@ namespace Text {
         undefined4 dialogY; // 0x000000B4 length: 4
         undefined4 dialogWidth; // 0x000000B8 length: 4
         undefined4 dialogHeight; // 0x000000BC length: 4
-        undefined4 dialogContentX; // 0x000000C0 length: 4
-        undefined4 dialogContentY; // 0x000000C4 length: 4
+        int dialogContentX; // 0x000000C0 length: 4
+        int dialogContentY; // 0x000000C4 length: 4
         undefined4 dialogContentHeight; // 0x000000C8 length: 4
-        undefined4 dialogContentWidth; // 0x000000CC length: 4
+        int dialogContentWidth; // 0x000000CC length: 4
         undefined4 helpContentScrollX; // 0x000000D0 length: 4
         undefined4 helpContentScrollY; // 0x000000D4 length: 4
         undefined4 activeHelpHotspotIndex; // 0x000000D8 length: 4
@@ -67,7 +75,7 @@ namespace Text {
         int graphicFileCount; // 0x000062B8 length: 4
         short lineLayoutTable[60000]; // 0x000062BC length: 120000
         int imageHotspotCount; // 0x0002377C length: 4
-        short imageHotspotTable[50][4]; // 0x00023780 length: 400
+        ImageHotspot imageHotspotTable[50]; // 0x00023780 length: 400
         int intArray1[20]; // 0x00023910 length: 80
         int unknown_0x23960; // 0x00023960 length: 4
         int unknown_0x23964; // 0x00023964 length: 4
