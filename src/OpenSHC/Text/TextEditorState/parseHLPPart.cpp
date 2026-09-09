@@ -8,7 +8,7 @@ namespace OpenSHC {
 namespace Text {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x0045D200
-    LPCWSTR TextEditorState::parseHLPPart(FILE* filePointer)
+    LPWSTR TextEditorState::parseHLPPart(FILE* filePointer)
     {
 
         int finishedParsing = FALSE;
