@@ -1,35 +1,21 @@
 # Stockpile footprint cleanup
 
-`TileMapState::clearStockpileFootprintTiles` (`0x004FAF70` in Crusader 1.41)
-clears the nine walkable tiles belonging to a stockpile. The four building
-parts are handled elsewhere.
+Removing a stockpile clears its nine walkable tiles. Its four building parts
+are removed separately.
 
-For each entry in `TerrainDefinedData::StockpilePathableOffsets`, it:
+For each walkable tile, cleanup:
 
-1. Clears `Logic1::L_STOCKPILEUnk` (`0x2`) and
-   `Logic1::L_WALL_OR_GATEHOUSE` (`0x100`), then restores the default height.
-2. Reads the building index from `AlphaGFXLayer` and checks that building's
-   `noRubble` field. Zero clears `BuildingWasLayer`; nonzero sets bit `0x4000`
-   in `MiscDisplayLayer` and preserves `BuildingWasLayer`.
-3. Clears `AlphaGFXLayer` after reading the building reference.
-
-The map layers belong to the supplied `TileMapState` instance. Building
-metadata, terrain offsets and row translation come from the corresponding
-global game structures.
-
-These logic names come from the existing `Logic1` enum; their combination here
-does not establish additional stockpile semantics. `MiscDisplayLayer` is a
-separate `ushort` layer with no corresponding flag enum in the current headers.
-Its `0x4000` bit is kept literal pending identification of its consumers; a
-same-valued flag from another layer would not establish its meaning.
+1. Clears the stockpile and wall/gatehouse map-logic flags and restores the
+   default terrain height.
+2. Updates the former-building and display information according to the
+   building's rubble setting. The exact visual effect of one display flag
+   remains unidentified.
+3. Removes the tile's building reference.
 
 ## Placement
 
-`placeKeep` (`0x005146D0`) creates a starting stockpile through `placeStockpile`
-(`0x00508540`). That call has no human/AI filter.
+Placing a keep creates a starting stockpile for both human and AI players.
 
-The stockpile branch of `checkBuildingCanBePlacedHere` (`0x005037B0`) looks up
-the supplied owner's stockpile. The first stockpile needs no adjacent existing
-stockpile. Further placement requires capacity and adjacency to an owned
-stockpile, in addition to the earlier terrain and placement checks.
-`AIVState::aiPlaceAIVBuilding` (`0x004ED410`) uses the shared placement path.
+The first stockpile needs no adjacent existing stockpile. Further stockpiles
+require available capacity and adjacency to the owner's stockpile, as well as
+suitable terrain. AI castle placement uses the same placement rules.
