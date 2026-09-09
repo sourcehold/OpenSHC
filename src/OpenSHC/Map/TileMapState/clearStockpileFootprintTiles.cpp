@@ -3,6 +3,7 @@
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
+#include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -16,7 +17,7 @@ namespace Map {
                            .addXgetTile
                 + x + DAT_TerrainDefinedData::instance.StockpilePathableOffsets[i].x;
 
-            this->LogicLayer[tile] &= ~0x102;
+            this->LogicLayer[tile] &= ~(LogicHelpers::L_STOCKPILEUnk | LogicHelpers::L_WALL_OR_GATEHOUSE);
             this->HeightLayer[tile] = this->DefaultHeightLayer[tile];
             if (DAT_BuildingsState::instance.buildings[this->AlphaGFXLayer[tile]].noRubble == 0) {
                 this->BuildingWasLayer[tile] = 0;
