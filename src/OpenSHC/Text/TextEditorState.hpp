@@ -114,7 +114,7 @@ namespace Text {
 
         void bltTextToScreenIfNeedBe();
 
-        void drawBorderStyle0x20(int param_1, int param_2, int param_3, int param_4);
+        void drawBorderStyle0x20(int dialogX, int dialogY, int dialogWidth, int dialogHeight);
 
         void drawHelpWindowBackground();
 
