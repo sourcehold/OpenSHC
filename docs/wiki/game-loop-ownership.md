@@ -114,6 +114,35 @@ The Bink library owns its internal allocations; clearing a game-side handle is
 not proof of leak-free library behavior. Likewise, classifying these direct
 writes does not certify every downstream menu handler as simulation-neutral.
 
+## Navigation maintenance and worker population
+
+The connectivity map also participates in ordinary workers' movement recovery.
+In `UnitsState::processUnitMove` (`578C40`), a failed tile move or an outstanding
+retry enters the recovery path. After the retry delay expires, it validates the
+destination and reads the source and destination `PathConnectionLayer` regions.
+A zero destination region rejects the route immediately. Otherwise the movement
+owner calls `calculateCanPlayerUnitsNavigateToAreaFromArea` (`4A5320`), whose
+initial checks reject a route between different regions if either region is zero.
+
+An invalid or unreachable destination does not have the same result for every
+unit. Lords and selectable units return without being marked for removal; a
+caged dog has its walking state cleared. An ordinary nonselectable worker is
+assigned `US_DISAPPEAR` and its update tracker is cleared (`579211`). This is a
+state transition, not an immediate free of the unit slot. The unit lifecycle
+subsequently removes it, and the population census observes the changed counts.
+
+This connects two phases of the coordinator: navigation maintenance supplies a
+movement decision, and `computePopulationStatistics` runs after the unit update.
+The next clocked `processPeasantSpawnAndDespawnCycle` can admit a peasant when
+that census has freed population capacity. A ready population clock alone is
+therefore insufficient to explain when a peasant spawns.
+
+Buildings own tile occupancy and linkage changes; navigation owns connectivity
+rebuilding; movement owns recovery and disappearance; the census owns population
+accounting. The refresh countdown schedules a rebuild rather than directly
+spawning or deleting a unit. Its per-call scheduling matters because maintenance
+can run while the match clock is stationary.
+
 ## Scheduling is distinct from network agreement
 
 `determineGameTicksToPerform` (`487A30`) owns how much work the outer loop
