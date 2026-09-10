@@ -1,0 +1,22 @@
+#include "OpenSHC/UI.func.hpp"
+#include "OpenSHC/UI/MenuTextInputState.func.hpp"
+
+#include "OpenSHC/Globals/DAT_MenuTextInputState.hpp"
+
+namespace OpenSHC {
+namespace UI {
+namespace MenuItems {
+namespace NetworkOptions {
+
+// FUNCTION: STRONGHOLDCRUSADER 0x004941F0
+void MenuItemActionHandler_NetworkOptions_LeaveButtonUnk(int param_1, ...)
+{
+    if (param_1 == 0x11) {
+        MACRO_CALL_MEMBER(OpenSHC::UI::MenuTextInputState_Func::popModalDialog, DAT_MenuTextInputState::ptr)();
+    }
+}
+
+}
+}
+}
+}
