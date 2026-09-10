@@ -4,13 +4,16 @@
 
 namespace OpenSHC {
 namespace UI {
-namespace MenuItems {
-namespace BuildingAndStatusMenu {
+    namespace MenuItems {
+        namespace BuildingAndStatusMenu {
 
-// FUNCTION: STRONGHOLDCRUSADER 0x0043A850
-void MenuItemActionHandler_BuildingAndStatusMenu_Unknown_Countdown() { DAT_GameCore::instance.countdown = 1; }
+            // FUNCTION: STRONGHOLDCRUSADER 0x0043A850
+            void MenuItemActionHandler_BuildingAndStatusMenu_Unknown_Countdown()
+            {
+                DAT_GameCore::instance.countdown = 1;
+            }
 
-}
-}
+        }
+    }
 }
 }

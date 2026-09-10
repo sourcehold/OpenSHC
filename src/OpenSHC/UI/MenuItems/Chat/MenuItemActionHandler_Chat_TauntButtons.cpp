@@ -6,20 +6,20 @@
 
 namespace OpenSHC {
 namespace UI {
-namespace MenuItems {
-namespace Chat {
+    namespace MenuItems {
+        namespace Chat {
 
-using OpenSHC::Commands::GameCommandType;
+            using OpenSHC::Commands::GameCommandType;
 
-// FUNCTION: STRONGHOLDCRUSADER 0x0048F850
-void MenuItemActionHandler_Chat_TauntButtons(int param_1, ...)
-{
-    DAT_GameSynchronyState::instance.DAT_ChatTauntOrMessage = param_1;
-    MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
-        OpenSHC::Commands::GCT_TAUNT_OR_CHAT);
-}
+            // FUNCTION: STRONGHOLDCRUSADER 0x0048F850
+            void MenuItemActionHandler_Chat_TauntButtons(int param_1, ...)
+            {
+                DAT_GameSynchronyState::instance.DAT_ChatTauntOrMessage = param_1;
+                MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand,
+                    DAT_GameSynchronyState::ptr)(OpenSHC::Commands::GCT_TAUNT_OR_CHAT);
+            }
 
-}
-}
+        }
+    }
 }
 }

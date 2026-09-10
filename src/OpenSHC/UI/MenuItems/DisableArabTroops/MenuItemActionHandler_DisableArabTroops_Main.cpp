@@ -8,27 +8,27 @@
 
 namespace OpenSHC {
 namespace UI {
-namespace MenuItems {
-namespace DisableArabTroops {
+    namespace MenuItems {
+        namespace DisableArabTroops {
 
-using OpenSHC::UI::Enums::MenuModalType;
-using OpenSHC::WindowsHelper::Enums::BOOLEnum;
+            using OpenSHC::UI::Enums::MenuModalType;
+            using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-// FUNCTION: STRONGHOLDCRUSADER 0x004BB650
-void MenuItemActionHandler_DisableArabTroops_Main(int param_1, ...)
-{
-    if ((uint)param_1 < 8) {
-        DAT_MapPropertiesState::instance.SEC_MercRecruitable[param_1]
-            = DAT_MapPropertiesState::instance.SEC_MercRecruitable[param_1] ^ 1;
-        return;
+            // FUNCTION: STRONGHOLDCRUSADER 0x004BB650
+            void MenuItemActionHandler_DisableArabTroops_Main(int param_1, ...)
+            {
+                if ((uint)param_1 < 8) {
+                    DAT_MapPropertiesState::instance.SEC_MercRecruitable[param_1]
+                        = DAT_MapPropertiesState::instance.SEC_MercRecruitable[param_1] ^ 1;
+                    return;
+                }
+                if (param_1 == -3) {
+                    MACRO_CALL_MEMBER(OpenSHC::UI::MenuModalComposition_Func::activateModalDialog,
+                        DAT_MenuModalComposition1::ptr)(OpenSHC::UI::Enums::MMT_BUILDING_AVAILABILITY, FALSE);
+                }
+            }
+
+        }
     }
-    if (param_1 == -3) {
-        MACRO_CALL_MEMBER(OpenSHC::UI::MenuModalComposition_Func::activateModalDialog, DAT_MenuModalComposition1::ptr)(
-            OpenSHC::UI::Enums::MMT_BUILDING_AVAILABILITY, FALSE);
-    }
-}
-
-}
-}
 }
 }

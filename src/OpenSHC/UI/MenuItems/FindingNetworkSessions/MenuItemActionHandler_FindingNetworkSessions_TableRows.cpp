@@ -4,19 +4,19 @@
 
 namespace OpenSHC {
 namespace UI {
-namespace MenuItems {
-namespace FindingNetworkSessions {
+    namespace MenuItems {
+        namespace FindingNetworkSessions {
 
-// FUNCTION: STRONGHOLDCRUSADER 0x0047D3F0
-void MenuItemActionHandler_FindingNetworkSessions_TableRows(int param_1, ...)
-{
-    if (DAT_GameSynchronyState::instance.scrollBarItemOffset + param_1
-        < DAT_GameSynchronyState::instance.DPLAY_SessionsCount) {
-        DAT_GameSynchronyState::instance.scrollBarIndex = param_1;
+            // FUNCTION: STRONGHOLDCRUSADER 0x0047D3F0
+            void MenuItemActionHandler_FindingNetworkSessions_TableRows(int param_1, ...)
+            {
+                if (DAT_GameSynchronyState::instance.scrollBarItemOffset + param_1
+                    < DAT_GameSynchronyState::instance.DPLAY_SessionsCount) {
+                    DAT_GameSynchronyState::instance.scrollBarIndex = param_1;
+                }
+            }
+
+        }
     }
-}
-
-}
-}
 }
 }
