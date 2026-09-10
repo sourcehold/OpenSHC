@@ -1,5 +1,4 @@
 #include "OpenSHC/UI.func.hpp"
-
 #include "OpenSHC/Audio/MSS/enums/SHC_SoundStream.hpp"
 
 #include "OpenSHC/Globals/DAT_ARRAY_00eb9b68.hpp"

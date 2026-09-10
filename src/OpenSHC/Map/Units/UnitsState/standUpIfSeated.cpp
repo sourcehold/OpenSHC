@@ -5,7 +5,7 @@ namespace Map {
     namespace Units {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0052FBB0
-        undefined4 UnitsState::standUpIfSeated(int param_1)
+        BOOLEnum UnitsState::standUpIfSeated(int param_1)
         {
             if (this->units[param_1].seated == 0) {
                 return FALSE;

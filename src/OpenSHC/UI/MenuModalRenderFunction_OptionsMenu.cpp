@@ -6,10 +6,11 @@
 namespace OpenSHC {
 
 // FUNCTION: STRONGHOLDCRUSADER 0x00491810
-void UI::MenuModalRenderFunction_OptionsMenu(int x,int y,int width,int height)
+void UI::MenuModalRenderFunction_OptionsMenu(int x, int y, int width, int height)
 {
 
-MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner, DAT_PencilRenderCore::ptr)(0x4a, 1, x, y, width);
+    MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner, DAT_PencilRenderCore::ptr)(
+        0x4a, 1, x, y, width);
 }
 
 }
