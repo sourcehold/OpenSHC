@@ -7,20 +7,20 @@
 
 namespace OpenSHC {
 namespace UI {
-namespace MenuViews {
-namespace NewMapMaptype {
+    namespace MenuViews {
+        namespace NewMapMaptype {
 
-// FUNCTION: STRONGHOLDCRUSADER 0x0042EFE0
-void MenuView_NewMapMaptype_Prepare()
-{
-    DAT_TextureRenderCoreObject::instance.totalLoadedGfx = 0;
-    MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
-        s_frontend_builder_tgx_005a2084);
-    MACRO_CALL(OpenSHC::UI_Func::LoadTGX_shc_back)();
-    DAT_GameCore::instance.mapU3EndInt = 0;
-}
+            // FUNCTION: STRONGHOLDCRUSADER 0x0042EFE0
+            void MenuView_NewMapMaptype_Prepare()
+            {
+                DAT_TextureRenderCoreObject::instance.totalLoadedGfx = 0;
+                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::loadGfxFile,
+                    DAT_TextureRenderCoreObject::ptr)(s_frontend_builder_tgx_005a2084);
+                MACRO_CALL(OpenSHC::UI_Func::LoadTGX_shc_back)();
+                DAT_GameCore::instance.mapU3EndInt = 0;
+            }
 
-}
-}
+        }
+    }
 }
 }

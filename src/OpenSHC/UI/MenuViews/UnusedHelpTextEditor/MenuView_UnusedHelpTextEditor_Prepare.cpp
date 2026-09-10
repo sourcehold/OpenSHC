@@ -8,25 +8,26 @@
 
 namespace OpenSHC {
 namespace UI {
-namespace MenuViews {
-namespace UnusedHelpTextEditor {
+    namespace MenuViews {
+        namespace UnusedHelpTextEditor {
 
-using OpenSHC::UI::Menu;
+            using OpenSHC::UI::Menu;
 
-// FUNCTION: STRONGHOLDCRUSADER 0x004403D0
-void MenuView_UnusedHelpTextEditor_Prepare()
-{
-    int y = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
-    int x = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
-    Menu* pMVar1 = DAT_MenuHandlerState::instance.currentMenu;
-    pMVar1->xPosition = x;
-    pMVar1->yPosition = y;
-    DAT_MenuHandlerState::instance.y = y;
-    DAT_MenuHandlerState::instance.x = x;
-    MACRO_CALL_MEMBER(OpenSHC::Text::TextEditorState_Func::bltTextToScreenIfNeedBe, DAT_TextEditorState::ptr)();
-}
+            // FUNCTION: STRONGHOLDCRUSADER 0x004403D0
+            void MenuView_UnusedHelpTextEditor_Prepare()
+            {
+                int y = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
+                int x = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
+                Menu* pMVar1 = DAT_MenuHandlerState::instance.currentMenu;
+                pMVar1->xPosition = x;
+                pMVar1->yPosition = y;
+                DAT_MenuHandlerState::instance.y = y;
+                DAT_MenuHandlerState::instance.x = x;
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Text::TextEditorState_Func::bltTextToScreenIfNeedBe, DAT_TextEditorState::ptr)();
+            }
 
-}
-}
+        }
+    }
 }
 }
