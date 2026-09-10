@@ -1,5 +1,6 @@
+#include "../UnitsState.func.hpp"
+
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
-#include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/Map/Units/UnitInstructionType.hpp"
 
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
