@@ -30,11 +30,14 @@ The Game itself
 ------------------
 - :doc:`Load balancing of the core game engine <wiki/load-balancing-table>`
 - Game Mechanics
-- AI Behavior
 - Graphics and Sound Systems
 - Modding Support
 - Multiplayer Architecture
 
 (Coming Soon!)
+
+AI Behavior
+~~~~~~~~~~~
+- :doc:`AI market pricing and goods trading <wiki/market-trading>`
 
 .. include:: wiki/approach.rst
