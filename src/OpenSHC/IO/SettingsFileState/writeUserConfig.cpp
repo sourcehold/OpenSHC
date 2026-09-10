@@ -37,23 +37,23 @@ namespace IO {
         }
         WCHAR _wideCharBuffer[265];
 
-        MACRO_CALL_MEMBER(Util::WideCharMultiByteState_Func::multiByteToWideCharThunk, DAT_WideCharMultiByteState::ptr)(
-            _wideCharBuffer,
+        MACRO_CALL_MEMBER(Util::WideCharMultiByteState_Func::multiByteToWideCharWithSize,
+            DAT_WideCharMultiByteState::ptr)(_wideCharBuffer,
             MACRO_CALL_MEMBER(Text::UserTextHandler_Func::getTextArrayPointer, DAT_UserTextHandlerState::ptr)(5), 15);
         MACRO_CALL(OS_Func::_fwrite)(_wideCharBuffer, sizeof(WCHAR), 15, _File);
 
-        MACRO_CALL_MEMBER(Util::WideCharMultiByteState_Func::multiByteToWideCharThunk, DAT_WideCharMultiByteState::ptr)(
-            _wideCharBuffer,
+        MACRO_CALL_MEMBER(Util::WideCharMultiByteState_Func::multiByteToWideCharWithSize,
+            DAT_WideCharMultiByteState::ptr)(_wideCharBuffer,
             MACRO_CALL_MEMBER(Text::UserTextHandler_Func::getTextArrayPointer, DAT_UserTextHandlerState::ptr)(6), 5);
         MACRO_CALL(OS_Func::_fwrite)(_wideCharBuffer, sizeof(WCHAR), 5, _File);
 
-        MACRO_CALL_MEMBER(Util::WideCharMultiByteState_Func::multiByteToWideCharThunk, DAT_WideCharMultiByteState::ptr)(
-            _wideCharBuffer,
+        MACRO_CALL_MEMBER(Util::WideCharMultiByteState_Func::multiByteToWideCharWithSize,
+            DAT_WideCharMultiByteState::ptr)(_wideCharBuffer,
             MACRO_CALL_MEMBER(Text::UserTextHandler_Func::getTextArrayPointer, DAT_UserTextHandlerState::ptr)(7), 15);
         MACRO_CALL(OS_Func::_fwrite)(_wideCharBuffer, sizeof(WCHAR), 15, _File);
 
-        MACRO_CALL_MEMBER(Util::WideCharMultiByteState_Func::multiByteToWideCharThunk, DAT_WideCharMultiByteState::ptr)(
-            _wideCharBuffer,
+        MACRO_CALL_MEMBER(Util::WideCharMultiByteState_Func::multiByteToWideCharWithSize,
+            DAT_WideCharMultiByteState::ptr)(_wideCharBuffer,
             MACRO_CALL_MEMBER(Text::UserTextHandler_Func::getTextArrayPointer, DAT_UserTextHandlerState::ptr)(0), 256);
         MACRO_CALL(OS_Func::_fwrite)(_wideCharBuffer, sizeof(WCHAR), 256, _File);
 
@@ -103,26 +103,26 @@ namespace IO {
         MACRO_CALL(OS_Func::_fwrite)(
             &DAT_MouseState::instance.cursorType, sizeof(DAT_MouseState::instance.cursorType), 1, _File);
 
-        MACRO_CALL_MEMBER(Util::WideCharMultiByteState_Func::multiByteToWideCharThunk, DAT_WideCharMultiByteState::ptr)(
-            _wideCharBuffer, DAT_GameSynchronyState::instance.ipRelatedArray[0],
+        MACRO_CALL_MEMBER(Util::WideCharMultiByteState_Func::multiByteToWideCharWithSize,
+            DAT_WideCharMultiByteState::ptr)(_wideCharBuffer, DAT_GameSynchronyState::instance.ipRelatedArray[0],
             sizeof(DAT_GameSynchronyState::instance.ipRelatedArray[0]));
         MACRO_CALL(OS_Func::_fwrite)(
             _wideCharBuffer, sizeof(WCHAR), sizeof(DAT_GameSynchronyState::instance.ipRelatedArray[0]), _File);
 
-        MACRO_CALL_MEMBER(Util::WideCharMultiByteState_Func::multiByteToWideCharThunk, DAT_WideCharMultiByteState::ptr)(
-            _wideCharBuffer, DAT_GameSynchronyState::instance.ipRelatedArray[1],
+        MACRO_CALL_MEMBER(Util::WideCharMultiByteState_Func::multiByteToWideCharWithSize,
+            DAT_WideCharMultiByteState::ptr)(_wideCharBuffer, DAT_GameSynchronyState::instance.ipRelatedArray[1],
             sizeof(DAT_GameSynchronyState::instance.ipRelatedArray[1]));
         MACRO_CALL(OS_Func::_fwrite)(
             _wideCharBuffer, sizeof(WCHAR), sizeof(DAT_GameSynchronyState::instance.ipRelatedArray[1]), _File);
 
-        MACRO_CALL_MEMBER(Util::WideCharMultiByteState_Func::multiByteToWideCharThunk, DAT_WideCharMultiByteState::ptr)(
-            _wideCharBuffer, DAT_GameSynchronyState::instance.ipRelatedArray[2],
+        MACRO_CALL_MEMBER(Util::WideCharMultiByteState_Func::multiByteToWideCharWithSize,
+            DAT_WideCharMultiByteState::ptr)(_wideCharBuffer, DAT_GameSynchronyState::instance.ipRelatedArray[2],
             sizeof(DAT_GameSynchronyState::instance.ipRelatedArray[2]));
         MACRO_CALL(OS_Func::_fwrite)(
             _wideCharBuffer, sizeof(WCHAR), sizeof(DAT_GameSynchronyState::instance.ipRelatedArray[2]), _File);
 
-        MACRO_CALL_MEMBER(Util::WideCharMultiByteState_Func::multiByteToWideCharThunk, DAT_WideCharMultiByteState::ptr)(
-            _wideCharBuffer, DAT_GameSynchronyState::instance.ipRelatedArray[3],
+        MACRO_CALL_MEMBER(Util::WideCharMultiByteState_Func::multiByteToWideCharWithSize,
+            DAT_WideCharMultiByteState::ptr)(_wideCharBuffer, DAT_GameSynchronyState::instance.ipRelatedArray[3],
             sizeof(DAT_GameSynchronyState::instance.ipRelatedArray[3]));
         MACRO_CALL(OS_Func::_fwrite)(
             _wideCharBuffer, sizeof(WCHAR), sizeof(DAT_GameSynchronyState::instance.ipRelatedArray[3]), _File);

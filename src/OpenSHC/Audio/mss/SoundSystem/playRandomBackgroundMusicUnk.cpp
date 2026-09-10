@@ -29,7 +29,7 @@ namespace Audio {
             //   this state and maybe one day tackled again when the last once are cleaned up.
             if (!MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()
                 && (DAT_GameCore::instance.currentMenuViewType != UI::Enums::MVT_SCENARIO_DESCRIPTION
-                    || !DAT_GameCore::instance.field25_0x64)) {
+                    || !DAT_GameCore::instance.field22_0x64)) {
                 if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.field0_0x0 == 5) {
                     DAT_SoundEffectsHelperData1::instance.SEC_Section1079.field0_0x0 = 1;
                 }

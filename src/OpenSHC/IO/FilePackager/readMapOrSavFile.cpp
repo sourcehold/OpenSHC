@@ -291,7 +291,7 @@ namespace IO {
         DAT_SoundEffectsHelperData1::instance.DAT_NegativeCountdownMin1ToMin4Becomes0 = 0;
         DAT_SoundEffectsHelperData1::instance.field13_0x50 = 0;
         DAT_SoundSystemState::instance.currentSoundID_0x3278 = -1;
-        DAT_GameCore::instance.field40_0xa0 = DAT_GameCore::instance.mapTimeInTicks;
+        DAT_GameCore::instance.field37_0xa0 = DAT_GameCore::instance.mapTimeInTicks;
         if (DAT_GameCore::instance.gameMode_2 == Game::GM_CAMPAIGN_MISSION) {
             DAT_GameCore::instance.historicCampaignNumber = 4;
 

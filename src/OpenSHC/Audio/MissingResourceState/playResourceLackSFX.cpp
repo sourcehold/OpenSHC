@@ -3,7 +3,7 @@
 #include "OpenSHC/Audio/MSS/SoundSystem.func.hpp"
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
 #include "OpenSHC/Random/RNG.func.hpp"
-#include "OpenSHC/UI.func.hpp"
+#include "OpenSHC/UI/DisplayElements.func.hpp"
 
 #include "OpenSHC/Globals/DAT_SFXState.hpp"
 #include "OpenSHC/Globals/DAT_SoundSystemState.hpp"
@@ -15,7 +15,7 @@ namespace Audio {
     // FUNCTION: STRONGHOLDCRUSADER 0x00471720
     void MissingResourceState::playResourceLackSFX(int resourceTextElement, ResourceLackSFX resourceType)
     {
-        MACRO_CALL(UI_Func::ActivateGameSpeedAndResourceLackDisplayElementUnk)(
+        MACRO_CALL(UI::DisplayElements_Func::ActivateGameSpeedAndResourceLackDisplayElementUnk)(
             (UI::Enums::DisplayElementID)(resourceTextElement + UI::Enums::DEID_IN_GAME_CHAT_Unk), resourceType, 5000);
         if (MACRO_CALL_MEMBER(MSS::SoundSystem_Func::shouldSoundXNotBePlaying, DAT_SoundSystemState::ptr)()) {
             return;

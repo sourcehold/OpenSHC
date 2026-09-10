@@ -108,7 +108,7 @@ namespace Audio {
 
             if ((MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()
                     || (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_SCENARIO_DESCRIPTION
-                        && DAT_GameCore::instance.field25_0x64 != 0))
+                        && DAT_GameCore::instance.field22_0x64 != 0))
                 && DAT_GameCore::instance.gameMode_2 != Game::GM_CRUSADER_TUTORIAL
                 && DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY) {
                 if (DAT_TroopValueState::instance.attackInfo.field105440_0x25b00 != 0

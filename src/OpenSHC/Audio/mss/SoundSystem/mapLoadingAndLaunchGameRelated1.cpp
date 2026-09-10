@@ -22,7 +22,7 @@ namespace Audio {
             DAT_GameCore::ptr->someSoundMatchTime_1 = DAT_GameCore::ptr->mapTimeInTicks;
             DAT_GameCore::ptr->battleLevel = 0;
             DAT_GameCore::ptr->battleLevel2 = 0;
-            DAT_GameCore::ptr->field36_0x90 = 0;
+            DAT_GameCore::ptr->field33_0x90 = 0;
             DAT_TroopValueState::ptr->attackInfo.field128057_0x469d8 = 0;
             DAT_TroopValueState::ptr->attackInfo.field128059_0x469e0 = 0;
             DAT_TroopValueState::ptr->attackInfo.field128058_0x469dc = 0;

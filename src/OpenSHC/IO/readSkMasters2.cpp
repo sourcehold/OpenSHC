@@ -15,7 +15,7 @@
 namespace OpenSHC {
 
 // FUNCTION: STRONGHOLDCRUSADER 0x004D5010
-void IO::readSkMasters2()
+void IO::ReadSkMasters2()
 {
     DAT_SkMasters2Data_Version::instance = 3.0;
     DAT_SkMasters2Data_Count::instance = 0;
