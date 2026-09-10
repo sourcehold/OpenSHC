@@ -46,10 +46,10 @@ namespace OS {
 
     // This seems to be the games main free function
     // STUB: STRONGHOLDCRUSADER 0x0057FA74
-    void __cdecl _free_base(void* _Memory) { free(_Memory); }
+    void _free_base(void* _Memory) { free(_Memory); }
 
     // STUB: STRONGHOLDCRUSADER 0x0057FC19
-    int __cdecl __tolower(int _C) { return tolower(_C); };
+    int __tolower(int _C) { return tolower(_C); };
 
     // STUB: STRONGHOLDCRUSADER 0x0057FCB2
     int _fclose(FILE* _File) { return fclose(_File); }
@@ -67,7 +67,7 @@ namespace OS {
     long _ftell(FILE* _File) { return ftell(_File); }
 
     // STUB: STRONGHOLDCRUSADER 0x00580384
-    int __cdecl _fseek(FILE* _File, long _Offset, DWORD _Origin) { return fseek(_File, _Offset, _Origin); }
+    int _fseek(FILE* _File, long _Offset, DWORD _Origin) { return fseek(_File, _Offset, _Origin); }
 
     // STUB: STRONGHOLDCRUSADER 0x005804CD
     FILE* _fopen(char const* _Filename, char const* _Mode) { return fopen(_Filename, _Mode); }
@@ -89,7 +89,7 @@ namespace OS {
 
     // Only jumps to _free in game version
     // STUB: STRONGHOLDCRUSADER 0x00580DC1
-    void __cdecl _free(void* _Memory) { free(_Memory); }
+    void _free(void* _Memory) { free(_Memory); }
 
     // STUB: STRONGHOLDCRUSADER 0x00580DC6
     errno_t _memcpy_s(void* _Dst, rsize_t _DstSize, void* _Src, rsize_t _MaxCount)
@@ -99,7 +99,7 @@ namespace OS {
 
     // Only jumps to _free
     // STUB: STRONGHOLDCRUSADER 0x00580E9C
-    void __cdecl _free_cpp(void* _Memory) { free(_Memory); }
+    void _free_cpp(void* _Memory) { free(_Memory); }
 
     // STUB: STRONGHOLDCRUSADER 0x00580F38
     int _ucrt_close(int fileDescriptor) { return _close(fileDescriptor); }
@@ -126,10 +126,10 @@ namespace OS {
     void* _memcpy(void* _Dst, void* _Src, size_t _Size) { return memcpy(_Dst, _Src, _Size); }
 
     // STUB: STRONGHOLDCRUSADER 0x005824CD
-    int __cdecl __toupper(int _C) { return toupper(_C); }
+    int __toupper(int _C) { return toupper(_C); }
 
     // STUB: STRONGHOLDCRUSADER 0x005826FB
-    int __cdecl _ucrt_tell(int handle) { return _tell(handle); }
+    int _ucrt_tell(int handle) { return _tell(handle); }
 
     // STUB: STRONGHOLDCRUSADER 0x0058277E
     int _ucrt_lseek(int fileDescriptor, long lDistanceToMove, DWORD moveMethod)
