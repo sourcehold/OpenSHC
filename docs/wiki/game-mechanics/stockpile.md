@@ -1,4 +1,4 @@
-# Stockpile footprint cleanup
+# Stockpile
 
 Removing a stockpile clears its nine walkable tiles. Its four building parts
 are removed separately.
