@@ -29,7 +29,7 @@ For the recommended method of using SARIF files in Ghidra, see:
 The Game itself
 ------------------
 - :doc:`Load balancing of the core game engine <wiki/load-balancing-table>`
-- Game Mechanics
+- :doc:`Enemy awareness <wiki/game-mechanics/enemy-awareness>`
 - Graphics and Sound Systems
 - Modding Support
 - Multiplayer Architecture
