@@ -115,7 +115,7 @@ namespace Text {
             &TextEditorState::closeHelpDialogAndReturnToMenu)
         closeHelpDialogAndReturnToMenu;
 
-        MACRO_FUNCTION_RESOLVER(int (TextEditorState::*)(LPCSTR), false, Address::SHC_3BB0A8C1_0x0045F470,
+        MACRO_FUNCTION_RESOLVER(FILE* (TextEditorState::*)(LPCSTR), false, Address::SHC_3BB0A8C1_0x0045F470,
             &TextEditorState::readCrusaderHelpHlp)
         readCrusaderHelpHlp;
 

@@ -167,7 +167,7 @@ namespace Text {
 
         void closeHelpDialogAndReturnToMenu();
 
-        int readCrusaderHelpHlp(LPCSTR param_1);
+        FILE* readCrusaderHelpHlp(LPCSTR searchedPart);
 
         BOOLEnum loadAndParseHelpFile(char const* param_1);
 
