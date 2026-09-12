@@ -146,5 +146,16 @@ namespace OS {
     // STUB: STRONGHOLDCRUSADER 0x00583D55
     void _exit(int _Code) { exit(_Code); }
 
+    // STUB: STRONGHOLDCRUSADER 0x005807A8
+    int _fwprintf(FILE* stream, wchar_t const* format, ...)
+    {
+        // needed for proxy
+        va_list args;
+        va_start(args, format);
+        int result = vfwprintf(stream, format, args);
+        va_end(args);
+        return result;
+    }
+
 }
 }
