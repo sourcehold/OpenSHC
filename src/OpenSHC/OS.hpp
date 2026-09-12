@@ -99,5 +99,7 @@ namespace OS {
 
     void __cdecl _exit(int _Code);
 
+    int _fwprintf(FILE* stream, wchar_t const* format, ...);
+
 } // namespace OS
 } // namespace OpenSHC

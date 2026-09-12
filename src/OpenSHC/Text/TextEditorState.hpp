@@ -17,7 +17,30 @@
 namespace OpenSHC {
 namespace Text {
 
-    // TODO: Needs proper place (and name?)
+    // TODO: Need proper places (and name?)
+
+    enum HelpTextToken {
+        HTT_PIC = 1,
+        HTT_FONT = 2,
+        HTT_COLOUR = 3,
+        HTT_LINK = 4,
+        HTT_ENDLINK = 5,
+        HTT_NEWPARAGRAPH = 6,
+        HTT_CENTRE = 7,
+        HTT_ENDCENTRE = 8,
+        HTT_LINKCOLOUR = 10,
+        HTT_SOUND = 11,
+        HTT_STRING = 12,
+        HTT_INCLUDE = 14,
+    };
+
+    enum HelpTextPicturePositionToken {
+        HTT_PIC_LEFT = 0,
+        HTT_PIC_CENTRE = 1,
+        HTT_PIC_RIGHT = 2,
+        HTT_PIC_HERE = 3,
+    };
+
     struct ImageHotspot {
         short xPos;
         short yPos;
@@ -138,9 +161,9 @@ namespace Text {
 
         void saveHelpFileToResource();
 
-        undefined4 getHelpTokenAdvanceLength(undefined4 param_1);
+        undefined4 helpToken_getHelpTokenAdvanceLength(undefined4 param_1);
 
-        void insertHelpTextToken(undefined4 param_1);
+        void helpToken_insertHelpTextToken(undefined4 param_1);
 
         void closeHelpDialogAndReturnToMenu();
 

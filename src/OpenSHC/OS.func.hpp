@@ -171,5 +171,9 @@ namespace OS_Func {
         void(__cdecl*)(int _Code), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x00583D55, &OpenSHC::OS::_exit)
     _exit;
 
+    MACRO_FUNCTION_RESOLVER(int(__cdecl*)(FILE*, wchar_t const*, ...), REIMPLEMENTED_CRT,
+        Address::SHC_3BB0A8C1_0x005807A8, &OpenSHC::OS::_fwprintf)
+    _fwprintf;
+
 } // namespace OS_Func
 } // namespace OpenSHC
