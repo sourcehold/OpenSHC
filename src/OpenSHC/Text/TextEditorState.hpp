@@ -169,7 +169,7 @@ namespace Text {
 
         FILE* readCrusaderHelpHlp(LPCSTR searchedPart);
 
-        BOOLEnum loadAndParseHelpFile(char const* param_1);
+        BOOLEnum loadAndParseHelpFile(char const* searchedPart);
 
         void parseHlp();
 
