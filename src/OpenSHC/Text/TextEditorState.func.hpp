@@ -103,13 +103,13 @@ namespace Text {
             &TextEditorState::saveHelpFileToResource)
         saveHelpFileToResource;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (TextEditorState::*)(undefined4), false, Address::SHC_3BB0A8C1_0x0045F080,
+        MACRO_FUNCTION_RESOLVER(int (TextEditorState::*)(HelpTextToken), false, Address::SHC_3BB0A8C1_0x0045F080,
             &TextEditorState::helpToken_getHelpTokenAdvanceLength)
         helpToken_getHelpTokenAdvanceLength;
 
-        MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(undefined4), false, Address::SHC_3BB0A8C1_0x0045F0D0,
-            &TextEditorState::helpToken_insertHelpTextToken)
-        helpToken_insertHelpTextToken;
+        MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(HelpTextToken), false, Address::SHC_3BB0A8C1_0x0045F0D0,
+            &TextEditorState::helpToken_insertSpaceForHelpTextToken)
+        helpToken_insertSpaceForHelpTextToken;
 
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(), false, Address::SHC_3BB0A8C1_0x0045F240,
             &TextEditorState::closeHelpDialogAndReturnToMenu)

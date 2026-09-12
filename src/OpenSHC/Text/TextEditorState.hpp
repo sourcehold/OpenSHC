@@ -57,7 +57,7 @@ namespace Text {
     class TextEditorState {
     public:
         LPWSTR DAT_PointerToTemporaryTextMemory; // 0x00000000 length: 4
-        undefined4 customHelpTextLength; // 0x00000004 length: 4
+        int customHelpTextLength; // 0x00000004 length: 4
         undefined4 isDialogStateInitialized; // 0x00000008 length: 4
         undefined4 helpDialogVariant; // 0x0000000C length: 4
         undefined4 useInGameHelpHandler; // 0x00000010 length: 4
@@ -81,7 +81,7 @@ namespace Text {
         int dialogContentWidth; // 0x000000CC length: 4
         undefined4 helpContentScrollX; // 0x000000D0 length: 4
         undefined4 helpContentScrollY; // 0x000000D4 length: 4
-        undefined4 activeHelpHotspotIndex; // 0x000000D8 length: 4
+        int activeHelpHotspotIndex; // 0x000000D8 length: 4
         undefined4 helpDialogSubMode; // 0x000000DC length: 4
         undefined4 useAlternateHelpTab; // 0x000000E0 length: 4
         undefined4 isCustomTextMode; // 0x000000E4 length: 4
@@ -161,9 +161,9 @@ namespace Text {
 
         void saveHelpFileToResource();
 
-        undefined4 helpToken_getHelpTokenAdvanceLength(undefined4 param_1);
+        int helpToken_getHelpTokenAdvanceLength(HelpTextToken token);
 
-        void helpToken_insertHelpTextToken(undefined4 param_1);
+        void helpToken_insertSpaceForHelpTextToken(HelpTextToken token);
 
         void closeHelpDialogAndReturnToMenu();
 
