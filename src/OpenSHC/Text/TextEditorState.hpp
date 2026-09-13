@@ -101,7 +101,7 @@ namespace Text {
         short lineLayoutTable[60000]; // 0x000062BC length: 120000
         int imageHotspotCount; // 0x0002377C length: 4
         ImageHotspot imageHotspotTable[50]; // 0x00023780 length: 400
-        int intArray1[20]; // 0x00023910 length: 80
+        wchar_t* intArray1[20]; // 0x00023910 length: 80
         int unknown_0x23960; // 0x00023960 length: 4
         int unknown_0x23964; // 0x00023964 length: 4
         int unknown_0x23968; // 0x00023968 length: 4

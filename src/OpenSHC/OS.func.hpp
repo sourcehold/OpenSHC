@@ -175,5 +175,9 @@ namespace OS_Func {
         Address::SHC_3BB0A8C1_0x005807A8, &OpenSHC::OS::_fwprintf)
     _fwprintf;
 
+    MACRO_FUNCTION_RESOLVER(
+        long(__cdecl*)(wchar_t const*), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x00580C0B, &OpenSHC::OS::__wtol)
+    __wtol;
+
 } // namespace OS_Func
 } // namespace OpenSHC
