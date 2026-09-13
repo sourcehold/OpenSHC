@@ -18757,7 +18757,7 @@ SHC_3BB0A8C1_0x0045F470 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0045F580 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0045F5B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0045F5B0 | 99.0% | Reimplemented, two cases where an "edx + ecx" is flipped to "ecx + edx"
 
 SHC_3BB0A8C1_0x0045FDC0 | 0.0% | Pending
 
