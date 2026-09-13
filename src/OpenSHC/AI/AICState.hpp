@@ -166,7 +166,7 @@ namespace AI {
 
         int createTribeForUnitType(int playerID, int unitSelectionTypeIndex);
 
-        int smallestTribeOfUnitType(int playerID, UnitType unitType);
+        int smallestTribeOfUnitType(int playerID, AIVUnitType aivUnitType);
 
         int getSmallestPatrolTribe(int playerID, int tribeCount);
 

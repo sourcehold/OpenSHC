@@ -2,6 +2,7 @@
   path: 'OpenSHC/Text/TextEditorState.func.hpp'
 */
 
+#include "OpenSHC/Text/Enums/HelpTextToken.hpp"
 #include "OpenSHC/Text/TextEditorState.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -11,6 +12,7 @@ namespace OpenSHC {
 namespace Text {
     namespace TextEditorState_Func {
 
+        using OpenSHC::Text::Enums::HelpTextToken;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // Constructor
@@ -35,17 +37,17 @@ namespace Text {
             &TextEditorState::findOrAddHelpSectionName)
         findOrAddHelpSectionName;
 
-        MACRO_FUNCTION_RESOLVER(LPCWSTR (TextEditorState::*)(FILE*), false, Address::SHC_3BB0A8C1_0x0045D200,
-            &TextEditorState::parseHLPPart)
+        MACRO_FUNCTION_RESOLVER(
+            LPWSTR (TextEditorState::*)(FILE*), false, Address::SHC_3BB0A8C1_0x0045D200, &TextEditorState::parseHLPPart)
         parseHLPPart;
 
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(), false, Address::SHC_3BB0A8C1_0x0045D370,
             &TextEditorState::loadHelpSectionGraphics)
         loadHelpSectionGraphics;
 
-        MACRO_FUNCTION_RESOLVER(undefined* (TextEditorState::*)(int*), false, Address::SHC_3BB0A8C1_0x0045D3C0,
-            &TextEditorState::getWideCharPointer)
-        getWideCharPointer;
+        MACRO_FUNCTION_RESOLVER(uint (TextEditorState::*)(int*), false, Address::SHC_3BB0A8C1_0x0045D3C0,
+            &TextEditorState::getWideCharOrWideCharPointer)
+        getWideCharOrWideCharPointer;
 
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(), false, Address::SHC_3BB0A8C1_0x0045D430,
             &TextEditorState::renderHelpImageHotspots)
@@ -103,19 +105,19 @@ namespace Text {
             &TextEditorState::saveHelpFileToResource)
         saveHelpFileToResource;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (TextEditorState::*)(undefined4), false, Address::SHC_3BB0A8C1_0x0045F080,
-            &TextEditorState::getHelpTokenAdvanceLength)
-        getHelpTokenAdvanceLength;
+        MACRO_FUNCTION_RESOLVER(int (TextEditorState::*)(HelpTextToken), false, Address::SHC_3BB0A8C1_0x0045F080,
+            &TextEditorState::helpToken_getHelpTokenAdvanceLength)
+        helpToken_getHelpTokenAdvanceLength;
 
-        MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(undefined4), false, Address::SHC_3BB0A8C1_0x0045F0D0,
-            &TextEditorState::insertHelpTextToken)
-        insertHelpTextToken;
+        MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(HelpTextToken), false, Address::SHC_3BB0A8C1_0x0045F0D0,
+            &TextEditorState::helpToken_insertSpaceForHelpTextToken)
+        helpToken_insertSpaceForHelpTextToken;
 
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(), false, Address::SHC_3BB0A8C1_0x0045F240,
             &TextEditorState::closeHelpDialogAndReturnToMenu)
         closeHelpDialogAndReturnToMenu;
 
-        MACRO_FUNCTION_RESOLVER(int (TextEditorState::*)(LPCSTR), false, Address::SHC_3BB0A8C1_0x0045F470,
+        MACRO_FUNCTION_RESOLVER(FILE* (TextEditorState::*)(LPCSTR), false, Address::SHC_3BB0A8C1_0x0045F470,
             &TextEditorState::readCrusaderHelpHlp)
         readCrusaderHelpHlp;
 

@@ -245,7 +245,7 @@ namespace AI {
             int (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004CC910, &AICState::createTribeForUnitType)
         createTribeForUnitType;
 
-        MACRO_FUNCTION_RESOLVER(int (AICState::*)(int, UnitType), false, Address::SHC_3BB0A8C1_0x004CC990,
+        MACRO_FUNCTION_RESOLVER(int (AICState::*)(int, AIVUnitType), false, Address::SHC_3BB0A8C1_0x004CC990,
             &AICState::smallestTribeOfUnitType)
         smallestTribeOfUnitType;
 

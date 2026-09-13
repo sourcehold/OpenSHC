@@ -20332,7 +20332,7 @@ enum {
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D370 = 0x0045D370,
-    // label: getWideCharPointer
+    // label: getWideCharOrWideCharPointer
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045D3C0 = 0x0045D3C0,
@@ -20748,7 +20748,7 @@ enum {
     // location: OpenSHC/UI/MenuItems/TextEditor
     // type: function
     SHC_3BB0A8C1_0x0045EF90 = 0x0045EF90,
-    // label: getHelpTokenAdvanceLength
+    // label: helpToken_getHelpTokenAdvanceLength
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045F080 = 0x0045F080,
@@ -20786,7 +20786,7 @@ enum {
     SHC_3BB0A8C1_0x0045F0CC = 0x0045F0CC,
     // type: /byte
     SHC_3BB0A8C1_0x0045F0CD = 0x0045F0CD,
-    // label: insertHelpTextToken
+    // label: helpToken_insertSpaceForHelpTextToken
     // location: OpenSHC/Text/TextEditorState
     // type: function
     SHC_3BB0A8C1_0x0045F0D0 = 0x0045F0D0,
@@ -75085,8 +75085,8 @@ enum {
     // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x0058079E = 0x0058079E,
-    // label: FUN_005807a8
-    // location: HoldStrong_lib
+    // label: _fwprintf
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x005807A8 = 0x005807A8,
     // label: FUN_00580832
@@ -75117,12 +75117,12 @@ enum {
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00580B69 = 0x00580B69,
-    // label: WCharStringToLong
-    // location: HoldStrong_lib
+    // label: __wtol
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00580BFA = 0x00580BFA,
-    // label: WCharStringToLong
-    // location: HoldStrong_lib
+    // label: __wtol
+    // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00580C0B = 0x00580C0B,
     // label: ??0exception@std@@QAE@XZ
