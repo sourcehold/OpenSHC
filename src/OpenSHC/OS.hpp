@@ -105,5 +105,7 @@ namespace OS {
 
     int _fwprintf(FILE* stream, wchar_t const* format, ...);
 
+    long __wtol(wchar_t const* str);
+
 } // namespace OS
 } // namespace OpenSHC
