@@ -157,5 +157,8 @@ namespace OS {
         return result;
     }
 
+    // STUB: STRONGHOLDCRUSADER 0x00580C0B
+    long __wtol(wchar_t const* str) { return _wtol(str); }
+
 }
 }

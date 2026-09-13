@@ -319,6 +319,7 @@ SEC_RNG::ptr->currentNumber1 % 4
   }
   ```
   Consider this, should a switch structure arise with strange fallthrough and loops, like SHC_3BB0A8C1_0x004870B0.
+- Non-consecutive case labels will likely result in a mixture of if-else and switch cases, sometimes even only if-elses. These are hard to spot. One sign, outside of weird decompiler artifacts, is that logic might be put inside a lot of conditions that feature only a single variable. Another can be a lot of GOTOs.
 
 - Write a comparison with its operands in the order the assembly shows. `if (a > b)` gives `cmp eax, ecx` where
   `if (b < a)` gives `cmp ecx, eax`; flipping seven `iVar6 < lag[n].average1` to `lag[n].average1 > iVar6` took
