@@ -162,7 +162,7 @@ namespace Text {
 
         void loadAndLayoutHelpContent();
 
-        void openBuildingHelpDialog(int param_1);
+        void openBuildingHelpDialog(int sectionId);
 
         void openInGameHelpDialog(int param_1);
 
