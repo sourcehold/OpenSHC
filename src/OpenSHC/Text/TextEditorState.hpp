@@ -197,7 +197,7 @@ namespace Text {
 
         void openCreditsScrollDialog(int sectionId);
 
-        void openMapDescriptionEditorDialog(int param_1);
+        void openMapDescriptionEditorDialog(int sectionId);
 
         void setCustomHelpText(char* param_1, undefined4 param_2);
 
