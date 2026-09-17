@@ -191,9 +191,9 @@ namespace Text {
 
         void openBuildingHelpDialog(int sectionId);
 
-        void openInGameHelpDialog(int param_1);
+        void openInGameHelpDialog(int sectionId);
 
-        void openScenarioHelpDialog(int param_1);
+        void openScenarioHelpDialog(int sectionId);
 
         void openCreditsScrollDialog(int param_1);
 
