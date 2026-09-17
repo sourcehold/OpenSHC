@@ -66,7 +66,7 @@ namespace Text {
         int customHelpTextLength; // 0x00000004 length: 4
         undefined4 isDialogStateInitialized; // 0x00000008 length: 4
         undefined4 helpDialogVariant; // 0x0000000C length: 4
-        undefined4 useInGameHelpHandler; // 0x00000010 length: 4
+        int useInGameHelpHandler; // 0x00000010 length: 4
         MenuViewTypeInt savedMenuViewType; // 0x00000014 length: 4
         undefined4 savedActiveMenuTab; // 0x00000018 length: 4
         undefined4 savedMenuFlag; // 0x0000001C length: 4
