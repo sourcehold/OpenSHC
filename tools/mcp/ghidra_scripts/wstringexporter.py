@@ -1,0 +1,69 @@
+#This script exports .rdata literal strings and addresses into a file. 
+# Labels are either default Ghidra labels or labels set by users.
+#@author Gynt
+#@category _OPENSHC.TOOLS.DECOMPILATION
+#@keybinding 
+#@menupath 
+#@toolbar 
+#@runtime PyGhidra
+
+from ghidra.program.model.data import Array
+import re
+PATTERN = re.compile("[^a-zA-Z0-9_]+")
+
+
+l = getCurrentProgram().getListing()
+roRange = getCurrentProgram().getMemory().getBlocks()[2].getAddressRange()
+pragma_once = """#pragma once
+
+""" 
+sdump = pragma_once + '#include "OpenSHC/wstring-macros.hpp"\n\n'
+mdump = pragma_once + """#define U__N L"\\n"
+
+#define U__R L"\\r"
+
+#define U_CARROT_LEFT L"<"
+
+#define U_BACKTICK L"`"
+
+#define U_BACKTICK_VARIATION L"’"
+
+#define U_QUOTE L'\\"'
+
+#define U_COMMA L'‚'
+
+#define U_FORWARDTICK L'‛'
+
+#define U_DOUBLECOMMA L'„'
+
+
+
+"""
+
+cur = l.getCodeUnitAt(roRange.getMinAddress())
+while cur.getAddress() < roRange.getMaxAddress():
+	while True:
+		if cur.getDataType().toString() in ["wstring", "unicode"]:
+			break;
+		if isinstance(cur.getDataType(), Array):
+			if cur.getDataType().getDataType().toString() in ["wchar", "WCHAR", "wchar_t", "WCHAR_T"]:
+				break;
+		cur = l.getCodeUnitAfter(cur.getAddress())
+	try:
+		if cur.getLabel():
+			s_label = PATTERN.sub("_", cur.getLabel())
+			m_label = s_label.upper()
+			v = cur.getValue().replace("\\", "\\\\").replace("\n", "\\n").replace("\r", "\\r").replace('"', '\\"')
+			sdump += "// 0x00" + hex(cur.getAddress().getOffset())[2:-1] + "\n"
+			sdump += "wchar_t const * const " + s_label + ' = ' + m_label + ';' + "\n\n"
+			mdump += "// STRING: STRONGHOLDCRUSADER 0x00" + hex(cur.getAddress().getOffset())[2:-1] + "\n"
+			mdump += "#define "+ m_label + ' L"' + v + '"' + "\n\n"
+	except Exception as e:
+		print("failed at: " + cur.getAddress().toString())
+	cur = l.getCodeUnitAfter(cur.getAddress())
+
+dir = askDirectory("Select output dir", "Choose")
+with open(str(dir) + "/wstring-literals.hpp", "wb") as f:
+	f.write(sdump.encode('utf-8'))
+with open(str(dir) + "/wstring-macros.hpp", "wb") as f:
+	f.write(mdump.encode('utf-8'))
