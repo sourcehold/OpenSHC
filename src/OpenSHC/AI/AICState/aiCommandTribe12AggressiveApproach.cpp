@@ -1,4 +1,5 @@
-#include "OpenSHC/AI/AICState.func.hpp"
+#include "../AICState.func.hpp"
+
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/AI/AIType.hpp"
@@ -60,16 +61,13 @@ namespace AI {
                  DAT_PathFindingState::ptr)(attackedPlayerID, 200)
                 != FALSE)
             || (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findDestinationCostLowerThan6,
-                    DAT_PathFindingState::ptr)(
-                    DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID, 150)
+                    DAT_PathFindingState::ptr)(DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID, 150)
                 != FALSE)
             || (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findDestinationCostLowerThan6,
-                    DAT_PathFindingState::ptr)(
-                    DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID, 100)
+                    DAT_PathFindingState::ptr)(DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID, 100)
                 != FALSE)
             || (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findDestinationCostLowerThan6,
-                    DAT_PathFindingState::ptr)(
-                    DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID, 50)
+                    DAT_PathFindingState::ptr)(DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID, 50)
                 != FALSE)) {
 
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(

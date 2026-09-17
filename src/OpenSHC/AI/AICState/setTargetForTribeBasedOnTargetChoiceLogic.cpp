@@ -1,4 +1,5 @@
-#include "OpenSHC/AI/AICState.func.hpp"
+#include "../AICState.func.hpp"
+
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/AI/AIC/AITargetChoice.hpp"
@@ -44,7 +45,8 @@ namespace AI {
                 if ((DAT_GameState::instance.mapAndTime.playerTeams[_player]
                         != DAT_GameState::instance.mapAndTime.playerTeams[owner])) {
 
-                    int _lord = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::getAliveLordForPlayer, DAT_UnitsState::ptr)(_player);
+                    int _lord = MACRO_CALL_MEMBER(
+                        OpenSHC::Map::Units::UnitsState_Func::getAliveLordForPlayer, DAT_UnitsState::ptr)(_player);
 
                     if (_lord != 0) {
 
@@ -86,8 +88,7 @@ namespace AI {
 
                         } else if (_targetChoice == OpenSHC::AI::AIC::AITC_BALANCED) {
 
-                            int _points = _ptrPlayerData->currentPopulation * 5
-                                + _ptrPlayerData->totalTroopValue
+                            int _points = _ptrPlayerData->currentPopulation * 5 + _ptrPlayerData->totalTroopValue
                                 + _ptrPlayerData->currentResources[0xf] / 100
                                 + DAT_DirectionAlgorithmState::instance.distanceHigh * 2;
                             if (_points <= _minPoints) {
@@ -116,7 +117,7 @@ namespace AI {
                             != DAT_GameState::instance.mapAndTime.playerTeams[owner])) {
 
                         int _lordBackup = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::getAliveLordForPlayer,
-                                DAT_UnitsState::ptr)(_playerID_backup);
+                            DAT_UnitsState::ptr)(_playerID_backup);
 
                         if (_lordBackup != 0) {
 

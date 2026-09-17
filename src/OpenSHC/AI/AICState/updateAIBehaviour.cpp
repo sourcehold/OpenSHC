@@ -1,4 +1,5 @@
-#include "OpenSHC/AI/AICState.func.hpp"
+#include "../AICState.func.hpp"
+
 #include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/AI/AIRecruitUnitChoice.hpp"
 #include "OpenSHC/AI/AIType.hpp"

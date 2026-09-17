@@ -1,4 +1,5 @@
-#include "OpenSHC/AI/AICState.func.hpp"
+#include "../AICState.func.hpp"
+
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/AI/AIType.hpp"
@@ -60,8 +61,8 @@ namespace AI {
                 && (0 < DAT_GameState::instance.playerDataArray[playerID].someYPosition)) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::unsetRallyRelatedFlagOnUnits,
                     DAT_TribesState::ptr)(_tribeID);
-                MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction,
-                    DAT_TribesState::ptr)(_tribeID,
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(_tribeID,
                     (uint)((int)(DAT_GameState::instance.playerDataArray[playerID].someXPosition)),
                     (uint)((int)(DAT_GameState::instance.playerDataArray[playerID].someYPosition)), 0, 0,
                     OpenSHC::Map::Units::Instructions::UMSE_0);

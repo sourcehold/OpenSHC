@@ -1,4 +1,5 @@
-#include "OpenSHC/AI/AICState.func.hpp"
+#include "../AICState.func.hpp"
+
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/AI/AIC/AITargetChoice.hpp"
@@ -38,8 +39,9 @@ namespace AI {
 
             int _reqState = DAT_GameState::instance.playerDataArray[playerID].requestStateUnk;
             if (((_reqState == 2) || (_reqState == 1))
-                && MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::getAliveLordForPlayer,
-                    DAT_UnitsState::ptr)(DAT_GameState::instance.playerDataArray[playerID].playerID_askerUnk) == 0) {
+                && MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::getAliveLordForPlayer, DAT_UnitsState::ptr)(
+                       DAT_GameState::instance.playerDataArray[playerID].playerID_askerUnk)
+                    == 0) {
                 DAT_GameState::instance.playerDataArray[playerID].requestStateUnk = 0;
             }
 
@@ -49,8 +51,9 @@ namespace AI {
                 return;
             }
             if (_reqState2 == 1) {
-                if (MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::getAliveLordForPlayer,
-                        DAT_UnitsState::ptr)(DAT_GameState::instance.playerDataArray[playerID].requestedAttackTargetUnk) != 0) {
+                if (MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::getAliveLordForPlayer, DAT_UnitsState::ptr)(
+                        DAT_GameState::instance.playerDataArray[playerID].requestedAttackTargetUnk)
+                    != 0) {
                     DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID
                         = DAT_GameState::instance.playerDataArray[playerID].requestedAttackTargetUnk;
                     return;
@@ -64,8 +67,9 @@ namespace AI {
             do {
                 if ((DAT_GameState::instance.mapAndTime.playerTeams[_iPlayer]
                         != DAT_GameState::instance.mapAndTime.playerTeams[playerID])
-                    && MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::getAliveLordForPlayer,
-                        DAT_UnitsState::ptr)(_iPlayer) != 0) {
+                    && MACRO_CALL_MEMBER(
+                           OpenSHC::Map::Units::UnitsState_Func::getAliveLordForPlayer, DAT_UnitsState::ptr)(_iPlayer)
+                        != 0) {
 
                     MACRO_CALL_MEMBER(
                         OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
@@ -122,7 +126,8 @@ namespace AI {
                     if (((DAT_GameState::instance.mapAndTime.playerTeams[_iPlayer2]
                              != DAT_GameState::instance.mapAndTime.playerTeams[playerID])
                             && MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::getAliveLordForPlayer,
-                                DAT_UnitsState::ptr)(_iPlayer2) != 0)
+                                   DAT_UnitsState::ptr)(_iPlayer2)
+                                != 0)
                         && (MACRO_CALL_MEMBER(
                                 OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                                 DAT_DirectionAlgorithmState::ptr)((_ptrPlayerData->campground).xEntry,

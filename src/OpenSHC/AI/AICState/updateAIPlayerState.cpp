@@ -1,4 +1,5 @@
-#include "OpenSHC/AI/AICState.func.hpp"
+#include "../AICState.func.hpp"
+
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
@@ -54,8 +55,8 @@ namespace AI {
             MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setCurrentAttackRaidParameter, this)(playerID);
             // fixme: struct layout. This looks like an int[10][8] attack tracker starting at
             // attackedByPlayerArrayUnk (0x2BDC) and ending where aivUnitLocationSlots begins (0x2D1C).
-            (&DAT_GameState::instance.playerDataArray[DAT_GameState::instance.playerDataArray[playerID]
-                                                          .attackedPlayerID]
+            (&DAT_GameState::instance
+                    .playerDataArray[DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID]
                     .attackedByPlayerArrayUnk)[playerID * 8]++;
         } else if ((MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::hasNoTroopsOrAllAreDiggers, this)(playerID)
                        && _aiPlayerState != 9)
@@ -158,9 +159,8 @@ namespace AI {
             MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
                 DAT_GameState::instance.playerDataArray[playerID].shortestDistanceX,
                 DAT_GameState::instance.playerDataArray[playerID].shortestDistanceY, 0x14);
-            if (!MACRO_CALL_MEMBER(
-                    OpenSHC::Game::GameStateStructures_Func::canNavigateFromKeepToKeep, DAT_GameState::ptr)(
-                    playerID, DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID)) {
+            if (!MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::canNavigateFromKeepToKeep,
+                    DAT_GameState::ptr)(playerID, DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID)) {
                 // castle is closed: attack the walls
                 DAT_GameState::instance.playerDataArray[playerID].aiPlayerState = 5;
                 MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::aiCommandTribe12AggressiveApproach, this)(playerID);
@@ -200,12 +200,10 @@ namespace AI {
                 MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setTribe0xbToAggressiveAndAttack, this)(playerID);
             }
             MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendAITribe_0xf_toAttackPatrol, this)(playerID);
-            if (!MACRO_CALL_MEMBER(
-                    OpenSHC::Game::GameStateStructures_Func::canNavigateFromKeepToKeep, DAT_GameState::ptr)(
-                    playerID, DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID)
-                && !MACRO_CALL_MEMBER(
-                    OpenSHC::Game::GameStateStructures_Func::canUnitsNavigateFromKeepToKeep, DAT_GameState::ptr)(
-                    playerID, DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID))
+            if (!MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::canNavigateFromKeepToKeep,
+                    DAT_GameState::ptr)(playerID, DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID)
+                && !MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::canUnitsNavigateFromKeepToKeep,
+                    DAT_GameState::ptr)(playerID, DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID))
                 return;
             DAT_GameState::instance.playerDataArray[playerID].aiPlayerState = 6;
             return;
@@ -222,13 +220,11 @@ namespace AI {
                 DAT_GameState::ptr)(_attackedPlayerID);
             if (MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToAttackBreachedCastle, this)(playerID))
                 return;
-            if (MACRO_CALL_MEMBER(
-                    OpenSHC::Game::GameStateStructures_Func::canNavigateFromKeepToKeep, DAT_GameState::ptr)(
-                    playerID, DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID))
+            if (MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::canNavigateFromKeepToKeep,
+                    DAT_GameState::ptr)(playerID, DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID))
                 return;
-            if (MACRO_CALL_MEMBER(
-                    OpenSHC::Game::GameStateStructures_Func::canUnitsNavigateFromKeepToKeep, DAT_GameState::ptr)(
-                    playerID, DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID))
+            if (MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::canUnitsNavigateFromKeepToKeep,
+                    DAT_GameState::ptr)(playerID, DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID))
                 return;
             // the breach got closed again: back to attacking the walls
             DAT_GameState::instance.playerDataArray[playerID].aiPlayerState = 5;
@@ -246,9 +242,8 @@ namespace AI {
                 return;
             DAT_GameState::instance.playerDataArray[playerID].aiPlayerState = 9;
             MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::disbandAIPlayerSiegeUnits, this)(playerID);
-            MACRO_CALL_MEMBER(
-                OpenSHC::Map::Buildings::BuildingsState_Func::removeSiegeBuildings, DAT_BuildingsState::ptr)(
-                DAT_GameState::instance.playerDataArray[playerID].currentAttackWave, playerID);
+            MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::removeSiegeBuildings,
+                DAT_BuildingsState::ptr)(DAT_GameState::instance.playerDataArray[playerID].currentAttackWave, playerID);
             MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::addEngineersToTribe, this)(playerID);
             MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::aiReassignTunnelersToTribe, this)(playerID);
             MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::findAttackTribePositionAndPathToDefenses, this)(playerID);
@@ -261,9 +256,8 @@ namespace AI {
             DAT_GameState::instance.playerDataArray[playerID].aiPlayerState = 9;
             DAT_GameState::instance.playerDataArray[playerID].attackTicker = 0;
             MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::disbandAIPlayerSiegeUnits, this)(playerID);
-            MACRO_CALL_MEMBER(
-                OpenSHC::Map::Buildings::BuildingsState_Func::removeSiegeBuildings, DAT_BuildingsState::ptr)(
-                DAT_GameState::instance.playerDataArray[playerID].currentAttackWave, playerID);
+            MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::removeSiegeBuildings,
+                DAT_BuildingsState::ptr)(DAT_GameState::instance.playerDataArray[playerID].currentAttackWave, playerID);
             MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::addEngineersToTribe, this)(playerID);
             MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::aiReassignTunnelersToTribe, this)(playerID);
             MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::findAttackTribePositionAndPathToDefenses, this)(playerID);

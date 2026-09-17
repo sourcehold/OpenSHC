@@ -1,4 +1,4 @@
-#include "OpenSHC/AI/AICState.func.hpp"
+#include "../AICState.func.hpp"
 
 namespace OpenSHC {
 namespace AI {

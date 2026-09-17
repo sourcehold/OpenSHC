@@ -1,4 +1,5 @@
-#include "OpenSHC/AI/AICState.func.hpp"
+#include "../AICState.func.hpp"
+
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/AI/AIType.hpp"
 #include "OpenSHC/AI/AITypeInt.hpp"
@@ -38,15 +39,19 @@ namespace AI {
                     DAT_BuildingsState::ptr)((int)DAT_BuildingsState::instance.buildings[buildingID].owner,
                     OpenSHC::Map::Buildings::BT_BLACKSMITH);
                 DAT_BuildingsState::instance.buildings[buildingID].producedItemType = (ResourceTypeShort)_aiTypeMin1;
-                DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext = (ResourceTypeShort)_aiTypeMin1;
+                DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext
+                    = (ResourceTypeShort)_aiTypeMin1;
                 return;
             }
             if (_aiTypeMin1 == 0x16) {
-                DAT_BuildingsState::instance.buildings[buildingID].producedItemType = OpenSHC::Game::Resources::RT_SWORD;
-                DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext = OpenSHC::Game::Resources::RT_SWORD;
+                DAT_BuildingsState::instance.buildings[buildingID].producedItemType
+                    = OpenSHC::Game::Resources::RT_SWORD;
+                DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext
+                    = OpenSHC::Game::Resources::RT_SWORD;
             } else {
                 DAT_BuildingsState::instance.buildings[buildingID].producedItemType = OpenSHC::Game::Resources::RT_MACE;
-                DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext = OpenSHC::Game::Resources::RT_MACE;
+                DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext
+                    = OpenSHC::Game::Resources::RT_MACE;
             }
             return;
         }
@@ -58,15 +63,19 @@ namespace AI {
                     DAT_BuildingsState::ptr)((int)DAT_BuildingsState::instance.buildings[buildingID].owner,
                     OpenSHC::Map::Buildings::BT_POLETURNER);
                 DAT_BuildingsState::instance.buildings[buildingID].producedItemType = (ResourceTypeShort)_aiTypeMin1;
-                DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext = (ResourceTypeShort)_aiTypeMin1;
+                DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext
+                    = (ResourceTypeShort)_aiTypeMin1;
                 return;
             }
             if (_aiTypeMin1 == 0x13) {
-                DAT_BuildingsState::instance.buildings[buildingID].producedItemType = OpenSHC::Game::Resources::RT_SPEAR;
-                DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext = OpenSHC::Game::Resources::RT_SPEAR;
+                DAT_BuildingsState::instance.buildings[buildingID].producedItemType
+                    = OpenSHC::Game::Resources::RT_SPEAR;
+                DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext
+                    = OpenSHC::Game::Resources::RT_SPEAR;
             } else {
                 DAT_BuildingsState::instance.buildings[buildingID].producedItemType = OpenSHC::Game::Resources::RT_PIKE;
-                DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext = OpenSHC::Game::Resources::RT_PIKE;
+                DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext
+                    = OpenSHC::Game::Resources::RT_PIKE;
             }
             return;
         }
@@ -78,15 +87,19 @@ namespace AI {
                     DAT_BuildingsState::ptr)((int)DAT_BuildingsState::instance.buildings[buildingID].owner,
                     OpenSHC::Map::Buildings::BT_FLETCHER);
                 DAT_BuildingsState::instance.buildings[buildingID].producedItemType = (ResourceTypeShort)_aiTypeMin1;
-                DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext = (ResourceTypeShort)_aiTypeMin1;
+                DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext
+                    = (ResourceTypeShort)_aiTypeMin1;
                 return;
             }
             if (_aiTypeMin1 == 0x11) {
                 DAT_BuildingsState::instance.buildings[buildingID].producedItemType = OpenSHC::Game::Resources::RT_BOW;
-                DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext = OpenSHC::Game::Resources::RT_BOW;
+                DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext
+                    = OpenSHC::Game::Resources::RT_BOW;
             } else {
-                DAT_BuildingsState::instance.buildings[buildingID].producedItemType = OpenSHC::Game::Resources::RT_CROSSBOW;
-                DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext = OpenSHC::Game::Resources::RT_CROSSBOW;
+                DAT_BuildingsState::instance.buildings[buildingID].producedItemType
+                    = OpenSHC::Game::Resources::RT_CROSSBOW;
+                DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext
+                    = OpenSHC::Game::Resources::RT_CROSSBOW;
             }
         }
 

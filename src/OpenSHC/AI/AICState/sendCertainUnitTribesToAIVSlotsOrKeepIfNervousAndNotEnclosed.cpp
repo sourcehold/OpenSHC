@@ -1,4 +1,5 @@
-#include "OpenSHC/AI/AICState.func.hpp"
+#include "../AICState.func.hpp"
+
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/AI/AIVUnitType.hpp"
 #include "OpenSHC/AI/AIVUnitTypeInt.hpp"

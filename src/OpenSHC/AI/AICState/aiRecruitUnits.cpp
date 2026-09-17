@@ -1,4 +1,5 @@
-#include "OpenSHC/AI/AICState.func.hpp"
+#include "../AICState.func.hpp"
+
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
@@ -84,8 +85,10 @@ namespace AI {
 
             if (AVar2 == OpenSHC::AI::AIRUC_DEFENSIVE) {
                 int _defTotal = *(int*)((int)this + iVar6 * 0x2a4 + 0x170);
-                if (bVar3) _defTotal = (_defTotal * 4) / 3;
-                if (0 < _nervousActionTracker) _defTotal = _defTotal * 4;
+                if (bVar3)
+                    _defTotal = (_defTotal * 4) / 3;
+                if (0 < _nervousActionTracker)
+                    _defTotal = _defTotal * 4;
                 if (_defTotal <= DAT_GameState::instance.playerDataArray[playerID].totalDefensiveTroopsUnk)
                     return;
             } else if (AVar2 == OpenSHC::AI::AIRUC_RAIDING) {
@@ -101,7 +104,8 @@ namespace AI {
 
             if (((*(int*)((int)this + iVar6 + 0x15c) != 0)
                     && (iVar5 = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::countUnfinishedMoatTilesForPlayer,
-                            DAT_TileMapState::ptr)(playerID), iVar5 != 0))
+                            DAT_TileMapState::ptr)(playerID),
+                        iVar5 != 0))
                 && ((_tribeID_defDiggingUnitMax = (int)DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[10],
                     _tribeID_defDiggingUnitMax == 0
                         || ((DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[10]
@@ -125,27 +129,32 @@ namespace AI {
                         }
                         _unitType = *(UnitType*)((int)this + iVar6 + 0x160);
                     } else {
-                        AIRecruitUnitChoiceInt _unitTypeChoice =
-                            DAT_GameState::instance.playerDataArray[_playerID2].aiRecruitUnitChoiceState;
+                        AIRecruitUnitChoiceInt _unitTypeChoice
+                            = DAT_GameState::instance.playerDataArray[_playerID2].aiRecruitUnitChoiceState;
 
                         if (_unitTypeChoice == OpenSHC::AI::AIRUC_DEFENSIVE) {
                             if (7 < DAT_GameState::instance.playerDataArray[_playerID2].aiDefUnitChoiceIndex)
                                 DAT_GameState::instance.playerDataArray[_playerID2].aiDefUnitChoiceIndex = 0;
                             if (*(int*)((int)this
                                     + (DAT_GameState::instance.playerDataArray[_playerID2].aiDefUnitChoiceIndex + iVar4)
-                                        * 4 + 0x184) == 0)
+                                        * 4
+                                    + 0x184)
+                                == 0)
                                 DAT_GameState::instance.playerDataArray[_playerID2].aiDefUnitChoiceIndex = 0;
-                            int _unitChoiceIndex =
-                                DAT_GameState::instance.playerDataArray[_playerID2].aiDefUnitChoiceIndex;
+                            int _unitChoiceIndex
+                                = DAT_GameState::instance.playerDataArray[_playerID2].aiDefUnitChoiceIndex;
                             _unitType = *(UnitType*)((int)this + (iVar4 + _unitChoiceIndex) * 4 + 0x184);
-                            DAT_GameState::instance.playerDataArray[_playerID2].aiDefUnitChoiceIndex =
-                                _unitChoiceIndex + 1;
+                            DAT_GameState::instance.playerDataArray[_playerID2].aiDefUnitChoiceIndex
+                                = _unitChoiceIndex + 1;
                         } else if (_unitTypeChoice == OpenSHC::AI::AIRUC_RAIDING) {
                             if (7 < DAT_GameState::instance.playerDataArray[_playerID2].aiRaidUnitChoiceIndex)
                                 DAT_GameState::instance.playerDataArray[_playerID2].aiRaidUnitChoiceIndex = 0;
                             if (*(int*)((int)this
-                                    + (DAT_GameState::instance.playerDataArray[_playerID2].aiRaidUnitChoiceIndex + iVar4)
-                                        * 4 + 0x1ac) == 0)
+                                    + (DAT_GameState::instance.playerDataArray[_playerID2].aiRaidUnitChoiceIndex
+                                          + iVar4)
+                                        * 4
+                                    + 0x1ac)
+                                == 0)
                                 DAT_GameState::instance.playerDataArray[_playerID2].aiRaidUnitChoiceIndex = 0;
                             iVar5 = DAT_GameState::instance.playerDataArray[_playerID2].aiRaidUnitChoiceIndex;
                             _unitType = *(UnitType*)((int)this + (iVar4 + iVar5) * 4 + 0x1ac);
@@ -153,9 +162,8 @@ namespace AI {
                         } else if (_unitTypeChoice == OpenSHC::AI::AIRUC_ATTACKING) {
                             _pAICState = (AICState*)MACRO_CALL_MEMBER(
                                 OpenSHC::AI::AICState_Func::randomlySelectAttackUnitTypeToRecruit, this)(_playerID2);
-                            _unitType = MACRO_CALL_MEMBER(
-                                OpenSHC::AI::AICState_Func::getUnitTypeForUnitBehaviourType, this)(
-                                _playerID2, (AIUnitBehaviourType)((int)(_pAICState)));
+                            _unitType = MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::getUnitTypeForUnitBehaviourType,
+                                this)(_playerID2, (AIUnitBehaviourType)((int)(_pAICState)));
                         }
                     }
 
@@ -218,7 +226,8 @@ namespace AI {
                                 < *(int*)((int)this + iVar6 + 0x180))
                                 MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::assignUnitToATribe, this)(_unitID);
                             else
-                                MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::addUnitToSmallestPatrolTribe, this)(_unitID);
+                                MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::addUnitToSmallestPatrolTribe, this)(
+                                    _unitID);
                         } else if (AVar2 == OpenSHC::AI::AIRUC_RAIDING) {
                             MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::aiAssignUnitToDefensiveTribe, this)(_unitID);
                         } else if (AVar2 == OpenSHC::AI::AIRUC_ATTACKING) {
