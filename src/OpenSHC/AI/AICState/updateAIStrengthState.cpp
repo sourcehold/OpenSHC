@@ -1,4 +1,5 @@
-#include "OpenSHC/AI/AICState.func.hpp"
+#include "../AICState.func.hpp"
+
 #include "OpenSHC/Random/RNG.func.hpp"
 #include "OpenSHC/AI/AINervousDestroyBuildingCategory.hpp"
 #include "OpenSHC/AI/AINervousDestroyBuildingCategoryInt.hpp"

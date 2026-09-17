@@ -1,4 +1,5 @@
-#include "OpenSHC/AI/AICState.func.hpp"
+#include "../AICState.func.hpp"
+
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
 #include "OpenSHC/AI/AIType.hpp"
@@ -42,7 +43,8 @@ namespace AI {
             }
 
             int _attForceBase = *(int*)((int)this + (_aiType - 1) * 0x2a4 + 0x1f4);
-            int _currentWaveStrength = DAT_GameState::instance.playerDataArray[playerID].currentWaveRandomAttackingStrength;
+            int _currentWaveStrength
+                = DAT_GameState::instance.playerDataArray[playerID].currentWaveRandomAttackingStrength;
             int _totalAttack = DAT_GameState::instance.playerDataArray[playerID].totalAttackTroops
                 - DAT_GameState::instance.playerDataArray[playerID].totalAttackingEngineerTroops;
 
@@ -61,8 +63,8 @@ namespace AI {
 
             do {
                 if (_iPlayer != playerID) {
-                    int _isAlive = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::getAliveLordForPlayer,
-                        DAT_UnitsState::ptr)(_iPlayer);
+                    int _isAlive = MACRO_CALL_MEMBER(
+                        OpenSHC::Map::Units::UnitsState_Func::getAliveLordForPlayer, DAT_UnitsState::ptr)(_iPlayer);
                     if (_isAlive != 0) {
                         BOOLEnum _isAI = MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::isAIPlayer,
                             DAT_GameSynchronyState::ptr)(_iPlayer);
@@ -76,8 +78,7 @@ namespace AI {
                                     >= *(int*)((int)this + (_pPlayerData->aiType - 1) * 0x2a4 + 0x1f4)
                                         + _pPlayerData->currentWaveRandomAttackingStrength) {
                                     _readyTeamMembers = _readyTeamMembers + 1;
-                                }
-                                else {
+                                } else {
                                     _unreadyTeamMembers = _unreadyTeamMembers + 1;
                                 }
                             }
@@ -94,8 +95,8 @@ namespace AI {
             if (_unreadyTeamMembers == 0) {
                 return TRUE;
             }
-            DAT_GameState::instance.playerDataArray[playerID].aiCoordinatedAttackPatience =
-                DAT_GameState::instance.playerDataArray[playerID].aiCoordinatedAttackPatience + 1;
+            DAT_GameState::instance.playerDataArray[playerID].aiCoordinatedAttackPatience
+                = DAT_GameState::instance.playerDataArray[playerID].aiCoordinatedAttackPatience + 1;
             if (DAT_GameState::instance.playerDataArray[playerID].aiCoordinatedAttackPatience <= 0x30
                 || (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_CAMPAIGN_MISSION)) {
                 return FALSE;

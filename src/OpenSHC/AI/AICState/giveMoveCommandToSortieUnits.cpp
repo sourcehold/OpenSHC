@@ -1,4 +1,5 @@
-#include "OpenSHC/AI/AICState.func.hpp"
+#include "../AICState.func.hpp"
+
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/Behavior/UnitStanceEnum.hpp"
@@ -56,18 +57,17 @@ namespace AI {
             && (iVar1 = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
                     DAT_PathFindingState::ptr)(playerID,
-                    (dword)((int)((int)(short)DAT_TileMapState::instance
-                            .PathConnectionLayer[DAT_UnitsState::instance
-                                    .units[DAT_TribesState::instance.tribes[_tribeID].selectionTargetUnitID].tile])),
+                    (dword)((int)((int)(short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance
+                            .units[DAT_TribesState::instance.tribes[_tribeID].selectionTargetUnitID]
+                            .tile])),
                     (dword)((int)((int)(short)DAT_TileMapState::instance
                             .PathConnectionLayer[DAT_UnitsState::instance.units[_unitID].tile])),
                     0),
                 iVar1 != 0)) {
-            MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::unsetRallyRelatedFlagOnUnits,
-                DAT_TribesState::ptr)(_tribeID);
-            MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction,
-                DAT_TribesState::ptr)(_tribeID,
-                (uint)((int)((int)DAT_UnitsState::instance.units[_unitID].x)),
+            MACRO_CALL_MEMBER(
+                OpenSHC::Map::Units::TribesState_Func::unsetRallyRelatedFlagOnUnits, DAT_TribesState::ptr)(_tribeID);
+            MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(
+                _tribeID, (uint)((int)((int)DAT_UnitsState::instance.units[_unitID].x)),
                 (uint)((int)((int)DAT_UnitsState::instance.units[_unitID].y)), 0, 0,
                 OpenSHC::Map::Units::Instructions::UMSE_0);
             DAT_TribesState::instance.tribes[_tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;

@@ -1,4 +1,5 @@
-#include "OpenSHC/AI/AICState.func.hpp"
+#include "../AICState.func.hpp"
+
 #include "OpenSHC/Game/Player/PlayerData.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
