@@ -18,6 +18,9 @@ namespace Common {
         int intValue; // 0x00000000 length: 4
         short shortValue; // 0x00000000 length: 2
         byte byteValue; // 0x00000000 length: 1
+        char charValue; // 0x00000000 length: 1
+        ushort ushortValue; // 0x00000000 length: 2
+        uint uintValue; // 0x00000000 length: 4
 
     } TruncatedInt;
 #pragma pack(pop)

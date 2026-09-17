@@ -25,12 +25,12 @@ namespace Audio {
             &OpenSHC::Audio::SFX::ComputePlayerRanking)
         ComputePlayerRanking;
 
-        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0044B840,
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0044B840,
             &OpenSHC::Audio::SFX::UpdateUnitLossSpeechFeedback)
         UpdateUnitLossSpeechFeedback;
 
-        MACRO_FUNCTION_RESOLVER(int(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0044C400,
-            &OpenSHC::Audio::SFX::ComputeCurrentPlayerRanking)
+        MACRO_FUNCTION_RESOLVER(
+            int(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0044C400, &OpenSHC::Audio::SFX::ComputeCurrentPlayerRanking)
         ComputeCurrentPlayerRanking;
 
     } // namespace SFX_Func

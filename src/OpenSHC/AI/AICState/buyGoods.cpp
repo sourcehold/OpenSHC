@@ -1,3 +1,5 @@
+#include "../AICState.func.hpp"
+
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/AI/AICState.hpp"
@@ -11,15 +13,12 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CC000
     BOOLEnum AICState::buyGoods(int playerID, ResourceType resourceType, int amount)
     {
-        int _cost = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::getBuyPrice, DAT_GameState::ptr)(
+        int const cost = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::getBuyPrice, DAT_GameState::ptr)(
             playerID, resourceType, amount);
-        BOOLEnum _gain = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::processResourceGain,
-            DAT_BuildingsState::ptr)(playerID, resourceType, amount);
-        if (_gain != FALSE) {
-            int* piVar1 = DAT_GameState::instance.playerDataArray[playerID].currentResources + 0xf;
-            *piVar1 = *piVar1 - _cost;
-            piVar1 = &DAT_GameState::instance.playerDataArray[playerID].marketGold;
-            *piVar1 = *piVar1 - _cost;
+        if (MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::processResourceGain, DAT_BuildingsState::ptr)(
+                playerID, resourceType, amount)) {
+            DAT_GameState::instance.playerDataArray[playerID].currentResources[Game::Resources::RT_GOLD] -= cost;
+            DAT_GameState::instance.playerDataArray[playerID].marketGold -= cost;
             MACRO_CALL_MEMBER(Game::GameStateStructures_Func::displayPlayerTradeVisualEffect, DAT_GameState::ptr)(
                 playerID, 0, amount, resourceType);
             return TRUE;

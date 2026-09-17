@@ -1,6 +1,5 @@
 #include "../RNG.func.hpp"
 
-#include "OpenSHC/Global.func.hpp"
 #include "OpenSHC/OS.func.hpp"
 
 namespace OpenSHC {
@@ -9,7 +8,7 @@ namespace Random {
     // FUNCTION: STRONGHOLDCRUSADER 0x0046a760
     void RNG::populateRNG1040()
     {
-        MACRO_CALL(OpenSHC::Global_Func::SetRNGSeed)(this->seed);
+        MACRO_CALL(OS_Func::_srand)(this->seed);
         this->index2 = 0;
         this->index1 = 0;
         for (int i = 0; i < 20000; i++) {

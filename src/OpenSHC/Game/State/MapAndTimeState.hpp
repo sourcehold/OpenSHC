@@ -12,6 +12,7 @@
 #include "OpenSHC/Game/Market/BuySellPair.hpp"
 #include "OpenSHC/Game/Signpost/SignpostLocation.hpp"
 #include "OpenSHC/Game/Skirmish/AttackVector.hpp"
+#include "OpenSHC/Map/Location/Point4ShortXY.hpp"
 #include "OpenSHC/Map/Location/Point8IntXY.hpp"
 #include "OpenSHC/Map/Navigation/Algorithms/XYPair.hpp"
 #include "OpenSHC/Map/Navigation/Algorithms/XYTileObject.hpp"
@@ -27,6 +28,7 @@ namespace Game {
         using OpenSHC::Game::Market::BuySellPair;
         using OpenSHC::Game::Signpost::SignpostLocation;
         using OpenSHC::Game::Skirmish::AttackVector;
+        using OpenSHC::Map::Location::Point4ShortXY;
         using OpenSHC::Map::Location::Point8IntXY;
         using OpenSHC::Map::Navigation::Algorithms::XYPair;
         using OpenSHC::Map::Navigation::Algorithms::XYTileObject;
@@ -128,7 +130,7 @@ namespace Game {
             int unknownResourceFlagArray2[25]; // 0x00000974 length: 100
             int isResourceTradeable[25]; // 0x000009D8 length: 100
             int deerCount; // 0x00000A3C length: 4
-            short deerSpawnLocationsXY[4][2]; // 0x00000A40 length: 16
+            Point4ShortXY deerSpawnLocationsXY[4]; // 0x00000A40 length: 16
             int countUpTo201; // 0x00000A50 length: 4
             undefined1 padding_0xa54[800]; // 0x00000A54 length: 800
             BOOLEnum gameOver; // 0x00000D74 length: 4
@@ -151,7 +153,7 @@ namespace Game {
             short editScenarioExtraOptions; // 0x00000DEA length: 2
             short eventCountdownRabbitInfestation; // 0x00000DEC length: 2
             short field2269_0xdee; // 0x00000DEE length: 2
-            short field2270_0xdf0[4][2]; // 0x00000DF0 length: 16
+            Point4ShortXY lionLocationsXY[4]; // 0x00000DF0 length: 16
             short unitLadyRelated; // 0x00000E00 length: 2
             short unitJesterRelated; // 0x00000E02 length: 2
             short playerPopulationStatistics[9][300]; // 0x00000E04 length: 5400
@@ -235,7 +237,7 @@ namespace Game {
             int field3166_0x277c; // 0x0000277C length: 4
             short rabbitSpawnXY[4][2]; // 0x00002780 length: 16
             int field3168_0x2790; // 0x00002790 length: 4
-            short camelSpawnXY[4][2]; // 0x00002794 length: 16
+            Point4ShortXY camelSpawnXY[4]; // 0x00002794 length: 16
             int field3170_0x27a4; // 0x000027A4 length: 4
             int field3171_0x27a8; // 0x000027A8 length: 4
             int field3172_0x27ac; // 0x000027AC length: 4

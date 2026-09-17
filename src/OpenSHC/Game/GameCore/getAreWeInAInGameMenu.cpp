@@ -1,4 +1,4 @@
-#include "..\GameCore.func.hpp"
+#include "../GameCore.func.hpp"
 
 namespace OpenSHC {
 namespace Game {

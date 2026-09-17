@@ -23,7 +23,7 @@ namespace Synchrony {
         int field4_0x4[12][2]; // 0x00000004 length: 96
         int field5_0x64[39][3]; // 0x00000064 length: 468
         undefined1 padding_0x238[8]; // 0x00000238 length: 8
-        char** field14_0x240[21]; // 0x00000240 length: 84
+        char** commandFunctions[21]; // 0x00000240 length: 84
         NoArgCallback* handleFunctions; // 0x00000294 length: 4
         NoArgCallback* field16_0x298; // 0x00000298 length: 4
         NoArgCallback* field17_0x29c; // 0x0000029C length: 4
@@ -145,7 +145,7 @@ namespace Synchrony {
         NoArgCallback* field133_0x46c; // 0x0000046C length: 4
         NoArgCallback* field134_0x470; // 0x00000470 length: 4
         int field135_0x474[32]; // 0x00000474 length: 128
-        char** field136_0x4f4; // 0x000004F4 length: 4
+        char* field136_0x4f4; // 0x000004F4 length: 4
 
     } ProtocolDefinedData;
 #pragma pack(pop)

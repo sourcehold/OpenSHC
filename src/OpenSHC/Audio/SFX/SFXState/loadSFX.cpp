@@ -12,11 +12,11 @@ namespace Audio {
         {
             if (!DAT_TextureRenderCoreObject::instance.unknownSfxAndGmRelatedFlag) {
                 MACRO_CALL_MEMBER(SFXState_Func::loadWavSounds, this)(
-                    (char*)DAT_SpeechDefinedData::instance.SFX_WavFileGroups[0]);
+                    (char*)DAT_SpeechDefinedData::instance.WavFileGroups[0]);
                 MACRO_CALL_MEMBER(SFXState_Func::readVolumeFileAndSetupSoundVolumes, this)();
             } else {
                 MACRO_CALL_MEMBER(SFXState_Func::loadWavSounds, this)(
-                    (char*)(DAT_SpeechDefinedData::instance.SFX_WavFileGroups[1]));
+                    (char*)(DAT_SpeechDefinedData::instance.WavFileGroups[1]));
                 MACRO_CALL_MEMBER(SFXState_Func::readVolumeFileAndSetupSoundVolumes, this)();
             }
         }

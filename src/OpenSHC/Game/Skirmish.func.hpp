@@ -16,7 +16,7 @@ namespace Game {
 
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-        MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00429710,
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00429710,
             &OpenSHC::Game::Skirmish::SetupSkirmishBalanceAndOrIntensity)
         SetupSkirmishBalanceAndOrIntensity;
 
@@ -29,7 +29,7 @@ namespace Game {
         SetupSkirmishMode;
 
         MACRO_FUNCTION_RESOLVER(
-            int(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x004C6CD0, &OpenSHC::Game::Skirmish::StoreLocalTime)
+            int(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004C6CD0, &OpenSHC::Game::Skirmish::StoreLocalTime)
         StoreLocalTime;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum(__cdecl*)(int score), false, Address::SHC_3BB0A8C1_0x004D1700,

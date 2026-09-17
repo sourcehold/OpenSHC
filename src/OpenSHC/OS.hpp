@@ -19,7 +19,6 @@
 #include "sys/stat.h"
 #include "time.h"
 #include "vadefs.h"
-#include "winnt.h"
 namespace OpenSHC {
 namespace OS {
 
@@ -62,11 +61,17 @@ namespace OS {
 
     wint_t __cdecl _fgetwc(FILE* _File);
 
+    int __cdecl _fwprintf(FILE* param_1, WCHAR_CONST* param_2, ...);
+
     size_t __cdecl _fwrite(void* _Str, size_t _Size, size_t _Count, FILE* _File);
 
     wchar_t* __cdecl _wcsncpy(wchar_t* _Dest, wchar_t* _Source, size_t _Count);
 
     int __cdecl __wcsicmp(wchar_t* _Str1, wchar_t* _Str2);
+
+    long __cdecl __wtol(WCHAR_CONST* wideStr);
+
+    long __cdecl __wtol(WCHAR_CONST* wideStr);
 
     void __cdecl _free(void* _Memory);
 
@@ -80,6 +85,8 @@ namespace OS {
 
     int __cdecl _ucrt_open(char* _Filename, int _OpenFlag, int _PMode);
 
+    void __cdecl _srand(ulong param_1);
+
     int __cdecl _rand();
 
     char* __cdecl __strlwr(char* string);
@@ -90,11 +97,11 @@ namespace OS {
 
     int __cdecl __toupper(int _C);
 
-    int __cdecl _tell(HANDLE hFile);
+    int __cdecl _ucrt_tell(int handle);
 
     int __cdecl _ucrt_lseek(int fileDescriptor, long lDistanceToMove, DWORD moveMethod);
 
-    int __cdecl __strnicmp(char* _Str1, char* _Str2, size_t _MaxCount);
+    int __cdecl __strnicmp(char const* _Str1, char const* _Str2, size_t _MaxCount);
 
     void __cdecl _exit(int _Code);
 

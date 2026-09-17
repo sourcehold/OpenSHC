@@ -18,9 +18,9 @@ namespace Audio {
 
         int __cdecl ComputePlayerRanking(int playerID);
 
-        void __stdcall UpdateUnitLossSpeechFeedback();
+        void __cdecl UpdateUnitLossSpeechFeedback();
 
-        int __stdcall ComputeCurrentPlayerRanking();
+        int __cdecl ComputeCurrentPlayerRanking();
 
     } // namespace SFX
 } // namespace Audio

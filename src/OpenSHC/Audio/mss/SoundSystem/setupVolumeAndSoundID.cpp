@@ -33,7 +33,7 @@ namespace Audio {
             }
             this->currentSoundID_0x3278 = soundIDInt;
             int const fileVolume = MACRO_CALL_MEMBER(SFX::SFXState_Func::getSoundVolumeForFilename, DAT_SFXState::ptr)(
-                DAT_SFXDefinedData::ptr->DAT_SFX_Pointers[soundIDInt].musicFile);
+                DAT_SFXDefinedData::ptr->Pointers[soundIDInt].musicFile);
             // 0x7f is the maximum volume of the MSS32 volume API.
             this->currentSoundIDVolumeUnk_0x327c = (fileVolume * 100) / 0x7f;
             this->mbr_0x3280 = 0;

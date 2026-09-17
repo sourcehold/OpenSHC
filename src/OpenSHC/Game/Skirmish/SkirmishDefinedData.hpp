@@ -66,7 +66,7 @@ namespace Game {
             int field25_0x3a44[6]; // 0x00003A44 length: 24
             AIUnitBehaviourRequiredMapEntry attackUnitRequired[11]; // 0x00003A5C length: 88
             UnitTypeInt SomeAIUnitTypeArray[20]; // 0x00003AB4 length: 80
-            int AITribeIDOffsetForUnitType[20]; // 0x00003B04 length: 80
+            int AITribeIDOffsetForAIVUnitType[20]; // 0x00003B04 length: 80
             EngineerSiegeEngineMapping SiegeEngineMetaInfoArray[4]; // 0x00003B54 length: 64
             UnitTypeInt DefenseTribesUnitTypeArray[20]; // 0x00003B94 length: 80
             AIVUnitTypeMaxLocationPair MaxAIVLocationForRangedUnits[6]; // 0x00003BE4 length: 48

@@ -18,10 +18,10 @@ namespace Audio {
             }
 
             MACRO_CALL_MEMBER(Rendering::Bink::BinkControlClass_Func::stopAllBinkPlayback, DAT_BinkControlState::ptr)();
-            if (DAT_SFXDefinedData::ptr->SND_SomeTimerIdentifier != UINT_MAX) {
-                timeKillEvent(DAT_SFXDefinedData::ptr->SND_SomeTimerIdentifier);
+            if (DAT_SFXDefinedData::ptr->SomeTimerIdentifier != UINT_MAX) {
+                timeKillEvent(DAT_SFXDefinedData::ptr->SomeTimerIdentifier);
                 timeEndPeriod(DAT_SoundEffectsHelperData1::ptr->SND_SomeTimerResolution);
-                DAT_SFXDefinedData::ptr->SND_SomeTimerIdentifier = UINT_MAX;
+                DAT_SFXDefinedData::ptr->SomeTimerIdentifier = UINT_MAX;
             }
             for (int i = 0; i < 5; ++i) {
                 this->streamFlagsUnkAndLoopCount_0x34[i] = 0;

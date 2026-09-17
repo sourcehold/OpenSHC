@@ -20,7 +20,7 @@ namespace Map {
             &MapPropertiesState::importTradingCosts)
         importTradingCosts;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004B7890,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004B7890,
             &MapPropertiesState::mapHasCertainEvent)
         mapHasCertainEvent;
 
@@ -80,7 +80,7 @@ namespace Map {
             &MapPropertiesState::openEventTriggerMenu)
         openEventTriggerMenu;
 
-        MACRO_FUNCTION_RESOLVER(void (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004BBA20,
+        MACRO_FUNCTION_RESOLVER(int (MapPropertiesState::*)(), false, Address::SHC_3BB0A8C1_0x004BBA20,
             &MapPropertiesState::sumInvasionEventUnitCount)
         sumInvasionEventUnitCount;
 

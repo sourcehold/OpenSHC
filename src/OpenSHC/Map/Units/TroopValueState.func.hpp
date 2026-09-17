@@ -41,7 +41,7 @@ namespace Map {
                 &TroopValueState::searchTribeWithProperties)
             searchTribeWithProperties;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x00518350,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x00518350,
                 &TroopValueState::isAttackWaveComplete)
             isAttackWaveComplete;
 
@@ -185,7 +185,7 @@ namespace Map {
                 &TroopValueState::attackInfoHasHigh2Building)
             attackInfoHasHigh2Building;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051ACB0,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051ACB0,
                 &TroopValueState::attackInfoHasArch2Building)
             attackInfoHasArch2Building;
 
@@ -262,7 +262,7 @@ namespace Map {
                 &TroopValueState::placeTunnelForEveryTunneler)
             placeTunnelForEveryTunneler;
 
-            MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(undefined4, int, AITribeType, undefined4), false,
+            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(undefined4, int, AITribeType, undefined4), false,
                 Address::SHC_3BB0A8C1_0x0051BC70, &TroopValueState::addUnitToNewTribe)
             addUnitToNewTribe;
 

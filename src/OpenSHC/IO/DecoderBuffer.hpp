@@ -8,9 +8,12 @@
 
 #pragma once
 
+#include "OpenSHC/IO/Helpers/BufferHelper.hpp"
 namespace OpenSHC {
 namespace IO {
     namespace DecoderBuffer {
+
+        using OpenSHC::IO::Helpers::BufferHelper;
 
         uint __cdecl ReadBufferAndComputeHash(char* buf, uint* size, void* param);
 

@@ -15,13 +15,13 @@ namespace Game {
 
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-        void __stdcall SetupSkirmishBalanceAndOrIntensity();
+        void __cdecl SetupSkirmishBalanceAndOrIntensity();
 
         void __cdecl RecalculateAllies();
 
         void __cdecl SetupSkirmishMode(int skirmishTrailMission);
 
-        int __stdcall StoreLocalTime();
+        int __cdecl StoreLocalTime();
 
         BOOLEnum __cdecl StoreCurrentGameIntoTemporarySKMasterEntry(int score);
 

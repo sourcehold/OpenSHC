@@ -45,7 +45,7 @@ namespace UI {
 
             void prepareButtonAndAlphaSurface();
 
-            bool isMouseOnButtonImageUnk();
+            BOOLEnum isMouseOnButtonImageUnk();
 
             void ProcessBuildingClickBonus(int buildingIndex);
 

@@ -19,13 +19,13 @@ namespace Global {
 
     void __cdecl PrintToDestination(wchar_t* destination, wchar_t* format, ...);
 
-    void __stdcall DoNothing();
+    void __cdecl DoNothing();
 
     char* __cdecl GetStringBasedOnHardcodedMaps(char* mapName, int* hardcodedMapDescriptionGroupNum);
 
-    DirectDrawStatus __stdcall DetectDXVersionByLoadingDDRAW();
+    DirectDrawStatus __cdecl DetectDXVersionByLoadingDDRAW();
 
-    byte __stdcall TestOSVersion();
+    byte __cdecl TestOSVersion();
 
     LRESULT __stdcall WindowMsgProcessingFunc(HWND windowHandle, UINT message, WPARAM wParam, LPARAM lParam);
 

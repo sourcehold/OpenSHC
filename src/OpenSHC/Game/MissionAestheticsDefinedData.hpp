@@ -1245,7 +1245,7 @@ namespace Game {
         int unknown3[914]; // 0x00001344 length: 3656
         int field1224_0x218c[6]; // 0x0000218C length: 24
         int field1225_0x21a4[4]; // 0x000021A4 length: 16
-        int DAT_DifficultyEventMultipliers[4]; // 0x000021B4 length: 16
+        int DifficultyEventMultipliers[4]; // 0x000021B4 length: 16
         int field1227_0x21c4[40]; // 0x000021C4 length: 160
         int field1228_0x2264[40]; // 0x00002264 length: 160
         int field1229_0x2304[40]; // 0x00002304 length: 160
@@ -1259,10 +1259,10 @@ namespace Game {
         int field1237_0x345c[22]; // 0x0000345C length: 88
         int field1238_0x34b4[40]; // 0x000034B4 length: 160
         int field1239_0x3554[30]; // 0x00003554 length: 120
-        int DAT_InvasionUnitLimits[24]; // 0x000035CC length: 96
+        int InvasionUnitLimits[24]; // 0x000035CC length: 96
         int field1241_0x362c[10]; // 0x0000362C length: 40
-        BuildingNameRelatedStruct DAT_BuildingNameRelatedStructArray[67]; // 0x00003654 length: 2680
-        int ARRAY_BuildingAvailabilityStructIndexForName[69]; // 0x000040CC length: 276
+        BuildingNameRelatedStruct BuildingNameRelatedStructArray[67]; // 0x00003654 length: 2680
+        int BuildingAvailabilityStructIndexForNameArray[69]; // 0x000040CC length: 276
         undefined1 padding_0x41e0[4]; // 0x000041E0 length: 4
         char field1248_0x41e4[46][3][32]; // 0x000041E4 length: 4416
         int field1249_0x5324[40]; // 0x00005324 length: 160

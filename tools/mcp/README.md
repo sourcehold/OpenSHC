@@ -8,4 +8,4 @@ In Ghidra, add the `ghidra_scripts` directory as a directory in the Script Manag
 
 ## Claude specific setup
 
-Copy the file `claude_desktop_configuration.json` to your Claude directory (`%APPDATA%\Claude`) and adapt it such that it points to this mcp directory containing `decomphelper.py` on your file system. Restart Claude completely.
+Copy the file `claude_desktop_configuration.json` to your Claude directory (`%APPDATA%\Claude`) and adapt it such that it points to this mcp directory containing `openshcmcp.py` on your file system. Restart Claude completely.

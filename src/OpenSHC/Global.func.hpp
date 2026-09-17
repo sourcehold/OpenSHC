@@ -22,19 +22,18 @@ namespace Global_Func {
         Address::SHC_3BB0A8C1_0x0045D060, &OpenSHC::Global::PrintToDestination)
     PrintToDestination;
 
-    MACRO_FUNCTION_RESOLVER(void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00469F10, &OpenSHC::Global::DoNothing)
+    MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00469F10, &OpenSHC::Global::DoNothing)
     DoNothing;
 
     MACRO_FUNCTION_RESOLVER(char*(__cdecl*)(char* mapName, int* hardcodedMapDescriptionGroupNum), false,
         Address::SHC_3BB0A8C1_0x0046D390, &OpenSHC::Global::GetStringBasedOnHardcodedMaps)
     GetStringBasedOnHardcodedMaps;
 
-    MACRO_FUNCTION_RESOLVER(DirectDrawStatus(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0046F4F0,
+    MACRO_FUNCTION_RESOLVER(DirectDrawStatus(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0046F4F0,
         &OpenSHC::Global::DetectDXVersionByLoadingDDRAW)
     DetectDXVersionByLoadingDDRAW;
 
-    MACRO_FUNCTION_RESOLVER(
-        byte(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0046F570, &OpenSHC::Global::TestOSVersion)
+    MACRO_FUNCTION_RESOLVER(byte(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0046F570, &OpenSHC::Global::TestOSVersion)
     TestOSVersion;
 
     MACRO_FUNCTION_RESOLVER(LRESULT(__stdcall*)(HWND windowHandle, UINT message, WPARAM wParam, LPARAM lParam), false,

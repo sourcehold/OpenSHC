@@ -118,10 +118,8 @@ namespace Map {
             BT_DANCINGBEAR = 103, // 0x00000067
             BT_POND = 104, // 0x00000068
             BT_BEARCAVE = 105, // 0x00000069
-            BT_OUTPOST = 106, // 0x0000006A
-            BT_OUTPOST_ARABIAN = 107, // 0x0000006B
-            BuildingTypeShort__BT_EUROPEAN_OUTPOST = 106, // 0x0000006A
-            BuildingTypeShort__BT_ARABIAN_OUTPOST = 107 // 0x0000006B
+            BT_OUTPOST_EUROPEAN = 106, // 0x0000006A
+            BT_OUTPOST_ARABIAN = 107 // 0x0000006B
 
         } BuildingType;
 

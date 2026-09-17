@@ -17,11 +17,11 @@ namespace UI {
             &OpenSHC::UI::GreatestLord::GetPlayerAtRank)
         GetPlayerAtRank;
 
-        MACRO_FUNCTION_RESOLVER(int(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0044B7D0,
+        MACRO_FUNCTION_RESOLVER(int(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0044B7D0,
             &OpenSHC::UI::GreatestLord::IfAiGreatestLordGetAiType)
         IfAiGreatestLordGetAiType;
 
-        MACRO_FUNCTION_RESOLVER(int(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x0044B800,
+        MACRO_FUNCTION_RESOLVER(int(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0044B800,
             &OpenSHC::UI::GreatestLord::GetLowestRankedAlivePlayer)
         GetLowestRankedAlivePlayer;
 

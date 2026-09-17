@@ -8,6 +8,9 @@
 
 #pragma once
 
+#include "OpenSHC/Text/Enums/HelpTextToken.hpp"
+#include "OpenSHC/Text/ImageHotspot.hpp"
+#include "OpenSHC/UI/Enums/MenuViewTypeInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "mbstring.h"
@@ -16,6 +19,9 @@
 namespace OpenSHC {
 namespace Text {
 
+    using OpenSHC::Text::ImageHotspot;
+    using OpenSHC::Text::Enums::HelpTextToken;
+    using OpenSHC::UI::Enums::MenuViewTypeInt;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
@@ -23,32 +29,32 @@ namespace Text {
     // SIZE: 0x00023974
     class TextEditorState {
     public:
-        pointer DAT_PointerToTemporaryTextMemory; // 0x00000000 length: 4
-        undefined4 customHelpTextLength; // 0x00000004 length: 4
+        LPWSTR DAT_PointerToTemporaryTextMemory; // 0x00000000 length: 4
+        int customHelpTextLength; // 0x00000004 length: 4
         undefined4 isDialogStateInitialized; // 0x00000008 length: 4
         undefined4 helpDialogVariant; // 0x0000000C length: 4
         undefined4 useInGameHelpHandler; // 0x00000010 length: 4
-        undefined4 savedMenuViewType; // 0x00000014 length: 4
+        MenuViewTypeInt savedMenuViewType; // 0x00000014 length: 4
         undefined4 savedActiveMenuTab; // 0x00000018 length: 4
         undefined4 savedMenuFlag; // 0x0000001C length: 4
         BOOLEnum pendingCreditsFadeBorder; // 0x00000020 length: 4
         BOOLEnum helpSectionParseSucceeded; // 0x00000024 length: 4
-        undefined4 currentHelpSectionID; // 0x00000028 length: 4
-        undefined4 helpSectionHistoryStack[30]; // 0x0000002C length: 120
-        undefined4 counter; // 0x000000A4 length: 4
+        int currentHelpSectionID; // 0x00000028 length: 4
+        int helpSectionHistoryStack[30]; // 0x0000002C length: 120
+        int counter; // 0x000000A4 length: 4
         undefined4 helpContentScrollOffsetY; // 0x000000A8 length: 4
         undefined4 topVisibleLineIndex; // 0x000000AC length: 4
-        undefined4 dialogX; // 0x000000B0 length: 4
-        undefined4 dialogY; // 0x000000B4 length: 4
-        undefined4 dialogWidth; // 0x000000B8 length: 4
-        undefined4 dialogHeight; // 0x000000BC length: 4
-        undefined4 dialogContentX; // 0x000000C0 length: 4
-        undefined4 dialogContentY; // 0x000000C4 length: 4
-        undefined4 dialogContentHeight; // 0x000000C8 length: 4
-        undefined4 dialogContentWidth; // 0x000000CC length: 4
+        int dialogX; // 0x000000B0 length: 4
+        int dialogY; // 0x000000B4 length: 4
+        int dialogWidth; // 0x000000B8 length: 4
+        int dialogHeight; // 0x000000BC length: 4
+        int dialogContentX; // 0x000000C0 length: 4
+        int dialogContentY; // 0x000000C4 length: 4
+        int dialogContentWidth; // 0x000000C8 length: 4
+        int dialogContentHeight; // 0x000000CC length: 4
         undefined4 helpContentScrollX; // 0x000000D0 length: 4
         undefined4 helpContentScrollY; // 0x000000D4 length: 4
-        undefined4 activeHelpHotspotIndex; // 0x000000D8 length: 4
+        int activeHelpHotspotIndex; // 0x000000D8 length: 4
         undefined4 helpDialogSubMode; // 0x000000DC length: 4
         undefined4 useAlternateHelpTab; // 0x000000E0 length: 4
         undefined4 isCustomTextMode; // 0x000000E4 length: 4
@@ -58,17 +64,22 @@ namespace Text {
         char* customHelpTextPointer; // 0x000000F4 length: 4
         undefined4 isCustomHelpTextWide; // 0x000000F8 length: 4
         undefined4 customHelpTextBufferSize; // 0x000000FC length: 4
-        undefined4 customTextMaxLength; // 0x00000100 length: 4
+        int customTextMaxLength; // 0x00000100 length: 4
         char soundFileNames[5][1000]; // 0x00000104 length: 5000
         byte soundFilePlayedFlags[5]; // 0x0000148C length: 5
         undefined1 padding_0x1491[3]; // 0x00001491 length: 3
-        undefined4 soundFileCount; // 0x00001494 length: 4
+        int soundFileCount; // 0x00001494 length: 4
         char graphicFileNames[20][1000]; // 0x00001498 length: 20000
-        undefined4 graphicFileCount; // 0x000062B8 length: 4
+        int graphicFileCount; // 0x000062B8 length: 4
         short lineLayoutTable[60000]; // 0x000062BC length: 120000
         int imageHotspotCount; // 0x0002377C length: 4
-        short imageHotspotTable[50][4]; // 0x00023780 length: 400
-        int intArray1[25]; // 0x00023910 length: 100
+        ImageHotspot imageHotspotTable[50]; // 0x00023780 length: 400
+        wchar_t* intArray1[20]; // 0x00023910 length: 80
+        int field48_0x23960; // 0x00023960 length: 4
+        int field49_0x23964; // 0x00023964 length: 4
+        int field50_0x23968; // 0x00023968 length: 4
+        int field51_0x2396c; // 0x0002396C length: 4
+        int field52_0x23970; // 0x00023970 length: 4
 
     private:
         TextEditorState(TextEditorState const&);
@@ -81,7 +92,7 @@ namespace Text {
         // Constructor
         TextEditorState* Constructor_TextEditorState();
 
-        void setHelpWindowBounds(undefined4 param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4);
+        void setHelpWindowBounds(undefined4 x, undefined4 y, undefined4 height, undefined4 width);
 
         void resetHelpStateFields();
 
@@ -89,17 +100,17 @@ namespace Text {
 
         int findOrAddHelpSectionName(char* param_1);
 
-        uint parseHLPPart(FILE* filePointer);
+        LPWSTR parseHLPPart(FILE* filePointer);
 
         void loadHelpSectionGraphics();
 
-        undefined* getWideCharPointer(int* param_1);
+        uint getWideCharOrWideCharPointer(int* param_1);
 
         void renderHelpImageHotspots();
 
         void bltTextToScreenIfNeedBe();
 
-        void drawBorderStyle0x20(int param_1, int param_2, int param_3, int param_4);
+        void drawBorderStyle0x20(int x, int y, int width, int height);
 
         void drawHelpWindowBackground();
 
@@ -123,15 +134,15 @@ namespace Text {
 
         void saveHelpFileToResource();
 
-        undefined4 getHelpTokenAdvanceLength(undefined4 param_1);
+        int helpToken_getHelpTokenAdvanceLength(HelpTextToken token);
 
-        void insertHelpTextToken(undefined4 param_1);
+        void helpToken_insertSpaceForHelpTextToken(HelpTextToken token);
 
         void closeHelpDialogAndReturnToMenu();
 
-        int readCrusaderHelpHlp(LPCSTR param_1);
+        FILE* readCrusaderHelpHlp(LPCSTR searchedPart);
 
-        undefined4 loadAndParseHelpFile(FILE* param_1);
+        BOOLEnum loadAndParseHelpFile(char const* searchedPart);
 
         void parseHlp();
 

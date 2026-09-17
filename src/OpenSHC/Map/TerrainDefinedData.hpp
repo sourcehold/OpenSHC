@@ -39,7 +39,7 @@ namespace Map {
         int field61_0x138; // 0x00000138 length: 4
         XYPair BuildingPartsOffsets[4][3]; // 0x0000013C length: 96
         XYPair field63_0x19c[4]; // 0x0000019C length: 32
-        XYPair DAT_Stockpile_BuildingPartsOffsets[4]; // 0x000001BC length: 32
+        XYPair Stockpile_BuildingPartsOffsets[4]; // 0x000001BC length: 32
         XYPair StockpilePathableOffsets[9]; // 0x000001DC length: 72
         undefined1 padding_0x224[64]; // 0x00000224 length: 64
         XYPair field130_0x264[3][12]; // 0x00000264 length: 288
@@ -78,9 +78,9 @@ namespace Map {
         byte field2296_0x1d54[4][2]; // 0x00001D54 length: 8
         byte field2297_0x1d5c[4][2]; // 0x00001D5C length: 8
         UnkBytePair field2298_0x1d64[8]; // 0x00001D64 length: 16
-        int DAT_MapSizes[5]; // 0x00001D74 length: 20
+        int MapSizes[5]; // 0x00001D74 length: 20
         undefined1 padding_0x1d88[164]; // 0x00001D88 length: 164
-        int DAT_SomeOrientationOrderArray[8]; // 0x00001E2C length: 32
+        int SomeOrientationOrderArray[8]; // 0x00001E2C length: 32
         int field2465_0x1e4c[32]; // 0x00001E4C length: 128
         XYPair drawBridgeOffsets[4][9]; // 0x00001ECC length: 288
         int field2467_0x1fec[4][25]; // 0x00001FEC length: 400

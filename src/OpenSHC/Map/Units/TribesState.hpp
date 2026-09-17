@@ -19,6 +19,8 @@
 #include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
+#include "WinDef.h"
+
 namespace OpenSHC {
 namespace Map {
     namespace Units {
@@ -56,7 +58,8 @@ namespace Map {
             int tribeCopiedToSlot0; // 0x000FB3BC length: 4
             int unknownX_01; // 0x000FB3C0 length: 4
             int unknownY_01; // 0x000FB3C4 length: 4
-            undefined1 padding_0xfb3c8[8]; // 0x000FB3C8 length: 8
+            DWORD constructorTime; // 0x000FB3C8 length: 4
+            undefined1 padding_0xfb3cc[4]; // 0x000FB3CC length: 4
 
         private:
             TribesState(TribesState const&);
@@ -67,10 +70,10 @@ namespace Map {
             ~TribesState() {};
 
             // Constructor
-            TribesState* constructTribesState();
+            TribesState* Constructor_TribesState();
 
             void giveUnitSelectionMoveInstructionNoMatchedSpeed(
-                undefined4 tribeID, undefined4 x, undefined4 y, undefined4 rallyBool, undefined4 doRally);
+                int tribeID, uint x, uint y, int rallyBool, int doRally);
 
             void clearAllTribes();
 
@@ -104,7 +107,7 @@ namespace Map {
 
             void updatePeasantSeatingAtBuilding(int param_1, int param_2, int param_3);
 
-            uint tribeCorrespondsWithUID(int tribeID, uint tribeUID);
+            BOOLEnum tribeCorrespondsWithUID(int tribeID, uint tribeUID);
 
             int getUnitIDForIndexInTribe(int tribeID, int unitSelectionIndex);
 
@@ -112,11 +115,11 @@ namespace Map {
 
             int setWhetherTribeContainsAnyUnits(int tribeID);
 
-            void addUnitToSelected(uint unitID);
+            void addUnitToSelected(int unitID);
 
             BOOLEnum unitIsSelectedByPlayer(uint tribeID);
 
-            int addUnitToTribe(uint unitID, int tribeID);
+            void addUnitToTribe(uint unitID, int tribeID);
 
             void removeUnitFromThisTribeIfInTribe(uint unitID, int tribeID);
 

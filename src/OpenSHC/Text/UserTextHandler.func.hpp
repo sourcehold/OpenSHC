@@ -11,15 +11,15 @@ namespace Text {
             void (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x004694A0, &UserTextHandler::FUN_004694a0)
         FUN_004694a0;
 
-        MACRO_FUNCTION_RESOLVER(void (UserTextHandler::*)(undefined4), false, Address::SHC_3BB0A8C1_0x00469790,
-            &UserTextHandler::resetToTextIndex)
+        MACRO_FUNCTION_RESOLVER(
+            void (UserTextHandler::*)(int), false, Address::SHC_3BB0A8C1_0x00469790, &UserTextHandler::resetToTextIndex)
         resetToTextIndex;
 
         MACRO_FUNCTION_RESOLVER(
             char* (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x004697C0, &UserTextHandler::getCurrentText)
         getCurrentText;
 
-        MACRO_FUNCTION_RESOLVER(int (UserTextHandler::*)(int), false, Address::SHC_3BB0A8C1_0x004697E0,
+        MACRO_FUNCTION_RESOLVER(char* (UserTextHandler::*)(int), false, Address::SHC_3BB0A8C1_0x004697E0,
             &UserTextHandler::getTextArrayPointer)
         getTextArrayPointer;
 

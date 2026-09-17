@@ -13,7 +13,7 @@ namespace Audio {
         // FUNCTION: STRONGHOLDCRUSADER 0x0044A6E0
         void SFXState::playSFXWeAreUnderAttack()
         {
-            if (DAT_GameSynchronyState::instance.DAT_CurrentGameMode == Game::GM_SOLITARY) {
+            if (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY) {
                 return;
             }
             if (60000 <= timeGetTime() - DAT_SFX_Cooldown_WeAreUnderAttack::instance) {

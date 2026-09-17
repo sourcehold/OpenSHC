@@ -1,7 +1,6 @@
 #include "../SFXState.func.hpp"
 
 #include "OpenSHC/Audio/MSS/SoundSystem.func.hpp"
-#include "OpenSHC/Global.func.hpp"
 
 #include "OpenSHC/Globals/BOOLEnum_00b9870c.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -14,8 +13,8 @@ namespace Audio {
         // FUNCTION: STRONGHOLDCRUSADER 0x0044C740
         void SFXState::soundRelatedMethod1()
         {
-            if (DAT_GameSynchronyState::instance.DAT_CurrentGameMode != Game::GM_SOLITARY) {
-                MACRO_CALL(Global_Func::PlaySFXVoices)();
+            if (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY) {
+                MACRO_CALL_MEMBER(SFXState_Func::playSFXVoices, this)();
             }
             MACRO_CALL_MEMBER(
                 Audio::MSS::SoundSystem_Func::restoreMusicVolumeAfterSpeechEnds, DAT_SoundSystemState::ptr)();

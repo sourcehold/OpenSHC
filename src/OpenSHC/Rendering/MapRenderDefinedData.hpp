@@ -20,7 +20,7 @@ namespace Rendering {
     typedef struct MapRenderDefinedData {
 
         undefined1 padding_0x0[4]; // 0x00000000 length: 4
-        int DAT_BuildingRenderSomeTypeArray[110]; // 0x00000004 length: 440
+        int BuildingRenderSomeTypeArray[110]; // 0x00000004 length: 440
         int field5_0x1bc; // 0x000001BC length: 4
         int field6_0x1c0; // 0x000001C0 length: 4
         int field7_0x1c4; // 0x000001C4 length: 4
@@ -230,7 +230,7 @@ namespace Rendering {
         int field618_0xc24[16][16]; // 0x00000C24 length: 1024
         int field619_0x1024[16][16]; // 0x00001024 length: 1024
         int field620_0x1424[16][16]; // 0x00001424 length: 1024
-        XYPair DAT_BuildingPreviewPositionRelatedOffsets[110][2]; // 0x00001824 length: 1760
+        XYPair BuildingPreviewPositionRelatedOffsets[110][2]; // 0x00001824 length: 1760
 
     } MapRenderDefinedData;
 #pragma pack(pop)

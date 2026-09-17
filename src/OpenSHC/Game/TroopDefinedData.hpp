@@ -20,18 +20,18 @@ namespace Game {
     typedef struct TroopDefinedData {
 
         undefined1 padding_0x0[4]; // 0x00000000 length: 4
-        int DAT_PeasantSpawnClockIncrementSolitaryPopLessThan101[21]; // 0x00000004 length: 84
+        int PeasantSpawnClockIncrementSolitaryPopLessThan101[21]; // 0x00000004 length: 84
         undefined1 padding_0x58[4]; // 0x00000058 length: 4
-        int DAT_PeasantSpawnClockIncrementSolitaryPopMoreThan100[21]; // 0x0000005C length: 84
+        int PeasantSpawnClockIncrementSolitaryPopMoreThan100[21]; // 0x0000005C length: 84
         undefined1 padding_0xb0[4]; // 0x000000B0 length: 4
-        int DAT_PeasantSpawnClockIncrementSkirmish[21]; // 0x000000B4 length: 84
+        int PeasantSpawnClockIncrementSkirmish[21]; // 0x000000B4 length: 84
         undefined1 padding_0x108[264]; // 0x00000108 length: 264
         int field279_0x210[38]; // 0x00000210 length: 152
         int field280_0x2a8; // 0x000002A8 length: 4
         ResourceTypeInt MarketResourceCycleArray[21]; // 0x000002AC length: 84
-        uint DAT_BarracksUnitCost[7]; // 0x00000300 length: 28
+        uint BarracksUnitCost[7]; // 0x00000300 length: 28
         undefined1 padding_0x31c[12]; // 0x0000031C length: 12
-        int DAT_NonEuroUnitCost[11]; // 0x00000328 length: 44
+        int NonEuroUnitCost[11]; // 0x00000328 length: 44
 
     } TroopDefinedData;
 #pragma pack(pop)

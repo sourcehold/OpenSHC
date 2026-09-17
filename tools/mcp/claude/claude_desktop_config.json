@@ -4,13 +4,13 @@
     "menuBarEnabled": false
   },
   "mcpServers": {
-    "decomp-helper": {
+    "openshc-mcp": {
       "command": "uv",
       "args": [
         "--directory",
         "C:\\Users\\%USERNAME%\\Projects\\sourcehold\\openshc",
         "run",
-        ".\\tools\\mcp\\decomphelper.py",
+        ".\\tools\\mcp\\openshcmcp.py",
         "--project-dir",
         "path\\to\\your\\openshc\\repo\\",
         "--project-name",

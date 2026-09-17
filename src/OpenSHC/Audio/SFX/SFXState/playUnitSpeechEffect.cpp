@@ -26,24 +26,24 @@ namespace Audio {
                 return;
             }
 
-            int iVar2 = DAT_SpeechDefinedData::instance.DAT_SpeechEffectPathArray[speechEffectID].field0_0x0;
+            int iVar2 = DAT_SpeechDefinedData::instance.SpeechEffectPathArray[speechEffectID].field0_0x0;
             if (!iVar2) {
                 return;
             }
             if (1 < iVar2) {
-                iVar4 = DAT_SpeechDefinedData::instance.DAT_SpeechEffectPathArray[speechEffectID].field3_0xc++;
-                if (DAT_SpeechDefinedData::instance.DAT_SpeechEffectPathArray[speechEffectID].field3_0xc >= iVar2) {
-                    DAT_SpeechDefinedData::instance.DAT_SpeechEffectPathArray[speechEffectID].field3_0xc = 0;
+                iVar4 = DAT_SpeechDefinedData::instance.SpeechEffectPathArray[speechEffectID].field3_0xc++;
+                if (DAT_SpeechDefinedData::instance.SpeechEffectPathArray[speechEffectID].field3_0xc >= iVar2) {
+                    DAT_SpeechDefinedData::instance.SpeechEffectPathArray[speechEffectID].field3_0xc = 0;
                 }
             }
 
             char fullSoundPath[64];
             if (DAT_GameCore::instance.historicCampaignNumber == 2) {
                 MACRO_CALL(OS_Func::_sprintf)(fullSoundPath, s_fx_speech_s_005a4d68,
-                    DAT_SpeechDefinedData::instance.DAT_SpeechEffectPathArray[iVar4 + speechEffectID].arabianSound);
+                    DAT_SpeechDefinedData::instance.SpeechEffectPathArray[iVar4 + speechEffectID].arabianSound);
             } else {
                 MACRO_CALL(OS_Func::_sprintf)(fullSoundPath, s_fx_speech_s_005a4d68,
-                    DAT_SpeechDefinedData::instance.DAT_SpeechEffectPathArray[iVar4 + speechEffectID].europeanSound);
+                    DAT_SpeechDefinedData::instance.SpeechEffectPathArray[iVar4 + speechEffectID].europeanSound);
             }
 
             if (!MACRO_CALL(OS_Func::__stricmp)(fullSoundPath, DAT_LastSpeechSFXFilename::instance)) {

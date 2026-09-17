@@ -20,8 +20,8 @@ namespace Map {
     typedef struct MapDefinedData {
 
         undefined1 padding_0x0[4]; // 0x00000000 length: 4
-        char DAT_GMNameArray[207][1000]; // 0x00000004 length: 207000
-        MapSectionAddress DAT_MapSectionAddressArray[123]; // 0x0003289C length: 1968
+        char GMNameArray[207][1000]; // 0x00000004 length: 207000
+        MapSectionAddress MapSectionAddressArray[123]; // 0x0003289C length: 1968
 
     } MapDefinedData;
 #pragma pack(pop)

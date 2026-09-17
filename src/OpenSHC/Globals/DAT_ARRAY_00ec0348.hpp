@@ -8,14 +8,14 @@
 
 #pragma once
 
-#include "OpenSHC/Rendering/CreditsRelatedStructure.hpp"
+#include "OpenSHC/UI/Credits/CreditsRelatedStructure.hpp"
 
 // GLOBAL: STRONGHOLDCRUSADER 0x00EC0348
-// StructResolver::Instance<OpenSHC::Rendering::CreditsRelatedStructure [24],15467336>::instance
+// StructResolver::Instance<OpenSHC::UI::Credits::CreditsRelatedStructure [24],15467336>::instance
 
 namespace OpenSHC {
 
-using OpenSHC::Rendering::CreditsRelatedStructure;
+using OpenSHC::UI::Credits::CreditsRelatedStructure;
 
 MACRO_STRUCT_RESOLVER(CreditsRelatedStructure[24], false, Address::SHC_3BB0A8C1_0x00EC0348) DAT_ARRAY_00ec0348;
 } // namespace OpenSHC

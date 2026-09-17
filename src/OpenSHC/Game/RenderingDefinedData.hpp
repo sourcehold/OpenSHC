@@ -35,10 +35,10 @@ namespace Game {
     // SIZE: 0x000557E4
     typedef struct RenderingDefinedData {
 
-        int DAT_StartGold[3]; // 0x00000000 length: 12
-        char ARRAY_MalePeasantSFXNames[128][32]; // 0x0000000C length: 4096
-        char ARRAY_FemalePeasantSFXNames[128][32]; // 0x0000100C length: 4096
-        UC ARRAY_UCArray[292]; // 0x0000200C length: 144832
+        int StartGold[3]; // 0x00000000 length: 12
+        char MalePeasantSFXNames[128][32]; // 0x0000000C length: 4096
+        char FemalePeasantSFXNames[128][32]; // 0x0000100C length: 4096
+        UC UCArray[292]; // 0x0000200C length: 144832
         MenuItem MenuItems_Unknown_ManyThings[1]; // 0x000255CC length: 80
         MenuItem MenuItems_IntroLogos[2]; // 0x0002561C length: 160
         MenuItem MenuItems_IntroVideo[1]; // 0x000256BC length: 80
@@ -147,59 +147,59 @@ namespace Game {
         MenuItem MenuItems_TriggerEventOrInvasion[5]; // 0x0005027C length: 400
         MenuItem MenuItems_TriggerEvent[13]; // 0x0005040C length: 1040
         MenuItem MenuItems_TriggerEventSlider[5]; // 0x0005081C length: 400
-        MenuIDMenuElementAddressPair DAT_MenuViewIDMenuMapping[51]; // 0x000509AC length: 408
-        TextMessageBLLookupStruct DAT_TextMessageLookupTable[422]; // 0x00050B44 length: 6752
+        MenuIDMenuElementAddressPair MenuViewIDMenuMapping[51]; // 0x000509AC length: 408
+        TextMessageBLLookupStruct TextMessageLookupTable[422]; // 0x00050B44 length: 6752
         int field114_0x525a4[27]; // 0x000525A4 length: 108
-        uint DAT_ColorTable1[9]; // 0x00052610 length: 36
+        uint ColorTable1[9]; // 0x00052610 length: 36
         undefined1 padding_0x52634[100]; // 0x00052634 length: 100
-        BGR24 DAT_ColorArray[9]; // 0x00052698 length: 36
+        BGR24 ColorArray[9]; // 0x00052698 length: 36
         undefined1 padding_0x526bc[208]; // 0x000526BC length: 208
-        StartingResourceStructureInt DAT_StartGoods[3]; // 0x0005278C length: 300
-        int DAT_HumanAdvantageArray; // 0x000528B8 length: 4
+        StartingResourceStructureInt StartGoods[3]; // 0x0005278C length: 300
+        int HumanAdvantageArray; // 0x000528B8 length: 4
         int field427_0x528bc; // 0x000528BC length: 4
         int field428_0x528c0; // 0x000528C0 length: 4
         int field429_0x528c4; // 0x000528C4 length: 4
         int field430_0x528c8; // 0x000528C8 length: 4
         int field431_0x528cc; // 0x000528CC length: 4
-        int DAT_AIAdvantageArray; // 0x000528D0 length: 4
+        int AIAdvantageArray; // 0x000528D0 length: 4
         int field433_0x528d4; // 0x000528D4 length: 4
         int field434_0x528d8; // 0x000528D8 length: 4
         int field435_0x528dc; // 0x000528DC length: 4
         int field436_0x528e0; // 0x000528E0 length: 4
         int field437_0x528e4; // 0x000528E4 length: 4
         undefined1 padding_0x528e8[4]; // 0x000528E8 length: 4
-        int DAT_StartingTroops[20][3][20]; // 0x000528EC length: 4800
+        int StartingTroops[20][3][20]; // 0x000528EC length: 4800
         undefined1 padding_0x53bac[8]; // 0x00053BAC length: 8
         int field451_0x53bb4[24]; // 0x00053BB4 length: 96
-        int DAT_StartGoldPerFairnessLevel[3][5][2]; // 0x00053C14 length: 120
+        int StartGoldPerFairnessLevel[3][5][2]; // 0x00053C14 length: 120
         int SkirmishIntensityRelatedArray[4][5][20]; // 0x00053C8C length: 1600
         undefined1 padding_0x542cc[440]; // 0x000542CC length: 440
         int SkirmishIntensityRelatedArray2[18][10]; // 0x00054484 length: 720
-        int DAT_BuyPricePerResource[26]; // 0x00054754 length: 104
-        int DAT_SalesPricePerResource[25]; // 0x000547BC length: 100
-        int DAT_NoRushTicks[5]; // 0x00054820 length: 20
-        int DAT_TroopTypeValuesPart; // 0x00054834 length: 4
+        int BuyPricePerResource[26]; // 0x00054754 length: 104
+        int SalesPricePerResource[25]; // 0x000547BC length: 100
+        int NoRushTicks[5]; // 0x00054820 length: 20
+        int TroopTypeValuesPart; // 0x00054834 length: 4
         undefined1 padding_0x54838[84]; // 0x00054838 length: 84
-        int TROOP_VALUE_ARCHER; // 0x0005488C length: 4
-        int TROOP_VALUE_CROSSBOW; // 0x00054890 length: 4
-        int TROOP_VALUE_SPEARMAN; // 0x00054894 length: 4
-        int TROOP_VALUE_PIKEMAN; // 0x00054898 length: 4
-        int TROOP_VALUE_MACEMAN; // 0x0005489C length: 4
-        int TROOP_VALUE_SWORDSMAN; // 0x000548A0 length: 4
-        int TROOP_VALUE_KNIGHT; // 0x000548A4 length: 4
-        int TROOP_VALUE_LADDERMAN; // 0x000548A8 length: 4
-        int TROOP_VALUE_ENGINEER; // 0x000548AC length: 4
-        int TROOP_VALUE_MONK; // 0x000548B0 length: 4
-        int TROOP_VALUE_TUNNELER; // 0x000548B4 length: 4
-        int TROOP_VALUE_A_ARCHER; // 0x000548B8 length: 4
-        int TROOP_VALUE_SLAVE; // 0x000548BC length: 4
-        int TROOP_VALUE_SLINGER; // 0x000548C0 length: 4
-        int TROOP_VALUE_ASSASSIN; // 0x000548C4 length: 4
-        int TROOP_VALUE_HARCHER; // 0x000548C8 length: 4
-        int TROOP_VALUE_A_SWORDSMAN; // 0x000548CC length: 4
-        int TROOP_VALUE_FIRETHROWER; // 0x000548D0 length: 4
-        int TROOP_VALUE_S_FBALLISTA; // 0x000548D4 length: 4
-        int TROOP_VALUE_CATAPULT; // 0x000548D8 length: 4
+        int ARCHER; // 0x0005488C length: 4
+        int CROSSBOW; // 0x00054890 length: 4
+        int SPEARMAN; // 0x00054894 length: 4
+        int PIKEMAN; // 0x00054898 length: 4
+        int MACEMAN; // 0x0005489C length: 4
+        int SWORDSMAN; // 0x000548A0 length: 4
+        int KNIGHT; // 0x000548A4 length: 4
+        int LADDERMAN; // 0x000548A8 length: 4
+        int ENGINEER; // 0x000548AC length: 4
+        int MONK; // 0x000548B0 length: 4
+        int TUNNELER; // 0x000548B4 length: 4
+        int A_ARCHER; // 0x000548B8 length: 4
+        int SLAVE; // 0x000548BC length: 4
+        int SLINGER; // 0x000548C0 length: 4
+        int ASSASSIN; // 0x000548C4 length: 4
+        int HARCHER; // 0x000548C8 length: 4
+        int A_SWORDSMAN; // 0x000548CC length: 4
+        int FIRETHROWER; // 0x000548D0 length: 4
+        int S_FBALLISTA; // 0x000548D4 length: 4
+        int CATAPULT; // 0x000548D8 length: 4
         int field1003_0x548dc; // 0x000548DC length: 4
         int field1004_0x548e0; // 0x000548E0 length: 4
         int field1005_0x548e4; // 0x000548E4 length: 4
@@ -228,28 +228,28 @@ namespace Game {
         int field1028_0x5499c[24]; // 0x0005499C length: 96
         int field1029_0x549fc[24]; // 0x000549FC length: 96
         UnitTypeInt field1030_0x54a5c[28]; // 0x00054A5C length: 112
-        char* DAT_ChimpTgxArray[70]; // 0x00054ACC length: 280
-        char* DAT_ChimpTgxSketchArray[80]; // 0x00054BE4 length: 320
-        char* DAT_ChimpHelpArray[70]; // 0x00054D24 length: 280
-        char* DAT_ChimpBikArray[70]; // 0x00054E3C length: 280
-        char* DAT_BuildingHelpArray[108]; // 0x00054F54 length: 432
-        char* DAT_BuildingBikArray[108]; // 0x00055104 length: 432
-        char* DAT_BuildingTgxSketchArray[108]; // 0x000552B4 length: 432
+        char* ChimpTgxArray[70]; // 0x00054ACC length: 280
+        char* ChimpTgxSketchArray[80]; // 0x00054BE4 length: 320
+        char* ChimpHelpArray[70]; // 0x00054D24 length: 280
+        char* ChimpBikArray[70]; // 0x00054E3C length: 280
+        char* BuildingHelpArray[108]; // 0x00054F54 length: 432
+        char* BuildingBikArray[108]; // 0x00055104 length: 432
+        char* BuildingTgxSketchArray[108]; // 0x000552B4 length: 432
         ResourceTypeInt field1038_0x55464[8]; // 0x00055464 length: 32
         int field1039_0x55484[8]; // 0x00055484 length: 32
-        Position DAT_StockpileIconsPositionNudges[8]; // 0x000554A4 length: 64
+        Position StockpileIconsPositionNudges[8]; // 0x000554A4 length: 64
         int field1041_0x554e4[8]; // 0x000554E4 length: 32
         int field1042_0x55504[8]; // 0x00055504 length: 32
         Position field1043_0x55524[8]; // 0x00055524 length: 64
-        int DAT_MarketStonksOrder[20]; // 0x00055564 length: 80
-        ResourceTypeInt DAT_FoodTypes[8]; // 0x000555B4 length: 32
-        int DAT_RawResourceTypes[4]; // 0x000555D4 length: 16
+        int MarketStonksOrder[20]; // 0x00055564 length: 80
+        ResourceTypeInt FoodTypes[8]; // 0x000555B4 length: 32
+        int RawResourceTypes[4]; // 0x000555D4 length: 16
         int field1047_0x555e4[8]; // 0x000555E4 length: 32
         Position field1048_0x55604[25]; // 0x00055604 length: 200
         int field1049_0x556cc[7][3]; // 0x000556CC length: 84
         int field1050_0x55720[4]; // 0x00055720 length: 16
         undefined1 padding_0x55730[68]; // 0x00055730 length: 68
-        UnitTypeInt DAT_UnitTypeGroups[3][9]; // 0x00055774 length: 108
+        UnitTypeInt UnitTypeGroups[3][9]; // 0x00055774 length: 108
         int field1120_0x557e0; // 0x000557E0 length: 4
 
     } RenderingDefinedData;

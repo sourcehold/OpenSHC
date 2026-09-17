@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/IO/Graphics/GmID.hpp"
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Entities/EntityType.hpp"
@@ -23,6 +24,7 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
+        using OpenSHC::Game::Resources::ResourceType;
         using OpenSHC::IO::PackagedFileMagicNum;
         using OpenSHC::IO::Graphics::GmID;
         using OpenSHC::Map::Entities::EntityType;
@@ -53,7 +55,7 @@ namespace Map {
             BOOLEnum hasEngineerSelected; // 0x00000558 length: 4
             int field14_0x55c; // 0x0000055C length: 4
             int field15_0x560; // 0x00000560 length: 4
-            undefined4 selectionEuropeanArchers; // 0x00000564 length: 4
+            int selectionEuropeanArchers; // 0x00000564 length: 4
             undefined4 selectionSpearmen; // 0x00000568 length: 4
             undefined4 selectionMacemen; // 0x0000056C length: 4
             undefined4 selectionCrossbowmen; // 0x00000570 length: 4
@@ -82,8 +84,8 @@ namespace Map {
             int selectionFireBallista; // 0x000005CC length: 4
             int selectionSlots[8]; // 0x000005D0 length: 32
             int nHasOwnedUnitInSelection; // 0x000005F0 length: 4
-            undefined4 unknownX_01; // 0x000005F4 length: 4
-            undefined4 unknownY_01; // 0x000005F8 length: 4
+            undefined4 climbX2; // 0x000005F4 length: 4
+            undefined4 climbY2; // 0x000005F8 length: 4
             byte unusedBytes03[8]; // 0x000005FC length: 8
             dword field48_0x604; // 0x00000604 length: 4
             uint field49_0x608; // 0x00000608 length: 4
@@ -103,7 +105,7 @@ namespace Map {
             ~UnitsState() {};
 
             // Constructor
-            UnitsState* constructUnitsState();
+            UnitsState* Constructor_UnitsState();
 
             void clearAllUnits();
 
@@ -141,9 +143,9 @@ namespace Map {
 
             void calculateUnitMovementSpeed(int unitID);
 
-            undefined4 standUpIfSeated(int param_1);
+            BOOLEnum standUpIfSeated(int param_1);
 
-            undefined4 sitDownIfStanding(int param_1);
+            BOOLEnum sitDownIfStanding(int param_1);
 
             void setFacingDirectionTowardUnit(int param_1, int param_2);
 
@@ -183,9 +185,9 @@ namespace Map {
 
             BOOLEnum checkIfCitizenUnitIsAliveBasedOnState(int param_1);
 
-            bool shouldUnitsEngageInMelee(int param_1, int param_2);
+            BOOLEnum shouldUnitsEngageInMelee(int param_1, int param_2);
 
-            int ComputeDamageFearFactorBonus(int damage, int playerID);
+            int computeDamageFearFactorBonus(int damage, int playerID);
 
             undefined4 processUnitAttackOtherUnit(int unitID, int unit2ID);
 
@@ -209,7 +211,7 @@ namespace Map {
 
             BOOLEnum checkTargetBuildingPossibilityOrState(int unitID);
 
-            BOOLEnum findClosestLaddermanWithLadderPosition(int unitID);
+            BOOLEnum findAndAttackNearbyEnemyLaddermanInPosition(int unitID);
 
             int findAndDestroyAdjacentEnemyLadder(int param_1, int param_2);
 
@@ -276,7 +278,7 @@ namespace Map {
 
             void recountUnitsInSelection();
 
-            int selectionContainsEngineersOnly();
+            BOOLEnum selectionContainsEngineersOnly();
 
             BOOLEnum selectionHasEngineers();
 
@@ -292,7 +294,7 @@ namespace Map {
 
             BOOLEnum selectionContainsRangedOnlyUnits();
 
-            int selectionContainsLadermenOnly();
+            int selectionContainsLaddermenOnly();
 
             BOOLEnum selectionContainsOnlyArabAssassins();
 
@@ -354,7 +356,7 @@ namespace Map {
 
             int selectionContainsCombatUnit(uint unitID);
 
-            void queueStopCommand();
+            void queueEscapeCommand();
 
             void queueUnitTypeCommand(undefined4 unitType);
 
@@ -406,7 +408,7 @@ namespace Map {
 
             void setAIControlStatusTo100000();
 
-            int clearUnitPositionCommitState(int unitIndex, int* param_2);
+            int getUnitStateTextParameterAndResourceType(int unitIndex, ResourceType* pResourceType);
 
             GmID getPeasantGmID(int unitID);
 
@@ -476,7 +478,7 @@ namespace Map {
 
             dword findNearestEnemyAndHeadTowardsIt(int unitID);
 
-            BOOLEnum acquireShootTarget(short* unitID);
+            BOOLEnum acquireShootTarget(int unitID);
 
             BOOLEnum updateClimbing(int unitID);
 

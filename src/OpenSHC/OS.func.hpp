@@ -18,7 +18,6 @@
 #include "stdio.h"
 #include "time.h"
 #include "vadefs.h"
-#include "winnt.h"
 namespace OpenSHC {
 namespace OS_Func {
 
@@ -97,6 +96,10 @@ namespace OS_Func {
         wint_t(__cdecl*)(FILE* _File), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x00580735, &OpenSHC::OS::_fgetwc)
     _fgetwc;
 
+    MACRO_FUNCTION_RESOLVER(int(__cdecl*)(FILE* param_1, WCHAR_CONST* param_2, ...), REIMPLEMENTED_CRT,
+        Address::SHC_3BB0A8C1_0x005807A8, &OpenSHC::OS::_fwprintf)
+    _fwprintf;
+
     MACRO_FUNCTION_RESOLVER(size_t(__cdecl*)(void* _Str, size_t _Size, size_t _Count, FILE* _File), REIMPLEMENTED_CRT,
         Address::SHC_3BB0A8C1_0x0058099B, &OpenSHC::OS::_fwrite)
     _fwrite;
@@ -108,6 +111,14 @@ namespace OS_Func {
     MACRO_FUNCTION_RESOLVER(int(__cdecl*)(wchar_t* _Str1, wchar_t* _Str2), REIMPLEMENTED_CRT,
         Address::SHC_3BB0A8C1_0x00580B69, &OpenSHC::OS::__wcsicmp)
     __wcsicmp;
+
+    MACRO_FUNCTION_RESOLVER(
+        long(__cdecl*)(WCHAR_CONST* wideStr), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x00580BFA, &OpenSHC::OS::__wtol)
+    __wtol;
+
+    MACRO_FUNCTION_RESOLVER(
+        long(__cdecl*)(WCHAR_CONST* wideStr), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x00580C0B, &OpenSHC::OS::__wtol)
+    __wtol;
 
     MACRO_FUNCTION_RESOLVER(
         void(__cdecl*)(void* _Memory), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x00580DC1, &OpenSHC::OS::_free)
@@ -133,6 +144,10 @@ namespace OS_Func {
         Address::SHC_3BB0A8C1_0x005816C3, &OpenSHC::OS::_ucrt_open)
     _ucrt_open;
 
+    MACRO_FUNCTION_RESOLVER(
+        void(__cdecl*)(ulong param_1), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x005816EE, &OpenSHC::OS::_srand)
+    _srand;
+
     MACRO_FUNCTION_RESOLVER(int(__cdecl*)(), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x005816FB, &OpenSHC::OS::_rand)
     _rand;
 
@@ -153,14 +168,14 @@ namespace OS_Func {
     __toupper;
 
     MACRO_FUNCTION_RESOLVER(
-        int(__cdecl*)(HANDLE hFile), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x005826FB, &OpenSHC::OS::_tell)
-    _tell;
+        int(__cdecl*)(int handle), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x005826FB, &OpenSHC::OS::_ucrt_tell)
+    _ucrt_tell;
 
     MACRO_FUNCTION_RESOLVER(int(__cdecl*)(int fileDescriptor, long lDistanceToMove, DWORD moveMethod),
         REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x0058277E, &OpenSHC::OS::_ucrt_lseek)
     _ucrt_lseek;
 
-    MACRO_FUNCTION_RESOLVER(int(__cdecl*)(char* _Str1, char* _Str2, size_t _MaxCount), REIMPLEMENTED_CRT,
+    MACRO_FUNCTION_RESOLVER(int(__cdecl*)(char const* _Str1, char const* _Str2, size_t _MaxCount), REIMPLEMENTED_CRT,
         Address::SHC_3BB0A8C1_0x005835BB, &OpenSHC::OS::__strnicmp)
     __strnicmp;
 

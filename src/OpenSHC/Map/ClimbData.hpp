@@ -20,7 +20,7 @@ namespace Map {
         int climbDataRelated; // 0x00000008 length: 4
         int buildingID; // 0x0000000C length: 4
         int unitID; // 0x00000010 length: 4
-        int buildingUID; // 0x00000014 length: 4
+        int sourceUID; // 0x00000014 length: 4
         int isRecognizedByPathfinding; // 0x00000018 length: 4
         int bottomXPosition; // 0x0000001C length: 4
         int bottomYPosition; // 0x00000020 length: 4
@@ -134,7 +134,7 @@ namespace Map {
         int ladderDirection; // 0x000001D0 length: 4
         int field117_0x1d4; // 0x000001D4 length: 4
         undefined1 padding_0x1d8[12]; // 0x000001D8 length: 12
-        int ownerPlayerIndex; // 0x000001E4 length: 4
+        int owner; // 0x000001E4 length: 4
         int buildingArea; // 0x000001E8 length: 4
         undefined1 padding_0x1ec[24]; // 0x000001EC length: 24
 

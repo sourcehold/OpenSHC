@@ -35,7 +35,7 @@ namespace Text {
         int fontStartImageId_0x8; // 0x00000008 length: 4
         FontRenderTypeInt renderType_0xc; // 0x0000000C length: 4
         int baselineOffset_0x10; // 0x00000010 length: 4
-        dword lineHeight_0x14; // 0x00000014 length: 4
+        int lineHeight_0x14; // 0x00000014 length: 4
         int letterSpacing_0x18; // 0x00000018 length: 4
         int whiteSpaceWidth_0x1c; // 0x0000001C length: 4
         HGDIOBJ hgdiobj; // 0x00000020 length: 4
@@ -74,11 +74,11 @@ namespace Text {
 
         void renderSomeSpecificTextUnk(int lengthUnk, int otherBlendValueUnk, int xPos, int yPos, BGR24 color);
 
-        int renderCharUnk(char charId, int xPos, int yPosUnk, int bgr24, int blendStrengthUnk);
+        int renderCharUnk(byte charId, int xPos, int yPosUnk, int bgr24, int blendStrengthUnk);
 
-        void renderWideText(LPWSTR wideText, int textLength, int xPos, int yPos, BGR24 color, int blendStrength);
+        int renderWideText(LPWSTR wideText, int textLength, int xPos, int yPos, BGR24 color, int blendStrength);
 
-        int renderWideChar(undefined4 param_1, int param_2, int param_3, int param_4, int param_5);
+        int renderWideChar(WCHAR wideChar, int xPos, int yPos, int bgr24, int blendStrengthUnk);
     };
 
     static_assert_cpp98_obj(sizeof(FontSizeClass) == 36, FontSizeClass);

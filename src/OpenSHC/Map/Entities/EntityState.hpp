@@ -51,7 +51,7 @@ namespace Map {
             // Constructor
             EntityState* Constructor_EntityState();
 
-            void clearEntityArrayAndSec1077();
+            void clearEntityArrayAndSeagullArray();
 
             BOOLEnum playerHasEntityOfType(int playerID, EntityType entityType);
 
@@ -106,11 +106,11 @@ namespace Map {
 
             void calculateEntityDrawOffset(int entityID);
 
-            void initializeSeagullMovementVector(int ID_1077, int param_2, int param_3, int param_4, int param_5);
+            void initializeSeagullMovementVector(int seagullID, int param_2, int param_3, int param_4, int param_5);
 
             void removeEntityFromTileLinkedList(int param_1);
 
-            int activateProjectileEntity(int entityID);
+            void activateProjectileEntity(int entityID);
 
             void deleteEntity(uint entityID);
 

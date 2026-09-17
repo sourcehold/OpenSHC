@@ -131,7 +131,7 @@ namespace UI {
                 Address::SHC_3BB0A8C1_0x00451E00, &TextureRenderCore::renderUnitAnimationWithBlendingUnk)
             renderUnitAnimationWithBlendingUnk;
 
-            MACRO_FUNCTION_RESOLVER(int (TextureRenderCore::*)(char*), false, Address::SHC_3BB0A8C1_0x00454620,
+            MACRO_FUNCTION_RESOLVER(int (TextureRenderCore::*)(char const*), false, Address::SHC_3BB0A8C1_0x00454620,
                 &TextureRenderCore::loadGfxFile)
             loadGfxFile;
 
@@ -144,8 +144,8 @@ namespace UI {
             loadGfxAtBufferEnd;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (TextureRenderCore::*)(char*), false, Address::SHC_3BB0A8C1_0x004548D0,
-                &TextureRenderCore::CheckGfxResourceExists)
-            CheckGfxResourceExists;
+                &TextureRenderCore::checkGfxResourceExists)
+            checkGfxResourceExists;
 
             MACRO_FUNCTION_RESOLVER(void (TextureRenderCore::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x00454900,
                 &TextureRenderCore::renderLoadedGfx)

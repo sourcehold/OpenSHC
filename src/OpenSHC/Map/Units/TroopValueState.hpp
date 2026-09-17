@@ -57,7 +57,7 @@ namespace Map {
 
             BOOLEnum searchTribeWithProperties(int param_1);
 
-            undefined4 isAttackWaveComplete();
+            BOOLEnum isAttackWaveComplete();
 
             void sortAttackInfoTribeIDArrayBasedOn(
                 int attackWave, int shrinkSize, int tribeSizeSumLimit, SomeTribeBehaviorType someTribeTypeIdentifier);
@@ -133,7 +133,7 @@ namespace Map {
 
             BOOLEnum attackInfoHasHigh2Building(int buildingID);
 
-            undefined4 attackInfoHasArch2Building(int buildingID);
+            BOOLEnum attackInfoHasArch2Building(int buildingID);
 
             void expandAIZoneLayerStage1();
 
@@ -172,7 +172,7 @@ namespace Map {
 
             void placeTunnelForEveryTunneler(int attackWave);
 
-            int addUnitToNewTribe(undefined4 unitID, int attackWave, AITribeType tribeType, undefined4 playerID);
+            void addUnitToNewTribe(undefined4 unitID, int attackWave, AITribeType tribeType, undefined4 playerID);
 
             void exitSiegeEquipmentForWave(int wave);
 

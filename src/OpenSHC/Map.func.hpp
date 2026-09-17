@@ -13,7 +13,7 @@ namespace OpenSHC {
 namespace Map_Func {
 
     MACRO_FUNCTION_RESOLVER(
-        void(__stdcall*)(), false, Address::SHC_3BB0A8C1_0x00431990, &OpenSHC::Map::ResetSomeValuesFunctionUnk)
+        void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00431990, &OpenSHC::Map::ResetSomeValuesFunctionUnk)
     ResetSomeValuesFunctionUnk;
 
 } // namespace Map_Func

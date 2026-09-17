@@ -122,6 +122,28 @@ SEC_RNG::ptr->currentNumber1 % 4
   ```
   Once 4 are reached, the switch is probably converted to a table lookup.  
   This structure shows up as if-else chain in the decompiler, so do not be confused and check the assembly if the conditions are repeated checks of the same value. 
+- A switch is in the end just a structure with a scope that allows to jump to certain cases. Inside this scope, other structures are fully legal. This is allowed, for example:
+  ```cpp
+  switch(value) {
+    ++value; // never executed
+  case 0: {
+      // do something
+      break;
+  }
+      while (value < 3) {
+      case 1: {
+          // do something
+      }
+      case 2: {
+          // do something
+      }
+      }
+  default: {
+      // do something
+  }
+  }
+  ```
+  Consider this, should a switch structure arise with strange fallthrough and loops, like SHC_3BB0A8C1_0x004870B0.
 
 ### Loops
 
@@ -154,11 +176,20 @@ for (int soundIndex = 1; soundIndex < this->loadedSoundsCountAndIndex_0x316c; ++
 }
 ```
 
-This covers most cases.
+This covers a lot of cases.
 
 Exceptions are:
  - when the logic has not initial condition check before the loop body. This suggests the usage of a do-while loop.
  - when the update parts of the pointer and index are not the last instructions before the loop condition. This indicates manual handling like in a while loop.
+ - when it might lack a counter variable and the index loop simply does not match. This case might indicate a pointer increment loop.  
+ Another sign for this could be the storing of the start of an array before the array is incremented. The main pointer is then often reset using this temporary. This may should up in opcodes like this:
+    ```
+        MOV     EDX,   dword ptr [ESP + 0x20] <--
+        MOV     dword ptr [ESI + 0xc],  EBX
+        MOV     dword ptr [ESI + 0x24], EBX
+        MOV     dword ptr [ESP + 0x20], EDX <--
+    ```
+    Note the seemingly redundant storing. This structure is followed by a loop where the main array is incremented and a temp used to reset it.
 
 If you see a repeating logic structure, that, for example, increments by a value in its logic every repeat,
 you might have found an unrolled loop. Therefore, try to reproduce the logic in loop form and see how the compiler behaves.
@@ -181,10 +212,28 @@ They might be worth trying in very tricky cases, but they were usually seen as c
 
 ### String Literals
 
-String literals are not resolved. Instead we use a big `string-literals.hpp` file.
-Make always sure to use a reference from this file instead of a string literal.
+String literals are not resolved. Instead we use tow big files, `string-macros.hpp` and `string-literals.hpp`.
+`string-macros.hpp` is the ground truth. However, when ever possible, using the pointers from `string-literals.hpp` is preferred.
+
+There is one known case that requires using only the macros:
+Only literals can by split up into multiple parts and be moved into registers to copy a string, for example via "strcpy".
+In this case, use the macros for the strings and **DO NOT** include `string-literals.hpp`, since this might cause different behavior.
+Should a mixture of pointers and macros be required, because the macro to not produce the fitting structure, still only use the macros from `string-macros.hpp`. Create a string pointer in the cpp file and use this for the pointer.
+
+Make always sure to use a reference from this files instead of a direct string literal.
+
+### Blocks and Scopes
+
+Many blocks come naturally with the usage of other structures. However, either by being in the original source or maybe via inlined functions, it can happen that a block is added to the logical function flow.
+
+It is hard to find these cases. I one situation, local variables that were used as local buffers whose pointers were send into functions had the issue of adding to the stack size. The lifetime of such just seems to naturally extend to the end of the block. Wrapping these statements into inline blocks solved this case.
 
 ## Functions
+
+### Parameters
+
+Parameters might not be pushed like normal in certain cases.
+Usually, if two functions are followed by each other, the parameters are pushed for the first function, then the call is executed and then parameters for the second function are pushed. If parameters for the second function are pushed before the first call, it might indicate that the first call was executed in place of a variable, to directly feed the return into the second function.
 
 ### Implicit functions
 
@@ -262,7 +311,7 @@ do {
 
 #### Known special cases
 
-- `memset` so far was seen optimizing a "set all bytes to zero" case, if it was smaller then a unknown amount. In all known cases it used `EAX` for this. Would still recommend to try `memset` for cases with a register filling multiple memory locations.
+- `memset` so far was seen optimizing a "set all bytes to zero" case, if it was smaller then a unknown amount. In all known cases it used `EAX` for this. Would still recommend to try `memset` for cases with a register filling multiple **byte-sized** memory locations.
 
 ### CRT Functions
 
@@ -271,3 +320,37 @@ A prominent example are `malloc` and `free`, where it is simply needed to use th
 since the memory management in the std library is rather complex.
 
 For other std functions, mostly the math functions, we decided to just use the std library directly.
+
+### Copy Elision and Return Value Optimization
+
+The compiler may use copy elision and return value optimization.
+
+The return value optimization may appear if a function returns an object, but instead of putting the whole object on the stack, the function receives a hidden pointer to memory from the caller. This memory is then initialized and the pointer to it is also return.  
+The actual function signature will only have the object as value return.
+
+Example in Ghidra:
+```cpp
+std::string* paths_getDocumentsFolderString(std::string* out, bool param_2);
+```
+
+Actual signature:
+```cpp
+std::string paths_getDocumentsFolderString(bool param_2);
+```
+
+This structure can be reproduced. However, this can not be said about the resulting Copy Elision.  
+If the value is assigned to another object, the compiler tries to avoid creating a copy.
+
+**This only works if the function is called directly. Any form of indirection via pointer or resolver will not optimize. This is a fundamental limitation of the MSVC2005 compiler.**
+
+As a result, such cases do not use the resolver. The limitation through this is accepted, although, it should be noted in the status entry for the caller.
+
+### Stack
+
+The stack of the function is an important orientation for decompilation.
+The reference point is the `esp` register, which points to the top of the stack. The stack grows **downwards** from the top, so actions that grow the stack reduce the `esp` register, for example `push` reduces the `esp` register by 4 and grows the stack by 4.
+
+Naturally, the stack reserved for the function indicated by `sub esp, <number>` at the start and `add esp, <number>` at the end of the function, need to match. This can be achieved by adding or removing locals or shrinking or growing arrays within the logical boundaries of the function. **It must never break the logic**.  
+At best, not only the stack fits, but variables are also at the correct positions and sizes within.
+
+If the stack usage shows a proper order in the function (i.e. the initial array occupies the first part in the allocated function stack, which means it requires the highest `[esp + <number>]` to reach), it might be sometimes good to fit one "side" of the stack first and then experiment with the rest of the function that has a non-fitting stack usage.

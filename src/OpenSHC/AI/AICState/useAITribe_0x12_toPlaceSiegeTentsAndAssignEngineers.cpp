@@ -1,4 +1,5 @@
-#include "OpenSHC/AI/AICState.func.hpp"
+#include "../AICState.func.hpp"
+
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/TroopValueState.func.hpp"
 #include "OpenSHC/AI/AIType.hpp"
@@ -23,183 +24,81 @@ namespace AI {
     using OpenSHC::Map::Units::SomeTribeBehaviorType;
     using OpenSHC::Map::Units::UnitInstructionType;
 
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000 */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004CEFD0
-    void AICState ::useAITribe_0x12_toPlaceSiegeTentsAndAssignEngineers(int playerID)
-
+    void AICState::useAITribe_0x12_toPlaceSiegeTentsAndAssignEngineers(int playerID)
     {
+        int _aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
+        if (_aiType == OpenSHC::AI::AIT_NULL)
+            return;
+        int _aicIndex = _aiType - 1;
+        int _aiTribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[0x12];
+        if (_aiTribeID == 0)
+            return;
+        if (DAT_TribesState::instance.tribes[_aiTribeID].uid
+            != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[0x12])
+            return;
 
-        AITypeInt AVar1;
-
-        int iVar2;
-
-        int _counterTill6;
-
-        int _selectionID2;
-
-        int iVar3;
-
-        int* piVar4;
-
-        MappersEnum _siegeEngineType;
-
-        int iVar5;
-
-        int _counterTill8;
-
-        int _aiTribeID;
-
-        int* _siegeEngineUnitType;
-
-        int local_18;
-
+        int _availableEngineers = DAT_TribesState::instance.tribes[_aiTribeID].size;
         int _requiredEngineers;
+        int _totalRequiredEngineers = 0;
 
-        short _currentAttackWave;
-
-        short _size;
-
-        AVar1 = DAT_GameState::instance.playerDataArray[playerID].aiType;
-
-        if (AVar1 != OpenSHC::AI::AIT_NULL) {
-
-            _aiTribeID = (int)DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[0x12];
-
-            if ((_aiTribeID != 0)
-                && (DAT_TribesState::instance.tribes[_aiTribeID].uid
-                    == DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[0x12])) {
-
-                _size = DAT_TribesState::instance.tribes[_aiTribeID].size;
-
-                local_18 = (int)_size;
-
-                iVar3 = 0;
-
-                _siegeEngineUnitType = (int*)((int)this + (AVar1 + ~OpenSHC::AI::AIT_NULL) * 0x2a4 + 0x214);
-
-                piVar4 = _siegeEngineUnitType;
-
-                iVar5 = 0;
-
-                do {
-
-                    if (*piVar4 < 1)
-                        break;
-
-                    iVar2 = 0;
-
-                    do {
-
-                        if (*piVar4 == DAT_SkirmishDefinedData::instance.SiegeEngineUnitType[iVar2]) {
-
-                            _requiredEngineers
-                                = DAT_SkirmishDefinedData::instance.SiegeEngineTypeRequiredEngineers[iVar2];
-
-                            break;
-                        }
-
-                        iVar2 = iVar2 + 1;
-
-                    } while (iVar2 < 6);
-
-                    iVar2 = _requiredEngineers + iVar5;
-
-                    if (local_18 < iVar2)
-                        break;
-
-                    iVar3 = iVar3 + 1;
-
-                    piVar4 = piVar4 + 1;
-
-                    iVar5 = iVar2;
-
-                } while (iVar3 < 8);
-
-                if (0 < iVar5) {
-
-                    for (; (_size != 0 && (0 < iVar5)); iVar5 = iVar5 + -1) {
-
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::Map::Units::TribesState_Func::popUnitFromTribe, DAT_TribesState::ptr)(_aiTribeID);
-
-                        _size = DAT_TribesState::instance.tribes[_aiTribeID].size;
-                    }
-
-                    _counterTill8 = 0;
-
-                    /*
-                              fixme: parameter reuse */
-
-                    _siegeEngineType = (MappersEnum)playerID;
-
-                    do {
-
-                        if (*_siegeEngineUnitType < 1) {
-
-                            return;
-                        }
-
-                        _counterTill6 = 0;
-
-                        do {
-
-                            if (*_siegeEngineUnitType
-                                == DAT_SkirmishDefinedData::instance.SiegeEngineUnitType[_counterTill6]) {
-
-                                _requiredEngineers
-                                    = DAT_SkirmishDefinedData::instance.SiegeEngineTypeRequiredEngineers[_counterTill6];
-
-                                _siegeEngineType = (MappersEnum)DAT_SkirmishDefinedData::instance
-                                                       .SiegeEngineCommandBuildingTypes[_counterTill6];
-
-                                break;
-                            }
-
-                            _counterTill6 = _counterTill6 + 1;
-
-                        } while (_counterTill6 < 6);
-
-                        if (local_18 < _requiredEngineers) {
-
-                            return;
-                        }
-
-                        local_18 = local_18 - _requiredEngineers;
-
-                        _selectionID2 = MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::addEngineersToSelection, this)(
-                            playerID, _requiredEngineers);
-
-                        if (_selectionID2 == 0) {
-
-                            return;
-                        }
-
-                        _currentAttackWave = (short)DAT_GameState::instance.playerDataArray[playerID].currentAttackWave;
-
-                        DAT_TribesState::instance.tribes[_selectionID2].tribeType = OpenSHC::AI::Tribes::AITT_ENGINEERS;
-
-                        DAT_TribesState::instance.tribes[_selectionID2].tribeBehaviorType
-                            = OpenSHC::Map::Units::STBT_0x410_SIEGE_EQUIPMENT_CONSTRUCTION;
-
-                        DAT_TribesState::instance.tribes[_selectionID2].attackWave = _currentAttackWave;
-
-                        MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::
-                                              placeSiegeTentOrTunnelAtSuitableLocationAndAssignEngineers,
-                            DAT_TroopValueState::ptr)(
-                            _selectionID2, _siegeEngineType, (uint)((int)(60)), (UnitInstructionType)((int)(15)));
-
-                        _counterTill8 = _counterTill8 + 1;
-
-                        _siegeEngineUnitType = _siegeEngineUnitType + 1;
-
-                    } while (_counterTill8 < 8);
+        for (int i = 0; i < 8; i++) {
+            if ((&this->aics[_aicIndex].SiegeEngine1)[i] <= 0)
+                break;
+            for (int j = 0; j < 6; j++) {
+                if ((&this->aics[_aicIndex].SiegeEngine1)[i]
+                    == DAT_SkirmishDefinedData::instance.SiegeEngineUnitType[j]) {
+                    _requiredEngineers = DAT_SkirmishDefinedData::instance.SiegeEngineTypeRequiredEngineers[j];
+                    break;
                 }
             }
+            if (_totalRequiredEngineers + _requiredEngineers > _availableEngineers)
+                break;
+            _totalRequiredEngineers += _requiredEngineers;
         }
 
-        return;
+        if (_totalRequiredEngineers <= 0)
+            return;
+
+        for (; DAT_TribesState::instance.tribes[_aiTribeID].size != 0; _totalRequiredEngineers--) {
+            if (_totalRequiredEngineers <= 0)
+                break;
+            MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::popUnitFromTribe, DAT_TribesState::ptr)(
+                _aiTribeID);
+        }
+
+        MappersEnum _siegeEngineType;
+        for (int i = 0; i < 8; i++) {
+            if ((&this->aics[_aicIndex].SiegeEngine1)[i] <= 0)
+                return;
+            for (int j = 0; j < 6; j++) {
+                if ((&this->aics[_aicIndex].SiegeEngine1)[i]
+                    == DAT_SkirmishDefinedData::instance.SiegeEngineUnitType[j]) {
+                    _requiredEngineers = DAT_SkirmishDefinedData::instance.SiegeEngineTypeRequiredEngineers[j];
+                    _siegeEngineType
+                        = (MappersEnum)DAT_SkirmishDefinedData::instance.SiegeEngineCommandBuildingTypes[j];
+                    break;
+                }
+            }
+            if (_requiredEngineers > _availableEngineers)
+                return;
+            _availableEngineers -= _requiredEngineers;
+
+            int _tribeID = MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::addEngineersToSelection, this)(
+                playerID, _requiredEngineers);
+            if (_tribeID == 0)
+                return;
+
+            DAT_TribesState::instance.tribes[_tribeID].tribeType = OpenSHC::AI::Tribes::AITT_ENGINEERS;
+            DAT_TribesState::instance.tribes[_tribeID].tribeBehaviorType
+                = OpenSHC::Map::Units::STBT_0x410_SIEGE_EQUIPMENT_CONSTRUCTION;
+            DAT_TribesState::instance.tribes[_tribeID].attackWave
+                = DAT_GameState::instance.playerDataArray[playerID].currentAttackWave;
+
+            MACRO_CALL_MEMBER(
+                OpenSHC::Map::Units::TroopValueState_Func::placeSiegeTentOrTunnelAtSuitableLocationAndAssignEngineers,
+                DAT_TroopValueState::ptr)(_tribeID, _siegeEngineType, 60, (UnitInstructionType)15);
+        }
     }
 
 }

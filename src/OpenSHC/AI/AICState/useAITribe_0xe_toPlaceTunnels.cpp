@@ -1,4 +1,5 @@
-#include "OpenSHC/AI/AICState.func.hpp"
+#include "../AICState.func.hpp"
+
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/TroopValueState.func.hpp"
 #include "OpenSHC/AI/AIType.hpp"
@@ -20,60 +21,46 @@ namespace AI {
     using OpenSHC::Map::Units::SomeTribeBehaviorType;
     using OpenSHC::Map::Units::UnitInstructionType;
 
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000 */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004CF180
-    void AICState ::useAITribe_0xe_toPlaceTunnels(int playerID)
-
+    void AICState::useAITribe_0xe_toPlaceTunnels(int playerID)
     {
+        if (DAT_GameState::instance.playerDataArray[playerID].aiType == OpenSHC::AI::AIT_NULL)
+            return;
+        int _aiTribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[0xe];
+        if (_aiTribeID == 0)
+            return;
+        if (DAT_TribesState::instance.tribes[_aiTribeID].uid
+            != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[0xe])
+            return;
+        int _countdown = DAT_TribesState::instance.tribes[_aiTribeID].size;
 
-        int _aiTribeID;
+        while (DAT_TribesState::instance.tribes[_aiTribeID].size != 0) {
+            if (_countdown <= 0)
+                break;
 
-        uint _unitID;
+            int _unitID = MACRO_CALL_MEMBER(
+                OpenSHC::Map::Units::TribesState_Func::popUnitFromTribe, DAT_TribesState::ptr)(_aiTribeID);
+            // Yes this line has to be right here for the code to match.
+            _countdown--;
 
-        int _tribeID;
+            int _tribeID = MACRO_CALL_MEMBER(
+                OpenSHC::Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(playerID);
 
-        int _countdown;
+            DAT_TribesState::instance.tribes[_tribeID].attackWave
+                = DAT_GameState::instance.playerDataArray[playerID].currentAttackWave;
 
-        short _size;
+            DAT_TribesState::instance.tribes[_tribeID].tribeType = OpenSHC::AI::Tribes::AITT_TUNNELERS;
 
-        if (((DAT_GameState::instance.playerDataArray[playerID].aiType != OpenSHC::AI::AIT_NULL)
-                && (_aiTribeID = (int)DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[0xe],
-                    _aiTribeID != 0))
-            && (DAT_TribesState::instance.tribes[_aiTribeID].uid
-                == DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[0xe])) {
+            DAT_TribesState::instance.tribes[_tribeID].tribeBehaviorType = OpenSHC::Map::Units::STBT_0x415;
 
-            _size = DAT_TribesState::instance.tribes[_aiTribeID].size;
+            MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(
+                _unitID, _tribeID);
 
-            for (_countdown = (int)_size; (_size != 0 && (0 < _countdown)); _countdown = _countdown + -1) {
-
-                _unitID = MACRO_CALL_MEMBER(
-                    OpenSHC::Map::Units::TribesState_Func::popUnitFromTribe, DAT_TribesState::ptr)(_aiTribeID);
-
-                _tribeID = MACRO_CALL_MEMBER(
-                    OpenSHC::Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(playerID);
-
-                DAT_TribesState::instance.tribes[_tribeID].attackWave
-                    = (short)DAT_GameState::instance.playerDataArray[playerID].currentAttackWave;
-
-                DAT_TribesState::instance.tribes[_tribeID].tribeType = OpenSHC::AI::Tribes::AITT_TUNNELERS;
-
-                DAT_TribesState::instance.tribes[_tribeID].tribeBehaviorType = OpenSHC::Map::Units::STBT_0x415;
-
-                MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(
-                    _unitID, _tribeID);
-
-                MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::
-                                      placeSiegeTentOrTunnelAtSuitableLocationAndAssignEngineers,
-                    DAT_TroopValueState::ptr)(_tribeID, OpenSHC::Commands::M_MAPPER_TUNNEL_CONSTRUCTION,
-                    (uint)((int)(50)), (UnitInstructionType)((int)(21)));
-
-                _size = DAT_TribesState::instance.tribes[_aiTribeID].size;
-            }
+            MACRO_CALL_MEMBER(
+                OpenSHC::Map::Units::TroopValueState_Func::placeSiegeTentOrTunnelAtSuitableLocationAndAssignEngineers,
+                DAT_TroopValueState::ptr)(
+                _tribeID, OpenSHC::Commands::M_MAPPER_TUNNEL_CONSTRUCTION, 50, (UnitInstructionType)21);
         }
-
-        return;
     }
 
 }

@@ -26,7 +26,7 @@ namespace Audio {
             DAT_SoundEffectsHelperData1::ptr->DAT_SomeSoundTime2 = timeGetTime();
 
             if (param_1 != 2) {
-                if (DAT_TroopValueState::ptr->attackInfo.field105458_0x25b00 == 0) {
+                if (DAT_TroopValueState::ptr->attackInfo.field105440_0x25b00 == 0) {
                     MACRO_CALL_MEMBER(
                         Map::Units::TroopValueState_Func::recountTotalTroopValue, DAT_TroopValueState::ptr)();
                 }
@@ -71,7 +71,7 @@ namespace Audio {
                 }
             } else {
                 int iVar1 = 3;
-                if (DAT_GameSynchronyState::ptr->DAT_CurrentGameMode != Game::GM_SOLITARY) {
+                if (DAT_GameSynchronyState::ptr->currentGameMode != Game::GM_SOLITARY) {
                     iVar1 = SEC_RNG::ptr->currentNumber1 % 5;
                 }
                 if ((iVar1 == 0) || (iVar1 == 1)) {
@@ -144,7 +144,7 @@ namespace Audio {
                 }
             } else if (param_1 == 2) {
                 MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber1, SEC_RNG::ptr)();
-                if (DAT_GameSynchronyState::ptr->DAT_CurrentGameMode != Game::GM_SOLITARY) {
+                if (DAT_GameSynchronyState::ptr->currentGameMode != Game::GM_SOLITARY) {
                     MACRO_CALL_MEMBER(SoundSystem_Func::endSoundStream, this)(enums::SND_STR_MUSIC);
                     this->mbr_0x154 = 0;
                     this->sec_Section1055_0x3274 = 0;

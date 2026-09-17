@@ -17,8 +17,8 @@ namespace Map {
         // Constructor
 
         MACRO_FUNCTION_RESOLVER(LandscapeState* (LandscapeState::*)(), false, Address::SHC_3BB0A8C1_0x004F3930,
-            &LandscapeState::constructLandscapeState)
-        constructLandscapeState;
+            &LandscapeState::Construct_LandscapeState)
+        Construct_LandscapeState;
 
         MACRO_FUNCTION_RESOLVER(undefined4 (LandscapeState::*)(undefined4), false, Address::SHC_3BB0A8C1_0x004F1A60,
             &LandscapeState::mapUITreeTypeToLogicalTreeType)
@@ -81,7 +81,7 @@ namespace Map {
             Address::SHC_3BB0A8C1_0x004F2E00, &LandscapeState::setupBabyTreeLocation)
         setupBabyTreeLocation;
 
-        MACRO_FUNCTION_RESOLVER(uint (LandscapeState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004F2FB0,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (LandscapeState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004F2FB0,
             &LandscapeState::isTreeAliveAndMatchingUID)
         isTreeAliveAndMatchingUID;
 
@@ -110,8 +110,8 @@ namespace Map {
         placeAppleTree;
 
         MACRO_FUNCTION_RESOLVER(int (LandscapeState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004F3610,
-            &LandscapeState::selectClosestTree)
-        selectClosestTree;
+            &LandscapeState::selectClosestAppleTree)
+        selectClosestAppleTree;
 
         MACRO_FUNCTION_RESOLVER(
             void (LandscapeState::*)(), false, Address::SHC_3BB0A8C1_0x004F3700, &LandscapeState::resetWind)

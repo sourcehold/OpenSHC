@@ -87,7 +87,7 @@ namespace Synchrony {
             &GameSynchronyState::compressOrCreateLengthPrefixedPacketUnk)
         compressOrCreateLengthPrefixedPacketUnk;
 
-        MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(void*, void*), false, Address::SHC_3BB0A8C1_0x0047E800,
+        MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(byte*, byte*), false, Address::SHC_3BB0A8C1_0x0047E800,
             &GameSynchronyState::decompressTooLongPacketData)
         decompressTooLongPacketData;
 

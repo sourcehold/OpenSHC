@@ -35,7 +35,7 @@ namespace Util {
             ~Stopwatch() {};
 
             // Constructor
-            Stopwatch* Cosntructor_Stopwatch();
+            Stopwatch* Constructor_Stopwatch();
 
             void start();
 

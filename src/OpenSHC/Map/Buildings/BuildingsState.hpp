@@ -39,8 +39,8 @@ namespace Map {
         public:
             int structCount; // 0x00000000 length: 4
             undefined4 field1_0x4; // 0x00000004 length: 4
-            undefined4 maxBuildingsCount; // 0x00000008 length: 4
-            undefined4 unknownCountdown01; // 0x0000000C length: 4
+            int maxBuildingsCount; // 0x00000008 length: 4
+            int unknownCountdown01; // 0x0000000C length: 4
             undefined4 field4_0x10; // 0x00000010 length: 4
             Building buildings[2000]; // 0x00000014 length: 1624000
             BuildingCostStruct buildingCosts[110]; // 0x0018C7D4 length: 2200
@@ -52,15 +52,15 @@ namespace Map {
             int campfireSpotY; // 0x0018E01C length: 4
             int campfireSpotOrientation; // 0x0018E020 length: 4
             undefined4 field14_0x18e024; // 0x0018E024 length: 4
-            undefined4 DAT_TempXOffset; // 0x0018E028 length: 4
-            undefined4 DAT_TempYOffset; // 0x0018E02C length: 4
-            undefined4 farmerDestinationTile; // 0x0018E030 length: 4
+            int DAT_TempXOffset; // 0x0018E028 length: 4
+            int DAT_TempYOffset; // 0x0018E02C length: 4
+            int farmerDestinationTile; // 0x0018E030 length: 4
             int hopFarmerDestinationOffsetX; // 0x0018E034 length: 4
             int hopFarmerDestinationOffsetY; // 0x0018E038 length: 4
-            undefined4 menuSelectedBuildingID; // 0x0018E03C length: 4
-            undefined4 newSelectedBuildingID; // 0x0018E040 length: 4
-            undefined4 menuSelectedUnitID; // 0x0018E044 length: 4
-            undefined4 newSelectedUnitID; // 0x0018E048 length: 4
+            int menuSelectedBuildingID; // 0x0018E03C length: 4
+            int newSelectedBuildingID; // 0x0018E040 length: 4
+            int menuSelectedUnitID; // 0x0018E044 length: 4
+            int newSelectedUnitID; // 0x0018E048 length: 4
             undefined4 field24_0x18e04c; // 0x0018E04C length: 4
             undefined4 field25_0x18e050; // 0x0018E050 length: 4
             char* DAT_CurrentlyPlayingBuildingBik; // 0x0018E054 length: 4
@@ -68,12 +68,12 @@ namespace Map {
             int field28_0x18e05c; // 0x0018E05C length: 4
             undefined4 field29_0x18e060; // 0x0018E060 length: 4
             BOOLEnum isFirstTickInLoop; // 0x0018E064 length: 4
-            undefined4 DAT_DraggedTileCountVerified; // 0x0018E068 length: 4
+            int DAT_DraggedTileCountVerified; // 0x0018E068 length: 4
             int INT_SelectedBuildingStoneWoodCost; // 0x0018E06C length: 4
             int INT_SelectedBuildingStoneRepairCost; // 0x0018E070 length: 4
             undefined4 field34_0x18e074; // 0x0018E074 length: 4
             int siegeEngineCreationRelated01; // 0x0018E078 length: 4
-            undefined4 unitID; // 0x0018E07C length: 4
+            int unitID; // 0x0018E07C length: 4
             undefined4 field37_0x18e080; // 0x0018E080 length: 4
             int unused01; // 0x0018E084 length: 4
 
@@ -88,7 +88,7 @@ namespace Map {
             // Constructor
             BuildingsState* constructBuildingsState();
 
-            undefined4 getBuildingResourceAmountByUid(int buildingID, int param_2, ResourceType param_3);
+            int getBuildingResourceAmountByUid(int buildingID, int param_2, ResourceType param_3);
 
             BuildingType convertCommandBuildingTypeToBuildingType(MappersEnum commandBuildingType);
 
@@ -110,7 +110,7 @@ namespace Map {
 
             uint isFearFactorBuilding(int buildingID);
 
-            uint isReligiousBuilding(int buildingID);
+            BOOLEnum isReligiousBuilding(int buildingID);
 
             void copyPlayerDataArrayValues(int playerID, int playerID2);
 

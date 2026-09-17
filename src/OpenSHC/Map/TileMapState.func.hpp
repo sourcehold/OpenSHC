@@ -28,14 +28,12 @@ namespace Map {
             &TileMapState::Constructor_TileMapState)
         Constructor_TileMapState;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (TileMapState::*)(undefined4, undefined4, undefined4, undefined4, undefined4, undefined4), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, int, int, undefined4), false,
             Address::SHC_3BB0A8C1_0x00401060, &TileMapState::processEntityDamageToBuildingCollateralThunk)
         processEntityDamageToBuildingCollateralThunk;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (TileMapState::*)(
-                                    undefined4, undefined4, undefined4, undefined4, undefined4, undefined4, BOOLEnum),
-            false, Address::SHC_3BB0A8C1_0x00409300, &TileMapState::processDamageToBuildingThunk)
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (TileMapState::*)(int, uint, uint, int, int, int, BOOLEnum), false,
+            Address::SHC_3BB0A8C1_0x00409300, &TileMapState::processDamageToBuildingThunk)
         processDamageToBuildingThunk;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x004F6AE0,

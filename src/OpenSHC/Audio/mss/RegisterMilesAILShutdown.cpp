@@ -8,10 +8,10 @@ namespace OpenSHC {
 namespace Audio {
     namespace MSS {
 
-        void __cdecl AIL_shutdown_proxy() { AIL_shutdown(); }
+        void AIL_shutdown_proxy() { AIL_shutdown(); }
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0057E160
-        int __cdecl RegisterMilesAILShutdown()
+        int RegisterMilesAILShutdown()
         {
             MACRO_CALL(OS_Func::_atexit)(AIL_shutdown_proxy);
             return 0;

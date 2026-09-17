@@ -31,7 +31,7 @@ namespace UI {
                 &AlphaAndButtonSurface::prepareButtonAndAlphaSurface)
             prepareButtonAndAlphaSurface;
 
-            MACRO_FUNCTION_RESOLVER(bool (AlphaAndButtonSurface::*)(), false, Address::SHC_3BB0A8C1_0x004630D0,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (AlphaAndButtonSurface::*)(), false, Address::SHC_3BB0A8C1_0x004630D0,
                 &AlphaAndButtonSurface::isMouseOnButtonImageUnk)
             isMouseOnButtonImageUnk;
 

@@ -13,19 +13,19 @@ namespace Rendering {
 
     void __cdecl ApplyBlending(int param_1);
 
-    void __stdcall BlitMapImageWithVerticalClip();
+    void __cdecl BlitMapImageWithVerticalClip();
 
-    void __stdcall BlitMapImageWithVerticalClipAndYOffset();
+    void __cdecl BlitMapImageWithVerticalClipAndYOffset();
 
-    void __stdcall InitializeColors();
+    void __cdecl InitializeColors();
 
-    void __stdcall TicksStartCounter();
+    void __cdecl TicksStartCounter();
 
     int __cdecl ViewportBasedTileNumber();
 
-    void __stdcall ProcessCreditsScriptCommands();
+    void __cdecl ProcessCreditsScriptCommands();
 
-    void __stdcall RenderActiveCreditsElements();
+    void __cdecl RenderActiveCreditsElements();
 
 } // namespace Rendering
 } // namespace OpenSHC
