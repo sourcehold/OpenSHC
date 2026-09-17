@@ -32,12 +32,16 @@ namespace AI {
         if (DAT_TribesState::instance.tribes[_aiTribeID].uid
             != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[0xe])
             return;
-        short _size = DAT_TribesState::instance.tribes[_aiTribeID].size;
+        int _countdown = DAT_TribesState::instance.tribes[_aiTribeID].size;
 
-        for (int _countdown = _size; (_size != 0 && (0 < _countdown)); _countdown--) {
+        while (DAT_TribesState::instance.tribes[_aiTribeID].size != 0) {
+            if (_countdown <= 0)
+                break;
 
             int _unitID = MACRO_CALL_MEMBER(
                 OpenSHC::Map::Units::TribesState_Func::popUnitFromTribe, DAT_TribesState::ptr)(_aiTribeID);
+            // Yes this line has to be right here for the code to match.
+            _countdown--;
 
             int _tribeID = MACRO_CALL_MEMBER(
                 OpenSHC::Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(playerID);
@@ -56,8 +60,6 @@ namespace AI {
                 OpenSHC::Map::Units::TroopValueState_Func::placeSiegeTentOrTunnelAtSuitableLocationAndAssignEngineers,
                 DAT_TroopValueState::ptr)(
                 _tribeID, OpenSHC::Commands::M_MAPPER_TUNNEL_CONSTRUCTION, 50, (UnitInstructionType)21);
-
-            _size = DAT_TribesState::instance.tribes[_aiTribeID].size;
         }
     }
 
