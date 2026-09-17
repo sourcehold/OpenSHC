@@ -20,6 +20,12 @@
 namespace OpenSHC {
 namespace Text {
 
+    struct LineLayout {
+        short unknown0;
+        short unknown1;
+        short unknown2;
+    };
+
     using OpenSHC::Text::ImageHotspot;
     using OpenSHC::Text::LineLayout;
     using OpenSHC::Text::Enums::HelpTextToken;
