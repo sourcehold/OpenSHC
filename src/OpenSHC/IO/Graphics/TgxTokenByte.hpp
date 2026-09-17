@@ -13,7 +13,7 @@
 namespace OpenSHC {
 namespace IO {
     namespace Graphics {
-        typedef byte TgxTokenByte;
+        typedef char TgxTokenByte;
 
         static_assert_cpp98_obj(sizeof(TgxTokenByte) == 1, TgxTokenByte);
     } // namespace Graphics

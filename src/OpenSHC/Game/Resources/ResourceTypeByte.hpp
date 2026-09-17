@@ -13,7 +13,7 @@
 namespace OpenSHC {
 namespace Game {
     namespace Resources {
-        typedef byte ResourceTypeByte;
+        typedef char ResourceTypeByte;
 
         static_assert_cpp98_obj(sizeof(ResourceTypeByte) == 1, ResourceTypeByte);
     } // namespace Resources

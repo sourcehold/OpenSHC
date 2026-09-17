@@ -13,7 +13,7 @@
 namespace OpenSHC {
 namespace Map {
     namespace Units {
-        typedef byte UnitStartupTypeByte;
+        typedef char UnitStartupTypeByte;
 
         static_assert_cpp98_obj(sizeof(UnitStartupTypeByte) == 1, UnitStartupTypeByte);
     } // namespace Units

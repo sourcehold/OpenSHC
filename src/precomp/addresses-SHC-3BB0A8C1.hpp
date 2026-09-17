@@ -75117,8 +75117,8 @@ enum {
     // location: OpenSHC/OS
     // type: function
     SHC_3BB0A8C1_0x00580B69 = 0x00580B69,
-    // label: __wtol
-    // location: OpenSHC/OS
+    // label: __wtol2
+    // location: HoldStrong_lib
     // type: function
     SHC_3BB0A8C1_0x00580BFA = 0x00580BFA,
     // label: __wtol

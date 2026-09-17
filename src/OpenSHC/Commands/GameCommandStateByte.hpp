@@ -12,7 +12,7 @@
 
 namespace OpenSHC {
 namespace Commands {
-    typedef byte GameCommandStateByte;
+    typedef char GameCommandStateByte;
 
     static_assert_cpp98_obj(sizeof(GameCommandStateByte) == 1, GameCommandStateByte);
 } // namespace Commands

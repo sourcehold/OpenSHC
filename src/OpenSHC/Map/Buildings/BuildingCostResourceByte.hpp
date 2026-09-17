@@ -13,7 +13,7 @@
 namespace OpenSHC {
 namespace Map {
     namespace Buildings {
-        typedef byte BuildingCostResourceByte;
+        typedef char BuildingCostResourceByte;
 
         static_assert_cpp98_obj(sizeof(BuildingCostResourceByte) == 1, BuildingCostResourceByte);
     } // namespace Buildings

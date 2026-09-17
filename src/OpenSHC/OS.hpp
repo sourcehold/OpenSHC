@@ -61,7 +61,7 @@ namespace OS {
 
     wint_t __cdecl _fgetwc(FILE* _File);
 
-    int __cdecl _fwprintf(FILE* param_1, WCHAR_CONST* param_2, ...);
+    int __cdecl _fwprintf(FILE* param_1, wchar_t const* param_2, ...);
 
     size_t __cdecl _fwrite(void* _Str, size_t _Size, size_t _Count, FILE* _File);
 
@@ -69,9 +69,7 @@ namespace OS {
 
     int __cdecl __wcsicmp(wchar_t* _Str1, wchar_t* _Str2);
 
-    long __cdecl __wtol(WCHAR_CONST* wideStr);
-
-    long __cdecl __wtol(WCHAR_CONST* wideStr);
+    long __cdecl __wtol(wchar_t const* wideStr);
 
     void __cdecl _free(void* _Memory);
 

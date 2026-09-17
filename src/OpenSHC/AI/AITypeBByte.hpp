@@ -12,7 +12,7 @@
 
 namespace OpenSHC {
 namespace AI {
-    typedef byte AITypeBByte;
+    typedef char AITypeBByte;
 
     static_assert_cpp98_obj(sizeof(AITypeBByte) == 1, AITypeBByte);
 } // namespace AI
