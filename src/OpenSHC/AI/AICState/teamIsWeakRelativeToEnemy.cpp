@@ -10,56 +10,45 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004D0190
     BOOLEnum AICState::teamIsWeakRelativeToEnemy(int playerID, BOOLEnum param_2)
     {
-        short _relativeStrength;
-        int _totalEnemyTroopValue = DAT_GameState::instance.playerDataArray[playerID].totalEnemyTroopValue;
-        if (_totalEnemyTroopValue == 0) {
+        // strength of the own team in percent of the enemy strength
+        int _relativeStrength;
+        if (DAT_GameState::instance.playerDataArray[playerID].totalEnemyTroopValue == 0) {
             _relativeStrength = 100;
         } else {
-            _relativeStrength = (short)((DAT_GameState::instance.playerDataArray[playerID].totalTeamTroopValue * 100)
-                / _totalEnemyTroopValue);
+            _relativeStrength = DAT_GameState::instance.playerDataArray[playerID].totalTeamTroopValue * 100
+                / DAT_GameState::instance.playerDataArray[playerID].totalEnemyTroopValue;
         }
         DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy = _relativeStrength;
-        if (param_2 != FALSE) {
-            BOOLEnum BVar2
-                = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::checkKeepEnclosed, DAT_GameState::ptr)(playerID);
-            if (BVar2 != FALSE) {
-                if ((short)DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy < 0x46) {
-                    return TRUE;
-                }
+
+        // the team counts as weak below a threshold that is lower with an enclosed keep
+        // and much higher during the first 12000 ticks
+        if (param_2) {
+            if (MACRO_CALL_MEMBER(Game::GameStateStructures_Func::checkKeepEnclosed, DAT_GameState::ptr)(playerID)) {
+                if (DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy >= 70)
+                    return FALSE;
+            } else if ((int)DAT_GameCore::instance.mapTimeInTicks < 12000) {
+                if (DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy >= 300)
+                    return FALSE;
+            } else if (DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy
+                >= 100) {
                 return FALSE;
-            }
-            if ((int)DAT_GameCore::instance.mapTimeInTicks < 12000) {
-                if ((short)DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy < 300) {
-                    return TRUE;
-                }
-                return FALSE;
-            }
-            if ((short)DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy < 100) {
-                return TRUE;
             }
         } else {
-            if (DAT_GameState::instance.playerDataArray[playerID].totalEnemyRangedTroopValue < 100) {
+            // without enemy ranged troops there is no reason to become nervous
+            if (DAT_GameState::instance.playerDataArray[playerID].totalEnemyRangedTroopValue < 100)
                 return FALSE;
-            }
-            BOOLEnum BVar2
-                = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::checkKeepEnclosed, DAT_GameState::ptr)(playerID);
-            if (BVar2 != FALSE) {
-                if ((short)DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy < 50) {
-                    return TRUE;
-                }
+            if (MACRO_CALL_MEMBER(Game::GameStateStructures_Func::checkKeepEnclosed, DAT_GameState::ptr)(playerID)) {
+                if (DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy >= 50)
+                    return FALSE;
+            } else if ((int)DAT_GameCore::instance.mapTimeInTicks < 12000) {
+                if (DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy >= 250)
+                    return FALSE;
+            } else if (DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy
+                >= 75) {
                 return FALSE;
-            }
-            if ((int)DAT_GameCore::instance.mapTimeInTicks < 12000) {
-                if ((short)DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy < 250) {
-                    return TRUE;
-                }
-                return FALSE;
-            }
-            if ((short)DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy < 75) {
-                return TRUE;
             }
         }
-        return FALSE;
+        return TRUE;
     }
 }
 }
