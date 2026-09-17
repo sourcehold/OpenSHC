@@ -76,7 +76,7 @@ namespace Text {
         int helpSectionHistoryStack[30]; // 0x0000002C length: 120
         int counter; // 0x000000A4 length: 4
         undefined4 helpContentScrollOffsetY; // 0x000000A8 length: 4
-        undefined4 topVisibleLineIndex; // 0x000000AC length: 4
+        int topVisibleLineIndex; // 0x000000AC length: 4
         undefined4 dialogX; // 0x000000B0 length: 4
         undefined4 dialogY; // 0x000000B4 length: 4
         undefined4 dialogWidth; // 0x000000B8 length: 4
