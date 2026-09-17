@@ -176,7 +176,7 @@ namespace Text {
 
         void popHelpDialogStack();
 
-        void openUnusedHelpTextEditorDialog(int param_1);
+        void openUnusedHelpTextEditorDialog(int sectionId);
     };
 
     static_assert_cpp98_obj(sizeof(TextEditorState) == 145780, TextEditorState);
