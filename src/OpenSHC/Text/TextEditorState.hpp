@@ -168,7 +168,7 @@ namespace Text {
 
         void openScenarioHelpDialog(int sectionId);
 
-        void openCreditsScrollDialog(int param_1);
+        void openCreditsScrollDialog(int sectionId);
 
         void openMapDescriptionEditorDialog(int param_1);
 
