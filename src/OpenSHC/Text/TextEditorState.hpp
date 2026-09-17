@@ -19,6 +19,12 @@
 namespace OpenSHC {
 namespace Text {
 
+    struct LineLayout {
+        short unknown0;
+        short unknown1;
+        short unknown2;
+    };
+
     using OpenSHC::Text::ImageHotspot;
     using OpenSHC::Text::Enums::HelpTextToken;
     using OpenSHC::UI::Enums::MenuViewTypeInt;
@@ -71,7 +77,7 @@ namespace Text {
         int soundFileCount; // 0x00001494 length: 4
         char graphicFileNames[20][1000]; // 0x00001498 length: 20000
         int graphicFileCount; // 0x000062B8 length: 4
-        short lineLayoutTable[60000]; // 0x000062BC length: 120000
+        LineLayout lineLayoutTable[20000]; // 0x000062BC length: 120000
         int imageHotspotCount; // 0x0002377C length: 4
         ImageHotspot imageHotspotTable[50]; // 0x00023780 length: 400
         wchar_t* intArray1[20]; // 0x00023910 length: 80
