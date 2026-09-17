@@ -199,7 +199,7 @@ namespace Text {
 
         void openMapDescriptionEditorDialog(int sectionId);
 
-        void setCustomHelpText(char* param_1, undefined4 param_2);
+        void setCustomHelpText(char* helpText, int bufferSize);
 
         void popHelpDialogStack();
 

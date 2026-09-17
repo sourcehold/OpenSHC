@@ -167,7 +167,7 @@ namespace Text {
             &TextEditorState::openMapDescriptionEditorDialog)
         openMapDescriptionEditorDialog;
 
-        MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(char*, undefined4), false, Address::SHC_3BB0A8C1_0x004620F0,
+        MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(char*, int), false, Address::SHC_3BB0A8C1_0x004620F0,
             &TextEditorState::setCustomHelpText)
         setCustomHelpText;
 
