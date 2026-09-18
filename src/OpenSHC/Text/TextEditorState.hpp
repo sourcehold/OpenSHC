@@ -28,6 +28,7 @@ namespace Text {
         HTT_NEWPARAGRAPH = 6,
         HTT_CENTRE = 7,
         HTT_ENDCENTRE = 8,
+        HTT_TAB = 9, // seems unused in almost all code
         HTT_LINKCOLOUR = 10,
         HTT_SOUND = 11,
         HTT_STRING = 12,
