@@ -19,6 +19,13 @@
 namespace OpenSHC {
 namespace Text {
 
+    struct ImageHotspot {
+        short xPos;
+        short yPos;
+        short imageRelated;
+        short unknown3;
+    };
+
     struct LineLayout {
         short unknown0;
         short unknown1;
@@ -176,7 +183,7 @@ namespace Text {
 
         void popHelpDialogStack();
 
-        void openUnusedHelpTextEditorDialog(int sectionId);
+        void openUnusedHelpTextEditorDialog(int param_1);
     };
 
     static_assert_cpp98_obj(sizeof(TextEditorState) == 145780, TextEditorState);
