@@ -13,40 +13,23 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000 */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004CE3B0
-    void AICState ::setNextMoveLocationForUnits(int playerID)
-
+    void AICState::setNextMoveLocationForUnits(int playerID)
     {
-
-        if ((short)DAT_TileMapState::instance.OrganismLayer
-                [DAT_ViewportRenderState::instance
-                        .translationMatrix[DAT_GameState::instance.playerDataArray[playerID].shortestDistanceY]
-                        .addXgetTile
-                    + DAT_GameState::instance.playerDataArray[playerID].shortestDistanceX]
-            != 0) {
-
-            MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::removeTree, DAT_LandscapeState::ptr)(
-                (int)(short)DAT_TileMapState::instance.OrganismLayer
-                    [DAT_ViewportRenderState::instance
-                            .translationMatrix[DAT_GameState::instance.playerDataArray[playerID].shortestDistanceY]
-                            .addXgetTile
-                        + DAT_GameState::instance.playerDataArray[playerID].shortestDistanceX]);
+        int organismID = (short)DAT_TileMapState::instance.OrganismLayer
+            [DAT_ViewportRenderState::instance
+                    .translationMatrix[DAT_GameState::instance.playerDataArray[playerID].shortestDistanceY]
+                    .addXgetTile
+                + DAT_GameState::instance.playerDataArray[playerID].shortestDistanceX];
+        if (organismID != 0) {
+            MACRO_CALL_MEMBER(Map::LandscapeState_Func::removeTree, DAT_LandscapeState::ptr)(organismID);
         }
 
-        MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findLinkageBasedPathOrWalkRadius,
+        MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findLinkageBasedPathOrWalkRadius,
             DAT_PathFindingState::ptr)(DAT_GameState::instance.playerDataArray[playerID].shortestDistanceX,
-            (uint)((int)(DAT_GameState::instance.playerDataArray[playerID].shortestDistanceY)), -1, -1, 4000, FALSE);
-
-        MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::setDestinationPairsBasedOnPreviousSearch,
-            DAT_PathFindingState::ptr)(
-            playerID + -1, DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID);
-
-        return;
+            DAT_GameState::instance.playerDataArray[playerID].shortestDistanceY, -1, -1, 4000, FALSE);
+        MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::setDestinationPairsBasedOnPreviousSearch,
+            DAT_PathFindingState::ptr)(playerID - 1, DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID);
     }
 
 }
