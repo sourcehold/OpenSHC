@@ -13,17 +13,25 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CF400
     void AICState::setTribe0xCtoAggressiveAndAttack(int playerID)
     {
-        int tribeID;
-        if ((DAT_GameState::instance.playerDataArray[playerID].aiType != AITA_NULL)
-            && (tribeID = (int)DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[0xc], tribeID != 0)) {
-            if ((DAT_TribesState::instance.tribes[tribeID].uid
-                    == DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[0xc])
-                && (DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID != 0)) {
-                DAT_TribesState::instance.tribes[tribeID].unitStance = Map::Units::Behavior::USE_AGGRESSIVE;
-                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::assignAttackTargetsForTribe, DAT_TribesState::ptr)(
-                    tribeID, Map::Units::STBT_0x3f2);
-            }
+        if (DAT_GameState::instance.playerDataArray[playerID].aiType == AITA_NULL) {
+            return;
         }
+
+        int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[12];
+        if (tribeID == 0) {
+            return;
+        }
+        if (DAT_TribesState::instance.tribes[tribeID].uid
+            != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[12]) {
+            return;
+        }
+        if (DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID == 0) {
+            return;
+        }
+
+        DAT_TribesState::instance.tribes[tribeID].unitStance = Map::Units::Behavior::USE_AGGRESSIVE;
+        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::assignAttackTargetsForTribe, DAT_TribesState::ptr)(
+            tribeID, Map::Units::STBT_0x3f2);
     }
 }
 }
