@@ -12,20 +12,30 @@ namespace OpenSHC {
 namespace AI {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CF560
-    void AICState::setTribe0x11ToAggressiveAndAttackIfConditionMet(int param_1)
+    void AICState::setTribe0x11ToAggressiveAndAttackIfConditionMet(int playerID)
     {
-        int tribeID;
-        if (((0 < *(int*)((int)DAT_TroopValueState::instance.attackInfo.moatValuesArray + param_1 * 0x177bc + -4))
-                && (DAT_GameState::instance.playerDataArray[param_1].aiType != AITA_NULL))
-            && (tribeID = (int)DAT_GameState::instance.playerDataArray[param_1].aiTribeIDs[0x11], tribeID != 0)) {
-            if ((DAT_TribesState::instance.tribes[tribeID].uid
-                    == DAT_GameState::instance.playerDataArray[param_1].aiTribeUIDs[0x11])
-                && (DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID != 0)) {
-                DAT_TribesState::instance.tribes[tribeID].unitStance = Map::Units::Behavior::USE_AGGRESSIVE;
-                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::assignAttackTargetsForTribe, DAT_TribesState::ptr)(
-                    tribeID, Map::Units::STBT_0x3f7);
-            }
+        if (DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].moat2 <= 0) {
+            return;
         }
+        if (DAT_GameState::instance.playerDataArray[playerID].aiType == AITA_NULL) {
+            return;
+        }
+
+        int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[17];
+        if (tribeID == 0) {
+            return;
+        }
+        if (DAT_TribesState::instance.tribes[tribeID].uid
+            != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[17]) {
+            return;
+        }
+        if (DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID == 0) {
+            return;
+        }
+
+        DAT_TribesState::instance.tribes[tribeID].unitStance = Map::Units::Behavior::USE_AGGRESSIVE;
+        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::assignAttackTargetsForTribe, DAT_TribesState::ptr)(
+            tribeID, Map::Units::STBT_0x3f7);
     }
 }
 }
