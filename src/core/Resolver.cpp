@@ -14,8 +14,8 @@ static void createRelativeJump(int from, int to)
     DWORD oldProtection;
     if (!VirtualProtect((void*)from, instructionLength, PAGE_EXECUTE_READWRITE, &oldProtection)) {
         std::ostringstream oss;
-        oss << "Error while trying to remove memory protection to create relative jump from '" << from << "' to '" << to
-            << "': " << GetLastError();
+        oss << "Error while trying to remove memory protection to create relative jump from '" << (void*)from
+            << "' to '" << (void*)to << "': " << GetLastError();
         ucp_log(Verbosity_FATAL, oss.str().c_str());
     }
 
@@ -26,8 +26,8 @@ static void createRelativeJump(int from, int to)
     DWORD dummyProtection;
     if (!VirtualProtect((void*)from, instructionLength, oldProtection, &dummyProtection)) {
         std::ostringstream oss;
-        oss << "Error while trying to re-enable memory protection after creating relative jump from '" << from
-            << "' to '" << to << "': " << GetLastError();
+        oss << "Error while trying to re-enable memory protection after creating relative jump from '" << (void*)from
+            << "' to '" << (void*)to << "': " << GetLastError();
         ucp_log(Verbosity_FATAL, oss.str().c_str());
     }
 }
@@ -44,7 +44,7 @@ void StructResolver::initialize(
 
 #ifdef OPEN_SHC_DLL
         std::ostringstream oss;
-        oss << "Abort execution, since address '" << gameAddress << "' was resolved more then once.";
+        oss << "Abort execution, since address '" << (void*)gameAddress << "' was resolved more then once.";
         ucp_log(Verbosity_FATAL, oss.str().c_str());
 #endif
         return;
@@ -75,7 +75,7 @@ void FunctionResolver::initialize(
 
 #ifdef OPEN_SHC_DLL
         std::ostringstream oss;
-        oss << "Abort execution, since address '" << gameAddress << "' was resolved more then once.";
+        oss << "Abort execution, since address '" << (void*)gameAddress << "' was resolved more then once.";
         ucp_log(Verbosity_FATAL, oss.str().c_str());
 #endif
         return;
