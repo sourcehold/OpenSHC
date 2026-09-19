@@ -7,10 +7,9 @@ namespace OpenSHC {
 namespace AI {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CB610
-    BOOLEnum AICState::shouldWaitWithBuildingNegativeFearFactor(int param_1, Commands::MappersEnum param_2)
+    BOOLEnum AICState::shouldWaitWithBuildingNegativeFearFactor(int playerID, Commands::MappersEnum mapper)
     {
-        int* piVar1;
-        switch (param_2) {
+        switch (mapper) {
         case Commands::M_MAPPER_GALLOWS:
         case Commands::M_MAPPER_STOCKS:
         case Commands::M_MAPPER_CESS_PIT1:
@@ -24,13 +23,15 @@ namespace AI {
         case Commands::M_MAPPER_RACK_FLOGGING:
         case Commands::M_MAPPER_CHOPPING_BLOCK:
         case Commands::M_MAPPER_DUNKING_STOOL:
-            if ((DAT_GameState::instance.playerDataArray[param_1].popularity < 5000)
-                || (piVar1 = &DAT_GameState::instance.playerDataArray[param_1].aivNegativeFearFactorDelay,
-                    *piVar1 = *piVar1 + 1,
-                    DAT_GameState::instance.playerDataArray[param_1].aivNegativeFearFactorDelay < 100)) {
+            if (DAT_GameState::instance.playerDataArray[playerID].popularity < 5000) {
                 return TRUE;
             }
-            DAT_GameState::instance.playerDataArray[param_1].aivNegativeFearFactorDelay = 0;
+            DAT_GameState::instance.playerDataArray[playerID].aivNegativeFearFactorDelay++;
+            if (DAT_GameState::instance.playerDataArray[playerID].aivNegativeFearFactorDelay < 100) {
+                return TRUE;
+            }
+            DAT_GameState::instance.playerDataArray[playerID].aivNegativeFearFactorDelay = 0;
+            return FALSE;
         }
         return FALSE;
     }
