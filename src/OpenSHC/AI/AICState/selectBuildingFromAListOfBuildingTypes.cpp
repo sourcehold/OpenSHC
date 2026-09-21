@@ -7,68 +7,28 @@
 namespace OpenSHC {
 namespace AI {
 
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000 */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004CDAB0
-    int AICState ::selectBuildingFromAListOfBuildingTypes(int playerID)
-
+    int AICState::selectBuildingFromAListOfBuildingTypes(int playerID)
     {
-
-        int _selectedBuildingID;
-
-        int _loopCounter;
-
-        int _loopLimit;
-
-        short* psVar1;
-
-        int _arraySize;
-
-        int _buildingID;
-
-        _arraySize = DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildingsTracker;
-
-        _selectedBuildingID = 0;
-
-        _loopLimit = 0x2e;
-
-        if (0 < _arraySize) {
-
-            psVar1 = DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildings;
-
-            do {
-
-                _buildingID = (int)*psVar1;
-
-                if ((_buildingID != 0) && (_loopCounter = 0, 0 < _loopLimit)) {
-
-                    do {
-
-                        if ((int)(short)DAT_BuildingsState::instance.buildings[_buildingID].buildingType
-                            == DAT_SkirmishDefinedData::instance.BuildingTargetPrioritySet1[_loopCounter]) {
-
-                            /*
-                                          fancy break statement? */
-
-                            _selectedBuildingID = _buildingID;
-
-                            _loopLimit = _loopCounter;
-                        }
-
-                        _loopCounter = _loopCounter + 1;
-
-                    } while (_loopCounter < _loopLimit);
+        // Pick the targetable building whose type comes first in BuildingTargetPrioritySet1
+        int selectedBuildingID = 0;
+        int bestPriority = 46;
+        for (int i = 0; i < DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildingsTracker; i++) {
+            int buildingID = DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildings[i];
+            if (buildingID == 0) {
+                continue;
+            }
+            for (int j = 0; j < bestPriority; j++) {
+                if ((short)DAT_BuildingsState::instance.buildings[buildingID].buildingType
+                    == DAT_SkirmishDefinedData::instance.BuildingTargetPrioritySet1[j]) {
+                    // Found a better match; lowering the bound also ends this loop
+                    bestPriority = j;
+                    selectedBuildingID = buildingID;
                 }
-
-                psVar1 = psVar1 + 1;
-
-                _arraySize = _arraySize + -1;
-
-            } while (_arraySize != 0);
+            }
         }
 
-        return _selectedBuildingID;
+        return selectedBuildingID;
     }
 
 }
