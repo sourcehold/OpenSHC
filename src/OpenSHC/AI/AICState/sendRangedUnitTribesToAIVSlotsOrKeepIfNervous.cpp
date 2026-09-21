@@ -18,58 +18,41 @@ namespace AI {
     using OpenSHC::AI::Tribes::AIVUnitTypeMaxLocationPair;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004D4130
-    void AICState ::sendRangedUnitTribesToAIVSlotsOrKeepIfNervous(int playerID)
-
+    void AICState::sendRangedUnitTribesToAIVSlotsOrKeepIfNervous(int playerID)
     {
+        for (int i = 0; i < 5; i++) {
+            int count = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount
+                            [DAT_SkirmishDefinedData::instance.MaxAIVLocationForRangedUnits[i].aivUnitType];
+            for (int j = 0; j < count; j++) {
+                int tribeID = DAT_GameState::instance.playerDataArray[playerID]
+                                  .aiTribeIDs[DAT_SkirmishDefinedData::instance.MaxAIVLocationForRangedUnits[i]
+                                                  .tribeArrayOffset
+                                      + j];
+                if (tribeID == 0) {
+                    continue;
+                }
+                if (DAT_TribesState::instance.tribes[tribeID].uid
+                    != DAT_GameState::instance.playerDataArray[playerID]
+                           .aiTribeUIDs[DAT_SkirmishDefinedData::instance.MaxAIVLocationForRangedUnits[i]
+                                            .tribeArrayOffset
+                               + j]) {
+                    continue;
+                }
 
-        AIVUnitTypeInt* _ptr = &DAT_SkirmishDefinedData::instance.MaxAIVLocationForRangedUnits[0].aivUnitType;
-
-        do {
-
-            int _limit = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount[*_ptr];
-
-            int _index = 0;
-
-            if (0 < _limit) {
-
-                do {
-
-                    int _tribe = (int)DAT_GameState::instance.playerDataArray[playerID]
-                                     .aiTribeIDs[((AIVUnitTypeMaxLocationPair*)(_ptr + -1))->tribeArrayOffset + _index];
-
-                    if ((_tribe != 0)
-                        && (DAT_TribesState::instance.tribes[_tribe].uid
-                            == DAT_GameState::instance.playerDataArray[playerID]
-                                .aiTribeUIDs[((AIVUnitTypeMaxLocationPair*)(_ptr + -1))->tribeArrayOffset + _index])) {
-
-                        if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker > 0) {
-
-                            if ((DAT_TileMapState::instance.LogicLayer[DAT_UnitsState::instance
-                                         .units[DAT_TribesState::instance.tribes[_tribe].selectionTargetUnitID]
-                                         .tile]
-                                    & 0x10000100U)
-                                == 0) {
-
-                                MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToKeep, this)(_tribe, playerID);
-                            }
-
-                        } else {
-
-                            MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendTribeToAIVLocationSlot, this)(
-                                _tribe, (AIVUnitType)((int)(*_ptr)), _index);
-                        }
+                if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker > 0) {
+                    if ((DAT_TileMapState::instance.LogicLayer[DAT_UnitsState::instance
+                                .units[DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID]
+                                .tile]
+                            & 0x10000100U)
+                        == 0) {
+                        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToKeep, this)(tribeID, playerID);
                     }
-
-                    _index = _index + 1;
-
-                } while (_index < _limit);
+                } else {
+                    MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendTribeToAIVLocationSlot, this)(tribeID,
+                        (AIVUnitType)DAT_SkirmishDefinedData::instance.MaxAIVLocationForRangedUnits[i].aivUnitType, j);
+                }
             }
-
-            _ptr = _ptr + 2;
-
-        } while ((int)_ptr < 0xb42744);
-
-        return;
+        }
     }
 
 }
