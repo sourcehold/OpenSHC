@@ -17,78 +17,59 @@ namespace AI {
     using OpenSHC::Map::Units::Behavior::UnitStanceEnum;
     using OpenSHC::Map::Units::Instructions::UnitMatchSpeedEnum;
 
-    /**
-     * I seem unable to make this match better than 75.42% even though this function flow is dumb: _ghX and _ghY are
-     * only specified if not navigatable, which is checked twice for some reason.
-     */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004CE5F0
     void AICState::sendUnitsToPlayerIDsKeepIfPossible(int playerID1, int playerID2)
     {
-        uint _p1_campfireX = DAT_GameState::instance.playerDataArray[playerID1].campground.xEntry;
-        uint _p1_campfireY = DAT_GameState::instance.playerDataArray[playerID1].campground.yEntry;
+        uint campfireX = DAT_GameState::instance.playerDataArray[playerID1].campground.xEntry;
+        uint campfireY = DAT_GameState::instance.playerDataArray[playerID1].campground.yEntry;
 
-        int const _canNavigate = MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::canNavigateFromKeepToKeep,
-            DAT_GameState::ptr)(playerID1, playerID2);
-
-        uint _ghX;
-        uint _ghY;
-
-        if (_canNavigate == FALSE) {
-            dword const _gatehouseTile
-                = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findOwnedGatehouse,
-                    DAT_PathFindingState::ptr)(playerID2, _p1_campfireX, _p1_campfireY);
-            if (_gatehouseTile == 0) {
+        uint gatehouseX;
+        uint gatehouseY;
+        if (MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::canNavigateFromKeepToKeep, DAT_GameState::ptr)(
+                playerID1, playerID2)
+            == FALSE) {
+            uint gatehouseTile = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findOwnedGatehouse,
+                DAT_PathFindingState::ptr)(playerID2, campfireX, campfireY);
+            if (gatehouseTile != 0) {
+                gatehouseY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[gatehouseTile];
+                gatehouseX = gatehouseTile - DAT_ViewportRenderState::instance.translationMatrix[gatehouseY].addXgetTile;
+            } else {
                 DAT_GameState::instance.playerDataArray[playerID1].requestStateUnk = 0;
                 return;
             }
-            _ghY = (uint)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_gatehouseTile];
-            _ghX = _gatehouseTile - DAT_ViewportRenderState::instance.translationMatrix[_ghY].addXgetTile;
         }
 
-        for (int _index = 0; _index < 11; _index++) {
-            int const _tribeTypeStart = (int)DAT_SkirmishDefinedData::instance.MaxAttackTribes1[_index].tribeType;
-            int _tribeIndex = 0;
-            int const _maxTribeCount = (int)DAT_SkirmishDefinedData::instance.MaxAttackTribes1[_index].tribeCount;
+        for (int i = 0; i < 11; i++) {
+            int tribeTypeStart = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeType;
+            int tribeCount = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeCount;
+            for (int j = 0; j < tribeCount; j++) {
+                int tribeID = DAT_GameState::instance.playerDataArray[playerID1].aiTribeIDs[tribeTypeStart + j];
+                if (tribeID == 0) {
+                    continue;
+                }
+                if (DAT_TribesState::instance.tribes[tribeID].uid
+                    != DAT_GameState::instance.playerDataArray[playerID1].aiTribeUIDs[j + tribeTypeStart]) {
+                    continue;
+                }
 
-            for (; _tribeIndex < _maxTribeCount; _tribeIndex++) {
+                DAT_TribesState::instance.tribes[tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
 
-                int const _tribeID
-                    = (int)DAT_GameState::instance.playerDataArray[playerID1].aiTribeIDs[_tribeTypeStart + _tribeIndex];
-
-                if ((_tribeID != 0)
-                    && (DAT_TribesState::instance.tribes[_tribeID].uid
-                        == DAT_GameState::instance.playerDataArray[playerID1]
-                            .aiTribeUIDs[_tribeIndex + _tribeTypeStart])) {
-
-                    DAT_TribesState::instance.tribes[_tribeID].unitStance
-                        = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
-
-                    int const _canNav2
-                        = MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::canNavigateFromKeepToKeep,
-                            DAT_GameState::ptr)(playerID1, playerID2);
-
-                    if (_canNav2 != FALSE) {
-                        if (_tribeTypeStart == 0xbe) {
-                            MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToCampfire, this)(
-                                _tribeID, playerID2);
-                        } else {
-                            int const _hasHorses
-                                = MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::selectionContainsHorses,
-                                    DAT_TribesState::ptr)(_tribeID);
-                            if (_hasHorses != FALSE) {
-                                MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToCampfire, this)(
-                                    _tribeID, playerID2);
-                            } else {
-                                MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToKeep, this)(
-                                    _tribeID, playerID2);
-                            }
-                        }
+                if (MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::canNavigateFromKeepToKeep,
+                        DAT_GameState::ptr)(playerID1, playerID2)
+                    != FALSE) {
+                    if (tribeTypeStart == 0xbe) {
+                        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToCampfire, this)(tribeID, playerID2);
+                    } else if (MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::selectionContainsHorses,
+                                   DAT_TribesState::ptr)(tribeID)
+                        != FALSE) {
+                        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToCampfire, this)(tribeID, playerID2);
                     } else {
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(
-                            _tribeID, _ghX, _ghY, 0, 0, OpenSHC::Map::Units::Instructions::UMSE_0);
+                        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToKeep, this)(tribeID, playerID2);
                     }
+                } else {
+                    MACRO_CALL_MEMBER(
+                        OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(
+                        tribeID, gatehouseX, gatehouseY, 0, 0, OpenSHC::Map::Units::Instructions::UMSE_0);
                 }
             }
         }
