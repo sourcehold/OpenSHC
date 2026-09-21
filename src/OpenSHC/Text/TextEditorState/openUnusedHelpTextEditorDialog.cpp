@@ -30,7 +30,7 @@ namespace Text {
             this->savedMenuViewType = DAT_GameCore::instance.currentMenuViewType;
             this->savedActiveMenuTab = DAT_GameCore::instance.activeMenuTab.tabType;
             this->savedMenuFlag = DAT_GameCore::instance.unknownAlwaysZero01;
-            this->unknown_0x23960 = 1;
+            this->field48_0x23960 = 1;
             this->isDialogStateInitialized = TRUE;
             this->useInGameHelpHandler = FALSE;
             this->helpDialogVariant = 0;
@@ -72,13 +72,13 @@ namespace Text {
         if (!this->useWideHelpLayout) {
             this->dialogContentX = this->dialogX + 10;
             this->dialogContentY = this->dialogY + 10;
-            this->dialogContentHeight = 600;
-            this->dialogContentWidth = 435;
+            this->dialogContentWidth = 600;
+            this->dialogContentHeight = 435;
         } else {
             this->dialogContentX = this->dialogX + 10;
             this->dialogContentY = this->dialogY + 10;
-            this->dialogContentHeight = 664;
-            this->dialogContentWidth = 291;
+            this->dialogContentWidth = 664;
+            this->dialogContentHeight = 291;
         }
 
         for (int i = 28; i >= 0; --i) {

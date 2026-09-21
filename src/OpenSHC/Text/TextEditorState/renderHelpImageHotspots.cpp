@@ -28,12 +28,12 @@ namespace Text {
                     height += y1 - this->dialogContentY;
                     y1 = this->dialogContentY;
                 }
-                // Does the naming "dialogContentWidth" fit? Is it related to width?
-                if (height + y1 > this->dialogContentY + this->dialogContentWidth) {
-                    height = this->dialogContentWidth * 2 - y1;
+
+                if (height + y1 > this->dialogContentY + this->dialogContentHeight) {
+                    height = this->dialogContentHeight * 2 - y1;
                 }
                 int const y2 = y1 + height;
-                if (y2 >= this->dialogContentY && y1 < this->dialogContentY + this->dialogContentWidth) {
+                if (y2 >= this->dialogContentY && y1 < this->dialogContentY + this->dialogContentHeight) {
                     int const x2 = x1 + width;
                     MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
                         x1, y1, x2, y1, COL_GREYISH_YELLOW::instance.shortValue);
@@ -64,7 +64,7 @@ namespace Text {
                     this->imageHotspotTable[i].yPos - this->helpContentScrollY + this->dialogContentY
                         - this->helpContentScrollOffsetY,
                     boxWidth, boxHeight)) {
-                this->unknown_0x23968 = this->imageHotspotTable[i].unknown3;
+                this->field50_0x23968 = this->imageHotspotTable[i].unknown3;
             }
         }
     }

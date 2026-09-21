@@ -8,11 +8,11 @@ namespace OpenSHC {
 namespace Text {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x0045F130
-    TextEditorState* TextEditorState ::Constructor_TextEditorState()
+    TextEditorState* TextEditorState::Constructor_TextEditorState()
     {
         this->isDialogStateInitialized = 0;
         this->helpDialogVariant = 0;
-        this->unknown_0x23960 = 0;
+        this->field48_0x23960 = 0;
         this->helpDialogSubMode = 0;
         this->useAlternateHelpTab = 0;
         this->customHelpTextLength = 0;
@@ -21,7 +21,7 @@ namespace Text {
 
         MACRO_CALL_MEMBER(TextEditorState_Func::resetHelpStateFields, this)();
 
-        this->DAT_PointerToTemporaryTextMemory = MACRO_CALL(OS_Func::_malloc)(40000);
+        this->DAT_PointerToTemporaryTextMemory = (LPWSTR)MACRO_CALL(OS_Func::_malloc)(40000);
         this->customTextMaxLength = -1;
 
         // FIXME:: Requires a finishing zero case, or it will not set the counter

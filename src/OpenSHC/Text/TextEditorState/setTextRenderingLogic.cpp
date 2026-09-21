@@ -15,18 +15,18 @@ namespace Text {
         if (this->helpDialogVariant != 1) {
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::setRenderingRect,
                 DAT_TextureRenderCoreObject::ptr)(this->dialogContentX, this->dialogContentY,
-                this->dialogContentHeight + this->dialogContentX, this->dialogContentWidth + this->dialogContentY);
+                this->dialogContentWidth + this->dialogContentX, this->dialogContentHeight + this->dialogContentY);
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::setScreenMenuSurfaceHeightRange,
                 DAT_TextureRenderCoreObject::ptr)(
-                this->dialogContentY, this->dialogContentWidth + this->dialogContentY);
+                this->dialogContentY, this->dialogContentHeight + this->dialogContentY);
             DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = Rendering::Enums::RT_SCREEN_MENU;
         } else {
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::setRenderingRect,
                 DAT_TextureRenderCoreObject::ptr)(this->dialogContentX, this->dialogContentY,
-                this->dialogContentHeight + this->dialogContentX, this->dialogContentWidth + this->dialogContentY);
+                this->dialogContentWidth + this->dialogContentX, this->dialogContentHeight + this->dialogContentY);
             MACRO_CALL_MEMBER(
                 UI::Rendering::TextureRenderCore_Func::setMapSurfaceHeightRange, DAT_TextureRenderCoreObject::ptr)(
-                this->dialogContentY, this->dialogContentWidth + this->dialogContentY);
+                this->dialogContentY, this->dialogContentHeight + this->dialogContentY);
             DAT_TextManagerObject::instance.textSurfaceTarget = Rendering::Enums::RT_MAP_GAME;
             DAT_PencilRenderCore::instance.surfaceTarget = Rendering::Enums::RT_MAP_GAME;
             DAT_TextureRenderCoreObject::instance.currentRenderSurfaceIdentifierUnk_0x8 = Rendering::Enums::RT_MAP_GAME;

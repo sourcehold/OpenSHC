@@ -19,16 +19,9 @@
 namespace OpenSHC {
 namespace Text {
 
-    struct ImageHotspot {
-        short xPos;
-        short yPos;
-        short imageRelated;
-        short unknown3;
-    };
-
     struct LineLayout {
-        short unknown0;
-        short unknown1;
+        short leftBorder;
+        short rightBorder;
         short unknown2;
     };
 
@@ -55,7 +48,7 @@ namespace Text {
         int currentHelpSectionID; // 0x00000028 length: 4
         int helpSectionHistoryStack[30]; // 0x0000002C length: 120
         int counter; // 0x000000A4 length: 4
-        undefined4 helpContentScrollOffsetY; // 0x000000A8 length: 4
+        int helpContentScrollOffsetY; // 0x000000A8 length: 4
         int topVisibleLineIndex; // 0x000000AC length: 4
         int dialogX; // 0x000000B0 length: 4
         int dialogY; // 0x000000B4 length: 4
@@ -105,7 +98,7 @@ namespace Text {
         // Constructor
         TextEditorState* Constructor_TextEditorState();
 
-        void setHelpWindowBounds(undefined4 x, undefined4 y, undefined4 height, undefined4 width);
+        void setHelpWindowBounds(int x, int y, int width, int height);
 
         void resetHelpStateFields();
 

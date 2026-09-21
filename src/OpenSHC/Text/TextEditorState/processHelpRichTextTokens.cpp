@@ -7,6 +7,8 @@
 #include "OpenSHC/Input/MouseState.func.hpp"
 #include "OpenSHC/Text/FontSizeClass.func.hpp"
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
+#include "OpenSHC/Text/Enums/HelpTextPicturePositionToken.hpp"
+#include "OpenSHC/wstring-literals.hpp"
 
 #include "OpenSHC/Globals/COL_DARK_LIME.hpp"
 #include "OpenSHC/Globals/DAT_00df3348.hpp"
@@ -24,7 +26,7 @@ namespace Text {
         int value;
         wchar_t* text;
         HelpTextToken helpToken;
-        HelpTextPicturePositionToken picturePositionToken;
+        Enums::HelpTextPicturePositionToken picturePositionToken;
     };
 
     // FUNCTION: STRONGHOLDCRUSADER 0x0045FDC0
@@ -65,9 +67,9 @@ namespace Text {
         if (!this->isTextHelpDialogMode) {
             return 1;
         }
-        this->unknown_0x23964 = -1;
-        this->unknown_0x23968 = -1;
-        if (this->unknown_0x2396C) {
+        this->field49_0x23964 = -1;
+        this->field50_0x23968 = -1;
+        if (this->field51_0x2396c) {
             DAT_00df334c::instance = 1;
         }
         if (this->activeHelpHotspotIndex < 0) {
@@ -92,8 +94,8 @@ namespace Text {
             TextMemUnion textMemUnion;
             textMemUnion.value
                 = MACRO_CALL_MEMBER(TextEditorState_Func::getWideCharOrWideCharPointer, this)(&textMemIndex);
-            if (this->useAlternateHelpTab && textMemUnion.value < L' ' && textMemUnion.helpToken != HTT_NEWPARAGRAPH
-                && iVar5 == this->activeHelpHotspotIndex) {
+            if (this->useAlternateHelpTab && textMemUnion.value < L' '
+                && textMemUnion.helpToken != Enums::HTT_NEWPARAGRAPH && iVar5 == this->activeHelpHotspotIndex) {
                 lineEndY = lineY + currentFontLineHeight;
                 lineStartY = lineY;
                 if (param_1 == 1) {
@@ -102,12 +104,12 @@ namespace Text {
                         xModify = this->lineLayoutTable[lineY].unknown2 / 2;
                     }
                     local_10c = local_114 - local_11c;
-                    if (this->unknown_0x2396C < 0) {
+                    if (this->field51_0x2396c < 0) {
                         this->activeHelpHotspotIndex = local_100 + DAT_00df3348::instance;
                         if (this->activeHelpHotspotIndex >= local_11c) {
                             this->activeHelpHotspotIndex = local_11c - 1;
                         }
-                        this->unknown_0x2396C = 0;
+                        this->field51_0x2396c = 0;
                     }
                     local_134 = 0;
                     MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
@@ -128,29 +130,29 @@ namespace Text {
 
             iVar17 = local_11c;
             switch (textMemUnion.helpToken) {
-            case HTT_PIC:
+            case Enums::HTT_PIC:
                 if (this->helpDialogSubMode == 1) {
                     charColor = 0xff;
                     local_12c = 0;
-                    MACRO_CALL(Global_Func::PrintToDestination)(wideTextBuffer, L"<PIC %d (\"%S\"),",
+                    MACRO_CALL(Global_Func::PrintToDestination)(wideTextBuffer, u__PIC__d__S__005a583c,
                         this->DAT_PointerToTemporaryTextMemory[textMemIndex],
                         this->graphicFileNames[this->DAT_PointerToTemporaryTextMemory[textMemIndex]]);
                     ++textMemIndex;
-                    switch ((HelpTextPicturePositionToken)this->DAT_PointerToTemporaryTextMemory[textMemIndex]) {
-                    case HTT_PIC_LEFT:
-                        wcscat(wideTextBuffer, L"LEFT>");
+                    switch ((Enums::HelpTextPicturePositionToken)this->DAT_PointerToTemporaryTextMemory[textMemIndex]) {
+                    case Enums::HTPPT_LEFT:
+                        wcscat(wideTextBuffer, u_LEFT__005a5494);
                         textMemIndex += 2;
                         break;
-                    case HTT_PIC_RIGHT:
-                        wcscat(wideTextBuffer, L"RIGHT>");
+                    case Enums::HTPPT_RIGHT:
+                        wcscat(wideTextBuffer, u_RIGHT__005a5484);
                         textMemIndex += 2;
                         break;
-                    case HTT_PIC_CENTRE:
-                        wcscat(wideTextBuffer, L"CENTRE>");
+                    case Enums::HTPPT_CENTRE:
+                        wcscat(wideTextBuffer, u_CENTRE__005a5474);
                         textMemIndex += 2;
                         break;
-                    case HTT_PIC_HERE:
-                        wcscat(wideTextBuffer, L"HERE>");
+                    case Enums::HTPPT_HERE:
+                        wcscat(wideTextBuffer, u_HERE__005a5468);
                         textMemIndex += 2;
                         break;
                     default:
@@ -179,8 +181,8 @@ namespace Text {
                             this->imageHotspotTable[this->imageHotspotCount].unknown3 = currentLinkId;
                         }
                     }
-                    HelpTextPicturePositionToken positionToken
-                        = (HelpTextPicturePositionToken)this->DAT_PointerToTemporaryTextMemory[textMemIndex + 1];
+                    Enums::HelpTextPicturePositionToken positionToken
+                        = (Enums::HelpTextPicturePositionToken)this->DAT_PointerToTemporaryTextMemory[textMemIndex + 1];
                     int imageHeight = DAT_TextureRenderCoreObject::instance
                                           .loadedGfxArray[99 - this->DAT_PointerToTemporaryTextMemory[textMemIndex]]
                                           .height;
@@ -188,14 +190,14 @@ namespace Text {
                                          .loadedGfxArray[99 - this->DAT_PointerToTemporaryTextMemory[textMemIndex]]
                                          .width;
                     switch (positionToken) {
-                    case HTT_PIC_LEFT:
+                    case Enums::HTPPT_LEFT:
                         this->imageHotspotTable[this->imageHotspotCount].xPos = this->lineLayoutTable[lineY].leftBorder;
                         for (int i = 0; i < imageHeight + 50; ++i) {
                             this->lineLayoutTable[lineY + i].rightBorder
                                 = this->lineLayoutTable[lineY].leftBorder + 25 + imageWidth;
                         }
                         break;
-                    case HTT_PIC_RIGHT:
+                    case Enums::HTPPT_RIGHT:
                         this->imageHotspotTable[this->imageHotspotCount].xPos
                             = this->lineLayoutTable[lineY].rightBorder - imageWidth;
                         for (int i = 0; i < imageHeight + 50; ++i) {
@@ -204,14 +206,14 @@ namespace Text {
                             this->lineLayoutTable[lineY + i].leftBorder = -1;
                         }
                         break;
-                    case HTT_PIC_CENTRE:
+                    case Enums::HTPPT_CENTRE:
                         this->imageHotspotTable[this->imageHotspotCount].xPos
-                            = (this->dialogContentHeight - imageWidth) / 2;
+                            = (this->dialogContentWidth - imageWidth) / 2;
                         for (int i = 0; i < imageHeight + 50; ++i) {
                             this->lineLayoutTable[lineY + i].leftBorder = -1;
                         }
                         break;
-                    case HTT_PIC_HERE:
+                    case Enums::HTPPT_HERE:
                         imageWidth += 3;
                         if (this->lineLayoutTable[lineY].rightBorder < imageWidth + leftPosition) {
                             local_f0 = FALSE;
@@ -230,13 +232,13 @@ namespace Text {
                                 ++local_134;
                                 local_100 = local_11c;
                                 local_11c = local_114;
-                                if (0 < this->unknown_0x2396C && 1 < local_134) {
+                                if (0 < this->field51_0x2396c && 1 < local_134) {
                                     this->activeHelpHotspotIndex = iVar17 + local_10c;
                                     local_134 = -10000;
                                     if (local_114 <= this->activeHelpHotspotIndex) {
                                         this->activeHelpHotspotIndex = local_114 + -1;
                                     }
-                                    this->unknown_0x2396C = 0;
+                                    this->field51_0x2396c = 0;
                                 }
                             }
                             currentFontLineHeight = currentFontClass->lineHeight_0x14;
@@ -253,19 +255,19 @@ namespace Text {
                         break;
                     }
                     textMemIndex += 3;
-                    if (positionToken == HTT_PIC_HERE || param_1) {
+                    if (positionToken == Enums::HTPPT_HERE || param_1) {
                         continue;
                     }
                     ++this->imageHotspotCount;
                     DAT_TextManagerObject::instance.field6_0x18 = 0;
                     return FALSE;
                 }
-            case HTT_FONT:
+            case Enums::HTT_FONT:
                 if (this->helpDialogSubMode == 1) {
                     charColor = 0xff;
                     local_12c = 0;
                     MACRO_CALL(Global_Func::PrintToDestination)(
-                        wideTextBuffer, L"<FONT %d>", this->DAT_PointerToTemporaryTextMemory[textMemIndex]);
+                        wideTextBuffer, u__FONT__d__005a5454, this->DAT_PointerToTemporaryTextMemory[textMemIndex]);
                     textMemIndex += 2;
                     break;
                 } else {
@@ -281,11 +283,11 @@ namespace Text {
                     }
                     continue;
                 }
-            case HTT_COLOUR:
+            case Enums::HTT_COLOUR:
                 if (this->helpDialogSubMode == 1) {
                     charColor = 0xff;
                     local_12c = 0;
-                    MACRO_CALL(Global_Func::PrintToDestination)(wideTextBuffer, L"<COLOUR %S>",
+                    MACRO_CALL(Global_Func::PrintToDestination)(wideTextBuffer, u__COLOUR__S__005a5824,
                         DAT_UserHelpDefinedData::instance
                             .field6_0x7a16c[this->DAT_PointerToTemporaryTextMemory[textMemIndex]]
                             .name_0x0);
@@ -314,11 +316,11 @@ namespace Text {
                     }
                     continue;
                 }
-            case HTT_LINKCOLOUR:
+            case Enums::HTT_LINKCOLOUR:
                 if (this->helpDialogSubMode == 1) {
                     charColor = 0xff;
                     local_12c = 0;
-                    MACRO_CALL(Global_Func::PrintToDestination)(wideTextBuffer, L"<LINKCOLOUR %S>",
+                    MACRO_CALL(Global_Func::PrintToDestination)(wideTextBuffer, u__LINKCOLOUR__S__005a5804,
                         DAT_UserHelpDefinedData::instance
                             .field6_0x7a16c[this->DAT_PointerToTemporaryTextMemory[textMemIndex]]
                             .name_0x0);
@@ -337,11 +339,11 @@ namespace Text {
                     }
                     continue;
                 }
-            case HTT_LINK:
+            case Enums::HTT_LINK:
                 if (this->helpDialogSubMode == 1) {
                     charColor = 0xff;
                     local_12c = 0;
-                    MACRO_CALL(Global_Func::PrintToDestination)(wideTextBuffer, L"<LINK=\"%S\">",
+                    MACRO_CALL(Global_Func::PrintToDestination)(wideTextBuffer, u__LINK_S__005a57ec,
                         DAT_UserHelpDefinedData::instance
                             .HelpSections[this->DAT_PointerToTemporaryTextMemory[textMemIndex]]);
                     textMemIndex += 2;
@@ -354,11 +356,11 @@ namespace Text {
                     textMemIndex += 2;
                     continue;
                 }
-            case HTT_INCLUDE:
+            case Enums::HTT_INCLUDE:
                 if (this->helpDialogSubMode == 1) {
                     charColor = 0xff;
                     local_12c = 0;
-                    MACRO_CALL(Global_Func::PrintToDestination)(wideTextBuffer, L"<INCLUDE=\"%S\">",
+                    MACRO_CALL(Global_Func::PrintToDestination)(wideTextBuffer, u__INCLUDE_S__005a57cc,
                         DAT_UserHelpDefinedData::instance
                             .HelpSections[this->DAT_PointerToTemporaryTextMemory[textMemIndex]]);
                     textMemIndex += 2;
@@ -367,28 +369,28 @@ namespace Text {
                     textMemIndex += 2;
                     continue;
                 }
-            case HTT_SOUND:
+            case Enums::HTT_SOUND:
                 if (this->helpDialogSubMode == 1) {
                     charColor = 0xff;
                     local_12c = 0;
-                    MACRO_CALL(Global_Func::PrintToDestination)(wideTextBuffer, L"<SOUND=\"%S\">",
+                    MACRO_CALL(Global_Func::PrintToDestination)(wideTextBuffer, u__SOUND_S__005a57b0,
                         this->soundFileNames[this->DAT_PointerToTemporaryTextMemory[textMemIndex]]);
                     textMemIndex += 2;
                     break;
                 } else {
                     if (param_1 == 1 && -1 < lineY - this->helpContentScrollOffsetY
-                        && lineY - this->helpContentScrollOffsetY < this->dialogContentWidth
+                        && lineY - this->helpContentScrollOffsetY < this->dialogContentHeight
                         && !this->soundFilePlayedFlags[this->DAT_PointerToTemporaryTextMemory[textMemIndex]]) {
                         this->soundFilePlayedFlags[this->DAT_PointerToTemporaryTextMemory[textMemIndex]] = 1;
                     }
                     textMemIndex += 2;
                     continue;
                 }
-            case HTT_ENDLINK:
+            case Enums::HTT_ENDLINK:
                 if (this->helpDialogSubMode == 1) {
                     charColor = 0xff;
                     local_12c = 0;
-                    wcscpy(wideTextBuffer, L"<\\LINK>");
+                    wcscpy(wideTextBuffer, u__LINK__005a53d4);
                     break;
                 } else {
                     currentLinkId = -1;
@@ -401,40 +403,40 @@ namespace Text {
             default:
                 pwVar6 = textMemUnion.text;
                 goto switchD_00460064_caseD_d;
-            case HTT_STRING:
+            case Enums::HTT_STRING:
                 if (this->helpDialogSubMode == 1) {
                     charColor = 0xff;
                     local_12c = 0;
                     MACRO_CALL(Global_Func::PrintToDestination)(
-                        wideTextBuffer, L"<STRING %d>", this->DAT_PointerToTemporaryTextMemory[textMemIndex]);
+                        wideTextBuffer, u__STRING__d__005a5358, this->DAT_PointerToTemporaryTextMemory[textMemIndex]);
                     textMemIndex += 2;
                     break;
                 } else {
                     textMemIndex += 2;
                     continue;
                 }
-            case HTT_CENTRE:
+            case Enums::HTT_CENTRE:
                 if (this->helpDialogSubMode == 1) {
                     charColor = 0xff;
                     local_12c = 0;
-                    wcscpy(wideTextBuffer, L"<CENTRE>");
+                    wcscpy(wideTextBuffer, u__CENTRE__005a539c);
                     break;
                 } else {
                     centreActive = TRUE;
                     local_120 = TRUE;
                     continue;
                 }
-            case HTT_ENDCENTRE:
+            case Enums::HTT_ENDCENTRE:
                 if (this->helpDialogSubMode == 1) {
                     charColor = 0xff;
                     local_12c = 0;
-                    wcscpy(wideTextBuffer, L"<\\CENTRE>");
+                    wcscpy(wideTextBuffer, u__CENTRE__005a5388);
                     break;
                 } else {
                     centreActive = FALSE;
                     continue;
                 }
-            case HTT_NEWPARAGRAPH:
+            case Enums::HTT_NEWPARAGRAPH:
                 if (local_120) {
                     this->lineLayoutTable[lineY].unknown2 = this->lineLayoutTable[lineY].rightBorder - leftPosition;
                     local_120 = centreActive;
@@ -473,24 +475,24 @@ namespace Text {
                     local_100 = local_11c;
                     if (param_1 == 1) {
                         ++local_134;
-                        if (0 < this->unknown_0x2396C && 1 < local_134) {
+                        if (0 < this->field51_0x2396c && 1 < local_134) {
                             this->activeHelpHotspotIndex = local_10c + local_11c;
                             local_134 = -10000;
                             if (iVar5 <= this->activeHelpHotspotIndex) {
                                 this->activeHelpHotspotIndex = iVar5 + -1;
                             }
-                            this->unknown_0x2396C = 0;
+                            this->field51_0x2396c = 0;
                         }
                     }
                     iVar12 = iVar5;
                     if (iVar5 == this->activeHelpHotspotIndex && param_1 == 1) {
                         local_10c = 0;
-                        if (this->unknown_0x2396C < 0) {
+                        if (this->field51_0x2396c < 0) {
                             this->activeHelpHotspotIndex = DAT_00df3348::instance + local_11c;
                             if (iVar5 <= this->activeHelpHotspotIndex) {
                                 this->activeHelpHotspotIndex = iVar5 + -1;
                             }
-                            this->unknown_0x2396C = 0;
+                            this->field51_0x2396c = 0;
                         }
                         local_134 = 0;
                     }
@@ -499,15 +501,15 @@ namespace Text {
                 if (this->helpDialogSubMode == 1) {
                     charColor = 0xff;
                     local_12c = 0;
-                    wcscpy(wideTextBuffer, L"<NEWPARAGRAPH>");
+                    wcscpy(wideTextBuffer, u__NEWPARAGRAPH__005a5790);
                     break;
                 }
                 continue;
-            case HTT_TAB: // TODO?: unknown token
+            case Enums::HTT_TAB: // TODO?: unknown token
                 if (this->helpDialogSubMode == 1) {
                     charColor = 0xff;
                     local_12c = 0;
-                    wcscpy(wideTextBuffer, L"<tab>");
+                    wcscpy(wideTextBuffer, u__tab__005a5784);
                     break;
                 } else {
                     if (this->lineLayoutTable[lineY].rightBorder < leftPosition + 30) {
@@ -528,13 +530,13 @@ namespace Text {
                             ++local_134;
                             local_100 = local_11c;
                             iVar12 = iVar5;
-                            if (0 < this->unknown_0x2396C && 1 < local_134) {
+                            if (0 < this->field51_0x2396c && 1 < local_134) {
                                 this->activeHelpHotspotIndex = local_11c + local_10c;
                                 local_134 = -10000;
                                 if (iVar5 <= this->activeHelpHotspotIndex) {
                                     this->activeHelpHotspotIndex = iVar5 + -1;
                                 }
-                                this->unknown_0x2396C = 0;
+                                this->field51_0x2396c = 0;
                             }
                         }
                         local_11c = iVar12;
@@ -550,7 +552,7 @@ namespace Text {
                         ++this->topVisibleLineIndex;
                         if (this->lineLayoutTable[this->topVisibleLineIndex].leftBorder == 25
                             && this->lineLayoutTable[this->topVisibleLineIndex].rightBorder
-                                == this->dialogContentHeight - 25) {
+                                == this->dialogContentWidth - 25) {
                             break;
                         }
                     } while (this->topVisibleLineIndex < 20000);
@@ -559,8 +561,8 @@ namespace Text {
                         if (lineStartY < this->helpContentScrollOffsetY) {
                             this->helpContentScrollOffsetY = lineStartY;
                         }
-                        if (lineEndY > this->helpContentScrollOffsetY + this->dialogContentWidth) {
-                            this->helpContentScrollOffsetY = (lineEndY - this->dialogContentWidth) + 5;
+                        if (lineEndY > this->helpContentScrollOffsetY + this->dialogContentHeight) {
+                            this->helpContentScrollOffsetY = (lineEndY - this->dialogContentHeight) + 5;
                             DAT_TextManagerObject::instance.field6_0x18 = 0;
                             return TRUE;
                         }
@@ -573,16 +575,16 @@ namespace Text {
                     return TRUE;
                 }
                 DAT_00df3348::instance = local_10c;
-                if (0 < this->unknown_0x2396C && local_134 == 1) {
+                if (0 < this->field51_0x2396c && local_134 == 1) {
                     this->activeHelpHotspotIndex = local_10c + local_11c;
                     if (this->activeHelpHotspotIndex > this->customHelpTextLength) {
                         this->activeHelpHotspotIndex = this->customHelpTextLength;
                     }
-                    this->unknown_0x2396C = 0;
+                    this->field51_0x2396c = 0;
                 }
                 if (!local_e4 && this->activeHelpHotspotIndex && DAT_00df334c::instance) {
                     --this->activeHelpHotspotIndex;
-                    this->unknown_0x23970 = 0;
+                    this->field52_0x23970 = 0;
                     DAT_TextManagerObject::instance.field6_0x18 = 0;
                     return TRUE;
                 }
@@ -613,13 +615,13 @@ namespace Text {
                         ++local_134;
                         local_100 = local_11c;
                         local_11c = local_114;
-                        if (0 < this->unknown_0x2396C && 1 < local_134) {
+                        if (0 < this->field51_0x2396c && 1 < local_134) {
                             this->activeHelpHotspotIndex = iVar5 + local_10c;
                             local_134 = -10000;
                             if (local_114 <= this->activeHelpHotspotIndex) {
                                 this->activeHelpHotspotIndex = local_114 - 1;
                             }
-                            this->unknown_0x2396C = 0;
+                            this->field51_0x2396c = 0;
                         }
                     }
                     local_f4 = iVar12 + leftPosition;
@@ -644,13 +646,13 @@ namespace Text {
                                     ++local_134;
                                     local_100 = local_11c;
                                     local_11c = local_114 + local_118;
-                                    if (0 < this->unknown_0x2396C && 1 < local_134) {
+                                    if (0 < this->field51_0x2396c && 1 < local_134) {
                                         this->activeHelpHotspotIndex = iVar5 + local_10c;
                                         local_134 = -10000;
                                         if (local_114 + local_118 <= this->activeHelpHotspotIndex) {
                                             this->activeHelpHotspotIndex = local_114 + local_118 - 1;
                                         }
-                                        this->unknown_0x2396C = 0;
+                                        this->field51_0x2396c = 0;
                                     }
                                 }
                                 do {
@@ -674,10 +676,10 @@ namespace Text {
                                             iVar5 - this->dialogContentX + local_f8 + leftPosition,
                                             currentFontLineHeight + 2)) {
                                         if (local_12c) {
-                                            this->unknown_0x23964 = local_114 + local_118;
-                                            this->unknown_0x23968 = currentLinkId;
+                                            this->field49_0x23964 = local_114 + local_118;
+                                            this->field50_0x23968 = currentLinkId;
                                         } else {
-                                            this->unknown_0x23964 = local_114;
+                                            this->field49_0x23964 = local_114;
                                         }
                                     }
                                 }
@@ -687,12 +689,12 @@ namespace Text {
                                 if (param_1 == 1) {
                                     if (local_12c) {
                                         local_10c = (local_118 - local_11c) + local_114;
-                                        if (this->unknown_0x2396C < 0) {
+                                        if (this->field51_0x2396c < 0) {
                                             this->activeHelpHotspotIndex = DAT_00df3348::instance + local_100;
                                             if (this->activeHelpHotspotIndex >= local_11c) {
                                                 this->activeHelpHotspotIndex = local_11c - 1;
                                             }
-                                            this->unknown_0x2396C = 0;
+                                            this->field51_0x2396c = 0;
                                         }
                                         local_134 = 0;
                                         MACRO_CALL_MEMBER(
@@ -722,10 +724,10 @@ namespace Text {
                                             iVar5 - this->dialogContentX + local_f8 + leftPosition,
                                             currentFontLineHeight + 2)) {
                                         if (local_12c) {
-                                            this->unknown_0x23964 = local_114 + local_118;
-                                            this->unknown_0x23968 = currentLinkId;
+                                            this->field49_0x23964 = local_114 + local_118;
+                                            this->field50_0x23968 = currentLinkId;
                                         } else {
-                                            this->unknown_0x23964 = local_114;
+                                            this->field49_0x23964 = local_114;
                                         }
                                     }
                                 }
@@ -752,10 +754,10 @@ namespace Text {
                                     iVar5 - this->helpContentScrollX, local_104 - this->helpContentScrollY,
                                     iVar12 - iVar5, currentFontLineHeight + 2)) {
                                 if (local_12c) {
-                                    this->unknown_0x23964 = i + local_114;
-                                    this->unknown_0x23968 = currentLinkId;
+                                    this->field49_0x23964 = i + local_114;
+                                    this->field50_0x23968 = currentLinkId;
                                 } else {
-                                    this->unknown_0x23964 = local_114;
+                                    this->field49_0x23964 = local_114;
                                 }
                             }
                         } else {
@@ -778,12 +780,12 @@ namespace Text {
                         if (param_1 == 1) {
                             local_10c = local_f8 + i;
                             local_134 = 0;
-                            if (this->unknown_0x2396C < 0 && local_12c) {
+                            if (this->field51_0x2396c < 0 && local_12c) {
                                 this->activeHelpHotspotIndex = local_100 + DAT_00df3348::instance;
                                 if (this->activeHelpHotspotIndex >= local_11c) {
                                     this->activeHelpHotspotIndex = local_11c + -1;
                                 }
-                                this->unknown_0x2396C = 0;
+                                this->field51_0x2396c = 0;
                             }
                             local_f0 = TRUE;
                             iVar12 = MACRO_CALL_MEMBER(FontSizeClass_Func::renderWideChar, currentFontClass)(
@@ -792,10 +794,10 @@ namespace Text {
                                     iVar5 - this->helpContentScrollX, local_104 - this->helpContentScrollY,
                                     iVar12 - iVar5, currentFontLineHeight + 2)) {
                                 if (local_12c) {
-                                    this->unknown_0x23964 = i + local_114;
-                                    this->unknown_0x23968 = currentLinkId;
+                                    this->field49_0x23964 = i + local_114;
+                                    this->field50_0x23968 = currentLinkId;
                                 } else {
-                                    this->unknown_0x23964 = local_114;
+                                    this->field49_0x23964 = local_114;
                                 }
                             }
                         } else {

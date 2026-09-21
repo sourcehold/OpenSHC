@@ -22,12 +22,12 @@ namespace Text {
         // FIXME: ContentHeight and ContentWidth or the dialogWidth and dialogHeight are swapped
         int const contentX = this->dialogX + DAT_00df2964::instance;
         int const contentY = this->dialogY + DAT_00df296c::instance;
-        int const contentWidth = this->dialogHeight - INT_00df2970::instance;
-        int const contentHeight = this->dialogWidth - INT_00df2968::instance;
+        int const contentHeight = this->dialogHeight - INT_00df2970::instance;
+        int const contentWidth = this->dialogWidth - INT_00df2968::instance;
         this->dialogContentX = contentX;
         this->dialogContentY = contentY;
-        this->dialogContentHeight = contentHeight;
         this->dialogContentWidth = contentWidth;
+        this->dialogContentHeight = contentHeight;
 
         this->helpContentScrollX = DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetX;
         this->helpContentScrollY = DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetY;
