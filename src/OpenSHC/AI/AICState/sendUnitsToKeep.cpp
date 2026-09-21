@@ -11,12 +11,14 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CD0C0
     void AICState::sendUnitsToKeep(int tribeID, int playerID)
     {
-        int iVar1 = DAT_GameState::instance.playerDataArray[playerID].keep.id;
-        if (0 < iVar1) {
-            MACRO_CALL_MEMBER(Map::Units::TribesState_Func::commandUnitsToLocation, DAT_TribesState::ptr)(tribeID,
-                (int)(short)DAT_BuildingsState::instance.buildings[iVar1].x + 3,
-                (int)(short)DAT_BuildingsState::instance.buildings[iVar1].y + 4, 0);
+        int keepID = DAT_GameState::instance.playerDataArray[playerID].keep.id;
+        if (keepID <= 0) {
+            return;
         }
+
+        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::commandUnitsToLocation, DAT_TribesState::ptr)(tribeID,
+            (short)DAT_BuildingsState::instance.buildings[keepID].x + 3,
+            (short)DAT_BuildingsState::instance.buildings[keepID].y + 4, 0);
     }
 }
 }
