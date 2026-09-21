@@ -4,14 +4,13 @@
 #include "OpenSHC/OS.func.hpp"
 #include "OpenSHC/Util/WideCharMultiByteState.func.hpp"
 #include "OpenSHC/string-literals.hpp"
+#include "OpenSHC/wstring-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_ResourceManager.hpp"
 #include "OpenSHC/Globals/DAT_WideCharMultiByteState.hpp"
 
 namespace OpenSHC {
 namespace Text {
-
-    // TODO: Replace L-strings with str-ptr
 
     // FUNCTION: STRONGHOLDCRUSADER 0x0045F470
     FILE* TextEditorState::readCrusaderHelpHlp(LPCSTR searchedPart)
@@ -40,7 +39,7 @@ namespace Text {
                     continue;
                 }
                 wchar_t* hlpPart = MACRO_CALL_MEMBER(TextEditorState_Func::parseHLPPart, this)(_File);
-                if (!hlpPart || MACRO_CALL(OS_Func::__wcsicmp)(L"section", hlpPart)) {
+                if (!hlpPart || MACRO_CALL(OS_Func::__wcsicmp)(u_section_005a5610, hlpPart)) {
                     continue;
                 }
                 wchar_t* sectionHlpPart = MACRO_CALL_MEMBER(TextEditorState_Func::parseHLPPart, this)(_File);

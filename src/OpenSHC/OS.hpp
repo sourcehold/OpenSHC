@@ -67,7 +67,7 @@ namespace OS {
 
     wchar_t* __cdecl _wcsncpy(wchar_t* _Dest, wchar_t* _Source, size_t _Count);
 
-    int __cdecl __wcsicmp(wchar_t* _Str1, wchar_t* _Str2);
+    int __cdecl __wcsicmp(wchar_t const* _Str1, wchar_t const* _Str2);
 
     long __cdecl __wtol(wchar_t const* wideStr);
 

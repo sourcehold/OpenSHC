@@ -34,8 +34,8 @@ namespace Text {
                 this->dialogX, this->dialogY, this->dialogWidth + this->dialogX, this->dialogHeight + this->dialogY,
                 COL_VERY_DARK_GREY::instance.shortValue);
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(
-                this->dialogContentX, this->dialogContentY, this->dialogContentHeight + this->dialogContentX,
-                this->dialogContentWidth + this->dialogContentY, COL_BLACK::instance.shortValue);
+                this->dialogContentX, this->dialogContentY, this->dialogContentWidth + this->dialogContentX,
+                this->dialogContentHeight + this->dialogContentY, COL_BLACK::instance.shortValue);
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(
                 this->dialogX, this->dialogY + this->dialogHeight, this->dialogWidth + this->dialogX,
                 this->dialogY + this->dialogHeight + 60, COL_DARK_CYAN_GREY::instance.shortValue);

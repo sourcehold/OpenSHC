@@ -62,8 +62,8 @@ namespace Text {
         int const dialogContentWidth = this->dialogWidth - INT_00df2968::instance;
         this->dialogContentX = dialogContentX;
         this->dialogContentY = dialogContentY;
-        this->dialogContentHeight = dialogContentWidth;
-        this->dialogContentWidth = dialogContentHeight;
+        this->dialogContentWidth = dialogContentWidth;
+        this->dialogContentHeight = dialogContentHeight;
 
         for (int i = 28; i >= 0; --i) {
             this->helpSectionHistoryStack[i + 1] = this->helpSectionHistoryStack[i];
