@@ -24,132 +24,71 @@ namespace AI {
     using OpenSHC::Map::Units::Behavior::UnitStanceEnum;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000 */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004D4340
-    void AICState ::sendWallPatrolUnitTribesToAIVLocations(int playerID)
-
+    void AICState::sendWallPatrolUnitTribesToAIVLocations(int playerID)
     {
-
-        BOOLEnum _enclosed;
-
-        int _tribeID;
-
-        AIVUnitTypeInt* _ptr;
-
-        int _patrolGroupIndex;
-
-        int _index;
-
-        int _minCount;
-
-        int _stepSize;
-
-        int _defWallPatrolGroups;
-
-        AITypeInt _aiType;
-
-        int _count;
-
-        _aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
-
-        if (_aiType != OpenSHC::AI::AIT_NULL) {
-
-            _enclosed = MACRO_CALL_MEMBER(
-                OpenSHC::Game::GameStateStructures_Func::checkKeepEnclosed, DAT_GameState::ptr)(playerID);
-
-            /*
-                  defWallPatrolGroups */
-
-            _ptr = &DAT_SkirmishDefinedData::instance.MaxAIVLocationForPatrolUnits[0].aivUnitType;
-
-            do {
-
-                _defWallPatrolGroups = *(int*)((int)this + (_aiType + ~OpenSHC::AI::AIT_NULL) * 0x2a4 + 0x114);
-
-                _count = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount[*_ptr];
-
-                _index = 0;
-
-                _minCount = _count;
-
-                if (_defWallPatrolGroups < _count) {
-
-                    _minCount = _defWallPatrolGroups;
-                }
-
-                if (0 < _minCount) {
-
-                    _stepSize = _count / _minCount;
-
-                    if (_stepSize < 1) {
-
-                        _stepSize = 1;
-                    }
-
-                    if (0 < _minCount) {
-
-                        _patrolGroupIndex = 0;
-
-                        do {
-
-                            _tribeID = (int)DAT_GameState::instance.playerDataArray[playerID]
-                                           .aiTribeIDs[((AIVUnitTypeMaxLocationPair*)(_ptr + -1))->tribeArrayOffset
-                                               + _index];
-
-                            if ((_tribeID != 0)
-                                && (DAT_TribesState::instance.tribes[_tribeID].uid
-                                    == DAT_GameState::instance.playerDataArray[playerID]
-                                        .aiTribeUIDs[((AIVUnitTypeMaxLocationPair*)(_ptr + -1))->tribeArrayOffset
-                                            + _index])) {
-
-                                if ((DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker < 1)
-                                    || (_enclosed != FALSE)) {
-
-                                    MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendTribeToAIVLocationSlot, this)(
-                                        _tribeID, (AIVUnitType)((int)(*_ptr)),
-                                        (DAT_GameState::instance.playerDataArray[playerID].defWallPatrolRallyTimeHits
-                                            + _patrolGroupIndex)
-                                            % _count);
-
-                                }
-
-                                else {
-
-                                    MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToCampfire, this)(
-                                        _tribeID, playerID);
-                                }
-
-                                if ((DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker < 1)
-                                    || (_enclosed != FALSE)) {
-
-                                    DAT_TribesState::instance.tribes[_tribeID].unitStance
-                                        = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
-
-                                }
-
-                                else {
-
-                                    DAT_TribesState::instance.tribes[_tribeID].unitStance
-                                        = OpenSHC::Map::Units::Behavior::USE_DEFENSIVE;
-                                }
-                            }
-
-                            _patrolGroupIndex = _patrolGroupIndex + _stepSize;
-
-                            _index = _index + 1;
-
-                        } while (_index < _minCount);
-                    }
-                }
-
-                _ptr = _ptr + 2;
-
-            } while ((int)_ptr < 0xb42794);
+        int aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
+        if (aiType == OpenSHC::AI::AIT_NULL) {
+            return;
         }
 
-        return;
+        BOOLEnum enclosed = MACRO_CALL_MEMBER(
+            OpenSHC::Game::GameStateStructures_Func::checkKeepEnclosed, DAT_GameState::ptr)(playerID);
+
+        for (int i = 0; i < 3; i++) {
+            int count = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount
+                            [DAT_SkirmishDefinedData::instance.MaxAIVLocationForPatrolUnits[i].aivUnitType];
+            int groups = count;
+            if (count > this->aics[aiType - 1].defWallPatrolGroups) {
+                groups = this->aics[aiType - 1].defWallPatrolGroups;
+            }
+            if (groups <= 0) {
+                continue;
+            }
+
+            int stepSize = count / groups;
+            if (stepSize <= 0) {
+                stepSize = 1;
+            }
+
+            for (int j = 0, patrolGroupIndex = 0; j < groups; j++, patrolGroupIndex += stepSize) {
+                int tribeID = DAT_GameState::instance.playerDataArray[playerID]
+                                  .aiTribeIDs[DAT_SkirmishDefinedData::instance.MaxAIVLocationForPatrolUnits[i]
+                                                  .tribeArrayOffset
+                                      + j];
+                if (tribeID == 0) {
+                    continue;
+                }
+                if (DAT_TribesState::instance.tribes[tribeID].uid
+                    != DAT_GameState::instance.playerDataArray[playerID]
+                           .aiTribeUIDs[DAT_SkirmishDefinedData::instance.MaxAIVLocationForPatrolUnits[i]
+                                            .tribeArrayOffset
+                               + j]) {
+                    continue;
+                }
+
+                int slot = (DAT_GameState::instance.playerDataArray[playerID].defWallPatrolRallyTimeHits
+                               + patrolGroupIndex)
+                    % count;
+                if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker > 0
+                    && enclosed == FALSE) {
+                    MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToCampfire, this)(tribeID, playerID);
+                } else {
+                    MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendTribeToAIVLocationSlot, this)(tribeID,
+                        (AIVUnitType)DAT_SkirmishDefinedData::instance.MaxAIVLocationForPatrolUnits[i].aivUnitType,
+                        slot);
+                }
+
+                if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker > 0
+                    && enclosed == FALSE) {
+                    DAT_TribesState::instance.tribes[tribeID].unitStance
+                        = OpenSHC::Map::Units::Behavior::USE_DEFENSIVE;
+                } else {
+                    DAT_TribesState::instance.tribes[tribeID].unitStance
+                        = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
+                }
+            }
+        }
     }
 
 }
