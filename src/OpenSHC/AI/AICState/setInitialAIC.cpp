@@ -3,14 +3,9 @@
 namespace OpenSHC {
 namespace AI {
 
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000 */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004D18B0
     void AICState ::setInitialAIC()
-
     {
-
         MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::wipeAICMemory, this)();
 
         MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_01, this)(1);
@@ -44,8 +39,6 @@ namespace AI {
         MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_15, this)(0xf);
 
         MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_16, this)(0x10);
-
-        return;
     }
 
 }
