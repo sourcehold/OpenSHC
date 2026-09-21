@@ -7,16 +7,16 @@ namespace Text {
     int TextEditorState::helpToken_getHelpTokenAdvanceLength(HelpTextToken token)
     {
         switch (token) {
-        case HTT_PIC:
+        case Enums::HTT_PIC:
             return 4;
 
-        case HTT_FONT:
-        case HTT_COLOUR:
-        case HTT_LINK:
-        case HTT_LINKCOLOUR:
-        case HTT_SOUND:
-        case HTT_STRING:
-        case HTT_INCLUDE:
+        case Enums::HTT_FONT:
+        case Enums::HTT_COLOUR:
+        case Enums::HTT_LINK:
+        case Enums::HTT_LINKCOLOUR:
+        case Enums::HTT_SOUND:
+        case Enums::HTT_STRING:
+        case Enums::HTT_INCLUDE:
             return 3;
 
         default:

@@ -20,16 +20,9 @@
 namespace OpenSHC {
 namespace Text {
 
-    struct ImageHotspot {
-        short xPos;
-        short yPos;
-        short imageRelated;
-        short unknown3;
-    };
-
     struct LineLayout {
-        short unknown0;
-        short unknown1;
+        short leftBorder;
+        short rightBorder;
         short unknown2;
     };
 

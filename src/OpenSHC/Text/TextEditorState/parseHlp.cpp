@@ -4,6 +4,9 @@
 #include "OpenSHC/OS.func.hpp"
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/Util/WideCharMultiByteState.func.hpp"
+#include "OpenSHC/Text/Enums/HelpTextPicturePositionToken.hpp"
+#include "OpenSHC/wstring-literals.hpp"
+#include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_TextEditorState.hpp"
@@ -13,8 +16,6 @@
 
 namespace OpenSHC {
 namespace Text {
-
-    // TODO: fix L-strings
 
     // FUNCTION: STRONGHOLDCRUSADER 0x0045F5B0
     void TextEditorState::parseHlp()
@@ -52,23 +53,23 @@ namespace Text {
                     wchar_t* hlpTag
                         = MACRO_CALL_MEMBER(TextEditorState_Func::parseHLPPart, this)(filePointer[_filePointerIndex]);
                     if (hlpTag) {
-                        if (!MACRO_CALL(OS_Func::__wcsicmp)(L"header", hlpTag)) {
+                        if (!MACRO_CALL(OS_Func::__wcsicmp)(u_header_005a5774, hlpTag)) {
                             headerActive = TRUE;
                             continue;
 
-                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(L"\\header", hlpTag)) {
+                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(u__header_005a5764, hlpTag)) {
                             headerActive = FALSE;
                             continue;
 
-                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(L"body", hlpTag)) {
+                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(u_body_005a5758, hlpTag)) {
                             bodyActive = TRUE;
                             continue;
 
-                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(L"\\body", hlpTag)) {
+                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(u__body_005a574c, hlpTag)) {
                             bodyActive = FALSE;
                             continue;
 
-                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(L"loadpic", hlpTag)) {
+                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(u_loadpic_005a573c, hlpTag)) {
                             if (headerActive) {
                                 wchar_t* resourceName = MACRO_CALL_MEMBER(TextEditorState_Func::parseHLPPart, this)(
                                     filePointer[_filePointerIndex]);
@@ -83,7 +84,7 @@ namespace Text {
                                             DAT_TextureRenderCoreObject::ptr)(resourceNameChars)) {
                                         validPic = false;
                                     } else if (!MACRO_CALL(OS_Func::__stricmp)(
-                                                   resourceNameChars, "st99_dog_cage.tgx")) {
+                                                   resourceNameChars, s_st99_dog_cage_tgx_005a5728)) {
                                         validPic = false;
                                     }
                                     if (!validPic) {
@@ -97,7 +98,7 @@ namespace Text {
                                 }
                             }
 
-                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(L"pic", hlpTag)) {
+                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(u_pic_005a5720, hlpTag)) {
                             if (bodyActive) {
                                 wchar_t* picId = MACRO_CALL_MEMBER(TextEditorState_Func::parseHLPPart, this)(
                                     filePointer[_filePointerIndex]);
@@ -105,7 +106,7 @@ namespace Text {
                                     if (MACRO_CALL(OS_Func::__wtol)(picId) < loadedGraphics[_filePointerIndex]) {
                                         if (graphicIndexes[_filePointerIndex][MACRO_CALL(OS_Func::__wtol)(picId)]
                                             != -1) {
-                                            this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = HTT_PIC;
+                                            this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = Enums::HTT_PIC;
                                             this->DAT_PointerToTemporaryTextMemory[textMemIndex++]
                                                 = graphicIndexes[_filePointerIndex][MACRO_CALL(OS_Func::__wtol)(picId)];
                                             wchar_t* picPosition = MACRO_CALL_MEMBER(TextEditorState_Func::parseHLPPart,
@@ -113,21 +114,21 @@ namespace Text {
                                             if (!picPosition) {
                                                 closeFile = TRUE;
                                             } else {
-                                                if (!MACRO_CALL(OS_Func::__wcsicmp)(L"left", picPosition)) {
+                                                if (!MACRO_CALL(OS_Func::__wcsicmp)(u_left_005a5714, picPosition)) {
                                                     this->DAT_PointerToTemporaryTextMemory[textMemIndex++]
-                                                        = HTT_PIC_LEFT;
-                                                } else if (!MACRO_CALL(OS_Func::__wcsicmp)(L"right", picPosition)) {
+                                                        = Enums::HTPPT_LEFT;
+                                                } else if (!MACRO_CALL(OS_Func::__wcsicmp)(u_right_005a5708, picPosition)) {
                                                     this->DAT_PointerToTemporaryTextMemory[textMemIndex++]
-                                                        = HTT_PIC_RIGHT;
-                                                } else if (!MACRO_CALL(OS_Func::__wcsicmp)(L"centre", picPosition)) {
+                                                        = Enums::HTPPT_RIGHT;
+                                                } else if (!MACRO_CALL(OS_Func::__wcsicmp)(u_centre_005a56f8, picPosition)) {
                                                     this->DAT_PointerToTemporaryTextMemory[textMemIndex++]
-                                                        = HTT_PIC_CENTRE;
-                                                } else if (!MACRO_CALL(OS_Func::__wcsicmp)(L"here", picPosition)) {
+                                                        = Enums::HTPPT_CENTRE;
+                                                } else if (!MACRO_CALL(OS_Func::__wcsicmp)(u_here_005a56ec, picPosition)) {
                                                     this->DAT_PointerToTemporaryTextMemory[textMemIndex++]
-                                                        = HTT_PIC_HERE;
+                                                        = Enums::HTPPT_HERE;
                                                 }
                                             }
-                                            this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = HTT_PIC;
+                                            this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = Enums::HTT_PIC;
                                             continue;
                                         }
                                     }
@@ -139,46 +140,46 @@ namespace Text {
                                 }
                             }
 
-                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(L"font", hlpTag)) {
+                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(u_font_005a56e0, hlpTag)) {
                             if (bodyActive) {
                                 wchar_t* fontId = MACRO_CALL_MEMBER(TextEditorState_Func::parseHLPPart, this)(
                                     filePointer[_filePointerIndex]);
                                 if (fontId) {
-                                    this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = HTT_FONT;
+                                    this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = Enums::HTT_FONT;
                                     this->DAT_PointerToTemporaryTextMemory[textMemIndex++]
                                         = (short)MACRO_CALL(OS_Func::__wtol)(fontId);
-                                    this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = HTT_FONT;
+                                    this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = Enums::HTT_FONT;
                                     continue;
                                 }
                             }
 
-                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(L"colour", hlpTag)) {
+                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(u_colour_005a56d0, hlpTag)) {
                             if (bodyActive) {
                                 wchar_t* colorId = MACRO_CALL_MEMBER(TextEditorState_Func::parseHLPPart, this)(
                                     filePointer[_filePointerIndex]);
                                 if (colorId) {
-                                    this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = HTT_COLOUR;
+                                    this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = Enums::HTT_COLOUR;
                                     this->DAT_PointerToTemporaryTextMemory[textMemIndex++]
                                         = (short)MACRO_CALL(OS_Func::__wtol)(colorId);
-                                    this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = HTT_COLOUR;
+                                    this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = Enums::HTT_COLOUR;
                                     continue;
                                 }
                             }
 
-                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(L"linkcolour", hlpTag)) {
+                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(u_linkcolour_005a56b8, hlpTag)) {
                             if (bodyActive) {
                                 wchar_t* linkColorId = MACRO_CALL_MEMBER(TextEditorState_Func::parseHLPPart, this)(
                                     filePointer[_filePointerIndex]);
                                 if (linkColorId) {
-                                    this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = HTT_LINKCOLOUR;
+                                    this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = Enums::HTT_LINKCOLOUR;
                                     this->DAT_PointerToTemporaryTextMemory[textMemIndex++]
                                         = (short)MACRO_CALL(OS_Func::__wtol)(linkColorId);
-                                    this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = HTT_LINKCOLOUR;
+                                    this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = Enums::HTT_LINKCOLOUR;
                                     continue;
                                 }
                             }
 
-                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(L"link", hlpTag)) {
+                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(u_link_005a56ac, hlpTag)) {
                             if (bodyActive) {
                                 wchar_t* linkName = MACRO_CALL_MEMBER(TextEditorState_Func::parseHLPPart, this)(
                                     filePointer[_filePointerIndex]);
@@ -188,38 +189,38 @@ namespace Text {
                                         DAT_WideCharMultiByteState::ptr)(linkNameChars, linkName);
                                     int const helpSectionIndex = MACRO_CALL_MEMBER(
                                         TextEditorState_Func::findOrAddHelpSectionName, this)(linkNameChars);
-                                    this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = HTT_LINK;
+                                    this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = Enums::HTT_LINK;
                                     this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = helpSectionIndex;
-                                    this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = HTT_LINK;
+                                    this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = Enums::HTT_LINK;
                                     continue;
                                 }
                             }
 
-                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(L"\\link", hlpTag)) {
+                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(u__link_005a56a0, hlpTag)) {
                             if (bodyActive) {
-                                this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = HTT_ENDLINK;
+                                this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = Enums::HTT_ENDLINK;
                                 continue;
                             }
 
-                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(L"newparagraph", hlpTag)) {
+                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(u_newparagraph_005a5684, hlpTag)) {
                             if (bodyActive) {
-                                this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = HTT_NEWPARAGRAPH;
+                                this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = Enums::HTT_NEWPARAGRAPH;
                                 continue;
                             }
 
-                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(L"centre", hlpTag)) {
+                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(u_centre_005a56f8, hlpTag)) {
                             if (bodyActive) {
-                                this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = HTT_CENTRE;
+                                this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = Enums::HTT_CENTRE;
                                 continue;
                             }
 
-                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(L"\\centre", hlpTag)) {
+                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(u__centre_005a5674, hlpTag)) {
                             if (bodyActive) {
-                                this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = HTT_ENDCENTRE;
+                                this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = Enums::HTT_ENDCENTRE;
                                 continue;
                             }
 
-                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(L"sound", hlpTag)) {
+                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(u_sound_005a5668, hlpTag)) {
                             if (bodyActive) {
                                 wchar_t* soundName = MACRO_CALL_MEMBER(TextEditorState_Func::parseHLPPart, this)(
                                     filePointer[_filePointerIndex]);
@@ -229,14 +230,14 @@ namespace Text {
                                         DAT_WideCharMultiByteState::ptr)(soundNameChars, soundName);
                                     int const soundIndex = MACRO_CALL_MEMBER(
                                         TextEditorState_Func::findOrAddSoundName, this)(soundNameChars);
-                                    this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = HTT_SOUND;
+                                    this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = Enums::HTT_SOUND;
                                     this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = soundIndex;
-                                    this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = HTT_SOUND;
+                                    this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = Enums::HTT_SOUND;
                                     continue;
                                 }
                             }
 
-                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(L"include", hlpTag)) {
+                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(u_include_005a5658, hlpTag)) {
                             if (bodyActive) {
                                 if (DAT_TextEditorState::instance.useAlternateHelpTab) {
                                     wchar_t* includeName = MACRO_CALL_MEMBER(TextEditorState_Func::parseHLPPart, this)(
@@ -248,9 +249,9 @@ namespace Text {
                                             DAT_WideCharMultiByteState::ptr)(includeNameChars, includeName);
                                         int const helpSectionIndex = MACRO_CALL_MEMBER(
                                             TextEditorState_Func::findOrAddHelpSectionName, this)(includeNameChars);
-                                        this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = HTT_INCLUDE;
+                                        this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = Enums::HTT_INCLUDE;
                                         this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = helpSectionIndex;
-                                        this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = HTT_INCLUDE;
+                                        this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = Enums::HTT_INCLUDE;
                                         continue;
                                     }
                                 } else {
@@ -275,7 +276,7 @@ namespace Text {
                                 }
                             }
 
-                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(L"string", hlpTag)) {
+                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(u_string_005a5648, hlpTag)) {
                             if (bodyActive) {
                                 wchar_t* stringId = MACRO_CALL_MEMBER(TextEditorState_Func::parseHLPPart, this)(
                                     filePointer[_filePointerIndex]);
@@ -290,7 +291,7 @@ namespace Text {
                                                 wchar_t const ch = this->intArray1[textIndex][i++];
                                                 if (ch == L'\n') {
                                                     this->DAT_PointerToTemporaryTextMemory[textMemIndex++]
-                                                        = HTT_NEWPARAGRAPH;
+                                                        = Enums::HTT_NEWPARAGRAPH;
                                                 } else if (ch >= L' ') {
                                                     this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = ch;
                                                 }
@@ -298,15 +299,15 @@ namespace Text {
                                         }
 
                                     } else {
-                                        this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = HTT_STRING;
+                                        this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = Enums::HTT_STRING;
                                         this->DAT_PointerToTemporaryTextMemory[textMemIndex++]
                                             = (short)MACRO_CALL(OS_Func::__wtol)(stringId);
-                                        this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = HTT_STRING;
+                                        this->DAT_PointerToTemporaryTextMemory[textMemIndex++] = Enums::HTT_STRING;
                                     }
                                     continue;
                                 }
                             }
-                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(L"\\section", hlpTag)) {
+                        } else if (!MACRO_CALL(OS_Func::__wcsicmp)(u__section_005a5634, hlpTag)) {
                             closeFile = TRUE;
                             continue;
                         } else {

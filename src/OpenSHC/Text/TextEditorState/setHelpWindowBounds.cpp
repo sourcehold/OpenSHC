@@ -4,12 +4,12 @@ namespace OpenSHC {
 namespace Text {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x0045D080
-    void TextEditorState::setHelpWindowBounds(undefined4 x, undefined4 y, undefined4 height, undefined4 width)
+    void TextEditorState::setHelpWindowBounds(int x, int y, int width, int height)
     {
         this->dialogContentX = x;
         this->dialogContentY = y;
-        this->dialogContentHeight = height;
         this->dialogContentWidth = width;
+        this->dialogContentHeight = height;
     }
 
 }
