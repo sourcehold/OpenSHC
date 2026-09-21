@@ -15,37 +15,34 @@ namespace AI {
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004D2E00
-    void AICState ::sendTribeToAIVLocationSlot(int tribeID, AIVUnitType aivUnitType, int slotIndex)
+    void AICState::sendTribeToAIVLocationSlot(int tribeID, AIVUnitType aivUnitType, int slotIndex)
     {
-        int _owner = DAT_TribesState::instance.tribes[tribeID].owner;
-        int _tile = 0;
-        int _slotIndex = 0;
-        int* _ptrSlot = (int*)(_owner * 0x39f4 + 0x115eb14 + aivUnitType * 0x28);
+        int owner = DAT_TribesState::instance.tribes[tribeID].owner;
 
-        // Find the slot at slotIndex, skipping empty entries
-        while (*_ptrSlot == 0 || (slotIndex = slotIndex + -1, -1 < slotIndex)) {
-            _slotIndex = _slotIndex + 1;
-            _ptrSlot = _ptrSlot + 1;
-            if (9 < _slotIndex)
+        // Find the slotIndex-th non-empty slot
+        int tile = 0;
+        for (int i = 0; i < 10; i++) {
+            if (DAT_GameState::instance.playerDataArray[owner].aivUnitLocationSlots[aivUnitType][i] == 0) {
+                continue;
+            }
+            slotIndex--;
+            if (slotIndex < 0) {
+                tile = DAT_GameState::instance.playerDataArray[owner].aivUnitLocationSlots[aivUnitType][i];
                 break;
+            }
         }
 
-        if (_slotIndex <= 9)
-            _tile = DAT_GameState::instance.playerDataArray[_owner].aivUnitLocationSlots[aivUnitType][_slotIndex];
+        int y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
+        int x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
 
-        short _y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile];
-        int _x = DAT_ViewportRenderState::instance.translationMatrix[_y].addXgetTile;
-
-        BOOLEnum _canNavigate
-            = MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::canNavigateUnitsFromTileToTargetTile, this)(tribeID, _tile);
-
-        if (_canNavigate == FALSE) {
-            MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToKeep, this)(tribeID, _owner);
+        if (MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::canNavigateUnitsFromTileToTargetTile, this)(tribeID, tile)
+            != FALSE) {
+            MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::commandUnitsToLocation, DAT_TribesState::ptr)(
+                tribeID, x, y, 0);
             return;
         }
 
-        MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::commandUnitsToLocation, DAT_TribesState::ptr)(
-            tribeID, (uint)((int)(_tile - _x)), (uint)((int)((int)_y)), 0);
+        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToKeep, this)(tribeID, owner);
     }
 }
 }
