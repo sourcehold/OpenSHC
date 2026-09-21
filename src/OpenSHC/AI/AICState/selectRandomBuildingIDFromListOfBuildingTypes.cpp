@@ -8,30 +8,17 @@
 namespace OpenSHC {
 namespace AI {
 
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000 */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004CDCA0
-    int AICState ::selectRandomBuildingIDFromListOfBuildingTypes(int playerID, undefined4 param_2)
-
+    int AICState::selectRandomBuildingIDFromListOfBuildingTypes(int playerID, undefined4 param_2)
     {
-
-        int iVar1;
-
-        int iVar2;
-
-        iVar1 = DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildingsTracker;
-
-        if (iVar1 < 1) {
-
+        int count = DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildingsTracker;
+        if (count <= 0) {
             return 0;
         }
 
-        iVar2 = (int)SEC_RNG::instance.currentNumber2;
-
+        int index = SEC_RNG::instance.currentNumber2 % count;
         MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
-
-        return (int)DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildings[iVar2 % iVar1];
+        return DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildings[index];
     }
 
 }
