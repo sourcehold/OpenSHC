@@ -35367,7 +35367,7 @@ SHC_3BB0A8C1_0x004CF560 | 37.74% | Reimplemented functionally, different registe
 
 SHC_3BB0A8C1_0x004CF5E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CF660 | 100.0% | Reimplemented without for-loop
+SHC_3BB0A8C1_0x004CF660 | 97.2% | Reimplemented
 
 SHC_3BB0A8C1_0x004CF6E0 | 62.22% | Reimplemented functionally, different register usage
 
