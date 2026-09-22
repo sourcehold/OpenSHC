@@ -13,27 +13,17 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CF270
     void AICState::aiCommandTribe13DefensiveWave(int playerID)
     {
-        if (DAT_GameState::instance.playerDataArray[playerID].aiType == AITA_NULL) {
+        if (DAT_GameState::instance.playerDataArray[playerID].aiType == AITA_NULL)
             return;
-        }
-
-        int tribeID = (int)DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[0xd];
-
-        if (tribeID == 0) {
+        int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[13];
+        if (tribeID == 0)
             return;
-        }
-
-        if (DAT_TribesState::instance.tribes[tribeID].uid
-            != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[0xd]) {
+        if (DAT_TribesState::instance.tribes[tribeID].uid != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[13])
             return;
-        }
-
-        if (DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID == 0) {
+        if (DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID == 0)
             return;
-        }
 
         DAT_TribesState::instance.tribes[tribeID].unitStance = Map::Units::Behavior::USE_DEFENSIVE;
-
         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::assignAttackTargetsForTribe, DAT_TribesState::ptr)(
             tribeID, Map::Units::STBT_0x3f4);
     }
