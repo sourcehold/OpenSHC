@@ -35387,7 +35387,7 @@ SHC_3BB0A8C1_0x004CFB20 | 97.8% | Reimplemented
 
 SHC_3BB0A8C1_0x004CFBC0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CFCD0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CFCD0 | 56.0% | Unresolved attackInfo offsets
 
 SHC_3BB0A8C1_0x004CFF60 | 0.0% | Pending
 
