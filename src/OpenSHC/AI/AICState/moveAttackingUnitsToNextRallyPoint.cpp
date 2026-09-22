@@ -15,137 +15,56 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::AI::AIType;
-    using OpenSHC::Map::Units::Behavior::UnitStanceEnum;
-    using OpenSHC::Map::Units::Instructions::UnitMatchSpeedEnum;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000 */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004D2F80
-    void AICState ::moveAttackingUnitsToNextRallyPoint(int playerID)
-
+    void AICState::moveAttackingUnitsToNextRallyPoint(int playerID)
     {
+        if (DAT_GameState::instance.playerDataArray[playerID].aiType == OpenSHC::AI::AIT_NULL)
+            return;
 
-        short sVar1;
+        for (int i = 0; i < 2; i++) {
+            int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[190 + i];
+            if (tribeID == 0)
+                continue;
+            if (DAT_TribesState::instance.tribes[tribeID].uid
+                != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[i + 190])
+                continue;
 
-        short* _ptrAttackingUnitsTribeID;
+            DAT_TribesState::instance.tribes[tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
+            if (MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::allUnitsReachedTheirDestination,
+                    DAT_TribesState::ptr)(tribeID)
+                == FALSE)
+                continue;
 
-        BOOLEnum _allArrived;
+            DAT_TribesState::instance.tribes[tribeID].unknownAttackRelatedUpdateCounter = 0;
+            MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::addRallyPointForTribe, this)(tribeID);
 
-        int _rallyPointIndex;
+            short rallyPointCount = DAT_TribesState::instance.tribes[tribeID].rallyPointCount;
+            int rallyPointIndex = DAT_TribesState::instance.tribes[tribeID].currentRallyPointIndex + 1;
+            if (rallyPointIndex >= rallyPointCount)
+                rallyPointIndex = 0;
 
-        uint _x;
+            int x = DAT_TribesState::instance.tribes[tribeID].rallyPointArray[rallyPointIndex][0];
+            int y = DAT_TribesState::instance.tribes[tribeID].rallyPointArray[rallyPointIndex][1];
+            int targetUnitID = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
+            DAT_TribesState::instance.tribes[tribeID].currentRallyPointIndex = rallyPointIndex;
 
-        uint _y;
+            if (rallyPointCount <= 0)
+                continue;
 
-        int _tribeID;
+            if (rallyPointCount <= 1) {
+                MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
+                    DAT_DirectionAlgorithmState::ptr)(DAT_UnitsState::instance.units[targetUnitID].x,
+                    DAT_UnitsState::instance.units[targetUnitID].y, x, y);
+                if (DAT_DirectionAlgorithmState::instance.distanceHigh <= 5)
+                    continue;
+            } else {
+                if (DAT_UnitsState::instance.units[targetUnitID].closestEnemyMicroDistance <= 96)
+                    continue;
+            }
 
-        bool bVar2;
-
-        bool bVar3;
-
-        bool bVar4;
-
-        int _counter;
-
-        short _totalRallyPointSteps;
-
-        short _targetUnitID;
-
-        if (DAT_GameState::instance.playerDataArray[playerID].aiType != OpenSHC::AI::AIT_NULL) {
-
-            _ptrAttackingUnitsTribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs + 0xbe;
-
-            _counter = 0;
-
-            do {
-
-                _tribeID = (int)*_ptrAttackingUnitsTribeID;
-
-                if ((_tribeID != 0)
-                    && (DAT_TribesState::instance.tribes[_tribeID].uid
-                        == DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[_counter + 0xbe])) {
-
-                    DAT_TribesState::instance.tribes[_tribeID].unitStance
-                        = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
-
-                    _allArrived
-                        = MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::allUnitsReachedTheirDestination,
-                            DAT_TribesState::ptr)(_tribeID);
-
-                    if (_allArrived != FALSE) {
-
-                        DAT_TribesState::instance.tribes[_tribeID].unknownAttackRelatedUpdateCounter = 0;
-
-                        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::addRallyPointForTribe, this)(_tribeID);
-
-                        _totalRallyPointSteps = DAT_TribesState::instance.tribes[_tribeID].rallyPointCount;
-
-                        _rallyPointIndex = DAT_TribesState::instance.tribes[_tribeID].currentRallyPointIndex + 1;
-
-                        if (_totalRallyPointSteps <= _rallyPointIndex) {
-
-                            _rallyPointIndex = 0;
-                        }
-
-                        _x = (uint)DAT_TribesState::instance.tribes[_tribeID].rallyPointArray[_rallyPointIndex][0];
-
-                        _y = (uint)DAT_TribesState::instance.tribes[_tribeID].rallyPointArray[_rallyPointIndex][1];
-
-                        _targetUnitID = DAT_TribesState::instance.tribes[_tribeID].selectionTargetUnitID;
-
-                        DAT_TribesState::instance.tribes[_tribeID].currentRallyPointIndex = (short)_rallyPointIndex;
-
-                        if (0 < _totalRallyPointSteps) {
-
-                            if (_totalRallyPointSteps < 2) {
-
-                                MACRO_CALL_MEMBER(
-                                    OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
-                                    DAT_DirectionAlgorithmState::ptr)(
-                                    (int)DAT_UnitsState::instance.units[_targetUnitID].x,
-                                    (int)((int)(DAT_UnitsState::instance.units[_targetUnitID].y)), (int)((int)(_x)),
-                                    (int)((int)(_y)));
-
-                                bVar4 = (DAT_DirectionAlgorithmState::instance.distanceHigh < 5);
-
-                                bVar3 = DAT_DirectionAlgorithmState::instance.distanceHigh + -5 < 0;
-
-                                bVar2 = DAT_DirectionAlgorithmState::instance.distanceHigh == 5;
-
-                            }
-
-                            else {
-
-                                sVar1 = DAT_UnitsState::instance.units[_targetUnitID].closestEnemyMicroDistance;
-
-                                bVar4 = (sVar1 < 96);
-
-                                bVar3 = (short)(sVar1 + 96) < 0;
-
-                                bVar2 = sVar1 == 96;
-                            }
-
-                            if (!bVar2 && bVar4 == bVar3) {
-
-                                MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction,
-                                    DAT_TribesState::ptr)(
-                                    _tribeID, _x, _y, 0, 0, OpenSHC::Map::Units::Instructions::UMSE_0);
-                            }
-                        }
-                    }
-                }
-
-                _counter = _counter + 1;
-
-                _ptrAttackingUnitsTribeID = _ptrAttackingUnitsTribeID + 1;
-
-            } while (_counter < 2);
+            MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(
+                tribeID, x, y, 0, 0, OpenSHC::Map::Units::Instructions::UMSE_0);
         }
-
-        return;
     }
 
 }
