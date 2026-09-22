@@ -12,20 +12,17 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CC840
     void AICState::aiAddUnitToMoatDiggerTribe(int unitID)
     {
-        int _owner = (int)DAT_UnitsState::instance.units[unitID].owner;
+        int owner = DAT_UnitsState::instance.units[unitID].owner;
         DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType = 5;
-        int _tribe = (int)DAT_GameState::instance.playerDataArray[_owner].aiTribeIDs[10];
-        if ((_tribe == 0)
-            || (DAT_TribesState::instance.tribes[_tribe].uid
-                != DAT_GameState::instance.playerDataArray[_owner].aiTribeUIDs[10])) {
-            _tribe
-                = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(_owner);
-            int _uid = DAT_TribesState::instance.tribes[_tribe].uid;
-            DAT_GameState::instance.playerDataArray[_owner].aiTribeIDs[10] = (short)_tribe;
-            DAT_GameState::instance.playerDataArray[_owner].aiTribeUIDs[10] = _uid;
+        int tribeID = DAT_GameState::instance.playerDataArray[owner].aiTribeIDs[10];
+        if (tribeID == 0
+            || DAT_TribesState::instance.tribes[tribeID].uid != DAT_GameState::instance.playerDataArray[owner].aiTribeUIDs[10]) {
+            tribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(owner);
+            DAT_GameState::instance.playerDataArray[owner].aiTribeIDs[10] = tribeID;
+            DAT_GameState::instance.playerDataArray[owner].aiTribeUIDs[10] = DAT_TribesState::instance.tribes[tribeID].uid;
         }
-        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(unitID, _tribe);
-        DAT_TribesState::instance.tribes[_tribe].unitStance = Map::Units::Behavior::USE_DEFENSIVE;
+        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(unitID, tribeID);
+        DAT_TribesState::instance.tribes[tribeID].unitStance = Map::Units::Behavior::USE_DEFENSIVE;
     }
 }
 }
