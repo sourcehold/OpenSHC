@@ -12,12 +12,12 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004D0FC0
     void AICState::playFriendlyVictoryBikFromPlayer(int playerID)
     {
-        int iVar1
-            = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::getAliveLordForPlayer, DAT_UnitsState::ptr)(playerID);
-        if (iVar1 != 0) {
-            MACRO_CALL_MEMBER(Rendering::Bink::AIMessageQueue_Func::playBikVideoFromPlayer, DAT_VideoBikQueue::ptr)(
-                playerID, (int)DAT_GameState::instance.playerDataArray[playerID].aiType - 1, 10);
+        if (MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::getAliveLordForPlayer, DAT_UnitsState::ptr)(playerID) == 0) {
+            return;
         }
+
+        MACRO_CALL_MEMBER(Rendering::Bink::AIMessageQueue_Func::playBikVideoFromPlayer, DAT_VideoBikQueue::ptr)(
+            playerID, DAT_GameState::instance.playerDataArray[playerID].aiType - 1, 10);
     }
 }
 }
