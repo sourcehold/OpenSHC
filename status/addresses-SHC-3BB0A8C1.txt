@@ -20887,7 +20887,7 @@ SHC_3BB0A8C1_0x0046BB20 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0046BB60 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0046BB80 | 0.0% | Pending
+SHC_3BB0A8C1_0x0046BB80 | 65.4% | Block layout of return TRUE
 
 SHC_3BB0A8C1_0x0046BBD0 | 100.0% | Reimplemented
 
