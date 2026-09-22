@@ -20,47 +20,27 @@ namespace AI {
     using OpenSHC::AI::AITypeInt;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000 */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004CE430
-    void AICState ::removeOrganismsAndSetMoveDestinationPairs(int playerID)
-
+    void AICState::removeOrganismsAndSetMoveDestinationPairs(int playerID)
     {
-
-        AITypeInt _aiType;
-
-        if ((short)DAT_TileMapState::instance.OrganismLayer
-                [DAT_ViewportRenderState::instance
-                        .translationMatrix[DAT_GameState::instance.playerDataArray[playerID].shortestDistanceY]
-                        .addXgetTile
-                    + DAT_GameState::instance.playerDataArray[playerID].shortestDistanceX]
-            != 0) {
-
-            MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::removeTree, DAT_LandscapeState::ptr)(
-                (int)(short)DAT_TileMapState::instance.OrganismLayer
-                    [DAT_ViewportRenderState::instance
-                            .translationMatrix[DAT_GameState::instance.playerDataArray[playerID].shortestDistanceY]
-                            .addXgetTile
-                        + DAT_GameState::instance.playerDataArray[playerID].shortestDistanceX]);
+        // Clear a tree standing on the target tile
+        int organismID = (short)DAT_TileMapState::instance.OrganismLayer
+            [DAT_ViewportRenderState::instance
+                    .translationMatrix[DAT_GameState::instance.playerDataArray[playerID].shortestDistanceY]
+                    .addXgetTile
+                + DAT_GameState::instance.playerDataArray[playerID].shortestDistanceX];
+        if (organismID != 0) {
+            MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::removeTree, DAT_LandscapeState::ptr)(organismID);
         }
 
-        _aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
-
-        /*
-            bug: special hardcoded exception for AI type 8 */
-
+        // Hardcoded exception: the Sultan keeps a smaller distance than all other AIs
+        int extraDistance = DAT_GameState::instance.playerDataArray[playerID].aiType == OpenSHC::AI::AIT_SULTAN ? 8 : 20;
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findLinkageBasedPathOrWalkRadius,
             DAT_PathFindingState::ptr)(DAT_GameState::instance.playerDataArray[playerID].shortestDistanceX,
-            (uint)((int)(DAT_GameState::instance.playerDataArray[playerID].shortestDistanceY)), -1, -1, 10000, FALSE);
-
+            DAT_GameState::instance.playerDataArray[playerID].shortestDistanceY, -1, -1, 10000, FALSE);
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::setMoveDestinationPairs,
-            DAT_PathFindingState::ptr)(playerID + -1,
-            DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID,
-            (int)((int)(*(int*)(DAT_TroopValueState::instance.attackInfo.scaleValuesArray + playerID * 0x177bc + -0x1c)
-                + (-(uint)(_aiType != OpenSHC::AI::AIT_SULTAN) & 0xc) + 8)));
-
-        return;
+            DAT_PathFindingState::ptr)(playerID - 1, DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID,
+            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].someMinimumDistance + extraDistance);
     }
 
 }
