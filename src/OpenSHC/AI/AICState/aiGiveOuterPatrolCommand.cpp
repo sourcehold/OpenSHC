@@ -14,80 +14,63 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004D28B0
     void AICState::aiGiveOuterPatrolCommand(int playerID)
     {
-        int* piVar1;
-        short sVar2;
-        int iVar3;
-        short* psVar4;
-        int _buildingID;
-        int _buildingID2;
-        int _tile;
-        BOOLEnum _canNavigate;
-        int _aicOffset;
-        int _tribeID;
-        int _index;
-        int _count;
-        int _aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
-        if (_aiType != 0) {
-            _aicOffset = (_aiType + -1) * 0x2a4;
-            _count = (int)this->aics[_aiType - 1].OuterPatrolGroupsCount;
-            _index = 0;
-            if (((0 < _count)
-                    && (piVar1 = &DAT_GameState::instance.playerDataArray[playerID].outerPatrolRallyDelayTracker,
-                        *piVar1 = *piVar1 + 1,
-                        (int)this->aics[_aiType - 1].OuterPatrolRallyDelay
-                            <= DAT_GameState::instance.playerDataArray[playerID].outerPatrolRallyDelayTracker))
-                && (DAT_GameState::instance.playerDataArray[playerID].outerPatrolRallyDelayTracker = 0, 0 < _count)) {
-                psVar4 = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs + 0xaa;
-                do {
-                    _tribeID = (int)*psVar4;
-                    DAT_TribesState::instance.tribes[_tribeID].unitStance = Map::Units::Behavior::USE_AGGRESSIVE;
-                    if (((_tribeID != 0)
-                            && (DAT_TribesState::instance.tribes[_tribeID].uid
-                                == DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[_index + 0xaa]))
-                        && ((DAT_TribesState::instance.tribes[_tribeID].percentageMovingUnk <= 0xa
-                            && ((DAT_TribesState::instance.tribes[_tribeID].percentageShootingUnk <= 0xa
-                                && (DAT_TribesState::instance.tribes[_tribeID].percentageAttackingUnk <= 0xa)))))) {
-                        bool _hasTarget = true;
-                        if (((int)this->aics[_aiType - 1].OuterPatrolGroupsMove == 0)
-                            || (_buildingID = MACRO_CALL_MEMBER(AICState_Func::getTargetableBuildingForPlayerID, this)(
-                                    playerID, _index),
-                                _buildingID == 0)) {
-                            _buildingID2 = MACRO_CALL_MEMBER(
-                                AICState_Func::selectBuildingFromAListOfBuildingTypes, this)(playerID);
-                            if (_buildingID2 == 0) {
-                                _hasTarget = false;
-                            } else {
-                                _tile = (int)DAT_BuildingsState::instance.buildings[_buildingID2].buildingEntryX
-                                    + DAT_ViewportRenderState::instance
-                                          .translationMatrix[DAT_BuildingsState::instance.buildings[_buildingID2]
-                                                  .buildingEntryY]
-                                          .addXgetTile;
-                            }
-                        } else {
-                            _tile = (int)DAT_BuildingsState::instance.buildings[_buildingID].buildingEntryX
-                                + DAT_ViewportRenderState::instance
-                                      .translationMatrix[DAT_BuildingsState::instance.buildings[_buildingID]
-                                              .buildingEntryY]
-                                      .addXgetTile;
-                        }
-                        if (_hasTarget && _tile != 0) {
-                            sVar2 = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile];
-                            iVar3 = DAT_ViewportRenderState::instance.translationMatrix[sVar2].addXgetTile;
-                            _canNavigate = MACRO_CALL_MEMBER(AICState_Func::canNavigateUnitsFromTileToTargetTile, this)(
-                                _tribeID, _tile);
-                            if (_canNavigate == FALSE) {
-                                MACRO_CALL_MEMBER(AICState_Func::sendUnitsToCampfire, this)(_tribeID, playerID);
-                            } else {
-                                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::commandUnitsToLocation,
-                                    DAT_TribesState::ptr)(_tribeID, _tile - iVar3, (int)sVar2, 0);
-                            }
-                        }
-                    }
-                    _index = _index + 1;
-                    psVar4 = psVar4 + 1;
-                } while (_index < _count);
+        int aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
+        if (aiType == 0)
+            return;
+        int aicIndex = aiType - 1;
+        int groupsCount = this->aics[aicIndex].OuterPatrolGroupsCount;
+        if (groupsCount <= 0)
+            return;
+
+        DAT_GameState::instance.playerDataArray[playerID].outerPatrolRallyDelayTracker++;
+        if (DAT_GameState::instance.playerDataArray[playerID].outerPatrolRallyDelayTracker
+            < this->aics[aicIndex].OuterPatrolRallyDelay)
+            return;
+        DAT_GameState::instance.playerDataArray[playerID].outerPatrolRallyDelayTracker = 0;
+
+        for (int i = 0; i < groupsCount; i++) {
+            int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[170 + i];
+            DAT_TribesState::instance.tribes[tribeID].unitStance = Map::Units::Behavior::USE_AGGRESSIVE;
+            if (tribeID == 0)
+                continue;
+            if (DAT_TribesState::instance.tribes[tribeID].uid
+                != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[i + 170])
+                continue;
+            if (DAT_TribesState::instance.tribes[tribeID].percentageMovingUnk > 10)
+                continue;
+            if (DAT_TribesState::instance.tribes[tribeID].percentageShootingUnk > 10)
+                continue;
+            if (DAT_TribesState::instance.tribes[tribeID].percentageAttackingUnk > 10)
+                continue;
+
+            int buildingID = 0;
+            if (this->aics[aicIndex].OuterPatrolGroupsMove != 0)
+                buildingID = MACRO_CALL_MEMBER(AICState_Func::getTargetableBuildingForPlayerID, this)(playerID, i);
+            int tile;
+            if (buildingID != 0) {
+                tile = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX
+                    + DAT_ViewportRenderState::instance
+                          .translationMatrix[DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY]
+                          .addXgetTile;
+            } else {
+                buildingID = MACRO_CALL_MEMBER(AICState_Func::selectBuildingFromAListOfBuildingTypes, this)(playerID);
+                if (buildingID == 0)
+                    continue;
+                tile = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX
+                    + DAT_ViewportRenderState::instance
+                          .translationMatrix[DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY]
+                          .addXgetTile;
             }
-        }
+            if (tile == 0)
+                continue;
+
+            int y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
+            int x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
+            if (MACRO_CALL_MEMBER(AICState_Func::canNavigateUnitsFromTileToTargetTile, this)(tribeID, tile) != FALSE)
+                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::commandUnitsToLocation, DAT_TribesState::ptr)(
+                    tribeID, x, y, 0);
+            else
+                MACRO_CALL_MEMBER(AICState_Func::sendUnitsToCampfire, this)(tribeID, playerID);        }
     }
 }
 }
