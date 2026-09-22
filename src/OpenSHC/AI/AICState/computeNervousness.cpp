@@ -8,32 +8,28 @@ namespace OpenSHC {
 namespace AI {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004D3780
-    void AICState ::computeNervousness(int playerID)
-
+    void AICState::computeNervousness(int playerID)
     {
-        int _one = 1;
+        int troopValueNearKeep = DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[playerID];
+        int enemyTroopValue = DAT_GameState::instance.playerDataArray[playerID].totalEnemyTroopValue;
 
-        int iVar1 = DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[playerID];
+        int margin;
+        if (enemyTroopValue < 50)
+            margin = -20;
+        else if (enemyTroopValue < 100)
+            margin = 0;
+        else if (enemyTroopValue < 200)
+            margin = 20;
+        else if (enemyTroopValue < 400)
+            margin = 100;
+        else if (enemyTroopValue < 600)
+            margin = 200;
+        else if (enemyTroopValue < 800)
+            margin = 300;
+        else
+            margin = 500;
 
-        int _totalTroopValueOfEnemy = DAT_GameState::instance.playerDataArray[playerID].totalEnemyTroopValue;
-
-        int _someCutoff;
-
-        if (_totalTroopValueOfEnemy < 50) {
-            _someCutoff = _one - 0x15;
-        } else if (_totalTroopValueOfEnemy < 100) {
-            _someCutoff = 0;
-        } else if (_totalTroopValueOfEnemy < 200) {
-            _someCutoff = 20;
-        } else if (_totalTroopValueOfEnemy < 400) {
-            _someCutoff = 100;
-        } else if (_totalTroopValueOfEnemy < 600) {
-            _someCutoff = 200;
-        } else {
-            _someCutoff = ((_totalTroopValueOfEnemy >= 800) - _one & 0xffffff38) + 500;
-        }
-
-        if (iVar1 > _someCutoff + _totalTroopValueOfEnemy) {
+        if (troopValueNearKeep > enemyTroopValue + margin) {
             DAT_GameState::instance.playerDataArray[playerID].isNotNervousByEnemyTroopValue = 0;
             return;
         }
@@ -41,13 +37,11 @@ namespace AI {
         if (DAT_GameState::instance.playerDataArray[playerID].isNotNervousByEnemyTroopValue == 0) {
             if (DAT_GameState::instance.playerDataArray[playerID]
                     .totalEnemyTroopValueByPlayerID[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                > iVar1) {
+                > troopValueNearKeep)
                 MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::playNervous1BikFromPlayer, this)(playerID);
-            }
             MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::playRequestHelpBikFromPlayer, this)(playerID);
         }
-
-        DAT_GameState::instance.playerDataArray[playerID].isNotNervousByEnemyTroopValue = _one;
+        DAT_GameState::instance.playerDataArray[playerID].isNotNervousByEnemyTroopValue = 1;
     }
 
 }

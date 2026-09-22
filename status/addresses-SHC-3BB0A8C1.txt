@@ -35513,7 +35513,7 @@ SHC_3BB0A8C1_0x004D30E0 | 100.0% | Reimplemented, barring one register usage dif
 
 SHC_3BB0A8C1_0x004D3320 | 87.69% | Reimplemented, different register usage, effectively 100%
 
-SHC_3BB0A8C1_0x004D3780 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D3780 | 74.0% | Constant 1 kept in register
 
 SHC_3BB0A8C1_0x004D3850 | 82.3% | AIC index folding differs
 
