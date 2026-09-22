@@ -12,89 +12,36 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::AI::AIType;
-    using OpenSHC::Map::Units::Behavior::UnitStanceEnum;
-    using OpenSHC::Map::Units::Instructions::UnitMatchSpeedEnum;
-
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000 */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004CEA50
-    void AICState ::makeUnitsGoDefensiveAndBackToSomeLocation(int param_1)
-
+    void AICState::makeUnitsGoDefensiveAndBackToSomeLocation(int playerID)
     {
+        if (DAT_GameState::instance.playerDataArray[playerID].aiType == OpenSHC::AI::AIT_NULL)
+            return;
+        if (DAT_GameState::instance.playerDataArray[playerID].someTile == 0)
+            return;
 
-        int iVar1;
+        for (int i = 0; i < 11; i++) {
+            int tribeType = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeType;
+            int tribeCount = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeCount;
+            for (int j = 0; j < tribeCount; j++) {
+                int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[tribeType + j];
+                if (tribeID == 0)
+                    continue;
+                if (DAT_TribesState::instance.tribes[tribeID].uid
+                    != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[j + tribeType])
+                    continue;
 
-        int iVar2;
-
-        int _commandResult;
-
-        short* psVar3;
-
-        int tribeID;
-
-        int iVar4;
-
-        int* local_c;
-
-        uint _x;
-
-        if ((DAT_GameState::instance.playerDataArray[param_1].aiType != OpenSHC::AI::AIT_NULL)
-            && (DAT_GameState::instance.playerDataArray[param_1].someTile != 0)) {
-
-            local_c = &DAT_SkirmishDefinedData::instance.MaxAttackTribes1[0].tribeCount;
-
-            do {
-
-                iVar1 = *local_c;
-
-                iVar2 = (*(int (*)[2])(local_c + -1))[0];
-
-                iVar4 = 0;
-
-                if (0 < iVar1) {
-
-                    psVar3 = DAT_GameState::instance.playerDataArray[param_1].aiTribeIDs + iVar2;
-
-                    do {
-
-                        tribeID = (int)*psVar3;
-
-                        if ((tribeID != 0)
-                            && (DAT_TribesState::instance.tribes[tribeID].uid
-                                == DAT_GameState::instance.playerDataArray[param_1].aiTribeUIDs[iVar4 + iVar2])) {
-
-                            _x = DAT_GameState::instance.playerDataArray[param_1].someX;
-
-                            DAT_TribesState::instance.tribes[tribeID].unitStance
-                                = OpenSHC::Map::Units::Behavior::USE_DEFENSIVE;
-
-                            _commandResult = MACRO_CALL_MEMBER(
-                                OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(
-                                tribeID, _x, (uint)((int)(DAT_GameState::instance.playerDataArray[param_1].someY)), 0,
-                                0, OpenSHC::Map::Units::Instructions::UMSE_0);
-
-                            if (_commandResult == 0) {
-
-                                MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::removeAllTribeUnits,
-                                    DAT_TribesState::ptr)(tribeID);
-                            }
-                        }
-
-                        iVar4 = iVar4 + 1;
-
-                        psVar3 = psVar3 + 1;
-
-                    } while (iVar4 < iVar1);
-                }
-
-                local_c = local_c + 2;
-
-            } while ((int)local_c < 0xb42a2c);
+                DAT_TribesState::instance.tribes[tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_DEFENSIVE;
+                uint result = MACRO_CALL_MEMBER(
+                    OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(tribeID,
+                    DAT_GameState::instance.playerDataArray[playerID].someX,
+                    DAT_GameState::instance.playerDataArray[playerID].someY, 0, 0,
+                    OpenSHC::Map::Units::Instructions::UMSE_0);
+                if (result == 0)
+                    MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::removeAllTribeUnits, DAT_TribesState::ptr)(
+                        tribeID);
+            }
         }
-
-        return;
     }
 
 }
