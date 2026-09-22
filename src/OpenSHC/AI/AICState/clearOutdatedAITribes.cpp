@@ -9,57 +9,30 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::AI::AIType;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004CF870
-    void AICState ::clearOutdatedAITribes(int playerID)
-
+    void AICState::clearOutdatedAITribes(int playerID)
     {
+        if (DAT_GameState::instance.playerDataArray[playerID].aiType == OpenSHC::AI::AIT_NULL)
+            return;
 
-        if (DAT_GameState::instance.playerDataArray[playerID].aiType != OpenSHC::AI::AIT_NULL) {
+        for (int i = 0; i < 11; i++) {
+            if (i == 8)
+                continue;
 
-            int _index = 0;
+            int tribeCount = DAT_SkirmishDefinedData::instance.MaxBreachTribes[i].tribeCount;
+            int tribeType = DAT_SkirmishDefinedData::instance.MaxBreachTribes[i].tribeType;
+            for (int j = 0; j < tribeCount; j++) {
+                int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[tribeType + j];
+                if (tribeID == 0)
+                    continue;
+                if (DAT_TribesState::instance.tribes[tribeID].uid
+                    == DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[j + tribeType])
+                    continue;
 
-            do {
-
-                if (_index != 8) {
-
-                    int _tribeCount = DAT_SkirmishDefinedData::instance.MaxBreachTribes[_index].tribeCount;
-
-                    int _tribeType = DAT_SkirmishDefinedData::instance.MaxBreachTribes[_index].tribeType;
-
-                    int _offset = 0;
-
-                    if (0 < _tribeCount) {
-
-                        short* _ptrTribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs + _tribeType;
-
-                        do {
-                            int _tribeIDVal = (int)*_ptrTribeID;
-                            if ((_tribeIDVal != 0)
-                                && (DAT_TribesState::instance.tribes[_tribeIDVal].uid
-                                    != DAT_GameState::instance.playerDataArray[playerID]
-                                        .aiTribeUIDs[_offset + _tribeType])) {
-
-                                *_ptrTribeID = 0;
-
-                                DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[_offset + _tribeType] = 0;
-                            }
-
-                            _offset = _offset + 1;
-
-                            _ptrTribeID = _ptrTribeID + 1;
-
-                        } while (_offset < _tribeCount);
-                    }
-                }
-
-                _index = _index + 1;
-
-            } while (_index < 0xb);
+                DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[tribeType + j] = 0;
+                DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[j + tribeType] = 0;
+            }
         }
-
-        return;
     }
 
 }
