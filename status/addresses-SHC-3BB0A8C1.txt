@@ -35479,7 +35479,7 @@ SHC_3BB0A8C1_0x004D1D60 | 52.5% | Stuck
 
 SHC_3BB0A8C1_0x004D1F00 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D2000 | 13.9% | Branch order restructured
+SHC_3BB0A8C1_0x004D2000 | 29.4% | Register allocation differs
 
 SHC_3BB0A8C1_0x004D2080 | 0.0% | Pending
 
