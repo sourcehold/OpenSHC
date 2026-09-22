@@ -42,8 +42,15 @@ from mcp.types import (
 import mcp.server.stdio
 
 import os
-cwd = Path(os.path.dirname(os.path.realpath(__file__)))
-os.chdir(str((cwd / "../..").resolve()))
+
+if "CLAUDE_PROJECT_DIR" in os.environ and os.environ["CLAUDE_PROJECT_DIR"]:
+  cwd = Path(os.environ["CLAUDE_PROJECT_DIR"])
+else:
+  p = Path(os.path.dirname(os.path.realpath(__file__)))
+  cwd = (p / "../..").resolve()
+os.chdir(str(cwd))
+#cwd = Path(os.getcwd())
+print(str(cwd))
 
 PATH_CMAKE_OPENSHC_SOURCES = Path("cmake/openshc-sources.txt.local")
 if not PATH_CMAKE_OPENSHC_SOURCES.exists():
@@ -62,14 +69,14 @@ def compile_project(truncated: bool = True, no_output_on_succes: bool = True) ->
     Tuple of (success, stdout, stderr)
   """
   # Build compiler command
-  cmd = ["build.bat", "RelWithDebInfo", "OpenSHC.dll"]
+  cmd = [str(cwd / "build.bat"), "RelWithDebInfo", "OpenSHC.dll"]
   
   try:
     result = subprocess.run(
       cmd,
       capture_output=True,
       text=True,
-      cwd=".",
+      cwd=str(cwd),
       stdin=subprocess.DEVNULL,
     )
     code = result.returncode
@@ -104,14 +111,14 @@ def extract_multiple_functions_assembly_diffs(function_names: List[str], match_p
   Returns:
     Tuple of (success, diffs of the functions, stdout, stderr)
   """
-  cmd = [str(Path("reccmp") / "dll" / "run.bat"), "reccmp-reccmp", "--target", "STRONGHOLDCRUSADER", "--json", "diff.json"]
+  cmd = [str(cwd / "reccmp" / "dll" / "run.bat"), "reccmp-reccmp", "--target", "STRONGHOLDCRUSADER", "--json", "diff.json"]
   
   try:
     result = subprocess.run(
       cmd,
       capture_output=True,
       text=True,
-      cwd=".",
+      cwd=str(cwd),
       stdin=subprocess.DEVNULL,
     )
     if result.returncode != 0:
@@ -380,6 +387,47 @@ def find_source_file_containing_text(text: str, glob: str = "**/*") -> List[str]
       if text in f.read_text(encoding='UTF-8'):
         results.append(str(f.relative_to(src)))
   return results
+
+@mcp.tool()
+def commit_progress(function_name: str, progress: float, remark: str = "Reimplemented") -> Tuple[bool, str, str]:
+  """
+    Commits progress on the cpp file into a status tracker file and into the github repo.
+    Returns a list of files in which 'text' can be found. The default file glob pattern is '**/*'.
+    
+    Args:
+      function_name: Name of the function of which to commit the progress, fully namespaced using '::'
+      progress: float ranging from 0 to 100, rounded to two decimal places
+      remark: A max 30-char length remark about the progress blocker. Use "Reimplemented" if 100% or functionally the same (for example if
+      only call differences are left, or register allocation differences without any functional differences).
+    
+    Returns:
+      boolean indicating success, stdout of the commit commands, stderr of the commit commands.
+  """
+  rstate, rresult, rerr = function_name_to_cpp_path(function_name=function_name)
+  if not rstate:
+    return rstate, "", f"could not resolve function name to file path: {rerr}"
+  # Build compiler command
+  cmd = ["python", str(cwd / "tools" / "reimplementation-helper" / "setstatusandcommit.py"), rresult, f"{progress:.2f}%", f"{remark}"]
+  
+  try:
+    result = subprocess.run(
+      cmd,
+      capture_output=True,
+      text=True,
+      cwd=str(cwd),
+      stdin=subprocess.DEVNULL,
+    )
+    code = result.returncode
+    stdout = result.stdout
+    stderr = result.stderr
+    if stderr and code == 0:
+      code = -1
+    if code == 0:
+      return True, stdout, stderr
+    return False, stdout, stderr
+  except Exception as e:
+    return False, "", str(e)
+
 
 import argparse
 parser = argparse.ArgumentParser()
