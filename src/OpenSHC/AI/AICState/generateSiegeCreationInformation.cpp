@@ -3,7 +3,6 @@
 #include "OpenSHC/AI/AIType.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
-#include "OpenSHC/Map/Units/UnitTypeShort.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -13,85 +12,38 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::AI::AIType;
-    using OpenSHC::Game::GameMode;
-    using OpenSHC::Map::Units::UnitType;
-    using OpenSHC::Map::Units::UnitTypeShort;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004CC420
-    void AICState ::generateSiegeCreationInformation(int playerID, int buildingID, int unitID)
-
+    void AICState::generateSiegeCreationInformation(int playerID, int buildingID, int unitID)
     {
+        if (DAT_GameState::instance.playerDataArray[playerID].aiType == OpenSHC::AI::AIT_NULL)
+            return;
+        if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY)
+            return;
 
-        UnitTypeShort UVar1;
+        int siegeIndex;
+        if (DAT_UnitsState::instance.units[unitID].unitType == OpenSHC::Map::Units::UT_S_TREBUCHET)
+            siegeIndex = 2;
+        else if (DAT_UnitsState::instance.units[unitID].unitType == OpenSHC::Map::Units::UT_S_FBALLISTA)
+            siegeIndex = 3;
+        else
+            return;
 
-        int iVar2;
-
-        int _siegeIndex;
-
-        int _engineIndexUnk;
-
-        int _nextIndex;
-
-        int _goal;
-
-        if ((DAT_GameState::instance.playerDataArray[playerID].aiType != OpenSHC::AI::AIT_NULL)
-            && (DAT_GameSynchronyState::instance.DAT_CurrentGameMode != OpenSHC::Game::GM_SOLITARY)) {
-
-            UVar1 = DAT_UnitsState::instance.units[unitID].unitType;
-
-            if (UVar1 == OpenSHC::Map::Units::UT_S_TREBUCHET) {
-
-                _siegeIndex = 2;
-
-            }
-
-            else {
-
-                if (UVar1 != OpenSHC::Map::Units::UT_S_FBALLISTA) {
-
-                    return;
-                }
-
-                _siegeIndex = 3;
-            }
-
-            iVar2 = DAT_SkirmishDefinedData::instance.SiegeEngineMetaInfoArray[_siegeIndex].slot;
-
-            _goal = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount[iVar2];
-
-            if (0 < _goal) {
-
-                _engineIndexUnk = 0;
-
-                while ((_nextIndex = _engineIndexUnk + 1,
-                    *(int*)(playerID * 0x39f4 + iVar2 * 40 + 0x115eb14 + _engineIndexUnk * 4) <= 0
-                        || (buildingID
-                            != *(int*)(playerID * 0x39f4 + 0x115f494 + (_engineIndexUnk + _siegeIndex * 5) * 0x14)))) {
-
-                    _engineIndexUnk = _nextIndex;
-
-                    if (_goal <= _nextIndex) {
-
-                        return;
-                    }
-                }
-
-                DAT_GameState::instance.playerDataArray[playerID]
-                    .aiSiegeCreationInformation[_siegeIndex][_engineIndexUnk]
-                    .unitID = unitID;
-
-                DAT_GameState::instance.playerDataArray[playerID]
-                    .aiSiegeCreationInformation[_siegeIndex][_engineIndexUnk]
-                    .uid = DAT_UnitsState::instance.units[unitID].uid;
-
-                DAT_GameState::instance.playerDataArray[playerID]
-                    .aiSiegeCreationInformation[_siegeIndex][_engineIndexUnk]
-                    .buildingID = 0;
-            }
+        int slot = DAT_SkirmishDefinedData::instance.SiegeEngineMetaInfoArray[siegeIndex].slot;
+        int locationCount = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount[slot];
+        int i;
+        for (i = 0; i < locationCount; i++) {
+            if (DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlots[slot][i] > 0
+                && DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].buildingID
+                    == buildingID)
+                break;
         }
+        if (i >= locationCount)
+            return;
 
-        return;
+        DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].unitID = unitID;
+        DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].uid
+            = DAT_UnitsState::instance.units[unitID].uid;
+        DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].buildingID = 0;
     }
 
 }
