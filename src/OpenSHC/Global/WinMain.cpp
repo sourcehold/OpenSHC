@@ -19,13 +19,13 @@
 #include "OpenSHC/Rendering/ViewportRenderState.func.hpp"
 #include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
 #include "OpenSHC/Text/TextManager.func.hpp"
-#include "OpenSHC/UI.func.hpp"
 #include "OpenSHC/UI/Helpers.func.hpp"
 #include "OpenSHC/UI/HoveredState.func.hpp"
 #include "OpenSHC/UI/Menu.func.hpp"
 #include "OpenSHC/UI/MenuHandlerState.func.hpp"
 #include "OpenSHC/UI/MenuModalComposition.func.hpp"
 #include "OpenSHC/UI/MinimapViewState.func.hpp"
+#include "OpenSHC/UI/DisplayElements.func.hpp"
 #include "OpenSHC/UI/Rendering.func.hpp"
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
@@ -113,61 +113,61 @@ using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 // FUNCTION: STRONGHOLDCRUSADER 0x0057BE10
 int __stdcall Global::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
-    int iVar3;
-    UINT _minPeriod;
-    UINT _timePeriodRes;
-    BOOL _timePeriodStarted;
-    TIMECAPS _timeCaps;
-    tagMSG _networkMessage;
-    CHAR _moduleFilenameBuf[260];
-    char _filenameChar;
+    int elapsedTime;
+    UINT minPeriod;
+    UINT timePeriodRes;
+    BOOL timePeriodStarted;
+    TIMECAPS timeCaps;
+    tagMSG networkMessage;
+    CHAR moduleFilenameBuf[260];
+    char filenameChar;
 
-    GetModuleFileNameA((HINSTANCE__*)0x0, _moduleFilenameBuf, 260);
-    char* _moduleFileNamePtr = _moduleFilenameBuf;
+    GetModuleFileNameA(NULL, moduleFilenameBuf, 260);
+    char* moduleFileNamePtr = moduleFilenameBuf;
     do {
-        _filenameChar = *_moduleFileNamePtr;
-        _moduleFileNamePtr = _moduleFileNamePtr + 1;
-    } while (_filenameChar != '\0');
-    for (_moduleFileNamePtr = _moduleFileNamePtr + (-1 - (int)(_moduleFilenameBuf + 1)); -1 < (int)_moduleFileNamePtr;
-        _moduleFileNamePtr = _moduleFileNamePtr + -1) {
-        if (_moduleFilenameBuf[(int)_moduleFileNamePtr] == '\\') {
-            _moduleFilenameBuf[(int)_moduleFileNamePtr] = '\0';
+        filenameChar = *moduleFileNamePtr;
+        moduleFileNamePtr = moduleFileNamePtr + 1;
+    } while (filenameChar != '\0');
+    // Cut the executable name off, leaving the directory
+    for (int slashIndex = (int)(moduleFileNamePtr - (moduleFilenameBuf + 1)) - 1; slashIndex >= 0; slashIndex--) {
+        if (moduleFilenameBuf[slashIndex] == '\\') {
+            moduleFilenameBuf[slashIndex] = '\0';
             break;
         }
     }
     MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::loadConfigPathTxt, DAT_ResourceManager::ptr)();
     if (DAT_TextureRenderCoreObject::instance.bufferAllocStateUnk_0x0 == 0) {
-        void* _mutexHandle = CreateMutexA((_SECURITY_ATTRIBUTES*)0x0, 0, "Global\\FireflyStrongholdCrusadersExtreme");
-        if ((_mutexHandle == (void*)0x0) || (GetLastError() != 183)) {
+        void* mutexHandle = CreateMutexA(NULL, 0, "Global\\FireflyStrongholdCrusadersExtreme");
+        if ((mutexHandle == NULL) || (GetLastError() != 183)) {
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::loadCRTex, DAT_TextManagerObject::ptr)();
             DAT_GameCore::instance.directDrawStatus = MACRO_CALL(OpenSHC::Global_Func::DetectDXVersionByLoadingDDRAW)();
-            _timePeriodStarted = 0;
-            if (timeGetDevCaps(&_timeCaps, 8) == 0) {
-                _timePeriodStarted = 1;
-                _minPeriod = _timeCaps.wPeriodMin;
-                if (_timeCaps.wPeriodMin < 2) {
-                    _minPeriod = 1;
+            timePeriodStarted = 0;
+            if (timeGetDevCaps(&timeCaps, 8) == 0) {
+                timePeriodStarted = 1;
+                minPeriod = timeCaps.wPeriodMin;
+                if (timeCaps.wPeriodMin <= 1) {
+                    minPeriod = 1;
                 }
-                if (_minPeriod < _timeCaps.wPeriodMax) {
-                    if (_timeCaps.wPeriodMin < 2) {
-                        _timePeriodRes = 1;
+                if (minPeriod < timeCaps.wPeriodMax) {
+                    if (timeCaps.wPeriodMin <= 1) {
+                        timePeriodRes = 1;
                     } else {
-                        _timePeriodRes = _timeCaps.wPeriodMin;
+                        timePeriodRes = timeCaps.wPeriodMin;
                     }
                 } else {
-                    _timePeriodRes = _timeCaps.wPeriodMax;
+                    timePeriodRes = timeCaps.wPeriodMax;
                 }
-                timeBeginPeriod(_timePeriodRes);
+                timeBeginPeriod(timePeriodRes);
             }
             MACRO_CALL_MEMBER(OpenSHC::IO::SettingsFileState_Func::readUserConfig, DAT_SettingsFileState::ptr)();
-            MACRO_CALL(OpenSHC::IO_Func::readSkMasters2)();
+            MACRO_CALL(OpenSHC::IO_Func::ReadSkMasters2)();
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::WindowAndDirectDraw_Func::createCrusaderWindow,
                 DAT_WindowAndDirectDraw::ptr)(hInstance, "Crusader", 0x65);
             DAT_MouseState::instance.waitCursorToggle = 1;
-            MACRO_CALL(OpenSHC::UI_Func::SetCursorDependingOnProgramState)();
+            MACRO_CALL(OpenSHC::UI::Helpers_Func::SetCursorDependingOnProgramState)();
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::WindowAndDirectDraw_Func::prepareWindowAndDDraw_2Unk,
                 DAT_WindowAndDirectDraw::ptr)(
-                TRUE, (ScreenResolutionEnum)((int)(DAT_WindowAndDirectDraw::instance.currentGameResolution)));
+                TRUE, (ScreenResolutionEnum)DAT_WindowAndDirectDraw::instance.currentGameResolution);
             MACRO_CALL_MEMBER(OpenSHC::Audio::MSS::SoundSystem_Func::initMiles, DAT_SoundSystemState::ptr)();
             MACRO_CALL_MEMBER(OpenSHC::IO::BitMapState_Func::loadFacesBMP, DAT_BitMapState::ptr)();
             MACRO_CALL_MEMBER(OpenSHC::AI::AIVState_Func::setAvailableAIV, DAT_AIVState::ptr)();
@@ -176,9 +176,9 @@ int __stdcall Global::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
             DAT_GameCore::instance.canBeginMainLoop = 0;
             MACRO_CALL_MEMBER(OpenSHC::UI::MenuHandlerState_Func::initializeUI, DAT_MenuHandlerState::ptr)(
                 DAT_RenderingDefinedData::instance.MenuViewIDMenuMapping,
-                (OpenSHC::UI::UC*)((int)(DAT_RenderingDefinedData::instance.UCArray)), "stronghold.uc");
+                (OpenSHC::UI::UC*)DAT_RenderingDefinedData::instance.UCArray, "stronghold.uc");
             MACRO_CALL_MEMBER(OpenSHC::UI::MenuHandlerState_Func::setupBuildMenuState, DAT_MenuHandlerState::ptr)(
-                17, (dword)((int)(516)));
+                17, 516);
             /*
               setup the load menu
              */
@@ -193,11 +193,12 @@ int __stdcall Global::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
              */
 
             MACRO_CALL(OpenSHC::Global_Func::DoNothing)();
+            DAT_MenuHandlerState::instance.currentMenu->yPosition
+                = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
+            DAT_MenuHandlerState::instance.currentMenu->xPosition
+                = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
             DAT_MenuHandlerState::instance.y = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
             DAT_MenuHandlerState::instance.x = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
-            (DAT_MenuHandlerState::instance.currentMenu)->yPosition
-                = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
-            DAT_MenuHandlerState::instance.currentMenu->xPosition = DAT_MenuHandlerState::instance.x;
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::drawGfxOnFlaggedSurface,
                 DAT_TextureRenderCoreObject::ptr)(0,
                 (DAT_WindowAndDirectDraw::instance.resolutionX
@@ -213,7 +214,7 @@ int __stdcall Global::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBorderBox, DAT_PencilRenderCore::ptr)(
                 DAT_MenuHandlerState::instance.x + 0xe7, DAT_MenuHandlerState::instance.y + 0x236,
                 DAT_MenuHandlerState::instance.x + 0x239, DAT_MenuHandlerState::instance.y + 0x248,
-                (ushort)((int)(COL_BLACK::instance.shortValue)));
+                COL_BLACK::instance.shortValue);
             MACRO_CALL_MEMBER(
                 OpenSHC::UI::Rendering::WindowAndDirectDraw_Func::renderBltAndFlip, DAT_WindowAndDirectDraw::ptr)(0);
             MACRO_CALL_MEMBER(OpenSHC::Audio::MSS::SoundSystem_Func::setupVolumeAndSoundID, DAT_SoundSystemState::ptr)(
@@ -279,7 +280,7 @@ int __stdcall Global::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
                       game loop start
                      */
 
-                    if (PeekMessageA(&_networkMessage, (HWND__*)0x0, 0, 0, 0) == 0) {
+                    if (PeekMessageA(&networkMessage, NULL, 0, 0, 0) == 0) {
                         if (((DAT_WindowAndDirectDraw::instance.isNotProcessingInputEvents == FALSE)
                                 && (DAT_WindowAndDirectDraw::instance.gameFocused != FALSE))
                             || ((DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY
@@ -306,7 +307,7 @@ int __stdcall Global::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
                                 && (DAT_WindowAndDirectDraw::instance.gameFocused != FALSE)) {
                                 MACRO_CALL_MEMBER(OpenSHC::Input::MouseState_Func::updateMouseStateBasedOnCursorAndTime,
                                     DAT_MouseState::ptr)();
-                                MACRO_CALL(OpenSHC::UI_Func::SetCursorDependingOnProgramState)();
+                                MACRO_CALL(OpenSHC::UI::Helpers_Func::SetCursorDependingOnProgramState)();
                             }
                             DAT_GameCore::instance.gameTicksLastLoop = DAT_GameCore::instance.gameTicksThisLoop;
                             DAT_GameCore::instance.gameTicksThisLoop = MACRO_CALL_MEMBER(
@@ -338,7 +339,7 @@ int __stdcall Global::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
                                     MACRO_CALL_MEMBER(
                                         OpenSHC::Rendering::Bink::BinkControlClass_Func::processBinkFrames,
                                         DAT_BinkControlState::ptr)();
-                                    MACRO_CALL(OpenSHC::UI_Func::TacticalPowersFill)();
+                                    MACRO_CALL(OpenSHC::UI::Helpers_Func::TacticalPowersFill)();
                                     if (DAT_GameSynchronyState::instance.DAT_GameHalted != 0)
                                         break;
                                     DAT_GameCore::instance.performedGameTicksThisLoop
@@ -396,11 +397,11 @@ int __stdcall Global::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
                                     DAT_GameCore::instance.currentlyInGameUnk_0xa4 = TRUE;
                                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::renderMap,
                                         DAT_ViewportRenderState::ptr)();
-                                    MACRO_CALL(OpenSHC::UI::Rendering_Func::RenderDisplayElementsUnk)();
+                                    MACRO_CALL(OpenSHC::UI::DisplayElements_Func::RenderDisplayElementsUnk)();
                                     MACRO_CALL_MEMBER(
                                         OpenSHC::Rendering::ViewportRenderState_Func::updateBuildingPreviewPosition,
                                         DAT_ViewportRenderState::ptr)(DAT_MouseState::instance.screenSpaceX,
-                                        (int)((int)(DAT_MouseState::instance.screenSpaceY)));
+                                        ((DAT_MouseState::instance.screenSpaceY)));
                                     MACRO_CALL_MEMBER(
                                         OpenSHC::Input::MouseState_Func::drawMouseBasedBox, DAT_MouseState::ptr)();
                                     MACRO_CALL_MEMBER(OpenSHC::Input::MouseState_Func::renderPreviewAtMouseLocation,
@@ -446,8 +447,8 @@ int __stdcall Global::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
                                         DAT_MinimapViewState::instance.field0_0x0 = 1;
                                         MACRO_CALL_MEMBER(OpenSHC::UI::MinimapViewState_Func::renderMinimapLandscaping,
                                             DAT_MinimapViewState::ptr)(DAT_MenuHandlerState::instance.x + 664,
-                                            (int)((int)(DAT_MenuHandlerState::instance.y + 464)), (int)((int)(128)),
-                                            (int)((int)(128)));
+                                            ((DAT_MenuHandlerState::instance.y + 464)), ((128)),
+                                            ((128)));
                                         DAT_WindowAndDirectDraw::instance.unk_resetViewportRelated = 4;
                                     }
                                 } else if (DAT_GameCore::instance.currentMenuViewType
@@ -530,17 +531,17 @@ int __stdcall Global::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
                                         OpenSHC::Game::GameCore_Func::isInBuildingTab, DAT_GameCore::ptr)()
                                     != FALSE)) {
                                 if (TIME_ReceivedMessage_2::instance != 0) {
-                                    iVar3 = timeGetTime() - TIME_ReceivedMessage_2::instance;
+                                    elapsedTime = timeGetTime() - TIME_ReceivedMessage_2::instance;
                                     TIME_ReceivedMessage_2::instance = 0;
-                                    DAT_GameCore::instance.timeSum_2 = DAT_GameCore::instance.timeSum_2 + iVar3;
+                                    DAT_GameCore::instance.timeSum_2 = DAT_GameCore::instance.timeSum_2 + elapsedTime;
                                 }
                             } else if (TIME_ReceivedMessage_2::instance == 0) {
                                 TIME_ReceivedMessage_2::instance = timeGetTime();
                             }
                             if (TIME_ReceivedMessage_1::instance != 0) {
-                                iVar3 = timeGetTime() - TIME_ReceivedMessage_1::instance;
+                                elapsedTime = timeGetTime() - TIME_ReceivedMessage_1::instance;
                                 TIME_ReceivedMessage_1::instance = 0;
-                                TIME_Sum_1::instance = TIME_Sum_1::instance + iVar3;
+                                TIME_Sum_1::instance = TIME_Sum_1::instance + elapsedTime;
                             }
                         } else {
                             MACRO_CALL_MEMBER(
@@ -557,10 +558,10 @@ int __stdcall Global::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
                             }
                         }
                     } else {
-                        if (GetMessageA(&_networkMessage, (HWND__*)0x0, 0, 0) == 0)
+                        if (GetMessageA(&networkMessage, NULL, 0, 0) == 0)
                             break; // Break the game loop
-                        TranslateMessage(&_networkMessage);
-                        DispatchMessageA(&_networkMessage);
+                        TranslateMessage(&networkMessage);
+                        DispatchMessageA(&networkMessage);
                     }
                     if (DAT_WindowAndDirectDraw::instance.postWindowCloseMessage == 1) {
                         PostMessageA(DAT_WindowAndDirectDraw::instance.windowHandle, WM_CLOSE, 0, 0);
@@ -573,8 +574,8 @@ int __stdcall Global::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
               game loop end
              */
 
-            if (_timePeriodStarted == 1) {
-                timeEndPeriod(_timePeriodRes);
+            if (timePeriodStarted == 1) {
+                timeEndPeriod(timePeriodRes);
             }
             MACRO_CALL_MEMBER(
                 OpenSHC::Synchrony::GameSynchronyState_Func::disconnectDPlay, DAT_GameSynchronyState::ptr)();
@@ -584,8 +585,8 @@ int __stdcall Global::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::WindowAndDirectDraw_Func::finalizeDirectDrawShutdown,
                 DAT_WindowAndDirectDraw::ptr)();
             if (DAT_GameSynchronyState::instance.openOnClose != FALSE) {
-                ShellExecuteA((HWND__*)0x0, "open", DAT_GameSynchronyState::instance.shellExecuteTarget,
-                    "+svc strongholdce", (CHAR*)0x0, 1);
+                ShellExecuteA(NULL, "open", DAT_GameSynchronyState::instance.shellExecuteTarget,
+                    "+svc strongholdce", NULL, 1);
             }
             MACRO_CALL(OpenSHC::OS_Func::_exit)(0); // Non-returning
             return 0;
@@ -594,8 +595,8 @@ int __stdcall Global::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
           only go here if Crusader is already running
          */
 
-        CloseHandle(_mutexHandle);
-        MessageBoxA((HWND__*)0x0, "Stronghold Crusader is already running.", "Stronghold Crusader Error", 0);
+        CloseHandle(mutexHandle);
+        MessageBoxA(NULL, "Stronghold Crusader is already running.", "Stronghold Crusader Error", 0);
     }
     return -1;
 }
