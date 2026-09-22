@@ -12,23 +12,21 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CB330
     uint AICState::aiShouldBuildQuarry(PlayerID playerID)
     {
-        int const aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
-        if (aiType == AITA_NULL) {
+        int aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
+        if (aiType == AITA_NULL)
             return 0;
-        }
-        AICSpecification const* spec = &this->aics[aiType - 1];
-        if ((int)spec->populationPerQuarry <= 0) {
+        int aicIndex = aiType - 1;
+        if (this->aics[aicIndex].populationPerQuarry <= 0)
             return 0;
-        }
-        int _quarryCount = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::countBuildingsForPlayer,
-            DAT_BuildingsState::ptr)(playerID, Map::Buildings::BT_QUARRY, 1);
-        if (_quarryCount < 1) {
-            _quarryCount = 1;
-        } else if (_quarryCount >= (int)spec->maxQuarries) {
+
+        int count = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::countBuildingsForPlayer, DAT_BuildingsState::ptr)(
+            playerID, Map::Buildings::BT_QUARRY, 1);
+        if (count <= 0)
+            count = 1;
+        else if (count >= this->aics[aicIndex].maxQuarries)
             return 0;
-        }
-        return DAT_GameState::instance.playerDataArray[playerID].currentPopulation / _quarryCount
-            >= (int)spec->populationPerQuarry;
+        return DAT_GameState::instance.playerDataArray[playerID].currentPopulation / count
+            >= this->aics[aicIndex].populationPerQuarry;
     }
 }
 }
