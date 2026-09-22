@@ -35555,7 +35555,7 @@ SHC_3BB0A8C1_0x004D4680 | 64.80% | Stuck, register usage
 
 SHC_3BB0A8C1_0x004D4870 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004D48F0 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x004D48F0 | 86.7% | Register allocation differs
 
 SHC_3BB0A8C1_0x004D4940 | 100.0% | Reimplemented
 
