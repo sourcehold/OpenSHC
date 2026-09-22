@@ -5,6 +5,7 @@
 #include "OpenSHC/AI/Trading/AIResourceTradeCategory.hpp"
 #include "OpenSHC/AI/Trading/AIResourceTradeCategoryInt.hpp"
 #include "OpenSHC/AI/Trading/ResourceAICResourceMappingEntry.hpp"
+#include "OpenSHC/Game/Player/PlayerData.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -19,6 +20,7 @@ namespace AI {
     using OpenSHC::AI::Trading::AIResourceTradeCategory;
     using OpenSHC::AI::Trading::AIResourceTradeCategoryInt;
     using OpenSHC::AI::Trading::ResourceAICResourceMappingEntry;
+    using OpenSHC::Game::Player::PlayerData;
     using OpenSHC::Game::Resources::ResourceType;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004D1D60
@@ -30,12 +32,14 @@ namespace AI {
         }
 
         int aicIndex = aiType - 1;
+        int playerResourceBase = playerID * (sizeof(PlayerData) / sizeof(int));
         int nervousActions = DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker;
         for (int i = 0; i < 20; i++) {
             ResourceType resourceType
                 = (ResourceType)DAT_SkirmishDefinedData::instance.AIResourceTradeAICMapping[i].game;
             int category = DAT_SkirmishDefinedData::instance.AIResourceTradeAICMapping[i].aic;
             int variance = this->aics[aicIndex].maxResourceVariance;
+            int resourceOffset = (playerResourceBase + resourceType) * sizeof(int);
 
             int amount;
             if (category == OpenSHC::AI::Trading::AIRTC_WOOD) {
@@ -75,7 +79,7 @@ namespace AI {
                 }
                 variance = 0;
             } else {
-                amount += DAT_GameState::instance.playerDataArray[playerID].resourcesToAcquireArray[resourceType];
+                amount += *(int*)((char*)DAT_GameState::instance.playerDataArray[0].resourcesToAcquireArray + resourceOffset);
             }
 
             // Resources the AIC always sells are kept at zero
@@ -87,9 +91,9 @@ namespace AI {
                 }
             }
 
-            if (DAT_GameState::instance.playerDataArray[playerID].currentResources[resourceType] > amount) {
+            if (*(int*)((char*)DAT_GameState::instance.playerDataArray[0].currentResources + resourceOffset) > amount) {
                 MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sellGoods, this)(playerID, resourceType,
-                    DAT_GameState::instance.playerDataArray[playerID].currentResources[resourceType] - amount
+                    ((int*)DAT_GameState::instance.playerDataArray[0].currentResources)[playerResourceBase + resourceType] - amount
                         + variance);
                 return;
             }
