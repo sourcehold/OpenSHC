@@ -35307,7 +35307,7 @@ SHC_3BB0A8C1_0x004CE110 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CE1A0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CE200 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CE200 | 55.3% | Register/store scheduling diff
 
 SHC_3BB0A8C1_0x004CE270 | 0.0% | Pending
 
