@@ -14,17 +14,23 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004D0C00
     void AICState::playAnger2BikFromPlayerToPlayer(int playerID, int targetPlayerID)
     {
-        if (DAT_GameState::instance.playerDataArray[playerID].aiType != AITA_NULL) {
-            int iVar1
-                = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::getAliveLordForPlayer, DAT_UnitsState::ptr)(playerID);
-            bool bVar2;
-            if (((iVar1 != 0) && (DAT_GameState::instance.playerDataArray[playerID].someAiCountdown3 == 0))
-                && (bVar2 = targetPlayerID == DAT_GameSynchronyState::instance.currentPlayerSlotID,
-                    DAT_GameState::instance.playerDataArray[playerID].someAiCountdown3 = 0x60, bVar2)) {
-                MACRO_CALL_MEMBER(Rendering::Bink::AIMessageQueue_Func::playBikVideoFromPlayer, DAT_VideoBikQueue::ptr)(
-                    playerID, (int)DAT_GameState::instance.playerDataArray[playerID].aiType - 1, 6);
-            }
+        if (DAT_GameState::instance.playerDataArray[playerID].aiType == AITA_NULL) {
+            return;
         }
+        if (MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::getAliveLordForPlayer, DAT_UnitsState::ptr)(playerID) == 0) {
+            return;
+        }
+        if (DAT_GameState::instance.playerDataArray[playerID].someAiCountdown3 != 0) {
+            return;
+        }
+
+        DAT_GameState::instance.playerDataArray[playerID].someAiCountdown3 = 96;
+        if (targetPlayerID != DAT_GameSynchronyState::instance.currentPlayerSlotID) {
+            return;
+        }
+
+        MACRO_CALL_MEMBER(Rendering::Bink::AIMessageQueue_Func::playBikVideoFromPlayer, DAT_VideoBikQueue::ptr)(
+            playerID, DAT_GameState::instance.playerDataArray[playerID].aiType - 1, 6);
     }
 }
 }
