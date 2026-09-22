@@ -2,6 +2,7 @@
 
 #include "OpenSHC/AI/AIType.hpp"
 #include "OpenSHC/AI/AITypeInt.hpp"
+#include "OpenSHC/AI/Tribes/AITribeIndex.hpp"
 #include "OpenSHC/Map/Units/Behavior/UnitStanceEnum.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -18,62 +19,49 @@ namespace AI {
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CEEA0
-    BOOLEnum AICState ::processAttForceRallyPercentage(int playerID)
-
+    BOOLEnum AICState::processAttForceRallyPercentage(int playerID)
     {
-        AITypeInt AVar1 = DAT_GameState::instance.playerDataArray[playerID].aiType;
-
-        if (AVar1 == OpenSHC::AI::AIT_NULL)
+        AITypeInt aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
+        if (aiType == OpenSHC::AI::AIT_NULL) {
             return FALSE;
-
-        AITypeInt _aiTypeMinus1 = AVar1 - 1;
-        int _tribeTotal = 0;
-        int _notReallyMoving = 0;
-
-        int* local_c = &DAT_SkirmishDefinedData::instance.MaxAttackTribes1[0].tribeCount;
-
-        do {
-            int iVar2 = (*(int (*)[2])(local_c + -1))[0];
-            int iVar3 = *local_c;
-
-            if (iVar2 != 0x12 && iVar2 != 0xbe && iVar2 != 0xf) {
-                int iVar5 = 0;
-                if (0 < iVar3) {
-                    short* psVar4 = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs + iVar2;
-
-                    do {
-                        int _tribeID = (int)*psVar4;
-
-                        if (_tribeID != 0
-                            && DAT_TribesState::instance.tribes[_tribeID].uid
-                                == DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[iVar5 + iVar2]) {
-
-                            _tribeTotal = _tribeTotal + 1;
-
-                            if (DAT_TribesState::instance.tribes[_tribeID].percentageMovingUnk < 0x14)
-                                _notReallyMoving = _notReallyMoving + 1;
-
-                            DAT_TribesState::instance.tribes[_tribeID].unitStance
-                                = OpenSHC::Map::Units::Behavior::USE_STAND_GROUND;
-                        }
-
-                        iVar5 = iVar5 + 1;
-                        psVar4 = psVar4 + 1;
-
-                    } while (iVar5 < iVar3);
-                }
-            }
-
-            local_c = local_c + 2;
-
-        } while ((int)local_c < 0xb42a2c);
-
-        if (0 < _tribeTotal) {
-            return (
-                BOOLEnum)((_notReallyMoving * 100) / _tribeTotal >= *(int*)((int)this + _aiTypeMinus1 * 0x2a4 + 0x200));
         }
 
-        return FALSE;
+        int aicIndex = aiType - 1;
+        int tribeTotal = 0;
+        int notReallyMoving = 0;
+
+        for (int i = 0; i < 11; i++) {
+            int tribeIndex = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeType;
+            int tribeCount = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeCount;
+            if (tribeIndex == OpenSHC::AI::Tribes::AITI_BREACH_BASIC_07_01
+                || tribeIndex == OpenSHC::AI::Tribes::AITI_BREACH_10_01
+                || tribeIndex == OpenSHC::AI::Tribes::AITI_BREACH_BASIC_05_01) {
+                continue;
+            }
+
+            for (int j = 0; j < tribeCount; j++) {
+                int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[tribeIndex + j];
+                if (tribeID == 0) {
+                    continue;
+                }
+                if (DAT_TribesState::instance.tribes[tribeID].uid
+                    != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[tribeIndex + j]) {
+                    continue;
+                }
+
+                tribeTotal++;
+                if (DAT_TribesState::instance.tribes[tribeID].percentageMovingUnk < 20) {
+                    notReallyMoving++;
+                }
+                DAT_TribesState::instance.tribes[tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_STAND_GROUND;
+            }
+        }
+
+        if (tribeTotal <= 0) {
+            return FALSE;
+        }
+
+        return (BOOLEnum)(notReallyMoving * 100 / tribeTotal >= this->aics[aicIndex].AttForceRallyPercentage);
     }
 
 }
