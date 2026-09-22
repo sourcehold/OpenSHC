@@ -35295,7 +35295,7 @@ SHC_3BB0A8C1_0x004CDCA0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CDCF0 | 41.8% | Register allocation differs
 
-SHC_3BB0A8C1_0x004CDE60 | 76.09% | Reimplemented functionally different register usage
+SHC_3BB0A8C1_0x004CDE60 | 76.1% | AIC index folding differs
 
 SHC_3BB0A8C1_0x004CDF10 | 98.2% | Reimplemented
 
