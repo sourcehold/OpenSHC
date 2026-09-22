@@ -34869,7 +34869,7 @@ SHC_3BB0A8C1_0x004CC390 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004CC420 | 38.0% | Loop strength reduction diff
 
-SHC_3BB0A8C1_0x004CC520 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CC520 | 93.8% | Reimplemented
 
 SHC_3BB0A8C1_0x004CC5A0 | 0.0% | Pending
 
