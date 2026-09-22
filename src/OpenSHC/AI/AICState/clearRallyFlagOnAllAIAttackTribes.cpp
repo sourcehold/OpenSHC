@@ -10,76 +10,27 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::AI::AIType;
-
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000 */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004CE790
-    void AICState ::clearRallyFlagOnAllAIAttackTribes(int param_1)
-
+    void AICState::clearRallyFlagOnAllAIAttackTribes(int playerID)
     {
+        if (DAT_GameState::instance.playerDataArray[playerID].aiType == OpenSHC::AI::AIT_NULL)
+            return;
 
-        int _tribeID;
+        for (int i = 0; i < 11; i++) {
+            int tribeType = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeType;
+            int tribeCount = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeCount;
+            for (int j = 0; j < tribeCount; j++) {
+                int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[tribeType + j];
+                if (tribeID == 0)
+                    continue;
+                if (DAT_TribesState::instance.tribes[tribeID].uid
+                    != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[j + tribeType])
+                    continue;
 
-        int _counter;
-
-        short* _ptrTribeID;
-
-        int* _ptrTribeCount;
-
-        int _tribeCount;
-
-        int _tribeType;
-
-        if (DAT_GameState::instance.playerDataArray[param_1].aiType != OpenSHC::AI::AIT_NULL) {
-
-            do {
-
-                /*
-                        first iteration: 0 */
-
-                _counter = 0;
-
-                _tribeCount = DAT_SkirmishDefinedData::instance.MaxBreachTribes[_counter].tribeCount;
-
-                _tribeType = DAT_SkirmishDefinedData::instance.MaxBreachTribes[_counter].tribeType;
-
-                /*
-                        first iteration: 186 */
-
-                // _tribeType = (*(int (*)[2])(_ptrTribeCount + -1))[0];
-
-                if (0 < _tribeCount) {
-
-                    _ptrTribeID = DAT_GameState::instance.playerDataArray[param_1].aiTribeIDs + _tribeType;
-
-                    do {
-
-                        _tribeID = (int)*_ptrTribeID;
-
-                        if ((_tribeID != 0)
-                            && (DAT_TribesState::instance.tribes[_tribeID].uid
-                                == DAT_GameState::instance.playerDataArray[param_1]
-                                    .aiTribeUIDs[_counter + _tribeType])) {
-
-                            MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::unsetRallyRelatedFlagOnUnits,
-                                DAT_TribesState::ptr)(_tribeID);
-                        }
-
-                        _counter = _counter + 1;
-
-                        _ptrTribeID = _ptrTribeID + 1;
-
-                    } while (_counter < _tribeCount);
-                }
-
-                _ptrTribeCount = _ptrTribeCount + 2;
-
-            } while ((int)_ptrTribeCount < 0xb42a2c);
+                MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::unsetRallyRelatedFlagOnUnits, DAT_TribesState::ptr)(
+                    tribeID);
+            }
         }
-
-        return;
     }
 
 }
