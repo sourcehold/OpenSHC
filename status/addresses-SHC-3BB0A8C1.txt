@@ -34893,7 +34893,7 @@ SHC_3BB0A8C1_0x004CCAF0 | 68.1% | Register allocation differs
 
 SHC_3BB0A8C1_0x004CCBE0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004CCD20 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CCD20 | 63.9% | Loop register allocation diff
 
 SHC_3BB0A8C1_0x004CCEDC | 0.0% | Pending
 
