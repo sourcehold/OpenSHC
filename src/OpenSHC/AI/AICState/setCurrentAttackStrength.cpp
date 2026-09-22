@@ -12,20 +12,17 @@ namespace AI {
     void AICState::setCurrentAttackStrength(int playerID)
     {
         int aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
-        if (aiType == AITA_NULL) {
+        if (aiType == AITA_NULL)
             return;
-        }
-
-        aiType -= 1;
-
+        int aicIndex = aiType - 1;
         int randomPercent = SEC_RNG::instance.currentNumber2 % 100;
         MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
 
         DAT_GameState::instance.playerDataArray[playerID].currentWaveRandomAttackingStrength
-            = (this->aics[aiType].AttForceRandom * randomPercent) / 100;
-        DAT_GameState::instance.playerDataArray[playerID].currentAttackWave += 1;
+            = (this->aics[aicIndex].AttForceRandom * randomPercent) / 100;
+        DAT_GameState::instance.playerDataArray[playerID].currentAttackWave++;
 
-        if (DAT_GameState::instance.playerDataArray[playerID].currentResources[0xf] > 10000) {
+        if (DAT_GameState::instance.playerDataArray[playerID].currentResources[Game::Resources::RT_GOLD] > 10000) {
             DAT_GameState::instance.playerDataArray[playerID].currentWaveRandomAttackingStrength
                 += DAT_GameState::instance.playerDataArray[playerID].currentAttackWave * 7;
         } else {
