@@ -3,7 +3,6 @@
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/AI/AIType.hpp"
-#include "OpenSHC/AI/AITypeInt.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -13,105 +12,58 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::AI::AIType;
-    using OpenSHC::AI::AITypeInt;
     using OpenSHC::Map::Units::UnitType;
 
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000 */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004CD560
-    void AICState ::aiRecruitSortieRangedUnits(int playerID)
-
+    void AICState::aiRecruitSortieRangedUnits(int playerID)
     {
+        int aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
+        if (aiType == OpenSHC::AI::AIT_NULL)
+            return;
+        int aicIndex = aiType - 1;
+        if (this->aics[aicIndex].SortieUnitRangedMin < 0)
+            return;
+        if (DAT_GameState::instance.playerDataArray[playerID].totalTroopsType6
+            >= DAT_GameState::instance.playerDataArray[playerID].unknownCounter_01 / 2
+                + this->aics[aicIndex].SortieUnitRangedMin)
+            return;
+        if (DAT_GameState::instance.playerDataArray[playerID].idlePeasantsCount <= 0)
+            return;
+        if (DAT_GameState::instance.playerDataArray[playerID].canStartSpending == 0)
+            return;
+        UnitType unitType = (UnitType)this->aics[aicIndex].SortieUnitRanged;
+        if (unitType == OpenSHC::Map::Units::UT_E_ENGINEER || unitType == OpenSHC::Map::Units::UT_E_LADDER
+            || unitType == OpenSHC::Map::Units::UT_TUNNELER)
+            return;
 
-        UnitType unitType;
+        int buildingID;
+        if (unitType < 70)
+            buildingID = DAT_GameState::instance.playerDataArray[playerID].barracks.id;
+        else
+            buildingID = DAT_GameState::instance.playerDataArray[playerID].mercenaryPost.id;
+        if (buildingID == 0)
+            return;
 
-        int iVar1;
+        int unitID;
+        if (unitType < 70)
+            unitID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::euroRecruit, DAT_UnitsState::ptr)(
+                unitType, buildingID, playerID, 0);
+        else
+            unitID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::nonEuroRecruit, DAT_UnitsState::ptr)(
+                unitType, buildingID, playerID, 0);
 
-        uint _unitID;
-
-        int iVar2;
-
-        int _buildingID;
-
-        AITypeInt _aiType;
-
-        _aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
-
-        if (_aiType != OpenSHC::AI::AIT_NULL) {
-
-            iVar1 = (_aiType + ~OpenSHC::AI::AIT_NULL) * 0x2a4;
-
-            iVar2 = *(int*)((int)this + iVar1 + 0x14c);
-
-            /*
-                  bug: missing != 0? */
-
-            if (((((-1 < iVar2)
-                      && (DAT_GameState::instance.playerDataArray[playerID].totalTroopsType6
-                          < DAT_GameState::instance.playerDataArray[playerID].unknownCounter_01 / 2 + iVar2))
-                     && (0 < DAT_GameState::instance.playerDataArray[playerID].idlePeasantsCount))
-                    && ((DAT_GameState::instance.playerDataArray[playerID].canStartSpending != 0
-                        && (unitType = *(UnitType*)((int)this + iVar1 + 0x150),
-                            unitType != OpenSHC::Map::Units::UT_E_ENGINEER))))
-                && ((unitType != OpenSHC::Map::Units::UT_E_LADDER && (unitType != OpenSHC::Map::Units::UT_TUNNELER)))) {
-
-                if ((int)unitType < 0x46) {
-
-                    _buildingID = DAT_GameState::instance.playerDataArray[playerID].barracks.id;
-
-                }
-
-                else {
-
-                    _buildingID = DAT_GameState::instance.playerDataArray[playerID].mercenaryPost.id;
-                }
-
-                if (_buildingID != 0) {
-
-                    if ((int)unitType < 0x46) {
-
-                        _unitID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::euroRecruit,
-                            DAT_UnitsState::ptr)(unitType, (undefined4)((int)(_buildingID)), playerID, 0);
-
-                    }
-
-                    else {
-
-                        _unitID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::nonEuroRecruit,
-                            DAT_UnitsState::ptr)(unitType, (undefined4)((int)(_buildingID)), playerID, 0);
-                    }
-
-                    if (_unitID == 0) {
-
-                        iVar2 = *(int*)((int)this + iVar1 + 0x9c);
-
-                        if ((0 < iVar2) && (DAT_UnitsState::instance.DAT_EuroUnitAcquisitionFailReason == 2)) {
-
-                            DAT_GameState::instance.playerDataArray[playerID]
-                                .resourcesToAcquireArray[DAT_UnitsState::instance.DAT_EuroUnitRequiredResource] = iVar2;
-
-                            return;
-                        }
-
-                    }
-
-                    else {
-
-                        DAT_UnitsState::instance.units[_unitID].aiUnitBehaviourType = 6;
-
-                        iVar2 = MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::createTribeForUnitType, this)(
-                            playerID, (int)((int)(166)));
-
-                        MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(
-                            _unitID, iVar2);
-                    }
-                }
-            }
+        if (unitID == 0) {
+            if (this->aics[aicIndex].tradeAmountEquipment > 0
+                && DAT_UnitsState::instance.euroUnitAcquisitionFailReason == 2)
+                DAT_GameState::instance.playerDataArray[playerID]
+                    .resourcesToAcquireArray[DAT_UnitsState::instance.euroUnitRequiredResource]
+                    = this->aics[aicIndex].tradeAmountEquipment;
+            return;
         }
 
-        return;
+        DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType = 6;
+        MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(
+            unitID, MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::createTribeForUnitType, this)(playerID, 166));
     }
 
 }
