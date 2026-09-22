@@ -13,15 +13,15 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004D27E0
     void AICState::addUnitToItsTribe(int unitID, int aiUnitBehaviourType)
     {
-        int iVar1 = (int)DAT_UnitsState::instance.units[unitID].owner;
-        if (DAT_GameState::instance.playerDataArray[iVar1].aiType != AITA_NULL) {
-            DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType = (short)aiUnitBehaviourType;
-            iVar1 = MACRO_CALL_MEMBER(AICState_Func::addUnitToSmallestBehaviourTypeTribe, this)(
-                iVar1, unitID, aiUnitBehaviourType);
-            if (iVar1 != 0) {
-                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(unitID, iVar1);
-            }
-        }
+        int owner = DAT_UnitsState::instance.units[unitID].owner;
+        if (DAT_GameState::instance.playerDataArray[owner].aiType == AITA_NULL)
+            return;
+
+        DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType = aiUnitBehaviourType;
+        int tribeID
+            = MACRO_CALL_MEMBER(AICState_Func::addUnitToSmallestBehaviourTypeTribe, this)(owner, unitID, aiUnitBehaviourType);
+        if (tribeID != 0)
+            MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(unitID, tribeID);
     }
 }
 }
