@@ -35421,7 +35421,7 @@ SHC_3BB0A8C1_0x004D0A20 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D0A80 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D0B10 | 68.0% | Reimplemented functionally, but aiType substraction is an issue
+SHC_3BB0A8C1_0x004D0B10 | 68.0% | Register scheduling issued
 
 SHC_3BB0A8C1_0x004D0B70 | 100.0% | Reimplemented
 
