@@ -13,33 +13,20 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CF470
     void AICState::aiCommandTribe11StandGroundToGate(int playerID)
     {
-        if (DAT_GameState::instance.playerDataArray[playerID].aiType == AITA_NULL) {
+        if (DAT_GameState::instance.playerDataArray[playerID].aiType == AITA_NULL)
             return;
-        }
-
-        int const iVar2 = (int)DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[0xb];
-
-        if (iVar2 == 0) {
+        int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[11];
+        if (tribeID == 0)
             return;
-        }
-
-        if (DAT_TribesState::instance.tribes[iVar2].uid
-            != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[0xb]) {
+        if (DAT_TribesState::instance.tribes[tribeID].uid != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[11])
             return;
-        }
-
-        if (DAT_TribesState::instance.tribes[iVar2].selectionTargetUnitID == 0) {
+        if (DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID == 0)
             return;
-        }
 
-        DAT_TribesState::instance.tribes[iVar2].unitStance = Map::Units::Behavior::USE_STAND_GROUND;
-
-        if (MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::moveTribeToNearbyGatehouse, DAT_TroopValueState::ptr)(
-                iVar2)
-            == 0) {
-            MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::moveTowardsParticularUnits, DAT_TroopValueState::ptr)(
-                iVar2);
-        }
+        DAT_TribesState::instance.tribes[tribeID].unitStance = Map::Units::Behavior::USE_STAND_GROUND;
+        if (MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::moveTribeToNearbyGatehouse, DAT_TroopValueState::ptr)(tribeID)
+            == 0)
+            MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::moveTowardsParticularUnits, DAT_TroopValueState::ptr)(tribeID);
     }
 }
 }
