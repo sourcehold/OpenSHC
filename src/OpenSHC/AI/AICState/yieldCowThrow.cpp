@@ -9,17 +9,19 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CFF60
     BOOLEnum AICState::yieldCowThrow(int playerID)
     {
-        int* _pCounter;
-        int const _ai = DAT_GameState::instance.playerDataArray[playerID].aiType;
-        if ((((_ai != AITA_NULL) && (DAT_GameState::instance.mapAndTime.noCowThrowing == 0))
-                && (this->aics[_ai - 1].CowThrowInterval != 0))
-            && ((0 < DAT_GameState::instance.playerDataArray[playerID].counter
-                && (_pCounter = &DAT_GameState::instance.playerDataArray[playerID].aiCowThrowCounter,
-                    *_pCounter = *_pCounter + 1,
-                    (int)this->aics[_ai - 1].CowThrowInterval
-                        < DAT_GameState::instance.playerDataArray[playerID].aiCowThrowCounter)))) {
-            DAT_GameState::instance.playerDataArray[playerID].aiCowThrowCounter = 0;
-            return TRUE;
+        int aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
+        if (aiType != AITA_NULL) {
+            int aicIndex = aiType - 1;
+            if (DAT_GameState::instance.mapAndTime.skirmishNoCowThrowing == 0
+                && this->aics[aicIndex].CowThrowInterval != 0
+                && DAT_GameState::instance.playerDataArray[playerID].counter > 0) {
+                DAT_GameState::instance.playerDataArray[playerID].aiCowThrowCounter++;
+                if (DAT_GameState::instance.playerDataArray[playerID].aiCowThrowCounter
+                    > this->aics[aicIndex].CowThrowInterval) {
+                    DAT_GameState::instance.playerDataArray[playerID].aiCowThrowCounter = 0;
+                    return TRUE;
+                }
+            }
         }
         return FALSE;
     }
