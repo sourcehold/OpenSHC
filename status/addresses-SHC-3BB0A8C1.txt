@@ -35501,7 +35501,7 @@ SHC_3BB0A8C1_0x004D2870 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D28B0 | 73.0% | Register allocation differs
 
-SHC_3BB0A8C1_0x004D2A70 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D2A70 | 29.9% | Orig duplicates move blocks
 
 SHC_3BB0A8C1_0x004D2E00 | 100.0% | Reimplemented
 
