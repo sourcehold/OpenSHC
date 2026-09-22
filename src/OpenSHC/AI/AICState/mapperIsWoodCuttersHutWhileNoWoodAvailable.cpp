@@ -10,8 +10,10 @@ namespace AI {
     BOOLEnum AICState::mapperIsWoodCuttersHutWhileNoWoodAvailable(
         undefined4 playerID, Commands::MappersEnum commandBuildingType)
     {
-        return ((commandBuildingType == Commands::M_MAPPER_WOODSMAN)
-            && (DAT_AIVState::instance.mapExtraInfo.totalWoodAvailable <= 0));
+        if (commandBuildingType == Commands::M_MAPPER_WOODSMAN
+            && DAT_AIVState::instance.mapExtraInfo.totalWoodAvailable <= 0)
+            return TRUE;
+        return FALSE;
     }
 }
 }
