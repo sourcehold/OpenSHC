@@ -21,10 +21,11 @@ namespace AI {
         int aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
         if (aiType == 0)
             return;
+        int aicIndex = aiType - 1;
 
         DAT_GameState::instance.playerDataArray[playerID].raidRetargetDelayCounter++;
         if (DAT_GameState::instance.playerDataArray[playerID].raidRetargetDelayCounter
-            >= this->aics[aiType - 1].RaidRetargetDelay)
+            >= this->aics[aicIndex].RaidRetargetDelay)
             DAT_GameState::instance.playerDataArray[playerID].raidRetargetDelayCounter = 0;
 
         if (DAT_GameState::instance.playerDataArray[playerID].totalRaidingTroopsUnk == 0)
@@ -56,7 +57,7 @@ namespace AI {
             } else if (DAT_GameState::instance.playerDataArray[playerID].someTotalDefenseTroopsRelatedCountdown == 0
                 && DAT_GameState::instance.playerDataArray[playerID].totalRaidingTroopsUnk
                     < MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::getCurrentDesiredAttackRaidUnitCount, this)(
-                        aiType - 1, playerID)) {
+                        aicIndex, playerID)) {
                 if (DAT_GameState::instance.playerDataArray[playerID].raidRetargetDelayCounter != 0)
                     continue;
                 if (MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::checkTribeActivityPercentages, this)(tribeID, i, TRUE)
