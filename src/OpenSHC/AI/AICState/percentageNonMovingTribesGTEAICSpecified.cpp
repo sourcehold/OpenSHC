@@ -15,82 +15,44 @@ namespace AI {
     using OpenSHC::AI::AITypeInt;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000 */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004CED90
-    BOOLEnum AICState ::percentageNonMovingTribesGTEAICSpecified(int playerID)
-
+    BOOLEnum AICState::percentageNonMovingTribesGTEAICSpecified(int playerID)
     {
-
-        int _tribe;
-
-        int _index;
-
-        short* _ptrTribeNumber;
-
-        int _tribesCount;
-
-        int _movingFewerThan20Percent;
-
-        int* _ptrSize;
-
-        AITypeInt _aiType;
-
-        _aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
-
-        if (_aiType == OpenSHC::AI::AIT_NULL) {
-
+        AITypeInt aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
+        if (aiType == OpenSHC::AI::AIT_NULL) {
             return FALSE;
         }
 
-        _tribesCount = 0;
+        int aicIndex = aiType - 1;
+        int tribeTotal = 0;
+        int notReallyMoving = 0;
 
-        _movingFewerThan20Percent = 0;
+        for (int i = 0; i < 11; i++) {
+            int tribeIndex = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeType;
+            int tribeCount = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeCount;
 
-        _ptrSize = &DAT_SkirmishDefinedData::instance.MaxAttackTribes1[0].tribeCount;
+            for (int j = 0; j < tribeCount; j++) {
+                int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[tribeIndex + j];
+                if (tribeID == 0) {
+                    continue;
+                }
+                if (DAT_TribesState::instance.tribes[tribeID].uid
+                    != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[tribeIndex + j]) {
+                    continue;
+                }
 
-        do {
-
-            _index = 0;
-
-            if (0 < *_ptrSize) {
-
-                _ptrTribeNumber
-                    = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs + (*(int (*)[2])(_ptrSize + -1))[0];
-
-                do {
-
-                    _tribe = (int)*_ptrTribeNumber;
-
-                    if (((_tribe != 0)
-                            && (DAT_TribesState::instance.tribes[_tribe].uid
-                                == DAT_GameState::instance.playerDataArray[playerID]
-                                    .aiTribeUIDs[_index + (*(int (*)[2])(_ptrSize + -1))[0]]))
-                        && (_tribesCount = _tribesCount + 1,
-                            DAT_TribesState::instance.tribes[_tribe].percentageMovingUnk < 20)) {
-
-                        _movingFewerThan20Percent = _movingFewerThan20Percent + 1;
-                    }
-
-                    _index = _index + 1;
-
-                    _ptrTribeNumber = _ptrTribeNumber + 1;
-
-                } while (_index < *_ptrSize);
+                tribeTotal++;
+                if (DAT_TribesState::instance.tribes[tribeID].percentageMovingUnk < 20) {
+                    notReallyMoving++;
+                }
             }
-
-            _ptrSize = _ptrSize + 2;
-
-        } while ((int)_ptrSize < 0xb42a2c);
-
-        if (0 < _tribesCount) {
-
-            return (uint)(*(int*)((int)this + (_aiType + ~OpenSHC::AI::AIT_NULL) * 0x2a4 + 0x204)
-                <= (_movingFewerThan20Percent * 100) / _tribesCount);
         }
 
-        return FALSE;
+        if (tribeTotal <= 0) {
+            return FALSE;
+        }
+
+        return (BOOLEnum)(notReallyMoving * 100 / tribeTotal >= this->aics[aicIndex].AttMovingTribesThreshold);
     }
 
 }
