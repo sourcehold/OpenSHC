@@ -32,6 +32,7 @@ namespace AI {
             return;
         }
 
+        int aicIndex = aiType - 1;
         BOOLEnum enclosed = MACRO_CALL_MEMBER(
             OpenSHC::Game::GameStateStructures_Func::checkKeepEnclosed, DAT_GameState::ptr)(playerID);
 
@@ -39,8 +40,8 @@ namespace AI {
             int count = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount
                             [DAT_SkirmishDefinedData::instance.MaxAIVLocationForPatrolUnits[i].aivUnitType];
             int groups = count;
-            if (count > this->aics[aiType - 1].defWallPatrolGroups) {
-                groups = this->aics[aiType - 1].defWallPatrolGroups;
+            if (count > this->aics[aicIndex].defWallPatrolGroups) {
+                groups = this->aics[aicIndex].defWallPatrolGroups;
             }
             if (groups <= 0) {
                 continue;
