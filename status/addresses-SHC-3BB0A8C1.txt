@@ -34885,7 +34885,7 @@ SHC_3BB0A8C1_0x004CC840 | 94.3% | Reimplemented
 
 SHC_3BB0A8C1_0x004CC8D0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CC910 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CC910 | 97.1% | Reimplemented
 
 SHC_3BB0A8C1_0x004CC990 | 40.90% | Reimplemented functionally, different register usage
 

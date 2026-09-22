@@ -7,21 +7,20 @@
 namespace OpenSHC {
 namespace AI {
 
-    // FUNCTION: STRONGHOLDCRUSADER 0x004CC960
+    // FUNCTION: STRONGHOLDCRUSADER 0x004CC910
     int AICState::createTribeForUnitType(int playerID, int unitSelectionTypeIndex)
     {
-        short* psVar1 = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs + unitSelectionTypeIndex;
-        int _tribeID = (int)*psVar1;
-        if ((_tribeID == 0)
-            || (DAT_TribesState::instance.tribes[_tribeID].uid
-                != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[unitSelectionTypeIndex])) {
-            _tribeID
-                = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(playerID);
-            int _tribeUID = DAT_TribesState::instance.tribes[_tribeID].uid;
-            *psVar1 = (short)_tribeID;
-            DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[unitSelectionTypeIndex] = _tribeUID;
-        }
-        return _tribeID;
+        int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[unitSelectionTypeIndex];
+        if (tribeID != 0
+            && DAT_TribesState::instance.tribes[tribeID].uid
+                == DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[unitSelectionTypeIndex])
+            return tribeID;
+
+        tribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(playerID);
+        DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[unitSelectionTypeIndex] = tribeID;
+        DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[unitSelectionTypeIndex]
+            = DAT_TribesState::instance.tribes[tribeID].uid;
+        return tribeID;
     }
 }
 }
