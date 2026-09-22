@@ -9,19 +9,17 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CB1B0
     int AICState::setNextFarmTypeToBuild(PlayerID playerID)
     {
-        int _aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
-        if (_aiType == AITA_NULL) {
+        int aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
+        if (aiType == AITA_NULL)
             return 0;
-        }
-        _aiType += -1;
-        DAT_GameState::instance.playerDataArray[playerID].aiFarmIndex += 1;
-        if (8 <= DAT_GameState::instance.playerDataArray[playerID].aiFarmIndex) {
+        int aicIndex = aiType - 1;
+
+        DAT_GameState::instance.playerDataArray[playerID].aiFarmIndex++;
+        if (DAT_GameState::instance.playerDataArray[playerID].aiFarmIndex >= 8)
             DAT_GameState::instance.playerDataArray[playerID].aiFarmIndex = 0;
-        }
-        if ((&this->aics[_aiType].farm1)[DAT_GameState::instance.playerDataArray[playerID].aiFarmIndex] == 0) {
+        if ((&this->aics[aicIndex].farm1)[DAT_GameState::instance.playerDataArray[playerID].aiFarmIndex] == 0)
             DAT_GameState::instance.playerDataArray[playerID].aiFarmIndex = 0;
-        }
-        return (&this->aics[_aiType].farm1)[DAT_GameState::instance.playerDataArray[playerID].aiFarmIndex];
+        return (&this->aics[aicIndex].farm1)[DAT_GameState::instance.playerDataArray[playerID].aiFarmIndex];
     }
 }
 }
