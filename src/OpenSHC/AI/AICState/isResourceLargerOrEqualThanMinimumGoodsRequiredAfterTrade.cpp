@@ -11,15 +11,15 @@ namespace AI {
     BOOLEnum AICState::isResourceLargerOrEqualThanMinimumGoodsRequiredAfterTrade(
         int playerID, ResourceType resourceType, int buffer)
     {
-        int _aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
-        if (_aiType == AITA_NULL) {
+        if (DAT_GameState::instance.playerDataArray[playerID].aiType == AITA_NULL)
             return TRUE;
-        }
-        if (resourceType == Game::Resources::RT_GOLD) {
+        if (resourceType == Game::Resources::RT_GOLD)
             return FALSE;
-        }
-        return (int)this->aics[_aiType - 1].minimumGoodsRequiredAfterTrade + buffer
-            <= DAT_GameState::instance.playerDataArray[playerID].currentResources[resourceType];
+        if (DAT_GameState::instance.playerDataArray[playerID].currentResources[resourceType]
+            < this->aics[DAT_GameState::instance.playerDataArray[playerID].aiType - 1].minimumGoodsRequiredAfterTrade
+                + buffer)
+            return FALSE;
+        return TRUE;
     }
 }
 }

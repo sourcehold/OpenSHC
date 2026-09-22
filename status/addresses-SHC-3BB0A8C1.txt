@@ -35401,7 +35401,7 @@ SHC_3BB0A8C1_0x004D0190 | 100.0% | Reimplemented, compiler didn't optimize one t
 
 SHC_3BB0A8C1_0x004D0280 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004D0520 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D0520 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D0580 | 0.0% | Pending
 
