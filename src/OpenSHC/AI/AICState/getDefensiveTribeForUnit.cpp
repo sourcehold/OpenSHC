@@ -9,7 +9,7 @@
 namespace OpenSHC {
 namespace AI {
 
-    // FUNCTION: STRONGHOLDCRUSADER 0x004CCBF0
+    // FUNCTION: STRONGHOLDCRUSADER 0x004CCBE0
     int AICState::getDefensiveTribeForUnit(int playerID, int unitID)
     {
         int index;
