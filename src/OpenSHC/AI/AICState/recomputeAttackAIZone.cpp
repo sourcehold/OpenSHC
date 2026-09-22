@@ -17,55 +17,31 @@ namespace AI {
     using OpenSHC::Map::AttackInfoSubElement;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CE110
-    void AICState ::recomputeAttackAIZone()
-
+    void AICState::recomputeAttackAIZone()
     {
-
-        int* _pBorderDistance;
-
-        int _playerID;
-
-        AttackInfoSubElement* _pi;
-
-        int _fullID;
-
-        _playerID = 1;
-
-        _pi = DAT_TroopValueState::instance.attackInfo.playerInfo;
-
-        _pBorderDistance = &DAT_GameState::instance.playerDataArray[1].unknownPathBorderDistanceRelated;
-
-        do {
-
-            _fullID = DAT_GameSynchronyState::instance.currentPlayerFullIDArray[_playerID];
-
-            _pi->currentPlayerID_OR_attackedPlayerID_OR_one = _playerID;
-
-            if ((_fullID != -1) || (DAT_GameSynchronyState::instance.currentAIArray[_playerID] != 0)) {
-
-                MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                    80400, '\0', (void*)((int)(DAT_TileMapState::instance.AIZoneLayer)));
-
-                MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::computeAIZoneLayer,
-                    DAT_PathFindingState::ptr)(_playerID, 2);
-
-                MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkLayerAndAIPathCostLayer,
-                    DAT_PathFindingState::ptr)(252, 0, 1, _playerID);
-
-                *_pBorderDistance = DAT_PathFindingState::instance.distance;
-
-                _pi->currentPlayerID_OR_attackedPlayerID_OR_one = 1;
+        for (int playerID = 1; playerID < 9; playerID++) {
+            int fullID = DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID];
+            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].currentPlayerID_OR_attackedPlayerID_OR_one
+                = playerID;
+            if (fullID == -1
+                && DAT_GameSynchronyState::instance.currentAIArray[playerID] == 0
+                // fixme: this comparison looks dumb since fullID is already known to be the value, so a cmp eax eax
+                // is generated, but we need it for the 100% match.
+                && fullID == DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID]) {
+                continue;
             }
 
-            _playerID = _playerID + 1;
-
-            _pBorderDistance = _pBorderDistance + 0xe7d;
-
-            _pi = _pi + 1;
-
-        } while (_playerID < 9);
-
-        return;
+            MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
+                80400, '\0', DAT_TileMapState::instance.AIZoneLayer);
+            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::computeAIZoneLayer,
+                DAT_PathFindingState::ptr)(playerID, 2, 1);
+            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkLayerAndAIPathCostLayer,
+                DAT_PathFindingState::ptr)(252, 0, 1, playerID);
+            DAT_GameState::instance.playerDataArray[playerID].unknownPathBorderDistanceRelated
+                = DAT_PathFindingState::instance.distance;
+            DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].currentPlayerID_OR_attackedPlayerID_OR_one
+                = 1;
+        }
     }
 
 }
