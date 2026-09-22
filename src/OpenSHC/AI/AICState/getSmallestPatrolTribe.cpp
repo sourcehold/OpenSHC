@@ -9,48 +9,38 @@ namespace OpenSHC {
 namespace AI {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CCAF0
-    int AICState ::getSmallestPatrolTribe(int playerID, int tribeCount)
+    int AICState::getSmallestPatrolTribe(int playerID, int tribeCount)
     {
-        int _selectedTribeID = 0;
-        int _tribeNumber = 0;
-        int _selectedTribeNumber = 0;
-        short _lowestTribeUnitCount = 1000;
+        int selectedTribeID = 0;
+        int selectedIndex = 0;
+        int lowestSize = 1000;
 
-        if (0 < tribeCount) {
-            short* _pTribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs + 0xaa;
-            do {
-                int _tribeID = (int)*_pTribeID;
-                if ((_tribeID == 0)
-                    || (DAT_TribesState::instance.tribes[_tribeID].uid
-                        != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[_tribeNumber + 0xaa])) {
-                    _selectedTribeID = MACRO_CALL_MEMBER(
-                        OpenSHC::Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(playerID);
-                    _selectedTribeNumber = _tribeNumber;
-                    DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[_selectedTribeNumber + 0xaa]
-                        = (short)_selectedTribeID;
-                    DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[_selectedTribeNumber + 0xaa]
-                        = DAT_TribesState::instance.tribes[_selectedTribeID].uid;
-                    return _selectedTribeID;
-                }
-                short _tribeSize = DAT_TribesState::instance.tribes[_tribeID].size;
-                if (_tribeSize < _lowestTribeUnitCount) {
-                    _selectedTribeID = _tribeID;
-                    _selectedTribeNumber = _tribeNumber;
-                    _lowestTribeUnitCount = _tribeSize;
-                }
-                _tribeNumber = _tribeNumber + 1;
-                _pTribeID = _pTribeID + 1;
-            } while (_tribeNumber < tribeCount);
+        for (int i = 0; i < tribeCount; i++) {
+            int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[170 + i];
+            if (tribeID == 0
+                || DAT_TribesState::instance.tribes[tribeID].uid
+                    != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[i + 170]) {
+                selectedTribeID
+                    = MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(
+                        playerID);
+                selectedIndex = i;
+                break;
+            }
 
-            if (_selectedTribeID != 0) {
-                DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[_selectedTribeNumber + 0xaa]
-                    = (short)_selectedTribeID;
-                DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[_selectedTribeNumber + 0xaa]
-                    = DAT_TribesState::instance.tribes[_selectedTribeID].uid;
-                return _selectedTribeID;
+            if (DAT_TribesState::instance.tribes[tribeID].size < lowestSize) {
+                lowestSize = DAT_TribesState::instance.tribes[tribeID].size;
+                selectedTribeID = tribeID;
+                selectedIndex = i;
             }
         }
-        return 0;
+
+        if (selectedTribeID == 0)
+            return 0;
+
+        DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[selectedIndex + 170] = selectedTribeID;
+        DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[selectedIndex + 170]
+            = DAT_TribesState::instance.tribes[selectedTribeID].uid;
+        return selectedTribeID;
     }
 }
 }
