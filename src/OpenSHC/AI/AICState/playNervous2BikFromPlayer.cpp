@@ -20,7 +20,7 @@ namespace AI {
             return;
         }
 
-        int aicIndex = DAT_GameState::instance.playerDataArray[playerID].aiType - 1;
+        int aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
         int currentPlayerID = DAT_GameSynchronyState::instance.currentPlayerSlotID;
         DAT_GameState::instance.playerDataArray[playerID].nervousBikCountdown = 48;
         if (DAT_GameState::instance.mapAndTime.playerTeams[playerID]
@@ -29,7 +29,7 @@ namespace AI {
         }
 
         MACRO_CALL_MEMBER(Rendering::Bink::AIMessageQueue_Func::playBikVideoFromPlayer, DAT_VideoBikQueue::ptr)(
-            playerID, aicIndex, 9);
+            playerID, aiType - 1, 9);
     }
 }
 }
