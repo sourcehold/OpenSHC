@@ -20741,15 +20741,15 @@ SHC_3BB0A8C1_0x0046B170 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0046B1B0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0046B1F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0046B1F0 | 72.5% | Register allocation
 
-SHC_3BB0A8C1_0x0046B2F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0046B2F0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0046B300 | 0.0% | Pending
+SHC_3BB0A8C1_0x0046B300 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0046B320 | 0.0% | Pending
+SHC_3BB0A8C1_0x0046B320 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0046B340 | 0.0% | Pending
+SHC_3BB0A8C1_0x0046B340 | 81.0% | Rechecks view before fallback
 
 SHC_3BB0A8C1_0x0046B90C | 0.0% | Pending
 
@@ -20881,21 +20881,21 @@ SHC_3BB0A8C1_0x0046B975 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0046B976 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0046B980 | 0.0% | Pending
+SHC_3BB0A8C1_0x0046B980 | 88.7% | Union param pushes extra zero
 
-SHC_3BB0A8C1_0x0046BB20 | 0.0% | Pending
+SHC_3BB0A8C1_0x0046BB20 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0046BB60 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0046BB80 | 0.0% | Pending
+SHC_3BB0A8C1_0x0046BB80 | 65.4% | Block layout of return TRUE
 
-SHC_3BB0A8C1_0x0046BBD0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0046BBD0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0046BC90 | 0.0% | Pending
+SHC_3BB0A8C1_0x0046BC90 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0046BD20 | 0.0% | Pending
+SHC_3BB0A8C1_0x0046BD20 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0046BD50 | 0.0% | Pending
+SHC_3BB0A8C1_0x0046BD50 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0046BDB0 | 0.0% | Pending
 
@@ -21325,15 +21325,15 @@ SHC_3BB0A8C1_0x00471890 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004718C0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004718F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004718F0 | 93.5% | Reimplemented
 
-SHC_3BB0A8C1_0x004719E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004719E0 | 71.4% | Reimplemented
 
-SHC_3BB0A8C1_0x00471A00 | 0.0% | Pending
+SHC_3BB0A8C1_0x00471A00 | 90.2% | Reimplemented
 
-SHC_3BB0A8C1_0x00471A80 | 0.0% | Pending
+SHC_3BB0A8C1_0x00471A80 | 71.4% | Reimplemented
 
-SHC_3BB0A8C1_0x00471AA0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00471AA0 | 71.9% | ecx load scheduling
 
 SHC_3BB0A8C1_0x00471BE0 | 100.0% | Reimplemented
 
