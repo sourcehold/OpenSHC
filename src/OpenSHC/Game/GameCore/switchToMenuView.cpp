@@ -77,8 +77,7 @@ namespace Game {
                     && this->buildmenuMenuTabToSwitchTo.buildMenuTab != 62) {
                     this->buildmenuMenuTabToSwitchTo.buildMenuTab = 48;
                     this->menuTabToSwitchTo.buildMenuTab = 48;
-                    MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::setSection1079_28_4_, DAT_SoundSystemState::ptr)(
-                        1);
+                    MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::setSection1079_28_4_, DAT_SoundSystemState::ptr)(1);
                 }
             } else if (this->currentMenuViewType == UI::Enums::MVT_BUILD_MENU
                 && this->buildmenuMenuTabToSwitchTo.buildMenuTab >= 10
@@ -98,8 +97,8 @@ namespace Game {
                             this->menuSwitchDelay = 0;
                             DAT_MenuHandlerState::instance.isBuildMenuTransitioning_0x18 = FALSE;
                         }
-                    } else if (MACRO_CALL_MEMBER(GameStateStructures_Func::singlePlayerHasKeepAndGranaryCheck,
-                                   DAT_GameState::ptr)()
+                    } else if (MACRO_CALL_MEMBER(
+                                   GameStateStructures_Func::singlePlayerHasKeepAndGranaryCheck, DAT_GameState::ptr)()
                         < 0) {
                         if (this->buildmenuMenuTabToSwitchTo.buildMenuTab != 49) {
                             this->buildmenuMenuTabToSwitchTo.buildMenuTab = 49;
@@ -122,8 +121,8 @@ namespace Game {
                             this->buildmenuMenuTabToSwitchTo.buildMenuTab = UI::Enums::BMTT_CASTLE_KEEPS;
                             this->menuTabToSwitchTo.buildMenuTab = UI::Enums::BMTT_CASTLE_KEEPS;
                         }
-                    } else if (MACRO_CALL_MEMBER(GameStateStructures_Func::singlePlayerHasKeepAndGranaryCheck,
-                                   DAT_GameState::ptr)()
+                    } else if (MACRO_CALL_MEMBER(
+                                   GameStateStructures_Func::singlePlayerHasKeepAndGranaryCheck, DAT_GameState::ptr)()
                         < 0) {
                         if (this->buildmenuMenuTabToSwitchTo.buildMenuTab != 49) {
                             this->buildmenuMenuTabToSwitchTo.buildMenuTab = 49;

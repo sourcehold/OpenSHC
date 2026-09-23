@@ -54,7 +54,8 @@ namespace Game {
             // this code is executed when changing menus
             this->currentMenuViewType = this->menuViewToSwitchTo;
             this->activeMenuTab = this->menuTabToSwitchTo;
-            MACRO_CALL_MEMBER(Rendering::ViewportRenderState_Func::resetupViewportThunk, DAT_ViewportRenderState::ptr)();
+            MACRO_CALL_MEMBER(
+                Rendering::ViewportRenderState_Func::resetupViewportThunk, DAT_ViewportRenderState::ptr)();
             DAT_UIDragDropDefinedData::instance.MenuView_TriggerInitial = TRUE;
             DAT_MenuView_TriggerPrepare::instance = TRUE;
             DAT_WindowAndDirectDraw::instance.unk_resetViewportRelated = 2;

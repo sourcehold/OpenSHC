@@ -18,7 +18,7 @@ namespace Game {
             if (jesterID != 0
                 && DAT_UnitsState::instance.units[jesterID].uid
                     == DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                           .someUnitIDSelfRef_2) {
+                        .someUnitIDSelfRef_2) {
                 DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                     .jesterIDUnk = 0;
                 DAT_UnitsState::instance.units[jesterID].logicalState = Map::Units::ULS_REMOVE;
@@ -37,9 +37,9 @@ namespace Game {
             if (ladyID != 0
                 && DAT_UnitsState::instance.units[ladyID].uid
                     == DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                           .someUnitIDSelfRef) {
-                DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                    .ladyIDUnk = 0;
+                        .someUnitIDSelfRef) {
+                DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID].ladyIDUnk
+                    = 0;
                 DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                     .someUnitIDSelfRef = 0;
                 DAT_UnitsState::instance.units[ladyID].logicalState = Map::Units::ULS_REMOVE;

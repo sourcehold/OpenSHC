@@ -37,8 +37,7 @@ namespace Game {
             if (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_BUILD_MENU) {
                 if (DAT_GameCore::instance.activeMenuTab.buildMenuTab == 62) {
                     DAT_GameCore::instance.buildmenuMenuTabToSwitchTo.buildMenuTab = UI::Enums::BMTT_SOLDIERS;
-                    MACRO_CALL_MEMBER(GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
-                        UI::Enums::MVT_BUILD_MENU, 0);
+                    MACRO_CALL_MEMBER(GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(UI::Enums::MVT_BUILD_MENU, 0);
                     return;
                 }
                 MACRO_CALL_MEMBER(GameCore_Func::swapBuildMenuTab, DAT_GameCore::ptr)();
@@ -50,8 +49,7 @@ namespace Game {
             if (DAT_GameCore::instance.buildmenuMenuTabToSwitchTo.buildMenuTab == UI::Enums::BMTT_MENU_HIDDEN) {
                 if (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_BUILD_MENU) {
                     DAT_GameCore::instance.buildmenuMenuTabToSwitchTo.buildMenuTab = UI::Enums::BMTT_CASTLE;
-                    MACRO_CALL_MEMBER(GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
-                        UI::Enums::MVT_BUILD_MENU, 0);
+                    MACRO_CALL_MEMBER(GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(UI::Enums::MVT_BUILD_MENU, 0);
                     return;
                 }
                 if (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_MAP_EDITOR_LANDSCAPING) {
