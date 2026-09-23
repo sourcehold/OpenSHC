@@ -37981,7 +37981,7 @@ SHC_3BB0A8C1_0x004EFA60 | 91.9% | Reimplemented
 
 SHC_3BB0A8C1_0x004EFAB0 | 82.8% | Register reuse after search
 
-SHC_3BB0A8C1_0x004EFB90 | 0.0% | Pending
+SHC_3BB0A8C1_0x004EFB90 | 97.7% | Reimplemented
 
 SHC_3BB0A8C1_0x004EFC30 | 96.0% | Reimplemented
 
