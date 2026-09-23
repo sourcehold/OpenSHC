@@ -6,13 +6,13 @@
 namespace OpenSHC {
 namespace AI {
 
-    // FUNCTION: STRONGHOLDCRUSADER 0x004CB120
-    int AICState::getAIBuildInterval(int playerID)
+    // FUNCTION: STRONGHOLDCRUSADER 0x004CB180
+    int AICState::aiFarmChoice(PlayerID playerID)
     {
         int aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
         if (aiType == AITA_NULL)
             return 0;
-        return this->aics[aiType - 1].buildInterval;
+        return (&this->aics[aiType - 1].farm1)[DAT_GameState::instance.playerDataArray[playerID].aiFarmIndex];
     }
 }
 }
