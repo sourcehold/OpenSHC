@@ -33,11 +33,11 @@ namespace AI {
                 DAT_DirectionAlgorithmState::ptr)(keepX, keepY,
                 tile
                     - DAT_ViewportRenderState::instance
-                          .translationMatrix[DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile]]
-                          .addXgetTile,
+                        .translationMatrix[DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile]]
+                        .addXgetTile,
                 DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile]);
-            this->aiBorderTiles[i].distance
-                = DAT_TileMapState::instance.unitDeathHeatMap[tile] + DAT_DirectionAlgorithmState::instance.distanceHigh;
+            this->aiBorderTiles[i].distance = DAT_TileMapState::instance.unitDeathHeatMap[tile]
+                + DAT_DirectionAlgorithmState::instance.distanceHigh;
         }
 
         int shortestDistanceTile = 0;

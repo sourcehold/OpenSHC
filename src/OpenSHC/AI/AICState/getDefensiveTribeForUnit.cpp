@@ -45,7 +45,8 @@ namespace AI {
 
         tribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(playerID);
         DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[tribeIndex] = tribeID;
-        DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[tribeIndex] = DAT_TribesState::instance.tribes[tribeID].uid;
+        DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[tribeIndex]
+            = DAT_TribesState::instance.tribes[tribeID].uid;
         return tribeID;
     }
 }

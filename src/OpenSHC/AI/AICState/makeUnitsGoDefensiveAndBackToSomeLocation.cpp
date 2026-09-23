@@ -32,9 +32,8 @@ namespace AI {
                     continue;
 
                 DAT_TribesState::instance.tribes[tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_DEFENSIVE;
-                uint result = MACRO_CALL_MEMBER(
-                    OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(tribeID,
-                    DAT_GameState::instance.playerDataArray[playerID].someX,
+                uint result = MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction,
+                    DAT_TribesState::ptr)(tribeID, DAT_GameState::instance.playerDataArray[playerID].someX,
                     DAT_GameState::instance.playerDataArray[playerID].someY, 0, 0,
                     OpenSHC::Map::Units::Instructions::UMSE_0);
                 if (result == 0)

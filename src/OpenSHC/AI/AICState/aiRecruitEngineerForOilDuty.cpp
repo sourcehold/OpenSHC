@@ -1,6 +1,6 @@
+#include "OpenSHC/AI/AICState.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
-#include "OpenSHC/AI/AICState.func.hpp"
 #include "OpenSHC/AI/AITypeA.hpp"
 #include "OpenSHC/AI/Tribes/AITribeType.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
@@ -45,14 +45,16 @@ namespace AI {
             DAT_GameState::instance.playerDataArray[playerID].resourcesToAcquireArray[Game::Resources::RT_PITCH] = 4;
             return;
         }
-        if (MACRO_CALL_MEMBER(AICState_Func::checksAndGenerateAITribesForPlayerIfNotExisting, this)(playerID, amount, TRUE)
+        if (MACRO_CALL_MEMBER(AICState_Func::checksAndGenerateAITribesForPlayerIfNotExisting, this)(
+                playerID, amount, TRUE)
             == FALSE)
             return;
 
-        int tribeID
-            = MACRO_CALL_MEMBER(AICState_Func::checksAndGenerateAITribesForPlayerIfNotExisting, this)(playerID, amount, FALSE);
+        int tribeID = MACRO_CALL_MEMBER(AICState_Func::checksAndGenerateAITribesForPlayerIfNotExisting, this)(
+            playerID, amount, FALSE);
         int unitID = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::nonEuroRecruit, DAT_UnitsState::ptr)(
-            Map::Units::UT_E_ENGINEER, DAT_GameState::instance.playerDataArray[playerID].engineersGuild.id, playerID, 0);
+            Map::Units::UT_E_ENGINEER, DAT_GameState::instance.playerDataArray[playerID].engineersGuild.id, playerID,
+            0);
         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(unitID, tribeID);
         if (unitID == 0)
             return;

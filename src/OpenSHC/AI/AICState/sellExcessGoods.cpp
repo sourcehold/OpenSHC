@@ -79,7 +79,8 @@ namespace AI {
                 }
                 variance = 0;
             } else {
-                amount += *(int*)((char*)DAT_GameState::instance.playerDataArray[0].resourcesToAcquireArray + resourceOffset);
+                amount += *(
+                    int*)((char*)DAT_GameState::instance.playerDataArray[0].resourcesToAcquireArray + resourceOffset);
             }
 
             // Resources the AIC always sells are kept at zero
@@ -93,8 +94,9 @@ namespace AI {
 
             if (*(int*)((char*)DAT_GameState::instance.playerDataArray[0].currentResources + resourceOffset) > amount) {
                 MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sellGoods, this)(playerID, resourceType,
-                    ((int*)DAT_GameState::instance.playerDataArray[0].currentResources)[playerResourceBase + resourceType] - amount
-                        + variance);
+                    ((int*)DAT_GameState::instance.playerDataArray[0]
+                            .currentResources)[playerResourceBase + resourceType]
+                        - amount + variance);
                 return;
             }
         }

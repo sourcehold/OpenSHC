@@ -56,11 +56,13 @@ namespace AI {
                 continue;
 
             if (DAT_UnitsState::instance.units[unitID].unitType == UT_S_TOWER) {
-                if (*(int*)((int)DAT_TroopValueState::instance.attackInfo.wideValuesArray + playerID * 0x177bc - 4) != 0)
+                if (*(int*)((int)DAT_TroopValueState::instance.attackInfo.wideValuesArray + playerID * 0x177bc - 4)
+                    != 0)
                     MACRO_CALL_MEMBER(TribesState_Func::assignAttackTargetsForTribe, DAT_TribesState::ptr)(
                         tribeID, STBT_0x414);
             } else if (DAT_UnitsState::instance.units[unitID].unitType == UT_S_BATTERINGRAM) {
-                if (*(int*)((int)DAT_TroopValueState::instance.attackInfo.gateValuesArray + playerID * 0x177bc - 4) != 0)
+                if (*(int*)((int)DAT_TroopValueState::instance.attackInfo.gateValuesArray + playerID * 0x177bc - 4)
+                    != 0)
                     MACRO_CALL_MEMBER(TribesState_Func::assignAttackTargetsForTribe, DAT_TribesState::ptr)(
                         tribeID, STBT_0x3f6);
                 else if (*(int*)((int)DAT_TroopValueState::instance.attackInfo.wideValuesArray + playerID * 0x177bc - 4)
@@ -87,9 +89,10 @@ namespace AI {
                     tribeID, x, y, 0, 0, Instructions::UMSE_0);
                 MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::calculatePreferredRelativeOrientation,
-                    DAT_DirectionAlgorithmState::ptr)(
-                    DAT_UnitsState::instance.units[targetUnitID].x, DAT_UnitsState::instance.units[targetUnitID].y, x, y);
-                DAT_TribesState::instance.tribes[tribeID].orientation = DAT_DirectionAlgorithmState::instance.orientation;
+                    DAT_DirectionAlgorithmState::ptr)(DAT_UnitsState::instance.units[targetUnitID].x,
+                    DAT_UnitsState::instance.units[targetUnitID].y, x, y);
+                DAT_TribesState::instance.tribes[tribeID].orientation
+                    = DAT_DirectionAlgorithmState::instance.orientation;
             }
         }
     }

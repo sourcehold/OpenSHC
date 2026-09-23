@@ -48,28 +48,28 @@ namespace AI {
                 if ((DAT_GameSynchronyState::instance.currentAIArray[playerID] != 0)
                     && (DAT_GameState::instance.mapAndTime.playerTeams[playerID]
                         != DAT_GameState::instance.mapAndTime
-                               .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID])) {
+                            .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID])) {
                     candidates[candidateCount] = playerID;
                     candidateCount++;
                 }
                 if ((DAT_GameSynchronyState::instance.currentAIArray[playerID + 1] != 0)
                     && (DAT_GameState::instance.mapAndTime.playerTeams[playerID + 1]
                         != DAT_GameState::instance.mapAndTime
-                               .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID])) {
+                            .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID])) {
                     candidates[candidateCount] = playerID + 1;
                     candidateCount++;
                 }
                 if ((DAT_GameSynchronyState::instance.currentAIArray[playerID + 2] != 0)
                     && (DAT_GameState::instance.mapAndTime.playerTeams[playerID + 2]
                         != DAT_GameState::instance.mapAndTime
-                               .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID])) {
+                            .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID])) {
                     candidates[candidateCount] = playerID + 2;
                     candidateCount++;
                 }
                 if ((DAT_GameSynchronyState::instance.currentAIArray[playerID + 3] != 0)
                     && (DAT_GameState::instance.mapAndTime.playerTeams[playerID + 3]
                         != DAT_GameState::instance.mapAndTime
-                               .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID])) {
+                            .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID])) {
                     candidates[candidateCount] = playerID + 3;
                     candidateCount++;
                 }

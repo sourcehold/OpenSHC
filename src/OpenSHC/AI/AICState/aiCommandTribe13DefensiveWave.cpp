@@ -18,7 +18,8 @@ namespace AI {
         int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[13];
         if (tribeID == 0)
             return;
-        if (DAT_TribesState::instance.tribes[tribeID].uid != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[13])
+        if (DAT_TribesState::instance.tribes[tribeID].uid
+            != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[13])
             return;
         if (DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID == 0)
             return;

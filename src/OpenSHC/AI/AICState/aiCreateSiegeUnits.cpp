@@ -45,9 +45,11 @@ namespace AI {
 
         // The original also processes index 4, one past the end of SiegeEngineMetaInfoArray.
         for (int siegeIndex = 0; siegeIndex < 5; siegeIndex++) {
-            UnitType unitType = (UnitType)DAT_SkirmishDefinedData::instance.SiegeEngineMetaInfoArray[siegeIndex].unitType;
+            UnitType unitType
+                = (UnitType)DAT_SkirmishDefinedData::instance.SiegeEngineMetaInfoArray[siegeIndex].unitType;
             int slot = DAT_SkirmishDefinedData::instance.SiegeEngineMetaInfoArray[siegeIndex].slot;
-            int locationCount = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount[slot];
+            int locationCount
+                = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount[slot];
             if (locationCount >= 4)
                 locationCount = 3;
 
@@ -57,25 +59,39 @@ namespace AI {
                     continue;
 
                 int existingBuildingID = (short)DAT_TileMapState::instance.BuildingLayer[location];
-                int unitID = DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].unitID;
-                int uid = DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].uid;
-                int buildingID
-                    = DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].buildingID;
+                int unitID = DAT_GameState::instance.playerDataArray[playerID]
+                                 .aiSiegeCreationInformation[siegeIndex][i]
+                                 .unitID;
+                int uid
+                    = DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].uid;
+                int buildingID = DAT_GameState::instance.playerDataArray[playerID]
+                                     .aiSiegeCreationInformation[siegeIndex][i]
+                                     .buildingID;
 
                 if (unitID != 0 && DAT_UnitsState::instance.units[unitID].uid != uid) {
-                    DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].unitID = 0;
+                    DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].unitID
+                        = 0;
                     DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].uid = 0;
-                    DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].delay = 0;
-                    DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].unknown = 0;
-                    DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].buildingID = 0;
+                    DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].delay
+                        = 0;
+                    DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].unknown
+                        = 0;
+                    DAT_GameState::instance.playerDataArray[playerID]
+                        .aiSiegeCreationInformation[siegeIndex][i]
+                        .buildingID = 0;
                     continue;
                 }
                 if (buildingID != 0 && DAT_BuildingsState::instance.buildings[buildingID].uid != uid) {
-                    DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].unitID = 0;
+                    DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].unitID
+                        = 0;
                     DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].uid = 0;
-                    DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].delay = 0;
-                    DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].unknown = 0;
-                    DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].buildingID = 0;
+                    DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].delay
+                        = 0;
+                    DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].unknown
+                        = 0;
+                    DAT_GameState::instance.playerDataArray[playerID]
+                        .aiSiegeCreationInformation[siegeIndex][i]
+                        .buildingID = 0;
                     continue;
                 }
 
@@ -84,19 +100,23 @@ namespace AI {
                         int requiredEngineers = MACRO_CALL_MEMBER(
                             OpenSHC::Map::Buildings::BuildingsState_Func::getRequiredEngineerCountForSiegeBuilding,
                             DAT_BuildingsState::ptr)(buildingID);
-                        if (DAT_BuildingsState::instance.buildings[buildingID].currentEmployeeCount == requiredEngineers)
+                        if (DAT_BuildingsState::instance.buildings[buildingID].currentEmployeeCount
+                            == requiredEngineers)
                             continue;
-                        if (requiredEngineers > DAT_GameState::instance.playerDataArray[playerID].engineerCountRelated) {
+                        if (requiredEngineers
+                            > DAT_GameState::instance.playerDataArray[playerID].engineerCountRelated) {
                             DAT_GameState::instance.playerDataArray[playerID].isEngineerRequired = TRUE;
                             continue;
                         }
-                        int tribeID = MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::assignRequiredIdleEngineersToNewTribe, this)(
-                            playerID, requiredEngineers);
+                        int tribeID
+                            = MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::assignRequiredIdleEngineersToNewTribe,
+                                this)(playerID, requiredEngineers);
                         DAT_TribesState::instance.tribes[tribeID].tribeType = OpenSHC::AI::Tribes::AITT_ENGINEERS;
                         DAT_TribesState::instance.tribes[tribeID].tribeBehaviorType
                             = OpenSHC::Map::Units::STBT_0x410_SIEGE_EQUIPMENT_CONSTRUCTION;
-                        MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeAnInstruction, DAT_TribesState::ptr)(
-                            tribeID, OpenSHC::Map::Units::UIT_CONSTRUCT_SIEGE_EQUIPMENTOIL_DUTYENGINEERRELATED, buildingID,
+                        MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeAnInstruction,
+                            DAT_TribesState::ptr)(tribeID,
+                            OpenSHC::Map::Units::UIT_CONSTRUCT_SIEGE_EQUIPMENTOIL_DUTYENGINEERRELATED, buildingID,
                             DAT_BuildingsState::instance.buildings[buildingID].uid, 0);
                         return;
                     }
@@ -105,53 +125,73 @@ namespace AI {
                         if (siegeIndex < 2)
                             continue;
                     } else if (siegeIndex < 2) {
-                        if (DAT_BuildingsState::instance.buildings[existingBuildingID].buildingType != OpenSHC::Map::Buildings::BT_TOWER4
+                        if (DAT_BuildingsState::instance.buildings[existingBuildingID].buildingType
+                                != OpenSHC::Map::Buildings::BT_TOWER4
                             && DAT_BuildingsState::instance.buildings[existingBuildingID].buildingType
                                 != OpenSHC::Map::Buildings::BT_TOWER5)
                             continue;
                     }
 
-                    int requiredGold = DAT_BuildingsState::instance
-                                           .buildingCosts[DAT_SkirmishDefinedData::instance.SiegeEngineMetaInfoArray[siegeIndex].buildingType]
-                                           .requiredGold;
+                    int requiredGold
+                        = DAT_BuildingsState::instance
+                              .buildingCosts[DAT_SkirmishDefinedData::instance.SiegeEngineMetaInfoArray[siegeIndex]
+                                      .buildingType]
+                              .requiredGold;
                     DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].delay++;
                     if (DAT_GameState::instance.playerDataArray[playerID].currentResources[Game::Resources::RT_GOLD]
                             + this->aics[aiType - 1].defSiegeEngineGoldThreshold
                         < requiredGold)
                         continue;
-                    if (DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].delay
+                    if (DAT_GameState::instance.playerDataArray[playerID]
+                            .aiSiegeCreationInformation[siegeIndex][i]
+                            .delay
                         < this->aics[aiType - 1].defSiegeEngineBuildDelay)
                         continue;
 
                     int y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[location];
                     int x = location - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
                     if (siegeIndex < 2) {
-                        int spawnedUnitID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
-                            playerID, playerID, x * 8 + 4, y * 8 + 4,
+                        int spawnedUnitID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::spawnUnit,
+                            DAT_UnitsState::ptr)(playerID, playerID, x * 8 + 4, y * 8 + 4,
                             DAT_BuildingsState::instance.buildings[existingBuildingID].terrainHeightUnk, unitType);
-                        DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].unitID
-                            = spawnedUnitID;
+                        DAT_GameState::instance.playerDataArray[playerID]
+                            .aiSiegeCreationInformation[siegeIndex][i]
+                            .unitID = spawnedUnitID;
                         DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].uid
                             = DAT_UnitsState::instance.units[spawnedUnitID].uid;
-                        DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].buildingID = 0;
-                        MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processPlacementResourceLossForBuildingType,
+                        DAT_GameState::instance.playerDataArray[playerID]
+                            .aiSiegeCreationInformation[siegeIndex][i]
+                            .buildingID = 0;
+                        MACRO_CALL_MEMBER(
+                            OpenSHC::Map::Buildings::BuildingsState_Func::processPlacementResourceLossForBuildingType,
                             DAT_BuildingsState::ptr)(playerID,
-                            (BuildingType)DAT_SkirmishDefinedData::instance.SiegeEngineMetaInfoArray[siegeIndex].buildingType, 0);
+                            (BuildingType)DAT_SkirmishDefinedData::instance.SiegeEngineMetaInfoArray[siegeIndex]
+                                .buildingType,
+                            0);
                     } else {
-                        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::placeBuilding, DAT_TileMapState::ptr)(playerID, x, y,
+                        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::placeBuilding, DAT_TileMapState::ptr)(
+                            playerID, x, y,
                             (MappersEnum)(ushort)DAT_SkirmishDefinedData::instance.SiegeEngineMetaInfoArray[siegeIndex]
                                 .commandBuildingType,
                             3, 15);
                         if (DAT_TileMapState::instance.buildingPlacementFail == FALSE) {
-                            DAT_GameState::instance.playerDataArray[playerID].currentResources[Game::Resources::RT_GOLD] -= requiredGold;
-                            DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].unitID = 0;
-                            DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].uid
-                                = DAT_BuildingsState::instance.buildings[DAT_TileMapState::instance.placedBuildingID].uid;
-                            DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].buildingID
-                                = DAT_TileMapState::instance.placedBuildingID;
+                            DAT_GameState::instance.playerDataArray[playerID].currentResources[Game::Resources::RT_GOLD]
+                                -= requiredGold;
+                            DAT_GameState::instance.playerDataArray[playerID]
+                                .aiSiegeCreationInformation[siegeIndex][i]
+                                .unitID = 0;
+                            DAT_GameState::instance.playerDataArray[playerID]
+                                .aiSiegeCreationInformation[siegeIndex][i]
+                                .uid
+                                = DAT_BuildingsState::instance.buildings[DAT_TileMapState::instance.placedBuildingID]
+                                      .uid;
+                            DAT_GameState::instance.playerDataArray[playerID]
+                                .aiSiegeCreationInformation[siegeIndex][i]
+                                .buildingID = DAT_TileMapState::instance.placedBuildingID;
                         }
                     }
-                    DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].delay = 0;
+                    DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].delay
+                        = 0;
                     return;
                 }
 
@@ -160,47 +200,55 @@ namespace AI {
                         int requiredEngineers = MACRO_CALL_MEMBER(
                             OpenSHC::Map::Buildings::BuildingsState_Func::getRequiredEngineerCountForSiegeBuilding,
                             DAT_BuildingsState::ptr)(buildingID);
-                        if (DAT_BuildingsState::instance.buildings[buildingID].currentEmployeeCount == requiredEngineers)
+                        if (DAT_BuildingsState::instance.buildings[buildingID].currentEmployeeCount
+                            == requiredEngineers)
                             continue;
-                        if (requiredEngineers > DAT_GameState::instance.playerDataArray[playerID].engineerCountRelated) {
+                        if (requiredEngineers
+                            > DAT_GameState::instance.playerDataArray[playerID].engineerCountRelated) {
                             DAT_GameState::instance.playerDataArray[playerID].isEngineerRequired = TRUE;
                             continue;
                         }
-                        int tribeID = MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::assignRequiredIdleEngineersToNewTribe, this)(
-                            playerID, requiredEngineers);
+                        int tribeID
+                            = MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::assignRequiredIdleEngineersToNewTribe,
+                                this)(playerID, requiredEngineers);
                         DAT_TribesState::instance.tribes[tribeID].tribeType = OpenSHC::AI::Tribes::AITT_ENGINEERS;
                         DAT_TribesState::instance.tribes[tribeID].tribeBehaviorType
                             = OpenSHC::Map::Units::STBT_0x410_SIEGE_EQUIPMENT_CONSTRUCTION;
-                        MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeAnInstruction, DAT_TribesState::ptr)(
-                            tribeID, OpenSHC::Map::Units::UIT_CONSTRUCT_SIEGE_EQUIPMENTOIL_DUTYENGINEERRELATED, buildingID,
+                        MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeAnInstruction,
+                            DAT_TribesState::ptr)(tribeID,
+                            OpenSHC::Map::Units::UIT_CONSTRUCT_SIEGE_EQUIPMENTOIL_DUTYENGINEERRELATED, buildingID,
                             DAT_BuildingsState::instance.buildings[buildingID].uid, 0);
                         return;
                     }
-                    int remainingEngineers = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::getRemainingRequiredEngineers,
-                        DAT_UnitsState::ptr)(unitID);
+                    int remainingEngineers
+                        = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::getRemainingRequiredEngineers,
+                            DAT_UnitsState::ptr)(unitID);
                     if (remainingEngineers <= 0)
                         continue;
                     if (DAT_GameState::instance.playerDataArray[playerID].engineerCountRelated < remainingEngineers) {
                         DAT_GameState::instance.playerDataArray[playerID].isEngineerRequired = TRUE;
                         continue;
                     }
-                    int tribeID = MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::assignRequiredIdleEngineersToNewTribe, this)(
-                        playerID, remainingEngineers);
+                    int tribeID = MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::assignRequiredIdleEngineersToNewTribe,
+                        this)(playerID, remainingEngineers);
                     int targetUnitID = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
                     if (targetUnitID == 0)
                         continue;
-                    if (MACRO_CALL_MEMBER(
-                            OpenSHC::Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
+                    if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
+                                              calculateCanPlayerUnitsNavigateToAreaFromArea,
                             DAT_PathFindingState::ptr)(playerID,
-                            (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile],
-                            (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[targetUnitID].tile],
+                            (short)DAT_TileMapState::instance
+                                .PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile],
+                            (short)DAT_TileMapState::instance
+                                .PathConnectionLayer[DAT_UnitsState::instance.units[targetUnitID].tile],
                             0)
                         == 0)
                         continue;
                     DAT_TribesState::instance.tribes[tribeID].tribeType = OpenSHC::AI::Tribes::AITT_ENGINEERS;
                     DAT_TribesState::instance.tribes[tribeID].tribeBehaviorType = OpenSHC::Map::Units::STBT_0x41c;
-                    MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::relayTribeInstruction, DAT_UnitsState::ptr)(tribeID,
-                        OpenSHC::Map::Units::UIT_MAN_SIEGE_EQUIPMENT, unitID, DAT_UnitsState::instance.units[unitID].uid, 0);
+                    MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::relayTribeInstruction, DAT_UnitsState::ptr)(
+                        tribeID, OpenSHC::Map::Units::UIT_MAN_SIEGE_EQUIPMENT, unitID,
+                        DAT_UnitsState::instance.units[unitID].uid, 0);
                     return;
                 }
             }

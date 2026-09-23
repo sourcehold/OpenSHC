@@ -27,8 +27,8 @@ namespace AI {
             DAT_GameState::instance.playerDataArray[playerID].unknownCounter_01 = 50;
 
         int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[166];
-        BOOLEnum keepEnclosed
-            = MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::checkKeepEnclosed, DAT_GameState::ptr)(playerID);
+        BOOLEnum keepEnclosed = MACRO_CALL_MEMBER(
+            OpenSHC::Game::GameStateStructures_Func::checkKeepEnclosed, DAT_GameState::ptr)(playerID);
         if (tribeID == 0)
             return;
         if (DAT_TribesState::instance.tribes[tribeID].uid

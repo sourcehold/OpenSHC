@@ -33,7 +33,8 @@ namespace AI {
                 continue;
 
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::computeNextRallyPointDestination,
-                DAT_PathFindingState::ptr)(-1, DAT_UnitsState::instance.units[unitID].x, DAT_UnitsState::instance.units[unitID].y);
+                DAT_PathFindingState::ptr)(
+                -1, DAT_UnitsState::instance.units[unitID].x, DAT_UnitsState::instance.units[unitID].y);
             DAT_TribesState::instance.tribes[tribeID]
                 .rallyPointArray[DAT_TribesState::instance.tribes[tribeID].rallyPointCount][0]
                 = DAT_PathFindingState::instance.ALG_ResultX;

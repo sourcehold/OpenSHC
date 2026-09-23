@@ -34,13 +34,22 @@ namespace AI {
             if (DAT_UnitsState::instance.units[unitID].dying != 0)
                 continue;
 
-            if (DAT_UnitsState::instance.units[unitID].unitType == UT_LORD || DAT_UnitsState::instance.units[unitID].unitType == UT_E_ENGINEER || DAT_UnitsState::instance.units[unitID].unitType == UT_TUNNELER || DAT_UnitsState::instance.units[unitID].unitType == UT_S_CATAPULT
-                || DAT_UnitsState::instance.units[unitID].unitType == UT_S_TREBUCHET || DAT_UnitsState::instance.units[unitID].unitType == UT_S_MANGONEL || DAT_UnitsState::instance.units[unitID].unitType == UT_S_TOWER
-                || DAT_UnitsState::instance.units[unitID].unitType == UT_S_BATTERINGRAM || DAT_UnitsState::instance.units[unitID].unitType == UT_S_SHIELD || DAT_UnitsState::instance.units[unitID].unitType == UT_S_BALLISTA
+            if (DAT_UnitsState::instance.units[unitID].unitType == UT_LORD
+                || DAT_UnitsState::instance.units[unitID].unitType == UT_E_ENGINEER
+                || DAT_UnitsState::instance.units[unitID].unitType == UT_TUNNELER
+                || DAT_UnitsState::instance.units[unitID].unitType == UT_S_CATAPULT
+                || DAT_UnitsState::instance.units[unitID].unitType == UT_S_TREBUCHET
+                || DAT_UnitsState::instance.units[unitID].unitType == UT_S_MANGONEL
+                || DAT_UnitsState::instance.units[unitID].unitType == UT_S_TOWER
+                || DAT_UnitsState::instance.units[unitID].unitType == UT_S_BATTERINGRAM
+                || DAT_UnitsState::instance.units[unitID].unitType == UT_S_SHIELD
+                || DAT_UnitsState::instance.units[unitID].unitType == UT_S_BALLISTA
                 || DAT_UnitsState::instance.units[unitID].unitType == UT_S_FBALLISTA)
                 continue;
 
-            if (this->aics[aicIndex].DefDiggingUnitMax == 0 || DAT_UnitsState::instance.units[unitID].unitType == UT_E_ARCHER || DAT_UnitsState::instance.units[unitID].unitType == UT_E_XBOW
+            if (this->aics[aicIndex].DefDiggingUnitMax == 0
+                || DAT_UnitsState::instance.units[unitID].unitType == UT_E_ARCHER
+                || DAT_UnitsState::instance.units[unitID].unitType == UT_E_XBOW
                 || DAT_UnitsState::instance.units[unitID].someUnitStat4 == 0)
                 MACRO_CALL_MEMBER(AICState_Func::assignUnitToATribe, this)(unitID);
             else

@@ -42,8 +42,8 @@ namespace AI {
             if (DAT_UnitsState::instance.units[DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID]
                     .resourceToDeposit
                 != 0) {
-                MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::unsetRallyRelatedFlagOnUnits,
-                    DAT_TribesState::ptr)(tribeID);
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Map::Units::TribesState_Func::unsetRallyRelatedFlagOnUnits, DAT_TribesState::ptr)(tribeID);
                 MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendTribeToAIVLocationSlot, this)(
                     tribeID, OpenSHC::AI::AIVUT_ENGINEER, i - 1);
                 continue;

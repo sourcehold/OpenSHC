@@ -23,7 +23,8 @@ namespace AI {
         int aicIndex = aiType - 1;
         if (this->aics[aicIndex].SortieUnitMeleeMin < 0)
             return;
-        if (DAT_GameState::instance.playerDataArray[playerID].totalTroopsType7 >= this->aics[aicIndex].SortieUnitMeleeMin)
+        if (DAT_GameState::instance.playerDataArray[playerID].totalTroopsType7
+            >= this->aics[aicIndex].SortieUnitMeleeMin)
             return;
         if (DAT_GameState::instance.playerDataArray[playerID].idlePeasantsCount <= 0)
             return;

@@ -20,9 +20,8 @@ namespace AI {
             if (tribeID == 0
                 || DAT_TribesState::instance.tribes[tribeID].uid
                     != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[i + 170]) {
-                selectedTribeID
-                    = MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(
-                        playerID);
+                selectedTribeID = MACRO_CALL_MEMBER(
+                    OpenSHC::Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(playerID);
                 selectedIndex = i;
                 break;
             }

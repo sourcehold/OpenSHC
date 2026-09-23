@@ -22,8 +22,8 @@ namespace AI {
         if (this->aics[aicIndex].populationPerWoodcutter <= 0)
             return FALSE;
 
-        int count = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::countBuildingsForPlayer, DAT_BuildingsState::ptr)(
-            playerID, Map::Buildings::BT_WOODCUTTERSHUT, 1);
+        int count = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::countBuildingsForPlayer,
+            DAT_BuildingsState::ptr)(playerID, Map::Buildings::BT_WOODCUTTERSHUT, 1);
         if (count <= 0) {
             count = 1;
         } else {

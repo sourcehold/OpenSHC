@@ -14,7 +14,8 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CC680
     int AICState::addEngineersToSelection(int playerID, int unitCount)
     {
-        int tribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(playerID);
+        int tribeID
+            = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(playerID);
         for (int unitID = 1; unitID < (int)DAT_UnitsState::instance.maxUnitCount; unitID++) {
             if (unitCount <= 0)
                 return tribeID;
