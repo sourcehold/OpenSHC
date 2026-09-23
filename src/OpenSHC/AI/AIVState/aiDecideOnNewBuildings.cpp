@@ -30,7 +30,8 @@ namespace AI {
         if (DAT_GameState::instance.playerDataArray[playerID].currentResources[Game::Resources::RT_GOLD] > 16000) {
             // rich
             stepIncrement = 2;
-        } else if (DAT_GameState::instance.playerDataArray[playerID].currentResources[Game::Resources::RT_GOLD] > 5000) {
+        } else if (DAT_GameState::instance.playerDataArray[playerID].currentResources[Game::Resources::RT_GOLD]
+            > 5000) {
             stepIncrement = 1;
         } else {
             // poor
@@ -82,8 +83,9 @@ namespace AI {
                 isPausing = 1;
             }
         } else {
-            int const pauseStep = DAT_GameState::instance.playerDataArray[playerID]
-                                      .aivPauses[DAT_GameState::instance.playerDataArray[playerID].aivCurrentPauseIndex];
+            int const pauseStep
+                = DAT_GameState::instance.playerDataArray[playerID]
+                      .aivPauses[DAT_GameState::instance.playerDataArray[playerID].aivCurrentPauseIndex];
             if (pauseStep > 0 && this->aivs[aivID].currentStepGoal >= pauseStep) {
                 DAT_GameState::instance.playerDataArray[playerID].aivCurrentPause
                     = DAT_GameState::instance.playerDataArray[playerID].aivPauseDelay;
@@ -98,7 +100,7 @@ namespace AI {
             MACRO_CALL_MEMBER(AIVState_Func::executeDefaultCastleAIV, this)(playerID, isPausing);
         } else if (!MACRO_CALL_MEMBER(AICState_Func::destroyHouse, DAT_AICState::ptr)(playerID)) {
             for (int step = 1; step <= this->aivs[aivID].totalSteps && step <= this->aivs[aivID].currentStepGoal;
-                 ++step) {
+                ++step) {
                 if (MACRO_CALL_MEMBER(AIVState_Func::aiPlaceAIVBuilding, this)(playerID, step, isPausing)) {
                     break;
                 }

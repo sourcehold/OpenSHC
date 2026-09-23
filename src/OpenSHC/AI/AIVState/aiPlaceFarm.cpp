@@ -16,14 +16,15 @@ namespace AI {
         if (buildingType <= 0) {
             return FALSE;
         }
-        if (!MACRO_CALL_MEMBER(Game::GameStateStructures_Func::checkRequiredResourcesForBuildingOrPlanToBuy,
-                DAT_GameState::ptr)(
+        if (!MACRO_CALL_MEMBER(
+                Game::GameStateStructures_Func::checkRequiredResourcesForBuildingOrPlanToBuy, DAT_GameState::ptr)(
                 MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::convertBuildingTypeToCommandBuildingType,
                     DAT_BuildingsState::ptr)((Map::Buildings::BuildingType)buildingType),
                 playerID, FALSE)) {
             return FALSE;
         }
-        return MACRO_CALL_MEMBER(AIVState_Func::findSuitableFarmLocationAndPlaceFarm, this)(playerID, buildingType) != 0;
+        return MACRO_CALL_MEMBER(AIVState_Func::findSuitableFarmLocationAndPlaceFarm, this)(playerID, buildingType)
+            != 0;
     }
 
 }

@@ -1,8 +1,8 @@
 #include "../AIVState.func.hpp"
 
-#include "OpenSHC/AI/AIVUnitType.hpp"
 #include "OpenSHC/Map/Entities/EntityState.func.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"
+#include "OpenSHC/AI/AIVUnitType.hpp"
 
 #include "OpenSHC/Globals/DAT_EntityState.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -24,7 +24,8 @@ namespace AI {
                 continue;
             }
             int const entityID = DAT_TileMapState::instance.EntityLayer[tile];
-            if (entityID != 0 && DAT_EntityState::instance.entityArray[entityID].entityType == Map::Entities::ET_BRAZIER) {
+            if (entityID != 0
+                && DAT_EntityState::instance.entityArray[entityID].entityType == Map::Entities::ET_BRAZIER) {
                 continue;
             }
             uint const height
@@ -32,12 +33,12 @@ namespace AI {
             if ((int)height <= 0) {
                 continue;
             }
-            MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(0,
-                playerID, playerID,
+            MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(0, playerID,
+                playerID,
                 (tile
                     - DAT_ViewportRenderState::instance
-                          .translationMatrix[DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile]]
-                          .addXgetTile)
+                        .translationMatrix[DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile]]
+                        .addXgetTile)
                     * 8,
                 DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile] * 8, height, 0, 0, 0,
                 Map::Entities::ET_BRAZIER, 0);

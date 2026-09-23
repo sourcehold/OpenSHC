@@ -23,9 +23,13 @@ namespace AI {
         int const quarryID = DAT_GameState::instance.playerDataArray[playerID].highestLoadedQuarryUnk;
         MACRO_CALL_MEMBER(AIVState_Func::findSuitableGridLocationFittingCriteria, this)(
             (short)DAT_BuildingsState::instance.buildings[quarryID].x / 5
-                + DAT_AIVDefinedData::instance.OffsetsForFiveByFiveAreaSpotCheck[this->mapExtraInfo.algBuildingPlacementNudge % 9].x,
+                + DAT_AIVDefinedData::instance
+                    .OffsetsForFiveByFiveAreaSpotCheck[this->mapExtraInfo.algBuildingPlacementNudge % 9]
+                    .x,
             (short)DAT_BuildingsState::instance.buildings[quarryID].y / 5
-                + DAT_AIVDefinedData::instance.OffsetsForFiveByFiveAreaSpotCheck[this->mapExtraInfo.algBuildingPlacementNudge % 9].y);
+                + DAT_AIVDefinedData::instance
+                    .OffsetsForFiveByFiveAreaSpotCheck[this->mapExtraInfo.algBuildingPlacementNudge % 9]
+                    .y);
         if (this->buildingApproriateGridXPosition == -1) {
             return;
         }

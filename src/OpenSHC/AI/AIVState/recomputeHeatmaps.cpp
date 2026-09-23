@@ -32,7 +32,8 @@ namespace AI {
                     this->heatMaps[x][y].impassableCount = 1;
                 }
             }
-            this->mapExtraInfo.largestSeparateArea = MACRO_CALL_MEMBER(AIVState_Func::computeLargestSeparateArea, this)();
+            this->mapExtraInfo.largestSeparateArea
+                = MACRO_CALL_MEMBER(AIVState_Func::computeLargestSeparateArea, this)();
         } else {
             for (int y = 0; y < 80; ++y) {
                 for (int x = 0; x < 80; ++x) {
@@ -60,16 +61,19 @@ namespace AI {
                 int const gridY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile] / 5;
                 int const gridX = (tile
                                       - DAT_ViewportRenderState::instance
-                                            .translationMatrix[DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile]]
-                                            .addXgetTile)
+                                          .translationMatrix[DAT_ViewportRenderState::instance
+                                                  .tileTranslationMatrix_YComponent[tile]]
+                                          .addXgetTile)
                     / 5;
                 if (gridX >= 1 && gridX <= 77 && gridY >= 1 && gridY <= 77) {
                     this->heatMaps[gridX][gridY].isNotNearEdgeUnk = 0;
                 }
-                if ((short)DAT_TileMapState::instance.PathConnectionLayer[tile] != this->mapExtraInfo.largestSeparateArea) {
+                if ((short)DAT_TileMapState::instance.PathConnectionLayer[tile]
+                    != this->mapExtraInfo.largestSeparateArea) {
                     ++this->heatMaps[gridX][gridY].tilesNotPartOfLargestAreaCount;
                 }
-                if (DAT_TileMapState::instance.LogicLayer[tile] & (L_SEA | L_BORDER | L_BORDER_EDGE | L_RIVER | L_FORD)) {
+                if (DAT_TileMapState::instance.LogicLayer[tile]
+                    & (L_SEA | L_BORDER | L_BORDER_EDGE | L_RIVER | L_FORD)) {
                     continue;
                 }
 
@@ -80,7 +84,8 @@ namespace AI {
                 if (height > this->heatMaps[gridX][gridY].highestTerrainHeight) {
                     this->heatMaps[gridX][gridY].highestTerrainHeight = (byte)height;
                 }
-                if (this->heatMaps[gridX][gridY].lowestTerrainHeight + 12 < (uint)this->heatMaps[gridX][gridY].highestTerrainHeight) {
+                if (this->heatMaps[gridX][gridY].lowestTerrainHeight + 12
+                    < (uint)this->heatMaps[gridX][gridY].highestTerrainHeight) {
                     this->heatMaps[gridX][gridY].terrainDiffHigherThan12 = 1;
                 }
 
@@ -138,10 +143,11 @@ namespace AI {
             if (DAT_TileMapState::instance.LogicLayer[tile] & L_ROCKY) {
                 ++this->heatMaps[(tile
                                      - DAT_ViewportRenderState::instance
-                                           .translationMatrix[DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile]]
-                                           .addXgetTile)
-                    / 5][DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile] / 5]
-                    .impassableCount;
+                                         .translationMatrix[DAT_ViewportRenderState::instance
+                                                 .tileTranslationMatrix_YComponent[tile]]
+                                         .addXgetTile)
+                          / 5][DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile] / 5]
+                      .impassableCount;
             }
             if (DAT_TileMapState::instance.LogicLayer[tile] & L_TREE) {
                 short const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
@@ -164,18 +170,22 @@ namespace AI {
             } else if (DAT_TileMapState::instance.BuildingLayer[tile] != 0) {
                 int const gridX = (tile
                                       - DAT_ViewportRenderState::instance
-                                            .translationMatrix[DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile]]
-                                            .addXgetTile)
+                                          .translationMatrix[DAT_ViewportRenderState::instance
+                                                  .tileTranslationMatrix_YComponent[tile]]
+                                          .addXgetTile)
                     / 5;
                 int const gridY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile] / 5;
                 ++this->heatMaps[gridX][gridY].structureCount;
                 this->heatMaps[gridX][gridY].tileOwnership
-                    = (byte)DAT_BuildingsState::instance.buildings[(short)DAT_TileMapState::instance.BuildingLayer[tile]].owner;
+                    = (byte)DAT_BuildingsState::instance
+                          .buildings[(short)DAT_TileMapState::instance.BuildingLayer[tile]]
+                          .owner;
             } else if (DAT_TileMapState::instance.LogicLayer[tile] & L_WALL_OR_GATEHOUSE) {
                 int const gridX = (tile
                                       - DAT_ViewportRenderState::instance
-                                            .translationMatrix[DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile]]
-                                            .addXgetTile)
+                                          .translationMatrix[DAT_ViewportRenderState::instance
+                                                  .tileTranslationMatrix_YComponent[tile]]
+                                          .addXgetTile)
                     / 5;
                 int const gridY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile] / 5;
                 ++this->heatMaps[gridX][gridY].structureCount;
