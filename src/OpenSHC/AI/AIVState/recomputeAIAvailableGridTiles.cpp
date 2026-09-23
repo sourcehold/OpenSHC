@@ -40,12 +40,15 @@ namespace AI {
             }
             // only the four cardinal directions
             for (int direction = 0; direction < 8; direction += 2) {
-                uint const gridX = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.xOffset + x;
-                uint const gridY = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.yOffset + y;
+                uint const gridX
+                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.xOffset + x;
+                uint const gridY
+                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.yOffset + y;
                 if (this->heatMaps[x][y].isNotNearEdgeUnk && (gridX > 79 || gridY > 79)) {
                     continue;
                 }
-                if (this->heatMaps[gridX][gridY].algorithmIterationNumber == this->mapExtraInfo.algorithmIterationNumber) {
+                if (this->heatMaps[gridX][gridY].algorithmIterationNumber
+                    == this->mapExtraInfo.algorithmIterationNumber) {
                     continue;
                 }
                 int const impassable = (char)this->heatMaps[gridX][gridY].impassableCount;
@@ -55,24 +58,36 @@ namespace AI {
                 if (blockedCount >= 16) {
                     continue;
                 }
-                if ((char)this->heatMaps[gridX][gridY].oilCount >= 2 && (char)this->heatMaps[gridX][gridY].marshCount >= 10 && notInLargestArea == impassable) {
-                    if (this->heatMaps[gridX][gridY].highestTerrainHeight - this->heatMaps[gridX][gridY].lowestTerrainHeight < 12) {
+                if ((char)this->heatMaps[gridX][gridY].oilCount >= 2
+                    && (char)this->heatMaps[gridX][gridY].marshCount >= 10 && notInLargestArea == impassable) {
+                    if (this->heatMaps[gridX][gridY].highestTerrainHeight
+                            - this->heatMaps[gridX][gridY].lowestTerrainHeight
+                        < 12) {
                         ++DAT_GameState::instance.playerDataArray[playerID].availableOilGridTiles;
                     }
                 } else if ((char)this->heatMaps[gridX][gridY].ironCount >= 6 && blockedCount <= 4) {
-                    if (this->heatMaps[gridX][gridY].highestTerrainHeight - this->heatMaps[gridX][gridY].lowestTerrainHeight < 12) {
+                    if (this->heatMaps[gridX][gridY].highestTerrainHeight
+                            - this->heatMaps[gridX][gridY].lowestTerrainHeight
+                        < 12) {
                         ++DAT_GameState::instance.playerDataArray[playerID].availableIronGridTiles;
                     }
                 } else if ((char)this->heatMaps[gridX][gridY].bouldersCount >= 8 && notInLargestArea == impassable) {
-                    if (this->heatMaps[gridX][gridY].highestTerrainHeight - this->heatMaps[gridX][gridY].lowestTerrainHeight < 40) {
+                    if (this->heatMaps[gridX][gridY].highestTerrainHeight
+                            - this->heatMaps[gridX][gridY].lowestTerrainHeight
+                        < 40) {
                         ++DAT_GameState::instance.playerDataArray[playerID].availableBoulderGridTiles;
                     }
                 } else if ((char)this->heatMaps[gridX][gridY].treeCount >= 0 && blockedCount <= 5) {
-                    if (this->heatMaps[gridX][gridY].highestTerrainHeight - this->heatMaps[gridX][gridY].lowestTerrainHeight < 12) {
+                    if (this->heatMaps[gridX][gridY].highestTerrainHeight
+                            - this->heatMaps[gridX][gridY].lowestTerrainHeight
+                        < 12) {
                         ++DAT_GameState::instance.playerDataArray[playerID].availableTreeGridTiles;
                     }
-                } else if ((char)this->heatMaps[gridX][gridY].oasisScrubCount > 25 && (char)this->heatMaps[gridX][gridY].oasisThickScrubCount > 14
-                    && notInLargestArea == impassable && this->heatMaps[gridX][gridY].highestTerrainHeight - this->heatMaps[gridX][gridY].lowestTerrainHeight < 12) {
+                } else if ((char)this->heatMaps[gridX][gridY].oasisScrubCount > 25
+                    && (char)this->heatMaps[gridX][gridY].oasisThickScrubCount > 14 && notInLargestArea == impassable
+                    && this->heatMaps[gridX][gridY].highestTerrainHeight
+                            - this->heatMaps[gridX][gridY].lowestTerrainHeight
+                        < 12) {
                     ++DAT_GameState::instance.playerDataArray[playerID].availableOasisGridTiles;
                 }
                 this->heatMaps[gridX][gridY].algorithmVisitCountUnk = this->visitCount + 1;

@@ -106,13 +106,16 @@ namespace AI {
                     --this->aivs[aivID].aivBuildingSteps[step].wait;
                     return FALSE;
                 }
-                if (DAT_GameState::instance.playerDataArray[playerID].currentResources[Game::Resources::RT_STONE] <= 0) {
+                if (DAT_GameState::instance.playerDataArray[playerID].currentResources[Game::Resources::RT_STONE]
+                    <= 0) {
                     // no stone, request some
-                    if (DAT_GameState::instance.playerDataArray[playerID].resourcesToAcquireArray[Game::Resources::RT_STONE]
+                    if (DAT_GameState::instance.playerDataArray[playerID]
+                            .resourcesToAcquireArray[Game::Resources::RT_STONE]
                         > 0) {
                         return FALSE;
                     }
-                    DAT_GameState::instance.playerDataArray[playerID].resourcesToAcquireArray[Game::Resources::RT_STONE] = 5;
+                    DAT_GameState::instance.playerDataArray[playerID].resourcesToAcquireArray[Game::Resources::RT_STONE]
+                        = 5;
                     return FALSE;
                 }
             }
@@ -143,8 +146,9 @@ namespace AI {
                 --this->aivs[aivID].aivBuildingSteps[step].wait;
                 return FALSE;
             }
-            uint const y = DAT_ViewportRenderState::instance
-                               .tileTranslationMatrix_YComponent[this->aivs[aivID].aivBuildingSteps[step].location.tile.tile];
+            uint const y
+                = DAT_ViewportRenderState::instance
+                      .tileTranslationMatrix_YComponent[this->aivs[aivID].aivBuildingSteps[step].location.tile.tile];
             uint const x = this->aivs[aivID].aivBuildingSteps[step].location.tile.tile
                 - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
             MACRO_CALL_MEMBER(Map::TileMapState_Func::prepareAreaForBuildingPlacement, DAT_TileMapState::ptr)(
@@ -170,8 +174,8 @@ namespace AI {
         if (MACRO_CALL_MEMBER(AICState_Func::shouldNotBeBuildingHovel, DAT_AICState::ptr)(playerID, mapper)) {
             return FALSE;
         }
-        if (MACRO_CALL_MEMBER(AICState_Func::shouldNotBuildMarketArmoryGranaryBarracksMercenarypost,
-                DAT_AICState::ptr)(playerID, mapper)) {
+        if (MACRO_CALL_MEMBER(AICState_Func::shouldNotBuildMarketArmoryGranaryBarracksMercenarypost, DAT_AICState::ptr)(
+                playerID, mapper)) {
             return FALSE;
         }
         if (MACRO_CALL_MEMBER(AICState_Func::shouldNotBuildKillingPits, DAT_AICState::ptr)(playerID, mapper)) {
@@ -252,32 +256,28 @@ namespace AI {
         // keep orientation is 0, 2, 4 or 6, halving it gives the index of the part offsets
         if (mapper == Commands::M_MAPPER_BARRACKS_EURO || mapper == Commands::M_MAPPER_BARRACKS_ARAB) {
             // the three fields in front of the barracks
-            MACRO_CALL_MEMBER(Map::TileMapState_Func::prepareAreaForBuildingPlacement, DAT_TileMapState::ptr)(
-                playerID,
+            MACRO_CALL_MEMBER(Map::TileMapState_Func::prepareAreaForBuildingPlacement, DAT_TileMapState::ptr)(playerID,
                 DAT_TerrainDefinedData::instance.BuildingPartsOffsets[this->aivs[aivID].keepOrientation / 2][0].x + x,
                 DAT_TerrainDefinedData::instance.BuildingPartsOffsets[this->aivs[aivID].keepOrientation / 2][0].y + y,
                 mapper, buildingSize);
-            MACRO_CALL_MEMBER(Map::TileMapState_Func::prepareAreaForBuildingPlacement, DAT_TileMapState::ptr)(
-                playerID,
+            MACRO_CALL_MEMBER(Map::TileMapState_Func::prepareAreaForBuildingPlacement, DAT_TileMapState::ptr)(playerID,
                 DAT_TerrainDefinedData::instance.BuildingPartsOffsets[this->aivs[aivID].keepOrientation / 2][1].x + x,
                 DAT_TerrainDefinedData::instance.BuildingPartsOffsets[this->aivs[aivID].keepOrientation / 2][1].y + y,
                 mapper, buildingSize);
-            MACRO_CALL_MEMBER(Map::TileMapState_Func::prepareAreaForBuildingPlacement, DAT_TileMapState::ptr)(
-                playerID,
+            MACRO_CALL_MEMBER(Map::TileMapState_Func::prepareAreaForBuildingPlacement, DAT_TileMapState::ptr)(playerID,
                 DAT_TerrainDefinedData::instance.BuildingPartsOffsets[this->aivs[aivID].keepOrientation / 2][2].x + x,
                 DAT_TerrainDefinedData::instance.BuildingPartsOffsets[this->aivs[aivID].keepOrientation / 2][2].y + y,
                 mapper, buildingSize);
 
         } else if (mapper == Commands::M_MAPPER_ENGINEERS_GUILD || mapper == Commands::M_MAPPER_TUNNELERS_GUILD) {
             // the guild field
-            MACRO_CALL_MEMBER(Map::TileMapState_Func::prepareAreaForBuildingPlacement, DAT_TileMapState::ptr)(
-                playerID,
+            MACRO_CALL_MEMBER(Map::TileMapState_Func::prepareAreaForBuildingPlacement, DAT_TileMapState::ptr)(playerID,
                 DAT_TerrainDefinedData::instance.BuildingPartsOffsets[this->aivs[aivID].keepOrientation / 2][1].x + x,
                 DAT_TerrainDefinedData::instance.BuildingPartsOffsets[this->aivs[aivID].keepOrientation / 2][1].y + y,
                 mapper, buildingSize);
         } else if (mapper == Commands::M_MAPPER_OIL_SMELTER) {
-            MACRO_CALL_MEMBER(Map::TileMapState_Func::prepareAreaForBuildingPlacement, DAT_TileMapState::ptr)(
-                playerID, DAT_TerrainDefinedData::instance.field63_0x19c[this->aivs[aivID].keepOrientation / 2].x + x,
+            MACRO_CALL_MEMBER(Map::TileMapState_Func::prepareAreaForBuildingPlacement, DAT_TileMapState::ptr)(playerID,
+                DAT_TerrainDefinedData::instance.field63_0x19c[this->aivs[aivID].keepOrientation / 2].x + x,
                 DAT_TerrainDefinedData::instance.field63_0x19c[this->aivs[aivID].keepOrientation / 2].y + y, mapper,
                 buildingSize);
         }

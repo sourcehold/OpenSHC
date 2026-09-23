@@ -26,12 +26,14 @@ namespace AI {
         }
 
         ++this->heatMaps[this->buildingApproriateGridXPosition][this->buildingAppropriateGridYPosition].structureCount;
-        int const quarryXOffset = DAT_AIVDefinedData::instance
-                                      .OffsetsForClockwiseThreeByThreeAreaCheck[this->mapExtraInfo.algBuildingPlacementNudge % 9]
-                                      .x;
-        int const quarryYOffset = DAT_AIVDefinedData::instance
-                                      .OffsetsForClockwiseThreeByThreeAreaCheck[this->mapExtraInfo.algBuildingPlacementNudge % 9]
-                                      .y;
+        int const quarryXOffset
+            = DAT_AIVDefinedData::instance
+                  .OffsetsForClockwiseThreeByThreeAreaCheck[this->mapExtraInfo.algBuildingPlacementNudge % 9]
+                  .x;
+        int const quarryYOffset
+            = DAT_AIVDefinedData::instance
+                  .OffsetsForClockwiseThreeByThreeAreaCheck[this->mapExtraInfo.algBuildingPlacementNudge % 9]
+                  .y;
         MACRO_CALL_MEMBER(Map::TileMapState_Func::placeBuilding, DAT_TileMapState::ptr)(playerID,
             quarryXOffset + this->buildingApproriateGridXPosition * 5,
             quarryYOffset + this->buildingAppropriateGridYPosition * 5, Commands::M_MAPPER_QUARRY,
@@ -53,8 +55,8 @@ namespace AI {
             int const xOffset = DAT_AIVDefinedData::instance.OffsetsForSpotCheckThreeByThreeAreaOnTheSide[side].x;
             int const yOffset = DAT_AIVDefinedData::instance.OffsetsForSpotCheckThreeByThreeAreaOnTheSide[side].y;
             MACRO_CALL_MEMBER(Map::TileMapState_Func::placeBuilding, DAT_TileMapState::ptr)(playerID,
-                xOffset + this->buildingApproriateGridXPosition * 5, yOffset + this->buildingAppropriateGridYPosition * 5,
-                Commands::M_MAPPER_OXENBASE,
+                xOffset + this->buildingApproriateGridXPosition * 5,
+                yOffset + this->buildingAppropriateGridYPosition * 5, Commands::M_MAPPER_OXENBASE,
                 MACRO_CALL_MEMBER(Map::TileMapState_Func::getBuildingSizeForCommandBuildingType, DAT_TileMapState::ptr)(
                     Commands::M_MAPPER_OXENBASE),
                 15);

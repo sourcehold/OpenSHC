@@ -77,40 +77,54 @@ namespace AI {
             }
             // only the four cardinal directions
             for (int direction = 0; direction < 8; direction += 2) {
-                uint const gridX = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.xOffset + x;
-                uint const gridY = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.yOffset + y;
+                uint const gridX
+                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.xOffset + x;
+                uint const gridY
+                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.yOffset + y;
                 if (this->heatMaps[x][y].isNotNearEdgeUnk && (gridX > 79 || gridY > 79)) {
                     continue;
                 }
-                if (this->heatMaps[gridX][gridY].algorithmIterationNumber == this->mapExtraInfo.algorithmIterationNumber) {
+                if (this->heatMaps[gridX][gridY].algorithmIterationNumber
+                    == this->mapExtraInfo.algorithmIterationNumber) {
                     continue;
                 }
                 this->heatMaps[gridX][gridY].algorithmIterationNumber = this->mapExtraInfo.algorithmIterationNumber;
-                int const blockedCount = (char)this->heatMaps[gridX][gridY].tilesNotPartOfLargestAreaCount - (char)this->heatMaps[gridX][gridY].impassableCount;
+                int const blockedCount = (char)this->heatMaps[gridX][gridY].tilesNotPartOfLargestAreaCount
+                    - (char)this->heatMaps[gridX][gridY].impassableCount;
                 if (blockedCount >= 16) {
                     continue;
                 }
                 int const owner = (char)this->heatMaps[gridX][gridY].tileOwnership;
-                if ((blockedCount == 0 || resourceType == AIGCRT_IRON) && blockedCount <= 4 && !this->heatMaps[gridX][gridY].structureCount
+                if ((blockedCount == 0 || resourceType == AIGCRT_IRON) && blockedCount <= 4
+                    && !this->heatMaps[gridX][gridY].structureCount
                     && !this->heatMaps[gridX][gridY].destructionBasedPlacementCooldown
                     && (owner == 0
                         || DAT_GameState::instance.mapAndTime.playerTeams[playerID]
                             == DAT_GameState::instance.mapAndTime.playerTeams[owner])) {
                     if (resourceType == AIGCRT_OIL) {
-                        if ((char)this->heatMaps[gridX][gridY].oilCount > 2 && (char)this->heatMaps[gridX][gridY].marshCount >= 10
-                            && this->heatMaps[gridX][gridY].highestTerrainHeight - this->heatMaps[gridX][gridY].lowestTerrainHeight < 12) {
+                        if ((char)this->heatMaps[gridX][gridY].oilCount > 2
+                            && (char)this->heatMaps[gridX][gridY].marshCount >= 10
+                            && this->heatMaps[gridX][gridY].highestTerrainHeight
+                                    - this->heatMaps[gridX][gridY].lowestTerrainHeight
+                                < 12) {
                             this->buildingApproriateGridXPosition = gridX;
                             this->buildingAppropriateGridYPosition = gridY;
                             return;
                         }
                     } else if (resourceType == AIGCRT_IRON) {
-                        if ((char)this->heatMaps[gridX][gridY].ironCount > 6 && this->heatMaps[gridX][gridY].highestTerrainHeight - this->heatMaps[gridX][gridY].lowestTerrainHeight < 12) {
+                        if ((char)this->heatMaps[gridX][gridY].ironCount > 6
+                            && this->heatMaps[gridX][gridY].highestTerrainHeight
+                                    - this->heatMaps[gridX][gridY].lowestTerrainHeight
+                                < 12) {
                             this->buildingApproriateGridXPosition = gridX;
                             this->buildingAppropriateGridYPosition = gridY;
                             return;
                         }
                     } else if (resourceType == AIGCRT_BOULDER) {
-                        if ((char)this->heatMaps[gridX][gridY].bouldersCount >= 8 && this->heatMaps[gridX][gridY].highestTerrainHeight - this->heatMaps[gridX][gridY].lowestTerrainHeight < 40) {
+                        if ((char)this->heatMaps[gridX][gridY].bouldersCount >= 8
+                            && this->heatMaps[gridX][gridY].highestTerrainHeight
+                                    - this->heatMaps[gridX][gridY].lowestTerrainHeight
+                                < 40) {
                             this->buildingApproriateGridXPosition = gridX;
                             this->buildingAppropriateGridYPosition = gridY;
                             return;

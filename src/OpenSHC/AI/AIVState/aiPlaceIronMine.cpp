@@ -18,13 +18,15 @@ namespace AI {
             || DAT_BuildingsState::instance.unknownCountdown01 < 20) {
             return;
         }
-        MACRO_CALL_MEMBER(AIVState_Func::findAppropriateGridLocationForResourceTypeBuilding, this)(playerID, AIGCRT_IRON);
+        MACRO_CALL_MEMBER(AIVState_Func::findAppropriateGridLocationForResourceTypeBuilding, this)(
+            playerID, AIGCRT_IRON);
         if (this->buildingApproriateGridXPosition == -1) {
             return;
         }
         ++this->heatMaps[this->buildingApproriateGridXPosition][this->buildingAppropriateGridYPosition].structureCount;
         MACRO_CALL_MEMBER(Map::TileMapState_Func::placeBuilding, DAT_TileMapState::ptr)(playerID,
-            this->buildingApproriateGridXPosition * 5, this->buildingAppropriateGridYPosition * 5, Commands::M_MAPPER_IRON_MINE,
+            this->buildingApproriateGridXPosition * 5, this->buildingAppropriateGridYPosition * 5,
+            Commands::M_MAPPER_IRON_MINE,
             MACRO_CALL_MEMBER(Map::TileMapState_Func::getBuildingSizeForCommandBuildingType, DAT_TileMapState::ptr)(
                 Commands::M_MAPPER_IRON_MINE),
             15);

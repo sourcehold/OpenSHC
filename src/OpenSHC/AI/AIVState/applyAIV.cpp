@@ -1,8 +1,8 @@
 #include "../AIVState.func.hpp"
 
-#include "OpenSHC/AI/AIVUnitType.hpp"
 #include "OpenSHC/IO/FilePackager.func.hpp"
 #include "OpenSHC/Rendering/ViewportRenderState.func.hpp"
+#include "OpenSHC/AI/AIVUnitType.hpp"
 
 #include "OpenSHC/Globals/DAT_AIVDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_AIVState.hpp"
@@ -42,8 +42,8 @@ namespace AI {
                     }
                     this->isHandled[index] = 1;
                 } else {
-                    MappersEnum const mapper = MACRO_CALL_MEMBER(AIVState_Func::convertAIVBuildingTypeToCommandBuildingType,
-                        this)((AIV::AIVBuildingType2)type);
+                    MappersEnum const mapper = MACRO_CALL_MEMBER(
+                        AIVState_Func::convertAIVBuildingTypeToCommandBuildingType, this)((AIV::AIVBuildingType2)type);
                     int const step = this->steps[0][index];
                     // walls, moats and pitch ditches are collected below
                     if (mapper == Commands::M_MAPPER_WALL || mapper == Commands::M_MAPPER_WOODWALL
@@ -56,8 +56,8 @@ namespace AI {
                         continue;
                     }
                     int const realY = this->aivs[aivID].keepYOffset + y;
-                    if (!MACRO_CALL_MEMBER(Rendering::ViewportRenderState_Func::xyAreValid, DAT_ViewportRenderState::ptr)(
-                            this->aivs[aivID].keepXOffset + x, realY)) {
+                    if (!MACRO_CALL_MEMBER(Rendering::ViewportRenderState_Func::xyAreValid,
+                            DAT_ViewportRenderState::ptr)(this->aivs[aivID].keepXOffset + x, realY)) {
                         continue;
                     }
                     this->aivs[aivID].aivBuildingSteps[step].buildingType = mapper;
@@ -152,8 +152,8 @@ namespace AI {
                     y = 99 - relativeX;
                     x = relativeY;
                 }
-                int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->aivs[aivID].keepYOffset + y]
-                                     .addXgetTile
+                int const tile
+                    = DAT_ViewportRenderState::instance.translationMatrix[this->aivs[aivID].keepYOffset + y].addXgetTile
                     + this->aivs[aivID].keepXOffset + x;
                 DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlots[unitType][i] = tile;
                 if (tile > 0) {

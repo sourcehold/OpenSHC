@@ -37,12 +37,15 @@ namespace AI {
             }
             this->visitCount = (char)this->heatMaps[x][y].algorithmVisitCountUnk;
             for (int direction = 0; direction < 8; ++direction) {
-                candidateX = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.xOffset + x;
-                candidateY = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.yOffset + y;
+                candidateX
+                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.xOffset + x;
+                candidateY
+                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.yOffset + y;
                 if (this->heatMaps[x][y].isNotNearEdgeUnk && (candidateX > 79 || candidateY > 79)) {
                     continue;
                 }
-                int const notInLargestArea = (char)this->heatMaps[candidateX][candidateY].tilesNotPartOfLargestAreaCount;
+                int const notInLargestArea
+                    = (char)this->heatMaps[candidateX][candidateY].tilesNotPartOfLargestAreaCount;
                 if (!this->heatMaps[candidateX][candidateY].terrainDiffHigherThan12
                     && !this->heatMaps[candidateX][candidateY].structureCount
                     && !this->heatMaps[candidateX][candidateY].isNotNearEdgeUnk

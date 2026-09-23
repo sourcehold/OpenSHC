@@ -1,8 +1,8 @@
 #include "../AIVState.func.hpp"
 
-#include "OpenSHC/AI/AIVUnitType.hpp"
 #include "OpenSHC/Map/Entities/EntityState.func.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"
+#include "OpenSHC/AI/AIVUnitType.hpp"
 
 #include "OpenSHC/Globals/DAT_AICState.hpp"
 #include "OpenSHC/Globals/DAT_EntityState.hpp"
@@ -16,9 +16,10 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004ED240
     void AIVState::aiPlaceFlag(PlayerID playerID)
     {
-        Map::Entities::EntityType const flagType = (Map::Entities::EntityType)DAT_AICState::instance
-                                                       .aics[DAT_GameState::instance.playerDataArray[playerID].aiType - 1]
-                                                       .flagType;
+        Map::Entities::EntityType const flagType
+            = (Map::Entities::EntityType)DAT_AICState::instance
+                  .aics[DAT_GameState::instance.playerDataArray[playerID].aiType - 1]
+                  .flagType;
         if (DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount[AIVUT_FLAG] <= 0) {
             return;
         }
@@ -36,12 +37,12 @@ namespace AI {
             if (height <= 0) {
                 continue;
             }
-            MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(0,
-                playerID, playerID,
+            MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(0, playerID,
+                playerID,
                 (tile
                     - DAT_ViewportRenderState::instance
-                          .translationMatrix[DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile]]
-                          .addXgetTile)
+                        .translationMatrix[DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile]]
+                        .addXgetTile)
                         * 8
                     + 4,
                 DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile] * 8 + 4, height, 0, 0, 0,

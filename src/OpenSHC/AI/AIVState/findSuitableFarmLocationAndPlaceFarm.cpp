@@ -56,12 +56,15 @@ namespace AI {
             }
             // only the four cardinal directions
             for (int direction = 0; direction < 8; direction += 2) {
-                uint const gridY = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.yOffset + y;
-                uint const gridX = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.xOffset + x;
+                uint const gridY
+                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.yOffset + y;
+                uint const gridX
+                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.xOffset + x;
                 if (this->heatMaps[x][y].isNotNearEdgeUnk && (gridX > 79 || gridY > 79)) {
                     continue;
                 }
-                if (this->heatMaps[gridX][gridY].algorithmIterationNumber == this->mapExtraInfo.algorithmIterationNumber) {
+                if (this->heatMaps[gridX][gridY].algorithmIterationNumber
+                    == this->mapExtraInfo.algorithmIterationNumber) {
                     continue;
                 }
                 int const notInLargestArea = (char)this->heatMaps[gridX][gridY].tilesNotPartOfLargestAreaCount;
@@ -76,20 +79,24 @@ namespace AI {
                 if (this->algBIndex > 6400) {
                     this->algBIndex = 0;
                 }
-                if (this->heatMaps[gridX][gridY].tilesNotPartOfLargestAreaCount || this->heatMaps[gridX][gridY].structureCount || this->heatMaps[gridX][gridY].treeCount
-                    || this->heatMaps[gridX][gridY].destructionBasedPlacementCooldown || (char)this->heatMaps[gridX][gridY].oasisScrubCount <= 25
+                if (this->heatMaps[gridX][gridY].tilesNotPartOfLargestAreaCount
+                    || this->heatMaps[gridX][gridY].structureCount || this->heatMaps[gridX][gridY].treeCount
+                    || this->heatMaps[gridX][gridY].destructionBasedPlacementCooldown
+                    || (char)this->heatMaps[gridX][gridY].oasisScrubCount <= 25
                     || (char)this->heatMaps[gridX][gridY].oasisThickScrubCount <= 14) {
                     continue;
                 }
                 int const xOffset
-                    = DAT_AIVDefinedData::instance.TilesSelfAndRightThree[this->mapExtraInfo.algBuildingPlacementNudge].x;
+                    = DAT_AIVDefinedData::instance.TilesSelfAndRightThree[this->mapExtraInfo.algBuildingPlacementNudge]
+                          .x;
                 int const yOffset
-                    = DAT_AIVDefinedData::instance.TilesSelfAndRightThree[this->mapExtraInfo.algBuildingPlacementNudge].y;
+                    = DAT_AIVDefinedData::instance.TilesSelfAndRightThree[this->mapExtraInfo.algBuildingPlacementNudge]
+                          .y;
                 ++this->counter;
                 MACRO_CALL_MEMBER(Map::TileMapState_Func::placeBuilding, DAT_TileMapState::ptr)(playerID,
                     xOffset + gridX * 5, yOffset + gridY * 5, mapper,
-                    MACRO_CALL_MEMBER(Map::TileMapState_Func::getBuildingSizeForCommandBuildingType,
-                        DAT_TileMapState::ptr)(mapper),
+                    MACRO_CALL_MEMBER(
+                        Map::TileMapState_Func::getBuildingSizeForCommandBuildingType, DAT_TileMapState::ptr)(mapper),
                     15);
                 if (!DAT_TileMapState::instance.buildingPlacementFail) {
                     this->heatMaps[gridX][gridY].structureCount = 1;

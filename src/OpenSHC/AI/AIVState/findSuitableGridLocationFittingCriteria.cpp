@@ -35,7 +35,8 @@ namespace AI {
                 if (this->heatMaps[x][y].isNotNearEdgeUnk && (candidateX >= 79 || candidateY >= 79)) {
                     continue;
                 }
-                int const notInLargestArea = (char)this->heatMaps[candidateX][candidateY].tilesNotPartOfLargestAreaCount;
+                int const notInLargestArea
+                    = (char)this->heatMaps[candidateX][candidateY].tilesNotPartOfLargestAreaCount;
                 if (this->heatMaps[candidateX][candidateY].algorithmIterationNumber
                     == this->mapExtraInfo.algorithmIterationNumber) {
                     continue;

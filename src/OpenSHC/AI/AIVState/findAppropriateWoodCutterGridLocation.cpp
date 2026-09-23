@@ -40,12 +40,15 @@ namespace AI {
             }
             // only the four cardinal directions
             for (int direction = 0; direction < 8; direction += 2) {
-                uint const gridY = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.yOffset + y;
-                uint const gridX = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.xOffset + x;
+                uint const gridY
+                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.yOffset + y;
+                uint const gridX
+                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.xOffset + x;
                 if (this->heatMaps[x][y].isNotNearEdgeUnk && (gridX > 79 || gridY > 79)) {
                     continue;
                 }
-                if (this->heatMaps[gridX][gridY].algorithmIterationNumber == this->mapExtraInfo.algorithmIterationNumber) {
+                if (this->heatMaps[gridX][gridY].algorithmIterationNumber
+                    == this->mapExtraInfo.algorithmIterationNumber) {
                     continue;
                 }
                 this->heatMaps[gridX][gridY].algorithmIterationNumber = this->mapExtraInfo.algorithmIterationNumber;

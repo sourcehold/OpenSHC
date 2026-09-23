@@ -40,7 +40,8 @@ namespace AI {
                     } else if (player == localPlayer) {
                         count = this->aivFileAvailabilityPerAIArray[aiIndex];
                     } else {
-                        count = DAT_GameSynchronyState::instance.DAT_ReceivedAIVFileAvailabilityPerAIArray[player][aiIndex];
+                        count = DAT_GameSynchronyState::instance
+                                    .DAT_ReceivedAIVFileAvailabilityPerAIArray[player][aiIndex];
                     }
                     if (count == 0) {
                         available = false;
@@ -79,7 +80,8 @@ namespace AI {
                     Commands::GCT_HOST_REMOVE_PLAYER_BY_SLOT);
             }
             if (removedPlayer) {
-                MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::reorderTeamsAndPositions, DAT_GameSynchronyState::ptr)();
+                MACRO_CALL_MEMBER(
+                    Synchrony::GameSynchronyState_Func::reorderTeamsAndPositions, DAT_GameSynchronyState::ptr)();
                 DAT_GameSynchronyState::instance.reparseMaps = TRUE;
             }
 
