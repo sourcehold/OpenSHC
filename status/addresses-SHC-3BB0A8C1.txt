@@ -37929,7 +37929,7 @@ SHC_3BB0A8C1_0x004ED240 | 94.7% | Reimplemented
 
 SHC_3BB0A8C1_0x004ED300 | 96.2% | Reimplemented
 
-SHC_3BB0A8C1_0x004ED3B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004ED3B0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004ED410 | 85.3% | Stack slot assignment
 
