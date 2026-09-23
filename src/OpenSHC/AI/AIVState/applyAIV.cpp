@@ -22,10 +22,10 @@ namespace AI {
             DAT_AIVDefinedData::instance.AIVFileNames[this->aivs[aivID].aiType - 2][this->aivs[aivID].castleID]);
         MACRO_CALL_MEMBER(AIVState_Func::rotateAIV, this)(this->aivs[aivID].keepOrientation);
 
-        // single buildings and the keep
+        // single buildings and the keep, steps is accessed as a flat 100 * 100 array
+        int index = 0;
         for (int y = 0; y < 100; ++y) {
-            for (int x = 0; x < 100; ++x) {
-                int const index = y * 100 + x;
+            for (int x = 0; x < 100; ++x, ++index) {
                 if (this->isHandled[index]) {
                     continue;
                 }
@@ -44,7 +44,7 @@ namespace AI {
                 } else {
                     MappersEnum const mapper = MACRO_CALL_MEMBER(AIVState_Func::convertAIVBuildingTypeToCommandBuildingType,
                         this)((AIV::AIVBuildingType2)type);
-                    int const step = this->steps[y][x];
+                    int const step = this->steps[0][index];
                     // walls, moats and pitch ditches are collected below
                     if (mapper == Commands::M_MAPPER_WALL || mapper == Commands::M_MAPPER_WOODWALL
                         || mapper == Commands::M_MAPPER_CRENAL || mapper == Commands::M_MAPPER_CRENAL2
@@ -83,20 +83,20 @@ namespace AI {
             }
             int step;
             MappersEnum mapper;
+            int index = startY * 100;
             for (int y = startY; y < 100; ++y) {
-                for (int x = 0; x < 100; ++x) {
-                    int const index = y * 100 + x;
+                for (int x = 0; x < 100; ++x, ++index) {
                     if (this->isHandled[index]) {
                         continue;
                     }
                     if (selected) {
-                        if (this->steps[y][x] != step) {
+                        if (this->steps[0][index] != step) {
                             continue;
                         }
                     } else {
                         mapper = MACRO_CALL_MEMBER(AIVState_Func::convertAIVBuildingTypeToCommandBuildingType, this)(
                             (AIV::AIVBuildingType2)this->constructions[index]);
-                        step = this->steps[y][x];
+                        step = this->steps[0][index];
                         this->aivs[aivID].aivBuildingSteps[step].location.tile.tile
                             = this->aivs[aivID].wallLocationsArrayIndex;
                         selected = TRUE;
@@ -173,12 +173,10 @@ namespace AI {
 
         // steps that can not be built
         for (int step = 1; step <= this->aivs[aivID].totalSteps; ++step) {
-            if (this->aivs[aivID].aivBuildingSteps[step].buildingType == Commands::M_MAPPER_NULL
-                || this->aivs[aivID].aivBuildingSteps[step].buildingType == Commands::M_MAPPER_KEEP3
-                || this->aivs[aivID].aivBuildingSteps[step].buildingType == Commands::M_MAPPER_POND1
-                || this->aivs[aivID].aivBuildingSteps[step].buildingType == Commands::M_MAPPER_POND2_SMALL
-                || this->aivs[aivID].aivBuildingSteps[step].buildingType == Commands::M_MAPPER_POND3_LARGE1
-                || this->aivs[aivID].aivBuildingSteps[step].buildingType == Commands::M_MAPPER_POND4_LARGE2) {
+            int const buildingType = this->aivs[aivID].aivBuildingSteps[step].buildingType;
+            if (buildingType == Commands::M_MAPPER_NULL || buildingType == Commands::M_MAPPER_KEEP3
+                || buildingType == Commands::M_MAPPER_POND1 || buildingType == Commands::M_MAPPER_POND2_SMALL
+                || buildingType == Commands::M_MAPPER_POND3_LARGE1 || buildingType == Commands::M_MAPPER_POND4_LARGE2) {
                 this->aivs[aivID].aivBuildingSteps[step].buildStatus = AIVBSS_disabled;
             }
         }

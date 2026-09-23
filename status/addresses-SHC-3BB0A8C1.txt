@@ -37963,7 +37963,7 @@ SHC_3BB0A8C1_0x004EEF20 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004EF090 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004EF0D0 | 31.0% | Register alloc; 74% normalized
+SHC_3BB0A8C1_0x004EF0D0 | 36.9% | Stack slots; 77% normalized
 
 SHC_3BB0A8C1_0x004EF130 | 0.0% | Pending
 
