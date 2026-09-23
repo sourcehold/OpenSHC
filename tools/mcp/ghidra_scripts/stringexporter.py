@@ -5,7 +5,7 @@
 #@keybinding 
 #@menupath 
 #@toolbar 
-#@runtime Jython
+#@runtime PyGhidra
 
 from ghidra.program.model.data import Array
 import re
@@ -38,7 +38,7 @@ while cur.getAddress() < roRange.getMaxAddress():
 			s_label = PATTERN.sub("_", cur.getLabel())
 			m_label = s_label.upper()
 			v = cur.getValue().replace("\\", "\\\\").replace("\n", "\\n").replace("\r", "\\r").replace('"', '\\"')
-			sdump += "// 0x00" + hex(cur.getAddress().getOffset())[2:-1] + "\n"
+			sdump += "// 0x00" + hex(cur.getAddress().getOffset())[2:] + "\n"
 			sdump += "char const * const " + s_label + ' = ' + m_label + ';' + "\n\n"
 			mdump += "// STRING: STRONGHOLDCRUSADER 0x00" + hex(cur.getAddress().getOffset())[2:] + "\n"
 			mdump += "#define "+ m_label + ' "' + v + '"' + "\n\n"
@@ -48,6 +48,6 @@ while cur.getAddress() < roRange.getMaxAddress():
 
 dir = askDirectory("Select output dir", "Choose")
 with open(str(dir) + "/string-literals.hpp", "wb") as f:
-	f.write(sdump)
+	f.write(sdump.encode('utf-8'))
 with open(str(dir) + "/string-macros.hpp", "wb") as f:
-	f.write(mdump)
+	f.write(mdump.encode('utf-8'))
