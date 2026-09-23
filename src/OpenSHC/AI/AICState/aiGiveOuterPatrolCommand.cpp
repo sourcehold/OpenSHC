@@ -70,7 +70,8 @@ namespace AI {
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::commandUnitsToLocation, DAT_TribesState::ptr)(
                     tribeID, x, y, 0);
             else
-                MACRO_CALL_MEMBER(AICState_Func::sendUnitsToCampfire, this)(tribeID, playerID);        }
+                MACRO_CALL_MEMBER(AICState_Func::sendUnitsToCampfire, this)(tribeID, playerID);
+        }
     }
 }
 }

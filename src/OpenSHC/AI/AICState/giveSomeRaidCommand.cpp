@@ -26,14 +26,16 @@ namespace AI {
             return 1;
 
         DAT_TribesState::instance.tribes[tribeIndex].targetBuildingID = 0;
-        int buildingID = MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::chooseRandomBuildingIDFromPlayersArrayOfBuildings,
-            this)(DAT_GameState::instance.playerDataArray[owner].attackedPlayerID);
+        int buildingID
+            = MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::chooseRandomBuildingIDFromPlayersArrayOfBuildings, this)(
+                DAT_GameState::instance.playerDataArray[owner].attackedPlayerID);
         if (buildingID == 0)
             return 0;
 
-        MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::queueDisbandAndAttackCommand4Params, DAT_UnitsState::ptr)(
-            tribeIndex, 9, buildingID, DAT_BuildingsState::instance.buildings[buildingID].uid);
-        DAT_TribesState::instance.tribes[tribeIndex].targetBuildingUID = DAT_BuildingsState::instance.buildings[buildingID].uid;
+        MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::queueDisbandAndAttackCommand4Params,
+            DAT_UnitsState::ptr)(tribeIndex, 9, buildingID, DAT_BuildingsState::instance.buildings[buildingID].uid);
+        DAT_TribesState::instance.tribes[tribeIndex].targetBuildingUID
+            = DAT_BuildingsState::instance.buildings[buildingID].uid;
         DAT_TribesState::instance.tribes[tribeIndex].unitStance = OpenSHC::Map::Units::Behavior::USE_DEFENSIVE;
         DAT_TribesState::instance.tribes[tribeIndex].targetBuildingID = buildingID;
         return 1;

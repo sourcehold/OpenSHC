@@ -18,15 +18,18 @@ namespace AI {
         int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[11];
         if (tribeID == 0)
             return;
-        if (DAT_TribesState::instance.tribes[tribeID].uid != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[11])
+        if (DAT_TribesState::instance.tribes[tribeID].uid
+            != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[11])
             return;
         if (DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID == 0)
             return;
 
         DAT_TribesState::instance.tribes[tribeID].unitStance = Map::Units::Behavior::USE_STAND_GROUND;
-        if (MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::moveTribeToNearbyGatehouse, DAT_TroopValueState::ptr)(tribeID)
+        if (MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::moveTribeToNearbyGatehouse, DAT_TroopValueState::ptr)(
+                tribeID)
             == 0)
-            MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::moveTowardsParticularUnits, DAT_TroopValueState::ptr)(tribeID);
+            MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::moveTowardsParticularUnits, DAT_TroopValueState::ptr)(
+                tribeID);
     }
 }
 }

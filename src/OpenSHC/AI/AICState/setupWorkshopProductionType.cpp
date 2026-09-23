@@ -25,8 +25,8 @@ namespace AI {
         if (DAT_BuildingsState::instance.buildings[buildingID].buildingType == Map::Buildings::BT_BLACKSMITH) {
             int setting = this->aics[aicIndex].blacksmithSetting;
             if (setting == -999) {
-                int itemType = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::chooseProductionItemType,
-                    DAT_BuildingsState::ptr)(
+                int itemType = MACRO_CALL_MEMBER(
+                    Map::Buildings::BuildingsState_Func::chooseProductionItemType, DAT_BuildingsState::ptr)(
                     DAT_BuildingsState::instance.buildings[buildingID].owner, Map::Buildings::BT_BLACKSMITH);
                 DAT_BuildingsState::instance.buildings[buildingID].producedItemType = (ResourceTypeShort)itemType;
                 DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext = (ResourceTypeShort)itemType;
@@ -45,8 +45,8 @@ namespace AI {
         if (DAT_BuildingsState::instance.buildings[buildingID].buildingType == Map::Buildings::BT_POLETURNER) {
             int setting = this->aics[aicIndex].poleturnerSetting;
             if (setting == -999) {
-                int itemType = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::chooseProductionItemType,
-                    DAT_BuildingsState::ptr)(
+                int itemType = MACRO_CALL_MEMBER(
+                    Map::Buildings::BuildingsState_Func::chooseProductionItemType, DAT_BuildingsState::ptr)(
                     DAT_BuildingsState::instance.buildings[buildingID].owner, Map::Buildings::BT_POLETURNER);
                 DAT_BuildingsState::instance.buildings[buildingID].producedItemType = (ResourceTypeShort)itemType;
                 DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext = (ResourceTypeShort)itemType;
@@ -65,8 +65,8 @@ namespace AI {
         if (DAT_BuildingsState::instance.buildings[buildingID].buildingType == Map::Buildings::BT_FLETCHER) {
             int setting = this->aics[aicIndex].fletcherSetting;
             if (setting == -999) {
-                int itemType = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::chooseProductionItemType,
-                    DAT_BuildingsState::ptr)(
+                int itemType = MACRO_CALL_MEMBER(
+                    Map::Buildings::BuildingsState_Func::chooseProductionItemType, DAT_BuildingsState::ptr)(
                     DAT_BuildingsState::instance.buildings[buildingID].owner, Map::Buildings::BT_FLETCHER);
                 DAT_BuildingsState::instance.buildings[buildingID].producedItemType = (ResourceTypeShort)itemType;
                 DAT_BuildingsState::instance.buildings[buildingID].producedItemTypeNext = (ResourceTypeShort)itemType;

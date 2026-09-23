@@ -48,16 +48,17 @@ namespace AI {
                 && MACRO_CALL_MEMBER(
                        OpenSHC::Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
                        DAT_PathFindingState::ptr)(playerID,
-                       (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[targetUnitID]
-                               .tile],
-                       (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile],
+                       (short)DAT_TileMapState::instance
+                           .PathConnectionLayer[DAT_UnitsState::instance.units[targetUnitID].tile],
+                       (short)
+                           DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile],
                        0)
                     != 0) {
-                MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::unsetRallyRelatedFlagOnUnits,
-                    DAT_TribesState::ptr)(tribeID);
-                MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(
-                    tribeID, DAT_UnitsState::instance.units[unitID].x, DAT_UnitsState::instance.units[unitID].y, 0, 0,
-                    OpenSHC::Map::Units::Instructions::UMSE_0);
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Map::Units::TribesState_Func::unsetRallyRelatedFlagOnUnits, DAT_TribesState::ptr)(tribeID);
+                MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction,
+                    DAT_TribesState::ptr)(tribeID, DAT_UnitsState::instance.units[unitID].x,
+                    DAT_UnitsState::instance.units[unitID].y, 0, 0, OpenSHC::Map::Units::Instructions::UMSE_0);
                 DAT_TribesState::instance.tribes[tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
                 return;
             }

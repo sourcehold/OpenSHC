@@ -10,7 +10,8 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004D3780
     void AICState::computeNervousness(int playerID)
     {
-        int troopValueNearKeep = DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[playerID];
+        int troopValueNearKeep
+            = DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[playerID];
         int enemyTroopValue = DAT_GameState::instance.playerDataArray[playerID].totalEnemyTroopValue;
 
         int margin;

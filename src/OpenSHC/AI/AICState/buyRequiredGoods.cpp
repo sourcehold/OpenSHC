@@ -45,7 +45,8 @@ namespace AI {
                 continue;
             }
 
-            if (MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::buyGoods, this)(playerID, (ResourceType)resourceType, amount)
+            if (MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::buyGoods, this)(
+                    playerID, (ResourceType)resourceType, amount)
                 != FALSE) {
                 DAT_GameState::instance.playerDataArray[playerID].resourcesToAcquireArray[resourceType] = 0;
                 return;

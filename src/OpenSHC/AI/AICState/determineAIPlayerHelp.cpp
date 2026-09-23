@@ -16,13 +16,15 @@ namespace AI {
         int aicIndex = aiType - 1;
 
         if (DAT_GameState::instance.playerDataArray[playerID].isNotNervousByEnemyTroopValue != 0) {
-            MACRO_CALL_MEMBER(AICState_Func::playWillNotHelp1BikFromPlayerToPlayer, this)(playerID, requestedByPlayerID);
+            MACRO_CALL_MEMBER(AICState_Func::playWillNotHelp1BikFromPlayerToPlayer, this)(
+                playerID, requestedByPlayerID);
             return FALSE;
         }
 
         if (DAT_GameState::instance.playerDataArray[playerID].totalAttackTroops
             < this->aics[aicIndex].AttForceSupportAllyThreshold) {
-            MACRO_CALL_MEMBER(AICState_Func::playWillNotHelp2BikFromPlayerToPlayer, this)(playerID, requestedByPlayerID);
+            MACRO_CALL_MEMBER(AICState_Func::playWillNotHelp2BikFromPlayerToPlayer, this)(
+                playerID, requestedByPlayerID);
             return FALSE;
         }
 

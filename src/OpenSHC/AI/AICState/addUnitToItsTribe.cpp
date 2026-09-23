@@ -18,8 +18,8 @@ namespace AI {
             return;
 
         DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType = aiUnitBehaviourType;
-        int tribeID
-            = MACRO_CALL_MEMBER(AICState_Func::addUnitToSmallestBehaviourTypeTribe, this)(owner, unitID, aiUnitBehaviourType);
+        int tribeID = MACRO_CALL_MEMBER(AICState_Func::addUnitToSmallestBehaviourTypeTribe, this)(
+            owner, unitID, aiUnitBehaviourType);
         if (tribeID != 0)
             MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(unitID, tribeID);
     }

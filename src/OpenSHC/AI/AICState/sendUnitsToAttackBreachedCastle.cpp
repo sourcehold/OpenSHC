@@ -71,7 +71,8 @@ namespace AI {
 
                     int attackedPlayerID
                         = DAT_GameState::instance.playerDataArray[attackingPlayerIndex].attackedPlayerID;
-                    MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
+                    MACRO_CALL_MEMBER(
+                        OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                         DAT_DirectionAlgorithmState::ptr)(DAT_UnitsState::instance.units[targetUnitID].x,
                         DAT_UnitsState::instance.units[targetUnitID].y,
                         DAT_GameState::instance.mapAndTime.attackVectors[attackedPlayerID][vector].x,
@@ -80,18 +81,17 @@ namespace AI {
                     if (DAT_DirectionAlgorithmState::instance.distanceHigh > 4) {
                         attackedPlayerID
                             = DAT_GameState::instance.playerDataArray[attackingPlayerIndex].attackedPlayerID;
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(
-                            tribeID, DAT_GameState::instance.mapAndTime.attackVectors[attackedPlayerID][vector].x,
+                        MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction,
+                            DAT_TribesState::ptr)(tribeID,
+                            DAT_GameState::instance.mapAndTime.attackVectors[attackedPlayerID][vector].x,
                             DAT_GameState::instance.mapAndTime.attackVectors[attackedPlayerID][vector].y, 0, 0,
                             OpenSHC::Map::Units::Instructions::UMSE_0);
                     }
                     vector += 1;
                 } else {
                     // Send units to attack lord
-                    if (MACRO_CALL_MEMBER(
-                            OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(
-                            tribeID, DAT_UnitsState::instance.units[defendingLordID].x,
+                    if (MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction,
+                            DAT_TribesState::ptr)(tribeID, DAT_UnitsState::instance.units[defendingLordID].x,
                             DAT_UnitsState::instance.units[defendingLordID].y, 0, 0,
                             OpenSHC::Map::Units::Instructions::UMSE_0)
                         == 0) {

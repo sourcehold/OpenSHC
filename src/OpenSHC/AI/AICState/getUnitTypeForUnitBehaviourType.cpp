@@ -40,7 +40,8 @@ namespace AI {
         if (unitBehaviourType != OpenSHC::AI::AIUBT_ATTUNITMAIN)
             return (UnitType)this->aics[aicIndex].AttUnitMain1;
 
-        if ((&this->aics[aicIndex].AttUnitMain1)[DAT_GameState::instance.playerDataArray[playerID].aiAttUnitMainChoiceIndex]
+        if ((&this->aics[aicIndex]
+                    .AttUnitMain1)[DAT_GameState::instance.playerDataArray[playerID].aiAttUnitMainChoiceIndex]
             == 0)
             DAT_GameState::instance.playerDataArray[playerID].aiAttUnitMainChoiceIndex = 0;
         if (DAT_GameState::instance.playerDataArray[playerID].aiAttUnitMainChoiceIndex >= 4)

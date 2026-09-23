@@ -45,7 +45,8 @@ namespace AI {
         if (aiType == 0) {
             return;
         }
-        if (DAT_GameState::instance.playerDataArray[playerID].currentResources[OpenSHC::Game::Resources::RT_GOLD] < 500) {
+        if (DAT_GameState::instance.playerDataArray[playerID].currentResources[OpenSHC::Game::Resources::RT_GOLD]
+            < 500) {
             return;
         }
 
@@ -102,14 +103,13 @@ namespace AI {
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(
                 unitID, tribeID);
             DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType = OpenSHC::AI::AIUBT_HARASS_SIEGE;
-        }
-        else {
+        } else {
             // Enough engineers: pick the next siege engine from the AIC list and place its tent
             if (DAT_GameState::instance.playerDataArray[playerID].harrassingSiegeEnginesIndex >= 8) {
                 DAT_GameState::instance.playerDataArray[playerID].harrassingSiegeEnginesIndex = 0;
             }
-            if ((&this->aics[aicIndex].HarassingSiegeEngine1)
-                    [DAT_GameState::instance.playerDataArray[playerID].harrassingSiegeEnginesIndex]
+            if ((&this->aics[aicIndex].HarassingSiegeEngine1)[DAT_GameState::instance.playerDataArray[playerID]
+                        .harrassingSiegeEnginesIndex]
                 == 0) {
                 DAT_GameState::instance.playerDataArray[playerID].harrassingSiegeEnginesIndex = 0;
             }

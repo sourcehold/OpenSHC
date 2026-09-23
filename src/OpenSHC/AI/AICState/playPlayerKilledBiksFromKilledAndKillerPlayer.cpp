@@ -34,10 +34,12 @@ namespace AI {
                     continue;
                 }
                 if (DAT_GameState::instance.mapAndTime.playerTeams[i]
-                    != DAT_GameState::instance.mapAndTime.playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID]) {
+                    != DAT_GameState::instance.mapAndTime
+                        .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID]) {
                     continue;
                 }
-                if (MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::getAliveLordForPlayer, DAT_UnitsState::ptr)(i) == 0) {
+                if (MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::getAliveLordForPlayer, DAT_UnitsState::ptr)(i)
+                    == 0) {
                     continue;
                 }
                 MACRO_CALL_MEMBER(Rendering::Bink::AIMessageQueue_Func::playBikVideoFromPlayer, DAT_VideoBikQueue::ptr)(

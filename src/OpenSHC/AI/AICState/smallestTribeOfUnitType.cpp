@@ -35,8 +35,8 @@ namespace AI {
                 // end of the function, skipping the "smallestTribeID == 0" check. A goto reproduces this and
                 // matches the assembly much better (~55% vs ~41%), but we avoid goto, so the assignment is
                 // duplicated here.
-                tribeID = MACRO_CALL_MEMBER(
-                    Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(playerID);
+                tribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(
+                    playerID);
                 DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[offset + i] = (short)tribeID;
                 DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[offset + i]
                     = DAT_TribesState::instance.tribes[tribeID].uid;

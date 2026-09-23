@@ -53,23 +53,22 @@ namespace AI {
             }
 
             for (int j = 0, patrolGroupIndex = 0; j < groups; j++, patrolGroupIndex += stepSize) {
-                int tribeID = DAT_GameState::instance.playerDataArray[playerID]
-                                  .aiTribeIDs[DAT_SkirmishDefinedData::instance.MaxAIVLocationForPatrolUnits[i]
-                                                  .tribeArrayOffset
-                                      + j];
+                int tribeID
+                    = DAT_GameState::instance.playerDataArray[playerID]
+                          .aiTribeIDs[DAT_SkirmishDefinedData::instance.MaxAIVLocationForPatrolUnits[i].tribeArrayOffset
+                              + j];
                 if (tribeID == 0) {
                     continue;
                 }
                 if (DAT_TribesState::instance.tribes[tribeID].uid
                     != DAT_GameState::instance.playerDataArray[playerID]
-                           .aiTribeUIDs[DAT_SkirmishDefinedData::instance.MaxAIVLocationForPatrolUnits[i]
-                                            .tribeArrayOffset
-                               + j]) {
+                        .aiTribeUIDs[DAT_SkirmishDefinedData::instance.MaxAIVLocationForPatrolUnits[i].tribeArrayOffset
+                            + j]) {
                     continue;
                 }
 
-                int slot = (DAT_GameState::instance.playerDataArray[playerID].defWallPatrolRallyTimeHits
-                               + patrolGroupIndex)
+                int slot
+                    = (DAT_GameState::instance.playerDataArray[playerID].defWallPatrolRallyTimeHits + patrolGroupIndex)
                     % count;
                 if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker > 0
                     && enclosed == FALSE) {
@@ -82,8 +81,7 @@ namespace AI {
 
                 if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker > 0
                     && enclosed == FALSE) {
-                    DAT_TribesState::instance.tribes[tribeID].unitStance
-                        = OpenSHC::Map::Units::Behavior::USE_DEFENSIVE;
+                    DAT_TribesState::instance.tribes[tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_DEFENSIVE;
                 } else {
                     DAT_TribesState::instance.tribes[tribeID].unitStance
                         = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;

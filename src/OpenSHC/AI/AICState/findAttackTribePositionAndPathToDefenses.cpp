@@ -26,7 +26,7 @@ namespace AI {
                     continue;
                 if (DAT_TribesState::instance.tribes[tribeID].uid
                     != DAT_GameState::instance.playerDataArray[playerID]
-                           .aiTribeUIDs[j + DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeType])
+                        .aiTribeUIDs[j + DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeType])
                     continue;
 
                 targetUnitID = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;

@@ -33,7 +33,9 @@ namespace AI {
         int i;
         for (i = 0; i < locationCount; i++) {
             if (DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlots[slot][i] > 0
-                && DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].buildingID
+                && DAT_GameState::instance.playerDataArray[playerID]
+                        .aiSiegeCreationInformation[siegeIndex][i]
+                        .buildingID
                     == buildingID)
                 break;
         }

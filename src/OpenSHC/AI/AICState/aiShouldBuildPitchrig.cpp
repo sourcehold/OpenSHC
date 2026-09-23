@@ -19,8 +19,8 @@ namespace AI {
         if (this->aics[aicIndex].populationPerPitchrig <= 0)
             return 0;
 
-        int count = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::countBuildingsForPlayer, DAT_BuildingsState::ptr)(
-            playerID, Map::Buildings::BT_PITCHRIG, 1);
+        int count = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::countBuildingsForPlayer,
+            DAT_BuildingsState::ptr)(playerID, Map::Buildings::BT_PITCHRIG, 1);
         if (count <= 0)
             count = 1;
         else if (count >= this->aics[aicIndex].maxPitchrigs)

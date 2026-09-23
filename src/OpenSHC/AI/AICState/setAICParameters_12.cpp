@@ -1,4 +1,5 @@
 #include "../AICState.func.hpp"
+
 #include "OpenSHC/AI/AIC/AITargetChoice.hpp"
 
 namespace OpenSHC {

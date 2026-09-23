@@ -30,16 +30,14 @@ namespace AI {
             int count = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount
                             [DAT_SkirmishDefinedData::instance.MaxAIVLocationForGroundUnits[i].aivUnitType];
             for (int j = 0; j < count; j++) {
-                int tribeID = DAT_GameState::instance.playerDataArray[playerID]
-                                  .aiTribeIDs[DAT_SkirmishDefinedData::instance.MaxAIVLocationForGroundUnits[i]
-                                                  .tribeArrayOffset
-                                      + j];
+                int tribeID
+                    = DAT_GameState::instance.playerDataArray[playerID]
+                          .aiTribeIDs[DAT_SkirmishDefinedData::instance.MaxAIVLocationForGroundUnits[i].tribeArrayOffset
+                              + j];
                 if (tribeID != 0
                     && DAT_TribesState::instance.tribes[tribeID].uid
-                        == DAT_GameState::instance.playerDataArray[playerID]
-                               .aiTribeUIDs[DAT_SkirmishDefinedData::instance.MaxAIVLocationForGroundUnits[i]
-                                                .tribeArrayOffset
-                                   + j]) {
+                        == DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs
+                            [DAT_SkirmishDefinedData::instance.MaxAIVLocationForGroundUnits[i].tribeArrayOffset + j]) {
                     if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker <= 0
                         || enclosed != FALSE) {
                         MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendTribeToAIVLocationSlot, this)(tribeID,
@@ -56,8 +54,7 @@ namespace AI {
                     DAT_TribesState::instance.tribes[tribeID].unitStance
                         = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
                 } else {
-                    DAT_TribesState::instance.tribes[tribeID].unitStance
-                        = OpenSHC::Map::Units::Behavior::USE_DEFENSIVE;
+                    DAT_TribesState::instance.tribes[tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_DEFENSIVE;
                 }
             }
         }

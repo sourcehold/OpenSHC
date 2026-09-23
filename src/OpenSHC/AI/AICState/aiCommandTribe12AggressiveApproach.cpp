@@ -22,7 +22,8 @@ namespace AI {
         int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[12];
         if (tribeID == 0)
             return;
-        if (DAT_TribesState::instance.tribes[tribeID].uid != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[12])
+        if (DAT_TribesState::instance.tribes[tribeID].uid
+            != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[12])
             return;
         int targetUnitID = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
         if (targetUnitID == 0)
@@ -48,8 +49,8 @@ namespace AI {
                 == FALSE)
             return;
 
-        MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(tribeID,
-            DAT_PathFindingState::instance.ALG_ResultX, DAT_PathFindingState::instance.ALG_ResultY, 0, 0,
+        MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(
+            tribeID, DAT_PathFindingState::instance.ALG_ResultX, DAT_PathFindingState::instance.ALG_ResultY, 0, 0,
             OpenSHC::Map::Units::Instructions::UMSE_0);
     }
 

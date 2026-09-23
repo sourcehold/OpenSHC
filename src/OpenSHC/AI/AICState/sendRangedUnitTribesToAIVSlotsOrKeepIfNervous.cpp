@@ -24,25 +24,24 @@ namespace AI {
             int count = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount
                             [DAT_SkirmishDefinedData::instance.MaxAIVLocationForRangedUnits[i].aivUnitType];
             for (int j = 0; j < count; j++) {
-                int tribeID = DAT_GameState::instance.playerDataArray[playerID]
-                                  .aiTribeIDs[DAT_SkirmishDefinedData::instance.MaxAIVLocationForRangedUnits[i]
-                                                  .tribeArrayOffset
-                                      + j];
+                int tribeID
+                    = DAT_GameState::instance.playerDataArray[playerID]
+                          .aiTribeIDs[DAT_SkirmishDefinedData::instance.MaxAIVLocationForRangedUnits[i].tribeArrayOffset
+                              + j];
                 if (tribeID == 0) {
                     continue;
                 }
                 if (DAT_TribesState::instance.tribes[tribeID].uid
                     != DAT_GameState::instance.playerDataArray[playerID]
-                           .aiTribeUIDs[DAT_SkirmishDefinedData::instance.MaxAIVLocationForRangedUnits[i]
-                                            .tribeArrayOffset
-                               + j]) {
+                        .aiTribeUIDs[DAT_SkirmishDefinedData::instance.MaxAIVLocationForRangedUnits[i].tribeArrayOffset
+                            + j]) {
                     continue;
                 }
 
                 if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker > 0) {
                     if ((DAT_TileMapState::instance.LogicLayer[DAT_UnitsState::instance
-                                .units[DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID]
-                                .tile]
+                                 .units[DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID]
+                                 .tile]
                             & 0x10000100U)
                         == 0) {
                         MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToKeep, this)(tribeID, playerID);

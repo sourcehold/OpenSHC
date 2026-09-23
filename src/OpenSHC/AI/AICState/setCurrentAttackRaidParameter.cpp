@@ -23,7 +23,8 @@ namespace AI {
         int raidUnits = this->aics[aicIndex].RaidUnitsRandom;
         if (DAT_GameState::instance.playerDataArray[playerID].currentResources[Game::Resources::RT_GOLD] < 1000) {
             raidUnits = 0;
-        } else if (DAT_GameState::instance.playerDataArray[playerID].currentResources[Game::Resources::RT_GOLD] >= 5000) {
+        } else if (DAT_GameState::instance.playerDataArray[playerID].currentResources[Game::Resources::RT_GOLD]
+            >= 5000) {
             raidUnits *= 2;
         }
 

@@ -29,8 +29,7 @@ namespace AI {
             } else if ((int)DAT_GameCore::instance.mapTimeInTicks < 12000) {
                 if (DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy >= 300)
                     return FALSE;
-            } else if (DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy
-                >= 100) {
+            } else if (DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy >= 100) {
                 return FALSE;
             }
         } else {
@@ -43,8 +42,7 @@ namespace AI {
             } else if ((int)DAT_GameCore::instance.mapTimeInTicks < 12000) {
                 if (DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy >= 250)
                     return FALSE;
-            } else if (DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy
-                >= 75) {
+            } else if (DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy >= 75) {
                 return FALSE;
             }
         }

@@ -32,7 +32,8 @@ namespace AI {
                 DAT_PathFindingState::ptr)(playerID2, campfireX, campfireY);
             if (gatehouseTile != 0) {
                 gatehouseY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[gatehouseTile];
-                gatehouseX = gatehouseTile - DAT_ViewportRenderState::instance.translationMatrix[gatehouseY].addXgetTile;
+                gatehouseX
+                    = gatehouseTile - DAT_ViewportRenderState::instance.translationMatrix[gatehouseY].addXgetTile;
             } else {
                 DAT_GameState::instance.playerDataArray[playerID1].requestStateUnk = 0;
                 return;

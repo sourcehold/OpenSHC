@@ -26,11 +26,10 @@ namespace AI {
         int borderDistance;
         if (DAT_GameState::instance.playerDataArray[attackedPlayerID].unknownPathBorderDistanceRelated > 120) {
             borderDistance = 98;
-        }
-        else {
+        } else {
             borderDistance
                 = DAT_GameState::instance.playerDataArray[attackedPlayerID].unknownPathBorderDistanceRelated > 90 ? 70
-                                                                                                                   : 50;
+                                                                                                                  : 50;
         }
         if (useBorderDistance == 0) {
             borderDistance = 0;
@@ -47,8 +46,7 @@ namespace AI {
             != FALSE) {
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::computeAIZoneLayer,
                 DAT_PathFindingState::ptr)(DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID, 1, 1);
-        }
-        else {
+        } else {
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::computeAIZoneLayer,
                 DAT_PathFindingState::ptr)(DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID, 0, 1);
         }

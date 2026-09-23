@@ -19,22 +19,24 @@ namespace AI {
         int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[10];
         if (tribeID == 0)
             return;
-        if (DAT_TribesState::instance.tribes[tribeID].uid != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[10])
+        if (DAT_TribesState::instance.tribes[tribeID].uid
+            != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[10])
             return;
         if (DAT_TribesState::instance.tribes[tribeID].size <= 0)
             return;
         if (DAT_TribesState::instance.tribes[tribeID].percentageSomething > 80)
             return;
 
-        if (MACRO_CALL_MEMBER(Map::TileMapState_Func::countUnfinishedMoatTilesForPlayer, DAT_TileMapState::ptr)(playerID)
+        if (MACRO_CALL_MEMBER(Map::TileMapState_Func::countUnfinishedMoatTilesForPlayer, DAT_TileMapState::ptr)(
+                playerID)
             <= 0) {
             MACRO_CALL_MEMBER(AICState_Func::sendUnitsToKeep, this)(tribeID, playerID);
             return;
         }
 
         int targetUnitID = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
-        int tile = MACRO_CALL_MEMBER(Map::TileMapState_Func::findNearestFriendlyMoatTileForDigging, DAT_TileMapState::ptr)(
-            playerID, targetUnitID, 1);
+        int tile = MACRO_CALL_MEMBER(Map::TileMapState_Func::findNearestFriendlyMoatTileForDigging,
+            DAT_TileMapState::ptr)(playerID, targetUnitID, 1);
         if (tile <= -1)
             return;
 
@@ -44,8 +46,8 @@ namespace AI {
             return;
 
         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeAnInstruction, DAT_TribesState::ptr)(tribeID,
-            Map::Units::UIT_DIG_MOAT, DAT_TileMapState::instance.ALG_MoatXResult, DAT_TileMapState::instance.ALG_MoatYResult,
-            0);
+            Map::Units::UIT_DIG_MOAT, DAT_TileMapState::instance.ALG_MoatXResult,
+            DAT_TileMapState::instance.ALG_MoatYResult, 0);
         DAT_TribesState::instance.tribes[tribeID].unitStance = Map::Units::Behavior::USE_STAND_GROUND;
     }
 }

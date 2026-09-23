@@ -16,11 +16,12 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CE3B0
     void AICState::setNextMoveLocationForUnits(int playerID)
     {
-        int organismID = (short)DAT_TileMapState::instance.OrganismLayer
-            [DAT_ViewportRenderState::instance
-                    .translationMatrix[DAT_GameState::instance.playerDataArray[playerID].shortestDistanceY]
-                    .addXgetTile
-                + DAT_GameState::instance.playerDataArray[playerID].shortestDistanceX];
+        int organismID
+            = (short)DAT_TileMapState::instance.OrganismLayer
+                  [DAT_ViewportRenderState::instance
+                          .translationMatrix[DAT_GameState::instance.playerDataArray[playerID].shortestDistanceY]
+                          .addXgetTile
+                      + DAT_GameState::instance.playerDataArray[playerID].shortestDistanceX];
         if (organismID != 0) {
             MACRO_CALL_MEMBER(Map::LandscapeState_Func::removeTree, DAT_LandscapeState::ptr)(organismID);
         }
@@ -29,7 +30,8 @@ namespace AI {
             DAT_PathFindingState::ptr)(DAT_GameState::instance.playerDataArray[playerID].shortestDistanceX,
             DAT_GameState::instance.playerDataArray[playerID].shortestDistanceY, -1, -1, 4000, FALSE);
         MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::setDestinationPairsBasedOnPreviousSearch,
-            DAT_PathFindingState::ptr)(playerID - 1, DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID);
+            DAT_PathFindingState::ptr)(
+            playerID - 1, DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID);
     }
 
 }

@@ -46,7 +46,8 @@ namespace AI {
             else
                 DAT_GameState::instance.playerDataArray[playerID].rationsSetting = 3;
             if (this->aics[aicIndex].doubleRationsFoodThreshold != 0
-                && DAT_GameState::instance.playerDataArray[playerID].totalFood >= this->aics[aicIndex].doubleRationsFoodThreshold)
+                && DAT_GameState::instance.playerDataArray[playerID].totalFood
+                    >= this->aics[aicIndex].doubleRationsFoodThreshold)
                 DAT_GameState::instance.playerDataArray[playerID].rationsSetting = 4;
         } else if (DAT_GameState::instance.playerDataArray[playerID].aiPopularityDecisionValue == 0) {
             if (DAT_GameState::instance.playerDataArray[playerID].taxesSetting < this->aics[aicIndex].taxesMax) {

@@ -12,12 +12,13 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CB3A0
     undefined4 AICState::aiRequiresExtraOxtethers(int playerID)
     {
-        int quarryID = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::findFirstBuildingIDForPlayerAndType,
-            DAT_BuildingsState::ptr)(playerID, OpenSHC::Map::Buildings::BT_QUARRY);
+        int quarryID
+            = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::findFirstBuildingIDForPlayerAndType,
+                DAT_BuildingsState::ptr)(playerID, OpenSHC::Map::Buildings::BT_QUARRY);
         int highestStonePerTether = 0;
         int highestQuarryID = 0;
-        if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::countBuildingsForPlayer, DAT_BuildingsState::ptr)(
-                playerID, OpenSHC::Map::Buildings::BT_OXTETHER, 1)
+        if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::countBuildingsForPlayer,
+                DAT_BuildingsState::ptr)(playerID, OpenSHC::Map::Buildings::BT_OXTETHER, 1)
             >= 10)
             return 0;
 
@@ -26,8 +27,8 @@ namespace AI {
             return 0;
 
         for (; quarryID != 0;
-             quarryID = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::findNextBuildingForPlayerAndType,
-                 DAT_BuildingsState::ptr)(playerID, OpenSHC::Map::Buildings::BT_QUARRY, quarryID)) {
+            quarryID = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::findNextBuildingForPlayerAndType,
+                DAT_BuildingsState::ptr)(playerID, OpenSHC::Map::Buildings::BT_QUARRY, quarryID)) {
             int stone = DAT_BuildingsState::instance
                             .buildings[(short)DAT_BuildingsState::instance.buildings[quarryID].quarryStockpileID]
                             .resources[Game::Resources::RT_STONE];
@@ -36,7 +37,8 @@ namespace AI {
                 int tetherID = DAT_BuildingsState::instance.buildings[quarryID].quarryLinkedOxTethers[i];
                 if (tetherID == 0)
                     continue;
-                if (DAT_BuildingsState::instance.buildings[tetherID].buildingType == OpenSHC::Map::Buildings::BT_OXTETHER
+                if (DAT_BuildingsState::instance.buildings[tetherID].buildingType
+                        == OpenSHC::Map::Buildings::BT_OXTETHER
                     && DAT_BuildingsState::instance.buildings[tetherID].oxtetherLinkedQuarryID == quarryID)
                     tetherCount++;
                 else
