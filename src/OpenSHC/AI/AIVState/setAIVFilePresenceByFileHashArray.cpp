@@ -7,7 +7,7 @@ namespace AI {
 
     // an AIV is only usable in multiplayer if all players have the same file
     // FUNCTION: STRONGHOLDCRUSADER 0x004ECDB0
-    void AIVState::setAIVFilePresenceByFileHashArray(int unused)
+    void AIVState::setAIVFilePresenceByFileHashArray()
     {
         if (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SKIRMISH_SINGLE_PLAYER) {
             for (int aiIndex = 0; aiIndex < 16; ++aiIndex) {
@@ -25,14 +25,13 @@ namespace AI {
                     if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[player] == -1) {
                         continue;
                     }
-                    // the received hashes use the same layout as aivFileHash
                     if (hash == -1) {
-                        hash = ((int*)this->receivedAIVFileHash[player])[aiIndex * 8 + castleID];
+                        hash = this->receivedAIVFileHash[player][aiIndex][castleID];
                         if (hash == -1) {
                             this->aivFilePresent[aiIndex][castleID] = 0;
                             break;
                         }
-                    } else if (hash != ((int*)this->receivedAIVFileHash[player])[aiIndex * 8 + castleID]) {
+                    } else if (hash != this->receivedAIVFileHash[player][aiIndex][castleID]) {
                         this->aivFilePresent[aiIndex][castleID] = 0;
                         break;
                     }
