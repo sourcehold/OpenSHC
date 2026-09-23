@@ -56,7 +56,7 @@ while cur.getAddress() < roRange.getMaxAddress():
 			v = cur.getValue().replace("\\", "\\\\").replace("\n", "\\n").replace("\r", "\\r").replace('"', '\\"')
 			sdump += "// 0x00" + hex(cur.getAddress().getOffset())[2:-1] + "\n"
 			sdump += "wchar_t const * const " + s_label + ' = ' + m_label + ';' + "\n\n"
-			mdump += "// STRING: STRONGHOLDCRUSADER 0x00" + hex(cur.getAddress().getOffset())[2:-1] + "\n"
+			mdump += "// STRING: STRONGHOLDCRUSADER 0x00" + hex(cur.getAddress().getOffset())[2:] + "\n"
 			mdump += "#define "+ m_label + ' L"' + v + '"' + "\n\n"
 	except Exception as e:
 		print("failed at: " + cur.getAddress().toString())
