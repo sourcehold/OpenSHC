@@ -32,7 +32,7 @@ namespace AI {
             void (AIVState::*)(), false, Address::SHC_3BB0A8C1_0x004ECBC0, &AIVState::hostChecksLobbyAIVAvailability)
         hostChecksLobbyAIVAvailability;
 
-        MACRO_FUNCTION_RESOLVER(void (AIVState::*)(int), false, Address::SHC_3BB0A8C1_0x004ECDB0,
+        MACRO_FUNCTION_RESOLVER(void (AIVState::*)(), false, Address::SHC_3BB0A8C1_0x004ECDB0,
             &AIVState::setAIVFilePresenceByFileHashArray)
         setAIVFilePresenceByFileHashArray;
 

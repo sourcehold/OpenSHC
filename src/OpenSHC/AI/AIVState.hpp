@@ -40,7 +40,7 @@ namespace AI {
         AIVSpec aivs[9]; // 0x00000004 length: 252504
         int aivFileHash[16][8]; // 0x0003DA5C length: 512
         int aivFilePresent[16][8]; // 0x0003DC5C length: 512
-        byte receivedAIVFileHash[9][512]; // 0x0003DE5C length: 4608
+        int receivedAIVFileHash[9][16][8]; // 0x0003DE5C length: 4608
         int aivFileAvailabilityPerAIArray[20]; // 0x0003F05C length: 80
         int numberOfAIsWithAIV; // 0x0003F0AC length: 4
         int keepX; // 0x0003F0B0 length: 4
@@ -88,7 +88,7 @@ namespace AI {
 
         void hostChecksLobbyAIVAvailability();
 
-        void setAIVFilePresenceByFileHashArray(int param_1);
+        void setAIVFilePresenceByFileHashArray();
 
         void syncAIPlayerNamesAndBuildIntervals();
 
