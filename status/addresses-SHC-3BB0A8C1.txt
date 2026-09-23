@@ -37995,7 +37995,7 @@ SHC_3BB0A8C1_0x004F0060 | 36.4% | Store scheduling; 77% normalized
 
 SHC_3BB0A8C1_0x004F0690 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004F0E80 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F0E80 | 84.5% | Register allocation
 
 SHC_3BB0A8C1_0x004F1190 | 0.0% | Pending
 
