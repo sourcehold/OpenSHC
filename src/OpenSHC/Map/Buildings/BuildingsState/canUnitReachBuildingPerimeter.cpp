@@ -26,11 +26,16 @@ namespace Map {
             int unitArea
                 = (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[param_2].tile];
             int buildingHeight
-                = DAT_TileMapState::instance.DefaultHeightLayer[this->buildings[param_1].currentTilePositionAdjusted];
+                = DAT_TileMapState::instance
+                      .DefaultHeightLayer[DAT_BuildingsState::instance.buildings[param_1].currentTilePositionAdjusted];
             uint size = this->buildings[param_1].widthOrHeight;
             int tileCount = DAT_BuildingDefinedData::instance.BuildingAccessibleTilesCount[size];
-            BOOLEnum onlyAssassins = MACRO_CALL_MEMBER(
-                OpenSHC::Map::Units::UnitsState_Func::selectionContainsOnlyArabAssassins, DAT_UnitsState::ptr)();
+            int onlyAssassins = 0;
+            if (MACRO_CALL_MEMBER(
+                    OpenSHC::Map::Units::UnitsState_Func::selectionContainsOnlyArabAssassins, DAT_UnitsState::ptr)()
+                != FALSE) {
+                onlyAssassins = 1;
+            }
             for (int i = 0; i < tileCount; ++i) {
                 MACRO_CALL_MEMBER(
                     OpenSHC::Map::Buildings::BuildingsState_Func::setupNextCandidateLocationComputeOffsets2, this)(
@@ -50,15 +55,15 @@ namespace Map {
                     continue;
                 }
                 BOOLEnum reachable;
-                if (onlyAssassins == FALSE) {
+                if (onlyAssassins == 1) {
+                    reachable = MACRO_CALL_MEMBER(
+                        OpenSHC::Map::Navigation::PathFindingState_Func::calculateCanReachUsingCachedAreaLogic,
+                        DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[param_2].tile, tile);
+                } else {
                     reachable = MACRO_CALL_MEMBER(
                         OpenSHC::Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
                         DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[param_2].owner, unitArea, tileArea,
                         MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::canAUnitClimb, DAT_UnitsState::ptr)());
-                } else {
-                    reachable = MACRO_CALL_MEMBER(
-                        OpenSHC::Map::Navigation::PathFindingState_Func::calculateCanReachUsingCachedAreaLogic,
-                        DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[param_2].tile, tile);
                 }
                 if (reachable != FALSE) {
                     return 1;
