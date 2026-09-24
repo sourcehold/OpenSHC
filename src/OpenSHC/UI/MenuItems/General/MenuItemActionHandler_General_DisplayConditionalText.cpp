@@ -9,11 +9,11 @@ namespace UI {
         namespace General {
 
             // FUNCTION: STRONGHOLDCRUSADER 0x004F6A60
-            void MenuItemActionHandler_General_DisplayConditionalText(int param_1, ...)
+            void MenuItemActionHandler_General_DisplayConditionalText(int textID, ...)
             {
                 MACRO_CALL_MEMBER(
                     OpenSHC::UI::BottomLeftTextDisplayState_Func::renderCurrentlyDisplayedTextConstructionCost,
-                    DAT_BottomLeftTextDisplayState::ptr)(param_1);
+                    DAT_BottomLeftTextDisplayState::ptr)(textID);
             }
 
         }
