@@ -18,13 +18,13 @@ namespace Map {
             int gold;
             MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingCost, this)(
                 OpenSHC::Commands::M_MAPPER_MOAT, &stone, &gold);
-            return ((int)DAT_TileMapState::instance.moatTileCount
+            return DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                       .startResources[OpenSHC::Game::Resources::RT_GOLD]
+                >= ((int)DAT_TileMapState::instance.moatTileCount
                        - DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                            .moatTileCount
                        + 1)
-                * gold
-                <= DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                       .startResources[OpenSHC::Game::Resources::RT_GOLD];
+                * gold;
         }
 
     }
