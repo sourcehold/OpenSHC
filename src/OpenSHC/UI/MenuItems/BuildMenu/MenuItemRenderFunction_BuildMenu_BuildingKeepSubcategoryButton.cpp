@@ -15,8 +15,8 @@ namespace UI {
             // FUNCTION: STRONGHOLDCRUSADER 0x00434230
             void MenuItemRenderFunction_BuildMenu_BuildingKeepSubcategoryButton(int param_1, ...)
             {
-                if ((DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_EDITOR)
-                    && (DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_SIEGE_THAT)) {
+                if (DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_EDITOR
+                    && DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_SIEGE_THAT) {
                     DAT_ButtonUnknownZero::instance = 1;
                     return;
                 }
