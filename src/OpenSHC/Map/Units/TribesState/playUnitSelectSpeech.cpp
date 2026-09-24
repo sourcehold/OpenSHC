@@ -14,12 +14,13 @@ namespace Map {
         using OpenSHC::Map::Units::UnitType;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00521EB0
-        void TribesState::playUnitSelectSpeech(undefined4 param_1)
+        void TribesState::playUnitSelectSpeech(undefined4 selectionID)
         {
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::selectionContainsCombatUnit, DAT_UnitsState::ptr)(
                 1);
-            UnitType unitType = MACRO_CALL_MEMBER(
-                OpenSHC::Map::Units::TribesState_Func::getMajoritySelectedUnitType, this)(param_1, (int*)&param_1);
+            UnitType const unitType
+                = MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::getMajoritySelectedUnitType, this)(
+                    selectionID, (int*)&selectionID);
             MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)(unitType, 0xb);
         }
 
