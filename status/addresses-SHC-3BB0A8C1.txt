@@ -6233,7 +6233,7 @@ SHC_3BB0A8C1_0x00420A30 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00420BF0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00420D20 | 0.0% | Pending
+SHC_3BB0A8C1_0x00420D20 | 20.2% | Reimplemented functionally, code layout differs
 
 SHC_3BB0A8C1_0x004217B0 | 0.0% | Pending
 

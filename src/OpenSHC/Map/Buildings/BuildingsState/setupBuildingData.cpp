@@ -24,6 +24,7 @@
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
+#include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_EntityState.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -65,7 +66,7 @@ namespace Map {
             if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY) {
                 playerID_dup = 0;
             }
-            if (x >= 400 || y >= 400 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
+            if (x > 399 || y > 399 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
                 return 0;
             }
 
@@ -75,8 +76,7 @@ namespace Map {
                 if (this->buildings[buildingID].logicalState == 0) {
                     break;
                 }
-                // Note: never true, a full building array is not detected
-                if (buildingID > 1999) {
+                if (buildingID >= 1999) {
                     return 0;
                 }
             }
@@ -208,90 +208,6 @@ namespace Map {
 
             // Building type specific setup
             switch (buildingType) {
-            case BT_HOVEL:
-            case BT_HOUSE:
-                this->buildings[buildingID].padding_0x2a5[0]
-                    = (this->buildings[buildingID].fireRelatedRNG1 >> 5) % 3 + 1;
-                break;
-            case BT_OXTETHER:
-                this->buildings[buildingID].field28_0x58 = 50;
-                break;
-            case BT_MERCENARYPOST:
-                MACRO_CALL_MEMBER(
-                    OpenSHC::Game::GameStateStructures_Func::computeBuildingCategoryEntryPointAndDestroyEarlierBuilding,
-                    DAT_GameState::ptr)(buildingID, playerID, OpenSHC::Game::Player::PDBCE_MERCENARYPOST);
-                break;
-            case BT_BARRACKS:
-                MACRO_CALL_MEMBER(
-                    OpenSHC::Game::GameStateStructures_Func::computeBuildingCategoryEntryPointAndDestroyEarlierBuilding,
-                    DAT_GameState::ptr)(buildingID, playerID, OpenSHC::Game::Player::PDBCE_BARRACKS);
-                break;
-            case BT_STOCKPILE:
-                this->buildings[buildingID].unknownStockpileOrSignpostRelated = 0;
-                MACRO_CALL_MEMBER(
-                    OpenSHC::Game::GameStateStructures_Func::computeBuildingCategoryEntryPointAndDestroyEarlierBuilding,
-                    DAT_GameState::ptr)(buildingID, playerID, OpenSHC::Game::Player::PDBCE_STOCKPILE);
-                break;
-            case BT_ARMORY:
-                MACRO_CALL_MEMBER(
-                    OpenSHC::Game::GameStateStructures_Func::computeBuildingCategoryEntryPointAndDestroyEarlierBuilding,
-                    DAT_GameState::ptr)(buildingID, playerID, OpenSHC::Game::Player::PDBCE_ARMORY);
-                break;
-            case BT_FLETCHER:
-                this->buildings[buildingID].producedItemTypeNext = OpenSHC::Game::Resources::RT_BOW;
-                this->buildings[buildingID].producedItemType = OpenSHC::Game::Resources::RT_BOW;
-                break;
-            case BT_BLACKSMITH:
-                if (DAT_GameCore::instance.swordProducible_logic == 0) {
-                    this->buildings[buildingID].producedItemTypeNext = OpenSHC::Game::Resources::RT_MACE;
-                    this->buildings[buildingID].producedItemType = OpenSHC::Game::Resources::RT_MACE;
-                } else {
-                    this->buildings[buildingID].producedItemTypeNext = OpenSHC::Game::Resources::RT_SWORD;
-                    this->buildings[buildingID].producedItemType = OpenSHC::Game::Resources::RT_SWORD;
-                }
-                if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_ECONOMIC_CAMPAIGN_SH1
-                    && DAT_GameCore::instance.missionNumber1to20 == 36) {
-                    this->buildings[buildingID].producedItemTypeNext = OpenSHC::Game::Resources::RT_MACE;
-                    this->buildings[buildingID].producedItemType = OpenSHC::Game::Resources::RT_MACE;
-                }
-                break;
-            case BT_POLETURNER:
-                this->buildings[buildingID].producedItemTypeNext = OpenSHC::Game::Resources::RT_SPEAR;
-                this->buildings[buildingID].producedItemType = OpenSHC::Game::Resources::RT_SPEAR;
-                break;
-            case BT_GRANARY:
-                MACRO_CALL_MEMBER(
-                    OpenSHC::Game::GameStateStructures_Func::computeBuildingCategoryEntryPointAndDestroyEarlierBuilding,
-                    DAT_GameState::ptr)(buildingID, playerID, OpenSHC::Game::Player::PDBCE_GRANARY);
-                break;
-            case BT_ENGINEERSGUILD:
-                MACRO_CALL_MEMBER(
-                    OpenSHC::Game::GameStateStructures_Func::computeBuildingCategoryEntryPointAndDestroyEarlierBuilding,
-                    DAT_GameState::ptr)(buildingID, playerID, OpenSHC::Game::Player::PDBCE_ENGINEERSGUILD);
-                break;
-            case BT_TUNNELERSGUILD:
-                MACRO_CALL_MEMBER(
-                    OpenSHC::Game::GameStateStructures_Func::computeBuildingCategoryEntryPointAndDestroyEarlierBuilding,
-                    DAT_GameState::ptr)(buildingID, playerID, OpenSHC::Game::Player::PDBCE_TUNNELERSGUILD);
-                break;
-            case BT_MARKETPLACE:
-                MACRO_CALL_MEMBER(
-                    OpenSHC::Game::GameStateStructures_Func::computeBuildingCategoryEntryPointAndDestroyEarlierBuilding,
-                    DAT_GameState::ptr)(buildingID, playerID, OpenSHC::Game::Player::PDBCE_MARKETPLACE);
-                break;
-            case BT_OILSMELTER:
-                MACRO_CALL_MEMBER(
-                    OpenSHC::Game::GameStateStructures_Func::computeBuildingCategoryEntryPointAndDestroyEarlierBuilding,
-                    DAT_GameState::ptr)(buildingID, playerID, OpenSHC::Game::Player::PDBCE_OILSMELTER);
-                // The oil smelters of siege maps start full
-                if ((DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_EDITOR
-                        || DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_SIEGE_THAT)
-                    && DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 == OpenSHC::Map::MT_SIEGE) {
-                    this->buildings[buildingID].resources[OpenSHC::Game::Resources::RT_PITCH]
-                        = DAT_BuildingDefinedData::instance
-                              .StorageLimitResourceTypeArray[OpenSHC::Game::Resources::RT_PITCH];
-                }
-                break;
             case BT_DAIRYFARM:
                 this->field4_0x10 = 3;
                 // fallthrough
@@ -302,6 +218,14 @@ namespace Map {
                     buildingID, 0);
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::determineBuildingEntranceFromKeepArea,
                     this)(buildingID, 1, FALSE);
+                break;
+            case BT_OXTETHER:
+                this->buildings[buildingID].field28_0x58 = 50;
+                break;
+            case BT_SIGNPOST:
+                this->buildings[buildingID].unknownStockpileOrSignpostRelated = 0;
+                MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::addSignpostToBuildingEntryData,
+                    DAT_GameState::ptr)(buildingID);
                 break;
             case BT_MANORHOUSE:
             case BT_STONEKEEP:
@@ -319,10 +243,73 @@ namespace Map {
                     DAT_TileMapState::instance.currentMapperCommand = OpenSHC::Commands::M_MAPPER_NULL;
                 }
                 break;
-            case BT_SIGNPOST:
+            case BT_CAMPGROUND:
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Game::GameStateStructures_Func::computeBuildingCategoryEntryPointAndDestroyEarlierBuilding,
+                    DAT_GameState::ptr)(buildingID, playerID, OpenSHC::Game::Player::PDBCE_CAMPGROUND);
+                break;
+            case BT_STOCKPILE:
                 this->buildings[buildingID].unknownStockpileOrSignpostRelated = 0;
-                MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::addSignpostToBuildingEntryData,
-                    DAT_GameState::ptr)(buildingID);
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Game::GameStateStructures_Func::computeBuildingCategoryEntryPointAndDestroyEarlierBuilding,
+                    DAT_GameState::ptr)(buildingID, playerID, OpenSHC::Game::Player::PDBCE_STOCKPILE);
+                break;
+            case BT_GRANARY:
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Game::GameStateStructures_Func::computeBuildingCategoryEntryPointAndDestroyEarlierBuilding,
+                    DAT_GameState::ptr)(buildingID, playerID, OpenSHC::Game::Player::PDBCE_GRANARY);
+                break;
+            case BT_ARMORY:
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Game::GameStateStructures_Func::computeBuildingCategoryEntryPointAndDestroyEarlierBuilding,
+                    DAT_GameState::ptr)(buildingID, playerID, OpenSHC::Game::Player::PDBCE_ARMORY);
+                break;
+            case BT_MARKETPLACE:
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Game::GameStateStructures_Func::computeBuildingCategoryEntryPointAndDestroyEarlierBuilding,
+                    DAT_GameState::ptr)(buildingID, playerID, OpenSHC::Game::Player::PDBCE_MARKETPLACE);
+                break;
+            case BT_ENGINEERSGUILD:
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Game::GameStateStructures_Func::computeBuildingCategoryEntryPointAndDestroyEarlierBuilding,
+                    DAT_GameState::ptr)(buildingID, playerID, OpenSHC::Game::Player::PDBCE_ENGINEERSGUILD);
+                break;
+            case BT_TUNNELERSGUILD:
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Game::GameStateStructures_Func::computeBuildingCategoryEntryPointAndDestroyEarlierBuilding,
+                    DAT_GameState::ptr)(buildingID, playerID, OpenSHC::Game::Player::PDBCE_TUNNELERSGUILD);
+                break;
+            case BT_MERCENARYPOST:
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Game::GameStateStructures_Func::computeBuildingCategoryEntryPointAndDestroyEarlierBuilding,
+                    DAT_GameState::ptr)(buildingID, playerID, OpenSHC::Game::Player::PDBCE_MERCENARYPOST);
+                break;
+            case BT_BARRACKS:
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Game::GameStateStructures_Func::computeBuildingCategoryEntryPointAndDestroyEarlierBuilding,
+                    DAT_GameState::ptr)(buildingID, playerID, OpenSHC::Game::Player::PDBCE_BARRACKS);
+                break;
+            case BT_BLACKSMITH:
+                if (DAT_GameCore::instance.swordProducible_logic != 0) {
+                    this->buildings[buildingID].producedItemTypeNext = OpenSHC::Game::Resources::RT_SWORD;
+                    this->buildings[buildingID].producedItemType = OpenSHC::Game::Resources::RT_SWORD;
+                } else {
+                    this->buildings[buildingID].producedItemTypeNext = OpenSHC::Game::Resources::RT_MACE;
+                    this->buildings[buildingID].producedItemType = OpenSHC::Game::Resources::RT_MACE;
+                }
+                if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_ECONOMIC_CAMPAIGN_SH1
+                    && DAT_GameCore::instance.missionNumber1to20 == 36) {
+                    this->buildings[buildingID].producedItemTypeNext = OpenSHC::Game::Resources::RT_MACE;
+                    this->buildings[buildingID].producedItemType = OpenSHC::Game::Resources::RT_MACE;
+                }
+                break;
+            case BT_POLETURNER:
+                this->buildings[buildingID].producedItemTypeNext = OpenSHC::Game::Resources::RT_SPEAR;
+                this->buildings[buildingID].producedItemType = OpenSHC::Game::Resources::RT_SPEAR;
+                break;
+            case BT_FLETCHER:
+                this->buildings[buildingID].producedItemTypeNext = OpenSHC::Game::Resources::RT_BOW;
+                this->buildings[buildingID].producedItemType = OpenSHC::Game::Resources::RT_BOW;
                 break;
             case BT_FIREBALLISTA:
             case BT_CATAPULT:
@@ -338,21 +325,34 @@ namespace Map {
                         this->buildings[buildingID].uid, 0);
                 }
                 break;
-            case BT_CAMPGROUND:
-                MACRO_CALL_MEMBER(
-                    OpenSHC::Game::GameStateStructures_Func::computeBuildingCategoryEntryPointAndDestroyEarlierBuilding,
-                    DAT_GameState::ptr)(buildingID, playerID, OpenSHC::Game::Player::PDBCE_CAMPGROUND);
-                break;
-            case BT_KILLINGPIT:
-                if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY) {
-                    this->buildings[buildingID].state = -1;
-                }
-                break;
             case BT_UNKNOWN4:
                 if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] != -1) {
                     MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::relayTribeInstruction, DAT_UnitsState::ptr)(
                         this->DAT_DraggedTileCountVerified, (UnitInstructionType)0x15, buildingID,
                         this->buildings[buildingID].uid, 0);
+                }
+                break;
+            case BT_HOVEL:
+            case BT_HOUSE:
+                this->buildings[buildingID].padding_0x2a5[0]
+                    = (this->buildings[buildingID].fireRelatedRNG1 >> 5) % 3 + 1;
+                break;
+            case BT_OILSMELTER:
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Game::GameStateStructures_Func::computeBuildingCategoryEntryPointAndDestroyEarlierBuilding,
+                    DAT_GameState::ptr)(buildingID, playerID, OpenSHC::Game::Player::PDBCE_OILSMELTER);
+                // The oil smelters of siege maps start full
+                if ((DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_EDITOR
+                        || DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_SIEGE_THAT)
+                    && DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 == OpenSHC::Map::MT_SIEGE) {
+                    this->buildings[buildingID].resources[OpenSHC::Game::Resources::RT_PITCH]
+                        = DAT_BuildingDefinedData::instance
+                              .StorageLimitResourceTypeArray[OpenSHC::Game::Resources::RT_PITCH];
+                }
+                break;
+            case BT_KILLINGPIT:
+                if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY) {
+                    this->buildings[buildingID].state = -1;
                 }
                 break;
             case BT_CESSPIT: {
@@ -462,7 +462,8 @@ namespace Map {
             this->field34_0x18e074 = 1;
             if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::isFearFactorBuilding, this)(buildingID)
                 != 0) {
-                MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::recomputeAllFearFactors, this)();
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Map::Buildings::BuildingsState_Func::recomputeAllFearFactors, DAT_BuildingsState::ptr)();
             }
             if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::isReligiousBuilding, this)(buildingID)
                 != 0) {
