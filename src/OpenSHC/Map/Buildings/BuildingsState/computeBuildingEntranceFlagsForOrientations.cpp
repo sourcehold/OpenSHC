@@ -15,13 +15,16 @@ namespace Map {
             uint size = this->buildings[param_1].widthOrHeight;
             int tileCount = DAT_BuildingDefinedData::instance.BuildingAccessibleTilesCount[size];
             int try_;
-            if (size == 4) {
+            switch (size) {
+            case 4:
                 try_ = tileCount - 1;
-            } else {
-                if (size != 5 && size != 6) {
-                    return;
-                }
+                break;
+            case 5:
+            case 6:
                 try_ = tileCount - 2;
+                break;
+            default:
+                return;
             }
             *(int*)this->buildings[param_1].padding_0x280 = 0;
             for (int i = 0; i < tileCount; ++i) {
