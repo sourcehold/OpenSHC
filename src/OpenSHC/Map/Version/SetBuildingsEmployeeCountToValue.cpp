@@ -14,12 +14,11 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x0041A390
     void Version::SetBuildingsEmployeeCountToValue()
     {
-        for (int _buildingID = 1; _buildingID < 2000; _buildingID++) {
-            if (DAT_BuildingsState::instance.buildings[_buildingID].logicalState != ((BuildingLogicalState)0)) {
-                DAT_BuildingsState::instance.buildings[_buildingID].buildingTypeBasedEmployeeCount
+        for (int buildingID = 1; buildingID < 2000; ++buildingID) {
+            if (DAT_BuildingsState::instance.buildings[buildingID].logicalState != (BuildingLogicalState)0) {
+                DAT_BuildingsState::instance.buildings[buildingID].buildingTypeBasedEmployeeCount
                     = DAT_BuildingDefinedData::instance
-                          .EmployeeCountPerBuildingType[DAT_BuildingsState::instance.buildings[_buildingID]
-                                  .buildingType]
+                          .EmployeeCountPerBuildingType[DAT_BuildingsState::instance.buildings[buildingID].buildingType]
                           .shortValue;
             }
         }
