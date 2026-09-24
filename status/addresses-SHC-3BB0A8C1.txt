@@ -6107,7 +6107,7 @@ SHC_3BB0A8C1_0x0041BB30 | 90.8% | Reimplemented functionally, orig keeps ecx ove
 
 SHC_3BB0A8C1_0x0041BC10 | 70.1% | Reimplemented functionally, register allocation differs
 
-SHC_3BB0A8C1_0x0041BCA0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0041BCA0 | 89.0% | Reimplemented functionally, register allocation differs
 
 SHC_3BB0A8C1_0x0041BD70 | 0.0% | Pending
 
