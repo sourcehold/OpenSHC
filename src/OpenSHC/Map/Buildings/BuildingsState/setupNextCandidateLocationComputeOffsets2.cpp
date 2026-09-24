@@ -63,10 +63,6 @@ namespace Map {
                 this->DAT_TempXOffset = DAT_BuildingDefinedData::instance.field191_0x89cc[try_].x;
                 this->DAT_TempYOffset = DAT_BuildingDefinedData::instance.field191_0x89cc[try_].y;
                 break;
-            default:
-                this->DAT_TempYOffset = 0;
-                this->DAT_TempXOffset = 0;
-                break;
             }
 
             // Move the tile away from the side of the building it belongs to
@@ -74,10 +70,10 @@ namespace Map {
             case 0:
                 this->DAT_TempYOffset -= offset;
                 break;
-            case 2:
+            case 4:
                 this->DAT_TempYOffset += offset;
                 break;
-            case 4:
+            case 2:
                 this->DAT_TempXOffset += offset;
                 break;
             case 6:
