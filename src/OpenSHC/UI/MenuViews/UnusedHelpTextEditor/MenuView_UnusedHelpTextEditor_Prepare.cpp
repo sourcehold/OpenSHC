@@ -1,5 +1,5 @@
 #include "OpenSHC/Text/TextEditorState.func.hpp"
-#include "OpenSHC/UI.func.hpp"
+#include "OpenSHC/UI/MenuViews/UnusedHelpTextEditor.func.hpp"
 #include "OpenSHC/UI/Menu.hpp"
 
 #include "OpenSHC/Globals/DAT_MenuHandlerState.hpp"

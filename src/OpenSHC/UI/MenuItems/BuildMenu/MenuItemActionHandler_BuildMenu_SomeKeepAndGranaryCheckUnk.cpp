@@ -1,6 +1,6 @@
 #include "OpenSHC/Game/GameCore.func.hpp"
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
-#include "OpenSHC/UI.func.hpp"
+#include "OpenSHC/UI/MenuItems/BuildMenu.func.hpp"
 #include "OpenSHC/UI/Enums/BuildMenuTabType.hpp"
 #include "OpenSHC/UI/Enums/BuildingsAndStatusMenuTabType.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"

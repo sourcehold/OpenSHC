@@ -1,6 +1,6 @@
 #include "OpenSHC/Game/GameCore.func.hpp"
 #include "OpenSHC/Text/UserTextHandler.func.hpp"
-#include "OpenSHC/UI.func.hpp"
+#include "OpenSHC/UI/MenuItems/EnterTitleOnGameStart.func.hpp"
 #include "OpenSHC/UI/MenuModalComposition.func.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"

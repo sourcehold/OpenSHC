@@ -1,5 +1,6 @@
-
 #include "../TextureRenderCore.func.hpp"
+
+#include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 
 #include "OpenSHC/Globals/DAT_GMImageOffsets.hpp"
 #include "OpenSHC/Globals/DAT_GMImageSizes.hpp"
@@ -12,7 +13,7 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00455270
         void TextureRenderCore::transformTgxCompressedImageToRGB565(int imageIndex)
         {
-            MACRO_CALL_MEMBER(TextureRenderCore_Func::transformTgxFromRGB555ToRGB565, this)(
+            MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::transformTgxFromRGB555ToRGB565, this)(
                 (ushort*)(&(((byte*)this->gmProcessedImageData)[DAT_GMImageOffsets::instance[imageIndex]])),
                 DAT_GMImageSizes::instance[imageIndex]);
         }

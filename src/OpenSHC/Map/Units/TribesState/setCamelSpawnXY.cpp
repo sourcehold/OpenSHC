@@ -9,10 +9,10 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x005233E0
         void TribesState::setCamelSpawnXY(undefined4 x, undefined4 y)
         {
-            for (int i = 0; i < 4; i++) {
-                if (DAT_GameState::instance.mapAndTime.camelSpawnXY[i][0] == 0) {
-                    DAT_GameState::instance.mapAndTime.camelSpawnXY[i][0] = x;
-                    DAT_GameState::instance.mapAndTime.camelSpawnXY[i][1] = y;
+            for (int i = 0; i < 4; ++i) {
+                if (DAT_GameState::instance.mapAndTime.camelSpawnXY[i].x == 0) {
+                    DAT_GameState::instance.mapAndTime.camelSpawnXY[i].x = x;
+                    DAT_GameState::instance.mapAndTime.camelSpawnXY[i].y = y;
                 }
             }
         }

@@ -1,5 +1,5 @@
 #include "OpenSHC/Text/TextEditorState.func.hpp"
-#include "OpenSHC/UI.func.hpp"
+#include "OpenSHC/UI/MenuItems/BuildingAndStatusMenu.func.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_TextEditorState.hpp"

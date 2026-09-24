@@ -1,4 +1,5 @@
-#include "OpenSHC/UI.func.hpp"
+#include "OpenSHC/UI/MenuItems/General.func.hpp"
+#include "OpenSHC/UI/MenuItems/InGameMenu.func.hpp"
 
 #include "OpenSHC/Globals/DAT_ButtonUnknownZero.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -16,7 +17,7 @@ namespace UI {
                 if ((DAT_MinimapViewState::instance.spawnMomentCount != 0)
                     && (DAT_GameCore::instance.isBinkVideoPlaying == 0)) {
                     DAT_ButtonUnknownZero::instance = 0;
-                    MACRO_CALL(OpenSHC::UI_Func::
+                    MACRO_CALL(OpenSHC::UI::MenuItems::General_Func::
                             MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
                     return;
                 }

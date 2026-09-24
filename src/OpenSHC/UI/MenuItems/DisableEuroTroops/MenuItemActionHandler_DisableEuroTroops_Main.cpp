@@ -1,4 +1,4 @@
-#include "OpenSHC/UI.func.hpp"
+#include "OpenSHC/UI/MenuItems/DisableEuroTroops.func.hpp"
 #include "OpenSHC/UI/MenuModalComposition.func.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"

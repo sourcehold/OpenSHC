@@ -1,5 +1,5 @@
-#include "OpenSHC/UI.func.hpp"
 #include "OpenSHC/UI/BottomLeftTextDisplayState.func.hpp"
+#include "OpenSHC/UI/MenuItems/LobbyMenu.func.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 
 #include "OpenSHC/Globals/DAT_BottomLeftTextDisplayState.hpp"

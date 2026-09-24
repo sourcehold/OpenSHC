@@ -1,5 +1,5 @@
 #include "OpenSHC/Game/Skirmish.func.hpp"
-#include "OpenSHC/UI.func.hpp"
+#include "OpenSHC/UI/MenuItems/DeleteGameRecord.func.hpp"
 #include "OpenSHC/UI/MenuModalComposition.func.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"

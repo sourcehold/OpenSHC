@@ -1,4 +1,5 @@
-#include "OpenSHC/UI.func.hpp"
+#include "OpenSHC/UI/MenuItems/BuildMenu.func.hpp"
+#include "OpenSHC/UI/MenuItems/General.func.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
 
 #include "OpenSHC/Globals/DAT_ButtonUnknownZero.hpp"
@@ -20,7 +21,7 @@ namespace UI {
                     return;
                 }
                 DAT_ButtonUnknownZero::instance = 0;
-                MACRO_CALL(OpenSHC::UI_Func::
+                MACRO_CALL(OpenSHC::UI::MenuItems::General_Func::
                         MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
             }
 

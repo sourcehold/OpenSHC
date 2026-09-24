@@ -1,4 +1,5 @@
-#include "OpenSHC/UI.func.hpp"
+#include "OpenSHC/UI/MenuItems/BuildingAndStatusMenu.func.hpp"
+#include "OpenSHC/UI/MenuItems/General.func.hpp"
 #include "OpenSHC/UI/Enums/BuildingsAndStatusMenuTabType.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -21,7 +22,7 @@ namespace UI {
                     || (DAT_GameCore::instance.activeMenuTab.tabType == OpenSHC::UI::Enums::BASMTT_MERCENARYPOST)) {
                     DAT_ButtonUnknownZero::instance = 1;
                 } else if (DAT_BuildingsState::instance.field24_0x18e04c != 0) {
-                    MACRO_CALL(OpenSHC::UI_Func::
+                    MACRO_CALL(OpenSHC::UI::MenuItems::General_Func::
                             MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
                 }
             }

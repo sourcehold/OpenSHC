@@ -1,5 +1,6 @@
 #include "OpenSHC/Map/MapPropertiesState.func.hpp"
-#include "OpenSHC/UI.func.hpp"
+#include "OpenSHC/UI/MenuItems/BuildMenu.func.hpp"
+#include "OpenSHC/UI/MenuItems/General.func.hpp"
 
 #include "OpenSHC/Globals/DAT_ButtonUnknownZero.hpp"
 #include "OpenSHC/Globals/DAT_MapPropertiesState.hpp"
@@ -15,7 +16,7 @@ namespace UI {
                 if (MACRO_CALL_MEMBER(OpenSHC::Map::MapPropertiesState_Func::isMercRecruitableForBuildingType,
                         DAT_MapPropertiesState::ptr)(param_1)
                     != 0) {
-                    MACRO_CALL(OpenSHC::UI_Func::
+                    MACRO_CALL(OpenSHC::UI::MenuItems::General_Func::
                             MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
                     DAT_ButtonUnknownZero::instance = 0;
                     return;

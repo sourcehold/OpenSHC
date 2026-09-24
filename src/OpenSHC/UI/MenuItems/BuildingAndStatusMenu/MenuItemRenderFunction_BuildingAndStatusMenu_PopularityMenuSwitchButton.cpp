@@ -1,4 +1,5 @@
-#include "OpenSHC/UI.func.hpp"
+#include "OpenSHC/UI/MenuItems/BuildingAndStatusMenu.func.hpp"
+#include "OpenSHC/UI/MenuItems/General.func.hpp"
 
 #include "OpenSHC/Globals/DAT_CurrentButtonGmDataIndex.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -16,7 +17,7 @@ namespace UI {
                     if (DAT_GameCore::instance.field77_0x144 == 1) {
                         DAT_CurrentButtonGmDataIndex::instance = 0x73;
                     }
-                    MACRO_CALL(OpenSHC::UI_Func::
+                    MACRO_CALL(OpenSHC::UI::MenuItems::General_Func::
                             MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
                 }
             }
