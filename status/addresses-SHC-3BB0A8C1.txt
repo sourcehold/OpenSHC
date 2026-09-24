@@ -5037,7 +5037,7 @@ SHC_3BB0A8C1_0x0040F420 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0040F440 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0040F460 | 29.0% | Reimplemented functionally, code layout differs
+SHC_3BB0A8C1_0x0040F460 | 66.7% | Reimplemented functionally, register allocation differs
 
 SHC_3BB0A8C1_0x0040F4F0 | 100.0% | Reimplemented
 
