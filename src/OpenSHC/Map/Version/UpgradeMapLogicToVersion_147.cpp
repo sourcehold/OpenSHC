@@ -8,11 +8,11 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00501730
     void Version::UpgradeMapLogicToVersion_147()
     {
-        for (int _tile = 0; _tile < 80400; _tile++) {
-            if (156 < DAT_TileMapState::instance.DefaultHeightLayer[_tile]) {
-                DAT_TileMapState::instance.HeightLayer[_tile] = DAT_TileMapState::instance.HeightLayer[_tile]
-                    + (156 - DAT_TileMapState::instance.DefaultHeightLayer[_tile]);
-                DAT_TileMapState::instance.DefaultHeightLayer[_tile] = 156;
+        for (int tile = 0; tile < 80400; ++tile) {
+            if (DAT_TileMapState::instance.DefaultHeightLayer[tile] > 156) {
+                DAT_TileMapState::instance.HeightLayer[tile]
+                    += 156 - DAT_TileMapState::instance.DefaultHeightLayer[tile];
+                DAT_TileMapState::instance.DefaultHeightLayer[tile] = 156;
             }
         }
     }
