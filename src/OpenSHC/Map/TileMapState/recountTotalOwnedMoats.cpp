@@ -7,9 +7,9 @@ namespace Map {
     void TileMapState::recountTotalOwnedMoats()
     {
         this->currentMoatCount = 0;
-        for (int i = 1; i < 16000; i++) {
+        for (int i = 1; i < 16000; ++i) {
             if (this->moats[i].owner != 0) {
-                // fixme: this must be wrong, but it is 100% Why not this->currentMoatCount += 1 ?
+                // not a count: one past the highest owned moat index, used as loop bound
                 this->currentMoatCount = i + 1;
             }
         }
