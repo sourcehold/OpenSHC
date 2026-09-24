@@ -14,12 +14,10 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004A9E80
     void MenuModalComposition::loadAllMenuElementsOfMenuModals()
     {
-        MenuModal* pMVar1;
-
-        for (pMVar1 = DAT_ModalMenuArrayPointerToStackTop::instance; pMVar1 != (MenuModal*)0x0;
-            pMVar1 = pMVar1->pointerToNextModalMenu) {
-            if (pMVar1->pointerToMenu != (Menu*)0x0) {
-                MACRO_CALL_MEMBER(OpenSHC::UI::Menu_Func::loadMenuElements, pMVar1->pointerToMenu)(0);
+        for (MenuModal* modal = DAT_ModalMenuArrayPointerToStackTop::instance; modal != NULL;
+            modal = modal->pointerToNextModalMenu) {
+            if (modal->pointerToMenu != NULL) {
+                MACRO_CALL_MEMBER(OpenSHC::UI::Menu_Func::loadMenuElements, modal->pointerToMenu)(0);
             }
         }
     }
