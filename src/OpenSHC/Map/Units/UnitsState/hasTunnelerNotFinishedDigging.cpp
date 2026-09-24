@@ -9,9 +9,9 @@ namespace Map {
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x005339F0
-        BOOLEnum UnitsState::hasTunnelerNotFinishedDigging(int param_1)
+        BOOLEnum UnitsState::hasTunnelerNotFinishedDigging(int unitID)
         {
-            return this->units[param_1].tunnelerFinishedDigging == 0;
+            return this->units[unitID].tunnelerFinishedDigging == 0;
         }
 
     }
