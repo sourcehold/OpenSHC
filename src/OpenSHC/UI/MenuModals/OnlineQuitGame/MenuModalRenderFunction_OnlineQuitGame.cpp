@@ -11,7 +11,6 @@ namespace UI {
             // FUNCTION: STRONGHOLDCRUSADER 0x004937B0
             void MenuModalRenderFunction_OnlineQuitGame(int x, int y, int width, int height)
             {
-
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner,
                     DAT_PencilRenderCore::ptr)(0x4a, 7, x, y, width);
             }
