@@ -13,10 +13,10 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004F6470
     void Menu::updateMenuButtons()
     {
-        if (this->hoveredItem == (MenuItem*)0x0) {
-            this->someMenuItemPtr_0x3c = (MenuItem*)0x0;
+        if (this->hoveredItem == NULL) {
+            this->someMenuItemPtr_0x3c = NULL;
         }
-        this->hoveredItem = (MenuItem*)0x0;
+        this->hoveredItem = NULL;
         this->field16_0x40 = 0;
         DAT_MenuHandlerState::instance.field18_0x3c = 0;
         MACRO_CALL_MEMBER(OpenSHC::UI::Menu_Func::handleMenuItems, this)(
