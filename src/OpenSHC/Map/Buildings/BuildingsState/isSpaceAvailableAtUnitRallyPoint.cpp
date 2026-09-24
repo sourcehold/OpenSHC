@@ -62,7 +62,7 @@ namespace Map {
                         y = DAT_GameState::instance.playerDataArray[playerID]
                                 .barracksParadegroundLocations[group][searchOffset]
                                 .y;
-                        if (x < 400 && y < 400
+                        if (x <= 399 && y <= 399
                             && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] != 0
                             && ((short)DAT_TileMapState::instance
                                         .UnitLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile
