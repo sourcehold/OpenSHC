@@ -15,14 +15,13 @@ namespace UI {
             // FUNCTION: STRONGHOLDCRUSADER 0x00424770
             void MenuView_IntroLogos_DoInitial()
             {
-                int y = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
-                int x = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
-                Menu* pMVar1 = DAT_MenuHandlerState::instance.currentMenu;
-                pMVar1->xPosition = x;
-                pMVar1->yPosition = y;
+                int const y = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
+                int const x = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
+                Menu* const menu = DAT_MenuHandlerState::instance.currentMenu;
+                menu->xPosition = x;
+                menu->yPosition = y;
                 DAT_MenuHandlerState::instance.x = x;
                 DAT_MenuHandlerState::instance.y = y;
-
                 DAT_IntroTimestamp::instance = timeGetTime();
             }
 
