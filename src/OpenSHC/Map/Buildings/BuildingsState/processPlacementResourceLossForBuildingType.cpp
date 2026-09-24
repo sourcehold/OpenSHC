@@ -5,6 +5,7 @@
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
+#include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -66,11 +67,11 @@ namespace Map {
                 return;
             }
 
-            int stone = this->buildingCosts[buildingType].requiredStone_0x4;
-            int wood = this->buildingCosts[buildingType].requiredWood;
-            int iron = this->buildingCosts[buildingType].requiredIron_0x8;
-            int pitch = this->buildingCosts[buildingType].requiredPitch_0xc;
-            int gold = this->buildingCosts[buildingType].requiredGold;
+            int stone = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredStone_0x4;
+            int wood = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredWood;
+            int iron = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredIron_0x8;
+            int pitch = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredPitch_0xc;
+            int gold = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredGold;
             if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_SIEGE_THAT) {
                 iron = 0;
                 pitch = 0;
