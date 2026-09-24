@@ -10,7 +10,8 @@ namespace Map {
     BOOLEnum MapPropertiesState::mapHasCertainEvent()
     {
         for (int i = 0; i < this->eventsCount; ++i) {
-            if (this->scenarioEvents[i].header.tl_type == 1) {
+            switch (this->scenarioEvents[i].header.tl_type) {
+            case 1:
                 return TRUE;
             }
         }
