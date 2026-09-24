@@ -51,7 +51,7 @@ namespace Map {
             for (int i = start; i < 25; ++i) {
                 uint x = DAT_GameState::instance.playerDataArray[param_1].tunnelersGuildParadegroundLocations[i].x;
                 uint y = DAT_GameState::instance.playerDataArray[param_1].tunnelersGuildParadegroundLocations[i].y;
-                if (x < 400 && y < 400 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] != 0
+                if (x <= 399 && y <= 399 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] != 0
                     && ((short)DAT_TileMapState::instance
                                 .UnitLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x]
                             == 0
@@ -61,11 +61,11 @@ namespace Map {
                         || DAT_UnitsState::instance.units[param_2].movementRelated != 8)) {
                     this->DAT_TempXOffset = x;
                     this->DAT_TempYOffset = y;
-                    if (x != DAT_UnitsState::instance.units[param_2].x
-                        || y != DAT_UnitsState::instance.units[param_2].y) {
-                        return 1;
+                    if (x == DAT_UnitsState::instance.units[param_2].x
+                        && y == DAT_UnitsState::instance.units[param_2].y) {
+                        return 0;
                     }
-                    return 0;
+                    return 1;
                 }
             }
             return 0;
