@@ -7,10 +7,10 @@ namespace Map {
     namespace Units {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00533F90
-        void UnitsState::saveUnitStateBeforeInterruption(int param_1)
+        void UnitsState::saveUnitStateBeforeInterruption(int unitID)
         {
-            this->units[param_1].tunnelerFinishedDigging = 5;
-            this->units[param_1].state_3 = this->units[param_1].state;
+            this->units[unitID].tunnelerFinishedDigging = 5;
+            this->units[unitID].state_3 = this->units[unitID].state;
         }
 
     }
