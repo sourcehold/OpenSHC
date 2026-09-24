@@ -6509,7 +6509,7 @@ SHC_3BB0A8C1_0x00421A40 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00421BE0 | 62.6% | Reimplemented functionally, code layout differs
 
-SHC_3BB0A8C1_0x00421D70 | 42.1% | Reimplemented functionally, code layout differs
+SHC_3BB0A8C1_0x00421D70 | 45.3% | Reimplemented functionally, stack slots and shared tail
 
 SHC_3BB0A8C1_0x00422230 | 100.0% | Reimplemented
 

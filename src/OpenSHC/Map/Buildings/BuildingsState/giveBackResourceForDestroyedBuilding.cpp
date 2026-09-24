@@ -20,6 +20,9 @@ namespace Map {
         void BuildingsState::giveBackResourceForDestroyedBuilding(
             int buildingIDORIfNegResourceType, int playerID, int param_3)
         {
+            // Matching note: The original uses one more stack slot (this is spilled), computes all five
+            // shares into registers and shares the pitch and gold tail between the branches. Our compiler allocates
+            // the shares differently; duplicating the tail per branch was not tried.
             // param_3 is the percentage of the costs that is given back
             if (param_3 == 0) {
                 return;
@@ -65,11 +68,12 @@ namespace Map {
             int gold;
             if (buildingIDORIfNegResourceType == -3) {
                 // Mangonel on a tower
-                int wood = this->buildingCosts[BT_MANGONEL].requiredWood * percentage / 100;
-                int stone = this->buildingCosts[BT_MANGONEL].requiredStone_0x4 * percentage / 100;
-                int iron = this->buildingCosts[BT_MANGONEL].requiredIron_0x8 * percentage / 100;
-                pitch = this->buildingCosts[BT_MANGONEL].requiredPitch_0xc * percentage / 100;
-                gold = this->buildingCosts[BT_MANGONEL].requiredGold * percentage / 100;
+                int wood = DAT_BuildingsState::instance.buildingCosts[BT_MANGONEL].requiredWood * percentage / 100;
+                int stone
+                    = DAT_BuildingsState::instance.buildingCosts[BT_MANGONEL].requiredStone_0x4 * percentage / 100;
+                int iron = DAT_BuildingsState::instance.buildingCosts[BT_MANGONEL].requiredIron_0x8 * percentage / 100;
+                pitch = DAT_BuildingsState::instance.buildingCosts[BT_MANGONEL].requiredPitch_0xc * percentage / 100;
+                gold = DAT_BuildingsState::instance.buildingCosts[BT_MANGONEL].requiredGold * percentage / 100;
                 if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
                         DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_WOOD, wood)
                     == FALSE) {
@@ -90,11 +94,12 @@ namespace Map {
                 }
             } else if (buildingIDORIfNegResourceType == -4) {
                 // Ballista on a tower
-                int wood = this->buildingCosts[BT_BALLISTA].requiredWood * percentage / 100;
-                int stone = this->buildingCosts[BT_BALLISTA].requiredStone_0x4 * percentage / 100;
-                int iron = this->buildingCosts[BT_BALLISTA].requiredIron_0x8 * percentage / 100;
-                pitch = this->buildingCosts[BT_BALLISTA].requiredPitch_0xc * percentage / 100;
-                gold = this->buildingCosts[BT_BALLISTA].requiredGold * percentage / 100;
+                int wood = DAT_BuildingsState::instance.buildingCosts[BT_BALLISTA].requiredWood * percentage / 100;
+                int stone
+                    = DAT_BuildingsState::instance.buildingCosts[BT_BALLISTA].requiredStone_0x4 * percentage / 100;
+                int iron = DAT_BuildingsState::instance.buildingCosts[BT_BALLISTA].requiredIron_0x8 * percentage / 100;
+                pitch = DAT_BuildingsState::instance.buildingCosts[BT_BALLISTA].requiredPitch_0xc * percentage / 100;
+                gold = DAT_BuildingsState::instance.buildingCosts[BT_BALLISTA].requiredGold * percentage / 100;
                 if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceGain,
                         DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_WOOD, wood)
                     == FALSE) {
@@ -115,11 +120,12 @@ namespace Map {
                 }
             } else {
                 int buildingType = this->buildings[buildingIDORIfNegResourceType].buildingType;
-                int wood = this->buildingCosts[buildingType].requiredWood * percentage / 100;
-                int stone = this->buildingCosts[buildingType].requiredStone_0x4 * percentage / 100;
-                int iron = this->buildingCosts[buildingType].requiredIron_0x8 * percentage / 100;
-                pitch = this->buildingCosts[buildingType].requiredPitch_0xc * percentage / 100;
-                gold = this->buildingCosts[buildingType].requiredGold * percentage / 100;
+                int wood = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredWood * percentage / 100;
+                int stone
+                    = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredStone_0x4 * percentage / 100;
+                int iron = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredIron_0x8 * percentage / 100;
+                pitch = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredPitch_0xc * percentage / 100;
+                gold = DAT_BuildingsState::instance.buildingCosts[buildingType].requiredGold * percentage / 100;
                 if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_SIEGE_THAT) {
                     MACRO_CALL_MEMBER(
                         OpenSHC::Map::Buildings::BuildingsState_Func::resourceGainForKillingPitAndPitchDitch, this)(
