@@ -10,6 +10,7 @@ namespace Map {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00532f60
         int UnitsState::getArmySize(int playerID) { return DAT_GameState::ptr->playerDataArray[playerID].armySize; }
+
     }
 
 }
