@@ -173,7 +173,7 @@ namespace Map {
                 &BuildingsState::isBuildingPathBlockerOrDamageable)
             isBuildingPathBlockerOrDamageable;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(uint), false, Address::SHC_3BB0A8C1_0x0040B900,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(uint, int), false, Address::SHC_3BB0A8C1_0x0040B900,
                 &BuildingsState::getBuildingHasHealthProperty)
             getBuildingHasHealthProperty;
 
