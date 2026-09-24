@@ -21,8 +21,8 @@ namespace Text {
             &TextEditorState::Constructor_TextEditorState)
         Constructor_TextEditorState;
 
-        MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(undefined4, undefined4, undefined4, undefined4), false,
-            Address::SHC_3BB0A8C1_0x0045D080, &TextEditorState::setHelpWindowBounds)
+        MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(int, int, int, int), false, Address::SHC_3BB0A8C1_0x0045D080,
+            &TextEditorState::setHelpWindowBounds)
         setHelpWindowBounds;
 
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(), false, Address::SHC_3BB0A8C1_0x0045D0C0,
@@ -169,7 +169,7 @@ namespace Text {
             &TextEditorState::openMapDescriptionEditorDialog)
         openMapDescriptionEditorDialog;
 
-        MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(char*, undefined4), false, Address::SHC_3BB0A8C1_0x004620F0,
+        MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(char*, int), false, Address::SHC_3BB0A8C1_0x004620F0,
             &TextEditorState::setCustomHelpText)
         setCustomHelpText;
 

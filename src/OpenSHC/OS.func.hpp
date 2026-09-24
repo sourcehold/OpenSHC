@@ -108,7 +108,7 @@ namespace OS_Func {
         Address::SHC_3BB0A8C1_0x00580A1D, &OpenSHC::OS::_wcsncpy)
     _wcsncpy;
 
-    MACRO_FUNCTION_RESOLVER(int(__cdecl*)(wchar_t* _Str1, wchar_t* _Str2), REIMPLEMENTED_CRT,
+    MACRO_FUNCTION_RESOLVER(int(__cdecl*)(wchar_t const* _Str1, wchar_t const* _Str2), REIMPLEMENTED_CRT,
         Address::SHC_3BB0A8C1_0x00580B69, &OpenSHC::OS::__wcsicmp)
     __wcsicmp;
 
@@ -178,6 +178,14 @@ namespace OS_Func {
     MACRO_FUNCTION_RESOLVER(
         void(__cdecl*)(int _Code), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x00583D55, &OpenSHC::OS::_exit)
     _exit;
+
+    MACRO_FUNCTION_RESOLVER(int(__cdecl*)(FILE*, wchar_t const*, ...), REIMPLEMENTED_CRT,
+        Address::SHC_3BB0A8C1_0x005807A8, &OpenSHC::OS::_fwprintf)
+    _fwprintf;
+
+    MACRO_FUNCTION_RESOLVER(
+        long(__cdecl*)(wchar_t const*), REIMPLEMENTED_CRT, Address::SHC_3BB0A8C1_0x00580C0B, &OpenSHC::OS::__wtol)
+    __wtol;
 
 } // namespace OS_Func
 } // namespace OpenSHC

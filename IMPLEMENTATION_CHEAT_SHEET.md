@@ -144,6 +144,7 @@ SEC_RNG::ptr->currentNumber1 % 4
   }
   ```
   Consider this, should a switch structure arise with strange fallthrough and loops, like SHC_3BB0A8C1_0x004870B0.
+- Non-consecutive case labels will likely result in a mixture of if-else and switch cases, sometimes even only if-elses. These are hard to spot. One sign, outside of weird decompiler artifacts, is that logic might be put inside a lot of conditions that feature only a single variable. Another can be a lot of GOTOs.
 
 ### Loops
 
@@ -195,6 +196,8 @@ If you see a repeating logic structure, that, for example, increments by a value
 you might have found an unrolled loop. Therefore, try to reproduce the logic in loop form and see how the compiler behaves.
 
 If GOTOs are present that clearly jump to the start of a loop, but the logic does not allow to do this without a GOTO, for example from a loop inside a loop, you might be able to move the continue or break condition to the outside. Methods could be placing a fitting condition related to the contained loop conditions after the loop or using a boolean flag that then functions as conditional. Both can sometimes be optimized away.
+
+If an explicit loop condition is removed from the compiler, it is able to prove all paths through the loop. If such a case happens where the condition is actually eliminated from the re-implementation, the re-implementation might be missing a condition that is present in the logic somewhere, but removed from the loop condition itself. The optimization pass failed to detect the resulting predictable loop in this latter case and the condition remains.
 
 ### GOTO
 
@@ -262,25 +265,36 @@ They are replaced by specific assembly instructions or otherwise inlined.
 A list of all intrinsics can be found in `intrin.h` in the std library, but these are mainly very low level instructions.
 However, there are also C functions that can be replaced by intrinsics. The following attempts to extract these from the header:
 
-| Intrinsic | Does                                                                                           |
-| --------- | ---------------------------------------------------------------------------------------------- |
-| `memcpy`  | Copies a memory block. **Does not support overlapping regions** (use `memmove` for overlap).   |
-| `memset`  | Fills a memory block with a byte value.                                                        |
-| `memcmp`  | Compares two memory blocks byte-by-byte.                                                       |
-| `memchr`  | Searches memory for the first occurrence of a byte.                                            |
-| `strcpy`  | Copies a null-terminated C string.                                                             |
-| `strlen`  | Returns the length of a null-terminated string (excluding `\0`).                               |
-| `strcmp`  | Compares two null-terminated C strings.                                                        |
-| `strcat`  | Appends one null-terminated C string to another.                                               |
-| `strncpy` | Copies up to N characters from a string; **may not null-terminate** if the source is too long. |
-| `strncmp` | Compares up to N characters of two strings.                                                    |
-| `wcscpy`  | Copies a null-terminated wide-character string.                                                |
-| `wcslen`  | Returns the length of a null-terminated wide string.                                           |
-| `ceil`    | Rounds a floating-point value upward to the nearest integer value.                             |
-| `abs`     | Returns the absolute value of an `int`.                                                        |
-| `labs`    | Returns the absolute value of a `long`.                                                        |
-| `longjmp` | Restores a saved execution context created by `setjmp`, continuing execution from that point.  |
-| `_setjmp` | Saves the current execution context for later restoration with `longjmp`.                      |
+| Intrinsic                 | Does                                                                                                                 |
+|---------------------------|----------------------------------------------------------------------------------------------------------------------|
+| `memcpy`                  | Copies a memory block. **Does not support overlapping regions** (use `memmove` for overlap).                         |
+| `memset`                  | Fills a memory block with a byte value.                                                                              |
+| `memcmp`                  | Compares two memory blocks byte-by-byte.                                                                             |
+| `memchr`                  | Searches memory for the first occurrence of a byte.                                                                  |
+| `strcpy`                  | Copies a null-terminated C string.                                                                                   |
+| `strlen`                  | Returns the length of a null-terminated string (excluding `\0`).                                                     |
+| `strcmp`                  | Compares two null-terminated C strings.                                                                              |
+| `strcat`                  | Appends one null-terminated C string to another.                                                                     |
+| `strncpy`                 | Copies up to N characters from a string; **may not null-terminate** if the source is too long.                       |
+| `strncmp`                 | Compares up to N characters of two strings.                                                                          |
+| `strset`                  | Sets every character in a null-terminated string to the specified character.                                         |
+| `_strset`                 | Microsoft-specific version of `strset`; sets every character in a null-terminated string to the specified character. |
+| `wcscpy`                  | Copies a null-terminated wide-character string.                                                                      |
+| `wcslen`                  | Returns the length of a null-terminated wide string.                                                                 |
+| `wcscmp`                  | Compares two null-terminated wide-character strings.                                                                 |
+| `wcscat`                  | Appends one null-terminated wide-character string to another.                                                        |
+| `wcsncpy`                 | Copies up to N wide characters; **may not null-terminate** if the source is too long.                                |
+| `wcsncmp`                 | Compares up to N wide characters of two strings.                                                                     |
+| `_wcsset`                 | Sets every character in a null-terminated wide string to the specified wide character.                               |
+| `ceil`                    | Returns the smallest integral floating-point value greater than or equal to the argument.                            |
+| `abs`                     | Returns the absolute value of an `int`.                                                                              |
+| `labs`                    | Returns the absolute value of a `long`.                                                                              |
+| `longjmp`                 | Restores a saved execution context created by `setjmp`, continuing execution from that point.                        |
+| `_setjmp`                 | Saves the current execution context for later restoration with `longjmp`.                                            |
+| `_AddressOfReturnAddress` | Returns the address of the current function's return-address storage.                                                |
+| `_WriteBarrier`           | Prevents certain compiler memory-write reorderings across the barrier.                                               |
+| `__trap`                  | Generates a processor/compiler trap, optionally with arguments.                                                      |
+
 
 In cases where the decompiler seems to perform one of these actions via simple instructions, one can also try one of these functions.
 

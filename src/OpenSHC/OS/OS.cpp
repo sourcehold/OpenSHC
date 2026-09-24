@@ -85,7 +85,7 @@ namespace OS {
     wchar_t* _wcsncpy(wchar_t* _Dest, wchar_t* _Source, size_t _Count) { return wcsncpy(_Dest, _Source, _Count); }
 
     // STUB: STRONGHOLDCRUSADER 0x00580B69
-    int __wcsicmp(wchar_t* _Str1, wchar_t* _Str2) { return _wcsicmp(_Str1, _Str2); }
+    int __wcsicmp(wchar_t const* _Str1, wchar_t const* _Str2) { return _wcsicmp(_Str1, _Str2); }
 
     // Only jumps to _free in game version
     // STUB: STRONGHOLDCRUSADER 0x00580DC1
@@ -145,6 +145,20 @@ namespace OS {
 
     // STUB: STRONGHOLDCRUSADER 0x00583D55
     void _exit(int _Code) { exit(_Code); }
+
+    // STUB: STRONGHOLDCRUSADER 0x005807A8
+    int _fwprintf(FILE* stream, wchar_t const* format, ...)
+    {
+        // needed for proxy
+        va_list args;
+        va_start(args, format);
+        int result = vfwprintf(stream, format, args);
+        va_end(args);
+        return result;
+    }
+
+    // STUB: STRONGHOLDCRUSADER 0x00580C0B
+    long __wtol(wchar_t const* str) { return _wtol(str); }
 
 }
 }
