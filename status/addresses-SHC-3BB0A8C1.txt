@@ -4971,7 +4971,7 @@ SHC_3BB0A8C1_0x0040D120 | 29.2% | Reimplemented functionally, code layout differ
 
 SHC_3BB0A8C1_0x0040D190 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0040D400 | 0.0% | Pending
+SHC_3BB0A8C1_0x0040D400 | 29.2% | Reimplemented functionally, code layout differs
 
 SHC_3BB0A8C1_0x0040D470 | 0.0% | Pending
 
