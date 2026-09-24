@@ -74,10 +74,10 @@ namespace Map {
             case 0:
                 this->DAT_TempYOffset -= offset;
                 break;
-            case 2:
+            case 4:
                 this->DAT_TempYOffset += offset;
                 break;
-            case 4:
+            case 2:
                 this->DAT_TempXOffset += offset;
                 break;
             case 6:
