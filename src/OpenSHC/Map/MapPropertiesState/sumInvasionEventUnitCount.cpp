@@ -1,16 +1,19 @@
 #include "OpenSHC/Map/MapPropertiesState.func.hpp"
 
+#include "OpenSHC/Globals/DAT_MapPropertiesState.hpp"
+
 namespace OpenSHC {
 namespace Map {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004BBA20
     int MapPropertiesState::sumInvasionEventUnitCount()
     {
-        this->DAT_InvasionEventItemUnitCountSum = 0;
+        int sum = 0;
         for (int i = 0; i < 25; ++i) {
-            this->DAT_InvasionEventItemUnitCountSum += this->invasionEventContent.unitCountsPerUnitType[i];
+            sum += DAT_MapPropertiesState::instance.invasionEventContent.unitCountsPerUnitType[i];
         }
-        return this->DAT_InvasionEventItemUnitCountSum;
+        this->DAT_InvasionEventItemUnitCountSum = sum;
+        return sum;
     }
 
 }
