@@ -16,7 +16,6 @@ namespace Map {
         {
             DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = stanceID;
             DAT_GameSynchronyState::instance.DAT_GameCommandParam1 = param_2;
-
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
                 OpenSHC::Commands::GCT_UNIT_STANCE);
         }
