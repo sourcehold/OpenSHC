@@ -11,7 +11,6 @@ namespace UI {
             // FUNCTION: STRONGHOLDCRUSADER 0x004AB4B0
             void MenuModalRenderFunction_TraderSettings(int x, int y, int width, int height)
             {
-
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner,
                     DAT_PencilRenderCore::ptr)(199, 0x26, x, y, width);
             }
