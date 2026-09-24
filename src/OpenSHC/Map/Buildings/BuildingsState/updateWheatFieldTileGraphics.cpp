@@ -57,10 +57,12 @@ namespace Map {
                 } else {
                     gfx = GMTotalPicturesProcessed::instance[14] + frame;
                 }
-                if (gfx != DAT_TileMapState::instance.GfxLayer[tile]) {
+                if (gfx == DAT_TileMapState::instance.GfxLayer[tile]) {
+                    if (--unchangedLeft == 0) {
+                        continue;
+                    }
+                } else {
                     DAT_TileMapState::instance.GfxLayer[tile] = gfx;
-                } else if (--unchangedLeft == 0) {
-                    continue;
                 }
                 if (DAT_BuildingsState::instance.field14_0x18e024 == 0) {
                     *(short*)DAT_BuildingsState::instance.buildings[buildingID].padding_0x2fc = (i + 1 + start) % 36;
