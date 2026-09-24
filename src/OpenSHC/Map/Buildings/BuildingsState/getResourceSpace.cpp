@@ -34,7 +34,8 @@ namespace Map {
                 }
                 if (this->buildings[i].buildingType == BT_ARMORY) {
                     space += MACRO_CALL_MEMBER(
-                        OpenSHC::Map::Buildings::BuildingsState_Func::computeArmoryRemainingCapacity, this)(i);
+                        OpenSHC::Map::Buildings::BuildingsState_Func::computeArmoryRemainingCapacity, this)(
+                        i, resource);
                 } else if (this->buildings[i].buildingType == BT_GRANARY) {
                     space += MACRO_CALL_MEMBER(
                         OpenSHC::Map::Buildings::BuildingsState_Func::getResourceCountThatCanBeDeposited, this)(
