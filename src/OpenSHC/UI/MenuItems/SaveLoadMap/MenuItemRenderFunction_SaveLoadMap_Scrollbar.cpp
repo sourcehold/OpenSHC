@@ -19,8 +19,8 @@ namespace UI {
                 int param_1, int thumbYPos, int param_3, int thumbHeight, BOOLEnum isDragged)
             {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawScrollbar,
-                    DAT_PencilRenderCore::ptr)(DAT_ButtonX::instance, (int)((int)(DAT_ButtonY::instance)),
-                    (int)((int)(DAT_ButtonH::instance)), thumbYPos, isDragged, thumbHeight, 0);
+                    DAT_PencilRenderCore::ptr)(DAT_ButtonX::instance, DAT_ButtonY::instance, DAT_ButtonH::instance,
+                    thumbYPos, isDragged, thumbHeight, 0);
             }
 
         }
