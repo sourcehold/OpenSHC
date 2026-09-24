@@ -9,9 +9,9 @@ namespace Map {
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00530D50
-    BOOLEnum Units::CheckUnitProductionPaused(int param_1)
+    BOOLEnum Units::CheckUnitProductionPaused(int unitID)
     {
-        return DAT_UnitsState::instance.units[param_1].field166_0x2fe == 1;
+        return DAT_UnitsState::instance.units[unitID].field166_0x2fe == 1;
     }
 
 }
