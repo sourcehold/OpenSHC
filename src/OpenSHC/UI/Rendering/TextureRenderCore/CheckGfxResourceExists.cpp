@@ -14,10 +14,10 @@ namespace UI {
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004548D0
-        BOOLEnum TextureRenderCore::checkGfxResourceExists(char* param_1)
+        BOOLEnum TextureRenderCore::checkGfxResourceExists(char* fileName)
         {
             MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::resolveResourceFileName, DAT_ResourceManager::ptr)(
-                OpenSHC::IO::FRT_GFX, (char const*)((int)(param_1)));
+                OpenSHC::IO::FRT_GFX, fileName);
             return MACRO_CALL_MEMBER(
                        OpenSHC::IO::ResourceManager_Func::getCurrentResourceSize, DAT_ResourceManager::ptr)()
                 != 0;
