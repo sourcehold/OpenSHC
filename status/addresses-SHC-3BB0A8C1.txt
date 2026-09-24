@@ -6507,7 +6507,7 @@ SHC_3BB0A8C1_0x00421990 | 58.2% | Reimplemented functionally, orig keeps regs ov
 
 SHC_3BB0A8C1_0x00421A40 | 30.6% | Reimplemented functionally, code layout differs
 
-SHC_3BB0A8C1_0x00421BE0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00421BE0 | 16.4% | Reimplemented functionally, code layout differs
 
 SHC_3BB0A8C1_0x00421D70 | 0.0% | Pending
 
