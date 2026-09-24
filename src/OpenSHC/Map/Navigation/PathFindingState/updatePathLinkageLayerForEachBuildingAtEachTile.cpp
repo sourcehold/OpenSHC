@@ -9,10 +9,10 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A5F60
         void PathFindingState::updatePathLinkageLayerForEachBuildingAtEachTile()
         {
-            for (int _tileIndex = 0; _tileIndex < 80400; _tileIndex++) {
+            for (int tileIndex = 0; tileIndex < 80400; ++tileIndex) {
                 MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkageLayerBasedOnBuildingsUnk, this)(
-                    DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tileIndex], _tileIndex);
+                    DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tileIndex], tileIndex);
             }
         }
 
