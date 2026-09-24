@@ -69,7 +69,8 @@ namespace Map {
             this->buildings[buildingID].fireDuration = 1;
             this->buildings[buildingID].ifFireThenResponsiblePlayer = burnerPlayerID;
             if (owner == DAT_GameSynchronyState::instance.currentPlayerSlotID
-                && DAT_GameCore::instance.mapTimeInTicks - DAT_GameState::instance.playerDataArray[owner].ignitionTime
+                && (int)DAT_GameCore::instance.mapTimeInTicks
+                        - DAT_GameState::instance.playerDataArray[owner].ignitionTime
                     > 800) {
                 DAT_GameState::instance.playerDataArray[owner].ignitionTime = DAT_GameCore::instance.mapTimeInTicks;
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
