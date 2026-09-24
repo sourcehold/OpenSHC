@@ -4,6 +4,7 @@
 #include "OpenSHC/Game/ScenarioEvents/InGameEventUnionVersion.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 
+#include "OpenSHC/Globals/DAT_MapPropertiesState.hpp"
 #include "OpenSHC/Globals/DAT_MenuTextInputState.hpp"
 
 namespace OpenSHC {
@@ -17,7 +18,7 @@ namespace Map {
     {
         this->eventType = eventType;
         MACRO_CALL_MEMBER(OpenSHC::Game::ScenarioEvents::InGameEventUnionVersion_Func::resetEvent,
-            (InGameEventUnionVersion*)&this->invasionEvent)();
+            (InGameEventUnionVersion*)&DAT_MapPropertiesState::instance.invasionEvent)();
         MACRO_CALL_MEMBER(OpenSHC::UI::MenuTextInputState_Func::activateModalDialogAndClearText,
             DAT_MenuTextInputState::ptr)(OpenSHC::UI::Enums::MMT_TRIGGER_EVENT_OR_INVASION);
     }
