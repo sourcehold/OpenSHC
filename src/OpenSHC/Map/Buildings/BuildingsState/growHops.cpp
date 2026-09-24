@@ -41,7 +41,11 @@ namespace Map {
                 }
             }
 
-            if (growing > 5 || (growing != 0 && ripe != 0)) {
+            if (growing >= 6) {
+                *(short*)&this->buildings[buildingID].wheatGrowStateRelated = 5;
+                return;
+            }
+            if (growing != 0 && ripe != 0) {
                 *(short*)&this->buildings[buildingID].wheatGrowStateRelated = 5;
                 return;
             }
