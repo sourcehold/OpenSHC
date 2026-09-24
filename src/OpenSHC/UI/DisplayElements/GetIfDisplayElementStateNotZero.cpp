@@ -15,10 +15,10 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004AF6E0
         BOOLEnum GetIfDisplayElementStateNotZero(DisplayElementID displayElementID)
         {
-            DisplayElement* _displayElementPtr
+            DisplayElement* const displayElement
                 = MACRO_CALL(OpenSHC::UI::DisplayElements_Func::FindDisplayElementWithID)(displayElementID);
-            if (_displayElementPtr != NULL) {
-                return _displayElementPtr->elementStateUnk_0xc != 0;
+            if (displayElement != NULL) {
+                return displayElement->elementStateUnk_0xc != 0;
             }
             return FALSE;
         }
