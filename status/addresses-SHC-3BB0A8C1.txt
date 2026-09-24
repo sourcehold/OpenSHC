@@ -6127,7 +6127,7 @@ SHC_3BB0A8C1_0x0041C310 | 43.6% | Reimplemented functionally, register allocatio
 
 SHC_3BB0A8C1_0x0041C570 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0041C6F0 | 24.8% | Reimplemented functionally, code layout differs
+SHC_3BB0A8C1_0x0041C6F0 | 45.3% | Reimplemented functionally, register allocation differs
 
 SHC_3BB0A8C1_0x0041C810 | 100.0% | Reimplemented
 
