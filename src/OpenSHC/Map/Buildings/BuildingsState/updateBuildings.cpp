@@ -6,6 +6,7 @@
 
 #include "OpenSHC/Globals/DAT_AIVState.hpp"
 #include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
+#include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_CurrentBuildingID.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -86,7 +87,7 @@ namespace Map {
                     this->buildings[DAT_CurrentBuildingID::instance].recruitTimer = 0;
                 }
                 ++this->buildings[DAT_CurrentBuildingID::instance].timeAlive;
-                int owner = this->buildings[DAT_CurrentBuildingID::instance].owner;
+                int owner = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;
                 if (this->buildings[DAT_CurrentBuildingID::instance].idleTimerUnk != 0) {
                     if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[owner] == -1
                         && DAT_GameSynchronyState::instance.currentAIArray[owner] != 0) {
