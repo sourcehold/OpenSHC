@@ -13,13 +13,13 @@ namespace UI {
             using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
             // FUNCTION: STRONGHOLDCRUSADER 0x0042C060
-            void MenuItemRenderFunction_SelectCrusade_Main(int param_1, ...)
+            void MenuItemRenderFunction_SelectCrusade_Main(int skirmishType, ...)
             {
-                if (param_1 == -1) {
+                if (skirmishType == -1) {
                     DAT_HighlightedSkirmishType::instance = 0;
                 }
                 if (DAT_ButtonCurrentlyInteracting::instance != FALSE) {
-                    DAT_HighlightedSkirmishType::instance = param_1;
+                    DAT_HighlightedSkirmishType::instance = skirmishType;
                 }
                 MACRO_CALL(OpenSHC::UI::MenuItems::General_Func::
                         MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
