@@ -12,11 +12,11 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004AF630
         DisplayElement* FindDisplayElementWithID(int elementID)
         {
-            DisplayElement* _pCurrent = DAT_PointerToDisplayElementStackTop::instance;
-            while (_pCurrent != NULL) {
-                if (_pCurrent->elementID_0x8 == elementID)
-                    return _pCurrent;
-                _pCurrent = _pCurrent->nextDisplayElement_0x20;
+            for (DisplayElement* element = DAT_PointerToDisplayElementStackTop::instance; element != NULL;
+                element = element->nextDisplayElement_0x20) {
+                if (element->elementID_0x8 == elementID) {
+                    return element;
+                }
             }
             return NULL;
         }
