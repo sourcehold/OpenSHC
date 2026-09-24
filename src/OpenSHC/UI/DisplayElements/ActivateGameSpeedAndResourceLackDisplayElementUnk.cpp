@@ -13,13 +13,12 @@ namespace UI {
         void ActivateGameSpeedAndResourceLackDisplayElementUnk(
             DisplayElementID elementId, dword elementState, int displayDuration)
         {
-            DisplayElement* _displayElementPtr
+            DisplayElement* const displayElement
                 = MACRO_CALL(OpenSHC::UI::DisplayElements_Func::FindDisplayElementWithID)(elementId);
-            if (_displayElementPtr != (DisplayElement*)0x0) {
-                _displayElementPtr->elementStateUnk_0xc = elementState;
-                _displayElementPtr->displayDuration_0x14 = displayDuration;
-                DWORD _currentTime = timeGetTime();
-                _displayElementPtr->activationTime_0x10 = _currentTime;
+            if (displayElement != NULL) {
+                displayElement->elementStateUnk_0xc = elementState;
+                displayElement->displayDuration_0x14 = displayDuration;
+                displayElement->activationTime_0x10 = timeGetTime();
             }
         }
 
