@@ -5139,7 +5139,7 @@ SHC_3BB0A8C1_0x00410290 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00410320 | 46.3% | Reimplemented functionally, code layout differs
 
-SHC_3BB0A8C1_0x00410440 | 47.1% | Reimplemented functionally, code layout differs
+SHC_3BB0A8C1_0x00410440 | 90.7% | Reimplemented functionally, store order differs
 
 SHC_3BB0A8C1_0x004105F0 | 82.2% | Reimplemented functionally, register allocation differs
 
