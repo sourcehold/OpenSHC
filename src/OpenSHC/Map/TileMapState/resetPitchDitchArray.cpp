@@ -13,9 +13,9 @@ namespace Map {
     void TileMapState::resetPitchDitchArray()
     {
         this->maxPitchDitchCount = 4000;
-        for (int i = 0; i < 4000; i++) {
+        for (int i = 0; i < 4000; ++i) {
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                0x14, 0, &this->pitchDitches[i]);
+                sizeof(this->pitchDitches[i]), 0, &this->pitchDitches[i]);
         }
     }
 
