@@ -8,11 +8,11 @@ namespace UI {
         namespace ChooseNetworkServiceProvider {
 
             // FUNCTION: STRONGHOLDCRUSADER 0x0047D0E0
-            void MenuItemActionHandler_ChooseNetworkServiceProvider_ModemTableRows(int param_1, ...)
+            void MenuItemActionHandler_ChooseNetworkServiceProvider_ModemTableRows(int row, ...)
             {
-                if (DAT_GameSynchronyState::instance.modemScrollBarOffset + param_1
+                if (DAT_GameSynchronyState::instance.modemScrollBarOffset + row
                     < DAT_GameSynchronyState::instance.modemScrollbarCount) {
-                    DAT_GameSynchronyState::instance.modemScrollbarIndex = param_1;
+                    DAT_GameSynchronyState::instance.modemScrollbarIndex = row;
                 }
             }
 
