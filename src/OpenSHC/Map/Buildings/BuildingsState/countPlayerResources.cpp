@@ -27,17 +27,21 @@ namespace Map {
                 if (this->buildings[i].logicalState != BLS_NORMAL || this->buildings[i].owner != playerID) {
                     continue;
                 }
-                if (this->buildings[i].buildingType == BT_STOCKPILE) {
-                    for (int r = OpenSHC::Game::Resources::RT_WOOD; r <= OpenSHC::Game::Resources::RT_FLOUR; ++r) {
-                        DAT_GameState::instance.playerDataArray[playerID].currentResources[r]
-                            += this->buildings[i].resources[r];
-                    }
-                } else if (this->buildings[i].buildingType == BT_GRANARY) {
+                if (this->buildings[i].buildingType != BT_STOCKPILE && this->buildings[i].buildingType != BT_GRANARY
+                    && this->buildings[i].buildingType != BT_ARMORY) {
+                    continue;
+                }
+                if (this->buildings[i].buildingType == BT_GRANARY) {
                     for (int r = OpenSHC::Game::Resources::RT_BREAD; r <= OpenSHC::Game::Resources::RT_APPLE; ++r) {
                         DAT_GameState::instance.playerDataArray[playerID].currentResources[r]
                             += this->buildings[i].resources[r];
                     }
-                } else if (this->buildings[i].buildingType == BT_ARMORY) {
+                } else if (this->buildings[i].buildingType == BT_STOCKPILE) {
+                    for (int r = OpenSHC::Game::Resources::RT_WOOD; r <= OpenSHC::Game::Resources::RT_FLOUR; ++r) {
+                        DAT_GameState::instance.playerDataArray[playerID].currentResources[r]
+                            += this->buildings[i].resources[r];
+                    }
+                } else {
                     for (int r = OpenSHC::Game::Resources::RT_BOW; r < 25; ++r) {
                         DAT_GameState::instance.playerDataArray[playerID].currentResources[r]
                             += this->buildings[i].resources[r];
