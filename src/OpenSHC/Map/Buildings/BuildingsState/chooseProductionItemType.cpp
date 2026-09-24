@@ -20,20 +20,24 @@ namespace Map {
             for (int i = 1; i < this->maxBuildingsCount; ++i) {
                 if (this->buildings[i].logicalState == BLS_NORMAL && this->buildings[i].owner == playerID
                     && this->buildings[i].buildingType == buildingType) {
-                    bool producesFirst;
                     if (buildingType == BT_BLACKSMITH) {
-                        producesFirst = this->buildings[i].producedItemTypeNext == OpenSHC::Game::Resources::RT_SWORD;
+                        if (this->buildings[i].producedItemTypeNext == OpenSHC::Game::Resources::RT_SWORD) {
+                            ++first;
+                        } else {
+                            ++second;
+                        }
                     } else if (buildingType == BT_POLETURNER) {
-                        producesFirst = this->buildings[i].producedItemTypeNext == OpenSHC::Game::Resources::RT_SPEAR;
+                        if (this->buildings[i].producedItemTypeNext == OpenSHC::Game::Resources::RT_SPEAR) {
+                            ++first;
+                        } else {
+                            ++second;
+                        }
                     } else if (buildingType == BT_FLETCHER) {
-                        producesFirst = this->buildings[i].producedItemTypeNext == OpenSHC::Game::Resources::RT_BOW;
-                    } else {
-                        continue;
-                    }
-                    if (producesFirst) {
-                        ++first;
-                    } else {
-                        ++second;
+                        if (this->buildings[i].producedItemTypeNext == OpenSHC::Game::Resources::RT_BOW) {
+                            ++first;
+                        } else {
+                            ++second;
+                        }
                     }
                 }
             }
