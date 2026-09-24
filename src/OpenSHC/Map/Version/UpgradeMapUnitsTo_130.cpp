@@ -17,11 +17,11 @@ namespace Map {
     void Version::UpgradeMapUnitsTo_130()
     {
         DAT_CurrentUnitSlotID::instance = 2500;
-        for (int i = 1; i < 2500; i++) {
-            if (DAT_UnitsState::instance.units[i].logicalState == Units::ULS_NORMAL
-                && DAT_UnitsState::instance.units[i].unitType == Units::UT_COW) {
-                DAT_UnitsState::instance.units[i].digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300
-                    = 0;
+        for (int unitID = 1; unitID < 2500; ++unitID) {
+            if (DAT_UnitsState::instance.units[unitID].logicalState == Units::ULS_NORMAL
+                && DAT_UnitsState::instance.units[unitID].unitType == Units::UT_COW) {
+                DAT_UnitsState::instance.units[unitID]
+                    .digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300 = 0;
             }
         }
     }
