@@ -8,7 +8,7 @@ namespace UI {
         void TextureRenderCore::setMapSurfaceHeightRangeUnk()
         {
             this->mapGameSurfaceHeightRange.start = 0;
-            this->mapGameSurfaceHeightRange.end = 0x81b;
+            this->mapGameSurfaceHeightRange.end = 2075;
         }
 
     } // namespace Rendering
