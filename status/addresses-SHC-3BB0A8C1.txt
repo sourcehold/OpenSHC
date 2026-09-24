@@ -6109,7 +6109,7 @@ SHC_3BB0A8C1_0x0041BC10 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0041BCA0 | 89.0% | Reimplemented functionally, register allocation differs
 
-SHC_3BB0A8C1_0x0041BD70 | 32.8% | Reimplemented functionally, code layout differs
+SHC_3BB0A8C1_0x0041BD70 | 72.4% | Reimplemented functionally, code layout differs
 
 SHC_3BB0A8C1_0x0041BE30 | 0.0% | Pending
 
