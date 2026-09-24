@@ -14,8 +14,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051AC80
         BOOLEnum TroopValueState::attackInfoHasHigh2Building(int buildingID)
         {
-            for (int i = 0; i < 1000; i++) {
-                // fixme: this function doesn't use this-> (would be not 100% matching!)
+            for (int i = 0; i < 1000; ++i) {
                 if (buildingID == DAT_TroopValueState::instance.attackInfo.high2ValuesArray[i].buildingID) {
                     return TRUE;
                 }
