@@ -11,8 +11,9 @@ namespace UI {
     void Helpers::CheckIfEnoughGoldForTunneler()
     {
         DAT_EnoughGoldForRequestedUnit::instance
-            = 0x1e <= DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                          .currentResources[0xf];
+            = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                  .currentResources[OpenSHC::Game::Resources::RT_GOLD]
+            >= 30;
     }
 
 }
