@@ -7,13 +7,11 @@ namespace Map {
     int TileMapState::getUnownedMoatCount()
     {
         int unownedMoatCount = 0;
-
-        for (int i = 1; i < 16000; i++) {
+        for (int i = 1; i < 16000; ++i) {
             if (this->moats[i].owner == 0) {
                 unownedMoatCount += 1;
             }
         }
-
         return unownedMoatCount;
     }
 
