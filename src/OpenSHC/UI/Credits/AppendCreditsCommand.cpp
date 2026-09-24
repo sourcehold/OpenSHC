@@ -8,11 +8,11 @@ namespace UI {
     namespace Credits {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004DA7E0
-        void AppendCreditsCommand(int param_1)
+        void AppendCreditsCommand(int command)
         {
-            if (DAT_UnknownBinkCount::instance < 0x120) {
-                DAT_ARRAY_00eb9b68::instance[DAT_UnknownBinkCount::instance].field0_0x0 = param_1;
-                DAT_UnknownBinkCount::instance = DAT_UnknownBinkCount::instance + 1;
+            if ((int)DAT_UnknownBinkCount::instance < 288) {
+                DAT_ARRAY_00eb9b68::instance[DAT_UnknownBinkCount::instance].field0_0x0 = command;
+                DAT_UnknownBinkCount::instance += 1;
             }
         }
 
