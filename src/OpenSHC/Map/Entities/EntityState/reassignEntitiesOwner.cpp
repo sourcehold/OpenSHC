@@ -5,11 +5,12 @@ namespace Map {
     namespace Entities {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00401AE0
-        void EntityState::reassignEntitiesOwner(int param_1, undefined4 param_2)
+        void EntityState::reassignEntitiesOwner(int fromPlayerID, undefined4 toPlayerID)
         {
-            for (int index = 1; index < 3000; index++) {
-                if ((this->entityArray[index].logicalState == 2) && (this->entityArray[index].owner == param_1)) {
-                    this->entityArray[index].owner = param_2;
+            for (int entityID = 1; entityID < 3000; ++entityID) {
+                if (this->entityArray[entityID].logicalState == 2
+                    && this->entityArray[entityID].owner == fromPlayerID) {
+                    this->entityArray[entityID].owner = toPlayerID;
                 }
             }
         }
