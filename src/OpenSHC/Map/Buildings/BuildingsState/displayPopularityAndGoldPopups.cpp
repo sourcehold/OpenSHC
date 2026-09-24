@@ -29,10 +29,6 @@ namespace Map {
             int heightOffset;
             EntityType entityType;
             switch (this->buildings[buildingID].buildingType) {
-            case BT_MARKETPLACE:
-                heightOffset = 80;
-                entityType = param_2 != 0 ? (EntityType)0x2b : (EntityType)0x2a;
-                break;
             case BT_MANORHOUSE:
             case BT_STONEKEEP:
             case BT_STRONGHOLD:
@@ -42,6 +38,10 @@ namespace Map {
             case BT_CAMPGROUND:
                 entityType = (EntityType)0x29;
                 heightOffset = 40;
+                break;
+            case BT_MARKETPLACE:
+                heightOffset = 80;
+                entityType = param_2 != 0 ? (EntityType)0x2b : (EntityType)0x2a;
                 break;
             default:
                 return;
