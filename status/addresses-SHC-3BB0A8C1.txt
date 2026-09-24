@@ -59625,7 +59625,7 @@ SHC_3BB0A8C1_0x0053B210 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0053B260 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0053B310 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053B310 | 90.0% | Global store scheduling
 
 SHC_3BB0A8C1_0x0053B340 | 53.3% | Loop unrolled x3, orig not
 

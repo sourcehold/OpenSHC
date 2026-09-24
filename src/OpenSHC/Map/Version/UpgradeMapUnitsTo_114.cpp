@@ -15,9 +15,9 @@ namespace Map {
     void Version::UpgradeMapUnitsTo_114()
     {
         DAT_CurrentUnitSlotID::instance = 2500;
-        for (int i = 1; i < 2500; i++) {
-            if (DAT_UnitsState::instance.units[i].logicalState == Units::ULS_NORMAL) {
-                DAT_UnitsState::instance.units[i].calculatedOwnerPlayerIndex = 0;
+        for (int unitID = 1; unitID < 2500; ++unitID) {
+            if (DAT_UnitsState::instance.units[unitID].logicalState == Units::ULS_NORMAL) {
+                DAT_UnitsState::instance.units[unitID].calculatedOwnerPlayerIndex = 0;
             }
         }
     }
