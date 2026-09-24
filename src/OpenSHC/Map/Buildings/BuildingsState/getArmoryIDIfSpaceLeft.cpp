@@ -13,9 +13,13 @@ namespace Map {
         uint BuildingsState::getArmoryIDIfSpaceLeft(
             uint buildingID, undefined4 resourceID, int playerID, int resourceCount)
         {
-            if (this->buildings[buildingID].buildingType != BT_ARMORY
-                || this->buildings[buildingID].logicalState != BLS_NORMAL
-                || this->buildings[buildingID].owner != playerID) {
+            if (this->buildings[buildingID].buildingType != BT_ARMORY) {
+                return 0;
+            }
+            if (this->buildings[buildingID].logicalState != BLS_NORMAL) {
+                return 0;
+            }
+            if (this->buildings[buildingID].owner != playerID) {
                 return 0;
             }
             int spaceLeft = 50;
