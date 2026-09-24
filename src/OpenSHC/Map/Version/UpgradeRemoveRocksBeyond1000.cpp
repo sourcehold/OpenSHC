@@ -13,9 +13,9 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004F3900
     void Version::UpgradeRemoveRocksBeyond1000()
     {
-        for (int i = 2000; i < 4000; i += 1) {
+        for (int i = 2000; i < 4000; ++i) {
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                32, 0, &DAT_LandscapeState::instance.rocks[i]);
+                sizeof(DAT_LandscapeState::instance.rocks[i]), 0, &DAT_LandscapeState::instance.rocks[i]);
         }
     }
 
