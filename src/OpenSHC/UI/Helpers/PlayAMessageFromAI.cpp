@@ -17,11 +17,12 @@ namespace UI {
          */
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004B7F60
-        void PlayAMessageFromAI(uint param_1, int param_2)
+        void PlayAMessageFromAI(uint messageIndex, int speakerIndex)
         {
-            if ((param_1 < 0x11) && (param_2 - 1U < 0x21)) {
-                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)((char const*)
-                        DAT_MissionAestheticsDefinedData::instance.field92_0x170[param_2 * 0x11 + param_1 + -0xc]);
+            if (messageIndex <= 16 && speakerIndex - 1U <= 32) {
+                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
+                    (char const*)DAT_MissionAestheticsDefinedData::instance
+                        .field92_0x170[speakerIndex * 17 + messageIndex - 12]);
             }
         }
 
