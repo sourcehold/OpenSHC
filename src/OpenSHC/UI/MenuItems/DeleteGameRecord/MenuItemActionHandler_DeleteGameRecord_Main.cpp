@@ -16,9 +16,9 @@ namespace UI {
             using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
             // FUNCTION: STRONGHOLDCRUSADER 0x004D9D60
-            void MenuItemActionHandler_DeleteGameRecord_Main(int param_1, ...)
+            void MenuItemActionHandler_DeleteGameRecord_Main(int action, ...)
             {
-                if (param_1 == 0x16) {
+                if (action == 22) {
                     MACRO_CALL(OpenSHC::Game::Skirmish_Func::SkirmishLeaderboard_DeleteEntry)(DAT_00ed2788::instance);
                     MACRO_CALL(OpenSHC::Game::Skirmish_Func::Skirmish_PrepareLeaderboardView)();
                 }
