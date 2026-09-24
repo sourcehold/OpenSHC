@@ -17,14 +17,14 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004AF650
         void CheckDisplayElementByIDAndSetForUnlimitedDisplay(DisplayElementID displayElementID, dword elementState)
         {
-            DisplayElement* _displayElementPtr
+            DisplayElement* const displayElement
                 = MACRO_CALL(OpenSHC::UI::DisplayElements_Func::FindDisplayElementWithID)(displayElementID);
-            if (_displayElementPtr != NULL) {
-                if (_displayElementPtr->elementStateUnk_0xc != elementState) {
+            if (displayElement != NULL) {
+                if (displayElement->elementStateUnk_0xc != elementState) {
                     BOOL_RelatedToInitialGranaryAndKeepPlacement::instance = FALSE;
                 }
-                _displayElementPtr->elementStateUnk_0xc = elementState;
-                _displayElementPtr->displayDuration_0x14 = -1;
+                displayElement->elementStateUnk_0xc = elementState;
+                displayElement->displayDuration_0x14 = -1;
             }
         }
 
