@@ -12,8 +12,10 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0040A4A0
         BOOLEnum BuildingsState::isReligiousBuilding(int buildingID)
         {
-            if (this->buildings[buildingID].buildingType == BT_CHAPEL
-                || this->buildings[buildingID].buildingType == BT_CHURCH) {
+            if (this->buildings[buildingID].buildingType == BT_CHAPEL) {
+                return TRUE;
+            }
+            if (this->buildings[buildingID].buildingType == BT_CHURCH) {
                 return TRUE;
             }
             return (BOOLEnum)(this->buildings[buildingID].buildingType == BT_CATHEDRAL);
