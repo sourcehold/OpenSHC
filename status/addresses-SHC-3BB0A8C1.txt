@@ -3943,7 +3943,7 @@ SHC_3BB0A8C1_0x0040A254 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0040A255 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0040A260 | 0.0% | Pending
+SHC_3BB0A8C1_0x0040A260 | 71.5% | Reimplemented functionally, code layout differs
 
 SHC_3BB0A8C1_0x0040A3BC | 0.0% | Pending
 
