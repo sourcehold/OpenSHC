@@ -10,7 +10,7 @@ namespace UI {
     using OpenSHC::Map::Buildings::BuildingType;
 
     /*
-      Sets DAT_00df5588 (tutorial action type) and DAT_00df558c (building type) unless param_1 is 0xb
+      Sets DAT_00df5588 (tutorial action type) and DAT_00df558c (building type) unless actionState is 11
        and DAT_00df5588 is already 7 — in which case the update is skipped to avoid overwriting a
        pending state. Used to record which building-related action the player last performed for
        tutorial step evaluation.
@@ -19,10 +19,10 @@ namespace UI {
      */
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004BC690
-    void Helpers::SetTutorialBuildingActionState(int param_1, BuildingType buildingType)
+    void Helpers::SetTutorialBuildingActionState(int actionState, BuildingType buildingType)
     {
-        if ((param_1 != 0xb) || (DAT_00df5588::instance != 7)) {
-            DAT_00df5588::instance = param_1;
+        if (actionState != 11 || DAT_00df5588::instance != 7) {
+            DAT_00df5588::instance = actionState;
             DAT_00df558c::instance = buildingType;
         }
     }
