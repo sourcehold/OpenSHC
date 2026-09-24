@@ -29,10 +29,10 @@ namespace Map {
             }
             if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::isFearFactorBuilding, this)(buildingID)
                 != 0) {
-                MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::recomputeAllFearFactors, this)();
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Map::Buildings::BuildingsState_Func::recomputeAllFearFactors, DAT_BuildingsState::ptr)();
             }
-            if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::isReligiousBuilding,
-                    DAT_BuildingsState::ptr)(buildingID)
+            if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::isReligiousBuilding, this)(buildingID)
                 != FALSE) {
                 MACRO_CALL_MEMBER(
                     OpenSHC::Game::GameStateStructures_Func::recomputeReligionBonuses, DAT_GameState::ptr)();
