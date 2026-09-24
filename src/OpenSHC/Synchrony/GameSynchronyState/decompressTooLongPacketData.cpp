@@ -11,10 +11,10 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x0047E800
     void GameSynchronyState::decompressTooLongPacketData(byte* source, byte* destination)
     {
-        size_t _size = MACRO_CALL_MEMBER(OpenSHC::IO::DecoderState_Func::decompressRLE, DAT_DecoderState::ptr)(
-            (char*)source, (char*)((int)(this->DAT_PacketDecodingDestination)));
+        size_t const size = MACRO_CALL_MEMBER(OpenSHC::IO::DecoderState_Func::decompressRLE, DAT_DecoderState::ptr)(
+            (char*)source, (char*)this->DAT_PacketDecodingDestination);
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::copyData, DAT_LowLevelMemory::ptr)(
-            _size, (void*)((int)(this->DAT_PacketDecodingDestination)), destination);
+            size, this->DAT_PacketDecodingDestination, destination);
     }
 
 }
