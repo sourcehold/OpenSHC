@@ -21,6 +21,9 @@ namespace Map {
         undefined4 BuildingsState::determineBuildingEntranceFromKeepArea(
             int buildingID, int workerIndexPlus1, BOOLEnum flag)
         {
+            // Matching note: The original keeps pointers to the building fields (x, y, entry) in stack
+            // slots and keeps this and the building offset in separate registers; our compiler folds them into one
+            // base register. The loop bodies are otherwise the same.
             // Finds an entrance tile of the building that can be reached from the campground of the owner.
             // flag enlarges the area around the building by one tile, workerIndexPlus1 - 1 matching tiles are skipped.
             // Returns 1 if an entrance was found, 2 if only an unreachable one (e.g. behind a locked gate) and 0
@@ -32,13 +35,13 @@ namespace Map {
                       .PathConnectionLayer[DAT_GameState::instance.playerDataArray[playerID].campground.tileEntry];
             int found = 0;
             int heightStep = 16;
-            if (this->buildings[buildingID].buildingType == BT_QUARRY) {
+            if (DAT_BuildingsState::instance.buildings[buildingID].buildingType == BT_QUARRY) {
                 heightStep = 32;
             }
             int size = this->buildings[buildingID].widthOrHeight + flag * 2;
             int tileCount = DAT_BuildingDefinedData::instance.BuildingAccessibleTilesCount[size];
             if (tileCount > 0) {
-                index = this->buildings[buildingID].entranceAttemptTileIndex % tileCount;
+                index = (short)this->buildings[buildingID].entranceAttemptTileIndex % tileCount;
                 this->buildings[buildingID].entranceAttemptTileIndex = index;
             }
             int height = this->buildings[buildingID].terrainHeightUnk;
@@ -128,7 +131,7 @@ namespace Map {
             if (tileCount <= 0) {
                 index = 0;
             } else {
-                index = this->buildings[buildingID].entranceAttemptTileIndex % tileCount;
+                index = (short)this->buildings[buildingID].entranceAttemptTileIndex % tileCount;
                 this->buildings[buildingID].entranceAttemptTileIndex = index;
             }
             for (int tries = 0; tries < tileCount; ++tries) {
