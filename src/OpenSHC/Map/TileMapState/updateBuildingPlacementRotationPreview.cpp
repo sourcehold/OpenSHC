@@ -7,12 +7,12 @@ namespace Map {
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00504EE0
-    void TileMapState::updateBuildingPlacementRotationPreview(int param_1, int param_2)
+    void TileMapState::updateBuildingPlacementRotationPreview(int x, int y)
     {
-        BOOLEnum _previous = this->buildingPlacementFail;
+        BOOLEnum const previousPlacementFail = this->buildingPlacementFail;
         this->buildingPlacementFail = FALSE;
-        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::determineBuildingPlacementRotation, this)(param_1, param_2);
-        this->buildingPlacementFail = _previous;
+        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::determineBuildingPlacementRotation, this)(x, y);
+        this->buildingPlacementFail = previousPlacementFail;
     }
 
 }
