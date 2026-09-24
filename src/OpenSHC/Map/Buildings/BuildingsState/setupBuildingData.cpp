@@ -62,6 +62,8 @@ namespace Map {
         int BuildingsState::setupBuildingData(int playerID, uint x, uint y, undefined4 averageHeight,
             BuildingType buildingType, uint width, int playerID_dup, int variationIndex)
         {
+            // Matching note: The remaining differences are mostly register and stack slot allocation in the
+            // large initialisation block and the building type switch.
             // Places a new building of the type at (x, y) and returns its ID
             if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY) {
                 playerID_dup = 0;
@@ -400,7 +402,8 @@ namespace Map {
                 {
                     int dogID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
                         0, playerID, this->buildings[buildingID].buildingEntryX * 8,
-                        this->buildings[buildingID].buildingEntryY * 8, this->buildings[buildingID].terrainHeightUnk,
+                        this->buildings[buildingID].buildingEntryY * 8,
+                        DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk,
                         OpenSHC::Map::Units::UT_CAGEDOG);
                     if (dogID != 0) {
                         DAT_UnitsState::instance.units[dogID].workplaceBuildingID_1 = buildingID;
@@ -416,7 +419,8 @@ namespace Map {
                 {
                     int dogID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
                         0, playerID, this->buildings[buildingID].buildingEntryX * 8,
-                        this->buildings[buildingID].buildingEntryY * 8, this->buildings[buildingID].terrainHeightUnk,
+                        this->buildings[buildingID].buildingEntryY * 8,
+                        DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk,
                         OpenSHC::Map::Units::UT_CAGEDOG);
                     if (dogID != 0) {
                         DAT_UnitsState::instance.units[dogID].workplaceBuildingID_1 = buildingID;
