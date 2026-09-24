@@ -13,18 +13,13 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004A9EB0
     MenuModal* MenuModalComposition::findModalMenu(MenuModalType menuModalID)
     {
-        MenuModal* pMVar1;
-
-        pMVar1 = DAT_ModalMenuArrayPointerToStackTop::instance;
-        while (true) {
-            if (pMVar1 == (MenuModal*)0x0) {
-                return (MenuModal*)0x0;
+        for (MenuModal* modal = DAT_ModalMenuArrayPointerToStackTop::instance; modal != NULL;
+            modal = modal->pointerToNextModalMenu) {
+            if (modal->menuModalID == menuModalID) {
+                return modal;
             }
-            if (pMVar1->menuModalID == menuModalID)
-                break;
-            pMVar1 = pMVar1->pointerToNextModalMenu;
         }
-        return pMVar1;
+        return NULL;
     }
 
 }
