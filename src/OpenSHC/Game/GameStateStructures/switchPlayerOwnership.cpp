@@ -10,7 +10,7 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x0045B460
     void GameStateStructures::switchPlayerOwnership(int playerID)
     {
-        for (int fromPlayer = 1; fromPlayer < 9; fromPlayer++) {
+        for (int fromPlayer = 1; fromPlayer < 9; ++fromPlayer) {
             if (fromPlayer != playerID) {
                 MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::changePlayerOwnership, this)(
                     fromPlayer, playerID);
