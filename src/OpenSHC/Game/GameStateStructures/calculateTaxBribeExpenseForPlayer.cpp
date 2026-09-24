@@ -6,11 +6,11 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x00459140
     int GameStateStructures::calculateTaxBribeExpenseForPlayer(int playerIndex, int taxStep, int currentPopulation)
     {
-        int _taxIncome = ((5 - taxStep) * currentPopulation) / 2;
-        if (this->playerDataArray[playerIndex].currentResources[0xf] <= 0) {
-            _taxIncome = 0;
+        int bribeExpense = ((5 - taxStep) * currentPopulation) / 2;
+        if (this->playerDataArray[playerIndex].currentResources[OpenSHC::Game::Resources::RT_GOLD] <= 0) {
+            bribeExpense = 0;
         }
-        return _taxIncome;
+        return bribeExpense;
     }
 
 }
