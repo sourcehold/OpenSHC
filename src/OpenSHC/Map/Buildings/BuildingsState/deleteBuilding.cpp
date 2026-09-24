@@ -9,6 +9,7 @@
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
 
 #include "OpenSHC/Globals/DAT_AICState.hpp"
+#include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
@@ -27,7 +28,7 @@ namespace Map {
         void BuildingsState::deleteBuilding(uint buildingID)
         {
             if (DAT_GameCore::instance.currentMenuViewType == OpenSHC::UI::Enums::MVT_BUILDING_AND_STATUS_MENU
-                && this->menuSelectedBuildingID == buildingID) {
+                && DAT_BuildingsState::instance.menuSelectedBuildingID == buildingID) {
                 MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     OpenSHC::UI::Enums::MVT_BUILD_MENU, 0);
             }
