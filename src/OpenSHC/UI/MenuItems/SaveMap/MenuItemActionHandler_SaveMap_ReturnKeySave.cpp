@@ -11,13 +11,10 @@ namespace UI {
             // FUNCTION: STRONGHOLDCRUSADER 0x00494920
             void MenuItemActionHandler_SaveMap_ReturnKeySave(int param_1, ...)
             {
-                bool bVar1;
-
-                bVar1 = DAT_UserTextHandlerState::instance.returnPressed != 0;
+                int const returnPressed = DAT_UserTextHandlerState::instance.returnPressed;
                 DAT_UserTextHandlerState::instance.returnPressed = 0;
-                if (bVar1) {
+                if (returnPressed != 0) {
                     MACRO_CALL(OpenSHC::UI::MenuItems::SaveLoadMap_Func::MenuItemActionHandler_SaveLoadMap_Buttons)(3);
-                    return;
                 }
             }
 
