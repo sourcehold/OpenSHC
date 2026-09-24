@@ -17,15 +17,14 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x0046BD20
     BOOLEnum GameCore::isGameHaltingMenuOpen()
     {
-        if ((DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY)
-            && (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SKIRMISH_SINGLE_PLAYER)) {
+        if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY
+            && DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SKIRMISH_SINGLE_PLAYER) {
             return FALSE;
         }
         if (DAT_MenuTextInputState::instance.currentModalDialog != OpenSHC::UI::Enums::MMT_NO_MENU) {
             return TRUE;
         }
-        return (
-            uint)(DAT_MenuModalComposition1::instance.activeModalDialogID == OpenSHC::UI::Enums::MMT_IN_GAME_HELP_TEXT);
+        return DAT_MenuModalComposition1::instance.activeModalDialogID == OpenSHC::UI::Enums::MMT_IN_GAME_HELP_TEXT;
     }
 
 }
