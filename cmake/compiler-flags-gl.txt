@@ -7,3 +7,4 @@ src/OpenSHC/IO/ResourceManager/swapMapDataWithNextMap.cpp
 src/OpenSHC/UI/Rendering/WindowAndDirectDraw/takeScreenshot.cpp
 src/OpenSHC/IO/ResourceManager/readFirstPartOfCurrentResourceIntoMemory.cpp
 src/OpenSHC/IO/ResourceManager/readNextPartOfCurrentResourceIntoMemory.cpp
+src/OpenSHC/AI/AICState/planToBuyWhenLowOnResourceAndSnoozeBuildings.cpp
