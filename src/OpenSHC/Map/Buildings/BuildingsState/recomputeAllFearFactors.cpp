@@ -18,6 +18,9 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0040B260
         void BuildingsState::recomputeAllFearFactors()
         {
+            // Matching note: The original keeps each 'goodOrBad = -1' as its own block that jumps to a shared
+            // compare of goodOrBad; our compiler jump-threads the constants straight into the counters. An inlined
+            // helper returning -1/0/1 was tried and made it worse (31% -> 15%).
             for (int p = 1; p < 9; ++p) {
                 DAT_GameState::instance.playerDataArray[p].badStuffCount = 0;
                 DAT_GameState::instance.playerDataArray[p].goodStuffCount = 0;
@@ -70,18 +73,20 @@ namespace Map {
                 int balance = DAT_GameState::instance.playerDataArray[p].goodStuffCount
                     - DAT_GameState::instance.playerDataArray[p].badStuffCount;
                 if (balance < 0) {
-                    int level = -(-balance / thingsPerLevel);
+                    balance = -balance;
+                    int level = -(balance / thingsPerLevel);
                     DAT_GameState::instance.playerDataArray[p].fearFactorLevel = level;
                     DAT_GameState::instance.playerDataArray[p].objectsLeftUntilNextLevel
-                        = thingsPerLevel - -balance % thingsPerLevel;
+                        = thingsPerLevel - balance % thingsPerLevel;
                     if (level < -5) {
                         DAT_GameState::instance.playerDataArray[p].fearFactorLevel = -5;
                     }
                 } else if (balance > 0) {
-                    DAT_GameState::instance.playerDataArray[p].fearFactorLevel = balance / thingsPerLevel;
+                    int level = balance / thingsPerLevel;
+                    DAT_GameState::instance.playerDataArray[p].fearFactorLevel = level;
                     DAT_GameState::instance.playerDataArray[p].objectsLeftUntilNextLevel
                         = thingsPerLevel - balance % thingsPerLevel;
-                    if (balance / thingsPerLevel > 5) {
+                    if (level > 5) {
                         DAT_GameState::instance.playerDataArray[p].fearFactorLevel = 5;
                     }
                 } else {
