@@ -7,10 +7,9 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00533C70
         void UnitsState::changeDestinationByLeftover(int unitID)
         {
-            short _leftover = this->units[unitID].leftover;
-            if (0 < _leftover) {
+            if (this->units[unitID].leftover > 0) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::changeDestinationByAmount, this)(
-                    unitID, _leftover);
+                    unitID, this->units[unitID].leftover);
             }
         }
 
