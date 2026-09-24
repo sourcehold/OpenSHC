@@ -12,10 +12,9 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x0044B7D0
     int GreatestLord::IfAiGreatestLordGetAiType()
     {
-        int _highestRankingPlayer = MACRO_CALL(OpenSHC::UI::GreatestLord_Func::GetPlayerAtRank)(0);
-        if ((_highestRankingPlayer != 0)
-            && (DAT_GameSynchronyState::instance.currentAIArray[_highestRankingPlayer] != 0)) {
-            return DAT_GameState::instance.playerDataArray[_highestRankingPlayer].aiType - 1;
+        int const playerID = MACRO_CALL(OpenSHC::UI::GreatestLord_Func::GetPlayerAtRank)(0);
+        if (playerID != 0 && DAT_GameSynchronyState::instance.currentAIArray[playerID] != 0) {
+            return DAT_GameState::instance.playerDataArray[playerID].aiType - 1;
         }
         return 0;
     }
