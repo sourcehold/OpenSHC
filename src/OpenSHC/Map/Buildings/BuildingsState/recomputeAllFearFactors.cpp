@@ -30,14 +30,27 @@ namespace Map {
                     continue;
                 }
                 int goodOrBad = 0;
-                if (this->buildings[i].buildingType == BT_GALLOWS || this->buildings[i].buildingType == BT_STOCKS
-                    || this->buildings[i].buildingType == BT_WITCHHOIST || this->buildings[i].buildingType == BT_CESSPIT
-                    || this->buildings[i].buildingType == BT_BURNINGSTAKE
-                    || this->buildings[i].buildingType == BT_GIBBET || this->buildings[i].buildingType == BT_DUNGEON
-                    || this->buildings[i].buildingType == BT_STRETCHINGRACK
-                    || this->buildings[i].buildingType == BT_RACKFLOGGING
-                    || this->buildings[i].buildingType == BT_CHOPPINGBLOCK
-                    || this->buildings[i].buildingType == BT_DUNKINGSTOOL) {
+                if (this->buildings[i].buildingType == BT_GALLOWS) {
+                    goodOrBad = -1;
+                } else if (this->buildings[i].buildingType == BT_STOCKS) {
+                    goodOrBad = -1;
+                } else if (this->buildings[i].buildingType == BT_WITCHHOIST) {
+                    goodOrBad = -1;
+                } else if (this->buildings[i].buildingType == BT_CESSPIT) {
+                    goodOrBad = -1;
+                } else if (this->buildings[i].buildingType == BT_BURNINGSTAKE) {
+                    goodOrBad = -1;
+                } else if (this->buildings[i].buildingType == BT_GIBBET) {
+                    goodOrBad = -1;
+                } else if (this->buildings[i].buildingType == BT_DUNGEON) {
+                    goodOrBad = -1;
+                } else if (this->buildings[i].buildingType == BT_STRETCHINGRACK) {
+                    goodOrBad = -1;
+                } else if (this->buildings[i].buildingType == BT_RACKFLOGGING) {
+                    goodOrBad = -1;
+                } else if (this->buildings[i].buildingType == BT_CHOPPINGBLOCK) {
+                    goodOrBad = -1;
+                } else if (this->buildings[i].buildingType == BT_DUNKINGSTOOL) {
                     goodOrBad = -1;
                 } else if (this->buildings[i].buildingType == BT_MAYPOLE || this->buildings[i].buildingType == BT_GARDEN
                     || this->buildings[i].buildingType == BT_STATUE || this->buildings[i].buildingType == BT_SHRINE
@@ -64,15 +77,15 @@ namespace Map {
                     if (level < -5) {
                         DAT_GameState::instance.playerDataArray[p].fearFactorLevel = -5;
                     }
-                } else if (balance < 1) {
-                    DAT_GameState::instance.playerDataArray[p].objectsLeftUntilNextLevel = 0;
-                } else {
+                } else if (balance > 0) {
                     DAT_GameState::instance.playerDataArray[p].fearFactorLevel = balance / thingsPerLevel;
                     DAT_GameState::instance.playerDataArray[p].objectsLeftUntilNextLevel
                         = thingsPerLevel - balance % thingsPerLevel;
                     if (balance / thingsPerLevel > 5) {
                         DAT_GameState::instance.playerDataArray[p].fearFactorLevel = 5;
                     }
+                } else {
+                    DAT_GameState::instance.playerDataArray[p].objectsLeftUntilNextLevel = 0;
                 }
 
                 // Track the extremes for the final statistics while the lord is alive
@@ -81,13 +94,14 @@ namespace Map {
                     && DAT_GameState::instance.playerDataArray[p].lordUID == DAT_UnitsState::instance.units[lordID].uid
                     && DAT_UnitsState::instance.units[lordID].logicalState == OpenSHC::Map::Units::ULS_NORMAL) {
                     int level = DAT_GameState::instance.playerDataArray[p].fearFactorLevel;
-                    if (level <= 0) {
-                        if (level < 0
-                            && level < (char)DAT_GameSynchronyState::instance.finalResults.finalMaxBadThings[p]) {
+                    if (level > 0) {
+                        if (level > (char)DAT_GameSynchronyState::instance.finalResults.finalMaxGoodThings[p]) {
+                            DAT_GameSynchronyState::instance.finalResults.finalMaxGoodThings[p] = level;
+                        }
+                    } else if (level < 0) {
+                        if (level < (char)DAT_GameSynchronyState::instance.finalResults.finalMaxBadThings[p]) {
                             DAT_GameSynchronyState::instance.finalResults.finalMaxBadThings[p] = level;
                         }
-                    } else if ((char)DAT_GameSynchronyState::instance.finalResults.finalMaxGoodThings[p] < level) {
-                        DAT_GameSynchronyState::instance.finalResults.finalMaxGoodThings[p] = level;
                     }
                 }
             }
