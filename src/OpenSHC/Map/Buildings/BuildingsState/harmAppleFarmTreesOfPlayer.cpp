@@ -21,7 +21,7 @@ namespace Map {
                     continue;
                 }
                 for (int t = 0; t < 8; ++t) {
-                    short tree = DAT_TileMapState::instance.OrganismLayer[(&this->buildings[i].tileRef1)[t]];
+                    int tree = (short)DAT_TileMapState::instance.OrganismLayer[(&this->buildings[i].tileRef1)[t]];
                     DAT_LandscapeState::instance.trees[tree].stage = 4;
                     DAT_LandscapeState::instance.trees[tree].stageTracker = -1200;
                 }
