@@ -10,12 +10,11 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051B680
         void TroopValueState::clearAIInfoLayerOutsideStartZone()
         {
-            // fixme: this function doesn't use this-> (would be not 100% matching!)
-            int area = DAT_TroopValueState::instance.attackInfo.startCon;
-            for (int iVar2 = 0; iVar2 < 80400; iVar2++) {
-                if ((DAT_TileMapState::instance.AIInfoLayer[iVar2] != '\0')
-                    && ((short)DAT_TileMapState::instance.PathConnectionLayer[iVar2] != area)) {
-                    DAT_TileMapState::instance.AIInfoLayer[iVar2] = '\0';
+            int const startArea = DAT_TroopValueState::instance.attackInfo.startCon;
+            for (int tile = 0; tile < 80400; ++tile) {
+                if (DAT_TileMapState::instance.AIInfoLayer[tile] != 0
+                    && (short)DAT_TileMapState::instance.PathConnectionLayer[tile] != startArea) {
+                    DAT_TileMapState::instance.AIInfoLayer[tile] = 0;
                 }
             }
         }
