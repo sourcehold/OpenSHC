@@ -8,9 +8,9 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x004285C0
     void Actions::RemovePositionOfPlayer(int playerID)
     {
-        for (int _position = 0; _position < 8; _position++) {
-            if ((char)DAT_GameSynchronyState::instance.playerPositionsArray[_position] + 1 == playerID) {
-                DAT_GameSynchronyState::instance.playerPositionsArray[_position] = 0xf6;
+        for (int position = 0; position < 8; ++position) {
+            if ((char)DAT_GameSynchronyState::instance.playerPositionsArray[position] + 1 == playerID) {
+                DAT_GameSynchronyState::instance.playerPositionsArray[position] = 0xf6;
             }
         }
     }
