@@ -6,7 +6,7 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x0044aa70
     void UpdateUnitValueLoss(int value)
     {
-        if (0 < value) {
+        if (value > 0) {
             DAT_CurrentPlayerUnitLosses::instance += value;
         }
     }
