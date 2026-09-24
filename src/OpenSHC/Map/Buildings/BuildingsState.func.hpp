@@ -26,7 +26,7 @@ namespace Map {
             // Constructor
 
             MACRO_FUNCTION_RESOLVER(BuildingsState* (BuildingsState::*)(), false, Address::SHC_3BB0A8C1_0x0041A760,
-                &BuildingsState::constructBuildingsState)
+                &BuildingsState::Constructor_BuildingsState)
             constructBuildingsState;
 
             MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int, ResourceType), false,
@@ -217,7 +217,7 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x0040C060, &BuildingsState::getArmoryIDIfSpaceLeft)
             getArmoryIDIfSpaceLeft;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x0040C0D0,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0040C0D0,
                 &BuildingsState::computeArmoryRemainingCapacity)
             computeArmoryRemainingCapacity;
 
