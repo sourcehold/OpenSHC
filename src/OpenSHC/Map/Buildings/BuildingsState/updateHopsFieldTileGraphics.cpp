@@ -48,10 +48,12 @@ namespace Map {
 
                 int gfx = GMTotalPicturesProcessed::instance[14]
                     + (DAT_TileMapState::instance.RandomLayer[tile] & 1) * 9 + 37 + frame;
-                if (gfx != DAT_TileMapState::instance.GfxLayer[tile]) {
+                if (gfx == DAT_TileMapState::instance.GfxLayer[tile]) {
+                    if (--unchangedLeft == 0) {
+                        continue;
+                    }
+                } else {
                     DAT_TileMapState::instance.GfxLayer[tile] = gfx;
-                } else if (--unchangedLeft == 0) {
-                    continue;
                 }
                 if (DAT_BuildingsState::instance.field14_0x18e024 == 0) {
                     // Note: wraps at 36 instead of 24 like the tile index above
