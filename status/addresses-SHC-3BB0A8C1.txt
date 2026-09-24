@@ -6505,7 +6505,7 @@ SHC_3BB0A8C1_0x00421890 | 66.7% | Reimplemented functionally, register allocatio
 
 SHC_3BB0A8C1_0x00421990 | 58.2% | Reimplemented functionally, orig keeps regs over calls
 
-SHC_3BB0A8C1_0x00421A40 | 30.6% | Reimplemented functionally, code layout differs
+SHC_3BB0A8C1_0x00421A40 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00421BE0 | 16.4% | Reimplemented functionally, code layout differs
 
