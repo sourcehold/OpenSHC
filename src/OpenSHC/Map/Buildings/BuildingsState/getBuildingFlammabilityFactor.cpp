@@ -8,6 +8,18 @@ namespace Map {
         undefined4 BuildingsState::getBuildingFlammabilityFactor(int buildingID)
         {
             switch (this->buildings[buildingID].buildingType) {
+            case BT_BLACKSMITH:
+            case BT_BAKERY:
+            case BT_INN:
+            case BT_OILSMELTER:
+                return 5;
+            case BT_PARADEGROUND:
+            case BT_CAMPGROUND:
+            case BT_PARADEGROUND2:
+            case BT_PARADEGROUND3:
+            case BT_PARADEGROUND4:
+            case BT_PARADEGROUND5:
+                return 4;
             case BT_HOVEL:
             case BT_WOODCUTTERSHUT:
             case BT_OXTETHER:
@@ -47,18 +59,6 @@ namespace Map {
             case BT_OUTPOST_EUROPEAN:
             case BT_OUTPOST_ARABIAN:
                 return 1;
-            case BT_BLACKSMITH:
-            case BT_BAKERY:
-            case BT_INN:
-            case BT_OILSMELTER:
-                return 5;
-            case BT_PARADEGROUND:
-            case BT_CAMPGROUND:
-            case BT_PARADEGROUND2:
-            case BT_PARADEGROUND3:
-            case BT_PARADEGROUND4:
-            case BT_PARADEGROUND5:
-                return 4;
             default:
                 return 0;
             }
