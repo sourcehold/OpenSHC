@@ -17,11 +17,12 @@ namespace UI {
             void MenuItemRenderFunction_BuildingAndStatusMenu_BuildingHelpTextButton(int param_1, ...)
             {
                 DAT_ButtonUnknownZero::instance = 0;
-                if ((DAT_GameCore::instance.activeMenuTab.tabType
-                        == OpenSHC::UI::Enums::BASMTT_BARRACKS_OR_MPMENU_MODEM)
-                    || (DAT_GameCore::instance.activeMenuTab.tabType == OpenSHC::UI::Enums::BASMTT_MERCENARYPOST)) {
+                if (DAT_GameCore::instance.activeMenuTab.tabType == OpenSHC::UI::Enums::BASMTT_BARRACKS_OR_MPMENU_MODEM
+                    || DAT_GameCore::instance.activeMenuTab.tabType == OpenSHC::UI::Enums::BASMTT_MERCENARYPOST) {
                     DAT_ButtonUnknownZero::instance = 1;
-                } else if (DAT_BuildingsState::instance.field24_0x18e04c != 0) {
+                    return;
+                }
+                if (DAT_BuildingsState::instance.field24_0x18e04c != 0) {
                     MACRO_CALL(OpenSHC::UI::MenuItems::General_Func::
                             MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
                 }
