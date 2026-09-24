@@ -15,7 +15,7 @@ namespace Map {
         {
             int x = this->buildings[buildingID].buildingEntryX;
             int y = this->buildings[buildingID].buildingEntryY;
-            if ((uint)x >= 400 || (uint)y >= 400
+            if ((uint)x > 399 || (uint)y > 399
                 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
                 return 0;
             }
@@ -35,10 +35,10 @@ namespace Map {
                 if (*(short*)&this->buildings[buildingID].wheatGrowStateRelated == 5) {
                     if (stage >= 14 && stage < 28) {
                         for (int n = 0; n < 4; ++n) {
-                            this->hopFarmerDestinationOffsetX
+                            DAT_BuildingsState::instance.hopFarmerDestinationOffsetX
                                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction]
                                       .int_.xOffset;
-                            this->hopFarmerDestinationOffsetY
+                            DAT_BuildingsState::instance.hopFarmerDestinationOffsetY
                                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction]
                                       .int_.yOffset;
                             int neighbour
@@ -51,7 +51,7 @@ namespace Map {
                                 return 1;
                             }
                             direction += 2;
-                            if (direction > 7) {
+                            if (direction >= 8) {
                                 direction = 0;
                             }
                         }
@@ -59,10 +59,10 @@ namespace Map {
                 } else if (*(short*)&this->buildings[buildingID].wheatGrowStateRelated == 3) {
                     if ((uint)stage < 2) {
                         for (int n = 0; n < 4; ++n) {
-                            this->hopFarmerDestinationOffsetX
+                            DAT_BuildingsState::instance.hopFarmerDestinationOffsetX
                                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction]
                                       .int_.xOffset;
-                            this->hopFarmerDestinationOffsetY
+                            DAT_BuildingsState::instance.hopFarmerDestinationOffsetY
                                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction]
                                       .int_.yOffset;
                             int neighbour
@@ -75,7 +75,7 @@ namespace Map {
                                 return 1;
                             }
                             direction += 2;
-                            if (direction > 7) {
+                            if (direction >= 8) {
                                 direction = 0;
                             }
                         }
