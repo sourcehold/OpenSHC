@@ -15,7 +15,7 @@ namespace UI {
             {
                 MACRO_CALL(OpenSHC::UI::Credits_Func::ResetCredits)();
                 MACRO_CALL(OpenSHC::UI::Helpers_Func::BuildIntroLogoSequence)(
-                    DAT_GameCore::instance.missionNumber1to20, (undefined4)((int)(DAT_GameCore::instance.section1066)));
+                    DAT_GameCore::instance.missionNumber1to20, DAT_GameCore::instance.section1066);
                 MACRO_CALL(OpenSHC::Rendering_Func::TicksStartCounter)();
             }
 
