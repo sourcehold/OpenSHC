@@ -20,7 +20,7 @@ namespace UI {
                     DAT_TextureRenderCoreObject::ptr)("frontend_builder2.tgx");
                 MACRO_CALL_MEMBER(OpenSHC::Map::MapPropertiesState_Func::updateEventYearsAndCommitBuildingAvailability,
                     DAT_MapPropertiesState::ptr)();
-                DAT_CopyOfScenarioGold::instance = (int)DAT_GameState::instance.mapAndTime.scenarioGold;
+                DAT_CopyOfScenarioGold::instance = DAT_GameState::instance.mapAndTime.scenarioGold;
             }
 
         }
