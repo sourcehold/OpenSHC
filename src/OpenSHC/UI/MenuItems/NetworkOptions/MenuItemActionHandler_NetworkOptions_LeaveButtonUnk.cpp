@@ -9,9 +9,9 @@ namespace UI {
         namespace NetworkOptions {
 
             // FUNCTION: STRONGHOLDCRUSADER 0x004941F0
-            void MenuItemActionHandler_NetworkOptions_LeaveButtonUnk(int param_1, ...)
+            void MenuItemActionHandler_NetworkOptions_LeaveButtonUnk(int action, ...)
             {
-                if (param_1 == 0x11) {
+                if (action == 17) {
                     MACRO_CALL_MEMBER(
                         OpenSHC::UI::MenuTextInputState_Func::popModalDialog, DAT_MenuTextInputState::ptr)();
                 }
