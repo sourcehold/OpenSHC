@@ -10,9 +10,9 @@ namespace Game {
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004563B0
-    BOOLEnum GameStateStructures::isFullIDEqualsToMinus1(int param_1)
+    BOOLEnum GameStateStructures::isFullIDEqualsToMinus1(int playerID)
     {
-        return DAT_GameSynchronyState::instance.currentPlayerFullIDArray[param_1] == -1;
+        return DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] == -1;
     }
 
 }
