@@ -11,7 +11,6 @@ namespace UI {
             // FUNCTION: STRONGHOLDCRUSADER 0x004ABE50
             void MenuModalRenderFunction_SkirmishConnectionOptions(int x, int y, int width, int height)
             {
-
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner,
                     DAT_PencilRenderCore::ptr)(0x4f, 0x5d, x, y, width);
             }
