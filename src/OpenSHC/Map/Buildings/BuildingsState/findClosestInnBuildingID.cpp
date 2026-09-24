@@ -17,7 +17,7 @@ namespace Map {
         int BuildingsState::findClosestInnBuildingID(int unitID)
         {
             // Finds the closest inn of the owner of the unit that still has ale
-            short playerID = DAT_UnitsState::instance.units[unitID].owner;
+            int playerID = DAT_UnitsState::instance.units[unitID].owner;
             int closestDistance = 10000;
             int closest = 0;
             for (int i = 1; i < this->maxBuildingsCount; ++i) {
