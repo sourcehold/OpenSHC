@@ -14,7 +14,7 @@ namespace Map {
     BOOLEnum Units::UpdateWorker_ConsiderTakingABreakUnk(int unitID)
     {
         return MACRO_CALL(OpenSHC::Map::Units_Func::ConsiderHavingABreakNowUnk)(
-            unitID, (UnitState)((int)((int)(short)DAT_UnitsState::instance.units[unitID].state.generic)));
+            unitID, (UnitState)(short)DAT_UnitsState::instance.units[unitID].state.generic);
     }
 
 }
