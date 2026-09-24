@@ -43,8 +43,8 @@ namespace Map {
             MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceLoss, this)(
                 playerID, OpenSHC::Game::Resources::RT_STONE, amount, zero);
             if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID && zero == 0 && amount != 0) {
-                DAT_WallAndPitchState::instance.flag = zero;
                 DAT_WallAndPitchState::instance.counter = amount;
+                DAT_WallAndPitchState::instance.flag = zero;
             }
         }
 
