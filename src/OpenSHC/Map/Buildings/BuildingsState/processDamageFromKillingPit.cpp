@@ -49,12 +49,12 @@ namespace Map {
                 DAT_UnitsState::instance.units[unitID].dying = 1;
                 DAT_UnitsState::instance.units[unitID].tunnelerFinishedDigging = 1;
             }
-            short healthPercentage
+            DAT_UnitsState::instance.units[unitID].healthPercentage
                 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::computeHealthPercentage,
                     DAT_DirectionAlgorithmState::ptr)(
                     DAT_UnitsState::instance.units[unitID].health, DAT_UnitsState::instance.units[unitID].maxHealth);
-            DAT_UnitsState::instance.units[unitID].healthPercentage = healthPercentage;
-            DAT_UnitsState::instance.units[unitID].healthbar = healthPercentage / 10;
+            DAT_UnitsState::instance.units[unitID].healthbar
+                = DAT_UnitsState::instance.units[unitID].healthPercentage / 10;
             this->buildings[buildingID].state = 1;
         }
 
