@@ -11,10 +11,10 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00523E00
     void Version::UpgradeMapTribesStateVersionTo_142()
     {
-        for (int _tribeID = 1; _tribeID < 1250; _tribeID++) {
-            if (DAT_TribesState::instance.tribes[_tribeID].tribeState != 0
-                && DAT_TribesState::instance.tribes[_tribeID].attackWave <= 0) {
-                DAT_TribesState::instance.tribes[_tribeID].tribeBehaviorType = 0;
+        for (int tribeID = 1; tribeID < 1250; ++tribeID) {
+            if (DAT_TribesState::instance.tribes[tribeID].tribeState != 0
+                && DAT_TribesState::instance.tribes[tribeID].attackWave <= 0) {
+                DAT_TribesState::instance.tribes[tribeID].tribeBehaviorType = 0;
             }
         }
     }
