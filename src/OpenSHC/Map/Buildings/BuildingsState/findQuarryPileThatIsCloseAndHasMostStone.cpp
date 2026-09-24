@@ -33,11 +33,11 @@ namespace Map {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                     DAT_DirectionAlgorithmState::ptr)(x, y, (short)this->buildings[i].x, (short)this->buildings[i].y);
                 int value = 400 - DAT_DirectionAlgorithmState::instance.distanceHigh;
-                if (DAT_UnitsState::instance.units[unitID].field300_0x410 != 0 && stone > 7) {
-                    if (stone < 40) {
-                        value += stone / 2;
-                    } else {
+                if (DAT_UnitsState::instance.units[unitID].field300_0x410 != 0 && stone >= 8) {
+                    if (stone > 40) {
                         value += stone;
+                    } else {
+                        value += stone / 2;
                     }
                 }
                 if (value >= bestValue) {
