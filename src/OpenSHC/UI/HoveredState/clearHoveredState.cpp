@@ -11,7 +11,7 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x005010C0
     void HoveredState::clearHoveredState()
     {
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 20; ++i) {
             this->elements[i].type = OpenSHC::Commands::M_MAPPER_NULL;
         }
     }
