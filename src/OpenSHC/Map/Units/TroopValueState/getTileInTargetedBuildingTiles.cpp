@@ -12,10 +12,8 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00519960
         BOOLEnum TroopValueState::getTileInTargetedBuildingTiles(int tile)
         {
-            // fixme: this function doesn't use this-> (would be not 100% matching!)
-            for (int _index = 0; _index < DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArraySize;
-                _index++) {
-                if (DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArray[_index] == tile) {
+            for (int i = 0; i < DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArraySize; ++i) {
+                if (DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArray[i] == tile) {
                     return TRUE;
                 }
             }
