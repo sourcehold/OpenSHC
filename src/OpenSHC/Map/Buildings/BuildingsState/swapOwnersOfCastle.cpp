@@ -17,26 +17,26 @@ namespace Map {
         void BuildingsState::swapOwnersOfCastle(int param_1, int param_2)
         {
             // Swaps all buildings of the players param_1 and param_2
-            bool swapped = false;
+            int swapped = 0;
             for (int i = 1; i < 2000; ++i) {
                 if (this->buildings[i].logicalState != BLS_NORMAL) {
                     continue;
                 }
                 if (this->buildings[i].owner == param_1) {
                     this->buildings[i].owner = param_2;
-                    swapped = true;
+                    swapped = 1;
                     if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
                         this->buildings[i].playerColorUnk = param_2;
                     }
                 } else if (this->buildings[i].owner == param_2) {
                     this->buildings[i].owner = param_1;
-                    swapped = true;
+                    swapped = 1;
                     if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
                         this->buildings[i].playerColorUnk = param_1;
                     }
                 }
             }
-            if (!swapped) {
+            if (swapped <= 0) {
                 return;
             }
 
