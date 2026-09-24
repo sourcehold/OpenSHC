@@ -4187,7 +4187,7 @@ SHC_3BB0A8C1_0x0040B8F8 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0040B8F9 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0040B900 | 0.0% | Pending
+SHC_3BB0A8C1_0x0040B900 | 94.6% | Needs 2nd param, orig is ret 8
 
 SHC_3BB0A8C1_0x0040B948 | 0.0% | Pending
 
