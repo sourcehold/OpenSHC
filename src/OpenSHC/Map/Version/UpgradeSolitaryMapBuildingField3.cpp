@@ -16,11 +16,12 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x0041A3F0
     void Version::UpgradeSolitaryMapBuildingField3()
     {
-        if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY) {
-            for (int _buildingID = 1; _buildingID < 2000; _buildingID++) {
-                if (DAT_BuildingsState::instance.buildings[_buildingID].logicalState != ((BuildingLogicalState)0)) {
-                    DAT_BuildingsState::instance.buildings[_buildingID].playerColorUnk = 0;
-                }
+        if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
+            return;
+        }
+        for (int buildingID = 1; buildingID < 2000; ++buildingID) {
+            if (DAT_BuildingsState::instance.buildings[buildingID].logicalState != (BuildingLogicalState)0) {
+                DAT_BuildingsState::instance.buildings[buildingID].playerColorUnk = 0;
             }
         }
     }
