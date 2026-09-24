@@ -4333,7 +4333,7 @@ SHC_3BB0A8C1_0x0040BFA0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0040BFD0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0040BFE0 | 56.5% | Reimplemented functionally, orig keeps ecx over calls
+SHC_3BB0A8C1_0x0040BFE0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0040C060 | 100.0% | Reimplemented
 
