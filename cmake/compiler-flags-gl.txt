@@ -36,3 +36,5 @@ src/OpenSHC/Map/Buildings/BuildingsState/resolveBuildingEntryAccessibility.cpp
 src/OpenSHC/Map/Buildings/BuildingsState/setupBuildingEntrancesOffset.cpp
 src/OpenSHC/Map/Buildings/BuildingsState/spreadFireRandomlyToBuildings.cpp
 src/OpenSHC/Map/Buildings/BuildingsState/updateNeededEmployeeCount.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/playerHasBurningBuilding.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/sortBuildingIDsNeedPeasantsQueue.cpp
