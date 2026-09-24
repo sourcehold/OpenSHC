@@ -10,12 +10,10 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0040E900
         undefined4 BuildingsState::isEngineerNotAtAssignedWorkTile(int param_1, int param_2, int param_3)
         {
-            if (DAT_UnitsState::instance.units[param_2].field252_0x3c4 == 0) {
-                if (DAT_UnitsState::instance.units[param_2].resourceToDeposit != 0) {
-                    param_3 = 15 - param_3;
-                }
-            } else {
+            if (DAT_UnitsState::instance.units[param_2].field252_0x3c4 != 0) {
                 param_3 = 0;
+            } else if (DAT_UnitsState::instance.units[param_2].resourceToDeposit != 0) {
+                param_3 = 15 - param_3;
             }
 
             int tile = (&this->buildings[param_1].tileRef1)[param_3];
