@@ -13,7 +13,7 @@ namespace Map {
             return;
         }
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            0x10, 0, &this->moats[moatID]);
+            sizeof(this->moats[moatID]), 0, &this->moats[moatID]);
         this->moatTileCount -= 1;
     }
 
