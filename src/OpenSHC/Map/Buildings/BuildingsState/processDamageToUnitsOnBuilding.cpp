@@ -15,23 +15,24 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004106D0
         void BuildingsState::processDamageToUnitsOnBuilding(int buildingID, int damageBonus)
         {
-            // Damages all units standing on the building by damageBonus percent of their maximum health.
-            // The original does not check the tile count before the first iteration.
-            ushort x = this->buildings[buildingID].x;
+            // Changes the health of all units standing on the building by damageBonus percent of their maximum health
+            // (damageBonus is negative for damage). The original does not check the tile count before the first
+            // iteration.
+            int x = (short)this->buildings[buildingID].x;
             int t = 0;
             uint size = this->buildings[buildingID].widthOrHeight;
-            ushort y = this->buildings[buildingID].y;
+            int y = (short)this->buildings[buildingID].y;
             do {
                 MACRO_CALL_MEMBER(
                     OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, DAT_TileMapState::ptr)(t, size);
                 for (int unitID = (short)DAT_TileMapState::instance
                          .UnitLayer[DAT_ViewportRenderState::instance
-                                        .translationMatrix[(short)y + DAT_TileMapState::instance.buildingY]
+                                        .translationMatrix[y + DAT_TileMapState::instance.buildingY]
                                         .addXgetTile
-                             + DAT_TileMapState::instance.buildingX + (short)x];
+                             + DAT_TileMapState::instance.buildingX + x];
                     unitID != 0; unitID = (short)DAT_UnitsState::instance.units[unitID].nextUnitOnTheSameTile) {
                     int maxHealth = DAT_UnitsState::instance.units[unitID].maxHealth;
-                    DAT_UnitsState::instance.units[unitID].health -= maxHealth * damageBonus / 100;
+                    DAT_UnitsState::instance.units[unitID].health += maxHealth * damageBonus / 100;
                     if (DAT_UnitsState::instance.units[unitID].health <= 0) {
                         DAT_UnitsState::instance.units[unitID].health = 0;
                         DAT_UnitsState::instance.units[unitID].dying = 1;
