@@ -48,6 +48,9 @@ namespace Map {
                     closest = i;
                 }
             }
+            if (closest == 0) {
+                return 0;
+            }
             return closest;
         }
 
