@@ -14,7 +14,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00534460
         BOOLEnum UnitsState::unitIsInMoat(int unitID)
         {
-            return DAT_TileMapState::instance.LogicLayer[this->units[unitID].tile] >> 30 & TRUE;
+            return (uint)DAT_TileMapState::instance.LogicLayer[this->units[unitID].tile] >> 30 & 1;
         }
 
     }
