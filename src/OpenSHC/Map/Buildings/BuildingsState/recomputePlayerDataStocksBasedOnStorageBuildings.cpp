@@ -15,7 +15,7 @@ namespace Map {
         void BuildingsState::recomputePlayerDataStocksBasedOnStorageBuildings()
         {
             // Reset the stored resources of all players and recount them from the storage buildings, gold is kept
-            int gold[9];
+            int gold[10];
             for (int p = 1; p < 9; ++p) {
                 gold[p]
                     = DAT_GameState::instance.playerDataArray[p].currentResources[OpenSHC::Game::Resources::RT_GOLD];
