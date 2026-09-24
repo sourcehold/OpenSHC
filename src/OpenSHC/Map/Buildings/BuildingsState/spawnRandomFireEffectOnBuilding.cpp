@@ -27,7 +27,7 @@ namespace Map {
             // Smaller buildings spawn fire effects more often
             int tick;
             int interval;
-            if ((int)this->buildings[buildingID].widthOrHeight < 4) {
+            if ((int)this->buildings[buildingID].widthOrHeight <= 3) {
                 interval = 24 - this->buildings[buildingID].widthOrHeight * 5;
                 tick = this->buildings[buildingID].fireRelatedRNG1 + this->buildings[buildingID].fireDuration;
             } else {
