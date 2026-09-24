@@ -20,9 +20,10 @@ namespace Map {
         {
             // param_2 is the unit. Engineers and laddermen use their own assembly point.
             int laddermenCount = (short)DAT_GameState::instance.playerDataArray[playerIndex].someCount28;
-            bool isLadderman = DAT_UnitsState::instance.units[param_2].unitType == OpenSHC::Map::Units::UT_E_LADDER;
             int i = DAT_GameState::instance.playerDataArray[playerIndex].someCount27 - laddermenCount;
-            if (isLadderman) {
+            int isLadderman = 0;
+            if (DAT_UnitsState::instance.units[param_2].unitType == OpenSHC::Map::Units::UT_E_LADDER) {
+                isLadderman = 1;
                 i = laddermenCount;
             }
             short pointX = DAT_GameState::instance.playerDataArray[playerIndex].engineersAssemblyPoints[isLadderman].x;
@@ -34,7 +35,7 @@ namespace Map {
                     if (i >= 25) {
                         return 0;
                     }
-                    if (isLadderman) {
+                    if (isLadderman != 0) {
                         x = DAT_GameState::instance.playerDataArray[playerIndex]
                                 .engineersParadegroundLocations[24 - i]
                                 .x;
@@ -45,7 +46,7 @@ namespace Map {
                         x = DAT_GameState::instance.playerDataArray[playerIndex].engineersParadegroundLocations[i].x;
                         y = DAT_GameState::instance.playerDataArray[playerIndex].engineersParadegroundLocations[i].y;
                     }
-                    if (x < 400 && y < 400
+                    if (x <= 399 && y <= 399
                         && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] != 0
                         && ((short)DAT_TileMapState::instance
                                     .UnitLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x]
