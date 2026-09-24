@@ -2,6 +2,7 @@
 #include "OpenSHC/Map/WildlifeState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
+#include "OpenSHC/Globals/DAT_WildlifeState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -10,7 +11,7 @@ namespace Map {
     void WildlifeState::clearWildlifeState()
     {
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            256000, 0, &this->grid[0][0]);
+            sizeof(DAT_WildlifeState::instance.grid), 0, DAT_WildlifeState::instance.grid);
     }
 
 }
