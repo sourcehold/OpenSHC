@@ -10,24 +10,58 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0040A400
         uint BuildingsState::isFearFactorBuilding(int buildingID)
         {
-            if (this->buildings[buildingID].buildingType == BT_GALLOWS
-                || this->buildings[buildingID].buildingType == BT_STOCKS
-                || this->buildings[buildingID].buildingType == BT_WITCHHOIST
-                || this->buildings[buildingID].buildingType == BT_CESSPIT
-                || this->buildings[buildingID].buildingType == BT_BURNINGSTAKE
-                || this->buildings[buildingID].buildingType == BT_GIBBET
-                || this->buildings[buildingID].buildingType == BT_DUNGEON
-                || this->buildings[buildingID].buildingType == BT_STRETCHINGRACK
-                || this->buildings[buildingID].buildingType == BT_RACKFLOGGING
-                || this->buildings[buildingID].buildingType == BT_CHOPPINGBLOCK
-                || this->buildings[buildingID].buildingType == BT_DUNKINGSTOOL
-                || this->buildings[buildingID].buildingType == BT_MAYPOLE
-                || this->buildings[buildingID].buildingType == BT_GARDEN
-                || this->buildings[buildingID].buildingType == BT_STATUE
-                || this->buildings[buildingID].buildingType == BT_SHRINE
-                || this->buildings[buildingID].buildingType == BT_DANCINGBEAR
-                || this->buildings[buildingID].buildingType == BT_POND
-                || this->buildings[buildingID].buildingType == BT_WELL) {
+            if (this->buildings[buildingID].buildingType == BT_GALLOWS) {
+                return 1;
+            }
+            if (this->buildings[buildingID].buildingType == BT_STOCKS) {
+                return 1;
+            }
+            if (this->buildings[buildingID].buildingType == BT_WITCHHOIST) {
+                return 1;
+            }
+            if (this->buildings[buildingID].buildingType == BT_CESSPIT) {
+                return 1;
+            }
+            if (this->buildings[buildingID].buildingType == BT_BURNINGSTAKE) {
+                return 1;
+            }
+            if (this->buildings[buildingID].buildingType == BT_GIBBET) {
+                return 1;
+            }
+            if (this->buildings[buildingID].buildingType == BT_DUNGEON) {
+                return 1;
+            }
+            if (this->buildings[buildingID].buildingType == BT_STRETCHINGRACK) {
+                return 1;
+            }
+            if (this->buildings[buildingID].buildingType == BT_RACKFLOGGING) {
+                return 1;
+            }
+            if (this->buildings[buildingID].buildingType == BT_CHOPPINGBLOCK) {
+                return 1;
+            }
+            if (this->buildings[buildingID].buildingType == BT_DUNKINGSTOOL) {
+                return 1;
+            }
+            if (this->buildings[buildingID].buildingType == BT_MAYPOLE) {
+                return 1;
+            }
+            if (this->buildings[buildingID].buildingType == BT_GARDEN) {
+                return 1;
+            }
+            if (this->buildings[buildingID].buildingType == BT_STATUE) {
+                return 1;
+            }
+            if (this->buildings[buildingID].buildingType == BT_SHRINE) {
+                return 1;
+            }
+            if (this->buildings[buildingID].buildingType == BT_DANCINGBEAR) {
+                return 1;
+            }
+            if (this->buildings[buildingID].buildingType == BT_POND) {
+                return 1;
+            }
+            if (this->buildings[buildingID].buildingType == BT_WELL) {
                 return 1;
             }
             return this->buildings[buildingID].buildingType == BT_BEEHIVE;
