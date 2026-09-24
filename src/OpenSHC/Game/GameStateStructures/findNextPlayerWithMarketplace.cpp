@@ -8,11 +8,11 @@ namespace Game {
     using OpenSHC::Game::Player::PlayerData;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00458700
-    int GameStateStructures::findNextPlayerWithMarketplace(int param_1)
+    int GameStateStructures::findNextPlayerWithMarketplace(int playerID)
     {
-        for (int iVar1 = param_1 + 1; iVar1 < 9; iVar1++) {
-            if (0 < this->playerDataArray[iVar1].marketplace.id) {
-                return iVar1;
+        for (int nextPlayerID = playerID + 1; nextPlayerID < 9; ++nextPlayerID) {
+            if (this->playerDataArray[nextPlayerID].marketplace.id > 0) {
+                return nextPlayerID;
             }
         }
         return 0;
