@@ -9,6 +9,9 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00419FA0
         int BuildingsState::findClosestEnemyBuildingWithinRadius(int param_1, int param_2, int param_3, int param_4)
         {
+            // Matching note: The original computes param_4 * param_4 before the loop and keeps the ID and
+            // UID array bases in registers. Hoisting the product into a local makes the match worse (48% -> 27%),
+            // so the original source shape is still unknown.
             // Finds the closest enemy building of player param_1 within radius param_4 around (param_2, param_3)
             int closestDistance = 1000000;
             int closest = 0;
