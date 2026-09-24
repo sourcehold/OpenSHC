@@ -18,13 +18,17 @@ namespace Map {
             if (unitID <= 0) {
                 return FALSE;
             }
-            if (DAT_UnitsState::instance.units[unitID].logicalState != OpenSHC::Map::Units::ULS_REMOVE
-                && DAT_UnitsState::instance.units[unitID].logicalState != OpenSHC::Map::Units::ULS_INVISIBLE
-                && DAT_UnitsState::instance.units[unitID].buildingID == buildingID) {
-                return (BOOLEnum)(DAT_UnitsState::instance.units[unitID].uid
-                    == this->buildings[buildingID].workerUID[workerSlot]);
+            if (DAT_UnitsState::instance.units[unitID].logicalState == OpenSHC::Map::Units::ULS_REMOVE) {
+                return FALSE;
             }
-            return FALSE;
+            if (DAT_UnitsState::instance.units[unitID].logicalState == OpenSHC::Map::Units::ULS_INVISIBLE) {
+                return FALSE;
+            }
+            if (DAT_UnitsState::instance.units[unitID].buildingID != buildingID) {
+                return FALSE;
+            }
+            return (BOOLEnum)(DAT_UnitsState::instance.units[unitID].uid
+                == this->buildings[buildingID].workerUID[workerSlot]);
         }
 
     }
