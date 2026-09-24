@@ -5045,7 +5045,7 @@ SHC_3BB0A8C1_0x0040F540 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0040F5C0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0040F620 | 45.2% | Reimplemented functionally, orig keeps ecx over calls
+SHC_3BB0A8C1_0x0040F620 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0040F700 | 100.0% | Reimplemented
 
