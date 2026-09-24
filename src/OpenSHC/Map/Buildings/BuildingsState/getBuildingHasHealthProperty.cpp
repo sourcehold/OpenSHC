@@ -10,7 +10,7 @@ namespace Map {
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0040B900
-        BOOLEnum BuildingsState::getBuildingHasHealthProperty(uint buildingID)
+        BOOLEnum BuildingsState::getBuildingHasHealthProperty(uint buildingID, int unused)
         {
             if (buildingID == 0) {
                 return FALSE;
