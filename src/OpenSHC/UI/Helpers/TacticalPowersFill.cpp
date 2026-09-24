@@ -10,11 +10,11 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004D9D90
         void TacticalPowersFill()
         {
-            if ((DAT_TacticalPowersHelpTextDisplayBool::instance != '\0')
-                && (DAT_MissionDefinedData::instance.field39_0x1370
-                    = DAT_MissionDefinedData::instance.field39_0x1370 + -1,
-                    DAT_MissionDefinedData::instance.field39_0x1370 == 0)) {
-                DAT_TacticalPowersHelpTextDisplayBool::instance = '\0';
+            if (DAT_TacticalPowersHelpTextDisplayBool::instance != 0) {
+                DAT_MissionDefinedData::instance.field39_0x1370 -= 1;
+                if (DAT_MissionDefinedData::instance.field39_0x1370 == 0) {
+                    DAT_TacticalPowersHelpTextDisplayBool::instance = 0;
+                }
             }
         }
 
