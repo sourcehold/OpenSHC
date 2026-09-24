@@ -12,9 +12,9 @@ namespace Map {
         {
             // The damage layer holds the growth stage of the wheat on the field tiles
             for (int i = 0; i < 36; ++i) {
-                DAT_BuildingsState::instance.farmerDestinationTile = (&this->buildings[param_1].tileRef1)[i];
-                int stage
-                    = (char)DAT_TileMapState::instance.DamageLayer[DAT_BuildingsState::instance.farmerDestinationTile];
+                int tile = (&this->buildings[param_1].tileRef1)[i];
+                int stage = (char)DAT_TileMapState::instance.DamageLayer[tile];
+                DAT_BuildingsState::instance.farmerDestinationTile = tile;
                 if (*(short*)&this->buildings[param_1].wheatGrowStateRelated == 6) {
                     if (stage >= 11 && stage < 101) {
                         return 1;
