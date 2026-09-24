@@ -14,7 +14,7 @@ namespace UI {
         void TextureRenderCore::transformTgxCompressedImageToRGB565(int imageIndex)
         {
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::transformTgxFromRGB555ToRGB565, this)(
-                (ushort*)(&(((byte*)this->gmProcessedImageData)[DAT_GMImageOffsets::instance[imageIndex]])),
+                (ushort*)((byte*)this->gmProcessedImageData + DAT_GMImageOffsets::instance[imageIndex]),
                 DAT_GMImageSizes::instance[imageIndex]);
         }
 
