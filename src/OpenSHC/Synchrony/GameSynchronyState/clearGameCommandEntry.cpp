@@ -11,7 +11,7 @@ namespace Synchrony {
     {
         if (gameCommandID < 200) {
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                0x4f8, '\0', (void*)((int)(this->DAT_GameCommandArray + gameCommandID)));
+                sizeof(this->DAT_GameCommandArray[gameCommandID]), 0, &this->DAT_GameCommandArray[gameCommandID]);
         }
     }
 
