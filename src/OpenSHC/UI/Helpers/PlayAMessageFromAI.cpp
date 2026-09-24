@@ -9,8 +9,8 @@ namespace UI {
     namespace Helpers {
 
         /*
-          Plays a WAV sound effect from the mission aesthetics data table. param_1 is the column index
-           (0-16) and param_2 is the row index (1-33). Bounds-checks both params and calls
+          Plays a WAV sound effect from the mission aesthetics data table. messageIndex is the column index
+           (0-16) and speakerIndex is the row index (1-33). Bounds-checks both params and calls
            SFXState::playWAVSFX with the resolved filename pointer.
 
            renamed by: Claude Sonnet 4.6
