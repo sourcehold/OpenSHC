@@ -7,13 +7,13 @@ namespace Map {
     namespace Units {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00521210
-        void TribesState::reassignOwnerForTribesOfBehaviorType2(int param_1, int param_2)
+        void TribesState::reassignOwnerForTribesOfBehaviorType2(int fromPlayerID, int toPlayerID)
         {
-            for (int i = 1; i < 1250; i++) {
-                // DAT_TribesState::instance is required instead of this for there to be 100% match
+            // the original reads DAT_TribesState::instance instead of this
+            for (int i = 1; i < 1250; ++i) {
                 if (DAT_TribesState::instance.tribes[i].tribeState == 2
-                    && DAT_TribesState::instance.tribes[i].owner == param_1) {
-                    DAT_TribesState::instance.tribes[i].owner = param_2;
+                    && DAT_TribesState::instance.tribes[i].owner == fromPlayerID) {
+                    DAT_TribesState::instance.tribes[i].owner = toPlayerID;
                 }
             }
         }
