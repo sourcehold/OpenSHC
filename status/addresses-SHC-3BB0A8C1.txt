@@ -26001,7 +26001,7 @@ SHC_3BB0A8C1_0x004B1E60 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004B1EB0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004B20B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004B20B0 | 67.6% | Register alloc/tail merge diff
 
 SHC_3BB0A8C1_0x004B2280 | 0.0% | Pending
 

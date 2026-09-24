@@ -33,114 +33,67 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004B20B0
         void RenderNoRushDisplayElementUnk(int posX, int posY, DWORD elementState)
         {
-            char* pcVar1;
-            int left;
-            int iVar2;
-            int iVar3;
-            int xParam;
-            int yParam;
-            TextAlignment alignment;
-            uint foregroundColor;
-            uint backgroundColor;
-            int fontSize;
-            BOOLEnum keepOffsetX;
-            int iVar4;
-            int blendStrength;
-
             if (DAT_GameState::instance.mapAndTime.skirmishNoRushTicks == 0) {
-                /*
-                  Plays pa paam pa pa pa paam
-                 */
-
+                // Plays pa paam pa pa pa paam
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)("battlehorn.wav");
                 MACRO_CALL(OpenSHC::UI::DisplayElements_Func::CheckDisplayElementByIDAndSetForUnlimitedDisplay)(
                     OpenSHC::UI::Enums::DEID_NO_RUSH, 0);
                 return;
             }
-            iVar4 = 0x12;
-            pcVar1 = MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_MISC, 7);
-            iVar4 = MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::computeTextWidth, DAT_TextManagerObject::ptr)(
-                pcVar1, iVar4);
-            iVar2 = posX + 800;
+            int const barWidth
+                = MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::computeTextWidth, DAT_TextManagerObject::ptr)(
+                      MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                          DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_MISC, 7),
+                      18)
+                + 50;
+            int x = posX + 800;
             DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_MAP_GAME;
             if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1024x768) {
-                iVar2 = posX + 0x390;
-                goto LAB_004b21ab;
+                x += 112;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1280x1024) {
+                x -= 240;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1600x1200) {
+                x -= 400;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1280x720) {
+                x -= 240;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1440x900) {
+                x -= 320;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1920x1080) {
+                x -= 560;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1920x1200) {
+                x -= 560;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_2560x1440) {
+                x -= 880;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_2560x1600) {
+                x -= 880;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1366x768) {
+                x -= 283;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1680x1050) {
+                x -= 440;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1600x900) {
+                x -= 400;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1024x600) {
+                x -= 112;
+            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1360x768) {
+                x -= 280;
             }
-            if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1280x1024) {
-            LAB_004b212c:
-                iVar2 = posX + 0x230;
-            } else {
-                if (DAT_WindowAndDirectDraw::instance.currentGameResolution != OpenSHC::Rendering::SRE_1600x1200) {
-                    if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1280x720)
-                        goto LAB_004b212c;
-                    if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1440x900) {
-                        iVar2 = posX + 0x1e0;
-                        goto LAB_004b21ab;
-                    }
-                    if ((DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1920x1080)
-                        || (DAT_WindowAndDirectDraw::instance.currentGameResolution
-                            == OpenSHC::Rendering::SRE_1920x1200)) {
-                        iVar2 = posX + 0xf0;
-                        goto LAB_004b21ab;
-                    }
-                    if ((DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_2560x1440)
-                        || (DAT_WindowAndDirectDraw::instance.currentGameResolution
-                            == OpenSHC::Rendering::SRE_2560x1600)) {
-                        iVar2 = posX + -0x50;
-                        goto LAB_004b21ab;
-                    }
-                    if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1366x768) {
-                        iVar2 = posX + 0x205;
-                        goto LAB_004b21ab;
-                    }
-                    if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1680x1050) {
-                        iVar2 = posX + 0x168;
-                        goto LAB_004b21ab;
-                    }
-                    if (DAT_WindowAndDirectDraw::instance.currentGameResolution != OpenSHC::Rendering::SRE_1600x900) {
-                        if (DAT_WindowAndDirectDraw::instance.currentGameResolution
-                            == OpenSHC::Rendering::SRE_1024x600) {
-                            iVar2 = posX + 0x2b0;
-                        } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution
-                            == OpenSHC::Rendering::SRE_1360x768) {
-                            iVar2 = posX + 0x208;
-                        }
-                        goto LAB_004b21ab;
-                    }
-                }
-                iVar2 = posX + 400;
-            }
-        LAB_004b21ab:
-            iVar3 = (iVar4 + 0x32) / 2;
-            iVar2 = iVar2 + (-0x12 - iVar3);
-            left = iVar2 - iVar3;
+            int const halfWidth = barWidth / 2;
+            x += -18 - halfWidth;
+            int const left = x - halfWidth;
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBlendedBlackBox,
-                DAT_PencilRenderCore::ptr)(left + -7, posY + -5, iVar3 + 5 + iVar2, posY + 0x1e, 0x10);
-            blendStrength = 0;
-            keepOffsetX = FALSE;
-            fontSize = 0x12;
-            backgroundColor = 0;
-            foregroundColor = 0xc2f0eb;
-            alignment = OpenSHC::Text::TTA_CENTER;
-            xParam = iVar2;
-            yParam = posY;
-            pcVar1 = MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_MISC, 7);
+                DAT_PencilRenderCore::ptr)(left - 7, posY - 5, halfWidth + 5 + x, posY + 30, 16);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                pcVar1, xParam, yParam, alignment, foregroundColor, backgroundColor, fontSize, keepOffsetX,
-                blendStrength);
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_MISC, 7),
+                x, posY, OpenSHC::Text::TTA_CENTER, 0xc2f0eb, 0, 18, FALSE, 0);
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBorderBox, DAT_PencilRenderCore::ptr)(
-                left + -1, posY + 0x12, iVar3 + 1 + iVar2, posY + 0x18,
-                (ushort)((int)(COL_BLACK::instance.shortValue)));
+                left - 1, posY + 18, halfWidth + 1 + x, posY + 24, COL_BLACK::instance.shortValue);
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(
-                left, posY + 0x13,
-                ((DAT_GameState::instance.mapAndTime.skirmishNoRushTicks * (iVar4 + 0x32))
+                left, posY + 19,
+                (DAT_GameState::instance.mapAndTime.skirmishNoRushTicks * barWidth)
                         / DAT_GameState::instance.mapAndTime.skirmishNoRushTicksLeft
-                    - iVar3)
-                    + iVar2,
-                posY + 0x17, (ushort)((int)(COL_DARK_LIME::instance.shortValue)));
+                    - halfWidth + x,
+                posY + 23, COL_DARK_LIME::instance.shortValue);
             DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
         }
 
