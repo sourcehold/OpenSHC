@@ -5813,7 +5813,7 @@ SHC_3BB0A8C1_0x00419EA1 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00419EA2 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00419EB0 | 28.8% | Reimplemented functionally, orig keeps edx over calls
+SHC_3BB0A8C1_0x00419EB0 | 55.6% | Reimplemented functionally, code layout differs
 
 SHC_3BB0A8C1_0x00419FA0 | 48.3% | Reimplemented functionally, code layout differs
 
