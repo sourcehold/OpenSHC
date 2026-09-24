@@ -10,17 +10,15 @@ namespace UI {
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004650C0
-    BOOLEnum Helpers::CheckGoldResource(int param_1)
+    BOOLEnum Helpers::CheckGoldResource(int unitIndex)
     {
-        int iVar1;
-
-        iVar1 = 0;
-        if (param_1 == 5) {
-            iVar1 = 0x1e;
+        int requiredGold = 0;
+        if (unitIndex == 5) {
+            requiredGold = 30;
         }
         return DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                   .currentResources[0xf]
-            >= iVar1;
+                   .currentResources[OpenSHC::Game::Resources::RT_GOLD]
+            >= requiredGold;
     }
 
 }
