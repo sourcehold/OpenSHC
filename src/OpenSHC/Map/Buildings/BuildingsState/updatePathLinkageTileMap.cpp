@@ -16,6 +16,9 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00419960
         void BuildingsState::updatePathLinkageTileMap(int param_1)
         {
+            // Matching note: After the if/else the original reloads pathLinkageRelated2 from memory before
+            // comparing it with 2; our compiler forwards the stored constants and reorders the blocks. No source
+            // form was found that prevents the store forwarding.
             // param_1: 1 = open all gatehouses, 2 = close all gatehouses, otherwise restore the previous state
             for (int i = 1; i < this->maxBuildingsCount; ++i) {
                 if (DAT_BuildingsState::instance.buildings[i].logicalState == 0
