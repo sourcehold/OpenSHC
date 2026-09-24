@@ -10,7 +10,7 @@ namespace Map {
         using OpenSHC::Map::Buildings::BuildingType;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0040C0D0
-        int BuildingsState::computeArmoryRemainingCapacity(int buildingID)
+        int BuildingsState::computeArmoryRemainingCapacity(int buildingID, int another)
         {
             int capacity = 50;
             if (this->buildings[buildingID].logicalState == BLS_NORMAL
