@@ -10,8 +10,7 @@ namespace Util {
         // FUNCTION: STRONGHOLDCRUSADER 0x0046CED0
         void Stopwatch::start()
         {
-            DWORD _currentTime = timeGetTime();
-            this->startTime_0x8 = _currentTime;
+            this->startTime_0x8 = timeGetTime();
             this->running_0x4 = TRUE;
         }
 
