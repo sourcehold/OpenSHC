@@ -22,9 +22,9 @@ namespace Map {
                 return;
             }
 
-            int y = (short)this->buildings[buildingID].y;
-            uint size = this->buildings[buildingID].widthOrHeight;
             int x = (short)this->buildings[buildingID].x;
+            uint size = this->buildings[buildingID].widthOrHeight;
+            int y = (short)this->buildings[buildingID].y;
             this->buildings[buildingID].fireDuration = 0;
             this->buildings[buildingID].cooldownTimer = 2000;
             // Farms burn including their fields
