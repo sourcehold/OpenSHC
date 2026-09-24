@@ -219,7 +219,7 @@ namespace Text {
                             local_f0 = FALSE;
                             if (local_120) {
                                 this->lineLayoutTable[lineY].unknown2
-                                    = this->lineLayoutTable[lineY].rightBorder - leftPosition;
+                                    = this->lineLayoutTable[lineY].rightBorder - (short)leftPosition;
                                 local_120 = centreActive;
                             }
                             do {
@@ -438,7 +438,8 @@ namespace Text {
                 }
             case Enums::HTT_NEWPARAGRAPH:
                 if (local_120) {
-                    this->lineLayoutTable[lineY].unknown2 = this->lineLayoutTable[lineY].rightBorder - leftPosition;
+                    this->lineLayoutTable[lineY].unknown2
+                        = this->lineLayoutTable[lineY].rightBorder - (short)leftPosition;
                     local_120 = centreActive;
                 }
                 if (this->useAlternateHelpTab && iVar5 == this->activeHelpHotspotIndex) {
@@ -516,7 +517,7 @@ namespace Text {
                         local_f0 = FALSE;
                         if (local_120) {
                             this->lineLayoutTable[lineY].unknown2
-                                = this->lineLayoutTable[lineY].rightBorder - leftPosition;
+                                = this->lineLayoutTable[lineY].rightBorder - (short)leftPosition;
                             local_120 = centreActive;
                         }
                         do {
@@ -603,7 +604,8 @@ namespace Text {
                 if (this->lineLayoutTable[lineY].rightBorder < local_f4) {
                     local_f0 = FALSE;
                     if (local_120) {
-                        this->lineLayoutTable[lineY].unknown2 = this->lineLayoutTable[lineY].rightBorder - leftPosition;
+                        this->lineLayoutTable[lineY].unknown2
+                            = this->lineLayoutTable[lineY].rightBorder - (short)leftPosition;
                         local_120 = centreActive;
                     }
                     lineY += 1 + currentFontLineHeight;
@@ -638,7 +640,7 @@ namespace Text {
                                 iVar5 = local_11c;
                                 if (local_120) {
                                     this->lineLayoutTable[lineY].unknown2
-                                        = this->lineLayoutTable[lineY].rightBorder - leftPosition;
+                                        = this->lineLayoutTable[lineY].rightBorder - (short)leftPosition;
                                     local_120 = centreActive;
                                 }
                                 lineY += currentFontLineHeight + 1;
