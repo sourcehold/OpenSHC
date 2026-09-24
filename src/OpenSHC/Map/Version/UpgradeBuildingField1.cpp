@@ -13,10 +13,10 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x0041A0D0
     void Version::UpgradeBuildingField1()
     {
-        for (int _buildingID = 1; _buildingID < 2000; _buildingID++) {
-            if (DAT_BuildingsState::instance.buildings[_buildingID].logicalState != ((BuildingLogicalState)0)) {
-                DAT_BuildingsState::instance.buildings[_buildingID].uidWhenPlaced
-                    = DAT_BuildingsState::instance.buildings[_buildingID].uidPlaced;
+        for (int buildingID = 1; buildingID < 2000; ++buildingID) {
+            if (DAT_BuildingsState::instance.buildings[buildingID].logicalState != (BuildingLogicalState)0) {
+                DAT_BuildingsState::instance.buildings[buildingID].uidWhenPlaced
+                    = DAT_BuildingsState::instance.buildings[buildingID].uidPlaced;
             }
         }
     }
