@@ -5,11 +5,11 @@ namespace Map {
     namespace Entities {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00401400
-        void EntityState::markEntityDestroyed(int param_1)
+        void EntityState::markEntityDestroyed(int entityID)
         {
-            if (0 < param_1) {
-                this->entityArray[param_1].logicalState = 3;
-                this->entityArray[param_1].someCounter_OR_hitGround = 10;
+            if (entityID > 0) {
+                this->entityArray[entityID].logicalState = 3;
+                this->entityArray[entityID].someCounter_OR_hitGround = 10;
             }
         }
 
