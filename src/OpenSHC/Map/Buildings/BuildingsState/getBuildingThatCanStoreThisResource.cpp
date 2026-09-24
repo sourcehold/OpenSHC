@@ -39,7 +39,7 @@ namespace Map {
                 for (int i = 1; i < this->maxBuildingsCount; ++i) {
                     if (this->buildings[i].logicalState == BLS_NORMAL && this->buildings[i].buildingType == BT_GRANARY
                         && this->buildings[i].owner == playerID
-                        && MACRO_CALL_MEMBER(
+                        && (int)MACRO_CALL_MEMBER(
                                OpenSHC::Map::Buildings::BuildingsState_Func::computeResourceSumForBuilding, this)(i)
                             < 250
                         && MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::buildingIsAccessible, this)(
