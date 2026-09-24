@@ -54,11 +54,11 @@ namespace Map {
                 }
             }
 
-            if (stage121 > 3) {
+            if (stage121 >= 4) {
                 *(short*)&this->buildings[buildingID].wheatGrowStateRelated = 8;
                 return;
             }
-            if (growing > 11 || (growing != 0 && stage120 != 0)) {
+            if (growing >= 12 || (growing != 0 && stage120 != 0)) {
                 *(short*)&this->buildings[buildingID].wheatGrowStateRelated = 6;
                 return;
             }
@@ -75,10 +75,12 @@ namespace Map {
                     *(short*)&this->buildings[buildingID].wheatGrowStateRelated = 3;
                     return;
                 }
-                if (stage103To119 == 0) {
-                    *(short*)&this->buildings[buildingID].wheatGrowStateRelated = seeded != 0 ? 5 : 2;
+                if (stage103To119 != 0) {
+                    *(short*)&this->buildings[buildingID].wheatGrowStateRelated = 3;
                     return;
                 }
+                *(short*)&this->buildings[buildingID].wheatGrowStateRelated = seeded != 0 ? 5 : 2;
+                return;
             }
             *(short*)&this->buildings[buildingID].wheatGrowStateRelated = 3;
         }
