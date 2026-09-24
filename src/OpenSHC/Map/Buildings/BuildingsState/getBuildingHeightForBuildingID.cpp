@@ -14,11 +14,6 @@ namespace Map {
                 return 92;
             case BT_STRONGHOLD:
                 return 190;
-            case BT_GATEHOUSELARGE:
-            case BT_GATEHOUSESMALL:
-                return 128;
-            case BT_SIEGETOWER_PLACED:
-                return 118;
             case BT_TOWER1:
                 return 296;
             case BT_TOWER2:
@@ -28,6 +23,11 @@ namespace Map {
             case BT_TOWER4:
             case BT_TOWER5:
                 return 192;
+            case BT_GATEHOUSELARGE:
+            case BT_GATEHOUSESMALL:
+                return 128;
+            case BT_SIEGETOWER_PLACED:
+                return 118;
             default:
                 return 0;
             }
