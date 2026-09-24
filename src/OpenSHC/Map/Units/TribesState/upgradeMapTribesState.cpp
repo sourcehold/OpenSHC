@@ -15,7 +15,7 @@ namespace Map {
         {
             MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeMapTribesStateVersionTo_Unknown1)();
             MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeMapTribesStateVersionTo_Unknown2)();
-            if ((receivedMapVersion != packagerMapVersion) && ((int)receivedMapVersion < 0x8e)) {
+            if (receivedMapVersion != packagerMapVersion && (int)receivedMapVersion < 142) {
                 MACRO_CALL(OpenSHC::Map::Version_Func::UpgradeMapTribesStateVersionTo_142)();
             }
         }
