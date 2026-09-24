@@ -11,19 +11,16 @@ namespace Map {
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00530FD0
-        BOOLEnum UnitsState::checkIfCitizenUnitIsAliveBasedOnState(int param_1)
+        BOOLEnum UnitsState::checkIfCitizenUnitIsAliveBasedOnState(int unitID)
         {
-            short _state = (unsigned short)this->units[param_1].state.generic;
-            if ((0x6f <= _state)) {
-                if (_state <= 0x74) {
+            short const state = (ushort)this->units[unitID].state.generic;
+            if (state >= 111) {
+                if (state <= 116) {
                     return TRUE;
-                } else {
-                    return FALSE;
                 }
-
-            } else {
                 return FALSE;
             }
+            return FALSE;
         }
 
     }
