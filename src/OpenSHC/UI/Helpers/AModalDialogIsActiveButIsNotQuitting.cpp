@@ -13,12 +13,11 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x00427210
     BOOLEnum Helpers::AModalDialogIsActiveButIsNotQuitting()
     {
-        if ((((DAT_MenuModalComposition1::instance.activeModalDialogID != OpenSHC::UI::Enums::MMT_NONE)
-                 && (DAT_MenuModalComposition1::instance.activeModalDialogID
-                     != OpenSHC::UI::Enums::MMT_BASIC_AI_LORD_SELECT))
-                && (DAT_MenuModalComposition1::instance.activeModalDialogID
-                    != OpenSHC::UI::Enums::MMT_EXTENDED_AI_LORD_SELECT))
-            && (DAT_MenuModalComposition1::instance.activeModalDialogID != OpenSHC::UI::Enums::MMT_ROUNDTABLE)) {
+        if (DAT_MenuModalComposition1::instance.activeModalDialogID != OpenSHC::UI::Enums::MMT_NONE
+            && DAT_MenuModalComposition1::instance.activeModalDialogID != OpenSHC::UI::Enums::MMT_BASIC_AI_LORD_SELECT
+            && DAT_MenuModalComposition1::instance.activeModalDialogID
+                != OpenSHC::UI::Enums::MMT_EXTENDED_AI_LORD_SELECT
+            && DAT_MenuModalComposition1::instance.activeModalDialogID != OpenSHC::UI::Enums::MMT_ROUNDTABLE) {
             return TRUE;
         }
         return FALSE;
