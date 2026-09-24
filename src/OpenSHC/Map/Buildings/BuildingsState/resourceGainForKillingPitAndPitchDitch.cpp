@@ -13,10 +13,13 @@ namespace Map {
         {
             *ptrRequiredStone = this->buildingCosts[buildingType].requiredStone_0x4;
             *ptrRequiredGold = this->buildingCosts[buildingType].requiredGold;
-            if (buildingType == BT_KILLINGPIT) {
+            switch (buildingType) {
+            case BT_KILLINGPIT:
                 *ptrRequiredGold = 5;
-            } else if (buildingType == BT_PITCHDITCH) {
+                break;
+            case BT_PITCHDITCH:
                 *ptrRequiredGold = 2;
+                break;
             }
         }
 
