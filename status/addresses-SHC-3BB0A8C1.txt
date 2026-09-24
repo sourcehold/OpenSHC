@@ -4341,7 +4341,7 @@ SHC_3BB0A8C1_0x0040C0D0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0040C130 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0040C1A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0040C1A0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0040C1F0 | 0.0% | Pending
 
