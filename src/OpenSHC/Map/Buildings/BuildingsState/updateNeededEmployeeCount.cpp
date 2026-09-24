@@ -25,7 +25,7 @@ namespace Map {
                 return;
             }
 
-            short owner = this->buildings[buildingID].owner;
+            int owner = this->buildings[buildingID].owner;
             this->buildings[buildingID].currentEmployeeCount = 0;
             for (int i = 0; i < this->buildings[buildingID].buildingTypeBasedEmployeeCount; ++i) {
                 if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::hasWorker, this)(buildingID, i)
@@ -36,10 +36,11 @@ namespace Map {
                     ++this->buildings[buildingID].currentEmployeeCount;
                 }
             }
-            short neededCount = this->buildings[buildingID].buildingTypeBasedEmployeeCount
+            this->buildings[buildingID].currentlyNeededEmployeeCount
+                = this->buildings[buildingID].buildingTypeBasedEmployeeCount
                 - this->buildings[buildingID].currentEmployeeCount;
-            this->buildings[buildingID].currentlyNeededEmployeeCount = neededCount;
-            DAT_GameState::instance.playerDataArray[owner].countEconomyBuilding_fixme += neededCount;
+            DAT_GameState::instance.playerDataArray[owner].countEconomyBuilding_fixme
+                += this->buildings[buildingID].currentlyNeededEmployeeCount;
         }
 
     }
