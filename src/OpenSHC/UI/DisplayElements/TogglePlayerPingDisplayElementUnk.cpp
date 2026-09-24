@@ -13,11 +13,11 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004AF6B0
         void TogglePlayerPingDisplayElementUnk(DisplayElementID displayElementID, uint toggleValue)
         {
-            DisplayElement* _displayElement
+            DisplayElement* const displayElement
                 = MACRO_CALL(OpenSHC::UI::DisplayElements_Func::FindDisplayElementWithID)(displayElementID);
-            if (_displayElement != NULL) {
-                _displayElement->displayDuration_0x14 = -1;
-                _displayElement->elementStateUnk_0xc = _displayElement->elementStateUnk_0xc != 0 ? 0 : toggleValue;
+            if (displayElement != NULL) {
+                displayElement->displayDuration_0x14 = -1;
+                displayElement->elementStateUnk_0xc = displayElement->elementStateUnk_0xc != 0 ? 0 : toggleValue;
             }
         }
 
