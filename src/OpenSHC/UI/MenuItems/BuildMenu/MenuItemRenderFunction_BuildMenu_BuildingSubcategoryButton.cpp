@@ -11,10 +11,10 @@ namespace UI {
         namespace BuildMenu {
 
             // FUNCTION: STRONGHOLDCRUSADER 0x00466920
-            void MenuItemRenderFunction_BuildMenu_BuildingSubcategoryButton(int param_1, ...)
+            void MenuItemRenderFunction_BuildMenu_BuildingSubcategoryButton(int buildingType, ...)
             {
                 if (MACRO_CALL_MEMBER(OpenSHC::Map::MapPropertiesState_Func::isMercRecruitableForBuildingType,
-                        DAT_MapPropertiesState::ptr)(param_1)
+                        DAT_MapPropertiesState::ptr)(buildingType)
                     != 0) {
                     MACRO_CALL(OpenSHC::UI::MenuItems::General_Func::
                             MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
