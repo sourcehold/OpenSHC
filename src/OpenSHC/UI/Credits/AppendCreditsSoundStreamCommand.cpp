@@ -11,12 +11,12 @@ namespace UI {
         using OpenSHC::Audio::MSS::enums::SHC_SoundStream;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004DABF0
-        void AppendCreditsSoundStreamCommand(int param_1, SHC_SoundStream param_2)
+        void AppendCreditsSoundStreamCommand(int command, SHC_SoundStream soundStream)
         {
-            if (DAT_UnknownBinkCount::instance < 0x120) {
-                DAT_ARRAY_00eb9b68::instance[DAT_UnknownBinkCount::instance].field0_0x0 = param_1;
-                DAT_ARRAY_00eb9b68::instance[DAT_UnknownBinkCount::instance].soundStream = param_2;
-                DAT_UnknownBinkCount::instance = DAT_UnknownBinkCount::instance + 1;
+            if ((int)DAT_UnknownBinkCount::instance < 288) {
+                DAT_ARRAY_00eb9b68::instance[DAT_UnknownBinkCount::instance].field0_0x0 = command;
+                DAT_ARRAY_00eb9b68::instance[DAT_UnknownBinkCount::instance].soundStream = soundStream;
+                DAT_UnknownBinkCount::instance += 1;
             }
         }
 
