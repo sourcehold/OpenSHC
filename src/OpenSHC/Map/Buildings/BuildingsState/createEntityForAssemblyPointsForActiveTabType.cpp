@@ -41,7 +41,7 @@ namespace Map {
                               .addXgetTile;
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                         DAT_ViewportRenderState::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW,
-                        DAT_TileMapState::instance.field165_0x5549d0 % 10 + 97, 18, -1, tile, 0xa0022);
+                        (int)DAT_TileMapState::instance.field165_0x5549d0 % 10 + 97, 18, -1, tile, 0xa0022);
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                         DAT_ViewportRenderState::ptr)((GmID)DAT_BuildingDefinedData::instance.field382_0x9e1c[i][0],
                         DAT_BuildingDefinedData::instance.field382_0x9e1c[i][1],
@@ -74,7 +74,7 @@ namespace Map {
                               .addXgetTile;
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                         DAT_ViewportRenderState::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW,
-                        DAT_TileMapState::instance.field165_0x5549d0 % 10 + 97, 18, -1, tile, 0xa0022);
+                        (int)DAT_TileMapState::instance.field165_0x5549d0 % 10 + 97, 18, -1, tile, 0xa0022);
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                         DAT_ViewportRenderState::ptr)((GmID)DAT_BuildingDefinedData::instance.field384_0x9e9c[i][0],
                         DAT_BuildingDefinedData::instance.field384_0x9e9c[i][1],
@@ -110,7 +110,7 @@ namespace Map {
                               .addXgetTile;
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                         DAT_ViewportRenderState::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW,
-                        DAT_TileMapState::instance.field165_0x5549d0 % 10 + 97, 18, -1, tile, 0xa0022);
+                        (int)DAT_TileMapState::instance.field165_0x5549d0 % 10 + 97, 18, -1, tile, 0xa0022);
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                         DAT_ViewportRenderState::ptr)((GmID)DAT_BuildingDefinedData::instance.field401_0x9f1c[i][0],
                         DAT_BuildingDefinedData::instance.field401_0x9f1c[i][1],
@@ -134,7 +134,7 @@ namespace Map {
                           .addXgetTile;
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                     DAT_ViewportRenderState::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW,
-                    DAT_TileMapState::instance.field165_0x5549d0 % 10 + 97, 18, -1, tile, 0xa0022);
+                    (int)DAT_TileMapState::instance.field165_0x5549d0 % 10 + 97, 18, -1, tile, 0xa0022);
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                     DAT_ViewportRenderState::ptr)(OpenSHC::IO::Graphics::GID_BODY_TUNNELOR, 3, 14, -40, tile, 0xc0006);
                 return;
@@ -154,7 +154,7 @@ namespace Map {
                           .addXgetTile;
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                     DAT_ViewportRenderState::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW,
-                    DAT_TileMapState::instance.field165_0x5549d0 % 10 + 97, 18, -1, tile, 0xa0022);
+                    (int)DAT_TileMapState::instance.field165_0x5549d0 % 10 + 97, 18, -1, tile, 0xa0022);
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                     DAT_ViewportRenderState::ptr)(
                     OpenSHC::IO::Graphics::GID_BODY_FIGHTING_MONK, 3, 14, -40, tile, 0xc0006);
