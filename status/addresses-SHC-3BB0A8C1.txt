@@ -59637,7 +59637,7 @@ SHC_3BB0A8C1_0x0053B3E0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0053B4F0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0053B530 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053B530 | 92.3% | Global store scheduling
 
 SHC_3BB0A8C1_0x0053B570 | 0.0% | Pending
 
