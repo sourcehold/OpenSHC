@@ -169,7 +169,6 @@ namespace Map {
                 if (this->buildings[DAT_CurrentBuildingID::instance].cooldownTimer != 0) {
                     --this->buildings[DAT_CurrentBuildingID::instance].cooldownTimer;
                 }
-                // Note: clears four entries, workers is declared with two
                 for (int i = 0; i < 4; ++i) {
                     this->buildings[DAT_CurrentBuildingID::instance].workers[i] = 0;
                 }
