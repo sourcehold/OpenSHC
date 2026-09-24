@@ -13,12 +13,12 @@ namespace UI {
         using OpenSHC::UI::Enums::MenuModalType;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00495800
-        void ShowProgressBarSaveLoadDialog(int param_1)
+        void ShowProgressBarSaveLoadDialog(int isSaving)
         {
-            DAT_MenuTextInputState::instance.DAT_MenuOptionsActionParameter = (param_1 != 0 ? 0xe : 0) + 0x20;
+            DAT_MenuTextInputState::instance.DAT_MenuOptionsActionParameter = (isSaving != 0 ? 14 : 0) + 32;
             MACRO_CALL_MEMBER(OpenSHC::UI::MenuModalComposition_Func::activateModalDialog2,
                 DAT_MenuModalComposition1::ptr)(OpenSHC::UI::Enums::MMT_PROGRESS_BAR_BOX);
-            DAT_MenuModalComposition1::instance.activeModalDialogID = Enums::MMT_PROGRESS_BAR_BOX;
+            DAT_MenuModalComposition1::instance.activeModalDialogID = OpenSHC::UI::Enums::MMT_PROGRESS_BAR_BOX;
             MACRO_CALL(OpenSHC::UI::MenuItems::ProgressBarBox_Func::
                     MenuItemActionHandler_ProgressBarBox_LoadAndSaveGameButtonLogic)(0);
         }
