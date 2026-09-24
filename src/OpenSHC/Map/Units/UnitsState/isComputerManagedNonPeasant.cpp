@@ -14,15 +14,14 @@ namespace Map {
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00530080
-        BOOLEnum UnitsState::isComputerManagedNonPeasant(int param_1)
+        BOOLEnum UnitsState::isComputerManagedNonPeasant(int unitID)
         {
-            // fixme: UnitType is loaded as an unsigned short in this function (movzx), but cast to a signed version on
-            // the stack for use later.
-            short UVar1 = (unsigned short)this->units[param_1].unitType;
-            if (UVar1 == OpenSHC::Map::Units::UT_PEASANT) {
+            // the unit type is loaded zero-extended but used as a signed short afterwards
+            short const unitType = (ushort)this->units[unitID].unitType;
+            if (unitType == OpenSHC::Map::Units::UT_PEASANT) {
                 return FALSE;
             }
-            return DAT_UnitPropertiesDefinedData::instance.COMPUTER_MANAGED[UVar1] != 0;
+            return DAT_UnitPropertiesDefinedData::instance.COMPUTER_MANAGED[unitType] != 0;
         }
 
     }
