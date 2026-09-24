@@ -10,6 +10,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0040B5D0
         void BuildingsState::setBuildingInitialEntryTileTry(int buildingID, undefined4 param_2)
         {
+            int sideLength = this->buildings[buildingID].widthOrHeight + param_2 * 2;
             int direction;
             if (this->buildings[buildingID].buildingVariation == 15) {
                 direction = 4;
@@ -22,12 +23,11 @@ namespace Map {
                 }
             } else {
                 direction = this->buildings[buildingID].buildingVariation + 4;
-                if (direction > 7) {
+                if (direction >= 8) {
                     direction -= 8;
                 }
             }
-            this->buildings[buildingID].entranceAttemptTileIndex
-                = (short)(direction / 2) * ((short)this->buildings[buildingID].widthOrHeight + (short)param_2 * 2);
+            this->buildings[buildingID].entranceAttemptTileIndex = direction / 2 * sideLength;
             if (this->buildings[buildingID].buildingType == BT_OXTETHER) {
                 this->buildings[buildingID].entranceAttemptTileIndex = 9;
             }
