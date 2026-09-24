@@ -20,6 +20,9 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0041C310
         BOOLEnum BuildingsState::processResourceGain(int playerID, ResourceType resourceType, int amount)
         {
+            // Matching note: The remaining differences are register and stack slot allocation. The original
+            // keeps the storage type in eax and loads currentNumberOfResource once for both of its checks, where our
+            // compiler folds the duplicated check differently.
             if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getResourceSpace, this)(
                     playerID, (int*)resourceType)
                 < amount) {
