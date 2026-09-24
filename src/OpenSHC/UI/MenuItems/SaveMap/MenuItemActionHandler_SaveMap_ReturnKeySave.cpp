@@ -1,4 +1,5 @@
-#include "OpenSHC/UI.func.hpp"
+#include "OpenSHC/UI/MenuItems/SaveLoadMap.func.hpp"
+#include "OpenSHC/UI/MenuItems/SaveMap.func.hpp"
 
 #include "OpenSHC/Globals/DAT_UserTextHandlerState.hpp"
 
@@ -15,7 +16,7 @@ namespace UI {
                 bVar1 = DAT_UserTextHandlerState::instance.returnPressed != 0;
                 DAT_UserTextHandlerState::instance.returnPressed = 0;
                 if (bVar1) {
-                    MACRO_CALL(OpenSHC::UI_Func::MenuItemActionHandler_SaveLoadMap_Buttons)(3);
+                    MACRO_CALL(OpenSHC::UI::MenuItems::SaveLoadMap_Func::MenuItemActionHandler_SaveLoadMap_Buttons)(3);
                     return;
                 }
             }

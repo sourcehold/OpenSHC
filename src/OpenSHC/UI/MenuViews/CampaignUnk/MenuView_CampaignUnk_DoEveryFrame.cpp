@@ -1,5 +1,6 @@
 #include "OpenSHC/Game/GameCore.func.hpp"
-#include "OpenSHC/UI.func.hpp"
+#include "OpenSHC/UI/Helpers.func.hpp"
+#include "OpenSHC/UI/MenuViews/CampaignUnk.func.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -16,7 +17,7 @@ namespace UI {
             {
                 int iVar1;
 
-                iVar1 = MACRO_CALL(OpenSHC::UI_Func::TicksSinceCounterStart)();
+                iVar1 = MACRO_CALL(OpenSHC::UI::Helpers_Func::TicksSinceCounterStart)();
                 if (iVar1 != 0) {
                     if (DAT_GameCore::instance.missionNumber1to20 == 1) {
                         MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(

@@ -9,10 +9,10 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00523340
         void TribesState::storeDeerXAndYinMapInfo(undefined4 x, undefined4 y)
         {
-            for (int i = 0; i < 4; i++) {
-                if (DAT_GameState::instance.mapAndTime.deerSpawnLocationsXY[i][0] == 0) {
-                    DAT_GameState::instance.mapAndTime.deerSpawnLocationsXY[i][0] = x;
-                    DAT_GameState::instance.mapAndTime.deerSpawnLocationsXY[i][1] = y;
+            for (int i = 0; i < 4; ++i) {
+                if (DAT_GameState::instance.mapAndTime.deerSpawnLocationsXY[i].x == 0) {
+                    DAT_GameState::instance.mapAndTime.deerSpawnLocationsXY[i].x = x;
+                    DAT_GameState::instance.mapAndTime.deerSpawnLocationsXY[i].y = y;
                 }
             }
         }

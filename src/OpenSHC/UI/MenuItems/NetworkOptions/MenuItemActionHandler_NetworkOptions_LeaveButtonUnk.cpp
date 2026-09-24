@@ -1,4 +1,4 @@
-#include "OpenSHC/UI.func.hpp"
+#include "OpenSHC/UI/MenuItems/NetworkOptions.func.hpp"
 #include "OpenSHC/UI/MenuTextInputState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_MenuTextInputState.hpp"

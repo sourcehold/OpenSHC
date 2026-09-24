@@ -1,5 +1,5 @@
 #include "OpenSHC/Map/MapPropertiesState.func.hpp"
-#include "OpenSHC/UI.func.hpp"
+#include "OpenSHC/UI/MenuViews/EditScenario.func.hpp"
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 
 #include "OpenSHC/Globals/DAT_CopyOfScenarioGold.hpp"

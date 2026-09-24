@@ -1,5 +1,5 @@
 #include "OpenSHC/Game/GameCore.func.hpp"
-#include "OpenSHC/UI.func.hpp"
+#include "OpenSHC/UI/MenuItems/BuildingAndStatusMenu.func.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"

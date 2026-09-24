@@ -1,5 +1,6 @@
 #include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
-#include "OpenSHC/UI.func.hpp"
+#include "OpenSHC/UI/Helpers.func.hpp"
+#include "OpenSHC/UI/MenuItems/BuildingAndStatusMenu.func.hpp"
 #include "OpenSHC/Commands/GameCommandType.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
 
@@ -19,7 +20,7 @@ namespace UI {
             void MenuItemActionHandler_BuildingAndStatusMenu_BuildingSleep()
             {
                 if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_CRUSADER_TUTORIAL) {
-                    MACRO_CALL(OpenSHC::UI_Func::SetTutorialHintActiveWithTimestamp)();
+                    MACRO_CALL(OpenSHC::UI::Helpers_Func::SetTutorialHintActiveWithTimestamp)();
                     return;
                 }
                 DAT_GameSynchronyState::instance.DAT_GameCommandParam0

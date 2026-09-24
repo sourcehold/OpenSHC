@@ -1,26 +1,20 @@
 #include "OpenSHC/Map/MapPropertiesState.func.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
 namespace Map {
 
-    // FUNCTION: STRONGHOLDCRUSADER 0x004B7890
-    undefined4 MapPropertiesState::mapHasCertainEvent()
-    {
-        int iVar1;
-        int* piVar2;
+    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-        iVar1 = 0;
-        if (0 < this->eventsCount) {
-            piVar2 = &this->scenarioEvents[0].header.tl_type;
-            do {
-                if (*piVar2 == 1) {
-                    return (undefined4)(1);
-                }
-                iVar1 = iVar1 + 1;
-                piVar2 = piVar2 + 0x39;
-            } while (iVar1 < this->eventsCount);
+    // FUNCTION: STRONGHOLDCRUSADER 0x004B7890
+    BOOLEnum MapPropertiesState::mapHasCertainEvent()
+    {
+        for (int i = 0; i < this->eventsCount; ++i) {
+            if (this->scenarioEvents[i].header.tl_type == 1) {
+                return TRUE;
+            }
         }
-        return (undefined4)(0);
+        return FALSE;
     }
 
 }

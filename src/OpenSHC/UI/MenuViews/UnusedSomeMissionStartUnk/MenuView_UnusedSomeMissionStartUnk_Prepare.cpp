@@ -1,4 +1,5 @@
-#include "OpenSHC/UI.func.hpp"
+#include "OpenSHC/UI/Helpers.func.hpp"
+#include "OpenSHC/UI/MenuViews/UnusedSomeMissionStartUnk.func.hpp"
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 #include "OpenSHC/string-literals.hpp"
@@ -22,7 +23,7 @@ namespace UI {
                     DAT_TextureRenderCoreObject::ptr)(s_multi_background_tgx_005a211c);
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::loadGfxFile,
                     DAT_TextureRenderCoreObject::ptr)(s_gm_fly_tgx_005a2110);
-                MACRO_CALL(OpenSHC::UI_Func::LoadTGX_shc_back)();
+                MACRO_CALL(OpenSHC::UI::Helpers_Func::LoadTGX_shc_back)();
             }
 
         }

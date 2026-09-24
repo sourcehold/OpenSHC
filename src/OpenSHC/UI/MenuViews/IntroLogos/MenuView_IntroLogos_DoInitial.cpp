@@ -1,4 +1,4 @@
-#include "OpenSHC/UI.func.hpp"
+#include "OpenSHC/UI/MenuViews/IntroLogos.func.hpp"
 #include "OpenSHC/UI/Menu.hpp"
 
 #include "OpenSHC/Globals/DAT_IntroTimestamp.hpp"

@@ -1,4 +1,5 @@
-#include "OpenSHC/UI.func.hpp"
+#include "OpenSHC/UI/MenuItems/General.func.hpp"
+#include "OpenSHC/UI/MenuItems/SelectCrusade.func.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_ButtonCurrentlyInteracting.hpp"
@@ -20,7 +21,7 @@ namespace UI {
                 if (DAT_ButtonCurrentlyInteracting::instance != FALSE) {
                     DAT_HighlightedSkirmishType::instance = param_1;
                 }
-                MACRO_CALL(OpenSHC::UI_Func::
+                MACRO_CALL(OpenSHC::UI::MenuItems::General_Func::
                         MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
             }
 

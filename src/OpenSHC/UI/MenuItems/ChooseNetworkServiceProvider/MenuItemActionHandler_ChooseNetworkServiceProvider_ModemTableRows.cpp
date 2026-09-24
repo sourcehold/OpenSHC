@@ -1,4 +1,4 @@
-#include "OpenSHC/UI.func.hpp"
+#include "OpenSHC/UI/MenuItems/ChooseNetworkServiceProvider.func.hpp"
 
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 

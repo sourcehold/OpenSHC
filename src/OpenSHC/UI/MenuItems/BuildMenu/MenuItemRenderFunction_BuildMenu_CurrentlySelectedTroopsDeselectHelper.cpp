@@ -1,4 +1,4 @@
-#include "OpenSHC/UI.func.hpp"
+#include "OpenSHC/UI/MenuItems/BuildMenu.func.hpp"
 
 #include "OpenSHC/Globals/DAT_ButtonUnknownZero.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
