@@ -6099,7 +6099,7 @@ SHC_3BB0A8C1_0x0041B890 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0041B940 | 58.1% | Reimplemented functionally, orig keeps ecx over calls
 
-SHC_3BB0A8C1_0x0041BA00 | 0.0% | Pending
+SHC_3BB0A8C1_0x0041BA00 | 46.9% | Reimplemented functionally, orig keeps ecx over calls
 
 SHC_3BB0A8C1_0x0041BAB0 | 0.0% | Pending
 
