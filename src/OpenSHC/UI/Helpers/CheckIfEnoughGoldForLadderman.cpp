@@ -11,8 +11,9 @@ namespace UI {
     void Helpers::CheckIfEnoughGoldForLadderman()
     {
         DAT_EnoughGoldForRequestedUnit::instance
-            = 4 <= DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                       .currentResources[0xf];
+            = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                  .currentResources[OpenSHC::Game::Resources::RT_GOLD]
+            >= 4;
     }
 
 }
