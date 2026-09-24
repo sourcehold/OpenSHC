@@ -4,11 +4,11 @@ namespace OpenSHC {
 namespace Map {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004F70B0
-    void TileMapState::toggleFlatView(int param_1)
+    void TileMapState::toggleFlatView(int flatView)
     {
-        if (param_1 != this->flatViewToggleValue1) {
-            this->flatViewToggleValue1 = param_1;
-            this->flatViewToggleValue2 = param_1;
+        if (flatView != this->flatViewToggleValue1) {
+            this->flatViewToggleValue1 = flatView;
+            this->flatViewToggleValue2 = flatView;
         }
     }
 
