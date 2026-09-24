@@ -13,11 +13,11 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00401540
         int EntityState::getFireEntityIDAtTile(int tile)
         {
-            int _current = DAT_TileMapState::instance.EntityLayer[tile];
-            while (_current != 0) {
-                if (this->entityArray[_current].entityType == OpenSHC::Map::Entities::ET_FIRE)
-                    return _current;
-                _current = this->entityArray[_current].nextEntityOnThisTileByID;
+            for (int entityID = DAT_TileMapState::instance.EntityLayer[tile]; entityID != 0;
+                entityID = this->entityArray[entityID].nextEntityOnThisTileByID) {
+                if (this->entityArray[entityID].entityType == OpenSHC::Map::Entities::ET_FIRE) {
+                    return entityID;
+                }
             }
             return 0;
         }
