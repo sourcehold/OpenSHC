@@ -5057,7 +5057,7 @@ SHC_3BB0A8C1_0x0040F790 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0040F8A0 | 91.7% | Reimplemented functionally, register allocation differs
 
-SHC_3BB0A8C1_0x0040F9D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0040F9D0 | 31.4% | Reimplemented functionally, worker blocks merged in orig
 
 SHC_3BB0A8C1_0x0040FC40 | 0.0% | Pending
 
