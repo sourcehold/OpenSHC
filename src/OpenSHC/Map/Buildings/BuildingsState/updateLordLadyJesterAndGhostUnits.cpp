@@ -12,6 +12,7 @@
 #include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
+#include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -41,8 +42,8 @@ namespace Map {
             int keepID = DAT_GameState::instance.playerDataArray[playerID].keep.id;
             int campgroundX = DAT_GameState::instance.playerDataArray[playerID].campground.xEntry;
             int campgroundY = DAT_GameState::instance.playerDataArray[playerID].campground.yEntry - 1;
-            if (keepID != 0 && this->buildings[keepID].buildingType == BT_MANORHOUSE) {
-                campgroundY = DAT_GameState::instance.playerDataArray[playerID].campground.yEntry;
+            if (keepID != 0 && DAT_BuildingsState::instance.buildings[keepID].buildingType == BT_MANORHOUSE) {
+                ++campgroundY;
             }
 
             if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY) {
@@ -105,13 +106,13 @@ namespace Map {
             }
             if (ladyID != 0) {
                 if (DAT_GameState::instance.playerDataArray[playerID].someUnitIDSelfRef
-                    == DAT_UnitsState::instance.units[ladyID].uid) {
+                    != DAT_UnitsState::instance.units[ladyID].uid) {
+                    DAT_GameState::instance.playerDataArray[playerID].ladyIDUnk = 0;
+                    DAT_GameState::instance.playerDataArray[playerID].someUnitIDSelfRef = 0;
+                } else {
                     DAT_UnitsState::instance.units[ladyID].workplaceBuildingID_1 = keepID;
                     DAT_UnitsState::instance.units[ladyID].targetX_2 = campgroundX;
                     DAT_UnitsState::instance.units[ladyID].targetY_2 = campgroundY;
-                } else {
-                    DAT_GameState::instance.playerDataArray[playerID].ladyIDUnk = 0;
-                    DAT_GameState::instance.playerDataArray[playerID].someUnitIDSelfRef = 0;
                 }
             }
 
@@ -126,14 +127,8 @@ namespace Map {
                     DAT_GameState::instance.playerDataArray[playerID].lordID = lordID;
                     MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::commitUnitLocation, DAT_UnitsState::ptr)(
                         lordID);
-                    bool solitary = DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY;
                     DAT_UnitsState::instance.units[lordID].state.generic = (UnitState)2;
-                    if (solitary) {
-                        if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_BUILDERUnk
-                            && DAT_GameCore::instance.selectedLordType_2Unk == 1) {
-                            DAT_UnitsState::instance.units[lordID].unknownLordTypeBasedMissionSpecificValue_01 = 1;
-                        }
-                    } else {
+                    if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
                         if (MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::getLordTypeForPlayer,
                                 DAT_GameSynchronyState::ptr)(playerID)
                             == 1) {
@@ -143,29 +138,44 @@ namespace Map {
                                 DAT_GameSynchronyState::ptr)(playerID)
                             != FALSE) {
                             // The health of AI lords depends on the AI character
-                            int aicIndex = DAT_GameState::instance.playerDataArray[playerID].aiType - 1;
-                            int health = DAT_UnitsState::instance.units[lordID].health;
-                            int healthPercentage
-                                = DAT_SkirmishDefinedData::instance.MaxLordHealthMapping[aicIndex].maxHealthMultiplier;
                             DAT_UnitsState::instance.units[lordID].maxHealthRatingLord
-                                = DAT_SkirmishDefinedData::instance.MaxLordHealthMapping[aicIndex].aiTypeA;
-                            int maxHealth = DAT_UnitsState::instance.units[lordID].maxHealth;
-                            DAT_UnitsState::instance.units[lordID].health = health * healthPercentage / 100;
-                            DAT_UnitsState::instance.units[lordID].maxHealth = maxHealth * healthPercentage / 100;
+                                = DAT_SkirmishDefinedData::instance
+                                      .MaxLordHealthMapping[DAT_GameState::instance.playerDataArray[playerID].aiType
+                                          - 1]
+                                      .aiTypeA;
+                            DAT_UnitsState::instance.units[lordID].health
+                                = DAT_UnitsState::instance.units[lordID].health
+                                * DAT_SkirmishDefinedData::instance
+                                      .MaxLordHealthMapping[DAT_GameState::instance.playerDataArray[playerID].aiType
+                                          - 1]
+                                      .maxHealthMultiplier
+                                / 100;
+                            DAT_UnitsState::instance.units[lordID].maxHealth
+                                = DAT_UnitsState::instance.units[lordID].maxHealth
+                                * DAT_SkirmishDefinedData::instance
+                                      .MaxLordHealthMapping[DAT_GameState::instance.playerDataArray[playerID].aiType
+                                          - 1]
+                                      .maxHealthMultiplier
+                                / 100;
                         }
+                    } else if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_BUILDERUnk
+                        && DAT_GameCore::instance.selectedLordType_2Unk == 1) {
+                        DAT_UnitsState::instance.units[lordID].unknownLordTypeBasedMissionSpecificValue_01 = 1;
                     }
                 }
             }
             if (lordID != 0) {
                 if (DAT_GameState::instance.playerDataArray[playerID].lordUID
-                    == DAT_UnitsState::instance.units[lordID].uid) {
+                    != DAT_UnitsState::instance.units[lordID].uid) {
+                    if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_BUILDERUnk
+                        && DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 == OpenSHC::Map::MT_JUST_BUILD) {
+                        DAT_GameState::instance.playerDataArray[playerID].lordID = 0;
+                        DAT_GameState::instance.playerDataArray[playerID].lordUID = 0;
+                    }
+                } else {
                     DAT_UnitsState::instance.units[lordID].workplaceBuildingID_1 = keepID;
                     DAT_UnitsState::instance.units[lordID].targetX_2 = campgroundX;
                     DAT_UnitsState::instance.units[lordID].targetY_2 = campgroundY;
-                } else if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_BUILDERUnk
-                    && DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 == OpenSHC::Map::MT_JUST_BUILD) {
-                    DAT_GameState::instance.playerDataArray[playerID].lordID = 0;
-                    DAT_GameState::instance.playerDataArray[playerID].lordUID = 0;
                 }
             }
 
@@ -185,13 +195,13 @@ namespace Map {
             }
             if (jesterID != 0) {
                 if (DAT_GameState::instance.playerDataArray[playerID].someUnitIDSelfRef_2
-                    == DAT_UnitsState::instance.units[jesterID].uid) {
+                    != DAT_UnitsState::instance.units[jesterID].uid) {
+                    DAT_GameState::instance.playerDataArray[playerID].jesterIDUnk = 0;
+                    DAT_GameState::instance.playerDataArray[playerID].someUnitIDSelfRef_2 = 0;
+                } else {
                     DAT_UnitsState::instance.units[jesterID].workplaceBuildingID_1 = keepID;
                     DAT_UnitsState::instance.units[jesterID].targetX_2 = campgroundX;
                     DAT_UnitsState::instance.units[jesterID].targetY_2 = campgroundY;
-                } else {
-                    DAT_GameState::instance.playerDataArray[playerID].jesterIDUnk = 0;
-                    DAT_GameState::instance.playerDataArray[playerID].someUnitIDSelfRef_2 = 0;
                 }
             }
 
