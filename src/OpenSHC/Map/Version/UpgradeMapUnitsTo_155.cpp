@@ -15,9 +15,9 @@ namespace Map {
     void Version::UpgradeMapUnitsTo_155()
     {
         DAT_CurrentUnitSlotID::instance = 2500;
-        for (int _unitID = 1; _unitID < 2500; _unitID++) {
-            if (DAT_UnitsState::instance.units[_unitID].logicalState != Units::ULS_INVISIBLE) {
-                DAT_UnitsState::instance.units[_unitID].killedFlagUnk = 0;
+        for (int unitID = 1; unitID < 2500; ++unitID) {
+            if (DAT_UnitsState::instance.units[unitID].logicalState != Units::ULS_INVISIBLE) {
+                DAT_UnitsState::instance.units[unitID].killedFlagUnk = 0;
             }
         }
     }
