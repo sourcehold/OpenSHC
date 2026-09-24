@@ -14,12 +14,11 @@ namespace UI {
             void MenuItemRenderFunction_InGameMenu_MapEventIconUnk(int param_1, ...)
             {
                 DAT_ButtonUnknownZero::instance = 1;
-                if ((DAT_MinimapViewState::instance.spawnMomentCount != 0)
-                    && (DAT_GameCore::instance.isBinkVideoPlaying == 0)) {
+                if (DAT_MinimapViewState::instance.spawnMomentCount != 0
+                    && DAT_GameCore::instance.isBinkVideoPlaying == 0) {
                     DAT_ButtonUnknownZero::instance = 0;
                     MACRO_CALL(OpenSHC::UI::MenuItems::General_Func::
                             MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
-                    return;
                 }
             }
 
