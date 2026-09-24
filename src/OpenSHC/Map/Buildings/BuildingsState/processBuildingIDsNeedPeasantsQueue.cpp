@@ -32,17 +32,30 @@ namespace Map {
                 }
 
                 if (this->buildings[buildingID].buildingType == BT_QUARRY) {
-                    for (int worker = 0; worker < 3; ++worker) {
-                        if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::hasWorker, this)(
-                                buildingID, worker)
-                            == FALSE) {
-                            int unitID = MACRO_CALL_MEMBER(
-                                OpenSHC::Map::Units::UnitsState_Func::assignPeasantToBuilding, DAT_UnitsState::ptr)(
-                                OpenSHC::Map::Units::UT_QUARRYMASON, buildingID, playerID, worker);
-                            MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::assignWorkerToBuilding,
-                                this)(buildingID, unitID, worker);
-                        }
+                    if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::hasWorker, this)(buildingID, 0)
+                        == FALSE) {
+                        int unitID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::assignPeasantToBuilding,
+                            DAT_UnitsState::ptr)(OpenSHC::Map::Units::UT_QUARRYMASON, buildingID, playerID, 0);
+                        MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::assignWorkerToBuilding, this)(
+                            buildingID, unitID, 0);
                     }
+
+                    if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::hasWorker, this)(buildingID, 1)
+                        == FALSE) {
+                        int unitID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::assignPeasantToBuilding,
+                            DAT_UnitsState::ptr)(OpenSHC::Map::Units::UT_QUARRYMASON, buildingID, playerID, 1);
+                        MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::assignWorkerToBuilding, this)(
+                            buildingID, unitID, 1);
+                    }
+
+                    if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::hasWorker, this)(buildingID, 2)
+                        == FALSE) {
+                        int unitID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::assignPeasantToBuilding,
+                            DAT_UnitsState::ptr)(OpenSHC::Map::Units::UT_QUARRYMASON, buildingID, playerID, 2);
+                        MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::assignWorkerToBuilding, this)(
+                            buildingID, unitID, 2);
+                    }
+
                 } else if (this->buildings[buildingID].buildingType == BT_IRONMINE) {
                     if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::hasWorker, this)(buildingID, 0)
                         == FALSE) {
@@ -58,34 +71,64 @@ namespace Map {
                         MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::assignWorkerToBuilding, this)(
                             buildingID, unitID, 1);
                     }
-                } else if (this->buildings[buildingID].buildingType == BT_MILL
-                    || this->buildings[buildingID].buildingType == BT_WATERPOT
-                    || this->buildings[buildingID].buildingType == BT_CATHEDRAL) {
-                    for (int worker = 0; worker < 3; ++worker) {
+                } else {
+                    // The mill, water pot and cathedral share the code for their three workers
+                    UnitType workerType;
+                    if (this->buildings[buildingID].buildingType == BT_MILL) {
+                        workerType = (UnitType)DAT_BuildingDefinedData::instance.WorkerTypeForBuildingType[BT_MILL];
+                    } else if (this->buildings[buildingID].buildingType == BT_WATERPOT) {
+                        workerType = (UnitType)DAT_BuildingDefinedData::instance.WorkerTypeForBuildingType[BT_WATERPOT];
+                    } else if (this->buildings[buildingID].buildingType == BT_CHURCH) {
+                        workerType = (UnitType)DAT_BuildingDefinedData::instance.WorkerTypeForBuildingType[BT_CHURCH];
                         if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::hasWorker, this)(
-                                buildingID, worker)
+                                buildingID, 0)
                             == FALSE) {
-                            int unitID = MACRO_CALL_MEMBER(
-                                OpenSHC::Map::Units::UnitsState_Func::assignPeasantToBuilding, DAT_UnitsState::ptr)(
-                                (UnitType)DAT_BuildingDefinedData::instance
-                                    .WorkerTypeForBuildingType[this->buildings[buildingID].buildingType],
-                                buildingID, playerID, worker);
+                            int unitID
+                                = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::assignPeasantToBuilding,
+                                    DAT_UnitsState::ptr)(workerType, buildingID, playerID, 0);
                             MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::assignWorkerToBuilding,
-                                this)(buildingID, unitID, worker);
+                                this)(buildingID, unitID, 0);
                         }
+
+                        if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::hasWorker, this)(
+                                buildingID, 1)
+                            == FALSE) {
+                            int unitID
+                                = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::assignPeasantToBuilding,
+                                    DAT_UnitsState::ptr)(workerType, buildingID, playerID, 1);
+                            MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::assignWorkerToBuilding,
+                                this)(buildingID, unitID, 1);
+                        }
+
+                        continue;
+                    } else if (this->buildings[buildingID].buildingType == BT_CATHEDRAL) {
+                        workerType
+                            = (UnitType)DAT_BuildingDefinedData::instance.WorkerTypeForBuildingType[BT_CATHEDRAL];
+                    } else {
+                        continue;
                     }
-                } else if (this->buildings[buildingID].buildingType == BT_CHURCH) {
-                    for (int worker = 0; worker < 2; ++worker) {
-                        if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::hasWorker, this)(
-                                buildingID, worker)
-                            == FALSE) {
-                            int unitID = MACRO_CALL_MEMBER(
-                                OpenSHC::Map::Units::UnitsState_Func::assignPeasantToBuilding, DAT_UnitsState::ptr)(
-                                (UnitType)DAT_BuildingDefinedData::instance.WorkerTypeForBuildingType[BT_CHURCH],
-                                buildingID, playerID, worker);
-                            MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::assignWorkerToBuilding,
-                                this)(buildingID, unitID, worker);
-                        }
+                    if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::hasWorker, this)(buildingID, 0)
+                        == FALSE) {
+                        int unitID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::assignPeasantToBuilding,
+                            DAT_UnitsState::ptr)(workerType, buildingID, playerID, 0);
+                        MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::assignWorkerToBuilding, this)(
+                            buildingID, unitID, 0);
+                    }
+
+                    if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::hasWorker, this)(buildingID, 1)
+                        == FALSE) {
+                        int unitID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::assignPeasantToBuilding,
+                            DAT_UnitsState::ptr)(workerType, buildingID, playerID, 1);
+                        MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::assignWorkerToBuilding, this)(
+                            buildingID, unitID, 1);
+                    }
+
+                    if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::hasWorker, this)(buildingID, 2)
+                        == FALSE) {
+                        int unitID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::assignPeasantToBuilding,
+                            DAT_UnitsState::ptr)(workerType, buildingID, playerID, 2);
+                        MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::assignWorkerToBuilding, this)(
+                            buildingID, unitID, 2);
                     }
                 }
             }
