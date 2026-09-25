@@ -139,3 +139,14 @@ src/OpenSHC/Map/Buildings/BuildingsState/findClosestEnemyBuildingWithinRadius.cp
 src/OpenSHC/Map/Units/UnitsState/checkTargetBuildingPossibilityOrState.cpp
 src/OpenSHC/Map/Units/UpdateMother.cpp
 src/OpenSHC/Map/Buildings/BuildingsState/pickARandomBuildingIDOfTheseThreeTypes.cpp
+src/OpenSHC/Map/Units/UpdateMonk.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/findFreeCathedralAssemblyTile.cpp
+src/OpenSHC/Map/Units/UnitsState/handleUnitMovementWhenTargetingBuildings.cpp
+src/OpenSHC/Map/Units/UpdateBallista.cpp
+src/OpenSHC/Map/Units/UpdateWheatFarmer.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/isFarmTileReadyForWheatStageChange.cpp
+src/OpenSHC/Map/Units/UpdateArabianSwordsman.cpp
+src/OpenSHC/Map/Buildings/BuildingsState/getKeepLocationForAIUnit.cpp
+src/OpenSHC/Map/Units/UnitsState/playHurtSFXForUnit.cpp
+src/OpenSHC/Map/Units/UnitsState/setUnitFacingDirectionBasedOnBuilding.cpp
+src/OpenSHC/Random/RNG/nextRandomNumber1.cpp
