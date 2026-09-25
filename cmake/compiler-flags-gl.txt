@@ -17,7 +17,6 @@ src/OpenSHC/Map/Buildings/BuildingsState/buildingIsAccessible.cpp
 src/OpenSHC/Map/Buildings/BuildingsState/getResourceCountThatCanBeDeposited.cpp
 src/OpenSHC/Map/Buildings/BuildingsState/addResourceToStockpile.cpp
 src/OpenSHC/Audio/SFX/SFXState/playSFXAtLocation.cpp
-src/OpenSHC/Map/Units/SetRestingForUnit.cpp
 src/OpenSHC/Map/Units/UnitsState/checkIfCitizenUnitIsAliveBasedOnState.cpp
 src/OpenSHC/Game/GameStateStructures/setLastEncounteredTroopUnit.cpp
 src/OpenSHC/Map/Units/UnitsState/makeUnitStopWalkingByClearingPathProgressState.cpp
