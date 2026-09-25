@@ -102,7 +102,8 @@ namespace UI {
 
             void drawLine(int x1, int y1, int x2, int y2, ushort color);
 
-            void drawHeaderTextBanner(int textGroupIndex, int textNumInGroup, int xPos, int yPos, int width);
+            void drawHeaderTextBanner(
+                int textGroupIndex, int textNumInGroup, int xPos, int yPos, int width, int height);
         };
 
         static_assert_cpp98_obj(sizeof(PencilRenderCore) == 66, PencilRenderCore);

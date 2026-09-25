@@ -1,0 +1,25 @@
+#include "OpenSHC/Rendering.func.hpp"
+#include "OpenSHC/UI/Credits.func.hpp"
+#include "OpenSHC/UI/Helpers.func.hpp"
+#include "OpenSHC/UI/MenuViews/Unknown26.func.hpp"
+
+#include "OpenSHC/Globals/DAT_GameCore.hpp"
+
+namespace OpenSHC {
+namespace UI {
+    namespace MenuViews {
+        namespace Unknown26 {
+
+            // FUNCTION: STRONGHOLDCRUSADER 0x004DCC70
+            void MenuView_Unknown26_CampaignRelatedUnk_Prepare()
+            {
+                MACRO_CALL(OpenSHC::UI::Credits_Func::ResetCredits)();
+                MACRO_CALL(OpenSHC::UI::Helpers_Func::BuildIntroLogoSequence)(
+                    DAT_GameCore::instance.missionNumber1to20, DAT_GameCore::instance.section1066);
+                MACRO_CALL(OpenSHC::Rendering_Func::TicksStartCounter)();
+            }
+
+        }
+    }
+}
+}
