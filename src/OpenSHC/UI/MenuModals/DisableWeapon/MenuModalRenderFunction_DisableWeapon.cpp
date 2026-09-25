@@ -12,7 +12,7 @@ namespace UI {
             void MenuModalRenderFunction_DisableWeapon(int x, int y, int width, int height)
             {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner,
-                    DAT_PencilRenderCore::ptr)(199, 0xbd, x, y, width);
+                    DAT_PencilRenderCore::ptr)(199, 0xbd, x, y, width, height);
             }
 
         }
