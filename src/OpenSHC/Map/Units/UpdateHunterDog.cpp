@@ -306,7 +306,7 @@ namespace Map {
             if (DAT_UnitsState::instance.units[hunter].state.generic == OpenSHC::Map::Units::States::US_IDLEUnk) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setDestinationForUnit, DAT_UnitsState::ptr)(
                     unitID, DAT_UnitsState::instance.units[hunter].x, DAT_UnitsState::instance.units[hunter].y, 0);
-                if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].totalSizeOfPathPlan < 9) {
+                if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].totalSizeOfPathPlan <= 8) {
                     DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state.generic
                         = OpenSHC::Map::Units::States::US_RELOAD_WEAPONUnk;
                 } else {
