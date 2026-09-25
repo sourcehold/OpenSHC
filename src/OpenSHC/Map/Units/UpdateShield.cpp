@@ -31,7 +31,7 @@ namespace Map {
     void Units::UpdateShield()
     {
         int unitID = DAT_CurrentUnitSlotID::instance;
-        short tribe = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].tribeID;
+        int tribe = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].tribeID;
         int owner = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].owner;
         DAT_GameState::instance.playerDataArray[owner].armySize += 1;
         DAT_GameState::instance.playerDataArray[owner].currentSiegeWeaponCount += 1;
