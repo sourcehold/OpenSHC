@@ -65,7 +65,7 @@ namespace UI {
 
         void renderMinimapPreview(int screenX, int screenY);
 
-        void triggerMinimapRedraw();
+        void triggerMinimapRedraw(int unknown);
 
         void renderMinimapTileStripWithLuminescence(uint param_1, int param_2, int param_3, uint param_4, int param_5);
 
