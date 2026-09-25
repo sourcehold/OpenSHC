@@ -24,7 +24,7 @@ namespace AI {
             sizeof(this->isHandled), 0, this->isHandled);
         for (int tries = 0; tries < 8; ++tries) {
             ++castleID;
-            if ((int)castleID > 7) {
+            if ((int)castleID >= 8) {
                 castleID = 0;
             }
             int const aiType = this->aivs[aivID].aiType;
