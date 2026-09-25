@@ -115,6 +115,51 @@ def entries(byaddr, files=None):
             yield f, byaddr.get(int(address, 16)), address
 
 
+SOURCE_LINE_RE = re.compile(r"\.cpp:(\d+)\)")
+REGISTERS = r"(?:e?(?:ax|bx|cx|dx|si|di|bp|sp)|[abcd][lh])"
+
+
+def diff_rows(entry):
+    """Yield (kind, text, source line) for every row of a reccmp diff, in order.
+
+    kind is "both", "orig" or "recomp"; text is the row as reccmp prints it, instruction
+    first. Only our side carries a source annotation, so the line is carried forward until
+    the next one appears. Every script that reads a diff goes through here.
+    """
+    line = None
+    for hunk in entry.get("diff") or []:
+        for block in hunk[1]:
+            for kind, rows in block.items():
+                for row in rows:
+                    if kind != "orig":
+                        m = SOURCE_LINE_RE.search(row[1])
+                        if m:
+                            line = int(m.group(1))
+                    yield kind, row[1], line
+
+
+def instruction(text):
+    """A diff row without its source annotation."""
+    return text.split("\t")[0].strip()
+
+
+def canonical(text, registers=True):
+    """An instruction with call targets, template arguments and absolute addresses folded away.
+
+    With registers=False the register names go too, so that a difference which is only the
+    allocator's choice of register compares equal. This is for spotting *structural*
+    differences; _normalize below answers a different question (see normalized_ratio) and
+    deliberately folds more, so the two are not interchangeable.
+    """
+    s = instruction(text)
+    s = re.sub(r"<OFFSET\d+>|trampoline<[^>]*>|FunctionResolver::\S+", "T", s)
+    s = re.sub(r"<[^>]*>", "<T>", s)
+    s = re.sub(r"0x[0-9a-f]{5,}", "A", s)
+    if not registers:
+        s = re.sub(r"\b%s\b" % REGISTERS, "r", s)
+    return s
+
+
 def _normalize(line):
     """Reduce an asm line so call targets, resolver names and absolute addresses compare equal."""
     s = line.split("\t")[0].strip()
@@ -131,17 +176,11 @@ def _normalize(line):
 
 def _asm_lines(entry):
     orig, recomp = [], []
-    for hunk in entry.get("diff") or []:
-        for block in hunk[1]:
-            for kind, rows in block.items():
-                if kind == "both":
-                    for row in rows:
-                        orig.append(row[1])
-                        recomp.append(row[1])
-                elif kind == "orig":
-                    orig += [row[1] for row in rows]
-                else:
-                    recomp += [row[1] for row in rows]
+    for kind, row, _ in diff_rows(entry):
+        if kind != "recomp":
+            orig.append(row)
+        if kind != "orig":
+            recomp.append(row)
     return orig, recomp
 
 
@@ -161,14 +200,10 @@ def normalized_ratio(entry):
 
 def print_diff(entry):
     print("### %s %.1f%% norm %.1f%%" % (entry["name"], float(entry["matching"]) * 100, normalized_ratio(entry) * 100))
-    for hunk in entry.get("diff") or []:
-        for block in hunk[1]:
-            for kind, rows in block.items():
-                prefix = {"both": " ", "orig": "-", "recomp": "+"}[kind]
-                for row in rows:
-                    s = re.sub(r"FunctionResolver::Resolver<.*?,&([\w:]+),\d>::GameFunction.*", r"<\1>", row[1])
-                    s = re.sub(r"StructResolver::Instance<([\w:]+),\d+>::", r"I<\1>::", s)
-                    print(prefix + s)
+    for kind, row, _ in diff_rows(entry):
+        s = re.sub(r"FunctionResolver::Resolver<.*?,&([\w:]+),\d>::GameFunction.*", r"<\1>", row)
+        s = re.sub(r"StructResolver::Instance<([\w:]+),\d+>::", r"I<\1>::", s)
+        print({"both": " ", "orig": "-", "recomp": "+"}[kind] + s)
 
 
 # ---------------------------------------------------------------- resolver index

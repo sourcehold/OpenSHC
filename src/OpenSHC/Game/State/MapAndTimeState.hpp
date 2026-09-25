@@ -71,15 +71,7 @@ namespace Game {
             int field30_0x9c; // 0x0000009C length: 4
             int field31_0xa0; // 0x000000A0 length: 4
             int field32_0xa4; // 0x000000A4 length: 4
-            int field33_0xa8; // 0x000000A8 length: 4
-            int field34_0xac; // 0x000000AC length: 4
-            int field35_0xb0; // 0x000000B0 length: 4
-            int field36_0xb4; // 0x000000B4 length: 4
-            int field37_0xb8; // 0x000000B8 length: 4
-            int field38_0xbc; // 0x000000BC length: 4
-            int field39_0xc0; // 0x000000C0 length: 4
-            int field40_0xc4; // 0x000000C4 length: 4
-            int field41_0xc8; // 0x000000C8 length: 4
+            int ownLossesArray[9]; // 0x000000A8 length: 36
             int emenyHitArray[9]; // 0x000000CC length: 36
             int field43_0xf0; // 0x000000F0 length: 4
             int field44_0xf4; // 0x000000F4 length: 4

@@ -107,6 +107,32 @@ quiet builds, `/Zs` syntax checks, a reccmp report (match %, normalized % ignori
 showing and splicing many function bodies, one progress commit per changed function, and repairing sources after
 `*_Func` namespace refactors. Prefer them over ad-hoc scripts when a task spans many functions.
 
+`focus.py NAME...` trims the sources list to the files being worked on, so a build takes seconds instead of
+minutes; `focus.py --restore` puts the full list back before a verification run. `gl_flags.py` maintains the
+per-file /GL list in `cmake/compiler-flags-gl.txt`.
+
+A second group inspects the original binary to find differences that are not register allocation.
+Run them from the batch folder; each takes function names or path substrings and defaults to the whole list:
+
+- `jump_table_order.py [--apply] [NAME...]` compares a state `switch` with the original's jump table and reorders
+  the cases. MSVC emits jump-table case bodies in source order, so cases in the wrong order cap the match
+  regardless of what the bodies contain. It refuses to move a body that can fall through.
+- `compare_constants.py [NAME...]` diffs the sequence of `cmp` constants between the original and our build.
+  A `-x / +y` pair one apart is an off-by-one literal, a lone `-x` is a check we are missing, and a run of lines
+  moving together means our blocks are in a different order.
+- `fix_off_by_one.py [--apply] [NAME...]` rewrites `> 31` to `>= 32` and friends, so the literal matches the one
+  the original compares against. Behaviour is unchanged, but it is not always an improvement: verify per function
+  and revert the ones that got worse.
+- `original_asm.py NAME [--jumptable]` prints the original's disassembly, or its switch case order, for reading
+  by hand.
+- `diff_reasons.py [--context N] [--full] [NAME...]` reports, per function, where the assembly first really diverges, the
+  source line and a guess at why, skipping differences that are only registers, call targets or prologue
+  housekeeping. Start here: a diff cascades, so a low match % mostly reflects one early divergence plus its tail.
+
+`jump_table_order.py` and `original_asm.py` read the original exe and need `capstone` and `_original/`;
+`compare_constants.py` and `fix_off_by_one.py` read `reccmp/dll/diff.json`, so run reccmp first.
+Always rebuild and `reccmp_report.py cmp BASE.json` after `--apply`: these are heuristics, not guarantees.
+
 ### Binary Comparison (`reccmp`)
 
 Compares generated binaries against the original executable.
