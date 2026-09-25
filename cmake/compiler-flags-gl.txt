@@ -10,14 +10,10 @@ src/OpenSHC/IO/ResourceManager/readNextPartOfCurrentResourceIntoMemory.cpp
 src/OpenSHC/Map/Units/UpdateAppleFarmer.cpp
 src/OpenSHC/Map/LandscapeState/selectClosestAppleTree.cpp
 src/OpenSHC/Map/Units/UnitsState/setDestinationForUnit.cpp
-src/OpenSHC/Map/Units/SetStateToFreetimeWalking.cpp
-src/OpenSHC/Map/Units/IncrementAndOptionalUpdateAVValueRelated.cpp
 src/OpenSHC/Map/Units/UnitsState/hasUnitReachedDestination.cpp
 src/OpenSHC/Map/Buildings/BuildingsState/getBuildingThatCanStoreThisResource.cpp
 src/OpenSHC/Map/Units/WarnIfPlayersGranaryIsFull.cpp
 src/OpenSHC/Map/Buildings/BuildingsState/buildingIsAccessible.cpp
-src/OpenSHC/Map/Units/ComputeGoodsProduced.cpp
-src/OpenSHC/Map/Units/UpdateWorker_ConsiderTakingABreakUnk.cpp
 src/OpenSHC/Map/Buildings/BuildingsState/getResourceCountThatCanBeDeposited.cpp
 src/OpenSHC/Map/Buildings/BuildingsState/addResourceToStockpile.cpp
 src/OpenSHC/Audio/SFX/SFXState/playSFXAtLocation.cpp
@@ -46,7 +42,6 @@ src/OpenSHC/Map/Buildings/BuildingsState/updateBuildingSignpostCounter.cpp
 src/OpenSHC/Map/Units/UnitsState/resetUnitMovementState.cpp
 src/OpenSHC/Map/Units/PlayStockpileIsFullWarning.cpp
 src/OpenSHC/Map/Buildings/BuildingsState/canBuildingStoreTheAmount.cpp
-src/OpenSHC/Map/Units/ConsiderHavingABreakNowUnk.cpp
 src/OpenSHC/Map/Units/UnitsState/commitUnitLocation.cpp
 src/OpenSHC/Map/Units/UpdateBurningMan.cpp
 src/OpenSHC/Map/Units/UnitsState/computeLadderClimbPath.cpp
@@ -65,7 +60,6 @@ src/OpenSHC/Random/RNG/nextRandomNumber2.cpp
 src/OpenSHC/Map/Units/UpdateCow.cpp
 src/OpenSHC/Map/Units/UnitsState/sitDownIfStanding.cpp
 src/OpenSHC/Map/Units/UpdateDairyFarmer.cpp
-src/OpenSHC/Map/Units/CheckUnitProductionPaused.cpp
 src/OpenSHC/Map/Units/UpdateDeer.cpp
 src/OpenSHC/Map/Units/TribesState/scatterTribeUnitsRandomly.cpp
 src/OpenSHC/Map/Units/UpdateDrunkard.cpp
@@ -99,7 +93,6 @@ src/OpenSHC/Map/Navigation/DirectionAlgorithmState/setAxisBasedDistanceResult.cp
 src/OpenSHC/Map/Units/UpdateJuggler.cpp
 src/OpenSHC/Map/Units/UpdateLadderman.cpp
 src/OpenSHC/Map/Units/TribesState/addUnitToNewTribe.cpp
-src/OpenSHC/Map/Units/DetachLadderman.cpp
 src/OpenSHC/Map/Buildings/BuildingsState/findFreeEngineerAssemblyTile.cpp
 src/OpenSHC/Map/Units/UnitsState/moveToFreeTileNearby.cpp
 src/OpenSHC/Map/TileMapState/getOrientationThatIsWallTowerOrGatehouse.cpp
