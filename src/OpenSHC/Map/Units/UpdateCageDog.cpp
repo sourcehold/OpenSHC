@@ -136,7 +136,7 @@ namespace Map {
         if (state == (UnitState)0xd0) {
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::makeUnitStopWalkingByClearingPathProgressState,
                 DAT_UnitsState::ptr)(DAT_CurrentUnitSlotID::instance);
-            if (DAT_UnitsState::instance.units[unitID].movementRelated > 7) {
+            if (DAT_UnitsState::instance.units[unitID].movementRelated >= 8) {
                 DAT_UnitsState::instance.units[unitID].state.generic
                     = OpenSHC::Map::Units::States::US_DETERMINE_NEXT_STATEUnk;
             }
@@ -237,7 +237,7 @@ namespace Map {
                     return;
                 }
             }
-            if (DAT_UnitsState::instance.units[unitID].currentIndexInPathPlan < 5
+            if (DAT_UnitsState::instance.units[unitID].currentIndexInPathPlan <= 4
                 && DAT_UnitsState::instance.units[unitID].totalSizeOfPathPlan > 8) {
                 DAT_UnitsState::instance.units[unitID].stateBasedSpeed = 0;
                 DAT_UnitsState::instance.units[unitID].animationSheetFrameOffset = 0x81;
