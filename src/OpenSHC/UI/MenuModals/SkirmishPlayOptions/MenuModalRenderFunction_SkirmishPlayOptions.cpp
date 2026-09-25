@@ -12,7 +12,7 @@ namespace UI {
             void MenuModalRenderFunction_SkirmishPlayOptions(int x, int y, int width, int height)
             {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner,
-                    DAT_PencilRenderCore::ptr)(0x4f, 0x67, x, y, width);
+                    DAT_PencilRenderCore::ptr)(0x4f, 0x67, x, y, width, height);
             }
 
         }
