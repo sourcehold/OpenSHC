@@ -115,7 +115,7 @@ namespace Map {
             }
             DAT_UnitsState::instance.units[unitID].animationSheetFrameOffset = 1;
             if (DAT_UnitsState::instance.units[unitID].moveInstructionSpeedDelayTracker == 0
-                || DAT_UnitsState::instance.units[unitID].moveInstructionSpeedDelayTracker < 71) {
+                || DAT_UnitsState::instance.units[unitID].moveInstructionSpeedDelayTracker <= 70) {
                 DAT_UnitsState::instance.units[unitID].stateBasedSpeed = 0;
             } else {
                 DAT_UnitsState::instance.units[unitID].stateBasedSpeed = -1;
@@ -146,7 +146,7 @@ namespace Map {
             DAT_UnitsState::instance.units[unitID].field_0x30_animRelated = 0x10;
             DAT_UnitsState::instance.units[unitID].animationSheetFrameOffset = 1;
             if (DAT_UnitsState::instance.units[unitID].moveInstructionSpeedDelayTracker == 0
-                || DAT_UnitsState::instance.units[unitID].moveInstructionSpeedDelayTracker < 71) {
+                || DAT_UnitsState::instance.units[unitID].moveInstructionSpeedDelayTracker <= 70) {
                 DAT_UnitsState::instance.units[unitID].stateBasedSpeed = 0;
             } else {
                 DAT_UnitsState::instance.units[unitID].stateBasedSpeed = -1;
