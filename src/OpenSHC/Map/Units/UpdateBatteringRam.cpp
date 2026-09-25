@@ -204,7 +204,7 @@ namespace Map {
                 newOwner = 1;
                 while (engineerCounts[newOwner] != 4) {
                     newOwner += 1;
-                    if (newOwner > 8) {
+                    if (newOwner >= 9) {
                         return;
                     }
                 }
