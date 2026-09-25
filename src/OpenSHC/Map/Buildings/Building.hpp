@@ -178,8 +178,8 @@ namespace Map {
             int tileRef34; // 0x0000024C length: 4
             int tileRef35; // 0x00000250 length: 4
             int tileRef36; // 0x00000254 length: 4
-            undefined1 wheatGrowStateRelated; // 0x00000258 length: 1
-            undefined1 padding_0x259[3]; // 0x00000259 length: 3
+            short wheatGrowStateRelated; // 0x00000258 length: 2
+            undefined1 padding_0x25a[2]; // 0x0000025A length: 2
             int tunnelerCounter; // 0x0000025C length: 4
             short someX; // 0x00000260 length: 2
             short someY; // 0x00000262 length: 2
