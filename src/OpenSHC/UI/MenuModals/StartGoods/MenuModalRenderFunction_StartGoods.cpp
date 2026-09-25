@@ -12,7 +12,7 @@ namespace UI {
             void MenuModalRenderFunction_StartGoods(int x, int y, int width, int height)
             {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner,
-                    DAT_PencilRenderCore::ptr)(199, 0x29, x, y, width);
+                    DAT_PencilRenderCore::ptr)(199, 0x29, x, y, width, height);
             }
 
         }
