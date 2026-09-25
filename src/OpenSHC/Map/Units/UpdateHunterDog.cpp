@@ -48,7 +48,7 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[kennel].numberOfAnimals += 1;
         }
         // the dog follows the hunter of its hut
-        short hunter = DAT_BuildingsState::instance.buildings[kennel].workerID[0];
+        int hunter = DAT_BuildingsState::instance.buildings[kennel].workerID[0];
         if (DAT_UnitsState::instance.units[hunter].uid != DAT_BuildingsState::instance.buildings[kennel].workerUID[0]) {
             DAT_UnitsState::instance.units[unitID].logicalState = OpenSHC::Map::Units::ULS_REMOVE;
             return;
@@ -71,14 +71,14 @@ namespace Map {
                 }
                 return;
             }
-            if (DAT_UnitsState::instance.units[unitID].closestEnemyMicroDistance <= 200) {
-                DAT_UnitsState::instance.units[unitID].state.generic
-                    = DAT_UnitsState::instance.units[unitID].closestEnemyMicroDistance > 0
-                    ? (UnitState)2
-                    : OpenSHC::Map::Units::States::US_IDLEUnk;
+            if (DAT_UnitsState::instance.units[unitID].closestEnemyMicroDistance > 200) {
+                DAT_UnitsState::instance.units[unitID].state.generic = OpenSHC::Map::Units::States::US_IDLEUnk;
                 return;
             }
-            DAT_UnitsState::instance.units[unitID].state.generic = OpenSHC::Map::Units::States::US_IDLEUnk;
+            DAT_UnitsState::instance.units[unitID].state.generic
+                = DAT_UnitsState::instance.units[unitID].closestEnemyMicroDistance > 0
+                ? (UnitState)2
+                : OpenSHC::Map::Units::States::US_IDLEUnk;
             return;
         }
         if (state == (UnitState)120) {
