@@ -237,7 +237,7 @@ namespace Map {
                 crewOwner = 1;
                 while (crewCount[crewOwner] != 3) {
                     crewOwner += 1;
-                    if (crewOwner > 8) {
+                    if (crewOwner >= 9) {
                         return;
                     }
                 }
