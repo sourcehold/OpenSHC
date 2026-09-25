@@ -44,23 +44,23 @@ namespace Map {
         OpenSHC::Map::Units::States::UnitState_WheatFarmerShort state
             = DAT_UnitsState::instance.units[unitID].state.wheatFarmer;
         if (state == OpenSHC::Map::Units::States::USWF_WAITING_0) {
-            if (DAT_UnitsState::instance.units[unitID].isDisappearingUnk == 0) {
-                if (DAT_UnitsState::instance.units[unitID].goToRallyPoint == 0) {
+            if (DAT_UnitsState::instance.units[unitID].isDisappearingUnk != 0) {
+                DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown -= 1;
+                if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown >= 0) {
                     return;
                 }
-                DAT_UnitsState::instance.units[unitID].goToRallyPoint = 0;
-                DAT_UnitsState::instance.units[unitID].state.wheatFarmer
-                    = OpenSHC::Map::Units::States::USWF_GOING_TO_WORKPLACE;
-                DAT_UnitsState::instance.units[unitID].destinationNeeded
-                    = (OpenSHC::Map::Units::Pathfinding::DestinationNeededEnum)2;
+                DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown = 0;
+                DAT_UnitsState::instance.units[unitID].isDisappearingUnk = 0;
                 return;
             }
-            DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown -= 1;
-            if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown >= 0) {
+            if (DAT_UnitsState::instance.units[unitID].goToRallyPoint == 0) {
                 return;
             }
-            DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown = 0;
-            DAT_UnitsState::instance.units[unitID].isDisappearingUnk = 0;
+            DAT_UnitsState::instance.units[unitID].goToRallyPoint = 0;
+            DAT_UnitsState::instance.units[unitID].state.wheatFarmer
+                = OpenSHC::Map::Units::States::USWF_GOING_TO_WORKPLACE;
+            DAT_UnitsState::instance.units[unitID].destinationNeeded
+                = (OpenSHC::Map::Units::Pathfinding::DestinationNeededEnum)2;
             return;
         }
         if (state == OpenSHC::Map::Units::States::USWF_WAITING_1) {
@@ -398,7 +398,7 @@ namespace Map {
             DAT_UnitsState::instance.units[unitID].field_0x30_animRelated = 0x10;
             DAT_UnitsState::instance.units[unitID].field131_0x2ac = 1;
             DAT_UnitsState::instance.units[unitID].updateTickTracker += 1;
-            if (DAT_UnitsState::instance.units[unitID].updateTickTracker < 11) {
+            if (DAT_UnitsState::instance.units[unitID].updateTickTracker <= 10) {
                 return;
             }
             DAT_UnitsState::instance.units[unitID].updateTickTracker = 0;
