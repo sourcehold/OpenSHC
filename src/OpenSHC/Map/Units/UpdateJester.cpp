@@ -96,7 +96,7 @@ namespace Map {
             if (((byte)SEC_RNG::instance.currentNumber2 & 7) <= 2) {
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].cachedState
                     = OpenSHC::Map::Units::States::US_LOOK_AROUNDUnk;
-            } else if (((byte)SEC_RNG::instance.currentNumber2 & 7) < 5 && inn != 0) {
+            } else if (((byte)SEC_RNG::instance.currentNumber2 & 7) <= 4 && inn != 0) {
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].cachedState
                     = OpenSHC::Map::Units::States::US_AIM_WEAPONUnk;
             } else if (nearbyUnit != 0) {
@@ -420,7 +420,7 @@ namespace Map {
                 += DAT_UnitsState::instance.units[unitID].engineerManningSiegeStateRef_checkType;
             if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown < 0) {
                 DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown = 0;
-            } else if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown > 31) {
+            } else if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown >= 32) {
                 DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown = 31;
             }
             DAT_UnitsState::instance.units[unitID].updateTickTracker += 1;
