@@ -24,6 +24,7 @@ rewrite sources, because the Visual Studio bundled one is too old for `.clang-fo
 | `jump_table_order.py [--apply] [NAME...]` | Compare a state `switch` with the original's jump table and put the cases in the order the original emits their bodies. |
 | `compare_constants.py [NAME...]` | Diff the sequence of `cmp` constants (original vs ours) per function: shows wrong literals, missing checks and blocks in the wrong order. |
 | `fix_off_by_one.py [--apply] [NAME...]` | Rewrite comparisons whose literal is one off from the original's (`> 31` -> `>= 32`). |
+| `diff_reasons.py [--context N] [NAME...]` | Per function: where the assembly *first* really diverges, its source line and a guess at why. Skips differences that are only registers, call targets or prologue housekeeping. |
 
 ## Typical loop
 
@@ -43,6 +44,7 @@ Once the obvious rewrites are done, most of what is left in a diff is LTCG regis
 allocation, which the source cannot control. These three find the differences that it can:
 
 ```sh
+python diff_reasons.py                           # which functions are worth opening at all
 python jump_table_order.py Map/Units             # cases in the original's body order?
 python compare_constants.py UpdateMiner          # which literals/checks differ, and where
 python fix_off_by_one.py --apply Map/Units       # > 31 -> >= 32 and friends
@@ -63,6 +65,16 @@ directly and need `capstone` (`pip install capstone`); the other two read
   records such functions as `100% Reimplemented`.
 - A file whose `// FUNCTION:` address has no reccmp entry is reported as `--` / skipped.
   Check the address against `src/precomp/addresses-SHC-3BB0A8C1.hpp`.
+- A low match % on its own is not a reason to work on a function. Diffs cascade, so one
+  differing instruction makes everything after it count as different; `diff_reasons.py`
+  exists to tell a real difference from that tail. Most of what is left across Map/Units is
+  LTCG register allocation and instruction scheduling, which the source cannot reach.
+- Only jump-table *body* order is evidence of source order. The order of `cmp` instructions
+  in an if-chain is not: MSVC reorders side-effect-free compares, and matching it by hand
+  made UpdateChild 8 points worse.
+- `short` locals used as an array index compile to `movzx` plus a separate sign-extend where
+  the original has a single `movsx`; `int` matches. State locals must stay 16 bit
+  (`UnitStateShort`), or the compares widen.
 - `fix_off_by_one.py` is not always an improvement: the register allocator sometimes keeps
   the old literal in a register and reuses it. Rebuild, `reccmp_report.py cmp BASE.json`
   and revert the functions that got worse.

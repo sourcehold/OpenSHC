@@ -121,6 +121,9 @@ Run them from the batch folder; each takes function names or path substrings and
   and revert the ones that got worse.
 - `original_asm.py NAME [--jumptable]` prints the original's disassembly, or its switch case order, for reading
   by hand.
+- `diff_reasons.py [--context N] [NAME...]` reports, per function, where the assembly first really diverges, the
+  source line and a guess at why, skipping differences that are only registers, call targets or prologue
+  housekeeping. Start here: a diff cascades, so a low match % mostly reflects one early divergence plus its tail.
 
 `jump_table_order.py` and `original_asm.py` read the original exe and need `capstone` and `_original/`;
 `compare_constants.py` and `fix_off_by_one.py` read `reccmp/dll/diff.json`, so run reccmp first.
