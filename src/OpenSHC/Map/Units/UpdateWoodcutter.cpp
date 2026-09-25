@@ -72,7 +72,7 @@ namespace Map {
                     DAT_BuildingsState::instance.buildings[DAT_UnitsState::instance.units[unitID].workplaceBuildingID_1]
                         .uid,
                     OpenSHC::Game::Resources::RT_LOGS)
-                > 2) {
+                >= 3) {
                 // enough logs to saw planks
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::commitUnitLocation, DAT_UnitsState::ptr)(
                     unitID);
@@ -181,7 +181,7 @@ namespace Map {
                 DAT_DirectionAlgorithmState::instance.orientation = 4;
             }
             int orientation = DAT_DirectionAlgorithmState::instance.orientation + 2;
-            if (orientation > 7) {
+            if (orientation >= 8) {
                 orientation = DAT_DirectionAlgorithmState::instance.orientation - 6;
             }
             DAT_DirectionAlgorithmState::instance.orientation = orientation;
@@ -592,7 +592,7 @@ namespace Map {
                 return;
             }
             DAT_UnitsState::instance.units[unitID].substate += 1;
-            if (DAT_UnitsState::instance.units[unitID].substate > 6) {
+            if (DAT_UnitsState::instance.units[unitID].substate >= 7) {
                 DAT_UnitsState::instance.units[unitID].substate = 0;
             }
             DAT_UnitsState::instance.units[unitID].animationCycleNumber = 0;
