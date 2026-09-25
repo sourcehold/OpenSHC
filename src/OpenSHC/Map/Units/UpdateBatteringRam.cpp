@@ -170,7 +170,7 @@ namespace Map {
                            - DAT_UnitsState::instance.units[unitID].buildingHeight
                            - DAT_UnitsState::instance.units[unitID].terrainOrClimbHeight
                            + DAT_UnitsState::instance.units[i].buildingHeight)
-                        < 17) {
+                        <= 16) {
                     int distanceX;
                     if (DAT_UnitsState::instance.units[unitID].microXPosition
                         < DAT_UnitsState::instance.units[i].microXPosition) {
