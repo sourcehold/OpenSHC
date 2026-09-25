@@ -211,7 +211,7 @@ namespace Map {
             byte field218_0x299; // 0x00000299 length: 1
             short outpostRelatedUnk4; // 0x0000029A length: 2
             int ffBuildingVariation; // 0x0000029C length: 4
-            undefined1 padding_0x2a0[2]; // 0x000002A0 length: 2
+            short waitingEngineerIDUnk; // 0x000002A0 length: 2
             byte pathLinkageRelated2; // 0x000002A2 length: 1
             byte gateState; // 0x000002A3 length: 1
             undefined1 unknownFlag4; // 0x000002A4 length: 1
