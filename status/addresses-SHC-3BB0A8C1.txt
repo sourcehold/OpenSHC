@@ -65447,7 +65447,7 @@ SHC_3BB0A8C1_0x00569410 | 42.5% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x0056A360 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0056A3F0 | 40.3% | LTCG_regs
+SHC_3BB0A8C1_0x0056A3F0 | 42.9% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x0056A8A0 | 0.0% | Pending
 
