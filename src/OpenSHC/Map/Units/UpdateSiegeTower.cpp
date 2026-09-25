@@ -222,7 +222,7 @@ namespace Map {
                 crewOwner = 1;
                 while (crewCount[crewOwner] != 4) {
                     crewOwner += 1;
-                    if (crewOwner > 8) {
+                    if (crewOwner >= 9) {
                         return;
                     }
                 }
@@ -295,7 +295,7 @@ namespace Map {
             if (DAT_UnitsState::instance.units[unitID].moveInstructionSpeedDelayTracker == 0) {
                 DAT_UnitsState::instance.units[unitID].animationSheetFrameOffset = 9;
                 DAT_UnitsState::instance.units[unitID].stateBasedSpeed = 1;
-            } else if (DAT_UnitsState::instance.units[unitID].moveInstructionSpeedDelayTracker < 71) {
+            } else if (DAT_UnitsState::instance.units[unitID].moveInstructionSpeedDelayTracker <= 70) {
                 DAT_UnitsState::instance.units[unitID].stateBasedSpeed = 0;
             } else {
                 DAT_UnitsState::instance.units[unitID].stateBasedSpeed = -1;
