@@ -41,26 +41,26 @@ namespace Map {
         DAT_UnitsState::instance.units[unitID].unitTypeSpecificRestingState = 1;
         UnitStateShort state = DAT_UnitsState::instance.units[unitID].state.generic;
         if (state == OpenSHC::Map::Units::States::US_DETERMINE_NEXT_STATEUnk) {
-            if (DAT_UnitsState::instance.units[unitID].isDisappearingUnk == 0) {
-                if (DAT_UnitsState::instance.units[unitID].goToRallyPoint == 0) {
-                    DAT_UnitsState::instance.units[unitID].state.generic
-                        = OpenSHC::Map::Units::States::US_RELOAD_WEAPONUnk;
-                    DAT_UnitsState::instance.units[unitID].destinationNeeded
-                        = OpenSHC::Map::Units::Pathfinding::DNE_DESTINATION_NEEDED;
+            if (DAT_UnitsState::instance.units[unitID].isDisappearingUnk != 0) {
+                DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown -= 1;
+                if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown >= 0) {
                     return;
                 }
-                DAT_UnitsState::instance.units[unitID].goToRallyPoint = 0;
+                DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown = 0;
+                DAT_UnitsState::instance.units[unitID].isDisappearingUnk = 0;
+                return;
+            }
+            if (DAT_UnitsState::instance.units[unitID].goToRallyPoint == 0) {
+                DAT_UnitsState::instance.units[unitID].state.generic
+                    = OpenSHC::Map::Units::States::US_RELOAD_WEAPONUnk;
                 DAT_UnitsState::instance.units[unitID].destinationNeeded
-                    = (OpenSHC::Map::Units::Pathfinding::DestinationNeededEnum)2;
-                DAT_UnitsState::instance.units[unitID].state.generic = OpenSHC::Map::Units::States::US_RELOAD_WEAPONUnk;
+                    = OpenSHC::Map::Units::Pathfinding::DNE_DESTINATION_NEEDED;
                 return;
             }
-            DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown -= 1;
-            if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown >= 0) {
-                return;
-            }
-            DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown = 0;
-            DAT_UnitsState::instance.units[unitID].isDisappearingUnk = 0;
+            DAT_UnitsState::instance.units[unitID].goToRallyPoint = 0;
+            DAT_UnitsState::instance.units[unitID].destinationNeeded
+                = (OpenSHC::Map::Units::Pathfinding::DestinationNeededEnum)2;
+            DAT_UnitsState::instance.units[unitID].state.generic = OpenSHC::Map::Units::States::US_RELOAD_WEAPONUnk;
             return;
         }
         if (state == OpenSHC::Map::Units::States::US_IDLEUnk) {
@@ -415,7 +415,7 @@ namespace Map {
             DAT_UnitsState::instance.units[unitID].animationSheetFrameOffset = 0xe1;
             DAT_UnitsState::instance.units[unitID].field_0x30_animRelated = 0x10;
             DAT_UnitsState::instance.units[unitID].updateTickTracker += 1;
-            if (DAT_UnitsState::instance.units[unitID].updateTickTracker < 11) {
+            if (DAT_UnitsState::instance.units[unitID].updateTickTracker <= 10) {
                 return;
             }
             DAT_UnitsState::instance.units[unitID].updateTickTracker = 0;
@@ -526,7 +526,7 @@ namespace Map {
                 += DAT_UnitsState::instance.units[unitID].engineerManningSiegeStateRef_checkType;
             if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown < 0) {
                 DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown = 0;
-            } else if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown > 31) {
+            } else if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown >= 32) {
                 DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown = 31;
             }
             DAT_UnitsState::instance.units[unitID].updateTickTracker += 1;
