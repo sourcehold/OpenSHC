@@ -31,7 +31,7 @@ namespace Map {
     void Units::UpdateLion()
     {
         int unitID = DAT_CurrentUnitSlotID::instance;
-        short tribe = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].tribeID;
+        int tribe = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].tribeID;
         DAT_GameState::instance.mapAndTime.field3170_0x27a4 += 1;
         DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].stateBasedSpeed = 0;
         if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown > 0
