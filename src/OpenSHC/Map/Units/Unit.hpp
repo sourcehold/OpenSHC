@@ -50,7 +50,8 @@ namespace Map {
             short orientationRelatedPositionX; // 0x00000026 length: 2
             short orientationRelatedPositionY; // 0x00000028 length: 2
             short field22_0x2a; // 0x0000002A length: 2
-            int unknownV; // 0x0000002C length: 4
+            short unknownV; // 0x0000002C length: 2
+            undefined1 padding_0x2e[2]; // 0x0000002E length: 2
             int field_0x30_animRelated; // 0x00000030 length: 4
             short isSelected; // 0x00000034 length: 2
             undefined1 padding_0x36[2]; // 0x00000036 length: 2
