@@ -318,7 +318,7 @@ namespace Map {
             }
             int dy = targetY - DAT_UnitsState::instance.units[unitID].y;
             int dx = targetX - DAT_UnitsState::instance.units[unitID].x;
-            if (dx * dx + dy * dy >= 7226) {
+            if (dx * dx + dy * dy > 7225) {
                 DAT_UnitsState::instance.units[unitID].field248_0x3bc = -40;
                 DAT_UnitsState::instance.units[unitID].state.generic
                     = OpenSHC::Map::Units::States::US_DETERMINE_NEXT_STATEUnk;
