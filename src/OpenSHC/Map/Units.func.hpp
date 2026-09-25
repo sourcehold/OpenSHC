@@ -350,7 +350,7 @@ namespace Map {
             void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x005744D0, &OpenSHC::Map::Units::UpdateAssassin)
         UpdateAssassin;
 
-        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(short* unitID), false, Address::SHC_3BB0A8C1_0x00575820,
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int unitID), false, Address::SHC_3BB0A8C1_0x00575820,
             &OpenSHC::Map::Units::UpdateHorseArcher_DoShooting)
         UpdateHorseArcher_DoShooting;
 

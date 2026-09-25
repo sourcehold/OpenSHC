@@ -183,7 +183,7 @@ namespace Map {
 
         void __cdecl UpdateAssassin();
 
-        void __cdecl UpdateHorseArcher_DoShooting(short* unitID);
+        void __cdecl UpdateHorseArcher_DoShooting(int unitID);
 
         void __cdecl UpdateArabianSwordsman();
 
