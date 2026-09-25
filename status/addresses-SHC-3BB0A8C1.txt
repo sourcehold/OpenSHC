@@ -62513,7 +62513,7 @@ SHC_3BB0A8C1_0x0054C710 | 37.9% | LTCG_regs
 
 SHC_3BB0A8C1_0x0054D8F0 | 31.3% | Style pass, asm differs
 
-SHC_3BB0A8C1_0x0054E6C0 | 35.4% | LTCG_regs
+SHC_3BB0A8C1_0x0054E6C0 | 42.2% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x0054F860 | 52.1% | Style pass, asm differs
 
