@@ -60335,7 +60335,7 @@ SHC_3BB0A8C1_0x00540EC0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x005416B0 | 53.4% | LTCG regs across calls
 
-SHC_3BB0A8C1_0x00541A30 | 0.0% | Pending
+SHC_3BB0A8C1_0x00541A30 | 41.4% | LTCG regs across calls
 
 SHC_3BB0A8C1_0x00541DE0 | 0.0% | Pending
 
