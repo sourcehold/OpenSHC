@@ -100,6 +100,18 @@ namespace Map {
             }
             DAT_UnitsState::instance.units[unitID].state.generic = (UnitState)0xcb;
             return;
+        case 0xd1:
+            DAT_UnitsState::instance.units[unitID].field_0x30_animRelated = 0x10;
+            DAT_UnitsState::instance.units[unitID].animationSheetFrameOffset = 1;
+            if (((DAT_UnitsState::instance.units[unitID].fixedRng ^ DAT_GameCore::instance.mapTimeInTicks) & 0x7f)
+                == 0) {
+                MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setDestinationForUnit, DAT_UnitsState::ptr)(
+                    unitID, DAT_UnitsState::instance.units[unitID].targetX,
+                    DAT_UnitsState::instance.units[unitID].targetY, 0);
+                DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state.generic
+                    = OpenSHC::Map::Units::States::US_MOVE_TO_DESTINATION;
+            }
+            return;
         case OpenSHC::Map::Units::States::US_MOVE_TO_DESTINATION:
         case 120:
             DAT_UnitsState::instance.units[unitID].field_0x30_animRelated = 0x10;
@@ -144,70 +156,6 @@ namespace Map {
                 DAT_UnitsState::instance.units[unitID].substate = 0;
                 DAT_UnitsState::instance.units[unitID].state.generic
                     = OpenSHC::Map::Units::States::US_DETERMINE_NEXT_STATEUnk;
-            }
-            return;
-        case OpenSHC::Map::Units::States::US_DISAPPEAR:
-            DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown += 1;
-            if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown > 32) {
-                DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown = 32;
-            }
-            DAT_UnitsState::instance.units[unitID].updateTickTracker += 1;
-            if (DAT_UnitsState::instance.units[unitID].updateTickTracker > 32) {
-                DAT_UnitsState::instance.units[unitID].logicalState = OpenSHC::Map::Units::ULS_REMOVE;
-            }
-            return;
-        case OpenSHC::Map::Units::States::US_DEATH_01:
-            DAT_UnitsState::instance.units[unitID].facingDirection = 0;
-            DAT_UnitsState::instance.units[unitID].animationSpeed = 4;
-            DAT_UnitsState::instance.units[unitID].field_0x30_animRelated = 0;
-            DAT_UnitsState::instance.units[unitID].animationFrame
-                = (char)DAT_UnitPropertiesDefinedData::instance.Frames_Shared_UnitClimbingUp
-                      .field362_0x72e0[DAT_UnitsState::instance.units[unitID].animationCycleNumber];
-            if (DAT_UnitsState::instance.units[unitID].animationFrame > 0) {
-                DAT_UnitsState::instance.units[unitID].gfxNumber
-                    = DAT_UnitsState::instance.units[unitID].animationFrame + 0x180;
-            } else {
-                DAT_UnitsState::instance.units[unitID].state.generic = (UnitState)117;
-                DAT_UnitsState::instance.units[unitID].updateTickTracker = 0;
-            }
-            if (DAT_UnitsState::instance.units[unitID].animationCycleNumberHasJustIncremented != FALSE
-                && DAT_UnitsState::instance.units[unitID].animationCycleNumber == 1) {
-                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
-                    DAT_UnitsState::instance.units[unitID].x, DAT_UnitsState::instance.units[unitID].y,
-                    OpenSHC::DE::SHCDE::FX_RABBIT_DIE);
-            }
-            return;
-        case OpenSHC::Map::Units::States::US_DEATH_02:
-        case OpenSHC::Map::Units::States::US_DEATH_03:
-        case OpenSHC::Map::Units::States::US_STONE_DEATH_01:
-        case OpenSHC::Map::Units::States::US_STONE_DEATH_02:
-        case OpenSHC::Map::Units::States::US_STONE_DEATH_03:
-            DAT_UnitsState::instance.units[unitID].facingDirection = 0;
-            DAT_UnitsState::instance.units[unitID].animationSpeed = 4;
-            DAT_UnitsState::instance.units[unitID].field_0x30_animRelated = 0;
-            DAT_UnitsState::instance.units[unitID].animationFrame
-                = (char)DAT_UnitPropertiesDefinedData::instance.Frames_Shared_UnitClimbingUp
-                      .field363_0x7310[DAT_UnitsState::instance.units[unitID].animationCycleNumber];
-            if (DAT_UnitsState::instance.units[unitID].animationFrame > 0) {
-                DAT_UnitsState::instance.units[unitID].gfxNumber
-                    = DAT_UnitsState::instance.units[unitID].animationFrame + 0x198;
-            } else {
-                DAT_UnitsState::instance.units[unitID].state.generic = (UnitState)117;
-                DAT_UnitsState::instance.units[unitID].updateTickTracker = 0;
-            }
-            if (DAT_UnitsState::instance.units[unitID].animationCycleNumberHasJustIncremented != FALSE
-                && DAT_UnitsState::instance.units[unitID].animationCycleNumber == 1) {
-                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
-                    DAT_UnitsState::instance.units[unitID].x, DAT_UnitsState::instance.units[unitID].y,
-                    OpenSHC::DE::SHCDE::FX_RABBIT_DIE);
-            }
-            return;
-        case 117:
-            DAT_UnitsState::instance.units[unitID].field_0x30_animRelated = 0;
-            DAT_UnitsState::instance.units[unitID].updateTickTracker += 1;
-            if (DAT_UnitsState::instance.units[unitID].updateTickTracker > 5) {
-                DAT_UnitsState::instance.units[unitID].updateTickTracker = 0;
-                DAT_UnitsState::instance.units[unitID].state.generic = OpenSHC::Map::Units::States::US_DISAPPEAR;
             }
             return;
         case 0xcb:
@@ -284,16 +232,68 @@ namespace Map {
                     = OpenSHC::Map::Units::States::US_DETERMINE_NEXT_STATEUnk;
             }
             return;
-        case 0xd1:
-            DAT_UnitsState::instance.units[unitID].field_0x30_animRelated = 0x10;
-            DAT_UnitsState::instance.units[unitID].animationSheetFrameOffset = 1;
-            if (((DAT_UnitsState::instance.units[unitID].fixedRng ^ DAT_GameCore::instance.mapTimeInTicks) & 0x7f)
-                == 0) {
-                MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setDestinationForUnit, DAT_UnitsState::ptr)(
-                    unitID, DAT_UnitsState::instance.units[unitID].targetX,
-                    DAT_UnitsState::instance.units[unitID].targetY, 0);
-                DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state.generic
-                    = OpenSHC::Map::Units::States::US_MOVE_TO_DESTINATION;
+        case OpenSHC::Map::Units::States::US_DEATH_01:
+            DAT_UnitsState::instance.units[unitID].facingDirection = 0;
+            DAT_UnitsState::instance.units[unitID].animationSpeed = 4;
+            DAT_UnitsState::instance.units[unitID].field_0x30_animRelated = 0;
+            DAT_UnitsState::instance.units[unitID].animationFrame
+                = (char)DAT_UnitPropertiesDefinedData::instance.Frames_Shared_UnitClimbingUp
+                      .field362_0x72e0[DAT_UnitsState::instance.units[unitID].animationCycleNumber];
+            if (DAT_UnitsState::instance.units[unitID].animationFrame > 0) {
+                DAT_UnitsState::instance.units[unitID].gfxNumber
+                    = DAT_UnitsState::instance.units[unitID].animationFrame + 0x180;
+            } else {
+                DAT_UnitsState::instance.units[unitID].state.generic = (UnitState)117;
+                DAT_UnitsState::instance.units[unitID].updateTickTracker = 0;
+            }
+            if (DAT_UnitsState::instance.units[unitID].animationCycleNumberHasJustIncremented != FALSE
+                && DAT_UnitsState::instance.units[unitID].animationCycleNumber == 1) {
+                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                    DAT_UnitsState::instance.units[unitID].x, DAT_UnitsState::instance.units[unitID].y,
+                    OpenSHC::DE::SHCDE::FX_RABBIT_DIE);
+            }
+            return;
+        case OpenSHC::Map::Units::States::US_DEATH_02:
+        case OpenSHC::Map::Units::States::US_DEATH_03:
+        case OpenSHC::Map::Units::States::US_STONE_DEATH_01:
+        case OpenSHC::Map::Units::States::US_STONE_DEATH_02:
+        case OpenSHC::Map::Units::States::US_STONE_DEATH_03:
+            DAT_UnitsState::instance.units[unitID].facingDirection = 0;
+            DAT_UnitsState::instance.units[unitID].animationSpeed = 4;
+            DAT_UnitsState::instance.units[unitID].field_0x30_animRelated = 0;
+            DAT_UnitsState::instance.units[unitID].animationFrame
+                = (char)DAT_UnitPropertiesDefinedData::instance.Frames_Shared_UnitClimbingUp
+                      .field363_0x7310[DAT_UnitsState::instance.units[unitID].animationCycleNumber];
+            if (DAT_UnitsState::instance.units[unitID].animationFrame > 0) {
+                DAT_UnitsState::instance.units[unitID].gfxNumber
+                    = DAT_UnitsState::instance.units[unitID].animationFrame + 0x198;
+            } else {
+                DAT_UnitsState::instance.units[unitID].state.generic = (UnitState)117;
+                DAT_UnitsState::instance.units[unitID].updateTickTracker = 0;
+            }
+            if (DAT_UnitsState::instance.units[unitID].animationCycleNumberHasJustIncremented != FALSE
+                && DAT_UnitsState::instance.units[unitID].animationCycleNumber == 1) {
+                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                    DAT_UnitsState::instance.units[unitID].x, DAT_UnitsState::instance.units[unitID].y,
+                    OpenSHC::DE::SHCDE::FX_RABBIT_DIE);
+            }
+            return;
+        case 117:
+            DAT_UnitsState::instance.units[unitID].field_0x30_animRelated = 0;
+            DAT_UnitsState::instance.units[unitID].updateTickTracker += 1;
+            if (DAT_UnitsState::instance.units[unitID].updateTickTracker > 5) {
+                DAT_UnitsState::instance.units[unitID].updateTickTracker = 0;
+                DAT_UnitsState::instance.units[unitID].state.generic = OpenSHC::Map::Units::States::US_DISAPPEAR;
+            }
+            return;
+        case OpenSHC::Map::Units::States::US_DISAPPEAR:
+            DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown += 1;
+            if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown > 32) {
+                DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown = 32;
+            }
+            DAT_UnitsState::instance.units[unitID].updateTickTracker += 1;
+            if (DAT_UnitsState::instance.units[unitID].updateTickTracker > 32) {
+                DAT_UnitsState::instance.units[unitID].logicalState = OpenSHC::Map::Units::ULS_REMOVE;
             }
             return;
         }

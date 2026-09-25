@@ -60783,7 +60783,7 @@ SHC_3BB0A8C1_0x00542628 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00542629 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00542630 | 69.3% | LTCG regs across calls
+SHC_3BB0A8C1_0x00542630 | 79.0% | cases in jump-table order
 
 SHC_3BB0A8C1_0x00542C0C | 0.0% | Pending
 
