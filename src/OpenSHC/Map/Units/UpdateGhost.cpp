@@ -72,7 +72,7 @@ namespace Map {
                     = OpenSHC::Map::Units::Pathfinding::DNE_DESTINATION_HAS_BEEN_SET;
             }
             DAT_UnitsState::instance.units[unitID].updateTickTracker += 1;
-            if (DAT_UnitsState::instance.units[unitID].updateTickTracker > 99) {
+            if (DAT_UnitsState::instance.units[unitID].updateTickTracker >= 100) {
                 DAT_UnitsState::instance.units[unitID].updateTickTracker = 0;
             }
             DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown

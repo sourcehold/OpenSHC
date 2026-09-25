@@ -61229,7 +61229,7 @@ SHC_3BB0A8C1_0x00542D10 | 42.6% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x00543340 | 43.3% | Style pass, asm differs
 
-SHC_3BB0A8C1_0x00543B80 | 52.6% | LTCG regs across calls
+SHC_3BB0A8C1_0x00543B80 | 60.4% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x00543DC0 | 53.7% | LTCG_regs
 
