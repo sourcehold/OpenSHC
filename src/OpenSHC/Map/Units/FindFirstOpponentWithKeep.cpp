@@ -16,7 +16,7 @@ namespace Map {
             && DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 == OpenSHC::Map::MT_SIEGE) {
             return 1;
         }
-        for (int playerID = 2; playerID < 9; ++playerID) {
+        for (int playerID = 2; playerID < 6; ++playerID) {
             if (DAT_GameState::instance.playerDataArray[playerID].keep.id > 0) {
                 return playerID;
             }
