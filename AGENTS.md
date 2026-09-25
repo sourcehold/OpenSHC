@@ -100,9 +100,47 @@ Scripts for enabling implementations and maintaining project state.
 
 Scripts for supporting implementation. Usually already integrated into skills.
 
+### Batch Helpers (`tools/reimplementation-helper/batch`)
+
+Python scripts for working on every function listed in `cmake/openshc-sources.txt.local` at once (see its README):
+quiet builds, `/Zs` syntax checks, a reccmp report (match %, normalized % ignoring call targets, snapshots, compact diffs),
+showing and splicing many function bodies, one progress commit per changed function, and repairing sources after
+`*_Func` namespace refactors. Prefer them over ad-hoc scripts when a task spans many functions.
+
 ### Binary Comparison (`reccmp`)
 
 Compares generated binaries against the original executable.
+
+## Working on Many Functions
+
+When restyling or improving a large set of functions, work in batches (e.g. per folder) and verify each batch:
+
+1. Save a baseline: `reccmp_report.py --run save base.json`.
+2. Rewrite the bodies (`show_functions.py` -> edit -> `splice_functions.py`), then `syntax_check.py` and `build_quiet.py`.
+3. Compare with `reccmp_report.py --run cmp base.json`; revert or rework every `WORSE` function and inspect the rest with `diff`.
+4. Commit with `commit_progress_batch.py` (100% "Reimplemented" when only call targets differ, otherwise the % with a short blocker remark).
+
+Style expected of reimplemented code:
+
+- Declare variables where they are first used; access fields repeatedly instead of copying them into locals
+  (the compiler created the locals), unless the diff shows the original really used a local.
+- Use `for` loops (loop variable declared in the `for`), early returns instead of nested if/else, no `goto`,
+  no pointer variables walking over arrays or structs, named fields and enum constants instead of offsets and magic numbers.
+- Never change the `// FUNCTION:` address line; keep generated headers untouched unless asked.
+- Write sources as UTF-8 with LF line endings.
+
+Diff patterns that were reliable (more in the cheat sheet):
+
+- Absolute `DAT_*` addresses in the original asm where the source uses `this->` mean the original accessed the global instance.
+- Signed `jl/jge` vs our unsigned `jb/jae` on `undefined4`/`uint` fields: compare through `(int)`.
+- `cmp x, N; ja` means `<= N`; write the literal the asm shows.
+- `mov r, [x]; sub r, 1; je` inside a loop is a `switch` on `x`.
+- A tail call to the same callee from our code but a jump back to a shared block in the original means separate
+  `if` branches with identical bodies, not a combined condition.
+- Callee-saved registers reused after a call without reload (`ecx`/`edx`) indicate LTCG (`cmake/compiler-flags-gl.txt`),
+  not a source difference.
+- A mismatching argument count or `ret N` usually means the generated header is wrong; report it instead of working around it.
+- Diffs can reveal real bugs in existing reimplementations (wrong constants, wrong strides); fix those.
 
 ## Agent Skills
 
