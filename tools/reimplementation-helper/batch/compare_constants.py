@@ -24,7 +24,6 @@ from pathlib import Path
 import common
 
 CONSTANT_RE = re.compile(r"^(cmp|test) (?:byte|word|dword)? ?(?:ptr )?(?:\[[^\]]*\]|\w+), (0x[0-9a-f]+|\d+)$")
-SOURCE_LINE_RE = re.compile(r"\((\w+)\.cpp:(\d+)\)")
 # 0 and 1 are mostly `test eax, eax` and flag checks: too common to carry information
 IGNORED = (0, 1)
 
@@ -36,28 +35,19 @@ def constants(entry):
     instruction was attributed to (or None).
     """
     original, ours, lines = [], [], []
-    current_line = None
-    for hunk in entry.get("diff") or []:
-        for block in hunk[1]:
-            for kind, rows in block.items():
-                for row in rows:
-                    parts = row[1].split("\t")
-                    if kind in ("both", "recomp") and len(parts) > 1:
-                        m = SOURCE_LINE_RE.search(parts[1])
-                        if m:
-                            current_line = int(m.group(2))
-                    m = CONSTANT_RE.match(parts[0].strip())
-                    if not m:
-                        continue
-                    value = int(m.group(2), 0)
-                    if value in IGNORED:
-                        continue
-                    token = "%s %#x" % (m.group(1), value)
-                    if kind in ("both", "orig"):
-                        original.append(token)
-                    if kind in ("both", "recomp"):
-                        ours.append(token)
-                        lines.append(current_line)
+    for kind, row, line in common.diff_rows(entry):
+        m = CONSTANT_RE.match(common.instruction(row))
+        if not m:
+            continue
+        value = int(m.group(2), 0)
+        if value in IGNORED:
+            continue
+        token = "%s %#x" % (m.group(1), value)
+        if kind != "recomp":
+            original.append(token)
+        if kind != "orig":
+            ours.append(token)
+            lines.append(line)
     return original, ours, lines
 
 

@@ -24,11 +24,15 @@ rewrite sources, because the Visual Studio bundled one is too old for `.clang-fo
 | `jump_table_order.py [--apply] [NAME...]` | Compare a state `switch` with the original's jump table and put the cases in the order the original emits their bodies. |
 | `compare_constants.py [NAME...]` | Diff the sequence of `cmp` constants (original vs ours) per function: shows wrong literals, missing checks and blocks in the wrong order. |
 | `fix_off_by_one.py [--apply] [NAME...]` | Rewrite comparisons whose literal is one off from the original's (`> 31` -> `>= 32`). |
-| `diff_reasons.py [--context N] [NAME...]` | Per function: where the assembly *first* really diverges, its source line and a guess at why. Skips differences that are only registers, call targets or prologue housekeeping. |
+| `diff_reasons.py [--context N] [--full] [NAME...]` | Per function: where the assembly *first* really diverges, its source line and a guess at why. Skips differences that are only registers, call targets or prologue housekeeping. `--full` prints the whole diff with registers folded away. |
+| `focus.py [--diff] NAME...` / `--restore` | Trim the sources list to a few files, build and report: ~15s instead of ~15min. Saves the full list so `--restore` brings it back. |
+| `gl_flags.py [--dry] NAME...` | Add a caller and everything it calls through a resolver to `cmake/compiler-flags-gl.txt` (the per-file /GL list). |
 
 ## Typical loop
 
 ```sh
+python focus.py UpdateEngineer                                          # one file: ~15s a build
+python focus.py --restore                                               # before a full run
 python build_quiet.py && python reccmp_report.py --run save base.json   # baseline
 python show_functions.py Map/Units > work.txt                            # edit the bodies in work.txt
 python splice_functions.py work.txt
@@ -45,6 +49,7 @@ allocation, which the source cannot control. These three find the differences th
 
 ```sh
 python diff_reasons.py                           # which functions are worth opening at all
+python diff_reasons.py --full UpdateMiner        # the whole diff, registers folded away
 python jump_table_order.py Map/Units             # cases in the original's body order?
 python compare_constants.py UpdateMiner          # which literals/checks differ, and where
 python fix_off_by_one.py --apply Map/Units       # > 31 -> >= 32 and friends
@@ -78,4 +83,8 @@ directly and need `capstone` (`pip install capstone`); the other two read
 - `fix_off_by_one.py` is not always an improvement: the register allocator sometimes keeps
   the old literal in a register and reuses it. Rebuild, `reccmp_report.py cmp BASE.json`
   and revert the functions that got worse.
+- Reading a reccmp diff goes through `common.diff_rows`, and `common.canonical` folds away
+  call targets, template arguments and (optionally) register names. `common._normalize` is
+  deliberately separate: it answers "is only the call target left?" for `normalized_ratio`,
+  folds more, and changing it would move every recorded percentage.
 - Sources are always written as UTF-8 with LF line endings.

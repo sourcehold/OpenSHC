@@ -107,6 +107,10 @@ quiet builds, `/Zs` syntax checks, a reccmp report (match %, normalized % ignori
 showing and splicing many function bodies, one progress commit per changed function, and repairing sources after
 `*_Func` namespace refactors. Prefer them over ad-hoc scripts when a task spans many functions.
 
+`focus.py NAME...` trims the sources list to the files being worked on, so a build takes seconds instead of
+minutes; `focus.py --restore` puts the full list back before a verification run. `gl_flags.py` maintains the
+per-file /GL list in `cmake/compiler-flags-gl.txt`.
+
 A second group inspects the original binary to find differences that are not register allocation.
 Run them from the batch folder; each takes function names or path substrings and defaults to the whole list:
 
@@ -121,7 +125,7 @@ Run them from the batch folder; each takes function names or path substrings and
   and revert the ones that got worse.
 - `original_asm.py NAME [--jumptable]` prints the original's disassembly, or its switch case order, for reading
   by hand.
-- `diff_reasons.py [--context N] [NAME...]` reports, per function, where the assembly first really diverges, the
+- `diff_reasons.py [--context N] [--full] [NAME...]` reports, per function, where the assembly first really diverges, the
   source line and a guess at why, skipping differences that are only registers, call targets or prologue
   housekeeping. Start here: a diff cascades, so a low match % mostly reflects one early divergence plus its tail.
 
