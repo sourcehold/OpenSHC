@@ -447,7 +447,7 @@ namespace Map {
             }
             int dy = targetY - DAT_UnitsState::instance.units[unitID].y;
             int dx = targetX - DAT_UnitsState::instance.units[unitID].x;
-            if (dx * dx + dy * dy >= 5626) {
+            if (dx * dx + dy * dy > 5625) {
                 DAT_UnitsState::instance.units[unitID].field248_0x3bc = -40;
                 DAT_UnitsState::instance.units[unitID].state.generic
                     = OpenSHC::Map::Units::States::US_DETERMINE_NEXT_STATEUnk;
@@ -637,7 +637,7 @@ namespace Map {
             }
             // AI catapults hitting their own troops move somewhere else
             if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field98_0xd2 < 6
-                && DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].friendlyFireCounterUnk < 5) {
+                && DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].friendlyFireCounterUnk <= 4) {
                 return;
             }
             if (DAT_GameSynchronyState::instance
