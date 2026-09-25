@@ -137,7 +137,7 @@ namespace Map {
                 += DAT_UnitsState::instance.units[unitID].engineerManningSiegeStateRef_checkType;
             if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown < 0) {
                 DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown = 0;
-            } else if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown > 31) {
+            } else if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown >= 32) {
                 DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown = 31;
             }
             DAT_UnitsState::instance.units[unitID].updateTickTracker += 1;
