@@ -23421,7 +23421,7 @@ SHC_3BB0A8C1_0x00491A30 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00491AC0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00491BF0 | 54.5% | Callee header lacks height arg
+SHC_3BB0A8C1_0x00491BF0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00491C20 | 0.0% | Pending
 
