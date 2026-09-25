@@ -4,7 +4,7 @@ namespace OpenSHC {
 namespace UI {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004B5300
-    void MinimapViewState::triggerMinimapRedraw()
+    void MinimapViewState::triggerMinimapRedraw(int unknown)
     {
         if (this->field14_0x38 == 0) {
             this->field13_0x34 = 0;
