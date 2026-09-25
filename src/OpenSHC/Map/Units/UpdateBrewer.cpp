@@ -321,7 +321,7 @@ namespace Map {
             DAT_UnitsState::instance.units[unitID].field_0x30_animRelated = 0x10;
             DAT_UnitsState::instance.units[unitID].field131_0x2ac = 1;
             DAT_UnitsState::instance.units[unitID].updateTickTracker += 1;
-            if (DAT_UnitsState::instance.units[unitID].updateTickTracker < 11) {
+            if (DAT_UnitsState::instance.units[unitID].updateTickTracker <= 10) {
                 return;
             }
             DAT_UnitsState::instance.units[unitID].updateTickTracker = 0;
@@ -461,7 +461,7 @@ namespace Map {
                 += DAT_UnitsState::instance.units[unitID].engineerManningSiegeStateRef_checkType;
             if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown < 0) {
                 DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown = 0;
-            } else if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown > 31) {
+            } else if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown >= 32) {
                 DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown = 31;
             }
             DAT_UnitsState::instance.units[unitID].updateTickTracker += 1;
