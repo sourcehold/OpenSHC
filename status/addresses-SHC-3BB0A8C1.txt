@@ -25547,7 +25547,7 @@ SHC_3BB0A8C1_0x004AB4B0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004AB4E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004AB510 | 54.5% | Callee header lacks height arg
+SHC_3BB0A8C1_0x004AB510 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004AB540 | 100.0% | Reimplemented
 
