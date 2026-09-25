@@ -131,7 +131,7 @@ namespace Map {
                 }
             } else {
                 DAT_UnitsState::instance.units[unitID].animationSheetFrameOffset = 1;
-                if (DAT_UnitsState::instance.units[unitID].moveInstructionSpeedDelayTracker < 71) {
+                if (DAT_UnitsState::instance.units[unitID].moveInstructionSpeedDelayTracker <= 70) {
                     DAT_UnitsState::instance.units[unitID].stateBasedSpeed = 0;
                 } else {
                     DAT_UnitsState::instance.units[unitID].stateBasedSpeed = -1;
@@ -166,7 +166,7 @@ namespace Map {
                 DAT_UnitsState::instance.units[unitID].stateBasedSpeed = 0;
             } else {
                 DAT_UnitsState::instance.units[unitID].animationSheetFrameOffset = 1;
-                if (DAT_UnitsState::instance.units[unitID].moveInstructionSpeedDelayTracker < 71) {
+                if (DAT_UnitsState::instance.units[unitID].moveInstructionSpeedDelayTracker <= 70) {
                     DAT_UnitsState::instance.units[unitID].stateBasedSpeed = 0;
                 } else {
                     DAT_UnitsState::instance.units[unitID].stateBasedSpeed = -1;
@@ -527,7 +527,7 @@ namespace Map {
                 += DAT_UnitsState::instance.units[unitID].engineerManningSiegeStateRef_checkType;
             if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown < 0) {
                 DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown = 0;
-            } else if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown > 31) {
+            } else if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown >= 32) {
                 DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown = 31;
             }
             DAT_UnitsState::instance.units[unitID].updateTickTracker += 1;
