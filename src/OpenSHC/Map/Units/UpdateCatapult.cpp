@@ -242,7 +242,7 @@ namespace Map {
                 crewOwner = 1;
                 while (crewCount[crewOwner] != 2) {
                     crewOwner += 1;
-                    if (crewOwner > 8) {
+                    if (crewOwner >= 9) {
                         return;
                     }
                 }
@@ -331,7 +331,7 @@ namespace Map {
             // TODO: the byte tile layers at 0x01EE2998 are not modelled yet
             if (*(unsigned char*)(DAT_UnitsState::instance.units[unitID].siegeTargetPlayerID * 0x13a10 + 0x1ee2998
                     + DAT_UnitsState::instance.units[unitID].tile)
-                < 16) {
+                <= 15) {
                 DAT_UnitsState::instance.units[unitID].destinationNeeded
                     = OpenSHC::Map::Units::Pathfinding::DNE_DESTINATION_HAS_BEEN_SET;
             }
