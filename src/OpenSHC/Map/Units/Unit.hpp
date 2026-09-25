@@ -278,8 +278,7 @@ namespace Map {
             undefined1 padding_0x3da[2]; // 0x000003DA length: 2
             short field265_0x3dc; // 0x000003DC length: 2
             short field266_0x3de; // 0x000003DE length: 2
-            undefined1 horseOriginStableIDUnk; // 0x000003E0 length: 1
-            undefined1 padding_0x3e1[3]; // 0x000003E1 length: 3
+            int horseOriginStableIDUnk; // 0x000003E0 length: 4
             int blessedAmount; // 0x000003E4 length: 4
             short attackAtTileX; // 0x000003E8 length: 2
             short attackAtTileY; // 0x000003EA length: 2
