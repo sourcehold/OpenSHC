@@ -170,10 +170,10 @@ namespace Map {
                     .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID
                     = DAT_EntityState::instance.entityArray[cloud].uid;
                 DAT_EntityState::instance.entityArray[cloud].velocityUnk = -10000;
-            } else if ((random & 7) < 4) {
+            } else if ((random & 7) <= 3) {
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].cachedState
                     = OpenSHC::Map::Units::States::US_RELOAD_WEAPONUnk;
-            } else if ((random & 7) < 8) {
+            } else if ((random & 7) <= 7) {
                 int garden = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::pickARandomBuildingOfType,
                     DAT_BuildingsState::ptr)(owner, OpenSHC::Map::Buildings::BT_GARDEN);
                 if (garden != 0) {
