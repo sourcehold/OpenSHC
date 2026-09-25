@@ -93,7 +93,7 @@ namespace Map {
                         return;
                     }
                     if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].closestEnemyMicroDistance
-                        < 401) {
+                        <= 400) {
                         if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY
                             && MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::acquireShootTarget,
                                    DAT_UnitsState::ptr)(DAT_CurrentUnitSlotID::instance)
@@ -730,7 +730,7 @@ namespace Map {
                     += DAT_UnitsState::instance.units[unitID].engineerManningSiegeStateRef_checkType;
                 if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown < 0) {
                     DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown = 0;
-                } else if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown > 31) {
+                } else if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown >= 32) {
                     DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown = 31;
                 }
                 DAT_UnitsState::instance.units[unitID].updateTickTracker += 1;
