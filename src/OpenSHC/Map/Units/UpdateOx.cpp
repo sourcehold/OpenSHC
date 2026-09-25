@@ -39,7 +39,7 @@ namespace Map {
     {
         int unitID = DAT_CurrentUnitSlotID::instance;
         int workplace = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].workplaceBuildingID_1;
-        short owner = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].owner;
+        int owner = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].owner;
         if (workplace == 0
             || DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].workplaceBuildingUID
                 != DAT_BuildingsState::instance.buildings[workplace].uid) {
