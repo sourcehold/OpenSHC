@@ -492,7 +492,7 @@ namespace Map {
                     > 2) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::makeUnitStopWalkingByClearingPathProgressState,
                     DAT_UnitsState::ptr)(unitID);
-                if (DAT_UnitsState::instance.units[unitID].movementRelated > 7) {
+                if (DAT_UnitsState::instance.units[unitID].movementRelated >= 8) {
                     DAT_UnitsState::instance.units[unitID].state.generic = OpenSHC::Map::Units::States::US_IDLEUnk;
                     DAT_UnitsState::instance.units[unitID].destinationNeeded
                         = OpenSHC::Map::Units::Pathfinding::DNE_DESTINATION_NEEDED;
@@ -794,7 +794,7 @@ namespace Map {
                 return;
             }
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].substate += 1;
-            if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].substate > 3) {
+            if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].substate >= 4) {
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].substate = 0;
             }
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].nextAttackHurtsWall += 1;
