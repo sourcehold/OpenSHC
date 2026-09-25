@@ -172,7 +172,7 @@ namespace Map {
                     return;
                 }
             }
-            if (DAT_UnitsState::instance.units[unitID].currentIndexInPathPlan < 5
+            if (DAT_UnitsState::instance.units[unitID].currentIndexInPathPlan <= 4
                 && DAT_UnitsState::instance.units[unitID].totalSizeOfPathPlan > 8) {
                 DAT_UnitsState::instance.units[unitID].stateBasedSpeed = 0;
                 DAT_UnitsState::instance.units[unitID].animationSheetFrameOffset = 1;
