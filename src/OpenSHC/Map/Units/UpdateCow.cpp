@@ -29,7 +29,7 @@ namespace Map {
     void Units::UpdateCow()
     {
         int unitID = DAT_CurrentUnitSlotID::instance;
-        short owner = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].owner;
+        int owner = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].owner;
         int building = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].workplaceBuildingID_1;
         DAT_GameState::instance.playerDataArray[owner].nonInteractiveCitizenCountUnk += 1;
         DAT_UnitsState::instance.units[unitID].calculatedOwnerPlayerIndex = 0;
