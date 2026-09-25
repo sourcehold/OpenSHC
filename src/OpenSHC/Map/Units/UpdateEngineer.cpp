@@ -231,7 +231,7 @@ namespace Map {
             }
             if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].moveInstructionSpeedDelayTracker != 0) {
                 if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].moveInstructionSpeedDelayTracker
-                    < 71) {
+                    <= 70) {
                     DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].stateBasedSpeed = 0;
                 } else {
                     DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].stateBasedSpeed = -1;
@@ -302,7 +302,7 @@ namespace Map {
                     == OpenSHC::Map::Units::UIT_THROW_OIL) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::makeUnitStopWalkingByClearingPathProgressState,
                     DAT_UnitsState::ptr)(DAT_CurrentUnitSlotID::instance);
-                if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].movementRelated > 7) {
+                if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].movementRelated >= 8) {
                     DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].targetingType
                         = OpenSHC::Map::Units::UIT_NO_INSTRUCTION_OR_MOVEUnk;
                     DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state.generic = (UnitState)10;
@@ -314,7 +314,7 @@ namespace Map {
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x30_animRelated = 0x10;
             if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].moveInstructionSpeedDelayTracker != 0) {
                 if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].moveInstructionSpeedDelayTracker
-                    < 71) {
+                    <= 70) {
                     DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].stateBasedSpeed = 0;
                 } else {
                     DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].stateBasedSpeed = -1;
@@ -598,7 +598,7 @@ namespace Map {
                 return;
             }
             if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].aiUnitBehaviourType == 10
-                && DAT_GameState::instance.playerDataArray[owner].aiPlayerState <= 4) {
+                && DAT_GameState::instance.playerDataArray[owner].aiPlayerState < 5) {
                 return;
             }
             if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::findFreeEngineerAssemblyTile,
