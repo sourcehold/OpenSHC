@@ -43,22 +43,22 @@ namespace Map {
         }
         UnitStateShort state = DAT_UnitsState::instance.units[unitID].state.generic;
         if (state == OpenSHC::Map::Units::States::US_DETERMINE_NEXT_STATEUnk) {
-            if (DAT_UnitsState::instance.units[unitID].isDisappearingUnk == 0) {
-                if (DAT_UnitsState::instance.units[unitID].goToRallyPoint == 0) {
+            if (DAT_UnitsState::instance.units[unitID].isDisappearingUnk != 0) {
+                DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown -= 1;
+                if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown >= 0) {
                     return;
                 }
-                DAT_UnitsState::instance.units[unitID].goToRallyPoint = 0;
-                DAT_UnitsState::instance.units[unitID].state.generic = OpenSHC::Map::Units::States::US_IDLEUnk;
-                DAT_UnitsState::instance.units[unitID].destinationNeeded
-                    = OpenSHC::Map::Units::Pathfinding::DNE_DESTINATION_NEEDED;
+                DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown = 0;
+                DAT_UnitsState::instance.units[unitID].isDisappearingUnk = 0;
                 return;
             }
-            DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown -= 1;
-            if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown >= 0) {
+            if (DAT_UnitsState::instance.units[unitID].goToRallyPoint == 0) {
                 return;
             }
-            DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown = 0;
-            DAT_UnitsState::instance.units[unitID].isDisappearingUnk = 0;
+            DAT_UnitsState::instance.units[unitID].goToRallyPoint = 0;
+            DAT_UnitsState::instance.units[unitID].state.generic = OpenSHC::Map::Units::States::US_IDLEUnk;
+            DAT_UnitsState::instance.units[unitID].destinationNeeded
+                = OpenSHC::Map::Units::Pathfinding::DNE_DESTINATION_NEEDED;
             return;
         }
         if (state == OpenSHC::Map::Units::States::US_IDLEUnk) {
@@ -123,7 +123,7 @@ namespace Map {
             if (target == 0) {
                 if (random > 1 || inn == 0) {
                     DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].cachedState
-                        = random < 5 ? (UnitState)3 : (UnitState)11;
+                        = random <= 4 ? (UnitState)3 : (UnitState)11;
                 } else {
                     DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].cachedState
                         = OpenSHC::Map::Units::States::US_AIM_WEAPONUnk;
@@ -468,7 +468,7 @@ namespace Map {
                 += DAT_UnitsState::instance.units[unitID].engineerManningSiegeStateRef_checkType;
             if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown < 0) {
                 DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown = 0;
-            } else if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown > 31) {
+            } else if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown >= 32) {
                 DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown = 31;
             }
             DAT_UnitsState::instance.units[unitID].updateTickTracker += 1;
