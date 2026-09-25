@@ -64567,7 +64567,7 @@ SHC_3BB0A8C1_0x00563905 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00563906 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00563910 | 37.2% | cases in jump-table order
+SHC_3BB0A8C1_0x00563910 | 37.4% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x0056419C | 0.0% | Pending
 
