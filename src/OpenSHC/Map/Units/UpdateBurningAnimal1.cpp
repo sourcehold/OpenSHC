@@ -16,7 +16,7 @@ namespace Map {
       decompilerscript: committed: 2025-01-30 21:57:43.216000 */
 
     // FUNCTION: STRONGHOLDCRUSADER 0x005309E0
-    void __stdcall Units ::UpdateBurningAnimal1()
+    void Units::UpdateBurningAnimal1()
 
     {
 

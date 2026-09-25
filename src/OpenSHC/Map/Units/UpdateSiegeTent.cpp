@@ -18,7 +18,7 @@ namespace Map {
       decompilerscript: committed: 2025-01-30 21:57:43.216000 */
 
     // FUNCTION: STRONGHOLDCRUSADER 0x005307B0
-    void __stdcall Units ::UpdateSiegeTent()
+    void Units::UpdateSiegeTent()
 
     {
 
@@ -66,7 +66,7 @@ namespace Map {
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].facingDirection
                 = DAT_DirectionAlgorithmState::instance.orientation;
 
-            DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field265_0x3bc = 0;
+            DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field248_0x3bc = 0;
         }
 
         return;
