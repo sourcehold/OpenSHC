@@ -49653,7 +49653,7 @@ SHC_3BB0A8C1_0x00530D50 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00530D70 | 78.0% | idiv vs magic division
 
-SHC_3BB0A8C1_0x00530E00 | 0.0% | Pending
+SHC_3BB0A8C1_0x00530E00 | 80.4% | loop precheck scheduling
 
 SHC_3BB0A8C1_0x00530EB0 | 100.0% | Reimplemented
 
