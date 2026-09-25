@@ -174,12 +174,12 @@ namespace Map {
                 && DAT_GameState::instance.mapAndTime.field3171_0x27a8 == 0
                 && DAT_GameState::instance.mapAndTime.field3172_0x27ac
                         + DAT_GameState::instance.mapAndTime.field3170_0x27a4
-                    < 3
+                    <= 2
                 && DAT_GameState::instance.playerDataArray[owner].totalEnemyUnitsCount <= 0) {
                 if (random == 8) {
                     // walk with the lady
                     DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].cachedState = (UnitState)3;
-                } else if (random < 4) {
+                } else if (random <= 3) {
                     int tower = MACRO_CALL_MEMBER(
                         OpenSHC::Map::Buildings::BuildingsState_Func::canNavigateToDefensiveBuilding,
                         DAT_BuildingsState::ptr)(owner,
@@ -296,7 +296,7 @@ namespace Map {
                 && DAT_GameState::instance.mapAndTime.field3171_0x27a8 == 0
                 && DAT_GameState::instance.mapAndTime.field3172_0x27ac
                         + DAT_GameState::instance.mapAndTime.field3170_0x27a4
-                    < 3) {
+                    <= 2) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                     DAT_DirectionAlgorithmState::ptr)(DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].x,
                     DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].y,
@@ -440,7 +440,7 @@ namespace Map {
                 && DAT_GameState::instance.mapAndTime.field3171_0x27a8 == 0
                 && DAT_GameState::instance.mapAndTime.field3172_0x27ac
                         + DAT_GameState::instance.mapAndTime.field3170_0x27a4
-                    < 3) {
+                    <= 2) {
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].resourceToDeposit += 1;
                 if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].resourceToDeposit < 3) {
                     int unit
