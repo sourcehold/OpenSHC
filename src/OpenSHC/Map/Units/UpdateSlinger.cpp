@@ -178,7 +178,7 @@ namespace Map {
             } else {
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset = 1;
                 if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].moveInstructionSpeedDelayTracker
-                    < 71) {
+                    <= 70) {
                     DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].stateBasedSpeed = 0;
                 } else {
                     DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].stateBasedSpeed = -1;
@@ -252,7 +252,7 @@ namespace Map {
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset = 1;
             if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].moveInstructionSpeedDelayTracker == 0
                 || DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].moveInstructionSpeedDelayTracker
-                    < 71) {
+                    <= 70) {
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].stateBasedSpeed = 0;
             } else {
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].stateBasedSpeed = -1;
@@ -474,7 +474,7 @@ namespace Map {
             }
             int dy = targetY - DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].y;
             int dx = targetX - DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].x;
-            if (targetX == 0 || dx * dx + dy * dy < 485) {
+            if (targetX == 0 || dx * dx + dy * dy <= 484) {
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state.generic
                     = OpenSHC::Map::Units::States::US_AIM_WEAPONUnk;
                 return;
