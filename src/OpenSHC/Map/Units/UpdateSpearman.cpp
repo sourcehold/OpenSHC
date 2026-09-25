@@ -162,7 +162,7 @@ namespace Map {
                     = OpenSHC::Map::Units::States::US_IDLEUnk;
                 return;
             }
-            if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].closestEnemyMicroDistance < 97) {
+            if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].closestEnemyMicroDistance <= 96) {
                 // push away the ladders of attackers close by
                 if (MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::findAndAttackNearbyEnemyLaddermanInPosition,
                         DAT_UnitsState::ptr)(DAT_CurrentUnitSlotID::instance)
@@ -285,7 +285,7 @@ namespace Map {
                 }
             } else {
                 DAT_UnitsState::instance.units[unitID].animationSheetFrameOffset = 1;
-                if (DAT_UnitsState::instance.units[unitID].moveInstructionSpeedDelayTracker < 71) {
+                if (DAT_UnitsState::instance.units[unitID].moveInstructionSpeedDelayTracker <= 70) {
                     DAT_UnitsState::instance.units[unitID].stateBasedSpeed = 0;
                 } else {
                     DAT_UnitsState::instance.units[unitID].stateBasedSpeed = -1;
@@ -344,7 +344,7 @@ namespace Map {
             DAT_UnitsState::instance.units[unitID].field_0x30_animRelated = 0x10;
             DAT_UnitsState::instance.units[unitID].animationSheetFrameOffset = 1;
             if (DAT_UnitsState::instance.units[unitID].moveInstructionSpeedDelayTracker == 0
-                || DAT_UnitsState::instance.units[unitID].moveInstructionSpeedDelayTracker < 71) {
+                || DAT_UnitsState::instance.units[unitID].moveInstructionSpeedDelayTracker <= 70) {
                 DAT_UnitsState::instance.units[unitID].stateBasedSpeed = 0;
             } else {
                 DAT_UnitsState::instance.units[unitID].stateBasedSpeed = -1;
@@ -533,7 +533,7 @@ namespace Map {
                 += DAT_UnitsState::instance.units[unitID].engineerManningSiegeStateRef_checkType;
             if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown < 0) {
                 DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown = 0;
-            } else if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown > 31) {
+            } else if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown >= 32) {
                 DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown = 31;
             }
             DAT_UnitsState::instance.units[unitID].updateTickTracker += 1;
@@ -916,7 +916,7 @@ namespace Map {
                 + 4;
             int groundHeight = DAT_TileMapState::instance
                                    .HeightLayer[DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].tile];
-            if (direction > 7) {
+            if (direction >= 8) {
                 direction = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance]
                                 .facingDirectionMapOrientationCorrected
                     - 4;
