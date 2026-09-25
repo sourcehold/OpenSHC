@@ -36,7 +36,7 @@ namespace Map {
     {
         int unitID = DAT_CurrentUnitSlotID::instance;
         int workplace = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].workplaceBuildingID_1;
-        short owner = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].owner;
+        int owner = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].owner;
         int ox = DAT_BuildingsState::instance.buildings[workplace].oxTetherRelatedUnitID;
         DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].movementSpeed = 1;
         DAT_UnitsState::instance.units[unitID].unitTypeSpecificRestingState = 7;

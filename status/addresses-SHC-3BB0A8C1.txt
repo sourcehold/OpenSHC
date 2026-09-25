@@ -62519,7 +62519,7 @@ SHC_3BB0A8C1_0x0054F860 | 52.1% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x00550A50 | 45.3% | LTCG regs across calls
 
-SHC_3BB0A8C1_0x00550D70 | 53.4% | LTCG_regs
+SHC_3BB0A8C1_0x00550D70 | 59.8% | int index local
 
 SHC_3BB0A8C1_0x00551980 | 49.2% | Style pass, asm differs
 
