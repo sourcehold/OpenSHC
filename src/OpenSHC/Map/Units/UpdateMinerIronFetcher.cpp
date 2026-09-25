@@ -63,7 +63,7 @@ namespace Map {
             DAT_UnitsState::instance.units[unitID].animationSheetFrameOffset = 1;
             DAT_UnitsState::instance.units[unitID].field_0x30_animRelated = 0x10;
             DAT_UnitsState::instance.units[unitID].animationCycleNumber += 1;
-            if (DAT_UnitsState::instance.units[unitID].animationCycleNumber > 19) {
+            if (DAT_UnitsState::instance.units[unitID].animationCycleNumber >= 20) {
                 if (MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::isWorkplaceBuildingOnAdjacentTile,
                         DAT_UnitsState::ptr)(unitID)
                     == 0) {
