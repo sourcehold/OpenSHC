@@ -37,8 +37,16 @@ def canonical(text):
     return common.canonical(text, registers=False)
 
 
+# a conditional jump whose only difference is how far it reaches: a consequence of code
+# elsewhere being a different size, never the cause
+BRANCH = re.compile(r"^j\w+ -?0x[0-9a-f]+$")
+
+
 def housekeeping_only(original, ours):
-    return all(NOISE.match(canonical(x)) for x in original + ours)
+    canon = [canonical(x) for x in original + ours]
+    if canon and all(BRANCH.match(x) for x in canon):
+        return True
+    return all(NOISE.match(x) for x in canon)
 
 
 def first_divergence(entry):

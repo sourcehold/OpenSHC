@@ -59,6 +59,9 @@ def main():
     print("building %d of %d files: %s" % (len(chosen), len(full), ", ".join(Path(f).stem for f in chosen)))
     build = run("build_quiet.py")
     if "BUILD_OK" not in build:
+        # changing the list makes cmake regenerate, and that first run reports failure
+        build = run("build_quiet.py")
+    if "BUILD_OK" not in build:
         print(build.strip() or "build failed")
         return
     print(run("reccmp_report.py", "--run", "pct").strip())
