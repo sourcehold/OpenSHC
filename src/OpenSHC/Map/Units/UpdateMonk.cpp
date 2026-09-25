@@ -89,7 +89,7 @@ namespace Map {
             }
             if (DAT_GameState::instance.playerDataArray[owner].totalEnemyUnitsCount > 0) {
                 DAT_UnitsState::instance.units[unitID].state.generic
-                    = DAT_UnitsState::instance.units[unitID].closestEnemyMicroDistance < 401
+                    = DAT_UnitsState::instance.units[unitID].closestEnemyMicroDistance <= 400
                     ? (UnitState)2
                     : OpenSHC::Map::Units::States::US_IDLEUnk;
                 return;
@@ -138,7 +138,7 @@ namespace Map {
                 }
             } else {
                 DAT_UnitsState::instance.units[unitID].animationSheetFrameOffset = 1;
-                if (DAT_UnitsState::instance.units[unitID].moveInstructionSpeedDelayTracker < 71) {
+                if (DAT_UnitsState::instance.units[unitID].moveInstructionSpeedDelayTracker <= 70) {
                     DAT_UnitsState::instance.units[unitID].stateBasedSpeed = 0;
                 } else {
                     DAT_UnitsState::instance.units[unitID].stateBasedSpeed = -1;
@@ -172,7 +172,7 @@ namespace Map {
             DAT_UnitsState::instance.units[unitID].field_0x30_animRelated = 0x10;
             DAT_UnitsState::instance.units[unitID].animationSheetFrameOffset = 1;
             if (DAT_UnitsState::instance.units[unitID].moveInstructionSpeedDelayTracker == 0
-                || DAT_UnitsState::instance.units[unitID].moveInstructionSpeedDelayTracker < 71) {
+                || DAT_UnitsState::instance.units[unitID].moveInstructionSpeedDelayTracker <= 70) {
                 DAT_UnitsState::instance.units[unitID].stateBasedSpeed = 0;
             } else {
                 DAT_UnitsState::instance.units[unitID].stateBasedSpeed = -1;

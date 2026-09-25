@@ -65157,7 +65157,7 @@ SHC_3BB0A8C1_0x00566750 | 57.7% | LTCG_regs
 
 SHC_3BB0A8C1_0x00567320 | 48.3% | LTCG regs across calls
 
-SHC_3BB0A8C1_0x00567640 | 35.4% | LTCG_regs
+SHC_3BB0A8C1_0x00567640 | 40.9% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x00568264 | 0.0% | Pending
 
