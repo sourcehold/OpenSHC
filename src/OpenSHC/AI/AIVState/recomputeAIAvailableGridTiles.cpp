@@ -77,7 +77,7 @@ namespace AI {
                         < 40) {
                         ++DAT_GameState::instance.playerDataArray[playerID].availableBoulderGridTiles;
                     }
-                } else if ((char)this->heatMaps[gridX][gridY].treeCount >= 0 && blockedCount <= 5) {
+                } else if ((char)this->heatMaps[gridX][gridY].treeCount >= 0 && blockedCount < 6) {
                     if (this->heatMaps[gridX][gridY].highestTerrainHeight
                             - this->heatMaps[gridX][gridY].lowestTerrainHeight
                         < 12) {
