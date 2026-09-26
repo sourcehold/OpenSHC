@@ -65,7 +65,7 @@ namespace AI {
                                                   .tileTranslationMatrix_YComponent[tile]]
                                           .addXgetTile)
                     / 5;
-                if (gridX >= 1 && gridX <= 77 && gridY >= 1 && gridY <= 77) {
+                if (gridX >= 1 && gridX <= 78 && gridY >= 1 && gridY <= 78) {
                     this->heatMaps[gridX][gridY].isNotNearEdgeUnk = 0;
                 }
                 if ((short)DAT_TileMapState::instance.PathConnectionLayer[tile]
