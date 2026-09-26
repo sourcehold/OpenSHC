@@ -49,7 +49,7 @@ namespace Map {
             ~TroopValueState() {};
 
             // Constructor
-            TroopValueState* constructTroopValueState();
+            TroopValueState* Constructor_TroopValueState();
 
             void clearAttackInfo();
 

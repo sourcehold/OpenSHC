@@ -86,7 +86,7 @@ namespace Map {
             ~BuildingsState() {};
 
             // Constructor
-            BuildingsState* constructBuildingsState();
+            BuildingsState* Constructor_BuildingsState();
 
             int getBuildingResourceAmountByUid(int buildingID, int param_2, ResourceType param_3);
 

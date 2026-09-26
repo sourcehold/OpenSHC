@@ -6884,7 +6884,7 @@ enum {
     // location: OpenSHC/IO
     // type: function
     SHC_3BB0A8C1_0x0041A740 = 0x0041A740,
-    // label: constructBuildingsState
+    // label: Constructor_BuildingsState
     // location: OpenSHC/Map/Buildings/BuildingsState
     // type: function
     SHC_3BB0A8C1_0x0041A760 = 0x0041A760,
@@ -26657,7 +26657,7 @@ enum {
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0048BF80 = 0x0048BF80,
-    // label: constructGameSynchronyState
+    // label: Constructor_GameSynchronyState
     // location: OpenSHC/Synchrony/GameSynchronyState
     // type: function
     SHC_3BB0A8C1_0x0048C150 = 0x0048C150,
@@ -41426,7 +41426,7 @@ enum {
     // location: OpenSHC/UI/MenuViews/CrusadeEndscreen
     // type: function
     SHC_3BB0A8C1_0x004E1F50 = 0x004E1F50,
-    // label: constructViewportRenderState
+    // label: Constructor_ViewportRenderState
     // location: OpenSHC/Rendering/ViewportRenderState
     // type: function
     SHC_3BB0A8C1_0x004E1FA0 = 0x004E1FA0,
@@ -52084,7 +52084,7 @@ enum {
     SHC_3BB0A8C1_0x0051D5D0 = 0x0051D5D0,
     // type: function
     SHC_3BB0A8C1_0x0051D5E0 = 0x0051D5E0,
-    // label: constructTroopValueState
+    // label: Constructor_TroopValueState
     // location: OpenSHC/Map/Units/TroopValueState
     // type: function
     SHC_3BB0A8C1_0x0051D680 = 0x0051D680,

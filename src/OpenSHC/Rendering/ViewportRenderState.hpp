@@ -99,7 +99,7 @@ namespace Rendering {
         ~ViewportRenderState() {};
 
         // Constructor
-        ViewportRenderState* constructViewportRenderState();
+        ViewportRenderState* Constructor_ViewportRenderState();
 
         BOOLEnum xyAreValid(uint x, uint y);
 

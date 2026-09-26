@@ -364,7 +364,7 @@ namespace Synchrony {
         ~GameSynchronyState() {};
 
         // Constructor
-        GameSynchronyState* constructGameSynchronyState();
+        GameSynchronyState* Constructor_GameSynchronyState();
 
         BOOLEnum isAIPlayer(int playerID);
 

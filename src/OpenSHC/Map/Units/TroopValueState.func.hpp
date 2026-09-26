@@ -26,8 +26,8 @@ namespace Map {
             // Constructor
 
             MACRO_FUNCTION_RESOLVER(TroopValueState* (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x0051D680,
-                &TroopValueState::constructTroopValueState)
-            constructTroopValueState;
+                &TroopValueState::Constructor_TroopValueState)
+            Constructor_TroopValueState;
 
             MACRO_FUNCTION_RESOLVER(
                 void (TroopValueState::*)(), false, Address::SHC_3BB0A8C1_0x00518130, &TroopValueState::clearAttackInfo)
