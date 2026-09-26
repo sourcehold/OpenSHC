@@ -16,7 +16,7 @@ namespace AI {
         this->heatMapYArray[0] = gridY;
         this->buildingApproriateGridXPosition = -1;
         this->buildingAppropriateGridYPosition = -1;
-        if (gridX >= 79 || gridY >= 79 || this->heatMaps[gridX][gridY].isNotNearEdgeUnk) {
+        if (gridX > 79 || gridY > 79 || this->heatMaps[gridX][gridY].isNotNearEdgeUnk) {
             return;
         }
         ++this->mapExtraInfo.algorithmIterationNumber;
@@ -51,7 +51,7 @@ namespace AI {
                     && !this->heatMaps[candidateX][candidateY].isNotNearEdgeUnk
                     && !this->heatMaps[candidateX][candidateY].destructionBasedPlacementCooldown
                     && !this->heatMaps[candidateX][candidateY].treeCount
-                    && (char)this->heatMaps[candidateX][candidateY].bouldersCount < 0 && !notInLargestArea) {
+                    && (char)this->heatMaps[candidateX][candidateY].bouldersCount <= 0 && !notInLargestArea) {
                     this->buildingApproriateGridXPosition = candidateX;
                     this->buildingAppropriateGridYPosition = candidateY;
                     return;
