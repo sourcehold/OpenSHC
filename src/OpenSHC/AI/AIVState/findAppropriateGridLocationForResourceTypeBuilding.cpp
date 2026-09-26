@@ -17,13 +17,8 @@ namespace AI {
         this->buildingApproriateGridXPosition = -1;
         this->buildingAppropriateGridYPosition = -1;
         if (resourceType == AIGCRT_OIL) {
-            if (DAT_GameState::instance.playerDataArray[playerID].availableOilGridTiles
-                <= DAT_GameState::instance.playerDataArray[playerID].countPitchRigs) {
-                this->visitCount = 1;
-                this->algAIndex = 0;
-                this->algBIndex = 1;
-                this->buildingApproriateGridXPosition = -1;
-                this->buildingAppropriateGridYPosition = -1;
+            if (DAT_GameState::instance.playerDataArray[playerID].countPitchRigs
+                >= DAT_GameState::instance.playerDataArray[playerID].availableOilGridTiles) {
                 return;
             }
             if (DAT_GameState::instance.playerDataArray[playerID].algoOilCooldown > 0) {
@@ -31,13 +26,8 @@ namespace AI {
                 return;
             }
         } else if (resourceType == AIGCRT_IRON) {
-            if (DAT_GameState::instance.playerDataArray[playerID].availableIronGridTiles
-                <= DAT_GameState::instance.playerDataArray[playerID].countIronMines) {
-                this->visitCount = 1;
-                this->algAIndex = 0;
-                this->algBIndex = 1;
-                this->buildingApproriateGridXPosition = -1;
-                this->buildingAppropriateGridYPosition = -1;
+            if (DAT_GameState::instance.playerDataArray[playerID].countIronMines
+                >= DAT_GameState::instance.playerDataArray[playerID].availableIronGridTiles) {
                 return;
             }
             if (DAT_GameState::instance.playerDataArray[playerID].algoIronCooldown > 0) {
@@ -45,13 +35,8 @@ namespace AI {
                 return;
             }
         } else if (resourceType == AIGCRT_BOULDER) {
-            if (DAT_GameState::instance.playerDataArray[playerID].availableBoulderGridTiles
-                <= DAT_GameState::instance.playerDataArray[playerID].countStoneQuarries) {
-                this->visitCount = 1;
-                this->algAIndex = 0;
-                this->algBIndex = 1;
-                this->buildingApproriateGridXPosition = -1;
-                this->buildingAppropriateGridYPosition = -1;
+            if (DAT_GameState::instance.playerDataArray[playerID].countStoneQuarries
+                >= DAT_GameState::instance.playerDataArray[playerID].availableBoulderGridTiles) {
                 return;
             }
             if (DAT_GameState::instance.playerDataArray[playerID].algoBoulderCooldown > 0) {
