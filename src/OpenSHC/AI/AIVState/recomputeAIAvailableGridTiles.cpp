@@ -94,12 +94,12 @@ namespace AI {
                 this->heatMapXArray[this->algBIndex] = gridX;
                 this->heatMapYArray[this->algBIndex] = gridY;
                 ++this->algBIndex;
-                if (this->algBIndex > 6400) {
+                if ((int)this->algBIndex >= 6400) {
                     this->algBIndex = 0;
                 }
             }
             ++this->algAIndex;
-            if (this->algAIndex > 6400) {
+            if ((int)this->algAIndex >= 6400) {
                 this->algAIndex = 0;
             }
         }
