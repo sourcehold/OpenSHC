@@ -366,7 +366,7 @@ namespace AI {
         }
 
         for (int step = 0; step <= 50; ++step) {
-            if (this->aivs[aivID].currentStepGoal < step) {
+            if (step > this->aivs[aivID].currentStepGoal) {
                 return FALSE;
             }
             if (this->aivs[aivID].aivBuildingSteps[step].buildStatus == AIVBSS_disabled) {
