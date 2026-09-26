@@ -15,7 +15,7 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004EDDF0
     int AIVState::findSuitableFarmLocationAndPlaceFarm(PlayerID playerID, MappersEnum farmType)
     {
-        if (DAT_BuildingsState::instance.unknownCountdown01 <= 20
+        if (DAT_BuildingsState::instance.unknownCountdown01 < 20
             || DAT_GameState::instance.playerDataArray[playerID].countFarms
                 >= DAT_GameState::instance.playerDataArray[playerID].availableOasisGridTiles) {
             return 0;
@@ -29,7 +29,8 @@ namespace AI {
         this->algAIndex = 0;
         this->algBIndex = 1;
         // despite its declared type, farmType holds the BuildingType of the farm
-        MappersEnum mapper = farmType;
+        // the original leaves mapper untouched when farmType is none of the four below
+        MappersEnum mapper;
         if (farmType == Map::Buildings::BT_WHEATFARM) {
             mapper = Commands::M_MAPPER_WHEATFARM;
         } else if (farmType == Map::Buildings::BT_HOPFARM) {
@@ -40,9 +41,9 @@ namespace AI {
             mapper = Commands::M_MAPPER_CATTLEFARM;
         }
         int const campX = DAT_GameState::instance.playerDataArray[playerID].campground.xEntry / 5;
+        this->heatMapXArray[0] = campX;
         ++this->mapExtraInfo.algorithmIterationNumber;
         int const campY = DAT_GameState::instance.playerDataArray[playerID].campground.yEntry / 5;
-        this->heatMapXArray[0] = campX;
         this->heatMapYArray[0] = campY;
         this->heatMaps[campX][campY].algorithmIterationNumber = this->mapExtraInfo.algorithmIterationNumber;
         this->heatMaps[campX][campY].algorithmVisitCountUnk = this->visitCount;
@@ -69,14 +70,14 @@ namespace AI {
                 }
                 int const notInLargestArea = (char)this->heatMaps[gridX][gridY].tilesNotPartOfLargestAreaCount;
                 this->heatMaps[gridX][gridY].algorithmIterationNumber = this->mapExtraInfo.algorithmIterationNumber;
-                if (notInLargestArea >= 16) {
+                if (notInLargestArea > 16) {
                     continue;
                 }
                 this->heatMaps[gridX][gridY].algorithmVisitCountUnk = this->visitCount + 1;
                 this->heatMapXArray[this->algBIndex] = gridX;
                 this->heatMapYArray[this->algBIndex] = gridY;
                 ++this->algBIndex;
-                if (this->algBIndex > 6400) {
+                if ((int)this->algBIndex >= 6400) {
                     this->algBIndex = 0;
                 }
                 if (this->heatMaps[gridX][gridY].tilesNotPartOfLargestAreaCount
