@@ -141,16 +141,12 @@ namespace AI {
                 continue;
             }
             if (DAT_TileMapState::instance.LogicLayer[tile] & L_ROCKY) {
-                ++this->heatMaps[(tile
-                                     - DAT_ViewportRenderState::instance
-                                         .translationMatrix[DAT_ViewportRenderState::instance
-                                                 .tileTranslationMatrix_YComponent[tile]]
-                                         .addXgetTile)
-                          / 5][DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile] / 5]
-                      .impassableCount;
+                int const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
+                int const gridX = (tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile) / 5;
+                ++this->heatMaps[gridX][y / 5].impassableCount;
             }
             if (DAT_TileMapState::instance.LogicLayer[tile] & L_TREE) {
-                short const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
+                int const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
                 int const gridX = (tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile) / 5;
                 int const gridY = y / 5;
                 int const treeID = (short)DAT_TileMapState::instance.OrganismLayer[tile];
@@ -168,26 +164,18 @@ namespace AI {
                     this->mapExtraInfo.totalWoodAvailable += 3;
                 }
             } else if (DAT_TileMapState::instance.BuildingLayer[tile] != 0) {
-                int const gridX = (tile
-                                      - DAT_ViewportRenderState::instance
-                                          .translationMatrix[DAT_ViewportRenderState::instance
-                                                  .tileTranslationMatrix_YComponent[tile]]
-                                          .addXgetTile)
-                    / 5;
-                int const gridY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile] / 5;
+                int const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
+                int const gridX = (tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile) / 5;
+                int const gridY = y / 5;
                 ++this->heatMaps[gridX][gridY].structureCount;
                 this->heatMaps[gridX][gridY].tileOwnership
                     = (byte)DAT_BuildingsState::instance
                           .buildings[(short)DAT_TileMapState::instance.BuildingLayer[tile]]
                           .owner;
             } else if (DAT_TileMapState::instance.LogicLayer[tile] & L_WALL_OR_GATEHOUSE) {
-                int const gridX = (tile
-                                      - DAT_ViewportRenderState::instance
-                                          .translationMatrix[DAT_ViewportRenderState::instance
-                                                  .tileTranslationMatrix_YComponent[tile]]
-                                          .addXgetTile)
-                    / 5;
-                int const gridY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile] / 5;
+                int const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
+                int const gridX = (tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile) / 5;
+                int const gridY = y / 5;
                 ++this->heatMaps[gridX][gridY].structureCount;
                 this->heatMaps[gridX][gridY].tileOwnership = (DAT_TileMapState::instance.WallOwnerLayer[tile] & 7) + 1;
             }
