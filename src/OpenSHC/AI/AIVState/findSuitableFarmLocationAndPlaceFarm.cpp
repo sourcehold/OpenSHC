@@ -42,8 +42,8 @@ namespace AI {
         }
         int const campX = DAT_GameState::instance.playerDataArray[playerID].campground.xEntry / 5;
         this->heatMapXArray[0] = campX;
-        ++this->mapExtraInfo.algorithmIterationNumber;
         int const campY = DAT_GameState::instance.playerDataArray[playerID].campground.yEntry / 5;
+        ++this->mapExtraInfo.algorithmIterationNumber;
         this->heatMapYArray[0] = campY;
         this->heatMaps[campX][campY].algorithmIterationNumber = this->mapExtraInfo.algorithmIterationNumber;
         this->heatMaps[campX][campY].algorithmVisitCountUnk = this->visitCount;
@@ -57,10 +57,10 @@ namespace AI {
             }
             // only the four cardinal directions
             for (int direction = 0; direction < 8; direction += 2) {
-                uint const gridY
-                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.yOffset + y;
                 uint const gridX
                     = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.xOffset + x;
+                uint const gridY
+                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.yOffset + y;
                 if (this->heatMaps[x][y].isNotNearEdgeUnk && (gridX > 79 || gridY > 79)) {
                     continue;
                 }
