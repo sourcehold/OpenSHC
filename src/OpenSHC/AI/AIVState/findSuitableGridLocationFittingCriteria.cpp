@@ -32,7 +32,7 @@ namespace AI {
                     = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.xOffset + x;
                 uint const candidateY
                     = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.yOffset + y;
-                if (this->heatMaps[x][y].isNotNearEdgeUnk && (candidateX >= 79 || candidateY >= 79)) {
+                if (this->heatMaps[x][y].isNotNearEdgeUnk && (candidateX > 79 || candidateY > 79)) {
                     continue;
                 }
                 int const notInLargestArea
