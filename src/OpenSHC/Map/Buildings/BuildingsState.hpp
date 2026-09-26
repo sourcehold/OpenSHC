@@ -86,7 +86,7 @@ namespace Map {
             ~BuildingsState() {};
 
             // Constructor
-            BuildingsState* constructBuildingsState();
+            BuildingsState* Constructor_BuildingsState();
 
             int getBuildingResourceAmountByUid(int buildingID, int param_2, ResourceType param_3);
 
@@ -163,7 +163,7 @@ namespace Map {
 
             uint isBuildingPathBlockerOrDamageable(uint param_1, int param_2);
 
-            BOOLEnum getBuildingHasHealthProperty(uint buildingID);
+            BOOLEnum getBuildingHasHealthProperty(uint buildingID, int unused);
 
             BOOLEnum hasHumanPlayerUnitsOnBuilding(int buildingID);
 
@@ -186,7 +186,7 @@ namespace Map {
 
             uint getArmoryIDIfSpaceLeft(uint buildingID, undefined4 resourceID, int playerID, int resourceCount);
 
-            int computeArmoryRemainingCapacity(int buildingID);
+            int computeArmoryRemainingCapacity(int buildingID, int another);
 
             uint computeResourceSumForBuilding(int buildingID);
 

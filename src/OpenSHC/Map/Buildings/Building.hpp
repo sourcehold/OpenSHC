@@ -135,9 +135,7 @@ namespace Map {
             short workerID[4]; // 0x0000019E length: 8
             undefined1 padding_0x1a6[2]; // 0x000001A6 length: 2
             int workerUID[4]; // 0x000001A8 length: 16
-            short workers[2]; // 0x000001B8 length: 4
-            short field137_0x1bc; // 0x000001BC length: 2
-            undefined1 padding_0x1be[2]; // 0x000001BE length: 2
+            short workers[4]; // 0x000001B8 length: 4
             short unitID; // 0x000001C0 length: 2
             short field141_0x1c2; // 0x000001C2 length: 2
             short growCounter; // 0x000001C4 length: 2
