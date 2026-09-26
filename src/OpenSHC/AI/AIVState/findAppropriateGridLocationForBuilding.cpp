@@ -29,9 +29,9 @@ namespace AI {
         uint candidateX;
         uint candidateY;
         for (;;) {
+            int freeCount = 0;
             int const x = this->heatMapXArray[this->algAIndex];
             int const y = this->heatMapYArray[this->algAIndex];
-            int freeCount = 0;
             if (!this->heatMaps[x][y].tilesNotPartOfLargestAreaCount) {
                 freeCount = 1;
             }
