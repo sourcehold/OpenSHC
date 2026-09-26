@@ -51,7 +51,7 @@ namespace AI {
                     && !this->heatMaps[candidateX][candidateY].isNotNearEdgeUnk
                     && !this->heatMaps[candidateX][candidateY].destructionBasedPlacementCooldown
                     && !this->heatMaps[candidateX][candidateY].treeCount
-                    && (char)this->heatMaps[candidateX][candidateY].bouldersCount < 0 && !notInLargestArea) {
+                    && (char)this->heatMaps[candidateX][candidateY].bouldersCount <= 0 && !notInLargestArea) {
                     ++freeCount;
                 }
                 if (this->heatMaps[candidateX][candidateY].algorithmIterationNumber
