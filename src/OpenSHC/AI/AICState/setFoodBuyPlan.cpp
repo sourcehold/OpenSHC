@@ -9,14 +9,16 @@
 namespace OpenSHC {
 namespace AI {
 
+    using OpenSHC::AI::AITypeA;
+    using OpenSHC::Game::Resources::ResourceType;
+
     // FUNCTION: STRONGHOLDCRUSADER 0x004CB060
     void AICState::setFoodBuyPlan(int playerID)
     {
-
         int const aiType = DAT_GameState::ptr->playerDataArray[playerID].aiType;
 
         // Early return if not an AI player (human player has aiType == 0)
-        if (aiType == AITA_NULL) {
+        if (aiType == AITypeA::AITA_NULL) {
             return;
         }
 
@@ -28,36 +30,36 @@ namespace AI {
         // Apples: special handling with >= 0 check (allows -1 to disable)
         int const minimumApples = this->aics[aiConfigIndex].minimumApples;
         int* currentResources = DAT_GameState::ptr->playerDataArray[playerID].currentResources;
-        if (minimumApples >= 0 && currentResources[Game::Resources::RT_APPLE] < minimumApples) {
-            DAT_GameState::ptr->playerDataArray[playerID].resourcesToAcquireArray[Game::Resources::RT_APPLE]
+        if (minimumApples >= 0 && currentResources[ResourceType::RT_APPLE] < minimumApples) {
+            DAT_GameState::ptr->playerDataArray[playerID].resourcesToAcquireArray[ResourceType::RT_APPLE]
                 = this->aics[aiConfigIndex].tradeAmountFood;
         }
 
         // Cheese: standard check with > 0
         int const minimumCheese = this->aics[aiConfigIndex].minimumCheese;
-        if (minimumCheese > 0 && currentResources[Game::Resources::RT_CHEESE] < minimumCheese) {
-            DAT_GameState::ptr->playerDataArray[playerID].resourcesToAcquireArray[Game::Resources::RT_CHEESE]
+        if (minimumCheese > 0 && currentResources[ResourceType::RT_CHEESE] < minimumCheese) {
+            DAT_GameState::ptr->playerDataArray[playerID].resourcesToAcquireArray[ResourceType::RT_CHEESE]
                 = this->aics[aiConfigIndex].tradeAmountFood;
         }
 
         // Bread: standard check with > 0
         int const minimumBread = this->aics[aiConfigIndex].minimumBread;
-        if (minimumBread > 0 && currentResources[Game::Resources::RT_BREAD] < minimumBread) {
-            DAT_GameState::ptr->playerDataArray[playerID].resourcesToAcquireArray[Game::Resources::RT_BREAD]
+        if (minimumBread > 0 && currentResources[ResourceType::RT_BREAD] < minimumBread) {
+            DAT_GameState::ptr->playerDataArray[playerID].resourcesToAcquireArray[ResourceType::RT_BREAD]
                 = this->aics[aiConfigIndex].tradeAmountFood;
         }
 
         // Wheat: standard check with > 0
         int const minimumWheat = this->aics[aiConfigIndex].minimumWheat;
-        if (minimumWheat > 0 && currentResources[Game::Resources::RT_WHEAT] < minimumWheat) {
-            DAT_GameState::ptr->playerDataArray[playerID].resourcesToAcquireArray[Game::Resources::RT_WHEAT]
+        if (minimumWheat > 0 && currentResources[ResourceType::RT_WHEAT] < minimumWheat) {
+            DAT_GameState::ptr->playerDataArray[playerID].resourcesToAcquireArray[ResourceType::RT_WHEAT]
                 = this->aics[aiConfigIndex].tradeAmountFood;
         }
 
         // Hops: standard check with > 0
         int const minimumHop = this->aics[aiConfigIndex].minimumHop;
-        if (minimumHop > 0 && currentResources[Game::Resources::RT_HOPS] < minimumHop) {
-            DAT_GameState::ptr->playerDataArray[playerID].resourcesToAcquireArray[Game::Resources::RT_HOPS]
+        if (minimumHop > 0 && currentResources[ResourceType::RT_HOPS] < minimumHop) {
+            DAT_GameState::ptr->playerDataArray[playerID].resourcesToAcquireArray[ResourceType::RT_HOPS]
                 = this->aics[aiConfigIndex].tradeAmountFood;
         }
     }
