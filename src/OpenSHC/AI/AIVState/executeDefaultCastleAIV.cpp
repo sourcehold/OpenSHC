@@ -485,7 +485,7 @@ namespace AI {
                     continue;
                 }
             }
-            if (DAT_GameState::instance.playerDataArray[playerID].closestEnemyDistanceToTheLord <= 120) {
+            if (DAT_GameState::instance.playerDataArray[playerID].closestEnemyDistanceToTheLord < 120) {
                 continue;
             }
             if (!MACRO_CALL_MEMBER(Game::GameStateStructures_Func::checkRequiredResourcesForBuildingOrPlanToBuy,
