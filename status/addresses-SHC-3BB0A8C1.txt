@@ -37963,7 +37963,7 @@ SHC_3BB0A8C1_0x004EEF20 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004EF090 | 90.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004EF0D0 | 37.1% | register allocation differs (t
+SHC_3BB0A8C1_0x004EF0D0 | 65.7% | orig spills y in loop 1, we ke
 
 SHC_3BB0A8C1_0x004EF130 | 0.0% | Pending
 

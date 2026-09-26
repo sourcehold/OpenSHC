@@ -23,9 +23,11 @@ namespace AI {
         MACRO_CALL_MEMBER(AIVState_Func::rotateAIV, this)(this->aivs[aivID].keepOrientation);
 
         // single buildings and the keep, steps is accessed as a flat 100 * 100 array
+        int x;
+        int y;
         int index = 0;
-        for (int y = 0; y < 100; ++y) {
-            for (int x = 0; x < 100; ++x, ++index) {
+        for (y = 0; y < 100; ++y) {
+            for (x = 0; x < 100; ++x, ++index) {
                 if (this->isHandled[index]) {
                     continue;
                 }
@@ -78,14 +80,14 @@ namespace AI {
         BOOLEnum selected;
         do {
             selected = FALSE;
-            int index = startY * 100;
+            index = startY * 100;
             if (startY >= 100) {
                 break;
             }
             int step;
             MappersEnum mapper;
-            for (int y = startY; y < 100; ++y) {
-                for (int x = 0; x < 100; ++x, ++index) {
+            for (y = startY; y < 100; ++y) {
+                for (x = 0; x < 100; ++x, ++index) {
                     if (this->isHandled[index]) {
                         continue;
                     }
@@ -123,8 +125,6 @@ namespace AI {
         } while (selected);
 
         // rotate the unit locations and copy them to the player
-        int y;
-        int x;
         for (int unitType = 0; unitType < 22; ++unitType) {
             DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount[unitType] = 0;
             if (unitType == AIVUT_PIKEMAN || unitType == AIVUT_SWORDSMAN || unitType == AIVUT_ARABIAN_SWORDSMAN) {
