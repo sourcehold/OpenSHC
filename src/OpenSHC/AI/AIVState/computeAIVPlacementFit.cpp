@@ -42,17 +42,18 @@ namespace AI {
                         Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,
                         DAT_BuildingsState::ptr)(mapper)];
                 ++this->buildingCounter;
-                uint const realY = this->aivs[playerID].keepYOffset + y;
                 uint const realX = this->aivs[playerID].keepXOffset + x;
+                uint const realY = this->aivs[playerID].keepYOffset + y;
                 if (realX > 399 || realY > 399
                     || !DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[realY * 400 + realX]) {
                     continue;
                 }
-                int const rowTile = DAT_ViewportRenderState::instance.translationMatrix[realY].addXgetTile;
+                int const tile
+                    = DAT_ViewportRenderState::instance.translationMatrix[realY].addXgetTile + realX;
                 MACRO_CALL_MEMBER(Map::TileMapState_Func::storeMinAndMaxHeightOfArea, DAT_TileMapState::ptr)(
                     realX, realY, 1);
                 if (MACRO_CALL_MEMBER(Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, DAT_TileMapState::ptr)(
-                        rowTile + realX, 0, mapper, 0)) {
+                        tile, 0, mapper, 0)) {
                     this->isHandled[index] = 1;
                     // steps is accessed as a flat 100 * 100 array
                     if (this->steps[0][index] < minSteps) {
