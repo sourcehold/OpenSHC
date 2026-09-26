@@ -46,9 +46,9 @@ namespace AI {
         }
 
         int const campX = DAT_GameState::instance.playerDataArray[playerID].campground.xEntry / 5;
-        ++this->mapExtraInfo.algorithmIterationNumber;
-        int const campY = DAT_GameState::instance.playerDataArray[playerID].campground.yEntry / 5;
         this->heatMapXArray[0] = campX;
+        int const campY = DAT_GameState::instance.playerDataArray[playerID].campground.yEntry / 5;
+        ++this->mapExtraInfo.algorithmIterationNumber;
         this->heatMapYArray[0] = campY;
         this->heatMaps[campX][campY].algorithmIterationNumber = this->mapExtraInfo.algorithmIterationNumber;
         this->heatMaps[campX][campY].algorithmVisitCountUnk = this->visitCount;
@@ -83,7 +83,7 @@ namespace AI {
                 if ((blockedCount == 0 || resourceType == AIGCRT_IRON) && blockedCount <= 4
                     && !this->heatMaps[gridX][gridY].structureCount
                     && !this->heatMaps[gridX][gridY].destructionBasedPlacementCooldown
-                    && (owner == 0
+                    && (!this->heatMaps[gridX][gridY].tileOwnership
                         || DAT_GameState::instance.mapAndTime.playerTeams[playerID]
                             == DAT_GameState::instance.mapAndTime.playerTeams[owner])) {
                     if (resourceType == AIGCRT_OIL) {
