@@ -60,12 +60,12 @@ namespace AI {
                 this->heatMapXArray[this->algBIndex] = candidateX;
                 this->heatMapYArray[this->algBIndex] = candidateY;
                 ++this->algBIndex;
-                if (this->algBIndex > 6400) {
+                if ((int)this->algBIndex >= 6400) {
                     this->algBIndex = 0;
                 }
             }
             ++this->algAIndex;
-            if (this->algAIndex > 6400) {
+            if ((int)this->algAIndex >= 6400) {
                 this->algAIndex = 0;
             }
         }
