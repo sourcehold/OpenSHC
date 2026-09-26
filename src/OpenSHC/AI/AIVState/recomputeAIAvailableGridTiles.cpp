@@ -24,9 +24,9 @@ namespace AI {
         this->algBIndex = 1;
         this->algAIndex = 0;
         int const campX = DAT_GameState::instance.playerDataArray[playerID].campground.xEntry / 5;
-        ++this->mapExtraInfo.algorithmIterationNumber;
-        int const campY = DAT_GameState::instance.playerDataArray[playerID].campground.yEntry / 5;
         this->heatMapXArray[0] = campX;
+        int const campY = DAT_GameState::instance.playerDataArray[playerID].campground.yEntry / 5;
+        ++this->mapExtraInfo.algorithmIterationNumber;
         this->heatMapYArray[0] = campY;
         this->heatMaps[campX][campY].algorithmIterationNumber = this->mapExtraInfo.algorithmIterationNumber;
         this->heatMaps[campX][campY].algorithmVisitCountUnk = this->visitCount;
@@ -53,13 +53,13 @@ namespace AI {
                 }
                 int const impassable = (char)this->heatMaps[gridX][gridY].impassableCount;
                 this->heatMaps[gridX][gridY].algorithmIterationNumber = this->mapExtraInfo.algorithmIterationNumber;
-                int const notInLargestArea = (char)this->heatMaps[gridX][gridY].tilesNotPartOfLargestAreaCount;
-                int const blockedCount = notInLargestArea - impassable;
+                int const blockedCount
+                    = (char)this->heatMaps[gridX][gridY].tilesNotPartOfLargestAreaCount - impassable;
                 if (blockedCount >= 16) {
                     continue;
                 }
                 if ((char)this->heatMaps[gridX][gridY].oilCount > 2
-                    && (char)this->heatMaps[gridX][gridY].marshCount >= 10 && notInLargestArea == impassable) {
+                    && (char)this->heatMaps[gridX][gridY].marshCount >= 10 && blockedCount == 0) {
                     if (this->heatMaps[gridX][gridY].highestTerrainHeight
                             - this->heatMaps[gridX][gridY].lowestTerrainHeight
                         < 12) {
@@ -71,7 +71,7 @@ namespace AI {
                         < 12) {
                         ++DAT_GameState::instance.playerDataArray[playerID].availableIronGridTiles;
                     }
-                } else if ((char)this->heatMaps[gridX][gridY].bouldersCount >= 8 && notInLargestArea == impassable) {
+                } else if ((char)this->heatMaps[gridX][gridY].bouldersCount >= 8 && blockedCount == 0) {
                     if (this->heatMaps[gridX][gridY].highestTerrainHeight
                             - this->heatMaps[gridX][gridY].lowestTerrainHeight
                         < 40) {
@@ -84,7 +84,7 @@ namespace AI {
                         ++DAT_GameState::instance.playerDataArray[playerID].availableTreeGridTiles;
                     }
                 } else if ((char)this->heatMaps[gridX][gridY].oasisScrubCount >= 25
-                    && (char)this->heatMaps[gridX][gridY].oasisThickScrubCount >= 14 && notInLargestArea == impassable
+                    && (char)this->heatMaps[gridX][gridY].oasisThickScrubCount >= 14 && blockedCount == 0
                     && this->heatMaps[gridX][gridY].highestTerrainHeight
                             - this->heatMaps[gridX][gridY].lowestTerrainHeight
                         < 12) {
