@@ -40,10 +40,10 @@ namespace AI {
             }
             // only the four cardinal directions
             for (int direction = 0; direction < 8; direction += 2) {
-                uint const gridY
-                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.yOffset + y;
                 uint const gridX
                     = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.xOffset + x;
+                uint const gridY
+                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.yOffset + y;
                 if (this->heatMaps[x][y].isNotNearEdgeUnk && (gridX > 79 || gridY > 79)) {
                     continue;
                 }
@@ -56,31 +56,27 @@ namespace AI {
                 if (notInLargestArea >= 16 || this->heatMaps[gridX][gridY].destructionBasedPlacementCooldown) {
                     continue;
                 }
-                if (notInLargestArea >= 6) {
-                    continue;
-                }
-                char const treeCount = (char)this->heatMaps[gridX][gridY].treeCount;
-                if (treeCount <= 0) {
-                    continue;
-                }
-                ++foundCount;
-                int score = treeCount * 5 - this->visitCount * 3;
-                // prefer cells that were not used for a woodcutter recently
-                if (this->heatMaps[gridX][gridY].woodRelatedCountdownTo0) {
-                    if (score > 0) {
-                        score /= 2;
-                    } else {
-                        score *= 2;
+                if (notInLargestArea < 6 && (char)this->heatMaps[gridX][gridY].treeCount > 0) {
+                    ++foundCount;
+                    int score
+                        = (char)this->heatMaps[gridX][gridY].treeCount * 5 - this->visitCount * 3;
+                    // prefer cells that were not used for a woodcutter recently
+                    if (this->heatMaps[gridX][gridY].woodRelatedCountdownTo0) {
+                        if (score > 0) {
+                            score /= 2;
+                        } else {
+                            score *= 2;
+                        }
                     }
-                }
-                if (score > bestScore) {
-                    bestX = gridX;
-                    bestY = gridY;
-                    bestScore = score;
-                }
-                if (foundCount > 10 || (foundCount > 5 && this->visitCount > 20)
-                    || (foundCount > 0 && this->visitCount > 30)) {
-                    break;
+                    if (score > bestScore) {
+                        bestX = gridX;
+                        bestY = gridY;
+                        bestScore = score;
+                    }
+                    if (foundCount > 10 || (foundCount > 5 && this->visitCount > 20)
+                        || (foundCount > 0 && this->visitCount > 30)) {
+                        break;
+                    }
                 }
                 this->heatMaps[gridX][gridY].algorithmVisitCountUnk = this->visitCount + 1;
                 this->heatMapXArray[this->algBIndex] = gridX;
