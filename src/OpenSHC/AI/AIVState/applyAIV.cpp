@@ -78,22 +78,18 @@ namespace AI {
         BOOLEnum selected;
         do {
             selected = FALSE;
+            int index = startY * 100;
             if (startY >= 100) {
                 break;
             }
             int step;
             MappersEnum mapper;
-            int index = startY * 100;
             for (int y = startY; y < 100; ++y) {
                 for (int x = 0; x < 100; ++x, ++index) {
                     if (this->isHandled[index]) {
                         continue;
                     }
-                    if (selected) {
-                        if (this->steps[0][index] != step) {
-                            continue;
-                        }
-                    } else {
+                    if (!selected) {
                         mapper = MACRO_CALL_MEMBER(AIVState_Func::convertAIVBuildingTypeToCommandBuildingType, this)(
                             (AIV::AIVBuildingType2)this->constructions[index]);
                         step = this->steps[0][index];
@@ -103,6 +99,8 @@ namespace AI {
                         if (y > startY) {
                             startY = y;
                         }
+                    } else if (this->steps[0][index] != step) {
+                        continue;
                     }
                     uint const realX = this->aivs[aivID].keepXOffset + x;
                     uint const realY = this->aivs[aivID].keepYOffset + y;
