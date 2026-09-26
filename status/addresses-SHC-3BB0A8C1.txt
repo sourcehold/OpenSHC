@@ -34157,73 +34157,73 @@ SHC_3BB0A8C1_0x004C6CD0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004C6D30 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004C6D60 | 0.0% | Pending
+SHC_3BB0A8C1_0x004C6D60 | 92.2% | Constant store order differs
 
-SHC_3BB0A8C1_0x004C7120 | 0.0% | Pending
+SHC_3BB0A8C1_0x004C7120 | 83.7% | Constant store order differs
 
-SHC_3BB0A8C1_0x004C7520 | 0.0% | Pending
+SHC_3BB0A8C1_0x004C7520 | 94.1% | Constant store order differs
 
-SHC_3BB0A8C1_0x004C7910 | 0.0% | Pending
+SHC_3BB0A8C1_0x004C7910 | 81.9% | Constant store order differs
 
-SHC_3BB0A8C1_0x004C7D20 | 0.0% | Pending
+SHC_3BB0A8C1_0x004C7D20 | 81.5% | Constant store order differs
 
-SHC_3BB0A8C1_0x004C8110 | 0.0% | Pending
+SHC_3BB0A8C1_0x004C8110 | 84.3% | Constant store order differs
 
-SHC_3BB0A8C1_0x004C8530 | 0.0% | Pending
+SHC_3BB0A8C1_0x004C8530 | 94.7% | Constant store order differs
 
-SHC_3BB0A8C1_0x004C8920 | 0.0% | Pending
+SHC_3BB0A8C1_0x004C8920 | 87.5% | Constant store order differs
 
-SHC_3BB0A8C1_0x004C8D20 | 0.0% | Pending
+SHC_3BB0A8C1_0x004C8D20 | 90.4% | Constant store order differs
 
-SHC_3BB0A8C1_0x004C9120 | 0.0% | Pending
+SHC_3BB0A8C1_0x004C9120 | 80.0% | Constant store order differs
 
-SHC_3BB0A8C1_0x004C94F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004C94F0 | 89.5% | Constant store order differs
 
-SHC_3BB0A8C1_0x004C9900 | 0.0% | Pending
+SHC_3BB0A8C1_0x004C9900 | 84.2% | Constant store order differs
 
-SHC_3BB0A8C1_0x004C9CF0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004C9CF0 | 83.3% | Constant store order differs
 
-SHC_3BB0A8C1_0x004CA0C0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CA0C0 | 82.3% | Constant store order differs
 
-SHC_3BB0A8C1_0x004CA4D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CA4D0 | 74.9% | Constant store order differs
 
-SHC_3BB0A8C1_0x004CA8A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CA8A0 | 84.8% | Constant store order differs
 
-SHC_3BB0A8C1_0x004CAC70 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CAC70 | 95.2% | Reimplemented
 
-SHC_3BB0A8C1_0x004CACB0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CACB0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CAD10 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004CAE20 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004CAEA0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CAEA0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CB060 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CB120 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CB150 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CB150 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CB180 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CB180 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CB1B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CB1B0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CB220 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CB220 | 97.8% | Reimplemented
 
-SHC_3BB0A8C1_0x004CB290 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CB290 | 98.1% | Reimplemented
 
-SHC_3BB0A8C1_0x004CB330 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CB330 | 97.5% | Reimplemented
 
-SHC_3BB0A8C1_0x004CB3A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CB3A0 | 85.3% | Register allocation differs
 
-SHC_3BB0A8C1_0x004CB4D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CB4D0 | 97.5% | Reimplemented
 
-SHC_3BB0A8C1_0x004CB540 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CB540 | 97.5% | Reimplemented
 
-SHC_3BB0A8C1_0x004CB5B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CB5B0 | 91.3% | Reimplemented
 
-SHC_3BB0A8C1_0x004CB610 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CB610 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CB66C | 0.0% | Pending
 
@@ -34501,7 +34501,7 @@ SHC_3BB0A8C1_0x004CB6FA | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004CB6FB | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004CB700 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CB700 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CB754 | 0.0% | Pending
 
@@ -34845,55 +34845,55 @@ SHC_3BB0A8C1_0x004CB803 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004CB804 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004CB810 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CB810 | 92.3% | Reimplemented
 
-SHC_3BB0A8C1_0x004CB890 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CB890 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CB940 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CB940 | 88.9% | Register allocation differs
 
-SHC_3BB0A8C1_0x004CB9F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CB9F0 | 93.3% | Reimplemented
 
-SHC_3BB0A8C1_0x004CBA50 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CBA50 | 85.1% | Reimplemented functionally, stack and cached load differencesd
 
-SHC_3BB0A8C1_0x004CBE30 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CBE30 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CBFA0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CC000 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x004CC000 | 92.9% | Reimplemented
 
-SHC_3BB0A8C1_0x004CC070 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CC070 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CC250 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CC250 | 94.2% | Register scheduling differs
 
 SHC_3BB0A8C1_0x004CC390 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004CC420 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CC420 | 38.0% | Loop strength reduction diff
 
-SHC_3BB0A8C1_0x004CC520 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CC520 | 93.8% | Reimplemented
 
-SHC_3BB0A8C1_0x004CC5A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CC5A0 | 85.7% | Register allocation differs
 
-SHC_3BB0A8C1_0x004CC680 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CC680 | 83.3% | Register push placement diff
 
 SHC_3BB0A8C1_0x004CC6B0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004CC720 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CC720 | 95.2% | Reimplemented
 
-SHC_3BB0A8C1_0x004CC7B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CC7B0 | 95.2% | Reimplemented
 
-SHC_3BB0A8C1_0x004CC840 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CC840 | 94.3% | Reimplemented
 
-SHC_3BB0A8C1_0x004CC8D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CC8D0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CC910 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CC910 | 97.1% | Reimplemented
 
-SHC_3BB0A8C1_0x004CC990 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CC990 | 40.90% | Reimplemented functionally, different register usage
 
-SHC_3BB0A8C1_0x004CCAF0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CCAF0 | 68.1% | Register allocation differs
 
-SHC_3BB0A8C1_0x004CCBE0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CCBE0 | 99.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CCD20 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CCD20 | 63.9% | Loop register allocation diff
 
 SHC_3BB0A8C1_0x004CCEDC | 0.0% | Pending
 
@@ -35265,175 +35265,175 @@ SHC_3BB0A8C1_0x004CCFB0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004CD070 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004CD0C0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CD0C0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CD110 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CD110 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CD160 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CD160 | 91.7% | Register allocation differs
 
-SHC_3BB0A8C1_0x004CD250 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CD250 | 94.7% | Reimplemented
 
-SHC_3BB0A8C1_0x004CD2A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CD2A0 | 59.60% | Reimplemented functionally, code block ordering problem
 
-SHC_3BB0A8C1_0x004CD560 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CD560 | 95.2% | Reimplemented
 
-SHC_3BB0A8C1_0x004CD690 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CD690 | 94.9% | Reimplemented
 
-SHC_3BB0A8C1_0x004CD7B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CD7B0 | 76.1% | Register allocation differs
 
-SHC_3BB0A8C1_0x004CD8F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CD8F0 | 74.2% | Register allocation differs
 
-SHC_3BB0A8C1_0x004CDA50 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CDA50 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CDAB0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CDAB0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CDB20 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CDB20 | 23.3% | Loop/register structure differs
 
-SHC_3BB0A8C1_0x004CDBC0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CDBC0 | 65.0% | Loop counter spilled in orig
 
-SHC_3BB0A8C1_0x004CDCA0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CDCA0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CDCF0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CDCF0 | 41.8% | Register allocation differs
 
-SHC_3BB0A8C1_0x004CDE60 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CDE60 | 76.1% | AIC index folding differs
 
-SHC_3BB0A8C1_0x004CDF10 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CDF10 | 98.2% | Reimplemented
 
-SHC_3BB0A8C1_0x004CDFD0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CDFD0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CE040 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CE040 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CE110 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CE110 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CE1A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CE1A0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CE200 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CE200 | 55.3% | Register/store scheduling diff
 
 SHC_3BB0A8C1_0x004CE270 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004CE3B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CE3B0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CE430 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CE430 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CE4D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CE4D0 | 93.8% | Reimplemented
 
 SHC_3BB0A8C1_0x004CE530 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004CE5F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CE5F0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CE660 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004CE6B0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004CE790 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CE790 | 98.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CE830 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CE830 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CE860 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004CE890 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004CE930 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CE930 | 87.0% | Register allocation differs
 
-SHC_3BB0A8C1_0x004CEA50 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CEA50 | 92.7% | Reimplemented functionally, stack ordering problem
 
-SHC_3BB0A8C1_0x004CEB50 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CEB50 | 98.8% | Reimplemented
 
 SHC_3BB0A8C1_0x004CEB80 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004CEC80 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CEC80 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CED90 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CED90 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CEEA0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CEEA0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CEFD0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CEFD0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CF060 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004CF180 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CF180 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CF270 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CF270 | 62.2% | Orig recomputes player offset
 
-SHC_3BB0A8C1_0x004CF2E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CF2E0 | 46.8% | Orig recomputes player offset
 
-SHC_3BB0A8C1_0x004CF400 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CF400 | 62.22% | Reimplemented functionally, our compiler improves on original by avoiding recomputations
 
-SHC_3BB0A8C1_0x004CF470 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CF470 | 56.0% | Orig recomputes player offset
 
-SHC_3BB0A8C1_0x004CF4F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CF4F0 | 57.10% | Reimplemented functionally, our compiler improves on original by avoiding recomputations
 
-SHC_3BB0A8C1_0x004CF560 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CF560 | 37.74% | Reimplemented functionally, different register usage
 
-SHC_3BB0A8C1_0x004CF5E0 | 100.0% | Reimplemented without for-loop
+SHC_3BB0A8C1_0x004CF5E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CF660 | 100.0% | Reimplemented without for-loop
+SHC_3BB0A8C1_0x004CF660 | 97.2% | Reimplemented
 
-SHC_3BB0A8C1_0x004CF6E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CF6E0 | 62.22% | Reimplemented functionally, different register usage
 
-SHC_3BB0A8C1_0x004CF750 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CF750 | 62.22% | Reimplemented functionally, our compiler improves on original by avoiding recomputations
 
-SHC_3BB0A8C1_0x004CF7C0 | 100.0% | Reimplemented, for-loop didn't work
+SHC_3BB0A8C1_0x004CF7C0 | 98.2% | Reimplemented
 
 SHC_3BB0A8C1_0x004CF7F0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004CF870 | 100.0% | Reimplemented, for-loop didn't work
+SHC_3BB0A8C1_0x004CF870 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CF920 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CF920 | 96.9% | Reimplemented
 
-SHC_3BB0A8C1_0x004CFA10 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CFA10 | 96.9% | Reimplemented
 
-SHC_3BB0A8C1_0x004CFB20 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CFB20 | 97.8% | Reimplemented
 
-SHC_3BB0A8C1_0x004CFBC0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CFBC0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CFCD0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CFCD0 | 56.0% | Unresolved attackInfo offsets
 
-SHC_3BB0A8C1_0x004CFF60 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CFF60 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CFFD0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CFFD0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D00A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D00A0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D0110 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D0190 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D0190 | 100.0% | Reimplemented, compiler didn't optimize one tail
 
-SHC_3BB0A8C1_0x004D0280 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D0280 | 98.2% | Reimplemented
 
-SHC_3BB0A8C1_0x004D0520 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D0520 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D0580 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D0580 | 95.7% | Reimplemented
 
-SHC_3BB0A8C1_0x004D05D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D05D0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D0720 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004D07C0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D07C0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D0830 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D0830 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D08B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D08B0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D0910 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004D0A20 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D0A20 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D0A80 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D0A80 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D0B10 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D0B10 | 68.0% | Load scheduling differs
 
-SHC_3BB0A8C1_0x004D0B70 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D0B70 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D0BB0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D0BB0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D0C00 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D0C00 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D0C70 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D0C70 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D0CF0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D0CF0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D0D40 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D0D40 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D0DB0 | 0.0% | Pending
 
@@ -35447,103 +35447,103 @@ SHC_3BB0A8C1_0x004D0EF0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004D0F40 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004D0F90 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D0F90 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D0FC0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D0FC0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D1000 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D1000 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D1050 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D1050 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D1090 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D1090 | 90.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D10B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D10B0 | 100.0% | Reimplemented, one reordered push edi
 
 SHC_3BB0A8C1_0x004D11C0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004D12A0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D1320 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D1320 | 69.88% | Partially reimplemented, stuck
 
 SHC_3BB0A8C1_0x004D1700 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004D1710 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004D18B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D18B0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D1950 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D1950 | 98.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D1A00 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D1A00 | 58.0% | Register allocation differs
 
-SHC_3BB0A8C1_0x004D1D60 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D1D60 | 58.0% | Register allocation differs
 
-SHC_3BB0A8C1_0x004D1F00 | 100.0% | Reimplemented, for-loop didn't work
+SHC_3BB0A8C1_0x004D1F00 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D2000 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D2000 | 29.4% | Register allocation differs
 
 SHC_3BB0A8C1_0x004D2080 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004D20C0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004D2500 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D2500 | 94.6% | Reimplemented
 
-SHC_3BB0A8C1_0x004D2660 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D2660 | 59.6% | Branch layout differs
 
-SHC_3BB0A8C1_0x004D2730 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D2730 | 79.2% | AIC index folding differs
 
-SHC_3BB0A8C1_0x004D2790 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x004D2790 | 91.3% | Reimplemented
 
-SHC_3BB0A8C1_0x004D27E0 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x004D27E0 | 92.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D2830 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D2870 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D2870 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D28B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D28B0 | 73.0% | Register allocation differs
 
-SHC_3BB0A8C1_0x004D2A70 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D2A70 | 30.0% | Register allocation differs
 
-SHC_3BB0A8C1_0x004D2E00 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D2E00 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D2EC0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D2EC0 | 74.1% | Call diffs, load order differs
 
-SHC_3BB0A8C1_0x004D2F80 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D2F80 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D30E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D30E0 | 100.0% | Reimplemented, barring one register usage difference
 
-SHC_3BB0A8C1_0x004D3320 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D3320 | 87.69% | Reimplemented, different register usage, effectively 100%
 
-SHC_3BB0A8C1_0x004D3780 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D3780 | 74.0% | Constant 1 kept in register
 
-SHC_3BB0A8C1_0x004D3850 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D3850 | 82.3% | AIC index folding differs
 
-SHC_3BB0A8C1_0x004D38C0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D38C0 | 83.8% | AIC index folding differs
 
 SHC_3BB0A8C1_0x004D3940 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D3960 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D39B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D39B0 | 96.6% | Reimplemented
 
 SHC_3BB0A8C1_0x004D39F0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004D3AE0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D3AE0 | 35.8% | Block layout differs
 
-SHC_3BB0A8C1_0x004D3F20 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D3F20 | 97.4% | Reimplemented
 
-SHC_3BB0A8C1_0x004D4040 | 100.0% | Reimplemented, for loop didn't work
+SHC_3BB0A8C1_0x004D4040 | 97.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D40B0 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x004D40B0 | 94.9% | Reimplemented
 
 SHC_3BB0A8C1_0x004D4130 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D4220 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D4220 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D4340 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D4340 | 54.63% | Reimplemented, different register usage
 
 SHC_3BB0A8C1_0x004D4400 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004D44E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D44E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D4530 | 0.0% | Pending
 
@@ -35551,15 +35551,15 @@ SHC_3BB0A8C1_0x004D45E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D4630 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D4680 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D4680 | 64.80% | Stuck, register usage
 
 SHC_3BB0A8C1_0x004D4870 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004D48F0 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x004D48F0 | 86.7% | Register allocation differs
 
-SHC_3BB0A8C1_0x004D4940 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D4940 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D49E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D49E0 | 52.84% | Register allocation differences, logic checks out
 
 SHC_3BB0A8C1_0x004D5010 | 100.0% | Reimplemented
 
@@ -35571,7 +35571,7 @@ SHC_3BB0A8C1_0x004D5370 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004D53A0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004D53E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D53E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D55D0 | 0.0% | Pending
 
