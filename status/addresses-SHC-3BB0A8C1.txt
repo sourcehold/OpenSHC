@@ -37945,7 +37945,7 @@ SHC_3BB0A8C1_0x004EE140 | 59.3% | Register alloc; 79% normalized
 
 SHC_3BB0A8C1_0x004EE230 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004EE430 | 49.9% | Register alloc; 84% normalized
+SHC_3BB0A8C1_0x004EE430 | 57.6% | regalloc: orig caches playerID
 
 SHC_3BB0A8C1_0x004EE830 | 73.8% | orig literal
 
