@@ -15,14 +15,14 @@ namespace AI {
         this->visitCount = 1;
         this->algBIndex = 1;
         int const campX = DAT_GameState::instance.playerDataArray[playerID].campground.xEntry / 5;
+        this->heatMapXArray[0] = campX;
         int const campY = DAT_GameState::instance.playerDataArray[playerID].campground.yEntry / 5;
+        this->heatMapYArray[0] = campY;
         this->buildingApproriateGridXPosition = -1;
         this->buildingAppropriateGridYPosition = -1;
         int bestScore = -100;
         uint bestX = -1;
         uint bestY = -1;
-        this->heatMapXArray[0] = campX;
-        this->heatMapYArray[0] = campY;
         if (DAT_GameState::instance.playerDataArray[playerID].algoTreeCooldownUnk > 0) {
             --DAT_GameState::instance.playerDataArray[playerID].algoTreeCooldownUnk;
             return;
@@ -52,31 +52,35 @@ namespace AI {
                     continue;
                 }
                 this->heatMaps[gridX][gridY].algorithmIterationNumber = this->mapExtraInfo.algorithmIterationNumber;
-                int const notInLargestArea = (char)this->heatMaps[gridX][gridY].tilesNotPartOfLargestAreaCount;
+                char const notInLargestArea = (char)this->heatMaps[gridX][gridY].tilesNotPartOfLargestAreaCount;
                 if (notInLargestArea >= 16 || this->heatMaps[gridX][gridY].destructionBasedPlacementCooldown) {
                     continue;
                 }
-                int const treeCount = (char)this->heatMaps[gridX][gridY].treeCount;
-                if (notInLargestArea < 6 && treeCount > 0) {
-                    ++foundCount;
-                    int score = treeCount * 5 - this->visitCount * 3;
-                    // prefer cells that were not used for a woodcutter recently
-                    if (this->heatMaps[gridX][gridY].woodRelatedCountdownTo0) {
-                        if (score <= 0) {
-                            score *= 2;
-                        } else {
-                            score /= 2;
-                        }
+                if (notInLargestArea >= 6) {
+                    continue;
+                }
+                char const treeCount = (char)this->heatMaps[gridX][gridY].treeCount;
+                if (treeCount <= 0) {
+                    continue;
+                }
+                ++foundCount;
+                int score = treeCount * 5 - this->visitCount * 3;
+                // prefer cells that were not used for a woodcutter recently
+                if (this->heatMaps[gridX][gridY].woodRelatedCountdownTo0) {
+                    if (score > 0) {
+                        score /= 2;
+                    } else {
+                        score *= 2;
                     }
-                    if (score > bestScore) {
-                        bestScore = score;
-                        bestX = gridX;
-                        bestY = gridY;
-                    }
-                    if (foundCount > 10 || (foundCount > 5 && this->visitCount > 20)
-                        || (foundCount > 0 && this->visitCount > 30)) {
-                        break;
-                    }
+                }
+                if (score > bestScore) {
+                    bestX = gridX;
+                    bestY = gridY;
+                    bestScore = score;
+                }
+                if (foundCount > 10 || (foundCount > 5 && this->visitCount > 20)
+                    || (foundCount > 0 && this->visitCount > 30)) {
+                    break;
                 }
                 this->heatMaps[gridX][gridY].algorithmVisitCountUnk = this->visitCount + 1;
                 this->heatMapXArray[this->algBIndex] = gridX;
