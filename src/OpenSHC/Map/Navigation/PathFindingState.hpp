@@ -260,7 +260,7 @@ namespace Map {
             BOOLEnum pathFindingToAttackCastleIncludingMoat(undefined4 playerID, int wallOwnerPlayerID, uint x, uint y,
                 byte* out_successUnk, int* out_x, int* out_y);
 
-            void computeAIZoneLayer(int attackedPlayerID, int canReachKeep);
+            void computeAIZoneLayer(int attackedPlayerID, int canReachKeep, int param_3);
 
             int setClimbBasedOnClosestClimbData(int unitID, int ladderWallGroup, int ladderArea);
 
@@ -330,7 +330,7 @@ namespace Map {
 
             void clearAllClimbData();
 
-            int createClimbData(int size, int buildingID, int unitID, int direction);
+            int createClimbData(int size, int buildingID, int unitID, int direction, int param_5);
 
             void updateClimbData();
 

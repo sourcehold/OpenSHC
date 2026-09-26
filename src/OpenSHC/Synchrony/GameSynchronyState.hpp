@@ -447,7 +447,7 @@ namespace Synchrony {
 
         int getLordTypeForPlayer(int playerID);
 
-        void initializeFinalResultsForActivePlayers(int param_1);
+        void initializeFinalResultsForActivePlayers();
 
         void invokeDirectPlayEnumConnections();
 
@@ -464,7 +464,7 @@ namespace Synchrony {
 
         void sendSomeMultiplayerSyncMessageWithType(undefined4 syncPacketType2);
 
-        void processSyncPacket();
+        void processSyncPacket(int param_1);
 
         void sendSyncPacket126();
 

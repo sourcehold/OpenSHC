@@ -25,7 +25,7 @@ namespace UI {
             &MinimapViewState::renderMinimapPreview)
         renderMinimapPreview;
 
-        MACRO_FUNCTION_RESOLVER(void (MinimapViewState::*)(), false, Address::SHC_3BB0A8C1_0x004B5300,
+        MACRO_FUNCTION_RESOLVER(void (MinimapViewState::*)(int), false, Address::SHC_3BB0A8C1_0x004B5300,
             &MinimapViewState::triggerMinimapRedraw)
         triggerMinimapRedraw;
 

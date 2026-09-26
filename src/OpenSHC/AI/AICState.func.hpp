@@ -238,7 +238,7 @@ namespace AI {
         aiAddUnitToMoatDiggerTribe;
 
         MACRO_FUNCTION_RESOLVER(
-            undefined4 (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CC8D0, &AICState::unitIDIsRangedOrArmored)
+            BOOLEnum (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CC8D0, &AICState::unitIDIsRangedOrArmored)
         unitIDIsRangedOrArmored;
 
         MACRO_FUNCTION_RESOLVER(
@@ -514,7 +514,7 @@ namespace AI {
         aiOfTypeInCurrentGame;
 
         MACRO_FUNCTION_RESOLVER(
-            int (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004D05D0, &AICState::shareGoldAmongTeamMembers)
+            void (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004D05D0, &AICState::shareGoldAmongTeamMembers)
         shareGoldAmongTeamMembers;
 
         MACRO_FUNCTION_RESOLVER(void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D07C0,

@@ -51,8 +51,8 @@ namespace Rendering {
             false, Address::SHC_3BB0A8C1_0x004E26D0, &ViewportRenderState::scheduleUnitForBatchedRendering)
         scheduleUnitForBatchedRendering;
 
-        MACRO_FUNCTION_RESOLVER(void (ViewportRenderState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004E2AD0,
-            &ViewportRenderState::renderGmOverlayBuilding2)
+        MACRO_FUNCTION_RESOLVER(void (ViewportRenderState::*)(int, int, int, int), false,
+            Address::SHC_3BB0A8C1_0x004E2AD0, &ViewportRenderState::renderGmOverlayBuilding2)
         renderGmOverlayBuilding2;
 
         MACRO_FUNCTION_RESOLVER(void (ViewportRenderState::*)(int, int, int, undefined4, int), false,

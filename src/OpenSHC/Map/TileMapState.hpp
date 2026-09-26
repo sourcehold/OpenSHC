@@ -54,8 +54,8 @@ namespace Map {
         byte Logic2Layer[80400]; // 0x001B3FE0 length: 80400
         byte unknownData2[400]; // 0x001C79F0 length: 400
         byte ChangedLayer[80400]; // 0x001C7B80 length: 80400
-        ushort OrganismLayer[80400]; // 0x001DB590 length: 160800
-        ushort BuildingLayer[80400]; // 0x002029B0 length: 160800
+        short OrganismLayer[80400]; // 0x001DB590 length: 160800
+        short BuildingLayer[80400]; // 0x002029B0 length: 160800
         uchar BuildingWasLayer[80400]; // 0x00229DD0 length: 80400
         ushort UnitLayer[80400]; // 0x0023D7E0 length: 160800
         short EntityLayer[80400]; // 0x00264C00 length: 160800
@@ -339,7 +339,7 @@ namespace Map {
         int getBuildingSizeForCommandBuildingType(MappersEnum commandBuildingType);
 
         void demolishBuildingsInKeepsConstructionFootprint(
-            undefined4 param_1, int param_2, int param_3, undefined4 param_4, int param_5);
+            undefined4 param_1, int param_2, int param_3, undefined4 param_4, int param_5, int param_6, int param_7);
 
         void markBuildingFootprintFlag(int param_1, int param_2, int param_3);
 
@@ -483,7 +483,7 @@ namespace Map {
 
         void createPlateau(int tile, uint the_y, int param_3, int plateauHeightSetting);
 
-        void useLevelBrush(int param_1, uint param_2, uint param_3);
+        void useLevelBrush(int param_1, uint param_2, uint param_3, int param_4);
 
         void setLand(int tile, uint y, uint brushType_y);
 
@@ -580,7 +580,7 @@ namespace Map {
 
         BOOLEnum findNearestFriendlyMoatTileForDigging(int playerID, int unitID, int number);
 
-        undefined4 removeMoat(uint moatID);
+        BOOLEnum removeMoat(uint moatID, int param_2);
 
         void updatePitchDitches();
 

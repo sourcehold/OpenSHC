@@ -118,7 +118,7 @@ namespace Rendering {
         void scheduleUnitForBatchedRendering(undefined4 unitIDOrStatus, undefined4 drawX, undefined4 drawY,
             undefined4 imageID, undefined4 blendStrength, undefined4 gmID, int param_7);
 
-        void renderGmOverlayBuilding2(int param_1, int param_2, int param_3);
+        void renderGmOverlayBuilding2(int param_1, int param_2, int param_3, int param_4);
 
         void renderBuildingAnimation(int param_1, int param_2, int param_3, undefined4 param_4, int param_5);
 

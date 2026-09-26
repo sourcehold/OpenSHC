@@ -180,7 +180,7 @@ namespace Map {
 
             void registerSpottedEnemyTile(int param_1);
 
-            BOOLEnum shouldLightPitchBasedOnTroopValue(int tile, int playerID);
+            BOOLEnum shouldLightPitchBasedOnTroopValue(int tile, int playerID, int param_3);
 
             undefined4 giveLightPitchInstructionToUnitClosestToPitch(int tile);
 

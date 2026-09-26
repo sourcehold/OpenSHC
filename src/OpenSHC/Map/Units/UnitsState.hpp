@@ -203,7 +203,7 @@ namespace Map {
 
             int computeDistanceToNearestEnemyForLegacyMissions(int param_1);
 
-            BOOLEnum returnFalseStub();
+            BOOLEnum returnFalseStub(int param_1);
 
             void setRandomShootLocation(int unitID, int microX, int microY, int z);
 
@@ -223,7 +223,7 @@ namespace Map {
 
             BOOLEnum hasTunnelerNotFinishedDigging(int param_1);
 
-            undefined4 computeLadderClimbPath(int unitID, uint param_2, int param_3, int param_4);
+            BOOLEnum computeLadderClimbPath(int unitID, uint param_2, int param_3, int param_4);
 
             void changeDestinationByAmount(int unitID, int leftover);
 

@@ -39,8 +39,8 @@ namespace Map {
             Address::SHC_3BB0A8C1_0x00500E20, &WallAndPitchState::destroyWall)
         destroyWall;
 
-        MACRO_FUNCTION_RESOLVER(void (WallAndPitchState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x00500EE0,
-            &WallAndPitchState::destroyPitch)
+        MACRO_FUNCTION_RESOLVER(void (WallAndPitchState::*)(int, int, int, int), false,
+            Address::SHC_3BB0A8C1_0x00500EE0, &WallAndPitchState::destroyPitch)
         destroyPitch;
 
         MACRO_FUNCTION_RESOLVER(void (WallAndPitchState::*)(), false, Address::SHC_3BB0A8C1_0x00500F40,

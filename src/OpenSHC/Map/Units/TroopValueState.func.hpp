@@ -278,8 +278,8 @@ namespace Map {
                 &TroopValueState::registerSpottedEnemyTile)
             registerSpottedEnemyTile;
 
-            MACRO_FUNCTION_RESOLVER(BOOLEnum (TroopValueState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0051BF20,
-                &TroopValueState::shouldLightPitchBasedOnTroopValue)
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (TroopValueState::*)(int, int, int), false,
+                Address::SHC_3BB0A8C1_0x0051BF20, &TroopValueState::shouldLightPitchBasedOnTroopValue)
             shouldLightPitchBasedOnTroopValue;
 
             MACRO_FUNCTION_RESOLVER(undefined4 (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051BF70,

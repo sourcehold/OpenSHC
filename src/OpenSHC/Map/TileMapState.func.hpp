@@ -212,7 +212,7 @@ namespace Map {
             &TileMapState::getBuildingSizeForCommandBuildingType)
         getBuildingSizeForCommandBuildingType;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(undefined4, int, int, undefined4, int), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(undefined4, int, int, undefined4, int, int, int), false,
             Address::SHC_3BB0A8C1_0x004FA760, &TileMapState::demolishBuildingsInKeepsConstructionFootprint)
         demolishBuildingsInKeepsConstructionFootprint;
 
@@ -500,7 +500,7 @@ namespace Map {
             &TileMapState::createPlateau)
         createPlateau;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint), false, Address::SHC_3BB0A8C1_0x00502110,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, int), false, Address::SHC_3BB0A8C1_0x00502110,
             &TileMapState::useLevelBrush)
         useLevelBrush;
 
@@ -667,7 +667,7 @@ namespace Map {
         findNearestFriendlyMoatTileForDigging;
 
         MACRO_FUNCTION_RESOLVER(
-            undefined4 (TileMapState::*)(uint), false, Address::SHC_3BB0A8C1_0x005113F0, &TileMapState::removeMoat)
+            BOOLEnum (TileMapState::*)(uint, int), false, Address::SHC_3BB0A8C1_0x005113F0, &TileMapState::removeMoat)
         removeMoat;
 
         MACRO_FUNCTION_RESOLVER(

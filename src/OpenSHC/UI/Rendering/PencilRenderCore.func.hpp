@@ -105,7 +105,7 @@ namespace UI {
                 Address::SHC_3BB0A8C1_0x00472B20, &PencilRenderCore::drawLine)
             drawLine;
 
-            MACRO_FUNCTION_RESOLVER(void (PencilRenderCore::*)(int, int, int, int, int), false,
+            MACRO_FUNCTION_RESOLVER(void (PencilRenderCore::*)(int, int, int, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x00475CC0, &PencilRenderCore::drawHeaderTextBanner)
             drawHeaderTextBanner;
 

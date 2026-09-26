@@ -352,7 +352,7 @@ namespace Map {
                 &TribesState::applyMovementDistanceToUnitsInTribeBasedOnUnitNumberInTribe)
             applyMovementDistanceToUnitsInTribeBasedOnUnitNumberInTribe;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (TribesState::*)(int), false, Address::SHC_3BB0A8C1_0x00525210,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (TribesState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00525210,
                 &TribesState::isTribeFreeOfTunnelingUnits)
             isTribeFreeOfTunnelingUnits;
 

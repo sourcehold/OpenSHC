@@ -162,7 +162,7 @@ namespace AI {
 
         void aiAddUnitToMoatDiggerTribe(int unitID);
 
-        undefined4 unitIDIsRangedOrArmored(int unitID);
+        BOOLEnum unitIDIsRangedOrArmored(int unitID);
 
         int createTribeForUnitType(int playerID, int unitSelectionTypeIndex);
 
@@ -302,7 +302,7 @@ namespace AI {
 
         BOOLEnum aiOfTypeInCurrentGame(int param_1);
 
-        int shareGoldAmongTeamMembers(int playerID, int gold);
+        void shareGoldAmongTeamMembers(int playerID, int gold);
 
         void playTauntToAttackedPlayerBikFromPlayer(int playerID);
 

@@ -331,7 +331,7 @@ namespace Map {
                 false, Address::SHC_3BB0A8C1_0x004A4140, &PathFindingState::pathFindingToAttackCastleIncludingMoat)
             pathFindingToAttackCastleIncludingMoat;
 
-            MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004A4470,
+            MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004A4470,
                 &PathFindingState::computeAIZoneLayer)
             computeAIZoneLayer;
 
@@ -457,7 +457,7 @@ namespace Map {
                 &PathFindingState::clearAllClimbData)
             clearAllClimbData;
 
-            MACRO_FUNCTION_RESOLVER(int (PathFindingState::*)(int, int, int, int), false,
+            MACRO_FUNCTION_RESOLVER(int (PathFindingState::*)(int, int, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x004A9510, &PathFindingState::createClimbData)
             createClimbData;
 

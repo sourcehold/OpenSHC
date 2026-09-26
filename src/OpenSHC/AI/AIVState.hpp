@@ -88,7 +88,7 @@ namespace AI {
 
         void hostChecksLobbyAIVAvailability();
 
-        void setAIVFilePresenceByFileHashArray(int param_1);
+        void setAIVFilePresenceByFileHashArray();
 
         void syncAIPlayerNamesAndBuildIntervals();
 
