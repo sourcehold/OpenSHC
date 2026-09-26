@@ -83,8 +83,8 @@ namespace AI {
                 if (this->heatMaps[gridX][gridY].tilesNotPartOfLargestAreaCount
                     || this->heatMaps[gridX][gridY].structureCount || this->heatMaps[gridX][gridY].treeCount
                     || this->heatMaps[gridX][gridY].destructionBasedPlacementCooldown
-                    || (char)this->heatMaps[gridX][gridY].oasisScrubCount <= 25
-                    || (char)this->heatMaps[gridX][gridY].oasisThickScrubCount <= 14) {
+                    || (char)this->heatMaps[gridX][gridY].oasisScrubCount < 25
+                    || (char)this->heatMaps[gridX][gridY].oasisThickScrubCount < 14) {
                     continue;
                 }
                 int const xOffset
