@@ -28,8 +28,8 @@ namespace AI {
             MACRO_CALL_MEMBER(AIVState_Func::clearTheHeatmaps, this)();
             for (int y = 0; y < 80; ++y) {
                 for (int x = 0; x < 80; ++x) {
-                    this->heatMaps[x][y].oasisThickScrubCount = 250;
-                    this->heatMaps[x][y].impassableCount = 1;
+                    this->heatMaps[x][y].lowestTerrainHeight = 250;
+                    this->heatMaps[x][y].isNotNearEdgeUnk = 1;
                 }
             }
             this->mapExtraInfo.largestSeparateArea
@@ -84,8 +84,8 @@ namespace AI {
                 if (height > this->heatMaps[gridX][gridY].highestTerrainHeight) {
                     this->heatMaps[gridX][gridY].highestTerrainHeight = (byte)height;
                 }
-                if (this->heatMaps[gridX][gridY].lowestTerrainHeight + 12
-                    < (uint)this->heatMaps[gridX][gridY].highestTerrainHeight) {
+                if ((int)this->heatMaps[gridX][gridY].highestTerrainHeight
+                    > (int)this->heatMaps[gridX][gridY].lowestTerrainHeight + 12) {
                     this->heatMaps[gridX][gridY].terrainDiffHigherThan12 = 1;
                 }
 
