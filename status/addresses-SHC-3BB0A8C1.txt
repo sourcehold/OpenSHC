@@ -37991,7 +37991,7 @@ SHC_3BB0A8C1_0x004EFE30 | 91.1% | Reimplemented
 
 SHC_3BB0A8C1_0x004EFED0 | 93.8% | Reimplemented
 
-SHC_3BB0A8C1_0x004F0060 | 36.4% | Store scheduling; 77% normalized
+SHC_3BB0A8C1_0x004F0060 | 36.4% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004F0690 | 0.0% | Pending
 
