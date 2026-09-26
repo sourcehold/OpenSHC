@@ -19,6 +19,8 @@ namespace AI {
     BOOLEnum AIVState::aiPlaceAIVBuilding(PlayerID playerID, int step, int isPausing)
     {
         int const aivID = DAT_GameState::instance.playerDataArray[playerID].aivID;
+        int x;
+        int y;
         MappersEnum const mapper = (MappersEnum)this->aivs[aivID].aivBuildingSteps[step].buildingType;
 
         // when pausing, only hovels are built
@@ -85,8 +87,8 @@ namespace AI {
             for (int i = 0; i < this->aivs[aivID].aivBuildingSteps[step].quantity; ++i) {
                 int const tile
                     = this->aivs[aivID].locationsArray[this->aivs[aivID].aivBuildingSteps[step].location.tile.tile + i];
-                int const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
-                int const x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
+                y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
+                x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
                 MACRO_CALL_MEMBER(Map::TileMapState_Func::placeBuilding, DAT_TileMapState::ptr)(playerID, x, y,
                     Commands::M_MAPPER_PITCH_DITCH,
                     MACRO_CALL_MEMBER(Map::TileMapState_Func::getBuildingSizeForCommandBuildingType,
@@ -122,8 +124,8 @@ namespace AI {
             for (int i = 0; i < this->aivs[aivID].aivBuildingSteps[step].quantity; ++i) {
                 int const tile
                     = this->aivs[aivID].locationsArray[this->aivs[aivID].aivBuildingSteps[step].location.tile.tile + i];
-                uint const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
-                uint const x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
+                y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
+                x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
                 MACRO_CALL_MEMBER(Map::TileMapState_Func::prepareAreaForBuildingPlacement, DAT_TileMapState::ptr)(
                     playerID, x, y, mapper, 1);
                 MACRO_CALL_MEMBER(Map::TileMapState_Func::placeDefensiveStructureTile, DAT_TileMapState::ptr)(
@@ -146,10 +148,9 @@ namespace AI {
                 --this->aivs[aivID].aivBuildingSteps[step].wait;
                 return FALSE;
             }
-            uint const y
-                = DAT_ViewportRenderState::instance
-                      .tileTranslationMatrix_YComponent[this->aivs[aivID].aivBuildingSteps[step].location.tile.tile];
-            uint const x = this->aivs[aivID].aivBuildingSteps[step].location.tile.tile
+            y = DAT_ViewportRenderState::instance
+                    .tileTranslationMatrix_YComponent[this->aivs[aivID].aivBuildingSteps[step].location.tile.tile];
+            x = this->aivs[aivID].aivBuildingSteps[step].location.tile.tile
                 - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
             MACRO_CALL_MEMBER(Map::TileMapState_Func::prepareAreaForBuildingPlacement, DAT_TileMapState::ptr)(
                 playerID, x, y, mapper, 1);
@@ -183,8 +184,8 @@ namespace AI {
         }
 
         int const tile = this->aivs[aivID].aivBuildingSteps[step].location.tile.tile;
-        int const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
-        int const x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
+        y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
+        x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
         int orientation = 15;
         if (mapper == Commands::M_MAPPER_BARRACKS_ARAB || mapper == Commands::M_MAPPER_BARRACKS_EURO
             || mapper == Commands::M_MAPPER_ENGINEERS_GUILD || mapper == Commands::M_MAPPER_TUNNELERS_GUILD
