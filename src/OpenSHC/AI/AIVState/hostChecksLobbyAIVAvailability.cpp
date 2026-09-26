@@ -25,7 +25,7 @@ namespace AI {
             int const localPlayer = DAT_GameSynchronyState::instance.currentPlayerSlotID;
             DAT_GameCore::instance.numOfAIsWithCastleUnk = 0;
             for (int aiIndex = 0; aiIndex < 16; ++aiIndex) {
-                bool available = true;
+                BOOLEnum available = TRUE;
                 for (int player = 1; player < 9; ++player) {
                     if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[player] == -1) {
                         continue;
@@ -44,7 +44,7 @@ namespace AI {
                                     .DAT_ReceivedAIVFileAvailabilityPerAIArray[player][aiIndex];
                     }
                     if (count == 0) {
-                        available = false;
+                        available = FALSE;
                         break;
                     }
                 }
@@ -61,11 +61,11 @@ namespace AI {
                     || DAT_GameSynchronyState::instance.currentAIArray[player] == 0) {
                     continue;
                 }
-                bool hasAIV = false;
+                BOOLEnum hasAIV = FALSE;
                 for (int i = 0; i < DAT_GameCore::instance.numOfAIsWithCastleUnk; ++i) {
                     if (DAT_GameSynchronyState::instance.currentAIArray[player]
                         == DAT_GameCore::instance.arrayOfLordIdsWithAIVsUnk[i]) {
-                        hasAIV = true;
+                        hasAIV = TRUE;
                         break;
                     }
                 }
