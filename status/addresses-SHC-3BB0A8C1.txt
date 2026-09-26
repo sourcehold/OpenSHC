@@ -37947,7 +37947,7 @@ SHC_3BB0A8C1_0x004EE230 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004EE430 | 57.6% | regalloc: orig caches playerID
 
-SHC_3BB0A8C1_0x004EE830 | 74.3% | loop structure differs
+SHC_3BB0A8C1_0x004EE830 | 76.7% | orig spills direction ptr
 
 SHC_3BB0A8C1_0x004EE920 | 0.0% | Pending
 
