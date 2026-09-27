@@ -24,7 +24,7 @@ namespace Map {
             if (this->units[unitID].isStalked != 0) {
                 return;
             }
-            if ((short)this->units[unitID].unitType < 1) {
+            if ((short)this->units[unitID].unitType <= 0) {
                 return;
             }
             eSFX _sfxOffsetInArray;

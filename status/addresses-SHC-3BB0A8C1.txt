@@ -49363,7 +49363,7 @@ SHC_3BB0A8C1_0x0052FF80 | 67.5% | orig caches dir in locals
 
 SHC_3BB0A8C1_0x00530080 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005300B0 | 25.0% | orig caches rng in local
+SHC_3BB0A8C1_0x005300B0 | 26.2% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x005301F0 | 96.0% | reg alloc differs
 
