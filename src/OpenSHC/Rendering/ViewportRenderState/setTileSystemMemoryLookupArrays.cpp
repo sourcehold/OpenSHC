@@ -3,17 +3,8 @@
 namespace OpenSHC {
 namespace Rendering {
 
-    /*
-      WARNING: Function: __alloca_probe replaced with injection: alloca_probe
-     */
-
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004E2050
     void ViewportRenderState::setTileSystemMemoryLookupArrays()
-
     {
         int diagonal;
         int savedDestOffset2;
@@ -263,7 +254,6 @@ namespace Rendering {
                 this->DAT_BinaryTileMap400x400[y * 400 + x] = (0 < tileGrid[y * 400 + x]);
             }
         }
-        return;
     }
 
 }
