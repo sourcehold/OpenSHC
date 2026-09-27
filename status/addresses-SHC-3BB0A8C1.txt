@@ -50673,7 +50673,7 @@ SHC_3BB0A8C1_0x005334A0 | 41.2% | orig caches unitType local
 
 SHC_3BB0A8C1_0x00533580 | 24.5% | orig caches locals
 
-SHC_3BB0A8C1_0x00533630 | 0.0% | Pending
+SHC_3BB0A8C1_0x00533630 | 20.6% | orig walks enemy array ptr
 
 SHC_3BB0A8C1_0x00533810 | 80.3% | orig walks matrix row ptr
 
