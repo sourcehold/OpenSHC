@@ -39369,7 +39369,7 @@ SHC_3BB0A8C1_0x004F8840 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004F8900 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004F89C0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F89C0 | 59.1% | orientation blocks not shared
 
 SHC_3BB0A8C1_0x004F8A40 | 87.2% | shr vs sar on logic bit
 
