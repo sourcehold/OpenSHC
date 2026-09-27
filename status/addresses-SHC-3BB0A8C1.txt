@@ -51223,7 +51223,7 @@ SHC_3BB0A8C1_0x00537070 | 86.4% | enum cast, reg alloc
 
 SHC_3BB0A8C1_0x005370C0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00537100 | 0.0% | Pending
+SHC_3BB0A8C1_0x00537100 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00537130 | 0.0% | Pending
 
