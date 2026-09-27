@@ -9,8 +9,8 @@ namespace Rendering {
     void ViewportRenderState::clearAllFloatingLayerElements()
     {
         int floaterIndex = 1;
-        if (floaterIndex < (int)this->availableFloaterIndex) {
-            for (; floaterIndex < (int)this->availableFloaterIndex; floaterIndex++) {
+        if (floaterIndex < this->availableFloaterIndex) {
+            for (; floaterIndex < this->availableFloaterIndex; floaterIndex++) {
                 DAT_TileMapState::instance.FloatingLayer[this->floatersArray[floaterIndex].tile] = 0;
                 this->floatersArray[floaterIndex].id = 0;
             }
