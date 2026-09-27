@@ -41437,7 +41437,7 @@ SHC_3BB0A8C1_0x00500310 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00500370 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005003D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005003D0 | 54.3% | moat row walk regalloc
 
 SHC_3BB0A8C1_0x00500500 | 86.5% | moat field reload/regalloc
 
