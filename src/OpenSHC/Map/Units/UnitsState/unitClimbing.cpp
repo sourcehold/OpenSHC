@@ -2,6 +2,7 @@
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
+#include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_UnitPropertiesDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
@@ -74,11 +75,11 @@ namespace Map {
                     /* Climbing down */
                     this->units[unitID].terrainOrClimbHeight = this->units[unitID].terrainOrClimbHeight + 0xf;
                 }
-                if ((short)(ushort)
-                        * (byte*)(DAT_ViewportRenderState::instance
-                                      .translationMatrix[this->units[unitID].mimicCurrentYPosition]
-                                      .addXgetTile
-                            + 0x1d32c38 + this->units[unitID].mimicCurrentXPosition)
+                if ((short)(ushort)DAT_TileMapState::instance
+                        .HeightLayer[DAT_ViewportRenderState::instance
+                                         .translationMatrix[this->units[unitID].mimicCurrentYPosition]
+                                         .addXgetTile
+                            + this->units[unitID].mimicCurrentXPosition]
                     < this->units[unitID].terrainOrClimbHeight) {
                     *(undefined2*)&this->units[unitID].climbingState = 5;
                 }
