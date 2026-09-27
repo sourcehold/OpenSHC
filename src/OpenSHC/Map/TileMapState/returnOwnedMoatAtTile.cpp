@@ -13,7 +13,7 @@ namespace Map {
     int TileMapState::returnOwnedMoatAtTile(int targetedTile)
     {
         for (int moatID = 1; moatID < this->currentMoatCount; moatID++) {
-            if (this->moats[moatID].owner != 0 && *(int*)&this->moats[moatID].tile == targetedTile) {
+            if (this->moats[moatID].owner != 0 && this->moats[moatID].tile == targetedTile) {
                 return moatID;
             }
         }
