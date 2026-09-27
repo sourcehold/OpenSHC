@@ -21,8 +21,8 @@ namespace Map {
             /* check by unit type */
             int _ableToClimbTowers
                 = DAT_UnitPropertiesDefinedData::instance.ABLE_TO_CLIMB_TOWERS[(short)this->units[unitID].unitType];
-            /* the 400x400 map of placeable tiles at 0x021AEC98 */
-            if (x > 399 || y > 399 || *(char*)(y * 400 + 0x21aec98 + x) == '\0') {
+            if (x > 399 || y > 399
+                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
                 DAT_PathFindingState::instance.allAssassinsUnk = 0;
                 return FALSE;
             }
