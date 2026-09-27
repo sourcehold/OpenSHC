@@ -30,21 +30,27 @@ namespace Rendering {
             return;
         }
 
-        int tileColumnX;
+        uint quadrantX;
         if (this->viewportState.isZoomedOutUnk == 0) {
             uint viewportXInTile = this->viewportState.viewportX & 0x8000001f;
             if ((int)viewportXInTile < 0) {
                 viewportXInTile = (viewportXInTile - 1 | 0xffffffe0) + 1;
             }
-            tileColumnX = (viewportXInTile - this->windowX) + screenX;
+            quadrantX = (int)((viewportXInTile - this->windowX) + screenX) >> 1 & 0xf;
         } else {
             uint viewportXInTile = this->viewportState.viewportX & 0x8000001f;
             if ((int)viewportXInTile < 0) {
                 viewportXInTile = (viewportXInTile - 1 | 0xffffffe0) + 1;
             }
-            tileColumnX = (viewportXInTile + screenX * 2) - this->windowX;
+            quadrantX = (int)((viewportXInTile + screenX * 2) - this->windowX) >> 1 & 0xf;
         }
 
+        uint viewportYInTile = this->viewportState.viewportY & 0x8000000f;
+        if ((int)viewportYInTile < 0) {
+            viewportYInTile = (viewportYInTile - 1 | 0xfffffff0) + 1;
+        }
+        int probeOffset = probeScreenY - screenY;
+        int probeDoubledY = screenY + probeScreenY;
         if (DAT_TileMapState::instance.mapOrientation == 0) {
             orientationBase = 8;
         } else if (DAT_TileMapState::instance.mapOrientation == 6) {
@@ -55,8 +61,6 @@ namespace Rendering {
             orientationBase = 0x3ae38;
         }
 
-        int probeOffset = probeScreenY - screenY;
-        int probeDoubledY = screenY + probeScreenY;
         do {
             if ((DAT_TileMapState::instance.field93_0x5548c8 != 0
                     || DAT_TileMapState::instance.flatViewToggleValue2 != 0)
@@ -68,19 +72,19 @@ namespace Rendering {
             uint tileRowY;
             if (this->viewportState.isZoomedOutUnk == 0) {
                 int unclampedY = (this->viewportState.viewportY - this->windowY) + 8 + probeScreenY;
-                tileRowY = ((this->viewportState.viewportY & 0x8000000fU) - this->windowY) + -8 + probeScreenY;
+                tileRowY = (viewportYInTile - this->windowY) + -8 + probeScreenY;
                 int unclampedX = (screenX - this->windowX) + this->viewportState.viewportX;
                 lookupIndex = ((int)(unclampedX + (unclampedX >> 0x1f & 0x1fU)) >> 5)
                     + ((int)(unclampedY + (unclampedY >> 0x1f & 0xfU)) >> 4) * 0x191 + orientationBase;
             } else {
                 int unclampedX = ((screenX * 2 + 0xa0) - this->windowX) + this->viewportState.viewportX;
-                tileRowY = ((this->viewportState.viewportY & 0x8000000fU) - this->windowY) + probeDoubledY;
+                tileRowY = (viewportYInTile - this->windowY) + probeDoubledY;
                 int unclampedY = (probeDoubledY - this->windowY) + this->viewportState.viewportY;
                 lookupIndex = ((int)(unclampedY + (unclampedY >> 0x1f & 0xfU)) >> 4) * 0x191
                     + ((int)(unclampedX + (unclampedX >> 0x1f & 0x1fU)) >> 5) + orientationBase;
             }
 
-            int quadrant = DAT_MapRenderDefinedData::instance.field618_0xc24[tileRowY & 0xf][tileColumnX >> 1 & 0xf];
+            int quadrant = DAT_MapRenderDefinedData::instance.field618_0xc24[tileRowY & 0xf][quadrantX];
             if (quadrant == 1) {
                 lookupIndex = lookupIndex + 200;
             } else if (quadrant == 2) {
