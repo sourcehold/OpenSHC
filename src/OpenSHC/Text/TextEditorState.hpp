@@ -22,7 +22,7 @@ namespace Text {
     struct LineLayout {
         short leftBorder;
         short rightBorder;
-        short unknown2;
+        short widthForCentering;
     };
 
     using OpenSHC::Text::ImageHotspot;
@@ -83,7 +83,7 @@ namespace Text {
         wchar_t* intArray1[20]; // 0x00023910 length: 80
         int field48_0x23960; // 0x00023960 length: 4
         int field49_0x23964; // 0x00023964 length: 4
-        int field50_0x23968; // 0x00023968 length: 4
+        int currentLinkId; // 0x00023968 length: 4
         int field51_0x2396c; // 0x0002396C length: 4
         int field52_0x23970; // 0x00023970 length: 4
 

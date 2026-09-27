@@ -9,7 +9,7 @@ namespace Text {
         for (int i = 0; i < 20000; ++i) {
             this->lineLayoutTable[i].leftBorder = 25;
             this->lineLayoutTable[i].rightBorder = this->dialogContentWidth - 25;
-            this->lineLayoutTable[i].unknown2 = 0;
+            this->lineLayoutTable[i].widthForCentering = 0;
         }
         // Adds vertical space at start
         for (int i = 0; i < 4; ++i) {

@@ -426,7 +426,8 @@ so it is built with `/GL`. SHC_3BB0A8C1_0x00504EE0 went from 38.5% to 100% and S
 ### Parameters
 
 Parameters might not be pushed like normal in certain cases.
-Usually, if two functions are followed by each other, the parameters are pushed for the first function, then the call is executed and then parameters for the second function are pushed. If parameters for the second function are pushed before the first call, it might indicate that the first call was executed in place of a variable, to directly feed the return into the second function.
+Usually, if two functions are followed by each other, the parameters are pushed for the first function, then the call is executed and then parameters for the second function are pushed. If parameters for the second function are pushed before the first call, it might indicate that the first call was executed in place of a variable, to directly feed the return into the second function.  
+This possibility is actually universal. If a computation of a value happens between pushes of parameters, it makes it likely the value was computed in-place. The other way around is also possible. If a computed value is created completely or partially before any push, it might have been a temporary.
 
 ### Implicit functions
 

@@ -18759,7 +18759,7 @@ SHC_3BB0A8C1_0x0045F580 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0045F5B0 | 99.0% | Reimplemented, two cases where an "edx + ecx" is flipped to "ecx + edx"
 
-SHC_3BB0A8C1_0x0045FDC0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0045FDC0 | 64.3% | Reimplemented, but heavy structural mismatch, seems functional
 
 SHC_3BB0A8C1_0x0045FEC0 | 0.0% | Pending
 
