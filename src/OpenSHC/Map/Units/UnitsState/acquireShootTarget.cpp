@@ -169,10 +169,9 @@ namespace Map {
                                     (int)(this->units[_0x04_targetUnitID].microYPosition),
                                     (int)(this->units[_0x04_targetUnitID].buildingHeight + 0x1a
                                         + this->units[_0x04_targetUnitID].terrainOrClimbHeight));
-                            if (((_shootDistanceScore <= 0)
-                                    || (UVar4 = this->units[unitID].unitType,
-                                        UVar4 == OpenSHC::Map::Units::UT_S_MANGONEL))
-                                || (UVar4 == OpenSHC::Map::Units::UT_S_BALLISTA)) {
+                            if (_shootDistanceScore <= 0
+                                || (UVar4 = this->units[unitID].unitType, UVar4 == OpenSHC::Map::Units::UT_S_MANGONEL)
+                                || UVar4 == OpenSHC::Map::Units::UT_S_BALLISTA) {
                                 if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_HUNTER) {
                                     return FALSE;
                                 }
@@ -242,9 +241,9 @@ namespace Map {
 
                 sVar9 = this->units[unitID].targetID_OR_targetBuildingID;
                 int _brazierEntityID;
-                if ((DAT_TileMapState::instance.pitchDitches[sVar9].uid
+                if (DAT_TileMapState::instance.pitchDitches[sVar9].uid
                         == this->units[unitID]
-                            .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID)
+                            .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID
                     && (_brazierEntityID = MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::isBrazierNearby,
                             DAT_EntityState::ptr)((int)this->units[unitID].x, (int)(this->units[unitID].y),
                             (int)((
@@ -277,7 +276,7 @@ namespace Map {
                 int _0x17_tile = DAT_ViewportRenderState::instance.translationMatrix[_0x17_y].addXgetTile + _0x17_x;
                 BVar6 = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
                     DAT_ViewportRenderState::ptr)(_0x17_x, (uint)(_0x17_y));
-                if ((BVar6 != FALSE) && ((DAT_TileMapState::instance.LogicLayer[_0x17_tile] & 0x100U) != 0)) {
+                if (BVar6 != FALSE && (DAT_TileMapState::instance.LogicLayer[_0x17_tile] & 0x100U) != 0) {
                     this->units[unitID].shootTargetMicroX = this->units[unitID].attackAtTileX * 8;
                     this->units[unitID].shootTargetMicroY = this->units[unitID].attackAtTileY * 8;
                     this->units[unitID].shootTargetZ
@@ -312,20 +311,20 @@ namespace Map {
                             break;
                         case OpenSHC::Map::Units::UT_LIONSHWOLF:
                             sVar9 = this->units[_enemy].tribeID;
-                            if ((DAT_TribesState::instance.tribes[sVar9].unknownBool02 != 0)
-                                || ((DAT_TribesState::instance.tribes[sVar9].unknownBool01 == 0
+                            if (DAT_TribesState::instance.tribes[sVar9].unknownBool02 != 0
+                                || (DAT_TribesState::instance.tribes[sVar9].unknownBool01 == 0
                                     && ((this->units[_enemy].state.generic != 0xcf
                                         || (this->units[this->units[_enemy]
                                                             .targetedUnitID__OR__engineerMannedSiegeEngineRef]
                                                 .isStalked
-                                            != 0))))))
+                                            != 0)))))
                                 continue;
                             break;
                         case OpenSHC::Map::Units::UT_RABBIT:
                             _xDifferenceToTarget = (int)this->units[unitID].tribeID;
-                            if (((this->units[unitID].unitType == OpenSHC::Map::Units::UT_HUNTER)
-                                    || (_xDifferenceToTarget <= 0))
-                                || (DAT_TribesState::instance.tribes[_xDifferenceToTarget].field71_0x212 == 0))
+                            if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_HUNTER
+                                || _xDifferenceToTarget <= 0
+                                || DAT_TribesState::instance.tribes[_xDifferenceToTarget].field71_0x212 == 0)
                                 continue;
                             break;
                         case OpenSHC::Map::Units::UT_CAGEDOG:
