@@ -62,7 +62,7 @@ namespace Map {
                 || unitType == OpenSHC::Map::Units::UT_FIREEATER || unitType == OpenSHC::Map::Units::UT_PRIEST) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::assignNameToUnit, this)(unitID);
             }
-            if (this->units[unitID].owner < 1) {
+            if (this->units[unitID].owner <= 0) {
                 this->units[unitID].occupancyOrFlag = 0xff;
                 this->units[unitID].field258_0x3d1 = 0xff;
             } else {
