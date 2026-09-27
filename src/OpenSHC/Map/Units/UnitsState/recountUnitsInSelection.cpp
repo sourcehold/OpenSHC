@@ -12,33 +12,9 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00535240
         void UnitsState::recountUnitsInSelection()
         {
-            this->selectionEuropeanArchers = 0;
-            this->selectionSpearmen = 0;
-            this->selectionMacemen = 0;
-            this->selectionCrossbowmen = 0;
-            this->selectionPikemen = 0;
-            this->selectionSwordsmen = 0;
-            this->selectionKnights = 0;
-            this->selectionEngineers = 0;
-            this->selectionLaddermen = 0;
-            this->selectionTunnelers = 0;
-            this->selectionMonks = 0;
-            this->selectionCatapults = 0;
-            this->selectionTrebuchets = 0;
-            this->selectionBatteringRam = 0;
-            this->selectionSiegeTower = 0;
-            this->selectionShield = 0;
-            this->selectionMangonel = 0;
-            this->selectionBallista = 0;
-            this->nSelectionFireBallistas = 0;
-            this->selectionArabArcher = 0;
-            this->selectionArabSlave = 0;
-            this->selectionArabSlinger = 0;
-            this->selectionArabAssassin = 0;
-            this->selectionArabHorseArchers = 0;
-            this->selectionArabSwordsman = 0;
-            this->selectionArabFireThrower = 0;
-            this->selectionFireBallista = 0;
+            for (int i = 0; i <= 26; ++i) {
+                (&this->selectionEuropeanArchers)[i] = 0;
+            }
             for (int unitID = 1; unitID < (int)this->maxUnitCount; ++unitID) {
                 if (this->units[unitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
                     continue;
@@ -53,9 +29,6 @@ namespace Map {
                     continue;
                 }
                 switch (this->units[unitID].unitType) {
-                case OpenSHC::Map::Units::UT_TUNNELER:
-                    this->selectionTunnelers = this->selectionTunnelers + 1;
-                    break;
                 case OpenSHC::Map::Units::UT_E_ARCHER:
                     this->selectionEuropeanArchers = this->selectionEuropeanArchers + 1;
                     break;
@@ -85,6 +58,9 @@ namespace Map {
                     break;
                 case OpenSHC::Map::Units::UT_E_MONK:
                     this->selectionMonks = this->selectionMonks + 1;
+                    break;
+                case OpenSHC::Map::Units::UT_TUNNELER:
+                    this->selectionTunnelers = this->selectionTunnelers + 1;
                     break;
                 case OpenSHC::Map::Units::UT_S_CATAPULT:
                     this->selectionCatapults = this->selectionCatapults + 1;
