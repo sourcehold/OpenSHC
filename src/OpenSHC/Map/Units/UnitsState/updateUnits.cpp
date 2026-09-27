@@ -135,48 +135,52 @@ namespace Map {
                     }
                     if (_unitIDBased8value == _rngNumber8) {
                         int _unitTile = this->units[_currentUnitID].tile;
-                        if (((((DAT_TileMapState::instance.PathConnectionLayer[_unitTile] == 0)
-                                  && ((DAT_TileMapState::instance.LogicLayer[_unitTile] & 0x40000000U) == 0))
-                                 && (this->units[_currentUnitID].moveRelatedFlag != 1))
-                                && ((_buildingID = DAT_TileMapState::instance.BuildingLayer[_unitTile],
-                                    _buildingID == 0
-                                        || (((DAT_BuildingsState::instance.buildings[_buildingID].logicalState
-                                                     == OpenSHC::Map::Buildings::BLS_NORMAL
-                                                 && (_buildingType
-                                                     = DAT_BuildingsState::instance.buildings[_buildingID].buildingType,
-                                                     DAT_BuildingDefinedData::instance
-                                                             .BuildingIsGateHouseArray[(short)_buildingType]
-                                                         == 0))
-                                            && (_buildingType != OpenSHC::Map::Buildings::BT_DRAWBRIDGE))))))
-                            && (this->units[_currentUnitID].state.generic
-                                != OpenSHC::Map::Units::States::US_DISAPPEAR)) {
-                            if (this->units[_currentUnitID].unitType == OpenSHC::Map::Units::UT_CHICKEN) {
-                                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation,
-                                    DAT_SFXState::ptr)((int)this->units[_currentUnitID].x,
-                                    (int)(this->units[_currentUnitID].y), OpenSHC::DE::SHCDE::FX_CHICKEN_FLAP);
-                                _currentUnitID = DAT_CurrentUnitSlotID::instance;
-                            }
-                            if ((999 < (int)(DAT_GameCore::instance.mapTimeInTicks - this->units[_currentUnitID].time))
-                                && (_unitType = this->units[_currentUnitID].unitType,
-                                    _unitType != OpenSHC::Map::Units::UT_S_TOWER)) {
-                                if (_unitType == OpenSHC::Map::Units::UT_LORD) {
-                                    uint uVar12 = (uint)this->units[_currentUnitID].targetY_2;
-                                    uVar9 = (uint)this->units[_currentUnitID].targetX_2;
-                                    MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setPositionOfUnit, this)(
-                                        _currentUnitID, uVar9, uVar12,
-                                        (undefined4)((int)(DAT_TileMapState::instance.HeightLayer
-                                                [DAT_ViewportRenderState::instance.translationMatrix[uVar12].addXgetTile
-                                                    + uVar9])));
-                                    this->units[DAT_CurrentUnitSlotID::instance].state.generic
-                                        = OpenSHC::Map::Units::States::US_IDLEUnk;
-                                    this->units[DAT_CurrentUnitSlotID::instance].destinationNeeded
-                                        = OpenSHC::Map::Units::Pathfinding::DNE_DESTINATION_HAS_BEEN_SET;
+                        if (DAT_TileMapState::instance.PathConnectionLayer[_unitTile] == 0
+                            && (DAT_TileMapState::instance.LogicLayer[_unitTile] & 0x40000000U) == 0
+                            && this->units[_currentUnitID].moveRelatedFlag != 1) {
+                            _buildingID = DAT_TileMapState::instance.BuildingLayer[_unitTile];
+                            if ((_buildingID == 0
+                                    || (DAT_BuildingsState::instance.buildings[_buildingID].logicalState
+                                            == OpenSHC::Map::Buildings::BLS_NORMAL
+                                        && (_buildingType
+                                            = DAT_BuildingsState::instance.buildings[_buildingID].buildingType,
+                                            DAT_BuildingDefinedData::instance
+                                                    .BuildingIsGateHouseArray[(short)_buildingType]
+                                                == 0)
+                                        && _buildingType != OpenSHC::Map::Buildings::BT_DRAWBRIDGE))
+                                && this->units[_currentUnitID].state.generic
+                                    != OpenSHC::Map::Units::States::US_DISAPPEAR) {
+                                if (this->units[_currentUnitID].unitType == OpenSHC::Map::Units::UT_CHICKEN) {
+                                    MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation,
+                                        DAT_SFXState::ptr)((int)this->units[_currentUnitID].x,
+                                        (int)(this->units[_currentUnitID].y), OpenSHC::DE::SHCDE::FX_CHICKEN_FLAP);
                                     _currentUnitID = DAT_CurrentUnitSlotID::instance;
-                                } else {
-                                    this->units[_currentUnitID].state.generic
-                                        = OpenSHC::Map::Units::States::US_DISAPPEAR;
-                                    this->units[DAT_CurrentUnitSlotID::instance].updateTickTracker = 0;
-                                    _currentUnitID = DAT_CurrentUnitSlotID::instance;
+                                }
+                                if ((999 < (int)(DAT_GameCore::instance.mapTimeInTicks
+                                         - this->units[_currentUnitID].time))
+                                    && (_unitType = this->units[_currentUnitID].unitType,
+                                        _unitType != OpenSHC::Map::Units::UT_S_TOWER)) {
+                                    if (_unitType == OpenSHC::Map::Units::UT_LORD) {
+                                        uint uVar12 = (uint)this->units[_currentUnitID].targetY_2;
+                                        uVar9 = (uint)this->units[_currentUnitID].targetX_2;
+                                        MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setPositionOfUnit,
+                                            this)(_currentUnitID, uVar9, uVar12,
+                                            (undefined4)((int)(DAT_TileMapState::instance
+                                                    .HeightLayer[DAT_ViewportRenderState::instance
+                                                                     .translationMatrix[uVar12]
+                                                                     .addXgetTile
+                                                        + uVar9])));
+                                        this->units[DAT_CurrentUnitSlotID::instance].state.generic
+                                            = OpenSHC::Map::Units::States::US_IDLEUnk;
+                                        this->units[DAT_CurrentUnitSlotID::instance].destinationNeeded
+                                            = OpenSHC::Map::Units::Pathfinding::DNE_DESTINATION_HAS_BEEN_SET;
+                                        _currentUnitID = DAT_CurrentUnitSlotID::instance;
+                                    } else {
+                                        this->units[_currentUnitID].state.generic
+                                            = OpenSHC::Map::Units::States::US_DISAPPEAR;
+                                        this->units[DAT_CurrentUnitSlotID::instance].updateTickTracker = 0;
+                                        _currentUnitID = DAT_CurrentUnitSlotID::instance;
+                                    }
                                 }
                             }
                         }
@@ -569,16 +573,18 @@ namespace Map {
                             *piVar1 = *piVar1 + 1;
                         }
                         DAT_UnitHasBecomeIdle::instance = 0;
-                        if (((((this->units[uVar9].dying != 0)
-                                  && (this->units[uVar9].state.generic != OpenSHC::Map::Units::States::US_DISAPPEAR))
-                                 && (UVar6 = this->units[uVar9].unitType, UVar6 != OpenSHC::Map::Units::UT_BURNINGMAN))
-                                && ((UVar6 != OpenSHC::Map::Units::UT_BURNING_ANIMAL_BIG
-                                    && (UVar6 != OpenSHC::Map::Units::UT_BURNING_ANIMAL_SMALL))))
-                            && (((short)this->units[uVar9].state.generic < 0x6f
-                                || (0x75 < (short)this->units[uVar9].state.generic)))) {
-                            this->units[uVar9].state.generic = OpenSHC::Map::Units::States::US_DEATH_01;
-                            this->units[DAT_CurrentUnitSlotID::instance].animationCycleNumber = 0;
-                            uVar9 = DAT_CurrentUnitSlotID::instance;
+                        if (this->units[uVar9].dying != 0
+                            && this->units[uVar9].state.generic != OpenSHC::Map::Units::States::US_DISAPPEAR) {
+                            UVar6 = this->units[uVar9].unitType;
+                            if (UVar6 != OpenSHC::Map::Units::UT_BURNINGMAN
+                                && UVar6 != OpenSHC::Map::Units::UT_BURNING_ANIMAL_BIG
+                                && UVar6 != OpenSHC::Map::Units::UT_BURNING_ANIMAL_SMALL
+                                && ((short)this->units[uVar9].state.generic < 0x6f
+                                    || 0x75 < (short)this->units[uVar9].state.generic)) {
+                                this->units[uVar9].state.generic = OpenSHC::Map::Units::States::US_DEATH_01;
+                                this->units[DAT_CurrentUnitSlotID::instance].animationCycleNumber = 0;
+                                uVar9 = DAT_CurrentUnitSlotID::instance;
+                            }
                         }
                         if (DAT_UnitPropertiesDefinedData::instance
                                 .COMPUTER_CONTROLLED[(short)this->units[uVar9].unitType]
