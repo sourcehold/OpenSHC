@@ -33,7 +33,7 @@ namespace Map {
                     }
                 }
                 _otherUnitID = (short)this->units[_otherUnitID].nextUnitOnTheSameTile;
-                if (_otherUnitID < 1) {
+                if (_otherUnitID <= 0) {
                     return 0;
                 }
             }
