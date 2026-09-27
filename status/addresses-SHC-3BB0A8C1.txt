@@ -36391,7 +36391,7 @@ SHC_3BB0A8C1_0x004E1F50 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004E1FA0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004E2050 | 26.1% | reg alloc; frame now matches
+SHC_3BB0A8C1_0x004E2050 | 28.7% | reg alloc; rowStart kept in re
 
 SHC_3BB0A8C1_0x004E21E0 | 0.0% | Pending
 

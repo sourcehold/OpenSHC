@@ -45,6 +45,7 @@ namespace Rendering {
             rowWidth = rowWidth + 2;
         }
 
+        rowStart = 80000;
         rowSpan = 400 - rowWidth;
         for (int row = 200; rowStart < 160000; row++) {
             rowFirstColumn = rowFirstColumn + 1;
