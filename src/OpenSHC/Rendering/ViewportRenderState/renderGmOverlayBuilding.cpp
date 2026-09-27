@@ -1730,7 +1730,7 @@ namespace Rendering {
         }
         if ((DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_BUILDERUnk)
             || (DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 != OpenSHC::Map::MT_SIEGE)) {
-            if (DAT_BuildingsState::instance.buildings[tileIndex].sleeping != false) {
+            if (DAT_BuildingsState::instance.buildings[tileIndex].sleeping) {
                 uVar8 = DAT_TileMapState::instance.field161_0x5549c0 - 1U & 0x80000007;
                 if ((int)uVar8 < 0) {
                     uVar8 = (uVar8 - 1 | 0xfffffff8) + 1;
