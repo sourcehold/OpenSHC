@@ -46,30 +46,14 @@ namespace Map {
             int local_2c = 100000;
             int local_10 = 0;
             int local_c = 0;
-            /*
-              switch based on unit type
-             */
-
             switch (this->units[unitID].unitType) {
             case OpenSHC::Map::Units::UT_E_XBOW:
-                /*
-                  crossbow
-                 */
-
                 _entityType = 7;
                 break;
             default:
-                /*
-                  default:
-                 */
-
                 _entityType = 1;
                 break;
             case OpenSHC::Map::Units::UT_S_CATAPULT:
-                /*
-                  catapult
-                 */
-
                 _entityType = 2;
                 if ((this->units[unitID].stoneAmmunition <= 0)
                     && (this->units[unitID].targetingType != OpenSHC::Map::Units::UIT_THROW_COW)) {
@@ -78,10 +62,6 @@ namespace Map {
                 }
                 break;
             case OpenSHC::Map::Units::UT_S_TREBUCHET:
-                /*
-                  trebuchet
-                 */
-
                 _entityType = 3;
                 if ((this->units[unitID].stoneAmmunition <= 0)
                     && (this->units[unitID].targetingType != OpenSHC::Map::Units::UIT_THROW_COW)) {
@@ -90,38 +70,18 @@ namespace Map {
                 }
                 break;
             case OpenSHC::Map::Units::UT_S_MANGONEL:
-                /*
-                  mangonel
-                 */
-
                 _entityType = 4;
                 break;
             case OpenSHC::Map::Units::UT_S_BALLISTA:
-                /*
-                  ballista
-                 */
-
                 _entityType = 0x14;
                 break;
             case OpenSHC::Map::Units::UT_A_SLINGER:
-                /*
-                  slinger
-                 */
-
                 _entityType = 0x21;
                 break;
             case OpenSHC::Map::Units::UT_A_FIRETHROWER:
-                /*
-                  fire thrower
-                 */
-
                 _entityType = 0x22;
                 break;
             case OpenSHC::Map::Units::UT_S_FBALLISTA:
-                /*
-                  fire ballista
-                 */
-
                 _entityType = 0x25;
             }
             int _rangeSquared = DAT_EntityDefinedData::instance.EntityTypeArrayForProjectileRange[_entityType]
@@ -211,15 +171,7 @@ namespace Map {
                         }
                     }
                 }
-                /*
-                  fixme
-                 */
-
                 sVar9 = this->units[unitID]._someX_2;
-                /*
-                  fixmefixme
-                 */
-
                 this->units[unitID].targetedUnitID__OR__engineerMannedSiegeEngineRef = 0;
                 this->units[unitID].shootTargetedUnit = 0;
                 this->units[unitID].targetingType = OpenSHC::Map::Units::UIT_NO_INSTRUCTION_OR_MOVEUnk;
