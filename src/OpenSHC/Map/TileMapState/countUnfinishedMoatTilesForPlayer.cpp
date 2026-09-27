@@ -17,7 +17,7 @@ namespace Map {
         int unfinishedMoatTiles = 0;
         for (int moatID = 1; moatID < 16000; moatID++) {
             if (this->moats[moatID].owner != 0 && this->moats[moatID].owner == playerID
-                && (this->LogicLayer[*(int*)&this->moats[moatID].tile] & L_MOAT) == 0) {
+                && (this->LogicLayer[this->moats[moatID].tile] & L_MOAT) == 0) {
                 unfinishedMoatTiles++;
             }
         }
