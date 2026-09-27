@@ -18,7 +18,7 @@ namespace Map {
                 return FALSE;
             }
             int _distance;
-            if ((int)DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter < 1) {
+            if ((int)DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter <= 0) {
                 _distance = 20;
             } else if ((int)DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter < 2) {
                 _distance = 20;
