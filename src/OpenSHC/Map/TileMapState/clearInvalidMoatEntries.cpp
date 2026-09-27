@@ -22,7 +22,7 @@ namespace Map {
             if (this->moats[moatID].owner == 0) {
                 continue;
             }
-            int tile = *(int*)&this->moats[moatID].tile;
+            int tile = this->moats[moatID].tile;
             if ((DAT_TileMapState::instance.LogicLayer[tile] & (L_MOAT_DUG_OR_PLANNED | L_MOAT)) != 0) {
                 continue;
             }
