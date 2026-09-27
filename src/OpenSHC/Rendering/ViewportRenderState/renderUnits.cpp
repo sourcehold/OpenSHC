@@ -30,31 +30,10 @@ namespace Rendering {
     using OpenSHC::Map::Units::States::UnitState;
     using OpenSHC::Map::Units::States::UnitStateShort;
 
-    /*
-      WARNING: Restarted to delay deadcode elimination for space: ram
-     */
-
-    /*
-      WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
-     */
-
-    /*
-      WARNING: Enum "DPERRInt": Some values do not have unique names
-     */
-
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004E7810
     void ViewportRenderState::renderUnits()
-
     {
-        short savedPixelColor;
+        ushort savedPixelColor;
         short graphicSize;
         UnitTypeShort unitType;
         UnitStateShort unitState;
@@ -193,8 +172,8 @@ namespace Rendering {
                             (GmID)((int)(_gmID)), ((int)_blendStrength >> 0x10) + _imageID, 0);
                     }
                 } else {
-                    savedPixelColor = *(short*)this->viewportState.ptrColor;
-                    *(short*)this->viewportState.ptrColor = COL_MAGENTA::instance.shortValue;
+                    savedPixelColor = *this->viewportState.ptrColor;
+                    *this->viewportState.ptrColor = COL_MAGENTA::instance.shortValue;
                     _alpha = (int)(char)DAT_UnitsState::instance.units[_unitID].disappearFadeAlphaCountdown;
                     if (DAT_UnitsState::instance.units[_unitID].unitType == OpenSHC::Map::Units::UT_A_ASSASSIN) {
                         if (((DAT_GameState::instance.mapAndTime
@@ -376,8 +355,8 @@ namespace Rendering {
                                     (int)((int)(animationTick / 2 + 1)), overlayX, overlayY);
                             }
                         }
-                        if (*(short*)this->viewportState.ptrColor == COL_MAGENTA::instance.shortValue) {
-                            *(short*)this->viewportState.ptrColor = savedPixelColor;
+                        if (*this->viewportState.ptrColor == COL_MAGENTA::instance.shortValue) {
+                            *this->viewportState.ptrColor = savedPixelColor;
                         } else {
                             this->viewportState.mouseRayUnitID = _unitID;
                             this->viewportState.mouseRayBuildingID = 0;
@@ -387,8 +366,8 @@ namespace Rendering {
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderUnitAnimationWithBlendingUnk,
                             DAT_TextureRenderCoreObject::ptr)(
                             _drawX, _drawY, _imageID, (int)((int)(_blendStrength)), (byte*)_gmID, _alpha);
-                        if (*(short*)this->viewportState.ptrColor == COL_MAGENTA::instance.shortValue) {
-                            *(short*)this->viewportState.ptrColor = savedPixelColor;
+                        if (*this->viewportState.ptrColor == COL_MAGENTA::instance.shortValue) {
+                            *this->viewportState.ptrColor = savedPixelColor;
                         } else {
                             this->viewportState.mouseRayUnitID = _unitID;
                             this->viewportState.mouseRayBuildingID = 0;
@@ -560,7 +539,6 @@ namespace Rendering {
                 }
             }
         }
-        return;
     }
 
 }
