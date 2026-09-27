@@ -215,7 +215,7 @@ namespace Map {
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                 *(int*)(this->units[_selectedUnitID].manningEngineerRef + this->units[_selectedUnitID].working * 2
                     + -0x16),
-                _column0, _lineY, OpenSHC::Text::TTA_LEFT, (uint)((int)(33023)), 0x12, TRUE, 0);
+                _column0, _lineY, OpenSHC::Text::TTA_LEFT, (uint)(33023), 0x12, TRUE, 0);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 (char*)s_Av_005abc34, _column1, _lineY, OpenSHC::Text::TTA_LEFT, 0xffffff, 0x12, TRUE, 0);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
