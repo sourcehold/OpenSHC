@@ -930,7 +930,6 @@ namespace Map {
                 return;
             }
             DAT_UpdateUnitsTracker::instance = DAT_UpdateUnitsTracker::instance + 1;
-            return;
         }
 
     }
