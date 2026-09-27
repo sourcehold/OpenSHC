@@ -36,10 +36,11 @@ namespace Map {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     this->unitCount, _column0, _lineY, OpenSHC::Text::TTA_LEFT, 0x80ff, 0x12, TRUE, 0);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                    (char*)s_Total_flies__005abdc0, x + 0x20, _lineY, OpenSHC::Text::TTA_LEFT, 0xffffff, 0x12, TRUE, 0);
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-                    DAT_EntityState::instance.totalEntityCount, x + 0x20, _lineY, OpenSHC::Text::TTA_LEFT, 0x80ff, 0x12,
+                    (char*)s_Total_flies__005abdc0, _column0 + 0x1e, _lineY, OpenSHC::Text::TTA_LEFT, 0xffffff, 0x12,
                     TRUE, 0);
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
+                    DAT_EntityState::instance.totalEntityCount, _column0 + 0x1e, _lineY, OpenSHC::Text::TTA_LEFT,
+                    0x80ff, 0x12, TRUE, 0);
                 _lineY = y + 0x1c;
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     (char*)s_No_of_teleports__005abdac, _column0, _lineY, OpenSHC::Text::TTA_LEFT, 0xffffff, 0x12,
@@ -48,11 +49,11 @@ namespace Map {
                     DAT_PathFindingState::instance.numberOfClimbTeleports, _column0, _lineY, OpenSHC::Text::TTA_LEFT,
                     0x80ff, 0x12, TRUE, 0);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                    (char*)s_greatest_loading__005abd98, x + 0x7a, _lineY, OpenSHC::Text::TTA_LEFT, 0xffffff, 0x12,
-                    FALSE, 0);
+                    (char*)s_greatest_loading__005abd98, _column0 + 0x78, _lineY, OpenSHC::Text::TTA_LEFT, 0xffffff,
+                    0x12, FALSE, 0);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-                    DAT_PathFindingState::instance.debugGreatestClimbLoading, x + 0x7a, _lineY, OpenSHC::Text::TTA_LEFT,
-                    0x80ff, 0x12, TRUE, 0);
+                    DAT_PathFindingState::instance.debugGreatestClimbLoading, _column0 + 0x78, _lineY,
+                    OpenSHC::Text::TTA_LEFT, 0x80ff, 0x12, TRUE, 0);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     (char*)s_total_zones__005abd88, _column0, y + 0x2a, OpenSHC::Text::TTA_LEFT, 0xffffff, 0x12, FALSE,
                     0);
@@ -69,18 +70,18 @@ namespace Map {
                 (char*)s_Watching_chimp__005abd64, _column0, y, OpenSHC::Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                 _selectedUnitID, _column0, y, OpenSHC::Text::TTA_LEFT, 0x80ff, 0x12, TRUE, 0);
-            int _column1 = x + 0x20;
+            int _column1 = _column0 + 0x1e;
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 (char*)s_type__005abd5c, _column1, y, OpenSHC::Text::TTA_LEFT, 0xffffff, 0x12, TRUE, 0);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                 (int)(short)this->units[_selectedUnitID].unitType, _column1, y, OpenSHC::Text::TTA_LEFT, 0x80ff, 0x12,
                 TRUE, 0);
-            int _column2 = x + 0x3e;
+            int _column2 = _column0 + 0x3c;
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 (char*)s_player__005abd50, _column2, y, OpenSHC::Text::TTA_LEFT, 0xffffff, 0x12, TRUE, 0);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                 _lineY, _column2, y, OpenSHC::Text::TTA_LEFT, 0x80ff, 0x12, TRUE, 0);
-            int _column3 = x + 0x5c;
+            int _column3 = _column0 + 0x5a;
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 (char*)s_status__005abd44, _column3, y, OpenSHC::Text::TTA_LEFT, 0xffffff, 0x12, TRUE, 0);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
@@ -106,7 +107,7 @@ namespace Map {
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                 (int)this->units[_selectedUnitID].unitOrderWhenOnSameTile, _column3, y + 0xe, OpenSHC::Text::TTA_LEFT,
                 0x80ff, 0x12, TRUE, 0);
-            int _column4 = x + 0x7a;
+            int _column4 = _column0 + 0x78;
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 (char*)s_sloth__005abd04, _column4, y + 0xe, OpenSHC::Text::TTA_LEFT, 0xffffff, 0x12, TRUE, 0);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
