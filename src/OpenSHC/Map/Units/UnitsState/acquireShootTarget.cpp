@@ -165,10 +165,10 @@ namespace Map {
                         int _shootDistanceScore
                             = MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::arrowShootingRelated,
                                 DAT_EntityState::ptr)(_microXUnit, _microYUnit, _unitTotalHeight + 0x1e,
-                                (int)((int)(this->units[_0x04_targetUnitID].microXPosition)),
-                                (int)((int)(this->units[_0x04_targetUnitID].microYPosition)),
-                                (int)((int)(this->units[_0x04_targetUnitID].buildingHeight + 0x1a
-                                    + this->units[_0x04_targetUnitID].terrainOrClimbHeight)));
+                                (int)(this->units[_0x04_targetUnitID].microXPosition),
+                                (int)(this->units[_0x04_targetUnitID].microYPosition),
+                                (int)(this->units[_0x04_targetUnitID].buildingHeight + 0x1a
+                                    + this->units[_0x04_targetUnitID].terrainOrClimbHeight));
                         if (((_shootDistanceScore <= 0)
                                 || (UVar4 = this->units[unitID].unitType, UVar4 == OpenSHC::Map::Units::UT_S_MANGONEL))
                             || (UVar4 == OpenSHC::Map::Units::UT_S_BALLISTA)) {
@@ -223,7 +223,7 @@ namespace Map {
                 this->units[unitID].targetingType = OpenSHC::Map::Units::UIT_NO_INSTRUCTION_OR_MOVEUnk;
                 if (sVar9 != 0) {
                     MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setDestinationForUnit, this)(
-                        unitID, (uint)((int)((int)sVar9)), (uint)((int)((int)this->units[unitID]._someY_2)), 0);
+                        unitID, (uint)(sVar9), (uint)((int)this->units[unitID]._someY_2), 0);
                     this->units[unitID]._someX_2 = 0;
                     this->units[unitID]._someY_2 = 0;
                     this->units[unitID].moveDelay = 0;
@@ -243,7 +243,7 @@ namespace Map {
                         == this->units[unitID]
                             .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID)
                     && (_brazierEntityID = MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::isBrazierNearby,
-                            DAT_EntityState::ptr)((int)this->units[unitID].x, (int)((int)(this->units[unitID].y)),
+                            DAT_EntityState::ptr)((int)this->units[unitID].x, (int)(this->units[unitID].y),
                             (int)((
                                 int)(this->units[unitID].buildingHeight + this->units[unitID].terrainOrClimbHeight))),
                         _brazierEntityID != 0)) {
@@ -273,7 +273,7 @@ namespace Map {
                 int _0x17_x = (int)this->units[unitID].attackAtTileX;
                 int _0x17_tile = DAT_ViewportRenderState::instance.translationMatrix[_0x17_y].addXgetTile + _0x17_x;
                 BVar6 = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
-                    DAT_ViewportRenderState::ptr)(_0x17_x, (uint)((int)(_0x17_y)));
+                    DAT_ViewportRenderState::ptr)(_0x17_x, (uint)(_0x17_y));
                 if ((BVar6 != FALSE) && ((DAT_TileMapState::instance.LogicLayer[_0x17_tile] & 0x100U) != 0)) {
                     this->units[unitID].shootTargetMicroX = this->units[unitID].attackAtTileX * 8;
                     this->units[unitID].shootTargetMicroY = this->units[unitID].attackAtTileY * 8;
@@ -507,9 +507,9 @@ namespace Map {
                                 && (iVar7
                                     = MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::arrowShootingRelated,
                                         DAT_EntityState::ptr)(_microXUnit, _microYUnit, _unitTotalHeight + 0x1e,
-                                        (int)((int)(this->units[_enemy].microXPosition)), iVar7,
-                                        (int)((int)(this->units[_enemy].buildingHeight + 0x1a
-                                            + this->units[_enemy].terrainOrClimbHeight))),
+                                        (int)(this->units[_enemy].microXPosition), iVar7,
+                                        (int)(this->units[_enemy].buildingHeight + 0x1a
+                                            + this->units[_enemy].terrainOrClimbHeight)),
                                     0 < iVar7)) {
                                 if (_xDifferenceToTarget < local_30) {
                                     local_30 = _xDifferenceToTarget;
@@ -575,7 +575,7 @@ namespace Map {
                 short sVar5 = this->units[unitID].attackAtTileX;
                 this->units[unitID].jugglerCount = -1;
                 BVar6 = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
-                    DAT_ViewportRenderState::ptr)((int)sVar5, (uint)((int)((int)sVar9)));
+                    DAT_ViewportRenderState::ptr)((int)sVar5, (uint)(sVar9));
                 if (BVar6 != FALSE) {
                     sVar5 = this->units[unitID].attackAtTileX;
                     this->units[unitID].shootTargetMicroX = sVar5 * 8;
