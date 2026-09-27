@@ -43,7 +43,9 @@ namespace Map {
                     DAT_BuildingsState::ptr)((UnitType)(short)_unitType, &_refund);
                 DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                     .startResources[0xf] += _refund;
-                return DAT_GameSynchronyState::instance.currentPlayerSlotID * 0x39f4 + 0x115c2a0;
+                return (
+                    int)&DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                    .startResources[0xf];
             }
             BOOLEnum _hasCampground = MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::playerHasACampground,
                 DAT_GameState::ptr)(this->units[unitID].owner);
