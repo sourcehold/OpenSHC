@@ -303,7 +303,7 @@ namespace Map {
                     this->units[unitID].state.generic = OpenSHC::Map::Units::States::US_STONE_DEATH_01;
                     this->units[unitID].tunnelerFinishedDigging = 1;
                     MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
-                        (int)_unitXPosition, (int)((int)(_unitYPosition)), OpenSHC::DE::SHCDE::FX_SPLAT);
+                        (int)_unitXPosition, (int)(_unitYPosition), OpenSHC::DE::SHCDE::FX_SPLAT);
                     this->units[unitID].health = 0;
                     return TRUE;
                 }
@@ -321,7 +321,7 @@ namespace Map {
                     _damage = DAT_UnitPropertiesDefinedData::instance.BOLT_DAMAGE[(short)this->units[unitID].unitType];
                 }
                 _damage = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::computeDamageFearFactorBonus, this)(
-                    _damage, (int)((int)(DAT_EntityState::instance.entityArray[entityID].owner)));
+                    _damage, (int)(DAT_EntityState::instance.entityArray[entityID].owner));
                 if (_unitIsSiegeEngine) {
                     _damage = _damage / 2;
                 }
@@ -406,8 +406,7 @@ namespace Map {
                         break;
                     case OpenSHC::Map::Units::UT_S_TREBUCHET:
                         MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
-                            (int)this->units[unitID].x, (int)((int)(this->units[unitID].y)),
-                            OpenSHC::DE::SHCDE::FX_TR_DIE);
+                            (int)this->units[unitID].x, (int)(this->units[unitID].y), OpenSHC::DE::SHCDE::FX_TR_DIE);
                         break;
                     case OpenSHC::Map::Units::UT_S_SHIELD:
                         if ((this->units[unitID].digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300
