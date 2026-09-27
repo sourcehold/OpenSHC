@@ -156,8 +156,8 @@ namespace Map {
                                         (int)(this->units[_currentUnitID].y), OpenSHC::DE::SHCDE::FX_CHICKEN_FLAP);
                                     _currentUnitID = DAT_CurrentUnitSlotID::instance;
                                 }
-                                if ((999 < (int)(DAT_GameCore::instance.mapTimeInTicks
-                                         - this->units[_currentUnitID].time))
+                                if (999 < (int)(DAT_GameCore::instance.mapTimeInTicks
+                                        - this->units[_currentUnitID].time)
                                     && (_unitType = this->units[_currentUnitID].unitType,
                                         _unitType != OpenSHC::Map::Units::UT_S_TOWER)) {
                                     if (_unitType == OpenSHC::Map::Units::UT_LORD) {
@@ -187,16 +187,16 @@ namespace Map {
                         UVar6 = this->units[_currentUnitID].unitType;
                         if (((UVar6 == OpenSHC::Map::Units::UT_S_CATAPULT)
                                 || (UVar6 == OpenSHC::Map::Units::UT_S_FBALLISTA))
-                            && ((DAT_TileMapState::instance.LogicLayer[this->units[_currentUnitID].tile] & 0x50000000U)
-                                != 0)) {
+                            && (DAT_TileMapState::instance.LogicLayer[this->units[_currentUnitID].tile] & 0x50000000U)
+                                != 0) {
                             this->units[_currentUnitID].state.generic = OpenSHC::Map::Units::States::US_DISAPPEAR;
                             this->units[DAT_CurrentUnitSlotID::instance].updateTickTracker = 0;
                             _currentUnitID = DAT_CurrentUnitSlotID::instance;
                         }
                     }
-                    if ((this->units[_currentUnitID].logicalState == OpenSHC::Map::Units::ULS_NORMAL)
-                        && (((this->units[_currentUnitID].x == 0 || (this->units[_currentUnitID].y == 0))
-                            || (this->units[_currentUnitID].tile < 0)))) {
+                    if (this->units[_currentUnitID].logicalState == OpenSHC::Map::Units::ULS_NORMAL
+                        && ((this->units[_currentUnitID].x == 0 || (this->units[_currentUnitID].y == 0))
+                            || (this->units[_currentUnitID].tile < 0))) {
                         this->units[_currentUnitID].state.generic = OpenSHC::Map::Units::States::US_DISAPPEAR;
                         this->units[DAT_CurrentUnitSlotID::instance].updateTickTracker = 0;
                         _currentUnitID = DAT_CurrentUnitSlotID::instance;
@@ -442,20 +442,20 @@ namespace Map {
                             }
                         }
                         _buildingID = this->units[uVar9].unitType;
-                        if ((((_buildingID == OpenSHC::Map::Units::UT_E_ARCHER)
-                                 || (_buildingID == OpenSHC::Map::Units::UT_A_ARCHER))
-                                && ((_buildingID = this->units[uVar9].state.generic,
-                                    _buildingID == OpenSHC::Map::Units::States::US_AIM_WEAPONUnk
-                                        || (_buildingID == OpenSHC::Map::Units::States::US_FIRE_WEAPONUnk))))
-                            && ((_troopValue = this->units[uVar9].shootTargetedUnit,
-                                0 < _troopValue && (this->units[_troopValue].uid == this->units[uVar9].targetUID)))) {
+                        if (((_buildingID == OpenSHC::Map::Units::UT_E_ARCHER)
+                                || (_buildingID == OpenSHC::Map::Units::UT_A_ARCHER))
+                            && (_buildingID = this->units[uVar9].state.generic,
+                                _buildingID == OpenSHC::Map::Units::States::US_AIM_WEAPONUnk
+                                    || (_buildingID == OpenSHC::Map::Units::States::US_FIRE_WEAPONUnk))
+                            && (_troopValue = this->units[uVar9].shootTargetedUnit,
+                                0 < _troopValue && (this->units[_troopValue].uid == this->units[uVar9].targetUID))) {
                             this->units[_troopValue].field233_0x39a = 1;
                             uVar9 = DAT_CurrentUnitSlotID::instance;
                         }
-                        if ((this->units[uVar9].enemyNoticeFrequencyUnk != 0)
-                            && ((DAT_GameState::instance.mapAndTime.totalGameTicksUnk
-                                    & this->units[uVar9].enemyNoticeFrequencyUnk)
-                                == (this->units[uVar9].fixedRng & this->units[uVar9].enemyNoticeFrequencyUnk))) {
+                        if (this->units[uVar9].enemyNoticeFrequencyUnk != 0
+                            && (DAT_GameState::instance.mapAndTime.totalGameTicksUnk
+                                   & this->units[uVar9].enemyNoticeFrequencyUnk)
+                                == (this->units[uVar9].fixedRng & this->units[uVar9].enemyNoticeFrequencyUnk)) {
                             if (this->units[uVar9].owner == 0) {
                                 _troopValue = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::
                                                                     computeDistanceToNearestEnemyForLegacyMissions,
@@ -525,7 +525,7 @@ namespace Map {
                             == OpenSHC::Map::Units::ULS_TRANSITIONING) {
                             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::changeUnitType, this)(
                                 DAT_CurrentUnitSlotID::instance);
-                        } else if (this->units[DAT_CurrentUnitSlotID::instance].logicalState == ((UnitLogicState)1)) {
+                        } else if (this->units[DAT_CurrentUnitSlotID::instance].logicalState == (UnitLogicState)1) {
                             this->units[DAT_CurrentUnitSlotID::instance].logicalState = OpenSHC::Map::Units::ULS_NORMAL;
                         }
                         int* _ptr_animationTicker = &this->units[DAT_CurrentUnitSlotID::instance].animationTicker;
@@ -645,12 +645,12 @@ namespace Map {
                         }
                         uVar9 = DAT_CurrentUnitSlotID::instance;
                         UnitStateShort UVar8 = this->units[DAT_CurrentUnitSlotID::instance].field143_0x2c4;
-                        if (((UVar8 != this->units[DAT_CurrentUnitSlotID::instance].state.generic)
-                                && ((UVar8
-                                        == (OpenSHC::Map::Units::States::US_DEATH_02
-                                            | OpenSHC::Map::Units::States::US_STAND_UPUnk
-                                            | OpenSHC::Map::Units::States::US_RELOAD_WEAPONUnk)
-                                    || (UVar8 == OpenSHC::Map::Units::States::US_DIG))))
+                        if (UVar8 != this->units[DAT_CurrentUnitSlotID::instance].state.generic
+                            && (UVar8
+                                    == (OpenSHC::Map::Units::States::US_DEATH_02
+                                        | OpenSHC::Map::Units::States::US_STAND_UPUnk
+                                        | OpenSHC::Map::Units::States::US_RELOAD_WEAPONUnk)
+                                || (UVar8 == OpenSHC::Map::Units::States::US_DIG))
                             && (_troopValue = this->units[DAT_CurrentUnitSlotID::instance].digTileTarget,
                                 DAT_TileMapState::instance.moats[_troopValue].owner != '\0')) {
                             char* pcVar3 = &DAT_TileMapState::instance.moats[_troopValue].someCountDown;
@@ -680,11 +680,10 @@ namespace Map {
                                     this)(DAT_CurrentUnitSlotID::instance,
                                     (int)(this->units[DAT_CurrentUnitSlotID::instance].stateBasedSpeed));
                                 if (_troopValue != 0) {
-                                    if (((this->units[DAT_CurrentUnitSlotID::instance].state.generic
-                                             == OpenSHC::Map::Units::States::US_MOVE_TO_DESTINATION)
-                                            && (this->units[DAT_CurrentUnitSlotID::instance].disappearFadeAlphaCountdown
-                                                != 0))
-                                        && (this->units[DAT_CurrentUnitSlotID::instance].fadeType == 0)) {
+                                    if (this->units[DAT_CurrentUnitSlotID::instance].state.generic
+                                            == OpenSHC::Map::Units::States::US_MOVE_TO_DESTINATION
+                                        && this->units[DAT_CurrentUnitSlotID::instance].disappearFadeAlphaCountdown != 0
+                                        && this->units[DAT_CurrentUnitSlotID::instance].fadeType == 0) {
                                         this->units[DAT_CurrentUnitSlotID::instance].disappearFadeAlphaCountdown = 0;
                                     }
                                     psVar4 = &this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e;
@@ -739,12 +738,12 @@ namespace Map {
                                 + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
                             piVar1 = &this->units[DAT_CurrentUnitSlotID::instance].gfxNumber;
                             *piVar1 = *piVar1 + this->units[DAT_CurrentUnitSlotID::instance].field215_0x378 * 8;
-                            if (((this->units[DAT_CurrentUnitSlotID::instance].unitType
-                                     == OpenSHC::Map::Units::UT_A_HARCHER)
-                                    && (_buildingID
-                                        = this->units[DAT_CurrentUnitSlotID::instance].horseArcherShootingVariation,
-                                        _buildingID != 4))
-                                && ((_buildingID != 5 && (_buildingID != 6)))) {
+                            if (this->units[DAT_CurrentUnitSlotID::instance].unitType
+                                    == OpenSHC::Map::Units::UT_A_HARCHER
+                                && (_buildingID
+                                    = this->units[DAT_CurrentUnitSlotID::instance].horseArcherShootingVariation,
+                                    _buildingID != 4)
+                                && _buildingID != 5 && _buildingID != 6) {
                                 this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
                                     = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber;
                             }
@@ -790,15 +789,14 @@ namespace Map {
                                 this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
                                     = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber;
                                 if ((DAT_CurrentUnitSlotID::instance & 1) == 0) {
-                                    if (((this->units[DAT_CurrentUnitSlotID::instance].stateBasedSpeed != 0)
-                                            && ((this->units[DAT_CurrentUnitSlotID::instance]
-                                                        .movementType_OR_targetUnitID
-                                                    != 0
-                                                || (this->units[DAT_CurrentUnitSlotID::instance].targetingType
-                                                    == OpenSHC::Map::Units::UIT_UNIT_ATTACK_UNIT))))
-                                        && (this->units[DAT_CurrentUnitSlotID::instance].totalSizeOfPathPlan + -0x10
+                                    if (this->units[DAT_CurrentUnitSlotID::instance].stateBasedSpeed != 0
+                                        && (this->units[DAT_CurrentUnitSlotID::instance].movementType_OR_targetUnitID
+                                                != 0
+                                            || (this->units[DAT_CurrentUnitSlotID::instance].targetingType
+                                                == OpenSHC::Map::Units::UIT_UNIT_ATTACK_UNIT))
+                                        && this->units[DAT_CurrentUnitSlotID::instance].totalSizeOfPathPlan + -0x10
                                             <= (int)this->units[DAT_CurrentUnitSlotID::instance]
-                                                .currentIndexInPathPlan)) {
+                                                .currentIndexInPathPlan) {
                                         piVar1 = &this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk;
                                         *piVar1 = *piVar1 + 0x80;
                                     }
