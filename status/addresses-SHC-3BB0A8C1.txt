@@ -49353,7 +49353,7 @@ SHC_3BB0A8C1_0x0052FC30 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0052FCA0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0052FD00 | 0.0% | Pending
+SHC_3BB0A8C1_0x0052FD00 | 83.1% | orig caches dir in locals
 
 SHC_3BB0A8C1_0x0052FE00 | 84.8% | reg alloc differs
 
