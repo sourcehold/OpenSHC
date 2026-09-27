@@ -13,6 +13,7 @@ namespace Map {
     namespace Units {
 
         using OpenSHC::Map::Buildings::BuildingType;
+        using OpenSHC::Map::Buildings::BuildingTypeShort;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00536780
@@ -22,24 +23,21 @@ namespace Map {
             if (_buildingID == 0) {
                 return FALSE;
             }
-            switch (DAT_BuildingsState::instance.buildings[_buildingID].buildingType) {
-            case OpenSHC::Map::Buildings::BT_TOWER1:
-            case OpenSHC::Map::Buildings::BT_TOWER2:
-            case OpenSHC::Map::Buildings::BT_TOWER3:
-            case OpenSHC::Map::Buildings::BT_TOWER4:
-            case OpenSHC::Map::Buildings::BT_TOWER5:
-            case OpenSHC::Map::Buildings::BT_STONEKEEP:
-            case OpenSHC::Map::Buildings::BT_STRONGHOLD:
-            case OpenSHC::Map::Buildings::BT_KEEPFOUR:
-            case OpenSHC::Map::Buildings::BT_KEEPFIVE:
-                break;
-            default:
+            BuildingTypeShort _buildingType = DAT_BuildingsState::instance.buildings[_buildingID].buildingType;
+            if (_buildingType != OpenSHC::Map::Buildings::BT_TOWER1
+                && _buildingType != OpenSHC::Map::Buildings::BT_TOWER2
+                && _buildingType != OpenSHC::Map::Buildings::BT_TOWER3
+                && _buildingType != OpenSHC::Map::Buildings::BT_TOWER4
+                && _buildingType != OpenSHC::Map::Buildings::BT_TOWER5
+                && _buildingType != OpenSHC::Map::Buildings::BT_STONEKEEP
+                && _buildingType != OpenSHC::Map::Buildings::BT_STRONGHOLD
+                && _buildingType != OpenSHC::Map::Buildings::BT_KEEPFOUR
+                && _buildingType != OpenSHC::Map::Buildings::BT_KEEPFIVE) {
                 return FALSE;
             }
             int _tileCapacity = DAT_BuildingsState::instance.buildings[_buildingID].widthOrHeight
                 * DAT_BuildingsState::instance.buildings[_buildingID].widthOrHeight;
-            if (DAT_BuildingsState::instance.buildings[_buildingID].buildingType
-                == OpenSHC::Map::Buildings::BT_TOWER1) {
+            if (_buildingType == OpenSHC::Map::Buildings::BT_TOWER1) {
                 _tileCapacity = 5;
             }
             int _ownUnitsOnBuilding = 0;
