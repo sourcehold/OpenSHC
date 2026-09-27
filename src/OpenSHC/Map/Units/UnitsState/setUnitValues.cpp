@@ -74,7 +74,6 @@ namespace Map {
             if (unitType != OpenSHC::Map::Units::UT_CAGEDOG) {
                 this->units[unitID].unknownBool01 = 500;
             }
-            /* Assassin */
             if (unitType == OpenSHC::Map::Units::UT_A_ASSASSIN) {
                 this->units[unitID].assassinsMicroDistanceToEnemyUnk = 32000;
             }
