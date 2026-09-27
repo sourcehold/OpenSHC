@@ -592,9 +592,10 @@ namespace Map {
                     this->units[unitID].shootTargetMicroX = sVar5 * 8;
                     this->units[unitID].shootTargetedUnit = -1;
                     this->units[unitID].shootTargetMicroY = sVar9 * 8;
-                    this->units[unitID].shootTargetZ = (ushort)
-                        * (byte*)(DAT_ViewportRenderState::instance.translationMatrix[sVar9].addXgetTile + 0x1d32c38
-                            + (int)sVar5);
+                    this->units[unitID].shootTargetZ
+                        = (ushort)DAT_TileMapState::instance
+                              .HeightLayer[DAT_ViewportRenderState::instance.translationMatrix[sVar9].addXgetTile
+                                  + (int)sVar5];
                     return TRUE;
                 }
             }
