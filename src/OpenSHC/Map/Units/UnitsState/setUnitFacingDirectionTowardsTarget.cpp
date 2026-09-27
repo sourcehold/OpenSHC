@@ -11,7 +11,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0052FD00
         undefined4 UnitsState::setUnitFacingDirectionTowardsTarget(int unitID, int targetUnitID)
         {
-            if (targetUnitID < 1) {
+            if (targetUnitID <= 0) {
                 return 0;
             }
             MACRO_CALL_MEMBER(
