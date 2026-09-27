@@ -13,7 +13,7 @@ namespace Map {
     int TileMapState::returnMoatIDForPlayerIDs(int playerID, int playerID2)
     {
         for (int moatID = 1; moatID < this->currentMoatCount; moatID++) {
-            if (*(int*)&this->moats[moatID].tile == playerID && this->moats[moatID].owner == playerID2) {
+            if (this->moats[moatID].tile == playerID && this->moats[moatID].owner == playerID2) {
                 return moatID;
             }
         }
