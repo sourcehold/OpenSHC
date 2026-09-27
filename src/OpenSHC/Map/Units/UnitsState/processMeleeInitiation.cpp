@@ -42,7 +42,7 @@ namespace Map {
                          && (this->units[unitID].dying == 0))
                     && (this->units[unitID].moveRelatedFlag != 1)))) {
                 int _distanceThreshold;
-                if (this->units[unitID].stateBasedSpeed < 1) {
+                if (this->units[unitID].stateBasedSpeed <= 0) {
                     /*
                       50 or 150 depending on selectable
                      */
@@ -514,7 +514,7 @@ namespace Map {
                             }
                             _otherUnitID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::getEnemyUnitIDNearby,
                                 this)(unitID, _candidateTile, _totalHeight);
-                            if (_otherUnitID < 1) {
+                            if (_otherUnitID <= 0) {
                                 continue;
                             }
                             if (this->units[_otherUnitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
