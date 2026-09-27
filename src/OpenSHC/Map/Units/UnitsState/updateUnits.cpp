@@ -153,7 +153,7 @@ namespace Map {
                             if (this->units[_currentUnitID].unitType == OpenSHC::Map::Units::UT_CHICKEN) {
                                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation,
                                     DAT_SFXState::ptr)((int)this->units[_currentUnitID].x,
-                                    (int)((int)(this->units[_currentUnitID].y)), OpenSHC::DE::SHCDE::FX_CHICKEN_FLAP);
+                                    (int)(this->units[_currentUnitID].y), OpenSHC::DE::SHCDE::FX_CHICKEN_FLAP);
                                 _currentUnitID = DAT_CurrentUnitSlotID::instance;
                             }
                             if ((999 < (int)(DAT_GameCore::instance.mapTimeInTicks - this->units[_currentUnitID].time))
@@ -164,7 +164,7 @@ namespace Map {
                                     uVar9 = (uint)this->units[_currentUnitID].targetX_2;
                                     MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setPositionOfUnit, this)(
                                         _currentUnitID, uVar9, uVar12,
-                                        (undefined4)((int)((uint)DAT_TileMapState::instance.HeightLayer
+                                        (undefined4)((int)(DAT_TileMapState::instance.HeightLayer
                                                 [DAT_ViewportRenderState::instance.translationMatrix[uVar12].addXgetTile
                                                     + uVar9])));
                                     this->units[DAT_CurrentUnitSlotID::instance].state.generic
@@ -672,7 +672,7 @@ namespace Map {
                                 }
                                 _troopValue = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::processUnitMove,
                                     this)(DAT_CurrentUnitSlotID::instance,
-                                    (int)((int)(this->units[DAT_CurrentUnitSlotID::instance].stateBasedSpeed)));
+                                    (int)(this->units[DAT_CurrentUnitSlotID::instance].stateBasedSpeed));
                                 if (_troopValue != 0) {
                                     if (((this->units[DAT_CurrentUnitSlotID::instance].state.generic
                                              == OpenSHC::Map::Units::States::US_MOVE_TO_DESTINATION)
