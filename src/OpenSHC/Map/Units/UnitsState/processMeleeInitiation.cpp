@@ -32,12 +32,10 @@ namespace Map {
             uint* _occupancyRow;
             int _adjacentTiles[24];
             int _otherUnitID;
-            if ((((this->units[unitID].someUnitStat2_meleeDamageUnk != 0)
-                     && (this->units[unitID].unknownTestAgainst0_2 == 0))
-                    && (this->units[unitID].unknownMovementRelated_0x2d2 == 0))
-                && (((this->units[unitID].logicalState == OpenSHC::Map::Units::ULS_NORMAL
-                         && (this->units[unitID].dying == 0))
-                    && (this->units[unitID].moveRelatedFlag != 1)))) {
+            if (this->units[unitID].someUnitStat2_meleeDamageUnk != 0 && this->units[unitID].unknownTestAgainst0_2 == 0
+                && this->units[unitID].unknownMovementRelated_0x2d2 == 0
+                && this->units[unitID].logicalState == OpenSHC::Map::Units::ULS_NORMAL && this->units[unitID].dying == 0
+                && this->units[unitID].moveRelatedFlag != 1) {
                 int _distanceThreshold;
                 if (this->units[unitID].stateBasedSpeed <= 0) {
                     /*
