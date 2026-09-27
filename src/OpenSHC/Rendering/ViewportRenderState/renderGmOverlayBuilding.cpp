@@ -35,25 +35,8 @@ namespace Rendering {
     using OpenSHC::Map::Buildings::BuildingTypeShort;
     using OpenSHC::UI::Enums::MenuViewType;
 
-    /*
-      WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
-     */
-
-    /*
-      WARNING: Enum "DPERRInt": Some values do not have unique names
-     */
-
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004E3980
     void ViewportRenderState::renderGmOverlayBuilding(int tileIndex, int xUnk, int yUnk, int param_4)
-
     {
         short sVar1;
         BuildingTypeShort BVar2;
@@ -1796,7 +1779,6 @@ namespace Rendering {
                 + -0x2a,
             OpenSHC::IO::Graphics::GID_FLOATS_NEW, iVar11, 0);
         DAT_BuildingsState::instance.buildings[tileIndex].field68_0xc2 = 0;
-        return;
     }
 
 }
