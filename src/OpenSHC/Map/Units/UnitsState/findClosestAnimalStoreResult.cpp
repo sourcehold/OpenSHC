@@ -24,8 +24,7 @@ namespace Map {
             if (x > 399 || y > 399) {
                 return 0;
             }
-            /* the 400x400 map of placeable tiles at 0x021AEC98 */
-            if (*(char*)(y * 400 + 0x21aec98 + x) == '\0') {
+            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
                 return 0;
             }
             ushort _areaOfOrigin
