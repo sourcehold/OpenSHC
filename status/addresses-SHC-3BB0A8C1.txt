@@ -44743,7 +44743,7 @@ SHC_3BB0A8C1_0x00512920 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00512940 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00514480 | 0.0% | Pending
+SHC_3BB0A8C1_0x00514480 | 40.0% | logic masks merged by cl
 
 SHC_3BB0A8C1_0x00514520 | 0.0% | Pending
 
