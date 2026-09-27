@@ -666,7 +666,7 @@ namespace Map {
                                 < _troopValue - this->units[DAT_CurrentUnitSlotID::instance].field199_0x350) {
                                 this->units[DAT_CurrentUnitSlotID::instance].field199_0x350 = _troopValue;
                                 psVar4 = &this->units[DAT_CurrentUnitSlotID::instance].movementRunUpTime;
-                                if (this->units[DAT_CurrentUnitSlotID::instance].movementRunUpTime < 1) {
+                                if (this->units[DAT_CurrentUnitSlotID::instance].movementRunUpTime <= 0) {
                                     *psVar4 = 0;
                                 } else {
                                     *psVar4 = *psVar4 + -1;
