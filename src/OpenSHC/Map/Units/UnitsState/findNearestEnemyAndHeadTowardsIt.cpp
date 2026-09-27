@@ -200,7 +200,6 @@ namespace Map {
                     && this->units[_enemyUnitID].unitType != OpenSHC::Map::Units::UT_CAGEDOG) {
                     continue;
                 }
-                /* unit type switch */
                 switch (this->units[_enemyUnitID].unitType) {
                 case OpenSHC::Map::Units::UT_PEASANT:
                     _score = _score * 8 + 200;
