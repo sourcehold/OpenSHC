@@ -71,7 +71,6 @@ namespace Rendering {
         int _gmID;
         int _renderBatchSize;
         int _alpha;
-        int _batchedUnitID;
 
         int renderCount5 = this->unitRender5;
         int renderCount4 = this->unitRender4;
@@ -106,7 +105,7 @@ namespace Rendering {
             _renderBatchSize = renderCount5;
         }
         if (0 < _renderBatchSize) {
-            for (_batchedUnitID = 0; _batchedUnitID < _renderBatchSize; _batchedUnitID++) {
+            for (int _batchedUnitID = 0; _batchedUnitID < _renderBatchSize; _batchedUnitID++) {
                 switch ((int)this->unitBatchedRenderCounterUntil6) {
                 case 1:
                     _unitID = this->unitBatch1[_batchedUnitID].unitIDOrStatus;
