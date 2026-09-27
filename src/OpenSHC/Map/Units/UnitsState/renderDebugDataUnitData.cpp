@@ -21,11 +21,11 @@ namespace Map {
 
         {
             int _selectedUnitID = this->lastSelectedUnitID;
-            int _ownerID = this->units[this->lastSelectedUnitID].owner;
-            short _tribeID = this->units[this->lastSelectedUnitID].tribeID;
+            int _ownerID = this->units[_selectedUnitID].owner;
+            short _tribeID = this->units[_selectedUnitID].tribeID;
             int _lineY = 0;
             int _column0 = x + 2;
-            if (this->lastSelectedUnitID < 1) {
+            if (_selectedUnitID < 1) {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     (char*)s_Not_watching_a_chimp_005abde0, _column0, y, OpenSHC::Text::TTA_LEFT, 0xffffff, 0x12, FALSE,
                     0);
