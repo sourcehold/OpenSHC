@@ -20,12 +20,6 @@
 namespace OpenSHC {
 namespace Text {
 
-    struct LineLayout {
-        short leftBorder;
-        short rightBorder;
-        short unknown2;
-    };
-
     using OpenSHC::Text::ImageHotspot;
     using OpenSHC::Text::LineLayout;
     using OpenSHC::Text::Enums::HelpTextToken;

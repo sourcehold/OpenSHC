@@ -16,7 +16,7 @@ namespace Text {
     void TextEditorState::renderHelpImageHotspots()
     {
         for (int i = 0; i < this->imageHotspotCount; ++i) {
-            int _gfxIndex = 99 - this->imageHotspotTable[i].imageRelated;
+            int _gfxIndex = 99 - this->imageHotspotTable[i].imageIndex;
             if ((this->useInGameHelpHandler || this->helpDialogVariant == 1)
                 && !MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::checkIfGfxTgxStartsWithTransparentPixels,
                     DAT_TextureRenderCoreObject::ptr)(_gfxIndex)) {
@@ -64,7 +64,7 @@ namespace Text {
                     this->imageHotspotTable[i].yPos - this->helpContentScrollY + this->dialogContentY
                         - this->helpContentScrollOffsetY,
                     boxWidth, boxHeight)) {
-                this->field50_0x23968 = this->imageHotspotTable[i].unknown3;
+                this->currentLinkId = this->imageHotspotTable[i].linkId;
             }
         }
     }

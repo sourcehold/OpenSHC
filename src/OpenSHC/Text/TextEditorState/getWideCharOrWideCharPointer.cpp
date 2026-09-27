@@ -6,7 +6,6 @@ namespace OpenSHC {
 namespace Text {
 
     // NOTE: Return is essentially a "union", however, it needs to be a value for the proper structure
-    //   Also, it might be likely that this function is "known" by its only user "processHelpRichTextTokens"
 
     // FUNCTION: STRONGHOLDCRUSADER 0x0045D3C0
     uint TextEditorState::getWideCharOrWideCharPointer(int* param_1)

@@ -17,9 +17,6 @@ namespace Text {
         this->dialogWidth = dialogWidth;
         this->dialogHeight = dialogHeight;
 
-        // NOTE: dialogWidth is used to compute the content height and vice versa, no idea if something was switched;
-        //   also, the required order feels strange, maybe they used a RECT struct or macro
-        // FIXME: ContentHeight and ContentWidth or the dialogWidth and dialogHeight are swapped
         int const contentX = this->dialogX + DAT_00df2964::instance;
         int const contentY = this->dialogY + DAT_00df296c::instance;
         int const contentHeight = this->dialogHeight - INT_00df2970::instance;
