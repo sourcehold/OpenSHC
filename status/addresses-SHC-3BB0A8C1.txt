@@ -51233,7 +51233,7 @@ SHC_3BB0A8C1_0x005371A0 | 35.7% | param store order differs
 
 SHC_3BB0A8C1_0x005371E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005371F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005371F0 | 36.2% | orig walks XYPair ptrs
 
 SHC_3BB0A8C1_0x00537700 | 16.1% | orig caches counter local
 
