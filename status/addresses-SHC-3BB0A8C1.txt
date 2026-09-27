@@ -60019,7 +60019,7 @@ SHC_3BB0A8C1_0x0053D850 | 69.8% | reg alloc differs
 
 SHC_3BB0A8C1_0x0053D900 | 68.8% | orig caches x/y in locals
 
-SHC_3BB0A8C1_0x0053D9C0 | 19.2% | orig shares branch tails
+SHC_3BB0A8C1_0x0053D9C0 | 25.8% | reg alloc, hoisted loads
 
 SHC_3BB0A8C1_0x0053DC9C | 0.0% | Pending
 

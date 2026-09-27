@@ -23,7 +23,7 @@ namespace Map {
         {
             int _hitboxXStart;
             int _hitboxXEnd;
-            if (DAT_MouseState::instance.hitboxXEnd < DAT_MouseState::instance.hitboxXStart) {
+            if ((int)DAT_MouseState::instance.hitboxXStart > (int)DAT_MouseState::instance.hitboxXEnd) {
                 _hitboxXStart = DAT_MouseState::instance.hitboxXEnd;
                 _hitboxXEnd = DAT_MouseState::instance.hitboxXStart;
             } else {
@@ -32,7 +32,7 @@ namespace Map {
             }
             int _hitboxYStart;
             int _hitboxYEnd;
-            if (DAT_MouseState::instance.hitboxYEnd < DAT_MouseState::instance.hitboxYStart) {
+            if ((int)DAT_MouseState::instance.hitboxYStart > (int)DAT_MouseState::instance.hitboxYEnd) {
                 _hitboxYStart = DAT_MouseState::instance.hitboxYEnd;
                 _hitboxYEnd = DAT_MouseState::instance.hitboxYStart;
             } else {
