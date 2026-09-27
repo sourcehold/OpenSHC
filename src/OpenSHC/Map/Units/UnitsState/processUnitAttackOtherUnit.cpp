@@ -12,6 +12,7 @@
 #include "OpenSHC/Globals/DAT_SoundSystemState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
 #include "OpenSHC/Globals/DAT_UnitPropertiesDefinedData.hpp"
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -35,7 +36,7 @@ namespace Map {
             /* if unit 1 is not a lord */
             if (this->units[unitID].unitType != OpenSHC::Map::Units::UT_LORD) {
                 _damage = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::computeDamageFearFactorBonus, this)(
-                    _damage, this->units[unitID].owner);
+                    _damage, DAT_UnitsState::instance.units[unitID].owner);
             }
             if (this->units[unitID].owner != 0 && this->units[unit2ID].owner != this->units[unitID].owner) {
                 this->units[unit2ID].lastEncounteredEnemyPlayerID = this->units[unitID].owner;
@@ -44,50 +45,48 @@ namespace Map {
             }
             /* decrement the health of unit 2 by damage */
             this->units[unit2ID].health = this->units[unit2ID].health - _damage;
-            if (this->units[unit2ID].health < 1) {
+            if (this->units[unit2ID].health <= 0) {
                 this->units[unit2ID].health = 0;
             }
             /* compute the health bar in percentages */
+            short _healthPercentage;
             if (this->units[unit2ID].maxHealth == 0) {
-                this->units[unit2ID].healthPercentage = 100;
+                _healthPercentage = 100;
             } else {
-                this->units[unit2ID].healthPercentage
-                    = (short)((this->units[unit2ID].health * 100) / this->units[unit2ID].maxHealth);
+                _healthPercentage = (short)((this->units[unit2ID].health * 100) / this->units[unit2ID].maxHealth);
             }
-            this->units[unit2ID].healthbar = this->units[unit2ID].healthPercentage / 10;
+            this->units[unit2ID].healthPercentage = _healthPercentage;
+            this->units[unit2ID].healthbar = _healthPercentage / 10;
             if (this->units[unit2ID].health <= 0 && this->units[unit2ID].isStalked != 0) {
-                eSFX _hitEffect;
-                bool _hasHitEffect = true;
                 switch (this->units[unitID].unitType) {
                 case OpenSHC::Map::Units::UT_WOODCUTTER:
                 case OpenSHC::Map::Units::UT_LORD:
-                    _hitEffect = OpenSHC::DE::SHCDE::FX_LORD_HIT;
+                    MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                        this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_LORD_HIT);
                     break;
                 case OpenSHC::Map::Units::UT_E_SPEAR:
                 case OpenSHC::Map::Units::UT_A_ARCHER:
                 case OpenSHC::Map::Units::UT_A_SLINGER:
                 case OpenSHC::Map::Units::UT_A_HARCHER:
                 case OpenSHC::Map::Units::UT_A_FIRETHROWER:
-                    _hitEffect = OpenSHC::DE::SHCDE::FX_SPEAR_HIT;
+                    MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                        this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_SPEAR_HIT);
                     break;
                 case OpenSHC::Map::Units::UT_E_PIKE:
-                    _hitEffect = OpenSHC::DE::SHCDE::FX_PIKE_HIT;
+                    MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                        this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_PIKE_HIT);
                     break;
                 case OpenSHC::Map::Units::UT_E_MACE:
-                    _hitEffect = OpenSHC::DE::SHCDE::FX_MACE_HIT;
+                    MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                        this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_MACE_HIT);
                     break;
                 case OpenSHC::Map::Units::UT_E_SWORD:
                 case OpenSHC::Map::Units::UT_E_KNIGHT:
                 case OpenSHC::Map::Units::UT_A_ASSASSIN:
                 case OpenSHC::Map::Units::UT_A_SWORDSMAN:
-                    _hitEffect = OpenSHC::DE::SHCDE::FX_SWORD_HIT;
-                    break;
-                default:
-                    _hasHitEffect = false;
-                }
-                if (_hasHitEffect) {
                     MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
-                        this->units[unitID].x, this->units[unitID].y, _hitEffect);
+                        this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_SWORD_HIT);
+                    break;
                 }
             }
             if (this->units[unit2ID].health > 0) {
