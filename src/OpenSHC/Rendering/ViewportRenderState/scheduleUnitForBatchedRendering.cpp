@@ -28,7 +28,7 @@ namespace Rendering {
 
         switch (batch) {
         case 1:
-            if ((int)this->unitRender1 < 500) {
+            if (this->unitRender1 < 500) {
                 this->unitBatch1[this->unitRender1].unitIDOrStatus = unitIDOrStatus;
                 this->unitBatch1[this->unitRender1].ownerColor = DAT_RenderedUnitOwner::instance;
                 this->unitBatch1[this->unitRender1].spriteID = DAT_CurrentlyRenderedSpriteID::instance;
@@ -41,7 +41,7 @@ namespace Rendering {
             }
             break;
         case 2:
-            if ((int)this->unitRender2 < 500) {
+            if (this->unitRender2 < 500) {
                 this->unitBatch2[this->unitRender2].unitIDOrStatus = unitIDOrStatus;
                 this->unitBatch2[this->unitRender2].ownerColor = DAT_RenderedUnitOwner::instance;
                 this->unitBatch2[this->unitRender2].spriteID = DAT_CurrentlyRenderedSpriteID::instance;
@@ -54,7 +54,7 @@ namespace Rendering {
             }
             break;
         case 3:
-            if ((int)this->unitRender3 < 500) {
+            if (this->unitRender3 < 500) {
                 this->unitBatch3[this->unitRender3].unitIDOrStatus = unitIDOrStatus;
                 this->unitBatch3[this->unitRender3].ownerColor = DAT_RenderedUnitOwner::instance;
                 this->unitBatch3[this->unitRender3].spriteID = DAT_CurrentlyRenderedSpriteID::instance;
@@ -67,7 +67,7 @@ namespace Rendering {
             }
             break;
         case 4:
-            if ((int)this->unitRender4 < 500) {
+            if (this->unitRender4 < 500) {
                 this->unitBatch4[this->unitRender4].unitIDOrStatus = unitIDOrStatus;
                 this->unitBatch4[this->unitRender4].ownerColor = DAT_RenderedUnitOwner::instance;
                 this->unitBatch4[this->unitRender4].spriteID = DAT_CurrentlyRenderedSpriteID::instance;
@@ -80,7 +80,7 @@ namespace Rendering {
             }
             break;
         case 5:
-            if ((int)this->unitRender5 < 500) {
+            if (this->unitRender5 < 500) {
                 this->unitBatch5[this->unitRender5].unitIDOrStatus = unitIDOrStatus;
                 this->unitBatch5[this->unitRender5].ownerColor = DAT_RenderedUnitOwner::instance;
                 this->unitBatch5[this->unitRender5].spriteID = DAT_CurrentlyRenderedSpriteID::instance;
