@@ -15,7 +15,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0052F010
         void UnitsState::removeUnitFromItsTribe(uint unitID, int unitUID)
         {
-            if ((int)unitID < 1) {
+            if ((int)unitID <= 0) {
                 return;
             }
             if (this->units[unitID].uid != unitUID) {
@@ -23,7 +23,7 @@ namespace Map {
             }
             int _tribeID = this->units[unitID].tribeID;
             this->units[unitID].logicalState = OpenSHC::Map::Units::ULS_REMOVE;
-            if (_tribeID < 1) {
+            if (_tribeID <= 0) {
                 return;
             }
             if (MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::tribeCorrespondsWithUID, DAT_TribesState::ptr)(
