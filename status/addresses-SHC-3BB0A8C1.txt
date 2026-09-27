@@ -39359,7 +39359,7 @@ SHC_3BB0A8C1_0x004F8530 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004F85B0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004F8640 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F8640 | 40.0% | regalloc: extra edi
 
 SHC_3BB0A8C1_0x004F86D0 | 0.0% | Pending
 
