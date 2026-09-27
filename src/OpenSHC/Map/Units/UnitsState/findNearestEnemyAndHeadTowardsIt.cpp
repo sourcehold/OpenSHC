@@ -27,8 +27,8 @@ namespace Map {
         {
             int _microX = this->units[unitID].microXPosition;
             int _microY = this->units[unitID].microYPosition;
-            short _playerID = this->units[unitID].owner;
-            ushort _area = DAT_TileMapState::instance.PathConnectionLayer[this->units[unitID].tile];
+            int _playerID = this->units[unitID].owner;
+            int _area = DAT_TileMapState::instance.PathConnectionLayer[this->units[unitID].tile];
             this->unitDistanceComputationResultUnk = 100000;
             dword _minDistance = 100000;
             dword _chosenRawDistance = 0;
