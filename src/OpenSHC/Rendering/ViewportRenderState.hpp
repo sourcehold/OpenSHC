@@ -55,7 +55,7 @@ namespace Rendering {
         undefined4 translationTracker1; // 0x001899E4 length: 4
         undefined4 translationResult2; // 0x001899E8 length: 4
         Floater floatersArray[250]; // 0x001899EC length: 7000
-        undefined4 availableFloaterIndex; // 0x0018B544 length: 4
+        int availableFloaterIndex; // 0x0018B544 length: 4
         int landscapeAnimationRandomTileArray[45]; // 0x0018B548 length: 180
         byte landscapeAnimationValueArray[60]; // 0x0018B5FC length: 60
         int landscapeSeaWhiteCapsAnimationFrames[45]; // 0x0018B638 length: 180
@@ -78,17 +78,17 @@ namespace Rendering {
         int field55_0x18b764; // 0x0018B764 length: 4
         int unknownCounterUntil_0x10; // 0x0018B768 length: 4
         int unknownCounterUntil_0x200; // 0x0018B76C length: 4
-        undefined4 unitBatchedRenderCounterUntil6; // 0x0018B770 length: 4
+        int unitBatchedRenderCounterUntil6; // 0x0018B770 length: 4
         UnitRenderHelpStructure unitBatch1[500]; // 0x0018B774 length: 16000
         UnitRenderHelpStructure unitBatch2[500]; // 0x0018F5F4 length: 16000
         UnitRenderHelpStructure unitBatch3[500]; // 0x00193474 length: 16000
         UnitRenderHelpStructure unitBatch4[500]; // 0x001972F4 length: 16000
         UnitRenderHelpStructure unitBatch5[500]; // 0x0019B174 length: 16000
-        undefined4 unitRender1; // 0x0019EFF4 length: 4
-        undefined4 unitRender2; // 0x0019EFF8 length: 4
-        undefined4 unitRender3; // 0x0019EFFC length: 4
-        undefined4 unitRender4; // 0x0019F000 length: 4
-        undefined4 unitRender5; // 0x0019F004 length: 4
+        int unitRender1; // 0x0019EFF4 length: 4
+        int unitRender2; // 0x0019EFF8 length: 4
+        int unitRender3; // 0x0019EFFC length: 4
+        int unitRender4; // 0x0019F000 length: 4
+        int unitRender5; // 0x0019F004 length: 4
 
     private:
         ViewportRenderState(ViewportRenderState const&);
