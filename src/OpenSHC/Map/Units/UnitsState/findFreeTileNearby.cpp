@@ -96,8 +96,7 @@ namespace Map {
                     if (_checkX >= 400 || _checkY >= 400) {
                         continue;
                     }
-                    /* the 400x400 map of placeable tiles at 0x021AEC98 */
-                    if (*(char*)(_checkX + 0x21aec98 + _checkY * 400) == '\0') {
+                    if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[_checkX + _checkY * 400] == 0) {
                         continue;
                     }
                     int _checkTile = DAT_ViewportRenderState::instance.translationMatrix[_checkY].addXgetTile
@@ -121,8 +120,7 @@ namespace Map {
                     if (_checkX >= 400 || _checkY >= 400) {
                         continue;
                     }
-                    /* the 400x400 map of placeable tiles at 0x021AEC98 */
-                    if (*(char*)(_checkX + 0x21aec98 + _checkY * 400) == '\0') {
+                    if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[_checkX + _checkY * 400] == 0) {
                         continue;
                     }
                     int _checkTile = DAT_ViewportRenderState::instance.translationMatrix[_checkY].addXgetTile
@@ -146,8 +144,7 @@ namespace Map {
                     if (_checkX >= 400 || _checkY >= 400) {
                         continue;
                     }
-                    /* the 400x400 map of placeable tiles at 0x021AEC98 */
-                    if (*(char*)(_checkX + 0x21aec98 + _checkY * 400) == '\0') {
+                    if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[_checkX + _checkY * 400] == 0) {
                         continue;
                     }
                     int _checkTile = DAT_ViewportRenderState::instance.translationMatrix[_checkY].addXgetTile
@@ -171,8 +168,7 @@ namespace Map {
                     if (_checkX >= 400 || _checkY >= 400) {
                         continue;
                     }
-                    /* the 400x400 map of placeable tiles at 0x021AEC98 */
-                    if (*(char*)(_checkX + 0x21aec98 + _checkY * 400) == '\0') {
+                    if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[_checkX + _checkY * 400] == 0) {
                         continue;
                     }
                     int _checkTile = DAT_ViewportRenderState::instance.translationMatrix[_checkY].addXgetTile
