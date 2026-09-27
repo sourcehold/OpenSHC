@@ -50,42 +50,57 @@ namespace Map {
                 this->units[unitID].calculatedMovementSpeed = this->units[unitID].movementSpeed;
             } else if (this->units[unitID].terrainOrClimbHeight < (int)(uint)_tileHeight) {
                 int _heightDifference = (uint)_tileHeight - this->units[unitID].terrainOrClimbHeight;
-                if (_heightDifference > 0x10) {
+                /* the climb bands are split by halving, not as a flat ladder */
+                if (_heightDifference < 0x11) {
+                    if (_heightDifference < 0xc) {
+                        if (_heightDifference < 8) {
+                            if (_heightDifference < 4) {
+                                if (_heightDifference < 2) {
+                                    this->units[unitID].terrainOrClimbHeight
+                                        = this->units[unitID].terrainOrClimbHeight + 1;
+                                    this->units[unitID].calculatedMovementSpeed = this->units[unitID].movementSpeed;
+                                } else {
+                                    this->units[unitID].terrainOrClimbHeight
+                                        = this->units[unitID].terrainOrClimbHeight + 2;
+                                    this->units[unitID].calculatedMovementSpeed = this->units[unitID].movementSpeed + 1;
+                                }
+                            } else {
+                                this->units[unitID].terrainOrClimbHeight = this->units[unitID].terrainOrClimbHeight + 3;
+                                this->units[unitID].calculatedMovementSpeed = this->units[unitID].movementSpeed + 3;
+                            }
+                        } else {
+                            this->units[unitID].terrainOrClimbHeight = this->units[unitID].terrainOrClimbHeight + 4;
+                            this->units[unitID].calculatedMovementSpeed = this->units[unitID].movementSpeed + 4;
+                            this->units[unitID].movementRunUpTime = 8;
+                        }
+                    } else {
+                        this->units[unitID].terrainOrClimbHeight = this->units[unitID].terrainOrClimbHeight + 4;
+                        this->units[unitID].calculatedMovementSpeed = this->units[unitID].movementSpeed + 5;
+                        this->units[unitID].movementRunUpTime = 0xc;
+                    }
+                } else {
                     this->units[unitID].terrainOrClimbHeight = _tileHeight;
                     this->units[unitID].calculatedMovementSpeed = this->units[unitID].movementSpeed;
-                } else if (_heightDifference < 2) {
-                    this->units[unitID].terrainOrClimbHeight = this->units[unitID].terrainOrClimbHeight + 1;
-                    this->units[unitID].calculatedMovementSpeed = this->units[unitID].movementSpeed;
-                } else if (_heightDifference < 4) {
-                    this->units[unitID].calculatedMovementSpeed = this->units[unitID].movementSpeed + 1;
-                    this->units[unitID].terrainOrClimbHeight = this->units[unitID].terrainOrClimbHeight + 2;
-                } else if (_heightDifference < 8) {
-                    this->units[unitID].calculatedMovementSpeed = this->units[unitID].movementSpeed + 3;
-                    this->units[unitID].terrainOrClimbHeight = this->units[unitID].terrainOrClimbHeight + 3;
-                } else if (_heightDifference < 0xc) {
-                    this->units[unitID].calculatedMovementSpeed = this->units[unitID].movementSpeed + 4;
-                    this->units[unitID].terrainOrClimbHeight = this->units[unitID].terrainOrClimbHeight + 4;
-                    this->units[unitID].movementRunUpTime = 8;
-                } else {
-                    this->units[unitID].calculatedMovementSpeed = this->units[unitID].movementSpeed + 5;
-                    this->units[unitID].terrainOrClimbHeight = this->units[unitID].terrainOrClimbHeight + 4;
-                    this->units[unitID].movementRunUpTime = 0xc;
                 }
             } else if ((int)(uint)_tileHeight < this->units[unitID].terrainOrClimbHeight) {
                 int _heightDifference = this->units[unitID].terrainOrClimbHeight - (uint)_tileHeight;
                 if (_heightDifference > 0x10) {
                     this->units[unitID].terrainOrClimbHeight = _tileHeight;
                     this->units[unitID].calculatedMovementSpeed = this->units[unitID].movementSpeed;
-                } else if (_heightDifference < 4) {
-                    this->units[unitID].terrainOrClimbHeight = this->units[unitID].terrainOrClimbHeight - 1;
-                } else if (_heightDifference < 8) {
-                    this->units[unitID].terrainOrClimbHeight = this->units[unitID].terrainOrClimbHeight - 2;
-                    this->units[unitID].calculatedMovementSpeed = this->units[unitID].movementSpeed;
                 } else if (_heightDifference < 0xc) {
-                    this->units[unitID].terrainOrClimbHeight = this->units[unitID].terrainOrClimbHeight - 3;
-                    this->units[unitID].calculatedMovementSpeed = this->units[unitID].movementSpeed;
+                    if (_heightDifference < 8) {
+                        if (_heightDifference > 3) {
+                            this->units[unitID].terrainOrClimbHeight = this->units[unitID].terrainOrClimbHeight + -2;
+                            this->units[unitID].calculatedMovementSpeed = this->units[unitID].movementSpeed;
+                        } else {
+                            this->units[unitID].terrainOrClimbHeight = this->units[unitID].terrainOrClimbHeight + -1;
+                        }
+                    } else {
+                        this->units[unitID].terrainOrClimbHeight = this->units[unitID].terrainOrClimbHeight + -3;
+                        this->units[unitID].calculatedMovementSpeed = this->units[unitID].movementSpeed;
+                    }
                 } else {
-                    this->units[unitID].terrainOrClimbHeight = this->units[unitID].terrainOrClimbHeight - 4;
+                    this->units[unitID].terrainOrClimbHeight = this->units[unitID].terrainOrClimbHeight + -4;
                     this->units[unitID].calculatedMovementSpeed = this->units[unitID].movementSpeed;
                 }
             } else if (this->units[unitID].isSelectable_OR_matchTime == 0) {
