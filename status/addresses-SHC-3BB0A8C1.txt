@@ -50863,7 +50863,7 @@ SHC_3BB0A8C1_0x005351C0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00535200 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00535240 | 0.0% | Pending
+SHC_3BB0A8C1_0x00535240 | 35.1% | orig walks counter ptr
 
 SHC_3BB0A8C1_0x00535460 | 0.0% | Pending
 
