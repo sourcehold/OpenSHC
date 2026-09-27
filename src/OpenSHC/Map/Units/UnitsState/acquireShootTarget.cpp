@@ -87,7 +87,7 @@ namespace Map {
                  */
 
                 _entityType = 2;
-                if ((this->units[unitID].stoneAmmunition < 1)
+                if ((this->units[unitID].stoneAmmunition <= 0)
                     && (this->units[unitID].targetingType != OpenSHC::Map::Units::UIT_THROW_COW)) {
                     this->units[unitID].targetingType = OpenSHC::Map::Units::UIT_NO_INSTRUCTION_OR_MOVEUnk;
                     return FALSE;
@@ -99,7 +99,7 @@ namespace Map {
                  */
 
                 _entityType = 3;
-                if ((this->units[unitID].stoneAmmunition < 1)
+                if ((this->units[unitID].stoneAmmunition <= 0)
                     && (this->units[unitID].targetingType != OpenSHC::Map::Units::UIT_THROW_COW)) {
                     this->units[unitID].targetingType = OpenSHC::Map::Units::UIT_NO_INSTRUCTION_OR_MOVEUnk;
                     return FALSE;
@@ -182,7 +182,7 @@ namespace Map {
                             (int)((int)(*psVar2)), (int)((int)(*psVar1)),
                             (int)((int)(this->units[_0x04_targetUnitID].buildingHeight + 0x1a
                                 + this->units[_0x04_targetUnitID].terrainOrClimbHeight)));
-                        if (((_unitID < 1)
+                        if (((_unitID <= 0)
                                 || (UVar4 = this->units[unitID].unitType, UVar4 == OpenSHC::Map::Units::UT_S_MANGONEL))
                             || (UVar4 == OpenSHC::Map::Units::UT_S_BALLISTA)) {
                             if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_HUNTER) {
@@ -330,7 +330,7 @@ namespace Map {
                         case OpenSHC::Map::Units::UT_RABBIT:
                             _xDifferenceToTarget = (int)this->units[_unitID].tribeID;
                             if (((this->units[_unitID].unitType == OpenSHC::Map::Units::UT_HUNTER)
-                                    || (_xDifferenceToTarget < 1))
+                                    || (_xDifferenceToTarget <= 0))
                                 || (DAT_TribesState::instance.tribes[_xDifferenceToTarget].field71_0x212 == 0))
                                 continue;
                             break;
