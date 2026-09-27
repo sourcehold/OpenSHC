@@ -64,28 +64,28 @@ namespace Rendering {
         _imageID = 0;
         _blendStrength = 0;
         _gmID = 0;
-        if (5 < (int)this->unitBatchedRenderCounterUntil6) {
+        if (5 < this->unitBatchedRenderCounterUntil6) {
             this->unitBatchedRenderCounterUntil6 = 1;
         }
-        if ((int)this->unitBatchedRenderCounterUntil6 == 1) {
+        if (this->unitBatchedRenderCounterUntil6 == 1) {
             this->unitRender1 = 0;
             _renderBatchSize = renderCount1;
-        } else if ((int)this->unitBatchedRenderCounterUntil6 == 2) {
+        } else if (this->unitBatchedRenderCounterUntil6 == 2) {
             this->unitRender2 = 0;
             _renderBatchSize = renderCount2;
-        } else if ((int)this->unitBatchedRenderCounterUntil6 == 3) {
+        } else if (this->unitBatchedRenderCounterUntil6 == 3) {
             this->unitRender3 = 0;
             _renderBatchSize = renderCount3;
-        } else if ((int)this->unitBatchedRenderCounterUntil6 == 4) {
+        } else if (this->unitBatchedRenderCounterUntil6 == 4) {
             this->unitRender4 = 0;
             _renderBatchSize = renderCount4;
-        } else if ((int)this->unitBatchedRenderCounterUntil6 == 5) {
+        } else if (this->unitBatchedRenderCounterUntil6 == 5) {
             this->unitRender5 = 0;
             _renderBatchSize = renderCount5;
         }
         if (0 < _renderBatchSize) {
             for (int _batchedUnitID = 0; _batchedUnitID < _renderBatchSize; _batchedUnitID++) {
-                switch ((int)this->unitBatchedRenderCounterUntil6) {
+                switch (this->unitBatchedRenderCounterUntil6) {
                 case 1:
                     _unitID = this->unitBatch1[_batchedUnitID].unitIDOrStatus;
                     DAT_RenderedUnitOwner::instance = this->unitBatch1[_batchedUnitID].ownerColor;
