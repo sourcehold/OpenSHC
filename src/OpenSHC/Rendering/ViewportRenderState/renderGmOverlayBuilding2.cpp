@@ -31,25 +31,8 @@ namespace Rendering {
     using OpenSHC::Map::Buildings::BuildingTypeShort;
     using OpenSHC::UI::Enums::MenuViewType;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-
-    /*
-      WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
-     */
-
-    /*
-      WARNING: Enum "DPERRInt": Some values do not have unique names
-     */
-
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004E2AD0
     void ViewportRenderState::renderGmOverlayBuilding2(int buildingID, int screenX, int screenY, int tile)
-
     {
         BuildingTypeShort buildingType;
         uint animationTick;
@@ -664,7 +647,6 @@ namespace Rendering {
                 OpenSHC::UI::Rendering::TextureRenderCore_Func::restoreMapSurfaceHeightRangeFromTemporaryUnk,
                 DAT_TextureRenderCoreObject::ptr)();
         }
-        return;
     }
 
 }
