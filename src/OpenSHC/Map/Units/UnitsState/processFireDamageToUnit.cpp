@@ -21,7 +21,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00532460
         undefined4 UnitsState::processFireDamageToUnit(int unitID, int playerID, int halfTheDamage)
         {
-            if (unitID < 1) {
+            if (unitID <= 0) {
                 return 0;
             }
             if (this->units[unitID].dying != 0) {
@@ -46,7 +46,7 @@ namespace Map {
                 this->units[unitID].lastEncounteredEnemyUnitIDUnk = 0;
             }
             this->units[unitID].health = this->units[unitID].health - _damage;
-            if (this->units[unitID].health < 1) {
+            if (this->units[unitID].health <= 0) {
                 this->units[unitID].health = 0;
             }
             if (this->units[unitID].maxHealth == 0) {
