@@ -21,7 +21,7 @@ namespace Rendering {
         if (DAT_TileMapState::instance.FloatingLayer[tile] == 0) {
             this->floatersArray[newFloaterIndex].id = 0;
         } else {
-            uint idAtTile = DAT_TileMapState::instance.FloatingLayer[tile];
+            ushort idAtTile = DAT_TileMapState::instance.FloatingLayer[tile];
             uint floaterID = idAtTile;
             if (249 < floaterID) {
                 return;
