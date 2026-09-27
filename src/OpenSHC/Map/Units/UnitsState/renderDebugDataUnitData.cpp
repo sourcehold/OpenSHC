@@ -22,10 +22,10 @@ namespace Map {
         {
             int _selectedUnitID = this->lastSelectedUnitID;
             int _ownerID = this->units[_selectedUnitID].owner;
-            short _tribeID = this->units[_selectedUnitID].tribeID;
+            int _tribeID = this->units[_selectedUnitID].tribeID;
             int _lineY;
             int _column0 = x + 2;
-            if (_selectedUnitID < 1) {
+            if (_selectedUnitID <= 0) {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     (char*)s_Not_watching_a_chimp_005abde0, _column0, y, OpenSHC::Text::TTA_LEFT, 0xffffff, 0x12, FALSE,
                     0);

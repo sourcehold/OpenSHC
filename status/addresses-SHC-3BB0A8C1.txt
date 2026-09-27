@@ -59617,7 +59617,7 @@ SHC_3BB0A8C1_0x0053A4D0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0053A560 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0053A5B0 | 9.8% | reg alloc, this on stack
+SHC_3BB0A8C1_0x0053A5B0 | 11.4% | arg push scheduling
 
 SHC_3BB0A8C1_0x0053B1F0 | 0.0% | Pending
 
