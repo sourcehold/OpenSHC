@@ -60037,7 +60037,7 @@ SHC_3BB0A8C1_0x0053DCB4 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0053DCC0 | 14.9% | orig caches many locals
 
-SHC_3BB0A8C1_0x0053DDD0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053DDD0 | 65.5% | orig unrolls scan loop x4
 
 SHC_3BB0A8C1_0x0053E330 | 0.0% | Pending
 
