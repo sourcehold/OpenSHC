@@ -173,11 +173,11 @@ namespace Map {
                 }
                 _unitHeight = 42;
             }
-            if ((((_entityType == OpenSHC::Map::Entities::ET_TREBUCHET)
-                     || (_entityType == OpenSHC::Map::Entities::ET_CATAPULT))
-                    || (_entityType == OpenSHC::Map::Entities::ET_MANGONEL))
-                || ((_entityType == OpenSHC::Map::Entities::ET_BALLISTA
-                    || (_entityType == OpenSHC::Map::Entities::ET_FIREBALLISTA)))) {
+            if (_entityType == OpenSHC::Map::Entities::ET_TREBUCHET
+                || _entityType == OpenSHC::Map::Entities::ET_CATAPULT
+                || _entityType == OpenSHC::Map::Entities::ET_MANGONEL
+                || _entityType == OpenSHC::Map::Entities::ET_BALLISTA
+                || _entityType == OpenSHC::Map::Entities::ET_FIREBALLISTA) {
                 _siegeProjectile = 1;
             }
             short _unitPlayerID = this->units[unitID].owner;
@@ -194,7 +194,7 @@ namespace Map {
                                   || (_unitType == OpenSHC::Map::Units::UT_S_SHIELD))
                                  || (_unitType == OpenSHC::Map::Units::UT_S_TOWER))
                             || (_unitType == OpenSHC::Map::Units::UT_S_BATTERINGRAM))))))
-                || (this->units[unitID].dying != 0)) {
+                || this->units[unitID].dying != 0) {
                 return FALSE;
             }
             int _unitAltitude = (int)this->units[unitID].terrainOrClimbHeight + (int)this->units[unitID].buildingHeight;
@@ -311,8 +311,8 @@ namespace Map {
                 if (_entityType == OpenSHC::Map::Entities::ET_ARROW_AND_DEFAULT) {
                     _entityType_2 = this->units[unitID].unitType;
                     _damage = DAT_UnitPropertiesDefinedData::instance.ARROW_DAMAGE[(short)_entityType_2];
-                    if ((_entityType_2 == OpenSHC::Map::Units::UT_E_LADDER)
-                        && (this->units[unitID].state.generic == ((UnitState)3))) {
+                    if (_entityType_2 == OpenSHC::Map::Units::UT_E_LADDER
+                        && this->units[unitID].state.generic == (UnitState)3) {
                         _damage = (int)(_damage + (_damage >> 0x1f & 3U)) >> 2;
                     }
                 } else if (_entityType == OpenSHC::Map::Entities::ET_SLINGER) {
@@ -371,10 +371,9 @@ namespace Map {
             this->units[unitID].healthPercentage = _entityShootingUnitID;
             this->units[unitID].healthbar = (_entityShootingUnitID / 10 + (_entityShootingUnitID >> 0xf))
                 - (short)((longlong)(int)_entityShootingUnitID * 0x66666667 >> 0x3f);
-            if ((((_unitType == OpenSHC::Map::Units::UT_BREWER) || (_unitType == OpenSHC::Map::Units::UT_TANNER))
-                    || (_unitType == OpenSHC::Map::Units::UT_LADY))
-                || ((_unitType == OpenSHC::Map::Units::UT_MOTHER
-                    || ((_unitType == OpenSHC::Map::Units::UT_CHILD && (this->units[unitID].spriteID == 0x81)))))) {
+            if (_unitType == OpenSHC::Map::Units::UT_BREWER || _unitType == OpenSHC::Map::Units::UT_TANNER
+                || _unitType == OpenSHC::Map::Units::UT_LADY || _unitType == OpenSHC::Map::Units::UT_MOTHER
+                || (_unitType == OpenSHC::Map::Units::UT_CHILD && (this->units[unitID].spriteID == 0x81))) {
                 bVar4 = 1;
             }
             bool _shootingUnitID = this->units[_entityShootingUnitID_2].unitType == OpenSHC::Map::Units::UT_A_SLINGER;
