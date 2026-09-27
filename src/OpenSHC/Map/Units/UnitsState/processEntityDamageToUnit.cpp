@@ -17,6 +17,7 @@
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_SFXState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
 #include "OpenSHC/Globals/DAT_UnitPropertiesDefinedData.hpp"
 
@@ -37,22 +38,18 @@ namespace Map {
 
         {
             short sVar3;
-            bool bVar4;
+            int bVar4;
             int _cowDiseaseDamage;
-            int _healthPercentage;
-            int _unitAltitude;
-            int _healthPercentage_2;
             uint uVar5;
             int _entityShootingUnitID_2;
             int _unitHeight;
             int _damage;
             eSFX sfxOffsetInArray;
-            bool _siegeProjectile;
+            int _siegeProjectile;
             short _entityShootingUnitID;
             EntityTypeShort _entityType;
             UnitTypeShort _entityType_2;
-            int* _unitHealth_ptr;
-            bool _unitIsSiegeEngine;
+            int _unitIsSiegeEngine;
 
             /*
               unclear what it does, but this function removes health from a unit, ranged
@@ -60,13 +57,13 @@ namespace Map {
              */
 
             int _unknown = (int)this->units[unitID].tribeID;
-            _unitIsSiegeEngine = false;
-            _siegeProjectile = false;
-            bVar4 = false;
+            _unitIsSiegeEngine = 0;
+            _siegeProjectile = 0;
+            bVar4 = 0;
             UnitTypeShort _unitType = this->units[unitID].unitType;
             _entityShootingUnitID = DAT_EntityState::instance.entityArray[entityID].unitID_OR_seaGullID;
             _entityShootingUnitID_2 = (int)_entityShootingUnitID;
-            if (unitID < 1) {
+            if (unitID <= 0) {
                 return FALSE;
             }
             if (_entityShootingUnitID_2 == unitID) {
@@ -87,7 +84,7 @@ namespace Map {
                 if (this->units[unitID].dying != 0) {
                     return FALSE;
                 }
-                _entityShootingUnitID_2 = this->units[unitID].tile;
+                _entityShootingUnitID_2 = DAT_UnitsState::instance.units[unitID].tile;
                 /*
                   if the tile that the unit is on has some properties, don't bother either.
                  */
@@ -144,8 +141,7 @@ namespace Map {
                     /* * 80 */
                     _cowDiseaseDamage = (_cowDiseaseDamage * 0x50) / 100;
                 }
-                _unitHealth_ptr = &this->units[unitID].health;
-                *_unitHealth_ptr = *_unitHealth_ptr - _cowDiseaseDamage;
+                this->units[unitID].health = this->units[unitID].health - _cowDiseaseDamage;
                 if (this->units[unitID].health < 1) {
                     this->units[unitID].health = 0;
                     this->units[unitID].dying = 1;
@@ -153,7 +149,7 @@ namespace Map {
                     this->units[unitID].state.generic = OpenSHC::Map::Units::States::US_STONE_DEATH_02;
                     this->units[unitID].tunnelerFinishedDigging = 1;
                 }
-                _healthPercentage
+                int _healthPercentage
                     = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::computeHealthPercentage,
                         DAT_DirectionAlgorithmState::ptr)(this->units[unitID].health, this->units[unitID].maxHealth);
                 this->units[unitID].healthPercentage = (short)_healthPercentage;
@@ -162,26 +158,26 @@ namespace Map {
             }
             if (_unitType == OpenSHC::Map::Units::UT_S_TREBUCHET) {
                 _unitHeight = (-(uint)(tileDistance != 0) & 0xffffffd8) + 0x50;
-                _unitIsSiegeEngine = true;
+                _unitIsSiegeEngine = 1;
             } else if (_unitType == OpenSHC::Map::Units::UT_S_TOWER) {
                 _unitHeight = 0x50;
-                _unitIsSiegeEngine = true;
+                _unitIsSiegeEngine = 1;
             } else if (_unitType == OpenSHC::Map::Units::UT_S_CATAPULT) {
                 _unitHeight = 0x32;
-                _unitIsSiegeEngine = true;
+                _unitIsSiegeEngine = 1;
             } else if (_unitType == OpenSHC::Map::Units::UT_S_SHIELD) {
                 _unitHeight = 0x5a;
-                _unitIsSiegeEngine = true;
+                _unitIsSiegeEngine = 1;
             } else if (_unitType == OpenSHC::Map::Units::UT_S_BATTERINGRAM) {
                 _unitHeight = 0x28;
-                _unitIsSiegeEngine = true;
+                _unitIsSiegeEngine = 1;
             } else if (_unitType == OpenSHC::Map::Units::UT_S_MANGONEL) {
                 _unitHeight = 0x46;
-                _unitIsSiegeEngine = true;
+                _unitIsSiegeEngine = 1;
             } else {
                 if ((_unitType == OpenSHC::Map::Units::UT_S_BALLISTA)
                     || (_unitType == OpenSHC::Map::Units::UT_S_FBALLISTA)) {
-                    _unitIsSiegeEngine = true;
+                    _unitIsSiegeEngine = 1;
                 }
                 _unitHeight = 42;
             }
@@ -190,7 +186,7 @@ namespace Map {
                     || (_entityType == OpenSHC::Map::Entities::ET_MANGONEL))
                 || ((_entityType == OpenSHC::Map::Entities::ET_BALLISTA
                     || (_entityType == OpenSHC::Map::Entities::ET_FIREBALLISTA)))) {
-                _siegeProjectile = true;
+                _siegeProjectile = 1;
             }
             short _unitPlayerID = this->units[unitID].owner;
             short _entityPlayerID = DAT_EntityState::instance.entityArray[entityID].owner;
@@ -209,7 +205,7 @@ namespace Map {
                 || (this->units[unitID].dying != 0)) {
                 return FALSE;
             }
-            _unitAltitude = (int)this->units[unitID].terrainOrClimbHeight + (int)this->units[unitID].buildingHeight;
+            int _unitAltitude = (int)this->units[unitID].terrainOrClimbHeight + (int)this->units[unitID].buildingHeight;
             _damage = (int)DAT_EntityState::instance.entityArray[entityID].height;
             if (_damage < _unitAltitude) {
                 return FALSE;
@@ -352,8 +348,7 @@ namespace Map {
                     _damage = _damage / 3;
                 }
             }
-            _unitHealth_ptr = &this->units[unitID].health;
-            *_unitHealth_ptr = *_unitHealth_ptr - _damage;
+            this->units[unitID].health = this->units[unitID].health - _damage;
             if (this->units[unitID].health < 1) {
                 this->units[unitID].health = 0;
             }
@@ -377,7 +372,7 @@ namespace Map {
                     = this->units[_entityShootingUnitID_2].uid;
             }
             int _unitHealth = this->units[unitID].health;
-            _healthPercentage_2
+            int _healthPercentage_2
                 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::computeHealthPercentage,
                     DAT_DirectionAlgorithmState::ptr)(_unitHealth, this->units[unitID].maxHealth);
             _entityShootingUnitID = (short)_healthPercentage_2;
@@ -388,7 +383,7 @@ namespace Map {
                     || (_unitType == OpenSHC::Map::Units::UT_LADY))
                 || ((_unitType == OpenSHC::Map::Units::UT_MOTHER
                     || ((_unitType == OpenSHC::Map::Units::UT_CHILD && (this->units[unitID].spriteID == 0x81)))))) {
-                bVar4 = true;
+                bVar4 = 1;
             }
             bool _shootingUnitID = this->units[_entityShootingUnitID_2].unitType == OpenSHC::Map::Units::UT_A_SLINGER;
             if ((_unitHealth < 1) && (this->units[unitID].dying == 0)) {
