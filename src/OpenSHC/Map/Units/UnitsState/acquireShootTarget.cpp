@@ -138,75 +138,78 @@ namespace Map {
 
                 sVar9 = this->units[unitID].targetedUnitID__OR__engineerMannedSiegeEngineRef;
                 int _0x04_targetUnitID = (int)sVar9;
-                if (((((this->units[_0x04_targetUnitID].uid
-                           == this->units[unitID]
-                               .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID)
-                          && (this->units[_0x04_targetUnitID].dying == 0))
-                         && (this->units[_0x04_targetUnitID].logicalState == OpenSHC::Map::Units::ULS_NORMAL))
-                        && ((BVar6 = MACRO_CALL_MEMBER(
-                                 OpenSHC::Map::Units::UnitsState_Func::checkIfCitizenUnitIsAliveBasedOnState, this)(
-                                 _0x04_targetUnitID),
-                            BVar6 == FALSE
-                                && (this->units[_0x04_targetUnitID].state.generic
-                                    != (OpenSHC::Map::Units::States::US_STONE_DEATH_03
-                                        | OpenSHC::Map::Units::States::US_IDLEUnk)))))
-                    && (DAT_GameState::instance.mapAndTime.playerTeams[this->units[_0x04_targetUnitID].owner]
-                        != DAT_GameState::instance.mapAndTime.playerTeams[_unitPlayerID])) {
-                    int _0x04_yDifference = ((int)(_microYUnit + (_microYUnit >> 0x1f & 7U)) >> 3)
-                        - ((int)((int)this->units[_0x04_targetUnitID].microYPosition
-                               + ((int)this->units[_0x04_targetUnitID].microYPosition >> 0x1f & 7U))
-                            >> 3);
-                    _xDifferenceToTarget = ((int)(_microXUnit + (_microXUnit >> 0x1f & 7U)) >> 3)
-                        - ((int)((int)this->units[_0x04_targetUnitID].microXPosition
-                               + ((int)this->units[_0x04_targetUnitID].microXPosition >> 0x1f & 7U))
-                            >> 3);
-                    if (_xDifferenceToTarget * _xDifferenceToTarget + _0x04_yDifference * _0x04_yDifference
-                        <= _rangeSquared) {
-                        int _shootDistanceScore
-                            = MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::arrowShootingRelated,
-                                DAT_EntityState::ptr)(_microXUnit, _microYUnit, _unitTotalHeight + 0x1e,
-                                (int)(this->units[_0x04_targetUnitID].microXPosition),
-                                (int)(this->units[_0x04_targetUnitID].microYPosition),
-                                (int)(this->units[_0x04_targetUnitID].buildingHeight + 0x1a
-                                    + this->units[_0x04_targetUnitID].terrainOrClimbHeight));
-                        if (((_shootDistanceScore <= 0)
-                                || (UVar4 = this->units[unitID].unitType, UVar4 == OpenSHC::Map::Units::UT_S_MANGONEL))
-                            || (UVar4 == OpenSHC::Map::Units::UT_S_BALLISTA)) {
-                            if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_HUNTER) {
-                                return FALSE;
+                if (this->units[_0x04_targetUnitID].uid
+                        == this->units[unitID]
+                            .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID
+                    && this->units[_0x04_targetUnitID].dying == 0
+                    && this->units[_0x04_targetUnitID].logicalState == OpenSHC::Map::Units::ULS_NORMAL) {
+                    BVar6
+                        = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::checkIfCitizenUnitIsAliveBasedOnState,
+                            this)(_0x04_targetUnitID);
+                    if (BVar6 == FALSE
+                        && this->units[_0x04_targetUnitID].state.generic
+                            != (OpenSHC::Map::Units::States::US_STONE_DEATH_03
+                                | OpenSHC::Map::Units::States::US_IDLEUnk)
+                        && DAT_GameState::instance.mapAndTime.playerTeams[this->units[_0x04_targetUnitID].owner]
+                            != DAT_GameState::instance.mapAndTime.playerTeams[_unitPlayerID]) {
+                        int _0x04_yDifference = ((int)(_microYUnit + (_microYUnit >> 0x1f & 7U)) >> 3)
+                            - ((int)((int)this->units[_0x04_targetUnitID].microYPosition
+                                   + ((int)this->units[_0x04_targetUnitID].microYPosition >> 0x1f & 7U))
+                                >> 3);
+                        _xDifferenceToTarget = ((int)(_microXUnit + (_microXUnit >> 0x1f & 7U)) >> 3)
+                            - ((int)((int)this->units[_0x04_targetUnitID].microXPosition
+                                   + ((int)this->units[_0x04_targetUnitID].microXPosition >> 0x1f & 7U))
+                                >> 3);
+                        if (_xDifferenceToTarget * _xDifferenceToTarget + _0x04_yDifference * _0x04_yDifference
+                            <= _rangeSquared) {
+                            int _shootDistanceScore
+                                = MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::arrowShootingRelated,
+                                    DAT_EntityState::ptr)(_microXUnit, _microYUnit, _unitTotalHeight + 0x1e,
+                                    (int)(this->units[_0x04_targetUnitID].microXPosition),
+                                    (int)(this->units[_0x04_targetUnitID].microYPosition),
+                                    (int)(this->units[_0x04_targetUnitID].buildingHeight + 0x1a
+                                        + this->units[_0x04_targetUnitID].terrainOrClimbHeight));
+                            if (((_shootDistanceScore <= 0)
+                                    || (UVar4 = this->units[unitID].unitType,
+                                        UVar4 == OpenSHC::Map::Units::UT_S_MANGONEL))
+                                || (UVar4 == OpenSHC::Map::Units::UT_S_BALLISTA)) {
+                                if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_HUNTER) {
+                                    return FALSE;
+                                }
+                                this->units[unitID].shootTargetedUnit = -2;
+                                this->units[unitID].shootTargetMicroX = this->units[_0x04_targetUnitID].microXPosition;
+                                this->units[unitID].shootTargetMicroY = this->units[_0x04_targetUnitID].microYPosition;
+                                this->units[unitID].shootTargetZ = this->units[_0x04_targetUnitID].terrainOrClimbHeight;
+                                return TRUE;
                             }
-                            this->units[unitID].shootTargetedUnit = -2;
+                            this->units[unitID].shootTargetedUnit = sVar9;
+                            this->units[unitID].targetUID = this->units[_0x04_targetUnitID].uid;
+                            this->units[unitID].distanceToEnemyUnitLadders = (short)_shootDistanceScore;
                             this->units[unitID].shootTargetMicroX = this->units[_0x04_targetUnitID].microXPosition;
                             this->units[unitID].shootTargetMicroY = this->units[_0x04_targetUnitID].microYPosition;
                             this->units[unitID].shootTargetZ = this->units[_0x04_targetUnitID].terrainOrClimbHeight;
-                            return TRUE;
-                        }
-                        this->units[unitID].shootTargetedUnit = sVar9;
-                        this->units[unitID].targetUID = this->units[_0x04_targetUnitID].uid;
-                        this->units[unitID].distanceToEnemyUnitLadders = (short)_shootDistanceScore;
-                        this->units[unitID].shootTargetMicroX = this->units[_0x04_targetUnitID].microXPosition;
-                        this->units[unitID].shootTargetMicroY = this->units[_0x04_targetUnitID].microYPosition;
-                        this->units[unitID].shootTargetZ = this->units[_0x04_targetUnitID].terrainOrClimbHeight;
-                        if (100 < _shootDistanceScore) {
-                            this->units[unitID].jugglerCount = 0;
+                            if (100 < _shootDistanceScore) {
+                                this->units[unitID].jugglerCount = 0;
+                                this->units[_0x04_targetUnitID].field233_0x39a = 1;
+                                return TRUE;
+                            }
+                            int _targetTotalHeight = (int)this->units[_0x04_targetUnitID].terrainOrClimbHeight
+                                + (int)this->units[_0x04_targetUnitID].buildingHeight;
+                            _unitPlayerID = (int)this->units[unitID].buildingHeight
+                                + (int)this->units[unitID].terrainOrClimbHeight;
+                            if (_targetTotalHeight + 0x46 < _unitPlayerID) {
+                                this->units[unitID].jugglerCount = 1;
+                                this->units[_0x04_targetUnitID].field233_0x39a = 1;
+                                return TRUE;
+                            }
+                            this->units[unitID].jugglerCount = (_targetTotalHeight + -0x46 <= _unitPlayerID) - 1;
                             this->units[_0x04_targetUnitID].field233_0x39a = 1;
                             return TRUE;
                         }
-                        int _targetTotalHeight = (int)this->units[_0x04_targetUnitID].terrainOrClimbHeight
-                            + (int)this->units[_0x04_targetUnitID].buildingHeight;
-                        _unitPlayerID
-                            = (int)this->units[unitID].buildingHeight + (int)this->units[unitID].terrainOrClimbHeight;
-                        if (_targetTotalHeight + 0x46 < _unitPlayerID) {
-                            this->units[unitID].jugglerCount = 1;
-                            this->units[_0x04_targetUnitID].field233_0x39a = 1;
-                            return TRUE;
+                        if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[this->units[unitID].owner]
+                            != -1) {
+                            return FALSE;
                         }
-                        this->units[unitID].jugglerCount = (_targetTotalHeight + -0x46 <= _unitPlayerID) - 1;
-                        this->units[_0x04_targetUnitID].field233_0x39a = 1;
-                        return TRUE;
-                    }
-                    if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[this->units[unitID].owner] != -1) {
-                        return FALSE;
                     }
                 }
                 /*
