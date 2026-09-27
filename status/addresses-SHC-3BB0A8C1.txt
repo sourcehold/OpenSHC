@@ -41443,7 +41443,7 @@ SHC_3BB0A8C1_0x00500500 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x005005F0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00500640 | 0.0% | Pending
+SHC_3BB0A8C1_0x00500640 | 46.1% | ecx not kept across callee
 
 SHC_3BB0A8C1_0x00500680 | 100.0% | Reimplemented
 
