@@ -14,7 +14,7 @@ namespace Rendering {
         if (tile < 0) {
             return;
         }
-        if (250 <= (int)this->availableFloaterIndex) {
+        if (250 <= this->availableFloaterIndex) {
             return;
         }
 
