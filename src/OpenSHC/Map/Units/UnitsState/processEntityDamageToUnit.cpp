@@ -17,9 +17,9 @@
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_SFXState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
-#include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
 #include "OpenSHC/Globals/DAT_UnitPropertiesDefinedData.hpp"
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -37,19 +37,11 @@ namespace Map {
         BOOLEnum UnitsState::processEntityDamageToUnit(int unitID, int entityID, int tileDistance)
 
         {
-            short sVar3;
-            int bVar4;
             int _cowDiseaseDamage;
             uint uVar5;
-            int _entityShootingUnitID_2;
             int _unitHeight;
-            int _damage;
             eSFX sfxOffsetInArray;
-            int _siegeProjectile;
-            short _entityShootingUnitID;
-            EntityTypeShort _entityType;
             UnitTypeShort _entityType_2;
-            int _unitIsSiegeEngine;
 
             /*
               unclear what it does, but this function removes health from a unit, ranged
@@ -57,19 +49,19 @@ namespace Map {
              */
 
             int _unknown = (int)this->units[unitID].tribeID;
-            _unitIsSiegeEngine = 0;
-            _siegeProjectile = 0;
-            bVar4 = 0;
+            int _unitIsSiegeEngine = 0;
+            int _siegeProjectile = 0;
+            int bVar4 = 0;
             UnitTypeShort _unitType = this->units[unitID].unitType;
-            _entityShootingUnitID = DAT_EntityState::instance.entityArray[entityID].unitID_OR_seaGullID;
-            _entityShootingUnitID_2 = (int)_entityShootingUnitID;
+            short _entityShootingUnitID = DAT_EntityState::instance.entityArray[entityID].unitID_OR_seaGullID;
+            int _entityShootingUnitID_2 = (int)_entityShootingUnitID;
             if (unitID <= 0) {
                 return FALSE;
             }
             if (_entityShootingUnitID_2 == unitID) {
                 return FALSE;
             }
-            _entityType = DAT_EntityState::instance.entityArray[entityID].entityType;
+            EntityTypeShort _entityType = DAT_EntityState::instance.entityArray[entityID].entityType;
             if (_entityType == OpenSHC::Map::Entities::ET_FIRE) {
                 return FALSE;
             }
@@ -206,7 +198,7 @@ namespace Map {
                 return FALSE;
             }
             int _unitAltitude = (int)this->units[unitID].terrainOrClimbHeight + (int)this->units[unitID].buildingHeight;
-            _damage = (int)DAT_EntityState::instance.entityArray[entityID].height;
+            int _damage = (int)DAT_EntityState::instance.entityArray[entityID].height;
             if (_damage < _unitAltitude) {
                 return FALSE;
             }
@@ -353,7 +345,7 @@ namespace Map {
                 this->units[unitID].health = 0;
             }
             if (_entityShootingUnitID_2 != 0) {
-                sVar3 = this->units[unitID].field97_0xd0;
+                short sVar3 = this->units[unitID].field97_0xd0;
                 if (sVar3 < 1000) {
                     this->units[unitID].field97_0xd0 = sVar3 + 200;
                 }
