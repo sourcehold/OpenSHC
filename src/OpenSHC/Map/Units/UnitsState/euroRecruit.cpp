@@ -74,7 +74,7 @@ namespace Map {
             if (_horseResource == -1) {
                 MACRO_CALL_MEMBER(
                     OpenSHC::Game::GameStateStructures_Func::recountStablesAndHorses, DAT_GameState::ptr)();
-                if (DAT_GameState::instance.playerDataArray[playerID].availableHorses < 1) {
+                if (DAT_GameState::instance.playerDataArray[playerID].availableHorses <= 0) {
                     this->euroUnitAcquisitionFailReason = 4;
                     return 0;
                 }
