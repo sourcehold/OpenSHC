@@ -31,32 +31,21 @@ namespace Map {
 
         {
             UnitTypeShort UVar4;
-            short sVar5;
-            int _unitTotalHeight;
-            int _rangeSquared;
             BOOLEnum BVar6;
-            int iVar7;
             short sVar9;
             int _xDifferenceToTarget;
-            int _0x04_yDifference;
-            int _yDifferenceToTarget;
             int _entityType;
-            int local_30;
-            int local_2c;
-            int _validTargetID;
-            int local_10;
-            int local_c;
-            int local_8;
             int _unitPlayerID = (int)this->units[unitID].owner;
             int _microXUnit = (int)this->units[unitID].microXPosition;
             int _microYUnit = (int)this->units[unitID].microYPosition;
-            _unitTotalHeight = (int)this->units[unitID].buildingHeight + (int)this->units[unitID].terrainOrClimbHeight;
-            _validTargetID = 0;
-            local_30 = 100000;
-            local_8 = 0;
-            local_2c = 100000;
-            local_10 = 0;
-            local_c = 0;
+            int _unitTotalHeight
+                = (int)this->units[unitID].buildingHeight + (int)this->units[unitID].terrainOrClimbHeight;
+            int _validTargetID = 0;
+            int local_30 = 100000;
+            int local_8 = 0;
+            int local_2c = 100000;
+            int local_10 = 0;
+            int local_c = 0;
             /*
               switch based on unit type
              */
@@ -135,7 +124,7 @@ namespace Map {
 
                 _entityType = 0x25;
             }
-            _rangeSquared = DAT_EntityDefinedData::instance.EntityTypeArrayForProjectileRange[_entityType]
+            int _rangeSquared = DAT_EntityDefinedData::instance.EntityTypeArrayForProjectileRange[_entityType]
                 * DAT_EntityDefinedData::instance.EntityTypeArrayForProjectileRange[_entityType];
             /*
               fetch attacking explicitness
@@ -163,7 +152,7 @@ namespace Map {
                                         | OpenSHC::Map::Units::States::US_IDLEUnk)))))
                     && (DAT_GameState::instance.mapAndTime.playerTeams[this->units[_0x04_targetUnitID].owner]
                         != DAT_GameState::instance.mapAndTime.playerTeams[_unitPlayerID])) {
-                    _0x04_yDifference = ((int)(_microYUnit + (_microYUnit >> 0x1f & 7U)) >> 3)
+                    int _0x04_yDifference = ((int)(_microYUnit + (_microYUnit >> 0x1f & 7U)) >> 3)
                         - ((int)((int)this->units[_0x04_targetUnitID].microYPosition
                                + ((int)this->units[_0x04_targetUnitID].microYPosition >> 0x1f & 7U))
                             >> 3);
@@ -346,8 +335,8 @@ namespace Map {
                                 continue;
                         }
                         _xDifferenceToTarget = (int)this->units[_enemy].microYPosition;
-                        iVar7 = (int)this->units[_enemy].microXPosition;
-                        _yDifferenceToTarget = ((int)(_microYUnit + (_microYUnit >> 0x1f & 7U)) >> 3)
+                        int iVar7 = (int)this->units[_enemy].microXPosition;
+                        int _yDifferenceToTarget = ((int)(_microYUnit + (_microYUnit >> 0x1f & 7U)) >> 3)
                             - ((int)(_xDifferenceToTarget + (_xDifferenceToTarget >> 0x1f & 7U)) >> 3);
                         _xDifferenceToTarget = ((int)(_microXUnit + (_microXUnit >> 0x1f & 7U)) >> 3)
                             - ((int)(iVar7 + (iVar7 >> 0x1f & 7U)) >> 3);
@@ -583,7 +572,7 @@ namespace Map {
                     return TRUE;
                 }
                 sVar9 = this->units[unitID].attackAtTileY;
-                sVar5 = this->units[unitID].attackAtTileX;
+                short sVar5 = this->units[unitID].attackAtTileX;
                 this->units[unitID].jugglerCount = -1;
                 BVar6 = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
                     DAT_ViewportRenderState::ptr)((int)sVar5, (uint)((int)((int)sVar9)));
