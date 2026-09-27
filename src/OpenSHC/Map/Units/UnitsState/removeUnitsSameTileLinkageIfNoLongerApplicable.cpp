@@ -10,7 +10,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0052F730
         void UnitsState::removeUnitsSameTileLinkageIfNoLongerApplicable()
         {
-            if (DAT_GameState::instance.mapAndTime.multiplayerUnitSameTileLinkageTimeWindow < 1) {
+            if (DAT_GameState::instance.mapAndTime.multiplayerUnitSameTileLinkageTimeWindow <= 0) {
                 DAT_GameState::instance.mapAndTime.multiplayerUnitSameTileLinkageTimeWindow = 0;
                 return;
             }
