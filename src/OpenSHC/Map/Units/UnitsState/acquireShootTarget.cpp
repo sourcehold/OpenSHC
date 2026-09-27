@@ -307,9 +307,11 @@ namespace Map {
                     }
                     for (int local_24 = 0; local_24 < DAT_GameState::instance.playerDataArray[_unitPlayerID].enemies;
                         local_24 = local_24 + 1) {
-                        int _enemy = (int)*(short*)(_unitPlayerID * 0x39f4 + 0x115caf8 + local_24 * 2);
+                        int _enemy = DAT_GameState::instance.playerDataArray[_unitPlayerID].enemyIDArray[local_24];
                         if ((this->units[_enemy].dying != 0)
-                            || (this->units[_enemy].uid != *(int*)(_unitPlayerID * 10000 + 0x11a66f0 + local_24 * 4)))
+                            || (this->units[_enemy].uid
+                                != DAT_GameState::instance.mapAndTime
+                                    .playerEnemenyUnitUIDShortList[_unitPlayerID][local_24]))
                             continue;
                         switch (this->units[_enemy].unitType) {
                         case OpenSHC::Map::Units::UT_ANTELOPESHDEER:
