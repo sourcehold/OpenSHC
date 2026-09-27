@@ -14,7 +14,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00537D60
         undefined4 UnitsState::tryAttackUnitID(int unitID_1, int unitID_2)
         {
-            if (unitID_2 < 1) {
+            if (unitID_2 <= 0) {
                 return 0;
             }
             if (this->units[unitID_1].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {

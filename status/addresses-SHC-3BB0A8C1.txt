@@ -51257,7 +51257,7 @@ SHC_3BB0A8C1_0x00537C10 | 48.5% | orig walks unit ptr
 
 SHC_3BB0A8C1_0x00537C90 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00537D60 | 14.6% | orig uses global instance
+SHC_3BB0A8C1_0x00537D60 | 48.7% | reg alloc
 
 SHC_3BB0A8C1_0x00537E00 | 35.2% | orig has 2 separate loops
 
