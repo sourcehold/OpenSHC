@@ -61405,7 +61405,7 @@ SHC_3BB0A8C1_0x00549B24 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00549B30 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00549C70 | 20.3% | orig shares melee tail
+SHC_3BB0A8C1_0x00549C70 | 29.2% | mask reg alloc, frame ptr
 
 SHC_3BB0A8C1_0x0054A770 | 100.0% | Reimplemented
 

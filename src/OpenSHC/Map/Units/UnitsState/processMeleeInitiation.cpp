@@ -75,55 +75,49 @@ namespace Map {
                     _hasEnemyOnOwnTile = 0;
                     _teamBitFlags = MACRO_CALL_MEMBER(
                         OpenSHC::Game::GameStateStructures_Func::teamToBitFlagsUnk, DAT_GameState::ptr)(unitID);
-                    DAT_TileMapState::instance.field213_0x554a48 = 0;
+                    uint _enemyNeighbourFlags = 0;
                     if ((*(uint*)((uchar*)DAT_TileMapState::instance.ptr_OccupancyLayer
                              + DAT_TileMapState::instance.DAT_SomeTile + 1)
                             & _teamBitFlags)
                         != 0) {
-                        DAT_TileMapState::instance.field213_0x554a48 = 0x20;
+                        _enemyNeighbourFlags = 0x20;
                     }
                     if ((*(uint*)((uchar*)DAT_TileMapState::instance.ptr_OccupancyLayer
                              + DAT_TileMapState::instance.DAT_SomeTile + -1)
                             & _teamBitFlags)
                         != 0) {
-                        DAT_TileMapState::instance.field213_0x554a48 = DAT_TileMapState::instance.field213_0x554a48 | 2;
+                        _enemyNeighbourFlags = _enemyNeighbourFlags | 2;
                     }
                     if ((*(uint*)((uchar*)DAT_TileMapState::instance.ptr_OccupancyLayer
                              + DAT_TileMapState::instance.DAT_SomeTile + 2)
                             & _teamBitFlags)
                         != 0) {
-                        DAT_TileMapState::instance.field213_0x554a48
-                            = DAT_TileMapState::instance.field213_0x554a48 | 0x80000;
+                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x80000;
                     }
                     if ((*(uint*)((uchar*)DAT_TileMapState::instance.ptr_OccupancyLayer
                              + DAT_TileMapState::instance.DAT_SomeTile + -2)
                             & _teamBitFlags)
                         != 0) {
-                        DAT_TileMapState::instance.field213_0x554a48
-                            = DAT_TileMapState::instance.field213_0x554a48 | 0x800;
+                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x800;
                     }
                     _occupancyRow = (uint*)((uchar*)DAT_TileMapState::instance.ptr_OccupancyLayer
                         + *(int*)((uchar*)DAT_TileMapState::instance.ptr_MovementDirectionTranslationMatrix
                             + DAT_TileMapState::instance.DAT_SomeY * 0x20)
                         + DAT_TileMapState::instance.DAT_SomeTile);
                     if ((*(uint*)((int)_occupancyRow + -1) & _teamBitFlags) != 0) {
-                        DAT_TileMapState::instance.field213_0x554a48 = DAT_TileMapState::instance.field213_0x554a48 | 1;
+                        _enemyNeighbourFlags = _enemyNeighbourFlags | 1;
                     }
                     if ((*(uint*)((int)_occupancyRow + 1) & _teamBitFlags) != 0) {
-                        DAT_TileMapState::instance.field213_0x554a48
-                            = DAT_TileMapState::instance.field213_0x554a48 | 0x40;
+                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x40;
                     }
                     if ((*_occupancyRow & _teamBitFlags) != 0) {
-                        DAT_TileMapState::instance.field213_0x554a48
-                            = DAT_TileMapState::instance.field213_0x554a48 | 0x80;
+                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x80;
                     }
                     if ((*(uint*)((int)_occupancyRow + -2) & _teamBitFlags) != 0) {
-                        DAT_TileMapState::instance.field213_0x554a48
-                            = DAT_TileMapState::instance.field213_0x554a48 | 0x400;
+                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x400;
                     }
                     if ((*(uint*)((int)_occupancyRow + 2) & _teamBitFlags) != 0) {
-                        DAT_TileMapState::instance.field213_0x554a48
-                            = DAT_TileMapState::instance.field213_0x554a48 | 0x100000;
+                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x100000;
                     }
                     _occupancyRow = (uint*)((uchar*)DAT_TileMapState::instance.ptr_OccupancyLayer
                         + *(int*)((int)((uchar*)DAT_TileMapState::instance.ptr_MovementDirectionTranslationMatrix
@@ -131,22 +125,19 @@ namespace Map {
                             + 0x10)
                         + DAT_TileMapState::instance.DAT_SomeTile);
                     if ((*(uint*)((int)_occupancyRow + -1) & _teamBitFlags) != 0) {
-                        DAT_TileMapState::instance.field213_0x554a48 = DAT_TileMapState::instance.field213_0x554a48 | 4;
+                        _enemyNeighbourFlags = _enemyNeighbourFlags | 4;
                     }
                     if ((*(uint*)((int)_occupancyRow + 1) & _teamBitFlags) != 0) {
-                        DAT_TileMapState::instance.field213_0x554a48
-                            = DAT_TileMapState::instance.field213_0x554a48 | 0x10;
+                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x10;
                     }
                     if ((*_occupancyRow & _teamBitFlags) != 0) {
-                        DAT_TileMapState::instance.field213_0x554a48 = DAT_TileMapState::instance.field213_0x554a48 | 8;
+                        _enemyNeighbourFlags = _enemyNeighbourFlags | 8;
                     }
                     if ((*(uint*)((int)_occupancyRow + -2) & _teamBitFlags) != 0) {
-                        DAT_TileMapState::instance.field213_0x554a48
-                            = DAT_TileMapState::instance.field213_0x554a48 | 0x1000;
+                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x1000;
                     }
                     if ((*(uint*)((int)_occupancyRow + 2) & _teamBitFlags) != 0) {
-                        DAT_TileMapState::instance.field213_0x554a48
-                            = DAT_TileMapState::instance.field213_0x554a48 | 0x40000;
+                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x40000;
                     }
                     _occupancyRow = (uint*)((uchar*)DAT_TileMapState::instance.ptr_OccupancyLayer
                         + *(int*)((uchar*)DAT_TileMapState::instance.ptr_MovementDirectionTranslationMatrix
@@ -155,24 +146,19 @@ namespace Map {
                             + DAT_TileMapState::instance.DAT_SomeY * 0x20)
                         + DAT_TileMapState::instance.DAT_SomeTile);
                     if ((*(uint*)((int)_occupancyRow + -1) & _teamBitFlags) != 0) {
-                        DAT_TileMapState::instance.field213_0x554a48
-                            = DAT_TileMapState::instance.field213_0x554a48 | 0x100;
+                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x100;
                     }
                     if ((*(uint*)((int)_occupancyRow + 1) & _teamBitFlags) != 0) {
-                        DAT_TileMapState::instance.field213_0x554a48
-                            = DAT_TileMapState::instance.field213_0x554a48 | 0x400000;
+                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x400000;
                     }
                     if ((*_occupancyRow & _teamBitFlags) != 0) {
-                        DAT_TileMapState::instance.field213_0x554a48
-                            = DAT_TileMapState::instance.field213_0x554a48 | 0x800000;
+                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x800000;
                     }
                     if ((*(uint*)((int)_occupancyRow + -2) & _teamBitFlags) != 0) {
-                        DAT_TileMapState::instance.field213_0x554a48
-                            = DAT_TileMapState::instance.field213_0x554a48 | 0x200;
+                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x200;
                     }
                     if ((*(uint*)((int)_occupancyRow + 2) & _teamBitFlags) != 0) {
-                        DAT_TileMapState::instance.field213_0x554a48
-                            = DAT_TileMapState::instance.field213_0x554a48 | 0x200000;
+                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x200000;
                     }
                     _occupancyRow = (uint*)((uchar*)DAT_TileMapState::instance.ptr_OccupancyLayer
                         + *(int*)((uchar*)DAT_TileMapState::instance.ptr_MovementDirectionTranslationMatrix
@@ -181,25 +167,21 @@ namespace Map {
                             + DAT_TileMapState::instance.DAT_SomeY * 0x20 + 0x10)
                         + DAT_TileMapState::instance.DAT_SomeTile);
                     if ((*(uint*)((int)_occupancyRow + -1) & _teamBitFlags) != 0) {
-                        DAT_TileMapState::instance.field213_0x554a48
-                            = DAT_TileMapState::instance.field213_0x554a48 | 0x4000;
+                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x4000;
                     }
                     if ((*(uint*)((int)_occupancyRow + 1) & _teamBitFlags) != 0) {
-                        DAT_TileMapState::instance.field213_0x554a48
-                            = DAT_TileMapState::instance.field213_0x554a48 | 0x10000;
+                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x10000;
                     }
                     if ((*_occupancyRow & _teamBitFlags) != 0) {
-                        DAT_TileMapState::instance.field213_0x554a48
-                            = DAT_TileMapState::instance.field213_0x554a48 | 0x8000;
+                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x8000;
                     }
                     if ((*(uint*)((int)_occupancyRow + -2) & _teamBitFlags) != 0) {
-                        DAT_TileMapState::instance.field213_0x554a48
-                            = DAT_TileMapState::instance.field213_0x554a48 | 0x2000;
+                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x2000;
                     }
                     if ((*(uint*)((int)_occupancyRow + 2) & _teamBitFlags) != 0) {
-                        DAT_TileMapState::instance.field213_0x554a48
-                            = DAT_TileMapState::instance.field213_0x554a48 | 0x20000;
+                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x20000;
                     }
+                    DAT_TileMapState::instance.field213_0x554a48 = _enemyNeighbourFlags;
                     for (_otherUnitID
                         = (short)DAT_TileMapState::instance.UnitLayer[DAT_TileMapState::instance.DAT_SomeTile];
                         _otherUnitID > 0; _otherUnitID = (short)this->units[_otherUnitID].nextUnitOnTheSameTile) {
