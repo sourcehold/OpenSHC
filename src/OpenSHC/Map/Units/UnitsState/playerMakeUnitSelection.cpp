@@ -87,7 +87,7 @@ namespace Map {
                     || _unitType == OpenSHC::Map::Units::UT_S_TREBUCHET) {
                     if ((this->units[_siegeEngineUnitID].unitType == OpenSHC::Map::Units::UT_S_CATAPULT
                             || this->units[_siegeEngineUnitID].unitType == OpenSHC::Map::Units::UT_S_TREBUCHET)
-                        && this->units[_siegeEngineUnitID].stoneAmmunition < 1) {
+                        && this->units[_siegeEngineUnitID].stoneAmmunition <= 0) {
                         MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSpeechSFX, DAT_SFXState::ptr)(
                             OpenSHC::Audio::SFX::SEID_RESOURCE_NEED25);
                         DAT_UIDragDropDefinedData::instance.MenuView_TriggerInitial = TRUE;
