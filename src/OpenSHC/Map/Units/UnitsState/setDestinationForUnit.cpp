@@ -69,7 +69,6 @@ namespace Map {
             }
             uint _pathTargetX = x;
             uint _pathTargetY = y;
-            bool _pathFailed = false;
             if (_fromArea != _toArea) {
                 if (DAT_PathFindingState::instance.climbIsIllegal == 0) {
                     if (DAT_PathFindingState::instance.allAssassinsUnk == 0 && reusePathingInfo == 0) {
@@ -79,26 +78,39 @@ namespace Map {
                                 DAT_PathFindingState::ptr)(
                                 this->units[unitID].owner, _fromArea, _toArea, this->units[unitID].unitCanClimb);
                         if (this->units[unitID].field129_0x2a8 == 0) {
-                            _pathFailed = true;
-                        } else {
-                            this->units[unitID].climbDataID = (short)MACRO_CALL_MEMBER(
-                                OpenSHC::Map::Navigation::PathFindingState_Func::setClimbBasedOnClosestClimbData,
-                                DAT_PathFindingState::ptr)(unitID, _fromArea, this->units[unitID].field129_0x2a8);
-                            if (this->units[unitID].climbDataID == 0) {
-                                _pathFailed = true;
-                            } else {
-                                int _registerResult = MACRO_CALL_MEMBER(
-                                    OpenSHC::Map::Navigation::PathFindingState_Func::registerUnitOnClimbData,
-                                    DAT_PathFindingState::ptr)(this->units[unitID].climbDataID, unitID);
-                                _pathTargetX = DAT_PathFindingState::instance.climbX;
-                                _pathTargetY = DAT_PathFindingState::instance.climbY;
-                                if (_registerResult != 1) {
-                                    _pathTargetX = x;
-                                    _pathTargetY = y;
-                                    if (_registerResult == -1) {
-                                        _pathFailed = true;
-                                    }
-                                }
+                            DAT_PathFindingState::instance.climbIsIllegal = 0;
+                            DAT_PathFindingState::instance.allAssassinsUnk = 0;
+                            this->units[unitID].unknownMovementRelated_0x2d2 = 0;
+                            MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::despawnUnreachableUnit, this)(
+                                unitID);
+                            return FALSE;
+                        }
+                        this->units[unitID].climbDataID = (short)MACRO_CALL_MEMBER(
+                            OpenSHC::Map::Navigation::PathFindingState_Func::setClimbBasedOnClosestClimbData,
+                            DAT_PathFindingState::ptr)(unitID, _fromArea, this->units[unitID].field129_0x2a8);
+                        if (this->units[unitID].climbDataID == 0) {
+                            DAT_PathFindingState::instance.climbIsIllegal = 0;
+                            DAT_PathFindingState::instance.allAssassinsUnk = 0;
+                            this->units[unitID].unknownMovementRelated_0x2d2 = 0;
+                            MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::despawnUnreachableUnit, this)(
+                                unitID);
+                            return FALSE;
+                        }
+                        int _registerResult = MACRO_CALL_MEMBER(
+                            OpenSHC::Map::Navigation::PathFindingState_Func::registerUnitOnClimbData,
+                            DAT_PathFindingState::ptr)(this->units[unitID].climbDataID, unitID);
+                        _pathTargetX = DAT_PathFindingState::instance.climbX;
+                        _pathTargetY = DAT_PathFindingState::instance.climbY;
+                        if (_registerResult != 1) {
+                            _pathTargetX = x;
+                            _pathTargetY = y;
+                            if (_registerResult == -1) {
+                                DAT_PathFindingState::instance.climbIsIllegal = 0;
+                                DAT_PathFindingState::instance.allAssassinsUnk = 0;
+                                this->units[unitID].unknownMovementRelated_0x2d2 = 0;
+                                MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::despawnUnreachableUnit, this)(
+                                    unitID);
+                                return FALSE;
                             }
                         }
                     }
@@ -114,75 +126,86 @@ namespace Map {
                                 DAT_PathFindingState::ptr)(
                                 this->units[unitID].owner, _fromArea, _toArea, this->units[unitID].unitCanClimb);
                         if (this->units[unitID].field129_0x2a8 == 0) {
-                            _pathFailed = true;
-                        } else {
-                            this->units[unitID].climbDataID = (short)MACRO_CALL_MEMBER(
-                                OpenSHC::Map::Navigation::PathFindingState_Func::setClimbBasedOnClosestClimbData,
-                                DAT_PathFindingState::ptr)(unitID, _fromArea, this->units[unitID].field129_0x2a8);
-                            if (this->units[unitID].climbDataID == 0) {
-                                _pathFailed = true;
-                            } else {
-                                int _registerResult = MACRO_CALL_MEMBER(
-                                    OpenSHC::Map::Navigation::PathFindingState_Func::registerUnitOnClimbData,
-                                    DAT_PathFindingState::ptr)(this->units[unitID].climbDataID, unitID);
-                                _pathTargetX = DAT_PathFindingState::instance.climbX;
-                                _pathTargetY = DAT_PathFindingState::instance.climbY;
-                                if (_registerResult != 1) {
-                                    _pathTargetX = x;
-                                    _pathTargetY = y;
-                                    if (_registerResult == -1) {
-                                        _pathFailed = true;
-                                    }
-                                }
+                            DAT_PathFindingState::instance.climbIsIllegal = 0;
+                            DAT_PathFindingState::instance.allAssassinsUnk = 0;
+                            this->units[unitID].unknownMovementRelated_0x2d2 = 0;
+                            MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::despawnUnreachableUnit, this)(
+                                unitID);
+                            return FALSE;
+                        }
+                        this->units[unitID].climbDataID = (short)MACRO_CALL_MEMBER(
+                            OpenSHC::Map::Navigation::PathFindingState_Func::setClimbBasedOnClosestClimbData,
+                            DAT_PathFindingState::ptr)(unitID, _fromArea, this->units[unitID].field129_0x2a8);
+                        if (this->units[unitID].climbDataID == 0) {
+                            DAT_PathFindingState::instance.climbIsIllegal = 0;
+                            DAT_PathFindingState::instance.allAssassinsUnk = 0;
+                            this->units[unitID].unknownMovementRelated_0x2d2 = 0;
+                            MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::despawnUnreachableUnit, this)(
+                                unitID);
+                            return FALSE;
+                        }
+                        int _registerResult = MACRO_CALL_MEMBER(
+                            OpenSHC::Map::Navigation::PathFindingState_Func::registerUnitOnClimbData,
+                            DAT_PathFindingState::ptr)(this->units[unitID].climbDataID, unitID);
+                        _pathTargetX = DAT_PathFindingState::instance.climbX;
+                        _pathTargetY = DAT_PathFindingState::instance.climbY;
+                        if (_registerResult != 1) {
+                            _pathTargetX = x;
+                            _pathTargetY = y;
+                            if (_registerResult == -1) {
+                                DAT_PathFindingState::instance.climbIsIllegal = 0;
+                                DAT_PathFindingState::instance.allAssassinsUnk = 0;
+                                this->units[unitID].unknownMovementRelated_0x2d2 = 0;
+                                MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::despawnUnreachableUnit, this)(
+                                    unitID);
+                                return FALSE;
                             }
                         }
                     }
                 }
             }
-            if (!_pathFailed) {
-                MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::copyData, DAT_LowLevelMemory::ptr)(
-                    1168, &this->units[unitID], this->units);
-                MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                    400, '\0', this->units[unitID].pathPlanStart);
-                MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::bindPathPlanToAlgorithmStateAndReset,
-                    DAT_PathFindingState::ptr)(this->units[unitID].pathPlanStart);
-                DAT_PathFindingState::instance.unitX = this->units[unitID].x;
-                DAT_PathFindingState::instance.unitY = this->units[unitID].y;
-                if (this->units[unitID].isSelectable_OR_matchTime == 0) {
-                    DAT_PathFindingState::instance.notAllAssassinsUnk = 1;
-                }
-                if (this->units[unitID].field64_0x90 != 0) {
-                    DAT_PathFindingState::instance.notAllAssassinsUnk = 1;
-                }
-                DAT_PathFindingState::instance.destinationX = _pathTargetX;
-                DAT_PathFindingState::instance.destinationY = _pathTargetY;
-                dword _pathPlanSize;
-                if (reusePathingInfo == 0) {
-                    _pathPlanSize = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::doPathfinding,
-                        DAT_PathFindingState::ptr)(this->units[unitID].owner, _ableToClimbTowers);
-                } else {
-                    _pathPlanSize
-                        = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::retraceAndCommitPathPlan,
-                            DAT_PathFindingState::ptr)();
-                }
-                DAT_PathFindingState::instance.notAllAssassinsUnk = 0;
-                if ((int)_pathPlanSize > 0) {
-                    this->units[unitID].totalSizeOfPathPlan = (short)_pathPlanSize;
-                    this->units[unitID].tunnelerFinishedDigging = 2;
-                    this->units[unitID].currentIndexInPathPlan = 0;
-                    this->units[unitID].destinationXPosition = (short)_pathTargetX;
-                    this->units[unitID].destinationYPosition = (short)_pathTargetY;
-                    this->units[unitID].ladderExitYPosition = this->units[unitID].y;
-                    this->units[unitID].destinationTilePosition = (short)_pathTargetX
-                        + DAT_ViewportRenderState::instance.translationMatrix[(short)_pathTargetY].addXgetTile;
-                    this->units[unitID].ladderExitXPosition = this->units[unitID].x;
-                    this->units[unitID].previousTilePosition = this->units[unitID].x
-                        + DAT_ViewportRenderState::instance.translationMatrix[this->units[unitID].y].addXgetTile;
-                    this->units[unitID].cannotClimb = (ushort)(DAT_PathFindingState::instance.climbIsIllegal != 0);
-                    DAT_PathFindingState::instance.climbIsIllegal = 0;
-                    DAT_PathFindingState::instance.allAssassinsUnk = 0;
-                    return TRUE;
-                }
+            MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::copyData, DAT_LowLevelMemory::ptr)(
+                1168, &this->units[unitID], this->units);
+            MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
+                400, '\0', this->units[unitID].pathPlanStart);
+            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::bindPathPlanToAlgorithmStateAndReset,
+                DAT_PathFindingState::ptr)(this->units[unitID].pathPlanStart);
+            DAT_PathFindingState::instance.unitX = this->units[unitID].x;
+            DAT_PathFindingState::instance.unitY = this->units[unitID].y;
+            if (this->units[unitID].isSelectable_OR_matchTime == 0) {
+                DAT_PathFindingState::instance.notAllAssassinsUnk = 1;
+            }
+            if (this->units[unitID].field64_0x90 != 0) {
+                DAT_PathFindingState::instance.notAllAssassinsUnk = 1;
+            }
+            DAT_PathFindingState::instance.destinationX = _pathTargetX;
+            DAT_PathFindingState::instance.destinationY = _pathTargetY;
+            dword _pathPlanSize;
+            if (reusePathingInfo == 0) {
+                _pathPlanSize = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::doPathfinding,
+                    DAT_PathFindingState::ptr)(this->units[unitID].owner, _ableToClimbTowers);
+            } else {
+                _pathPlanSize
+                    = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::retraceAndCommitPathPlan,
+                        DAT_PathFindingState::ptr)();
+            }
+            DAT_PathFindingState::instance.notAllAssassinsUnk = 0;
+            if ((int)_pathPlanSize > 0) {
+                this->units[unitID].totalSizeOfPathPlan = (short)_pathPlanSize;
+                this->units[unitID].tunnelerFinishedDigging = 2;
+                this->units[unitID].currentIndexInPathPlan = 0;
+                this->units[unitID].destinationXPosition = (short)_pathTargetX;
+                this->units[unitID].destinationYPosition = (short)_pathTargetY;
+                this->units[unitID].ladderExitYPosition = this->units[unitID].y;
+                this->units[unitID].destinationTilePosition = (short)_pathTargetX
+                    + DAT_ViewportRenderState::instance.translationMatrix[(short)_pathTargetY].addXgetTile;
+                this->units[unitID].ladderExitXPosition = this->units[unitID].x;
+                this->units[unitID].previousTilePosition = this->units[unitID].x
+                    + DAT_ViewportRenderState::instance.translationMatrix[this->units[unitID].y].addXgetTile;
+                this->units[unitID].cannotClimb = (ushort)(DAT_PathFindingState::instance.climbIsIllegal != 0);
+                DAT_PathFindingState::instance.climbIsIllegal = 0;
+                DAT_PathFindingState::instance.allAssassinsUnk = 0;
+                return TRUE;
             }
             DAT_PathFindingState::instance.climbIsIllegal = 0;
             DAT_PathFindingState::instance.allAssassinsUnk = 0;
