@@ -83,7 +83,7 @@ namespace Rendering {
             }
             if ((DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_BUILDERUnk)
                 || (DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 != OpenSHC::Map::MT_SIEGE)) {
-                if (DAT_BuildingsState::instance.buildings[buildingID].sleeping != false) {
+                if (DAT_BuildingsState::instance.buildings[buildingID].sleeping) {
                     animationTick = DAT_TileMapState::instance.field161_0x5549c0 - 1U & 0x80000007;
                     if ((int)animationTick < 0) {
                         animationTick = (animationTick - 1 | 0xfffffff8) + 1;
