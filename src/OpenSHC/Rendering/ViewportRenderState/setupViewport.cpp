@@ -14,10 +14,6 @@ namespace Rendering {
     using OpenSHC::UI::Enums::BuildingsAndStatusMenuTabType;
     using OpenSHC::UI::Enums::MenuViewType;
 
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004E66F0
     void ViewportRenderState::setupViewport(
         undefined4 windowX, undefined4 windowY, undefined4 screenPixelWidth, undefined4 screenPixelHeight)
@@ -792,7 +788,6 @@ namespace Rendering {
         DAT_ScrollingHandler::instance.field11_0x2c = 1;
         this->viewportState.someYOffset = 0x40;
         MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, this)();
-        return;
     }
 
 }
