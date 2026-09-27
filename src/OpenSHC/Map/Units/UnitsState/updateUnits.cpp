@@ -164,10 +164,9 @@ namespace Map {
                                     uVar9 = (uint)this->units[_currentUnitID].targetX_2;
                                     MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setPositionOfUnit, this)(
                                         _currentUnitID, uVar9, uVar12,
-                                        (undefined4)((int)((uint)
-                                            * (byte*)(DAT_ViewportRenderState::instance.translationMatrix[uVar12]
-                                                          .addXgetTile
-                                                + 0x1d32c38 + uVar9))));
+                                        (undefined4)((int)((uint)DAT_TileMapState::instance.HeightLayer
+                                                [DAT_ViewportRenderState::instance.translationMatrix[uVar12].addXgetTile
+                                                    + uVar9])));
                                     this->units[DAT_CurrentUnitSlotID::instance].state.generic
                                         = OpenSHC::Map::Units::States::US_IDLEUnk;
                                     this->units[DAT_CurrentUnitSlotID::instance].destinationNeeded
