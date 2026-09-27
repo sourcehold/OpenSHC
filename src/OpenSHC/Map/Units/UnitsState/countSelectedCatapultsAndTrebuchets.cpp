@@ -18,7 +18,7 @@ namespace Map {
         {
             this->field15_0x560 = 0;
             if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID].keep.id
-                < 1) {
+                <= 0) {
                 return 0;
             }
             int _count = 0;
