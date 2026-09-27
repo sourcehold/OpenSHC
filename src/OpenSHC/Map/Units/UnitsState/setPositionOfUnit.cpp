@@ -12,8 +12,7 @@ namespace Map {
             if (x >= 400 || y >= 400) {
                 return;
             }
-            /* the 400x400 map of placeable tiles at 0x021AEC98 */
-            if (*(char*)(y * 400 + 0x21aec98 + x) == '\0') {
+            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
                 return;
             }
             this->units[unitID].currentIndexInPathPlan = 0;
