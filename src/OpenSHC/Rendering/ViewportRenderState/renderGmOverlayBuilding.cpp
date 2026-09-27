@@ -41,8 +41,6 @@ namespace Rendering {
         short sVar1;
         BuildingTypeShort BVar2;
         int iVar3;
-        int iVar4;
-        int iVar5;
         int iVar6;
         int* piVar7;
         uint uVar8;
@@ -58,8 +56,6 @@ namespace Rendering {
         int local_8;
         int local_4;
 
-        iVar5 = yUnk;
-        iVar4 = xUnk;
         DAT_RenderedUnitOwner::instance = DAT_BuildingsState::instance.buildings[tileIndex].playerColorUnk;
         local_18 = 0;
         local_14 = 0;
@@ -1639,12 +1635,12 @@ namespace Rendering {
         }
         iVar11 = DAT_BuildingDefinedData::instance
                      .BuildingHeights[(short)DAT_BuildingsState::instance.buildings[tileIndex].buildingType];
-        xUnk = 0;
-        yUnk = 0;
+        int barXOffset = 0;
+        int barYOffset = 0;
         if (iVar11 == 0) {
             uVar8 = DAT_BuildingsState::instance.buildings[tileIndex].widthOrHeight;
-            xUnk = uVar8 << 5;
-            yUnk = uVar8 << 4;
+            barXOffset = uVar8 << 5;
+            barYOffset = uVar8 << 4;
         }
         if (((((DAT_GameCore::instance.currentMenuViewType == OpenSHC::UI::Enums::MVT_BUILDING_AND_STATUS_MENU)
                   && (tileIndex == DAT_BuildingsState::instance.menuSelectedBuildingID))
@@ -1670,23 +1666,23 @@ namespace Rendering {
                 (int)DAT_BuildingsState::instance.buildings[tileIndex].currentHealth, (int)((int)(sVar1)));
             switch (DAT_BuildingsState::instance.buildings[tileIndex].buildingType) {
             case OpenSHC::Map::Buildings::BT_GATEHOUSELARGE:
-                yUnk = yUnk + 0x14;
+                barYOffset = barYOffset + 0x14;
                 break;
             case OpenSHC::Map::Buildings::BT_GATEHOUSESMALL:
-                yUnk = yUnk + 0x1e;
+                barYOffset = barYOffset + 0x1e;
                 break;
             case OpenSHC::Map::Buildings::BT_SIEGETOWER_PLACED:
-                yUnk = yUnk + -0x1e;
+                barYOffset = barYOffset + -0x1e;
                 break;
             case OpenSHC::Map::Buildings::BT_TOWER2:
-                yUnk = yUnk + 0x50;
+                barYOffset = barYOffset + 0x50;
                 break;
             case OpenSHC::Map::Buildings::BT_TOWER3:
             case OpenSHC::Map::Buildings::BT_TOWER4:
-                yUnk = yUnk + 0x5a;
+                barYOffset = barYOffset + 0x5a;
                 break;
             case OpenSHC::Map::Buildings::BT_TOWER5:
-                yUnk = yUnk + 100;
+                barYOffset = barYOffset + 100;
             }
             if ((uint)(iVar6 / 10) < 0xb) {
                 BVar2 = DAT_BuildingsState::instance.buildings[tileIndex].buildingType;
@@ -1715,16 +1711,16 @@ namespace Rendering {
                         || ((DAT_TileMapState::instance.mapOrientation == 2) && (iVar9 == 0xc))
                         || ((DAT_TileMapState::instance.mapOrientation == 4) && (iVar9 == 0))
                         || ((DAT_TileMapState::instance.mapOrientation == 6) && (iVar9 == 3))) {
-                        iVar11 = (iVar5 - iVar11) - yUnk;
+                        iVar11 = (yUnk - iVar11) - barYOffset;
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            OpenSHC::DE::SHCDE::GM_FLOATS, iVar6 / 10 + 0x11, iVar4 + 4, iVar11 + -0xc);
+                            OpenSHC::DE::SHCDE::GM_FLOATS, iVar6 / 10 + 0x11, xUnk + 4, iVar11 + -0xc);
                     }
                 } else {
-                    iVar11 = (iVar5 - iVar11) - yUnk;
+                    iVar11 = (yUnk - iVar11) - barYOffset;
                     MACRO_CALL_MEMBER(
                         OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                        OpenSHC::DE::SHCDE::GM_FLOATS, iVar6 / 10 + 0x11, iVar4 + 4, iVar11 + -0xc);
+                        OpenSHC::DE::SHCDE::GM_FLOATS, iVar6 / 10 + 0x11, xUnk + 4, iVar11 + -0xc);
                 }
             }
         }
@@ -1737,26 +1733,26 @@ namespace Rendering {
                 }
                 iVar11 = uVar8 + 0xd3;
                 maskGmID = OpenSHC::IO::Graphics::GID_FLOAT_POP_CIRC;
-                iVar9 = (iVar5
+                iVar9 = (yUnk
                             - DAT_BuildingDefinedData::instance
                                 .BuildingHeights[(short)DAT_BuildingsState::instance.buildings[tileIndex].buildingType])
-                    - yUnk;
+                    - barYOffset;
                 iVar6 = uVar8 + 0xcb;
                 GVar12 = OpenSHC::IO::Graphics::GID_FLOAT_POP_CIRC;
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
-                    DAT_TextureRenderCoreObject::ptr)(GVar12, iVar6, iVar4 + -0x23, iVar9 + -0x2a, maskGmID, iVar11, 0);
+                    DAT_TextureRenderCoreObject::ptr)(GVar12, iVar6, xUnk + -0x23, iVar9 + -0x2a, maskGmID, iVar11, 0);
             } else if ((DAT_BuildingsState::instance.buildings[tileIndex].currentlyNeededEmployeeCount != 0)
                 && (DAT_GameCore::instance.field63_0x108 != 0)) {
                 iVar11 = DAT_TileMapState::instance.field161_0x5549c0 + 0x128;
                 maskGmID = OpenSHC::IO::Graphics::GID_FLOATS_NEW;
-                iVar9 = (iVar5
+                iVar9 = (yUnk
                             - DAT_BuildingDefinedData::instance
                                 .BuildingHeights[(short)DAT_BuildingsState::instance.buildings[tileIndex].buildingType])
-                    - yUnk;
+                    - barYOffset;
                 iVar6 = DAT_TileMapState::instance.field161_0x5549c0 + 0x118;
                 GVar12 = OpenSHC::IO::Graphics::GID_FLOATS_NEW;
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
-                    DAT_TextureRenderCoreObject::ptr)(GVar12, iVar6, iVar4 + -0x23, iVar9 + -0x2a, maskGmID, iVar11, 0);
+                    DAT_TextureRenderCoreObject::ptr)(GVar12, iVar6, xUnk + -0x23, iVar9 + -0x2a, maskGmID, iVar11, 0);
             }
         }
         sVar1 = DAT_BuildingsState::instance.buildings[tileIndex].field68_0xc2;
@@ -1771,11 +1767,11 @@ namespace Rendering {
             iVar6 = DAT_TileMapState::instance.field161_0x5549c0 + 0x74;
         }
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
-            DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW, iVar6, iVar4 + -0x23,
-            ((iVar5
+            DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW, iVar6, xUnk + -0x23,
+            ((yUnk
                  - DAT_BuildingDefinedData::instance
                      .BuildingHeights[(short)DAT_BuildingsState::instance.buildings[tileIndex].buildingType])
-                - xUnk)
+                - barXOffset)
                 + -0x2a,
             OpenSHC::IO::Graphics::GID_FLOATS_NEW, iVar11, 0);
         DAT_BuildingsState::instance.buildings[tileIndex].field68_0xc2 = 0;
