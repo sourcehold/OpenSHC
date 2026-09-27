@@ -40577,7 +40577,7 @@ SHC_3BB0A8C1_0x004FB7D0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004FB8E0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004FB970 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FB970 | 36.9% | ecx not kept across callee
 
 SHC_3BB0A8C1_0x004FB990 | 0.0% | Pending
 
