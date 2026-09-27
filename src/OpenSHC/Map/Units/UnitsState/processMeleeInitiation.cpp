@@ -29,9 +29,6 @@ namespace Map {
         {
             uint _neighbourHeights[8];
             int _totalHeight;
-            int _playerID;
-            int _hasEnemyOnOwnTile;
-            uint _teamBitFlags;
             uint* _occupancyRow;
             int _adjacentTiles[24];
             int _otherUnitID;
@@ -67,13 +64,13 @@ namespace Map {
                                     == 0)))))))) {
                     _totalHeight
                         = (int)this->units[unitID].buildingHeight + (int)this->units[unitID].terrainOrClimbHeight;
-                    _playerID = (int)this->units[unitID].owner;
+                    int _playerID = (int)this->units[unitID].owner;
                     DAT_TileMapState::instance.DAT_SomeTile = this->units[unitID].tile;
                     DAT_TileMapState::instance.DAT_SomeY
                         = (int)DAT_ViewportRenderState::instance
                               .tileTranslationMatrix_YComponent[DAT_TileMapState::instance.DAT_SomeTile];
-                    _hasEnemyOnOwnTile = 0;
-                    _teamBitFlags = MACRO_CALL_MEMBER(
+                    int _hasEnemyOnOwnTile = 0;
+                    uint _teamBitFlags = MACRO_CALL_MEMBER(
                         OpenSHC::Game::GameStateStructures_Func::teamToBitFlagsUnk, DAT_GameState::ptr)(unitID);
                     uint _enemyNeighbourFlags = 0;
                     if ((*(uint*)((uchar*)DAT_TileMapState::instance.ptr_OccupancyLayer
