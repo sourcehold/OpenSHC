@@ -16,7 +16,7 @@ namespace Map {
     void TileMapState::clearMoatDataAtTile(int x, int y)
     {
         for (int moatID = 0; moatID < this->currentMoatCount; moatID++) {
-            if ((short)this->moats[moatID].x == x && (short)this->moats[moatID].y == y) {
+            if (this->moats[moatID].x == x && this->moats[moatID].y == y) {
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                     sizeof(Moat), 0, &this->moats[moatID]);
                 this->moatTileCount = this->moatTileCount - 1;
