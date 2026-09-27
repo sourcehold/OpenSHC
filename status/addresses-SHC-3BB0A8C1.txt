@@ -42099,7 +42099,7 @@ SHC_3BB0A8C1_0x00507130 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00507280 | 54.5% | ecx not kept across callee
 
-SHC_3BB0A8C1_0x00507350 | 0.0% | Pending
+SHC_3BB0A8C1_0x00507350 | 74.1% | tree switch jump table
 
 SHC_3BB0A8C1_0x00507408 | 0.0% | Pending
 
