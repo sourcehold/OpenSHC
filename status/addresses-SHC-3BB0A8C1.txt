@@ -50075,7 +50075,7 @@ SHC_3BB0A8C1_0x00531914 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00531915 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00531920 | 0.0% | Pending
+SHC_3BB0A8C1_0x00531920 | 18.0% | orig merges pos blocks
 
 SHC_3BB0A8C1_0x005323C0 | 0.0% | Pending
 
