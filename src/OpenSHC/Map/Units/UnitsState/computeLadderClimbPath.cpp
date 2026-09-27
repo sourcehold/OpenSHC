@@ -31,7 +31,7 @@ namespace Map {
             int _pathPlanSize
                 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::commitUnitPathPlanUsingWalkLayer,
                     DAT_PathFindingState::ptr)(param_2, param_3, param_4);
-            if (_pathPlanSize < 1) {
+            if (_pathPlanSize <= 0) {
                 return FALSE;
             }
             this->units[unitID].totalSizeOfPathPlan = (short)_pathPlanSize;
