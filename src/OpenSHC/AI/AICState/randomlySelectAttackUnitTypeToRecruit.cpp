@@ -11,223 +11,112 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::AI::AIType;
-    using OpenSHC::AI::AITypeInt;
-    using OpenSHC::AI::AIUnitBehaviourType;
-
-    /*
-      doc:
-       Determines which AI unit behaviour groups need recruiting because AIC Max units hasn't been
-       reached for that category, then randomly selects one of those groups to recruit
-
-       @returns AiUnitBehaviourType The selected unit behaviour type
-       decompilerscript: committed: 2025-01-30 21:57:43.216000 */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004CC070
-    AIUnitBehaviourType AICState ::randomlySelectAttackUnitTypeToRecruit(int playerID)
-
+    AIUnitBehaviourType AICState::randomlySelectAttackUnitTypeToRecruit(int playerID)
     {
-
-        int* piVar1;
-
-        dword _engineersCount;
-
-        int _index2;
-
-        int _rng;
-
-        int _index;
-
-        int _aiTypeMin1;
-
-        dword _maxDiggingUnits;
-
-        dword _maxAssassins;
-
-        dword _maxUnit2;
-
-        dword _maxLaddermen;
-
-        dword _maxTunnelers;
-
-        dword _maxUnitPatrol;
-
-        AITypeInt _aiType;
-
-        int _attackedPlayerID;
-
-        dword _maxEngineers;
-
-        _aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
-
-        if (_aiType == OpenSHC::AI::AIT_NULL) {
-
-            return OpenSHC::AI::AIUBT_ATTUNITMAIN;
+        AITypeInt aiType = DAT_GameState::ptr->playerDataArray[playerID].aiType;
+        if (aiType == AIT_NULL) {
+            return AIUBT_ATTUNITMAIN;
         }
 
-        _attackedPlayerID = DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID;
-
-        _index = 0;
-
-        /*
-            clear out flags */
-
-        piVar1 = &DAT_SkirmishDefinedData::instance.attackUnitRequired[0].required;
-
-        do {
-
-            *piVar1 = 0;
-
-            piVar1 = piVar1 + 2;
-
-        } while ((int)piVar1 < 0xb425ec);
-
-        _maxEngineers = this->aics[_aiType + ~OpenSHC::AI::AIT_NULL].AttMaxEngineers;
-
-        _engineersCount = DAT_GameState::instance.playerDataArray[playerID].currentAttackWave * 4;
-
-        if ((int)_maxEngineers < (int)_engineersCount) {
-
-            _engineersCount = _maxEngineers;
+        int aiIndex = aiType - 1;
+        int attackedPlayerID = DAT_GameState::ptr->playerDataArray[playerID].attackedPlayerID;
+        int requiredCount = 0;
+        for (int index = 0; index < 11; ++index) {
+            DAT_SkirmishDefinedData::ptr->attackUnitRequired[index].required = 0;
         }
 
-        if ((_maxEngineers != 0)
-            && (DAT_GameState::instance.playerDataArray[playerID].totalAttackingEngineerTroops
-                < (int)_engineersCount)) {
-
-            _index = 1;
-
-            DAT_SkirmishDefinedData::instance.attackUnitRequired[0].required = 1;
+        dword const maximumEngineers = this->aics[aiIndex].AttMaxEngineers;
+        dword engineersNeeded = DAT_GameState::ptr->playerDataArray[playerID].currentAttackWave * 4;
+        if (static_cast<int>(engineersNeeded) > static_cast<int>(maximumEngineers)) {
+            engineersNeeded = maximumEngineers;
+        }
+        if (maximumEngineers != 0
+            && DAT_GameState::ptr->playerDataArray[playerID].totalAttackingEngineerTroops
+                < static_cast<int>(engineersNeeded)) {
+            ++requiredCount;
+            DAT_SkirmishDefinedData::ptr->attackUnitRequired[0].required = 1;
         }
 
-        _maxDiggingUnits = this->aics[_aiType + ~OpenSHC::AI::AIT_NULL].AttDiggingUnitMax;
-
-        if (((_maxDiggingUnits != 0)
-                && (DAT_GameState::instance.playerDataArray[playerID].totalDiggingUnitTroops < (int)_maxDiggingUnits))
-            && (5 < DAT_GameState::instance.playerDataArray[_attackedPlayerID].moatsOwned)) {
-
-            _index = _index + 1;
-
-            DAT_SkirmishDefinedData::instance.attackUnitRequired[1].required = 1;
+        if (this->aics[aiIndex].AttDiggingUnitMax != 0
+            && DAT_GameState::ptr->playerDataArray[playerID].totalDiggingUnitTroops
+                < static_cast<int>(this->aics[aiIndex].AttDiggingUnitMax)
+            && DAT_GameState::ptr->playerDataArray[attackedPlayerID].moatsOwned > 5) {
+            ++requiredCount;
+            DAT_SkirmishDefinedData::ptr->attackUnitRequired[1].required = 1;
+        }
+        if (this->aics[aiIndex].AttMaxAssassins != 0
+            && DAT_GameState::ptr->playerDataArray[playerID].totalAssassinTroops
+                < static_cast<int>(this->aics[aiIndex].AttMaxAssassins)) {
+            ++requiredCount;
+            DAT_SkirmishDefinedData::ptr->attackUnitRequired[2].required = 1;
+        }
+        if (this->aics[aiIndex].AttUnit2Max != 0
+            && DAT_GameState::ptr->playerDataArray[playerID].totalUnit2Troops
+                < static_cast<int>(this->aics[aiIndex].AttUnit2Max)) {
+            ++requiredCount;
+            DAT_SkirmishDefinedData::ptr->attackUnitRequired[3].required = 1;
+        }
+        if (this->aics[aiIndex].AttMaxLaddermen != 0
+            && DAT_GameState::ptr->playerDataArray[playerID].totalLaddermenTroops
+                < static_cast<int>(this->aics[aiIndex].AttMaxLaddermen)) {
+            ++requiredCount;
+            DAT_SkirmishDefinedData::ptr->attackUnitRequired[4].required = 1;
+        }
+        if (this->aics[aiIndex].AttMaxTunnelers != 0
+            && DAT_GameState::ptr->playerDataArray[playerID].totalTunnelerTroops
+                < static_cast<int>(this->aics[aiIndex].AttMaxTunnelers)) {
+            ++requiredCount;
+            DAT_SkirmishDefinedData::ptr->attackUnitRequired[5].required = 1;
+        }
+        if (this->aics[aiIndex].AttUnitPatrolMax != 0
+            && DAT_GameState::ptr->playerDataArray[playerID].totalUnitPatrolTroops
+                < static_cast<int>(this->aics[aiIndex].AttUnitPatrolMax)) {
+            ++requiredCount;
+            DAT_SkirmishDefinedData::ptr->attackUnitRequired[6].required = 1;
+        }
+        if (this->aics[aiIndex].AttUnitBackupMax != 0
+            && DAT_GameState::ptr->playerDataArray[playerID].totalUnitBackupTroops
+                < static_cast<int>(this->aics[aiIndex].AttUnitBackupMax)) {
+            ++requiredCount;
+            DAT_SkirmishDefinedData::ptr->attackUnitRequired[7].required = 1;
+        }
+        if (this->aics[aiIndex].AttUnitEngageMax != 0
+            && DAT_GameState::ptr->playerDataArray[playerID].totalUnitEngageTroops
+                < static_cast<int>(this->aics[aiIndex].AttUnitEngageMax)) {
+            ++requiredCount;
+            DAT_SkirmishDefinedData::ptr->attackUnitRequired[8].required = 1;
+        }
+        if (this->aics[aiIndex].AttUnitSiegeDefMax != 0
+            && DAT_GameState::ptr->playerDataArray[playerID].totalUnitSiegeDefTroops
+                < static_cast<int>(this->aics[aiIndex].AttUnitSiegeDefMax)) {
+            ++requiredCount;
+            DAT_SkirmishDefinedData::ptr->attackUnitRequired[9].required = 1;
+        }
+        if (this->aics[aiIndex].AttMaxDefault != 0
+            && DAT_GameState::ptr->playerDataArray[playerID].totalMaxDefaultTroops
+                < static_cast<int>(this->aics[aiIndex].AttMaxDefault)) {
+            ++requiredCount;
+            DAT_SkirmishDefinedData::ptr->attackUnitRequired[10].required = 1;
         }
 
-        _maxAssassins = this->aics[_aiType + ~OpenSHC::AI::AIT_NULL].AttMaxAssassins;
-
-        if ((_maxAssassins != 0)
-            && (DAT_GameState::instance.playerDataArray[playerID].totalAssassinTroops < (int)_maxAssassins)) {
-
-            _index = _index + 1;
-
-            DAT_SkirmishDefinedData::instance.attackUnitRequired[2].required = 1;
+        if (requiredCount == 0) {
+            return AIUBT_ATTUNITMAIN;
         }
 
-        _maxUnit2 = this->aics[_aiType + ~OpenSHC::AI::AIT_NULL].AttUnit2Max;
-
-        if ((_maxUnit2 != 0) && (DAT_GameState::instance.playerDataArray[playerID].totalUnit2Troops < (int)_maxUnit2)) {
-
-            _index = _index + 1;
-
-            DAT_SkirmishDefinedData::instance.attackUnitRequired[3].required = 1;
+        int ticket = SEC_RNG::instance.currentNumber2 % requiredCount;
+        MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
+        for (int index = 0; index < 11; ++index) {
+            if (DAT_SkirmishDefinedData::ptr->attackUnitRequired[index].required == 0) {
+                continue;
+            }
+            if (ticket == 0) {
+                return static_cast<AIUnitBehaviourType>(
+                    DAT_SkirmishDefinedData::ptr->attackUnitRequired[index].unitBehaviourType);
+            }
+            --ticket;
         }
-
-        _maxLaddermen = this->aics[_aiType + ~OpenSHC::AI::AIT_NULL].AttMaxLaddermen;
-
-        if ((_maxLaddermen != 0)
-            && (DAT_GameState::instance.playerDataArray[playerID].totalLaddermenTroops < (int)_maxLaddermen)) {
-
-            _index = _index + 1;
-
-            DAT_SkirmishDefinedData::instance.attackUnitRequired[4].required = 1;
-        }
-
-        _maxTunnelers = this->aics[_aiType + ~OpenSHC::AI::AIT_NULL].AttMaxTunnelers;
-
-        if ((_maxTunnelers != 0)
-            && (DAT_GameState::instance.playerDataArray[playerID].totalTunnelerTroops < (int)_maxTunnelers)) {
-
-            _index = _index + 1;
-
-            DAT_SkirmishDefinedData::instance.attackUnitRequired[5].required = 1;
-        }
-
-        _maxUnitPatrol = this->aics[_aiType + ~OpenSHC::AI::AIT_NULL].AttUnitPatrolMax;
-
-        if ((_maxUnitPatrol != 0)
-            && (DAT_GameState::instance.playerDataArray[playerID].totalUnitPatrolTroops < (int)_maxUnitPatrol)) {
-
-            _index = _index + 1;
-
-            DAT_SkirmishDefinedData::instance.attackUnitRequired[6].required = 1;
-        }
-
-        _maxEngineers = this->aics[_aiType + ~OpenSHC::AI::AIT_NULL].AttUnitBackupMax;
-
-        if ((_maxEngineers != 0)
-            && (DAT_GameState::instance.playerDataArray[playerID].totalUnitBackupTroops < (int)_maxEngineers)) {
-
-            _index = _index + 1;
-
-            DAT_SkirmishDefinedData::instance.attackUnitRequired[7].required = 1;
-        }
-
-        _maxEngineers = this->aics[_aiType + ~OpenSHC::AI::AIT_NULL].AttUnitEngageMax;
-
-        if ((_maxEngineers != 0)
-            && (DAT_GameState::instance.playerDataArray[playerID].totalUnitEngageTroops < (int)_maxEngineers)) {
-
-            _index = _index + 1;
-
-            DAT_SkirmishDefinedData::instance.attackUnitRequired[8].required = 1;
-        }
-
-        _maxEngineers = this->aics[_aiType + ~OpenSHC::AI::AIT_NULL].AttUnitSiegeDefMax;
-
-        if ((_maxEngineers != 0)
-            && (DAT_GameState::instance.playerDataArray[playerID].totalUnitSiegeDefTroops < (int)_maxEngineers)) {
-
-            _index = _index + 1;
-
-            DAT_SkirmishDefinedData::instance.attackUnitRequired[9].required = 1;
-        }
-
-        _maxEngineers = this->aics[_aiType + ~OpenSHC::AI::AIT_NULL].AttMaxDefault;
-
-        if ((_maxEngineers != 0)
-            && (DAT_GameState::instance.playerDataArray[playerID].totalMaxDefaultTroops < (int)_maxEngineers)) {
-
-            _index = _index + 1;
-
-            DAT_SkirmishDefinedData::instance.attackUnitRequired[10].required = 1;
-        }
-
-        if (_index != 0) {
-
-            _rng = (int)SEC_RNG::instance.currentNumber2 % _index;
-
-            MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
-
-            _index2 = 0;
-
-            do {
-
-                if (DAT_SkirmishDefinedData::instance.attackUnitRequired[_index2].required != 0) {
-
-                    if (_rng == 0) {
-
-                        return (AIUnitBehaviourType)(DAT_SkirmishDefinedData::instance.attackUnitRequired[_index2]
-                                .unitBehaviourType);
-                    }
-
-                    _rng = _rng + -1;
-                }
-
-                _index2 = _index2 + 1;
-
-            } while (_index2 < 0xb);
-        }
-
-        return OpenSHC::AI::AIUBT_ATTUNITMAIN;
+        return AIUBT_ATTUNITMAIN;
     }
-
 }
 }
