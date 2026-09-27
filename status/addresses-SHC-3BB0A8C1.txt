@@ -59673,7 +59673,7 @@ SHC_3BB0A8C1_0x0053CAC0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0053CAE0 | 41.7% | loop shape differs
 
-SHC_3BB0A8C1_0x0053CBD0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053CBD0 | 35.8% | orig caches shooter fields
 
 SHC_3BB0A8C1_0x0053CF84 | 0.0% | Pending
 
