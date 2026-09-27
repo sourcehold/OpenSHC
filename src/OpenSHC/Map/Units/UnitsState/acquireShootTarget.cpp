@@ -30,7 +30,6 @@ namespace Map {
         BOOLEnum UnitsState::acquireShootTarget(int unitID)
 
         {
-            short* psVar1;
             UnitTypeShort UVar4;
             short sVar5;
             int _unitTotalHeight;
@@ -48,10 +47,6 @@ namespace Map {
             int local_10;
             int local_c;
             int local_8;
-            short _unitID_2;
-            int _unitID;
-
-            _unitID = unitID;
             int _unitPlayerID = (int)this->units[unitID].owner;
             int _microXUnit = (int)this->units[unitID].microXPosition;
             int _microYUnit = (int)this->units[unitID].microYPosition;
@@ -168,52 +163,56 @@ namespace Map {
                                         | OpenSHC::Map::Units::States::US_IDLEUnk)))))
                     && (DAT_GameState::instance.mapAndTime.playerTeams[this->units[_0x04_targetUnitID].owner]
                         != DAT_GameState::instance.mapAndTime.playerTeams[_unitPlayerID])) {
-                    psVar1 = &this->units[_0x04_targetUnitID].microYPosition;
-                    short* psVar2 = &this->units[_0x04_targetUnitID].microXPosition;
                     _0x04_yDifference = ((int)(_microYUnit + (_microYUnit >> 0x1f & 7U)) >> 3)
-                        - ((int)((int)*psVar1 + ((int)*psVar1 >> 0x1f & 7U)) >> 3);
+                        - ((int)((int)this->units[_0x04_targetUnitID].microYPosition
+                               + ((int)this->units[_0x04_targetUnitID].microYPosition >> 0x1f & 7U))
+                            >> 3);
                     _xDifferenceToTarget = ((int)(_microXUnit + (_microXUnit >> 0x1f & 7U)) >> 3)
-                        - ((int)((int)*psVar2 + ((int)*psVar2 >> 0x1f & 7U)) >> 3);
+                        - ((int)((int)this->units[_0x04_targetUnitID].microXPosition
+                               + ((int)this->units[_0x04_targetUnitID].microXPosition >> 0x1f & 7U))
+                            >> 3);
                     if (_xDifferenceToTarget * _xDifferenceToTarget + _0x04_yDifference * _0x04_yDifference
                         <= _rangeSquared) {
-                        short* psVar3 = &this->units[_0x04_targetUnitID].terrainOrClimbHeight;
-                        _unitID = MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::arrowShootingRelated,
-                            DAT_EntityState::ptr)(_microXUnit, _microYUnit, _unitTotalHeight + 0x1e,
-                            (int)((int)(*psVar2)), (int)((int)(*psVar1)),
-                            (int)((int)(this->units[_0x04_targetUnitID].buildingHeight + 0x1a
-                                + this->units[_0x04_targetUnitID].terrainOrClimbHeight)));
-                        if (((_unitID <= 0)
+                        int _shootDistanceScore
+                            = MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::arrowShootingRelated,
+                                DAT_EntityState::ptr)(_microXUnit, _microYUnit, _unitTotalHeight + 0x1e,
+                                (int)((int)(this->units[_0x04_targetUnitID].microXPosition)),
+                                (int)((int)(this->units[_0x04_targetUnitID].microYPosition)),
+                                (int)((int)(this->units[_0x04_targetUnitID].buildingHeight + 0x1a
+                                    + this->units[_0x04_targetUnitID].terrainOrClimbHeight)));
+                        if (((_shootDistanceScore <= 0)
                                 || (UVar4 = this->units[unitID].unitType, UVar4 == OpenSHC::Map::Units::UT_S_MANGONEL))
                             || (UVar4 == OpenSHC::Map::Units::UT_S_BALLISTA)) {
                             if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_HUNTER) {
                                 return FALSE;
                             }
                             this->units[unitID].shootTargetedUnit = -2;
-                            this->units[unitID].shootTargetMicroX = *psVar2;
-                            this->units[unitID].shootTargetMicroY = *psVar1;
-                            this->units[unitID].shootTargetZ = *psVar3;
+                            this->units[unitID].shootTargetMicroX = this->units[_0x04_targetUnitID].microXPosition;
+                            this->units[unitID].shootTargetMicroY = this->units[_0x04_targetUnitID].microYPosition;
+                            this->units[unitID].shootTargetZ = this->units[_0x04_targetUnitID].terrainOrClimbHeight;
                             return TRUE;
                         }
                         this->units[unitID].shootTargetedUnit = sVar9;
                         this->units[unitID].targetUID = this->units[_0x04_targetUnitID].uid;
-                        this->units[unitID].distanceToEnemyUnitLadders = (short)_unitID;
-                        this->units[unitID].shootTargetMicroX = *psVar2;
-                        this->units[unitID].shootTargetMicroY = *psVar1;
-                        this->units[unitID].shootTargetZ = *psVar3;
-                        if (100 < _unitID) {
+                        this->units[unitID].distanceToEnemyUnitLadders = (short)_shootDistanceScore;
+                        this->units[unitID].shootTargetMicroX = this->units[_0x04_targetUnitID].microXPosition;
+                        this->units[unitID].shootTargetMicroY = this->units[_0x04_targetUnitID].microYPosition;
+                        this->units[unitID].shootTargetZ = this->units[_0x04_targetUnitID].terrainOrClimbHeight;
+                        if (100 < _shootDistanceScore) {
                             this->units[unitID].jugglerCount = 0;
                             this->units[_0x04_targetUnitID].field233_0x39a = 1;
                             return TRUE;
                         }
-                        _unitID = (int)*psVar3 + (int)this->units[_0x04_targetUnitID].buildingHeight;
+                        int _targetTotalHeight = (int)this->units[_0x04_targetUnitID].terrainOrClimbHeight
+                            + (int)this->units[_0x04_targetUnitID].buildingHeight;
                         _unitPlayerID
                             = (int)this->units[unitID].buildingHeight + (int)this->units[unitID].terrainOrClimbHeight;
-                        if (_unitID + 0x46 < _unitPlayerID) {
+                        if (_targetTotalHeight + 0x46 < _unitPlayerID) {
                             this->units[unitID].jugglerCount = 1;
                             this->units[_0x04_targetUnitID].field233_0x39a = 1;
                             return TRUE;
                         }
-                        this->units[unitID].jugglerCount = (_unitID + -0x46 <= _unitPlayerID) - 1;
+                        this->units[unitID].jugglerCount = (_targetTotalHeight + -0x46 <= _unitPlayerID) - 1;
                         this->units[_0x04_targetUnitID].field233_0x39a = 1;
                         return TRUE;
                     }
@@ -250,14 +249,15 @@ namespace Map {
                  */
 
                 sVar9 = this->units[unitID].targetID_OR_targetBuildingID;
+                int _brazierEntityID;
                 if ((DAT_TileMapState::instance.pitchDitches[sVar9].uid
                         == this->units[unitID]
                             .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID)
-                    && (_unitID = MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::isBrazierNearby,
+                    && (_brazierEntityID = MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::isBrazierNearby,
                             DAT_EntityState::ptr)((int)this->units[unitID].x, (int)((int)(this->units[unitID].y)),
                             (int)((
                                 int)(this->units[unitID].buildingHeight + this->units[unitID].terrainOrClimbHeight))),
-                        _unitID != 0)) {
+                        _brazierEntityID != 0)) {
                     this->units[unitID].shootTargetMicroX = DAT_TileMapState::instance.pitchDitches[sVar9].x * 8 + 4;
                     this->units[unitID].shootTargetMicroY = DAT_TileMapState::instance.pitchDitches[sVar9].y * 8 + 4;
                     this->units[unitID].shootTargetZ
@@ -313,7 +313,7 @@ namespace Map {
                             continue;
                         switch (this->units[_enemy].unitType) {
                         case OpenSHC::Map::Units::UT_ANTELOPESHDEER:
-                            if (this->units[_unitID].unitType != OpenSHC::Map::Units::UT_HUNTER)
+                            if (this->units[unitID].unitType != OpenSHC::Map::Units::UT_HUNTER)
                                 continue;
                             break;
                         case OpenSHC::Map::Units::UT_LIONSHWOLF:
@@ -328,15 +328,15 @@ namespace Map {
                                 continue;
                             break;
                         case OpenSHC::Map::Units::UT_RABBIT:
-                            _xDifferenceToTarget = (int)this->units[_unitID].tribeID;
-                            if (((this->units[_unitID].unitType == OpenSHC::Map::Units::UT_HUNTER)
+                            _xDifferenceToTarget = (int)this->units[unitID].tribeID;
+                            if (((this->units[unitID].unitType == OpenSHC::Map::Units::UT_HUNTER)
                                     || (_xDifferenceToTarget <= 0))
                                 || (DAT_TribesState::instance.tribes[_xDifferenceToTarget].field71_0x212 == 0))
                                 continue;
                             break;
                         case OpenSHC::Map::Units::UT_CAGEDOG:
                             if (DAT_GameState::instance.mapAndTime.playerTeams[this->units[_enemy].displayColorPlayerID]
-                                == DAT_GameState::instance.mapAndTime.playerTeams[this->units[_unitID].owner])
+                                == DAT_GameState::instance.mapAndTime.playerTeams[this->units[unitID].owner])
                                 continue;
                             break;
                         case OpenSHC::Map::Units::UT_A_ASSASSIN:
@@ -382,8 +382,7 @@ namespace Map {
                             case OpenSHC::Map::Units::UT_S_FBALLISTA:
                                 break;
                             default:
-                                if (DAT_GameSynchronyState::instance
-                                        .currentPlayerFullIDArray[this->units[_unitID].owner]
+                                if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[this->units[unitID].owner]
                                     != -1)
                                     continue;
                                 if (this->units[_enemy].isSelectable_OR_matchTime == 0) {
@@ -542,43 +541,42 @@ namespace Map {
                         local_8 = local_c;
                     }
                     if (_entityType == 4) {
-                        this->units[_unitID].shootTargetedUnit = -2;
-                        this->units[_unitID].shootTargetMicroX = this->units[_validTargetID].microXPosition;
-                        this->units[_unitID].shootTargetMicroY = this->units[_validTargetID].microYPosition;
-                        this->units[_unitID].shootTargetZ = this->units[_validTargetID].terrainOrClimbHeight;
+                        this->units[unitID].shootTargetedUnit = -2;
+                        this->units[unitID].shootTargetMicroX = this->units[_validTargetID].microXPosition;
+                        this->units[unitID].shootTargetMicroY = this->units[_validTargetID].microYPosition;
+                        this->units[unitID].shootTargetZ = this->units[_validTargetID].terrainOrClimbHeight;
                         return TRUE;
                     }
                     sVar9 = (short)_validTargetID;
                     if ((_entityType == 0x25) || (_entityType == 0x14)) {
-                        this->units[_unitID].shootTargetedUnit = sVar9;
-                        this->units[_unitID].targetUID = this->units[_validTargetID].uid;
-                        this->units[_unitID].distanceToEnemyUnitLadders = (short)local_8;
-                        this->units[_unitID].shootTargetMicroX = this->units[_validTargetID].microXPosition;
-                        this->units[_unitID].shootTargetMicroY = this->units[_validTargetID].microYPosition;
-                        this->units[_unitID].shootTargetZ = this->units[_validTargetID].terrainOrClimbHeight;
+                        this->units[unitID].shootTargetedUnit = sVar9;
+                        this->units[unitID].targetUID = this->units[_validTargetID].uid;
+                        this->units[unitID].distanceToEnemyUnitLadders = (short)local_8;
+                        this->units[unitID].shootTargetMicroX = this->units[_validTargetID].microXPosition;
+                        this->units[unitID].shootTargetMicroY = this->units[_validTargetID].microYPosition;
+                        this->units[unitID].shootTargetZ = this->units[_validTargetID].terrainOrClimbHeight;
                         return TRUE;
                     }
-                    psVar1 = &this->units[_validTargetID].field265_0x3dc;
-                    *psVar1 = *psVar1 + 1;
-                    this->units[_unitID].shootTargetedUnit = sVar9;
-                    this->units[_unitID].field266_0x3de = sVar9;
-                    this->units[_unitID].targetUID = this->units[_validTargetID].uid;
-                    this->units[_unitID].distanceToEnemyUnitLadders = (short)local_8;
+                    this->units[_validTargetID].field265_0x3dc = this->units[_validTargetID].field265_0x3dc + 1;
+                    this->units[unitID].shootTargetedUnit = sVar9;
+                    this->units[unitID].field266_0x3de = sVar9;
+                    this->units[unitID].targetUID = this->units[_validTargetID].uid;
+                    this->units[unitID].distanceToEnemyUnitLadders = (short)local_8;
                     if (100 < local_8) {
-                        this->units[_unitID].jugglerCount = 0;
+                        this->units[unitID].jugglerCount = 0;
                         this->units[_validTargetID].field233_0x39a = 1;
                         return TRUE;
                     }
                     _unitPlayerID = (int)this->units[_validTargetID].terrainOrClimbHeight
                         + (int)this->units[_validTargetID].buildingHeight;
                     _microXUnit
-                        = (int)this->units[_unitID].buildingHeight + (int)this->units[_unitID].terrainOrClimbHeight;
+                        = (int)this->units[unitID].buildingHeight + (int)this->units[unitID].terrainOrClimbHeight;
                     if (_unitPlayerID + 0x46 < _microXUnit) {
-                        this->units[_unitID].jugglerCount = 1;
+                        this->units[unitID].jugglerCount = 1;
                         this->units[_validTargetID].field233_0x39a = 1;
                         return TRUE;
                     }
-                    this->units[_unitID].jugglerCount = (_unitPlayerID + -0x46 <= _microXUnit) - 1;
+                    this->units[unitID].jugglerCount = (_unitPlayerID + -0x46 <= _microXUnit) - 1;
                     this->units[_validTargetID].field233_0x39a = 1;
                     return TRUE;
                 }
