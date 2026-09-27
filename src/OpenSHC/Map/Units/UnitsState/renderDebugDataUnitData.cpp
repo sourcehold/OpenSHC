@@ -80,7 +80,7 @@ namespace Map {
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 (char*)s_player__005abd50, _column2, y, OpenSHC::Text::TTA_LEFT, 0xffffff, 0x12, TRUE, 0);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-                _lineY, _column2, y, OpenSHC::Text::TTA_LEFT, 0x80ff, 0x12, TRUE, 0);
+                _ownerID, _column2, y, OpenSHC::Text::TTA_LEFT, 0x80ff, 0x12, TRUE, 0);
             int _column3 = _column0 + 0x5a;
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 (char*)s_status__005abd44, _column3, y, OpenSHC::Text::TTA_LEFT, 0xffffff, 0x12, TRUE, 0);
