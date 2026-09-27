@@ -117,7 +117,7 @@ namespace Map {
                 case OpenSHC::Map::Units::UT_S_FBALLISTA:
                     return _result;
                 }
-                if (_scatter < 1) {
+                if (_scatter <= 0) {
                     return _result;
                 }
                 if (_scatter > 0x118) {
