@@ -28,7 +28,6 @@ namespace Map {
         undefined4 UnitsState::processUnitAttackOtherUnit(int unitID, int unit2ID)
         {
             int _tribeID = this->units[unit2ID].tribeID;
-            /* get the unit type of unit2 */
             UnitTypeShort _unit2Type = this->units[unit2ID].unitType;
             /* get the damage from the array based: row is unit1ID type, column is unit2ID type */
             int _damage = DAT_UnitPropertiesDefinedData::instance
