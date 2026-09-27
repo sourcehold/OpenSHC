@@ -50,16 +50,15 @@ namespace Map {
                 } else {
                     _distanceThreshold = 270;
                 }
-                if (((this->units[unitID].closestEnemyMicroDistance <= _distanceThreshold)
-                        || (this->units[unitID].attackedUnitID != 0))
-                    || ((this->units[unitID].unitType == OpenSHC::Map::Units::UT_LIONSHWOLF
-                        || ((this->units[unitID].isStalked != 0
-                            && (((DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY
-                                     || (100 < (int)this->unitCount))
-                                && (((this->units[unitID].fixedRng
-                                         ^ DAT_GameState::instance.mapAndTime.totalGameTicksUnk)
-                                        & 0xf)
-                                    == 0)))))))) {
+                if (this->units[unitID].closestEnemyMicroDistance <= _distanceThreshold
+                    || this->units[unitID].attackedUnitID != 0
+                    || this->units[unitID].unitType == OpenSHC::Map::Units::UT_LIONSHWOLF
+                    || (this->units[unitID].isStalked != 0
+                        && (((DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY
+                                 || (100 < (int)this->unitCount))
+                            && (((this->units[unitID].fixedRng ^ DAT_GameState::instance.mapAndTime.totalGameTicksUnk)
+                                    & 0xf)
+                                == 0))))) {
                     _totalHeight
                         = (int)this->units[unitID].buildingHeight + (int)this->units[unitID].terrainOrClimbHeight;
                     int _playerID = (int)this->units[unitID].owner;
