@@ -93,29 +93,8 @@ namespace Rendering {
     using OpenSHC::UI::Enums::MenuModalType;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    /*
-      WARNING: Restarted to delay deadcode elimination for space: ram
-     */
-
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-
-    /*
-      WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
-     */
-
-    /*
-      WARNING: Enum "DPERRInt": Some values do not have unique names
-     */
-
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004E8CF0
     void ViewportRenderState::renderMap()
-
     {
         ushort* puVar1;
         int iVar2;
@@ -295,7 +274,7 @@ namespace Rendering {
         }
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::setMapSurfaceHeightRange,
             DAT_TextureRenderCoreObject::ptr)(iVar31, iVar16);
-        this->viewportState.ptrColor = (undefined4)(DAT_WindowAndDirectDraw::instance.surfacePointer_mapGame
+        this->viewportState.ptrColor = (DAT_WindowAndDirectDraw::instance.surfacePointer_mapGame
             + this->viewportState.currentCameraOffsetX + DAT_MouseState::instance.screenSpaceX
             + (this->viewportState.currentCameraOffsetY + DAT_MouseState::instance.screenSpaceY) * 0xfd8);
         this->viewportState.mouseRayBuildingID = 0;
@@ -759,8 +738,8 @@ namespace Rendering {
                                   .heightBasedScreenYOffset[DAT_TileMapState::instance.HeightLayer[iVar16] + 4];
                     }
                     if (local_54 != 0) {
-                        uVar9 = *(ushort*)this->viewportState.ptrColor;
-                        *(ushort*)this->viewportState.ptrColor = COL_MAGENTA::instance.shortValue;
+                        uVar9 = *this->viewportState.ptrColor;
+                        *this->viewportState.ptrColor = COL_MAGENTA::instance.shortValue;
                     }
                     if (((DAT_00ed3170::instance != 0xff) && (bVar13))
                         && (MACRO_CALL(OpenSHC::UI::Rendering_Func::RenderTerrainTilesCenterPiece)(), bVar12)) {
@@ -809,8 +788,8 @@ namespace Rendering {
                                 + 7);
                     }
                     if (local_54 != 0) {
-                        if (*(ushort*)this->viewportState.ptrColor == COL_MAGENTA::instance.shortValue) {
-                            *(ushort*)this->viewportState.ptrColor = uVar9;
+                        if (*this->viewportState.ptrColor == COL_MAGENTA::instance.shortValue) {
+                            *this->viewportState.ptrColor = uVar9;
                         } else {
                             this->viewportState.mouseRayUnitID = 0;
                             this->viewportState.mouseRayBuildingID = local_54;
@@ -1166,9 +1145,8 @@ namespace Rendering {
                                                             0x20 - iVar27);
                                                     }
                                                 }
-                                                uVar9 = *(ushort*)this->viewportState.ptrColor;
-                                                *(ushort*)this->viewportState.ptrColor
-                                                    = COL_MAGENTA::instance.shortValue;
+                                                uVar9 = *this->viewportState.ptrColor;
+                                                *this->viewportState.ptrColor = COL_MAGENTA::instance.shortValue;
                                                 bVar15 = DAT_UnitsState::instance.units[local_60]
                                                              .disappearFadeAlphaCountdown;
                                                 if (bVar15 == 0) {
@@ -1366,9 +1344,9 @@ namespace Rendering {
                                                         }
                                                     }
                                                 LAB_004eadfa:
-                                                    if (*(ushort*)this->viewportState.ptrColor
+                                                    if (*this->viewportState.ptrColor
                                                         == COL_MAGENTA::instance.shortValue) {
-                                                        *(ushort*)this->viewportState.ptrColor = uVar9;
+                                                        *this->viewportState.ptrColor = uVar9;
                                                     } else {
                                                         this->viewportState.mouseRayUnitID = local_60;
                                                         this->viewportState.mouseRayBuildingID = 0;
@@ -1387,9 +1365,9 @@ namespace Rendering {
                                                             + (int)DAT_TextureRenderCoreObject::instance
                                                                 .gmProcessedImageData))),
                                                         (int)((int)((char)bVar15)));
-                                                    if (*(ushort*)this->viewportState.ptrColor
+                                                    if (*this->viewportState.ptrColor
                                                         == COL_MAGENTA::instance.shortValue) {
-                                                        *(ushort*)this->viewportState.ptrColor = uVar9;
+                                                        *this->viewportState.ptrColor = uVar9;
                                                     } else {
                                                         this->viewportState.mouseRayUnitID = local_60;
                                                         this->viewportState.mouseRayBuildingID = 0;
@@ -1658,8 +1636,8 @@ namespace Rendering {
                                                         0x20 - iVar27);
                                                 }
                                             }
-                                            uVar9 = *(ushort*)this->viewportState.ptrColor;
-                                            *(ushort*)this->viewportState.ptrColor = COL_MAGENTA::instance.shortValue;
+                                            uVar9 = *this->viewportState.ptrColor;
+                                            *this->viewportState.ptrColor = COL_MAGENTA::instance.shortValue;
                                             sVar30 = DAT_UnitsState::instance.units[local_60].field59_0x86;
                                             if (local_2c == 0) {
                                                 if (sVar30 < 0) {
@@ -1851,9 +1829,8 @@ namespace Rendering {
                                                 }
                                             }
                                         LAB_004ea966:
-                                            if (*(ushort*)this->viewportState.ptrColor
-                                                == COL_MAGENTA::instance.shortValue) {
-                                                *(ushort*)this->viewportState.ptrColor = uVar9;
+                                            if (*this->viewportState.ptrColor == COL_MAGENTA::instance.shortValue) {
+                                                *this->viewportState.ptrColor = uVar9;
                                             } else {
                                                 this->viewportState.mouseRayUnitID = local_60;
                                                 this->viewportState.mouseRayBuildingID = 0;
@@ -2389,8 +2366,8 @@ namespace Rendering {
                             psVar17 = &DAT_BuildingsState::instance.buildings[uVar29].surfaceAreaUnk;
                             *psVar17 = *psVar17 + 1;
                         }
-                        uVar9 = *(ushort*)this->viewportState.ptrColor;
-                        *(ushort*)this->viewportState.ptrColor = COL_MAGENTA::instance.shortValue;
+                        uVar9 = *this->viewportState.ptrColor;
+                        *this->viewportState.ptrColor = COL_MAGENTA::instance.shortValue;
                         if ((DAT_GMImageHeaders::instance.imh[DAT_GmImageAddressToBeRendered::instance].direction != 0)
                             && (bVar13)) {
                             iVar23 = (int)DAT_GMImageHeaders::instance.imh[DAT_GmImageAddressToBeRendered::instance]
@@ -2471,8 +2448,8 @@ namespace Rendering {
                                 }
                             }
                         }
-                        if (*(ushort*)this->viewportState.ptrColor == COL_MAGENTA::instance.shortValue) {
-                            *(ushort*)this->viewportState.ptrColor = uVar9;
+                        if (*this->viewportState.ptrColor == COL_MAGENTA::instance.shortValue) {
+                            *this->viewportState.ptrColor = uVar9;
                         } else {
                             this->viewportState.mouseRayUnitID = 0;
                             this->viewportState.mouseRayBuildingID = uVar29;
