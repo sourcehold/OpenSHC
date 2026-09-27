@@ -36879,7 +36879,7 @@ SHC_3BB0A8C1_0x004E5A90 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004E5B80 | 65.7% | esi/edi allocation differs
 
-SHC_3BB0A8C1_0x004E5C00 | 25.4% | reg alloc, extra stack spill
+SHC_3BB0A8C1_0x004E5C00 | 57.4% | reg alloc + one spill
 
 SHC_3BB0A8C1_0x004E5D80 | 100.0% | Reimplemented
 

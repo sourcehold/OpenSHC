@@ -18,12 +18,10 @@ namespace Rendering {
         }
         mapBorder = mapBorder / 2;
 
-        int maxTileColumn = ((400 - mapBorder) / 2 - this->viewportState.viewportHeight) + 4;
-        int minViewportX = mapBorder / 2 + 1;
-        int maxViewportX = maxTileColumn * 0x20;
+        int maxViewportX = (((400 - mapBorder) / 2 - this->viewportState.viewportHeight) + 4) * 0x20;
         int maxViewportY = ((401 - this->viewportState.viewportWidth) - mapBorder) * 8;
-        int mapBorderY = mapBorder * 8;
-        int minViewportY = mapBorderY + 0x10;
+        int minViewportX = mapBorder / 2 + 1;
+        int minViewportY = mapBorder * 8 + 0x10;
         if (this->viewportState.isZoomedOutUnk != 0) {
             minViewportX = mapBorder / 2 + -4;
         }
@@ -48,8 +46,8 @@ namespace Rendering {
                     this->viewportState.viewportX = maxViewportX + -0x20;
                 }
             } else if (DAT_TileMapState::instance.mapOrientation == 4) {
-                if (this->viewportState.viewportY < mapBorderY + 0x18) {
-                    this->viewportState.viewportY = mapBorderY + 0x18;
+                if (this->viewportState.viewportY < minViewportY + 8) {
+                    this->viewportState.viewportY = minViewportY + 8;
                 }
                 if (this->viewportState.viewportY > maxViewportY + -8) {
                     this->viewportState.viewportY = maxViewportY + -8;
@@ -67,12 +65,12 @@ namespace Rendering {
         if (DAT_TileMapState::instance.mapSize == 160
             && DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1024x768
             && this->viewportState.isZoomedOutUnk != 0) {
-            minViewportY = mapBorderY + 6;
+            minViewportY = minViewportY - 10;
             maxViewportY = maxViewportY + -10;
         }
 
         if (maxViewportX < minViewportX) {
-            this->viewportState.viewportX = (minViewportX + maxTileColumn * -0x20) / 2 + maxViewportX;
+            this->viewportState.viewportX = (minViewportX - maxViewportX) / 2 + maxViewportX;
         }
         if (maxViewportY < minViewportY) {
             this->viewportState.viewportY = (minViewportY - maxViewportY) / 2 + maxViewportY;
