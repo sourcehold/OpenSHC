@@ -1,17 +1,17 @@
 #include "../PathFindingState.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
+#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Navigation {
-            using OpenSHC::Map::Location::Point8ShortXY;
+        using OpenSHC::Map::Location::Point8ShortXY;
 
         /*
           WARNING: Enum "MappersEnum": Some values do not have unique names
@@ -22,7 +22,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049BBF0
         void PathFindingState::findFurthestSeaTile(int budget, uint x, uint y)
         {
-            int _candidate;
             short* psVar1;
             int (*paiVar2)[8];
             short _x;
@@ -30,7 +29,7 @@ namespace Map {
             this->ALG_ResultTile = 0;
             this->ALG_ResultY = 0;
             this->ALG_ResultX = 0;
-            if (((x < 400) && (y < 400)) && (*(char*)(y * 400 + 0x21aec98 + x) != '\0')) {
+            if (x < 400 && y < 400 && *(char*)(y * 400 + 0x21aec98 + x) != '\0') {
                 this->calculations = this->calculations + 1;
                 this->searchGeneration = this->searchGeneration + 1;
                 if (32000 < this->searchGeneration) {
@@ -67,9 +66,9 @@ namespace Map {
                             /*
                               for each direction, do:
                              */
-                            _candidate = (*paiVar2)[0] + this->ALG_ResultTile;
-                            if ((DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration)
-                                && ((DAT_TileMapState::instance.LogicLayer[_candidate] & 1) != 0)) {
+                            int _candidate = (*paiVar2)[0] + this->ALG_ResultTile;
+                            if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration
+                                && (DAT_TileMapState::instance.LogicLayer[_candidate] & 1) != 0) {
                                 /*
                                   is sea
                                  */
