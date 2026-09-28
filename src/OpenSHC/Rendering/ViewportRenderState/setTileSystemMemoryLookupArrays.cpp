@@ -89,8 +89,8 @@ namespace Rendering {
                 this->screenPointToTileNumber[firstHalfIndex] = tileGrid[diagonal + column];
                 scratch6 = scratch6 + -1;
                 firstHalfIndex = firstHalfIndex + 1;
-                column = column + 1;
                 diagonal = diagonal + -400;
+                column = column + 1;
             } while (0 < scratch6);
             diagonalBase = diagonalBase + 400;
             destIndex = destIndex + 401;
