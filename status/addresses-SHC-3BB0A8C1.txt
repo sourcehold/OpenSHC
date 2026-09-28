@@ -40571,7 +40571,7 @@ SHC_3BB0A8C1_0x004FB3F0 | 34.3% | XYPair stride regalloc
 
 SHC_3BB0A8C1_0x004FB4D0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004FB770 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FB770 | 76.7% | gfx expression regalloc
 
 SHC_3BB0A8C1_0x004FB7D0 | 0.0% | Pending
 
