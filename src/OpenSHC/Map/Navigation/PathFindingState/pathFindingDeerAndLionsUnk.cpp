@@ -33,7 +33,7 @@ namespace Map {
             int _currentX;
             int _currentY;
             if (destinationX < 400 && destinationY < 400
-                && *(char*)(destinationY * 400 + 0x21aec98 + destinationX) != '\0') {
+                && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[destinationY * 400 + destinationX] != '\0') {
                 this->calculations = this->calculations + 1;
                 this->searchGeneration = this->searchGeneration + 1;
                 this->climbX = destinationX;
