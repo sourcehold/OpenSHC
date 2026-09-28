@@ -3,6 +3,7 @@
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/Map/Navigation/Algorithms/XYPair.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -11,12 +12,11 @@
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Map/Navigation/Algorithms/XYPair.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Navigation {
-            using OpenSHC::Map::Navigation::Algorithms::XYPair;
+        using OpenSHC::Map::Navigation::Algorithms::XYPair;
 
         /*
           WARNING: Enum "MappersEnum": Some values do not have unique names
@@ -40,12 +40,9 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A8860
         int PathFindingState::findBuildingAccessPoint(int unitID, int buildingID, int* pResultTile)
         {
-            int _buildingX;
-            uint _heightDiff;
             int _canNav;
             uint _heightDiff2;
             int _candidate2;
-            int _buildingY;
             XYPair* pXVar1;
             uint uVar2;
             int _closestDistance;
@@ -66,8 +63,8 @@ namespace Map {
             /*
               === GET BUILDING INFORMATION ===
              */
-            _buildingY = (int)(short)DAT_BuildingsState::instance.buildings[buildingID].y;
-            _buildingX = (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x;
+            int _buildingY = (int)(short)DAT_BuildingsState::instance.buildings[buildingID].y;
+            int _buildingX = (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x;
             /*
               Get the default/base height of the building's foundation
              */
@@ -121,7 +118,7 @@ namespace Map {
                       Get height of the access tile
                      */
                     _cHeight = DAT_TileMapState::instance.HeightLayer[_entranceCandidate];
-                    _heightDiff = (uint)_buidingDefHeight - (uint)_cHeight;
+                    uint _heightDiff = (uint)_buidingDefHeight - (uint)_cHeight;
                     /*
                       Compute absolute value: abs(_heightDiff) < 32
                      */
@@ -136,19 +133,19 @@ namespace Map {
                       === HEIGHT VALIDATION #2: Building Terrain Height ===   Check if access point is within 16 height
                       units of building's actual terrain   height
                      */
-                    if (((int)((_heightDiff ^ (int)_heightDiff >> 0x1f) - ((int)_heightDiff >> 0x1f)) < 32)
-                        && ((((int)(short)DAT_TileMapState::instance.PathConnectionLayer[_entranceCandidate]
-                                     == (int)(short)_unitArea
-                                 || (_canNav = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
-                                                                     calculateCanPlayerUnitsNavigateToAreaFromArea,
-                                         this)((int)_unitOwner, (dword)((int)((int)(short)_unitArea)),
-                                         (dword)((int)((int)(short)
-                                                 DAT_TileMapState::instance.PathConnectionLayer[_entranceCandidate])),
-                                         0),
-                                     _canNav != 0))
-                            && (_heightDiff2 = (int)DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk
-                                    - (uint)_cHeight,
-                                uVar2 = (int)_heightDiff2 >> 0x1f, (int)((_heightDiff2 ^ uVar2) - uVar2) < 16)))) {
+                    if ((int)((_heightDiff ^ (int)_heightDiff >> 0x1f) - ((int)_heightDiff >> 0x1f)) < 32
+                        && ((int)(short)DAT_TileMapState::instance.PathConnectionLayer[_entranceCandidate]
+                                == (int)(short)_unitArea
+                            || (_canNav = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
+                                                                calculateCanPlayerUnitsNavigateToAreaFromArea,
+                                    this)((int)_unitOwner, (dword)((int)((short)_unitArea)),
+                                    (dword)((int)((
+                                        int)(short)DAT_TileMapState::instance.PathConnectionLayer[_entranceCandidate])),
+                                    0),
+                                _canNav != 0))
+                        && (_heightDiff2
+                            = (int)DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk - (uint)_cHeight,
+                            uVar2 = (int)_heightDiff2 >> 0x1f, (int)((_heightDiff2 ^ uVar2) - uVar2) < 16)) {
                         /*
                           === ACCESS POINT IS VALID - ADD TO LIST ===      Store the access tile
                          */
@@ -225,14 +222,14 @@ namespace Map {
                     MACRO_CALL_MEMBER(
                         OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                         DAT_DirectionAlgorithmState::ptr)((int)DAT_UnitsState::instance.units[unitID].x,
-                        (int)((int)(DAT_UnitsState::instance.units[unitID].y)),
+                        (int)(DAT_UnitsState::instance.units[unitID].y),
                         _pairsOfAccessAndAdjacent[_counter][0]
                             - DAT_ViewportRenderState::instance
                                 .translationMatrix[DAT_ViewportRenderState::instance
                                         .tileTranslationMatrix_YComponent[_pairsOfAccessAndAdjacent[_counter][0]]]
                                 .addXgetTile,
-                        (int)((int)(DAT_ViewportRenderState::instance
-                                .tileTranslationMatrix_YComponent[_pairsOfAccessAndAdjacent[_counter][0]])));
+                        (int)(DAT_ViewportRenderState::instance
+                                .tileTranslationMatrix_YComponent[_pairsOfAccessAndAdjacent[_counter][0]]));
                     /*
                       If this access point is closer than previous best
                      */
