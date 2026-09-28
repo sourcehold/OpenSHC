@@ -55,7 +55,7 @@ namespace Map {
             if (399 < y) {
                 return;
             }
-            if (*(char*)(y * 400 + 0x21aec98 + x) == '\0') {
+            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
                 return;
             }
             this->searchGeneration = this->searchGeneration + 1;
