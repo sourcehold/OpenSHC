@@ -65,7 +65,7 @@ namespace Game {
                 }
             }
         }
-        return soloCount < 2;
+        return soloCount <= 1;
     }
 }
 }
