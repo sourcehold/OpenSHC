@@ -55,7 +55,7 @@ namespace Map {
                         do {
                             iVar5 = (*(int (*)[8])(piVar6 + -1))[0] + tile;
                             if (DAT_TileMapState::instance.CertainPathLayer[iVar5] < 1
-                                && DAT_TileMapState::instance.PathConnectionLayer[iVar5] == uVar1
+                                && (short)DAT_TileMapState::instance.PathConnectionLayer[iVar5] == uVar1
                                 && (DAT_TileMapState::instance.LogicLayer[iVar5] & 0x30) == 0) {
                                 DAT_TileMapState::instance.CertainPathLayer[iVar5]
                                     = (short)this->searchQueue.currentDistance + 1;
@@ -70,7 +70,7 @@ namespace Map {
                             }
                             iVar5 = *piVar6 + tile;
                             if (DAT_TileMapState::instance.CertainPathLayer[iVar5] < 1
-                                && DAT_TileMapState::instance.PathConnectionLayer[iVar5] == uVar1
+                                && (short)DAT_TileMapState::instance.PathConnectionLayer[iVar5] == uVar1
                                 && (DAT_TileMapState::instance.LogicLayer[iVar5] & 0x30) == 0) {
                                 DAT_TileMapState::instance.CertainPathLayer[iVar5]
                                     = (short)this->searchQueue.currentDistance + 1;
@@ -84,7 +84,7 @@ namespace Map {
                             }
                             iVar5 = piVar6[1] + tile;
                             if (DAT_TileMapState::instance.CertainPathLayer[iVar5] < 1
-                                && DAT_TileMapState::instance.PathConnectionLayer[iVar5] == uVar1
+                                && (short)DAT_TileMapState::instance.PathConnectionLayer[iVar5] == uVar1
                                 && (DAT_TileMapState::instance.LogicLayer[iVar5] & 0x30) == 0) {
                                 DAT_TileMapState::instance.CertainPathLayer[iVar5]
                                     = (short)this->searchQueue.currentDistance + 1;
@@ -98,7 +98,7 @@ namespace Map {
                             }
                             iVar5 = piVar6[2] + tile;
                             if (DAT_TileMapState::instance.CertainPathLayer[iVar5] < 1
-                                && DAT_TileMapState::instance.PathConnectionLayer[iVar5] == uVar1
+                                && (short)DAT_TileMapState::instance.PathConnectionLayer[iVar5] == uVar1
                                 && (DAT_TileMapState::instance.LogicLayer[iVar5] & 0x30) == 0) {
                                 DAT_TileMapState::instance.CertainPathLayer[iVar5]
                                     = (short)this->searchQueue.currentDistance + 1;
