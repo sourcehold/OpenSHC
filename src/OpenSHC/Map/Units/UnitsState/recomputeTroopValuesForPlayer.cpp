@@ -122,15 +122,16 @@ namespace Map {
                         DAT_GameState::instance.playerDataArray[playerID].totalEnemyTroopValue
                             += MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::getValueOfTroopType,
                                 DAT_TroopValueState::ptr)((UnitType)(short)this->units[unitID].unitType);
-                        if (this->units[unitID].unitType != OpenSHC::Map::Units::UT_E_ARCHER
-                            && this->units[unitID].unitType != OpenSHC::Map::Units::UT_E_XBOW
-                            && this->units[unitID].unitType != OpenSHC::Map::Units::UT_A_ARCHER
-                            && this->units[unitID].unitType != OpenSHC::Map::Units::UT_A_SLINGER
-                            && this->units[unitID].unitType != OpenSHC::Map::Units::UT_A_HARCHER
-                            && this->units[unitID].unitType != OpenSHC::Map::Units::UT_A_FIRETHROWER) {
+                        UnitTypeShort _enemyUnitType = this->units[unitID].unitType;
+                        if (_enemyUnitType != OpenSHC::Map::Units::UT_E_ARCHER
+                            && _enemyUnitType != OpenSHC::Map::Units::UT_E_XBOW
+                            && _enemyUnitType != OpenSHC::Map::Units::UT_A_ARCHER
+                            && _enemyUnitType != OpenSHC::Map::Units::UT_A_SLINGER
+                            && _enemyUnitType != OpenSHC::Map::Units::UT_A_HARCHER
+                            && _enemyUnitType != OpenSHC::Map::Units::UT_A_FIRETHROWER) {
                             DAT_GameState::instance.playerDataArray[playerID].totalEnemyRangedTroopValue
                                 += MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::getValueOfTroopType,
-                                    DAT_TroopValueState::ptr)((UnitType)(short)this->units[unitID].unitType);
+                                    DAT_TroopValueState::ptr)((UnitType)(short)_enemyUnitType);
                         }
                     }
                 }
