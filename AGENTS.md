@@ -180,6 +180,13 @@ When restyling or improving a large set of functions, work in batches (e.g. per 
 4. Commit with `commit_progress_batch.py` (100% "Reimplemented" when only call targets differ, otherwise the % with a short blocker remark).
    Field and parameter type changes to generated headers go in a commit of their own, separate from the `.cpp` work.
 
+Replace a function body whole. Do not patch one by slicing its existing text: a scripted edit that cuts the body at
+some marker and splices a fragment back silently loses brace balance, and `clang-format` then reflows the damage into
+something that still looks plausible - a `do { ... } while (cond);` comes back as a bare `while (cond);` with the loop
+body detached above it. `syntax_check.py` does catch it, but the rewrite is wasted and the cause is not obvious from
+the error. This is why `splice_functions.py` replaces whole bodies; when editing by hand or from your own script, emit
+the function from its signature through its closing brace, keeping the `// FUNCTION:` line above it untouched.
+
 Style expected of reimplemented code:
 
 - Declare variables where they are first used; access fields repeatedly instead of copying them into locals
