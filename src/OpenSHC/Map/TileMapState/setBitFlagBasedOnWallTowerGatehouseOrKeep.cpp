@@ -18,8 +18,10 @@ namespace Map {
         /*
           The original is handwritten assembly: it materialises zero with "mov edx, 0" instead of
           "xor edx, edx", advances the tile pointer with four "add esi, ecx" instead of a scaled lea,
-          and spills the row base with a bare push/pop across the middle of the body. Written as C++
-          it would be:
+          spills the row base with a bare push/pop across the middle of the body, and reaches the
+          fields through the global instance's absolute address rather than through this (which is why
+          the loads below differ: MSVC inline asm cannot name DAT_TileMapState::instance, as "::" is
+          not parseable there). Written as C++ it would be:
 
           this->bitFlag = 0;
           if ((this->ptr_LogicLayer[this->DAT_SomeTile + 1] & (L_WALL_OR_GATEHOUSE | L_KEEP_NON_MANOR_HOUSE)) != 0) {
@@ -27,13 +29,6 @@ namespace Map {
           }
           ... and so on for the eight neighbours, where the north row is offset by
           ptr_MovementDirectionTranslationMatrix[DAT_SomeY * 8 + 0] and the south row by [+ 4].
-
-          Offsets used below (this is TileMapState):
-            0x554a38  DAT_SomeY
-            0x554a3c  DAT_SomeTile
-            0x554a40  bitFlag
-            0x554a58  ptr_LogicLayer
-            0x554a68  ptr_MovementDirectionTranslationMatrix
         */
         this->DAT_SomeY = y;
         this->DAT_SomeTile = MACRO_CALL_MEMBER(
@@ -41,14 +36,14 @@ namespace Map {
 
         __asm {
             mov eax, this
-            mov edi, dword ptr [eax + 0x554a68]
-            mov esi, dword ptr [eax + 0x554a58]
-            mov eax, dword ptr [eax + 0x554a3c]
+            mov edi, dword ptr [eax]TileMapState.ptr_MovementDirectionTranslationMatrix
+            mov esi, dword ptr [eax]TileMapState.ptr_LogicLayer
+            mov eax, dword ptr [eax]TileMapState.DAT_SomeTile
             shl eax, 0x2
             add esi, eax
             push esi
             mov eax, this
-            mov eax, dword ptr [eax + 0x554a38]
+            mov eax, dword ptr [eax]TileMapState.DAT_SomeY
             shl eax, 0x5
             add edi, eax
             mov edx, 0x0
@@ -104,7 +99,7 @@ namespace Map {
             or edx, 0x8
         south_done:
             mov eax, this
-            mov byte ptr [eax + 0x554a40], dl
+            mov byte ptr [eax]TileMapState.bitFlag, dl
         }
 
         return this->bitFlag;
