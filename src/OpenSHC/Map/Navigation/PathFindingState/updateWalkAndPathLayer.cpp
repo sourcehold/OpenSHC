@@ -25,7 +25,7 @@ namespace Map {
             short* psVar6;
             int* piVar7;
             int iVar8;
-            if (xPosition < 400 && yPosition < 400 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[yPosition * 400 + xPosition] != '\0') {
+            if (xPosition <= 399 && yPosition <= 399 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[yPosition * 400 + xPosition] != '\0') {
                 this->searchGeneration = this->searchGeneration + 1;
                 if (32000 < this->searchGeneration) {
                     this->searchGeneration = 1;
