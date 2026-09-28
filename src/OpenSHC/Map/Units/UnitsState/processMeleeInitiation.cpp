@@ -27,7 +27,7 @@ namespace Map {
         void UnitsState::processMeleeInitiation(int unitID)
 
         {
-            uint _neighbourHeights[8];
+            int _neighbourHeights[8];
             int _totalHeight;
             uint* _occupancyRow;
             int _adjacentTiles[24];
