@@ -21,7 +21,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049CD60
         BOOLEnum PathFindingState::findDirectNeighbourWalkableTile(uint x, uint y)
         {
-            if (x < 400 && y < 400 && *(char*)(y * 400 + 0x21aec98 + x) != '\0') {
+            if (x < 400 && y < 400 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] != '\0') {
                 int _directionIndex = 0;
                 do {
                     uint _x = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_directionIndex]
@@ -30,7 +30,7 @@ namespace Map {
                     uint _y = *(int*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
                                   + _directionIndex * 8 + 4)
                         + y;
-                    if (_x < 400 && _y < 400 && *(char*)(_y * 400 + 0x21aec98 + _x) != '\0') {
+                    if (_x < 400 && _y < 400 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[_y * 400 + _x] != '\0') {
                         int _tile = DAT_TileMapState::instance.directionTranslationMatrix[y][_directionIndex]
                             + DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
                         if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0xb1U) == 0
