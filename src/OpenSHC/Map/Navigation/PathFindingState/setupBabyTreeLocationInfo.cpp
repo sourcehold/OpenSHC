@@ -1,7 +1,9 @@
 #include "../PathFindingState.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
+#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 #include "OpenSHC/Map/Trees/TreeType.hpp"
+#include "OpenSHC/Map/Trees/TreeTypeShort.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_LandscapeState.hpp"
@@ -9,16 +11,14 @@
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Map/Trees/TreeTypeShort.hpp"
-#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
+        using OpenSHC::Map::Location::Point8ShortXY;
         using OpenSHC::Map::Trees::TreeType;
-            using OpenSHC::Map::Trees::TreeTypeShort;
-            using OpenSHC::Map::Location::Point8ShortXY;
+        using OpenSHC::Map::Trees::TreeTypeShort;
 
         /*
           WARNING: Enum "MappersEnum": Some values do not have unique names
@@ -29,18 +29,13 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049C020
         undefined4 PathFindingState::setupBabyTreeLocationInfo(int param_1, int treeType, uint x, uint y)
         {
-            short sVar1;
-            short sVar2;
-            TreeTypeShort TVar3;
             int iVar4;
-            int iVar5;
-            int iVar6;
             short* psVar7;
             int (*paiVar8)[8];
             this->ALG_ResultTile = 0;
             this->ALG_ResultY = 0;
             this->ALG_ResultX = 0;
-            if (((399 < x) || (399 < y)) || (*(char*)(y * 400 + 0x21aec98 + x) == '\0')) {
+            if (399 < x || 399 < y || *(char*)(y * 400 + 0x21aec98 + x) == '\0') {
                 return (undefined4)(0);
             }
             this->calculations = this->calculations + 1;
@@ -68,14 +63,14 @@ namespace Map {
                     if (param_1 < this->searchQueue.currentDistance) {
                         return (undefined4)(1);
                     }
-                    sVar1 = this->searchQueue.yQueue[this->searchQueue.readIndex];
-                    sVar2 = this->searchQueue.xQueue[this->searchQueue.readIndex];
+                    short sVar1 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    short sVar2 = this->searchQueue.xQueue[this->searchQueue.readIndex];
                     psVar7 = &DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[0].short_.yOffset;
                     paiVar8 = DAT_TileMapState::instance.directionTranslationMatrix + sVar1;
                     do {
-                        iVar5 = (*paiVar8)[0] + iVar4;
+                        int iVar5 = (*paiVar8)[0] + iVar4;
                         if (DAT_TileMapState::instance.WalkLayer[iVar5] != this->searchGeneration) {
-                            iVar6 = (int)DAT_TileMapState::instance.OrganismLayer[iVar5];
+                            int iVar6 = (int)DAT_TileMapState::instance.OrganismLayer[iVar5];
                             if ((iVar6 == 0) || (1999 < iVar6)) {
                                 if (DAT_TileMapState::instance.BuildingLayer[iVar5] != 0) {
                                     switch (DAT_BuildingsState::instance
@@ -90,7 +85,8 @@ namespace Map {
                                     case OpenSHC::Map::Buildings::BT_SIGNPOST:
                                     case OpenSHC::Map::Buildings::BT_POND:
                                         break;
-                                        default: goto switchD_0049c1f0_caseD_4;
+                                    default:
+                                        goto switchD_0049c1f0_caseD_4;
                                     }
                                 }
                                 if ((DAT_TileMapState::instance.LogicLayer[iVar5] & 0x703e25b5U) == 0) {
@@ -113,17 +109,17 @@ namespace Map {
                                         goto LAB_0049c26a;
                                 }
                             } else {
-                                TVar3 = DAT_LandscapeState::instance.trees[iVar6].treeType;
-                                if (TVar3 == ((TreeType)1)) {
+                                TreeTypeShort TVar3 = DAT_LandscapeState::instance.trees[iVar6].treeType;
+                                if (TVar3 == (TreeType)1) {
                                     return (undefined4)(0);
                                 }
-                                if (TVar3 == ((TreeType)2)) {
+                                if (TVar3 == (TreeType)2) {
                                     return (undefined4)(0);
                                 }
-                                if (TVar3 == ((TreeType)3)) {
+                                if (TVar3 == (TreeType)3) {
                                     return (undefined4)(0);
                                 }
-                                if (TVar3 == ((TreeType)4)) {
+                                if (TVar3 == (TreeType)4) {
                                     return (undefined4)(0);
                                 }
                             }
