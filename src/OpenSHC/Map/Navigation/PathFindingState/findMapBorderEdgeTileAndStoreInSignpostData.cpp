@@ -35,104 +35,105 @@ namespace Map {
             this->resultTile = 0;
             this->resultY = 0;
             this->resultX = 0;
-            if (x <= 399 && y <= 399 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] != '\0') {
-                this->searchGeneration = this->searchGeneration + 1;
-                if (32000 < this->searchGeneration) {
-                    this->searchGeneration = 1;
-                    MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                        0x27420, '\0', (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
-                }
-                this->searchQueue.currentDistance = 1;
-                this->searchQueue.writeIndex = 1;
-                this->searchQueue.readIndex = 0;
-                this->searchQueue.yQueue[0] = (short)y;
-                this->searchQueue.xQueue[0] = (short)x;
-                this->searchQueue.tilesQueue[0]
-                    = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
-                DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
-                DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
-                if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
-                    while (_tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex], _tile < 80399) {
-                        _x = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
-                        _y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
-                        this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
-                        if (this->searchQueue.currentDistance > maxDistance) {
-                            return;
-                        }
-                        _index = 0;
-                        paiVar1 = DAT_TileMapState::instance.directionTranslationMatrix + _y;
-                        do {
+            if (x > 399 || y > 399 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
+                return;
+            }
+            this->searchGeneration = this->searchGeneration + 1;
+            if (32000 < this->searchGeneration) {
+                this->searchGeneration = 1;
+                MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
+                    0x27420, '\0', (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
+            }
+            this->searchQueue.currentDistance = 1;
+            this->searchQueue.writeIndex = 1;
+            this->searchQueue.readIndex = 0;
+            this->searchQueue.yQueue[0] = (short)y;
+            this->searchQueue.xQueue[0] = (short)x;
+            this->searchQueue.tilesQueue[0]
+                = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+            DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
+            DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
+            if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
+                while (_tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex], _tile < 80399) {
+                    _x = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
+                    _y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
+                    if (this->searchQueue.currentDistance > maxDistance) {
+                        return;
+                    }
+                    _index = 0;
+                    paiVar1 = DAT_TileMapState::instance.directionTranslationMatrix + _y;
+                    do {
+                        /*
+                          for each direction, do
+                         */
+                        _candidate = (*paiVar1)[0] + _tile;
+                        if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration) {
                             /*
-                              for each direction, do
+                              reached map border edge?
                              */
-                            _candidate = (*paiVar1)[0] + _tile;
-                            if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration) {
-                                /*
-                                  reached map border edge?
-                                 */
-                                if ((DAT_TileMapState::instance.LogicLayer[_candidate] & 0x30) != 0) {
-                                    this->resultX = (int)_x;
-                                    this->resultY = (int)_y;
-                                    this->resultTile = _tile;
-                                    DAT_GameState::instance.mapAndTime
-                                        .signpostsMapEdge[signpostID][DAT_GameState::instance.mapAndTime
-                                                .signpostsMapEdgeDataCounter]
-                                        .x = (int)_x;
-                                    DAT_GameState::instance.mapAndTime
-                                        .signpostsMapEdge[signpostID][DAT_GameState::instance.mapAndTime
-                                                .signpostsMapEdgeDataCounter]
-                                        .y = this->resultY;
-                                    DAT_GameState::instance.mapAndTime
-                                        .signpostsMapEdge[signpostID][DAT_GameState::instance.mapAndTime
-                                                .signpostsMapEdgeDataCounter]
-                                        .tile = this->resultTile;
-                                    DAT_GameState::instance.mapAndTime.signpostsMapEdgeDataCounter
-                                        = DAT_GameState::instance.mapAndTime.signpostsMapEdgeDataCounter + 1;
-                                    if (50 < DAT_GameState::instance.mapAndTime.signpostsMapEdgeDataCounter) {
-                                        return;
-                                    }
-                                    break;
+                            if ((DAT_TileMapState::instance.LogicLayer[_candidate] & 0x30) != 0) {
+                                this->resultX = (int)_x;
+                                this->resultY = (int)_y;
+                                this->resultTile = _tile;
+                                DAT_GameState::instance.mapAndTime
+                                    .signpostsMapEdge[signpostID][DAT_GameState::instance.mapAndTime
+                                            .signpostsMapEdgeDataCounter]
+                                    .x = (int)_x;
+                                DAT_GameState::instance.mapAndTime
+                                    .signpostsMapEdge[signpostID][DAT_GameState::instance.mapAndTime
+                                            .signpostsMapEdgeDataCounter]
+                                    .y = this->resultY;
+                                DAT_GameState::instance.mapAndTime
+                                    .signpostsMapEdge[signpostID][DAT_GameState::instance.mapAndTime
+                                            .signpostsMapEdgeDataCounter]
+                                    .tile = this->resultTile;
+                                DAT_GameState::instance.mapAndTime.signpostsMapEdgeDataCounter
+                                    = DAT_GameState::instance.mapAndTime.signpostsMapEdgeDataCounter + 1;
+                                if (50 < DAT_GameState::instance.mapAndTime.signpostsMapEdgeDataCounter) {
+                                    return;
                                 }
-                                if ((DAT_TileMapState::instance.PathLinkageLayer[_tile]
-                                        & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_index])
-                                    != 0) {
-                                    /*
-                                      this direction can be walked to? add to queue
-                                     */
-                                    DAT_TileMapState::instance.CertainPathLayer[_candidate]
-                                        = (short)this->searchQueue.currentDistance + 1;
-                                    DAT_TileMapState::instance.WalkLayer[_candidate] = (short)this->searchGeneration;
-                                    this->searchQueue.xQueue[this->searchQueue.writeIndex]
-                                        = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_index]
-                                              .short_.xOffset
-                                        + _x;
-                                    this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                        = *(short*)((int)DAT_TerrainDefinedData::instance
-                                                        .clockwiseCardinalTranslationMatrix
-                                              + _index * 8 + 4)
-                                        + _y;
-                                    this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
-                                    this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                                    if (0x13a0f < this->searchQueue.writeIndex) {
-                                        this->searchQueue.writeIndex = 0;
-                                    }
+                                break;
+                            }
+                            if ((DAT_TileMapState::instance.PathLinkageLayer[_tile]
+                                    & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_index])
+                                != 0) {
+                                /*
+                                  this direction can be walked to? add to queue
+                                 */
+                                DAT_TileMapState::instance.CertainPathLayer[_candidate]
+                                    = (short)this->searchQueue.currentDistance + 1;
+                                DAT_TileMapState::instance.WalkLayer[_candidate] = (short)this->searchGeneration;
+                                this->searchQueue.xQueue[this->searchQueue.writeIndex]
+                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_index]
+                                          .short_.xOffset
+                                    + _x;
+                                this->searchQueue.yQueue[this->searchQueue.writeIndex]
+                                    = *(short*)((int)DAT_TerrainDefinedData::instance
+                                                    .clockwiseCardinalTranslationMatrix
+                                          + _index * 8 + 4)
+                                    + _y;
+                                this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
+                                this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
+                                if (0x13a0f < this->searchQueue.writeIndex) {
+                                    this->searchQueue.writeIndex = 0;
                                 }
                             }
-                            _index = _index + 2;
-                            paiVar1 = (int (*)[8])(*paiVar1 + 2);
-                        } while (_index < 8);
-                        this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                        if (0x13a0f < this->searchQueue.readIndex) {
-                            this->searchQueue.readIndex = 0;
                         }
-                        if (this->searchQueue.readIndex == this->searchQueue.writeIndex) {
-                            return;
-                        }
+                        _index = _index + 2;
+                        paiVar1 = (int (*)[8])(*paiVar1 + 2);
+                    } while (_index < 8);
+                    this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
+                    if (0x13a0f < this->searchQueue.readIndex) {
+                        this->searchQueue.readIndex = 0;
+                    }
+                    if (this->searchQueue.readIndex == this->searchQueue.writeIndex) {
+                        return;
                     }
                 }
             }
             return;
-        }
+}
 
     }
 }
