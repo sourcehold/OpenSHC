@@ -19,18 +19,14 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A69F0
         void PathFindingState::computeAttackVectorsBasedOnXAndY(int playerID)
         {
-            int iVar1;
-            uint x;
-            int _index;
-            uint y;
             this->calculations = this->calculations + 1;
-            _index = 0;
+            int _index = 0;
             this->searchQueue.readIndex = 0;
             if (this->searchQueue.writeIndex != 0) {
                 do {
-                    y = (uint)this->searchQueue.yQueue[this->searchQueue.readIndex];
-                    iVar1 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
-                    x = iVar1 - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
+                    uint y = (uint)this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    int iVar1 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                    uint x = iVar1 - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
                     if (DAT_TileMapState::instance.CertainPathLayer[iVar1] != 100) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::Map::Navigation::PathFindingState_Func::budgetFloodFillOnCertainPathLayer, this)(
