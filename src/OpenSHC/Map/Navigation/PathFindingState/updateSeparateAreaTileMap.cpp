@@ -66,7 +66,7 @@ namespace Map {
                     sVar3 = sVar3 + 1;
                     local_c = local_c + 3;
                 }
-                if ((char)DAT_TileMapState::instance.PathConnectionLayer[local_20] == '\0'
+                if ((char)(short)DAT_TileMapState::instance.PathConnectionLayer[local_20] == '\0'
                     && (DAT_TileMapState::instance.LogicLayer[local_20] & 0x4a5014b1U) == 0) {
                     this->searchQueue.tilesQueue[0] = local_20;
                     forceUpdate = 1;
@@ -84,7 +84,7 @@ namespace Map {
                             this->searchQueue.yQueue[forceUpdate] = uVar2;
                             forceUpdate = forceUpdate + 1;
                         }
-                        if ((bVar1 & 4) != 0 && DAT_TileMapState::instance.PathConnectionLayer[iVar7 + 1] == 0) {
+                        if ((bVar1 & 4) != 0 && (short)DAT_TileMapState::instance.PathConnectionLayer[iVar7 + 1] == 0) {
                             DAT_TileMapState::instance.PathConnectionLayer[iVar7 + 1] = uVar4;
                             this->searchQueue.tilesQueue[forceUpdate] = iVar7 + 1;
                             this->searchQueue.yQueue[forceUpdate] = uVar2;
@@ -97,13 +97,13 @@ namespace Map {
                             this->searchQueue.yQueue[forceUpdate] = uVar2 - 1;
                             forceUpdate = forceUpdate + 1;
                         }
-                        if ((bVar1 & 1) != 0 && DAT_TileMapState::instance.PathConnectionLayer[iVar6] == 0) {
+                        if ((bVar1 & 1) != 0 && (short)DAT_TileMapState::instance.PathConnectionLayer[iVar6] == 0) {
                             DAT_TileMapState::instance.PathConnectionLayer[iVar6] = uVar4;
                             this->searchQueue.tilesQueue[forceUpdate] = iVar6;
                             this->searchQueue.yQueue[forceUpdate] = uVar2 - 1;
                             forceUpdate = forceUpdate + 1;
                         }
-                        if ((bVar1 & 2) != 0 && DAT_TileMapState::instance.PathConnectionLayer[iVar6 + 1] == 0) {
+                        if ((bVar1 & 2) != 0 && (short)DAT_TileMapState::instance.PathConnectionLayer[iVar6 + 1] == 0) {
                             DAT_TileMapState::instance.PathConnectionLayer[iVar6 + 1] = uVar4;
                             this->searchQueue.tilesQueue[forceUpdate] = iVar6 + 1;
                             this->searchQueue.yQueue[forceUpdate] = uVar2 - 1;
@@ -116,13 +116,13 @@ namespace Map {
                             this->searchQueue.yQueue[forceUpdate] = uVar2 + 1;
                             forceUpdate = forceUpdate + 1;
                         }
-                        if ((bVar1 & 0x10) != 0 && DAT_TileMapState::instance.PathConnectionLayer[iVar7] == 0) {
+                        if ((bVar1 & 0x10) != 0 && (short)DAT_TileMapState::instance.PathConnectionLayer[iVar7] == 0) {
                             DAT_TileMapState::instance.PathConnectionLayer[iVar7] = uVar4;
                             this->searchQueue.tilesQueue[forceUpdate] = iVar7;
                             this->searchQueue.yQueue[forceUpdate] = uVar2 + 1;
                             forceUpdate = forceUpdate + 1;
                         }
-                        if ((bVar1 & 8) != 0 && DAT_TileMapState::instance.PathConnectionLayer[iVar7 + 1] == 0) {
+                        if ((bVar1 & 8) != 0 && (short)DAT_TileMapState::instance.PathConnectionLayer[iVar7 + 1] == 0) {
                             DAT_TileMapState::instance.PathConnectionLayer[iVar7 + 1] = uVar4;
                             this->searchQueue.tilesQueue[forceUpdate] = iVar7 + 1;
                             this->searchQueue.yQueue[forceUpdate] = uVar2 + 1;
