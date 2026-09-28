@@ -44769,7 +44769,7 @@ SHC_3BB0A8C1_0x00515740 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00515A20 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00515C80 | 0.0% | Pending
+SHC_3BB0A8C1_0x00515C80 | 52.6% | ecx not kept across callee
 
 SHC_3BB0A8C1_0x00515DA0 | 0.0% | Pending
 
