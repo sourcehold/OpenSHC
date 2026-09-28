@@ -2,6 +2,8 @@
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
+#include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
+#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -10,17 +12,15 @@
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
-#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
         using OpenSHC::Map::Buildings::BuildingType;
+        using OpenSHC::Map::Buildings::BuildingTypeShort;
+        using OpenSHC::Map::Location::Point8ShortXY;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-            using OpenSHC::Map::Buildings::BuildingTypeShort;
-            using OpenSHC::Map::Location::Point8ShortXY;
 
         /*
           WARNING: Enum "MappersEnum": Some values do not have unique names
@@ -31,7 +31,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049DB30
         BOOLEnum PathFindingState::checkEnemyBuildingOrDefensiveStructureWithin12Tiles(int playerID, uint x, uint y)
         {
-            int _candidate;
             short* psVar1;
             int (*paiVar2)[8];
             bool bVar3;
@@ -40,7 +39,7 @@ namespace Map {
             int _tile;
             short _x;
             short _y;
-            if (((399 < x) || (399 < y)) || (*(char*)(y * 400 + 0x21aec98 + x) == '\0')) {
+            if (399 < x || 399 < y || *(char*)(y * 400 + 0x21aec98 + x) == '\0') {
                 return FALSE;
             }
             this->searchGeneration = this->searchGeneration + 1;
@@ -77,21 +76,21 @@ namespace Map {
                     /*
                       find enemy building
                      */
-                    if (((_buildingType != OpenSHC::Map::Buildings::BT_PITCHDITCH)
-                            && (_buildingType != OpenSHC::Map::Buildings::BT_KILLINGPIT))
-                        && (DAT_GameState::instance.mapAndTime
+                    if (_buildingType != OpenSHC::Map::Buildings::BT_PITCHDITCH
+                        && _buildingType != OpenSHC::Map::Buildings::BT_KILLINGPIT
+                        && DAT_GameState::instance.mapAndTime
                                 .playerTeams[DAT_BuildingsState::instance.buildings[_building].owner]
-                            != DAT_GameState::instance.mapAndTime.playerTeams[playerID])) {
+                            != DAT_GameState::instance.mapAndTime.playerTeams[playerID]) {
                         return TRUE;
                     }
                 }
                 /*
                   find enemy wall tower or gatehouse
                  */
-                if (((DAT_TileMapState::instance.LogicLayer[_tile] & 0x100U) != 0)
-                    && (DAT_GameState::instance.mapAndTime
+                if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x100U) != 0
+                    && DAT_GameState::instance.mapAndTime
                             .playerTeams[(DAT_TileMapState::instance.WallOwnerLayer[_tile] & 7) + 1]
-                        != DAT_GameState::instance.mapAndTime.playerTeams[playerID])) {
+                        != DAT_GameState::instance.mapAndTime.playerTeams[playerID]) {
                     return TRUE;
                 }
                 this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
@@ -103,7 +102,7 @@ namespace Map {
                 psVar1 = &DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[0].short_.yOffset;
                 paiVar2 = DAT_TileMapState::instance.directionTranslationMatrix + _y;
                 do {
-                    _candidate = (*paiVar2)[0] + _tile;
+                    int _candidate = (*paiVar2)[0] + _tile;
                     if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration) {
                         DAT_TileMapState::instance.CertainPathLayer[_candidate]
                             = (short)this->searchQueue.currentDistance + 1;
