@@ -3,18 +3,18 @@
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/Map/Location/Point8IntXY.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_DirectionAlgorithmState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Map/Location/Point8IntXY.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Navigation {
-            using OpenSHC::Map::Location::Point8IntXY;
+        using OpenSHC::Map::Location::Point8IntXY;
 
         /*
           WARNING: Enum "MappersEnum": Some values do not have unique names
@@ -40,10 +40,10 @@ namespace Map {
             uint local_18;
             int local_10;
             undefined4 local_8;
-            if (((399 < param_2) || (399 < param_3)) || (*(char*)(param_3 * 400 + 0x21aec98 + param_2) == '\0')) {
+            if (399 < param_2 || 399 < param_3 || *(char*)(param_3 * 400 + 0x21aec98 + param_2) == '\0') {
                 return (undefined4)(0);
             }
-            if (((param_4 < 400) && (param_5 < 400)) && (*(char*)(param_5 * 400 + 0x21aec98 + param_4) != '\0')) {
+            if (param_4 < 400 && param_5 < 400 && *(char*)(param_5 * 400 + 0x21aec98 + param_4) != '\0') {
                 iVar5 = DAT_ViewportRenderState::instance.translationMatrix[param_5].addXgetTile + param_4;
                 local_18 = (uint)DAT_TileMapState::instance.HeightLayer[iVar5];
                 uVar1
@@ -64,8 +64,8 @@ namespace Map {
                     iVar6 = (*paiVar3)[0] + iVar5;
                     iVar2 = MACRO_CALL_MEMBER(
                         OpenSHC::Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
-                        this)(param_1, (dword)((int)((int)(short)uVar1)),
-                        (dword)((int)((int)(short)DAT_TileMapState::instance.PathConnectionLayer[iVar6])), 0);
+                        this)(param_1, (dword)((int)((short)uVar1)),
+                        (dword)((int)((short)DAT_TileMapState::instance.PathConnectionLayer[iVar6])), 0);
                     if (iVar2 != 0) {
                         uVar4 = (uint)DAT_TileMapState::instance.HeightLayer[iVar6];
                         if (DAT_TileMapState::instance.BuildingLayer[iVar6] != 0) {
@@ -74,12 +74,11 @@ namespace Map {
                                 DAT_BuildingsState::ptr)((int)DAT_TileMapState::instance.BuildingLayer[iVar6]);
                             uVar4 = uVar4 + iVar2;
                         }
-                        if ((((int)local_18 <= (int)(uVar4 + 0x10)) && ((int)(uVar4 - 0x10) <= (int)local_18))
+                        if ((int)local_18 <= (int)(uVar4 + 0x10) && (int)(uVar4 - 0x10) <= (int)local_18
                             && (MACRO_CALL_MEMBER(
                                     OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
-                                    DAT_DirectionAlgorithmState::ptr)(param_2, (int)((int)(param_3)),
-                                    (int)((int)(((Point8IntXY*)(piVar7 + -1))->xOffset + param_4)),
-                                    (int)((int)(*piVar7 + param_5))),
+                                    DAT_DirectionAlgorithmState::ptr)(param_2, (int)(param_3),
+                                    (int)(((Point8IntXY*)(piVar7 + -1))->xOffset + param_4), (int)(*piVar7 + param_5)),
                                 DAT_DirectionAlgorithmState::instance.distanceHigh < local_10)) {
                             local_10 = DAT_DirectionAlgorithmState::instance.distanceHigh;
                             this->climbX = ((Point8IntXY*)(piVar7 + -1))->xOffset + param_4;
