@@ -63,8 +63,8 @@ namespace Map {
                     if (param_1 < this->searchQueue.currentDistance) {
                         return (undefined4)(1);
                     }
-                    short sVar1 = this->searchQueue.yQueue[this->searchQueue.readIndex];
-                    short sVar2 = this->searchQueue.xQueue[this->searchQueue.readIndex];
+                    int sVar1 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    int sVar2 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                     for (int _direction = 0; _direction < 8; _direction = _direction + 1) {
                         int iVar5 = DAT_TileMapState::instance.directionTranslationMatrix[sVar1][_direction] + iVar4;
                         if (DAT_TileMapState::instance.WalkLayer[iVar5] != this->searchGeneration) {
