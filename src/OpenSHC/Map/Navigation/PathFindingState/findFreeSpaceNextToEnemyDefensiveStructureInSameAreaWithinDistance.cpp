@@ -3,6 +3,9 @@
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
+#include "OpenSHC/Map/Buildings/BuildingTypeInt.hpp"
+#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
+#include "OpenSHC/Map/Navigation/Algorithms/XYPair.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_ClimbLogicDefinedData.hpp"
@@ -11,18 +14,15 @@
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Map/Navigation/Algorithms/XYPair.hpp"
-#include "OpenSHC/Map/Buildings/BuildingTypeInt.hpp"
-#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
         using OpenSHC::Map::Buildings::BuildingType;
-            using OpenSHC::Map::Navigation::Algorithms::XYPair;
-            using OpenSHC::Map::Buildings::BuildingTypeInt;
-            using OpenSHC::Map::Location::Point8ShortXY;
+        using OpenSHC::Map::Buildings::BuildingTypeInt;
+        using OpenSHC::Map::Location::Point8ShortXY;
+        using OpenSHC::Map::Navigation::Algorithms::XYPair;
 
         /*
           WARNING: Type propagation algorithm not settling
@@ -37,7 +37,6 @@ namespace Map {
         void PathFindingState::findFreeSpaceNextToEnemyDefensiveStructureInSameAreaWithinDistance(
             int tile, int maxDestinations, int* area, int playerID, int shortenedDistance, int direction)
         {
-            short sVar1;
             int iVar2;
             int _candidate2;
             int* piVar3;
@@ -96,16 +95,16 @@ namespace Map {
                     paiVar6 = DAT_TileMapState::instance.directionTranslationMatrix + _y;
                     do {
                         _candidate = (*paiVar6)[0] + _tile;
-                        if ((DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration)
-                            && ((area == (int*)(int)(short)DAT_TileMapState::instance.PathConnectionLayer[_candidate]
+                        if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration
+                            && (area == (int*)(int)(short)DAT_TileMapState::instance.PathConnectionLayer[_candidate]
                                 || (iVar2 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                                   calculateCanPlayerUnitsNavigateToAreaFromArea,
                                         this)(playerID, (dword)((int)(area)),
                                         (dword)((int)((
                                             int)(short)DAT_TileMapState::instance.PathConnectionLayer[_candidate])),
                                         0),
-                                    iVar2 != 0)))) {
-                            sVar1 = ((Point8ShortXY*)(psVar5 + -2))->xOffset;
+                                    iVar2 != 0))) {
+                            short sVar1 = ((Point8ShortXY*)(psVar5 + -2))->xOffset;
                             /*
                               queue tiles in same area that are pathable without climbing
                              */
@@ -150,24 +149,24 @@ namespace Map {
                               if a wall gatehouse crenel keep and not a stockpile, and not a keep, and wall   is of
                               enemy... break
                              */
-                            if (((((DAT_TileMapState::instance.LogicLayer[_candidate2] & 0x10000300U) != 0)
-                                     && ((DAT_TileMapState::instance.LogicLayer[_candidate2] & 2U) == 0))
-                                    && ((DAT_TileMapState::instance.BuildingLayer[_candidate2] == 0
-                                        || ((_buildingType = (BuildingTypeInt)(short)DAT_BuildingsState::instance
-                                                 .buildings[DAT_TileMapState::instance.BuildingLayer[_candidate2]]
-                                                 .buildingType,
-                                            _buildingType != OpenSHC::Map::Buildings::BT_STOCKPILE
-                                                && (2 < _buildingType - OpenSHC::Map::Buildings::BT_MANORHOUSE))))))
-                                && (DAT_GameState::instance.mapAndTime
+                            if ((DAT_TileMapState::instance.LogicLayer[_candidate2] & 0x10000300U) != 0
+                                && (DAT_TileMapState::instance.LogicLayer[_candidate2] & 2U) == 0
+                                && (DAT_TileMapState::instance.BuildingLayer[_candidate2] == 0
+                                    || ((_buildingType = (BuildingTypeInt)(short)DAT_BuildingsState::instance
+                                             .buildings[DAT_TileMapState::instance.BuildingLayer[_candidate2]]
+                                             .buildingType,
+                                        _buildingType != OpenSHC::Map::Buildings::BT_STOCKPILE
+                                            && (2 < _buildingType - OpenSHC::Map::Buildings::BT_MANORHOUSE))))
+                                && DAT_GameState::instance.mapAndTime
                                         .playerTeams[(DAT_TileMapState::instance.WallOwnerLayer[_candidate2] & 7) + 1]
-                                    != DAT_GameState::instance.mapAndTime.playerTeams[playerID]))
+                                    != DAT_GameState::instance.mapAndTime.playerTeams[playerID])
                                 break;
                             _candidate2 = 0;
                             _index = _index + 1;
                             pXVar4 = pXVar4 + 1;
                         } while (_index < 4);
                         if (((shortenedDistance != 1) || (DAT_TileMapState::instance.UnitLayer[_candidate2] == 0))
-                            && (_candidate2 != 0)) {
+                            && _candidate2 != 0) {
                             area[-1] = _tile2;
                             _dIndex = _dIndex + 1;
                             *area = _candidate2;
@@ -186,7 +185,7 @@ namespace Map {
                 piVar3 = &((PathFindingStatePartB*)(this->climbData + 200))->destinationsArray[_dIndex].tile2OrAHelper;
                 do {
                     iVar2 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
-                    if (((DAT_TileMapState::instance.LogicLayer[iVar2] & 0x10000300U) == 0) && (iVar2 != -1)) {
+                    if ((DAT_TileMapState::instance.LogicLayer[iVar2] & 0x10000300U) == 0 && iVar2 != -1) {
                         ((PathHelper12*)(piVar3 + -1))->tile1 = iVar2;
                         *piVar3 = 0;
                         _dIndex = _dIndex + 1;
