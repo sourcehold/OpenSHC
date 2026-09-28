@@ -21,17 +21,14 @@ namespace Map {
         BOOLEnum PathFindingState::findDestinationCostLowerThan6(int tile, int maxDistance)
         {
             uint _cost;
-            int _y;
-            int _tile;
             this->searchQueue.readIndex = 0;
             if (this->searchQueue.writeIndex != 0) {
                 do {
-                    _y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
-                    _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
-                    if ((((DAT_TileMapState::instance.WalkLayer[_tile] == this->searchGeneration)
-                             && (_cost = (uint) * (byte*)(tile * 0x13a10 + 0x1ee2998 + _tile), _cost != 0))
-                            && (_cost - 0x28 < 6))
-                        && (maxDistance <= DAT_TileMapState::instance.CertainPathLayer[_tile])) {
+                    int _y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    int _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                    if (DAT_TileMapState::instance.WalkLayer[_tile] == this->searchGeneration
+                        && (_cost = (uint) * (byte*)(tile * 0x13a10 + 0x1ee2998 + _tile), _cost != 0)
+                        && _cost - 0x28 < 6 && maxDistance <= DAT_TileMapState::instance.CertainPathLayer[_tile]) {
                         this->ALG_ResultX = _tile - DAT_ViewportRenderState::instance.translationMatrix[_y].addXgetTile;
                         this->ALG_ResultY = _y;
                         this->ALG_ResultTile = _tile;
