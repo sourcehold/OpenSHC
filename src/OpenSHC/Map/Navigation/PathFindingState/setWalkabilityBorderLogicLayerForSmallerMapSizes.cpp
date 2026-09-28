@@ -51,8 +51,8 @@ namespace Map {
                     if (0x13a0f < uVar4) {
                         return;
                     }
-                    short sVar1 = this->searchQueue.yQueue[this->searchQueue.readIndex];
-                    short sVar2 = this->searchQueue.xQueue[this->searchQueue.readIndex];
+                    int sVar1 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    int sVar2 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[uVar4];
                     piVar6 = DAT_TileMapState::instance.directionTranslationMatrix[sVar1] + 1;
                     psVar5 = &DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[0].short_.yOffset;
