@@ -83,7 +83,7 @@ namespace Map {
                     if (0x13a10 < this->searchQueue.currentDistance) {
                         return (undefined4)(0);
                     }
-                    if (param_2 < this->searchQueue.currentDistance) {
+                    if (this->searchQueue.currentDistance > param_2) {
                         return (undefined4)(0);
                     }
                     ushort uVar4 = (short)DAT_TileMapState::instance.UnitLayer[uVar1];
