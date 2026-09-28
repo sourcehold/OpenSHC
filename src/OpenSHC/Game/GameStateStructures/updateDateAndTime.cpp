@@ -27,7 +27,7 @@ namespace Game {
         /*
           if currentTick is 0, 50, 100, 150
          */
-        bool startOfDay = currentTick == (currentTick / 50) * 50;
+        bool startOfDay = currentTick % 50 == 0;
         this->mapAndTime.weekChanged = 0;
         this->mapAndTime.monthChanged = 0;
         this->mapAndTime.yearChanged = 0;
