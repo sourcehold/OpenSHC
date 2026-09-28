@@ -56,7 +56,7 @@ namespace Map {
                 if (0x13a0f < uVar2) {
                     return local_c;
                 }
-                short sVar1 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                int sVar1 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                 this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[uVar2];
                 if (0x13a10 < this->searchQueue.currentDistance) {
                     return local_c;
