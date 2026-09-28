@@ -55,8 +55,8 @@ namespace Map {
                 if ((_currentTile < 0) || (0x13a0f < _currentTile)) {
                     return FALSE;
                 }
-                short _currentX = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                short _currentY = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                int _currentX = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
+                int _currentY = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                 if ((DAT_TileMapState::instance.LogicLayer[_currentTile] & 0x100) != 0
                     && (DAT_TileMapState::instance.LogicLayer[_currentTile] & 2) == 0
                     && wallOwnerPlayerID == (DAT_TileMapState::instance.WallOwnerLayer[_currentTile] & 7) + 1) {
