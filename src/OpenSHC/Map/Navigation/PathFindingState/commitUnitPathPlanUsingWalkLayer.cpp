@@ -50,7 +50,7 @@ namespace Map {
             }
             _tile = DAT_ViewportRenderState::instance.translationMatrix[this->unitY].addXgetTile + this->unitX;
             _y = this->unitY;
-            if (DAT_TileMapState::instance.PathConnectionLayer[_tile] == 0) {
+            if ((short)DAT_TileMapState::instance.PathConnectionLayer[_tile] == 0) {
                 return 0;
             }
             if (param_1 == 0) {
