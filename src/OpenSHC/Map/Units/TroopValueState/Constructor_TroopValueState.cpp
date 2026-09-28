@@ -7,7 +7,7 @@ namespace Map {
         using OpenSHC::Map::Units::TroopValueState;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0051D680
-        TroopValueState* TroopValueState::constructTroopValueState()
+        TroopValueState* TroopValueState::Constructor_TroopValueState()
         {
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::clearAttackInfo, this)();
             return this;

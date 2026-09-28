@@ -9,7 +9,7 @@ namespace Map {
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00533090
-        BOOLEnum UnitsState::returnFalseStub() { return FALSE; }
+        BOOLEnum UnitsState::returnFalseStub(int unitID) { return FALSE; }
 
     }
 }
