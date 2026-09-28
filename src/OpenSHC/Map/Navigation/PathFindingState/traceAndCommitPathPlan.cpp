@@ -26,7 +26,7 @@ namespace Map {
             uint uVar3;
             int iVar4;
             uint uVar5;
-            if (x < 400 && y < 400 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] != '\0' && x2 < 400 && y2 < 400
+            if (x <= 399 && y <= 399 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] != '\0' && x2 <= 399 && y2 <= 399
                 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y2 * 400 + x2] != '\0') {
                 uint tile = DAT_ViewportRenderState::instance.translationMatrix[y2].addXgetTile + x2;
                 int iVar2 = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
