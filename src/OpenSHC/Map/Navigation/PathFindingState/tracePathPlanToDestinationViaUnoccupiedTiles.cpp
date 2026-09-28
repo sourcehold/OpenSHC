@@ -24,7 +24,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049A370
         BOOLEnum PathFindingState::tracePathPlanToDestinationViaUnoccupiedTiles(uint x, uint y, uint destX, uint destY)
         {
-            int _candidate;
             byte* pbVar1;
             short _gen_2;
             int _direction;
@@ -35,10 +34,10 @@ namespace Map {
             int _fc;
             int _gen;
             byte* _pPathPlan;
-            if (((399 < x) || (399 < y)) || (*(char*)(y * 400 + 0x21aec98 + x) == '\0')) {
+            if (399 < x || 399 < y || *(char*)(y * 400 + 0x21aec98 + x) == '\0') {
                 return FALSE;
             }
-            if (((destX < 400) && (destY < 400)) && (*(char*)(destY * 400 + 0x21aec98 + destX) != '\0')) {
+            if (destX < 400 && destY < 400 && *(char*)(destY * 400 + 0x21aec98 + destX) != '\0') {
                 this->searchGeneration = this->searchGeneration + 1;
                 if (32000 < this->searchGeneration) {
                     this->searchGeneration = 1;
@@ -49,7 +48,7 @@ namespace Map {
                 _pPathPlan = this->searchQueue.ptrPathPlan;
                 _gen = this->searchGeneration;
                 _budget = 0;
-                _candidate = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+                int _candidate = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
                 _axgt2 = DAT_ViewportRenderState::instance.translationMatrix[destY].addXgetTile;
                 _ppIndex = this->searchQueue.pathPlanIndex;
                 while (true) {
@@ -117,7 +116,8 @@ namespace Map {
                       update tile with new direction
                      */
                     _candidate = _candidate + DAT_TileMapState::instance.directionTranslationMatrix[y][_direction];
-                    x = x + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.xOffset;
+                    x = x
+                        + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.xOffset;
                     y = y
                         + *(int*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
                             + _direction * 8 + 4);
