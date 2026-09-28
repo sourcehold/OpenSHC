@@ -155,7 +155,7 @@ namespace Map {
                               (minimum spacing requirement)
                              */
                             if (4 < this->searchQueue.currentDistance
-                                && DAT_TileMapState::instance.UnitLayer[_offsetTile] == 0 && bVar2) {
+                                && (short)DAT_TileMapState::instance.UnitLayer[_offsetTile] == 0 && bVar2) {
                                 /*
                                   Get height of candidate tile
                                  */
@@ -189,7 +189,7 @@ namespace Map {
                                      */
                                     if ((DAT_TileMapState::instance.LogicLayer[iVar5] & 0x4a7014b1U) != 0
                                         || (DAT_TileMapState::instance.LogicLayer[iVar5] & 4U) != 0
-                                        || DAT_TileMapState::instance.UnitLayer[iVar5] != 0
+                                        || (short)DAT_TileMapState::instance.UnitLayer[iVar5] != 0
                                         || DAT_TileMapState::instance.BuildingLayer[iVar5] != 0)
                                         break;
                                     /*
@@ -212,7 +212,7 @@ namespace Map {
                                     iVar5 = *piVar4 + _offsetTile;
                                     if ((DAT_TileMapState::instance.LogicLayer[iVar5] & 0x4a7014b1U) != 0
                                         || (DAT_TileMapState::instance.LogicLayer[iVar5] & 4U) != 0
-                                        || DAT_TileMapState::instance.UnitLayer[iVar5] != 0
+                                        || (short)DAT_TileMapState::instance.UnitLayer[iVar5] != 0
                                         || DAT_TileMapState::instance.BuildingLayer[iVar5] != 0) {
                                         iVar6 = iVar6 + 1;
                                         break;
@@ -226,7 +226,7 @@ namespace Map {
                                     iVar5 = piVar4[1] + _offsetTile;
                                     if ((DAT_TileMapState::instance.LogicLayer[iVar5] & 0x4a7014b1U) != 0
                                         || (DAT_TileMapState::instance.LogicLayer[iVar5] & 4U) != 0
-                                        || DAT_TileMapState::instance.UnitLayer[iVar5] != 0
+                                        || (short)DAT_TileMapState::instance.UnitLayer[iVar5] != 0
                                         || DAT_TileMapState::instance.BuildingLayer[iVar5] != 0) {
                                         iVar6 = iVar6 + 2;
                                         break;
@@ -239,7 +239,7 @@ namespace Map {
                                     iVar5 = piVar4[2] + _offsetTile;
                                     if ((DAT_TileMapState::instance.LogicLayer[iVar5] & 0x4a7014b1U) != 0
                                         || (DAT_TileMapState::instance.LogicLayer[iVar5] & 4U) != 0
-                                        || DAT_TileMapState::instance.UnitLayer[iVar5] != 0
+                                        || (short)DAT_TileMapState::instance.UnitLayer[iVar5] != 0
                                         || DAT_TileMapState::instance.BuildingLayer[iVar5] != 0) {
                                         iVar6 = iVar6 + 3;
                                         uVar7 = uVar8;
