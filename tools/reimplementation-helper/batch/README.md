@@ -54,6 +54,10 @@ it was applied, but none is guaranteed to be -- re-measure after running one.
 | `test_deparen.py` | Precedence tests for `deparen.py`. Run after touching its table: an earlier version silently rewrote `(a != 0 \|\| b != 0) && (x & 0x100) == 0` into a different expression that still compiled. |
 | `undiv.py [filter] [--apply]` | Turn MSVC's biased shift for a signed power-of-two division back into a division: `(x + (x >> 0x1f & 7U)) >> 3` -> `x / 8`. Dry run unless `--apply`. Usually a large gain rather than merely neutral: over one namespace it was worth up to 22% on a single function. |
 | `test_undiv.py` | Cases for `undiv.py`, including the near-misses it must leave alone: a shift disagreeing with the mask, a mask that is not 2^k - 1, and a bias taken from another variable. |
+| `unmod.py [filter] [--apply]` | The same for a signed power-of-two remainder: `v = x & 0x8000000f;` plus the negative-case repair is `v = x % 16`. Forces a signed dividend, because the repair only exists for a signed operand and an unsigned `%` compiles to a bare `and`. |
+| `test_unmod.py` | Cases for `unmod.py`: a repair constant that does not complement the mask, a repair applied to another variable, and a bare mask with no repair. |
+| `unptr.py [filter] [--apply]` | Replace the decompiler's field-walking pointers (`piVar1 = &x.f; *piVar1 = *piVar1 + 1;`) with the field itself. Only the two-adjacent-line shape, since a pointer freezes the address while the field form re-evaluates the index. Reports which pointers are still in use. |
+| `test_unptr.py` | Cases for `unptr.py`, including a pointer declared on the spot (`char* pcVar3 = &...`, whose type prefix must go with it) and the set-up-then-use-later shape it must leave alone. |
 
 ## Typical loop
 

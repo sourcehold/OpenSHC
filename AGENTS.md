@@ -115,10 +115,15 @@ style question - see the note on unpredictable styles below. `declare_at_use.py`
 `undiv.py` undo decompiler artefacts across a whole selection; run `test_deparen.py` and `test_undiv.py` after
 touching the precedence table or the division patterns those two rely on.
 
-The rewriting scripts take a path filter and default to a dry run, so read the diff before building: a bad rewrite
-still compiles. Two of these tools have quietly reported on the wrong thing in the past - `try_styles.py` narrows
-the build list while it works, and `reccmp_report.py` without `--run` reads the previous run's `diff.json` - so if a
-report covers suspiciously few functions, check `cmake/openshc-sources.txt.local` and re-run with `--run`.
+The rewriting scripts take a path filter and default to a dry run. Read the diff before building, then run
+`syntax_check.py` on what you touched: reviewing a diff catches a wrong transformation but not a rewrite that leaves
+the surrounding text unparseable, and `/Zs` finds that in seconds instead of a full build.
+
+**`build.bat` exits 0 even when compilation failed**, which leaves the previous DLL and the previous `diff.json` in
+place, so every reccmp number then describes the code as it was before the edit. An "unchanged" percentage is the
+symptom. `build_quiet.py` now exits non-zero on `BUILD_FAIL` so `build && report` stops, and `load_diff()` warns when a
+source file is newer than `diff.json`; `reccmp_report.py` also warns when the last run covers only part of the build
+list, which is what `try_styles.py` leaves behind while it narrows the list to one function.
 
 `orig_asm.py NAME` prints the **original** instruction stream of one function from the last reccmp run, rather than the
 interleaved diff `reccmp_report.py diff` gives you. Use it when the diff comes back truncated, or when you need the
@@ -188,6 +193,14 @@ Style expected of reimplemented code:
 - Never change the `// FUNCTION:` address line; keep generated headers untouched unless asked.
 - Write sources as UTF-8 with LF line endings.
 
+When removing the decompiler's `goto`s, check how many predecessors the target block has. A `LAB_*` reached from
+several places has to be **duplicated** into each path; dropping it instead still compiles and is silent. Three such
+bugs sat in one function (`processEntityDamageToUnit`): a damage value never assigned so the variable still held an
+unrelated height, a `break` left outside its `if` that made six `switch` arms unreachable, and a `case` that fell out
+of the switch leaving the value it should have set uninitialised. Fixing them was also worth 7.7% of match, so a
+suspicious dead store is worth decompiling for rather than deleting. Note this is the opposite of the duplicate-tail
+pattern below, where our shared block should have been two separate branches - check the predecessor count either way.
+
 Diff patterns that were reliable (more in the cheat sheet):
 
 - Absolute `DAT_*` addresses in the original asm where the source uses `this->` mean the original accessed the global instance.
@@ -209,6 +222,14 @@ Diff patterns that were reliable (more in the cheat sheet):
   great deal - 22 sites in one namespace, up to +22% on a single function (`undiv.py` rewrites them). The bias also
   proves the dividend is signed, so a surrounding `(int)` cast is redundant once the division is back. Measure
   anyway: one site out of 22 came out 0.1% worse and kept the shift.
+- `v = x & 0x8000000f;` followed by `if ((int)v < 0) v = (v - 1 | 0xfffffff0) + 1;` is `v = x % 16` - the low bits and
+  the sign bit masked together, then the negative case repaired (`unmod.py`). The mask's low bits and the `|` constant
+  always complement each other. The repair proves the operand is signed, so the dividend has to stay signed in our
+  source too: the decompiler's `uint` locals and its `+ 4U` make the sum unsigned, and an unsigned `%` compiles to a
+  bare `and` with no repair, which loses the match instead of gaining it.
+- `piVar1 = &x.field; *piVar1 = *piVar1 + 1;` is `x.field = x.field + 1` (`unptr.py`), worth 1.2% over 60 sites in one
+  function. Only rewrite it when the store immediately follows the pointer: a pointer freezes the address while the
+  field form re-evaluates the index, so with a call or a write to the index in between the two forms differ.
 - Our `movzx` against the original's `movsx` on a `ushort` layer (`PathConnectionLayer`) means the original cast the
   read: `dword x = (short)layer[i]`, one `movsx`. Declaring the local `short` does not do it - the signedness comes
   from the cast on the array access, not from the destination.

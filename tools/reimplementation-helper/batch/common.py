@@ -99,7 +99,28 @@ def run_reccmp():
         sys.exit("reccmp failed:\n" + result.stdout[-800:] + result.stderr[-800:])
 
 
+def warn_if_stale():
+    """Warn when diff.json predates a source file it is supposed to describe.
+
+    build.bat exits 0 even when compilation failed, so a failed build leaves the previous
+    DLL and the previous diff.json in place and every reccmp number silently describes the
+    code as it was before the edit. That has been mistaken for "the change was neutral"
+    more than once, so say it out loud.
+    """
+    try:
+        built = DIFF_JSON.stat().st_mtime
+    except OSError:
+        return
+    newer = [f for f in list_files() if Path(f).exists() and Path(f).stat().st_mtime > built]
+    if newer:
+        sys.stderr.write(
+            "warning: %d source file(s) are newer than the last reccmp run, e.g. %s.\n"
+            "         Re-build (and check for BUILD_FAIL) before trusting these numbers.\n"
+            % (len(newer), newer[0]))
+
+
 def load_diff():
+    warn_if_stale()
     return {int(e["address"], 16): e for e in json.loads(DIFF_JSON.read_text())["data"]}
 
 

@@ -31,4 +31,8 @@ errors = [line for line in text.splitlines()
           if re.search(r" error |warning C4700|warning C4715", line) and "U1077" not in line]
 for line in errors[:args.max]:
     print(re.sub(r"^.*src.OpenSHC.", "", line))
-print("BUILD_FAIL" if re.search(r" error |U1077", text) else "BUILD_OK")
+failed = bool(re.search(r" error |U1077", text))
+print("BUILD_FAIL" if failed else "BUILD_OK")
+# exit non-zero so `build_quiet.py && reccmp_report.py ...` stops here: a failed build
+# leaves the previous DLL in place and reccmp would happily report on the old code
+raise SystemExit(1 if failed else 0)
