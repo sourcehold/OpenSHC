@@ -41,7 +41,7 @@ namespace Map {
             int _tile;
             int local_14;
             int _y;
-            bool _inBounds;
+            int _inBounds;
             uint _init_10;
             short _walkLayer;
             if (399 < (uint)this->unitX || 399 < (uint)this->unitY
@@ -263,7 +263,7 @@ namespace Map {
                 }
                 if (_inBounds)
                     break;
-                _inBounds = true;
+                _inBounds = 1;
             }
             return (uint)(this->searchQueue.pathPlanIndex);
         }
