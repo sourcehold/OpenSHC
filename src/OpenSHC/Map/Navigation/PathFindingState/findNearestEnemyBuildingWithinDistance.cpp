@@ -62,16 +62,14 @@ namespace Map {
                     if (param_4 < this->searchQueue.currentDistance) {
                         return 0;
                     }
-                    psVar7 = &DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[0].short_.yOffset;
-                    paiVar6 = DAT_TileMapState::instance.directionTranslationMatrix + sVar1;
-                    do {
-                        int iVar4 = (*paiVar6)[0] + iVar3;
+                    for (int _direction = 0; _direction < 8; _direction = _direction + 1) {
+                        int iVar4 = DAT_TileMapState::instance.directionTranslationMatrix[sVar1][_direction] + iVar3;
                         if ((DAT_TileMapState::instance.LogicLayer[iVar4] & 0x30) == 0
                             && DAT_TileMapState::instance.WalkLayer[iVar4] != this->searchGeneration) {
                             DAT_TileMapState::instance.CertainPathLayer[iVar4]
                                 = (short)this->searchQueue.currentDistance + 1;
                             DAT_TileMapState::instance.WalkLayer[iVar4] = (short)this->searchGeneration;
-                            this->searchQueue.yQueue[this->searchQueue.writeIndex] = *psVar7 + sVar1;
+                            this->searchQueue.yQueue[this->searchQueue.writeIndex] = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].short_.yOffset + sVar1;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar4;
                             this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
                             if (0x13a0f < this->searchQueue.writeIndex) {
@@ -93,9 +91,8 @@ namespace Map {
                                 return iVar4;
                             }
                         }
-                        psVar7 = psVar7 + 4;
-                        paiVar6 = (int (*)[8])(*paiVar6 + 1);
-                    } while ((int)psVar7 < 0xb4908c);
+                    }
+
                     this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
                     if (0x13a0f < this->searchQueue.readIndex) {
                         this->searchQueue.readIndex = 0;
