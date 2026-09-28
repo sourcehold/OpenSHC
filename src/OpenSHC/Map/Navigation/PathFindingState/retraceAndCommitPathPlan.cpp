@@ -14,8 +14,7 @@ namespace Map {
         {
             this->searchQueue.pathPlanIndex = 0;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::traceAndCommitPathPlan, this)(
-                this->unitX, (uint)((int)(this->unitY)), (uint)((int)(this->destinationX)),
-                (uint)((int)(this->destinationY)), 0);
+                this->unitX, (uint)(this->unitY), (uint)(this->destinationX), (uint)(this->destinationY), 0);
             return this->searchQueue.pathPlanIndex;
         }
 
