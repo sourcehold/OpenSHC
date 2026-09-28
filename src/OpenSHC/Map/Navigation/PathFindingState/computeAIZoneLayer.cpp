@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
+#include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_ClimbLogicDefinedData.hpp"
@@ -9,14 +10,13 @@
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
         using OpenSHC::Map::Buildings::BuildingType;
-            using OpenSHC::Map::Buildings::BuildingTypeShort;
+        using OpenSHC::Map::Buildings::BuildingTypeShort;
 
         /*
           WARNING: Enum "MappersEnum": Some values do not have unique names
@@ -34,7 +34,6 @@ namespace Map {
         void PathFindingState::computeAIZoneLayer(int attackedPlayerID, int canReachKeep, int param_3)
         {
             uint uVar1;
-            int iVar2;
             int _offsetTile;
             int _direction;
             int (*_pDirectionTranslation)[8];
@@ -86,7 +85,7 @@ namespace Map {
                         /*
                              Save iteration counter
                          */
-                        iVar2 = attackedPlayerID;
+                        int iVar2 = attackedPlayerID;
                         /*
                                 === INNER LOOP: EXPAND THROUGH CONNECTED TILES ===
                          */
@@ -112,11 +111,11 @@ namespace Map {
                                       this direction, OR   b) There's a gate (GATEHOUSELARGE or GATEHOUSESMALL) on the
                                       tile
                                      */
-                                    if ((((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] < '\x01')
-                                            && (DAT_TileMapState::instance.PathConnectionLayer[_offsetTile] != 0))
-                                        && (((DAT_TileMapState::instance.PathLinkageLayer[_candidateTile]
-                                                 & DAT_ClimbLogicDefinedData::instance
-                                                     .BitFlagHelperForPathLinkage[_direction])
+                                    if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] < '\x01'
+                                        && DAT_TileMapState::instance.PathConnectionLayer[_offsetTile] != 0
+                                        && ((DAT_TileMapState::instance.PathLinkageLayer[_candidateTile]
+                                                & DAT_ClimbLogicDefinedData::instance
+                                                    .BitFlagHelperForPathLinkage[_direction])
                                                 != 0
                                             || ((DAT_TileMapState::instance.BuildingLayer[_offsetTile] != 0
                                                 && ((_buildingType = DAT_BuildingsState::instance
@@ -125,7 +124,7 @@ namespace Map {
                                                          .buildingType,
                                                     _buildingType == OpenSHC::Map::Buildings::BT_GATEHOUSELARGE
                                                         || (_buildingType
-                                                            == OpenSHC::Map::Buildings::BT_GATEHOUSESMALL)))))))) {
+                                                            == OpenSHC::Map::Buildings::BT_GATEHOUSESMALL))))))) {
                                         /*
                                           Calculate Y offset for this direction
                                          */
@@ -162,7 +161,7 @@ namespace Map {
                                   to prevent excessive computation)
                                  */
                                 if (((canReachKeep != 0) && (1999 < this->searchQueue.writeIndex))
-                                    || (5999 < this->searchQueue.writeIndex))
+                                    || 5999 < this->searchQueue.writeIndex)
                                     goto LAB_004a4914;
                             } while (this->searchQueue.readIndex != this->searchQueue.writeIndex);
                         }
@@ -201,14 +200,14 @@ namespace Map {
                                       cliff, or border)   3. Either no building OR building allows passage (unknownFlag4
                                       == 0)
                                      */
-                                    if ((((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] < '\x01')
-                                            && (uVar1 = DAT_TileMapState::instance.LogicLayer[_offsetTile],
-                                                (uVar1 & 0x31) == 0))
-                                        && ((DAT_TileMapState::instance.BuildingLayer[_offsetTile] == 0
+                                    if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] < '\x01'
+                                        && (uVar1 = DAT_TileMapState::instance.LogicLayer[_offsetTile],
+                                            (uVar1 & 0x31) == 0)
+                                        && (DAT_TileMapState::instance.BuildingLayer[_offsetTile] == 0
                                             || (DAT_BuildingsState::instance
                                                     .buildings[DAT_TileMapState::instance.BuildingLayer[_offsetTile]]
                                                     .unknownFlag4
-                                                == '\0')))) {
+                                                == '\0'))) {
                                         /*
                                           === TERRAIN-BASED DISTANCE CALCULATION ===
                                          */
@@ -216,7 +215,7 @@ namespace Map {
                                             /*
                                               Non wall Non gatehouse
                                              */
-                                            if (((uVar1 & 0x40000000) == 0) || (iVar2 == 0)) {
+                                            if ((uVar1 & 0x40000000) == 0 || iVar2 == 0) {
                                                 /*
                                                   Non moat or
                                                  */
@@ -242,16 +241,16 @@ namespace Map {
                                       === TILE 2 (same logic as tile 1) ===
                                      */
                                     _offsetTile = *piVar3 + _direction;
-                                    if ((((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] < '\x01')
-                                            && (uVar1 = DAT_TileMapState::instance.LogicLayer[_offsetTile],
-                                                (uVar1 & 0x31) == 0))
-                                        && ((DAT_TileMapState::instance.BuildingLayer[_offsetTile] == 0
+                                    if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] < '\x01'
+                                        && (uVar1 = DAT_TileMapState::instance.LogicLayer[_offsetTile],
+                                            (uVar1 & 0x31) == 0)
+                                        && (DAT_TileMapState::instance.BuildingLayer[_offsetTile] == 0
                                             || (DAT_BuildingsState::instance
                                                     .buildings[DAT_TileMapState::instance.BuildingLayer[_offsetTile]]
                                                     .unknownFlag4
-                                                == '\0')))) {
+                                                == '\0'))) {
                                         if ((uVar1 & 0x100) == 0) {
-                                            if (((uVar1 & 0x40000000) == 0) || (iVar2 == 0)) {
+                                            if ((uVar1 & 0x40000000) == 0 || iVar2 == 0) {
                                                 DAT_TileMapState::instance.AIZoneLayer[_offsetTile]
                                                     = (byte)this->searchQueue.currentDistance;
                                             } else {
@@ -267,16 +266,16 @@ namespace Map {
                                       === TILE 3 (same logic as tile 1) ===
                                      */
                                     _offsetTile = piVar3[1] + _direction;
-                                    if ((((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] < '\x01')
-                                            && (uVar1 = DAT_TileMapState::instance.LogicLayer[_offsetTile],
-                                                (uVar1 & 0x31) == 0))
-                                        && ((DAT_TileMapState::instance.BuildingLayer[_offsetTile] == 0
+                                    if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] < '\x01'
+                                        && (uVar1 = DAT_TileMapState::instance.LogicLayer[_offsetTile],
+                                            (uVar1 & 0x31) == 0)
+                                        && (DAT_TileMapState::instance.BuildingLayer[_offsetTile] == 0
                                             || (DAT_BuildingsState::instance
                                                     .buildings[DAT_TileMapState::instance.BuildingLayer[_offsetTile]]
                                                     .unknownFlag4
-                                                == '\0')))) {
+                                                == '\0'))) {
                                         if ((uVar1 & 0x100) == 0) {
-                                            if (((uVar1 & 0x40000000) == 0) || (iVar2 == 0)) {
+                                            if ((uVar1 & 0x40000000) == 0 || iVar2 == 0) {
                                                 DAT_TileMapState::instance.AIZoneLayer[_offsetTile]
                                                     = (byte)this->searchQueue.currentDistance;
                                             } else {
@@ -292,16 +291,16 @@ namespace Map {
                                       === TILE 4 (same logic as tile 1) ===
                                      */
                                     _offsetTile = piVar3[2] + _direction;
-                                    if ((((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] < '\x01')
-                                            && (uVar1 = DAT_TileMapState::instance.LogicLayer[_offsetTile],
-                                                (uVar1 & 0x31) == 0))
-                                        && ((DAT_TileMapState::instance.BuildingLayer[_offsetTile] == 0
+                                    if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] < '\x01'
+                                        && (uVar1 = DAT_TileMapState::instance.LogicLayer[_offsetTile],
+                                            (uVar1 & 0x31) == 0)
+                                        && (DAT_TileMapState::instance.BuildingLayer[_offsetTile] == 0
                                             || (DAT_BuildingsState::instance
                                                     .buildings[DAT_TileMapState::instance.BuildingLayer[_offsetTile]]
                                                     .unknownFlag4
-                                                == '\0')))) {
+                                                == '\0'))) {
                                         if ((uVar1 & 0x100) == 0) {
-                                            if (((uVar1 & 0x40000000) == 0) || (iVar2 == 0)) {
+                                            if ((uVar1 & 0x40000000) == 0 || iVar2 == 0) {
                                                 DAT_TileMapState::instance.AIZoneLayer[_offsetTile]
                                                     = (byte)this->searchQueue.currentDistance;
                                             } else {
