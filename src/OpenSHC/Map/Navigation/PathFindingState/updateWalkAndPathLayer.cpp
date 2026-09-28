@@ -46,9 +46,9 @@ namespace Map {
                         uint uVar3 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                         if (0x13a0f < uVar3)
                             break;
-                        short sVar1 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                        int sVar1 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                         iVar8 = (int)sVar1;
-                        short sVar2 = this->searchQueue.xQueue[this->searchQueue.readIndex];
+                        int sVar2 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                         if (iVar8 < this->mappingYRelated) {
                             this->mappingYRelated = iVar8;
                         }
