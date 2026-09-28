@@ -43,7 +43,7 @@ namespace Map {
             local_14 = 0;
             local_10 = 0;
             local_20 = 10000;
-            if (param_2 < 400 && param_3 < 400 && *(char*)(param_3 * 400 + 0x21aec98 + param_2) != '\0') {
+            if (param_2 < 400 && param_3 < 400 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[param_3 * 400 + param_2] != '\0') {
                 this->searchGeneration = this->searchGeneration + 1;
                 if (32000 < this->searchGeneration) {
                     this->searchGeneration = 1;
