@@ -7,7 +7,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0053E870
         void UnitsState::resetUnitMovementState(int unitID)
         {
-            short _wasPositionPending = this->units[unitID].unknownTestAgainst0_2;
+            int _wasPositionPending = this->units[unitID].unknownTestAgainst0_2;
             this->units[unitID].currentIndexInPathPlan = 0;
             this->units[unitID].tunnelerFinishedDigging = 0;
             this->units[unitID].movementRelated = 8;
