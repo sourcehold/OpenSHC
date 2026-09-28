@@ -6,12 +6,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::Map::LogicHelpers::L_KEEP_NON_MANOR_HOUSE;
-    using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
-
-    /*
-      WARNING: Restarted to delay deadcode elimination for space: ram
-     */
     /*
       WARNING: Enum "MappersEnum": Some values do not have unique names
      */
@@ -21,42 +15,98 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004FF870
     byte TileMapState::setBitFlagBasedOnWallTowerGatehouseOrKeep(int x, int y)
     {
+        /*
+          The original is handwritten assembly: it materialises zero with "mov edx, 0" instead of
+          "xor edx, edx", advances the tile pointer with four "add esi, ecx" instead of a scaled lea,
+          and spills the row base with a bare push/pop across the middle of the body. Written as C++
+          it would be:
+
+          this->bitFlag = 0;
+          if ((this->ptr_LogicLayer[this->DAT_SomeTile + 1] & (L_WALL_OR_GATEHOUSE | L_KEEP_NON_MANOR_HOUSE)) != 0) {
+              this->bitFlag = 0x20;
+          }
+          ... and so on for the eight neighbours, where the north row is offset by
+          ptr_MovementDirectionTranslationMatrix[DAT_SomeY * 8 + 0] and the south row by [+ 4].
+
+          Offsets used below (this is TileMapState):
+            0x554a38  DAT_SomeY
+            0x554a3c  DAT_SomeTile
+            0x554a40  bitFlag
+            0x554a58  ptr_LogicLayer
+            0x554a68  ptr_MovementDirectionTranslationMatrix
+        */
         this->DAT_SomeY = y;
         this->DAT_SomeTile = MACRO_CALL_MEMBER(
             OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile, DAT_ViewportRenderState::ptr)(x, y);
-        this->bitFlag = 0;
-        if ((((uint*)this->ptr_LogicLayer)[this->DAT_SomeTile + 1] & (L_WALL_OR_GATEHOUSE | L_KEEP_NON_MANOR_HOUSE))
-            != 0) {
-            this->bitFlag = 0x20;
-        }
-        if ((((uint*)this->ptr_LogicLayer)[this->DAT_SomeTile - 1] & (L_WALL_OR_GATEHOUSE | L_KEEP_NON_MANOR_HOUSE))
-            != 0) {
-            this->bitFlag = this->bitFlag | 2;
+
+        __asm {
+            mov eax, this
+            mov edi, dword ptr [eax + 0x554a68]
+            mov esi, dword ptr [eax + 0x554a58]
+            mov eax, dword ptr [eax + 0x554a3c]
+            shl eax, 0x2
+            add esi, eax
+            push esi
+            mov eax, this
+            mov eax, dword ptr [eax + 0x554a38]
+            shl eax, 0x5
+            add edi, eax
+            mov edx, 0x0
+            mov eax, dword ptr [esi + 0x4]
+            mov ebx, dword ptr [esi - 0x4]
+            and eax, 0x10000100
+            jz east_done
+            or edx, 0x20
+        east_done:
+            and ebx, 0x10000100
+            jz west_done
+            or edx, 0x2
+        west_done:
+            mov ecx, dword ptr [edi]
+            add esi, ecx
+            add esi, ecx
+            add esi, ecx
+            add esi, ecx
+            mov eax, dword ptr [esi - 0x4]
+            mov ebx, dword ptr [esi + 0x4]
+            mov ecx, dword ptr [esi]
+            and eax, 0x10000100
+            jz north_west_done
+            or edx, 0x1
+        north_west_done:
+            and ebx, 0x10000100
+            jz north_east_done
+            or edx, 0x40
+        north_east_done:
+            and ecx, 0x10000100
+            jz north_done
+            or edx, 0x80
+        north_done:
+            mov ecx, dword ptr [edi + 0x10]
+            pop esi
+            add esi, ecx
+            add esi, ecx
+            add esi, ecx
+            add esi, ecx
+            mov eax, dword ptr [esi - 0x4]
+            mov ebx, dword ptr [esi + 0x4]
+            mov ecx, dword ptr [esi]
+            and eax, 0x10000100
+            jz south_west_done
+            or edx, 0x4
+        south_west_done:
+            and ebx, 0x10000100
+            jz south_east_done
+            or edx, 0x10
+        south_east_done:
+            and ecx, 0x10000100
+            jz south_done
+            or edx, 0x8
+        south_done:
+            mov eax, this
+            mov byte ptr [eax + 0x554a40], dl
         }
 
-        uint* northRow = (uint*)this->ptr_LogicLayer + this->DAT_SomeTile
-            + ((int*)this->ptr_MovementDirectionTranslationMatrix)[this->DAT_SomeY * 8];
-        if ((northRow[-1] & (L_WALL_OR_GATEHOUSE | L_KEEP_NON_MANOR_HOUSE)) != 0) {
-            this->bitFlag = this->bitFlag | 1;
-        }
-        if ((northRow[1] & (L_WALL_OR_GATEHOUSE | L_KEEP_NON_MANOR_HOUSE)) != 0) {
-            this->bitFlag = this->bitFlag | 0x40;
-        }
-        if ((*northRow & (L_WALL_OR_GATEHOUSE | L_KEEP_NON_MANOR_HOUSE)) != 0) {
-            this->bitFlag = this->bitFlag | 0x80;
-        }
-
-        uint* southRow = (uint*)this->ptr_LogicLayer + this->DAT_SomeTile
-            + ((int*)this->ptr_MovementDirectionTranslationMatrix)[this->DAT_SomeY * 8 + 4];
-        if ((southRow[-1] & (L_WALL_OR_GATEHOUSE | L_KEEP_NON_MANOR_HOUSE)) != 0) {
-            this->bitFlag = this->bitFlag | 4;
-        }
-        if ((southRow[1] & (L_WALL_OR_GATEHOUSE | L_KEEP_NON_MANOR_HOUSE)) != 0) {
-            this->bitFlag = this->bitFlag | 0x10;
-        }
-        if ((*southRow & (L_WALL_OR_GATEHOUSE | L_KEEP_NON_MANOR_HOUSE)) != 0) {
-            this->bitFlag = this->bitFlag | 8;
-        }
         return this->bitFlag;
     }
 
