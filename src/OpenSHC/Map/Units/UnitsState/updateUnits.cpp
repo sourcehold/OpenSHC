@@ -63,10 +63,7 @@ namespace Map {
             short _buildingID;
             BuildingTypeShort _buildingType;
 
-            _rngNumber8 = (int)SEC_RNG::instance.currentNumber2 & 0x8000000f;
-            if ((int)_rngNumber8 < 0) {
-                _rngNumber8 = (_rngNumber8 - 1 | 0xfffffff0) + 1;
-            }
+            _rngNumber8 = (int)SEC_RNG::instance.currentNumber2 % 16;
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                 80400, '\0', (void*)((int)(DAT_TileMapState::instance.OccupancyLayer)));
             DAT_GameState::instance.playerDataArray[0].healerCount = 0;
@@ -129,10 +126,7 @@ namespace Map {
                             = DAT_GameState::instance.playerDataArray[_buildingID].unblessedPeopleCountUnk + 1;
                     }
                     _currentUnitID = DAT_CurrentUnitSlotID::instance;
-                    _unitIDBased8value = _currentUnitID & 0x8000000f;
-                    if ((int)_unitIDBased8value < 0) {
-                        _unitIDBased8value = (_unitIDBased8value - 1 | 0xfffffff0) + 1;
-                    }
+                    _unitIDBased8value = (int)_currentUnitID % 16;
                     if (_unitIDBased8value == _rngNumber8) {
                         int _unitTile = this->units[_currentUnitID].tile;
                         if (DAT_TileMapState::instance.PathConnectionLayer[_unitTile] == 0
@@ -854,24 +848,18 @@ namespace Map {
                             *piVar1 = *piVar1 + this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e * 8;
                             break;
                         case 0x16:
-                            uVar9 = (int)this->units[DAT_CurrentUnitSlotID::instance]
-                                        .facingDirectionMapOrientationCorrected
-                                    + 4U
-                                & 0x80000007;
-                            if ((int)uVar9 < 0) {
-                                uVar9 = (uVar9 - 1 | 0xfffffff8) + 1;
-                            }
+                            uVar9 = ((int)this->units[DAT_CurrentUnitSlotID::instance]
+                                            .facingDirectionMapOrientationCorrected
+                                        + 4)
+                                % 8;
                             this->units[DAT_CurrentUnitSlotID::instance].gfxNumber = uVar9 + 0x151;
                             piVar1 = &this->units[DAT_CurrentUnitSlotID::instance].gfxNumber;
                             *piVar1
                                 = *piVar1 + ((byte)this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e & 3) * 8;
-                            uVar9 = (int)this->units[DAT_CurrentUnitSlotID::instance]
-                                        .facingDirectionMapOrientationCorrected
-                                    + 4U
-                                & 0x80000007;
-                            if ((int)uVar9 < 0) {
-                                uVar9 = (uVar9 - 1 | 0xfffffff8) + 1;
-                            }
+                            uVar9 = ((int)this->units[DAT_CurrentUnitSlotID::instance]
+                                            .facingDirectionMapOrientationCorrected
+                                        + 4)
+                                % 8;
                             _troopValue = uVar9 + 0x1d1;
                             this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk = _troopValue;
                             piVar1 = &this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk;
