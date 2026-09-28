@@ -114,13 +114,12 @@ namespace Map {
                     - DAT_ViewportRenderState::instance
                         .translationMatrix[DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile1]]
                         .addXgetTile,
-                (uint)((int)((int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile1])),
-                (uint)((int)(tile2
+                (uint)(DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile1]),
+                (uint)(tile2
                     - DAT_ViewportRenderState::instance
                         .translationMatrix[DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile2]]
-                        .addXgetTile)),
-                (uint)((int)((int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile2])), 100000,
-                0);
+                        .addXgetTile),
+                (uint)(DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile2]), 100000, 0);
             if (BVar3 != FALSE) {
                 iVar4 = 0;
                 pAVar2 = this->searchQueue.acceptAreaPairArray1;
