@@ -141,8 +141,8 @@ namespace Map {
                                 DAT_BuildingsState::ptr)(iVar14, 1, iVar13, 0);
                             uVar7 = iVar3 + DAT_BuildingsState::instance.DAT_TempYOffset;
                             if ((uint)(DAT_BuildingsState::instance.DAT_TempXOffset + iVar10) < 400 && uVar7 < 400
-                                && *(char*)(uVar7 * 400 + 0x21aec98 + DAT_BuildingsState::instance.DAT_TempXOffset
-                                       + iVar10)
+                                && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[uVar7 * 400 + DAT_BuildingsState::instance.DAT_TempXOffset
+                                       + iVar10]
                                     != '\0') {
                                 iVar15 = DAT_ViewportRenderState::instance.translationMatrix[uVar7].addXgetTile
                                     + DAT_BuildingsState::instance.DAT_TempXOffset;
