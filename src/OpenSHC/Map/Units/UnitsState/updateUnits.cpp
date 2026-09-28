@@ -510,24 +510,31 @@ namespace Map {
             DAT_CurrentUnitSlotID::instance = 1;
             if (1 < (int)this->maxUnitCount) {
                 do {
+                    bool _updateAnimation = false;
                     switch (this->units[DAT_CurrentUnitSlotID::instance].logicalState) {
                     case OpenSHC::Map::Units::ULS_INVISIBLE:
+                        break;
+                    case ((UnitLogicState)1):
+                        this->units[DAT_CurrentUnitSlotID::instance].logicalState = OpenSHC::Map::Units::ULS_NORMAL;
+                        _updateAnimation = true;
                         break;
                     case OpenSHC::Map::Units::ULS_REMOVE:
                         MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::deleteUnit, this)(
                             DAT_CurrentUnitSlotID::instance);
                         break;
+                    case OpenSHC::Map::Units::ULS_TRANSITIONING:
+                        MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::changeUnitType, this)(
+                            DAT_CurrentUnitSlotID::instance);
+                        _updateAnimation = true;
+                        break;
                     case ((UnitLogicState)5):
                         this->units[DAT_CurrentUnitSlotID::instance].logicalState = ((UnitLogicState)1);
                         break;
                     default:
-                        if (this->units[DAT_CurrentUnitSlotID::instance].logicalState
-                            == OpenSHC::Map::Units::ULS_TRANSITIONING) {
-                            MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::changeUnitType, this)(
-                                DAT_CurrentUnitSlotID::instance);
-                        } else if (this->units[DAT_CurrentUnitSlotID::instance].logicalState == (UnitLogicState)1) {
-                            this->units[DAT_CurrentUnitSlotID::instance].logicalState = OpenSHC::Map::Units::ULS_NORMAL;
-                        }
+                        _updateAnimation = true;
+                        break;
+                    }
+                    if (_updateAnimation) {
                         int* _ptr_animationTicker = &this->units[DAT_CurrentUnitSlotID::instance].animationTicker;
                         *_ptr_animationTicker = *_ptr_animationTicker + 1;
                         int _animationTicker = this->units[DAT_CurrentUnitSlotID::instance].animationTicker;
