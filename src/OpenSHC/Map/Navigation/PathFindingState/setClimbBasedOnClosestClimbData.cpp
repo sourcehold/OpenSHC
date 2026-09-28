@@ -18,7 +18,6 @@ namespace Map {
         {
             int iVar1;
             int fromXPosition;
-            int _climbDataCounter;
             ClimbData* _pClimbData;
             ClimbData* _pClimbData2;
             short _downOrUp1;
@@ -33,7 +32,7 @@ namespace Map {
             if (this->field63_0xc0 == 0) {
                 return 200;
             }
-            _climbDataCounter = 1;
+            int _climbDataCounter = 1;
             if (1 < this->maxClimbDataCount) {
                 _pClimbData = &this->climbData[1];
                 _downOrUp = 0;
@@ -52,7 +51,7 @@ namespace Map {
                                     MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::
                                                           setAxisBasedDistanceResult,
                                         DAT_DirectionAlgorithmState::ptr)((int)DAT_UnitsState::instance.units[unitID].x,
-                                        (int)((int)(DAT_UnitsState::instance.units[unitID].y)), fromXPosition, iVar1);
+                                        (int)(DAT_UnitsState::instance.units[unitID].y), fromXPosition, iVar1);
                                     _distance = DAT_DirectionAlgorithmState::instance.distanceHigh
                                         + _pClimbData->numberOfUnitsUsing * 8;
                                     if (_distance < _minDistance) {
