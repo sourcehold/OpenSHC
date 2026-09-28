@@ -1,17 +1,17 @@
 #include "../PathFindingState.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
+#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Navigation {
-            using OpenSHC::Map::Location::Point8ShortXY;
+        using OpenSHC::Map::Location::Point8ShortXY;
 
         /*
           WARNING: Enum "MappersEnum": Some values do not have unique names
@@ -22,9 +22,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049CE40
         void PathFindingState::findPathableTileWithoutUnitWithBuildingAtXY(int unitID, int x, int y)
         {
-            int _readIndex;
-            int _unitID;
-            int _candidate;
             short* psVar1;
             int iVar2;
             int (*paiVar3)[8];
@@ -36,7 +33,7 @@ namespace Map {
             this->ALG_ResultTile = 0;
             this->ALG_ResultY = 0;
             this->ALG_ResultX = 0;
-            if ((((uint)x < 400) && ((uint)y < 400)) && (*(char*)(y * 400 + 0x21aec98 + x) != '\0')) {
+            if ((uint)x < 400 && (uint)y < 400 && *(char*)(y * 400 + 0x21aec98 + x) != '\0') {
                 this->searchGeneration = this->searchGeneration + 1;
                 if (32000 < this->searchGeneration) {
                     this->searchGeneration = 1;
@@ -59,7 +56,7 @@ namespace Map {
                         _x = this->searchQueue.xQueue[this->searchQueue.readIndex];
                         _y = this->searchQueue.yQueue[this->searchQueue.readIndex];
                         iVar2 = (int)_y;
-                        _unitID = (int)(short)DAT_TileMapState::instance.UnitLayer[_tile];
+                        int _unitID = (int)(short)DAT_TileMapState::instance.UnitLayer[_tile];
                         if (_unitID == unitID) {
                             this->ALG_ResultX = (int)_x;
                             this->ALG_ResultY = iVar2;
@@ -69,8 +66,8 @@ namespace Map {
                         /*
                           find building space without unit
                          */
-                        if (((DAT_TileMapState::instance.OccupancyLayer[_tile] == '\0') && (_unitID == 0))
-                            && (_buildingAtStart == DAT_TileMapState::instance.BuildingLayer[_tile])) {
+                        if (DAT_TileMapState::instance.OccupancyLayer[_tile] == '\0' && _unitID == 0
+                            && _buildingAtStart == DAT_TileMapState::instance.BuildingLayer[_tile]) {
                             this->ALG_ResultX = (int)_x;
                             this->ALG_ResultY = iVar2;
                             this->ALG_ResultTile = _tile;
@@ -89,11 +86,11 @@ namespace Map {
                             /*
                               for each direction, do:
                              */
-                            _candidate = (*paiVar3)[0] + _tile;
-                            if ((((DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration)
-                                     && ((DAT_TileMapState::instance.LogicLayer[_candidate] & 0xb1U) == 0))
-                                    && ((DAT_TileMapState::instance.LogicLayer[_candidate] & 0x1000U) == 0))
-                                && (DAT_TileMapState::instance.PathConnectionLayer[_candidate] != 0)) {
+                            int _candidate = (*paiVar3)[0] + _tile;
+                            if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration
+                                && (DAT_TileMapState::instance.LogicLayer[_candidate] & 0xb1U) == 0
+                                && (DAT_TileMapState::instance.LogicLayer[_candidate] & 0x1000U) == 0
+                                && DAT_TileMapState::instance.PathConnectionLayer[_candidate] != 0) {
                                 /*
                                   queue pathable tiles that aren't see nor tree
                                  */
