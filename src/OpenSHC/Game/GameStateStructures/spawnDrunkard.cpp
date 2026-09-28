@@ -34,7 +34,7 @@ namespace Game {
             int playerID = DAT_BuildingsState::instance.buildings[buildingID].owner;
             int rowTile = DAT_ViewportRenderState::instance.translationMatrix[entryY].addXgetTile;
             this->playerDataArray[playerID].field646_0x2178 = buildingID;
-            uint drunkardLimit;
+            int drunkardLimit;
             if (this->playerDataArray[playerID].populationRelatedCrowdingCountUnk < 20) {
                 drunkardLimit = 1;
             } else if (this->playerDataArray[playerID].populationRelatedCrowdingCountUnk < 50) {
@@ -44,8 +44,8 @@ namespace Game {
             } else {
                 drunkardLimit = 4;
             }
-            uint drunkardsToSpawn = ((byte)SEC_RNG::instance.currentNumber2 & 3) + 1;
-            if (drunkardLimit < drunkardsToSpawn) {
+            int drunkardsToSpawn = ((byte)SEC_RNG::instance.currentNumber2 & 3) + 1;
+            if (drunkardsToSpawn > drunkardLimit) {
                 drunkardsToSpawn = drunkardLimit;
             }
             for (; drunkardsToSpawn != 0; drunkardsToSpawn = drunkardsToSpawn - 1) {
