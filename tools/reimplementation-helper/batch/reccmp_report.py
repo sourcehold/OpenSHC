@@ -24,6 +24,18 @@ if args and args[0] == "--run":
 mode = args[0] if args else "pct"
 byaddr = common.load_diff()
 
+# Without --run the cached diff.json may be from a run over a different (narrower) build
+# list -- try_styles.py in particular runs reccmp over a single function. Every missing
+# function then just silently reads as "no entry", which turns a `save` into a snapshot of
+# almost nothing and a `cmp` against it into a clean bill of health. Say so instead.
+_listed = [a for f, e, a in common.entries(byaddr)]
+_missing = sum(1 for f, e, a in common.entries(byaddr) if e is None)
+if _listed and _missing > len(_listed) // 2:
+    sys.stderr.write(
+        "warning: the last reccmp run covers only %d of the %d functions in the build "
+        "list.\n         Re-run with --run, or this reports on stale results.\n"
+        % (len(_listed) - _missing, len(_listed)))
+
 if mode == "pct":
     path_filter = args[1] if len(args) > 1 else ""
     total = count = 0

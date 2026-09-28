@@ -66,19 +66,25 @@ def main():
     backup = vdir / "_original.cpp.bak"
     if not backup.exists():
         shutil.copy(target, backup)
-    common.write_text(common.SOURCES_LIST, target.as_posix() + "\n")
 
-    results = []
-    for style in styles:
-        shutil.copy(vdir / (style + ".cpp"), target)
-        common.format_file(target)
-        pct, err = measure(func)
-        results.append((pct, style))
-        print("%-32s %s" % (style, "BUILD FAIL" if pct is None else "%.2f%%" % pct))
-        if err:
-            for line in err.splitlines():
-                if "error" in line:
-                    print("    " + line.strip()[:160])
+    # narrow the build list to this one function so each variant builds in seconds, and
+    # put it back afterwards -- every other batch tool reads it to decide what to report on
+    saved_list = common.read_text(common.SOURCES_LIST)
+    common.write_text(common.SOURCES_LIST, target.as_posix() + "\n")
+    try:
+        results = []
+        for style in styles:
+            shutil.copy(vdir / (style + ".cpp"), target)
+            common.format_file(target)
+            pct, err = measure(func)
+            results.append((pct, style))
+            print("%-32s %s" % (style, "BUILD FAIL" if pct is None else "%.2f%%" % pct))
+            if err:
+                for line in err.splitlines():
+                    if "error" in line:
+                        print("    " + line.strip()[:160])
+    finally:
+        common.write_text(common.SOURCES_LIST, saved_list)
 
     ranked = sorted((r for r in results if r[0] is not None), reverse=True)
     if not ranked:

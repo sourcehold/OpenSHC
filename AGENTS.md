@@ -111,8 +111,14 @@ To pick the next target, `rank_functions.py` orders by lines x (1 - match) rathe
 `scan_dispatch.py` lists every function whose dispatch form disagrees with the original (a jump table on one side and an
 if/else-if chain on the other), with `scan_chains.py` finding the chains to convert. `try_styles.py` compiles and
 measures several hand-written variants of one function and keeps the best, which is the only reliable way to settle a
-style question - see the note on unpredictable styles below. `declare_at_use.py`, `decast.py` and `deparen.py` undo
-decompiler artefacts across a whole selection; run `test_deparen.py` after touching `deparen.py`'s precedence table.
+style question - see the note on unpredictable styles below. `declare_at_use.py`, `decast.py`, `deparen.py` and
+`undiv.py` undo decompiler artefacts across a whole selection; run `test_deparen.py` and `test_undiv.py` after
+touching the precedence table or the division patterns those two rely on.
+
+The rewriting scripts take a path filter and default to a dry run, so read the diff before building: a bad rewrite
+still compiles. Two of these tools have quietly reported on the wrong thing in the past - `try_styles.py` narrows
+the build list while it works, and `reccmp_report.py` without `--run` reads the previous run's `diff.json` - so if a
+report covers suspiciously few functions, check `cmake/openshc-sources.txt.local` and re-run with `--run`.
 
 `orig_asm.py NAME` prints the **original** instruction stream of one function from the last reccmp run, rather than the
 interleaved diff `reccmp_report.py diff` gives you. Use it when the diff comes back truncated, or when you need the
@@ -187,6 +193,12 @@ Diff patterns that were reliable (more in the cheat sheet):
 - `(-(uint)(c) & MASK) + BASE` in the decompiler output is a conditional it has already turned into mask-and-add:
   it is `c ? BASE + MASK : BASE`. Writing the conditional out recovers the same instructions and stops the constants
   being unreadable - `(-(uint)(d != 1) & 0xffffffce) + 200` is `d == 1 ? 200 : 150`.
+- `(x + (x >> 0x1f & 7U)) >> 3` is a signed division by 8, not a shift: shifting alone rounds towards negative
+  infinity, so the compiler biases the value first and the decompiler reports the bias. Any mask `2^k - 1` paired
+  with a shift of `k` is `x / 2^k`. Writing the division back recovers the same instructions and has been worth a
+  great deal - 22 sites in one namespace, up to +22% on a single function (`undiv.py` rewrites them). The bias also
+  proves the dividend is signed, so a surrounding `(int)` cast is redundant once the division is back. Measure
+  anyway: one site out of 22 came out 0.1% worse and kept the shift.
 - Our `movzx` against the original's `movsx` on a `ushort` layer (`PathConnectionLayer`) means the original cast the
   read: `dword x = (short)layer[i]`, one `movsx`. Declaring the local `short` does not do it - the signedness comes
   from the cast on the array access, not from the destination.

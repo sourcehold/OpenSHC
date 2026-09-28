@@ -51,6 +51,8 @@ it was applied, but none is guaranteed to be -- re-measure after running one.
 | `decast.py [filter]` | Collapse doubled casts, `(int)((int)(x))` -> `(int)(x)`. Skips `(int)((int)X + Y)`, where the inner cast covers one operand and dropping it would move the conversion onto the sum. |
 | `deparen.py [filter] [--apply]` | Drop redundant brackets from `if`/`while` conditions using C precedence. Keeps the load-bearing ones (`(a \|\| b) && c`, `(x & 7) == 0`, assignments and comma operators inside conditions). Dry run unless `--apply`. |
 | `test_deparen.py` | Precedence tests for `deparen.py`. Run after touching its table: an earlier version silently rewrote `(a != 0 \|\| b != 0) && (x & 0x100) == 0` into a different expression that still compiled. |
+| `undiv.py [filter] [--apply]` | Turn MSVC's biased shift for a signed power-of-two division back into a division: `(x + (x >> 0x1f & 7U)) >> 3` -> `x / 8`. Dry run unless `--apply`. Usually a large gain rather than merely neutral: over one namespace it was worth up to 22% on a single function. |
+| `test_undiv.py` | Cases for `undiv.py`, including the near-misses it must leave alone: a shift disagreeing with the mask, a mask that is not 2^k - 1, and a bias taken from another variable. |
 
 ## Typical loop
 
