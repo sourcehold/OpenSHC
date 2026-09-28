@@ -28,10 +28,10 @@ namespace Map {
             int* piVar5;
             int iVar6;
             uint _tile;
-            if (399 < (uint)x1 || 399 < (uint)y1 || *(char*)(y1 * 400 + 0x21aec98 + x1) == '\0') {
+            if (399 < (uint)x1 || 399 < (uint)y1 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y1 * 400 + x1] == '\0') {
                 return (undefined4)(0);
             }
-            if (x2 == -1 || (((uint)x2 < 400 && ((uint)y2 < 400)) && (*(char*)(y2 * 400 + 0x21aec98 + x2) != '\0'))) {
+            if (x2 == -1 || (((uint)x2 < 400 && ((uint)y2 < 400)) && (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y2 * 400 + x2] != '\0'))) {
                 this->searchGeneration = this->searchGeneration + 1;
                 if (32000 < this->searchGeneration) {
                     this->searchGeneration = 1;
