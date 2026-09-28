@@ -31,7 +31,7 @@ namespace Map {
             if (399 < (uint)x1 || 399 < (uint)y1 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y1 * 400 + x1] == '\0') {
                 return (undefined4)(0);
             }
-            if (x2 == -1 || (((uint)x2 < 400 && ((uint)y2 < 400)) && (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y2 * 400 + x2] != '\0'))) {
+            if (x2 == -1 || (((uint)x2 <= 399 && ((uint)y2 <= 399)) && (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y2 * 400 + x2] != '\0'))) {
                 this->searchGeneration = this->searchGeneration + 1;
                 if (32000 < this->searchGeneration) {
                     this->searchGeneration = 1;
