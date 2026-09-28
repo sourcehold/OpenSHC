@@ -37,8 +37,8 @@ namespace Map {
             short _building;
             BuildingTypeShort _buildingType;
             int _tile;
-            short _x;
-            short _y;
+            int _x;
+            int _y;
             if (399 < x || 399 < y || *(char*)(y * 400 + 0x21aec98 + x) == '\0') {
                 return FALSE;
             }
@@ -68,8 +68,8 @@ namespace Map {
                 if (0x13a0f < _tile) {
                     return FALSE;
                 }
-                _x = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                _y = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                _x = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
+                _y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                 _building = DAT_TileMapState::instance.BuildingLayer[_tile];
                 if (_building != 0) {
                     _buildingType = DAT_BuildingsState::instance.buildings[_building].buildingType;
