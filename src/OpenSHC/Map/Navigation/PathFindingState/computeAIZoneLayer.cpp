@@ -112,7 +112,7 @@ namespace Map {
                                       tile
                                      */
                                     if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] < '\x01'
-                                        && DAT_TileMapState::instance.PathConnectionLayer[_offsetTile] != 0
+                                        && (short)DAT_TileMapState::instance.PathConnectionLayer[_offsetTile] != 0
                                         && ((DAT_TileMapState::instance.PathLinkageLayer[_candidateTile]
                                                 & DAT_ClimbLogicDefinedData::instance
                                                     .BitFlagHelperForPathLinkage[_direction])
