@@ -14,8 +14,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A5F60
         void PathFindingState::updatePathLinkageLayerForEachBuildingAtEachTile()
         {
-            int _tileIndex;
-            _tileIndex = 0;
+            int _tileIndex = 0;
             do {
                 MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkageLayerBasedOnBuildingsUnk, this)(
