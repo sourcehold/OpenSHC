@@ -29,10 +29,7 @@ namespace Map {
         void PathFindingState::updateWalkLayerAndAIPathCostLayer(
             int limit, uint borderDistance, dword fromArea, int playerID)
         {
-            short sVar1;
-            int _tile;
             int _canNav;
-            int iVar2;
             short* psVar3;
             int (*paiVar4)[8];
             uint _tile2;
@@ -51,7 +48,7 @@ namespace Map {
             /*
               === INITIALIZE BFS QUEUE ===
              */
-            _tile = 0;
+            int _tile = 0;
             /*
               Starting distance
              */
@@ -200,7 +197,7 @@ namespace Map {
                     /*
                       Get Y coordinate of current tile
                      */
-                    sVar1 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    short sVar1 = this->searchQueue.yQueue[this->searchQueue.readIndex];
                     /*
                       Read the distance value for this tile from the AI path cost layer
                      */
@@ -225,14 +222,13 @@ namespace Map {
                       === COLLECT CANDIDATE TILES AT SPECIFIC DISTANCE ===   If param_2 is non-zero and tile is at
                       exactly that distance,   and it's reachable from param_3 zone, add to candidate list
                      */
-                    if ((((borderDistance != 0) && (this->searchQueue.currentDistance == borderDistance))
-                            && (_canNav = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
-                                                                calculateCanPlayerUnitsNavigateToAreaFromArea,
-                                    this)(playerID, (dword)((int)(fromArea)),
-                                    (dword)((int)((int)(short)DAT_TileMapState::instance.PathConnectionLayer[_tile2])),
-                                    0),
-                                _canNav != 0))
-                        && (DAT_AICState::instance.aiBorderTilesIndex < 1000)) {
+                    if (borderDistance != 0 && this->searchQueue.currentDistance == borderDistance
+                        && (_canNav = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
+                                                            calculateCanPlayerUnitsNavigateToAreaFromArea,
+                                this)(playerID, (dword)((int)(fromArea)),
+                                (dword)((int)((short)DAT_TileMapState::instance.PathConnectionLayer[_tile2])), 0),
+                            _canNav != 0)
+                        && DAT_AICState::instance.aiBorderTilesIndex < 1000) {
                         /*
                           Add to candidate array (likely used by AI for strategic placement decisions)
                          */
@@ -256,7 +252,7 @@ namespace Map {
                             /*
                               Calculate adjacent tile index
                              */
-                            iVar2 = (*paiVar4)[0] + _tile2;
+                            int iVar2 = (*paiVar4)[0] + _tile2;
                             /*
                               If adjacent tile hasn't been visited this iteration
                              */
