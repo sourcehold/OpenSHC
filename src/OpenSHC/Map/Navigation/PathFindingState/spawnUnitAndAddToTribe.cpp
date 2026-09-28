@@ -3,18 +3,18 @@
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
+#include "OpenSHC/Map/Navigation/Algorithms/XYPair.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Map/Navigation/Algorithms/XYPair.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Navigation {
-            using OpenSHC::Map::Navigation::Algorithms::XYPair;
+        using OpenSHC::Map::Navigation::Algorithms::XYPair;
 
         /*
           WARNING: Enum "MappersEnum": Some values do not have unique names
@@ -26,27 +26,20 @@ namespace Map {
         void PathFindingState::spawnUnitAndAddToTribe(
             int playerID, int displayColor, int count, UnitType unitType, undefined4 tribeID)
         {
-            short sVar1;
-            int _unitID_2;
-            int _unitID;
-            uint _x;
-            int iVar2;
-            uint _y;
             int* local_4;
             int _tile;
             this->calculations = this->calculations + 1;
-            iVar2 = -1;
+            int iVar2 = -1;
             this->searchQueue.readIndex = 0;
             if (this->searchQueue.writeIndex != 0) {
                 local_4 = &DAT_GameState::instance.mapAndTime.somePairArray.y;
                 do {
-                    _y = (uint)this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    uint _y = (uint)this->searchQueue.yQueue[this->searchQueue.readIndex];
                     _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
-                    _x = _tile - DAT_ViewportRenderState::instance.translationMatrix[_y].addXgetTile;
+                    uint _x = _tile - DAT_ViewportRenderState::instance.translationMatrix[_y].addXgetTile;
                     if (DAT_TileMapState::instance.CertainPathLayer[_tile] != 100) {
-                        _unitID_2
-                            = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
-                                playerID, displayColor, (int)((int)(_x * 8)), (int)((int)(_y * 8)), 8, unitType);
+                        int _unitID_2 = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::spawnUnit,
+                            DAT_UnitsState::ptr)(playerID, displayColor, (int)(_x * 8), (int)(_y * 8), 8, unitType);
                         if (_unitID_2 != 0) {
                             count = count + -1;
                             MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::addUnitToTribe,
@@ -72,11 +65,12 @@ namespace Map {
                 } while (this->searchQueue.readIndex != this->searchQueue.writeIndex);
             }
             if ((0 < count) && (iVar2 != -1)) {
-                sVar1 = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[iVar2];
+                short sVar1 = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[iVar2];
                 _tile = DAT_ViewportRenderState::instance.translationMatrix[sVar1].addXgetTile;
                 do {
-                    _unitID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
-                        playerID, displayColor, (iVar2 - _tile) * 8, (int)((int)(sVar1 * 8)), 8, unitType);
+                    int _unitID
+                        = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
+                            playerID, displayColor, (iVar2 - _tile) * 8, (int)(sVar1 * 8), 8, unitType);
                     if (_unitID != 0) {
                         MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(
                             _unitID, tribeID);
