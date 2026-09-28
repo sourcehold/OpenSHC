@@ -39,7 +39,7 @@ namespace Map {
             int _tile;
             int _x;
             int _y;
-            if (399 < x || 399 < y || *(char*)(y * 400 + 0x21aec98 + x) == '\0') {
+            if (399 < x || 399 < y || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
                 return FALSE;
             }
             this->searchGeneration = this->searchGeneration + 1;
