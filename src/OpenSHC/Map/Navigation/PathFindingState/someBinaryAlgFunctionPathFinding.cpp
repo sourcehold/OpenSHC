@@ -48,8 +48,8 @@ namespace Map {
                     if (0x13a0f < iVar4) {
                         return (undefined4)(1);
                     }
-                    short sVar2 = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                    short sVar3 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    int sVar2 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
+                    int sVar3 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[iVar4];
                     if (0x13a10 < this->searchQueue.currentDistance) {
                         return (undefined4)(1);
