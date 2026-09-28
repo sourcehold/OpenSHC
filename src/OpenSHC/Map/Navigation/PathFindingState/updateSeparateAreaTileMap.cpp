@@ -77,7 +77,7 @@ namespace Map {
                         this->zoneSizesArray[uVar4] = this->zoneSizesArray[uVar4] + 1;
                         iVar7 = this->searchQueue.tilesQueue[local_8];
                         ushort uVar2 = this->searchQueue.yQueue[local_8];
-                        byte bVar1 = DAT_TileMapState::instance.PathLinkageLayer[iVar7];
+                        int bVar1 = DAT_TileMapState::instance.PathLinkageLayer[iVar7];
                         if ((bVar1 & 0x40) != 0 && DAT_TileMapState::instance.MacroLayer[iVar7 + 0x13a0f] == 0) {
                             DAT_TileMapState::instance.MacroLayer[iVar7 + 0x13a0f] = uVar4;
                             this->searchQueue.tilesQueue[forceUpdate] = iVar7 + -1;
