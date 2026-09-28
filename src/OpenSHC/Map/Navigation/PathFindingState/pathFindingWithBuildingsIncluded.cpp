@@ -80,7 +80,7 @@ namespace Map {
             if (399 < x || 399 < y || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
                 return FALSE;
             }
-            if (x2 == 0xffffffff || ((x2 < 400 && (y2 < 400)) && (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y2 * 400 + x2] != '\0'))) {
+            if (x2 == 0xffffffff || ((x2 <= 399 && (y2 <= 399)) && (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y2 * 400 + x2] != '\0'))) {
                 if (zeroMeansResetAlgorithm == 0) {
                     this->searchGeneration = this->searchGeneration + 1;
                     if (32000 < this->searchGeneration) {
