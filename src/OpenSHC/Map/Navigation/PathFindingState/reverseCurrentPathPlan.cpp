@@ -12,14 +12,13 @@ namespace Map {
         {
             byte bVar1;
             byte bVar2;
-            uint _index;
             byte* pbVar3;
             uint _endIndex;
             int _swapCounter;
             /*
               Index from start of path
              */
-            _index = 0;
+            uint _index = 0;
             /*
               === ONLY REVERSE IF PATH HAS MORE THAN 1 ELEMENT ===
              */
