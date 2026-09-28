@@ -61,7 +61,7 @@ namespace Map {
                 if (0x13a10 < this->searchQueue.currentDistance) {
                     return local_c;
                 }
-                if (param_4 < this->searchQueue.currentDistance) {
+                if (this->searchQueue.currentDistance > param_4) {
                     return local_c;
                 }
                 paiVar3 = DAT_TileMapState::instance.directionTranslationMatrix + sVar1;
