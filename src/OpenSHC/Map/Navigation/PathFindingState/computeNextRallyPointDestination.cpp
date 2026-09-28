@@ -32,7 +32,7 @@ namespace Map {
             this->ALG_ResultTile = 0;
             this->ALG_ResultY = 0;
             this->ALG_ResultX = 0;
-            if ((uint)xPos < 400 && (uint)yPos < 400 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[yPos * 400 + xPos] != '\0') {
+            if ((uint)xPos <= 399 && (uint)yPos <= 399 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[yPos * 400 + xPos] != '\0') {
                 this->searchGeneration = this->searchGeneration + 1;
                 if (32000 < this->searchGeneration) {
                     this->searchGeneration = 1;
