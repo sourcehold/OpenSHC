@@ -52,7 +52,7 @@ namespace Map {
             int _siegeProjectile = 0;
             int _usesFemaleDeathScream = 0;
             UnitTypeShort _unitType = this->units[unitID].unitType;
-            short _entityShootingUnitID = DAT_EntityState::instance.entityArray[entityID].unitID_OR_seaGullID;
+            int _entityShootingUnitID = DAT_EntityState::instance.entityArray[entityID].unitID_OR_seaGullID;
             int _entityShootingUnitID_2 = (int)_entityShootingUnitID;
             if (unitID <= 0) {
                 return FALSE;
@@ -178,8 +178,8 @@ namespace Map {
                 || _entityType == OpenSHC::Map::Entities::ET_FIREBALLISTA) {
                 _siegeProjectile = 1;
             }
-            short _unitPlayerID = this->units[unitID].owner;
-            short _entityPlayerID = DAT_EntityState::instance.entityArray[entityID].owner;
+            int _unitPlayerID = this->units[unitID].owner;
+            int _entityPlayerID = DAT_EntityState::instance.entityArray[entityID].owner;
             if (((DAT_GameState::instance.mapAndTime.playerTeams[_entityPlayerID]
                      == DAT_GameState::instance.mapAndTime.playerTeams[_unitPlayerID])
                     && ((
@@ -296,8 +296,8 @@ namespace Map {
                     if (0 < _unknown) {
                         DAT_TribesState::instance.tribes[_unknown].field133_0x278 = 1;
                     }
-                    short _unitYPosition = this->units[unitID].y;
-                    short _unitXPosition = this->units[unitID].x;
+                    int _unitYPosition = this->units[unitID].y;
+                    int _unitXPosition = this->units[unitID].x;
                     this->units[unitID].animationCycleNumber = 0;
                     this->units[unitID].state.generic = OpenSHC::Map::Units::States::US_STONE_DEATH_01;
                     this->units[unitID].tunnelerFinishedDigging = 1;

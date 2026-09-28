@@ -97,7 +97,7 @@ namespace Map {
                         this->units[unitID].field105_0xe8 = 1;
                     }
                 } else {
-                    ushort _pathIndex = this->units[unitID].currentIndexInPathPlan;
+                    int _pathIndex = this->units[unitID].currentIndexInPathPlan;
                     if (this->units[unitID].totalSizeOfPathPlan <= (short)_pathIndex
                         && this->units[unitID].field280_0x3f4 == 0) {
                         this->units[unitID].unknownMovementRelated_0x2d2 = 0;
@@ -142,8 +142,8 @@ namespace Map {
                                 }
                             }
                             this->unknownInitially0_01 = this->unknownInitially0_01 + 1;
-                            short _destinationY = this->units[unitID].destinationYPosition;
-                            short _destinationX = this->units[unitID].destinationXPosition;
+                            int _destinationY = this->units[unitID].destinationYPosition;
+                            int _destinationX = this->units[unitID].destinationXPosition;
                             bool _destinationReachable = false;
                             if (MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
                                     DAT_ViewportRenderState::ptr)(_destinationX, _destinationY)

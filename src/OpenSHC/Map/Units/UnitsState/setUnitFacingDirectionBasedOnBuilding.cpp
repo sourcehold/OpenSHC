@@ -15,7 +15,7 @@ namespace Map {
             if (buildingID == 0) {
                 return 0;
             }
-            short _previousFacingDirection = this->units[unitID].facingDirection;
+            int _previousFacingDirection = this->units[unitID].facingDirection;
             MACRO_CALL_MEMBER(
                 OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::calculatePreferredRelativeOrientation,
                 DAT_DirectionAlgorithmState::ptr)(this->units[unitID].x, this->units[unitID].y,

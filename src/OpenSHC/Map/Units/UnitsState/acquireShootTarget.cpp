@@ -93,7 +93,7 @@ namespace Map {
                    fetch the targetedUnitID
                  */
 
-                short _mannedEngineTargetID = this->units[unitID].targetedUnitID__OR__engineerMannedSiegeEngineRef;
+                int _mannedEngineTargetID = this->units[unitID].targetedUnitID__OR__engineerMannedSiegeEngineRef;
                 int _0x04_targetUnitID = (int)_mannedEngineTargetID;
                 if (this->units[_0x04_targetUnitID].uid
                         == this->units[unitID]
@@ -164,7 +164,7 @@ namespace Map {
                         }
                     }
                 }
-                short _savedDestinationX = this->units[unitID]._someX_2;
+                int _savedDestinationX = this->units[unitID]._someX_2;
                 this->units[unitID].targetedUnitID__OR__engineerMannedSiegeEngineRef = 0;
                 this->units[unitID].shootTargetedUnit = 0;
                 this->units[unitID].targetingType = OpenSHC::Map::Units::UIT_NO_INSTRUCTION_OR_MOVEUnk;
@@ -184,7 +184,7 @@ namespace Map {
                   get the workplace building id
                  */
 
-                short _ditchID = this->units[unitID].targetID_OR_targetBuildingID;
+                int _ditchID = this->units[unitID].targetID_OR_targetBuildingID;
                 int _brazierEntityID;
                 if (DAT_TileMapState::instance.pitchDitches[_ditchID].uid
                         == this->units[unitID]
@@ -203,7 +203,7 @@ namespace Map {
                     return TRUE;
                 }
             } else if (this->units[unitID].targetingType == OpenSHC::Map::Units::UIT_ATTACK_BUILDING) {
-                short _buildingID = this->units[unitID].targetID_OR_targetBuildingID;
+                int _buildingID = this->units[unitID].targetID_OR_targetBuildingID;
                 if (DAT_BuildingsState::instance.buildings[_buildingID].uid
                     == this->units[unitID]
                         .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID) {
@@ -257,7 +257,7 @@ namespace Map {
                                 continue;
                             break;
                         case OpenSHC::Map::Units::UT_LIONSHWOLF: {
-                            short _enemyTribeID = this->units[_enemy].tribeID;
+                            int _enemyTribeID = this->units[_enemy].tribeID;
                             if (DAT_TribesState::instance.tribes[_enemyTribeID].unknownBool02 != 0
                                 || (DAT_TribesState::instance.tribes[_enemyTribeID].unknownBool01 == 0
                                     && ((this->units[_enemy].state.generic != 0xcf
@@ -521,8 +521,8 @@ namespace Map {
                     this->units[_validTargetID].field233_0x39a = 1;
                     return TRUE;
                 }
-                short _attackTileY = this->units[unitID].attackAtTileY;
-                short _attackTileX = this->units[unitID].attackAtTileX;
+                int _attackTileY = this->units[unitID].attackAtTileY;
+                int _attackTileX = this->units[unitID].attackAtTileX;
                 this->units[unitID].jugglerCount = -1;
                 BOOLEnum _tileIsValid = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
                     DAT_ViewportRenderState::ptr)((int)_attackTileX, (uint)(_attackTileY));

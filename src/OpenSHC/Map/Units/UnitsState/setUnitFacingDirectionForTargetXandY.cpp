@@ -14,7 +14,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0052FE90
         BOOLEnum UnitsState::setUnitFacingDirectionForTargetXandY(int unitID, int targetX, int targetY)
         {
-            short _previousFacingDirection = this->units[unitID].facingDirection;
+            int _previousFacingDirection = this->units[unitID].facingDirection;
             MACRO_CALL_MEMBER(
                 OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::calculatePreferredRelativeOrientation,
                 DAT_DirectionAlgorithmState::ptr)(this->units[unitID].x, this->units[unitID].y, targetX, targetY);
