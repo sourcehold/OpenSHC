@@ -66,7 +66,7 @@ namespace Map {
                         _y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                         if ((((short)DAT_TileMapState::instance.UnitLayer[_tile] == 0) || (considerUnits == 0))
                             && (short)DAT_TileMapState::instance.UnitLayer[_tile] != unitID
-                            && _area == DAT_TileMapState::instance.PathConnectionLayer[_tile]
+                            && _area == (short)DAT_TileMapState::instance.PathConnectionLayer[_tile]
                             && (_tHeight = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTotalHeightAtTile,
                                     DAT_TileMapState::ptr)(_tile),
                                 _heightDiff = ((int)_buildingHeight + (int)_terrainHeight) - _tHeight,
@@ -86,7 +86,7 @@ namespace Map {
                             if (DAT_TileMapState::instance.WalkLayer[iVar1] != this->searchGeneration
                                 && (DAT_TileMapState::instance.LogicLayer[iVar1] & 0xb1U) == 0
                                 && (DAT_TileMapState::instance.LogicLayer[iVar1] & 0x1400U) == 0
-                                && DAT_TileMapState::instance.PathConnectionLayer[iVar1] == _area) {
+                                && (short)DAT_TileMapState::instance.PathConnectionLayer[iVar1] == _area) {
                                 DAT_TileMapState::instance.CertainPathLayer[iVar1]
                                     = (short)this->searchQueue.currentDistance + 1;
                                 DAT_TileMapState::instance.WalkLayer[iVar1] = (short)this->searchGeneration;
