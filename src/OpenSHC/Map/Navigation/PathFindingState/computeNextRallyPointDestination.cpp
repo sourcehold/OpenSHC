@@ -1,17 +1,17 @@
 #include "../PathFindingState.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
+#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Navigation {
-            using OpenSHC::Map::Location::Point8ShortXY;
+        using OpenSHC::Map::Location::Point8ShortXY;
 
         /*
           WARNING: Enum "MappersEnum": Some values do not have unique names
@@ -22,7 +22,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049CB00
         void PathFindingState::computeNextRallyPointDestination(int unitID, int xPos, int yPos)
         {
-            int _cTile2;
             short* _pOffsets;
             int _cY_2;
             int (*_cY2)[8];
@@ -33,7 +32,7 @@ namespace Map {
             this->ALG_ResultTile = 0;
             this->ALG_ResultY = 0;
             this->ALG_ResultX = 0;
-            if ((((uint)xPos < 400) && ((uint)yPos < 400)) && (*(char*)(yPos * 400 + 0x21aec98 + xPos) != '\0')) {
+            if ((uint)xPos < 400 && (uint)yPos < 400 && *(char*)(yPos * 400 + 0x21aec98 + xPos) != '\0') {
                 this->searchGeneration = this->searchGeneration + 1;
                 if (32000 < this->searchGeneration) {
                     this->searchGeneration = 1;
@@ -61,8 +60,8 @@ namespace Map {
                             this->ALG_ResultTile = _cTile;
                             return;
                         }
-                        if ((DAT_TileMapState::instance.OccupancyLayer[_cTile] == '\0')
-                            && ((short)DAT_TileMapState::instance.UnitLayer[_cTile] == 0)) {
+                        if (DAT_TileMapState::instance.OccupancyLayer[_cTile] == '\0'
+                            && (short)DAT_TileMapState::instance.UnitLayer[_cTile] == 0) {
                             this->ALG_ResultX = (int)_cX;
                             this->ALG_ResultY = _cY_2;
                             this->ALG_ResultTile = _cTile;
@@ -76,16 +75,16 @@ namespace Map {
                             = &DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[0].short_.yOffset;
                         _cY2 = DAT_TileMapState::instance.directionTranslationMatrix + _cY_2;
                         do {
-                            _cTile2 = (*_cY2)[0] + _cTile;
+                            int _cTile2 = (*_cY2)[0] + _cTile;
                             /*
                               0xb1 == test against sea, rocky, and borders
                              */
                             /*
                               0x10001400 == test against building tree keep
                              */
-                            if (((DAT_TileMapState::instance.WalkLayer[_cTile2] != this->searchGeneration)
-                                    && ((DAT_TileMapState::instance.LogicLayer[_cTile2] & 0xb1U) == 0))
-                                && ((DAT_TileMapState::instance.LogicLayer[_cTile2] & 0x10001400U) == 0)) {
+                            if (DAT_TileMapState::instance.WalkLayer[_cTile2] != this->searchGeneration
+                                && (DAT_TileMapState::instance.LogicLayer[_cTile2] & 0xb1U) == 0
+                                && (DAT_TileMapState::instance.LogicLayer[_cTile2] & 0x10001400U) == 0) {
                                 DAT_TileMapState::instance.CertainPathLayer[_cTile2]
                                     = (short)this->searchQueue.currentDistance + 1;
                                 DAT_TileMapState::instance.WalkLayer[_cTile2] = (short)this->searchGeneration;
