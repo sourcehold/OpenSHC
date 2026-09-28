@@ -368,10 +368,8 @@ namespace Map {
             int _healthPercentage_2
                 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::computeHealthPercentage,
                     DAT_DirectionAlgorithmState::ptr)(_unitHealth, this->units[unitID].maxHealth);
-            _entityShootingUnitID = (short)_healthPercentage_2;
-            this->units[unitID].healthPercentage = _entityShootingUnitID;
-            this->units[unitID].healthbar = (_entityShootingUnitID / 10 + (_entityShootingUnitID >> 0xf))
-                - (short)((longlong)(int)_entityShootingUnitID * 0x66666667 >> 0x3f);
+            this->units[unitID].healthPercentage = (short)_healthPercentage_2;
+            this->units[unitID].healthbar = this->units[unitID].healthPercentage / 10;
             if (_unitType == OpenSHC::Map::Units::UT_BREWER || _unitType == OpenSHC::Map::Units::UT_TANNER
                 || _unitType == OpenSHC::Map::Units::UT_LADY || _unitType == OpenSHC::Map::Units::UT_MOTHER
                 || (_unitType == OpenSHC::Map::Units::UT_CHILD && (this->units[unitID].spriteID == 0x81))) {
