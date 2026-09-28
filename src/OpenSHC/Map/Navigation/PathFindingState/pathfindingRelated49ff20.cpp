@@ -30,7 +30,7 @@ namespace Map {
             dword dVar4 = 1000;
             int local_4 = 1000;
             dword local_8 = 0;
-            if (x < 400 && y < 400 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] != '\0') {
+            if (x <= 399 && y <= 399 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] != '\0') {
                 this->calculations = this->calculations + 1;
                 this->searchGeneration = this->searchGeneration + 1;
                 if (32000 < this->searchGeneration) {
