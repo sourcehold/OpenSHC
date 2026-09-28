@@ -1,17 +1,17 @@
 #include "../PathFindingState.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
+#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Navigation {
-            using OpenSHC::Map::Location::Point8ShortXY;
+        using OpenSHC::Map::Location::Point8ShortXY;
 
         /*
           WARNING: Enum "MappersEnum": Some values do not have unique names
@@ -22,16 +22,10 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049AAD0
         void PathFindingState::updateWalkAndPathLayer(int param_1, uint xPosition, uint yPosition)
         {
-            short sVar1;
-            short sVar2;
-            uint uVar3;
-            int iVar4;
-            int iVar5;
             short* psVar6;
             int* piVar7;
             int iVar8;
-            if (((xPosition < 400) && (yPosition < 400))
-                && (*(char*)(yPosition * 400 + 0x21aec98 + xPosition) != '\0')) {
+            if (xPosition < 400 && yPosition < 400 && *(char*)(yPosition * 400 + 0x21aec98 + xPosition) != '\0') {
                 this->searchGeneration = this->searchGeneration + 1;
                 if (32000 < this->searchGeneration) {
                     this->searchGeneration = 1;
@@ -49,20 +43,20 @@ namespace Map {
                 DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
                 if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                     do {
-                        uVar3 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                        uint uVar3 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                         if (0x13a0f < uVar3)
                             break;
-                        sVar1 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                        short sVar1 = this->searchQueue.yQueue[this->searchQueue.readIndex];
                         iVar8 = (int)sVar1;
-                        sVar2 = this->searchQueue.xQueue[this->searchQueue.readIndex];
+                        short sVar2 = this->searchQueue.xQueue[this->searchQueue.readIndex];
                         if (iVar8 < this->mappingYRelated) {
                             this->mappingYRelated = iVar8;
                         }
                         if (this->yLimit < iVar8) {
                             this->yLimit = iVar8;
                         }
-                        iVar4 = (int)sVar2 / 10;
-                        iVar5 = iVar8 / 10;
+                        int iVar4 = (int)sVar2 / 10;
+                        int iVar5 = iVar8 / 10;
                         *(undefined1*)(iVar4 + 0x1f93438 + iVar5 * 0x28) = 2;
                         if (iVar4 < DAT_TileMapState::instance.someYLike) {
                             DAT_TileMapState::instance.someYLike = iVar4;
@@ -84,8 +78,8 @@ namespace Map {
                         psVar6 = &DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[0].short_.yOffset;
                         do {
                             iVar8 = (*(int (*)[8])(piVar7 + -1))[0] + uVar3;
-                            if ((DAT_TileMapState::instance.WalkLayer[iVar8] != this->searchGeneration)
-                                && ((DAT_TileMapState::instance.LogicLayer[iVar8] & 0x30) == 0)) {
+                            if (DAT_TileMapState::instance.WalkLayer[iVar8] != this->searchGeneration
+                                && (DAT_TileMapState::instance.LogicLayer[iVar8] & 0x30) == 0) {
                                 DAT_TileMapState::instance.CertainPathLayer[iVar8]
                                     = (short)this->searchQueue.currentDistance + 1;
                                 DAT_TileMapState::instance.WalkLayer[iVar8] = (short)this->searchGeneration;
@@ -99,8 +93,8 @@ namespace Map {
                                 }
                             }
                             iVar8 = *piVar7 + uVar3;
-                            if ((DAT_TileMapState::instance.WalkLayer[iVar8] != this->searchGeneration)
-                                && ((DAT_TileMapState::instance.LogicLayer[iVar8] & 0x30) == 0)) {
+                            if (DAT_TileMapState::instance.WalkLayer[iVar8] != this->searchGeneration
+                                && (DAT_TileMapState::instance.LogicLayer[iVar8] & 0x30) == 0) {
                                 DAT_TileMapState::instance.CertainPathLayer[iVar8]
                                     = (short)this->searchQueue.currentDistance + 1;
                                 DAT_TileMapState::instance.WalkLayer[iVar8] = (short)this->searchGeneration;
@@ -113,8 +107,8 @@ namespace Map {
                                 }
                             }
                             iVar8 = piVar7[1] + uVar3;
-                            if ((DAT_TileMapState::instance.WalkLayer[iVar8] != this->searchGeneration)
-                                && ((DAT_TileMapState::instance.LogicLayer[iVar8] & 0x30) == 0)) {
+                            if (DAT_TileMapState::instance.WalkLayer[iVar8] != this->searchGeneration
+                                && (DAT_TileMapState::instance.LogicLayer[iVar8] & 0x30) == 0) {
                                 DAT_TileMapState::instance.CertainPathLayer[iVar8]
                                     = (short)this->searchQueue.currentDistance + 1;
                                 DAT_TileMapState::instance.WalkLayer[iVar8] = (short)this->searchGeneration;
@@ -127,8 +121,8 @@ namespace Map {
                                 }
                             }
                             iVar8 = piVar7[2] + uVar3;
-                            if ((DAT_TileMapState::instance.WalkLayer[iVar8] != this->searchGeneration)
-                                && ((DAT_TileMapState::instance.LogicLayer[iVar8] & 0x30) == 0)) {
+                            if (DAT_TileMapState::instance.WalkLayer[iVar8] != this->searchGeneration
+                                && (DAT_TileMapState::instance.LogicLayer[iVar8] & 0x30) == 0) {
                                 DAT_TileMapState::instance.CertainPathLayer[iVar8]
                                     = (short)this->searchQueue.currentDistance + 1;
                                 DAT_TileMapState::instance.WalkLayer[iVar8] = (short)this->searchGeneration;
