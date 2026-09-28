@@ -24,7 +24,7 @@ namespace Map {
         {
             int (*paiVar3)[8];
             short _building;
-            byte _link;
+            int _link;
             dword _tile;
             if (399 < x || 399 < y || *(char*)(y * 400 + 0x21aec98 + x) == '\0') {
                 return (dword)(0);
