@@ -119,7 +119,7 @@ namespace Map {
                     /*
                       If we've exceeded search radius, stop searching
                      */
-                    if (distanceUnk < this->searchQueue.currentDistance) {
+                    if (this->searchQueue.currentDistance > distanceUnk) {
                         return (dword)(0);
                     }
                     /*
