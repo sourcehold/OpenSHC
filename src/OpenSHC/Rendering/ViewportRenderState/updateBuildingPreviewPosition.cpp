@@ -53,8 +53,8 @@ namespace Rendering {
         }
 
         if (DAT_TextureRenderCoreObject::instance.activeMenuTabIndex != 0) {
-            int hitBoxRow = (DAT_TextureRenderCoreObject::instance.activeMenuTabIndex * 5 - 5) * 2;
-            int nextHitBoxRow = (DAT_TextureRenderCoreObject::instance.activeMenuTabIndex * 5 - 5) * 2;
+            int hitBoxRow = (DAT_TextureRenderCoreObject::instance.activeMenuTabIndex - 1) * 10;
+            int nextHitBoxRow = (DAT_TextureRenderCoreObject::instance.activeMenuTabIndex - 1) * 10;
             int hitBoxAnchor = DAT_MapRenderDefinedData::instance.BuildingPreviewPositionRelatedOffsets[hitBoxRow][0].x;
             if (hitBoxAnchor != -1) {
                 do {
