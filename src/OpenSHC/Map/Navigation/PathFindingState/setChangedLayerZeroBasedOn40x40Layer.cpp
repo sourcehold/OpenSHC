@@ -44,7 +44,7 @@ namespace Map {
                                         int local_1c = 2;
                                         uint _x = flag_and_offset;
                                         do {
-                                            if (_x - 1 < 400 && _coord2 < 400
+                                            if (_x - 1 <= 399 && _coord2 <= 399
                                                 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[_yOffset + (_x - 1)] != '\0') {
                                                 /*
                                                   set changed layer to 0
@@ -58,7 +58,7 @@ namespace Map {
                                                                   .addXgetTile
                                                         + _curX)) = 0;
                                             }
-                                            if (_x < 400 && _coord2 < 400
+                                            if (_x <= 399 && _coord2 <= 399
                                                 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[_yOffset + _x] != '\0') {
                                                 *(undefined1*)(*(int*)((int)&DAT_ViewportRenderState::instance
                                                                            .translationMatrix[0]
@@ -66,7 +66,7 @@ namespace Map {
                                                                    + _curX)
                                                     + 0x1c5ad88 + _x) = 0;
                                             }
-                                            if (_x + 1 < 400 && _coord2 < 400
+                                            if (_x + 1 <= 399 && _coord2 <= 399
                                                 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[_yOffset + _x + 1] != '\0') {
                                                 *(undefined1*)(_x + 0x1c5ad89
                                                     + *(int*)((int)&DAT_ViewportRenderState::instance
@@ -74,7 +74,7 @@ namespace Map {
                                                                   .addXgetTile
                                                         + _curX)) = 0;
                                             }
-                                            if (_x + 2 < 400 && _coord2 < 400
+                                            if (_x + 2 <= 399 && _coord2 <= 399
                                                 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[_yOffset + _x + 2] != '\0') {
                                                 *(undefined1*)(_x + 0x1c5ad8a
                                                     + *(int*)((int)&DAT_ViewportRenderState::instance
@@ -82,7 +82,7 @@ namespace Map {
                                                                   .addXgetTile
                                                         + _curX)) = 0;
                                             }
-                                            if (_x + 3 < 400 && _coord2 < 400
+                                            if (_x + 3 <= 399 && _coord2 <= 399
                                                 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[_yOffset + _x + 3] != '\0') {
                                                 *(undefined1*)(_x + 0x1c5ad8b
                                                     + *(int*)((int)&DAT_ViewportRenderState::instance
