@@ -20,12 +20,8 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049E9E0
         void PathFindingState::updateAIZoneWithFloodFill0x20(int max, uint x, uint y)
         {
-            short sVar1;
-            short sVar2;
-            int iVar3;
             int _candidate;
-            int _tile;
-            if (((x < 400) && (y < 400)) && (*(char*)(y * 400 + 0x21aec98 + x) != '\0')) {
+            if (x < 400 && y < 400 && *(char*)(y * 400 + 0x21aec98 + x) != '\0') {
                 this->searchGeneration = this->searchGeneration + 1;
                 if (32000 < this->searchGeneration) {
                     this->searchGeneration = 1;
@@ -43,16 +39,16 @@ namespace Map {
                 DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
                 if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                     do {
-                        _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                        int _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                         DAT_TileMapState::instance.AIInfoLayer[_tile]
                             = DAT_TileMapState::instance.AIInfoLayer[_tile] | 0x20;
-                        sVar1 = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                        sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                        short sVar1 = this->searchQueue.xQueue[this->searchQueue.readIndex];
+                        short sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
                         this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
                         if (max < this->searchQueue.currentDistance) {
                             return;
                         }
-                        iVar3 = 0;
+                        int iVar3 = 0;
                         do {
                             /*
                               fixme: why are there nested identical if else statements here?   shouldn't it tested the
@@ -130,7 +126,7 @@ namespace Map {
                                                 this->searchQueue.writeIndex = 0;
                                             }
                                         }
-                                        if (((DAT_TileMapState::instance.LogicLayer[_tile] & 0x30) == 0)
+                                        if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x30) == 0
                                             && (_candidate = DAT_TileMapState::instance
                                                                  .directionTranslationMatrix[sVar2][iVar3 + 3]
                                                     + _tile,
