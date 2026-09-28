@@ -18027,7 +18027,7 @@ SHC_3BB0A8C1_0x0045AEB0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0045AF00 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0045AF30 | 0.0% | Pending
+SHC_3BB0A8C1_0x0045AF30 | 57.2% | One base ptr fewer
 
 SHC_3BB0A8C1_0x0045B1C0 | 57.4% | Reg alloc, one extra slot
 
