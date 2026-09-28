@@ -35,42 +35,35 @@ namespace Map {
                     } else {
                         _adjustment = (short)((_lead + (_lead >> 0x1f & 7U)) >> 3);
                     }
-                    switch (this->units[targetID].facingDirection) {
-                    case 0:
+                    short _targetFacing = this->units[targetID].facingDirection;
+                    if (_targetFacing == 0) {
                         this->units[shooterID].shootTargetMicroY
                             = this->units[shooterID].shootTargetMicroY - _adjustment;
-                        break;
-                    case 1:
+                    } else if (_targetFacing == 1) {
                         this->units[shooterID].shootTargetMicroY
                             = this->units[shooterID].shootTargetMicroY - _adjustment;
                         this->units[shooterID].shootTargetMicroX
                             = this->units[shooterID].shootTargetMicroX + _adjustment;
-                        break;
-                    case 2:
+                    } else if (_targetFacing == 2) {
                         this->units[shooterID].shootTargetMicroX
                             = this->units[shooterID].shootTargetMicroX + _adjustment;
-                        break;
-                    case 3:
+                    } else if (_targetFacing == 3) {
                         this->units[shooterID].shootTargetMicroY
                             = this->units[shooterID].shootTargetMicroY + _adjustment;
                         this->units[shooterID].shootTargetMicroX
                             = this->units[shooterID].shootTargetMicroX + _adjustment;
-                        break;
-                    case 4:
+                    } else if (_targetFacing == 4) {
                         this->units[shooterID].shootTargetMicroY
                             = this->units[shooterID].shootTargetMicroY + _adjustment;
-                        break;
-                    case 5:
+                    } else if (_targetFacing == 5) {
                         this->units[shooterID].shootTargetMicroY
                             = this->units[shooterID].shootTargetMicroY + _adjustment;
                         this->units[shooterID].shootTargetMicroX
                             = this->units[shooterID].shootTargetMicroX - _adjustment;
-                        break;
-                    case 6:
+                    } else if (_targetFacing == 6) {
                         this->units[shooterID].shootTargetMicroX
                             = this->units[shooterID].shootTargetMicroX - _adjustment;
-                        break;
-                    case 7:
+                    } else if (_targetFacing == 7) {
                         this->units[shooterID].shootTargetMicroY
                             = this->units[shooterID].shootTargetMicroY - _adjustment;
                         this->units[shooterID].shootTargetMicroX
@@ -78,7 +71,10 @@ namespace Map {
                     }
                 }
             }
-            int _result = (short)this->units[shooterID].unitType + -0x16;
+            /* the original returns whatever the switch below left in the return register on
+               the paths that adjust nothing, which is the type's index into it; the value is
+               not a meaningful result, but callers of those paths are given it */
+            int _unhandledTypeResult = (short)this->units[shooterID].unitType + -0x16;
             int _scatter;
             if (this->units[shooterID].shootTargetZ < this->units[shooterID].terrainOrClimbHeight) {
                 switch (this->units[shooterID].unitType) {
@@ -96,7 +92,7 @@ namespace Map {
                     _scatter = 10;
                     break;
                 default:
-                    return _result;
+                    return _unhandledTypeResult;
                 }
             } else {
                 _scatter = this->units[shooterID].shootTargetZ - this->units[shooterID].terrainOrClimbHeight;
@@ -115,10 +111,10 @@ namespace Map {
                     _scatter = _scatter + 0x46;
                     break;
                 case OpenSHC::Map::Units::UT_S_FBALLISTA:
-                    return _result;
+                    return _unhandledTypeResult;
                 }
                 if (_scatter <= 0) {
-                    return _result;
+                    return _unhandledTypeResult;
                 }
                 if (_scatter > 0x118) {
                     _scatter = 0x118;
@@ -126,9 +122,9 @@ namespace Map {
             }
             uint _rng = SEC_RNG::instance.currentNumber2;
             MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
-            _result = ((int)_rng / 300) * 300;
+            _unhandledTypeResult = ((int)_rng / 300) * 300;
             if ((int)_rng % 300 >= _scatter) {
-                return _result;
+                return _unhandledTypeResult;
             }
             if ((_rng & 7) < 2) {
                 _scatter = (_scatter + (_scatter >> 0x1f & 3U)) >> 2;
@@ -161,12 +157,12 @@ namespace Map {
                 }
                 int _heightOffset = _heightRng % _scatter + 0x14;
                 if (_heightRng % _scatter + 0x1c <= (int)this->units[shooterID].shootTargetZ) {
-                    _result = (ushort)this->units[shooterID].shootTargetZ - _heightOffset;
+                    _unhandledTypeResult = (ushort)this->units[shooterID].shootTargetZ - _heightOffset;
                 } else {
-                    _result = (ushort)this->units[shooterID].shootTargetZ + _heightOffset;
+                    _unhandledTypeResult = (ushort)this->units[shooterID].shootTargetZ + _heightOffset;
                 }
-                this->units[shooterID].shootTargetZ = (short)_result;
-                return _result;
+                this->units[shooterID].shootTargetZ = (short)_unhandledTypeResult;
+                return _unhandledTypeResult;
             }
             _scatter = _scatter / 6;
             if (_scatter == 0) {
