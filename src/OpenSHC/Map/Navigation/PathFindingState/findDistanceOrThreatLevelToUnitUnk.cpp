@@ -25,8 +25,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A0B20
         int PathFindingState::findDistanceOrThreatLevelToUnitUnk(int param_1, int param_2, int param_3, int param_4)
         {
-            short sVar1;
-            uint uVar2;
             int (*paiVar3)[8];
             int iVar4;
             int iVar5;
@@ -54,11 +52,11 @@ namespace Map {
                 return 0;
             }
             do {
-                uVar2 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                uint uVar2 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                 if (0x13a0f < uVar2) {
                     return local_c;
                 }
-                sVar1 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                short sVar1 = this->searchQueue.yQueue[this->searchQueue.readIndex];
                 this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[uVar2];
                 if (0x13a10 < this->searchQueue.currentDistance) {
                     return local_c;
@@ -70,8 +68,8 @@ namespace Map {
                 psVar6 = &DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[0].short_.yOffset;
                 do {
                     iVar4 = (*paiVar3)[0] + uVar2;
-                    if (((DAT_TileMapState::instance.LogicLayer[iVar4] & 0x4a5014b1U) == 0)
-                        && (DAT_TileMapState::instance.WalkLayer[iVar4] != this->searchGeneration)) {
+                    if ((DAT_TileMapState::instance.LogicLayer[iVar4] & 0x4a5014b1U) == 0
+                        && DAT_TileMapState::instance.WalkLayer[iVar4] != this->searchGeneration) {
                         iVar5 = (int)(short)DAT_TileMapState::instance.UnitLayer[iVar4];
                         DAT_TileMapState::instance.CertainPathLayer[iVar4]
                             = (short)this->searchQueue.currentDistance + 1;
@@ -82,14 +80,13 @@ namespace Map {
                         if (0x13a0f < this->searchQueue.writeIndex) {
                             this->searchQueue.writeIndex = 0;
                         }
-                        if ((((iVar5 != 0)
-                                 && (DAT_GameState::instance.mapAndTime.playerTeams[param_1]
-                                     != DAT_GameState::instance.mapAndTime
-                                         .playerTeams[DAT_UnitsState::instance.units[iVar5].owner]))
-                                && (DAT_UnitsState::instance.units[iVar5].logicalState
-                                    != OpenSHC::Map::Units::ULS_INVISIBLE))
-                            && ((DAT_UnitsState::instance.units[iVar5].dying == 0
-                                && (DAT_UnitsState::instance.units[iVar5].isSelectable_OR_matchTime != 0)))) {
+                        if (iVar5 != 0
+                            && DAT_GameState::instance.mapAndTime.playerTeams[param_1]
+                                != DAT_GameState::instance.mapAndTime
+                                    .playerTeams[DAT_UnitsState::instance.units[iVar5].owner]
+                            && DAT_UnitsState::instance.units[iVar5].logicalState != OpenSHC::Map::Units::ULS_INVISIBLE
+                            && DAT_UnitsState::instance.units[iVar5].dying == 0
+                            && DAT_UnitsState::instance.units[iVar5].isSelectable_OR_matchTime != 0) {
                             switch (DAT_UnitsState::instance.units[iVar5].unitType) {
                             case OpenSHC::Map::Units::UT_E_ARCHER:
                             case OpenSHC::Map::Units::UT_E_XBOW:
