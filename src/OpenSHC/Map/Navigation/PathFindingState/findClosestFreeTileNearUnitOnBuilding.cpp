@@ -30,8 +30,8 @@ namespace Map {
             int _lowestDist;
             uint _tile;
             ushort _unitArea;
-            short _x;
-            short _y;
+            int _x;
+            int _y;
             this->searchGeneration = this->searchGeneration + 1;
             this->calculations = this->calculations + 1;
             _lowestDist = 10000;
@@ -60,8 +60,8 @@ namespace Map {
                 if (0x13a0f < _tile) {
                     return (undefined4)(1);
                 }
-                _x = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                _y = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                _x = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
+                _y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                 iVar5 = (int)_y;
                 uint uVar1 = _x - x;
                 uVar3 = (int)uVar1 >> 0x1f;
