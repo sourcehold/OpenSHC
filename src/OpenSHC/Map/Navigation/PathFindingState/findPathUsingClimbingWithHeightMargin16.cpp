@@ -42,7 +42,7 @@ namespace Map {
             uint _tLogic;
             BuildingTypeShort _tType;
             uint _tile;
-            if (399 < x || 399 < y || *(char*)(y * 400 + 0x21aec98 + x) == '\0') {
+            if (399 < x || 399 < y || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
                 return FALSE;
             }
             if (x2 != 0xffffffff) {
@@ -52,7 +52,7 @@ namespace Map {
                 if (399 < y2) {
                     return FALSE;
                 }
-                if (*(char*)(y2 * 400 + 0x21aec98 + x2) == '\0') {
+                if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y2 * 400 + x2] == '\0') {
                     return FALSE;
                 }
             }
