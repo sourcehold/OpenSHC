@@ -93,10 +93,10 @@ namespace Map {
         int maxPitchDitchCount; // 0x00552904 length: 4
         undefined1 padding_0x552908[4]; // 0x00552908 length: 4
         short specialAreasArray[8]; // 0x0055290C length: 16
-        undefined4 temporaryTerrainTypeIndex; // 0x0055291C length: 4
-        undefined4 SEC_Section1052; // 0x00552920 length: 4
-        undefined4 SEC_Section1053; // 0x00552924 length: 4
-        undefined4 SEC_Section1054; // 0x00552928 length: 4
+        int temporaryTerrainTypeIndex; // 0x0055291C length: 4
+        int SEC_Section1052; // 0x00552920 length: 4
+        int SEC_Section1053; // 0x00552924 length: 4
+        int SEC_Section1054; // 0x00552928 length: 4
         int temporaryTerrainTypeArray[1000]; // 0x0055292C length: 4000
         int temporaryTerrainTypeBinaryArray[1000]; // 0x005538CC length: 4000
         undefined4 forceUpdateLogicalAndMiscDisplayLayers; // 0x0055486C length: 4
