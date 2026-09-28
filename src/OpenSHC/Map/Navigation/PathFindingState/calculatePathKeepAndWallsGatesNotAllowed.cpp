@@ -24,18 +24,14 @@ namespace Map {
         undefined4 PathFindingState::calculatePathKeepAndWallsGatesNotAllowed(
             int x1, int y1, int x2, int y2, int maxTries)
         {
-            short sVar1;
-            short sVar2;
-            int iVar3;
             uint uVar4;
             int* piVar5;
             int iVar6;
             uint _tile;
-            if (((399 < (uint)x1) || (399 < (uint)y1)) || (*(char*)(y1 * 400 + 0x21aec98 + x1) == '\0')) {
+            if (399 < (uint)x1 || 399 < (uint)y1 || *(char*)(y1 * 400 + 0x21aec98 + x1) == '\0') {
                 return (undefined4)(0);
             }
-            if ((x2 == -1)
-                || ((((uint)x2 < 400 && ((uint)y2 < 400)) && (*(char*)(y2 * 400 + 0x21aec98 + x2) != '\0')))) {
+            if (x2 == -1 || (((uint)x2 < 400 && ((uint)y2 < 400)) && (*(char*)(y2 * 400 + 0x21aec98 + x2) != '\0'))) {
                 this->searchGeneration = this->searchGeneration + 1;
                 if (32000 < this->searchGeneration) {
                     this->searchGeneration = 1;
@@ -64,25 +60,25 @@ namespace Map {
                         }
                         if ((maxTries <= this->searchQueue.readIndex) || (80399 < _tile))
                             break;
-                        sVar1 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                        short sVar1 = this->searchQueue.yQueue[this->searchQueue.readIndex];
                         this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
-                        sVar2 = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                        iVar3 = 0;
+                        short sVar2 = this->searchQueue.xQueue[this->searchQueue.readIndex];
+                        int iVar3 = 0;
                         piVar5 = DAT_TileMapState::instance.directionTranslationMatrix[sVar1] + 1;
                         do {
                             iVar6 = (*(int (*)[8])(piVar5 + -1))[0] + _tile;
-                            if (((DAT_TileMapState::instance.WalkLayer[iVar6] != this->searchGeneration)
-                                    && ((DAT_TileMapState::instance.PathLinkageLayer[_tile]
-                                            & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar3])
-                                        != 0))
-                                && ((((DAT_TileMapState::instance.LogicLayer[iVar6] & 2U) != 0
-                                         || ((DAT_TileMapState::instance.LogicLayer[iVar6] & 0x10000100U) == 0))
+                            if (DAT_TileMapState::instance.WalkLayer[iVar6] != this->searchGeneration
+                                && (DAT_TileMapState::instance.PathLinkageLayer[_tile]
+                                       & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar3])
+                                    != 0
+                                && (((DAT_TileMapState::instance.LogicLayer[iVar6] & 2U) != 0
+                                        || ((DAT_TileMapState::instance.LogicLayer[iVar6] & 0x10000100U) == 0))
                                     || ((DAT_TileMapState::instance.BuildingLayer[iVar6] != 0
                                         && (DAT_BuildingDefinedData::instance
                                                 .BuildingIsGateHouseArray[(short)DAT_BuildingsState::instance
                                                         .buildings[DAT_TileMapState::instance.BuildingLayer[iVar6]]
                                                         .buildingType]
-                                            != 0)))))) {
+                                            != 0))))) {
                                 DAT_TileMapState::instance.CertainPathLayer[iVar6]
                                     = (short)this->searchQueue.currentDistance + 1;
                                 DAT_TileMapState::instance.WalkLayer[iVar6] = (short)this->searchGeneration;
@@ -101,19 +97,18 @@ namespace Map {
                                 }
                             }
                             iVar6 = *piVar5 + _tile;
-                            if (((DAT_TileMapState::instance.WalkLayer[iVar6] != this->searchGeneration)
-                                    && ((DAT_TileMapState::instance.PathLinkageLayer[_tile]
-                                            & DAT_ClimbLogicDefinedData::instance
-                                                .BitFlagHelperForPathLinkage[iVar3 + 1])
-                                        != 0))
-                                && ((((DAT_TileMapState::instance.LogicLayer[iVar6] & 2U) != 0
-                                         || ((DAT_TileMapState::instance.LogicLayer[iVar6] & 0x10000100U) == 0))
+                            if (DAT_TileMapState::instance.WalkLayer[iVar6] != this->searchGeneration
+                                && (DAT_TileMapState::instance.PathLinkageLayer[_tile]
+                                       & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar3 + 1])
+                                    != 0
+                                && (((DAT_TileMapState::instance.LogicLayer[iVar6] & 2U) != 0
+                                        || ((DAT_TileMapState::instance.LogicLayer[iVar6] & 0x10000100U) == 0))
                                     || ((DAT_TileMapState::instance.BuildingLayer[iVar6] != 0
                                         && (DAT_BuildingDefinedData::instance
                                                 .BuildingIsGateHouseArray[(short)DAT_BuildingsState::instance
                                                         .buildings[DAT_TileMapState::instance.BuildingLayer[iVar6]]
                                                         .buildingType]
-                                            != 0)))))) {
+                                            != 0))))) {
                                 DAT_TileMapState::instance.CertainPathLayer[iVar6]
                                     = (short)this->searchQueue.currentDistance + 1;
                                 DAT_TileMapState::instance.WalkLayer[iVar6] = (short)this->searchGeneration;
@@ -132,19 +127,18 @@ namespace Map {
                                 }
                             }
                             iVar6 = piVar5[1] + _tile;
-                            if (((DAT_TileMapState::instance.WalkLayer[iVar6] != this->searchGeneration)
-                                    && ((DAT_TileMapState::instance.PathLinkageLayer[_tile]
-                                            & DAT_ClimbLogicDefinedData::instance
-                                                .BitFlagHelperForPathLinkage[iVar3 + 2])
-                                        != 0))
-                                && ((((DAT_TileMapState::instance.LogicLayer[iVar6] & 2U) != 0
-                                         || ((DAT_TileMapState::instance.LogicLayer[iVar6] & 0x10000100U) == 0))
+                            if (DAT_TileMapState::instance.WalkLayer[iVar6] != this->searchGeneration
+                                && (DAT_TileMapState::instance.PathLinkageLayer[_tile]
+                                       & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar3 + 2])
+                                    != 0
+                                && (((DAT_TileMapState::instance.LogicLayer[iVar6] & 2U) != 0
+                                        || ((DAT_TileMapState::instance.LogicLayer[iVar6] & 0x10000100U) == 0))
                                     || ((DAT_TileMapState::instance.BuildingLayer[iVar6] != 0
                                         && (DAT_BuildingDefinedData::instance
                                                 .BuildingIsGateHouseArray[(short)DAT_BuildingsState::instance
                                                         .buildings[DAT_TileMapState::instance.BuildingLayer[iVar6]]
                                                         .buildingType]
-                                            != 0)))))) {
+                                            != 0))))) {
                                 DAT_TileMapState::instance.CertainPathLayer[iVar6]
                                     = (short)this->searchQueue.currentDistance + 1;
                                 DAT_TileMapState::instance.WalkLayer[iVar6] = (short)this->searchGeneration;
@@ -163,19 +157,18 @@ namespace Map {
                                 }
                             }
                             iVar6 = piVar5[2] + _tile;
-                            if (((DAT_TileMapState::instance.WalkLayer[iVar6] != this->searchGeneration)
-                                    && ((DAT_TileMapState::instance.PathLinkageLayer[_tile]
-                                            & DAT_ClimbLogicDefinedData::instance
-                                                .BitFlagHelperForPathLinkage[iVar3 + 3])
-                                        != 0))
-                                && ((((DAT_TileMapState::instance.LogicLayer[iVar6] & 2U) != 0
-                                         || ((DAT_TileMapState::instance.LogicLayer[iVar6] & 0x10000100U) == 0))
+                            if (DAT_TileMapState::instance.WalkLayer[iVar6] != this->searchGeneration
+                                && (DAT_TileMapState::instance.PathLinkageLayer[_tile]
+                                       & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar3 + 3])
+                                    != 0
+                                && (((DAT_TileMapState::instance.LogicLayer[iVar6] & 2U) != 0
+                                        || ((DAT_TileMapState::instance.LogicLayer[iVar6] & 0x10000100U) == 0))
                                     || ((DAT_TileMapState::instance.BuildingLayer[iVar6] != 0
                                         && (DAT_BuildingDefinedData::instance
                                                 .BuildingIsGateHouseArray[(short)DAT_BuildingsState::instance
                                                         .buildings[DAT_TileMapState::instance.BuildingLayer[iVar6]]
                                                         .buildingType]
-                                            != 0)))))) {
+                                            != 0))))) {
                                 DAT_TileMapState::instance.CertainPathLayer[iVar6]
                                     = (short)this->searchQueue.currentDistance + 1;
                                 DAT_TileMapState::instance.WalkLayer[iVar6] = (short)this->searchGeneration;
