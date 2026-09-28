@@ -45,7 +45,7 @@ namespace Game {
         for (int playerID = 1; playerID < 9; playerID++) {
             if ((this->playerDataArray[playerID].keep.id > 0) && (this->playerDataArray[playerID].campground.id > 0)) {
                 int wantedChickens;
-                if (this->playerDataArray[playerID].totalFood < 1) {
+                if (this->playerDataArray[playerID].totalFood <= 0) {
                     wantedChickens = 0;
                 } else if (this->playerDataArray[playerID].totalFood < 10) {
                     wantedChickens = 1;
@@ -55,7 +55,7 @@ namespace Game {
                     wantedChickens = 3;
                 } else {
                     int populationTwice = this->playerDataArray[playerID].currentPopulation * 2;
-                    if (populationTwice < 2) {
+                    if (populationTwice <= 1) {
                         populationTwice = 1;
                     }
                     wantedChickens = this->playerDataArray[playerID].totalFood / populationTwice + 3;
