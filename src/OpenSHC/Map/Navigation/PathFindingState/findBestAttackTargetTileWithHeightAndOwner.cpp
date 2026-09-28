@@ -79,8 +79,8 @@ namespace Map {
                         uint uVar4 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                         if (0x13a0f < uVar4)
                             break;
-                        short sVar1 = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                        short sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                        int sVar1 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
+                        int sVar2 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                         iVar6 = (int)sVar2;
                         uint uVar8 = DAT_TileMapState::instance.LogicLayer[uVar4];
                         uint uVar11 = (uint) * (byte*)(param_7 * 0x13a10 + 0x1ee2998 + uVar4);
