@@ -50,7 +50,7 @@ namespace Game {
             }
         }
         if (livingPlayers != 0) {
-            this->mapAndTime.armySizeLimit = 2400 / livingPlayers + 40;
+            this->mapAndTime.armySizeLimit = 2400 / livingPlayers - 40;
             return;
         }
         this->mapAndTime.armySizeLimit = 10000;
