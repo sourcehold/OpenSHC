@@ -26,6 +26,7 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x004595D0
     int GameStateStructures::singlePlayerHasKeepAndGranaryCheck()
     {
+        int currentPlayerSlotID = DAT_GameSynchronyState::instance.currentPlayerSlotID;
         if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_EDITOR) {
             return 1;
         }
@@ -34,7 +35,7 @@ namespace Game {
         }
         if (((DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_BUILDERUnk)
                 || (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_CRUSADER_TUTORIAL))
-            && (DAT_GameSynchronyState::instance.currentPlayerSlotID == 2)) {
+            && (currentPlayerSlotID == 2)) {
             return 1;
         }
         if (this->mapAndTime.singlePlayerHasKeepAndGranary != FALSE) {
@@ -43,10 +44,10 @@ namespace Game {
         if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
             return 1;
         }
-        if (this->playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID].keep.id == 0) {
+        if (this->playerDataArray[currentPlayerSlotID].keep.id == 0) {
             return 0;
         }
-        if (this->playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID].granary.id == 0) {
+        if (this->playerDataArray[currentPlayerSlotID].granary.id == 0) {
             return -1;
         }
         this->mapAndTime.singlePlayerHasKeepAndGranary = TRUE;
