@@ -38753,7 +38753,7 @@ SHC_3BB0A8C1_0x004F6DC0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004F6F90 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004F6FD0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F6FD0 | 98.3% | unit loop regalloc
 
 SHC_3BB0A8C1_0x004F70B0 | 100.0% | Reimplemented
 
