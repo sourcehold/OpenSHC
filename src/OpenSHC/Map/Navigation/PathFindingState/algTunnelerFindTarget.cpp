@@ -55,8 +55,8 @@ namespace Map {
                 if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                     while ((iVar4 = this->searchQueue.tilesQueue[this->searchQueue.readIndex],
                         -1 < iVar4 && (iVar4 < 0x13a10))) {
-                        short sVar1 = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                        short sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                        int sVar1 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
+                        int sVar2 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                         iVar7 = (int)sVar2;
                         if ((DAT_TileMapState::instance.LogicLayer[iVar4] & 0x100U) != 0
                             && (DAT_TileMapState::instance.LogicLayer[iVar4] & 2U) == 0) {
