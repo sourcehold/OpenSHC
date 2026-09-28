@@ -156,7 +156,7 @@ namespace Map {
                                                                         calculateCanPlayerUnitsNavigateToAreaFromArea,
                                                     this)(param_5, (dword)((int)(param_4)),
                                                     (dword)((int)((
-                                                        short)DAT_TileMapState::instance.PathConnectionLayer[tile2])),
+                                                        short)(short)DAT_TileMapState::instance.PathConnectionLayer[tile2])),
                                                     0),
                                                 iVar15 != 0))
                                         || ((BVar4 != FALSE
