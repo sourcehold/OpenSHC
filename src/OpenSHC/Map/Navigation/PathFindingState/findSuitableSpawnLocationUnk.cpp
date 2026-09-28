@@ -20,20 +20,11 @@ namespace Map {
         undefined4 PathFindingState::findSuitableSpawnLocationUnk(
             int x, int y, int x2, int y2, int param_5, int param_6)
         {
-            byte bVar1;
-            short sVar2;
-            ushort uVar3;
-            int iVar4;
-            int iVar5;
-            int iVar6;
-            short sVar7;
-            short local_20;
-            iVar5 = x2;
-            iVar6 = y;
-            if ((((uint)x < 400) && ((uint)y < 400)) && (*(char*)(y * 400 + 0x21aec98 + x) != '\0')) {
-                if ((x2 != -1)
-                    && ((((399 < (uint)x2 || (399 < (uint)y2)) || (*(char*)(y2 * 400 + 0x21aec98 + x2) == '\0'))
-                        && (500 < param_5)))) {
+            int iVar5 = x2;
+            int iVar6 = y;
+            if ((uint)x < 400 && (uint)y < 400 && *(char*)(y * 400 + 0x21aec98 + x) != '\0') {
+                if (x2 != -1 && ((399 < (uint)x2 || (399 < (uint)y2)) || (*(char*)(y2 * 400 + 0x21aec98 + x2) == '\0'))
+                    && 500 < param_5) {
                     param_5 = 500;
                 }
                 if (param_6 == 0) {
@@ -48,7 +39,7 @@ namespace Map {
                     this->searchQueue.readIndex = 0;
                     this->searchQueue.depth = 0;
                 }
-                iVar4 = this->searchGeneration;
+                int iVar4 = this->searchGeneration;
                 y = this->searchQueue.writeIndex;
                 this->searchQueue.yQueue[0] = (short)iVar6;
                 x2 = this->searchQueue.readIndex;
@@ -79,22 +70,21 @@ namespace Map {
                         this->searchQueue.depth = param_6;
                         return (undefined4)(1);
                     }
-                    sVar2 = DAT_TileMapState::instance.CertainPathLayer[iVar6];
-                    sVar7 = sVar2 + 1;
-                    uVar3 = this->searchQueue.yQueue[x2];
-                    bVar1 = DAT_TileMapState::instance.PathLinkageLayer[iVar6];
-                    local_20 = (short)iVar4;
-                    if (((DAT_TileMapState::instance.CertainPathLayer[iVar6 + 0x13a0f] != local_20)
-                            && ((bVar1 & 0x40) != 0))
-                        && (DAT_TileMapState::instance.PathLinkageLayer[iVar6 + 0x13a0f] == '\0')) {
+                    short sVar2 = DAT_TileMapState::instance.CertainPathLayer[iVar6];
+                    short sVar7 = sVar2 + 1;
+                    ushort uVar3 = this->searchQueue.yQueue[x2];
+                    byte bVar1 = DAT_TileMapState::instance.PathLinkageLayer[iVar6];
+                    short local_20 = (short)iVar4;
+                    if (DAT_TileMapState::instance.CertainPathLayer[iVar6 + 0x13a0f] != local_20 && (bVar1 & 0x40) != 0
+                        && DAT_TileMapState::instance.PathLinkageLayer[iVar6 + 0x13a0f] == '\0') {
                         DAT_TileMapState::instance.CertainPathLayer[iVar6 + -1] = sVar7;
                         DAT_TileMapState::instance.CertainPathLayer[iVar6 + 0x13a0f] = local_20;
                         this->searchQueue.tilesQueue[y] = iVar6 + -1;
                         this->searchQueue.yQueue[y] = uVar3;
                         y = y + 1;
                     }
-                    if (((DAT_TileMapState::instance.WalkLayer[iVar6 + 1] != local_20) && ((bVar1 & 4) != 0))
-                        && (DAT_TileMapState::instance.OccupancyLayer[iVar6 + 1] == '\0')) {
+                    if (DAT_TileMapState::instance.WalkLayer[iVar6 + 1] != local_20 && (bVar1 & 4) != 0
+                        && DAT_TileMapState::instance.OccupancyLayer[iVar6 + 1] == '\0') {
                         DAT_TileMapState::instance.CertainPathLayer[iVar6 + 1] = sVar7;
                         DAT_TileMapState::instance.WalkLayer[iVar6 + 1] = local_20;
                         this->searchQueue.tilesQueue[y] = iVar6 + 1;
@@ -102,25 +92,24 @@ namespace Map {
                         y = y + 1;
                     }
                     iVar5 = iVar6 + DAT_TileMapState::instance.directionTranslationMatrix[uVar3][0];
-                    if (((DAT_TileMapState::instance.WalkLayer[iVar5] != local_20) && ((bVar1 & 1) != 0))
-                        && (DAT_TileMapState::instance.OccupancyLayer[iVar5] == '\0')) {
+                    if (DAT_TileMapState::instance.WalkLayer[iVar5] != local_20 && (bVar1 & 1) != 0
+                        && DAT_TileMapState::instance.OccupancyLayer[iVar5] == '\0') {
                         DAT_TileMapState::instance.CertainPathLayer[iVar5] = sVar7;
                         DAT_TileMapState::instance.WalkLayer[iVar5] = local_20;
                         this->searchQueue.tilesQueue[y] = iVar5;
                         this->searchQueue.yQueue[y] = uVar3 - 1;
                         y = y + 1;
                     }
-                    if (((DAT_TileMapState::instance.CertainPathLayer[iVar5 + 0x13a0f] != local_20)
-                            && ((bVar1 & 0x80) != 0))
-                        && (DAT_TileMapState::instance.PathLinkageLayer[iVar5 + 0x13a0f] == '\0')) {
+                    if (DAT_TileMapState::instance.CertainPathLayer[iVar5 + 0x13a0f] != local_20 && (bVar1 & 0x80) != 0
+                        && DAT_TileMapState::instance.PathLinkageLayer[iVar5 + 0x13a0f] == '\0') {
                         DAT_TileMapState::instance.CertainPathLayer[iVar5 + -1] = sVar2 + 2;
                         DAT_TileMapState::instance.CertainPathLayer[iVar5 + 0x13a0f] = local_20;
                         this->searchQueue.tilesQueue[y] = iVar5 + -1;
                         this->searchQueue.yQueue[y] = uVar3 - 1;
                         y = y + 1;
                     }
-                    if (((DAT_TileMapState::instance.WalkLayer[iVar5 + 1] != local_20) && ((bVar1 & 2) != 0))
-                        && (DAT_TileMapState::instance.OccupancyLayer[iVar5 + 1] == '\0')) {
+                    if (DAT_TileMapState::instance.WalkLayer[iVar5 + 1] != local_20 && (bVar1 & 2) != 0
+                        && DAT_TileMapState::instance.OccupancyLayer[iVar5 + 1] == '\0') {
                         DAT_TileMapState::instance.CertainPathLayer[iVar5 + 1] = sVar2 + 2;
                         DAT_TileMapState::instance.WalkLayer[iVar5 + 1] = local_20;
                         this->searchQueue.tilesQueue[y] = iVar5 + 1;
@@ -128,25 +117,24 @@ namespace Map {
                         y = y + 1;
                     }
                     iVar6 = iVar6 + DAT_TileMapState::instance.directionTranslationMatrix[uVar3][4];
-                    if (((DAT_TileMapState::instance.WalkLayer[iVar6] != local_20) && ((bVar1 & 0x10) != 0))
-                        && (DAT_TileMapState::instance.OccupancyLayer[iVar6] == '\0')) {
+                    if (DAT_TileMapState::instance.WalkLayer[iVar6] != local_20 && (bVar1 & 0x10) != 0
+                        && DAT_TileMapState::instance.OccupancyLayer[iVar6] == '\0') {
                         DAT_TileMapState::instance.CertainPathLayer[iVar6] = sVar7;
                         DAT_TileMapState::instance.WalkLayer[iVar6] = local_20;
                         this->searchQueue.tilesQueue[y] = iVar6;
                         this->searchQueue.yQueue[y] = uVar3 + 1;
                         y = y + 1;
                     }
-                    if (((DAT_TileMapState::instance.CertainPathLayer[iVar6 + 0x13a0f] != local_20)
-                            && ((bVar1 & 0x20) != 0))
-                        && (DAT_TileMapState::instance.PathLinkageLayer[iVar6 + 0x13a0f] == '\0')) {
+                    if (DAT_TileMapState::instance.CertainPathLayer[iVar6 + 0x13a0f] != local_20 && (bVar1 & 0x20) != 0
+                        && DAT_TileMapState::instance.PathLinkageLayer[iVar6 + 0x13a0f] == '\0') {
                         DAT_TileMapState::instance.CertainPathLayer[iVar6 + -1] = sVar2 + 2;
                         DAT_TileMapState::instance.CertainPathLayer[iVar6 + 0x13a0f] = local_20;
                         this->searchQueue.tilesQueue[y] = iVar6 + -1;
                         this->searchQueue.yQueue[y] = uVar3 + 1;
                         y = y + 1;
                     }
-                    if (((DAT_TileMapState::instance.WalkLayer[iVar6 + 1] != local_20) && ((bVar1 & 8) != 0))
-                        && (DAT_TileMapState::instance.OccupancyLayer[iVar6 + 1] == '\0')) {
+                    if (DAT_TileMapState::instance.WalkLayer[iVar6 + 1] != local_20 && (bVar1 & 8) != 0
+                        && DAT_TileMapState::instance.OccupancyLayer[iVar6 + 1] == '\0') {
                         DAT_TileMapState::instance.CertainPathLayer[iVar6 + 1] = sVar2 + 2;
                         DAT_TileMapState::instance.WalkLayer[iVar6 + 1] = local_20;
                         this->searchQueue.tilesQueue[y] = iVar6 + 1;
