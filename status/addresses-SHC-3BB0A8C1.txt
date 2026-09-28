@@ -40367,7 +40367,7 @@ SHC_3BB0A8C1_0x004FAE50 | 35.1% | ecx not kept across callee
 
 SHC_3BB0A8C1_0x004FAEE0 | 55.3% | ecx not kept across callee
 
-SHC_3BB0A8C1_0x004FAF70 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FAF70 | 98.5% | offset walk regalloc
 
 SHC_3BB0A8C1_0x004FB0C0 | 0.0% | Pending
 
