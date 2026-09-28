@@ -17,7 +17,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0053DCC0
         undefined4 UnitsState::setDestinationNearTargetedBuilding(int unitID, int param_2)
         {
-            ushort _areaAtUnitTile = DAT_TileMapState::instance.PathConnectionLayer[this->units[unitID].tile];
+            dword _areaAtUnitTile = (short)DAT_TileMapState::instance.PathConnectionLayer[this->units[unitID].tile];
             DAT_TileMapState::instance.PathConnectionLayer[this->units[unitID].targetedBuildingTile] = _areaAtUnitTile;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                   findFreeSpaceNextToEnemyDefensiveStructureInSameAreaWithinDistance,
