@@ -40,7 +40,6 @@ namespace Rendering {
     {
         short sVar1;
         BuildingTypeShort BVar2;
-        int iVar3;
         int iVar6;
         int* piVar7;
         uint uVar8;
@@ -61,7 +60,7 @@ namespace Rendering {
         local_14 = 0;
         if (DAT_BuildingsState::instance.buildings[tileIndex].displayOwnerFlag != 0) {
             sVar1 = DAT_BuildingsState::instance.buildings[tileIndex].tickRelatedVisuallyActiveIndicator;
-            if (((sVar1 < 1) || (4 < sVar1)) || (iVar11 = 0x20 - ((int)sVar1 << 5) / 5, iVar11 == 0x20)) {
+            if (sVar1 < 1 || 4 < sVar1 || (iVar11 = 0x20 - ((int)sVar1 << 5) / 5, iVar11 == 0x20)) {
                 iVar11 = 0;
             }
             BVar2 = DAT_BuildingsState::instance.buildings[tileIndex].buildingType;
@@ -99,8 +98,7 @@ namespace Rendering {
                             DAT_TextureRenderCoreObject::ptr)(xUnk + -0x23, yUnk + -0x39,
                             (int)((
                                 int)(DAT_GMImageHeaders::instance.imh[DAT_GmImageAddressToBeRendered::instance].width)),
-                            (int)((int)(DAT_GMImageHeaders::instance.imh[DAT_GmImageAddressToBeRendered::instance]
-                                    .height)),
+                            (int)(DAT_GMImageHeaders::instance.imh[DAT_GmImageAddressToBeRendered::instance].height),
                             (byte*)((int)((DAT_GMImageOffsets::instance[DAT_GmImageAddressToBeRendered::instance]
                                 + (int)DAT_TextureRenderCoreObject::instance.gmProcessedImageData))));
                     }
@@ -111,8 +109,7 @@ namespace Rendering {
                             DAT_TextureRenderCoreObject::ptr)(xUnk + -0x38, yUnk + -0x46,
                             (int)((
                                 int)(DAT_GMImageHeaders::instance.imh[DAT_GmImageAddressToBeRendered::instance].width)),
-                            (int)((int)(DAT_GMImageHeaders::instance.imh[DAT_GmImageAddressToBeRendered::instance]
-                                    .height)),
+                            (int)(DAT_GMImageHeaders::instance.imh[DAT_GmImageAddressToBeRendered::instance].height),
                             (byte*)((int)((DAT_GMImageOffsets::instance[DAT_GmImageAddressToBeRendered::instance]
                                 + (int)DAT_TextureRenderCoreObject::instance.gmProcessedImageData))));
                     }
@@ -145,7 +142,7 @@ namespace Rendering {
                             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                                 DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_IRON_MINER, iVar11,
                                 local_18 + xUnk, local_14 + yUnk,
-                                (int)((int)((uint)DAT_BuildingsState::instance.buildings[tileIndex].field208_0x292)));
+                                (int)(DAT_BuildingsState::instance.buildings[tileIndex].field208_0x292));
                         }
                     }
                     iVar11 = DAT_BuildingsState::instance.buildings[tileIndex].field23_0x44;
@@ -286,6 +283,7 @@ namespace Rendering {
                     }
                     break;
                 case OpenSHC::Map::Buildings::BT_ARMORY:
+                {
                     piVar7 = &DAT_BuildingsState::instance.buildings[tileIndex].tileRef2;
                     do {
                         if (piVar7[-1] == param_4)
@@ -358,7 +356,7 @@ namespace Rendering {
                         local_8 = -10;
                         iVar10 = DAT_TextureRenderCoreObject::instance.gmFileHeaderColorpaletteArray[0x68].originY;
                     }
-                    iVar3 = DAT_BuildingsState::instance.buildings[tileIndex].field29_0x5c;
+                    int iVar3 = DAT_BuildingsState::instance.buildings[tileIndex].field29_0x5c;
                     DAT_RenderedUnitOwner::instance = 0;
                     DAT_CurrentlyRenderedSpriteID::instance = GVar12;
                     if ((iVar3 != 0) && (iVar6 == iVar9)) {
@@ -448,6 +446,7 @@ namespace Rendering {
                         }
                     }
                     break;
+                }
                 case OpenSHC::Map::Buildings::BT_FLETCHER:
                     iVar11 = DAT_BuildingsState::instance.buildings[tileIndex].field39_0x84;
                     DAT_CurrentlyRenderedSpriteID::instance = OpenSHC::IO::Graphics::GID_ANIM_FLAG_SMALL;
@@ -589,17 +588,17 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS,
                             DAT_BuildingsState::instance.buildings[tileIndex].field20_0x38,
-                            (int)((int)((xUnk
-                                            - DAT_GMImageHeaders::instance
-                                                    .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                    .width
-                                                / 2)
-                                + 0xf)),
-                            (int)((int)((yUnk
-                                            - DAT_GMImageHeaders::instance
-                                                .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                .height)
-                                + -5)),
+                            (int)((xUnk
+                                      - DAT_GMImageHeaders::instance
+                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .width
+                                          / 2)
+                                + 0xf),
+                            (int)((yUnk
+                                      - DAT_GMImageHeaders::instance
+                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .height)
+                                + -5),
                             iVar11);
                     }
                     iVar9 = DAT_BuildingsState::instance.buildings[tileIndex].field22_0x40;
@@ -607,17 +606,17 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS,
                             DAT_BuildingsState::instance.buildings[tileIndex].field22_0x40,
-                            (int)((int)((xUnk
-                                            - DAT_GMImageHeaders::instance
-                                                    .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                    .width
-                                                / 2)
-                                + 0xf)),
-                            (int)((int)((yUnk
-                                            - DAT_GMImageHeaders::instance
-                                                .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                .height)
-                                + -5)),
+                            (int)((xUnk
+                                      - DAT_GMImageHeaders::instance
+                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .width
+                                          / 2)
+                                + 0xf),
+                            (int)((yUnk
+                                      - DAT_GMImageHeaders::instance
+                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .height)
+                                + -5),
                             iVar11);
                     }
                     iVar9 = DAT_BuildingsState::instance.buildings[tileIndex].shouldRenderRoof;
@@ -625,17 +624,17 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS,
                             DAT_BuildingsState::instance.buildings[tileIndex].shouldRenderRoof,
-                            (int)((int)((xUnk
-                                            - DAT_GMImageHeaders::instance
-                                                    .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                    .width
-                                                / 2)
-                                + 0xf)),
-                            (int)((int)((yUnk
-                                            - DAT_GMImageHeaders::instance
-                                                .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                .height)
-                                + -5)),
+                            (int)((xUnk
+                                      - DAT_GMImageHeaders::instance
+                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .width
+                                          / 2)
+                                + 0xf),
+                            (int)((yUnk
+                                      - DAT_GMImageHeaders::instance
+                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .height)
+                                + -5),
                             iVar11);
                     }
                     iVar9 = DAT_BuildingsState::instance.buildings[tileIndex].field34_0x70;
@@ -643,17 +642,17 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS,
                             DAT_BuildingsState::instance.buildings[tileIndex].field34_0x70,
-                            (int)((int)((xUnk
-                                            - DAT_GMImageHeaders::instance
-                                                    .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                    .width
-                                                / 2)
-                                + 0xf)),
-                            (int)((int)((yUnk
-                                            - DAT_GMImageHeaders::instance
-                                                .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                .height)
-                                + -5)),
+                            (int)((xUnk
+                                      - DAT_GMImageHeaders::instance
+                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .width
+                                          / 2)
+                                + 0xf),
+                            (int)((yUnk
+                                      - DAT_GMImageHeaders::instance
+                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .height)
+                                + -5),
                             iVar11);
                     }
                     iVar9 = DAT_BuildingsState::instance.buildings[tileIndex].field21_0x3c;
@@ -661,17 +660,17 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS,
                             DAT_BuildingsState::instance.buildings[tileIndex].field21_0x3c,
-                            (int)((int)((xUnk
-                                            - DAT_GMImageHeaders::instance
-                                                    .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                    .width
-                                                / 2)
-                                + 0xf)),
-                            (int)((int)((yUnk
-                                            - DAT_GMImageHeaders::instance
-                                                .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                .height)
-                                + -5)),
+                            (int)((xUnk
+                                      - DAT_GMImageHeaders::instance
+                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .width
+                                          / 2)
+                                + 0xf),
+                            (int)((yUnk
+                                      - DAT_GMImageHeaders::instance
+                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .height)
+                                + -5),
                             iVar11);
                     }
                     iVar9 = DAT_BuildingsState::instance.buildings[tileIndex].field23_0x44;
@@ -679,17 +678,17 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS,
                             DAT_BuildingsState::instance.buildings[tileIndex].field23_0x44,
-                            (int)((int)((xUnk
-                                            - DAT_GMImageHeaders::instance
-                                                    .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                    .width
-                                                / 2)
-                                + 0xf)),
-                            (int)((int)((yUnk
-                                            - DAT_GMImageHeaders::instance
-                                                .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                .height)
-                                + -5)),
+                            (int)((xUnk
+                                      - DAT_GMImageHeaders::instance
+                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .width
+                                          / 2)
+                                + 0xf),
+                            (int)((yUnk
+                                      - DAT_GMImageHeaders::instance
+                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .height)
+                                + -5),
                             iVar11);
                     }
                     iVar9 = DAT_BuildingsState::instance.buildings[tileIndex].field32_0x68;
@@ -697,17 +696,17 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS,
                             DAT_BuildingsState::instance.buildings[tileIndex].field32_0x68,
-                            (int)((int)((xUnk
-                                            - DAT_GMImageHeaders::instance
-                                                    .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                    .width
-                                                / 2)
-                                + 0xf)),
-                            (int)((int)((yUnk
-                                            - DAT_GMImageHeaders::instance
-                                                .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                .height)
-                                + -5)),
+                            (int)((xUnk
+                                      - DAT_GMImageHeaders::instance
+                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .width
+                                          / 2)
+                                + 0xf),
+                            (int)((yUnk
+                                      - DAT_GMImageHeaders::instance
+                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .height)
+                                + -5),
                             iVar11);
                     }
                     iVar9 = DAT_BuildingsState::instance.buildings[tileIndex].field37_0x7c;
@@ -715,17 +714,17 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS,
                             DAT_BuildingsState::instance.buildings[tileIndex].field37_0x7c,
-                            (int)((int)((xUnk
-                                            - DAT_GMImageHeaders::instance
-                                                    .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                    .width
-                                                / 2)
-                                + 0xf)),
-                            (int)((int)((yUnk
-                                            - DAT_GMImageHeaders::instance
-                                                .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                .height)
-                                + -5)),
+                            (int)((xUnk
+                                      - DAT_GMImageHeaders::instance
+                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .width
+                                          / 2)
+                                + 0xf),
+                            (int)((yUnk
+                                      - DAT_GMImageHeaders::instance
+                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .height)
+                                + -5),
                             iVar11);
                     }
                     iVar9 = DAT_BuildingsState::instance.buildings[tileIndex].field29_0x5c;
@@ -733,17 +732,17 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS,
                             DAT_BuildingsState::instance.buildings[tileIndex].field29_0x5c,
-                            (int)((int)((xUnk
-                                            - DAT_GMImageHeaders::instance
-                                                    .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                    .width
-                                                / 2)
-                                + 0xf)),
-                            (int)((int)((yUnk
-                                            - DAT_GMImageHeaders::instance
-                                                .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                .height)
-                                + -5)),
+                            (int)((xUnk
+                                      - DAT_GMImageHeaders::instance
+                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .width
+                                          / 2)
+                                + 0xf),
+                            (int)((yUnk
+                                      - DAT_GMImageHeaders::instance
+                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .height)
+                                + -5),
                             iVar11);
                     }
                     iVar9 = DAT_BuildingsState::instance.buildings[tileIndex].shouldRenderSomeOverlay;
@@ -751,17 +750,17 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS,
                             DAT_BuildingsState::instance.buildings[tileIndex].shouldRenderSomeOverlay,
-                            (int)((int)((xUnk
-                                            - DAT_GMImageHeaders::instance
-                                                    .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                    .width
-                                                / 2)
-                                + 0xf)),
-                            (int)((int)((yUnk
-                                            - DAT_GMImageHeaders::instance
-                                                .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                .height)
-                                + -5)),
+                            (int)((xUnk
+                                      - DAT_GMImageHeaders::instance
+                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .width
+                                          / 2)
+                                + 0xf),
+                            (int)((yUnk
+                                      - DAT_GMImageHeaders::instance
+                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .height)
+                                + -5),
                             iVar11);
                     }
                     iVar9 = DAT_BuildingsState::instance.buildings[tileIndex].field35_0x74;
@@ -769,17 +768,17 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS,
                             DAT_BuildingsState::instance.buildings[tileIndex].field35_0x74,
-                            (int)((int)((xUnk
-                                            - DAT_GMImageHeaders::instance
-                                                    .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                    .width
-                                                / 2)
-                                + 0xf)),
-                            (int)((int)((yUnk
-                                            - DAT_GMImageHeaders::instance
-                                                .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                .height)
-                                + -5)),
+                            (int)((xUnk
+                                      - DAT_GMImageHeaders::instance
+                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .width
+                                          / 2)
+                                + 0xf),
+                            (int)((yUnk
+                                      - DAT_GMImageHeaders::instance
+                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .height)
+                                + -5),
                             iVar11);
                     }
                     iVar9 = DAT_BuildingsState::instance.buildings[tileIndex].field39_0x84;
@@ -787,17 +786,17 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS,
                             DAT_BuildingsState::instance.buildings[tileIndex].field39_0x84,
-                            (int)((int)((xUnk
-                                            - DAT_GMImageHeaders::instance
-                                                    .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                    .width
-                                                / 2)
-                                + 0xf)),
-                            (int)((int)((yUnk
-                                            - DAT_GMImageHeaders::instance
-                                                .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                .height)
-                                + -5)),
+                            (int)((xUnk
+                                      - DAT_GMImageHeaders::instance
+                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .width
+                                          / 2)
+                                + 0xf),
+                            (int)((yUnk
+                                      - DAT_GMImageHeaders::instance
+                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .height)
+                                + -5),
                             iVar11);
                     }
                     iVar9 = DAT_BuildingsState::instance.buildings[tileIndex].field33_0x6c;
@@ -805,17 +804,17 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS,
                             DAT_BuildingsState::instance.buildings[tileIndex].field33_0x6c,
-                            (int)((int)((xUnk
-                                            - DAT_GMImageHeaders::instance
-                                                    .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                    .width
-                                                / 2)
-                                + 0xf)),
-                            (int)((int)((yUnk
-                                            - DAT_GMImageHeaders::instance
-                                                .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                .height)
-                                + -5)),
+                            (int)((xUnk
+                                      - DAT_GMImageHeaders::instance
+                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .width
+                                          / 2)
+                                + 0xf),
+                            (int)((yUnk
+                                      - DAT_GMImageHeaders::instance
+                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .height)
+                                + -5),
                             iVar11);
                     }
                     iVar9 = DAT_BuildingsState::instance.buildings[tileIndex].field36_0x78;
@@ -823,17 +822,17 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS,
                             DAT_BuildingsState::instance.buildings[tileIndex].field36_0x78,
-                            (int)((int)((xUnk
-                                            - DAT_GMImageHeaders::instance
-                                                    .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                    .width
-                                                / 2)
-                                + 0xf)),
-                            (int)((int)((yUnk
-                                            - DAT_GMImageHeaders::instance
-                                                .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                .height)
-                                + -5)),
+                            (int)((xUnk
+                                      - DAT_GMImageHeaders::instance
+                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .width
+                                          / 2)
+                                + 0xf),
+                            (int)((yUnk
+                                      - DAT_GMImageHeaders::instance
+                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .height)
+                                + -5),
                             iVar11);
                     }
                     iVar9 = DAT_BuildingsState::instance.buildings[tileIndex].ownerFlagFrame;
@@ -841,34 +840,34 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS,
                             DAT_BuildingsState::instance.buildings[tileIndex].ownerFlagFrame,
-                            (int)((int)((xUnk
-                                            - DAT_GMImageHeaders::instance
-                                                    .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                    .width
-                                                / 2)
-                                + 0xf)),
-                            (int)((int)((yUnk
-                                            - DAT_GMImageHeaders::instance
-                                                .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                .height)
-                                + -5)),
+                            (int)((xUnk
+                                      - DAT_GMImageHeaders::instance
+                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .width
+                                          / 2)
+                                + 0xf),
+                            (int)((yUnk
+                                      - DAT_GMImageHeaders::instance
+                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .height)
+                                + -5),
                             iVar11);
                     }
                     iVar9 = DAT_BuildingsState::instance.buildings[tileIndex].field40_0x88;
                     if ((iVar9 != 0) && (iVar6 == 0xf)) {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_GOODS, iVar9,
-                            (int)((int)((xUnk
-                                            - DAT_GMImageHeaders::instance
-                                                    .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                    .width
-                                                / 2)
-                                + 0xf)),
-                            (int)((int)((yUnk
-                                            - DAT_GMImageHeaders::instance
-                                                .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
-                                                .height)
-                                + -5)),
+                            (int)((xUnk
+                                      - DAT_GMImageHeaders::instance
+                                              .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                              .width
+                                          / 2)
+                                + 0xf),
+                            (int)((yUnk
+                                      - DAT_GMImageHeaders::instance
+                                          .imh[GMTotalPicturesProcessed::instance[0x1c] + iVar9 + -1]
+                                          .height)
+                                + -5),
                             iVar11);
                     }
                     break;
@@ -1068,7 +1067,7 @@ namespace Rendering {
                         } else {
                             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                                 DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_FARMER, iVar11,
-                                xUnk + -0x23, yUnk + -0x51, (int)((int)(sVar1)));
+                                xUnk + -0x23, yUnk + -0x51, (int)(sVar1));
                         }
                     }
                     iVar11 = DAT_BuildingsState::instance.buildings[tileIndex].field21_0x3c;
@@ -1081,7 +1080,7 @@ namespace Rendering {
                         } else {
                             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                                 DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_FARMER, iVar11,
-                                xUnk + -0x23, yUnk + -0x51, (int)((int)(sVar1)));
+                                xUnk + -0x23, yUnk + -0x51, (int)(sVar1));
                         }
                     }
                     iVar11 = DAT_BuildingsState::instance.buildings[tileIndex].field22_0x40;
@@ -1161,7 +1160,7 @@ namespace Rendering {
                             } else {
                                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                                     DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_STABLES, iVar11,
-                                    xUnk + -0x50, yUnk + -0x6b, (int)((int)(sVar1)));
+                                    xUnk + -0x50, yUnk + -0x6b, (int)(sVar1));
                             }
                         } else {
                             if (sVar1 == 0) {
@@ -1173,7 +1172,7 @@ namespace Rendering {
                             } else {
                                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                                     DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_STABLES, iVar11,
-                                    xUnk + -0x50, yUnk + -0x6b, (int)((int)(sVar1)));
+                                    xUnk + -0x50, yUnk + -0x6b, (int)(sVar1));
                             }
                         }
                     }
@@ -1190,7 +1189,7 @@ namespace Rendering {
                             } else {
                                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                                     DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_STABLES, iVar11,
-                                    xUnk + -0x3a, yUnk + -0x60, (int)((int)(sVar1)));
+                                    xUnk + -0x3a, yUnk + -0x60, (int)(sVar1));
                             }
                         } else {
                             if (sVar1 == 0) {
@@ -1202,7 +1201,7 @@ namespace Rendering {
                             } else {
                                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                                     DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_STABLES, iVar11,
-                                    xUnk + -0x3a, yUnk + -0x60, (int)((int)(sVar1)));
+                                    xUnk + -0x3a, yUnk + -0x60, (int)(sVar1));
                             }
                         }
                     }
@@ -1219,7 +1218,7 @@ namespace Rendering {
                             } else {
                                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                                     DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_STABLES, iVar11,
-                                    xUnk + -0x24, yUnk + -0x55, (int)((int)(sVar1)));
+                                    xUnk + -0x24, yUnk + -0x55, (int)(sVar1));
                             }
                         } else {
                             if (sVar1 == 0) {
@@ -1231,7 +1230,7 @@ namespace Rendering {
                             } else {
                                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                                     DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_STABLES, iVar11,
-                                    xUnk + -0x24, yUnk + -0x55, (int)((int)(sVar1)));
+                                    xUnk + -0x24, yUnk + -0x55, (int)(sVar1));
                             }
                         }
                     }
@@ -1246,7 +1245,7 @@ namespace Rendering {
                             } else {
                                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                                     DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_STABLES, iVar11,
-                                    xUnk + -0xe, yUnk + -0x4a, (int)((int)(sVar1)));
+                                    xUnk + -0xe, yUnk + -0x4a, (int)(sVar1));
                             }
                             sVar1 = DAT_BuildingsState::instance.buildings[tileIndex].field66_0xbe;
                             if (sVar1 == 0) {
@@ -1259,8 +1258,8 @@ namespace Rendering {
                                 break;
                             }
                             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
-                                DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_STABLES, 0x26,
-                                xUnk + -0xd, yUnk + -0x49, (int)((int)(sVar1)));
+                                DAT_TextureRenderCoreObject::ptr)(
+                                OpenSHC::IO::Graphics::GID_ANIM_STABLES, 0x26, xUnk + -0xd, yUnk + -0x49, (int)(sVar1));
                         } else {
                             if (sVar1 == 0) {
                                 iVar6 = yUnk + -0x3f;
@@ -1272,7 +1271,7 @@ namespace Rendering {
                             }
                             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                                 DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_ANIM_STABLES, iVar11,
-                                xUnk + -0xe, yUnk + -0x4a, (int)((int)(sVar1)));
+                                xUnk + -0xe, yUnk + -0x4a, (int)(sVar1));
                         }
                     }
                     break;
@@ -1642,28 +1641,24 @@ namespace Rendering {
             barXOffset = uVar8 << 5;
             barYOffset = uVar8 << 4;
         }
-        if (((((DAT_GameCore::instance.currentMenuViewType == OpenSHC::UI::Enums::MVT_BUILDING_AND_STATUS_MENU)
-                  && (tileIndex == DAT_BuildingsState::instance.menuSelectedBuildingID))
-                 || ((tileIndex == DAT_BuildingsState::instance.field28_0x18e05c
-                     && (DAT_BuildingsState::instance.field29_0x18e060
-                         == DAT_BuildingsState::instance.buildings[tileIndex].uid))))
-                && (((((sVar1 = DAT_BuildingsState::instance.buildings[tileIndex].maxHealth,
-                           sVar1 != 0
-                               && (DAT_BuildingsState::instance.buildings[tileIndex].buildingType
-                                   != OpenSHC::Map::Buildings::BT_MANORHOUSE))
-                          && (DAT_BuildingsState::instance.buildings[tileIndex].buildingType
-                              != OpenSHC::Map::Buildings::BT_STONEKEEP))
-                         && ((DAT_BuildingsState::instance.buildings[tileIndex].buildingType
-                                 != OpenSHC::Map::Buildings::BT_STRONGHOLD
-                             && (DAT_BuildingsState::instance.buildings[tileIndex].buildingType
-                                 != OpenSHC::Map::Buildings::BT_KEEPFOUR))))
+        if ((((DAT_GameCore::instance.currentMenuViewType == OpenSHC::UI::Enums::MVT_BUILDING_AND_STATUS_MENU)
+                 && (tileIndex == DAT_BuildingsState::instance.menuSelectedBuildingID))
+                || ((tileIndex == DAT_BuildingsState::instance.field28_0x18e05c
+                    && (DAT_BuildingsState::instance.field29_0x18e060
+                        == DAT_BuildingsState::instance.buildings[tileIndex].uid))))
+            && (sVar1 = DAT_BuildingsState::instance.buildings[tileIndex].maxHealth,
+                sVar1 != 0
                     && (DAT_BuildingsState::instance.buildings[tileIndex].buildingType
-                        != OpenSHC::Map::Buildings::BT_KEEPFIVE))))
-            && (DAT_BuildingsState::instance.buildings[tileIndex].buildingType
-                != OpenSHC::Map::Buildings::BT_CAMPGROUND)) {
+                        != OpenSHC::Map::Buildings::BT_MANORHOUSE))
+            && DAT_BuildingsState::instance.buildings[tileIndex].buildingType != OpenSHC::Map::Buildings::BT_STONEKEEP
+            && DAT_BuildingsState::instance.buildings[tileIndex].buildingType != OpenSHC::Map::Buildings::BT_STRONGHOLD
+            && DAT_BuildingsState::instance.buildings[tileIndex].buildingType != OpenSHC::Map::Buildings::BT_KEEPFOUR
+            && DAT_BuildingsState::instance.buildings[tileIndex].buildingType != OpenSHC::Map::Buildings::BT_KEEPFIVE
+            && DAT_BuildingsState::instance.buildings[tileIndex].buildingType
+                != OpenSHC::Map::Buildings::BT_CAMPGROUND) {
             iVar6 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::computeHealthPercentage,
                 DAT_DirectionAlgorithmState::ptr)(
-                (int)DAT_BuildingsState::instance.buildings[tileIndex].currentHealth, (int)((int)(sVar1)));
+                (int)DAT_BuildingsState::instance.buildings[tileIndex].currentHealth, (int)(sVar1));
             switch (DAT_BuildingsState::instance.buildings[tileIndex].buildingType) {
             case OpenSHC::Map::Buildings::BT_GATEHOUSELARGE:
                 barYOffset = barYOffset + 0x14;
