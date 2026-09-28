@@ -34,10 +34,10 @@ namespace Map {
             int _fc;
             int _gen;
             byte* _pPathPlan;
-            if (399 < x || 399 < y || *(char*)(y * 400 + 0x21aec98 + x) == '\0') {
+            if (399 < x || 399 < y || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
                 return FALSE;
             }
-            if (destX < 400 && destY < 400 && *(char*)(destY * 400 + 0x21aec98 + destX) != '\0') {
+            if (destX < 400 && destY < 400 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[destY * 400 + destX] != '\0') {
                 this->searchGeneration = this->searchGeneration + 1;
                 if (32000 < this->searchGeneration) {
                     this->searchGeneration = 1;
