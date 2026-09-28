@@ -19,27 +19,21 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A65E0
         void PathFindingState::setDestinationPairsBasedOnPreviousSearch(int playerIDMin1, int attackedPlayerID)
         {
-            uint _attackedDistance;
-            uint x;
-            int _pair;
-            uint y;
-            int _tile;
-            _pair = 0;
+            int _pair = 0;
             this->searchQueue.readIndex = 0;
             if (this->searchQueue.writeIndex != 0) {
                 do {
-                    y = (uint)this->searchQueue.yQueue[this->searchQueue.readIndex];
-                    _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
-                    _attackedDistance = (uint) * (byte*)(attackedPlayerID * 0x13a10 + 0x1ee2998 + _tile);
-                    x = _tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
-                    if ((((DAT_TileMapState::instance.WalkLayer[_tile] == this->searchGeneration)
-                             && (_attackedDistance != 0))
-                            && (_attackedDistance - 4294967224 < 4))
-                        && ((DAT_TileMapState::instance.CertainPathLayer[_tile] < 0x4c
-                            && (DAT_TileMapState::instance.CertainPathLayer[_tile] != 100)))) {
+                    uint y = (uint)this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    int _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                    uint _attackedDistance = (uint) * (byte*)(attackedPlayerID * 0x13a10 + 0x1ee2998 + _tile);
+                    uint x = _tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
+                    if (DAT_TileMapState::instance.WalkLayer[_tile] == this->searchGeneration && _attackedDistance != 0
+                        && _attackedDistance - 4294967224 < 4
+                        && DAT_TileMapState::instance.CertainPathLayer[_tile] < 0x4c
+                        && DAT_TileMapState::instance.CertainPathLayer[_tile] != 100) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::Map::Navigation::PathFindingState_Func::budgetFloodFillOnCertainPathLayer, this)(
-                            x, y, (int)((int)(100)), (int)((int)(50)));
+                            x, y, (int)(100), (int)(50));
                         DAT_GameState::instance.mapAndTime.unitMoveDestinationXYPairs[playerIDMin1][_pair].x = x;
                         DAT_GameState::instance.mapAndTime.unitMoveDestinationXYPairs[playerIDMin1][_pair].y = y;
                         _pair = _pair + 1;
