@@ -64,8 +64,8 @@ namespace Map {
                       for each direction relative to tile 2, do
                      */
                     _candidate2 = (*paiVar3)[0] + _tile2;
-                    if ((DAT_TileMapState::instance.PathConnectionLayer[_candidate2] == _area1)
-                        && (DAT_TileMapState::instance.UnitLayer[_candidate2] == 0)) {
+                    if (((short)DAT_TileMapState::instance.PathConnectionLayer[_candidate2] == _area1)
+                        && ((short)DAT_TileMapState::instance.UnitLayer[_candidate2] == 0)) {
                         /*
                           area is same as area1, no units on this tile   compute the total height at this candidate tile
                          */
