@@ -2,6 +2,7 @@
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/Map/Trees/TreeType.hpp"
+#include "OpenSHC/Map/Trees/TreeTypeShort.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_LandscapeState.hpp"
@@ -9,15 +10,14 @@
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Map/Trees/TreeTypeShort.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
         using OpenSHC::Map::Trees::TreeType;
+        using OpenSHC::Map::Trees::TreeTypeShort;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-            using OpenSHC::Map::Trees::TreeTypeShort;
 
         /*
           WARNING: Enum "MappersEnum": Some values do not have unique names
@@ -28,9 +28,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049C370
         BOOLEnum PathFindingState::findNoTreeInRange(int budget, uint x, uint y)
         {
-            short sVar1;
-            int _candidate;
-            int _org;
             int (*paiVar2)[8];
             short* psVar3;
             int _tile;
@@ -38,7 +35,7 @@ namespace Map {
             this->ALG_ResultTile = 0;
             this->ALG_ResultY = 0;
             this->ALG_ResultX = 0;
-            if (((399 < x) || (399 < y)) || (*(char*)(y * 400 + 0x21aec98 + x) == '\0')) {
+            if (399 < x || 399 < y || *(char*)(y * 400 + 0x21aec98 + x) == '\0') {
                 return FALSE;
             }
             this->calculations = this->calculations + 1;
@@ -62,16 +59,16 @@ namespace Map {
                     if (budget < this->searchQueue.currentDistance) {
                         return TRUE;
                     }
-                    sVar1 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    short sVar1 = this->searchQueue.yQueue[this->searchQueue.readIndex];
                     psVar3 = &DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[0].short_.yOffset;
                     paiVar2 = DAT_TileMapState::instance.directionTranslationMatrix + sVar1;
                     do {
                         /*
                           for each direction, do:
                          */
-                        _candidate = (*paiVar2)[0] + _tile;
+                        int _candidate = (*paiVar2)[0] + _tile;
                         if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration) {
-                            _org = (int)DAT_TileMapState::instance.OrganismLayer[_candidate];
+                            int _org = (int)DAT_TileMapState::instance.OrganismLayer[_candidate];
                             if ((_org == 0) || (1999 < _org)) {
                                 if ((DAT_TileMapState::instance.LogicLayer[_candidate] & 0x30) == 0) {
                                     /*
@@ -89,16 +86,16 @@ namespace Map {
                                 }
                             } else {
                                 _treeType = DAT_LandscapeState::instance.trees[_org].treeType;
-                                if (_treeType == ((TreeType)1)) {
+                                if (_treeType == (TreeType)1) {
                                     return FALSE;
                                 }
-                                if (_treeType == ((TreeType)2)) {
+                                if (_treeType == (TreeType)2) {
                                     return FALSE;
                                 }
-                                if (_treeType == ((TreeType)3)) {
+                                if (_treeType == (TreeType)3) {
                                     return FALSE;
                                 }
-                                if (_treeType == ((TreeType)4)) {
+                                if (_treeType == (TreeType)4) {
                                     return FALSE;
                                 }
                             }
