@@ -42,7 +42,7 @@ namespace Map {
             int playerID, uint x, uint y, int param_4, int param_5)
         {
             int* piVar1;
-            short sVar2;
+            int sVar2;
             int tile;
             uint uVar3;
             int iVar4;
@@ -76,7 +76,7 @@ namespace Map {
                 while (
                     (tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex], -1 < tile && (tile < 0x13a10))) {
                     local_4 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
-                    sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    sVar2 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[tile];
                     if (0x13a10 < this->searchQueue.currentDistance) {
                         return (undefined4)(0);
