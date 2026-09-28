@@ -33,7 +33,7 @@ namespace Map {
             short* psVar6;
             int* piVar7;
             int iVar8;
-            if (399 < x || 399 < y || *(char*)(y * 400 + 0x21aec98 + x) == '\0') {
+            if (399 < x || 399 < y || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
                 return (undefined4)(0);
             }
             this->calculations = this->calculations + 1;
