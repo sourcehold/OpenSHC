@@ -49,7 +49,7 @@ namespace Game {
                     = DAT_GameSynchronyState::instance.currentPlayerSlotID != 2 ? 10000 : 0;
                 continue;
             }
-            if ((this->playerDataArray[playerID].currentPopulation < 4)
+            if ((this->playerDataArray[playerID].currentPopulation <= 3)
                 && (this->playerDataArray[playerID].popularity < 5000)) {
                 /*
                   75(00)
@@ -209,7 +209,7 @@ namespace Game {
                 /*
                   if aleCoverage > 99: 200; else: 150
                  */
-                alePopChange = (int)this->playerDataArray[playerID].beerPercentage <= 99 ? 150 : 200;
+                alePopChange = (int)this->playerDataArray[playerID].beerPercentage < 100 ? 150 : 200;
             }
             this->playerDataArray[playerID].popularity = this->playerDataArray[playerID].popularity + alePopChange;
             this->playerDataArray[playerID].popularityChangeAleBased = alePopChange;
