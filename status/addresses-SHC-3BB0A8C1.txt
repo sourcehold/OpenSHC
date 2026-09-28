@@ -41545,7 +41545,7 @@ SHC_3BB0A8C1_0x005017C0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00501A20 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00501B90 | 0.0% | Pending
+SHC_3BB0A8C1_0x00501B90 | 75.0% | orientation switch regalloc
 
 SHC_3BB0A8C1_0x00501CB0 | 0.0% | Pending
 
