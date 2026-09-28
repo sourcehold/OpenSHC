@@ -1,20 +1,20 @@
 #include "../PathFindingState.func.hpp"
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
+#include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_ClimbLogicDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
-#include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
+        using OpenSHC::Map::Buildings::BuildingTypeShort;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-            using OpenSHC::Map::Buildings::BuildingTypeShort;
 
         /*
           WARNING: Enum "MappersEnum": Some values do not have unique names
@@ -26,13 +26,7 @@ namespace Map {
         BOOLEnum PathFindingState::updatePathLinkageLayerBasedOnBuildingsUnk(int yUnk, int tile)
         {
             byte bVar1;
-            bool bVar2;
-            bool bVar3;
-            bool bVar4;
-            bool bVar5;
             int iVar6;
-            int _tile;
-            byte bVar7;
             int (*paiVar8)[8];
             uint _height;
             int _directionIndex;
@@ -65,17 +59,17 @@ namespace Map {
                     DAT_BuildingDefinedData::instance.BuildingIsKeepArray[(short)_buildingType] != 0)) {
                 _result = TRUE;
             }
-            bVar2 = false;
-            bVar4 = false;
-            bVar3 = false;
-            bVar5 = false;
-            bVar7 = 0;
+            bool bVar2 = false;
+            bool bVar4 = false;
+            bool bVar3 = false;
+            bool bVar5 = false;
+            byte bVar7 = 0;
             iVar6 = 0;
             _linkageResult = 0;
             DAT_TileMapState::instance.PathLinkageLayer[tile] = '\0';
             if ((_logic & 0x800000) == 0) {
                 if ((_logic & 0x10000000) == 0) {
-                    if (((_logic & 2) == 0) && ((_logic & 0x200000) == 0)) {
+                    if ((_logic & 2) == 0 && (_logic & 0x200000) == 0) {
                         if ((_logic & 0x800) != 0) {
                             bVar4 = true;
                             goto LAB_00499ada;
@@ -104,7 +98,7 @@ namespace Map {
             _directionIndex = 0;
             paiVar8 = DAT_TileMapState::instance.directionTranslationMatrix + yUnk;
             do {
-                _tile = (*paiVar8)[0] + tile;
+                int _tile = (*paiVar8)[0] + tile;
                 _logic = DAT_TileMapState::instance.LogicLayer[_tile];
                 local_20[_directionIndex] = _logic;
                 if ((_logic & 0x200000) == 0) {
@@ -156,10 +150,9 @@ namespace Map {
                 } else {
                 LAB_00499bce:
                     if ((_logic & 0x10000000) == 0) {
-                        if (((_logic & 0x100) == 0) || (iVar6 == 0)) {
-                            if (((bVar3) || (bVar4))
-                                && ((
-                                    (_logic & 0x100) != 0 && (DAT_TileMapState::instance.BuildingLayer[_tile] != 0)))) {
+                        if ((_logic & 0x100) == 0 || iVar6 == 0) {
+                            if (((bVar3) || (bVar4)) && (_logic & 0x100) != 0
+                                && DAT_TileMapState::instance.BuildingLayer[_tile] != 0) {
                                 bVar1 = DAT_TileMapState::instance.DamageLayer[tile];
                                 bVar11 = (bVar1 < '\x14');
                                 bVar10 = (char)(bVar1 - 0x14) < '\0';
@@ -198,45 +191,41 @@ namespace Map {
                 paiVar8 = (int (*)[8])(*paiVar8 + 1);
                 if (7 < _directionIndex) {
                     if (bVar5) {
-                        if (((_linkageResult & 1) == 0) && ((bVar7 & 1) != 0)) {
-                            if (((_linkageResult & 4) == 0) && ((bVar7 & 4) != 0)) {
+                        if ((_linkageResult & 1) == 0 && (bVar7 & 1) != 0) {
+                            if ((_linkageResult & 4) == 0 && (bVar7 & 4) != 0) {
                                 _linkageResult = _linkageResult & 0xfd;
                             }
-                            if (((_linkageResult & 0x40) == 0) && ((bVar7 & 0x40) != 0)) {
+                            if ((_linkageResult & 0x40) == 0 && (bVar7 & 0x40) != 0) {
                                 _linkageResult = _linkageResult & 0x7f;
                             }
                         }
-                        if (((_linkageResult & 0x10) == 0) && ((bVar7 & 0x10) != 0)) {
-                            if (((_linkageResult & 4) == 0) && ((bVar7 & 4) != 0)) {
+                        if ((_linkageResult & 0x10) == 0 && (bVar7 & 0x10) != 0) {
+                            if ((_linkageResult & 4) == 0 && (bVar7 & 4) != 0) {
                                 _linkageResult = _linkageResult & 0xf7;
                             }
-                            if (((_linkageResult & 0x40) == 0) && ((bVar7 & 0x40) != 0)) {
+                            if ((_linkageResult & 0x40) == 0 && (bVar7 & 0x40) != 0) {
                                 _linkageResult = _linkageResult & 0xdf;
                             }
                         }
                     } else {
-                        if ((((((local_20[0] & 0x10000100) != 0) && ((local_20[2] & 0x10000100) != 0))
-                                 && ((local_20[1] & 0x10000100) == 0))
-                                && (((local_20[1] & 2) == 0 && ((local_20[0] & 0x800) == 0))))
-                            && ((local_20[2] & 0x800) == 0)) {
+                        if ((local_20[0] & 0x10000100) != 0 && (local_20[2] & 0x10000100) != 0
+                            && (local_20[1] & 0x10000100) == 0 && (local_20[1] & 2) == 0 && (local_20[0] & 0x800) == 0
+                            && (local_20[2] & 0x800) == 0) {
                             _linkageResult = _linkageResult & 0xfd;
                         }
-                        if ((((local_20[0] & 0x10000100) != 0) && ((local_20[6] & 0x10000100) != 0))
-                            && (((local_20[7] & 0x10000100) == 0
-                                && ((((local_20[7] & 2) == 0 && ((local_20[0] & 0x800) == 0))
-                                    && ((local_20[6] & 0x800) == 0)))))) {
+                        if ((local_20[0] & 0x10000100) != 0 && (local_20[6] & 0x10000100) != 0
+                            && (local_20[7] & 0x10000100) == 0 && (local_20[7] & 2) == 0 && (local_20[0] & 0x800) == 0
+                            && (local_20[6] & 0x800) == 0) {
                             _linkageResult = _linkageResult & 0x7f;
                         }
-                        if (((((local_20[4] & 0x10000100) != 0) && ((local_20[2] & 0x10000100) != 0))
-                                && (((local_20[3] & 0x10000100) == 0
-                                    && (((local_20[3] & 2) == 0 && ((local_20[4] & 0x800) == 0))))))
-                            && ((local_20[2] & 0x800) == 0)) {
+                        if ((local_20[4] & 0x10000100) != 0 && (local_20[2] & 0x10000100) != 0
+                            && (local_20[3] & 0x10000100) == 0 && (local_20[3] & 2) == 0 && (local_20[4] & 0x800) == 0
+                            && (local_20[2] & 0x800) == 0) {
                             _linkageResult = _linkageResult & 0xf7;
                         }
-                        if (((((local_20[4] & 0x10000100) != 0) && ((local_20[6] & 0x10000100) != 0))
-                                && ((local_20[5] & 0x10000100) == 0))
-                            && ((((local_20[5] & 2) == 0 && ((local_20[4] & 0x800) == 0))
-                                && ((local_20[6] & 0x800) == 0)))) {
+                        if ((local_20[4] & 0x10000100) != 0 && (local_20[6] & 0x10000100) != 0
+                            && (local_20[5] & 0x10000100) == 0 && (local_20[5] & 2) == 0 && (local_20[4] & 0x800) == 0
+                            && (local_20[6] & 0x800) == 0) {
                             _linkageResult = _linkageResult & 0xdf;
                         }
                     }
