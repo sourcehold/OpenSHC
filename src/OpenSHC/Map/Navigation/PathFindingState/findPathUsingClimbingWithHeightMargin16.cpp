@@ -3,6 +3,7 @@
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
+#include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -11,15 +12,14 @@
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
         using OpenSHC::Map::Buildings::BuildingType;
+        using OpenSHC::Map::Buildings::BuildingTypeShort;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-            using OpenSHC::Map::Buildings::BuildingTypeShort;
 
         /*
           WARNING: Enum "MappersEnum": Some values do not have unique names
@@ -31,10 +31,6 @@ namespace Map {
         BOOLEnum PathFindingState::findPathUsingClimbingWithHeightMargin16(
             uint x, uint y, uint x2, uint y2, int budget, BOOLEnum continueSearch)
         {
-            short sVar1;
-            short sVar2;
-            short sVar3;
-            uint _tHeight;
             int (*paiVar4)[8];
             int _keepHeight;
             int _tDiff;
@@ -46,7 +42,7 @@ namespace Map {
             uint _tLogic;
             BuildingTypeShort _tType;
             uint _tile;
-            if (((399 < x) || (399 < y)) || (*(char*)(y * 400 + 0x21aec98 + x) == '\0')) {
+            if (399 < x || 399 < y || *(char*)(y * 400 + 0x21aec98 + x) == '\0') {
                 return FALSE;
             }
             if (x2 != 0xffffffff) {
@@ -94,12 +90,12 @@ namespace Map {
                     }
                     if ((budget <= this->searchQueue.readIndex) || (0x13a0f < _tile))
                         break;
-                    sVar1 = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                    sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    short sVar1 = this->searchQueue.xQueue[this->searchQueue.readIndex];
+                    short sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
                     if (0x78 < this->searchQueue.currentDistance)
                         break;
-                    _tHeight = (uint)DAT_TileMapState::instance.HeightLayer[_tile];
+                    uint _tHeight = (uint)DAT_TileMapState::instance.HeightLayer[_tile];
                     _tLogic = DAT_TileMapState::instance.LogicLayer[_tile];
                     _direction = 0;
                     paiVar4 = DAT_TileMapState::instance.directionTranslationMatrix + sVar2;
@@ -123,7 +119,7 @@ namespace Map {
                                     if ((_tLogic & 0x40000000) == 0) {
                                         if ((_cLogic & 0x40000000) != 0)
                                             goto LAB_0049825d;
-                                    } else if (((_cLogic & 0x40000800) != 0) || ((_cLogic & 0x4a5015b1) == 0)) {
+                                    } else if ((_cLogic & 0x40000800) != 0 || (_cLogic & 0x4a5015b1) == 0) {
                                     LAB_0049825d:
                                         /*
                                           candidate is moat or stairs OR not sea, border (edge), rocky, wall or
@@ -144,8 +140,8 @@ namespace Map {
                                         /*
                                           test if height difference is within margin
                                          */
-                                        if (((int)_tHeight <= (int)(_cHeight + 16))
-                                            && ((int)(_cHeight - 4294967280) <= (int)_tHeight))
+                                        if ((int)_tHeight <= (int)(_cHeight + 16)
+                                            && (int)(_cHeight - 4294967280) <= (int)_tHeight)
                                             goto LAB_00498308;
                                         _cType = DAT_BuildingsState::instance
                                                      .buildings[DAT_TileMapState::instance.BuildingLayer[_candidate]]
@@ -166,8 +162,8 @@ namespace Map {
                                         /*
                                           test if height difference is within margin
                                          */
-                                        if (((int)(_tHeight + _tDiff) <= (int)(_cHeight + 0x10))
-                                            && ((int)(_cHeight - 0x10) <= (int)(_tHeight + _tDiff)))
+                                        if ((int)(_tHeight + _tDiff) <= (int)(_cHeight + 0x10)
+                                            && (int)(_cHeight - 0x10) <= (int)(_tHeight + _tDiff))
                                             goto LAB_00498308;
                                     }
                                 }
@@ -178,8 +174,9 @@ namespace Map {
                                  */
                                 DAT_TileMapState::instance.CertainPathLayer[_candidate]
                                     = (short)this->searchQueue.currentDistance + 1;
-                                sVar3 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
-                                            .short_.xOffset;
+                                short sVar3
+                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                          .short_.xOffset;
                                 DAT_TileMapState::instance.WalkLayer[_candidate] = (short)this->searchGeneration;
                                 this->searchQueue.xQueue[this->searchQueue.writeIndex] = sVar3 + sVar1;
                                 this->searchQueue.yQueue[this->searchQueue.writeIndex]
