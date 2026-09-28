@@ -126,7 +126,7 @@ namespace Game {
                 OpenSHC::Synchrony::GameSynchronyState_Func::checkGameSync, DAT_GameSynchronyState::ptr)();
         }
         this->gameTicksLoadBalancer = this->gameTicksLoadBalancer + 1;
-        if (this->gameTicksLoadBalancer > 199) {
+        if (this->gameTicksLoadBalancer >= 200) {
             this->gameTicksLoadBalancer = 0;
             MACRO_CALL(OpenSHC::Audio::SFX_Func::UpdateUnitLossSpeechFeedback)();
         }
