@@ -120,7 +120,7 @@ namespace Map {
                 if (tileDistance == 0) {
                     _cowDiseaseDamage = 400;
                 } else {
-                    _cowDiseaseDamage = (-(uint)(tileDistance != 1) & 0xffffffce) + 200;
+                    _cowDiseaseDamage = tileDistance == 1 ? 200 : 150;
                 }
                 int _healerCount = DAT_GameState::instance.playerDataArray[this->units[unitID].owner].healerCount;
                 if (_healerCount >= 3) {
@@ -149,7 +149,7 @@ namespace Map {
                 return FALSE;
             }
             if (_unitType == OpenSHC::Map::Units::UT_S_TREBUCHET) {
-                _unitHeight = (-(uint)(tileDistance != 0) & 0xffffffd8) + 0x50;
+                _unitHeight = tileDistance == 0 ? 0x50 : 0x28;
                 _unitIsSiegeEngine = 1;
             } else if (_unitType == OpenSHC::Map::Units::UT_S_TOWER) {
                 _unitHeight = 0x50;
@@ -223,7 +223,7 @@ namespace Map {
                     if (_entityType_2 == OpenSHC::Map::Units::UT_LORD) {
                         _damage = 0x32;
                     } else {
-                        uVar5 = -(uint)(_entityType_2 != OpenSHC::Map::Units::UT_S_SHIELD) & 0x1c2;
+                        uVar5 = _entityType_2 == OpenSHC::Map::Units::UT_S_SHIELD ? 0 : 0x1c2;
                     }
                 } else if (_entityType == OpenSHC::Map::Entities::ET_MANGONEL) {
                     /*
@@ -248,11 +248,11 @@ namespace Map {
                     } else if (_entityType_2 == OpenSHC::Map::Units::UT_S_BATTERINGRAM) {
                         _damage = 10000;
                     } else {
-                        _damage = (-(uint)(_entityType_2 != OpenSHC::Map::Units::UT_S_TOWER) & 20000) + 10000;
+                        _damage = _entityType_2 == OpenSHC::Map::Units::UT_S_TOWER ? 10000 : 30000;
                     }
                 } else {
                     if (_entityType != OpenSHC::Map::Entities::ET_BALLISTA) {
-                        uVar5 = -(uint)(this->units[unitID].unitType != OpenSHC::Map::Units::UT_LORD) & 0x74fe;
+                        uVar5 = this->units[unitID].unitType == OpenSHC::Map::Units::UT_LORD ? 0 : 0x74fe;
                         _damage = uVar5 + 0x32;
                     }
                     /*
@@ -281,7 +281,7 @@ namespace Map {
                           10000 if not siege tower else 20000
                          */
 
-                        _damage = (-(uint)(_targetUnitType != OpenSHC::Map::Units::UT_S_TOWER) & 0xffffd8f0) + 20000;
+                        _damage = _targetUnitType == OpenSHC::Map::Units::UT_S_TOWER ? 20000 : 10000;
                     }
                     if (DAT_EntityState::instance.entityArray[entityID].field90_0xd0 != 0) {
                         /*
@@ -387,9 +387,9 @@ namespace Map {
                 if (_entityType == OpenSHC::Map::Entities::ET_COW_FLYING) {
                     this->units[unitID].state.generic = OpenSHC::Map::Units::States::US_STONE_DEATH_01;
                 } else {
-                    this->units[unitID].state.generic
-                        = (-(ushort)(_entityType != OpenSHC::Map::Entities::ET_SLINGER) & 0xfffd)
-                        + OpenSHC::Map::Units::States::US_STONE_DEATH_01;
+                    this->units[unitID].state.generic = _entityType == OpenSHC::Map::Entities::ET_SLINGER
+                        ? OpenSHC::Map::Units::States::US_STONE_DEATH_01
+                        : (UnitState)(OpenSHC::Map::Units::States::US_STONE_DEATH_01 - 3);
                 }
                 byte bVar2 = this->units[unitID].isStalked;
                 this->units[unitID].tunnelerFinishedDigging = 1;
