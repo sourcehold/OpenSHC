@@ -41079,7 +41079,7 @@ SHC_3BB0A8C1_0x004FBD70 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004FBD80 | 38.7% | brush step regalloc
 
-SHC_3BB0A8C1_0x004FBE70 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FBE70 | 87.2% | 85.48% regalloc
 
 SHC_3BB0A8C1_0x004FC0B0 | 0.0% | Pending
 
