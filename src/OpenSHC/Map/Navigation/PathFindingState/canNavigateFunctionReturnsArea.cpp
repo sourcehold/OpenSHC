@@ -22,18 +22,13 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A6DF0
         int PathFindingState::canNavigateFunctionReturnsArea(int playerID, dword targetArea, uint unitX, uint unitY)
         {
-            short sVar1;
-            short sVar2;
-            int iVar3;
-            uint uVar4;
-            int _tile;
             int (*paiVar5)[8];
             int iVar6;
             ushort _area;
             this->ALG_ResultTile = 0;
             this->ALG_ResultY = 0;
             this->ALG_ResultX = 0;
-            if (((399 < unitX) || (399 < unitY)) || (*(char*)(unitY * 400 + 0x21aec98 + unitX) == '\0')) {
+            if (399 < unitX || 399 < unitY || *(char*)(unitY * 400 + 0x21aec98 + unitX) == '\0') {
                 return 0;
             }
             this->searchGeneration = this->searchGeneration + 1;
@@ -56,15 +51,15 @@ namespace Map {
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 do {
-                    iVar3 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                    int iVar3 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                     if (iVar3 < 0) {
                         return 0;
                     }
                     if (80400 < iVar3) {
                         return 0;
                     }
-                    sVar1 = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                    sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    short sVar1 = this->searchQueue.xQueue[this->searchQueue.readIndex];
+                    short sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[iVar3];
                     if (0x13a10 < this->searchQueue.currentDistance) {
                         return 0;
@@ -72,8 +67,8 @@ namespace Map {
                     iVar6 = 0;
                     paiVar5 = DAT_TileMapState::instance.directionTranslationMatrix + sVar2;
                     do {
-                        _tile = (*paiVar5)[0] + iVar3;
-                        uVar4 = DAT_TileMapState::instance.LogicLayer[_tile];
+                        int _tile = (*paiVar5)[0] + iVar3;
+                        uint uVar4 = DAT_TileMapState::instance.LogicLayer[_tile];
                         if (DAT_TileMapState::instance.WalkLayer[_tile] != this->searchGeneration) {
                             if ((uVar4 & 0x40000000) != 0) {
                                 DAT_TileMapState::instance.CertainPathLayer[_tile]
@@ -97,7 +92,7 @@ namespace Map {
                                 _area = DAT_TileMapState::instance.PathConnectionLayer[_tile];
                                 _tile = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                               calculateCanPlayerUnitsNavigateToAreaFromArea,
-                                    this)(playerID, (dword)((int)((int)(short)_area)), (dword)((int)(targetArea)), 0);
+                                    this)(playerID, (dword)((int)((short)_area)), (dword)((int)(targetArea)), 0);
                                 if (_tile != 0) {
                                     this->climbX
                                         = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar6]
