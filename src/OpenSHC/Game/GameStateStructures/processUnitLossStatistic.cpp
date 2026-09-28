@@ -56,12 +56,11 @@ namespace Game {
             break;
         default:
             this->playerDataArray[playerID].troopsLost = this->playerDataArray[playerID].troopsLost + 1;
-            lossValue = MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::getValueOfTroopType,
-                DAT_TroopValueState::ptr)(
-            (OpenSHC::Map::Units::UnitType)DAT_UnitsState::instance.units[unitID].unitType);
+            lossValue = MACRO_CALL_MEMBER(
+                OpenSHC::Map::Units::TroopValueState_Func::getValueOfTroopType, DAT_TroopValueState::ptr)(
+                (OpenSHC::Map::Units::UnitType)DAT_UnitsState::instance.units[unitID].unitType);
         }
-        this->playerDataArray[playerID].weightedLosses
-            = this->playerDataArray[playerID].weightedLosses + lossValue;
+        this->playerDataArray[playerID].weightedLosses = this->playerDataArray[playerID].weightedLosses + lossValue;
         if (lossValue > 0) {
             if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                 MACRO_CALL(OpenSHC::Map::Version_Func::UpdateUnitLossData)(
@@ -77,12 +76,8 @@ namespace Game {
                 = DAT_UnitsState::instance.units[unitID].lastEncounteredEnemyPlayerID;
             if ((DAT_UnitsState::instance.units[unitID].lastEncounteredEnemyPlayerID > 1)
                 && (DAT_UnitsState::instance.units[unitID].lastEncounteredEnemyPlayerID < 6)) {
-                /*
-                  a byte flag array that ends just before barracksAssemblyPoints; the generated header has no
-                  field for it
-                 */
-                *((byte*)this->playerDataArray[playerID].barracksAssemblyPoints
-                    + DAT_UnitsState::instance.units[unitID].lastEncounteredEnemyPlayerID - 10)
+                this->playerDataArray[playerID]
+                    .lostUnitToEnemyPlayerFlags[DAT_UnitsState::instance.units[unitID].lastEncounteredEnemyPlayerID - 2]
                     = 1;
             }
         }
@@ -101,13 +96,8 @@ namespace Game {
                         + lossValue / 4;
                 }
             }
-            /*
-              the column before unusedEnemyAttackTracker; the generated header starts that table four bytes
-              too late
-             */
-            *(int*)(DAT_GameState::instance.playerDataArray[playerID].padding_0x2be4 + enemyPlayerID * 32)
-                = *(int*)(DAT_GameState::instance.playerDataArray[playerID].padding_0x2be4 + enemyPlayerID * 32)
-                + 1;
+            DAT_GameState::instance.playerDataArray[playerID].unusedEnemyAttackTracker[enemyPlayerID][0]
+                = DAT_GameState::instance.playerDataArray[playerID].unusedEnemyAttackTracker[enemyPlayerID][0] + 1;
         }
         if (DAT_UnitsState::instance.units[unitID].isSelected != 0) {
             DAT_GameCore::instance.countdown = 1;

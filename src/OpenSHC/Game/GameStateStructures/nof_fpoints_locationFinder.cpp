@@ -50,8 +50,8 @@ namespace Game {
             if (DAT_TileMapState::instance.CertainPathLayer[tile] != 100) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::budgetFloodFillOnCertainPathLayer,
                     DAT_PathFindingState::ptr)(x, y, 100, 0x3c);
-                (&this->mapAndTime.somePairArray)[pairIndex].x = x;
-                (&this->mapAndTime.somePairArray)[pairIndex].y = y;
+                this->mapAndTime.somePairArray[pairIndex].x = x;
+                this->mapAndTime.somePairArray[pairIndex].y = y;
                 pairIndex = pairIndex + 1;
             }
             if (pairIndex >= 40) {

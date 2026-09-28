@@ -359,13 +359,9 @@ namespace Game {
                         this->playerDataArray[playerID].mercenaryAssemblyPoints[assemblyPoint][0] = 0;
                         this->playerDataArray[playerID].mercenaryAssemblyPoints[assemblyPoint][1] = 0;
                     }
-                    /*
-                      five entries; the generated header splits this array into engineersAssemblyPoints,
-                      tunnelersGuildAssemblyPointX/Y, cathedralAssemblyPointX/Y and padding_0x39b4
-                     */
                     for (int assemblyPoint = 0; assemblyPoint < 5; assemblyPoint++) {
-                        (&this->playerDataArray[playerID].engineersAssemblyPoints[0])[assemblyPoint].x = 0;
-                        (&this->playerDataArray[playerID].engineersAssemblyPoints[0])[assemblyPoint].y = 0;
+                        this->playerDataArray[playerID].specialBuildingAssemblyPoints[assemblyPoint].x = 0;
+                        this->playerDataArray[playerID].specialBuildingAssemblyPoints[assemblyPoint].y = 0;
                     }
                 }
             }

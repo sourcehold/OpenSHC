@@ -25,7 +25,7 @@ namespace Game {
             }
             if (wallMaterial == 4) {
                 wallTiles = this->playerDataArray[playerID].currentResources[4] * 2;
-                if (*(int*)&this->playerDataArray[playerID].partialStoneCounter != 0) {
+                if (this->playerDataArray[playerID].partialStoneCounter != 0) {
                     wallTiles = wallTiles - 1;
                 }
             } else {
@@ -36,7 +36,7 @@ namespace Game {
                 /*
                   this is the only leftover of the partial wood stuff from SH1
                  */
-                if (*(int*)&this->playerDataArray[playerID].partialWoodCounter != 0) {
+                if (this->playerDataArray[playerID].partialWoodCounter != 0) {
                     wallTiles = wallTiles - 1;
                 }
             }

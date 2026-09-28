@@ -76,8 +76,8 @@ namespace Game {
             } else if (this->playerDataArray[playerID].sumOfTotalEnemyUnitsCount >= 1) {
                 continue;
             }
-            int spawnBudget = (75 - this->playerDataArray[playerID].someCount03)
-                - this->playerDataArray[playerID].someCount02;
+            int spawnBudget
+                = (75 - this->playerDataArray[playerID].someCount03) - this->playerDataArray[playerID].someCount02;
             for (int buildingID = 0; buildingID < DAT_BuildingsState::instance.maxBuildingsCount; buildingID++) {
                 if ((DAT_BuildingsState::instance.buildings[buildingID].logicalState == ((BuildingLogicalState)0))
                     || (DAT_BuildingsState::instance.buildings[buildingID].logicalState
@@ -101,13 +101,11 @@ namespace Game {
                     if (motherEntryX > 0) {
                         short motherEntryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
                         if (motherEntryY > 0) {
-                            int motherUnitID = MACRO_CALL_MEMBER(
-                                OpenSHC::Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(playerID,
-                                playerID, motherEntryX * 8, motherEntryY * 8,
-                                DAT_TileMapState::instance.HeightLayer[DAT_ViewportRenderState::instance
-                                        .translationMatrix[motherEntryY]
-                                        .addXgetTile
-                                    + motherEntryX],
+                            int motherUnitID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::spawnUnit,
+                                DAT_UnitsState::ptr)(playerID, playerID, motherEntryX * 8, motherEntryY * 8,
+                                DAT_TileMapState::instance.HeightLayer
+                                    [DAT_ViewportRenderState::instance.translationMatrix[motherEntryY].addXgetTile
+                                        + motherEntryX],
                                 OpenSHC::Map::Units::UT_MOTHER);
                             if (motherUnitID != 0) {
                                 /*
@@ -117,15 +115,13 @@ namespace Game {
                                 int motherUnitUID = DAT_UnitsState::instance.units[motherUnitID].uid;
                                 DAT_UnitsState::instance.units[motherUnitID].workplaceBuildingUID
                                     = DAT_BuildingsState::instance.buildings[buildingID].uid;
-                                DAT_UnitsState::instance.units[motherUnitID].workplaceBuildingID_1
-                                    = (short)buildingID;
+                                DAT_UnitsState::instance.units[motherUnitID].workplaceBuildingID_1 = (short)buildingID;
                                 DAT_BuildingsState::instance.buildings[buildingID].unitRefUID = motherUnitUID;
                                 spawnBudget = spawnBudget - 1;
-                                /*
-                                  the two bytes at 0x2a5/0x2a6 have no names in the generated header
-                                 */
-                                DAT_BuildingsState::instance.buildings[buildingID].padding_0x2a5[1] = (char)((
-                                    DAT_BuildingsState::instance.buildings[buildingID].fireRelatedRNG1 >> 10) % 3) + 1;
+                                DAT_BuildingsState::instance.buildings[buildingID].childSpawnCountdown
+                                    = (char)((DAT_BuildingsState::instance.buildings[buildingID].fireRelatedRNG1 >> 10)
+                                          % 3)
+                                    + 1;
                             }
                         }
                     }
@@ -133,46 +129,41 @@ namespace Game {
                     /*
                       if popularity is higher than 49
                      */
-                    DAT_BuildingsState::instance.buildings[buildingID].padding_0x2a5[1]
-                        = DAT_BuildingsState::instance.buildings[buildingID].padding_0x2a5[1] - 1;
-                    if (((char)DAT_BuildingsState::instance.buildings[buildingID].padding_0x2a5[1] < 1)
-                        && ((short)(char)DAT_BuildingsState::instance.buildings[buildingID].padding_0x2a5[0]
+                    DAT_BuildingsState::instance.buildings[buildingID].childSpawnCountdown
+                        = DAT_BuildingsState::instance.buildings[buildingID].childSpawnCountdown - 1;
+                    if (((char)DAT_BuildingsState::instance.buildings[buildingID].childSpawnCountdown < 1)
+                        && ((short)(char)DAT_BuildingsState::instance.buildings[buildingID].maxOccupants
                             != DAT_BuildingsState::instance.buildings[buildingID].currentEmployeeCount)) {
                         short childEntryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
-                        DAT_BuildingsState::instance.buildings[buildingID].padding_0x2a5[1] = (char)((
-                            DAT_BuildingsState::instance.buildings[buildingID].fireRelatedRNG1 >> 10) % 3) + 1;
+                        DAT_BuildingsState::instance.buildings[buildingID].childSpawnCountdown
+                            = (char)((DAT_BuildingsState::instance.buildings[buildingID].fireRelatedRNG1 >> 10) % 3)
+                            + 1;
                         if (childEntryX > 0) {
                             short childEntryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
                             if (childEntryY > 0) {
-                                int childUnitID = MACRO_CALL_MEMBER(
-                                    OpenSHC::Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(playerID,
-                                    playerID, childEntryX * 8, childEntryY * 8,
-                                    DAT_TileMapState::instance.HeightLayer[DAT_ViewportRenderState::instance
-                                            .translationMatrix[childEntryY]
-                                            .addXgetTile
-                                        + childEntryX],
+                                int childUnitID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::spawnUnit,
+                                    DAT_UnitsState::ptr)(playerID, playerID, childEntryX * 8, childEntryY * 8,
+                                    DAT_TileMapState::instance.HeightLayer
+                                        [DAT_ViewportRenderState::instance.translationMatrix[childEntryY].addXgetTile
+                                            + childEntryX],
                                     OpenSHC::Map::Units::UT_CHILD);
                                 if (childUnitID != 0) {
                                     spawnBudget = spawnBudget - 1;
                                     DAT_BuildingsState::instance.buildings[buildingID]
                                         .workerID[DAT_BuildingsState::instance.buildings[buildingID]
-                                                      .currentEmployeeCount]
-                                        = (short)childUnitID;
-                                    DAT_BuildingsState::instance.buildings[buildingID]
-                                        .workerUID[DAT_BuildingsState::instance.buildings[buildingID]
-                                                       .currentEmployeeCount]
+                                                .currentEmployeeCount] = (short)childUnitID;
+                                    DAT_BuildingsState::instance.buildings[buildingID].workerUID
+                                        [DAT_BuildingsState::instance.buildings[buildingID].currentEmployeeCount]
                                         = DAT_UnitsState::instance.units[childUnitID].uid;
                                     int workplaceUID = DAT_BuildingsState::instance.buildings[buildingID].uid;
                                     /*
                                       increment currentEmployeeCount of building
                                      */
                                     DAT_BuildingsState::instance.buildings[buildingID].currentEmployeeCount
-                                        = DAT_BuildingsState::instance.buildings[buildingID].currentEmployeeCount
-                                        + 1;
+                                        = DAT_BuildingsState::instance.buildings[buildingID].currentEmployeeCount + 1;
                                     DAT_UnitsState::instance.units[childUnitID].workplaceBuildingID_1
                                         = (short)buildingID;
-                                    DAT_UnitsState::instance.units[childUnitID].workplaceBuildingUID
-                                        = workplaceUID;
+                                    DAT_UnitsState::instance.units[childUnitID].workplaceBuildingUID = workplaceUID;
                                 }
                             }
                         }

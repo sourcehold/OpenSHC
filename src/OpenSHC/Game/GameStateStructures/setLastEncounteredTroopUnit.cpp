@@ -44,12 +44,12 @@ namespace Game {
                     = DAT_UnitsState::instance.units[enemyUnitID].uid;
             }
             DAT_GameState::instance.playerDataArray[playerID].unusedEnemyAttackTracker
-                [DAT_UnitsState::instance.units[unitID].lastEncounteredEnemyPlayerID][0]
+                [DAT_UnitsState::instance.units[unitID].lastEncounteredEnemyPlayerID][1]
                 = DAT_GameState::instance.playerDataArray[playerID].unusedEnemyAttackTracker
-                      [DAT_UnitsState::instance.units[unitID].lastEncounteredEnemyPlayerID][0]
+                      [DAT_UnitsState::instance.units[unitID].lastEncounteredEnemyPlayerID][1]
                 + 1;
             result = (uint)&DAT_GameState::instance.playerDataArray[playerID].unusedEnemyAttackTracker
-                          [DAT_UnitsState::instance.units[unitID].lastEncounteredEnemyPlayerID][0];
+                          [DAT_UnitsState::instance.units[unitID].lastEncounteredEnemyPlayerID][1];
         }
         return result;
     }

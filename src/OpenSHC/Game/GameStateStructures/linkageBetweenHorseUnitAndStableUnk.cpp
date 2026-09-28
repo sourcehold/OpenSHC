@@ -33,10 +33,10 @@ namespace Game {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::validateBuildingTetheredUnits,
                     DAT_BuildingsState::ptr)(buildingID);
                 for (int tetherSlot = 0; tetherSlot < 4; tetherSlot++) {
-                    if ((&DAT_BuildingsState::instance.buildings[buildingID].insideUnitID1)[tetherSlot] == 0) {
-                        (&DAT_BuildingsState::instance.buildings[buildingID].insideUnitID1)[tetherSlot]
+                    if (DAT_BuildingsState::instance.buildings[buildingID].insideUnitID[tetherSlot] == 0) {
+                        DAT_BuildingsState::instance.buildings[buildingID].insideUnitID[tetherSlot]
                             = (short)unitID;
-                        (&DAT_BuildingsState::instance.buildings[buildingID].insideUnitUID1)[tetherSlot]
+                        DAT_BuildingsState::instance.buildings[buildingID].insideUnitUID[tetherSlot]
                             = DAT_UnitsState::instance.units[unitID].uid;
                         DAT_BuildingsState::instance.buildings[buildingID].randomOutpostField
                             = DAT_BuildingsState::instance.buildings[buildingID].randomOutpostField + 1;
