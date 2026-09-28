@@ -37,14 +37,14 @@ namespace Map {
             UnitType _mostFrequentUnitType
                 = MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::getMajoritySelectedUnitType,
                     DAT_TribesState::ptr)(tribeID, (int*)0x0);
-            short _areaAtDestination
-                = DAT_TileMapState::instance
+            dword _areaAtDestination
+                = (short)DAT_TileMapState::instance
                       .PathConnectionLayer[DAT_ViewportRenderState::instance.viewportState.field24_0x60];
             uint _logicAtDestination
                 = DAT_TileMapState::instance.LogicLayer[DAT_ViewportRenderState::instance.viewportState.field24_0x60];
             int _combatUnitID
                 = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::selectionContainsCombatUnit, this)(1);
-            short _areaAtUnit = DAT_TileMapState::instance.PathConnectionLayer[this->units[_combatUnitID].tile];
+            dword _areaAtUnit = (short)DAT_TileMapState::instance.PathConnectionLayer[this->units[_combatUnitID].tile];
             if ((DAT_TileMapState::instance.LogicLayer[this->units[_combatUnitID].tile] & 0x40000000U) != 0) {
                 return;
             }
