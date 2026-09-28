@@ -7,6 +7,7 @@
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/DE/SHCDE/eSFX.hpp"
+#include "OpenSHC/Map/Location/Point8IntXY.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -17,14 +18,13 @@
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Map/Location/Point8IntXY.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
         using OpenSHC::DE::SHCDE::eSFX;
-            using OpenSHC::Map::Location::Point8IntXY;
+        using OpenSHC::Map::Location::Point8IntXY;
 
         /*
           WARNING: Enum "MappersEnum": Some values do not have unique names
@@ -37,10 +37,6 @@ namespace Map {
         {
             ushort uVar1;
             ushort uVar2;
-            short sVar3;
-            short sVar4;
-            uint uVar5;
-            uint uVar6;
             int (*paiVar7)[8];
             int iVar8;
             int iVar9;
@@ -75,7 +71,7 @@ namespace Map {
                 DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
                 DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             }
-            uVar6 = (uint)bVar13;
+            uint uVar6 = (uint)bVar13;
             if (DAT_GameState::instance.mapAndTime.signpostIDs[1] != 0) {
                 uVar1 = DAT_BuildingsState::instance.buildings[DAT_GameState::instance.mapAndTime.signpostIDs[1]].x;
                 uVar2 = DAT_BuildingsState::instance.buildings[DAT_GameState::instance.mapAndTime.signpostIDs[1]].y;
@@ -168,8 +164,8 @@ namespace Map {
             }
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 while (uVar6 = this->searchQueue.tilesQueue[this->searchQueue.readIndex], uVar6 < 0x13a10) {
-                    sVar3 = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                    sVar4 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    short sVar3 = this->searchQueue.xQueue[this->searchQueue.readIndex];
+                    short sVar4 = this->searchQueue.yQueue[this->searchQueue.readIndex];
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[uVar6];
                     if ((0x13a10 < this->searchQueue.currentDistance) || (param_1 < this->searchQueue.currentDistance))
                         break;
@@ -180,9 +176,9 @@ namespace Map {
                     piVar11 = &DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[0].int_.yOffset;
                     do {
                         iVar9 = (*paiVar7)[0] + uVar6;
-                        uVar5 = DAT_TileMapState::instance.LogicLayer[iVar9];
-                        if ((DAT_TileMapState::instance.WalkLayer[iVar9] != this->searchGeneration)
-                            && ((uVar5 & 0x30) == 0)) {
+                        uint uVar5 = DAT_TileMapState::instance.LogicLayer[iVar9];
+                        if (DAT_TileMapState::instance.WalkLayer[iVar9] != this->searchGeneration
+                            && (uVar5 & 0x30) == 0) {
                             DAT_TileMapState::instance.CertainPathLayer[iVar9]
                                 = (short)this->searchQueue.currentDistance + 1;
                             iVar8 = ((Point8IntXY*)(piVar11 + -1))->xOffset;
@@ -218,11 +214,11 @@ namespace Map {
                                         DAT_BuildingsState::ptr)(iVar8);
                                     MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation,
                                         DAT_SFXState::ptr)((int)(short)DAT_BuildingsState::instance.buildings[iVar8].x,
-                                        (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar8].y)),
+                                        (int)((short)DAT_BuildingsState::instance.buildings[iVar8].y),
                                         OpenSHC::DE::SHCDE::FX_BUILDING_SMASH);
                                 }
                             }
-                            if (((uVar5 & 0x100) != 0) && ((uVar5 & 2) == 0)) {
+                            if ((uVar5 & 0x100) != 0 && (uVar5 & 2) == 0) {
                                 MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::destroyEntitiesOnTile,
                                     DAT_EntityState::ptr)(iVar9);
                                 DAT_TileMapState::instance.LogicLayer[iVar9]
@@ -242,9 +238,9 @@ namespace Map {
                                 local_10 = local_10 + 1;
                             }
                             if ((uVar5 & 0x40000000) != 0) {
-                                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearMoatDataAtTile,
-                                    DAT_TileMapState::ptr)(((Point8IntXY*)(piVar11 + -1))->xOffset + (int)sVar3,
-                                    (int)((int)(*piVar11 + sVar4)));
+                                MACRO_CALL_MEMBER(
+                                    OpenSHC::Map::TileMapState_Func::clearMoatDataAtTile, DAT_TileMapState::ptr)(
+                                    ((Point8IntXY*)(piVar11 + -1))->xOffset + (int)sVar3, (int)(*piVar11 + sVar4));
                                 iVar8 = ((Point8IntXY*)(piVar11 + -1))->xOffset;
                                 local_24 = local_24 + 1;
                                 DAT_TileMapState::instance.HeightLayer[iVar9] = 8;
@@ -284,9 +280,9 @@ namespace Map {
                 do {
                     MACRO_CALL_MEMBER(
                         OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections, this)(
-                        (int)*psVar12, (int)((int)(*piVar11)));
+                        (int)*psVar12, (int)(*piVar11));
                     MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer, this)(
-                        7, (uint)((int)((int)psVar12[0x13a10])), (uint)((int)((int)*psVar12)));
+                        7, (uint)(psVar12[0x13a10]), (uint)((int)*psVar12));
                     piVar11 = piVar11 + 1;
                     psVar12 = psVar12 + 1;
                     local_24 = local_24 + -1;
