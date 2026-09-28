@@ -23,15 +23,9 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A16C0
         int PathFindingState::tracePathToFriendlyDefensesAndReturnTileUnk(int playerID, uint x, uint y)
         {
-            byte bVar1;
-            short sVar2;
-            short sVar3;
-            short sVar4;
-            int iVar5;
-            int iVar6;
             int (*paiVar7)[8];
             int _candidateTile;
-            if (((399 < x) || (399 < y)) || (*(char*)(y * 400 + 0x21aec98 + x) == '\0')) {
+            if (399 < x || 399 < y || *(char*)(y * 400 + 0x21aec98 + x) == '\0') {
                 return 0;
             }
             this->calculations = this->calculations + 1;
@@ -58,22 +52,22 @@ namespace Map {
                     if (0x13a0f < _candidateTile) {
                         return 0;
                     }
-                    sVar2 = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                    sVar3 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    short sVar2 = this->searchQueue.xQueue[this->searchQueue.readIndex];
+                    short sVar3 = this->searchQueue.yQueue[this->searchQueue.readIndex];
                     this->searchQueue.currentDistance
                         = (int)DAT_TileMapState::instance.CertainPathLayer[_candidateTile];
                     if (0x13a10 < this->searchQueue.currentDistance) {
                         return 0;
                     }
-                    bVar1 = DAT_TileMapState::instance.PathLinkageLayer[_candidateTile];
-                    iVar6 = 0;
+                    byte bVar1 = DAT_TileMapState::instance.PathLinkageLayer[_candidateTile];
+                    int iVar6 = 0;
                     paiVar7 = DAT_TileMapState::instance.directionTranslationMatrix + sVar3;
                     do {
-                        iVar5 = (*paiVar7)[0] + _candidateTile;
-                        if ((DAT_TileMapState::instance.WalkLayer[iVar5] != this->searchGeneration)
-                            && ((DAT_TileMapState::instance.LogicLayer[iVar5] & 0x30) == 0)) {
+                        int iVar5 = (*paiVar7)[0] + _candidateTile;
+                        if (DAT_TileMapState::instance.WalkLayer[iVar5] != this->searchGeneration
+                            && (DAT_TileMapState::instance.LogicLayer[iVar5] & 0x30) == 0) {
                             if ((DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar6] & bVar1) == 0) {
-                                sVar4 = DAT_TileMapState::instance.BuildingLayer[iVar5];
+                                short sVar4 = DAT_TileMapState::instance.BuildingLayer[iVar5];
                                 if (sVar4 != 0) {
                                     switch (DAT_BuildingsState::instance.buildings[sVar4].buildingType) {
                                     case OpenSHC::Map::Buildings::BT_MERCENARYPOST:
