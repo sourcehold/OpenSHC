@@ -30,13 +30,13 @@ namespace Map {
             int unitID, int tile, int y, int direction, int param_5, int ignoreAssassinClimbing)
         {
             short* psVar1;
-            byte bVar2;
+            int bVar2;
             uint uVar3;
             int _targetTile;
             uint uVar4;
-            byte _terrainHeight2;
-            byte _height;
-            byte _terrainHeight;
+            int _terrainHeight2;
+            int _height;
+            int _terrainHeight;
             if (param_5 != 0) {
                 if (param_5 == 1) {
                     if ((DAT_TileMapState::instance
