@@ -104,10 +104,11 @@ namespace Rendering {
             this->viewportState.mouseRayEntityID = DAT_TileMapState::instance.EntityLayer[minimapTile];
 
             int minimapGateTile = 0;
-            if (DAT_TileMapState::instance.BuildingLayer[minimapTile] <= 0) {
+            ushort minimapBuildingID = DAT_TileMapState::instance.BuildingLayer[minimapTile];
+            if ((short)minimapBuildingID <= 0) {
                 if ((DAT_TileMapState::instance.LogicLayer[minimapTile] & 0x100U) != 0) {
                     minimapGateTile = minimapTile;
-                } else if (DAT_TileMapState::instance.BuildingLayer[minimapTile] <= 0) {
+                } else if ((short)minimapBuildingID <= 0) {
                     this->viewportState.field18_0x48 = DAT_TileMapState::instance.BuildingWasLayer[minimapTile];
                 }
             }
@@ -218,10 +219,11 @@ namespace Rendering {
         int lastBuildingID = -1;
         int hoveredBuildingID = -1;
         int hoveredGateTile = -1;
-        if (DAT_TileMapState::instance.BuildingLayer[this->viewportState.mouseTile] <= 0) {
+        ushort hoveredBuildingLayer = DAT_TileMapState::instance.BuildingLayer[this->viewportState.mouseTile];
+        if ((short)hoveredBuildingLayer <= 0) {
             if ((DAT_TileMapState::instance.LogicLayer[this->viewportState.mouseTile] & 0x100U) != 0) {
                 hoveredGateTile = this->viewportState.mouseTile;
-            } else if (DAT_TileMapState::instance.BuildingLayer[this->viewportState.mouseTile] <= 0) {
+            } else if ((short)hoveredBuildingLayer <= 0) {
                 this->viewportState.field18_0x48
                     = DAT_TileMapState::instance.BuildingWasLayer[this->viewportState.mouseTile];
             }
