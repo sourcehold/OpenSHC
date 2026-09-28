@@ -24,13 +24,10 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049EDF0
         BOOLEnum PathFindingState::findAIZoneWithFlags(int maxDistance, uint x, uint y, undefined4 aiInfoFlags)
         {
-            short sVar1;
-            short sVar2;
             int _candidate;
-            int _direction;
             int _tile;
             this->calculations = this->calculations + 1;
-            if (((x < 400) && (y < 400)) && (*(char*)(y * 400 + 0x21aec98 + x) != '\0')) {
+            if (x < 400 && y < 400 && *(char*)(y * 400 + 0x21aec98 + x) != '\0') {
                 this->searchGeneration = this->searchGeneration + 1;
                 if (32000 < this->searchGeneration) {
                     this->searchGeneration = 1;
@@ -49,8 +46,8 @@ namespace Map {
                 if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                     while ((_tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex],
                         -1 < _tile && (_tile < 0x13a10))) {
-                        sVar1 = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                        sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                        short sVar1 = this->searchQueue.xQueue[this->searchQueue.readIndex];
+                        short sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
                         this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
                         if (0x13a10 < this->searchQueue.currentDistance) {
                             return FALSE;
@@ -58,11 +55,11 @@ namespace Map {
                         if (maxDistance < this->searchQueue.currentDistance) {
                             return FALSE;
                         }
-                        _direction = 0;
+                        int _direction = 0;
                         do {
-                            if (((DAT_TileMapState::instance.PathLinkageLayer[_tile]
-                                     & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction])
-                                    != 0)
+                            if ((DAT_TileMapState::instance.PathLinkageLayer[_tile]
+                                    & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction])
+                                    != 0
                                 && (_candidate
                                     = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][_direction] + _tile,
                                     DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration)) {
