@@ -52,7 +52,7 @@ namespace Map {
             this->ALG_ResultTile = 0;
             this->ALG_ResultY = 0;
             this->ALG_ResultX = 0;
-            if (uVar5 < 400 && uVar7 < 400 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[uVar7 * 400 + uVar5] != '\0') {
+            if (uVar5 <= 399 && uVar7 <= 399 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[uVar7 * 400 + uVar5] != '\0') {
                 this->searchGeneration = this->searchGeneration + 1;
                 if (32000 < this->searchGeneration) {
                     this->searchGeneration = 1;
