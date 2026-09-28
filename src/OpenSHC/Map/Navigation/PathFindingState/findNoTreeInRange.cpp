@@ -56,7 +56,7 @@ namespace Map {
                 while ((_tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex],
                     -1 < _tile && (_tile < 0x13a10))) {
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
-                    if (budget < this->searchQueue.currentDistance) {
+                    if (this->searchQueue.currentDistance > budget) {
                         return TRUE;
                     }
                     int sVar1 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
