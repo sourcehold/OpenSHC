@@ -22,7 +22,7 @@ namespace Map {
             uint uVar5;
             int iVar2 = tile;
             uVar5 = 4;
-            byte bVar1 = DAT_TileMapState::instance.PathLinkageLayer[tile];
+            int bVar1 = DAT_TileMapState::instance.PathLinkageLayer[tile];
             _ptrY = DAT_TileMapState::instance.directionTranslationMatrix[y] + 1;
             tile = 2;
             do {
