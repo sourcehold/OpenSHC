@@ -33,7 +33,7 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x004563D0
     void GameStateStructures::processUnitLossStatistic(int playerID, int unitID)
     {
-        if (playerID - 1U >= 8) {
+        if (playerID - 1U > 7) {
             return;
         }
         int lossValue;
@@ -74,8 +74,8 @@ namespace Game {
         if (DAT_UnitsState::instance.units[unitID].lastEncounteredEnemyPlayerID != 0) {
             this->playerDataArray[playerID].lastlastEncounteredEnemyPlayerID
                 = DAT_UnitsState::instance.units[unitID].lastEncounteredEnemyPlayerID;
-            if ((DAT_UnitsState::instance.units[unitID].lastEncounteredEnemyPlayerID > 1)
-                && (DAT_UnitsState::instance.units[unitID].lastEncounteredEnemyPlayerID < 6)) {
+            if ((DAT_UnitsState::instance.units[unitID].lastEncounteredEnemyPlayerID >= 2)
+                && (DAT_UnitsState::instance.units[unitID].lastEncounteredEnemyPlayerID <= 5)) {
                 this->playerDataArray[playerID]
                     .lostUnitToEnemyPlayerFlags[DAT_UnitsState::instance.units[unitID].lastEncounteredEnemyPlayerID - 2]
                     = 1;
