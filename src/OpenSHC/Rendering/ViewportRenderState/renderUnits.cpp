@@ -33,23 +33,12 @@ namespace Rendering {
     // FUNCTION: STRONGHOLDCRUSADER 0x004E7810
     void ViewportRenderState::renderUnits()
     {
-        ushort savedPixelColor;
         short graphicSize;
         UnitTypeShort unitType;
         UnitStateShort unitState;
         int overlayX;
-        uint animationTick;
         int overlayY;
         int maskImageID;
-        int overlayImageID;
-        int _drawX;
-        int _drawY;
-        int _imageID;
-        uint _blendStrength;
-        int _unitID;
-        int _gmID;
-        int _renderBatchSize;
-        int _alpha;
 
         int renderCount5 = this->unitRender5;
         int renderCount4 = this->unitRender4;
@@ -57,13 +46,13 @@ namespace Rendering {
         int renderCount2 = this->unitRender2;
         int renderCount1 = this->unitRender1;
         this->unitBatchedRenderCounterUntil6 = this->unitBatchedRenderCounterUntil6 + 1;
-        _drawX = 0;
-        _drawY = 0;
-        _renderBatchSize = 0;
-        _unitID = 0;
-        _imageID = 0;
-        _blendStrength = 0;
-        _gmID = 0;
+        int _drawX = 0;
+        int _drawY = 0;
+        int _renderBatchSize = 0;
+        int _unitID = 0;
+        int _imageID = 0;
+        uint _blendStrength = 0;
+        int _gmID = 0;
         if (5 < this->unitBatchedRenderCounterUntil6) {
             this->unitBatchedRenderCounterUntil6 = 1;
         }
@@ -140,8 +129,8 @@ namespace Rendering {
                     if ((int)_blendStrength < 0) {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
                             DAT_TextureRenderCoreObject::ptr)((GmID)DAT_CurrentlyRenderedSpriteID::instance, _imageID,
-                            _drawX, _drawY, (GmID)((int)(DAT_CurrentlyRenderedSpriteID::instance)), (int)((int)(_gmID)),
-                            (int)((int)(-1 - _blendStrength)));
+                            _drawX, _drawY, (GmID)((int)(DAT_CurrentlyRenderedSpriteID::instance)), (int)(_gmID),
+                            (int)(-1 - _blendStrength));
                     } else if (_blendStrength == 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
@@ -149,7 +138,7 @@ namespace Rendering {
                     } else {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                             DAT_TextureRenderCoreObject::ptr)((GmID)DAT_CurrentlyRenderedSpriteID::instance, _imageID,
-                            _drawX, _drawY, (int)((int)(_blendStrength)));
+                            _drawX, _drawY, (int)(_blendStrength));
                     }
                 } else if (_unitID == 0) {
                     if ((_blendStrength & 4) != 0) {
@@ -164,7 +153,7 @@ namespace Rendering {
                         } else {
                             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                                 DAT_TextureRenderCoreObject::ptr)(
-                                (GmID)_gmID, _imageID, _drawX, _drawY, (int)((int)(_blendStrength >> 0x10)));
+                                (GmID)_gmID, _imageID, _drawX, _drawY, (int)(_blendStrength >> 0x10));
                         }
                     } else {
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
@@ -172,17 +161,17 @@ namespace Rendering {
                             (GmID)((int)(_gmID)), ((int)_blendStrength >> 0x10) + _imageID, 0);
                     }
                 } else {
-                    savedPixelColor = *this->viewportState.ptrColor;
+                    ushort savedPixelColor = *this->viewportState.ptrColor;
                     *this->viewportState.ptrColor = COL_MAGENTA::instance.shortValue;
-                    _alpha = (int)(char)DAT_UnitsState::instance.units[_unitID].disappearFadeAlphaCountdown;
+                    int _alpha = (int)(char)DAT_UnitsState::instance.units[_unitID].disappearFadeAlphaCountdown;
                     if (DAT_UnitsState::instance.units[_unitID].unitType == OpenSHC::Map::Units::UT_A_ASSASSIN) {
-                        if (((DAT_GameState::instance.mapAndTime
-                                     .playerTeams[DAT_UnitsState::instance.units[_unitID].owner]
-                                 != DAT_GameState::instance.mapAndTime
-                                     .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID])
-                                && (120 < DAT_UnitsState::instance.units[_unitID].assassinsMicroDistanceToEnemyUnk))
-                            && ((DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY
-                                || (DAT_UnitsState::instance.units[_unitID].idleCounterUnk <= 2400)))) {
+                        if (DAT_GameState::instance.mapAndTime
+                                    .playerTeams[DAT_UnitsState::instance.units[_unitID].owner]
+                                != DAT_GameState::instance.mapAndTime
+                                    .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                            && 120 < DAT_UnitsState::instance.units[_unitID].assassinsMicroDistanceToEnemyUnk
+                            && (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY
+                                || (DAT_UnitsState::instance.units[_unitID].idleCounterUnk <= 2400))) {
                             _alpha = 0x20 - (0x20 - _alpha) / 2;
                         }
                         overlayX = DAT_UnitsState::instance.units[_unitID].imageID2;
@@ -190,8 +179,7 @@ namespace Rendering {
                             overlayY = (0x20 - _alpha) / 3;
                             MACRO_CALL_MEMBER(
                                 OpenSHC::UI::Rendering::TextureRenderCore_Func::renderUnitAnimationWithBlendingUnk,
-                                DAT_TextureRenderCoreObject::ptr)(_drawX, _drawY, _imageID,
-                                (int)((int)(_blendStrength)),
+                                DAT_TextureRenderCoreObject::ptr)(_drawX, _drawY, _imageID, (int)(_blendStrength),
                                 (byte*)((
                                     int)((DAT_GMImageSizes::instance[GMTotalPicturesProcessed::instance[(
                                                                          int)DAT_CurrentlyRenderedSpriteID::instance]
@@ -202,8 +190,7 @@ namespace Rendering {
                             if (graphicSize != 0) {
                                 MACRO_CALL_MEMBER(
                                     OpenSHC::UI::Rendering::TextureRenderCore_Func::renderUnitAnimationWithBlendingUnk,
-                                    DAT_TextureRenderCoreObject::ptr)(_drawX, _drawY, _imageID,
-                                    (int)((int)(_blendStrength)),
+                                    DAT_TextureRenderCoreObject::ptr)(_drawX, _drawY, _imageID, (int)(_blendStrength),
                                     (byte*)((int)((
                                         DAT_GMImageSizes::instance[GMTotalPicturesProcessed::instance[(
                                                                        int)DAT_CurrentlyRenderedSpriteID::instance]
@@ -344,7 +331,7 @@ namespace Rendering {
                                 }
                                 DAT_RenderedUnitOwner::instance = (uint)DAT_UnitsState::instance.units[_unitID].owner;
                                 DAT_CurrentlyRenderedSpriteID::instance = 0xbd;
-                                animationTick = DAT_UnitsState::instance.units[_unitID].fixedRng
+                                uint animationTick = DAT_UnitsState::instance.units[_unitID].fixedRng
                                         + DAT_GameState::instance.mapAndTime.totalGameTicksUnk
                                     & 0x8000003f;
                                 if ((int)animationTick < 0) {
@@ -352,7 +339,7 @@ namespace Rendering {
                                 }
                                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                                     DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_ANIM_FLAG_SMALL,
-                                    (int)((int)(animationTick / 2 + 1)), overlayX, overlayY);
+                                    (int)(animationTick / 2 + 1), overlayX, overlayY);
                             }
                         }
                         if (*this->viewportState.ptrColor == COL_MAGENTA::instance.shortValue) {
@@ -365,7 +352,7 @@ namespace Rendering {
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderUnitAnimationWithBlendingUnk,
                             DAT_TextureRenderCoreObject::ptr)(
-                            _drawX, _drawY, _imageID, (int)((int)(_blendStrength)), (byte*)_gmID, _alpha);
+                            _drawX, _drawY, _imageID, (int)(_blendStrength), (byte*)_gmID, _alpha);
                         if (*this->viewportState.ptrColor == COL_MAGENTA::instance.shortValue) {
                             *this->viewportState.ptrColor = savedPixelColor;
                         } else {
@@ -409,19 +396,18 @@ namespace Rendering {
                             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                                 DAT_TextureRenderCoreObject::ptr)(
                                 OpenSHC::DE::SHCDE::GM_FLOATS, overlayY, maskImageID, overlayX);
-                            if (((DAT_UnitsState::instance.units[_unitID].unitType
-                                     == OpenSHC::Map::Units::UT_A_ASSASSIN)
-                                    && (DAT_GameState::instance.mapAndTime
-                                            .playerTeams[DAT_UnitsState::instance.units[_unitID].owner]
-                                        == DAT_GameState::instance.mapAndTime
-                                            .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID]))
-                                && ((DAT_UnitsState::instance.units[_unitID].assassinsMicroDistanceToEnemyUnk <= 160
+                            if (DAT_UnitsState::instance.units[_unitID].unitType == OpenSHC::Map::Units::UT_A_ASSASSIN
+                                && DAT_GameState::instance.mapAndTime
+                                        .playerTeams[DAT_UnitsState::instance.units[_unitID].owner]
+                                    == DAT_GameState::instance.mapAndTime
+                                        .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                                && (DAT_UnitsState::instance.units[_unitID].assassinsMicroDistanceToEnemyUnk <= 160
                                     || ((unitState = DAT_UnitsState::instance.units[_unitID].state.generic,
                                         unitState == OpenSHC::Map::Units::States::US_MELEE_ATTACK
-                                            || (unitState == OpenSHC::Map::Units::States::US_MELEE_ATTACK_WALL)))))) {
+                                            || (unitState == OpenSHC::Map::Units::States::US_MELEE_ATTACK_WALL))))) {
                                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                                     DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_2,
-                                    (int)((int)(447)), maskImageID + 2,
+                                    (int)(447), maskImageID + 2,
                                     DAT_UnitsState::instance.units[_unitID].someDrawYOffset + -0x1b + _drawY, 0x10);
                             }
                         }
@@ -429,11 +415,10 @@ namespace Rendering {
                         if (savedPixelColor != 0) {
                             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
                                 DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW,
-                                (int)((int)(savedPixelColor + 0xd4)),
-                                (int)((int)(DAT_UnitsState::instance.units[_unitID].drawX)),
-                                (int)((int)(DAT_UnitsState::instance.units[_unitID].drawY + -0x36
-                                    + DAT_UnitsState::instance.units[_unitID].someDrawYOffset)),
-                                OpenSHC::IO::Graphics::GID_FLOATS_NEW, (int)((int)(savedPixelColor + 0xdc)), 0);
+                                (int)(savedPixelColor + 0xd4), (int)(DAT_UnitsState::instance.units[_unitID].drawX),
+                                (int)(DAT_UnitsState::instance.units[_unitID].drawY + -0x36
+                                    + DAT_UnitsState::instance.units[_unitID].someDrawYOffset),
+                                OpenSHC::IO::Graphics::GID_FLOATS_NEW, (int)(savedPixelColor + 0xdc), 0);
                             DAT_UnitsState::instance.units[_unitID].field46_0x6e = 0;
                         }
                         savedPixelColor = DAT_UnitsState::instance.units[_unitID].field45_0x6c;
@@ -446,7 +431,7 @@ namespace Rendering {
                                     + (int)DAT_UnitsState::instance.units[_unitID].someDrawYOffset;
                                 overlayY = DAT_UnitsState::instance.units[_unitID].field22_0x2a + -0x35
                                     + (int)DAT_UnitsState::instance.units[_unitID].drawX;
-                                overlayImageID = DAT_TileMapState::instance.field161_0x5549c0 + 0x20;
+                                int overlayImageID = DAT_TileMapState::instance.field161_0x5549c0 + 0x20;
                                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
                                     DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW,
                                     overlayImageID, overlayY, overlayX, OpenSHC::IO::Graphics::GID_FLOATS_NEW,
@@ -485,7 +470,7 @@ namespace Rendering {
                                                    + (int)DAT_UnitsState::instance.units[_unitID].someDrawYOffset)
                                         - overlayX;
                                     overlayY = DAT_UnitsState::instance.units[_unitID].drawX + overlayY;
-                                    overlayImageID = DAT_TileMapState::instance.field161_0x5549c0 + 0x74;
+                                    int overlayImageID = DAT_TileMapState::instance.field161_0x5549c0 + 0x74;
                                     MACRO_CALL_MEMBER(
                                         OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
                                         DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW,
@@ -525,7 +510,7 @@ namespace Rendering {
                                                    + (int)DAT_UnitsState::instance.units[_unitID].someDrawYOffset)
                                         - overlayX;
                                     overlayY = DAT_UnitsState::instance.units[_unitID].drawX + overlayY;
-                                    overlayImageID = DAT_TileMapState::instance.field161_0x5549c0 + 0x94;
+                                    int overlayImageID = DAT_TileMapState::instance.field161_0x5549c0 + 0x94;
                                     MACRO_CALL_MEMBER(
                                         OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
                                         DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW,
