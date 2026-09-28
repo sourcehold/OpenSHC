@@ -28,17 +28,17 @@ namespace Map {
         }
         for (int i = 0; i < count; i++) {
             int _tile = this->receivedWallPlacementInfoArray[i].tile_OR_pitchID;
-            uint _y = (uint)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile];
+            int _y = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile];
             DAT_TileMapState::instance.DamageLayer[_tile] = this->receivedWallPlacementInfoArray[i].damage;
             DAT_TileMapState::instance.HeightLayer[_tile] = this->receivedWallPlacementInfoArray[i].height;
             DAT_TileMapState::instance.LogicLayer[_tile] = DAT_TileMapState::instance.LogicLayer[_tile] & 0xffb8f4ff;
             DAT_TileMapState::instance.LogicLayer[_tile]
                 = this->receivedWallPlacementInfoArray[i].logic | DAT_TileMapState::instance.LogicLayer[_tile];
+            int _tileDelta = _tile - DAT_ViewportRenderState::instance.translationMatrix[_y].addXgetTile;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
                 DAT_PathFindingState::ptr)(_y, _tile);
-            MACRO_CALL_MEMBER(
-                OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer, DAT_PathFindingState::ptr)(
-                9, (uint)(_tile - DAT_ViewportRenderState::instance.translationMatrix[_y].addXgetTile), _y);
+            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
+                DAT_PathFindingState::ptr)(9, (uint)_tileDelta, _y);
         }
         MACRO_CALL_MEMBER(OpenSHC::UI::MinimapViewState_Func::triggerMinimapRedraw, DAT_MinimapViewState::ptr)(1);
     }
