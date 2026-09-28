@@ -24,8 +24,8 @@ namespace Map {
         {
             int (*paiVar1)[8];
             int* piVar2;
-            bool _someLinkageResult;
-            _someLinkageResult = false;
+            int _someLinkageResult;
+            _someLinkageResult = 0;
             MACRO_CALL_MEMBER(
                 OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkageLayerBasedOnBuildingsUnk, this)(
                 y, tile);
@@ -36,7 +36,7 @@ namespace Map {
                     OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkageLayerBasedOnBuildingsUnk, this)(
                     *piVar2 + y, (*paiVar1)[0] + tile);
                 if (_tileIsKeepUnk != FALSE) {
-                    _someLinkageResult = true;
+                    _someLinkageResult = 1;
                 }
                 piVar2 = piVar2 + 2;
                 paiVar1 = (int (*)[8])(*paiVar1 + 1);
