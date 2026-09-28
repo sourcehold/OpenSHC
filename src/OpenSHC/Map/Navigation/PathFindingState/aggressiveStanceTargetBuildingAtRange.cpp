@@ -3,6 +3,7 @@
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
+#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -13,15 +14,14 @@
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
         using OpenSHC::Game::GameMode;
+        using OpenSHC::Map::Location::Point8ShortXY;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-            using OpenSHC::Map::Location::Point8ShortXY;
 
         /*
           WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
@@ -38,24 +38,21 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A1230
         void PathFindingState::aggressiveStanceTargetBuildingAtRange(int unitID, int maxDistance)
         {
-            short sVar1;
-            short sVar2;
-            BOOLEnum BVar3;
             int (*paiVar4)[8];
             uint uVar5;
             short* psVar6;
             uint uVar7;
             int _nextCandidate;
             int _tile;
-            sVar1 = DAT_UnitsState::instance.units[unitID].x;
+            short sVar1 = DAT_UnitsState::instance.units[unitID].x;
             uVar5 = (uint)sVar1;
-            sVar2 = DAT_UnitsState::instance.units[unitID].y;
+            short sVar2 = DAT_UnitsState::instance.units[unitID].y;
             uVar7 = (uint)sVar2;
             this->calculations = this->calculations + 1;
             this->ALG_ResultTile = 0;
             this->ALG_ResultY = 0;
             this->ALG_ResultX = 0;
-            if (((uVar5 < 400) && (uVar7 < 400)) && (*(char*)(uVar7 * 400 + 0x21aec98 + uVar5) != '\0')) {
+            if (uVar5 < 400 && uVar7 < 400 && *(char*)(uVar7 * 400 + 0x21aec98 + uVar5) != '\0') {
                 this->searchGeneration = this->searchGeneration + 1;
                 if (32000 < this->searchGeneration) {
                     this->searchGeneration = 1;
@@ -71,8 +68,8 @@ namespace Map {
                 this->searchQueue.xQueue[0] = sVar1;
                 DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
                 DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
-                if (((DAT_TileMapState::instance.LogicLayer[this->searchQueue.tilesQueue[0]] & 0x30) == 0)
-                    && (this->searchQueue.readIndex != this->searchQueue.writeIndex)) {
+                if ((DAT_TileMapState::instance.LogicLayer[this->searchQueue.tilesQueue[0]] & 0x30) == 0
+                    && this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                     while ((_tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex],
                         -1 < _tile && (_tile < 0x13a10))) {
                         sVar1 = this->searchQueue.xQueue[this->searchQueue.readIndex];
@@ -97,14 +94,14 @@ namespace Map {
                                     /*
                                       TODO:FIXME: WallOwnerLayer contains player ids, not necessarily team ids
                                      */
-                                    if ((((uVar5 & 0x100) != 0)
-                                            && ((DAT_GameSynchronyState::instance.currentGameMode
-                                                    == OpenSHC::Game::GM_SOLITARY
-                                                || (DAT_GameState::instance.mapAndTime.skirmishStrongWalls == 0))))
-                                        && (DAT_GameState::instance.mapAndTime.playerTeams
+                                    if ((uVar5 & 0x100) != 0
+                                        && (DAT_GameSynchronyState::instance.currentGameMode
+                                                == OpenSHC::Game::GM_SOLITARY
+                                            || (DAT_GameState::instance.mapAndTime.skirmishStrongWalls == 0))
+                                        && DAT_GameState::instance.mapAndTime.playerTeams
                                                 [(DAT_TileMapState::instance.WallOwnerLayer[_nextCandidate] & 7) + 1]
                                             != DAT_GameState::instance.mapAndTime
-                                                .playerTeams[DAT_UnitsState::instance.units[unitID].owner])) {
+                                                .playerTeams[DAT_UnitsState::instance.units[unitID].owner]) {
                                         this->ALG_ResultTile = _nextCandidate;
                                         return;
                                     }
@@ -132,10 +129,11 @@ namespace Map {
                                         case OpenSHC::Map::Buildings::BT_KEEPDOOR_RIGHT:
                                         case OpenSHC::Map::Buildings::BT_KEEPDOOR:
                                             break;
-                                            default: BVar3
-                                                  = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::
-                                                                          getBuildingHasHealthProperty,
-                                                      DAT_BuildingsState::ptr)(uVar7, _nextCandidate);
+                                        default:
+                                            BOOLEnum BVar3
+                                                = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::
+                                                                        getBuildingHasHealthProperty,
+                                                    DAT_BuildingsState::ptr)(uVar7, _nextCandidate);
                                             if (BVar3 != FALSE) {
                                                 this->ALG_ResultTile = _nextCandidate;
                                                 return;
