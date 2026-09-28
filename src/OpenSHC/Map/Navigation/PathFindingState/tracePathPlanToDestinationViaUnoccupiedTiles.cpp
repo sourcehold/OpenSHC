@@ -30,7 +30,7 @@ namespace Map {
             int _budget;
             uint _ppIndex;
             int _axgt2;
-            byte _canTraverseThisDirection;
+            int _canTraverseThisDirection;
             int _fc;
             int _gen;
             byte* _pPathPlan;
