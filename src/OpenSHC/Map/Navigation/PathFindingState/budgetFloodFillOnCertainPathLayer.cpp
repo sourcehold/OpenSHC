@@ -1,14 +1,15 @@
 #include "../PathFindingState.func.hpp"
 
+#include "OpenSHC/Map/Location/Point8IntXY.hpp"
+
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Map/Location/Point8IntXY.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Navigation {
-            using OpenSHC::Map::Location::Point8IntXY;
+        using OpenSHC::Map::Location::Point8IntXY;
 
         /*
           WARNING: Function: __alloca_probe replaced with injection: alloca_probe
@@ -23,7 +24,6 @@ namespace Map {
         void PathFindingState::budgetFloodFillOnCertainPathLayer(uint x, uint y, int marker, int budget)
         {
             int iVar1;
-            int _writeIndex;
             int* piVar2;
             int* piVar3;
             uint _candidate;
@@ -38,8 +38,8 @@ namespace Map {
             uint _yUnk;
             _tilesQueue[999] = 0x49ddca;
             _readIndex = 0;
-            _writeIndex = 1;
-            if (((x < 400) && (y < 400)) && (*(char*)(y * 400 + 0x21aec98 + x) != '\0')) {
+            int _writeIndex = 1;
+            if (x < 400 && y < 400 && *(char*)(y * 400 + 0x21aec98 + x) != '\0') {
                 this->DAT_Mini_spreads = this->DAT_Mini_spreads + 1;
                 _ys[0] = y;
                 _xs[0] = x;
