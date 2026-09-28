@@ -33,6 +33,17 @@ instructions establish behavior. No multiplayer match was run for this analysis.
    execution action/parameter state, calls the handler and marks the entry
    processed. The translator is `0x47EAF0`, reimplemented by this contribution.
 
+For a locally queued timed command, `queueCommand` sets its execution tick to
+the later of the match clock and the local synchrony clock, plus the current
+command delay. It sends the command after its handler has serialized the
+parameters; `getCommandIDFromCommandSelectionStuff` does not select it until
+that execution tick is due. The original match initialization sets the delay
+to 35 ticks. During play, synchronization packets can raise it in steps of at
+most five ticks, while the periodic sync send can lower it by one before
+applying a floor derived from peer lag indicators. Thus the delay is part of
+native scheduling before DirectPlay carries the command, and it can change
+while a match is running.
+
 The timestamp is thus 24-bit on the wire and 32-bit in the ring. The examined
 receive routine does not reconstruct a higher epoch. Long-duration recording
 and replay must preserve that distinction rather than assuming identical wire
