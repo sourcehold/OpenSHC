@@ -86,7 +86,7 @@ namespace Map {
                     if (param_2 < this->searchQueue.currentDistance) {
                         return (undefined4)(0);
                     }
-                    ushort uVar4 = DAT_TileMapState::instance.UnitLayer[uVar1];
+                    ushort uVar4 = (short)DAT_TileMapState::instance.UnitLayer[uVar1];
                     while (iVar9 = (int)(short)uVar4, iVar9 != 0) {
                         if (param_3 != 0
                             && DAT_GameState::instance.mapAndTime
