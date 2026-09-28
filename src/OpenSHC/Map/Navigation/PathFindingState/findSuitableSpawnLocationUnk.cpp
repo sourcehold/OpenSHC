@@ -72,7 +72,7 @@ namespace Map {
                     }
                     short sVar2 = DAT_TileMapState::instance.CertainPathLayer[iVar6];
                     short sVar7 = sVar2 + 1;
-                    ushort uVar3 = this->searchQueue.yQueue[x2];
+                    int uVar3 = (int)this->searchQueue.yQueue[x2];
                     int bVar1 = DAT_TileMapState::instance.PathLinkageLayer[iVar6];
                     short local_20 = (short)iVar4;
                     if (DAT_TileMapState::instance.CertainPathLayer[iVar6 + 0x13a0f] != local_20 && (bVar1 & 0x40) != 0
