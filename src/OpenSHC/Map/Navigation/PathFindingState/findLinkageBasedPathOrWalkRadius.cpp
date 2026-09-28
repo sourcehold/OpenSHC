@@ -169,7 +169,7 @@ namespace Map {
                 /*
                   Get Y coordinate and path linkage flags for current tile
                  */
-                ushort _cY = this->searchQueue.yQueue[x2];
+                int _cY = (int)this->searchQueue.yQueue[x2];
                 /*
                   8-bit flags for 8 directions
                  */
