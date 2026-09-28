@@ -58,7 +58,7 @@ namespace Map {
                     if (param_2 < this->searchQueue.currentDistance) {
                         return (undefined4)(0);
                     }
-                    ushort uVar3 = DAT_TileMapState::instance.UnitLayer[uVar4];
+                    ushort uVar3 = (short)DAT_TileMapState::instance.UnitLayer[uVar4];
                     while (iVar8 = (int)(short)uVar3, iVar8 != 0) {
                         if (DAT_UnitsState::instance.units[iVar8].owner == param_3) {
                             DAT_UnitsState::instance.units[iVar8].health
