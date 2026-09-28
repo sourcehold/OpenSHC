@@ -21,14 +21,9 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049E0D0
         void PathFindingState::updateUnitDeathHeatmapIn3SpacesAroundTile(uint x, uint y)
         {
-            char cVar1;
-            int iVar2;
-            int _direction;
             int _candidate1;
             uint _tile;
-            short _x;
-            short _y;
-            if (((x < 400) && (y < 400)) && (*(char*)(y * 400 + 0x21aec98 + x) != '\0')) {
+            if (x < 400 && y < 400 && *(char*)(y * 400 + 0x21aec98 + x) != '\0') {
                 this->searchGeneration = this->searchGeneration + 1;
                 if (32000 < this->searchGeneration) {
                     this->searchGeneration = 1;
@@ -46,9 +41,9 @@ namespace Map {
                 DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
                 if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                     while (_tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex], _tile < 0x13a10) {
-                        _x = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                        _y = this->searchQueue.yQueue[this->searchQueue.readIndex];
-                        iVar2 = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
+                        short _x = this->searchQueue.xQueue[this->searchQueue.readIndex];
+                        short _y = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                        int iVar2 = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
                         if (80400 < iVar2) {
                             this->searchQueue.currentDistance = iVar2;
                             return;
@@ -59,16 +54,17 @@ namespace Map {
                         }
                         this->searchQueue.currentDistance = iVar2;
                         if (DAT_TileMapState::instance.unitDeathHeatMap[_tile] < 250) {
-                            this->searchQueue.currentDistance                                = (char)DAT_TileMapState::instance.CertainPathLayer[_tile];
-                            cVar1 = DAT_TileMapState::instance.unitDeathHeatMap[_tile]
+                            this->searchQueue.currentDistance
+                                = (char)DAT_TileMapState::instance.CertainPathLayer[_tile];
+                            char cVar1 = DAT_TileMapState::instance.unitDeathHeatMap[_tile]
                                 - (char)this->searchQueue.currentDistance;
                             DAT_TileMapState::instance.unitDeathHeatMap[_tile] = cVar1 + 4;
                         }
-                        _direction = 0;
+                        int _direction = 0;
                         do {
-                            if (((DAT_TileMapState::instance.PathLinkageLayer[_tile]
-                                     & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction])
-                                    != 0)
+                            if ((DAT_TileMapState::instance.PathLinkageLayer[_tile]
+                                    & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction])
+                                    != 0
                                 && (_candidate1
                                     = DAT_TileMapState::instance.directionTranslationMatrix[_y][_direction] + _tile,
                                     DAT_TileMapState::instance.WalkLayer[_candidate1] != this->searchGeneration)) {
@@ -92,9 +88,9 @@ namespace Map {
                                     this->searchQueue.writeIndex = 0;
                                 }
                             }
-                            if (((DAT_TileMapState::instance.PathLinkageLayer[_tile]
-                                     & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction + 1])
-                                    != 0)
+                            if ((DAT_TileMapState::instance.PathLinkageLayer[_tile]
+                                    & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction + 1])
+                                    != 0
                                 && (iVar2
                                     = DAT_TileMapState::instance.directionTranslationMatrix[_y][_direction + 1] + _tile,
                                     DAT_TileMapState::instance.WalkLayer[iVar2] != this->searchGeneration)) {
@@ -116,9 +112,9 @@ namespace Map {
                                     this->searchQueue.writeIndex = 0;
                                 }
                             }
-                            if (((DAT_TileMapState::instance.PathLinkageLayer[_tile]
-                                     & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction + 2])
-                                    != 0)
+                            if ((DAT_TileMapState::instance.PathLinkageLayer[_tile]
+                                    & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction + 2])
+                                    != 0
                                 && (iVar2
                                     = DAT_TileMapState::instance.directionTranslationMatrix[_y][_direction + 2] + _tile,
                                     DAT_TileMapState::instance.WalkLayer[iVar2] != this->searchGeneration)) {
@@ -140,9 +136,9 @@ namespace Map {
                                     this->searchQueue.writeIndex = 0;
                                 }
                             }
-                            if (((DAT_TileMapState::instance.PathLinkageLayer[_tile]
-                                     & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction + 3])
-                                    != 0)
+                            if ((DAT_TileMapState::instance.PathLinkageLayer[_tile]
+                                    & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction + 3])
+                                    != 0
                                 && (iVar2
                                     = DAT_TileMapState::instance.directionTranslationMatrix[_y][_direction + 3] + _tile,
                                     DAT_TileMapState::instance.WalkLayer[iVar2] != this->searchGeneration)) {
