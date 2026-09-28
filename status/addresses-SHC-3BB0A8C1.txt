@@ -41093,7 +41093,7 @@ SHC_3BB0A8C1_0x004FC650 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004FC7C0 | 79.0% | setg vs sbb/neg
 
-SHC_3BB0A8C1_0x004FC810 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FC810 | 67.2% | height compare regalloc
 
 SHC_3BB0A8C1_0x004FC9E0 | 64.5% | Od stack slot order differs
 
