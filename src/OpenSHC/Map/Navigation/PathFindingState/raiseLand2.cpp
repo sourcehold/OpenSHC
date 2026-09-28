@@ -26,7 +26,7 @@ namespace Map {
             short* psVar4;
             int iVar5;
             int* piVar6;
-            if (x < 400 && y < 400 && *(char*)(y * 400 + 0x21aec98 + x) != '\0') {
+            if (x < 400 && y < 400 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] != '\0') {
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                     160800, '\0', (void*)((int)(DAT_TileMapState::instance.CertainPathLayer)));
                 this->searchQueue.readIndex = 0;
