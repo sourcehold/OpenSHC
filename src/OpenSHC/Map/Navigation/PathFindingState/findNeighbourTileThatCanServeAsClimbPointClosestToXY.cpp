@@ -2,18 +2,18 @@
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
+#include "OpenSHC/Map/Location/Point8IntXY.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_DirectionAlgorithmState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Map/Location/Point8IntXY.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Navigation {
-            using OpenSHC::Map::Location::Point8IntXY;
+        using OpenSHC::Map::Location::Point8IntXY;
 
         /*
           WARNING: Enum "MappersEnum": Some values do not have unique names
@@ -24,7 +24,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004974D0
         BOOL PathFindingState::findNeighbourTileThatCanServeAsClimbPointClosestToXY(uint x, uint y, uint x2, uint y2)
         {
-            uint uVar1;
             int iVar2;
             int (*paiVar3)[8];
             int _candidate2;
@@ -34,11 +33,11 @@ namespace Map {
             int _minDistance;
             BOOL _status;
             ushort _area1;
-            uVar1 = y2;
-            if (((399 < x) || (399 < y)) || (*(char*)(y * 400 + 0x21aec98 + x) == '\0')) {
+            uint uVar1 = y2;
+            if (399 < x || 399 < y || *(char*)(y * 400 + 0x21aec98 + x) == '\0') {
                 return 0;
             }
-            if (((x2 < 400) && (y2 < 400)) && (*(char*)(y2 * 400 + 0x21aec98 + x2) != '\0')) {
+            if (x2 < 400 && y2 < 400 && *(char*)(y2 * 400 + 0x21aec98 + x2) != '\0') {
                 _tile2 = DAT_ViewportRenderState::instance.translationMatrix[y2].addXgetTile + x2;
                 /*
                   height 2
@@ -77,16 +76,15 @@ namespace Map {
                                 DAT_BuildingsState::ptr)((int)DAT_TileMapState::instance.BuildingLayer[_candidate2]);
                             _c2Height = _c2Height + iVar2;
                         }
-                        if (((int)y2 <= (int)(_c2Height + 16)) && ((int)(_c2Height - 4294967280) <= (int)y2)) {
+                        if ((int)y2 <= (int)(_c2Height + 16) && (int)(_c2Height - 4294967280) <= (int)y2) {
                             /*
                               if the height of this candidate tile is within 16 of the tile2 height   then, compute the
                               distance between x,y and the candidate2 tile
                              */
                             MACRO_CALL_MEMBER(
                                 OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
-                                DAT_DirectionAlgorithmState::ptr)(x, (int)((int)(y)),
-                                (int)((int)(((Point8IntXY*)(piVar4 + -1))->xOffset + x2)),
-                                (int)((int)(*piVar4 + uVar1)));
+                                DAT_DirectionAlgorithmState::ptr)(x, (int)(y),
+                                (int)(((Point8IntXY*)(piVar4 + -1))->xOffset + x2), (int)(*piVar4 + uVar1));
                             if (DAT_DirectionAlgorithmState::instance.distanceHigh < _minDistance) {
                                 this->climbX = ((Point8IntXY*)(piVar4 + -1))->xOffset + x2;
                                 _minDistance = DAT_DirectionAlgorithmState::instance.distanceHigh;
