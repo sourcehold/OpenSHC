@@ -88,10 +88,8 @@ namespace Map {
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[uVar11];
                     if ((0x13a10 < this->searchQueue.currentDistance) || (10 < this->searchQueue.currentDistance))
                         break;
-                    psVar10 = &DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[0].short_.yOffset;
-                    paiVar9 = DAT_TileMapState::instance.directionTranslationMatrix + sVar2;
-                    do {
-                        iVar12 = (*paiVar9)[0] + uVar11;
+                    for (int _direction = 0; _direction < 8; _direction = _direction + 1) {
+                        iVar12 = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][_direction] + uVar11;
                         if (DAT_TileMapState::instance.WalkLayer[iVar12] != this->searchGeneration
                             && ((area == (int)(short)DAT_TileMapState::instance.PathConnectionLayer[iVar12]
                                     || (iVar5 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
@@ -106,21 +104,20 @@ namespace Map {
                                                                       calculateCanReachUsingCachedAreaLogic,
                                             this)(iVar4, iVar12),
                                         BVar6 != FALSE))))) {
-                            short sVar3 = ((Point8ShortXY*)(psVar10 + -2))->xOffset;
+                            short sVar3 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].short_.xOffset;
                             DAT_TileMapState::instance.CertainPathLayer[iVar12]
                                 = (short)this->searchQueue.currentDistance + 1;
                             DAT_TileMapState::instance.WalkLayer[iVar12] = (short)this->searchGeneration;
                             this->searchQueue.xQueue[this->searchQueue.writeIndex] = sVar3 + sVar1;
-                            this->searchQueue.yQueue[this->searchQueue.writeIndex] = *psVar10 + sVar2;
+                            this->searchQueue.yQueue[this->searchQueue.writeIndex] = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].short_.yOffset + sVar2;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar12;
                             this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
                             if (0x13a0f < this->searchQueue.writeIndex) {
                                 this->searchQueue.writeIndex = 0;
                             }
                         }
-                        psVar10 = psVar10 + 4;
-                        paiVar9 = (int (*)[8])(*paiVar9 + 1);
-                    } while ((int)psVar10 < 0xb4908c);
+                    }
+
                     this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
                     if (0x13a0f < this->searchQueue.readIndex) {
                         this->searchQueue.readIndex = 0;
