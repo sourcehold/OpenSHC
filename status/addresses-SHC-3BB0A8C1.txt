@@ -36391,7 +36391,7 @@ SHC_3BB0A8C1_0x004E1F50 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004E1FA0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004E2050 | 28.9% | reg alloc; frame matches
+SHC_3BB0A8C1_0x004E2050 | 30.7% | for loops, reg alloc differs
 
 SHC_3BB0A8C1_0x004E21E0 | 0.0% | Pending
 
