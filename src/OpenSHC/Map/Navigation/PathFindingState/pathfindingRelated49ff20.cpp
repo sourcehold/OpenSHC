@@ -27,17 +27,10 @@ namespace Map {
         dword PathFindingState::pathfindingRelated49ff20(uint x, uint y, int playerID, uint distanceUnk, int param_5)
         {
             int iVar1;
-            short sVar2;
-            int iVar3;
-            dword dVar4;
-            int iVar5;
-            uint uVar6;
-            dword local_8;
-            int local_4;
-            dVar4 = 1000;
-            local_4 = 1000;
-            local_8 = 0;
-            if (((x < 400) && (y < 400)) && (*(char*)(y * 400 + 0x21aec98 + x) != '\0')) {
+            dword dVar4 = 1000;
+            int local_4 = 1000;
+            dword local_8 = 0;
+            if (x < 400 && y < 400 && *(char*)(y * 400 + 0x21aec98 + x) != '\0') {
                 this->calculations = this->calculations + 1;
                 this->searchGeneration = this->searchGeneration + 1;
                 if (32000 < this->searchGeneration) {
@@ -56,27 +49,27 @@ namespace Map {
                 dVar4 = local_8;
                 if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                     do {
-                        iVar3 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                        int iVar3 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                         if (iVar3 < 0) {
                             return (dword)(local_8);
                         }
                         if (0x13a0f < iVar3) {
                             return (dword)(local_8);
                         }
-                        sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                        short sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
                         this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[iVar3];
                         if (0x13a10 < this->searchQueue.currentDistance) {
                             return (dword)(local_8);
                         }
-                        iVar5 = 0;
+                        int iVar5 = 0;
                         do {
-                            if ((((DAT_TileMapState::instance.PathLinkageLayer[iVar3]
-                                      & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar5])
-                                     != 0)
-                                    && ((DAT_TileMapState::instance.LogicLayer[iVar3] & 0x10000100U) == 0))
+                            if ((DAT_TileMapState::instance.PathLinkageLayer[iVar3]
+                                    & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar5])
+                                    != 0
+                                && (DAT_TileMapState::instance.LogicLayer[iVar3] & 0x10000100U) == 0
                                 && (dVar4 = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][iVar5] + iVar3,
                                     DAT_TileMapState::instance.WalkLayer[dVar4] != this->searchGeneration)) {
-                                uVar6 = (uint)DAT_TileMapState::instance.SEC_TileMap1104[dVar4];
+                                uint uVar6 = (uint)DAT_TileMapState::instance.SEC_TileMap1104[dVar4];
                                 if (param_5 == 0) {
                                     uVar6 = 0;
                                 }
@@ -85,11 +78,11 @@ namespace Map {
                                                 .entityArray[DAT_TileMapState::instance.EntityLayer[dVar4]]
                                                 .entityType
                                             != OpenSHC::Map::Entities::ET_FIRE))
-                                    && (*(byte*)(*(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray
-                                                     + playerID * 0x177bc + -0x10)
-                                                * 0x13a10
-                                            + 0x1ee2998 + dVar4)
-                                        == distanceUnk)) {
+                                    && *(byte*)(*(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray
+                                                    + playerID * 0x177bc + -0x10)
+                                               * 0x13a10
+                                           + 0x1ee2998 + dVar4)
+                                        == distanceUnk) {
                                     if ((16 < this->searchQueue.currentDistance) && (local_8 != 0)) {
                                         return (dword)(local_8);
                                     }
