@@ -38,7 +38,6 @@ namespace Map {
 
         {
             int _cowDiseaseDamage;
-            uint uVar5;
             int _unitHeight;
             eSFX sfxOffsetInArray;
             UnitTypeShort _entityType_2;
@@ -51,7 +50,7 @@ namespace Map {
             int _unknown = (int)this->units[unitID].tribeID;
             int _unitIsSiegeEngine = 0;
             int _siegeProjectile = 0;
-            int bVar4 = 0;
+            int _usesFemaleDeathScream = 0;
             UnitTypeShort _unitType = this->units[unitID].unitType;
             short _entityShootingUnitID = DAT_EntityState::instance.entityArray[entityID].unitID_OR_seaGullID;
             int _entityShootingUnitID_2 = (int)_entityShootingUnitID;
@@ -223,7 +222,8 @@ namespace Map {
                     if (_entityType_2 == OpenSHC::Map::Units::UT_LORD) {
                         _damage = 0x32;
                     } else {
-                        uVar5 = _entityType_2 == OpenSHC::Map::Units::UT_S_SHIELD ? 0 : 0x1c2;
+                        /* flying cow: 50 against a shield, 500 against anything else */
+                        _damage = _entityType_2 == OpenSHC::Map::Units::UT_S_SHIELD ? 0x32 : 0x1f4;
                     }
                 } else if (_entityType == OpenSHC::Map::Entities::ET_MANGONEL) {
                     /*
@@ -252,8 +252,8 @@ namespace Map {
                     }
                 } else {
                     if (_entityType != OpenSHC::Map::Entities::ET_BALLISTA) {
-                        uVar5 = this->units[unitID].unitType == OpenSHC::Map::Units::UT_LORD ? 0 : 0x74fe;
-                        _damage = uVar5 + 0x32;
+                        /* every other siege projectile: 50 against the lord, 30000 otherwise */
+                        _damage = this->units[unitID].unitType == OpenSHC::Map::Units::UT_LORD ? 0x32 : 0x7530;
                     }
                     /*
                       tower ballista and fire ballista damage
@@ -346,15 +346,13 @@ namespace Map {
                 this->units[unitID].health = 0;
             }
             if (_entityShootingUnitID_2 != 0) {
-                short sVar3 = this->units[unitID].field97_0xd0;
-                if (sVar3 < 1000) {
-                    this->units[unitID].field97_0xd0 = sVar3 + 200;
+                if (this->units[unitID].field97_0xd0 < 1000) {
+                    this->units[unitID].field97_0xd0 = this->units[unitID].field97_0xd0 + 200;
                 }
-                short* psVar1 = &DAT_TribesState::instance.tribes[_unknown].someUnitArrayIndex;
-                *psVar1 = *psVar1 + 1;
-                sVar3 = DAT_TribesState::instance.tribes[_unknown].someUnitArrayIndex;
+                DAT_TribesState::instance.tribes[_unknown].someUnitArrayIndex
+                    = DAT_TribesState::instance.tribes[_unknown].someUnitArrayIndex + 1;
                 DAT_TribesState::instance.tribes[_unknown].countdown = 100;
-                if (9 < sVar3) {
+                if (9 < DAT_TribesState::instance.tribes[_unknown].someUnitArrayIndex) {
                     DAT_TribesState::instance.tribes[_unknown].someUnitArrayIndex = 0;
                 }
                 DAT_TribesState::instance.tribes[_unknown]
@@ -373,7 +371,7 @@ namespace Map {
             if (_unitType == OpenSHC::Map::Units::UT_BREWER || _unitType == OpenSHC::Map::Units::UT_TANNER
                 || _unitType == OpenSHC::Map::Units::UT_LADY || _unitType == OpenSHC::Map::Units::UT_MOTHER
                 || (_unitType == OpenSHC::Map::Units::UT_CHILD && (this->units[unitID].spriteID == 0x81))) {
-                bVar4 = 1;
+                _usesFemaleDeathScream = 1;
             }
             bool _shootingUnitID = this->units[_entityShootingUnitID_2].unitType == OpenSHC::Map::Units::UT_A_SLINGER;
             if ((_unitHealth < 1) && (this->units[unitID].dying == 0)) {
@@ -390,9 +388,10 @@ namespace Map {
                         ? OpenSHC::Map::Units::States::US_STONE_DEATH_01
                         : (UnitState)(OpenSHC::Map::Units::States::US_STONE_DEATH_01 - 3);
                 }
-                byte bVar2 = this->units[unitID].isStalked;
+                /* read before the write below, which the original also ordered this way */
+                byte _wasStalked = this->units[unitID].isStalked;
                 this->units[unitID].tunnelerFinishedDigging = 1;
-                if (bVar2 == 0) {
+                if (_wasStalked == 0) {
                     switch (this->units[unitID].unitType) {
                     case OpenSHC::Map::Units::UT_S_CATAPULT:
                     case OpenSHC::Map::Units::UT_S_MANGONEL:
@@ -416,7 +415,7 @@ namespace Map {
                         sfxOffsetInArray = OpenSHC::DE::SHCDE::FX_SIEGE_DIE;
                         break;
                     }
-                    if (bVar4) {
+                    if (_usesFemaleDeathScream) {
                         MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                             this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_GIRL_DIE);
                         if (_shootingUnitID) {
@@ -452,32 +451,33 @@ namespace Map {
                     case OpenSHC::Map::Units::UT_S_FBALLISTA:
                         sfxOffsetInArray = OpenSHC::DE::SHCDE::FX_WOOD_HIT;
                         break;
-                    default:
-                        uVar5 = this->units[unitID].fixedRng & 7;
-                        if (uVar5 != 0) {
-                            if (uVar5 == 1)
+                    default: {
+                        uint _hitSoundVariant = this->units[unitID].fixedRng & 7;
+                        if (_hitSoundVariant != 0) {
+                            if (_hitSoundVariant == 1) {
                                 sfxOffsetInArray = OpenSHC::DE::SHCDE::FX_BODY_HIT2;
-                            break;
-                            if (uVar5 == 2) {
+                                break;
+                            }
+                            if (_hitSoundVariant == 2) {
                                 sfxOffsetInArray = OpenSHC::DE::SHCDE::FX_BODY_HIT3;
                                 break;
                             }
-                            if (uVar5 == 3) {
+                            if (_hitSoundVariant == 3) {
                                 sfxOffsetInArray = OpenSHC::DE::SHCDE::FX_BODY_HIT4;
                                 break;
                             }
-                            if (uVar5 == 4) {
+                            if (_hitSoundVariant == 4) {
                                 sfxOffsetInArray = OpenSHC::DE::SHCDE::FX_BODY_HIT5;
                             } else {
-                                if (uVar5 == 5) {
+                                if (_hitSoundVariant == 5) {
                                     sfxOffsetInArray = OpenSHC::DE::SHCDE::FX_BODY_HIT6;
                                     break;
                                 }
-                                if (uVar5 == 6) {
+                                if (_hitSoundVariant == 6) {
                                     sfxOffsetInArray = OpenSHC::DE::SHCDE::FX_BODY_HIT7;
                                     break;
                                 }
-                                if (uVar5 != 7) {
+                                if (_hitSoundVariant != 7) {
                                     return TRUE;
                                 }
                                 sfxOffsetInArray = OpenSHC::DE::SHCDE::FX_BODY_HIT8;
@@ -486,6 +486,7 @@ namespace Map {
                         }
                         sfxOffsetInArray = OpenSHC::DE::SHCDE::FX_BODY_HIT;
                         break;
+                    }
                     case OpenSHC::Map::Units::UT_LORD:
                         return TRUE;
                     case OpenSHC::Map::Units::UT_S_SHIELD:
@@ -493,6 +494,8 @@ namespace Map {
                             < 1) {
                             return TRUE;
                         }
+                        sfxOffsetInArray = OpenSHC::DE::SHCDE::FX_BODY_HIT2;
+                        break;
                     }
                 }
             }
