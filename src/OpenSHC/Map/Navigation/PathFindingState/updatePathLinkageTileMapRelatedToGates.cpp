@@ -26,7 +26,7 @@ namespace Map {
             uint uVar5;
             int _xMiddleUnk;
             int _offset;
-            byte _pl2;
+            int _pl2;
             uint _widthOrHeight;
             _middleTileUnk = (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x;
             _widthOrHeight = DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight;
