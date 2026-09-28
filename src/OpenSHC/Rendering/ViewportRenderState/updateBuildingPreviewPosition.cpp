@@ -188,10 +188,10 @@ namespace Rendering {
         }
 
         this->viewportState.mouseTile = this->screenPointToTileNumber[lookupIndex + -8];
-        this->viewportState.field5_0x14 = DAT_TileMapState::instance.LogicLayer[this->viewportState.mouseTile];
         this->viewportState.field6_0x18 = DAT_TileMapState::instance.BuildingLayer[this->viewportState.mouseTile];
         this->viewportState.field8_0x20 = (short)DAT_TileMapState::instance.UnitLayer[this->viewportState.mouseTile];
         this->viewportState.field18_0x48 = 0;
+        this->viewportState.field5_0x14 = DAT_TileMapState::instance.LogicLayer[this->viewportState.mouseTile];
 
         if (this->viewportState.mouseRayUnitID != 0) {
             this->viewportState.mouseRayLastUnitID = this->viewportState.mouseRayUnitID;
