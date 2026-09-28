@@ -40,7 +40,7 @@ namespace Map {
             int* piVar3;
             int _candidateTile;
             BuildingTypeShort _buildingType;
-            short _candidateY;
+            int _candidateY;
             short _directionOffset;
             /*
                  === VALIDATE PLAYER HAS A KEEP ===   Only compute AI zones if the player has a keep (main castle)
@@ -95,7 +95,7 @@ namespace Map {
                                 /*
                                   Get current tile being processed
                                  */
-                                _candidateY = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                                _candidateY = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                                 _candidateTile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                                 /*
                                   Check all 8 adjacent directions
