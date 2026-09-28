@@ -17671,7 +17671,7 @@ SHC_3BB0A8C1_0x00457AD0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00457B40 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00457B80 | 36.8% | Block placement differs
+SHC_3BB0A8C1_0x00457B80 | 43.9% | Block placement differs
 
 SHC_3BB0A8C1_0x00457E80 | 67.5% | Zero kept in reg by orig
 
