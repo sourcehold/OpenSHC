@@ -60,9 +60,9 @@ namespace Map {
                         }
                         if ((maxTries <= this->searchQueue.readIndex) || (80399 < _tile))
                             break;
-                        short sVar1 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                        int sVar1 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                         this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
-                        short sVar2 = this->searchQueue.xQueue[this->searchQueue.readIndex];
+                        int sVar2 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                         int iVar3 = 0;
                         piVar5 = DAT_TileMapState::instance.directionTranslationMatrix[sVar1] + 1;
                         do {
