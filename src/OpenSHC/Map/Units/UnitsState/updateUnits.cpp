@@ -206,11 +206,10 @@ namespace Map {
                         if (this->units[DAT_CurrentUnitSlotID::instance].state.generic
                             == OpenSHC::Map::Units::States::US_MELEE_ATTACK) {
                             _buildingID = this->units[DAT_CurrentUnitSlotID::instance].attackedUnitID;
-                            psVar4 = &this->units[_buildingID].attackedBy;
-                            *psVar4 = *psVar4 + 1;
+                            this->units[_buildingID].attackedBy = this->units[_buildingID].attackedBy + 1;
                             if ((int)this->units[_buildingID].attackedUnitID != DAT_CurrentUnitSlotID::instance) {
-                                psVar4 = &this->units[DAT_CurrentUnitSlotID::instance].attackedBy;
-                                *psVar4 = *psVar4 + 1;
+                                this->units[DAT_CurrentUnitSlotID::instance].attackedBy
+                                    = this->units[DAT_CurrentUnitSlotID::instance].attackedBy + 1;
                             }
                             if ((this->units[_buildingID].attackedBy == 1)
                                 && (this->units[_buildingID].isStalked == 0)) {
@@ -220,13 +219,11 @@ namespace Map {
                         }
                         _buildingID = this->units[DAT_CurrentUnitSlotID::instance].movementType_OR_targetUnitID;
                         if (_buildingID != 0) {
-                            psVar4 = &this->units[_buildingID].huntedBy;
-                            *psVar4 = *psVar4 + 1;
+                            this->units[_buildingID].huntedBy = this->units[_buildingID].huntedBy + 1;
                         }
                         _buildingID = this->units[DAT_CurrentUnitSlotID::instance].field266_0x3de;
                         if (_buildingID != 0) {
-                            psVar4 = &this->units[_buildingID].field265_0x3dc;
-                            *psVar4 = *psVar4 + 1;
+                            this->units[_buildingID].field265_0x3dc = this->units[_buildingID].field265_0x3dc + 1;
                         }
                         psVar4 = &this->units[DAT_CurrentUnitSlotID::instance].field97_0xd0;
                         if (0 < this->units[DAT_CurrentUnitSlotID::instance].field97_0xd0) {
@@ -312,11 +309,12 @@ namespace Map {
                             if (UVar6 != OpenSHC::Map::Units::UT_LORD) {
                                 short sVar7 = this->units[uVar9].aiUnitBehaviourType;
                                 if (sVar7 == 10) {
-                                    piVar1 = &DAT_GameState::instance.playerDataArray[_buildingID]
-                                                  .totalAttackingEngineerTroops;
-                                    *piVar1 = *piVar1 + 1;
-                                    piVar1 = &DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops;
-                                    *piVar1 = *piVar1 + 1;
+                                    DAT_GameState::instance.playerDataArray[_buildingID].totalAttackingEngineerTroops
+                                        = DAT_GameState::instance.playerDataArray[_buildingID]
+                                              .totalAttackingEngineerTroops
+                                        + 1;
+                                    DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
+                                        = DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops + 1;
                                 } else if (UVar6 != OpenSHC::Map::Units::UT_E_ENGINEER) {
                                     /*
                                       fixme: TODO, review this bit, cannot be true!
@@ -324,113 +322,118 @@ namespace Map {
 
                                     switch (sVar7) {
                                     case 0:
-                                        piVar1 = &DAT_GameState::instance.playerDataArray[_buildingID].totalTroopsType0;
-                                        *piVar1 = *piVar1 + 1;
+                                        DAT_GameState::instance.playerDataArray[_buildingID].totalTroopsType0
+                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalTroopsType0 + 1;
                                         break;
                                     case 1:
                                     case 4:
-                                        piVar1 = &DAT_GameState::instance.playerDataArray[_buildingID]
-                                                      .totalDefensiveTroopsUnk;
-                                        *piVar1 = *piVar1 + 1;
+                                        DAT_GameState::instance.playerDataArray[_buildingID].totalDefensiveTroopsUnk
+                                            = DAT_GameState::instance.playerDataArray[_buildingID]
+                                                  .totalDefensiveTroopsUnk
+                                            + 1;
                                         break;
                                     case 2:
-                                        piVar1 = &DAT_GameState::instance.playerDataArray[_buildingID]
-                                                      .totalRaidingTroopsUnk;
-                                        *piVar1 = *piVar1 + 1;
+                                        DAT_GameState::instance.playerDataArray[_buildingID].totalRaidingTroopsUnk
+                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalRaidingTroopsUnk
+                                            + 1;
                                         break;
                                     default:
                                         break;
                                     case 6:
-                                        piVar1 = &DAT_GameState::instance.playerDataArray[_buildingID].totalTroopsType6;
-                                        *piVar1 = *piVar1 + 1;
+                                        DAT_GameState::instance.playerDataArray[_buildingID].totalTroopsType6
+                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalTroopsType6 + 1;
                                         break;
                                     case 7:
-                                        piVar1 = &DAT_GameState::instance.playerDataArray[_buildingID].totalTroopsType7;
-                                        *piVar1 = *piVar1 + 1;
+                                        DAT_GameState::instance.playerDataArray[_buildingID].totalTroopsType7
+                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalTroopsType7 + 1;
                                         break;
                                     case 0xb:
-                                        piVar1 = &DAT_GameState::instance.playerDataArray[_buildingID]
-                                                      .totalDiggingUnitTroops;
-                                        *piVar1 = *piVar1 + 1;
-                                        piVar1
-                                            = &DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops;
-                                        *piVar1 = *piVar1 + 1;
+                                        DAT_GameState::instance.playerDataArray[_buildingID].totalDiggingUnitTroops
+                                            = DAT_GameState::instance.playerDataArray[_buildingID]
+                                                  .totalDiggingUnitTroops
+                                            + 1;
+                                        DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
+                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
+                                            + 1;
                                         break;
                                     case 0xc:
-                                        piVar1
-                                            = &DAT_GameState::instance.playerDataArray[_buildingID].totalAssassinTroops;
-                                        *piVar1 = *piVar1 + 1;
-                                        piVar1
-                                            = &DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops;
-                                        *piVar1 = *piVar1 + 1;
+                                        DAT_GameState::instance.playerDataArray[_buildingID].totalAssassinTroops
+                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalAssassinTroops
+                                            + 1;
+                                        DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
+                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
+                                            + 1;
                                         break;
                                     case 0xd:
-                                        piVar1 = &DAT_GameState::instance.playerDataArray[_buildingID].totalUnit2Troops;
-                                        *piVar1 = *piVar1 + 1;
-                                        piVar1
-                                            = &DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops;
-                                        *piVar1 = *piVar1 + 1;
+                                        DAT_GameState::instance.playerDataArray[_buildingID].totalUnit2Troops
+                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalUnit2Troops + 1;
+                                        DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
+                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
+                                            + 1;
                                         break;
                                     case 0xe:
-                                        piVar1 = &DAT_GameState::instance.playerDataArray[_buildingID]
-                                                      .totalLaddermenTroops;
-                                        *piVar1 = *piVar1 + 1;
-                                        piVar1
-                                            = &DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops;
-                                        *piVar1 = *piVar1 + 1;
+                                        DAT_GameState::instance.playerDataArray[_buildingID].totalLaddermenTroops
+                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalLaddermenTroops
+                                            + 1;
+                                        DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
+                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
+                                            + 1;
                                         break;
                                     case 0xf:
-                                        piVar1
-                                            = &DAT_GameState::instance.playerDataArray[_buildingID].totalTunnelerTroops;
-                                        *piVar1 = *piVar1 + 1;
-                                        piVar1
-                                            = &DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops;
-                                        *piVar1 = *piVar1 + 1;
+                                        DAT_GameState::instance.playerDataArray[_buildingID].totalTunnelerTroops
+                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalTunnelerTroops
+                                            + 1;
+                                        DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
+                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
+                                            + 1;
                                         break;
                                     case 0x10:
-                                        piVar1 = &DAT_GameState::instance.playerDataArray[_buildingID]
-                                                      .totalUnitPatrolTroops;
-                                        *piVar1 = *piVar1 + 1;
-                                        piVar1
-                                            = &DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops;
-                                        *piVar1 = *piVar1 + 1;
+                                        DAT_GameState::instance.playerDataArray[_buildingID].totalUnitPatrolTroops
+                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalUnitPatrolTroops
+                                            + 1;
+                                        DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
+                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
+                                            + 1;
                                         break;
                                     case 0x11:
-                                        piVar1 = &DAT_GameState::instance.playerDataArray[_buildingID]
-                                                      .totalUnitBackupTroops;
-                                        *piVar1 = *piVar1 + 1;
-                                        piVar1
-                                            = &DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops;
-                                        *piVar1 = *piVar1 + 1;
+                                        DAT_GameState::instance.playerDataArray[_buildingID].totalUnitBackupTroops
+                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalUnitBackupTroops
+                                            + 1;
+                                        DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
+                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
+                                            + 1;
                                         break;
                                     case 0x12:
-                                        piVar1 = &DAT_GameState::instance.playerDataArray[_buildingID]
-                                                      .totalUnitEngageTroops;
-                                        *piVar1 = *piVar1 + 1;
-                                        piVar1
-                                            = &DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops;
-                                        *piVar1 = *piVar1 + 1;
+                                        DAT_GameState::instance.playerDataArray[_buildingID].totalUnitEngageTroops
+                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalUnitEngageTroops
+                                            + 1;
+                                        DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
+                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
+                                            + 1;
                                         break;
                                     case 0x13:
-                                        piVar1 = &DAT_GameState::instance.playerDataArray[_buildingID]
-                                                      .totalUnitSiegeDefTroops;
-                                        *piVar1 = *piVar1 + 1;
-                                        piVar1
-                                            = &DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops;
-                                        *piVar1 = *piVar1 + 1;
+                                        DAT_GameState::instance.playerDataArray[_buildingID].totalUnitSiegeDefTroops
+                                            = DAT_GameState::instance.playerDataArray[_buildingID]
+                                                  .totalUnitSiegeDefTroops
+                                            + 1;
+                                        DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
+                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
+                                            + 1;
                                         break;
                                     case 0x14:
-                                        piVar1 = &DAT_GameState::instance.playerDataArray[_buildingID]
-                                                      .totalMaxDefaultTroops;
-                                        *piVar1 = *piVar1 + 1;
-                                        piVar1
-                                            = &DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops;
-                                        *piVar1 = *piVar1 + 1;
+                                        DAT_GameState::instance.playerDataArray[_buildingID].totalMaxDefaultTroops
+                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalMaxDefaultTroops
+                                            + 1;
+                                        DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
+                                            = DAT_GameState::instance.playerDataArray[_buildingID].totalAttackTroops
+                                            + 1;
                                         break;
                                     case 0x15:
-                                        piVar1 = &DAT_GameState::instance.playerDataArray[_buildingID]
-                                                      .harassingSiegeEnginesCountUnk;
-                                        *piVar1 = *piVar1 + 1;
+                                        DAT_GameState::instance.playerDataArray[_buildingID]
+                                            .harassingSiegeEnginesCountUnk
+                                            = DAT_GameState::instance.playerDataArray[_buildingID]
+                                                  .harassingSiegeEnginesCountUnk
+                                            + 1;
                                     }
                                 }
                             }
@@ -480,8 +483,8 @@ namespace Map {
                         if (DAT_TileMapState::instance.refreshRelatedOne != 0) {
                             bVar13 = this->units[DAT_CurrentUnitSlotID::instance].heightDiv10;
                             if (bVar13 != 0) {
-                                undefined1* puVar2 = &this->units[DAT_CurrentUnitSlotID::instance].padding_0x83[0];
-                                *puVar2 = *puVar2
+                                this->units[DAT_CurrentUnitSlotID::instance].padding_0x83[0]
+                                    = this->units[DAT_CurrentUnitSlotID::instance].padding_0x83[0]
                                     - *(char*)((int)DAT_UnitPropertiesDefinedData::ptr
                                         + (DAT_UpdateUnitsTracker::instance - (uint)bVar13) * 4 + 0x11a24);
                                 if (100 < (byte)this->units[DAT_CurrentUnitSlotID::instance].padding_0x83[0]) {
@@ -536,8 +539,8 @@ namespace Map {
                                 + this->units[DAT_CurrentUnitSlotID::instance].animationLeapTicksTotal
                             < _animationTicker) {
                             this->units[DAT_CurrentUnitSlotID::instance].animationLeapTicksTotal = _animationTicker;
-                            piVar1 = &this->units[DAT_CurrentUnitSlotID::instance].animationCycleNumber;
-                            *piVar1 = *piVar1 + 1;
+                            this->units[DAT_CurrentUnitSlotID::instance].animationCycleNumber
+                                = this->units[DAT_CurrentUnitSlotID::instance].animationCycleNumber + 1;
                             this->units[DAT_CurrentUnitSlotID::instance].animationCycleNumberHasJustIncremented = TRUE;
                             uVar9 = DAT_CurrentUnitSlotID::instance;
                             if (999 < this->units[DAT_CurrentUnitSlotID::instance].animationCycleNumber) {
@@ -566,12 +569,12 @@ namespace Map {
                         }
                         uVar9 = DAT_CurrentUnitSlotID::instance;
                         _buildingID = this->units[DAT_CurrentUnitSlotID::instance].owner;
-                        piVar1 = &DAT_GameState::instance.playerDataArray[_buildingID].countEntities;
-                        *piVar1 = *piVar1 + 1;
+                        DAT_GameState::instance.playerDataArray[_buildingID].countEntities
+                            = DAT_GameState::instance.playerDataArray[_buildingID].countEntities + 1;
                         if (DAT_UnitPropertiesDefinedData::instance.COMPUTER_MANAGED[(short)this->units[uVar9].unitType]
                             != 0) {
-                            piVar1 = &DAT_GameState::instance.playerDataArray[_buildingID].currentPopulation_2;
-                            *piVar1 = *piVar1 + 1;
+                            DAT_GameState::instance.playerDataArray[_buildingID].currentPopulation_2
+                                = DAT_GameState::instance.playerDataArray[_buildingID].currentPopulation_2 + 1;
                         }
                         DAT_UnitHasBecomeIdle::instance = 0;
                         if (this->units[uVar9].dying != 0
@@ -654,8 +657,8 @@ namespace Map {
                                 || (UVar8 == OpenSHC::Map::Units::States::US_DIG))
                             && (_troopValue = this->units[DAT_CurrentUnitSlotID::instance].digTileTarget,
                                 DAT_TileMapState::instance.moats[_troopValue].owner != '\0')) {
-                            char* pcVar3 = &DAT_TileMapState::instance.moats[_troopValue].someCountDown;
-                            *pcVar3 = *pcVar3 + -0x14;
+                            DAT_TileMapState::instance.moats[_troopValue].someCountDown
+                                = DAT_TileMapState::instance.moats[_troopValue].someCountDown + -0x14;
                         }
                         this->units[uVar9].field41_0x5c = 0;
                         if (this->units[DAT_CurrentUnitSlotID::instance].usingTeleport == 0) {
@@ -687,34 +690,34 @@ namespace Map {
                                         && this->units[DAT_CurrentUnitSlotID::instance].fadeType == 0) {
                                         this->units[DAT_CurrentUnitSlotID::instance].disappearFadeAlphaCountdown = 0;
                                     }
-                                    psVar4 = &this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e;
-                                    *psVar4 = *psVar4 + 1;
+                                    this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e
+                                        = this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e + 1;
                                     if (0xf < this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e) {
                                         this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e = 0;
                                     }
-                                    psVar4 = &this->units[DAT_CurrentUnitSlotID::instance].field217_0x37c;
-                                    *psVar4 = *psVar4 + 2;
+                                    this->units[DAT_CurrentUnitSlotID::instance].field217_0x37c
+                                        = this->units[DAT_CurrentUnitSlotID::instance].field217_0x37c + 2;
                                     if (0xd < this->units[DAT_CurrentUnitSlotID::instance].field217_0x37c) {
                                         this->units[DAT_CurrentUnitSlotID::instance].field217_0x37c = 0;
                                     }
-                                    psVar4 = &this->units[DAT_CurrentUnitSlotID::instance].field215_0x378;
-                                    *psVar4 = *psVar4 + 2;
+                                    this->units[DAT_CurrentUnitSlotID::instance].field215_0x378
+                                        = this->units[DAT_CurrentUnitSlotID::instance].field215_0x378 + 2;
                                     if (0xf < this->units[DAT_CurrentUnitSlotID::instance].field215_0x378) {
                                         this->units[DAT_CurrentUnitSlotID::instance].field215_0x378 = 0;
                                     }
-                                    psVar4 = &this->units[DAT_CurrentUnitSlotID::instance].field254_0x3c6;
-                                    *psVar4 = *psVar4 + 1;
+                                    this->units[DAT_CurrentUnitSlotID::instance].field254_0x3c6
+                                        = this->units[DAT_CurrentUnitSlotID::instance].field254_0x3c6 + 1;
                                     if (0x11 < this->units[DAT_CurrentUnitSlotID::instance].field254_0x3c6) {
                                         this->units[DAT_CurrentUnitSlotID::instance].field254_0x3c6 = 0;
                                     }
-                                    psVar4 = &this->units[DAT_CurrentUnitSlotID::instance].field312_0x428;
-                                    *psVar4 = *psVar4 + 1;
+                                    this->units[DAT_CurrentUnitSlotID::instance].field312_0x428
+                                        = this->units[DAT_CurrentUnitSlotID::instance].field312_0x428 + 1;
                                     if (0x17 < this->units[DAT_CurrentUnitSlotID::instance].field312_0x428) {
                                         this->units[DAT_CurrentUnitSlotID::instance].field312_0x428 = 0;
                                     }
                                 }
-                                psVar4 = &this->units[DAT_CurrentUnitSlotID::instance].field216_0x37a;
-                                *psVar4 = *psVar4 + 1;
+                                this->units[DAT_CurrentUnitSlotID::instance].field216_0x37a
+                                    = this->units[DAT_CurrentUnitSlotID::instance].field216_0x37a + 1;
                                 if (0xb < this->units[DAT_CurrentUnitSlotID::instance].field216_0x37a) {
                                     this->units[DAT_CurrentUnitSlotID::instance].field216_0x37a = 0;
                                 }
@@ -737,8 +740,9 @@ namespace Map {
                                 = (int)this->units[DAT_CurrentUnitSlotID::instance]
                                       .facingDirectionMapOrientationCorrected
                                 + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
-                            piVar1 = &this->units[DAT_CurrentUnitSlotID::instance].gfxNumber;
-                            *piVar1 = *piVar1 + this->units[DAT_CurrentUnitSlotID::instance].field215_0x378 * 8;
+                            this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                                = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                                + this->units[DAT_CurrentUnitSlotID::instance].field215_0x378 * 8;
                             if (this->units[DAT_CurrentUnitSlotID::instance].unitType
                                     == OpenSHC::Map::Units::UT_A_HARCHER
                                 && (_buildingID
@@ -754,32 +758,36 @@ namespace Map {
                                 = (int)this->units[DAT_CurrentUnitSlotID::instance]
                                       .facingDirectionMapOrientationCorrected
                                 + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
-                            piVar1 = &this->units[DAT_CurrentUnitSlotID::instance].gfxNumber;
-                            *piVar1 = *piVar1 + (this->units[DAT_CurrentUnitSlotID::instance].field215_0x378 * 8) / 2;
+                            this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                                = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                                + (this->units[DAT_CurrentUnitSlotID::instance].field215_0x378 * 8) / 2;
                             break;
                         case 0xc:
                             this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
                                 = (int)this->units[DAT_CurrentUnitSlotID::instance]
                                       .facingDirectionMapOrientationCorrected
                                 + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
-                            piVar1 = &this->units[DAT_CurrentUnitSlotID::instance].gfxNumber;
-                            *piVar1 = *piVar1 + this->units[DAT_CurrentUnitSlotID::instance].field216_0x37a * 8;
+                            this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                                = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                                + this->units[DAT_CurrentUnitSlotID::instance].field216_0x37a * 8;
                             break;
                         case 0xe:
                             this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
                                 = (int)this->units[DAT_CurrentUnitSlotID::instance]
                                       .facingDirectionMapOrientationCorrected
                                 + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
-                            piVar1 = &this->units[DAT_CurrentUnitSlotID::instance].gfxNumber;
-                            *piVar1 = *piVar1 + this->units[DAT_CurrentUnitSlotID::instance].field217_0x37c * 8;
+                            this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                                = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                                + this->units[DAT_CurrentUnitSlotID::instance].field217_0x37c * 8;
                             break;
                         case 0x10:
                             this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
                                 = (int)this->units[DAT_CurrentUnitSlotID::instance]
                                       .facingDirectionMapOrientationCorrected
                                 + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
-                            piVar1 = &this->units[DAT_CurrentUnitSlotID::instance].gfxNumber;
-                            *piVar1 = *piVar1 + this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e * 8;
+                            this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                                = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                                + this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e * 8;
                             if (this->units[DAT_CurrentUnitSlotID::instance].unitType
                                 == OpenSHC::Map::Units::UT_A_HARCHER) {
                                 this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
@@ -798,12 +806,12 @@ namespace Map {
                                         && this->units[DAT_CurrentUnitSlotID::instance].totalSizeOfPathPlan + -0x10
                                             <= (int)this->units[DAT_CurrentUnitSlotID::instance]
                                                 .currentIndexInPathPlan) {
-                                        piVar1 = &this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk;
-                                        *piVar1 = *piVar1 + 0x80;
+                                        this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
+                                            = this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk + 0x80;
                                     }
                                 } else {
-                                    piVar1 = &this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk;
-                                    *piVar1 = *piVar1 + 0x270;
+                                    this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
+                                        = this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk + 0x270;
                                 }
                             }
                             break;
@@ -812,16 +820,18 @@ namespace Map {
                                 = this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected
                                     * 0x10
                                 + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
-                            piVar1 = &this->units[DAT_CurrentUnitSlotID::instance].gfxNumber;
-                            *piVar1 = *piVar1 + (int)this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e;
+                            this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                                = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                                + (int)this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e;
                             break;
                         case 0x12:
                             this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
                                 = (int)this->units[DAT_CurrentUnitSlotID::instance]
                                       .facingDirectionMapOrientationCorrected
                                 + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
-                            piVar1 = &this->units[DAT_CurrentUnitSlotID::instance].gfxNumber;
-                            *piVar1 = *piVar1 + this->units[DAT_CurrentUnitSlotID::instance].field254_0x3c6 * 8;
+                            this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                                = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                                + this->units[DAT_CurrentUnitSlotID::instance].field254_0x3c6 * 8;
                             break;
                         case 0x13:
                         case 0x14:
@@ -829,23 +839,25 @@ namespace Map {
                                 = (int)this->units[DAT_CurrentUnitSlotID::instance]
                                       .facingDirectionMapOrientationCorrected
                                 + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
-                            piVar1 = &this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk;
-                            *piVar1
-                                = *piVar1 + ((int)this->units[DAT_CurrentUnitSlotID::instance].field215_0x378 / 2) * 8;
+                            this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
+                                = this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
+                                + ((int)this->units[DAT_CurrentUnitSlotID::instance].field215_0x378 / 2) * 8;
                             break;
                         case 0x15:
                             this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
                                 = (int)this->units[DAT_CurrentUnitSlotID::instance]
                                       .facingDirectionMapOrientationCorrected
                                 + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
-                            piVar1 = &this->units[DAT_CurrentUnitSlotID::instance].gfxNumber;
-                            *piVar1 = *piVar1 + this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e * 8;
+                            this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                                = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                                + this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e * 8;
                             _troopValue
                                 = this->units[DAT_CurrentUnitSlotID::instance].facingDirectionMapOrientationCorrected
                                 + 0x80 + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
                             this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk = _troopValue;
-                            piVar1 = &this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk;
-                            *piVar1 = *piVar1 + this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e * 8;
+                            this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
+                                = this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
+                                + this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e * 8;
                             break;
                         case 0x16:
                             uVar9 = ((int)this->units[DAT_CurrentUnitSlotID::instance]
@@ -853,34 +865,36 @@ namespace Map {
                                         + 4)
                                 % 8;
                             this->units[DAT_CurrentUnitSlotID::instance].gfxNumber = uVar9 + 0x151;
-                            piVar1 = &this->units[DAT_CurrentUnitSlotID::instance].gfxNumber;
-                            *piVar1
-                                = *piVar1 + ((byte)this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e & 3) * 8;
+                            this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                                = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                                + ((byte)this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e & 3) * 8;
                             uVar9 = ((int)this->units[DAT_CurrentUnitSlotID::instance]
                                             .facingDirectionMapOrientationCorrected
                                         + 4)
                                 % 8;
                             _troopValue = uVar9 + 0x1d1;
                             this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk = _troopValue;
-                            piVar1 = &this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk;
-                            *piVar1 = *piVar1 + this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e * 8;
+                            this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
+                                = this->units[DAT_CurrentUnitSlotID::instance].imageIDUnk
+                                + this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e * 8;
                             break;
                         case 0x18:
                             this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
                                 = (int)this->units[DAT_CurrentUnitSlotID::instance]
                                       .facingDirectionMapOrientationCorrected
                                 + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
-                            piVar1 = &this->units[DAT_CurrentUnitSlotID::instance].gfxNumber;
-                            *piVar1 = *piVar1 + this->units[DAT_CurrentUnitSlotID::instance].field312_0x428 * 8;
+                            this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                                = this->units[DAT_CurrentUnitSlotID::instance].gfxNumber
+                                + this->units[DAT_CurrentUnitSlotID::instance].field312_0x428 * 8;
                             break;
                         case 99:
                             this->units[DAT_CurrentUnitSlotID::instance].imageID2
                                 = (int)this->units[DAT_CurrentUnitSlotID::instance]
                                       .facingDirectionMapOrientationCorrected
                                 + this->units[DAT_CurrentUnitSlotID::instance].animationSheetFrameOffset;
-                            piVar1 = &this->units[DAT_CurrentUnitSlotID::instance].imageID2;
-                            *piVar1
-                                = *piVar1 + ((int)this->units[DAT_CurrentUnitSlotID::instance].field215_0x378 / 2) * 8;
+                            this->units[DAT_CurrentUnitSlotID::instance].imageID2
+                                = this->units[DAT_CurrentUnitSlotID::instance].imageID2
+                                + ((int)this->units[DAT_CurrentUnitSlotID::instance].field215_0x378 / 2) * 8;
                         }
                         psVar4 = &this->units[DAT_CurrentUnitSlotID::instance].unitSpeedMatchingRelatedUnk;
                         if (this->units[DAT_CurrentUnitSlotID::instance].unitSpeedMatchingRelatedUnk != 0) {
@@ -908,8 +922,8 @@ namespace Map {
                                 }
                                 this->units[DAT_CurrentUnitSlotID::instance].disappearFadeAlphaCountdown = bVar13;
                             }
-                            byte* pbVar11 = &this->units[DAT_CurrentUnitSlotID::instance].fadeCounter;
-                            *pbVar11 = *pbVar11 + 1;
+                            this->units[DAT_CurrentUnitSlotID::instance].fadeCounter
+                                = this->units[DAT_CurrentUnitSlotID::instance].fadeCounter + 1;
                             if ((char)this->units[DAT_CurrentUnitSlotID::instance].disappearFadeAlphaCountdown
                                 < '\x01') {
                                 this->units[DAT_CurrentUnitSlotID::instance].fadeType = 0;
