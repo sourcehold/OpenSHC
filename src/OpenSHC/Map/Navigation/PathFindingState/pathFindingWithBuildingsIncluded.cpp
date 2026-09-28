@@ -68,7 +68,6 @@ namespace Map {
             uint x, uint y, uint x2, uint y2, int maxOptionsToTry, int zeroMeansResetAlgorithm)
         {
             uint uVar1;
-            int _direction;
             int* piVar2;
             int _nextTileOption;
             uint uVar3;
@@ -78,10 +77,10 @@ namespace Map {
             short _currentX;
             short _currentY;
             uint _logical;
-            if (((399 < x) || (399 < y)) || (*(char*)(y * 400 + 0x21aec98 + x) == '\0')) {
+            if (399 < x || 399 < y || *(char*)(y * 400 + 0x21aec98 + x) == '\0') {
                 return FALSE;
             }
-            if ((x2 == 0xffffffff) || (((x2 < 400 && (y2 < 400)) && (*(char*)(y2 * 400 + 0x21aec98 + x2) != '\0')))) {
+            if (x2 == 0xffffffff || ((x2 < 400 && (y2 < 400)) && (*(char*)(y2 * 400 + 0x21aec98 + x2) != '\0'))) {
                 if (zeroMeansResetAlgorithm == 0) {
                     this->searchGeneration = this->searchGeneration + 1;
                     if (32000 < this->searchGeneration) {
@@ -124,22 +123,22 @@ namespace Map {
                         }
                         _buildingID = DAT_TileMapState::instance.BuildingLayer[_currentTile];
                         _logical = DAT_TileMapState::instance.LogicLayer[_currentTile];
-                        _direction = 0;
+                        int _direction = 0;
                         piVar2 = DAT_TileMapState::instance.directionTranslationMatrix[_currentY] + 1;
                         do {
                             _nextTileOption = (*(int (*)[8])(piVar2 + -1))[0] + _currentTile;
                             /*
                               0x4a5014b1 == check against walkable tiles including keep, walls, and   gatehouses
                              */
-                            if ((DAT_TileMapState::instance.WalkLayer[_nextTileOption] != this->searchGeneration)
-                                && (((DAT_TileMapState::instance.PathLinkageLayer[_currentTile]
-                                         & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction])
+                            if (DAT_TileMapState::instance.WalkLayer[_nextTileOption] != this->searchGeneration
+                                && ((DAT_TileMapState::instance.PathLinkageLayer[_currentTile]
+                                        & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction])
                                         != 0
                                     || (((((uVar1 = DAT_TileMapState::instance.LogicLayer[_nextTileOption],
                                                (uVar1 & 0x4a5014b1) == 0 && (_buildingID == 0))
                                               && (DAT_TileMapState::instance.BuildingLayer[_nextTileOption] == 0))
                                              && ((uVar3 = _logical & 0x100, uVar3 == 0 || ((uVar1 & 0x100) == 0))))
-                                        && ((uVar3 != 0 || ((uVar1 & 0x100) != 0)))))))) {
+                                        && ((uVar3 != 0 || ((uVar1 & 0x100) != 0))))))) {
                                 DAT_TileMapState::instance.CertainPathLayer[_nextTileOption]
                                     = (short)this->searchQueue.currentDistance + 1;
                                 DAT_TileMapState::instance.WalkLayer[_nextTileOption] = (short)this->searchGeneration;
@@ -158,11 +157,11 @@ namespace Map {
                                 }
                             }
                             _nextTileOption = *piVar2 + _currentTile;
-                            if ((DAT_TileMapState::instance.WalkLayer[_nextTileOption] != this->searchGeneration)
-                                && ((DAT_TileMapState::instance.PathLinkageLayer[_currentTile]
-                                        & DAT_ClimbLogicDefinedData::instance
-                                            .BitFlagHelperForPathLinkage[_direction + 1])
-                                    != 0)) {
+                            if (DAT_TileMapState::instance.WalkLayer[_nextTileOption] != this->searchGeneration
+                                && (DAT_TileMapState::instance.PathLinkageLayer[_currentTile]
+                                       & DAT_ClimbLogicDefinedData::instance
+                                           .BitFlagHelperForPathLinkage[_direction + 1])
+                                    != 0) {
                                 DAT_TileMapState::instance.CertainPathLayer[_nextTileOption]
                                     = (short)this->searchQueue.currentDistance + 1;
                                 DAT_TileMapState::instance.WalkLayer[_nextTileOption] = (short)this->searchGeneration;
@@ -182,16 +181,16 @@ namespace Map {
                                 }
                             }
                             _nextTileOption = piVar2[1] + _currentTile;
-                            if ((DAT_TileMapState::instance.WalkLayer[_nextTileOption] != this->searchGeneration)
-                                && (((DAT_TileMapState::instance.PathLinkageLayer[_currentTile]
-                                         & DAT_ClimbLogicDefinedData::instance
-                                             .BitFlagHelperForPathLinkage[_direction + 2])
+                            if (DAT_TileMapState::instance.WalkLayer[_nextTileOption] != this->searchGeneration
+                                && ((DAT_TileMapState::instance.PathLinkageLayer[_currentTile]
+                                        & DAT_ClimbLogicDefinedData::instance
+                                            .BitFlagHelperForPathLinkage[_direction + 2])
                                         != 0
                                     || ((((uVar1 = DAT_TileMapState::instance.LogicLayer[_nextTileOption],
                                               (uVar1 & 0x4a5014b1) == 0 && (_buildingID == 0))
                                              && (DAT_TileMapState::instance.BuildingLayer[_nextTileOption] == 0))
                                         && (((uVar3 = _logical & 0x100, uVar3 == 0 || ((uVar1 & 0x100) == 0))
-                                            && ((uVar3 != 0 || ((uVar1 & 0x100) != 0)))))))))) {
+                                            && ((uVar3 != 0 || ((uVar1 & 0x100) != 0))))))))) {
                                 DAT_TileMapState::instance.CertainPathLayer[_nextTileOption]
                                     = (short)this->searchQueue.currentDistance + 1;
                                 DAT_TileMapState::instance.WalkLayer[_nextTileOption] = (short)this->searchGeneration;
@@ -211,11 +210,11 @@ namespace Map {
                                 }
                             }
                             _nextTileOption = piVar2[2] + _currentTile;
-                            if ((DAT_TileMapState::instance.WalkLayer[_nextTileOption] != this->searchGeneration)
-                                && ((DAT_TileMapState::instance.PathLinkageLayer[_currentTile]
-                                        & DAT_ClimbLogicDefinedData::instance
-                                            .BitFlagHelperForPathLinkage[_direction + 3])
-                                    != 0)) {
+                            if (DAT_TileMapState::instance.WalkLayer[_nextTileOption] != this->searchGeneration
+                                && (DAT_TileMapState::instance.PathLinkageLayer[_currentTile]
+                                       & DAT_ClimbLogicDefinedData::instance
+                                           .BitFlagHelperForPathLinkage[_direction + 3])
+                                    != 0) {
                                 DAT_TileMapState::instance.CertainPathLayer[_nextTileOption]
                                     = (short)this->searchQueue.currentDistance + 1;
                                 DAT_TileMapState::instance.WalkLayer[_nextTileOption] = (short)this->searchGeneration;
