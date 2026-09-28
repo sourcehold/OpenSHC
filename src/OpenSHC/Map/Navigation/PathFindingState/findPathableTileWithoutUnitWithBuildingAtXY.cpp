@@ -88,7 +88,7 @@ namespace Map {
                             if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration
                                 && (DAT_TileMapState::instance.LogicLayer[_candidate] & 0xb1U) == 0
                                 && (DAT_TileMapState::instance.LogicLayer[_candidate] & 0x1000U) == 0
-                                && DAT_TileMapState::instance.PathConnectionLayer[_candidate] != 0) {
+                                && (short)DAT_TileMapState::instance.PathConnectionLayer[_candidate] != 0) {
                                 /*
                                   queue pathable tiles that aren't see nor tree
                                  */
