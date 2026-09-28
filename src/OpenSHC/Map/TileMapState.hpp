@@ -59,7 +59,7 @@ namespace Map {
         uchar BuildingWasLayer[80400]; // 0x00229DD0 length: 80400
         ushort UnitLayer[80400]; // 0x0023D7E0 length: 160800
         short EntityLayer[80400]; // 0x00264C00 length: 160800
-        char EntityLayerLT25[80400]; // 0x0028C020 length: 80400
+        byte EntityLayerLT25[80400]; // 0x0028C020 length: 80400
         byte HeightLayer[80400]; // 0x0029FA30 length: 80400
         byte DefaultHeightLayer[80400]; // 0x002B3440 length: 80400
         byte WallOwnerLayer[80400]; // 0x002C6E50 length: 80400
