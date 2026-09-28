@@ -28,11 +28,10 @@ namespace Map {
             do {
                 _tile = *_pResultTile;
                 _d = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
-                if (((0 < _d)
-                        && ((_d - DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]])
-                                % param_1
-                            == 0))
-                    && (_d < _closest)) {
+                if (0 < _d
+                    && (_d - DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]]) % param_1
+                        == 0
+                    && _d < _closest) {
                     _match = DAT_TribesState::instance.ALG_ResultTileIndex;
                     _closest = _d;
                 }
