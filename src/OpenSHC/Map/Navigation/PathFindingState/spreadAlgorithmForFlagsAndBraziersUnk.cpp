@@ -5,6 +5,7 @@
 #include "OpenSHC/Map/Entities/EntityState.func.hpp"
 #include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_EntityState.hpp"
@@ -15,7 +16,6 @@
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -23,7 +23,7 @@ namespace Map {
 
         using OpenSHC::Commands::MappersEnum;
         using OpenSHC::Game::GameMode2;
-            using OpenSHC::Map::Location::Point8ShortXY;
+        using OpenSHC::Map::Location::Point8ShortXY;
 
         /*
           WARNING: Enum "MappersEnum": Some values do not have unique names
@@ -53,7 +53,7 @@ namespace Map {
             int local_8;
             int local_4;
             uVar3 = y;
-            if (((399 < x) || (399 < y)) || (*(char*)(y * 400 + 0x21aec98 + x) == '\0')) {
+            if (399 < x || 399 < y || *(char*)(y * 400 + 0x21aec98 + x) == '\0') {
                 return (undefined4)(0);
             }
             this->calculations = this->calculations + 1;
@@ -129,8 +129,8 @@ namespace Map {
                     paiVar7 = DAT_TileMapState::instance.directionTranslationMatrix + sVar2;
                     do {
                         iVar5 = (*paiVar7)[0] + tile;
-                        if ((DAT_TileMapState::instance.WalkLayer[iVar5] != this->searchGeneration)
-                            && ((DAT_TileMapState::instance.LogicLayer[iVar5] & 0x30) == 0)) {
+                        if (DAT_TileMapState::instance.WalkLayer[iVar5] != this->searchGeneration
+                            && (DAT_TileMapState::instance.LogicLayer[iVar5] & 0x30) == 0) {
                             DAT_TileMapState::instance.CertainPathLayer[iVar5]
                                 = (short)this->searchQueue.currentDistance + 1;
                             DAT_TileMapState::instance.WalkLayer[iVar5] = (short)this->searchGeneration;
