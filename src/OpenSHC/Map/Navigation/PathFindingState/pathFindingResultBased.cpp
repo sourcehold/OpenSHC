@@ -17,9 +17,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00497080
         dword PathFindingState::pathFindingResultBased(int param_1, int x, int y, int extraDistance)
         {
-            dword dVar1;
-            uint _someX;
-            uint _someY;
             int* _tilesPointer;
             uint _isNegativeNumberX;
             uint _isNegativeNumberY;
@@ -31,25 +28,25 @@ namespace Map {
             do {
                 _tile = *_tilesPointer;
                 _distance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
-                if (((DAT_TileMapState::instance.LogicLayer[_tile] & 0x10000100U) != 0) && (0 < _distance)) {
+                if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x10000100U) != 0 && 0 < _distance) {
                     if (extraDistance + 0xc < _distance) {
                         return (dword)(0);
                     }
-                    _someX = (_tile
-                                 - DAT_ViewportRenderState::instance
-                                     .translationMatrix[DAT_ViewportRenderState::instance
-                                             .tileTranslationMatrix_YComponent[_tile]]
-                                     .addXgetTile)
+                    uint _someX = (_tile
+                                      - DAT_ViewportRenderState::instance
+                                          .translationMatrix[DAT_ViewportRenderState::instance
+                                                  .tileTranslationMatrix_YComponent[_tile]]
+                                          .addXgetTile)
                         - x;
                     _isNegativeNumberX = (int)_someX >> 0x1f;
-                    _someY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile] - y;
+                    uint _someY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile] - y;
                     _isNegativeNumberY = (int)_someY >> 0x1f;
-                    if (((int)(((_someY ^ _isNegativeNumberY) - _isNegativeNumberY)
-                             + ((_someX ^ _isNegativeNumberX) - _isNegativeNumberX))
+                    if ((int)(((_someY ^ _isNegativeNumberY) - _isNegativeNumberY)
+                            + ((_someX ^ _isNegativeNumberX) - _isNegativeNumberX))
                                 % param_1
-                            == 0)
-                        && (_distance < 4000)) {
-                        dVar1 = this->searchQueue.tilesQueue[_index];
+                            == 0
+                        && _distance < 4000) {
+                        dword dVar1 = this->searchQueue.tilesQueue[_index];
                         DAT_TribesState::instance.ALG_ResultY = (int)this->searchQueue.yQueue[_index];
                         DAT_TribesState::instance.ALG_ResultTileIndex = _index;
                         DAT_TribesState::instance.ALG_ResultX = dVar1
