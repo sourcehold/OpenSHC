@@ -20,7 +20,7 @@ namespace Map {
             this->wallPlacementInfoArray[this->index].height = DAT_TileMapState::instance.HeightLayer[tile];
             this->wallPlacementInfoArray[this->index].logic = DAT_TileMapState::instance.LogicLayer[tile] & 0x470b00;
             this->wallPlacementInfoArray[this->index].damage = DAT_TileMapState::instance.DamageLayer[tile];
-            this->index = this->index + 1;
+            this->index += 1;
         }
     }
 

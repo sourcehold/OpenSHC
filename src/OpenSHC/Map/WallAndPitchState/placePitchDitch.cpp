@@ -21,8 +21,8 @@ namespace Map {
             }
             if (this->index < 100) {
                 this->wallPlacementInfoArray[this->index].tile_OR_pitchID = pitchID;
-                this->index = this->index + 1;
-                this->counter = this->counter + 1;
+                this->index += 1;
+                this->counter += 1;
                 this->countdown = 400;
             }
         }

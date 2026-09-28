@@ -31,9 +31,8 @@ namespace Map {
             int _y = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile];
             DAT_TileMapState::instance.DamageLayer[_tile] = this->receivedWallPlacementInfoArray[i].damage;
             DAT_TileMapState::instance.HeightLayer[_tile] = this->receivedWallPlacementInfoArray[i].height;
-            DAT_TileMapState::instance.LogicLayer[_tile] = DAT_TileMapState::instance.LogicLayer[_tile] & 0xffb8f4ff;
-            DAT_TileMapState::instance.LogicLayer[_tile]
-                = this->receivedWallPlacementInfoArray[i].logic | DAT_TileMapState::instance.LogicLayer[_tile];
+            DAT_TileMapState::instance.LogicLayer[_tile] &= 0xffb8f4ff;
+            DAT_TileMapState::instance.LogicLayer[_tile] |= this->receivedWallPlacementInfoArray[i].logic;
             int _tileDelta = _tile - DAT_ViewportRenderState::instance.translationMatrix[_y].addXgetTile;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
                 DAT_PathFindingState::ptr)(_y, _tile);

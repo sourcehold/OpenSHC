@@ -18,7 +18,7 @@ namespace Map {
     void WallAndPitchState::confirmAndQueueDestructionCommand()
     {
         if (this->countdown != 0) {
-            this->countdown = this->countdown + 1;
+            this->countdown += 1;
             MACRO_CALL_MEMBER(OpenSHC::Map::WallAndPitchState_Func::updateDestructionConfirmationCountdown, this)();
             if (this->countdown != 0) {
                 switch (this->state) {

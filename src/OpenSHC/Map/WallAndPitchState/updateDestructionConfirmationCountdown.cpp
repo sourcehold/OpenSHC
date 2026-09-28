@@ -28,7 +28,7 @@ namespace Map {
         if (this->countdown == 0) {
             return;
         }
-        this->countdown = this->countdown - 1;
+        this->countdown -= 1;
         switch (this->state) {
         case 0:
             if (DAT_BuildingsState::instance.buildings[this->id].uid != this->uid) {
