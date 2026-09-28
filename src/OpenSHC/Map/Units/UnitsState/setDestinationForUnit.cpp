@@ -21,8 +21,7 @@ namespace Map {
             /* check by unit type */
             int _ableToClimbTowers
                 = DAT_UnitPropertiesDefinedData::instance.ABLE_TO_CLIMB_TOWERS[(short)this->units[unitID].unitType];
-            if (x > 399 || y > 399
-                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
+            if (x > 399 || y > 399 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
                 DAT_PathFindingState::instance.allAssassinsUnk = 0;
                 return FALSE;
             }
@@ -30,31 +29,30 @@ namespace Map {
             if (MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::unitIsInMoat, this)(unitID) != FALSE) {
                 DAT_PathFindingState::instance.climbIsIllegal = 1;
             }
+            uint _unitX = this->units[unitID].x;
             this->units[unitID].climbDataID = 0;
             this->units[unitID].destinationX_2Unk = (short)x;
             this->units[unitID].destinationY_2Unk = (short)y;
             this->units[unitID].field280_0x3f4 = 0;
-            if (this->units[unitID].x == x && this->units[unitID].y == y) {
+            if (_unitX == x && this->units[unitID].y == y) {
                 this->units[unitID].destinationYPosition = (short)y;
                 this->units[unitID].totalSizeOfPathPlan = 0;
                 this->units[unitID].tunnelerFinishedDigging = 0;
                 this->units[unitID].currentIndexInPathPlan = 0;
                 this->units[unitID].destinationXPosition = (short)x;
-                this->units[unitID].ladderExitXPosition = this->units[unitID].x;
+                this->units[unitID].ladderExitXPosition = (short)_unitX;
                 this->units[unitID].ladderExitYPosition = this->units[unitID].y;
                 this->units[unitID].destinationTilePosition
                     = (short)x + DAT_ViewportRenderState::instance.translationMatrix[(short)y].addXgetTile;
                 this->units[unitID].previousTilePosition
-                    = DAT_ViewportRenderState::instance.translationMatrix[this->units[unitID].y].addXgetTile
-                    + this->units[unitID].x;
+                    = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + _unitX;
                 DAT_PathFindingState::instance.climbIsIllegal = 0;
                 DAT_PathFindingState::instance.allAssassinsUnk = 0;
                 return TRUE;
             }
             dword _fromArea
                 = (short)DAT_TileMapState::instance.PathConnectionLayer
-                      [DAT_ViewportRenderState::instance.translationMatrix[this->units[unitID].y].addXgetTile
-                          + this->units[unitID].x];
+                      [DAT_ViewportRenderState::instance.translationMatrix[this->units[unitID].y].addXgetTile + _unitX];
             int _destinationTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
             dword _toArea = (short)DAT_TileMapState::instance.PathConnectionLayer[_destinationTile];
             if ((DAT_TileMapState::instance.LogicLayer[_destinationTile] & 0x30) != 0) {
@@ -199,7 +197,7 @@ namespace Map {
                 this->units[unitID].ladderExitYPosition = this->units[unitID].y;
                 this->units[unitID].destinationTilePosition = (short)_pathTargetX
                     + DAT_ViewportRenderState::instance.translationMatrix[(short)_pathTargetY].addXgetTile;
-                this->units[unitID].ladderExitXPosition = this->units[unitID].x;
+                this->units[unitID].ladderExitXPosition = (short)_unitX;
                 this->units[unitID].previousTilePosition = this->units[unitID].x
                     + DAT_ViewportRenderState::instance.translationMatrix[this->units[unitID].y].addXgetTile;
                 this->units[unitID].cannotClimb = (ushort)(DAT_PathFindingState::instance.climbIsIllegal != 0);
