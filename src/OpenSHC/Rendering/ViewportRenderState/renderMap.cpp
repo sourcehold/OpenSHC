@@ -1017,7 +1017,7 @@ namespace Rendering {
                                     != DAT_GameState::instance.mapAndTime
                                         .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID])) {
                                 iVar26 = DAT_UnitsState::instance.units[local_60].assassinsMicroDistanceToEnemyUnk;
-                                if ((iVar26 < 160)
+                                if ((iVar26 <= 160)
                                     || ((UVar4 = DAT_UnitsState::instance.units[local_60].state.generic,
                                         UVar4 == OpenSHC::Map::Units::States::US_MELEE_ATTACK
                                             || (UVar4 == OpenSHC::Map::Units::States::US_MELEE_ATTACK_WALL)))) {
