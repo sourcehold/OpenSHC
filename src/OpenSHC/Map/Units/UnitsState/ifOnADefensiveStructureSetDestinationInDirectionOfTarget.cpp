@@ -53,12 +53,8 @@ namespace Map {
                     = (short)DAT_BuildingsState::instance.buildings[this->units[unitID].targetID_OR_targetBuildingID].y;
             } else if (this->units[unitID].targetingType == OpenSHC::Map::Units::UIT_ATTACK_LAND
                 || this->units[unitID].shootTargetedUnit == -2) {
-                _targetX
-                    = (this->units[unitID].shootTargetMicroX + (this->units[unitID].shootTargetMicroX >> 0x1f & 7U))
-                    >> 3;
-                _targetY
-                    = (this->units[unitID].shootTargetMicroY + (this->units[unitID].shootTargetMicroY >> 0x1f & 7U))
-                    >> 3;
+                _targetX = this->units[unitID].shootTargetMicroX / 8;
+                _targetY = this->units[unitID].shootTargetMicroY / 8;
             } else {
                 _targetX = this->units[this->units[unitID].shootTargetedUnit].x;
                 _targetY = this->units[this->units[unitID].shootTargetedUnit].y;

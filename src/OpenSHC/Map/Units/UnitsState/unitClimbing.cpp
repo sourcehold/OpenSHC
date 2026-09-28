@@ -111,16 +111,12 @@ namespace Map {
                 /* Climbing up */
                 this->units[unitID].animationFrame
                     = (char)DAT_UnitPropertiesDefinedData::instance.Frames_Shared_UnitClimbingUp
-                          .ANIM_Frames_Shared_UnitClimbingUp[(this->units[unitID].field203_0x35c
-                                                                 + (this->units[unitID].field203_0x35c >> 0x1f & 7U))
-                              >> 3];
+                          .ANIM_Frames_Shared_UnitClimbingUp[this->units[unitID].field203_0x35c / 8];
             } else {
                 /* Climbing down */
                 this->units[unitID].animationFrame
                     = (char)DAT_UnitPropertiesDefinedData::instance
-                          .Frames_Shared_UnitClimbingDown[(this->units[unitID].field203_0x35c
-                                                              + (this->units[unitID].field203_0x35c >> 0x1f & 7U))
-                              >> 3];
+                          .Frames_Shared_UnitClimbingDown[this->units[unitID].field203_0x35c / 8];
             }
             this->units[unitID].gfxNumber = this->units[unitID].animationSheetFrameOffset
                 + this->units[unitID].animationFrame * 8 + -8

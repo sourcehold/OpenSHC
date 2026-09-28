@@ -313,6 +313,7 @@ namespace Map {
                     _damage = DAT_UnitPropertiesDefinedData::instance.ARROW_DAMAGE[(short)_entityType_2];
                     if (_entityType_2 == OpenSHC::Map::Units::UT_E_LADDER
                         && this->units[unitID].state.generic == (UnitState)3) {
+                        /* the compiler's biased shift matches here where a plain /4 does not */
                         _damage = (int)(_damage + (_damage >> 0x1f & 3U)) >> 2;
                     }
                 } else if (_entityType == OpenSHC::Map::Entities::ET_SLINGER) {

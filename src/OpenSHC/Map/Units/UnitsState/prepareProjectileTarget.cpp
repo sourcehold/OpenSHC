@@ -28,12 +28,12 @@ namespace Map {
                        targetID has negative height (walking in pitch or moat) */
                     if (this->units[targetID].stateBasedSpeed == 0) {
                         if (this->units[targetID].calculatedMovementSpeed < 2) {
-                            _adjustment = (short)((_lead + (_lead >> 0x1f & 0xfU)) >> 4);
+                            _adjustment = (short)(_lead / 16);
                         } else {
                             _adjustment = (short)(_lead / (this->units[targetID].calculatedMovementSpeed << 4));
                         }
                     } else {
-                        _adjustment = (short)((_lead + (_lead >> 0x1f & 7U)) >> 3);
+                        _adjustment = (short)(_lead / 8);
                     }
                     short _targetFacing = this->units[targetID].facingDirection;
                     if (_targetFacing == 0) {
@@ -127,12 +127,11 @@ namespace Map {
                 return _unhandledTypeResult;
             }
             if ((_rng & 7) < 2) {
-                _scatter = (_scatter + (_scatter >> 0x1f & 3U)) >> 2;
+                _scatter = _scatter / 4;
                 if (_scatter == 0) {
                     _scatter = 1;
                 }
-                int _horizontalRng
-                    = ((int)(_rng + ((int)_rng >> 0x1f & 0x1ffU)) >> 9) + this->units[shooterID].fixedRng;
+                int _horizontalRng = ((int)_rng / 512) + this->units[shooterID].fixedRng;
                 if (_horizontalRng < 0) {
                     _horizontalRng = -_horizontalRng;
                 }

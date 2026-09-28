@@ -57,15 +57,11 @@ namespace Map {
             } else if (unitType == OpenSHC::Map::Units::UT_CAGEDOG) {
                 this->units[_unitID].calculatedOwnerPlayerIndex = 0;
             }
-            short _y
-                = (short)((this->units[_unitID].microYPosition + (this->units[_unitID].microYPosition >> 0x1f & 7U))
-                    >> 3);
+            short _y = (short)(this->units[_unitID].microYPosition / 8);
             this->units[_unitID].mimicCurrentYPosition = _y;
             this->units[_unitID].y = _y;
             this->units[_unitID].destinationY_2Unk = _y;
-            short _x
-                = (short)((this->units[_unitID].microXPosition + (this->units[_unitID].microXPosition >> 0x1f & 7U))
-                    >> 3);
+            short _x = (short)(this->units[_unitID].microXPosition / 8);
             this->units[_unitID].mimicCurrentXPosition = _x;
             this->units[_unitID].x = _x;
             this->units[_unitID].destinationX_2Unk = _x;

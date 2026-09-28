@@ -112,14 +112,10 @@ namespace Map {
                                 | OpenSHC::Map::Units::States::US_IDLEUnk)
                         && DAT_GameState::instance.mapAndTime.playerTeams[this->units[_0x04_targetUnitID].owner]
                             != DAT_GameState::instance.mapAndTime.playerTeams[_unitPlayerID]) {
-                        int _0x04_yDifference = ((int)(_microYUnit + (_microYUnit >> 0x1f & 7U)) >> 3)
-                            - ((int)((int)this->units[_0x04_targetUnitID].microYPosition
-                                   + ((int)this->units[_0x04_targetUnitID].microYPosition >> 0x1f & 7U))
-                                >> 3);
-                        _xDifferenceToTarget = ((int)(_microXUnit + (_microXUnit >> 0x1f & 7U)) >> 3)
-                            - ((int)((int)this->units[_0x04_targetUnitID].microXPosition
-                                   + ((int)this->units[_0x04_targetUnitID].microXPosition >> 0x1f & 7U))
-                                >> 3);
+                        int _0x04_yDifference
+                            = ((int)_microYUnit / 8) - ((int)this->units[_0x04_targetUnitID].microYPosition / 8);
+                        _xDifferenceToTarget
+                            = ((int)_microXUnit / 8) - ((int)this->units[_0x04_targetUnitID].microXPosition / 8);
                         if (_xDifferenceToTarget * _xDifferenceToTarget + _0x04_yDifference * _0x04_yDifference
                             <= _rangeSquared) {
                             int _shootDistanceScore
@@ -290,10 +286,8 @@ namespace Map {
                         }
                         _xDifferenceToTarget = (int)this->units[_enemy].microYPosition;
                         int iVar7 = (int)this->units[_enemy].microXPosition;
-                        int _yDifferenceToTarget = ((int)(_microYUnit + (_microYUnit >> 0x1f & 7U)) >> 3)
-                            - ((int)(_xDifferenceToTarget + (_xDifferenceToTarget >> 0x1f & 7U)) >> 3);
-                        _xDifferenceToTarget = ((int)(_microXUnit + (_microXUnit >> 0x1f & 7U)) >> 3)
-                            - ((int)(iVar7 + (iVar7 >> 0x1f & 7U)) >> 3);
+                        int _yDifferenceToTarget = ((int)_microYUnit / 8) - ((int)_xDifferenceToTarget / 8);
+                        _xDifferenceToTarget = ((int)_microXUnit / 8) - ((int)iVar7 / 8);
                         if (_rangeSquared
                             < _xDifferenceToTarget * _xDifferenceToTarget + _yDifferenceToTarget * _yDifferenceToTarget)
                             continue;

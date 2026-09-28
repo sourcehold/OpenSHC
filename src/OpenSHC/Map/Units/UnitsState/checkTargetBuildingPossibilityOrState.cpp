@@ -33,9 +33,7 @@ namespace Map {
             int _shootTargetMicroY = this->units[unitID].shootTargetMicroY;
             return (BOOLEnum)(MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                     checkEnemyBuildingOrDefensiveStructureWithin12Tiles,
-                                  DAT_PathFindingState::ptr)(_playerID,
-                                  (_shootTargetMicroX + (_shootTargetMicroX >> 0x1f & 7U)) >> 3,
-                                  (_shootTargetMicroY + (_shootTargetMicroY >> 0x1f & 7U)) >> 3)
+                                  DAT_PathFindingState::ptr)(_playerID, _shootTargetMicroX / 8, _shootTargetMicroY / 8)
                 != FALSE);
         }
 

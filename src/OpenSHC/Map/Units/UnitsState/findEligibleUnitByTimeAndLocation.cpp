@@ -49,8 +49,7 @@ namespace Map {
                         OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                         DAT_DirectionAlgorithmState::ptr)(
                         unitXPosition, unitYPosition, this->units[_candidateUnitID].x, this->units[_candidateUnitID].y);
-                    /* this formula means divide by 4 and round it up. */
-                    _score = _score - ((_distance + (_distance >> 0x1f & 3U)) >> 2);
+                    _score = _score - (_distance / 4);
                 }
                 if (_bestScore < _score) {
                     _bestScore = _score;
