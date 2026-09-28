@@ -107,6 +107,38 @@ quiet builds, `/Zs` syntax checks, a reccmp report (match %, normalized % ignori
 showing and splicing many function bodies, one progress commit per changed function, and repairing sources after
 `*_Func` namespace refactors. Prefer them over ad-hoc scripts when a task spans many functions.
 
+`orig_asm.py NAME` prints the **original** instruction stream of one function from the last reccmp run, rather than the
+interleaved diff `reccmp_report.py diff` gives you. Use it when the diff comes back truncated, or when you need the
+original's own jump targets and fall-through order to reconstruct control flow. It reads `reccmp/dll/diff.json`, so it
+works with no Ghidra connection.
+
+`orig_asm.py NAME --stats` reports the signals that decide *how* a function has to be reimplemented. Check it before
+restyling anything large:
+
+- `mov reg, 0` - no compiler materialises zero that way, so that block is handwritten assembly and belongs in an
+  `__asm` block rather than C++. Functions are never `__declspec(naked)`: write a normal function, keep the
+  compiler-generated statements as C++, and refer to parameters, locals and `this` by name. Prettify offsets with
+  MSVC's struct-member asm syntax (`mov esi, dword ptr [eax]TileMapState.ptr_LogicLayer`) - `::` is not parseable in an
+  asm operand, so a resolver global cannot be named there.
+- a frame pointer plus a `this` spill - the original was built without optimisation. Add `#pragma optimize(, off)`
+  around the function; inline asm alone does not disable optimisation. Then match the reported **frame size** exactly,
+  which is usually the single biggest win, because every local displacement shifts otherwise. Merge locals that share a
+  slot and reproduce dead stores. At `/Od` prefer a nested `if` over an early `continue` (the original inverts the test
+  and jumps to the loop's continue trampoline), and declare locals together at the top of the function.
+- a jump table - Ghidra usually renders the dispatch as a call through an unnamed pointer array and drops the arms, so
+  rebuild the `switch` from the byte and jump tables instead of restyling the decompiler output.
+
+`diff_triage.py` gives one line per function in the build list and says whether more source work can pay at all: it
+flags a `sub esp` frame-size mismatch (`FRAME`), byte-sized stack slots we have and the original does not (`BYTE`), a
+cold return block we inline where the original outlines it (`RET`), and the case where only register and stack-slot
+*naming* is left (`alloc-only`). Chase a `FRAME` flag with `diff_slots.py NAME`, which lists every `[esp + N]` slot per
+side: one extra slot is one local the original does not have, and removing it has been worth 10-30 points.
+`diff_jcc.py` finds comparisons whose operator is one strictness step off the original (`jl`/`jle`, `jg`/`jge`) - these
+are real off-by-one bugs where Ghidra decompiled the condition wrongly, so confirm a fix by re-running that tool rather
+than by the percentage. `reorder_search.py FILE NAME` hill-climbs the match % by reordering independent statements,
+which is the only lever left once a function is `alloc-only`; it pays about one move in ten, and mostly where the
+statements sit between two calls or on a loop back-edge.
+
 ### Binary Comparison (`reccmp`)
 
 Compares generated binaries against the original executable.
