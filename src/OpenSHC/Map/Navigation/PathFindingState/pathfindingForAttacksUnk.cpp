@@ -3,6 +3,7 @@
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
+#include "OpenSHC/Map/Navigation/Algorithms/XYPair.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
@@ -12,14 +13,13 @@
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Map/Navigation/Algorithms/XYPair.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
+        using OpenSHC::Map::Navigation::Algorithms::XYPair;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-            using OpenSHC::Map::Navigation::Algorithms::XYPair;
 
         /*
           WARNING: Enum "MappersEnum": Some values do not have unique names
@@ -31,13 +31,8 @@ namespace Map {
         void PathFindingState::pathfindingForAttacksUnk(
             int tribeID, int buildingID, int param_3, dword param_4, int param_5)
         {
-            byte bVar1;
-            short sVar2;
-            int iVar3;
-            BOOLEnum BVar4;
             uint uVar5;
             BOOLEnum BVar6;
-            uint uVar7;
             XYPair* pXVar8;
             uint uVar9;
             int iVar10;
@@ -50,15 +45,16 @@ namespace Map {
             int local_28;
             int* local_24;
             int local_20;
-            iVar3 = (int)(short)DAT_BuildingsState::instance.buildings[buildingID].y;
-            uVar7 = DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight;
+            int iVar3 = (int)(short)DAT_BuildingsState::instance.buildings[buildingID].y;
+            uint uVar7 = DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight;
             iVar10 = (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x;
-            bVar1 = DAT_TileMapState::instance.DefaultHeightLayer[DAT_BuildingsState::instance.buildings[buildingID]
-                    .currentTilePositionAdjusted];
-            sVar2 = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
+            byte bVar1
+                = DAT_TileMapState::instance.DefaultHeightLayer[DAT_BuildingsState::instance.buildings[buildingID]
+                        .currentTilePositionAdjusted];
+            short sVar2 = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
             local_28 = 0;
-            BVar4 = MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::isTribeAllAssassins, DAT_TribesState::ptr)(
-                tribeID);
+            BOOLEnum BVar4 = MACRO_CALL_MEMBER(
+                OpenSHC::Map::Units::TribesState_Func::isTribeAllAssassins, DAT_TribesState::ptr)(tribeID);
             param_3 = param_3 * 2;
             if (param_3 < 0x1f5) {
                 if (param_3 < 0x32) {
@@ -82,23 +78,23 @@ namespace Map {
                     iVar13 = iVar12 + iVar10;
                     uVar5 = (uint)bVar1 - (uint) * (byte*)(iVar12 + 0x1d32c38 + iVar10);
                     uVar9 = (int)uVar5 >> 0x1f;
-                    if (((int)((uVar5 ^ uVar9) - uVar9) < 0x20)
-                        && (((((int)(short)DAT_TileMapState::instance.PathConnectionLayer[iVar13] == param_4
-                                  || (iVar12 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
-                                                                     calculateCanPlayerUnitsNavigateToAreaFromArea,
-                                          this)(param_5, (dword)((int)(param_4)),
-                                          (dword)((
-                                              int)((int)(short)DAT_TileMapState::instance.PathConnectionLayer[iVar13])),
-                                          0),
-                                      iVar12 != 0))
-                                 || ((BVar4 != FALSE
-                                     && (BVar6 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
-                                                                       calculateCanReachUsingCachedAreaLogic,
-                                             this)(DAT_UnitsState::instance.units[sVar2].tile, iVar13),
-                                         BVar6 != FALSE))))
-                            && (uVar5 = (int)DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk
-                                    - (uint)DAT_TileMapState::instance.HeightLayer[iVar13],
-                                uVar9 = (int)uVar5 >> 0x1f, (int)((uVar5 ^ uVar9) - uVar9) < 0x10)))) {
+                    if ((int)((uVar5 ^ uVar9) - uVar9) < 0x20
+                        && (((int)(short)DAT_TileMapState::instance.PathConnectionLayer[iVar13] == param_4
+                                || (iVar12 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
+                                                                   calculateCanPlayerUnitsNavigateToAreaFromArea,
+                                        this)(param_5, (dword)((int)(param_4)),
+                                        (dword)((
+                                            int)((int)(short)DAT_TileMapState::instance.PathConnectionLayer[iVar13])),
+                                        0),
+                                    iVar12 != 0))
+                            || ((BVar4 != FALSE
+                                && (BVar6 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
+                                                                  calculateCanReachUsingCachedAreaLogic,
+                                        this)(DAT_UnitsState::instance.units[sVar2].tile, iVar13),
+                                    BVar6 != FALSE))))
+                        && (uVar5 = (int)DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk
+                                - (uint)DAT_TileMapState::instance.HeightLayer[iVar13],
+                            uVar9 = (int)uVar5 >> 0x1f, (int)((uVar5 ^ uVar9) - uVar9) < 0x10)) {
                         ((PathHelper12*)(local_24 + -1))->tile1 = iVar13;
                         *local_24 = 0;
                         pXVar8 = DAT_ClimbLogicDefinedData::instance.CardinalHorizontalFirstSearchOrder;
@@ -108,8 +104,8 @@ namespace Map {
                                              + iVar3]
                                          .addXgetTile
                                 + pXVar8->x + DAT_BuildingsState::instance.DAT_TempXOffset + iVar10;
-                            if (((DAT_TileMapState::instance.LogicLayer[iVar12] & 0xf000000U) == 0)
-                                && (DAT_TileMapState::instance.BuildingLayer[iVar12] == buildingID)) {
+                            if ((DAT_TileMapState::instance.LogicLayer[iVar12] & 0xf000000U) == 0
+                                && DAT_TileMapState::instance.BuildingLayer[iVar12] == buildingID) {
                                 *local_24 = iVar12;
                                 break;
                             }
@@ -144,32 +140,31 @@ namespace Map {
                                 OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingEntrancesOffset,
                                 DAT_BuildingsState::ptr)(iVar14, 1, iVar13, 0);
                             uVar7 = iVar3 + DAT_BuildingsState::instance.DAT_TempYOffset;
-                            if ((((uint)(DAT_BuildingsState::instance.DAT_TempXOffset + iVar10) < 400) && (uVar7 < 400))
-                                && (*(char*)(uVar7 * 400 + 0x21aec98 + DAT_BuildingsState::instance.DAT_TempXOffset
-                                        + iVar10)
-                                    != '\0')) {
+                            if ((uint)(DAT_BuildingsState::instance.DAT_TempXOffset + iVar10) < 400 && uVar7 < 400
+                                && *(char*)(uVar7 * 400 + 0x21aec98 + DAT_BuildingsState::instance.DAT_TempXOffset
+                                       + iVar10)
+                                    != '\0') {
                                 iVar15 = DAT_ViewportRenderState::instance.translationMatrix[uVar7].addXgetTile
                                     + DAT_BuildingsState::instance.DAT_TempXOffset;
                                 tile2 = iVar15 + iVar10;
                                 uVar7 = (uint)bVar1 - (uint) * (byte*)(iVar15 + 0x1d32c38 + iVar10);
                                 uVar5 = (int)uVar7 >> 0x1f;
-                                if ((((int)((uVar7 ^ uVar5) - uVar5) < 0x20)
-                                        && ((((int)(short)DAT_TileMapState::instance.PathConnectionLayer[tile2]
-                                                     == param_4
-                                                 || (iVar15 = MACRO_CALL_MEMBER(
-                                                         OpenSHC::Map::Navigation::PathFindingState_Func::
-                                                             calculateCanPlayerUnitsNavigateToAreaFromArea,
-                                                         this)(param_5, (dword)((int)(param_4)),
-                                                         (dword)((int)((int)(short)DAT_TileMapState::instance
-                                                                 .PathConnectionLayer[tile2])),
-                                                         0),
-                                                     iVar15 != 0))
-                                            || ((BVar4 != FALSE
-                                                && (BVar6 = MACRO_CALL_MEMBER(
-                                                        OpenSHC::Map::Navigation::PathFindingState_Func::
-                                                            calculateCanReachUsingCachedAreaLogic,
-                                                        this)(DAT_UnitsState::instance.units[sVar2].tile, tile2),
-                                                    BVar6 != FALSE))))))
+                                if ((int)((uVar7 ^ uVar5) - uVar5) < 0x20
+                                    && (((int)(short)DAT_TileMapState::instance.PathConnectionLayer[tile2] == param_4
+                                            || (iVar15
+                                                = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
+                                                                        calculateCanPlayerUnitsNavigateToAreaFromArea,
+                                                    this)(param_5, (dword)((int)(param_4)),
+                                                    (dword)((int)((
+                                                        short)DAT_TileMapState::instance.PathConnectionLayer[tile2])),
+                                                    0),
+                                                iVar15 != 0))
+                                        || ((BVar4 != FALSE
+                                            && (BVar6
+                                                = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
+                                                                        calculateCanReachUsingCachedAreaLogic,
+                                                    this)(DAT_UnitsState::instance.units[sVar2].tile, tile2),
+                                                BVar6 != FALSE))))
                                     && (uVar7 = (int)DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk
                                             - (uint)DAT_TileMapState::instance.HeightLayer[tile2],
                                         uVar5 = (int)uVar7 >> 0x1f, (int)((uVar7 ^ uVar5) - uVar5) < local_20)) {
