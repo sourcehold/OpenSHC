@@ -17,10 +17,9 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A58A0
         dword PathFindingState::findConnectingAreaBetweenTwoAreas(int param_1, dword param_2, dword param_3)
         {
+            undefined4 dVar2;
             int iVar1;
-            dword dVar2;
             int iVar3;
-            int iVar4;
             int* piVar5;
             int iVar6;
             dword dVar7;
@@ -39,11 +38,11 @@ namespace Map {
             if (1 < this->maxClimbDataCount) {
                 piVar5 = &this->climbData[1].isRecognizedByPathfinding;
                 do {
-                    if ((((((ClimbData*)(piVar5 + -6))->canBeUsed == 1) && (*piVar5 != 0)) && (piVar5[-5] != 1))
-                        && (((param_1 == 0
-                                 || (DAT_GameState::instance.mapAndTime.playerTeams[piVar5[0x73]]
-                                     == DAT_GameState::instance.mapAndTime.playerTeams[param_1]))
-                            || (DAT_BuildingsState::instance.buildings[piVar5[-3]].field241_0x2c6 != 0)))) {
+                    if (((ClimbData*)(piVar5 + -6))->canBeUsed == 1 && *piVar5 != 0 && piVar5[-5] != 1
+                        && ((param_1 == 0
+                                || (DAT_GameState::instance.mapAndTime.playerTeams[piVar5[0x73]]
+                                    == DAT_GameState::instance.mapAndTime.playerTeams[param_1]))
+                            || (DAT_BuildingsState::instance.buildings[piVar5[-3]].field241_0x2c6 != 0))) {
                         aiStack_640[local_96c * 2 + 1] = 0;
                         aiStack_640[local_96c * 2] = iVar6;
                         local_96c = local_96c + 1;
@@ -52,7 +51,7 @@ namespace Map {
                     piVar5 = piVar5 + 0x81;
                 } while (iVar6 < this->maxClimbDataCount);
             }
-            iVar4 = 0;
+            int iVar4 = 0;
             iVar6 = 0;
             if (0 < local_96c) {
                 do {
@@ -114,7 +113,7 @@ namespace Map {
                                     if (dVar8 == param_2) {
                                         return (dword)(dVar7);
                                     }
-                                    dVar2 = this->climbData[iVar1].buildingArea;
+                                    dword dVar2 = this->climbData[iVar1].buildingArea;
                                     if (dVar2 == param_2) {
                                         return (dword)(dVar7);
                                     }
