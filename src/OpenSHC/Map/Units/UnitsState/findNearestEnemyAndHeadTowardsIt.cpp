@@ -30,8 +30,8 @@ namespace Map {
             int _playerID = this->units[unitID].owner;
             dword _area = (short)DAT_TileMapState::instance.PathConnectionLayer[this->units[unitID].tile];
             this->unitDistanceComputationResultUnk = 100000;
-            dword _minDistance = 100000;
-            dword _chosenRawDistance = 0;
+            int _minDistance = 100000;
+            int _chosenRawDistance = 0;
             int _bestScore = 100000;
             int _foundEnemyID = 0;
             int _visionDivisor = 1;
@@ -132,7 +132,7 @@ namespace Map {
                 } else {
                     _distanceY = this->units[_enemyUnitID].microYPosition - _microY;
                 }
-                dword _approximateDistance;
+                int _approximateDistance;
                 if (_distanceX < _distanceY) {
                     /* pythagorean approximation */
                     _approximateDistance = (((_distanceX * 2) / 5) * _distanceX) / _distanceY + _distanceY;
@@ -142,20 +142,20 @@ namespace Map {
                 } else {
                     _approximateDistance = (((_distanceY * 2) / 5) * _distanceY) / _distanceX + _distanceX;
                 }
-                if ((int)_approximateDistance < (int)_minDistance) {
+                if (_approximateDistance < _minDistance) {
                     _minDistance = _approximateDistance;
                 }
                 if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_A_ASSASSIN
                     && this->units[_enemyUnitID].isSelectable_OR_matchTime != 0
-                    && (int)_approximateDistance < (int)this->unitDistanceComputationResultUnk) {
+                    && _approximateDistance < (int)this->unitDistanceComputationResultUnk) {
                     this->unitDistanceComputationResultUnk = _approximateDistance;
                 }
                 if (_skipStanceSearch || _stanceBasedRange == 0 || this->units[unitID].lookForEnemy < 0) {
                     continue;
                 }
-                dword _score = _approximateDistance;
+                int _score = _approximateDistance;
                 if (this->units[unitID]._someX_2 != 0 && _isRallying == 0 && _stanceBasedRange == 40) {
-                    dword _savedDistanceX;
+                    int _savedDistanceX;
                     if (this->units[unitID]._someX_2 * 8 < this->units[_enemyUnitID].microXPosition) {
                         _savedDistanceX = this->units[_enemyUnitID].microXPosition + this->units[unitID]._someX_2 * -8;
                     } else {
@@ -166,12 +166,12 @@ namespace Map {
                     } else {
                         _score = this->units[unitID]._someY_2 * 8 - this->units[_enemyUnitID].microYPosition;
                     }
-                    if ((int)_score <= (int)_savedDistanceX) {
+                    if (_score <= _savedDistanceX) {
                         _score = _savedDistanceX;
                     }
                 }
-                dword _rawDistance = _score;
-                if ((int)_score > _stanceBasedRange) {
+                int _rawDistance = _score;
+                if (_score > _stanceBasedRange) {
                     continue;
                 }
                 if (this->units[_enemyUnitID].uid
@@ -235,15 +235,15 @@ namespace Map {
                     _score = _score + 0x19;
                     break;
                 case OpenSHC::Map::Units::UT_LORD:
-                    _score = (_score + ((int)_score >> 0x1f & 3U)) >> 2;
+                    _score = _score / 4;
                     break;
                 default:
                     _score = _score * 4 + 200;
                 }
                 if (this->units[unitID].movementType_OR_targetUnitID == _enemyUnitID) {
-                    _score = (int)_score / 2;
+                    _score = _score / 2;
                 }
-                if ((int)_score >= _bestScore) {
+                if (_score >= _bestScore) {
                     continue;
                 }
                 int _enemyTotalHeight
@@ -358,7 +358,7 @@ namespace Map {
                 this->units[unitID]._someX_2 = 0;
                 this->units[unitID].state.generic = OpenSHC::Map::Units::States::US_MOVE_TO_DESTINATION;
             }
-            if ((int)_minDistance > 32000) {
+            if (_minDistance > 32000) {
                 _minDistance = 32000;
             }
             return _minDistance;
