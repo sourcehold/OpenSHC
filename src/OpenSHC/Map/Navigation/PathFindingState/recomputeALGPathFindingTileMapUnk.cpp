@@ -44,8 +44,8 @@ namespace Map {
                         while (uVar3 = this->searchQueue.tilesQueue[this->searchQueue.readIndex], uVar3 < 0x13a10) {
                             DAT_TileMapState::instance.AIInfoLayer[uVar3]
                                 = DAT_TileMapState::instance.AIInfoLayer[uVar3] | (byte)param_4;
-                            short sVar1 = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                            short sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                            int sVar1 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
+                            int sVar2 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                             this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[uVar3];
                             if (0x13a10 < this->searchQueue.currentDistance) {
                                 return;
