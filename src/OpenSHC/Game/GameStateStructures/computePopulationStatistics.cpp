@@ -76,7 +76,7 @@ namespace Game {
                     = this->playerDataArray[playerID].availablePeasantsOrHousedPeasants;
                 this->playerDataArray[playerID].populationGrowthStatisticCounter
                     = this->playerDataArray[playerID].populationGrowthStatisticCounter + 1;
-                if (this->playerDataArray[playerID].populationGrowthStatisticCounter > 7) {
+                if (this->playerDataArray[playerID].populationGrowthStatisticCounter >= 8) {
                     this->playerDataArray[playerID].populationGrowthStatisticCounter = 0;
                 }
                 this->playerDataArray[playerID].averagePopulationGrowthUnk
