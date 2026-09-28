@@ -1,17 +1,17 @@
 #include "../PathFindingState.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
+#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Navigation {
-            using OpenSHC::Map::Location::Point8ShortXY;
+        using OpenSHC::Map::Location::Point8ShortXY;
 
         /*
           WARNING: Enum "MappersEnum": Some values do not have unique names
@@ -22,8 +22,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049D0E0
         void PathFindingState::findFreeTileOnDefensiveStructure(int unitID, int x, int y)
         {
-            short sVar1;
-            short sVar2;
             short* psVar3;
             int (*paiVar4)[8];
             int iVar5;
@@ -32,7 +30,7 @@ namespace Map {
             this->ALG_ResultTile = 0;
             this->ALG_ResultY = 0;
             this->ALG_ResultX = 0;
-            if ((((uint)x < 400) && ((uint)y < 400)) && (*(char*)(y * 400 + 0x21aec98 + x) != '\0')) {
+            if ((uint)x < 400 && (uint)y < 400 && *(char*)(y * 400 + 0x21aec98 + x) != '\0') {
                 this->searchGeneration = this->searchGeneration + 1;
                 if (32000 < this->searchGeneration) {
                     this->searchGeneration = 1;
@@ -51,8 +49,8 @@ namespace Map {
                 if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                     while ((_tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex],
                         -1 < _tile && (_tile < 0x13a10))) {
-                        sVar1 = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                        sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                        short sVar1 = this->searchQueue.xQueue[this->searchQueue.readIndex];
+                        short sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
                         iVar5 = (int)sVar2;
                         if ((short)DAT_TileMapState::instance.UnitLayer[_tile] == 0) {
                             this->ALG_ResultX = (int)sVar1;
@@ -74,8 +72,8 @@ namespace Map {
                         paiVar4 = DAT_TileMapState::instance.directionTranslationMatrix + iVar5;
                         do {
                             iVar5 = (*paiVar4)[0] + _tile;
-                            if ((DAT_TileMapState::instance.WalkLayer[iVar5] != this->searchGeneration)
-                                && ((DAT_TileMapState::instance.LogicLayer[iVar5] & 0x10000100U) != 0)) {
+                            if (DAT_TileMapState::instance.WalkLayer[iVar5] != this->searchGeneration
+                                && (DAT_TileMapState::instance.LogicLayer[iVar5] & 0x10000100U) != 0) {
                                 /*
                                   queue tiles that are wall gatehouse tower or keep
                                  */
