@@ -71,11 +71,8 @@ namespace Map {
                         if (0x13a10 < this->searchQueue.currentDistance) {
                             return;
                         }
-                        _pOffsets
-                            = &DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[0].short_.yOffset;
-                        _cY2 = DAT_TileMapState::instance.directionTranslationMatrix + _cY_2;
-                        do {
-                            int _cTile2 = (*_cY2)[0] + _cTile;
+                        for (int _direction = 0; _direction < 8; _direction = _direction + 2) {
+                            int _cTile2 = DAT_TileMapState::instance.directionTranslationMatrix[_cY_2][_direction] + _cTile;
                             /*
                               0xb1 == test against sea, rocky, and borders
                              */
@@ -89,17 +86,16 @@ namespace Map {
                                     = (short)this->searchQueue.currentDistance + 1;
                                 DAT_TileMapState::instance.WalkLayer[_cTile2] = (short)this->searchGeneration;
                                 this->searchQueue.xQueue[this->searchQueue.writeIndex]
-                                    = ((Point8ShortXY*)(_pOffsets + -2))->xOffset + _cX;
-                                this->searchQueue.yQueue[this->searchQueue.writeIndex] = *_pOffsets + _cY;
+                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].short_.xOffset + _cX;
+                                this->searchQueue.yQueue[this->searchQueue.writeIndex] = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].short_.yOffset + _cY;
                                 this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _cTile2;
                                 this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
                                 if (0x13a0f < this->searchQueue.writeIndex) {
                                     this->searchQueue.writeIndex = 0;
                                 }
                             }
-                            _pOffsets = _pOffsets + 8;
-                            _cY2 = (int (*)[8])(*_cY2 + 2);
-                        } while ((int)_pOffsets < 0xb4908c);
+                        }
+
                         this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
                         if (0x13a0f < this->searchQueue.readIndex) {
                             this->searchQueue.readIndex = 0;
