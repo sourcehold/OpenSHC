@@ -43,7 +43,7 @@ namespace Map {
             if (399 < param_2 || 399 < param_3 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[param_3 * 400 + param_2] == '\0') {
                 return (undefined4)(0);
             }
-            if (param_4 < 400 && param_5 < 400 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[param_5 * 400 + param_4] != '\0') {
+            if (param_4 <= 399 && param_5 <= 399 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[param_5 * 400 + param_4] != '\0') {
                 iVar5 = DAT_ViewportRenderState::instance.translationMatrix[param_5].addXgetTile + param_4;
                 local_18 = (uint)DAT_TileMapState::instance.HeightLayer[iVar5];
                 uVar1
