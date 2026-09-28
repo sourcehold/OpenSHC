@@ -37,7 +37,7 @@ namespace Game {
             }
         }
         int despawnUnitID = 0;
-        uint highestPriority = 0;
+        int highestPriority = 0;
         for (int unitID = 1; unitID < (int)DAT_UnitsState::instance.maxUnitCount; unitID++) {
             if ((DAT_UnitsState::instance.units[unitID].logicalState == OpenSHC::Map::Units::ULS_NORMAL)
                 && (DAT_UnitsState::instance.units[unitID].dying == 0)
@@ -45,7 +45,7 @@ namespace Game {
                 && (DAT_UnitsState::instance.units[unitID].isSelectable_OR_matchTime == 0)
                 && (DAT_UnitsState::instance.units[unitID].field64_0x90 == 0)
                 && (DAT_UnitsState::instance.units[unitID].isStalked == 0)) {
-                uint despawnPriority;
+                int despawnPriority;
                 switch (DAT_UnitsState::instance.units[unitID].unitType) {
                     case OpenSHC::Map::Units::UT_WOODCUTTER:
                         despawnPriority = 7;
@@ -116,7 +116,7 @@ namespace Game {
                         despawnPriority = 21;
                         break;
                 }
-                if (highestPriority < despawnPriority) {
+                if (despawnPriority > highestPriority) {
                     highestPriority = despawnPriority;
                     despawnUnitID = unitID;
                 }

@@ -17763,7 +17763,7 @@ SHC_3BB0A8C1_0x00459170 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004591B0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004591F0 | 75.5% | Reg alloc differs
+SHC_3BB0A8C1_0x004591F0 | 79.1% | Switch block layout differs
 
 SHC_3BB0A8C1_0x00459260 | 0.0% | Pending
 
