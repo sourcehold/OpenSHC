@@ -54,7 +54,7 @@ namespace Map {
                         short sVar3 = this->searchQueue.yQueue[this->searchQueue.readIndex];
                         int iVar7 = (int)sVar3;
                         if ((0x13a10 < this->searchQueue.currentDistance)
-                            || (param_1 < this->searchQueue.currentDistance))
+                            || (this->searchQueue.currentDistance > param_1))
                             break;
                         int iVar10 = 0;
                         do {
