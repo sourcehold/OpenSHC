@@ -197,7 +197,7 @@ namespace Map {
                     /*
                       Get Y coordinate of current tile
                      */
-                    short sVar1 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    int sVar1 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                     /*
                       Read the distance value for this tile from the AI path cost layer
                      */
