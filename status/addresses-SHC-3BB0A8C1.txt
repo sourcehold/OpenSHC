@@ -37341,7 +37341,7 @@ SHC_3BB0A8C1_0x004E8CA0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004E8CC0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004E8CF0 | 31.8% | reg alloc + stack slot order
+SHC_3BB0A8C1_0x004E8CF0 | 31.9% | Style pass, reg alloc differs
 
 SHC_3BB0A8C1_0x004E9000 | 0.0% | Pending
 
