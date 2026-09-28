@@ -2,18 +2,18 @@
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"
+#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Navigation {
-            using OpenSHC::Map::Location::Point8ShortXY;
+        using OpenSHC::Map::Location::Point8ShortXY;
 
         /*
           WARNING: Enum "MappersEnum": Some values do not have unique names
@@ -25,12 +25,11 @@ namespace Map {
         void PathFindingState::findWalkableTileThatDoesNotContainUnit(int unitID, uint x, uint y, int considerUnits)
         {
             uint _tHeight;
-            int iVar1;
-            uint _heightDiff;
             short* psVar2;
             uint _absHeight;
             int (*paiVar3)[8];
             ushort _area;
+            uint _heightDiff;
             short _buildingHeight;
             short _terrainHeight;
             int _tile;
@@ -42,7 +41,7 @@ namespace Map {
             this->ALG_ResultTile = 0;
             this->ALG_ResultY = 0;
             this->ALG_ResultX = 0;
-            if (((x < 400) && (y < 400)) && (*(char*)(y * 400 + 0x21aec98 + x) != '\0')) {
+            if (x < 400 && y < 400 && *(char*)(y * 400 + 0x21aec98 + x) != '\0') {
                 this->searchGeneration = this->searchGeneration + 1;
                 if (32000 < this->searchGeneration) {
                     this->searchGeneration = 1;
@@ -59,20 +58,20 @@ namespace Map {
                     = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
                 DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
                 DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
-                if (((DAT_TileMapState::instance.LogicLayer[this->searchQueue.tilesQueue[0]] & 0x30) == 0)
-                    && (this->searchQueue.readIndex != this->searchQueue.writeIndex)) {
+                if ((DAT_TileMapState::instance.LogicLayer[this->searchQueue.tilesQueue[0]] & 0x30) == 0
+                    && this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                     while ((_tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex],
                         -1 < _tile && (_tile < 0x13a10))) {
                         _x = this->searchQueue.xQueue[this->searchQueue.readIndex];
                         _y = this->searchQueue.yQueue[this->searchQueue.readIndex];
-                        if (((((short)DAT_TileMapState::instance.UnitLayer[_tile] == 0) || (considerUnits == 0))
-                                && ((short)DAT_TileMapState::instance.UnitLayer[_tile] != unitID))
-                            && ((_area == DAT_TileMapState::instance.PathConnectionLayer[_tile]
-                                && (_tHeight = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTotalHeightAtTile,
-                                        DAT_TileMapState::ptr)(_tile),
-                                    _heightDiff = ((int)_buildingHeight + (int)_terrainHeight) - _tHeight,
-                                    _absHeight = (int)_heightDiff >> 0x1f,
-                                    (int)((_heightDiff ^ _absHeight) - _absHeight) < 16)))) {
+                        if ((((short)DAT_TileMapState::instance.UnitLayer[_tile] == 0) || (considerUnits == 0))
+                            && (short)DAT_TileMapState::instance.UnitLayer[_tile] != unitID
+                            && _area == DAT_TileMapState::instance.PathConnectionLayer[_tile]
+                            && (_tHeight = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTotalHeightAtTile,
+                                    DAT_TileMapState::ptr)(_tile),
+                                _heightDiff = ((int)_buildingHeight + (int)_terrainHeight) - _tHeight,
+                                _absHeight = (int)_heightDiff >> 0x1f,
+                                (int)((_heightDiff ^ _absHeight) - _absHeight) < 16)) {
                             this->ALG_ResultX = (int)_x;
                             this->ALG_ResultY = (int)_y;
                             this->ALG_ResultTile = _tile;
@@ -85,11 +84,11 @@ namespace Map {
                         psVar2 = &DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[0].short_.yOffset;
                         paiVar3 = DAT_TileMapState::instance.directionTranslationMatrix + _y;
                         do {
-                            iVar1 = (*paiVar3)[0] + _tile;
-                            if ((((DAT_TileMapState::instance.WalkLayer[iVar1] != this->searchGeneration)
-                                     && ((DAT_TileMapState::instance.LogicLayer[iVar1] & 0xb1U) == 0))
-                                    && ((DAT_TileMapState::instance.LogicLayer[iVar1] & 0x1400U) == 0))
-                                && (DAT_TileMapState::instance.PathConnectionLayer[iVar1] == _area)) {
+                            int iVar1 = (*paiVar3)[0] + _tile;
+                            if (DAT_TileMapState::instance.WalkLayer[iVar1] != this->searchGeneration
+                                && (DAT_TileMapState::instance.LogicLayer[iVar1] & 0xb1U) == 0
+                                && (DAT_TileMapState::instance.LogicLayer[iVar1] & 0x1400U) == 0
+                                && DAT_TileMapState::instance.PathConnectionLayer[iVar1] == _area) {
                                 DAT_TileMapState::instance.CertainPathLayer[iVar1]
                                     = (short)this->searchQueue.currentDistance + 1;
                                 DAT_TileMapState::instance.WalkLayer[iVar1] = (short)this->searchGeneration;
