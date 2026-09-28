@@ -22,7 +22,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A5F90
         void PathFindingState::updatePathLinkagesInAllEightDirections(int y, int tile)
         {
-            BOOLEnum _tileIsKeepUnk;
             int (*paiVar1)[8];
             int* piVar2;
             bool _someLinkageResult;
@@ -33,7 +32,7 @@ namespace Map {
             paiVar1 = DAT_TileMapState::instance.directionTranslationMatrix + y;
             piVar2 = &DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[0].int_.yOffset;
             do {
-                _tileIsKeepUnk = MACRO_CALL_MEMBER(
+                BOOLEnum _tileIsKeepUnk = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkageLayerBasedOnBuildingsUnk, this)(
                     *piVar2 + y, (*paiVar1)[0] + tile);
                 if (_tileIsKeepUnk != FALSE) {
