@@ -33,7 +33,7 @@ namespace Map {
         {
             short* psVar1;
             int (*paiVar2)[8];
-            bool bVar3;
+            int bVar3;
             short _building;
             BuildingTypeShort _buildingType;
             int _tile;
