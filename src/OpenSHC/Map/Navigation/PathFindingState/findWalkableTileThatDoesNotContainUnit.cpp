@@ -33,8 +33,8 @@ namespace Map {
             short _buildingHeight;
             short _terrainHeight;
             int _tile;
-            short _x;
-            short _y;
+            int _x;
+            int _y;
             _buildingHeight = DAT_UnitsState::instance.units[unitID].buildingHeight;
             _terrainHeight = DAT_UnitsState::instance.units[unitID].terrainOrClimbHeight;
             this->calculations = this->calculations + 1;
@@ -62,8 +62,8 @@ namespace Map {
                     && this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                     while ((_tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex],
                         -1 < _tile && (_tile < 0x13a10))) {
-                        _x = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                        _y = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                        _x = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
+                        _y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                         if ((((short)DAT_TileMapState::instance.UnitLayer[_tile] == 0) || (considerUnits == 0))
                             && (short)DAT_TileMapState::instance.UnitLayer[_tile] != unitID
                             && _area == DAT_TileMapState::instance.PathConnectionLayer[_tile]
