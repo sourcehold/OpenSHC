@@ -14,9 +14,8 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A52D0
         void PathFindingState::clearActiveClimbDataOfType6And7()
         {
-            int iVar1;
             int* piVar2;
-            iVar1 = 1;
+            int iVar1 = 1;
             piVar2 = &this->climbData[1].type;
             do {
                 if (((ClimbData*)(piVar2 + -1))->canBeUsed != 0) {
