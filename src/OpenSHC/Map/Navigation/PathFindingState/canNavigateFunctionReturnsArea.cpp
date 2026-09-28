@@ -89,7 +89,7 @@ namespace Map {
                                 }
                             }
                             if ((uVar4 & 0x4a5014b1) == 0) {
-                                _area = DAT_TileMapState::instance.PathConnectionLayer[_tile];
+                                _area = (short)DAT_TileMapState::instance.PathConnectionLayer[_tile];
                                 _tile = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                               calculateCanPlayerUnitsNavigateToAreaFromArea,
                                     this)(playerID, (dword)((int)((short)_area)), (dword)((int)(targetArea)), 0);
