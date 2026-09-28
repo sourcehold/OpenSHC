@@ -41,8 +41,8 @@ namespace Map {
             int _axgt;
             int _tile2;
             uint _tile;
-            short _x;
-            short _y;
+            int _x;
+            int _y;
             _tileY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
             _axgt = DAT_ViewportRenderState::instance.translationMatrix[_tileY].addXgetTile;
             this->searchGeneration = this->searchGeneration + 1;
@@ -70,8 +70,8 @@ namespace Map {
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 while (_tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex], _tile < 0x13a10) {
-                    _x = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                    _y = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    _x = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
+                    _y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
                     if ((80400 < this->searchQueue.currentDistance) || (10 < this->searchQueue.currentDistance))
                         break;
