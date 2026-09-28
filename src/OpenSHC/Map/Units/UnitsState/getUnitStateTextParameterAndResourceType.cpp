@@ -268,8 +268,7 @@ namespace Map {
                       115 or 112
                      */
 
-                    return (-(uint)(this->units[this->units[unitIndex].shootTargetedUnit].isStalked != 0) & 0xfffffffd)
-                        + 0x73;
+                    return this->units[this->units[unitIndex].shootTargetedUnit].isStalked != 0 ? 0x70 : 0x73;
                 case 10:
                     return (uint)(this->units[this->units[unitIndex].shootTargetedUnit].isStalked == 0) * 2 + 0x71;
                 default:

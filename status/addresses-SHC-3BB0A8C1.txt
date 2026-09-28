@@ -51263,7 +51263,7 @@ SHC_3BB0A8C1_0x00537E00 | 35.2% | orig has 2 separate loops
 
 SHC_3BB0A8C1_0x00537EE0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00537F60 | 62.5% | jump table order differs
+SHC_3BB0A8C1_0x00537F60 | 64.9% | LTCG edx across call
 
 SHC_3BB0A8C1_0x005388DC | 0.0% | Pending
 
