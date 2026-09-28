@@ -27,6 +27,8 @@ reccmp\dll\setup.bat
 
 git push --set-upstream origin $Branch
 
+.\tools\reimplementation-control\Enable-Reimplemented-Data.ps1
+
 .\build.bat RelWithDebInfo OpenSHC.dll
 
 reccmp/dll/run.bat reccmp-reccmp --target STRONGHOLDCRUSADER
