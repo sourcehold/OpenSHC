@@ -32,8 +32,8 @@ namespace Map {
             int (*paiVar3)[8];
             int _tile;
             short _buildingID;
-            short _x;
-            short _y;
+            int _x;
+            int _y;
             if (399 < (uint)x || 399 < (uint)y || *(char*)(y * 400 + 0x21aec98 + x) == '\0') {
                 return (undefined4)(0);
             }
@@ -55,8 +55,8 @@ namespace Map {
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 while ((
                     _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex], -1 < _tile && (_tile < 80400))) {
-                    _x = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                    _y = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    _x = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
+                    _y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
                     if ((80400 < this->searchQueue.currentDistance) || (range < this->searchQueue.currentDistance))
                         break;
