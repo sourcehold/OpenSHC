@@ -17,48 +17,45 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00531000
         BOOLEnum UnitsState::shouldUnitsEngageInMelee(int unitID_1, int unitID_2)
         {
-            if (this->units[unitID_1].unitType == OpenSHC::Map::Units::UT_TRADER
-                || this->units[unitID_1].unitType == OpenSHC::Map::Units::UT_TRADERHORSE) {
+            UnitTypeShort _type1 = this->units[unitID_1].unitType;
+            if (_type1 == OpenSHC::Map::Units::UT_TRADER || _type1 == OpenSHC::Map::Units::UT_TRADERHORSE) {
                 return TRUE;
             }
-            if (this->units[unitID_2].unitType == OpenSHC::Map::Units::UT_TRADER
-                || this->units[unitID_2].unitType == OpenSHC::Map::Units::UT_TRADERHORSE
-                || this->units[unitID_1].unitType == OpenSHC::Map::Units::UT_GHOST
-                || this->units[unitID_2].unitType == OpenSHC::Map::Units::UT_GHOST) {
+            UnitTypeShort _type2 = this->units[unitID_2].unitType;
+            if (_type2 == OpenSHC::Map::Units::UT_TRADER || _type2 == OpenSHC::Map::Units::UT_TRADERHORSE
+                || _type1 == OpenSHC::Map::Units::UT_GHOST || _type2 == OpenSHC::Map::Units::UT_GHOST) {
                 return TRUE;
             }
-            if (this->units[unitID_1].unitType == OpenSHC::Map::Units::UT_CAMELSHBEAR) {
-                if (this->units[unitID_2].unitType == OpenSHC::Map::Units::UT_WOODCUTTER) {
+            if (_type1 == OpenSHC::Map::Units::UT_CAMELSHBEAR) {
+                if (_type2 == OpenSHC::Map::Units::UT_WOODCUTTER) {
                     return FALSE;
                 }
-                if (this->units[unitID_2].unitType == OpenSHC::Map::Units::UT_LIONSHWOLF) {
+                if (_type2 == OpenSHC::Map::Units::UT_LIONSHWOLF) {
                     return FALSE;
                 }
                 return TRUE;
             }
-            if (this->units[unitID_2].unitType == OpenSHC::Map::Units::UT_CAMELSHBEAR) {
-                if (this->units[unitID_1].unitType == OpenSHC::Map::Units::UT_WOODCUTTER
-                    || this->units[unitID_1].unitType == OpenSHC::Map::Units::UT_LIONSHWOLF) {
+            if (_type2 == OpenSHC::Map::Units::UT_CAMELSHBEAR) {
+                if (_type1 == OpenSHC::Map::Units::UT_WOODCUTTER || _type1 == OpenSHC::Map::Units::UT_LIONSHWOLF) {
                     return FALSE;
                 }
                 return TRUE;
             }
             if (this->units[unitID_1].isStalked == 0) {
                 if (this->units[unitID_2].isStalked != 0) {
-                    if (this->units[unitID_2].unitType == OpenSHC::Map::Units::UT_LIONSHWOLF) {
+                    if (_type2 == OpenSHC::Map::Units::UT_LIONSHWOLF) {
                         return FALSE;
                     }
-                    if (this->units[unitID_2].unitType == OpenSHC::Map::Units::UT_CAGEDOG) {
+                    if (_type2 == OpenSHC::Map::Units::UT_CAGEDOG) {
                         return (BOOLEnum)(DAT_GameState::instance.mapAndTime
                                               .playerTeams[this->units[unitID_2].displayColorPlayerID]
                             == DAT_GameState::instance.mapAndTime.playerTeams[this->units[unitID_1].owner]);
                     }
-                    if (this->units[unitID_2].unitType == OpenSHC::Map::Units::UT_RABBIT
-                        || this->units[unitID_2].unitType == OpenSHC::Map::Units::UT_QUARRYOX
-                        || this->units[unitID_2].unitType == OpenSHC::Map::Units::UT_COW) {
+                    if (_type2 == OpenSHC::Map::Units::UT_RABBIT || _type2 == OpenSHC::Map::Units::UT_QUARRYOX
+                        || _type2 == OpenSHC::Map::Units::UT_COW) {
                         return FALSE;
                     }
-                    return (BOOLEnum)(this->units[unitID_2].unitType != OpenSHC::Map::Units::UT_HUNTERDOG);
+                    return (BOOLEnum)(_type2 != OpenSHC::Map::Units::UT_HUNTERDOG);
                 }
                 if (DAT_GameState::instance.mapAndTime.skirmishNoRushTicks == 0
                     || DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SKIRMISH_SINGLE_PLAYER
@@ -67,30 +64,30 @@ namespace Map {
                 }
                 return TRUE;
             }
-            if (this->units[unitID_1].unitType == OpenSHC::Map::Units::UT_LIONSHWOLF) {
-                if (this->units[unitID_2].unitType == OpenSHC::Map::Units::UT_ANTELOPESHDEER) {
+            if (_type1 == OpenSHC::Map::Units::UT_LIONSHWOLF) {
+                if (_type2 == OpenSHC::Map::Units::UT_ANTELOPESHDEER) {
                     return FALSE;
                 }
-                if (this->units[unitID_2].unitType == OpenSHC::Map::Units::UT_COW) {
+                if (_type2 == OpenSHC::Map::Units::UT_COW) {
                     return FALSE;
                 }
-                if (this->units[unitID_2].unitType == OpenSHC::Map::Units::UT_RABBIT) {
+                if (_type2 == OpenSHC::Map::Units::UT_RABBIT) {
                     return FALSE;
                 }
-                if (this->units[unitID_2].unitType == OpenSHC::Map::Units::UT_HUNTERDOG) {
+                if (_type2 == OpenSHC::Map::Units::UT_HUNTERDOG) {
                     return FALSE;
                 }
-            } else if (this->units[unitID_1].unitType == OpenSHC::Map::Units::UT_CAGEDOG) {
-                if (this->units[unitID_2].unitType == OpenSHC::Map::Units::UT_ANTELOPESHDEER) {
+            } else if (_type1 == OpenSHC::Map::Units::UT_CAGEDOG) {
+                if (_type2 == OpenSHC::Map::Units::UT_ANTELOPESHDEER) {
                     return FALSE;
                 }
-                if (this->units[unitID_2].unitType == OpenSHC::Map::Units::UT_COW) {
+                if (_type2 == OpenSHC::Map::Units::UT_COW) {
                     return FALSE;
                 }
-                if (this->units[unitID_2].unitType == OpenSHC::Map::Units::UT_RABBIT) {
+                if (_type2 == OpenSHC::Map::Units::UT_RABBIT) {
                     return FALSE;
                 }
-                if (this->units[unitID_2].unitType == OpenSHC::Map::Units::UT_HUNTERDOG) {
+                if (_type2 == OpenSHC::Map::Units::UT_HUNTERDOG) {
                     return FALSE;
                 }
                 if (this->units[unitID_2].isStalked != 0) {
@@ -99,16 +96,16 @@ namespace Map {
                 return (
                     BOOLEnum)(DAT_GameState::instance.mapAndTime.playerTeams[this->units[unitID_1].displayColorPlayerID]
                     == DAT_GameState::instance.mapAndTime.playerTeams[this->units[unitID_2].owner]);
-            } else if (this->units[unitID_1].unitType != OpenSHC::Map::Units::UT_HUNTERDOG) {
+            } else if (_type1 != OpenSHC::Map::Units::UT_HUNTERDOG) {
                 return TRUE;
             } else {
-                if (this->units[unitID_2].unitType == OpenSHC::Map::Units::UT_RABBIT) {
+                if (_type2 == OpenSHC::Map::Units::UT_RABBIT) {
                     return FALSE;
                 }
-                if (this->units[unitID_2].unitType == OpenSHC::Map::Units::UT_LIONSHWOLF) {
+                if (_type2 == OpenSHC::Map::Units::UT_LIONSHWOLF) {
                     return FALSE;
                 }
-                if (this->units[unitID_2].unitType == OpenSHC::Map::Units::UT_CAGEDOG) {
+                if (_type2 == OpenSHC::Map::Units::UT_CAGEDOG) {
                     return FALSE;
                 }
             }
