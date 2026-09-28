@@ -30,9 +30,6 @@ namespace Map {
         dword PathFindingState::findAppropriateLocationForSiegeTent(
             int distanceUnk, uint x, uint y, undefined4 selectionID, uint requiredDistanceFromAIZone, int playerID)
         {
-            short sVar1;
-            bool bVar2;
-            uint uVar3;
             int* piVar4;
             int iVar5;
             int iVar6;
@@ -45,7 +42,7 @@ namespace Map {
               === INITIAL VALIDATION ===   Check if coordinates are within map bounds (400x400) and if the tile is
               walkable
              */
-            if (((399 < x) || (399 < y)) || (*(char*)(y * 400 + 0x21aec98 + x) == '\0')) {
+            if (399 < x || 399 < y || *(char*)(y * 400 + 0x21aec98 + x) == '\0') {
                 /*
                   Invalid position - out of bounds or unwalkable
                  */
@@ -108,7 +105,7 @@ namespace Map {
                     /*
                       Get Y coordinate of current tile being processed
                      */
-                    sVar1 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    short sVar1 = this->searchQueue.yQueue[this->searchQueue.readIndex];
                     /*
                       Get distance from start for current tile
                      */
@@ -134,17 +131,17 @@ namespace Map {
                           Check if movement is possible in this direction (using bitflag for direction   y)   Check if
                           adjacent tile hasn't been visited this iteration
                          */
-                        if (((DAT_TileMapState::instance.PathLinkageLayer[_tile]
-                                 & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[y])
-                                != 0)
+                        if ((DAT_TileMapState::instance.PathLinkageLayer[_tile]
+                                & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[y])
+                                != 0
                             && (_offsetTile = DAT_TileMapState::instance.directionTranslationMatrix[sVar1][y] + _tile,
                                 DAT_TileMapState::instance.WalkLayer[_offsetTile] != this->searchGeneration)) {
-                            bVar2 = true;
+                            bool bVar2 = true;
                             /*
                               === AI Zone DISTANCE CHECK ===   If specified (i.e. not 0), then the strategic distance of
                               the current tile   must be exactly that value
                              */
-                            if ((requiredDistanceFromAIZone != 0)
+                            if (requiredDistanceFromAIZone != 0
                                 && (bVar2 = true,
                                     *(byte*)(*(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray
                                                  + playerID * 0x177bc + -0x10)
@@ -157,9 +154,8 @@ namespace Map {
                               === SIEGE TENT PLACEMENT VALIDATION ===   Only check for valid placement if distance > 4
                               (minimum spacing requirement)
                              */
-                            if (((4 < this->searchQueue.currentDistance)
-                                    && (DAT_TileMapState::instance.UnitLayer[_offsetTile] == 0))
-                                && (bVar2)) {
+                            if (4 < this->searchQueue.currentDistance
+                                && DAT_TileMapState::instance.UnitLayer[_offsetTile] == 0 && bVar2) {
                                 /*
                                   Get height of candidate tile
                                  */
@@ -191,15 +187,15 @@ namespace Map {
                                       checks for: sea, border, border_edge, rocky, building,    tree, river, ford,
                                       crenel wall impassible, farm field hop tree,    farm field dairy fence, moat, farm
                                      */
-                                    if ((((DAT_TileMapState::instance.LogicLayer[iVar5] & 0x4a7014b1U) != 0)
-                                            || ((DAT_TileMapState::instance.LogicLayer[iVar5] & 4U) != 0))
-                                        || ((DAT_TileMapState::instance.UnitLayer[iVar5] != 0
-                                            || (DAT_TileMapState::instance.BuildingLayer[iVar5] != 0))))
+                                    if ((DAT_TileMapState::instance.LogicLayer[iVar5] & 0x4a7014b1U) != 0
+                                        || (DAT_TileMapState::instance.LogicLayer[iVar5] & 4U) != 0
+                                        || DAT_TileMapState::instance.UnitLayer[iVar5] != 0
+                                        || DAT_TileMapState::instance.BuildingLayer[iVar5] != 0)
                                         break;
                                     /*
                                       Track height variation (for flatness check)
                                      */
-                                    uVar3 = (uint)DAT_TileMapState::instance.HeightLayer[iVar5];
+                                    uint uVar3 = (uint)DAT_TileMapState::instance.HeightLayer[iVar5];
                                     uVar8 = uVar3;
                                     if ((uVar3 <= uVar7) && (uVar8 = uVar7, uVar3 < x)) {
                                         /*
@@ -214,10 +210,10 @@ namespace Map {
                                       UnitLayer, BuildingLayer, HeightLayer
                                      */
                                     iVar5 = *piVar4 + _offsetTile;
-                                    if (((((DAT_TileMapState::instance.LogicLayer[iVar5] & 0x4a7014b1U) != 0)
-                                             || ((DAT_TileMapState::instance.LogicLayer[iVar5] & 4U) != 0))
-                                            || (DAT_TileMapState::instance.UnitLayer[iVar5] != 0))
-                                        || (DAT_TileMapState::instance.BuildingLayer[iVar5] != 0)) {
+                                    if ((DAT_TileMapState::instance.LogicLayer[iVar5] & 0x4a7014b1U) != 0
+                                        || (DAT_TileMapState::instance.LogicLayer[iVar5] & 4U) != 0
+                                        || DAT_TileMapState::instance.UnitLayer[iVar5] != 0
+                                        || DAT_TileMapState::instance.BuildingLayer[iVar5] != 0) {
                                         iVar6 = iVar6 + 1;
                                         break;
                                     }
@@ -228,10 +224,10 @@ namespace Map {
                                     }
                                     uVar7 = uVar8;
                                     iVar5 = piVar4[1] + _offsetTile;
-                                    if ((((DAT_TileMapState::instance.LogicLayer[iVar5] & 0x4a7014b1U) != 0)
-                                            || ((DAT_TileMapState::instance.LogicLayer[iVar5] & 4U) != 0))
-                                        || ((DAT_TileMapState::instance.UnitLayer[iVar5] != 0
-                                            || (DAT_TileMapState::instance.BuildingLayer[iVar5] != 0)))) {
+                                    if ((DAT_TileMapState::instance.LogicLayer[iVar5] & 0x4a7014b1U) != 0
+                                        || (DAT_TileMapState::instance.LogicLayer[iVar5] & 4U) != 0
+                                        || DAT_TileMapState::instance.UnitLayer[iVar5] != 0
+                                        || DAT_TileMapState::instance.BuildingLayer[iVar5] != 0) {
                                         iVar6 = iVar6 + 2;
                                         break;
                                     }
@@ -241,10 +237,10 @@ namespace Map {
                                         x = uVar3;
                                     }
                                     iVar5 = piVar4[2] + _offsetTile;
-                                    if (((((DAT_TileMapState::instance.LogicLayer[iVar5] & 0x4a7014b1U) != 0)
-                                             || ((DAT_TileMapState::instance.LogicLayer[iVar5] & 4U) != 0))
-                                            || (DAT_TileMapState::instance.UnitLayer[iVar5] != 0))
-                                        || (DAT_TileMapState::instance.BuildingLayer[iVar5] != 0)) {
+                                    if ((DAT_TileMapState::instance.LogicLayer[iVar5] & 0x4a7014b1U) != 0
+                                        || (DAT_TileMapState::instance.LogicLayer[iVar5] & 4U) != 0
+                                        || DAT_TileMapState::instance.UnitLayer[iVar5] != 0
+                                        || DAT_TileMapState::instance.BuildingLayer[iVar5] != 0) {
                                         iVar6 = iVar6 + 3;
                                         uVar7 = uVar8;
                                         break;
@@ -262,7 +258,7 @@ namespace Map {
                                   === FINAL VALIDATION ===   If all 8 surrounding tiles are clear (iVar6 == 8)   AND
                                   terrain is relatively flat (height difference < 12)
                                  */
-                                if ((iVar6 == 8) && ((int)(uVar7 - x) < 0xc)) {
+                                if (iVar6 == 8 && (int)(uVar7 - x) < 0xc) {
                                     /*
                                       FOUND VALID LOCATION!
                                      */
