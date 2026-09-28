@@ -10,15 +10,16 @@ namespace Game {
     void GameStateStructures::updateCrowding()
     {
         for (int playerID = 1; playerID < 9; playerID++) {
-            if (this->playerDataArray[playerID].currentPopulation <= this->playerDataArray[playerID].populationCap) {
+            int currentPopulation = this->playerDataArray[playerID].currentPopulation;
+            int populationCap = this->playerDataArray[playerID].populationCap;
+            if (currentPopulation <= populationCap) {
                 this->playerDataArray[playerID].crowding = 0;
-            } else if (this->playerDataArray[playerID].currentPopulation <= 0) {
+            } else if (currentPopulation <= 0) {
                 this->playerDataArray[playerID].crowding = 0;
-            } else if (this->playerDataArray[playerID].populationCap <= 0) {
+            } else if (populationCap <= 0) {
                 this->playerDataArray[playerID].crowding = 150;
             } else {
-                this->playerDataArray[playerID].crowding = (this->playerDataArray[playerID].currentPopulation * 100)
-                    / this->playerDataArray[playerID].populationCap;
+                this->playerDataArray[playerID].crowding = (currentPopulation * 100) / populationCap;
             }
         }
     }
