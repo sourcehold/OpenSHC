@@ -78,23 +78,23 @@ namespace Map {
             DAT_CurrentUnitSlotID::instance = 1;
             do {
                 _currentUnitID = DAT_CurrentUnitSlotID::instance;
-                if (this->units[DAT_CurrentUnitSlotID::instance].logicalState != OpenSHC::Map::Units::ULS_INVISIBLE) {
-                    this->maxUnitCount = DAT_CurrentUnitSlotID::instance + 1;
-                    this->units[DAT_CurrentUnitSlotID::instance].field233_0x39a = 0;
-                    this->units[DAT_CurrentUnitSlotID::instance].attackedBy = 0;
-                    this->units[DAT_CurrentUnitSlotID::instance].huntedBy = 0;
-                    this->units[DAT_CurrentUnitSlotID::instance].field265_0x3dc = 0;
-                    this->units[DAT_CurrentUnitSlotID::instance].field43_0x64 = 0;
+                if (this->units[_currentUnitID].logicalState != OpenSHC::Map::Units::ULS_INVISIBLE) {
+                    this->maxUnitCount = _currentUnitID + 1;
+                    this->units[_currentUnitID].field233_0x39a = 0;
+                    this->units[_currentUnitID].attackedBy = 0;
+                    this->units[_currentUnitID].huntedBy = 0;
+                    this->units[_currentUnitID].field265_0x3dc = 0;
+                    this->units[_currentUnitID].field43_0x64 = 0;
                     /*
                       This literally does nothing, this variable is not used elsewhere, what the
                        hell?
                      */
 
-                    _shortFieldPtr = &this->units[DAT_CurrentUnitSlotID::instance].targetShootRelated;
-                    if (this->units[DAT_CurrentUnitSlotID::instance].targetShootRelated != 0) {
+                    _shortFieldPtr = &this->units[_currentUnitID].targetShootRelated;
+                    if (this->units[_currentUnitID].targetShootRelated != 0) {
                         *_shortFieldPtr = *_shortFieldPtr + -1;
                     }
-                    if ((this->units[DAT_CurrentUnitSlotID::instance].state.generic
+                    if ((this->units[_currentUnitID].state.generic
                             == OpenSHC::Map::Units::States::US_DETERMINE_NEXT_STATEUnk)
                         && (_troopValue
                             = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::isUnitRegisteredOnItsOwnTile,
@@ -432,17 +432,19 @@ namespace Map {
                                 }
                             }
                         }
-                        _buildingID = this->units[DAT_CurrentUnitSlotID::instance].unitType;
-                        if (((_buildingID == OpenSHC::Map::Units::UT_E_ARCHER)
-                                || (_buildingID == OpenSHC::Map::Units::UT_A_ARCHER))
-                            && (_buildingID = this->units[DAT_CurrentUnitSlotID::instance].state.generic,
-                                _buildingID == OpenSHC::Map::Units::States::US_AIM_WEAPONUnk
-                                    || (_buildingID == OpenSHC::Map::Units::States::US_FIRE_WEAPONUnk))
-                            && (_troopValue = this->units[DAT_CurrentUnitSlotID::instance].shootTargetedUnit,
-                                0 < _troopValue
-                                    && (this->units[_troopValue].uid
-                                        == this->units[DAT_CurrentUnitSlotID::instance].targetUID))) {
-                            this->units[_troopValue].field233_0x39a = 1;
+                        if ((this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_E_ARCHER
+                                || this->units[DAT_CurrentUnitSlotID::instance].unitType
+                                    == OpenSHC::Map::Units::UT_A_ARCHER)
+                            && (this->units[DAT_CurrentUnitSlotID::instance].state.generic
+                                    == OpenSHC::Map::Units::States::US_AIM_WEAPONUnk
+                                || this->units[DAT_CurrentUnitSlotID::instance].state.generic
+                                    == OpenSHC::Map::Units::States::US_FIRE_WEAPONUnk)) {
+                            _troopValue = this->units[DAT_CurrentUnitSlotID::instance].shootTargetedUnit;
+                            if (0 < _troopValue
+                                && this->units[_troopValue].uid
+                                    == this->units[DAT_CurrentUnitSlotID::instance].targetUID) {
+                                this->units[_troopValue].field233_0x39a = 1;
+                            }
                         }
                         if (this->units[DAT_CurrentUnitSlotID::instance].enemyNoticeFrequencyUnk != 0
                             && (DAT_GameState::instance.mapAndTime.totalGameTicksUnk
@@ -647,11 +649,12 @@ namespace Map {
                                     == (OpenSHC::Map::Units::States::US_DEATH_02
                                         | OpenSHC::Map::Units::States::US_STAND_UPUnk
                                         | OpenSHC::Map::Units::States::US_RELOAD_WEAPONUnk)
-                                || (UVar8 == OpenSHC::Map::Units::States::US_DIG))
-                            && (_troopValue = this->units[DAT_CurrentUnitSlotID::instance].digTileTarget,
-                                DAT_TileMapState::instance.moats[_troopValue].owner != '\0')) {
-                            DAT_TileMapState::instance.moats[_troopValue].someCountDown
-                                = DAT_TileMapState::instance.moats[_troopValue].someCountDown + -0x14;
+                                || (UVar8 == OpenSHC::Map::Units::States::US_DIG))) {
+                            _troopValue = this->units[DAT_CurrentUnitSlotID::instance].digTileTarget;
+                            if (DAT_TileMapState::instance.moats[_troopValue].owner != '\0') {
+                                DAT_TileMapState::instance.moats[_troopValue].someCountDown
+                                    = DAT_TileMapState::instance.moats[_troopValue].someCountDown + -0x14;
+                            }
                         }
                         this->units[DAT_CurrentUnitSlotID::instance].field41_0x5c = 0;
                         if (this->units[DAT_CurrentUnitSlotID::instance].usingTeleport == 0) {
