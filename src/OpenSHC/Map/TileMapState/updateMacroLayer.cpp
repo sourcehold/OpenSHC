@@ -23,7 +23,7 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00511020
     void TileMapState::updateMacroLayer()
     {
-        if ((int)this->forceUpdateMacroLayerFlag <= 0) {
+        if (this->forceUpdateMacroLayerFlag <= 0) {
             return;
         }
 

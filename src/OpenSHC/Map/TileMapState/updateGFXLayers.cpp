@@ -81,7 +81,7 @@ namespace Map {
         int macroMid;
         int savedBitFlag;
 
-        if ((int)this->forceUpdateGFXLayers <= 0) {
+        if (this->forceUpdateGFXLayers <= 0) {
             return;
         }
         this->forceUpdateGFXLayers = this->forceUpdateGFXLayers - 1;
@@ -93,9 +93,9 @@ namespace Map {
         }
 
         rotation = DAT_PathFindingState::instance.mappingYRelated % 10;
-        for (blockRow = this->someIndex; (int)blockRow <= (int)this->someLimit; blockRow++) {
-            for (blockColumn = this->someYLike; (int)blockColumn <= (int)this->someYLikeLimit; blockColumn++) {
-                if ((char)this->mapping40x40[blockRow][blockColumn] != 0) {
+        for (blockRow = this->someIndex; blockRow <= this->someLimit; blockRow++) {
+            for (blockColumn = this->someYLike; blockColumn <= this->someYLikeLimit; blockColumn++) {
+                if (this->mapping40x40[blockRow][blockColumn] != 0) {
                     subRow = rotation;
                     rotation = 0;
                     for (; subRow < 10; subRow++) {

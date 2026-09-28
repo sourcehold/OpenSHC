@@ -35,10 +35,10 @@ namespace Map {
                 uint height
                     = this->HeightLayer[DAT_ViewportRenderState::instance.translationMatrix[footprintY].addXgetTile
                         + this->buildingX + x];
-                if ((int)height > (int)this->buildingMaxHeight) {
+                if ((int)height > this->buildingMaxHeight) {
                     this->buildingMaxHeight = height;
                 }
-                if ((int)height < (int)this->buildingMinHeight) {
+                if ((int)height < this->buildingMinHeight) {
                     this->buildingMinHeight = height;
                 }
             }
