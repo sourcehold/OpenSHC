@@ -77,10 +77,10 @@ namespace Map {
             short _currentX;
             short _currentY;
             uint _logical;
-            if (399 < x || 399 < y || *(char*)(y * 400 + 0x21aec98 + x) == '\0') {
+            if (399 < x || 399 < y || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
                 return FALSE;
             }
-            if (x2 == 0xffffffff || ((x2 < 400 && (y2 < 400)) && (*(char*)(y2 * 400 + 0x21aec98 + x2) != '\0'))) {
+            if (x2 == 0xffffffff || ((x2 < 400 && (y2 < 400)) && (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y2 * 400 + x2] != '\0'))) {
                 if (zeroMeansResetAlgorithm == 0) {
                     this->searchGeneration = this->searchGeneration + 1;
                     if (32000 < this->searchGeneration) {
