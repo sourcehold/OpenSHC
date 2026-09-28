@@ -197,6 +197,8 @@ Style expected of reimplemented code:
   two rows helped one function and hurt its near-identical neighbour. Use `try_styles.py` rather than reasoning about it.
 - Use `for` loops (loop variable declared in the `for`), early returns instead of nested if/else, no `goto`,
   no pointer variables walking over arrays or structs, named fields and enum constants instead of offsets and magic numbers.
+  The early-return preference has one known exception, still tentative - see the note on arms sharing a tail among the
+  diff patterns below.
 - Never change the `// FUNCTION:` address line; keep generated headers untouched unless asked.
 - Write sources as UTF-8 with LF line endings.
 
@@ -255,6 +257,15 @@ Diff patterns that were reliable (more in the cheat sheet):
 - MSVC1400 at `/O2` never unrolls a loop, so a body repeated N times in the asm means the source was written out N
   times. A plain loop where the original is unrolled has cost 80 points on its own.
 - A flag stored with `mov dword ptr [..], 0/1` is an `int`, not a `bool`, which stores a byte.
+- Tentative, one clear case so far: where two arms of a condition share a tail, the nested `if/else` shape the
+  decompiler emits can beat the early returns the style list above asks for, because it decides *which* arm holds the
+  physical copy of the shared block. In `calculateTaxIncomeForPlayer` the original keeps the shared `(tax * 150) / 100`
+  in the second arm and jumps forward into it from the first; early returns put the copy in the first arm and made the
+  second jump backwards, and switching to nested `if/else` was worth 17 points. Read the original's own jump direction
+  with `orig_asm.py NAME` to see which arm should hold it. Treat this as a thing to try, not a rule: the same change
+  measured *worse* on `updateCrowding` (all three nested variants lost 9-14 points) and made no difference at all on
+  `showPopAndGoldPopup` and `createStatsPopUpEntities`, where every shape tied to the decimal because the gap there is
+  the loop base-pointer anchor. `try_styles.py` settles it per function; prefer the early-return form on a tie.
 
 ## Agent Skills
 
