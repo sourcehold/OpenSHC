@@ -28,10 +28,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004995E0
         BOOLEnum PathFindingState::updateSeparateAreaTileMap(int forceUpdate)
         {
-            byte bVar1;
-            ushort uVar2;
-            short sVar3;
-            ushort uVar4;
             int* piVar5;
             int iVar6;
             int iVar7;
@@ -55,14 +51,14 @@ namespace Map {
             this->toggleUpdateSeparateAreaTileMap = 0;
             this->totalZones = 0;
             this->sum = 0;
-            uVar4 = 1;
+            ushort uVar4 = 1;
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                 0x27420, '\0', (void*)((int)(DAT_TileMapState::instance.PathConnectionLayer)));
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                 4000, '\0', (void*)((int)(this->zoneSizesArray)));
             MACRO_CALL_MEMBER(
                 OpenSHC::Map::Buildings::BuildingsState_Func::updatePathLinkageTileMap, DAT_BuildingsState::ptr)(1);
-            sVar3 = 0;
+            short sVar3 = 0;
             local_20 = 0;
             local_c = &DAT_ViewportRenderState::instance.translationMatrix[1].firstTileOfRow;
             do {
@@ -70,8 +66,8 @@ namespace Map {
                     sVar3 = sVar3 + 1;
                     local_c = local_c + 3;
                 }
-                if (((char)DAT_TileMapState::instance.PathConnectionLayer[local_20] == '\0')
-                    && ((DAT_TileMapState::instance.LogicLayer[local_20] & 0x4a5014b1U) == 0)) {
+                if ((char)DAT_TileMapState::instance.PathConnectionLayer[local_20] == '\0'
+                    && (DAT_TileMapState::instance.LogicLayer[local_20] & 0x4a5014b1U) == 0) {
                     this->searchQueue.tilesQueue[0] = local_20;
                     forceUpdate = 1;
                     local_8 = 0;
@@ -80,53 +76,53 @@ namespace Map {
                     for (; local_8 != forceUpdate; local_8 = local_8 + 1) {
                         this->zoneSizesArray[uVar4] = this->zoneSizesArray[uVar4] + 1;
                         iVar7 = this->searchQueue.tilesQueue[local_8];
-                        uVar2 = this->searchQueue.yQueue[local_8];
-                        bVar1 = DAT_TileMapState::instance.PathLinkageLayer[iVar7];
-                        if (((bVar1 & 0x40) != 0) && (DAT_TileMapState::instance.MacroLayer[iVar7 + 0x13a0f] == 0)) {
+                        ushort uVar2 = this->searchQueue.yQueue[local_8];
+                        byte bVar1 = DAT_TileMapState::instance.PathLinkageLayer[iVar7];
+                        if ((bVar1 & 0x40) != 0 && DAT_TileMapState::instance.MacroLayer[iVar7 + 0x13a0f] == 0) {
                             DAT_TileMapState::instance.MacroLayer[iVar7 + 0x13a0f] = uVar4;
                             this->searchQueue.tilesQueue[forceUpdate] = iVar7 + -1;
                             this->searchQueue.yQueue[forceUpdate] = uVar2;
                             forceUpdate = forceUpdate + 1;
                         }
-                        if (((bVar1 & 4) != 0) && (DAT_TileMapState::instance.PathConnectionLayer[iVar7 + 1] == 0)) {
+                        if ((bVar1 & 4) != 0 && DAT_TileMapState::instance.PathConnectionLayer[iVar7 + 1] == 0) {
                             DAT_TileMapState::instance.PathConnectionLayer[iVar7 + 1] = uVar4;
                             this->searchQueue.tilesQueue[forceUpdate] = iVar7 + 1;
                             this->searchQueue.yQueue[forceUpdate] = uVar2;
                             forceUpdate = forceUpdate + 1;
                         }
                         iVar6 = iVar7 + DAT_TileMapState::instance.directionTranslationMatrix[uVar2][0];
-                        if (((bVar1 & 0x80) != 0) && (DAT_TileMapState::instance.MacroLayer[iVar6 + 0x13a0f] == 0)) {
+                        if ((bVar1 & 0x80) != 0 && DAT_TileMapState::instance.MacroLayer[iVar6 + 0x13a0f] == 0) {
                             DAT_TileMapState::instance.MacroLayer[iVar6 + 0x13a0f] = uVar4;
                             this->searchQueue.tilesQueue[forceUpdate] = iVar6 + -1;
                             this->searchQueue.yQueue[forceUpdate] = uVar2 - 1;
                             forceUpdate = forceUpdate + 1;
                         }
-                        if (((bVar1 & 1) != 0) && (DAT_TileMapState::instance.PathConnectionLayer[iVar6] == 0)) {
+                        if ((bVar1 & 1) != 0 && DAT_TileMapState::instance.PathConnectionLayer[iVar6] == 0) {
                             DAT_TileMapState::instance.PathConnectionLayer[iVar6] = uVar4;
                             this->searchQueue.tilesQueue[forceUpdate] = iVar6;
                             this->searchQueue.yQueue[forceUpdate] = uVar2 - 1;
                             forceUpdate = forceUpdate + 1;
                         }
-                        if (((bVar1 & 2) != 0) && (DAT_TileMapState::instance.PathConnectionLayer[iVar6 + 1] == 0)) {
+                        if ((bVar1 & 2) != 0 && DAT_TileMapState::instance.PathConnectionLayer[iVar6 + 1] == 0) {
                             DAT_TileMapState::instance.PathConnectionLayer[iVar6 + 1] = uVar4;
                             this->searchQueue.tilesQueue[forceUpdate] = iVar6 + 1;
                             this->searchQueue.yQueue[forceUpdate] = uVar2 - 1;
                             forceUpdate = forceUpdate + 1;
                         }
                         iVar7 = iVar7 + DAT_TileMapState::instance.directionTranslationMatrix[uVar2][4];
-                        if (((bVar1 & 0x20) != 0) && (DAT_TileMapState::instance.MacroLayer[iVar7 + 0x13a0f] == 0)) {
+                        if ((bVar1 & 0x20) != 0 && DAT_TileMapState::instance.MacroLayer[iVar7 + 0x13a0f] == 0) {
                             DAT_TileMapState::instance.MacroLayer[iVar7 + 0x13a0f] = uVar4;
                             this->searchQueue.tilesQueue[forceUpdate] = iVar7 + -1;
                             this->searchQueue.yQueue[forceUpdate] = uVar2 + 1;
                             forceUpdate = forceUpdate + 1;
                         }
-                        if (((bVar1 & 0x10) != 0) && (DAT_TileMapState::instance.PathConnectionLayer[iVar7] == 0)) {
+                        if ((bVar1 & 0x10) != 0 && DAT_TileMapState::instance.PathConnectionLayer[iVar7] == 0) {
                             DAT_TileMapState::instance.PathConnectionLayer[iVar7] = uVar4;
                             this->searchQueue.tilesQueue[forceUpdate] = iVar7;
                             this->searchQueue.yQueue[forceUpdate] = uVar2 + 1;
                             forceUpdate = forceUpdate + 1;
                         }
-                        if (((bVar1 & 8) != 0) && (DAT_TileMapState::instance.PathConnectionLayer[iVar7 + 1] == 0)) {
+                        if ((bVar1 & 8) != 0 && DAT_TileMapState::instance.PathConnectionLayer[iVar7 + 1] == 0) {
                             DAT_TileMapState::instance.PathConnectionLayer[iVar7 + 1] = uVar4;
                             this->searchQueue.tilesQueue[forceUpdate] = iVar7 + 1;
                             this->searchQueue.yQueue[forceUpdate] = uVar2 + 1;
