@@ -43,13 +43,13 @@ namespace Map {
             if (_isInMoat != 0 && (DAT_TileMapState::instance.MacroLayer[_tile] & 0x3f) == 1) {
                 _isInMoat = 0;
             }
-            if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x40000000U) != 0) {
+            if ((_logicFlags & 0x40000000) != 0) {
                 _isInMoat = 1;
             }
             if ((_logicFlags & 0x800000) != 0) {
                 this->units[unitID].calculatedMovementSpeed = this->units[unitID].movementSpeed;
-            } else if (this->units[unitID].terrainOrClimbHeight < (int)(uint)_tileHeight) {
-                int _heightDifference = (uint)_tileHeight - this->units[unitID].terrainOrClimbHeight;
+            } else if (this->units[unitID].terrainOrClimbHeight < _tileHeight) {
+                int _heightDifference = _tileHeight - this->units[unitID].terrainOrClimbHeight;
                 /* the climb bands are split by halving, not as a flat ladder */
                 if (_heightDifference < 0x11) {
                     if (_heightDifference < 0xc) {
@@ -82,8 +82,8 @@ namespace Map {
                     this->units[unitID].terrainOrClimbHeight = _tileHeight;
                     this->units[unitID].calculatedMovementSpeed = this->units[unitID].movementSpeed;
                 }
-            } else if ((int)(uint)_tileHeight < this->units[unitID].terrainOrClimbHeight) {
-                int _heightDifference = this->units[unitID].terrainOrClimbHeight - (uint)_tileHeight;
+            } else if (_tileHeight < this->units[unitID].terrainOrClimbHeight) {
+                int _heightDifference = this->units[unitID].terrainOrClimbHeight - _tileHeight;
                 if (_heightDifference > 0x10) {
                     this->units[unitID].terrainOrClimbHeight = _tileHeight;
                     this->units[unitID].calculatedMovementSpeed = this->units[unitID].movementSpeed;
@@ -120,31 +120,31 @@ namespace Map {
             }
             if (_isInMoat == 0) {
                 if ((_logicFlags & 0x200000) != 0) {
-                    if ((char)this->units[unitID].negativeHeight < '\x10') {
+                    if ((char)this->units[unitID].negativeHeight < 0x10) {
                         this->units[unitID].negativeHeight = this->units[unitID].negativeHeight + 4;
                     }
                     this->units[unitID].calculatedMovementSpeed = this->units[unitID].calculatedMovementSpeed + 2;
                 } else if (this->units[unitID].negativeHeight != 0) {
                     this->units[unitID].negativeHeight = this->units[unitID].negativeHeight - 8;
-                    if ((char)this->units[unitID].negativeHeight < '\0') {
+                    if ((char)this->units[unitID].negativeHeight < 0) {
                         this->units[unitID].negativeHeight = 0;
                     }
                     this->units[unitID].calculatedMovementSpeed = this->units[unitID].calculatedMovementSpeed + 3;
                 }
             } else {
-                if ((char)this->units[unitID].negativeHeight < '\x18') {
+                if ((char)this->units[unitID].negativeHeight < 0x18) {
                     this->units[unitID].negativeHeight = this->units[unitID].negativeHeight + 4;
                 }
-                if ((char)this->units[unitID].negativeHeight <= '\x04') {
+                if ((char)this->units[unitID].negativeHeight <= 4) {
                     this->units[unitID].calculatedMovementSpeed = this->units[unitID].calculatedMovementSpeed + 3;
-                } else if ((char)this->units[unitID].negativeHeight < '\n') {
+                } else if ((char)this->units[unitID].negativeHeight < 10) {
                     this->units[unitID].calculatedMovementSpeed = this->units[unitID].calculatedMovementSpeed + 4;
                 } else {
                     this->units[unitID].calculatedMovementSpeed = this->units[unitID].calculatedMovementSpeed + 6;
                 }
             }
             this->units[unitID].field289_0x3ff = 0;
-            if ((DAT_TileMapState::instance.LogicLayer[_tile] & 8) != 0) {
+            if ((_logicFlags & 8) != 0) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::registerSpottedEnemyTile,
                     DAT_TroopValueState::ptr)(_tile);
             }
