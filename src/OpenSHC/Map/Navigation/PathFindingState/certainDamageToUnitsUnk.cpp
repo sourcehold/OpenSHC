@@ -61,7 +61,7 @@ namespace Map {
             iVar9 = param_1 - DAT_ViewportRenderState::instance.translationMatrix[uVar7].addXgetTile;
             local_4 = 1;
             uint uVar1 = iVar9 + 100;
-            if (399 < uVar1 || 399 < uVar7 || *(char*)(uVar7 * 400 + 0x21aec98 + uVar1) == '\0') {
+            if (399 < uVar1 || 399 < uVar7 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[uVar7 * 400 + uVar1] == '\0') {
                 local_4 = -1;
             }
             this->searchQueue.tilesQueue[0] = param_1;
