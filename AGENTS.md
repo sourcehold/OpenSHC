@@ -128,6 +128,17 @@ restyling anything large:
 - a jump table - Ghidra usually renders the dispatch as a call through an unnamed pointer array and drops the arms, so
   rebuild the `switch` from the byte and jump tables instead of restyling the decompiler output.
 
+`diff_triage.py` gives one line per function in the build list and says whether more source work can pay at all: it
+flags a `sub esp` frame-size mismatch (`FRAME`), byte-sized stack slots we have and the original does not (`BYTE`), a
+cold return block we inline where the original outlines it (`RET`), and the case where only register and stack-slot
+*naming* is left (`alloc-only`). Chase a `FRAME` flag with `diff_slots.py NAME`, which lists every `[esp + N]` slot per
+side: one extra slot is one local the original does not have, and removing it has been worth 10-30 points.
+`diff_jcc.py` finds comparisons whose operator is one strictness step off the original (`jl`/`jle`, `jg`/`jge`) - these
+are real off-by-one bugs where Ghidra decompiled the condition wrongly, so confirm a fix by re-running that tool rather
+than by the percentage. `reorder_search.py FILE NAME` hill-climbs the match % by reordering independent statements,
+which is the only lever left once a function is `alloc-only`; it pays about one move in ten, and mostly where the
+statements sit between two calls or on a loop back-edge.
+
 ### Binary Comparison (`reccmp`)
 
 Compares generated binaries against the original executable.

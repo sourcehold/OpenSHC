@@ -22,6 +22,15 @@ rewrite sources, because the Visual Studio bundled one is too old for `.clang-fo
 | `fix_func_refs.py [--drop-include H]` | After a header refactor: rewrite `X_Func::name` references whose resolver moved to another namespace. |
 | `move_to_resolver_namespace.py FILE...` | After a header refactor: re-wrap a definition in its resolver's new namespace and `git mv` it to the matching folder. |
 
+Analysis helpers, for deciding *what* to change when a function is stuck below 100%:
+
+| Script | Purpose |
+|---|---|
+| `diff_triage.py [--run] [filter]` | One line per function: match %, raw and register/slot-normalized difflib ratios, `sub esp` frame size per side, byte-sized `[esp]` accesses per side, `ret` placement. Flags `FRAME` / `BYTE` / `RET` / `alloc-only`. |
+| `diff_slots.py NAME` | Every `[esp + N]` slot with its access count on each side, and the slots only we use. Run after `diff_triage.py` reports `FRAME`. |
+| `diff_jcc.py [NAME]` | Comparisons whose operator is one strictness step off the original (`jl`/`jle`, `jg`/`jge`, `ja`/`jae`) or whose `cmp` operands are the other way round, with context. |
+| `reorder_search.py FILE NAME [--pairs] [--dry]` | Hill-climb the match % by reordering independent statements: permute runs of >=3 by default, or swap every adjacent independent pair with `--pairs`. Builds once per move and reverts anything that does not improve. |
+
 ## Typical loop
 
 ```sh
@@ -33,6 +42,27 @@ python build_quiet.py && python reccmp_report.py --run cmp base.json Map/Units
 python reccmp_report.py diff someFunction                                # inspect what still differs
 python commit_progress_batch.py Map/Units "someFunction=LTCG ecx reuse"
 ```
+
+## Reading `diff_triage.py`
+
+The two ratios are the quickest way to tell whether more source work can pay:
+
+- `norm` much higher than `raw` - only register and stack-slot *naming* differs.
+  The allocator is not reachable from the source; record the reason and move on.
+- `norm` still low - real structure or ordering differs; keep looking.
+- `FRAME` - one local too many or too few. Chase it with `diff_slots.py`; this has
+  been worth 10-30 points (a redundant Ghidra temp, or two copies of a parameter
+  where the original introduced fresh locals instead of reassigning it).
+- `BYTE` - we have byte-sized stack slots the original does not: every `bool`/`byte`
+  local is an `int` in the original.
+- `RET` - we inline a cold early-return block the original places out of line.
+  Restructure so the cold case is last in the source (`if (ok) { body } else { reset }`
+  rather than a guard at the top), which is what makes MSVC outline it.
+
+Confirm a `diff_jcc.py` fix by re-running that tool and checking the pair is gone,
+not by the percentage: a single instruction moves the score by ~0.1 and tells you
+nothing, while three such fixes in one namespace turned out to be real off-by-one
+bugs that Ghidra had decompiled wrongly.
 
 ## Notes
 
