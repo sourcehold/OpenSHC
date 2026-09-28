@@ -45,7 +45,7 @@ namespace Map {
             uint _init_10;
             short _walkLayer;
             if (399 < (uint)this->unitX || 399 < (uint)this->unitY
-                || (_inBounds = false, *(char*)(this->unitY * 400 + 0x21aec98 + this->unitX) == '\0')) {
+                || (_inBounds = false, DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[this->unitY * 400 + this->unitX] == '\0')) {
                 return 0;
             }
             _tile = DAT_ViewportRenderState::instance.translationMatrix[this->unitY].addXgetTile + this->unitX;
