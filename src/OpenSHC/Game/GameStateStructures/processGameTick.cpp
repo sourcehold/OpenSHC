@@ -70,12 +70,12 @@ namespace Game {
     {
         DAT_RotateMapOrPullDownTerrain::instance = 0;
         if (DAT_GameSynchronyState::instance.saveRelated != 0) {
-            if (DAT_GameSynchronyState::instance.isHost == FALSE) {
-                DAT_RotateMapOrPullDownTerrain::instance = 0;
+            if (DAT_GameSynchronyState::instance.isHost != FALSE) {
+                MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::checkGameLagStatusAndKickAccordingly,
+                    DAT_GameSynchronyState::ptr)();
                 return;
             }
-            MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::checkGameLagStatusAndKickAccordingly,
-                DAT_GameSynchronyState::ptr)();
+            DAT_RotateMapOrPullDownTerrain::instance = 0;
             return;
         }
         if (DAT_GameSynchronyState::instance.syncStatus != 0) {
@@ -131,11 +131,11 @@ namespace Game {
                 OpenSHC::Commands::GCT_SEND_QUIT_GAME_VOTE);
         }
         if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)() == FALSE) {
-            if (DAT_TileMapState::instance.DAT_FutureMapOrientation < 8) {
+            if ((int)DAT_TileMapState::instance.DAT_FutureMapOrientation < 8) {
                 DAT_RotateMapOrPullDownTerrain::instance = 1;
             }
         } else if ((DAT_GameCore::instance.gamePausedLogical == 0)
-            || (DAT_TileMapState::instance.DAT_FutureMapOrientation <= 7)) {
+            || ((int)DAT_TileMapState::instance.DAT_FutureMapOrientation <= 7)) {
             if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::isGameHaltingMenuOpen, DAT_GameCore::ptr)()
                 == FALSE) {
                 MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
@@ -143,7 +143,7 @@ namespace Game {
                 DAT_GameCore::instance.mapTimeInTicks = DAT_GameCore::instance.mapTimeInTicks + 1;
                 MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::processSingleTimeTick, this)();
             }
-            if (DAT_TileMapState::instance.DAT_FutureMapOrientation < 8) {
+            if ((int)DAT_TileMapState::instance.DAT_FutureMapOrientation < 8) {
                 DAT_RotateMapOrPullDownTerrain::instance = 1;
             }
         }
