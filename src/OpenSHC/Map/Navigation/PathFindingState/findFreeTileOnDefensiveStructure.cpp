@@ -68,10 +68,8 @@ namespace Map {
                         if (0x13a10 < this->searchQueue.currentDistance) {
                             return;
                         }
-                        psVar3 = &DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[0].short_.yOffset;
-                        paiVar4 = DAT_TileMapState::instance.directionTranslationMatrix + iVar5;
-                        do {
-                            iVar5 = (*paiVar4)[0] + _tile;
+                        for (int _direction = 0; _direction < 8; _direction = _direction + 2) {
+                            iVar5 = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][_direction] + _tile;
                             if (DAT_TileMapState::instance.WalkLayer[iVar5] != this->searchGeneration
                                 && (DAT_TileMapState::instance.LogicLayer[iVar5] & 0x10000100U) != 0) {
                                 /*
@@ -81,17 +79,16 @@ namespace Map {
                                     = (short)this->searchQueue.currentDistance + 1;
                                 DAT_TileMapState::instance.WalkLayer[iVar5] = (short)this->searchGeneration;
                                 this->searchQueue.xQueue[this->searchQueue.writeIndex]
-                                    = ((Point8ShortXY*)(psVar3 + -2))->xOffset + sVar1;
-                                this->searchQueue.yQueue[this->searchQueue.writeIndex] = *psVar3 + sVar2;
+                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].short_.xOffset + sVar1;
+                                this->searchQueue.yQueue[this->searchQueue.writeIndex] = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].short_.yOffset + sVar2;
                                 this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar5;
                                 this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
                                 if (0x13a0f < this->searchQueue.writeIndex) {
                                     this->searchQueue.writeIndex = 0;
                                 }
                             }
-                            psVar3 = psVar3 + 8;
-                            paiVar4 = (int (*)[8])(*paiVar4 + 2);
-                        } while ((int)psVar3 < 0xb4908c);
+                        }
+
                         this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
                         if (0x13a0f < this->searchQueue.readIndex) {
                             this->searchQueue.readIndex = 0;
