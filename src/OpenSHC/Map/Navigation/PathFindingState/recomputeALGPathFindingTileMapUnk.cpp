@@ -20,12 +20,9 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049E510
         void PathFindingState::recomputeALGPathFindingTileMapUnk(int someMax, uint x, uint y, undefined4 param_4)
         {
-            short sVar1;
-            short sVar2;
             uint uVar3;
-            int _direction;
             int iVar4;
-            if (((x < 400) && (y < 400)) && (*(char*)(y * 400 + 0x21aec98 + x) != '\0')) {
+            if (x < 400 && y < 400 && *(char*)(y * 400 + 0x21aec98 + x) != '\0') {
                 this->searchGeneration = this->searchGeneration + 1;
                 if (32000 < this->searchGeneration) {
                     this->searchGeneration = 1;
@@ -47,8 +44,8 @@ namespace Map {
                         while (uVar3 = this->searchQueue.tilesQueue[this->searchQueue.readIndex], uVar3 < 0x13a10) {
                             DAT_TileMapState::instance.AIInfoLayer[uVar3]
                                 = DAT_TileMapState::instance.AIInfoLayer[uVar3] | (byte)param_4;
-                            sVar1 = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                            sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                            short sVar1 = this->searchQueue.xQueue[this->searchQueue.readIndex];
+                            short sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
                             this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[uVar3];
                             if (0x13a10 < this->searchQueue.currentDistance) {
                                 return;
@@ -56,17 +53,16 @@ namespace Map {
                             if (someMax < this->searchQueue.currentDistance) {
                                 return;
                             }
-                            _direction = 0;
+                            int _direction = 0;
                             do {
-                                if (((((DAT_TileMapState::instance.LogicLayer[uVar3] & 0x30U) == 0)
-                                         && (((byte)param_4 != 8
-                                             || ((DAT_TileMapState::instance.LogicLayer[uVar3] & 0x6a5014b1U) == 0))))
-                                        && (iVar4
-                                            = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][_direction]
-                                                + uVar3,
-                                            DAT_TileMapState::instance.WalkLayer[iVar4] != this->searchGeneration))
-                                    && (((byte)param_4 == 0x80
-                                        || (DAT_TileMapState::instance.AIInfoLayer[iVar4] == '\0')))) {
+                                if ((DAT_TileMapState::instance.LogicLayer[uVar3] & 0x30U) == 0
+                                    && ((byte)param_4 != 8
+                                        || ((DAT_TileMapState::instance.LogicLayer[uVar3] & 0x6a5014b1U) == 0))
+                                    && (iVar4 = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][_direction]
+                                            + uVar3,
+                                        DAT_TileMapState::instance.WalkLayer[iVar4] != this->searchGeneration)
+                                    && ((byte)param_4 == 0x80
+                                        || (DAT_TileMapState::instance.AIInfoLayer[iVar4] == '\0'))) {
                                     DAT_TileMapState::instance.CertainPathLayer[iVar4]
                                         = (short)this->searchQueue.currentDistance + 1;
                                     DAT_TileMapState::instance.WalkLayer[iVar4] = (short)this->searchGeneration;
@@ -86,15 +82,15 @@ namespace Map {
                                         this->searchQueue.writeIndex = 0;
                                     }
                                 }
-                                if (((DAT_TileMapState::instance.LogicLayer[uVar3] & 0x30U) == 0)
-                                    && (((((byte)param_4 != 8
-                                              || ((DAT_TileMapState::instance.LogicLayer[uVar3] & 0x6a5014b1U) == 0))
-                                             && (iVar4 = DAT_TileMapState::instance
-                                                             .directionTranslationMatrix[sVar2][_direction + 1]
-                                                     + uVar3,
-                                                 DAT_TileMapState::instance.WalkLayer[iVar4] != this->searchGeneration))
-                                        && (((byte)param_4 == 0x80
-                                            || (DAT_TileMapState::instance.AIInfoLayer[iVar4] == '\0')))))) {
+                                if ((DAT_TileMapState::instance.LogicLayer[uVar3] & 0x30U) == 0
+                                    && ((byte)param_4 != 8
+                                        || ((DAT_TileMapState::instance.LogicLayer[uVar3] & 0x6a5014b1U) == 0))
+                                    && (iVar4
+                                        = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][_direction + 1]
+                                            + uVar3,
+                                        DAT_TileMapState::instance.WalkLayer[iVar4] != this->searchGeneration)
+                                    && ((byte)param_4 == 0x80
+                                        || (DAT_TileMapState::instance.AIInfoLayer[iVar4] == '\0'))) {
                                     DAT_TileMapState::instance.CertainPathLayer[iVar4]
                                         = (short)this->searchQueue.currentDistance + 1;
                                     DAT_TileMapState::instance.WalkLayer[iVar4] = (short)this->searchGeneration;
@@ -114,15 +110,15 @@ namespace Map {
                                         this->searchQueue.writeIndex = 0;
                                     }
                                 }
-                                if ((((DAT_TileMapState::instance.LogicLayer[uVar3] & 0x30U) == 0)
-                                        && (((byte)param_4 != 8
-                                            || ((DAT_TileMapState::instance.LogicLayer[uVar3] & 0x6a5014b1U) == 0))))
-                                    && ((iVar4
+                                if ((DAT_TileMapState::instance.LogicLayer[uVar3] & 0x30U) == 0
+                                    && ((byte)param_4 != 8
+                                        || ((DAT_TileMapState::instance.LogicLayer[uVar3] & 0x6a5014b1U) == 0))
+                                    && (iVar4
                                         = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][_direction + 2]
                                             + uVar3,
                                         DAT_TileMapState::instance.WalkLayer[iVar4] != this->searchGeneration
                                             && (((byte)param_4 == 0x80
-                                                || (DAT_TileMapState::instance.AIInfoLayer[iVar4] == '\0')))))) {
+                                                || (DAT_TileMapState::instance.AIInfoLayer[iVar4] == '\0'))))) {
                                     DAT_TileMapState::instance.CertainPathLayer[iVar4]
                                         = (short)this->searchQueue.currentDistance + 1;
                                     DAT_TileMapState::instance.WalkLayer[iVar4] = (short)this->searchGeneration;
@@ -142,16 +138,15 @@ namespace Map {
                                         this->searchQueue.writeIndex = 0;
                                     }
                                 }
-                                if ((((DAT_TileMapState::instance.LogicLayer[uVar3] & 0x30U) == 0)
-                                        && ((((byte)param_4 != 8
-                                                 || ((DAT_TileMapState::instance.LogicLayer[uVar3] & 0x6a5014b1U) == 0))
-                                            && (iVar4 = DAT_TileMapState::instance
-                                                            .directionTranslationMatrix[sVar2][_direction + 3]
-                                                    + uVar3,
-                                                DAT_TileMapState::instance.WalkLayer[iVar4]
-                                                    != this->searchGeneration))))
-                                    && (((byte)param_4 == 0x80
-                                        || (DAT_TileMapState::instance.AIInfoLayer[iVar4] == '\0')))) {
+                                if ((DAT_TileMapState::instance.LogicLayer[uVar3] & 0x30U) == 0
+                                    && ((byte)param_4 != 8
+                                        || ((DAT_TileMapState::instance.LogicLayer[uVar3] & 0x6a5014b1U) == 0))
+                                    && (iVar4
+                                        = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][_direction + 3]
+                                            + uVar3,
+                                        DAT_TileMapState::instance.WalkLayer[iVar4] != this->searchGeneration)
+                                    && ((byte)param_4 == 0x80
+                                        || (DAT_TileMapState::instance.AIInfoLayer[iVar4] == '\0'))) {
                                     DAT_TileMapState::instance.CertainPathLayer[iVar4]
                                         = (short)this->searchQueue.currentDistance + 1;
                                     DAT_TileMapState::instance.WalkLayer[iVar4] = (short)this->searchGeneration;
