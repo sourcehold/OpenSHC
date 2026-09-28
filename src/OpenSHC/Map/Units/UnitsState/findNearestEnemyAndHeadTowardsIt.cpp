@@ -35,7 +35,7 @@ namespace Map {
             int _bestScore = 100000;
             int _foundEnemyID = 0;
             int _visionDivisor = 1;
-            bool _skipStanceSearch = false;
+            int _skipStanceSearch = 0;
             int _stanceBasedRange = 0;
             short _isRallying = 0;
             if ((this->units[unitID].SA != 0
@@ -52,7 +52,7 @@ namespace Map {
                 }
             }
             if (this->units[unitID].targetingType == OpenSHC::Map::Units::UIT_UNIT_ATTACK_UNIT) {
-                _skipStanceSearch = true;
+                _skipStanceSearch = 1;
                 switch (this->units[unitID].unitType) {
                 case OpenSHC::Map::Units::UT_TUNNELER:
                 case OpenSHC::Map::Units::UT_E_SPEAR:
@@ -65,13 +65,13 @@ namespace Map {
                 case OpenSHC::Map::Units::UT_A_SLAVE:
                 case OpenSHC::Map::Units::UT_A_ASSASSIN:
                 case OpenSHC::Map::Units::UT_A_SWORDSMAN:
-                    _skipStanceSearch = false;
+                    _skipStanceSearch = 0;
                     if (this->units[unitID].tribeID != 0) {
                         int _tribeUnitID = DAT_TribesState::instance.tribes[this->units[unitID].tribeID].someUnitID;
                         if (_tribeUnitID != 0
                             && this->units[_tribeUnitID].uid
                                 == DAT_TribesState::instance.tribes[this->units[unitID].tribeID].someUnitUID) {
-                            _skipStanceSearch = true;
+                            _skipStanceSearch = 1;
                             break;
                         }
                     }
@@ -106,11 +106,11 @@ namespace Map {
                         }
                         this->units[unitID].lookForEnemy = (short)_lookAhead;
                     }
-                    _skipStanceSearch = true;
+                    _skipStanceSearch = 1;
                 }
             }
             if (this->units[unitID].isSelectable_OR_matchTime == 0) {
-                _skipStanceSearch = true;
+                _skipStanceSearch = 1;
             }
             if (DAT_GameState::instance.playerDataArray[_playerID].enemies < 5) {
                 _visionDivisor = 5;
@@ -294,12 +294,12 @@ namespace Map {
                     _foundEnemyID = _enemyUnitID;
                 }
             }
-            bool _restoreSavedDestination = false;
+            int _restoreSavedDestination = 0;
             if (_stanceBasedRange == 0) {
                 if (this->units[unitID].lookForEnemy == 0) {
                     this->units[unitID].movementType_OR_targetUnitID = 0;
                     if (this->units[unitID].state.generic == OpenSHC::Map::Units::States::US_MOVE_TO_DESTINATION) {
-                        _restoreSavedDestination = true;
+                        _restoreSavedDestination = 1;
                     }
                 }
             } else if (this->units[unitID].lookForEnemy >= 0) {
@@ -307,11 +307,11 @@ namespace Map {
                     if (this->units[unitID].lookForEnemy == 0) {
                         this->units[unitID].movementType_OR_targetUnitID = 0;
                         if (this->units[unitID].state.generic == OpenSHC::Map::Units::States::US_MOVE_TO_DESTINATION) {
-                            _restoreSavedDestination = true;
+                            _restoreSavedDestination = 1;
                         }
                     }
                 } else {
-                    bool _headedToEnemy = false;
+                    int _headedToEnemy = 0;
                     if (_foundEnemyID != 0
                         && MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                  calculateCanPlayerUnitsNavigateToAreaFromArea,
@@ -341,12 +341,12 @@ namespace Map {
                             this->units[unitID].movementType_OR_targetUnitID = (short)_foundEnemyID;
                             this->units[_foundEnemyID].huntedBy = this->units[_foundEnemyID].huntedBy + 1;
                         }
-                        _headedToEnemy = true;
+                        _headedToEnemy = 1;
                     }
                     if (!_headedToEnemy) {
                         this->units[unitID].lookForEnemy = -8;
                         this->units[unitID].movementType_OR_targetUnitID = 0;
-                        _restoreSavedDestination = true;
+                        _restoreSavedDestination = 1;
                     }
                 }
             }

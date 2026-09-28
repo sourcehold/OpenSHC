@@ -17,12 +17,12 @@ namespace Map {
                 return 0;
             }
             uint _tile = 0;
-            bool _isNear = false;
+            int _isNear = 0;
             for (int direction = 0; direction < 8; ++direction) {
                 _tile = DAT_TileMapState::instance.directionTranslationMatrix[this->units[unitID].y][direction]
                     + this->units[unitID].tile;
                 if (_tile == this->units[unitID].targetedBuildingTile) {
-                    _isNear = true;
+                    _isNear = 1;
                     break;
                 }
             }
@@ -38,7 +38,7 @@ namespace Map {
                                 + _neighbourTile
                             == this->units[unitID].targetedBuildingTile) {
                             _tile = _neighbourTile;
-                            _isNear = true;
+                            _isNear = 1;
                             break;
                         }
                     }

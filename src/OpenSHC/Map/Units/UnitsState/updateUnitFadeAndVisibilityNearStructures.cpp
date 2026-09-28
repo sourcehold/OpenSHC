@@ -16,16 +16,16 @@ namespace Map {
         {
             int _tile = this->units[unitID].tile;
             uint _logicFlags = DAT_TileMapState::instance.LogicLayer[_tile];
-            byte _gateFadeType = 0;
-            byte _towerFadeType = 0;
-            byte _fadeType = 0;
-            bool _isOnDefensiveStructure = false;
+            int _gateFadeType = 0;
+            int _towerFadeType = 0;
+            int _fadeType = 0;
+            int _isOnDefensiveStructure = 0;
             if (this->units[unitID].unknownCountdown_0x402 != 0) {
                 this->units[unitID].unknownCountdown_0x402 = this->units[unitID].unknownCountdown_0x402 - 1;
             }
             if (DAT_TileMapState::instance.BuildingLayer[_tile] == 0) {
                 if ((_logicFlags & 0x100) != 0) {
-                    _isOnDefensiveStructure = true;
+                    _isOnDefensiveStructure = 1;
                 }
             } else {
                 switch (DAT_BuildingsState::instance.buildings[DAT_TileMapState::instance.BuildingLayer[_tile]]
