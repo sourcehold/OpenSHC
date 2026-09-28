@@ -41103,7 +41103,7 @@ SHC_3BB0A8C1_0x004FF080 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004FF420 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004FF870 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FF870 | 8.9% | original built unoptimised
 
 SHC_3BB0A8C1_0x004FF990 | 0.0% | Pending
 
