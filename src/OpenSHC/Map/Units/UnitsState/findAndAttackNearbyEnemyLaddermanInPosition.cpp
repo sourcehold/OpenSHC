@@ -20,11 +20,12 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00533630
         BOOLEnum UnitsState::findAndAttackNearbyEnemyLaddermanInPosition(int unitID)
         {
-            if ((DAT_TileMapState::instance.LogicLayer[this->units[unitID].tile] & LogicHelpers::L_WALL_OR_GATEHOUSE) == 0) {
+            if ((DAT_TileMapState::instance.LogicLayer[this->units[unitID].tile] & LogicHelpers::L_WALL_OR_GATEHOUSE)
+                == 0) {
                 return FALSE;
             }
             short _owner = this->units[unitID].owner;
-            ushort _areaOfUnit = DAT_TileMapState::instance.PathConnectionLayer[this->units[unitID].tile];
+            dword _areaOfUnit = (short)DAT_TileMapState::instance.PathConnectionLayer[this->units[unitID].tile];
             int _bestEnemyUnitID = 0;
             int _minDistance = 1000;
             for (int i = 0; i < DAT_GameState::instance.playerDataArray[_owner].enemies; ++i) {
