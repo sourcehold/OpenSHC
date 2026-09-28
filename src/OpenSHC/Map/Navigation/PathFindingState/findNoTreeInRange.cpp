@@ -59,7 +59,7 @@ namespace Map {
                     if (budget < this->searchQueue.currentDistance) {
                         return TRUE;
                     }
-                    short sVar1 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    int sVar1 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                     for (int _direction = 0; _direction < 8; _direction = _direction + 1) {
                         /*
                           for each direction, do:
