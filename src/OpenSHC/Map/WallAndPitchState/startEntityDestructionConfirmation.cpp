@@ -13,9 +13,6 @@ namespace Map {
     using OpenSHC::Game::GameMode2;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00500CB0
     void WallAndPitchState::startEntityDestructionConfirmation(int entityID)
     {
@@ -27,7 +24,6 @@ namespace Map {
             this->uid = DAT_EntityState::instance.entityArray[entityID].uid;
             DAT_UIDragDropDefinedData::instance.MenuView_TriggerInitial = TRUE;
         }
-        return;
     }
 
 }

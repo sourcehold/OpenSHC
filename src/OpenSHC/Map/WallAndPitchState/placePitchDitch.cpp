@@ -9,9 +9,6 @@ namespace Map {
 
     using OpenSHC::Game::GameMode2;
 
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00500DD0
     void WallAndPitchState::placePitchDitch(int pitchID)
     {
@@ -29,7 +26,6 @@ namespace Map {
                 this->countdown = 400;
             }
         }
-        return;
     }
 
 }

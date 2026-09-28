@@ -12,9 +12,6 @@ namespace Map {
     using OpenSHC::Game::GameMode2;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00500D30
     void WallAndPitchState::resetWallPlacementInfo()
     {
@@ -26,7 +23,6 @@ namespace Map {
             this->counter = 0;
             DAT_UIDragDropDefinedData::instance.MenuView_TriggerInitial = TRUE;
         }
-        return;
     }
 
 }

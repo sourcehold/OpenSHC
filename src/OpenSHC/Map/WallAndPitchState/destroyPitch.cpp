@@ -14,12 +14,6 @@ namespace Map {
 
     using OpenSHC::Game::Resources::ResourceType;
 
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00500EE0
     void WallAndPitchState::destroyPitch(int playerID, int count, int amount, int param_4)
     {
