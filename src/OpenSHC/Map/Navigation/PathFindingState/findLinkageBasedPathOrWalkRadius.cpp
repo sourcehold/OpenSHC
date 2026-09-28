@@ -173,7 +173,7 @@ namespace Map {
                 /*
                   8-bit flags for 8 directions
                  */
-                byte _cLink = DAT_TileMapState::instance.PathLinkageLayer[_candidate];
+                int _cLink = DAT_TileMapState::instance.PathLinkageLayer[_candidate];
                 /*
                   Current search generation
                  */
