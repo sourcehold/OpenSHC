@@ -182,7 +182,7 @@ namespace Rendering {
                                      .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID])
                                 && (120 < DAT_UnitsState::instance.units[_unitID].assassinsMicroDistanceToEnemyUnk))
                             && ((DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY
-                                || (DAT_UnitsState::instance.units[_unitID].idleCounterUnk < 2400)))) {
+                                || (DAT_UnitsState::instance.units[_unitID].idleCounterUnk <= 2400)))) {
                             _alpha = 0x20 - (0x20 - _alpha) / 2;
                         }
                         overlayX = DAT_UnitsState::instance.units[_unitID].imageID2;
@@ -415,7 +415,7 @@ namespace Rendering {
                                             .playerTeams[DAT_UnitsState::instance.units[_unitID].owner]
                                         == DAT_GameState::instance.mapAndTime
                                             .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID]))
-                                && ((DAT_UnitsState::instance.units[_unitID].assassinsMicroDistanceToEnemyUnk < 160
+                                && ((DAT_UnitsState::instance.units[_unitID].assassinsMicroDistanceToEnemyUnk <= 160
                                     || ((unitState = DAT_UnitsState::instance.units[_unitID].state.generic,
                                         unitState == OpenSHC::Map::Units::States::US_MELEE_ATTACK
                                             || (unitState == OpenSHC::Map::Units::States::US_MELEE_ATTACK_WALL)))))) {

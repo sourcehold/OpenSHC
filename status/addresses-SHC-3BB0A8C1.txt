@@ -36987,7 +36987,7 @@ SHC_3BB0A8C1_0x004E7770 | 38.7% | LTCG ecx reuse in callers
 
 SHC_3BB0A8C1_0x004E7800 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004E7810 | 34.5% | frame and reg allocation diffe
+SHC_3BB0A8C1_0x004E7810 | 34.7% | frame and reg allocation diffe
 
 SHC_3BB0A8C1_0x004E78D0 | 0.0% | Pending
 
