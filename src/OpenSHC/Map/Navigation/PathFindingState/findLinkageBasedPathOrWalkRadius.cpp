@@ -32,31 +32,19 @@ namespace Map {
         BOOLEnum PathFindingState::findLinkageBasedPathOrWalkRadius(
             uint x, uint y, int x2, int y2, int maxIterations, BOOLEnum continuePreviousSearch)
         {
-            uint uVar1;
-            int iVar2;
-            int _candidateNorth;
-            int _candidateSouth;
-            short _cCardinalDistance;
-            short _curGen;
-            uint _candidate;
-            short _cD;
-            byte _cLink;
-            ushort _cY;
-            int _gen;
-            iVar2 = x2;
-            uVar1 = y;
+            int iVar2 = x2;
+            uint uVar1 = y;
             /*
               === VALIDATE STARTING POSITION ===   Check bounds (400x400) and walkability
              */
-            if (((399 < x) || (399 < y)) || (*(char*)(y * 400 + 0x21aec98 + x) == '\0')) {
+            if (399 < x || 399 < y || *(char*)(y * 400 + 0x21aec98 + x) == '\0') {
                 return FALSE;
             }
             /*
               === VALIDATE TARGET POSITION ===   If target is specified (x2 != -1) and invalid, cap search depth to 500
              */
-            if ((x2 != -1)
-                && ((((399 < (uint)x2 || (399 < (uint)y2)) || (*(char*)(y2 * 400 + 0x21aec98 + x2) == '\0'))
-                    && (500 < maxIterations)))) {
+            if (x2 != -1 && ((399 < (uint)x2 || (399 < (uint)y2)) || (*(char*)(y2 * 400 + 0x21aec98 + x2) == '\0'))
+                && 500 < maxIterations) {
                 /*
                   Limit search when target is unreachable
                  */
@@ -94,7 +82,7 @@ namespace Map {
             /*
               === SETUP SEARCH STATE ===
              */
-            _gen = this->searchGeneration;
+            int _gen = this->searchGeneration;
             y = this->searchQueue.writeIndex;
             /*
               Add starting position to queue
@@ -152,7 +140,7 @@ namespace Map {
                 /*
                   === PROCESS CURRENT TILE ===
                  */
-                _candidate = this->searchQueue.tilesQueue[x2];
+                uint _candidate = this->searchQueue.tilesQueue[x2];
                 if (_candidate == x) {
                     /*
                       Found target! Return success
@@ -168,11 +156,11 @@ namespace Map {
                 /*
                   Get current tile's distance
                  */
-                _cD = DAT_TileMapState::instance.CertainPathLayer[_candidate];
+                short _cD = DAT_TileMapState::instance.CertainPathLayer[_candidate];
                 /*
                    Distance for cardinal neighbors
                  */
-                _cCardinalDistance = _cD + 1;
+                short _cCardinalDistance = _cD + 1;
                 /*
                   Safety check: distance overflow
                  */
@@ -181,22 +169,22 @@ namespace Map {
                 /*
                   Get Y coordinate and path linkage flags for current tile
                  */
-                _cY = this->searchQueue.yQueue[x2];
+                ushort _cY = this->searchQueue.yQueue[x2];
                 /*
                   8-bit flags for 8 directions
                  */
-                _cLink = DAT_TileMapState::instance.PathLinkageLayer[_candidate];
+                byte _cLink = DAT_TileMapState::instance.PathLinkageLayer[_candidate];
                 /*
                   Current search generation
                  */
-                _curGen = (short)_gen;
+                short _curGen = (short)_gen;
                 /*
                   === EXPAND TO 8 ADJACENT TILES ===   PathLinkageLayer bit flags:   0x01 = North, 0x02 = NorthEast,
                   0x04 = East, 0x08 = SouthEast   0x10 = South, 0x20 = SouthWest, 0x40 = West, 0x80 = NorthWest      ===
                   WEST (Cardinal: distance +1) ===
                  */
-                if ((DAT_TileMapState::instance.CertainPathLayer[_candidate + 0x13a0f] != _curGen)
-                    && ((_cLink & 0x40) != 0)) {
+                if (DAT_TileMapState::instance.CertainPathLayer[_candidate + 0x13a0f] != _curGen
+                    && (_cLink & 0x40) != 0) {
                     DAT_TileMapState::instance.CertainPathLayer[_candidate - 1] = _cCardinalDistance;
                     DAT_TileMapState::instance.CertainPathLayer[_candidate + 0x13a0f] = _curGen;
                     this->searchQueue.tilesQueue[y] = _candidate - 1;
@@ -206,7 +194,7 @@ namespace Map {
                 /*
                   === EAST (Cardinal: distance +1) ===
                  */
-                if ((DAT_TileMapState::instance.WalkLayer[_candidate + 1] != _curGen) && ((_cLink & 4) != 0)) {
+                if (DAT_TileMapState::instance.WalkLayer[_candidate + 1] != _curGen && (_cLink & 4) != 0) {
                     DAT_TileMapState::instance.CertainPathLayer[_candidate + 1] = _cCardinalDistance;
                     DAT_TileMapState::instance.WalkLayer[_candidate + 1] = _curGen;
                     this->searchQueue.tilesQueue[y] = _candidate + 1;
@@ -216,8 +204,8 @@ namespace Map {
                 /*
                   === NORTH (Cardinal: distance +1) ===
                  */
-                _candidateNorth = _candidate + DAT_TileMapState::instance.directionTranslationMatrix[_cY][0];
-                if ((DAT_TileMapState::instance.WalkLayer[_candidateNorth] != _curGen) && ((_cLink & 1) != 0)) {
+                int _candidateNorth = _candidate + DAT_TileMapState::instance.directionTranslationMatrix[_cY][0];
+                if (DAT_TileMapState::instance.WalkLayer[_candidateNorth] != _curGen && (_cLink & 1) != 0) {
                     DAT_TileMapState::instance.CertainPathLayer[_candidateNorth] = _cCardinalDistance;
                     DAT_TileMapState::instance.WalkLayer[_candidateNorth] = _curGen;
                     this->searchQueue.tilesQueue[y] = _candidateNorth;
@@ -227,8 +215,8 @@ namespace Map {
                 /*
                   === NORTHWEST (Diagonal: distance +2) ===
                  */
-                if ((DAT_TileMapState::instance.CertainPathLayer[_candidateNorth + 0x13a0f] != _curGen)
-                    && ((_cLink & 0x80) != 0)) {
+                if (DAT_TileMapState::instance.CertainPathLayer[_candidateNorth + 0x13a0f] != _curGen
+                    && (_cLink & 0x80) != 0) {
                     DAT_TileMapState::instance.CertainPathLayer[_candidateNorth + -1] = _cD + 2;
                     DAT_TileMapState::instance.CertainPathLayer[_candidateNorth + 0x13a0f] = _curGen;
                     this->searchQueue.tilesQueue[y] = _candidateNorth + -1;
@@ -238,7 +226,7 @@ namespace Map {
                 /*
                   === NORTHEAST (Diagonal: distance +2) ===
                  */
-                if ((DAT_TileMapState::instance.WalkLayer[_candidateNorth + 1] != _curGen) && ((_cLink & 2) != 0)) {
+                if (DAT_TileMapState::instance.WalkLayer[_candidateNorth + 1] != _curGen && (_cLink & 2) != 0) {
                     DAT_TileMapState::instance.CertainPathLayer[_candidateNorth + 1] = _cD + 2;
                     DAT_TileMapState::instance.WalkLayer[_candidateNorth + 1] = _curGen;
                     this->searchQueue.tilesQueue[y] = _candidateNorth + 1;
@@ -248,8 +236,8 @@ namespace Map {
                 /*
                   === SOUTH (Cardinal: distance +1) ===
                  */
-                _candidateSouth = _candidate + DAT_TileMapState::instance.directionTranslationMatrix[_cY][4];
-                if ((DAT_TileMapState::instance.WalkLayer[_candidateSouth] != _curGen) && ((_cLink & 0x10) != 0)) {
+                int _candidateSouth = _candidate + DAT_TileMapState::instance.directionTranslationMatrix[_cY][4];
+                if (DAT_TileMapState::instance.WalkLayer[_candidateSouth] != _curGen && (_cLink & 0x10) != 0) {
                     DAT_TileMapState::instance.CertainPathLayer[_candidateSouth] = _cCardinalDistance;
                     DAT_TileMapState::instance.WalkLayer[_candidateSouth] = _curGen;
                     this->searchQueue.tilesQueue[y] = _candidateSouth;
@@ -259,8 +247,8 @@ namespace Map {
                 /*
                   === SOUTHWEST (Diagonal: distance +2) ===
                  */
-                if ((DAT_TileMapState::instance.CertainPathLayer[_candidateSouth + 0x13a0f] != _curGen)
-                    && ((_cLink & 0x20) != 0)) {
+                if (DAT_TileMapState::instance.CertainPathLayer[_candidateSouth + 0x13a0f] != _curGen
+                    && (_cLink & 0x20) != 0) {
                     DAT_TileMapState::instance.CertainPathLayer[_candidateSouth + -1] = _cD + 2;
                     DAT_TileMapState::instance.CertainPathLayer[_candidateSouth + 0x13a0f] = _curGen;
                     this->searchQueue.tilesQueue[y] = _candidateSouth + -1;
@@ -270,7 +258,7 @@ namespace Map {
                 /*
                   === SOUTHEAST (Diagonal: distance +2) ===
                  */
-                if ((DAT_TileMapState::instance.WalkLayer[_candidateSouth + 1] != _curGen) && ((_cLink & 8) != 0)) {
+                if (DAT_TileMapState::instance.WalkLayer[_candidateSouth + 1] != _curGen && (_cLink & 8) != 0) {
                     DAT_TileMapState::instance.CertainPathLayer[_candidateSouth + 1] = _cD + 2;
                     DAT_TileMapState::instance.WalkLayer[_candidateSouth + 1] = _curGen;
                     this->searchQueue.tilesQueue[y] = _candidateSouth + 1;
