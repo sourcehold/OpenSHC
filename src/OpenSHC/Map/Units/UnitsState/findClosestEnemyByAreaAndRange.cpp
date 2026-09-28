@@ -24,8 +24,8 @@ namespace Map {
             if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
                 return 0;
             }
-            ushort _areaOfOrigin
-                = DAT_TileMapState::instance
+            dword _areaOfOrigin
+                = (short)DAT_TileMapState::instance
                       .PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x];
             this->unusedUnitIDArrayIndex = 0;
             int _bestScore = 10000;
