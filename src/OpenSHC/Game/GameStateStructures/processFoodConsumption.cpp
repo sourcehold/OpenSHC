@@ -112,7 +112,7 @@ namespace Game {
                                 "food_warning4.wav");
                         }
                         DAT_CounterFoodWarningInterval::instance = DAT_CounterFoodWarningInterval::instance + 1;
-                        if (DAT_CounterFoodWarningInterval::instance > 2) {
+                        if ((int)DAT_CounterFoodWarningInterval::instance > 2) {
                             DAT_CounterFoodWarningInterval::instance = 0;
                         }
                     } else if ((leftover < 2) && (leftover != lastMonthLeftover)
