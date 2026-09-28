@@ -41087,7 +41087,7 @@ SHC_3BB0A8C1_0x004FC280 | 85.2% | XYPair base regalloc
 
 SHC_3BB0A8C1_0x004FC340 | 62.4% | LogicLayer walk regalloc
 
-SHC_3BB0A8C1_0x004FC490 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FC490 | 54.1% | 56.42% array base regalloc
 
 SHC_3BB0A8C1_0x004FC650 | 45.5% | orientation chain regalloc
 
