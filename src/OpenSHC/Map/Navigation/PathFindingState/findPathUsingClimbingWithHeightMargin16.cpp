@@ -90,8 +90,8 @@ namespace Map {
                     }
                     if ((budget <= this->searchQueue.readIndex) || (0x13a0f < _tile))
                         break;
-                    short sVar1 = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                    short sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    int sVar1 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
+                    int sVar2 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
                     if (0x78 < this->searchQueue.currentDistance)
                         break;
