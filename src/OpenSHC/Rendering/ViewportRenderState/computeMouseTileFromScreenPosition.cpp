@@ -168,47 +168,47 @@ namespace Rendering {
             this->viewportState.somePitchDitchID = 0;
             this->viewportState.mouseAtomRefFloorTile = foundTile;
 
-            if (this->viewportState.field24_0x60 == 0) {
+        if (this->viewportState.field24_0x60 != 0) {
+
+                this->viewportState.mouseY = this->tileTranslationMatrix_YComponent[this->viewportState.field24_0x60];
+                this->viewportState.mouseX
+                    = this->viewportState.field24_0x60 - this->translationMatrix[this->viewportState.mouseY].addXgetTile;
+
+                int hoveredTile = this->viewportState.field24_0x60;
+                if (DAT_TileMapState::instance.flatViewToggleValue1 != 0) {
+                    hoveredTile = this->viewportState.mouseTile;
+                }
+                this->viewportState.field14_0x38 = DAT_TileMapState::instance.LogicLayer[hoveredTile] & 0x40000000;
+                this->viewportState.field16_0x40 = DAT_TileMapState::instance.LogicLayer[hoveredTile] & 0x4000;
+
+                int moatID = MACRO_CALL_MEMBER(
+                    OpenSHC::Map::TileMapState_Func::returnOwnedMoatAtTile, DAT_TileMapState::ptr)(hoveredTile);
+                if (moatID == 0) {
+                    this->viewportState.field14_0x38 = 0;
+                    this->viewportState.field16_0x40 = 0;
+                }
+                this->viewportState.field15_0x3c = this->viewportState.field14_0x38;
+                if (DAT_GameState::instance.mapAndTime.playerTeams[DAT_TileMapState::instance.moats[moatID].owner]
+                    == DAT_GameState::instance.mapAndTime
+                        .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID]) {
+                    this->viewportState.field14_0x38 = 0;
+                } else {
+                    this->viewportState.field16_0x40 = 0;
+                    this->viewportState.field15_0x3c = 0;
+                }
+
+                if ((DAT_TileMapState::instance.LogicLayer[hoveredTile] & 8) != 0) {
+                    this->viewportState.somePitchDitchID = MACRO_CALL_MEMBER(
+                        OpenSHC::Map::TileMapState_Func::getPitchDitchIDForTile, DAT_TileMapState::ptr)(hoveredTile);
+                }
+        } else {
                 this->viewportState.mouseY = 0;
                 this->viewportState.mouseX = 0;
                 this->viewportState.field27_0x6c = 0;
                 this->viewportState.field14_0x38 = 0;
                 this->viewportState.field16_0x40 = 0;
                 this->viewportState.field15_0x3c = 0;
-                return;
-            }
-
-            this->viewportState.mouseY = this->tileTranslationMatrix_YComponent[this->viewportState.field24_0x60];
-            this->viewportState.mouseX
-                = this->viewportState.field24_0x60 - this->translationMatrix[this->viewportState.mouseY].addXgetTile;
-
-            int hoveredTile = this->viewportState.field24_0x60;
-            if (DAT_TileMapState::instance.flatViewToggleValue1 != 0) {
-                hoveredTile = this->viewportState.mouseTile;
-            }
-            this->viewportState.field14_0x38 = DAT_TileMapState::instance.LogicLayer[hoveredTile] & 0x40000000;
-            this->viewportState.field16_0x40 = DAT_TileMapState::instance.LogicLayer[hoveredTile] & 0x4000;
-
-            int moatID = MACRO_CALL_MEMBER(
-                OpenSHC::Map::TileMapState_Func::returnOwnedMoatAtTile, DAT_TileMapState::ptr)(hoveredTile);
-            if (moatID == 0) {
-                this->viewportState.field14_0x38 = 0;
-                this->viewportState.field16_0x40 = 0;
-            }
-            this->viewportState.field15_0x3c = this->viewportState.field14_0x38;
-            if (DAT_GameState::instance.mapAndTime.playerTeams[DAT_TileMapState::instance.moats[moatID].owner]
-                == DAT_GameState::instance.mapAndTime
-                    .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID]) {
-                this->viewportState.field14_0x38 = 0;
-            } else {
-                this->viewportState.field16_0x40 = 0;
-                this->viewportState.field15_0x3c = 0;
-            }
-
-            if ((DAT_TileMapState::instance.LogicLayer[hoveredTile] & 8) != 0) {
-                this->viewportState.somePitchDitchID = MACRO_CALL_MEMBER(
-                    OpenSHC::Map::TileMapState_Func::getPitchDitchIDForTile, DAT_TileMapState::ptr)(hoveredTile);
-            }
+        }
         } else {
             this->viewportState.field24_0x60 = 0;
             this->viewportState.mouseX = 0;

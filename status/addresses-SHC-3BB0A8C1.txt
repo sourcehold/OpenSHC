@@ -36887,7 +36887,7 @@ SHC_3BB0A8C1_0x004E5DD0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004E5E20 | 90.6% | goto-free loop exit, 3 instr
 
-SHC_3BB0A8C1_0x004E5ED0 | 43.1% | reg alloc, one extra spill
+SHC_3BB0A8C1_0x004E5ED0 | 43.4% | Block order, reg alloc differs
 
 SHC_3BB0A8C1_0x004E6308 | 0.0% | Pending
 
