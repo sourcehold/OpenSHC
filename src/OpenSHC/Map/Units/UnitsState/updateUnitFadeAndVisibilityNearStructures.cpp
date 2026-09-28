@@ -85,7 +85,7 @@ namespace Map {
             if (_isOnDefensiveStructure) {
                 this->units[unitID].field171_0x308 = 1;
             } else if (_towerFadeType == 0) {
-                this->units[unitID].field171_0x308 = -(ushort)(_gateFadeType != 0) & 3;
+                this->units[unitID].field171_0x308 = _gateFadeType != 0 ? 3 : 0;
             } else {
                 this->units[unitID].field171_0x308 = 2;
             }
