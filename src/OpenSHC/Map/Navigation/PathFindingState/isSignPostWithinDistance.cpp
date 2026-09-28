@@ -71,7 +71,7 @@ namespace Map {
                     if (0x13a10 < this->searchQueue.currentDistance) {
                         return FALSE;
                     }
-                    if (limit < this->searchQueue.currentDistance) {
+                    if (this->searchQueue.currentDistance > limit) {
                         return FALSE;
                     }
                     if ((DAT_TileMapState::instance.BuildingLayer[iVar3] != 0)
