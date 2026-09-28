@@ -23,24 +23,13 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049FC00
         dword PathFindingState::pathFindingRelated(int param_1, uint param_2, uint param_3, int param_4)
         {
-            byte bVar1;
-            short sVar2;
-            short sVar3;
-            short sVar4;
             uint uVar5;
-            dword dVar6;
-            int iVar7;
             int iVar8;
-            uint uVar9;
-            int iVar10;
-            uint local_1c;
-            int local_18;
-            dword local_14;
-            dVar6 = 1000;
-            local_1c = 1000;
-            local_14 = 0;
-            local_18 = 10000;
-            if (((param_2 < 400) && (param_3 < 400)) && (*(char*)(param_3 * 400 + 0x21aec98 + param_2) != '\0')) {
+            dword dVar6 = 1000;
+            uint local_1c = 1000;
+            dword local_14 = 0;
+            int local_18 = 10000;
+            if (param_2 < 400 && param_3 < 400 && *(char*)(param_3 * 400 + 0x21aec98 + param_2) != '\0') {
                 this->calculations = this->calculations + 1;
                 this->searchGeneration = this->searchGeneration + 1;
                 if (32000 < this->searchGeneration) {
@@ -55,39 +44,39 @@ namespace Map {
                 this->searchQueue.xQueue[0] = (short)param_2;
                 this->searchQueue.tilesQueue[0]
                     = DAT_ViewportRenderState::instance.translationMatrix[param_3].addXgetTile + param_2;
-                bVar1 = *(byte*)(param_4 * 0x13a10 + 0x1ee2998 + this->searchQueue.tilesQueue[0]);
+                byte bVar1 = *(byte*)(param_4 * 0x13a10 + 0x1ee2998 + this->searchQueue.tilesQueue[0]);
                 DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
                 DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
                 if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                     while (uVar5 = this->searchQueue.tilesQueue[this->searchQueue.readIndex], uVar5 < 0x13a10) {
-                        sVar2 = this->searchQueue.xQueue[this->searchQueue.readIndex];
+                        short sVar2 = this->searchQueue.xQueue[this->searchQueue.readIndex];
                         this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[uVar5];
-                        sVar3 = this->searchQueue.yQueue[this->searchQueue.readIndex];
-                        iVar7 = (int)sVar3;
+                        short sVar3 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                        int iVar7 = (int)sVar3;
                         if ((0x13a10 < this->searchQueue.currentDistance)
                             || (param_1 < this->searchQueue.currentDistance))
                             break;
-                        iVar10 = 0;
+                        int iVar10 = 0;
                         do {
-                            if (((DAT_TileMapState::instance.PathLinkageLayer[uVar5]
-                                     & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar10])
-                                    != 0)
+                            if ((DAT_TileMapState::instance.PathLinkageLayer[uVar5]
+                                    & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar10])
+                                    != 0
                                 && (dVar6
                                     = DAT_TileMapState::instance.directionTranslationMatrix[iVar7][iVar10] + uVar5,
                                     DAT_TileMapState::instance.WalkLayer[dVar6] != this->searchGeneration)) {
-                                uVar9 = (uint) * (byte*)(param_4 * 0x13a10 + 0x1ee2998 + dVar6);
+                                uint uVar9 = (uint) * (byte*)(param_4 * 0x13a10 + 0x1ee2998 + dVar6);
                                 if (uVar9 < 4) {
                                     uVar9 = 0;
                                 LAB_0049fdba:
-                                    if ((uVar9 == local_1c)
+                                    if (uVar9 == local_1c
                                         && (iVar8
                                             = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::
                                                                     setAxisBasedDistanceResult,
-                                                DAT_DirectionAlgorithmState::ptr)(param_2, (int)((int)(param_3)),
-                                                (int)((int)(DAT_TerrainDefinedData::instance
-                                                                .clockwiseCardinalTranslationMatrix[iVar10]
-                                                                .int_.xOffset
-                                                    + sVar2)),
+                                                DAT_DirectionAlgorithmState::ptr)(param_2, (int)(param_3),
+                                                (int)(DAT_TerrainDefinedData::instance
+                                                          .clockwiseCardinalTranslationMatrix[iVar10]
+                                                          .int_.xOffset
+                                                    + sVar2),
                                                 *(int*)((int)DAT_TerrainDefinedData::instance
                                                             .clockwiseCardinalTranslationMatrix
                                                     + iVar10 * 8 + 4)
@@ -99,11 +88,11 @@ namespace Map {
                                         goto LAB_0049fdba;
                                     iVar8 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::
                                                                   setAxisBasedDistanceResult,
-                                        DAT_DirectionAlgorithmState::ptr)(param_2, (int)((int)(param_3)),
-                                        (int)((int)(DAT_TerrainDefinedData::instance
-                                                        .clockwiseCardinalTranslationMatrix[iVar10]
-                                                        .int_.xOffset
-                                            + sVar2)),
+                                        DAT_DirectionAlgorithmState::ptr)(param_2, (int)(param_3),
+                                        (int)(DAT_TerrainDefinedData::instance
+                                                  .clockwiseCardinalTranslationMatrix[iVar10]
+                                                  .int_.xOffset
+                                            + sVar2),
                                         *(int*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
                                             + iVar10 * 8 + 4)
                                             + iVar7);
@@ -114,8 +103,9 @@ namespace Map {
                                 }
                                 DAT_TileMapState::instance.CertainPathLayer[dVar6]
                                     = (short)this->searchQueue.currentDistance + 1;
-                                sVar4 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar10]
-                                            .short_.xOffset;
+                                short sVar4
+                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar10]
+                                          .short_.xOffset;
                                 DAT_TileMapState::instance.WalkLayer[dVar6] = (short)this->searchGeneration;
                                 this->searchQueue.xQueue[this->searchQueue.writeIndex] = sVar4 + sVar2;
                                 this->searchQueue.yQueue[this->searchQueue.writeIndex]
