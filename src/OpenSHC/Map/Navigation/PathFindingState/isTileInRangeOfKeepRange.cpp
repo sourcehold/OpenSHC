@@ -27,35 +27,36 @@ namespace Map {
         {
             int* piVar1;
             int* piVar2;
-            if (x <= 399 && y <= 399 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] != '\0') {
-                if (DAT_GameState::instance.playerDataArray[playerID].keep.id != 0
-                    && (MACRO_CALL_MEMBER(
-                            OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
-                            DAT_DirectionAlgorithmState::ptr)(x, (int)(y),
-                            DAT_GameState::instance.playerDataArray[playerID].keep.xEntry,
-                            DAT_GameState::instance.playerDataArray[playerID].keep.yEntry),
-                        DAT_DirectionAlgorithmState::instance.distanceHigh <= range)) {
-                    return (undefined4)(0);
-                }
-                piVar1 = &DAT_GameState::instance.playerDataArray[1].keep.yEntry;
-                piVar2 = DAT_GameState::instance.mapAndTime.playerTeams + 1;
-                while (*piVar2 != DAT_GameState::instance.mapAndTime.playerTeams[playerID]
-                    || ((BuildingEntryInfo*)(piVar1 + -2))->id == 0
-                    || (MACRO_CALL_MEMBER(
-                            OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
-                            DAT_DirectionAlgorithmState::ptr)(x, (int)(y), (int)(piVar1[-1]), (int)(*piVar1)),
-                        range / 2 < DAT_DirectionAlgorithmState::instance.distanceHigh)) {
-                    piVar2 = piVar2 + 1;
-                    piVar1 = piVar1 + 0xe7d;
-                    if (0x117d56b < (int)piVar2) {
-                        DAT_TileMapState::instance.buildingPlacementFailReason = ((BuildingFailReasonEnum)0x12);
-                        return (undefined4)(1);
-                    }
-                }
+            if (x > 399 || y > 399 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
                 return (undefined4)(0);
             }
+            if (DAT_GameState::instance.playerDataArray[playerID].keep.id != 0
+                && (MACRO_CALL_MEMBER(
+                        OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
+                        DAT_DirectionAlgorithmState::ptr)(x, (int)(y),
+                        DAT_GameState::instance.playerDataArray[playerID].keep.xEntry,
+                        DAT_GameState::instance.playerDataArray[playerID].keep.yEntry),
+                    DAT_DirectionAlgorithmState::instance.distanceHigh <= range)) {
+                return (undefined4)(0);
+            }
+            piVar1 = &DAT_GameState::instance.playerDataArray[1].keep.yEntry;
+            piVar2 = DAT_GameState::instance.mapAndTime.playerTeams + 1;
+            while (*piVar2 != DAT_GameState::instance.mapAndTime.playerTeams[playerID]
+                || ((BuildingEntryInfo*)(piVar1 + -2))->id == 0
+                || (MACRO_CALL_MEMBER(
+                        OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
+                        DAT_DirectionAlgorithmState::ptr)(x, (int)(y), (int)(piVar1[-1]), (int)(*piVar1)),
+                    range / 2 < DAT_DirectionAlgorithmState::instance.distanceHigh)) {
+                piVar2 = piVar2 + 1;
+                piVar1 = piVar1 + 0xe7d;
+                if (0x117d56b < (int)piVar2) {
+                    DAT_TileMapState::instance.buildingPlacementFailReason = ((BuildingFailReasonEnum)0x12);
+                    return (undefined4)(1);
+                }
+            }
             return (undefined4)(0);
-        }
+            return (undefined4)(0);
+}
 
     }
 }
