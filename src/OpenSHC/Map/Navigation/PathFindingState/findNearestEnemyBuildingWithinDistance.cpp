@@ -3,6 +3,7 @@
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingLogicalState.hpp"
+#include "OpenSHC/Map/Buildings/BuildingLogicalStateShort.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -10,14 +11,13 @@
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Map/Buildings/BuildingLogicalStateShort.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
         using OpenSHC::Map::Buildings::BuildingLogicalState;
-            using OpenSHC::Map::Buildings::BuildingLogicalStateShort;
+        using OpenSHC::Map::Buildings::BuildingLogicalStateShort;
 
         /*
           WARNING: Enum "MappersEnum": Some values do not have unique names
@@ -31,10 +31,8 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A0460
         int PathFindingState::findNearestEnemyBuildingWithinDistance(int param_1, int param_2, int param_3, int param_4)
         {
-            short sVar1;
             BuildingLogicalStateShort BVar2;
             int iVar3;
-            int iVar4;
             int iVar5;
             int (*paiVar6)[8];
             short* psVar7;
@@ -56,7 +54,7 @@ namespace Map {
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 while ((iVar3 = this->searchQueue.tilesQueue[this->searchQueue.readIndex],
                     -1 < iVar3 && (iVar3 < 0x13a10))) {
-                    sVar1 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    short sVar1 = this->searchQueue.yQueue[this->searchQueue.readIndex];
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[iVar3];
                     if (0x13a10 < this->searchQueue.currentDistance) {
                         return 0;
@@ -67,9 +65,9 @@ namespace Map {
                     psVar7 = &DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[0].short_.yOffset;
                     paiVar6 = DAT_TileMapState::instance.directionTranslationMatrix + sVar1;
                     do {
-                        iVar4 = (*paiVar6)[0] + iVar3;
-                        if (((DAT_TileMapState::instance.LogicLayer[iVar4] & 0x30) == 0)
-                            && (DAT_TileMapState::instance.WalkLayer[iVar4] != this->searchGeneration)) {
+                        int iVar4 = (*paiVar6)[0] + iVar3;
+                        if ((DAT_TileMapState::instance.LogicLayer[iVar4] & 0x30) == 0
+                            && DAT_TileMapState::instance.WalkLayer[iVar4] != this->searchGeneration) {
                             DAT_TileMapState::instance.CertainPathLayer[iVar4]
                                 = (short)this->searchQueue.currentDistance + 1;
                             DAT_TileMapState::instance.WalkLayer[iVar4] = (short)this->searchGeneration;
@@ -80,19 +78,18 @@ namespace Map {
                                 this->searchQueue.writeIndex = 0;
                             }
                             iVar4 = (int)DAT_TileMapState::instance.BuildingLayer[iVar4];
-                            if ((((iVar4 != 0)
-                                     && (DAT_GameState::instance.mapAndTime.playerTeams[param_1]
-                                         != DAT_GameState::instance.mapAndTime
-                                             .playerTeams[DAT_BuildingsState::instance.buildings[iVar4].owner]))
-                                    && (BVar2 = DAT_BuildingsState::instance.buildings[iVar4].logicalState,
-                                        BVar2 != ((BuildingLogicalState)0)))
-                                && (((BVar2 != OpenSHC::Map::Buildings::BLS_REMOVE
-                                         && (DAT_BuildingsState::instance.buildings[iVar4].fireDuration == 0))
-                                    && ((
-                                        iVar5 = MACRO_CALL_MEMBER(
-                                            OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlammabilityFactor,
-                                            DAT_BuildingsState::ptr)(iVar4),
-                                        iVar5 != 0 && (iVar5 != 4)))))) {
+                            if (iVar4 != 0
+                                && DAT_GameState::instance.mapAndTime.playerTeams[param_1]
+                                    != DAT_GameState::instance.mapAndTime
+                                        .playerTeams[DAT_BuildingsState::instance.buildings[iVar4].owner]
+                                && (BVar2 = DAT_BuildingsState::instance.buildings[iVar4].logicalState,
+                                    BVar2 != ((BuildingLogicalState)0))
+                                && BVar2 != OpenSHC::Map::Buildings::BLS_REMOVE
+                                && DAT_BuildingsState::instance.buildings[iVar4].fireDuration == 0
+                                && (iVar5 = MACRO_CALL_MEMBER(
+                                        OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlammabilityFactor,
+                                        DAT_BuildingsState::ptr)(iVar4),
+                                    iVar5 != 0 && (iVar5 != 4))) {
                                 return iVar4;
                             }
                         }
