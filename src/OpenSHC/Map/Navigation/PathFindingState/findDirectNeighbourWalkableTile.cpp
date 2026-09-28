@@ -21,24 +21,20 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049CD60
         BOOLEnum PathFindingState::findDirectNeighbourWalkableTile(uint x, uint y)
         {
-            int _tile;
-            uint _x;
-            int _directionIndex;
-            uint _y;
-            if (((x < 400) && (y < 400)) && (*(char*)(y * 400 + 0x21aec98 + x) != '\0')) {
-                _directionIndex = 0;
+            if (x < 400 && y < 400 && *(char*)(y * 400 + 0x21aec98 + x) != '\0') {
+                int _directionIndex = 0;
                 do {
-                    _x = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_directionIndex]
-                             .int_.xOffset
+                    uint _x = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_directionIndex]
+                                  .int_.xOffset
                         + x;
-                    _y = *(int*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
-                             + _directionIndex * 8 + 4)
+                    uint _y = *(int*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
+                                  + _directionIndex * 8 + 4)
                         + y;
-                    if (((_x < 400) && (_y < 400)) && (*(char*)(_y * 400 + 0x21aec98 + _x) != '\0')) {
-                        _tile = DAT_TileMapState::instance.directionTranslationMatrix[y][_directionIndex]
+                    if (_x < 400 && _y < 400 && *(char*)(_y * 400 + 0x21aec98 + _x) != '\0') {
+                        int _tile = DAT_TileMapState::instance.directionTranslationMatrix[y][_directionIndex]
                             + DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
-                        if (((DAT_TileMapState::instance.LogicLayer[_tile] & 0xb1U) == 0)
-                            && ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x50101400U) == 0)) {
+                        if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0xb1U) == 0
+                            && (DAT_TileMapState::instance.LogicLayer[_tile] & 0x50101400U) == 0) {
                             /*
                               No sea, borders, rocky, building, tree, river, keep, moat
                              */
