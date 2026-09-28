@@ -43,7 +43,7 @@ namespace Game {
     void GameStateStructures::processSingleTimeTick()
     {
         if (this->gameTicksLoadBalancer != 0) {
-            if ((this->gameTicksLoadBalancer >= 10) && (this->gameTicksLoadBalancer <= 19)) {
+            if ((this->gameTicksLoadBalancer >= 10) && (this->gameTicksLoadBalancer < 19)) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::recomputeTroopValuesForPlayer,
                     DAT_UnitsState::ptr)(this->gameTicksLoadBalancer - 10);
             } else if (this->gameTicksLoadBalancer == 20) {
@@ -68,10 +68,10 @@ namespace Game {
                 /*
                   no work scheduled for this tick
                  */
-            } else if ((this->gameTicksLoadBalancer >= 60) && (this->gameTicksLoadBalancer <= 69)) {
+            } else if ((this->gameTicksLoadBalancer >= 60) && (this->gameTicksLoadBalancer < 69)) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::recomputeTroopValuesForPlayer,
                     DAT_UnitsState::ptr)(this->gameTicksLoadBalancer - 60);
-            } else if ((this->gameTicksLoadBalancer >= 71) && (this->gameTicksLoadBalancer <= 79)) {
+            } else if ((this->gameTicksLoadBalancer >= 71) && (this->gameTicksLoadBalancer < 79)) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::updateEnemyBuildings,
                     DAT_BuildingsState::ptr)(this->gameTicksLoadBalancer - 70);
             } else if (this->gameTicksLoadBalancer == 80) {
@@ -91,10 +91,10 @@ namespace Game {
                 /*
                   no work scheduled for this tick
                  */
-            } else if ((this->gameTicksLoadBalancer >= 100) && (this->gameTicksLoadBalancer <= 108)) {
+            } else if ((this->gameTicksLoadBalancer >= 100) && (this->gameTicksLoadBalancer < 109)) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::recomputeTroopValuesForPlayer,
                     DAT_UnitsState::ptr)(this->gameTicksLoadBalancer - 100);
-            } else if ((this->gameTicksLoadBalancer >= 110) && (this->gameTicksLoadBalancer <= 150)) {
+            } else if ((this->gameTicksLoadBalancer >= 110) && (this->gameTicksLoadBalancer < 150)) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::WildlifeState_Func::updateWildlifeGrid, DAT_WildlifeState::ptr)(
                     this->gameTicksLoadBalancer - 110);
             } else if (this->gameTicksLoadBalancer == 150) {
@@ -103,7 +103,7 @@ namespace Game {
                 MACRO_CALL_MEMBER(OpenSHC::Map::WildlifeState_Func::updateSection1034Info, DAT_WildlifeState::ptr)();
             } else if (this->gameTicksLoadBalancer == 152) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::WildlifeState_Func::updateNofFpoints, DAT_WildlifeState::ptr)();
-            } else if ((this->gameTicksLoadBalancer >= 160) && (this->gameTicksLoadBalancer <= 169)) {
+            } else if ((this->gameTicksLoadBalancer >= 160) && (this->gameTicksLoadBalancer < 169)) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::recomputeTroopValuesForPlayer,
                     DAT_UnitsState::ptr)(this->gameTicksLoadBalancer - 160);
             } else if (this->gameTicksLoadBalancer == 170) {
