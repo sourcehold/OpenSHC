@@ -103,15 +103,15 @@ namespace Rendering {
                 } else {
                     if ((DAT_BuildingsState::instance.buildings[buildingID].currentlyNeededEmployeeCount != 0)
                         && (DAT_GameCore::instance.field63_0x108 != 0)) {
-                        renderY = DAT_TileMapState::instance.field161_0x5549c0 + 0x128;
-                        maskGmID = OpenSHC::IO::Graphics::GID_FLOATS_NEW;
+                        gmID = OpenSHC::IO::Graphics::GID_FLOATS_NEW;
+                        renderX = DAT_TileMapState::instance.field161_0x5549c0 + 0x118;
                         renderBaseY
                             = (screenY
                                   - DAT_BuildingDefinedData::instance
                                       .BuildingHeights[DAT_BuildingsState::instance.buildings[buildingID].buildingType])
                             - heightOffset;
-                        renderX = DAT_TileMapState::instance.field161_0x5549c0 + 0x118;
-                        gmID = OpenSHC::IO::Graphics::GID_FLOATS_NEW;
+                        maskGmID = OpenSHC::IO::Graphics::GID_FLOATS_NEW;
+                        renderY = DAT_TileMapState::instance.field161_0x5549c0 + 0x128;
                         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
                             DAT_TextureRenderCoreObject::ptr)(
                             gmID, renderX, screenX + -0x23, renderBaseY + -0x2a, maskGmID, renderY, 0);
@@ -632,10 +632,10 @@ namespace Rendering {
                     DAT_BuildingsState::instance.buildings[buildingID].spriteOffetY + screenY,
                     (int)((int)(blendStrength)));
             } else {
-                renderY = DAT_BuildingsState::instance.buildings[buildingID].spriteOffetY + screenY;
                 frame = DAT_BuildingsState::instance.buildings[buildingID].animationFrame;
                 renderX = DAT_BuildingsState::instance.buildings[buildingID].spriteOffetX + screenX;
                 gmID = (GmID)DAT_CurrentlyRenderedSpriteID::instance;
+                renderY = DAT_BuildingsState::instance.buildings[buildingID].spriteOffetY + screenY;
             }
         }
         if (frame != 0) {
