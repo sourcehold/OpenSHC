@@ -20,7 +20,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00498FD0
         uint PathFindingState::commitUnitPathPlanUsingWalkLayer(uint param_1, int param_2, int param_3)
         {
-            int iVar1;
             int* _ptrTranslationMatrix;
             int _candidateTile1;
             uint uVar2;
@@ -33,6 +32,7 @@ namespace Map {
             int _candidateTile3;
             uint _cp4;
             int iVar4;
+            int iVar1;
             uint _rng;
             uint uVar5;
             int iVar6;
@@ -44,7 +44,7 @@ namespace Map {
             bool _inBounds;
             uint _init_10;
             short _walkLayer;
-            if (((399 < (uint)this->unitX) || (399 < (uint)this->unitY))
+            if (399 < (uint)this->unitX || 399 < (uint)this->unitY
                 || (_inBounds = false, *(char*)(this->unitY * 400 + 0x21aec98 + this->unitX) == '\0')) {
                 return 0;
             }
@@ -87,8 +87,8 @@ namespace Map {
                         if (DAT_TileMapState::instance.WalkLayer[_candidateTile1] == _walkLayer) {
                             _cp1 = (uint)DAT_TileMapState::instance.CertainPathLayer[_candidateTile1];
                             if (_inBounds) {
-                                if ((((_cp1 & 0x4000) == 0) && (uVar3 = _cp1 & 0x3fff, uVar3 <= _init_10))
-                                    && ((param_3 == 0 || (uVar3 != _init_10)))) {
+                                if ((_cp1 & 0x4000) == 0 && (uVar3 = _cp1 & 0x3fff, uVar3 <= _init_10)
+                                    && (param_3 == 0 || (uVar3 != _init_10))) {
                                     uVar2 = uVar3
                                         - ((DAT_TileMapState::instance.RandomLayer[_candidateTile1] ^ _rng) & 7);
                                     uVar5 = uVar2;
@@ -103,8 +103,8 @@ namespace Map {
                                     _rng = (int)_rng >> 1 & 0x7fffU | (_rng & 1) << 0xf;
                                     iVar6 = local_14;
                                 }
-                            } else if ((((_cp1 & 0x8000) == 0) && (uVar3 = _cp1 & 0x3fff, _init_10 <= uVar3))
-                                && ((param_3 == 0 || (uVar3 != _init_10)))) {
+                            } else if ((_cp1 & 0x8000) == 0 && (uVar3 = _cp1 & 0x3fff, _init_10 <= uVar3)
+                                && (param_3 == 0 || (uVar3 != _init_10))) {
                                 uVar2 = ((DAT_TileMapState::instance.RandomLayer[_candidateTile1] ^ _rng) & 7) + uVar3;
                                 uVar5 = uVar2;
                                 if (iVar4 + -2 == iVar6) {
@@ -123,8 +123,8 @@ namespace Map {
                         if (DAT_TileMapState::instance.WalkLayer[_candidateTile2] == _walkLayer) {
                             _cp2 = (uint)DAT_TileMapState::instance.CertainPathLayer[_candidateTile2];
                             if (_inBounds) {
-                                if ((((_cp2 & 0x4000) == 0) && (uVar3 = _cp2 & 0x3fff, uVar3 <= _init_10))
-                                    && ((param_3 == 0 || (uVar3 != _init_10)))) {
+                                if ((_cp2 & 0x4000) == 0 && (uVar3 = _cp2 & 0x3fff, uVar3 <= _init_10)
+                                    && (param_3 == 0 || (uVar3 != _init_10))) {
                                     uVar2 = uVar3
                                         - ((DAT_TileMapState::instance.RandomLayer[_candidateTile2] ^ _rng) & 7);
                                     uVar5 = uVar2;
@@ -139,8 +139,8 @@ namespace Map {
                                     _rng = (int)_rng >> 1 & 0x7fffU | (_rng & 1) << 0xf;
                                     iVar6 = local_14;
                                 }
-                            } else if ((((_cp2 & 0x8000) == 0) && (uVar3 = _cp2 & 0x3fff, _init_10 <= uVar3))
-                                && ((param_3 == 0 || (uVar3 != _init_10)))) {
+                            } else if ((_cp2 & 0x8000) == 0 && (uVar3 = _cp2 & 0x3fff, _init_10 <= uVar3)
+                                && (param_3 == 0 || (uVar3 != _init_10))) {
                                 uVar2 = ((DAT_TileMapState::instance.RandomLayer[_candidateTile2] ^ _rng) & 7) + uVar3;
                                 uVar5 = uVar2;
                                 if (iVar4 + -1 == iVar6) {
@@ -159,8 +159,8 @@ namespace Map {
                         if (DAT_TileMapState::instance.WalkLayer[_candidateTile3] == _walkLayer) {
                             _cp3 = (uint)DAT_TileMapState::instance.CertainPathLayer[_candidateTile3];
                             if (_inBounds) {
-                                if ((((_cp3 & 0x4000) == 0) && (uVar3 = _cp3 & 0x3fff, uVar3 <= _init_10))
-                                    && ((param_3 == 0 || (uVar3 != _init_10)))) {
+                                if ((_cp3 & 0x4000) == 0 && (uVar3 = _cp3 & 0x3fff, uVar3 <= _init_10)
+                                    && (param_3 == 0 || (uVar3 != _init_10))) {
                                     uVar2 = uVar3
                                         - ((DAT_TileMapState::instance.RandomLayer[_candidateTile3] ^ _rng) & 7);
                                     uVar5 = uVar2;
@@ -174,8 +174,8 @@ namespace Map {
                                     }
                                     _rng = (int)_rng >> 1 & 0x7fffU | (_rng & 1) << 0xf;
                                 }
-                            } else if ((((_cp3 & 0x8000) == 0) && (uVar3 = _cp3 & 0x3fff, _init_10 <= uVar3))
-                                && ((param_3 == 0 || (uVar3 != _init_10)))) {
+                            } else if ((_cp3 & 0x8000) == 0 && (uVar3 = _cp3 & 0x3fff, _init_10 <= uVar3)
+                                && (param_3 == 0 || (uVar3 != _init_10))) {
                                 uVar2 = ((DAT_TileMapState::instance.RandomLayer[_candidateTile3] ^ _rng) & 7) + uVar3;
                                 uVar5 = uVar2;
                                 if (iVar4 == iVar6) {
@@ -193,8 +193,8 @@ namespace Map {
                         if (DAT_TileMapState::instance.WalkLayer[_candidateTile4] == _walkLayer) {
                             _cp4 = (uint)DAT_TileMapState::instance.CertainPathLayer[_candidateTile4];
                             if (_inBounds) {
-                                if ((((_cp4 & 0x4000) == 0) && (uVar3 = _cp4 & 0x3fff, uVar3 <= _init_10))
-                                    && ((param_3 == 0 || (uVar3 != _init_10)))) {
+                                if ((_cp4 & 0x4000) == 0 && (uVar3 = _cp4 & 0x3fff, uVar3 <= _init_10)
+                                    && (param_3 == 0 || (uVar3 != _init_10))) {
                                     uVar2 = uVar3
                                         - ((DAT_TileMapState::instance.RandomLayer[_candidateTile4] ^ _rng) & 7);
                                     uVar5 = uVar2;
@@ -209,8 +209,8 @@ namespace Map {
                                     _rng = (int)_rng >> 1 & 0x7fffU | (_rng & 1) << 0xf;
                                     iVar6 = local_14;
                                 }
-                            } else if ((((_cp4 & 0x8000) == 0) && (uVar3 = _cp4 & 0x3fff, _init_10 <= uVar3))
-                                && ((param_3 == 0 || (uVar3 != _init_10)))) {
+                            } else if ((_cp4 & 0x8000) == 0 && (uVar3 = _cp4 & 0x3fff, _init_10 <= uVar3)
+                                && (param_3 == 0 || (uVar3 != _init_10))) {
                                 uVar2 = ((DAT_TileMapState::instance.RandomLayer[_candidateTile4] ^ _rng) & 7) + uVar3;
                                 uVar5 = uVar2;
                                 if (iVar4 + 1 == iVar6) {
