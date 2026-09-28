@@ -49,7 +49,7 @@ namespace Map {
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 while (uVar4 = this->searchQueue.tilesQueue[this->searchQueue.readIndex], uVar4 < 0x13a10) {
-                    short sVar3 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    int sVar3 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                     ushort uVar2 = DAT_TileMapState::instance.UnitLayer[uVar4];
                     while (iVar6 = (int)(short)uVar2, iVar6 != 0) {
                         if (sameTeamUnits == 1) {
