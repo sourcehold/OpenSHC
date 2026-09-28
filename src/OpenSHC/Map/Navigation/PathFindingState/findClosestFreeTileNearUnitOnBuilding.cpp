@@ -1,17 +1,17 @@
 #include "../PathFindingState.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
+#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
-#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Navigation {
-            using OpenSHC::Map::Location::Point8ShortXY;
+        using OpenSHC::Map::Location::Point8ShortXY;
 
         /*
           WARNING: Enum "MappersEnum": Some values do not have unique names
@@ -23,10 +23,6 @@ namespace Map {
         undefined4 PathFindingState::findClosestFreeTileNearUnitOnBuilding(
             int buildingID, int unitID, int x, int y, int* pX, int* pY)
         {
-            uint uVar1;
-            int _absDistY;
-            int _candidate;
-            int _absDistX;
             short* psVar2;
             uint uVar3;
             int (*paiVar4)[8];
@@ -67,11 +63,11 @@ namespace Map {
                 _x = this->searchQueue.xQueue[this->searchQueue.readIndex];
                 _y = this->searchQueue.yQueue[this->searchQueue.readIndex];
                 iVar5 = (int)_y;
-                uVar1 = _x - x;
+                uint uVar1 = _x - x;
                 uVar3 = (int)uVar1 >> 0x1f;
-                _absDistX = (uVar1 ^ uVar3) - uVar3;
+                int _absDistX = (uVar1 ^ uVar3) - uVar3;
                 uVar1 = iVar5 - y >> 0x1f;
-                _absDistY = (iVar5 - y ^ uVar1) - uVar1;
+                int _absDistY = (iVar5 - y ^ uVar1) - uVar1;
                 if (_absDistY < _absDistX) {
                     _absDistY = _absDistX;
                 }
@@ -89,11 +85,11 @@ namespace Map {
                 psVar2 = &DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[0].short_.yOffset;
                 paiVar4 = DAT_TileMapState::instance.directionTranslationMatrix + iVar5;
                 do {
-                    _candidate = (*paiVar4)[0] + _tile;
-                    if ((((DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration)
-                             && (DAT_TileMapState::instance.PathConnectionLayer[_candidate] == _unitArea))
-                            && (DAT_TileMapState::instance.BuildingLayer[_candidate] == buildingID))
-                        && (DAT_TileMapState::instance.UnitLayer[_candidate] == 0)) {
+                    int _candidate = (*paiVar4)[0] + _tile;
+                    if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration
+                        && DAT_TileMapState::instance.PathConnectionLayer[_candidate] == _unitArea
+                        && DAT_TileMapState::instance.BuildingLayer[_candidate] == buildingID
+                        && DAT_TileMapState::instance.UnitLayer[_candidate] == 0) {
                         /*
                           queue free spaces in the same area as the unit on the same building as the   unit
                          */
