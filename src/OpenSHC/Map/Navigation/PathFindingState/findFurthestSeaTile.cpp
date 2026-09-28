@@ -24,8 +24,8 @@ namespace Map {
         {
             short* psVar1;
             int (*paiVar2)[8];
-            short _x;
-            short _y;
+            int _x;
+            int _y;
             this->ALG_ResultTile = 0;
             this->ALG_ResultY = 0;
             this->ALG_ResultX = 0;
@@ -51,8 +51,8 @@ namespace Map {
                         this->ALG_ResultTile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                         if ((this->ALG_ResultTile < 0) || (0x13a0f < this->ALG_ResultTile))
                             break;
-                        _x = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                        _y = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                        _x = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
+                        _y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                         this->searchQueue.currentDistance
                             = (int)DAT_TileMapState::instance.CertainPathLayer[this->ALG_ResultTile];
                         if (budget < this->searchQueue.writeIndex) {
