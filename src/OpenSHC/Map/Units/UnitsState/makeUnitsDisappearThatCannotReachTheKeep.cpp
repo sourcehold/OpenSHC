@@ -17,8 +17,8 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00530650
         void UnitsState::makeUnitsDisappearThatCannotReachTheKeep(int playerID)
         {
-            ushort _areaOfKeep
-                = DAT_TileMapState::instance
+            dword _areaOfKeep
+                = (short)DAT_TileMapState::instance
                       .PathConnectionLayer[DAT_GameState::instance.playerDataArray[playerID].campground.tileEntry];
             for (int unitID = 1; unitID < (int)this->maxUnitCount; ++unitID) {
                 if (this->units[unitID].owner != playerID) {
