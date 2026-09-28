@@ -26,9 +26,6 @@ namespace Map {
         void PathFindingState::computeTotalUnitsWithinDistance(
             int playerID, int sameTeamUnits, int someLogicalTileProperty, int tile, int distance)
         {
-            byte bVar1;
-            ushort uVar2;
-            short sVar3;
             uint uVar4;
             int iVar5;
             int iVar6;
@@ -52,8 +49,8 @@ namespace Map {
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 while (uVar4 = this->searchQueue.tilesQueue[this->searchQueue.readIndex], uVar4 < 0x13a10) {
-                    sVar3 = this->searchQueue.yQueue[this->searchQueue.readIndex];
-                    uVar2 = DAT_TileMapState::instance.UnitLayer[uVar4];
+                    short sVar3 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    ushort uVar2 = DAT_TileMapState::instance.UnitLayer[uVar4];
                     while (iVar6 = (int)(short)uVar2, iVar6 != 0) {
                         if (sameTeamUnits == 1) {
                             if (DAT_GameState::instance.mapAndTime.playerTeams[playerID]
@@ -65,7 +62,8 @@ namespace Map {
                                     iVar5 = MACRO_CALL_MEMBER(
                                         OpenSHC::Map::Units::TroopValueState_Func::getValueOfTroopType,
                                         DAT_TroopValueState::ptr)(
-                                        (OpenSHC::Map::Units::UnitType)(int)(short)DAT_UnitsState::instance.units[iVar6].unitType);
+                                        (OpenSHC::Map::Units::UnitType)(int)(short)DAT_UnitsState::instance.units[iVar6]
+                                            .unitType);
                                     this->ALGO_TotalTroopValue = this->ALGO_TotalTroopValue + iVar5;
                                     this->ALGO_TotalTroopCount = this->ALGO_TotalTroopCount + 1;
                                     if (this->field34_0x64 == 0) {
@@ -87,7 +85,7 @@ namespace Map {
                     if (distance < this->searchQueue.currentDistance) {
                         return;
                     }
-                    bVar1 = DAT_TileMapState::instance.PathLinkageLayer[uVar4];
+                    byte bVar1 = DAT_TileMapState::instance.PathLinkageLayer[uVar4];
                     iVar6 = 0;
                     piVar7 = DAT_TileMapState::instance.directionTranslationMatrix[sVar3] + 1;
                     do {
