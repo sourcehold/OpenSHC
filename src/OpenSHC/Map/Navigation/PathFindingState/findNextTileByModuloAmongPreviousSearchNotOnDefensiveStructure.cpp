@@ -32,19 +32,19 @@ namespace Map {
                 /*
                   manhatten distance
                  */
-                if (((((DAT_TileMapState::instance.LogicLayer[_tile] & 0x10000100U) == 0)
-                         && (0 < DAT_TileMapState::instance.CertainPathLayer[_tile]))
-                        && (_xDistance = (_tile
-                                             - DAT_ViewportRenderState::instance
-                                                 .translationMatrix[DAT_ViewportRenderState::instance
-                                                         .tileTranslationMatrix_YComponent[_tile]]
-                                                 .addXgetTile)
-                                - x,
-                            _absX = (int)_xDistance >> 0x1f,
-                            _yDistance = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile] - y,
-                            _absY = (int)_yDistance >> 0x1f,
-                            (int)(((_yDistance ^ _absY) - _absY) + ((_xDistance ^ _absX) - _absX)) % modulo == 0))
-                    && (DAT_TileMapState::instance.CertainPathLayer[_tile] < 4000))
+                if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x10000100U) == 0
+                    && 0 < DAT_TileMapState::instance.CertainPathLayer[_tile]
+                    && (_xDistance = (_tile
+                                         - DAT_ViewportRenderState::instance
+                                             .translationMatrix[DAT_ViewportRenderState::instance
+                                                     .tileTranslationMatrix_YComponent[_tile]]
+                                             .addXgetTile)
+                            - x,
+                        _absX = (int)_xDistance >> 0x1f,
+                        _yDistance = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile] - y,
+                        _absY = (int)_yDistance >> 0x1f,
+                        (int)(((_yDistance ^ _absY) - _absY) + ((_xDistance ^ _absX) - _absX)) % modulo == 0)
+                    && DAT_TileMapState::instance.CertainPathLayer[_tile] < 4000)
                     break;
                 iVar1 = iVar1 + 1;
                 _pTile = _pTile + 1;
