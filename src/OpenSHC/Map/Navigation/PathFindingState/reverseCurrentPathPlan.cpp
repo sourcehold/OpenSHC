@@ -10,8 +10,8 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049A5E0
         void PathFindingState::reverseCurrentPathPlan()
         {
-            byte bVar1;
-            byte bVar2;
+            int bVar1;
+            int bVar2;
             byte* pbVar3;
             uint _endIndex;
             int _swapCounter;
