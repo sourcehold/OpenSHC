@@ -148,7 +148,12 @@ cold return block we inline where the original outlines it (`RET`), and the case
 side: one extra slot is one local the original does not have, and removing it has been worth 10-30 points.
 `diff_jcc.py` finds comparisons whose operator is one strictness step off the original (`jl`/`jle`, `jg`/`jge`) - these
 are real off-by-one bugs where Ghidra decompiled the condition wrongly, so confirm a fix by re-running that tool rather
-than by the percentage. `reorder_search.py FILE NAME` hill-climbs the match % by reordering independent statements,
+than by the percentage. `diff_types.py` is its counterpart away from comparisons: `movsx` against `movzx` for one field
+means the field's signedness is wrong in the generated header, and `add` against `sub` of the same magnitude is a sign
+error in a formula - that is how `2400 / n + 40` was caught being `- 40`, which Ghidra had decompiled with the wrong
+sign. It carries only those two rules on purpose: a third, "same instruction with a different constant", was tried and
+dropped because every hit it produced was a loop-induction stride rather than a constant the source chose.
+`reorder_search.py FILE NAME` hill-climbs the match % by reordering independent statements,
 which is the only lever left once a function is `alloc-only`; it pays about one move in ten, and mostly where the
 statements sit between two calls or on a loop back-edge.
 
@@ -160,10 +165,15 @@ Compares generated binaries against the original executable.
 
 When restyling or improving a large set of functions, work in batches (e.g. per folder) and verify each batch:
 
+0. Switch the global data reimplementations on (the `MACRO_STRUCT_RESOLVER` flag in `src/OpenSHC/Globals/*.hpp`)
+   before measuring anything, and never commit those files. With the resolvers inactive, reccmp collapses every
+   absolute address to one token, so a `this->` that should be the global instance, and a wrong field offset, both
+   look like a match.
 1. Save a baseline: `reccmp_report.py --run save base.json`.
 2. Rewrite the bodies (`show_functions.py` -> edit -> `splice_functions.py`), then `syntax_check.py` and `build_quiet.py`.
 3. Compare with `reccmp_report.py --run cmp base.json`; revert or rework every `WORSE` function and inspect the rest with `diff`.
 4. Commit with `commit_progress_batch.py` (100% "Reimplemented" when only call targets differ, otherwise the % with a short blocker remark).
+   Field and parameter type changes to generated headers go in a commit of their own, separate from the `.cpp` work.
 
 Style expected of reimplemented code:
 
@@ -208,6 +218,15 @@ Diff patterns that were reliable (more in the cheat sheet):
   drops them out of the table, so give every value its own `case` and lift a shared tail out behind a flag instead.
 - `x < 1` compiles to `cmp x, 1; jl` but the original usually shows `test x, x; jle`, i.e. `x <= 0`. The two are
   identical for signed and unsigned alike; write the form the asm shows.
+- A range's upper bound is half-open when the original ends it with `jge` and inclusive when it ends with `jg`.
+  Writing `<= N-1` where the original has `< N` is a real off-by-one whenever the bound is a player or slot count -
+  `processSingleTimeTick` had five, each calling a per-player routine one index out of range.
+- Trust the asm over the decompilation for constants and their sign. Ghidra rendered `2400 / n + 40` where the binary
+  has `sub eax, 0x28`, so the formula is `- 40`; the function reached 100% once corrected (`diff_types.py` finds these).
+  A `(longlong)` in a Ghidra division is usually spurious too - it emits `_alldiv` where the original has a plain `idiv`.
+- MSVC1400 at `/O2` never unrolls a loop, so a body repeated N times in the asm means the source was written out N
+  times. A plain loop where the original is unrolled has cost 80 points on its own.
+- A flag stored with `mov dword ptr [..], 0/1` is an `int`, not a `bool`, which stores a byte.
 
 ## Agent Skills
 
