@@ -16,48 +16,36 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049AF50
         void PathFindingState::setChangedLayerZeroBasedOn40x40Layer(uint flag_and_offset)
         {
-            int _someYLikeLimit;
-            uint _x;
-            int _someY;
-            int _pMap4040;
-            int _yOffset;
-            int _curX;
-            int _someX;
-            int _index4000;
-            int _index10;
-            int local_1c;
-            int _cur10;
-            uint _coord2;
             if ((this->field10_0x28 == 0) && (flag_and_offset == 0)) {
                 if (DAT_TileMapState::instance.someIndex <= DAT_TileMapState::instance.someLimit) {
-                    _index10 = DAT_TileMapState::instance.someIndex * 10;
+                    int _index10 = DAT_TileMapState::instance.someIndex * 10;
                     /*
                       10 400x400 rows
                      */
-                    _index4000 = DAT_TileMapState::instance.someIndex * 4000;
-                    _someX = DAT_TileMapState::instance.someIndex * 120;
-                    _pMap4040 = DAT_TileMapState::instance.someIndex * 40 + 0x1f93438;
-                    _someYLikeLimit = DAT_TileMapState::instance.someYLikeLimit;
+                    int _index4000 = DAT_TileMapState::instance.someIndex * 4000;
+                    int _someX = DAT_TileMapState::instance.someIndex * 120;
+                    int _pMap4040 = DAT_TileMapState::instance.someIndex * 40 + 0x1f93438;
+                    int _someYLikeLimit = DAT_TileMapState::instance.someYLikeLimit;
                     do {
                         if (DAT_TileMapState::instance.someYLike <= _someYLikeLimit) {
                             flag_and_offset = DAT_TileMapState::instance.someYLike * 10 + 1;
-                            _someY = DAT_TileMapState::instance.someYLike;
+                            int _someY = DAT_TileMapState::instance.someYLike;
                             do {
                                 if (*(char*)(_pMap4040 + _someY) != '\0') {
                                     /*
                                       update this part
                                      */
                                     *(undefined1*)(_pMap4040 + _someY) = 0;
-                                    _cur10 = 0;
-                                    _yOffset = _index4000;
-                                    _curX = _someX;
+                                    int _cur10 = 0;
+                                    int _yOffset = _index4000;
+                                    int _curX = _someX;
                                     do {
-                                        _coord2 = _index10 + _cur10;
-                                        local_1c = 2;
-                                        _x = flag_and_offset;
+                                        uint _coord2 = _index10 + _cur10;
+                                        int local_1c = 2;
+                                        uint _x = flag_and_offset;
                                         do {
-                                            if (((_x - 1 < 400) && (_coord2 < 400))
-                                                && (*(char*)(_yOffset + 0x21aec98 + (_x - 1)) != '\0')) {
+                                            if (_x - 1 < 400 && _coord2 < 400
+                                                && *(char*)(_yOffset + 0x21aec98 + (_x - 1)) != '\0') {
                                                 /*
                                                   set changed layer to 0
                                                  */
@@ -70,32 +58,32 @@ namespace Map {
                                                                   .addXgetTile
                                                         + _curX)) = 0;
                                             }
-                                            if (((_x < 400) && (_coord2 < 400))
-                                                && (*(char*)(_yOffset + 0x21aec98 + _x) != '\0')) {
+                                            if (_x < 400 && _coord2 < 400
+                                                && *(char*)(_yOffset + 0x21aec98 + _x) != '\0') {
                                                 *(undefined1*)(*(int*)((int)&DAT_ViewportRenderState::instance
                                                                            .translationMatrix[0]
                                                                            .addXgetTile
                                                                    + _curX)
                                                     + 0x1c5ad88 + _x) = 0;
                                             }
-                                            if (((_x + 1 < 400) && (_coord2 < 400))
-                                                && (*(char*)(_yOffset + 0x21aec98 + _x + 1) != '\0')) {
+                                            if (_x + 1 < 400 && _coord2 < 400
+                                                && *(char*)(_yOffset + 0x21aec98 + _x + 1) != '\0') {
                                                 *(undefined1*)(_x + 0x1c5ad89
                                                     + *(int*)((int)&DAT_ViewportRenderState::instance
                                                                   .translationMatrix[0]
                                                                   .addXgetTile
                                                         + _curX)) = 0;
                                             }
-                                            if (((_x + 2 < 400) && (_coord2 < 400))
-                                                && (*(char*)(_yOffset + 0x21aec98 + _x + 2) != '\0')) {
+                                            if (_x + 2 < 400 && _coord2 < 400
+                                                && *(char*)(_yOffset + 0x21aec98 + _x + 2) != '\0') {
                                                 *(undefined1*)(_x + 0x1c5ad8a
                                                     + *(int*)((int)&DAT_ViewportRenderState::instance
                                                                   .translationMatrix[0]
                                                                   .addXgetTile
                                                         + _curX)) = 0;
                                             }
-                                            if (((_x + 3 < 400) && (_coord2 < 400))
-                                                && (*(char*)(_yOffset + 0x21aec98 + _x + 3) != '\0')) {
+                                            if (_x + 3 < 400 && _coord2 < 400
+                                                && *(char*)(_yOffset + 0x21aec98 + _x + 3) != '\0') {
                                                 *(undefined1*)(_x + 0x1c5ad8b
                                                     + *(int*)((int)&DAT_ViewportRenderState::instance
                                                                   .translationMatrix[0]
