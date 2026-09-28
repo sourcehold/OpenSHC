@@ -25,7 +25,7 @@ namespace Game {
         }
         DWORD currentTime = timeGetTime();
         if ((this->playerDataArray[playerID].lastTimeSFXNoPlaceInStockpile == 0)
-            || (currentTime - timeGetTime() > 9999)) {
+            || (currentTime - timeGetTime() >= 10000)) {
             /*
               "No space in the stockpile"
              */
