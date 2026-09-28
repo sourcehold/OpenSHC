@@ -1,17 +1,17 @@
 #include "../PathFindingState.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
+#include "OpenSHC/Map/Location/Point8IntXY.hpp"
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Map/Location/Point8IntXY.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Navigation {
-            using OpenSHC::Map::Location::Point8IntXY;
+        using OpenSHC::Map::Location::Point8IntXY;
 
         /*
           WARNING: Enum "MappersEnum": Some values do not have unique names
@@ -32,8 +32,8 @@ namespace Map {
             int _currentTile;
             short _currentX;
             short _currentY;
-            if (((destinationX < 400) && (destinationY < 400))
-                && (*(char*)(destinationY * 400 + 0x21aec98 + destinationX) != '\0')) {
+            if (destinationX < 400 && destinationY < 400
+                && *(char*)(destinationY * 400 + 0x21aec98 + destinationX) != '\0') {
                 this->calculations = this->calculations + 1;
                 this->searchGeneration = this->searchGeneration + 1;
                 this->climbX = destinationX;
@@ -68,7 +68,8 @@ namespace Map {
                             return;
                         }
                         _cardinalTileOffset = DAT_TileMapState::instance.directionTranslationMatrix[_currentY] + 1;
-                        _cardinalXYOffset = &DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[0].int_;
+                        _cardinalXYOffset
+                            = &DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[0].int_;
                         do {
                             _neswTile1 = (*(int (*)[8])(_cardinalTileOffset + -1))[0] + _currentTile;
                             if ((DAT_TileMapState::instance.LogicLayer[_neswTile1] & 0x30) == 0) {
