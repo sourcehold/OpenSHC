@@ -20,14 +20,16 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00533630
         BOOLEnum UnitsState::findAndAttackNearbyEnemyLaddermanInPosition(int unitID)
         {
-            if ((DAT_TileMapState::instance.LogicLayer[this->units[unitID].tile] & LogicHelpers::L_WALL_OR_GATEHOUSE)
-                == 0) {
-                return FALSE;
-            }
+            int _unitX = this->units[unitID].x;
             short _owner = this->units[unitID].owner;
-            dword _areaOfUnit = (short)DAT_TileMapState::instance.PathConnectionLayer[this->units[unitID].tile];
+            int _unitY = this->units[unitID].y;
+            int _tile = this->units[unitID].tile;
+            dword _areaOfUnit = (short)DAT_TileMapState::instance.PathConnectionLayer[_tile];
             int _bestEnemyUnitID = 0;
             int _minDistance = 1000;
+            if ((DAT_TileMapState::instance.LogicLayer[_tile] & LogicHelpers::L_WALL_OR_GATEHOUSE) == 0) {
+                return FALSE;
+            }
             for (int i = 0; i < DAT_GameState::instance.playerDataArray[_owner].enemies; ++i) {
                 int _enemyUnitID = DAT_GameState::instance.playerDataArray[_owner].enemyIDArray[i];
                 if (this->units[_enemyUnitID].unitType != OpenSHC::Map::Units::UT_E_LADDER) {
@@ -45,16 +47,16 @@ namespace Map {
                     DAT_PathFindingState::ptr)(
                     (short)_areaOfUnit, this->units[_enemyUnitID].x, this->units[_enemyUnitID].y);
                 int _distanceX;
-                if (DAT_PathFindingState::instance.climbX < this->units[unitID].x) {
-                    _distanceX = this->units[unitID].x - DAT_PathFindingState::instance.climbX;
+                if (DAT_PathFindingState::instance.climbX < _unitX) {
+                    _distanceX = _unitX - DAT_PathFindingState::instance.climbX;
                 } else {
-                    _distanceX = DAT_PathFindingState::instance.climbX - this->units[unitID].x;
+                    _distanceX = DAT_PathFindingState::instance.climbX - _unitX;
                 }
                 int _distanceY;
-                if (DAT_PathFindingState::instance.climbY < this->units[unitID].y) {
-                    _distanceY = this->units[unitID].y - DAT_PathFindingState::instance.climbY;
+                if (DAT_PathFindingState::instance.climbY < _unitY) {
+                    _distanceY = _unitY - DAT_PathFindingState::instance.climbY;
                 } else {
-                    _distanceY = DAT_PathFindingState::instance.climbY - this->units[unitID].y;
+                    _distanceY = DAT_PathFindingState::instance.climbY - _unitY;
                 }
                 if (_distanceX < _distanceY) {
                     /* stores the largest distance into _distanceX */
