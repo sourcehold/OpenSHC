@@ -40,18 +40,9 @@ namespace Map {
         void PathFindingState::findBestAttackTargetTileWithHeightAndOwner(int param_1, uint param_2, uint param_3,
             int param_4, int param_5, int param_6, int param_7, int param_8, int param_9)
         {
-            short sVar1;
-            short sVar2;
-            short sVar3;
-            uint uVar4;
             short sVar5;
-            int iVar6;
             int iVar7;
-            int buildingID;
-            uint uVar8;
             int iVar9;
-            uint uVar10;
-            uint uVar11;
             int (*paiVar12)[3];
             int local_20;
             int local_14;
@@ -66,7 +57,7 @@ namespace Map {
             this->ALG_TargetTile = 0;
             this->ALG_TargetY = 0;
             this->ALG_TargetX = 0;
-            if (((param_2 < 400) && (param_3 < 400)) && (*(char*)(param_3 * 400 + 0x21aec98 + param_2) != '\0')) {
+            if (param_2 < 400 && param_3 < 400 && *(char*)(param_3 * 400 + 0x21aec98 + param_2) != '\0') {
                 this->searchGeneration = this->searchGeneration + 1;
                 if (32000 < this->searchGeneration) {
                     this->searchGeneration = 1;
@@ -78,21 +69,21 @@ namespace Map {
                 this->searchQueue.readIndex = 0;
                 this->searchQueue.yQueue[0] = (short)param_3;
                 this->searchQueue.xQueue[0] = (short)param_2;
-                iVar6 = DAT_ViewportRenderState::instance.translationMatrix[param_3].addXgetTile + param_2;
+                int iVar6 = DAT_ViewportRenderState::instance.translationMatrix[param_3].addXgetTile + param_2;
                 this->searchQueue.tilesQueue[0] = iVar6;
                 DAT_TileMapState::instance.CertainPathLayer[iVar6] = 1;
                 DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
-                uVar10 = (uint)DAT_TileMapState::instance.HeightLayer[iVar6];
+                uint uVar10 = (uint)DAT_TileMapState::instance.HeightLayer[iVar6];
                 if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                     do {
-                        uVar4 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                        uint uVar4 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                         if (0x13a0f < uVar4)
                             break;
-                        sVar1 = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                        sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                        short sVar1 = this->searchQueue.xQueue[this->searchQueue.readIndex];
+                        short sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
                         iVar6 = (int)sVar2;
-                        uVar8 = DAT_TileMapState::instance.LogicLayer[uVar4];
-                        uVar11 = (uint) * (byte*)(param_7 * 0x13a10 + 0x1ee2998 + uVar4);
+                        uint uVar8 = DAT_TileMapState::instance.LogicLayer[uVar4];
+                        uint uVar11 = (uint) * (byte*)(param_7 * 0x13a10 + 0x1ee2998 + uVar4);
                         this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[uVar4];
                         if (this->searchQueue.currentDistance <= param_1) {
                             if ((DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY)
@@ -100,23 +91,23 @@ namespace Map {
                                 uVar11 = 1;
                             }
                             if ((uVar8 & 2) == 0) {
-                                if ((((uVar8 & 0x10100) == 0) || (uVar11 == 0)) || (param_8 <= (int)uVar11)) {
-                                    if (((((((uVar8 & 0x10000400) != 0) && (uVar11 != 0)) && ((int)uVar11 < param_8))
-                                             && ((iVar9 = (int)DAT_TileMapState::instance.BuildingLayer[uVar4],
-                                                 iVar9 != 0
-                                                     && (DAT_BuildingDefinedData::instance.BuildingTypeHasHealth[(
-                                                             short)DAT_BuildingsState::instance.buildings[iVar9]
-                                                                 .buildingType]
-                                                         != 0))))
-                                            && (DAT_BuildingsState::instance.buildings[iVar9].owner == param_7))
-                                        && ((param_9 == 0
+                                if ((uVar8 & 0x10100) == 0 || uVar11 == 0 || param_8 <= (int)uVar11) {
+                                    if ((uVar8 & 0x10000400) != 0 && uVar11 != 0 && (int)uVar11 < param_8
+                                        && (iVar9 = (int)DAT_TileMapState::instance.BuildingLayer[uVar4],
+                                            iVar9 != 0
+                                                && (DAT_BuildingDefinedData::instance.BuildingTypeHasHealth[(
+                                                        short)DAT_BuildingsState::instance.buildings[iVar9]
+                                                            .buildingType]
+                                                    != 0))
+                                        && DAT_BuildingsState::instance.buildings[iVar9].owner == param_7
+                                        && (param_9 == 0
                                             || ((
                                                 iVar7 = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::
                                                                               getBuildingFlammabilityFactor,
                                                     DAT_BuildingsState::ptr)(iVar9),
                                                 iVar7 != 0
                                                     && (DAT_BuildingsState::instance.buildings[iVar9].fireDuration
-                                                        == 0)))))) {
+                                                        == 0))))) {
                                         iVar9 = 0x96;
                                         if ((uVar8 & 0x400) == 0) {
                                             iVar9 = 0x4b;
@@ -130,8 +121,8 @@ namespace Map {
                                         }
                                         goto LAB_004a62e3;
                                     }
-                                } else if (((DAT_TileMapState::instance.WallOwnerLayer[uVar4] & 7) + 1 == param_7)
-                                    && (param_9 == 0)) {
+                                } else if ((DAT_TileMapState::instance.WallOwnerLayer[uVar4] & 7) + 1 == param_7
+                                    && param_9 == 0) {
                                     iVar9 = (uint)DAT_TileMapState::instance.HeightLayer[uVar4]
                                         - (uint)DAT_TileMapState::instance.DefaultHeightLayer[uVar4];
                                     if (this->searchQueue.currentDistance < 1) {
@@ -142,10 +133,10 @@ namespace Map {
                                         iVar9 = this->searchQueue.currentDistance * 100 + iVar9;
                                     }
                                 LAB_004a62e3:
-                                    if ((iVar9 < local_20)
+                                    if (iVar9 < local_20
                                         && (iVar7
                                             = MACRO_CALL(OpenSHC::Map::Navigation_Func::calcApproxEuclideanDistance)(
-                                                param_2, (int)((int)(sVar1)), (int)((int)(param_3)), iVar6),
+                                                param_2, (int)(sVar1), (int)(param_3), iVar6),
                                             iVar7 <= param_1)) {
                                         local_20 = iVar9;
                                         local_14 = (int)sVar1;
@@ -160,8 +151,8 @@ namespace Map {
                                 iVar9 = (*paiVar12)[0];
                                 iVar7 = DAT_TileMapState::instance.directionTranslationMatrix[iVar6][iVar9] + uVar4;
                                 uVar8 = DAT_TileMapState::instance.LogicLayer[iVar7];
-                                if ((DAT_TileMapState::instance.WalkLayer[iVar7] != this->searchGeneration)
-                                    && ((uVar8 & 0x30) == 0)) {
+                                if (DAT_TileMapState::instance.WalkLayer[iVar7] != this->searchGeneration
+                                    && (uVar8 & 0x30) == 0) {
                                     if ((uVar8 & 0x10000400) == 0) {
                                         if ((uVar8 & 0x100) == 0) {
                                             uVar8 = (uint)DAT_TileMapState::instance.HeightLayer[iVar7];
@@ -176,9 +167,9 @@ namespace Map {
                                             } else {
                                                 sVar5 = ((int)(param_5 / 3 + uVar10) < (int)uVar8) + 1;
                                             }
-                                            sVar3 = DAT_TerrainDefinedData::instance
-                                                        .clockwiseCardinalTranslationMatrix[iVar9]
-                                                        .short_.xOffset;
+                                            short sVar3 = DAT_TerrainDefinedData::instance
+                                                              .clockwiseCardinalTranslationMatrix[iVar9]
+                                                              .short_.xOffset;
                                             DAT_TileMapState::instance.CertainPathLayer[iVar7]
                                                 = (short)this->searchQueue.currentDistance + sVar5;
                                             DAT_TileMapState::instance.WalkLayer[iVar7] = (short)this->searchGeneration;
@@ -195,7 +186,7 @@ namespace Map {
                                             }
                                         }
                                     } else {
-                                        buildingID = (int)DAT_TileMapState::instance.BuildingLayer[iVar7];
+                                        int buildingID = (int)DAT_TileMapState::instance.BuildingLayer[iVar7];
                                         if ((buildingID != 0)
                                             && (DAT_BuildingsState::instance.buildings[buildingID].owner == param_7)) {
                                             uVar8 = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::
