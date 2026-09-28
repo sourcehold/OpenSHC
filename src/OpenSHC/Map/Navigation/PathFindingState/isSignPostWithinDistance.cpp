@@ -65,8 +65,8 @@ namespace Map {
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 while ((iVar3 = this->searchQueue.tilesQueue[this->searchQueue.readIndex],
                     -1 < iVar3 && (iVar3 < 0x13a10))) {
-                    short sVar1 = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                    short sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    int sVar1 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
+                    int sVar2 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[iVar3];
                     if (0x13a10 < this->searchQueue.currentDistance) {
                         return FALSE;
