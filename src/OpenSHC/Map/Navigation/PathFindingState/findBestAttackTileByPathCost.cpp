@@ -30,16 +30,10 @@ namespace Map {
         dword PathFindingState::findBestAttackTileByPathCost(uint param_1, uint param_2, int param_3, uint param_4)
         {
             int iVar1;
-            short sVar2;
-            int iVar3;
-            dword dVar4;
-            int iVar5;
-            dword local_8;
-            int local_4;
-            dVar4 = 1000;
-            local_4 = 1000;
-            local_8 = 0;
-            if (((param_1 < 400) && (param_2 < 400)) && (*(char*)(param_2 * 400 + 0x21aec98 + param_1) != '\0')) {
+            dword dVar4 = 1000;
+            int local_4 = 1000;
+            dword local_8 = 0;
+            if (param_1 < 400 && param_2 < 400 && *(char*)(param_2 * 400 + 0x21aec98 + param_1) != '\0') {
                 this->calculations = this->calculations + 1;
                 this->searchGeneration = this->searchGeneration + 1;
                 if (32000 < this->searchGeneration) {
@@ -58,23 +52,23 @@ namespace Map {
                 dVar4 = local_8;
                 if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                     do {
-                        iVar3 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                        int iVar3 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                         if (iVar3 < 0) {
                             return (dword)(local_8);
                         }
                         if (0x13a0f < iVar3) {
                             return (dword)(local_8);
                         }
-                        sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                        short sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
                         this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[iVar3];
                         if (0x13a10 < this->searchQueue.currentDistance) {
                             return (dword)(local_8);
                         }
-                        iVar5 = 0;
+                        int iVar5 = 0;
                         do {
-                            if (((DAT_TileMapState::instance.PathLinkageLayer[iVar3]
-                                     & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar5])
-                                    != 0)
+                            if ((DAT_TileMapState::instance.PathLinkageLayer[iVar3]
+                                    & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar5])
+                                    != 0
                                 && (dVar4 = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][iVar5] + iVar3,
                                     DAT_TileMapState::instance.WalkLayer[dVar4] != this->searchGeneration)) {
                                 if (((DAT_TileMapState::instance.EntityLayer[dVar4] == 0)
@@ -82,11 +76,11 @@ namespace Map {
                                                 .entityArray[DAT_TileMapState::instance.EntityLayer[dVar4]]
                                                 .entityType
                                             != OpenSHC::Map::Entities::ET_FIRE))
-                                    && (*(byte*)(*(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray
-                                                     + param_3 * 0x177bc + -0x10)
-                                                * 0x13a10
-                                            + 0x1ee2998 + dVar4)
-                                        == param_4)) {
+                                    && *(byte*)(*(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray
+                                                    + param_3 * 0x177bc + -0x10)
+                                               * 0x13a10
+                                           + 0x1ee2998 + dVar4)
+                                        == param_4) {
                                     if ((10 < this->searchQueue.currentDistance) && (local_8 != 0)) {
                                         return (dword)(local_8);
                                     }
