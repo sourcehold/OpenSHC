@@ -21,8 +21,10 @@ body rather than only the parts that differ.
 `--stats` reports the signals that decide how a function has to be reimplemented at all:
   * "mov reg, 0"        - no compiler materialises zero that way; the block is handwritten assembly
                           and belongs in an __asm block (see AGENTS.md and NeighbourFlagsAsm.hpp).
-  * frame pointer       - "push ebp / mov ebp, esp" plus a "this" spill means the original was built
-                          without optimisation; the reimplementation needs #pragma optimize("", off).
+  * frame pointer       - "push ebp / mov ebp, esp" with locals addressed off ebp means the original
+                          was built without optimisation; the reimplementation needs
+                          #pragma optimize("", off). The same prologue with "and esp, -N" is only
+                          /O2 realigning the stack for a large local, and is NOT an /Od tell.
   * "sub esp, N"        - the frame size. Matching it exactly is usually the single biggest win for
                           an unoptimised function, because every local displacement shifts otherwise.
   * "jmp dword ptr"     - a jump table: Ghidra often renders the dispatch as a call through an
@@ -73,8 +75,16 @@ def instructions(entry, both):
                 if key == 'both' and not both:
                     continue
                 for row in node[key]:
-                    if isinstance(row, (list, tuple)) and len(row) >= 2:
-                        out.append((int(row[0], 16), row[1].rstrip(), key == 'both'))
+                    if not (isinstance(row, (list, tuple)) and len(row) >= 2):
+                        continue
+                    # reccmp leaves the address empty on rows it synthesised (padding,
+                    # and the blank line it puts between hunks); keep them in order by
+                    # reusing the previous address rather than dropping the instruction.
+                    try:
+                        address = int(row[0], 16)
+                    except (TypeError, ValueError):
+                        address = out[-1][0] if out else 0
+                    out.append((address, row[1].rstrip(), key == 'both'))
         elif isinstance(node, list):
             for item in node:
                 walk(item)
@@ -103,7 +113,13 @@ def main():
     if '--stats' in flags:
         text = '\n'.join(row[1] for row in rows)
         zero = re.findall(r'\bmov e[a-z]{2}, 0\b', text)
-        frame = bool(re.search(r'\bpush ebp\b', text)) and bool(re.search(r'\bmov ebp, esp\b', text))
+        # `push ebp / mov ebp, esp` alone is not an /Od tell: /O2 emits the same pair when a
+        # function realigns the stack for a large local (`and esp, -N`, usually with __chkstk),
+        # and there the locals still live at [esp + N]. A real /Od frame addresses them off ebp.
+        prologue = bool(re.search(r'\bpush ebp\b', text)) and bool(re.search(r'\bmov ebp, esp\b', text))
+        realigned = bool(re.search(r'\band esp, 0x[0-9a-f]+\b', text))
+        ebp_locals = bool(re.search(r'\[ebp - 0x[0-9a-f]+\]', text))
+        frame = prologue and ebp_locals and not realigned
         stack = re.findall(r'\bsub esp, (0x[0-9a-f]+|\d+)\b', text)
         tables = re.findall(r'\bjmp dword ptr\b', text)
         print('# instructions seen: %d (matched and differing)' % len(rows))

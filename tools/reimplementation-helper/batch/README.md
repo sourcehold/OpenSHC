@@ -31,6 +31,27 @@ Analysis helpers, for deciding *what* to change when a function is stuck below 1
 | `diff_jcc.py [NAME]` | Comparisons whose operator is one strictness step off the original (`jl`/`jle`, `jg`/`jge`, `ja`/`jae`) or whose `cmp` operands are the other way round, with context. |
 | `reorder_search.py FILE NAME [--pairs] [--dry]` | Hill-climb the match % by reordering independent statements: permute runs of >=3 by default, or swap every adjacent independent pair with `--pairs`. Builds once per move and reverts anything that does not improve. |
 
+### Choosing what to work on
+
+| Script | Purpose |
+|---|---|
+| `rank_functions.py [filter] [--top N]` | Rank by source lines x (1 - match), so the big badly-matching functions come first instead of the small ones with a low percentage. |
+| `scan_dispatch.py [filter]` | Functions whose dispatch form disagrees with the original (jump table on one side, if/else-if chain on the other), and which way to fix each. |
+| `scan_chains.py [filter] [--min N]` | `if/else if` chains comparing one expression against several constants: the candidates to convert when `scan_dispatch.py` says the original has a table we do not. |
+| `try_styles.py FUNC [style...]` | Compile and measure several hand-written variants of one function, restore the winner, print the table. Variants live in `build-RelWithDebInfo/batch/variants/FUNC/*.cpp`. |
+
+### Readability passes
+
+These undo decompiler artefacts. Each measured as code-generation neutral or better where
+it was applied, but none is guaranteed to be -- re-measure after running one.
+
+| Script | Purpose |
+|---|---|
+| `declare_at_use.py [filter]` | Move the leading declaration block down to each variable's first use, and drop declarations that are never used. Only moves one when the first assignment provably dominates every later use. |
+| `decast.py [filter]` | Collapse doubled casts, `(int)((int)(x))` -> `(int)(x)`. Skips `(int)((int)X + Y)`, where the inner cast covers one operand and dropping it would move the conversion onto the sum. |
+| `deparen.py [filter] [--apply]` | Drop redundant brackets from `if`/`while` conditions using C precedence. Keeps the load-bearing ones (`(a \|\| b) && c`, `(x & 7) == 0`, assignments and comma operators inside conditions). Dry run unless `--apply`. |
+| `test_deparen.py` | Precedence tests for `deparen.py`. Run after touching its table: an earlier version silently rewrote `(a != 0 \|\| b != 0) && (x & 0x100) == 0` into a different expression that still compiled. |
+
 ## Typical loop
 
 ```sh

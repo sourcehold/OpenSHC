@@ -107,6 +107,13 @@ quiet builds, `/Zs` syntax checks, a reccmp report (match %, normalized % ignori
 showing and splicing many function bodies, one progress commit per changed function, and repairing sources after
 `*_Func` namespace refactors. Prefer them over ad-hoc scripts when a task spans many functions.
 
+To pick the next target, `rank_functions.py` orders by lines x (1 - match) rather than by percentage, and
+`scan_dispatch.py` lists every function whose dispatch form disagrees with the original (a jump table on one side and an
+if/else-if chain on the other), with `scan_chains.py` finding the chains to convert. `try_styles.py` compiles and
+measures several hand-written variants of one function and keeps the best, which is the only reliable way to settle a
+style question - see the note on unpredictable styles below. `declare_at_use.py`, `decast.py` and `deparen.py` undo
+decompiler artefacts across a whole selection; run `test_deparen.py` after touching `deparen.py`'s precedence table.
+
 `orig_asm.py NAME` prints the **original** instruction stream of one function from the last reccmp run, rather than the
 interleaved diff `reccmp_report.py diff` gives you. Use it when the diff comes back truncated, or when you need the
 original's own jump targets and fall-through order to reconstruct control flow. It reads `reccmp/dll/diff.json`, so it
@@ -155,7 +162,11 @@ When restyling or improving a large set of functions, work in batches (e.g. per 
 Style expected of reimplemented code:
 
 - Declare variables where they are first used; access fields repeatedly instead of copying them into locals
-  (the compiler created the locals), unless the diff shows the original really used a local.
+  (the compiler created the locals), unless the diff shows the original really used a local. Whether naming a
+  repeatedly read field helps is not predictable and has to be measured per function: it gained 18% in one function
+  where the value fed distance arithmetic and lost 12% in another where it fed a chain of `== constant` tests, which
+  MSVC compiles against the memory operand directly. The same applies to other style choices - reusing one pointer for
+  two rows helped one function and hurt its near-identical neighbour. Use `try_styles.py` rather than reasoning about it.
 - Use `for` loops (loop variable declared in the `for`), early returns instead of nested if/else, no `goto`,
   no pointer variables walking over arrays or structs, named fields and enum constants instead of offsets and magic numbers.
 - Never change the `// FUNCTION:` address line; keep generated headers untouched unless asked.
@@ -173,6 +184,18 @@ Diff patterns that were reliable (more in the cheat sheet):
   not a source difference.
 - A mismatching argument count or `ret N` usually means the generated header is wrong; report it instead of working around it.
 - Diffs can reveal real bugs in existing reimplementations (wrong constants, wrong strides); fix those.
+- `(-(uint)(c) & MASK) + BASE` in the decompiler output is a conditional it has already turned into mask-and-add:
+  it is `c ? BASE + MASK : BASE`. Writing the conditional out recovers the same instructions and stops the constants
+  being unreadable - `(-(uint)(d != 1) & 0xffffffce) + 200` is `d == 1 ? 200 : 150`.
+- Our `movzx` against the original's `movsx` on a `ushort` layer (`PathConnectionLayer`) means the original cast the
+  read: `dword x = (short)layer[i]`, one `movsx`. Declaring the local `short` does not do it - the signedness comes
+  from the cast on the array access, not from the destination.
+- `jmp dword ptr [reg*4 + table]` on one side only is a dispatch-form mismatch: a `switch` over contiguous values
+  becomes a jump table, an if/else-if chain becomes compares. Both directions have been worth several percent
+  (`scan_dispatch.py` finds them). Handing some of a switch's values to `default:` and re-testing them with an `if`
+  drops them out of the table, so give every value its own `case` and lift a shared tail out behind a flag instead.
+- `x < 1` compiles to `cmp x, 1; jl` but the original usually shows `test x, x; jle`, i.e. `x <= 0`. The two are
+  identical for signed and unsigned alike; write the form the asm shows.
 
 ## Agent Skills
 
