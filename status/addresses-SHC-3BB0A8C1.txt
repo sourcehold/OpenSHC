@@ -17141,7 +17141,7 @@ SHC_3BB0A8C1_0x004567A0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00456810 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00456870 | 0.0% | Pending
+SHC_3BB0A8C1_0x00456870 | 27.4% | Orig tail-calls 0x4A6940
 
 SHC_3BB0A8C1_0x004568B0 | 100.0% | Reimplemented
 
