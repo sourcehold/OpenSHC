@@ -1,6 +1,7 @@
 #include "../PathFindingState.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
+#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -8,12 +9,11 @@
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Navigation {
-            using OpenSHC::Map::Location::Point8ShortXY;
+        using OpenSHC::Map::Location::Point8ShortXY;
 
         /*
           WARNING: Enum "MappersEnum": Some values do not have unique names
@@ -25,9 +25,6 @@ namespace Map {
         void PathFindingState::algTunnelerFindTarget(
             int playerID, int targetPlayerID, int distance, int originX, int originY)
         {
-            short sVar1;
-            short sVar2;
-            short sVar3;
             int iVar4;
             uint uVar5;
             short* psVar6;
@@ -39,8 +36,7 @@ namespace Map {
             this->ALG_TargetTile = 0;
             this->ALG_TargetY = 0;
             this->ALG_TargetX = 0;
-            if ((((uint)originX < 400) && ((uint)originY < 400))
-                && (*(char*)(originY * 400 + 0x21aec98 + originX) != '\0')) {
+            if ((uint)originX < 400 && (uint)originY < 400 && *(char*)(originY * 400 + 0x21aec98 + originX) != '\0') {
                 this->searchGeneration = this->searchGeneration + 1;
                 if (32000 < this->searchGeneration) {
                     this->searchGeneration = 1;
@@ -59,28 +55,28 @@ namespace Map {
                 if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                     while ((iVar4 = this->searchQueue.tilesQueue[this->searchQueue.readIndex],
                         -1 < iVar4 && (iVar4 < 0x13a10))) {
-                        sVar1 = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                        sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                        short sVar1 = this->searchQueue.xQueue[this->searchQueue.readIndex];
+                        short sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
                         iVar7 = (int)sVar2;
-                        if (((DAT_TileMapState::instance.LogicLayer[iVar4] & 0x100U) != 0)
-                            && ((DAT_TileMapState::instance.LogicLayer[iVar4] & 2U) == 0)) {
+                        if ((DAT_TileMapState::instance.LogicLayer[iVar4] & 0x100U) != 0
+                            && (DAT_TileMapState::instance.LogicLayer[iVar4] & 2U) == 0) {
                             uVar5 = DAT_TileMapState::instance.WallOwnerLayer[iVar4] & 7;
                             if (((targetPlayerID == 0) || (targetPlayerID == uVar5 + 1))
-                                && (DAT_GameState::instance.mapAndTime.playerTeams[playerID]
-                                    != DAT_GameState::instance.mapAndTime.playerTeams[uVar5 + 1])) {
+                                && DAT_GameState::instance.mapAndTime.playerTeams[playerID]
+                                    != DAT_GameState::instance.mapAndTime.playerTeams[uVar5 + 1]) {
                                 this->ALG_TargetX = (int)sVar1;
                                 this->ALG_TargetY = iVar7;
                                 this->ALG_TargetTile = iVar4;
                                 return;
                             }
                         }
-                        sVar3 = DAT_TileMapState::instance.BuildingLayer[iVar4];
-                        if ((sVar3 != 0)
-                            && (((targetPlayerID == 0
-                                     || (targetPlayerID == DAT_BuildingsState::instance.buildings[sVar3].owner))
-                                && (DAT_GameState::instance.mapAndTime.playerTeams[playerID]
-                                    != DAT_GameState::instance.mapAndTime
-                                        .playerTeams[DAT_BuildingsState::instance.buildings[sVar3].owner])))) {
+                        short sVar3 = DAT_TileMapState::instance.BuildingLayer[iVar4];
+                        if (sVar3 != 0
+                            && (targetPlayerID == 0
+                                || (targetPlayerID == DAT_BuildingsState::instance.buildings[sVar3].owner))
+                            && DAT_GameState::instance.mapAndTime.playerTeams[playerID]
+                                != DAT_GameState::instance.mapAndTime
+                                    .playerTeams[DAT_BuildingsState::instance.buildings[sVar3].owner]) {
                             this->ALG_TargetX = (int)sVar1;
                             this->ALG_TargetY = iVar7;
                             this->ALG_TargetTile = iVar4;
@@ -95,16 +91,15 @@ namespace Map {
                         do {
                             iVar7 = (*paiVar8)[0] + iVar4;
                             uVar5 = DAT_TileMapState::instance.LogicLayer[iVar7];
-                            if (((DAT_TileMapState::instance.WalkLayer[iVar7] != this->searchGeneration)
-                                    && ((uVar5 & 0xb1) == 0))
-                                && ((((uVar5 & 0x301000) == 0
-                                         && ((DAT_TileMapState::instance.BuildingLayer[iVar7] == 0
-                                             || ((int)(short)DAT_BuildingsState::instance
-                                                         .buildings[DAT_TileMapState::instance.BuildingLayer[iVar7]]
-                                                         .buildingType
-                                                     - 0x4aU
-                                                 < 3))))
-                                    && ((uVar5 & 0x40000000) == 0)))) {
+                            if (DAT_TileMapState::instance.WalkLayer[iVar7] != this->searchGeneration
+                                && (uVar5 & 0xb1) == 0 && (uVar5 & 0x301000) == 0
+                                && (DAT_TileMapState::instance.BuildingLayer[iVar7] == 0
+                                    || ((int)(short)DAT_BuildingsState::instance
+                                                .buildings[DAT_TileMapState::instance.BuildingLayer[iVar7]]
+                                                .buildingType
+                                            - 0x4aU
+                                        < 3))
+                                && (uVar5 & 0x40000000) == 0) {
                                 DAT_TileMapState::instance.CertainPathLayer[iVar7]
                                     = (short)this->searchQueue.currentDistance + 1;
                                 DAT_TileMapState::instance.WalkLayer[iVar7] = (short)this->searchGeneration;
