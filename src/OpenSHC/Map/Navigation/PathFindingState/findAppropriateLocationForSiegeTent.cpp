@@ -136,7 +136,7 @@ namespace Map {
                                 != 0
                             && (_offsetTile = DAT_TileMapState::instance.directionTranslationMatrix[sVar1][y] + _tile,
                                 DAT_TileMapState::instance.WalkLayer[_offsetTile] != this->searchGeneration)) {
-                            bool bVar2 = true;
+                            int bVar2 = 1;
                             /*
                               === AI Zone DISTANCE CHECK ===   If specified (i.e. not 0), then the strategic distance of
                               the current tile   must be exactly that value
@@ -148,7 +148,7 @@ namespace Map {
                                             * 0x13a10
                                         + 0x1ee2998 + _offsetTile)
                                         != requiredDistanceFromAIZone)) {
-                                bVar2 = false;
+                                bVar2 = 0;
                             }
                             /*
                               === SIEGE TENT PLACEMENT VALIDATION ===   Only check for valid placement if distance > 4
