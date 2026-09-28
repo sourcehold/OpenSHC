@@ -4,6 +4,7 @@
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
+#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -12,14 +13,13 @@
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
+        using OpenSHC::Map::Location::Point8ShortXY;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-            using OpenSHC::Map::Location::Point8ShortXY;
 
         /*
           WARNING: Type propagation algorithm not settling
@@ -34,16 +34,9 @@ namespace Map {
         void PathFindingState::pathPlanningForTribe(
             uint tribeID, undefined4 targetUnitID, uint x, uint y, int unitCount, dword area, int playerID)
         {
-            short sVar1;
-            short sVar2;
-            short sVar3;
-            BOOL _assasinsTribe;
-            int iVar4;
             int iVar5;
             BOOLEnum BVar6;
             uint uVar7;
-            uint _yDiff3;
-            uint _xDiff3;
             uint uVar8;
             int (*paiVar9)[8];
             int* _pDest2;
@@ -54,7 +47,7 @@ namespace Map {
             int _destIndex;
             int* _pDest1;
             _destIndex = 0;
-            _assasinsTribe = MACRO_CALL_MEMBER(
+            BOOL _assasinsTribe = MACRO_CALL_MEMBER(
                 OpenSHC::Map::Units::TribesState_Func::isTribeAllAssassins, DAT_TribesState::ptr)(tribeID);
             if (399 < x) {
                 return;
@@ -84,14 +77,14 @@ namespace Map {
             this->searchQueue.currentDistance = 1;
             this->searchQueue.yQueue[0] = (short)y;
             this->searchQueue.xQueue[0] = (short)x;
-            iVar4 = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+            int iVar4 = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
             this->searchQueue.tilesQueue[0] = iVar4;
             DAT_TileMapState::instance.CertainPathLayer[iVar4] = 1;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 while (uVar11 = this->searchQueue.tilesQueue[this->searchQueue.readIndex], uVar11 < 0x13a10) {
-                    sVar1 = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                    sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    short sVar1 = this->searchQueue.xQueue[this->searchQueue.readIndex];
+                    short sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[uVar11];
                     if ((0x13a10 < this->searchQueue.currentDistance) || (10 < this->searchQueue.currentDistance))
                         break;
@@ -99,21 +92,21 @@ namespace Map {
                     paiVar9 = DAT_TileMapState::instance.directionTranslationMatrix + sVar2;
                     do {
                         iVar12 = (*paiVar9)[0] + uVar11;
-                        if ((DAT_TileMapState::instance.WalkLayer[iVar12] != this->searchGeneration)
-                            && (((area == (int)(short)DAT_TileMapState::instance.PathConnectionLayer[iVar12]
-                                     || (iVar5 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
-                                                                       calculateCanPlayerUnitsNavigateToAreaFromArea,
-                                             this)(playerID, (dword)((int)(area)),
-                                             (dword)((int)((
-                                                 int)(short)DAT_TileMapState::instance.PathConnectionLayer[iVar12])),
-                                             0),
-                                         iVar5 != 0))
+                        if (DAT_TileMapState::instance.WalkLayer[iVar12] != this->searchGeneration
+                            && ((area == (int)(short)DAT_TileMapState::instance.PathConnectionLayer[iVar12]
+                                    || (iVar5 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
+                                                                      calculateCanPlayerUnitsNavigateToAreaFromArea,
+                                            this)(playerID, (dword)((int)(area)),
+                                            (dword)((int)((
+                                                int)(short)DAT_TileMapState::instance.PathConnectionLayer[iVar12])),
+                                            0),
+                                        iVar5 != 0))
                                 || ((_assasinsTribe != 0
                                     && (BVar6 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                                       calculateCanReachUsingCachedAreaLogic,
                                             this)(iVar4, iVar12),
-                                        BVar6 != FALSE)))))) {
-                            sVar3 = ((Point8ShortXY*)(psVar10 + -2))->xOffset;
+                                        BVar6 != FALSE))))) {
+                            short sVar3 = ((Point8ShortXY*)(psVar10 + -2))->xOffset;
                             DAT_TileMapState::instance.CertainPathLayer[iVar12]
                                 = (short)this->searchQueue.currentDistance + 1;
                             DAT_TileMapState::instance.WalkLayer[iVar12] = (short)this->searchGeneration;
@@ -167,7 +160,7 @@ namespace Map {
                     if (iVar12 <= iVar5) {
                         iVar12 = iVar5;
                     }
-                    if ((iVar12 == 2)
+                    if (iVar12 == 2
                         && (uVar7 = (int)(tribeID - uVar11) >> 0x1f,
                             (int)((tribeID - uVar11 ^ uVar7) - uVar7) < 0x20)) {
                         _pDest1[-1] = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
@@ -212,7 +205,7 @@ namespace Map {
                     if (iVar12 <= iVar5) {
                         iVar12 = iVar5;
                     }
-                    if ((iVar12 == 1)
+                    if (iVar12 == 1
                         && (uVar7 = (int)(tribeID - uVar11) >> 0x1f,
                             (int)((tribeID - uVar11 ^ uVar7) - uVar7) < 0x20)) {
                         ((PathHelper12*)(_pDest2 + -1))->tile1
@@ -233,9 +226,9 @@ namespace Map {
                 _pDest3
                     = &((PathFindingStatePartB*)(this->climbData + 200))->destinationsArray[_destIndex].tile2OrAHelper;
                 do {
-                    _yDiff3 = y - (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    uint _yDiff3 = y - (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                     iVar12 = (_yDiff3 ^ (int)_yDiff3 >> 0x1f) - ((int)_yDiff3 >> 0x1f);
-                    _xDiff3 = x - (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
+                    uint _xDiff3 = x - (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                     iVar4 = (_xDiff3 ^ (int)_xDiff3 >> 0x1f) - ((int)_xDiff3 >> 0x1f);
                     if (iVar4 <= iVar12) {
                         iVar4 = iVar12;
