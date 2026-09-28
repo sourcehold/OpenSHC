@@ -75,12 +75,12 @@ namespace Map {
                 if (this->units[unitID].dying != 0) {
                     return FALSE;
                 }
-                _entityShootingUnitID_2 = DAT_UnitsState::instance.units[unitID].tile;
+                int _unitTile = DAT_UnitsState::instance.units[unitID].tile;
                 /*
                   if the tile that the unit is on has some properties, don't bother either.
                  */
 
-                if ((DAT_TileMapState::instance.LogicLayer[_entityShootingUnitID_2] & 0x10000100U) != 0) {
+                if ((DAT_TileMapState::instance.LogicLayer[_unitTile] & 0x10000100U) != 0) {
                     return FALSE;
                 }
                 /*
@@ -88,9 +88,8 @@ namespace Map {
                    building, return 0
                  */
 
-                if (DAT_TileMapState::instance.BuildingLayer[_entityShootingUnitID_2] != 0) {
-                    switch (DAT_BuildingsState::instance
-                            .buildings[DAT_TileMapState::instance.BuildingLayer[_entityShootingUnitID_2]]
+                if (DAT_TileMapState::instance.BuildingLayer[_unitTile] != 0) {
+                    switch (DAT_BuildingsState::instance.buildings[DAT_TileMapState::instance.BuildingLayer[_unitTile]]
                             .buildingType) {
                     case OpenSHC::Map::Buildings::BT_MANORHOUSE:
                     case OpenSHC::Map::Buildings::BT_STONEKEEP:

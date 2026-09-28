@@ -36,9 +36,9 @@ namespace Map {
             this->units[unitID].isMatchingSpeed = false;
             uint _isInMoat = _logicFlags & 0x20000000;
             byte _tileHeight = DAT_TileMapState::instance.HeightLayer[_tile];
-            if (DAT_TileMapState::instance.OrganismLayer[_tile] != 0
-                && DAT_TileMapState::instance.OrganismLayer[_tile] < 2000) {
-                DAT_LandscapeState::instance.trees[DAT_TileMapState::instance.OrganismLayer[_tile]].state = 3;
+            int _organismID = DAT_TileMapState::instance.OrganismLayer[_tile];
+            if (_organismID != 0 && _organismID < 2000) {
+                DAT_LandscapeState::instance.trees[_organismID].state = 3;
             }
             if (_isInMoat != 0 && (DAT_TileMapState::instance.MacroLayer[_tile] & 0x3f) == 1) {
                 _isInMoat = 0;
@@ -158,7 +158,8 @@ namespace Map {
                 return;
             }
             this->units[unitID].field289_0x3ff = 1;
-            if (DAT_BuildingsState::instance.buildings[_buildingID].owner == this->units[unitID].owner) {
+            int _owner = this->units[unitID].owner;
+            if (DAT_BuildingsState::instance.buildings[_buildingID].owner == _owner) {
                 return;
             }
             if (this->units[unitID].dying != 0) {
@@ -167,10 +168,10 @@ namespace Map {
             if (this->units[unitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
                 return;
             }
-            if (this->units[unitID].owner == 0) {
+            if (_owner == 0) {
                 return;
             }
-            if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[this->units[unitID].owner] != -1) {
+            if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[_owner] != -1) {
                 return;
             }
             DAT_TroopValueState::instance.attackInfo.field128058_0x469dc
