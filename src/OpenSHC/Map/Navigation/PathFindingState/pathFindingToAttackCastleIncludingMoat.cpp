@@ -33,7 +33,7 @@ namespace Map {
                 0x27420, '\0', (void*)((int)(DAT_TileMapState::instance.CertainPathLayer)));
             *out_y = 0;
             *out_x = 0;
-            if (399 < x || 399 < y || ((char*)0x21aec98)[y * 400 + x] == '\0') {
+            if (399 < x || 399 < y || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
                 return FALSE;
             }
             this->searchGeneration = this->searchGeneration + 1;
