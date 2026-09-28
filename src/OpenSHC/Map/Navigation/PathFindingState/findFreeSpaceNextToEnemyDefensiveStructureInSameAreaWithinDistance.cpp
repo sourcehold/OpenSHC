@@ -162,7 +162,7 @@ namespace Map {
                             _index = _index + 1;
                             pXVar4 = pXVar4 + 1;
                         } while (_index < 4);
-                        if (((shortenedDistance != 1) || (DAT_TileMapState::instance.UnitLayer[_candidate2] == 0))
+                        if (((shortenedDistance != 1) || ((short)DAT_TileMapState::instance.UnitLayer[_candidate2] == 0))
                             && _candidate2 != 0) {
                             area[-1] = _tile2;
                             _dIndex = _dIndex + 1;
