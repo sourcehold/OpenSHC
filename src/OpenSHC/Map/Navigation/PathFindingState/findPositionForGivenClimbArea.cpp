@@ -19,9 +19,8 @@ namespace Map {
         void PathFindingState::findPositionForGivenClimbArea(int area, uint x, uint y)
         {
             int _direction;
-            int _directionIndex;
-            if (((x < 400) && (y < 400)) && (*(char*)(y * 400 + 0x21aec98 + x) != '\0')) {
-                _directionIndex = 0;
+            if (x < 400 && y < 400 && *(char*)(y * 400 + 0x21aec98 + x) != '\0') {
+                int _directionIndex = 0;
                 while (_direction = (int)(char)DAT_ClimbLogicDefinedData::instance.DirectionArray[_directionIndex],
                     (short)DAT_TileMapState::instance
                             .PathConnectionLayer[DAT_TileMapState::instance.directionTranslationMatrix[y][_direction]
