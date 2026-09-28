@@ -78,7 +78,7 @@ namespace Map {
                         if (0x13a10 < this->searchQueue.currentDistance) {
                             return;
                         }
-                        if (maxDistance < this->searchQueue.currentDistance) {
+                        if (this->searchQueue.currentDistance > maxDistance) {
                             return;
                         }
                         paiVar4 = DAT_TileMapState::instance.directionTranslationMatrix + sVar2;
