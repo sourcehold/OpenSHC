@@ -2,6 +2,7 @@
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -10,12 +11,11 @@
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Navigation {
-            using OpenSHC::Map::Location::Point8ShortXY;
+        using OpenSHC::Map::Location::Point8ShortXY;
 
         /*
           WARNING: Enum "MappersEnum": Some values do not have unique names
@@ -27,7 +27,6 @@ namespace Map {
         undefined4 PathFindingState::isOpponentBuildingInRange(
             int playerID, int x, int y, int range, int param_5, int param_6, int keepRange)
         {
-            int _newTile;
             int iVar1;
             short* psVar2;
             int (*paiVar3)[8];
@@ -35,7 +34,7 @@ namespace Map {
             short _buildingID;
             short _x;
             short _y;
-            if (((399 < (uint)x) || (399 < (uint)y)) || (*(char*)(y * 400 + 0x21aec98 + x) == '\0')) {
+            if (399 < (uint)x || 399 < (uint)y || *(char*)(y * 400 + 0x21aec98 + x) == '\0') {
                 return (undefined4)(0);
             }
             this->calculations = this->calculations + 1;
@@ -62,28 +61,28 @@ namespace Map {
                     if ((80400 < this->searchQueue.currentDistance) || (range < this->searchQueue.currentDistance))
                         break;
                     _buildingID = DAT_TileMapState::instance.BuildingLayer[_tile];
-                    if (((_buildingID != 0)
-                            && (DAT_BuildingDefinedData::instance.BuildingTypeOwnable
-                                    [(short)DAT_BuildingsState::instance.buildings[_buildingID].buildingType]
-                                != 0))
-                        && (DAT_GameState::instance.mapAndTime
+                    if (_buildingID != 0
+                        && DAT_BuildingDefinedData::instance.BuildingTypeOwnable
+                                [(short)DAT_BuildingsState::instance.buildings[_buildingID].buildingType]
+                            != 0
+                        && DAT_GameState::instance.mapAndTime
                                 .playerTeams[DAT_BuildingsState::instance.buildings[_buildingID].owner]
-                            != DAT_GameState::instance.mapAndTime.playerTeams[playerID])) {
+                            != DAT_GameState::instance.mapAndTime.playerTeams[playerID]) {
                         return (undefined4)(1);
                     }
-                    if ((((DAT_TileMapState::instance.LogicLayer[_tile] & 0x100U) != 0)
-                            && ((DAT_TileMapState::instance.LogicLayer[_tile] & 2U) == 0))
-                        && (DAT_GameState::instance.mapAndTime
+                    if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x100U) != 0
+                        && (DAT_TileMapState::instance.LogicLayer[_tile] & 2U) == 0
+                        && DAT_GameState::instance.mapAndTime
                                 .playerTeams[(DAT_TileMapState::instance.WallOwnerLayer[_tile] & 7) + 1]
-                            != DAT_GameState::instance.mapAndTime.playerTeams[playerID])) {
+                            != DAT_GameState::instance.mapAndTime.playerTeams[playerID]) {
                         return (undefined4)(1);
                     }
                     paiVar3 = DAT_TileMapState::instance.directionTranslationMatrix + _y;
                     psVar2 = &DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[0].short_.yOffset;
                     do {
-                        _newTile = (*paiVar3)[0] + _tile;
-                        if ((DAT_TileMapState::instance.WalkLayer[_newTile] != this->searchGeneration)
-                            && ((DAT_TileMapState::instance.LogicLayer[_newTile] & 0x30) == 0)) {
+                        int _newTile = (*paiVar3)[0] + _tile;
+                        if (DAT_TileMapState::instance.WalkLayer[_newTile] != this->searchGeneration
+                            && (DAT_TileMapState::instance.LogicLayer[_newTile] & 0x30) == 0) {
                             DAT_TileMapState::instance.CertainPathLayer[_newTile]
                                 = (short)this->searchQueue.currentDistance + 1;
                             DAT_TileMapState::instance.WalkLayer[_newTile] = (short)this->searchGeneration;
@@ -107,9 +106,9 @@ namespace Map {
                         break;
                 }
             }
-            if ((keepRange != -1)
+            if (keepRange != -1
                 && (iVar1 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isTileInRangeOfKeepRange,
-                        this)(playerID, (uint)((int)(x)), (uint)((int)(y)), keepRange),
+                        this)(playerID, (uint)(x), (uint)(y), keepRange),
                     iVar1 != 0)) {
                 return (undefined4)(1);
             }
