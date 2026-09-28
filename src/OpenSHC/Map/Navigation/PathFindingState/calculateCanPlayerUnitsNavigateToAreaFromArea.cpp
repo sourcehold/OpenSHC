@@ -19,8 +19,6 @@ namespace Map {
             dword dVar2;
             dword dVar3;
             dword dVar4;
-            int iVar5;
-            int iVar6;
             ClimbData* piVar7;
             int iVar7;
             bool bVar8;
@@ -29,7 +27,7 @@ namespace Map {
             dword adStack_960[200];
             int aiStack_640[400];
             if (fromArea != toArea) {
-                iVar5 = 0;
+                int iVar5 = 0;
                 if ((toArea == 0) || (fromArea == 0)) {
                     return 0;
                 }
@@ -46,12 +44,12 @@ namespace Map {
                             } else {
                                 bVar8 = permitClimb == 2;
                             }
-                            if ((!bVar8)
-                                && (((playerID == 0
-                                         || (DAT_GameState::instance.mapAndTime.playerTeams[piVar7->owner]
-                                             == DAT_GameState::instance.mapAndTime.playerTeams[playerID]))
+                            if (!bVar8
+                                && ((playerID == 0
+                                        || (DAT_GameState::instance.mapAndTime.playerTeams[piVar7->owner]
+                                            == DAT_GameState::instance.mapAndTime.playerTeams[playerID]))
                                     || (DAT_BuildingsState::instance.buildings[piVar7->buildingID].field241_0x2c6
-                                        != 0)))) {
+                                        != 0))) {
                                 aiStack_640[local_96c * 2 + 1] = 0;
                                 aiStack_640[local_96c * 2] = iVar7;
                                 local_96c = local_96c + 1;
@@ -61,7 +59,7 @@ namespace Map {
                         piVar7 = piVar7 + 0x81;
                     } while (iVar7 < this->maxClimbDataCount);
                 }
-                iVar6 = 0;
+                int iVar6 = 0;
                 this->field63_0xc0 = 0;
                 iVar7 = iVar5;
                 if (0 < local_96c) {
