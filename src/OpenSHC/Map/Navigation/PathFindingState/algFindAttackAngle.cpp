@@ -48,8 +48,8 @@ namespace Map {
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 while ((_tileOption = this->searchQueue.tilesQueue[this->searchQueue.readIndex],
                     -1 < _tileOption && (_tileOption < 80400))) {
-                    short _xOption = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                    short _yOption = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    int _xOption = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
+                    int _yOption = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tileOption];
                     if (80400 < this->searchQueue.currentDistance) {
                         return 0;
