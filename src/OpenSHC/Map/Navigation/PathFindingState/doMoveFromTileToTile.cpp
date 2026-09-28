@@ -64,10 +64,10 @@ namespace Map {
                 if (ignoreAssassinClimbing == 0) {
                     if (DAT_UnitsState::instance.units[unitID].unitType == OpenSHC::Map::Units::UT_A_ASSASSIN) {
                         uVar3 = DAT_TileMapState::instance.LogicLayer[_targetTile];
-                        if ((((uVar3 & 0x4a5014b1) == 0)
-                                && ((uVar4 = DAT_TileMapState::instance.LogicLayer[tile] & 0x100,
-                                    uVar4 == 0 || ((uVar3 & 0x100) == 0))))
-                            && ((uVar4 != 0 || ((uVar3 & 0x100) != 0)))) {
+                        if ((uVar3 & 0x4a5014b1) == 0
+                            && (uVar4 = DAT_TileMapState::instance.LogicLayer[tile] & 0x100,
+                                uVar4 == 0 || ((uVar3 & 0x100) == 0))
+                            && (uVar4 != 0 || ((uVar3 & 0x100) != 0))) {
                             _height = DAT_TileMapState::instance.HeightLayer[tile];
                             DAT_UnitsState::instance.units[unitID].animationCycleNumber = 0;
                             DAT_UnitsState::instance.units[unitID].field306_0x418 = 0;
@@ -102,8 +102,7 @@ namespace Map {
                     if ((uVar3 & 0x40000000) != 0) {
                         return TRUE;
                     }
-                    if (((DAT_TileMapState::instance.LogicLayer[tile] & 0x40000000U) != 0)
-                        && ((uVar3 & 0x4a5014b1) == 0)) {
+                    if ((DAT_TileMapState::instance.LogicLayer[tile] & 0x40000000U) != 0 && (uVar3 & 0x4a5014b1) == 0) {
                         return ~(uVar3 >> 8) & TRUE;
                     }
                 }
@@ -130,8 +129,7 @@ namespace Map {
                         == OpenSHC::Map::Entities::ET_FIRE)) {
                     return TRUE;
                 }
-                psVar1 = &DAT_UnitsState::instance.units[unitID].counter;
-                *psVar1 = *psVar1 + 1;
+                DAT_UnitsState::instance.units[unitID].counter = DAT_UnitsState::instance.units[unitID].counter + 1;
                 DAT_UnitsState::instance.units[unitID].field280_0x3f4 = 5;
                 DAT_UnitsState::instance.units[unitID].field295_0x40a = 1;
             }
