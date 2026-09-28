@@ -39655,7 +39655,7 @@ SHC_3BB0A8C1_0x004F9F00 | 73.0% | microX/microY regalloc
 
 SHC_3BB0A8C1_0x004FA000 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004FA2D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FA2D0 | 47.4% | 47.37% cold block layout regal
 
 SHC_3BB0A8C1_0x004FA460 | 100.0% | Reimplemented
 
