@@ -27,7 +27,7 @@ namespace Map {
             int iVar4;
             int iVar5;
             int tile;
-            if (399 < x || 399 < y || *(char*)(y * 400 + 0x21aec98 + x) == '\0') {
+            if (399 < x || 399 < y || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
                 return 0;
             }
             this->calculations = this->calculations + 1;
