@@ -201,8 +201,8 @@ namespace Map {
                   Read the distance value for this tile from the AI path cost layer
                  */
                 this->searchQueue.currentDistance = (uint)
-                    * (byte*)(*(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray
-                                  + playerID * 0x177bc + -0x10)
+                    * (byte*)(*(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + playerID * 0x177bc
+                                  + -0x10)
                             * 0x13a10
                         + 0x1ee2998 + _tile2);
                 /*
@@ -298,7 +298,7 @@ namespace Map {
                 if (0x13a0f < this->searchQueue.readIndex) {
                     this->searchQueue.readIndex = 0;
                 }
-                }
+            }
             return;
         }
 
