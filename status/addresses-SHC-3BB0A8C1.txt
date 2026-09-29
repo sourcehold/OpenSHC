@@ -41579,7 +41579,7 @@ SHC_3BB0A8C1_0x00502680 | 19.9% | 20.99% highest/lowest spilled
 
 SHC_3BB0A8C1_0x00502950 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005029D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005029D0 | 28.5% | 34.09% this spilled vs regallo
 
 SHC_3BB0A8C1_0x00502F14 | 0.0% | Pending
 
