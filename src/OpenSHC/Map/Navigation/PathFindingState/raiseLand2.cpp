@@ -38,7 +38,7 @@ namespace Map {
             this->searchQueue.xQueue[0] = (short)x;
             this->searchQueue.tilesQueue[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
             DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
-            ushort uVar1 = DAT_TileMapState::instance.PathConnectionLayer[this->searchQueue.tilesQueue[0]];
+            ushort uVar1 = (short)DAT_TileMapState::instance.PathConnectionLayer[this->searchQueue.tilesQueue[0]];
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 do {
                     uint tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
