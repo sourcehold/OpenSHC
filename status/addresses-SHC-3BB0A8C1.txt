@@ -40569,7 +40569,7 @@ SHC_3BB0A8C1_0x004FB360 | 79.0% | ecx not kept across callee
 
 SHC_3BB0A8C1_0x004FB3F0 | 34.3% | XYPair stride regalloc
 
-SHC_3BB0A8C1_0x004FB4D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FB4D0 | 41.1% | 43.40% rockType spilled vs reg
 
 SHC_3BB0A8C1_0x004FB770 | 76.7% | gfx expression regalloc
 
