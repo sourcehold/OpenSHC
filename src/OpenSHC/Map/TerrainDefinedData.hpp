@@ -43,9 +43,8 @@ namespace Map {
         XYPair StockpilePathableOffsets[9]; // 0x000001DC length: 72
         undefined1 padding_0x224[64]; // 0x00000224 length: 64
         XYPair field130_0x264[3][12]; // 0x00000264 length: 288
-        Point8IntXY unkXYOffsets_0x384[8]; // 0x00000384 length: 64
-        Point8IntXY field132_0x3c4[8]; // 0x000003C4 length: 64
-        undefined1 padding_0x404[64]; // 0x00000404 length: 64
+        Point8IntXY keepOutbuildingOffsets_0x384[3][4]; // 0x00000384 length: 96
+        Point8IntXY keepOutbuildingOffsets_0x3e4[3][4]; // 0x000003E4 length: 96
         XYPair field197_0x444[24]; // 0x00000444 length: 192
         undefined1 padding_0x504[8]; // 0x00000504 length: 8
         XYPair field206_0x50c; // 0x0000050C length: 8

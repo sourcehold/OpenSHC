@@ -65,8 +65,8 @@ namespace Map {
         index = 0;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, 7);
-            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y + DAT_TerrainDefinedData::instance.unkXYOffsets_0x384[variant * 4].yOffset].addXgetTile + this->buildingX + x
-                + DAT_TerrainDefinedData::instance.unkXYOffsets_0x384[variant * 4].xOffset;
+            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y + DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x384[variant][0].yOffset].addXgetTile + this->buildingX + x
+                + DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x384[variant][0].xOffset;
             if (this->BuildingLayer[tile] != 0) {
                 this->showNoRubbleWhenDestroyingBuilding = 1;
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(this->BuildingLayer[tile]);
@@ -77,8 +77,8 @@ namespace Map {
         index = 0;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, 5);
-            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y + DAT_TerrainDefinedData::instance.field132_0x3c4[variant * 4 + 4].yOffset].addXgetTile + this->buildingX + x
-                + DAT_TerrainDefinedData::instance.field132_0x3c4[variant * 4 + 4].xOffset;
+            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y + DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x3e4[variant][0].yOffset].addXgetTile + this->buildingX + x
+                + DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x3e4[variant][0].xOffset;
             if (this->BuildingLayer[tile] != 0) {
                 this->showNoRubbleWhenDestroyingBuilding = 1;
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(this->BuildingLayer[tile]);
