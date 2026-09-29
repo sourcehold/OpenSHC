@@ -35,7 +35,7 @@ namespace Map {
                 OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::calculatePreferredRelativeOrientation,
                 DAT_DirectionAlgorithmState::ptr)(_x, _y, (int)(DAT_UnitsState::instance.units[unitID].x),
                 (int)(DAT_UnitsState::instance.units[unitID].y));
-            _area = DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile];
+            _area = (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile];
             pXVar1
                 = DAT_ClimbLogicDefinedData::instance
                       .OrderedOrientationBasedCardinalDirectionList[DAT_DirectionAlgorithmState::instance.orientation];
