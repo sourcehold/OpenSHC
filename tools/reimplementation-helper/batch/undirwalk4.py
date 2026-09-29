@@ -39,10 +39,10 @@ ROW = "DAT_TileMapState::instance.directionTranslationMatrix"
 Y_BASE = 0x00B48F54 + 0xF4 + 4
 ENTRY = 8
 BLOCKS = 4
-LOOKBACK = 4
+LOOKBACK = 24
 
 DO = re.compile(r"^(?P<ind>[ \t]*)do (?=\{)", re.M)
-SET_ROW = re.compile(r"^[ \t]*(?P<a>\w+) = " + re.escape(ROW) + r"\[(?P<y>[^\]]+)\] \+ 1;[ \t]*\n", re.M)
+ROW_HEAD = re.compile(r"^[ \t]*(?P<a>\w+) = " + r"\s*\.\s*".join(re.escape(part) for part in ROW.split(".")) + r"\s*\[")
 SET_XY = re.compile(r"^[ \t]*(?P<p>\w+) = &" + re.escape(MATRIX) + r"\[0\]\.(?P<u>short_|int_)\.yOffset;[ \t]*\n", re.M)
 
 
@@ -60,6 +60,33 @@ def find_block(text, start):
     return open_brace + 1, i, text.index(";", i) + 1
 
 
+def match_row_setup(text):
+    """Match `X = directionTranslationMatrix[<index>] + 1;` where <index> may itself
+    contain brackets - an index resolved by unoffset_matrix.py usually does - and may
+    be wrapped over several lines by clang-format. Returns (name, index) or None."""
+    head = ROW_HEAD.match(text)
+    if not head:
+        return None
+    depth, i = 1, head.end()
+    while i < len(text) and depth:
+        if text[i] == "[":
+            depth += 1
+        elif text[i] == "]":
+            depth -= 1
+        i += 1
+    if depth:
+        return None
+    if not re.match(r"\s*\+\s*1;[ \t]*\n?\s*$", text[i:]):
+        return None
+    return head.group("a"), " ".join(text[head.end():i - 1].split())
+
+
+def without_comments(text):
+    """Blank out comments so a leftover-pointer check does not trip over prose that
+    happens to name the pointer - the decompiler's comments often do."""
+    return re.sub(r"/\*.*?\*/|//[^\n]*", "", text, flags=re.S)
+
+
 def row_forms(a):
     """The four ways Ghidra reaches a direction through the row pointer, in index order."""
     return [r"\(\*\(int \(\*\)\[8\]\)\(%s \+ -1\)\)\[0\]" % re.escape(a),
@@ -68,15 +95,31 @@ def row_forms(a):
             r"%s\[2\]" % re.escape(a)]
 
 
-def preceding_lines(text, at, count):
-    """Spans of the `count` lines that end at `at`, outermost first."""
-    spans, end = [], at
-    for _ in range(count):
-        start = text.rfind("\n", 0, end - 1) + 1
-        if start <= 0:
+def preceding_statements(text, at, lines):
+    """Spans of the statements in the `lines` lines before `at`.
+
+    A statement, not a line: clang-format wraps a long set-up over several lines, so
+    matching line by line would miss it.
+    """
+    start = at
+    for _ in range(lines):
+        nl = text.rfind("\n", 0, start - 1)
+        if nl < 0:
             break
-        spans.append((start, end))
-        end = start
+        start = nl + 1
+    spans, here = [], start
+    for m in re.finditer(r";[ \t]*\n", text[start:at]):
+        end = start + m.end()
+        # a span begins after the previous statement, so it can open with a comment
+        # block or blank lines; skip those so the statement itself is at the front
+        head = here
+        while True:
+            skip = re.match(r"[ \t]*\n|[ \t]*/\*.*?\*/[ \t]*\n|[ \t]*//[^\n]*\n", text[head:end], re.S)
+            if not skip:
+                break
+            head += skip.end()
+        spans.append((head, end))
+        here = end
     return spans
 
 
@@ -89,15 +132,17 @@ def convert(text, name):
             return text, changes
         pos = do.end()
         row = xy = None
-        for start, end in preceding_lines(text, do.start(), LOOKBACK):
-            line = text[start:end]
-            if row is None and SET_ROW.match(line):
-                row = (start, end, SET_ROW.match(line))
-            elif xy is None and SET_XY.match(line):
-                xy = (start, end, SET_XY.match(line))
+        # closest first: a set-up further back belongs to some earlier loop
+        for start, end in reversed(preceding_statements(text, do.start(), LOOKBACK)):
+            statement = text[start:end]
+            setup = match_row_setup(statement)
+            if row is None and setup:
+                row = (start, end, setup)
+            elif xy is None and SET_XY.match(statement):
+                xy = (start, end, SET_XY.match(statement))
         if row is None:
             continue
-        a, yexpr = row[2].group("a"), row[2].group("y").strip()
+        a, yexpr = row[2]
         indent = do.group("ind")
 
         body_start, body_end, stmt_end = find_block(text, do.end())
@@ -106,17 +151,23 @@ def convert(text, name):
         if xy is None:
             # no matrix pointer: the loop already carries the direction index itself, so
             # only the row pointer has to go and the existing counter becomes the index
-            counter = re.search(r"\n[ \t]*(\w+) = \1 \+ %d;[ \t]*\n[ \t]*%s = %s \+ %d;[ \t]*\n[ \t]*$"
-                                % (BLOCKS, re.escape(a), re.escape(a), BLOCKS), body)
-            if not counter or not re.search(r"while \(%s < %d\)" % (re.escape(counter.group(1)), 2 * BLOCKS), tail):
+            # the loop's own counter is whichever variable steps by BLOCKS and is the
+            # one the while tests; the pointer steps alongside it, not necessarily last
+            if not re.search(r"\n[ \t]*%s = %s \+ %d;" % (re.escape(a), re.escape(a), BLOCKS), body):
                 continue
-            index = counter.group(1)
+            index = None
+            for name_ in re.findall(r"\n[ \t]*(\w+) = \1 \+ %d;" % BLOCKS, body):
+                if re.search(r"while \(%s < %d\)" % (re.escape(name_), 2 * BLOCKS), tail):
+                    index = name_
+                    break
+            if index is None:
+                continue
             new_body = body
             for k, form in enumerate(row_forms(a)):
                 new_body = re.sub(form, "%s[%s][%s]" % (ROW, yexpr, index if k == 0 else "%s + %d" % (index, k)),
                                   new_body)
             new_body = re.sub(r"\n[ \t]*%s = %s \+ \d+;[ \t]*" % ((re.escape(a),) * 2), "", new_body)
-            if re.search(r"\b%s\b" % re.escape(a), new_body):
+            if re.search(r"\b%s\b" % re.escape(a), without_comments(new_body)):
                 continue
             text = text[:body_start] + new_body + text[body_end:]
             text = text[:row[0]] + text[row[1]:]
@@ -169,7 +220,8 @@ def convert(text, name):
                 new_body = re.sub(form, entry(k, "yOffset"), new_body)
         new_body = re.sub(r"\n[ \t]*%s = %s \+ \d+;[ \t]*" % ((re.escape(a),) * 2), "", new_body)
         new_body = re.sub(r"\n[ \t]*%s = %s \+ (?:0x[0-9a-fA-F]+|\d+);[ \t]*" % ((re.escape(p),) * 2), "", new_body)
-        if re.search(r"\b%s\b" % re.escape(p), new_body) or re.search(r"\b%s\b" % re.escape(a), new_body):
+        stripped = without_comments(new_body)
+        if re.search(r"\b%s\b" % re.escape(p), stripped) or re.search(r"\b%s\b" % re.escape(a), stripped):
             print("  %s: offsets do not match the regular layout, left alone (check the original asm)" % name)
             continue
         head = "%sfor (int %s = 0; %s < %d; %s = %s + %d) " % (indent, var, var, count, var, var, BLOCKS)
