@@ -69,9 +69,9 @@ namespace Map {
                             if (DAT_TileMapState::instance.WalkLayer[_currentTile] != this->searchGeneration) {
                                 _tracker = _tracker + 1;
                                 if (brushTileIndex <= _tracker) {
-                                    this->resultY = *(int*)((int)DAT_TerrainDefinedData::instance
-                                                                .clockwiseCardinalTranslationMatrix
-                                                        + _direction * 8 + 4)
+                                    this->resultY = DAT_TerrainDefinedData::instance
+                                                        .clockwiseCardinalTranslationMatrix[_direction]
+                                                        .int_.yOffset
                                         + _y;
                                     this->resultTile = _currentTile;
                                     return;
