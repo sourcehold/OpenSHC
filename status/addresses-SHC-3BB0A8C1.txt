@@ -539,7 +539,7 @@ SHC_3BB0A8C1_0x00403900 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00403980 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004039B0 | 36.4% | instruction selection differs
+SHC_3BB0A8C1_0x004039B0 | 36.4% | register alloc + arg scheduling
 
 SHC_3BB0A8C1_0x004039F0 | 100.0% | Reimplemented
 
@@ -6793,7 +6793,7 @@ SHC_3BB0A8C1_0x00426D30 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00426ED0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00426F80 | 70.0% | instruction selection differs
+SHC_3BB0A8C1_0x00426F80 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00426FB0 | 0.0% | Pending
 
@@ -7443,7 +7443,7 @@ SHC_3BB0A8C1_0x0042B960 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0042BA50 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0042BB70 | 71.4% | instruction selection differs
+SHC_3BB0A8C1_0x0042BB70 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0042BB90 | 0.0% | Pending
 
@@ -7453,7 +7453,7 @@ SHC_3BB0A8C1_0x0042BF00 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0042BFC0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0042C060 | 87.5% | jump target differs
+SHC_3BB0A8C1_0x0042C060 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0042C090 | 0.0% | Pending
 
@@ -8741,7 +8741,7 @@ SHC_3BB0A8C1_0x0042F3BC | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0042F3C0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0042F3D0 | 60.0% | instruction selection differs
+SHC_3BB0A8C1_0x0042F3D0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0042F3F0 | 0.0% | Pending
 
@@ -11135,7 +11135,7 @@ SHC_3BB0A8C1_0x00434224 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00434228 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00434230 | 88.9% | jump target differs
+SHC_3BB0A8C1_0x00434230 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00434260 | 100.0% | Reimplemented
 
@@ -13397,11 +13397,11 @@ SHC_3BB0A8C1_0x0043A850 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0043A860 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0043A880 | 90.9% | jump target differs
+SHC_3BB0A8C1_0x0043A880 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0043A8C0 | 75.0% | jump target differs
+SHC_3BB0A8C1_0x0043A8C0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0043A8D0 | 50.0% | jump target differs
+SHC_3BB0A8C1_0x0043A8D0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0043A8E0 | 0.0% | Pending
 
@@ -13597,7 +13597,7 @@ SHC_3BB0A8C1_0x0043E6C0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0043F2B0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0043F2C0 | 87.5% | jump target differs
+SHC_3BB0A8C1_0x0043F2C0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0043F2F0 | 0.0% | Pending
 
@@ -13613,7 +13613,7 @@ SHC_3BB0A8C1_0x0043FBF0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0043FC80 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0043FCA0 | 0.0% | jump target differs
+SHC_3BB0A8C1_0x0043FCA0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0043FCB0 | 0.0% | Pending
 
@@ -13631,9 +13631,9 @@ SHC_3BB0A8C1_0x00440280 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00440360 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004403D0 | 88.9% | jump target differs
+SHC_3BB0A8C1_0x004403D0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00440400 | 50.0% | jump target differs
+SHC_3BB0A8C1_0x00440400 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00440410 | 100.0% | Reimplemented
 
@@ -16987,7 +16987,7 @@ SHC_3BB0A8C1_0x00454960 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00454990 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004549C0 | 40.0% | instruction selection differs
+SHC_3BB0A8C1_0x004549C0 | 40.0% | register allocation differs
 
 SHC_3BB0A8C1_0x004549F0 | 0.0% | Pending
 
@@ -18041,7 +18041,7 @@ SHC_3BB0A8C1_0x0045B4A0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0045B6B0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0045B7F0 | 63.2% | instruction selection differs
+SHC_3BB0A8C1_0x0045B7F0 | 63.2% | register allocation differs
 
 SHC_3BB0A8C1_0x0045B830 | 0.0% | Pending
 
@@ -18747,7 +18747,7 @@ SHC_3BB0A8C1_0x0045F0CD | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0045F0D0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0045F120 | 75.0% | jump target differs
+SHC_3BB0A8C1_0x0045F120 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0045F130 | 0.0% | Pending
 
@@ -19929,7 +19929,7 @@ SHC_3BB0A8C1_0x00465F20 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00465F90 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004660B0 | 81.8% | jump target differs
+SHC_3BB0A8C1_0x004660B0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004660F0 | 0.0% | Pending
 
@@ -23373,7 +23373,7 @@ SHC_3BB0A8C1_0x00490060 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00490080 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00490340 | 94.4% | jump target differs
+SHC_3BB0A8C1_0x00490340 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00490380 | 0.0% | Pending
 
@@ -24041,7 +24041,7 @@ SHC_3BB0A8C1_0x004941E7 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004941E8 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004941F0 | 80.0% | jump target differs
+SHC_3BB0A8C1_0x004941F0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00494210 | 0.0% | Pending
 
@@ -24111,7 +24111,7 @@ SHC_3BB0A8C1_0x004948BF | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004948C0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00494920 | 85.7% | jump target differs
+SHC_3BB0A8C1_0x00494920 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00494950 | 0.0% | Pending
 
@@ -24213,7 +24213,7 @@ SHC_3BB0A8C1_0x00495230 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004954A0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00495800 | 83.3% | jump target differs
+SHC_3BB0A8C1_0x00495800 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00495840 | 100.0% | Reimplemented
 
@@ -25535,7 +25535,7 @@ SHC_3BB0A8C1_0x004AAB00 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004AAB20 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004AAB40 | 50.0% | jump target differs
+SHC_3BB0A8C1_0x004AAB40 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004AAB50 | 0.0% | Pending
 
@@ -25623,7 +25623,7 @@ SHC_3BB0A8C1_0x004ABCB0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004ABCE0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004ABD10 | 0.0% | jump target differs
+SHC_3BB0A8C1_0x004ABD10 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004ABD20 | 0.0% | Pending
 
@@ -26001,7 +26001,7 @@ SHC_3BB0A8C1_0x004B1E60 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004B1EB0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004B20B0 | 67.6% | instruction selection differs
+SHC_3BB0A8C1_0x004B20B0 | 67.6% | equal arms merged by MSVC
 
 SHC_3BB0A8C1_0x004B2280 | 0.0% | Pending
 
@@ -26905,7 +26905,7 @@ SHC_3BB0A8C1_0x004B6480 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004B64D0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004B6500 | 87.5% | jump target differs
+SHC_3BB0A8C1_0x004B6500 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004B6530 | 0.0% | Pending
 
@@ -27107,7 +27107,7 @@ SHC_3BB0A8C1_0x004B8050 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004B8080 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004B8200 | 50.0% | jump target differs
+SHC_3BB0A8C1_0x004B8200 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004B8210 | 100.0% | Reimplemented
 
@@ -29315,7 +29315,7 @@ SHC_3BB0A8C1_0x004BB900 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004BB990 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004BB9F0 | 71.4% | jump target differs
+SHC_3BB0A8C1_0x004BB9F0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004BBA20 | 100.0% | Reimplemented
 
@@ -36257,7 +36257,7 @@ SHC_3BB0A8C1_0x004DC500 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004DC9E0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004DCC70 | 62.5% | jump target differs
+SHC_3BB0A8C1_0x004DCC70 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004DCC90 | 0.0% | Pending
 
@@ -38735,7 +38735,7 @@ SHC_3BB0A8C1_0x004F6A20 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004F6A60 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004F6A70 | 50.0% | jump target differs
+SHC_3BB0A8C1_0x004F6A70 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004F6A80 | 0.0% | Pending
 
@@ -41443,7 +41443,7 @@ SHC_3BB0A8C1_0x00500500 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x005005F0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00500640 | 46.2% | instruction selection differs
+SHC_3BB0A8C1_0x00500640 | 46.2% | register allocation differs
 
 SHC_3BB0A8C1_0x00500680 | 100.0% | Reimplemented
 
@@ -41539,7 +41539,7 @@ SHC_3BB0A8C1_0x00501730 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00501760 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x005017A0 | 80.0% | jump target differs
+SHC_3BB0A8C1_0x005017A0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005017C0 | 0.0% | Pending
 
@@ -42067,7 +42067,7 @@ SHC_3BB0A8C1_0x00504ED0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00504ED1 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00504EE0 | 38.5% | instruction selection differs
+SHC_3BB0A8C1_0x00504EE0 | 38.5% | register allocation differs
 
 SHC_3BB0A8C1_0x00504F10 | 0.0% | Pending
 
@@ -46633,7 +46633,7 @@ SHC_3BB0A8C1_0x00521EA5 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00521EA6 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00521EB0 | 76.5% | instruction selection differs
+SHC_3BB0A8C1_0x00521EB0 | 76.5% | pop esi scheduling
 
 SHC_3BB0A8C1_0x00521EF0 | 0.0% | Pending
 
@@ -46787,7 +46787,7 @@ SHC_3BB0A8C1_0x00522410 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x005224E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00522520 | 89.7% | instruction selection differs
+SHC_3BB0A8C1_0x00522520 | 89.7% | address lea hoisted
 
 SHC_3BB0A8C1_0x00522550 | 0.0% | Pending
 
@@ -49659,7 +49659,7 @@ SHC_3BB0A8C1_0x00530EB0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00530F20 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00530FD0 | 78.3% | instruction selection differs
+SHC_3BB0A8C1_0x00530FD0 | 78.3% | setle vs branch
 
 SHC_3BB0A8C1_0x00531000 | 0.0% | Pending
 
@@ -51103,7 +51103,7 @@ SHC_3BB0A8C1_0x00535B00 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00535BC0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00535DF0 | 85.7% | jump target differs
+SHC_3BB0A8C1_0x00535DF0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00535E20 | 0.0% | Pending
 
@@ -51205,9 +51205,9 @@ SHC_3BB0A8C1_0x00536A60 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00536C70 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00536C90 | 83.3% | jump target differs
+SHC_3BB0A8C1_0x00536C90 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00536CC0 | 83.3% | jump target differs
+SHC_3BB0A8C1_0x00536CC0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00536CF0 | 0.0% | Pending
 
@@ -51231,7 +51231,7 @@ SHC_3BB0A8C1_0x00537160 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005371A0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x005371E0 | 50.0% | jump target differs
+SHC_3BB0A8C1_0x005371E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005371F0 | 0.0% | Pending
 
@@ -59625,9 +59625,9 @@ SHC_3BB0A8C1_0x0053B210 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0053B260 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0053B310 | 90.0% | register allocation differs
+SHC_3BB0A8C1_0x0053B310 | 90.0% | global store scheduling
 
-SHC_3BB0A8C1_0x0053B340 | 81.8% | Store sched + jne vs jl
+SHC_3BB0A8C1_0x0053B340 | 81.8% | store sched + jne vs jl
 
 SHC_3BB0A8C1_0x0053B380 | 0.0% | Pending
 
@@ -59637,13 +59637,13 @@ SHC_3BB0A8C1_0x0053B3E0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0053B4F0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0053B530 | 92.3% | register allocation differs
+SHC_3BB0A8C1_0x0053B530 | 92.3% | global store scheduling
 
-SHC_3BB0A8C1_0x0053B570 | 90.0% | register allocation differs
+SHC_3BB0A8C1_0x0053B570 | 90.0% | global store scheduling
 
 SHC_3BB0A8C1_0x0053B5A0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0053B5E0 | 90.0% | register allocation differs
+SHC_3BB0A8C1_0x0053B5E0 | 90.0% | global store scheduling
 
 SHC_3BB0A8C1_0x0053B610 | 0.0% | Pending
 
@@ -60095,7 +60095,7 @@ SHC_3BB0A8C1_0x0053E820 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0053E870 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0053E8D0 | 90.0% | jump target differs
+SHC_3BB0A8C1_0x0053E8D0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0053E900 | 0.0% | Pending
 
