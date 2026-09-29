@@ -41,7 +41,8 @@ namespace Map {
                                              .addXgetTile)
                             - x,
                         _absX = (int)_xDistance >> 0x1f,
-                        _yDistance = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile] - y,
+                        _yDistance
+                        = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile] - y,
                         _absY = (int)_yDistance >> 0x1f,
                         (int)(((_yDistance ^ _absY) - _absY) + ((_xDistance ^ _absX) - _absX)) % modulo == 0)
                     && DAT_TileMapState::instance.CertainPathLayer[_tile] < 4000)
