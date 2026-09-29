@@ -155,7 +155,7 @@ namespace Map {
                                                 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                                         calculateCanPlayerUnitsNavigateToAreaFromArea,
                                                     this)(param_5, (dword)((int)(param_4)),
-                                                    (dword)((int)((short)(short)
+                                                    (dword)((int)((short)(short)(short)
                                                             DAT_TileMapState::instance.PathConnectionLayer[tile2])),
                                                     0),
                                                 iVar15 != 0))
