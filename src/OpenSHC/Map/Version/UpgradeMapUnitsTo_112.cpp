@@ -15,8 +15,7 @@ namespace Map {
     void Version::UpgradeMapUnitsTo_112()
     {
         DAT_CurrentUnitSlotID::instance = 2500;
-        // fixme: the reimplementation unrolls this loop three times (2499 = 3 * 833), the original does not
-        for (int unitID = 1; unitID < 2500; ++unitID) {
+        for (int unitID = 1; unitID != 2500; ++unitID) {
             if (DAT_UnitsState::instance.units[unitID].logicalState == Units::ULS_NORMAL) {
                 DAT_UnitsState::instance.units[unitID].buildingID
                     = DAT_UnitsState::instance.units[unitID].workplaceBuildingID_1;
