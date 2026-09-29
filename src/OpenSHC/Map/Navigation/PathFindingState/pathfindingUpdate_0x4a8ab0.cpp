@@ -172,19 +172,21 @@ namespace Map {
                     local_10 = this->searchQueue.tilesQueue + local_24;
                     local_14 = this->searchQueue.yQueue + local_24;
                     local_18 = this->searchQueue.xQueue + local_24;
-                    paiVar7 = DAT_TileMapState::instance.directionTranslationMatrix + sVar4;
-                    piVar11 = &DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[0].int_.yOffset;
-                    do {
-                        iVar9 = (*paiVar7)[0] + uVar6;
+                    for (int _direction = 0; _direction < 8; _direction = _direction + 1) {
+                        iVar9 = DAT_TileMapState::instance.directionTranslationMatrix[sVar4][_direction] + uVar6;
                         uint uVar5 = DAT_TileMapState::instance.LogicLayer[iVar9];
                         if (DAT_TileMapState::instance.WalkLayer[iVar9] != this->searchGeneration
                             && (uVar5 & 0x30) == 0) {
                             DAT_TileMapState::instance.CertainPathLayer[iVar9]
                                 = (short)this->searchQueue.currentDistance + 1;
-                            iVar8 = ((Point8IntXY*)(piVar11 + -1))->xOffset;
+                            iVar8 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                        .int_.xOffset;
                             DAT_TileMapState::instance.WalkLayer[iVar9] = (short)this->searchGeneration;
                             this->searchQueue.xQueue[this->searchQueue.writeIndex] = (short)iVar8 + sVar3;
-                            this->searchQueue.yQueue[this->searchQueue.writeIndex] = (short)*piVar11 + sVar4;
+                            this->searchQueue.yQueue[this->searchQueue.writeIndex]
+                                = (short)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                      .int_.yOffset
+                                + sVar4;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar9;
                             if (DAT_TileMapState::instance.BuildingLayer[iVar9] != 0) {
                                 iVar8 = (int)DAT_TileMapState::instance.BuildingLayer[iVar9];
@@ -223,7 +225,8 @@ namespace Map {
                                     DAT_EntityState::ptr)(iVar9);
                                 DAT_TileMapState::instance.LogicLayer[iVar9]
                                     = DAT_TileMapState::instance.LogicLayer[iVar9] & 0xffbef4ff;
-                                iVar8 = ((Point8IntXY*)(piVar11 + -1))->xOffset;
+                                iVar8 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                            .int_.xOffset;
                                 local_24 = local_24 + 1;
                                 DAT_TileMapState::instance.HeightLayer[iVar9]
                                     = DAT_TileMapState::instance.DefaultHeightLayer[iVar9];
@@ -231,7 +234,10 @@ namespace Map {
                                 this->toggleUpdateSeparateAreaTileMap = 1;
                                 DAT_TileMapState::instance.field204_0x554a30 = 1;
                                 *local_18 = (short)iVar8 + sVar3;
-                                *local_14 = (short)*piVar11 + sVar4;
+                                *local_14 = (short)DAT_TerrainDefinedData::instance
+                                                .clockwiseCardinalTranslationMatrix[_direction]
+                                                .int_.yOffset
+                                    + sVar4;
                                 local_14 = local_14 + 1;
                                 local_18 = local_18 + 1;
                                 *local_10 = iVar9;
@@ -240,14 +246,24 @@ namespace Map {
                             if ((uVar5 & 0x40000000) != 0) {
                                 MACRO_CALL_MEMBER(
                                     OpenSHC::Map::TileMapState_Func::clearMoatDataAtTile, DAT_TileMapState::ptr)(
-                                    ((Point8IntXY*)(piVar11 + -1))->xOffset + (int)sVar3, (int)(*piVar11 + sVar4));
-                                iVar8 = ((Point8IntXY*)(piVar11 + -1))->xOffset;
+                                    DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                            .int_.xOffset
+                                        + (int)sVar3,
+                                    (int)(DAT_TerrainDefinedData::instance
+                                              .clockwiseCardinalTranslationMatrix[_direction]
+                                              .int_.yOffset
+                                        + sVar4));
+                                iVar8 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                            .int_.xOffset;
                                 local_24 = local_24 + 1;
                                 DAT_TileMapState::instance.HeightLayer[iVar9] = 8;
                                 DAT_TileMapState::instance.LogicLayer[iVar9]
                                     = DAT_TileMapState::instance.LogicLayer[iVar9] & 0xbfffbfff;
                                 *local_18 = (short)iVar8 + sVar3;
-                                *local_14 = (short)*piVar11 + sVar4;
+                                *local_14 = (short)DAT_TerrainDefinedData::instance
+                                                .clockwiseCardinalTranslationMatrix[_direction]
+                                                .int_.yOffset
+                                    + sVar4;
                                 local_18 = local_18 + 1;
                                 *local_10 = iVar9;
                                 local_10 = local_10 + 1;
@@ -262,9 +278,8 @@ namespace Map {
                                 this->searchQueue.writeIndex = 0;
                             }
                         }
-                        paiVar7 = (int (*)[8])(*paiVar7 + 1);
-                        piVar11 = piVar11 + 2;
-                    } while ((int)piVar11 < 0xb4908c);
+                    }
+
                     this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
                     if (0x13a0f < this->searchQueue.readIndex) {
                         this->searchQueue.readIndex = 0;
