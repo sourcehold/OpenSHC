@@ -44,8 +44,7 @@ namespace Map {
             this->searchQueue.currentDistance = 1;
             this->searchQueue.yQueue[0] = (short)y;
             this->searchQueue.xQueue[0] = (short)x;
-            this->searchQueue.tilesQueue[0]
-                = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+            this->searchQueue.tilesQueue[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
             DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             while (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
@@ -65,7 +64,8 @@ namespace Map {
                     /*
                       for each direction, do:
                      */
-                    int _candidate = DAT_TileMapState::instance.directionTranslationMatrix[_y][_direction] + this->ALG_ResultTile;
+                    int _candidate
+                        = DAT_TileMapState::instance.directionTranslationMatrix[_y][_direction] + this->ALG_ResultTile;
                     if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration
                         && (DAT_TileMapState::instance.LogicLayer[_candidate] & 1) != 0) {
                         /*
@@ -75,8 +75,13 @@ namespace Map {
                             = (short)this->searchQueue.currentDistance + 1;
                         DAT_TileMapState::instance.WalkLayer[_candidate] = (short)this->searchGeneration;
                         this->searchQueue.xQueue[this->searchQueue.writeIndex]
-                            = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].short_.xOffset + _x;
-                        this->searchQueue.yQueue[this->searchQueue.writeIndex] = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].short_.yOffset + _y;
+                            = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                  .short_.xOffset
+                            + _x;
+                        this->searchQueue.yQueue[this->searchQueue.writeIndex]
+                            = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                  .short_.yOffset
+                            + _y;
                         this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
                         this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
                         if (0x13a0f < this->searchQueue.writeIndex) {
@@ -89,12 +94,12 @@ namespace Map {
                 if (0x13a0f < this->searchQueue.readIndex) {
                     this->searchQueue.readIndex = 0;
                 }
-                }
+            }
             this->ALG_ResultX = (int)this->searchQueue.yQueue[this->searchQueue.readIndex + 0x13a0f];
             this->ALG_ResultY = (int)this->searchQueue.yQueue[this->searchQueue.readIndex + -1];
             this->ALG_ResultTile = this->searchQueue.tilesQueue[this->searchQueue.readIndex + -1];
             return;
-}
+        }
 
     }
 }
