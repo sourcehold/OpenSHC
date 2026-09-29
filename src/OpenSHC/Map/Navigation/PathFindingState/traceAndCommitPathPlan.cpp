@@ -120,8 +120,8 @@ namespace Map {
                         return;
                     }
                     y2 = y2
-                        + *(int*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
-                            + _theDirection * 8 + 4);
+                        + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_theDirection]
+                              .int_.yOffset;
                     if ((DAT_TileMapState::instance.LogicLayer[x2] & 0x10000100U) != 0
                         && (DAT_TileMapState::instance.LogicLayer[x2] & 2U) == 0
                         && (DAT_TileMapState::instance.BuildingLayer[x2] == 0
