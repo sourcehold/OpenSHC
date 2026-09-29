@@ -21,9 +21,12 @@ import common
 MATRIX = "DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix"
 ENTRY = 8
 
-# *(short*)((int)MATRIX + <idx> * 8 + <off>)   -- the whitespace is whatever clang-format left
+# *(short*)((int)MATRIX + <idx> * 8 + <off>)
+# clang-format wraps a long expression between the instance and the member, so every
+# separator has to tolerate a newline and the indentation that follows it.
+LOOSE_MATRIX = r"\s*\.\s*".join(re.escape(part) for part in MATRIX.split("."))
 PATTERN = re.compile(
-    r"\*\((?P<type>short|int)\*\)\(\s*\(int\)" + re.escape(MATRIX)
+    r"\*\((?P<type>short|int)\*\)\(\s*\(int\)\s*" + LOOSE_MATRIX
     + r"\s*\+\s*(?P<idx>[A-Za-z_]\w*)\s*\*\s*8(?:\s*\+\s*(?P<off>0x[0-9a-fA-F]+|\d+))?\s*\)")
 
 
