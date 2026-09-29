@@ -100,7 +100,7 @@ namespace Map {
         int temporaryTerrainTypeArray[1000]; // 0x0055292C length: 4000
         int temporaryTerrainTypeBinaryArray[1000]; // 0x005538CC length: 4000
         undefined4 forceUpdateLogicalAndMiscDisplayLayers; // 0x0055486C length: 4
-        undefined4 forceUpdateTextureTilemap; // 0x00554870 length: 4
+        int forceUpdateTextureTilemap; // 0x00554870 length: 4
         int forceUpdateGFXLayers; // 0x00554874 length: 4
         int forceUpdateMacroLayerFlag; // 0x00554878 length: 4
         undefined4 field68_0x55487c; // 0x0055487C length: 4
