@@ -59,20 +59,22 @@ namespace Map {
                 }
                 _yUnk = _xs[_readIndex];
                 _xUnk = _ys[_readIndex];
-                piVar2 = DAT_TileMapState::instance.directionTranslationMatrix[_xUnk] + 1;
                 _distance = (short)marker;
                 DAT_TileMapState::instance.CertainPathLayer[_tile] = _distance;
-                piVar3 = &DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[0].int_.yOffset;
-                do {
-                    _candidate = (*(int (*)[8])(piVar2 + -1))[0] + _tile;
+                for (int _direction = 0; _direction < 8; _direction = _direction + 4) {
+                    _candidate = DAT_TileMapState::instance.directionTranslationMatrix[_xUnk][_direction] + _tile;
                     if (DAT_TileMapState::instance.WalkLayer[_candidate] == this->searchGeneration) {
                         if (DAT_TileMapState::instance.CertainPathLayer[_candidate] == marker) {
                             budget = budget + -1;
                         } else if (0 < DAT_TileMapState::instance.CertainPathLayer[_candidate]) {
-                            iVar1 = ((Point8IntXY*)(piVar3 + -1))->xOffset;
+                            iVar1 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                        .int_.xOffset;
                             _tilesQueue[_writeIndex] = _candidate;
                             _xs[_writeIndex] = iVar1 + _yUnk;
-                            _ys[_writeIndex] = *piVar3 + _xUnk;
+                            _ys[_writeIndex]
+                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                      .int_.yOffset
+                                + _xUnk;
                             _writeIndex = _writeIndex + 1;
                             DAT_TileMapState::instance.CertainPathLayer[_candidate] = _distance;
                             if (999 < _writeIndex) {
@@ -82,15 +84,19 @@ namespace Map {
                     } else {
                         budget = budget + -1;
                     }
-                    uVar4 = *piVar2 + _tile;
+                    uVar4 = DAT_TileMapState::instance.directionTranslationMatrix[_xUnk][_direction + 1] + _tile;
                     if (DAT_TileMapState::instance.WalkLayer[uVar4] == this->searchGeneration) {
                         if (DAT_TileMapState::instance.CertainPathLayer[uVar4] == marker) {
                             budget = budget + -1;
                         } else if (0 < DAT_TileMapState::instance.CertainPathLayer[uVar4]) {
-                            iVar1 = piVar3[1];
+                            iVar1 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction + 1]
+                                        .int_.xOffset;
                             _tilesQueue[_writeIndex] = uVar4;
                             _xs[_writeIndex] = iVar1 + _yUnk;
-                            _ys[_writeIndex] = piVar3[2] + _xUnk;
+                            _ys[_writeIndex]
+                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction + 1]
+                                      .int_.yOffset
+                                + _xUnk;
                             _writeIndex = _writeIndex + 1;
                             DAT_TileMapState::instance.CertainPathLayer[uVar4] = _distance;
                             if (999 < _writeIndex) {
@@ -100,15 +106,19 @@ namespace Map {
                     } else {
                         budget = budget + -1;
                     }
-                    uVar4 = piVar2[1] + _tile;
+                    uVar4 = DAT_TileMapState::instance.directionTranslationMatrix[_xUnk][_direction + 2] + _tile;
                     if (DAT_TileMapState::instance.WalkLayer[uVar4] == this->searchGeneration) {
                         if (DAT_TileMapState::instance.CertainPathLayer[uVar4] == marker) {
                             budget = budget + -1;
                         } else if (0 < DAT_TileMapState::instance.CertainPathLayer[uVar4]) {
-                            iVar1 = piVar3[3];
+                            iVar1 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction + 2]
+                                        .int_.xOffset;
                             _tilesQueue[_writeIndex] = uVar4;
                             _xs[_writeIndex] = iVar1 + _yUnk;
-                            _ys[_writeIndex] = piVar3[4] + _xUnk;
+                            _ys[_writeIndex]
+                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction + 2]
+                                      .int_.yOffset
+                                + _xUnk;
                             _writeIndex = _writeIndex + 1;
                             DAT_TileMapState::instance.CertainPathLayer[uVar4] = _distance;
                             if (999 < _writeIndex) {
@@ -118,15 +128,19 @@ namespace Map {
                     } else {
                         budget = budget + -1;
                     }
-                    uVar4 = piVar2[2] + _tile;
+                    uVar4 = DAT_TileMapState::instance.directionTranslationMatrix[_xUnk][_direction + 3] + _tile;
                     if (DAT_TileMapState::instance.WalkLayer[uVar4] == this->searchGeneration) {
                         if (DAT_TileMapState::instance.CertainPathLayer[uVar4] == marker) {
                             budget = budget + -1;
                         } else if (0 < DAT_TileMapState::instance.CertainPathLayer[uVar4]) {
-                            iVar1 = piVar3[5];
+                            iVar1 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction + 3]
+                                        .int_.xOffset;
                             _tilesQueue[_writeIndex] = uVar4;
                             _xs[_writeIndex] = iVar1 + _yUnk;
-                            _ys[_writeIndex] = piVar3[6] + _xUnk;
+                            _ys[_writeIndex]
+                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction + 3]
+                                      .int_.yOffset
+                                + _xUnk;
                             _writeIndex = _writeIndex + 1;
                             DAT_TileMapState::instance.CertainPathLayer[uVar4] = _distance;
                             if (999 < _writeIndex) {
@@ -136,9 +150,8 @@ namespace Map {
                     } else {
                         budget = budget + -1;
                     }
-                    piVar2 = piVar2 + 4;
-                    piVar3 = piVar3 + 8;
-                } while ((int)piVar3 < 0xb4908c);
+                }
+
                 _readIndex = _readIndex + 1;
                 if (999 < _readIndex) {
                     _readIndex = 0;
