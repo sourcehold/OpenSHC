@@ -78,8 +78,8 @@ namespace Map {
                                 }
                                 DAT_TileMapState::instance.WalkLayer[_currentTile] = (short)this->searchGeneration;
                                 _yTranslationUnk
-                                    = *(int*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
-                                        + _direction * 8 + 4);
+                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                          .int_.yOffset;
                                 _tileArray[_index_3] = _currentTile;
                                 _yArray[_index_3] = _yTranslationUnk + _y;
                                 _index_3 = _index_3 + 1;
