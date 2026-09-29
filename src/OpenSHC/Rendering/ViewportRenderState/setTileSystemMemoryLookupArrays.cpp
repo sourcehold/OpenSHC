@@ -80,7 +80,6 @@ namespace Rendering {
         this->field16_0x4e5fc = 0;
         rowBase = 0;
         diagonalBase = 79600;
-        destIndex = 0;
         column = 8;
         int* destRow = this->screenPointToTileNumber;
         for (int runRemaining = 200; 0 < runRemaining; runRemaining--) {
@@ -96,7 +95,6 @@ namespace Rendering {
                 column = column + 1;
             }
             diagonalBase = diagonalBase + 400;
-            destIndex = destIndex + 401;
             int* secondHalf = destRow;
             destRow = destRow + 201;
             column = rowBase;
@@ -139,7 +137,6 @@ namespace Rendering {
             scratch7 = diagonal + 1;
             runRemaining = (scratch7 - diagonal) + 199;
             diagonal = ((scratch7 - diagonal) + rowBase) * 400;
-            destIndex = destIndex + 0x191;
             int* secondHalf = destRow;
             destRow = destRow + 201;
             column = scratch7;
