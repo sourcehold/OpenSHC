@@ -41959,7 +41959,7 @@ SHC_3BB0A8C1_0x00504A26 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00504A27 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00504A30 | 0.0% | Pending
+SHC_3BB0A8C1_0x00504A30 | 48.9% | 48.92% global instance base
 
 SHC_3BB0A8C1_0x00504E88 | 0.0% | Pending
 
