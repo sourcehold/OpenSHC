@@ -42081,7 +42081,7 @@ SHC_3BB0A8C1_0x00505A10 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x005060C0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00506370 | 0.0% | Pending
+SHC_3BB0A8C1_0x00506370 | 42.1% | 44.49% per-arm stores vs share
 
 SHC_3BB0A8C1_0x00506AD0 | 77.9% | buildingType chain tail-merge
 
