@@ -36,8 +36,7 @@ namespace Map {
             this->climbX
                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.xOffset + x;
             this->climbY
-                = *(int*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix + _direction * 8 + 4)
-                + y;
+                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.yOffset + y;
             return;
         }
 
