@@ -1,12 +1,11 @@
 #include "../PathFindingState.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
+#include "OpenSHC/Map/Navigation/PathFindingState/LinkageNeighbourAsm.hpp"
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-
-#include "OpenSHC/Map/Navigation/PathFindingState/LinkageNeighbourAsm.hpp"
 
 namespace OpenSHC {
 namespace Map {
