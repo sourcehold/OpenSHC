@@ -28,7 +28,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A6AB0
         undefined4 PathFindingState::findCrossAreaBridgeTileToTarget(int param_1, uint param_2, uint param_3)
         {
-            ushort uVar2;
             int (*paiVar6)[8];
             int iVar7;
             uint uVar8;
@@ -57,9 +56,10 @@ namespace Map {
             this->searchQueue.writeIndex = 1;
             this->searchQueue.readIndex = 0;
             ushort uVar1 = DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[param_1].tile];
-            uVar2 = DAT_TileMapState::instance
-                        .PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[param_3].addXgetTile
-                            + param_2];
+            ushort uVar2
+                = DAT_TileMapState::instance
+                      .PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[param_3].addXgetTile
+                          + param_2];
             this->searchQueue.yQueue[0] = DAT_UnitsState::instance.units[param_1].y;
             this->searchQueue.xQueue[0] = DAT_UnitsState::instance.units[param_1].x;
             this->searchQueue.tilesQueue[0] = DAT_UnitsState::instance.units[param_1].tile;
@@ -101,7 +101,7 @@ namespace Map {
                                 iVar7 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                               calculateCanPlayerUnitsNavigateToAreaFromArea,
                                     this)((int)DAT_UnitsState::instance.units[param_1].owner,
-                                    (dword)((int)((int)(short)DAT_TileMapState::instance.PathConnectionLayer[iVar13])),
+                                    (dword)((int)((short)DAT_TileMapState::instance.PathConnectionLayer[iVar13])),
                                     (dword)((int)((short)uVar2)),
                                     (int)(DAT_UnitsState::instance.units[param_1].unitCanClimb));
                                 if (iVar7 != 0) {
