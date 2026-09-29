@@ -36,7 +36,7 @@ namespace Map {
                                         .addXgetTile)
                             - x,
                         uVar5 = (int)uVar3 >> 0x1f,
-                        uVar4 = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[iVar1] - y,
+                        uVar4 = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[iVar1] - y,
                         uVar6 = (int)uVar4 >> 0x1f,
                         (int)(((uVar4 ^ uVar6) - uVar6) + ((uVar3 ^ uVar5) - uVar5)) % modulo == 0)
                     && (iVar2 = DAT_TribesState::instance.ALG_ResultTileIndex,
