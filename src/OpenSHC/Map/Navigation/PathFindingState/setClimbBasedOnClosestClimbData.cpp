@@ -76,7 +76,7 @@ namespace Map {
                         }
                     }
                     _climbDataCounter = _climbDataCounter + 1;
-                    _pClimbData = _pClimbData + 0x81;
+                    _pClimbData = _pClimbData + 1;
                 } while (_climbDataCounter < this->maxClimbDataCount);
             }
             DAT_UnitsState::instance.units[unitID].climbDirection = _downOrUp;
@@ -102,7 +102,7 @@ namespace Map {
                         }
                     }
                     _climbDataID = _climbDataID + 1;
-                    _pClimbData2 = _pClimbData2 + 0x81;
+                    _pClimbData2 = _pClimbData2 + 1;
                 } while (_climbDataID < 200);
             }
             return _climbData2;
