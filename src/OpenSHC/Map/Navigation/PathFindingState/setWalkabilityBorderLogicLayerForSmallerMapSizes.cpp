@@ -131,7 +131,7 @@ namespace Map {
                 if (0x13a0f < this->searchQueue.readIndex) {
                     this->searchQueue.readIndex = 0;
                 }
-                }
+            }
             return;
         }
 
