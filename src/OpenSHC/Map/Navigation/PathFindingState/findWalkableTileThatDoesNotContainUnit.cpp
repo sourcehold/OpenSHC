@@ -56,8 +56,7 @@ namespace Map {
             _area = DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile];
             this->searchQueue.yQueue[0] = (short)y;
             this->searchQueue.xQueue[0] = (short)x;
-            this->searchQueue.tilesQueue[0]
-                = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+            this->searchQueue.tilesQueue[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
             DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             if ((DAT_TileMapState::instance.LogicLayer[this->searchQueue.tilesQueue[0]] & 0x30) == 0
@@ -69,8 +68,8 @@ namespace Map {
                     if ((((short)DAT_TileMapState::instance.UnitLayer[_tile] == 0) || (considerUnits == 0))
                         && (short)DAT_TileMapState::instance.UnitLayer[_tile] != unitID
                         && _area == (short)DAT_TileMapState::instance.PathConnectionLayer[_tile]
-                        && (_tHeight = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTotalHeightAtTile,
-                                DAT_TileMapState::ptr)(_tile),
+                        && (_tHeight = MACRO_CALL_MEMBER(
+                                OpenSHC::Map::TileMapState_Func::getTotalHeightAtTile, DAT_TileMapState::ptr)(_tile),
                             _heightDiff = ((int)_buildingHeight + (int)_terrainHeight) - _tHeight,
                             _absHeight = (int)_heightDiff >> 0x1f,
                             (int)((_heightDiff ^ _absHeight) - _absHeight) < 16)) {
@@ -93,8 +92,13 @@ namespace Map {
                                 = (short)this->searchQueue.currentDistance + 1;
                             DAT_TileMapState::instance.WalkLayer[iVar1] = (short)this->searchGeneration;
                             this->searchQueue.xQueue[this->searchQueue.writeIndex]
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].short_.xOffset + _x;
-                            this->searchQueue.yQueue[this->searchQueue.writeIndex] = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].short_.yOffset + _y;
+                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                      .short_.xOffset
+                                + _x;
+                            this->searchQueue.yQueue[this->searchQueue.writeIndex]
+                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                      .short_.yOffset
+                                + _y;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar1;
                             this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
                             if (0x13a0f < this->searchQueue.writeIndex) {
@@ -113,7 +117,7 @@ namespace Map {
                 }
             }
             return;
-}
+        }
 
     }
 }
