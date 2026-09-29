@@ -28,13 +28,16 @@ namespace Rendering {
         int rowWidth = 2;
         int rowStart = 0;
         int rowSpan = 398;
-        for (int row = 0; rowStart < 80000; row++) {
-            this->translationMatrix[row].distanceToCenter = rowSpan / 2;
-            this->translationMatrix[row].firstTileOfRow = tileNumber;
-            this->translationMatrix[row].addXgetTile = tileNumber - rowSpan / 2;
+        TranslationMatrixTriplet* rowEntry = this->translationMatrix;
+        for (; rowStart < 80000; rowEntry++) {
+            rowEntry->distanceToCenter = rowSpan / 2;
+            rowEntry->firstTileOfRow = tileNumber;
+            rowEntry->addXgetTile = tileNumber - rowSpan / 2;
             if (0 < rowWidth) {
+                int* gridRow = &tileGrid[rowFirstColumn + rowStart];
                 for (int column = 0; column < rowWidth; column++) {
-                    tileGrid[rowFirstColumn + rowStart + column] = tileNumber;
+                    *gridRow = tileNumber;
+                    gridRow++;
                     tileNumber = tileNumber + 1;
                 }
             }
@@ -46,16 +49,19 @@ namespace Rendering {
 
         rowStart = 80000;
         rowSpan = 400 - rowWidth;
-        for (int row = 200; rowStart < 160000; row++) {
+        rowEntry = &this->translationMatrix[200];
+        for (; rowStart < 160000; rowEntry++) {
             rowFirstColumn = rowFirstColumn + 1;
             rowSpan = rowSpan + 2;
             rowWidth = rowWidth + -2;
-            this->translationMatrix[row].distanceToCenter = rowSpan / 2;
-            this->translationMatrix[row].firstTileOfRow = tileNumber;
-            this->translationMatrix[row].addXgetTile = tileNumber - rowSpan / 2;
+            rowEntry->distanceToCenter = rowSpan / 2;
+            rowEntry->firstTileOfRow = tileNumber;
+            rowEntry->addXgetTile = tileNumber - rowSpan / 2;
             if (0 < rowWidth) {
+                int* gridRow = &tileGrid[rowStart + rowFirstColumn];
                 for (int column = 0; column < rowWidth; column++) {
-                    tileGrid[rowStart + rowFirstColumn + column] = tileNumber;
+                    *gridRow = tileNumber;
+                    gridRow++;
                     tileNumber = tileNumber + 1;
                 }
             }
@@ -76,25 +82,28 @@ namespace Rendering {
         diagonalBase = 79600;
         destIndex = 0;
         column = 8;
+        int* destRow = this->screenPointToTileNumber;
         for (int runRemaining = 200; 0 < runRemaining; runRemaining--) {
             scratch7 = column;
-            secondHalfIndex = destIndex + 200;
-            firstHalfIndex = destIndex;
+            int* firstHalf = destRow;
+            destRow = destRow + 200;
             column = rowBase;
             diagonal = diagonalBase;
             for (int scratch6 = 200; 0 < scratch6; scratch6--) {
-                this->screenPointToTileNumber[firstHalfIndex] = tileGrid[diagonal + column];
-                firstHalfIndex = firstHalfIndex + 1;
+                *firstHalf = tileGrid[diagonal + column];
+                firstHalf++;
                 diagonal = diagonal + -400;
                 column = column + 1;
             }
             diagonalBase = diagonalBase + 400;
             destIndex = destIndex + 401;
+            int* secondHalf = destRow;
+            destRow = destRow + 201;
             column = rowBase;
             diagonal = diagonalBase;
             for (int scratch6 = 200; -1 < scratch6; scratch6--) {
-                this->screenPointToTileNumber[secondHalfIndex] = tileGrid[diagonal + column];
-                secondHalfIndex = secondHalfIndex + 1;
+                *secondHalf = tileGrid[diagonal + column];
+                secondHalf++;
                 column = column + 1;
                 diagonal = diagonal + -400;
             }
@@ -112,17 +121,18 @@ namespace Rendering {
         rowBase = 399;
         diagonalBase = 0x26f70;
         destIndex = scratch7 + 0x251;
+        destRow = &this->screenPointToTileNumber[destIndex];
         column = scratch7 + 0x259;
         diagonal = 199;
         for (int blockRemaining = 200; blockRemaining != 0; blockRemaining--) {
             scratch6 = column;
-            secondHalfIndex = destIndex + 200;
-            firstHalfIndex = destIndex;
+            int* firstHalf = destRow;
+            destRow = destRow + 200;
             column = diagonal;
             scratch7 = diagonalBase;
             for (int runRemaining = 200; runRemaining != 0; runRemaining--) {
-                this->screenPointToTileNumber[firstHalfIndex] = tileGrid[scratch7 + column];
-                firstHalfIndex = firstHalfIndex + 1;
+                *firstHalf = tileGrid[scratch7 + column];
+                firstHalf++;
                 column = column + -1;
                 scratch7 = scratch7 + -400;
             }
@@ -130,11 +140,13 @@ namespace Rendering {
             runRemaining = (scratch7 - diagonal) + 199;
             diagonal = ((scratch7 - diagonal) + rowBase) * 400;
             destIndex = destIndex + 0x191;
+            int* secondHalf = destRow;
+            destRow = destRow + 201;
             column = scratch7;
             do {
                 diagonal = diagonal + -400;
-                this->screenPointToTileNumber[secondHalfIndex] = tileGrid[diagonal + column];
-                secondHalfIndex = secondHalfIndex + 1;
+                *secondHalf = tileGrid[diagonal + column];
+                secondHalf++;
                 column = column + -1;
                 runRemaining = runRemaining + -1;
             } while (-1 < runRemaining);
