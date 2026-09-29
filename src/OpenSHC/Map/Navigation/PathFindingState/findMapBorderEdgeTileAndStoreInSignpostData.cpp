@@ -108,8 +108,8 @@ namespace Map {
                                           .short_.xOffset
                                     + _x;
                                 this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                    = *(short*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
-                                          + _index * 8 + 4)
+                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_index]
+                                          .short_.yOffset
                                     + _y;
                                 this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
                                 this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
