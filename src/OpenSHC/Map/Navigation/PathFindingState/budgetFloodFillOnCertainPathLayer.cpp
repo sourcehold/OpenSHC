@@ -145,7 +145,7 @@ namespace Map {
                 }
             } while (_readIndex != _writeIndex);
             return;
-}
+        }
 
     }
 }
