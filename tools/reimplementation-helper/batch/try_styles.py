@@ -37,8 +37,11 @@ def run(*args):
 
 def measure(func):
     out = run(BATCH / "build_quiet.py")
-    if "BUILD_FAIL" in out and "C1090" in out:
-        # mspdbsrv occasionally dies mid-build; that is not the variant's fault
+    if "BUILD_FAIL" in out and not out.strip().splitlines()[:-1]:
+        # A build that fails without naming a source line did not fail on the variant:
+        # mspdbsrv dies mid-build (C1090), and cmake's glob verification crashes with an
+        # access violation on the first build after the source list changed, which is
+        # every first variant. Both succeed on a plain retry.
         subprocess.run(["taskkill", "/F", "/IM", "mspdbsrv.exe"], capture_output=True)
         out = run(BATCH / "build_quiet.py")
     if "BUILD_FAIL" in out:
