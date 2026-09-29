@@ -89,7 +89,7 @@ namespace Map {
                                     .tile = this->resultTile;
                                 DAT_GameState::instance.mapAndTime.signpostsMapEdgeDataCounter
                                     = DAT_GameState::instance.mapAndTime.signpostsMapEdgeDataCounter + 1;
-                                if (50 < DAT_GameState::instance.mapAndTime.signpostsMapEdgeDataCounter) {
+                                if (DAT_GameState::instance.mapAndTime.signpostsMapEdgeDataCounter >= 50) {
                                     return;
                                 }
                                 break;
