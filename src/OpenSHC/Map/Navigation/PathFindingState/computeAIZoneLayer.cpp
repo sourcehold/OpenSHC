@@ -99,8 +99,7 @@ namespace Map {
                           Check all 8 adjacent directions
                          */
                         _direction = 0;
-                        _pDirectionTranslation
-                            = DAT_TileMapState::instance.directionTranslationMatrix + _candidateY;
+                        _pDirectionTranslation = DAT_TileMapState::instance.directionTranslationMatrix + _candidateY;
                         do {
                             _offsetTile = (*_pDirectionTranslation)[0] + _candidateTile;
                             /*
@@ -112,23 +111,20 @@ namespace Map {
                             if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] < '\x01'
                                 && (short)DAT_TileMapState::instance.PathConnectionLayer[_offsetTile] != 0
                                 && ((DAT_TileMapState::instance.PathLinkageLayer[_candidateTile]
-                                        & DAT_ClimbLogicDefinedData::instance
-                                            .BitFlagHelperForPathLinkage[_direction])
+                                        & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction])
                                         != 0
                                     || ((DAT_TileMapState::instance.BuildingLayer[_offsetTile] != 0
                                         && ((_buildingType = DAT_BuildingsState::instance
-                                                 .buildings[DAT_TileMapState::instance
-                                                         .BuildingLayer[_offsetTile]]
+                                                 .buildings[DAT_TileMapState::instance.BuildingLayer[_offsetTile]]
                                                  .buildingType,
                                             _buildingType == OpenSHC::Map::Buildings::BT_GATEHOUSELARGE
-                                                || (_buildingType
-                                                    == OpenSHC::Map::Buildings::BT_GATEHOUSESMALL))))))) {
+                                                || (_buildingType == OpenSHC::Map::Buildings::BT_GATEHOUSESMALL))))))) {
                                 /*
                                   Calculate Y offset for this direction
                                  */
-                                _directionOffset = *(short*)((int)DAT_TerrainDefinedData::instance
-                                                                 .clockwiseCardinalTranslationMatrix
-                                    + _direction * 8 + 4);
+                                _directionOffset
+                                    = *(short*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
+                                        + _direction * 8 + 4);
                                 /*
                                   Mark tile as part of AI zone (value 1 = directly accessible)
                                  */
@@ -136,8 +132,7 @@ namespace Map {
                                 /*
                                   Add to BFS queue for further expansion
                                  */
-                                this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                    = _directionOffset + _candidateY;
+                                this->searchQueue.yQueue[this->searchQueue.writeIndex] = _directionOffset + _candidateY;
                                 this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _offsetTile;
                                 this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
                                 if (80400 < this->searchQueue.writeIndex)
@@ -161,7 +156,7 @@ namespace Map {
                         if (((canReachKeep != 0) && (1999 < this->searchQueue.writeIndex))
                             || 5999 < this->searchQueue.writeIndex)
                             goto LAB_004a4914;
-                        }
+                    }
                     /*
                       === PHASE 2: EXPAND INTO DIFFICULT TERRAIN ===   After marking all easily accessible tiles,
                       expand into harder-to-reach areas   with distance penalties based on terrain type
@@ -179,8 +174,9 @@ namespace Map {
                             /*
                               Get movement direction offsets
                              */
-                            piVar3 = DAT_TileMapState::instance.directionTranslationMatrix[this->searchQueue
-                                             .yQueue[this->searchQueue.readIndex]]
+                            piVar3
+                                = DAT_TileMapState::instance
+                                      .directionTranslationMatrix[this->searchQueue.yQueue[this->searchQueue.readIndex]]
                                 + 1;
                             /*
                               Process tiles in groups of 4 (unrolled loop)   === PROCESS ADJACENT TILES (Unrolled
@@ -198,8 +194,7 @@ namespace Map {
                                   == 0)
                                  */
                                 if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] < '\x01'
-                                    && (uVar1 = DAT_TileMapState::instance.LogicLayer[_offsetTile],
-                                        (uVar1 & 0x31) == 0)
+                                    && (uVar1 = DAT_TileMapState::instance.LogicLayer[_offsetTile], (uVar1 & 0x31) == 0)
                                     && (DAT_TileMapState::instance.BuildingLayer[_offsetTile] == 0
                                         || (DAT_BuildingsState::instance
                                                 .buildings[DAT_TileMapState::instance.BuildingLayer[_offsetTile]]
@@ -239,8 +234,7 @@ namespace Map {
                                  */
                                 _offsetTile = *piVar3 + _direction;
                                 if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] < '\x01'
-                                    && (uVar1 = DAT_TileMapState::instance.LogicLayer[_offsetTile],
-                                        (uVar1 & 0x31) == 0)
+                                    && (uVar1 = DAT_TileMapState::instance.LogicLayer[_offsetTile], (uVar1 & 0x31) == 0)
                                     && (DAT_TileMapState::instance.BuildingLayer[_offsetTile] == 0
                                         || (DAT_BuildingsState::instance
                                                 .buildings[DAT_TileMapState::instance.BuildingLayer[_offsetTile]]
@@ -264,8 +258,7 @@ namespace Map {
                                  */
                                 _offsetTile = piVar3[1] + _direction;
                                 if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] < '\x01'
-                                    && (uVar1 = DAT_TileMapState::instance.LogicLayer[_offsetTile],
-                                        (uVar1 & 0x31) == 0)
+                                    && (uVar1 = DAT_TileMapState::instance.LogicLayer[_offsetTile], (uVar1 & 0x31) == 0)
                                     && (DAT_TileMapState::instance.BuildingLayer[_offsetTile] == 0
                                         || (DAT_BuildingsState::instance
                                                 .buildings[DAT_TileMapState::instance.BuildingLayer[_offsetTile]]
@@ -289,8 +282,7 @@ namespace Map {
                                  */
                                 _offsetTile = piVar3[2] + _direction;
                                 if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] < '\x01'
-                                    && (uVar1 = DAT_TileMapState::instance.LogicLayer[_offsetTile],
-                                        (uVar1 & 0x31) == 0)
+                                    && (uVar1 = DAT_TileMapState::instance.LogicLayer[_offsetTile], (uVar1 & 0x31) == 0)
                                     && (DAT_TileMapState::instance.BuildingLayer[_offsetTile] == 0
                                         || (DAT_BuildingsState::instance
                                                 .buildings[DAT_TileMapState::instance.BuildingLayer[_offsetTile]]
@@ -328,7 +320,7 @@ namespace Map {
                     if (1 < attackedPlayerID) {
                         attackedPlayerID = 0;
                     }
-                    }
+                }
             LAB_004a4914:
                 MACRO_CALL_MEMBER(
                     OpenSHC::Map::Buildings::BuildingsState_Func::updatePathLinkageTileMap, DAT_BuildingsState::ptr)(0);
