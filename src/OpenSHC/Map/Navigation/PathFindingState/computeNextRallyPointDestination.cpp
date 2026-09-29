@@ -32,7 +32,8 @@ namespace Map {
             this->ALG_ResultTile = 0;
             this->ALG_ResultY = 0;
             this->ALG_ResultX = 0;
-            if ((uint)xPos <= 399 && (uint)yPos <= 399 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[yPos * 400 + xPos] != '\0') {
+            if ((uint)xPos <= 399 && (uint)yPos <= 399
+                && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[yPos * 400 + xPos] != '\0') {
                 this->searchGeneration = this->searchGeneration + 1;
                 if (32000 < this->searchGeneration) {
                     this->searchGeneration = 1;
@@ -72,7 +73,8 @@ namespace Map {
                             return;
                         }
                         for (int _direction = 0; _direction < 8; _direction = _direction + 2) {
-                            int _cTile2 = DAT_TileMapState::instance.directionTranslationMatrix[_cY_2][_direction] + _cTile;
+                            int _cTile2
+                                = DAT_TileMapState::instance.directionTranslationMatrix[_cY_2][_direction] + _cTile;
                             /*
                               0xb1 == test against sea, rocky, and borders
                              */
@@ -86,8 +88,13 @@ namespace Map {
                                     = (short)this->searchQueue.currentDistance + 1;
                                 DAT_TileMapState::instance.WalkLayer[_cTile2] = (short)this->searchGeneration;
                                 this->searchQueue.xQueue[this->searchQueue.writeIndex]
-                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].short_.xOffset + _cX;
-                                this->searchQueue.yQueue[this->searchQueue.writeIndex] = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].short_.yOffset + _cY;
+                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                          .short_.xOffset
+                                    + _cX;
+                                this->searchQueue.yQueue[this->searchQueue.writeIndex]
+                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                          .short_.yOffset
+                                    + _cY;
                                 this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _cTile2;
                                 this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
                                 if (0x13a0f < this->searchQueue.writeIndex) {
