@@ -29,18 +29,16 @@ namespace Map {
             MACRO_CALL_MEMBER(
                 OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkageLayerBasedOnBuildingsUnk, this)(
                 y, tile);
-            paiVar1 = DAT_TileMapState::instance.directionTranslationMatrix + y;
-            piVar2 = &DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[0].int_.yOffset;
-            do {
+            for (int _direction = 0; _direction < 8; _direction = _direction + 1) {
                 BOOLEnum _tileIsKeepUnk = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkageLayerBasedOnBuildingsUnk, this)(
-                    *piVar2 + y, (*paiVar1)[0] + tile);
+                    DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.yOffset + y,
+                    DAT_TileMapState::instance.directionTranslationMatrix[y][_direction] + tile);
                 if (_tileIsKeepUnk != FALSE) {
                     _someLinkageResult = 1;
                 }
-                piVar2 = piVar2 + 2;
-                paiVar1 = (int (*)[8])(*paiVar1 + 1);
-            } while ((int)piVar2 < 0xb4908c);
+            }
+
             if (_someLinkageResult) {
                 DAT_BuildingsState::instance.pathLinkageKeepWasUpdatedUnk = 1;
             }
