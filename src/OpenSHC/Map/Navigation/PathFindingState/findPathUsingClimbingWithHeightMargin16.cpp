@@ -129,11 +129,10 @@ namespace Map {
                                         /*
                                           candidate is keep
                                          */
-                                        _keepHeight
-                                            = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::
-                                                                    getBuildingHeightForBuildingID,
-                                                DAT_BuildingsState::ptr)(
-                                                (int)DAT_TileMapState::instance.BuildingLayer[_candidate]);
+                                        _keepHeight = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::
+                                                                            getBuildingHeightForBuildingID,
+                                            DAT_BuildingsState::ptr)(
+                                            (int)DAT_TileMapState::instance.BuildingLayer[_candidate]);
                                         _cHeight = _cHeight + _keepHeight;
                                     }
                                     /*
@@ -197,7 +196,7 @@ namespace Map {
                 if (0x13a0f < this->searchQueue.readIndex) {
                     this->searchQueue.readIndex = 0;
                 }
-                }
+            }
             this->searchNonmatchCount = this->searchNonmatchCount + 1;
             return FALSE;
         }
