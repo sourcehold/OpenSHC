@@ -58,6 +58,11 @@ it was applied, but none is guaranteed to be -- re-measure after running one.
 | `test_unmod.py` | Cases for `unmod.py`: a repair constant that does not complement the mask, a repair applied to another variable, and a bare mask with no repair. |
 | `unptr.py [filter] [--apply]` | Replace the decompiler's field-walking pointers (`piVar1 = &x.f; *piVar1 = *piVar1 + 1;`) with the field itself. Only the two-adjacent-line shape, since a pointer freezes the address while the field form re-evaluates the index. Reports which pointers are still in use. |
 | `test_unptr.py` | Cases for `unptr.py`, including a pointer declared on the spot (`char* pcVar3 = &...`, whose type prefix must go with it) and the set-up-then-use-later shape it must leave alone. |
+| `undirwalk.py [filter] [--apply]` | Turn the two pointers Ghidra walks in lockstep over `clockwiseCardinalTranslationMatrix` and a row of `directionTranslationMatrix` back into `for (int _direction = 0; _direction < 8; ...)`. Derives the direction count and stride from the pointer steps and the absolute end address, and refuses when the row index is reassigned inside the body (that pointer froze the *initial* row) or when either pointer survives the rewrite. |
+| `unoffset_matrix.py [filter] [--apply]` | Resolve hand-computed byte offsets into the same matrix, `*(short*)((int)matrix + i * 8 + 0xc)` -> `matrix[i + 1].short_.yOffset`. Code-generation neutral; it only removes magic numbers. |
+| `unguarded_do.py [filter] [--apply]` | Collapse `if (cond) { do { ... } while (cond); }` into `while (cond) { ... }`. Usually neutral, but **measure**: where the original really did compile a do-while this has cost up to 22% on one function, so re-run `reccmp_report.py cmp` and revert per file. |
+| `docount.py [filter] [--apply]` | Counted `i = 0; do { ... i = i + 1; } while (i < N);` -> `for (int i = 0; i < N; i = i + 1)`. Only when the counter is stepped by the last statement, written nowhere else, and not read after the loop. |
+| `early_return.py [filter] [--apply]` | Turn a function whose body is one big `if (bounds guard) { ... } return X;` into `if (!guard) { return X; } ...`. Inverts a top-level `&&` chain of simple comparisons by De Morgan and bails on anything else. Measured code-generation neutral across 20 functions; it is a readability change. |
 
 ## Typical loop
 

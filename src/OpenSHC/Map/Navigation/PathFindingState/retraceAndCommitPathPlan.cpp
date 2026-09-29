@@ -1,0 +1,23 @@
+#include "../PathFindingState.func.hpp"
+
+#include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+
+namespace OpenSHC {
+namespace Map {
+    namespace Navigation {
+
+        /*
+          decompilerscript: committed: 2025-01-30 21:57:43.216000
+         */
+        // FUNCTION: STRONGHOLDCRUSADER 0x004A9DD0
+        undefined4 PathFindingState::retraceAndCommitPathPlan()
+        {
+            this->searchQueue.pathPlanIndex = 0;
+            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::traceAndCommitPathPlan, this)(
+                this->unitX, (uint)(this->unitY), (uint)(this->destinationX), (uint)(this->destinationY), 0);
+            return this->searchQueue.pathPlanIndex;
+        }
+
+    }
+}
+}
