@@ -58,13 +58,11 @@ namespace Map {
                         DAT_BuildingsState::ptr)((int)DAT_TileMapState::instance.BuildingLayer[_tile2]);
                     y2 = y2 + iVar2;
                 }
-                paiVar3 = DAT_TileMapState::instance.directionTranslationMatrix + uVar1;
-                piVar4 = &DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[0].int_.yOffset;
-                do {
+                for (int _direction = 0; _direction < 8; _direction = _direction + 1) {
                     /*
                       for each direction relative to tile 2, do
                      */
-                    _candidate2 = (*paiVar3)[0] + _tile2;
+                    _candidate2 = DAT_TileMapState::instance.directionTranslationMatrix[uVar1][_direction] + _tile2;
                     if (((short)DAT_TileMapState::instance.PathConnectionLayer[_candidate2] == _area1)
                         && ((short)DAT_TileMapState::instance.UnitLayer[_candidate2] == 0)) {
                         /*
@@ -85,18 +83,28 @@ namespace Map {
                             MACRO_CALL_MEMBER(
                                 OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                                 DAT_DirectionAlgorithmState::ptr)(x, (int)(y),
-                                (int)(((Point8IntXY*)(piVar4 + -1))->xOffset + x2), (int)(*piVar4 + uVar1));
+                                (int)(DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                          .int_.xOffset
+                                    + x2),
+                                (int)(DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                          .int_.yOffset
+                                    + uVar1));
                             if (DAT_DirectionAlgorithmState::instance.distanceHigh < _minDistance) {
-                                this->climbX = ((Point8IntXY*)(piVar4 + -1))->xOffset + x2;
+                                this->climbX
+                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                          .int_.xOffset
+                                    + x2;
                                 _minDistance = DAT_DirectionAlgorithmState::instance.distanceHigh;
-                                this->climbY = *piVar4 + uVar1;
+                                this->climbY
+                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                          .int_.yOffset
+                                    + uVar1;
                                 _status = 1;
                             }
                         }
                     }
-                    paiVar3 = (int (*)[8])(*paiVar3 + 1);
-                    piVar4 = piVar4 + 2;
-                } while ((int)piVar4 < 0xb4908c);
+                }
+
                 return _status;
             }
             return 0;
