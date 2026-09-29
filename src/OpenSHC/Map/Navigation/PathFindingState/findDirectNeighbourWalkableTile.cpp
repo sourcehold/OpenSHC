@@ -29,8 +29,8 @@ namespace Map {
                 uint _x
                     = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_directionIndex].int_.xOffset
                     + x;
-                uint _y = *(int*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
-                              + _directionIndex * 8 + 4)
+                uint _y
+                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_directionIndex].int_.yOffset
                     + y;
                 if (_x <= 399 && _y <= 399
                     && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[_y * 400 + _x] != '\0') {
