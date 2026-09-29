@@ -24,122 +24,114 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049A370
         BOOLEnum PathFindingState::tracePathPlanToDestinationViaUnoccupiedTiles(uint x, uint y, uint destX, uint destY)
         {
-            byte* pbVar1;
-            short _gen_2;
-            int _direction;
-            int _budget;
-            uint _ppIndex;
-            int _axgt2;
-            int _canTraverseThisDirection;
-            int _fc;
-            int _gen;
-            byte* _pPathPlan;
             if (399 < x || 399 < y || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
                 return FALSE;
             }
-            if (destX <= 399 && destY <= 399
-                && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[destY * 400 + destX] != '\0') {
-                this->searchGeneration = this->searchGeneration + 1;
-                if (32000 < this->searchGeneration) {
-                    this->searchGeneration = 1;
-                    MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                        0x27420, '\0', (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
-                }
-                _fc = DAT_EntityState::instance.fireCount;
-                _pPathPlan = this->searchQueue.ptrPathPlan;
-                _gen = this->searchGeneration;
-                _budget = 0;
-                int _candidate = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
-                _axgt2 = DAT_ViewportRenderState::instance.translationMatrix[destY].addXgetTile;
-                _ppIndex = this->searchQueue.pathPlanIndex;
-                while (true) {
-                    _budget = _budget + 1;
-                    if (399 < _budget) {
-                        this->searchQueue.pathPlanIndex = _ppIndex;
-                        return FALSE;
-                    }
-                    _gen_2 = (short)_gen;
-                    DAT_TileMapState::instance.WalkLayer[_candidate] = _gen_2;
-                    /*
-                      tile2 matches tile ?
-                     */
-                    if (_candidate == _axgt2 + destX) {
-                        this->searchQueue.pathPlanIndex = _ppIndex;
-                        return TRUE;
-                    }
-                    /*
-                      tile is occupied and fire?
-                     */
-                    if ((_fc != 0) && (DAT_TileMapState::instance.OccupancyLayer[_candidate] != '\0')) {
-                        this->searchQueue.pathPlanIndex = _ppIndex;
-                        return FALSE;
-                    }
-                    _canTraverseThisDirection = DAT_TileMapState::instance.PathLinkageLayer[_candidate];
-                    if ((int)destY < (int)y) {
-                        if ((int)destX < (int)x) {
-                            _direction = 7;
-                            _canTraverseThisDirection = _canTraverseThisDirection & 0x80;
-                        } else if ((int)x < (int)destX) {
-                            _direction = 1;
-                            _canTraverseThisDirection = _canTraverseThisDirection & 2;
-                        } else {
-                            _direction = 0;
-                            _canTraverseThisDirection = _canTraverseThisDirection & 1;
-                        }
-                    } else if ((int)y < (int)destY) {
-                        if ((int)destX < (int)x) {
-                            _direction = 5;
-                            _canTraverseThisDirection = _canTraverseThisDirection & 0x20;
-                        } else if ((int)x < (int)destX) {
-                            _direction = 3;
-                            _canTraverseThisDirection = _canTraverseThisDirection & 8;
-                        } else {
-                            _direction = 4;
-                            _canTraverseThisDirection = _canTraverseThisDirection & 0x10;
-                        }
-                    } else if ((int)destX < (int)x) {
-                        _direction = 6;
-                        _canTraverseThisDirection = _canTraverseThisDirection & 0x40;
-                    } else {
-                        if ((int)destX <= (int)x) {
-                            this->searchQueue.pathPlanIndex = _ppIndex;
-                            return FALSE;
-                        }
-                        _direction = 2;
-                        _canTraverseThisDirection = _canTraverseThisDirection & 4;
-                    }
-                    /*
-                      if cannot go any direciton, break
-                     */
-                    if (_canTraverseThisDirection == 0)
-                        break;
-                    /*
-                      update tile with new direction
-                     */
-                    _candidate = _candidate + DAT_TileMapState::instance.directionTranslationMatrix[y][_direction];
-                    x = x
-                        + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.xOffset;
-                    y = y
-                        + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.yOffset;
-                    /*
-                      store direction in path plan
-                     */
-                    if ((_ppIndex & 1) == 0) {
-                        _pPathPlan[_ppIndex >> 1] = (byte)_direction;
-                        _ppIndex = _ppIndex + 1;
-                    } else {
-                        pbVar1 = _pPathPlan + (_ppIndex >> 1);
-                        *pbVar1 = *pbVar1 & 0xf;
-                        *pbVar1 = *pbVar1 | (byte)(_direction << 4);
-                        _ppIndex = _ppIndex + 1;
-                    }
-                }
-                this->searchQueue.pathPlanIndex = _ppIndex;
+            if (399 < destX || 399 < destY
+                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[destY * 400 + destX] == '\0') {
                 return FALSE;
             }
+            this->searchGeneration = this->searchGeneration + 1;
+            if (32000 < this->searchGeneration) {
+                this->searchGeneration = 1;
+                MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
+                    0x27420, '\0', (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
+            }
+            /*
+              The original keeps every layer base and both end points in its own stack slot for the
+              whole walk rather than reloading the globals, so they are locals here too.
+             */
+            int _budget = 0;
+            uint _ppIndex = 0;
+            int _direction = 0;
+            uint _gen = (ushort)this->searchGeneration;
+            int _fireCount = DAT_EntityState::instance.fireCount;
+            short* _walkLayer = DAT_TileMapState::instance.WalkLayer;
+            uchar* _occupancy = DAT_TileMapState::instance.OccupancyLayer;
+            uchar* _linkage = DAT_TileMapState::instance.PathLinkageLayer;
+            int* _dirMatrix = &DAT_TileMapState::instance.directionTranslationMatrix[0][0];
+            Point8* _cardinal = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix;
+            int _tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+            int _destTile = DAT_ViewportRenderState::instance.translationMatrix[destY].addXgetTile + destX;
+            byte* _pPathPlan = this->searchQueue.ptrPathPlan;
+            _ppIndex = this->searchQueue.pathPlanIndex;
+            while (true) {
+                _budget = _budget + 1;
+                if (399 < _budget) {
+                    break;
+                }
+                _walkLayer[_tile] = (short)_gen;
+                /*
+                  tile2 matches tile ?
+                 */
+                if (_tile == _destTile) {
+                    this->searchQueue.pathPlanIndex = _ppIndex;
+                    return TRUE;
+                }
+                /*
+                  tile is occupied and fire?
+                 */
+                if (_fireCount != 0 && _occupancy[_tile] != '\0') {
+                    break;
+                }
+                int _canTraverseThisDirection = _linkage[_tile];
+                if ((int)destY < (int)y) {
+                    if ((int)destX < (int)x) {
+                        _direction = 7;
+                        _canTraverseThisDirection = _canTraverseThisDirection & 0x80;
+                    } else if ((int)x < (int)destX) {
+                        _direction = 1;
+                        _canTraverseThisDirection = _canTraverseThisDirection & 2;
+                    } else {
+                        _direction = 0;
+                        _canTraverseThisDirection = _canTraverseThisDirection & 1;
+                    }
+                } else if ((int)y < (int)destY) {
+                    if ((int)destX < (int)x) {
+                        _direction = 5;
+                        _canTraverseThisDirection = _canTraverseThisDirection & 0x20;
+                    } else if ((int)x < (int)destX) {
+                        _direction = 3;
+                        _canTraverseThisDirection = _canTraverseThisDirection & 8;
+                    } else {
+                        _direction = 4;
+                        _canTraverseThisDirection = _canTraverseThisDirection & 0x10;
+                    }
+                } else if ((int)destX < (int)x) {
+                    _direction = 6;
+                    _canTraverseThisDirection = _canTraverseThisDirection & 0x40;
+                } else {
+                    if ((int)destX <= (int)x) {
+                        break;
+                    }
+                    _direction = 2;
+                    _canTraverseThisDirection = _canTraverseThisDirection & 4;
+                }
+                /*
+                  if cannot go any direction, stop
+                 */
+                if (_canTraverseThisDirection == 0) {
+                    break;
+                }
+                /*
+                  update tile with new direction
+                 */
+                _tile = _tile + _dirMatrix[y * 8 + _direction];
+                x = x + _cardinal[_direction].int_.xOffset;
+                y = y + _cardinal[_direction].int_.yOffset;
+                /*
+                  store direction in path plan
+                 */
+                if ((_ppIndex & 1) == 0) {
+                    _pPathPlan[_ppIndex >> 1] = (byte)_direction;
+                } else {
+                    _pPathPlan[_ppIndex >> 1] = (_pPathPlan[_ppIndex >> 1] & 0xf) | (byte)(_direction << 4);
+                }
+                _ppIndex = _ppIndex + 1;
+            }
+            this->searchQueue.pathPlanIndex = _ppIndex;
             return FALSE;
         }
-
     }
 }
 }
