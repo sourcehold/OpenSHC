@@ -278,8 +278,7 @@ namespace Map {
                               Add Y coordinate to queue
                              */
                             this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                = *(short*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
-                                      + y * 8 + 4)
+                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[y].short_.yOffset
                                 + sVar1;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _offsetTile;
                             /*
