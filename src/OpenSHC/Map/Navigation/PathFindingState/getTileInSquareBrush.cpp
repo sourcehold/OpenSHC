@@ -50,7 +50,8 @@ namespace Map {
             this->resultTile = 0;
             this->resultY = 0;
             this->resultX = 0;
-            if (x <= 399 && y <= 399 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] != '\0') {
+            if (x <= 399 && y <= 399
+                && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] != '\0') {
                 _tileArray[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
                 _yArray[0] = y;
                 if (brushTileIndex < 1) {
