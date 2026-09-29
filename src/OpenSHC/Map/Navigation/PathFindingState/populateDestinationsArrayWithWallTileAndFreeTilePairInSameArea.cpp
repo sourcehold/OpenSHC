@@ -43,7 +43,7 @@ namespace Map {
             uint _tile;
             int _x;
             int _y;
-            _tileY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
+            _tileY = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
             _axgt = DAT_ViewportRenderState::instance.translationMatrix[_tileY].addXgetTile;
             this->searchGeneration = this->searchGeneration + 1;
             _dIndex = 0;
