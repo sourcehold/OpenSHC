@@ -39413,7 +39413,7 @@ SHC_3BB0A8C1_0x004F9980 | 34.2% | ecx not kept across callee
 
 SHC_3BB0A8C1_0x004F99D0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004F9A60 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F9A60 | 49.7% | 49.70% global instance base
 
 SHC_3BB0A8C1_0x004F9D64 | 0.0% | Pending
 
