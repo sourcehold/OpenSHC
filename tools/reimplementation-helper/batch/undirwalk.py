@@ -92,6 +92,13 @@ def convert(text):
         if stride != int(step_a.group(1)):
             print("  skip (%s: strides disagree %d/%s)" % (p, stride, step_a.group(1)))
             return text, changes
+        # the pointer froze the row at its initial index; re-reading the index each
+        # iteration is only the same thing if nothing in the body writes it
+        reassigned = [n for n in re.findall(r"[A-Za-z_]\w*", yexpr)
+                      if re.search(r"\b%s\b\s*(?:=[^=]|\+\+|--)" % re.escape(n), body)]
+        if reassigned:
+            print("  skip (%s: row index %s is reassigned in the body)" % (p, reassigned[0]))
+            return text, changes
         count = (int(bound.group(1), 16) - Y_BASE) // (int(step_p.group(1)) * width) * stride
         var = "_direction"
         while re.search(r"\b%s\b" % var, text):
