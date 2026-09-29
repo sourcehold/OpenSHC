@@ -84,10 +84,9 @@ namespace Map {
                     if (this->searchQueue.currentDistance > maxDistance) {
                         return;
                     }
-                    paiVar4 = DAT_TileMapState::instance.directionTranslationMatrix + sVar2;
-                    psVar6 = &DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[0].short_.yOffset;
-                    do {
-                        _nextCandidate = (*paiVar4)[0] + _tile;
+                    for (int _direction = 0; _direction < 8; _direction = _direction + 2) {
+                        _nextCandidate
+                            = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][_direction] + _tile;
                         uVar5 = DAT_TileMapState::instance.LogicLayer[_nextCandidate];
                         if (DAT_TileMapState::instance.WalkLayer[_nextCandidate] != this->searchGeneration) {
                             if (DAT_TileMapState::instance.BuildingLayer[_nextCandidate] == 0) {
@@ -151,8 +150,13 @@ namespace Map {
                                     = (short)this->searchQueue.currentDistance + 1;
                                 DAT_TileMapState::instance.WalkLayer[_nextCandidate] = (short)this->searchGeneration;
                                 this->searchQueue.xQueue[this->searchQueue.writeIndex]
-                                    = ((Point8ShortXY*)(psVar6 + -2))->xOffset + sVar1;
-                                this->searchQueue.yQueue[this->searchQueue.writeIndex] = *psVar6 + sVar2;
+                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                          .short_.xOffset
+                                    + sVar1;
+                                this->searchQueue.yQueue[this->searchQueue.writeIndex]
+                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                          .short_.yOffset
+                                    + sVar2;
                                 this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _nextCandidate;
                                 this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
                                 if (0x13a0f < this->searchQueue.writeIndex) {
@@ -160,9 +164,8 @@ namespace Map {
                                 }
                             }
                         }
-                        paiVar4 = (int (*)[8])(*paiVar4 + 2);
-                        psVar6 = psVar6 + 8;
-                    } while ((int)psVar6 < 0xb4908c);
+                    }
+
                     this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
                     if (0x13a0f < this->searchQueue.readIndex) {
                         this->searchQueue.readIndex = 0;
