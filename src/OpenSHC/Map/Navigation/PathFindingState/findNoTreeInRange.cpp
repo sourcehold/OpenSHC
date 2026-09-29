@@ -64,7 +64,8 @@ namespace Map {
                         /*
                           for each direction, do:
                          */
-                        int _candidate = DAT_TileMapState::instance.directionTranslationMatrix[sVar1][_direction] + _tile;
+                        int _candidate
+                            = DAT_TileMapState::instance.directionTranslationMatrix[sVar1][_direction] + _tile;
                         if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration) {
                             int _org = (int)DAT_TileMapState::instance.OrganismLayer[_candidate];
                             if ((_org == 0) || (1999 < _org)) {
@@ -75,7 +76,11 @@ namespace Map {
                                     DAT_TileMapState::instance.CertainPathLayer[_candidate]
                                         = (short)this->searchQueue.currentDistance + 1;
                                     DAT_TileMapState::instance.WalkLayer[_candidate] = (short)this->searchGeneration;
-                                    this->searchQueue.yQueue[this->searchQueue.writeIndex] = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].short_.yOffset + sVar1;
+                                    this->searchQueue.yQueue[this->searchQueue.writeIndex]
+                                        = DAT_TerrainDefinedData::instance
+                                              .clockwiseCardinalTranslationMatrix[_direction]
+                                              .short_.yOffset
+                                        + sVar1;
                                     this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
                                     this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
                                     if (0x13a0f < this->searchQueue.writeIndex) {
