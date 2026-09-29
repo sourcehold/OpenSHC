@@ -20,7 +20,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049E9E0
         void PathFindingState::updateAIZoneWithFloodFill0x20(int max, uint x, uint y)
         {
-            int _candidate;
             if (x > 399 || y > 399 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
                 return;
             }
@@ -56,7 +55,8 @@ namespace Map {
                           edge-ness of the candidate !?
                          */
                         if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x30) == 0) {
-                            _candidate = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][iVar3] + _tile;
+                            int _candidate
+                                = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][iVar3] + _tile;
                             if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration) {
                                 DAT_TileMapState::instance.CertainPathLayer[_candidate]
                                     = (short)this->searchQueue.currentDistance + 1;
