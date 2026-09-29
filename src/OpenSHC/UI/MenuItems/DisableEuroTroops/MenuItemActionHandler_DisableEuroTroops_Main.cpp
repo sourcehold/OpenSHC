@@ -19,7 +19,8 @@ namespace UI {
             {
                 // indexes the seven barracks troop flags that directly precede SEC_MercRecruitable
                 if ((uint)troopIndex <= 7) {
-                    DAT_MapPropertiesState::instance.SEC_MercRecruitable[troopIndex - 7] ^= 1;
+                    DAT_MapPropertiesState::instance.barracksRecruitability.array.barracksRecruitability[troopIndex]
+                        ^= 1;
                     return;
                 }
                 if (troopIndex == -3) {

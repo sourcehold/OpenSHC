@@ -12,10 +12,6 @@ namespace Map {
     using OpenSHC::Map::Buildings::BuildingLogicalState;
     using OpenSHC::Map::Buildings::BuildingType;
 
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
-
     // FUNCTION: STRONGHOLDCRUSADER 0x0041A2B0
     void Version::SetDairyCheeseToZero()
     {
