@@ -36,8 +36,7 @@ namespace Map {
             this->searchQueue.currentDistance = 1;
             this->searchQueue.yQueue[0] = (short)y;
             this->searchQueue.xQueue[0] = (short)x;
-            this->searchQueue.tilesQueue[0]
-                = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+            this->searchQueue.tilesQueue[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
             DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
             ushort uVar1 = DAT_TileMapState::instance.PathConnectionLayer[this->searchQueue.tilesQueue[0]];
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
@@ -125,7 +124,7 @@ namespace Map {
             DAT_TileMapState::instance.forceUpdateTextureTilemap = 1;
             DAT_TileMapState::instance.forceUpdateGFXLayers = 1;
             return;
-}
+        }
 
     }
 }
