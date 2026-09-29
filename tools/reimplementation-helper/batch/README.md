@@ -12,7 +12,7 @@ rewrite sources, because the Visual Studio bundled one is too old for `.clang-fo
 
 | Script | Purpose |
 |---|---|
-| `build_quiet.py [--keep-going]` | `build.bat RelWithDebInfo OpenSHC.dll`, prints only errors and `BUILD_OK`/`BUILD_FAIL` (build.bat exits 0 even on errors). |
+| `build_quiet.py [--keep-going]` | `build.bat RelWithDebInfo OpenSHC.dll`, prints only errors and `BUILD_OK`/`BUILD_FAIL` (build.bat exits 0 even on errors). Retries once on a PDB server error, see the note below. |
 | `syntax_check.py [substr...]` | `cl /Zs` every (matching) list file serially; finds all compile errors in one pass without linking. |
 | `reccmp_report.py [--run] pct\|save\|cmp\|diff` | Match % and *normalized* % (call/tail-jump targets and resolver addresses ignored) per function, snapshots, before/after comparison, compact asm diffs. |
 | `orig_asm.py NAME [--both\|--stats]` | The **original** instruction stream of one function (not the interleaved diff), in address order; `--stats` reports the tells that decide how to reimplement it: `mov reg, 0` (handwritten asm), frame pointer (built /Od), frame size, jump tables. |
@@ -92,3 +92,10 @@ bugs that Ghidra had decompiled wrongly.
 - A file whose `// FUNCTION:` address has no reccmp entry is reported as `--` / skipped.
   Check the address against `src/precomp/addresses-SHC-3BB0A8C1.hpp`.
 - Sources are always written as UTF-8 with LF line endings.
+- Every script that runs `cl.exe` sets this worktree's own `_MSPDBSRV_ENDPOINT_`
+  (`common.build_env`), the same name `build.bat` derives. `mspdbsrv.exe` is a per-user
+  singleton keyed on that endpoint and each worktree carries its own toolchain copy, so a
+  shared endpoint makes `cl.exe` talk to the wrong server and fail with
+  `fatal error C1090: PDB API call failed`. `build_quiet.py` retries once after stopping
+  this worktree's `mspdbsrv.exe` (`common.kill_pdb_server`, never other worktrees'), which
+  clears a server that was already wedged before the build started.

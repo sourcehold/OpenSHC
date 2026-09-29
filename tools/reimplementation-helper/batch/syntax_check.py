@@ -12,7 +12,7 @@ import re
 import subprocess
 import sys
 
-from common import BUILD_DIR, ROOT, TMP, list_files
+from common import BUILD_DIR, ROOT, TMP, build_env, list_files
 
 commands = json.loads((BUILD_DIR / "compile_commands.json").read_text())
 template = next(c["command"] for c in commands if "OpenSHC.dll.dir" in c["command"])
@@ -30,7 +30,8 @@ for f in files:
 bat = TMP / "syntax_check.bat"
 bat.write_text("\n".join(lines) + "\n")
 
-result = subprocess.run(["cmd", "/c", str(bat.resolve())], capture_output=True, text=True)
+result = subprocess.run(["cmd", "/c", str(bat.resolve())], capture_output=True, text=True,
+                        env=build_env())
 errors = [l for l in (result.stdout + result.stderr).splitlines() if " error " in l or "fatal" in l]
 for line in errors:
     print(re.sub(r"^.*src.OpenSHC.", "", line)[:260])

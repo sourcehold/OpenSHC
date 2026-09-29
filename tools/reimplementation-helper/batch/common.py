@@ -27,6 +27,36 @@ TMP.mkdir(parents=True, exist_ok=True)
 DIFF_JSON = Path("reccmp/dll/diff.json")
 
 FUNCTION_RE = re.compile(r"//\s*FUNCTION:\s*STRONGHOLDCRUSADER\s+(0x[0-9A-Fa-f]+)")
+# ---------------------------------------------------------------- pdb server
+
+# mspdbsrv.exe is a per-user singleton keyed on _MSPDBSRV_ENDPOINT_, and every worktree carries its
+# own copy of the toolchain. Sharing one endpoint makes cl.exe talk to whichever copy started first
+# and fail with "fatal error C1090: PDB API call failed, error code '23'" (or C1033). build.bat
+# derives this same name, so setting it here keeps the two in step and also covers the scripts that
+# drive cl.exe or cmake directly instead of going through build.bat.
+PDB_ENDPOINT = "openshc_" + ROOT.name
+PDB_ERROR_RE = re.compile(r"fatal error C10(90|33)")
+
+
+def build_env():
+    """Environment for anything that runs cl.exe, with this worktree's PDB endpoint."""
+    env = dict(os.environ)
+    env.setdefault("_MSPDBSRV_ENDPOINT_", PDB_ENDPOINT)
+    return env
+
+
+def kill_pdb_server():
+    """Stop this worktree's mspdbsrv.exe only.
+
+    Killing every instance by image name takes down the PDB server of any other worktree that is
+    building at the same time and fails their build with the same C1090.
+    """
+    subprocess.run(["powershell", "-NoProfile", "-Command",
+                    "Get-Process mspdbsrv -ErrorAction SilentlyContinue | "
+                    "Where-Object { $_.Path -like '%s*' } | "
+                    "Stop-Process -Force -ErrorAction SilentlyContinue"
+                    % str(ROOT).replace("'", "''")],
+                   capture_output=True)
 
 
 def list_files(existing_only=True):
