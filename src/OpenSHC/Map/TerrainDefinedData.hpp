@@ -58,7 +58,9 @@ namespace Map {
         XYPair field370_0x5cc; // 0x000005CC length: 8
         undefined1 padding_0x5d4[184]; // 0x000005D4 length: 184
         XYPair field555_0x68c; // 0x0000068C length: 8
-        undefined1 padding_0x694[440]; // 0x00000694 length: 440
+        undefined1 padding_0x694[308]; // 0x00000694 length: 308
+        int field600_0x7c8[32]; // 0x000007C8 length: 128
+        undefined1 padding_0x848[4]; // 0x00000848 length: 4
         int field996_0x84c[25]; // 0x0000084C length: 100
         undefined1 padding_0x8b0[4]; // 0x000008B0 length: 4
         int field1001_0x8b4[25]; // 0x000008B4 length: 100
