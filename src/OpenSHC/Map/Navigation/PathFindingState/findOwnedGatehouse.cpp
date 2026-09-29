@@ -69,8 +69,7 @@ namespace Map {
                             == 0) {
                             _building = DAT_TileMapState::instance.BuildingLayer[_candidate];
                             if (_building != 0
-                                && (int)(short)DAT_BuildingsState::instance.buildings[_building].buildingType - 45
-                                    < 2
+                                && (int)(short)DAT_BuildingsState::instance.buildings[_building].buildingType - 45 < 2
                                 && DAT_BuildingsState::instance.buildings[_building].owner == playerID) {
                                 /*
                                   if gate house from player
@@ -106,7 +105,7 @@ namespace Map {
                 if (0x13a0f < this->searchQueue.readIndex) {
                     this->searchQueue.readIndex = 0;
                 }
-                }
+            }
             return (dword)(0);
         }
 
