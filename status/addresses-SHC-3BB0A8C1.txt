@@ -49303,83 +49303,83 @@ SHC_3BB0A8C1_0x0052E120 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0052E1A0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0052E7B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0052E7B0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0052E830 | 0.0% | Pending
+SHC_3BB0A8C1_0x0052E830 | 89.5% | orig walks unit ptr
 
-SHC_3BB0A8C1_0x0052E960 | 0.0% | Pending
+SHC_3BB0A8C1_0x0052E960 | 87.9% | reg alloc
 
-SHC_3BB0A8C1_0x0052EC10 | 0.0% | Pending
+SHC_3BB0A8C1_0x0052EC10 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0052EDC0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0052EDC0 | 62.1% | reg alloc, edi save site
 
-SHC_3BB0A8C1_0x0052EED0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0052EED0 | 80.0% | orig caches unitType local
 
-SHC_3BB0A8C1_0x0052F010 | 0.0% | Pending
+SHC_3BB0A8C1_0x0052F010 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0052F070 | 0.0% | Pending
+SHC_3BB0A8C1_0x0052F070 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0052F0A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0052F0A0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0052F0D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0052F0D0 | 41.0% | branch shape differs
 
-SHC_3BB0A8C1_0x0052F260 | 0.0% | Pending
+SHC_3BB0A8C1_0x0052F260 | 19.3% | loop shape differs
 
-SHC_3BB0A8C1_0x0052F440 | 0.0% | Pending
+SHC_3BB0A8C1_0x0052F440 | 66.7% | loop shape differs
 
 SHC_3BB0A8C1_0x0052F4A0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0052F4E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0052F4E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0052F550 | 0.0% | Pending
+SHC_3BB0A8C1_0x0052F550 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0052F570 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0052F5B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0052F5B0 | 24.6% | orig fully unrolled x4
 
-SHC_3BB0A8C1_0x0052F680 | 0.0% | Pending
+SHC_3BB0A8C1_0x0052F680 | 58.3% | branch shape differs
 
 SHC_3BB0A8C1_0x0052F6C0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0052F730 | 0.0% | Pending
+SHC_3BB0A8C1_0x0052F730 | 82.8% | reg alloc
 
-SHC_3BB0A8C1_0x0052F7E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0052F7E0 | 26.4% | reg alloc, band order
 
-SHC_3BB0A8C1_0x0052FBB0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0052FBB0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0052FBF0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0052FBF0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0052FC30 | 0.0% | Pending
+SHC_3BB0A8C1_0x0052FC30 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0052FCA0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0052FCA0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0052FD00 | 0.0% | Pending
+SHC_3BB0A8C1_0x0052FD00 | 90.1% | reg alloc
 
-SHC_3BB0A8C1_0x0052FE00 | 0.0% | Pending
+SHC_3BB0A8C1_0x0052FE00 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0052FE90 | 0.0% | Pending
+SHC_3BB0A8C1_0x0052FE90 | 81.9% | orig caches dir in locals
 
-SHC_3BB0A8C1_0x0052FF80 | 0.0% | Pending
+SHC_3BB0A8C1_0x0052FF80 | 67.5% | orig caches dir in locals
 
-SHC_3BB0A8C1_0x00530080 | 0.0% | Pending
+SHC_3BB0A8C1_0x00530080 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005300B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005300B0 | 26.2% | Style pass, asm differs
 
-SHC_3BB0A8C1_0x005301F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005301F0 | 96.0% | reg alloc differs
 
 SHC_3BB0A8C1_0x00530210 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00530240 | 0.0% | Pending
+SHC_3BB0A8C1_0x00530240 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005302B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005302B0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00530310 | 0.0% | Pending
+SHC_3BB0A8C1_0x00530310 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00530390 | 0.0% | Pending
+SHC_3BB0A8C1_0x00530390 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005303B0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00530400 | 0.0% | Pending
+SHC_3BB0A8C1_0x00530400 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005304B4 | 0.0% | Pending
 
@@ -49501,7 +49501,7 @@ SHC_3BB0A8C1_0x005304F4 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x005304F5 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00530500 | 0.0% | Pending
+SHC_3BB0A8C1_0x00530500 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00530608 | 0.0% | Pending
 
@@ -49623,7 +49623,7 @@ SHC_3BB0A8C1_0x00530648 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00530649 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00530650 | 0.0% | Pending
+SHC_3BB0A8C1_0x00530650 | 83.9% | reg alloc
 
 SHC_3BB0A8C1_0x00530690 | 0.0% | Pending
 
@@ -49633,9 +49633,9 @@ SHC_3BB0A8C1_0x00530760 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x005307B0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00530880 | 0.0% | Pending
+SHC_3BB0A8C1_0x00530880 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005308F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005308F0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00530990 | 0.0% | Pending
 
@@ -49659,13 +49659,13 @@ SHC_3BB0A8C1_0x00530EB0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00530F20 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00530FD0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00530FD0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00531000 | 0.0% | Pending
+SHC_3BB0A8C1_0x00531000 | 38.3% | reg alloc, branch order
 
-SHC_3BB0A8C1_0x005311F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005311F0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00531220 | 0.0% | Pending
+SHC_3BB0A8C1_0x00531220 | 44.0% | block order, reg alloc
 
 SHC_3BB0A8C1_0x00531814 | 0.0% | Pending
 
@@ -50075,7 +50075,7 @@ SHC_3BB0A8C1_0x00531914 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00531915 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00531920 | 0.0% | Pending
+SHC_3BB0A8C1_0x00531920 | 28.7% | extra spills, frame size
 
 SHC_3BB0A8C1_0x005323C0 | 0.0% | Pending
 
@@ -50331,7 +50331,7 @@ SHC_3BB0A8C1_0x0053245D | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0053245E | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00532460 | 0.0% | Pending
+SHC_3BB0A8C1_0x00532460 | 75.8% | reg alloc
 
 SHC_3BB0A8C1_0x005326A8 | 0.0% | Pending
 
@@ -50459,7 +50459,7 @@ SHC_3BB0A8C1_0x005326F1 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x005326F2 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00532700 | 0.0% | Pending
+SHC_3BB0A8C1_0x00532700 | 55.2% | orig dups call per branch
 
 SHC_3BB0A8C1_0x00532B40 | 0.0% | Pending
 
@@ -50509,7 +50509,7 @@ SHC_3BB0A8C1_0x00532B98 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00532B9C | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00532BA0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00532BA0 | 50.3% | reg alloc
 
 SHC_3BB0A8C1_0x00532F10 | 0.0% | Pending
 
@@ -50643,15 +50643,15 @@ SHC_3BB0A8C1_0x00532F5D | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00532F5E | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00532F60 | 0.0% | Pending
+SHC_3BB0A8C1_0x00532F60 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00532F80 | 0.0% | Pending
+SHC_3BB0A8C1_0x00532F80 | 43.3% | block order, spills
 
 SHC_3BB0A8C1_0x00533010 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00533090 | 0.0% | Pending
+SHC_3BB0A8C1_0x00533090 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005330A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005330A0 | 81.6% | switch fallthrough differs
 
 SHC_3BB0A8C1_0x00533474 | 0.0% | Pending
 
@@ -50669,31 +50669,31 @@ SHC_3BB0A8C1_0x0053348C | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00533490 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x005334A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005334A0 | 41.2% | orig caches unitType local
 
-SHC_3BB0A8C1_0x00533580 | 0.0% | Pending
+SHC_3BB0A8C1_0x00533580 | 24.5% | orig caches locals
 
-SHC_3BB0A8C1_0x00533630 | 0.0% | Pending
+SHC_3BB0A8C1_0x00533630 | 42.3% | reg alloc
 
-SHC_3BB0A8C1_0x00533810 | 0.0% | Pending
+SHC_3BB0A8C1_0x00533810 | 80.3% | orig walks matrix row ptr
 
-SHC_3BB0A8C1_0x00533920 | 0.0% | Pending
+SHC_3BB0A8C1_0x00533920 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00533960 | 0.0% | Pending
+SHC_3BB0A8C1_0x00533960 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005339A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005339A0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005339F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005339F0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00533A10 | 0.0% | Pending
+SHC_3BB0A8C1_0x00533A10 | 29.5% | reg alloc
 
-SHC_3BB0A8C1_0x00533B30 | 0.0% | Pending
+SHC_3BB0A8C1_0x00533B30 | 70.1% | orig caches x/y in locals
 
-SHC_3BB0A8C1_0x00533C70 | 0.0% | Pending
+SHC_3BB0A8C1_0x00533C70 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00533CA0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00533CA0 | 90.9% | loop exit shape differs
 
-SHC_3BB0A8C1_0x00533D50 | 0.0% | Pending
+SHC_3BB0A8C1_0x00533D50 | 39.4% | reg alloc
 
 SHC_3BB0A8C1_0x00533F48 | 0.0% | Pending
 
@@ -50777,11 +50777,11 @@ SHC_3BB0A8C1_0x00533F84 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00533F85 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00533F90 | 0.0% | Pending
+SHC_3BB0A8C1_0x00533F90 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00533FC0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00533FC0 | 70.8% | branch shape differs
 
-SHC_3BB0A8C1_0x00534030 | 0.0% | Pending
+SHC_3BB0A8C1_0x00534030 | 55.8% | switch shape differs
 
 SHC_3BB0A8C1_0x005340CC | 0.0% | Pending
 
@@ -50797,31 +50797,31 @@ SHC_3BB0A8C1_0x005340E0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x005340E4 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x005340F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005340F0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00534130 | 0.0% | Pending
+SHC_3BB0A8C1_0x00534130 | 79.7% | reg alloc differs
 
-SHC_3BB0A8C1_0x00534240 | 0.0% | Pending
+SHC_3BB0A8C1_0x00534240 | 29.0% | orig walks matrix row ptrs
 
-SHC_3BB0A8C1_0x00534380 | 0.0% | Pending
+SHC_3BB0A8C1_0x00534380 | 77.6% | orig walks matrix row ptr
 
 SHC_3BB0A8C1_0x005343C0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x005343F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005343F0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00534460 | 0.0% | Pending
+SHC_3BB0A8C1_0x00534460 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00534490 | 0.0% | Pending
+SHC_3BB0A8C1_0x00534490 | 20.4% | spills base+tile, word OR
 
-SHC_3BB0A8C1_0x00534520 | 0.0% | Pending
+SHC_3BB0A8C1_0x00534520 | 22.2% | spills base+tile to stack
 
-SHC_3BB0A8C1_0x005345A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005345A0 | 61.7% | orig walks unit ptr
 
 SHC_3BB0A8C1_0x005345D0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x005346D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005346D0 | 32.1% | orig walks unit ptr
 
-SHC_3BB0A8C1_0x005347E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005347E0 | 61.8% | cases 1-8 dead in binary
 
 SHC_3BB0A8C1_0x00534880 | 0.0% | Pending
 
@@ -50845,25 +50845,25 @@ SHC_3BB0A8C1_0x00534D08 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00534D0C | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00534D10 | 0.0% | Pending
+SHC_3BB0A8C1_0x00534D10 | 89.0% | reg alloc differs
 
 SHC_3BB0A8C1_0x00534D80 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00534EE0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00534EE0 | 88.1% | reg alloc differs
 
 SHC_3BB0A8C1_0x00534F50 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x005350B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005350B0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00535150 | 0.0% | Pending
+SHC_3BB0A8C1_0x00535150 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00535190 | 0.0% | Pending
+SHC_3BB0A8C1_0x00535190 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005351C0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005351C0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00535200 | 0.0% | Pending
+SHC_3BB0A8C1_0x00535200 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00535240 | 0.0% | Pending
+SHC_3BB0A8C1_0x00535240 | 75.5% | switch case order
 
 SHC_3BB0A8C1_0x00535460 | 0.0% | Pending
 
@@ -51065,93 +51065,93 @@ SHC_3BB0A8C1_0x00535513 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00535514 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00535520 | 0.0% | Pending
+SHC_3BB0A8C1_0x00535520 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00535550 | 0.0% | Pending
+SHC_3BB0A8C1_0x00535550 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00535560 | 0.0% | Pending
+SHC_3BB0A8C1_0x00535560 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00535580 | 0.0% | Pending
+SHC_3BB0A8C1_0x00535580 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005355E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005355E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00535680 | 0.0% | Pending
+SHC_3BB0A8C1_0x00535680 | 23.7% | guard order differs
 
-SHC_3BB0A8C1_0x00535700 | 0.0% | Pending
+SHC_3BB0A8C1_0x00535700 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00535730 | 0.0% | Pending
+SHC_3BB0A8C1_0x00535730 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005357E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005357E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00535810 | 0.0% | Pending
+SHC_3BB0A8C1_0x00535810 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00535840 | 0.0% | Pending
+SHC_3BB0A8C1_0x00535840 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00535870 | 0.0% | Pending
+SHC_3BB0A8C1_0x00535870 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005358C0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005358C0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00535910 | 0.0% | Pending
+SHC_3BB0A8C1_0x00535910 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00535980 | 0.0% | Pending
+SHC_3BB0A8C1_0x00535980 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005359C0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005359C0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00535A30 | 0.0% | Pending
+SHC_3BB0A8C1_0x00535A30 | 67.7% | call+reg alloc differs
 
-SHC_3BB0A8C1_0x00535B00 | 0.0% | Pending
+SHC_3BB0A8C1_0x00535B00 | 61.8% | call+reg alloc differs
 
-SHC_3BB0A8C1_0x00535BC0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00535BC0 | 57.9% | Style pass, asm differs
 
-SHC_3BB0A8C1_0x00535DF0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00535DF0 | 46.1% | call+reg alloc differs
 
-SHC_3BB0A8C1_0x00535E20 | 0.0% | Pending
+SHC_3BB0A8C1_0x00535E20 | 65.1% | reg alloc
 
-SHC_3BB0A8C1_0x00535FD0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00535FD0 | 88.9% | orig walks hotkey ptr
 
-SHC_3BB0A8C1_0x005360A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005360A0 | 90.5% | orig unrolls inner loop x5
 
-SHC_3BB0A8C1_0x00536190 | 0.0% | Pending
+SHC_3BB0A8C1_0x00536190 | 72.4% | incr scheduled before call
 
-SHC_3BB0A8C1_0x005361F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005361F0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00536260 | 0.0% | Pending
+SHC_3BB0A8C1_0x00536260 | 65.0% | type range test shape
 
 SHC_3BB0A8C1_0x00536280 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x005362F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005362F0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00536310 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00536370 | 0.0% | Pending
+SHC_3BB0A8C1_0x00536370 | 77.3% | cond order differs
 
-SHC_3BB0A8C1_0x00536400 | 0.0% | Pending
+SHC_3BB0A8C1_0x00536400 | 63.0% | loop shape
 
 SHC_3BB0A8C1_0x00536440 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x005364C0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005364C0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00536530 | 0.0% | Pending
+SHC_3BB0A8C1_0x00536530 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005365A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005365A0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00536610 | 0.0% | Pending
+SHC_3BB0A8C1_0x00536610 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00536630 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00536690 | 0.0% | Pending
+SHC_3BB0A8C1_0x00536690 | 92.1% | Style pass, asm differs
 
-SHC_3BB0A8C1_0x00536710 | 0.0% | Pending
+SHC_3BB0A8C1_0x00536710 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00536780 | 0.0% | Pending
+SHC_3BB0A8C1_0x00536780 | 32.8% | loop shape, reg alloc
 
 SHC_3BB0A8C1_0x00536860 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x005368D0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00536970 | 0.0% | Pending
+SHC_3BB0A8C1_0x00536970 | 34.1% | local loop var + reg alloc
 
-SHC_3BB0A8C1_0x005369F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005369F0 | 80.0% | switch shape differs
 
 SHC_3BB0A8C1_0x00536A34 | 0.0% | Pending
 
@@ -51201,69 +51201,69 @@ SHC_3BB0A8C1_0x00536A50 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00536A51 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00536A60 | 0.0% | Pending
+SHC_3BB0A8C1_0x00536A60 | 87.3% | array init loop differs
 
-SHC_3BB0A8C1_0x00536C70 | 0.0% | Pending
+SHC_3BB0A8C1_0x00536C70 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00536C90 | 0.0% | Pending
+SHC_3BB0A8C1_0x00536C90 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00536CC0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00536CC0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00536CF0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00536CF0 | 52.2% | branch order differs
 
 SHC_3BB0A8C1_0x00536DA0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00536DE0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00536DE0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00536E10 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00536E30 | 0.0% | Pending
+SHC_3BB0A8C1_0x00536E30 | 34.5% | reg alloc, spill order
 
-SHC_3BB0A8C1_0x00537070 | 0.0% | Pending
+SHC_3BB0A8C1_0x00537070 | 86.4% | enum cast, reg alloc
 
-SHC_3BB0A8C1_0x005370C0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005370C0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00537100 | 0.0% | Pending
+SHC_3BB0A8C1_0x00537100 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00537130 | 0.0% | Pending
+SHC_3BB0A8C1_0x00537130 | 40.0% | param store order differs
 
-SHC_3BB0A8C1_0x00537160 | 0.0% | Pending
+SHC_3BB0A8C1_0x00537160 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005371A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005371A0 | 35.7% | param store order differs
 
-SHC_3BB0A8C1_0x005371E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005371E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005371F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005371F0 | 38.5% | reg alloc, loop shape
 
-SHC_3BB0A8C1_0x00537700 | 0.0% | Pending
+SHC_3BB0A8C1_0x00537700 | 21.1% | loop shape, spills
 
-SHC_3BB0A8C1_0x005377F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005377F0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00537840 | 0.0% | Pending
+SHC_3BB0A8C1_0x00537840 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00537880 | 0.0% | Pending
+SHC_3BB0A8C1_0x00537880 | 28.6% | retry loop shape differs
 
 SHC_3BB0A8C1_0x005378D0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x005378F0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00537A00 | 0.0% | Pending
+SHC_3BB0A8C1_0x00537A00 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00537AA0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00537AA0 | 40.0% | reg alloc
 
 SHC_3BB0A8C1_0x00537B20 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00537C10 | 0.0% | Pending
+SHC_3BB0A8C1_0x00537C10 | 60.4% | reg alloc
 
 SHC_3BB0A8C1_0x00537C90 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00537D60 | 0.0% | Pending
+SHC_3BB0A8C1_0x00537D60 | 48.7% | reg alloc
 
-SHC_3BB0A8C1_0x00537E00 | 0.0% | Pending
+SHC_3BB0A8C1_0x00537E00 | 35.2% | orig has 2 separate loops
 
-SHC_3BB0A8C1_0x00537EE0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00537EE0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00537F60 | 0.0% | Pending
+SHC_3BB0A8C1_0x00537F60 | 64.9% | LTCG edx across call
 
 SHC_3BB0A8C1_0x005388DC | 0.0% | Pending
 
@@ -59085,7 +59085,7 @@ SHC_3BB0A8C1_0x00539BD5 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00539BD6 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00539BE0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00539BE0 | 78.4% | jump table order differs
 
 SHC_3BB0A8C1_0x00539D1C | 0.0% | Pending
 
@@ -59295,7 +59295,7 @@ SHC_3BB0A8C1_0x00539DEB | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00539DEC | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00539DF0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00539DF0 | 64.7% | hist array via 1st global
 
 SHC_3BB0A8C1_0x00539FD0 | 0.0% | Pending
 
@@ -59427,7 +59427,7 @@ SHC_3BB0A8C1_0x0053A018 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0053A020 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0053A070 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053A070 | 64.0% | orig caches state local
 
 SHC_3BB0A8C1_0x0053A108 | 0.0% | Pending
 
@@ -59507,7 +59507,7 @@ SHC_3BB0A8C1_0x0053A148 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0053A149 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0053A150 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053A150 | 56.9% | reg alloc, spill order
 
 SHC_3BB0A8C1_0x0053A458 | 0.0% | Pending
 
@@ -59613,11 +59613,11 @@ SHC_3BB0A8C1_0x0053A4C0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0053A4C1 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0053A4D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053A4D0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0053A560 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053A560 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0053A5B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053A5B0 | 33.4% | arg push hoist, y cached
 
 SHC_3BB0A8C1_0x0053B1F0 | 0.0% | Pending
 
@@ -59649,15 +59649,15 @@ SHC_3BB0A8C1_0x0053B610 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0053B800 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0053B8B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053B8B0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0053B8E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053B8E0 | 86.9% | reg alloc
 
-SHC_3BB0A8C1_0x0053BB10 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053BB10 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0053BB70 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053BB70 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0053BB90 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053BB90 | 60.0% | one read via global inst
 
 SHC_3BB0A8C1_0x0053BC20 | 0.0% | Pending
 
@@ -59671,9 +59671,9 @@ SHC_3BB0A8C1_0x0053C590 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0053CAC0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0053CAE0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053CAE0 | 48.6% | reg alloc
 
-SHC_3BB0A8C1_0x0053CBD0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053CBD0 | 42.5% | reg alloc, spill order
 
 SHC_3BB0A8C1_0x0053CF84 | 0.0% | Pending
 
@@ -59923,7 +59923,7 @@ SHC_3BB0A8C1_0x0053D022 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0053D023 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0053D030 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053D030 | 42.9% | branch shape differs
 
 SHC_3BB0A8C1_0x0053D388 | 0.0% | Pending
 
@@ -60013,13 +60013,13 @@ SHC_3BB0A8C1_0x0053D3C1 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0053D3C2 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0053D3D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053D3D0 | 36.1% | reg alloc, spill order
 
-SHC_3BB0A8C1_0x0053D850 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053D850 | 69.8% | reg alloc differs
 
-SHC_3BB0A8C1_0x0053D900 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053D900 | 68.8% | orig caches x/y in locals
 
-SHC_3BB0A8C1_0x0053D9C0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053D9C0 | 25.8% | reg alloc, hoisted loads
 
 SHC_3BB0A8C1_0x0053DC9C | 0.0% | Pending
 
@@ -60035,9 +60035,9 @@ SHC_3BB0A8C1_0x0053DCB0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0053DCB4 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0053DCC0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053DCC0 | 25.4% | reg alloc
 
-SHC_3BB0A8C1_0x0053DDD0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053DDD0 | 65.5% | orig unrolls scan loop x4
 
 SHC_3BB0A8C1_0x0053E330 | 0.0% | Pending
 
@@ -60083,23 +60083,23 @@ SHC_3BB0A8C1_0x0053E380 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0053E384 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0053E390 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053E390 | 55.2% | version ladder shape
 
-SHC_3BB0A8C1_0x0053E440 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053E440 | 46.1% | orig walks unit ptr
 
-SHC_3BB0A8C1_0x0053E6C0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053E6C0 | 83.7% | branch shape differs
 
-SHC_3BB0A8C1_0x0053E790 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053E790 | 36.4% | orig uses global instance
 
-SHC_3BB0A8C1_0x0053E820 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053E820 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0053E870 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053E870 | 85.7% | reg alloc differs
 
-SHC_3BB0A8C1_0x0053E8D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053E8D0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0053E900 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053E900 | 87.0% | reg alloc
 
-SHC_3BB0A8C1_0x0053E9F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0053E9F0 | 56.8% | orig caches x/y in locals
 
 SHC_3BB0A8C1_0x0053EAA0 | 0.0% | Pending
 
@@ -60243,7 +60243,7 @@ SHC_3BB0A8C1_0x0053F930 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0053F940 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00540040 | 0.0% | Pending
+SHC_3BB0A8C1_0x00540040 | 49.8% | orig caches locals
 
 SHC_3BB0A8C1_0x0054019C | 0.0% | Pending
 
@@ -61405,11 +61405,11 @@ SHC_3BB0A8C1_0x00549B24 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00549B30 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00549C70 | 0.0% | Pending
+SHC_3BB0A8C1_0x00549C70 | 29.2% | mask reg alloc, frame ptr
 
-SHC_3BB0A8C1_0x0054A770 | 0.0% | Pending
+SHC_3BB0A8C1_0x0054A770 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0054A7B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0054A7B0 | 34.3% | reg alloc, spill order
 
 SHC_3BB0A8C1_0x0054AA40 | 0.0% | Pending
 
@@ -61833,7 +61833,7 @@ SHC_3BB0A8C1_0x0054B0CB | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0054B0CC | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0054B0D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0054B0D0 | 39.3% | 2-reg addressing, reg alloc
 
 SHC_3BB0A8C1_0x0054BE04 | 0.0% | Pending
 
@@ -62501,13 +62501,13 @@ SHC_3BB0A8C1_0x0054BFB2 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0054BFB3 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0054BFC0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0054BFC0 | 46.1% | branch shape differs
 
-SHC_3BB0A8C1_0x0054C1C0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0054C1C0 | 32.5% | reg alloc
 
-SHC_3BB0A8C1_0x0054C4F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0054C4F0 | 14.0% | orig walks matrix row ptr
 
-SHC_3BB0A8C1_0x0054C610 | 0.0% | Pending
+SHC_3BB0A8C1_0x0054C610 | 72.7% | call+reg alloc differs
 
 SHC_3BB0A8C1_0x0054C710 | 0.0% | Pending
 
@@ -66971,7 +66971,7 @@ SHC_3BB0A8C1_0x00578370 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00578B40 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00578C40 | 0.0% | Pending
+SHC_3BB0A8C1_0x00578C40 | 59.7% | branch shape differs
 
 SHC_3BB0A8C1_0x00578D90 | 0.0% | Pending
 
@@ -66991,7 +66991,7 @@ SHC_3BB0A8C1_0x005792F8 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x005792FC | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00579300 | 0.0% | Pending
+SHC_3BB0A8C1_0x00579300 | 35.2% | reg alloc, dup tails
 
 SHC_3BB0A8C1_0x00579380 | 0.0% | Pending
 
