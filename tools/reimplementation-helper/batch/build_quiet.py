@@ -18,6 +18,11 @@ different causes:
 
 The second cost six consecutive builds once, across a regenerated PCH and PDBs, while the same tree
 built first try under a different endpoint name.
+
+A build that fails without naming any source line gets one more plain retry. cmake's glob
+verification dies with an access violation ("Access violation" + U1077 return code 0xffffffff) on the
+first build after cmake/openshc-sources.txt.local changes, which is every first build of a new
+selection; the reconfigure crashed, not the compile, and a plain re-run succeeds.
 """
 
 import argparse
@@ -60,11 +65,25 @@ if PDB_ERROR_RE.search(text):
     kill_pdb_server()
     text = run_build(endpoint)
 
-errors = [line for line in text.splitlines()
-          if re.search(r" error |warning C4700|warning C4715", line) and "U1077" not in line]
+def compile_errors(text):
+    return [line for line in text.splitlines()
+            if re.search(r" error |warning C4700|warning C4715", line) and "U1077" not in line]
+
+
+def failing(text):
+    return bool(re.search(r" error |U1077", text))
+
+
+if failing(text) and not compile_errors(text):
+    # Nothing named a source line, so the compile is not what failed: cmake's glob verification
+    # crashed during the reconfigure. It succeeds on a plain re-run.
+    print("note: build failed without a compiler error, retrying once", file=sys.stderr)
+    text = run_build()
+
+errors = compile_errors(text)
 for line in errors[:args.max]:
     print(re.sub(r"^.*src.OpenSHC.", "", line))
-failed = bool(re.search(r" error |U1077", text))
+failed = failing(text)
 print("BUILD_FAIL" if failed else "BUILD_OK")
 # exit non-zero so `build_quiet.py && reccmp_report.py ...` stops here: a failed build
 # leaves the previous DLL in place and reccmp would happily report on the old code
