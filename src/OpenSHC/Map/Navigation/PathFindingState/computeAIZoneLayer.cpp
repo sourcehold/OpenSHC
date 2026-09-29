@@ -123,8 +123,8 @@ namespace Map {
                                   Calculate Y offset for this direction
                                  */
                                 _directionOffset
-                                    = *(short*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
-                                        + _direction * 8 + 4);
+                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                          .short_.yOffset;
                                 /*
                                   Mark tile as part of AI zone (value 1 = directly accessible)
                                  */
