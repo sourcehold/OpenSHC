@@ -126,9 +126,10 @@ namespace Map {
                         _buildingID = DAT_TileMapState::instance.BuildingLayer[_currentTile];
                         _logical = DAT_TileMapState::instance.LogicLayer[_currentTile];
                         int _direction = 0;
-                        piVar2 = DAT_TileMapState::instance.directionTranslationMatrix[_currentY] + 1;
                         do {
-                            _nextTileOption = (*(int (*)[8])(piVar2 + -1))[0] + _currentTile;
+                            _nextTileOption
+                                = DAT_TileMapState::instance.directionTranslationMatrix[_currentY][_direction]
+                                + _currentTile;
                             /*
                               0x4a5014b1 == check against walkable tiles including keep, walls, and   gatehouses
                              */
@@ -158,7 +159,9 @@ namespace Map {
                                     this->searchQueue.writeIndex = 0;
                                 }
                             }
-                            _nextTileOption = *piVar2 + _currentTile;
+                            _nextTileOption
+                                = DAT_TileMapState::instance.directionTranslationMatrix[_currentY][_direction + 1]
+                                + _currentTile;
                             if (DAT_TileMapState::instance.WalkLayer[_nextTileOption] != this->searchGeneration
                                 && (DAT_TileMapState::instance.PathLinkageLayer[_currentTile]
                                        & DAT_ClimbLogicDefinedData::instance
@@ -183,7 +186,9 @@ namespace Map {
                                     this->searchQueue.writeIndex = 0;
                                 }
                             }
-                            _nextTileOption = piVar2[1] + _currentTile;
+                            _nextTileOption
+                                = DAT_TileMapState::instance.directionTranslationMatrix[_currentY][_direction + 2]
+                                + _currentTile;
                             if (DAT_TileMapState::instance.WalkLayer[_nextTileOption] != this->searchGeneration
                                 && ((DAT_TileMapState::instance.PathLinkageLayer[_currentTile]
                                         & DAT_ClimbLogicDefinedData::instance
@@ -213,7 +218,9 @@ namespace Map {
                                     this->searchQueue.writeIndex = 0;
                                 }
                             }
-                            _nextTileOption = piVar2[2] + _currentTile;
+                            _nextTileOption
+                                = DAT_TileMapState::instance.directionTranslationMatrix[_currentY][_direction + 3]
+                                + _currentTile;
                             if (DAT_TileMapState::instance.WalkLayer[_nextTileOption] != this->searchGeneration
                                 && (DAT_TileMapState::instance.PathLinkageLayer[_currentTile]
                                        & DAT_ClimbLogicDefinedData::instance
@@ -239,7 +246,6 @@ namespace Map {
                                 }
                             }
                             _direction = _direction + 4;
-                            piVar2 = piVar2 + 4;
                         } while (_direction < 8);
                         this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
                         if (0x13a0f < this->searchQueue.readIndex) {
