@@ -330,7 +330,7 @@ namespace Rendering {
 
         this->viewportState.field21_0x54 = 0;
         if (hoveredBuildingID == -1) {
-            if (-1 < hoveredGateTile) {
+            if (-1 <= hoveredGateTile) {
                 this->viewportState.mouseRayBuildingID = 0;
                 this->viewportState.field21_0x54 = hoveredGateTile;
             }
