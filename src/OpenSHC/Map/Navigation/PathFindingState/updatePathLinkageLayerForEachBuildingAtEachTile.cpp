@@ -16,8 +16,8 @@ namespace Map {
         {
             for (int _tileIndex = 0; _tileIndex < 80400; _tileIndex = _tileIndex + 1) {
                 MACRO_CALL_MEMBER(
-                OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkageLayerBasedOnBuildingsUnk, this)(
-                (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tileIndex], _tileIndex);
+                    OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkageLayerBasedOnBuildingsUnk, this)(
+                    (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tileIndex], _tileIndex);
             }
             return;
         }
