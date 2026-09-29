@@ -44,71 +44,69 @@ namespace Map {
             this->searchQueue.tilesQueue[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
             DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
-            if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
+            while (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
+                _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                if ((int)_tile < 0) {
+                    return (dword)(0);
+                }
+                if (0x13a0f < (int)_tile) {
+                    return (dword)(0);
+                }
+                short sVar1 = this->searchQueue.xQueue[this->searchQueue.readIndex];
+                short sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
+                this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
+                if (0x13a10 < this->searchQueue.currentDistance) {
+                    return (dword)(0);
+                }
+                _link = DAT_TileMapState::instance.PathLinkageLayer[_tile];
+                int _direction = 0;
+                paiVar3 = DAT_TileMapState::instance.directionTranslationMatrix + sVar2;
                 do {
-                    _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
-                    if ((int)_tile < 0) {
-                        return (dword)(0);
-                    }
-                    if (0x13a0f < (int)_tile) {
-                        return (dword)(0);
-                    }
-                    short sVar1 = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                    short sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
-                    this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
-                    if (0x13a10 < this->searchQueue.currentDistance) {
-                        return (dword)(0);
-                    }
-                    _link = DAT_TileMapState::instance.PathLinkageLayer[_tile];
-                    int _direction = 0;
-                    paiVar3 = DAT_TileMapState::instance.directionTranslationMatrix + sVar2;
-                    do {
-                        int _candidate = (*paiVar3)[0] + _tile;
-                        if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration
-                            && (DAT_TileMapState::instance.LogicLayer[_candidate] & 0x30) == 0) {
-                            if ((DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction] & _link)
-                                == 0) {
-                                _building = DAT_TileMapState::instance.BuildingLayer[_candidate];
-                                if (_building != 0
-                                    && (int)(short)DAT_BuildingsState::instance.buildings[_building].buildingType - 45
-                                        < 2
-                                    && DAT_BuildingsState::instance.buildings[_building].owner == playerID) {
-                                    /*
-                                      if gate house from player
-                                     */
-                                    return (dword)(_tile);
-                                }
-                            } else {
+                    int _candidate = (*paiVar3)[0] + _tile;
+                    if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration
+                        && (DAT_TileMapState::instance.LogicLayer[_candidate] & 0x30) == 0) {
+                        if ((DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction] & _link)
+                            == 0) {
+                            _building = DAT_TileMapState::instance.BuildingLayer[_candidate];
+                            if (_building != 0
+                                && (int)(short)DAT_BuildingsState::instance.buildings[_building].buildingType - 45
+                                    < 2
+                                && DAT_BuildingsState::instance.buildings[_building].owner == playerID) {
                                 /*
-                                  queue tiles
+                                  if gate house from player
                                  */
-                                DAT_TileMapState::instance.CertainPathLayer[_candidate]
-                                    = (short)this->searchQueue.currentDistance + 1;
-                                DAT_TileMapState::instance.WalkLayer[_candidate] = (short)this->searchGeneration;
-                                this->searchQueue.xQueue[this->searchQueue.writeIndex]
-                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
-                                          .short_.xOffset
-                                    + sVar1;
-                                this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                    = *(short*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
-                                          + _direction * 8 + 4)
-                                    + sVar2;
-                                this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
-                                this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                                if (0x13a0f < this->searchQueue.writeIndex) {
-                                    this->searchQueue.writeIndex = 0;
-                                }
+                                return (dword)(_tile);
+                            }
+                        } else {
+                            /*
+                              queue tiles
+                             */
+                            DAT_TileMapState::instance.CertainPathLayer[_candidate]
+                                = (short)this->searchQueue.currentDistance + 1;
+                            DAT_TileMapState::instance.WalkLayer[_candidate] = (short)this->searchGeneration;
+                            this->searchQueue.xQueue[this->searchQueue.writeIndex]
+                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                      .short_.xOffset
+                                + sVar1;
+                            this->searchQueue.yQueue[this->searchQueue.writeIndex]
+                                = *(short*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
+                                      + _direction * 8 + 4)
+                                + sVar2;
+                            this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
+                            this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
+                            if (0x13a0f < this->searchQueue.writeIndex) {
+                                this->searchQueue.writeIndex = 0;
                             }
                         }
-                        _direction = _direction + 1;
-                        paiVar3 = (int (*)[8])(*paiVar3 + 1);
-                    } while (_direction < 8);
-                    this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                    if (0x13a0f < this->searchQueue.readIndex) {
-                        this->searchQueue.readIndex = 0;
                     }
-                } while (this->searchQueue.readIndex != this->searchQueue.writeIndex);
-            }
+                    _direction = _direction + 1;
+                    paiVar3 = (int (*)[8])(*paiVar3 + 1);
+                } while (_direction < 8);
+                this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
+                if (0x13a0f < this->searchQueue.readIndex) {
+                    this->searchQueue.readIndex = 0;
+                }
+                }
             return (dword)(0);
         }
 
