@@ -101,8 +101,8 @@ namespace Map {
                                     = (short)this->searchQueue.currentDistance + 1;
                                 DAT_TileMapState::instance.WalkLayer[iVar5] = (short)this->searchGeneration;
                                 this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                    = *(short*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
-                                          + iVar6 * 8 + 4)
+                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar6]
+                                          .short_.yOffset
                                     + sVar3;
                                 this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar5;
                                 this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
@@ -124,8 +124,8 @@ namespace Map {
                                     = (short)this->searchQueue.currentDistance + 1;
                                 DAT_TileMapState::instance.WalkLayer[iVar5] = (short)this->searchGeneration;
                                 this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                    = *(short*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
-                                          + iVar6 * 8 + 0xc)
+                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar6 + 1]
+                                          .short_.yOffset
                                     + sVar3;
                                 this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar5;
                                 this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
@@ -147,8 +147,8 @@ namespace Map {
                                     = (short)this->searchQueue.currentDistance + 1;
                                 DAT_TileMapState::instance.WalkLayer[iVar5] = (short)this->searchGeneration;
                                 this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                    = *(short*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
-                                          + iVar6 * 8 + 0x14)
+                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar6 + 2]
+                                          .short_.yOffset
                                     + sVar3;
                                 this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar5;
                                 this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
@@ -170,8 +170,8 @@ namespace Map {
                                     = (short)this->searchQueue.currentDistance + 1;
                                 DAT_TileMapState::instance.WalkLayer[iVar5] = (short)this->searchGeneration;
                                 this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                    = *(short*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
-                                          + iVar6 * 8 + 0x1c)
+                                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar6 + 3]
+                                          .short_.yOffset
                                     + sVar3;
                                 this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar5;
                                 this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
