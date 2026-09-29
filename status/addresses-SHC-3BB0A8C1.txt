@@ -44747,7 +44747,7 @@ SHC_3BB0A8C1_0x00514480 | 40.0% | logic masks merged by cl
 
 SHC_3BB0A8C1_0x00514520 | 75.3% | 75.63% spill order
 
-SHC_3BB0A8C1_0x005146D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005146D0 | 40.4% | 47.46% regalloc
 
 SHC_3BB0A8C1_0x00514BC0 | 0.0% | Pending
 
