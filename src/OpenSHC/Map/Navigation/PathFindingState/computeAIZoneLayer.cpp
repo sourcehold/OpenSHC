@@ -80,259 +80,255 @@ namespace Map {
                         === PHASE 1: FLOOD-FILL THROUGH WALKABLE/CONNECTED AREAS ===   This phase marks all tiles that
                    are directly connected via normal pathfinding
                  */
-                if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
-                    do {
+                while (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
+                    /*
+                         Save iteration counter
+                     */
+                    int iVar2 = attackedPlayerID;
+                    /*
+                            === INNER LOOP: EXPAND THROUGH CONNECTED TILES ===
+                     */
+                    this->searchQueue.previousReadIndex = this->searchQueue.readIndex;
+                    while (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                         /*
-                             Save iteration counter
+                          Get current tile being processed
                          */
-                        int iVar2 = attackedPlayerID;
+                        _candidateY = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
+                        _candidateTile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                         /*
-                                === INNER LOOP: EXPAND THROUGH CONNECTED TILES ===
+                          Check all 8 adjacent directions
                          */
-                        this->searchQueue.previousReadIndex = this->searchQueue.readIndex;
-                        if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
-                            do {
+                        _direction = 0;
+                        _pDirectionTranslation
+                            = DAT_TileMapState::instance.directionTranslationMatrix + _candidateY;
+                        do {
+                            _offsetTile = (*_pDirectionTranslation)[0] + _candidateTile;
+                            /*
+                              Add tile to AI zone if:   1. Not already marked (< 1)   2. Has path connection
+                              (PathConnectionLayer != 0)   3. Either:   a) Normal pathfinding allows movement in
+                              this direction, OR   b) There's a gate (GATEHOUSELARGE or GATEHOUSESMALL) on the
+                              tile
+                             */
+                            if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] < '\x01'
+                                && (short)DAT_TileMapState::instance.PathConnectionLayer[_offsetTile] != 0
+                                && ((DAT_TileMapState::instance.PathLinkageLayer[_candidateTile]
+                                        & DAT_ClimbLogicDefinedData::instance
+                                            .BitFlagHelperForPathLinkage[_direction])
+                                        != 0
+                                    || ((DAT_TileMapState::instance.BuildingLayer[_offsetTile] != 0
+                                        && ((_buildingType = DAT_BuildingsState::instance
+                                                 .buildings[DAT_TileMapState::instance
+                                                         .BuildingLayer[_offsetTile]]
+                                                 .buildingType,
+                                            _buildingType == OpenSHC::Map::Buildings::BT_GATEHOUSELARGE
+                                                || (_buildingType
+                                                    == OpenSHC::Map::Buildings::BT_GATEHOUSESMALL))))))) {
                                 /*
-                                  Get current tile being processed
+                                  Calculate Y offset for this direction
                                  */
-                                _candidateY = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
-                                _candidateTile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                                _directionOffset = *(short*)((int)DAT_TerrainDefinedData::instance
+                                                                 .clockwiseCardinalTranslationMatrix
+                                    + _direction * 8 + 4);
                                 /*
-                                  Check all 8 adjacent directions
+                                  Mark tile as part of AI zone (value 1 = directly accessible)
                                  */
-                                _direction = 0;
-                                _pDirectionTranslation
-                                    = DAT_TileMapState::instance.directionTranslationMatrix + _candidateY;
-                                do {
-                                    _offsetTile = (*_pDirectionTranslation)[0] + _candidateTile;
-                                    /*
-                                      Add tile to AI zone if:   1. Not already marked (< 1)   2. Has path connection
-                                      (PathConnectionLayer != 0)   3. Either:   a) Normal pathfinding allows movement in
-                                      this direction, OR   b) There's a gate (GATEHOUSELARGE or GATEHOUSESMALL) on the
-                                      tile
-                                     */
-                                    if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] < '\x01'
-                                        && (short)DAT_TileMapState::instance.PathConnectionLayer[_offsetTile] != 0
-                                        && ((DAT_TileMapState::instance.PathLinkageLayer[_candidateTile]
-                                                & DAT_ClimbLogicDefinedData::instance
-                                                    .BitFlagHelperForPathLinkage[_direction])
-                                                != 0
-                                            || ((DAT_TileMapState::instance.BuildingLayer[_offsetTile] != 0
-                                                && ((_buildingType = DAT_BuildingsState::instance
-                                                         .buildings[DAT_TileMapState::instance
-                                                                 .BuildingLayer[_offsetTile]]
-                                                         .buildingType,
-                                                    _buildingType == OpenSHC::Map::Buildings::BT_GATEHOUSELARGE
-                                                        || (_buildingType
-                                                            == OpenSHC::Map::Buildings::BT_GATEHOUSESMALL))))))) {
-                                        /*
-                                          Calculate Y offset for this direction
-                                         */
-                                        _directionOffset = *(short*)((int)DAT_TerrainDefinedData::instance
-                                                                         .clockwiseCardinalTranslationMatrix
-                                            + _direction * 8 + 4);
-                                        /*
-                                          Mark tile as part of AI zone (value 1 = directly accessible)
-                                         */
-                                        DAT_TileMapState::instance.AIZoneLayer[_offsetTile] = 1;
-                                        /*
-                                          Add to BFS queue for further expansion
-                                         */
-                                        this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                            = _directionOffset + _candidateY;
-                                        this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _offsetTile;
-                                        this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                                        if (80400 < this->searchQueue.writeIndex)
-                                            goto LAB_004a4914;
-                                    }
-                                    _direction = _direction + 1;
-                                    _pDirectionTranslation = (int (*)[8])(*_pDirectionTranslation + 1);
-                                } while (_direction < 8);
+                                DAT_TileMapState::instance.AIZoneLayer[_offsetTile] = 1;
                                 /*
-                                  Move to next tile in queue
+                                  Add to BFS queue for further expansion
                                  */
-                                this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                                if (80400 < this->searchQueue.readIndex) {
-                                    this->searchQueue.readIndex = 0;
-                                }
-                                /*
-                                  === EARLY TERMINATION CONDITIONS ===   If canReachKeep is set and we've marked > 2000
-                                  tiles, stop   OR if we've marked > 6000 tiles total, stop   (Performance optimization
-                                  to prevent excessive computation)
-                                 */
-                                if (((canReachKeep != 0) && (1999 < this->searchQueue.writeIndex))
-                                    || 5999 < this->searchQueue.writeIndex)
+                                this->searchQueue.yQueue[this->searchQueue.writeIndex]
+                                    = _directionOffset + _candidateY;
+                                this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _offsetTile;
+                                this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
+                                if (80400 < this->searchQueue.writeIndex)
                                     goto LAB_004a4914;
-                            } while (this->searchQueue.readIndex != this->searchQueue.writeIndex);
+                            }
+                            _direction = _direction + 1;
+                            _pDirectionTranslation = (int (*)[8])(*_pDirectionTranslation + 1);
+                        } while (_direction < 8);
+                        /*
+                          Move to next tile in queue
+                         */
+                        this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
+                        if (80400 < this->searchQueue.readIndex) {
+                            this->searchQueue.readIndex = 0;
                         }
                         /*
-                          === PHASE 2: EXPAND INTO DIFFICULT TERRAIN ===   After marking all easily accessible tiles,
-                          expand into harder-to-reach areas   with distance penalties based on terrain type
+                          === EARLY TERMINATION CONDITIONS ===   If canReachKeep is set and we've marked > 2000
+                          tiles, stop   OR if we've marked > 6000 tiles total, stop   (Performance optimization
+                          to prevent excessive computation)
                          */
-                        this->searchQueue.readIndex = this->searchQueue.previousReadIndex;
-                        this->searchQueue.nextWriteIndex = this->searchQueue.writeIndex;
-                        if (this->searchQueue.previousReadIndex != this->searchQueue.writeIndex) {
+                        if (((canReachKeep != 0) && (1999 < this->searchQueue.writeIndex))
+                            || 5999 < this->searchQueue.writeIndex)
+                            goto LAB_004a4914;
+                        }
+                    /*
+                      === PHASE 2: EXPAND INTO DIFFICULT TERRAIN ===   After marking all easily accessible tiles,
+                      expand into harder-to-reach areas   with distance penalties based on terrain type
+                     */
+                    this->searchQueue.readIndex = this->searchQueue.previousReadIndex;
+                    this->searchQueue.nextWriteIndex = this->searchQueue.writeIndex;
+                    if (this->searchQueue.previousReadIndex != this->searchQueue.writeIndex) {
+                        do {
+                            _direction = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                            /*
+                              Distance = current tile's AI zone value + 1
+                             */
+                            this->searchQueue.currentDistance
+                                = (char)DAT_TileMapState::instance.AIZoneLayer[_direction] + 1;
+                            /*
+                              Get movement direction offsets
+                             */
+                            piVar3 = DAT_TileMapState::instance.directionTranslationMatrix[this->searchQueue
+                                             .yQueue[this->searchQueue.readIndex]]
+                                + 1;
+                            /*
+                              Process tiles in groups of 4 (unrolled loop)   === PROCESS ADJACENT TILES (Unrolled
+                              loop for 4 directions at a time) ===
+                             */
+                            attackedPlayerID = 2;
                             do {
-                                _direction = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                                 /*
-                                  Distance = current tile's AI zone value + 1
+                                  === TILE 1 ===
                                  */
-                                this->searchQueue.currentDistance
-                                    = (char)DAT_TileMapState::instance.AIZoneLayer[_direction] + 1;
+                                _offsetTile = (*(int (*)[8])(piVar3 + -1))[0] + _direction;
                                 /*
-                                  Get movement direction offsets
+                                  Only process if:   1. Not already marked   2. No blocking terrain (0x31 = sea,
+                                  cliff, or border)   3. Either no building OR building allows passage (unknownFlag4
+                                  == 0)
                                  */
-                                piVar3 = DAT_TileMapState::instance.directionTranslationMatrix[this->searchQueue
-                                                 .yQueue[this->searchQueue.readIndex]]
-                                    + 1;
-                                /*
-                                  Process tiles in groups of 4 (unrolled loop)   === PROCESS ADJACENT TILES (Unrolled
-                                  loop for 4 directions at a time) ===
-                                 */
-                                attackedPlayerID = 2;
-                                do {
+                                if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] < '\x01'
+                                    && (uVar1 = DAT_TileMapState::instance.LogicLayer[_offsetTile],
+                                        (uVar1 & 0x31) == 0)
+                                    && (DAT_TileMapState::instance.BuildingLayer[_offsetTile] == 0
+                                        || (DAT_BuildingsState::instance
+                                                .buildings[DAT_TileMapState::instance.BuildingLayer[_offsetTile]]
+                                                .unknownFlag4
+                                            == '\0'))) {
                                     /*
-                                      === TILE 1 ===
+                                      === TERRAIN-BASED DISTANCE CALCULATION ===
                                      */
-                                    _offsetTile = (*(int (*)[8])(piVar3 + -1))[0] + _direction;
-                                    /*
-                                      Only process if:   1. Not already marked   2. No blocking terrain (0x31 = sea,
-                                      cliff, or border)   3. Either no building OR building allows passage (unknownFlag4
-                                      == 0)
-                                     */
-                                    if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] < '\x01'
-                                        && (uVar1 = DAT_TileMapState::instance.LogicLayer[_offsetTile],
-                                            (uVar1 & 0x31) == 0)
-                                        && (DAT_TileMapState::instance.BuildingLayer[_offsetTile] == 0
-                                            || (DAT_BuildingsState::instance
-                                                    .buildings[DAT_TileMapState::instance.BuildingLayer[_offsetTile]]
-                                                    .unknownFlag4
-                                                == '\0'))) {
+                                    if ((uVar1 & 0x100) == 0) {
                                         /*
-                                          === TERRAIN-BASED DISTANCE CALCULATION ===
+                                          Non wall Non gatehouse
                                          */
-                                        if ((uVar1 & 0x100) == 0) {
+                                        if ((uVar1 & 0x40000000) == 0 || iVar2 == 0) {
                                             /*
-                                              Non wall Non gatehouse
-                                             */
-                                            if ((uVar1 & 0x40000000) == 0 || iVar2 == 0) {
-                                                /*
-                                                  Non moat or
-                                                 */
-                                                DAT_TileMapState::instance.AIZoneLayer[_offsetTile]
-                                                    = (byte)this->searchQueue.currentDistance;
-                                            } else {
-                                                /*
-                                                  Moat discount making fortified areas closer in AI Zone calculations
-                                                 */
-                                                DAT_TileMapState::instance.AIZoneLayer[_offsetTile]
-                                                    = (byte)this->searchQueue.currentDistance - 1;
-                                            }
-                                        } else {
-                                            /*
-                                              wall or gatehouse   This makes walls, towers, and gatehouses "farther"
-                                              strategically
+                                              Non moat or
                                              */
                                             DAT_TileMapState::instance.AIZoneLayer[_offsetTile]
-                                                = (byte)this->searchQueue.currentDistance + 6;
-                                        }
-                                    }
-                                    /*
-                                      === TILE 2 (same logic as tile 1) ===
-                                     */
-                                    _offsetTile = *piVar3 + _direction;
-                                    if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] < '\x01'
-                                        && (uVar1 = DAT_TileMapState::instance.LogicLayer[_offsetTile],
-                                            (uVar1 & 0x31) == 0)
-                                        && (DAT_TileMapState::instance.BuildingLayer[_offsetTile] == 0
-                                            || (DAT_BuildingsState::instance
-                                                    .buildings[DAT_TileMapState::instance.BuildingLayer[_offsetTile]]
-                                                    .unknownFlag4
-                                                == '\0'))) {
-                                        if ((uVar1 & 0x100) == 0) {
-                                            if ((uVar1 & 0x40000000) == 0 || iVar2 == 0) {
-                                                DAT_TileMapState::instance.AIZoneLayer[_offsetTile]
-                                                    = (byte)this->searchQueue.currentDistance;
-                                            } else {
-                                                DAT_TileMapState::instance.AIZoneLayer[_offsetTile]
-                                                    = (byte)this->searchQueue.currentDistance - 1;
-                                            }
+                                                = (byte)this->searchQueue.currentDistance;
                                         } else {
+                                            /*
+                                              Moat discount making fortified areas closer in AI Zone calculations
+                                             */
                                             DAT_TileMapState::instance.AIZoneLayer[_offsetTile]
-                                                = (byte)this->searchQueue.currentDistance + 6;
+                                                = (byte)this->searchQueue.currentDistance - 1;
                                         }
+                                    } else {
+                                        /*
+                                          wall or gatehouse   This makes walls, towers, and gatehouses "farther"
+                                          strategically
+                                         */
+                                        DAT_TileMapState::instance.AIZoneLayer[_offsetTile]
+                                            = (byte)this->searchQueue.currentDistance + 6;
                                     }
-                                    /*
-                                      === TILE 3 (same logic as tile 1) ===
-                                     */
-                                    _offsetTile = piVar3[1] + _direction;
-                                    if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] < '\x01'
-                                        && (uVar1 = DAT_TileMapState::instance.LogicLayer[_offsetTile],
-                                            (uVar1 & 0x31) == 0)
-                                        && (DAT_TileMapState::instance.BuildingLayer[_offsetTile] == 0
-                                            || (DAT_BuildingsState::instance
-                                                    .buildings[DAT_TileMapState::instance.BuildingLayer[_offsetTile]]
-                                                    .unknownFlag4
-                                                == '\0'))) {
-                                        if ((uVar1 & 0x100) == 0) {
-                                            if ((uVar1 & 0x40000000) == 0 || iVar2 == 0) {
-                                                DAT_TileMapState::instance.AIZoneLayer[_offsetTile]
-                                                    = (byte)this->searchQueue.currentDistance;
-                                            } else {
-                                                DAT_TileMapState::instance.AIZoneLayer[_offsetTile]
-                                                    = (byte)this->searchQueue.currentDistance - 1;
-                                            }
-                                        } else {
-                                            DAT_TileMapState::instance.AIZoneLayer[_offsetTile]
-                                                = (byte)this->searchQueue.currentDistance + 6;
-                                        }
-                                    }
-                                    /*
-                                      === TILE 4 (same logic as tile 1) ===
-                                     */
-                                    _offsetTile = piVar3[2] + _direction;
-                                    if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] < '\x01'
-                                        && (uVar1 = DAT_TileMapState::instance.LogicLayer[_offsetTile],
-                                            (uVar1 & 0x31) == 0)
-                                        && (DAT_TileMapState::instance.BuildingLayer[_offsetTile] == 0
-                                            || (DAT_BuildingsState::instance
-                                                    .buildings[DAT_TileMapState::instance.BuildingLayer[_offsetTile]]
-                                                    .unknownFlag4
-                                                == '\0'))) {
-                                        if ((uVar1 & 0x100) == 0) {
-                                            if ((uVar1 & 0x40000000) == 0 || iVar2 == 0) {
-                                                DAT_TileMapState::instance.AIZoneLayer[_offsetTile]
-                                                    = (byte)this->searchQueue.currentDistance;
-                                            } else {
-                                                DAT_TileMapState::instance.AIZoneLayer[_offsetTile]
-                                                    = (byte)this->searchQueue.currentDistance - 1;
-                                            }
-                                        } else {
-                                            DAT_TileMapState::instance.AIZoneLayer[_offsetTile]
-                                                = (byte)this->searchQueue.currentDistance + 6;
-                                        }
-                                    }
-                                    piVar3 = piVar3 + 4;
-                                    attackedPlayerID = attackedPlayerID + -1;
-                                } while (attackedPlayerID != 0);
-                                /*
-                                  Move to next tile in queue
-                                 */
-                                this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                                if (0x13a0f < this->searchQueue.readIndex) {
-                                    this->searchQueue.readIndex = 0;
                                 }
-                            } while (this->searchQueue.readIndex != this->searchQueue.nextWriteIndex);
-                        }
-                        /*
-                          Increment iteration counter (alternates between 0 and 1)
-                         */
-                        attackedPlayerID = iVar2 + 1;
-                        if (1 < attackedPlayerID) {
-                            attackedPlayerID = 0;
-                        }
-                    } while (this->searchQueue.readIndex != this->searchQueue.writeIndex);
-                }
+                                /*
+                                  === TILE 2 (same logic as tile 1) ===
+                                 */
+                                _offsetTile = *piVar3 + _direction;
+                                if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] < '\x01'
+                                    && (uVar1 = DAT_TileMapState::instance.LogicLayer[_offsetTile],
+                                        (uVar1 & 0x31) == 0)
+                                    && (DAT_TileMapState::instance.BuildingLayer[_offsetTile] == 0
+                                        || (DAT_BuildingsState::instance
+                                                .buildings[DAT_TileMapState::instance.BuildingLayer[_offsetTile]]
+                                                .unknownFlag4
+                                            == '\0'))) {
+                                    if ((uVar1 & 0x100) == 0) {
+                                        if ((uVar1 & 0x40000000) == 0 || iVar2 == 0) {
+                                            DAT_TileMapState::instance.AIZoneLayer[_offsetTile]
+                                                = (byte)this->searchQueue.currentDistance;
+                                        } else {
+                                            DAT_TileMapState::instance.AIZoneLayer[_offsetTile]
+                                                = (byte)this->searchQueue.currentDistance - 1;
+                                        }
+                                    } else {
+                                        DAT_TileMapState::instance.AIZoneLayer[_offsetTile]
+                                            = (byte)this->searchQueue.currentDistance + 6;
+                                    }
+                                }
+                                /*
+                                  === TILE 3 (same logic as tile 1) ===
+                                 */
+                                _offsetTile = piVar3[1] + _direction;
+                                if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] < '\x01'
+                                    && (uVar1 = DAT_TileMapState::instance.LogicLayer[_offsetTile],
+                                        (uVar1 & 0x31) == 0)
+                                    && (DAT_TileMapState::instance.BuildingLayer[_offsetTile] == 0
+                                        || (DAT_BuildingsState::instance
+                                                .buildings[DAT_TileMapState::instance.BuildingLayer[_offsetTile]]
+                                                .unknownFlag4
+                                            == '\0'))) {
+                                    if ((uVar1 & 0x100) == 0) {
+                                        if ((uVar1 & 0x40000000) == 0 || iVar2 == 0) {
+                                            DAT_TileMapState::instance.AIZoneLayer[_offsetTile]
+                                                = (byte)this->searchQueue.currentDistance;
+                                        } else {
+                                            DAT_TileMapState::instance.AIZoneLayer[_offsetTile]
+                                                = (byte)this->searchQueue.currentDistance - 1;
+                                        }
+                                    } else {
+                                        DAT_TileMapState::instance.AIZoneLayer[_offsetTile]
+                                            = (byte)this->searchQueue.currentDistance + 6;
+                                    }
+                                }
+                                /*
+                                  === TILE 4 (same logic as tile 1) ===
+                                 */
+                                _offsetTile = piVar3[2] + _direction;
+                                if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] < '\x01'
+                                    && (uVar1 = DAT_TileMapState::instance.LogicLayer[_offsetTile],
+                                        (uVar1 & 0x31) == 0)
+                                    && (DAT_TileMapState::instance.BuildingLayer[_offsetTile] == 0
+                                        || (DAT_BuildingsState::instance
+                                                .buildings[DAT_TileMapState::instance.BuildingLayer[_offsetTile]]
+                                                .unknownFlag4
+                                            == '\0'))) {
+                                    if ((uVar1 & 0x100) == 0) {
+                                        if ((uVar1 & 0x40000000) == 0 || iVar2 == 0) {
+                                            DAT_TileMapState::instance.AIZoneLayer[_offsetTile]
+                                                = (byte)this->searchQueue.currentDistance;
+                                        } else {
+                                            DAT_TileMapState::instance.AIZoneLayer[_offsetTile]
+                                                = (byte)this->searchQueue.currentDistance - 1;
+                                        }
+                                    } else {
+                                        DAT_TileMapState::instance.AIZoneLayer[_offsetTile]
+                                            = (byte)this->searchQueue.currentDistance + 6;
+                                    }
+                                }
+                                piVar3 = piVar3 + 4;
+                                attackedPlayerID = attackedPlayerID + -1;
+                            } while (attackedPlayerID != 0);
+                            /*
+                              Move to next tile in queue
+                             */
+                            this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
+                            if (0x13a0f < this->searchQueue.readIndex) {
+                                this->searchQueue.readIndex = 0;
+                            }
+                        } while (this->searchQueue.readIndex != this->searchQueue.nextWriteIndex);
+                    }
+                    /*
+                      Increment iteration counter (alternates between 0 and 1)
+                     */
+                    attackedPlayerID = iVar2 + 1;
+                    if (1 < attackedPlayerID) {
+                        attackedPlayerID = 0;
+                    }
+                    }
             LAB_004a4914:
                 MACRO_CALL_MEMBER(
                     OpenSHC::Map::Buildings::BuildingsState_Func::updatePathLinkageTileMap, DAT_BuildingsState::ptr)(0);
