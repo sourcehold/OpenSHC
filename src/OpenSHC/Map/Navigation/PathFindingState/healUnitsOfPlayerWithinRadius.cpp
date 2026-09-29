@@ -38,7 +38,8 @@ namespace Map {
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                     0x27420, '\0', (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
             }
-            this->searchQueue.yQueue[0] = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[param_1];
+            this->searchQueue.yQueue[0]
+                = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[param_1];
             this->searchQueue.xQueue[0] = (short)param_1
                 - (short)DAT_ViewportRenderState::instance.translationMatrix[this->searchQueue.yQueue[0]].addXgetTile;
             this->searchQueue.tilesQueue[0] = param_1;
