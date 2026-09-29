@@ -35,7 +35,7 @@ namespace Map {
                         DAT_GameState::instance.mapAndTime.unitMoveDestinationXYPairs[signpostID][iVar2].y = y;
                         iVar2 = iVar2 + 1;
                     }
-                    if (40 < iVar2) {
+                    if (iVar2 >= 40) {
                         return;
                     }
                     this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
