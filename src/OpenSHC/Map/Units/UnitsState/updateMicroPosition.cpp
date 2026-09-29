@@ -21,9 +21,9 @@ namespace Map {
                 _microPartX = (7 - _microPartX) * 16;
                 _microPartY = _microPartY * 2;
                 break;
+                _microPartY = (7 - _microPartY) * 16;
             case 4:
                 _microPartX = (7 - _microPartX) * 2;
-                _microPartY = (7 - _microPartY) * 16;
                 break;
             case 6:
                 _microPartY = (7 - _microPartY) * 2;

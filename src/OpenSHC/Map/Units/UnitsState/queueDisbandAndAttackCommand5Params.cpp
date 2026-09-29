@@ -14,11 +14,11 @@ namespace Map {
         void UnitsState::queueDisbandAndAttackCommand5Params(undefined4 param_1, UnitInstructionType instruction,
             undefined4 param_3, undefined4 param_4, undefined4 param_5)
         {
+            DAT_GameSynchronyState::instance.DAT_GameCommandParam4 = param_5;
             DAT_GameSynchronyState::instance.DAT_GameCommandParam1 = instruction;
             DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = param_1;
-            DAT_GameSynchronyState::instance.DAT_GameCommandParam4 = param_5;
-            DAT_GameSynchronyState::instance.DAT_GameCommandParam2 = param_3;
             DAT_GameSynchronyState::instance.DAT_GameCommandParam3 = param_4;
+            DAT_GameSynchronyState::instance.DAT_GameCommandParam2 = param_3;
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
                 OpenSHC::Commands::GCT_DISBAND_AND_ATTACK_UNITS);
         }
