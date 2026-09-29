@@ -32,7 +32,6 @@ namespace Map {
             int _candidateTile3;
             uint _cp4;
             int iVar4;
-            int iVar1;
             uint _rng;
             uint uVar5;
             int iVar6;
@@ -228,9 +227,8 @@ namespace Map {
                             }
                         }
                         _ptrTranslationMatrix = _ptrTranslationMatrix + 4;
-                        iVar1 = iVar4 + 2;
                         iVar4 = iVar4 + 4;
-                    } while (iVar1 < 8);
+                    } while (iVar4 < 10);
                     if (_inBounds) {
                         DAT_TileMapState::instance.CertainPathLayer[_tile]
                             = DAT_TileMapState::instance.CertainPathLayer[_tile] | 0x4000;
