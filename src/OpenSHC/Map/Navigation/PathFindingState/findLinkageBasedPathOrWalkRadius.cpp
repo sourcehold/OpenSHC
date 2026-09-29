@@ -43,7 +43,9 @@ namespace Map {
             /*
               === VALIDATE TARGET POSITION ===   If target is specified (x2 != -1) and invalid, cap search depth to 500
              */
-            if (x2 != -1 && ((399 < (uint)x2 || (399 < (uint)y2)) || (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y2 * 400 + x2] == '\0'))
+            if (x2 != -1
+                && ((399 < (uint)x2 || (399 < (uint)y2))
+                    || (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y2 * 400 + x2] == '\0'))
                 && 500 < maxIterations) {
                 /*
                   Limit search when target is unreachable
