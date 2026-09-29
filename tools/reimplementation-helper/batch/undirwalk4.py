@@ -60,6 +60,14 @@ def find_block(text, start):
     return open_brace + 1, i, text.index(";", i) + 1
 
 
+def row_forms(a):
+    """The four ways Ghidra reaches a direction through the row pointer, in index order."""
+    return [r"\(\*\(int \(\*\)\[8\]\)\(%s \+ -1\)\)\[0\]" % re.escape(a),
+            r"\*%s\b" % re.escape(a),
+            r"%s\[1\]" % re.escape(a),
+            r"%s\[2\]" % re.escape(a)]
+
+
 def preceding_lines(text, at, count):
     """Spans of the `count` lines that end at `at`, outermost first."""
     spans, end = [], at
@@ -87,14 +95,35 @@ def convert(text, name):
                 row = (start, end, SET_ROW.match(line))
             elif xy is None and SET_XY.match(line):
                 xy = (start, end, SET_XY.match(line))
-        if row is None or xy is None:
+        if row is None:
             continue
         a, yexpr = row[2].group("a"), row[2].group("y").strip()
-        p, unit = xy[2].group("p"), xy[2].group("u")
         indent = do.group("ind")
 
         body_start, body_end, stmt_end = find_block(text, do.end())
         body, tail = text[body_start:body_end], text[body_end:stmt_end]
+
+        if xy is None:
+            # no matrix pointer: the loop already carries the direction index itself, so
+            # only the row pointer has to go and the existing counter becomes the index
+            counter = re.search(r"\n[ \t]*(\w+) = \1 \+ %d;[ \t]*\n[ \t]*%s = %s \+ %d;[ \t]*\n[ \t]*$"
+                                % (BLOCKS, re.escape(a), re.escape(a), BLOCKS), body)
+            if not counter or not re.search(r"while \(%s < %d\)" % (re.escape(counter.group(1)), 2 * BLOCKS), tail):
+                continue
+            index = counter.group(1)
+            new_body = body
+            for k, form in enumerate(row_forms(a)):
+                new_body = re.sub(form, "%s[%s][%s]" % (ROW, yexpr, index if k == 0 else "%s + %d" % (index, k)),
+                                  new_body)
+            new_body = re.sub(r"\n[ \t]*%s = %s \+ \d+;[ \t]*" % ((re.escape(a),) * 2), "", new_body)
+            if re.search(r"\b%s\b" % re.escape(a), new_body):
+                continue
+            text = text[:body_start] + new_body + text[body_end:]
+            text = text[:row[0]] + text[row[1]:]
+            changes += 1
+            pos = 0
+            continue
+        p, unit = xy[2].group("p"), xy[2].group("u")
         bound = re.search(r"while \(\(int\)%s < (0x[0-9a-fA-F]+)\)" % re.escape(p), tail)
         step_a = re.search(r"\n[ \t]*%s = %s \+ (\d+);[ \t]*" % ((re.escape(a),) * 2), body)
         step_p = re.search(r"\n[ \t]*%s = %s \+ (0x[0-9a-fA-F]+|\d+);[ \t]*" % ((re.escape(p),) * 2), body)
@@ -122,11 +151,7 @@ def convert(text, name):
 
         per_entry = ENTRY // width
         new_body = body
-        row_forms = [r"\(\*\(int \(\*\)\[8\]\)\(%s \+ -1\)\)\[0\]" % re.escape(a),
-                     r"\*%s\b" % re.escape(a),
-                     r"%s\[1\]" % re.escape(a),
-                     r"%s\[2\]" % re.escape(a)]
-        for k, form in enumerate(row_forms):
+        for k, form in enumerate(row_forms(a)):
             index = var if k == 0 else "%s + %d" % (var, k)
             new_body = re.sub(form, "%s[%s][%s]" % (ROW, yexpr, index), new_body)
         for k in range(BLOCKS):
