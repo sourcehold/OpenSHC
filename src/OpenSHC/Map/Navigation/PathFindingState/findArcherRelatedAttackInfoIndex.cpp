@@ -62,41 +62,41 @@ namespace Map {
                     }
                     for (int iVar5 = 0; iVar5 < 8; iVar5 = iVar5 + 1) {
                         if ((DAT_TileMapState::instance.PathLinkageLayer[_tile]
-                            & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar5])
-                            != 0
-                        && (_candidate
-                            = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][iVar5] + _tile,
-                            DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration)) {
-                        if (4 < this->searchQueue.currentDistance
-                            && (DAT_TileMapState::instance.AIInfoLayer[_candidate] & 0x10) != 0
-                            && (iVar4 = MACRO_CALL_MEMBER(
-                                    OpenSHC::Map::Units::TroopValueState_Func::findOrReserveArcherPointSlot,
-                                    DAT_TroopValueState::ptr)(_candidate),
-                                iVar4 != 0)
-                            && iVar4 != DAT_TribesState::instance.tribes[tribeID].archerRelated
-                            && iVar4 != DAT_TribesState::instance.tribes[tribeID].archerRelated2
-                            && DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[iVar4 * 2 + 0x3eb].tile
-                                == 0
-                            && DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[iVar4 * 2 + 0x3ea]
-                                    .buildingID
-                                == 0) {
-                            return iVar4;
-                        }
-                        DAT_TileMapState::instance.CertainPathLayer[_candidate]
-                            = (short)this->searchQueue.currentDistance + 1;
-                        short sVar3 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar5]
-                                          .short_.xOffset;
-                        DAT_TileMapState::instance.WalkLayer[_candidate] = (short)this->searchGeneration;
-                        this->searchQueue.xQueue[this->searchQueue.writeIndex] = sVar3 + sVar1;
-                        this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                            = *(short*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
-                                  + iVar5 * 8 + 4)
-                            + sVar2;
-                        this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
-                        this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                        if (0x13a0f < this->searchQueue.writeIndex) {
-                            this->searchQueue.writeIndex = 0;
-                        }
+                                & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar5])
+                                != 0
+                            && (_candidate
+                                = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][iVar5] + _tile,
+                                DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration)) {
+                            if (4 < this->searchQueue.currentDistance
+                                && (DAT_TileMapState::instance.AIInfoLayer[_candidate] & 0x10) != 0
+                                && (iVar4 = MACRO_CALL_MEMBER(
+                                        OpenSHC::Map::Units::TroopValueState_Func::findOrReserveArcherPointSlot,
+                                        DAT_TroopValueState::ptr)(_candidate),
+                                    iVar4 != 0)
+                                && iVar4 != DAT_TribesState::instance.tribes[tribeID].archerRelated
+                                && iVar4 != DAT_TribesState::instance.tribes[tribeID].archerRelated2
+                                && DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[iVar4 * 2 + 0x3eb].tile
+                                    == 0
+                                && DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[iVar4 * 2 + 0x3ea]
+                                        .buildingID
+                                    == 0) {
+                                return iVar4;
+                            }
+                            DAT_TileMapState::instance.CertainPathLayer[_candidate]
+                                = (short)this->searchQueue.currentDistance + 1;
+                            short sVar3 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar5]
+                                              .short_.xOffset;
+                            DAT_TileMapState::instance.WalkLayer[_candidate] = (short)this->searchGeneration;
+                            this->searchQueue.xQueue[this->searchQueue.writeIndex] = sVar3 + sVar1;
+                            this->searchQueue.yQueue[this->searchQueue.writeIndex]
+                                = *(short*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
+                                      + iVar5 * 8 + 4)
+                                + sVar2;
+                            this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
+                            this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
+                            if (0x13a0f < this->searchQueue.writeIndex) {
+                                this->searchQueue.writeIndex = 0;
+                            }
                         }
                     }
                     this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
