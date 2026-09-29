@@ -31,8 +31,8 @@ namespace Map {
             while (true) {
                 _writeIndex = _index;
                 if (unitID < _unitIDOfAUnitOnSameTile && !_isInserted) {
-                    _unitIDArray[_index] = (short)unitID;
                     _writeIndex = _index + 1;
+                    _unitIDArray[_index] = (short)unitID;
                     _isInserted = true;
                 }
                 _unitIDArray[_writeIndex] = (short)_unitIDOfAUnitOnSameTile;
@@ -51,8 +51,8 @@ namespace Map {
                 _unitIDArray[_writeIndex] = (short)unitID;
                 _writeIndex = _writeIndex + 2;
             }
-            _unitIDArray[_writeIndex] = 0;
             DAT_TileMapState::instance.UnitLayer[unitIDCurrentTilePosition] = (ushort)_unitIDArray[0];
+            _unitIDArray[_writeIndex] = 0;
             this->units[_unitIDArray[0]].unitOrderWhenOnSameTile = 0;
             int _previousUnitID = _unitIDArray[0];
             for (int _order = 1; _order < 2001; ++_order) {
@@ -60,8 +60,8 @@ namespace Map {
                 if (_unitIDArray[_order] < 1) {
                     break;
                 }
-                this->units[_unitIDArray[_order]].unitOrderWhenOnSameTile = (short)_order;
                 _previousUnitID = _unitIDArray[_order];
+                this->units[_unitIDArray[_order]].unitOrderWhenOnSameTile = (short)_order;
             }
             for (int i = 0; i < 2000; ++i) {
                 if (_unitIDArray[i] < 1) {

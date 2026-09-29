@@ -34,8 +34,8 @@ namespace Map {
             if (_pathPlanSize <= 0) {
                 return FALSE;
             }
-            this->units[unitID].totalSizeOfPathPlan = (short)_pathPlanSize;
             this->units[unitID].ladderExitYPosition = this->units[unitID].y;
+            this->units[unitID].totalSizeOfPathPlan = (short)_pathPlanSize;
             this->units[unitID].currentIndexInPathPlan = 0;
             this->units[unitID].ladderExitXPosition = this->units[unitID].x;
             this->units[unitID].tunnelerFinishedDigging = 2;

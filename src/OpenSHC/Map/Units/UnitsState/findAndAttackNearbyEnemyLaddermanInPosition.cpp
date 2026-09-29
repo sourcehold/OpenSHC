@@ -20,8 +20,8 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00533630
         BOOLEnum UnitsState::findAndAttackNearbyEnemyLaddermanInPosition(int unitID)
         {
-            int _unitX = this->units[unitID].x;
             short _owner = this->units[unitID].owner;
+            int _unitX = this->units[unitID].x;
             int _unitY = this->units[unitID].y;
             int _tile = this->units[unitID].tile;
             dword _areaOfUnit = (short)DAT_TileMapState::instance.PathConnectionLayer[_tile];

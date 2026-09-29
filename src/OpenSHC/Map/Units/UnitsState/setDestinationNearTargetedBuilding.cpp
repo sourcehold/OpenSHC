@@ -45,11 +45,11 @@ namespace Map {
             }
             short _attackTileY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent
                                      [DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile2OrAHelper];
-            this->units[unitID].attackAtTileY = _attackTileY;
             this->units[unitID].targetedBuildingTile
                 = DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile2OrAHelper;
             this->units[unitID].attackAtTileX = (short)this->units[unitID].targetedBuildingTile
                 - (short)DAT_ViewportRenderState::instance.translationMatrix[_attackTileY].addXgetTile;
+            this->units[unitID].attackAtTileY = _attackTileY;
             return 1;
         }
 

@@ -16,8 +16,8 @@ namespace Map {
         {
             short _playerID = this->units[unitID].owner;
             short _x = this->units[unitID].x;
-            short _y = this->units[unitID].y;
             int _bestUnitID = 0;
+            short _y = this->units[unitID].y;
             int _highestPreference = 0;
             for (int _targetUnitID = 1; _targetUnitID < (int)this->maxUnitCount; ++_targetUnitID) {
                 if (this->units[_targetUnitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
