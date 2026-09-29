@@ -120,8 +120,7 @@ namespace Map {
                     x = x
                         + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.xOffset;
                     y = y
-                        + *(int*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
-                            + _direction * 8 + 4);
+                        + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.yOffset;
                     /*
                       store direction in path plan
                      */
