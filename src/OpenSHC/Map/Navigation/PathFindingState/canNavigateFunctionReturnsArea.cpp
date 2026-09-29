@@ -28,7 +28,8 @@ namespace Map {
             this->ALG_ResultTile = 0;
             this->ALG_ResultY = 0;
             this->ALG_ResultX = 0;
-            if (399 < unitX || 399 < unitY || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[unitY * 400 + unitX] == '\0') {
+            if (399 < unitX || 399 < unitY
+                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[unitY * 400 + unitX] == '\0') {
                 return 0;
             }
             this->searchGeneration = this->searchGeneration + 1;
