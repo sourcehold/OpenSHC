@@ -74,7 +74,8 @@ namespace Map {
             /*
               === GET UNIT INFORMATION ===
              */
-            _unitArea = DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile];
+            _unitArea
+                = (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile];
             _unitOwner = DAT_UnitsState::instance.units[unitID].owner;
             /*
               === GET BUILDING SIZE AND ACCESS POINT COUNT ===
