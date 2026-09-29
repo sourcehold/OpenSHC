@@ -22,8 +22,11 @@ namespace Map {
         {
             int iVar5 = x2;
             int iVar6 = y;
-            if ((uint)x < 400 && (uint)y < 400 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] != '\0') {
-                if (x2 != -1 && ((399 < (uint)x2 || (399 < (uint)y2)) || (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y2 * 400 + x2] == '\0'))
+            if ((uint)x < 400 && (uint)y < 400
+                && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] != '\0') {
+                if (x2 != -1
+                    && ((399 < (uint)x2 || (399 < (uint)y2))
+                        || (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y2 * 400 + x2] == '\0'))
                     && 500 < param_5) {
                     param_5 = 500;
                 }
