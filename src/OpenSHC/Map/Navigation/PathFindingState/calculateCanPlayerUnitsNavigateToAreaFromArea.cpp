@@ -44,8 +44,7 @@ namespace Map {
                         }
                         if (!bVar8
                             && ((playerID == 0
-                                    || (DAT_GameState::instance.mapAndTime
-                                            .playerTeams[this->climbData[iVar7].owner]
+                                    || (DAT_GameState::instance.mapAndTime.playerTeams[this->climbData[iVar7].owner]
                                         == DAT_GameState::instance.mapAndTime.playerTeams[playerID]))
                                 || (DAT_BuildingsState::instance.buildings[this->climbData[iVar7].buildingID]
                                         .field241_0x2c6

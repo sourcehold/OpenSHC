@@ -25251,7 +25251,7 @@ SHC_3BB0A8C1_0x004A5230 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004A52D0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004A5320 | 16.1% | ClimbData stride bug fixed
+SHC_3BB0A8C1_0x004A5320 | 16.1% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004A5420 | 0.0% | Pending
 
