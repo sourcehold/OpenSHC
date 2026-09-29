@@ -88,9 +88,8 @@ namespace Map {
                     }
                     byte bVar1 = DAT_TileMapState::instance.PathLinkageLayer[uVar4];
                     iVar6 = 0;
-                    piVar7 = DAT_TileMapState::instance.directionTranslationMatrix[sVar3] + 1;
                     do {
-                        iVar5 = (*(int (*)[8])(piVar7 + -1))[0] + uVar4;
+                        iVar5 = DAT_TileMapState::instance.directionTranslationMatrix[sVar3][iVar6] + uVar4;
                         if (DAT_TileMapState::instance.WalkLayer[iVar5] != this->searchGeneration) {
                             if (someLogicalTileProperty == 0) {
                                 if ((DAT_TileMapState::instance.LogicLayer[iVar5] & 0x30) == 0)
@@ -112,7 +111,7 @@ namespace Map {
                                 }
                             }
                         }
-                        iVar5 = *piVar7 + uVar4;
+                        iVar5 = DAT_TileMapState::instance.directionTranslationMatrix[sVar3][iVar6 + 1] + uVar4;
                         if (DAT_TileMapState::instance.WalkLayer[iVar5] != this->searchGeneration) {
                             if (someLogicalTileProperty == 0) {
                                 if ((DAT_TileMapState::instance.LogicLayer[iVar5] & 0x30) == 0)
@@ -135,7 +134,7 @@ namespace Map {
                                 }
                             }
                         }
-                        iVar5 = piVar7[1] + uVar4;
+                        iVar5 = DAT_TileMapState::instance.directionTranslationMatrix[sVar3][iVar6 + 2] + uVar4;
                         if (DAT_TileMapState::instance.WalkLayer[iVar5] != this->searchGeneration) {
                             if (someLogicalTileProperty == 0) {
                                 if ((DAT_TileMapState::instance.LogicLayer[iVar5] & 0x30) == 0)
@@ -158,7 +157,7 @@ namespace Map {
                                 }
                             }
                         }
-                        iVar5 = piVar7[2] + uVar4;
+                        iVar5 = DAT_TileMapState::instance.directionTranslationMatrix[sVar3][iVar6 + 3] + uVar4;
                         if (DAT_TileMapState::instance.WalkLayer[iVar5] != this->searchGeneration) {
                             if (someLogicalTileProperty == 0) {
                                 if ((DAT_TileMapState::instance.LogicLayer[iVar5] & 0x30) == 0)
@@ -182,7 +181,6 @@ namespace Map {
                             }
                         }
                         iVar6 = iVar6 + 4;
-                        piVar7 = piVar7 + 4;
                     } while (iVar6 < 8);
                     this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
                     if (0x13a0f < this->searchQueue.readIndex) {
