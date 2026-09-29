@@ -242,8 +242,7 @@ namespace Map {
                         break;
                     _tile = _tile + DAT_TileMapState::instance.directionTranslationMatrix[_y][_direction];
                     _y = _y
-                        + *(int*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
-                            + _direction * 8 + 4);
+                        + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.yOffset;
                     if ((this->searchQueue.pathPlanIndex & 1) == 0) {
                         this->searchQueue.ptrPathPlan[(int)this->searchQueue.pathPlanIndex / 2] = (byte)_direction;
                     } else {
