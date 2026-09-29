@@ -76,7 +76,7 @@ namespace Map {
                       Get Y coordinate for this tile
                      */
                     this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                        = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile];
+                        = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile];
                     /*
                       Add tile to queue
                      */
@@ -112,7 +112,7 @@ namespace Map {
                  */
                 if (DAT_TileMapState::instance.AIZoneLayer[_tile + 1] == 1) {
                     this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                        = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile + 1];
+                        = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile + 1];
                     this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _tile + 1;
                     *(char*)(*(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + playerID * 0x177bc
                                  + -0x10)
@@ -128,7 +128,7 @@ namespace Map {
                 }
                 if (DAT_TileMapState::instance.AIZoneLayer[_tile + 2] == 1) {
                     this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                        = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile + 2];
+                        = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile + 2];
                     this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _tile + 2;
                     *(char*)(*(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + playerID * 0x177bc
                                  + -0x10)
@@ -144,7 +144,7 @@ namespace Map {
                 }
                 if (DAT_TileMapState::instance.AIZoneLayer[_tile + 3] == 1) {
                     this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                        = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile + 3];
+                        = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile + 3];
                     this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _tile + 3;
                     *(char*)(*(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + playerID * 0x177bc
                                  + -0x10)
@@ -160,7 +160,7 @@ namespace Map {
                 }
                 if (DAT_TileMapState::instance.AIZoneLayer[_tile + 4] == 1) {
                     this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                        = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile + 4];
+                        = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile + 4];
                     this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _tile + 4;
                     *(char*)(*(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + playerID * 0x177bc
                                  + -0x10)
