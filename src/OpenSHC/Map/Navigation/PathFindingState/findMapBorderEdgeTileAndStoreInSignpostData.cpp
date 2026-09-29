@@ -49,8 +49,7 @@ namespace Map {
             this->searchQueue.readIndex = 0;
             this->searchQueue.yQueue[0] = (short)y;
             this->searchQueue.xQueue[0] = (short)x;
-            this->searchQueue.tilesQueue[0]
-                = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+            this->searchQueue.tilesQueue[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
             DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
@@ -77,16 +76,16 @@ namespace Map {
                                 this->resultY = (int)_y;
                                 this->resultTile = _tile;
                                 DAT_GameState::instance.mapAndTime
-                                    .signpostsMapEdge[signpostID][DAT_GameState::instance.mapAndTime
-                                            .signpostsMapEdgeDataCounter]
+                                    .signpostsMapEdge[signpostID]
+                                                     [DAT_GameState::instance.mapAndTime.signpostsMapEdgeDataCounter]
                                     .x = (int)_x;
                                 DAT_GameState::instance.mapAndTime
-                                    .signpostsMapEdge[signpostID][DAT_GameState::instance.mapAndTime
-                                            .signpostsMapEdgeDataCounter]
+                                    .signpostsMapEdge[signpostID]
+                                                     [DAT_GameState::instance.mapAndTime.signpostsMapEdgeDataCounter]
                                     .y = this->resultY;
                                 DAT_GameState::instance.mapAndTime
-                                    .signpostsMapEdge[signpostID][DAT_GameState::instance.mapAndTime
-                                            .signpostsMapEdgeDataCounter]
+                                    .signpostsMapEdge[signpostID]
+                                                     [DAT_GameState::instance.mapAndTime.signpostsMapEdgeDataCounter]
                                     .tile = this->resultTile;
                                 DAT_GameState::instance.mapAndTime.signpostsMapEdgeDataCounter
                                     = DAT_GameState::instance.mapAndTime.signpostsMapEdgeDataCounter + 1;
@@ -109,8 +108,7 @@ namespace Map {
                                           .short_.xOffset
                                     + _x;
                                 this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                    = *(short*)((int)DAT_TerrainDefinedData::instance
-                                                    .clockwiseCardinalTranslationMatrix
+                                    = *(short*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
                                           + _index * 8 + 4)
                                     + _y;
                                 this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
@@ -133,7 +131,7 @@ namespace Map {
                 }
             }
             return;
-}
+        }
 
     }
 }
