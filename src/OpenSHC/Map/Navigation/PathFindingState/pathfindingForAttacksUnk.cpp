@@ -141,8 +141,8 @@ namespace Map {
                                 DAT_BuildingsState::ptr)(iVar14, 1, iVar13, 0);
                             uVar7 = iVar3 + DAT_BuildingsState::instance.DAT_TempYOffset;
                             if ((uint)(DAT_BuildingsState::instance.DAT_TempXOffset + iVar10) < 400 && uVar7 <= 399
-                                && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[uVar7 * 400 + DAT_BuildingsState::instance.DAT_TempXOffset
-                                       + iVar10]
+                                && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[uVar7 * 400
+                                       + DAT_BuildingsState::instance.DAT_TempXOffset + iVar10]
                                     != '\0') {
                                 iVar15 = DAT_ViewportRenderState::instance.translationMatrix[uVar7].addXgetTile
                                     + DAT_BuildingsState::instance.DAT_TempXOffset;
@@ -155,8 +155,8 @@ namespace Map {
                                                 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                                         calculateCanPlayerUnitsNavigateToAreaFromArea,
                                                     this)(param_5, (dword)((int)(param_4)),
-                                                    (dword)((int)((
-                                                        short)(short)DAT_TileMapState::instance.PathConnectionLayer[tile2])),
+                                                    (dword)((int)((short)(short)
+                                                            DAT_TileMapState::instance.PathConnectionLayer[tile2])),
                                                     0),
                                                 iVar15 != 0))
                                         || ((BVar4 != FALSE
