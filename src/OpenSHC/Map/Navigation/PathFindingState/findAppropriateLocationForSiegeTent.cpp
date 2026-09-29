@@ -166,12 +166,6 @@ namespace Map {
                                   Get pointer to movement direction offsets for checking surrounding tiles   Track
                                   minimum height in surrounding area
                                  */
-                                piVar4 = DAT_TileMapState::instance
-                                             .directionTranslationMatrix[DAT_TerrainDefinedData::instance
-                                                                             .clockwiseCardinalTranslationMatrix[y]
-                                                                             .int_.yOffset
-                                                 + (int)sVar1]
-                                    + 1;
                                 x = uVar7;
                                 /*
                                   === CHECK 8 SURROUNDING TILES FOR TENT PLACEMENT ===   Loop checks tiles in groups of
@@ -181,7 +175,12 @@ namespace Map {
                                     /*
                                       Check first tile in group
                                      */
-                                    iVar5 = (*(int (*)[8])(piVar4 + -1))[0] + _offsetTile;
+                                    iVar5 = DAT_TileMapState::instance
+                                                .directionTranslationMatrix[DAT_TerrainDefinedData::instance
+                                                                                .clockwiseCardinalTranslationMatrix[y]
+                                                                                .int_.yOffset
+                                                    + (int)sVar1][local_c]
+                                        + _offsetTile;
                                     /*
                                       Disqualify if tile has: impassable terrain, units, or buildings   0x4a7014b1
                                       checks for: sea, border, border_edge, rocky, building,    tree, river, ford,
@@ -206,10 +205,19 @@ namespace Map {
                                     uVar7 = uVar8;
                                     /*
                                       Update maximum height   Repeat checks for tiles 2, 3, and 4 in the group (Pattern
-                                      repeats with piVar4[0], piVar4[1], piVar4[2])   Each tile checks: LogicLayer,
-                                      UnitLayer, BuildingLayer, HeightLayer
+                                      repeats with piVar4[0],
+                                      DAT_TileMapState::instance.directionTranslationMatrix[DAT_TerrainDefinedData::instance
+                                      .clockwiseCardinalTranslationMatrix[y] .int_.yOffset + (int)sVar1][local_c + 2],
+                                      DAT_TileMapState::instance.directionTranslationMatrix[DAT_TerrainDefinedData::instance
+                                      .clockwiseCardinalTranslationMatrix[y] .int_.yOffset + (int)sVar1][local_c + 3])
+                                      Each tile checks: LogicLayer, UnitLayer, BuildingLayer, HeightLayer
                                      */
-                                    iVar5 = *piVar4 + _offsetTile;
+                                    iVar5 = DAT_TileMapState::instance
+                                                .directionTranslationMatrix[DAT_TerrainDefinedData::instance
+                                                                                .clockwiseCardinalTranslationMatrix[y]
+                                                                                .int_.yOffset
+                                                    + (int)sVar1][local_c + 1]
+                                        + _offsetTile;
                                     if ((DAT_TileMapState::instance.LogicLayer[iVar5] & 0x4a7014b1U) != 0
                                         || (DAT_TileMapState::instance.LogicLayer[iVar5] & 4U) != 0
                                         || (short)DAT_TileMapState::instance.UnitLayer[iVar5] != 0
@@ -223,7 +231,12 @@ namespace Map {
                                         x = uVar3;
                                     }
                                     uVar7 = uVar8;
-                                    iVar5 = piVar4[1] + _offsetTile;
+                                    iVar5 = DAT_TileMapState::instance
+                                                .directionTranslationMatrix[DAT_TerrainDefinedData::instance
+                                                                                .clockwiseCardinalTranslationMatrix[y]
+                                                                                .int_.yOffset
+                                                    + (int)sVar1][local_c + 2]
+                                        + _offsetTile;
                                     if ((DAT_TileMapState::instance.LogicLayer[iVar5] & 0x4a7014b1U) != 0
                                         || (DAT_TileMapState::instance.LogicLayer[iVar5] & 4U) != 0
                                         || (short)DAT_TileMapState::instance.UnitLayer[iVar5] != 0
@@ -236,7 +249,12 @@ namespace Map {
                                     if ((uVar3 <= uVar7) && (uVar8 = uVar7, uVar3 < x)) {
                                         x = uVar3;
                                     }
-                                    iVar5 = piVar4[2] + _offsetTile;
+                                    iVar5 = DAT_TileMapState::instance
+                                                .directionTranslationMatrix[DAT_TerrainDefinedData::instance
+                                                                                .clockwiseCardinalTranslationMatrix[y]
+                                                                                .int_.yOffset
+                                                    + (int)sVar1][local_c + 3]
+                                        + _offsetTile;
                                     if ((DAT_TileMapState::instance.LogicLayer[iVar5] & 0x4a7014b1U) != 0
                                         || (DAT_TileMapState::instance.LogicLayer[iVar5] & 4U) != 0
                                         || (short)DAT_TileMapState::instance.UnitLayer[iVar5] != 0
@@ -251,7 +269,6 @@ namespace Map {
                                         x = uVar3;
                                     }
                                     local_c = local_c + 4;
-                                    piVar4 = piVar4 + 4;
                                     iVar6 = iVar6 + 4;
                                 } while (local_c < 8);
                                 /*
