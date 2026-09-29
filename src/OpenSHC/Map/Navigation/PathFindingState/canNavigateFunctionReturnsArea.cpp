@@ -99,9 +99,9 @@ namespace Map {
                                         = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar6]
                                               .int_.xOffset
                                         + (int)sVar1;
-                                    this->climbY = *(int*)((int)DAT_TerrainDefinedData::instance
-                                                               .clockwiseCardinalTranslationMatrix
-                                                       + iVar6 * 8 + 4)
+                                    this->climbY
+                                        = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar6]
+                                              .int_.yOffset
                                         + (int)sVar2;
                                     return (int)(short)_area;
                                 }
