@@ -165,4 +165,52 @@
     MACRO_LINKAGE_PUSH_FREE(ID, sw, WRITEIDX, -2, -1, 0x20, MACRO_ASM_DIAGONAL, MACRO_ASM_DEC, MACRO_ASM_INC) \
     MACRO_LINKAGE_PUSH_FREE(ID, se, WRITEIDX, +2, +1, 0x08, MACRO_ASM_DIAGONAL, MACRO_ASM_INC, MACRO_ASM_INC)
 
+// The area flood-fill variant: no distance and no search generation, just "this neighbour has no
+// area yet, give it mine". It tests the linkage bit first and walks the north and south rows
+// west-to-east, both the other way round from the two search variants above. Needs the locals
+// "ushort* _areaLayer" (PathConnectionLayer) and "short _areaID" in place of the layer pair.
+#define MACRO_LINKAGE_PUSH_AREA(ID, N, WRITEIDX, OFF, BIT, TILE, YADJ)                \
+    __asm test bl, BIT                                                                \
+    __asm je push_done_##ID##_##N                                                     \
+    __asm mov ax, word ptr [edi + edx*2 + OFF]                                        \
+    __asm cmp ax, 0                                                                   \
+    __asm jne push_done_##ID##_##N                                                    \
+    __asm mov ax, word ptr _areaID                                                    \
+    __asm mov word ptr [edi + edx*2 + OFF], ax                                        \
+    __asm mov ecx, WRITEIDX                                                           \
+    __asm mov esi, _tilesQueue                                                        \
+    __asm mov eax, edx                                                                \
+    TILE                                                                              \
+    __asm mov dword ptr [esi + ecx*4], eax                                            \
+    __asm mov eax, _cY                                                                \
+    YADJ                                                                              \
+    __asm mov esi, _yQueue                                                            \
+    __asm mov word ptr [esi + ecx*2], ax                                              \
+    __asm add WRITEIDX, 1                                                             \
+    __asm push_done_##ID##_##N:
+
+#define MACRO_LINKAGE_EXPAND_AREA_NEIGHBOURS(ID, WRITEIDX)                            \
+    __asm mov edx, _tile                                                              \
+    __asm mov edi, _areaLayer                                                         \
+    __asm mov ebx, _cLink                                                             \
+    MACRO_LINKAGE_PUSH_AREA(ID, w, WRITEIDX, -2, 0x40, MACRO_ASM_DEC, MACRO_ASM_SAME) \
+    MACRO_LINKAGE_PUSH_AREA(ID, e, WRITEIDX, +2, 0x04, MACRO_ASM_INC, MACRO_ASM_SAME) \
+    __asm mov edx, _tile                                                              \
+    __asm mov eax, _cY                                                                \
+    __asm shl eax, 3                                                                  \
+    __asm mov esi, _dirMatrix                                                         \
+    __asm add edx, dword ptr [esi + eax*4]                                            \
+    MACRO_LINKAGE_PUSH_AREA(ID, nw, WRITEIDX, -2, 0x80, MACRO_ASM_DEC, MACRO_ASM_DEC) \
+    MACRO_LINKAGE_PUSH_AREA(ID, n, WRITEIDX, 0, 0x01, MACRO_ASM_SAME, MACRO_ASM_DEC)  \
+    MACRO_LINKAGE_PUSH_AREA(ID, ne, WRITEIDX, +2, 0x02, MACRO_ASM_INC, MACRO_ASM_DEC) \
+    __asm mov edx, _tile                                                              \
+    __asm mov eax, _cY                                                                \
+    __asm shl eax, 3                                                                  \
+    __asm add eax, 4                                                                  \
+    __asm mov esi, _dirMatrix                                                         \
+    __asm add edx, dword ptr [esi + eax*4]                                            \
+    MACRO_LINKAGE_PUSH_AREA(ID, sw, WRITEIDX, -2, 0x20, MACRO_ASM_DEC, MACRO_ASM_INC) \
+    MACRO_LINKAGE_PUSH_AREA(ID, s, WRITEIDX, 0, 0x10, MACRO_ASM_SAME, MACRO_ASM_INC)  \
+    MACRO_LINKAGE_PUSH_AREA(ID, se, WRITEIDX, +2, 0x08, MACRO_ASM_INC, MACRO_ASM_INC)
+
 // clang-format on
