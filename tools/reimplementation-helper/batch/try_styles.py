@@ -107,6 +107,12 @@ def main():
     (vdir / "results.json").write_text(
         json.dumps({s: p for p, s in results if p is not None}, indent=1), encoding="utf-8")
 
+    # The trials left the DLL and reccmp/dll/diff.json built from the narrowed list, so every
+    # batch tool would go on reporting the last variant's single-function result. Restoring
+    # the list is not enough -- rebuild so the tree, the DLL and the diff agree again.
+    print("\nrebuilding with the full list so later reports are valid...")
+    print(run(BATCH / "build_quiet.py").strip().splitlines()[-1])
+
 
 if __name__ == "__main__":
     main()
