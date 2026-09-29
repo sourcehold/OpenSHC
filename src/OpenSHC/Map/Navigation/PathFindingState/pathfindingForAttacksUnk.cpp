@@ -76,7 +76,7 @@ namespace Map {
                                  .addXgetTile
                         + DAT_BuildingsState::instance.DAT_TempXOffset;
                     iVar13 = iVar12 + iVar10;
-                    uVar5 = (uint)bVar1 - (uint) * (byte*)(iVar12 + 0x1d32c38 + iVar10);
+                    uVar5 = (uint)bVar1 - (uint)DAT_TileMapState::instance.HeightLayer[iVar12 + iVar10];
                     uVar9 = (int)uVar5 >> 0x1f;
                     if ((int)((uVar5 ^ uVar9) - uVar9) < 0x20
                         && (((int)(short)DAT_TileMapState::instance.PathConnectionLayer[iVar13] == param_4
@@ -147,7 +147,7 @@ namespace Map {
                                 iVar15 = DAT_ViewportRenderState::instance.translationMatrix[uVar7].addXgetTile
                                     + DAT_BuildingsState::instance.DAT_TempXOffset;
                                 tile2 = iVar15 + iVar10;
-                                uVar7 = (uint)bVar1 - (uint) * (byte*)(iVar15 + 0x1d32c38 + iVar10);
+                                uVar7 = (uint)bVar1 - (uint)DAT_TileMapState::instance.HeightLayer[iVar15 + iVar10];
                                 uVar5 = (int)uVar7 >> 0x1f;
                                 if ((int)((uVar7 ^ uVar5) - uVar5) < 0x20
                                     && (((int)(short)DAT_TileMapState::instance.PathConnectionLayer[tile2] == param_4
