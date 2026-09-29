@@ -111,4 +111,58 @@
     MACRO_LINKAGE_PUSH(ID, sw, WRITEIDX, -2, 0x20, MACRO_ASM_DIAGONAL, MACRO_ASM_DEC, MACRO_ASM_INC) \
     MACRO_LINKAGE_PUSH(ID, se, WRITEIDX, +2, 0x08, MACRO_ASM_DIAGONAL, MACRO_ASM_INC, MACRO_ASM_INC)
 
+// The same neighbour, but only entered when OccupancyLayer says the tile is free. TOFF is the
+// neighbour's offset in tiles (the occupancy layer holds one byte per tile, so it is not scaled
+// like OFF is on the short layers). Needs one more local, "uchar* _occupancy".
+#define MACRO_LINKAGE_PUSH_FREE(ID, N, WRITEIDX, OFF, TOFF, BIT, DIST, TILE, YADJ)    \
+    __asm mov ax, word ptr [edi + edx*2 + OFF]                                        \
+    __asm cmp ax, word ptr _curGen                                                    \
+    __asm je push_done_##ID##_##N                                                     \
+    __asm test bl, BIT                                                                \
+    __asm je push_done_##ID##_##N                                                     \
+    __asm mov esi, _occupancy                                                         \
+    __asm mov cl, byte ptr [esi + edx + TOFF]                                         \
+    __asm cmp cl, 0                                                                   \
+    __asm jne push_done_##ID##_##N                                                    \
+    __asm mov esi, _certainPath                                                       \
+    __asm mov ax, word ptr _cCardinalDistance                                         \
+    DIST                                                                              \
+    __asm mov cx, word ptr _curGen                                                    \
+    __asm mov word ptr [esi + edx*2 + OFF], ax                                        \
+    __asm mov word ptr [edi + edx*2 + OFF], cx                                        \
+    __asm mov ecx, WRITEIDX                                                           \
+    __asm mov esi, _tilesQueue                                                        \
+    __asm mov eax, edx                                                                \
+    TILE                                                                              \
+    __asm mov dword ptr [esi + ecx*4], eax                                            \
+    __asm mov eax, _cY                                                                \
+    YADJ                                                                              \
+    __asm mov esi, _yQueue                                                            \
+    __asm mov word ptr [esi + ecx*2], ax                                              \
+    __asm add WRITEIDX, 1                                                             \
+    __asm push_done_##ID##_##N:
+
+#define MACRO_LINKAGE_EXPAND_FREE_NEIGHBOURS(ID, WRITEIDX)                            \
+    __asm mov edx, _tile                                                              \
+    __asm mov edi, _walkLayer                                                         \
+    __asm mov ebx, _cLink                                                             \
+    MACRO_LINKAGE_PUSH_FREE(ID, w, WRITEIDX, -2, -1, 0x40, MACRO_ASM_SAME, MACRO_ASM_DEC, MACRO_ASM_SAME) \
+    MACRO_LINKAGE_PUSH_FREE(ID, e, WRITEIDX, +2, +1, 0x04, MACRO_ASM_SAME, MACRO_ASM_INC, MACRO_ASM_SAME) \
+    __asm mov eax, _cY                                                                \
+    __asm shl eax, 3                                                                  \
+    __asm mov esi, _dirMatrix                                                         \
+    __asm add edx, dword ptr [esi + eax*4]                                            \
+    MACRO_LINKAGE_PUSH_FREE(ID, n, WRITEIDX, 0, 0, 0x01, MACRO_ASM_SAME, MACRO_ASM_SAME, MACRO_ASM_DEC) \
+    MACRO_LINKAGE_PUSH_FREE(ID, nw, WRITEIDX, -2, -1, 0x80, MACRO_ASM_DIAGONAL, MACRO_ASM_DEC, MACRO_ASM_DEC) \
+    MACRO_LINKAGE_PUSH_FREE(ID, ne, WRITEIDX, +2, +1, 0x02, MACRO_ASM_DIAGONAL, MACRO_ASM_INC, MACRO_ASM_DEC) \
+    __asm mov edx, _tile                                                              \
+    __asm mov eax, _cY                                                                \
+    __asm shl eax, 3                                                                  \
+    __asm add eax, 4                                                                  \
+    __asm mov esi, _dirMatrix                                                         \
+    __asm add edx, dword ptr [esi + eax*4]                                            \
+    MACRO_LINKAGE_PUSH_FREE(ID, s, WRITEIDX, 0, 0, 0x10, MACRO_ASM_SAME, MACRO_ASM_SAME, MACRO_ASM_INC) \
+    MACRO_LINKAGE_PUSH_FREE(ID, sw, WRITEIDX, -2, -1, 0x20, MACRO_ASM_DIAGONAL, MACRO_ASM_DEC, MACRO_ASM_INC) \
+    MACRO_LINKAGE_PUSH_FREE(ID, se, WRITEIDX, +2, +1, 0x08, MACRO_ASM_DIAGONAL, MACRO_ASM_INC, MACRO_ASM_INC)
+
 // clang-format on
