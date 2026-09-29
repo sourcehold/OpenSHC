@@ -42,7 +42,7 @@ def measure(func):
         # mspdbsrv dies mid-build (C1090), and cmake's glob verification crashes with an
         # access violation on the first build after the source list changed, which is
         # every first variant. Both succeed on a plain retry.
-        subprocess.run(["taskkill", "/F", "/IM", "mspdbsrv.exe"], capture_output=True)
+        common.kill_pdb_server()
         out = run(BATCH / "build_quiet.py")
     if "BUILD_FAIL" in out:
         return None, out
