@@ -39,7 +39,7 @@ namespace Map {
                                           .addXgetTile)
                         - x;
                     _isNegativeNumberX = (int)_someX >> 0x1f;
-                    uint _someY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile] - y;
+                    uint _someY = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile] - y;
                     _isNegativeNumberY = (int)_someY >> 0x1f;
                     if ((int)(((_someY ^ _isNegativeNumberY) - _isNegativeNumberY)
                             + ((_someX ^ _isNegativeNumberX) - _isNegativeNumberX))
