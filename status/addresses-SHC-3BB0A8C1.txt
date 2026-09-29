@@ -381,9 +381,9 @@ SHC_3BB0A8C1_0x00400260 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00400288 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00401000 | 0.0% | Pending
+SHC_3BB0A8C1_0x00401000 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00401040 | 0.0% | Pending
+SHC_3BB0A8C1_0x00401040 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00401060 | 0.0% | Pending
 
@@ -2599,7 +2599,7 @@ SHC_3BB0A8C1_0x004092B0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004092C0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004092E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004092E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00409300 | 0.0% | Pending
 
@@ -36389,21 +36389,21 @@ SHC_3BB0A8C1_0x004E1E70 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004E1F50 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004E1FA0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004E1FA0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004E2050 | 0.0% | Pending
+SHC_3BB0A8C1_0x004E2050 | 30.7% | for loops, reg alloc differs
 
 SHC_3BB0A8C1_0x004E21E0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004E2460 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004E25A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004E25A0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004E2600 | 0.0% | Pending
+SHC_3BB0A8C1_0x004E2600 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004E2630 | 0.0% | Pending
+SHC_3BB0A8C1_0x004E2630 | 51.2% | register allocation differs
 
-SHC_3BB0A8C1_0x004E26D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004E26D0 | 54.1% | esi/edx allocation differs
 
 SHC_3BB0A8C1_0x004E2AB4 | 0.0% | Pending
 
@@ -36415,7 +36415,7 @@ SHC_3BB0A8C1_0x004E2AC0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004E2AC4 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004E2AD0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004E2AD0 | 47.4% | Block order, reg alloc differs
 
 SHC_3BB0A8C1_0x004E3828 | 0.0% | Pending
 
@@ -36501,9 +36501,9 @@ SHC_3BB0A8C1_0x004E3868 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004E3869 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004E3870 | 0.0% | Pending
+SHC_3BB0A8C1_0x004E3870 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004E3980 | 0.0% | Pending
+SHC_3BB0A8C1_0x004E3980 | 45.0% | Style pass, reg alloc differs
 
 SHC_3BB0A8C1_0x004E46C0 | 0.0% | Pending
 
@@ -36875,19 +36875,19 @@ SHC_3BB0A8C1_0x004E5A88 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004E5A89 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004E5A90 | 0.0% | Pending
+SHC_3BB0A8C1_0x004E5A90 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004E5B80 | 0.0% | Pending
+SHC_3BB0A8C1_0x004E5B80 | 65.7% | esi/edi allocation differs
 
-SHC_3BB0A8C1_0x004E5C00 | 0.0% | Pending
+SHC_3BB0A8C1_0x004E5C00 | 57.4% | reg alloc + one spill
 
-SHC_3BB0A8C1_0x004E5D80 | 0.0% | Pending
+SHC_3BB0A8C1_0x004E5D80 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004E5DD0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004E5DD0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004E5E20 | 0.0% | Pending
+SHC_3BB0A8C1_0x004E5E20 | 90.6% | goto-free loop exit, 3 instr
 
-SHC_3BB0A8C1_0x004E5ED0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004E5ED0 | 43.4% | Block order, reg alloc differs
 
 SHC_3BB0A8C1_0x004E6308 | 0.0% | Pending
 
@@ -36971,23 +36971,23 @@ SHC_3BB0A8C1_0x004E6335 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004E6336 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004E6340 | 0.0% | Pending
+SHC_3BB0A8C1_0x004E6340 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004E6360 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004E63A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004E63A0 | 93.8% | one reg-copy form differs
 
 SHC_3BB0A8C1_0x004E6410 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004E64D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004E64D0 | 86.9% | reccmp label noise only
 
-SHC_3BB0A8C1_0x004E66F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004E66F0 | 60.0% | consts kept in regs by orig
 
-SHC_3BB0A8C1_0x004E7770 | 0.0% | Pending
+SHC_3BB0A8C1_0x004E7770 | 38.7% | LTCG ecx reuse in callers
 
-SHC_3BB0A8C1_0x004E7800 | 0.0% | Pending
+SHC_3BB0A8C1_0x004E7800 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004E7810 | 0.0% | Pending
+SHC_3BB0A8C1_0x004E7810 | 34.7% | Style pass, reg alloc differs
 
 SHC_3BB0A8C1_0x004E78D0 | 0.0% | Pending
 
@@ -37217,7 +37217,7 @@ SHC_3BB0A8C1_0x004E8429 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004E842A | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004E8430 | 0.0% | Pending
+SHC_3BB0A8C1_0x004E8430 | 49.6% | Style pass, reg alloc differs
 
 SHC_3BB0A8C1_0x004E8BFC | 0.0% | Pending
 
@@ -37333,15 +37333,15 @@ SHC_3BB0A8C1_0x004E8C4B | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004E8C4C | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004E8C50 | 0.0% | Pending
+SHC_3BB0A8C1_0x004E8C50 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004E8C90 | 0.0% | Pending
+SHC_3BB0A8C1_0x004E8C90 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004E8CA0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004E8CA0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004E8CC0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004E8CC0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004E8CF0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004E8CF0 | 31.9% | Style pass, reg alloc differs
 
 SHC_3BB0A8C1_0x004E9000 | 0.0% | Pending
 
