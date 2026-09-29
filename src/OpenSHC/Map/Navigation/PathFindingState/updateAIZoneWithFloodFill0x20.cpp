@@ -35,8 +35,7 @@ namespace Map {
             this->searchQueue.currentDistance = 1;
             this->searchQueue.yQueue[0] = (short)y;
             this->searchQueue.xQueue[0] = (short)x;
-            this->searchQueue.tilesQueue[0]
-                = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+            this->searchQueue.tilesQueue[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
             DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
@@ -57,8 +56,7 @@ namespace Map {
                           edge-ness of the candidate !?
                          */
                         if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x30) == 0) {
-                            _candidate
-                                = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][iVar3] + _tile;
+                            _candidate = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][iVar3] + _tile;
                             if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration) {
                                 DAT_TileMapState::instance.CertainPathLayer[_candidate]
                                     = (short)this->searchQueue.currentDistance + 1;
@@ -68,8 +66,7 @@ namespace Map {
                                           .short_.xOffset
                                     + sVar1;
                                 this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                    = *(short*)((int)DAT_TerrainDefinedData::instance
-                                                    .clockwiseCardinalTranslationMatrix
+                                    = *(short*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
                                           + iVar3 * 8 + 4)
                                     + sVar2;
                                 this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
@@ -79,16 +76,14 @@ namespace Map {
                                 }
                             }
                             if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x30) == 0) {
-                                _candidate = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][iVar3 + 1]
-                                    + _tile;
+                                _candidate
+                                    = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][iVar3 + 1] + _tile;
                                 if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration) {
                                     DAT_TileMapState::instance.CertainPathLayer[_candidate]
                                         = (short)this->searchQueue.currentDistance + 1;
-                                    DAT_TileMapState::instance.WalkLayer[_candidate]
-                                        = (short)this->searchGeneration;
+                                    DAT_TileMapState::instance.WalkLayer[_candidate] = (short)this->searchGeneration;
                                     this->searchQueue.xQueue[this->searchQueue.writeIndex]
-                                        = DAT_TerrainDefinedData::instance
-                                              .clockwiseCardinalTranslationMatrix[iVar3 + 1]
+                                        = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar3 + 1]
                                               .short_.xOffset
                                         + sVar1;
                                     this->searchQueue.yQueue[this->searchQueue.writeIndex]
@@ -103,11 +98,9 @@ namespace Map {
                                     }
                                 }
                                 if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x30) == 0) {
-                                    _candidate
-                                        = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][iVar3 + 2]
+                                    _candidate = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][iVar3 + 2]
                                         + _tile;
-                                    if (DAT_TileMapState::instance.WalkLayer[_candidate]
-                                        != this->searchGeneration) {
+                                    if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration) {
                                         DAT_TileMapState::instance.CertainPathLayer[_candidate]
                                             = (short)this->searchQueue.currentDistance + 1;
                                         DAT_TileMapState::instance.WalkLayer[_candidate]
@@ -129,8 +122,8 @@ namespace Map {
                                         }
                                     }
                                     if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x30) == 0
-                                        && (_candidate = DAT_TileMapState::instance
-                                                             .directionTranslationMatrix[sVar2][iVar3 + 3]
+                                        && (_candidate
+                                            = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][iVar3 + 3]
                                                 + _tile,
                                             DAT_TileMapState::instance.WalkLayer[_candidate]
                                                 != this->searchGeneration)) {
@@ -166,7 +159,7 @@ namespace Map {
                 } while (this->searchQueue.readIndex != this->searchQueue.writeIndex);
             }
             return;
-}
+        }
 
     }
 }
