@@ -74,8 +74,8 @@ namespace Map {
             DAT_GameState::instance.playerDataArray[7].healerCount = 0;
             DAT_GameState::instance.playerDataArray[8].healerCount = 0;
             this->unitCount = 0;
-            this->maxUnitCount = 0;
             DAT_CurrentUnitSlotID::instance = 1;
+            this->maxUnitCount = 0;
             do {
                 _currentUnitID = DAT_CurrentUnitSlotID::instance;
                 if (this->units[_currentUnitID].logicalState != OpenSHC::Map::Units::ULS_INVISIBLE) {
@@ -160,10 +160,10 @@ namespace Map {
                                                                      .translationMatrix[_targetY]
                                                                      .addXgetTile
                                                         + _targetX])));
-                                        this->units[DAT_CurrentUnitSlotID::instance].state.generic
-                                            = OpenSHC::Map::Units::States::US_IDLEUnk;
                                         this->units[DAT_CurrentUnitSlotID::instance].destinationNeeded
                                             = OpenSHC::Map::Units::Pathfinding::DNE_DESTINATION_HAS_BEEN_SET;
+                                        this->units[DAT_CurrentUnitSlotID::instance].state.generic
+                                            = OpenSHC::Map::Units::States::US_IDLEUnk;
                                         _currentUnitID = DAT_CurrentUnitSlotID::instance;
                                     } else {
                                         this->units[_currentUnitID].state.generic
@@ -180,8 +180,8 @@ namespace Map {
                             && (DAT_TileMapState::instance.LogicLayer[this->units[_currentUnitID].tile] & 0x50000000U)
                                 != 0) {
                             this->units[_currentUnitID].state.generic = OpenSHC::Map::Units::States::US_DISAPPEAR;
-                            this->units[DAT_CurrentUnitSlotID::instance].updateTickTracker = 0;
                             _currentUnitID = DAT_CurrentUnitSlotID::instance;
+                            this->units[DAT_CurrentUnitSlotID::instance].updateTickTracker = 0;
                         }
                     }
                     if (this->units[_currentUnitID].logicalState == OpenSHC::Map::Units::ULS_NORMAL
@@ -619,10 +619,10 @@ namespace Map {
                                 if (7 < this->units[DAT_CurrentUnitSlotID::instance].movementRelated) {
                                     this->units[DAT_CurrentUnitSlotID::instance].logicalState
                                         = OpenSHC::Map::Units::ULS_TRANSITIONING;
+                                    this->units[DAT_CurrentUnitSlotID::instance].workplaceBuildingID_1 = 0;
                                     this->units[DAT_CurrentUnitSlotID::instance].unitTypeToChangeInto
                                         = OpenSHC::Map::Units::UT_PEASANT;
                                     this->units[DAT_CurrentUnitSlotID::instance].state_2 = 0;
-                                    this->units[DAT_CurrentUnitSlotID::instance].workplaceBuildingID_1 = 0;
                                     MACRO_CALL_MEMBER(
                                         OpenSHC::Map::Units::UnitsState_Func::clearHiddenFlagAndUpdatePosition, this)(
                                         DAT_CurrentUnitSlotID::instance);
@@ -669,8 +669,8 @@ namespace Map {
                                     + (int)this->units[DAT_CurrentUnitSlotID::instance].stateBasedSpeed
                                     + (int)this->units[DAT_CurrentUnitSlotID::instance].moveDelay
                                 < _troopValue - this->units[DAT_CurrentUnitSlotID::instance].field199_0x350) {
-                                this->units[DAT_CurrentUnitSlotID::instance].field199_0x350 = _troopValue;
                                 _shortFieldPtr = &this->units[DAT_CurrentUnitSlotID::instance].movementRunUpTime;
+                                this->units[DAT_CurrentUnitSlotID::instance].field199_0x350 = _troopValue;
                                 if (this->units[DAT_CurrentUnitSlotID::instance].movementRunUpTime <= 0) {
                                     *_shortFieldPtr = 0;
                                 } else {
