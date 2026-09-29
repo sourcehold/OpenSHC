@@ -29,7 +29,7 @@ namespace Map {
             if (MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::unitIsInMoat, this)(unitID) != FALSE) {
                 DAT_PathFindingState::instance.climbIsIllegal = 1;
             }
-            uint _unitX = this->units[unitID].x;
+            int _unitX = this->units[unitID].x;
             this->units[unitID].climbDataID = 0;
             this->units[unitID].destinationX_2Unk = (short)x;
             this->units[unitID].destinationY_2Unk = (short)y;
