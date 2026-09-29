@@ -90,8 +90,8 @@ namespace Map {
                                       .short_.xOffset
                                 + sVar1;
                             this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                = *(short*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
-                                      + _direction * 8 + 4)
+                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                      .short_.yOffset
                                 + _y;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidateNorthOrSouth;
                             this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
@@ -111,8 +111,8 @@ namespace Map {
                                       .short_.xOffset
                                 + sVar1;
                             this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                = *(short*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
-                                      + uVar4 * 8 + 4)
+                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[uVar4]
+                                      .short_.yOffset
                                 + _y;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar3;
                             this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
@@ -132,8 +132,8 @@ namespace Map {
                                       .short_.xOffset
                                 + sVar1;
                             this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                = *(short*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
-                                      + uVar4 * 8 + 4)
+                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[uVar4]
+                                      .short_.yOffset
                                 + _y;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar3;
                             this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
@@ -153,8 +153,8 @@ namespace Map {
                                       .short_.xOffset
                                 + sVar1;
                             this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                = *(short*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
-                                      + uVar4 * 8 + 4)
+                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[uVar4]
+                                      .short_.yOffset
                                 + _y;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar3;
                             this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
