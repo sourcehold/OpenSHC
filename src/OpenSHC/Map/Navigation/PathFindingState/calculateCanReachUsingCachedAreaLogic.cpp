@@ -112,14 +112,16 @@ namespace Map {
             BVar3 = MACRO_CALL_MEMBER(
                 OpenSHC::Map::Navigation::PathFindingState_Func::pathFindingWithBuildingsIncluded, this)(tile1
                     - DAT_ViewportRenderState::instance
-                        .translationMatrix[DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile1]]
+                        .translationMatrix[(
+                            short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile1]]
                         .addXgetTile,
-                (uint)(DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile1]),
+                (uint)((short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile1]),
                 (uint)(tile2
                     - DAT_ViewportRenderState::instance
-                        .translationMatrix[DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile2]]
+                        .translationMatrix[(
+                            short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile2]]
                         .addXgetTile),
-                (uint)(DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile2]), 100000, 0);
+                (uint)((short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile2]), 100000, 0);
             if (BVar3 != FALSE) {
                 iVar4 = 0;
                 pAVar2 = this->searchQueue.acceptAreaPairArray1;
