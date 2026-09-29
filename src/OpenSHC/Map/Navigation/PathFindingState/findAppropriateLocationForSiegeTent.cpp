@@ -167,9 +167,9 @@ namespace Map {
                                   minimum height in surrounding area
                                  */
                                 piVar4 = DAT_TileMapState::instance
-                                             .directionTranslationMatrix[*(int*)((int)DAT_TerrainDefinedData::instance
-                                                                                     .clockwiseCardinalTranslationMatrix
-                                                                             + y * 8 + 4)
+                                             .directionTranslationMatrix[DAT_TerrainDefinedData::instance
+                                                                             .clockwiseCardinalTranslationMatrix[y]
+                                                                             .int_.yOffset
                                                  + (int)sVar1]
                                     + 1;
                                 x = uVar7;
