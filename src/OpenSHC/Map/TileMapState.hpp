@@ -123,7 +123,7 @@ namespace Map {
         undefined4 refreshRelatedOne; // 0x005548C4 length: 4
         undefined4 field93_0x5548c8; // 0x005548C8 length: 4
         undefined4 flatViewToggleValue1; // 0x005548CC length: 4
-        undefined1 padding_0x5548d0[4]; // 0x005548D0 length: 4
+        undefined4 field95_0x5548d0; // 0x005548D0 length: 4
         undefined4 flatViewToggleValue2; // 0x005548D4 length: 4
         undefined4 refreshRelatedTwo; // 0x005548D8 length: 4
         undefined4 field101_0x5548dc; // 0x005548DC length: 4
