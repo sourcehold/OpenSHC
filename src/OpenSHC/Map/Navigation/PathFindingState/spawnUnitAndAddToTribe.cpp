@@ -65,7 +65,7 @@ namespace Map {
                 } while (this->searchQueue.readIndex != this->searchQueue.writeIndex);
             }
             if ((0 < count) && (iVar2 != -1)) {
-                short sVar1 = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[iVar2];
+                int sVar1 = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[iVar2];
                 _tile = DAT_ViewportRenderState::instance.translationMatrix[sVar1].addXgetTile;
                 do {
                     int _unitID
