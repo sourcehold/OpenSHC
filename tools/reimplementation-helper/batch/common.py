@@ -38,10 +38,28 @@ PDB_ENDPOINT = "openshc_" + ROOT.name
 PDB_ERROR_RE = re.compile(r"fatal error C10(90|33)")
 
 
-def build_env():
-    """Environment for anything that runs cl.exe, with this worktree's PDB endpoint."""
+def fresh_pdb_endpoint():
+    """A previously unused endpoint name for this worktree.
+
+    An endpoint can wedge in a way that outlives every mspdbsrv.exe using it: the name stays
+    unusable, and `cl.exe` keeps failing with C1090 no matter how often the server is killed and
+    restarted. Six consecutive builds failed that way once, across a fresh PCH and PDBs, while the
+    same tree built first try under a different name. So when killing the server does not help,
+    move to a new name rather than retrying into the same one.
+    """
+    return "%s_%d" % (PDB_ENDPOINT, os.getpid())
+
+
+def build_env(endpoint=None):
+    """Environment for anything that runs cl.exe, with this worktree's PDB endpoint.
+
+    An endpoint already set in the environment wins, so a caller can pin one for a whole session.
+    """
     env = dict(os.environ)
-    env.setdefault("_MSPDBSRV_ENDPOINT_", PDB_ENDPOINT)
+    if endpoint:
+        env["_MSPDBSRV_ENDPOINT_"] = endpoint
+    else:
+        env.setdefault("_MSPDBSRV_ENDPOINT_", PDB_ENDPOINT)
     return env
 
 
