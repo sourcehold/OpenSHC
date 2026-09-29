@@ -85,8 +85,8 @@ namespace Map {
                             DAT_TileMapState::instance.WalkLayer[_tile] = (short)this->searchGeneration;
                             this->searchQueue.xQueue[this->searchQueue.writeIndex] = _xOffset + _xOption;
                             this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                = *(short*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
-                                      + _direction * 8 + 4)
+                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                      .short_.yOffset
                                 + _yOption;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _tile;
                             this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
