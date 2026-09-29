@@ -56,7 +56,7 @@ namespace Map {
             }
             return (undefined4)(0);
             return (undefined4)(0);
-}
+        }
 
     }
 }
