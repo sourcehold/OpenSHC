@@ -141,6 +141,20 @@ Diff patterns that were reliable (more in the cheat sheet):
   not a source difference.
 - A mismatching argument count or `ret N` usually means the generated header is wrong; report it instead of working around it.
 - Diffs can reveal real bugs in existing reimplementations (wrong constants, wrong strides); fix those.
+- A decompiled `goto` that lands *after* a shared block (a clamp ladder, a common tail) is usually not a
+  jump at all: put the block once, after the if/else that feeds it, and give the skipped arm the value the
+  block maps to itself (`step = 0` for a clamp that leaves 0 alone). MSVC then emits the original's
+  "jump straight past the block" for that arm on its own. Duplicating the block into each arm instead does
+  *not* get tail-merged and scores far worse - worth ~38 points on `updateShowHiLayerOrResetChangedLayer`.
+- Thresholds in such a ladder are the literals the `cmp` shows, not what the decompiler printed:
+  `cmp eax, 0x3c; jle` is `step > 60`, and Ghidra renders the same code as `iVar1 < 60`.
+- A folded address constant where the original has an `imul` means a named local: we wrote
+  `(y - 1) * 400 + x` and got one constant, while the original multiplied a `y - 1` local by 400.
+  Give each reused coordinate its own local and reassign it as the original walks the neighbours.
+- An extra 4 bytes of frame with no local to explain it is usually a value the decompiler folded into an
+  expression but the original held in a variable (a copy taken across a call, a mask computed once).
+- A mask applied inside a loop over a value that cannot change was hoisted in the original; look for
+  `and reg, MASK` before the first call and keep the masked result in a local.
 
 ## Agent Skills
 
