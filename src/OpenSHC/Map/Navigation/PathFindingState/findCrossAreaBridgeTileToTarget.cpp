@@ -43,7 +43,8 @@ namespace Map {
             local_14 = 0;
             local_10 = 0;
             local_20 = 10000;
-            if (param_2 > 399 || param_3 > 399 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[param_3 * 400 + param_2] == '\0') {
+            if (param_2 > 399 || param_3 > 399
+                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[param_3 * 400 + param_2] == '\0') {
                 return (undefined4)(0);
             }
             this->searchGeneration = this->searchGeneration + 1;
@@ -55,12 +56,10 @@ namespace Map {
             this->searchQueue.currentDistance = 1;
             this->searchQueue.writeIndex = 1;
             this->searchQueue.readIndex = 0;
-            ushort uVar1
-                = DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[param_1].tile];
-            uVar2
-                = DAT_TileMapState::instance
-                      .PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[param_3].addXgetTile
-                          + param_2];
+            ushort uVar1 = DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[param_1].tile];
+            uVar2 = DAT_TileMapState::instance
+                        .PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[param_3].addXgetTile
+                            + param_2];
             this->searchQueue.yQueue[0] = DAT_UnitsState::instance.units[param_1].y;
             this->searchQueue.xQueue[0] = DAT_UnitsState::instance.units[param_1].x;
             this->searchQueue.tilesQueue[0] = DAT_UnitsState::instance.units[param_1].tile;
@@ -82,8 +81,7 @@ namespace Map {
                         iVar13 = (*paiVar6)[0] + uVar5;
                         if (DAT_TileMapState::instance.WalkLayer[iVar13] != this->searchGeneration
                             && (DAT_TileMapState::instance.LogicLayer[iVar13] & 0x400000U) == 0) {
-                            if ((int)(short)DAT_TileMapState::instance.PathConnectionLayer[iVar13]
-                                    == (int)(short)uVar1
+                            if ((int)(short)DAT_TileMapState::instance.PathConnectionLayer[iVar13] == (int)(short)uVar1
                                 || (DAT_TileMapState::instance.LogicLayer[iVar13] & 0x10000100U) != 0) {
                                 iVar7 = ((Point8IntXY*)(piVar12 + -1))->xOffset;
                                 DAT_TileMapState::instance.CertainPathLayer[iVar13]
@@ -100,8 +98,7 @@ namespace Map {
                                 iVar7 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                               calculateCanPlayerUnitsNavigateToAreaFromArea,
                                     this)((int)DAT_UnitsState::instance.units[param_1].owner,
-                                    (dword)((
-                                        int)((int)(short)DAT_TileMapState::instance.PathConnectionLayer[iVar13])),
+                                    (dword)((int)((int)(short)DAT_TileMapState::instance.PathConnectionLayer[iVar13])),
                                     (dword)((int)((short)uVar2)),
                                     (int)(DAT_UnitsState::instance.units[param_1].unitCanClimb));
                                 if (iVar7 != 0) {
@@ -137,7 +134,7 @@ namespace Map {
                 }
             }
             return (undefined4)(0);
-}
+        }
 
     }
 }
