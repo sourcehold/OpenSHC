@@ -19,7 +19,6 @@ namespace Map {
             dword dVar2;
             dword dVar3;
             dword dVar4;
-            ClimbData* piVar7;
             int iVar7;
             bool bVar8;
             int local_96c;
@@ -35,29 +34,27 @@ namespace Map {
                 this->DAT_Test_likely = this->DAT_Test_likely + 1;
                 local_96c = 0;
                 local_968 = 0;
-                if (1 < this->maxClimbDataCount) {
-                    piVar7 = &this->climbData[1];
-                    do {
-                        if ((piVar7->canBeUsed == 1) && (piVar7->isRecognizedByPathfinding != 0)) {
-                            if (piVar7->type == 1) {
-                                bVar8 = permitClimb == 0;
-                            } else {
-                                bVar8 = permitClimb == 2;
-                            }
-                            if (!bVar8
-                                && ((playerID == 0
-                                        || (DAT_GameState::instance.mapAndTime.playerTeams[piVar7->owner]
-                                            == DAT_GameState::instance.mapAndTime.playerTeams[playerID]))
-                                    || (DAT_BuildingsState::instance.buildings[piVar7->buildingID].field241_0x2c6
-                                        != 0))) {
-                                aiStack_640[local_96c * 2 + 1] = 0;
-                                aiStack_640[local_96c * 2] = iVar7;
-                                local_96c = local_96c + 1;
-                            }
+                for (iVar7 = 1; iVar7 < this->maxClimbDataCount; iVar7 = iVar7 + 1) {
+                    if (this->climbData[iVar7].canBeUsed == 1
+                        && this->climbData[iVar7].isRecognizedByPathfinding != 0) {
+                        if (this->climbData[iVar7].type == 1) {
+                            bVar8 = permitClimb == 0;
+                        } else {
+                            bVar8 = permitClimb == 2;
                         }
-                        iVar7 = iVar7 + 1;
-                        piVar7 = piVar7 + 0x81;
-                    } while (iVar7 < this->maxClimbDataCount);
+                        if (!bVar8
+                            && ((playerID == 0
+                                    || (DAT_GameState::instance.mapAndTime
+                                            .playerTeams[this->climbData[iVar7].owner]
+                                        == DAT_GameState::instance.mapAndTime.playerTeams[playerID]))
+                                || (DAT_BuildingsState::instance.buildings[this->climbData[iVar7].buildingID]
+                                        .field241_0x2c6
+                                    != 0))) {
+                            aiStack_640[local_96c * 2 + 1] = 0;
+                            aiStack_640[local_96c * 2] = iVar7;
+                            local_96c = local_96c + 1;
+                        }
+                    }
                 }
                 int iVar6 = 0;
                 this->field63_0xc0 = 0;
