@@ -57,41 +57,39 @@ namespace Map {
                     if (this->searchQueue.currentDistance > max) {
                         return 0;
                     }
-                    int iVar6 = 0;
-                    do {
+                    for (int iVar6 = 0; iVar6 < 8; iVar6 = iVar6 + 1) {
                         if ((DAT_TileMapState::instance.PathLinkageLayer[iVar4]
-                                & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar6])
-                                != 0
-                            && (tile = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][iVar6] + iVar4,
-                                DAT_TileMapState::instance.WalkLayer[tile] != this->searchGeneration)) {
-                            if (4 < this->searchQueue.currentDistance
-                                && (DAT_TileMapState::instance.AIInfoLayer[tile] & 0x40) != 0
-                                && (iVar5
-                                    = MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::getSupportPointIndex,
-                                        DAT_TroopValueState::ptr)(tile),
-                                    iVar5 != 0)
-                                && iVar5 != DAT_TribesState::instance.tribes[tribeID].supportPointIndex
-                                && DAT_TroopValueState::instance.attackInfo.supportPointsArray[iVar5].tribeID == 0) {
-                                return iVar5;
-                            }
-                            DAT_TileMapState::instance.CertainPathLayer[tile]
-                                = (short)this->searchQueue.currentDistance + 1;
-                            short sVar3 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar6]
-                                              .short_.xOffset;
-                            DAT_TileMapState::instance.WalkLayer[tile] = (short)this->searchGeneration;
-                            this->searchQueue.xQueue[this->searchQueue.writeIndex] = sVar3 + sVar1;
-                            this->searchQueue.yQueue[this->searchQueue.writeIndex]
-                                = *(short*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
-                                      + iVar6 * 8 + 4)
-                                + sVar2;
-                            this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = tile;
-                            this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                            if (0x13a0f < this->searchQueue.writeIndex) {
-                                this->searchQueue.writeIndex = 0;
-                            }
+                            & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar6])
+                            != 0
+                        && (tile = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][iVar6] + iVar4,
+                            DAT_TileMapState::instance.WalkLayer[tile] != this->searchGeneration)) {
+                        if (4 < this->searchQueue.currentDistance
+                            && (DAT_TileMapState::instance.AIInfoLayer[tile] & 0x40) != 0
+                            && (iVar5
+                                = MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::getSupportPointIndex,
+                                    DAT_TroopValueState::ptr)(tile),
+                                iVar5 != 0)
+                            && iVar5 != DAT_TribesState::instance.tribes[tribeID].supportPointIndex
+                            && DAT_TroopValueState::instance.attackInfo.supportPointsArray[iVar5].tribeID == 0) {
+                            return iVar5;
                         }
-                        iVar6 = iVar6 + 1;
-                    } while (iVar6 < 8);
+                        DAT_TileMapState::instance.CertainPathLayer[tile]
+                            = (short)this->searchQueue.currentDistance + 1;
+                        short sVar3 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar6]
+                                          .short_.xOffset;
+                        DAT_TileMapState::instance.WalkLayer[tile] = (short)this->searchGeneration;
+                        this->searchQueue.xQueue[this->searchQueue.writeIndex] = sVar3 + sVar1;
+                        this->searchQueue.yQueue[this->searchQueue.writeIndex]
+                            = *(short*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix
+                                  + iVar6 * 8 + 4)
+                            + sVar2;
+                        this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = tile;
+                        this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
+                        if (0x13a0f < this->searchQueue.writeIndex) {
+                            this->searchQueue.writeIndex = 0;
+                        }
+                        }
+                    }
                     this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
                     if (0x13a0f < this->searchQueue.readIndex) {
                         this->searchQueue.readIndex = 0;
