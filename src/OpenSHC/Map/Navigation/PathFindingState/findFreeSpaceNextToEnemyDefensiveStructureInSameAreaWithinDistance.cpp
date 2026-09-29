@@ -54,7 +54,7 @@ namespace Map {
             int _x;
             int _y;
             uint _tile;
-            _origY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
+            _origY = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
             _origAXGT = DAT_ViewportRenderState::instance.translationMatrix[_origY].addXgetTile;
             _dIndex = 0;
             _maxDistance = 10;
