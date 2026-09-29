@@ -67,8 +67,8 @@ namespace Map {
                             return;
                         }
                         for (int _direction = 0; _direction < 8; _direction = _direction + 4) {
-                            _neswTile1 = DAT_TileMapState::instance
-                                              .directionTranslationMatrix[_currentY][_direction + 0]
+                            _neswTile1
+                                = DAT_TileMapState::instance.directionTranslationMatrix[_currentY][_direction + 0]
                                 + _currentTile;
                             if ((DAT_TileMapState::instance.LogicLayer[_neswTile1] & 0x30) == 0) {
                                 DAT_TileMapState::instance.CertainPathLayer[_neswTile1]
@@ -90,8 +90,8 @@ namespace Map {
                                     this->searchQueue.writeIndex = 0;
                                 }
                             }
-                            _neswTile2 = DAT_TileMapState::instance
-                                              .directionTranslationMatrix[_currentY][_direction + 1]
+                            _neswTile2
+                                = DAT_TileMapState::instance.directionTranslationMatrix[_currentY][_direction + 1]
                                 + _currentTile;
                             if ((DAT_TileMapState::instance.LogicLayer[_neswTile2] & 0x30) == 0) {
                                 DAT_TileMapState::instance.CertainPathLayer[_neswTile2]
@@ -113,8 +113,8 @@ namespace Map {
                                     this->searchQueue.writeIndex = 0;
                                 }
                             }
-                            _neswTile3 = DAT_TileMapState::instance
-                                              .directionTranslationMatrix[_currentY][_direction + 2]
+                            _neswTile3
+                                = DAT_TileMapState::instance.directionTranslationMatrix[_currentY][_direction + 2]
                                 + _currentTile;
                             if ((DAT_TileMapState::instance.LogicLayer[_neswTile3] & 0x30) == 0) {
                                 DAT_TileMapState::instance.CertainPathLayer[_neswTile3]
@@ -136,8 +136,8 @@ namespace Map {
                                     this->searchQueue.writeIndex = 0;
                                 }
                             }
-                            _neswTile4 = DAT_TileMapState::instance
-                                              .directionTranslationMatrix[_currentY][_direction + 3]
+                            _neswTile4
+                                = DAT_TileMapState::instance.directionTranslationMatrix[_currentY][_direction + 3]
                                 + _currentTile;
                             if ((DAT_TileMapState::instance.LogicLayer[_neswTile4] & 0x30) == 0) {
                                 DAT_TileMapState::instance.CertainPathLayer[_neswTile4]
