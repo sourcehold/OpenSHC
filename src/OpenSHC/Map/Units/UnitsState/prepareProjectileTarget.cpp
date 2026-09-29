@@ -17,8 +17,8 @@ namespace Map {
                     this->units[shooterID].shootTargetZ);
             } else {
                 _targetFixedRng = this->units[targetID].fixedRng;
-                this->units[shooterID].shootTargetMicroX = this->units[targetID].x * 8 + 4;
                 this->units[shooterID].shootTargetMicroY = this->units[targetID].y * 8 + 4;
+                this->units[shooterID].shootTargetMicroX = this->units[targetID].x * 8 + 4;
                 this->units[shooterID].shootTargetZ
                     = this->units[targetID].buildingHeight + this->units[targetID].terrainOrClimbHeight;
                 if (this->units[targetID].tunnelerFinishedDigging == 2) {

@@ -46,8 +46,8 @@ namespace Map {
             this->units[_unitID].terrainOrClimbHeight = (short)terrainHeight;
             this->units[_unitID].microXPosition = (short)microXPosition + 4;
             this->units[_unitID].time = _time;
-            this->units[_unitID].calculatedOwnerPlayerIndex = (short)displayColor;
             this->units[_unitID].microYPosition = (short)microYPosition + 4;
+            this->units[_unitID].calculatedOwnerPlayerIndex = (short)displayColor;
             this->units[_unitID].facingDirection = 0;
             this->units[_unitID].displayColorPlayerID = (short)displayColor;
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setUnitValues, this)(_unitID, unitType);

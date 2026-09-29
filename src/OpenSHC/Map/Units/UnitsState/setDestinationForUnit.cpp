@@ -41,11 +41,11 @@ namespace Map {
                 this->units[unitID].currentIndexInPathPlan = 0;
                 this->units[unitID].destinationXPosition = (short)x;
                 this->units[unitID].ladderExitXPosition = (short)_unitX;
+                this->units[unitID].previousTilePosition
+                    = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + _unitX;
                 this->units[unitID].ladderExitYPosition = this->units[unitID].y;
                 this->units[unitID].destinationTilePosition
                     = (short)x + DAT_ViewportRenderState::instance.translationMatrix[(short)y].addXgetTile;
-                this->units[unitID].previousTilePosition
-                    = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + _unitX;
                 DAT_PathFindingState::instance.climbIsIllegal = 0;
                 DAT_PathFindingState::instance.allAssassinsUnk = 0;
                 return TRUE;
@@ -168,8 +168,8 @@ namespace Map {
                 400, '\0', this->units[unitID].pathPlanStart);
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::bindPathPlanToAlgorithmStateAndReset,
                 DAT_PathFindingState::ptr)(this->units[unitID].pathPlanStart);
-            DAT_PathFindingState::instance.unitX = this->units[unitID].x;
             DAT_PathFindingState::instance.unitY = this->units[unitID].y;
+            DAT_PathFindingState::instance.unitX = this->units[unitID].x;
             if (this->units[unitID].isSelectable_OR_matchTime == 0) {
                 DAT_PathFindingState::instance.notAllAssassinsUnk = 1;
             }
@@ -198,10 +198,10 @@ namespace Map {
                 this->units[unitID].destinationTilePosition = (short)_pathTargetX
                     + DAT_ViewportRenderState::instance.translationMatrix[(short)_pathTargetY].addXgetTile;
                 this->units[unitID].ladderExitXPosition = (short)_unitX;
-                this->units[unitID].previousTilePosition = this->units[unitID].x
-                    + DAT_ViewportRenderState::instance.translationMatrix[this->units[unitID].y].addXgetTile;
                 this->units[unitID].cannotClimb = (ushort)(DAT_PathFindingState::instance.climbIsIllegal != 0);
                 DAT_PathFindingState::instance.climbIsIllegal = 0;
+                this->units[unitID].previousTilePosition = this->units[unitID].x
+                    + DAT_ViewportRenderState::instance.translationMatrix[this->units[unitID].y].addXgetTile;
                 DAT_PathFindingState::instance.allAssassinsUnk = 0;
                 return TRUE;
             }

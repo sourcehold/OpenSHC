@@ -109,14 +109,14 @@ namespace Map {
                         .playerTeams[(DAT_TileMapState::instance.WallOwnerLayer[this->units[unitID].field248_0x3bc] & 7)
                             + 1]) {
                 _shootAtZ = (int)(_heightAtTarget - _defaultHeightAtTarget) / 2 + _defaultHeightAtTarget;
+                _shootAtMicroY = DAT_ViewportRenderState::instance
+                                     .tileTranslationMatrix_YComponent[this->units[unitID].field248_0x3bc]
+                    * 8;
                 _shootAtMicroX = (this->units[unitID].field248_0x3bc
                                      - DAT_ViewportRenderState::instance
                                          .translationMatrix[DAT_ViewportRenderState::instance
                                                  .tileTranslationMatrix_YComponent[this->units[unitID].field248_0x3bc]]
                                          .addXgetTile)
-                    * 8;
-                _shootAtMicroY = DAT_ViewportRenderState::instance
-                                     .tileTranslationMatrix_YComponent[this->units[unitID].field248_0x3bc]
                     * 8;
             } else {
                 DAT_PathFindingState::instance.ALG_TargetTile = 0;
@@ -161,8 +161,8 @@ namespace Map {
                 } else {
                     this->units[unitID].facingDirection
                         = this->units[unitID].facingDirection + (short)this->units[unitID].attackFacingDirection;
-                    this->units[unitID].facingDirection = this->units[unitID].facingDirection & 7;
                     this->units[unitID].attackFacingDirection = '\0';
+                    this->units[unitID].facingDirection = this->units[unitID].facingDirection & 7;
                     this->units[unitID].shootTargetedUnit = 0;
                     this->units[unitID].facingDirectionMapOrientationCorrected
                         = this->units[unitID].facingDirection - (short)DAT_TileMapState::instance.mapOrientation;
