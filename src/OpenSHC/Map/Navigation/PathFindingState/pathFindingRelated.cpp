@@ -77,9 +77,8 @@ namespace Map {
                                                       .clockwiseCardinalTranslationMatrix[iVar10]
                                                       .int_.xOffset
                                                 + sVar2),
-                                            *(int*)((int)DAT_TerrainDefinedData::instance
-                                                        .clockwiseCardinalTranslationMatrix
-                                                + iVar10 * 8 + 4)
+                                            DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar10]
+                                                    .int_.yOffset
                                                 + iVar7),
                                         iVar8 < local_18))
                                     goto LAB_0049fdee;
