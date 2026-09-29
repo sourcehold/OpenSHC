@@ -83,7 +83,7 @@ namespace Map {
                                 _tileArray[_index_3] = _currentTile;
                                 _yArray[_index_3] = _yTranslationUnk + _y;
                                 _index_3 = _index_3 + 1;
-                                if (80400 < _index_3) {
+                                if (_index_3 >= 80400) {
                                     _index_3 = 0;
                                 }
                             }
