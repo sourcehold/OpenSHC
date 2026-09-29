@@ -53,7 +53,7 @@ namespace Map {
             this->searchQueue.currentDistance = 1;
             this->searchQueue.writeIndex = 1;
             this->searchQueue.readIndex = 0;
-            _area = DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile];
+            _area = (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile];
             this->searchQueue.yQueue[0] = (short)y;
             this->searchQueue.xQueue[0] = (short)x;
             this->searchQueue.tilesQueue[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
