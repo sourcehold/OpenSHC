@@ -219,6 +219,13 @@ of the switch leaving the value it should have set uninitialised. Fixing them wa
 suspicious dead store is worth decompiling for rather than deleting. Note this is the opposite of the duplicate-tail
 pattern below, where our shared block should have been two separate branches - check the predecessor count either way.
 
+Duplicating a `LAB_*` is correct C++ but not automatically a better match, so **measure every `goto` removal**. A
+`goto` in the decompiler output usually marks a block the original compiler emitted once and jumped to, and writing
+the block out twice makes MSVC emit it twice: duplicating the single shared tail in
+`setClimbBasedOnClosestClimbData` - two `if` arms that set a coordinate pair and then share the distance test - was
+semantically identical and cost **35 points**. Keep the `goto` where the measurement says the original shared the
+block, and record that in the commit remark rather than trading match for style.
+
 Diff patterns that were reliable (more in the cheat sheet):
 
 - Absolute `DAT_*` addresses in the original asm where the source uses `this->` mean the original accessed the global instance.
