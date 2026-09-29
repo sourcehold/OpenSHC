@@ -52,7 +52,8 @@ namespace Map {
             this->ALG_ResultTile = 0;
             this->ALG_ResultY = 0;
             this->ALG_ResultX = 0;
-            if (uVar5 > 399 || uVar7 > 399 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[uVar7 * 400 + uVar5] == '\0') {
+            if (uVar5 > 399 || uVar7 > 399
+                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[uVar7 * 400 + uVar5] == '\0') {
                 return;
             }
             this->searchGeneration = this->searchGeneration + 1;
@@ -97,11 +98,11 @@ namespace Map {
                                   TODO:FIXME: WallOwnerLayer contains player ids, not necessarily team ids
                                  */
                                 if ((uVar5 & 0x100) != 0
-                                    && (DAT_GameSynchronyState::instance.currentGameMode
-                                            == OpenSHC::Game::GM_SOLITARY
+                                    && (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY
                                         || (DAT_GameState::instance.mapAndTime.skirmishStrongWalls == 0))
-                                    && DAT_GameState::instance.mapAndTime.playerTeams
-                                            [(DAT_TileMapState::instance.WallOwnerLayer[_nextCandidate] & 7) + 1]
+                                    && DAT_GameState::instance.mapAndTime
+                                            .playerTeams[(DAT_TileMapState::instance.WallOwnerLayer[_nextCandidate] & 7)
+                                                + 1]
                                         != DAT_GameState::instance.mapAndTime
                                             .playerTeams[DAT_UnitsState::instance.units[unitID].owner]) {
                                     this->ALG_ResultTile = _nextCandidate;
@@ -132,10 +133,9 @@ namespace Map {
                                     case OpenSHC::Map::Buildings::BT_KEEPDOOR:
                                         break;
                                     default:
-                                        BOOLEnum BVar3
-                                            = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::
-                                                                    getBuildingHasHealthProperty,
-                                                DAT_BuildingsState::ptr)(uVar7, _nextCandidate);
+                                        BOOLEnum BVar3 = MACRO_CALL_MEMBER(
+                                            OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHasHealthProperty,
+                                            DAT_BuildingsState::ptr)(uVar7, _nextCandidate);
                                         if (BVar3 != FALSE) {
                                             this->ALG_ResultTile = _nextCandidate;
                                             return;
@@ -149,8 +149,7 @@ namespace Map {
                                  */
                                 DAT_TileMapState::instance.CertainPathLayer[_nextCandidate]
                                     = (short)this->searchQueue.currentDistance + 1;
-                                DAT_TileMapState::instance.WalkLayer[_nextCandidate]
-                                    = (short)this->searchGeneration;
+                                DAT_TileMapState::instance.WalkLayer[_nextCandidate] = (short)this->searchGeneration;
                                 this->searchQueue.xQueue[this->searchQueue.writeIndex]
                                     = ((Point8ShortXY*)(psVar6 + -2))->xOffset + sVar1;
                                 this->searchQueue.yQueue[this->searchQueue.writeIndex] = *psVar6 + sVar2;
@@ -174,7 +173,7 @@ namespace Map {
                 }
             }
             return;
-}
+        }
 
     }
 }
