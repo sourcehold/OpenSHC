@@ -24385,7 +24385,7 @@ SHC_3BB0A8C1_0x00498FD0 | 9.7% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004990F0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004995E0 | 4.7% | Style pass, asm differs
+SHC_3BB0A8C1_0x004995E0 | 49.3% | Handwritten asm block
 
 SHC_3BB0A8C1_0x00499970 | 0.0% | Pending
 

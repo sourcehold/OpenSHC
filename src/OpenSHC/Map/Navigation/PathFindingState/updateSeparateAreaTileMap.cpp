@@ -9,6 +9,8 @@
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
+#include "OpenSHC/Map/Navigation/PathFindingState/LinkageNeighbourAsm.hpp"
+
 
 namespace OpenSHC {
 namespace Map {
@@ -28,21 +30,13 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004995E0
         BOOLEnum PathFindingState::updateSeparateAreaTileMap(int forceUpdate)
         {
-            int* piVar5;
-            int iVar6;
-            int iVar7;
-            ushort _zoneCounter;
-            int local_20;
-            int* local_c;
-            int local_8;
-            _zoneCounter = 1;
             if (forceUpdate != 0) {
                 this->toggleUpdateSeparateAreaTileMap = 1;
                 DAT_GameState::instance.mapAndTime.counterForUpdatingSeparateAreaTileMaps = 0;
             }
             DAT_GameState::instance.mapAndTime.counterForUpdatingSeparateAreaTileMaps
-                = DAT_GameState::instance.mapAndTime.counterForUpdatingSeparateAreaTileMaps + -1;
-            if ((0 < DAT_GameState::instance.mapAndTime.counterForUpdatingSeparateAreaTileMaps)
+                = DAT_GameState::instance.mapAndTime.counterForUpdatingSeparateAreaTileMaps - 1;
+            if (0 < DAT_GameState::instance.mapAndTime.counterForUpdatingSeparateAreaTileMaps
                 || (DAT_GameState::instance.mapAndTime.counterForUpdatingSeparateAreaTileMaps = 200,
                     this->toggleUpdateSeparateAreaTileMap == 0)) {
                 return FALSE;
@@ -51,99 +45,56 @@ namespace Map {
             this->toggleUpdateSeparateAreaTileMap = 0;
             this->totalZones = 0;
             this->sum = 0;
-            ushort uVar4 = 1;
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                 0x27420, '\0', (void*)((int)(DAT_TileMapState::instance.PathConnectionLayer)));
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                 4000, '\0', (void*)((int)(this->zoneSizesArray)));
             MACRO_CALL_MEMBER(
                 OpenSHC::Map::Buildings::BuildingsState_Func::updatePathLinkageTileMap, DAT_BuildingsState::ptr)(1);
-            short sVar3 = 0;
-            local_20 = 0;
-            local_c = &DAT_ViewportRenderState::instance.translationMatrix[1].firstTileOfRow;
-            do {
-                if (*local_c <= local_20) {
-                    sVar3 = sVar3 + 1;
-                    local_c = local_c + 3;
+            /*
+              The eight-neighbour expansion below is handwritten assembly in the original and reaches
+              the area layer and the queue through these locals; see LinkageNeighbourAsm.hpp. The
+              queue end lives in the forceUpdate parameter slot, as it does in the original.
+             */
+            ushort* _areaLayer = DAT_TileMapState::instance.PathConnectionLayer;
+            int* _tilesQueue = this->searchQueue.tilesQueue;
+            short* _yQueue = this->searchQueue.yQueue;
+            int* _dirMatrix = &DAT_TileMapState::instance.directionTranslationMatrix[0][0];
+            short _areaID = 1;
+            short _row = 0;
+            int* _rowEnd = &DAT_ViewportRenderState::instance.translationMatrix[1].firstTileOfRow;
+            for (int _first = 0; _first < 80400; _first = _first + 1) {
+                if (*_rowEnd <= _first) {
+                    _row = _row + 1;
+                    _rowEnd = _rowEnd + 3;
                 }
-                if ((char)(short)DAT_TileMapState::instance.PathConnectionLayer[local_20] == '\0'
-                    && (DAT_TileMapState::instance.LogicLayer[local_20] & 0x4a5014b1U) == 0) {
-                    this->searchQueue.tilesQueue[0] = local_20;
-                    forceUpdate = 1;
-                    local_8 = 0;
-                    this->searchQueue.yQueue[0] = sVar3;
-                    DAT_TileMapState::instance.PathConnectionLayer[local_20] = _zoneCounter;
-                    for (; local_8 != forceUpdate; local_8 = local_8 + 1) {
-                        this->zoneSizesArray[uVar4] = this->zoneSizesArray[uVar4] + 1;
-                        iVar7 = this->searchQueue.tilesQueue[local_8];
-                        int uVar2 = (int)this->searchQueue.yQueue[local_8];
-                        int bVar1 = DAT_TileMapState::instance.PathLinkageLayer[iVar7];
-                        if ((bVar1 & 0x40) != 0 && DAT_TileMapState::instance.MacroLayer[iVar7 + 0x13a0f] == 0) {
-                            DAT_TileMapState::instance.MacroLayer[iVar7 + 0x13a0f] = uVar4;
-                            this->searchQueue.tilesQueue[forceUpdate] = iVar7 + -1;
-                            this->searchQueue.yQueue[forceUpdate] = uVar2;
-                            forceUpdate = forceUpdate + 1;
-                        }
-                        if ((bVar1 & 4) != 0 && (short)DAT_TileMapState::instance.PathConnectionLayer[iVar7 + 1] == 0) {
-                            DAT_TileMapState::instance.PathConnectionLayer[iVar7 + 1] = uVar4;
-                            this->searchQueue.tilesQueue[forceUpdate] = iVar7 + 1;
-                            this->searchQueue.yQueue[forceUpdate] = uVar2;
-                            forceUpdate = forceUpdate + 1;
-                        }
-                        iVar6 = iVar7 + DAT_TileMapState::instance.directionTranslationMatrix[uVar2][0];
-                        if ((bVar1 & 0x80) != 0 && DAT_TileMapState::instance.MacroLayer[iVar6 + 0x13a0f] == 0) {
-                            DAT_TileMapState::instance.MacroLayer[iVar6 + 0x13a0f] = uVar4;
-                            this->searchQueue.tilesQueue[forceUpdate] = iVar6 + -1;
-                            this->searchQueue.yQueue[forceUpdate] = uVar2 - 1;
-                            forceUpdate = forceUpdate + 1;
-                        }
-                        if ((bVar1 & 1) != 0 && (short)DAT_TileMapState::instance.PathConnectionLayer[iVar6] == 0) {
-                            DAT_TileMapState::instance.PathConnectionLayer[iVar6] = uVar4;
-                            this->searchQueue.tilesQueue[forceUpdate] = iVar6;
-                            this->searchQueue.yQueue[forceUpdate] = uVar2 - 1;
-                            forceUpdate = forceUpdate + 1;
-                        }
-                        if ((bVar1 & 2) != 0 && (short)DAT_TileMapState::instance.PathConnectionLayer[iVar6 + 1] == 0) {
-                            DAT_TileMapState::instance.PathConnectionLayer[iVar6 + 1] = uVar4;
-                            this->searchQueue.tilesQueue[forceUpdate] = iVar6 + 1;
-                            this->searchQueue.yQueue[forceUpdate] = uVar2 - 1;
-                            forceUpdate = forceUpdate + 1;
-                        }
-                        iVar7 = iVar7 + DAT_TileMapState::instance.directionTranslationMatrix[uVar2][4];
-                        if ((bVar1 & 0x20) != 0 && DAT_TileMapState::instance.MacroLayer[iVar7 + 0x13a0f] == 0) {
-                            DAT_TileMapState::instance.MacroLayer[iVar7 + 0x13a0f] = uVar4;
-                            this->searchQueue.tilesQueue[forceUpdate] = iVar7 + -1;
-                            this->searchQueue.yQueue[forceUpdate] = uVar2 + 1;
-                            forceUpdate = forceUpdate + 1;
-                        }
-                        if ((bVar1 & 0x10) != 0 && (short)DAT_TileMapState::instance.PathConnectionLayer[iVar7] == 0) {
-                            DAT_TileMapState::instance.PathConnectionLayer[iVar7] = uVar4;
-                            this->searchQueue.tilesQueue[forceUpdate] = iVar7;
-                            this->searchQueue.yQueue[forceUpdate] = uVar2 + 1;
-                            forceUpdate = forceUpdate + 1;
-                        }
-                        if ((bVar1 & 8) != 0 && (short)DAT_TileMapState::instance.PathConnectionLayer[iVar7 + 1] == 0) {
-                            DAT_TileMapState::instance.PathConnectionLayer[iVar7 + 1] = uVar4;
-                            this->searchQueue.tilesQueue[forceUpdate] = iVar7 + 1;
-                            this->searchQueue.yQueue[forceUpdate] = uVar2 + 1;
-                            forceUpdate = forceUpdate + 1;
-                        }
-                    }
-                    _zoneCounter = uVar4 + 1;
-                    uVar4 = _zoneCounter;
-                    if (999 < (short)_zoneCounter)
-                        break;
+                if ((char)(short)DAT_TileMapState::instance.PathConnectionLayer[_first] != '\0'
+                    || (DAT_TileMapState::instance.LogicLayer[_first] & 0x4a5014b1) != 0) {
+                    continue;
                 }
-                local_20 = local_20 + 1;
-            } while (local_20 < 80400);
-            this->totalZones = (int)(short)_zoneCounter;
-            piVar5 = this->zoneSizesArray + 2;
-            iVar7 = 333;
-            do {
-                this->sum = piVar5[1] + this->sum + piVar5[-1] + *piVar5;
-                piVar5 = piVar5 + 3;
-                iVar7 = iVar7 + -1;
-            } while (iVar7 != 0);
+                this->searchQueue.tilesQueue[0] = _first;
+                this->searchQueue.yQueue[0] = _row;
+                DAT_TileMapState::instance.PathConnectionLayer[_first] = _areaID;
+                forceUpdate = 1;
+                for (int _readIndex = 0; _readIndex != forceUpdate; _readIndex = _readIndex + 1) {
+                    this->zoneSizesArray[(ushort)_areaID] = this->zoneSizesArray[(ushort)_areaID] + 1;
+                    int _tile = this->searchQueue.tilesQueue[_readIndex];
+                    int _cY = (ushort)this->searchQueue.yQueue[_readIndex];
+                    int _cLink = DAT_TileMapState::instance.PathLinkageLayer[_tile];
+
+                    MACRO_LINKAGE_EXPAND_AREA_NEIGHBOURS(1, forceUpdate)
+                }
+                _areaID = _areaID + 1;
+                if (999 < _areaID) {
+                    break;
+                }
+            }
+            this->totalZones = (int)_areaID;
+            int* _zoneSize = this->zoneSizesArray + 2;
+            for (int _group = 333; _group != 0; _group = _group - 1) {
+                this->sum = _zoneSize[1] + this->sum + _zoneSize[-1] + *_zoneSize;
+                _zoneSize = _zoneSize + 3;
+            }
             MACRO_CALL_MEMBER(
                 OpenSHC::Map::Buildings::BuildingsState_Func::updatePathLinkageTileMap, DAT_BuildingsState::ptr)(0);
             return TRUE;
