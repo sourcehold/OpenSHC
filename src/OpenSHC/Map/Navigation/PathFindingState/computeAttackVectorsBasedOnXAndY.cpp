@@ -37,7 +37,7 @@ namespace Map {
                         DAT_GameState::instance.mapAndTime.attackVectors[playerID][_index].tribeID = 0;
                         _index = _index + 1;
                     }
-                    if (50 < _index) {
+                    if (_index >= 50) {
                         return;
                     }
                     this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
