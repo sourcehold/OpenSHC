@@ -182,125 +182,123 @@ namespace Map {
             /*
               === MAIN BFS LOOP ===   Expand outward from all AI zone tiles, calculating distances
              */
-            if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
-                do {
+            while (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
+                /*
+                  Get current tile from queue
+                 */
+                _tile2 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                /*
+                  Bounds check
+                 */
+                if (0x13a0f < _tile2) {
+                    return;
+                }
+                /*
+                  Get Y coordinate of current tile
+                 */
+                int sVar1 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
+                /*
+                  Read the distance value for this tile from the AI path cost layer
+                 */
+                this->searchQueue.currentDistance = (uint)
+                    * (byte*)(*(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray
+                                  + playerID * 0x177bc + -0x10)
+                            * 0x13a10
+                        + 0x1ee2998 + _tile2);
+                /*
+                  Track maximum distance encountered, constitutes extra return value
+                 */
+                if (this->distance < (int)this->searchQueue.currentDistance) {
+                    this->distance = this->searchQueue.currentDistance;
+                }
+                /*
+                  Stop if we've exceeded the maximum distance limit
+                 */
+                if (limit < (int)this->searchQueue.currentDistance) {
+                    return;
+                }
+                /*
+                  === COLLECT CANDIDATE TILES AT SPECIFIC DISTANCE ===   If param_2 is non-zero and tile is at
+                  exactly that distance,   and it's reachable from param_3 zone, add to candidate list
+                 */
+                if (borderDistance != 0 && this->searchQueue.currentDistance == borderDistance
+                    && (_canNav = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
+                                                        calculateCanPlayerUnitsNavigateToAreaFromArea,
+                            this)(playerID, (dword)((int)(fromArea)),
+                            (dword)((int)((short)DAT_TileMapState::instance.PathConnectionLayer[_tile2])), 0),
+                        _canNav != 0)
+                    && DAT_AICState::instance.aiBorderTilesIndex < 1000) {
                     /*
-                      Get current tile from queue
+                      Add to candidate array (likely used by AI for strategic placement decisions)
                      */
-                    _tile2 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                    DAT_AICState::instance.aiBorderTiles[DAT_AICState::instance.aiBorderTilesIndex].tile = _tile2;
+                    DAT_AICState::instance.aiBorderTilesIndex = DAT_AICState::instance.aiBorderTilesIndex + 1;
+                }
+                /*
+                  === EXPAND TO ADJACENT TILES ===   Only expand if tile doesn't have blocking terrain   0x100031
+                  checks for: sea, border, border edge, river
+                 */
+                if ((DAT_TileMapState::instance.LogicLayer[_tile2] & 0x100031U) == 0) {
                     /*
-                      Bounds check
+                      Get pointer to movement direction offsets
                      */
-                    if (0x13a0f < _tile2) {
-                        return;
-                    }
+                    paiVar4 = DAT_TileMapState::instance.directionTranslationMatrix + sVar1;
                     /*
-                      Get Y coordinate of current tile
+                      Process all 8 adjacent tiles (cardinal + diagonal directions)
                      */
-                    int sVar1 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
-                    /*
-                      Read the distance value for this tile from the AI path cost layer
-                     */
-                    this->searchQueue.currentDistance = (uint)
-                        * (byte*)(*(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray
-                                      + playerID * 0x177bc + -0x10)
-                                * 0x13a10
-                            + 0x1ee2998 + _tile2);
-                    /*
-                      Track maximum distance encountered, constitutes extra return value
-                     */
-                    if (this->distance < (int)this->searchQueue.currentDistance) {
-                        this->distance = this->searchQueue.currentDistance;
-                    }
-                    /*
-                      Stop if we've exceeded the maximum distance limit
-                     */
-                    if (limit < (int)this->searchQueue.currentDistance) {
-                        return;
-                    }
-                    /*
-                      === COLLECT CANDIDATE TILES AT SPECIFIC DISTANCE ===   If param_2 is non-zero and tile is at
-                      exactly that distance,   and it's reachable from param_3 zone, add to candidate list
-                     */
-                    if (borderDistance != 0 && this->searchQueue.currentDistance == borderDistance
-                        && (_canNav = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
-                                                            calculateCanPlayerUnitsNavigateToAreaFromArea,
-                                this)(playerID, (dword)((int)(fromArea)),
-                                (dword)((int)((short)DAT_TileMapState::instance.PathConnectionLayer[_tile2])), 0),
-                            _canNav != 0)
-                        && DAT_AICState::instance.aiBorderTilesIndex < 1000) {
+                    psVar3 = &DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[0].short_.yOffset;
+                    do {
                         /*
-                          Add to candidate array (likely used by AI for strategic placement decisions)
+                          Calculate adjacent tile index
                          */
-                        DAT_AICState::instance.aiBorderTiles[DAT_AICState::instance.aiBorderTilesIndex].tile = _tile2;
-                        DAT_AICState::instance.aiBorderTilesIndex = DAT_AICState::instance.aiBorderTilesIndex + 1;
-                    }
-                    /*
-                      === EXPAND TO ADJACENT TILES ===   Only expand if tile doesn't have blocking terrain   0x100031
-                      checks for: sea, border, border edge, river
-                     */
-                    if ((DAT_TileMapState::instance.LogicLayer[_tile2] & 0x100031U) == 0) {
+                        int iVar2 = (*paiVar4)[0] + _tile2;
                         /*
-                          Get pointer to movement direction offsets
+                          If adjacent tile hasn't been visited this iteration
                          */
-                        paiVar4 = DAT_TileMapState::instance.directionTranslationMatrix + sVar1;
-                        /*
-                          Process all 8 adjacent tiles (cardinal + diagonal directions)
-                         */
-                        psVar3 = &DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[0].short_.yOffset;
-                        do {
+                        if (DAT_TileMapState::instance.WalkLayer[iVar2] != this->searchGeneration) {
                             /*
-                              Calculate adjacent tile index
+                              SET DISTANCE = CURRENT DISTANCE + 1   This creates the distance map radiating from AI
+                              zones
                              */
-                            int iVar2 = (*paiVar4)[0] + _tile2;
+                            *(char*)(*(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray
+                                         + playerID * 0x177bc + -0x10)
+                                    * 0x13a10
+                                + 0x1ee2998 + iVar2) = (char)this->searchQueue.currentDistance + '\x01';
                             /*
-                              If adjacent tile hasn't been visited this iteration
+                              previous line sets pathfinding cost layer   Mark as visited
                              */
-                            if (DAT_TileMapState::instance.WalkLayer[iVar2] != this->searchGeneration) {
-                                /*
-                                  SET DISTANCE = CURRENT DISTANCE + 1   This creates the distance map radiating from AI
-                                  zones
-                                 */
-                                *(char*)(*(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray
-                                             + playerID * 0x177bc + -0x10)
-                                        * 0x13a10
-                                    + 0x1ee2998 + iVar2) = (char)this->searchQueue.currentDistance + '\x01';
-                                /*
-                                  previous line sets pathfinding cost layer   Mark as visited
-                                 */
-                                DAT_TileMapState::instance.WalkLayer[iVar2] = (short)this->searchGeneration;
-                                /*
-                                  Add adjacent tile to queue
-                                 */
-                                this->searchQueue.yQueue[this->searchQueue.writeIndex] = *psVar3 + sVar1;
-                                this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar2;
-                                /*
-                                  Increment queue write position
-                                 */
-                                this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                                if (0x13a0f < this->searchQueue.writeIndex) {
-                                    this->searchQueue.writeIndex = 0;
-                                }
+                            DAT_TileMapState::instance.WalkLayer[iVar2] = (short)this->searchGeneration;
+                            /*
+                              Add adjacent tile to queue
+                             */
+                            this->searchQueue.yQueue[this->searchQueue.writeIndex] = *psVar3 + sVar1;
+                            this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar2;
+                            /*
+                              Increment queue write position
+                             */
+                            this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
+                            if (0x13a0f < this->searchQueue.writeIndex) {
+                                this->searchQueue.writeIndex = 0;
                             }
-                            /*
-                              Move to next direction
-                             */
-                            psVar3 = psVar3 + 8;
-                            paiVar4 = (int (*)[8])(*paiVar4 + 2);
-                            /*
-                              Process all 8 directions
-                             */
-                        } while ((int)psVar3 < 0xb4908c);
-                    }
-                    /*
-                      === ADVANCE TO NEXT TILE IN QUEUE ===
-                     */
-                    this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                    if (0x13a0f < this->searchQueue.readIndex) {
-                        this->searchQueue.readIndex = 0;
-                    }
-                } while (this->searchQueue.readIndex != this->searchQueue.writeIndex);
-            }
+                        }
+                        /*
+                          Move to next direction
+                         */
+                        psVar3 = psVar3 + 8;
+                        paiVar4 = (int (*)[8])(*paiVar4 + 2);
+                        /*
+                          Process all 8 directions
+                         */
+                    } while ((int)psVar3 < 0xb4908c);
+                }
+                /*
+                  === ADVANCE TO NEXT TILE IN QUEUE ===
+                 */
+                this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
+                if (0x13a0f < this->searchQueue.readIndex) {
+                    this->searchQueue.readIndex = 0;
+                }
+                }
             return;
         }
 
