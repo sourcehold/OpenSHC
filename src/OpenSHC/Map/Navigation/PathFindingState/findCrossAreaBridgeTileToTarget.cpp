@@ -55,7 +55,8 @@ namespace Map {
             this->searchQueue.currentDistance = 1;
             this->searchQueue.writeIndex = 1;
             this->searchQueue.readIndex = 0;
-            ushort uVar1 = DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[param_1].tile];
+            ushort uVar1
+                = (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[param_1].tile];
             ushort uVar2
                 = DAT_TileMapState::instance
                       .PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[param_3].addXgetTile
