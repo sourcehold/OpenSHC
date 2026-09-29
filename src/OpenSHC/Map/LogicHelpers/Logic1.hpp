@@ -20,6 +20,7 @@ namespace Map {
             L_PLAIN2_AND_PITCH = 8, // 0x00000008
             L_BORDER = 16, // 0x00000010
             L_BORDER_EDGE = 32, // 0x00000020
+            L_UNNAMED_0x40 = 64, // 0x00000040
             L_ROCKY = 128, // 0x00000080
             L_WALL_OR_GATEHOUSE = 256, // 0x00000100
             L_CRENEL = 512, // 0x00000200

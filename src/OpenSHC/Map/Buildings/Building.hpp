@@ -99,8 +99,8 @@ namespace Map {
             ushort microX; // 0x000000E8 length: 2
             ushort microY; // 0x000000EA length: 2
             short terrainHeightUnk; // 0x000000EC length: 2
-            ushort x; // 0x000000EE length: 2
-            ushort y; // 0x000000F0 length: 2
+            short x; // 0x000000EE length: 2
+            short y; // 0x000000F0 length: 2
             undefined1 padding_0xf2[2]; // 0x000000F2 length: 2
             uint currentTilePositionAdjusted; // 0x000000F4 length: 4
             uint widthOrHeight; // 0x000000F8 length: 4
@@ -140,42 +140,7 @@ namespace Map {
             short field138_0x1c2; // 0x000001C2 length: 2
             short growCounter; // 0x000001C4 length: 2
             undefined1 padding_0x1c6[2]; // 0x000001C6 length: 2
-            int tileRef1; // 0x000001C8 length: 4
-            int tileRef2; // 0x000001CC length: 4
-            int tileRef3; // 0x000001D0 length: 4
-            int tileRef4; // 0x000001D4 length: 4
-            int tileRef5; // 0x000001D8 length: 4
-            int tileRef6; // 0x000001DC length: 4
-            int tileRef7; // 0x000001E0 length: 4
-            int tileRef8; // 0x000001E4 length: 4
-            int tileRef9; // 0x000001E8 length: 4
-            int tileRef10; // 0x000001EC length: 4
-            int tileRef11; // 0x000001F0 length: 4
-            int tileRef12; // 0x000001F4 length: 4
-            int tileRef13; // 0x000001F8 length: 4
-            int tileRef14; // 0x000001FC length: 4
-            int tileRef15; // 0x00000200 length: 4
-            int tileRef16; // 0x00000204 length: 4
-            int tileRef17; // 0x00000208 length: 4
-            int tileRef18; // 0x0000020C length: 4
-            int tileRef19; // 0x00000210 length: 4
-            int tileRef20; // 0x00000214 length: 4
-            int tileRef21; // 0x00000218 length: 4
-            int tileRef22; // 0x0000021C length: 4
-            int tileRef23; // 0x00000220 length: 4
-            int tileRef24; // 0x00000224 length: 4
-            int tileRef25; // 0x00000228 length: 4
-            int tileRef26; // 0x0000022C length: 4
-            int tileRef27; // 0x00000230 length: 4
-            int tileRef28; // 0x00000234 length: 4
-            int tileRef29; // 0x00000238 length: 4
-            int tileRef30; // 0x0000023C length: 4
-            int tileRef31; // 0x00000240 length: 4
-            int tileRef32; // 0x00000244 length: 4
-            int tileRef33; // 0x00000248 length: 4
-            int tileRef34; // 0x0000024C length: 4
-            int tileRef35; // 0x00000250 length: 4
-            int tileRef36; // 0x00000254 length: 4
+            int tileRefs[36]; // 0x000001C8 length: 144
             undefined1 wheatGrowStateRelated; // 0x00000258 length: 1
             undefined1 padding_0x259[3]; // 0x00000259 length: 3
             int tunnelerCounter; // 0x0000025C length: 4

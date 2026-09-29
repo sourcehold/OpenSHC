@@ -385,7 +385,7 @@ SHC_3BB0A8C1_0x00401000 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00401040 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00401060 | 0.0% | Pending
+SHC_3BB0A8C1_0x00401060 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00401090 | 0.0% | Pending
 
@@ -2601,7 +2601,7 @@ SHC_3BB0A8C1_0x004092C0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004092E0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00409300 | 0.0% | Pending
+SHC_3BB0A8C1_0x00409300 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00409330 | 0.0% | Pending
 
@@ -38739,27 +38739,27 @@ SHC_3BB0A8C1_0x004F6A70 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004F6A80 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004F6AE0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F6AE0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004F6B20 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F6B20 | 30.1% | row counter costs a spill
 
 SHC_3BB0A8C1_0x004F6C20 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004F6C60 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F6C60 | 92.3% | border index regalloc
 
 SHC_3BB0A8C1_0x004F6CF0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004F6DC0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004F6F90 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F6F90 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004F6FD0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F6FD0 | 98.3% | unit loop regalloc
 
-SHC_3BB0A8C1_0x004F70B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F70B0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004F70D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F70D0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004F70E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F70E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004F70F0 | 0.0% | Pending
 
@@ -38767,7 +38767,7 @@ SHC_3BB0A8C1_0x004F7140 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004F7170 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004F79D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F79D0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004F7A80 | 0.0% | Pending
 
@@ -38787,13 +38787,13 @@ SHC_3BB0A8C1_0x004F80D4 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004F80D8 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004F80E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F80E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004F8160 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F8160 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004F81D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F81D0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004F8210 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F8210 | 94.7% | switch table vs compare chain
 
 SHC_3BB0A8C1_0x004F8288 | 0.0% | Pending
 
@@ -38995,7 +38995,7 @@ SHC_3BB0A8C1_0x004F82F0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004F82F1 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004F8300 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F8300 | 80.3% | mapper switch jump table
 
 SHC_3BB0A8C1_0x004F8454 | 0.0% | Pending
 
@@ -39355,43 +39355,43 @@ SHC_3BB0A8C1_0x004F8523 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004F8524 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004F8530 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F8530 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004F85B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F85B0 | 41.0% | regalloc: extra edi
 
-SHC_3BB0A8C1_0x004F8640 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F8640 | 40.0% | regalloc: extra edi
 
-SHC_3BB0A8C1_0x004F86D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F86D0 | 98.4% | direction chain regalloc
 
-SHC_3BB0A8C1_0x004F8780 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F8780 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004F8840 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F8840 | 93.7% | direction chain order
 
-SHC_3BB0A8C1_0x004F8900 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F8900 | 63.5% | neighbour load regalloc
 
-SHC_3BB0A8C1_0x004F89C0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F89C0 | 59.1% | orientation blocks not shared
 
-SHC_3BB0A8C1_0x004F8A40 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F8A40 | 87.2% | shr vs sar on logic bit
 
-SHC_3BB0A8C1_0x004F8AC0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F8AC0 | 90.7% | shr vs sar on logic bit
 
-SHC_3BB0A8C1_0x004F8B50 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F8B50 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004F8BD0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004F9000 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F9000 | 59.5% | owner store tail-merge
 
-SHC_3BB0A8C1_0x004F9220 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F9220 | 88.1% | owner store tail-merge
 
-SHC_3BB0A8C1_0x004F93E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F93E0 | 49.0% | const 1 rematerialised
 
-SHC_3BB0A8C1_0x004F94A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F94A0 | 67.2% | logic masks merged by cl
 
 SHC_3BB0A8C1_0x004F9590 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004F9630 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004F9880 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F9880 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004F990C | 0.0% | Pending
 
@@ -39407,9 +39407,9 @@ SHC_3BB0A8C1_0x004F9920 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004F9924 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004F9930 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F9930 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004F9980 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F9980 | 34.2% | ecx not kept across callee
 
 SHC_3BB0A8C1_0x004F99D0 | 0.0% | Pending
 
@@ -39649,17 +39649,17 @@ SHC_3BB0A8C1_0x004F9DE9 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004F9DEA | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004F9DF0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F9DF0 | 97.1% | buildingType chain regalloc
 
-SHC_3BB0A8C1_0x004F9F00 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F9F00 | 73.0% | microX/microY regalloc
 
 SHC_3BB0A8C1_0x004FA000 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004FA2D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FA2D0 | 47.4% | 47.37% cold block layout regal
 
-SHC_3BB0A8C1_0x004FA460 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FA460 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004FA550 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FA550 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004FA5DC | 0.0% | Pending
 
@@ -40343,31 +40343,31 @@ SHC_3BB0A8C1_0x004FA759 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004FA75A | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004FA760 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FA760 | 56.3% | 61.02% offset array partition
 
 SHC_3BB0A8C1_0x004FA8D0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004FA9D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FA9D0 | 43.6% | ecx not kept across callee
 
-SHC_3BB0A8C1_0x004FAA30 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FAA30 | 91.9% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004FAAB0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004FAAE0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004FAB70 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FAB70 | 70.4% | ecx not kept across callee
 
-SHC_3BB0A8C1_0x004FAC70 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FAC70 | 84.7% | ecx not kept across callee
 
-SHC_3BB0A8C1_0x004FAD20 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FAD20 | 45.3% | ecx not kept across callee
 
-SHC_3BB0A8C1_0x004FAD70 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FAD70 | 77.7% | ecx not kept across callee
 
-SHC_3BB0A8C1_0x004FAE50 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FAE50 | 35.1% | ecx not kept across callee
 
-SHC_3BB0A8C1_0x004FAEE0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FAEE0 | 55.3% | ecx not kept across callee
 
-SHC_3BB0A8C1_0x004FAF70 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FAF70 | 98.5% | offset walk regalloc
 
 SHC_3BB0A8C1_0x004FB0C0 | 0.0% | Pending
 
@@ -40565,25 +40565,25 @@ SHC_3BB0A8C1_0x004FB354 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004FB358 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004FB360 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FB360 | 79.0% | ecx not kept across callee
 
-SHC_3BB0A8C1_0x004FB3F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FB3F0 | 34.3% | XYPair stride regalloc
 
 SHC_3BB0A8C1_0x004FB4D0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004FB770 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FB770 | 76.7% | gfx expression regalloc
 
 SHC_3BB0A8C1_0x004FB7D0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004FB8E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FB8E0 | 28.2% | ecx not kept across callee
 
-SHC_3BB0A8C1_0x004FB970 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FB970 | 36.9% | ecx not kept across callee
 
 SHC_3BB0A8C1_0x004FB990 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004FB9E0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004FBC30 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FBC30 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004FBC6C | 0.0% | Pending
 
@@ -41077,35 +41077,35 @@ SHC_3BB0A8C1_0x004FBD6F | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004FBD70 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004FBD80 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FBD80 | 38.7% | brush step regalloc
 
-SHC_3BB0A8C1_0x004FBE70 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FBE70 | 87.2% | 85.48% regalloc
 
 SHC_3BB0A8C1_0x004FC0B0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004FC280 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FC280 | 85.2% | XYPair base regalloc
 
-SHC_3BB0A8C1_0x004FC340 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FC340 | 62.4% | LogicLayer walk regalloc
 
-SHC_3BB0A8C1_0x004FC490 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FC490 | 54.1% | 56.42% array base regalloc
 
-SHC_3BB0A8C1_0x004FC650 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FC650 | 45.5% | orientation chain regalloc
 
-SHC_3BB0A8C1_0x004FC7C0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FC7C0 | 79.0% | setg vs sbb/neg
 
-SHC_3BB0A8C1_0x004FC810 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FC810 | 67.2% | height compare regalloc
 
-SHC_3BB0A8C1_0x004FC9E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FC9E0 | 64.5% | Od stack slot order differs
 
-SHC_3BB0A8C1_0x004FDB00 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FDB00 | 56.3% | Od stack slot order differs
 
 SHC_3BB0A8C1_0x004FF080 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004FF420 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004FF870 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FF870 | 74.7% | __asm macro; global not nameable
 
-SHC_3BB0A8C1_0x004FF990 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FF990 | 74.5% | switch arm regalloc
 
 SHC_3BB0A8C1_0x004FFAAC | 0.0% | Pending
 
@@ -41259,7 +41259,7 @@ SHC_3BB0A8C1_0x004FFB02 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004FFB03 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004FFB10 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FFB10 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004FFBA0 | 0.0% | Pending
 
@@ -41349,7 +41349,7 @@ SHC_3BB0A8C1_0x004FFF01 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004FFF02 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004FFF10 | 0.0% | Pending
+SHC_3BB0A8C1_0x004FFF10 | 44.0% | switch arm regalloc
 
 SHC_3BB0A8C1_0x00500060 | 0.0% | Pending
 
@@ -41419,57 +41419,57 @@ SHC_3BB0A8C1_0x00500090 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00500091 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x005000A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005000A0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005000E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005000E0 | 48.7% | owner reload per unrolled step
 
-SHC_3BB0A8C1_0x00500180 | 0.0% | Pending
+SHC_3BB0A8C1_0x00500180 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00500210 | 0.0% | Pending
+SHC_3BB0A8C1_0x00500210 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00500250 | 0.0% | Pending
+SHC_3BB0A8C1_0x00500250 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00500290 | 0.0% | Pending
+SHC_3BB0A8C1_0x00500290 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005002D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005002D0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00500310 | 0.0% | Pending
+SHC_3BB0A8C1_0x00500310 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00500370 | 0.0% | Pending
+SHC_3BB0A8C1_0x00500370 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005003D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005003D0 | 54.3% | moat row walk regalloc
 
-SHC_3BB0A8C1_0x00500500 | 0.0% | Pending
+SHC_3BB0A8C1_0x00500500 | 86.5% | moat field reload/regalloc
 
-SHC_3BB0A8C1_0x005005F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005005F0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00500640 | 0.0% | Pending
+SHC_3BB0A8C1_0x00500640 | 46.1% | ecx not kept across callee
 
-SHC_3BB0A8C1_0x00500680 | 0.0% | Pending
+SHC_3BB0A8C1_0x00500680 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005006C0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005006C0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00500720 | 0.0% | Pending
+SHC_3BB0A8C1_0x00500720 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00500750 | 0.0% | Pending
+SHC_3BB0A8C1_0x00500750 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00500790 | 0.0% | Pending
+SHC_3BB0A8C1_0x00500790 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005007D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005007D0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00500800 | 0.0% | Pending
+SHC_3BB0A8C1_0x00500800 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00500850 | 0.0% | Pending
+SHC_3BB0A8C1_0x00500850 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00500890 | 0.0% | Pending
+SHC_3BB0A8C1_0x00500890 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00500940 | 0.0% | Pending
+SHC_3BB0A8C1_0x00500940 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00500980 | 0.0% | Pending
+SHC_3BB0A8C1_0x00500980 | 65.1% | height compare regalloc
 
-SHC_3BB0A8C1_0x00500B50 | 0.0% | Pending
+SHC_3BB0A8C1_0x00500B50 | 68.3% | loop guard/regalloc differs
 
-SHC_3BB0A8C1_0x00500BB0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00500BB0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00500C20 | 0.0% | Pending
 
@@ -41511,9 +41511,9 @@ SHC_3BB0A8C1_0x005010E0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00501110 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00501180 | 0.0% | Pending
+SHC_3BB0A8C1_0x00501180 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005011A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005011A0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005011C0 | 0.0% | Pending
 
@@ -41539,13 +41539,13 @@ SHC_3BB0A8C1_0x00501730 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00501760 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x005017A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005017A0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005017C0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00501A20 | 0.0% | Pending
+SHC_3BB0A8C1_0x00501A20 | 91.7% | 84.72% regalloc
 
-SHC_3BB0A8C1_0x00501B90 | 0.0% | Pending
+SHC_3BB0A8C1_0x00501B90 | 75.0% | orientation switch regalloc
 
 SHC_3BB0A8C1_0x00501CB0 | 0.0% | Pending
 
@@ -41561,23 +41561,23 @@ SHC_3BB0A8C1_0x00501CC4 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00501CC8 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00501CD0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00501CD0 | 82.0% | brush loop regalloc
 
-SHC_3BB0A8C1_0x00501D90 | 0.0% | Pending
+SHC_3BB0A8C1_0x00501D90 | 15.2% | spills where original uses reg
 
-SHC_3BB0A8C1_0x00501F50 | 0.0% | Pending
+SHC_3BB0A8C1_0x00501F50 | 9.7% | one fewer spilled local
 
 SHC_3BB0A8C1_0x00501FE0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00502110 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00502390 | 0.0% | Pending
+SHC_3BB0A8C1_0x00502390 | 28.1% | brush loop regalloc
 
-SHC_3BB0A8C1_0x005024F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005024F0 | 51.8% | 47.37% index spill regalloc
 
 SHC_3BB0A8C1_0x00502680 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00502950 | 0.0% | Pending
+SHC_3BB0A8C1_0x00502950 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005029D0 | 0.0% | Pending
 
@@ -41653,7 +41653,7 @@ SHC_3BB0A8C1_0x00503492 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x005034A0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00503720 | 0.0% | Pending
+SHC_3BB0A8C1_0x00503720 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005037B0 | 0.0% | Pending
 
@@ -42067,7 +42067,7 @@ SHC_3BB0A8C1_0x00504ED0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00504ED1 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00504EE0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00504EE0 | 38.5% | needs callee LTCG (ecx reuse)
 
 SHC_3BB0A8C1_0x00504F10 | 0.0% | Pending
 
@@ -42083,23 +42083,23 @@ SHC_3BB0A8C1_0x005060C0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00506370 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00506AD0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00506AD0 | 77.9% | buildingType chain tail-merge
 
-SHC_3BB0A8C1_0x00506BD0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00506BD0 | 75.9% | setupBuildingData arg regalloc
 
-SHC_3BB0A8C1_0x00506D40 | 0.0% | Pending
+SHC_3BB0A8C1_0x00506D40 | 89.6% | setupBuildingData arg regalloc
 
-SHC_3BB0A8C1_0x00506E10 | 0.0% | Pending
+SHC_3BB0A8C1_0x00506E10 | 84.5% | setupBuildingData arg regalloc
 
-SHC_3BB0A8C1_0x00506F40 | 0.0% | Pending
+SHC_3BB0A8C1_0x00506F40 | 85.2% | setupBuildingData arg regalloc
 
-SHC_3BB0A8C1_0x00507060 | 0.0% | Pending
+SHC_3BB0A8C1_0x00507060 | 90.8% | setupBuildingData arg regalloc
 
-SHC_3BB0A8C1_0x00507130 | 0.0% | Pending
+SHC_3BB0A8C1_0x00507130 | 53.1% | setupBuildingData arg regalloc
 
-SHC_3BB0A8C1_0x00507280 | 0.0% | Pending
+SHC_3BB0A8C1_0x00507280 | 54.5% | ecx not kept across callee
 
-SHC_3BB0A8C1_0x00507350 | 0.0% | Pending
+SHC_3BB0A8C1_0x00507350 | 74.1% | tree switch jump table
 
 SHC_3BB0A8C1_0x00507408 | 0.0% | Pending
 
@@ -42135,9 +42135,9 @@ SHC_3BB0A8C1_0x0050741D | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0050741E | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00507420 | 0.0% | Pending
+SHC_3BB0A8C1_0x00507420 | 44.8% | setupBuildingData arg regalloc
 
-SHC_3BB0A8C1_0x00507560 | 0.0% | Pending
+SHC_3BB0A8C1_0x00507560 | 44.8% | setupBuildingData arg regalloc
 
 SHC_3BB0A8C1_0x005076A0 | 0.0% | Pending
 
@@ -42151,19 +42151,19 @@ SHC_3BB0A8C1_0x00507E00 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00507F80 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00508030 | 0.0% | Pending
+SHC_3BB0A8C1_0x00508030 | 61.1% | 68.42% x/y param reuse regallo
 
 SHC_3BB0A8C1_0x00508250 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00508540 | 0.0% | Pending
+SHC_3BB0A8C1_0x00508540 | 52.9% | 55.63% operand order regalloc
 
 SHC_3BB0A8C1_0x00508590 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00508760 | 0.0% | Pending
+SHC_3BB0A8C1_0x00508760 | 69.0% | ecx not kept across callee
 
-SHC_3BB0A8C1_0x00508870 | 0.0% | Pending
+SHC_3BB0A8C1_0x00508870 | 88.9% | Style pass, asm differs
 
-SHC_3BB0A8C1_0x00508910 | 0.0% | Pending
+SHC_3BB0A8C1_0x00508910 | 66.7% | ecx not kept across callee
 
 SHC_3BB0A8C1_0x00508A00 | 0.0% | Pending
 
@@ -42763,7 +42763,7 @@ SHC_3BB0A8C1_0x00508DC2 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00508DC3 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00508DD0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00508DD0 | 43.1% | extra callee-saved reg
 
 SHC_3BB0A8C1_0x00508EC0 | 0.0% | Pending
 
@@ -44173,23 +44173,23 @@ SHC_3BB0A8C1_0x00511018 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0051101C | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00511020 | 0.0% | Pending
+SHC_3BB0A8C1_0x00511020 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005110B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005110B0 | 84.0% | moat scan regalloc
 
 SHC_3BB0A8C1_0x005111D0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00511240 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x005113F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005113F0 | 54.2% | moat field reload/regalloc
 
-SHC_3BB0A8C1_0x005114C0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005114C0 | 43.7% | 46.51% global instance base re
 
 SHC_3BB0A8C1_0x005115C0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x005116E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005116E0 | 72.4% | pitch field reload/regalloc
 
-SHC_3BB0A8C1_0x00511850 | 0.0% | Pending
+SHC_3BB0A8C1_0x00511850 | 58.8% | ecx not kept across callee
 
 SHC_3BB0A8C1_0x005118C0 | 0.0% | Pending
 
@@ -44723,9 +44723,9 @@ SHC_3BB0A8C1_0x00511D60 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00511D64 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00511D70 | 0.0% | Pending
+SHC_3BB0A8C1_0x00511D70 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00511DF0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00511DF0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005120C0 | 0.0% | Pending
 
@@ -44735,17 +44735,17 @@ SHC_3BB0A8C1_0x00512180 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00512450 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x005127B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x005127B0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005127D0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00512920 | 0.0% | Pending
+SHC_3BB0A8C1_0x00512920 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00512940 | 0.0% | Pending
+SHC_3BB0A8C1_0x00512940 | 76.0% | Od stack slot order differs
 
-SHC_3BB0A8C1_0x00514480 | 0.0% | Pending
+SHC_3BB0A8C1_0x00514480 | 40.0% | logic masks merged by cl
 
-SHC_3BB0A8C1_0x00514520 | 0.0% | Pending
+SHC_3BB0A8C1_0x00514520 | 75.3% | 75.63% spill order
 
 SHC_3BB0A8C1_0x005146D0 | 0.0% | Pending
 
@@ -44769,11 +44769,11 @@ SHC_3BB0A8C1_0x00515740 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00515A20 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00515C80 | 0.0% | Pending
+SHC_3BB0A8C1_0x00515C80 | 52.6% | ecx not kept across callee
 
-SHC_3BB0A8C1_0x00515DA0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00515DA0 | 36.1% | brush loop regalloc
 
-SHC_3BB0A8C1_0x00515F40 | 0.0% | Pending
+SHC_3BB0A8C1_0x00515F40 | 69.9% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x005160C0 | 0.0% | Pending
 
