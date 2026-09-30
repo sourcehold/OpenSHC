@@ -90,8 +90,8 @@ namespace Map {
                     break;
                 case 1:
                 case 4:
-                    _offsetX = 0;
                     _offsetY = 0;
+                    _offsetX = 0;
                     break;
                 case 2:
                 case 6:

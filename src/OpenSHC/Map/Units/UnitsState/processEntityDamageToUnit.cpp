@@ -42,17 +42,17 @@ namespace Map {
             eSFX sfxOffsetInArray;
             UnitTypeShort _entityType_2;
 
+            int _unitIsSiegeEngine = 0;
             /*
               unclear what it does, but this function removes health from a unit, ranged
                and melee
              */
 
             int _unknown = (int)this->units[unitID].tribeID;
-            int _unitIsSiegeEngine = 0;
             int _siegeProjectile = 0;
             int _usesFemaleDeathScream = 0;
-            UnitTypeShort _unitType = this->units[unitID].unitType;
             int _entityShootingUnitID = DAT_EntityState::instance.entityArray[entityID].unitID_OR_seaGullID;
+            UnitTypeShort _unitType = this->units[unitID].unitType;
             int _entityShootingUnitID_2 = (int)_entityShootingUnitID;
             if (unitID <= 0) {
                 return FALSE;
@@ -204,9 +204,9 @@ namespace Map {
                 return FALSE;
             }
             if ((_entityPlayerID != 0) && (_entityPlayerID != this->units[unitID].owner)) {
-                this->units[unitID].lastEncounteredEnemyPlayerID = _entityPlayerID;
                 this->units[unitID].lastEncounteredEnemyUnitIDUnk
                     = DAT_EntityState::instance.entityArray[entityID].unitID_OR_seaGullID;
+                this->units[unitID].lastEncounteredEnemyPlayerID = _entityPlayerID;
             }
             if ((DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY)
                 && (_unitPlayerID == DAT_GameSynchronyState::instance.currentPlayerSlotID)) {

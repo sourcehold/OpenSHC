@@ -38,9 +38,9 @@ namespace Map {
                     _damage, DAT_UnitsState::instance.units[unitID].owner);
             }
             if (this->units[unitID].owner != 0 && this->units[unit2ID].owner != this->units[unitID].owner) {
-                this->units[unit2ID].lastEncounteredEnemyPlayerID = this->units[unitID].owner;
                 /* let unit 2 know we attacked them? */
                 this->units[unit2ID].lastEncounteredEnemyUnitIDUnk = (short)unitID;
+                this->units[unit2ID].lastEncounteredEnemyPlayerID = this->units[unitID].owner;
             }
             /* decrement the health of unit 2 by damage */
             this->units[unit2ID].health = this->units[unit2ID].health - _damage;

@@ -31,8 +31,8 @@ namespace Map {
             dword _area = (short)DAT_TileMapState::instance.PathConnectionLayer[this->units[unitID].tile];
             this->unitDistanceComputationResultUnk = 100000;
             int _minDistance = 100000;
-            int _chosenRawDistance = 0;
             int _bestScore = 100000;
+            int _chosenRawDistance = 0;
             int _foundEnemyID = 0;
             int _visionDivisor = 1;
             int _skipStanceSearch = 0;
@@ -319,8 +319,8 @@ namespace Map {
                                (short)DAT_TileMapState::instance.PathConnectionLayer[this->units[_foundEnemyID].tile],
                                this->units[unitID].unitCanClimb)
                             != 0) {
-                        this->units[unitID].state.generic = OpenSHC::Map::Units::States::US_MOVE_TO_DESTINATION;
                         this->units[unitID].animationCycleNumber = 0;
+                        this->units[unitID].state.generic = OpenSHC::Map::Units::States::US_MOVE_TO_DESTINATION;
                         if (this->units[unitID]._someX_2 == 0) {
                             this->units[unitID]._someX_2 = this->units[unitID].destinationX_2Unk;
                             this->units[unitID]._someY_2 = this->units[unitID].destinationY_2Unk;

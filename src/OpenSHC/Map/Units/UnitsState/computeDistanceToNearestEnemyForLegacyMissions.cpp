@@ -14,8 +14,8 @@ namespace Map {
         int UnitsState::computeDistanceToNearestEnemyForLegacyMissions(int unitID)
         {
             int _owner = this->units[unitID].owner;
-            int _unitMicroY = this->units[unitID].microYPosition;
             int _unitMicroX = this->units[unitID].microXPosition;
+            int _unitMicroY = this->units[unitID].microYPosition;
             /* kept in step with the result but never read back */
             int _closestWithinThousand = 1000;
             int _closestDistance = 10000;

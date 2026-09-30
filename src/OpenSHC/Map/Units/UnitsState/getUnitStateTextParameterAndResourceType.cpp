@@ -20,8 +20,8 @@ namespace Map {
         int UnitsState::getUnitStateTextParameterAndResourceType(int unitIndex, ResourceType* pResourceType)
 
         {
-            int _state = (short)this->units[unitIndex].state.generic;
             *pResourceType = (ResourceType)0;
+            int _state = (short)this->units[unitIndex].state.generic;
             if (this->units[unitIndex].dying != 0) {
                 /*
                   "Dying"

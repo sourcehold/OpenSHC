@@ -19,13 +19,13 @@ namespace Map {
                 unitID, _previousTile);
             this->units[unitID].field42_0x60 = 0;
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setupUnitSharingCurrentTilePosition, this)(unitID);
-            this->units[unitID].y = this->units[unitID].mimicCurrentYPosition;
             this->units[unitID].x = this->units[unitID].mimicCurrentXPosition;
-            this->units[unitID].microYPosition = this->units[unitID].mimicCurrentYPosition * 8 + 4;
+            this->units[unitID].y = this->units[unitID].mimicCurrentYPosition;
             this->units[unitID].tile = this->units[unitID].mimicCurrentXPosition
                 + DAT_ViewportRenderState::instance.translationMatrix[this->units[unitID].mimicCurrentYPosition]
                       .addXgetTile;
             this->units[unitID].microXPosition = this->units[unitID].mimicCurrentXPosition * 8 + 4;
+            this->units[unitID].microYPosition = this->units[unitID].mimicCurrentYPosition * 8 + 4;
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::updateMicroPosition, this)(unitID);
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::commitPendingUnitPosition, this)(unitID);
         }

@@ -68,11 +68,11 @@ namespace Map {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::changeDestinationByLeftover, this)(unitID);
             }
             if (this->units[unitID].climbDirection != 0) {
+                this->units[unitID].mimicCurrentYPosition
+                    = (short)DAT_PathFindingState::instance.climbData[_climbDataID].bottomYPosition;
                 /* Climb down */
                 this->units[unitID].mimicCurrentXPosition
                     = (short)DAT_PathFindingState::instance.climbData[_climbDataID].bottomXPosition;
-                this->units[unitID].mimicCurrentYPosition
-                    = (short)DAT_PathFindingState::instance.climbData[_climbDataID].bottomYPosition;
                 return TRUE;
             }
             /* Climb up */

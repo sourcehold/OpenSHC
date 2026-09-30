@@ -32,8 +32,8 @@ namespace Map {
                     break;
                 }
             }
-            this->units[unitID].destinationYPosition = (short)_exitY;
             this->units[unitID].totalSizeOfPathPlan = (short)_stepIndex + 1;
+            this->units[unitID].destinationYPosition = (short)_exitY;
             this->units[unitID].destinationXPosition = (short)_exitX;
             this->units[unitID].destinationTilePosition = _tile;
         }

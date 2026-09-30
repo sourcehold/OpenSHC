@@ -13,8 +13,8 @@ namespace Map {
             this->units[unitID].movementRelated = 8;
             this->units[unitID].field105_0xe8 = 0;
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setupUnitSharingCurrentTilePosition, this)(unitID);
-            this->units[unitID].y = this->units[unitID].mimicCurrentYPosition;
             this->units[unitID].microXPosition = this->units[unitID].mimicCurrentXPosition * 8 + 4;
+            this->units[unitID].y = this->units[unitID].mimicCurrentYPosition;
             this->units[unitID].x = this->units[unitID].mimicCurrentXPosition;
             this->units[unitID].microYPosition = this->units[unitID].mimicCurrentYPosition * 8 + 4;
             this->units[unitID].tile = this->units[unitID].mimicCurrentXPosition

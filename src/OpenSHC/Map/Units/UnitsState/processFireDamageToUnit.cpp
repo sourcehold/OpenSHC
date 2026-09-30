@@ -86,8 +86,8 @@ namespace Map {
             case OpenSHC::Map::Units::UT_CAMELSHBEAR:
             case OpenSHC::Map::Units::UT_COW:
             case OpenSHC::Map::Units::UT_CAGEDOG:
-                this->units[unitID].unitTypeToChangeInto = OpenSHC::Map::Units::UT_BURNING_ANIMAL_BIG;
                 this->units[unitID].state_2 = 1;
+                this->units[unitID].unitTypeToChangeInto = OpenSHC::Map::Units::UT_BURNING_ANIMAL_BIG;
                 break;
             case OpenSHC::Map::Units::UT_RABBIT:
             case OpenSHC::Map::Units::UT_HUNTERDOG:

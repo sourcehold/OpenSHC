@@ -89,8 +89,8 @@ namespace Map {
                         continue;
                     }
                 }
-                this->units[unitID].movementRelated = this->units[unitID].movementRelated + 1;
                 this->units[unitID].field105_0xe8 = 0;
+                this->units[unitID].movementRelated = this->units[unitID].movementRelated + 1;
                 if (this->units[unitID].movementRelated < 8) {
                     if (DAT_UnitPropertiesDefinedData::instance.field79_0x119cc[this->units[unitID].facingDirection]
                         <= this->units[unitID].movementRelated) {
@@ -103,8 +103,8 @@ namespace Map {
                         this->units[unitID].unknownMovementRelated_0x2d2 = 0;
                         this->units[unitID].tunnelerFinishedDigging = 0;
                         this->units[unitID].movementRelated = 8;
-                        this->units[unitID].destinationX_2Unk = this->units[unitID].x;
                         this->units[unitID].destinationY_2Unk = this->units[unitID].y;
+                        this->units[unitID].destinationX_2Unk = this->units[unitID].x;
                         return 0;
                     }
                     this->units[unitID].movementRelated = 0;

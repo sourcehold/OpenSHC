@@ -102,16 +102,16 @@ namespace Map {
                 microX = microX + _spreadAcross;
                 break;
             case 5:
-                microX = microX + ((_spreadAlong * 3) / 4 - (_spreadAcross * 3) / 4);
                 microY = microY + (-((_spreadAcross * 3) / 4) - (_spreadAlong * 3) / 4);
+                microX = microX + ((_spreadAlong * 3) / 4 - (_spreadAcross * 3) / 4);
                 break;
             case 6:
                 microX = microX + _spreadAlong;
                 microY = microY + _spreadAcross;
                 break;
             case 7:
-                microX = microX + (_spreadAlong * 3) / 4 + (_spreadAcross * 3) / 4;
                 microY = microY + ((_spreadAlong * 3) / 4 - (_spreadAcross * 3) / 4);
+                microX = microX + (_spreadAlong * 3) / 4 + (_spreadAcross * 3) / 4;
             }
             this->units[unitID].shootTargetZ = (short)z;
             this->units[unitID].shootTargetMicroY = (short)microY;

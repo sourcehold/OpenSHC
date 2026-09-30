@@ -461,14 +461,14 @@ namespace Map {
                                 if (_shotFlightDistance > 0) {
                                     if (_xDifferenceToTarget < _bestScore) {
                                         _bestScore = _xDifferenceToTarget;
-                                        _validTargetID = _enemy;
                                         _shotDistance = _shotFlightDistance;
+                                        _validTargetID = _enemy;
                                     }
                                     if (this->units[_enemy].field233_0x39a == 0
                                         && _xDifferenceToTarget < _bestUntargetedScore) {
                                         _bestUntargetedScore = _xDifferenceToTarget;
-                                        _untargetedTargetID = _enemy;
                                         _untargetedShotDistance = _shotFlightDistance;
+                                        _untargetedTargetID = _enemy;
                                     }
                                 }
                             }
