@@ -13,14 +13,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00530FD0
         BOOLEnum UnitsState::checkIfCitizenUnitIsAliveBasedOnState(int unitID)
         {
-            short const state = (ushort)this->units[unitID].state.generic;
-            if (state >= 111) {
-                if (state <= 116) {
-                    return TRUE;
-                }
-                return FALSE;
-            }
-            return FALSE;
+            return 0x6f <= this->units[unitID].state.generic && this->units[unitID].state.generic <= 0x74;
         }
 
     }
