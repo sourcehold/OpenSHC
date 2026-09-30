@@ -14,8 +14,9 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x0053B340
     void Version::UpgradeMapUnitsTo_112()
     {
-        DAT_CurrentUnitSlotID::instance = 2500;
+        DAT_CurrentUnitSlotID::instance = 1;
         for (int unitID = 1; unitID != 2500; ++unitID) {
+            DAT_CurrentUnitSlotID::instance += 1;
             if (DAT_UnitsState::instance.units[unitID].logicalState == Units::ULS_NORMAL) {
                 DAT_UnitsState::instance.units[unitID].buildingID
                     = DAT_UnitsState::instance.units[unitID].workplaceBuildingID_1;
