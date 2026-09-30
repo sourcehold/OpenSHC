@@ -14,3 +14,4 @@ src/OpenSHC/Map/TileMapState/updateBuildingPlacementRotationPreview.cpp
 src/OpenSHC/Map/Units/TribesState/playUnitSelectSpeech.cpp
 src/OpenSHC/Audio/SFX/SFXState/playUnitSpeech.cpp
 src/OpenSHC/Game/GameStateStructures/getSellResourceAmount.cpp
+src/OpenSHC/Map/TileMapState/determineBuildingPlacementRotation.cpp

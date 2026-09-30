@@ -42067,7 +42067,7 @@ SHC_3BB0A8C1_0x00504ED0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00504ED1 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00504EE0 | 38.5% | register allocation differs
+SHC_3BB0A8C1_0x00504EE0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00504F10 | 0.0% | Pending
 
