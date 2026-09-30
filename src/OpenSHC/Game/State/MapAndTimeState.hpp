@@ -110,8 +110,7 @@ namespace Game {
             BOOLEnum startOfDay; // 0x00000364 length: 4
             int skirmishFogOfWar; // 0x00000368 length: 4
             undefined1 padding_0x36c[436]; // 0x0000036C length: 436
-            XYPair somePairArray; // 0x00000520 length: 8
-            undefined1 padding_0x528[312]; // 0x00000528 length: 312
+            XYPair somePairArray[40]; // 0x00000520 length: 320
             int startGoods[25]; // 0x00000660 length: 100
             SiegeUnitCounts siegeInformation; // 0x000006C4 length: 80
             int startingPopularity; // 0x00000714 length: 4
