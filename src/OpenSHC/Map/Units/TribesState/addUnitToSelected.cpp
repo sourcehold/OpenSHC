@@ -10,8 +10,10 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00522520
         void TribesState::addUnitToSelected(int unitID)
         {
-            ((ushort*)DAT_UnitsState::instance.selectedUnitsBitFlags)[unitID / 16]
-                |= DAT_UnitSelectionDefinedData::instance.BitMaskHelper[unitID % 16];
+            int const bitFlagsIndex = unitID / 16;
+            int const bitMaskIndex = unitID % 16;
+            ((short*)DAT_UnitsState::instance.selectedUnitsBitFlags)[bitFlagsIndex]
+                |= DAT_UnitSelectionDefinedData::instance.BitMaskHelper[bitMaskIndex];
         }
 
     }
