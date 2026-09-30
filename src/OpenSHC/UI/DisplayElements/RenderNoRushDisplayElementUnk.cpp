@@ -79,22 +79,21 @@ namespace UI {
             } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1360x768) {
                 x -= 280;
             }
-            int const halfWidth = barWidth / 2;
-            x += -18 - halfWidth;
-            int const left = x - halfWidth;
+            x += -18 - (barWidth / 2);
+            int const left = x - (barWidth / 2);
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBlendedBlackBox,
-                DAT_PencilRenderCore::ptr)(left - 7, posY - 5, halfWidth + 5 + x, posY + 30, 16);
+                DAT_PencilRenderCore::ptr)(left - 7, posY - 5, (barWidth / 2) + 5 + x, posY + 30, 16);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_MISC, 7),
                 x, posY, OpenSHC::Text::TTA_CENTER, 0xc2f0eb, 0, 18, FALSE, 0);
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBorderBox, DAT_PencilRenderCore::ptr)(
-                left - 1, posY + 18, halfWidth + 1 + x, posY + 24, COL_BLACK::instance.shortValue);
+                left - 1, posY + 18, (barWidth / 2) + 1 + x, posY + 24, COL_BLACK::instance.shortValue);
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(
                 left, posY + 19,
                 (DAT_GameState::instance.mapAndTime.skirmishNoRushTicks * barWidth)
                         / DAT_GameState::instance.mapAndTime.skirmishNoRushTicksLeft
-                    - halfWidth + x,
+                    - (barWidth / 2) + x,
                 posY + 23, COL_DARK_LIME::instance.shortValue);
             DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
         }
