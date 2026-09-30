@@ -10,6 +10,7 @@
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/UI/Enums/DisplayElementID.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+#include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/COL_BLACK.hpp"
 #include "OpenSHC/Globals/COL_DARK_LIME.hpp"
@@ -35,7 +36,8 @@ namespace UI {
         {
             if (DAT_GameState::instance.mapAndTime.skirmishNoRushTicks == 0) {
                 // Plays pa paam pa pa pa paam
-                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)("battlehorn.wav");
+                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
+                    s_battlehorn_wav_005a77d8);
                 MACRO_CALL(OpenSHC::UI::DisplayElements_Func::CheckDisplayElementByIDAndSetForUnlimitedDisplay)(
                     OpenSHC::UI::Enums::DEID_NO_RUSH, 0);
                 return;
