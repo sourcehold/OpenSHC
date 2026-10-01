@@ -20,11 +20,13 @@ namespace AI {
     AIVUnitType AICState::getUnitTypeIndexForUnitID(int unitID, int param_2)
     {
         UnitTypeShort _unitType = DAT_UnitsState::instance.units[unitID].unitType;
-        short _playerID = DAT_UnitsState::instance.units[unitID].owner;
+        int _playerID = DAT_UnitsState::instance.units[unitID].owner;
+        UnitTypeInt _unitType2;
         if (_unitType == OpenSHC::Map::Units::UT_PEASANT) {
-            _unitType = DAT_UnitsState::instance.units[unitID].unitTypeToChangeInto;
+            _unitType2 = DAT_UnitsState::instance.units[unitID].unitTypeToChangeInto;
+        } else {
+            _unitType2 = _unitType;
         }
-        UnitTypeInt _unitType2 = (UnitTypeInt)(short)_unitType;
 
         // 6 is the Caliph's AIC index: he fields slaves rather than the ranged units listed below
         if (DAT_GameState::instance.playerDataArray[_playerID].aiType - 1 != 6 && param_2 != 0
