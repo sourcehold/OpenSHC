@@ -34,7 +34,8 @@ namespace AI {
             return 0;
 
         MACRO_CALL_MEMBER(AIVState_Func::resetCountdownInHeatMap, DAT_AIVState::ptr)(
-            DAT_BuildingsState::instance.buildings[buildingID].x, DAT_BuildingsState::instance.buildings[buildingID].y);
+            (short)DAT_BuildingsState::instance.buildings[buildingID].x,
+            (short)DAT_BuildingsState::instance.buildings[buildingID].y);
         MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::giveBackResourceForDestroyedBuilding,
             DAT_BuildingsState::ptr)(buildingID, owner, 50);
         MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(buildingID);
