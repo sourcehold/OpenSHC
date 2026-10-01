@@ -37,20 +37,21 @@ namespace AI {
             return (UnitType)this->aics[aicIndex].AttUnitEngage;
         if (unitBehaviourType == OpenSHC::AI::AIUBT_SIEGEDEFENSE)
             return (UnitType)this->aics[aicIndex].AttUnitSiegeDef;
-        if (unitBehaviourType != OpenSHC::AI::AIUBT_ATTUNITMAIN)
-            return (UnitType)this->aics[aicIndex].AttUnitMain1;
+        if (unitBehaviourType == OpenSHC::AI::AIUBT_ATTUNITMAIN) {
+            if ((&this->aics[aicIndex]
+                        .AttUnitMain1)[DAT_GameState::instance.playerDataArray[playerID].aiAttUnitMainChoiceIndex]
+                == 0)
+                DAT_GameState::instance.playerDataArray[playerID].aiAttUnitMainChoiceIndex = 0;
+            if (DAT_GameState::instance.playerDataArray[playerID].aiAttUnitMainChoiceIndex >= 4)
+                DAT_GameState::instance.playerDataArray[playerID].aiAttUnitMainChoiceIndex = 0;
 
-        if ((&this->aics[aicIndex]
-                    .AttUnitMain1)[DAT_GameState::instance.playerDataArray[playerID].aiAttUnitMainChoiceIndex]
-            == 0)
-            DAT_GameState::instance.playerDataArray[playerID].aiAttUnitMainChoiceIndex = 0;
-        if (DAT_GameState::instance.playerDataArray[playerID].aiAttUnitMainChoiceIndex >= 4)
-            DAT_GameState::instance.playerDataArray[playerID].aiAttUnitMainChoiceIndex = 0;
+            int choice = DAT_GameState::instance.playerDataArray[playerID].aiAttUnitMainChoiceIndex;
+            UnitType unitType = (UnitType)(&this->aics[aicIndex].AttUnitMain1)[choice];
+            DAT_GameState::instance.playerDataArray[playerID].aiAttUnitMainChoiceIndex = choice + 1;
+            return unitType;
+        }
 
-        int choice = DAT_GameState::instance.playerDataArray[playerID].aiAttUnitMainChoiceIndex;
-        UnitType unitType = (UnitType)(&this->aics[aicIndex].AttUnitMain1)[choice];
-        DAT_GameState::instance.playerDataArray[playerID].aiAttUnitMainChoiceIndex = choice + 1;
-        return unitType;
+        return (UnitType)this->aics[aicIndex].AttUnitMain1;
     }
 
 }
