@@ -22,18 +22,19 @@ namespace AI {
 
             int buildingType = DAT_BuildingsState::instance.buildings[buildingID].buildingType;
             for (int j = 0; j < chosenPriority; j++) {
-                bool isMatch;
-                if (rng <= 1)
-                    isMatch = buildingType == DAT_SkirmishDefinedData::instance.BuildingTargetPrioritySet3[j];
-                else if (rng <= 3)
-                    isMatch = buildingType == DAT_SkirmishDefinedData::instance.BuildingTargetPrioritySet2[j];
-                else
-                    isMatch = buildingType == DAT_SkirmishDefinedData::instance.BuildingTargetPrioritySet1[j];
-
-                if (isMatch) {
-                    chosenBuildingID = buildingID;
-                    chosenPriority = j;
+                if (rng <= 1) {
+                    if (buildingType != DAT_SkirmishDefinedData::instance.BuildingTargetPrioritySet3[j])
+                        continue;
+                } else if (rng <= 3) {
+                    if (buildingType != DAT_SkirmishDefinedData::instance.BuildingTargetPrioritySet2[j])
+                        continue;
+                } else {
+                    if (buildingType != DAT_SkirmishDefinedData::instance.BuildingTargetPrioritySet1[j])
+                        continue;
                 }
+
+                chosenBuildingID = buildingID;
+                chosenPriority = j;
             }
         }
         return chosenBuildingID;
