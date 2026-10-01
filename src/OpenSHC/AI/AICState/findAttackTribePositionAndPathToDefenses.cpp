@@ -48,7 +48,7 @@ namespace AI {
         if (tile <= 0)
             return;
 
-        short tileY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
+        int tileY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
         DAT_GameState::instance.playerDataArray[playerID].someTile = tile;
         DAT_GameState::instance.playerDataArray[playerID].someY = tileY;
         DAT_GameState::instance.playerDataArray[playerID].someX
