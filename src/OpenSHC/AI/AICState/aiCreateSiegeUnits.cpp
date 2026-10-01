@@ -43,8 +43,7 @@ namespace AI {
         if (DAT_GameState::instance.playerDataArray[playerID].canStartSpending == 0)
             return;
 
-        // The original also processes index 4, one past the end of SiegeEngineMetaInfoArray.
-        for (int siegeIndex = 0; siegeIndex < 5; siegeIndex++) {
+        for (int siegeIndex = 0; siegeIndex < 4; siegeIndex++) {
             UnitType unitType
                 = (UnitType)DAT_SkirmishDefinedData::instance.SiegeEngineMetaInfoArray[siegeIndex].unitType;
             int slot = DAT_SkirmishDefinedData::instance.SiegeEngineMetaInfoArray[siegeIndex].slot;
