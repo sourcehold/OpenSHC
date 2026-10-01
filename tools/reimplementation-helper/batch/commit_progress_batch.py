@@ -58,7 +58,10 @@ def commit(cpp, address, percent, remark):
         return False, "address %s not in %s (wrong FUNCTION address?)" % (address, STATUS_FILE)
     STATUS_FILE.write_text("".join(lines), encoding="utf-8", newline="")
     git("add", cpp, str(STATUS_FILE))
-    r = git("commit", "-m", "reimplement: %s %.2f%% %s" % (function_id, percent, remark))
+    # commit only these two paths: anything else already in the index (a `git checkout other-branch --`
+    # stages what it writes) would otherwise be swept into the first function's commit
+    r = git("commit", "-m", "reimplement: %s %.2f%% %s" % (function_id, percent, remark),
+            "--only", "--", cpp, str(STATUS_FILE))
     return r.returncode == 0, r.stdout[-200:] + r.stderr[-300:]
 
 
