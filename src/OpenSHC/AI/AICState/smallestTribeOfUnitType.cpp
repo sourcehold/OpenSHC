@@ -34,7 +34,8 @@ namespace AI {
                 // FIXME: The original binary jumps from here directly into the shared assignment code at the
                 // end of the function, skipping the "smallestTribeID == 0" check. A goto reproduces this and
                 // matches the assembly much better (~55% vs ~41%), but we avoid goto, so the assignment is
-                // duplicated here.
+                // duplicated here. Do not "simplify" this into a break into the shared tail below, the way
+                // addUnitToSmallestBehaviourTypeTribe is written: that was measured at 17%.
                 tribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(
                     playerID);
                 DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[offset + i] = (short)tribeID;
