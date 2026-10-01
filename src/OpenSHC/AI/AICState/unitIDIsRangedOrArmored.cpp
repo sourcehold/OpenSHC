@@ -11,7 +11,7 @@ namespace AI {
     using OpenSHC::Game::Skirmish::SkirmishDefinedData;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CC8D0
-    undefined4 AICState::unitIDIsRangedOrArmored(int unitID)
+    BOOLEnum AICState::unitIDIsRangedOrArmored(int unitID)
     {
         int _unitType = DAT_UnitsState::instance.units[unitID].unitType;
 
