@@ -1,0 +1,32 @@
+#include "OpenSHC/Map/Version.func.hpp"
+#include "OpenSHC/Map/Buildings/Building.hpp"
+#include "OpenSHC/Map/Buildings/BuildingLogicalState.hpp"
+
+#include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
+#include "OpenSHC/Globals/DAT_BuildingsState.hpp"
+
+namespace OpenSHC {
+namespace Map {
+
+    using OpenSHC::Map::Buildings::Building;
+    using OpenSHC::Map::Buildings::BuildingLogicalState;
+
+    // FUNCTION: STRONGHOLDCRUSADER 0x0041A060
+    void Version::SetUndamagedBuildingHealthToValue()
+    {
+        for (int buildingID = 1; buildingID < 2000; ++buildingID) {
+            if (DAT_BuildingsState::instance.buildings[buildingID].logicalState != (BuildingLogicalState)0
+                && DAT_BuildingsState::instance.buildings[buildingID].currentHealth
+                    == DAT_BuildingsState::instance.buildings[buildingID].maxHealth) {
+                uint const health
+                    = DAT_BuildingDefinedData::instance
+                          .BuildingHP[(short)DAT_BuildingsState::instance.buildings[buildingID].buildingType]
+                          .ushortValue;
+                DAT_BuildingsState::instance.buildings[buildingID].maxHealth = health;
+                DAT_BuildingsState::instance.buildings[buildingID].currentHealth = health;
+            }
+        }
+    }
+
+}
+}

@@ -7,3 +7,11 @@ src/OpenSHC/IO/ResourceManager/swapMapDataWithNextMap.cpp
 src/OpenSHC/UI/Rendering/WindowAndDirectDraw/takeScreenshot.cpp
 src/OpenSHC/IO/ResourceManager/readFirstPartOfCurrentResourceIntoMemory.cpp
 src/OpenSHC/IO/ResourceManager/readNextPartOfCurrentResourceIntoMemory.cpp
+src/OpenSHC/Map/TileMapState/updateMoatCountdownTimers.cpp
+src/OpenSHC/Map/TileMapState/recountTotalOwnedMoats.cpp
+src/OpenSHC/Game/GameStateStructures/getSalesPrice.cpp
+src/OpenSHC/Map/TileMapState/updateBuildingPlacementRotationPreview.cpp
+src/OpenSHC/Map/Units/TribesState/playUnitSelectSpeech.cpp
+src/OpenSHC/Audio/SFX/SFXState/playUnitSpeech.cpp
+src/OpenSHC/Game/GameStateStructures/getSellResourceAmount.cpp
+src/OpenSHC/Map/TileMapState/determineBuildingPlacementRotation.cpp
