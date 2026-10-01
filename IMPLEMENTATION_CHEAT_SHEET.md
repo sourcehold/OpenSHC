@@ -50,6 +50,24 @@ This also applies when putting instructions inside the condition branches.
 
 Naturally, the logic flow needs to be kept, so the update of a variable can not move before or after another usage of the same variable.
 
+### Statement Order
+
+The order of instructions in the assembly is not the order of the statements in the original source.
+Within a boundary the compiler schedules freely, so do not try to reconstruct the statement order from
+the instruction order.
+
+This matters most for long runs of independent stores into one object, as in `AICState::setAICParameters_NN`:
+the whole body is `this->aics[aicIndex].<field> = <constant>;` over ~130 fields, and the compiler emits
+those `mov dword ptr [eax + <offset>], <reg>` instructions in an order of its own. Rewriting all 16 of
+those functions so their statements followed the original's store order made every one of them *worse*
+(e.g. `setAICParameters_14` 82.4% -> 50.0%).
+
+What the instruction order *does* reveal is which constants got their own register and in which order
+those registers were allocated (`mov ebx, 6` before `or edi, 0xffffffff` and so on). That is a
+consequence of register pressure, not something a statement reordering can be aimed at directly, so a
+remaining diff of this shape is usually a reason to record the percentage with a remark rather than to
+keep permuting the body.
+
 ## Structure
 
 ### Bitwise Operations
