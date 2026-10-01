@@ -76,7 +76,7 @@ namespace AI {
             return;
         }
 
-        bool recruitDiggingUnit = false;
+        int recruitDiggingUnit = 0;
         if (this->aics[aicIndex].DefDiggingUnitMax != 0
             && MACRO_CALL_MEMBER(
                    OpenSHC::Map::TileMapState_Func::countUnfinishedMoatTilesForPlayer, DAT_TileMapState::ptr)(playerID)
@@ -86,14 +86,14 @@ namespace AI {
                 || DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[10]
                     != DAT_TribesState::instance.tribes[diggerTribeID].uid
                 || DAT_TribesState::instance.tribes[diggerTribeID].size < this->aics[aicIndex].DefDiggingUnitMax)
-                recruitDiggingUnit = true;
+                recruitDiggingUnit = 1;
         }
 
         UnitType unitType = (UnitType)0;
         int behaviourType = 0;
         for (int i = 0; i < recruitCount; i++) {
             if (recruitDiggingUnit && (SEC_RNG::instance.currentNumber2 & 1) != 0)
-                recruitDiggingUnit = false;
+                recruitDiggingUnit = 0;
 
             if (recruitDiggingUnit) {
                 if (DAT_GameState::instance.playerDataArray[playerID].barracks.id == 0
