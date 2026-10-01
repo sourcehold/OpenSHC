@@ -12,8 +12,8 @@ namespace AI {
     {
         if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker > 0) {
             // nervous: reject market/mercenarypost/barracks/armory types
-            if (param_2 != Commands::M_MAPPER_TRADEPOST && param_2 != Commands::M_MAPPER_BARRACKS_ARAB
-                && param_2 != Commands::M_MAPPER_BARRACKS_EURO && param_2 != Commands::M_MAPPER_ARMOURY) {
+            if (param_2 != Commands::M_MAPPER_TRADEPOST && param_2 != Commands::M_MAPPER_BARRACKS_EURO
+                && param_2 != Commands::M_MAPPER_BARRACKS_ARAB && param_2 != Commands::M_MAPPER_ARMOURY) {
                 return param_2 != Commands::M_MAPPER_GRANARY;
             }
         } else {
