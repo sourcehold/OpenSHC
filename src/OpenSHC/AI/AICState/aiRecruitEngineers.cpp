@@ -21,7 +21,7 @@ namespace AI {
             return;
         if (DAT_GameState::instance.playerDataArray[playerID].canStartSpending == 0)
             return;
-        if (this->aics[aiType - 1].recruitGoldThreshold
+        if (this->aics[aiType - 1].defSiegeEngineGoldThreshold
                 + DAT_GameState::instance.playerDataArray[playerID].currentResources[Game::Resources::RT_GOLD]
             < 30)
             return;
