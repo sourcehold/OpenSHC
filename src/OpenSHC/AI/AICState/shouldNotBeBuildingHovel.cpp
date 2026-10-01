@@ -18,7 +18,7 @@ namespace AI {
             return FALSE;
         }
 
-        if (populationCap <= DAT_GameState::instance.playerDataArray[playerID].currentPopulation) {
+        if (DAT_GameState::instance.playerDataArray[playerID].currentPopulation < populationCap) {
             return TRUE;
         }
 
