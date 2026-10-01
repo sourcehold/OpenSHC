@@ -14,7 +14,7 @@ namespace AI {
                 continue;
             if (DAT_GameState::instance.playerDataArray[playerID].lordKilledByPlayerID != 0)
                 continue;
-            if (DAT_GameState::instance.playerDataArray[playerID].aiType - 1 != aicIndex)
+            if (aicIndex != DAT_GameState::instance.playerDataArray[playerID].aiType - 1)
                 continue;
             return TRUE;
         }
