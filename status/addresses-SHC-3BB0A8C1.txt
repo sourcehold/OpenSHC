@@ -10117,7 +10117,7 @@ SHC_3BB0A8C1_0x00430686 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00430690 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004306D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004306D0 | 65.9% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x00430B10 | 0.0% | Pending
 
