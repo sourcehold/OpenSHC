@@ -50,7 +50,7 @@ namespace Text {
 
         char* getTextArrayPointer(int param_1);
 
-        void setTextEntryAndUpdateCursor(undefined4 param_1, undefined4 param_2);
+        void setTextEntryAndUpdateCursor(int textIndex, char* text);
 
         int getCurrentFontSize();
 

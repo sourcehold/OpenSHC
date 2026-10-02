@@ -41,7 +41,7 @@ namespace UI {
 
         void __cdecl SetTaxesSetting_unknown(int taxesSettingUnk);
 
-        void __cdecl SetTribesPatrolButtonPressed(undefined4 param_1);
+        void __cdecl SetTribesPatrolButtonPressed(BOOLEnum param_1);
 
         undefined4 __cdecl SomeUnitAndViewportCheck(int unitID);
 

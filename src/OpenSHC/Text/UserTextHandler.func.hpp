@@ -23,7 +23,7 @@ namespace Text {
             &UserTextHandler::getTextArrayPointer)
         getTextArrayPointer;
 
-        MACRO_FUNCTION_RESOLVER(void (UserTextHandler::*)(undefined4, undefined4), false,
+        MACRO_FUNCTION_RESOLVER(void (UserTextHandler::*)(int, char*), false,
             Address::SHC_3BB0A8C1_0x00469800, &UserTextHandler::setTextEntryAndUpdateCursor)
         setTextEntryAndUpdateCursor;
 
