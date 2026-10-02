@@ -6629,7 +6629,7 @@ SHC_3BB0A8C1_0x00424310 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00424320 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00424360 | 0.0% | Pending
+SHC_3BB0A8C1_0x00424360 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00424390 | 100.0% | Reimplemented
 
