@@ -141,7 +141,7 @@ def function_body_span(text, start=0):
 
 def run_reccmp():
     result = subprocess.run(
-        ["cmd", "/c", r"reccmp\dll\run.bat", "reccmp-reccmp", "--target", "STRONGHOLDCRUSADER", "--json", "diff.json"],
+        ["cmd", "/c", r"reccmp\dll\run.bat", "reccmp-reccmp", "--target", "STRONGHOLDCRUSADER", "--json", "diff.json", "--resolve-wrapped-calls"],
         capture_output=True, text=True, stdin=subprocess.DEVNULL)
     if result.returncode:
         sys.exit("reccmp failed:\n" + result.stdout[-800:] + result.stderr[-800:])
