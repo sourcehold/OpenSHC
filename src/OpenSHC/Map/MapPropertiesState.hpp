@@ -70,18 +70,21 @@ namespace Map {
         undefined4 SEC_Section1090; // 0x00013540 length: 4
         undefined4 SEC_Section1080; // 0x00013544 length: 4
         undefined4 SEC_Section1081; // 0x00013548 length: 4
-        undefined1 padding_0x1354c[16]; // 0x0001354C length: 16
+        undefined1 padding_0x1354c[4]; // 0x0001354C length: 4
+        int visibleRowCount; // 0x00013550 length: 4
+        undefined1 padding_0x13554[8]; // 0x00013554 length: 8
         undefined4 field47_0x1355c; // 0x0001355C length: 4
         int field48_0x13560; // 0x00013560 length: 4
         undefined4 currentEventID; // 0x00013564 length: 4
         undefined4 field50_0x13568; // 0x00013568 length: 4
-        undefined1 padding_0x1356c[4]; // 0x0001356C length: 4
+        int field_0x1356c; // 0x0001356C length: 4
         undefined4 invasionTroopIndex; // 0x00013570 length: 4
         int DAT_BuildingAvailabilityScrollbarOffset; // 0x00013574 length: 4
         undefined4 flag; // 0x00013578 length: 4
         undefined4 offset; // 0x0001357C length: 4
         undefined4 indexStored; // 0x00013580 length: 4
-        undefined1 padding_0x13584[8]; // 0x00013584 length: 8
+        int selectedAbsoluteIndex; // 0x00013584 length: 4
+        dword selectionTime; // 0x00013588 length: 4
         undefined4 value; // 0x0001358C length: 4
         undefined4 field69_0x13590; // 0x00013590 length: 4
         undefined1 padding_0x13594[8]; // 0x00013594 length: 8

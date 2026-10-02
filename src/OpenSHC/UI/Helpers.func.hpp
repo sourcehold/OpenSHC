@@ -60,7 +60,7 @@ namespace UI {
             &OpenSHC::UI::Helpers::SetTaxesSetting_unknown)
         SetTaxesSetting_unknown;
 
-        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(undefined4 param_1), false, Address::SHC_3BB0A8C1_0x00434340,
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(BOOLEnum param_1), false, Address::SHC_3BB0A8C1_0x00434340,
             &OpenSHC::UI::Helpers::SetTribesPatrolButtonPressed)
         SetTribesPatrolButtonPressed;
 
