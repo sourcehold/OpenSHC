@@ -30,11 +30,22 @@ namespace AI {
 
         // 6 is the Caliph's AIC index: he fields slaves rather than the ranged units listed below
         if (DAT_GameState::instance.playerDataArray[_playerID].aiType - 1 != 6 && param_2 != 0
-            && DAT_GameState::instance.playerDataArray[_playerID].aivUnitLocationSlotLocationCount[0xd] > 0
-            && (_unitType2 == OpenSHC::Map::Units::UT_E_ARCHER || _unitType2 == OpenSHC::Map::Units::UT_E_XBOW
-                || _unitType2 == OpenSHC::Map::Units::UT_A_ARCHER || _unitType2 == OpenSHC::Map::Units::UT_A_SLINGER
-                || _unitType2 == OpenSHC::Map::Units::UT_A_FIRETHROWER)) {
-            return OpenSHC::AI::AIVUT_SLAVE;
+            && DAT_GameState::instance.playerDataArray[_playerID].aivUnitLocationSlotLocationCount[0xd] > 0) {
+            if (_unitType2 == OpenSHC::Map::Units::UT_E_ARCHER) {
+                return OpenSHC::AI::AIVUT_SLAVE;
+            }
+            if (_unitType2 == OpenSHC::Map::Units::UT_E_XBOW) {
+                return OpenSHC::AI::AIVUT_SLAVE;
+            }
+            if (_unitType2 == OpenSHC::Map::Units::UT_A_ARCHER) {
+                return OpenSHC::AI::AIVUT_SLAVE;
+            }
+            if (_unitType2 == OpenSHC::Map::Units::UT_A_SLINGER) {
+                return OpenSHC::AI::AIVUT_SLAVE;
+            }
+            if (_unitType2 == OpenSHC::Map::Units::UT_A_FIRETHROWER) {
+                return OpenSHC::AI::AIVUT_SLAVE;
+            }
         }
 
         for (int someUnitTypeIndex = 0; someUnitTypeIndex < 0x14; someUnitTypeIndex++) {

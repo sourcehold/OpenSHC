@@ -34865,7 +34865,7 @@ SHC_3BB0A8C1_0x004CC070 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CC250 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CC390 | 79.5% | block layout differs
+SHC_3BB0A8C1_0x004CC390 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CC420 | 39.4% | regalloc/locals differ
 
@@ -35261,7 +35261,7 @@ SHC_3BB0A8C1_0x004CCFA0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004CCFA1 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004CCFB0 | 90.0% | imported, regalloc differs
+SHC_3BB0A8C1_0x004CCFB0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CD070 | 100.0% | Reimplemented
 
