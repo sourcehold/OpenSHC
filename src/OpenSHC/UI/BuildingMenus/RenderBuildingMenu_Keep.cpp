@@ -99,7 +99,7 @@ namespace UI {
         }
         iVar3 = (int)(short)DAT_BuildingsState::instance.buildings[_displayNumber].buildingType;
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
-        if (iVar3 - 0x47U < 3) {
+        if (iVar3 - 0x47U <= 2) {
             iVar3 = (int)(short)DAT_BuildingsState::instance.buildings[_displayNumber].quarryStockpileID;
             if ((iVar3 != 0)
                 && (DAT_BuildingsState::instance.buildings[iVar3].uid
@@ -118,7 +118,10 @@ namespace UI {
             _alignment = OpenSHC::Text::TTA_LEFT;
             _displayNumber = DAT_MenuHandlerState::instance.y + 0x1d3;
             _xPos = DAT_MenuHandlerState::instance.x + 0x19;
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_KEEP, iVar3 * 2 + -0x50), _xPos, _displayNumber, _alignment, _color, _fontSize, _keepOffsetX, _blendStrength);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_KEEP, iVar3 * 2 + -0x50),
+                _xPos, _displayNumber, _alignment, _color, _fontSize, _keepOffsetX, _blendStrength);
         }
         _displayNumber = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                              .taxesSliderUI;
@@ -130,7 +133,10 @@ namespace UI {
         _alignment = OpenSHC::Text::TTA_LEFT;
         _xPos = DAT_MenuHandlerState::instance.x + 0xf0;
         if (_displayNumber < 3) {
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_KEEP, _displayNumber + 7), _xPos, iVar3, _alignment, _color, _fontSize, _keepOffsetX, _blendStrength);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_KEEP, _displayNumber + 7),
+                _xPos, iVar3, _alignment, _color, _fontSize, _keepOffsetX, _blendStrength);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                 DAT_GameState::instance.playerDataArray[iVar4].currentPopulation,
                 DAT_MenuHandlerState::instance.x + 300, DAT_MenuHandlerState::instance.y + 0x1e3,
@@ -154,7 +160,10 @@ namespace UI {
             _displayNumber
                 = DAT_TextManagerObject::instance.currentXOffset_0x0 + 0x154 + DAT_MenuHandlerState::instance.x;
         } else {
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_KEEP, _displayNumber + 7), _xPos, iVar3, _alignment, _color, _fontSize, _keepOffsetX, _blendStrength);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_KEEP, _displayNumber + 7),
+                _xPos, iVar3, _alignment, _color, _fontSize, _keepOffsetX, _blendStrength);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                 DAT_GameState::instance.playerDataArray[iVar4].currentPopulation,
                 DAT_MenuHandlerState::instance.x + 300, DAT_MenuHandlerState::instance.y + 0x1e3,
@@ -183,7 +192,13 @@ namespace UI {
             OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS2, 0x7c, _displayNumber, DAT_MenuHandlerState::instance.y + 0x1e1);
         iVar4 = 0x12;
         _displayNumber = 0;
-        iVar4 = MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::computeTextWidth, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_KEEP, DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID].taxesSliderUI + 7), iVar4);
+        iVar4 = MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::computeTextWidth, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_KEEP,
+                DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                        .taxesSliderUI
+                    + 7),
+            iVar4);
         if (0xbe < iVar4) {
             _displayNumber = iVar4 + -0xbe;
         }
