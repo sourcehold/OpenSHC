@@ -2573,7 +2573,7 @@ SHC_3BB0A8C1_0x00408E10 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00408E30 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00408E70 | 0.0% | Pending
+SHC_3BB0A8C1_0x00408E70 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00408EB0 | 0.0% | Pending
 
