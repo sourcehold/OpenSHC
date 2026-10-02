@@ -65,7 +65,7 @@ namespace UI {
         undefined4 field42_0x9c; // 0x0000009C length: 4
         undefined4 field43_0xa0; // 0x000000A0 length: 4
         int field44_0xa4; // 0x000000A4 length: 4
-        undefined1 padding_0xa8[4]; // 0x000000A8 length: 4
+        int dialogResult; // 0x000000A8 length: 4
         undefined4 field49_0xac; // 0x000000AC length: 4
         undefined4 DAT_ArrayOfMapU3EndInt2[500]; // 0x000000B0 length: 2000
         undefined4 DAT_MapSelectionPreloadMapIndexMapping; // 0x00000880 length: 4
