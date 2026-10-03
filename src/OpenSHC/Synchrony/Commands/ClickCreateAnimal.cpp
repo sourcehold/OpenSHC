@@ -9,6 +9,7 @@
 #include "OpenSHC/Commands/MappersEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
+#include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
@@ -72,13 +73,11 @@ namespace Synchrony {
                     (OpenSHC::Commands::MappersEnum)DAT_GameSynchronyState::instance.DAT_GameCommandParam2,
                     (uint)((int)(DAT_GameSynchronyState::instance.DAT_GameCommandParam0)),
                     (uint)((int)(DAT_GameSynchronyState::instance.DAT_GameCommandParam1)),
-                    (int)((int)((uint)
-                        * (byte*)((OpenSHC::Commands::MappersEnum)((OpenSHC::Commands::MappersEnum)((
-                            OpenSHC::Commands::MappersEnum)(DAT_ViewportRenderState::instance
-                                                                .translationMatrix[DAT_GameSynchronyState::instance
-                                                                        .DAT_GameCommandParam1]
-                                                                .addXgetTile
-                            + 0x1d32c38 + DAT_GameSynchronyState::instance.DAT_GameCommandParam0)))))));
+                    (int)((uint)DAT_TileMapState::instance
+                            .HeightLayer[DAT_ViewportRenderState::instance
+                                             .translationMatrix[DAT_GameSynchronyState::instance.DAT_GameCommandParam1]
+                                             .addXgetTile
+                                + DAT_GameSynchronyState::instance.DAT_GameCommandParam0]));
             }
         }
         return;
