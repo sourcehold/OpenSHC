@@ -23123,7 +23123,7 @@ SHC_3BB0A8C1_0x0048A350 | 96.7% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x0048A460 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0048A510 | 0.0% | Pending
+SHC_3BB0A8C1_0x0048A510 | 75.9% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x0048A710 | 100.0% | Reimplemented
 
