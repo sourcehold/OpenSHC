@@ -53,7 +53,7 @@ namespace UI {
         iVar2 = DAT_MenuHandlerState::instance.y;
         iVar1 = DAT_MenuHandlerState::instance.x;
         DAT_00b98448::instance = DAT_00b98448::instance + 1;
-        if (0x28 < DAT_00b98448::instance) {
+        if (0x28 < (int)DAT_00b98448::instance) {
             DAT_00b98448::instance = 0;
         }
         MACRO_CALL_MEMBER(
