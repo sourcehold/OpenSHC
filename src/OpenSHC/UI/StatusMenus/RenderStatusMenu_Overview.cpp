@@ -68,15 +68,24 @@ namespace UI {
             iVar3 = MACRO_CALL(OpenSHC::UI::Helpers_Func::SomeFearFactorComputation)();
         }
         iVar4 = 0x13;
-        iVar4 = MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::computeTextWidth, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_PLAYER_DESC, iVar3), iVar4);
+        iVar4 = MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::computeTextWidth, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_PLAYER_DESC, iVar3),
+            iVar4);
         iVar3 = 0x13;
         /*
           added by script: "and"
          */
-        iVar2 = MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::computeTextWidth, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_PLAYER_DESC, 0x28), iVar3);
+        iVar2 = MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::computeTextWidth, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_PLAYER_DESC, 0x28),
+            iVar3);
         iVar3 = MACRO_CALL(OpenSHC::UI::Helpers_Func::SomePopularityRelatedComputation)();
         iVar8 = 0x13;
-        iVar8 = MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::computeTextWidth, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_PLAYER_DESC, iVar3), iVar8);
+        iVar8 = MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::computeTextWidth, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_PLAYER_DESC, iVar3),
+            iVar8);
         iVar3 = DAT_MenuHandlerState::instance.y;
         iVar2 = DAT_MenuHandlerState::instance.x - (iVar4 + iVar2 + 0xc + iVar8) / 2;
         iVar4 = iVar2 + 0x8d;
@@ -93,7 +102,10 @@ namespace UI {
         iVar9 = 0x13;
         BVar6 = 0;
         TVar5 = OpenSHC::Text::TTA_LEFT;
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_PLAYER_DESC, iVar8), iVar4, iVar3, TVar5, BVar6, iVar9, BVar7, blendStrength);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_PLAYER_DESC, iVar8),
+            iVar4, iVar3, TVar5, BVar6, iVar9, BVar7, blendStrength);
         iVar9 = 0;
         BVar7 = TRUE;
         iVar8 = 0x13;
@@ -104,7 +116,10 @@ namespace UI {
         /*
           added by script: "and"
          */
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_PLAYER_DESC, 0x28), iVar3, iVar4, TVar5, BVar6, iVar8, BVar7, iVar9);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_PLAYER_DESC, 0x28),
+            iVar3, iVar4, TVar5, BVar6, iVar8, BVar7, iVar9);
         iVar4 = DAT_MenuHandlerState::instance.y + 0x242;
         iVar3 = MACRO_CALL(OpenSHC::UI::Helpers_Func::SomePopularityRelatedComputation)();
         iVar9 = 0;
@@ -113,7 +128,10 @@ namespace UI {
         BVar6 = 0;
         TVar5 = OpenSHC::Text::TTA_LEFT;
         iVar2 = iVar2 + 0x99;
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_PLAYER_DESC, iVar3), iVar2, iVar4, TVar5, BVar6, iVar8, BVar7, iVar9);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_PLAYER_DESC, iVar3),
+            iVar2, iVar4, TVar5, BVar6, iVar8, BVar7, iVar9);
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
     }
 

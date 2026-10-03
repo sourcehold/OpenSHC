@@ -64,7 +64,10 @@ namespace UI {
         /*
           added by script: "Food"
          */
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 4), iVar1, iVar3, TVar7, BVar8, iVar9, BVar10, blendStrength);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 4),
+            iVar1, iVar3, TVar7, BVar8, iVar9, BVar10, blendStrength);
         if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY) {
             iVar9 = 0;
             BVar10 = FALSE;
@@ -76,7 +79,10 @@ namespace UI {
             /*
               added by script: "Clicking on a food toggles consumption"
              */
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 0x17), iVar1, iVar4, TVar7, BVar8, iVar3, BVar10, iVar9);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 0x17),
+                iVar1, iVar4, TVar7, BVar8, iVar3, BVar10, iVar9);
         }
         iVar6 = iVar6 + 0xbe;
         piVar5 = DAT_RenderingDefinedData::instance.field1050_0x55720;

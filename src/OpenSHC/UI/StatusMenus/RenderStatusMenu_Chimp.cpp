@@ -8,6 +8,7 @@
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
+#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -23,17 +24,16 @@
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/INT_00b96124.hpp"
 #include "OpenSHC/Globals/INT_00b98458.hpp"
-#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 
 namespace OpenSHC {
 namespace UI {
 
     using OpenSHC::DE::SHCDE::eTextSections;
     using OpenSHC::Map::Units::UnitType;
+    using OpenSHC::Rendering::Colors::BGR24;
     using OpenSHC::Text::TextAlignment;
     using OpenSHC::UI::Enums::MenuViewType;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-    using OpenSHC::Rendering::Colors::BGR24;
 
     /*
       WARNING: Enum "MappersEnum": Some values do not have unique names
@@ -82,9 +82,16 @@ namespace UI {
             alignment = OpenSHC::Text::TTA_LEFT;
             _xParam = DAT_MenuHandlerState::instance.x + 0x8c;
             if (DAT_UnitsState::instance.units[_unitID].unitType == OpenSHC::Map::Units::UT_GHOST) {
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_CHIMP_NAMES, numInGroup), _xParam, _yParam, alignment, color, fontSize, keepOffsetX, blendStrength);
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_CHIMP_NAMES, numInGroup),
+                    _xParam, _yParam, alignment, color, fontSize, keepOffsetX, blendStrength);
             } else {
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_PEASANT_NAMES, (int)((int)((char)DAT_UnitsState::instance.units[_unitID].firstNameIndex))), _xParam, _yParam, alignment, color, fontSize, keepOffsetX, blendStrength);
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_PEASANT_NAMES,
+                        (int)((int)((char)DAT_UnitsState::instance.units[_unitID].firstNameIndex))),
+                    _xParam, _yParam, alignment, color, fontSize, keepOffsetX, blendStrength);
                 bVar1 = DAT_UnitsState::instance.units[_unitID].rng1_to_70;
                 if (bVar1 != 0) {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
