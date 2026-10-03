@@ -6771,7 +6771,7 @@ SHC_3BB0A8C1_0x00426600 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004266A0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004266E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004266E0 | 91.5% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x00426750 | 0.0% | Pending
 
@@ -22253,7 +22253,7 @@ SHC_3BB0A8C1_0x0047C5D0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0047C670 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0047C860 | 0.0% | Pending
+SHC_3BB0A8C1_0x0047C860 | 38.8% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x0047CA80 | 0.0% | Pending
 
@@ -22311,7 +22311,7 @@ SHC_3BB0A8C1_0x0047D0E0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0047D100 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0047D190 | 0.0% | Pending
+SHC_3BB0A8C1_0x0047D190 | 39.1% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x0047D330 | 0.0% | Pending
 
@@ -22361,7 +22361,7 @@ SHC_3BB0A8C1_0x0047E1A0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0047E240 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0047E3A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0047E3A0 | 86.4% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x0047E3E0 | 0.0% | Pending
 
@@ -23419,7 +23419,7 @@ SHC_3BB0A8C1_0x00491840 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00491A30 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00491AC0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00491AC0 | 71.4% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x00491BF0 | 0.0% | Pending
 
@@ -23451,7 +23451,7 @@ SHC_3BB0A8C1_0x00492070 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00492080 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00492120 | 0.0% | Pending
+SHC_3BB0A8C1_0x00492120 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00492170 | 0.0% | Pending
 
@@ -23549,13 +23549,13 @@ SHC_3BB0A8C1_0x00492FD0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00493050 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004931A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004931A0 | 54.7% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004932A0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004932E0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00493390 | 0.0% | Pending
+SHC_3BB0A8C1_0x00493390 | 43.9% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004934B4 | 0.0% | Pending
 
@@ -23623,7 +23623,7 @@ SHC_3BB0A8C1_0x004934E5 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004934F0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00493560 | 0.0% | Pending
+SHC_3BB0A8C1_0x00493560 | 45.2% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x00493690 | 0.0% | Pending
 
@@ -23631,7 +23631,7 @@ SHC_3BB0A8C1_0x004937A4 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004937B0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004937E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004937E0 | 82.1% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x00493850 | 0.0% | Pending
 
@@ -24043,7 +24043,7 @@ SHC_3BB0A8C1_0x004941E8 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004941F0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00494210 | 0.0% | Pending
+SHC_3BB0A8C1_0x00494210 | 49.2% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004943B0 | 0.0% | Pending
 
@@ -25473,7 +25473,7 @@ SHC_3BB0A8C1_0x004A9B20 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004A9DD0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004A9E00 | 0.0% | Pending
+SHC_3BB0A8C1_0x004A9E00 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004A9E60 | 0.0% | Pending
 
@@ -25491,7 +25491,7 @@ SHC_3BB0A8C1_0x004AA1F0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004AA3E0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004AA440 | 0.0% | Pending
+SHC_3BB0A8C1_0x004AA440 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004AA480 | 0.0% | Pending
 
@@ -25537,11 +25537,11 @@ SHC_3BB0A8C1_0x004AAB20 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004AAB40 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004AAB50 | 0.0% | Pending
+SHC_3BB0A8C1_0x004AAB50 | 37.8% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004AB440 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004AB460 | 0.0% | Pending
+SHC_3BB0A8C1_0x004AB460 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004AB4B0 | 0.0% | Pending
 
@@ -25551,15 +25551,15 @@ SHC_3BB0A8C1_0x004AB510 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004AB540 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004AB570 | 0.0% | Pending
+SHC_3BB0A8C1_0x004AB570 | 38.9% | Style pass, asm differs
 
-SHC_3BB0A8C1_0x004AB680 | 0.0% | Pending
+SHC_3BB0A8C1_0x004AB680 | 38.9% | Style pass, asm differs
 
-SHC_3BB0A8C1_0x004AB790 | 0.0% | Pending
+SHC_3BB0A8C1_0x004AB790 | 42.4% | Style pass, asm differs
 
-SHC_3BB0A8C1_0x004ABA20 | 0.0% | Pending
+SHC_3BB0A8C1_0x004ABA20 | 79.6% | Style pass, asm differs
 
-SHC_3BB0A8C1_0x004ABAB0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004ABAB0 | 91.9% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004ABB70 | 0.0% | Pending
 
@@ -25617,7 +25617,7 @@ SHC_3BB0A8C1_0x004ABB90 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004ABB91 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004ABBA0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004ABBA0 | 38.9% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004ABCB0 | 0.0% | Pending
 
@@ -25625,7 +25625,7 @@ SHC_3BB0A8C1_0x004ABCE0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004ABD10 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004ABD20 | 0.0% | Pending
+SHC_3BB0A8C1_0x004ABD20 | 64.9% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004ABE50 | 0.0% | Pending
 
@@ -25781,19 +25781,19 @@ SHC_3BB0A8C1_0x004AC24F | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004AC250 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004AC280 | 0.0% | Pending
+SHC_3BB0A8C1_0x004AC280 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004AC310 | 0.0% | Pending
+SHC_3BB0A8C1_0x004AC310 | 40.4% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004AC440 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004AC4C0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004AC4C0 | 46.6% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004AC570 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004AC650 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004AC6E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004AC6E0 | 75.5% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004AC7A0 | 0.0% | Pending
 
@@ -25801,19 +25801,19 @@ SHC_3BB0A8C1_0x004AD110 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004AD1E0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004AD2B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004AD2B0 | 80.0% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004AD2F0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004AD480 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004AD780 | 0.0% | Pending
+SHC_3BB0A8C1_0x004AD780 | 84.2% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004AD7C0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004AD920 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004ADD90 | 0.0% | Pending
+SHC_3BB0A8C1_0x004ADD90 | 84.2% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004ADDD0 | 0.0% | Pending
 
@@ -25863,7 +25863,7 @@ SHC_3BB0A8C1_0x004AE002 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004AE010 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004AE070 | 0.0% | Pending
+SHC_3BB0A8C1_0x004AE070 | 84.2% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004AE0F0 | 0.0% | Pending
 
@@ -25899,7 +25899,7 @@ SHC_3BB0A8C1_0x004AEF60 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004AEF70 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004AF4C0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004AF4C0 | 65.0% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004AF5E0 | 0.0% | Pending
 
@@ -25987,9 +25987,9 @@ SHC_3BB0A8C1_0x004B1900 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004B1990 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004B19E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004B19E0 | 45.3% | Style pass, asm differs
 
-SHC_3BB0A8C1_0x004B1AC0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004B1AC0 | 32.5% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004B1C30 | 0.0% | Pending
 
@@ -30169,7 +30169,7 @@ SHC_3BB0A8C1_0x004BCB9D | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004BCB9E | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004BCBA0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004BCBA0 | 44.4% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004BCEC0 | 0.0% | Pending
 
@@ -36051,13 +36051,13 @@ SHC_3BB0A8C1_0x004D9C08 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004D9C10 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004D9CC0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D9CC0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D9D60 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004D9D90 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004D9DB0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D9DB0 | 54.8% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004D9EC0 | 0.0% | Pending
 
