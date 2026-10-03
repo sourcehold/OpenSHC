@@ -22,7 +22,9 @@ namespace UI {
                 while (_nextIndex = _index + 1, (int)(_now - *_ptrMoment) < 20000) {
                     _ptrMoment = _ptrMoment + 1;
                     _index = _nextIndex;
-                    if (this->spawnMomentCount <= _nextIndex) {}
+                    if (this->spawnMomentCount <= _nextIndex) {
+                        return;
+                    }
                 }
                 /*
                   If there is a spawnmoment after 20 seconds
