@@ -38,7 +38,9 @@ namespace UI {
             while (*_pElement != OpenSHC::Commands::M_MAPPER_NULL) {
                 _index = _index + 1;
                 _pElement = _pElement + 6;
-                if (20 < _index) {}
+                if (20 <= _index) {
+                    return;
+                }
             }
             this->elements[_index].x = x;
             this->elements[_index].y = y;
