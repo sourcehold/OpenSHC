@@ -36,6 +36,7 @@ namespace UI {
         void YesNoDialog::MenuModalRenderFunction_YesNoDialog(int x, int y, int width, int height)
         {
             int xParam;
+            int yParam;
             char* textAddress;
             int iVar1;
             int xParam_00;
@@ -77,17 +78,21 @@ namespace UI {
                 fontSize = 0x11;
                 color = 0xc2f0eb;
                 alignment = OpenSHC::Text::TTA_CENTER;
-                iVar1 = y + 0xf;
+                yParam = y + 0xf;
                 xParam = width / 2 + x;
                 xParam_00 = xParam;
                 /*
                   added by script: "Receiving Map"
                  */
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 0x6b), xParam_00, iVar1, alignment, color, fontSize, keepOffsetX, blendStrength);
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 0x6b),
+                    xParam_00, yParam, alignment, color, fontSize, keepOffsetX, blendStrength);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     DAT_GameSynchronyState::instance.unknownMapName_01, xParam, y + 0x2a, OpenSHC::Text::TTA_CENTER,
                     0xc2f0eb, 0x11, FALSE, 0);
                 (DAT_MenuHandlerState::instance.currentMenu)->zero = 0;
+                return;
             }
             if (iVar1 != -1) {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner,
