@@ -61,7 +61,7 @@ namespace Synchrony {
                 OpenSHC::Commands::GCT_ANNOUNCE_GAME_VERSION);
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
                 OpenSHC::Commands::GCT_ANNOUNCE_PLAYER_INFO);
-            if ((_param0 == 1) && (1 < DAT_GameCore::instance.lordIconUnk)) {
+            if ((_param0 == 1) && (DAT_GameCore::instance.lordIconUnk >= 2)) {
                 MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand,
                     DAT_GameSynchronyState::ptr)(OpenSHC::Commands::GCT_SHARE_AIV_HASH);
             }
