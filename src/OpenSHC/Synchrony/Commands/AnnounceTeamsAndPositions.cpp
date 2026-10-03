@@ -85,15 +85,7 @@ namespace Synchrony {
                 DAT_GameSynchronyState::ptr)(DAT_GameSynchronyState::instance.playerPositionsArray, 8,
                 OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
             if (_isHost != 0) {
-                DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[0] = local_10[0];
-                DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[1] = local_10[1];
-                DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[2] = local_10[2];
-                DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[3] = local_10[3];
-                DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[4] = local_10[4];
-                DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[5] = local_10[5];
-                DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[6] = local_10[6];
-                DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[7] = local_10[7];
-                DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[8] = local_10[8];
+                memcpy(DAT_GameSynchronyState::instance.DAT_PlayerGroupArray, local_10, 9);
             }
         };
     }
