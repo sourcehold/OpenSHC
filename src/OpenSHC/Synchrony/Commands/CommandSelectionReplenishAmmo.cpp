@@ -52,6 +52,7 @@ namespace Synchrony {
                 MACRO_CALL(OpenSHC::Synchrony::Actions_Func::TryAcquireAmmunitionOrPlanToBuyStone)(
                     DAT_GameSynchronyState::instance.protocolInvokerPlayerID,
                     (int)((int)(DAT_GameSynchronyState::instance.DAT_GameCommandParam0)));
+                return;
             }
             MACRO_CALL(OpenSHC::Synchrony::Actions_Func::SelectionReplenishAmmo)(
                 DAT_GameSynchronyState::instance.protocolInvokerPlayerID,
