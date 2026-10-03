@@ -76,8 +76,10 @@ namespace Synchrony {
             _unitCategory = DAT_GameSynchronyState::instance.DAT_GameCommandParam0;
             _y = (uint)local_4[0];
             DAT_GameSynchronyState::instance.DAT_GameCommandParam2 = _y;
-            if (((DAT_GameSynchronyState::instance.DAT_GameCommandParam1 < 400) && (_y < 400))
-                && (*(char*)(_y * 400 + 0x21aec98 + DAT_GameSynchronyState::instance.DAT_GameCommandParam1) != '\0')) {
+            if (((DAT_GameSynchronyState::instance.DAT_GameCommandParam1 <= 399) && (_y <= 399))
+                && (DAT_ViewportRenderState::instance
+                        .DAT_BinaryTileMap400x400[_y * 400 + DAT_GameSynchronyState::instance.DAT_GameCommandParam1]
+                    != '\0')) {
                 _x = (short)DAT_GameSynchronyState::instance.DAT_GameCommandParam1;
                 if (DAT_GameSynchronyState::instance.DAT_GameCommandParam0 < 10) {
                     DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.protocolInvokerPlayerID]
