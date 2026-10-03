@@ -43,7 +43,10 @@ namespace UI {
         /*
           added by script: "Battering Ram"
          */
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_SIEGE_TENT, 4), iVar4, iVar1, TVar5, BVar6, iVar7, BVar8, blendStrength);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_SIEGE_TENT, 4),
+            iVar4, iVar1, TVar5, BVar6, iVar7, BVar8, blendStrength);
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
             (DAT_BuildingsState::instance.buildings[iVar3].buildingProgress * 100) / 0x280,
             DAT_MenuHandlerState::instance.x + 0xb4, DAT_MenuHandlerState::instance.y + 0x209, OpenSHC::Text::TTA_LEFT,
@@ -58,7 +61,10 @@ namespace UI {
         /*
           added by script: "% Complete"
          */
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_SIEGE_TENT, 6), iVar1, iVar3, TVar5, BVar6, iVar4, BVar8, iVar7);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_SIEGE_TENT, 6),
+            iVar1, iVar3, TVar5, BVar6, iVar4, BVar8, iVar7);
     }
 
 }

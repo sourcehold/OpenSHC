@@ -48,7 +48,10 @@ namespace UI {
         /*
           added by script: "Caged war dogs"
          */
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_DOG_CAGE, 0), iVar3, iVar1, TVar4, BVar5, iVar6, BVar7, iVar8);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_DOG_CAGE, 0),
+            iVar3, iVar1, TVar4, BVar5, iVar6, BVar7, iVar8);
         if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                 .releaseDogsFlag
             == 1) {
@@ -62,7 +65,10 @@ namespace UI {
             /*
               added by script: "The dogs are loose!"
              */
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_DOG_CAGE, 2), iVar3, iVar1, TVar4, BVar5, iVar6, BVar7, iVar8);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_DOG_CAGE, 2),
+                iVar3, iVar1, TVar4, BVar5, iVar6, BVar7, iVar8);
         }
     }
 

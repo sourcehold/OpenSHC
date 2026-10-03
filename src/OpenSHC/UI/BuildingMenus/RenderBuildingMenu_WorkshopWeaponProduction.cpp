@@ -5,6 +5,7 @@
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
+#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -12,7 +13,6 @@
 #include "OpenSHC/Globals/DAT_MenuHandlerState.hpp"
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
-#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -20,9 +20,9 @@ namespace UI {
     using OpenSHC::DE::SHCDE::eTextSections;
     using OpenSHC::Map::Buildings::BuildingType;
     using OpenSHC::Map::Units::States::UnitState;
+    using OpenSHC::Rendering::Colors::BGR24;
     using OpenSHC::Text::TextAlignment;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-    using OpenSHC::Rendering::Colors::BGR24;
 
     /*
       decompilerscript: committed: 2025-01-30 21:57:43.216000
@@ -89,7 +89,10 @@ namespace UI {
             /*
               added by script: "Producing:"
              */
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_BLACKSMITHS_WORKSHOP, 3), iVar5, iVar1, TVar6, BVar7, iVar8, BVar2, iVar9);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_BLACKSMITHS_WORKSHOP, 3),
+                iVar5, iVar1, TVar6, BVar7, iVar8, BVar2, iVar9);
             switch (DAT_BuildingsState::instance.buildings[iVar4].producedItemTypeNext) {
             case OpenSHC::Game::Resources::RT_BOW:
                 _textNumInGroup = 7;
@@ -116,7 +119,10 @@ namespace UI {
             TVar6 = OpenSHC::Text::TTA_LEFT;
             iVar1 = DAT_MenuHandlerState::instance.y + 0x1f9;
             iVar5 = DAT_MenuHandlerState::instance.x + 0xb4;
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_BLACKSMITHS_WORKSHOP, _textNumInGroup), iVar5, iVar1, TVar6, BVar7, iVar8, BVar2, iVar9);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_BLACKSMITHS_WORKSHOP, _textNumInGroup),
+                iVar5, iVar1, TVar6, BVar7, iVar8, BVar2, iVar9);
         }
         iVar9 = 0;
         BVar2 = FALSE;
@@ -128,7 +134,10 @@ namespace UI {
         /*
           added by script: "Next:"
          */
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_BLACKSMITHS_WORKSHOP, 4), iVar5, iVar1, TVar6, BVar7, iVar8, BVar2, iVar9);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_BLACKSMITHS_WORKSHOP, 4),
+            iVar5, iVar1, TVar6, BVar7, iVar8, BVar2, iVar9);
         switch (DAT_BuildingsState::instance.buildings[iVar4].producedItemType) {
         case OpenSHC::Game::Resources::RT_BOW:
             _textNumInGroup = 7;
@@ -155,7 +164,10 @@ namespace UI {
         TVar6 = OpenSHC::Text::TTA_LEFT;
         iVar4 = DAT_MenuHandlerState::instance.y + 0x212;
         iVar1 = DAT_MenuHandlerState::instance.x + 0xb4;
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_BLACKSMITHS_WORKSHOP, _textNumInGroup), iVar1, iVar4, TVar6, BVar7, iVar5, BVar2, iVar8);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_BLACKSMITHS_WORKSHOP, _textNumInGroup),
+            iVar1, iVar4, TVar6, BVar7, iVar5, BVar2, iVar8);
     }
 
 }

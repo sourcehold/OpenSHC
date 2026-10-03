@@ -56,7 +56,10 @@ namespace UI {
         /*
           added by script: "Trade Weapons"
          */
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_TRADEPOST, 4), iVar2, iVar1, alignment, color, fontSize, BVar4, blendStrength);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_TRADEPOST, 4),
+            iVar2, iVar1, alignment, color, fontSize, BVar4, blendStrength);
         iVar1 = 0;
         piVar3 = DAT_RenderingDefinedData::instance.field1047_0x555e4;
         do {

@@ -85,7 +85,10 @@ namespace UI {
             /*
               added by script: "Cathedral"
              */
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_CHURCH, iVar5), iVar8, iVar11, TVar6, BVar7, iVar10, BVar9, blendStrength);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_CHURCH, iVar5),
+                iVar8, iVar11, TVar6, BVar7, iVar10, BVar9, blendStrength);
         }
         if (DAT_BuildingsState::instance.buildings[iVar4].currentEmployeeCount == 0) {
             iVar11 = 0;
@@ -98,7 +101,10 @@ namespace UI {
             /*
               added by script: "No Wedding this month"
              */
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MARRIAGE, 0x22), iVar5, iVar4, TVar6, BVar7, iVar8, BVar9, iVar11);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MARRIAGE, 0x22),
+                iVar5, iVar4, TVar6, BVar7, iVar8, BVar9, iVar11);
         }
         if (DAT_GameState::instance.mapAndTime.month != DAT_RenderingDefinedData::instance.field1120_0x557e0) {
             DAT_RenderingDefinedData::instance.field1120_0x557e0 = DAT_GameState::instance.mapAndTime.month;
@@ -116,7 +122,10 @@ namespace UI {
                 /*
                 added by script: "No Wedding this month"
                 */
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MARRIAGE, 0x22), iVar5, iVar4, TVar6, BVar7, iVar8, BVar9, iVar11);
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MARRIAGE, 0x22),
+                    iVar5, iVar4, TVar6, BVar7, iVar8, BVar9, iVar11);
                 return;
             }
             DAT_HusbandUnitType::instance
@@ -158,7 +167,12 @@ namespace UI {
                     if (DAT_WifeUnitType::instance == OpenSHC::Map::Units::UT_BREWER) {
                         iVar11 = DAT_MenuHandlerState::instance.y + 0x22f;
                         iVar10 = DAT_MenuHandlerState::instance.x + 0xb4;
-                        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MARRIAGE, DAT_00b98428::instance + 1), iVar10, iVar11, iVar4, color, iVar5, iVar8);
+                        MACRO_CALL_MEMBER(
+                            OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
+                            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                                DAT_TextManagerObject::ptr)(
+                                OpenSHC::DE::SHCDE::TEXT_MARRIAGE, DAT_00b98428::instance + 1),
+                            iVar10, iVar11, iVar4, color, iVar5, iVar8);
                     } else if (DAT_WifeUnitType::instance == OpenSHC::Map::Units::UT_TANNER) {
                         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineTextUnk,
                             DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MARRIAGE, DAT_00b9842c::instance + 0xc,
@@ -200,7 +214,11 @@ namespace UI {
                         TVar6 = OpenSHC::Text::TTA_LEFT;
                         iVar5 = DAT_MenuHandlerState::instance.y + 0x1ec;
                         iVar8 = DAT_MenuHandlerState::instance.x + 0xd7;
-                        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_PEASANT_NAMES, (int)((char)bVar1)), iVar8, iVar5, TVar6, BVar7, iVar11, BVar9, iVar10);
+                        MACRO_CALL_MEMBER(
+                            OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_PEASANT_NAMES, (int)((char)bVar1)),
+                            iVar8, iVar5, TVar6, BVar7, iVar11, BVar9, iVar10);
                         bVar1 = DAT_UnitsState::instance.units[iVar4].rng1_to_70;
                         if (bVar1 != 0) {
                             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
@@ -219,7 +237,11 @@ namespace UI {
                         TVar6 = OpenSHC::Text::TTA_LEFT;
                         iVar5 = DAT_MenuHandlerState::instance.y + 0x205;
                         iVar8 = DAT_MenuHandlerState::instance.x + 0xe6;
-                        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_PEASANT_NAMES, (int)((char)bVar1)), iVar8, iVar5, TVar6, BVar7, iVar11, BVar9, iVar10);
+                        MACRO_CALL_MEMBER(
+                            OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_PEASANT_NAMES, (int)((char)bVar1)),
+                            iVar8, iVar5, TVar6, BVar7, iVar11, BVar9, iVar10);
                         bVar1 = DAT_UnitsState::instance.units[iVar4].rng1_to_70;
                         if (bVar1 != 0) {
                             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
@@ -244,7 +266,10 @@ namespace UI {
         /*
           added by script: "No Wedding this month"
          */
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MARRIAGE, 0x22), iVar5, iVar4, TVar6, BVar7, iVar8, BVar9, iVar11);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MARRIAGE, 0x22),
+            iVar5, iVar4, TVar6, BVar7, iVar8, BVar9, iVar11);
     }
 
 }

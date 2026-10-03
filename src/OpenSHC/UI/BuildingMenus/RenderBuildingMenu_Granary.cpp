@@ -110,7 +110,10 @@ namespace UI {
         /*
           added by script: "Granary"
          */
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_GRANARY, 0), iVar4, iVar12, TVar8, BVar9, iVar10, BVar11, blendStrength);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_GRANARY, 0),
+            iVar4, iVar12, TVar8, BVar9, iVar10, BVar11, blendStrength);
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
         switch (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                 .rationsSetting3) {
@@ -177,7 +180,10 @@ namespace UI {
         /*
           added by script: "unit of food."
          */
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_GRANARY, iVar10), iVar6, iVar5, TVar8, BVar9, iVar12, BVar11, iVar4);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_GRANARY, iVar10),
+            iVar6, iVar5, TVar8, BVar9, iVar12, BVar11, iVar4);
         iVar5 = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                     .rationsSetting3;
         if (iVar5 == 3) {
@@ -194,7 +200,10 @@ namespace UI {
         TVar8 = OpenSHC::Text::TTA_RIGHT;
         iVar6 = DAT_MenuHandlerState::instance.y + 0x1d1;
         iVar12 = DAT_MenuHandlerState::instance.x + 0x21c;
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_GRANARY, iVar5), iVar12, iVar6, TVar8, BVar9, iVar4, BVar11, iVar10);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_GRANARY, iVar5),
+            iVar12, iVar6, TVar8, BVar9, iVar4, BVar11, iVar10);
         if (DAT_GameState::instance.playerDataArray[iVar1].currentPopulation == 0) {
             SVar7 = OpenSHC::Audio::SFX::SEID_GENERAL_STARTGAME;
         } else if (DAT_GameState::instance.playerDataArray[iVar1].foodTypesInStock == 0) {
@@ -245,7 +254,10 @@ namespace UI {
             /*
               added by script: "month supply."
              */
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_GRANARY, iVar12), iVar6, iVar5, TVar8, BVar9, iVar4, BVar11, iVar10);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_GRANARY, iVar12),
+                iVar6, iVar5, TVar8, BVar9, iVar4, BVar11, iVar10);
         }
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
             DAT_GameState::instance.playerDataArray[iVar1].foodTypesCurrentlyEaten,
@@ -262,20 +274,29 @@ namespace UI {
             /*
               added by script: "food type eaten."
              */
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_GRANARY, 8), iVar6, iVar5, TVar8, BVar9, iVar12, BVar11, iVar4);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_GRANARY, 8),
+                iVar6, iVar5, TVar8, BVar9, iVar12, BVar11, iVar4);
             iVar5 = 8;
         } else {
             /*
               added by script: "food types eaten."
              */
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_GRANARY, 7), iVar6, iVar5, TVar8, BVar9, iVar12, BVar11, iVar4);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_GRANARY, 7),
+                iVar6, iVar5, TVar8, BVar9, iVar12, BVar11, iVar4);
             iVar5 = 7;
         }
         iVar6 = 0x12;
         /*
           added by script: "food type eaten."
          */
-        iVar6 = MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::computeTextWidth, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_GRANARY, iVar5), iVar6);
+        iVar6 = MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::computeTextWidth, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_GRANARY, iVar5),
+            iVar6);
         iVar5 = DAT_GameState::instance.playerDataArray[iVar1].foodTypesCurrentlyEaten;
         if ((iVar5 == 0) || (iVar5 == 1)) {
             SVar7 = OpenSHC::Audio::SFX::SEID_GENERAL_STARTGAME;

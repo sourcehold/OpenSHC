@@ -81,7 +81,10 @@ namespace UI {
         /*
           Render stockpile title
          */
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_GOODS_YARD, 0), _textX, _textY, _alignment, _color, _fontSize, _retainX, _blendStrength);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_GOODS_YARD, 0),
+            _textX, _textY, _alignment, _color, _fontSize, _retainX, _blendStrength);
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
         _nudges = DAT_RenderingDefinedData::instance.StockpileIconsPositionNudges;
         do {

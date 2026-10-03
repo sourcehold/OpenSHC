@@ -42,7 +42,10 @@ namespace UI {
         /*
           added by script: "Quarry Stone Pile"
          */
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_QUARRYPILE, 0), iVar3, iVar1, alignment, color, iVar4, keepOffsetX, iVar5);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_QUARRYPILE, 0),
+            iVar3, iVar1, alignment, color, iVar4, keepOffsetX, iVar5);
         blendStrength = 0;
         iVar5 = 0x12;
         color_00 = 0;
@@ -52,7 +55,10 @@ namespace UI {
         /*
           added by script: "Use an Ox to transport stone placed here."
          */
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_QUARRYPILE, 1), iVar3, iVar1, iVar4, color_00, iVar5, blendStrength);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_QUARRYPILE, 1),
+            iVar3, iVar1, iVar4, color_00, iVar5, blendStrength);
     }
 
 }

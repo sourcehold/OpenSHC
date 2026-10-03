@@ -49,7 +49,10 @@ namespace UI {
         /*
           added by script: "Statue"
          */
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_STATUE, 0), iVar4, iVar2, TVar5, BVar6, iVar7, BVar8, iVar9);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_STATUE, 0),
+            iVar4, iVar2, TVar5, BVar6, iVar7, BVar8, iVar9);
         if (DAT_BuildingsState::instance.buildings[iVar1].owner == 0) {
             iVar9 = 0;
             BVar8 = FALSE;
@@ -61,7 +64,10 @@ namespace UI {
             /*
               added by script: "Here lies the poor bones of"
              */
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MISC2, 1), iVar4, iVar2, TVar5, BVar6, iVar7, BVar8, iVar9);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MISC2, 1),
+                iVar4, iVar2, TVar5, BVar6, iVar7, BVar8, iVar9);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 DAT_GameSynchronyState::instance.finalResults
                     .names[DAT_BuildingsState::instance.buildings[iVar1].statueCommemoratingPlayerID],

@@ -46,7 +46,10 @@ namespace UI {
         /*
           added by script: "Tunneller's Guild"
          */
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_TUNNELLERS_GUILD, 0), iVar3, iVar1, alignment, color, iVar4, keepOffsetX, iVar5);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_TUNNELLERS_GUILD, 0),
+            iVar3, iVar1, alignment, color, iVar4, keepOffsetX, iVar5);
         MACRO_CALL(OpenSHC::UI::Helpers_Func::CheckIfEnoughGoldForTunneler)();
         if (DAT_EnoughGoldForRequestedUnit::instance == FALSE) {
             blendStrength = 0;
@@ -58,7 +61,10 @@ namespace UI {
             /*
               added by script: "You do not have enough gold to train a tunneller"
              */
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_TUNNELLERS_GUILD, 1), iVar3, iVar1, iVar4, color_00, iVar5, blendStrength);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_TUNNELLERS_GUILD, 1),
+                iVar3, iVar1, iVar4, color_00, iVar5, blendStrength);
         }
         MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::createEntityForAssemblyPointsForActiveTabType,
             DAT_BuildingsState::ptr)();

@@ -77,7 +77,10 @@ namespace UI {
         iVar3 = DAT_MenuHandlerState::instance.y + 0x1d3;
         iVar4 = DAT_MenuHandlerState::instance.x + 0x1e;
         int iVar2 = DAT_MenuHandlerState::instance.x + 0x19;
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_ARMOURY, 0), iVar2, iVar3, alignment, color, iVar6, BVar7, iVar8);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_ARMOURY, 0),
+            iVar2, iVar3, alignment, color, iVar6, BVar7, iVar8);
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
         _positionPtr = DAT_RenderingDefinedData::instance.field1043_0x55524;
         do {

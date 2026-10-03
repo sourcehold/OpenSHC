@@ -68,7 +68,10 @@ namespace UI {
         /*
           added by script: "Here's what I sell and what they cost."
          */
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_TRADEPOST, 1), iVar4, iVar1, alignment, color, iVar5, BVar6, iVar7);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_TRADEPOST, 1),
+            iVar4, iVar1, alignment, color, iVar5, BVar6, iVar7);
         _index = 0;
         do {
             _resourceType = (OpenSHC::Game::Resources::ResourceType)(DAT_RenderingDefinedData::instance

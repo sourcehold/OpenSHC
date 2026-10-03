@@ -44,7 +44,10 @@ namespace UI {
         /*
           added by script: "Stables"
          */
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_STABLES, 0), iVar3, iVar1, TVar5, BVar6, iVar7, BVar8, iVar9);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_STABLES, 0),
+            iVar3, iVar1, TVar5, BVar6, iVar7, BVar8, iVar9);
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
             (int)(char)DAT_BuildingsState::instance.buildings[iVar4].numberOfAnimals
                 - (int)DAT_BuildingsState::instance.buildings[iVar4].randomOutpostField,
@@ -67,7 +70,10 @@ namespace UI {
         /*
           added by script: "Horse Available"
          */
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_STABLES, iVar9), xParam, iVar1, TVar5, BVar6, iVar3, BVar8, iVar7);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_STABLES, iVar9),
+            xParam, iVar1, TVar5, BVar6, iVar3, BVar8, iVar7);
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
             (int)DAT_BuildingsState::instance.buildings[iVar4].randomOutpostField,
             DAT_MenuHandlerState::instance.x + 0xaf, DAT_MenuHandlerState::instance.y + 0x219, OpenSHC::Text::TTA_LEFT,
@@ -87,7 +93,10 @@ namespace UI {
         /*
           added by script: "Horse In Use"
          */
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_STABLES, iVar4), iVar7, iVar9, TVar5, BVar6, iVar1, BVar8, iVar3);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_STABLES, iVar4),
+            iVar7, iVar9, TVar5, BVar6, iVar1, BVar8, iVar3);
     }
 
 }

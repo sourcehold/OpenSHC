@@ -42,7 +42,10 @@ namespace UI {
         /*
           added by script: "Hovel"
          */
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_HOUSE, 0), iVar3, iVar1, alignment, color, iVar4, keepOffsetX, iVar5);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_HOUSE, 0),
+            iVar3, iVar1, alignment, color, iVar4, keepOffsetX, iVar5);
         blendStrength = 0;
         iVar5 = 0x12;
         color_00 = 0;
@@ -52,7 +55,10 @@ namespace UI {
         /*
           added by script: "Provides space for 8 peasants."
          */
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_HOUSE, 1), iVar3, iVar1, iVar4, color_00, iVar5, blendStrength);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_HOUSE, 1),
+            iVar3, iVar1, iVar4, color_00, iVar5, blendStrength);
     }
 
 }

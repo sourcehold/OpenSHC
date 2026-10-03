@@ -58,7 +58,10 @@ namespace UI {
         /*
           added by script: "Trade Food"
          */
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_TRADEPOST, 2), iVar2, iVar1, alignment, color, fontSize, BVar4, blendStrength);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_TRADEPOST, 2),
+            iVar2, iVar1, alignment, color, fontSize, BVar4, blendStrength);
         iVar1 = 0;
         pRVar3 = DAT_RenderingDefinedData::instance.FoodTypes;
         do {
