@@ -58,15 +58,8 @@ namespace Synchrony {
                     0x16);
                 return;
             }
-            DAT_GameState::instance.mapAndTime.playerIsAlive[0] = 0;
-            DAT_GameState::instance.mapAndTime.playerIsAlive[1] = 0;
-            DAT_GameState::instance.mapAndTime.playerIsAlive[2] = 0;
-            DAT_GameState::instance.mapAndTime.playerIsAlive[3] = 0;
-            DAT_GameState::instance.mapAndTime.playerIsAlive[4] = 0;
-            DAT_GameState::instance.mapAndTime.playerIsAlive[5] = 0;
-            DAT_GameState::instance.mapAndTime.playerIsAlive[6] = 0;
-            DAT_GameState::instance.mapAndTime.playerIsAlive[7] = 0;
-            DAT_GameState::instance.mapAndTime.playerIsAlive[8] = 0;
+            memset(DAT_GameState::instance.mapAndTime.playerIsAlive, 0,
+                sizeof(DAT_GameState::instance.mapAndTime.playerIsAlive));
             MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                 OpenSHC::UI::Enums::MVT_MISSION_FINISHED_TRANSITION, 0);
         }
