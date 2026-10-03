@@ -89,6 +89,7 @@ namespace UI {
             DAT_GameSynchronyState::instance.laggingPlayerIDUnk = 0;
             MACRO_CALL(OpenSHC::UI::DisplayElements_Func::CheckDisplayElementByIDAndSetForUnlimitedDisplay)(
                 OpenSHC::UI::Enums::DEID_SOME_MULTIPLAYER_INFO_Unk_28, 0);
+            return;
         }
     LAB_004b2593:
         DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_MAP_GAME;
