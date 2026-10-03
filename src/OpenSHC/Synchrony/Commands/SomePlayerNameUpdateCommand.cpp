@@ -96,7 +96,7 @@ namespace Synchrony {
                     }
                     _chatEventArray = _chatEventArray + 1;
                     _playerName = _playerName + 1;
-                } while ((int)_chatEventArray < 0x1a22f20);
+                } while (_chatEventArray < DAT_GameSynchronyState::instance.DAT_ChatEventArray + 20);
             };
             return;
         }
