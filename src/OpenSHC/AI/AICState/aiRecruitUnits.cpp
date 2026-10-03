@@ -32,9 +32,11 @@ namespace AI {
             return;
         int aicIndex = aiType - 1;
 
-        bool isExtremeTrail = DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_SKIRMISH_AND_MULTIPLAYER
+        bool isExtremeTrail = false;
+        if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_SKIRMISH_AND_MULTIPLAYER
             && DAT_GameCore::instance.isSkirmishTrail == TRUE
-            && DAT_GameCore::instance.currentTrailType == OpenSHC::Game::TT_EXTREME;
+            && DAT_GameCore::instance.currentTrailType == OpenSHC::Game::TT_EXTREME)
+            isExtremeTrail = true;
 
         int recruitInterval = (&this->aics[aicIndex]
                 .RecruitInterval)[DAT_GameState::instance.playerDataArray[playerID].aiStrengthFeeling];
@@ -42,12 +44,12 @@ namespace AI {
         if (isExtremeTrail)
             recruitCount++;
 
-        if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker <= 0) {
+        if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker > 0) {
+            recruitCount = 4;
+        } else {
             DAT_GameState::instance.playerDataArray[playerID].aiRecruitIntervalTracker++;
             if (DAT_GameState::instance.playerDataArray[playerID].aiRecruitIntervalTracker < recruitInterval)
                 return;
-        } else {
-            recruitCount = 4;
         }
 
         DAT_GameState::instance.playerDataArray[playerID].aiRecruitIntervalTracker = 0;
