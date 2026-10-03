@@ -65,8 +65,8 @@ namespace Synchrony {
             DAT_GameSynchronyState::instance.DAT_GameCommandParam3 = (int)(char)local_4;
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::addRallyPoint, DAT_TribesState::ptr)(
                 DAT_GameSynchronyState::instance.DAT_GameCommandParam0,
-                (short)((int)(DAT_GameSynchronyState::instance.DAT_GameCommandParam1)),
-                (short)((int)(DAT_GameSynchronyState::instance.DAT_GameCommandParam2)),
+                (int)(DAT_GameSynchronyState::instance.DAT_GameCommandParam1),
+                (int)(DAT_GameSynchronyState::instance.DAT_GameCommandParam2),
                 (int)((int)(DAT_GameSynchronyState::instance.DAT_GameCommandParam3)));
         }
     }
