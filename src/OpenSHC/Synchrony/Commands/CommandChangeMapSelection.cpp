@@ -47,8 +47,8 @@ namespace Synchrony {
         DAT_GameSynchronyState::instance.DAT_GameCommandArray[DAT_GameSynchronyState::instance.DAT_CurrentGameCommandID]
             .time = 0;
         if (DAT_GameSynchronyState::instance.DAT_CommandActionPlan == OpenSHC::Commands::GCS_SCHEDULE_AND_SEND) {
-            _selectionIndex = DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected
-                + DAT_GameSynchronyState::instance.DAT_MapSelectionScrollOffset;
+            _selectionIndex = DAT_GameSynchronyState::instance.DAT_MapSelectionScrollOffset
+                + DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected;
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
                 DAT_GameSynchronyState::ptr)(&_selectionIndex, 4, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
                 OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1);
