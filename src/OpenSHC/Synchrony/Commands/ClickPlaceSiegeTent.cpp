@@ -52,7 +52,7 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x004827E0
     void Commands::ClickPlaceSiegeTent()
     {
-        BuildingTypeShort BVar1;
+        int BVar1;
         MappersEnum commandBuildingType;
         int iVar2;
         int _unitID;
