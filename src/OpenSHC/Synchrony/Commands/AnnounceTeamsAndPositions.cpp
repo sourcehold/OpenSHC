@@ -28,9 +28,7 @@ namespace Synchrony {
     void Commands::AnnounceTeamsAndPositions()
     {
         int _isHost;
-        byte local_10[4];
-        byte local_c[4];
-        byte local_8;
+        byte local_10[9];
         DAT_GameSynchronyState::instance.DAT_CommandSize = 33;
         DAT_GameSynchronyState::instance.DAT_GameCommandArray[DAT_GameSynchronyState::instance.DAT_CurrentGameCommandID]
             .time = 0;
@@ -91,11 +89,11 @@ namespace Synchrony {
                 DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[1] = local_10[1];
                 DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[2] = local_10[2];
                 DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[3] = local_10[3];
-                DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[4] = local_c[0];
-                DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[5] = local_c[1];
-                DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[6] = local_c[2];
-                DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[7] = local_c[3];
-                DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[8] = local_8;
+                DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[4] = local_10[4];
+                DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[5] = local_10[5];
+                DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[6] = local_10[6];
+                DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[7] = local_10[7];
+                DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[8] = local_10[8];
             }
         };
     }
