@@ -92,28 +92,26 @@ namespace Synchrony {
             if (DAT_GameSynchronyState::instance
                     .mapSendingByteBufferAddress[DAT_GameSynchronyState::instance.DAT_GameCommandParam1]
                 < DAT_GameSynchronyState::instance.mapSendingFileSize) {
-                if (DAT_GameSynchronyState::instance.DAT_GameCommandParam0 % 10 != 9)
-                    goto LAB_0048ba65;
-                local_40a = '\x01';
+                if (DAT_GameSynchronyState::instance.DAT_GameCommandParam0 % 10 == 9) {
+                    local_40a = '\x01';
+                }
             } else {
                 local_40a = '\x01';
                 MACRO_CALL(OpenSHC::OS_Func::_fclose)(DAT_GameSynchronyState::instance
                         .mapSendingFileHandles[DAT_GameSynchronyState::instance.DAT_GameCommandParam1]);
                 DAT_GameSynchronyState::instance
                     .mapSendingFileHandles[DAT_GameSynchronyState::instance.DAT_GameCommandParam1] = (FILE*)0x0;
-            LAB_0048ba65:
-                if (local_40a == '\0')
-                    goto LAB_0048ba88;
             }
-            if ((DAT_GameSynchronyState::instance
-                        .currentPlayerFullIDArray[DAT_GameSynchronyState::instance.DAT_GameCommandParam1]
-                    != -1)
-                && (DAT_GameSynchronyState::instance.DAT_GameCommandParam1
-                    != DAT_GameSynchronyState::instance.currentPlayerSlotID)) {
-                DAT_GameSynchronyState::instance
-                    .field290_0x109e20[DAT_GameSynchronyState::instance.DAT_GameCommandParam1] = 1;
+            if (local_40a != '\0') {
+                if ((DAT_GameSynchronyState::instance
+                            .currentPlayerFullIDArray[DAT_GameSynchronyState::instance.DAT_GameCommandParam1]
+                        != -1)
+                    && (DAT_GameSynchronyState::instance.DAT_GameCommandParam1
+                        != DAT_GameSynchronyState::instance.currentPlayerSlotID)) {
+                    DAT_GameSynchronyState::instance
+                        .field290_0x109e20[DAT_GameSynchronyState::instance.DAT_GameCommandParam1] = 1;
+                }
             }
-        LAB_0048ba88:
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
                 DAT_GameSynchronyState::ptr)(&local_40a, 1, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
                 OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1);
