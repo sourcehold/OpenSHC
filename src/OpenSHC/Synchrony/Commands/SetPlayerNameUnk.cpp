@@ -103,7 +103,7 @@ namespace Synchrony {
                     pacVar4 = (char (*)[250])(*pacVar4 + 1);
                 } while (*pcVar2 != '\0');
                 piVar5 = piVar5 + 1;
-            } while ((int)piVar5 < 0x191de58);
+            } while (piVar5 < DAT_GameSynchronyState::instance.DAT_CurrentPlayerFullIDArray2 + 9);
             MACRO_CALL(OpenSHC::OS_Func::_memcpy)(
                 (void*)((int)DAT_TextureRenderCoreObject::instance.bitmapsFaces_0x94 + 0x39c00),
                 (void*)((int)DAT_TextureRenderCoreObject::instance.bitmapsFaces_0x94 + 0x29400), 0x10800);
