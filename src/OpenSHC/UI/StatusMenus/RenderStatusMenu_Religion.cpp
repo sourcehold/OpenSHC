@@ -136,7 +136,7 @@ namespace UI {
         } else if (iVar5 < 0x4b) {
             iVar5 = 100;
         } else {
-            iVar5 = ((0x5e < iVar5) - 1 & 0xffffffce) + 200;
+            iVar5 = 0x5e < iVar5 ? 200 : 150;
         }
         MACRO_CALL(OpenSHC::UI::Rendering_Func::TransformAndRenderPercentage)(
             DAT_TextManagerObject::instance.currentXOffset_0x0 + 0xf0 + iVar1, iVar2 + 0x202, iVar5, TRUE);
