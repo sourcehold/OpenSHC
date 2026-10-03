@@ -80,7 +80,7 @@ namespace Synchrony {
                     (char*)((int)&DAT_GameState::instance.mapAndTime.field192_0x194
                         + DAT_GameSynchronyState::instance.DAT_GameCommandParam0 * 0x38e6),
                     (size_t)((int)(14566)), DAT_GameSynchronyState::instance.DAT_GameCommandParam0);
-                ;
+                return;
             }
             if (DAT_GameSynchronyState::instance.DAT_GameCommandParam0 == 0x12) {
                 MACRO_CALL(OpenSHC::OS_Func::_sprintf)(local_3ec, "Glob %d", 0x401c0);
@@ -88,7 +88,7 @@ namespace Synchrony {
                     (char*)((int)&DAT_GameState::instance.mapAndTime.field192_0x194
                         + DAT_GameSynchronyState::instance.DAT_GameCommandParam0 * 0x38e6),
                     (size_t)((int)(16)), DAT_GameSynchronyState::instance.DAT_GameCommandParam0);
-                ;
+                return;
             }
             if (DAT_GameSynchronyState::instance.DAT_GameCommandParam0 == 0x13) {
                 MACRO_CALL(OpenSHC::Synchrony_Func::MemCopyFromParameter)(
