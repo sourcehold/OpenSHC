@@ -51,21 +51,21 @@ namespace Synchrony {
                                                      + DAT_GameSynchronyState::instance.DAT_GameCommandParam0 * 14566),
                     (size_t)((int)(14566)), OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
                     OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1);
-                ;
+                return;
             }
             if (DAT_GameSynchronyState::instance.DAT_GameCommandParam0 == 0x12) {
                 MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
                     DAT_GameSynchronyState::ptr)(DAT_GameState::instance.mapAndTime.startingTroops[7] + 0x10, 0x10,
                     OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
                     OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1);
-                ;
+                return;
             }
             if (DAT_GameSynchronyState::instance.DAT_GameCommandParam0 == 0x13) {
                 MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
                     DAT_GameSynchronyState::ptr)(&DAT_AIVState::instance.mapExtraInfo, 0x330,
                     OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
                     OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1);
-                ;
+                return;
             }
             return;
         } else if ((DAT_GameSynchronyState::instance.DAT_CommandActionPlan == OpenSHC::Commands::GCS_EXECUTE)
