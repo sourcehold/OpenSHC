@@ -53,7 +53,7 @@ namespace UI {
         int iVar13;
         int local_4;
         int _fearFactorLevel;
-        iVar2 = DAT_MenuHandlerState::instance.y;
+        iVar2 = DAT_MenuHandlerState::instance.y + 0x1bf;
         iVar1 = DAT_MenuHandlerState::instance.x;
         local_4 = 0;
         if ((DAT_TextManagerObject::instance.gameLanguage != OpenSHC::Text::GL_ENGLISH)
@@ -65,7 +65,7 @@ namespace UI {
         iVar8 = 0x11;
         BVar7 = 0;
         TVar6 = OpenSHC::Text::TTA_LEFT;
-        iVar5 = DAT_MenuHandlerState::instance.y + 0x1d3;
+        iVar5 = iVar2 + 0x14;
         iVar4 = DAT_MenuHandlerState::instance.x + 0x19;
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
         /*
@@ -76,16 +76,16 @@ namespace UI {
                 DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 2),
             iVar4, iVar5, TVar6, BVar7, iVar8, BVar10, iVar11);
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderLoadedGfx,
-            DAT_TextureRenderCoreObject::ptr)(0, iVar1 + 100, iVar2 + 0x1f1);
+            DAT_TextureRenderCoreObject::ptr)(0, iVar1 + 100, iVar2 + 0x32);
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
             DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                 .goodStuffCount,
-            iVar1 + 0x80, iVar2 + 0x235, OpenSHC::Text::TTA_LEFT, 0, 0x11, FALSE, 0);
+            iVar1 + 0x80, iVar2 + 0x76, OpenSHC::Text::TTA_LEFT, 0, 0x11, FALSE, 0);
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderLoadedGfx,
-            DAT_TextureRenderCoreObject::ptr)(1, iVar1 + 0xb4, iVar2 + 0x1f1);
+            DAT_TextureRenderCoreObject::ptr)(1, iVar1 + 0xb4, iVar2 + 0x32);
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
             DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID].badStuffCount,
-            iVar1 + 0xd0, iVar2 + 0x235, OpenSHC::Text::TTA_LEFT, 0, 0x11, FALSE, 0);
+            iVar1 + 0xd0, iVar2 + 0x76, OpenSHC::Text::TTA_LEFT, 0, 0x11, FALSE, 0);
         iVar12 = 0;
         BVar10 = FALSE;
         iVar11 = 0x12;
@@ -93,7 +93,7 @@ namespace UI {
         TVar6 = OpenSHC::Text::TTA_LEFT;
         iVar5 = local_4 + 0x118 + iVar1;
         iVar4 = iVar5;
-        iVar8 = iVar2 + 0x1d8;
+        iVar8 = iVar2 + 0x19;
         /*
           added by script: "Popularity Effect:"
          */
@@ -116,7 +116,7 @@ namespace UI {
             iVar4 = _fearFactorLevel * 0x19;
         }
         MACRO_CALL(OpenSHC::UI::Rendering_Func::TransformAndRenderPercentage)(
-            DAT_TextManagerObject::instance.currentXOffset_0x0 + local_4 + 300 + iVar1, iVar2 + 0x1d8, iVar4, FALSE);
+            DAT_TextManagerObject::instance.currentXOffset_0x0 + local_4 + 300 + iVar1, iVar2 + 0x19, iVar4, FALSE);
         iVar4 = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                     .fearFactorLevel;
         if (iVar4 < 5) {
@@ -131,7 +131,7 @@ namespace UI {
                     iVar11 = 0x12;
                     BVar7 = 0;
                     TVar6 = OpenSHC::Text::TTA_LEFT;
-                    iVar4 = iVar2 + 0x1ec;
+                    iVar4 = iVar2 + 0x2d;
                     iVar8 = iVar5;
                     /*
                       added by script: "Good things for next level:"
@@ -150,21 +150,21 @@ namespace UI {
                       added by script: "Bad things for next level:"
                      */
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
-                        OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 0x1a, iVar5, iVar2 + 0x1ec, OpenSHC::Text::TTA_LEFT, 0,
+                        OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 0x1a, iVar5, iVar2 + 0x2d, OpenSHC::Text::TTA_LEFT, 0,
                         0x12, FALSE);
                     iVar4
                         = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                               .objectsLeftUntilNextLevel;
                 }
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
-                    iVar4, local_4 + 0x11d + iVar1, iVar2 + 0x1ec, OpenSHC::Text::TTA_LEFT, 0xccfaff, 0, 0x12, TRUE, 0);
+                    iVar4, local_4 + 0x11d + iVar1, iVar2 + 0x2d, OpenSHC::Text::TTA_LEFT, 0xccfaff, 0, 0x12, TRUE, 0);
                 goto LAB_0043f56c;
             }
             iVar4 = 0x18;
         } else {
             iVar4 = 0x19;
         }
-        iVar11 = iVar2 + 0x1ec;
+        iVar11 = iVar2 + 0x2d;
         iVar13 = 0;
         BVar10 = FALSE;
         iVar12 = 0x12;
@@ -186,7 +186,7 @@ namespace UI {
             iVar12 = 0x12;
             uVar9 = 0;
             iVar11 = 0xfa;
-            iVar4 = iVar2 + 0x20a;
+            iVar4 = iVar2 + 0x4b;
             iVar8 = iVar5;
             /*
               added by script: "No effect on population."
@@ -202,7 +202,7 @@ namespace UI {
             iVar12 = 0x12;
             uVar9 = 0;
             iVar11 = 0xfa;
-            iVar4 = iVar2 + 0x20a;
+            iVar4 = iVar2 + 0x4b;
             iVar8 = iVar5;
             /*
               added by script: "People are happier, but idler."
@@ -219,7 +219,7 @@ namespace UI {
             iVar12 = 0x12;
             uVar9 = 0;
             iVar11 = 0xfa;
-            iVar4 = iVar2 + 0x20a;
+            iVar4 = iVar2 + 0x4b;
             iVar8 = iVar5;
             /*
               added by script: "People are less happy, but more efficient."
@@ -234,7 +234,7 @@ namespace UI {
         iVar8 = 0x12;
         BVar7 = 0;
         TVar6 = OpenSHC::Text::TTA_LEFT;
-        iVar4 = iVar2 + 0x23c;
+        iVar4 = iVar2 + 0x7d;
         /*
           added by script: "Efficiency %:"
          */
@@ -245,7 +245,7 @@ namespace UI {
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
             DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                 .fearFactorProductivityUnk,
-            local_4 + 0x11d + iVar1, iVar2 + 0x23d, OpenSHC::Text::TTA_LEFT, 0xccfaff, 0, 0x12, TRUE, 0);
+            local_4 + 0x11d + iVar1, iVar2 + 0x7e, OpenSHC::Text::TTA_LEFT, 0xccfaff, 0, 0x12, TRUE, 0);
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
     }
 
