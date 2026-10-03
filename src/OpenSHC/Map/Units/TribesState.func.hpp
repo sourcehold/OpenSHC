@@ -167,7 +167,7 @@ namespace Map {
                 &TribesState::setUnitStance)
             setUnitStance;
 
-            MACRO_FUNCTION_RESOLVER(void (TribesState::*)(int, short, short, int), false,
+            MACRO_FUNCTION_RESOLVER(void (TribesState::*)(int, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x00522C50, &TribesState::addRallyPoint)
             addRallyPoint;
 
