@@ -83,7 +83,9 @@ namespace Synchrony {
                         DAT_GameSynchronyState::ptr)(subjectPlayerID, 0);
                 }
             } else if (DAT_GameSynchronyState::instance.quitGameVoteRelated == 2) {
-                if (DAT_GameSynchronyState::instance.DAT_GameCommandParam0 != 0) {}
+                if (DAT_GameSynchronyState::instance.DAT_GameCommandParam0 != 0) {
+                    return;
+                }
                 DAT_GameSynchronyState::instance
                     .field122_0xc70[DAT_GameSynchronyState::instance.protocolInvokerPlayerID] = 1;
                 if ((DAT_GameSynchronyState::instance.field122_0xc70[8] != 0)
