@@ -86,7 +86,7 @@ namespace UI {
             pPVar5 = pPVar5 + 1;
             iVar6 = iVar6 + 0x34;
             iVar4 = iVar4 + 4;
-        } while ((int)pPVar5 < 0x617fd0);
+        } while (pPVar5 < DAT_RenderingDefinedData::instance.field1043_0x55524 + 8);
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
     }
 
