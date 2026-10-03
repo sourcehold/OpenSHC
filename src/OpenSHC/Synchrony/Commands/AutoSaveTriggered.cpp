@@ -15,7 +15,6 @@
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_WideCharMultiByteState.hpp"
-#include "OpenSHC/Globals/MSVC_SecurityCookie.hpp"
 
 namespace OpenSHC {
 namespace Synchrony {
@@ -46,8 +45,6 @@ namespace Synchrony {
         Base64State _base64State;
         WCHAR local_4c;
         undefined1 local_4a[70];
-        uint local_4;
-        local_4 = MSVC_SecurityCookie::instance ^ (uint)auStack_5c;
         DAT_GameSynchronyState::instance.DAT_CommandSize = 0x4b;
         if (DAT_GameSynchronyState::instance.DAT_CommandActionPlan == OpenSHC::Commands::GCS_SCHEDULE_AND_SEND) {
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,

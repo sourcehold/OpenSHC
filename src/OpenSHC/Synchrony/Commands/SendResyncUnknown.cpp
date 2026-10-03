@@ -12,7 +12,6 @@
 #include "OpenSHC/Globals/DAT_AIVState.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
-#include "OpenSHC/Globals/MSVC_SecurityCookie.hpp"
 
 namespace OpenSHC {
 namespace Synchrony {
@@ -38,8 +37,6 @@ namespace Synchrony {
     void Commands::SendResyncUnknown()
     {
         char local_3ec[1000];
-        uint local_4;
-        local_4 = MSVC_SecurityCookie::instance ^ (uint)local_3ec;
         DAT_GameSynchronyState::instance.DAT_GameCommandArray[DAT_GameSynchronyState::instance.DAT_CurrentGameCommandID]
             .time = 0;
         DAT_GameSynchronyState::instance.DAT_CommandSize = 14570;

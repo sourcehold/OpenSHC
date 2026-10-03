@@ -18,7 +18,6 @@
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
 #include "OpenSHC/Globals/DAT_WideCharMultiByteState.hpp"
-#include "OpenSHC/Globals/MSVC_SecurityCookie.hpp"
 
 namespace OpenSHC {
 namespace Synchrony {
@@ -51,8 +50,6 @@ namespace Synchrony {
         Base64State local_58;
         WCHAR local_4c;
         undefined1 local_4a[70];
-        uint local_4;
-        local_4 = MSVC_SecurityCookie::instance ^ (uint)&local_58;
         DAT_GameSynchronyState::instance.DAT_CommandSize = 66;
         DAT_GameSynchronyState::instance.DAT_GameCommandArray[DAT_GameSynchronyState::instance.DAT_CurrentGameCommandID]
             .time = 0;

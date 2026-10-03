@@ -13,7 +13,6 @@
 #include "OpenSHC/Globals/DAT_MenuTextInputState.hpp"
 #include "OpenSHC/Globals/DAT_ResourceManager.hpp"
 #include "OpenSHC/Globals/DAT_WideCharMultiByteState.hpp"
-#include "OpenSHC/Globals/MSVC_SecurityCookie.hpp"
 #include "OpenSHC/Globals/SEC_RNG.hpp"
 
 namespace OpenSHC {
@@ -38,8 +37,6 @@ namespace Synchrony {
         char* lpMultiByteStr;
         int numberOfSymbols;
         WCHAR local_7d8[1002];
-        uint local_4;
-        local_4 = MSVC_SecurityCookie::instance ^ (uint)local_7d8;
         DAT_GameSynchronyState::instance.DAT_CommandSize = 2012;
         DAT_GameSynchronyState::instance.DAT_GameCommandArray[DAT_GameSynchronyState::instance.DAT_CurrentGameCommandID]
             .time = 0;

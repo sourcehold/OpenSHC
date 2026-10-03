@@ -21,7 +21,6 @@
 #include "OpenSHC/Globals/DAT_ResourceManager.hpp"
 #include "OpenSHC/Globals/DAT_WideCharMultiByteState.hpp"
 #include "OpenSHC/Globals/FilePackagerObj.hpp"
-#include "OpenSHC/Globals/MSVC_SecurityCookie.hpp"
 
 namespace OpenSHC {
 namespace Synchrony {
@@ -51,7 +50,6 @@ namespace Synchrony {
     {
         char cVar1;
         WCHAR WVar2;
-        uint uVar3;
         char* pcVar4;
         char* pcVar5;
         WCHAR* pWVar6;
@@ -63,7 +61,6 @@ namespace Synchrony {
         Base64State local_1794;
         char _msvFile[1001];
         WCHAR local_fb0[1001];
-        uVar3 = MSVC_SecurityCookie::instance ^ (uint)&local_17a0;
         DAT_GameSynchronyState::instance.DAT_CommandSize = 0x7dc;
         DAT_GameSynchronyState::instance.DAT_GameCommandArray[DAT_GameSynchronyState::instance.DAT_CurrentGameCommandID]
             .time = 0;

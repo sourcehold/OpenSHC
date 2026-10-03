@@ -7,7 +7,6 @@
 #include "OpenSHC/Commands/GameCommandScheduling.hpp"
 
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
-#include "OpenSHC/Globals/MSVC_SecurityCookie.hpp"
 
 namespace OpenSHC {
 namespace Synchrony {
@@ -32,8 +31,6 @@ namespace Synchrony {
         byte local_10[4];
         byte local_c[4];
         byte local_8;
-        uint local_4;
-        local_4 = MSVC_SecurityCookie::instance ^ (uint)&_isHost;
         DAT_GameSynchronyState::instance.DAT_CommandSize = 33;
         DAT_GameSynchronyState::instance.DAT_GameCommandArray[DAT_GameSynchronyState::instance.DAT_CurrentGameCommandID]
             .time = 0;

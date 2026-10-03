@@ -21,7 +21,6 @@
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
 #include "OpenSHC/Globals/DAT_UserTextHandlerState.hpp"
 #include "OpenSHC/Globals/DAT_WideCharMultiByteState.hpp"
-#include "OpenSHC/Globals/MSVC_SecurityCookie.hpp"
 
 namespace OpenSHC {
 namespace Synchrony {
@@ -55,8 +54,6 @@ namespace Synchrony {
         SoundFlagsAndLoopCount SVar5;
         int _tauntOrChat[10];
         WCHAR _messageRaw[260];
-        uint local_4;
-        local_4 = MSVC_SecurityCookie::instance ^ (uint)_tauntOrChat;
         DAT_GameSynchronyState::instance.DAT_CommandSize = 0x220;
         DAT_GameSynchronyState::instance.DAT_GameCommandArray[DAT_GameSynchronyState::instance.DAT_CurrentGameCommandID]
             .time = 0;

@@ -15,7 +15,6 @@
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_UserTextHandlerState.hpp"
 #include "OpenSHC/Globals/DAT_WideCharMultiByteState.hpp"
-#include "OpenSHC/Globals/MSVC_SecurityCookie.hpp"
 
 namespace OpenSHC {
 namespace Synchrony {
@@ -50,8 +49,6 @@ namespace Synchrony {
         int local_3f4;
         int local_3f0;
         WCHAR local_3ec[500];
-        uint local_4;
-        local_4 = MSVC_SecurityCookie::instance ^ (uint)&_receivedCurrentPlayerSlotID;
         DAT_GameSynchronyState::instance.DAT_CommandSize = 0x250;
         DAT_GameSynchronyState::instance.DAT_GameCommandArray[DAT_GameSynchronyState::instance.DAT_CurrentGameCommandID]
             .time = 0;
