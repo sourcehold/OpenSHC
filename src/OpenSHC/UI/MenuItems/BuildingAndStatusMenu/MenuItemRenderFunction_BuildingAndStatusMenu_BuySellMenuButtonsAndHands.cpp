@@ -71,7 +71,11 @@ namespace UI {
                 iVar4 = param_1 + 5;
                 if (DAT_ButtonCurrentlyInteracting::instance == FALSE) {
                     iVar11 = 0x11;
-                    iVar11 = MACRO_CALL_MEMBER( OpenSHC::Text::TextManager_Func::computeTextWidth, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_TRADEPOST, iVar4), iVar11);
+                    iVar11 = MACRO_CALL_MEMBER(
+                        OpenSHC::Text::TextManager_Func::computeTextWidth, DAT_TextManagerObject::ptr)(
+                        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                            DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_TRADEPOST, iVar4),
+                        iVar11);
                     iVar12 = 0;
                     BVar10 = FALSE;
                     iVar9 = 0x11;
@@ -80,7 +84,11 @@ namespace UI {
                     TVar6 = OpenSHC::Text::TTA_LEFT;
                     iVar5 = DAT_ButtonY::instance + 0xb;
                     iVar3 = (DAT_ButtonW::instance - (iVar11 + 0x35)) / 2 + DAT_ButtonX::instance;
-                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_TRADEPOST, iVar4), iVar3, iVar5, TVar6, uVar7, uVar8, iVar9, BVar10, iVar12);
+                    MACRO_CALL_MEMBER(
+                        OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
+                        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                            DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_TRADEPOST, iVar4),
+                        iVar3, iVar5, TVar6, uVar7, uVar8, iVar9, BVar10, iVar12);
                     RVar1
                         = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                               .marketSelectedResourceType;
@@ -97,7 +105,11 @@ namespace UI {
                         (int)(DAT_ButtonY::instance + 10), OpenSHC::Text::TTA_LEFT, 0, 0x11, TRUE, 0);
                 }
                 iVar11 = 0x11;
-                iVar11 = MACRO_CALL_MEMBER( OpenSHC::Text::TextManager_Func::computeTextWidth, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_TRADEPOST, iVar4), iVar11);
+                iVar11
+                    = MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::computeTextWidth, DAT_TextManagerObject::ptr)(
+                        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                            DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_TRADEPOST, iVar4),
+                        iVar11);
                 iVar12 = 0;
                 BVar10 = FALSE;
                 iVar9 = 0x11;
@@ -106,7 +118,11 @@ namespace UI {
                 TVar6 = OpenSHC::Text::TTA_LEFT;
                 iVar5 = DAT_ButtonY::instance + 0xb;
                 iVar3 = (DAT_ButtonW::instance - (iVar11 + 0x35)) / 2 + DAT_ButtonX::instance;
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_TRADEPOST, iVar4), iVar3, iVar5, TVar6, uVar7, uVar8, iVar9, BVar10, iVar12);
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_TRADEPOST, iVar4),
+                    iVar3, iVar5, TVar6, uVar7, uVar8, iVar9, BVar10, iVar12);
                 RVar1 = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                             .marketSelectedResourceType;
                 if (param_1 == 0) {

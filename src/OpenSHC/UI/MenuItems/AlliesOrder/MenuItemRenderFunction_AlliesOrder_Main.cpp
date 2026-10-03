@@ -154,7 +154,12 @@ namespace UI {
                 DAT_TextManagerObject::instance.textSurfaceTarget = OpenSHC::Rendering::Enums::RT_MAP_GAME;
                 xParam = DAT_ButtonX::instance;
                 yParam = DAT_ButtonY::instance;
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)((OpenSHC::DE::SHCDE::eTextSections)DAT_00df5200::instance, DAT_00df51fc::instance), xParam, yParam, alignment, foregroundColor, backgroundColor, fontSize, keepOffsetX, blendStrength);
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(
+                        OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
+                        (OpenSHC::DE::SHCDE::eTextSections)DAT_00df5200::instance, DAT_00df51fc::instance),
+                    xParam, yParam, alignment, foregroundColor, backgroundColor, fontSize, keepOffsetX, blendStrength);
                 if (DAT_00df51fc::instance == 10) {
                     if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[DAT_00df51f8::instance] != -1) {
                         MACRO_CALL_MEMBER(

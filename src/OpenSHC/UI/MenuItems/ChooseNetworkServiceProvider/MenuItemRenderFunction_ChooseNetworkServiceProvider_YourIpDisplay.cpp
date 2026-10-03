@@ -57,7 +57,10 @@ namespace UI {
                 /*
                   added by script: "Your IP:"
                  */
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 0x24), xParam, yParam, alignment, color, fontSize, keepOffsetX, blendStrength);
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 0x24),
+                    xParam, yParam, alignment, color, fontSize, keepOffsetX, blendStrength);
                 if (DAT_GameSynchronyState::instance.lanOrWan == FALSE) {
                     MACRO_CALL(OpenSHC::OS_Func::_sprintf)(local_68, "   %d.%d.%d.%d",
                         (uint)DAT_GameSynchronyState::instance.lanIP.S_un.S_un_b.s_b1,

@@ -283,8 +283,9 @@ namespace UI {
             drawY = DAT_ButtonY::instance;
             iVar2 = MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::ButtonGmData_Func::getPictureNumberInGm, buttonGmData)(
                 DAT_ButtonCurrentlyInteracting::instance);
-            MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
-                DAT_TextureRenderCoreObject::ptr)((OpenSHC::DE::SHCDE::eGM)(buttonGmData->gmId_0x0), iVar2 + iVar3, iVar1, drawY);
+            MACRO_CALL_MEMBER(
+                OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
+                (OpenSHC::DE::SHCDE::eGM)(buttonGmData->gmId_0x0), iVar2 + iVar3, iVar1, drawY);
             DAT_CurrentButtonPictureInGm::instance
                 = DAT_UIButtonDefinedData::instance.ButtonGmDataArray[DAT_CurrentButtonGmDataIndex::instance]
                       .pictureInGm_0x4

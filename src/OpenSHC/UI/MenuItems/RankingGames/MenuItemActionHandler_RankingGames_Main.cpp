@@ -5,6 +5,7 @@
 #include "OpenSHC/UI/MenuModalComposition.func.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/Game/Skirmish/SkirmishStatistics.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -22,7 +23,6 @@
 #include "OpenSHC/Globals/DAT_SkMasters2DataArray.hpp"
 #include "OpenSHC/Globals/DAT_StoredGameMode.hpp"
 #include "OpenSHC/Globals/INT_ARRAY_00eb96d8.hpp"
-#include "OpenSHC/Game/Skirmish/SkirmishStatistics.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -30,10 +30,10 @@ namespace UI {
 
         using OpenSHC::Game::GameMode;
         using OpenSHC::Game::GameMode2;
+        using OpenSHC::Game::Skirmish::SkirmishStatistics;
         using OpenSHC::UI::Enums::MenuModalType;
         using OpenSHC::UI::Enums::MenuViewType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-        using OpenSHC::Game::Skirmish::SkirmishStatistics;
 
         /*
           WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
@@ -88,7 +88,8 @@ namespace UI {
                         *pcVar7 = *pcVar5;
                         if (iVar1 != 0) {
                             memcpy(CHAR_ARRAY_00eb9ac8::instance, "lose_screen_arab.tgx", 20);
-                            (*(uint*)(CHAR_ARRAY_00eb9ac8::instance + 20)) = (*(uint*)(CHAR_ARRAY_00eb9ac8::instance + 20)) & 0xffffff00;
+                            (*(uint*)(CHAR_ARRAY_00eb9ac8::instance + 20))
+                                = (*(uint*)(CHAR_ARRAY_00eb9ac8::instance + 20)) & 0xffffff00;
                         }
                     } else {
                         strcpy(CHAR_ARRAY_00eb9ac8::instance, "win_screen_crusader.tgx");

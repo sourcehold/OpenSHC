@@ -5,6 +5,7 @@
 #include "OpenSHC/UI/Rendering/AlphaAndButtonSurface.func.hpp"
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
+#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/UI/Enums/BuildingsAndStatusMenuTabType.hpp"
@@ -21,18 +22,17 @@
 #include "OpenSHC/Globals/DAT_PencilRenderCore.hpp"
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
-#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 
 namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
         using OpenSHC::DE::SHCDE::eTextSections;
+        using OpenSHC::Rendering::Colors::BGR24;
         using OpenSHC::Rendering::Enums::RenderTarget;
         using OpenSHC::Text::TextAlignment;
         using OpenSHC::UI::Enums::BuildingsAndStatusMenuTabType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-        using OpenSHC::Rendering::Colors::BGR24;
 
         /*
           WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
@@ -74,7 +74,10 @@ namespace UI {
                     /*
                       Text:   0x8 => Join
                      */
-                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 8), xParam, yParam, alignment, color, fontSize, keepOffsetX, blendStrength);
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                            DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, 8),
+                        xParam, yParam, alignment, color, fontSize, keepOffsetX, blendStrength);
                 }
             LAB_0047c73a:
                 DAT_ButtonUnknownZero::instance = 0;

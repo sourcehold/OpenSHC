@@ -130,7 +130,8 @@ namespace UI {
                         } else if (DAT_GameCore::instance.activeMenuTab.buildMenuTab == ((BuildMenuTabType)0x31))
                             goto LAB_00434497;
                         DAT_UIDragDropDefinedData::instance.MenuView_TriggerInitial = TRUE;
-                        MACRO_CALL(OpenSHC::UI::DisplayElements_Func::CheckDisplayElementByIDAndSetForUnlimitedDisplay)(OpenSHC::UI::Enums::DEID_KEEP_AND_GRANERY_PLACEMENT_INFO, 0);
+                        MACRO_CALL(OpenSHC::UI::DisplayElements_Func::CheckDisplayElementByIDAndSetForUnlimitedDisplay)(
+                            OpenSHC::UI::Enums::DEID_KEEP_AND_GRANERY_PLACEMENT_INFO, 0);
                     } else if (DAT_GameCore::instance.activeMenuTab.tabType
                         == OpenSHC::UI::Enums::BASMTT_UNUSED_WITCHHOIST) {
                     LAB_00434497:

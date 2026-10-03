@@ -216,7 +216,8 @@ namespace UI {
             }
             if (-1 < iVar8) {
                 INT_00b95ab8::instance = 1;
-                MACRO_CALL(OpenSHC::UI::MenuItems::LobbyMenu_Func::MenuItemActionHandler_LobbyMenu_MapSelectTable)(DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected);
+                MACRO_CALL(OpenSHC::UI::MenuItems::LobbyMenu_Func::MenuItemActionHandler_LobbyMenu_MapSelectTable)(
+                    DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected);
             }
             iVar8 = 0;
             if (0 < iVar2) {

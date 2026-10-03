@@ -12,11 +12,11 @@
 #include "OpenSHC/UI/MenuTextInputState.func.hpp"
 #include "OpenSHC/Commands/GameCommandType.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/Map/MapType2.hpp"
 #include "OpenSHC/UI/Enums/BuildingsAndStatusMenuTabType.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
 
-#include "OpenSHC/Map/MapType2.hpp"
 #include "OpenSHC/Globals/DAT_00eb0b24.hpp"
 #include "OpenSHC/Globals/DAT_00ed2794.hpp"
 #include "OpenSHC/Globals/DAT_00ed2798.hpp"

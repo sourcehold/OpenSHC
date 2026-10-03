@@ -8,7 +8,9 @@
 #include "OpenSHC/UI/MenuModalComposition.func.hpp"
 #include "OpenSHC/Commands/GameCommandType.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
+#include "OpenSHC/Game/Resources/ResourceTypeInt.hpp"
 #include "OpenSHC/Game/Resources/ResourceTypeMin1.hpp"
+#include "OpenSHC/Game/Resources/ResourceTypeMin1Int.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -23,8 +25,6 @@
 #include "OpenSHC/Globals/DAT_SFXState.hpp"
 #include "OpenSHC/Globals/DAT_SentOrRequestedGoodsAmount.hpp"
 #include "OpenSHC/Globals/DAT_SomeTeamMemberPlayerIDArray.hpp"
-#include "OpenSHC/Game/Resources/ResourceTypeInt.hpp"
-#include "OpenSHC/Game/Resources/ResourceTypeMin1Int.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -32,11 +32,11 @@ namespace UI {
 
         using OpenSHC::Commands::GameCommandType;
         using OpenSHC::Game::Resources::ResourceType;
+        using OpenSHC::Game::Resources::ResourceTypeInt;
         using OpenSHC::Game::Resources::ResourceTypeMin1;
+        using OpenSHC::Game::Resources::ResourceTypeMin1Int;
         using OpenSHC::UI::Enums::MenuModalType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-        using OpenSHC::Game::Resources::ResourceTypeInt;
-        using OpenSHC::Game::Resources::ResourceTypeMin1Int;
 
         /*
           WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names

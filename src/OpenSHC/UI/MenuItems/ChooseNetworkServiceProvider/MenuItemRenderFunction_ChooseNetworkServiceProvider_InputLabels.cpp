@@ -42,14 +42,21 @@ namespace UI {
               Text:   0x0e => Phone Number (Only needed if Joining)   0x0C => "Host's IP Address (Only needed if
               Joining)"   0x0D => "Ip port"
              */
-            iVar2 = MACRO_CALL_MEMBER(OpenSHC::Text::FontSizeClass_Func::renderMultilineTextUnk, &DAT_TextManagerObject::instance.fontSizeClassArray[0x12])(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, param_1), iVar2, iVar3, iVar4, color, iVar5, iVar6);
+            iVar2 = MACRO_CALL_MEMBER(OpenSHC::Text::FontSizeClass_Func::renderMultilineTextUnk,
+                &DAT_TextManagerObject::instance.fontSizeClassArray[0x12])(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, param_1),
+                iVar2, iVar3, iVar4, color, iVar5, iVar6);
             iVar6 = 0;
             iVar5 = 0x12;
             color_00 = 0xccfaff;
             iVar4 = 400;
             iVar2 = (DAT_ButtonH::instance - iVar2) + -3 + DAT_ButtonY::instance;
             iVar3 = DAT_ButtonX::instance;
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, param_1), iVar3, iVar2, iVar4, color_00, iVar5, iVar6);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION, param_1),
+                iVar3, iVar2, iVar4, color_00, iVar5, iVar6);
         }
 
     }

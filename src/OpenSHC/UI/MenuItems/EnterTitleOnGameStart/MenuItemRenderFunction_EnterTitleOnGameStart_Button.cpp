@@ -51,12 +51,18 @@ namespace UI {
             if (DAT_ButtonCurrentlyInteracting::instance == FALSE) {
                 color = 0xc2f0eb;
                 TVar2 = OpenSHC::Text::TTA_CENTER;
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_BUBBLE_HELP_TEXT, param_1), xParam, yParam, TVar2, color, fontSize, keepOffsetX, blendStrength);
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_BUBBLE_HELP_TEXT, param_1),
+                    xParam, yParam, TVar2, color, fontSize, keepOffsetX, blendStrength);
             }
             backgroundColor = 0;
             foregroundColor = 0xccfaff;
             TVar2 = OpenSHC::Text::TTA_CENTER;
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_BUBBLE_HELP_TEXT, param_1), xParam, yParam, TVar2, foregroundColor, backgroundColor, fontSize, keepOffsetX, blendStrength);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_BUBBLE_HELP_TEXT, param_1),
+                xParam, yParam, TVar2, foregroundColor, backgroundColor, fontSize, keepOffsetX, blendStrength);
         }
 
     }

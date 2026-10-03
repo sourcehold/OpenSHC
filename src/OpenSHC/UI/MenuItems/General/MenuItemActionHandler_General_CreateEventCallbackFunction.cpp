@@ -546,7 +546,11 @@ namespace UI {
                 /*
                   added by script: "There is fire in the castle and we have not built any wells   my Liege!"
                  */
-                MACRO_CALL_MEMBER(OpenSHC::Rendering::Bink::AIMessageQueue_Func::playEventVideoBik, DAT_VideoBikQueue::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_ACTION, iVar8), (char*)((int)(ppcVar9)), pcVar10);
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Rendering::Bink::AIMessageQueue_Func::playEventVideoBik, DAT_VideoBikQueue::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_ACTION, iVar8),
+                    (char*)((int)(ppcVar9)), pcVar10);
             switchD_004c1bae_caseD_8c:
                 MACRO_CALL_MEMBER(
                     OpenSHC::UI::MenuTextInputState_Func::clearAnyOtherModalDialogs, DAT_MenuTextInputState::ptr)();
@@ -689,7 +693,11 @@ namespace UI {
                 /*
                   added by script: "The people rejoice at your forthcoming marriage, Sire."
                  */
-                MACRO_CALL_MEMBER(OpenSHC::Rendering::Bink::AIMessageQueue_Func::playEventVideoBik, DAT_VideoBikQueue::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_ACTION, 0xc), (char*)((int)(ppcVar9)), pcVar3);
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Rendering::Bink::AIMessageQueue_Func::playEventVideoBik, DAT_VideoBikQueue::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_ACTION, 0xc),
+                    (char*)((int)(ppcVar9)), pcVar3);
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(
                     OpenSHC::Audio::SFX::SEID_CHAPEL_BELL);
                 MACRO_CALL_MEMBER(
@@ -722,7 +730,10 @@ namespace UI {
             /*
               added by script: "A ‘Travelling Fair’ has come to town, my Lord."
              */
-            MACRO_CALL_MEMBER(OpenSHC::Rendering::Bink::AIMessageQueue_Func::playEventVideoBik, DAT_VideoBikQueue::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_ACTION, iVar8), (char*)((int)(ppcVar9)), pcVar10);
+            MACRO_CALL_MEMBER(OpenSHC::Rendering::Bink::AIMessageQueue_Func::playEventVideoBik, DAT_VideoBikQueue::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_ACTION, iVar8),
+                (char*)((int)(ppcVar9)), pcVar10);
         LAB_004c19d6:
             MACRO_CALL_MEMBER(
                 OpenSHC::UI::MenuTextInputState_Func::clearAnyOtherModalDialogs, DAT_MenuTextInputState::ptr)();

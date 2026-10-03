@@ -85,7 +85,12 @@ namespace UI {
                     alignment = OpenSHC::Text::TTA_LEFT;
                     yParam = DAT_ButtonY::instance + 0xf;
                     xParam = DAT_ButtonX::instance + 0x1e;
-                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_BUBBLE_HELP_TEXT, param_1 + 0x135), xParam, yParam, alignment, foregroundColor, backgroundColor, fontSize, keepOffsetX, blendStrength);
+                    MACRO_CALL_MEMBER(
+                        OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
+                        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                            DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_BUBBLE_HELP_TEXT, param_1 + 0x135),
+                        xParam, yParam, alignment, foregroundColor, backgroundColor, fontSize, keepOffsetX,
+                        blendStrength);
                     if (DAT_ButtonCurrentlyInteracting::instance != FALSE) {
                         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue
                             = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;

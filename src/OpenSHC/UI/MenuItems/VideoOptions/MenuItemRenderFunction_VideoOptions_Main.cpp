@@ -5,6 +5,7 @@
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/DE/SHCDE/eGM.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
+#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -17,7 +18,6 @@
 #include "OpenSHC/Globals/DAT_MenuTextInputState.hpp"
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
-#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -25,10 +25,10 @@ namespace UI {
 
         using OpenSHC::DE::SHCDE::eGM;
         using OpenSHC::DE::SHCDE::eTextSections;
+        using OpenSHC::Rendering::Colors::BGR24;
         using OpenSHC::Rendering::Enums::RenderTarget;
         using OpenSHC::Text::TextAlignment;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-        using OpenSHC::Rendering::Colors::BGR24;
 
         /*
           decompilerscript: committed: 2025-01-30 21:57:43.216000
@@ -210,7 +210,10 @@ namespace UI {
             keepOffsetX = FALSE;
             fontSize = 0x12;
             alignment = OpenSHC::Text::TTA_CENTER;
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS, param_1), iVar1, yParam, alignment, color, fontSize, keepOffsetX, blendStrength);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS, param_1),
+                iVar1, yParam, alignment, color, fontSize, keepOffsetX, blendStrength);
         }
 
     }

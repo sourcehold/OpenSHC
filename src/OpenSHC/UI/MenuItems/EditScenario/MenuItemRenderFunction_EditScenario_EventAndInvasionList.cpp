@@ -3,6 +3,7 @@
 #include "OpenSHC/Text/TextManager.func.hpp"
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
+#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -14,17 +15,16 @@
 #include "OpenSHC/Globals/DAT_PencilRenderCore.hpp"
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
-#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 
 namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
         using OpenSHC::DE::SHCDE::eTextSections;
+        using OpenSHC::Rendering::Colors::BGR24;
         using OpenSHC::Rendering::Enums::RenderTarget;
         using OpenSHC::Text::TextAlignment;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-        using OpenSHC::Rendering::Colors::BGR24;
 
         /*
           decompilerscript: committed: 2025-01-30 21:57:43.216000
@@ -67,7 +67,13 @@ namespace UI {
             TVar6 = OpenSHC::Text::TTA_LEFT;
             iVar3 = DAT_ButtonY::instance + 4;
             iVar4 = DAT_ButtonX::instance + 8;
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MONTHS, DAT_MapPropertiesState::instance .scenarioEvents[DAT_MapPropertiesState::instance.field47_0x1355c + param_1] .header.month), iVar4, iVar3, TVar6, BVar7, iVar8, BVar9, iVar10);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MONTHS,
+                    DAT_MapPropertiesState::instance
+                        .scenarioEvents[DAT_MapPropertiesState::instance.field47_0x1355c + param_1]
+                        .header.month),
+                iVar4, iVar3, TVar6, BVar7, iVar8, BVar9, iVar10);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                 DAT_MapPropertiesState::instance
                     .scenarioEvents[DAT_MapPropertiesState::instance.field47_0x1355c + param_1]
@@ -88,7 +94,10 @@ namespace UI {
                 /*
                   added by script: "Invasion"
                  */
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SCENARIO, 0x2e), iVar4, iVar3, TVar6, BVar7, iVar8, BVar9, iVar10);
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SCENARIO, 0x2e),
+                    iVar4, iVar3, TVar6, BVar7, iVar8, BVar9, iVar10);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     DAT_MapPropertiesState::instance
                         .scenarioEvents[DAT_MapPropertiesState::instance.field47_0x1355c + param_1]
@@ -128,7 +137,10 @@ namespace UI {
                 iVar3 = DAT_ButtonY::instance + 4;
                 iVar8 = DAT_ButtonX::instance + 0x50;
                 BVar7 = color;
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SCENARIO, iVar4), iVar8, iVar3, TVar6, BVar7, iVar10, BVar9, blendStrength);
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SCENARIO, iVar4),
+                    iVar8, iVar3, TVar6, BVar7, iVar10, BVar9, blendStrength);
                 if (DAT_MapPropertiesState::instance
                         .scenarioEvents[DAT_MapPropertiesState::instance.field47_0x1355c + param_1]
                         .data.scenario.repeat

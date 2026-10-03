@@ -44,7 +44,10 @@ namespace UI {
                 alignment = OpenSHC::Text::TTA_CENTER;
                 yParam = DAT_ButtonY::instance + 4;
                 int xParam = DAT_ButtonW::instance / 2 + DAT_ButtonX::instance;
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_KEEP, param_1), xParam, yParam, alignment, color, fontSize, keepOffsetX, blendStrength);
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_KEEP, param_1),
+                    xParam, yParam, alignment, color, fontSize, keepOffsetX, blendStrength);
             }
         }
 

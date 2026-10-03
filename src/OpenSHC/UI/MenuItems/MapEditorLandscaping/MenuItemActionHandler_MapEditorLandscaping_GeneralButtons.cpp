@@ -95,8 +95,8 @@ namespace UI {
                     goto LAB_004315c1;
                 }
                 goto LAB_00431832;
-                default:
-                    break;
+            default:
+                break;
             case OpenSHC::Commands::M_MAPPER_MIN:
                 DAT_TileMapState::instance.mapperMax = FALSE;
                 DAT_TileMapState::instance.currentMapperCommand = param_1;
@@ -199,7 +199,8 @@ namespace UI {
                     = param_1 - OpenSHC::Commands::M_MAPPER_SUB_MODE_FEATURE_MP;
                 if (DAT_GameCore::instance.mapU2MiddleBytes[2] == 0) {
                     DAT_TileMapState::instance.currentMapperCommand
-                        = (OpenSHC::Commands::MappersEnum)((DAT_GameCore::instance.mapU2MiddleBytes[1] != 0) + OpenSHC::Commands::M_MAPPER_KEEP1);
+                        = (OpenSHC::Commands::MappersEnum)((DAT_GameCore::instance.mapU2MiddleBytes[1] != 0)
+                            + OpenSHC::Commands::M_MAPPER_KEEP1);
                 }
                 DAT_TileMapState::instance.currentMapperCommand = OpenSHC::Commands::M_MAPPER_KEEP3;
             }

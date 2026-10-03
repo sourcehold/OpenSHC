@@ -58,8 +58,8 @@ namespace UI {
             int xPosition;
             uint color2;
             int fontSize;
-            BVar1 = MACRO_CALL_MEMBER(
-                OpenSHC::Map::MapPropertiesState_Func::isMapperAvailable, DAT_MapPropertiesState::ptr)((OpenSHC::Commands::MappersEnum)mapperValue);
+            BVar1 = MACRO_CALL_MEMBER(OpenSHC::Map::MapPropertiesState_Func::isMapperAvailable,
+                DAT_MapPropertiesState::ptr)((OpenSHC::Commands::MappersEnum)mapperValue);
             if (BVar1 == FALSE) {
                 DAT_ButtonUnknownZero::instance = 1;
             }

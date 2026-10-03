@@ -96,7 +96,8 @@ namespace UI {
                     if (DAT_TextEditorState::instance.pendingTokenTypeToSkip != ((HelpTextToken)0)) {
                         iVar3 = MACRO_CALL_MEMBER(
                             OpenSHC::Text::TextEditorState_Func::helpToken_getHelpTokenAdvanceLength,
-                            DAT_TextEditorState::ptr)((OpenSHC::Text::Enums::HelpTextToken)DAT_TextEditorState::instance.pendingTokenTypeToSkip);
+                            DAT_TextEditorState::ptr)(
+                            (OpenSHC::Text::Enums::HelpTextToken)DAT_TextEditorState::instance.pendingTokenTypeToSkip);
                         DAT_TextEditorState::instance.activeHelpHotspotIndex
                             = DAT_TextEditorState::instance.activeHelpHotspotIndex + iVar3;
                         DAT_TextEditorState::instance.pendingTokenTypeToSkip = ((HelpTextToken)0);
@@ -153,9 +154,9 @@ namespace UI {
                                 < ((HelpTextToken)0x20)) {
                                 iVar5 = MACRO_CALL_MEMBER(
                                     OpenSHC::Text::TextEditorState_Func::helpToken_getHelpTokenAdvanceLength,
-                                    DAT_TextEditorState::ptr)(
-                                    (OpenSHC::Text::Enums::HelpTextToken)DAT_TextEditorState::instance.DAT_PointerToTemporaryTextMemory
-                                        [DAT_TextEditorState::instance.activeHelpHotspotIndex + -1]);
+                                    DAT_TextEditorState::ptr)((OpenSHC::Text::Enums::HelpTextToken)
+                                        DAT_TextEditorState::instance.DAT_PointerToTemporaryTextMemory
+                                            [DAT_TextEditorState::instance.activeHelpHotspotIndex + -1]);
                                 DAT_TextEditorState::instance.activeHelpHotspotIndex = iVar3 - iVar5;
                             } else {
                                 DAT_TextEditorState::instance.activeHelpHotspotIndex
@@ -171,7 +172,8 @@ namespace UI {
                                 < ((HelpTextToken)0x20)) {
                                 iVar5 = MACRO_CALL_MEMBER(
                                     OpenSHC::Text::TextEditorState_Func::helpToken_getHelpTokenAdvanceLength,
-                                    DAT_TextEditorState::ptr)((OpenSHC::Text::Enums::HelpTextToken)DAT_TextEditorState::instance
+                                    DAT_TextEditorState::ptr)(
+                                    (OpenSHC::Text::Enums::HelpTextToken)DAT_TextEditorState::instance
                                         .DAT_PointerToTemporaryTextMemory[DAT_TextEditorState::instance
                                                 .activeHelpHotspotIndex]);
                                 DAT_TextEditorState::instance.activeHelpHotspotIndex = iVar3 + iVar5;
@@ -202,9 +204,9 @@ namespace UI {
                         if (0 < DAT_TextEditorState::instance.activeHelpHotspotIndex) {
                             iVar5 = MACRO_CALL_MEMBER(
                                 OpenSHC::Text::TextEditorState_Func::helpToken_getHelpTokenAdvanceLength,
-                                DAT_TextEditorState::ptr)(
-                                (OpenSHC::Text::Enums::HelpTextToken)DAT_TextEditorState::instance.DAT_PointerToTemporaryTextMemory
-                                    [DAT_TextEditorState::instance.activeHelpHotspotIndex + -1]);
+                                DAT_TextEditorState::ptr)((OpenSHC::Text::Enums::HelpTextToken)
+                                    DAT_TextEditorState::instance.DAT_PointerToTemporaryTextMemory
+                                        [DAT_TextEditorState::instance.activeHelpHotspotIndex + -1]);
                             if (iVar3 < DAT_TextEditorState::instance.customHelpTextLength + iVar5) {
                                 iVar6 = (iVar3 - iVar5) * 2;
                                 do {

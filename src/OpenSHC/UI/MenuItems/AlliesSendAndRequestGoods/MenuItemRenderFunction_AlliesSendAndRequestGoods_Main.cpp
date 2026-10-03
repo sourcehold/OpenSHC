@@ -7,6 +7,7 @@
 #include "OpenSHC/DE/SHCDE/eGM.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/IO/Graphics/GmID.hpp"
+#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -21,7 +22,6 @@
 #include "OpenSHC/Globals/DAT_SentOrRequestedGoodsAmount.hpp"
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
-#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -30,9 +30,9 @@ namespace UI {
         using OpenSHC::DE::SHCDE::eGM;
         using OpenSHC::DE::SHCDE::eTextSections;
         using OpenSHC::IO::Graphics::GmID;
+        using OpenSHC::Rendering::Colors::BGR24;
         using OpenSHC::Text::TextAlignment;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-        using OpenSHC::Rendering::Colors::BGR24;
 
         /*
           WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
@@ -227,7 +227,10 @@ namespace UI {
             /*
               added by script: "Choose Goods"
              */
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(offsetIndex, iVar5), iVar1, iVar2, alignment, color, iVar3, keepOffsetX, iVar4);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(offsetIndex, iVar5),
+                iVar1, iVar2, alignment, color, iVar3, keepOffsetX, iVar4);
         }
 
     }

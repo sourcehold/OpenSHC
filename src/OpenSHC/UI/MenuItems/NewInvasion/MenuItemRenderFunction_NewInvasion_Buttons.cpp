@@ -4,6 +4,7 @@
 #include "OpenSHC/UI/Rendering.func.hpp"
 #include "OpenSHC/UI/Rendering/AlphaAndButtonSurface.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
+#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -15,17 +16,16 @@
 #include "OpenSHC/Globals/DAT_ButtonY.hpp"
 #include "OpenSHC/Globals/DAT_MapPropertiesState.hpp"
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
-#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 
 namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
         using OpenSHC::DE::SHCDE::eTextSections;
+        using OpenSHC::Rendering::Colors::BGR24;
         using OpenSHC::Rendering::Enums::RenderTarget;
         using OpenSHC::Text::TextAlignment;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-        using OpenSHC::Rendering::Colors::BGR24;
 
         /*
           decompilerscript: committed: 2025-01-30 21:57:43.216000
@@ -119,7 +119,10 @@ namespace UI {
                     alignment = OpenSHC::Text::TTA_CENTER;
                     yParam = DAT_ButtonY::instance + 6;
                     iVar1 = DAT_ButtonW::instance / 2 + DAT_ButtonX::instance;
-                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SCENARIO, param_1), iVar1, yParam, alignment, color, fontSize, keepOffsetX, blendStrength);
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                            DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SCENARIO, param_1),
+                        iVar1, yParam, alignment, color, fontSize, keepOffsetX, blendStrength);
                 }
             default:
                 MACRO_CALL(OpenSHC::UI::Rendering_Func::RenderScenarioButtonWithText)(param_1);

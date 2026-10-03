@@ -108,7 +108,10 @@ namespace UI {
             keepOffsetX = FALSE;
             fontSize = 0x12;
             alignment = OpenSHC::Text::TTA_CENTER;
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(offsetIndex, iVar1), xParam, yParam, alignment, color, fontSize, keepOffsetX, blendStrength);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(offsetIndex, iVar1),
+                xParam, yParam, alignment, color, fontSize, keepOffsetX, blendStrength);
         }
 
     }

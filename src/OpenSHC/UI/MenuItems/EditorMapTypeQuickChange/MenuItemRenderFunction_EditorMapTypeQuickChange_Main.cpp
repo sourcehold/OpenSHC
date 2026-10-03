@@ -3,6 +3,8 @@
 #include "OpenSHC/Text/TextManager.func.hpp"
 #include "OpenSHC/UI/Rendering/AlphaAndButtonSurface.func.hpp"
 #include "OpenSHC/Map/MapLockState.hpp"
+#include "OpenSHC/Map/MapLockStateInt.hpp"
+#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -16,19 +18,17 @@
 #include "OpenSHC/Globals/DAT_MapPropertiesState.hpp"
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
-#include "OpenSHC/Map/MapLockStateInt.hpp"
-#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 
 namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
         using OpenSHC::Map::MapLockState;
+        using OpenSHC::Map::MapLockStateInt;
+        using OpenSHC::Rendering::Colors::BGR24;
         using OpenSHC::Rendering::Enums::RenderTarget;
         using OpenSHC::Text::TextAlignment;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-        using OpenSHC::Map::MapLockStateInt;
-        using OpenSHC::Rendering::Colors::BGR24;
 
         /*
           WARNING: Enum "MappersEnum": Some values do not have unique names

@@ -107,7 +107,8 @@ namespace UI {
                     goto LAB_004baa59;
             } else {
                 if (DAT_MapPropertiesState::instance.field69_0x13590 == 3) {
-                    if ((param_1 < 0xd) && (param_1 + -8 == (*(int*)&DAT_MapPropertiesState::instance.padding_0x13594[0])))
+                    if ((param_1 < 0xd)
+                        && (param_1 + -8 == (*(int*)&DAT_MapPropertiesState::instance.padding_0x13594[0])))
                         goto LAB_004baa3d;
                 LAB_004bab10:
                     if (0xc < param_1) {

@@ -8,6 +8,7 @@
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/Game/TrailType.hpp"
 #include "OpenSHC/IO/Graphics/GmID.hpp"
+#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
@@ -27,7 +28,6 @@
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
 #include "OpenSHC/Globals/DAT_UIButtonDefinedData.hpp"
-#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -37,11 +37,11 @@ namespace UI {
         using OpenSHC::Game::GameMode2;
         using OpenSHC::Game::TrailType;
         using OpenSHC::IO::Graphics::GmID;
+        using OpenSHC::Rendering::Colors::BGR24;
         using OpenSHC::Rendering::Enums::RenderTarget;
         using OpenSHC::Text::TextAlignment;
         using OpenSHC::UI::Enums::MenuModalType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-        using OpenSHC::Rendering::Colors::BGR24;
 
         /*
           WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
@@ -108,7 +108,12 @@ namespace UI {
                         alignment = OpenSHC::Text::TTA_CENTER;
                         iVar3 = DAT_ButtonY::instance + 1;
                         xParam = DAT_ButtonX::instance + 0xb4;
-                        MACRO_CALL_MEMBER( OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GAME_TYPE, DAT_GameSynchronyState::instance.skirmishGameIntensityType + -1), xParam, iVar3, alignment, color, fontSize, BVar1, iVar2);
+                        MACRO_CALL_MEMBER(
+                            OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GAME_TYPE,
+                                DAT_GameSynchronyState::instance.skirmishGameIntensityType + -1),
+                            xParam, iVar3, alignment, color, fontSize, BVar1, iVar2);
                         if (DAT_GameSynchronyState::instance.skirmishCurrentAdvantageBalance < 3) {
                             iVar2 = (DAT_ButtonBackgroundBlendStrength::instance + -0x20) * 0x20;
                             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextFromTextGroup,
@@ -176,9 +181,10 @@ namespace UI {
                             DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue
                                 = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
                             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
-                                DAT_TextureRenderCoreObject::ptr)((OpenSHC::IO::Graphics::GmID)(DAT_UIButtonDefinedData::instance
-                                    .ButtonGmDataArray[DAT_CurrentButtonGmDataIndex::instance]
-                                    .gmId_0x0),
+                                DAT_TextureRenderCoreObject::ptr)(
+                                (OpenSHC::IO::Graphics::GmID)(DAT_UIButtonDefinedData::instance
+                                        .ButtonGmDataArray[DAT_CurrentButtonGmDataIndex::instance]
+                                        .gmId_0x0),
                                 iVar3, (int)((int)(DAT_ButtonX::instance)), (int)((int)(DAT_ButtonY::instance)),
                                 ((int)(iVar2 + (iVar2 >> 0x1f & 0x1fU)) >> 5) + 0x20);
                             DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue

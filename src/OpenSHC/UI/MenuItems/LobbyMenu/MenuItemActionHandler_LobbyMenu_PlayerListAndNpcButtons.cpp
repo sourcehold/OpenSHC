@@ -103,7 +103,9 @@ namespace UI {
                                 && (DAT_GameSynchronyState::instance.isHost != FALSE))
                             && (DAT_MenuModalComposition1::instance.activeModalDialogID
                                 == OpenSHC::UI::Enums::MMT_NONE)) {
-                            MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)((OpenSHC::Audio::SFX::SoundEffectID)(OpenSHC::Audio::SFX::SEID_UNIT_DAMAGE3 | OpenSHC::Audio::SFX::SEID_STOCKS));
+                            MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(
+                                (OpenSHC::Audio::SFX::SoundEffectID)(OpenSHC::Audio::SFX::SEID_UNIT_DAMAGE3
+                                    | OpenSHC::Audio::SFX::SEID_STOCKS));
                             MACRO_CALL_MEMBER(OpenSHC::UI::MenuModalComposition_Func::activateModalDialog,
                                 DAT_MenuModalComposition1::ptr)(
                                 OpenSHC::UI::Enums::MMT_CHOOSE_RANDOM_NUMBER_OF_ENEMIES, FALSE);
@@ -116,7 +118,8 @@ namespace UI {
                         && (playerID = (int)cVar1, playerID != DAT_GameSynchronyState::instance.currentPlayerSlotID)) {
                         if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] == -1) {
                             if (DAT_GameSynchronyState::instance.currentAIArray[playerID] != 0) {
-                                MACRO_CALL(OpenSHC::UI::Helpers_Func::PlayAMessageFromAI)(DAT_GameSynchronyState::instance.currentAIArray[playerID], 0x15);
+                                MACRO_CALL(OpenSHC::UI::Helpers_Func::PlayAMessageFromAI)(
+                                    DAT_GameSynchronyState::instance.currentAIArray[playerID], 0x15);
                                 DAT_GameSynchronyState::instance.currentAIArray[playerID] = 0;
                                 MACRO_CALL(OpenSHC::Synchrony::Actions_Func::RemovePositionOfPlayer)(playerID);
                                 MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::reorderTeamsAndPositions,

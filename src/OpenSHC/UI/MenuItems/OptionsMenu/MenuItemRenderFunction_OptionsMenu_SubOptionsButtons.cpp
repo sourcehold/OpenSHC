@@ -51,7 +51,10 @@ namespace UI {
                 iVar3 = 0x12;
                 color = 0xc2f0eb;
                 TVar2 = OpenSHC::Text::TTA_CENTER;
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS, param_1), xParam, yParam, TVar2, color, iVar3, BVar4, iVar5);
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS, param_1),
+                    xParam, yParam, TVar2, color, iVar3, BVar4, iVar5);
             }
             iVar5 = 2;
             BVar4 = FALSE;
@@ -59,7 +62,10 @@ namespace UI {
             backgroundColor = 0;
             foregroundColor = 0xccfaff;
             TVar2 = OpenSHC::Text::TTA_CENTER;
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS, param_1), xParam, yParam, TVar2, foregroundColor, backgroundColor, iVar3, BVar4, iVar5);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS, param_1),
+                xParam, yParam, TVar2, foregroundColor, backgroundColor, iVar3, BVar4, iVar5);
         }
 
     }

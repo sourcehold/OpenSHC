@@ -55,7 +55,9 @@ namespace UI {
             if (DAT_UnknownGFXIndex::instance == 1) {}
             if (param_1 == 5) {
                 if ((DAT_ButtonCurrentlyInteracting::instance != FALSE) && (BOOL_WasInteracting::instance == FALSE)) {
-                    MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)((OpenSHC::Audio::SFX::SoundEffectID)(OpenSHC::Audio::SFX::SEID_UNIT_DAMAGE3 | OpenSHC::Audio::SFX::SEID_WOOD_SAW));
+                    MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(
+                        (OpenSHC::Audio::SFX::SoundEffectID)(OpenSHC::Audio::SFX::SEID_UNIT_DAMAGE3
+                            | OpenSHC::Audio::SFX::SEID_WOOD_SAW));
                 }
                 BOOL_WasInteracting::instance = DAT_ButtonCurrentlyInteracting::instance;
             LAB_00424fed:
@@ -74,7 +76,9 @@ namespace UI {
                           .pictureInGm_0x4;
                 if (((param_1 < 5) || (param_1 == 9)) && (DAT_ButtonCurrentlyInteracting::instance != FALSE)) {
                     if (INT_00b95abc::instance != param_1) {
-                        MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)((OpenSHC::Audio::SFX::SoundEffectID)(OpenSHC::Audio::SFX::SEID_CHILDREN_PLAY_MAYPOLE | OpenSHC::Audio::SFX::SEID_WOOD_CHOP));
+                        MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(
+                            (OpenSHC::Audio::SFX::SoundEffectID)(OpenSHC::Audio::SFX::SEID_CHILDREN_PLAY_MAYPOLE
+                                | OpenSHC::Audio::SFX::SEID_WOOD_CHOP));
                     }
                     INT_00b95abc::instance = param_1;
                 }
@@ -110,7 +114,11 @@ namespace UI {
                 _y = DAT_ButtonY::instance + 0xf;
                 _aligntment = OpenSHC::Text::TTA_LEFT;
                 _x = DAT_ButtonX::instance + 0x1e;
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MAINOPTIONS, param_1 + 0x19), _x, _y, _aligntment, _color, uVar1, iVar2, BVar3, iVar4);
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MAINOPTIONS, param_1 + 0x19),
+                    _x, _y, _aligntment, _color, uVar1, iVar2, BVar3, iVar4);
             }
             if (param_1 == 9) {
                 iVar4 = 0;
@@ -124,7 +132,11 @@ namespace UI {
                 /*
                   added by script: "Custom Scenarios"
                  */
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MAINOPTIONS, 0x1e), _x, _y, _aligntment, _color, uVar1, iVar2, BVar3, iVar4);
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MAINOPTIONS, 0x1e),
+                    _x, _y, _aligntment, _color, uVar1, iVar2, BVar3, iVar4);
             } else if (4 < param_1) {
             }
         LAB_00425150:

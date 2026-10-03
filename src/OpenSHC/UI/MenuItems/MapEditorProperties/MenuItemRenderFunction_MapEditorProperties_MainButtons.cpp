@@ -94,7 +94,8 @@ namespace UI {
                             DAT_ButtonCurrentlyInteracting::instance);
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            (OpenSHC::DE::SHCDE::eGM)(DAT_UIButtonDefinedData::instance.ButtonGmDataArray[DAT_CurrentButtonGmDataIndex::instance]
+                            (OpenSHC::DE::SHCDE::eGM)(DAT_UIButtonDefinedData::instance
+                                    .ButtonGmDataArray[DAT_CurrentButtonGmDataIndex::instance]
                                     .gmId_0x0),
                             iVar1 + (uint)bVar4, iVar2, iVar3);
                         DAT_CurrentButtonPictureInGm::instance
@@ -128,7 +129,8 @@ namespace UI {
                             DAT_ButtonCurrentlyInteracting::instance);
                         MACRO_CALL_MEMBER(
                             OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            (OpenSHC::DE::SHCDE::eGM)(DAT_UIButtonDefinedData::instance.ButtonGmDataArray[DAT_CurrentButtonGmDataIndex::instance]
+                            (OpenSHC::DE::SHCDE::eGM)(DAT_UIButtonDefinedData::instance
+                                    .ButtonGmDataArray[DAT_CurrentButtonGmDataIndex::instance]
                                     .gmId_0x0),
                             iVar1 + (uint)bVar4, iVar2, iVar3);
                         DAT_CurrentButtonPictureInGm::instance
