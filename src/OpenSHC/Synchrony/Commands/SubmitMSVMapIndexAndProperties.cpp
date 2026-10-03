@@ -59,7 +59,7 @@ namespace Synchrony {
         int local_179c;
         int local_1798;
         Base64State local_1794;
-        char _msvFile[1001];
+        char _msvFile[1010];
         WCHAR local_fb0[1001];
         DAT_GameSynchronyState::instance.DAT_CommandSize = 0x7dc;
         DAT_GameSynchronyState::instance.DAT_GameCommandArray[DAT_GameSynchronyState::instance.DAT_CurrentGameCommandID]
@@ -87,12 +87,11 @@ namespace Synchrony {
                 pcVar5 = pcVar5 + 1;
                 pcVar4 = pcVar4 + 1;
             } while (cVar1 != '\0');
-            pcVar4 = (char*)((int)&local_1794.lineCharacterCounter + 3);
-            do {
-                pcVar5 = pcVar4;
-                pcVar4 = pcVar5 + 1;
-            } while (pcVar5[1] != '\0');
-            strcpy(pcVar5 + 1, ".msv");
+            pcVar4 = _msvFile;
+            while (*pcVar4 != '\0') {
+                pcVar4 = pcVar4 + 1;
+            }
+            strcpy(pcVar4, ".msv");
             MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::resolveResourceFileName, DAT_ResourceManager::ptr)(
                 OpenSHC::IO::FRT_UNKNOWN, (char const*)((int)(_msvFile)));
             MACRO_CALL_MEMBER(OpenSHC::IO::FilePackager_Func::readMapHeader, FilePackagerObj::ptr)(FALSE);
@@ -118,8 +117,8 @@ namespace Synchrony {
                 WVar2 = *pWVar6;
                 pWVar6 = pWVar6 + 1;
             } while (WVar2 != L'\0');
-            MACRO_CALL(OpenSHC::IO_Func::Base64Encode)((char*)local_fb0,
-                (int)((int)((pWVar6 - (local_fb0 + 1) >> 1) * 2)), (char*)((int)(_msvFile)), &local_1794);
+            MACRO_CALL(OpenSHC::IO_Func::Base64Encode)(
+                (char*)local_fb0, (int)((pWVar6 - (local_fb0 + 1)) * 2), (char*)((int)(_msvFile)), &local_1794);
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
                 DAT_GameSynchronyState::ptr)(&local_17a0, 4, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
                 OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
@@ -130,12 +129,11 @@ namespace Synchrony {
                 DAT_GameSynchronyState::ptr)(&local_179c, 4, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
                 OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
             if (DAT_GameSynchronyState::instance.isHost == FALSE) {
-                pcVar4 = (char*)((int)&local_1794.lineCharacterCounter + 3);
-                do {
-                    pcVar5 = pcVar4;
-                    pcVar4 = pcVar5 + 1;
-                } while (pcVar5[1] != '\0');
-                strcpy(pcVar5 + 1, ".msv");
+                pcVar4 = _msvFile;
+                while (*pcVar4 != '\0') {
+                    pcVar4 = pcVar4 + 1;
+                }
+                strcpy(pcVar4, ".msv");
                 MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::resolveResourceFileName, DAT_ResourceManager::ptr)(
                     OpenSHC::IO::FRT_UNKNOWN, (char const*)((int)(_msvFile)));
                 BVar7 = MACRO_CALL_MEMBER(
