@@ -142,6 +142,13 @@ SEC_RNG::ptr->currentNumber1 % 4
   `if ((x & MASK) == VALUE) { return TRUE; } else { return FALSE; }`, with locals for the computed index and the loaded
   byte, reached 100%. Together with the range-check case above this means: folded expression and explicit
   `TRUE`/`FALSE` branches are two separate candidates, measure both.
+- A field read that every arm of an if/else-if chain needs is often read **inside each arm** in the original, not
+  hoisted above the chain. When the original shows the same load repeated once per arm (three `movsx [ebx + 0x24a]`
+  for one `unit.tribeID`, each followed by its own `test`/`jz` to the loop's continue trampoline), move the read and
+  its guard into every arm instead of declaring one local before the chain. This is the same duplicate-the-shared-
+  block rule as for `LAB_*` targets with several predecessors, applied to a read rather than a block, and it was
+  worth +33 points on its own (SHC_3BB0A8C1_0x004CFCD0 `aiCommandSiegeEngineTribes`, 59.4% -> 92.7%). Spell the last
+  arm's condition out as `else if (type == UT_S_SHIELD)` too when the assembly tests it, rather than a bare `else`.
 - A switch with fewer then 4 cases is often simplified and uses subtractions in assembly to compare the value:
   ```
   MOV          EAX,[DAT_SoundEffectsHelperData1.SEC_Section1079.  volumeLevel]
@@ -236,6 +243,30 @@ worth the last 8-10% on the whole `Map::Version::UpgradeMapUnitsTo_*` family (0x
 
 `!=` as the loop bound suppresses MSVC's unrolling. If the original ends the loop with `jne` while we emit `jl` and an
 unrolled body, write `for (int i = 1; i != 2500; ++i)` instead of `i < 2500` (SHC_3BB0A8C1_0x0053B340, 53% -> 91%).
+
+- Where the original compares a memory operand against a **zero register** (`xor ebp,ebp` once, then
+  `cmp dword ptr [..], ebp` and `mov dword ptr [..], ebp`) and we emit `test r,r` / `cmp ..,0`, that is **not** a
+  source-level difference and **not** a size-vs-speed flag. Using a zero register saves a byte per memory
+  comparison, so `/Os` looks like the explanation, but compiling with `/O2 /Os` per file (verified present in the
+  compile command) left `getTargetableBuildingForPlayerID`, `getSmallestPatrolTribe` and
+  `aiShouldAttackOrWaitForTeamCoordination` at *exactly* their previous percentages. The choice cascades into a
+  different register assignment and sometimes one extra spill of the loop counter, which is why these functions
+  stall in the 43-65% band with an otherwise instruction-for-instruction match. Treat it as allocator noise and
+  record it; it shows up across `AI::AICState` (`aiRecruitUnits`, `aiGiveRaidInstructions`,
+  `generateSiegeCreationInformation`, `getTargetableBuildingForPlayerID`, `getSmallestPatrolTribe`).
+- The "find the smallest tribe, or create one if a slot is stale" family all have the same shape: a loop whose
+  create-path wants to reach the function's shared store-and-return tail while skipping the tail's
+  `selected == 0` guard, which the original does with a jump into the middle of that block. There is no goto-free
+  form that is right for all of them, so **measure each one**; the three measured so far disagree:
+  - `getSmallestPatrolTribe` (0x004CCAF0): `break` into the shared tail is best at **65.2%**; duplicating the
+    stores into the create path drops it to 48.3%.
+  - `smallestTribeOfUnitType` (0x004CC990): the reverse - duplicating the stores gives **41.9%**, a `goto` into
+    the tail would give ~55%, and `break` into the shared tail was measured at 17%.
+  - `addUnitToSmallestBehaviourTypeTribe` (0x004CCD20): `break` into the shared tail, **64.5%**; neither hoisting
+    the `smallestSize` initialiser to the top (where the original's own `mov [esp+0x24],0x3e8` sits) nor reusing
+    the loop variable for the slot index moved it at all - both exact ties.
+  So the predecessor-count rule tells you a duplicate *may* be needed, not that it will help; `try_styles.py` is
+  the only way to settle it.
 
 ### GOTO
 
