@@ -104,7 +104,7 @@ namespace UI {
             (((OpenSHC::Game::Scenario::BarracksRecruitabilityShort*)(psVar4 + -7))->recruitability).archers = 1;
             *psVar4 = 1;
             psVar4 = psVar4 + 1;
-        } while ((int)psVar4 < 0x1653df6);
+        } while (psVar4 < DAT_MapPropertiesState::instance.SEC_MercRecruitable + 7);
         if (param_1 == 0) {
             pcVar5 = MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::mapNames_getLoadedMapNameForIndex,
                 DAT_ResourceManager::ptr)(DAT_MenuTextInputState::instance
@@ -341,7 +341,7 @@ namespace UI {
                 }
                 pUVar11 = pUVar11 + 0x248;
                 uVar12 = uVar12 + 1;
-            } while ((int)pUVar11 < 0x165141a);
+            } while (pUVar11 < &DAT_UnitsState::instance.units[2500].unitType);
         } else {
             if (DAT_MapMissionType::instance == 2) {
                 DAT_GameState::instance.mapAndTime.siegeInformation.archers = DAT_SiegeInformationArray::instance[0];
@@ -404,7 +404,7 @@ namespace UI {
                                 iVar9 = iVar9 + iVar7;
                             }
                             psVar4 = psVar4 + 0x248;
-                        } while ((int)psVar4 < 0x165162c);
+                        } while (psVar4 < &DAT_UnitsState::instance.units[2500].dying);
                         if (DAT_GameState::instance.mapAndTime.difficulty == 1) {
                             local_7e8 = 4;
                             iVar7 = (int)(iVar9 * -3 + (iVar9 * -3 >> 0x1f & 3U)) >> 2;
@@ -448,7 +448,7 @@ namespace UI {
                                 }
                                 psVar4 = psVar4 + 0x248;
                                 uVar12 = uVar12 + 1;
-                            } while ((int)psVar4 < 0x165162c);
+                            } while (psVar4 < &DAT_UnitsState::instance.units[2500].dying);
                             local_7e4 = local_7e4 + 1;
                         } while (local_7e4 < 3);
                     }
