@@ -70,6 +70,7 @@ namespace Synchrony {
                     0x2100);
                 DAT_TextureRenderCoreObject::instance
                     .field69_0x98[DAT_GameSynchronyState::instance.currentPlayerSlotID + 0x13] = 0x2100;
+                return;
             }
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
                 DAT_GameSynchronyState::ptr)(&_commandSenderIsHost, 1,
