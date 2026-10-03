@@ -43,70 +43,70 @@ namespace Synchrony {
         DAT_GameSynchronyState::instance.DAT_CommandSize = 500;
         DAT_GameSynchronyState::instance.DAT_GameCommandArray[DAT_GameSynchronyState::instance.DAT_CurrentGameCommandID]
             .time = 0;
-        if (DAT_GameSynchronyState::instance.DAT_CommandActionPlan != OpenSHC::Commands::GCS_SCHEDULE_AND_SEND) {
-            if (DAT_GameSynchronyState::instance.DAT_CommandActionPlan == OpenSHC::Commands::GCS_EXECUTE) {
-                MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
-                    DAT_GameSynchronyState::ptr)(local_20c, 500, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
-                    OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
-                MACRO_CALL_MEMBER(OpenSHC::Util::WideCharMultiByteState_Func::wideCharToMultiByteWithSize,
-                    DAT_WideCharMultiByteState::ptr)(
-                    DAT_GameSynchronyState::instance
-                        .DAT_PlayerNames[DAT_GameSynchronyState::instance.protocolInvokerPlayerID],
-                    (LPWSTR)((int)(local_20c)), 0xfa);
-                _playerName = DAT_GameSynchronyState::instance.DAT_PlayerNames
-                    + DAT_GameSynchronyState::instance.protocolInvokerPlayerID;
-                _finalResultsName = DAT_GameSynchronyState::instance.finalResults.names
-                    + DAT_GameSynchronyState::instance.protocolInvokerPlayerID;
-                do {
-                    _character = (*_playerName)[0];
-                    (*_finalResultsName)[0] = _character;
-                    _playerName = (char (*)[250])(*_playerName + 1);
-                    _finalResultsName = (char (*)[90])(*_finalResultsName + 1);
-                } while (_character != '\0');
-                _playerName = DAT_GameSynchronyState::instance.DAT_ChatMessageObjectPlayerNameArray;
-                _chatEventArray = DAT_GameSynchronyState::instance.DAT_ChatEventArray;
-                _clickedByPlayer = DAT_GameSynchronyState::instance.protocolInvokerPlayerID;
-                do {
-                    if (_chatEventArray->flag == 1) {
-                        if (_chatEventArray->subjectPlayer == _clickedByPlayer) {
-                            _clickerPlayerName = DAT_GameSynchronyState::instance.DAT_PlayerNames + _clickedByPlayer;
-                            pacVar1 = _playerName + -0x14;
-                            do {
-                                _character = (*_clickerPlayerName)[0];
-                                (*pacVar1)[0] = _character;
-                                _clickerPlayerName = (char (*)[250])(*_clickerPlayerName + 1);
-                                pacVar1 = (char (*)[250])(*pacVar1 + 1);
-                                _clickedByPlayer = DAT_GameSynchronyState::instance.protocolInvokerPlayerID;
-                            } while (_character != '\0');
-                        }
-                        if (_chatEventArray->objectPlayer == _clickedByPlayer) {
-                            _clickerPlayerName = DAT_GameSynchronyState::instance.DAT_PlayerNames + _clickedByPlayer;
-                            pacVar1 = _playerName;
-                            do {
-                                _character = (*_clickerPlayerName)[0];
-                                (*pacVar1)[0] = _character;
-                                _clickerPlayerName = (char (*)[250])(*_clickerPlayerName + 1);
-                                pacVar1 = (char (*)[250])(*pacVar1 + 1);
-                                _clickedByPlayer = DAT_GameSynchronyState::instance.protocolInvokerPlayerID;
-                            } while (_character != '\0');
-                        }
-                    }
-                    _chatEventArray = _chatEventArray + 1;
-                    _playerName = _playerName + 1;
-                } while (_chatEventArray < DAT_GameSynchronyState::instance.DAT_ChatEventArray + 20);
-            };
+        if (DAT_GameSynchronyState::instance.DAT_CommandActionPlan == OpenSHC::Commands::GCS_SCHEDULE_AND_SEND) {
+            _clickedByPlayer = 0xfa;
+            lpMultiByteStr = MACRO_CALL_MEMBER(
+                OpenSHC::Text::UserTextHandler_Func::getTextArrayPointer, DAT_UserTextHandlerState::ptr)(0);
+            MACRO_CALL_MEMBER(OpenSHC::Util::WideCharMultiByteState_Func::multiByteToWideCharWithSize,
+                DAT_WideCharMultiByteState::ptr)(local_20c, (LPCSTR)((int)(lpMultiByteStr)), _clickedByPlayer);
+            MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+                DAT_GameSynchronyState::ptr)(local_20c, 500, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
+                OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1);
+            DAT_GameSynchronyState::instance.DAT_CommandActionPlan = OpenSHC::Commands::GCS_EXECUTE;
+            ;
             return;
         }
-        _clickedByPlayer = 0xfa;
-        lpMultiByteStr = MACRO_CALL_MEMBER(
-            OpenSHC::Text::UserTextHandler_Func::getTextArrayPointer, DAT_UserTextHandlerState::ptr)(0);
-        MACRO_CALL_MEMBER(OpenSHC::Util::WideCharMultiByteState_Func::multiByteToWideCharWithSize,
-            DAT_WideCharMultiByteState::ptr)(local_20c, (LPCSTR)((int)(lpMultiByteStr)), _clickedByPlayer);
-        MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
-            DAT_GameSynchronyState::ptr)(local_20c, 500, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
-            OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1);
-        DAT_GameSynchronyState::instance.DAT_CommandActionPlan = OpenSHC::Commands::GCS_EXECUTE;
-        ;
+        if (DAT_GameSynchronyState::instance.DAT_CommandActionPlan == OpenSHC::Commands::GCS_EXECUTE) {
+            MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+                DAT_GameSynchronyState::ptr)(local_20c, 500, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
+                OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
+            MACRO_CALL_MEMBER(OpenSHC::Util::WideCharMultiByteState_Func::wideCharToMultiByteWithSize,
+                DAT_WideCharMultiByteState::ptr)(
+                DAT_GameSynchronyState::instance
+                    .DAT_PlayerNames[DAT_GameSynchronyState::instance.protocolInvokerPlayerID],
+                (LPWSTR)((int)(local_20c)), 0xfa);
+            _playerName = DAT_GameSynchronyState::instance.DAT_PlayerNames
+                + DAT_GameSynchronyState::instance.protocolInvokerPlayerID;
+            _finalResultsName = DAT_GameSynchronyState::instance.finalResults.names
+                + DAT_GameSynchronyState::instance.protocolInvokerPlayerID;
+            do {
+                _character = (*_playerName)[0];
+                (*_finalResultsName)[0] = _character;
+                _playerName = (char (*)[250])(*_playerName + 1);
+                _finalResultsName = (char (*)[90])(*_finalResultsName + 1);
+            } while (_character != '\0');
+            _playerName = DAT_GameSynchronyState::instance.DAT_ChatMessageObjectPlayerNameArray;
+            _chatEventArray = DAT_GameSynchronyState::instance.DAT_ChatEventArray;
+            _clickedByPlayer = DAT_GameSynchronyState::instance.protocolInvokerPlayerID;
+            do {
+                if (_chatEventArray->flag == 1) {
+                    if (_chatEventArray->subjectPlayer == _clickedByPlayer) {
+                        _clickerPlayerName = DAT_GameSynchronyState::instance.DAT_PlayerNames + _clickedByPlayer;
+                        pacVar1 = _playerName + -0x14;
+                        do {
+                            _character = (*_clickerPlayerName)[0];
+                            (*pacVar1)[0] = _character;
+                            _clickerPlayerName = (char (*)[250])(*_clickerPlayerName + 1);
+                            pacVar1 = (char (*)[250])(*pacVar1 + 1);
+                            _clickedByPlayer = DAT_GameSynchronyState::instance.protocolInvokerPlayerID;
+                        } while (_character != '\0');
+                    }
+                    if (_chatEventArray->objectPlayer == _clickedByPlayer) {
+                        _clickerPlayerName = DAT_GameSynchronyState::instance.DAT_PlayerNames + _clickedByPlayer;
+                        pacVar1 = _playerName;
+                        do {
+                            _character = (*_clickerPlayerName)[0];
+                            (*pacVar1)[0] = _character;
+                            _clickerPlayerName = (char (*)[250])(*_clickerPlayerName + 1);
+                            pacVar1 = (char (*)[250])(*pacVar1 + 1);
+                            _clickedByPlayer = DAT_GameSynchronyState::instance.protocolInvokerPlayerID;
+                        } while (_character != '\0');
+                    }
+                }
+                _chatEventArray = _chatEventArray + 1;
+                _playerName = _playerName + 1;
+            } while (_chatEventArray < DAT_GameSynchronyState::instance.DAT_ChatEventArray + 20);
+        }
     }
 
 }
