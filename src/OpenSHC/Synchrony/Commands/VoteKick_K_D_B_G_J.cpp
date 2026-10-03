@@ -56,6 +56,7 @@ namespace Synchrony {
                 MACRO_CALL(
                     OpenSHC::UI::MenuItems::General_Func::MenuItemActionHandler_General_LaunchOrQuitMultiplayerGameUnk)(
                     0x16);
+                return;
             }
             DAT_GameState::instance.mapAndTime.playerIsAlive[0] = 0;
             DAT_GameState::instance.mapAndTime.playerIsAlive[1] = 0;
