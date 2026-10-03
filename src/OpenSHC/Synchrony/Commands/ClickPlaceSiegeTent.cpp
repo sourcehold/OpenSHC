@@ -74,7 +74,7 @@ namespace Synchrony {
             return;
         }
         if (DAT_GameSynchronyState::instance.DAT_CommandActionPlan != OpenSHC::Commands::GCS_EXECUTE) {
-            DAT_GameSynchronyState::instance.DAT_CommandSize = 7;
+            return;
         }
         DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = DAT_GameSynchronyState::instance.DAT_CommandActionPlan;
         MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
