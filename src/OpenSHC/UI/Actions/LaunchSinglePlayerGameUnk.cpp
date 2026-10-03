@@ -83,8 +83,7 @@ namespace UI {
         MenuViewType menuID;
         int local_7e8;
         undefined4 local_7e4;
-        char local_7e0[4];
-        char local_7dc[1004];
+        char local_7e0[1008];
         char _mapU3StringCopy[1004];
         uint local_4;
         iVar8 = DAT_GameSynchronyState::instance.currentPlayerSlotID;
