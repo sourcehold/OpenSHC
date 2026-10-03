@@ -59,7 +59,7 @@ namespace Synchrony {
             .time = 0;
         if (DAT_GameSynchronyState::instance.DAT_CommandActionPlan != OpenSHC::Commands::GCS_SCHEDULE_AND_SEND) {
             if ((DAT_GameSynchronyState::instance.DAT_CommandActionPlan == OpenSHC::Commands::GCS_EXECUTE)
-                && (DAT_GameSynchronyState::instance.protocolInvokerPlayerID - 1U < 8)) {
+                && (DAT_GameSynchronyState::instance.protocolInvokerPlayerID - 1U <= 7)) {
                 _tauntOrChat[1] = 0;
                 _tauntOrChat[2] = 0;
                 _tauntOrChat[3] = 0;
