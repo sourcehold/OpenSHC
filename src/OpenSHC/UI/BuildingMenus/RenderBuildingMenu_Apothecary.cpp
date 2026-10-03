@@ -48,7 +48,10 @@ namespace UI {
         /*
           added by script: "Apothecary"
          */
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_HEALERS, 0), iVar3, iVar1, TVar4, BVar5, iVar6, BVar7, iVar8);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_HEALERS, 0),
+            iVar3, iVar1, TVar4, BVar5, iVar6, BVar7, iVar8);
         iVar8 = 0;
         BVar7 = FALSE;
         iVar6 = 0x12;
@@ -59,10 +62,13 @@ namespace UI {
         /*
           added by script: "Immunity From Disease"
          */
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_HEALERS, 3), iVar3, iVar1, TVar4, BVar5, iVar6, BVar7, iVar8);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_HEALERS, 3),
+            iVar3, iVar1, TVar4, BVar5, iVar6, BVar7, iVar8);
         iVar1
             = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID].healerCount;
-        if (2 < iVar1) {
+        if (iVar1 >= 3) {
             iVar1 = 3;
         }
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
