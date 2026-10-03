@@ -47,29 +47,24 @@ namespace UI {
             int blendStrength;
             iVar1 = -1;
             UI_MissionModeIntent::instance = FALSE;
-            if (DAT_MenuTextInputState::instance.DAT_MenuOptionsActionParameter < 0x2d) {
-                if (DAT_MenuTextInputState::instance.DAT_MenuOptionsActionParameter < 0x2b) {
-                    switch (DAT_MenuTextInputState::instance.DAT_MenuOptionsActionParameter) {
-                    case 7:
-                    case 9:
-                    case 0x1e:
-                        goto switchD_004933bd_caseD_7;
-                    case -7:
-                        iVar1 = -DAT_MenuTextInputState::instance.DAT_MenuOptionsActionParameter;
-                    }
-                    goto switchD_004933bd_caseD_fffffffa;
-                }
-            } else if ((DAT_MenuTextInputState::instance.DAT_MenuOptionsActionParameter != 0x2f)
-                && (DAT_MenuTextInputState::instance.DAT_MenuOptionsActionParameter != 0x31)) {
-                if (DAT_MenuTextInputState::instance.DAT_MenuOptionsActionParameter == 1000) {
-                    iVar1 = 7;
-                    UI_MissionModeIntent::instance = TRUE;
-                }
-                goto switchD_004933bd_caseD_fffffffa;
+            switch (DAT_MenuTextInputState::instance.DAT_MenuOptionsActionParameter) {
+            case -7:
+                iVar1 = -DAT_MenuTextInputState::instance.DAT_MenuOptionsActionParameter;
+                break;
+            case 7:
+            case 9:
+            case 0x1e:
+            case 0x2b:
+            case 0x2c:
+            case 0x2f:
+            case 0x31:
+                iVar1 = DAT_MenuTextInputState::instance.DAT_MenuOptionsActionParameter;
+                break;
+            case 1000:
+                iVar1 = 7;
+                UI_MissionModeIntent::instance = TRUE;
+                break;
             }
-        switchD_004933bd_caseD_7:
-            iVar1 = DAT_MenuTextInputState::instance.DAT_MenuOptionsActionParameter;
-        switchD_004933bd_caseD_fffffffa:
             if (DAT_MenuTextInputState::instance.DAT_MenuOptionsActionParameter == 2000) {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderBanner,
                     DAT_PencilRenderCore::ptr)(x, y, width, height);
