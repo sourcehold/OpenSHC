@@ -108,7 +108,8 @@ namespace Synchrony {
                     0x50, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
                     OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
                 pacVar3 = DAT_GameSynchronyState::instance.DAT_PlayerNames + _receivedCurrentPlayerSlotID;
-                iVar6 = (_receivedCurrentPlayerSlotID * 0x5a + 0x1a26d2c) - (int)pacVar3;
+                iVar6 = (int)DAT_GameSynchronyState::instance.finalResults.names[_receivedCurrentPlayerSlotID]
+                    - (int)pacVar3;
                 do {
                     cVar1 = (*pacVar3)[0];
                     *(char*)((int)pacVar3 + iVar6) = cVar1;
