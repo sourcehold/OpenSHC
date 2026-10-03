@@ -50,7 +50,7 @@ namespace UI {
         int iVar11;
         int blendStrength;
         int local_4;
-        iVar2 = DAT_MenuHandlerState::instance.y;
+        iVar2 = DAT_MenuHandlerState::instance.y + 0x1b0;
         iVar1 = DAT_MenuHandlerState::instance.x;
         DAT_00b98448::instance = DAT_00b98448::instance + 1;
         if (0x28 < (int)DAT_00b98448::instance) {
@@ -75,7 +75,7 @@ namespace UI {
                 DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 8),
             iVar5, iVar3, TVar6, BVar7, iVar8, BVar9, iVar10);
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderLoadedGfx,
-            DAT_TextureRenderCoreObject::ptr)(0, iVar1 + 0x78, iVar2 + 0x1e2);
+            DAT_TextureRenderCoreObject::ptr)(0, iVar1 + 0x78, iVar2 + 0x32);
         iVar11 = 0;
         BVar9 = FALSE;
         iVar10 = 0x12;
@@ -83,7 +83,7 @@ namespace UI {
         TVar6 = OpenSHC::Text::TTA_LEFT;
         iVar3 = iVar1 + 0xdc;
         iVar5 = iVar3;
-        iVar8 = iVar2 + 0x1d6;
+        iVar8 = iVar2 + 0x26;
         /*
           added by script: "Total priests"
          */
@@ -94,14 +94,14 @@ namespace UI {
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
             DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                 .priestCountUnk,
-            iVar1 + 0xe2, iVar2 + 0x1d6, OpenSHC::Text::TTA_LEFT, 0, 0x12, TRUE, 0);
+            iVar1 + 0xe2, iVar2 + 0x26, OpenSHC::Text::TTA_LEFT, 0, 0x12, TRUE, 0);
         iVar11 = 0;
         BVar9 = FALSE;
         iVar10 = 0x12;
         BVar7 = 0;
         TVar6 = OpenSHC::Text::TTA_LEFT;
         iVar5 = iVar3;
-        iVar8 = iVar2 + 0x1ec;
+        iVar8 = iVar2 + 0x3c;
         /*
           added by script: "Blessed People %"
          */
@@ -112,14 +112,14 @@ namespace UI {
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
             DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                 .blessedPeoplePercentage,
-            iVar1 + 0xe1, iVar2 + 0x1ec, OpenSHC::Text::TTA_LEFT, 0, 0x12, TRUE, 0);
+            iVar1 + 0xe1, iVar2 + 0x3c, OpenSHC::Text::TTA_LEFT, 0, 0x12, TRUE, 0);
         iVar11 = 0;
         BVar9 = FALSE;
         iVar10 = 0x12;
         BVar7 = 0;
         TVar6 = OpenSHC::Text::TTA_LEFT;
         iVar5 = iVar3;
-        iVar8 = iVar2 + 0x202;
+        iVar8 = iVar2 + 0x52;
         /*
           added by script: "Popularity Effect:"
          */
@@ -139,7 +139,7 @@ namespace UI {
             iVar5 = 0x5e < iVar5 ? 200 : 150;
         }
         MACRO_CALL(OpenSHC::UI::Rendering_Func::TransformAndRenderPercentage)(
-            DAT_TextManagerObject::instance.currentXOffset_0x0 + 0xf0 + iVar1, iVar2 + 0x202, iVar5, TRUE);
+            DAT_TextManagerObject::instance.currentXOffset_0x0 + 0xf0 + iVar1, iVar2 + 0x52, iVar5, TRUE);
         iVar5 = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                     .blessedPeoplePercentage;
         if (iVar5 < 0x19) {
@@ -150,7 +150,7 @@ namespace UI {
             iVar11 = 0x12;
             BVar7 = 0;
             TVar6 = OpenSHC::Text::TTA_LEFT;
-            iVar5 = iVar2 + 0x218;
+            iVar5 = iVar2 + 0x68;
             iVar8 = iVar3;
             iVar10 = iVar5;
             /*
@@ -187,7 +187,7 @@ namespace UI {
             iVar10 = 0x12;
             BVar7 = 0;
             TVar6 = OpenSHC::Text::TTA_LEFT;
-            iVar5 = iVar2 + 0x218;
+            iVar5 = iVar2 + 0x68;
             iVar8 = iVar3;
             /*
               added by script: "Max bonus achieved."
@@ -215,7 +215,7 @@ namespace UI {
         } else {
             iVar5 = 0x20;
         }
-        iVar8 = iVar2 + 0x23c;
+        iVar8 = iVar2 + 0x8c;
         iVar11 = 0;
         BVar9 = FALSE;
         iVar10 = 0x12;
@@ -241,7 +241,7 @@ namespace UI {
         }
         if (iVar3 != 0) {
             MACRO_CALL(OpenSHC::UI::Rendering_Func::TransformAndRenderPercentage)(
-                DAT_TextManagerObject::instance.currentXOffset_0x0 + 0xfa + iVar1, iVar2 + 0x23c, iVar3, TRUE);
+                DAT_TextManagerObject::instance.currentXOffset_0x0 + 0xfa + iVar1, iVar2 + 0x8c, iVar3, TRUE);
         }
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
     }
