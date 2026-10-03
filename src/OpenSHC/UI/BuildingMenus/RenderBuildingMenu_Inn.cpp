@@ -59,7 +59,10 @@ namespace UI {
         /*
           added by script: "Inn"
          */
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_INN, 0), iVar4, iVar1, TVar5, BVar6, iVar7, BVar8, iVar9);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_INN, 0),
+            iVar4, iVar1, TVar5, BVar6, iVar7, BVar8, iVar9);
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
             OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS2, 0xa9, DAT_MenuHandlerState::instance.x + 0xb4,
@@ -79,7 +82,10 @@ namespace UI {
         /*
           added by script: "Flagons of ale"
          */
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_INN, 3), iVar4, iVar1, TVar5, BVar6, iVar7, BVar8, iVar9);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_INN, 3),
+            iVar4, iVar1, TVar5, BVar6, iVar7, BVar8, iVar9);
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
             (int)DAT_BuildingsState::instance.buildings[iVar3].flagonsOfAleOrCheeseOrReleaseDogs,
             DAT_MenuHandlerState::instance.x + 0xe0, DAT_MenuHandlerState::instance.y + 0x1d7, OpenSHC::Text::TTA_LEFT,
@@ -94,7 +100,10 @@ namespace UI {
         /*
           added by script: "Working Inns"
          */
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_INN, 7), iVar1, iVar3, TVar5, BVar6, iVar4, BVar8, iVar7);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_INN, 7),
+            iVar1, iVar3, TVar5, BVar6, iVar4, BVar8, iVar7);
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
             DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                 .workingInnsCount,
@@ -122,7 +131,10 @@ namespace UI {
         /*
           added by script: "Population coverage"
          */
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_INN, 5), iVar4, iVar1, TVar5, BVar6, iVar7, BVar8, iVar9);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_INN, 5),
+            iVar4, iVar1, TVar5, BVar6, iVar7, BVar8, iVar9);
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(iVar3,
             DAT_MenuHandlerState::instance.x + 0xb8, DAT_MenuHandlerState::instance.y + 0x1fb, OpenSHC::Text::TTA_LEFT,
             0, 0x12, TRUE, 0);
@@ -136,7 +148,7 @@ namespace UI {
         } else if (iVar3 < 0x4b) {
             iVar1 = 100;
         } else {
-            iVar1 = ((99 < iVar3) - 1 & 0xffffffce) + 200;
+            iVar1 = iVar3 >= 100 ? 200 : 150;
         }
         MACRO_CALL(OpenSHC::UI::Rendering_Func::TransformAndRenderPercentage)(
             DAT_TextManagerObject::instance.currentXOffset_0x0 + 0xd6 + DAT_MenuHandlerState::instance.x,
@@ -148,7 +160,7 @@ namespace UI {
         } else if (iVar3 < 0x4b) {
             iVar3 = 0x4b;
         } else {
-            if (99 < iVar3) {
+            if (iVar3 >= 100) {
                 iVar7 = 0;
                 BVar8 = FALSE;
                 iVar4 = 0x12;
@@ -159,7 +171,10 @@ namespace UI {
                 /*
                   added by script: "Maximum bonus achieved"
                  */
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_INN, 8), iVar1, iVar3, TVar5, BVar6, iVar4, BVar8, iVar7);
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_INN, 8),
+                    iVar1, iVar3, TVar5, BVar6, iVar4, BVar8, iVar7);
             }
             iVar3 = 100;
         }
@@ -173,7 +188,10 @@ namespace UI {
         /*
           added by script: "Next level at"
          */
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_INN, 6), iVar4, iVar1, TVar5, BVar6, iVar7, BVar8, iVar9);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_INN, 6),
+            iVar4, iVar1, TVar5, BVar6, iVar7, BVar8, iVar9);
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(iVar3,
             DAT_MenuHandlerState::instance.x + 0xb8, DAT_MenuHandlerState::instance.y + 0x20d, OpenSHC::Text::TTA_LEFT,
             0, 0x12, TRUE, 0);
