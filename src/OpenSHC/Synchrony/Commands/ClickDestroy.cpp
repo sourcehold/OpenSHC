@@ -68,6 +68,7 @@ namespace Synchrony {
                     = DAT_TileMapState::instance
                           .MiscDisplayLayer[DAT_GameSynchronyState::instance.DAT_GameCommandParam0]
                     & 0xfbff;
+                return;
             }
             if ((int)((uint)
                           DAT_TileMapState::instance.HeightLayer[DAT_GameSynchronyState::instance.DAT_GameCommandParam0]
