@@ -358,7 +358,7 @@ namespace UI {
         } else if (iVar16 < 0x4b) {
             iVar16 = 100;
         } else {
-            iVar16 = ((0x5e < iVar16) - 1 & 0xffffffce) + 200;
+            iVar16 = 0x5e < iVar16 ? 200 : 150;
         }
         if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID].ownsChurchUnk
             != 0) {
@@ -398,7 +398,7 @@ namespace UI {
         } else if (iVar21 < 0x4b) {
             iVar21 = 100;
         } else {
-            iVar21 = ((99 < iVar21) - 1 & 0xffffffce) + 200;
+            iVar21 = 99 < iVar21 ? 200 : 150;
         }
         if (DAT_GameCore::instance.field77_0x144 == 0) {
             MACRO_CALL(OpenSHC::UI::Rendering_Func::TransformAndRenderPercentage)(
