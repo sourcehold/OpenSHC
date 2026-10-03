@@ -98,7 +98,9 @@ namespace Synchrony {
                         DAT_GameState::ptr)(
                         (OpenSHC::Commands::MappersEnum)(DAT_GameSynchronyState::instance.DAT_GameCommandParam2),
                         DAT_GameSynchronyState::instance.protocolInvokerPlayerID, FALSE),
-                    iVar1 == 0)) {}
+                    iVar1 == 0)) {
+                return;
+            }
             DAT_BuildingsState::instance.DAT_DraggedTileCountVerified
                 = DAT_GameSynchronyState::instance.DAT_GameCommandParam5;
             iVar1 = DAT_GameSynchronyState::instance.field299_0x109e7c;
