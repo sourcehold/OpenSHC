@@ -67,30 +67,31 @@ namespace Synchrony {
             OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
         _entity = (int)local_4[0];
         DAT_GameSynchronyState::instance.DAT_GameCommandParam1 = _entity;
-        if (DAT_GameSynchronyState::instance.DAT_GameCommandParam0 == 1) {
+        switch (DAT_GameSynchronyState::instance.DAT_GameCommandParam0) {
+        case 2:
+            UVar1 = DAT_UnitsState::instance.units[_entity].unitType;
+            iVar2 = (int)DAT_TileMapState::instance.BuildingLayer[DAT_UnitsState::instance.units[_entity].tile];
+            if (UVar1 == OpenSHC::Map::Units::UT_S_MANGONEL) {
+                if (iVar2 != 0) {
+                    DAT_BuildingsState::instance.buildings[iVar2].containsSiegeMangonel1OrBallista2 = 0;
+                }
+                MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::giveBackResourceForDestroyedBuilding,
+                    DAT_BuildingsState::ptr)(
+                    -3, (int)((int)(DAT_GameSynchronyState::instance.protocolInvokerPlayerID)), 100);
+            } else if (UVar1 == OpenSHC::Map::Units::UT_S_BALLISTA) {
+                if (iVar2 != 0) {
+                    DAT_BuildingsState::instance.buildings[iVar2].containsSiegeMangonel1OrBallista2 = 0;
+                }
+                MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::giveBackResourceForDestroyedBuilding,
+                    DAT_BuildingsState::ptr)(
+                    -4, (int)((int)(DAT_GameSynchronyState::instance.protocolInvokerPlayerID)), 100);
+            }
+            DAT_UnitsState::instance.units[_entity].logicalState = OpenSHC::Map::Units::ULS_REMOVE;
+            return;
+        case 1:
             DAT_EntityState::instance.entityArray[_entity].logicalState = 3;
+            return;
         }
-        if (DAT_GameSynchronyState::instance.DAT_GameCommandParam0 != 2) {}
-        UVar1 = DAT_UnitsState::instance.units[_entity].unitType;
-        iVar2 = (int)DAT_TileMapState::instance.BuildingLayer[DAT_UnitsState::instance.units[_entity].tile];
-        if (UVar1 == OpenSHC::Map::Units::UT_S_MANGONEL) {
-            if (iVar2 != 0) {
-                DAT_BuildingsState::instance.buildings[iVar2].containsSiegeMangonel1OrBallista2 = 0;
-            }
-            iVar2 = -3;
-        } else {
-            if (UVar1 != OpenSHC::Map::Units::UT_S_BALLISTA)
-                goto LAB_00484c1b;
-            if (iVar2 != 0) {
-                DAT_BuildingsState::instance.buildings[iVar2].containsSiegeMangonel1OrBallista2 = 0;
-            }
-            iVar2 = -4;
-        }
-        MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::giveBackResourceForDestroyedBuilding,
-            DAT_BuildingsState::ptr)(
-            iVar2, (int)((int)(DAT_GameSynchronyState::instance.protocolInvokerPlayerID)), 100);
-    LAB_00484c1b:
-        DAT_UnitsState::instance.units[_entity].logicalState = OpenSHC::Map::Units::ULS_REMOVE;
     }
 
 }

@@ -35,7 +35,6 @@ namespace Synchrony {
         char cVar1;
         char (*pacVar2)[250];
         int iVar3;
-        bool _isHost;
         int _receivedPlayerSlotID;
         int local_c;
         int _selectedLordType;
@@ -60,10 +59,9 @@ namespace Synchrony {
                     DAT_GameSynchronyState::ptr)(&_selectedLordType, 4,
                     OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
                     OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
-                _isHost = DAT_GameSynchronyState::instance.isHost != FALSE;
                 DAT_GameCore::instance.lordIcons[_receivedPlayerSlotID] = local_c;
                 DAT_GameCore::instance.selectedLordTypes[_receivedPlayerSlotID] = _selectedLordType;
-                if (_isHost) {
+                if (DAT_GameSynchronyState::instance.isHost != FALSE) {
                     if (_receivedPlayerSlotID != _somePlayerInformation) {
                         DAT_GameSynchronyState::instance.currentPlayerFullIDArray[_receivedPlayerSlotID]
                             = DAT_GameSynchronyState::instance.DAT_CurrentPlayerFullIDArray2[_somePlayerInformation];
