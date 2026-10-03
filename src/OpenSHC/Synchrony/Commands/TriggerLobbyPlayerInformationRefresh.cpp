@@ -46,7 +46,7 @@ namespace Synchrony {
             return;
         }
         if ((DAT_GameSynchronyState::instance.DAT_CommandActionPlan == OpenSHC::Commands::GCS_EXECUTE)
-            && (DAT_GameSynchronyState::instance.currentPlayerSlotID - 1U < 8)) {
+            && (DAT_GameSynchronyState::instance.currentPlayerSlotID - 1U <= 7)) {
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
                 DAT_GameSynchronyState::ptr)(&_param0, 4, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
                 OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
