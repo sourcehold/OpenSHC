@@ -38,7 +38,7 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x00485830
     void Commands::SetUnitAssemblyPoint()
     {
-        BuildingTypeShort BVar1;
+        int BVar1;
         uint uVar2;
         uint _y;
         int iVar3;
