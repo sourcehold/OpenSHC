@@ -70,7 +70,7 @@ namespace UI {
         iVar9 = DAT_00b95b68::instance * 9;
         DAT_00b9845c::instance = DAT_00b9845c::instance + 1;
         local_14 = 0;
-        if (0x28 < DAT_00b9845c::instance) {
+        if (0x28 < (int)DAT_00b9845c::instance) {
             DAT_00b9845c::instance = 0;
             MACRO_CALL(OpenSHC::UI::Helpers_Func::CountPlayerUnitsByType)();
         }
