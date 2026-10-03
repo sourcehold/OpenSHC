@@ -7,6 +7,7 @@
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
 #include "OpenSHC/Commands/GameCommandType.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
+#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -25,17 +26,16 @@
 #include "OpenSHC/Globals/DAT_PencilRenderCore.hpp"
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 
 namespace OpenSHC {
 namespace UI {
 
     using OpenSHC::Commands::GameCommandType;
     using OpenSHC::DE::SHCDE::eTextSections;
+    using OpenSHC::Rendering::Colors::BGR24;
     using OpenSHC::Rendering::Enums::RenderTarget;
     using OpenSHC::Text::TextAlignment;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-    using OpenSHC::Rendering::Colors::BGR24;
 
     /*
       WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
