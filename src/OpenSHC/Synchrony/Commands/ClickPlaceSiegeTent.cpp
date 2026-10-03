@@ -104,7 +104,9 @@ namespace Synchrony {
                 OpenSHC::Game::GameStateStructures_Func::checkRequiredResourcesForBuildingOrPlanToBuy,
                 DAT_GameState::ptr)(
                 commandBuildingType, (int)((int)(DAT_GameSynchronyState::instance.protocolInvokerPlayerID)), FALSE);
-            if (iVar2 == 0) {}
+            if (iVar2 == 0) {
+                return;
+            }
         }
     LAB_0048290e:
         if ((((DAT_GameSynchronyState::instance.DAT_GameCommandParam3 == OpenSHC::Map::Units::UT_S_MANGONEL)
@@ -132,7 +134,9 @@ namespace Synchrony {
                                        + ((int)DAT_GameSynchronyState::instance.DAT_GameCommandParam0 >> 0x1f & 7U))
                                     >> 3)]]
                     .containsSiegeMangonel1OrBallista2
-                != 0)) {}
+                != 0)) {
+            return;
+        }
         _unitID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
             DAT_GameSynchronyState::instance.protocolInvokerPlayerID,
             (int)((int)(DAT_GameSynchronyState::instance.protocolInvokerPlayerID)),
