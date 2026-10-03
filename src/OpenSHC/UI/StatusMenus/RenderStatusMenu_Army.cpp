@@ -154,6 +154,7 @@ namespace UI {
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 0x1e),
                     iVar5, iVar4, TVar7, BVar8, iVar9, BVar10, iVar11);
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
+                return;
             }
             DAT_TextManagerObject::instance.field8_0x20 = 1;
             MACRO_CALL_MEMBER(
