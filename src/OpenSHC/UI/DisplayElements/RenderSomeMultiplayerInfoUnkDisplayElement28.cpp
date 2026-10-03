@@ -159,7 +159,8 @@ namespace UI {
                         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 0x5b),
                         iVar2, iVar3, TVar4, BVar5, iVar6, BVar7, iVar8);
-                    if (DAT_MouseState::instance.leftClickStart == 0) {}
+                    if (DAT_MouseState::instance.leftClickStart == 0)
+                        return;
                     DAT_GameSynchronyState::instance.DAT_SomeTime = timeGetTime();
                     DAT_GameSynchronyState::instance.field131_0xcd4 = 0x42;
                     MACRO_CALL_MEMBER(
