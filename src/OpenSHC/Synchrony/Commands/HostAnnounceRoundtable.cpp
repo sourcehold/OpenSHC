@@ -69,7 +69,9 @@ namespace Synchrony {
             if ((DAT_GameSynchronyState::instance.isHost != FALSE)
                 || (DAT_GameCore::instance.currentMenuViewType == OpenSHC::UI::Enums::MVT_LOBBY_MENU)) {
                 if (DAT_MenuModalComposition1::instance.activeModalDialogID == OpenSHC::UI::Enums::MMT_NONE) {
-                    if (local_1 == '\0') {}
+                    if (local_1 == '\0') {
+                        return;
+                    }
                     MACRO_CALL_MEMBER(OpenSHC::UI::MenuModalComposition_Func::activateModalDialog,
                         DAT_MenuModalComposition1::ptr)(OpenSHC::UI::Enums::MMT_ROUNDTABLE, FALSE);
                 }
