@@ -51,7 +51,7 @@ namespace Synchrony {
                     *piVar1 = 0;
                 }
                 piVar1 = piVar1 + 1;
-            } while (piVar1 < DAT_GameSynchronyState::instance.syncRelatedStatusArray + 9);
+            } while ((int)piVar1 < (int)(DAT_GameSynchronyState::instance.syncRelatedStatusArray + 9));
             DAT_GameSynchronyState::instance.announcementReceiveTime = timeGetTime();
             DAT_GameSynchronyState::instance.announcementReceivedBool = FALSE;
             DAT_GameSynchronyState::instance
