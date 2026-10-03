@@ -71,6 +71,20 @@ python reccmp_report.py diff someFunction                                # inspe
 python commit_progress_batch.py Map/Units "someFunction=LTCG ecx reuse"
 ```
 
+## Which `norm` is which
+
+The two tools print a column called `norm` and they do **not** mean the same thing:
+
+- `reccmp_report.py`'s `norm` ignores call/tail-jump targets and resolver addresses only. It does **not** normalize
+  registers, so a function that matches the original instruction-for-instruction except that two registers are
+  swapped still reports `norm` equal to its raw percentage. Do not read a low `norm` here as "real structure differs".
+- `diff_triage.py`'s `norm` does normalize registers and stack slots, and is the one that tells you whether source
+  work can still pay.
+
+`diff_triage.py` also silently **skips** functions whose blocks it cannot pair - 12 of 68 in one `AI::AICState` run,
+and they were exactly the lowest-scoring ones. If a function you care about is missing from its table, fall back to
+reading `reccmp_report.py diff NAME` and judging by eye whether the two streams differ only in register names.
+
 ## Reading `diff_triage.py`
 
 The two ratios are the quickest way to tell whether more source work can pay:
