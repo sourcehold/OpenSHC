@@ -42,25 +42,28 @@ namespace UI {
                     = _displayElementPtr->y_0x4 + DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetY;
                 _positionModifier = _displayElementPtr->positionModifier_0x1c
                     & (OpenSHC::UI::Enums::DEPM_TOWARDS_MID_Y | OpenSHC::UI::Enums::DEPM_RESOLUTION_Y);
-                if (_positionModifier != OpenSHC::UI::Enums::DEPM_RESOLUTION_Y) {
-                    if (_positionModifier == OpenSHC::UI::Enums::DEPM_TOWARDS_MID_Y) {
-                        _yPos = _yPos + -600 + DAT_WindowAndDirectDraw::instance.resolutionY;
-                        if (((DAT_GameCore::instance.currentMenuViewType == OpenSHC::UI::Enums::MVT_BUILD_MENU)
-                                || (DAT_GameCore::instance.currentMenuViewType
-                                    == OpenSHC::UI::Enums::MVT_MAP_EDITOR_LANDSCAPING))
-                            && ((DAT_GameCore::instance.activeMenuTab.tabType
-                                    == OpenSHC::UI::Enums::BASMTT_SIEGETENT_SIEGETOWER
-                                || (DAT_GameCore::instance.activeMenuTab.tabType
-                                    == OpenSHC::UI::Enums::BASMTT_SIEGETENT_SHIELD)))) {
-                            _yPos = _yPos + 0x80;
-                        }
-                        if (DAT_GameCore::instance.currentMenuViewType
-                            == OpenSHC::UI::Enums::MVT_BUILDING_AND_STATUS_MENU) {
-                            _yPos = _yPos + -0x14;
-                        }
-                    } else {
-                        _yPos = _yPos + DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
+                switch (_positionModifier) {
+                case OpenSHC::UI::Enums::DEPM_RESOLUTION_Y:
+                    break;
+                case OpenSHC::UI::Enums::DEPM_TOWARDS_MID_Y: {
+                    _yPos = _yPos + -600 + DAT_WindowAndDirectDraw::instance.resolutionY;
+                    if (((DAT_GameCore::instance.currentMenuViewType == OpenSHC::UI::Enums::MVT_BUILD_MENU)
+                            || (DAT_GameCore::instance.currentMenuViewType
+                                == OpenSHC::UI::Enums::MVT_MAP_EDITOR_LANDSCAPING))
+                        && ((DAT_GameCore::instance.activeMenuTab.tabType
+                                == OpenSHC::UI::Enums::BASMTT_SIEGETENT_SIEGETOWER
+                            || (DAT_GameCore::instance.activeMenuTab.tabType
+                                == OpenSHC::UI::Enums::BASMTT_SIEGETENT_SHIELD)))) {
+                        _yPos = _yPos + 0x80;
                     }
+                    if (DAT_GameCore::instance.currentMenuViewType
+                        == OpenSHC::UI::Enums::MVT_BUILDING_AND_STATUS_MENU) {
+                        _yPos = _yPos + -0x14;
+                    }
+                    break;
+                }
+                default:
+                    _yPos = _yPos + DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
                 }
                 _xPosModifier = _displayElementPtr->positionModifier_0x1c
                     & (OpenSHC::UI::Enums::DEPM_TOWARDS_MID_X | OpenSHC::UI::Enums::DEPM_RESOLUTION_X);
