@@ -51,16 +51,18 @@ namespace AI {
             if (DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType == 21)
                 continue;
 
-            int tribeID = DAT_UnitsState::instance.units[unitID].tribeID;
-            if (tribeID == 0)
-                continue;
-
             if (DAT_UnitsState::instance.units[unitID].unitType == UT_S_TOWER) {
+                int tribeID = DAT_UnitsState::instance.units[unitID].tribeID;
+                if (tribeID == 0)
+                    continue;
                 if (*(int*)((int)DAT_TroopValueState::instance.attackInfo.wideValuesArray + playerID * 0x177bc - 4)
                     != 0)
                     MACRO_CALL_MEMBER(TribesState_Func::assignAttackTargetsForTribe, DAT_TribesState::ptr)(
                         tribeID, STBT_0x414);
             } else if (DAT_UnitsState::instance.units[unitID].unitType == UT_S_BATTERINGRAM) {
+                int tribeID = DAT_UnitsState::instance.units[unitID].tribeID;
+                if (tribeID == 0)
+                    continue;
                 if (*(int*)((int)DAT_TroopValueState::instance.attackInfo.gateValuesArray + playerID * 0x177bc - 4)
                     != 0)
                     MACRO_CALL_MEMBER(TribesState_Func::assignAttackTargetsForTribe, DAT_TribesState::ptr)(
@@ -69,7 +71,10 @@ namespace AI {
                     != 0)
                     MACRO_CALL_MEMBER(TribesState_Func::assignAttackTargetsForTribe, DAT_TribesState::ptr)(
                         tribeID, STBT_0x413);
-            } else {
+            } else if (DAT_UnitsState::instance.units[unitID].unitType == UT_S_SHIELD) {
+                int tribeID = DAT_UnitsState::instance.units[unitID].tribeID;
+                if (tribeID == 0)
+                    continue;
                 if (shieldCount >= 3)
                     continue;
 
