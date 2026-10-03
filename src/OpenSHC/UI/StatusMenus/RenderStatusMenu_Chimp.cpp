@@ -64,6 +64,7 @@ namespace UI {
             if (numInGroup == 0) {
                 MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     OpenSHC::UI::Enums::MVT_BUILD_MENU, 0);
+                return;
             }
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::getPeasantGmID, DAT_UnitsState::ptr)(
                 DAT_BuildingsState::instance.menuSelectedUnitID);
