@@ -94,7 +94,10 @@ namespace UI {
                     /*
                       added by script: "Single-Player"
                      */
-                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MAPEDIT, 0xc), iVar4, iVar1, TVar6, BVar8, iVar10, BVar11, iVar12);
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                            DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MAPEDIT, 0xc),
+                        iVar4, iVar1, TVar6, BVar8, iVar10, BVar11, iVar12);
                     switch (DAT_MapPropertiesState::instance.SEC_U3_MapType2_1) {
                     case OpenSHC::Map::MT_SIEGE:
                         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen,
@@ -153,7 +156,10 @@ namespace UI {
                     /*
                       added by script: "Multi-Player"
                      */
-                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MAPEDIT, 0xd), iVar4, iVar1, TVar6, BVar8, iVar10, BVar11, iVar12);
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                            DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MAPEDIT, 0xd),
+                        iVar4, iVar1, TVar6, BVar8, iVar10, BVar11, iVar12);
                 }
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     " - ", DAT_MenuHandlerState::instance.x + 0x8c, DAT_MenuHandlerState::instance.y + 0x23,
@@ -292,7 +298,11 @@ namespace UI {
                 /*
                   added by script: "Flag this map as Balanced"
                  */
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MAPEDIT, 0x2d), iVar4, iVar1, TVar6, uVar7, uVar9, iVar10, BVar11, iVar12);
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MAPEDIT, 0x2d),
+                    iVar4, iVar1, TVar6, uVar7, uVar9, iVar10, BVar11, iVar12);
             }
             if (DAT_MapEditorProperties_ClickedButton::instance == -4) {
                 iVar12 = 0;
@@ -306,7 +316,11 @@ namespace UI {
                 /*
                   added by script: "Flag this map as Un-Balanced"
                  */
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MAPEDIT, 0x2e), iVar4, iVar1, TVar6, uVar7, uVar9, iVar10, BVar11, iVar12);
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MAPEDIT, 0x2e),
+                    iVar4, iVar1, TVar6, uVar7, uVar9, iVar10, BVar11, iVar12);
             }
             if (DAT_MapEditorProperties_ClickedButton::instance == -5) {
                 iVar12 = 0;
@@ -320,7 +334,11 @@ namespace UI {
                 /*
                   added by script: "Invasion"
                  */
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MAPEDIT, 0x1d), iVar4, iVar1, TVar6, uVar7, uVar9, iVar10, BVar11, iVar12);
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MAPEDIT, 0x1d),
+                    iVar4, iVar1, TVar6, uVar7, uVar9, iVar10, BVar11, iVar12);
             }
             if (DAT_MapEditorProperties_ClickedButton::instance == -6) {
                 iVar12 = 0;
@@ -334,7 +352,11 @@ namespace UI {
                 /*
                   added by script: "Economic"
                  */
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MAPEDIT, 0x1e), iVar4, iVar1, TVar6, uVar7, uVar9, iVar10, BVar11, iVar12);
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MAPEDIT, 0x1e),
+                    iVar4, iVar1, TVar6, uVar7, uVar9, iVar10, BVar11, iVar12);
             }
         LAB_0042e7ab:
             if (DAT_GameCore::instance.isTimeHalted2 != 0) {

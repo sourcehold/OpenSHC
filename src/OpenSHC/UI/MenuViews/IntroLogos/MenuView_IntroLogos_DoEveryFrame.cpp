@@ -71,7 +71,10 @@ namespace UI {
                 /*
                   added by script: "Gameplay may change during online play"
                  */
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GAMEPLAY_ONLINE, 0), _xPos, _yParam, alignment, _color, _fontSIze, _keepOffsetX, _blendStrength);
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GAMEPLAY_ONLINE, 0),
+                    _xPos, _yParam, alignment, _color, _fontSIze, _keepOffsetX, _blendStrength);
             }
             _currentTime = timeGetTime();
             if (DAT_IntroTransitionStep::instance == 0) {

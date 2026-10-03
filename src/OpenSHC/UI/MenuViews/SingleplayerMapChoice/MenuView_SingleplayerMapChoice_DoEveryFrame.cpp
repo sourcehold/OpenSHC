@@ -7,9 +7,9 @@
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/IO/FileResourceType.hpp"
+#include "OpenSHC/Map/MapType2.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
-#include "OpenSHC/Map/MapType2.hpp"
 #include "OpenSHC/Globals/COL_VERY_SOFT_YELLOW.hpp"
 #include "OpenSHC/Globals/DAT_00b960dc.hpp"
 #include "OpenSHC/Globals/DAT_ButtonBackgroundBlendStrength.hpp"

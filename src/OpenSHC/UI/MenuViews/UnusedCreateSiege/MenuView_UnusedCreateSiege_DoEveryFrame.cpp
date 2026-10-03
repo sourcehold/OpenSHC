@@ -8,6 +8,7 @@
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/Map/MapType2.hpp"
+#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
@@ -32,7 +33,6 @@
 #include "OpenSHC/Globals/INT_00b960e4.hpp"
 #include "OpenSHC/Globals/INT_00b960ec.hpp"
 #include "OpenSHC/Globals/MSVC_SecurityCookie.hpp"
-#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -40,11 +40,11 @@ namespace UI {
 
         using OpenSHC::DE::SHCDE::eTextSections;
         using OpenSHC::Map::MapType2;
+        using OpenSHC::Rendering::Colors::BGR24;
         using OpenSHC::Rendering::Enums::RenderTarget;
         using OpenSHC::Text::TextAlignment;
         using OpenSHC::UI::Enums::MenuModalType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-        using OpenSHC::Rendering::Colors::BGR24;
 
         /*
           WARNING: Enum "MappersEnum": Some values do not have unique names
@@ -101,7 +101,10 @@ namespace UI {
                 iVar1 = DAT_MenuHandlerState::instance.y + 0x76;
                 iVar4 = DAT_MenuHandlerState::instance.x + 0x12;
                 DAT_TextManagerObject::instance.field9_0x24 = 1;
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText6Unk, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MAPEDIT, 0x25), iVar4, iVar1, iVar5, color1, color2, iVar8, iVar10);
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText6Unk, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MAPEDIT, 0x25),
+                    iVar4, iVar1, iVar5, color1, color2, iVar8, iVar10);
             }
             iVar8 = 0;
             BVar9 = FALSE;
@@ -110,7 +113,10 @@ namespace UI {
             TVar6 = OpenSHC::Text::TTA_LEFT;
             iVar1 = DAT_MenuHandlerState::instance.y + 0x23;
             iVar4 = DAT_MenuHandlerState::instance.x + 0x8c;
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MAPEDIT, 0x22), iVar4, iVar1, TVar6, BVar7, iVar5, BVar9, iVar8);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MAPEDIT, 0x22),
+                iVar4, iVar1, TVar6, BVar7, iVar5, BVar9, iVar8);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(" - ",
                 DAT_MenuHandlerState::instance.x + 0x8c, DAT_MenuHandlerState::instance.y + 0x23,
                 OpenSHC::Text::TTA_LEFT, 0xc2f0eb, 0x11, TRUE, 0);

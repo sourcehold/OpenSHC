@@ -6,6 +6,7 @@
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
+#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -19,17 +20,16 @@
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_WindowAndDirectDraw.hpp"
 #include "OpenSHC/Globals/MSVC_SecurityCookie.hpp"
-#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 
 namespace OpenSHC {
 namespace UI {
     namespace MenuViews {
 
         using OpenSHC::DE::SHCDE::eTextSections;
+        using OpenSHC::Rendering::Colors::BGR24;
         using OpenSHC::Rendering::Enums::RenderTarget;
         using OpenSHC::Text::TextAlignment;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-        using OpenSHC::Rendering::Colors::BGR24;
 
         /*
           WARNING: Enum "MappersEnum": Some values do not have unique names
@@ -77,7 +77,10 @@ namespace UI {
             /*
               added by script: "Select New Map Size"
              */
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MAPEDIT, 0x14), iVar3, iVar1, alignment, color, iVar5, keepOffsetX, iVar6);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MAPEDIT, 0x14),
+                iVar3, iVar1, alignment, color, iVar5, keepOffsetX, iVar6);
             iVar3 = DAT_MenuHandlerState::instance.y;
             iVar1 = DAT_MenuHandlerState::instance.x;
             local_1c = DAT_MenuHandlerState::instance.y + 0x122;

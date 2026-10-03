@@ -247,7 +247,11 @@ namespace UI {
                 TVar16 = OpenSHC::Text::TTA_LEFT;
                 iVar11 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x10;
                 iVar12 = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 0x10;
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_TRAIL_NAMES_CRU, (int)((int)(DAT_GameCore::instance.skirmishTrailProgress + 1))), iVar12, iVar11, TVar16, BVar17, iVar13, BVar19, iVar14);
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_TRAIL_NAMES_CRU,
+                        (int)((int)(DAT_GameCore::instance.skirmishTrailProgress + 1))),
+                    iVar12, iVar11, TVar16, BVar17, iVar13, BVar19, iVar14);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     DAT_GameCore::instance.skirmishTrailStartDateInMonths[DAT_GameCore::instance.skirmishTrailProgress]
                         / 0xc,
@@ -275,7 +279,11 @@ namespace UI {
                 TVar16 = OpenSHC::Text::TTA_RIGHT;
                 iVar11 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x10;
                 iVar12 = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 0x2b2;
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MONTHS, (int)((int)(DAT_GameCore::instance.skirmishTrailYearReached % 0xc))), iVar12, iVar11, TVar16, BVar17, iVar13, BVar19, iVar14);
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MONTHS,
+                        (int)((int)(DAT_GameCore::instance.skirmishTrailYearReached % 0xc))),
+                    iVar12, iVar11, TVar16, BVar17, iVar13, BVar19, iVar14);
                 if (DAT_TextManagerObject::instance.gameLanguage == OpenSHC::Text::GL_GERMAN) {
                     pcVar5 = " n. Chr.";
                 } else {
@@ -392,7 +400,11 @@ namespace UI {
                 TVar16 = OpenSHC::Text::TTA_LEFT;
                 iVar11 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x10;
                 iVar12 = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 0x10;
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_TRAIL_NAMES_CRU, (int)((int)(DAT_GameCore::instance.warchestTrailProgress + 0x33))), iVar12, iVar11, TVar16, BVar17, iVar13, BVar19, iVar14);
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_TRAIL_NAMES_CRU,
+                        (int)((int)(DAT_GameCore::instance.warchestTrailProgress + 0x33))),
+                    iVar12, iVar11, TVar16, BVar17, iVar13, BVar19, iVar14);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     DAT_GameCore::instance.warchestTrailStartDatesInMonths[DAT_GameCore::instance.warchestTrailProgress]
                         / 0xc,
@@ -420,7 +432,11 @@ namespace UI {
                 TVar16 = OpenSHC::Text::TTA_RIGHT;
                 iVar11 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x10;
                 iVar12 = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 0x2b2;
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MONTHS, (int)((int)(DAT_GameCore::instance.warchestTrailYearReached % 0xc))), iVar12, iVar11, TVar16, BVar17, iVar13, BVar19, iVar14);
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MONTHS,
+                        (int)((int)(DAT_GameCore::instance.warchestTrailYearReached % 0xc))),
+                    iVar12, iVar11, TVar16, BVar17, iVar13, BVar19, iVar14);
                 if (DAT_TextManagerObject::instance.gameLanguage == OpenSHC::Text::GL_GERMAN) {
                     pcVar5 = " n. Chr.";
                 } else {
@@ -542,7 +558,11 @@ namespace UI {
                 TVar16 = OpenSHC::Text::TTA_LEFT;
                 iVar11 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x10;
                 iVar12 = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 0x10;
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER( OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)( OpenSHC::DE::SHCDE::TEXT_TRAIL_NAMES_CRU, DAT_GameCore::instance.extremeTrailProgress + 0x51), iVar12, iVar11, TVar16, BVar17, iVar13, BVar19, iVar14);
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(
+                        OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
+                        OpenSHC::DE::SHCDE::TEXT_TRAIL_NAMES_CRU, DAT_GameCore::instance.extremeTrailProgress + 0x51),
+                    iVar12, iVar11, TVar16, BVar17, iVar13, BVar19, iVar14);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     DAT_GameCore::instance.extremeTrailStartDatesInMonths[DAT_GameCore::instance.extremeTrailProgress]
                         / 0xc,
@@ -570,7 +590,11 @@ namespace UI {
                 TVar16 = OpenSHC::Text::TTA_RIGHT;
                 iVar11 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x10;
                 iVar12 = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 0x2b2;
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MONTHS, (int)((int)(DAT_GameCore::instance.extremeTrailYearReached % 0xc))), iVar12, iVar11, TVar16, BVar17, iVar13, BVar19, iVar14);
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MONTHS,
+                        (int)((int)(DAT_GameCore::instance.extremeTrailYearReached % 0xc))),
+                    iVar12, iVar11, TVar16, BVar17, iVar13, BVar19, iVar14);
                 if (DAT_TextManagerObject::instance.gameLanguage == OpenSHC::Text::GL_GERMAN) {
                     pcVar5 = " n. Chr.";
                 } else {
@@ -593,7 +617,10 @@ namespace UI {
                 /*
                   added by script: "Crusader Trail Completed!"
                  */
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_CHOOSE, 6), iVar12, iVar11, TVar16, BVar17, iVar13, BVar19, iVar14);
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SKIRMISH_CHOOSE, 6),
+                    iVar12, iVar11, TVar16, BVar17, iVar13, BVar19, iVar14);
             }
         }
 

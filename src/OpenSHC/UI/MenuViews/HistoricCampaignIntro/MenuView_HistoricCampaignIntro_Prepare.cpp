@@ -48,8 +48,14 @@ namespace UI {
                 OpenSHC::UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(pcVar1);
         switchD_004dbb02_caseD_4:
             DAT_NumberOfStoredMenuStrings::instance = 0;
-            MACRO_CALL(OpenSHC::UI::Helpers_Func::StoreStringInMenuStringArray)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_CAMPAIGN_INFO, (int)((int)(DAT_GameCore::instance.historicCampaignNumber * 6 + -5))));
-            MACRO_CALL(OpenSHC::UI::Helpers_Func::StoreStringInMenuStringArray)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_CAMPAIGN_INFO, (int)((int)(DAT_GameCore::instance.historicCampaignNumber * 6 + -4))));
+            MACRO_CALL(OpenSHC::UI::Helpers_Func::StoreStringInMenuStringArray)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_CAMPAIGN_INFO,
+                    (int)((int)(DAT_GameCore::instance.historicCampaignNumber * 6 + -5))));
+            MACRO_CALL(OpenSHC::UI::Helpers_Func::StoreStringInMenuStringArray)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_CAMPAIGN_INFO,
+                    (int)((int)(DAT_GameCore::instance.historicCampaignNumber * 6 + -4))));
             MACRO_CALL(OpenSHC::UI::Helpers_Func::LoadTGX_shc_back)();
             FLOAT_00ec0834::instance = 0.0;
             DAT_00ed2780::instance = 1;
