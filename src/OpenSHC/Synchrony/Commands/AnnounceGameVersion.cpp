@@ -42,7 +42,7 @@ namespace Synchrony {
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
                 DAT_GameSynchronyState::ptr)(&DAT_GameSynchronyState::instance.DAT_GameCommandParam0, 4,
                 OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
-            if (DAT_GameSynchronyState::instance.protocolInvokerPlayerID - 1U < 8) {
+            if (DAT_GameSynchronyState::instance.protocolInvokerPlayerID - 1U <= 7) {
                 DAT_GameSynchronyState::instance
                     .DAT_MultiplayerGameVersions[DAT_GameSynchronyState::instance.protocolInvokerPlayerID]
                     = DAT_GameSynchronyState::instance.DAT_GameCommandParam0;
