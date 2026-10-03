@@ -14,6 +14,7 @@
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_MiniMapDefinedData.hpp"
+#include "OpenSHC/Globals/DAT_MinimapViewState.hpp"
 #include "OpenSHC/Globals/DAT_PencilRenderCore.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
@@ -251,7 +252,8 @@ namespace UI {
         }
         iVar7 = (int)DAT_PencilRenderCore::instance.surfacePtr
             + yPos * DAT_PencilRenderCore::instance.horizontalByteSize + xPos * 2;
-        iVar14 = (xOffset - local_4c) * 2 + 0x1a31654 + (iVar14 * heightFactor - local_24) * 400;
+        iVar14 = (xOffset - local_4c) * 2 + (int)DAT_MinimapViewState::instance.field17_0x44
+            + (iVar14 * heightFactor - local_24) * 400;
         do {
             iVar15 = 0;
             iVar10 = local_18;
