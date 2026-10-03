@@ -33,7 +33,6 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x00485C10
     void Commands::StartSendingMapFile()
     {
-        short* psVar1;
         char local_1;
         DAT_GameSynchronyState::instance.DAT_CommandSize = 1;
         DAT_GameSynchronyState::instance.DAT_GameCommandArray[DAT_GameSynchronyState::instance.DAT_CurrentGameCommandID]
@@ -54,11 +53,11 @@ namespace Synchrony {
                     .field282_0x109d98[DAT_GameSynchronyState::instance.protocolInvokerPlayerID]
                     = (local_1 != '\0') + 1;
             }
-            psVar1 = DAT_GameSynchronyState::instance.field282_0x109d98 + 1;
-            do {
-                if (*psVar1 == 0) {}
-                psVar1 = psVar1 + 1;
-            } while (psVar1 < DAT_GameSynchronyState::instance.field282_0x109d98 + 9);
+            for (int i = 1; i < 9; i++) {
+                if (DAT_GameSynchronyState::instance.field282_0x109d98[i] == 0) {
+                    return;
+                }
+            }
             MACRO_CALL_MEMBER(OpenSHC::UI::MenuModalComposition_Func::activateModalDialog,
                 DAT_MenuModalComposition1::ptr)(OpenSHC::UI::Enums::MMT_SEND_MAP_TO, FALSE);
         }
