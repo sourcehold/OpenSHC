@@ -71,6 +71,7 @@ namespace Synchrony {
                     DAT_GameSynchronyState::instance.DAT_GameCommandParam0,
                     (uint)((int)(DAT_GameSynchronyState::instance.DAT_GameCommandParam1)),
                     (uint)((int)(DAT_GameSynchronyState::instance.DAT_GameCommandParam3 & 0xffff)));
+                return;
             }
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::placeTree, DAT_TileMapState::ptr)(
                 DAT_GameSynchronyState::instance.DAT_GameCommandParam0,
