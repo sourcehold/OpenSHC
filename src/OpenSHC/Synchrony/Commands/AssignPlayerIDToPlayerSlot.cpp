@@ -52,7 +52,7 @@ namespace Synchrony {
             DAT_GameSynchronyState::instance
                 .currentPlayerFullIDArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                 = DAT_GameSynchronyState::instance.DPLAYX_PlayerHandle;
-            if (1 < iVar1) {
+            if (iVar1 >= 2) {
                 MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand,
                     DAT_GameSynchronyState::ptr)(OpenSHC::Commands::GCT_SHARE_AIV_HASH);
             }
