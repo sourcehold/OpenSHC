@@ -68,7 +68,7 @@ namespace UI {
             uint local_4;
             local_4 = MSVC_SecurityCookie::instance ^ (uint)&local_3c;
             if (0x1f < DAT_TutorialCurrentStep::instance)
-                goto LAB_004bceab;
+                return;
             local_28 = INT_ARRAY_00df5598::instance[DAT_TutorialCurrentStep::instance];
             local_38 = x + 0x10;
             local_34 = width + -0x20;
@@ -205,7 +205,6 @@ namespace UI {
                 }
             }
             MACRO_CALL(OpenSHC::UI::Rendering_Func::RenderTutorialFloatForUIElement)(DAT_TutorialCurrentStep::instance);
-        LAB_004bceab:;
         }
 
     }
