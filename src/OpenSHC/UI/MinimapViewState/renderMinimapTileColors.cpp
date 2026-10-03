@@ -1,6 +1,7 @@
 #include "../MinimapViewState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_MiniMapDefinedData.hpp"
+#include "OpenSHC/Globals/DAT_MinimapViewState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 #include "OpenSHC/Globals/DAT_WindowAndDirectDraw.hpp"
@@ -245,7 +246,8 @@ namespace UI {
                                                 && ((int)(param_5 + local_2c) < iVar3 * param_2))
                                             && (local_30 = 0, 0 < param_3)) {
                                             do {
-                                                *(ushort*)((param_5 + local_2c) * 2 + 0x1a58754
+                                                *(ushort*)((param_5 + local_2c) * 2
+                                                    + (int)DAT_MinimapViewState::instance.field18_0x27144
                                                     + (local_4c + local_30) * 400) = (ushort)param_4;
                                                 local_30 = local_30 + 1;
                                             } while (local_30 < param_3);
@@ -263,7 +265,8 @@ namespace UI {
                                             iVar9 = 0;
                                             if (0 < param_3) {
                                                 do {
-                                                    *(ushort*)((iVar5 / local_54) * 2 + 0x1a58754
+                                                    *(ushort*)((iVar5 / local_54) * 2
+                                                        + (int)DAT_MinimapViewState::instance.field18_0x27144
                                                         + ((local_4c + iVar9) / local_54) * 400) = (ushort)param_4;
                                                     iVar9 = iVar9 + 1;
                                                 } while (iVar9 < param_3);
