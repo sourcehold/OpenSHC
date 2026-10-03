@@ -57,7 +57,10 @@ namespace UI {
             /*
               added by script: "Allies"
              */
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_ALLIES, 0), iVar6, iVar2, TVar3, BVar4, iVar5, BVar7, blendStrength);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_ALLIES, 0),
+                iVar6, iVar2, TVar3, BVar4, iVar5, BVar7, blendStrength);
             if (DAT_AlliesCount::instance < 1) {
                 iVar5 = 0;
                 BVar7 = FALSE;
@@ -68,7 +71,10 @@ namespace UI {
                 /*
                   added by script: "You have no Allies!"
                  */
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_ALLIES, 0x13), xParam, iVar2, TVar3, BVar4, iVar6, BVar7, iVar5);
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_ALLIES, 0x13),
+                    xParam, iVar2, TVar3, BVar4, iVar6, BVar7, iVar5);
             }
         }
 

@@ -3,6 +3,7 @@
 #include "OpenSHC/Text/TextManager.func.hpp"
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
+#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -10,16 +11,15 @@
 #include "OpenSHC/Globals/DAT_MissionAestheticsDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_PencilRenderCore.hpp"
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
-#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 
 namespace OpenSHC {
 namespace UI {
     namespace MenuModals {
 
         using OpenSHC::DE::SHCDE::eTextSections;
+        using OpenSHC::Rendering::Colors::BGR24;
         using OpenSHC::Text::TextAlignment;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-        using OpenSHC::Rendering::Colors::BGR24;
 
         /*
           decompilerscript: committed: 2025-01-30 21:57:43.216000
@@ -66,7 +66,10 @@ namespace UI {
                     TVar7 = OpenSHC::Text::TTA_LEFT;
                     iVar12 = iVar3 + 0x96;
                     iVar6 = iVar4;
-                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SCENARIO, iVar1), iVar12, iVar6, TVar7, BVar8, iVar9, BVar10, iVar11);
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                            DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SCENARIO, iVar1),
+                        iVar12, iVar6, TVar7, BVar8, iVar9, BVar10, iVar11);
                     if (DAT_MissionAestheticsDefinedData::instance.field1230_0x23a4[iVar5] == 1) {
                         iVar1 = iVar3 + 0x9e;
                         MACRO_CALL_MEMBER(
@@ -79,7 +82,16 @@ namespace UI {
                         TVar7 = OpenSHC::Text::TTA_LEFT;
                         iVar12 = iVar1;
                         iVar6 = iVar4;
-                        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SCENARIO, (int)((int)(DAT_MissionAestheticsDefinedData::instance.field1235_0x33e4[*( char*)(&DAT_MapPropertiesState::instance .scenarioEvents[DAT_MapPropertiesState::instance.currentEventID] .data + iVar5 * 4 + 0xe)]))), iVar12, iVar6, TVar7, BVar8, iVar9, BVar10, iVar11);
+                        MACRO_CALL_MEMBER(
+                            OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SCENARIO,
+                                (int)((int)(DAT_MissionAestheticsDefinedData::instance.field1235_0x33e4[*(
+                                    char*)(&DAT_MapPropertiesState::instance
+                                               .scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
+                                               .data
+                                    + iVar5 * 4 + 0xe)]))),
+                            iVar12, iVar6, TVar7, BVar8, iVar9, BVar10, iVar11);
                         MACRO_CALL_MEMBER(
                             OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                             ")", iVar1, iVar4, OpenSHC::Text::TTA_LEFT, 0xccfaff, 0x12, TRUE, 0);
@@ -96,7 +108,16 @@ namespace UI {
                         TVar7 = OpenSHC::Text::TTA_LEFT;
                         iVar12 = iVar1;
                         iVar6 = iVar4;
-                        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SCENARIO, (int)((int)(DAT_MissionAestheticsDefinedData::instance.field92_0x170[*( char*)(&DAT_MapPropertiesState::instance .scenarioEvents[DAT_MapPropertiesState::instance.currentEventID] .data + iVar5 * 4 + 0xe)]))), iVar12, iVar6, TVar7, BVar8, iVar9, BVar10, iVar11);
+                        MACRO_CALL_MEMBER(
+                            OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                                DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SCENARIO,
+                                (int)((int)(DAT_MissionAestheticsDefinedData::instance.field92_0x170[*(
+                                    char*)(&DAT_MapPropertiesState::instance
+                                               .scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
+                                               .data
+                                    + iVar5 * 4 + 0xe)]))),
+                            iVar12, iVar6, TVar7, BVar8, iVar9, BVar10, iVar11);
                         MACRO_CALL_MEMBER(
                             OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                             ")", iVar1, iVar4, OpenSHC::Text::TTA_LEFT, 0xccfaff, 0x12, TRUE, 0);
@@ -129,7 +150,10 @@ namespace UI {
             TVar7 = OpenSHC::Text::TTA_LEFT;
             iVar1 = y + 0x17c;
             iVar3 = iVar3 + 0x9e;
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SCENARIO, iVar4), iVar3, iVar1, TVar7, BVar8, iVar5, BVar10, iVar12);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_SCENARIO, iVar4),
+                iVar3, iVar1, TVar7, BVar8, iVar5, BVar10, iVar12);
             return;
         }
 

@@ -65,7 +65,10 @@ namespace UI {
                 /*
                   added by script: "You Were Ejected!"
                  */
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 0x5c), iVar1, iVar3, alignment, color, iVar4, keepOffsetX, iVar5);
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 0x5c),
+                    iVar1, iVar3, alignment, color, iVar4, keepOffsetX, iVar5);
                 DVar2 = timeGetTime();
                 if (5000 < DVar2 - DAT_GameSynchronyState::instance.kickedAtTime) {
                     DAT_GameSynchronyState::instance.kickedAtTime = 0;

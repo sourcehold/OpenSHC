@@ -58,7 +58,10 @@ namespace UI {
             /*
               added by script: "Crusader or Arabic Lord"
              */
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS, 0x32), iVar6, iVar3, iVar5, uVar7, iVar8, blendStrength);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS, 0x32),
+                iVar6, iVar3, iVar5, uVar7, iVar8, blendStrength);
             iVar8 = 0;
             iVar5 = 0x12;
             uVar7 = 0xccfaff;
@@ -67,7 +70,10 @@ namespace UI {
             /*
               added by script: "Choose Portrait"
              */
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS, 0x33), xPos, iVar3, iVar6, uVar7, iVar5, iVar8);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS, 0x33),
+                xPos, iVar3, iVar6, uVar7, iVar5, iVar8);
             iVar3 = 100;
             DAT_CurrentlyRenderedSpriteID::instance = 100;
             if (DAT_GameCore::instance.selectedLordTypeUnk != 0) {

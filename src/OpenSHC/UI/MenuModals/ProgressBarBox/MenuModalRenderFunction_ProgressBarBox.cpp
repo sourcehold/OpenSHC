@@ -58,7 +58,11 @@ namespace UI {
             keepOffsetX = FALSE;
             color = 0xc2f0eb;
             alignment = OpenSHC::Text::TTA_CENTER;
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS, (int)((int)(DAT_MenuTextInputState::instance.DAT_MenuOptionsActionParameter))), iVar1, yParam, alignment, color, iVar2, keepOffsetX, blendStrength);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GAME_OPTIONS,
+                    (int)((int)(DAT_MenuTextInputState::instance.DAT_MenuOptionsActionParameter))),
+                iVar1, yParam, alignment, color, iVar2, keepOffsetX, blendStrength);
             if (((DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY)
                     && (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SKIRMISH_SINGLE_PLAYER))
                 && (DAT_GameSynchronyState::instance.saveRelated != 0)) {
