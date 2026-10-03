@@ -144,10 +144,8 @@ namespace UI {
                 }
             }
             _index = _index + 1;
-            if (0x13 < _index) {
-                DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
-            }
-        } while (true);
+        } while (_index < 0x14);
+        DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
     }
 
 }
