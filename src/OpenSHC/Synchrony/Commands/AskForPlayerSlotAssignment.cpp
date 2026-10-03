@@ -99,7 +99,7 @@ namespace Synchrony {
                 DAT_GameSynchronyState::instance.protocolInvokerPlayerID = _commandOriginPlayer;
                 if (DAT_GameSynchronyState::instance.currentPlayerSlotID == 0) {
                     DAT_GameSynchronyState::instance.currentPlayerSlotID = _commandOriginPlayer;
-                    if (1 < DAT_GameCore::instance.lordIconUnk) {
+                    if (DAT_GameCore::instance.lordIconUnk >= 2) {
                         MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand,
                             DAT_GameSynchronyState::ptr)(OpenSHC::Commands::GCT_SHARE_AIV_HASH);
                     }
