@@ -33,7 +33,7 @@ namespace Synchrony {
     void Commands::CommandSwitchTeams()
     {
         char cVar1;
-        bool bVar2;
+        int bVar2;
         int iVar3;
         DWORD DVar4;
         char* pcVar5;
@@ -53,7 +53,7 @@ namespace Synchrony {
                 OpenSHC::Commands::GCPL_DYNAMIC_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1);
             return;
         }
-        bVar2 = false;
+        bVar2 = 0;
         if (DAT_GameSynchronyState::instance.DAT_CommandActionPlan == OpenSHC::Commands::GCS_EXECUTE) {
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
                 DAT_GameSynchronyState::ptr)(local_28, 2, OpenSHC::Commands::GCPL_DYNAMIC_COMMAND_DATA_ADDRESS,
@@ -184,15 +184,13 @@ namespace Synchrony {
                     if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[8] != -1) {
                         aiStack_24[DAT_GameState::instance.mapAndTime.playerTeams[8]] = 1;
                     }
-                    iVar6 = 1;
-                    do {
-                        if (aiStack_24[iVar6] == 0) {
+                    for (int teamSlot = 1; teamSlot < 9; teamSlot++) {
+                        if (aiStack_24[teamSlot] == 0) {
                             DAT_GameState::instance.mapAndTime
-                                .playerTeams[DAT_GameSynchronyState::instance.protocolInvokerPlayerID] = iVar6;
+                                .playerTeams[DAT_GameSynchronyState::instance.protocolInvokerPlayerID] = teamSlot;
                             break;
                         }
-                        iVar6 = iVar6 + 1;
-                    } while (iVar6 < 9);
+                    }
                     /*
                       "has cancelled the alliance"   added by script: "has cancelled the alliance"
                      */
@@ -272,7 +270,7 @@ namespace Synchrony {
                         bVar9 = bVar9 + 1;
                     }
                     if ((2 < bVar9) || (aiStack_24[DAT_GameSynchronyState::instance.DAT_GameCommandParam0] != 1)) {
-                        bVar2 = true;
+                        bVar2 = 1;
                     }
                     iVar7 = MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::countPlayersInSameTeam,
                         DAT_GameSynchronyState::ptr)(DAT_GameSynchronyState::instance.DAT_GameCommandParam0);
