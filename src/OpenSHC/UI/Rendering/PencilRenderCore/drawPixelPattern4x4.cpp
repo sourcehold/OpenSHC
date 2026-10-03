@@ -1,5 +1,7 @@
 #include "../PencilRenderCore.func.hpp"
 
+#include "OpenSHC/Globals/DAT_PencilRenderCore.hpp"
+
 namespace OpenSHC {
 namespace UI {
     namespace Rendering {
@@ -12,16 +14,22 @@ namespace UI {
         {
             int _drawPtr;
             dword _horizontalByteSize;
-            _horizontalByteSize = this->horizontalByteSize;
-            _drawPtr = (int)this->surfacePtr + drawY * this->horizontalByteSize + drawX * 2;
-            *(undefined4*)_drawPtr = 0xffff7bcf;
-            *(undefined4*)(_drawPtr + 4) = 0x39c70000;
-            *(undefined4*)(_drawPtr + _horizontalByteSize) = 0x7bcf7bcf;
-            *(undefined4*)(_drawPtr + 4 + _horizontalByteSize) = 0x39c70000;
-            *(undefined4*)(_drawPtr + _horizontalByteSize * 2) = 0x39c739c7;
-            *(undefined4*)(_drawPtr + 4 + _horizontalByteSize * 2) = 0x39c70000;
-            *(undefined4*)(_drawPtr + _horizontalByteSize * 3) = 0;
-            *(undefined4*)(_drawPtr + 4 + _horizontalByteSize * 3) = 0;
+            int _rowOffset;
+            _horizontalByteSize = DAT_PencilRenderCore::instance.horizontalByteSize;
+            _drawPtr = (int)DAT_PencilRenderCore::instance.surfacePtr
+                + drawY * DAT_PencilRenderCore::instance.horizontalByteSize + drawX * 2;
+            _rowOffset = 0;
+            *(undefined4*)(_drawPtr + _rowOffset) = 0xffff7bcf;
+            *(undefined4*)(_drawPtr + _rowOffset + 4) = 0x39c70000;
+            _rowOffset = _rowOffset + _horizontalByteSize;
+            *(undefined4*)(_drawPtr + _rowOffset) = 0x7bcf7bcf;
+            *(undefined4*)(_drawPtr + _rowOffset + 4) = 0x39c70000;
+            _rowOffset = _rowOffset + _horizontalByteSize;
+            *(undefined4*)(_drawPtr + _rowOffset) = 0x39c739c7;
+            *(undefined4*)(_drawPtr + _rowOffset + 4) = 0x39c70000;
+            _rowOffset = _rowOffset + _horizontalByteSize;
+            *(undefined4*)(_drawPtr + _rowOffset) = 0;
+            *(undefined4*)(_drawPtr + _rowOffset + 4) = 0;
         }
 
     }
