@@ -72,10 +72,11 @@ namespace Synchrony {
                 DAT_GameSynchronyState::ptr)(&local_1, 1, OpenSHC::Commands::GCPL_DYNAMIC_COMMAND_DATA_ADDRESS,
                 OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
             DAT_GameSynchronyState::instance.DAT_GameCommandParam3 = (int)local_1;
-            if (((DAT_GameSynchronyState::instance.DAT_GameCommandParam0 < ((GameCommandScheduling)400))
-                    && (DAT_GameSynchronyState::instance.DAT_GameCommandParam1 < 400))
-                && (*(char*)(DAT_GameSynchronyState::instance.DAT_GameCommandParam1 * 400 + 0x21aec98
-                        + DAT_GameSynchronyState::instance.DAT_GameCommandParam0)
+            if (((DAT_GameSynchronyState::instance.DAT_GameCommandParam0 <= ((GameCommandScheduling)399))
+                    && (DAT_GameSynchronyState::instance.DAT_GameCommandParam1 <= 399))
+                && (DAT_ViewportRenderState::instance
+                        .DAT_BinaryTileMap400x400[DAT_GameSynchronyState::instance.DAT_GameCommandParam1 * 400
+                            + DAT_GameSynchronyState::instance.DAT_GameCommandParam0]
                     != '\0')) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::raiseLand, DAT_TileMapState::ptr)(
                     DAT_ViewportRenderState::instance
