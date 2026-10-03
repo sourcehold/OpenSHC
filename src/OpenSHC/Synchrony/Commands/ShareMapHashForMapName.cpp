@@ -48,7 +48,7 @@ namespace Synchrony {
         GameCommandParameterLocation srcSwitch;
         GameCommandParameterReadWrite destSwitch;
         undefined4 _mapHash;
-        char mapName[1000];
+        char mapName[1008];
         DAT_GameSynchronyState::instance.DAT_CommandSize = 0x3ec;
         DAT_GameSynchronyState::instance.DAT_GameCommandArray[DAT_GameSynchronyState::instance.DAT_CurrentGameCommandID]
             .time = 0;
