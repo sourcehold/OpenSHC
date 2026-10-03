@@ -62,10 +62,10 @@ namespace UI {
             pcVar1, iVar4, iVar3, OpenSHC::Text::TTA_CENTER, 0, 0x13, FALSE, 0);
         if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                 .fearFactorLevel
-            == 0) {
-            iVar3 = MACRO_CALL(OpenSHC::UI::Helpers_Func::SomeGoldRelatedComputation)();
-        } else {
+            != 0) {
             iVar3 = MACRO_CALL(OpenSHC::UI::Helpers_Func::SomeFearFactorComputation)();
+        } else {
+            iVar3 = MACRO_CALL(OpenSHC::UI::Helpers_Func::SomeGoldRelatedComputation)();
         }
         iVar4 = 0x13;
         iVar4 = MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::computeTextWidth, DAT_TextManagerObject::ptr)(
