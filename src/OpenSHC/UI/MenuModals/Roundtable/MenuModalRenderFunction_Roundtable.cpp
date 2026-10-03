@@ -83,20 +83,16 @@ namespace UI {
                         .DAT_PlayerGroupArray[(char)DAT_GameSynchronyState::instance.DAT_RoundTableOrderArray[iVar4]]) {
                     y = y + 1;
                     iVar2 = iVar2 + 1;
-                    if (iVar2 < 2)
-                        goto LAB_004b1ba5;
-                    iVar2 = 0;
+                    if (1 < iVar2) {
+                        iVar2 = 0;
+                    }
+                }
+                if (iVar2 == 0) {
                     blendStrengthUnk = 0x10;
                     gfxIndex = iVar4 + 2;
                 } else {
-                LAB_004b1ba5:
-                    if (iVar2 == 0) {
-                        blendStrengthUnk = 0x10;
-                        gfxIndex = iVar4 + 2;
-                    } else {
-                        blendStrengthUnk = 0x14;
-                        gfxIndex = iVar4 + 2 + iVar2 * 8;
-                    }
+                    blendStrengthUnk = 0x14;
+                    gfxIndex = iVar4 + 2 + iVar2 * 8;
                 }
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGfxTgxWithBlending,
                     DAT_TextureRenderCoreObject::ptr)(gfxIndex, *piVar3 + x, piVar3[1] + iVar1, blendStrengthUnk);
