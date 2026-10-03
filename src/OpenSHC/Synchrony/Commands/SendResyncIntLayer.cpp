@@ -60,10 +60,9 @@ namespace Synchrony {
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
                 DAT_GameSynchronyState::ptr)(&DAT_GameSynchronyState::instance.DAT_GameCommandParam1, 4,
                 OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
+            int layerOffset = DAT_GameSynchronyState::instance.DAT_GameCommandParam1 * 0x274;
             MACRO_CALL(OpenSHC::Synchrony_Func::MemCopyFromParameter)(
-                (char*)(DAT_TileMapState::instance.LogicLayer
-                    + DAT_GameSynchronyState::instance.DAT_GameCommandParam1 * 0x274),
-                0x9d0, DAT_GameSynchronyState::instance.DAT_GameCommandParam1 * 0x274);
+                (char*)(DAT_TileMapState::instance.LogicLayer + layerOffset), 0x9d0, layerOffset);
         }
     }
 
