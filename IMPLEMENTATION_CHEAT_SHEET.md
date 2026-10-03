@@ -8,7 +8,7 @@ Note, that Ghidra and reccmp use slightly different disassembly styles, so there
 
 ## Boundaries
 
-Certain instructions work as boundaries between different code segments, preventing reordering of instructions and aiding in identifying the possible structure. 
+Certain instructions work as boundaries between different code segments, preventing reordering of instructions and aiding in identifying the possible structure.
 
 ### Functions
 
@@ -39,6 +39,7 @@ it is a clean indication of a known function body. The source of the other funct
 allowing the compiler to optimize the register usage.
 
 #### Detecting inlined functions
+
 The compiler (and/or linker) likely inlined some functions. This mainly happens if the compilation unit (in our case
 function body) can "see" the contents of another compilation unit (function body). Detecting whether this has occurred
 is challenging. So far, we have found one pattern that predicts it (occurs in OpenSHC::Global::WinMain).
@@ -89,6 +90,7 @@ which usually also cascades in further code changes.
 ### Conditionals
 
 Instructions can only be pulled:
+
 - before a condition block if every block has the same instruction at the start.
 - after a condition block if every block that does not return has the same instruction at the end.
 
@@ -106,7 +108,7 @@ Within a boundary the compiler schedules freely, so do not copy the instruction 
 This matters most for long runs of independent stores into one object, as in `AICState::setAICParameters_NN`:
 the whole body is `this->aics[aicIndex].<field> = <constant>;` over ~130 fields, and the compiler emits
 those `mov dword ptr [eax + <offset>], <reg>` instructions in an order of its own. Rewriting all 16 of
-those functions so their statements followed the original's store order made every one of them *worse*
+those functions so their statements followed the original's store order made every one of them _worse_
 (e.g. `setAICParameters_14` 82.4% -> 50.0%).
 
 That does not make the order unrecoverable. The compiler moves only the stores whose value sits in a **register**:
@@ -123,7 +125,7 @@ are pulled up in front of the reload, and stores of a newly loaded constant are 
 3. Compile and move the few statements that still sit elsewhere next to their neighbour in the original.
 
 All 16 `setAICParameters_NN` went from 75-95% to 100% this way, with no type or header change; the earlier attempt
-failed because it copied the *instruction* order, hoisted stores included. Which constant lands in which register
+failed because it copied the _instruction_ order, hoisted stores included. Which constant lands in which register
 then follows by itself - it was a consequence of the statement order, not of register pressure.
 
 ## Structure
@@ -135,6 +137,7 @@ at the usage of a structure that the compiler optimized.
 If not contained in the examples here yet, AI is usually good at identifying them.
 
 The most prominent example are modulo operations so far:
+
 ```cpp
 if ((int)SEC_RNG.currentNumber1 % 3 == 0) {
     DAT_SoundEffectsHelperData1.field6_0x34 = 1;
@@ -143,7 +146,9 @@ else {
     DAT_SoundEffectsHelperData1.field6_0x34 = (-(uint)((int)SEC_RNG.currentNumber1 % 3 != 1) & 0xfffffffe) + 2;
 }
 ```
+
 is roughly:
+
 ```cpp
 int const randomNumber = SEC_RNG::instance.currentNumber1 % 3;
 if (randomNumber == 0)
@@ -155,13 +160,16 @@ else
 ```
 
 Or another modulo:
+
 ```cpp
 uVar1 = (int)SEC_RNG.currentNumber1 & 0x80000003;
 if ((int)uVar1 < 0) {
     uVar1 = (uVar1 - 1 | 0xfffffffc) + 1;
 }
 ```
+
 being
+
 ```cpp
 SEC_RNG::ptr->currentNumber1 % 4
 ```
@@ -196,7 +204,7 @@ SEC_RNG::ptr->currentNumber1 % 4
   every use took `getTargetableBuildingForPlayerID` from 65% to 100%.
 - **A constant index held in a local stops the per-struct multiply being shared.** When the original recomputes
   `playerID * 0x39f4` in every basic block (`mov eax, ecx; imul eax, eax, 0x39f4` three times, with `playerID` staying
-  in its register) while we multiply once, the array index in the source was a *variable* that the optimizer only
+  in its register) while we multiply once, the array index in the source was a _variable_ that the optimizer only
   later found to be constant. With a variable index MSVC factors each access by its own element size
   (`playerID * 0x1cfa` for a `short` array, `* 0xe7d` for an `int` array), so the three accesses are three different
   expressions and nothing is common. Write `int tribeIndex = 11;` and index with it:
@@ -220,7 +228,7 @@ SEC_RNG::ptr->currentNumber1 % 4
   (`removeOrganismsAndSetMoveDestinationPairs` 97.9% -> 100%).
 - Where two arguments are loaded on either side of a store (`mov ecx, [x]` ... `mov [stance], 1` ... `mov eax, [y]`),
   give each a local and put the statements in that order: `int x = pd.someX; tribe.unitStance = ...; int y = pd.someY;`
-  (`makeUnitsGoDefensiveAndBackToSomeLocation` 95.7% -> 100%). Without a store in between, the *declaration order*
+  (`makeUnitsGoDefensiveAndBackToSomeLocation` 95.7% -> 100%). Without a store in between, the _declaration order_
   of two such locals picks which one gets `ecx` (`sendUnitsToAttackBreachedCastle` 98.7% -> 100%).
 - The opposite does happen for the operands of a single statement: in `SHC_3BB0A8C1_0x00522520` the original evaluates
   `unitID / 16` and `unitID % 16` into locals before the compound assignment. If a `|=`/`&=` statement with computed index
@@ -244,6 +252,13 @@ SEC_RNG::ptr->currentNumber1 % 4
   `if ((x & MASK) == VALUE) { return TRUE; } else { return FALSE; }`, with locals for the computed index and the loaded
   byte, reached 100%. Together with the range-check case above this means: folded expression and explicit
   `TRUE`/`FALSE` branches are two separate candidates, measure both.
+- A field read that every arm of an if/else-if chain needs is often read **inside each arm** in the original, not
+  hoisted above the chain. When the original shows the same load repeated once per arm (three `movsx [ebx + 0x24a]`
+  for one `unit.tribeID`, each followed by its own `test`/`jz` to the loop's continue trampoline), move the read and
+  its guard into every arm instead of declaring one local before the chain. This is the same duplicate-the-shared-
+  block rule as for `LAB_*` targets with several predecessors, applied to a read rather than a block, and it was
+  worth +33 points on its own (SHC_3BB0A8C1_0x004CFCD0 `aiCommandSiegeEngineTribes`, 59.4% -> 92.7%). Spell the last
+  arm's condition out as `else if (type == UT_S_SHIELD)` too when the assembly tests it, rather than a bare `else`.
 - A switch with fewer then 4 cases is often simplified and uses subtractions in assembly to compare the value:
   ```
   MOV          EAX,[DAT_SoundEffectsHelperData1.SEC_Section1079.  volumeLevel]
@@ -255,7 +270,7 @@ SEC_RNG::ptr->currentNumber1 % 4
   JNZ          LAB_0047c386
   ```
   Once 4 are reached, the switch is probably converted to a table lookup.  
-  This structure shows up as if-else chain in the decompiler, so do not be confused and check the assembly if the conditions are repeated checks of the same value. 
+  This structure shows up as if-else chain in the decompiler, so do not be confused and check the assembly if the conditions are repeated checks of the same value.
 - A switch is in the end just a structure with a scope that allows to jump to certain cases. Inside this scope, other structures are fully legal. This is allowed, for example:
   ```cpp
   switch(value) {
@@ -284,6 +299,7 @@ SEC_RNG::ptr->currentNumber1 % 4
 Loops are very often presented in the decompiler as a pointer being incremented or decremented. The pointer is often created by getting the address to an array before the loop. There is also often a condition variable present that is incremented or decremented with the direction not necessarily matching the direction of the pointer increment.
 
 Example:
+
 ```cpp
 int _soundIndex = 1;
 if (1 < DAT_SoundSystemState.loadedSoundsCountAndIndex_0x316c) {
@@ -300,6 +316,7 @@ if (1 < DAT_SoundSystemState.loadedSoundsCountAndIndex_0x316c) {
 ```
 
 It should always be attempted to simplify this logic to a default for-block with array index access:
+
 ```cpp
 for (int soundIndex = 1; soundIndex < this->loadedSoundsCountAndIndex_0x316c; ++soundIndex) {
     if (this->soundFileCurrSampleNum_0x28c[soundIndex] < 0 || !this->samplePaused_0x31f4[soundIndex]) {
@@ -313,17 +330,18 @@ for (int soundIndex = 1; soundIndex < this->loadedSoundsCountAndIndex_0x316c; ++
 This covers a lot of cases.
 
 Exceptions are:
- - when the logic has not initial condition check before the loop body. This suggests the usage of a do-while loop.
- - when the update parts of the pointer and index are not the last instructions before the loop condition. This indicates manual handling like in a while loop.
- - when it might lack a counter variable and the index loop simply does not match. This case might indicate a pointer increment loop.  
- Another sign for this could be the storing of the start of an array before the array is incremented. The main pointer is then often reset using this temporary. This may should up in opcodes like this:
-    ```
-        MOV     EDX,   dword ptr [ESP + 0x20] <--
-        MOV     dword ptr [ESI + 0xc],  EBX
-        MOV     dword ptr [ESI + 0x24], EBX
-        MOV     dword ptr [ESP + 0x20], EDX <--
-    ```
-    Note the seemingly redundant storing. This structure is followed by a loop where the main array is incremented and a temp used to reset it.
+
+- when the logic has not initial condition check before the loop body. This suggests the usage of a do-while loop.
+- when the update parts of the pointer and index are not the last instructions before the loop condition. This indicates manual handling like in a while loop.
+- when it might lack a counter variable and the index loop simply does not match. This case might indicate a pointer increment loop.  
+  Another sign for this could be the storing of the start of an array before the array is incremented. The main pointer is then often reset using this temporary. This may should up in opcodes like this:
+  ```
+      MOV     EDX,   dword ptr [ESP + 0x20] <--
+      MOV     dword ptr [ESI + 0xc],  EBX
+      MOV     dword ptr [ESI + 0x24], EBX
+      MOV     dword ptr [ESP + 0x20], EDX <--
+  ```
+  Note the seemingly redundant storing. This structure is followed by a loop where the main array is incremented and a temp used to reset it.
 
 If you see a repeating logic structure, that, for example, increments by a value in its logic every repeat,
 you might have found an unrolled loop. Therefore, try to reproduce the logic in loop form and see how the compiler behaves.
@@ -340,7 +358,7 @@ worth the last 8-10% on the whole `Map::Version::UpgradeMapUnitsTo_*` family (0x
 unrolled body, write `for (int i = 1; i != 2500; ++i)` instead of `i < 2500` (SHC_3BB0A8C1_0x0053B340, 53% -> 91%).
 
 - A loop whose early exit returns the same value as the code after the loop was a `break`, not a `return`. The tell is
-  callee-saved registers pushed *after* the loop's entry test and one shared `mov eax, result` behind the loop, where
+  callee-saved registers pushed _after_ the loop's entry test and one shared `mov eax, result` behind the loop, where
   an early `return result;` makes us push everything in the prologue (`assignRequiredIdleEngineersToNewTribe`,
   `addEngineersToSelection`, both ~88% -> 100%).
 - Do not add a guard the loop condition already expresses. `if (id == 0) return 0;` in front of
@@ -350,27 +368,50 @@ unrolled body, write `for (int i = 1; i != 2500; ++i)` instead of `i < 2500` (SH
 
 - **Several exits that end in the same statement were usually one statement.** MSVC copies a short shared tail
   (a store or a call followed by the epilogue) into each predecessor, so three `mov word ptr [tribe.unitStance], 2`
-  + `ret` blocks in the original do not mean three assignments in the source. Writing the assignment once after an
-  `if / else if` ladder instead of `stance = X; return;` in every arm changes how often each value is *used*, and the
-  use count is what ranks values for the callee-saved registers - so this is the fix when a function matches
-  instruction for instruction except that two registers are swapped (`tribeID` in `ebx` and the tribe offset in `ebp`
-  on one side, the reverse on the other). `giveMoveCommandToSortieUnits` 79.6% -> 100%, `instructTribe166ToMove`
-  81.8% -> 100%, `assignUnitToATribe` 86.1% -> 100% (one `addUnitToTribe(unitID, tribeID)` after the branches
-  instead of three calls). When one of the arms must skip a call the others share, a `bool` set in the arms and
-  tested once afterwards compiles away and gives the single call site the original has.
+  - `ret` blocks in the original do not mean three assignments in the source. Writing the assignment once after an
+    `if / else if` ladder instead of `stance = X; return;` in every arm changes how often each value is _used_, and the
+    use count is what ranks values for the callee-saved registers - so this is the fix when a function matches
+    instruction for instruction except that two registers are swapped (`tribeID` in `ebx` and the tribe offset in `ebp`
+    on one side, the reverse on the other). `giveMoveCommandToSortieUnits` 79.6% -> 100%, `instructTribe166ToMove`
+    81.8% -> 100%, `assignUnitToATribe` 86.1% -> 100% (one `addUnitToTribe(unitID, tribeID)` after the branches
+    instead of three calls). When one of the arms must skip a call the others share, a `bool` set in the arms and
+    tested once afterwards compiles away and gives the single call site the original has.
 - A search loop whose "found a free slot" exit must skip the check that follows the loop has its end test **inside
   the body**: `for (;; i++) { if (i >= count) { if (best == 0) return 0; break; } ... if (free) { best = create();
-  bestIndex = i; break; } ... }`. A `for (i < count)` loop with the check after it tests `best` on both paths, and
+bestIndex = i; break; } ... }`. A `for (i < count)` loop with the check after it tests `best` on both paths, and
   duplicating the tail into the create path changes the frame. With the test in the body the compiler rotates it to
   the bottom and lays the blocks out as the original does (`getSmallestPatrolTribe` 65.2% -> 100%). The same
-  function needed `int i = 0;` declared *first*, before the other zero-initialised locals, to get the original's
+  function needed `int i = 0;` declared _first_, before the other zero-initialised locals, to get the original's
   `xor` order - declaration order did not matter anywhere else it was tried.
 
 - `mov edx, esi; add esi, 1` at the **top** of a loop body, with the body then indexing by the copy, is a `while`
   loop that takes the index and advances the counter first: `while (i < count) { int index = i; i++; if (...[index]...)
-  { ...; return; } }`. A `for (...; i++)` with the same body does not produce it. Together with `int i = 0;`
+{ ...; return; } }`. A `for (...; i++)` with the same body does not produce it. Together with `int i = 0;`
   declared where the original's `xor esi, esi` sits (here before an earlier early-return test, which then compares
   against that zero register) this took `generateSiegeCreationInformation` from 39.4% to 100%.
+- Where the original compares a memory operand against a **zero register** (`xor ebp,ebp` once, then
+  `cmp dword ptr [..], ebp` and `mov dword ptr [..], ebp`) and we emit `test r,r` / `cmp ..,0`, that is **not** a
+  source-level difference and **not** a size-vs-speed flag. Using a zero register saves a byte per memory
+  comparison, so `/Os` looks like the explanation, but compiling with `/O2 /Os` per file (verified present in the
+  compile command) left `getTargetableBuildingForPlayerID`, `getSmallestPatrolTribe` and
+  `aiShouldAttackOrWaitForTeamCoordination` at _exactly_ their previous percentages. The choice cascades into a
+  different register assignment and sometimes one extra spill of the loop counter, which is why these functions
+  stall in the 43-65% band with an otherwise instruction-for-instruction match. Treat it as allocator noise and
+  record it; it shows up across `AI::AICState` (`aiRecruitUnits`, `aiGiveRaidInstructions`,
+  `generateSiegeCreationInformation`, `getTargetableBuildingForPlayerID`, `getSmallestPatrolTribe`).
+- The "find the smallest tribe, or create one if a slot is stale" family all have the same shape: a loop whose
+  create-path wants to reach the function's shared store-and-return tail while skipping the tail's
+  `selected == 0` guard, which the original does with a jump into the middle of that block. There is no goto-free
+  form that is right for all of them, so **measure each one**; the three measured so far disagree:
+  - `getSmallestPatrolTribe` (0x004CCAF0): `break` into the shared tail is best at **65.2%**; duplicating the
+    stores into the create path drops it to 48.3%.
+  - `smallestTribeOfUnitType` (0x004CC990): the reverse - duplicating the stores gives **41.9%**, a `goto` into
+    the tail would give ~55%, and `break` into the shared tail was measured at 17%.
+  - `addUnitToSmallestBehaviourTypeTribe` (0x004CCD20): `break` into the shared tail, **64.5%**; neither hoisting
+    the `smallestSize` initialiser to the top (where the original's own `mov [esp+0x24],0x3e8` sits) nor reusing
+    the loop variable for the slot index moved it at all - both exact ties.
+    So the predecessor-count rule tells you a duplicate _may_ be needed, not that it will help; `try_styles.py` is
+    the only way to settle it.
 
 ### GOTO
 
@@ -474,6 +515,7 @@ However, there are also C functions that can be replaced by intrinsics. The foll
 In cases where the decompiler seems to perform one of these actions via simple instructions, one can also try one of these functions.
 
 Example `strcpy`:
+
 ```cpp
 char* pcVar2 = filePath;
 do {
@@ -484,6 +526,7 @@ do {
 ```
 
 Example `strcmp`:
+
 ```cpp
 int iVar2 = 9;
 int bVar7 = true;
@@ -518,11 +561,13 @@ The return value optimization may appear if a function returns an object, but in
 The actual function signature will only have the object as value return.
 
 Example in Ghidra:
+
 ```cpp
 std::string* paths_getDocumentsFolderString(std::string* out, bool param_2);
 ```
 
 Actual signature:
+
 ```cpp
 std::string paths_getDocumentsFolderString(bool param_2);
 ```
