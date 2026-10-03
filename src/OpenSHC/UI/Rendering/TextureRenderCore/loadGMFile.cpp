@@ -5,6 +5,7 @@
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/IO/FileResourceType.hpp"
 #include "OpenSHC/IO/Graphics/GmImageType.hpp"
+#include "OpenSHC/IO/Graphics/ImageHeader.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GMImageHeaders.hpp"
@@ -14,7 +15,6 @@
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_PictureNumToGmIDArray_UNUSED.hpp"
 #include "OpenSHC/Globals/DAT_ResourceManager.hpp"
-#include "OpenSHC/IO/Graphics/ImageHeader.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -22,8 +22,8 @@ namespace UI {
 
         using OpenSHC::IO::FileResourceType;
         using OpenSHC::IO::Graphics::GmImageType;
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
         using OpenSHC::IO::Graphics::ImageHeader;
+        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         /*
           decompilerscript: committed: 2025-01-30 21:57:43.216000

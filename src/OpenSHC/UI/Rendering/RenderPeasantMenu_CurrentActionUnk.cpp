@@ -54,7 +54,10 @@ namespace UI {
             /*
               added by script: "Taking"
              */
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_UNIT_ACTIONS, 0x65), iVar2, iVar3, TVar4, BVar5, iVar6, BVar7, iVar8);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_UNIT_ACTIONS, 0x65),
+                iVar2, iVar3, TVar4, BVar5, iVar6, BVar7, iVar8);
             iVar8 = 0;
             BVar7 = TRUE;
             iVar6 = 0x12;
@@ -62,7 +65,10 @@ namespace UI {
             TVar4 = OpenSHC::Text::TTA_LEFT;
             iVar2 = xPos + 5;
             iVar3 = yPos;
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GOODS, (int)((int)(_entry))), iVar2, iVar3, TVar4, BVar5, iVar6, BVar7, iVar8);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_GOODS, (int)((int)(_entry))),
+                iVar2, iVar3, TVar4, BVar5, iVar6, BVar7, iVar8);
             BVar7 = TRUE;
             xPos = xPos + 10;
             _entry = ((ResourceType)0x66);
@@ -79,7 +85,10 @@ namespace UI {
                     /*
                       added by script: "Returning with"
                      */
-                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_UNIT_ACTIONS, 100), iVar2, iVar3, TVar4, BVar5, iVar6, BVar7, iVar8);
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                            DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_UNIT_ACTIONS, 100),
+                        iVar2, iVar3, TVar4, BVar5, iVar6, BVar7, iVar8);
                     BVar7 = TRUE;
                     xPos = xPos + 5;
                     _group = OpenSHC::DE::SHCDE::TEXT_GOODS;
@@ -96,7 +105,10 @@ namespace UI {
                 /*
                   added by script: "Going to get"
                  */
-                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_UNIT_ACTIONS, 0x67), iVar2, iVar3, TVar4, BVar5, iVar6, BVar7, iVar8);
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_UNIT_ACTIONS, 0x67),
+                    iVar2, iVar3, TVar4, BVar5, iVar6, BVar7, iVar8);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
                     OpenSHC::DE::SHCDE::TEXT_GOODS, (int)((int)(_entry)), xPos + 5, yPos, OpenSHC::Text::TTA_LEFT, 0,
                     0x12, TRUE);
@@ -117,7 +129,10 @@ namespace UI {
         iVar2 = 0x12;
         BVar5 = 0;
         TVar4 = OpenSHC::Text::TTA_LEFT;
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(_group, (int)((int)(_entry))), xPos, yPos, TVar4, BVar5, iVar2, BVar7, iVar3);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                DAT_TextManagerObject::ptr)(_group, (int)((int)(_entry))),
+            xPos, yPos, TVar4, BVar5, iVar2, BVar7, iVar3);
     }
 
 }

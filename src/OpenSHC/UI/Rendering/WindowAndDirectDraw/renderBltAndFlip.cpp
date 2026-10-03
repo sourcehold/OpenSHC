@@ -75,11 +75,11 @@ namespace UI {
                     MACRO_CALL_MEMBER(
                         OpenSHC::UI::Rendering::WindowAndDirectDraw_Func::adjustForNotExclusiveFullscreenUnk, this)(
                         &_destinationRect, &_sourceRect);
-                    this->directDrawBackbufferSurfacePointer->Blt(&_destinationRect, this->directDrawOffscreenSurfacePointer_screenMenu, &_sourceRect, 0x1000000,
-                        (LPDDBLTFX)0x0);
+                    this->directDrawBackbufferSurfacePointer->Blt(&_destinationRect,
+                        this->directDrawOffscreenSurfacePointer_screenMenu, &_sourceRect, 0x1000000, (LPDDBLTFX)0x0);
                 } else {
-                    this->directDrawBackbufferSurfacePointer->BltFast(0, 0,
-                        this->directDrawOffscreenSurfacePointer_screenMenu, (tagRECT*)0xf983e8, 0x10);
+                    this->directDrawBackbufferSurfacePointer->BltFast(
+                        0, 0, this->directDrawOffscreenSurfacePointer_screenMenu, (tagRECT*)0xf983e8, 0x10);
                 }
             }
             if (this->mbr_0xd0 != 0) {
@@ -98,8 +98,8 @@ namespace UI {
                 _destinationRect.bottom = (this->clientOnScreenCoords.top - iVar1) + this->resolutionY;
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::WindowAndDirectDraw_Func::adjustForNotExclusiveFullscreenUnk,
                     this)(&_destinationRect, &_sourceRect);
-                this->directDrawBackbufferSurfacePointer->Blt(&_destinationRect, this->directDrawOffscreenSurfacePointer_mapGame, &_sourceRect, 0x1000000,
-                    (LPDDBLTFX)0x0);
+                this->directDrawBackbufferSurfacePointer->Blt(&_destinationRect,
+                    this->directDrawOffscreenSurfacePointer_mapGame, &_sourceRect, 0x1000000, (LPDDBLTFX)0x0);
                 if ((this->unk_resetViewportRelated == 2) && (this->mbr_0xd0 != 2)) {
                     this->mbr_0xcc = this->mbr_0xcc + 1;
                     _sourceRect.top = this->resolutionY + -0x80;
@@ -113,8 +113,8 @@ namespace UI {
                     MACRO_CALL_MEMBER(
                         OpenSHC::UI::Rendering::WindowAndDirectDraw_Func::adjustForNotExclusiveFullscreenUnk, this)(
                         &_destinationRect, &_sourceRect);
-                    this->directDrawBackbufferSurfacePointer->Blt(&_destinationRect, this->directDrawOffscreenSurfacePointer_screenMenu, &_sourceRect, 0x1000000,
-                        (LPDDBLTFX)0x0);
+                    this->directDrawBackbufferSurfacePointer->Blt(&_destinationRect,
+                        this->directDrawOffscreenSurfacePointer_screenMenu, &_sourceRect, 0x1000000, (LPDDBLTFX)0x0);
                 } else {
                     if (this->unk_resetViewportRelated == 3) {
                         _sourceRect.left = DAT_MenuHandlerState::instance.x + 0x23b;
@@ -148,8 +148,8 @@ namespace UI {
                     MACRO_CALL_MEMBER(
                         OpenSHC::UI::Rendering::WindowAndDirectDraw_Func::adjustForNotExclusiveFullscreenUnk, this)(
                         &_destinationRect, &_sourceRect);
-                    this->directDrawBackbufferSurfacePointer->Blt(&_destinationRect, this->directDrawOffscreenSurfacePointer_screenMenu, &_sourceRect, 0x1000000,
-                        (LPDDBLTFX)0x0);
+                    this->directDrawBackbufferSurfacePointer->Blt(&_destinationRect,
+                        this->directDrawOffscreenSurfacePointer_screenMenu, &_sourceRect, 0x1000000, (LPDDBLTFX)0x0);
                 }
             }
         LAB_0047040e:
@@ -168,8 +168,8 @@ namespace UI {
                     MACRO_CALL_MEMBER(
                         OpenSHC::UI::Rendering::WindowAndDirectDraw_Func::adjustForNotExclusiveFullscreenUnk, this)(
                         &_destinationRect, &_sourceRect);
-                    this->directDrawBackbufferSurfacePointer->Blt(&_destinationRect, this->directDrawOffscreenSurfacePointer_screenMenu, &_sourceRect, 0x1000000,
-                        (LPDDBLTFX)0x0);
+                    this->directDrawBackbufferSurfacePointer->Blt(&_destinationRect,
+                        this->directDrawOffscreenSurfacePointer_screenMenu, &_sourceRect, 0x1000000, (LPDDBLTFX)0x0);
                 } else {
                     if (this->unk_resetViewportRelated == 3) {
                         _sourceRect.left = DAT_MenuHandlerState::instance.x + 571;
@@ -203,8 +203,8 @@ namespace UI {
                     MACRO_CALL_MEMBER(
                         OpenSHC::UI::Rendering::WindowAndDirectDraw_Func::adjustForNotExclusiveFullscreenUnk, this)(
                         &_destinationRect, &_sourceRect);
-                    this->directDrawBackbufferSurfacePointer->Blt(&_destinationRect, this->directDrawOffscreenSurfacePointer_screenMenu, &_sourceRect, 0x1000000,
-                        (LPDDBLTFX)0x0);
+                    this->directDrawBackbufferSurfacePointer->Blt(&_destinationRect,
+                        this->directDrawOffscreenSurfacePointer_screenMenu, &_sourceRect, 0x1000000, (LPDDBLTFX)0x0);
                 }
             }
         LAB_004705da:

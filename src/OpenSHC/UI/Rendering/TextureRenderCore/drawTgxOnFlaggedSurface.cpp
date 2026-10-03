@@ -1,19 +1,19 @@
 #include "../TextureRenderCore.func.hpp"
 
 #include "OpenSHC/IO/Graphics/TgxToken.hpp"
+#include "OpenSHC/IO/Graphics/TgxTokenByte.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
 #include "OpenSHC/Globals/DAT_WindowAndDirectDraw.hpp"
-#include "OpenSHC/IO/Graphics/TgxTokenByte.hpp"
 
 namespace OpenSHC {
 namespace UI {
     namespace Rendering {
 
         using OpenSHC::IO::Graphics::TgxToken;
-        using OpenSHC::Rendering::Enums::RenderTarget;
         using OpenSHC::IO::Graphics::TgxTokenByte;
+        using OpenSHC::Rendering::Enums::RenderTarget;
 
         /*
           decompilerscript: committed: 2025-01-30 21:57:43.216000
@@ -36,20 +36,25 @@ namespace UI {
             int _xRenderPos;
             LVar3 = DAT_TextureRenderCoreObject::instance.renderingRect_16c854.right;
             LVar2 = DAT_TextureRenderCoreObject::instance.renderingRect_16c854.left;
-            if (DAT_TextureRenderCoreObject::instance.currentRenderSurfaceIdentifierUnk_0x8 == OpenSHC::Rendering::Enums::RT_SCREEN_MENU) {
-                DAT_TextureRenderCoreObject::instance.currentRenderSurface = DAT_WindowAndDirectDraw::instance.surfacePointer_screenMenu;
+            if (DAT_TextureRenderCoreObject::instance.currentRenderSurfaceIdentifierUnk_0x8
+                == OpenSHC::Rendering::Enums::RT_SCREEN_MENU) {
+                DAT_TextureRenderCoreObject::instance.currentRenderSurface
+                    = DAT_WindowAndDirectDraw::instance.surfacePointer_screenMenu;
                 /*
                   Could be "jump"-line needed to skip to start of next horizontal line.   --TheRedDaemon
                  */
                 gfxWidth = DAT_WindowAndDirectDraw::instance.byteSizeOfOneHorizontalLine + gfxWidth * -2;
                 _byteWidth = DAT_WindowAndDirectDraw::instance.byteSizeOfOneHorizontalLine;
-            } else if (DAT_TextureRenderCoreObject::instance.currentRenderSurfaceIdentifierUnk_0x8 == OpenSHC::Rendering::Enums::RT_MAP_GAME) {
-                DAT_TextureRenderCoreObject::instance.currentRenderSurface = DAT_WindowAndDirectDraw::instance.surfacePointer_mapGame;
+            } else if (DAT_TextureRenderCoreObject::instance.currentRenderSurfaceIdentifierUnk_0x8
+                == OpenSHC::Rendering::Enums::RT_MAP_GAME) {
+                DAT_TextureRenderCoreObject::instance.currentRenderSurface
+                    = DAT_WindowAndDirectDraw::instance.surfacePointer_mapGame;
                 gfxWidth = (0xfd8 - gfxWidth) * 2;
                 _byteWidth = 0x1fb0;
             }
             if ((gfxHeight + yPos <= DAT_TextureRenderCoreObject::instance.renderingRect_16c854.bottom)
-                || (gfxHeight = DAT_TextureRenderCoreObject::instance.renderingRect_16c854.bottom - yPos, 0 < gfxHeight)) {
+                || (gfxHeight = DAT_TextureRenderCoreObject::instance.renderingRect_16c854.bottom - yPos,
+                    0 < gfxHeight)) {
                 if (yPos < DAT_TextureRenderCoreObject::instance.renderingRect_16c854.top) {
                     iVar6 = DAT_TextureRenderCoreObject::instance.renderingRect_16c854.top - yPos;
                     if (gfxHeight <= iVar6) {}
@@ -74,7 +79,8 @@ namespace UI {
                         yPos = DAT_TextureRenderCoreObject::instance.renderingRect_16c854.top;
                     } while (0 < iVar6);
                 }
-                _renderPtr = (ushort*)((int)DAT_TextureRenderCoreObject::instance.currentRenderSurface + yPos * _byteWidth + xPos * 2);
+                _renderPtr = (ushort*)((int)DAT_TextureRenderCoreObject::instance.currentRenderSurface
+                    + yPos * _byteWidth + xPos * 2);
                 _xRenderPos = xPos;
             LAB_00454b69:
                 do {
