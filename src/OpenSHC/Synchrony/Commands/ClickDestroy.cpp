@@ -74,9 +74,9 @@ namespace Synchrony {
                           DAT_TileMapState::instance.HeightLayer[DAT_GameSynchronyState::instance.DAT_GameCommandParam0]
                     - (uint)DAT_TileMapState::instance
                         .DefaultHeightLayer[DAT_GameSynchronyState::instance.DAT_GameCommandParam0])
-                < 0x3d) {
+                <= 0x3c) {
                 DAT_GameSynchronyState::instance.DAT_GameCommandParam1
-                    = DAT_GameSynchronyState::instance.DAT_GameCommandParam1 / 2;
+                    = (int)DAT_GameSynchronyState::instance.DAT_GameCommandParam1 / 2;
             }
             MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::giveBackResourceForDestroyedBuilding,
                 DAT_BuildingsState::ptr)(-1, (int)((int)(DAT_GameSynchronyState::instance.protocolInvokerPlayerID)),
