@@ -30,7 +30,9 @@ namespace UI {
                  */
                 _menuID = _arrayElementOffset[1].menuID;
                 _arrayElementOffset = _arrayElementOffset + 1;
-                if (_menuID == OpenSHC::UI::Enums::MVT_MENUVIEWID_MENU_PAIR_ENDMARKER) {}
+                if (_menuID == OpenSHC::UI::Enums::MVT_MENUVIEWID_MENU_PAIR_ENDMARKER) {
+                    return;
+                }
             }
             /*
               get the value of the menu pointer
