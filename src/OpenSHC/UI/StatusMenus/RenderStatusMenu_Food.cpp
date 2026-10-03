@@ -93,7 +93,7 @@ namespace UI {
                 iVar6, DAT_MenuHandlerState::instance.y + 0x225, OpenSHC::Text::TTA_LEFT, 0, 0x11, FALSE, 0);
             piVar5 = piVar5 + 1;
             iVar6 = iVar6 + 0x50;
-        } while ((int)piVar5 < 0x61819c);
+        } while (piVar5 < DAT_RenderingDefinedData::instance.field1050_0x55720 + 4);
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
     }
 
