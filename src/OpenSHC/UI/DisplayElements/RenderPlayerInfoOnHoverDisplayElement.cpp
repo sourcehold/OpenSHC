@@ -117,6 +117,7 @@ namespace UI {
         if (DAT_MenuModalComposition2::instance.activeModalDialogID
             == OpenSHC::UI::Enums::MMT_DISPLAY_AI_LORD_MESSAGE) {
             DAT_00df5530::instance = 0;
+            return;
         }
         blendStrength = 0;
         if (iVar3 == 0) {
