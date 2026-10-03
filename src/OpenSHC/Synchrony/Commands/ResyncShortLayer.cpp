@@ -1,0 +1,184 @@
+#include "../../Synchrony.func.hpp"
+#include "../Commands.func.hpp"
+
+#include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
+#include "OpenSHC/Commands/GameCommandParameterLocation.hpp"
+#include "OpenSHC/Commands/GameCommandParameterReadWrite.hpp"
+#include "OpenSHC/Commands/GameCommandScheduling.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
+#include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
+#include "OpenSHC/Globals/DAT_TileMapState.hpp"
+
+namespace OpenSHC {
+namespace Synchrony {
+
+    using OpenSHC::Commands::GameCommandParameterLocation;
+    using OpenSHC::Commands::GameCommandParameterReadWrite;
+    using OpenSHC::Commands::GameCommandScheduling;
+    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
+
+    /*
+      WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
+     */
+    /*
+      WARNING: Enum "DPERRInt": Some values do not have unique names
+     */
+    /*
+      WARNING: Enum "MappersEnum": Some values do not have unique names
+     */
+    /*
+      decompilerscript: committed: 2025-01-30 21:57:43.216000
+     */
+    // FUNCTION: STRONGHOLDCRUSADER 0x004840C0
+    void Commands::ResyncShortLayer()
+    {
+        GameCommandParameterReadWrite GVar1;
+        DAT_GameSynchronyState::instance.DAT_GameCommandArray[DAT_GameSynchronyState::instance.DAT_CurrentGameCommandID]
+            .time = 0;
+        DAT_GameSynchronyState::instance.DAT_CommandSize = 2520;
+        if (DAT_GameSynchronyState::instance.DAT_CommandActionPlan == OpenSHC::Commands::GCS_SCHEDULE_AND_SEND) {
+            DAT_GameSynchronyState::instance.DAT_CommandActionPlan = OpenSHC::Commands::GCS_EXECUTE;
+            MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+                DAT_GameSynchronyState::ptr)(&DAT_GameSynchronyState::instance.DAT_GameCommandParam0, 4,
+                OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1);
+            MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+                DAT_GameSynchronyState::ptr)(&DAT_GameSynchronyState::instance.DAT_GameCommandParam1, 4,
+                OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1);
+            switch (DAT_GameSynchronyState::instance.DAT_GameCommandParam0) {
+            case 1:
+                GVar1 = OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1;
+            LAB_0048413b:
+                MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+                    DAT_GameSynchronyState::ptr)(DAT_TileMapState::instance.RandomLayer
+                        + DAT_GameSynchronyState::instance.DAT_GameCommandParam1 * 0x4e8,
+                    (size_t)((int)(2512)), OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, GVar1);
+                return;
+            case 2:
+                GVar1 = OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1;
+            LAB_00484162:
+                MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+                    DAT_GameSynchronyState::ptr)(DAT_TileMapState::instance.WalkLayer
+                        + DAT_GameSynchronyState::instance.DAT_GameCommandParam1 * 0x4e8,
+                    0x9d0, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, GVar1);
+                return;
+            case 3:
+                GVar1 = OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1;
+            LAB_00484189:
+                MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+                    DAT_GameSynchronyState::ptr)(DAT_TileMapState::instance.OrganismLayer
+                        + DAT_GameSynchronyState::instance.DAT_GameCommandParam1 * 0x4e8,
+                    0x9d0, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, GVar1);
+                return;
+            case 4:
+                MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+                    DAT_GameSynchronyState::ptr)(DAT_TileMapState::instance.BuildingLayer
+                        + DAT_GameSynchronyState::instance.DAT_GameCommandParam1 * 0x4e8,
+                    0x9d0, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
+                    OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1);
+                return;
+            case 5:
+                MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+                    DAT_GameSynchronyState::ptr)(DAT_TileMapState::instance.UnitLayer
+                        + DAT_GameSynchronyState::instance.DAT_GameCommandParam1 * 0x4e8,
+                    0x9d0, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
+                    OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1);
+                return;
+            case 6:
+                GVar1 = OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1;
+            LAB_004841fc:
+                MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+                    DAT_GameSynchronyState::ptr)(DAT_TileMapState::instance.EntityLayer
+                        + DAT_GameSynchronyState::instance.DAT_GameCommandParam1 * 0x4e8,
+                    0x9d0, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, GVar1);
+                return;
+            case 7:
+                MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+                    DAT_GameSynchronyState::ptr)(DAT_TileMapState::instance.CertainPathLayer
+                        + DAT_GameSynchronyState::instance.DAT_GameCommandParam1 * 0x4e8,
+                    (size_t)((int)(2512)), OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
+                    OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1);
+                return;
+            case 8:
+                MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+                    DAT_GameSynchronyState::ptr)(DAT_TileMapState::instance.PathConnectionLayer
+                        + DAT_GameSynchronyState::instance.DAT_GameCommandParam1 * 0x4e8,
+                    (size_t)((int)(2512)), OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
+                    OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1);
+                return;
+            case 9:
+                GVar1 = OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1;
+                break;
+            default:
+                return;
+            }
+        } else {
+            if (DAT_GameSynchronyState::instance.DAT_CommandActionPlan != OpenSHC::Commands::GCS_EXECUTE) {
+                DAT_GameSynchronyState::instance.DAT_CommandSize = 2520;
+            }
+            if (DAT_GameSynchronyState::instance.isHost != FALSE) {
+                DAT_GameSynchronyState::instance.DAT_CommandSize = 2520;
+            }
+            MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+                DAT_GameSynchronyState::ptr)(&DAT_GameSynchronyState::instance.DAT_GameCommandParam0, 4,
+                OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
+            MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+                DAT_GameSynchronyState::ptr)(&DAT_GameSynchronyState::instance.DAT_GameCommandParam1, 4,
+                OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
+            switch (DAT_GameSynchronyState::instance.DAT_GameCommandParam0) {
+            case 1:
+                GVar1 = OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1;
+                goto LAB_0048413b;
+            case 2:
+                GVar1 = OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1;
+                goto LAB_00484162;
+            case 3:
+                GVar1 = OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1;
+                goto LAB_00484189;
+            case 4:
+                MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+                    DAT_GameSynchronyState::ptr)(DAT_TileMapState::instance.BuildingLayer
+                        + DAT_GameSynchronyState::instance.DAT_GameCommandParam1 * 0x4e8,
+                    0x9d0, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
+                    OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
+                return;
+            case 5:
+                MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+                    DAT_GameSynchronyState::ptr)(DAT_TileMapState::instance.UnitLayer
+                        + DAT_GameSynchronyState::instance.DAT_GameCommandParam1 * 0x4e8,
+                    0x9d0, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
+                    OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
+                return;
+            case 6:
+                GVar1 = OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1;
+                goto LAB_004841fc;
+            case 7:
+                MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+                    DAT_GameSynchronyState::ptr)(DAT_TileMapState::instance.CertainPathLayer
+                        + DAT_GameSynchronyState::instance.DAT_GameCommandParam1 * 1256,
+                    (size_t)((int)(2512)), OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
+                    OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
+                return;
+            case 8:
+                MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+                    DAT_GameSynchronyState::ptr)(DAT_TileMapState::instance.PathConnectionLayer
+                        + DAT_GameSynchronyState::instance.DAT_GameCommandParam1 * 0x4e8,
+                    0x9d0, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
+                    OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
+                return;
+            case 9:
+                GVar1 = OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1;
+                break;
+            default:
+                return;
+            }
+            return;
+        }
+        MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+            DAT_GameSynchronyState::ptr)(
+            DAT_TileMapState::instance.MacroLayer + DAT_GameSynchronyState::instance.DAT_GameCommandParam1 * 0x4e8,
+            0x9d0, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, GVar1);
+    }
+
+}
+}
