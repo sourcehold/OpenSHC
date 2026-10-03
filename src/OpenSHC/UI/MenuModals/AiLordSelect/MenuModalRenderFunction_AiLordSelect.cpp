@@ -57,7 +57,7 @@ namespace UI {
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderLoadedGfx,
                 DAT_TextureRenderCoreObject::ptr)(iVar1, x, y);
             if (8 < DAT_GameCore::instance.numOfAIsWithCastleUnk) {
-                yPos = y + 0xba;
+                yPos = yPos + 0x4c;
             }
             if (DAT_MouseState::instance.rightClickStart != 0) {
                 MACRO_CALL_MEMBER(OpenSHC::UI::MenuModalComposition_Func::activateModalDialog,
@@ -88,7 +88,10 @@ namespace UI {
             blendStrength = 0;
             fontSize = 0x12;
             color_00 = 0xccfaff;
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, iVar2), iVar1, yPos, maxWidth, color_00, fontSize, blendStrength);
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
+                MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, iVar2),
+                iVar1, yPos, maxWidth, color_00, fontSize, blendStrength);
         }
 
     }
