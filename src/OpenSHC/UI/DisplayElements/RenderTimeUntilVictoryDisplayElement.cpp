@@ -51,6 +51,7 @@ namespace UI {
         if (DAT_GameCore::instance.section1095 == 2) {
             MACRO_CALL(OpenSHC::UI::DisplayElements_Func::CheckDisplayElementByIDAndSetForUnlimitedDisplay)(
                 OpenSHC::UI::Enums::DEID_TIME_UNTIL_VICTORY, 0);
+            return;
         }
         iVar4 = 0x12;
         /*
