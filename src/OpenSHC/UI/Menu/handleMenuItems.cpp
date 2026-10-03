@@ -34,8 +34,7 @@ namespace UI {
         _menuItemArray = this->menuItemArray;
         this->currentBuildMenuButtonShiftUnk_0x14 = 0;
         _menuItemType = _menuItemArray->menuItemType;
-        do {
-            if (_menuItemType == OpenSHC::UI::Enums::MIT_LAST_ENTRY) {}
+        while (_menuItemType != OpenSHC::UI::Enums::MIT_LAST_ENTRY) {
             _currentMenuItemPtr = _menuItemArray;
             if (_menuItemType == OpenSHC::UI::Enums::MIT_TAB_CONSIDER_ITEM_SKIP_BECAUSE_OTHER_MENU_TAB) {
                 if (((_menuItemArray->callbackParameter).activeMenuTab.tabType
@@ -118,7 +117,7 @@ namespace UI {
             }
             _menuItemType = _currentMenuItemPtr[1].menuItemType;
             _menuItemArray = _currentMenuItemPtr + 1;
-        } while (true);
+        }
     }
 
 }
