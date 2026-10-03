@@ -46,10 +46,9 @@ namespace Synchrony {
         size_t size;
         GameCommandParameterLocation srcSwitch;
         GameCommandParameterReadWrite destSwitch;
-        char local_3f4[4];
-        char local_3f0[1004];
+        char mapName[1000];
         uint local_4;
-        local_4 = MSVC_SecurityCookie::instance ^ (uint)local_3f4;
+        local_4 = MSVC_SecurityCookie::instance ^ (uint)mapName;
         DAT_GameSynchronyState::instance.DAT_CommandSize = 1004;
         DAT_GameSynchronyState::instance.DAT_GameCommandArray[DAT_GameSynchronyState::instance.DAT_CurrentGameCommandID]
             .time = 0;
@@ -66,21 +65,21 @@ namespace Synchrony {
                 OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1);
             _mapname = MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::mapNames_getLoadedMapNameForIndex,
                 DAT_ResourceManager::ptr)(DAT_GameSynchronyState::instance.DAT_GameCommandParam0);
-            pcVar2 = local_3f4;
+            pcVar2 = mapName;
             do {
                 cVar1 = *_mapname;
                 *pcVar2 = cVar1;
                 _mapname = _mapname + 1;
                 pcVar2 = pcVar2 + 1;
             } while (cVar1 != '\0');
-            _mapname = (local_3f4 - 1);
+            _mapname = (mapName - 1);
             do {
                 pcVar2 = _mapname;
                 _mapname = pcVar2 + 1;
             } while (pcVar2[1] != '\0');
             strcpy(pcVar2 + 1, ".map");
             MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::resolveResourceFileName, DAT_ResourceManager::ptr)(
-                OpenSHC::IO::FRT_MAPS, (char const*)((int)(local_3f4)));
+                OpenSHC::IO::FRT_MAPS, mapName);
             DAT_GameSynchronyState::instance.DAT_PlayerIDReceiver
                 = DAT_GameSynchronyState::instance
                       .currentPlayerFullIDArray[DAT_GameSynchronyState::instance.DAT_GameCommandParam1];
@@ -89,20 +88,20 @@ namespace Synchrony {
         }
         if (DAT_GameSynchronyState::instance.DAT_CommandActionPlan == OpenSHC::Commands::GCS_EXECUTE) {
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
-                DAT_GameSynchronyState::ptr)(local_3f4, 1000, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
+                DAT_GameSynchronyState::ptr)(mapName, 1000, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
                 OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
                 DAT_GameSynchronyState::ptr)(&DAT_GameSynchronyState::instance.mapSendingFileSize, 4,
                 OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
             if (DAT_GameSynchronyState::instance.isHost == FALSE) {
-                _mapname = (local_3f4 - 1);
+                _mapname = (mapName - 1);
                 do {
                     pcVar2 = _mapname;
                     _mapname = pcVar2 + 1;
                 } while (pcVar2[1] != '\0');
                 strcpy(pcVar2 + 1, ".map");
                 MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::resolveResourceFileName, DAT_ResourceManager::ptr)(
-                    OpenSHC::IO::FRT_MAPS, (char const*)((int)(local_3f4)));
+                    OpenSHC::IO::FRT_MAPS, mapName);
                 _mapname = MACRO_CALL_MEMBER(
                     OpenSHC::IO::ResourceManager_Func::getFileNameOfCurrentActiveResource, DAT_ResourceManager::ptr)();
                 DAT_GameSynchronyState::instance.FILEPTR_ReceivedMapFile
