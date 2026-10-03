@@ -7,6 +7,7 @@
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/UI/Enums/BuildingsAndStatusMenuTabType.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
+#include "OpenSHC/UI/Enums/TextMessageBLLookupStructTypeEnum.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/COL_GREYISH_YELLOW.hpp"
@@ -18,7 +19,6 @@
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
 #include "OpenSHC/Globals/DAT_WindowAndDirectDraw.hpp"
-#include "OpenSHC/UI/Enums/TextMessageBLLookupStructTypeEnum.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -27,8 +27,8 @@ namespace UI {
     using OpenSHC::Text::TextAlignment;
     using OpenSHC::UI::Enums::BuildingsAndStatusMenuTabType;
     using OpenSHC::UI::Enums::MenuViewType;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
     using OpenSHC::UI::Enums::TextMessageBLLookupStructTypeEnum;
+    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     /*
       WARNING: Enum "MappersEnum": Some values do not have unique names
@@ -48,7 +48,8 @@ namespace UI {
         MenuItem* _menuItem;
         _currentTime = timeGetTime();
         _menuItem = this->hoveredItem;
-        if (((_menuItem != (MenuItem*)0x0) && (_index = (uint)(ushort)_menuItem->textMessageLookupIndex.field0_0x0, _index != 0))
+        if (((_menuItem != (MenuItem*)0x0)
+                && (_index = (uint)(ushort)_menuItem->textMessageLookupIndex.field0_0x0, _index != 0))
             && ((((DAT_GameCore::instance.currentMenuViewType != OpenSHC::UI::Enums::MVT_BUILDING_AND_STATUS_MENU
                       || ((((DAT_GameCore::instance.activeMenuTab.tabType
                                     == OpenSHC::UI::Enums::BASMTT_BARRACKS_OR_MPMENU_MODEM
@@ -63,12 +64,11 @@ namespace UI {
             switch (DAT_RenderingDefinedData::instance.TextMessageLookupTable[_index].messageType) {
             case ((TextMessageBLLookupStructTypeEnum)0):
                 return;
-                default:
-                    if (((DAT_MouseState::instance.leftClickState == FALSE)
-                                                      && (DAT_MouseState::instance.rightClickState == FALSE))
-                                                  && ((DAT_MouseState::instance.midClickState == FALSE
-                                                      && (DAT_GameCore::instance.settingBubbleHelp != 0))))
-                {
+            default:
+                if (((DAT_MouseState::instance.leftClickState == FALSE)
+                        && (DAT_MouseState::instance.rightClickState == FALSE))
+                    && ((DAT_MouseState::instance.midClickState == FALSE
+                        && (DAT_GameCore::instance.settingBubbleHelp != 0)))) {
                     iVar1 = this->zero;
                     if (iVar1 == 0) {
                         this->zero = 1;
@@ -84,9 +84,10 @@ namespace UI {
                                      .TextMessageLookupTable[(uint)(ushort)_menuItem->textMessageLookupIndex.field0_0x0]
                                      .textIndexInGroup;
                         this->field11_0x2c = _group;
-                        _groupIndex = DAT_RenderingDefinedData::instance
-                                          .TextMessageLookupTable[(uint)(ushort)_menuItem->textMessageLookupIndex.field0_0x0]
-                                          .textGroupIndex;
+                        _groupIndex
+                            = DAT_RenderingDefinedData::instance
+                                  .TextMessageLookupTable[(uint)(ushort)_menuItem->textMessageLookupIndex.field0_0x0]
+                                  .textGroupIndex;
                         this->field12_0x30 = _groupIndex;
                         if (((_group == 0x12e) && (_groupIndex == 8)) && (DAT_GameCore::instance.field22_0x64 == 1)) {
                             /*
@@ -98,8 +99,9 @@ namespace UI {
                         this->someMenuItemPtr_0x3c = _menuItem;
                     }
                     if ((iVar1 == 2) && (this->someMenuItemPtr_0x3c == _menuItem)) {
-                        text = MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((OpenSHC::DE::SHCDE::eTextSections)(this->field12_0x30), this->field11_0x2c);
+                        text = MACRO_CALL_MEMBER(
+                            OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
+                            (OpenSHC::DE::SHCDE::eTextSections)(this->field12_0x30), this->field11_0x2c);
                         iVar1 = MACRO_CALL_MEMBER(
                             OpenSHC::Text::TextManager_Func::computeTextWidth, DAT_TextManagerObject::ptr)(text, 0x11);
                         if ((DAT_GameCore::instance.currentMenuViewType

@@ -85,8 +85,8 @@ namespace UI {
                         DAT_ViewportRenderState::ptr)(OpenSHC::IO::Graphics::GID_ANIM_FLAGS, imageID, local_c, local_10,
                         DAT_ViewportRenderState::instance.translationMatrix[piVar6->y].addXgetTile + piVar6->x, 0xd);
                     break;
-                    default:
-                        DAT_TileMapState::instance.field188_0x554a14 = 1;
+                default:
+                    DAT_TileMapState::instance.field188_0x554a14 = 1;
                     DAT_TileMapState::instance.uiBuildingRotation = piVar6->rotationOrExtraInfo;
                     MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setConstructionGFXLayerBasedOnPlacementChecks,
                         DAT_TileMapState::ptr)(

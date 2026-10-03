@@ -102,7 +102,7 @@ namespace UI {
             _y = (this->modalMenu).y;
             _menuPtr->xPosition = (this->modalMenu).x;
             _menuPtr->yPosition = _y;
-MACRO_CALL_MEMBER(OpenSHC::UI::Menu_Func::updateMenuButtons, (this->modalMenu).pointerToMenu)();
+            MACRO_CALL_MEMBER(OpenSHC::UI::Menu_Func::updateMenuButtons, (this->modalMenu).pointerToMenu)();
         }
         if (this->minus1 == -1) {
             this->minus1 = 0;
