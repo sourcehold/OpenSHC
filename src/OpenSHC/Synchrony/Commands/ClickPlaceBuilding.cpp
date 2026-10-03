@@ -110,7 +110,7 @@ namespace Synchrony {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::placeBuilding, DAT_TileMapState::ptr)(iVar1,
                 ((DAT_GameSynchronyState::instance.DAT_GameCommandParam0)),
                 ((DAT_GameSynchronyState::instance.DAT_GameCommandParam1)),
-                (MappersEnum)((int)(DAT_GameSynchronyState::instance.DAT_GameCommandParam2 & 0xffff)),
+                (MappersEnum)((ushort)DAT_GameSynchronyState::instance.DAT_GameCommandParam2),
                 ((DAT_GameSynchronyState::instance.DAT_GameCommandParam3)),
                 ((DAT_GameSynchronyState::instance.DAT_GameCommandParam4)));
         }
