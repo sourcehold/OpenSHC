@@ -68,7 +68,8 @@ namespace Synchrony {
                         DAT_GameSynchronyState::instance.currentPlayerFullIDArray[_receivedPlayerSlotID]
                             = DAT_GameSynchronyState::instance.DAT_CurrentPlayerFullIDArray2[_somePlayerInformation];
                         pacVar2 = DAT_GameSynchronyState::instance.playerNames2 + _somePlayerInformation;
-                        iVar3 = (_receivedPlayerSlotID * 250 + 0x1a23384) - (int)pacVar2;
+                        iVar3 = (int)DAT_GameSynchronyState::instance.DAT_PlayerNames[_receivedPlayerSlotID]
+                            - (int)pacVar2;
                         do {
                             cVar1 = (*pacVar2)[0];
                             *(char*)((int)pacVar2 + iVar3) = cVar1;
