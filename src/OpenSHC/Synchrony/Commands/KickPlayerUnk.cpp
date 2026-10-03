@@ -72,6 +72,7 @@ namespace Synchrony {
                     0x16);
                 MACRO_CALL(OpenSHC::Synchrony::Actions_Func::RemovePositionOfPlayer)(
                     DAT_GameSynchronyState::instance.DAT_GameCommandParam0);
+                return;
             }
             if (DAT_GameSynchronyState::instance.currentAIArray[DAT_GameSynchronyState::instance.DAT_GameCommandParam0]
                 != 0) {
