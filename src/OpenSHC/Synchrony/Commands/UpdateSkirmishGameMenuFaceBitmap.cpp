@@ -34,8 +34,7 @@ namespace Synchrony {
         int iVar3;
         int local_8c;
         int local_88;
-        undefined1 local_84[64];
-        undefined1 auStack_44[64];
+        undefined1 local_84[128];
         DAT_GameSynchronyState::instance.DAT_CommandSize = 0x88;
         DAT_GameSynchronyState::instance.DAT_GameCommandArray[DAT_GameSynchronyState::instance.DAT_CurrentGameCommandID]
             .time = 0;
@@ -52,7 +51,7 @@ namespace Synchrony {
             do {
                 local_84[iVar2] = *(undefined1*)((int)DAT_TextureRenderCoreObject::instance.bitmapsFaces_0x94
                     + iVar2 * 2 + iVar3 * 0x80);
-                auStack_44[iVar2] = *(undefined1*)((int)DAT_TextureRenderCoreObject::instance.bitmapsFaces_0x94
+                local_84[iVar2 + 0x40] = *(undefined1*)((int)DAT_TextureRenderCoreObject::instance.bitmapsFaces_0x94
                     + iVar2 * 2 + iVar3 * 0x80 + 1);
                 iVar2 = iVar2 + 1;
             } while (iVar2 < 0x40);
@@ -79,7 +78,7 @@ namespace Synchrony {
                 iVar3 = 0;
                 do {
                     *(undefined1*)((int)pvVar1 + iVar3 * 2 + local_88 * 0x80) = local_84[iVar3];
-                    *(undefined1*)((int)pvVar1 + iVar3 * 2 + local_88 * 0x80 + 1) = auStack_44[iVar3];
+                    *(undefined1*)((int)pvVar1 + iVar3 * 2 + local_88 * 0x80 + 1) = local_84[iVar3 + 0x40];
                     iVar3 = iVar3 + 1;
                 } while (iVar3 < 0x40);
                 DAT_TextureRenderCoreObject::instance.field69_0x98[local_8c + 0x13] = 0x2100;
