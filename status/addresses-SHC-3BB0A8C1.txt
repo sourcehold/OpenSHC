@@ -22463,7 +22463,7 @@ SHC_3BB0A8C1_0x004816F0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00481860 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004819D0 | 97.7% | Style pass, asm differs
+SHC_3BB0A8C1_0x004819D0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00481B50 | 100.0% | Reimplemented
 

@@ -97,7 +97,7 @@ namespace Synchrony {
                 (uint)((int)(DAT_GameSynchronyState::instance.DAT_GameCommandParam1)),
                 (uint)((int)(DAT_GameSynchronyState::instance.DAT_GameCommandParam2)),
                 (uint)((int)(DAT_GameSynchronyState::instance.DAT_GameCommandParam3)),
-                (MappersEnum)((int)(DAT_GameSynchronyState::instance.DAT_GameCommandParam4 & 0xffff)),
+                (MappersEnum)((int)((ushort)DAT_GameSynchronyState::instance.DAT_GameCommandParam4)),
                 (int)((int)(DAT_GameSynchronyState::instance.DAT_GameCommandParam5)));
         }
     }
