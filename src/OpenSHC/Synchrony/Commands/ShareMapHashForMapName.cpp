@@ -69,11 +69,10 @@ namespace Synchrony {
                 pcVar3 = pcVar3 + 1;
                 pcVar2 = pcVar2 + 1;
             } while (cVar1 != '\0');
-            pcVar2 = mapName + -1;
-            do {
-                pcVar3 = pcVar2;
-                pcVar2 = pcVar3 + 1;
-            } while (pcVar3[1] != '\0');
+            pcVar3 = mapName + -1;
+            while (pcVar3[1] != '\0') {
+                pcVar3 = pcVar3 + 1;
+            }
             strcpy(pcVar3 + 1, ".map");
             MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::resolveResourceFileName, DAT_ResourceManager::ptr)(
                 OpenSHC::IO::FRT_MAPS, mapName);
@@ -110,11 +109,10 @@ namespace Synchrony {
                     DAT_GameSynchronyState::instance.unknownMapName_01[iVar4] = cVar1;
                     iVar4 = iVar4 + 1;
                 } while (cVar1 != '\0');
-                pcVar2 = mapName + -1;
-                do {
-                    pcVar3 = pcVar2;
-                    pcVar2 = pcVar3 + 1;
-                } while (pcVar3[1] != '\0');
+                pcVar3 = mapName + -1;
+                while (pcVar3[1] != '\0') {
+                    pcVar3 = pcVar3 + 1;
+                }
                 /*
                   .map in reverse
                  */
