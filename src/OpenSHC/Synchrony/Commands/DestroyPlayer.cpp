@@ -64,13 +64,11 @@ namespace Synchrony {
             DAT_GameSynchronyState::instance.DAT_GameCommandParam1 = (int)local_4[0];
             DAT_GameSynchronyState::instance.unknownIncrementBy40_01
                 = DAT_GameSynchronyState::instance.unknownIncrementBy40_01 + -0x28;
-            if (DAT_GameSynchronyState::instance
-                    .currentPlayerFullIDArray[DAT_GameSynchronyState::instance.DAT_GameCommandParam0]
-                == 0xffffffff) {
-                if (DAT_GameSynchronyState::instance.DAT_GameCommandParam0
-                    != DAT_GameSynchronyState::instance.currentPlayerSlotID) {}
-            } else if (DAT_GameSynchronyState::instance.DAT_GameCommandParam0
-                != DAT_GameSynchronyState::instance.currentPlayerSlotID) {
+            if ((DAT_GameSynchronyState::instance
+                        .currentPlayerFullIDArray[DAT_GameSynchronyState::instance.DAT_GameCommandParam0]
+                    != 0xffffffff)
+                && (DAT_GameSynchronyState::instance.DAT_GameCommandParam0
+                    != DAT_GameSynchronyState::instance.currentPlayerSlotID)) {
                 if (DAT_GameSynchronyState::instance.DPLAYX_4A != (IDirectPlay4A**)0x0) {
                     ((IDirectPlay4A*)DAT_GameSynchronyState::instance.DPLAYX_4A)
                         ->DestroyPlayer(DAT_GameSynchronyState::instance
@@ -112,7 +110,9 @@ namespace Synchrony {
                 DAT_GameSynchronyState::instance
                     .DAT_PlayerNames[DAT_GameSynchronyState::instance.DAT_GameCommandParam0][0] = '\0';
             }
-            if (DAT_GameSynchronyState::instance.field261_0x109298 == 0) {
+            if ((DAT_GameSynchronyState::instance.DAT_GameCommandParam0
+                    == DAT_GameSynchronyState::instance.currentPlayerSlotID)
+                && (DAT_GameSynchronyState::instance.field261_0x109298 == 0)) {
                 DAT_GameSynchronyState::instance.field261_0x109298 = 1;
                 pcVar3 = MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MULTIPLAYER_CONNECTION,
