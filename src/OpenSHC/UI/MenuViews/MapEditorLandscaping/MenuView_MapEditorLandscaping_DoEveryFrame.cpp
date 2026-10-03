@@ -26,8 +26,12 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004313C0
         void MapEditorLandscaping::MenuView_MapEditorLandscaping_DoEveryFrame()
         {
-            if (DAT_GameCore::instance.activeMenuTab.tabType == OpenSHC::UI::Enums::BASMTT_SIEGETENT_SIEGETOWER) {}
-            if (DAT_GameCore::instance.activeMenuTab.tabType == OpenSHC::UI::Enums::BASMTT_SIEGETENT_SHIELD) {}
+            if (DAT_GameCore::instance.activeMenuTab.tabType == OpenSHC::UI::Enums::BASMTT_SIEGETENT_SIEGETOWER) {
+                return;
+            }
+            if (DAT_GameCore::instance.activeMenuTab.tabType == OpenSHC::UI::Enums::BASMTT_SIEGETENT_SHIELD) {
+                return;
+            }
             if (DAT_MinimapViewState::instance.field3_0xc == 0) {
                 DAT_WindowAndDirectDraw::instance.unk_resetViewportRelated = 2;
             } else if (DAT_WindowAndDirectDraw::instance.unk_resetViewportRelated != 2)
