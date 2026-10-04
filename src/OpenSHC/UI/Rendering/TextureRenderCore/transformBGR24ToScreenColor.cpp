@@ -17,12 +17,12 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x0044CBE0
         RGB15 TextureRenderCore::transformBGR24ToScreenColor(BGR24 color)
         {
-            ushort uVar1;
-            uVar1 = (ushort)(color >> 0x13) & 0x1f;
+            int _blue;
+            _blue = color >> 0x13 & 0x1f;
             if (DAT_WindowAndDirectDraw::instance.colorBitMode == OpenSHC::Rendering::RGB_555) {
-                return (ushort)(color >> 6) & 0x3e0 | uVar1 | (ushort)((color & 0xf8) << 7);
+                return (color >> 6 & 0x3e0) | _blue | ((color & 0xf8) << 7);
             }
-            return (ushort)(color >> 5) & 0x7e0 | uVar1 | ((byte)color & 0xf8) << 8;
+            return (color >> 5 & 0x7e0) | _blue | (ushort)(((byte)color & 0xf8) << 8);
         }
 
     }
