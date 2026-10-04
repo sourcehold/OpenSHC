@@ -14,9 +14,6 @@ namespace UI {
 
         using OpenSHC::Rendering::ScreenResolutionEnum;
 
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x00454F00
         void TextureRenderCore::moveOverlappingMenuPartsToMapSurface()
         {

@@ -2,26 +2,23 @@
 
 #include "OpenSHC/UI/Rendering.func.hpp"
 #include "OpenSHC/IO/Graphics/TgxToken.hpp"
-#include "OpenSHC/IO/Graphics/TgxTokenByte.hpp"
 #include "OpenSHC/Rendering/ColorMode.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 
 #include "OpenSHC/Globals/AlphaAndButtonSurfaceObj.hpp"
 #include "OpenSHC/Globals/DAT_BlendFilterArrays.hpp"
 #include "OpenSHC/Globals/DAT_WindowAndDirectDraw.hpp"
+#include "OpenSHC/IO/Graphics/TgxTokenByte.hpp"
 
 namespace OpenSHC {
 namespace UI {
     namespace Rendering {
 
         using OpenSHC::IO::Graphics::TgxToken;
-        using OpenSHC::IO::Graphics::TgxTokenByte;
         using OpenSHC::Rendering::ColorMode;
         using OpenSHC::Rendering::Enums::RenderTarget;
+        using OpenSHC::IO::Graphics::TgxTokenByte;
 
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x0044F170
         void TextureRenderCore::renderGmWithPreparedAlphaMask(
             int x, int y, int width, int height, ushort* imageDataPtr, int blendStrength)
@@ -78,16 +75,13 @@ namespace UI {
                                         while (true) {
                                             do {
                                                 _currentTgxDataPtr = (TgxTokenByte*)imageDataPtr;
-                                                _tgxToken
-                                                    = *_currentTgxDataPtr & OpenSHC::IO::Graphics::TT_TGX_PIXEL_HEADER;
+                                                _tgxToken = *_currentTgxDataPtr & OpenSHC::IO::Graphics::TT_TGX_PIXEL_HEADER;
                                                 imageDataPtr = (ushort*)(_currentTgxDataPtr + 1);
                                             } while (_tgxToken == OpenSHC::IO::Graphics::TT_TRANSPARENT_PIXELS);
                                             if (_tgxToken != OpenSHC::IO::Graphics::TT_STREAM_OF_PIXELS)
                                                 break;
                                             imageDataPtr = (ushort*)((int)imageDataPtr
-                                                + ((*_currentTgxDataPtr & OpenSHC::IO::Graphics::TT_TGX_PIXEL_LENGTH)
-                                                      + 1)
-                                                    * 2);
+                                                + ((*_currentTgxDataPtr & OpenSHC::IO::Graphics::TT_TGX_PIXEL_LENGTH) + 1) * 2);
                                         }
                                         if (_tgxToken != OpenSHC::IO::Graphics::TT_REPEATING_PIXELS)
                                             break;
@@ -106,10 +100,8 @@ namespace UI {
                                 while (true) {
                                     while (true) {
                                         while (true) {
-                                            _tgxToken2 = *(TgxTokenByte*)imageDataPtr
-                                                & OpenSHC::IO::Graphics::TT_TGX_PIXEL_HEADER;
-                                            _pixelLength = (uint)(*(TgxTokenByte*)imageDataPtr
-                                                & OpenSHC::IO::Graphics::TT_TGX_PIXEL_LENGTH);
+                                            _tgxToken2 = *(TgxTokenByte*)imageDataPtr & OpenSHC::IO::Graphics::TT_TGX_PIXEL_HEADER;
+                                            _pixelLength = (uint)(*(TgxTokenByte*)imageDataPtr & OpenSHC::IO::Graphics::TT_TGX_PIXEL_LENGTH);
                                             _currentTgxDataPtr = (TgxTokenByte*)((int)imageDataPtr + 1);
                                             if (_tgxToken2 != OpenSHC::IO::Graphics::TT_TRANSPARENT_PIXELS)
                                                 break;
@@ -171,8 +163,8 @@ namespace UI {
                                             } else {
                                                 uVar3 = *(undefined2*)_currentTgxDataPtr & 0xffe0
                                                     | DAT_BlendFilterArrays::instance[_remainingHeight][(
-                                                        ushort)(*(undefined2*)_currentTgxDataPtr
-                                                        & OpenSHC::IO::Graphics::TT_TGX_PIXEL_LENGTH)][0];
+                                                        ushort)(*(undefined2*)_currentTgxDataPtr & OpenSHC::IO::Graphics::TT_TGX_PIXEL_LENGTH)]
+                                                                                     [0];
                                                 uVar3 = uVar3 & 0xfc1f
                                                     | *(ushort*)(_remainingHeight * 0x200 + 0xd7d2da
                                                         + (uint)((ushort)uVar3 >> 5 & 0x1f) * 8);

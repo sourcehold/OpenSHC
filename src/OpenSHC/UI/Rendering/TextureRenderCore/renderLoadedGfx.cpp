@@ -6,9 +6,6 @@ namespace OpenSHC {
 namespace UI {
     namespace Rendering {
 
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x00454900
         void TextureRenderCore::renderLoadedGfx(int loadedGfxIndex, int xPos, int yPos)
         {
@@ -16,7 +13,7 @@ namespace UI {
             RVar1 = this->drawBufferChoiceValue;
             this->drawBufferChoiceValue = this->currentRenderSurfaceIdentifierUnk_0x8;
             MACRO_CALL_MEMBER(
-                OpenSHC::UI::Rendering::TextureRenderCore_Func::renderFunctionResponsibleForManyGameObjects, this)(xPos,
+                UI::Rendering::TextureRenderCore_Func::renderFunctionResponsibleForManyGameObjects, this)(xPos,
                 yPos, this->loadedGfxArray[loadedGfxIndex].width, this->loadedGfxArray[loadedGfxIndex].height,
                 (ushort*)((int)(
 

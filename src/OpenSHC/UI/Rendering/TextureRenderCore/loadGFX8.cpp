@@ -10,12 +10,9 @@ namespace OpenSHC {
 namespace UI {
     namespace Rendering {
 
-        using OpenSHC::IO::FileResourceType;
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
+        using IO::FileResourceType;
+        using WindowsHelper::Enums::BOOLEnum;
 
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x00454700
         int TextureRenderCore::loadGFX8(char* gfx8Filename)
         {
@@ -23,16 +20,16 @@ namespace UI {
             BOOLEnum _success;
             void* _destination;
             int _currentBufferFillSize;
-            MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::resolveResourceFileName, DAT_ResourceManager::ptr)(
-                OpenSHC::IO::FRT_GFX8, (char const*)((int)(gfx8Filename)));
+            MACRO_CALL_MEMBER(IO::ResourceManager_Func::resolveResourceFileName, DAT_ResourceManager::ptr)(
+                IO::FRT_GFX8, (char const*)((int)(gfx8Filename)));
             _size = MACRO_CALL_MEMBER(
-                OpenSHC::IO::ResourceManager_Func::getCurrentResourceSize, DAT_ResourceManager::ptr)();
+                IO::ResourceManager_Func::getCurrentResourceSize, DAT_ResourceManager::ptr)();
             _currentBufferFillSize = this->loadedGfxArray[this->totalLoadedGfx].offsetInBuffer;
             if (0x1167910 < (int)(_currentBufferFillSize + _size)) {
                 return -1;
             }
             _destination = (void*)((int)this->gmAndGfxImageDataBuffer + _currentBufferFillSize);
-            _success = MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::readCurrentResourceIntoDestination,
+            _success = MACRO_CALL_MEMBER(IO::ResourceManager_Func::readCurrentResourceIntoDestination,
                 DAT_ResourceManager::ptr)(_destination, _size);
             if (_success == FALSE) {
                 return -1;

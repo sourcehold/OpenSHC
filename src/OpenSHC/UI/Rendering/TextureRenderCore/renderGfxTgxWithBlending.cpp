@@ -6,9 +6,6 @@ namespace OpenSHC {
 namespace UI {
     namespace Rendering {
 
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x004549F0
         void TextureRenderCore::renderGfxTgxWithBlending(int gfxIndex, int x, int y, int blendStrengthUnk)
         {
@@ -17,7 +14,7 @@ namespace UI {
             if ((uint)blendStrengthUnk < 0x20) {
                 this->drawBufferChoiceValue = this->currentRenderSurfaceIdentifierUnk_0x8;
                 MACRO_CALL_MEMBER(
-                    OpenSHC::UI::Rendering::TextureRenderCore_Func::renderInterfaceOrBuildingOccupationArea, this)(x, y,
+                    UI::Rendering::TextureRenderCore_Func::renderInterfaceOrBuildingOccupationArea, this)(x, y,
                     this->loadedGfxArray[gfxIndex].width, this->loadedGfxArray[gfxIndex].height,
                     (ushort*)((int)(
 

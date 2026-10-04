@@ -16,9 +16,6 @@ namespace UI {
         using OpenSHC::IO::FileResourceType;
         using OpenSHC::Rendering::ColorMode;
 
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x00454CB0
         void TextureRenderCore::loadCampaignMapGfxUnk()
         {

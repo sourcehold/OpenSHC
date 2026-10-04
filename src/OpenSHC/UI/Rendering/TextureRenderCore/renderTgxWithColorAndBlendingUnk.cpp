@@ -1,25 +1,22 @@
 #include "../TextureRenderCore.func.hpp"
 
 #include "OpenSHC/IO/Graphics/TgxToken.hpp"
-#include "OpenSHC/IO/Graphics/TgxTokenByte.hpp"
 #include "OpenSHC/Rendering/ColorMode.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
 #include "OpenSHC/Globals/DAT_WindowAndDirectDraw.hpp"
+#include "OpenSHC/IO/Graphics/TgxTokenByte.hpp"
 
 namespace OpenSHC {
 namespace UI {
     namespace Rendering {
 
         using OpenSHC::IO::Graphics::TgxToken;
-        using OpenSHC::IO::Graphics::TgxTokenByte;
         using OpenSHC::Rendering::ColorMode;
         using OpenSHC::Rendering::Enums::RenderTarget;
+        using OpenSHC::IO::Graphics::TgxTokenByte;
 
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x0044F850
         void TextureRenderCore::renderTgxWithColorAndBlendingUnk(
             int xPos, int yPos, int width, int height, ushort* imageSource, ushort fillColorUnk, int blendStrengthUnk)
@@ -37,17 +34,14 @@ namespace UI {
             char _greenOffset;
             short _overlayStrengthUnk;
             _overlayStrengthUnk = 0x20 - (short)blendStrengthUnk;
-            if (DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue
-                == OpenSHC::Rendering::Enums::RT_SCREEN_MENU) {
-                DAT_TextureRenderCoreObject::instance.currentRenderSurface
-                    = DAT_WindowAndDirectDraw::instance.surfacePointer_screenMenu;
+            if (DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue == OpenSHC::Rendering::Enums::RT_SCREEN_MENU) {
+                DAT_TextureRenderCoreObject::instance.currentRenderSurface = DAT_WindowAndDirectDraw::instance.surfacePointer_screenMenu;
                 _lineByteWidth = DAT_WindowAndDirectDraw::instance.byteSizeOfOneHorizontalLine;
                 _jumpLineByteWidth = DAT_WindowAndDirectDraw::instance.byteSizeOfOneHorizontalLine + width * -2;
                 _heightStart = DAT_TextureRenderCoreObject::instance.screenMenuSurfaceHeightRange.start;
                 iVar2 = DAT_TextureRenderCoreObject::instance.screenMenuSurfaceHeightRange.end;
             } else {
-                DAT_TextureRenderCoreObject::instance.currentRenderSurface
-                    = DAT_WindowAndDirectDraw::instance.surfacePointer_mapGame;
+                DAT_TextureRenderCoreObject::instance.currentRenderSurface = DAT_WindowAndDirectDraw::instance.surfacePointer_mapGame;
                 _jumpLineByteWidth = (0xfd8 - width) * 2;
                 _lineByteWidth = 0x1fb0;
                 _heightStart = DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.start;
@@ -86,8 +80,7 @@ namespace UI {
                             yPos = _heightStart;
                         } while (0 < iVar2);
                     }
-                    _drawPointer = (ushort*)((int)DAT_TextureRenderCoreObject::instance.currentRenderSurface
-                        + yPos * _lineByteWidth + xPos * 2);
+                    _drawPointer = (ushort*)((int)DAT_TextureRenderCoreObject::instance.currentRenderSurface + yPos * _lineByteWidth + xPos * 2);
                 LAB_0044f97b:
                     do {
                         while (true) {

@@ -15,9 +15,6 @@ namespace UI {
         using OpenSHC::Rendering::ColorMode;
         using OpenSHC::Rendering::Enums::RenderTarget;
 
-        /*
-          decompilerscript: committed: 2025-01-30 21:57:43.216000
-         */
         // FUNCTION: STRONGHOLDCRUSADER 0x0044CEB0
         void TextureRenderCore::drawBitmapFaceWithBlendUnk(
             int bitmapFaceIndex, int xPos, int yPos, int colorOrBlendOrGammaUnk)
@@ -75,13 +72,9 @@ namespace UI {
                                 iVar4 = (uVar9 & 0xf800) * iVar7;
                                 iVar5 = (uVar8 & 0x1f) * iVar10;
                                 iVar6 = (uVar9 & 0x1f) * iVar7;
-                                *_surfacePtr
-                                    = ((ushort)((int)(_widthInByte + (_widthInByte >> 0x1f & 0x1fU)) >> 5) & 0x7e0)
-                                        + ((ushort)((int)(iVar2 + (iVar2 >> 0x1f & 0x1fU)) >> 5) & 0x7e0)
-                                    | ((ushort)((int)(iVar3 + (iVar3 >> 0x1f & 0x1fU)) >> 5) & 0xf800)
-                                        + ((ushort)((int)(iVar4 + (iVar4 >> 0x1f & 0x1fU)) >> 5) & 0xf800)
-                                    | (short)((int)(iVar5 + (iVar5 >> 0x1f & 0x1fU)) >> 5)
-                                        + (short)((int)(iVar6 + (iVar6 >> 0x1f & 0x1fU)) >> 5);
+                                *_surfacePtr = ((ushort)(_widthInByte / 32) & 0x7e0) + ((ushort)(iVar2 / 32) & 0x7e0)
+                                    | ((ushort)(iVar3 / 32) & 0xf800) + ((ushort)(iVar4 / 32) & 0xf800)
+                                    | (short)(iVar5 / 32) + (short)(iVar6 / 32);
                             }
                             if (*(ushort*)(colorOrBlendOrGammaUnk + 2) != COL_MAGENTA::instance.shortValue) {
                                 uVar9 = (uint)_surfacePtr[1];
@@ -92,13 +85,9 @@ namespace UI {
                                 iVar4 = (uVar9 & 0xf800) * iVar7;
                                 iVar5 = (uVar8 & 0x1f) * iVar10;
                                 iVar6 = (uVar9 & 0x1f) * iVar7;
-                                _surfacePtr[1]
-                                    = ((ushort)((int)(_widthInByte + (_widthInByte >> 0x1f & 0x1fU)) >> 5) & 0x7e0)
-                                        + ((ushort)((int)(iVar2 + (iVar2 >> 0x1f & 0x1fU)) >> 5) & 0x7e0)
-                                    | ((ushort)((int)(iVar3 + (iVar3 >> 0x1f & 0x1fU)) >> 5) & 0xf800)
-                                        + ((ushort)((int)(iVar4 + (iVar4 >> 0x1f & 0x1fU)) >> 5) & 0xf800)
-                                    | (short)((int)(iVar5 + (iVar5 >> 0x1f & 0x1fU)) >> 5)
-                                        + (short)((int)(iVar6 + (iVar6 >> 0x1f & 0x1fU)) >> 5);
+                                _surfacePtr[1] = ((ushort)(_widthInByte / 32) & 0x7e0) + ((ushort)(iVar2 / 32) & 0x7e0)
+                                    | ((ushort)(iVar3 / 32) & 0xf800) + ((ushort)(iVar4 / 32) & 0xf800)
+                                    | (short)(iVar5 / 32) + (short)(iVar6 / 32);
                             }
                             if (*(ushort*)(colorOrBlendOrGammaUnk + 4) != COL_MAGENTA::instance.shortValue) {
                                 uVar9 = (uint)_surfacePtr[2];
@@ -109,13 +98,9 @@ namespace UI {
                                 iVar4 = (uVar9 & 0xf800) * iVar7;
                                 iVar5 = (uVar8 & 0x1f) * iVar10;
                                 iVar6 = (uVar9 & 0x1f) * iVar7;
-                                _surfacePtr[2]
-                                    = ((ushort)((int)(_widthInByte + (_widthInByte >> 0x1f & 0x1fU)) >> 5) & 0x7e0)
-                                        + ((ushort)((int)(iVar2 + (iVar2 >> 0x1f & 0x1fU)) >> 5) & 0x7e0)
-                                    | ((ushort)((int)(iVar3 + (iVar3 >> 0x1f & 0x1fU)) >> 5) & 0xf800)
-                                        + ((ushort)((int)(iVar4 + (iVar4 >> 0x1f & 0x1fU)) >> 5) & 0xf800)
-                                    | (short)((int)(iVar5 + (iVar5 >> 0x1f & 0x1fU)) >> 5)
-                                        + (short)((int)(iVar6 + (iVar6 >> 0x1f & 0x1fU)) >> 5);
+                                _surfacePtr[2] = ((ushort)(_widthInByte / 32) & 0x7e0) + ((ushort)(iVar2 / 32) & 0x7e0)
+                                    | ((ushort)(iVar3 / 32) & 0xf800) + ((ushort)(iVar4 / 32) & 0xf800)
+                                    | (short)(iVar5 / 32) + (short)(iVar6 / 32);
                             }
                             if (*(ushort*)(colorOrBlendOrGammaUnk + 6) != COL_MAGENTA::instance.shortValue) {
                                 uVar9 = (uint)_surfacePtr[3];
@@ -126,13 +111,9 @@ namespace UI {
                                 iVar4 = (uVar9 & 0xf800) * iVar7;
                                 iVar5 = (uVar8 & 0x1f) * iVar10;
                                 iVar6 = (uVar9 & 0x1f) * iVar7;
-                                _surfacePtr[3]
-                                    = ((ushort)((int)(_widthInByte + (_widthInByte >> 0x1f & 0x1fU)) >> 5) & 0x7e0)
-                                        + ((ushort)((int)(iVar2 + (iVar2 >> 0x1f & 0x1fU)) >> 5) & 0x7e0)
-                                    | ((ushort)((int)(iVar3 + (iVar3 >> 0x1f & 0x1fU)) >> 5) & 0xf800)
-                                        + ((ushort)((int)(iVar4 + (iVar4 >> 0x1f & 0x1fU)) >> 5) & 0xf800)
-                                    | (short)((int)(iVar5 + (iVar5 >> 0x1f & 0x1fU)) >> 5)
-                                        + (short)((int)(iVar6 + (iVar6 >> 0x1f & 0x1fU)) >> 5);
+                                _surfacePtr[3] = ((ushort)(_widthInByte / 32) & 0x7e0) + ((ushort)(iVar2 / 32) & 0x7e0)
+                                    | ((ushort)(iVar3 / 32) & 0xf800) + ((ushort)(iVar4 / 32) & 0xf800)
+                                    | (short)(iVar5 / 32) + (short)(iVar6 / 32);
                             }
                             _bitmapFacePtr = (ushort*)(colorOrBlendOrGammaUnk + 8);
                             _surfacePtr = _surfacePtr + 4;
@@ -154,9 +135,8 @@ namespace UI {
                             iVar7 = (uVar8 & 0x3e0) * colorOrBlendOrGammaUnk;
                             iVar10 = (uVar8 & 0x7c00) * colorOrBlendOrGammaUnk;
                             _widthInByte = (uVar8 & 0x1f) * colorOrBlendOrGammaUnk;
-                            *_surfacePtr = (ushort)((int)(iVar7 + (iVar7 >> 0x1f & 0x1fU)) >> 5) & 0x3e0
-                                | (ushort)((int)(iVar10 + (iVar10 >> 0x1f & 0x1fU)) >> 5) & 0x7c00
-                                | (ushort)((int)(_widthInByte + (_widthInByte >> 0x1f & 0x1fU)) >> 5);
+                            *_surfacePtr = (ushort)(iVar7 / 32) & 0x3e0 | (ushort)(iVar10 / 32) & 0x7c00
+                                | (ushort)(_widthInByte / 32);
                         }
                         _surfacePtr = _surfacePtr + 1;
                         bitmapFaceIndex = bitmapFaceIndex + -1;
