@@ -244,6 +244,13 @@ worth the last 8-10% on the whole `Map::Version::UpgradeMapUnitsTo_*` family (0x
 `!=` as the loop bound suppresses MSVC's unrolling. If the original ends the loop with `jne` while we emit `jl` and an
 unrolled body, write `for (int i = 1; i != 2500; ++i)` instead of `i < 2500` (SHC_3BB0A8C1_0x0053B340, 53% -> 91%).
 
+- The `setAICParameters_01..16` family (0x004C6D60 and up) is a long run of independent constant stores into one
+  `aics[aicIndex]` element, and it sits at 74-95% because the original hoists repeated constants into registers in a
+  particular order while we materialise them in another; every actual field store already matches, and the field
+  offsets check out. Statement order is **not** the lever: `reorder_search.py` on `setAICParameters_15` tried all 9
+  independent runs (lengths 42, 29, 21, 14, 6, 4, 3, 3, 3) over 27 builds and kept nothing, leaving it at exactly
+  74.92%. MSVC schedules those stores the same way whatever order the source lists them in, which is the
+  *Statement Order* note above measured on a large case. Record the percentage and move on.
 - Where the original compares a memory operand against a **zero register** (`xor ebp,ebp` once, then
   `cmp dword ptr [..], ebp` and `mov dword ptr [..], ebp`) and we emit `test r,r` / `cmp ..,0`, that is **not** a
   source-level difference and **not** a size-vs-speed flag. Using a zero register saves a byte per memory
