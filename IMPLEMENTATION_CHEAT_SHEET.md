@@ -389,6 +389,13 @@ bestIndex = i; break; } ... }`. A `for (i < count)` loop with the check after it
 { ...; return; } }`. A `for (...; i++)` with the same body does not produce it. Together with `int i = 0;`
   declared where the original's `xor esi, esi` sits (here before an earlier early-return test, which then compares
   against that zero register) this took `generateSiegeCreationInformation` from 39.4% to 100%.
+- The `setAICParameters_01..16` family (0x004C6D60 and up) is a long run of independent constant stores into one
+  `aics[aicIndex]` element, and it sits at 74-95% because the original hoists repeated constants into registers in a
+  particular order while we materialise them in another; every actual field store already matches, and the field
+  offsets check out. Statement order is **not** the lever: `reorder_search.py` on `setAICParameters_15` tried all 9
+  independent runs (lengths 42, 29, 21, 14, 6, 4, 3, 3, 3) over 27 builds and kept nothing, leaving it at exactly
+  74.92%. MSVC schedules those stores the same way whatever order the source lists them in, which is the
+  _Statement Order_ note above measured on a large case. Record the percentage and move on.
 - Where the original compares a memory operand against a **zero register** (`xor ebp,ebp` once, then
   `cmp dword ptr [..], ebp` and `mov dword ptr [..], ebp`) and we emit `test r,r` / `cmp ..,0`, that is **not** a
   source-level difference and **not** a size-vs-speed flag. Using a zero register saves a byte per memory
