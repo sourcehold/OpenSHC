@@ -27,7 +27,6 @@ namespace UI {
             _currentLoadingBarStatus = 0;
             _currentGmFilename = fileNameArray;
             do {
-                _currentLoadingBarStatus = _currentLoadingBarStatus;
                 _currentLoadingBarStatus = _currentLoadingBarStatus + 1;
                 _lengthToCompare = 5;
                 bVar1 = true;
@@ -45,16 +44,16 @@ namespace UI {
                     goto LAB_00455c95;
                 _currentGmFilename = _currentGmFilename + 1000;
             } while (_currentLoadingBarStatus < 240);
-            _currentLoadingBarStatus = _currentLoadingBarStatus + 2;
+            _currentLoadingBarStatus = _currentLoadingBarStatus + 1;
         LAB_00455c95:
             /*
               Start Actual loading
              */
+            DAT_LoadingBarProgress::instance = _currentLoadingBarStatus;
             _currentGmIndex = 0;
             this->gmNumberOfProcessedPictures = 1;
             this->gmFileID = 1;
             this->gmSizeOfProcessedPictures_0x44 = 0;
-            DAT_LoadingBarProgress::instance = _currentLoadingBarStatus;
             do {
                 _currentGmIndex = _currentGmIndex + 1;
                 _lengthToCompare = 5;
