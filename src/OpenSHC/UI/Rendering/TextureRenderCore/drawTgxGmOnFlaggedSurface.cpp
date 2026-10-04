@@ -16,21 +16,19 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004554A0
         void TextureRenderCore::drawTgxGmOnFlaggedSurface(GmID gmId, int imageIndexInGm, int xPos, int yPos)
         {
-            int iVar1;
-            ushort* _tgxSourcePtr;
             int _imageIndex;
-            iVar1 = GMTotalPicturesProcessed::instance[gmId];
-            _tgxSourcePtr = (ushort*)(DAT_GMImageOffsets::instance[iVar1 + -1 + imageIndexInGm]
-                + (int)this->gmProcessedImageData);
+            ushort* _tgxSourcePtr;
+            _imageIndex = GMTotalPicturesProcessed::instance[gmId] + imageIndexInGm + -1;
+            _tgxSourcePtr = (ushort*)(DAT_GMImageOffsets::instance[_imageIndex] + (int)this->gmProcessedImageData);
             if (this->gmFileHeaderColorpaletteArray[gmId].ImageType == IO::Graphics::GIT_InterfaceElement) {
-                MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::drawTgxOnFlaggedSurface, this)(xPos,
-                    yPos, (int)((int)(DAT_GMImageHeaders::instance.imh[imageIndexInGm + iVar1 + -1].width)),
-                    (int)((int)(DAT_GMImageHeaders::instance.imh[imageIndexInGm + iVar1 + -1].height)), _tgxSourcePtr);
+                MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::drawTgxOnFlaggedSurface, this)(xPos, yPos,
+                    DAT_GMImageHeaders::instance.imh[_imageIndex].width,
+                    DAT_GMImageHeaders::instance.imh[_imageIndex].height, _tgxSourcePtr);
             }
             if (this->gmFileHeaderColorpaletteArray[gmId].ImageType == IO::Graphics::GIT_CompressedImage) {
-                MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::drawTgxOnFlaggedSurface, this)(xPos,
-                    yPos, (int)((int)(DAT_GMImageHeaders::instance.imh[imageIndexInGm + iVar1 + -1].width)),
-                    (int)((int)(DAT_GMImageHeaders::instance.imh[imageIndexInGm + iVar1 + -1].height)), _tgxSourcePtr);
+                MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::drawTgxOnFlaggedSurface, this)(xPos, yPos,
+                    DAT_GMImageHeaders::instance.imh[_imageIndex].width,
+                    DAT_GMImageHeaders::instance.imh[_imageIndex].height, _tgxSourcePtr);
             }
         }
 
