@@ -25,8 +25,8 @@ namespace UI {
         void TextureRenderCore::renderTextChar(int xPos, int yPos, int imageId, FontRenderType renderType,
             int lineHeight, ushort fillColor, int blendStrength)
         {
-            short sVar1;
-            short sVar2;
+            int sVar1;
+            int sVar2;
             ushort* _imageSource;
             int iVar3;
             int _imageId;
