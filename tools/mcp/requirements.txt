@@ -1,4 +1,4 @@
 mcp
 uv
--e 'ghidracpp @ git+https://github.com/gynt/ghidra-cpp'
+ghidracpp @ git+https://github.com/gynt/ghidra-cpp
 pyghidra

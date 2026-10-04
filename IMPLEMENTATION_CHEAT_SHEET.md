@@ -50,6 +50,24 @@ This also applies when putting instructions inside the condition branches.
 
 Naturally, the logic flow needs to be kept, so the update of a variable can not move before or after another usage of the same variable.
 
+### Statement Order
+
+The order of instructions in the assembly is not the order of the statements in the original source.
+Within a boundary the compiler schedules freely, so do not try to reconstruct the statement order from
+the instruction order.
+
+This matters most for long runs of independent stores into one object, as in `AICState::setAICParameters_NN`:
+the whole body is `this->aics[aicIndex].<field> = <constant>;` over ~130 fields, and the compiler emits
+those `mov dword ptr [eax + <offset>], <reg>` instructions in an order of its own. Rewriting all 16 of
+those functions so their statements followed the original's store order made every one of them *worse*
+(e.g. `setAICParameters_14` 82.4% -> 50.0%).
+
+What the instruction order *does* reveal is which constants got their own register and in which order
+those registers were allocated (`mov ebx, 6` before `or edi, 0xffffffff` and so on). That is a
+consequence of register pressure, not something a statement reordering can be aimed at directly, so a
+remaining diff of this shape is usually a reason to record the percentage with a remark rather than to
+keep permuting the body.
+
 ## Structure
 
 ### Bitwise Operations
@@ -99,6 +117,12 @@ SEC_RNG::ptr->currentNumber1 % 4
 - The assembly may contain multiple assigns of the same value to the same variable within the same boundary. This might be optimization suggesting there was only one assign.
 - The decompiler may suggest multiple assigns of the same value to the same variable within the same boundary. If this is not present in the assembly, it might be an artifact.
 - If a variable is stored in a temporary, before it is directly being incremented or decremented by one, suggests a post-increment/decrement, even more if the temporary is used after this.
+- Do not hoist a repeated sub-expression into a local just because it appears several times. `int const halfWidth = barWidth / 2;`
+  used at four call sites lost against the original, which recomputes `barWidth / 2` at every use (SHC_3BB0A8C1_0x004B20B0, 67.6% -> 82.4%).
+  Write the expression out again at each use and let the compiler decide.
+- The opposite does happen for the operands of a single statement: in `SHC_3BB0A8C1_0x00522520` the original evaluates
+  `unitID / 16` and `unitID % 16` into locals before the compound assignment. If a `|=`/`&=` statement with computed index
+  and mask does not match, give the index and the mask a local each and keep the declaration order the assembly shows.
 
 ### Conditionals
 
@@ -110,6 +134,14 @@ SEC_RNG::ptr->currentNumber1 % 4
 - If a condition suddenly uses a normally signed variable as unsigned value (e.g. `ja` compared to signed `jg`) and most times also contains a subtraction, it suggests a range condition optimization. The actual value was moved to 0 to allow expressing this via a single check:
   - Decomp code example: `DAT_GameCore.missionNumber1to20 - 1U < 0x14`
   - Original (likely): `1 <= DAT_GameCore.missionNumber1to20 && DAT_GameCore.missionNumber1to20 <= 20`
+- A two-sided range check that is the whole body of a `BOOL`-returning function is compiled branchless. Write it as one
+  expression, `return lo <= value && value <= hi;`, not as nested `if`s with early returns, and use the literals the
+  assembly shows rather than a `short`/`ushort` local holding the field (SHC_3BB0A8C1_0x00530FD0, 78.3% -> 100%).
+- Which form a boolean result takes is **not** predictable and has to be tried both ways. The folded
+  `return (x & MASK) == VALUE;` matched at only 40% for SHC_3BB0A8C1_0x004549C0; spelling it out as
+  `if ((x & MASK) == VALUE) { return TRUE; } else { return FALSE; }`, with locals for the computed index and the loaded
+  byte, reached 100%. Together with the range-check case above this means: folded expression and explicit
+  `TRUE`/`FALSE` branches are two separate candidates, measure both.
 - A switch with fewer then 4 cases is often simplified and uses subtractions in assembly to compare the value:
   ```
   MOV          EAX,[DAT_SoundEffectsHelperData1.SEC_Section1079.  volumeLevel]
@@ -196,6 +228,15 @@ you might have found an unrolled loop. Therefore, try to reproduce the logic in 
 
 If GOTOs are present that clearly jump to the start of a loop, but the logic does not allow to do this without a GOTO, for example from a loop inside a loop, you might be able to move the continue or break condition to the outside. Methods could be placing a fitting condition related to the contained loop conditions after the loop or using a boolean flag that then functions as conditional. Both can sometimes be optimized away.
 
+A global used as a running counter alongside the loop index is usually incremented inside the loop, even when its final
+value is a constant. Ghidra shows the folded result: `DAT_CurrentUnitSlotID = 2500;` placed around the loop is really
+`DAT_CurrentUnitSlotID = 1;` before it and `DAT_CurrentUnitSlotID += 1;` as the first statement of the body. This was
+worth the last 8-10% on the whole `Map::Version::UpgradeMapUnitsTo_*` family (0x0053B310, 0x0053B530, 0x0053B570,
+0x0053B5E0 all 90% -> 100%).
+
+`!=` as the loop bound suppresses MSVC's unrolling. If the original ends the loop with `jne` while we emit `jl` and an
+unrolled body, write `for (int i = 1; i != 2500; ++i)` instead of `i < 2500` (SHC_3BB0A8C1_0x0053B340, 53% -> 91%).
+
 ### GOTO
 
 A function may contain multiple GOTOs.
@@ -229,6 +270,19 @@ Many blocks come naturally with the usage of other structures. However, either b
 It is hard to find these cases. I one situation, local variables that were used as local buffers whose pointers were send into functions had the issue of adding to the stack size. The lifetime of such just seems to naturally extend to the end of the block. Wrapping these statements into inline blocks solved this case.
 
 ## Functions
+
+### Return Values
+
+A function declared `void` whose assembly still leaves a value in EAX at the return usually returns it. The most common
+case is a function that returns the ID it was passed: changing `void EntityState::activateProjectileEntity(int entityID)`
+to `int` with a trailing `return entityID;` took SHC_3BB0A8C1_0x004039B0 from 36.4% to 100%. Fix the signature in the
+generated header rather than working around the difference.
+
+### Link-Time Code Generation
+
+A volatile register (usually ECX or EDX) that stays live across a call in the original, without being reloaded, means
+that call was compiled with LTCG. This is fixable, not a permanent blocker: add the `.cpp` to `cmake/compiler-flags-gl.txt`
+so it is built with `/GL`. SHC_3BB0A8C1_0x00504EE0 went from 38.5% to 100% and SHC_3BB0A8C1_0x0045B7F0 to 100% that way.
 
 ### Parameters
 
