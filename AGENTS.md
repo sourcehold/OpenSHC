@@ -239,6 +239,9 @@ Diff patterns that were reliable (more in the cheat sheet):
 - Callee-saved registers reused after a call without reload (`ecx`/`edx`) indicate LTCG (`cmake/compiler-flags-gl.txt`),
   not a source difference.
 - A mismatching argument count or `ret N` usually means the generated header is wrong; report it instead of working around it.
+- Instruction order is not statement order: the compiler schedules freely inside a boundary, so a long run of
+  independent stores into one object says nothing about the order the fields were assigned in the original source
+  (see the cheat sheet's *Statement Order*). Reordering the body to follow the asm makes the match worse.
 - Diffs can reveal real bugs in existing reimplementations (wrong constants, wrong strides); fix those.
 - `(-(uint)(c) & MASK) + BASE` in the decompiler output is a conditional it has already turned into mask-and-add:
   it is `c ? BASE + MASK : BASE`. Writing the conditional out recovers the same instructions and stops the constants

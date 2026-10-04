@@ -40,6 +40,8 @@ PAIRS = "--pairs" in sys.argv
 DRY = "--dry" in sys.argv
 ID = re.compile(r"[A-Za-z_]\w*")
 CALL = re.compile(r"\bMACRO_CALL\w*\s*\(|\b\w+\s*\([^)]")
+# a `case X:`, `default:` or plain goto label - a boundary between statements, never part of one
+LABEL = re.compile(r"^(case\b.*|default\s*|[A-Za-z_]\w*\s*):$")
 
 
 def build_and_score():
@@ -67,10 +69,18 @@ def statements(lines, lo, hi):
             out.append((i, i + 1, d0))
             i += 1
             continue
-        if s and not s.endswith((";", "{", "}")) and d0 == depth:
+        if s and not s.endswith((";", "{", "}")) and d0 == depth \
+                and not s.startswith(keywords) and not LABEL.match(s):
+            # A statement wrapped over several lines, but stop at anything that is a boundary
+            # rather than an operand: without this a `case N:` line is glued to the statement
+            # under it and the pair can then be swapped out of its own case, which strands the
+            # other statements of that case after a `break` where they never run. That produced
+            # a silent behaviour change that reccmp scored 8.9% *better*, because the dead code
+            # happened to leave an instruction stream closer to the original's.
             j = i
             while j < hi and not lines[j].strip().endswith(";"):
-                if "{" in lines[j] or "}" in lines[j]:
+                t = lines[j].strip()
+                if "{" in lines[j] or "}" in lines[j] or t.startswith(keywords) or LABEL.match(t):
                     j = -1
                     break
                 j += 1

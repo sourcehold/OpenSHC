@@ -103,6 +103,12 @@ bugs that Ghidra had decompiled wrongly.
   (`common.build_env`), the same name `build.bat` derives. `mspdbsrv.exe` is a per-user
   singleton keyed on that endpoint and each worktree carries its own toolchain copy, so a
   shared endpoint makes `cl.exe` talk to the wrong server and fail with
-  `fatal error C1090: PDB API call failed`. `build_quiet.py` retries once after stopping
-  this worktree's `mspdbsrv.exe` (`common.kill_pdb_server`, never other worktrees'), which
-  clears a server that was already wedged before the build started.
+  `fatal error C1090: PDB API call failed`.
+- `build_quiet.py` and `syntax_check.py` both retry such a failure twice, because it has two
+  causes. A wedged server survives the kill `build.bat` does up front, so the first retry stops
+  this worktree's `mspdbsrv.exe` (`common.kill_pdb_server`, never other worktrees'). A wedged
+  *endpoint* outlives every `mspdbsrv.exe` using it, so the second retry moves to a fresh name
+  (`common.fresh_pdb_endpoint`) rather than retrying into one that will keep failing.
+- In `syntax_check.py` a PDB failure is not just a lost run: the fatal line counts as an error
+  against whichever file hit it and the rest of the batch still gets checked, so without the
+  retries the output looks like a normal error list and hides the real compile errors.
