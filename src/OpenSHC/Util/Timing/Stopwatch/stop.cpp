@@ -1,8 +1,11 @@
 #include "../Stopwatch.func.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
 namespace Util {
     namespace Timing {
+      
+        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0046CEF0
         void Stopwatch::stop()
