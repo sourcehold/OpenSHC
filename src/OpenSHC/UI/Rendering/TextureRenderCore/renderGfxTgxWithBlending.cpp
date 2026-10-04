@@ -11,7 +11,7 @@ namespace UI {
         {
             RenderTargetInt RVar1;
             RVar1 = this->drawBufferChoiceValue;
-            if ((uint)blendStrengthUnk < 0x20) {
+            if ((uint)blendStrengthUnk <= 0x1f) {
                 this->drawBufferChoiceValue = this->currentRenderSurfaceIdentifierUnk_0x8;
                 MACRO_CALL_MEMBER(
                     UI::Rendering::TextureRenderCore_Func::renderInterfaceOrBuildingOccupationArea, this)(x, y,
