@@ -25,24 +25,21 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004547C0
         int TextureRenderCore::loadGfxAtBufferEnd(char* fileName)
         {
-            void* pvVar1;
             size_t _size;
             BOOLEnum _success;
             void* _destination;
-            int _backwardsBufferSize;
+            int _oldIndex;
             /*
-              Some address calculations are bugged. I assume normal numbers are mistaken as   addresses, which causes
-              issues. -TheRedDaemon
+              0x1167910 is the end of the gfx area the files are packed into backwards, not an
+              address: the decompiler rendered it as DAT_GameState::ptr + 0x3c858.
              */
             MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::resolveResourceFileName, DAT_ResourceManager::ptr)(
                 OpenSHC::IO::FRT_GFX, (char const*)((int)(fileName)));
             _size = MACRO_CALL_MEMBER(
                 OpenSHC::IO::ResourceManager_Func::getCurrentResourceSize, DAT_ResourceManager::ptr)();
-            pvVar1 = this->gmAndGfxImageDataBuffer;
-            _backwardsBufferSize
-                = -_size - this->loadedGfxArray[this->backwardsLoadedGfxIndex_0x16C850].backwardsOffsetInBuffer;
-            _destination = (void*)((int)this->gmAndGfxImageDataBuffer + (int)DAT_GameState::ptr + _backwardsBufferSize
-                + 0x3c858);
+            _destination = (void*)((int)this->gmAndGfxImageDataBuffer
+                - this->loadedGfxArray[this->backwardsLoadedGfxIndex_0x16C850].backwardsOffsetInBuffer - (int)_size
+                + 0x1167910);
             _success = MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::readCurrentResourceIntoDestination,
                 DAT_ResourceManager::ptr)(_destination, _size);
             if (_success == FALSE) {
@@ -50,8 +47,7 @@ namespace UI {
             }
             if (DAT_WindowAndDirectDraw::instance.colorBitMode == OpenSHC::Rendering::RGB_565) {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::transformTgxFromRGB555ToRGB565, this)(
-                    (ushort*)((int)pvVar1 + (int)DAT_GameState::ptr + _backwardsBufferSize + 0x3c860),
-                    DAT_ResourceManager::instance.loadPositionInCurrentResource + -8);
+                    (ushort*)((int)_destination + 8), DAT_ResourceManager::instance.loadPositionInCurrentResource + -8);
             }
             this->loadedGfxArray[this->backwardsLoadedGfxIndex_0x16C850].offsetInBuffer
                 = (0x1167910 - this->loadedGfxArray[this->backwardsLoadedGfxIndex_0x16C850].backwardsOffsetInBuffer)
@@ -62,11 +58,10 @@ namespace UI {
             this->loadedGfxArray[this->backwardsLoadedGfxIndex_0x16C850].backwardsOffsetInBuffer
                 = this->loadedGfxArray[this->backwardsLoadedGfxIndex_0x16C850 + -1].backwardsOffsetInBuffer;
             this->loadedGfxArray[this->backwardsLoadedGfxIndex_0x16C850].width = *(int*)_destination;
-            this->loadedGfxArray[this->backwardsLoadedGfxIndex_0x16C850].height
-                = *(int*)((int)pvVar1 + (int)DAT_GameState::ptr + _backwardsBufferSize + 0x3c85c);
-            _backwardsBufferSize = this->backwardsLoadedGfxIndex_0x16C850;
+            this->loadedGfxArray[this->backwardsLoadedGfxIndex_0x16C850].height = *(int*)((int)_destination + 4);
             this->backwardsLoadedGfxIndex_0x16C850 = this->backwardsLoadedGfxIndex_0x16C850 + -1;
-            return _backwardsBufferSize;
+            _oldIndex = this->backwardsLoadedGfxIndex_0x16C850 + 1;
+            return _oldIndex;
         }
 
     }
