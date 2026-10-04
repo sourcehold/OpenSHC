@@ -48,9 +48,8 @@ namespace UI {
                 + DAT_ResourceManager::instance.loadPositionInCurrentResource;
             this->loadedGfxArray[this->totalLoadedGfx].width = *(int*)_tgxLoadLocation;
             this->loadedGfxArray[this->totalLoadedGfx].height = *(int*)((int)_tgxLoadLocation + 4);
-            _currentBufferSize = this->totalLoadedGfx;
             this->totalLoadedGfx = this->totalLoadedGfx + 1;
-            return _currentBufferSize;
+            return this->totalLoadedGfx + -1;
         }
 
     }
