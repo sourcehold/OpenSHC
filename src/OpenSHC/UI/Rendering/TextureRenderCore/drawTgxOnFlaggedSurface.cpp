@@ -1,181 +1,246 @@
 #include "../TextureRenderCore.func.hpp"
 
-#include "OpenSHC/IO/Graphics/TgxToken.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
 #include "OpenSHC/Globals/DAT_WindowAndDirectDraw.hpp"
-#include "OpenSHC/IO/Graphics/TgxTokenByte.hpp"
 
 namespace OpenSHC {
 namespace UI {
     namespace Rendering {
 
-        using OpenSHC::IO::Graphics::TgxToken;
         using OpenSHC::Rendering::Enums::RenderTarget;
-        using OpenSHC::IO::Graphics::TgxTokenByte;
+
+        // NOTE: The drawing loop is hand-written assembly in the original: it materialises zero
+        //   with mov ecx,0 and mov eax,0, compares with cmp reg,0 rather than test, loads the same
+        //   token byte twice into two registers, and uses mul for the line offset. The surface
+        //   selection and the height clamp above it are ordinary C++, which is why the
+        //   ebx/esi/edi saves are interleaved with those loads instead of sitting in the prologue.
+        //
+        //   The loop walks TGX tokens and clips every run against renderingRect_16c854 on both
+        //   sides: ebx tracks the current x, and a run crossing left or right is split so that
+        //   only the visible part is copied.
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00454A60
         void TextureRenderCore::drawTgxOnFlaggedSurface(
             int xPos, int yPos, int gfxWidth, int gfxHeight, ushort* tgxSourcePtr)
         {
-            undefined2 uVar1;
-            LONG LVar2;
-            LONG LVar3;
-            TgxTokenByte _tgxToken;
-            int iVar4;
-            uint uVar5;
-            TgxTokenByte _tgxToken2;
-            int iVar6;
-            TgxTokenByte* pTVar7;
-            ushort* _renderPtr;
             int _byteWidth;
-            int _xRenderPos;
-            LVar3 = DAT_TextureRenderCoreObject::instance.renderingRect_16c854.right;
-            LVar2 = DAT_TextureRenderCoreObject::instance.renderingRect_16c854.left;
-            if (DAT_TextureRenderCoreObject::instance.currentRenderSurfaceIdentifierUnk_0x8 == OpenSHC::Rendering::Enums::RT_SCREEN_MENU) {
-                DAT_TextureRenderCoreObject::instance.currentRenderSurface = DAT_WindowAndDirectDraw::instance.surfacePointer_screenMenu;
-                /*
-                  Could be "jump"-line needed to skip to start of next horizontal line.   --TheRedDaemon
-                 */
-                gfxWidth = DAT_WindowAndDirectDraw::instance.byteSizeOfOneHorizontalLine + gfxWidth * -2;
-                _byteWidth = DAT_WindowAndDirectDraw::instance.byteSizeOfOneHorizontalLine;
-            } else if (DAT_TextureRenderCoreObject::instance.currentRenderSurfaceIdentifierUnk_0x8 == OpenSHC::Rendering::Enums::RT_MAP_GAME) {
-                DAT_TextureRenderCoreObject::instance.currentRenderSurface = DAT_WindowAndDirectDraw::instance.surfacePointer_mapGame;
+            int _left;
+            int _right;
+            int _top;
+            int _bottom;
+            _top = this->renderingRect_16c854.top;
+            _left = this->renderingRect_16c854.left;
+            _bottom = this->renderingRect_16c854.bottom;
+            _right = this->renderingRect_16c854.right;
+            switch (this->currentRenderSurfaceIdentifierUnk_0x8) {
+            case OpenSHC::Rendering::Enums::RT_MAP_GAME:
+                DAT_TextureRenderCoreObject::instance.currentRenderSurface
+                    = DAT_WindowAndDirectDraw::instance.surfacePointer_mapGame;
                 gfxWidth = (0xfd8 - gfxWidth) * 2;
                 _byteWidth = 0x1fb0;
+                break;
+            case OpenSHC::Rendering::Enums::RT_SCREEN_MENU:
+                DAT_TextureRenderCoreObject::instance.currentRenderSurface
+                    = DAT_WindowAndDirectDraw::instance.surfacePointer_screenMenu;
+                gfxWidth = DAT_WindowAndDirectDraw::instance.byteSizeOfOneHorizontalLine + gfxWidth * -2;
+                _byteWidth = DAT_WindowAndDirectDraw::instance.byteSizeOfOneHorizontalLine;
+                break;
             }
-            if ((gfxHeight + yPos <= DAT_TextureRenderCoreObject::instance.renderingRect_16c854.bottom)
-                || (gfxHeight = DAT_TextureRenderCoreObject::instance.renderingRect_16c854.bottom - yPos, 0 < gfxHeight)) {
-                if (yPos < DAT_TextureRenderCoreObject::instance.renderingRect_16c854.top) {
-                    iVar6 = DAT_TextureRenderCoreObject::instance.renderingRect_16c854.top - yPos;
-                    if (gfxHeight <= iVar6) {}
-                    gfxHeight = gfxHeight - iVar6;
-                    do {
-                        while (true) {
-                            while (true) {
-                                do {
-                                    pTVar7 = (TgxTokenByte*)tgxSourcePtr;
-                                    _tgxToken2 = *pTVar7 & OpenSHC::IO::Graphics::TT_TGX_PIXEL_HEADER;
-                                    tgxSourcePtr = (ushort*)(pTVar7 + 1);
-                                } while (_tgxToken2 == OpenSHC::IO::Graphics::TT_TRANSPARENT_PIXELS);
-                                if (_tgxToken2 != OpenSHC::IO::Graphics::TT_STREAM_OF_PIXELS)
-                                    break;
-                                tgxSourcePtr = (ushort*)((int)tgxSourcePtr + ((*pTVar7 & 0xffffff1f) + 1) * 2);
-                            }
-                            if (_tgxToken2 != OpenSHC::IO::Graphics::TT_REPEATING_PIXELS)
-                                break;
-                            tgxSourcePtr = (ushort*)(pTVar7 + 3);
-                        }
-                        iVar6 = iVar6 + -1;
-                        yPos = DAT_TextureRenderCoreObject::instance.renderingRect_16c854.top;
-                    } while (0 < iVar6);
+            if (gfxHeight + yPos > _bottom) {
+                gfxHeight = _bottom - yPos;
+                if (gfxHeight <= 0) {
+                    return;
                 }
-                _renderPtr = (ushort*)((int)DAT_TextureRenderCoreObject::instance.currentRenderSurface + yPos * _byteWidth + xPos * 2);
-                _xRenderPos = xPos;
-            LAB_00454b69:
-                do {
-                    while (true) {
-                        while (true) {
-                            _tgxToken = *(TgxTokenByte*)tgxSourcePtr & OpenSHC::IO::Graphics::TT_TGX_PIXEL_HEADER;
-                            uVar5 = *(TgxTokenByte*)tgxSourcePtr & 0xffffff1f;
-                            pTVar7 = (TgxTokenByte*)((int)tgxSourcePtr + 1);
-                            if (_tgxToken != OpenSHC::IO::Graphics::TT_TRANSPARENT_PIXELS)
-                                break;
-                            _xRenderPos = _xRenderPos + uVar5 + 1;
-                            _renderPtr = _renderPtr + uVar5 + 1;
-                            tgxSourcePtr = (ushort*)pTVar7;
-                        }
-                        if (_tgxToken != OpenSHC::IO::Graphics::TT_STREAM_OF_PIXELS)
-                            break;
-                        iVar6 = uVar5 + 1;
-                        if (_xRenderPos < LVar3) {
-                            tgxSourcePtr = (ushort*)pTVar7;
-                            if (_xRenderPos < LVar2) {
-                                if (iVar6 + _xRenderPos <= LVar2)
-                                    goto LAB_00454c2d;
-                                iVar4 = LVar2 - _xRenderPos;
-                                iVar6 = iVar6 - iVar4;
-                                _xRenderPos = _xRenderPos + iVar4;
-                                tgxSourcePtr = (ushort*)(pTVar7 + iVar4 * 2);
-                                _renderPtr = _renderPtr + iVar4;
-                            }
-                            if (iVar6 + _xRenderPos < LVar3) {
-                                do {
-                                    *_renderPtr = *tgxSourcePtr;
-                                    tgxSourcePtr = (ushort*)((int)tgxSourcePtr + 2);
-                                    _renderPtr = _renderPtr + 1;
-                                    _xRenderPos = _xRenderPos + 1;
-                                    iVar6 = iVar6 + -1;
-                                } while (iVar6 != 0);
-                            } else {
-                                iVar4 = (iVar6 + _xRenderPos) - LVar3;
-                                iVar6 = iVar6 - iVar4;
-                                do {
-                                    *_renderPtr = *tgxSourcePtr;
-                                    tgxSourcePtr = (ushort*)((int)tgxSourcePtr + 2);
-                                    _renderPtr = _renderPtr + 1;
-                                    _xRenderPos = _xRenderPos + 1;
-                                    iVar6 = iVar6 + -1;
-                                } while (iVar6 != 0);
-                                _xRenderPos = _xRenderPos + iVar4;
-                                _renderPtr = _renderPtr + iVar4;
-                                tgxSourcePtr = (ushort*)((int)tgxSourcePtr + iVar4 * 2);
-                            }
-                        } else {
-                        LAB_00454c2d:
-                            _xRenderPos = _xRenderPos + iVar6;
-                            _renderPtr = _renderPtr + iVar6;
-                            tgxSourcePtr = (ushort*)(pTVar7 + iVar6 * 2);
-                        }
-                    }
-                    if (_tgxToken == OpenSHC::IO::Graphics::TT_REPEATING_PIXELS) {
-                        iVar6 = uVar5 + 1;
-                        if (_xRenderPos < LVar3) {
-                            if (_xRenderPos < LVar2) {
-                                if (iVar6 + _xRenderPos <= LVar2)
-                                    goto LAB_00454bb5;
-                                iVar4 = LVar2 - _xRenderPos;
-                                iVar6 = iVar6 - iVar4;
-                                _xRenderPos = _xRenderPos + iVar4;
-                                _renderPtr = _renderPtr + iVar4;
-                            }
-                            if (iVar6 + _xRenderPos < LVar3) {
-                                uVar1 = *(undefined2*)pTVar7;
-                                do {
-                                    *_renderPtr = uVar1;
-                                    _renderPtr = _renderPtr + 1;
-                                    _xRenderPos = _xRenderPos + 1;
-                                    iVar6 = iVar6 + -1;
-                                } while (iVar6 != 0);
-                                tgxSourcePtr = (ushort*)((int)tgxSourcePtr + 3);
-                            } else {
-                                iVar4 = (iVar6 + _xRenderPos) - LVar3;
-                                iVar6 = iVar6 - iVar4;
-                                uVar1 = *(undefined2*)pTVar7;
-                                do {
-                                    *_renderPtr = uVar1;
-                                    _renderPtr = _renderPtr + 1;
-                                    _xRenderPos = _xRenderPos + 1;
-                                    iVar6 = iVar6 + -1;
-                                } while (iVar6 != 0);
-                                _xRenderPos = _xRenderPos + iVar4;
-                                _renderPtr = _renderPtr + iVar4;
-                                tgxSourcePtr = (ushort*)((int)tgxSourcePtr + 3);
-                            }
-                        } else {
-                        LAB_00454bb5:
-                            _xRenderPos = _xRenderPos + iVar6;
-                            _renderPtr = _renderPtr + iVar6;
-                            tgxSourcePtr = (ushort*)((int)tgxSourcePtr + 3);
-                        }
-                        goto LAB_00454b69;
-                    }
-                    _renderPtr = (ushort*)((int)_renderPtr + gfxWidth);
-                    gfxHeight = gfxHeight + -1;
-                    _xRenderPos = xPos;
-                    tgxSourcePtr = (ushort*)pTVar7;
-                } while (0 < gfxHeight);
+            }
+            __asm {
+                mov esi, tgxSourcePtr
+                mov eax, this
+                mov edi, dword ptr [eax]TextureRenderCore.currentRenderSurface
+                mov eax, xPos
+                add eax, eax
+                add edi, eax
+                mov eax, yPos
+                mov ebx, _top
+                cmp eax, ebx
+                jge addYOffset
+                sub ebx, eax
+                mov eax, ebx
+                cmp gfxHeight, eax
+                jle done
+                sub gfxHeight, eax
+            skipTokenLoop:
+                mov ecx, 0
+                mov bl, byte ptr [esi]
+                mov cl, byte ptr [esi]
+                and bl, 0E0h
+                and cl, 1Fh
+                add esi, 1
+                cmp bl, 20h
+                je skipTokenLoop
+                cmp bl, 0
+                je skipStream
+                cmp bl, 40h
+                je skipRepeat
+                jmp skipNextLine
+            skipStream:
+                add ecx, 1
+                add ecx, ecx
+                add esi, ecx
+                jmp skipTokenLoop
+            skipRepeat:
+                add esi, 2
+                jmp skipTokenLoop
+            skipNextLine:
+                sub eax, 1
+                cmp eax, 0
+                jg skipTokenLoop
+                mov eax, _top
+            addYOffset:
+                mov edx, _byteWidth
+                mul edx
+                add edi, eax
+                mov edx, gfxHeight
+                mov ebx, xPos
+            drawTokenLoop:
+                mov ecx, 0
+                mov al, byte ptr [esi]
+                mov cl, byte ptr [esi]
+                and al, 0E0h
+                and cl, 1Fh
+                add esi, 1
+                cmp al, 20h
+                je drawTransparent
+                cmp al, 0
+                je drawRepeat
+                cmp al, 40h
+                je drawStream
+                mov ebx, xPos
+                add edi, gfxWidth
+                sub edx, 1
+                cmp edx, 0
+                jg drawTokenLoop
+                jmp done
+            drawTransparent:
+                add ecx, 1
+                add ebx, ecx
+                add ecx, ecx
+                add edi, ecx
+                jmp drawTokenLoop
+            drawStream:
+                mov eax, 0
+                add ecx, 1
+                cmp ebx, _right
+                jl streamClip
+            streamAdvance:
+                add ebx, ecx
+                add ecx, ecx
+                add edi, ecx
+                add esi, 2
+                jmp drawTokenLoop
+            streamClip:
+                cmp ebx, _left
+                jge streamRight
+                mov eax, ecx
+                add eax, ebx
+                cmp eax, _left
+                jle streamAdvance
+                mov eax, _left
+                sub eax, ebx
+                sub ecx, eax
+                add ebx, eax
+                add eax, eax
+                add edi, eax
+            streamRight:
+                mov eax, ecx
+                add eax, ebx
+                cmp eax, _right
+                jl streamCopy
+                push edx
+                mov edx, eax
+                sub edx, _right
+                sub ecx, edx
+                mov ax, word ptr [esi]
+            streamClipLoop:
+                mov word ptr [edi], ax
+                add edi, 2
+                add ebx, 1
+                sub ecx, 1
+                jne streamClipLoop
+                add ebx, edx
+                add edx, edx
+                add edi, edx
+                pop edx
+                add esi, 2
+                jmp drawTokenLoop
+            streamCopy:
+                mov ax, word ptr [esi]
+            streamCopyLoop:
+                mov word ptr [edi], ax
+                add edi, 2
+                add ebx, 1
+                sub ecx, 1
+                jne streamCopyLoop
+                add esi, 2
+                jmp drawTokenLoop
+            drawRepeat:
+                add ecx, 1
+                cmp ebx, _right
+                jl repeatClip
+            repeatAdvance:
+                add ebx, ecx
+                add ecx, ecx
+                add esi, ecx
+                add edi, ecx
+                jmp drawTokenLoop
+            repeatClip:
+                cmp ebx, _left
+                jge repeatRight
+                mov eax, ecx
+                add eax, ebx
+                cmp eax, _left
+                jle repeatAdvance
+                mov eax, _left
+                sub eax, ebx
+                sub ecx, eax
+                add ebx, eax
+                add eax, eax
+                add esi, eax
+                add edi, eax
+            repeatRight:
+                mov eax, ecx
+                add eax, ebx
+                cmp eax, _right
+                jl repeatCopy
+                push edx
+                mov edx, eax
+                sub edx, _right
+                sub ecx, edx
+            repeatClipLoop:
+                mov ax, word ptr [esi]
+                mov word ptr [edi], ax
+                add esi, 2
+                add edi, 2
+                add ebx, 1
+                sub ecx, 1
+                jne repeatClipLoop
+                add ebx, edx
+                add edx, edx
+                add esi, edx
+                add edi, edx
+                pop edx
+                jmp drawTokenLoop
+            repeatCopy:
+                mov ax, word ptr [esi]
+                mov word ptr [edi], ax
+                add esi, 2
+                add edi, 2
+                add ebx, 1
+                sub ecx, 1
+                jne repeatCopy
+                jmp drawTokenLoop
+            done:
             }
         }
 
