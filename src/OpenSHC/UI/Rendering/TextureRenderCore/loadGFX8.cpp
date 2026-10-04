@@ -22,8 +22,7 @@ namespace UI {
             int _currentBufferFillSize;
             MACRO_CALL_MEMBER(IO::ResourceManager_Func::resolveResourceFileName, DAT_ResourceManager::ptr)(
                 IO::FRT_GFX8, (char const*)((int)(gfx8Filename)));
-            _size = MACRO_CALL_MEMBER(
-                IO::ResourceManager_Func::getCurrentResourceSize, DAT_ResourceManager::ptr)();
+            _size = MACRO_CALL_MEMBER(IO::ResourceManager_Func::getCurrentResourceSize, DAT_ResourceManager::ptr)();
             _currentBufferFillSize = this->loadedGfxArray[this->totalLoadedGfx].offsetInBuffer;
             if (0x1167910 < (int)(_currentBufferFillSize + _size)) {
                 return -1;
@@ -39,9 +38,8 @@ namespace UI {
                 + DAT_ResourceManager::instance.loadPositionInCurrentResource;
             this->loadedGfxArray[this->totalLoadedGfx].width = *(int*)_destination;
             this->loadedGfxArray[this->totalLoadedGfx].height = *(int*)((int)_destination + 4);
-            _currentBufferFillSize = this->totalLoadedGfx;
             this->totalLoadedGfx = this->totalLoadedGfx + 1;
-            return _currentBufferFillSize;
+            return this->totalLoadedGfx + -1;
         }
 
     }
