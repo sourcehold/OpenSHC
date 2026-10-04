@@ -71,7 +71,7 @@ namespace UI {
                         local_c = 0x10;
                         colorOrBlendOrGammaUnk = (int)_bitmapFacePtr;
                         do {
-                            if (*(ushort*)colorOrBlendOrGammaUnk != COL_MAGENTA::instance.shortValue) {
+                            if (*(ushort*)colorOrBlendOrGammaUnk != (ushort)COL_MAGENTA::instance.shortValue) {
                                 uVar9 = (uint)*_surfacePtr;
                                 uVar8 = (uint) * (ushort*)colorOrBlendOrGammaUnk;
                                 _widthInByte = (uVar8 & 0x7e0) * iVar10;
@@ -84,7 +84,7 @@ namespace UI {
                                     | ((ushort)(iVar3 / 32) & 0xf800) + ((ushort)(iVar4 / 32) & 0xf800)
                                     | (short)(iVar5 / 32) + (short)(iVar6 / 32);
                             }
-                            if (*(ushort*)(colorOrBlendOrGammaUnk + 2) != COL_MAGENTA::instance.shortValue) {
+                            if (*(ushort*)(colorOrBlendOrGammaUnk + 2) != (ushort)COL_MAGENTA::instance.shortValue) {
                                 uVar9 = (uint)_surfacePtr[1];
                                 uVar8 = (uint) * (ushort*)(colorOrBlendOrGammaUnk + 2);
                                 _widthInByte = (uVar8 & 0x7e0) * iVar10;
@@ -97,7 +97,7 @@ namespace UI {
                                     | ((ushort)(iVar3 / 32) & 0xf800) + ((ushort)(iVar4 / 32) & 0xf800)
                                     | (short)(iVar5 / 32) + (short)(iVar6 / 32);
                             }
-                            if (*(ushort*)(colorOrBlendOrGammaUnk + 4) != COL_MAGENTA::instance.shortValue) {
+                            if (*(ushort*)(colorOrBlendOrGammaUnk + 4) != (ushort)COL_MAGENTA::instance.shortValue) {
                                 uVar9 = (uint)_surfacePtr[2];
                                 uVar8 = (uint) * (ushort*)(colorOrBlendOrGammaUnk + 4);
                                 _widthInByte = (uVar8 & 0x7e0) * iVar10;
@@ -110,7 +110,7 @@ namespace UI {
                                     | ((ushort)(iVar3 / 32) & 0xf800) + ((ushort)(iVar4 / 32) & 0xf800)
                                     | (short)(iVar5 / 32) + (short)(iVar6 / 32);
                             }
-                            if (*(ushort*)(colorOrBlendOrGammaUnk + 6) != COL_MAGENTA::instance.shortValue) {
+                            if (*(ushort*)(colorOrBlendOrGammaUnk + 6) != (ushort)COL_MAGENTA::instance.shortValue) {
                                 uVar9 = (uint)_surfacePtr[3];
                                 uVar8 = (uint) * (ushort*)(colorOrBlendOrGammaUnk + 6);
                                 _widthInByte = (uVar8 & 0x7e0) * iVar10;
@@ -138,7 +138,7 @@ namespace UI {
                     do {
                         uVar1 = *_bitmapFacePtr;
                         _bitmapFacePtr = _bitmapFacePtr + 1;
-                        if (uVar1 != COL_MAGENTA::instance.shortValue) {
+                        if (uVar1 != (ushort)COL_MAGENTA::instance.shortValue) {
                             uVar8 = (uint)uVar1;
                             iVar7 = (uVar8 & 0x3e0) * colorOrBlendOrGammaUnk;
                             iVar10 = (uVar8 & 0x7c00) * colorOrBlendOrGammaUnk;
