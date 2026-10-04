@@ -123,7 +123,9 @@ namespace AI {
                     if (existingBuildingID == 0) {
                         if (siegeIndex < 2)
                             continue;
-                    } else if (siegeIndex < 2) {
+                    } else {
+                        if (siegeIndex >= 2)
+                            continue;
                         if (DAT_BuildingsState::instance.buildings[existingBuildingID].buildingType
                                 != OpenSHC::Map::Buildings::BT_TOWER4
                             && DAT_BuildingsState::instance.buildings[existingBuildingID].buildingType
