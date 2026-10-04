@@ -21,7 +21,7 @@ namespace UI {
             short* _ptrInSurface;
             int _facePixelWidth;
             short* _bitmapPtr;
-            short _currentPixel;
+            ushort _currentPixel;
             short* _renderSurface;
             _bitmapPtr = (short*)(bitmapFaceIndex * 0x2100 + (int)this->bitmapsFaces_0x94);
             switch (this->drawBufferChoiceValue) {
@@ -49,7 +49,7 @@ namespace UI {
                 do {
                     _currentPixel = *_bitmapPtr;
                     _bitmapPtr = _bitmapPtr + 1;
-                    if (_currentPixel != COL_MAGENTA::instance.shortValue) {
+                    if (_currentPixel != (ushort)COL_MAGENTA::instance.shortValue) {
                         *_ptrInSurface = _currentPixel;
                     }
                     _ptrInSurface = _ptrInSurface + 1;
