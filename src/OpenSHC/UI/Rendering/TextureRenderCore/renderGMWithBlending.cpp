@@ -18,47 +18,42 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00455390
         void TextureRenderCore::renderGMWithBlending(GmID GmID, int imageID, int drawX, int drawY, int blendStrengthUnk)
         {
-            int iVar1;
+            int _imageIndex;
             ushort* _imageDataPtr;
             GmImageTypeInt _imageType;
-            iVar1 = GMTotalPicturesProcessed::instance[GmID];
-            _imageDataPtr
-                = (ushort*)(DAT_GMImageOffsets::instance[iVar1 + -1 + imageID] + (int)this->gmProcessedImageData);
-            if (blendStrengthUnk != 0x20) {
-                _imageType = this->gmFileHeaderColorpaletteArray[GmID].ImageType;
-                if (blendStrengthUnk == 0) {
-                    if ((_imageType == IO::Graphics::GIT_InterfaceElement)
-                        || (_imageType == IO::Graphics::GIT_CompressedImage)) {
-                        MACRO_CALL_MEMBER(
-                            UI::Rendering::TextureRenderCore_Func::renderFunctionResponsibleForManyGameObjects,
-                            this)(drawX, drawY,
-                            (int)((int)(DAT_GMImageHeaders::instance.imh[imageID + iVar1 + -1].width)),
-                            (int)((int)(DAT_GMImageHeaders::instance.imh[imageID + iVar1 + -1].height)), _imageDataPtr);
-                    }
-                    if (_imageType == IO::Graphics::GIT_Animation) {
-                        MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderUnitAnimationUnk, this)(
-                            drawX, drawY, (int)((int)(DAT_GMImageHeaders::instance.imh[imageID + iVar1 + -1].width)),
-                            (int)((int)(DAT_GMImageHeaders::instance.imh[imageID + iVar1 + -1].height)),
-                            (byte*)((int)(_imageDataPtr)));
-                    }
-                } else {
-                    if ((_imageType == IO::Graphics::GIT_InterfaceElement)
-                        || (_imageType == IO::Graphics::GIT_CompressedImage)) {
-                        MACRO_CALL_MEMBER(
-                            UI::Rendering::TextureRenderCore_Func::renderInterfaceOrBuildingOccupationArea,
-                            this)(drawX, drawY,
-                            (int)((int)(DAT_GMImageHeaders::instance.imh[imageID + iVar1 + -1].width)),
-                            (int)((int)(DAT_GMImageHeaders::instance.imh[imageID + iVar1 + -1].height)), _imageDataPtr,
-                            blendStrengthUnk);
-                    }
-                    if (_imageType == IO::Graphics::GIT_Animation) {
-                        MACRO_CALL_MEMBER(
-                            UI::Rendering::TextureRenderCore_Func::renderUnitAnimationWithBlendingUnk, this)(
-                            drawX, drawY, (int)((int)(DAT_GMImageHeaders::instance.imh[imageID + iVar1 + -1].width)),
-                            (int)((int)(DAT_GMImageHeaders::instance.imh[imageID + iVar1 + -1].height)),
-                            (byte*)((int)(_imageDataPtr)), blendStrengthUnk);
-                    }
+            _imageIndex = GMTotalPicturesProcessed::instance[GmID] + imageID + -1;
+            _imageDataPtr = (ushort*)(DAT_GMImageOffsets::instance[_imageIndex] + (int)this->gmProcessedImageData);
+            if (blendStrengthUnk == 0x20) {
+                return;
+            }
+            _imageType = this->gmFileHeaderColorpaletteArray[GmID].ImageType;
+            if (blendStrengthUnk == 0) {
+                if ((_imageType == IO::Graphics::GIT_InterfaceElement)
+                    || (_imageType == IO::Graphics::GIT_CompressedImage)) {
+                    MACRO_CALL_MEMBER(
+                        UI::Rendering::TextureRenderCore_Func::renderFunctionResponsibleForManyGameObjects, this)(drawX,
+                        drawY, DAT_GMImageHeaders::instance.imh[_imageIndex].width,
+                        DAT_GMImageHeaders::instance.imh[_imageIndex].height, _imageDataPtr);
+                    return;
                 }
+                if (_imageType == IO::Graphics::GIT_Animation) {
+                    MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderUnitAnimationUnk, this)(drawX, drawY,
+                        DAT_GMImageHeaders::instance.imh[_imageIndex].width,
+                        DAT_GMImageHeaders::instance.imh[_imageIndex].height, (byte*)_imageDataPtr);
+                }
+                return;
+            }
+            if ((_imageType == IO::Graphics::GIT_InterfaceElement)
+                || (_imageType == IO::Graphics::GIT_CompressedImage)) {
+                MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderInterfaceOrBuildingOccupationArea, this)(
+                    drawX, drawY, DAT_GMImageHeaders::instance.imh[_imageIndex].width,
+                    DAT_GMImageHeaders::instance.imh[_imageIndex].height, _imageDataPtr, blendStrengthUnk);
+                return;
+            }
+            if (_imageType == IO::Graphics::GIT_Animation) {
+                MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderUnitAnimationWithBlendingUnk, this)(
+                    drawX, drawY, DAT_GMImageHeaders::instance.imh[_imageIndex].width,
+                    DAT_GMImageHeaders::instance.imh[_imageIndex].height, (byte*)_imageDataPtr, blendStrengthUnk);
             }
         }
 
