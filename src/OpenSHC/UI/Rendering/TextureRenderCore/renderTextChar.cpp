@@ -77,37 +77,34 @@ namespace UI {
             if (blendStrength != 0x20) {
                 if (DAT_TextManagerObject::instance.field5_0x14 == 0) {
                     iVar3 = _yPosUnk - DAT_GMImageHeaders::instance.imh[_imageId].tileOffset;
-                    MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawColorBox,
-                        DAT_PencilRenderCore::ptr)(xPos + -1, iVar3 + -2,
-                        DAT_GMImageHeaders::instance.imh[_imageId].width + 1 + xPos, iVar3 + 2 + lineHeight,
-                        (ushort)((int)(COL_WHITE::instance.shortValue)));
+                    MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(
+                        xPos + -1, iVar3 + -2, DAT_GMImageHeaders::instance.imh[_imageId].width + 1 + xPos,
+                        iVar3 + 2 + lineHeight, (ushort)((int)(COL_WHITE::instance.shortValue)));
                 }
                 if (DAT_TextManagerObject::instance.field6_0x18 != 0) {
-                    MACRO_CALL_MEMBER(
-                        UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(xPos,
+                    MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(xPos,
                         _yPosUnk + 2, DAT_GMImageHeaders::instance.imh[_imageId].width + xPos, _yPosUnk + 2, fillColor);
                 }
                 if (renderType == Text::FRT_COLOR) {
                     MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderTgxWithColorUnk, this)(xPos,
-                        (int)((int)(_yPosUnk - DAT_GMImageHeaders::instance.imh[_imageId].tileOffset)),
-                        (int)((int)(DAT_GMImageHeaders::instance.imh[_imageId].width)),
-                        (int)((int)(DAT_GMImageHeaders::instance.imh[_imageId].height)), _imageSource, fillColor);
-                } else {
-                    if (renderType == Text::FRT_BLENDED_COLOR) {
-                        MACRO_CALL_MEMBER(
-                            UI::Rendering::TextureRenderCore_Func::renderTgxWithColorAndBlendingUnk, this)(
-                            xPos, (int)((int)(_yPosUnk - DAT_GMImageHeaders::instance.imh[_imageId].tileOffset)),
-                            (int)((int)(DAT_GMImageHeaders::instance.imh[_imageId].width)),
-                            (int)((int)(DAT_GMImageHeaders::instance.imh[_imageId].height)), _imageSource, fillColor,
-                            blendStrength);
-                    }
-                    if (renderType == Text::FRT_RAW) {
-                        MACRO_CALL_MEMBER(
-                            UI::Rendering::TextureRenderCore_Func::renderFunctionResponsibleForManyGameObjects,
-                            this)(xPos, (int)((int)(_yPosUnk - DAT_GMImageHeaders::instance.imh[_imageId].tileOffset)),
-                            (int)((int)(DAT_GMImageHeaders::instance.imh[_imageId].width)),
-                            (int)((int)(DAT_GMImageHeaders::instance.imh[_imageId].height)), _imageSource);
-                    }
+                        _yPosUnk - DAT_GMImageHeaders::instance.imh[_imageId].tileOffset,
+                        DAT_GMImageHeaders::instance.imh[_imageId].width,
+                        DAT_GMImageHeaders::instance.imh[_imageId].height, _imageSource, fillColor);
+                    return;
+                }
+                if (renderType == Text::FRT_BLENDED_COLOR) {
+                    MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderTgxWithColorAndBlendingUnk, this)(
+                        xPos, _yPosUnk - DAT_GMImageHeaders::instance.imh[_imageId].tileOffset,
+                        DAT_GMImageHeaders::instance.imh[_imageId].width,
+                        DAT_GMImageHeaders::instance.imh[_imageId].height, _imageSource, fillColor, blendStrength);
+                    return;
+                }
+                if (renderType == Text::FRT_RAW) {
+                    MACRO_CALL_MEMBER(
+                        UI::Rendering::TextureRenderCore_Func::renderFunctionResponsibleForManyGameObjects, this)(xPos,
+                        _yPosUnk - DAT_GMImageHeaders::instance.imh[_imageId].tileOffset,
+                        DAT_GMImageHeaders::instance.imh[_imageId].width,
+                        DAT_GMImageHeaders::instance.imh[_imageId].height, _imageSource);
                 }
             }
         }
