@@ -7,7 +7,6 @@
 #include "OpenSHC/Globals/DAT_BlendingDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_ResourceManager.hpp"
 #include "OpenSHC/Globals/DAT_WindowAndDirectDraw.hpp"
-#include "OpenSHC/Globals/MSVC_SecurityCookie.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -16,19 +15,22 @@ namespace UI {
         using OpenSHC::IO::FileResourceType;
         using OpenSHC::Rendering::ColorMode;
 
+        /*
+          The four pixel conversions are written out rather than looped: MSVC1400 does not unroll,
+          so the body repeated four times in the original means the source repeats it four times.
+         */
         // FUNCTION: STRONGHOLDCRUSADER 0x00454CB0
         void TextureRenderCore::loadCampaignMapGfxUnk()
         {
-            byte bVar1;
-            short sVar2;
+            ushort _red;
+            ushort _green;
+            ushort _blue;
             ushort uVar3;
             byte* pbVar4;
             int iVar5;
             ushort* _campaignMapPtrUnk;
             undefined** _campaignActGfx8Ptr;
             byte local_304[768];
-            uint local_4;
-            local_4 = MSVC_SecurityCookie::instance ^ (uint)&_campaignActGfx8Ptr;
             _campaignActGfx8Ptr = (undefined**)(DAT_BlendingDefinedData::instance.campaign_map_england);
             _campaignMapPtrUnk = this->campaignMapColorMapsUnk_0x16c886[0] + 1;
             do {
@@ -39,44 +41,49 @@ namespace UI {
                 pbVar4 = local_304;
                 iVar5 = 0x40;
                 do {
-                    sVar2 = (*pbVar4 & 0xfff8) * 0x20;
+                    _green = pbVar4[1];
+                    _red = pbVar4[0];
+                    _blue = pbVar4[2] >> 3;
                     if (DAT_WindowAndDirectDraw::instance.colorBitMode == OpenSHC::Rendering::RGB_565) {
-                        uVar3 = (ushort)(pbVar4[2] >> 3) + (sVar2 + (pbVar4[1] & 0xfffc)) * 8;
+                        uVar3 = (ushort)(_blue + (((_red & 0xfff8) * 0x20) + (_green & 0xfffc)) * 8);
                     } else {
-                        uVar3 = (ushort)(pbVar4[2] >> 3) + (sVar2 + (pbVar4[1] & 0xfff8)) * 4 | 0x8000;
+                        uVar3 = (ushort)(_blue + (((_red & 0xfff8) * 0x20) + (_green & 0xfff8)) * 4 | 0x8000);
                     }
                     if (uVar3 == 0xfc1f) {
                         uVar3 = 0xf81f;
                     }
-                    bVar1 = pbVar4[3];
                     _campaignMapPtrUnk[-1] = uVar3;
-                    sVar2 = (bVar1 & 0xfff8) * 0x20;
+                    _green = pbVar4[4];
+                    _red = pbVar4[3];
+                    _blue = pbVar4[5] >> 3;
                     if (DAT_WindowAndDirectDraw::instance.colorBitMode == OpenSHC::Rendering::RGB_565) {
-                        uVar3 = (ushort)(pbVar4[5] >> 3) + (sVar2 + (pbVar4[4] & 0xfffc)) * 8;
+                        uVar3 = (ushort)(_blue + (((_red & 0xfff8) * 0x20) + (_green & 0xfffc)) * 8);
                     } else {
-                        uVar3 = (ushort)(pbVar4[5] >> 3) + (sVar2 + (pbVar4[4] & 0xfff8)) * 4 | 0x8000;
+                        uVar3 = (ushort)(_blue + (((_red & 0xfff8) * 0x20) + (_green & 0xfff8)) * 4 | 0x8000);
                     }
                     if (uVar3 == 0xfc1f) {
                         uVar3 = 0xf81f;
                     }
-                    bVar1 = pbVar4[6];
                     *_campaignMapPtrUnk = uVar3;
-                    sVar2 = (bVar1 & 0xfff8) * 0x20;
+                    _green = pbVar4[7];
+                    _red = pbVar4[6];
+                    _blue = pbVar4[8] >> 3;
                     if (DAT_WindowAndDirectDraw::instance.colorBitMode == OpenSHC::Rendering::RGB_565) {
-                        uVar3 = (ushort)(pbVar4[8] >> 3) + (sVar2 + (pbVar4[7] & 0xfffc)) * 8;
+                        uVar3 = (ushort)(_blue + (((_red & 0xfff8) * 0x20) + (_green & 0xfffc)) * 8);
                     } else {
-                        uVar3 = (ushort)(pbVar4[8] >> 3) + (sVar2 + (pbVar4[7] & 0xfff8)) * 4 | 0x8000;
+                        uVar3 = (ushort)(_blue + (((_red & 0xfff8) * 0x20) + (_green & 0xfff8)) * 4 | 0x8000);
                     }
                     if (uVar3 == 0xfc1f) {
                         uVar3 = 0xf81f;
                     }
-                    bVar1 = pbVar4[9];
                     _campaignMapPtrUnk[1] = uVar3;
-                    sVar2 = (bVar1 & 0xfff8) * 0x20;
+                    _green = pbVar4[10];
+                    _red = pbVar4[9];
+                    _blue = pbVar4[11] >> 3;
                     if (DAT_WindowAndDirectDraw::instance.colorBitMode == OpenSHC::Rendering::RGB_565) {
-                        uVar3 = (ushort)(pbVar4[0xb] >> 3) + (sVar2 + (pbVar4[10] & 0xfffc)) * 8;
+                        uVar3 = (ushort)(_blue + (((_red & 0xfff8) * 0x20) + (_green & 0xfffc)) * 8);
                     } else {
-                        uVar3 = (ushort)(pbVar4[0xb] >> 3) + (sVar2 + (pbVar4[10] & 0xfff8)) * 4 | 0x8000;
+                        uVar3 = (ushort)(_blue + (((_red & 0xfff8) * 0x20) + (_green & 0xfff8)) * 4 | 0x8000);
                     }
                     if (uVar3 == 0xfc1f) {
                         uVar3 = 0xf81f;
@@ -87,8 +94,7 @@ namespace UI {
                     iVar5 = iVar5 + -1;
                 } while (iVar5 != 0);
                 _campaignActGfx8Ptr = _campaignActGfx8Ptr + 1;
-            } while ((int)_campaignActGfx8Ptr < 0xab8730);
-            ;
+            } while (_campaignActGfx8Ptr < (undefined**)(DAT_BlendingDefinedData::instance.campaign_map_england) + 6);
         }
 
     }
