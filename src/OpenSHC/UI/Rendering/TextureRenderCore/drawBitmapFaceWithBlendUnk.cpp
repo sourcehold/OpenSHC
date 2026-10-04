@@ -6,6 +6,7 @@
 
 #include "OpenSHC/Globals/AlphaAndButtonSurfaceObj.hpp"
 #include "OpenSHC/Globals/COL_MAGENTA.hpp"
+#include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
 #include "OpenSHC/Globals/DAT_WindowAndDirectDraw.hpp"
 
 namespace OpenSHC {
@@ -29,6 +30,7 @@ namespace UI {
             int iVar7;
             int _widthInByte;
             ushort* _surfacePtr;
+            ushort* _renderSurface;
             ushort* _bitmapFacePtr;
             uint uVar8;
             uint uVar9;
@@ -39,24 +41,30 @@ namespace UI {
             if (colorOrBlendOrGammaUnk == 0) {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::drawBitmapFace, this)(
                     bitmapFaceIndex, xPos, yPos);
+                return;
             }
             if (colorOrBlendOrGammaUnk != 0x20) {
                 _bitmapFacePtr = (ushort*)(bitmapFaceIndex * 0x2100 + (int)this->bitmapsFaces_0x94);
                 iVar10 = 0x20 - colorOrBlendOrGammaUnk;
-                if (this->drawBufferChoiceValue == OpenSHC::Rendering::Enums::RT_MAP_GAME) {
+                switch (this->drawBufferChoiceValue) {
+                case OpenSHC::Rendering::Enums::RT_MAP_GAME:
+                    _renderSurface = DAT_WindowAndDirectDraw::instance.surfacePointer_mapGame;
                     _pixelToLineJump = 0xf98;
                     _widthInByte = 0x1fb0;
-                    this->currentRenderSurface = DAT_WindowAndDirectDraw::instance.surfacePointer_mapGame;
-                } else if (this->drawBufferChoiceValue == OpenSHC::Rendering::Enums::RT_BUTTON_AND_ALPHA) {
+                    break;
+                case OpenSHC::Rendering::Enums::RT_BUTTON_AND_ALPHA:
+                    _renderSurface = (ushort*)AlphaAndButtonSurfaceObj::instance.surfacePtr;
                     _pixelToLineJump = AlphaAndButtonSurfaceObj::instance.currentImageWidth + -0x40;
                     _widthInByte = AlphaAndButtonSurfaceObj::instance.currentImageWidth * 2;
-                    this->currentRenderSurface = AlphaAndButtonSurfaceObj::instance.surfacePtr;
-                } else {
+                    break;
+                default:
+                    _renderSurface = DAT_WindowAndDirectDraw::instance.surfacePointer_screenMenu;
                     _pixelToLineJump = DAT_WindowAndDirectDraw::instance.byteSizeOfOneHorizontalLine / 2 + -0x40;
                     _widthInByte = DAT_WindowAndDirectDraw::instance.byteSizeOfOneHorizontalLine;
-                    this->currentRenderSurface = DAT_WindowAndDirectDraw::instance.surfacePointer_screenMenu;
+                    break;
                 }
-                _surfacePtr = (ushort*)((int)this->currentRenderSurface + xPos * 2 + _widthInByte * yPos);
+                DAT_TextureRenderCoreObject::instance.currentRenderSurface = _renderSurface;
+                _surfacePtr = (ushort*)((int)_renderSurface + _widthInByte * yPos + xPos * 2);
                 if (DAT_WindowAndDirectDraw::instance.colorBitMode == OpenSHC::Rendering::RGB_565) {
                     local_8 = 0x42;
                     do {
