@@ -22,43 +22,38 @@ namespace UI {
         void TextureRenderCore::renderGMWithAlphaMask(
             GmID gmID, int imageID, int xPos, int yPos, GmID maskGmID, int alphaImageID, int blendStrength)
         {
-            int iVar1;
+            int _imageIndex;
+            int _maskImageIndex;
             void* pvVar2;
             RenderTargetInt _tempBufferChoiceValueUnk;
-            pvVar2 = DAT_TextureRenderCoreObject::instance.gmProcessedImageData;
+            pvVar2 = this->gmProcessedImageData;
             if (DAT_TextureRenderCoreObject::instance.isZoom2 != 0) {
-                iVar1 = GMTotalPicturesProcessed::instance[gmID];
+                _imageIndex = GMTotalPicturesProcessed::instance[gmID] + imageID + -1;
                 MACRO_CALL_MEMBER(
                     OpenSHC::UI::Rendering::TextureRenderCore_Func::renderInterfaceOrBuildingOccupationArea, this)(xPos,
-                    yPos, (int)((int)(DAT_GMImageHeaders::instance.imh[imageID + iVar1 + -1].width)),
-                    (int)((int)(DAT_GMImageHeaders::instance.imh[imageID + iVar1 + -1].height)),
-                    (ushort*)((int)(
-
-                        (DAT_GMImageOffsets::instance[iVar1 + -1 + imageID]
-                            + (int)DAT_TextureRenderCoreObject::instance.gmProcessedImageData))),
-                    blendStrength);
+                    yPos, DAT_GMImageHeaders::instance.imh[_imageIndex].width,
+                    DAT_GMImageHeaders::instance.imh[_imageIndex].height,
+                    (ushort*)(DAT_GMImageOffsets::instance[_imageIndex] + (int)pvVar2), blendStrength);
+                return;
             }
+            _maskImageIndex = GMTotalPicturesProcessed::instance[maskGmID] + alphaImageID + -1;
             AlphaAndButtonSurfaceObj::instance.currentImageWidth
-                = (int)DAT_GMImageHeaders::instance
-                      .imh[alphaImageID + GMTotalPicturesProcessed::instance[maskGmID] + -1]
-                      .width;
+                = DAT_GMImageHeaders::instance.imh[_maskImageIndex].width;
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ShortValue, DAT_LowLevelMemory::ptr)(
-                DAT_GMImageHeaders::instance.imh[alphaImageID + GMTotalPicturesProcessed::instance[maskGmID] + -1]
-                        .height
+                DAT_GMImageHeaders::instance.imh[_maskImageIndex].height
                     * AlphaAndButtonSurfaceObj::instance.currentImageWidth * 2,
-                (ushort)((int)(COL_MAGENTA::instance.shortValue)),
-                (void*)((int)(AlphaAndButtonSurfaceObj::instance.surfacePtr)));
+                COL_MAGENTA::instance.shortValue, (void*)AlphaAndButtonSurfaceObj::instance.surfacePtr);
             _tempBufferChoiceValueUnk = DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue;
             DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue
                 = OpenSHC::Rendering::Enums::RT_BUTTON_AND_ALPHA;
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, this)(
                 (OpenSHC::DE::SHCDE::eGM)maskGmID, alphaImageID, 0, 0);
-            iVar1 = GMTotalPicturesProcessed::instance[gmID];
+            _imageIndex = GMTotalPicturesProcessed::instance[gmID] + imageID + -1;
             DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = _tempBufferChoiceValueUnk;
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGmWithPreparedAlphaMask, this)(xPos,
-                yPos, (int)((int)(DAT_GMImageHeaders::instance.imh[imageID + iVar1 + -1].width)),
-                (int)((int)(DAT_GMImageHeaders::instance.imh[imageID + iVar1 + -1].height)),
-                (ushort*)((int)((DAT_GMImageOffsets::instance[iVar1 + -1 + imageID] + (int)pvVar2))), blendStrength);
+                yPos, DAT_GMImageHeaders::instance.imh[_imageIndex].width,
+                DAT_GMImageHeaders::instance.imh[_imageIndex].height,
+                (ushort*)(DAT_GMImageOffsets::instance[_imageIndex] + (int)pvVar2), blendStrength);
         }
 
     }
