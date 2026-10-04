@@ -22,27 +22,27 @@ namespace UI {
             int _facePixelWidth;
             short* _bitmapPtr;
             short _currentPixel;
-            _bitmapPtr
-                = (short*)(bitmapFaceIndex * 0x2100 + (int)DAT_TextureRenderCoreObject::instance.bitmapsFaces_0x94);
-            if (DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue == OpenSHC::Rendering::Enums::RT_MAP_GAME) {
+            short* _renderSurface;
+            _bitmapPtr = (short*)(bitmapFaceIndex * 0x2100 + (int)this->bitmapsFaces_0x94);
+            switch (this->drawBufferChoiceValue) {
+            case OpenSHC::Rendering::Enums::RT_MAP_GAME:
+                _renderSurface = (short*)DAT_WindowAndDirectDraw::instance.surfacePointer_mapGame;
                 _pixelToJump = 0xf98;
                 _widthInByte = 0x1fb0;
-                DAT_TextureRenderCoreObject::instance.currentRenderSurface
-                    = DAT_WindowAndDirectDraw::instance.surfacePointer_mapGame;
-            } else if (DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue
-                == OpenSHC::Rendering::Enums::RT_BUTTON_AND_ALPHA) {
+                break;
+            case OpenSHC::Rendering::Enums::RT_BUTTON_AND_ALPHA:
+                _renderSurface = (short*)AlphaAndButtonSurfaceObj::instance.surfacePtr;
                 _pixelToJump = AlphaAndButtonSurfaceObj::instance.currentImageWidth + -0x40;
                 _widthInByte = AlphaAndButtonSurfaceObj::instance.currentImageWidth * 2;
-                DAT_TextureRenderCoreObject::instance.currentRenderSurface
-                    = AlphaAndButtonSurfaceObj::instance.surfacePtr;
-            } else {
+                break;
+            default:
+                _renderSurface = (short*)DAT_WindowAndDirectDraw::instance.surfacePointer_screenMenu;
                 _pixelToJump = DAT_WindowAndDirectDraw::instance.byteSizeOfOneHorizontalLine / 2 + -0x40;
                 _widthInByte = DAT_WindowAndDirectDraw::instance.byteSizeOfOneHorizontalLine;
-                DAT_TextureRenderCoreObject::instance.currentRenderSurface
-                    = DAT_WindowAndDirectDraw::instance.surfacePointer_screenMenu;
+                break;
             }
-            _ptrInSurface = (short*)((int)DAT_TextureRenderCoreObject::instance.currentRenderSurface + xPos * 2
-                + _widthInByte * yPos);
+            DAT_TextureRenderCoreObject::instance.currentRenderSurface = (ushort*)_renderSurface;
+            _ptrInSurface = (short*)((int)_renderSurface + _widthInByte * yPos + xPos * 2);
             _widthInByte = 0x42;
             do {
                 _facePixelWidth = 0x40;
