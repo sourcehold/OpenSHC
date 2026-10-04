@@ -16,143 +16,145 @@ namespace UI {
         using OpenSHC::Rendering::ColorMode;
         using OpenSHC::Rendering::Enums::RenderTarget;
 
+        /*
+          Each channel is scaled and divided by 0x20 signed, so the decompiler's shift-plus-bias
+          sequences are plain divisions. In RGB565 the source and destination are blended by
+          weight; in RGB555 only the source is scaled. The 565 loop is written out four pixels at
+          a time because MSVC1400 does not unroll.
+         */
         // FUNCTION: STRONGHOLDCRUSADER 0x0044CEB0
         void TextureRenderCore::drawBitmapFaceWithBlendUnk(
             int bitmapFaceIndex, int xPos, int yPos, int colorOrBlendOrGammaUnk)
         {
-            ushort uVar1;
             int _pixelToLineJump;
-            int iVar2;
-            int iVar3;
-            int iVar4;
-            int iVar5;
-            int iVar6;
-            int iVar7;
             int _widthInByte;
+            int _lineJumpBytes;
+            int _rowCount;
+            int _columnCount;
+            int _srcWeight;
+            ushort _srcPixel;
+            ushort _dstPixel;
+            int _blended;
             ushort* _surfacePtr;
+            ushort* _bitmapPtr;
             ushort* _renderSurface;
-            ushort* _bitmapFacePtr;
-            uint uVar8;
-            uint uVar9;
-            int iVar10;
-            int local_c;
-            int local_8;
-            iVar7 = colorOrBlendOrGammaUnk;
             if (colorOrBlendOrGammaUnk == 0) {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::drawBitmapFace, this)(
                     bitmapFaceIndex, xPos, yPos);
                 return;
             }
-            if (colorOrBlendOrGammaUnk != 0x20) {
-                _bitmapFacePtr = (ushort*)(bitmapFaceIndex * 0x2100 + (int)this->bitmapsFaces_0x94);
-                iVar10 = 0x20 - colorOrBlendOrGammaUnk;
-                switch (this->drawBufferChoiceValue) {
-                case OpenSHC::Rendering::Enums::RT_MAP_GAME:
-                    _renderSurface = DAT_WindowAndDirectDraw::instance.surfacePointer_mapGame;
-                    _pixelToLineJump = 0xf98;
-                    _widthInByte = 0x1fb0;
-                    break;
-                case OpenSHC::Rendering::Enums::RT_BUTTON_AND_ALPHA:
-                    _renderSurface = (ushort*)AlphaAndButtonSurfaceObj::instance.surfacePtr;
-                    _pixelToLineJump = AlphaAndButtonSurfaceObj::instance.currentImageWidth + -0x40;
-                    _widthInByte = AlphaAndButtonSurfaceObj::instance.currentImageWidth * 2;
-                    break;
-                default:
-                    _renderSurface = DAT_WindowAndDirectDraw::instance.surfacePointer_screenMenu;
-                    _pixelToLineJump = DAT_WindowAndDirectDraw::instance.byteSizeOfOneHorizontalLine / 2 + -0x40;
-                    _widthInByte = DAT_WindowAndDirectDraw::instance.byteSizeOfOneHorizontalLine;
-                    break;
-                }
-                DAT_TextureRenderCoreObject::instance.currentRenderSurface = _renderSurface;
-                _surfacePtr = (ushort*)((int)_renderSurface + _widthInByte * yPos + xPos * 2);
-                if (DAT_WindowAndDirectDraw::instance.colorBitMode == OpenSHC::Rendering::RGB_565) {
-                    local_8 = 0x42;
-                    do {
-                        local_c = 0x10;
-                        colorOrBlendOrGammaUnk = (int)_bitmapFacePtr;
-                        do {
-                            if (*(ushort*)colorOrBlendOrGammaUnk != (ushort)COL_MAGENTA::instance.shortValue) {
-                                uVar9 = (uint)*_surfacePtr;
-                                uVar8 = (uint) * (ushort*)colorOrBlendOrGammaUnk;
-                                _widthInByte = (uVar8 & 0x7e0) * iVar10;
-                                iVar2 = (uVar9 & 0x7e0) * iVar7;
-                                iVar3 = (uVar8 & 0xf800) * iVar10;
-                                iVar4 = (uVar9 & 0xf800) * iVar7;
-                                iVar5 = (uVar8 & 0x1f) * iVar10;
-                                iVar6 = (uVar9 & 0x1f) * iVar7;
-                                *_surfacePtr = ((ushort)(_widthInByte / 32) & 0x7e0) + ((ushort)(iVar2 / 32) & 0x7e0)
-                                    | ((ushort)(iVar3 / 32) & 0xf800) + ((ushort)(iVar4 / 32) & 0xf800)
-                                    | (short)(iVar5 / 32) + (short)(iVar6 / 32);
-                            }
-                            if (*(ushort*)(colorOrBlendOrGammaUnk + 2) != (ushort)COL_MAGENTA::instance.shortValue) {
-                                uVar9 = (uint)_surfacePtr[1];
-                                uVar8 = (uint) * (ushort*)(colorOrBlendOrGammaUnk + 2);
-                                _widthInByte = (uVar8 & 0x7e0) * iVar10;
-                                iVar2 = (uVar9 & 0x7e0) * iVar7;
-                                iVar3 = (uVar8 & 0xf800) * iVar10;
-                                iVar4 = (uVar9 & 0xf800) * iVar7;
-                                iVar5 = (uVar8 & 0x1f) * iVar10;
-                                iVar6 = (uVar9 & 0x1f) * iVar7;
-                                _surfacePtr[1] = ((ushort)(_widthInByte / 32) & 0x7e0) + ((ushort)(iVar2 / 32) & 0x7e0)
-                                    | ((ushort)(iVar3 / 32) & 0xf800) + ((ushort)(iVar4 / 32) & 0xf800)
-                                    | (short)(iVar5 / 32) + (short)(iVar6 / 32);
-                            }
-                            if (*(ushort*)(colorOrBlendOrGammaUnk + 4) != (ushort)COL_MAGENTA::instance.shortValue) {
-                                uVar9 = (uint)_surfacePtr[2];
-                                uVar8 = (uint) * (ushort*)(colorOrBlendOrGammaUnk + 4);
-                                _widthInByte = (uVar8 & 0x7e0) * iVar10;
-                                iVar2 = (uVar9 & 0x7e0) * iVar7;
-                                iVar3 = (uVar8 & 0xf800) * iVar10;
-                                iVar4 = (uVar9 & 0xf800) * iVar7;
-                                iVar5 = (uVar8 & 0x1f) * iVar10;
-                                iVar6 = (uVar9 & 0x1f) * iVar7;
-                                _surfacePtr[2] = ((ushort)(_widthInByte / 32) & 0x7e0) + ((ushort)(iVar2 / 32) & 0x7e0)
-                                    | ((ushort)(iVar3 / 32) & 0xf800) + ((ushort)(iVar4 / 32) & 0xf800)
-                                    | (short)(iVar5 / 32) + (short)(iVar6 / 32);
-                            }
-                            if (*(ushort*)(colorOrBlendOrGammaUnk + 6) != (ushort)COL_MAGENTA::instance.shortValue) {
-                                uVar9 = (uint)_surfacePtr[3];
-                                uVar8 = (uint) * (ushort*)(colorOrBlendOrGammaUnk + 6);
-                                _widthInByte = (uVar8 & 0x7e0) * iVar10;
-                                iVar2 = (uVar9 & 0x7e0) * iVar7;
-                                iVar3 = (uVar8 & 0xf800) * iVar10;
-                                iVar4 = (uVar9 & 0xf800) * iVar7;
-                                iVar5 = (uVar8 & 0x1f) * iVar10;
-                                iVar6 = (uVar9 & 0x1f) * iVar7;
-                                _surfacePtr[3] = ((ushort)(_widthInByte / 32) & 0x7e0) + ((ushort)(iVar2 / 32) & 0x7e0)
-                                    | ((ushort)(iVar3 / 32) & 0xf800) + ((ushort)(iVar4 / 32) & 0xf800)
-                                    | (short)(iVar5 / 32) + (short)(iVar6 / 32);
-                            }
-                            _bitmapFacePtr = (ushort*)(colorOrBlendOrGammaUnk + 8);
-                            _surfacePtr = _surfacePtr + 4;
-                            local_c = local_c + -1;
-                            colorOrBlendOrGammaUnk = (int)_bitmapFacePtr;
-                        } while (local_c != 0);
-                        _surfacePtr = _surfacePtr + _pixelToLineJump;
-                        local_8 = local_8 + -1;
-                    } while (local_8 != 0);
-                }
-                yPos = 0x42;
+            if (colorOrBlendOrGammaUnk == 0x20) {
+                return;
+            }
+            _bitmapPtr = (ushort*)(bitmapFaceIndex * 0x2100 + (int)this->bitmapsFaces_0x94);
+            _srcWeight = 0x20 - colorOrBlendOrGammaUnk;
+            switch (this->drawBufferChoiceValue) {
+            case OpenSHC::Rendering::Enums::RT_MAP_GAME:
+                _renderSurface = DAT_WindowAndDirectDraw::instance.surfacePointer_mapGame;
+                _pixelToLineJump = 0xf98;
+                _widthInByte = 0x1fb0;
+                break;
+            case OpenSHC::Rendering::Enums::RT_BUTTON_AND_ALPHA:
+                _pixelToLineJump = AlphaAndButtonSurfaceObj::instance.currentImageWidth + -0x40;
+                _renderSurface = AlphaAndButtonSurfaceObj::instance.surfacePtr;
+                _widthInByte = AlphaAndButtonSurfaceObj::instance.currentImageWidth * 2;
+                break;
+            default:
+                _renderSurface = DAT_WindowAndDirectDraw::instance.surfacePointer_screenMenu;
+                _pixelToLineJump = DAT_WindowAndDirectDraw::instance.byteSizeOfOneHorizontalLine / 2 + -0x40;
+                _widthInByte = DAT_WindowAndDirectDraw::instance.byteSizeOfOneHorizontalLine;
+                break;
+            }
+            DAT_TextureRenderCoreObject::instance.currentRenderSurface = _renderSurface;
+            _surfacePtr = (ushort*)((int)_renderSurface + _widthInByte * yPos + xPos * 2);
+            if (DAT_WindowAndDirectDraw::instance.colorBitMode == OpenSHC::Rendering::RGB_565) {
+                _lineJumpBytes = _pixelToLineJump * 2;
+                _rowCount = 0x42;
                 do {
-                    bitmapFaceIndex = 0x40;
+                    _columnCount = 0x10;
                     do {
-                        uVar1 = *_bitmapFacePtr;
-                        _bitmapFacePtr = _bitmapFacePtr + 1;
-                        if (uVar1 != (ushort)COL_MAGENTA::instance.shortValue) {
-                            uVar8 = (uint)uVar1;
-                            iVar7 = (uVar8 & 0x3e0) * colorOrBlendOrGammaUnk;
-                            iVar10 = (uVar8 & 0x7c00) * colorOrBlendOrGammaUnk;
-                            _widthInByte = (uVar8 & 0x1f) * colorOrBlendOrGammaUnk;
-                            *_surfacePtr = (ushort)(iVar7 / 32) & 0x3e0 | (ushort)(iVar10 / 32) & 0x7c00
-                                | (ushort)(_widthInByte / 32);
+                        _srcPixel = _bitmapPtr[0];
+                        if (_srcPixel != (ushort)COL_MAGENTA::instance.shortValue) {
+                            _dstPixel = *_surfacePtr;
+                            _blended = (((_srcPixel & 0x7e0) * _srcWeight / 0x20) & 0x7e0)
+                                + (((_dstPixel & 0x7e0) * colorOrBlendOrGammaUnk / 0x20) & 0x7e0);
+                            _blended = _blended
+                                | (((_srcPixel & 0xf800) * _srcWeight / 0x20) & 0xf800)
+                                    + (((_dstPixel & 0xf800) * colorOrBlendOrGammaUnk / 0x20) & 0xf800);
+                            _blended = _blended
+                                | ((_srcPixel & 0x1f) * _srcWeight / 0x20)
+                                    + ((_dstPixel & 0x1f) * colorOrBlendOrGammaUnk / 0x20);
+                            *_surfacePtr = (ushort)_blended;
                         }
                         _surfacePtr = _surfacePtr + 1;
-                        bitmapFaceIndex = bitmapFaceIndex + -1;
-                    } while (bitmapFaceIndex != 0);
-                    _surfacePtr = _surfacePtr + _pixelToLineJump;
-                    yPos = yPos + -1;
-                } while (yPos != 0);
+                        _srcPixel = _bitmapPtr[1];
+                        if (_srcPixel != (ushort)COL_MAGENTA::instance.shortValue) {
+                            _dstPixel = *_surfacePtr;
+                            _blended = (((_srcPixel & 0x7e0) * _srcWeight / 0x20) & 0x7e0)
+                                + (((_dstPixel & 0x7e0) * colorOrBlendOrGammaUnk / 0x20) & 0x7e0);
+                            _blended = _blended
+                                | (((_srcPixel & 0xf800) * _srcWeight / 0x20) & 0xf800)
+                                    + (((_dstPixel & 0xf800) * colorOrBlendOrGammaUnk / 0x20) & 0xf800);
+                            _blended = _blended
+                                | ((_srcPixel & 0x1f) * _srcWeight / 0x20)
+                                    + ((_dstPixel & 0x1f) * colorOrBlendOrGammaUnk / 0x20);
+                            *_surfacePtr = (ushort)_blended;
+                        }
+                        _surfacePtr = _surfacePtr + 1;
+                        _srcPixel = _bitmapPtr[2];
+                        if (_srcPixel != (ushort)COL_MAGENTA::instance.shortValue) {
+                            _dstPixel = *_surfacePtr;
+                            _blended = (((_srcPixel & 0x7e0) * _srcWeight / 0x20) & 0x7e0)
+                                + (((_dstPixel & 0x7e0) * colorOrBlendOrGammaUnk / 0x20) & 0x7e0);
+                            _blended = _blended
+                                | (((_srcPixel & 0xf800) * _srcWeight / 0x20) & 0xf800)
+                                    + (((_dstPixel & 0xf800) * colorOrBlendOrGammaUnk / 0x20) & 0xf800);
+                            _blended = _blended
+                                | ((_srcPixel & 0x1f) * _srcWeight / 0x20)
+                                    + ((_dstPixel & 0x1f) * colorOrBlendOrGammaUnk / 0x20);
+                            *_surfacePtr = (ushort)_blended;
+                        }
+                        _surfacePtr = _surfacePtr + 1;
+                        _srcPixel = _bitmapPtr[3];
+                        if (_srcPixel != (ushort)COL_MAGENTA::instance.shortValue) {
+                            _dstPixel = *_surfacePtr;
+                            _blended = (((_srcPixel & 0x7e0) * _srcWeight / 0x20) & 0x7e0)
+                                + (((_dstPixel & 0x7e0) * colorOrBlendOrGammaUnk / 0x20) & 0x7e0);
+                            _blended = _blended
+                                | (((_srcPixel & 0xf800) * _srcWeight / 0x20) & 0xf800)
+                                    + (((_dstPixel & 0xf800) * colorOrBlendOrGammaUnk / 0x20) & 0xf800);
+                            _blended = _blended
+                                | ((_srcPixel & 0x1f) * _srcWeight / 0x20)
+                                    + ((_dstPixel & 0x1f) * colorOrBlendOrGammaUnk / 0x20);
+                            *_surfacePtr = (ushort)_blended;
+                        }
+                        _surfacePtr = _surfacePtr + 1;
+                        _bitmapPtr = _bitmapPtr + 4;
+                        _columnCount = _columnCount + -1;
+                    } while (_columnCount != 0);
+                    _surfacePtr = (ushort*)((int)_surfacePtr + _lineJumpBytes);
+                    _rowCount = _rowCount + -1;
+                } while (_rowCount != 0);
+                return;
             }
+            _lineJumpBytes = _pixelToLineJump * 2;
+            _rowCount = 0x42;
+            do {
+                _columnCount = 0x40;
+                do {
+                    _srcPixel = *_bitmapPtr;
+                    _bitmapPtr = _bitmapPtr + 1;
+                    if (_srcPixel != (ushort)COL_MAGENTA::instance.shortValue) {
+                        *_surfacePtr = (ushort)(((((_srcPixel & 0x3e0) * colorOrBlendOrGammaUnk / 0x20) & 0x3e0)
+                                                    | (((_srcPixel & 0x7c00) * colorOrBlendOrGammaUnk / 0x20) & 0x7c00))
+                            | ((_srcPixel & 0x1f) * colorOrBlendOrGammaUnk / 0x20));
+                    }
+                    _surfacePtr = _surfacePtr + 1;
+                    _columnCount = _columnCount + -1;
+                } while (_columnCount != 0);
+                _surfacePtr = (ushort*)((int)_surfacePtr + _lineJumpBytes);
+                _rowCount = _rowCount + -1;
+            } while (_rowCount != 0);
         }
 
     }
