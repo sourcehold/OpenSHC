@@ -13,15 +13,6 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004C6D60
     void AICState::setAICParameters_01(int aicIndex)
     {
-        this->aics[aicIndex].minimumCheese = -1;
-        this->aics[aicIndex].minimumBread = -1;
-        this->aics[aicIndex].minimumWheat = -1;
-        this->aics[aicIndex].minimumHop = -1;
-        this->aics[aicIndex].aiRequestDelay = 0x12;
-        this->aics[aicIndex].populationPerQuarry = 0x12;
-        this->aics[aicIndex].populationPerFarm = 6;
-        this->aics[aicIndex].maxWoodcutters = 6;
-        this->aics[aicIndex].maxFarms = 6;
         this->aics[aicIndex].flagType = 0xc;
         this->aics[aicIndex].unknown002 = 0;
         this->aics[aicIndex].unknown001 = 0;
@@ -34,11 +25,17 @@ namespace AI {
         this->aics[aicIndex].taxesMin = 3;
         this->aics[aicIndex].taxesMax = 10;
         this->aics[aicIndex].farm1 = 0x20;
+        this->aics[aicIndex].populationPerFarm = 6;
         this->aics[aicIndex].unknown011 = 0x14;
         this->aics[aicIndex].maxFood = 100;
         this->aics[aicIndex].minimumApples = 10;
+        this->aics[aicIndex].minimumCheese = -1;
+        this->aics[aicIndex].minimumBread = -1;
+        this->aics[aicIndex].minimumWheat = -1;
+        this->aics[aicIndex].minimumHop = -1;
         this->aics[aicIndex].tradeAmountFood = 10;
         this->aics[aicIndex].tradeAmountEquipment = 2;
+        this->aics[aicIndex].aiRequestDelay = 0x12;
         this->aics[aicIndex].minimumGoodsRequiredAfterTrade = 0;
         this->aics[aicIndex].doubleRationsFoodThreshold = 0;
         this->aics[aicIndex].maxWood = 0x1e;
@@ -49,11 +46,14 @@ namespace AI {
         this->aics[aicIndex].maxResourceVariance = 5;
         this->aics[aicIndex].recruitGoldThreshold = 200;
         this->aics[aicIndex].populationPerWoodcutter = 8;
+        this->aics[aicIndex].populationPerQuarry = 0x12;
         this->aics[aicIndex].populationPerIronmine = 0;
         this->aics[aicIndex].populationPerPitchrig = 0;
         this->aics[aicIndex].maxQuarries = 1;
         this->aics[aicIndex].maxIronmines = 1;
+        this->aics[aicIndex].maxWoodcutters = 6;
         this->aics[aicIndex].maxPitchrigs = 1;
+        this->aics[aicIndex].maxFarms = 6;
         this->aics[aicIndex].buildInterval = 1;
         this->aics[aicIndex].resourceRebuildDelay = 10;
         this->aics[aicIndex].blacksmithSetting = 0x16;
