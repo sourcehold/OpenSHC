@@ -138,6 +138,12 @@ interleaved diff `reccmp_report.py diff` gives you. Use it when the diff comes b
 original's own jump targets and fall-through order to reconstruct control flow. It reads `reccmp/dll/diff.json`, so it
 works with no Ghidra connection.
 
+reccmp cuts the original's stream at the length of *our* function, so when ours is shorter the original's tail is
+simply missing from the diff (it reads as "the original has no `ret`"). `quick_diff.py FILE.cpp` disassembles the whole
+original function from `_original/` and diffs it against a `/FA` compile of that one file in about six seconds, with
+no link and no reccmp run. Use it to try source variants - it is what broke the `AI::AICState` plateau that
+`try_styles.py` at several minutes per variant had declared allocator-bound - and confirm the result with reccmp.
+
 `orig_asm.py NAME --stats` reports the signals that decide *how* a function has to be reimplemented. Check it before
 restyling anything large:
 

@@ -120,6 +120,50 @@ SEC_RNG::ptr->currentNumber1 % 4
 - Do not hoist a repeated sub-expression into a local just because it appears several times. `int const halfWidth = barWidth / 2;`
   used at four call sites lost against the original, which recomputes `barWidth / 2` at every use (SHC_3BB0A8C1_0x004B20B0, 67.6% -> 82.4%).
   Write the expression out again at each use and let the compiler decide.
+- **A local that only copies a field lets the compiler fold what the original kept separate.** MSVC forward-substitutes
+  an expression built from a register value (`int aiType = pd.aiType; ... int aicIndex = aiType - 1;`) into its use, so
+  `aics[aicIndex].x` becomes `[reg*0x2a4 + this + (off - 0x2a4)]` with no decrement left. It does **not** substitute
+  an expression that contains a memory read across a store, a call or a branch. The original's
+  `test eax, eax; je; add eax, -1; imul eax, eax, 0x2a4; ... [eax + ecx + off]` therefore needs the field tested
+  directly and read again for the index:
+  ```cpp
+  if (DAT_GameState::instance.playerDataArray[playerID].aiType == AIT_NULL)
+      return FALSE;
+  int aicIndex = DAT_GameState::instance.playerDataArray[playerID].aiType - 1;
+  ```
+  `determineAIPlayerHelp`, `determineAIPlayerAttackRequestResponse`, `addUnitToSmallestPatrolTribe`,
+  `setCurrentAttackStrength` all went to 100% on this alone. Fifteen other spellings of the index (casts, pointer
+  arithmetic, an inlined accessor, in-place decrement, unsigned) all folded - only the missing local matters. The
+  same applies to any other decompiler local for a field (`tracker`, `outerPatrolGroupsCount`): reading the field at
+  every use took `getTargetableBuildingForPlayerID` from 65% to 100%.
+- **A constant index held in a local stops the per-struct multiply being shared.** When the original recomputes
+  `playerID * 0x39f4` in every basic block (`mov eax, ecx; imul eax, eax, 0x39f4` three times, with `playerID` staying
+  in its register) while we multiply once, the array index in the source was a *variable* that the optimizer only
+  later found to be constant. With a variable index MSVC factors each access by its own element size
+  (`playerID * 0x1cfa` for a `short` array, `* 0xe7d` for an `int` array), so the three accesses are three different
+  expressions and nothing is common. Write `int tribeIndex = 11;` and index with it:
+  ```cpp
+  int tribeIndex = 11;
+  if (DAT_GameState::instance.playerDataArray[playerID].aiType == AITA_NULL)
+      return;
+  int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[tribeIndex];
+  ```
+  Eight `AI::AICState` tribe-command functions went from 38-62% to 100% (`setTribe0xbToAggressiveAndAttack`,
+  `sendTribeToAttack`, `aiCommandTribe11/13`, ...). The same happens when the index is a field the code has just
+  compared against a constant: `pd.aivCurrentPauseIndex == 1 && pd.aivPauses[pd.aivCurrentPauseIndex] > 0`, not
+  `aivPauses[1]`. It is not universal - on functions whose index is a loop sum (`aiTribeIDs[166 + i]`) the local made
+  things worse.
+- A constant kept in a callee-saved register from the top of the function (`mov ebx, 1` before the first branch, later
+  `mov [field], ebx`) is a **result variable** initialised at the top and stored once at the end, not two literal
+  stores: `int isNotNervous = 1; ... if (cond) isNotNervous = 0; else {...} field = isNotNervous;`
+  (`computeNervousness` 77% -> 100%).
+- `add reg, -N` where we emit `sub reg, N` or `cmp reg, N` means two constants were merged: the source compared a
+  derived value, `aicIndex == 7` with `aicIndex = aiType - 1`, not `aiType == 8`
+  (`removeOrganismsAndSetMoveDestinationPairs` 97.9% -> 100%).
+- Where two arguments are loaded on either side of a store (`mov ecx, [x]` ... `mov [stance], 1` ... `mov eax, [y]`),
+  give each a local and put the statements in that order: `int x = pd.someX; tribe.unitStance = ...; int y = pd.someY;`
+  (`makeUnitsGoDefensiveAndBackToSomeLocation` 95.7% -> 100%). Without a store in between, the *declaration order*
+  of two such locals picks which one gets `ecx` (`sendUnitsToAttackBreachedCastle` 98.7% -> 100%).
 - The opposite does happen for the operands of a single statement: in `SHC_3BB0A8C1_0x00522520` the original evaluates
   `unitID / 16` and `unitID % 16` into locals before the compound assignment. If a `|=`/`&=` statement with computed index
   and mask does not match, give the index and the mask a local each and keep the declaration order the assembly shows.
@@ -274,6 +318,15 @@ unrolled body, write `for (int i = 1; i != 2500; ++i)` instead of `i < 2500` (SH
     the loop variable for the slot index moved it at all - both exact ties.
   So the predecessor-count rule tells you a duplicate *may* be needed, not that it will help; `try_styles.py` is
   the only way to settle it.
+
+- A loop whose early exit returns the same value as the code after the loop was a `break`, not a `return`. The tell is
+  callee-saved registers pushed *after* the loop's entry test and one shared `mov eax, result` behind the loop, where
+  an early `return result;` makes us push everything in the prologue (`assignRequiredIdleEngineersToNewTribe`,
+  `addEngineersToSelection`, both ~88% -> 100%).
+- Do not add a guard the loop condition already expresses. `if (id == 0) return 0;` in front of
+  `for (; id != 0; id = next(id))` moved one `push` across a branch; without it the compiler derives the same early
+  exit itself and places it where the original does (`aiRequiresExtraOxtethers`). Likewise put the block the
+  original keeps inline first: `if (best > 20) { store; return 1; } return 0;` rather than the inverted guard.
 
 ### GOTO
 
