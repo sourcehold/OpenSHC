@@ -41,28 +41,19 @@ namespace AI {
 
         if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker > 0 && keepEnclosed == FALSE) {
             MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToKeep, this)(tribeID, playerID);
-            DAT_TribesState::instance.tribes[tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
-            return;
+        } else if (DAT_TribesState::instance.tribes[tribeID].size >= this->aics[aicIndex].SortieUnitRangedMin) {
+            if (DAT_GameState::instance.playerDataArray[playerID].someXPosition <= 0
+                || DAT_GameState::instance.playerDataArray[playerID].someYPosition <= 0) {
+                MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToKeep, this)(tribeID, playerID);
+            } else {
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Map::Units::TribesState_Func::unsetRallyRelatedFlagOnUnits, DAT_TribesState::ptr)(tribeID);
+                MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction,
+                    DAT_TribesState::ptr)(tribeID, DAT_GameState::instance.playerDataArray[playerID].someXPosition,
+                    DAT_GameState::instance.playerDataArray[playerID].someYPosition, 0, 0,
+                    OpenSHC::Map::Units::Instructions::UMSE_0);
+            }
         }
-
-        if (DAT_TribesState::instance.tribes[tribeID].size < this->aics[aicIndex].SortieUnitRangedMin) {
-            DAT_TribesState::instance.tribes[tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
-            return;
-        }
-
-        if (DAT_GameState::instance.playerDataArray[playerID].someXPosition <= 0
-            || DAT_GameState::instance.playerDataArray[playerID].someYPosition <= 0) {
-            MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToKeep, this)(tribeID, playerID);
-            DAT_TribesState::instance.tribes[tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
-            return;
-        }
-
-        MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::unsetRallyRelatedFlagOnUnits, DAT_TribesState::ptr)(
-            tribeID);
-        MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(
-            tribeID, DAT_GameState::instance.playerDataArray[playerID].someXPosition,
-            DAT_GameState::instance.playerDataArray[playerID].someYPosition, 0, 0,
-            OpenSHC::Map::Units::Instructions::UMSE_0);
         DAT_TribesState::instance.tribes[tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
     }
 }
