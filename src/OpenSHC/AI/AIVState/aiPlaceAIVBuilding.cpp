@@ -289,7 +289,7 @@ namespace AI {
             orientation);
         int const placedID = DAT_TileMapState::instance.placedBuildingID;
         if (!DAT_TileMapState::instance.buildingPlacementFail) {
-            DAT_BuildingsState::instance.buildings[DAT_TileMapState::instance.placedBuildingID].field245_0x2c8 = 1;
+            DAT_BuildingsState::instance.buildings[DAT_TileMapState::instance.placedBuildingID].field242_0x2c8 = 1;
             MACRO_CALL_MEMBER(AICState_Func::setupWorkshopProductionType, DAT_AICState::ptr)(playerID, placedID);
         }
         if (!DAT_TileMapState::instance.buildingPlacementFail) {
