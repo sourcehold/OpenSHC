@@ -23,7 +23,6 @@ namespace AI {
     BOOLEnum AIVState::executeDefaultCastleAIV(PlayerID playerID, int isPausing)
     {
         int const aivID = DAT_GameState::instance.playerDataArray[playerID].aivID;
-        int const aiType = DAT_GameState::instance.playerDataArray[playerID].aiType - 1;
         int stockpiles = 0;
         int hovels = 0;
         int granaries = 1;
@@ -45,6 +44,7 @@ namespace AI {
         int engineersGuilds = 0;
         int tunnelersGuilds = 0;
         int stables = 0;
+        int const aiType = DAT_GameState::instance.playerDataArray[playerID].aiType - 1;
         if (aiType == AITA_RAT) {
             stockpiles = 0;
             hovels = 3;
@@ -367,7 +367,7 @@ namespace AI {
             tunnelersGuilds = 0;
         }
 
-        for (int step = 0; step <= 50; ++step) {
+        for (int step = 0; step < 50; ++step) {
             if (step > this->aivs[aivID].currentStepGoal) {
                 return FALSE;
             }
@@ -476,11 +476,10 @@ namespace AI {
             }
             if (status == AIVBSS_built) {
                 // only rebuild buildings that were destroyed
-                short const buildingID
-                    = DAT_TileMapState::instance
-                          .BuildingLayer[this->aivs[aivID].aivBuildingSteps[step].location.tile.tile];
+                int const buildingID = (short)DAT_TileMapState::instance
+                                           .BuildingLayer[this->aivs[aivID].aivBuildingSteps[step].location.tile.tile];
                 if (buildingID != 0
-                    && DAT_BuildingsState::instance.buildings[buildingID].buildingType
+                    && (short)DAT_BuildingsState::instance.buildings[buildingID].buildingType
                         == MACRO_CALL_MEMBER(
                             Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,
                             DAT_BuildingsState::ptr)(mapper)) {
@@ -556,19 +555,25 @@ namespace AI {
                     MACRO_CALL_MEMBER(AIVState_Func::findAppropriateGridLocationForBuilding, this)(
                         DAT_GameState::instance.playerDataArray[playerID].campground.xEntry / 5,
                         DAT_GameState::instance.playerDataArray[playerID].campground.yEntry / 5);
+                    if (this->buildingApproriateGridXPosition == -1) {
+                        continue;
+                    }
                 } else {
                     MACRO_CALL_MEMBER(AIVState_Func::findSuitableGridLocationFittingCriteria, this)(
                         DAT_GameState::instance.playerDataArray[playerID].campground.xEntry / 5,
                         DAT_GameState::instance.playerDataArray[playerID].campground.yEntry / 5);
+                    if (this->buildingApproriateGridXPosition == -1) {
+                        continue;
+                    }
                 }
-                if (this->buildingApproriateGridXPosition == -1 || this->buildingAppropriateGridYPosition == -1) {
+                if (this->buildingAppropriateGridYPosition == -1) {
                     continue;
                 }
                 x = this->buildingApproriateGridXPosition * 5;
                 y = this->buildingAppropriateGridYPosition * 5;
             }
 
-            int const rowTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
+            int const tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
             MACRO_CALL_MEMBER(Map::TileMapState_Func::prepareAreaForBuildingPlacement, DAT_TileMapState::ptr)(
                 playerID, x, y, mapper, buildingSize);
             // keep orientation is 0, 2, 4 or 6, halving it gives the index of the part offsets
@@ -618,9 +623,9 @@ namespace AI {
                 orientation);
             int const placedID = DAT_TileMapState::instance.placedBuildingID;
             if (!DAT_TileMapState::instance.buildingPlacementFail) {
-                DAT_BuildingsState::instance.buildings[DAT_TileMapState::instance.placedBuildingID].field242_0x2c8 = 1;
+                DAT_BuildingsState::instance.buildings[placedID].field242_0x2c8 = 1;
                 MACRO_CALL_MEMBER(AICState_Func::setupWorkshopProductionType, DAT_AICState::ptr)(playerID, placedID);
-                this->aivs[aivID].aivBuildingSteps[step].location.tile.tile = rowTile + x;
+                this->aivs[aivID].aivBuildingSteps[step].location.tile.tile = tile;
                 if (!DAT_TileMapState::instance.buildingPlacementFail) {
                     this->aivs[aivID].aivBuildingSteps[step].buildStatus = AIVBSS_built;
                 }

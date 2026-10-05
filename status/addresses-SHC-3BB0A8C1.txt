@@ -37991,7 +37991,7 @@ SHC_3BB0A8C1_0x004EFE30 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004EFED0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004F0060 | 36.7% | aiType - 1 chain; registers differ
+SHC_3BB0A8C1_0x004F0060 | 53.6% | step < 50 fix; registers differ
 
 SHC_3BB0A8C1_0x004F0690 | 0.0% | Pending
 
