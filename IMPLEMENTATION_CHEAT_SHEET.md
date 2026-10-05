@@ -53,8 +53,7 @@ Naturally, the logic flow needs to be kept, so the update of a variable can not 
 ### Statement Order
 
 The order of instructions in the assembly is not the order of the statements in the original source.
-Within a boundary the compiler schedules freely, so do not try to reconstruct the statement order from
-the instruction order.
+Within a boundary the compiler schedules freely, so do not copy the instruction order into the source.
 
 This matters most for long runs of independent stores into one object, as in `AICState::setAICParameters_NN`:
 the whole body is `this->aics[aicIndex].<field> = <constant>;` over ~130 fields, and the compiler emits
@@ -62,11 +61,22 @@ those `mov dword ptr [eax + <offset>], <reg>` instructions in an order of its ow
 those functions so their statements followed the original's store order made every one of them *worse*
 (e.g. `setAICParameters_14` 82.4% -> 50.0%).
 
-What the instruction order *does* reveal is which constants got their own register and in which order
-those registers were allocated (`mov ebx, 6` before `or edi, 0xffffffff` and so on). That is a
-consequence of register pressure, not something a statement reordering can be aimed at directly, so a
-remaining diff of this shape is usually a reason to record the percentage with a remark rather than to
-keep permuting the body.
+That does not make the order unrecoverable. The compiler moves only the stores whose value sits in a **register**:
+when a constant's register is about to be reloaded with another constant, the stores still waiting for the old value
+are pulled up in front of the reload, and stores of a newly loaded constant are gathered behind it. Stores of an
+**immediate** (`mov dword ptr [eax + off], 0x46`) stay where the source put them. So:
+
+1. Take the immediate stores of the original as the skeleton of the source order. Across a family of sibling
+   functions the skeleton is the same template, so vote the precedence of every pair of fields over all siblings -
+   a field that is a register store in one function is an immediate in another.
+2. Put each register store back at its place in that template (mostly struct order, with the template's own local
+   swaps: `unknown002` before `unknown001`, `populationPerFarm` before `unknown011`, `recruitProbDefWeak` before
+   `recruitProbDefDefault`, `RecruitIntervalWeak` before `RecruitInterval`, `AttMaxAssassins` before `AttUnit2`).
+3. Compile and move the few statements that still sit elsewhere next to their neighbour in the original.
+
+All 16 `setAICParameters_NN` went from 75-95% to 100% this way, with no type or header change; the earlier attempt
+failed because it copied the *instruction* order, hoisted stores included. Which constant lands in which register
+then follows by itself - it was a consequence of the statement order, not of register pressure.
 
 ## Structure
 
