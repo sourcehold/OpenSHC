@@ -35489,7 +35489,7 @@ SHC_3BB0A8C1_0x004D2500 | 94.6% | Reimplemented
 
 SHC_3BB0A8C1_0x004D2660 | 59.6% | Branch layout differs
 
-SHC_3BB0A8C1_0x004D2730 | 79.2% | AIC index folding differs
+SHC_3BB0A8C1_0x004D2730 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D2790 | 91.3% | Reimplemented
 
