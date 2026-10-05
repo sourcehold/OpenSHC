@@ -26,8 +26,8 @@ namespace AI {
         }
 
         if (DAT_GameState::instance.mapAndTime.startOfDay) {
-            ++this->mapExtraInfo.algBuildingPlacementNudge;
             this->counter = 0;
+            ++this->mapExtraInfo.algBuildingPlacementNudge;
             if (this->mapExtraInfo.algBuildingPlacementNudge >= 31) {
                 this->mapExtraInfo.algBuildingPlacementNudge = 0;
             }
