@@ -103,7 +103,7 @@ namespace AI {
             &AIVState::findSuitableGridLocationFittingCriteria)
         findSuitableGridLocationFittingCriteria;
 
-        MACRO_FUNCTION_RESOLVER(void (AIVState::*)(uint, uint), false, Address::SHC_3BB0A8C1_0x004EEE10,
+        MACRO_FUNCTION_RESOLVER(void (AIVState::*)(uint, uint), true, Address::SHC_3BB0A8C1_0x004EEE10,
             &AIVState::findAppropriateGridLocationForBuilding)
         findAppropriateGridLocationForBuilding;
 
