@@ -51,7 +51,7 @@ namespace Map {
                     int sVar2 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                     int sVar3 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[iVar4];
-                    if (0x13a10 < this->searchQueue.currentDistance) {
+                    if (0x13a10 < (int)this->searchQueue.currentDistance) {
                         return (undefined4)(1);
                     }
                     for (int _direction = 0; _direction < 8; _direction = _direction + 1) {
@@ -75,14 +75,14 @@ namespace Map {
                                 + sVar3;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar5;
                             this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                            if (0x13a0f < this->searchQueue.writeIndex) {
+                            if (0x13a10 <= this->searchQueue.writeIndex) {
                                 this->searchQueue.writeIndex = 0;
                             }
                         }
                     }
 
                     this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                    if (0x13a0f < this->searchQueue.readIndex) {
+                    if (0x13a10 <= this->searchQueue.readIndex) {
                         this->searchQueue.readIndex = 0;
                     }
                 } while (this->searchQueue.readIndex != this->searchQueue.writeIndex);
