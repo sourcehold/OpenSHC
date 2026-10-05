@@ -14,28 +14,26 @@ namespace Map {
         void UnitsState::assignNameToUnit(int unitID)
         {
             this->units[unitID].rng1_to_70 = 0;
-            if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_COW) {
+            int _unitType = this->units[unitID].unitType;
+            if (_unitType == OpenSHC::Map::Units::UT_COW) {
                 this->units[unitID].firstNameIndex = (char)(SEC_RNG::instance.currentNumber2 % 4) + 0x49;
                 return;
             }
-            if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_CHICKEN) {
+            if (_unitType == OpenSHC::Map::Units::UT_CHICKEN) {
                 this->units[unitID].firstNameIndex = (char)(SEC_RNG::instance.currentNumber2 % 4) + 0x4d;
                 return;
             }
-            if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_HUNTERDOG) {
+            if (_unitType == OpenSHC::Map::Units::UT_HUNTERDOG) {
                 this->units[unitID].firstNameIndex = (char)(SEC_RNG::instance.currentNumber2 % 4) + 0x51;
                 return;
             }
-            if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_QUARRYOX) {
+            if (_unitType == OpenSHC::Map::Units::UT_QUARRYOX) {
                 this->units[unitID].firstNameIndex = (char)(SEC_RNG::instance.currentNumber2 % 4) + 0x55;
                 return;
             }
-            if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_TANNER
-                || this->units[unitID].unitType == OpenSHC::Map::Units::UT_LADY
-                || this->units[unitID].unitType == OpenSHC::Map::Units::UT_MOTHER
-                || this->units[unitID].unitType == OpenSHC::Map::Units::UT_BREWER
-                || (this->units[unitID].unitType == OpenSHC::Map::Units::UT_CHILD
-                    && this->units[unitID].spriteID == 0x81)) {
+            if (_unitType == OpenSHC::Map::Units::UT_TANNER || _unitType == OpenSHC::Map::Units::UT_LADY
+                || _unitType == OpenSHC::Map::Units::UT_MOTHER || _unitType == OpenSHC::Map::Units::UT_BREWER
+                || (_unitType == OpenSHC::Map::Units::UT_CHILD && this->units[unitID].spriteID == 0x81)) {
                 /* women */
                 this->units[unitID].firstNameIndex = (char)(SEC_RNG::instance.currentNumber2 % 0x14) + 52;
             } else {
