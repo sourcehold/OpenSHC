@@ -298,36 +298,19 @@ worth the last 8-10% on the whole `Map::Version::UpgradeMapUnitsTo_*` family (0x
 `!=` as the loop bound suppresses MSVC's unrolling. If the original ends the loop with `jne` while we emit `jl` and an
 unrolled body, write `for (int i = 1; i != 2500; ++i)` instead of `i < 2500` (SHC_3BB0A8C1_0x0053B340, 53% -> 91%).
 
-- The `setAICParameters_01..16` family (0x004C6D60 and up) is a long run of independent constant stores into one
-  `aics[aicIndex]` element, and it sits at 74-95% because the original hoists repeated constants into registers in a
-  particular order while we materialise them in another; every actual field store already matches, and the field
-  offsets check out. Statement order is **not** the lever: `reorder_search.py` on `setAICParameters_15` tried all 9
-  independent runs (lengths 42, 29, 21, 14, 6, 4, 3, 3, 3) over 27 builds and kept nothing, leaving it at exactly
-  74.92%. MSVC schedules those stores the same way whatever order the source lists them in, which is the
-  *Statement Order* note above measured on a large case. Record the percentage and move on.
 - Where the original compares a memory operand against a **zero register** (`xor ebp,ebp` once, then
   `cmp dword ptr [..], ebp` and `mov dword ptr [..], ebp`) and we emit `test r,r` / `cmp ..,0`, that is **not** a
-  source-level difference and **not** a size-vs-speed flag. Using a zero register saves a byte per memory
-  comparison, so `/Os` looks like the explanation, but compiling with `/O2 /Os` per file (verified present in the
-  compile command) left `getTargetableBuildingForPlayerID`, `getSmallestPatrolTribe` and
-  `aiShouldAttackOrWaitForTeamCoordination` at *exactly* their previous percentages. The choice cascades into a
-  different register assignment and sometimes one extra spill of the loop counter, which is why these functions
-  stall in the 43-65% band with an otherwise instruction-for-instruction match. Treat it as allocator noise and
-  record it; it shows up across `AI::AICState` (`aiRecruitUnits`, `aiGiveRaidInstructions`,
-  `generateSiegeCreationInformation`, `getTargetableBuildingForPlayerID`, `getSmallestPatrolTribe`).
+  size-vs-speed flag: compiling three such functions with `/O2 /Os` per file left them at exactly their previous
+  percentages. It is a source-level difference after all - the zero register is a variable initialised to zero
+  (usually the loop counter, `int i = 0;`) that is declared at that point in the function, so later comparisons
+  against zero reuse it. `getTargetableBuildingForPlayerID`, `getSmallestPatrolTribe` and
+  `generateSiegeCreationInformation` all reached 100% once the locals were declared where the original's `xor` sits.
 - The "find the smallest tribe, or create one if a slot is stale" family all have the same shape: a loop whose
-  create-path wants to reach the function's shared store-and-return tail while skipping the tail's
-  `selected == 0` guard, which the original does with a jump into the middle of that block. There is no goto-free
-  form that is right for all of them, so **measure each one**; the three measured so far disagree:
-  - `getSmallestPatrolTribe` (0x004CCAF0): `break` into the shared tail is best at **65.2%**; duplicating the
-    stores into the create path drops it to 48.3%.
-  - `smallestTribeOfUnitType` (0x004CC990): the reverse - duplicating the stores gives **41.9%**, a `goto` into
-    the tail would give ~55%, and `break` into the shared tail was measured at 17%.
-  - `addUnitToSmallestBehaviourTypeTribe` (0x004CCD20): `break` into the shared tail, **64.5%**; neither hoisting
-    the `smallestSize` initialiser to the top (where the original's own `mov [esp+0x24],0x3e8` sits) nor reusing
-    the loop variable for the slot index moved it at all - both exact ties.
-  So the predecessor-count rule tells you a duplicate *may* be needed, not that it will help; `try_styles.py` is
-  the only way to settle it.
+  create-path reaches the function's shared store-and-return tail while skipping the tail's `selected == 0` guard.
+  Neither a `break` into the shared tail nor duplicating the stores into the create path reproduces that; the loop
+  with its end test inside the body does (see below). It took `getSmallestPatrolTribe` (0x004CCAF0) to 100% and
+  `smallestTribeOfUnitType` (0x004CC990) from 41.9% to 56.6%; `addUnitToSmallestBehaviourTypeTribe` (0x004CCD20)
+  did not respond to it and is still open.
 
 - A loop whose early exit returns the same value as the code after the loop was a `break`, not a `return`. The tell is
   callee-saved registers pushed *after* the loop's entry test and one shared `mov eax, result` behind the loop, where
