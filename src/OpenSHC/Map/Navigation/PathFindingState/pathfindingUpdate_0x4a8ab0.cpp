@@ -167,7 +167,7 @@ namespace Map {
                     int sVar3 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                     int sVar4 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[uVar6];
-                    if ((0x13a10 < this->searchQueue.currentDistance) || (this->searchQueue.currentDistance > param_1))
+                    if ((0x13a10 < (int)this->searchQueue.currentDistance) || (this->searchQueue.currentDistance > param_1))
                         break;
                     local_10 = this->searchQueue.tilesQueue + local_24;
                     local_14 = this->searchQueue.yQueue + local_24;
@@ -274,14 +274,14 @@ namespace Map {
                                     = DAT_TileMapState::instance.LogicLayer[iVar9] & 0xfffffff7;
                             }
                             this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                            if (0x13a0f < this->searchQueue.writeIndex) {
+                            if (0x13a10 <= this->searchQueue.writeIndex) {
                                 this->searchQueue.writeIndex = 0;
                             }
                         }
                     }
 
                     this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                    if (0x13a0f < this->searchQueue.readIndex) {
+                    if (0x13a10 <= this->searchQueue.readIndex) {
                         this->searchQueue.readIndex = 0;
                     }
                     if (this->searchQueue.readIndex == this->searchQueue.writeIndex)
