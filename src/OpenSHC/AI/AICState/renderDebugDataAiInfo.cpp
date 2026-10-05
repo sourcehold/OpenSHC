@@ -47,7 +47,6 @@ namespace AI {
                 continue;
             }
 
-            int aicIndex = DAT_GameState::instance.playerDataArray[playerID].aiType - 1;
             uint color = DAT_RenderingDefinedData::instance
                              .ColorArray[DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[playerID]];
 
@@ -102,7 +101,7 @@ namespace AI {
             MACRO_CALL(OpenSHC::OS_Func::_sprintf)(text, "E:%d/%d",
                 DAT_GameState::instance.playerDataArray[playerID].totalTroopsType6,
                 DAT_GameState::instance.playerDataArray[playerID].unknownCounter_01
-                    + this->aics[aicIndex].SortieUnitRangedMin);
+                    + this->aics[(DAT_GameState::instance.playerDataArray[playerID].aiType - 1)].SortieUnitRangedMin);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
                 text, x + 452, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
 
@@ -118,7 +117,7 @@ namespace AI {
             } else {
                 MACRO_CALL(OpenSHC::OS_Func::_sprintf)(text, "Sg:%d/%d", siegeTroops,
                     DAT_GameState::instance.playerDataArray[playerID].currentWaveRandomAttackingStrength
-                        + this->aics[aicIndex].AttForceBase);
+                        + this->aics[(DAT_GameState::instance.playerDataArray[playerID].aiType - 1)].AttForceBase);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow,
                     DAT_TextManagerObject::ptr)(text, x + 512, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
             }
@@ -127,14 +126,14 @@ namespace AI {
             MACRO_CALL(OpenSHC::OS_Func::_sprintf)(text, "Hr:%d/%d",
                 DAT_GameState::instance.playerDataArray[playerID].totalRaidingTroopsUnk,
                 MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::getCurrentDesiredAttackRaidUnitCount, this)(
-                    aicIndex, playerID));
+                    (DAT_GameState::instance.playerDataArray[playerID].aiType - 1), playerID));
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
                 text, x + 592, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
 
             // Defensive troops
             MACRO_CALL(OpenSHC::OS_Func::_sprintf)(text, "Df:%d/%d",
                 DAT_GameState::instance.playerDataArray[playerID].totalDefensiveTroopsUnk,
-                this->aics[aicIndex].DefWalls);
+                this->aics[(DAT_GameState::instance.playerDataArray[playerID].aiType - 1)].DefWalls);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
                 text, x + 657, y, OpenSHC::Text::TTA_LEFT, color, 0, 18, FALSE, 0);
         }
