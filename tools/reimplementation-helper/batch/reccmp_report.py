@@ -24,6 +24,18 @@ if args and args[0] == "--run":
 mode = args[0] if args else "pct"
 byaddr = common.load_diff()
 
+# Without --run the cached diff.json may be from a run over a different (narrower) build
+# list -- try_styles.py in particular runs reccmp over a single function. Every missing
+# function then just silently reads as "no entry", which turns a `save` into a snapshot of
+# almost nothing and a `cmp` against it into a clean bill of health. Say so instead.
+_listed = [a for f, e, a in common.entries(byaddr)]
+_missing = sum(1 for f, e, a in common.entries(byaddr) if e is None)
+if _listed and _missing > len(_listed) // 2:
+    sys.stderr.write(
+        "warning: the last reccmp run covers only %d of the %d functions in the build "
+        "list.\n         Re-run with --run, or this reports on stale results.\n"
+        % (len(_listed) - _missing, len(_listed)))
+
 if mode == "pct":
     path_filter = args[1] if len(args) > 1 else ""
     total = count = 0
@@ -43,6 +55,13 @@ if mode == "pct":
 elif mode == "save":
     snapshot = {e["name"]: [float(e["matching"]), common.normalized_ratio(e)]
                 for f, e, a in common.entries(byaddr) if e}
+    # A snapshot of a partial run is worse than no snapshot: every function it is missing reads
+    # as 0.0 later, so the comparison calls the whole namespace "better" and hides any real
+    # regression among the noise. Refuse instead, rather than writing a file that looks fine.
+    listed = sum(1 for _ in common.entries(byaddr))
+    if listed and len(snapshot) <= listed // 2:
+        sys.exit("refusing to save: the last reccmp run covers %d of the %d functions in the "
+                 "build list.\nRe-run with --run first." % (len(snapshot), listed))
     json.dump(snapshot, open(args[1], "w"), indent=0)
 
 elif mode == "cmp":
