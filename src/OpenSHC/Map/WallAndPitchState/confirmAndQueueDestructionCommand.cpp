@@ -51,9 +51,8 @@ namespace Map {
                 case 3: {
                     DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = this->index;
                     DAT_GameSynchronyState::instance.DAT_GameCommandParam1 = this->counter;
-                    int flag = this->flag;
+                    DAT_GameSynchronyState::instance.DAT_GameCommandParam2 = this->flag;
                     DAT_GameSynchronyState::instance.DAT_GameCommandParam3 = 3;
-                    DAT_GameSynchronyState::instance.DAT_GameCommandParam2 = flag;
                     MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand,
                         DAT_GameSynchronyState::ptr)((GameCommandType)76);
                     break;
@@ -61,9 +60,8 @@ namespace Map {
                 case 4: {
                     DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = this->index;
                     DAT_GameSynchronyState::instance.DAT_GameCommandParam1 = this->counter;
-                    int flag = this->flag;
+                    DAT_GameSynchronyState::instance.DAT_GameCommandParam2 = this->flag;
                     DAT_GameSynchronyState::instance.DAT_GameCommandParam3 = 4;
-                    DAT_GameSynchronyState::instance.DAT_GameCommandParam2 = flag;
                     MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand,
                         DAT_GameSynchronyState::ptr)((GameCommandType)76);
                     break;
