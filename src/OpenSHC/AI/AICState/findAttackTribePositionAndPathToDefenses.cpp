@@ -19,14 +19,14 @@ namespace AI {
         int y = 0;
         for (int i = 0; i < 11; i++) {
             int targetUnitID = 0;
-            for (int j = 0; j < DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeCount; j++) {
-                int tribeID = DAT_GameState::instance.playerDataArray[playerID]
-                                  .aiTribeIDs[DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeType + j];
+            int tribeType = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeType;
+            int tribeCount = DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeCount;
+            for (int j = 0; j < tribeCount; j++) {
+                int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[tribeType + j];
                 if (tribeID == 0)
                     continue;
                 if (DAT_TribesState::instance.tribes[tribeID].uid
-                    != DAT_GameState::instance.playerDataArray[playerID]
-                        .aiTribeUIDs[j + DAT_SkirmishDefinedData::instance.MaxAttackTribes1[i].tribeType])
+                    != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[j + tribeType])
                     continue;
 
                 targetUnitID = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
