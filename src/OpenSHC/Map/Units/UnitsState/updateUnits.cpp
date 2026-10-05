@@ -688,33 +688,33 @@ namespace Map {
                                     }
                                     this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e
                                         = this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e + 1;
-                                    if (0xf < this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e) {
+                                    if (this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e >= 0x10) {
                                         this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e = 0;
                                     }
                                     this->units[DAT_CurrentUnitSlotID::instance].field217_0x37c
                                         = this->units[DAT_CurrentUnitSlotID::instance].field217_0x37c + 2;
-                                    if (0xd < this->units[DAT_CurrentUnitSlotID::instance].field217_0x37c) {
+                                    if (this->units[DAT_CurrentUnitSlotID::instance].field217_0x37c >= 0xe) {
                                         this->units[DAT_CurrentUnitSlotID::instance].field217_0x37c = 0;
                                     }
                                     this->units[DAT_CurrentUnitSlotID::instance].field215_0x378
                                         = this->units[DAT_CurrentUnitSlotID::instance].field215_0x378 + 2;
-                                    if (0xf < this->units[DAT_CurrentUnitSlotID::instance].field215_0x378) {
+                                    if (this->units[DAT_CurrentUnitSlotID::instance].field215_0x378 >= 0x10) {
                                         this->units[DAT_CurrentUnitSlotID::instance].field215_0x378 = 0;
                                     }
                                     this->units[DAT_CurrentUnitSlotID::instance].field254_0x3c6
                                         = this->units[DAT_CurrentUnitSlotID::instance].field254_0x3c6 + 1;
-                                    if (0x11 < this->units[DAT_CurrentUnitSlotID::instance].field254_0x3c6) {
+                                    if (this->units[DAT_CurrentUnitSlotID::instance].field254_0x3c6 >= 0x12) {
                                         this->units[DAT_CurrentUnitSlotID::instance].field254_0x3c6 = 0;
                                     }
                                     this->units[DAT_CurrentUnitSlotID::instance].field312_0x428
                                         = this->units[DAT_CurrentUnitSlotID::instance].field312_0x428 + 1;
-                                    if (0x17 < this->units[DAT_CurrentUnitSlotID::instance].field312_0x428) {
+                                    if (this->units[DAT_CurrentUnitSlotID::instance].field312_0x428 >= 0x18) {
                                         this->units[DAT_CurrentUnitSlotID::instance].field312_0x428 = 0;
                                     }
                                 }
                                 this->units[DAT_CurrentUnitSlotID::instance].field216_0x37a
                                     = this->units[DAT_CurrentUnitSlotID::instance].field216_0x37a + 1;
-                                if (0xb < this->units[DAT_CurrentUnitSlotID::instance].field216_0x37a) {
+                                if (this->units[DAT_CurrentUnitSlotID::instance].field216_0x37a >= 0xc) {
                                     this->units[DAT_CurrentUnitSlotID::instance].field216_0x37a = 0;
                                 }
                                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::calculateUnitMovementSpeed,
