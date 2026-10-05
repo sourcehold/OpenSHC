@@ -34871,7 +34871,7 @@ SHC_3BB0A8C1_0x004CC420 | 39.4% | regalloc/locals differ
 
 SHC_3BB0A8C1_0x004CC520 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CC5A0 | 85.7% | Register allocation differs
+SHC_3BB0A8C1_0x004CC5A0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CC680 | 100.0% | Reimplemented
 
