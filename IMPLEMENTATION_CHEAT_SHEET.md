@@ -300,6 +300,24 @@ unrolled body, write `for (int i = 1; i != 2500; ++i)` instead of `i < 2500` (SH
   exit itself and places it where the original does (`aiRequiresExtraOxtethers`). Likewise put the block the
   original keeps inline first: `if (best > 20) { store; return 1; } return 0;` rather than the inverted guard.
 
+- **Several exits that end in the same statement were usually one statement.** MSVC copies a short shared tail
+  (a store or a call followed by the epilogue) into each predecessor, so three `mov word ptr [tribe.unitStance], 2`
+  + `ret` blocks in the original do not mean three assignments in the source. Writing the assignment once after an
+  `if / else if` ladder instead of `stance = X; return;` in every arm changes how often each value is *used*, and the
+  use count is what ranks values for the callee-saved registers - so this is the fix when a function matches
+  instruction for instruction except that two registers are swapped (`tribeID` in `ebx` and the tribe offset in `ebp`
+  on one side, the reverse on the other). `giveMoveCommandToSortieUnits` 79.6% -> 100%, `instructTribe166ToMove`
+  81.8% -> 100%, `assignUnitToATribe` 86.1% -> 100% (one `addUnitToTribe(unitID, tribeID)` after the branches
+  instead of three calls). When one of the arms must skip a call the others share, a `bool` set in the arms and
+  tested once afterwards compiles away and gives the single call site the original has.
+- A search loop whose "found a free slot" exit must skip the check that follows the loop has its end test **inside
+  the body**: `for (;; i++) { if (i >= count) { if (best == 0) return 0; break; } ... if (free) { best = create();
+  bestIndex = i; break; } ... }`. A `for (i < count)` loop with the check after it tests `best` on both paths, and
+  duplicating the tail into the create path changes the frame. With the test in the body the compiler rotates it to
+  the bottom and lays the blocks out as the original does (`getSmallestPatrolTribe` 65.2% -> 100%). The same
+  function needed `int i = 0;` declared *first*, before the other zero-initialised locals, to get the original's
+  `xor` order - declaration order did not matter anywhere else it was tried.
+
 ### GOTO
 
 A function may contain multiple GOTOs.
