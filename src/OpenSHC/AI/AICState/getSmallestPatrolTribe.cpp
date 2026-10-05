@@ -11,11 +11,18 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CCAF0
     int AICState::getSmallestPatrolTribe(int playerID, int tribeCount)
     {
+        int i = 0;
         int selectedTribeID = 0;
         int selectedIndex = 0;
         int lowestSize = 1000;
 
-        for (int i = 0; i < tribeCount; i++) {
+        for (;; i++) {
+            if (i >= tribeCount) {
+                if (selectedTribeID == 0)
+                    return 0;
+                break;
+            }
+
             int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[170 + i];
             if (tribeID == 0
                 || DAT_TribesState::instance.tribes[tribeID].uid
@@ -32,9 +39,6 @@ namespace AI {
                 selectedIndex = i;
             }
         }
-
-        if (selectedTribeID == 0)
-            return 0;
 
         DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[selectedIndex + 170] = selectedTribeID;
         DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[selectedIndex + 170]
