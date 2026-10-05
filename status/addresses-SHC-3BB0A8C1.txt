@@ -35363,7 +35363,7 @@ SHC_3BB0A8C1_0x004CF470 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CF4F0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CF560 | 37.74% | Reimplemented functionally, different register usage
+SHC_3BB0A8C1_0x004CF560 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CF5E0 | 100.0% | Reimplemented
 

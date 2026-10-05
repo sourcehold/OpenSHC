@@ -14,6 +14,7 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CF560
     void AICState::setTribe0x11ToAggressiveAndAttackIfConditionMet(int playerID)
     {
+        int tribeIndex = 17;
         if (DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].moat2 <= 0) {
             return;
         }
@@ -21,12 +22,12 @@ namespace AI {
             return;
         }
 
-        int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[17];
+        int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[tribeIndex];
         if (tribeID == 0) {
             return;
         }
         if (DAT_TribesState::instance.tribes[tribeID].uid
-            != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[17]) {
+            != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[tribeIndex]) {
             return;
         }
         if (DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID == 0) {
