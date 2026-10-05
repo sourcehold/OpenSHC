@@ -27,12 +27,12 @@ namespace AI {
         shieldTargetTribeIDs[1] = 0;
         shieldTargetTribeIDs[2] = 0;
         int targetCount = 0;
-        for (int i = 0; i < 3; i++) {
-            int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[186 + i];
+        for (int i = 186; i < 189; i++) {
+            int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[i];
             if (tribeID == 0)
                 continue;
             if (DAT_TribesState::instance.tribes[tribeID].uid
-                != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[186 + i])
+                != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[i])
                 continue;
             shieldTargetTribeIDs[targetCount] = tribeID;
             targetCount++;
