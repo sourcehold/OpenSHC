@@ -44,20 +44,17 @@ namespace AI {
             return;
 
         for (int siegeIndex = 0; siegeIndex < 4; siegeIndex++) {
-            UnitType unitType
-                = (UnitType)DAT_SkirmishDefinedData::instance.SiegeEngineMetaInfoArray[siegeIndex].unitType;
-            int slot = DAT_SkirmishDefinedData::instance.SiegeEngineMetaInfoArray[siegeIndex].slot;
-            int locationCount
-                = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount[slot];
+            int locationCount = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount
+                                    [DAT_SkirmishDefinedData::instance.SiegeEngineMetaInfoArray[siegeIndex].slot];
             if (locationCount >= 4)
                 locationCount = 3;
 
             for (int i = 0; i < locationCount; i++) {
-                int location = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlots[slot][i];
+                int location = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlots
+                                   [DAT_SkirmishDefinedData::instance.SiegeEngineMetaInfoArray[siegeIndex].slot][i];
                 if (location <= 0)
                     continue;
 
-                int existingBuildingID = (short)DAT_TileMapState::instance.BuildingLayer[location];
                 int unitID = DAT_GameState::instance.playerDataArray[playerID]
                                  .aiSiegeCreationInformation[siegeIndex][i]
                                  .unitID;
@@ -120,15 +117,19 @@ namespace AI {
                         return;
                     }
 
-                    if (existingBuildingID == 0) {
+                    if (((short)DAT_TileMapState::instance.BuildingLayer[location]) == 0) {
                         if (siegeIndex < 2)
                             continue;
                     } else {
                         if (siegeIndex >= 2)
                             continue;
-                        if (DAT_BuildingsState::instance.buildings[existingBuildingID].buildingType
+                        if (DAT_BuildingsState::instance
+                                    .buildings[((short)DAT_TileMapState::instance.BuildingLayer[location])]
+                                    .buildingType
                                 != OpenSHC::Map::Buildings::BT_TOWER4
-                            && DAT_BuildingsState::instance.buildings[existingBuildingID].buildingType
+                            && DAT_BuildingsState::instance
+                                    .buildings[((short)DAT_TileMapState::instance.BuildingLayer[location])]
+                                    .buildingType
                                 != OpenSHC::Map::Buildings::BT_TOWER5)
                             continue;
                     }
@@ -154,7 +155,11 @@ namespace AI {
                     if (siegeIndex < 2) {
                         int spawnedUnitID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::spawnUnit,
                             DAT_UnitsState::ptr)(playerID, playerID, x * 8 + 4, y * 8 + 4,
-                            DAT_BuildingsState::instance.buildings[existingBuildingID].terrainHeightUnk, unitType);
+                            DAT_BuildingsState::instance
+                                .buildings[((short)DAT_TileMapState::instance.BuildingLayer[location])]
+                                .terrainHeightUnk,
+                            ((UnitType)DAT_SkirmishDefinedData::instance.SiegeEngineMetaInfoArray[siegeIndex]
+                                    .unitType));
                         DAT_GameState::instance.playerDataArray[playerID]
                             .aiSiegeCreationInformation[siegeIndex][i]
                             .unitID = spawnedUnitID;
