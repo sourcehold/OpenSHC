@@ -17,13 +17,14 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CF2E0
     void AICState::aiCommandTribe12AggressiveApproach(int playerID)
     {
+        int tribeIndex = 12;
         if (DAT_GameState::instance.playerDataArray[playerID].aiType == OpenSHC::AI::AIT_NULL)
             return;
-        int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[12];
+        int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[tribeIndex];
         if (tribeID == 0)
             return;
         if (DAT_TribesState::instance.tribes[tribeID].uid
-            != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[12])
+            != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[tribeIndex])
             return;
         int targetUnitID = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
         if (targetUnitID == 0)
