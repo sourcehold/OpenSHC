@@ -318,6 +318,12 @@ unrolled body, write `for (int i = 1; i != 2500; ++i)` instead of `i < 2500` (SH
   function needed `int i = 0;` declared *first*, before the other zero-initialised locals, to get the original's
   `xor` order - declaration order did not matter anywhere else it was tried.
 
+- `mov edx, esi; add esi, 1` at the **top** of a loop body, with the body then indexing by the copy, is a `while`
+  loop that takes the index and advances the counter first: `while (i < count) { int index = i; i++; if (...[index]...)
+  { ...; return; } }`. A `for (...; i++)` with the same body does not produce it. Together with `int i = 0;`
+  declared where the original's `xor esi, esi` sits (here before an earlier early-return test, which then compares
+  against that zero register) this took `generateSiegeCreationInformation` from 39.4% to 100%.
+
 ### GOTO
 
 A function may contain multiple GOTOs.
