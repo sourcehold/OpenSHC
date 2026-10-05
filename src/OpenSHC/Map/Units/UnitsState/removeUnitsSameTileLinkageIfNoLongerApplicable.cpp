@@ -17,7 +17,7 @@ namespace Map {
             if (DAT_GameState::instance.mapAndTime.multiplayerUnitSameTileLinkageTimeWindow < 100) {
                 DAT_GameState::instance.mapAndTime.multiplayerUnitSameTileLinkageTimeWindow
                     = DAT_GameState::instance.mapAndTime.multiplayerUnitSameTileLinkageTimeWindow + 1;
-                if (DAT_GameState::instance.mapAndTime.multiplayerUnitSameTileLinkageTimeWindow > 50) {
+                if (DAT_GameState::instance.mapAndTime.multiplayerUnitSameTileLinkageTimeWindow >= 50) {
                     DAT_GameState::instance.mapAndTime.multiplayerUnitSameTileLinkageTimeWindow = 0;
                 }
                 return;
