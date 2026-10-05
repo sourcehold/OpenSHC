@@ -35,36 +35,36 @@ namespace AI {
             MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::syncBehaviourType7UnitTribes, this)(playerID);
 
         int targetUnitID = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
+        bool sendToKeep = true;
         if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker <= 0) {
             if (DAT_TribesState::instance.tribes[tribeID].size < this->aics[aicIndex].SortieUnitMeleeMin) {
-                DAT_TribesState::instance.tribes[tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
-                return;
-            }
-
-            int unitID = DAT_GameState::instance.playerDataArray[playerID].lastEncounteredTroopUnitID;
-            if (unitID != 0
-                && DAT_GameState::instance.playerDataArray[playerID].lastEncounteredTroopUnitUID
-                    == DAT_UnitsState::instance.units[unitID].uid
-                && MACRO_CALL_MEMBER(
-                       OpenSHC::Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
-                       DAT_PathFindingState::ptr)(playerID,
-                       (short)DAT_TileMapState::instance
-                           .PathConnectionLayer[DAT_UnitsState::instance.units[targetUnitID].tile],
-                       (short)
-                           DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile],
-                       0)
-                    != 0) {
-                MACRO_CALL_MEMBER(
-                    OpenSHC::Map::Units::TribesState_Func::unsetRallyRelatedFlagOnUnits, DAT_TribesState::ptr)(tribeID);
-                MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction,
-                    DAT_TribesState::ptr)(tribeID, DAT_UnitsState::instance.units[unitID].x,
-                    DAT_UnitsState::instance.units[unitID].y, 0, 0, OpenSHC::Map::Units::Instructions::UMSE_0);
-                DAT_TribesState::instance.tribes[tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
-                return;
+                sendToKeep = false;
+            } else {
+                int unitID = DAT_GameState::instance.playerDataArray[playerID].lastEncounteredTroopUnitID;
+                if (unitID != 0
+                    && DAT_GameState::instance.playerDataArray[playerID].lastEncounteredTroopUnitUID
+                        == DAT_UnitsState::instance.units[unitID].uid
+                    && MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
+                                             calculateCanPlayerUnitsNavigateToAreaFromArea,
+                           DAT_PathFindingState::ptr)(playerID,
+                           (short)DAT_TileMapState::instance
+                               .PathConnectionLayer[DAT_UnitsState::instance.units[targetUnitID].tile],
+                           (short)DAT_TileMapState::instance
+                               .PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile],
+                           0)
+                        != 0) {
+                    MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::unsetRallyRelatedFlagOnUnits,
+                        DAT_TribesState::ptr)(tribeID);
+                    MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction,
+                        DAT_TribesState::ptr)(tribeID, DAT_UnitsState::instance.units[unitID].x,
+                        DAT_UnitsState::instance.units[unitID].y, 0, 0, OpenSHC::Map::Units::Instructions::UMSE_0);
+                    sendToKeep = false;
+                }
             }
         }
-
-        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToKeep, this)(tribeID, playerID);
+        if (sendToKeep) {
+            MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToKeep, this)(tribeID, playerID);
+        }
         DAT_TribesState::instance.tribes[tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
     }
 }
