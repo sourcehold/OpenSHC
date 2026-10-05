@@ -13,16 +13,17 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CF6E0
     void AICState::setTribe0xbToAggressiveAndAttack(int playerID)
     {
+        int tribeIndex = 11;
         if (DAT_GameState::instance.playerDataArray[playerID].aiType == AITA_NULL) {
             return;
         }
 
-        int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[11];
+        int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[tribeIndex];
         if (tribeID == 0) {
             return;
         }
         if (DAT_TribesState::instance.tribes[tribeID].uid
-            != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[11]) {
+            != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[tribeIndex]) {
             return;
         }
         if (DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID == 0) {
