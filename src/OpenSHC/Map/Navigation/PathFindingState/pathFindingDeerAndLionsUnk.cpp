@@ -86,7 +86,7 @@ namespace Map {
                                     + _currentY;
                                 this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _neswTile1;
                                 this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                                if (0x13a0f < this->searchQueue.writeIndex) {
+                                if (0x13a10 <= this->searchQueue.writeIndex) {
                                     this->searchQueue.writeIndex = 0;
                                 }
                             }
@@ -109,7 +109,7 @@ namespace Map {
                                     + _currentY;
                                 this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _neswTile2;
                                 this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                                if (0x13a0f < this->searchQueue.writeIndex) {
+                                if (0x13a10 <= this->searchQueue.writeIndex) {
                                     this->searchQueue.writeIndex = 0;
                                 }
                             }
@@ -132,7 +132,7 @@ namespace Map {
                                     + _currentY;
                                 this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _neswTile3;
                                 this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                                if (0x13a0f < this->searchQueue.writeIndex) {
+                                if (0x13a10 <= this->searchQueue.writeIndex) {
                                     this->searchQueue.writeIndex = 0;
                                 }
                             }
@@ -155,7 +155,7 @@ namespace Map {
                                     + _currentY;
                                 this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _neswTile4;
                                 this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                                if (0x13a0f < this->searchQueue.writeIndex) {
+                                if (0x13a10 <= this->searchQueue.writeIndex) {
                                     this->searchQueue.writeIndex = 0;
                                 }
                             }
