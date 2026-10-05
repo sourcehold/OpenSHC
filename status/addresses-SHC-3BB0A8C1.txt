@@ -37931,7 +37931,7 @@ SHC_3BB0A8C1_0x004ED300 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004ED3B0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004ED410 | 95.3% | orig branches to a shared return
+SHC_3BB0A8C1_0x004ED410 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004EDC90 | 100.0% | Reimplemented
 
