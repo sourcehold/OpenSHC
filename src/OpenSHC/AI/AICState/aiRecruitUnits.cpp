@@ -110,9 +110,10 @@ namespace AI {
                             .DefUnit1)[DAT_GameState::instance.playerDataArray[playerID].aiDefUnitChoiceIndex]
                     == 0)
                     DAT_GameState::instance.playerDataArray[playerID].aiDefUnitChoiceIndex = 0;
-                int choice = DAT_GameState::instance.playerDataArray[playerID].aiDefUnitChoiceIndex;
-                unitType = (UnitType)(&this->aics[aicIndex].DefUnit1)[choice];
-                DAT_GameState::instance.playerDataArray[playerID].aiDefUnitChoiceIndex = choice + 1;
+                unitType = (UnitType)(&this->aics[aicIndex]
+                        .DefUnit1)[DAT_GameState::instance.playerDataArray[playerID].aiDefUnitChoiceIndex];
+                DAT_GameState::instance.playerDataArray[playerID].aiDefUnitChoiceIndex
+                    = DAT_GameState::instance.playerDataArray[playerID].aiDefUnitChoiceIndex + 1;
             } else if (DAT_GameState::instance.playerDataArray[playerID].aiRecruitUnitChoiceState
                 == OpenSHC::AI::AIRUC_RAIDING) {
                 if (DAT_GameState::instance.playerDataArray[playerID].aiRaidUnitChoiceIndex > 7)
@@ -121,9 +122,10 @@ namespace AI {
                             .RaidUnit1)[DAT_GameState::instance.playerDataArray[playerID].aiRaidUnitChoiceIndex]
                     == 0)
                     DAT_GameState::instance.playerDataArray[playerID].aiRaidUnitChoiceIndex = 0;
-                int choice = DAT_GameState::instance.playerDataArray[playerID].aiRaidUnitChoiceIndex;
-                unitType = (UnitType)(&this->aics[aicIndex].RaidUnit1)[choice];
-                DAT_GameState::instance.playerDataArray[playerID].aiRaidUnitChoiceIndex = choice + 1;
+                unitType = (UnitType)(&this->aics[aicIndex]
+                        .RaidUnit1)[DAT_GameState::instance.playerDataArray[playerID].aiRaidUnitChoiceIndex];
+                DAT_GameState::instance.playerDataArray[playerID].aiRaidUnitChoiceIndex
+                    = DAT_GameState::instance.playerDataArray[playerID].aiRaidUnitChoiceIndex + 1;
             } else if (DAT_GameState::instance.playerDataArray[playerID].aiRecruitUnitChoiceState
                 == OpenSHC::AI::AIRUC_ATTACKING) {
                 behaviourType = MACRO_CALL_MEMBER(
