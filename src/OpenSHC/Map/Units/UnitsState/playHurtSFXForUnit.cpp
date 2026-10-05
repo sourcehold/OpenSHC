@@ -18,58 +18,60 @@ namespace Map {
             if (unitID == 0) {
                 return;
             }
-            if (this->units[unitID].healthPercentage < 0xb) {
+            if (this->units[unitID].healthPercentage <= 0xa) {
                 return;
             }
             if (this->units[unitID].isStalked != 0) {
                 return;
             }
-            if ((short)this->units[unitID].unitType <= 0) {
+            int _unitType = this->units[unitID].unitType;
+            if (_unitType <= 0) {
                 return;
             }
-            eSFX _sfxOffsetInArray;
-            if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_S_CATAPULT
-                || this->units[unitID].unitType == OpenSHC::Map::Units::UT_S_TREBUCHET
-                || this->units[unitID].unitType == OpenSHC::Map::Units::UT_S_MANGONEL
-                || this->units[unitID].unitType == OpenSHC::Map::Units::UT_S_BALLISTA
-                || this->units[unitID].unitType == OpenSHC::Map::Units::UT_S_TOWER
-                || this->units[unitID].unitType == OpenSHC::Map::Units::UT_S_BATTERINGRAM) {
-                _sfxOffsetInArray = OpenSHC::DE::SHCDE::FX_ATTACK_WOOD;
-            } else if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_BREWER
-                || this->units[unitID].unitType == OpenSHC::Map::Units::UT_TANNER
-                || this->units[unitID].unitType == OpenSHC::Map::Units::UT_LADY
-                || this->units[unitID].unitType == OpenSHC::Map::Units::UT_MOTHER
-                || (this->units[unitID].unitType == OpenSHC::Map::Units::UT_CHILD
-                    && this->units[unitID].spriteID == 0x81)) {
-                _sfxOffsetInArray = OpenSHC::DE::SHCDE::FX_GIRL_GRUNT;
-            } else {
-                if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_S_SHIELD
-                    && this->units[unitID].digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300
-                        == 0) {
-                    return;
-                }
-                if ((this->units[unitID].fixedRng & 7) == 0) {
-                    _sfxOffsetInArray = OpenSHC::DE::SHCDE::FX_BODY_HIT;
-                } else if ((this->units[unitID].fixedRng & 7) == 1) {
-                    _sfxOffsetInArray = OpenSHC::DE::SHCDE::FX_BODY_HIT2;
-                } else if ((this->units[unitID].fixedRng & 7) == 2) {
-                    _sfxOffsetInArray = OpenSHC::DE::SHCDE::FX_BODY_HIT3;
-                } else if ((this->units[unitID].fixedRng & 7) == 3) {
-                    _sfxOffsetInArray = OpenSHC::DE::SHCDE::FX_BODY_HIT4;
-                } else if ((this->units[unitID].fixedRng & 7) == 4) {
-                    _sfxOffsetInArray = OpenSHC::DE::SHCDE::FX_BODY_HIT5;
-                } else if ((this->units[unitID].fixedRng & 7) == 5) {
-                    _sfxOffsetInArray = OpenSHC::DE::SHCDE::FX_BODY_HIT6;
-                } else if ((this->units[unitID].fixedRng & 7) == 6) {
-                    _sfxOffsetInArray = OpenSHC::DE::SHCDE::FX_BODY_HIT7;
-                } else if ((this->units[unitID].fixedRng & 7) == 7) {
-                    _sfxOffsetInArray = OpenSHC::DE::SHCDE::FX_BODY_HIT8;
-                } else {
-                    return;
-                }
+            if (_unitType == OpenSHC::Map::Units::UT_S_CATAPULT || _unitType == OpenSHC::Map::Units::UT_S_TREBUCHET
+                || _unitType == OpenSHC::Map::Units::UT_S_MANGONEL || _unitType == OpenSHC::Map::Units::UT_S_BALLISTA
+                || _unitType == OpenSHC::Map::Units::UT_S_TOWER
+                || _unitType == OpenSHC::Map::Units::UT_S_BATTERINGRAM) {
+                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                    this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_ATTACK_WOOD);
+                return;
             }
-            MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
-                this->units[unitID].x, this->units[unitID].y, _sfxOffsetInArray);
+            if (_unitType == OpenSHC::Map::Units::UT_S_SHIELD) {
+                if (this->units[unitID].digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300 == 0) {
+                    return;
+                }
+            } else if (_unitType == OpenSHC::Map::Units::UT_BREWER || _unitType == OpenSHC::Map::Units::UT_TANNER
+                || _unitType == OpenSHC::Map::Units::UT_LADY || _unitType == OpenSHC::Map::Units::UT_MOTHER
+                || (_unitType == OpenSHC::Map::Units::UT_CHILD && this->units[unitID].spriteID == 0x81)) {
+                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                    this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_GIRL_GRUNT);
+                return;
+            }
+            if ((this->units[unitID].fixedRng & 7) == 0) {
+                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                    this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_BODY_HIT);
+            } else if ((this->units[unitID].fixedRng & 7) == 1) {
+                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                    this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_BODY_HIT2);
+            } else if ((this->units[unitID].fixedRng & 7) == 2) {
+                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                    this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_BODY_HIT3);
+            } else if ((this->units[unitID].fixedRng & 7) == 3) {
+                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                    this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_BODY_HIT4);
+            } else if ((this->units[unitID].fixedRng & 7) == 4) {
+                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                    this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_BODY_HIT5);
+            } else if ((this->units[unitID].fixedRng & 7) == 5) {
+                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                    this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_BODY_HIT6);
+            } else if ((this->units[unitID].fixedRng & 7) == 6) {
+                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                    this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_BODY_HIT7);
+            } else if ((this->units[unitID].fixedRng & 7) == 7) {
+                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                    this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_BODY_HIT8);
+            }
         }
 
     }
