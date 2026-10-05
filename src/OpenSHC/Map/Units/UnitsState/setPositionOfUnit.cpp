@@ -9,7 +9,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0053E900
         void UnitsState::setPositionOfUnit(int unitID, uint x, uint y, undefined4 height)
         {
-            if (x >= 400 || y >= 400) {
+            if (x > 0x18f || y > 0x18f) {
                 return;
             }
             if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
