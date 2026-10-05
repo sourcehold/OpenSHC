@@ -14,13 +14,13 @@ namespace AI {
     void AICState::addUnitToSmallestPatrolTribe(int unitID)
     {
         int owner = DAT_UnitsState::instance.units[unitID].owner;
-        int aiType = DAT_GameState::instance.playerDataArray[owner].aiType;
-        if (aiType == AITA_NULL)
+        if (DAT_GameState::instance.playerDataArray[owner].aiType == AITA_NULL)
             return;
+        int aicIndex = DAT_GameState::instance.playerDataArray[owner].aiType - 1;
 
         DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType = 4;
         int tribeID = MACRO_CALL_MEMBER(AICState_Func::getSmallestPatrolTribe, this)(
-            owner, this->aics[aiType - 1].OuterPatrolGroupsCount);
+            owner, this->aics[aicIndex].OuterPatrolGroupsCount);
         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(unitID, tribeID);
     }
 }
