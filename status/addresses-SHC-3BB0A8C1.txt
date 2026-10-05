@@ -34867,7 +34867,7 @@ SHC_3BB0A8C1_0x004CC250 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CC390 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CC420 | 39.4% | regalloc/locals differ
+SHC_3BB0A8C1_0x004CC420 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CC520 | 100.0% | Reimplemented
 

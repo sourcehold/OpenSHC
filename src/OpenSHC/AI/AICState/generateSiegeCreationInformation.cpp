@@ -17,6 +17,7 @@ namespace AI {
     {
         if (DAT_GameState::instance.playerDataArray[playerID].aiType == OpenSHC::AI::AIT_NULL)
             return;
+        int i = 0;
         if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY)
             return;
 
@@ -30,22 +31,24 @@ namespace AI {
 
         int slot = DAT_SkirmishDefinedData::instance.SiegeEngineMetaInfoArray[siegeIndex].slot;
         int locationCount = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount[slot];
-        int i;
-        for (i = 0; i < locationCount; i++) {
-            if (DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlots[slot][i] > 0
+        while (i < locationCount) {
+            int index = i;
+            i++;
+            if (DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlots[slot][index] > 0
                 && buildingID
                     == DAT_GameState::instance.playerDataArray[playerID]
-                           .aiSiegeCreationInformation[siegeIndex][i]
-                           .buildingID)
-                break;
+                        .aiSiegeCreationInformation[siegeIndex][index]
+                        .buildingID) {
+                DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][index].unitID
+                    = unitID;
+                DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][index].uid
+                    = DAT_UnitsState::instance.units[unitID].uid;
+                DAT_GameState::instance.playerDataArray[playerID]
+                    .aiSiegeCreationInformation[siegeIndex][index]
+                    .buildingID = 0;
+                return;
+            }
         }
-        if (i >= locationCount)
-            return;
-
-        DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].unitID = unitID;
-        DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].uid
-            = DAT_UnitsState::instance.units[unitID].uid;
-        DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].buildingID = 0;
     }
 
 }
