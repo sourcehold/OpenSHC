@@ -26,18 +26,16 @@ namespace AI {
         else
             aivUnitType = MACRO_CALL_MEMBER(AICState_Func::getUnitTypeIndexForUnitID, this)(unitID, 0);
         DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType = 1;
+        int tribeID;
         if (DAT_GameState::instance.playerDataArray[owner].aivUnitLocationSlotLocationCount[aivUnitType] <= 0) {
-            if (MACRO_CALL_MEMBER(AICState_Func::unitIDIsRangedOrArmored, this)(unitID) != 0) {
-                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(
-                    unitID, MACRO_CALL_MEMBER(AICState_Func::createTribeForUnitType, this)(owner, 0));
-                return;
-            }
-            MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(
-                unitID, MACRO_CALL_MEMBER(AICState_Func::createTribeForUnitType, this)(owner, 1));
-            return;
+            if (MACRO_CALL_MEMBER(AICState_Func::unitIDIsRangedOrArmored, this)(unitID) != 0)
+                tribeID = MACRO_CALL_MEMBER(AICState_Func::createTribeForUnitType, this)(owner, 0);
+            else
+                tribeID = MACRO_CALL_MEMBER(AICState_Func::createTribeForUnitType, this)(owner, 1);
+        } else {
+            tribeID = MACRO_CALL_MEMBER(AICState_Func::smallestTribeOfUnitType, this)(owner, aivUnitType);
         }
-        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(
-            unitID, MACRO_CALL_MEMBER(AICState_Func::smallestTribeOfUnitType, this)(owner, aivUnitType));
+        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(unitID, tribeID);
     }
 }
 }
