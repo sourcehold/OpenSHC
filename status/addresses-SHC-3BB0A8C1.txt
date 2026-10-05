@@ -37871,27 +37871,27 @@ SHC_3BB0A8C1_0x004ECA90 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004ECAB0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004ECAD0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004ECAD0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004ECBC0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004ECBC0 | 68.6% | orig branch shape; registers differ
 
 SHC_3BB0A8C1_0x004ECCA0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004ECD90 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004ECDB0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004ECDB0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004ECDE0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004ECDF0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004ECE60 | 0.0% | Pending
+SHC_3BB0A8C1_0x004ECE60 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004ECEF0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004ECF70 | 0.0% | Pending
+SHC_3BB0A8C1_0x004ECF70 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004ECFE0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004ECFE0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004ED070 | 0.0% | Pending
 
@@ -37923,47 +37923,47 @@ SHC_3BB0A8C1_0x004ED0A4 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004ED0A8 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004ED0B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004ED0B0 | 97.2% | Reimplemented
 
-SHC_3BB0A8C1_0x004ED240 | 0.0% | Pending
+SHC_3BB0A8C1_0x004ED240 | 98.2% | Reimplemented
 
-SHC_3BB0A8C1_0x004ED300 | 0.0% | Pending
+SHC_3BB0A8C1_0x004ED300 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004ED3B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004ED3B0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004ED410 | 0.0% | Pending
+SHC_3BB0A8C1_0x004ED410 | 95.3% | orig branches to a shared return
 
-SHC_3BB0A8C1_0x004EDC90 | 0.0% | Pending
+SHC_3BB0A8C1_0x004EDC90 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004EDCB0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004EDCB0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004EDD00 | 0.0% | Pending
+SHC_3BB0A8C1_0x004EDD00 | 98.8% | Reimplemented
 
-SHC_3BB0A8C1_0x004EDDF0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004EDDF0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004EE140 | 0.0% | Pending
+SHC_3BB0A8C1_0x004EE140 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004EE230 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004EE430 | 0.0% | Pending
+SHC_3BB0A8C1_0x004EE430 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004EE830 | 0.0% | Pending
+SHC_3BB0A8C1_0x004EE830 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004EE920 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004EEBD0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004EEBD0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004EECC0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004EEE10 | 0.0% | Pending
+SHC_3BB0A8C1_0x004EEE10 | 88.2% | loop rotation; orig rematerial
 
 SHC_3BB0A8C1_0x004EEEC0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004EEF20 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004EF090 | 0.0% | Pending
+SHC_3BB0A8C1_0x004EF090 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004EF0D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004EF0D0 | 67.0% | orig spills y in loop 1, we ke
 
 SHC_3BB0A8C1_0x004EF130 | 0.0% | Pending
 
@@ -37971,43 +37971,43 @@ SHC_3BB0A8C1_0x004EF150 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004EF450 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004EF8C0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004EF8C0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004EF900 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004EF920 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004EFA60 | 0.0% | Pending
+SHC_3BB0A8C1_0x004EFA60 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004EFAB0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004EFAB0 | 91.4% | Register reuse after search
 
-SHC_3BB0A8C1_0x004EFB90 | 0.0% | Pending
+SHC_3BB0A8C1_0x004EFB90 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004EFC30 | 0.0% | Pending
+SHC_3BB0A8C1_0x004EFC30 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004EFD90 | 0.0% | Pending
+SHC_3BB0A8C1_0x004EFD90 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004EFE30 | 0.0% | Pending
+SHC_3BB0A8C1_0x004EFE30 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004EFED0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004EFED0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004F0060 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F0060 | 36.7% | aiType - 1 chain; registers differ
 
 SHC_3BB0A8C1_0x004F0690 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004F0E80 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F0E80 | 88.9% | rest is scheduling + a hoisted
 
 SHC_3BB0A8C1_0x004F1190 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004F13E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F13E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004F13F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F13F0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004F14F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F14F0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004F15C0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F15C0 | 98.5% | init stores sit after the aivID branch
 
-SHC_3BB0A8C1_0x004F1860 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F1860 | 90.8% | orig has a redundant cmp eax,eax
 
 SHC_3BB0A8C1_0x004F1A60 | 0.0% | Pending
 
