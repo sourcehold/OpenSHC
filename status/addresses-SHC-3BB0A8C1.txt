@@ -44191,7 +44191,7 @@ SHC_3BB0A8C1_0x005116E0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00511850 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x005118C0 | 59.3% | MSVC merges Param0 not Param2
+SHC_3BB0A8C1_0x005118C0 | 76.9% | case 4 register allocation
 
 SHC_3BB0A8C1_0x005119A4 | 0.0% | Pending
 
