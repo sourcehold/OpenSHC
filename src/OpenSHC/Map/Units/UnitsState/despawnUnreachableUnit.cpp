@@ -17,7 +17,8 @@ namespace Map {
             if (this->units[unitID].isSelectable_OR_matchTime != 0) {
                 return;
             }
-            if ((short)this->units[unitID].unitType >= 0x37 && (short)this->units[unitID].unitType <= 0x39) {
+            int _unitType = this->units[unitID].unitType;
+            if (_unitType >= 0x37 && _unitType <= 0x39) {
                 return;
             }
             if ((DAT_TileMapState::instance.LogicLayer[this->units[unitID].tile] & 0x100U) == 0) {
