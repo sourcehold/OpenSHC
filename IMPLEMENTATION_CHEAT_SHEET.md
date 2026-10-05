@@ -420,6 +420,15 @@ bestIndex = i; break; } ... }`. A `for (i < count)` loop with the check after it
     So the predecessor-count rule tells you a duplicate _may_ be needed, not that it will help; `try_styles.py` is
     the only way to settle it.
 
+- A loop whose early exit returns the same value as the code after the loop was a `break`, not a `return`. The tell is
+  callee-saved registers pushed _after_ the loop's entry test and one shared `mov eax, result` behind the loop, where
+  an early `return result;` makes us push everything in the prologue (`assignRequiredIdleEngineersToNewTribe`,
+  `addEngineersToSelection`, both ~88% -> 100%).
+- Do not add a guard the loop condition already expresses. `if (id == 0) return 0;` in front of
+  `for (; id != 0; id = next(id))` moved one `push` across a branch; without it the compiler derives the same early
+  exit itself and places it where the original does (`aiRequiresExtraOxtethers`). Likewise put the block the
+  original keeps inline first: `if (best > 20) { store; return 1; } return 0;` rather than the inverted guard.
+
 ### GOTO
 
 A function may contain multiple GOTOs.

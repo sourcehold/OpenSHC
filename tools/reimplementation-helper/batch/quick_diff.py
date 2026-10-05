@@ -27,9 +27,14 @@ import capstone
 import common
 
 quiet = '-q' in sys.argv
+<<<<<<< HEAD
 keep_slots = '-s' in sys.argv
 files = [os.path.abspath(f) for f in sys.argv[1:] if f not in ('-q', '-s')]
 if not files and __name__ == "__main__":
+=======
+files = [os.path.abspath(f) for f in sys.argv[1:] if f != '-q']
+if not files:
+>>>>>>> 45472f1b (tools/batch: quick_diff.py, and the source patterns it found in AI::AICState)
     sys.exit(__doc__)
 ROOT = str(common.ROOT).replace(chr(92), '/')
 os.chdir(ROOT)
@@ -111,6 +116,7 @@ def ours(f, cls, name):
         print('no code found for %s::%s' % (cls, name))
         return None
     res = []
+<<<<<<< HEAD
     # `_x$ = -16` lines define each local's offset; `_x$[esp+44H]` then means [esp + 0x44 - 16]
     pre = txt[txt.rfind('_TEXT	SEGMENT', 0, m.start()):m.start()]
     slots = {k: int(v) for k, v in re.findall(r'^(\w+\$\w*|tv\d+) = (-?\d+)', pre, re.M)}
@@ -129,6 +135,13 @@ def ours(f, cls, name):
             continue
         l = l.replace('\t', ' ')
         l = re.sub(r'(\w+\$\w*|tv\d+)\[esp(?:([+-][0-9a-fA-F]+H|[+-]\d+))?\]', slot, l)
+=======
+    for l in m.group(2).splitlines():
+        l = l.split(';')[0].strip()
+        if not l or l.endswith(':') or re.match(r'^\w+\$ = ', l) or l.startswith('npad') or l.startswith('$') or l.startswith('DD') or l.startswith('DB') or l.startswith('_'):
+            continue
+        l = l.replace('\t', ' ')
+>>>>>>> 45472f1b (tools/batch: quick_diff.py, and the source patterns it found in AI::AICState)
         op = l.split(' ')[0]
         if op.startswith('j') and 'DWORD PTR' not in l:
             l = op + (' L' if '$' in l else ' F')
@@ -157,8 +170,12 @@ def ours(f, cls, name):
 
 def canon(s):
     # esp-relative slots and globals compare loosely
+<<<<<<< HEAD
     if not keep_slots:
         s = re.sub(r'\[esp( [+-] 0x[0-9a-f]+)?\]', '[esp+N]', s)
+=======
+    s = re.sub(r'\[esp( [+-] 0x[0-9a-f]+)?\]', '[esp+N]', s)
+>>>>>>> 45472f1b (tools/batch: quick_diff.py, and the source patterns it found in AI::AICState)
     s = re.sub(r'tv\d+\[', '[', s)
     s = re.sub(r'_\w+\$\w*\[', '[', s)
     s = s.replace('mov eax, G', 'mov eax, 0x51eb851f') if s == 'mov eax, G' else s
@@ -166,6 +183,7 @@ def canon(s):
     return s
 
 
+<<<<<<< HEAD
 def streams(f):
     """(original, ours) normalized instruction lists for one source file."""
     src = open(f, encoding='utf-8').read()
@@ -190,3 +208,20 @@ def main():
 
 if __name__ == '__main__':
     main()
+=======
+for f in files:
+    src = open(f, encoding='utf-8').read()
+    va = int(re.search(r'FUNCTION: STRONGHOLDCRUSADER (0x[0-9A-Fa-f]+)', src).group(1), 16)
+    a = [canon(x) for x in orig(va)]
+    cls, name = re.search(r'FUNCTION: STRONGHOLDCRUSADER[^\n]*\n[^\n(]*?(\w+)::(\w+)\(', src).groups()
+    b = ours(f, cls, name)
+    if b is None:
+        continue
+    b = [canon(x) for x in b]
+    ratio = difflib.SequenceMatcher(None, a, b, autojunk=False).ratio()
+    print('##### %s  ratio %.4f  orig %d ours %d' % (os.path.basename(f), ratio, len(a), len(b)))
+    if not quiet:
+        for l in difflib.unified_diff(a, b, lineterm='', n=2):
+            if not l.startswith(('---', '+++')):
+                print(l)
+>>>>>>> 45472f1b (tools/batch: quick_diff.py, and the source patterns it found in AI::AICState)
