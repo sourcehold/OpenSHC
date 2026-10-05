@@ -631,7 +631,7 @@ namespace AI {
         decideOnTribeAttackLocation;
 
         MACRO_FUNCTION_RESOLVER(
-            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D1D60, &AICState::sellExcessGoods)
+            void (AICState::*)(int), true, Address::SHC_3BB0A8C1_0x004D1D60, &AICState::sellExcessGoods)
         sellExcessGoods;
 
         MACRO_FUNCTION_RESOLVER(void (AICState::*)(int, ResourceType, int), false, Address::SHC_3BB0A8C1_0x004D1F00,
@@ -715,7 +715,7 @@ namespace AI {
         makeOutpostTribesAttack;
 
         MACRO_FUNCTION_RESOLVER(
-            void (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004D39B0, &AICState::buyRequiredGoods)
+            void (AICState::*)(int), true, Address::SHC_3BB0A8C1_0x004D39B0, &AICState::buyRequiredGoods)
         buyRequiredGoods;
 
         MACRO_FUNCTION_RESOLVER(
