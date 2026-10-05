@@ -90,10 +90,11 @@ namespace AI {
                     vector += 1;
                 } else {
                     // Send units to attack lord
-                    if (MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction,
-                            DAT_TribesState::ptr)(tribeID, DAT_UnitsState::instance.units[defendingLordID].x,
-                            DAT_UnitsState::instance.units[defendingLordID].y, 0, 0,
-                            OpenSHC::Map::Units::Instructions::UMSE_0)
+                    int lordY = DAT_UnitsState::instance.units[defendingLordID].y;
+                    int lordX = DAT_UnitsState::instance.units[defendingLordID].x;
+                    if (MACRO_CALL_MEMBER(
+                            OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(
+                            tribeID, lordX, lordY, 0, 0, OpenSHC::Map::Units::Instructions::UMSE_0)
                         == 0) {
                         return 0;
                     }
