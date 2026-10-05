@@ -20,7 +20,6 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CE200
     void AICState::computeEnemyKeepApproachTile(int playerID)
     {
-        int keepX = DAT_GameState::instance.playerDataArray[playerID].campground.xEntry;
         int keepY = DAT_GameState::instance.playerDataArray[playerID].campground.yEntry;
         this->aiBorderTilesIndex = 0;
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
@@ -30,7 +29,8 @@ namespace AI {
         for (int i = 0; i < (int)this->aiBorderTilesIndex; i++) {
             int tile = this->aiBorderTiles[i].tile;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
-                DAT_DirectionAlgorithmState::ptr)(keepX, keepY,
+                DAT_DirectionAlgorithmState::ptr)(DAT_GameState::instance.playerDataArray[playerID].campground.xEntry,
+                keepY,
                 tile
                     - DAT_ViewportRenderState::instance
                         .translationMatrix[DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile]]
