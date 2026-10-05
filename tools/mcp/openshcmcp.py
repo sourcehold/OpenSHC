@@ -111,7 +111,7 @@ def extract_multiple_functions_assembly_diffs(function_names: List[str], match_p
   Returns:
     Tuple of (success, diffs of the functions, stdout, stderr)
   """
-  cmd = [str(cwd / "reccmp" / "dll" / "run.bat"), "reccmp-reccmp", "--target", "STRONGHOLDCRUSADER", "--json", "diff.json"]
+  cmd = [str(cwd / "reccmp" / "dll" / "run.bat"), "reccmp-reccmp", "--target", "STRONGHOLDCRUSADER", "--json", "diff.json", "--resolve-wrapped-calls"]
   
   try:
     result = subprocess.run(
