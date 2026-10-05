@@ -118,8 +118,10 @@ namespace AI {
                         if (step > this->aivs[aivID].totalSteps) {
                             this->aivs[aivID].totalSteps = step;
                         }
+                        this->isHandled[index] = 1;
+                    } else {
+                        this->isHandled[index] = 1;
                     }
-                    this->isHandled[index] = 1;
                 }
             }
         } while (selected);
