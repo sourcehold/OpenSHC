@@ -53,10 +53,9 @@ namespace Map {
             return;
         }
 
+        int moatX = tile - DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile;
         if ((logic & (L_MOAT_DUG_OR_PLANNED | L_MOAT)) == 0 && this->HeightLayer[tile] <= 0xc) {
-            if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::createMoatData, this)(
-                    playerID, tile - DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile, tileY, 0)
-                != 0) {
+            if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::createMoatData, this)(playerID, moatX, tileY, 0) != 0) {
                 this->LogicLayer[tile] = this->LogicLayer[tile] | L_MOAT_DUG_OR_PLANNED;
             }
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
