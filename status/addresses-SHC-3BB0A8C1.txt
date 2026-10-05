@@ -50803,7 +50803,7 @@ SHC_3BB0A8C1_0x00534130 | 79.7% | reg alloc differs
 
 SHC_3BB0A8C1_0x00534240 | 29.0% | orig walks matrix row ptrs
 
-SHC_3BB0A8C1_0x00534380 | 77.6% | orig walks matrix row ptr
+SHC_3BB0A8C1_0x00534380 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005343C0 | 0.0% | Pending
 
