@@ -15,17 +15,14 @@ namespace AI {
         int quarryID
             = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::findFirstBuildingIDForPlayerAndType,
                 DAT_BuildingsState::ptr)(playerID, OpenSHC::Map::Buildings::BT_QUARRY);
-        int highestStonePerTether = 0;
         int highestQuarryID = 0;
+        int highestStonePerTether = 0;
         if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::countBuildingsForPlayer,
                 DAT_BuildingsState::ptr)(playerID, OpenSHC::Map::Buildings::BT_OXTETHER, 1)
             >= 10)
             return 0;
 
         DAT_GameState::instance.playerDataArray[playerID].highestLoadedQuarryUnk = 0;
-        if (quarryID == 0)
-            return 0;
-
         for (; quarryID != 0;
             quarryID = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::findNextBuildingForPlayerAndType,
                 DAT_BuildingsState::ptr)(playerID, OpenSHC::Map::Buildings::BT_QUARRY, quarryID)) {
@@ -55,10 +52,11 @@ namespace AI {
             }
         }
 
-        if (highestStonePerTether <= 20)
-            return 0;
-        DAT_GameState::instance.playerDataArray[playerID].highestLoadedQuarryUnk = highestQuarryID;
-        return 1;
+        if (highestStonePerTether > 20) {
+            DAT_GameState::instance.playerDataArray[playerID].highestLoadedQuarryUnk = highestQuarryID;
+            return 1;
+        }
+        return 0;
     }
 
 }
