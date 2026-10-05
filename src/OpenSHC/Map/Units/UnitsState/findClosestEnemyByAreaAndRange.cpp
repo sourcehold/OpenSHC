@@ -18,18 +18,18 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00537C10
         int UnitsState::findClosestEnemyByAreaAndRange(int range, uint x, uint y, int playerID)
         {
-            if (x >= 400 || y >= 400) {
+            int _bestScore = 10000;
+            int _bestUnitID = 0;
+            if (x > 0x18f || y > 0x18f) {
                 return 0;
             }
             if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
                 return 0;
             }
-            this->unusedUnitIDArrayIndex = 0;
             dword _areaOfOrigin
                 = (short)DAT_TileMapState::instance
                       .PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x];
-            int _bestScore = 10000;
-            int _bestUnitID = 0;
+            this->unusedUnitIDArrayIndex = 0;
             for (int unitID = 1; unitID < (int)this->maxUnitCount; ++unitID) {
                 if (this->units[unitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
                     continue;
@@ -52,13 +52,14 @@ namespace Map {
                 }
                 MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                     DAT_DirectionAlgorithmState::ptr)(x, y, this->units[unitID].x, this->units[unitID].y);
-                if (DAT_DirectionAlgorithmState::instance.distanceHigh > range) {
+                int _distance = DAT_DirectionAlgorithmState::instance.distanceHigh;
+                if (_distance > range) {
                     continue;
                 }
-                if (DAT_TileMapState::instance.PathConnectionLayer[this->units[unitID].tile] != _areaOfOrigin) {
+                if ((short)DAT_TileMapState::instance.PathConnectionLayer[this->units[unitID].tile] != _areaOfOrigin) {
                     continue;
                 }
-                int _score = DAT_DirectionAlgorithmState::instance.distanceHigh + this->units[unitID].huntedBy * 3;
+                int _score = _distance + this->units[unitID].huntedBy * 3;
                 if (_score < _bestScore) {
                     _bestScore = _score;
                     _bestUnitID = unitID;
