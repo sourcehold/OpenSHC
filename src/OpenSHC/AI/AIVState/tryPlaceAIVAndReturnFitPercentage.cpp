@@ -33,10 +33,11 @@ namespace AI {
         }
         this->aivs[aivID].aivSubType = 1;
         // the counters are declared unsigned but used as signed values
-        if ((int)this->buildingCounter == 0) {
+        int const buildingCounter = this->buildingCounter;
+        if (buildingCounter == 0) {
             return 100;
         }
-        return ((int)this->buildingCounter - (int)this->invalidTileCounter) * 100 / (int)this->buildingCounter;
+        return (buildingCounter - (int)this->invalidTileCounter) * 100 / buildingCounter;
     }
 
 }
