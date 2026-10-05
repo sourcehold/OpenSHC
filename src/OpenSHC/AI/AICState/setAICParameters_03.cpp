@@ -13,8 +13,6 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004C7520
     void AICState::setAICParameters_03(int aicIndex)
     {
-        this->aics[aicIndex].minimumWheat = -1;
-        this->aics[aicIndex].minimumHop = -1;
         this->aics[aicIndex].flagType = 0xc;
         this->aics[aicIndex].unknown002 = 0;
         this->aics[aicIndex].unknown001 = 0;
@@ -33,6 +31,8 @@ namespace AI {
         this->aics[aicIndex].minimumApples = 10;
         this->aics[aicIndex].minimumCheese = 10;
         this->aics[aicIndex].minimumBread = 10;
+        this->aics[aicIndex].minimumWheat = -1;
+        this->aics[aicIndex].minimumHop = -1;
         this->aics[aicIndex].tradeAmountFood = 5;
         this->aics[aicIndex].tradeAmountEquipment = 4;
         this->aics[aicIndex].aiRequestDelay = 0xc;
@@ -80,26 +80,30 @@ namespace AI {
         this->aics[aicIndex].recruitProbDefStrong = 0x1e;
         this->aics[aicIndex].recruitProbRaidWeak = 0;
         this->aics[aicIndex].recruitProbRaidDefault = 0;
-        this->aics[aicIndex].RecruitIntervalWeak = 1;
-        this->aics[aicIndex].RecruitInterval = 1;
-        this->aics[aicIndex].RecruitIntervalStrong = 4;
-        this->aics[aicIndex].SortieUnitRangedMin = 4;
-        this->aics[aicIndex].SortieUnitMeleeMin = 5;
-        this->aics[aicIndex].SortieUnitRanged = 0x17;
-        this->aics[aicIndex].SortieUnitMelee = 0x1a;
-        this->aics[aicIndex].OuterPatrolRallyDelay = 0x14;
-        this->aics[aicIndex].RaidUnitsRandom = 5;
         this->aics[aicIndex].recruitProbRaidStrong = 0;
         this->aics[aicIndex].recruitProbAttackWeak = 0;
         this->aics[aicIndex].recruitProbAttackDefault = 0x28;
         this->aics[aicIndex].recruitProbAttackStrong = 0x46;
+        this->aics[aicIndex].RecruitIntervalWeak = 1;
+        this->aics[aicIndex].RecruitInterval = 1;
+        this->aics[aicIndex].RecruitIntervalStrong = 4;
+        this->aics[aicIndex].SortieUnitRangedMin = 4;
+        this->aics[aicIndex].SortieUnitRanged = 0x17;
+        this->aics[aicIndex].SortieUnitMeleeMin = 5;
+        this->aics[aicIndex].SortieUnitMelee = 0x1a;
         this->aics[aicIndex].DefDiggingUnitMax = 0;
         this->aics[aicIndex].DefDiggingUnit = 0x18;
         this->aics[aicIndex].DefWalls = 0x1e;
         this->aics[aicIndex].DefTotal = 0x28;
         this->aics[aicIndex].OuterPatrolGroupsCount = 2;
         this->aics[aicIndex].OuterPatrolGroupsMove = 1;
+        this->aics[aicIndex].OuterPatrolRallyDelay = 0x14;
+        this->aics[aicIndex].DefUnit1 = 0x17;
+        this->aics[aicIndex].DefUnit2 = 0x17;
         this->aics[aicIndex].RaidUnitsBase = 10;
+        this->aics[aicIndex].RaidUnitsRandom = 5;
+        this->aics[aicIndex].DefUnit3 = 0x17;
+        this->aics[aicIndex].RaidUnit1 = 0x1a;
         this->aics[aicIndex].HarassingSiegeEnginesMax = 2;
         this->aics[aicIndex].HarassingSiegeEngine1 = 0xbe;
         this->aics[aicIndex].RaidRetargetDelay = 3;
@@ -107,10 +111,6 @@ namespace AI {
         this->aics[aicIndex].AttForceRandom = 10;
         this->aics[aicIndex].AttForceSupportAllyThreshold = 10;
         this->aics[aicIndex].AttForceRallyPercentage = 0x3c;
-        this->aics[aicIndex].DefUnit1 = 0x17;
-        this->aics[aicIndex].DefUnit2 = 0x17;
-        this->aics[aicIndex].DefUnit3 = 0x17;
-        this->aics[aicIndex].RaidUnit1 = 0x1a;
         this->aics[aicIndex].AttMovingTribesThreshold = 100;
         this->aics[aicIndex].AttAssaultDelay = 5;
         this->aics[aicIndex].AttUnitPatrolRecommandDelay = 0xf;
