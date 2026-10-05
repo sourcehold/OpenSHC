@@ -17,11 +17,14 @@ namespace AI {
         if (DAT_GameState::instance.playerDataArray[owner].aiType == AITA_NULL)
             return;
 
-        AIVUnitType aivUnitType = MACRO_CALL_MEMBER(AICState_Func::getUnitTypeIndexForUnitID, this)(unitID,
-            DAT_GameState::instance.playerDataArray[owner].aivCurrentPauseIndex == 1
-                    && DAT_GameState::instance.playerDataArray[owner].aivPauses[1] > 0
-                ? 1
-                : 0);
+        AIVUnitType aivUnitType;
+        if (DAT_GameState::instance.playerDataArray[owner].aivCurrentPauseIndex == 1
+            && DAT_GameState::instance.playerDataArray[owner]
+                    .aivPauses[DAT_GameState::instance.playerDataArray[owner].aivCurrentPauseIndex]
+                > 0)
+            aivUnitType = MACRO_CALL_MEMBER(AICState_Func::getUnitTypeIndexForUnitID, this)(unitID, 1);
+        else
+            aivUnitType = MACRO_CALL_MEMBER(AICState_Func::getUnitTypeIndexForUnitID, this)(unitID, 0);
         DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType = 1;
         if (DAT_GameState::instance.playerDataArray[owner].aivUnitLocationSlotLocationCount[aivUnitType] <= 0) {
             if (MACRO_CALL_MEMBER(AICState_Func::unitIDIsRangedOrArmored, this)(unitID) != 0) {
