@@ -10,6 +10,9 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004EE140
     void AIVState::findAppropriateWoodCutterGridLocation(int playerID)
     {
+        int bestScore = -100;
+        uint bestX = -1;
+        uint bestY = -1;
         this->algAIndex = 0;
         int foundCount = 0;
         this->visitCount = 1;
@@ -20,9 +23,6 @@ namespace AI {
         this->heatMapYArray[0] = campY;
         this->buildingApproriateGridXPosition = -1;
         this->buildingAppropriateGridYPosition = -1;
-        int bestScore = -100;
-        uint bestX = -1;
-        uint bestY = -1;
         if (DAT_GameState::instance.playerDataArray[playerID].algoTreeCooldownUnk > 0) {
             --DAT_GameState::instance.playerDataArray[playerID].algoTreeCooldownUnk;
             return;
@@ -58,8 +58,7 @@ namespace AI {
                 }
                 if (notInLargestArea < 6 && (char)this->heatMaps[gridX][gridY].treeCount > 0) {
                     ++foundCount;
-                    int score
-                        = (char)this->heatMaps[gridX][gridY].treeCount * 5 - this->visitCount * 3;
+                    int score = (char)this->heatMaps[gridX][gridY].treeCount * 5 - this->visitCount * 3;
                     // prefer cells that were not used for a woodcutter recently
                     if (this->heatMaps[gridX][gridY].woodRelatedCountdownTo0) {
                         if (score > 0) {
