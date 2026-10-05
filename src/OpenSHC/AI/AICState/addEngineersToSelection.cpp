@@ -18,7 +18,7 @@ namespace AI {
             = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(playerID);
         for (int unitID = 1; unitID < (int)DAT_UnitsState::instance.maxUnitCount; unitID++) {
             if (unitCount <= 0)
-                return tribeID;
+                break;
             if (DAT_UnitsState::instance.units[unitID].logicalState != Map::Units::ULS_NORMAL)
                 continue;
             if (DAT_UnitsState::instance.units[unitID].owner != playerID)
