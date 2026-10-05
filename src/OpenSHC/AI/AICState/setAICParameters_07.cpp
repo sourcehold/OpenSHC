@@ -10,10 +10,6 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004C8530
     void AICState::setAICParameters_07(int aicIndex)
     {
-        this->aics[aicIndex].minimumCheese = -1;
-        this->aics[aicIndex].minimumBread = -1;
-        this->aics[aicIndex].minimumWheat = -1;
-        this->aics[aicIndex].minimumHop = -1;
         this->aics[aicIndex].flagType = 10;
         this->aics[aicIndex].unknown002 = 0;
         this->aics[aicIndex].unknown001 = 0;
@@ -30,6 +26,10 @@ namespace AI {
         this->aics[aicIndex].unknown011 = 0x14;
         this->aics[aicIndex].maxFood = 500;
         this->aics[aicIndex].minimumApples = 0x14;
+        this->aics[aicIndex].minimumCheese = -1;
+        this->aics[aicIndex].minimumBread = -1;
+        this->aics[aicIndex].minimumWheat = -1;
+        this->aics[aicIndex].minimumHop = -1;
         this->aics[aicIndex].tradeAmountFood = 10;
         this->aics[aicIndex].tradeAmountEquipment = 0;
         this->aics[aicIndex].aiRequestDelay = 0x1e;
