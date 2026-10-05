@@ -37871,7 +37871,7 @@ SHC_3BB0A8C1_0x004ECA90 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004ECAB0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004ECAD0 | 98.6% | Reimplemented
+SHC_3BB0A8C1_0x004ECAD0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004ECBC0 | 68.6% | orig branch shape; registers differ
 
@@ -37885,7 +37885,7 @@ SHC_3BB0A8C1_0x004ECDE0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004ECDF0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004ECE60 | 97.8% | Reimplemented
+SHC_3BB0A8C1_0x004ECE60 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004ECEF0 | 100.0% | Reimplemented
 
@@ -37923,21 +37923,21 @@ SHC_3BB0A8C1_0x004ED0A4 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004ED0A8 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004ED0B0 | 95.3% | Reimplemented
+SHC_3BB0A8C1_0x004ED0B0 | 97.2% | Reimplemented
 
-SHC_3BB0A8C1_0x004ED240 | 94.7% | Reimplemented
+SHC_3BB0A8C1_0x004ED240 | 98.2% | Reimplemented
 
-SHC_3BB0A8C1_0x004ED300 | 96.2% | Reimplemented
+SHC_3BB0A8C1_0x004ED300 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004ED3B0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004ED410 | 95.3% | orig branches to a shared return
 
-SHC_3BB0A8C1_0x004EDC90 | 85.7% | Reimplemented
+SHC_3BB0A8C1_0x004EDC90 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004EDCB0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004EDD00 | 97.6% | Reimplemented
+SHC_3BB0A8C1_0x004EDD00 | 98.8% | Reimplemented
 
 SHC_3BB0A8C1_0x004EDDF0 | 100.0% | Reimplemented
 
@@ -37961,9 +37961,9 @@ SHC_3BB0A8C1_0x004EEEC0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004EEF20 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004EF090 | 90.0% | Reimplemented
+SHC_3BB0A8C1_0x004EF090 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004EF0D0 | 65.7% | orig spills y in loop 1, we ke
+SHC_3BB0A8C1_0x004EF0D0 | 67.0% | orig spills y in loop 1, we ke
 
 SHC_3BB0A8C1_0x004EF130 | 0.0% | Pending
 
@@ -37977,29 +37977,29 @@ SHC_3BB0A8C1_0x004EF900 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004EF920 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004EFA60 | 91.9% | Reimplemented
+SHC_3BB0A8C1_0x004EFA60 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004EFAB0 | 82.8% | Register reuse after search
+SHC_3BB0A8C1_0x004EFAB0 | 91.4% | Register reuse after search
 
-SHC_3BB0A8C1_0x004EFB90 | 97.7% | Reimplemented
+SHC_3BB0A8C1_0x004EFB90 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004EFC30 | 96.0% | Reimplemented
+SHC_3BB0A8C1_0x004EFC30 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004EFD90 | 91.1% | Reimplemented
+SHC_3BB0A8C1_0x004EFD90 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004EFE30 | 91.1% | Reimplemented
+SHC_3BB0A8C1_0x004EFE30 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004EFED0 | 93.8% | Reimplemented
+SHC_3BB0A8C1_0x004EFED0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004F0060 | 36.7% | aiType - 1 chain; registers differ
 
 SHC_3BB0A8C1_0x004F0690 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004F0E80 | 87.8% | rest is scheduling + a hoisted
+SHC_3BB0A8C1_0x004F0E80 | 88.9% | rest is scheduling + a hoisted
 
 SHC_3BB0A8C1_0x004F1190 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004F13E0 | 83.3% | Reimplemented
+SHC_3BB0A8C1_0x004F13E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004F13F0 | 100.0% | Reimplemented
 
