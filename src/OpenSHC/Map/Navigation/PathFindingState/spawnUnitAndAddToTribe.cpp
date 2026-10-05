@@ -59,7 +59,7 @@ namespace Map {
                     if (0x117cdef < (int)local_4)
                         break;
                     this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                    if (0x13a0f < this->searchQueue.readIndex) {
+                    if (0x13a10 <= this->searchQueue.readIndex) {
                         this->searchQueue.readIndex = 0;
                     }
                 } while (this->searchQueue.readIndex != this->searchQueue.writeIndex);
