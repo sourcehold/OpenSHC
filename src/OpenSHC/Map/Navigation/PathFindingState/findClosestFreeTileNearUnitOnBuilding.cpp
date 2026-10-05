@@ -29,7 +29,7 @@ namespace Map {
             int iVar5;
             int _lowestDist;
             uint _tile;
-            ushort _unitArea;
+            int _unitArea;
             int _x;
             int _y;
             this->searchGeneration = this->searchGeneration + 1;
@@ -43,7 +43,7 @@ namespace Map {
             this->searchQueue.currentDistance = 1;
             this->searchQueue.readIndex = 0;
             this->searchQueue.writeIndex = 1;
-            _unitArea = DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile];
+            _unitArea = (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile];
             *pX = (int)DAT_UnitsState::instance.units[unitID].x;
             *pY = (int)DAT_UnitsState::instance.units[unitID].y;
             this->searchQueue.yQueue[0] = DAT_UnitsState::instance.units[unitID].y;
@@ -85,7 +85,7 @@ namespace Map {
                 for (int _direction = 0; _direction < 8; _direction = _direction + 2) {
                     int _candidate = DAT_TileMapState::instance.directionTranslationMatrix[iVar5][_direction] + _tile;
                     if (DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration
-                        && DAT_TileMapState::instance.PathConnectionLayer[_candidate] == _unitArea
+                        && (short)DAT_TileMapState::instance.PathConnectionLayer[_candidate] == _unitArea
                         && DAT_TileMapState::instance.BuildingLayer[_candidate] == buildingID
                         && DAT_TileMapState::instance.UnitLayer[_candidate] == 0) {
                         /*
