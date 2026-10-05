@@ -16,9 +16,9 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004F13F0
     void AIVState::selectBestAIVwithRandomStart(int aivID)
     {
-        uint castleID = (byte)SEC_RNG::instance.currentNumber2 & 7;
         int bestFit = 0;
         int bestCastleID = -1;
+        uint castleID = (byte)SEC_RNG::instance.currentNumber2 & 7;
         MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
         MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
             sizeof(this->isHandled), 0, this->isHandled);
