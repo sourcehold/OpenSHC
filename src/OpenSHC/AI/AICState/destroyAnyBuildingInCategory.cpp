@@ -21,7 +21,7 @@ namespace AI {
             if (DAT_BuildingsState::instance.buildings[buildingID].owner != playerID)
                 continue;
 
-            bool matches = false;
+            bool matches = true;
             if (buildingCategory == AINDBC_FEAR_FACTOR_BUILDINGS)
                 matches = DAT_BuildingsState::instance.buildings[buildingID].buildingType == BT_CESSPIT
                     || DAT_BuildingsState::instance.buildings[buildingID].buildingType == BT_BURNINGSTAKE
