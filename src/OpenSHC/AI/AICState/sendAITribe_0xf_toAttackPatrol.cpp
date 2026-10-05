@@ -13,17 +13,18 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CF4F0
     void AICState::sendAITribe_0xf_toAttackPatrol(int playerID)
     {
+        int tribeIndex = 15;
         if (DAT_GameState::instance.playerDataArray[playerID].aiType == AITA_NULL) {
             return;
         }
 
         // Bug: only tribe 15 is sent, although tribe 16 can also exist if 'AIC: AttUnitPatrolGroupsCount' is 2
-        int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[15];
+        int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[tribeIndex];
         if (tribeID == 0) {
             return;
         }
         if (DAT_TribesState::instance.tribes[tribeID].uid
-            != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[15]) {
+            != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[tribeIndex]) {
             return;
         }
         if (DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID == 0) {
