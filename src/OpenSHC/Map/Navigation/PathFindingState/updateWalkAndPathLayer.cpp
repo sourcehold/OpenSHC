@@ -104,7 +104,7 @@ namespace Map {
                         this->searchQueue.yQueue[this->searchQueue.writeIndex] = psVar6[4] + sVar1;
                         this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar8;
                         this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                        if (0x13a0f < this->searchQueue.writeIndex) {
+                        if (0x13a10 <= this->searchQueue.writeIndex) {
                             this->searchQueue.writeIndex = 0;
                         }
                     }
@@ -118,7 +118,7 @@ namespace Map {
                         this->searchQueue.yQueue[this->searchQueue.writeIndex] = psVar6[8] + sVar1;
                         this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar8;
                         this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                        if (0x13a0f < this->searchQueue.writeIndex) {
+                        if (0x13a10 <= this->searchQueue.writeIndex) {
                             this->searchQueue.writeIndex = 0;
                         }
                     }
@@ -132,7 +132,7 @@ namespace Map {
                         this->searchQueue.yQueue[this->searchQueue.writeIndex] = psVar6[0xc] + sVar1;
                         this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar8;
                         this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                        if (0x13a0f < this->searchQueue.writeIndex) {
+                        if (0x13a10 <= this->searchQueue.writeIndex) {
                             this->searchQueue.writeIndex = 0;
                         }
                     }
@@ -140,7 +140,7 @@ namespace Map {
                     psVar6 = psVar6 + 0x10;
                 } while ((int)psVar6 < 0xb4908c);
                 this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                if (0x13a0f < this->searchQueue.readIndex) {
+                if (0x13a10 <= this->searchQueue.readIndex) {
                     this->searchQueue.readIndex = 0;
                 }
             }
