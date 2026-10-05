@@ -92,10 +92,12 @@ namespace AI {
             DAT_GameState::instance.playerDataArray[playerID].aiStrengthFeeling = OpenSHC::AI::AIST_WEAK;
 
         // the three recruitProb* triples are laid out as Default, Weak, Strong, matching AIStrengthType
-        int _aiStrengthFeeling = DAT_GameState::instance.playerDataArray[playerID].aiStrengthFeeling;
-        int _recruitProbDefensive = (&this->aics[_aicIndex].recruitProbDefDefault)[_aiStrengthFeeling];
-        int _recruitProbAttack = (&this->aics[_aicIndex].recruitProbAttackDefault)[_aiStrengthFeeling];
-        int _recruitProbRaid = (&this->aics[_aicIndex].recruitProbRaidDefault)[_aiStrengthFeeling];
+        int _recruitProbDefensive = (&this->aics[_aicIndex]
+                .recruitProbDefDefault)[DAT_GameState::instance.playerDataArray[playerID].aiStrengthFeeling];
+        int _recruitProbAttack = (&this->aics[_aicIndex]
+                .recruitProbAttackDefault)[DAT_GameState::instance.playerDataArray[playerID].aiStrengthFeeling];
+        int _recruitProbRaid = (&this->aics[_aicIndex]
+                .recruitProbRaidDefault)[DAT_GameState::instance.playerDataArray[playerID].aiStrengthFeeling];
         int _totalRecruitProb = _recruitProbAttack + _recruitProbRaid + _recruitProbDefensive;
 
         int _aiRecruitUnitChoice;
