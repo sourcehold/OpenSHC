@@ -79,11 +79,10 @@ namespace AI {
         if (DAT_GameState::instance.playerDataArray[playerID].aivCurrentPause != 0) {
             if (stepIncrement > 1) {
                 DAT_GameState::instance.playerDataArray[playerID].aivCurrentPause = 0;
-                isPausing = 1;
             } else {
                 --DAT_GameState::instance.playerDataArray[playerID].aivCurrentPause;
-                isPausing = 1;
             }
+            isPausing = 1;
         } else {
             int const pauseStep
                 = DAT_GameState::instance.playerDataArray[playerID]

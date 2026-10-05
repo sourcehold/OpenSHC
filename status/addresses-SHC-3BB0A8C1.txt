@@ -38005,7 +38005,7 @@ SHC_3BB0A8C1_0x004F13F0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004F14F0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004F15C0 | 63.1% | Register allocation
+SHC_3BB0A8C1_0x004F15C0 | 98.5% | init stores sit after the aivID branch
 
 SHC_3BB0A8C1_0x004F1860 | 79.7% | orig compares member directly
 
