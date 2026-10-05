@@ -172,36 +172,40 @@ namespace Map {
                                         != 0) {
                                     occluded = true;
                                 }
-                                if (((this->LogicLayer[this->directionTranslationMatrix[row][this->field86_0x5548ac] + tile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
+                                int rightTile = this->directionTranslationMatrix[row][this->field86_0x5548ac] + tile;
+                                if (((this->LogicLayer[rightTile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
                                     && MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag1, DAT_BuildingsState::ptr)(
-                                           this->BuildingLayer[this->directionTranslationMatrix[row][this->field86_0x5548ac] + tile])
+                                           this->BuildingLayer[rightTile])
                                         != 0)
-                                    || ((this->LogicLayer[this->directionTranslationMatrix[row][this->field86_0x5548ac] + tile] & L_WALL_OR_GATEHOUSE) != 0
-                                        && (this->LogicLayer[this->directionTranslationMatrix[row][this->field86_0x5548ac] + tile] & L_STOCKPILEUnk) == 0)) {
+                                    || ((this->LogicLayer[rightTile] & L_WALL_OR_GATEHOUSE) != 0
+                                        && (this->LogicLayer[rightTile] & L_STOCKPILEUnk) == 0)) {
                                     occluded = true;
                                 }
-                                if (((this->LogicLayer[this->directionTranslationMatrix[row][this->field85_0x5548a8] + tile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
+                                int leftTile = this->directionTranslationMatrix[row][this->field85_0x5548a8] + tile;
+                                if (((this->LogicLayer[leftTile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
                                     && MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag1, DAT_BuildingsState::ptr)(
-                                           this->BuildingLayer[this->directionTranslationMatrix[row][this->field85_0x5548a8] + tile])
+                                           this->BuildingLayer[leftTile])
                                         != 0)
-                                    || ((this->LogicLayer[this->directionTranslationMatrix[row][this->field85_0x5548a8] + tile] & L_WALL_OR_GATEHOUSE) != 0
-                                        && (this->LogicLayer[this->directionTranslationMatrix[row][this->field85_0x5548a8] + tile] & L_STOCKPILEUnk) == 0)) {
+                                    || ((this->LogicLayer[leftTile] & L_WALL_OR_GATEHOUSE) != 0
+                                        && (this->LogicLayer[leftTile] & L_STOCKPILEUnk) == 0)) {
                                     occluded = true;
                                 }
-                                if (((this->LogicLayer[this->directionTranslationMatrix[this->field88_0x5548b4 + row][this->field86_0x5548ac] + shadowTile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
+                                int rightTile2 = this->directionTranslationMatrix[this->field88_0x5548b4 + row][this->field86_0x5548ac] + shadowTile;
+                                if (((this->LogicLayer[rightTile2] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
                                     && MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag1, DAT_BuildingsState::ptr)(
-                                           this->BuildingLayer[this->directionTranslationMatrix[this->field88_0x5548b4 + row][this->field86_0x5548ac] + shadowTile])
+                                           this->BuildingLayer[rightTile2])
                                         != 0)
-                                    || ((this->LogicLayer[this->directionTranslationMatrix[this->field88_0x5548b4 + row][this->field86_0x5548ac] + shadowTile] & L_WALL_OR_GATEHOUSE) != 0
-                                        && (this->LogicLayer[this->directionTranslationMatrix[this->field88_0x5548b4 + row][this->field86_0x5548ac] + shadowTile] & L_STOCKPILEUnk) == 0)) {
+                                    || ((this->LogicLayer[rightTile2] & L_WALL_OR_GATEHOUSE) != 0
+                                        && (this->LogicLayer[rightTile2] & L_STOCKPILEUnk) == 0)) {
                                     occluded = true;
                                 }
-                                if (((this->LogicLayer[this->directionTranslationMatrix[this->field88_0x5548b4 + row][this->field85_0x5548a8] + shadowTile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
+                                int leftTile2 = this->directionTranslationMatrix[this->field88_0x5548b4 + row][this->field85_0x5548a8] + shadowTile;
+                                if (((this->LogicLayer[leftTile2] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
                                     && MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag1, DAT_BuildingsState::ptr)(
-                                           this->BuildingLayer[this->directionTranslationMatrix[this->field88_0x5548b4 + row][this->field85_0x5548a8] + shadowTile])
+                                           this->BuildingLayer[leftTile2])
                                         != 0)
-                                    || ((this->LogicLayer[this->directionTranslationMatrix[this->field88_0x5548b4 + row][this->field85_0x5548a8] + shadowTile] & L_WALL_OR_GATEHOUSE) != 0
-                                        && (this->LogicLayer[this->directionTranslationMatrix[this->field88_0x5548b4 + row][this->field85_0x5548a8] + shadowTile] & L_STOCKPILEUnk) == 0)) {
+                                    || ((this->LogicLayer[leftTile2] & L_WALL_OR_GATEHOUSE) != 0
+                                        && (this->LogicLayer[leftTile2] & L_STOCKPILEUnk) == 0)) {
                                     occluded = true;
                                 }
                                 shadowTile = shadowTile
@@ -212,20 +216,22 @@ namespace Map {
                                         != 0) {
                                     occluded = true;
                                 }
-                                if (((this->LogicLayer[this->directionTranslationMatrix[row + this->field88_0x5548b4 * 2][this->field86_0x5548ac] + shadowTile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
+                                int rightTile3 = this->directionTranslationMatrix[row + this->field88_0x5548b4 * 2][this->field86_0x5548ac] + shadowTile;
+                                if (((this->LogicLayer[rightTile3] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
                                     && MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag1, DAT_BuildingsState::ptr)(
-                                           this->BuildingLayer[this->directionTranslationMatrix[row + this->field88_0x5548b4 * 2][this->field86_0x5548ac] + shadowTile])
+                                           this->BuildingLayer[rightTile3])
                                         != 0)
-                                    || ((this->LogicLayer[this->directionTranslationMatrix[row + this->field88_0x5548b4 * 2][this->field86_0x5548ac] + shadowTile] & L_WALL_OR_GATEHOUSE) != 0
-                                        && (this->LogicLayer[this->directionTranslationMatrix[row + this->field88_0x5548b4 * 2][this->field86_0x5548ac] + shadowTile] & L_STOCKPILEUnk) == 0)) {
+                                    || ((this->LogicLayer[rightTile3] & L_WALL_OR_GATEHOUSE) != 0
+                                        && (this->LogicLayer[rightTile3] & L_STOCKPILEUnk) == 0)) {
                                     occluded = true;
                                 }
-                                if (((this->LogicLayer[this->directionTranslationMatrix[row + this->field88_0x5548b4 * 2][this->field85_0x5548a8] + shadowTile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
+                                int leftTile3 = this->directionTranslationMatrix[row + this->field88_0x5548b4 * 2][this->field85_0x5548a8] + shadowTile;
+                                if (((this->LogicLayer[leftTile3] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
                                     && MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag1, DAT_BuildingsState::ptr)(
-                                           this->BuildingLayer[this->directionTranslationMatrix[row + this->field88_0x5548b4 * 2][this->field85_0x5548a8] + shadowTile])
+                                           this->BuildingLayer[leftTile3])
                                         != 0)
-                                    || ((this->LogicLayer[this->directionTranslationMatrix[row + this->field88_0x5548b4 * 2][this->field85_0x5548a8] + shadowTile] & L_WALL_OR_GATEHOUSE) != 0
-                                        && (this->LogicLayer[this->directionTranslationMatrix[row + this->field88_0x5548b4 * 2][this->field85_0x5548a8] + shadowTile] & L_STOCKPILEUnk) == 0)) {
+                                    || ((this->LogicLayer[leftTile3] & L_WALL_OR_GATEHOUSE) != 0
+                                        && (this->LogicLayer[leftTile3] & L_STOCKPILEUnk) == 0)) {
                                     occluded = true;
                                 }
                                 shadowTile = shadowTile
