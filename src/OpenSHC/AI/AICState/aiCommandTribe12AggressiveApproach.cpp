@@ -33,11 +33,10 @@ namespace AI {
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findLinkageBasedPathOrWalkRadius,
             DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[targetUnitID].x,
             DAT_UnitsState::instance.units[targetUnitID].y, -1, -1, 10000, FALSE);
-        int attackedPlayerID = DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID;
         DAT_TribesState::instance.tribes[tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
 
         if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findDestinationCostLowerThan6,
-                DAT_PathFindingState::ptr)(attackedPlayerID, 200)
+                DAT_PathFindingState::ptr)(DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID, 200)
                 == FALSE
             && MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findDestinationCostLowerThan6,
                    DAT_PathFindingState::ptr)(DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID, 150)

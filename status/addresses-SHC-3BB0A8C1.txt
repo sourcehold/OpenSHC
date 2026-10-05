@@ -35355,7 +35355,7 @@ SHC_3BB0A8C1_0x004CF180 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CF270 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CF2E0 | 83.4% | esi/edi regalloc differs
+SHC_3BB0A8C1_0x004CF2E0 | 94.7% | esi/edi regalloc differs
 
 SHC_3BB0A8C1_0x004CF400 | 100.0% | Reimplemented
 
