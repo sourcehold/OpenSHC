@@ -18,7 +18,9 @@ namespace Map {
     {
         if ((DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_SKIRMISH_AND_MULTIPLAYER)
             && (DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_SIEGE_THAT)) {
-            if ((int)(short)DAT_BuildingsState::instance.buildings[buildingID].buildingType - 0x28U <= 4) {
+            int buildingType = DAT_BuildingsState::instance.buildings[buildingID].buildingType;
+            if (buildingType >= OpenSHC::Map::Buildings::BT_MANORHOUSE
+                && buildingType <= OpenSHC::Map::Buildings::BT_KEEPFIVE) {
                 this->countdown = 0;
                 return;
             }
