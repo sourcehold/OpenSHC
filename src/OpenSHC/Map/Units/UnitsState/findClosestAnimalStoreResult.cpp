@@ -21,7 +21,9 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00537AA0
         int UnitsState::findClosestAnimalStoreResult(int maxDistance, BOOLEnum excludeCows, uint x, uint y)
         {
-            if (x > 399 || y > 399) {
+            int _bestUnitID = 0;
+            int _bestScore = 10000;
+            if (x > 0x18f || y > 0x18f) {
                 return 0;
             }
             if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
@@ -31,8 +33,6 @@ namespace Map {
                 = (short)DAT_TileMapState::instance
                       .PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x];
             this->unusedUnitIDArrayIndex = 0;
-            int _bestScore = 10000;
-            int _bestUnitID = 0;
             for (int unitID = 1; unitID < (int)this->maxUnitCount; ++unitID) {
                 if (this->units[unitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
                     continue;
@@ -57,15 +57,16 @@ namespace Map {
                 }
                 MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                     DAT_DirectionAlgorithmState::ptr)(x, y, this->units[unitID].x, this->units[unitID].y);
-                if (DAT_DirectionAlgorithmState::instance.distanceHigh > maxDistance) {
+                int _distance = DAT_DirectionAlgorithmState::instance.distanceHigh;
+                if (_distance > maxDistance) {
                     continue;
                 }
-                if (DAT_TileMapState::instance.PathConnectionLayer[this->units[unitID].tile] != _areaOfOrigin) {
+                if ((short)DAT_TileMapState::instance.PathConnectionLayer[this->units[unitID].tile] != _areaOfOrigin) {
                     continue;
                 }
                 this->unusedUnitIDArray[this->unusedUnitIDArrayIndex] = (short)unitID;
                 this->unusedUnitIDArrayIndex = this->unusedUnitIDArrayIndex + 1;
-                int _score = DAT_DirectionAlgorithmState::instance.distanceHigh + this->units[unitID].huntedBy * 3;
+                int _score = _distance + this->units[unitID].huntedBy * 3;
                 if (_score < _bestScore) {
                     _bestScore = _score;
                     _bestUnitID = unitID;
