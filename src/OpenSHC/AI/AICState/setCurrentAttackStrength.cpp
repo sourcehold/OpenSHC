@@ -11,10 +11,9 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CDE60
     void AICState::setCurrentAttackStrength(int playerID)
     {
-        int aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
-        if (aiType == AITA_NULL)
+        if (DAT_GameState::instance.playerDataArray[playerID].aiType == AITA_NULL)
             return;
-        int aicIndex = aiType - 1;
+        int aicIndex = DAT_GameState::instance.playerDataArray[playerID].aiType - 1;
         int randomPercent = SEC_RNG::instance.currentNumber2 % 100;
         MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
 
