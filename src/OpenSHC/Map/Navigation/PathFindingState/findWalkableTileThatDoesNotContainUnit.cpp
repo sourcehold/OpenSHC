@@ -28,15 +28,13 @@ namespace Map {
             short* psVar2;
             uint _absHeight;
             int (*paiVar3)[8];
-            ushort _area;
+            int _area;
             uint _heightDiff;
-            short _buildingHeight;
-            short _terrainHeight;
             int _tile;
             int _x;
             int _y;
-            _buildingHeight = DAT_UnitsState::instance.units[unitID].buildingHeight;
-            _terrainHeight = DAT_UnitsState::instance.units[unitID].terrainOrClimbHeight;
+            int _unitHeight = (short)DAT_UnitsState::instance.units[unitID].buildingHeight
+                + (short)DAT_UnitsState::instance.units[unitID].terrainOrClimbHeight;
             this->calculations = this->calculations + 1;
             this->ALG_ResultTile = 0;
             this->ALG_ResultY = 0;
@@ -61,16 +59,22 @@ namespace Map {
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             if ((DAT_TileMapState::instance.LogicLayer[this->searchQueue.tilesQueue[0]] & 0x30) == 0
                 && this->searchQueue.readIndex != this->searchQueue.writeIndex) {
-                while ((_tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex],
-                    -1 < _tile && (_tile < 0x13a10))) {
+                while (true) {
+                    _tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                    if (_tile < 0) {
+                        break;
+                    }
+                    if (0x13a10 <= _tile) {
+                        break;
+                    }
                     _x = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                     _y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
-                    if ((((short)DAT_TileMapState::instance.UnitLayer[_tile] == 0) || (considerUnits == 0))
+                    if ((((int)(short)DAT_TileMapState::instance.UnitLayer[_tile] == 0) || (considerUnits == 0))
                         && (short)DAT_TileMapState::instance.UnitLayer[_tile] != unitID
                         && _area == (short)DAT_TileMapState::instance.PathConnectionLayer[_tile]
                         && (_tHeight = MACRO_CALL_MEMBER(
                                 OpenSHC::Map::TileMapState_Func::getTotalHeightAtTile, DAT_TileMapState::ptr)(_tile),
-                            _heightDiff = ((int)_buildingHeight + (int)_terrainHeight) - _tHeight,
+                            _heightDiff = _unitHeight - _tHeight,
                             _absHeight = (int)_heightDiff >> 0x1f,
                             (int)((_heightDiff ^ _absHeight) - _absHeight) < 16)) {
                         this->ALG_ResultX = (int)_x;
@@ -79,7 +83,7 @@ namespace Map {
                         return;
                     }
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
-                    if (0x13a10 < this->searchQueue.currentDistance) {
+                    if (0x13a10 < (int)this->searchQueue.currentDistance) {
                         return;
                     }
                     for (int _direction = 0; _direction < 8; _direction = _direction + 2) {
@@ -101,14 +105,14 @@ namespace Map {
                                 + _y;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar1;
                             this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                            if (0x13a0f < this->searchQueue.writeIndex) {
+                            if (0x13a10 <= this->searchQueue.writeIndex) {
                                 this->searchQueue.writeIndex = 0;
                             }
                         }
                     }
 
                     this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                    if (0x13a0f < this->searchQueue.readIndex) {
+                    if (0x13a10 <= this->searchQueue.readIndex) {
                         this->searchQueue.readIndex = 0;
                     }
                     if (this->searchQueue.readIndex == this->searchQueue.writeIndex) {
