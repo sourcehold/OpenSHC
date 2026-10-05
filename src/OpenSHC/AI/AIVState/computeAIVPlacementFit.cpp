@@ -20,8 +20,7 @@ namespace AI {
         DAT_TileMapState::instance.buildingPlacementProperty_6 = 0;
         DAT_TileMapState::instance.buildingPlacementProperty_5 = 0;
         DAT_TileMapState::instance.buildingPlacementProperty_3 = 0;
-        int index = 0;
-        for (int y = 0; y < 100; ++y) {
+        for (int y = 0, index = 0; y < 100; ++y) {
             for (int x = 0; x < 100; ++x, ++index) {
                 int const type = this->constructions[index];
                 if (type == 0) {
@@ -48,8 +47,7 @@ namespace AI {
                     || !DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[realY * 400 + realX]) {
                     continue;
                 }
-                int const tile
-                    = DAT_ViewportRenderState::instance.translationMatrix[realY].addXgetTile + realX;
+                int const tile = DAT_ViewportRenderState::instance.translationMatrix[realY].addXgetTile + realX;
                 MACRO_CALL_MEMBER(Map::TileMapState_Func::storeMinAndMaxHeightOfArea, DAT_TileMapState::ptr)(
                     realX, realY, 1);
                 if (MACRO_CALL_MEMBER(Map::TileMapState_Func::isBuildingPlacementAllowedAtTile, DAT_TileMapState::ptr)(
