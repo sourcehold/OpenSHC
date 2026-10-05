@@ -38747,7 +38747,7 @@ SHC_3BB0A8C1_0x004F6C20 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004F6C60 | 92.3% | border index regalloc
 
-SHC_3BB0A8C1_0x004F6CF0 | 8.4% | 9.04% this in esi vs ecx regal
+SHC_3BB0A8C1_0x004F6CF0 | 9.0% | rolled unrolled loop
 
 SHC_3BB0A8C1_0x004F6DC0 | 0.0% | Pending
 

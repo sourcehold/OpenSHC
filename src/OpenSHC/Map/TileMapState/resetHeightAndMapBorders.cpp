@@ -21,31 +21,11 @@ namespace Map {
     {
         int inset = (400 - mapSize) / 2;
         this->mapSize = mapSize;
-        for (int tile = 0; tile < 80400; tile += 6) {
-            if ((this->LogicLayer[tile + 0] & (L_BORDER | L_BORDER_EDGE)) != 0) {
-                this->HeightLayer[tile + 0] = this->DefaultHeightLayer[tile + 0];
+        for (int tile = 0; tile < 80400; tile++) {
+            if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
+                this->HeightLayer[tile] = this->DefaultHeightLayer[tile];
             }
-            this->LogicLayer[tile + 0] = this->LogicLayer[tile + 0] & ~(L_BORDER | L_BORDER_EDGE);
-            if ((this->LogicLayer[tile + 1] & (L_BORDER | L_BORDER_EDGE)) != 0) {
-                this->HeightLayer[tile + 1] = this->DefaultHeightLayer[tile + 1];
-            }
-            this->LogicLayer[tile + 1] = this->LogicLayer[tile + 1] & ~(L_BORDER | L_BORDER_EDGE);
-            if ((this->LogicLayer[tile + 2] & (L_BORDER | L_BORDER_EDGE)) != 0) {
-                this->HeightLayer[tile + 2] = this->DefaultHeightLayer[tile + 2];
-            }
-            this->LogicLayer[tile + 2] = this->LogicLayer[tile + 2] & ~(L_BORDER | L_BORDER_EDGE);
-            if ((this->LogicLayer[tile + 3] & (L_BORDER | L_BORDER_EDGE)) != 0) {
-                this->HeightLayer[tile + 3] = this->DefaultHeightLayer[tile + 3];
-            }
-            this->LogicLayer[tile + 3] = this->LogicLayer[tile + 3] & ~(L_BORDER | L_BORDER_EDGE);
-            if ((this->LogicLayer[tile + 4] & (L_BORDER | L_BORDER_EDGE)) != 0) {
-                this->HeightLayer[tile + 4] = this->DefaultHeightLayer[tile + 4];
-            }
-            this->LogicLayer[tile + 4] = this->LogicLayer[tile + 4] & ~(L_BORDER | L_BORDER_EDGE);
-            if ((this->LogicLayer[tile + 5] & (L_BORDER | L_BORDER_EDGE)) != 0) {
-                this->HeightLayer[tile + 5] = this->DefaultHeightLayer[tile + 5];
-            }
-            this->LogicLayer[tile + 5] = this->LogicLayer[tile + 5] & ~(L_BORDER | L_BORDER_EDGE);
+            this->LogicLayer[tile] = this->LogicLayer[tile] & ~(L_BORDER | L_BORDER_EDGE);
         }
 
         /* the two outer diagonals of the diamond carry the border flags */
