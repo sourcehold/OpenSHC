@@ -14,6 +14,7 @@ namespace AI {
             = DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueOfTroopsNearKeep[playerID];
         int enemyTroopValue = DAT_GameState::instance.playerDataArray[playerID].totalEnemyTroopValue;
 
+        int isNotNervous = 1;
         int margin;
         if (enemyTroopValue < 50)
             margin = -20;
@@ -31,18 +32,15 @@ namespace AI {
             margin = 500;
 
         if (troopValueNearKeep > enemyTroopValue + margin) {
-            DAT_GameState::instance.playerDataArray[playerID].isNotNervousByEnemyTroopValue = 0;
-            return;
-        }
-
-        if (DAT_GameState::instance.playerDataArray[playerID].isNotNervousByEnemyTroopValue == 0) {
+            isNotNervous = 0;
+        } else if (DAT_GameState::instance.playerDataArray[playerID].isNotNervousByEnemyTroopValue == 0) {
             if (DAT_GameState::instance.playerDataArray[playerID]
                     .totalEnemyTroopValueByPlayerID[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                 > troopValueNearKeep)
                 MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::playNervous1BikFromPlayer, this)(playerID);
             MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::playRequestHelpBikFromPlayer, this)(playerID);
         }
-        DAT_GameState::instance.playerDataArray[playerID].isNotNervousByEnemyTroopValue = 1;
+        DAT_GameState::instance.playerDataArray[playerID].isNotNervousByEnemyTroopValue = isNotNervous;
     }
 
 }
