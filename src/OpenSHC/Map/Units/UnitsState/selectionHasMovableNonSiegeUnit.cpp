@@ -30,11 +30,11 @@ namespace Map {
                 if (this->units[DAT_CurrentUnitSlotID::instance].owner != _currentPlayerSlotID) {
                     return 0;
                 }
-                if ((short)this->units[DAT_CurrentUnitSlotID::instance].unitType < 40) {
+                int _unitType = this->units[DAT_CurrentUnitSlotID::instance].unitType;
+                if (_unitType < 40) {
                     return 1;
                 }
-                if ((short)this->units[DAT_CurrentUnitSlotID::instance].unitType > 41
-                    && this->units[DAT_CurrentUnitSlotID::instance].unitType != OpenSHC::Map::Units::UT_S_BALLISTA) {
+                if (_unitType > 41 && _unitType != OpenSHC::Map::Units::UT_S_BALLISTA) {
                     return 1;
                 }
             }

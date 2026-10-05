@@ -51115,7 +51115,7 @@ SHC_3BB0A8C1_0x00536190 | 72.4% | incr scheduled before call
 
 SHC_3BB0A8C1_0x005361F0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00536260 | 65.0% | type range test shape
+SHC_3BB0A8C1_0x00536260 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00536280 | 0.0% | Pending
 
