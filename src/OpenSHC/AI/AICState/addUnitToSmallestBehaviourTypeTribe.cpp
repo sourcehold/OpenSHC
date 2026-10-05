@@ -18,9 +18,8 @@ namespace AI {
             return 0;
 
         int aicIndex = aiType - 1;
-        int tribeType = DAT_SkirmishDefinedData::instance.AIUnitBehaviourTypeMapping[aiUnitBehaviourType - 10];
         int groupsCount;
-        switch (tribeType) {
+        switch (DAT_SkirmishDefinedData::instance.AIUnitBehaviourTypeMapping[aiUnitBehaviourType - 10]) {
         case 15:
             groupsCount = this->aics[aicIndex].AttUnitPatrolGroupsCount;
             break;
@@ -41,17 +40,21 @@ namespace AI {
         int selectedTribeID = 0;
         int selectedSlot = 0;
         if (groupsCount <= 1) {
-            int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[tribeType];
+            int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[DAT_SkirmishDefinedData::instance
+                    .AIUnitBehaviourTypeMapping[aiUnitBehaviourType - 10]];
             if (tribeID != 0
                 && DAT_TribesState::instance.tribes[tribeID].uid
-                    == DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[tribeType])
+                    == DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[DAT_SkirmishDefinedData::instance
+                            .AIUnitBehaviourTypeMapping[aiUnitBehaviourType - 10]])
                 return tribeID;
             selectedTribeID
                 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(playerID);
-            selectedSlot = tribeType;
+            selectedSlot = DAT_SkirmishDefinedData::instance.AIUnitBehaviourTypeMapping[aiUnitBehaviourType - 10];
         } else {
             int smallestSize = 1000;
-            for (int slot = tribeType; slot < tribeType + groupsCount; slot++) {
+            for (int slot = DAT_SkirmishDefinedData::instance.AIUnitBehaviourTypeMapping[aiUnitBehaviourType - 10]; slot
+                < DAT_SkirmishDefinedData::instance.AIUnitBehaviourTypeMapping[aiUnitBehaviourType - 10] + groupsCount;
+                slot++) {
                 int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[slot];
                 if (tribeID == 0
                     || DAT_TribesState::instance.tribes[tribeID].uid
