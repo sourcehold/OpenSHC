@@ -30,20 +30,23 @@ namespace AI {
                     if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[player] == -1) {
                         continue;
                     }
-                    int count;
                     if (DAT_GameSynchronyState::instance.DAT_ReceivedAIVFileAvailabilityPerAIArray[player][0] == -1) {
                         // nothing received yet
                         if (player != localPlayer) {
                             continue;
                         }
-                        count = this->aivFileAvailabilityPerAIArray[aiIndex];
+                        if (this->aivFileAvailabilityPerAIArray[aiIndex] == 0) {
+                            available = FALSE;
+                            break;
+                        }
                     } else if (player == localPlayer) {
-                        count = this->aivFileAvailabilityPerAIArray[aiIndex];
-                    } else {
-                        count = DAT_GameSynchronyState::instance
-                                    .DAT_ReceivedAIVFileAvailabilityPerAIArray[player][aiIndex];
-                    }
-                    if (count == 0) {
+                        if (this->aivFileAvailabilityPerAIArray[aiIndex] == 0) {
+                            available = FALSE;
+                            break;
+                        }
+                    } else if (DAT_GameSynchronyState::instance
+                                   .DAT_ReceivedAIVFileAvailabilityPerAIArray[player][aiIndex]
+                        == 0) {
                         available = FALSE;
                         break;
                     }

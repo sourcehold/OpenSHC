@@ -37873,7 +37873,7 @@ SHC_3BB0A8C1_0x004ECAB0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004ECAD0 | 98.6% | Reimplemented
 
-SHC_3BB0A8C1_0x004ECBC0 | 64.7% | BOOLEnum flags; gap is MSVC in
+SHC_3BB0A8C1_0x004ECBC0 | 68.6% | orig branch shape; registers differ
 
 SHC_3BB0A8C1_0x004ECCA0 | 0.0% | Pending
 
