@@ -39,7 +39,6 @@ namespace Map {
                 _hitboxYStart = DAT_MouseState::instance.hitboxYStart;
                 _hitboxYEnd = DAT_MouseState::instance.hitboxYEnd;
             }
-            int _currentPlayerSlotID = DAT_GameSynchronyState::instance.currentPlayerSlotID;
             for (DAT_CurrentUnitSlotID::instance = 1; (int)DAT_CurrentUnitSlotID::instance < (int)this->maxUnitCount;
                 DAT_CurrentUnitSlotID::instance = DAT_CurrentUnitSlotID::instance + 1) {
                 if (this->units[DAT_CurrentUnitSlotID::instance].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
@@ -55,7 +54,18 @@ namespace Map {
                     == OpenSHC::Map::Units::States::US_JESTER_ROAM_TO) {
                     continue;
                 }
-                if (DAT_MinimapViewState::instance.field15_0x3c == 0) {
+                if (DAT_MinimapViewState::instance.field15_0x3c != 0) {
+                    if (abs(DAT_ViewportRenderState::instance.viewportState.mouseTileX
+                            - this->units[DAT_CurrentUnitSlotID::instance].x)
+                        >= 2) {
+                        continue;
+                    }
+                    if (abs(DAT_ViewportRenderState::instance.viewportState.mouseTileY
+                            - this->units[DAT_CurrentUnitSlotID::instance].y)
+                        >= 2) {
+                        continue;
+                    }
+                } else {
                     if (this->units[DAT_CurrentUnitSlotID::instance].drawX == 0
                         && this->units[DAT_CurrentUnitSlotID::instance].drawY == 0) {
                         continue;
@@ -80,23 +90,6 @@ namespace Map {
                             + this->units[DAT_CurrentUnitSlotID::instance].drawY
                             + this->units[DAT_CurrentUnitSlotID::instance].someDrawYOffset
                         < _hitboxYStart) {
-                        continue;
-                    }
-                } else {
-                    int _tileDistanceX = DAT_ViewportRenderState::instance.viewportState.mouseTileX
-                        - this->units[DAT_CurrentUnitSlotID::instance].x;
-                    if (_tileDistanceX < 0) {
-                        _tileDistanceX = -_tileDistanceX;
-                    }
-                    if (_tileDistanceX > 1) {
-                        continue;
-                    }
-                    int _tileDistanceY = DAT_ViewportRenderState::instance.viewportState.mouseTileY
-                        - this->units[DAT_CurrentUnitSlotID::instance].y;
-                    if (_tileDistanceY < 0) {
-                        _tileDistanceY = -_tileDistanceY;
-                    }
-                    if (_tileDistanceY > 1) {
                         continue;
                     }
                 }
@@ -126,12 +119,14 @@ namespace Map {
                 case 1:
                     if (DAT_GameState::instance.mapAndTime
                             .playerTeams[this->units[DAT_CurrentUnitSlotID::instance].owner]
-                        != DAT_GameState::instance.mapAndTime.playerTeams[_currentPlayerSlotID]) {
+                        != DAT_GameState::instance.mapAndTime
+                            .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID]) {
                         return DAT_CurrentUnitSlotID::instance;
                     }
                     break;
                 case 2:
-                    if (this->units[DAT_CurrentUnitSlotID::instance].owner == _currentPlayerSlotID) {
+                    if (this->units[DAT_CurrentUnitSlotID::instance].owner
+                        == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         if (this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_S_CATAPULT
                             || this->units[DAT_CurrentUnitSlotID::instance].unitType
                                 == OpenSHC::Map::Units::UT_S_TREBUCHET
@@ -151,7 +146,8 @@ namespace Map {
                     }
                     break;
                 case 3:
-                    if (this->units[DAT_CurrentUnitSlotID::instance].owner == _currentPlayerSlotID) {
+                    if (this->units[DAT_CurrentUnitSlotID::instance].owner
+                        == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         return DAT_CurrentUnitSlotID::instance;
                     }
                     break;
@@ -162,14 +158,16 @@ namespace Map {
                     }
                     break;
                 case 5:
-                    if (this->units[DAT_CurrentUnitSlotID::instance].owner == _currentPlayerSlotID
+                    if (this->units[DAT_CurrentUnitSlotID::instance].owner
+                            == DAT_GameSynchronyState::instance.currentPlayerSlotID
                         && this->units[DAT_CurrentUnitSlotID::instance].isSelectable_OR_matchTime != 0) {
                         return DAT_CurrentUnitSlotID::instance;
                     }
                     break;
                 case 6:
                     if (this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_E_LADDER
-                        && this->units[DAT_CurrentUnitSlotID::instance].owner == _currentPlayerSlotID) {
+                        && this->units[DAT_CurrentUnitSlotID::instance].owner
+                            == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         return DAT_CurrentUnitSlotID::instance;
                     }
                 }
