@@ -10,11 +10,6 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CA8A0
     void AICState::setAICParameters_16(int aicIndex)
     {
-        this->aics[aicIndex].taxesMax = 0xc;
-        this->aics[aicIndex].farm2 = 0x1e;
-        this->aics[aicIndex].farm3 = 0x1e;
-        this->aics[aicIndex].aiRequestDelay = 0xc;
-        this->aics[aicIndex].maxFarms = 0xc;
         this->aics[aicIndex].flagType = 0xd;
         this->aics[aicIndex].unknown002 = 0;
         this->aics[aicIndex].unknown001 = 0;
@@ -25,7 +20,10 @@ namespace AI {
         this->aics[aicIndex].lowestPopularity = 5000;
         this->aics[aicIndex].highestPopularity = 9000;
         this->aics[aicIndex].taxesMin = 2;
+        this->aics[aicIndex].taxesMax = 0xc;
         this->aics[aicIndex].farm1 = 0x1f;
+        this->aics[aicIndex].farm2 = 0x1e;
+        this->aics[aicIndex].farm3 = 0x1e;
         this->aics[aicIndex].populationPerFarm = 4;
         this->aics[aicIndex].unknown011 = 10;
         this->aics[aicIndex].maxFood = 100;
@@ -36,6 +34,7 @@ namespace AI {
         this->aics[aicIndex].minimumHop = 2;
         this->aics[aicIndex].tradeAmountFood = 5;
         this->aics[aicIndex].tradeAmountEquipment = 0;
+        this->aics[aicIndex].aiRequestDelay = 0xc;
         this->aics[aicIndex].minimumGoodsRequiredAfterTrade = 10;
         this->aics[aicIndex].doubleRationsFoodThreshold = 0x28;
         this->aics[aicIndex].maxWood = 0x3c;
@@ -53,6 +52,7 @@ namespace AI {
         this->aics[aicIndex].maxIronmines = 2;
         this->aics[aicIndex].maxWoodcutters = 10;
         this->aics[aicIndex].maxPitchrigs = 0;
+        this->aics[aicIndex].maxFarms = 0xc;
         this->aics[aicIndex].buildInterval = 2;
         this->aics[aicIndex].resourceRebuildDelay = 0x28;
         this->aics[aicIndex].blacksmithSetting = 0x16;
@@ -76,9 +76,6 @@ namespace AI {
         this->aics[aicIndex].recruitProbDefDefault = 0x28;
         this->aics[aicIndex].recruitProbDefStrong = 0x14;
         this->aics[aicIndex].recruitProbRaidWeak = 10;
-        this->aics[aicIndex].SortieUnitRangedMin = 4;
-        this->aics[aicIndex].DefDiggingUnitMax = 4;
-        this->aics[aicIndex].RaidRetargetDelay = 4;
         this->aics[aicIndex].RecruitIntervalWeak = 1;
         this->aics[aicIndex].RecruitInterval = 1;
         this->aics[aicIndex].RecruitIntervalStrong = 1;
@@ -93,14 +90,17 @@ namespace AI {
         this->aics[aicIndex].recruitProbAttackWeak = 10;
         this->aics[aicIndex].recruitProbAttackDefault = 0x28;
         this->aics[aicIndex].recruitProbAttackStrong = 0x32;
+        this->aics[aicIndex].SortieUnitRangedMin = 4;
         this->aics[aicIndex].SortieUnitMeleeMin = 0x14;
         this->aics[aicIndex].SortieUnitMelee = 0x25;
+        this->aics[aicIndex].DefDiggingUnitMax = 4;
         this->aics[aicIndex].DefWalls = 0x1e;
         this->aics[aicIndex].DefTotal = 0x1e;
         this->aics[aicIndex].RaidUnitsBase = 0x1e;
         this->aics[aicIndex].RaidUnitsRandom = 10;
         this->aics[aicIndex].RaidUnit1 = 0x25;
         this->aics[aicIndex].HarassingSiegeEnginesMax = 5;
+        this->aics[aicIndex].RaidRetargetDelay = 4;
         this->aics[aicIndex].HarassingSiegeEngine1 = 0xbe;
         this->aics[aicIndex].AttForceBase = 0x32;
         this->aics[aicIndex].AttForceRandom = 10;
