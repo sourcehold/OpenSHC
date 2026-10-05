@@ -11,9 +11,9 @@ namespace AI {
     void AIVState::setKeepOffsetAndOrientation(int aivID, int keepX, int keepY)
     {
         // the AIV is 100x100 tiles with the keep at 43/43
-        this->aivs[aivID].keepXOffset = keepX - 43;
-        this->aivs[aivID].keepY = keepY;
         this->aivs[aivID].keepX = keepX;
+        this->aivs[aivID].keepY = keepY;
+        this->aivs[aivID].keepXOffset = keepX - 43;
         this->aivs[aivID].keepYOffset = keepY - 43;
         // orient the castle towards the map center
         MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::calculatePreferredRelativeOrientation,
