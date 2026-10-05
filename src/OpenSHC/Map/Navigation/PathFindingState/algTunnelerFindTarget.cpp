@@ -117,7 +117,7 @@ namespace Map {
                             paiVar8 = (int (*)[8])(*paiVar8 + 2);
                         } while ((int)psVar6 < 0xb4908c);
                         this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                        if (0x13a0f < this->searchQueue.readIndex) {
+                        if (0x13a10 <= this->searchQueue.readIndex) {
                             this->searchQueue.readIndex = 0;
                         }
                         if (this->searchQueue.readIndex == this->searchQueue.writeIndex) {
