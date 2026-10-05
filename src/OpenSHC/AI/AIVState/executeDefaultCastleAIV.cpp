@@ -5,6 +5,7 @@
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/AI/AIType.hpp"
+#include "OpenSHC/AI/AITypeA.hpp"
 
 #include "OpenSHC/Globals/DAT_AICState.hpp"
 #include "OpenSHC/Globals/DAT_AIVState.hpp"
@@ -22,6 +23,7 @@ namespace AI {
     BOOLEnum AIVState::executeDefaultCastleAIV(PlayerID playerID, int isPausing)
     {
         int const aivID = DAT_GameState::instance.playerDataArray[playerID].aivID;
+        int const aiType = DAT_GameState::instance.playerDataArray[playerID].aiType - 1;
         int stockpiles = 0;
         int hovels = 0;
         int granaries = 1;
@@ -43,12 +45,14 @@ namespace AI {
         int engineersGuilds = 0;
         int tunnelersGuilds = 0;
         int stables = 0;
-        if (DAT_GameState::instance.playerDataArray[playerID].aiType == AIT_RAT) {
+        if (aiType == AITA_RAT) {
             stockpiles = 0;
             hovels = 3;
             armories = 1;
             barracks = 1;
             mercenaryPosts = 0;
+            cathedrals = 0;
+            chapels = 0;
             inns = 0;
             breweries = 0;
             bakeries = 0;
@@ -58,57 +62,56 @@ namespace AI {
             tanners = 0;
             blacksmiths = 0;
             engineersGuilds = 0;
-            chapels = 0;
             armourers = 0;
-            cathedrals = 0;
             stables = 0;
             tunnelersGuilds = 0;
-        } else if (DAT_GameState::instance.playerDataArray[playerID].aiType == AIT_SNAKE) {
+        } else if (aiType == AITA_SNAKE) {
+            stockpiles = 2;
+            hovels = 4;
+            armories = 1;
+            barracks = 1;
             mercenaryPosts = 1;
+            cathedrals = 0;
+            chapels = 0;
+            inns = 0;
+            breweries = 0;
+            bakeries = 0;
+            mills = 0;
+            poleturners = 2;
+            fletchers = 2;
             tanners = 0;
             blacksmiths = 0;
-            poleturners = 2;
-            stockpiles = 2;
-            inns = 0;
-            mills = 0;
-            bakeries = 0;
-            breweries = 0;
-            armories = 1;
-            barracks = 1;
-            hovels = 4;
             engineersGuilds = 1;
-            fletchers = 2;
-            chapels = 0;
             armourers = 0;
-            cathedrals = 0;
             stables = 0;
             tunnelersGuilds = 0;
-        } else if (DAT_GameState::instance.playerDataArray[playerID].aiType == AIT_PIG) {
+        } else if (aiType == AITA_PIG) {
+            stockpiles = 2;
+            hovels = 4;
+            armories = 1;
+            barracks = 1;
             mercenaryPosts = 0;
+            cathedrals = 0;
+            chapels = 0;
+            inns = 0;
+            breweries = 0;
+            bakeries = 0;
+            mills = 0;
             poleturners = 0;
+            fletchers = 2;
             tanners = 2;
             blacksmiths = 2;
-            stockpiles = 2;
-            inns = 0;
-            mills = 0;
-            bakeries = 0;
-            breweries = 0;
-            armories = 1;
-            barracks = 1;
-            hovels = 4;
             engineersGuilds = 1;
-            fletchers = 2;
-            chapels = 0;
             armourers = 0;
-            cathedrals = 0;
             stables = 0;
             tunnelersGuilds = 0;
-        } else if (DAT_GameState::instance.playerDataArray[playerID].aiType == AIT_WOLF) {
+        } else if (aiType == AITA_WOLF) {
             stockpiles = 3;
             hovels = 5;
             armories = 1;
             barracks = 1;
             mercenaryPosts = 1;
+            cathedrals = 0;
             chapels = 2;
             inns = 2;
             breweries = 3;
@@ -118,52 +121,51 @@ namespace AI {
             fletchers = 2;
             tanners = 1;
             blacksmiths = 2;
-            armourers = 1;
             engineersGuilds = 1;
-            cathedrals = 0;
+            armourers = 1;
             stables = 0;
             tunnelersGuilds = 0;
-        } else if (DAT_GameState::instance.playerDataArray[playerID].aiType == AIT_SALADIN) {
+        } else if (aiType == AITA_SALADIN) {
             stockpiles = 3;
             hovels = 8;
+            armories = 0;
+            barracks = 0;
+            mercenaryPosts = 1;
+            cathedrals = 0;
+            chapels = 0;
             inns = 0;
             breweries = 0;
             bakeries = 4;
             mills = 2;
-            mercenaryPosts = 1;
-            barracks = 0;
-            armories = 0;
             poleturners = 0;
             fletchers = 0;
             tanners = 0;
             blacksmiths = 0;
             engineersGuilds = 1;
-            chapels = 0;
             armourers = 0;
-            cathedrals = 0;
             stables = 0;
             tunnelersGuilds = 0;
-        } else if (DAT_GameState::instance.playerDataArray[playerID].aiType == AIT_CALIPH) {
+        } else if (aiType == AITA_CALIPH) {
             stockpiles = 2;
+            hovels = 6;
+            armories = 0;
+            barracks = 0;
+            mercenaryPosts = 1;
+            cathedrals = 0;
+            chapels = 0;
             inns = 2;
             breweries = 5;
             bakeries = 0;
             mills = 0;
-            hovels = 6;
-            mercenaryPosts = 1;
-            barracks = 0;
-            armories = 0;
             poleturners = 0;
             fletchers = 0;
             tanners = 0;
             blacksmiths = 0;
             engineersGuilds = 1;
-            chapels = 0;
             armourers = 0;
-            cathedrals = 0;
             stables = 0;
             tunnelersGuilds = 0;
-        } else if (DAT_GameState::instance.playerDataArray[playerID].aiType == AIT_SULTAN) {
+        } else if (aiType == AITA_SULTAN) {
             stockpiles = 0;
             hovels = 3;
             armories = 0;
@@ -179,11 +181,11 @@ namespace AI {
             fletchers = 0;
             tanners = 0;
             blacksmiths = 0;
-            armourers = 0;
             engineersGuilds = 1;
-            tunnelersGuilds = 0;
+            armourers = 0;
             stables = 0;
-        } else if (DAT_GameState::instance.playerDataArray[playerID].aiType == AIT_RICHARD) {
+            tunnelersGuilds = 0;
+        } else if (aiType == AITA_RICHARD) {
             stockpiles = 2;
             hovels = 6;
             armories = 1;
@@ -199,13 +201,13 @@ namespace AI {
             fletchers = 2;
             tanners = 0;
             blacksmiths = 2;
-            armourers = 2;
             engineersGuilds = 1;
-            tunnelersGuilds = 1;
+            armourers = 2;
             stables = 0;
-        } else if (DAT_GameState::instance.playerDataArray[playerID].aiType == AIT_FREDERICK) {
-            hovels = 7;
+            tunnelersGuilds = 1;
+        } else if (aiType == AITA_FREDERICK) {
             stockpiles = 3;
+            hovels = 7;
             armories = 1;
             barracks = 1;
             mercenaryPosts = 0;
@@ -219,11 +221,11 @@ namespace AI {
             fletchers = 2;
             tanners = 2;
             blacksmiths = 2;
-            armourers = 2;
             engineersGuilds = 1;
-            tunnelersGuilds = 0;
+            armourers = 2;
             stables = 2;
-        } else if (DAT_GameState::instance.playerDataArray[playerID].aiType == AIT_PHILIPP) {
+            tunnelersGuilds = 0;
+        } else if (aiType == AITA_PHILIPP) {
             stockpiles = 2;
             hovels = 5;
             armories = 1;
@@ -239,51 +241,52 @@ namespace AI {
             fletchers = 2;
             tanners = 0;
             blacksmiths = 2;
-            armourers = 2;
             engineersGuilds = 1;
-            tunnelersGuilds = 0;
+            armourers = 2;
             stables = 5;
-        } else if (DAT_GameState::instance.playerDataArray[playerID].aiType == AIT_WAZIR) {
+            tunnelersGuilds = 0;
+        } else if (aiType == AITA_WAZIR) {
+            stockpiles = 2;
             hovels = 6;
             armories = 0;
             barracks = 0;
+            mercenaryPosts = 1;
+            cathedrals = 0;
+            chapels = 0;
             inns = 0;
             breweries = 0;
             bakeries = 3;
-            fletchers = 0;
-            mercenaryPosts = 1;
-            stockpiles = 2;
+            mills = 1;
             poleturners = 0;
-            chapels = 0;
-            cathedrals = 0;
+            fletchers = 0;
             tanners = 0;
             blacksmiths = 0;
-            armourers = 0;
-            tunnelersGuilds = 0;
-            stables = 0;
-            mills = 1;
             engineersGuilds = 1;
-        } else if (DAT_GameState::instance.playerDataArray[playerID].aiType == AIT_EMIR) {
+            armourers = 0;
+            stables = 0;
+            tunnelersGuilds = 0;
+        } else if (aiType == AITA_EMIR) {
+            stockpiles = 3;
             hovels = 7;
             armories = 1;
             barracks = 1;
+            mercenaryPosts = 1;
+            cathedrals = 0;
+            chapels = 0;
             inns = 1;
             breweries = 2;
             bakeries = 2;
-            fletchers = 1;
-            mercenaryPosts = 1;
-            stockpiles = 3;
+            mills = 1;
             poleturners = 0;
-            chapels = 0;
-            cathedrals = 0;
+            fletchers = 1;
             tanners = 0;
             blacksmiths = 0;
-            armourers = 0;
-            tunnelersGuilds = 0;
-            stables = 0;
-            mills = 1;
             engineersGuilds = 1;
-        } else if (DAT_GameState::instance.playerDataArray[playerID].aiType == AIT_NIZAR) {
+            armourers = 0;
+            stables = 0;
+            tunnelersGuilds = 0;
+        } else if (aiType == AITA_NIZAR) {
+            stockpiles = 2;
             hovels = 8;
             armories = 0;
             barracks = 0;
@@ -292,18 +295,17 @@ namespace AI {
             chapels = 0;
             inns = 1;
             breweries = 3;
-            mills = 1;
-            fletchers = 0;
-            stockpiles = 2;
-            poleturners = 0;
             bakeries = 4;
+            mills = 1;
+            poleturners = 0;
+            fletchers = 0;
             tanners = 0;
             blacksmiths = 0;
-            armourers = 0;
             engineersGuilds = 1;
-            tunnelersGuilds = 0;
+            armourers = 0;
             stables = 0;
-        } else if (DAT_GameState::instance.playerDataArray[playerID].aiType == AIT_SHERIFF) {
+            tunnelersGuilds = 0;
+        } else if (aiType == AITA_SHERIFF) {
             stockpiles = 3;
             hovels = 6;
             armories = 1;
@@ -319,11 +321,11 @@ namespace AI {
             fletchers = 2;
             tanners = 2;
             blacksmiths = 2;
-            armourers = 0;
             engineersGuilds = 1;
-            tunnelersGuilds = 0;
+            armourers = 0;
             stables = 0;
-        } else if (DAT_GameState::instance.playerDataArray[playerID].aiType == AIT_MARSHAL) {
+            tunnelersGuilds = 0;
+        } else if (aiType == AITA_MARSHAL) {
             stockpiles = 2;
             hovels = 5;
             armories = 1;
@@ -339,30 +341,30 @@ namespace AI {
             fletchers = 2;
             tanners = 0;
             blacksmiths = 2;
-            armourers = 2;
             engineersGuilds = 1;
-            tunnelersGuilds = 0;
+            armourers = 2;
             stables = 4;
-        } else if (DAT_GameState::instance.playerDataArray[playerID].aiType == AIT_ABBOT) {
-            mills = 2;
-            chapels = 5;
+            tunnelersGuilds = 0;
+        } else if (aiType == AITA_ABBOT) {
+            stockpiles = 2;
             hovels = 6;
             armories = 1;
             barracks = 1;
             mercenaryPosts = 0;
             cathedrals = 1;
+            chapels = 5;
             inns = 3;
             breweries = 6;
-            fletchers = 3;
-            stockpiles = 2;
-            poleturners = 0;
             bakeries = 4;
+            mills = 2;
+            poleturners = 0;
+            fletchers = 3;
             tanners = 0;
             blacksmiths = 0;
-            armourers = 0;
             engineersGuilds = 1;
-            tunnelersGuilds = 0;
+            armourers = 0;
             stables = 0;
+            tunnelersGuilds = 0;
         }
 
         for (int step = 0; step <= 50; ++step) {
@@ -616,7 +618,7 @@ namespace AI {
                 orientation);
             int const placedID = DAT_TileMapState::instance.placedBuildingID;
             if (!DAT_TileMapState::instance.buildingPlacementFail) {
-                DAT_BuildingsState::instance.buildings[DAT_TileMapState::instance.placedBuildingID].field245_0x2c8 = 1;
+                DAT_BuildingsState::instance.buildings[DAT_TileMapState::instance.placedBuildingID].field242_0x2c8 = 1;
                 MACRO_CALL_MEMBER(AICState_Func::setupWorkshopProductionType, DAT_AICState::ptr)(playerID, placedID);
                 this->aivs[aivID].aivBuildingSteps[step].location.tile.tile = rowTile + x;
                 if (!DAT_TileMapState::instance.buildingPlacementFail) {
