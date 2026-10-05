@@ -19,20 +19,24 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004F85B0
     BOOLEnum TileMapState::isTileEnclosedByWallsOrGates(int tile, int y)
     {
-        if ((this->LogicLayer[this->directionTranslationMatrix[y][0] + tile] & L_WALL_OR_GATEHOUSE) != 0
-            && (this->LogicLayer[this->directionTranslationMatrix[y][0] + tile] & (L_STOCKPILEUnk | L_CRENEL)) == 0) {
+        int offset = this->directionTranslationMatrix[y][0] + tile;
+        if ((this->LogicLayer[offset] & L_WALL_OR_GATEHOUSE) != 0
+            && (this->LogicLayer[offset] & (L_STOCKPILEUnk | L_CRENEL)) == 0) {
             return TRUE;
         }
-        if ((this->LogicLayer[this->directionTranslationMatrix[y][4] + tile] & L_WALL_OR_GATEHOUSE) != 0
-            && (this->LogicLayer[this->directionTranslationMatrix[y][4] + tile] & (L_STOCKPILEUnk | L_CRENEL)) == 0) {
+        offset = this->directionTranslationMatrix[y][4] + tile;
+        if ((this->LogicLayer[offset] & L_WALL_OR_GATEHOUSE) != 0
+            && (this->LogicLayer[offset] & (L_STOCKPILEUnk | L_CRENEL)) == 0) {
             return TRUE;
         }
-        if ((this->LogicLayer[this->directionTranslationMatrix[y][2] + tile] & L_WALL_OR_GATEHOUSE) != 0
-            && (this->LogicLayer[this->directionTranslationMatrix[y][2] + tile] & (L_STOCKPILEUnk | L_CRENEL)) == 0) {
+        offset = this->directionTranslationMatrix[y][2] + tile;
+        if ((this->LogicLayer[offset] & L_WALL_OR_GATEHOUSE) != 0
+            && (this->LogicLayer[offset] & (L_STOCKPILEUnk | L_CRENEL)) == 0) {
             return TRUE;
         }
-        if ((this->LogicLayer[this->directionTranslationMatrix[y][6] + tile] & L_WALL_OR_GATEHOUSE) != 0
-            && (this->LogicLayer[this->directionTranslationMatrix[y][6] + tile] & (L_STOCKPILEUnk | L_CRENEL)) == 0) {
+        offset = this->directionTranslationMatrix[y][6] + tile;
+        if ((this->LogicLayer[offset] & L_WALL_OR_GATEHOUSE) != 0
+            && (this->LogicLayer[offset] & (L_STOCKPILEUnk | L_CRENEL)) == 0) {
             return TRUE;
         }
         return FALSE;
