@@ -40,7 +40,7 @@ namespace Map {
                     OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                     DAT_DirectionAlgorithmState::ptr)(
                     _x, _y, this->units[_targetUnitID].x, this->units[_targetUnitID].y);
-                if (_distance >= 40) {
+                if (_distance > 40) {
                     continue;
                 }
                 int _preference = ((4000 - this->units[_targetUnitID].blessedAmount) >> 6) - _distance / 2;
