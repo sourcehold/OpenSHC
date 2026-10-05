@@ -12,7 +12,6 @@ namespace Map {
         {
             int bVar1;
             int bVar2;
-            byte* pbVar3;
             uint _endIndex;
             int _swapCounter;
             /*
@@ -65,17 +64,18 @@ namespace Map {
                     /*
                       === WRITE END DIRECTION TO START POSITION ===
                      */
-                    pbVar3 = this->searchQueue.ptrPathPlan + (int)_index / 2;
                     if ((_index & 1) == 0) {
                         /*
                           Even index: clear LOW nibble, keep HIGH nibble
                          */
-                        *pbVar3 = *pbVar3 & 0xf0;
+                        this->searchQueue.ptrPathPlan[(int)_index / 2]
+                            = this->searchQueue.ptrPathPlan[(int)_index / 2] & 0xf0;
                     } else {
                         /*
                           Odd index: clear HIGH nibble, keep LOW nibble
                          */
-                        *pbVar3 = *pbVar3 & 0xf;
+                        this->searchQueue.ptrPathPlan[(int)_index / 2]
+                            = this->searchQueue.ptrPathPlan[(int)_index / 2] & 0xf;
                         /*
                           Shift value to HIGH nibble position
                          */
@@ -89,17 +89,18 @@ namespace Map {
                     /*
                       === WRITE START DIRECTION TO END POSITION ===
                      */
-                    pbVar3 = this->searchQueue.ptrPathPlan + (int)_endIndex / 2;
                     if ((_endIndex & 1) == 0) {
                         /*
                           Even index: clear LOW nibble
                          */
-                        *pbVar3 = *pbVar3 & 0xf0;
+                        this->searchQueue.ptrPathPlan[(int)_endIndex / 2]
+                            = this->searchQueue.ptrPathPlan[(int)_endIndex / 2] & 0xf0;
                     } else {
                         /*
                           Odd index: clear HIGH nibble
                          */
-                        *pbVar3 = *pbVar3 & 0xf;
+                        this->searchQueue.ptrPathPlan[(int)_endIndex / 2]
+                            = this->searchQueue.ptrPathPlan[(int)_endIndex / 2] & 0xf;
                         /*
                           Shift value to HIGH nibble position
                          */
