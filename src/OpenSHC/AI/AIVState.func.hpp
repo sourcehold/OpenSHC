@@ -72,7 +72,7 @@ namespace AI {
         aiPlaceAIVBuilding;
 
         MACRO_FUNCTION_RESOLVER(
-            void (AIVState::*)(), false, Address::SHC_3BB0A8C1_0x004EDC90, &AIVState::clearTheHeatmaps)
+            void (AIVState::*)(), true, Address::SHC_3BB0A8C1_0x004EDC90, &AIVState::clearTheHeatmaps)
         clearTheHeatmaps;
 
         MACRO_FUNCTION_RESOLVER(
