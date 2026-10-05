@@ -10,27 +10,26 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CDBC0
     int AICState::getTargetableBuildingForPlayerID(int playerID, int param_2)
     {
-        int aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
-        if (aiType == 0)
+        if (DAT_GameState::instance.playerDataArray[playerID].aiType == 0)
             return 0;
-        int outerPatrolGroupsCount = this->aics[aiType - 1].OuterPatrolGroupsCount;
-        if (outerPatrolGroupsCount <= 0)
+        int aicIndex = DAT_GameState::instance.playerDataArray[playerID].aiType - 1;
+        if (this->aics[aicIndex].OuterPatrolGroupsCount <= 0)
             return 0;
-        int tracker = DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildingsTracker;
-        if (tracker <= 0)
+        if (DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildingsTracker <= 0)
             return 0;
 
+        int step = DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildingsTracker
+            / this->aics[aicIndex].OuterPatrolGroupsCount;
         DAT_GameState::instance.playerDataArray[playerID].someCounter2++;
-        if (DAT_GameState::instance.playerDataArray[playerID].someCounter2 >= tracker)
+        if (DAT_GameState::instance.playerDataArray[playerID].someCounter2
+            >= DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildingsTracker)
             DAT_GameState::instance.playerDataArray[playerID].someCounter2 = 0;
-
-        int index = (tracker / outerPatrolGroupsCount * param_2
-                        + DAT_GameState::instance.playerDataArray[playerID].someCounter2)
-            % tracker;
-        for (int i = 0; i < tracker; i++) {
+        int index = (step * param_2 + DAT_GameState::instance.playerDataArray[playerID].someCounter2)
+            % DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildingsTracker;
+        for (int i = 0; i < DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildingsTracker; i++) {
             int buildingID = DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildings[index];
             index++;
-            if (index >= tracker)
+            if (index >= DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildingsTracker)
                 index = 0;
             if (buildingID == 0)
                 continue;
