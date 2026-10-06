@@ -17659,7 +17659,7 @@ SHC_3BB0A8C1_0x00457770 | 70.7% | Reg alloc differs
 
 SHC_3BB0A8C1_0x00457800 | 86.2% | Load scheduling differs
 
-SHC_3BB0A8C1_0x00457870 | 65.6% | Load scheduling differs
+SHC_3BB0A8C1_0x00457870 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004578F0 | 60.7% | Load scheduling differs
 
