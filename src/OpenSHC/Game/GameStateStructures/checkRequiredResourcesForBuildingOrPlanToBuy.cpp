@@ -40,6 +40,7 @@ namespace Game {
     undefined4 GameStateStructures::checkRequiredResourcesForBuildingOrPlanToBuy(
         MappersEnum commandBuildingType, int playerID, BOOLEnum playResourceLackMsgUnk)
     {
+        int result = 1;
         int isAI = 0;
         BuildingType buildingType
             = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,
@@ -73,103 +74,89 @@ namespace Game {
             != 0) {
             return 1;
         }
-        if (this->playerDataArray[playerID].currentResources[6] < requiredIron) {
+        if (requiredIron > this->playerDataArray[playerID].currentResources[6]) {
+            result = 0;
             if (playResourceLackMsgUnk != FALSE) {
                 MACRO_CALL_MEMBER(OpenSHC::Audio::MissingResourceState_Func::playResourceLackSFX,
                     DAT_MissingResourceState::ptr)(1, OpenSHC::Audio::SFX::RLSFX_IRON);
             }
-            if (isAI == 0) {
-                return 0;
+            if (isAI != 0) {
+                int ironToBuy = requiredIron - this->playerDataArray[playerID].currentResources[6];
+                if (ironToBuy > this->playerDataArray[playerID].resourcesToAcquireArray[6]) {
+                    this->playerDataArray[playerID].resourcesToAcquireArray[6] = ironToBuy;
+                }
             }
-            int ironToBuy = requiredIron - this->playerDataArray[playerID].currentResources[6];
-            if (ironToBuy <= this->playerDataArray[playerID].resourcesToAcquireArray[6]) {
-                return 0;
+        } else if (requiredPitch > this->playerDataArray[playerID].currentResources[7]) {
+            if ((buildingType != OpenSHC::Map::Buildings::BT_PITCHDITCH)
+                || (this->playerDataArray[playerID].pitchDitchCounterTo4 == 0)) {
+                result = 0;
+                if (playResourceLackMsgUnk != FALSE) {
+                    MACRO_CALL_MEMBER(OpenSHC::Audio::MissingResourceState_Func::playResourceLackSFX,
+                        DAT_MissingResourceState::ptr)(1, OpenSHC::Audio::SFX::RLSFX_PITCH);
+                }
+                if (isAI != 0) {
+                    int pitchToBuy = requiredPitch - this->playerDataArray[playerID].currentResources[7];
+                    if (pitchToBuy > this->playerDataArray[playerID].resourcesToAcquireArray[7]) {
+                        this->playerDataArray[playerID].resourcesToAcquireArray[7] = pitchToBuy;
+                    }
+                }
             }
-            this->playerDataArray[playerID].resourcesToAcquireArray[6] = ironToBuy;
-            return 0;
-        }
-        if (this->playerDataArray[playerID].currentResources[7] < requiredPitch) {
-            if ((buildingType == OpenSHC::Map::Buildings::BT_PITCHDITCH)
-                && (this->playerDataArray[playerID].pitchDitchCounterTo4 != 0)) {
-                return 1;
-            }
+        } else if (requiredGold > this->playerDataArray[playerID].currentResources[0xf]) {
+            result = 0;
             if (playResourceLackMsgUnk != FALSE) {
                 MACRO_CALL_MEMBER(OpenSHC::Audio::MissingResourceState_Func::playResourceLackSFX,
-                    DAT_MissingResourceState::ptr)(1, OpenSHC::Audio::SFX::RLSFX_PITCH);
+                    DAT_MissingResourceState::ptr)(1, OpenSHC::Audio::SFX::RLSFX_GOLD);
             }
-            if (isAI == 0) {
-                return 0;
-            }
-            int pitchToBuy = requiredPitch - this->playerDataArray[playerID].currentResources[7];
-            if (pitchToBuy <= this->playerDataArray[playerID].resourcesToAcquireArray[7]) {
-                return 0;
-            }
-            this->playerDataArray[playerID].resourcesToAcquireArray[7] = pitchToBuy;
-            return 0;
-        }
-        if (this->playerDataArray[playerID].currentResources[0xf] < requiredGold) {
-            if (playResourceLackMsgUnk == FALSE) {
-                return 0;
-            }
-            MACRO_CALL_MEMBER(OpenSHC::Audio::MissingResourceState_Func::playResourceLackSFX,
-                DAT_MissingResourceState::ptr)(1, OpenSHC::Audio::SFX::RLSFX_GOLD);
-            return 0;
-        }
-        int currentWood = this->playerDataArray[playerID].currentResources[2];
-        if (currentWood < requiredWood) {
-            if (this->playerDataArray[playerID].currentResources[4] < requiredStone) {
+        } else {
+            int currentWood = this->playerDataArray[playerID].currentResources[2];
+            if (requiredWood > currentWood) {
+                if (requiredStone > this->playerDataArray[playerID].currentResources[4]) {
+                    result = 0;
+                    if (playResourceLackMsgUnk != FALSE) {
+                        MACRO_CALL_MEMBER(OpenSHC::Audio::MissingResourceState_Func::playResourceLackSFX,
+                            DAT_MissingResourceState::ptr)(1, OpenSHC::Audio::SFX::RLSFX_PARTIAL_STONEUnk);
+                    }
+                    if (isAI != 0) {
+                        int woodToBuy = requiredWood - this->playerDataArray[playerID].currentResources[2];
+                        if ((woodToBuy > 0)
+                            && (woodToBuy > this->playerDataArray[playerID].resourcesToAcquireArray[2])) {
+                            this->playerDataArray[playerID].resourcesToAcquireArray[2] = woodToBuy;
+                        }
+                        int stoneToBuyAsWell = requiredStone - this->playerDataArray[playerID].currentResources[4];
+                        if ((stoneToBuyAsWell > 0)
+                            && (stoneToBuyAsWell > this->playerDataArray[playerID].resourcesToAcquireArray[4])) {
+                            this->playerDataArray[playerID].resourcesToAcquireArray[4] = stoneToBuyAsWell;
+                        }
+                    }
+                } else if (requiredWood > currentWood) {
+                    result = 0;
+                    if (playResourceLackMsgUnk != FALSE) {
+                        MACRO_CALL_MEMBER(OpenSHC::Audio::MissingResourceState_Func::playResourceLackSFX,
+                            DAT_MissingResourceState::ptr)(1, OpenSHC::Audio::SFX::RLSFX_WOOD);
+                    }
+                    if (isAI != 0) {
+                        int woodShortage = requiredWood - this->playerDataArray[playerID].currentResources[2];
+                        if ((woodShortage > 0)
+                            && (woodShortage > this->playerDataArray[playerID].resourcesToAcquireArray[2])) {
+                            this->playerDataArray[playerID].resourcesToAcquireArray[2] = woodShortage;
+                        }
+                    }
+                }
+            } else if (requiredStone > this->playerDataArray[playerID].currentResources[4]) {
+                result = 0;
                 if (playResourceLackMsgUnk != FALSE) {
                     MACRO_CALL_MEMBER(OpenSHC::Audio::MissingResourceState_Func::playResourceLackSFX,
-                        DAT_MissingResourceState::ptr)(1, OpenSHC::Audio::SFX::RLSFX_PARTIAL_STONEUnk);
+                        DAT_MissingResourceState::ptr)(1, OpenSHC::Audio::SFX::RLSFX_STONE);
                 }
-                if (isAI == 0) {
-                    return 0;
+                if (isAI != 0) {
+                    int stoneToBuy = requiredStone - this->playerDataArray[playerID].currentResources[4];
+                    if ((stoneToBuy > 0) && (stoneToBuy > this->playerDataArray[playerID].resourcesToAcquireArray[4])) {
+                        this->playerDataArray[playerID].resourcesToAcquireArray[4] = stoneToBuy;
+                    }
                 }
-                int woodToBuy = requiredWood - this->playerDataArray[playerID].currentResources[2];
-                if ((woodToBuy > 0) && (this->playerDataArray[playerID].resourcesToAcquireArray[2] < woodToBuy)) {
-                    this->playerDataArray[playerID].resourcesToAcquireArray[2] = woodToBuy;
-                }
-                int stoneToBuyAsWell = requiredStone - this->playerDataArray[playerID].currentResources[4];
-                if ((stoneToBuyAsWell > 0)
-                    && (this->playerDataArray[playerID].resourcesToAcquireArray[4] < stoneToBuyAsWell)) {
-                    this->playerDataArray[playerID].resourcesToAcquireArray[4] = stoneToBuyAsWell;
-                }
-                return 0;
-            }
-            if (currentWood < requiredWood) {
-                if (playResourceLackMsgUnk != FALSE) {
-                    MACRO_CALL_MEMBER(OpenSHC::Audio::MissingResourceState_Func::playResourceLackSFX,
-                        DAT_MissingResourceState::ptr)(1, OpenSHC::Audio::SFX::RLSFX_WOOD);
-                }
-                if (isAI == 0) {
-                    return 0;
-                }
-                int woodShortage = requiredWood - this->playerDataArray[playerID].currentResources[2];
-                if (woodShortage < 1) {
-                    return 0;
-                }
-                if (woodShortage <= this->playerDataArray[playerID].resourcesToAcquireArray[2]) {
-                    return 0;
-                }
-                this->playerDataArray[playerID].resourcesToAcquireArray[2] = woodShortage;
-                return 0;
             }
         }
-        if (requiredStone <= this->playerDataArray[playerID].currentResources[4]) {
-            return 1;
-        }
-        if (playResourceLackMsgUnk != FALSE) {
-            MACRO_CALL_MEMBER(OpenSHC::Audio::MissingResourceState_Func::playResourceLackSFX,
-                DAT_MissingResourceState::ptr)(1, OpenSHC::Audio::SFX::RLSFX_STONE);
-        }
-        if (isAI == 0) {
-            return 0;
-        }
-        int stoneToBuy = requiredStone - this->playerDataArray[playerID].currentResources[4];
-        if ((stoneToBuy > 0) && (this->playerDataArray[playerID].resourcesToAcquireArray[4] < stoneToBuy)) {
-            this->playerDataArray[playerID].resourcesToAcquireArray[4] = stoneToBuy;
-        }
-        return 0;
+        return result;
     }
 }
 }
