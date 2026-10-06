@@ -16,6 +16,7 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CDCF0
     BOOLEnum AICState::aiShouldAttackOrWaitForTeamCoordination(int playerID)
     {
+        int otherPlayerID = 1;
         int aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
         if (aiType == OpenSHC::AI::AIT_NULL)
             return FALSE;
@@ -38,7 +39,7 @@ namespace AI {
 
         int readyTeamMembers = 0;
         int unreadyTeamMembers = 0;
-        for (int otherPlayerID = 1; otherPlayerID < 9; otherPlayerID++) {
+        for (; otherPlayerID < 9; otherPlayerID++) {
             if (otherPlayerID == playerID)
                 continue;
             if (MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::getAliveLordForPlayer, DAT_UnitsState::ptr)(
