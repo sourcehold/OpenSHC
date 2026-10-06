@@ -13,6 +13,7 @@
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
+#include "OpenSHC/Globals/DAT_TileMapState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -64,8 +65,8 @@ namespace Map {
         } else {
             buildingID = this->BuildingLayer[DAT_ViewportRenderState::instance.viewportState.mouseTile];
             wallTile = 0;
-            if ((this->LogicLayer[DAT_ViewportRenderState::instance.viewportState.mouseTile] & L_WALL_OR_GATEHOUSE) != 0
-                && ((this->LogicLayer[DAT_ViewportRenderState::instance.viewportState.mouseTile] & L_STOCKPILEUnk) == 0 || buildingID == 0)) {
+            if ((DAT_TileMapState::instance.LogicLayer[DAT_ViewportRenderState::instance.viewportState.mouseTile] & L_WALL_OR_GATEHOUSE) != 0
+                && ((DAT_TileMapState::instance.LogicLayer[DAT_ViewportRenderState::instance.viewportState.mouseTile] & L_STOCKPILEUnk) == 0 || buildingID == 0)) {
                 DAT_ViewportRenderState::instance.viewportState.field21_0x54 = DAT_ViewportRenderState::instance.viewportState.mouseTile;
                 wallTile = DAT_ViewportRenderState::instance.viewportState.mouseTile;
             }
