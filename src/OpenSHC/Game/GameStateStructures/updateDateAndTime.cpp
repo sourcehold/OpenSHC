@@ -18,23 +18,23 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x00456670
     void GameStateStructures::updateDateAndTime(BOOLEnum startOfWeekAsCurrentTickIs0, int currentTick)
     {
-        /*
-          synchronized with currentTick but it counts until 50 instead of 200
-         */
-        this->mapAndTime.dayTicks = this->mapAndTime.dayTicks + 1;
-        this->mapAndTime.weekTicks = this->mapAndTime.weekTicks + 1;
-        this->mapAndTime.monthTicks = this->mapAndTime.monthTicks + 1;
-        /*
-          if currentTick is 0, 50, 100, 150
-         */
-        bool startOfDay = currentTick % 50 == 0;
         this->mapAndTime.weekChanged = 0;
         this->mapAndTime.monthChanged = 0;
         this->mapAndTime.yearChanged = 0;
-        if (startOfDay) {
+        this->mapAndTime.startOfDay = 0;
+        /*
+          synchronized with currentTick but it counts until 50 instead of 200
+         */
+        this->mapAndTime.dayTicks++;
+        this->mapAndTime.weekTicks++;
+        this->mapAndTime.monthTicks++;
+        /*
+          if currentTick is 0, 50, 100, 150
+         */
+        if (currentTick % 50 == 0) {
+            this->mapAndTime.startOfDay = 1;
             this->mapAndTime.dayTicks = 0;
         }
-        this->mapAndTime.startOfDay = startOfDay;
         /*
           key "H" in scenario editor mode for example
          */
