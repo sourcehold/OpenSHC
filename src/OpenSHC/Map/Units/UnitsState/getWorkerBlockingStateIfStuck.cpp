@@ -69,8 +69,7 @@ namespace Map {
                 }
                 break;
             case OpenSHC::Map::Units::UT_WHEATFARMER:
-                if (_state
-                    == (OpenSHC::Map::Units::States::US_STAND_UPUnk | OpenSHC::Map::Units::States::US_IDLEUnk)) {
+                if (_state == (OpenSHC::Map::Units::States::US_STAND_UPUnk | OpenSHC::Map::Units::States::US_IDLEUnk)) {
                     return 0x2f;
                 }
                 break;
