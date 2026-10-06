@@ -111,11 +111,24 @@ def ours(f, cls, name):
         print('no code found for %s::%s' % (cls, name))
         return None
     res = []
+    # `_x$ = -16` lines define each local's offset; `_x$[esp+44H]` then means [esp + 0x44 - 16]
+    pre = txt[txt.rfind('_TEXT	SEGMENT', 0, m.start()):m.start()]
+    slots = {k: int(v) for k, v in re.findall(r'^(\w+\$\w*|tv\d+) = (-?\d+)', pre, re.M)}
+
+    def slot(mm):
+        base = slots.get(mm.group(1))
+        off = (int(mm.group(2)[:-1], 16) if mm.group(2).endswith('H') else int(mm.group(2))) if mm.group(2) else 0
+        # a hex offset keeps its sign in the first character: int('+1cH'[:-1], 16) handles it
+        if base is None:
+            return '[esp + ' + hex(off) + ']'
+        v = base + off
+        return '[esp + ' + hex(v) + ']' if v >= 0 else '[esp - ' + hex(-v) + ']'
     for l in m.group(2).splitlines():
         l = l.split(';')[0].strip()
-        if not l or l.endswith(':') or re.match(r'^\w+\$ = ', l) or l.startswith('npad') or l.startswith('$') or l.startswith('DD') or l.startswith('DB') or l.startswith('_'):
+        if not l or l.endswith(':') or re.match(r'^\w+\$\w* = ', l) or l.startswith('npad') or l.startswith('$') or l.startswith('DD') or l.startswith('DB') or l.startswith('_'):
             continue
         l = l.replace('\t', ' ')
+        l = re.sub(r'(\w+\$\w*|tv\d+)\[esp(?:([+-][0-9a-fA-F]+H|[+-]\d+))?\]', slot, l)
         op = l.split(' ')[0]
         if op.startswith('j') and 'DWORD PTR' not in l:
             l = op + (' L' if '$' in l else ' F')
