@@ -2,6 +2,7 @@
 #include "OpenSHC/Map/LandscapeState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"
+#include "OpenSHC/Map/TileMapState/NeighbourFlagsAsm.hpp"
 
 #include "OpenSHC/Globals/DAT_LandscapeState.hpp"
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
@@ -56,85 +57,73 @@ namespace Map {
         int average = (int)(brush + highest) / 2;
         tile = baseTile;
         y = baseY;
-        if (brushSize < 1) {
-            this->forceUpdateLogicalAndMiscDisplayLayers = 1;
-            return;
-        }
-
         for (int index = 0; index < brushSize; index++) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(1, index, &tile, (int*)&y, baseTile, baseY);
-            if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
+            int brushTile = tile;
+            if ((this->LogicLayer[brushTile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                 continue;
             }
-            if ((this->LogicLayer[tile]
+            if ((this->LogicLayer[brushTile]
                     & (L_SEA | L_WALL_OR_GATEHOUSE | L_BUILDING | L_KEEP_NON_MANOR_HOUSE | L_MARSH | L_MOAT))
                 != 0) {
                 continue;
             }
-            if (this->BuildingLayer[tile] != 0) {
+            if (this->BuildingLayer[brushTile] != 0) {
                 continue;
             }
 
-            this->HeightLayer[tile] = this->HeightLayer[tile] + 1;
+            this->HeightLayer[brushTile] = this->HeightLayer[brushTile] + 1;
             if ((short)mapper == 0) {
                 /* mapper min */
-                this->HeightLayer[tile] = 8;
-                this->Logic2Layer[tile] = this->Logic2Layer[tile] & 0xf3;
+                this->HeightLayer[brushTile] = 8;
+                this->Logic2Layer[brushTile] = this->Logic2Layer[brushTile] & 0xf3;
             } else if ((short)mapper == 1) {
                 /* mapper max, bug:fixme: is 156 really the maximum height? */
-                this->HeightLayer[tile] = 156;
-                this->LogicLayer[tile] = this->LogicLayer[tile] | 0x8000;
+                this->HeightLayer[brushTile] = 156;
+                this->LogicLayer[brushTile] = this->LogicLayer[brushTile] | 0x8000;
             } else if ((short)mapper == 5) {
-                this->HeightLayer[tile] = 100;
+                this->HeightLayer[brushTile] = 100;
             } else if ((short)mapper == 2) {
                 /* scale towards the brush average, in eighths of the ratio to it */
                 int ratio;
                 if (average != 0) {
-                    ratio = this->HeightLayer[tile] * 100 / average;
+                    ratio = this->HeightLayer[brushTile] * 100 / average;
                 } else {
                     ratio = 100;
                 }
                 ratio = ratio / 8 + 100;
-                ratio = ratio * this->HeightLayer[tile] / 100;
+                ratio = ratio * this->HeightLayer[brushTile] / 100;
                 if (ratio > 0x9c) {
                     ratio = 0x9c;
                 }
-                this->HeightLayer[tile] = (byte)ratio;
+                this->HeightLayer[brushTile] = (byte)ratio;
             }
 
-            if ((this->LogicLayer[tile] & L_ROCKY) != 0 && this->OrganismLayer[tile] > 1999) {
-                MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::removeRock, DAT_LandscapeState::ptr)(
-                    this->OrganismLayer[tile] - 2000);
+            if ((this->LogicLayer[brushTile] & L_ROCKY) != 0) {
+                int organism = this->OrganismLayer[brushTile];
+                if (organism >= 2000) {
+                    MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::removeRock, DAT_LandscapeState::ptr)(
+                        organism - 2000);
+                }
             }
-            this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_ROCKY;
-            if (this->HeightLayer[tile] < 8) {
-                this->HeightLayer[tile] = 8;
+            this->LogicLayer[brushTile] = this->LogicLayer[brushTile] & ~L_ROCKY;
+            if (this->HeightLayer[brushTile] < 8) {
+                this->HeightLayer[brushTile] = 8;
             }
-            if (this->HeightLayer[tile] > 0x9c) {
-                this->HeightLayer[tile] = 0x9c;
+            if (this->HeightLayer[brushTile] > 0x9c) {
+                this->HeightLayer[brushTile] = 0x9c;
             }
-            this->DefaultHeightLayer[tile] = this->HeightLayer[tile];
-            if ((this->LogicLayer[tile] & L_RIVER) != 0) {
-                this->HeightLayer[tile] = this->HeightLayer[tile] - 8;
+            this->DefaultHeightLayer[brushTile] = this->HeightLayer[brushTile];
+            if ((this->LogicLayer[brushTile] & L_RIVER) != 0) {
+                this->HeightLayer[brushTile] = this->HeightLayer[brushTile] - 8;
             }
-            this->DAT_SomeTile = tile;
-            this->DAT_SomeY = y;
+            uint brushY = y;
+            this->DAT_SomeTile = brushTile;
+            this->DAT_SomeY = brushY;
 
-            /* mark this tile and its eight neighbours changed, through the layer pointers */
-            byte* changed = (byte*)this->ptr_ChangedLayer + tile;
-            int* directionRow = (int*)this->ptr_MovementDirectionTranslationMatrix + y * 8;
-            changed[1] = 2;
-            changed[-1] = 2;
-            changed[0] = 2;
-            byte* northRow = changed + directionRow[0];
-            northRow[-1] = 2;
-            northRow[1] = 2;
-            northRow[0] = 2;
-            changed = changed + directionRow[4];
-            changed[-1] = 2;
-            changed[1] = 2;
-            changed[0] = 2;
-            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections, DAT_PathFindingState::ptr)(y, tile);
+            /* handwritten assembly in the original: mark this tile and its eight neighbours changed */
+            MACRO_MARK_CHANGED_NEIGHBOURS()
+            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections, DAT_PathFindingState::ptr)(brushY, brushTile);
         }
         this->forceUpdateLogicalAndMiscDisplayLayers = 1;
     }
