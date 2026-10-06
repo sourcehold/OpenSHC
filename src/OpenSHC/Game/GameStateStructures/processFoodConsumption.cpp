@@ -62,13 +62,13 @@ namespace Game {
                 this->playerDataArray[playerID].foodTypesCurrentlyEaten = 0;
                 continue;
             }
-            int foodClockSpeed = this->playerDataArray[playerID].currentPopulation * 3;
-            this->playerDataArray[playerID].foodClockSpeed = foodClockSpeed;
+            this->playerDataArray[playerID].foodClockSpeed = this->playerDataArray[playerID].currentPopulation * 3;
             if ((DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY)
                 && (MACRO_CALL_MEMBER(
                         OpenSHC::Synchrony::GameSynchronyState_Func::isAIPlayer, DAT_GameSynchronyState::ptr)(playerID)
                     != FALSE)) {
-                this->playerDataArray[playerID].foodClockSpeed = (foodClockSpeed * 60) / 100;
+                this->playerDataArray[playerID].foodClockSpeed
+                    = (this->playerDataArray[playerID].foodClockSpeed * 60) / 100;
             }
             switch (this->playerDataArray[playerID].rationsSetting) {
             case 0:
