@@ -7,6 +7,7 @@
 #include "OpenSHC/Globals/DAT_EntityState.hpp"
 #include "OpenSHC/Globals/DAT_MinimapViewState.hpp"
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
+#include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
 namespace OpenSHC {
@@ -50,8 +51,8 @@ namespace Map {
                       .addXgetTile)
             * 8;
         MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(0, 0,
-            0, microX, microY, this->DefaultHeightLayer[tile], microX + 1, microY + 1, this->DefaultHeightLayer[tile],
-            (EntityType)0x1e, 0);
+            0, microX, microY, DAT_TileMapState::instance.DefaultHeightLayer[tile], microX + 1, microY + 1,
+            DAT_TileMapState::instance.DefaultHeightLayer[tile], (EntityType)0x1e, 0);
         this->BuildingWasLayer[tile] = 0;
         this->DamageLayer[tile] = 0;
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
@@ -60,7 +61,7 @@ namespace Map {
             DAT_PathFindingState::ptr)(9, tile - rowTile, y);
         MACRO_CALL_MEMBER(OpenSHC::UI::MinimapViewState_Func::triggerMinimapRedraw, DAT_MinimapViewState::ptr)(1);
         DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
-        this->field204_0x554a30 = 1;
+        DAT_TileMapState::instance.field204_0x554a30 = 1;
     }
 
 }
