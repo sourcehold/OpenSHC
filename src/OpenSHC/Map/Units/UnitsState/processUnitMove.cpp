@@ -74,12 +74,12 @@ namespace Map {
             }
             int _steps = speedCategory + this->units[unitID].field259_0x3d2;
             for (int _step = 0; _step <= _steps; ++_step) {
-                if (this->units[DAT_CurrentUnitSlotID::instance].field180_0x32d == '\x01') {
+                if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field180_0x32d == '\x01') {
                     if (this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e < 4
                         || this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e > 0xb) {
                         continue;
                     }
-                } else if (this->units[DAT_CurrentUnitSlotID::instance].field180_0x32d == '\x02') {
+                } else if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field180_0x32d == '\x02') {
                     if (this->units[DAT_CurrentUnitSlotID::instance].field218_0x37e <= 4) {
                         continue;
                     }
