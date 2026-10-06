@@ -146,6 +146,62 @@ displacement fits in a byte (parameters at `ebp + 0x7c`), while MSVC gives us `m
 parameters at `ebp + 8`. Only two of the 109 functions in `Map::Units::UnitsState` have a frame pointer at all, so
 scan for the prologue rather than guessing.
 
+### Handwritten Assembly Without `mov reg, 0`
+
+A handwritten block does not always announce itself with `mov reg, 0`. The other tells are locals stored to the stack
+and reloaded by the very next instructions (`mov [esp + 0xc], ecx` ... `mov eax, [esp + 0xc]`), a bare `push`/`pop`
+parking a pointer in the middle of the body, and an operand size the element type does not have
+(`or word ptr [esi + 1], bx` on a byte layer). `stampOccupancyFlagOnSurroundingTiles` and
+`writeSixToTileMap1104InAllDirections` are both that: 20.4% and 22.2% as C++, 100% as a few locals plus one `__asm`
+block.
+
+Three things that were believed otherwise:
+
+- A resolver global **can** be named in an asm operand, through the typedef and the struct-member syntax:
+  `mov edx, dword ptr [DAT_TileMapState::instance]TileMapState.ptr_MovementDirectionTranslationMatrix`. This assembles
+  to the absolute load the original has, so no pointer local is needed for it.
+- An `__asm` block does not force a frame pointer. Both functions above stay `esp`-relative, and the compiler tracks the
+  `push` inside the block when it addresses the locals after it.
+- `processMeleeInitiation` has such a block and a frame pointer, but the frame pointer comes with the block there:
+  dropping `#pragma optimize("y", off)` once the block was inline asm was worth 49.7% -> 61.0%, and `lea ebp, [esp - N]`
+  then matched by itself.
+
+The C++ locals that feed the block decide the prologue, and their **declaration order** decides which register and
+which stack slot each gets. Sweep the permutations (four locals are 24 runs of `quick_diff.py`); exactly one order was
+100% in both functions.
+
+### Calls Through the Global Instance
+
+`mov ecx, <UnitsState instance>` in front of a call where we emit `mov ecx, esi` is the same global-instead-of-`this`
+pattern as for fields, on a call: write `MACRO_CALL_MEMBER(..., DAT_UnitsState::ptr)`. Fourteen call sites in
+`Map::Units::UnitsState` had it. Converting the call usually frees the register that held `this`, so re-check every
+field of that function afterwards - several that had been swept to the global form only matched that way *because*
+`this` was being kept for the call, and have to go back to `this->` (`deleteUnit` 68.5% -> 98.7%,
+`selectSiegeEngineAndPlayFeedback` 85.9% -> 100%, `setDestinationNearTargetedBuilding` 47.3% -> 70.9%).
+
+When the original never forms `[reg + reg + offset]` at all, nothing in the function goes through `this`: convert every
+access at once. A per-field greedy sweep cannot find this, because no single conversion pays until the last one frees
+the register (`checkTargetBuildingPossibilityOrState` 41.7% -> 100%).
+
+### Jump Tables That Cover More Values Than Our Cases
+
+Compare the table's range, not just its presence: `add eax, -0x16; cmp eax, 0x37` against our `lea eax, [edi - 0x27];
+cmp eax, 0x26` means the original `switch` has case labels below ours. Decode the byte table to see which values and
+where they go. If they land on the same block as `default`, an explicit `case` with the same body does not bring them
+back - the compiler drops it before it builds the table. The arm did something that was optimised away later, and a
+dead store reproduces that:
+
+```cpp
+case UT_E_ARCHER:
+case UT_E_ARCHER_DEBUG:
+    _archerScatter = 0; // never read
+    return ...;
+```
+
+`prepareProjectileTarget` went 53.7% -> 81.5% on this alone, because the wider table also made the switch index the
+value the function is left returning. Where the extra value has its own table index, a plain explicit case is enough
+(`getPeasantGmID`, `case UT_PEASANT:` in front of an identical `default:`).
+
 ### Duplicated Blocks: Being Longer Is Not Evidence
 
 Two identical blocks in the decompiler output are often identical in the original too, and a longer instruction
@@ -252,6 +308,17 @@ where a handful of named fields were reached through the global.
   give each a local and put the statements in that order: `int x = pd.someX; tribe.unitStance = ...; int y = pd.someY;`
   (`makeUnitsGoDefensiveAndBackToSomeLocation` 95.7% -> 100%). Without a store in between, the *declaration order*
   of two such locals picks which one gets `ecx` (`sendUnitsToAttackBreachedCastle` 98.7% -> 100%).
+- **Declaration order picks registers and stack slots, and the parameter's own slot is one of them.** When only the
+  prologue or only `[esp + N]` displacements differ, permute the leading declarations and measure. Five locals are 120
+  runs of `quick_diff.py`, about ten minutes. `quick_diff.py` hides stack displacements, so several orders tie at 1.0
+  there and still differ in reccmp: `selectNewBlessingTarget` had four such orders scoring 90.7%, 93.3%, 98.7% and
+  100%, the difference being which local the compiler put into the dead parameter's slot.
+- **An expression the original evaluates before a call has to read memory.** `(4000 - blessedAmount) >> 6` built from a
+  local copy of the field is sunk below the call that follows, since nothing forces it earlier; built from the field
+  itself it cannot move across the call and lands where the original has it. Test the field, then read it again
+  (`selectNewBlessingTarget` 0.67 -> 0.90 in `quick_diff.py`).
+- A value kept in the parameter's stack slot and incremented there (`add dword ptr [esp + 0x1c], 1` inside the
+  innermost loop) is the parameter being reused as a counter (`isTowerTileOvercrowdedByCurrentPlayer`).
 - The opposite does happen for the operands of a single statement: in `SHC_3BB0A8C1_0x00522520` the original evaluates
   `unitID / 16` and `unitID % 16` into locals before the compound assignment. If a `|=`/`&=` statement with computed index
   and mask does not match, give the index and the mask a local each and keep the declaration order the assembly shows.
@@ -368,6 +435,12 @@ worth the last 8-10% on the whole `Map::Version::UpgradeMapUnitsTo_*` family (0x
 
 `!=` as the loop bound suppresses MSVC's unrolling. If the original ends the loop with `jne` while we emit `jl` and an
 unrolled body, write `for (int i = 1; i != 2500; ++i)` instead of `i < 2500` (SHC_3BB0A8C1_0x0053B340, 53% -> 91%).
+
+Before settling for `!=`, try a `do { ... } while (i < N);`. It also stops the unrolling and keeps the original's `jl`:
+`setMoveDelayForUnitsOnSameTiles` had two scans over a 2000-entry array that MSVC unrolled five times as `for` loops
+(240 instructions against 116); `!=` gave 116 with two `jne`, the `do`-`while` gave 116 with nothing left to differ
+(24.1% -> 98.3%). The same function had an `int` copy of the array element tested with `<= 0`, where the decompiler
+showed the `short` element tested with `< 1`.
 
 - A loop whose early exit returns the same value as the code after the loop was a `break`, not a `return`. The tell is
   callee-saved registers pushed *after* the loop's entry test and one shared `mov eax, result` behind the loop, where
