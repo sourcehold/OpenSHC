@@ -18133,7 +18133,7 @@ SHC_3BB0A8C1_0x0045C1B8 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0045C1B9 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0045C1C0 | 21.6% | Reg alloc and spills differ
+SHC_3BB0A8C1_0x0045C1C0 | 69.2% | Call targets, movzx on short
 
 SHC_3BB0A8C1_0x0045C2B0 | 0.0% | Pending
 
