@@ -42767,7 +42767,7 @@ SHC_3BB0A8C1_0x00508DD0 | 43.1% | extra callee-saved reg
 
 SHC_3BB0A8C1_0x00508EC0 | 27.5% | 35.40% spill order regalloc
 
-SHC_3BB0A8C1_0x00509180 | 24.9% | 17 of 19 asm blocks as macro
+SHC_3BB0A8C1_0x00509180 | 26.2% | all 19 asm blocks as macro
 
 SHC_3BB0A8C1_0x0050A74E | 0.0% | Pending
 

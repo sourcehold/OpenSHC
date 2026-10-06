@@ -1886,48 +1886,12 @@ namespace Map {
                                                 bVar19 = this->bitFlag;
                                                 this->bitFlag = ~bVar19 & 0xaa;
                                                 if (this->bitFlag == 0) {
-                                                    bVar19 = (*(uint*)((char*)this->ptr_LogicLayer
-                                                                  + *(int*)((char*)this
-                                                                                ->ptr_MovementDirectionTranslationMatrix
-                                                                        + this->DAT_SomeY * 0x20)
-                                                                      * 4
-                                                                  + this->DAT_SomeTile * 4 + -4)
-                                                                     & L_RIVER
-                                                                 | L_FORD)
-                                                        != 0;
-                                                    if ((*(uint*)((char*)this->ptr_LogicLayer
-                                                             + *(int*)((char*)this
-                                                                           ->ptr_MovementDirectionTranslationMatrix
-                                                                   + this->DAT_SomeY * 0x20)
-                                                                 * 4
-                                                             + this->DAT_SomeTile * 4 + 4)
-                                                            & 0x300000)
-                                                        != 0) {
-                                                        bVar19 = bVar19 | 0x40;
-                                                    }
-                                                    if ((*(uint*)((char*)this->ptr_LogicLayer
-                                                             + *(int*)((int)((char*)this
-                                                                                 ->ptr_MovementDirectionTranslationMatrix
-                                                                           + this->DAT_SomeY * 0x20)
-                                                                   + 0x10)
-                                                                 * 4
-                                                             + this->DAT_SomeTile * 4 + -4)
-                                                            & 0x300000)
-                                                        != 0) {
-                                                        bVar19 = bVar19 | 4;
-                                                    }
-                                                    if ((*(uint*)((char*)this->ptr_LogicLayer
-                                                             + *(int*)((int)((char*)this
-                                                                                 ->ptr_MovementDirectionTranslationMatrix
-                                                                           + this->DAT_SomeY * 0x20)
-                                                                   + 0x10)
-                                                                 * 4
-                                                             + this->DAT_SomeTile * 4 + 4)
-                                                            & 0x300000)
-                                                        != 0) {
-                                                        bVar19 = bVar19 | 0x10;
-                                                    }
-                                                    this->bitFlag = ~bVar19 & 0x55;
+                                                                                                        _gfxLayer = (char*)this->ptr_LogicLayer;
+                                                    _gfxTile = this->DAT_SomeTile;
+                                                    _gfxY = this->DAT_SomeY;
+                                                    MACRO_GFX_NEIGHBOUR_MASK(d1, 4, MACRO_GFX_SHIFT_4, MACRO_GFX_ROWSTEP_4, L_RIVER | L_FORD)
+                                                    this->bitFlag = ~this->bitFlag;
+                                                    this->bitFlag = this->bitFlag & 0x55;
                                                 }
                                                 if (this->mapOrientation == 0) {
                                                     this->bitFlag = MACRO_CALL_MEMBER(
@@ -2004,46 +1968,12 @@ namespace Map {
                                             bVar19 = this->bitFlag;
                                             this->bitFlag = ~bVar19 & 0xaa;
                                             if (this->bitFlag == 0) {
-                                                bVar19
-                                                    = (*(uint*)((char*)this->ptr_LogicLayer
-                                                           + *(int*)((char*)this->ptr_MovementDirectionTranslationMatrix
-                                                                 + this->DAT_SomeY * 0x20)
-                                                               * 4
-                                                           + this->DAT_SomeTile * 4 + -4)
-                                                          & 0x100031)
-                                                    != 0;
-                                                if ((*(uint*)((char*)this->ptr_LogicLayer
-                                                         + *(int*)((char*)this->ptr_MovementDirectionTranslationMatrix
-                                                               + this->DAT_SomeY * 0x20)
-                                                             * 4
-                                                         + this->DAT_SomeTile * 4 + 4)
-                                                        & 0x100031)
-                                                    != 0) {
-                                                    bVar19 = bVar19 | 0x40;
-                                                }
-                                                if ((*(uint*)((char*)this->ptr_LogicLayer
-                                                         + *(int*)((int)((char*)this
-                                                                             ->ptr_MovementDirectionTranslationMatrix
-                                                                       + this->DAT_SomeY * 0x20)
-                                                               + 0x10)
-                                                             * 4
-                                                         + this->DAT_SomeTile * 4 + -4)
-                                                        & 0x100031)
-                                                    != 0) {
-                                                    bVar19 = bVar19 | 4;
-                                                }
-                                                if ((*(uint*)((char*)this->ptr_LogicLayer
-                                                         + *(int*)((int)((char*)this
-                                                                             ->ptr_MovementDirectionTranslationMatrix
-                                                                       + this->DAT_SomeY * 0x20)
-                                                               + 0x10)
-                                                             * 4
-                                                         + this->DAT_SomeTile * 4 + 4)
-                                                        & 0x100031)
-                                                    != 0) {
-                                                    bVar19 = bVar19 | 0x10;
-                                                }
-                                                this->bitFlag = ~bVar19 & 0x55;
+                                                                                                _gfxLayer = (char*)this->ptr_LogicLayer;
+                                                _gfxTile = this->DAT_SomeTile;
+                                                _gfxY = this->DAT_SomeY;
+                                                MACRO_GFX_NEIGHBOUR_MASK(d2, 4, MACRO_GFX_SHIFT_4, MACRO_GFX_ROWSTEP_4, 0x100031)
+                                                this->bitFlag = ~this->bitFlag;
+                                                this->bitFlag = this->bitFlag & 0x55;
                                             }
                                             if (this->mapOrientation == 0) {
                                                 this->bitFlag = MACRO_CALL_MEMBER(
