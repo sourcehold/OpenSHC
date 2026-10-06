@@ -57,29 +57,30 @@ namespace Game {
                 && (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY)) {
                 continue;
             }
-            int clockIncrement;
             if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
-                clockIncrement
+                this->playerDataArray[playerID].vclockIncrement
                     = DAT_TroopDefinedData::instance
                           .PeasantSpawnClockIncrementSkirmish[this->playerDataArray[playerID].popularity / 500];
             } else {
                 int popularityIndex = this->playerDataArray[playerID].popularity / 500;
                 if (this->playerDataArray[playerID].currentPopulation > 100) {
-                    clockIncrement = DAT_TroopDefinedData::instance
-                                         .PeasantSpawnClockIncrementSolitaryPopMoreThan100[popularityIndex];
+                    this->playerDataArray[playerID].vclockIncrement
+                        = DAT_TroopDefinedData::instance
+                              .PeasantSpawnClockIncrementSolitaryPopMoreThan100[popularityIndex];
                 } else {
-                    clockIncrement = DAT_TroopDefinedData::instance
-                                         .PeasantSpawnClockIncrementSolitaryPopLessThan101[popularityIndex];
+                    this->playerDataArray[playerID].vclockIncrement
+                        = DAT_TroopDefinedData::instance
+                              .PeasantSpawnClockIncrementSolitaryPopLessThan101[popularityIndex];
                 }
             }
-            this->playerDataArray[playerID].vclockIncrement = clockIncrement;
-            this->playerDataArray[playerID].vclock = clockIncrement + this->playerDataArray[playerID].vclock;
+            this->playerDataArray[playerID].vclock
+                = this->playerDataArray[playerID].vclockIncrement + this->playerDataArray[playerID].vclock;
             if (this->playerDataArray[playerID].vclock >= 4000) {
                 this->playerDataArray[playerID].vclock = 4000;
             } else if (this->playerDataArray[playerID].vclock < 0) {
                 this->playerDataArray[playerID].vclock = 0;
             }
-            if (clockIncrement == 0) {
+            if (this->playerDataArray[playerID].vclockIncrement == 0) {
                 this->playerDataArray[playerID].vclock = 2000;
             }
             if (this->playerDataArray[playerID].keep.id <= 0) {
@@ -95,11 +96,12 @@ namespace Game {
                     /*
                       Havent reached peasant limit.
                      */
+                    int x = this->playerDataArray[playerID].campground.xEntry;
+                    int y = this->playerDataArray[playerID].campground.yEntry;
                     this->playerDataArray[playerID].vclock = 2000;
-                    int peasantUnitID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::spawnUnit,
-                        DAT_UnitsState::ptr)(playerID, playerID, this->playerDataArray[playerID].campground.xEntry * 8,
-                        this->playerDataArray[playerID].campground.yEntry * 8,
-                        DAT_BuildingsState::instance.buildings[campgroundID].terrainHeightUnk,
+                    int peasantUnitID = MACRO_CALL_MEMBER(
+                        OpenSHC::Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(playerID, playerID, x * 8,
+                        y * 8, DAT_BuildingsState::instance.buildings[campgroundID].terrainHeightUnk,
                         OpenSHC::Map::Units::UT_PEASANT);
                     if (peasantUnitID != 0) {
                         /*

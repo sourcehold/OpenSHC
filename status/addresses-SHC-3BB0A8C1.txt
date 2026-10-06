@@ -18037,7 +18037,7 @@ SHC_3BB0A8C1_0x0045B3E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0045B460 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0045B4A0 | 64.6% | Loop base reg choice
+SHC_3BB0A8C1_0x0045B4A0 | 77.1% | Increment local vs loop base
 
 SHC_3BB0A8C1_0x0045B6B0 | 100.0% | Reimplemented
 
