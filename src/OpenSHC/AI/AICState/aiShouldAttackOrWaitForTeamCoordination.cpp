@@ -20,9 +20,9 @@ namespace AI {
         int aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
         if (aiType == OpenSHC::AI::AIT_NULL)
             return FALSE;
-        int aicIndex = aiType - 1;
         if (DAT_GameState::instance.playerDataArray[playerID].requestStateUnk == 1)
             return TRUE;
+        int aicIndex = aiType - 1;
 
         if (DAT_GameState::instance.playerDataArray[DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID]
                 .totalTroopValue

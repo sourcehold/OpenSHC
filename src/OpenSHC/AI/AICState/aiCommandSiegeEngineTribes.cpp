@@ -81,8 +81,8 @@ namespace AI {
                 int targetTribeID = shieldTargetTribeIDs[shieldCount];
                 DAT_TribesState::instance.tribes[tribeID].field56_0x1f2 = targetTribeID;
                 DAT_TribesState::instance.tribes[tribeID].uid2 = DAT_TribesState::instance.tribes[targetTribeID].uid;
-                int targetUnitID = DAT_TribesState::instance.tribes[targetTribeID].selectionTargetUnitID;
                 DAT_TribesState::instance.tribes[targetTribeID].tribeID = tribeID;
+                int targetUnitID = DAT_TribesState::instance.tribes[targetTribeID].selectionTargetUnitID;
                 int tile = DAT_UnitsState::instance.units[targetUnitID].tile;
                 shieldCount++;
                 if (tile <= 0)
