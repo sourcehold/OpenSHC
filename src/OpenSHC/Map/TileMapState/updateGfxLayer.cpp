@@ -1975,41 +1975,11 @@ namespace Map {
                                                     }
                                                 }
                                             } else {
-                                                bVar19 = 0;
-                                                if ((*(uint*)((char*)this->ptr_LogicLayer + this->DAT_SomeTile * 4 + 4)
-                                                            & L_RIVER
-                                                        | L_FORD)
-                                                    != 0) {
-                                                    bVar19 = 0x20;
-                                                }
-                                                if ((*(uint*)((char*)this->ptr_LogicLayer + this->DAT_SomeTile * 4 + -4)
-                                                            & L_RIVER
-                                                        | L_FORD)
-                                                    != 0) {
-                                                    bVar19 = bVar19 | 2;
-                                                }
-                                                if ((*(uint*)((char*)this->ptr_LogicLayer
-                                                         + *(int*)((char*)this->ptr_MovementDirectionTranslationMatrix
-                                                               + this->DAT_SomeY * 0x20)
-                                                             * 4
-                                                         + this->DAT_SomeTile * 4)
-                                                            & L_RIVER
-                                                        | L_FORD)
-                                                    != 0) {
-                                                    bVar19 = bVar19 | 0x80;
-                                                }
-                                                if ((*(uint*)((char*)this->ptr_LogicLayer
-                                                         + *(int*)((int)((char*)this
-                                                                             ->ptr_MovementDirectionTranslationMatrix
-                                                                       + this->DAT_SomeY * 0x20)
-                                                               + 0x10)
-                                                             * 4
-                                                         + this->DAT_SomeTile * 4)
-                                                            & L_RIVER
-                                                        | L_FORD)
-                                                    != 0) {
-                                                    bVar19 = bVar19 | 8;
-                                                }
+                                                                                                _gfxLayer = (char*)this->ptr_LogicLayer;
+                                                _gfxTile = this->DAT_SomeTile;
+                                                _gfxY = this->DAT_SomeY;
+                                                MACRO_GFX_CARDINAL_MASK(c1, 4, MACRO_GFX_SHIFT_4, MACRO_GFX_ROWSTEP_4, L_RIVER | L_FORD)
+                                                bVar19 = this->bitFlag;
                                                 this->bitFlag = ~bVar19 & 0xaa;
                                                 if (this->bitFlag == 0) {
                                                     bVar19 = (*(uint*)((char*)this->ptr_LogicLayer
@@ -2109,35 +2079,11 @@ namespace Map {
                                         } else {
                                             this->Logic2Layer[this->DAT_SomeTile]
                                                 = this->Logic2Layer[this->DAT_SomeTile] & 0xf7;
-                                            bVar19 = 0;
-                                            if ((*(uint*)((char*)this->ptr_LogicLayer + this->DAT_SomeTile * 4 + 4) & 1)
-                                                != 0) {
-                                                bVar19 = 0x20;
-                                            }
-                                            if ((*(uint*)((char*)this->ptr_LogicLayer + this->DAT_SomeTile * 4 + -4)
-                                                    & 1)
-                                                != 0) {
-                                                bVar19 = bVar19 | 2;
-                                            }
-                                            if ((*(uint*)((char*)this->ptr_LogicLayer
-                                                     + *(int*)((char*)this->ptr_MovementDirectionTranslationMatrix
-                                                           + this->DAT_SomeY * 0x20)
-                                                         * 4
-                                                     + this->DAT_SomeTile * 4)
-                                                    & 1)
-                                                != 0) {
-                                                bVar19 = bVar19 | 0x80;
-                                            }
-                                            if ((*(uint*)((char*)this->ptr_LogicLayer
-                                                     + *(int*)((int)((char*)this->ptr_MovementDirectionTranslationMatrix
-                                                                   + this->DAT_SomeY * 0x20)
-                                                           + 0x10)
-                                                         * 4
-                                                     + this->DAT_SomeTile * 4)
-                                                    & 1)
-                                                != 0) {
-                                                bVar19 = bVar19 | 8;
-                                            }
+                                                                                        _gfxLayer = (char*)this->ptr_LogicLayer;
+                                            _gfxTile = this->DAT_SomeTile;
+                                            _gfxY = this->DAT_SomeY;
+                                            MACRO_GFX_CARDINAL_MASK(c2, 4, MACRO_GFX_SHIFT_4, MACRO_GFX_ROWSTEP_4, 1)
+                                            bVar19 = this->bitFlag;
                                             if ((bVar19 != 0)
                                                 && (this->Logic2Layer[this->DAT_SomeTile]
                                                     = this->Logic2Layer[this->DAT_SomeTile] | 8,
@@ -2147,36 +2093,11 @@ namespace Map {
                                                 this->WallGFXLayer[this->DAT_SomeTile]
                                                     = this->RandomLayer[this->DAT_SomeTile] & 7;
                                             }
-                                            bVar19 = 0;
-                                            if ((*(uint*)((char*)this->ptr_LogicLayer + this->DAT_SomeTile * 4 + 4)
-                                                    & 0x100031)
-                                                != 0) {
-                                                bVar19 = 0x20;
-                                            }
-                                            if ((*(uint*)((char*)this->ptr_LogicLayer + this->DAT_SomeTile * 4 + -4)
-                                                    & 0x100031)
-                                                != 0) {
-                                                bVar19 = bVar19 | 2;
-                                            }
-                                            if ((*(uint*)((char*)this->ptr_LogicLayer
-                                                     + *(int*)((char*)this->ptr_MovementDirectionTranslationMatrix
-                                                           + this->DAT_SomeY * 0x20)
-                                                         * 4
-                                                     + this->DAT_SomeTile * 4)
-                                                    & 0x100031)
-                                                != 0) {
-                                                bVar19 = bVar19 | 0x80;
-                                            }
-                                            if ((*(uint*)((char*)this->ptr_LogicLayer
-                                                     + *(int*)((int)((char*)this->ptr_MovementDirectionTranslationMatrix
-                                                                   + this->DAT_SomeY * 0x20)
-                                                           + 0x10)
-                                                         * 4
-                                                     + this->DAT_SomeTile * 4)
-                                                    & 0x100031)
-                                                != 0) {
-                                                bVar19 = bVar19 | 8;
-                                            }
+                                                                                        _gfxLayer = (char*)this->ptr_LogicLayer;
+                                            _gfxTile = this->DAT_SomeTile;
+                                            _gfxY = this->DAT_SomeY;
+                                            MACRO_GFX_CARDINAL_MASK(c3, 4, MACRO_GFX_SHIFT_4, MACRO_GFX_ROWSTEP_4, 0x100031)
+                                            bVar19 = this->bitFlag;
                                             this->bitFlag = ~bVar19 & 0xaa;
                                             if (this->bitFlag == 0) {
                                                 bVar19
@@ -2252,40 +2173,10 @@ namespace Map {
                                                 for (local_14 = 0; local_14 < 7; local_14 = local_14 + 1) {
                                                     if (DAT_TerrainDefinedData::instance.field2298_0x1d64[local_14].unk1
                                                         == this->bitFlag) {
-                                                        this->bitFlag = 0;
-                                                        if ((*(uint*)((char*)this->ptr_LogicLayer
-                                                                 + this->DAT_SomeTile * 4 + 4)
-                                                                & 0x200000)
-                                                            != 0) {
-                                                            this->bitFlag = 0x20;
-                                                        }
-                                                        if ((*(uint*)((char*)this->ptr_LogicLayer
-                                                                 + this->DAT_SomeTile * 4 + -4)
-                                                                & 0x200000)
-                                                            != 0) {
-                                                            this->bitFlag = this->bitFlag | 2;
-                                                        }
-                                                        if ((*(uint*)((char*)this->ptr_LogicLayer
-                                                                 + *(int*)((char*)this
-                                                                               ->ptr_MovementDirectionTranslationMatrix
-                                                                       + this->DAT_SomeY * 0x20)
-                                                                     * 4
-                                                                 + this->DAT_SomeTile * 4)
-                                                                & 0x200000)
-                                                            != 0) {
-                                                            this->bitFlag = this->bitFlag | 0x80;
-                                                        }
-                                                        if ((*(uint*)((char*)this->ptr_LogicLayer
-                                                                 + *(int*)((int)((char*)this
-                                                                                     ->ptr_MovementDirectionTranslationMatrix
-                                                                               + this->DAT_SomeY * 0x20)
-                                                                       + 0x10)
-                                                                     * 4
-                                                                 + this->DAT_SomeTile * 4)
-                                                                & 0x200000)
-                                                            != 0) {
-                                                            this->bitFlag = this->bitFlag | 8;
-                                                        }
+                                                                                                                _gfxLayer = (char*)this->ptr_LogicLayer;
+                                                        _gfxTile = this->DAT_SomeTile;
+                                                        _gfxY = this->DAT_SomeY;
+                                                        MACRO_GFX_CARDINAL_MASK(c4, 4, MACRO_GFX_SHIFT_4, MACRO_GFX_ROWSTEP_4, 0x200000)
                                                         sVar4 = (short)GMTotalPicturesProcessed::instance[5];
                                                         if (local_14 < 4) {
                                                             if (this->bitFlag == 0) {
@@ -2660,36 +2551,10 @@ namespace Map {
                                     } else {
                                         this->Logic2Layer[this->DAT_SomeTile]
                                             = this->Logic2Layer[this->DAT_SomeTile] & 0xf7;
-                                        this->bitFlag = 0;
-                                        if ((*(uint*)((char*)this->ptr_LogicLayer + this->DAT_SomeTile * 4 + 4)
-                                                & 0x100000)
-                                            != 0) {
-                                            this->bitFlag = 0x20;
-                                        }
-                                        if ((*(uint*)((char*)this->ptr_LogicLayer + this->DAT_SomeTile * 4 + -4)
-                                                & 0x100000)
-                                            != 0) {
-                                            this->bitFlag = this->bitFlag | 2;
-                                        }
-                                        if ((*(uint*)((char*)this->ptr_LogicLayer
-                                                 + *(int*)((char*)this->ptr_MovementDirectionTranslationMatrix
-                                                       + this->DAT_SomeY * 0x20)
-                                                     * 4
-                                                 + this->DAT_SomeTile * 4)
-                                                & 0x100000)
-                                            != 0) {
-                                            this->bitFlag = this->bitFlag | 0x80;
-                                        }
-                                        if ((*(uint*)((char*)this->ptr_LogicLayer
-                                                 + *(int*)((int)((char*)this->ptr_MovementDirectionTranslationMatrix
-                                                               + this->DAT_SomeY * 0x20)
-                                                       + 0x10)
-                                                     * 4
-                                                 + this->DAT_SomeTile * 4)
-                                                & 0x100000)
-                                            != 0) {
-                                            this->bitFlag = this->bitFlag | 8;
-                                        }
+                                                                                _gfxLayer = (char*)this->ptr_LogicLayer;
+                                        _gfxTile = this->DAT_SomeTile;
+                                        _gfxY = this->DAT_SomeY;
+                                        MACRO_GFX_CARDINAL_MASK(c5, 4, MACRO_GFX_SHIFT_4, MACRO_GFX_ROWSTEP_4, 0x100000)
                                         if (this->bitFlag == 0) {
                                             if ((this->MiscDisplayLayer[this->DAT_SomeTile] & 0xc0) == 0) {
                                                                                                 _gfxLayer = (char*)this->ptr_MiscDisplayLayer;
