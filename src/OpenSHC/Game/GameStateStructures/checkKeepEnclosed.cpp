@@ -2,6 +2,7 @@
 
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
+#include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
@@ -29,8 +30,10 @@ namespace Game {
         if (this->playerDataArray[playerID].campground.id == 0) {
             return FALSE;
         }
-        int zoneSize = DAT_PathFindingState::instance.zoneSizesArray[(short)DAT_TileMapState::instance
-                .PathConnectionLayer[this->playerDataArray[playerID].campground.tileEntry]];
+        int keepArea
+            = (short)
+                  DAT_TileMapState::instance.PathConnectionLayer[this->playerDataArray[playerID].campground.tileEntry];
+        int zoneSize = DAT_PathFindingState::instance.zoneSizesArray[keepArea];
         if (zoneSize < 300) {
             return FALSE;
         }
@@ -59,15 +62,16 @@ namespace Game {
             }
         }
         for (int otherPlayerID = 1; otherPlayerID < 9; otherPlayerID++) {
-            if ((this->mapAndTime.playerTeams[playerID] != this->mapAndTime.playerTeams[otherPlayerID])
-                && (this->playerDataArray[otherPlayerID].campground.id != 0)
-                && (this->playerDataArray[otherPlayerID].lordKilledByPlayerID == 0)
+            if (DAT_GameState::instance.mapAndTime.playerTeams[playerID]
+                == DAT_GameState::instance.mapAndTime.playerTeams[otherPlayerID]) {
+                continue;
+            }
+            int otherTile = this->playerDataArray[otherPlayerID].campground.tileEntry;
+            if ((this->playerDataArray[otherPlayerID].campground.id != 0)
+                && (DAT_GameState::instance.playerDataArray[otherPlayerID].lordKilledByPlayerID == 0)
                 && ((DAT_GameSynchronyState::instance.currentPlayerFullIDArray[otherPlayerID] != -1)
                     || (DAT_GameSynchronyState::instance.currentAIArray[otherPlayerID] != 0))
-                && ((short)DAT_TileMapState::instance
-                        .PathConnectionLayer[this->playerDataArray[playerID].campground.tileEntry]
-                    == (short)DAT_TileMapState::instance
-                           .PathConnectionLayer[this->playerDataArray[otherPlayerID].campground.tileEntry])) {
+                && (keepArea == (short)DAT_TileMapState::instance.PathConnectionLayer[otherTile])) {
                 return FALSE;
             }
         }

@@ -17159,7 +17159,7 @@ SHC_3BB0A8C1_0x00456FD0 | 30.5% | Spills differ
 
 SHC_3BB0A8C1_0x004572A0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004574C0 | 84.4% | Reg alloc differs
+SHC_3BB0A8C1_0x004574C0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004575D0 | 0.0% | Pending
 
