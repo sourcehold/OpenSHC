@@ -62505,7 +62505,7 @@ SHC_3BB0A8C1_0x0054BFC0 | 46.1% | branch shape differs
 
 SHC_3BB0A8C1_0x0054C1C0 | 32.5% | reg alloc
 
-SHC_3BB0A8C1_0x0054C4F0 | 14.0% | orig walks matrix row ptr
+SHC_3BB0A8C1_0x0054C4F0 | 41.9% | field reloads, reg alloc
 
 SHC_3BB0A8C1_0x0054C610 | 72.7% | call+reg alloc differs
 
