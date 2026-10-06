@@ -14,6 +14,7 @@
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
+#include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_LandscapeState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
@@ -59,11 +60,10 @@ namespace Game {
             } else if (this->gameTicksLoadBalancer == 31) {
                 MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::createStatsPopUpEntities, this)();
             } else if (this->gameTicksLoadBalancer == 34) {
-                MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::recountTotalTroopValue,
-                    DAT_TroopValueState::ptr)();
-            } else if (this->gameTicksLoadBalancer == 40) {
                 MACRO_CALL_MEMBER(
-                    OpenSHC::Map::TileMapState_Func::updateMoatCountdownTimers, DAT_TileMapState::ptr)();
+                    OpenSHC::Map::Units::TroopValueState_Func::recountTotalTroopValue, DAT_TroopValueState::ptr)();
+            } else if (this->gameTicksLoadBalancer == 40) {
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateMoatCountdownTimers, DAT_TileMapState::ptr)();
             } else if (this->gameTicksLoadBalancer == 50) {
                 /*
                   no work scheduled for this tick
@@ -116,12 +116,11 @@ namespace Game {
                 MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::recountStablesAndHorses, this)();
             }
         }
-        if (this->mapAndTime.skirmishNoRushTicks != 0) {
-            this->mapAndTime.skirmishNoRushTicks = this->mapAndTime.skirmishNoRushTicks - 1;
+        if (DAT_GameState::instance.mapAndTime.skirmishNoRushTicks != 0) {
+            DAT_GameState::instance.mapAndTime.skirmishNoRushTicks -= 1;
         }
         if ((DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY)
-            && (DAT_GameSynchronyState::instance.currentGameMode
-                != OpenSHC::Game::GM_SKIRMISH_SINGLE_PLAYER)) {
+            && (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SKIRMISH_SINGLE_PLAYER)) {
             MACRO_CALL_MEMBER(
                 OpenSHC::Synchrony::GameSynchronyState_Func::checkGameSync, DAT_GameSynchronyState::ptr)();
         }
@@ -132,8 +131,7 @@ namespace Game {
         }
         if (((int)DAT_GameCore::instance.mapTimeInTicks % 200 == 0)
             && (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY)
-            && (DAT_GameSynchronyState::instance.currentGameMode
-                != OpenSHC::Game::GM_SKIRMISH_SINGLE_PLAYER)) {
+            && (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SKIRMISH_SINGLE_PLAYER)) {
             /*
               check game sync
              */
@@ -147,11 +145,16 @@ namespace Game {
         if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_SIEGE_THAT) {
             return;
         }
-        MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::updateDateAndTime, this)(
-            this->gameTicksLoadBalancer == 0, this->gameTicksLoadBalancer);
+        if (this->gameTicksLoadBalancer == 0) {
+            MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::updateDateAndTime, this)(
+                TRUE, this->gameTicksLoadBalancer);
+        } else {
+            MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::updateDateAndTime, this)(
+                FALSE, this->gameTicksLoadBalancer);
+        }
         if (this->mapAndTime.weekChanged != 0) {
-            DAT_GameSynchronyState::instance.finalResults.yearEnd = this->mapAndTime.year;
-            DAT_GameSynchronyState::instance.finalResults.monthEnd = this->mapAndTime.month;
+            DAT_GameSynchronyState::instance.finalResults.yearEnd = DAT_GameState::instance.mapAndTime.year;
+            DAT_GameSynchronyState::instance.finalResults.monthEnd = DAT_GameState::instance.mapAndTime.month;
             MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::updateCrowding, this)();
             MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::updateTrader, this)();
             MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::updateTaxing, this)();
