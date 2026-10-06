@@ -62,11 +62,12 @@ namespace Map {
                 || unitType == OpenSHC::Map::Units::UT_FIREEATER || unitType == OpenSHC::Map::Units::UT_PRIEST) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::assignNameToUnit, this)(unitID);
             }
-            if (this->units[unitID].owner <= 0) {
+            short _owner = this->units[unitID].owner;
+            if (_owner <= 0) {
                 this->units[unitID].occupancyOrFlag = 0xff;
                 this->units[unitID].field258_0x3d1 = 0xff;
             } else {
-                this->units[unitID].occupancyOrFlag = '\x01' << ((char)this->units[unitID].owner - 1U & 0x1f);
+                this->units[unitID].occupancyOrFlag = 1 << (_owner - 1 & 0x1f);
                 this->units[unitID].field258_0x3d1 = ~this->units[unitID].occupancyOrFlag;
             }
             this->units[unitID].isSelectable_OR_matchTime = 0;
