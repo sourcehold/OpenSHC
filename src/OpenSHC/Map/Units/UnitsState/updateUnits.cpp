@@ -55,7 +55,6 @@ namespace Map {
             uint _unitIDBased8value;
             int _troopValue;
             uint _rngNumber8;
-            uint _unitID;
             uint _currentUnitID;
             UnitTypeShort _unitType;
             int _buildingID;
@@ -489,7 +488,7 @@ namespace Map {
                                     this->units[DAT_CurrentUnitSlotID::instance].padding_0x83[0] = 0;
                                 }
                                 if ((int)((byte)this->units[DAT_CurrentUnitSlotID::instance].heightDiv10 + 0xd)
-                                    <= DAT_UpdateUnitsTracker::instance) {
+                                    <= (int)DAT_UpdateUnitsTracker::instance) {
                                     this->units[DAT_CurrentUnitSlotID::instance].heightDiv10 = 0;
                                     this->units[DAT_CurrentUnitSlotID::instance].padding_0x83[0] = 0;
                                 }
