@@ -77,48 +77,30 @@ namespace Game {
             this->playerDataArray[playerID].countArmorersAndBlacksmiths = 0;
             this->playerDataArray[playerID].countBakers = 0;
             this->playerDataArray[playerID].countBrewers = 0;
-            for (int targetSlot = 0; targetSlot < 100; targetSlot += 2) {
+            for (int targetSlot = 0; targetSlot < 100; targetSlot++) {
                 this->playerDataArray[playerID].top100TargetableBuildings[targetSlot] = 0;
-                this->playerDataArray[playerID].top100TargetableBuildings[targetSlot + 1] = 0;
             }
             this->playerDataArray[playerID].top100TargetableBuildingsTracker = 0;
-            this->playerDataArray[playerID].rallySearchOffsetsUnk[0] = 0;
-            this->playerDataArray[playerID].rallySearchOffsetsUnk[1] = 0;
-            this->playerDataArray[playerID].rallySearchOffsetsUnk[2] = 0;
-            this->playerDataArray[playerID].rallySearchOffsetsUnk[3] = 0;
-            this->playerDataArray[playerID].rallySearchOffsetsUnk[4] = 0;
-            this->playerDataArray[playerID].rallySearchOffsetsUnk[5] = 0;
-            this->playerDataArray[playerID].rallySearchOffset = 0;
-            this->playerDataArray[playerID].someCount20 = 0;
-            this->playerDataArray[playerID].someCount21 = 0;
-            this->playerDataArray[playerID].someCount22 = 0;
-            this->playerDataArray[playerID].countArabianArchersRelated = 0;
-            this->playerDataArray[playerID].countRelatedToHorseArchers = 0;
-            this->playerDataArray[playerID].countSlaves = 0;
-            this->playerDataArray[playerID].countAssassinsAndArabianSwordsman = 0;
-            this->playerDataArray[playerID].countSlingers = 0;
-            this->playerDataArray[playerID].countFireThrowers = 0;
-            this->playerDataArray[playerID].someCount23 = 0;
-            this->playerDataArray[playerID].someCount24 = 0;
-            this->playerDataArray[playerID].someCount25 = 0;
-            this->playerDataArray[playerID].someCount26 = 0;
-            this->playerDataArray[playerID].currentArchers = 0;
-            this->playerDataArray[playerID].currentCrossbowmen = 0;
-            this->playerDataArray[playerID].currentSpearmen = 0;
-            this->playerDataArray[playerID].currentPikemen = 0;
-            this->playerDataArray[playerID].currentMacemen = 0;
-            this->playerDataArray[playerID].currentSwordsmen = 0;
-            this->playerDataArray[playerID].currentKnights = 0;
-            this->playerDataArray[playerID].currentLaddermen = 0;
-            this->playerDataArray[playerID].currentEngineers = 0;
-            this->playerDataArray[playerID].currentTunnelers = 0;
+            /*
+              clears the 20 counters from rallySearchOffsetsUnk up to and including someCount26 as one array,
+              exactly as the original binary does
+             */
+            for (int counterIndex = 0; counterIndex < 20; counterIndex++) {
+                this->playerDataArray[playerID].rallySearchOffsetsUnk[counterIndex] = 0;
+            }
+            /*
+              clears the 10 troop counters from currentArchers up to and including currentTunnelers as one array
+             */
+            for (int troopIndex = 0; troopIndex < 10; troopIndex++) {
+                (&this->playerDataArray[playerID].currentArchers)[troopIndex] = 0;
+            }
             this->playerDataArray[playerID].someCount27 = 0;
             this->playerDataArray[playerID].someCount28 = 0;
             this->playerDataArray[playerID].someCount29 = 0;
             this->playerDataArray[playerID].someCount30 = 0;
             this->playerDataArray[playerID].someCount31 = 0;
             this->playerDataArray[playerID].currentResources[0] = 1;
-            if (this->playerDataArray[playerID].aleRate < 1) {
+            if (this->playerDataArray[playerID].aleRate <= 0) {
                 this->playerDataArray[playerID].aleRate = 30;
             }
             if (this->playerDataArray[playerID].someCount32 != 0) {

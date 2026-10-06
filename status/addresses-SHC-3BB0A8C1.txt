@@ -17043,7 +17043,7 @@ SHC_3BB0A8C1_0x00455E10 | 60.5% | Reg alloc differs
 
 SHC_3BB0A8C1_0x00455E40 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004560F0 | 7.3% | Reg naming only, same shape
+SHC_3BB0A8C1_0x004560F0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004563B0 | 100.0% | Reimplemented
 
