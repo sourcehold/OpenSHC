@@ -9,24 +9,36 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00534520
         void UnitsState::writeSixToTileMap1104InAllDirections(int unitID, undefined4 six)
         {
+            /* The 3x3 stamp is handwritten assembly in the original: the row centre is parked with
+               push/pop and the locals are reloaded from their stack slots. */
+            uchar* _layer = DAT_TileMapState::instance.SEC_TileMap1104;
             int _tile = this->units[unitID].tile;
-            uchar* _tileMap1104 = DAT_TileMapState::instance.SEC_TileMap1104;
             int _y = this->units[unitID].y;
-            uchar _value = (uchar)six;
-            uchar* _row = _tileMap1104 + _tile;
-            _row[1] = _value;
-            _row[-1] = _value;
-            _row[0] = _value;
-            int* _directionRow
-                = (int*)((uchar*)DAT_TileMapState::instance.ptr_MovementDirectionTranslationMatrix + _y * 0x20);
-            uchar* _nextRow = _row + _directionRow[0];
-            _nextRow[-1] = _value;
-            _nextRow[1] = _value;
-            _nextRow[0] = _value;
-            _row = _row + _directionRow[4];
-            _row[-1] = _value;
-            _row[1] = _value;
-            _row[0] = _value;
+            __asm {
+                mov ebx, six
+                mov esi, _layer
+                mov eax, _tile
+                add esi, eax
+                push esi
+                mov edx, dword ptr [DAT_TileMapState::instance]TileMapState.ptr_MovementDirectionTranslationMatrix
+                mov eax, _y
+                shl eax, 5
+                add edx, eax
+                mov byte ptr [esi + 1], bl
+                mov byte ptr [esi - 1], bl
+                mov byte ptr [esi], bl
+                mov ecx, dword ptr [edx]
+                add esi, ecx
+                mov byte ptr [esi - 1], bl
+                mov byte ptr [esi + 1], bl
+                mov byte ptr [esi], bl
+                mov ecx, dword ptr [edx + 0x10]
+                pop esi
+                add esi, ecx
+                mov byte ptr [esi - 1], bl
+                mov byte ptr [esi + 1], bl
+                mov byte ptr [esi], bl
+            }
         }
 
     }

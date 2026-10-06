@@ -50813,7 +50813,7 @@ SHC_3BB0A8C1_0x00534460 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00534490 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00534520 | 22.2% | spills base+tile to stack
+SHC_3BB0A8C1_0x00534520 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005345A0 | 61.7% | orig walks unit ptr
 
