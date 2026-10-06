@@ -17037,7 +17037,7 @@ SHC_3BB0A8C1_0x00455C60 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00455D40 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00455D90 | 94.3% | Loop base displacement
+SHC_3BB0A8C1_0x00455D90 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00455E10 | 60.5% | Reg alloc differs
 
