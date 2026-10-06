@@ -26,34 +26,33 @@ namespace Map {
             return;
         }
 
-        if (index > 37) {
+        if (index >= 37) {
             index = 0;
         }
-        int brushStep = DAT_TerrainDefinedData::instance.field12_0xc[index];
-        if (brushStep == 0xf) {
+        int direction = DAT_TerrainDefinedData::instance.field12_0xc[index];
+        if (direction == 0xf) {
             return;
         }
-        if (brushStep < 8) {
-            *tilePointer = *tilePointer + this->directionTranslationMatrix[*yPointer][brushStep];
+        if (direction < 8) {
+            *tilePointer = *tilePointer + this->directionTranslationMatrix[*yPointer][direction];
             *yPointer = *yPointer
-                + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[brushStep].int_.yOffset;
+                + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.yOffset;
             return;
         }
 
-        int direction;
-        if (brushStep < 28) {
-            direction = brushStep + 20;
-            brushStep = this->directionTranslationMatrix[*yPointer - 3][brushStep + 4];
+        /* 20 to 27 step twice in a direction, 40 to 47 three times */
+        if (direction < 28) {
+            direction = direction - 20;
         } else {
-            if (brushStep > 48) {
+            if (direction >= 48) {
                 return;
             }
-            direction = brushStep + 40;
+            direction = direction - 40;
             *tilePointer = *tilePointer + this->directionTranslationMatrix[*yPointer][direction];
-            *yPointer = *yPointer + DAT_TerrainDefinedData::instance.field12_0xc[brushStep * 2 - 0x15];
-            brushStep = this->directionTranslationMatrix[*yPointer][direction];
+            *yPointer = *yPointer
+                + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.yOffset;
         }
-        *tilePointer = *tilePointer + brushStep;
+        *tilePointer = *tilePointer + this->directionTranslationMatrix[*yPointer][direction];
         *yPointer
             = *yPointer + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.yOffset;
         *tilePointer = *tilePointer + this->directionTranslationMatrix[*yPointer][direction];
