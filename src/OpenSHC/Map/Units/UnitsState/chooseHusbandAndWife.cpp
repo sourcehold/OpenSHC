@@ -65,7 +65,7 @@ namespace Map {
                 case OpenSHC::Map::Units::UT_BREWER:
                 case OpenSHC::Map::Units::UT_TANNER:
                 case OpenSHC::Map::Units::UT_MOTHER:
-                    if ((char)this->units[unitID].firstNameIndex > 52 && _womenCount < 100) {
+                    if ((char)this->units[unitID].firstNameIndex >= 52 && _womenCount < 100) {
                         _womenIDs[_womenCount] = unitID;
                         _womenCount = _womenCount + 1;
                     }
