@@ -29,7 +29,7 @@ import common
 quiet = '-q' in sys.argv
 keep_slots = '-s' in sys.argv
 files = [os.path.abspath(f) for f in sys.argv[1:] if f not in ('-q', '-s')]
-if not files:
+if not files and __name__ == "__main__":
     sys.exit(__doc__)
 ROOT = str(common.ROOT).replace(chr(92), '/')
 os.chdir(ROOT)
@@ -166,18 +166,27 @@ def canon(s):
     return s
 
 
-for f in files:
+def streams(f):
+    """(original, ours) normalized instruction lists for one source file."""
     src = open(f, encoding='utf-8').read()
     va = int(re.search(r'FUNCTION: STRONGHOLDCRUSADER (0x[0-9A-Fa-f]+)', src).group(1), 16)
-    a = [canon(x) for x in orig(va)]
     cls, name = re.search(r'FUNCTION: STRONGHOLDCRUSADER[^\n]*\n[^\n(]*?(\w+)::(\w+)\(', src).groups()
     b = ours(f, cls, name)
-    if b is None:
-        continue
-    b = [canon(x) for x in b]
-    ratio = difflib.SequenceMatcher(None, a, b, autojunk=False).ratio()
-    print('##### %s  ratio %.4f  orig %d ours %d' % (os.path.basename(f), ratio, len(a), len(b)))
-    if not quiet:
-        for l in difflib.unified_diff(a, b, lineterm='', n=2):
-            if not l.startswith(('---', '+++')):
-                print(l)
+    return [canon(x) for x in orig(va)], (None if b is None else [canon(x) for x in b])
+
+
+def main():
+    for f in files:
+        a, b = streams(f)
+        if b is None:
+            continue
+        ratio = difflib.SequenceMatcher(None, a, b, autojunk=False).ratio()
+        print('##### %s  ratio %.4f  orig %d ours %d' % (os.path.basename(f), ratio, len(a), len(b)))
+        if not quiet:
+            for l in difflib.unified_diff(a, b, lineterm='', n=2):
+                if not l.startswith(('---', '+++')):
+                    print(l)
+
+
+if __name__ == '__main__':
+    main()
