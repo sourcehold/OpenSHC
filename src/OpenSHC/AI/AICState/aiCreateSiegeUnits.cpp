@@ -32,9 +32,9 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004D2000
     void AICState::aiCreateSiegeUnits(int playerID)
     {
-        int aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
-        if (aiType == OpenSHC::AI::AIT_NULL)
+        if (DAT_GameState::instance.playerDataArray[playerID].aiType == OpenSHC::AI::AIT_NULL)
             return;
+        int aicIndex = DAT_GameState::instance.playerDataArray[playerID].aiType - 1;
         int guildID = DAT_GameState::instance.playerDataArray[playerID].engineersGuild.id;
         if (guildID <= 0)
             return;
@@ -46,7 +46,7 @@ namespace AI {
         for (int siegeIndex = 0; siegeIndex < 4; siegeIndex++) {
             int locationCount = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount
                                     [DAT_SkirmishDefinedData::instance.SiegeEngineMetaInfoArray[siegeIndex].slot];
-            if (locationCount >= 4)
+            if (locationCount > 3)
                 locationCount = 3;
 
             for (int i = 0; i < locationCount; i++) {
@@ -141,13 +141,13 @@ namespace AI {
                               .requiredGold;
                     DAT_GameState::instance.playerDataArray[playerID].aiSiegeCreationInformation[siegeIndex][i].delay++;
                     if (DAT_GameState::instance.playerDataArray[playerID].currentResources[Game::Resources::RT_GOLD]
-                            + this->aics[aiType - 1].defSiegeEngineGoldThreshold
+                            + this->aics[aicIndex].defSiegeEngineGoldThreshold
                         < requiredGold)
                         continue;
                     if (DAT_GameState::instance.playerDataArray[playerID]
                             .aiSiegeCreationInformation[siegeIndex][i]
                             .delay
-                        < this->aics[aiType - 1].defSiegeEngineBuildDelay)
+                        < this->aics[aicIndex].defSiegeEngineBuildDelay)
                         continue;
 
                     int y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[location];
