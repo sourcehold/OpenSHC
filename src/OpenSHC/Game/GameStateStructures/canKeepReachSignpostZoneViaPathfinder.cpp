@@ -21,21 +21,21 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x004578F0
     BOOLEnum GameStateStructures::canKeepReachSignpostZoneViaPathfinder(int playerID, int param_2, int signpostSlot)
     {
-        ushort keepArea
-            = DAT_TileMapState::instance.PathConnectionLayer[this->playerDataArray[playerID].campground.tileEntry];
-        ushort signpostArea = DAT_TileMapState::instance.PathConnectionLayer[this->mapAndTime
-                .signpostEntryData[(&DAT_TroopValueState::instance.attackInfo
-                                         .unknownSignpostRelatedArray)[signpostSlot]]
-                .tile];
-        if (keepArea == 0) {
+        int keepTile = this->playerDataArray[playerID].campground.tileEntry;
+        int signpostTile = this->mapAndTime
+                               .signpostEntryData[(
+                                   &DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray)[signpostSlot]]
+                               .tile;
+        if (DAT_TileMapState::instance.PathConnectionLayer[keepTile] == 0) {
             return FALSE;
         }
-        if (signpostArea == 0) {
+        if (DAT_TileMapState::instance.PathConnectionLayer[signpostTile] == 0) {
             return FALSE;
         }
         return MACRO_CALL_MEMBER(
                    OpenSHC::Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
-                   DAT_PathFindingState::ptr)(param_2, (short)keepArea, (short)signpostArea, 2)
+                   DAT_PathFindingState::ptr)(param_2, (short)DAT_TileMapState::instance.PathConnectionLayer[keepTile],
+                   (short)DAT_TileMapState::instance.PathConnectionLayer[signpostTile], 2)
             != 0;
     }
 }
