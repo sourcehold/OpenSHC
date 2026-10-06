@@ -51105,7 +51105,7 @@ SHC_3BB0A8C1_0x00535BC0 | 57.9% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x00535DF0 | 46.1% | call+reg alloc differs
 
-SHC_3BB0A8C1_0x00535E20 | 65.1% | reg alloc
+SHC_3BB0A8C1_0x00535E20 | 85.9% | reg alloc differs
 
 SHC_3BB0A8C1_0x00535FD0 | 88.9% | orig walks hotkey ptr
 

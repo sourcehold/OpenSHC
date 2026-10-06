@@ -9,6 +9,7 @@
 #include "OpenSHC/Globals/DAT_SFXState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
 #include "OpenSHC/Globals/DAT_UIDragDropDefinedData.hpp"
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -22,10 +23,10 @@ namespace Map {
         void UnitsState::selectSiegeEngineAndPlayFeedback(int playerID, int unitID, int tribeID)
         {
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::removeUnitFromTribe, DAT_TribesState::ptr)(
-                unitID, this->units[unitID].tribeID);
-            this->units[unitID].isSelected = 1;
-            this->units[unitID].selectionRelatedFlag = 1;
-            this->units[unitID].ifSelectedThenPlayerID = (short)playerID;
+                unitID, DAT_UnitsState::instance.units[unitID].tribeID);
+            DAT_UnitsState::instance.units[unitID].isSelected = 1;
+            DAT_UnitsState::instance.units[unitID].selectionRelatedFlag = 1;
+            DAT_UnitsState::instance.units[unitID].ifSelectedThenPlayerID = (short)playerID;
             this->unitCountOfSelection[playerID] = this->unitCountOfSelection[playerID] + 1;
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::addUnitToTribeAndUpdateTribeMovementSpeed,
                 DAT_TribesState::ptr)(playerID, unitID, tribeID);
@@ -34,7 +35,7 @@ namespace Map {
                 DAT_UIDragDropDefinedData::instance.MenuView_TriggerInitial = TRUE;
                 return;
             }
-            UnitType _unitType = (UnitType)(short)this->units[unitID].unitType;
+            UnitType _unitType = (UnitType)(short)DAT_UnitsState::instance.units[unitID].unitType;
             if (_unitType == OpenSHC::Map::Units::UT_S_CATAPULT || _unitType == OpenSHC::Map::Units::UT_S_TOWER
                 || _unitType == OpenSHC::Map::Units::UT_S_BATTERINGRAM || _unitType == OpenSHC::Map::Units::UT_S_SHIELD
                 || _unitType == OpenSHC::Map::Units::UT_S_BALLISTA || _unitType == OpenSHC::Map::Units::UT_S_FBALLISTA
@@ -44,7 +45,7 @@ namespace Map {
                 int _remainingEngineers = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Units::UnitsState_Func::getRemainingRequiredEngineers, this)(_siegeEngineUnitID);
                 if (_remainingEngineers > 0) {
-                    if (this->units[_siegeEngineUnitID]
+                    if (DAT_UnitsState::instance.units[_siegeEngineUnitID]
                                 .digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300
                             == 0
                         || _remainingEngineers > 3) {
@@ -65,7 +66,7 @@ namespace Map {
                 }
                 if ((_unitType == OpenSHC::Map::Units::UT_S_CATAPULT
                         || _unitType == OpenSHC::Map::Units::UT_S_TREBUCHET)
-                    && this->units[_siegeEngineUnitID].stoneAmmunition <= 0) {
+                    && DAT_UnitsState::instance.units[_siegeEngineUnitID].stoneAmmunition <= 0) {
                     MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSpeechSFX, DAT_SFXState::ptr)(
                         OpenSHC::Audio::SFX::SEID_RESOURCE_NEED25);
                     DAT_UIDragDropDefinedData::instance.MenuView_TriggerInitial = TRUE;
