@@ -40369,7 +40369,7 @@ SHC_3BB0A8C1_0x004FAEE0 | 55.3% | ecx not kept across callee
 
 SHC_3BB0A8C1_0x004FAF70 | 98.5% | offset walk regalloc
 
-SHC_3BB0A8C1_0x004FB0C0 | 50.4% | 50.43% two jump tables, slot r
+SHC_3BB0A8C1_0x004FB0C0 | 62.4% | LTCG, rotation hoisted
 
 SHC_3BB0A8C1_0x004FB2E0 | 0.0% | Pending
 

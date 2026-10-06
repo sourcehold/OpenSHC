@@ -20,6 +20,7 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004FB0C0
     void TileMapState::setMiscDisplayLayer(int buildingID)
     {
+        int rotation = this->mapOrientation / 2;
         if (DAT_BuildingsState::instance.buildings[buildingID].unknownStockpileOrSignpostRelated == 0) {
             return;
         }
@@ -29,7 +30,7 @@ namespace Map {
         uint size = DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight;
         OpenSHC::Map::Buildings::BuildingTypeShort type = DAT_BuildingsState::instance.buildings[buildingID].buildingType;
         int typeInt = (short)type;
-        int offsetIndex = this->mapOrientation / 2 + size * 4;
+        int offsetIndex = rotation + size * 4;
         int workerTile = DAT_TerrainDefinedData::instance.orientationRelativeBuildingTileOffset1[offsetIndex];
         int displayTile = DAT_TerrainDefinedData::instance.orientationRelativeBuildingTileOffset2[offsetIndex];
         int extraTile = -1;
@@ -58,7 +59,7 @@ namespace Map {
             displayTile = DAT_TerrainDefinedData::instance.orientationRelativeBuildingTileOffset1[offsetIndex];
             break;
         case OpenSHC::Map::Buildings::BT_DRAWBRIDGE:
-            switch (this->mapOrientation / 2) {
+            switch (rotation) {
             case 0:
                 displayTile = 0x13;
                 extraTile = 6;
