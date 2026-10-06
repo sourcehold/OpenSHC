@@ -39,7 +39,7 @@ namespace Map {
             int _skipStanceSearch = 0;
             int _stanceBasedRange = 0;
             short _isRallying = 0;
-            if ((DAT_UnitsState::instance.units[unitID].SA != 0
+            if ((this->units[unitID].SA != 0
                     || (this->units[unitID].movementType_OR_targetUnitID != 0
                         && this->units[unitID].state.generic == OpenSHC::Map::Units::States::US_MOVE_TO_DESTINATION))
                 && this->units[unitID].tribeID != 0) {
