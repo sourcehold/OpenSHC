@@ -100,13 +100,13 @@ namespace Map {
                             + sVar2;
                         this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = dVar4;
                         this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                        if (0x13a10 <= this->searchQueue.writeIndex) {
+                        if (0x13a10 <= (int)this->searchQueue.writeIndex) {
                             this->searchQueue.writeIndex = 0;
                         }
                     }
                 }
                 this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                if (0x13a10 <= this->searchQueue.readIndex) {
+                if (0x13a10 <= (int)this->searchQueue.readIndex) {
                     this->searchQueue.readIndex = 0;
                 }
                 dVar4 = local_8;
