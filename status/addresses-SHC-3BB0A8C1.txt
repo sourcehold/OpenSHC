@@ -44729,7 +44729,7 @@ SHC_3BB0A8C1_0x00511DF0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005120C0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00512100 | 70.7% | 87.94% call targets only
+SHC_3BB0A8C1_0x00512100 | 89.0% | global instance access
 
 SHC_3BB0A8C1_0x00512180 | 0.0% | Pending
 
