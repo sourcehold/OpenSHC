@@ -14,10 +14,10 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x005346D0
         int UnitsState::selectNewBlessingTarget(int unitID)
         {
-            short _playerID = this->units[unitID].owner;
-            short _x = this->units[unitID].x;
+            int _playerID = this->units[unitID].owner;
+            int _x = this->units[unitID].x;
+            int _y = this->units[unitID].y;
             int _bestUnitID = 0;
-            short _y = this->units[unitID].y;
             int _highestPreference = 0;
             for (int _targetUnitID = 1; _targetUnitID < (int)this->maxUnitCount; ++_targetUnitID) {
                 if (this->units[_targetUnitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
@@ -33,9 +33,11 @@ namespace Map {
                     != 0) {
                     continue;
                 }
-                if (this->units[_targetUnitID].blessedAmount >= 4000) {
+                int _blessedAmount = this->units[_targetUnitID].blessedAmount;
+                if (_blessedAmount >= 4000) {
                     continue;
                 }
+                int _preference = (4000 - _blessedAmount) >> 6;
                 int _distance = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                     DAT_DirectionAlgorithmState::ptr)(
@@ -43,8 +45,8 @@ namespace Map {
                 if (_distance > 40) {
                     continue;
                 }
-                int _preference = ((4000 - this->units[_targetUnitID].blessedAmount) >> 6) - _distance / 2;
-                if (_highestPreference < _preference) {
+                _preference += _distance / -2;
+                if (_preference > _highestPreference) {
                     _highestPreference = _preference;
                     _bestUnitID = _targetUnitID;
                 }
