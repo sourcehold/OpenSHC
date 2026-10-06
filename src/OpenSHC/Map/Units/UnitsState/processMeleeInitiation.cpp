@@ -23,6 +23,8 @@ namespace Map {
         using OpenSHC::Map::Units::UnitType;
         using OpenSHC::Map::Units::States::UnitState;
 
+#pragma optimize("y", off)
+
         // FUNCTION: STRONGHOLDCRUSADER 0x00549C70
         void UnitsState::processMeleeInitiation(int unitID)
 
@@ -575,6 +577,8 @@ namespace Map {
                 this->units[unitID].field259_0x3d2 = 0;
             }
         }
+
+#pragma optimize("y", on)
     }
 }
 }
