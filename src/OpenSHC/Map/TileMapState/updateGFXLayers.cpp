@@ -7,6 +7,7 @@
 #include "OpenSHC/Globals/DAT_DirectionAlgorithmState.hpp"
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
+#include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 #include "OpenSHC/Globals/GMTotalPicturesProcessed.hpp"
 
@@ -95,7 +96,7 @@ namespace Map {
         rotation = DAT_PathFindingState::instance.mappingYRelated % 10;
         for (blockRow = this->someIndex; blockRow <= this->someLimit; blockRow++) {
             for (blockColumn = this->someYLike; blockColumn <= this->someYLikeLimit; blockColumn++) {
-                if (this->mapping40x40[blockRow][blockColumn] != 0) {
+                if (DAT_TileMapState::instance.mapping40x40[blockRow][blockColumn] != 0) {
                     subRow = rotation;
                     rotation = 0;
                     for (; subRow < 10; subRow++) {
@@ -114,11 +115,11 @@ namespace Map {
                                         if (luminescence < 2) {
                                             luminescence = 2;
                                         }
-                                        macroLow = this->MacroLayer[this->DAT_SomeTile] & 0x3f;
-                                        macroMid = (this->MacroLayer[this->DAT_SomeTile] & 0x7c0) >> 6;
-                                        macroHigh = (this->MacroLayer[this->DAT_SomeTile] & 0xf000) >> 12;
+                                        macroLow = (short)this->MacroLayer[this->DAT_SomeTile] & 0x3f;
+                                        macroMid = ((short)this->MacroLayer[this->DAT_SomeTile] & 0x7c0) >> 6;
+                                        macroHigh = ((short)this->MacroLayer[this->DAT_SomeTile] & 0xf000) >> 12;
                                         macroHigh = macroHigh & 3;
-                                        rotation = this->MacroLayer[this->DAT_SomeTile];
+                                        rotation = (short)this->MacroLayer[this->DAT_SomeTile];
                                         this->PillarGFXLayer[this->DAT_SomeTile]
                                             = (ushort)GMTotalPicturesProcessed::instance[9];
 
@@ -131,7 +132,8 @@ namespace Map {
                                             gfxBaseE = 0x25;
                                             gfxStride = 4;
                                             gfxMode = 0;
-                                        } else if ((this->Logic2Layer[this->DAT_SomeTile] & L2_EARTH_AND_STONES) != 0) {
+                                        } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_EARTH_AND_STONES)
+                                            != 0) {
                                             height = this->HeightLayer[this->DAT_SomeTile];
                                             MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(2, NEIGHBOUR_FLAGS_MASK_L2_EARTH_AND_STONES)
                                             gfxBaseA = 0x99;
@@ -141,7 +143,8 @@ namespace Map {
                                             gfxBaseE = 0xbd;
                                             gfxStride = 4;
                                             gfxMode = 0;
-                                        } else if ((this->Logic2Layer[this->DAT_SomeTile] & L2_OASIS_GRASS) != 0) {
+                                        } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_OASIS_GRASS)
+                                            != 0) {
                                             MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(3, NEIGHBOUR_FLAGS_MASK_L2_OASIS_GRASS)
                                             gfxBaseA = 0x1c9;
                                             gfxBaseB = 0x1cb;
@@ -150,7 +153,8 @@ namespace Map {
                                             gfxBaseE = 0x1ed;
                                             gfxStride = 4;
                                             gfxMode = 0;
-                                        } else if ((this->Logic2Layer[this->DAT_SomeTile] & L2_STONES_OR_DRIVEN_SANDUnk)
+                                        } else if (((char)this->Logic2Layer[this->DAT_SomeTile]
+                                                       & L2_STONES_OR_DRIVEN_SANDUnk)
                                             != 0) {
                                             MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(4, NEIGHBOUR_FLAGS_MASK_L2_STONES)
                                             gfxBaseA = 0x261;
@@ -160,7 +164,7 @@ namespace Map {
                                             gfxBaseE = 0x285;
                                             gfxStride = 4;
                                             gfxMode = 0;
-                                        } else if ((this->Logic2Layer[this->DAT_SomeTile] & L2_SCRUB) != 0) {
+                                        } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_SCRUB) != 0) {
                                             MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(5, NEIGHBOUR_FLAGS_MASK_L2_SCRUB)
                                             gfxBaseA = 0x2f9;
                                             gfxBaseB = 0x2fb;
@@ -169,7 +173,8 @@ namespace Map {
                                             gfxBaseE = 0x31d;
                                             gfxStride = 4;
                                             gfxMode = 0;
-                                        } else if ((this->Logic2Layer[this->DAT_SomeTile] & L2_THICK_SCRUB) != 0) {
+                                        } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_THICK_SCRUB)
+                                            != 0) {
                                             /* the original gathers L2_SCRUB here, not L2_THICK_SCRUB; kept as-is */
                                             MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(6, NEIGHBOUR_FLAGS_MASK_L2_SCRUB)
                                             gfxBaseA = 0x4a9;
@@ -179,7 +184,8 @@ namespace Map {
                                             gfxBaseE = 0x4cd;
                                             gfxStride = 4;
                                             gfxMode = 0;
-                                        } else if ((this->Logic2Layer[this->DAT_SomeTile] & L2_PLATEAU_MEDIUM) != 0) {
+                                        } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_PLATEAU_MEDIUM)
+                                            != 0) {
                                             MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(7, NEIGHBOUR_FLAGS_MASK_L2_PLATEAU_MEDIUM)
                                             gfxBaseA = 0x131;
                                             gfxBaseB = 0x133;
@@ -188,7 +194,8 @@ namespace Map {
                                             gfxBaseE = 0x155;
                                             gfxStride = 4;
                                             gfxMode = 2;
-                                        } else if ((this->Logic2Layer[this->DAT_SomeTile] & L2_PLATEAU_HIGH) != 0) {
+                                        } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_PLATEAU_HIGH)
+                                            != 0) {
                                             MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(8, NEIGHBOUR_FLAGS_MASK_L2_PLATEAU_HIGH)
                                             gfxBaseA = 0x131;
                                             gfxBaseB = 0x133;
@@ -197,7 +204,7 @@ namespace Map {
                                             gfxBaseE = 0x155;
                                             gfxStride = 4;
                                             gfxMode = 2;
-                                        } else if ((this->Logic2Layer[this->DAT_SomeTile] & L2_BEACH) != 0) {
+                                        } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_BEACH) != 0) {
                                             MACRO_NEIGHBOUR_FLAGS_TERRAIN_4(9, NEIGHBOUR_FLAGS_MASK_L2_BEACH)
                                             savedBitFlag = this->bitFlag;
                                             MACRO_NEIGHBOUR_FLAGS_LOGIC_4(10, NEIGHBOUR_FLAGS_MASK_SEA)
@@ -253,7 +260,7 @@ namespace Map {
                                                         this->GfxLayer[this->DAT_SomeTile]
                                                             = GMTotalPicturesProcessed::instance[55] + gfxBaseA
                                                             + (luminescence - 2) * gfxStride - 1
-                                                            + (this->RandomLayer[this->DAT_SomeTile] & 1)
+                                                            + ((short)this->RandomLayer[this->DAT_SomeTile] & 1)
                                                             + DAT_TerrainDefinedData::instance
                                                                   .field2296_0x1d54[index][1];
                                                     }
@@ -272,60 +279,60 @@ namespace Map {
                                                     this->GfxLayer[this->DAT_SomeTile]
                                                         = GMTotalPicturesProcessed::instance[55] + gfxBaseC
                                                         + (luminescence - 2) * gfxStride - 1
-                                                        + (this->RandomLayer[this->DAT_SomeTile] & 3);
+                                                        + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
                                                 }
                                             } else if (luminescence == 2) {
                                                 if (this->bitFlag != 0) {
                                                     this->GfxLayer[this->DAT_SomeTile]
                                                         = GMTotalPicturesProcessed::instance[55] + gfxBaseC
-                                                        + (this->RandomLayer[this->DAT_SomeTile] & 7) - 1;
+                                                        + ((short)this->RandomLayer[this->DAT_SomeTile] & 7) - 1;
                                                 } else {
                                                     this->GfxLayer[this->DAT_SomeTile]
                                                         = GMTotalPicturesProcessed::instance[55] + gfxBaseD
-                                                        + (this->RandomLayer[this->DAT_SomeTile] & 7) - 1;
+                                                        + ((short)this->RandomLayer[this->DAT_SomeTile] & 7) - 1;
                                                 }
                                             } else if (gfxMode == 2) {
                                                 this->GfxLayer[this->DAT_SomeTile]
                                                     = GMTotalPicturesProcessed::instance[55] + gfxBaseA
                                                     + (luminescence - 3) * gfxStride - 1
-                                                    + (this->RandomLayer[this->DAT_SomeTile] & 3);
+                                                    + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
                                             } else if (this->bitFlag != 0) {
                                                 this->GfxLayer[this->DAT_SomeTile]
                                                     = GMTotalPicturesProcessed::instance[55] + gfxBaseA
                                                     + (luminescence - 3) * gfxStride - 1
-                                                    + (this->RandomLayer[this->DAT_SomeTile] & 1);
+                                                    + ((short)this->RandomLayer[this->DAT_SomeTile] & 1);
                                             } else {
                                                 this->GfxLayer[this->DAT_SomeTile]
                                                     = GMTotalPicturesProcessed::instance[55] + gfxBaseB
                                                     + (luminescence - 3) * gfxStride - 1
-                                                    + (this->RandomLayer[this->DAT_SomeTile] & 1);
+                                                    + ((short)this->RandomLayer[this->DAT_SomeTile] & 1);
                                             }
                                         } else if (luminescence > 2) {
                                             if (gfxMode == 0) {
                                                 this->GfxLayer[this->DAT_SomeTile]
                                                     = GMTotalPicturesProcessed::instance[55] + gfxBaseB
                                                     + (luminescence - 3) * gfxStride - 1
-                                                    + (this->RandomLayer[this->DAT_SomeTile] & 1);
+                                                    + ((short)this->RandomLayer[this->DAT_SomeTile] & 1);
                                             } else if (gfxMode == 2) {
                                                 this->GfxLayer[this->DAT_SomeTile]
                                                     = GMTotalPicturesProcessed::instance[55] + gfxBaseA
                                                     + (luminescence - 3) * gfxStride - 1
-                                                    + (this->RandomLayer[this->DAT_SomeTile] & 3);
+                                                    + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
                                             } else {
                                                 this->GfxLayer[this->DAT_SomeTile]
                                                     = GMTotalPicturesProcessed::instance[55] + gfxBaseD
                                                     + (luminescence - 2) * gfxStride - 1
-                                                    + (this->RandomLayer[this->DAT_SomeTile] & 3);
+                                                    + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
                                             }
                                         } else if (macroLow == 2) {
                                             if (gfxMode == 0) {
                                                 this->GfxLayer[this->DAT_SomeTile]
                                                     = GMTotalPicturesProcessed::instance[55] + gfxBaseD
-                                                    + (this->RandomLayer[this->DAT_SomeTile] & 7) - 1;
+                                                    + ((short)this->RandomLayer[this->DAT_SomeTile] & 7) - 1;
                                             } else {
                                                 this->GfxLayer[this->DAT_SomeTile]
                                                     = GMTotalPicturesProcessed::instance[55] + gfxBaseD
-                                                    + (this->RandomLayer[this->DAT_SomeTile] & 3) - 1;
+                                                    + ((short)this->RandomLayer[this->DAT_SomeTile] & 3) - 1;
                                             }
                                         } else if (macroLow == 4) {
                                             macroMid = DAT_TerrainDefinedData::instance
