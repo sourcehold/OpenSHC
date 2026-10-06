@@ -225,10 +225,7 @@ namespace Game {
             if (popularityChange < worstChange) {
                 worstChangeReason = 8;
             }
-            if (this->playerDataArray[playerID].someCount48 == 0) {
-                this->playerDataArray[playerID].someCount54 = 0;
-                this->playerDataArray[playerID].someCount60 = 0;
-            } else {
+            if (this->playerDataArray[playerID].someCount48 != 0) {
                 this->playerDataArray[playerID].someCount48 = this->playerDataArray[playerID].someCount48 - 1;
                 if (this->playerDataArray[playerID].someCount60 != 0) {
                     this->playerDataArray[playerID].someCount60 = this->playerDataArray[playerID].someCount60 + 1;
@@ -253,41 +250,44 @@ namespace Game {
                     this->playerDataArray[playerID].popularity = popularityAfterFear + lateSiegePenalty;
                     this->playerDataArray[playerID].someCount54 = (short)lateSiegePenalty;
                 }
-            }
-            if (this->playerDataArray[playerID].someCount49 == 0) {
-                this->playerDataArray[playerID].someCount55 = 0;
             } else {
+                this->playerDataArray[playerID].someCount54 = 0;
+                this->playerDataArray[playerID].someCount60 = 0;
+            }
+            if (this->playerDataArray[playerID].someCount49 != 0) {
                 this->playerDataArray[playerID].someCount49 = this->playerDataArray[playerID].someCount49 - 1;
                 this->playerDataArray[playerID].popularity = this->playerDataArray[playerID].popularity - 75;
                 this->playerDataArray[playerID].someCount55 = -75;
-            }
-            if (this->playerDataArray[playerID].someCount50 == 0) {
-                this->playerDataArray[playerID].someCount56 = 0;
             } else {
+                this->playerDataArray[playerID].someCount55 = 0;
+            }
+            if (this->playerDataArray[playerID].someCount50 != 0) {
                 this->playerDataArray[playerID].someCount50 = this->playerDataArray[playerID].someCount50 - 1;
                 this->playerDataArray[playerID].popularity = this->playerDataArray[playerID].popularity - 125;
                 this->playerDataArray[playerID].someCount56 = -125;
-            }
-            if (this->playerDataArray[playerID].someCount51 == 0) {
-                this->playerDataArray[playerID].someCount57 = 0;
             } else {
+                this->playerDataArray[playerID].someCount56 = 0;
+            }
+            if (this->playerDataArray[playerID].someCount51 != 0) {
                 this->playerDataArray[playerID].someCount51 = this->playerDataArray[playerID].someCount51 - 1;
                 this->playerDataArray[playerID].popularity = this->playerDataArray[playerID].popularity - 50;
                 this->playerDataArray[playerID].someCount57 = -50;
-            }
-            if (this->playerDataArray[playerID].someCount52 == 0) {
-                this->playerDataArray[playerID].someCount58 = 0;
             } else {
+                this->playerDataArray[playerID].someCount57 = 0;
+            }
+            if (this->playerDataArray[playerID].someCount52 != 0) {
                 this->playerDataArray[playerID].someCount52 = this->playerDataArray[playerID].someCount52 - 1;
                 this->playerDataArray[playerID].popularity = this->playerDataArray[playerID].popularity + 200;
                 this->playerDataArray[playerID].someCount58 = 200;
-            }
-            if (this->playerDataArray[playerID].someCount53 == 0) {
-                this->playerDataArray[playerID].someCount59 = 0;
             } else {
+                this->playerDataArray[playerID].someCount58 = 0;
+            }
+            if (this->playerDataArray[playerID].someCount53 != 0) {
                 this->playerDataArray[playerID].someCount53 = this->playerDataArray[playerID].someCount53 - 1;
                 this->playerDataArray[playerID].popularity = this->playerDataArray[playerID].popularity + 50;
                 this->playerDataArray[playerID].someCount59 = 50;
+            } else {
+                this->playerDataArray[playerID].someCount59 = 0;
             }
             this->playerDataArray[playerID].someCount40 = worstChangeReason;
             if (this->playerDataArray[playerID].popularity < 0) {
