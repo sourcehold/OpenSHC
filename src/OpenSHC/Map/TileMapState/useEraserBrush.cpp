@@ -16,6 +16,7 @@
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
+#include "OpenSHC/Globals/DAT_TileMapState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -106,7 +107,7 @@ namespace Map {
             int index = 0;
             do {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(1, index, (int*)&x, (int*)&y, baseTile, baseY);
-                for (int unit = (short)this->UnitLayer[x]; unit != 0;
+                for (int unit = (short)DAT_TileMapState::instance.UnitLayer[x]; unit != 0;
                      unit = DAT_UnitsState::instance.units[unit].nextUnitOnTheSameTile) {
                     DAT_UnitsState::instance.units[unit].logicalState = OpenSHC::Map::Units::ULS_REMOVE;
                 }
