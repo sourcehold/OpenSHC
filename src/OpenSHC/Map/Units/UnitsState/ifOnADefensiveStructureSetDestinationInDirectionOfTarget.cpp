@@ -7,6 +7,7 @@
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -19,7 +20,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00540040
         BOOLEnum UnitsState::ifOnADefensiveStructureSetDestinationInDirectionOfTarget(int unitID)
         {
-            int _buildingID = DAT_TileMapState::instance.BuildingLayer[this->units[unitID].tile];
+            int _buildingID = DAT_TileMapState::instance.BuildingLayer[DAT_UnitsState::instance.units[unitID].tile];
             if (_buildingID == 0) {
                 return FALSE;
             }
@@ -43,32 +44,40 @@ namespace Map {
             }
             int _targetX;
             int _targetY;
-            if (this->units[unitID].targetingType == OpenSHC::Map::Units::UIT_LIGHT_PITCH) {
-                _targetX = DAT_TileMapState::instance.pitchDitches[this->units[unitID].targetID_OR_targetBuildingID].x;
-                _targetY = DAT_TileMapState::instance.pitchDitches[this->units[unitID].targetID_OR_targetBuildingID].y;
-            } else if (this->units[unitID].targetingType == OpenSHC::Map::Units::UIT_ATTACK_BUILDING) {
-                _targetX
-                    = (short)DAT_BuildingsState::instance.buildings[this->units[unitID].targetID_OR_targetBuildingID].x;
-                _targetY
-                    = (short)DAT_BuildingsState::instance.buildings[this->units[unitID].targetID_OR_targetBuildingID].y;
-            } else if (this->units[unitID].targetingType == OpenSHC::Map::Units::UIT_ATTACK_LAND
-                || this->units[unitID].shootTargetedUnit == -2) {
-                _targetX = this->units[unitID].shootTargetMicroX / 8;
-                _targetY = this->units[unitID].shootTargetMicroY / 8;
+            if (DAT_UnitsState::instance.units[unitID].targetingType == OpenSHC::Map::Units::UIT_LIGHT_PITCH) {
+                _targetX = DAT_TileMapState::instance
+                               .pitchDitches[DAT_UnitsState::instance.units[unitID].targetID_OR_targetBuildingID]
+                               .x;
+                _targetY = DAT_TileMapState::instance
+                               .pitchDitches[DAT_UnitsState::instance.units[unitID].targetID_OR_targetBuildingID]
+                               .y;
+            } else if (DAT_UnitsState::instance.units[unitID].targetingType
+                == OpenSHC::Map::Units::UIT_ATTACK_BUILDING) {
+                _targetX = (short)DAT_BuildingsState::instance
+                               .buildings[DAT_UnitsState::instance.units[unitID].targetID_OR_targetBuildingID]
+                               .x;
+                _targetY = (short)DAT_BuildingsState::instance
+                               .buildings[DAT_UnitsState::instance.units[unitID].targetID_OR_targetBuildingID]
+                               .y;
+            } else if (DAT_UnitsState::instance.units[unitID].targetingType == OpenSHC::Map::Units::UIT_ATTACK_LAND
+                || DAT_UnitsState::instance.units[unitID].shootTargetedUnit == -2) {
+                _targetX = DAT_UnitsState::instance.units[unitID].shootTargetMicroX / 8;
+                _targetY = DAT_UnitsState::instance.units[unitID].shootTargetMicroY / 8;
             } else {
-                _targetX = this->units[this->units[unitID].shootTargetedUnit].x;
-                _targetY = this->units[this->units[unitID].shootTargetedUnit].y;
+                _targetX = DAT_UnitsState::instance.units[DAT_UnitsState::instance.units[unitID].shootTargetedUnit].x;
+                _targetY = DAT_UnitsState::instance.units[DAT_UnitsState::instance.units[unitID].shootTargetedUnit].y;
             }
             int _freeTileX = -1;
             int _freeTileY = -1;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findClosestFreeTileNearUnitOnBuilding,
                 DAT_PathFindingState::ptr)(_buildingID, unitID, _targetX, _targetY, &_freeTileX, &_freeTileY);
-            if (this->units[unitID].x == _freeTileX && this->units[unitID].y == _freeTileY) {
+            if (DAT_UnitsState::instance.units[unitID].x == _freeTileX
+                && DAT_UnitsState::instance.units[unitID].y == _freeTileY) {
                 return FALSE;
             }
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setDestinationForUnit, this)(
                 unitID, _freeTileX, _freeTileY, 0);
-            this->units[unitID].state.generic
+            DAT_UnitsState::instance.units[unitID].state.generic
                 = (OpenSHC::Map::Units::States::US_APPEAR | OpenSHC::Map::Units::States::US_IDLEUnk);
             return TRUE;
         }
