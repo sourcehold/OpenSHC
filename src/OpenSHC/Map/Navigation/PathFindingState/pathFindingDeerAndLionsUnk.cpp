@@ -63,7 +63,7 @@ namespace Map {
                         }
                         this->searchQueue.currentDistance
                             = (int)DAT_TileMapState::instance.CertainPathLayer[_currentTile];
-                        if (6 < this->searchQueue.currentDistance) {
+                        if (6 < (int)this->searchQueue.currentDistance) {
                             return;
                         }
                         for (int _direction = 0; _direction < 8; _direction = _direction + 4) {
@@ -161,7 +161,7 @@ namespace Map {
                             }
                         }
                         this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                        if (80400 < this->searchQueue.readIndex) {
+                        if (80400 < (int)this->searchQueue.readIndex) {
                             this->searchQueue.readIndex = 0;
                         }
                         /*
