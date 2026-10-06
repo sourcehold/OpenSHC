@@ -2,6 +2,7 @@
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"
+#include "OpenSHC/Map/TileMapState/GfxNeighbourMaskAsm.hpp"
 #include "OpenSHC/Rendering/ViewportRenderState.func.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
@@ -70,6 +71,12 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00509180
     void TileMapState::updateGfxLayer()
     {
+        /* the locals MACRO_GFX_NEIGHBOUR_MASK reaches the layers through, see GfxNeighbourMaskAsm.hpp */
+        char* _gfxLayer;
+        char* _gfxDirMatrix;
+        int _gfxTile;
+        int _gfxY;
+
         OpenSHC::Map::Buildings::BuildingTypeShort BVar1;
         ushort uVar2;
         ushort uVar3;
@@ -216,50 +223,11 @@ namespace Map {
                                                                     this->WallOwnerLayer[this->DAT_SomeTile]
                                                                         = this->WallOwnerLayer[this->DAT_SomeTile]
                                                                         & 0xf7;
-                                                                    bVar19 = 0;
-                                                                    if ((*(uint*)((char*)this->ptr_LogicLayer
-                                                                             + this->DAT_SomeTile * 4 + 4)
-                                                                            & L_WALL_OR_GATEHOUSE)
-                                                                        != 0) {
-                                                                        bVar19 = 0x20;
-                                                                    }
-                                                                    if ((*(uint*)((char*)this->ptr_LogicLayer
-                                                                             + this->DAT_SomeTile * 4 + -4)
-                                                                            & L_WALL_OR_GATEHOUSE)
-                                                                        != 0) {
-                                                                        bVar19 = bVar19 | 2;
-                                                                    }
-                                                                    puVar18 = (uint*)((char*)this->ptr_LogicLayer
-                                                                        + *(int*)((char*)this
-                                                                                      ->ptr_MovementDirectionTranslationMatrix
-                                                                              + this->DAT_SomeY * 0x20)
-                                                                            * 4
-                                                                        + this->DAT_SomeTile * 4);
-                                                                    if ((puVar18[-1] & L_WALL_OR_GATEHOUSE) != 0) {
-                                                                        bVar19 = bVar19 | 1;
-                                                                    }
-                                                                    if ((puVar18[1] & L_WALL_OR_GATEHOUSE) != 0) {
-                                                                        bVar19 = bVar19 | 0x40;
-                                                                    }
-                                                                    if ((*puVar18 & L_WALL_OR_GATEHOUSE) != 0) {
-                                                                        bVar19 = bVar19 | 0x80;
-                                                                    }
-                                                                    puVar18 = (uint*)((char*)this->ptr_LogicLayer
-                                                                        + *(int*)((int)((char*)this
-                                                                                            ->ptr_MovementDirectionTranslationMatrix
-                                                                                      + this->DAT_SomeY * 0x20)
-                                                                              + 0x10)
-                                                                            * 4
-                                                                        + this->DAT_SomeTile * 4);
-                                                                    if ((puVar18[-1] & L_WALL_OR_GATEHOUSE) != 0) {
-                                                                        bVar19 = bVar19 | 4;
-                                                                    }
-                                                                    if ((puVar18[1] & L_WALL_OR_GATEHOUSE) != 0) {
-                                                                        bVar19 = bVar19 | 0x10;
-                                                                    }
-                                                                    if ((*puVar18 & L_WALL_OR_GATEHOUSE) != 0) {
-                                                                        bVar19 = bVar19 | 8;
-                                                                    }
+                                                                    _gfxLayer = (char*)this->ptr_LogicLayer;
+                                                                    _gfxDirMatrix = (char*)this->ptr_MovementDirectionTranslationMatrix;
+                                                                    _gfxTile = this->DAT_SomeTile;
+                                                                    _gfxY = this->DAT_SomeY;
+                                                                    MACRO_GFX_NEIGHBOUR_MASK(wall, 4, MACRO_GFX_SHIFT_4, MACRO_GFX_ROWSTEP_4, L_WALL_OR_GATEHOUSE, bVar19)
                                                                     this->bitFlag = 0;
                                                                     if ((*(uint*)((char*)this->ptr_LogicLayer
                                                                              + this->DAT_SomeTile * 4 + 4)
