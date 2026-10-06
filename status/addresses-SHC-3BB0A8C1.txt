@@ -61409,7 +61409,7 @@ SHC_3BB0A8C1_0x00549C70 | 39.6% | frame ptr mid-frame, frame siz
 
 SHC_3BB0A8C1_0x0054A770 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0054A7B0 | 34.3% | reg alloc, spill order
+SHC_3BB0A8C1_0x0054A7B0 | 64.1% | jump tables, reg alloc
 
 SHC_3BB0A8C1_0x0054AA40 | 0.0% | Pending
 

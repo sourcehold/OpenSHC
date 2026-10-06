@@ -11,6 +11,7 @@
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
 #include "OpenSHC/Globals/DAT_UnitPropertiesDefinedData.hpp"
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
 namespace OpenSHC {
@@ -38,7 +39,7 @@ namespace Map {
             int _skipStanceSearch = 0;
             int _stanceBasedRange = 0;
             short _isRallying = 0;
-            if ((this->units[unitID].SA != 0
+            if ((DAT_UnitsState::instance.units[unitID].SA != 0
                     || (this->units[unitID].movementType_OR_targetUnitID != 0
                         && this->units[unitID].state.generic == OpenSHC::Map::Units::States::US_MOVE_TO_DESTINATION))
                 && this->units[unitID].tribeID != 0) {
@@ -109,7 +110,7 @@ namespace Map {
                     _skipStanceSearch = 1;
                 }
             }
-            if (this->units[unitID].isSelectable_OR_matchTime == 0) {
+            if (DAT_UnitsState::instance.units[unitID].isSelectable_OR_matchTime == 0) {
                 _skipStanceSearch = 1;
             }
             if (DAT_GameState::instance.playerDataArray[_playerID].enemies < 5) {
@@ -146,7 +147,7 @@ namespace Map {
                     _minDistance = _approximateDistance;
                 }
                 if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_A_ASSASSIN
-                    && this->units[_enemyUnitID].isSelectable_OR_matchTime != 0
+                    && DAT_UnitsState::instance.units[_enemyUnitID].isSelectable_OR_matchTime != 0
                     && _approximateDistance < (int)this->unitDistanceComputationResultUnk) {
                     this->unitDistanceComputationResultUnk = _approximateDistance;
                 }
@@ -183,14 +184,14 @@ namespace Map {
                             .UnitVisionBonus[(this->units[unitID].fixedRng + _enemyUnitID) % 10]
                         / _visionDivisor;
                 if (this->units[_enemyUnitID].state.generic == OpenSHC::Map::Units::States::US_MELEE_ATTACK) {
-                    _score = (this->units[_enemyUnitID].attackedBy * 50 + _score) * 2;
-                    if (this->units[_enemyUnitID].attackedBy >= 3) {
+                    _score = (DAT_UnitsState::instance.units[_enemyUnitID].attackedBy * 50 + _score) * 2;
+                    if (DAT_UnitsState::instance.units[_enemyUnitID].attackedBy >= 3) {
                         continue;
                     }
                 }
-                if (this->units[_enemyUnitID].huntedBy >= 2) {
-                    _score = _score + this->units[_enemyUnitID].huntedBy * 0x32;
-                    if (this->units[_enemyUnitID].huntedBy >= 3
+                if (DAT_UnitsState::instance.units[_enemyUnitID].huntedBy >= 2) {
+                    _score = _score + DAT_UnitsState::instance.units[_enemyUnitID].huntedBy * 0x32;
+                    if (DAT_UnitsState::instance.units[_enemyUnitID].huntedBy >= 3
                         && this->units[unitID].movementType_OR_targetUnitID != _enemyUnitID) {
                         continue;
                     }
@@ -339,7 +340,8 @@ namespace Map {
                         this->units[unitID].lookForEnemy = (short)_lookAhead;
                         if (this->units[unitID].movementType_OR_targetUnitID != _foundEnemyID) {
                             this->units[unitID].movementType_OR_targetUnitID = (short)_foundEnemyID;
-                            this->units[_foundEnemyID].huntedBy = this->units[_foundEnemyID].huntedBy + 1;
+                            DAT_UnitsState::instance.units[_foundEnemyID].huntedBy
+                                = DAT_UnitsState::instance.units[_foundEnemyID].huntedBy + 1;
                         }
                         _headedToEnemy = 1;
                     }
