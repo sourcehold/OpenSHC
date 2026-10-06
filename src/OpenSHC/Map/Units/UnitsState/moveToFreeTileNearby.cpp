@@ -48,7 +48,7 @@ namespace Map {
                 == FALSE) {
                 return FALSE;
             }
-            this->units[DAT_CurrentUnitSlotID::instance].state.generic
+            DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state.generic
                 = OpenSHC::Map::Units::States::US_MOVE_TO_DESTINATION;
             return TRUE;
         }
