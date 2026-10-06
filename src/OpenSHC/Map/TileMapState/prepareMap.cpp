@@ -41,6 +41,7 @@
 #include "OpenSHC/Globals/DAT_WallAndPitchState.hpp"
 #include "OpenSHC/Globals/DAT_WildlifeState.hpp"
 #include "OpenSHC/Globals/FilePackagerObj.hpp"
+#include "OpenSHC/Globals/DAT_TileMapState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -95,7 +96,7 @@ namespace Map {
 
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::changeMapOrientation, this)(this->mapOrientation);
         DAT_PathFindingState::instance.searchGeneration = 1;
-        MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(0x27420, '\0', this->WalkLayer);
+        MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(0x27420, '\0', DAT_TileMapState::instance.WalkLayer);
         DAT_ViewportRenderState::instance.viewportState.viewportX = savedX;
         DAT_ViewportRenderState::instance.viewportState.viewportY = savedY;
         MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, DAT_ViewportRenderState::ptr)();
@@ -110,8 +111,8 @@ namespace Map {
         this->maxPitchDitchCount = 4000;
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetHeightAndMapBorders, this)(this->mapSize);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::toggleFlatView, this)(0);
-        this->field95_0x5548d0 = 0;
-        this->flatViewToggleValue2 = 0;
+        DAT_TileMapState::instance.field95_0x5548d0 = 0;
+        DAT_TileMapState::instance.flatViewToggleValue2 = 0;
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setChangedLayerToThreeAndMapping0x40x40, this)();
         this->forceUpdateLogicalAndMiscDisplayLayers = 1;
         this->forceUpdateTextureTilemap = 1;
