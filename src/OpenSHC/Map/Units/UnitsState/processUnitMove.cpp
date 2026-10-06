@@ -15,6 +15,7 @@
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_UnitPropertiesDefinedData.hpp"
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
 namespace OpenSHC {
@@ -190,9 +191,10 @@ namespace Map {
                                     return 0;
                                 }
                             }
-                            if (MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setDestinationForUnit, this)(
-                                    DAT_CurrentUnitSlotID::instance, this->units[unitID].destinationXPosition,
-                                    this->units[unitID].destinationYPosition, 0)
+                            if (MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setDestinationForUnit,
+                                    DAT_UnitsState::ptr)(DAT_CurrentUnitSlotID::instance,
+                                    this->units[unitID].destinationXPosition, this->units[unitID].destinationYPosition,
+                                    0)
                                 == FALSE) {
                                 this->units[unitID].field280_0x3f4 = 0x28;
                                 return 0;
@@ -271,8 +273,8 @@ namespace Map {
                     }
                 }
                 this->units[unitID].field105_0xe8 = 0;
-                MACRO_CALL_MEMBER(
-                    OpenSHC::Map::Units::UnitsState_Func::updateUnitFadeAndVisibilityNearStructures, this)(unitID);
+                MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::updateUnitFadeAndVisibilityNearStructures,
+                    DAT_UnitsState::ptr)(unitID);
             }
             return 1;
         }
