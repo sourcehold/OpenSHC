@@ -59,7 +59,7 @@ namespace Map {
                     if (0x13a10 < (int)this->searchQueue.currentDistance) {
                         return 0;
                     }
-                    if (this->searchQueue.currentDistance > maxDistance) {
+                    if ((int)this->searchQueue.currentDistance > maxDistance) {
                         return 0;
                     }
                     int iVar7 = 0;
