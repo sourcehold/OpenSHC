@@ -15,8 +15,9 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CCFB0
     int AICState::checksAndGenerateAITribesForPlayerIfNotExisting(int playerID, int maxAmount, BOOLEnum checkOnly)
     {
+        int offset = 0;
         int baseOffset = DAT_SkirmishDefinedData::instance.AITribeIDOffsetForAIVUnitType[1];
-        for (int offset = 0; offset < maxAmount; offset++) {
+        for (; offset < maxAmount; offset++) {
             if (offset >= 10) {
                 return 0;
             }
