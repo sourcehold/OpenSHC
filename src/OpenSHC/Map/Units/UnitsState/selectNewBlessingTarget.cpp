@@ -14,11 +14,11 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x005346D0
         int UnitsState::selectNewBlessingTarget(int unitID)
         {
+            int _bestUnitID = 0;
+            int _highestPreference = 0;
             int _playerID = this->units[unitID].owner;
             int _x = this->units[unitID].x;
             int _y = this->units[unitID].y;
-            int _bestUnitID = 0;
-            int _highestPreference = 0;
             for (int _targetUnitID = 1; _targetUnitID < (int)this->maxUnitCount; ++_targetUnitID) {
                 if (this->units[_targetUnitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
                     continue;
@@ -33,11 +33,10 @@ namespace Map {
                     != 0) {
                     continue;
                 }
-                int _blessedAmount = this->units[_targetUnitID].blessedAmount;
-                if (_blessedAmount >= 4000) {
+                if (this->units[_targetUnitID].blessedAmount >= 4000) {
                     continue;
                 }
-                int _preference = (4000 - _blessedAmount) >> 6;
+                int _preference = (4000 - this->units[_targetUnitID].blessedAmount) >> 6;
                 int _distance = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                     DAT_DirectionAlgorithmState::ptr)(
