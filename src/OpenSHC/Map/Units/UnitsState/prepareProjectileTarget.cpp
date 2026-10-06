@@ -17,24 +17,27 @@ namespace Map {
                     this->units[shooterID].shootTargetZ);
             } else {
                 _targetFixedRng = this->units[targetID].fixedRng;
-                this->units[shooterID].shootTargetMicroY = this->units[targetID].y * 8 + 4;
-                this->units[shooterID].shootTargetMicroX = this->units[targetID].x * 8 + 4;
-                this->units[shooterID].shootTargetZ
-                    = this->units[targetID].buildingHeight + this->units[targetID].terrainOrClimbHeight;
-                if (this->units[targetID].tunnelerFinishedDigging == 2) {
+                if (this->units[targetID].tunnelerFinishedDigging != 2) {
+                    this->units[shooterID].shootTargetMicroX = this->units[targetID].x * 8 + 4;
+                    this->units[shooterID].shootTargetMicroY = this->units[targetID].y * 8 + 4;
+                    this->units[shooterID].shootTargetZ
+                        = this->units[targetID].buildingHeight + this->units[targetID].terrainOrClimbHeight;
+                } else {
                     int _lead = (param_3 * 133) / 100;
-                    short _adjustment;
+                    int _adjustment;
                     /* todo:fixme:ucp: this if-else should be improved to also trigger when the
                        targetID has negative height (walking in pitch or moat) */
-                    if (this->units[targetID].stateBasedSpeed == 0) {
-                        if (this->units[targetID].calculatedMovementSpeed < 2) {
-                            _adjustment = (short)(_lead / 16);
-                        } else {
-                            _adjustment = (short)(_lead / (this->units[targetID].calculatedMovementSpeed << 4));
-                        }
+                    if (this->units[targetID].stateBasedSpeed != 0) {
+                        _adjustment = _lead / 8;
+                    } else if (this->units[targetID].calculatedMovementSpeed > 1) {
+                        _adjustment = _lead / (this->units[targetID].calculatedMovementSpeed << 4);
                     } else {
-                        _adjustment = (short)(_lead / 8);
+                        _adjustment = _lead / 16;
                     }
+                    this->units[shooterID].shootTargetMicroX = this->units[targetID].x * 8 + 4;
+                    this->units[shooterID].shootTargetMicroY = this->units[targetID].y * 8 + 4;
+                    this->units[shooterID].shootTargetZ
+                        = this->units[targetID].buildingHeight + this->units[targetID].terrainOrClimbHeight;
                     short _targetFacing = this->units[targetID].facingDirection;
                     if (_targetFacing == 0) {
                         this->units[shooterID].shootTargetMicroY
@@ -120,10 +123,10 @@ namespace Map {
                     _scatter = 0x118;
                 }
             }
-            uint _rng = SEC_RNG::instance.currentNumber2;
+            int _rng = SEC_RNG::instance.currentNumber2;
             MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
-            _unhandledTypeResult = ((int)_rng / 300) * 300;
-            if ((int)_rng % 300 >= _scatter) {
+            _unhandledTypeResult = (_rng / 300) * 300;
+            if (_rng % 300 >= _scatter) {
                 return _unhandledTypeResult;
             }
             if ((_rng & 7) < 2) {
@@ -131,16 +134,10 @@ namespace Map {
                 if (_scatter == 0) {
                     _scatter = 1;
                 }
-                int _horizontalRng = ((int)_rng / 512) + this->units[shooterID].fixedRng;
-                if (_horizontalRng < 0) {
-                    _horizontalRng = -_horizontalRng;
-                }
+                int _horizontalRng = abs((_rng / 512) + this->units[shooterID].fixedRng);
                 this->units[shooterID].shootTargetMicroX = this->units[shooterID].shootTargetMicroX
                     + ((short)(_horizontalRng % _scatter) - (short)(_scatter / 2));
-                int _verticalRng = _rng + _targetFixedRng;
-                if (_verticalRng < 0) {
-                    _verticalRng = -_verticalRng;
-                }
+                int _verticalRng = abs(_rng + _targetFixedRng);
                 this->units[shooterID].shootTargetMicroY = this->units[shooterID].shootTargetMicroY
                     + ((short)(_verticalRng % _scatter) - (short)(_scatter / 2));
                 return _verticalRng / _scatter;
@@ -150,16 +147,14 @@ namespace Map {
                 if (_scatter == 0) {
                     _scatter = 1;
                 }
-                int _heightRng = this->units[shooterID].fixedRng + _rng;
-                if (_heightRng < 0) {
-                    _heightRng = -_heightRng;
-                }
+                int _heightRng = abs(this->units[shooterID].fixedRng + _rng);
                 int _heightOffset = _heightRng % _scatter + 0x14;
-                if (_heightRng % _scatter + 0x1c <= (int)this->units[shooterID].shootTargetZ) {
-                    _unhandledTypeResult = (ushort)this->units[shooterID].shootTargetZ - _heightOffset;
-                } else {
+                if (this->units[shooterID].shootTargetZ < _heightOffset + 8) {
                     _unhandledTypeResult = (ushort)this->units[shooterID].shootTargetZ + _heightOffset;
+                    this->units[shooterID].shootTargetZ = (short)_unhandledTypeResult;
+                    return _unhandledTypeResult;
                 }
+                _unhandledTypeResult = (ushort)this->units[shooterID].shootTargetZ - _heightOffset;
                 this->units[shooterID].shootTargetZ = (short)_unhandledTypeResult;
                 return _unhandledTypeResult;
             }
@@ -167,10 +162,7 @@ namespace Map {
             if (_scatter == 0) {
                 _scatter = 1;
             }
-            int _heightRng = _rng + _targetFixedRng;
-            if (_heightRng < 0) {
-                _heightRng = -_heightRng;
-            }
+            int _heightRng = abs(_rng + _targetFixedRng);
             this->units[shooterID].shootTargetZ
                 = this->units[shooterID].shootTargetZ + (short)(_heightRng % _scatter) + 0x28;
             return _heightRng / _scatter;
