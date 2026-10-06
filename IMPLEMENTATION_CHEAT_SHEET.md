@@ -345,6 +345,32 @@ unrolled body, write `for (int i = 1; i != 2500; ++i)` instead of `i < 2500` (SH
   declared where the original's `xor esi, esi` sits (here before an earlier early-return test, which then compares
   against that zero register) this took `generateSiegeCreationInformation` from 39.4% to 100%.
 
+### Reading Ghidra against the assembly
+
+Ghidra's decompilation shows the original's *variable and loop structure*, but reproducing that structure
+literally usually makes the match **worse**, because MSVC derives the same shapes from simpler source. Measured on
+`AI::AICState` (2026-10-06): writing the inner loop of `aiCreateSiegeUnits` as the `do { i = slot; slot++; ... }
+while (slot < count)` that Ghidra shows dropped it from 55% to 33%; giving the engineer-tribe block the single
+physical copy the original has (`LAB_004d22d3`, two predecessors) cost 20 points; restoring a `unitType` local that
+the original keeps in a stack slot cost 1; and the countdown loop Ghidra shows in `computeEnemyKeepApproachTile`
+(`do { ... } while (--n != 0)`) cost 3. Strength reduction, induction variables and block duplication are the
+compiler's doing, so do not copy them back into the source.
+
+What Ghidra *is* reliable for:
+
+- **Comparison literals.** `if (count >= 4) count = 3;` against the original's `cmp edi, 3; jle` says the source
+  wrote `> 3`. Worth 0.6% on its own and it is free (`aiCreateSiegeUnits`).
+- **Where a value is computed.** `_aicOffset = (_aiType + ~AIT_NULL) * 0x2a4` appearing once at the top of the
+  decompilation, against our `aics[aiType - 1]` at each use, says the source had `int aicIndex = pd.aiType - 1;`
+  as its own statement (+1%).
+- **Arms with identical bodies.** Ghidra renders `if (t == UT_E_ENGINEER) { b = guild; } else if (t == UT_E_LADDER)
+  { b = guild; }` where we had written `t == ENGINEER || t == LADDER`. Splitting the `||` into two arms with the
+  same body took `aiRecruitUnits` from 41.6% to 43.4%. This is the duplicate-the-shared-block rule again, and it is
+  the one structural thing that transfers.
+- **Field types and flat array access.** `*(int *)((int)&DAT_AICState + (index + aicIndex * 0xa9) * 4 + 0x184)` is
+  `(&aics[aicIndex].DefUnit1)[index]` - the AIC block indexed as a flat `int` array, 169 ints per entry. The
+  per-field struct access and this flat form appear in the same function and both are real.
+
 ### GOTO
 
 A function may contain multiple GOTOs.
