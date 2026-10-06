@@ -57,6 +57,71 @@ namespace Game {
                         DAT_BuildingsState::ptr)(this->playerDataArray[playerID].stockpile.id);
                 }
             }
+        } else if (category == OpenSHC::Game::Player::PDBCE_MARKETPLACE) {
+            if (this->playerDataArray[playerID].marketplace.id > 0) {
+                MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuilding,
+                    DAT_BuildingsState::ptr)(this->playerDataArray[playerID].marketplace.id);
+            }
+            entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
+            entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
+        } else if (category == OpenSHC::Game::Player::PDBCE_ENGINEERSGUILD) {
+            if (this->playerDataArray[playerID].engineersGuild.id > 0) {
+                MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuilding,
+                    DAT_BuildingsState::ptr)(this->playerDataArray[playerID].engineersGuild.id);
+            }
+            entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
+            entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
+        } else if (category == OpenSHC::Game::Player::PDBCE_TUNNELERSGUILD) {
+            if (this->playerDataArray[playerID].tunnelersGuild.id > 0) {
+                MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuilding,
+                    DAT_BuildingsState::ptr)(this->playerDataArray[playerID].tunnelersGuild.id);
+            }
+            entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
+            entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
+        } else if (category == OpenSHC::Game::Player::PDBCE_STOCKPILE) {
+            /*
+              a storage building of this kind already exists, keep the old entry
+             */
+            if (this->playerDataArray[playerID].stockpile.id > 0) {
+                return;
+            }
+            entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
+            entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
+        } else if (category == OpenSHC::Game::Player::PDBCE_ARMORY) {
+            /*
+              a storage building of this kind already exists, keep the old entry
+             */
+            if (this->playerDataArray[playerID].armory.id > 0) {
+                return;
+            }
+            entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
+            entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
+        } else if (category == OpenSHC::Game::Player::PDBCE_GRANARY) {
+            /*
+              a storage building of this kind already exists, keep the old entry
+             */
+            if (this->playerDataArray[playerID].granary.id > 0) {
+                return;
+            }
+            entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
+            entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
+        } else if (category == OpenSHC::Game::Player::PDBCE_BARRACKS) {
+            if (this->playerDataArray[playerID].barracks.id > 0) {
+                MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuilding,
+                    DAT_BuildingsState::ptr)(this->playerDataArray[playerID].barracks.id);
+            }
+            entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
+            entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
+        } else if (category == OpenSHC::Game::Player::PDBCE_MERCENARYPOST) {
+            if (this->playerDataArray[playerID].mercenaryPost.id > 0) {
+                MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuilding,
+                    DAT_BuildingsState::ptr)(this->playerDataArray[playerID].mercenaryPost.id);
+            }
+            entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
+            entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
+        } else if (category == OpenSHC::Game::Player::PDBCE_OILSMELTER) {
+            entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
+            entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
         } else if (category == OpenSHC::Game::Player::PDBCE_CAMPGROUND) {
             short orientation = DAT_BuildingsState::instance.buildings[buildingID].orientation;
             entryX = (short)DAT_BuildingsState::instance.buildings[buildingID].x;
@@ -72,31 +137,6 @@ namespace Game {
             } else {
                 entryX = entryX + 3;
             }
-        } else if ((category == OpenSHC::Game::Player::PDBCE_STOCKPILE)
-            || (category == OpenSHC::Game::Player::PDBCE_ARMORY)
-            || (category == OpenSHC::Game::Player::PDBCE_GRANARY)) {
-            /*
-              a storage building of this kind already exists, keep the old entry
-             */
-            if ((&this->playerDataArray[playerID].keep)[category].id > 0) {
-                DAT_TileMapState::instance.showNoRubbleWhenDestroyingBuilding = 1;
-                return;
-            }
-            entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
-            entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
-        } else {
-            if ((category == OpenSHC::Game::Player::PDBCE_MARKETPLACE)
-                || (category == OpenSHC::Game::Player::PDBCE_ENGINEERSGUILD)
-                || (category == OpenSHC::Game::Player::PDBCE_TUNNELERSGUILD)
-                || (category == OpenSHC::Game::Player::PDBCE_BARRACKS)
-                || (category == OpenSHC::Game::Player::PDBCE_MERCENARYPOST)) {
-                if ((&this->playerDataArray[playerID].keep)[category].id > 0) {
-                    MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuilding,
-                        DAT_BuildingsState::ptr)((&this->playerDataArray[playerID].keep)[category].id);
-                }
-            }
-            entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
-            entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
         }
         if (entryX < 0) {
             return;
