@@ -27,25 +27,29 @@ namespace Game {
             return;
         }
         for (int playerID = 1; playerID < 9; playerID++) {
-            if ((this->playerDataArray[playerID].lordKilledByPlayerID == 0)
-                && (this->playerDataArray[playerID].playerDeathRelated == 0)
-                && ((DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] != -1)
-                    || (DAT_GameSynchronyState::instance.currentAIArray[playerID] != 0))) {
-                int popularityPercent = this->playerDataArray[playerID].popularity / 100;
-                if (popularityPercent != this->playerDataArray[playerID].popularityAtWeekTick100) {
-                    this->playerDataArray[playerID].counterTrackingPopGoldPopup
-                        = this->playerDataArray[playerID].counterTrackingPopGoldPopup + 1;
-                    if (this->playerDataArray[playerID].counterTrackingPopGoldPopup >= 2) {
-                        this->playerDataArray[playerID].popularityAtWeekTick100 = popularityPercent;
-                        int campgroundID = this->playerDataArray[playerID].campground.id;
-                        this->playerDataArray[playerID].counterTrackingPopGoldPopup = 0;
-                        if (campgroundID != 0) {
-                            MACRO_CALL_MEMBER(
-                                OpenSHC::Map::Buildings::BuildingsState_Func::displayPopularityAndGoldPopups,
-                                DAT_BuildingsState::ptr)(campgroundID, 0, 0, 0);
-                        }
-                    }
-                }
+            if (this->playerDataArray[playerID].lordKilledByPlayerID != 0) {
+                continue;
+            }
+            if (this->playerDataArray[playerID].playerDeathRelated != 0) {
+                continue;
+            }
+            if ((DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] == -1)
+                && (DAT_GameSynchronyState::instance.currentAIArray[playerID] == 0)) {
+                continue;
+            }
+            if (this->playerDataArray[playerID].popularity / 100
+                == this->playerDataArray[playerID].popularityAtWeekTick100) {
+                continue;
+            }
+            this->playerDataArray[playerID].counterTrackingPopGoldPopup += 1;
+            if (this->playerDataArray[playerID].counterTrackingPopGoldPopup < 2) {
+                continue;
+            }
+            this->playerDataArray[playerID].popularityAtWeekTick100 = this->playerDataArray[playerID].popularity / 100;
+            this->playerDataArray[playerID].counterTrackingPopGoldPopup = 0;
+            if (this->playerDataArray[playerID].campground.id != 0) {
+                MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::displayPopularityAndGoldPopups,
+                    DAT_BuildingsState::ptr)(this->playerDataArray[playerID].campground.id, 0, 0, 0);
             }
         }
     }

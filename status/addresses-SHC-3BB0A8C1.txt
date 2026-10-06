@@ -17675,7 +17675,7 @@ SHC_3BB0A8C1_0x00457B80 | 81.9% | Retest folded, reg alloc
 
 SHC_3BB0A8C1_0x00457E80 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00457F20 | 48.3% | Loop base reg choice
+SHC_3BB0A8C1_0x00457F20 | 86.7% | Loop base reg choice
 
 SHC_3BB0A8C1_0x00457FD0 | 84.6% | Loop base reg choice
 
