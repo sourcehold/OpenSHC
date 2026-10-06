@@ -11,6 +11,8 @@ namespace Map {
         GmID UnitsState::getPeasantGmID(int unitID)
         {
             switch (this->units[unitID].unitType) {
+            case OpenSHC::Map::Units::UT_PEASANT:
+                return OpenSHC::IO::Graphics::GID_BODY_PEASANT;
             case OpenSHC::Map::Units::UT_BURNINGMAN:
                 return OpenSHC::IO::Graphics::GID_BODY_MAN_BURNING;
             case OpenSHC::Map::Units::UT_WOODCUTTER:
