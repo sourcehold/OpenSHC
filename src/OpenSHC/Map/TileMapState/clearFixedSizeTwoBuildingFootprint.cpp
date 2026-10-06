@@ -33,7 +33,7 @@ namespace Map {
             this->LogicLayer[tile] = this->LogicLayer[tile]
                 & ~(L_STOCKPILEUnk | L_WALL_OR_GATEHOUSE | L_CRENEL | L_BUILDING | L_STAIRS | L_CRENEL_VARIATIONUnk
                     | L_KEEP_NON_MANOR_HOUSE);
-            short buildingID = this->BuildingLayer[tile];
+            int buildingID = this->BuildingLayer[tile];
             this->BuildingLayer[tile] = 0;
             if (DAT_BuildingsState::instance.buildings[buildingID].noRubble == 0) {
                 this->BuildingWasLayer[tile] = 0;
