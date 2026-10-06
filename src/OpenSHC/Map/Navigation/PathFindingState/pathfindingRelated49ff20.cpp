@@ -81,10 +81,10 @@ namespace Map {
                                        * 0x13a10
                                    + 0x1ee2998 + dVar4)
                                 == distanceUnk) {
-                            if ((16 < this->searchQueue.currentDistance) && (local_8 != 0)) {
+                            if ((16 < (int)this->searchQueue.currentDistance) && (local_8 != 0)) {
                                 return (dword)(local_8);
                             }
-                            if ((10 < this->searchQueue.currentDistance)
+                            if ((10 < (int)this->searchQueue.currentDistance)
                                 && (iVar1 = this->searchQueue.currentDistance + uVar6 * 2, iVar1 < local_4)) {
                                 local_8 = dVar4;
                                 local_4 = iVar1;
