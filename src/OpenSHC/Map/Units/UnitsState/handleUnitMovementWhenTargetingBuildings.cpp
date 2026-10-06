@@ -2,6 +2,7 @@
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -41,8 +42,8 @@ namespace Map {
                         _unitTile)
                     != FALSE) {
                     if (_isDefensiveStructure != 0) {
-                        MACRO_CALL_MEMBER(
-                            OpenSHC::Map::Units::UnitsState_Func::setDestinationNearTargetedBuilding, this)(unitID, 0);
+                        MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setDestinationNearTargetedBuilding,
+                            DAT_UnitsState::ptr)(unitID, 0);
                     }
                 } else {
                     MACRO_CALL_MEMBER(
