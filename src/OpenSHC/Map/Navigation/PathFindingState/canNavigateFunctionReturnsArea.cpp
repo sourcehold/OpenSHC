@@ -85,7 +85,7 @@ namespace Map {
                                     + sVar2;
                                 this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _tile;
                                 this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                                if (0x13a10 <= this->searchQueue.writeIndex) {
+                                if (0x13a10 <= (int)this->searchQueue.writeIndex) {
                                     this->searchQueue.writeIndex = 0;
                                 }
                             }
@@ -111,7 +111,7 @@ namespace Map {
                         paiVar5 = (int (*)[8])(*paiVar5 + 1);
                     } while (iVar6 < 8);
                     this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                    if (0x13a10 <= this->searchQueue.readIndex) {
+                    if (0x13a10 <= (int)this->searchQueue.readIndex) {
                         this->searchQueue.readIndex = 0;
                     }
                 } while (this->searchQueue.readIndex != this->searchQueue.writeIndex);
