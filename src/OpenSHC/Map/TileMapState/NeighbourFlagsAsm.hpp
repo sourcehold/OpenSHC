@@ -5,7 +5,7 @@
 
   The original gathers the neighbours of DAT_SomeTile into bitFlag with handwritten assembly, and that
   assembly is a MACRO: the identical instruction stream appears verbatim inside
-  setBitFlagBasedOnWallTowerGatehouseOrKeep (0x004FF870, once), updateGFXLayers (0x004FC9E0, nine
+  setBitFlagBasedOnWallTowerGatehouseOrKeep (0x004FF870, once), updateGFXLayers (0x004FC9E0, eleven
   times), updateMacroLayerRelated (0x004FDB00, eleven times) and updateGfxLayer (0x00509180, nineteen
   times) - never as a call. It is recognisable by "mov edx, 0" (no compiler materialises zero that
   way), by advancing the row pointer with repeated "add esi, ecx" instead of one scaled lea, and, in

@@ -29,12 +29,12 @@ namespace Map {
         int brushSize = DAT_TerrainDefinedData::instance.BrushSizeArray[MACRO_CALL_MEMBER(
             OpenSHC::Map::LandscapeState_Func::getValueFrom0UpTo3ForTreeTypeAndTreeStage, DAT_LandscapeState::ptr)(
             DAT_LandscapeState::instance.trees[treeID].treeType, DAT_LandscapeState::instance.trees[treeID].stage)];
-        uint baseY = DAT_LandscapeState::instance.trees[treeID].yPosition;
-        int baseTile = DAT_LandscapeState::instance.trees[treeID].xPosition
+        int baseY = (short)DAT_LandscapeState::instance.trees[treeID].yPosition;
+        int baseTile = (short)DAT_LandscapeState::instance.trees[treeID].xPosition
             + DAT_ViewportRenderState::instance.translationMatrix[baseY].addXgetTile;
 
         int tile = baseTile;
-        uint y = baseY;
+        int y = baseY;
         for (int tileIndex = 0; tileIndex < brushSize; tileIndex++) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
                 1, tileIndex, &tile, (int*)&y, baseTile, baseY);
@@ -51,7 +51,7 @@ namespace Map {
         }
         MACRO_CALL_MEMBER(
             OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer, DAT_PathFindingState::ptr)(7,
-            DAT_LandscapeState::instance.trees[treeID].xPosition, DAT_LandscapeState::instance.trees[treeID].yPosition);
+            (short)DAT_LandscapeState::instance.trees[treeID].xPosition, (short)DAT_LandscapeState::instance.trees[treeID].yPosition);
     }
 
 }
