@@ -220,7 +220,12 @@ namespace Game {
         MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::respawnDeer, DAT_TribesState::ptr)();
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::generateDustClouds, DAT_TileMapState::ptr)();
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateGameRelatedValue, DAT_TileMapState::ptr)();
-        MACRO_CALL(OpenSHC::Global_Func::DoNothing)();
+        /*
+          the original calls this empty function as a TileMapState member (this in ecx); the generated header has it
+          as a global, so pass the object through a one-argument __fastcall pointer
+         */
+        ((void(__fastcall*)(OpenSHC::Map::TileMapState*))MACRO_CALL(OpenSHC::Global_Func::DoNothing))(
+            DAT_TileMapState::ptr);
         MACRO_CALL_MEMBER(
             OpenSHC::Map::WallAndPitchState_Func::updateDestructionConfirmationCountdown, DAT_WallAndPitchState::ptr)();
         MACRO_CALL_MEMBER(OpenSHC::UI::HoveredState_Func::clearInvalidatedHoverStates, DAT_HoveredState::ptr)();
