@@ -58,7 +58,7 @@ namespace Map {
             uint _unitID;
             uint _currentUnitID;
             UnitTypeShort _unitType;
-            short _buildingID;
+            int _buildingID;
             BuildingTypeShort _buildingType;
 
             _rngNumber8 = (int)SEC_RNG::instance.currentNumber2 % 16;
