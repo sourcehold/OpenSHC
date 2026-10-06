@@ -7,6 +7,7 @@
 #include "OpenSHC/Globals/DAT_CurrentUnitSlotID.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -30,7 +31,7 @@ namespace Map {
                         .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID);
             }
             int _shootTargetMicroX = this->units[unitID].shootTargetMicroX;
-            int _shootTargetMicroY = this->units[unitID].shootTargetMicroY;
+            int _shootTargetMicroY = DAT_UnitsState::instance.units[unitID].shootTargetMicroY;
             return (BOOLEnum)(MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                     checkEnemyBuildingOrDefensiveStructureWithin12Tiles,
                                   DAT_PathFindingState::ptr)(_playerID, _shootTargetMicroX / 8, _shootTargetMicroY / 8)
