@@ -30,41 +30,32 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x00459A20
     void GameStateStructures::spawnPoisonCloudsAroundBuilding(int buildingID)
     {
-        int attemptsLeft = 20;
-        uint xPosition;
-        uint yPosition;
-        int rowTile;
-        while (true) {
-            xPosition = (int)SEC_RNG::instance.currentNumber2 % 30 - 15
+        for (int attemptsLeft = 20; attemptsLeft > 0; attemptsLeft--) {
+            uint xPosition = SEC_RNG::instance.currentNumber2 % 30 - 15
                 + (short)DAT_BuildingsState::instance.buildings[buildingID].x;
-            yPosition = ((int)SEC_RNG::instance.currentNumber2 >> 8) % 30 - 15
+            uint yPosition = (SEC_RNG::instance.currentNumber2 >> 8) % 30 - 15
                 + (short)DAT_BuildingsState::instance.buildings[buildingID].y;
             MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
-            if ((xPosition <= 399) && (yPosition <= 399)
-                && (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[yPosition * 400 + xPosition] != 0)) {
-                rowTile = DAT_ViewportRenderState::instance.translationMatrix[yPosition].addXgetTile;
-                if ((DAT_TileMapState::instance.LogicLayer[rowTile + xPosition] & 0x4a5014b1U) == 0) {
-                    break;
-                }
+            if ((xPosition > 399) || (yPosition > 399)
+                || (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[yPosition * 400 + xPosition] == 0)) {
+                continue;
             }
-            attemptsLeft = attemptsLeft - 1;
-            if (attemptsLeft <= 0) {
-                return;
+            int tile = DAT_ViewportRenderState::instance.translationMatrix[yPosition].addXgetTile + xPosition;
+            if ((DAT_TileMapState::instance.LogicLayer[tile] & 0x4a5014b1U) != 0) {
+                continue;
             }
-        }
-        int cloudCount = (int)SEC_RNG::instance.currentNumber2 % 5 - 2;
-        if (cloudCount < 8) {
-            for (cloudCount = 8 - cloudCount; cloudCount != 0; cloudCount = cloudCount - 1) {
-                MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity,
-                    DAT_EntityState::ptr)(0, 0, 0, xPosition * 8, yPosition * 8,
-                    DAT_TileMapState::instance.EntityLayerLT25[rowTile + xPosition + 0x13a10], 0, 0, 0,
+            for (int cloudIndex = SEC_RNG::instance.currentNumber2 % 5 - 2; cloudIndex < 8; cloudIndex++) {
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(0, 0, 0,
+                    xPosition * 8, yPosition * 8, DAT_TileMapState::instance.EntityLayerLT25[tile + 0x13a10], 0, 0, 0,
                     OpenSHC::Map::Entities::ET_COW_POISON_CLOUD, 0);
             }
+            MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                xPosition, yPosition, OpenSHC::DE::SHCDE::FX_FLIES);
+            MACRO_CALL_MEMBER(OpenSHC::UI::MinimapViewState_Func::setSpawnMoment, DAT_MinimapViewState::ptr)(
+                xPosition, yPosition);
+            return;
         }
-        MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
-            xPosition, yPosition, OpenSHC::DE::SHCDE::FX_FLIES);
-        MACRO_CALL_MEMBER(OpenSHC::UI::MinimapViewState_Func::setSpawnMoment, DAT_MinimapViewState::ptr)(
-            xPosition, yPosition);
     }
 }
 }

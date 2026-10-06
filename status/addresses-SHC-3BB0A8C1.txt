@@ -17901,7 +17901,7 @@ SHC_3BB0A8C1_0x004598B0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00459930 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00459A20 | 63.1% | Reg alloc differs
+SHC_3BB0A8C1_0x00459A20 | 88.0% | Counter decremented in memory
 
 SHC_3BB0A8C1_0x00459A40 | 0.0% | Pending
 
