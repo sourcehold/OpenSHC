@@ -11,6 +11,7 @@
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
+#include "OpenSHC/Globals/DAT_TileMapState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -68,7 +69,7 @@ namespace Map {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 commandBuildingType, buildingWidthOrHeight);
             int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile + x + this->buildingX;
-            int buildingID = this->BuildingLayer[tile];
+            int buildingID = DAT_TileMapState::instance.BuildingLayer[tile];
             bool cleared = false;
             if (buildingID != 0) {
                 if (DAT_BuildingsState::instance.buildings[buildingID].buildingType == OpenSHC::Map::Buildings::BT_WOODCUTTERSHUT || DAT_BuildingsState::instance.buildings[buildingID].buildingType == OpenSHC::Map::Buildings::BT_OXTETHER || DAT_BuildingsState::instance.buildings[buildingID].buildingType == OpenSHC::Map::Buildings::BT_QUARRY || DAT_BuildingsState::instance.buildings[buildingID].buildingType == OpenSHC::Map::Buildings::BT_IRONMINE || DAT_BuildingsState::instance.buildings[buildingID].buildingType == OpenSHC::Map::Buildings::BT_WHEATFARM || DAT_BuildingsState::instance.buildings[buildingID].buildingType == OpenSHC::Map::Buildings::BT_HOPFARM || DAT_BuildingsState::instance.buildings[buildingID].buildingType == OpenSHC::Map::Buildings::BT_APPLEFARM || DAT_BuildingsState::instance.buildings[buildingID].buildingType == OpenSHC::Map::Buildings::BT_DAIRYFARM) {
@@ -79,7 +80,7 @@ namespace Map {
                         DAT_GameState::ptr)(buildingID);
                     cleared = true;
                 }
-            } else if ((this->LogicLayer[tile] & L_FARM_FIELD_APPLE) != 0) {
+            } else if ((DAT_TileMapState::instance.LogicLayer[tile] & L_FARM_FIELD_APPLE) != 0) {
                 buildingID = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Buildings::BuildingsState_Func::getFarmThatHasTile,
                     DAT_BuildingsState::ptr)(tile);
