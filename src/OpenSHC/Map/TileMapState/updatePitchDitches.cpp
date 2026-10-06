@@ -5,6 +5,7 @@
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
+#include "OpenSHC/Globals/DAT_TileMapState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -45,7 +46,7 @@ namespace Map {
                 if (this->pitchDitches[id].field7_0x12 == 0x14) {
                     this->pitchDitches[id].state = this->pitchDitches[id].state + 1;
                     this->pitchDitches[id].field7_0x12 = 0;
-                    uint height = this->HeightLayer[tile];
+                    uint height = DAT_TileMapState::instance.HeightLayer[tile];
                     /* the fire spreads to the four adjacent ditches that are still unlit */
                     for (int i = 0; i < 4; i++) {
                         int neighbour = DAT_ViewportRenderState::instance
@@ -60,10 +61,10 @@ namespace Map {
                         if (other == 0 || this->pitchDitches[other].state != 1) {
                             continue;
                         }
-                        if (abs((int)(height - this->HeightLayer[neighbour])) < 0x19) {
+                        if (abs((int)(height - DAT_TileMapState::instance.HeightLayer[neighbour])) < 0x19) {
                             MACRO_CALL(OpenSHC::Map::Entities_Func::SetPlaceOnFire)(this->pitchDitches[other].owner,
                                 this->pitchDitches[other].x * 8, this->pitchDitches[other].y * 8,
-                                this->HeightLayer[this->pitchDitches[other].tile], 3);
+                                DAT_TileMapState::instance.HeightLayer[this->pitchDitches[other].tile], 3);
                             this->pitchDitches[other].state = 2;
                         }
                     }
@@ -71,7 +72,7 @@ namespace Map {
             } else if (this->pitchDitches[id].state == 3) {
                 this->pitchDitches[id].field7_0x12 = this->pitchDitches[id].field7_0x12 + 1;
                 if (this->pitchDitches[id].field7_0x12 == 200) {
-                    this->HeightLayer[tile] = this->DefaultHeightLayer[tile];
+                    DAT_TileMapState::instance.HeightLayer[tile] = DAT_TileMapState::instance.DefaultHeightLayer[tile];
                     this->pitchDitches[id].state = -1;
                 }
             }
