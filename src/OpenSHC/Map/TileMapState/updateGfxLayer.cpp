@@ -76,6 +76,7 @@ namespace Map {
         char* _gfxDirMatrix;
         int _gfxTile;
         int _gfxY;
+        uchar* _gfxBitFlag = &this->bitFlag;
 
         OpenSHC::Map::Buildings::BuildingTypeShort BVar1;
         ushort uVar2;
@@ -227,51 +228,12 @@ namespace Map {
                                                                     _gfxDirMatrix = (char*)this->ptr_MovementDirectionTranslationMatrix;
                                                                     _gfxTile = this->DAT_SomeTile;
                                                                     _gfxY = this->DAT_SomeY;
-                                                                    MACRO_GFX_NEIGHBOUR_MASK(wall, 4, MACRO_GFX_SHIFT_4, MACRO_GFX_ROWSTEP_4, L_WALL_OR_GATEHOUSE, bVar19)
-                                                                    this->bitFlag = 0;
-                                                                    if ((*(uint*)((char*)this->ptr_LogicLayer
-                                                                             + this->DAT_SomeTile * 4 + 4)
-                                                                            & 2)
-                                                                        != 0) {
-                                                                        this->bitFlag = 0x20;
-                                                                    }
-                                                                    if ((*(uint*)((char*)this->ptr_LogicLayer
-                                                                             + this->DAT_SomeTile * 4 + -4)
-                                                                            & 2)
-                                                                        != 0) {
-                                                                        this->bitFlag = this->bitFlag | 2;
-                                                                    }
-                                                                    puVar18 = (uint*)((char*)this->ptr_LogicLayer
-                                                                        + *(int*)((char*)this
-                                                                                      ->ptr_MovementDirectionTranslationMatrix
-                                                                              + this->DAT_SomeY * 0x20)
-                                                                            * 4
-                                                                        + this->DAT_SomeTile * 4);
-                                                                    if ((puVar18[-1] & L_STOCKPILEUnk) != 0) {
-                                                                        this->bitFlag = this->bitFlag | 1;
-                                                                    }
-                                                                    if ((puVar18[1] & L_STOCKPILEUnk) != 0) {
-                                                                        this->bitFlag = this->bitFlag | 0x40;
-                                                                    }
-                                                                    if ((*puVar18 & L_STOCKPILEUnk) != 0) {
-                                                                        this->bitFlag = this->bitFlag | 0x80;
-                                                                    }
-                                                                    puVar18 = (uint*)((char*)this->ptr_LogicLayer
-                                                                        + *(int*)((int)((char*)this
-                                                                                            ->ptr_MovementDirectionTranslationMatrix
-                                                                                      + this->DAT_SomeY * 0x20)
-                                                                              + 0x10)
-                                                                            * 4
-                                                                        + this->DAT_SomeTile * 4);
-                                                                    if ((puVar18[-1] & L_STOCKPILEUnk) != 0) {
-                                                                        this->bitFlag = this->bitFlag | 4;
-                                                                    }
-                                                                    if ((puVar18[1] & L_STOCKPILEUnk) != 0) {
-                                                                        this->bitFlag = this->bitFlag | 0x10;
-                                                                    }
-                                                                    if ((*puVar18 & L_STOCKPILEUnk) != 0) {
-                                                                        this->bitFlag = this->bitFlag | 8;
-                                                                    }
+                                                                    MACRO_GFX_NEIGHBOUR_MASK(wall, 4, MACRO_GFX_SHIFT_4, MACRO_GFX_ROWSTEP_4, L_WALL_OR_GATEHOUSE)
+                                                                    bVar19 = this->bitFlag;
+                                                                                                                                        _gfxLayer = (char*)this->ptr_LogicLayer;
+                                                                    _gfxTile = this->DAT_SomeTile;
+                                                                    _gfxY = this->DAT_SomeY;
+                                                                    MACRO_GFX_NEIGHBOUR_MASK(m1, 4, MACRO_GFX_SHIFT_4, MACRO_GFX_ROWSTEP_4, 2)
                                                                     bVar19 = ~this->bitFlag & bVar19;
                                                                     if (bVar19 != 0) {
                                                                         switch (bVar19 & 0xaa) {
@@ -1151,56 +1113,16 @@ namespace Map {
                                              && (((this->LogicLayer[this->DAT_SomeTile] & 0x10000030U) == 0
                                                  && (this->BuildingLayer[this->DAT_SomeTile] == 0))))
                                         && ((this->MiscDisplayLayer[this->DAT_SomeTile] & 0x40) == 0)))) {
-                                    bVar19 = 0;
-                                    if ((*(uint*)((char*)this->ptr_MiscDisplayLayer + this->DAT_SomeTile * 2 + 2)
-                                            & 0x80)
-                                        != 0) {
-                                        bVar19 = 0x20;
-                                    }
-                                    if ((*(uint*)((char*)this->ptr_MiscDisplayLayer + this->DAT_SomeTile * 2 + -2)
-                                            & 0x80)
-                                        != 0) {
-                                        bVar19 = bVar19 | 2;
-                                    }
-                                    puVar18 = (uint*)((char*)this->ptr_MiscDisplayLayer
-                                        + *(int*)((char*)this->ptr_MovementDirectionTranslationMatrix
-                                              + this->DAT_SomeY * 0x20)
-                                            * 2
-                                        + this->DAT_SomeTile * 2);
-                                    if ((*(uint*)((int)puVar18 + -2) & 0x80) != 0) {
-                                        bVar19 = bVar19 | 1;
-                                    }
-                                    if ((*(uint*)((int)puVar18 + 2) & 0x80) != 0) {
-                                        bVar19 = bVar19 | 0x40;
-                                    }
-                                    if ((*puVar18 & 0x80) != 0) {
-                                        bVar19 = bVar19 | 0x80;
-                                    }
-                                    bVar16 = 0;
-                                    if ((*(uint*)((char*)this->ptr_MiscDisplayLayer + this->DAT_SomeTile * 2 + 2)
-                                            & 0x40)
-                                        != 0) {
-                                        bVar16 = 0x20;
-                                    }
-                                    if ((*(uint*)((char*)this->ptr_MiscDisplayLayer + this->DAT_SomeTile * 2 + -2)
-                                            & 0x40)
-                                        != 0) {
-                                        bVar16 = bVar16 | 2;
-                                    }
-                                    puVar18 = (uint*)((char*)this->ptr_MiscDisplayLayer
-                                        + *(int*)((char*)this->ptr_MovementDirectionTranslationMatrix
-                                              + this->DAT_SomeY * 0x20)
-                                            * 2
-                                        + this->DAT_SomeTile * 2);
-                                    if ((*(uint*)((int)puVar18 + -2) & 0x40) != 0) {
-                                        bVar16 = bVar16 | 1;
-                                    }
-                                    if ((*(uint*)((int)puVar18 + 2) & 0x40) != 0) {
-                                        bVar16 = bVar16 | 0x40;
-                                    }
-                                    if ((*puVar18 & 0x40) != 0) {
-                                        bVar16 = bVar16 | 0x80;
-                                    }
+                                                                        _gfxLayer = (char*)this->ptr_MiscDisplayLayer;
+                                    _gfxTile = this->DAT_SomeTile;
+                                    _gfxY = this->DAT_SomeY;
+                                    MACRO_GFX_NEIGHBOUR_MASK(m2, 2, MACRO_GFX_SHIFT_2, MACRO_GFX_ROWSTEP_2, 0x80)
+                                    bVar19 = this->bitFlag;
+                                                                        _gfxLayer = (char*)this->ptr_MiscDisplayLayer;
+                                    _gfxTile = this->DAT_SomeTile;
+                                    _gfxY = this->DAT_SomeY;
+                                    MACRO_GFX_NEIGHBOUR_MASK(m3, 2, MACRO_GFX_SHIFT_2, MACRO_GFX_ROWSTEP_2, 0x40)
+                                    bVar16 = this->bitFlag;
                                     this->bitFlag = bVar16 & ~bVar19;
                                     if (this->bitFlag != 0) {
                                         this->GfxLayer[this->DAT_SomeTile]
@@ -2448,49 +2370,11 @@ namespace Map {
                                                         this->GfxLayer[this->DAT_SomeTile] = sVar4 + 0x40c;
                                                     }
                                                 } else {
-                                                    bVar19 = 0;
-                                                    if ((*(uint*)((char*)this->ptr_LogicLayer + this->DAT_SomeTile * 4
-                                                             + 4)
-                                                            & 1)
-                                                        != 0) {
-                                                        bVar19 = 0x20;
-                                                    }
-                                                    if ((*(uint*)((char*)this->ptr_LogicLayer + this->DAT_SomeTile * 4
-                                                             + -4)
-                                                            & 1)
-                                                        != 0) {
-                                                        bVar19 = bVar19 | 2;
-                                                    }
-                                                    puVar18 = (uint*)((char*)this->ptr_LogicLayer
-                                                        + *(int*)((char*)this->ptr_MovementDirectionTranslationMatrix
-                                                              + this->DAT_SomeY * 0x20)
-                                                            * 4
-                                                        + this->DAT_SomeTile * 4);
-                                                    if ((puVar18[-1] & 1) != 0) {
-                                                        bVar19 = bVar19 | 1;
-                                                    }
-                                                    if ((puVar18[1] & 1) != 0) {
-                                                        bVar19 = bVar19 | 0x40;
-                                                    }
-                                                    if ((*puVar18 & 1) != 0) {
-                                                        bVar19 = bVar19 | 0x80;
-                                                    }
-                                                    puVar18 = (uint*)((char*)this->ptr_LogicLayer
-                                                        + *(int*)((int)((char*)this
-                                                                            ->ptr_MovementDirectionTranslationMatrix
-                                                                      + this->DAT_SomeY * 0x20)
-                                                              + 0x10)
-                                                            * 4
-                                                        + this->DAT_SomeTile * 4);
-                                                    if ((puVar18[-1] & 1) != 0) {
-                                                        bVar19 = bVar19 | 4;
-                                                    }
-                                                    if ((puVar18[1] & 1) != 0) {
-                                                        bVar19 = bVar19 | 0x10;
-                                                    }
-                                                    if ((*puVar18 & 1) != 0) {
-                                                        bVar19 = bVar19 | 8;
-                                                    }
+                                                                                                        _gfxLayer = (char*)this->ptr_LogicLayer;
+                                                    _gfxTile = this->DAT_SomeTile;
+                                                    _gfxY = this->DAT_SomeY;
+                                                    MACRO_GFX_NEIGHBOUR_MASK(m4, 4, MACRO_GFX_SHIFT_4, MACRO_GFX_ROWSTEP_4, 1)
+                                                    bVar19 = this->bitFlag;
                                                     bVar16 = 0;
                                                     if ((*(uint*)((char*)this->ptr_TerrainTypeTileMap
                                                              + this->DAT_SomeTile + 1)
@@ -2535,50 +2419,10 @@ namespace Map {
                                                     this->bitFlag = bVar16 | bVar19;
                                                     local_c0 = 0xffffffff;
                                                     if (this->bitFlag == 0) {
-                                                        this->bitFlag = 0;
-                                                        if ((*(uint*)((char*)this->ptr_LogicLayer
-                                                                 + this->DAT_SomeTile * 4 + 4)
-                                                                & 0x100000)
-                                                            != 0) {
-                                                            this->bitFlag = 0x20;
-                                                        }
-                                                        if ((*(uint*)((char*)this->ptr_LogicLayer
-                                                                 + this->DAT_SomeTile * 4 + -4)
-                                                                & 0x100000)
-                                                            != 0) {
-                                                            this->bitFlag = this->bitFlag | 2;
-                                                        }
-                                                        puVar18 = (uint*)((char*)this->ptr_LogicLayer
-                                                            + *(int*)((char*)this
-                                                                          ->ptr_MovementDirectionTranslationMatrix
-                                                                  + this->DAT_SomeY * 0x20)
-                                                                * 4
-                                                            + this->DAT_SomeTile * 4);
-                                                        if ((puVar18[-1] & 0x100000) != 0) {
-                                                            this->bitFlag = this->bitFlag | 1;
-                                                        }
-                                                        if ((puVar18[1] & 0x100000) != 0) {
-                                                            this->bitFlag = this->bitFlag | 0x40;
-                                                        }
-                                                        if ((*puVar18 & 0x100000) != 0) {
-                                                            this->bitFlag = this->bitFlag | 0x80;
-                                                        }
-                                                        puVar18 = (uint*)((char*)this->ptr_LogicLayer
-                                                            + *(int*)((int)((char*)this
-                                                                                ->ptr_MovementDirectionTranslationMatrix
-                                                                          + this->DAT_SomeY * 0x20)
-                                                                  + 0x10)
-                                                                * 4
-                                                            + this->DAT_SomeTile * 4);
-                                                        if ((puVar18[-1] & 0x100000) != 0) {
-                                                            this->bitFlag = this->bitFlag | 4;
-                                                        }
-                                                        if ((puVar18[1] & 0x100000) != 0) {
-                                                            this->bitFlag = this->bitFlag | 0x10;
-                                                        }
-                                                        if ((*puVar18 & 0x100000) != 0) {
-                                                            this->bitFlag = this->bitFlag | 8;
-                                                        }
+                                                                                                                _gfxLayer = (char*)this->ptr_LogicLayer;
+                                                        _gfxTile = this->DAT_SomeTile;
+                                                        _gfxY = this->DAT_SomeY;
+                                                        MACRO_GFX_NEIGHBOUR_MASK(m5, 4, MACRO_GFX_SHIFT_4, MACRO_GFX_ROWSTEP_4, 0x100000)
                                                         if (this->bitFlag != 0) {
                                                             for (local_14 = 0; local_14 < 8; local_14 = local_14 + 1) {
                                                                 if ((((uint)this->bitFlag
@@ -2848,60 +2692,16 @@ namespace Map {
                                         }
                                         if (this->bitFlag == 0) {
                                             if ((this->MiscDisplayLayer[this->DAT_SomeTile] & 0xc0) == 0) {
-                                                bVar19 = 0;
-                                                if ((*(uint*)((char*)this->ptr_MiscDisplayLayer + this->DAT_SomeTile * 2
-                                                         + 2)
-                                                        & 0x40)
-                                                    != 0) {
-                                                    bVar19 = 0x20;
-                                                }
-                                                if ((*(uint*)((char*)this->ptr_MiscDisplayLayer + this->DAT_SomeTile * 2
-                                                         + -2)
-                                                        & 0x40)
-                                                    != 0) {
-                                                    bVar19 = bVar19 | 2;
-                                                }
-                                                puVar18 = (uint*)((char*)this->ptr_MiscDisplayLayer
-                                                    + *(int*)((char*)this->ptr_MovementDirectionTranslationMatrix
-                                                          + this->DAT_SomeY * 0x20)
-                                                        * 2
-                                                    + this->DAT_SomeTile * 2);
-                                                if ((*(uint*)((int)puVar18 + -2) & 0x40) != 0) {
-                                                    bVar19 = bVar19 | 1;
-                                                }
-                                                if ((*(uint*)((int)puVar18 + 2) & 0x40) != 0) {
-                                                    bVar19 = bVar19 | 0x40;
-                                                }
-                                                if ((*puVar18 & 0x40) != 0) {
-                                                    bVar19 = bVar19 | 0x80;
-                                                }
-                                                bVar16 = 0;
-                                                if ((*(uint*)((char*)this->ptr_MiscDisplayLayer + this->DAT_SomeTile * 2
-                                                         + 2)
-                                                        & 0x80)
-                                                    != 0) {
-                                                    bVar16 = 0x20;
-                                                }
-                                                if ((*(uint*)((char*)this->ptr_MiscDisplayLayer + this->DAT_SomeTile * 2
-                                                         + -2)
-                                                        & 0x80)
-                                                    != 0) {
-                                                    bVar16 = bVar16 | 2;
-                                                }
-                                                puVar18 = (uint*)((char*)this->ptr_MiscDisplayLayer
-                                                    + *(int*)((char*)this->ptr_MovementDirectionTranslationMatrix
-                                                          + this->DAT_SomeY * 0x20)
-                                                        * 2
-                                                    + this->DAT_SomeTile * 2);
-                                                if ((*(uint*)((int)puVar18 + -2) & 0x80) != 0) {
-                                                    bVar16 = bVar16 | 1;
-                                                }
-                                                if ((*(uint*)((int)puVar18 + 2) & 0x80) != 0) {
-                                                    bVar16 = bVar16 | 0x40;
-                                                }
-                                                if ((*puVar18 & 0x80) != 0) {
-                                                    bVar16 = bVar16 | 0x80;
-                                                }
+                                                                                                _gfxLayer = (char*)this->ptr_MiscDisplayLayer;
+                                                _gfxTile = this->DAT_SomeTile;
+                                                _gfxY = this->DAT_SomeY;
+                                                MACRO_GFX_NEIGHBOUR_MASK(m6, 2, MACRO_GFX_SHIFT_2, MACRO_GFX_ROWSTEP_2, 0x40)
+                                                bVar19 = this->bitFlag;
+                                                                                                _gfxLayer = (char*)this->ptr_MiscDisplayLayer;
+                                                _gfxTile = this->DAT_SomeTile;
+                                                _gfxY = this->DAT_SomeY;
+                                                MACRO_GFX_NEIGHBOUR_MASK(m7, 2, MACRO_GFX_SHIFT_2, MACRO_GFX_ROWSTEP_2, 0x80)
+                                                bVar16 = this->bitFlag;
                                                 this->bitFlag = bVar16 & ~bVar19;
                                                 if (this->bitFlag != 0) {
                                                     this->GfxLayer[this->DAT_SomeTile]
@@ -2925,49 +2725,10 @@ namespace Map {
                                             sVar4 = (short)local_38;
                                             if ((this->MiscDisplayLayer[this->DAT_SomeTile] & 0xc0) == 0) {
                                                 if ((this->MiscDisplayLayer[this->DAT_SomeTile] & 0x100) == 0) {
-                                                    this->bitFlag = 0;
-                                                    if ((*(uint*)((char*)this->ptr_MiscDisplayLayer
-                                                             + this->DAT_SomeTile * 2 + 2)
-                                                            & 0x100)
-                                                        != 0) {
-                                                        this->bitFlag = 0x20;
-                                                    }
-                                                    if ((*(uint*)((char*)this->ptr_MiscDisplayLayer
-                                                             + this->DAT_SomeTile * 2 + -2)
-                                                            & 0x100)
-                                                        != 0) {
-                                                        this->bitFlag = this->bitFlag | 2;
-                                                    }
-                                                    puVar18 = (uint*)((char*)this->ptr_MiscDisplayLayer
-                                                        + *(int*)((char*)this->ptr_MovementDirectionTranslationMatrix
-                                                              + this->DAT_SomeY * 0x20)
-                                                            * 2
-                                                        + this->DAT_SomeTile * 2);
-                                                    if ((*(uint*)((int)puVar18 + -2) & 0x100) != 0) {
-                                                        this->bitFlag = this->bitFlag | 1;
-                                                    }
-                                                    if ((*(uint*)((int)puVar18 + 2) & 0x100) != 0) {
-                                                        this->bitFlag = this->bitFlag | 0x40;
-                                                    }
-                                                    if ((*puVar18 & 0x100) != 0) {
-                                                        this->bitFlag = this->bitFlag | 0x80;
-                                                    }
-                                                    puVar18 = (uint*)((char*)this->ptr_MiscDisplayLayer
-                                                        + *(int*)((int)((char*)this
-                                                                            ->ptr_MovementDirectionTranslationMatrix
-                                                                      + this->DAT_SomeY * 0x20)
-                                                              + 0x10)
-                                                            * 2
-                                                        + this->DAT_SomeTile * 2);
-                                                    if ((*(uint*)((int)puVar18 + -2) & 0x100) != 0) {
-                                                        this->bitFlag = this->bitFlag | 4;
-                                                    }
-                                                    if ((*(uint*)((int)puVar18 + 2) & 0x100) != 0) {
-                                                        this->bitFlag = this->bitFlag | 0x10;
-                                                    }
-                                                    if ((*puVar18 & 0x100) != 0) {
-                                                        this->bitFlag = this->bitFlag | 8;
-                                                    }
+                                                                                                        _gfxLayer = (char*)this->ptr_MiscDisplayLayer;
+                                                    _gfxTile = this->DAT_SomeTile;
+                                                    _gfxY = this->DAT_SomeY;
+                                                    MACRO_GFX_NEIGHBOUR_MASK(m8, 2, MACRO_GFX_SHIFT_2, MACRO_GFX_ROWSTEP_2, 0x100)
                                                     if (this->bitFlag != 0) {
                                                         local_ac = 2;
                                                         uVar12 = (uint)this->bitFlag
