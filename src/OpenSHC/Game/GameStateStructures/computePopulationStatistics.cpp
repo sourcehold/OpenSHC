@@ -58,17 +58,20 @@ namespace Game {
             this->playerDataArray[playerID].populationRelatedCrowdingCountUnk
                 = this->playerDataArray[playerID].currentPopulation_2
                 - this->playerDataArray[playerID].availablePeasantsOrHousedPeasants;
-            if (this->playerDataArray[playerID].blessedPeopleCountUnk < 1) {
+            if (this->playerDataArray[playerID].blessedPeopleCountUnk <= 0) {
                 this->playerDataArray[playerID].blessedPeoplePercentage = 0;
-            } else if (this->playerDataArray[playerID].unblessedPeopleCountUnk
-                    + this->playerDataArray[playerID].blessedPeopleCountUnk
-                == 0) {
-                this->playerDataArray[playerID].blessedPeoplePercentage = 100;
             } else {
-                this->playerDataArray[playerID].blessedPeoplePercentage
-                    = (this->playerDataArray[playerID].blessedPeopleCountUnk * 100)
-                    / (this->playerDataArray[playerID].unblessedPeopleCountUnk
-                        + this->playerDataArray[playerID].blessedPeopleCountUnk);
+                int blessedPercentage;
+                if (this->playerDataArray[playerID].unblessedPeopleCountUnk
+                        + this->playerDataArray[playerID].blessedPeopleCountUnk
+                    == 0) {
+                    blessedPercentage = 100;
+                } else {
+                    blessedPercentage = (this->playerDataArray[playerID].blessedPeopleCountUnk * 100)
+                        / (this->playerDataArray[playerID].unblessedPeopleCountUnk
+                            + this->playerDataArray[playerID].blessedPeopleCountUnk);
+                }
+                this->playerDataArray[playerID].blessedPeoplePercentage = blessedPercentage;
             }
             if (this->mapAndTime.startOfDay != FALSE) {
                 this->playerDataArray[playerID]
@@ -79,16 +82,11 @@ namespace Game {
                 if (this->playerDataArray[playerID].populationGrowthStatisticCounter >= 8) {
                     this->playerDataArray[playerID].populationGrowthStatisticCounter = 0;
                 }
-                this->playerDataArray[playerID].averagePopulationGrowthUnk
-                    = (this->playerDataArray[playerID].populationGrowth[0]
-                          + this->playerDataArray[playerID].populationGrowth[1]
-                          + this->playerDataArray[playerID].populationGrowth[2]
-                          + this->playerDataArray[playerID].populationGrowth[3]
-                          + this->playerDataArray[playerID].populationGrowth[4]
-                          + this->playerDataArray[playerID].populationGrowth[5]
-                          + this->playerDataArray[playerID].populationGrowth[7]
-                          + this->playerDataArray[playerID].populationGrowth[6])
-                    / 8;
+                int growthSum = 0;
+                for (int sample = 0; sample < 8; sample++) {
+                    growthSum += this->playerDataArray[playerID].populationGrowth[sample];
+                }
+                this->playerDataArray[playerID].averagePopulationGrowthUnk = growthSum / 8;
             }
             if (this->mapAndTime.monthChanged != 0) {
                 if (this->mapAndTime.populationIndex < 300) {
@@ -106,8 +104,8 @@ namespace Game {
                         = (short)this->playerDataArray[playerID].currentPopulation;
                 }
             }
-            if ((int)DAT_GameSynchronyState::instance.finalResults.finalMaxPopulation[playerID]
-                < this->playerDataArray[playerID].currentPopulation) {
+            if (this->playerDataArray[playerID].currentPopulation
+                > DAT_GameSynchronyState::instance.finalResults.finalMaxPopulation[playerID]) {
                 DAT_GameSynchronyState::instance.finalResults.finalMaxPopulation[playerID]
                     = (short)this->playerDataArray[playerID].currentPopulation;
             }
