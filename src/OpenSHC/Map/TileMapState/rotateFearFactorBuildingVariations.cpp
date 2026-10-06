@@ -1,6 +1,8 @@
 #include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/Commands/MappersEnum.hpp"
 
+#include "OpenSHC/Globals/DAT_TileMapState.hpp"
+
 namespace OpenSHC {
 namespace Map {
 
@@ -46,7 +48,7 @@ namespace Map {
             }
         }
 
-        switch (this->currentMapperCommand) {
+        switch (DAT_TileMapState::instance.currentMapperCommand) {
         case OpenSHC::Commands::M_MAPPER_GARDEN1:
         case OpenSHC::Commands::M_MAPPER_GARDEN2:
         case OpenSHC::Commands::M_MAPPER_GARDEN3:
@@ -66,31 +68,32 @@ namespace Map {
         case OpenSHC::Commands::M_MAPPER_SHRINE1:
         case OpenSHC::Commands::M_MAPPER_POND1:
         case OpenSHC::Commands::M_MAPPER_POND3_LARGE1:
-            this->currentMapperCommand = (MappersEnum)(this->currentMapperCommand + OpenSHC::Commands::M_MAPPER_AREA);
+            DAT_TileMapState::instance.currentMapperCommand
+                = (MappersEnum)(DAT_TileMapState::instance.currentMapperCommand + OpenSHC::Commands::M_MAPPER_AREA);
             return;
         case OpenSHC::Commands::M_MAPPER_GARDEN6:
-            this->currentMapperCommand = OpenSHC::Commands::M_MAPPER_GARDEN1;
+            DAT_TileMapState::instance.currentMapperCommand = OpenSHC::Commands::M_MAPPER_GARDEN1;
             return;
         case OpenSHC::Commands::M_MAPPER_GARDEN9:
-            this->currentMapperCommand = OpenSHC::Commands::M_MAPPER_GARDEN7;
+            DAT_TileMapState::instance.currentMapperCommand = OpenSHC::Commands::M_MAPPER_GARDEN7;
             return;
         case OpenSHC::Commands::M_MAPPER_GARDEN12:
-            this->currentMapperCommand = OpenSHC::Commands::M_MAPPER_GARDEN10;
+            DAT_TileMapState::instance.currentMapperCommand = OpenSHC::Commands::M_MAPPER_GARDEN10;
             return;
         case OpenSHC::Commands::M_MAPPER_STATUE5:
-            this->currentMapperCommand = OpenSHC::Commands::M_MAPPER_STATUE1;
+            DAT_TileMapState::instance.currentMapperCommand = OpenSHC::Commands::M_MAPPER_STATUE1;
             return;
         case OpenSHC::Commands::M_MAPPER_POND2_SMALL:
-            this->currentMapperCommand = OpenSHC::Commands::M_MAPPER_POND1;
+            DAT_TileMapState::instance.currentMapperCommand = OpenSHC::Commands::M_MAPPER_POND1;
             return;
         case OpenSHC::Commands::M_MAPPER_POND4_LARGE2:
-            this->currentMapperCommand = OpenSHC::Commands::M_MAPPER_POND3_LARGE1;
+            DAT_TileMapState::instance.currentMapperCommand = OpenSHC::Commands::M_MAPPER_POND3_LARGE1;
             return;
         case OpenSHC::Commands::M_MAPPER_SHRINE2:
-            this->currentMapperCommand = OpenSHC::Commands::M_MAPPER_SHRINE1;
+            DAT_TileMapState::instance.currentMapperCommand = OpenSHC::Commands::M_MAPPER_SHRINE1;
             return;
         case OpenSHC::Commands::M_MAPPER_CESS_PIT4:
-            this->currentMapperCommand = OpenSHC::Commands::M_MAPPER_CESS_PIT1;
+            DAT_TileMapState::instance.currentMapperCommand = OpenSHC::Commands::M_MAPPER_CESS_PIT1;
             return;
         }
     }
