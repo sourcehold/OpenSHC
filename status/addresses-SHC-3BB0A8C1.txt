@@ -51235,7 +51235,7 @@ SHC_3BB0A8C1_0x005371E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005371F0 | 38.5% | reg alloc, loop shape
 
-SHC_3BB0A8C1_0x00537700 | 21.1% | loop shape, spills
+SHC_3BB0A8C1_0x00537700 | 61.2% | reg alloc, 16-bit sub form
 
 SHC_3BB0A8C1_0x005377F0 | 100.0% | Reimplemented
 

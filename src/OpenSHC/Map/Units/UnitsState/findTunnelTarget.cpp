@@ -20,28 +20,28 @@ namespace Map {
             int _distance;
             if ((int)DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter <= 0) {
                 _distance = 20;
-            } else if ((int)DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter < 2) {
+            } else if ((int)DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter <= 1) {
                 _distance = 20;
-            } else if ((int)DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter < 3) {
+            } else if ((int)DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter <= 2) {
                 _distance = 40;
-            } else if ((int)DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter < 4) {
+            } else if ((int)DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter <= 3) {
                 _distance = 40;
-            } else {
-                if ((int)DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter > 5) {
-                    DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter = -1;
-                    return FALSE;
-                }
+            } else if ((int)DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter <= 4) {
                 _distance = 80;
-            }
-            ushort _tunnelStartY;
-            if ((DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter & 1) == 0) {
-                DAT_BuildingsState::instance.buildings[originBuildingID].someX
-                    = DAT_BuildingsState::instance.buildings[originBuildingID].x;
-                _tunnelStartY = DAT_BuildingsState::instance.buildings[originBuildingID].y - 1;
+            } else if ((int)DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter <= 5) {
+                _distance = 80;
             } else {
-                DAT_BuildingsState::instance.buildings[originBuildingID].someX
-                    = DAT_BuildingsState::instance.buildings[originBuildingID].x - 1;
+                DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter = -1;
+                return FALSE;
+            }
+            ushort _buildingX = DAT_BuildingsState::instance.buildings[originBuildingID].x;
+            ushort _tunnelStartY;
+            if ((DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter & 1) != 0) {
+                DAT_BuildingsState::instance.buildings[originBuildingID].someX = _buildingX - 1;
                 _tunnelStartY = DAT_BuildingsState::instance.buildings[originBuildingID].y;
+            } else {
+                DAT_BuildingsState::instance.buildings[originBuildingID].someX = _buildingX;
+                _tunnelStartY = DAT_BuildingsState::instance.buildings[originBuildingID].y - 1;
             }
             DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter
                 = DAT_BuildingsState::instance.buildings[originBuildingID].tunnelerCounter + 1;
