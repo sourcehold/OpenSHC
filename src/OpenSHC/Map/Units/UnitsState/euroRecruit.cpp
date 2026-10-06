@@ -31,16 +31,13 @@ namespace Map {
             /* archer is unittype 0x16 */
             this->euroUnitAcquisitionFailReason = 0;
             int _unitCost = DAT_TroopDefinedData::instance.MarketResourceCycleArray[unitType + -1];
-            int _armourResource
-                = DAT_UnitPropertiesDefinedData::instance.MELEE_DAMAGE[0x4e][unitType * 4 + 0x49];
+            int _armourResource = DAT_UnitPropertiesDefinedData::instance.MELEE_DAMAGE[0x4e][unitType * 4 + 0x49];
             /* fixme: always 0 strange */
-            int _unknownResource
-                = DAT_UnitPropertiesDefinedData::instance.MELEE_DAMAGE[0x4e][unitType * 4 + 0x4a];
+            int _unknownResource = DAT_UnitPropertiesDefinedData::instance.MELEE_DAMAGE[0x4e][unitType * 4 + 0x4a];
             /* bug: if unitType was 0, then it became -0x16, which results in requiring wood
                for creating this unit. This is nonsensical. It is wood because it will
                access memory DAT_MELEE_DAMAGE_MATRIX[78][72], which happens to be 2 */
-            int _weaponResource
-                = DAT_UnitPropertiesDefinedData::instance.MELEE_DAMAGE[0x4e][unitType * 4 + 0x48];
+            int _weaponResource = DAT_UnitPropertiesDefinedData::instance.MELEE_DAMAGE[0x4e][unitType * 4 + 0x48];
             int _horseResource = DAT_UnitPropertiesDefinedData::instance.MELEE_DAMAGE[0x4e][unitType * 4 + 0x4b];
             if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY
                 && DAT_GameSynchronyState::instance.skirmishTroopsCostGold == 0) {
