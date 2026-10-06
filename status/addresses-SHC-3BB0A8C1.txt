@@ -17149,7 +17149,7 @@ SHC_3BB0A8C1_0x004568F0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004569E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00456AD0 | 45.0% | Const CSE and spills differ
+SHC_3BB0A8C1_0x00456AD0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00456C50 | 100.0% | Reimplemented
 
