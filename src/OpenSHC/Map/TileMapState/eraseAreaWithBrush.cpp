@@ -14,6 +14,7 @@
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
+#include "OpenSHC/Globals/DAT_TileMapState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -69,7 +70,7 @@ namespace Map {
                         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer, DAT_PathFindingState::ptr)(3, baseX, y);
                     }
                     DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
-                    this->field204_0x554a30 = 1;
+                    DAT_TileMapState::instance.field204_0x554a30 = 1;
                 }
                 index++;
             } while (index < brushSize);
@@ -121,7 +122,7 @@ namespace Map {
                 if ((this->LogicLayer[x] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                     return;
                 }
-                for (int unit = (short)this->UnitLayer[x]; unit != 0;
+                for (int unit = (short)DAT_TileMapState::instance.UnitLayer[x]; unit != 0;
                      unit = DAT_UnitsState::instance.units[unit].nextUnitOnTheSameTile) {
                     DAT_UnitsState::instance.units[unit].logicalState = OpenSHC::Map::Units::ULS_REMOVE;
                 }
