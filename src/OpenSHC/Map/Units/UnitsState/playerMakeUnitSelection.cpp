@@ -11,6 +11,7 @@
 #include "OpenSHC/Globals/DAT_SFXState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
 #include "OpenSHC/Globals/DAT_UIDragDropDefinedData.hpp"
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -61,8 +62,9 @@ namespace Map {
                 || _unitType == OpenSHC::Map::Units::UT_S_TREBUCHET
                 || _unitType == OpenSHC::Map::Units::UT_S_MANGONEL) {
                 int _siegeEngineUnitID = DAT_TribesState::instance.tribes[_newTribeID].selectionTargetUnitID;
-                int _remainingEngineers = MACRO_CALL_MEMBER(
-                    OpenSHC::Map::Units::UnitsState_Func::getRemainingRequiredEngineers, this)(_siegeEngineUnitID);
+                int _remainingEngineers
+                    = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::getRemainingRequiredEngineers,
+                        DAT_UnitsState::ptr)(_siegeEngineUnitID);
                 if (_remainingEngineers > 0) {
                     if (this->units[_siegeEngineUnitID]
                                 .digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300
