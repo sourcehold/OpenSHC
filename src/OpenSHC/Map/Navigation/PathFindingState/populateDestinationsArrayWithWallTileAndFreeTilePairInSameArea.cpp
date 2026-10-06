@@ -73,7 +73,7 @@ namespace Map {
                     _x = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                     _y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
-                    if ((80400 < this->searchQueue.currentDistance) || (10 < this->searchQueue.currentDistance))
+                    if ((80400 < (int)this->searchQueue.currentDistance) || (10 < (int)this->searchQueue.currentDistance))
                         break;
                     for (int _direction = 0; _direction < 8; _direction = _direction + 1) {
                         _candidate = DAT_TileMapState::instance.directionTranslationMatrix[_y][_direction] + _tile;
@@ -117,7 +117,7 @@ namespace Map {
                 }
             }
             this->searchQueue.readIndex = 0;
-            if (0 < this->searchQueue.writeIndex) {
+            if (0 < (int)this->searchQueue.writeIndex) {
                 piVar3 = &this->searchQueue.destinationsArray[0].tile2OrAHelper;
                 do {
                     _tile2 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
@@ -154,10 +154,10 @@ namespace Map {
                         } while ((int)pXVar4 < 0xb39238);
                     }
                     this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                } while (this->searchQueue.readIndex < this->searchQueue.writeIndex);
+                } while ((int)this->searchQueue.readIndex < (int)this->searchQueue.writeIndex);
             }
             this->searchQueue.readIndex = 0;
-            if (0 < this->searchQueue.writeIndex) {
+            if (0 < (int)this->searchQueue.writeIndex) {
                 piVar3 = &((PathFindingStatePartB*)(this->climbData + 200))->destinationsArray[_dIndex].tile2OrAHelper;
                 do {
                     iVar2 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
@@ -174,7 +174,7 @@ namespace Map {
                         }
                     }
                     this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                } while (this->searchQueue.readIndex < this->searchQueue.writeIndex);
+                } while ((int)this->searchQueue.readIndex < (int)this->searchQueue.writeIndex);
             }
             this->searchQueue.destinationsArray[_dIndex].tile1 = 0;
             ((PathFindingStatePartB*)(this->climbData + 200))->destinationsArray[_dIndex].tile2OrAHelper = 0;
