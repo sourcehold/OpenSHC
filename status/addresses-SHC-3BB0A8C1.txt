@@ -17677,7 +17677,7 @@ SHC_3BB0A8C1_0x00457E80 | 67.5% | Zero kept in reg by orig
 
 SHC_3BB0A8C1_0x00457F20 | 48.3% | Loop base reg choice
 
-SHC_3BB0A8C1_0x00457FD0 | 36.6% | Loop base reg choice
+SHC_3BB0A8C1_0x00457FD0 | 84.6% | Loop base reg choice
 
 SHC_3BB0A8C1_0x00458070 | 100.0% | Reimplemented
 

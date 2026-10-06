@@ -27,31 +27,29 @@ namespace Game {
             return;
         }
         for (int playerID = 1; playerID < 9; playerID++) {
-            if ((this->playerDataArray[playerID].lordKilledByPlayerID == 0)
-                && (this->playerDataArray[playerID].playerDeathRelated == 0)
-                && ((DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] != -1)
-                    || (DAT_GameSynchronyState::instance.currentAIArray[playerID] != 0))) {
-                int currentGold = this->playerDataArray[playerID].currentResources[0xf];
-                if (currentGold != this->playerDataArray[playerID].currentGoldDelayed) {
-                    this->playerDataArray[playerID].field490_0x450
-                        = this->playerDataArray[playerID].field490_0x450 + 1;
-                    if (this->playerDataArray[playerID].field490_0x450 >= 2) {
-                        /*
-                          currentGoldDelayed = currentGold
-                         */
-                        this->playerDataArray[playerID].currentGoldDelayed = currentGold;
-                        int keepID = this->playerDataArray[playerID].keep.id;
-                        this->playerDataArray[playerID].field490_0x450 = 0;
-                        /*
-                          if keepBuildingID != 0
-                         */
-                        if (keepID != 0) {
-                            MACRO_CALL_MEMBER(
-                                OpenSHC::Map::Buildings::BuildingsState_Func::displayPopularityAndGoldPopups,
-                                DAT_BuildingsState::ptr)(keepID, 0, 0, 0);
-                        }
-                    }
-                }
+            if (this->playerDataArray[playerID].lordKilledByPlayerID != 0) {
+                continue;
+            }
+            if (this->playerDataArray[playerID].playerDeathRelated != 0) {
+                continue;
+            }
+            if ((DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] == -1)
+                && (DAT_GameSynchronyState::instance.currentAIArray[playerID] == 0)) {
+                continue;
+            }
+            if (this->playerDataArray[playerID].currentResources[0xf]
+                == this->playerDataArray[playerID].currentGoldDelayed) {
+                continue;
+            }
+            this->playerDataArray[playerID].field490_0x450 += 1;
+            if (this->playerDataArray[playerID].field490_0x450 < 2) {
+                continue;
+            }
+            this->playerDataArray[playerID].currentGoldDelayed = this->playerDataArray[playerID].currentResources[0xf];
+            this->playerDataArray[playerID].field490_0x450 = 0;
+            if (this->playerDataArray[playerID].keep.id != 0) {
+                MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::displayPopularityAndGoldPopups,
+                    DAT_BuildingsState::ptr)(this->playerDataArray[playerID].keep.id, 0, 0, 0);
             }
         }
     }
