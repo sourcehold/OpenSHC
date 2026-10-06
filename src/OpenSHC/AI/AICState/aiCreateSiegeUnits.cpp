@@ -91,32 +91,7 @@ namespace AI {
                     continue;
                 }
 
-                if (unitID == 0) {
-                    if (buildingID != 0) {
-                        int requiredEngineers = MACRO_CALL_MEMBER(
-                            OpenSHC::Map::Buildings::BuildingsState_Func::getRequiredEngineerCountForSiegeBuilding,
-                            DAT_BuildingsState::ptr)(buildingID);
-                        if (DAT_BuildingsState::instance.buildings[buildingID].currentEmployeeCount
-                            == requiredEngineers)
-                            continue;
-                        if (requiredEngineers
-                            > DAT_GameState::instance.playerDataArray[playerID].engineerCountRelated) {
-                            DAT_GameState::instance.playerDataArray[playerID].isEngineerRequired = TRUE;
-                            continue;
-                        }
-                        int tribeID
-                            = MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::assignRequiredIdleEngineersToNewTribe,
-                                this)(playerID, requiredEngineers);
-                        DAT_TribesState::instance.tribes[tribeID].tribeType = OpenSHC::AI::Tribes::AITT_ENGINEERS;
-                        DAT_TribesState::instance.tribes[tribeID].tribeBehaviorType
-                            = OpenSHC::Map::Units::STBT_0x410_SIEGE_EQUIPMENT_CONSTRUCTION;
-                        MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeAnInstruction,
-                            DAT_TribesState::ptr)(tribeID,
-                            OpenSHC::Map::Units::UIT_CONSTRUCT_SIEGE_EQUIPMENTOIL_DUTYENGINEERRELATED, buildingID,
-                            DAT_BuildingsState::instance.buildings[buildingID].uid, 0);
-                        return;
-                    }
-
+                if (unitID == 0 && buildingID == 0) {
                     if (((short)DAT_TileMapState::instance.BuildingLayer[location]) == 0) {
                         if (siegeIndex < 2)
                             continue;
@@ -200,32 +175,7 @@ namespace AI {
                         = 0;
                     return;
                 }
-
-                if (unitID != 0) {
-                    if (buildingID != 0) {
-                        int requiredEngineers = MACRO_CALL_MEMBER(
-                            OpenSHC::Map::Buildings::BuildingsState_Func::getRequiredEngineerCountForSiegeBuilding,
-                            DAT_BuildingsState::ptr)(buildingID);
-                        if (DAT_BuildingsState::instance.buildings[buildingID].currentEmployeeCount
-                            == requiredEngineers)
-                            continue;
-                        if (requiredEngineers
-                            > DAT_GameState::instance.playerDataArray[playerID].engineerCountRelated) {
-                            DAT_GameState::instance.playerDataArray[playerID].isEngineerRequired = TRUE;
-                            continue;
-                        }
-                        int tribeID
-                            = MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::assignRequiredIdleEngineersToNewTribe,
-                                this)(playerID, requiredEngineers);
-                        DAT_TribesState::instance.tribes[tribeID].tribeType = OpenSHC::AI::Tribes::AITT_ENGINEERS;
-                        DAT_TribesState::instance.tribes[tribeID].tribeBehaviorType
-                            = OpenSHC::Map::Units::STBT_0x410_SIEGE_EQUIPMENT_CONSTRUCTION;
-                        MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeAnInstruction,
-                            DAT_TribesState::ptr)(tribeID,
-                            OpenSHC::Map::Units::UIT_CONSTRUCT_SIEGE_EQUIPMENTOIL_DUTYENGINEERRELATED, buildingID,
-                            DAT_BuildingsState::instance.buildings[buildingID].uid, 0);
-                        return;
-                    }
+                if (unitID != 0 && buildingID == 0) {
                     int remainingEngineers
                         = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::getRemainingRequiredEngineers,
                             DAT_UnitsState::ptr)(unitID);
@@ -257,8 +207,28 @@ namespace AI {
                         DAT_UnitsState::instance.units[unitID].uid, 0);
                     return;
                 }
+
+                int requiredEngineers = MACRO_CALL_MEMBER(
+                    OpenSHC::Map::Buildings::BuildingsState_Func::getRequiredEngineerCountForSiegeBuilding,
+                    DAT_BuildingsState::ptr)(buildingID);
+                if (DAT_BuildingsState::instance.buildings[buildingID].currentEmployeeCount == requiredEngineers)
+                    continue;
+                if (DAT_GameState::instance.playerDataArray[playerID].engineerCountRelated >= requiredEngineers) {
+                    int tribeID = MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::assignRequiredIdleEngineersToNewTribe,
+                        this)(playerID, requiredEngineers);
+                    DAT_TribesState::instance.tribes[tribeID].tribeType = OpenSHC::AI::Tribes::AITT_ENGINEERS;
+                    DAT_TribesState::instance.tribes[tribeID].tribeBehaviorType
+                        = OpenSHC::Map::Units::STBT_0x410_SIEGE_EQUIPMENT_CONSTRUCTION;
+                    MACRO_CALL_MEMBER(
+                        OpenSHC::Map::Units::TribesState_Func::giveTribeAnInstruction, DAT_TribesState::ptr)(tribeID,
+                        OpenSHC::Map::Units::UIT_CONSTRUCT_SIEGE_EQUIPMENTOIL_DUTYENGINEERRELATED, buildingID,
+                        DAT_BuildingsState::instance.buildings[buildingID].uid, 0);
+                    return;
+                }
+                DAT_GameState::instance.playerDataArray[playerID].isEngineerRequired = TRUE;
             }
         }
     }
+
 }
 }
