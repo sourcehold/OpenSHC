@@ -57,7 +57,7 @@ namespace Map {
                     if (0x13a10 < (int)this->searchQueue.currentDistance) {
                         return 0;
                     }
-                    if (this->searchQueue.currentDistance > max) {
+                    if ((int)this->searchQueue.currentDistance > max) {
                         return 0;
                     }
                     for (int iVar5 = 0; iVar5 < 8; iVar5 = iVar5 + 1) {
@@ -67,7 +67,7 @@ namespace Map {
                             && (_candidate
                                 = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][iVar5] + _tile,
                                 DAT_TileMapState::instance.WalkLayer[_candidate] != this->searchGeneration)) {
-                            if (4 < this->searchQueue.currentDistance
+                            if (4 < (int)this->searchQueue.currentDistance
                                 && (DAT_TileMapState::instance.AIInfoLayer[_candidate] & 0x10) != 0
                                 && (iVar4 = MACRO_CALL_MEMBER(
                                         OpenSHC::Map::Units::TroopValueState_Func::findOrReserveArcherPointSlot,
