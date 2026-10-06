@@ -29,9 +29,9 @@ namespace Map {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, buildingWidthAndHeight);
             uint footprintY = this->buildingY + y;
-            if (this->buildingX + x <= 399 && footprintY <= 399
-                && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[footprintY * 400 + this->buildingX + x]
-                    != 0) {
+            uint footprintX = this->buildingX + x;
+            if (footprintX <= 399 && footprintY <= 399
+                && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[footprintY * 400 + footprintX] != 0) {
                 uint height
                     = this->HeightLayer[DAT_ViewportRenderState::instance.translationMatrix[footprintY].addXgetTile
                         + this->buildingX + x];
