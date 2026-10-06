@@ -6,6 +6,7 @@
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
 namespace OpenSHC {
@@ -53,8 +54,10 @@ namespace Map {
                                         .addXgetTile
                              + DAT_TileMapState::instance.buildingX
                              + (short)DAT_BuildingsState::instance.buildings[_buildingID].x];
-                    _otherUnitID != 0; _otherUnitID = (short)this->units[_otherUnitID].nextUnitOnTheSameTile) {
-                    if (this->units[_otherUnitID].owner == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
+                    _otherUnitID != 0;
+                    _otherUnitID = (short)DAT_UnitsState::instance.units[_otherUnitID].nextUnitOnTheSameTile) {
+                    if (DAT_UnitsState::instance.units[_otherUnitID].owner
+                        == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         _ownUnitsOnBuilding = _ownUnitsOnBuilding + 1;
                     }
                 }

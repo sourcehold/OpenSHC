@@ -51143,7 +51143,7 @@ SHC_3BB0A8C1_0x00536690 | 92.1% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x00536710 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00536780 | 32.8% | loop shape, reg alloc
+SHC_3BB0A8C1_0x00536780 | 35.8% | frame size, reg alloc
 
 SHC_3BB0A8C1_0x00536860 | 0.0% | Pending
 
