@@ -254,21 +254,20 @@ namespace Map {
                     MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::updateMicroPosition, this)(unitID);
                     MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processDamageFromKillingPit,
                         DAT_BuildingsState::ptr)(unitID);
-                    if (DAT_TileMapState::instance.BuildingLayer[this->units[unitID].tile] != 0
-                        && (DAT_BuildingsState::instance
-                                    .buildings[DAT_TileMapState::instance.BuildingLayer[this->units[unitID].tile]]
-                                    .buildingType
-                                == OpenSHC::Map::Buildings::BT_TOWER1
-                            || DAT_BuildingsState::instance
-                                    .buildings[DAT_TileMapState::instance.BuildingLayer[this->units[unitID].tile]]
-                                    .buildingType
-                                == OpenSHC::Map::Buildings::BT_TOWER4)) {
-                        DAT_BuildingsState::instance
-                            .buildings[DAT_TileMapState::instance.BuildingLayer[this->units[unitID].tile]]
-                            .hasUnitsOntop = 1;
-                        DAT_BuildingsState::instance
-                            .buildings[DAT_TileMapState::instance.BuildingLayer[this->units[unitID].tile]]
-                            .field261_0x2fa = 100;
+                    if (DAT_TileMapState::instance.BuildingLayer[this->units[unitID].tile] != 0) {
+                        int _buildingType
+                            = DAT_BuildingsState::instance
+                                  .buildings[DAT_TileMapState::instance.BuildingLayer[this->units[unitID].tile]]
+                                  .buildingType;
+                        if (_buildingType == OpenSHC::Map::Buildings::BT_TOWER1
+                            || _buildingType == OpenSHC::Map::Buildings::BT_TOWER4) {
+                            DAT_BuildingsState::instance
+                                .buildings[DAT_TileMapState::instance.BuildingLayer[this->units[unitID].tile]]
+                                .hasUnitsOntop = 1;
+                            DAT_BuildingsState::instance
+                                .buildings[DAT_TileMapState::instance.BuildingLayer[this->units[unitID].tile]]
+                                .field261_0x2fa = 100;
+                        }
                     }
                 }
                 this->units[unitID].field105_0xe8 = 0;
