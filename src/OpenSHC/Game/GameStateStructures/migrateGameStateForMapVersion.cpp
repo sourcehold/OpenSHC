@@ -150,16 +150,14 @@ namespace Game {
                         = (&DAT_GameState::instance.mapAndTime.field3154_0x274c)[index];
                 }
             }
-            short unitJesterRelated = DAT_GameState::instance.mapAndTime.unitJesterRelated;
-            short unitLadyRelated = DAT_GameState::instance.mapAndTime.unitLadyRelated;
             if (((int)receivedMapVersion < 143)
                 && (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_CAMPAIGN_MISSION)) {
                 for (int unitID = 1; unitID < 2500; unitID++) {
                     if ((DAT_UnitsState::instance.units[unitID].logicalState != OpenSHC::Map::Units::ULS_INVISIBLE)
                         && (((DAT_UnitsState::instance.units[unitID].unitType == OpenSHC::Map::Units::UT_JESTER)
-                                && (unitJesterRelated == 0))
+                                && (DAT_GameState::instance.mapAndTime.unitJesterRelated == 0))
                             || ((DAT_UnitsState::instance.units[unitID].unitType == OpenSHC::Map::Units::UT_LADY)
-                                && (unitLadyRelated == 0)))) {
+                                && (DAT_GameState::instance.mapAndTime.unitLadyRelated == 0)))) {
                         DAT_UnitsState::instance.units[unitID].logicalState = OpenSHC::Map::Units::ULS_REMOVE;
                     }
                 }
