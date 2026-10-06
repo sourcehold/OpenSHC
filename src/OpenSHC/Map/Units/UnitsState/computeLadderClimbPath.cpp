@@ -5,6 +5,7 @@
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
 namespace OpenSHC {
@@ -23,9 +24,9 @@ namespace Map {
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::copyData, DAT_LowLevelMemory::ptr)(
                 0x490, &this->units[unitID], this->units);
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                400, '\0', this->units[unitID].pathPlanStart);
+                400, '\0', DAT_UnitsState::instance.units[unitID].pathPlanStart);
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::bindPathPlanToAlgorithmStateAndReset,
-                DAT_PathFindingState::ptr)(this->units[unitID].pathPlanStart);
+                DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[unitID].pathPlanStart);
             DAT_PathFindingState::instance.unitX = this->units[unitID].x;
             DAT_PathFindingState::instance.unitY = this->units[unitID].y;
             int _pathPlanSize
