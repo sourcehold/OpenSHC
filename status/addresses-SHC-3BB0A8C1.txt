@@ -59657,7 +59657,7 @@ SHC_3BB0A8C1_0x0053BB10 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0053BB70 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0053BB90 | 60.0% | one read via global inst
+SHC_3BB0A8C1_0x0053BB90 | 67.9% | reg alloc differs
 
 SHC_3BB0A8C1_0x0053BC20 | 0.0% | Pending
 
