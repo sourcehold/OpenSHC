@@ -4,6 +4,7 @@
 #include "OpenSHC/Rendering/ViewportRenderState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
+#include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
 namespace OpenSHC {
@@ -20,7 +21,7 @@ namespace Map {
     {
         MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::saveFocusTileAndCenterPreview,
             DAT_ViewportRenderState::ptr)();
-        this->mapOrientation = mapOrientation;
+        DAT_TileMapState::instance.mapOrientation = mapOrientation;
         MACRO_CALL_MEMBER(
             OpenSHC::Rendering::ViewportRenderState_Func::restoreFocusTile, DAT_ViewportRenderState::ptr)();
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::forceFullTileMapRedraw, this)();
