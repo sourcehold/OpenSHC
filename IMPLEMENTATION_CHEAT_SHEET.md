@@ -118,6 +118,34 @@ being
 SEC_RNG::ptr->currentNumber1 % 4
 ```
 
+### Frame Pointers: `optimize("y", off)`, Not `optimize("", off)`
+
+`push ebp` followed by `mov ebp, esp` or `lea ebp, [esp + N]` in the original, with the parameters addressed off
+`ebp` and `this` spilled to the frame, means that function was built **with** a frame pointer. Comparisons against a
+zeroed register (`xor ebx, ebx; cmp word ptr [..], bx`) come with it and make the whole thing look unoptimised, but
+it is not: `#pragma optimize("", off)` took `processMeleeInitiation` from 38.3% to **6.0%** and inflated it from 707
+to 1262 instructions against the original's 734. The frame pointer alone is what differs, so disable only its
+omission:
+
+```cpp
+#pragma optimize("y", off)
+// FUNCTION: STRONGHOLDCRUSADER 0x...
+...
+#pragma optimize("y", on)
+```
+
+That took the same function 31.3% -> 39.6% in reccmp with the count landing at 713 against 734.
+
+Two things not to trust here. `orig_asm.py --stats` reports `frame pointer: False` for this case, because it looks
+for `mov ebp, esp` and the original uses `lea ebp, [esp + N]`; check the prologue in the diff yourself. And a frame
+pointer on *both* sides is not this pattern at all - it is usually forced by stack alignment for a large local array
+(`and esp, 0xfffffff8`), as in `selectionContainsCombatUnit`, where there is nothing to change.
+
+What stays out of reach is where `ebp` points. The original sets it into the middle of its frame so every
+displacement fits in a byte (parameters at `ebp + 0x7c`), while MSVC gives us `mov ebp, esp` and addresses
+parameters at `ebp + 8`. Only two of the 109 functions in `Map::Units::UnitsState` have a frame pointer at all, so
+scan for the prologue rather than guessing.
+
 ### Duplicated Blocks: Being Longer Is Not Evidence
 
 Two identical blocks in the decompiler output are often identical in the original too, and a longer instruction
