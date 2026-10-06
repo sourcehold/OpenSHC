@@ -18143,7 +18143,7 @@ SHC_3BB0A8C1_0x0045C9E0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0045CA20 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0045CD10 | 42.0% | Zero CSE'd into a register
+SHC_3BB0A8C1_0x0045CD10 | 36.0% | DoNothing needs this in ecx
 
 SHC_3BB0A8C1_0x0045D060 | 0.0% | Pending
 

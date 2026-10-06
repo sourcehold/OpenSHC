@@ -76,7 +76,6 @@ namespace Game {
                     DAT_GameSynchronyState::ptr)();
                 return;
             }
-            DAT_RotateMapOrPullDownTerrain::instance = 0;
             return;
         }
         if (DAT_GameSynchronyState::instance.syncStatus != 0) {
@@ -121,7 +120,6 @@ namespace Game {
                     return;
                 }
             }
-            DAT_RotateMapOrPullDownTerrain::instance = 0;
             return;
         }
         if ((DAT_GameSynchronyState::instance.quitGameVoteRelated != 0)
@@ -130,21 +128,17 @@ namespace Game {
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
                 OpenSHC::Commands::GCT_SEND_QUIT_GAME_VOTE);
         }
-        if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)() == FALSE) {
-            if ((int)DAT_TileMapState::instance.DAT_FutureMapOrientation < 8) {
-                DAT_RotateMapOrPullDownTerrain::instance = 1;
-            }
-        } else if ((DAT_GameCore::instance.gamePausedLogical == 0)
-            || ((int)DAT_TileMapState::instance.DAT_FutureMapOrientation < 8)) {
-            if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::isGameHaltingMenuOpen, DAT_GameCore::ptr)() == FALSE) {
-                MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
-                MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber1, SEC_RNG::ptr)();
-                DAT_GameCore::instance.mapTimeInTicks = DAT_GameCore::instance.mapTimeInTicks + 1;
-                MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::processSingleTimeTick, DAT_GameState::ptr)();
-            }
-            if ((int)DAT_TileMapState::instance.DAT_FutureMapOrientation < 8) {
-                DAT_RotateMapOrPullDownTerrain::instance = 1;
-            }
+        if ((MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)() != FALSE)
+            && ((DAT_GameCore::instance.gamePausedLogical == 0)
+                || ((int)DAT_TileMapState::instance.DAT_FutureMapOrientation < 8))
+            && (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::isGameHaltingMenuOpen, DAT_GameCore::ptr)() == FALSE)) {
+            MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
+            MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber1, SEC_RNG::ptr)();
+            DAT_GameCore::instance.mapTimeInTicks = DAT_GameCore::instance.mapTimeInTicks + 1;
+            MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::processSingleTimeTick, DAT_GameState::ptr)();
+        }
+        if ((int)DAT_TileMapState::instance.DAT_FutureMapOrientation < 8) {
+            DAT_RotateMapOrPullDownTerrain::instance = 1;
         }
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::processMapOrientationChange, DAT_TileMapState::ptr)();
         MACRO_CALL_MEMBER(
