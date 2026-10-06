@@ -51257,7 +51257,7 @@ SHC_3BB0A8C1_0x00537C10 | 85.9% | cold return block outlined
 
 SHC_3BB0A8C1_0x00537C90 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00537D60 | 48.7% | reg alloc
+SHC_3BB0A8C1_0x00537D60 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00537E00 | 98.4% | reg alloc differs
 
