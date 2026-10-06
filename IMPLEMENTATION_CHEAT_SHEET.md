@@ -38,6 +38,54 @@ If a volatile register is **NOT** used as return register but still used after t
 it is a clean indication of a known function body. The source of the other function was likely in the same file,
 allowing the compiler to optimize the register usage.
 
+#### Detecting inlined functions
+The compiler (and/or linker) likely inlined some functions. This mainly happens if the compilation unit (in our case
+function body) can "see" the contents of another compilation unit (function body). Detecting whether this has occurred
+is challenging. So far, we have found one pattern that predicts it (occurs in OpenSHC::Global::WinMain).
+
+The context is the following:
+
+```cpp
+inline static void Helper(Menu* menu)
+{
+    MACRO_CALL_MEMBER(OpenSHC::UI::Menu_Func::handleMenuItems, menu)(OpenSHC::UI::Enums::MIHS_PREPARE_AND_RENDER);
+    MACRO_CALL_MEMBER(OpenSHC::UI::Menu_Func::renderConstructionMenu, menu)();
+}
+
+int WinMain() {
+    /* The use of the Helper() leads to 100% match. */
+    Helper(DAT_MenuHandleState::instance.currentMenu);
+    /* Using the lines below would have produced a mismatch: */
+    // MACRO_CALL_MEMBER(OpenSHC::UI::Menu_Func::handleMenuItems, menu)(OpenSHC::UI::Enums::MIHS_PREPARE_AND_RENDER);
+    // MACRO_CALL_MEMBER(OpenSHC::UI::Menu_Func::renderConstructionMenu, menu)();
+}
+```
+
+The pattern in assembly is as follows:
+
+```asm
+mov ecx, [ptrData]
+mov esi, ecx
+call A
+mov ecx, esi
+call B
+```
+
+Which basically means the this-pointer (currentMenu) is saved to esi to restore it easily after the first call.
+
+If there had been no inline function, we would have seen the following pattern instead:
+
+```asm
+mov ecx, [ptrData]
+call A
+mov ecx, [ptrData]
+call B
+```
+
+Note that the inlined-variant is shorter in size, which causes jmp/je/jg (etc.) to mismatch throughout the whole
+function body. Furthermore, esi has been "claimed" to achieve this reduction in code size, so esi is used differently,
+which usually also cascades in further code changes.
+
 ### Conditionals
 
 Instructions can only be pulled:
