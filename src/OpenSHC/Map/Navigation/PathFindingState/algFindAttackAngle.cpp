@@ -51,10 +51,10 @@ namespace Map {
                     int _xOption = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                     int _yOption = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tileOption];
-                    if (80400 < this->searchQueue.currentDistance) {
+                    if (80400 < (int)this->searchQueue.currentDistance) {
                         return 0;
                     }
-                    if (this->searchQueue.currentDistance > maxDistance200) {
+                    if ((int)this->searchQueue.currentDistance > maxDistance200) {
                         return 0;
                     }
                     for (int _direction = 0; _direction < 8; _direction = _direction + 1) {
@@ -64,7 +64,7 @@ namespace Map {
                             && (_tile = DAT_TileMapState::instance.directionTranslationMatrix[_yOption][_direction]
                                     + _tileOption,
                                 DAT_TileMapState::instance.WalkLayer[_tile] != this->searchGeneration)) {
-                            if (4 < this->searchQueue.currentDistance
+                            if (4 < (int)this->searchQueue.currentDistance
                                 && (DAT_TileMapState::instance.AIInfoLayer[_tile] & 0x80) != 0
                                 && (_siegeIndex
                                     = MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::getSiegeIndexForTile,
@@ -90,7 +90,7 @@ namespace Map {
                                 + _yOption;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _tile;
                             this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                            if (80400 < this->searchQueue.writeIndex) {
+                            if (80400 < (int)this->searchQueue.writeIndex) {
                                 this->searchQueue.writeIndex = 0;
                             }
                         }
