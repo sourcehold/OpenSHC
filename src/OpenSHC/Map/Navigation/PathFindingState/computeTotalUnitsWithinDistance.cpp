@@ -129,7 +129,7 @@ namespace Map {
                                     + sVar3;
                                 this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar5;
                                 this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                                if (0x13a10 <= this->searchQueue.writeIndex) {
+                                if (0x13a10 <= (int)this->searchQueue.writeIndex) {
                                     this->searchQueue.writeIndex = 0;
                                 }
                             }
@@ -152,7 +152,7 @@ namespace Map {
                                     + sVar3;
                                 this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar5;
                                 this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                                if (0x13a10 <= this->searchQueue.writeIndex) {
+                                if (0x13a10 <= (int)this->searchQueue.writeIndex) {
                                     this->searchQueue.writeIndex = 0;
                                 }
                             }
@@ -175,7 +175,7 @@ namespace Map {
                                     + sVar3;
                                 this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar5;
                                 this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                                if (0x13a10 <= this->searchQueue.writeIndex) {
+                                if (0x13a10 <= (int)this->searchQueue.writeIndex) {
                                     this->searchQueue.writeIndex = 0;
                                 }
                             }
@@ -183,7 +183,7 @@ namespace Map {
                         iVar6 = iVar6 + 4;
                     } while (iVar6 < 8);
                     this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                    if (0x13a10 <= this->searchQueue.readIndex) {
+                    if (0x13a10 <= (int)this->searchQueue.readIndex) {
                         this->searchQueue.readIndex = 0;
                     }
                     if (this->searchQueue.readIndex == this->searchQueue.writeIndex) {
