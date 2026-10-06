@@ -163,7 +163,7 @@ namespace Map {
                                 + sVar3;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar9;
                             this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                            if (0x13a10 <= this->searchQueue.writeIndex) {
+                            if (0x13a10 <= (int)this->searchQueue.writeIndex) {
                                 this->searchQueue.writeIndex = 0;
                             }
                         }
@@ -183,7 +183,7 @@ namespace Map {
                                 + sVar3;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar9;
                             this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                            if (0x13a10 <= this->searchQueue.writeIndex) {
+                            if (0x13a10 <= (int)this->searchQueue.writeIndex) {
                                 this->searchQueue.writeIndex = 0;
                             }
                         }
@@ -203,7 +203,7 @@ namespace Map {
                                 + sVar3;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar9;
                             this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                            if (0x13a10 <= this->searchQueue.writeIndex) {
+                            if (0x13a10 <= (int)this->searchQueue.writeIndex) {
                                 this->searchQueue.writeIndex = 0;
                             }
                         }
@@ -223,7 +223,7 @@ namespace Map {
                                 + sVar3;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar9;
                             this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                            if (0x13a10 <= this->searchQueue.writeIndex) {
+                            if (0x13a10 <= (int)this->searchQueue.writeIndex) {
                                 this->searchQueue.writeIndex = 0;
                             }
                         }
