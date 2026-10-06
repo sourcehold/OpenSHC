@@ -31,66 +31,59 @@ namespace Map {
     {
         int baseTile = tile;
         int brushSize = DAT_TerrainDefinedData::instance.BrushSizeArray[brush];
-        int index = 0;
         /* the original reuses the brush parameter to hold the base y */
         brush = y;
-        if (brushSize < 1) {
-            this->forceUpdateTextureTilemap = 1;
-            this->forceUpdateLogicalAndMiscDisplayLayers = 1;
-            return;
-        }
-
-        do {
+        for (int index = 0; index < brushSize; index++) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
                 1, index, &tile, (int*)&y, baseTile, brush);
-            uint logic = this->LogicLayer[tile];
+            int brushTile = tile;
+            uint logic = this->LogicLayer[brushTile];
             if ((logic & (L_BORDER | L_BORDER_EDGE)) == 0
                 && ((logic & (L_SEA | L_MARSH)) == 0 || this->unknownZero_0x554904 != 0)
                 && ((logic & (L_SEA | L_MARSH)) != 0 || this->unknownZero_0x554904 != 1)
                 && (logic
                        & (L_WALL_OR_GATEHOUSE | L_BUILDING | L_MOAT_DUG_OR_PLANNED | L_KEEP_NON_MANOR_HOUSE | L_MOAT))
                     == 0
-                && this->BuildingLayer[tile] == 0) {
-                byte minHeight;
-                byte maxHeight;
+                && this->BuildingLayer[brushTile] == 0) {
+                int minHeight;
+                int maxHeight;
                 if ((logic & L_SEA) != 0) {
                     minHeight = 0;
                     maxHeight = 0;
-                } else if ((logic & (L_SEA | L_MARSH | L_MOAT)) == 0) {
-                    minHeight = 8;
-                    maxHeight = 128;
-                } else {
+                } else if ((logic & (L_SEA | L_MARSH | L_MOAT)) != 0) {
                     minHeight = 0;
                     maxHeight = 20;
+                } else {
+                    minHeight = 8;
+                    maxHeight = 128;
                 }
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_ROCKY;
-                if ((this->LogicLayer[tile] & L_RIVER) != 0) {
-                    this->HeightLayer[tile] = this->HeightLayer[tile] + 8;
+                this->LogicLayer[brushTile] &= ~L_ROCKY;
+                if ((this->LogicLayer[brushTile] & L_RIVER) != 0) {
+                    this->HeightLayer[brushTile] += 8;
                 }
-                this->ChangedLayer[tile] = 2;
-                if (this->HeightLayer[tile] <= minHeight) {
-                    this->HeightLayer[tile] = minHeight;
+                this->ChangedLayer[brushTile] = 2;
+                if ((int)this->HeightLayer[brushTile] <= minHeight) {
+                    this->HeightLayer[brushTile] = (byte)minHeight;
                 }
-                if (this->HeightLayer[tile] != 0 || change >= 0) {
-                    this->HeightLayer[tile] = this->HeightLayer[tile] + (char)change;
-                    this->Logic2Layer[tile] = 0;
+                if (this->HeightLayer[brushTile] > 0 || change >= 0) {
+                    this->HeightLayer[brushTile] += (char)change;
+                    this->Logic2Layer[brushTile] = 0;
                 }
-                if (this->HeightLayer[tile] < minHeight) {
-                    this->HeightLayer[tile] = minHeight;
+                if ((int)this->HeightLayer[brushTile] < minHeight) {
+                    this->HeightLayer[brushTile] = (byte)minHeight;
                 }
-                if (this->HeightLayer[tile] > maxHeight) {
-                    this->HeightLayer[tile] = maxHeight;
+                if ((int)this->HeightLayer[brushTile] > maxHeight) {
+                    this->HeightLayer[brushTile] = (byte)maxHeight;
                 }
-                this->DefaultHeightLayer[tile] = this->HeightLayer[tile];
-                if ((this->LogicLayer[tile] & L_RIVER) != 0) {
-                    this->HeightLayer[tile] = this->HeightLayer[tile] - 8;
+                this->DefaultHeightLayer[brushTile] = this->HeightLayer[brushTile];
+                if ((this->LogicLayer[brushTile] & L_RIVER) != 0) {
+                    this->HeightLayer[brushTile] -= 8;
                 }
                 MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
-                    DAT_PathFindingState::ptr)(y, tile);
+                    DAT_PathFindingState::ptr)(y, brushTile);
             }
-            index++;
-        } while (index < brushSize);
+        }
         this->forceUpdateTextureTilemap = 1;
         this->forceUpdateLogicalAndMiscDisplayLayers = 1;
     }
