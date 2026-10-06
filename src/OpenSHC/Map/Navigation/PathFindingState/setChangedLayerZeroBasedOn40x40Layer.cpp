@@ -17,7 +17,7 @@ namespace Map {
         void PathFindingState::setChangedLayerZeroBasedOn40x40Layer(uint flag_and_offset)
         {
             if ((this->field10_0x28 == 0) && (flag_and_offset == 0)) {
-                if (DAT_TileMapState::instance.someIndex <= DAT_TileMapState::instance.someLimit) {
+                if ((int)DAT_TileMapState::instance.someIndex <= (int)DAT_TileMapState::instance.someLimit) {
                     int _index10 = DAT_TileMapState::instance.someIndex * 10;
                     /*
                       10 400x400 rows
@@ -27,7 +27,7 @@ namespace Map {
                     int _pMap4040 = DAT_TileMapState::instance.someIndex * 40 + 0x1f93438;
                     int _someYLikeLimit = DAT_TileMapState::instance.someYLikeLimit;
                     do {
-                        if (DAT_TileMapState::instance.someYLike <= _someYLikeLimit) {
+                        if ((int)DAT_TileMapState::instance.someYLike <= _someYLikeLimit) {
                             flag_and_offset = DAT_TileMapState::instance.someYLike * 10 + 1;
                             int _someY = DAT_TileMapState::instance.someYLike;
                             do {
@@ -118,7 +118,7 @@ namespace Map {
                         DAT_TileMapState::instance.someIndex = DAT_TileMapState::instance.someIndex + 1;
                         _pMap4040 = _pMap4040 + 40;
                         _someX = _someX + 120;
-                    } while (DAT_TileMapState::instance.someIndex <= DAT_TileMapState::instance.someLimit);
+                    } while ((int)DAT_TileMapState::instance.someIndex <= (int)DAT_TileMapState::instance.someLimit);
                 }
                 this->mappingYRelated = 1000;
                 this->yLimit = 0;
