@@ -42,10 +42,11 @@ namespace Map {
             DAT_PathFindingState::instance.notAllAssassinsUnk = 1;
             DAT_UnitsState::instance.units[unitID].plannedDestinationY = _destinationY;
             DAT_UnitsState::instance.units[unitID].state.generic = OpenSHC::Map::Units::States::US_MOVE_TO_DESTINATION;
-            MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setDestinationForUnit, this)(
+            MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setDestinationForUnit, DAT_UnitsState::ptr)(
                 unitID, _destinationX, _destinationY, 0);
             if (DAT_UnitsState::instance.units[unitID].field64_0x90 != 0) {
-                MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::changeDestinationByAmount, this)(unitID, 2);
+                MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::changeDestinationByAmount, DAT_UnitsState::ptr)(
+                    unitID, 2);
             }
             short _attackTileY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent
                                      [DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile2OrAHelper];
