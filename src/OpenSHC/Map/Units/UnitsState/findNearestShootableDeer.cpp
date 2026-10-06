@@ -18,11 +18,13 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00537880
         int UnitsState::findNearestShootableDeer(int unitID)
         {
+            int _bestUnitID = 0;
+            int _bestDistance = 100000;
+            int _x = this->units[unitID].x;
+            int _y = this->units[unitID].y;
             for (int _minimumDistance = 20;; _minimumDistance = 5) {
-                int _bestDistance = 100000;
-                int _bestUnitID = 0;
                 for (int _deerUnitID = 1; _deerUnitID < (int)this->maxUnitCount; ++_deerUnitID) {
-                    if (DAT_UnitsState::instance.units[_deerUnitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
+                    if (this->units[_deerUnitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
                         continue;
                     }
                     if (this->units[_deerUnitID].dying != 0) {
@@ -36,22 +38,22 @@ namespace Map {
                     }
                     MACRO_CALL_MEMBER(
                         OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
-                        DAT_DirectionAlgorithmState::ptr)(this->units[unitID].x, this->units[unitID].y,
-                        this->units[_deerUnitID].x, this->units[_deerUnitID].y);
+                        DAT_DirectionAlgorithmState::ptr)(
+                        _x, _y, this->units[_deerUnitID].x, this->units[_deerUnitID].y);
                     if (DAT_DirectionAlgorithmState::instance.distanceHigh <= _minimumDistance) {
                         continue;
                     }
-                    if (DAT_DirectionAlgorithmState::instance.distanceHigh <= 0x35
-                        && MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::arrowShootingRelated,
-                               DAT_EntityState::ptr)(this->units[unitID].microXPosition,
-                               this->units[unitID].microYPosition,
-                               this->units[unitID].buildingHeight + 0x1e + this->units[unitID].terrainOrClimbHeight,
-                               this->units[_deerUnitID].microXPosition, this->units[_deerUnitID].microYPosition,
-                               this->units[_deerUnitID].terrainOrClimbHeight + 0x1a
-                                   + this->units[_deerUnitID].buildingHeight)
-                                - 1U
-                            >= 0x1b0) {
-                        continue;
+                    if (DAT_DirectionAlgorithmState::instance.distanceHigh < 0x36) {
+                        int _shotResult = MACRO_CALL_MEMBER(
+                            OpenSHC::Map::Entities::EntityState_Func::arrowShootingRelated, DAT_EntityState::ptr)(
+                            this->units[unitID].microXPosition, this->units[unitID].microYPosition,
+                            this->units[unitID].buildingHeight + 0x1e + this->units[unitID].terrainOrClimbHeight,
+                            this->units[_deerUnitID].microXPosition, this->units[_deerUnitID].microYPosition,
+                            this->units[_deerUnitID].terrainOrClimbHeight + 0x1a
+                                + this->units[_deerUnitID].buildingHeight);
+                        if (_shotResult - 1U > 0x1af) {
+                            continue;
+                        }
                     }
                     if (DAT_DirectionAlgorithmState::instance.distanceHigh < _bestDistance) {
                         _bestDistance = DAT_DirectionAlgorithmState::instance.distanceHigh;
