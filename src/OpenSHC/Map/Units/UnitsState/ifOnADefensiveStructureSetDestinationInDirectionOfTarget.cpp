@@ -75,7 +75,7 @@ namespace Map {
                 && DAT_UnitsState::instance.units[unitID].y == _freeTileY) {
                 return FALSE;
             }
-            MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setDestinationForUnit, this)(
+            MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setDestinationForUnit, DAT_UnitsState::ptr)(
                 unitID, _freeTileX, _freeTileY, 0);
             DAT_UnitsState::instance.units[unitID].state.generic
                 = (OpenSHC::Map::Units::States::US_APPEAR | OpenSHC::Map::Units::States::US_IDLEUnk);
