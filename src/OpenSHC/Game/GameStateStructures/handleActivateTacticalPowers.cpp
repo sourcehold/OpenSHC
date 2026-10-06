@@ -71,14 +71,10 @@ namespace Game {
                 unitType = OpenSHC::Map::Units::UT_E_KNIGHT;
                 unitCount = 10;
             }
-            dword tribeID = MACRO_CALL_MEMBER(
-                OpenSHC::Map::Units::TribesState_Func::spawnUnitsAroundLocation, DAT_TribesState::ptr)(1,
-                tile
-                    - DAT_ViewportRenderState::instance
-                        .translationMatrix[DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile]]
-                        .addXgetTile,
-                DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile], playerID, unitType,
-                unitCount);
+            int y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
+            int x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
+            dword tribeID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::spawnUnitsAroundLocation,
+                DAT_TribesState::ptr)(1, x, y, playerID, unitType, unitCount);
             if ((int)tribeID > 0) {
                 DAT_TribesState::instance.tribes[tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
             }
