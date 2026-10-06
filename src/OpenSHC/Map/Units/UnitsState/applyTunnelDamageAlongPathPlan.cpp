@@ -6,6 +6,7 @@
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -29,8 +30,8 @@ namespace Map {
                         DAT_TileMapState::instance.HeightLayer[_tile] = 0;
                     } else {
                         MACRO_CALL_MEMBER(
-                            OpenSHC::Map::TileMapState_Func::processDamageToBuilding, DAT_TileMapState::ptr)(
-                            _tile, _xPosition, _yPosition, 5, 0, this->units[unitID].owner, FALSE, 0);
+                            OpenSHC::Map::TileMapState_Func::processDamageToBuilding, DAT_TileMapState::ptr)(_tile,
+                            _xPosition, _yPosition, 5, 0, DAT_UnitsState::instance.units[unitID].owner, FALSE, 0);
                     }
                     MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
                         DAT_PathFindingState::ptr)(1, _xPosition, _yPosition);
