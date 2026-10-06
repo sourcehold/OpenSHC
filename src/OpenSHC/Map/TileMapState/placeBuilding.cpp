@@ -26,6 +26,7 @@
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 #include "OpenSHC/Globals/DAT_WallAndPitchState.hpp"
+#include "OpenSHC/Globals/DAT_TileMapState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -115,7 +116,7 @@ namespace Map {
             this->LogicLayer[tile] = this->LogicLayer[tile]
                 & ~(L_CRENEL_VARIATIONUnk | L_UNKNOWN_WALL_RELATED | L_STAIRS | L_CRENEL | L_WALL_OR_GATEHOUSE
                     | L_PLAIN2_AND_PITCH);
-            this->HeightLayer[tile] = this->DefaultHeightLayer[tile];
+            this->HeightLayer[tile] = DAT_TileMapState::instance.DefaultHeightLayer[tile];
             this->DamageLayer[tile] = 0;
             if ((this->LogicLayer[tile] & L_TREE) != 0 && this->OrganismLayer[tile] < 2000) {
                 /* every tree goes, scrub or not; only the reported reason differs */
@@ -159,7 +160,7 @@ namespace Map {
             this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] & 0xfc3f;
             index++;
             DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
-            this->field204_0x554a30 = 1;
+            DAT_TileMapState::instance.field204_0x554a30 = 1;
         } while (index < this->constructionTileCount);
 
         /* the building sits at the middle of the heights it covers */
@@ -319,7 +320,7 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
             DAT_PathFindingState::ptr)(radius, x, y);
         DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
-        this->field204_0x554a30 = 1;
+        DAT_TileMapState::instance.field204_0x554a30 = 1;
         if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY) {
             this->forceUpdateMacroLayerFlag = 1;
             this->field68_0x55487c = 200;

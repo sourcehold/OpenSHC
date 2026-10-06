@@ -44777,7 +44777,7 @@ SHC_3BB0A8C1_0x00515F40 | 69.9% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x005160C0 | 37.6% | 48.02% global instance base
 
-SHC_3BB0A8C1_0x005162D0 | 35.9% | 60.66% dispatch jump table, ca
+SHC_3BB0A8C1_0x005162D0 | 41.9% | global instance access
 
 SHC_3BB0A8C1_0x00516A64 | 0.0% | Pending
 
