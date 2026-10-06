@@ -8,6 +8,7 @@
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_UnitPropertiesDefinedData.hpp"
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
 namespace OpenSHC {
@@ -19,15 +20,17 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x005371F0
         uint UnitsState::findFreeTileNearby(uint unitID, uint tile)
         {
+            int _ownerPlayerID = DAT_UnitsState::instance.units[unitID].owner;
             int _originY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
-            dword _areaAtUnit = (short)DAT_TileMapState::instance.PathConnectionLayer[this->units[unitID].tile];
+            dword _areaAtUnit
+                = (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile];
             int _originX = tile - DAT_ViewportRenderState::instance.translationMatrix[_originY].addXgetTile;
             /* original_y-2 */
             uint _northTile = DAT_ViewportRenderState::instance.translationMatrix[_originY + -2].addXgetTile + _originX;
             if (MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
-                    DAT_PathFindingState::ptr)(this->units[unitID].owner, _areaAtUnit,
-                    (short)DAT_TileMapState::instance.PathConnectionLayer[_northTile], 0)
+                    DAT_PathFindingState::ptr)(
+                    _ownerPlayerID, _areaAtUnit, (short)DAT_TileMapState::instance.PathConnectionLayer[_northTile], 0)
                 == 0) {
                 _northTile = 0;
             }
@@ -35,8 +38,8 @@ namespace Map {
             uint _eastTile = DAT_ViewportRenderState::instance.translationMatrix[_originY].addXgetTile + 2 + _originX;
             if (MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
-                    DAT_PathFindingState::ptr)(this->units[unitID].owner, _areaAtUnit,
-                    (short)DAT_TileMapState::instance.PathConnectionLayer[_eastTile], 0)
+                    DAT_PathFindingState::ptr)(
+                    _ownerPlayerID, _areaAtUnit, (short)DAT_TileMapState::instance.PathConnectionLayer[_eastTile], 0)
                 == 0) {
                 _eastTile = 0;
             }
@@ -44,8 +47,8 @@ namespace Map {
             uint _southTile = DAT_ViewportRenderState::instance.translationMatrix[_originY + 2].addXgetTile + _originX;
             if (MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
-                    DAT_PathFindingState::ptr)(this->units[unitID].owner, _areaAtUnit,
-                    (short)DAT_TileMapState::instance.PathConnectionLayer[_southTile], 0)
+                    DAT_PathFindingState::ptr)(
+                    _ownerPlayerID, _areaAtUnit, (short)DAT_TileMapState::instance.PathConnectionLayer[_southTile], 0)
                 == 0) {
                 _southTile = 0;
             }
@@ -53,8 +56,8 @@ namespace Map {
             uint _westTile = DAT_ViewportRenderState::instance.translationMatrix[_originY].addXgetTile + -2 + _originX;
             if (MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
-                    DAT_PathFindingState::ptr)(this->units[unitID].owner, _areaAtUnit,
-                    (short)DAT_TileMapState::instance.PathConnectionLayer[_westTile], 0)
+                    DAT_PathFindingState::ptr)(
+                    _ownerPlayerID, _areaAtUnit, (short)DAT_TileMapState::instance.PathConnectionLayer[_westTile], 0)
                 == 0) {
                 _westTile = 0;
             }
@@ -185,9 +188,10 @@ namespace Map {
                     }
                 }
             }
-            int _unitY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[this->units[unitID].tile];
-            int _unitX
-                = this->units[unitID].tile - DAT_ViewportRenderState::instance.translationMatrix[_unitY].addXgetTile;
+            int _unitY = DAT_ViewportRenderState::instance
+                             .tileTranslationMatrix_YComponent[DAT_UnitsState::instance.units[unitID].tile];
+            int _unitX = DAT_UnitsState::instance.units[unitID].tile
+                - DAT_ViewportRenderState::instance.translationMatrix[_unitY].addXgetTile;
             uint _closestTile = 0;
             int _closestDistance = 100000;
             if (_northTile != 0) {
