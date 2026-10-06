@@ -81,10 +81,10 @@ namespace Map {
                                        * 0x13a10
                                    + 0x1ee2998 + dVar4)
                                 == param_4) {
-                            if ((10 < this->searchQueue.currentDistance) && (local_8 != 0)) {
+                            if ((10 < (int)this->searchQueue.currentDistance) && (local_8 != 0)) {
                                 return (dword)(local_8);
                             }
-                            if ((6 < this->searchQueue.currentDistance)
+                            if ((6 < (int)this->searchQueue.currentDistance)
                                 && (iVar1 = this->searchQueue.currentDistance
                                         + (uint)DAT_TileMapState::instance.SEC_TileMap1104[dVar4] * 3,
                                     iVar1 < local_4)) {
