@@ -52,13 +52,13 @@ namespace Map {
                     return 0;
                 }
             }
-            if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x100U) == 0
-                && DAT_TileMapState::instance.BuildingLayer[_tile] == 0) {
-                return -1;
+            if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x100U) != 0
+                || DAT_TileMapState::instance.BuildingLayer[_tile] != 0) {
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Map::Units::UnitsState_Func::makeUnitStopWalkingByClearingPathProgressState, this)(unitID);
+                return this->units[unitID].movementRelated >= 8;
             }
-            MACRO_CALL_MEMBER(
-                OpenSHC::Map::Units::UnitsState_Func::makeUnitStopWalkingByClearingPathProgressState, this)(unitID);
-            return this->units[unitID].movementRelated >= 8;
+            return -1;
         }
 
     }
