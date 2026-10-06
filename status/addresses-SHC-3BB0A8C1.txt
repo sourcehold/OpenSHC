@@ -60089,7 +60089,7 @@ SHC_3BB0A8C1_0x0053E440 | 46.1% | orig walks unit ptr
 
 SHC_3BB0A8C1_0x0053E6C0 | 83.7% | branch shape differs
 
-SHC_3BB0A8C1_0x0053E790 | 68.5% | cold ret block, reg alloc
+SHC_3BB0A8C1_0x0053E790 | 98.7% | LTCG ecx kept across call
 
 SHC_3BB0A8C1_0x0053E820 | 100.0% | Reimplemented
 
