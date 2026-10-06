@@ -14,6 +14,7 @@
 #include "OpenSHC/Globals/DAT_SoundSystemState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
 namespace OpenSHC {
@@ -44,8 +45,11 @@ namespace Map {
                 = DAT_TileMapState::instance.LogicLayer[DAT_ViewportRenderState::instance.viewportState.field24_0x60];
             int _combatUnitID
                 = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::selectionContainsCombatUnit, this)(1);
-            dword _areaAtUnit = (short)DAT_TileMapState::instance.PathConnectionLayer[this->units[_combatUnitID].tile];
-            if ((DAT_TileMapState::instance.LogicLayer[this->units[_combatUnitID].tile] & 0x40000000U) != 0) {
+            dword _areaAtUnit = (short)DAT_TileMapState::instance
+                                    .PathConnectionLayer[DAT_UnitsState::instance.units[_combatUnitID].tile];
+            if ((DAT_TileMapState::instance.LogicLayer[DAT_UnitsState::instance.units[_combatUnitID].tile]
+                    & 0x40000000U)
+                != 0) {
                 return;
             }
             bool _canReachDestination
@@ -59,7 +63,8 @@ namespace Map {
                 if ((_logicAtDestination & 0x10000100) != 0
                     || MACRO_CALL_MEMBER(
                            OpenSHC::Map::Navigation::PathFindingState_Func::calculatePathKeepAndWallsGatesNotAllowed,
-                           DAT_PathFindingState::ptr)(this->units[_combatUnitID].x, this->units[_combatUnitID].y,
+                           DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[_combatUnitID].x,
+                           DAT_UnitsState::instance.units[_combatUnitID].y,
                            DAT_ViewportRenderState::instance.viewportState.field24_0x60
                                - DAT_ViewportRenderState::instance
                                    .translationMatrix[DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent
@@ -103,13 +108,13 @@ namespace Map {
                 != FALSE) {
                 return;
             }
-            if (this->units[_combatUnitID].unitType == OpenSHC::Map::Units::UT_E_ENGINEER
-                && this->units[_combatUnitID].resourceToDeposit != 0) {
+            if (DAT_UnitsState::instance.units[_combatUnitID].unitType == OpenSHC::Map::Units::UT_E_ENGINEER
+                && DAT_UnitsState::instance.units[_combatUnitID].resourceToDeposit != 0) {
                 return;
             }
             short _leaderUnitID = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
-            if ((this->units[_leaderUnitID].x - x) + 0x48U > 0x90
-                || (this->units[_leaderUnitID].y - y) + 0x48U > 0x90) {
+            if ((DAT_UnitsState::instance.units[_leaderUnitID].x - x) + 0x48U > 0x90
+                || (DAT_UnitsState::instance.units[_leaderUnitID].y - y) + 0x48U > 0x90) {
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)(
                     _mostFrequentUnitType, 10);
                 return;
