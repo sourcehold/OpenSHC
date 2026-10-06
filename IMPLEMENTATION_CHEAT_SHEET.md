@@ -173,21 +173,24 @@ logic is identical. `getRemainingRequiredEngineers` sat at 65% after its control
 on this change alone; `tryAttackUnitID` went 48.7% -> 100%, `selectionHasUnmannedSiegeEngine` 80% -> 100%.
 
 Find the candidates by scanning `reccmp/dll/diff.json` for functions whose original mentions
-`<ClassName>,<address>>::instance+` while the source only uses `this->`, then **measure one function at a time**:
-the right spelling is not predictable and an all-or-nothing rewrite is wrong as often as it is right. Over 29
-candidates in `Map::Units::UnitsState`, 13 improved and 16 got worse.
+`<ClassName>,<address>>::instance+` while the source only uses `this->`, then sweep **one field at a time**,
+keeping each conversion only if the measurement improves. Converting a whole function at once is the wrong
+granularity and will throw away most of the value: on that basis `computeLadderClimbPath` and
+`findNearestEnemyAndHeadTowardsIt` both measured *worse* and were rejected, yet per field they are worth
+42.6% -> 86.6% (`pathPlanStart` alone) and 40.1% -> 64.1% (four fields). A greedy cumulative loop over the
+distinct fields is enough; a real conversion moves the quick_diff ratio by 0.1 to 0.4, and anything under about
+0.01 is noise worth reverting rather than committing.
 
-The split follows what the function is, not its size alone. Small helpers reached for the global
-(`deleteUnit` 51.9 -> 68.5, `teleportUnitToUnitXAndY`, `giveMoveCommand`, `setDestinationNearTargetedBuilding`
-31.6 -> 47.3), while the large real instance methods use `this` throughout and lose heavily if converted -
-`updateUnits` 0.54 -> 0.20, `processUnitMove` 0.73 -> 0.40, and likewise `processUnitAttackOtherUnit`,
-`processMeleeInitiation`, `acquireShootTarget`, `getUnitStateTextParameterAndResourceType`. Mid-size functions go
-either way (`moveToFreeTileNearby` and `applyTunnelDamageAlongPathPlan` both got much worse), so keep a
-revert-unless-better guard around the experiment rather than trusting the shape of the function: one of those two was
-already at 0.93 and the guard is all that saved it.
+Most functions mix the two forms, so read the original's operands rather than guessing. `lea ebx, [esi + G]`
+with an absolute `G` next to `lea ecx, [esi + edi + 0x614]` in the same prologue is one function using the global
+for one field address and `this` for the array base - that was `computeLadderClimbPath`, where exactly one field
+moved. `acquireShootTarget` needed three (`_someX_2`, `assassinsMicroDistanceToEnemyUnk`, `buildingHeight`),
+`getRemainingRequiredEngineers` reads `unitType` through `this` and the engineer count through the global.
 
-A function can also mix the two - only some reads move. `getRemainingRequiredEngineers` reads `unitType` through
-`this` and the engineer count through the global.
+Where it pays is not simply a matter of size. The long dispatch loops do nearly all their work through `this` and
+gain nothing - `updateUnits` and `getUnitStateTextParameterAndResourceType` each yielded under 0.01 across every
+field, and converting them wholesale cost 0.54 -> 0.20 and similar. The wins are the small and mid-size helpers
+where a handful of named fields were reached through the global.
 
 ### Variables
 
