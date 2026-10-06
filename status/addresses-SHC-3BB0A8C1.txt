@@ -40347,7 +40347,7 @@ SHC_3BB0A8C1_0x004FA760 | 56.3% | 61.02% offset array partition
 
 SHC_3BB0A8C1_0x004FA8D0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004FA9D0 | 43.6% | ecx not kept across callee
+SHC_3BB0A8C1_0x004FA9D0 | 96.3% | LTCG, loop alignment
 
 SHC_3BB0A8C1_0x004FAA30 | 91.9% | Style pass, asm differs
 
@@ -40359,13 +40359,13 @@ SHC_3BB0A8C1_0x004FAB70 | 70.4% | ecx not kept across callee
 
 SHC_3BB0A8C1_0x004FAC70 | 84.7% | ecx not kept across callee
 
-SHC_3BB0A8C1_0x004FAD20 | 45.3% | ecx not kept across callee
+SHC_3BB0A8C1_0x004FAD20 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004FAD70 | 77.7% | ecx not kept across callee
 
 SHC_3BB0A8C1_0x004FAE50 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004FAEE0 | 55.3% | ecx not kept across callee
+SHC_3BB0A8C1_0x004FAEE0 | 74.2% | LTCG, regalloc differs
 
 SHC_3BB0A8C1_0x004FAF70 | 98.5% | offset walk regalloc
 
@@ -41443,7 +41443,7 @@ SHC_3BB0A8C1_0x00500500 | 86.5% | moat field reload/regalloc
 
 SHC_3BB0A8C1_0x005005F0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00500640 | 46.1% | ecx not kept across callee
+SHC_3BB0A8C1_0x00500640 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00500680 | 100.0% | Reimplemented
 
@@ -42067,7 +42067,7 @@ SHC_3BB0A8C1_0x00504ED0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00504ED1 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00504EE0 | 38.5% | needs callee LTCG (ecx reuse)
+SHC_3BB0A8C1_0x00504EE0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00504F10 | 30.2% | Style pass, asm differs
 
@@ -42151,7 +42151,7 @@ SHC_3BB0A8C1_0x00507E00 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00507F80 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00508030 | 61.1% | 68.42% x/y param reuse regallo
+SHC_3BB0A8C1_0x00508030 | 69.3% | LTCG, regalloc differs
 
 SHC_3BB0A8C1_0x00508250 | 40.3% | 39.78% regalloc
 
@@ -42159,11 +42159,11 @@ SHC_3BB0A8C1_0x00508540 | 52.9% | 55.63% operand order regalloc
 
 SHC_3BB0A8C1_0x00508590 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00508760 | 69.0% | ecx not kept across callee
+SHC_3BB0A8C1_0x00508760 | 75.0% | LTCG, regalloc differs
 
-SHC_3BB0A8C1_0x00508870 | 88.9% | Style pass, asm differs
+SHC_3BB0A8C1_0x00508870 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00508910 | 66.7% | ecx not kept across callee
+SHC_3BB0A8C1_0x00508910 | 76.9% | LTCG, regalloc differs
 
 SHC_3BB0A8C1_0x00508A00 | 71.4% | 71.43% jump table, gfx select
 
@@ -44189,7 +44189,7 @@ SHC_3BB0A8C1_0x005115C0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x005116E0 | 72.4% | pitch field reload/regalloc
 
-SHC_3BB0A8C1_0x00511850 | 58.8% | ecx not kept across callee
+SHC_3BB0A8C1_0x00511850 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005118C0 | 0.0% | Pending
 
