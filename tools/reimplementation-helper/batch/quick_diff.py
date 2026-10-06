@@ -1,11 +1,12 @@
 """Compile ONE source file and diff its code against the original function, in seconds.
 
-usage: quick_diff.py FILE.cpp... [-q]
+usage: quick_diff.py FILE.cpp... [-q] [-s]
 
 Compiles each file with a DLL compile command plus /FA (no link, no reccmp), disassembles the original function
 at the file's `// FUNCTION:` address straight from `_original/` with capstone, normalizes both streams (globals,
 call/jump targets and esp slots become tokens) and prints a difflib ratio and a unified diff (- original, + ours).
-`-q` prints the ratio only.
+`-q` prints the ratio only; `-s` keeps `[esp + N]` offsets instead of collapsing them to one token, for chasing
+stack-slot assignment (declaration order) once everything else matches.
 
 This is a triage loop, not the score: it is stricter than reccmp about register names and looser about stack
 offsets and constants, so confirm a 1.0000 with `reccmp_report.py --run`. Unlike reccmp it shows the *whole*
@@ -26,7 +27,8 @@ import capstone
 import common
 
 quiet = '-q' in sys.argv
-files = [os.path.abspath(f) for f in sys.argv[1:] if f != '-q']
+keep_slots = '-s' in sys.argv
+files = [os.path.abspath(f) for f in sys.argv[1:] if f not in ('-q', '-s')]
 if not files:
     sys.exit(__doc__)
 ROOT = str(common.ROOT).replace(chr(92), '/')
@@ -142,7 +144,8 @@ def ours(f, cls, name):
 
 def canon(s):
     # esp-relative slots and globals compare loosely
-    s = re.sub(r'\[esp( [+-] 0x[0-9a-f]+)?\]', '[esp+N]', s)
+    if not keep_slots:
+        s = re.sub(r'\[esp( [+-] 0x[0-9a-f]+)?\]', '[esp+N]', s)
     s = re.sub(r'tv\d+\[', '[', s)
     s = re.sub(r'_\w+\$\w*\[', '[', s)
     s = s.replace('mov eax, G', 'mov eax, 0x51eb851f') if s == 'mov eax, G' else s
