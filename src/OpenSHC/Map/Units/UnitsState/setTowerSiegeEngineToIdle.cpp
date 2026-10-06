@@ -18,7 +18,7 @@ namespace Map {
         void UnitsState::setTowerSiegeEngineToIdle(int buildingID)
         {
             /* the original writes the search out once per siege engine type */
-            switch (DAT_BuildingsState::instance.buildings[buildingID].containsSiegeMangonel1OrBallista2) {
+            switch ((char)DAT_BuildingsState::instance.buildings[buildingID].containsSiegeMangonel1OrBallista2) {
             case 1:
                 for (int unitID = 0; unitID < (int)this->maxUnitCount; ++unitID) {
                     if (this->units[unitID].logicalState == OpenSHC::Map::Units::ULS_NORMAL

@@ -51259,7 +51259,7 @@ SHC_3BB0A8C1_0x00537C90 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00537D60 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00537E00 | 98.4% | reg alloc differs
+SHC_3BB0A8C1_0x00537E00 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00537EE0 | 100.0% | Reimplemented
 
