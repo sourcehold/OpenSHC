@@ -141,13 +141,13 @@ namespace Game {
         if (entryX < 0) {
             return;
         }
-        if (entryX > 399) {
+        if (entryX >= 400) {
             return;
         }
         if (entryY < 0) {
             return;
         }
-        if (entryY > 399) {
+        if (entryY >= 400) {
             return;
         }
         if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[entryY * 400 + entryX] != 0) {
