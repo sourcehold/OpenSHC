@@ -17657,7 +17657,7 @@ SHC_3BB0A8C1_0x004576E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00457770 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00457800 | 86.2% | Load scheduling differs
+SHC_3BB0A8C1_0x00457800 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00457870 | 100.0% | Reimplemented
 
