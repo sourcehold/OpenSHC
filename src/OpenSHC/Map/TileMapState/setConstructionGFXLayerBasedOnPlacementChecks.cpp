@@ -65,7 +65,16 @@ namespace Map {
         iVar14 = this->field188_0x554a14;
         local_14 = 0;
         this->field188_0x554a14 = 0;
-        if (iVar14 == 0) {
+        if (iVar14 != 0) {
+            BVar2 = MACRO_CALL_MEMBER(
+                OpenSHC::Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,
+                DAT_BuildingsState::ptr)((MappersEnum)command);
+            this->buildingSpriteSheetID_1 = DAT_BuildingDefinedData::instance.Building_SpriteSheet_ID_Array_1[BVar2].intValue;
+            this->buildingSpriteID1 = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getSpriteID,
+                DAT_BuildingsState::ptr)((MappersEnum)command);
+            this->buildingSpriteID2 = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getSpriteID2,
+                DAT_BuildingsState::ptr)((MappersEnum)command);
+        } else {
             if (this->buildingPlacementFail == 2) {
                 this->field188_0x554a14 = 0;
                 return (int)(2);
@@ -286,15 +295,6 @@ namespace Map {
                 } while (iVar14 < this->constructionTileCount);
                 return iVar15;
             }
-        } else {
-            BVar2 = MACRO_CALL_MEMBER(
-                OpenSHC::Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,
-                DAT_BuildingsState::ptr)((MappersEnum)command);
-            this->buildingSpriteSheetID_1 = DAT_BuildingDefinedData::instance.Building_SpriteSheet_ID_Array_1[BVar2].intValue;
-            this->buildingSpriteID1 = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getSpriteID,
-                DAT_BuildingsState::ptr)((MappersEnum)command);
-            this->buildingSpriteID2 = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getSpriteID2,
-                DAT_BuildingsState::ptr)((MappersEnum)command);
         }
         if (command == OpenSHC::Commands::M_MAPPER_WHEATFARM) {
             size = 3;
