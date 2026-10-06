@@ -2,10 +2,10 @@
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"
-#include "OpenSHC/Map/TileMapState/GfxNeighbourMaskAsm.hpp"
 #include "OpenSHC/Rendering/ViewportRenderState.func.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
+#include "OpenSHC/Map/TileMapState/NeighbourFlagsAsm.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -18,6 +18,10 @@
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 #include "OpenSHC/Globals/GMTotalPicturesProcessed.hpp"
+
+// masks for the handwritten neighbour-flag macro; MASM has no "|", so these must be literals
+#define NEIGHBOUR_FLAGS_MASK_RIVER_OR_FORD 0x300000 // L_RIVER | L_FORD
+#define NEIGHBOUR_FLAGS_MASK_WALL_OR_GATEHOUSE 0x100 // L_WALL_OR_GATEHOUSE
 
 /* the original was built without optimisation: frame pointer, locals off ebp, sub esp, 0x118 */
 #pragma optimize("", off)
@@ -71,12 +75,6 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00509180
     void TileMapState::updateGfxLayer()
     {
-        /* the locals MACRO_GFX_NEIGHBOUR_MASK reaches the layers through, see GfxNeighbourMaskAsm.hpp */
-        char* _gfxLayer;
-        char* _gfxDirMatrix;
-        int _gfxTile;
-        int _gfxY;
-        uchar* _gfxBitFlag = &this->bitFlag;
 
         OpenSHC::Map::Buildings::BuildingTypeShort BVar1;
         ushort uVar2;
@@ -224,16 +222,10 @@ namespace Map {
                                                                     this->WallOwnerLayer[this->DAT_SomeTile]
                                                                         = this->WallOwnerLayer[this->DAT_SomeTile]
                                                                         & 0xf7;
-                                                                    _gfxLayer = (char*)this->ptr_LogicLayer;
-                                                                    _gfxDirMatrix = (char*)this->ptr_MovementDirectionTranslationMatrix;
-                                                                    _gfxTile = this->DAT_SomeTile;
-                                                                    _gfxY = this->DAT_SomeY;
-                                                                    MACRO_GFX_NEIGHBOUR_MASK(wall, 4, MACRO_GFX_SHIFT_4, MACRO_GFX_ROWSTEP_4, L_WALL_OR_GATEHOUSE)
+                                                                    MACRO_NEIGHBOUR_FLAGS_LOGIC_8(
+                                                                        wall, NEIGHBOUR_FLAGS_MASK_WALL_OR_GATEHOUSE)
                                                                     bVar19 = this->bitFlag;
-                                                                                                                                        _gfxLayer = (char*)this->ptr_LogicLayer;
-                                                                    _gfxTile = this->DAT_SomeTile;
-                                                                    _gfxY = this->DAT_SomeY;
-                                                                    MACRO_GFX_NEIGHBOUR_MASK(m1, 4, MACRO_GFX_SHIFT_4, MACRO_GFX_ROWSTEP_4, 2)
+                                                                    MACRO_NEIGHBOUR_FLAGS_LOGIC_8(m1, 2)
                                                                     bVar19 = ~this->bitFlag & bVar19;
                                                                     if (bVar19 != 0) {
                                                                         switch (bVar19 & 0xaa) {
@@ -259,10 +251,7 @@ namespace Map {
                                                                             }
                                                                         }
                                                                         if (local_48 != 0) {
-                                                                                                                                                        _gfxLayer = (char*)this->ptr_LogicLayer;
-                                                                            _gfxTile = this->DAT_SomeTile;
-                                                                            _gfxY = this->DAT_SomeY;
-                                                                            MACRO_GFX_NEIGHBOUR_MASK(r1, 4, MACRO_GFX_SHIFT_4, MACRO_GFX_ROWSTEP_4, 0x800)
+                                                                            MACRO_NEIGHBOUR_FLAGS_LOGIC_8(r1, 0x800)
                                                                             if (this->bitFlag != 0) {
                                                                                 local_48 = 0;
                                                                             }
@@ -1071,15 +1060,9 @@ namespace Map {
                                              && (((this->LogicLayer[this->DAT_SomeTile] & 0x10000030U) == 0
                                                  && (this->BuildingLayer[this->DAT_SomeTile] == 0))))
                                         && ((this->MiscDisplayLayer[this->DAT_SomeTile] & 0x40) == 0)))) {
-                                                                        _gfxLayer = (char*)this->ptr_MiscDisplayLayer;
-                                    _gfxTile = this->DAT_SomeTile;
-                                    _gfxY = this->DAT_SomeY;
-                                    MACRO_GFX_NEIGHBOUR_MASK(m2, 2, MACRO_GFX_SHIFT_2, MACRO_GFX_ROWSTEP_2, 0x80)
+                                    MACRO_NEIGHBOUR_FLAGS_MISC_8(m2, 0x80)
                                     bVar19 = this->bitFlag;
-                                                                        _gfxLayer = (char*)this->ptr_MiscDisplayLayer;
-                                    _gfxTile = this->DAT_SomeTile;
-                                    _gfxY = this->DAT_SomeY;
-                                    MACRO_GFX_NEIGHBOUR_MASK(m3, 2, MACRO_GFX_SHIFT_2, MACRO_GFX_ROWSTEP_2, 0x40)
+                                    MACRO_NEIGHBOUR_FLAGS_MISC_8(m3, 0x40)
                                     bVar16 = this->bitFlag;
                                     this->bitFlag = bVar16 & ~bVar19;
                                     if (this->bitFlag != 0) {
@@ -1512,10 +1495,8 @@ namespace Map {
                                                                                             = (short)uVar12 + 0x37
                                                                                             + sVar8;
                                                                                     }
-                                                                                                                                                                        _gfxLayer = (char*)this->ptr_LogicLayer;
-                                                                                    _gfxTile = this->DAT_SomeTile;
-                                                                                    _gfxY = this->DAT_SomeY;
-                                                                                    MACRO_GFX_NEIGHBOUR_MASK(r2, 4, MACRO_GFX_SHIFT_4, MACRO_GFX_ROWSTEP_4, 0x200)
+                                                                                    MACRO_NEIGHBOUR_FLAGS_LOGIC_8(
+                                                                                        r2, 0x200)
                                                                                     if (this->bitFlag != 0) {
                                                                                         switch (this->mapOrientation) {
                                                                                         case 0:
@@ -1879,17 +1860,12 @@ namespace Map {
                                                     }
                                                 }
                                             } else {
-                                                                                                _gfxLayer = (char*)this->ptr_LogicLayer;
-                                                _gfxTile = this->DAT_SomeTile;
-                                                _gfxY = this->DAT_SomeY;
-                                                MACRO_GFX_CARDINAL_MASK(c1, 4, MACRO_GFX_SHIFT_4, MACRO_GFX_ROWSTEP_4, L_RIVER | L_FORD)
+                                                MACRO_NEIGHBOUR_FLAGS_LOGIC_4(c1, NEIGHBOUR_FLAGS_MASK_RIVER_OR_FORD)
                                                 bVar19 = this->bitFlag;
                                                 this->bitFlag = ~bVar19 & 0xaa;
                                                 if (this->bitFlag == 0) {
-                                                                                                        _gfxLayer = (char*)this->ptr_LogicLayer;
-                                                    _gfxTile = this->DAT_SomeTile;
-                                                    _gfxY = this->DAT_SomeY;
-                                                    MACRO_GFX_NEIGHBOUR_MASK(d1, 4, MACRO_GFX_SHIFT_4, MACRO_GFX_ROWSTEP_4, L_RIVER | L_FORD)
+                                                    MACRO_NEIGHBOUR_FLAGS_LOGIC_8(
+                                                        d1, NEIGHBOUR_FLAGS_MASK_RIVER_OR_FORD)
                                                     this->bitFlag = ~this->bitFlag;
                                                     this->bitFlag = this->bitFlag & 0x55;
                                                 }
@@ -1947,10 +1923,7 @@ namespace Map {
                                         } else {
                                             this->Logic2Layer[this->DAT_SomeTile]
                                                 = this->Logic2Layer[this->DAT_SomeTile] & 0xf7;
-                                                                                        _gfxLayer = (char*)this->ptr_LogicLayer;
-                                            _gfxTile = this->DAT_SomeTile;
-                                            _gfxY = this->DAT_SomeY;
-                                            MACRO_GFX_CARDINAL_MASK(c2, 4, MACRO_GFX_SHIFT_4, MACRO_GFX_ROWSTEP_4, 1)
+                                            MACRO_NEIGHBOUR_FLAGS_LOGIC_4(c2, 1)
                                             bVar19 = this->bitFlag;
                                             if ((bVar19 != 0)
                                                 && (this->Logic2Layer[this->DAT_SomeTile]
@@ -1961,17 +1934,11 @@ namespace Map {
                                                 this->WallGFXLayer[this->DAT_SomeTile]
                                                     = this->RandomLayer[this->DAT_SomeTile] & 7;
                                             }
-                                                                                        _gfxLayer = (char*)this->ptr_LogicLayer;
-                                            _gfxTile = this->DAT_SomeTile;
-                                            _gfxY = this->DAT_SomeY;
-                                            MACRO_GFX_CARDINAL_MASK(c3, 4, MACRO_GFX_SHIFT_4, MACRO_GFX_ROWSTEP_4, 0x100031)
+                                            MACRO_NEIGHBOUR_FLAGS_LOGIC_4(c3, 0x100031)
                                             bVar19 = this->bitFlag;
                                             this->bitFlag = ~bVar19 & 0xaa;
                                             if (this->bitFlag == 0) {
-                                                                                                _gfxLayer = (char*)this->ptr_LogicLayer;
-                                                _gfxTile = this->DAT_SomeTile;
-                                                _gfxY = this->DAT_SomeY;
-                                                MACRO_GFX_NEIGHBOUR_MASK(d2, 4, MACRO_GFX_SHIFT_4, MACRO_GFX_ROWSTEP_4, 0x100031)
+                                                MACRO_NEIGHBOUR_FLAGS_LOGIC_8(d2, 0x100031)
                                                 this->bitFlag = ~this->bitFlag;
                                                 this->bitFlag = this->bitFlag & 0x55;
                                             }
@@ -2007,10 +1974,7 @@ namespace Map {
                                                 for (local_14 = 0; local_14 < 7; local_14 = local_14 + 1) {
                                                     if (DAT_TerrainDefinedData::instance.field2298_0x1d64[local_14].unk1
                                                         == this->bitFlag) {
-                                                                                                                _gfxLayer = (char*)this->ptr_LogicLayer;
-                                                        _gfxTile = this->DAT_SomeTile;
-                                                        _gfxY = this->DAT_SomeY;
-                                                        MACRO_GFX_CARDINAL_MASK(c4, 4, MACRO_GFX_SHIFT_4, MACRO_GFX_ROWSTEP_4, 0x200000)
+                                                        MACRO_NEIGHBOUR_FLAGS_LOGIC_4(c4, 0x200000)
                                                         sVar4 = (short)GMTotalPicturesProcessed::instance[5];
                                                         if (local_14 < 4) {
                                                             if (this->bitFlag == 0) {
@@ -2095,23 +2059,14 @@ namespace Map {
                                                         this->GfxLayer[this->DAT_SomeTile] = sVar4 + 0x40c;
                                                     }
                                                 } else {
-                                                                                                        _gfxLayer = (char*)this->ptr_LogicLayer;
-                                                    _gfxTile = this->DAT_SomeTile;
-                                                    _gfxY = this->DAT_SomeY;
-                                                    MACRO_GFX_NEIGHBOUR_MASK(m4, 4, MACRO_GFX_SHIFT_4, MACRO_GFX_ROWSTEP_4, 1)
+                                                    MACRO_NEIGHBOUR_FLAGS_LOGIC_8(m4, 1)
                                                     bVar19 = this->bitFlag;
-                                                                                                        _gfxLayer = (char*)this->ptr_TerrainTypeTileMap;
-                                                    _gfxTile = this->DAT_SomeTile;
-                                                    _gfxY = this->DAT_SomeY;
-                                                    MACRO_GFX_NEIGHBOUR_MASK(r3, 1, MACRO_GFX_SHIFT_1, MACRO_GFX_ROWSTEP_1, 0x50)
+                                                    MACRO_NEIGHBOUR_FLAGS_TERRAIN_8(r3, 0x50)
                                                     bVar16 = this->bitFlag;
                                                     this->bitFlag = bVar16 | bVar19;
                                                     local_c0 = 0xffffffff;
                                                     if (this->bitFlag == 0) {
-                                                                                                                _gfxLayer = (char*)this->ptr_LogicLayer;
-                                                        _gfxTile = this->DAT_SomeTile;
-                                                        _gfxY = this->DAT_SomeY;
-                                                        MACRO_GFX_NEIGHBOUR_MASK(m5, 4, MACRO_GFX_SHIFT_4, MACRO_GFX_ROWSTEP_4, 0x100000)
+                                                        MACRO_NEIGHBOUR_FLAGS_LOGIC_8(m5, 0x100000)
                                                         if (this->bitFlag != 0) {
                                                             for (local_14 = 0; local_14 < 8; local_14 = local_14 + 1) {
                                                                 if ((((uint)this->bitFlag
@@ -2349,21 +2304,12 @@ namespace Map {
                                     } else {
                                         this->Logic2Layer[this->DAT_SomeTile]
                                             = this->Logic2Layer[this->DAT_SomeTile] & 0xf7;
-                                                                                _gfxLayer = (char*)this->ptr_LogicLayer;
-                                        _gfxTile = this->DAT_SomeTile;
-                                        _gfxY = this->DAT_SomeY;
-                                        MACRO_GFX_CARDINAL_MASK(c5, 4, MACRO_GFX_SHIFT_4, MACRO_GFX_ROWSTEP_4, 0x100000)
+                                        MACRO_NEIGHBOUR_FLAGS_LOGIC_4(c5, 0x100000)
                                         if (this->bitFlag == 0) {
                                             if ((this->MiscDisplayLayer[this->DAT_SomeTile] & 0xc0) == 0) {
-                                                                                                _gfxLayer = (char*)this->ptr_MiscDisplayLayer;
-                                                _gfxTile = this->DAT_SomeTile;
-                                                _gfxY = this->DAT_SomeY;
-                                                MACRO_GFX_NEIGHBOUR_MASK(m6, 2, MACRO_GFX_SHIFT_2, MACRO_GFX_ROWSTEP_2, 0x40)
+                                                MACRO_NEIGHBOUR_FLAGS_MISC_8(m6, 0x40)
                                                 bVar19 = this->bitFlag;
-                                                                                                _gfxLayer = (char*)this->ptr_MiscDisplayLayer;
-                                                _gfxTile = this->DAT_SomeTile;
-                                                _gfxY = this->DAT_SomeY;
-                                                MACRO_GFX_NEIGHBOUR_MASK(m7, 2, MACRO_GFX_SHIFT_2, MACRO_GFX_ROWSTEP_2, 0x80)
+                                                MACRO_NEIGHBOUR_FLAGS_MISC_8(m7, 0x80)
                                                 bVar16 = this->bitFlag;
                                                 this->bitFlag = bVar16 & ~bVar19;
                                                 if (this->bitFlag != 0) {
@@ -2388,10 +2334,7 @@ namespace Map {
                                             sVar4 = (short)local_38;
                                             if ((this->MiscDisplayLayer[this->DAT_SomeTile] & 0xc0) == 0) {
                                                 if ((this->MiscDisplayLayer[this->DAT_SomeTile] & 0x100) == 0) {
-                                                                                                        _gfxLayer = (char*)this->ptr_MiscDisplayLayer;
-                                                    _gfxTile = this->DAT_SomeTile;
-                                                    _gfxY = this->DAT_SomeY;
-                                                    MACRO_GFX_NEIGHBOUR_MASK(m8, 2, MACRO_GFX_SHIFT_2, MACRO_GFX_ROWSTEP_2, 0x100)
+                                                    MACRO_NEIGHBOUR_FLAGS_MISC_8(m8, 0x100)
                                                     if (this->bitFlag != 0) {
                                                         local_ac = 2;
                                                         uVar12 = (uint)this->bitFlag

@@ -11,9 +11,10 @@
   way), by advancing the row pointer with repeated "add esi, ecx" instead of one scaled lea, and, in
   the TERRAIN variants, by loading a dword at a one-byte offset and masking it down to the low byte.
 
-  Four shapes occur, selected by which layer pointer is read and how many neighbours are gathered:
+  Five shapes occur, selected by which layer pointer is read and how many neighbours are gathered:
 
     LOGIC   - ptr_LogicLayer,         4-byte elements: "shl eax, 2", "add esi, ecx" x4, [esi +/- 4]
+    MISC    - ptr_MiscDisplayLayer,   2-byte elements: "shl eax, 1", "add esi, ecx" x2, [esi +/- 2]
     TERRAIN - ptr_TerrainTypeTileMap, 1-byte elements: no shift,     "add esi, ecx" x1, [esi +/- 1]
     _4      - east, west, north and south only
     _8      - also north-west, north-east, south-west and south-east
@@ -136,6 +137,69 @@
     __asm add esi, ecx                                                                \
     __asm mov eax, dword ptr [esi - 0x4]                                              \
     __asm mov ebx, dword ptr [esi + 0x4]                                              \
+    __asm mov ecx, dword ptr [esi]                                                    \
+    __asm and eax, MASK                                                               \
+    __asm jz south_west_done_##ID                                                     \
+    __asm or edx, 0x4                                                                 \
+    __asm south_west_done_##ID:                                                       \
+    __asm and ebx, MASK                                                               \
+    __asm jz south_east_done_##ID                                                     \
+    __asm or edx, 0x10                                                                \
+    __asm south_east_done_##ID:                                                       \
+    __asm and ecx, MASK                                                               \
+    __asm jz south_done_##ID                                                          \
+    __asm or edx, 0x8                                                                 \
+    __asm south_done_##ID:                                                            \
+    __asm mov eax, this                                                               \
+    __asm mov byte ptr [eax]TileMapState.bitFlag, dl
+
+#define MACRO_NEIGHBOUR_FLAGS_MISC_8(ID, MASK)                                       \
+    __asm mov eax, this                                                               \
+    __asm mov edi, dword ptr [eax]TileMapState.ptr_MovementDirectionTranslationMatrix \
+    __asm mov esi, dword ptr [eax]TileMapState.ptr_MiscDisplayLayer                         \
+    __asm mov eax, dword ptr [eax]TileMapState.DAT_SomeTile                           \
+    __asm shl eax, 0x1                                                                \
+    __asm add esi, eax                                                                \
+    __asm push esi                                                                    \
+    __asm mov eax, this                                                               \
+    __asm mov eax, dword ptr [eax]TileMapState.DAT_SomeY                              \
+    __asm shl eax, 0x5                                                                \
+    __asm add edi, eax                                                                \
+    __asm mov edx, 0x0                                                                \
+    __asm mov eax, dword ptr [esi + 0x2]                                              \
+    __asm mov ebx, dword ptr [esi - 0x2]                                              \
+    __asm and eax, MASK                                                               \
+    __asm jz east_done_##ID                                                           \
+    __asm or edx, 0x20                                                                \
+    __asm east_done_##ID:                                                             \
+    __asm and ebx, MASK                                                               \
+    __asm jz west_done_##ID                                                           \
+    __asm or edx, 0x2                                                                 \
+    __asm west_done_##ID:                                                             \
+    __asm mov ecx, dword ptr [edi]                                                    \
+    __asm add esi, ecx                                                                \
+    __asm add esi, ecx                                                                \
+    __asm mov eax, dword ptr [esi - 0x2]                                              \
+    __asm mov ebx, dword ptr [esi + 0x2]                                              \
+    __asm mov ecx, dword ptr [esi]                                                    \
+    __asm and eax, MASK                                                               \
+    __asm jz north_west_done_##ID                                                     \
+    __asm or edx, 0x1                                                                 \
+    __asm north_west_done_##ID:                                                       \
+    __asm and ebx, MASK                                                               \
+    __asm jz north_east_done_##ID                                                     \
+    __asm or edx, 0x40                                                                \
+    __asm north_east_done_##ID:                                                       \
+    __asm and ecx, MASK                                                               \
+    __asm jz north_done_##ID                                                          \
+    __asm or edx, 0x80                                                                \
+    __asm north_done_##ID:                                                            \
+    __asm mov ecx, dword ptr [edi + 0x10]                                             \
+    __asm pop esi                                                                     \
+    __asm add esi, ecx                                                                \
+    __asm add esi, ecx                                                                \
+    __asm mov eax, dword ptr [esi - 0x2]                                              \
+    __asm mov ebx, dword ptr [esi + 0x2]                                              \
     __asm mov ecx, dword ptr [esi]                                                    \
     __asm and eax, MASK                                                               \
     __asm jz south_west_done_##ID                                                     \
