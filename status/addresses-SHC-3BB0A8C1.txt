@@ -17733,7 +17733,7 @@ SHC_3BB0A8C1_0x00458A70 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00458A80 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00458AD0 | 36.1% | Reg alloc differs
+SHC_3BB0A8C1_0x00458AD0 | 54.7% | Loop base reg choice, LTCG edx
 
 SHC_3BB0A8C1_0x00458D38 | 0.0% | Pending
 

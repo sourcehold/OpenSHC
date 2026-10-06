@@ -14,6 +14,7 @@
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_CounterFoodWarningInterval.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
+#include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_MapPropertiesState.hpp"
 #include "OpenSHC/Globals/DAT_SFXState.hpp"
@@ -57,18 +58,17 @@ namespace Game {
                 continue;
             }
             this->playerDataArray[playerID].foodStorageLevel = -1;
-            if (this->playerDataArray[playerID].foodTypesInStock < 1) {
+            if (this->playerDataArray[playerID].foodTypesInStock <= 0) {
                 this->playerDataArray[playerID].foodTypesCurrentlyEaten = 0;
                 continue;
             }
-            this->playerDataArray[playerID].foodClockSpeed
-                = this->playerDataArray[playerID].currentPopulation * 3;
+            int foodClockSpeed = this->playerDataArray[playerID].currentPopulation * 3;
+            this->playerDataArray[playerID].foodClockSpeed = foodClockSpeed;
             if ((DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY)
-                && (MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::isAIPlayer,
-                        DAT_GameSynchronyState::ptr)(playerID)
+                && (MACRO_CALL_MEMBER(
+                        OpenSHC::Synchrony::GameSynchronyState_Func::isAIPlayer, DAT_GameSynchronyState::ptr)(playerID)
                     != FALSE)) {
-                this->playerDataArray[playerID].foodClockSpeed
-                    = (this->playerDataArray[playerID].currentPopulation * 180) / 100;
+                this->playerDataArray[playerID].foodClockSpeed = (foodClockSpeed * 60) / 100;
             }
             switch (this->playerDataArray[playerID].rationsSetting) {
             case 0:
@@ -76,16 +76,14 @@ namespace Game {
                 this->playerDataArray[playerID].foodTypesCurrentlyEaten = 0;
                 break;
             case 1:
-                this->playerDataArray[playerID].foodClockSpeed
-                    = this->playerDataArray[playerID].foodClockSpeed / 2;
+                this->playerDataArray[playerID].foodClockSpeed = this->playerDataArray[playerID].foodClockSpeed / 2;
                 break;
             case 3:
                 this->playerDataArray[playerID].foodClockSpeed
                     = (this->playerDataArray[playerID].foodClockSpeed * 3) / 2;
                 break;
             case 4:
-                this->playerDataArray[playerID].foodClockSpeed
-                    = this->playerDataArray[playerID].foodClockSpeed * 2;
+                this->playerDataArray[playerID].foodClockSpeed = this->playerDataArray[playerID].foodClockSpeed * 2;
             }
             if (this->playerDataArray[playerID].foodClockSpeed != 0) {
                 this->playerDataArray[playerID].foodStorageLevel
@@ -93,13 +91,13 @@ namespace Game {
                           * this->playerDataArray[playerID].totalFood)
                     / 800;
             }
-            if (this->mapAndTime.monthChanged != 0) {
+            if (DAT_GameState::instance.mapAndTime.monthChanged != 0) {
                 short leftover = (short)this->playerDataArray[playerID].foodStorageLevel;
                 short lastMonthLeftover = this->playerDataArray[playerID].foodStorageLevelLastMonth;
                 this->playerDataArray[playerID].foodStorageLevelLastLastMonth = lastMonthLeftover;
                 this->playerDataArray[playerID].foodStorageLevelLastMonth = leftover;
                 if ((playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID)
-                    && (this->mapAndTime.singlePlayerHasKeepAndGranary != FALSE)) {
+                    && (DAT_GameState::instance.mapAndTime.singlePlayerHasKeepAndGranary != FALSE)) {
                     if (this->playerDataArray[playerID].totalFood == 0) {
                         if ((DAT_CounterFoodWarningInterval::instance == 0)
                             && (MACRO_CALL_MEMBER(OpenSHC::Audio::MSS::SoundSystem_Func::shouldSoundXNotBePlaying,
@@ -124,11 +122,10 @@ namespace Game {
                                 /*
                                   "Granary stocks are very low sire"
                                  */
-                                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playWAVSFX,
-                                    DAT_SFXState::ptr)("food_warning2.wav");
+                                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
+                                    "food_warning2.wav");
                             }
-                        } else if (MACRO_CALL_MEMBER(
-                                       OpenSHC::Audio::MSS::SoundSystem_Func::shouldSoundXNotBePlaying,
+                        } else if (MACRO_CALL_MEMBER(OpenSHC::Audio::MSS::SoundSystem_Func::shouldSoundXNotBePlaying,
                                        DAT_SoundSystemState::ptr)()
                             == FALSE) {
                             /*
@@ -140,42 +137,43 @@ namespace Game {
                     }
                 }
             }
-            this->playerDataArray[playerID].foodClock = this->playerDataArray[playerID].foodClock
-                + this->playerDataArray[playerID].foodClockSpeed;
+            this->playerDataArray[playerID].foodClock
+                = this->playerDataArray[playerID].foodClock + this->playerDataArray[playerID].foodClockSpeed;
             if (this->playerDataArray[playerID].foodClock > 15000) {
                 this->playerDataArray[playerID].foodClock = 0;
                 this->playerDataArray[playerID].foodTypesCurrentlyEaten
                     = this->playerDataArray[playerID].foodTypesInStock;
-                ResourceType resourceType;
                 while (true) {
                     this->playerDataArray[playerID].foodTypeToBeEatenNext
                         = this->playerDataArray[playerID].foodTypeToBeEatenNext + 1;
-                    if (this->playerDataArray[playerID].foodTypeToBeEatenNext >= 4) {
+                    if (this->playerDataArray[playerID].foodTypeToBeEatenNext > 3) {
                         this->playerDataArray[playerID].foodTypeToBeEatenNext = 0;
                     }
                     if ((this->playerDataArray[playerID].foodTypeToBeEatenNext == 0)
                         && (this->playerDataArray[playerID].breadCount > 0)) {
-                        resourceType = OpenSHC::Game::Resources::RT_BREAD;
+                        MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceLoss,
+                            DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_BREAD, 1, 0);
                         break;
                     }
                     if ((this->playerDataArray[playerID].foodTypeToBeEatenNext == 1)
                         && (this->playerDataArray[playerID].cheeseCount > 0)) {
-                        resourceType = OpenSHC::Game::Resources::RT_CHEESE;
+                        MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceLoss,
+                            DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_CHEESE, 1, 0);
                         break;
                     }
                     if ((this->playerDataArray[playerID].foodTypeToBeEatenNext == 2)
                         && (this->playerDataArray[playerID].meatCount > 0)) {
-                        resourceType = OpenSHC::Game::Resources::RT_MEAT;
+                        MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceLoss,
+                            DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_MEAT, 1, 0);
                         break;
                     }
                     if ((this->playerDataArray[playerID].foodTypeToBeEatenNext == 3)
                         && (this->playerDataArray[playerID].appleCount > 0)) {
-                        resourceType = OpenSHC::Game::Resources::RT_APPLE;
+                        MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceLoss,
+                            DAT_BuildingsState::ptr)(playerID, OpenSHC::Game::Resources::RT_APPLE, 1, 0);
                         break;
                     }
                 }
-                MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceLoss,
-                    DAT_BuildingsState::ptr)(playerID, resourceType, 1, 0);
             }
         }
     }
