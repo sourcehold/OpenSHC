@@ -35,23 +35,11 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x00459E40
     void GameStateStructures::handleActivateTacticalPowers(int playerID, int powerType, int tile)
     {
-        int powerLevel = powerType + 1;
-        if (DAT_GameState::instance.playerDataArray[playerID].tacticalPowersBarLevel < powerLevel * 0x27c) {
+        int powerCost = (powerType + 1) * 0x27c;
+        if (DAT_GameState::instance.playerDataArray[playerID].tacticalPowersBarLevel < powerCost) {
             return;
         }
         switch (powerType) {
-        case 0:
-            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::certainDamageToUnitsUnk,
-                DAT_PathFindingState::ptr)(tile, 6, playerID, 6000, 1);
-            break;
-        case 1:
-            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::healUnitsOfPlayerWithinRadius,
-                DAT_PathFindingState::ptr)(tile, 6, playerID, 8000);
-            if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
-                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(
-                    OpenSHC::Audio::SFX::SEID_CHAPEL_BELL);
-            }
-            break;
         case 2:
         case 3:
         case 4:
@@ -64,37 +52,35 @@ namespace Game {
             case 2:
                 unitType = OpenSHC::Map::Units::UT_E_SPEAR;
                 break;
-            case 3:
-                unitType = OpenSHC::Map::Units::UT_E_ENGINEER;
-                unitCount = 0xe;
-                break;
-            case 4:
-                unitType = OpenSHC::Map::Units::UT_E_MACE;
-                break;
-            case 6:
-                unitType = OpenSHC::Map::Units::UT_E_KNIGHT;
-                unitCount = 10;
-                break;
             case 0xd:
                 unitType = OpenSHC::Map::Units::UT_E_ARCHER;
                 unitCount = 0xf;
                 break;
+            case 4:
+                unitType = OpenSHC::Map::Units::UT_E_MACE;
+                break;
             case 0x10:
                 unitType = OpenSHC::Map::Units::UT_A_FIRETHROWER;
                 unitCount = 0xc;
+                break;
+            case 3:
+                unitType = OpenSHC::Map::Units::UT_E_ENGINEER;
+                unitCount = 0xe;
+                break;
+            case 6:
+                unitType = OpenSHC::Map::Units::UT_E_KNIGHT;
+                unitCount = 10;
             }
             dword tribeID = MACRO_CALL_MEMBER(
                 OpenSHC::Map::Units::TribesState_Func::spawnUnitsAroundLocation, DAT_TribesState::ptr)(1,
                 tile
                     - DAT_ViewportRenderState::instance
-                          .translationMatrix[DAT_ViewportRenderState::instance
-                                  .tileTranslationMatrix_YComponent[tile]]
-                          .addXgetTile,
+                        .translationMatrix[DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile]]
+                        .addXgetTile,
                 DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile], playerID, unitType,
                 unitCount);
             if ((int)tribeID > 0) {
-                DAT_TribesState::instance.tribes[tribeID].unitStance
-                    = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
+                DAT_TribesState::instance.tribes[tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
             }
             if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(
@@ -102,10 +88,22 @@ namespace Game {
             }
             break;
         }
+        case 1:
+            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::healUnitsOfPlayerWithinRadius,
+                DAT_PathFindingState::ptr)(tile, 6, playerID, 8000);
+            if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
+                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(
+                    OpenSHC::Audio::SFX::SEID_CHAPEL_BELL);
+            }
+            break;
         case 5:
-            DAT_GameState::instance.playerDataArray[playerID].goldDonation = DAT_GameState::instance.playerDataArray[playerID].goldDonation
-                + (int)SEC_RNG::instance.currentNumber2 % 0x5dc + 1000;
+            DAT_GameState::instance.playerDataArray[playerID].goldDonation
+                += SEC_RNG::instance.currentNumber2 % 0x5dc + 1000;
             MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
+            break;
+        case 0:
+            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::certainDamageToUnitsUnk,
+                DAT_PathFindingState::ptr)(tile, 6, playerID, 6000, 1);
             break;
         case 7:
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::certainDamageToUnitsUnk,
@@ -118,8 +116,7 @@ namespace Game {
         default:
             return;
         }
-        DAT_GameState::instance.playerDataArray[playerID].tacticalPowersBarLevel
-            = DAT_GameState::instance.playerDataArray[playerID].tacticalPowersBarLevel - powerLevel * 0x27c;
+        DAT_GameState::instance.playerDataArray[playerID].tacticalPowersBarLevel -= powerCost;
     }
 }
 }
