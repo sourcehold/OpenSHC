@@ -7,6 +7,7 @@
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_CurrentUnitSlotID.hpp"
 #include "OpenSHC/Globals/DAT_LandscapeState.hpp"
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -108,9 +109,11 @@ namespace Map {
                 }
                 if (_state < 2) {
                     if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingResourceAmountByUid,
-                            DAT_BuildingsState::ptr)(this->units[DAT_CurrentUnitSlotID::instance].workplaceBuildingID_1,
+                            DAT_BuildingsState::ptr)(
+                            DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].workplaceBuildingID_1,
                             DAT_BuildingsState::instance
-                                .buildings[this->units[DAT_CurrentUnitSlotID::instance].workplaceBuildingID_1]
+                                .buildings[DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance]
+                                        .workplaceBuildingID_1]
                                 .uid,
                             OpenSHC::Game::Resources::RT_FLOUR)
                         != 0) {
@@ -126,8 +129,8 @@ namespace Map {
                 if (_state == OpenSHC::Map::Units::States::US_IDLEUnk) {
                     if (MACRO_CALL_MEMBER(
                             OpenSHC::Map::Buildings::BuildingsState_Func::getStorageBuildingForResourceTypeAndAmount,
-                            DAT_BuildingsState::ptr)(
-                            OpenSHC::Game::Resources::RT_HOPS, 1, this->units[DAT_CurrentUnitSlotID::instance].owner)
+                            DAT_BuildingsState::ptr)(OpenSHC::Game::Resources::RT_HOPS, 1,
+                            DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].owner)
                         != 0) {
                         return 0;
                     }
