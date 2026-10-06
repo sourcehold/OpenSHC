@@ -17,7 +17,7 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x00457E80
     int GameStateStructures::getWallTilesThatCanBeBuilt(int playerID, int wallMaterial)
     {
-        int wallTiles;
+        int wallTiles = 0;
         if ((DAT_GameCore::instance.solitaryAllBuildingsAreFree == FALSE)
             && (DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_EDITOR)) {
             if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_SIEGE_THAT) {
@@ -28,10 +28,7 @@ namespace Game {
                 if (this->playerDataArray[playerID].partialStoneCounter != 0) {
                     wallTiles = wallTiles - 1;
                 }
-            } else {
-                if (wallMaterial != 2) {
-                    return 0;
-                }
+            } else if (wallMaterial == 2) {
                 wallTiles = this->playerDataArray[playerID].currentResources[2] * 2;
                 /*
                   this is the only leftover of the partial wood stuff from SH1
