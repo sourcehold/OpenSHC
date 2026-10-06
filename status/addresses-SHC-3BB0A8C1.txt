@@ -41569,7 +41569,7 @@ SHC_3BB0A8C1_0x00501F50 | 35.6% | asm macro, regalloc differs
 
 SHC_3BB0A8C1_0x00501FE0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00502110 | 27.0% | 28.70% this in edi vs esi rega
+SHC_3BB0A8C1_0x00502110 | 43.3% | asm macro, regalloc differs
 
 SHC_3BB0A8C1_0x00502390 | 28.1% | brush loop regalloc
 

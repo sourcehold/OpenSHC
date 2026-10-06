@@ -1,24 +1,13 @@
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"
+#include "OpenSHC/Map/TileMapState/NeighbourFlagsAsm.hpp"
 
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 
 namespace OpenSHC {
 namespace Map {
-
-    using OpenSHC::Map::LogicHelpers::L_BORDER;
-    using OpenSHC::Map::LogicHelpers::L_BORDER_EDGE;
-    using OpenSHC::Map::LogicHelpers::L_BUILDING;
-    using OpenSHC::Map::LogicHelpers::L_KEEP_NON_MANOR_HOUSE;
-    using OpenSHC::Map::LogicHelpers::L_MARSH;
-    using OpenSHC::Map::LogicHelpers::L_MOAT;
-    using OpenSHC::Map::LogicHelpers::L_MOAT_DUG_OR_PLANNED;
-    using OpenSHC::Map::LogicHelpers::L_RIVER;
-    using OpenSHC::Map::LogicHelpers::L_ROCKY;
-    using OpenSHC::Map::LogicHelpers::L_SEA;
-    using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
     using OpenSHC::Map::LogicHelpers::L_BORDER;
     using OpenSHC::Map::LogicHelpers::L_BORDER_EDGE;
@@ -48,32 +37,26 @@ namespace Map {
         int highest = 0;
         /* the original reuses the brush parameter to hold the lowest height seen */
         brush = 200;
-        if (brushSize > 0) {
-            int index = 0;
-            do {
-                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(1, index, &tile, (int*)&y, baseTile, baseY);
-                if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) == 0) {
-                    if ((int)(uint)this->HeightLayer[tile] > highest) {
-                        highest = this->HeightLayer[tile];
-                    }
-                    if ((int)(uint)this->HeightLayer[tile] < (int)brush) {
-                        brush = this->HeightLayer[tile];
-                    }
+        for (int index = 0; index < brushSize; index++) {
+            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(1, index, &tile, (int*)&y, baseTile, baseY);
+            if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) == 0) {
+                int height = this->HeightLayer[tile];
+                if (height > highest) {
+                    highest = height;
                 }
-                index++;
-            } while (index < brushSize);
+                if (height < (int)brush) {
+                    brush = height;
+                }
+            }
         }
 
         int average = (int)(brush + highest) / 2;
         tile = baseTile;
         y = baseY;
-        if (brushSize < 1) {
-            return;
-        }
-
         for (int index = 0; index < brushSize; index++) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(1, index, &tile, (int*)&y, baseTile, baseY);
-            uint logic = this->LogicLayer[tile];
+            int brushTile = tile;
+            uint logic = this->LogicLayer[brushTile];
             if ((logic & (L_BORDER | L_BORDER_EDGE)) != 0) {
                 continue;
             }
@@ -88,57 +71,47 @@ namespace Map {
                 != 0) {
                 continue;
             }
-            if (this->BuildingLayer[tile] != 0 || (logic & L_SEA) != 0) {
+            if (this->BuildingLayer[brushTile] != 0 || (logic & L_SEA) != 0) {
                 continue;
             }
 
             if ((logic & L_RIVER) != 0) {
-                this->HeightLayer[tile] = this->HeightLayer[tile] + 8;
+                this->HeightLayer[brushTile] = this->HeightLayer[brushTile] + 8;
             }
-            this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_ROCKY;
+            this->LogicLayer[brushTile] = this->LogicLayer[brushTile] & ~L_ROCKY;
             /* the tile moves a tenth of the way towards the brush average, plus one */
             byte levelled;
             bool levelChanged = true;
-            if ((int)(uint)this->HeightLayer[tile] < average) {
-                levelled = (char)((average - (int)(uint)this->HeightLayer[tile]) / 10) + this->HeightLayer[tile] + 1;
-            } else if ((int)(uint)this->HeightLayer[tile] > average) {
-                levelled = this->HeightLayer[tile]
-                    - (char)(((int)(uint)this->HeightLayer[tile] - average) / 10) - 1;
+            if ((int)(uint)this->HeightLayer[brushTile] < average) {
+                levelled = (char)((average - (int)(uint)this->HeightLayer[brushTile]) / 10)
+                    + this->HeightLayer[brushTile] + 1;
+            } else if ((int)(uint)this->HeightLayer[brushTile] > average) {
+                levelled = this->HeightLayer[brushTile]
+                    - (char)(((int)(uint)this->HeightLayer[brushTile] - average) / 10) - 1;
             } else {
                 levelChanged = false;
             }
             if (levelChanged) {
-                this->HeightLayer[tile] = levelled;
-                this->Logic2Layer[tile] = 0;
+                this->HeightLayer[brushTile] = levelled;
+                this->Logic2Layer[brushTile] = 0;
             }
-            if (this->HeightLayer[tile] < 8) {
-                this->HeightLayer[tile] = 8;
+            if (this->HeightLayer[brushTile] < 8) {
+                this->HeightLayer[brushTile] = 8;
             }
-            if (this->HeightLayer[tile] > 0x9c) {
-                this->HeightLayer[tile] = 0x9c;
+            if (this->HeightLayer[brushTile] > 0x9c) {
+                this->HeightLayer[brushTile] = 0x9c;
             }
-            this->DefaultHeightLayer[tile] = this->HeightLayer[tile];
-            if ((this->LogicLayer[tile] & L_RIVER) != 0) {
-                this->HeightLayer[tile] = this->HeightLayer[tile] - 8;
+            this->DefaultHeightLayer[brushTile] = this->HeightLayer[brushTile];
+            if ((this->LogicLayer[brushTile] & L_RIVER) != 0) {
+                this->HeightLayer[brushTile] = this->HeightLayer[brushTile] - 8;
             }
-            this->DAT_SomeTile = tile;
-            this->DAT_SomeY = y;
+            uint brushY = y;
+            this->DAT_SomeTile = brushTile;
+            this->DAT_SomeY = brushY;
 
-            /* mark this tile and its eight neighbours changed, through the layer pointers */
-            byte* changed = (byte*)this->ptr_ChangedLayer + tile;
-            int* directionRow = (int*)this->ptr_MovementDirectionTranslationMatrix + y * 8;
-            changed[1] = 2;
-            changed[-1] = 2;
-            changed[0] = 2;
-            byte* northRow = changed + directionRow[0];
-            northRow[-1] = 2;
-            northRow[1] = 2;
-            northRow[0] = 2;
-            changed = changed + directionRow[4];
-            changed[-1] = 2;
-            changed[1] = 2;
-            changed[0] = 2;
-            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections, DAT_PathFindingState::ptr)(y, tile);
+            /* handwritten assembly in the original: mark this tile and its eight neighbours changed */
+            MACRO_MARK_CHANGED_NEIGHBOURS()
+            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections, DAT_PathFindingState::ptr)(brushY, brushTile);
         }
     }
 
