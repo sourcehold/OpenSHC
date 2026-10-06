@@ -55,10 +55,10 @@ namespace Map {
                     if (0x13a10 < (int)this->searchQueue.currentDistance) {
                         return FALSE;
                     }
-                    if (0xc < this->searchQueue.currentDistance) {
+                    if (0xc < (int)this->searchQueue.currentDistance) {
                         return FALSE;
                     }
-                    if (3 < this->searchQueue.currentDistance
+                    if (3 < (int)this->searchQueue.currentDistance
                         && (DAT_TileMapState::instance.LogicLayer[_tile] & 0x100U) != 0) {
                         /*
                           wall or gatehouse (or tower?)
