@@ -39387,7 +39387,7 @@ SHC_3BB0A8C1_0x004F93E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004F94A0 | 67.2% | logic masks merged by cl
 
-SHC_3BB0A8C1_0x004F9590 | 23.6% | 24.13% index arithmetic regall
+SHC_3BB0A8C1_0x004F9590 | 62.5% | natural x/y, regalloc differs
 
 SHC_3BB0A8C1_0x004F9630 | 0.0% | Pending
 
