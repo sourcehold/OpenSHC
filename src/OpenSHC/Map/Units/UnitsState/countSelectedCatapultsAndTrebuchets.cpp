@@ -16,9 +16,9 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00536400
         undefined4 UnitsState::countSelectedCatapultsAndTrebuchets()
         {
+            int _currentPlayerSlotID = DAT_GameSynchronyState::instance.currentPlayerSlotID;
             this->field15_0x560 = 0;
-            if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID].keep.id
-                <= 0) {
+            if (DAT_GameState::instance.playerDataArray[_currentPlayerSlotID].keep.id <= 0) {
                 return 0;
             }
             int _count = 0;
@@ -33,8 +33,7 @@ namespace Map {
                 if (this->units[DAT_CurrentUnitSlotID::instance].isSelected == 0) {
                     continue;
                 }
-                if (this->units[DAT_CurrentUnitSlotID::instance].owner
-                    != DAT_GameSynchronyState::instance.currentPlayerSlotID) {
+                if (this->units[DAT_CurrentUnitSlotID::instance].owner != _currentPlayerSlotID) {
                     return 0;
                 }
                 if (this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_S_CATAPULT
