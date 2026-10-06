@@ -18043,7 +18043,7 @@ SHC_3BB0A8C1_0x0045B6B0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0045B7F0 | 63.2% | EDX assumed preserved
 
-SHC_3BB0A8C1_0x0045B830 | 28.5% | this spilled, not kept in reg
+SHC_3BB0A8C1_0x0045B830 | 64.0% | worstChange kept in memory
 
 SHC_3BB0A8C1_0x0045B860 | 0.0% | Pending
 
