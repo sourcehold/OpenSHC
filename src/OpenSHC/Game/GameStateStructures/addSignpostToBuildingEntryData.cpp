@@ -21,12 +21,12 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x00456EF0
     void GameStateStructures::addSignpostToBuildingEntryData(int buildingID)
     {
-        int signpostSlot = 0;
-        while ((this->mapAndTime.signpostIDs[signpostSlot] != 0)
-            && (DAT_BuildingsState::instance.buildings[this->mapAndTime.signpostIDs[signpostSlot]].buildingType
-                == OpenSHC::Map::Buildings::BT_SIGNPOST)) {
-            signpostSlot = signpostSlot + 1;
-            if (signpostSlot >= 8) {
+        int signpostSlot;
+        for (signpostSlot = 0; signpostSlot < 8; signpostSlot++) {
+            if ((this->mapAndTime.signpostIDs[signpostSlot] == 0)
+                || (DAT_BuildingsState::instance.buildings[this->mapAndTime.signpostIDs[signpostSlot]].buildingType
+                    != OpenSHC::Map::Buildings::BT_SIGNPOST)) {
+                this->mapAndTime.signpostIDs[signpostSlot] = buildingID;
                 break;
             }
         }
@@ -35,8 +35,6 @@ namespace Game {
                 this->mapAndTime.signpostIDs[7]);
             signpostSlot = 7;
             this->mapAndTime.signpostIDs[7] = buildingID;
-        } else {
-            this->mapAndTime.signpostIDs[signpostSlot] = buildingID;
         }
         MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::determineBuildingEntranceFromKeepArea,
             DAT_BuildingsState::ptr)(buildingID, 1, FALSE);
@@ -49,8 +47,7 @@ namespace Game {
             + DAT_ViewportRenderState::instance
                   .translationMatrix[DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY]
                   .addXgetTile;
-        MACRO_CALL_MEMBER(
-            OpenSHC::Map::Navigation::PathFindingState_Func::findMapBorderEdgeTileAndStoreInSignpostData,
+        MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findMapBorderEdgeTileAndStoreInSignpostData,
             DAT_PathFindingState::ptr)(signpostSlot, 80400,
             DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX,
             DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY);
