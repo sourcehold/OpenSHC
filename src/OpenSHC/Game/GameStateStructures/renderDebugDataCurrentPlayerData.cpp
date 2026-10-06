@@ -201,12 +201,10 @@ namespace Game {
             TRUE, 0);
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             "Enemy hit: ", textX, y + 0xb6, OpenSHC::Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
-        x = textX;
         for (int hitPlayerID = 0; hitPlayerID < 9; hitPlayerID++) {
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-                this->mapAndTime.emenyHitArray[hitPlayerID], x, y + 0xb6, OpenSHC::Text::TTA_LEFT, 0x80ff, 0x12, TRUE,
-                0);
-            x = x + 0x14;
+                DAT_GameState::instance.mapAndTime.emenyHitArray[hitPlayerID], textX + hitPlayerID * 0x14, y + 0xb6,
+                OpenSHC::Text::TTA_LEFT, 0x80ff, 0x12, TRUE, 0);
         }
         rowY = y + 0xc4;
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
