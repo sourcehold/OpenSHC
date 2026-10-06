@@ -41,7 +41,7 @@ namespace Map {
                         return;
                     }
                     this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                    if (0x13a10 <= this->searchQueue.readIndex) {
+                    if (0x13a10 <= (int)this->searchQueue.readIndex) {
                         this->searchQueue.readIndex = 0;
                     }
                 } while (this->searchQueue.readIndex != this->searchQueue.writeIndex);
