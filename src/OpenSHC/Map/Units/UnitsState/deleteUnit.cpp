@@ -5,6 +5,7 @@
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -15,16 +16,18 @@ namespace Map {
         {
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::deselectUnit, this)(unitID);
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::clearOrDeselectUnitFromSelection, this)(
-                this->units[unitID].owner, unitID, 0);
-            if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[this->units[unitID].owner] == -1
-                && this->units[unitID].isStalked == 0) {
+                DAT_UnitsState::instance.units[unitID].owner, unitID, 0);
+            if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[DAT_UnitsState::instance.units[unitID].owner]
+                    == -1
+                && DAT_UnitsState::instance.units[unitID].isStalked == 0) {
                 MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::PathFindingState_Func::updateUnitDeathHeatmapIn3SpacesAroundTile,
-                    DAT_PathFindingState::ptr)(this->units[unitID].x, this->units[unitID].y);
+                    DAT_PathFindingState::ptr)(
+                    DAT_UnitsState::instance.units[unitID].x, DAT_UnitsState::instance.units[unitID].y);
             }
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setupUnitSharingCurrentTilePosition, this)(unitID);
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                0x490, '\0', &this->units[unitID]);
+                0x490, '\0', &DAT_UnitsState::instance.units[unitID]);
         }
 
     }
