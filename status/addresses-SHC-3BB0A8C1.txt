@@ -18029,7 +18029,7 @@ SHC_3BB0A8C1_0x0045AF00 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0045AF30 | 58.5% | One base ptr fewer
 
-SHC_3BB0A8C1_0x0045B1C0 | 57.4% | Reg alloc, one extra slot
+SHC_3BB0A8C1_0x0045B1C0 | 93.1% | LTCG ecx reuse after call
 
 SHC_3BB0A8C1_0x0045B3A0 | 0.0% | Pending
 
