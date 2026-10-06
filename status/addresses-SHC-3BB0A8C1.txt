@@ -49323,7 +49323,7 @@ SHC_3BB0A8C1_0x0052F0A0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0052F0D0 | 41.0% | branch shape differs
 
-SHC_3BB0A8C1_0x0052F260 | 19.3% | loop shape differs
+SHC_3BB0A8C1_0x0052F260 | 98.3% | security cookie symbol only
 
 SHC_3BB0A8C1_0x0052F440 | 66.7% | loop shape differs
 

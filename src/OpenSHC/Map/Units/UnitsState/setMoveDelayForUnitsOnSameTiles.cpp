@@ -24,68 +24,69 @@ namespace Map {
                 return;
             }
             /* if current tile position is occupied */
-            bool _isInserted = false;
+            int _isInserted = 0;
             int _unitIDOfAUnitOnSameTile = (short)DAT_TileMapState::instance.UnitLayer[unitIDCurrentTilePosition];
             int _index = 0;
-            int _writeIndex = 0;
-            while (true) {
-                _writeIndex = _index;
-                if (unitID < _unitIDOfAUnitOnSameTile && !_isInserted) {
-                    _writeIndex = _index + 1;
+            do {
+                if (unitID < _unitIDOfAUnitOnSameTile && _isInserted == 0) {
                     _unitIDArray[_index] = (short)unitID;
-                    _isInserted = true;
+                    _index++;
+                    _isInserted = 1;
                 }
-                _unitIDArray[_writeIndex] = (short)_unitIDOfAUnitOnSameTile;
+                _unitIDArray[_index] = (short)_unitIDOfAUnitOnSameTile;
                 _unitIDOfAUnitOnSameTile = (short)this->units[_unitIDOfAUnitOnSameTile].nextUnitOnTheSameTile;
-                if (_unitIDOfAUnitOnSameTile < 1) {
+                if (_unitIDOfAUnitOnSameTile <= 0) {
                     break;
                 }
-                _index = _writeIndex + 1;
-                _writeIndex = _index;
-                if (_index >= 2000) {
-                    break;
-                }
+                _index++;
+            } while (_index < 2000);
+            _index++;
+            if (_isInserted == 0) {
+                _unitIDArray[_index] = (short)unitID;
+                _index++;
             }
-            _writeIndex = _writeIndex + 1;
-            if (!_isInserted) {
-                _unitIDArray[_writeIndex] = (short)unitID;
-                _writeIndex = _writeIndex + 2;
-            }
-            DAT_TileMapState::instance.UnitLayer[unitIDCurrentTilePosition] = (ushort)_unitIDArray[0];
-            _unitIDArray[_writeIndex] = 0;
-            this->units[_unitIDArray[0]].unitOrderWhenOnSameTile = 0;
+            _unitIDArray[_index] = 0;
             int _previousUnitID = _unitIDArray[0];
+            DAT_TileMapState::instance.UnitLayer[unitIDCurrentTilePosition] = (ushort)_previousUnitID;
+            this->units[_previousUnitID].unitOrderWhenOnSameTile = 0;
             for (int _order = 1; _order < 2001; ++_order) {
-                this->units[_previousUnitID].nextUnitOnTheSameTile = _unitIDArray[_order];
-                if (_unitIDArray[_order] < 1) {
+                int _nextUnitID = _unitIDArray[_order];
+                this->units[_previousUnitID].nextUnitOnTheSameTile = (short)_nextUnitID;
+                _previousUnitID = _nextUnitID;
+                if (_nextUnitID <= 0) {
                     break;
                 }
-                _previousUnitID = _unitIDArray[_order];
-                this->units[_unitIDArray[_order]].unitOrderWhenOnSameTile = (short)_order;
+                this->units[_nextUnitID].unitOrderWhenOnSameTile = (short)_order;
             }
-            for (int i = 0; i < 2000; ++i) {
-                if (_unitIDArray[i] < 1) {
+            int _speedIndex = 0;
+            do {
+                int _sameTileUnitID = _unitIDArray[_speedIndex];
+                if (_sameTileUnitID <= 0) {
                     break;
                 }
-                if (this->units[_unitIDArray[i]].tunnelerFinishedDigging == 2
-                    && this->units[_unitIDArray[i]].movementSpeed < _lowestMovementSpeed) {
-                    _lowestMovementSpeed = this->units[_unitIDArray[i]].movementSpeed;
+                if (this->units[_sameTileUnitID].tunnelerFinishedDigging == 2
+                    && this->units[_sameTileUnitID].movementSpeed < _lowestMovementSpeed) {
+                    _lowestMovementSpeed = this->units[_sameTileUnitID].movementSpeed;
                 }
-            }
-            for (int i = 0; i < 2000; ++i) {
-                if (_unitIDArray[i] < 1) {
+                _speedIndex++;
+            } while (_speedIndex < 2000);
+            int _delayIndex = 0;
+            do {
+                int _sameTileUnitID = _unitIDArray[_delayIndex];
+                if (_sameTileUnitID <= 0) {
                     break;
                 }
-                if (this->units[_unitIDArray[i]].tunnelerFinishedDigging == 2
-                    && this->units[_unitIDArray[i]].moveDelay == 0) {
-                    if (_lowestMovementSpeed < this->units[_unitIDArray[i]].movementSpeed) {
-                        this->units[_unitIDArray[i]].moveDelay
-                            = this->units[_unitIDArray[i]].unitOrderWhenOnSameTile / 2 + 1;
+                if (this->units[_sameTileUnitID].tunnelerFinishedDigging == 2
+                    && this->units[_sameTileUnitID].moveDelay == 0) {
+                    if (this->units[_sameTileUnitID].movementSpeed > _lowestMovementSpeed) {
+                        this->units[_sameTileUnitID].moveDelay
+                            = this->units[_sameTileUnitID].unitOrderWhenOnSameTile / 2 + 1;
                     } else {
                         _lowestMovementSpeed = 0;
                     }
                 }
-            }
+                _delayIndex++;
+            } while (_delayIndex < 2000);
         }
 
     }
