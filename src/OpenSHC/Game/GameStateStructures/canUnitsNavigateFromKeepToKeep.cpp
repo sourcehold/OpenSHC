@@ -26,22 +26,23 @@ namespace Game {
         if (this->playerDataArray[targetPlayerID].keep.id == 0) {
             return TRUE;
         }
-        ushort targetArea = DAT_TileMapState::instance
-                                .PathConnectionLayer[this->playerDataArray[targetPlayerID].campground.tileEntry];
-        ushort area
-            = DAT_TileMapState::instance.PathConnectionLayer[this->playerDataArray[playerID].campground.tileEntry];
-        if (targetArea == 0) {
+        int targetKeepTile = this->playerDataArray[targetPlayerID].campground.tileEntry;
+        int keepTile = this->playerDataArray[playerID].campground.tileEntry;
+        if (DAT_TileMapState::instance.PathConnectionLayer[targetKeepTile] == 0) {
             return FALSE;
         }
-        if (area == 0) {
+        if (DAT_TileMapState::instance.PathConnectionLayer[keepTile] == 0) {
             return FALSE;
         }
-        if (area == targetArea) {
+        if (DAT_TileMapState::instance.PathConnectionLayer[keepTile]
+            == DAT_TileMapState::instance.PathConnectionLayer[targetKeepTile]) {
             return TRUE;
         }
         return MACRO_CALL_MEMBER(
                    OpenSHC::Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
-                   DAT_PathFindingState::ptr)(playerID, (short)targetArea, (short)area, 2)
+                   DAT_PathFindingState::ptr)(playerID,
+                   (short)DAT_TileMapState::instance.PathConnectionLayer[targetKeepTile],
+                   (short)DAT_TileMapState::instance.PathConnectionLayer[keepTile], 2)
             != 0;
     }
 }
