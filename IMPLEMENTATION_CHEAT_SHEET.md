@@ -118,6 +118,32 @@ being
 SEC_RNG::ptr->currentNumber1 % 4
 ```
 
+### Global Instance Instead of `this`
+
+An absolute instance address in the original's operand (`[eax + I<...::UnitsState>::instance+2504]`) where our source
+reads `this->field` means the original went through the **global instance**, not the `this` pointer. Our `this->` form
+compiles to `add eax, ecx` plus `[eax + off]`; the global form keeps the scaled index in one register and folds the
+instance address into the displacement, so the whole instruction stream shifts and the match collapses even when the
+logic is identical. `getRemainingRequiredEngineers` sat at 65% after its control flow had been fixed and reached 100%
+on this change alone; `tryAttackUnitID` went 48.7% -> 100%, `selectionHasUnmannedSiegeEngine` 80% -> 100%.
+
+Find the candidates by scanning `reccmp/dll/diff.json` for functions whose original mentions
+`<ClassName>,<address>>::instance+` while the source only uses `this->`, then **measure one function at a time**:
+the right spelling is not predictable and an all-or-nothing rewrite is wrong as often as it is right. Over 29
+candidates in `Map::Units::UnitsState`, 13 improved and 16 got worse.
+
+The split follows what the function is, not its size alone. Small helpers reached for the global
+(`deleteUnit` 51.9 -> 68.5, `teleportUnitToUnitXAndY`, `giveMoveCommand`, `setDestinationNearTargetedBuilding`
+31.6 -> 47.3), while the large real instance methods use `this` throughout and lose heavily if converted -
+`updateUnits` 0.54 -> 0.20, `processUnitMove` 0.73 -> 0.40, and likewise `processUnitAttackOtherUnit`,
+`processMeleeInitiation`, `acquireShootTarget`, `getUnitStateTextParameterAndResourceType`. Mid-size functions go
+either way (`moveToFreeTileNearby` and `applyTunnelDamageAlongPathPlan` both got much worse), so keep a
+revert-unless-better guard around the experiment rather than trusting the shape of the function: one of those two was
+already at 0.93 and the guard is all that saved it.
+
+A function can also mix the two - only some reads move. `getRemainingRequiredEngineers` reads `unitType` through
+`this` and the engineer count through the global.
+
 ### Variables
 
 - Ghidra declares all variables at the start of a function. Please try to declare them when needed. Helps the readability.
