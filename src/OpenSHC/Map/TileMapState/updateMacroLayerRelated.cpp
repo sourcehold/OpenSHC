@@ -5,6 +5,7 @@
 
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
+#include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
 // masks for the handwritten neighbour-flag macro; MASM has no "|", so these must be literals
@@ -62,7 +63,7 @@ namespace Map {
         rotation = DAT_PathFindingState::instance.mappingYRelated % 10;
         for (blockRow = this->someIndex; blockRow <= this->someLimit; blockRow++) {
             for (blockColumn = this->someYLike; blockColumn <= this->someYLikeLimit; blockColumn++) {
-                if (this->mapping40x40[blockRow][blockColumn] != 0) {
+                if (DAT_TileMapState::instance.mapping40x40[blockRow][blockColumn] != 0) {
                     subRow = rotation;
                     rotation = 0;
                     for (; subRow < 10; subRow++) {
@@ -75,13 +76,13 @@ namespace Map {
                                 this->DAT_SomeTile
                                     = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile,
                                         DAT_ViewportRenderState::ptr)(this->DAT_SomeX, this->DAT_SomeY);
-                                if (this->ChangedLayer[this->DAT_SomeTile] != 0) {
-                                    previousMacro = this->MacroLayer[this->DAT_SomeTile];
+                                if ((char)this->ChangedLayer[this->DAT_SomeTile] != 0) {
+                                    previousMacro = (short)this->MacroLayer[this->DAT_SomeTile];
                                     if (clearMacroFirst != 0) {
                                         this->MacroLayer[this->DAT_SomeTile] = 0;
                                     }
                                     if ((this->LogicLayer[this->DAT_SomeTile] & logic1) != 0
-                                        || (this->Logic2Layer[this->DAT_SomeTile] & logic2) != 0) {
+                                        || ((char)this->Logic2Layer[this->DAT_SomeTile] & logic2) != 0) {
                                         if ((this->LogicLayer[this->DAT_SomeTile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                                             this->bitFlag = 0;
                                         } else if (logic1 == 0x8000) {
@@ -91,12 +92,12 @@ namespace Map {
                                                 MACRO_NEIGHBOUR_FLAGS_LOGIC_8(2, NEIGHBOUR_FLAGS_MASK_MARSH)
                                                 if (this->bitFlag != 0xff) {
                                                     this->MacroLayer[this->DAT_SomeTile] = 1;
-                                                } else if ((this->RandomLayer[this->DAT_SomeTile] & 0xf) == 0) {
+                                                } else if (((short)this->RandomLayer[this->DAT_SomeTile] & 0xf) == 0) {
                                                     this->MacroLayer[this->DAT_SomeTile] = 2;
                                                 } else {
                                                     this->MacroLayer[this->DAT_SomeTile] = 0x800;
                                                 }
-                                                if (previousMacro != this->MacroLayer[this->DAT_SomeTile]) {
+                                                if (previousMacro != (short)this->MacroLayer[this->DAT_SomeTile]) {
                                                     MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                                           updateWalkAndPathLayer,
                                                         DAT_PathFindingState::ptr)(1, this->DAT_SomeX, this->DAT_SomeY);
@@ -126,12 +127,12 @@ namespace Map {
                                         }
                                         if (this->bitFlag != 0xff) {
                                             this->MacroLayer[this->DAT_SomeTile] = 1;
-                                        } else if ((this->RandomLayer[this->DAT_SomeTile] & 0xf) == 0) {
+                                        } else if (((short)this->RandomLayer[this->DAT_SomeTile] & 0xf) == 0) {
                                             this->MacroLayer[this->DAT_SomeTile] = 2;
                                         } else {
                                             this->MacroLayer[this->DAT_SomeTile] = 0x800;
                                         }
-                                        if (previousMacro != this->MacroLayer[this->DAT_SomeTile]) {
+                                        if (previousMacro != (short)this->MacroLayer[this->DAT_SomeTile]) {
                                             MACRO_CALL_MEMBER(
                                                 OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
                                                 DAT_PathFindingState::ptr)(1, this->DAT_SomeX, this->DAT_SomeY);
@@ -147,7 +148,7 @@ namespace Map {
         rotation = DAT_PathFindingState::instance.mappingYRelated % 10;
         for (blockRow = this->someIndex; blockRow <= this->someLimit; blockRow++) {
             for (blockColumn = this->someYLike; blockColumn <= this->someYLikeLimit; blockColumn++) {
-                if (this->mapping40x40[blockRow][blockColumn] != 0) {
+                if (DAT_TileMapState::instance.mapping40x40[blockRow][blockColumn] != 0) {
                     subRow = rotation;
                     rotation = 0;
                     for (; subRow < 10; subRow++) {
@@ -160,11 +161,11 @@ namespace Map {
                                 this->DAT_SomeTile
                                     = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile,
                                         DAT_ViewportRenderState::ptr)(this->DAT_SomeX, this->DAT_SomeY);
-                                if (this->MacroLayer[this->DAT_SomeTile] == 0x800) {
+                                if ((short)this->MacroLayer[this->DAT_SomeTile] == 0x800) {
                                     tileXOffset = MACRO_CALL_MEMBER(
                                         OpenSHC::Rendering::ViewportRenderState_Func::computeTileXOffset,
                                         DAT_ViewportRenderState::ptr)(this->DAT_SomeTile, this->DAT_SomeY);
-                                    randomValue = this->RandomLayer[this->DAT_SomeTile] & 0xf;
+                                    randomValue = (short)this->RandomLayer[this->DAT_SomeTile] & 0xf;
                                     for (index = 0; index < 0x10; index++) {
                                         tableX = DAT_TerrainDefinedData::instance.field2292_0x19d4[index].x;
                                         tableY = DAT_TerrainDefinedData::instance.field2292_0x19d4[index].y;
@@ -172,7 +173,7 @@ namespace Map {
                                             OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile,
                                             DAT_ViewportRenderState::ptr)(
                                             tileXOffset + tableX, this->DAT_SomeY + tableY);
-                                        if (this->MacroLayer[neighbourTile] != 0x800) {
+                                        if ((short)this->MacroLayer[neighbourTile] != 0x800) {
                                             break;
                                         }
                                     }
@@ -186,9 +187,9 @@ namespace Map {
                                                 tileXOffset + tableX, this->DAT_SomeY + tableY);
                                             this->MacroLayer[neighbourTile] = 0x10;
                                             this->MacroLayer[neighbourTile]
-                                                = this->MacroLayer[neighbourTile] + (short)(index << 6);
+                                                = (short)this->MacroLayer[neighbourTile] + (short)(index << 6);
                                             this->MacroLayer[neighbourTile]
-                                                = this->MacroLayer[neighbourTile] + randomValue * 0x1000;
+                                                = (short)this->MacroLayer[neighbourTile] + randomValue * 0x1000;
                                         }
                                     }
                                 }
@@ -201,7 +202,7 @@ namespace Map {
         rotation = DAT_PathFindingState::instance.mappingYRelated % 10;
         for (blockRow = this->someIndex; blockRow <= this->someLimit; blockRow++) {
             for (blockColumn = this->someYLike; blockColumn <= this->someYLikeLimit; blockColumn++) {
-                if (this->mapping40x40[blockRow][blockColumn] != 0) {
+                if (DAT_TileMapState::instance.mapping40x40[blockRow][blockColumn] != 0) {
                     subRow = rotation;
                     rotation = 0;
                     for (; subRow < 10; subRow++) {
@@ -214,11 +215,11 @@ namespace Map {
                                 this->DAT_SomeTile
                                     = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile,
                                         DAT_ViewportRenderState::ptr)(this->DAT_SomeX, this->DAT_SomeY);
-                                if (this->MacroLayer[this->DAT_SomeTile] == 0x800) {
+                                if ((short)this->MacroLayer[this->DAT_SomeTile] == 0x800) {
                                     tileXOffset = MACRO_CALL_MEMBER(
                                         OpenSHC::Rendering::ViewportRenderState_Func::computeTileXOffset,
                                         DAT_ViewportRenderState::ptr)(this->DAT_SomeTile, this->DAT_SomeY);
-                                    randomValue = this->RandomLayer[this->DAT_SomeTile] & 0xf;
+                                    randomValue = (short)this->RandomLayer[this->DAT_SomeTile] & 0xf;
                                     for (index = 0; index < 9; index++) {
                                         tableX = DAT_TerrainDefinedData::instance.field2291_0x198c[index].x;
                                         tableY = DAT_TerrainDefinedData::instance.field2291_0x198c[index].y;
@@ -226,7 +227,7 @@ namespace Map {
                                             OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile,
                                             DAT_ViewportRenderState::ptr)(
                                             tileXOffset + tableX, this->DAT_SomeY + tableY);
-                                        if (this->MacroLayer[neighbourTile] != 0x800) {
+                                        if ((short)this->MacroLayer[neighbourTile] != 0x800) {
                                             break;
                                         }
                                     }
@@ -240,9 +241,9 @@ namespace Map {
                                                 tileXOffset + tableX, this->DAT_SomeY + tableY);
                                             this->MacroLayer[neighbourTile] = 8;
                                             this->MacroLayer[neighbourTile]
-                                                = this->MacroLayer[neighbourTile] + (short)(index << 6);
+                                                = (short)this->MacroLayer[neighbourTile] + (short)(index << 6);
                                             this->MacroLayer[neighbourTile]
-                                                = this->MacroLayer[neighbourTile] + randomValue * 0x1000;
+                                                = (short)this->MacroLayer[neighbourTile] + randomValue * 0x1000;
                                         }
                                     }
                                 }
@@ -255,7 +256,7 @@ namespace Map {
         rotation = DAT_PathFindingState::instance.mappingYRelated % 10;
         for (blockRow = this->someIndex; blockRow <= this->someLimit; blockRow++) {
             for (blockColumn = this->someYLike; blockColumn <= this->someYLikeLimit; blockColumn++) {
-                if (this->mapping40x40[blockRow][blockColumn] != 0) {
+                if (DAT_TileMapState::instance.mapping40x40[blockRow][blockColumn] != 0) {
                     subRow = rotation;
                     rotation = 0;
                     for (; subRow < 10; subRow++) {
@@ -268,11 +269,11 @@ namespace Map {
                                 this->DAT_SomeTile
                                     = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile,
                                         DAT_ViewportRenderState::ptr)(this->DAT_SomeX, this->DAT_SomeY);
-                                if (this->MacroLayer[this->DAT_SomeTile] == 0x800) {
+                                if ((short)this->MacroLayer[this->DAT_SomeTile] == 0x800) {
                                     tileXOffset = MACRO_CALL_MEMBER(
                                         OpenSHC::Rendering::ViewportRenderState_Func::computeTileXOffset,
                                         DAT_ViewportRenderState::ptr)(this->DAT_SomeTile, this->DAT_SomeY);
-                                    randomValue = this->RandomLayer[this->DAT_SomeTile] & 0xf;
+                                    randomValue = (short)this->RandomLayer[this->DAT_SomeTile] & 0xf;
                                     for (index = 0; index < 4; index++) {
                                         tableX = DAT_TerrainDefinedData::instance.field2290_0x196c[index].x;
                                         tableY = DAT_TerrainDefinedData::instance.field2290_0x196c[index].y;
@@ -280,7 +281,7 @@ namespace Map {
                                             OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile,
                                             DAT_ViewportRenderState::ptr)(
                                             tileXOffset + tableX, this->DAT_SomeY + tableY);
-                                        if (this->MacroLayer[neighbourTile] != 0x800) {
+                                        if ((short)this->MacroLayer[neighbourTile] != 0x800) {
                                             break;
                                         }
                                     }
@@ -294,9 +295,9 @@ namespace Map {
                                                 tileXOffset + tableX, this->DAT_SomeY + tableY);
                                             this->MacroLayer[neighbourTile] = 4;
                                             this->MacroLayer[neighbourTile]
-                                                = this->MacroLayer[neighbourTile] + (short)(index << 6);
+                                                = (short)this->MacroLayer[neighbourTile] + (short)(index << 6);
                                             this->MacroLayer[neighbourTile]
-                                                = this->MacroLayer[neighbourTile] + randomValue * 0x1000;
+                                                = (short)this->MacroLayer[neighbourTile] + randomValue * 0x1000;
                                         }
                                     }
                                 }
@@ -309,7 +310,7 @@ namespace Map {
         rotation = DAT_PathFindingState::instance.mappingYRelated % 10;
         for (blockRow = this->someIndex; blockRow <= this->someLimit; blockRow++) {
             for (blockColumn = this->someYLike; blockColumn <= this->someYLikeLimit; blockColumn++) {
-                if (this->mapping40x40[blockRow][blockColumn] != 0) {
+                if (DAT_TileMapState::instance.mapping40x40[blockRow][blockColumn] != 0) {
                     subRow = rotation;
                     rotation = 0;
                     for (; subRow < 10; subRow++) {
@@ -322,7 +323,7 @@ namespace Map {
                                 this->DAT_SomeTile
                                     = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::translateXYToTile,
                                         DAT_ViewportRenderState::ptr)(this->DAT_SomeX, this->DAT_SomeY);
-                                if (this->MacroLayer[this->DAT_SomeTile] == 0x800) {
+                                if ((short)this->MacroLayer[this->DAT_SomeTile] == 0x800) {
                                     this->MacroLayer[this->DAT_SomeTile] = 2;
                                 }
                             }
