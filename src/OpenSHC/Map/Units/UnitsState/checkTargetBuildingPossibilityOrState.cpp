@@ -19,22 +19,22 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00533580
         BOOLEnum UnitsState::checkTargetBuildingPossibilityOrState(int unitID)
         {
-            int _playerID = this->units[unitID].owner;
+            int _playerID = DAT_UnitsState::instance.units[unitID].owner;
             if (DAT_GameState::instance.playerDataArray[_playerID].totalEnemyUnitsCount > 0) {
                 return TRUE;
             }
-            if (this->units[unitID].targetingType == OpenSHC::Map::Units::UIT_ATTACK_BUILDING) {
-                return (
-                    BOOLEnum)(DAT_BuildingsState::instance.buildings[this->units[unitID].targetID_OR_targetBuildingID]
-                                  .uid
-                    == this->units[DAT_CurrentUnitSlotID::instance]
+            if (DAT_UnitsState::instance.units[unitID].targetingType == OpenSHC::Map::Units::UIT_ATTACK_BUILDING) {
+                return (BOOLEnum)(DAT_BuildingsState::instance
+                                      .buildings[DAT_UnitsState::instance.units[unitID].targetID_OR_targetBuildingID]
+                                      .uid
+                    == DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance]
                         .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID);
             }
-            int _shootTargetMicroX = this->units[unitID].shootTargetMicroX;
-            int _shootTargetMicroY = DAT_UnitsState::instance.units[unitID].shootTargetMicroY;
+            int _shootTargetX = DAT_UnitsState::instance.units[unitID].shootTargetMicroX / 8;
+            int _shootTargetY = DAT_UnitsState::instance.units[unitID].shootTargetMicroY / 8;
             return (BOOLEnum)(MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                     checkEnemyBuildingOrDefensiveStructureWithin12Tiles,
-                                  DAT_PathFindingState::ptr)(_playerID, _shootTargetMicroX / 8, _shootTargetMicroY / 8)
+                                  DAT_PathFindingState::ptr)(_playerID, _shootTargetX, _shootTargetY)
                 != FALSE);
         }
 

@@ -50671,7 +50671,7 @@ SHC_3BB0A8C1_0x00533490 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x005334A0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00533580 | 41.7% | Style pass, asm differs
+SHC_3BB0A8C1_0x00533580 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00533630 | 91.8% | cold return block outlined
 
