@@ -7,6 +7,7 @@
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -265,7 +266,9 @@ namespace Map {
                       115 or 112
                      */
 
-                    return this->units[this->units[unitIndex].shootTargetedUnit].isStalked != 0 ? 0x70 : 0x73;
+                    return this->units[DAT_UnitsState::instance.units[unitIndex].shootTargetedUnit].isStalked != 0
+                        ? 0x70
+                        : 0x73;
                 case 10:
                     return (uint)(this->units[this->units[unitIndex].shootTargetedUnit].isStalked == 0) * 2 + 0x71;
                 default:
@@ -517,7 +520,7 @@ namespace Map {
                     return 2;
                 case 8:
                     *pResourceType = (ResourceType)(short)DAT_BuildingsState::instance
-                                         .buildings[this->units[unitIndex].workplaceBuildingID_1]
+                                         .buildings[DAT_UnitsState::instance.units[unitIndex].workplaceBuildingID_1]
                                          .producedItemTypeNext;
                     return 10;
                 default:
