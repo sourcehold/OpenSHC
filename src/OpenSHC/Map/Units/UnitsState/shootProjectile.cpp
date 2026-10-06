@@ -179,8 +179,9 @@ namespace Map {
                     this->units[unitID].buildingHeight + 12 + this->units[unitID].terrainOrClimbHeight, targetX,
                     targetY, targetZUnk, projectileType, 0);
             }
-            if (this->units[unitID].tribeID != 0) {
-                DAT_TribesState::instance.tribes[this->units[unitID].tribeID].countdown2 = 500;
+            int _tribeID = this->units[unitID].tribeID;
+            if (_tribeID != 0) {
+                DAT_TribesState::instance.tribes[_tribeID].countdown2 = 500;
             }
         }
 
