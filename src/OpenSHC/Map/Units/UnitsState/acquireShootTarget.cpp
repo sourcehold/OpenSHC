@@ -14,6 +14,7 @@
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
 namespace OpenSHC {
@@ -35,8 +36,8 @@ namespace Map {
             int _unitPlayerID = (int)this->units[unitID].owner;
             int _microXUnit = (int)this->units[unitID].microXPosition;
             int _microYUnit = (int)this->units[unitID].microYPosition;
-            int _unitTotalHeight
-                = (int)this->units[unitID].buildingHeight + (int)this->units[unitID].terrainOrClimbHeight;
+            int _unitTotalHeight = (int)DAT_UnitsState::instance.units[unitID].buildingHeight
+                + (int)this->units[unitID].terrainOrClimbHeight;
             int _validTargetID = 0;
             int _bestScore = 100000;
             int _shotDistance = 0;
@@ -120,7 +121,7 @@ namespace Map {
                                     DAT_EntityState::ptr)(_microXUnit, _microYUnit, _unitTotalHeight + 0x1e,
                                     (int)(this->units[_0x04_targetUnitID].microXPosition),
                                     (int)(this->units[_0x04_targetUnitID].microYPosition),
-                                    (int)(this->units[_0x04_targetUnitID].buildingHeight + 0x1a
+                                    (int)(DAT_UnitsState::instance.units[_0x04_targetUnitID].buildingHeight + 0x1a
                                         + this->units[_0x04_targetUnitID].terrainOrClimbHeight));
                             if (_shootDistanceScore <= 0
                                 || this->units[unitID].unitType == OpenSHC::Map::Units::UT_S_MANGONEL
@@ -146,8 +147,8 @@ namespace Map {
                                 return TRUE;
                             }
                             int _targetTotalHeight = (int)this->units[_0x04_targetUnitID].terrainOrClimbHeight
-                                + (int)this->units[_0x04_targetUnitID].buildingHeight;
-                            _unitPlayerID = (int)this->units[unitID].buildingHeight
+                                + (int)DAT_UnitsState::instance.units[_0x04_targetUnitID].buildingHeight;
+                            _unitPlayerID = (int)DAT_UnitsState::instance.units[unitID].buildingHeight
                                 + (int)this->units[unitID].terrainOrClimbHeight;
                             if (_targetTotalHeight + 0x46 < _unitPlayerID) {
                                 this->units[unitID].jugglerCount = 1;
@@ -164,14 +165,14 @@ namespace Map {
                         }
                     }
                 }
-                int _savedDestinationX = this->units[unitID]._someX_2;
+                int _savedDestinationX = DAT_UnitsState::instance.units[unitID]._someX_2;
                 this->units[unitID].targetedUnitID__OR__engineerMannedSiegeEngineRef = 0;
                 this->units[unitID].shootTargetedUnit = 0;
                 this->units[unitID].targetingType = OpenSHC::Map::Units::UIT_NO_INSTRUCTION_OR_MOVEUnk;
                 if (_savedDestinationX != 0) {
                     MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setDestinationForUnit, this)(
                         unitID, (uint)(_savedDestinationX), (uint)((int)this->units[unitID]._someY_2), 0);
-                    this->units[unitID]._someX_2 = 0;
+                    DAT_UnitsState::instance.units[unitID]._someX_2 = 0;
                     this->units[unitID]._someY_2 = 0;
                     this->units[unitID].moveDelay = 0;
                     this->units[unitID].targetedBuildingTile = 0;
@@ -191,8 +192,8 @@ namespace Map {
                             .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID
                     && (_brazierEntityID = MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::isBrazierNearby,
                             DAT_EntityState::ptr)((int)this->units[unitID].x, (int)(this->units[unitID].y),
-                            (int)((
-                                int)(this->units[unitID].buildingHeight + this->units[unitID].terrainOrClimbHeight))),
+                            (int)((int)(DAT_UnitsState::instance.units[unitID].buildingHeight
+                                + this->units[unitID].terrainOrClimbHeight))),
                         _brazierEntityID != 0)) {
                     this->units[unitID].shootTargetMicroX = DAT_TileMapState::instance.pitchDitches[_ditchID].x * 8 + 4;
                     this->units[unitID].shootTargetMicroY = DAT_TileMapState::instance.pitchDitches[_ditchID].y * 8 + 4;
@@ -281,7 +282,7 @@ namespace Map {
                                 continue;
                             break;
                         case OpenSHC::Map::Units::UT_A_ASSASSIN:
-                            if (160 < this->units[_enemy].assassinsMicroDistanceToEnemyUnk)
+                            if (160 < DAT_UnitsState::instance.units[_enemy].assassinsMicroDistanceToEnemyUnk)
                                 continue;
                         }
                         _xDifferenceToTarget = (int)this->units[_enemy].microYPosition;
@@ -456,7 +457,7 @@ namespace Map {
                                     = MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::arrowShootingRelated,
                                         DAT_EntityState::ptr)(_microXUnit, _microYUnit, _unitTotalHeight + 0x1e,
                                         (int)(this->units[_enemy].microXPosition), _enemyMicroY,
-                                        (int)(this->units[_enemy].buildingHeight + 0x1a
+                                        (int)(DAT_UnitsState::instance.units[_enemy].buildingHeight + 0x1a
                                             + this->units[_enemy].terrainOrClimbHeight));
                                 if (_shotFlightDistance > 0) {
                                     if (_xDifferenceToTarget < _bestScore) {
@@ -509,9 +510,9 @@ namespace Map {
                         return TRUE;
                     }
                     _unitPlayerID = (int)this->units[_validTargetID].terrainOrClimbHeight
-                        + (int)this->units[_validTargetID].buildingHeight;
-                    _microXUnit
-                        = (int)this->units[unitID].buildingHeight + (int)this->units[unitID].terrainOrClimbHeight;
+                        + (int)DAT_UnitsState::instance.units[_validTargetID].buildingHeight;
+                    _microXUnit = (int)DAT_UnitsState::instance.units[unitID].buildingHeight
+                        + (int)this->units[unitID].terrainOrClimbHeight;
                     if (_unitPlayerID + 0x46 < _microXUnit) {
                         this->units[unitID].jugglerCount = 1;
                         this->units[_validTargetID].field233_0x39a = 1;
