@@ -99,7 +99,7 @@ namespace Map {
             if (_tribeID > 0) {
                 DAT_TribesState::instance.tribes[_tribeID].field133_0x278 = 1;
             }
-            this->units[unit2ID].animationCycleNumber = 0;
+            DAT_UnitsState::instance.units[unit2ID].animationCycleNumber = 0;
             if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_E_SWORD) {
                 this->units[unit2ID].state.generic = OpenSHC::Map::Units::States::US_DEATH_03;
             } else if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_E_KNIGHT) {
