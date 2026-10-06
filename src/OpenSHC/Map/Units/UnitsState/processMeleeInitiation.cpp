@@ -9,9 +9,9 @@
 #include "OpenSHC/Globals/DAT_CurrentUnitSlotID.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
-#include "OpenSHC/Globals/DAT_MinimapViewState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_UnitPropertiesDefinedData.hpp"
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
 namespace OpenSHC {
@@ -22,7 +22,6 @@ namespace Map {
         using OpenSHC::Map::Units::UnitLogicState;
         using OpenSHC::Map::Units::UnitType;
         using OpenSHC::Map::Units::States::UnitState;
-
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00549C70
         void UnitsState::processMeleeInitiation(int unitID)
@@ -223,16 +222,16 @@ namespace Map {
                     }
                     for (_otherUnitID
                         = (short)DAT_TileMapState::instance.UnitLayer[DAT_TileMapState::instance.DAT_SomeTile];
-                        _otherUnitID > 0; _otherUnitID = (short)this->units[_otherUnitID].nextUnitOnTheSameTile) {
+                        _otherUnitID > 0; _otherUnitID = (short)this->units[_otherUnitID].nextUnitOnTheSameTile)
+                    {
                         if (_otherUnitID != unitID) {
-                            bool _isFriendly;
                             if (this->units[unitID].owner == 0) {
-                                _isFriendly = this->units[unitID].unitType == this->units[_otherUnitID].unitType;
-                            } else {
-                                _isFriendly = DAT_GameState::instance.mapAndTime.playerTeams[_playerID]
-                                    == DAT_GameState::instance.mapAndTime.playerTeams[this->units[_otherUnitID].owner];
-                            }
-                            if (!_isFriendly) {
+                                if (this->units[unitID].unitType != this->units[_otherUnitID].unitType) {
+                                    _hasEnemyOnOwnTile = 1;
+                                    break;
+                                }
+                            } else if (DAT_GameState::instance.mapAndTime.playerTeams[_playerID]
+                                != DAT_GameState::instance.mapAndTime.playerTeams[this->units[_otherUnitID].owner]) {
                                 _hasEnemyOnOwnTile = 1;
                                 break;
                             }
@@ -323,17 +322,19 @@ namespace Map {
                                 .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][0]
                             + this->units[unitID].tile);
                         if ((DAT_TileMapState::instance.field213_0x554a48 & 0x100) != 0) {
-                            _adjacentTiles[8] = DAT_MinimapViewState::instance
-                                                    .spawnMoment[DAT_TileMapState::instance.DAT_SomeY * 8 + 0x14]
+                            _adjacentTiles[8]
+                                = DAT_TileMapState::instance
+                                      .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY - 1][7]
                                 + this->units[unitID].tile
                                 + DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][0];
                         }
                         if ((DAT_TileMapState::instance.field213_0x554a48 & 0x200) != 0) {
-                            _adjacentTiles[9] = DAT_MinimapViewState::instance
-                                                    .spawnMoment[DAT_TileMapState::instance.DAT_SomeY * 8 + 0x13]
-                                + DAT_MinimapViewState::instance
-                                      .spawnMoment[DAT_TileMapState::instance.DAT_SomeY * 8 + 0x14]
+                            _adjacentTiles[9]
+                                = DAT_TileMapState::instance
+                                      .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY - 1][6]
+                                + DAT_TileMapState::instance
+                                      .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY - 1][7]
                                 + this->units[unitID].tile
                                 + DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][0];
@@ -427,28 +428,32 @@ namespace Map {
                                 + this->units[unitID].tile;
                         }
                         if ((DAT_TileMapState::instance.field213_0x554a48 & 0x200000) != 0) {
-                            _adjacentTiles[0x15] = DAT_MinimapViewState::instance
-                                                       .spawnMoment[DAT_TileMapState::instance.DAT_SomeY * 8 + 0xe]
-                                + DAT_MinimapViewState::instance
-                                      .spawnMoment[DAT_TileMapState::instance.DAT_SomeY * 8 + 0xf]
+                            _adjacentTiles[0x15]
+                                = DAT_TileMapState::instance
+                                      .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY - 1][1]
+                                + DAT_TileMapState::instance
+                                      .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY - 1][2]
                                 + this->units[unitID].tile
                                 + DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][0];
                         }
                         if ((DAT_TileMapState::instance.field213_0x554a48 & 0x400000) != 0) {
-                            _adjacentTiles[0x16] = DAT_MinimapViewState::instance
-                                                       .spawnMoment[DAT_TileMapState::instance.DAT_SomeY * 8 + 0xe]
+                            _adjacentTiles[0x16]
+                                = DAT_TileMapState::instance
+                                      .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY - 1][1]
                                 + this->units[unitID].tile
                                 + DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][0];
                         }
                         if ((DAT_TileMapState::instance.field213_0x554a48 & 0x800000) != 0) {
-                            _adjacentTiles[0x17] = DAT_MinimapViewState::instance
-                                                       .spawnMoment[DAT_TileMapState::instance.DAT_SomeY * 8 + 0xd]
+                            _adjacentTiles[0x17]
+                                = DAT_TileMapState::instance
+                                      .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY - 1][0]
                                 + this->units[unitID].tile
                                 + DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][0];
                         }
+                        int _keepsTarget = 0;
                         if (this->units[unitID].attackedUnitID != 0) {
                             _otherUnitID = this->units[unitID].attackedUnitID;
                             if (this->units[_otherUnitID].uid == this->units[unitID].field191_0x340
@@ -469,128 +474,107 @@ namespace Map {
                                     if (_candidateTile == 0) {
                                         continue;
                                     }
-                                    int _heightDelta = _totalHeight
-                                        - MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTotalHeightAtTile,
-                                            DAT_TileMapState::ptr)(_candidateTile);
-                                    if (_heightDelta < 0) {
-                                        _heightDelta = -_heightDelta;
-                                    }
-                                    if (_heightDelta >= 0x20) {
+                                    if (abs(_totalHeight
+                                            - MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTotalHeightAtTile,
+                                                DAT_TileMapState::ptr)(_candidateTile))
+                                        >= 0x20) {
                                         continue;
                                     }
                                     if (_otherUnitID
                                         == MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::getEnemyUnitIDNearby,
                                             this)(unitID, _candidateTile, _totalHeight)) {
-                                        MACRO_CALL_MEMBER(
-                                            OpenSHC::Map::Units::UnitsState_Func::setFacingDirectionTowardUnitMicro,
-                                            this)(unitID, _otherUnitID);
-                                        if (this->units[unitID].state.generic
-                                            != OpenSHC::Map::Units::States::US_MELEE_ATTACK) {
-                                            if (this->units[unitID].movementRelated == 8) {
-                                                MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::
-                                                                      saveUnitStateBeforeInterruption,
-                                                    this)(unitID);
-                                                this->units[unitID].movementRelated = 8;
-                                                this->units[unitID].state.generic
-                                                    = OpenSHC::Map::Units::States::US_MELEE_ATTACK;
-                                                this->units[unitID].SA = 0;
-                                                this->units[unitID].animationCycleNumber = 0;
-                                                this->units[DAT_CurrentUnitSlotID::instance].substate = 0;
-                                            } else {
-                                                this->units[unitID].field259_0x3d2 = 1;
-                                            }
-                                        }
-                                        MACRO_CALL_MEMBER(
-                                            OpenSHC::Map::Units::UnitsState_Func::processUnitAttackOtherUnit, this)(
-                                            DAT_CurrentUnitSlotID::instance, this->units[unitID].attackedUnitID);
-                                        return;
+                                        _keepsTarget = 1;
+                                        break;
                                     }
                                 }
                             }
-                            this->units[unitID].attackedUnitID = 0;
-                            this->units[unitID].field191_0x340 = 0;
-                            this->units[unitID].field259_0x3d2 = 0;
+                            if (!_keepsTarget) {
+                                this->units[unitID].attackedUnitID = 0;
+                                this->units[unitID].field191_0x340 = 0;
+                                this->units[unitID].field259_0x3d2 = 0;
+                            }
                         }
-                        /* -- CHECK 24 TILES AROUND UNIT -- look for someone new to fight */
-                        for (int _slot = -1; _slot < 24; ++_slot) {
-                            int _candidateTile;
-                            int _tileSlot;
-                            if (_slot == -1) {
-                                if (_hasEnemyOnOwnTile == 0) {
-                                    continue;
-                                }
-                                _tileSlot = this->units[unitID].facingDirection;
-                                _candidateTile = this->units[unitID].tile;
-                            } else {
-                                _tileSlot = DAT_UnitPropertiesDefinedData::instance
-                                                .field117_0x11cf4[this->units[unitID].facingDirection][_slot];
-                                _candidateTile = _adjacentTiles[_tileSlot];
-                            }
-                            if (_candidateTile == 0) {
-                                continue;
-                            }
-                            if (_tileSlot >= 8) {
-                                int _firstHeightDelta = _totalHeight
-                                    - _neighbourHeights
-                                        [DAT_UnitPropertiesDefinedData::instance.field118_0x12054[_tileSlot].x];
-                                if (_firstHeightDelta < 0) {
-                                    _firstHeightDelta = -_firstHeightDelta;
-                                }
-                                if (_firstHeightDelta >= 0x21) {
-                                    continue;
-                                }
-                                int _secondHeightIndex
-                                    = DAT_UnitPropertiesDefinedData::instance.field118_0x12054[_tileSlot].y;
-                                if (_secondHeightIndex != -1) {
-                                    int _secondHeightDelta = _totalHeight - _neighbourHeights[_secondHeightIndex];
-                                    if (_secondHeightDelta < 0) {
-                                        _secondHeightDelta = -_secondHeightDelta;
-                                    }
-                                    if (_secondHeightDelta >= 0x21) {
+                        int _engage = _keepsTarget;
+                        if (_keepsTarget) {
+                            MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setFacingDirectionTowardUnitMicro,
+                                DAT_UnitsState::ptr)(unitID, _otherUnitID);
+                        } else {
+                            /* -- CHECK 24 TILES AROUND UNIT -- look for someone new to fight */
+                            for (int _slot = -1; _slot < 24; ++_slot) {
+                                int _candidateTile;
+                                int _tileSlot;
+                                if (_slot == -1) {
+                                    if (_hasEnemyOnOwnTile == 0) {
                                         continue;
                                     }
+                                    _tileSlot = this->units[unitID].facingDirection;
+                                    _candidateTile = this->units[unitID].tile;
+                                } else {
+                                    _tileSlot = DAT_UnitPropertiesDefinedData::instance
+                                                    .field117_0x11cf4[this->units[unitID].facingDirection][_slot];
+                                    _candidateTile = _adjacentTiles[_tileSlot];
                                 }
-                            }
-                            _otherUnitID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::getEnemyUnitIDNearby,
-                                this)(unitID, _candidateTile, _totalHeight);
-                            if (_otherUnitID <= 0) {
-                                continue;
-                            }
-                            if (this->units[_otherUnitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
-                                continue;
-                            }
-                            if (this->units[_otherUnitID].dying != 0) {
-                                continue;
-                            }
-                            int _targetHeightDelta = (_totalHeight - this->units[_otherUnitID].buildingHeight)
-                                - this->units[_otherUnitID].terrainOrClimbHeight;
-                            if (_targetHeightDelta < 0) {
-                                _targetHeightDelta = -_targetHeightDelta;
-                            }
-                            if (_targetHeightDelta >= 0x21) {
-                                continue;
-                            }
-                            if ((this->units[unitID].unitType == OpenSHC::Map::Units::UT_LIONSHWOLF
-                                    || this->units[unitID].unitType == OpenSHC::Map::Units::UT_CAGEDOG)
-                                && this->units[_otherUnitID].isStalked != 0 && _slot >= 8) {
-                                continue;
-                            }
-                            this->units[unitID].attackedUnitID = (short)_otherUnitID;
-                            this->units[unitID].field191_0x340 = this->units[_otherUnitID].uid;
-                            MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setFacingDirectionTowardUnitMicro,
-                                this)(unitID, _otherUnitID);
-                            break;
-                        }
-                        if (this->units[unitID].attackedUnitID != 0) {
-                            if (this->units[_otherUnitID].someUnitStat2_meleeDamageUnk != 0
-                                && this->units[_otherUnitID].attackedUnitID == 0
-                                && this->units[_otherUnitID].unknownMovementRelated_0x2d2 == 0) {
-                                this->units[_otherUnitID].attackedUnitID = (short)unitID;
-                                this->units[_otherUnitID].field191_0x340 = this->units[unitID].uid;
+                                if (_candidateTile == 0) {
+                                    continue;
+                                }
+                                if (_tileSlot >= 8) {
+                                    if (abs(_totalHeight
+                                            - _neighbourHeights
+                                                [DAT_UnitPropertiesDefinedData::instance.field118_0x12054[_tileSlot].x])
+                                        > 0x20) {
+                                        continue;
+                                    }
+                                    int _secondHeightIndex
+                                        = DAT_UnitPropertiesDefinedData::instance.field118_0x12054[_tileSlot].y;
+                                    if (_secondHeightIndex != -1) {
+                                        if (abs(_totalHeight - _neighbourHeights[_secondHeightIndex]) > 0x20) {
+                                            continue;
+                                        }
+                                    }
+                                }
+                                _otherUnitID
+                                    = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::getEnemyUnitIDNearby,
+                                        this)(unitID, _candidateTile, _totalHeight);
+                                if (_otherUnitID <= 0) {
+                                    continue;
+                                }
+                                if (this->units[_otherUnitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
+                                    continue;
+                                }
+                                if (this->units[_otherUnitID].dying != 0) {
+                                    continue;
+                                }
+                                if (abs((_totalHeight - this->units[_otherUnitID].buildingHeight)
+                                        - this->units[_otherUnitID].terrainOrClimbHeight)
+                                    > 0x20) {
+                                    continue;
+                                }
+                                if ((this->units[unitID].unitType == OpenSHC::Map::Units::UT_LIONSHWOLF
+                                        || this->units[unitID].unitType == OpenSHC::Map::Units::UT_CAGEDOG)
+                                    && this->units[_otherUnitID].isStalked != 0 && _slot >= 8) {
+                                    continue;
+                                }
+                                this->units[unitID].attackedUnitID = (short)_otherUnitID;
+                                this->units[unitID].field191_0x340 = this->units[_otherUnitID].uid;
                                 MACRO_CALL_MEMBER(
-                                    OpenSHC::Map::Units::UnitsState_Func::setFacingDirectionTowardUnitMicro, this)(
-                                    _otherUnitID, unitID);
+                                    OpenSHC::Map::Units::UnitsState_Func::setFacingDirectionTowardUnitMicro,
+                                    DAT_UnitsState::ptr)(unitID, _otherUnitID);
+                                break;
                             }
+                            if (this->units[unitID].attackedUnitID != 0) {
+                                if (this->units[_otherUnitID].someUnitStat2_meleeDamageUnk != 0
+                                    && this->units[_otherUnitID].attackedUnitID == 0
+                                    && this->units[_otherUnitID].unknownMovementRelated_0x2d2 == 0) {
+                                    this->units[_otherUnitID].attackedUnitID = (short)unitID;
+                                    this->units[_otherUnitID].field191_0x340 = this->units[unitID].uid;
+                                    MACRO_CALL_MEMBER(
+                                        OpenSHC::Map::Units::UnitsState_Func::setFacingDirectionTowardUnitMicro,
+                                        DAT_UnitsState::ptr)(_otherUnitID, unitID);
+                                }
+                                _engage = 1;
+                            }
+                        }
+                        if (_engage) {
                             if (this->units[unitID].state.generic != OpenSHC::Map::Units::States::US_MELEE_ATTACK) {
                                 if (this->units[unitID].movementRelated == 8) {
                                     MACRO_CALL_MEMBER(
@@ -600,7 +584,7 @@ namespace Map {
                                     this->units[unitID].state.generic = OpenSHC::Map::Units::States::US_MELEE_ATTACK;
                                     this->units[unitID].SA = 0;
                                     this->units[unitID].animationCycleNumber = 0;
-                                    this->units[DAT_CurrentUnitSlotID::instance].substate = 0;
+                                    DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].substate = 0;
                                 } else {
                                     this->units[unitID].field259_0x3d2 = 1;
                                 }
