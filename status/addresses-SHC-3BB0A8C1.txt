@@ -17753,7 +17753,7 @@ SHC_3BB0A8C1_0x00458E60 | 33.3% | Loop base reg choice
 
 SHC_3BB0A8C1_0x00458EC0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00458F70 | 11.7% | Zero-reg and base choice
+SHC_3BB0A8C1_0x00458F70 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00459080 | 86.0% | Shared tail placed differently
 
