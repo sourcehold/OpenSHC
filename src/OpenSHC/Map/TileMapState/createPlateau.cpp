@@ -1,6 +1,7 @@
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"
+#include "OpenSHC/Map/TileMapState/NeighbourFlagsAsm.hpp"
 
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
@@ -34,68 +35,50 @@ namespace Map {
         /* the original reuses the brush parameter to hold the size */
         brush = DAT_TerrainDefinedData::instance.BrushSizeArray[brush];
 
-        byte maxHeightInBrush = 0;
-        int index = 0;
-        if (brush > 0) {
-            do {
-                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
-                    1, index, &tile, (int*)&the_y, baseTile, baseY);
-                if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) == 0
-                    && maxHeightInBrush < this->HeightLayer[tile]) {
-                    maxHeightInBrush = this->HeightLayer[tile];
-                }
-                index++;
-            } while (index < brush);
+        int maxHeightInBrush = 0;
+        for (int index = 0; index < brush; index++) {
+            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
+                1, index, &tile, (int*)&the_y, baseTile, baseY);
+            if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) == 0
+                && this->HeightLayer[tile] > maxHeightInBrush) {
+                maxHeightInBrush = this->HeightLayer[tile];
+            }
         }
 
         tile = baseTile;
         the_y = baseY;
-        index = 0;
-        if (brush > 0) {
-            do {
-                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
-                    1, index, &tile, (int*)&the_y, baseTile, baseY);
-                if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) == 0
-                    && (this->LogicLayer[tile] & (L_SEA | L_BUILDING | L_KEEP_NON_MANOR_HOUSE | L_MARSH | L_MOAT)) == 0
-                    && this->BuildingLayer[tile] == 0
-                    && (this->LogicLayer[tile]
-                           & (L_WALL_OR_GATEHOUSE | L_BUILDING | L_MOAT_DUG_OR_PLANNED | L_KEEP_NON_MANOR_HOUSE
-                               | L_MOAT))
-                        == 0) {
-                    this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_ROCKY;
-                    if (plateauHeightSetting == 4) {
-                        this->HeightLayer[tile] = 80;
-                    } else if (plateauHeightSetting == 8) {
-                        this->HeightLayer[tile] = 130;
-                    }
-                    this->DefaultHeightLayer[tile] = this->HeightLayer[tile];
-                    if ((this->LogicLayer[tile] & L_RIVER) != 0) {
-                        this->HeightLayer[tile] = this->HeightLayer[tile] - 8;
-                    }
-                    this->Logic2Layer[tile] = (byte)plateauHeightSetting;
-                    this->DAT_SomeTile = tile;
-                    this->DAT_SomeY = the_y;
-
-                    /* mark this tile and its eight neighbours changed, through the layer pointers */
-                    byte* changed = (byte*)this->ptr_ChangedLayer + tile;
-                    int* directionRow = (int*)this->ptr_MovementDirectionTranslationMatrix + the_y * 8;
-                    changed[1] = 2;
-                    changed[-1] = 2;
-                    changed[0] = 2;
-                    byte* northRow = changed + directionRow[0];
-                    northRow[-1] = 2;
-                    northRow[1] = 2;
-                    northRow[0] = 2;
-                    changed = changed + directionRow[4];
-                    changed[-1] = 2;
-                    changed[1] = 2;
-                    changed[0] = 2;
-                    MACRO_CALL_MEMBER(
-                        OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
-                        DAT_PathFindingState::ptr)(the_y, tile);
+        for (int index = 0; index < brush; index++) {
+            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
+                1, index, &tile, (int*)&the_y, baseTile, baseY);
+            int brushTile = tile;
+            uint logic = this->LogicLayer[brushTile];
+            if ((logic & (L_BORDER | L_BORDER_EDGE)) == 0
+                && (logic & (L_SEA | L_BUILDING | L_KEEP_NON_MANOR_HOUSE | L_MARSH | L_MOAT)) == 0
+                && this->BuildingLayer[brushTile] == 0
+                && (logic
+                       & (L_WALL_OR_GATEHOUSE | L_BUILDING | L_MOAT_DUG_OR_PLANNED | L_KEEP_NON_MANOR_HOUSE | L_MOAT))
+                    == 0) {
+                this->LogicLayer[brushTile] = this->LogicLayer[brushTile] & ~L_ROCKY;
+                if (plateauHeightSetting == 4) {
+                    this->HeightLayer[brushTile] = 80;
+                } else if (plateauHeightSetting == 8) {
+                    this->HeightLayer[brushTile] = 130;
                 }
-                index++;
-            } while (index < brush);
+                this->DefaultHeightLayer[brushTile] = this->HeightLayer[brushTile];
+                if ((this->LogicLayer[brushTile] & L_RIVER) != 0) {
+                    this->HeightLayer[brushTile] = this->HeightLayer[brushTile] - 8;
+                }
+                uint brushY = the_y;
+                this->Logic2Layer[brushTile] = (byte)plateauHeightSetting;
+                this->DAT_SomeTile = brushTile;
+                this->DAT_SomeY = brushY;
+
+                /* handwritten assembly in the original: mark this tile and its eight neighbours changed */
+                MACRO_MARK_CHANGED_NEIGHBOURS()
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
+                    DAT_PathFindingState::ptr)(brushY, brushTile);
+            }
         }
     }
 
