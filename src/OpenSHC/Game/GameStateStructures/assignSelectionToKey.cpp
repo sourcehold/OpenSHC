@@ -20,9 +20,11 @@ namespace Game {
     void GameStateStructures::assignSelectionToKey(int number, int tribeID)
     {
         int slotID = 0;
-        for (int tribeIndex = 0; tribeIndex < DAT_TribesState::instance.tribes[tribeID].size; tribeIndex++) {
+        int tribeIndex = 0;
+        while (tribeIndex < DAT_TribesState::instance.tribes[tribeID].size) {
             int unitID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::getUnitIDForIndexInTribe,
                 DAT_TribesState::ptr)(tribeID, tribeIndex);
+            tribeIndex++;
             if ((DAT_UnitsState::instance.units[unitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL)
                 || (DAT_UnitsState::instance.units[unitID].dying != 0)
                 || (DAT_UnitsState::instance.units[unitID].unitType == OpenSHC::Map::Units::UT_LORD)) {
@@ -47,10 +49,8 @@ namespace Game {
                         continue;
                     }
                     while (slot < 2499) {
-                        this->hotkeyTribes[hotkeyID].units[slot].id
-                            = this->hotkeyTribes[hotkeyID].units[slot + 1].id;
-                        this->hotkeyTribes[hotkeyID].units[slot].uid
-                            = this->hotkeyTribes[hotkeyID].units[slot + 1].uid;
+                        this->hotkeyTribes[hotkeyID].units[slot].id = this->hotkeyTribes[hotkeyID].units[slot + 1].id;
+                        this->hotkeyTribes[hotkeyID].units[slot].uid = this->hotkeyTribes[hotkeyID].units[slot + 1].uid;
                         if (this->hotkeyTribes[hotkeyID].units[slot].id == -1) {
                             break;
                         }
