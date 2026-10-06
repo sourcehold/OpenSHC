@@ -64,8 +64,8 @@ namespace Map {
         MappersEnum _commandBuildingType;
         int iVar8;
         int* piVar9;
-        bool bVar10;
-        bool bVar11;
+        int bVar10;
+        int bVar11;
         int _grassCount;
         int _distance;
         int _range;
@@ -78,10 +78,11 @@ namespace Map {
         /* the parameter carries the y position in, then is reused as a tile counter */
         _y = y__fertileLandCount;
         _x = x;
-        bVar11 = buildingSize < 0;
         local_4 = 0;
-        if (bVar11) {
+        int sizeDefaulted = 0;
+        if (buildingSize < 0) {
             buildingSize = 2;
+            sizeDefaulted = 1;
         }
         _commandBuildingType = (MappersEnum)(short)(undefined2)commandBuildingType;
         this->buildingPlacementFail = FALSE;
@@ -145,7 +146,7 @@ namespace Map {
         y__fertileLandCount = 0;
         _grassCount = 0;
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::storeMinAndMaxHeightOfArea, this)(x, _y, buildingSize);
-        if (bVar11)
+        if (sizeDefaulted != 0)
             goto switchD_0050397c_caseD_33;
         if (0x138 < (int)_commandBuildingType) {
             if (325 < (int)_commandBuildingType) {
