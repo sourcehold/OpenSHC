@@ -16961,7 +16961,7 @@ SHC_3BB0A8C1_0x0044F6F0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0044F850 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0044FBF0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0044FBF0 | 100.0% | Reimplemented, only works if global data is instantiated somewhere
 
 SHC_3BB0A8C1_0x00451E00 | 0.0% | Pending
 
