@@ -4,6 +4,7 @@
 #include "OpenSHC/Map/Units/UnitType.hpp"
 
 #include "OpenSHC/Globals/DAT_CurrentUnitSlotID.hpp"
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -33,10 +34,10 @@ namespace Map {
                 && this->units[unitID].unitType != OpenSHC::Map::Units::UT_CAGEDOG) {
                 return;
             }
-            this->units[DAT_CurrentUnitSlotID::instance].state.generic
+            DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state.generic
                 = OpenSHC::Map::Units::States::US_MOVE_TO_DESTINATION;
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::makeUnitStopWalkingByClearingPathProgressState,
-                this)(DAT_CurrentUnitSlotID::instance);
+                DAT_UnitsState::ptr)(DAT_CurrentUnitSlotID::instance);
         }
 
     }
