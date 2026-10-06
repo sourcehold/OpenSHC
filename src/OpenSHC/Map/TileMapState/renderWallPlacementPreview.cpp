@@ -23,8 +23,9 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004FB9E0
     void TileMapState::renderWallPlacementPreview(uint x, uint y, short kind)
     {
-        int size = 0;
+        int index = 0;
         int base = 0;
+        int size = 0;
         if (x > 399) {
             return;
         }
@@ -91,11 +92,12 @@ namespace Map {
         if (this->field80_0x554894 == 5) {
             rotation = this->mapOrientation;
         }
-        if (rotation > 7) {
+        if (rotation >= 8) {
             rotation = rotation - 8;
         }
+        /* the rotation part of the graphic index does not change over the footprint */
+        int variationStep = rotation / 2 * size * size;
 
-        int index = 0;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, size);
             int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile + this->buildingX + x;
@@ -112,18 +114,15 @@ namespace Map {
             index++;
         } while (index < this->constructionTileCount);
 
-        /* the rotation part of the graphic index does not change over the footprint */
-        short variationStep = (short)(rotation / 2) * (short)size * (short)size;
         index = 0;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, size);
-            index++;
             this->ConstructionGFXLayer[DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y]
                                            .addXgetTile
                 + this->buildingX + x]
-                = ((short)this->buildingRotationRelatedValue + (short)GMTotalPicturesProcessed::instance[0x38]
-                      + variationStep + base)
-                - 1;
+                = (short)this->buildingRotationRelatedValue + (short)GMTotalPicturesProcessed::instance[0x38]
+                + (short)variationStep + (short)base - 1;
+            index++;
         } while (index < this->constructionTileCount);
     }
 
