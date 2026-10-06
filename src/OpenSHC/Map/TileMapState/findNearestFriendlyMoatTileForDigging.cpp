@@ -8,6 +8,7 @@
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
+#include "OpenSHC/Globals/DAT_TileMapState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -77,7 +78,7 @@ namespace Map {
                 continue;
             }
 
-            byte pathCost = this->SEC_PathfindingCostTileMap1105[this->moats[moatID].owner][tile];
+            byte pathCost = DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[this->moats[moatID].owner][tile];
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult, DAT_DirectionAlgorithmState::ptr)(
                 unitX, unitY, this->moats[moatID].x, this->moats[moatID].y);
             int score = DAT_DirectionAlgorithmState::instance.distanceHigh;
