@@ -137,7 +137,9 @@ namespace AI {
                 return;
 
             int buildingID;
-            if (unitType == OpenSHC::Map::Units::UT_E_ENGINEER || unitType == OpenSHC::Map::Units::UT_E_LADDER)
+            if (unitType == OpenSHC::Map::Units::UT_E_ENGINEER)
+                buildingID = DAT_GameState::instance.playerDataArray[playerID].engineersGuild.id;
+            else if (unitType == OpenSHC::Map::Units::UT_E_LADDER)
                 buildingID = DAT_GameState::instance.playerDataArray[playerID].engineersGuild.id;
             else if (unitType == OpenSHC::Map::Units::UT_TUNNELER)
                 buildingID = DAT_GameState::instance.playerDataArray[playerID].tunnelersGuild.id;
