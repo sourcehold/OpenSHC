@@ -74,14 +74,16 @@ namespace Game {
                     if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::buildingIsAccessible,
                             DAT_BuildingsState::ptr)(buildingID, 0)
                         != 0) {
-                        int entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
-                        int entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
-                        int chickenUnitID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::spawnUnit,
-                            DAT_UnitsState::ptr)(playerID, playerID, entryX * 8, entryY * 8,
-                            DAT_TileMapState::instance
-                                .HeightLayer[DAT_ViewportRenderState::instance.translationMatrix[entryY].addXgetTile
-                                    + entryX],
-                            OpenSHC::Map::Units::UT_CHICKEN);
+                        int tile
+                            = DAT_ViewportRenderState::instance
+                                  .translationMatrix[DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY]
+                                  .addXgetTile
+                            + DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
+                        int chickenUnitID = MACRO_CALL_MEMBER(
+                            OpenSHC::Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(playerID, playerID,
+                            DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX * 8,
+                            DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY * 8,
+                            DAT_TileMapState::instance.HeightLayer[tile], OpenSHC::Map::Units::UT_CHICKEN);
                         if (chickenUnitID != 0) {
                             int chickenY = DAT_UnitsState::instance.units[chickenUnitID].y;
                             int chickenX = DAT_UnitsState::instance.units[chickenUnitID].x;

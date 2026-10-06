@@ -17681,7 +17681,7 @@ SHC_3BB0A8C1_0x00457FD0 | 84.6% | Loop base reg choice
 
 SHC_3BB0A8C1_0x00458070 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004580C0 | 90.8% | Reg alloc differs
+SHC_3BB0A8C1_0x004580C0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004580F0 | 0.0% | Pending
 
