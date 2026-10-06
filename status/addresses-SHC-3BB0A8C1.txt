@@ -35501,7 +35501,7 @@ SHC_3BB0A8C1_0x004D2870 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D28B0 | 86.3% | select call block layout diffe
 
-SHC_3BB0A8C1_0x004D2A70 | 30.0% | Register allocation differs
+SHC_3BB0A8C1_0x004D2A70 | 54.3% | regalloc/spills differ
 
 SHC_3BB0A8C1_0x004D2E00 | 100.0% | Reimplemented
 

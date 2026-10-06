@@ -21,6 +21,7 @@ namespace AI {
         int aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
         if (aiType == 0)
             return;
+        int i = 0;
         int aicIndex = aiType - 1;
 
         DAT_GameState::instance.playerDataArray[playerID].raidRetargetDelayCounter++;
@@ -28,12 +29,13 @@ namespace AI {
             >= this->aics[aicIndex].RaidRetargetDelay)
             DAT_GameState::instance.playerDataArray[playerID].raidRetargetDelayCounter = 0;
 
-        if (DAT_GameState::instance.playerDataArray[playerID].totalRaidingTroopsUnk == 0)
+        int totalRaidingTroopsUnk = DAT_GameState::instance.playerDataArray[playerID].totalRaidingTroopsUnk;
+        if (totalRaidingTroopsUnk == 0)
             DAT_GameState::instance.playerDataArray[playerID].someTotalDefenseTroopsRelatedCountdown = 0;
         else if (DAT_GameState::instance.playerDataArray[playerID].someTotalDefenseTroopsRelatedCountdown > 0)
             DAT_GameState::instance.playerDataArray[playerID].someTotalDefenseTroopsRelatedCountdown--;
 
-        for (int i = 0; i < 6; i++) {
+        for (; i < 6; i++) {
             int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[180 + i];
             DAT_TribesState::instance.tribes[tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
             if (tribeID == 0)
@@ -43,20 +45,21 @@ namespace AI {
                 continue;
 
             int buildingID = 0;
+            int playerID_askerUnk = DAT_GameState::instance.playerDataArray[playerID].playerID_askerUnk;
             if (DAT_GameState::instance.playerDataArray[playerID].requestStateUnk == 2
                 && MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::getAliveLordForPlayer, DAT_UnitsState::ptr)(
-                       DAT_GameState::instance.playerDataArray[playerID].playerID_askerUnk)
+                       playerID_askerUnk)
                     != 0) {
                 if (DAT_GameState::instance.playerDataArray[playerID].raidRetargetDelayCounter != 0)
                     continue;
                 buildingID
                     = MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::selectRandomBuildingIDFromListOfBuildingTypes,
-                        this)(DAT_GameState::instance.playerDataArray[playerID].playerID_askerUnk, i);
+                        this)(playerID_askerUnk, i);
                 if (buildingID == 0)
                     buildingID = MACRO_CALL_MEMBER(
                         OpenSHC::AI::AICState_Func::selectBuildingFromAListOfBuildingTypes, this)(playerID);
             } else if (DAT_GameState::instance.playerDataArray[playerID].someTotalDefenseTroopsRelatedCountdown == 0
-                && DAT_GameState::instance.playerDataArray[playerID].totalRaidingTroopsUnk < MACRO_CALL_MEMBER(
+                && totalRaidingTroopsUnk < MACRO_CALL_MEMBER(
                        OpenSHC::AI::AICState_Func::getCurrentDesiredAttackRaidUnitCount, this)(aicIndex, playerID)) {
                 if (DAT_GameState::instance.playerDataArray[playerID].raidRetargetDelayCounter != 0)
                     continue;
