@@ -41,6 +41,8 @@ namespace Map {
             if (_buildingType == OpenSHC::Map::Buildings::BT_TOWER1) {
                 _tileCapacity = 5;
             }
+            int _buildingY = (short)DAT_BuildingsState::instance.buildings[_buildingID].y;
+            int _buildingX = (short)DAT_BuildingsState::instance.buildings[_buildingID].x;
             int _ownUnitsOnBuilding = 0;
             for (int _constructionTile = 0; _constructionTile < DAT_TileMapState::instance.constructionTileCount;
                 ++_constructionTile) {
@@ -49,11 +51,9 @@ namespace Map {
                     _constructionTile, DAT_BuildingsState::instance.buildings[_buildingID].widthOrHeight);
                 for (int _otherUnitID = (short)DAT_TileMapState::instance
                          .UnitLayer[DAT_ViewportRenderState::instance
-                                        .translationMatrix[DAT_TileMapState::instance.buildingY
-                                            + (short)DAT_BuildingsState::instance.buildings[_buildingID].y]
+                                        .translationMatrix[DAT_TileMapState::instance.buildingY + _buildingY]
                                         .addXgetTile
-                             + DAT_TileMapState::instance.buildingX
-                             + (short)DAT_BuildingsState::instance.buildings[_buildingID].x];
+                             + DAT_TileMapState::instance.buildingX + _buildingX];
                     _otherUnitID != 0;
                     _otherUnitID = (short)DAT_UnitsState::instance.units[_otherUnitID].nextUnitOnTheSameTile) {
                     if (DAT_UnitsState::instance.units[_otherUnitID].owner
@@ -65,16 +65,17 @@ namespace Map {
             if (_ownUnitsOnBuilding < _tileCapacity / 2) {
                 return FALSE;
             }
-            if (_tileCapacity <= _ownUnitsOnBuilding) {
+            if (_ownUnitsOnBuilding >= _tileCapacity) {
                 return TRUE;
             }
+            int _freeCapacity = _tileCapacity - _ownUnitsOnBuilding;
             int _selectedUnitCount = 0;
-            for (int i = 0; i < 27; ++i) {
-                if (i != 6 && i != 8 && i != 11 && i != 12 && i != 13 && i != 14) {
+            for (int i = 0; i <= 26; ++i) {
+                if (i != 6 && i != 8 && i != 13 && i != 12 && i != 11 && i != 14) {
                     _selectedUnitCount = _selectedUnitCount + (&this->selectionEuropeanArchers)[i];
                 }
             }
-            return (BOOLEnum)((_tileCapacity - _ownUnitsOnBuilding) * 2 < _selectedUnitCount);
+            return (BOOLEnum)(_selectedUnitCount > _freeCapacity * 2);
         }
 
     }
