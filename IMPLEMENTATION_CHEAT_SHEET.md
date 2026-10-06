@@ -178,8 +178,12 @@ keeping each conversion only if the measurement improves. Converting a whole fun
 granularity and will throw away most of the value: on that basis `computeLadderClimbPath` and
 `findNearestEnemyAndHeadTowardsIt` both measured *worse* and were rejected, yet per field they are worth
 42.6% -> 86.6% (`pathPlanStart` alone) and 40.1% -> 64.1% (four fields). A greedy cumulative loop over the
-distinct fields is enough; a real conversion moves the quick_diff ratio by 0.1 to 0.4, and anything under about
-0.01 is noise worth reverting rather than committing.
+distinct fields is enough, but read the size of the rise against `quick_diff`'s own caveat about low ratios. A real
+conversion moves it by 0.1 to 0.4. Below about 0.6 absolute, a *small* rise is worthless and often a loss: on
+`setMoveDelayForUnitsOnSameTiles` 0.236 -> 0.285 and `selectNewBlessingTarget` 0.470 -> 0.490 both came back WORSE in
+reccmp (24.1% -> 23.9%, 40.3% -> 36.1%), while every rise over 0.1 held. Above about 0.9 absolute a small rise is
+trustworthy (`applyTunnelDamageAlongPathPlan` +0.013 was really 89.2% -> 96.0%). So: confirm anything under +0.1 with
+`reccmp_report.py --run` before committing it, and expect to revert roughly half of them.
 
 Most functions mix the two forms, so read the original's operands rather than guessing. `lea ebx, [esi + G]`
 with an absolute `G` next to `lea ecx, [esi + edi + 0x614]` in the same prologue is one function using the global
