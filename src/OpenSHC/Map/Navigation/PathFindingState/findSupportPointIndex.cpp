@@ -54,7 +54,7 @@ namespace Map {
                     if (0x13a10 < (int)this->searchQueue.currentDistance) {
                         return 0;
                     }
-                    if (this->searchQueue.currentDistance > max) {
+                    if ((int)this->searchQueue.currentDistance > max) {
                         return 0;
                     }
                     for (int iVar6 = 0; iVar6 < 8; iVar6 = iVar6 + 1) {
@@ -63,7 +63,7 @@ namespace Map {
                                 != 0
                             && (tile = DAT_TileMapState::instance.directionTranslationMatrix[sVar2][iVar6] + iVar4,
                                 DAT_TileMapState::instance.WalkLayer[tile] != this->searchGeneration)) {
-                            if (4 < this->searchQueue.currentDistance
+                            if (4 < (int)this->searchQueue.currentDistance
                                 && (DAT_TileMapState::instance.AIInfoLayer[tile] & 0x40) != 0
                                 && (iVar5
                                     = MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::getSupportPointIndex,
