@@ -118,6 +118,23 @@ being
 SEC_RNG::ptr->currentNumber1 % 4
 ```
 
+### Duplicated Blocks: Being Longer Is Not Evidence
+
+Two identical blocks in the decompiler output are often identical in the original too, and a longer instruction
+stream on our side does **not** show otherwise. `setDestinationForUnit` carried two byte-identical 40-line copies of
+its climb setup and ran 52 instructions longer than the original; folding them into one block behind a flag brought
+the count from 322 to 291 against the original's 270 and still dropped the match from 44.3% to 32.8%. The
+convergence in length was not the signal - the original genuinely has both copies.
+
+What did pay was the narrower case where the shared block sits in two `switch` arms that both `break`:
+`harassBuildingsWithSiegeAI` had the same ammunition check in its catapult and trebuchet arms, and lifting it out
+behind a flag (every `case` kept in the jump table) went 48.3% -> 49.8% with the count moving 237 -> 218 against 223.
+
+So scan for duplicated runs, but treat the result as a candidate list only, and keep a revert-unless-better guard.
+Across `Map::Units::UnitsState` six functions had runs of eight or more duplicated lines and only one was wrong:
+`applyDragBoxSelectionByPriority` (29 lines), `acquireShootTarget` (22) and `shouldUnitsEngageInMelee` (12) all match
+the original's instruction count almost exactly, so their duplication has to stay.
+
 ### Global Instance Instead of `this`
 
 An absolute instance address in the original's operand (`[eax + I<...::UnitsState>::instance+2504]`) where our source
