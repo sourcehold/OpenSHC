@@ -26,6 +26,7 @@
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_EntityState.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
+#include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_HoveredState.hpp"
 #include "OpenSHC/Globals/DAT_LandscapeState.hpp"
@@ -79,7 +80,28 @@ namespace Game {
             return;
         }
         if (DAT_GameSynchronyState::instance.syncStatus != 0) {
-            if (DAT_GameSynchronyState::instance.isHost == FALSE) {
+            if (DAT_GameSynchronyState::instance.isHost != FALSE) {
+                if (DAT_GameSynchronyState::instance.syncStatus == 10) {
+                    MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::checkLagAndSyncStatus,
+                        DAT_GameSynchronyState::ptr)();
+                    return;
+                }
+                if (DAT_GameSynchronyState::instance.syncStatus == 1) {
+                    MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::broadcastDesyncResyncCommands,
+                        DAT_GameSynchronyState::ptr)();
+                    return;
+                }
+                if (DAT_GameSynchronyState::instance.syncStatus == 2) {
+                    MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::sendPendingResyncCommandsInBudget,
+                        DAT_GameSynchronyState::ptr)();
+                    return;
+                }
+                if (DAT_GameSynchronyState::instance.syncStatus > 2) {
+                    MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::advanceSyncStatusAndKickLaggers,
+                        DAT_GameSynchronyState::ptr)();
+                    return;
+                }
+            } else {
                 if (DAT_GameSynchronyState::instance.syncStatus == 10) {
                     DAT_GameSynchronyState::instance.syncStatus = 0xb;
                     MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand,
@@ -92,36 +114,14 @@ namespace Game {
                         DAT_GameSynchronyState::ptr)(OpenSHC::Commands::GCT_SHARE_DESYNC_HASHES);
                     return;
                 }
-                if (DAT_GameSynchronyState::instance.syncStatus != 3) {
-                    DAT_RotateMapOrPullDownTerrain::instance = 0;
+                if (DAT_GameSynchronyState::instance.syncStatus == 3) {
+                    DAT_GameSynchronyState::instance.syncStatus = 4;
+                    MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand,
+                        DAT_GameSynchronyState::ptr)(OpenSHC::Commands::GCT_SEND_KEEP_ALIVE);
                     return;
                 }
-                DAT_GameSynchronyState::instance.syncStatus = 4;
-                MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand,
-                    DAT_GameSynchronyState::ptr)(OpenSHC::Commands::GCT_SEND_KEEP_ALIVE);
-                return;
             }
-            if (DAT_GameSynchronyState::instance.syncStatus == 10) {
-                MACRO_CALL_MEMBER(
-                    OpenSHC::Synchrony::GameSynchronyState_Func::checkLagAndSyncStatus, DAT_GameSynchronyState::ptr)();
-                return;
-            }
-            if (DAT_GameSynchronyState::instance.syncStatus == 1) {
-                MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::broadcastDesyncResyncCommands,
-                    DAT_GameSynchronyState::ptr)();
-                return;
-            }
-            if (DAT_GameSynchronyState::instance.syncStatus == 2) {
-                MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::sendPendingResyncCommandsInBudget,
-                    DAT_GameSynchronyState::ptr)();
-                return;
-            }
-            if (DAT_GameSynchronyState::instance.syncStatus < 3) {
-                DAT_RotateMapOrPullDownTerrain::instance = 0;
-                return;
-            }
-            MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::advanceSyncStatusAndKickLaggers,
-                DAT_GameSynchronyState::ptr)();
+            DAT_RotateMapOrPullDownTerrain::instance = 0;
             return;
         }
         if ((DAT_GameSynchronyState::instance.quitGameVoteRelated != 0)
@@ -135,13 +135,12 @@ namespace Game {
                 DAT_RotateMapOrPullDownTerrain::instance = 1;
             }
         } else if ((DAT_GameCore::instance.gamePausedLogical == 0)
-            || ((int)DAT_TileMapState::instance.DAT_FutureMapOrientation <= 7)) {
-            if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::isGameHaltingMenuOpen, DAT_GameCore::ptr)()
-                == FALSE) {
+            || ((int)DAT_TileMapState::instance.DAT_FutureMapOrientation < 8)) {
+            if (MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::isGameHaltingMenuOpen, DAT_GameCore::ptr)() == FALSE) {
                 MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
                 MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber1, SEC_RNG::ptr)();
                 DAT_GameCore::instance.mapTimeInTicks = DAT_GameCore::instance.mapTimeInTicks + 1;
-                MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::processSingleTimeTick, this)();
+                MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::processSingleTimeTick, DAT_GameState::ptr)();
             }
             if ((int)DAT_TileMapState::instance.DAT_FutureMapOrientation < 8) {
                 DAT_RotateMapOrPullDownTerrain::instance = 1;
@@ -213,8 +212,8 @@ namespace Game {
             OpenSHC::Synchrony::GameSynchronyState_Func::checkSkirmishGameDefeat, DAT_GameSynchronyState::ptr)();
         MACRO_CALL_MEMBER(
             OpenSHC::AI::AIVState_Func::updateBuildingsStateAndUpdateAIBuildingDecisions, DAT_AIVState::ptr)();
-        MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::aiControlNonSkirmishUnitMovement,
-            DAT_TroopValueState::ptr)();
+        MACRO_CALL_MEMBER(
+            OpenSHC::Map::Units::TroopValueState_Func::aiControlNonSkirmishUnitMovement, DAT_TroopValueState::ptr)();
         MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::updateUnits, DAT_UnitsState::ptr)();
         MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::updateEntities, DAT_EntityState::ptr)();
         MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::removeUnitsSameTileLinkageIfNoLongerApplicable,
@@ -223,14 +222,13 @@ namespace Game {
         MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::computePopulationStatistics, this)();
         MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::updateTribeUnitAssignments, DAT_TribesState::ptr)();
         MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::updateTribes, DAT_TribesState::ptr)();
-        MACRO_CALL_MEMBER(
-            OpenSHC::Map::Units::TribesState_Func::spawnQueuedReinforcementWaves, DAT_TribesState::ptr)();
+        MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::spawnQueuedReinforcementWaves, DAT_TribesState::ptr)();
         MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::respawnDeer, DAT_TribesState::ptr)();
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::generateDustClouds, DAT_TileMapState::ptr)();
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateGameRelatedValue, DAT_TileMapState::ptr)();
         MACRO_CALL(OpenSHC::Global_Func::DoNothing)();
-        MACRO_CALL_MEMBER(OpenSHC::Map::WallAndPitchState_Func::updateDestructionConfirmationCountdown,
-            DAT_WallAndPitchState::ptr)();
+        MACRO_CALL_MEMBER(
+            OpenSHC::Map::WallAndPitchState_Func::updateDestructionConfirmationCountdown, DAT_WallAndPitchState::ptr)();
         MACRO_CALL_MEMBER(OpenSHC::UI::HoveredState_Func::clearInvalidatedHoverStates, DAT_HoveredState::ptr)();
         MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::computeArmySizeLimit, this)();
     }
