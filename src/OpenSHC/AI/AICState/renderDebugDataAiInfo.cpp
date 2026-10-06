@@ -31,11 +31,12 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004D1320
     void AICState::renderDebugDataAiInfo(int x, int y, int width, int height)
     {
+        int playerID = 1;
         char text[1000];
 
         // One row of 24 pixels per player, starting one row below y
         y += 24;
-        for (int playerID = 1; playerID <= 8; playerID++, y += 24) {
+        for (; playerID <= 8; playerID++, y += 24) {
             if (DAT_GameState::instance.playerDataArray[playerID].playerDeathRelated != 0) {
                 continue;
             }
