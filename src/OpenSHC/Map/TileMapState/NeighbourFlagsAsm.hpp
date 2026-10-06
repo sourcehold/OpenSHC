@@ -316,4 +316,39 @@
     __asm mov eax, this                                                               \
     __asm mov byte ptr [eax]TileMapState.bitFlag, dl
 
+/*
+  A second handwritten macro: mark DAT_SomeTile and its eight neighbours as changed (2) in the
+  changed layer. It appears verbatim in createPlateau (0x00501F50), useLevelBrush (0x00502110) and
+  useTerrainHeightBrush (0x00502680), each time right after DAT_SomeTile and DAT_SomeY are stored.
+  Same tells as above: a bare push/pop of esi around the north row, and the fields read through the
+  global instance's absolute address.
+
+  Clobbers eax, ecx, edx and esi. "this" is loaded once into ecx (which the original does not need)
+  so that no named operand is resolved while the pushed esi is on the stack.
+*/
+#define MACRO_MARK_CHANGED_NEIGHBOURS()                                               \
+    __asm mov ecx, this                                                               \
+    __asm mov esi, dword ptr [ecx]TileMapState.ptr_ChangedLayer                       \
+    __asm mov eax, dword ptr [ecx]TileMapState.DAT_SomeTile                           \
+    __asm add esi, eax                                                                \
+    __asm push esi                                                                    \
+    __asm mov edx, dword ptr [ecx]TileMapState.ptr_MovementDirectionTranslationMatrix \
+    __asm mov eax, dword ptr [ecx]TileMapState.DAT_SomeY                              \
+    __asm shl eax, 0x5                                                                \
+    __asm add edx, eax                                                                \
+    __asm mov byte ptr [esi + 0x1], 0x2                                               \
+    __asm mov byte ptr [esi - 0x1], 0x2                                               \
+    __asm mov byte ptr [esi], 0x2                                                     \
+    __asm mov ecx, dword ptr [edx]                                                    \
+    __asm add esi, ecx                                                                \
+    __asm mov byte ptr [esi - 0x1], 0x2                                               \
+    __asm mov byte ptr [esi + 0x1], 0x2                                               \
+    __asm mov byte ptr [esi], 0x2                                                     \
+    __asm mov ecx, dword ptr [edx + 0x10]                                             \
+    __asm pop esi                                                                     \
+    __asm add esi, ecx                                                                \
+    __asm mov byte ptr [esi - 0x1], 0x2                                               \
+    __asm mov byte ptr [esi + 0x1], 0x2                                               \
+    __asm mov byte ptr [esi], 0x2
+
 // clang-format on
