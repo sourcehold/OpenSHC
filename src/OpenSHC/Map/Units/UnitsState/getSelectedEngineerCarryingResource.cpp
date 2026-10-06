@@ -5,6 +5,7 @@
 
 #include "OpenSHC/Globals/DAT_CurrentUnitSlotID.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -37,7 +38,7 @@ namespace Map {
                         break;
                     }
                     if (this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_E_ENGINEER
-                        && this->units[DAT_CurrentUnitSlotID::instance].resourceToDeposit != 0) {
+                        && DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].resourceToDeposit != 0) {
                         return DAT_CurrentUnitSlotID::instance;
                     }
                 }

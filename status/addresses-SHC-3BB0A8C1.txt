@@ -51075,7 +51075,7 @@ SHC_3BB0A8C1_0x00535580 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005355E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00535680 | 39.4% | reg alloc differs
+SHC_3BB0A8C1_0x00535680 | 70.6% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x00535700 | 100.0% | Reimplemented
 
