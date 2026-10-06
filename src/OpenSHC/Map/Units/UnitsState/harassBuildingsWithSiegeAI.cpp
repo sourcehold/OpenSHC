@@ -35,33 +35,16 @@ namespace Map {
             int _siegeKind = 0;
             int _searchRange = 200;
             int _isFireBallista = 0;
+            int _needsStoneAmmunition = 0;
             switch (this->units[unitID].unitType) {
             case OpenSHC::Map::Units::UT_S_CATAPULT:
                 _siegeKind = 2;
                 _searchRange = 0x50;
-                if (this->units[unitID].stoneAmmunition < 1) {
-                    if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY
-                        && MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::isAIPlayer,
-                               DAT_GameSynchronyState::ptr)(_playerID)
-                            != FALSE) {
-                        MACRO_CALL(OpenSHC::Synchrony::Actions_Func::TryAcquireAmmunitionOrPlanToBuyStone)(
-                            _playerID, unitID);
-                    }
-                    return 0;
-                }
+                _needsStoneAmmunition = 1;
                 break;
             case OpenSHC::Map::Units::UT_S_TREBUCHET:
                 _siegeKind = 3;
-                if (this->units[unitID].stoneAmmunition < 1) {
-                    if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY
-                        && MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::isAIPlayer,
-                               DAT_GameSynchronyState::ptr)(_playerID)
-                            != FALSE) {
-                        MACRO_CALL(OpenSHC::Synchrony::Actions_Func::TryAcquireAmmunitionOrPlanToBuyStone)(
-                            _playerID, unitID);
-                    }
-                    return 0;
-                }
+                _needsStoneAmmunition = 1;
                 break;
             case OpenSHC::Map::Units::UT_S_MANGONEL:
             case OpenSHC::Map::Units::UT_S_BALLISTA:
@@ -70,6 +53,16 @@ namespace Map {
             case OpenSHC::Map::Units::UT_S_FBALLISTA:
                 _siegeKind = 0x25;
                 _isFireBallista = 1;
+            }
+            if (_needsStoneAmmunition != 0 && this->units[unitID].stoneAmmunition < 1) {
+                if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY
+                    && MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::isAIPlayer,
+                           DAT_GameSynchronyState::ptr)(_playerID)
+                        != FALSE) {
+                    MACRO_CALL(OpenSHC::Synchrony::Actions_Func::TryAcquireAmmunitionOrPlanToBuyStone)(
+                        _playerID, unitID);
+                }
+                return 0;
             }
             uint _defaultHeightAtTarget = 0;
             uint _heightAtTarget = 0;
