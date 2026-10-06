@@ -85,15 +85,13 @@ namespace Game {
             int enemyPlayerID = DAT_UnitsState::instance.units[unitID].lastEncounteredEnemyPlayerID;
             DAT_GameSynchronyState::instance.finalResults.finalKillMatrix[enemyPlayerID][playerID]
                 = DAT_GameSynchronyState::instance.finalResults.finalKillMatrix[enemyPlayerID][playerID] + 1;
-            if (this->mapAndTime.playerTeams[enemyPlayerID] != this->mapAndTime.playerTeams[playerID]) {
-                if (DAT_UnitsState::instance.units[unitID].field323_0x442 == 0) {
+            if (DAT_GameState::instance.mapAndTime.playerTeams[enemyPlayerID]
+                != DAT_GameState::instance.mapAndTime.playerTeams[playerID]) {
+                if (DAT_UnitsState::instance.units[unitID].field323_0x442 != 0) {
                     DAT_GameSynchronyState::instance.finalResults.finalTroopsKilledWeighted[enemyPlayerID]
-                        = DAT_GameSynchronyState::instance.finalResults.finalTroopsKilledWeighted[enemyPlayerID]
-                        + lossValue;
+                        += lossValue / 4;
                 } else {
-                    DAT_GameSynchronyState::instance.finalResults.finalTroopsKilledWeighted[enemyPlayerID]
-                        = DAT_GameSynchronyState::instance.finalResults.finalTroopsKilledWeighted[enemyPlayerID]
-                        + lossValue / 4;
+                    DAT_GameSynchronyState::instance.finalResults.finalTroopsKilledWeighted[enemyPlayerID] += lossValue;
                 }
             }
             DAT_GameState::instance.playerDataArray[playerID].unusedEnemyAttackTracker[enemyPlayerID][0]
