@@ -36,8 +36,8 @@ namespace Map {
             int _unitPlayerID = (int)this->units[unitID].owner;
             int _microXUnit = (int)this->units[unitID].microXPosition;
             int _microYUnit = (int)this->units[unitID].microYPosition;
-            int _unitTotalHeight = (int)DAT_UnitsState::instance.units[unitID].buildingHeight
-                + (int)this->units[unitID].terrainOrClimbHeight;
+            int _unitTotalHeight
+                = (int)this->units[unitID].buildingHeight + (int)this->units[unitID].terrainOrClimbHeight;
             int _validTargetID = 0;
             int _bestScore = 100000;
             int _shotDistance = 0;
@@ -48,8 +48,11 @@ namespace Map {
             case OpenSHC::Map::Units::UT_E_XBOW:
                 _entityType = 7;
                 break;
-            default:
-                _entityType = 1;
+            case OpenSHC::Map::Units::UT_A_SLINGER:
+                _entityType = 0x21;
+                break;
+            case OpenSHC::Map::Units::UT_A_FIRETHROWER:
+                _entityType = 0x22;
                 break;
             case OpenSHC::Map::Units::UT_S_CATAPULT:
                 _entityType = 2;
@@ -73,14 +76,11 @@ namespace Map {
             case OpenSHC::Map::Units::UT_S_BALLISTA:
                 _entityType = 0x14;
                 break;
-            case OpenSHC::Map::Units::UT_A_SLINGER:
-                _entityType = 0x21;
-                break;
-            case OpenSHC::Map::Units::UT_A_FIRETHROWER:
-                _entityType = 0x22;
-                break;
             case OpenSHC::Map::Units::UT_S_FBALLISTA:
                 _entityType = 0x25;
+                break;
+            default:
+                _entityType = 1;
             }
             int _rangeSquared = DAT_EntityDefinedData::instance.EntityTypeArrayForProjectileRange[_entityType]
                 * DAT_EntityDefinedData::instance.EntityTypeArrayForProjectileRange[_entityType];
@@ -103,7 +103,7 @@ namespace Map {
                     && this->units[_0x04_targetUnitID].logicalState == OpenSHC::Map::Units::ULS_NORMAL) {
                     BOOLEnum _targetIsAliveCitizen
                         = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::checkIfCitizenUnitIsAliveBasedOnState,
-                            this)(_0x04_targetUnitID);
+                            DAT_UnitsState::ptr)(_0x04_targetUnitID);
                     if (_targetIsAliveCitizen == FALSE
                         && this->units[_0x04_targetUnitID].state.generic
                             != (OpenSHC::Map::Units::States::US_STONE_DEATH_03
