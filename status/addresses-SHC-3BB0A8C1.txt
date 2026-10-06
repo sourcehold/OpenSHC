@@ -40575,7 +40575,7 @@ SHC_3BB0A8C1_0x004FB770 | 76.7% | gfx expression regalloc
 
 SHC_3BB0A8C1_0x004FB7D0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004FB8E0 | 28.2% | ecx not kept across callee
+SHC_3BB0A8C1_0x004FB8E0 | 97.0% | LTCG, add operand order
 
 SHC_3BB0A8C1_0x004FB970 | 96.8% | LTCG, add operand order
 
