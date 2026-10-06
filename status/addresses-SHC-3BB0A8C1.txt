@@ -51241,7 +51241,7 @@ SHC_3BB0A8C1_0x005377F0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00537840 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00537880 | 28.6% | retry loop shape differs
+SHC_3BB0A8C1_0x00537880 | 39.1% | frame size, reg alloc
 
 SHC_3BB0A8C1_0x005378D0 | 0.0% | Pending
 

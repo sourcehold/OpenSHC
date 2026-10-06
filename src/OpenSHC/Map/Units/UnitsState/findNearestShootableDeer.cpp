@@ -6,6 +6,7 @@
 
 #include "OpenSHC/Globals/DAT_DirectionAlgorithmState.hpp"
 #include "OpenSHC/Globals/DAT_EntityState.hpp"
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -21,7 +22,7 @@ namespace Map {
                 int _bestDistance = 100000;
                 int _bestUnitID = 0;
                 for (int _deerUnitID = 1; _deerUnitID < (int)this->maxUnitCount; ++_deerUnitID) {
-                    if (this->units[_deerUnitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
+                    if (DAT_UnitsState::instance.units[_deerUnitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
                         continue;
                     }
                     if (this->units[_deerUnitID].dying != 0) {
