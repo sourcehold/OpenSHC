@@ -51217,7 +51217,7 @@ SHC_3BB0A8C1_0x00536DE0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00536E10 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00536E30 | 55.4% | byte stack slots, reg alloc
+SHC_3BB0A8C1_0x00536E30 | 74.4% | this/tribeID register swap
 
 SHC_3BB0A8C1_0x00537070 | 86.4% | enum cast, reg alloc
 

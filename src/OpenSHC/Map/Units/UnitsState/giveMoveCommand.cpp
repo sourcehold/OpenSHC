@@ -41,8 +41,10 @@ namespace Map {
             dword _areaAtDestination
                 = (short)DAT_TileMapState::instance
                       .PathConnectionLayer[DAT_ViewportRenderState::instance.viewportState.field24_0x60];
-            uint _logicAtDestination
-                = DAT_TileMapState::instance.LogicLayer[DAT_ViewportRenderState::instance.viewportState.field24_0x60];
+            uint _blockedAtDestination
+                = DAT_TileMapState::instance.LogicLayer[DAT_ViewportRenderState::instance.viewportState.field24_0x60]
+                & 0x10000100;
+            int _canReachDestination = 0;
             int _combatUnitID
                 = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::selectionContainsCombatUnit, this)(1);
             dword _areaAtUnit = (short)DAT_TileMapState::instance
@@ -52,29 +54,28 @@ namespace Map {
                 != 0) {
                 return;
             }
-            bool _canReachDestination
-                = MACRO_CALL_MEMBER(
-                      OpenSHC::Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
-                      DAT_PathFindingState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID,
-                      _areaAtDestination, _areaAtUnit,
-                      MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::canAUnitClimb, this)())
-                != 0;
-            if (MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::selectionHasMobileAssaultUnits, this)() != 0) {
-                if ((_logicAtDestination & 0x10000100) != 0
+            if (MACRO_CALL_MEMBER(
+                    OpenSHC::Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
+                    DAT_PathFindingState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID, _areaAtDestination,
+                    _areaAtUnit,
+                    MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::canAUnitClimb, DAT_UnitsState::ptr)())
+                != 0) {
+                _canReachDestination = 1;
+            }
+            if (MACRO_CALL_MEMBER(
+                    OpenSHC::Map::Units::UnitsState_Func::selectionHasMobileAssaultUnits, DAT_UnitsState::ptr)()
+                != 0) {
+                int _destinationY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent
+                                        [DAT_ViewportRenderState::instance.viewportState.field24_0x60];
+                int _destinationX = DAT_ViewportRenderState::instance.viewportState.field24_0x60
+                    - DAT_ViewportRenderState::instance.translationMatrix[_destinationY].addXgetTile;
+                if (_blockedAtDestination != 0
                     || MACRO_CALL_MEMBER(
                            OpenSHC::Map::Navigation::PathFindingState_Func::calculatePathKeepAndWallsGatesNotAllowed,
                            DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[_combatUnitID].x,
-                           DAT_UnitsState::instance.units[_combatUnitID].y,
-                           DAT_ViewportRenderState::instance.viewportState.field24_0x60
-                               - DAT_ViewportRenderState::instance
-                                   .translationMatrix[DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent
-                                           [DAT_ViewportRenderState::instance.viewportState.field24_0x60]]
-                                   .addXgetTile,
-                           DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent
-                               [DAT_ViewportRenderState::instance.viewportState.field24_0x60],
-                           100000)
+                           DAT_UnitsState::instance.units[_combatUnitID].y, _destinationX, _destinationY, 100000)
                         == 0) {
-                    _canReachDestination = false;
+                    _canReachDestination = 0;
                 }
             }
             if (matchUnitSpeeds == 0
@@ -96,31 +97,32 @@ namespace Map {
             if (_mostFrequentUnitType == OpenSHC::Map::Units::UT_S_TREBUCHET) {
                 return;
             }
-            if (!_canReachDestination) {
-                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)(
-                    _mostFrequentUnitType, 9);
-                return;
-            }
-            MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::playUnitSelectionSound, DAT_TribesState::ptr)(
-                tribeID);
-            if (MACRO_CALL_MEMBER(
-                    OpenSHC::Audio::MSS::SoundSystem_Func::shouldSoundXNotBePlaying, DAT_SoundSystemState::ptr)()
-                != FALSE) {
-                return;
-            }
-            if (DAT_UnitsState::instance.units[_combatUnitID].unitType == OpenSHC::Map::Units::UT_E_ENGINEER
-                && DAT_UnitsState::instance.units[_combatUnitID].resourceToDeposit != 0) {
-                return;
-            }
-            short _leaderUnitID = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
-            if ((DAT_UnitsState::instance.units[_leaderUnitID].x - x) + 0x48U > 0x90
-                || (DAT_UnitsState::instance.units[_leaderUnitID].y - y) + 0x48U > 0x90) {
-                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)(
-                    _mostFrequentUnitType, 10);
+            if (_canReachDestination != 0) {
+                MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::playUnitSelectionSound, DAT_TribesState::ptr)(
+                    tribeID);
+                if (MACRO_CALL_MEMBER(
+                        OpenSHC::Audio::MSS::SoundSystem_Func::shouldSoundXNotBePlaying, DAT_SoundSystemState::ptr)()
+                    != FALSE) {
+                    return;
+                }
+                if (DAT_UnitsState::instance.units[_combatUnitID].unitType == OpenSHC::Map::Units::UT_E_ENGINEER
+                    && DAT_UnitsState::instance.units[_combatUnitID].resourceToDeposit != 0) {
+                    return;
+                }
+                int _leaderUnitID = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
+                int _distanceX = this->units[_leaderUnitID].x - x;
+                int _distanceY = this->units[_leaderUnitID].y - y;
+                if (_distanceX + 0x48U <= 0x90 && _distanceY + 0x48U <= 0x90) {
+                    MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)(
+                        _mostFrequentUnitType, 6);
+                } else {
+                    MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)(
+                        _mostFrequentUnitType, 10);
+                }
                 return;
             }
             MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)(
-                _mostFrequentUnitType, 6);
+                _mostFrequentUnitType, 9);
         }
 
     }
