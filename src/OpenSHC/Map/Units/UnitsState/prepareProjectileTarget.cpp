@@ -77,13 +77,18 @@ namespace Map {
             /* the original returns whatever the switch below left in the return register on
                the paths that adjust nothing, which is the type's index into it; the value is
                not a meaningful result, but callers of those paths are given it */
-            int _unhandledTypeResult = (short)this->units[shooterID].unitType + -0x16;
             int _scatter;
-            if (this->units[shooterID].shootTargetZ < this->units[shooterID].terrainOrClimbHeight) {
+            /* The original's jump tables carry entries for the archers that end up in the same place as
+               every other unhandled type, so their arms did something that was optimised away. */
+            int _archerScatter;
+            if (this->units[shooterID].terrainOrClimbHeight > this->units[shooterID].shootTargetZ) {
                 switch (this->units[shooterID].unitType) {
                 case OpenSHC::Map::Units::UT_S_CATAPULT:
                 case OpenSHC::Map::Units::UT_S_BALLISTA:
                     _scatter = 0x14;
+                    break;
+                case OpenSHC::Map::Units::UT_S_FBALLISTA:
+                    _scatter = 10;
                     break;
                 case OpenSHC::Map::Units::UT_S_TREBUCHET:
                     _scatter = 0x32;
@@ -91,11 +96,12 @@ namespace Map {
                 case OpenSHC::Map::Units::UT_S_MANGONEL:
                     _scatter = 0x3c;
                     break;
-                case OpenSHC::Map::Units::UT_S_FBALLISTA:
-                    _scatter = 10;
-                    break;
+                case OpenSHC::Map::Units::UT_E_ARCHER:
+                case OpenSHC::Map::Units::UT_E_ARCHER_DEBUG:
+                    _archerScatter = 0;
+                    return this->units[shooterID].unitType - 0x16;
                 default:
-                    return _unhandledTypeResult;
+                    return this->units[shooterID].unitType - 0x16;
                 }
             } else {
                 _scatter = this->units[shooterID].shootTargetZ - this->units[shooterID].terrainOrClimbHeight;
@@ -114,10 +120,14 @@ namespace Map {
                     _scatter = _scatter + 0x46;
                     break;
                 case OpenSHC::Map::Units::UT_S_FBALLISTA:
-                    return _unhandledTypeResult;
+                    return this->units[shooterID].unitType - 0x16;
+                case OpenSHC::Map::Units::UT_E_ARCHER:
+                case OpenSHC::Map::Units::UT_E_ARCHER_DEBUG:
+                    _archerScatter = 0;
+                    break;
                 }
                 if (_scatter <= 0) {
-                    return _unhandledTypeResult;
+                    return this->units[shooterID].unitType - 0x16;
                 }
                 if (_scatter > 0x118) {
                     _scatter = 0x118;
@@ -125,7 +135,7 @@ namespace Map {
             }
             int _rng = SEC_RNG::instance.currentNumber2;
             MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
-            _unhandledTypeResult = (_rng / 300) * 300;
+            int _unhandledTypeResult = (_rng / 300) * 300;
             if (_rng % 300 >= _scatter) {
                 return _unhandledTypeResult;
             }
