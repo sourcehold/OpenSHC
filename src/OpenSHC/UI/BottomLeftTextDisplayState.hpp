@@ -38,8 +38,8 @@ namespace UI {
         BottomLeftTextDisplayState() {};
         ~BottomLeftTextDisplayState() {};
 
-        void setBottomLeftTextDisplayText(int messageTypeUnk, int textGroupIndex, int textNumInGroup,
-            TextMessageBLLookupStructUnion param_4, int importanceUnk, int displayDurationUnk);
+        void setBottomLeftTextDisplayText(int messageTypeUnk, int textGroupIndex, int textNumInGroup, int param_4,
+            int importanceUnk, int displayDurationUnk);
 
         void hasPassedCountdownOrDuration();
 

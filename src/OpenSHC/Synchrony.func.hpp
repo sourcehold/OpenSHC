@@ -68,8 +68,8 @@ namespace Synchrony_Func {
     ProgressBarRelated;
 
     MACRO_FUNCTION_RESOLVER(
-        void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004AEA10, &OpenSHC::Synchrony::syncPlayerGroupArrays)
-    syncPlayerGroupArrays;
+        void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004AEA10, &OpenSHC::Synchrony::SyncPlayerGroupArrays)
+    SyncPlayerGroupArrays;
 
     MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int missionID), false, Address::SHC_3BB0A8C1_0x004C6B20,
         &OpenSHC::Synchrony::LoadSkirmishCampaignData)

@@ -63,7 +63,7 @@ namespace Game {
 
         void processUnitLossStatistic(int playerID, int unitID);
 
-        uint setLastEncounteredTroopUnit(int playerID, int unitID);
+        void setLastEncounteredTroopUnit(int playerID, int unitID);
 
         void updateDateAndTime(BOOLEnum startOfWeekAsCurrentTickIs0, int currentTick);
 

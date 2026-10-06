@@ -68,7 +68,7 @@ namespace Map {
         ushort MiscDisplayLayer[80400]; // 0x00301C80 length: 160800
         byte DamageLayer[80400]; // 0x003290A0 length: 80400
         ushort MacroLayer[80400]; // 0x0033CAB0 length: 160800
-        ushort PathConnectionLayer[80400]; // 0x00363ED0 length: 160800
+        short PathConnectionLayer[80400]; // 0x00363ED0 length: 160800
         uchar PathLinkageLayer[80400]; // 0x0038B2F0 length: 80400
         uchar OccupancyLayer[80400]; // 0x0039ED00 length: 80400
         short CertainPathLayer[80400]; // 0x003B2710 length: 160800
@@ -82,7 +82,7 @@ namespace Map {
         undefined4 someLimit; // 0x00500224 length: 4
         undefined4 someYLike; // 0x00500228 length: 4
         undefined4 someYLikeLimit; // 0x0050022C length: 4
-        byte mapping40x40[40][40]; // 0x00500230 length: 1600
+        char mapping40x40[40][40]; // 0x00500230 length: 1600
         Moat moats[16000]; // 0x00500870 length: 256000
         int currentMoatCount; // 0x0053F070 length: 4
         undefined4 moatTileCount; // 0x0053F074 length: 4

@@ -44,8 +44,8 @@ namespace Map {
             short microX; // 0x0000005C length: 2
             short microY; // 0x0000005E length: 2
             undefined1 padding_0x60[2]; // 0x00000060 length: 2
-            ushort xPosition; // 0x00000062 length: 2
-            ushort yPosition; // 0x00000064 length: 2
+            short xPosition; // 0x00000062 length: 2
+            short yPosition; // 0x00000064 length: 2
             undefined1 padding_0x66[2]; // 0x00000066 length: 2
             uint tile; // 0x00000068 length: 4
             short size; // 0x0000006C length: 2

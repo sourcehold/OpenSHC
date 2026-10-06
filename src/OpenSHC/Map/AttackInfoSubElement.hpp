@@ -8,58 +8,75 @@
 
 #pragma once
 
-#include "OpenSHC/Map/AttackInfoSomeArrayElement.hpp"
+#include "OpenSHC/AI/Siege/EngineerBuildingAndCountPair.hpp"
+#include "OpenSHC/Map/AttackInfoSubArrayElement1.hpp"
+#include "OpenSHC/Map/AttackInfoSubArrayElement2.hpp"
 
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::Map::AttackInfoSomeArrayElement;
+    using OpenSHC::AI::Siege::EngineerBuildingAndCountPair;
+    using OpenSHC::Map::AttackInfoSubArrayElement1;
+    using OpenSHC::Map::AttackInfoSubArrayElement2;
 
 #pragma pack(push, 1)
     // SIZE: 0x000177BC
     typedef struct AttackInfoSubElement {
 
-        int currentPlayerID_OR_attackedPlayerID_OR_one; // 0x00000000 length: 4
-        int hack1; // 0x00000004 length: 4
-        int hack2; // 0x00000008 length: 4
-        int hack3; // 0x0000000C length: 4
-        int field4_0x10[4000]; // 0x00000010 length: 16000
-        undefined1 padding_0x3e90[16]; // 0x00003E90 length: 16
-        int someMinimumDistance; // 0x00003EA0 length: 4
-        int field22_0x3ea4; // 0x00003EA4 length: 4
+        int attackedPlayerID; // 0x00000000 length: 4
+        int hackValue1; // 0x00000004 length: 4
+        int hackValue2; // 0x00000008 length: 4
+        int hackValue3; // 0x0000000C length: 4
+        AttackInfoSubArrayElement2 hackValuesArray[1001]; // 0x00000010 length: 16016
+        int minPathCostToKeep; // 0x00003EA0 length: 4
+        int minPathCostToGate; // 0x00003EA4 length: 4
         undefined1 padding_0x3ea8[4]; // 0x00003EA8 length: 4
-        int stone1; // 0x00003EAC length: 4
-        int scale1; // 0x00003EB0 length: 4
-        int scale2; // 0x00003EB4 length: 4
-        int scale3; // 0x00003EB8 length: 4
-        int field31_0x3ebc[1000][4]; // 0x00003EBC length: 16000
-        undefined1 padding_0x7d3c[16]; // 0x00007D3C length: 16
-        int town1; // 0x00007D4C length: 4
-        int some1000ArrayIndex; // 0x00007D50 length: 4
-        int town2; // 0x00007D54 length: 4
-        AttackInfoSomeArrayElement some1000Array[1000]; // 0x00007D58 length: 16000
-        undefined1 padding_0xbbd8[16]; // 0x0000BBD8 length: 16
-        int gate1; // 0x0000BBE8 length: 4
-        int some1000ArrayIndex_2; // 0x0000BBEC length: 4
-        int gate2; // 0x0000BBF0 length: 4
-        int field71_0xbbf4[1000][4]; // 0x0000BBF4 length: 16000
-        undefined1 padding_0xfa74[16]; // 0x0000FA74 length: 16
+        int stoneValue1; // 0x00003EAC length: 4
+        int scaleValue1; // 0x00003EB0 length: 4
+        int scaleValue2; // 0x00003EB4 length: 4
+        int scaleValue3; // 0x00003EB8 length: 4
+        AttackInfoSubArrayElement1 scaleValuesArray[1001]; // 0x00003EBC length: 16016
+        int townValue1; // 0x00007D4C length: 4
+        int townValue22; // 0x00007D50 length: 4
+        int townValue2; // 0x00007D54 length: 4
+        AttackInfoSubArrayElement2 townValuesArray[1001]; // 0x00007D58 length: 16016
+        int gateValue1; // 0x0000BBE8 length: 4
+        int gateValue15; // 0x0000BBEC length: 4
+        int gateValue2; // 0x0000BBF0 length: 4
+        AttackInfoSubArrayElement1 gateValuesArray[1001]; // 0x0000BBF4 length: 16016
         int moat1; // 0x0000FA84 length: 4
-        int field89_0xfa88; // 0x0000FA88 length: 4
-        int moat2; // 0x0000FA8C length: 4
-        undefined1 padding_0xfa90[8]; // 0x0000FA90 length: 8
-        uint field99_0xfa98; // 0x0000FA98 length: 4
-        undefined1 padding_0xfa9c[10988]; // 0x0000FA9C length: 10988
-        int field11088_0x12588; // 0x00012588 length: 4
-        int field11089_0x1258c; // 0x0001258C length: 4
-        int field11090_0x12590; // 0x00012590 length: 4
-        undefined1 padding_0x12594[5004]; // 0x00012594 length: 5004
+        int moat2; // 0x0000FA88 length: 4
+        int moat3; // 0x0000FA8C length: 4
+        AttackInfoSubArrayElement1 moatValuesArray[562]; // 0x0000FA90 length: 8992
+        int createTribeAmount; // 0x00011DB0 length: 4
+        EngineerBuildingAndCountPair engineerBuildingAssignments[250]; // 0x00011DB4 length: 2000
+        int unknown_0x12584; // 0x00012584 length: 4
+        int people1; // 0x00012588 length: 4
+        int people2; // 0x0001258C length: 4
+        int people3; // 0x00012590 length: 4
+        AttackInfoSubArrayElement1 peopleValuesArray[312]; // 0x00012594 length: 4992
+        undefined1 padding_0x13914[12]; // 0x00013914 length: 12
         int wide1; // 0x00013920 length: 4
         int wide2; // 0x00013924 length: 4
         int wide3; // 0x00013928 length: 4
-        undefined1 padding_0x1392c[11808]; // 0x0001392C length: 11808
-        int field27906_0x1674c; // 0x0001674C length: 4
-        undefined1 padding_0x16750[4204]; // 0x00016750 length: 4204
+        AttackInfoSubArrayElement1 wideValuesArray[687]; // 0x0001392C length: 10992
+        undefined1 padding_0x1641c[8]; // 0x0001641C length: 8
+        int tribeIDArraySize; // 0x00016424 length: 4
+        int unknownTribeCounterRelated; // 0x00016428 length: 4
+        int tribeIDArray[50]; // 0x0001642C length: 200
+        int unknownIntArray_0x164f4[50]; // 0x000164F4 length: 200
+        int tribeRelatedArrayValue0UpTo12[50]; // 0x000165BC length: 200
+        undefined1 padding_0x16684[200]; // 0x00016684 length: 200
+        int unknownSignpostRelatedArray[50]; // 0x0001674C length: 200
+        int unknown_0x16814; // 0x00016814 length: 4
+        int delayedWaveAssignmentCount; // 0x00016818 length: 4
+        int unknown_0x1681c; // 0x0001681C length: 4
+        int unknown_0x16820; // 0x00016820 length: 4
+        int knights; // 0x00016824 length: 4
+        int ranged; // 0x00016828 length: 4
+        undefined1 padding_0x1682c[8]; // 0x0001682C length: 8
+        int tilemapOffset; // 0x00016834 length: 4
+        byte unknownTail[3972]; // 0x00016838 length: 3972
 
     } AttackInfoSubElement;
 #pragma pack(pop)

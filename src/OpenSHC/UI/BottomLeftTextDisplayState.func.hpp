@@ -3,15 +3,11 @@
 */
 
 #include "OpenSHC/UI/BottomLeftTextDisplayState.hpp"
-#include "OpenSHC/UI/TextMessageBLLookupStructUnion.hpp"
 namespace OpenSHC {
 namespace UI {
     namespace BottomLeftTextDisplayState_Func {
 
-        using OpenSHC::UI::TextMessageBLLookupStructUnion;
-
-        MACRO_FUNCTION_RESOLVER(
-            void (BottomLeftTextDisplayState::*)(int, int, int, TextMessageBLLookupStructUnion, int, int), false,
+        MACRO_FUNCTION_RESOLVER(void (BottomLeftTextDisplayState::*)(int, int, int, int, int, int), false,
             Address::SHC_3BB0A8C1_0x004F4E00, &BottomLeftTextDisplayState::setBottomLeftTextDisplayText)
         setBottomLeftTextDisplayText;
 

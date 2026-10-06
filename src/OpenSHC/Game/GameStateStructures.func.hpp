@@ -46,7 +46,7 @@ namespace Game {
             &GameStateStructures::processUnitLossStatistic)
         processUnitLossStatistic;
 
-        MACRO_FUNCTION_RESOLVER(uint (GameStateStructures::*)(int, int), false, Address::SHC_3BB0A8C1_0x004565A0,
+        MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(int, int), false, Address::SHC_3BB0A8C1_0x004565A0,
             &GameStateStructures::setLastEncounteredTroopUnit)
         setLastEncounteredTroopUnit;
 

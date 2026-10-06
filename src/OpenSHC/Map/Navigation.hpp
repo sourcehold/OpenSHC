@@ -12,7 +12,7 @@ namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
-        int __cdecl calcApproxEuclideanDistance(int param_1, int param_2, int param_3, int param_4);
+        int __cdecl CalcApproxEuclideanDistance(int param_1, int param_2, int param_3, int param_4);
 
         void __cdecl UpdateClimbDataState01();
 

@@ -403,6 +403,10 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x004A67D0, &PathFindingState::spawnUnitAndAddToTribe)
             spawnUnitAndAddToTribe;
 
+            MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(), false, Address::SHC_3BB0A8C1_0x004A6940,
+                &PathFindingState::searchCertainPathLayer)
+            searchCertainPathLayer;
+
             MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int), false, Address::SHC_3BB0A8C1_0x004A69F0,
                 &PathFindingState::computeAttackVectorsBasedOnXAndY)
             computeAttackVectorsBasedOnXAndY;
