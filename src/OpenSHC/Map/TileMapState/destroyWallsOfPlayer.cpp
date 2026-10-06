@@ -47,12 +47,12 @@ namespace Map {
             this->DamageLayer[tile] = 0;
             uint y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
             DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
-            this->field204_0x554a30 = 1;
-            int rowTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
+            DAT_TileMapState::instance.field204_0x554a30 = 1;
+            int x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
                 DAT_PathFindingState::ptr)(y, tile);
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
-                DAT_PathFindingState::ptr)(7, tile - rowTile, y);
+                DAT_PathFindingState::ptr)(7, x, y);
         }
     }
 
