@@ -23,7 +23,6 @@ namespace Map {
         using OpenSHC::Map::Units::UnitType;
         using OpenSHC::Map::Units::States::UnitState;
 
-#pragma optimize("y", off)
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00549C70
         void UnitsState::processMeleeInitiation(int unitID)
@@ -31,7 +30,6 @@ namespace Map {
         {
             int _neighbourHeights[8];
             int _totalHeight;
-            uint* _occupancyRow;
             int _adjacentTiles[24];
             int _otherUnitID;
             if (this->units[unitID].someUnitStat2_meleeDamageUnk != 0 && this->units[unitID].unknownTestAgainst0_2 == 0
@@ -39,18 +37,11 @@ namespace Map {
                 && this->units[unitID].logicalState == OpenSHC::Map::Units::ULS_NORMAL && this->units[unitID].dying == 0
                 && this->units[unitID].moveRelatedFlag != 1) {
                 int _distanceThreshold;
-                if (this->units[unitID].stateBasedSpeed <= 0) {
-                    /*
-                      50 or 150 depending on selectable
-                     */
-
-                    if (this->units[unitID].isSelectable_OR_matchTime != 0) {
-                        _distanceThreshold = 150;
-                    } else {
-                        _distanceThreshold = 50;
-                    }
-                } else {
+                if (this->units[unitID].stateBasedSpeed > 0) {
                     _distanceThreshold = 270;
+                } else {
+                    /* 50 or 150 depending on selectable */
+                    _distanceThreshold = this->units[unitID].isSelectable_OR_matchTime != 0 ? 150 : 50;
                 }
                 if (this->units[unitID].closestEnemyMicroDistance <= _distanceThreshold
                     || this->units[unitID].attackedUnitID != 0
@@ -71,113 +62,165 @@ namespace Map {
                     int _hasEnemyOnOwnTile = 0;
                     uint _teamBitFlags = MACRO_CALL_MEMBER(
                         OpenSHC::Game::GameStateStructures_Func::teamToBitFlagsUnk, DAT_GameState::ptr)(unitID);
-                    uint _enemyNeighbourFlags = 0;
-                    if ((*(uint*)((uchar*)DAT_TileMapState::instance.ptr_OccupancyLayer
-                             + DAT_TileMapState::instance.DAT_SomeTile + 1)
-                            & _teamBitFlags)
-                        != 0) {
-                        _enemyNeighbourFlags = 0x20;
+                    /* Handwritten assembly in the original: gathers a 24-bit mask of the surrounding tiles
+                       (two rings) whose occupancy has a bit of another team set. It reads a dword at every
+                       tile of the byte layer and parks the row centre with push/pop. */
+                    __asm {
+                        mov edi, dword ptr [DAT_TileMapState::instance]TileMapState.ptr_MovementDirectionTranslationMatrix
+                        mov esi, dword ptr [DAT_TileMapState::instance]TileMapState.ptr_OccupancyLayer
+                        mov eax, dword ptr [DAT_TileMapState::instance]TileMapState.DAT_SomeTile
+                        add esi, eax
+                        push esi
+                        push esi
+                        push esi
+                        mov eax, dword ptr [DAT_TileMapState::instance]TileMapState.DAT_SomeY
+                        shl eax, 5
+                        add edi, eax
+                        mov edx, 0
+                        mov eax, dword ptr [esi + 1]
+                        mov ebx, dword ptr [esi - 1]
+                        and eax, _teamBitFlags
+                        je skip_0x20
+                        or edx, 0x20
+                    skip_0x20:
+                        and ebx, _teamBitFlags
+                        je skip_0x2
+                        or edx, 0x2
+                    skip_0x2:
+                        mov eax, dword ptr [esi + 2]
+                        mov ebx, dword ptr [esi - 2]
+                        and eax, _teamBitFlags
+                        je skip_0x80000
+                        or edx, 0x80000
+                    skip_0x80000:
+                        and ebx, _teamBitFlags
+                        je skip_0x800
+                        or edx, 0x800
+                    skip_0x800:
+                        mov ecx, dword ptr [edi]
+                        add esi, ecx
+                        mov eax, dword ptr [esi - 1]
+                        mov ebx, dword ptr [esi + 1]
+                        mov ecx, dword ptr [esi]
+                        and eax, _teamBitFlags
+                        je skip_0x1
+                        or edx, 0x1
+                    skip_0x1:
+                        and ebx, _teamBitFlags
+                        je skip_0x40
+                        or edx, 0x40
+                    skip_0x40:
+                        and ecx, _teamBitFlags
+                        je skip_0x80
+                        or edx, 0x80
+                    skip_0x80:
+                        mov eax, dword ptr [esi - 2]
+                        mov ebx, dword ptr [esi + 2]
+                        and eax, _teamBitFlags
+                        je skip_0x400
+                        or edx, 0x400
+                    skip_0x400:
+                        and ebx, _teamBitFlags
+                        je skip_0x100000
+                        or edx, 0x100000
+                    skip_0x100000:
+                        mov ecx, dword ptr [edi + 0x10]
+                        pop esi
+                        add esi, ecx
+                        mov eax, dword ptr [esi - 1]
+                        mov ebx, dword ptr [esi + 1]
+                        mov ecx, dword ptr [esi]
+                        and eax, _teamBitFlags
+                        je skip_0x4
+                        or edx, 0x4
+                    skip_0x4:
+                        and ebx, _teamBitFlags
+                        je skip_0x10
+                        or edx, 0x10
+                    skip_0x10:
+                        and ecx, _teamBitFlags
+                        je skip_0x8
+                        or edx, 0x8
+                    skip_0x8:
+                        mov eax, dword ptr [esi - 2]
+                        mov ebx, dword ptr [esi + 2]
+                        and eax, _teamBitFlags
+                        je skip_0x1000
+                        or edx, 0x1000
+                    skip_0x1000:
+                        and ebx, _teamBitFlags
+                        je skip_0x40000
+                        or edx, 0x40000
+                    skip_0x40000:
+                        mov edi, dword ptr [DAT_TileMapState::instance]TileMapState.ptr_MovementDirectionTranslationMatrix
+                        pop esi
+                        mov ebx, dword ptr [DAT_TileMapState::instance]TileMapState.DAT_SomeY
+                        shl ebx, 5
+                        mov ecx, dword ptr [edi + ebx]
+                        add esi, ecx
+                        sub ebx, 0x20
+                        mov ecx, dword ptr [edi + ebx]
+                        add esi, ecx
+                        mov eax, dword ptr [esi - 1]
+                        mov ebx, dword ptr [esi + 1]
+                        mov ecx, dword ptr [esi]
+                        and eax, _teamBitFlags
+                        je skip_0x100
+                        or edx, 0x100
+                    skip_0x100:
+                        and ebx, _teamBitFlags
+                        je skip_0x400000
+                        or edx, 0x400000
+                    skip_0x400000:
+                        and ecx, _teamBitFlags
+                        je skip_0x800000
+                        or edx, 0x800000
+                    skip_0x800000:
+                        mov eax, dword ptr [esi - 2]
+                        mov ebx, dword ptr [esi + 2]
+                        and eax, _teamBitFlags
+                        je skip_0x200
+                        or edx, 0x200
+                    skip_0x200:
+                        and ebx, _teamBitFlags
+                        je skip_0x200000
+                        or edx, 0x200000
+                    skip_0x200000:
+                        pop esi
+                        mov ebx, dword ptr [DAT_TileMapState::instance]TileMapState.DAT_SomeY
+                        shl ebx, 5
+                        mov ecx, dword ptr [edi + ebx + 0x10]
+                        add esi, ecx
+                        add ebx, 0x20
+                        mov ecx, dword ptr [edi + ebx + 0x10]
+                        add esi, ecx
+                        mov eax, dword ptr [esi - 1]
+                        mov ebx, dword ptr [esi + 1]
+                        mov ecx, dword ptr [esi]
+                        and eax, _teamBitFlags
+                        je skip_0x4000
+                        or edx, 0x4000
+                    skip_0x4000:
+                        and ebx, _teamBitFlags
+                        je skip_0x10000
+                        or edx, 0x10000
+                    skip_0x10000:
+                        and ecx, _teamBitFlags
+                        je skip_0x8000
+                        or edx, 0x8000
+                    skip_0x8000:
+                        mov eax, dword ptr [esi - 2]
+                        mov ebx, dword ptr [esi + 2]
+                        and eax, _teamBitFlags
+                        je skip_0x2000
+                        or edx, 0x2000
+                    skip_0x2000:
+                        and ebx, _teamBitFlags
+                        je skip_0x20000
+                        or edx, 0x20000
+                    skip_0x20000:
+                        mov dword ptr [DAT_TileMapState::instance]TileMapState.field213_0x554a48, edx
                     }
-                    if ((*(uint*)((uchar*)DAT_TileMapState::instance.ptr_OccupancyLayer
-                             + DAT_TileMapState::instance.DAT_SomeTile + -1)
-                            & _teamBitFlags)
-                        != 0) {
-                        _enemyNeighbourFlags = _enemyNeighbourFlags | 2;
-                    }
-                    if ((*(uint*)((uchar*)DAT_TileMapState::instance.ptr_OccupancyLayer
-                             + DAT_TileMapState::instance.DAT_SomeTile + 2)
-                            & _teamBitFlags)
-                        != 0) {
-                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x80000;
-                    }
-                    if ((*(uint*)((uchar*)DAT_TileMapState::instance.ptr_OccupancyLayer
-                             + DAT_TileMapState::instance.DAT_SomeTile + -2)
-                            & _teamBitFlags)
-                        != 0) {
-                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x800;
-                    }
-                    _occupancyRow = (uint*)((uchar*)DAT_TileMapState::instance.ptr_OccupancyLayer
-                        + *(int*)((uchar*)DAT_TileMapState::instance.ptr_MovementDirectionTranslationMatrix
-                            + DAT_TileMapState::instance.DAT_SomeY * 0x20)
-                        + DAT_TileMapState::instance.DAT_SomeTile);
-                    if ((*(uint*)((int)_occupancyRow + -1) & _teamBitFlags) != 0) {
-                        _enemyNeighbourFlags = _enemyNeighbourFlags | 1;
-                    }
-                    if ((*(uint*)((int)_occupancyRow + 1) & _teamBitFlags) != 0) {
-                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x40;
-                    }
-                    if ((*_occupancyRow & _teamBitFlags) != 0) {
-                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x80;
-                    }
-                    if ((*(uint*)((int)_occupancyRow + -2) & _teamBitFlags) != 0) {
-                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x400;
-                    }
-                    if ((*(uint*)((int)_occupancyRow + 2) & _teamBitFlags) != 0) {
-                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x100000;
-                    }
-                    _occupancyRow = (uint*)((uchar*)DAT_TileMapState::instance.ptr_OccupancyLayer
-                        + *(int*)((int)((uchar*)DAT_TileMapState::instance.ptr_MovementDirectionTranslationMatrix
-                                      + DAT_TileMapState::instance.DAT_SomeY * 0x20)
-                            + 0x10)
-                        + DAT_TileMapState::instance.DAT_SomeTile);
-                    if ((*(uint*)((int)_occupancyRow + -1) & _teamBitFlags) != 0) {
-                        _enemyNeighbourFlags = _enemyNeighbourFlags | 4;
-                    }
-                    if ((*(uint*)((int)_occupancyRow + 1) & _teamBitFlags) != 0) {
-                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x10;
-                    }
-                    if ((*_occupancyRow & _teamBitFlags) != 0) {
-                        _enemyNeighbourFlags = _enemyNeighbourFlags | 8;
-                    }
-                    if ((*(uint*)((int)_occupancyRow + -2) & _teamBitFlags) != 0) {
-                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x1000;
-                    }
-                    if ((*(uint*)((int)_occupancyRow + 2) & _teamBitFlags) != 0) {
-                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x40000;
-                    }
-                    _occupancyRow = (uint*)((uchar*)DAT_TileMapState::instance.ptr_OccupancyLayer
-                        + *(int*)((uchar*)DAT_TileMapState::instance.ptr_MovementDirectionTranslationMatrix
-                            + DAT_TileMapState::instance.DAT_SomeY * 0x20 + -0x20)
-                        + *(int*)((uchar*)DAT_TileMapState::instance.ptr_MovementDirectionTranslationMatrix
-                            + DAT_TileMapState::instance.DAT_SomeY * 0x20)
-                        + DAT_TileMapState::instance.DAT_SomeTile);
-                    if ((*(uint*)((int)_occupancyRow + -1) & _teamBitFlags) != 0) {
-                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x100;
-                    }
-                    if ((*(uint*)((int)_occupancyRow + 1) & _teamBitFlags) != 0) {
-                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x400000;
-                    }
-                    if ((*_occupancyRow & _teamBitFlags) != 0) {
-                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x800000;
-                    }
-                    if ((*(uint*)((int)_occupancyRow + -2) & _teamBitFlags) != 0) {
-                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x200;
-                    }
-                    if ((*(uint*)((int)_occupancyRow + 2) & _teamBitFlags) != 0) {
-                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x200000;
-                    }
-                    _occupancyRow = (uint*)((uchar*)DAT_TileMapState::instance.ptr_OccupancyLayer
-                        + *(int*)((uchar*)DAT_TileMapState::instance.ptr_MovementDirectionTranslationMatrix
-                            + DAT_TileMapState::instance.DAT_SomeY * 0x20 + 0x30)
-                        + *(int*)((uchar*)DAT_TileMapState::instance.ptr_MovementDirectionTranslationMatrix
-                            + DAT_TileMapState::instance.DAT_SomeY * 0x20 + 0x10)
-                        + DAT_TileMapState::instance.DAT_SomeTile);
-                    if ((*(uint*)((int)_occupancyRow + -1) & _teamBitFlags) != 0) {
-                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x4000;
-                    }
-                    if ((*(uint*)((int)_occupancyRow + 1) & _teamBitFlags) != 0) {
-                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x10000;
-                    }
-                    if ((*_occupancyRow & _teamBitFlags) != 0) {
-                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x8000;
-                    }
-                    if ((*(uint*)((int)_occupancyRow + -2) & _teamBitFlags) != 0) {
-                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x2000;
-                    }
-                    if ((*(uint*)((int)_occupancyRow + 2) & _teamBitFlags) != 0) {
-                        _enemyNeighbourFlags = _enemyNeighbourFlags | 0x20000;
-                    }
-                    DAT_TileMapState::instance.field213_0x554a48 = _enemyNeighbourFlags;
                     for (_otherUnitID
                         = (short)DAT_TileMapState::instance.UnitLayer[DAT_TileMapState::instance.DAT_SomeTile];
                         _otherUnitID > 0; _otherUnitID = (short)this->units[_otherUnitID].nextUnitOnTheSameTile) {
@@ -566,19 +609,19 @@ namespace Map {
                                 DAT_CurrentUnitSlotID::instance, this->units[unitID].attackedUnitID);
                             return;
                         }
-                        this->units[unitID].field259_0x3d2 = 0;
-                        this->units[unitID].attackedUnitID = 0;
-                        this->units[unitID].field191_0x340 = 0;
-                        return;
                     }
+                    this->units[unitID].field259_0x3d2 = 0;
+                    this->units[unitID].attackedUnitID = 0;
+                    this->units[unitID].field191_0x340 = 0;
+                    return;
                 }
-                this->units[unitID].field191_0x340 = 0;
-                this->units[unitID].attackedUnitID = 0;
-                this->units[unitID].field259_0x3d2 = 0;
             }
+            /* Not able to fight at all, or no reason to look for a fight this tick. */
+            this->units[unitID].field191_0x340 = 0;
+            this->units[unitID].attackedUnitID = 0;
+            this->units[unitID].field259_0x3d2 = 0;
         }
 
-#pragma optimize("y", on)
     }
 }
 }
