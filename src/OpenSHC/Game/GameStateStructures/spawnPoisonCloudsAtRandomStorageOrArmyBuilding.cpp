@@ -18,12 +18,12 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x0045C050
     void GameStateStructures::spawnPoisonCloudsAtRandomStorageOrArmyBuilding(int playerID, int count)
     {
+        int targetCount = 0;
         if (this->playerDataArray[playerID].campground.id <= 0) {
             return;
         }
         MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::spawnPoisonCloudsAroundBuilding, this)(
             this->playerDataArray[playerID].campground.id);
-        int targetCount = 0;
         for (int buildingID = 1; buildingID < DAT_BuildingsState::instance.maxBuildingsCount; buildingID++) {
             if ((DAT_BuildingsState::instance.buildings[buildingID].logicalState != ((BuildingLogicalState)0))
                 && (DAT_BuildingsState::instance.buildings[buildingID].logicalState
@@ -62,9 +62,8 @@ namespace Game {
                     case OpenSHC::Map::Buildings::BT_TUNNELERSGUILD:
                         targetsToSkip = targetsToSkip - 1;
                         if (targetsToSkip < 0) {
-                            MACRO_CALL_MEMBER(
-                                OpenSHC::Game::GameStateStructures_Func::spawnPoisonCloudsAroundBuilding, this)(
-                                buildingID);
+                            MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::spawnPoisonCloudsAroundBuilding,
+                                this)(buildingID);
                             buildingID = 2000;
                         }
                     }
