@@ -9,24 +9,38 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00534490
         void UnitsState::stampOccupancyFlagOnSurroundingTiles(int unitID)
         {
+            /* The 3x3 stamp is handwritten assembly in the original: the row centre is parked with
+               push/pop and the locals are reloaded from their stack slots. It ORs a word
+               into the byte layer, so the flag's (zero) high byte is applied to the next tile as well. */
+            uchar* _layer = DAT_TileMapState::instance.OccupancyLayer;
             int _tile = this->units[unitID].tile;
-            uchar* _occupancy = DAT_TileMapState::instance.OccupancyLayer;
             int _y = this->units[unitID].y;
-            uchar _value = this->units[unitID].occupancyOrFlag;
-            uchar* _row = _occupancy + _tile;
-            _row[1] |= _value;
-            _row[-1] |= _value;
-            _row[0] |= _value;
-            int* _directionRow
-                = (int*)((uchar*)DAT_TileMapState::instance.ptr_MovementDirectionTranslationMatrix + _y * 0x20);
-            uchar* _nextRow = _row + _directionRow[0];
-            _nextRow[-1] |= _value;
-            _nextRow[1] |= _value;
-            _nextRow[0] |= _value;
-            uchar* _furtherRow = _row + _directionRow[4];
-            _furtherRow[-1] |= _value;
-            _furtherRow[1] |= _value;
-            _furtherRow[0] |= _value;
+            int _value = this->units[unitID].occupancyOrFlag;
+            __asm {
+                mov ebx, _value
+                mov esi, _layer
+                mov eax, _tile
+                add esi, eax
+                push esi
+                mov edx, dword ptr [DAT_TileMapState::instance]TileMapState.ptr_MovementDirectionTranslationMatrix
+                mov eax, _y
+                shl eax, 5
+                add edx, eax
+                or word ptr [esi + 1], bx
+                or word ptr [esi - 1], bx
+                or word ptr [esi], bx
+                mov ecx, dword ptr [edx]
+                add esi, ecx
+                or word ptr [esi - 1], bx
+                or word ptr [esi + 1], bx
+                or word ptr [esi], bx
+                mov ecx, dword ptr [edx + 0x10]
+                pop esi
+                add esi, ecx
+                or word ptr [esi - 1], bx
+                or word ptr [esi + 1], bx
+                or word ptr [esi], bx
+            }
         }
 
     }
