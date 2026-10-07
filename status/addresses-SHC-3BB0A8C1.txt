@@ -51149,7 +51149,7 @@ SHC_3BB0A8C1_0x00536860 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x005368D0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00536970 | 34.1% | local loop var + reg alloc
+SHC_3BB0A8C1_0x00536970 | 36.6% | Asm differs
 
 SHC_3BB0A8C1_0x005369F0 | 100.0% | Reimplemented
 
