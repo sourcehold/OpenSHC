@@ -49325,7 +49325,7 @@ SHC_3BB0A8C1_0x0052F0D0 | 47.0% | Asm differs
 
 SHC_3BB0A8C1_0x0052F260 | 98.3% | Register allocation differs
 
-SHC_3BB0A8C1_0x0052F440 | 66.7% | loop shape differs
+SHC_3BB0A8C1_0x0052F440 | 66.7% | Asm differs
 
 SHC_3BB0A8C1_0x0052F4A0 | 0.0% | Pending
 
