@@ -50459,7 +50459,7 @@ SHC_3BB0A8C1_0x005326F1 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x005326F2 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00532700 | 57.0% | structure differs in places
+SHC_3BB0A8C1_0x00532700 | 57.0% | Asm differs
 
 SHC_3BB0A8C1_0x00532B40 | 0.0% | Pending
 
