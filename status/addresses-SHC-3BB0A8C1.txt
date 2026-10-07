@@ -49335,7 +49335,7 @@ SHC_3BB0A8C1_0x0052F550 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0052F570 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0052F5B0 | 57.6% | ecx across call, reg alloc
+SHC_3BB0A8C1_0x0052F5B0 | 57.6% | Asm differs
 
 SHC_3BB0A8C1_0x0052F680 | 58.3% | branch shape differs
 
