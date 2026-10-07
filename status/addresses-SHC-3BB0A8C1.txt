@@ -50691,7 +50691,7 @@ SHC_3BB0A8C1_0x00533B30 | 97.2% | Register allocation differs
 
 SHC_3BB0A8C1_0x00533C70 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00533CA0 | 90.9% | loop exit shape differs
+SHC_3BB0A8C1_0x00533CA0 | 93.2% | Asm differs
 
 SHC_3BB0A8C1_0x00533D50 | 56.3% | structure differs in places
 
