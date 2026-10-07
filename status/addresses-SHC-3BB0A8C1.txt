@@ -60019,7 +60019,7 @@ SHC_3BB0A8C1_0x0053D850 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0053D900 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0053D9C0 | 27.0% | reg alloc differs
+SHC_3BB0A8C1_0x0053D9C0 | 27.0% | Asm differs
 
 SHC_3BB0A8C1_0x0053DC9C | 0.0% | Pending
 
