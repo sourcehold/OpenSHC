@@ -50651,7 +50651,7 @@ SHC_3BB0A8C1_0x00533010 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00533090 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005330A0 | 81.6% | switch fallthrough differs
+SHC_3BB0A8C1_0x005330A0 | 82.6% | Asm differs
 
 SHC_3BB0A8C1_0x00533474 | 0.0% | Pending
 
