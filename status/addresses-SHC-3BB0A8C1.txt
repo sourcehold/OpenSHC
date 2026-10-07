@@ -60089,7 +60089,7 @@ SHC_3BB0A8C1_0x0053E440 | 46.1% | orig walks unit ptr
 
 SHC_3BB0A8C1_0x0053E6C0 | 86.0% | Asm differs
 
-SHC_3BB0A8C1_0x0053E790 | 98.7% | LTCG ecx kept across call
+SHC_3BB0A8C1_0x0053E790 | 98.7% | Asm differs
 
 SHC_3BB0A8C1_0x0053E820 | 100.0% | Reimplemented
 
