@@ -51109,7 +51109,7 @@ SHC_3BB0A8C1_0x00535E20 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00535FD0 | 88.9% | orig walks hotkey ptr
 
-SHC_3BB0A8C1_0x005360A0 | 90.5% | orig unrolls inner loop x5
+SHC_3BB0A8C1_0x005360A0 | 91.9% | Asm differs
 
 SHC_3BB0A8C1_0x00536190 | 72.4% | incr scheduled before call
 
