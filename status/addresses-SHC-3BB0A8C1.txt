@@ -49353,7 +49353,7 @@ SHC_3BB0A8C1_0x0052FC30 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0052FCA0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0052FD00 | 90.1% | reg alloc
+SHC_3BB0A8C1_0x0052FD00 | 91.5% | Asm differs
 
 SHC_3BB0A8C1_0x0052FE00 | 100.0% | Reimplemented
 
