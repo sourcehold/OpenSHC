@@ -51103,7 +51103,7 @@ SHC_3BB0A8C1_0x00535B00 | 89.1% | Asm differs
 
 SHC_3BB0A8C1_0x00535BC0 | 68.9% | Style pass, asm differs
 
-SHC_3BB0A8C1_0x00535DF0 | 46.1% | call+reg alloc differs
+SHC_3BB0A8C1_0x00535DF0 | 85.7% | Reimplemented
 
 SHC_3BB0A8C1_0x00535E20 | 100.0% | Reimplemented
 
