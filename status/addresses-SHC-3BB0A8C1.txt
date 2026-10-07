@@ -51139,7 +51139,7 @@ SHC_3BB0A8C1_0x00536610 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00536630 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00536690 | 97.4% | Register allocation differs
+SHC_3BB0A8C1_0x00536690 | 97.4% | Jcc scheduling differs
 
 SHC_3BB0A8C1_0x00536710 | 100.0% | Reimplemented
 
