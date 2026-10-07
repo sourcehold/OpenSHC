@@ -51099,7 +51099,7 @@ SHC_3BB0A8C1_0x005359C0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00535A30 | 67.7% | call+reg alloc differs
 
-SHC_3BB0A8C1_0x00535B00 | 61.8% | call+reg alloc differs
+SHC_3BB0A8C1_0x00535B00 | 89.1% | Asm differs
 
 SHC_3BB0A8C1_0x00535BC0 | 68.9% | Style pass, asm differs
 
