@@ -50675,7 +50675,7 @@ SHC_3BB0A8C1_0x00533580 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00533630 | 91.8% | Asm differs
 
-SHC_3BB0A8C1_0x00533810 | 80.3% | orig walks matrix row ptr
+SHC_3BB0A8C1_0x00533810 | 81.6% | Asm differs
 
 SHC_3BB0A8C1_0x00533920 | 100.0% | Reimplemented
 
