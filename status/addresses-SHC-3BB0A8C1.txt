@@ -60099,7 +60099,7 @@ SHC_3BB0A8C1_0x0053E8D0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0053E900 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0053E9F0 | 56.8% | orig caches x/y in locals
+SHC_3BB0A8C1_0x0053E9F0 | 71.6% | Asm differs
 
 SHC_3BB0A8C1_0x0053EAA0 | 0.0% | Pending
 
