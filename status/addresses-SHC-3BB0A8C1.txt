@@ -51209,7 +51209,7 @@ SHC_3BB0A8C1_0x00536C90 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00536CC0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00536CF0 | 52.2% | branch order differs
+SHC_3BB0A8C1_0x00536CF0 | 60.9% | Asm differs
 
 SHC_3BB0A8C1_0x00536DA0 | 0.0% | Pending
 
