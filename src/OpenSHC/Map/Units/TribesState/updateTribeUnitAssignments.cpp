@@ -23,7 +23,7 @@ namespace Map {
             int _tribeTime;
             int _tribeSize;
             int _state;
-            UnitLogicStateShort _unitLogicalState;
+            int _unitLogicalState;
             this->clans = 0;
             this->field2_0x8 = 1;
             DAT_CurrentTribeID::instance = 1;

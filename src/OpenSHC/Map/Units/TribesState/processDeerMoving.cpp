@@ -32,7 +32,7 @@ namespace Map {
         {
             short* psVar1;
             int sVar2;
-            SomeTribeBehaviorTypeShort SVar3;
+            int SVar3;
             int iVar4;
             int iVar5;
             int iVar6;

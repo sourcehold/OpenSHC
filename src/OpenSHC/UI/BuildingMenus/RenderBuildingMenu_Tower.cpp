@@ -24,7 +24,7 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x00447D30
     void BuildingMenus::RenderBuildingMenu_Tower()
     {
-        BuildingTypeShort BVar1;
+        int BVar1;
         char* pcVar3;
         int iVar4;
         TextAlignment alignment;
