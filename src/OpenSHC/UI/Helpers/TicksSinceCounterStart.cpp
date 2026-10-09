@@ -30,8 +30,8 @@ namespace UI {
                 DAT_00df33ac::instance = _now;
             }
         } while (_now - TIME_PreviousQuery::instance < TIME_QueryMargin::instance);
-        float fVar1 = (float)(int)TIME_QueryMargin::instance;
-        if ((int)TIME_QueryMargin::instance < 0) {
+        float fVar1 = (float)TIME_QueryMargin::instance;
+        if (TIME_QueryMargin::instance < 0) {
             fVar1 = fVar1 + 4.2949673e+09;
         }
         float fVar2 = (float)(int)(_now - TIME_PreviousQuery::instance);
