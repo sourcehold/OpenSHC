@@ -24,7 +24,7 @@ namespace Map {
     {
         int* piVar1;
         byte bVar2;
-        short sVar3;
+        int sVar3;
         int iVar4;
         int iVar5;
         iVar4 = DAT_CurrentBuildingID::instance;

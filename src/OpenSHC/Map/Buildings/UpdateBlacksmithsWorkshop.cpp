@@ -36,8 +36,8 @@ namespace Map {
     void Buildings::UpdateBlacksmithsWorkshop()
     {
         int* piVar1;
-        short sVar2;
-        short sVar3;
+        int sVar2;
+        int sVar3;
         ResourceTypeShort RVar4;
         UnitStateShort UVar5;
         int iVar6;

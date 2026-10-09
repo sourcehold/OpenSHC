@@ -78,7 +78,7 @@ namespace UI {
         {
             ushort uVar1;
             ushort uVar2;
-            short sVar3;
+            int sVar3;
             UnitTypeShort UVar4;
             BuildingTypeShort BVar5;
             bool bVar6;

@@ -37,7 +37,7 @@ namespace Map {
         int* piVar2;
         short* psVar3;
         byte bVar4;
-        short sVar5;
+        int sVar5;
         UnitStateShort UVar6;
         bool bVar7;
         int iVar8;

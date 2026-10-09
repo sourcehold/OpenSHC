@@ -31,7 +31,7 @@ namespace Map {
         void TribesState::processDeerMoving(int tribeID)
         {
             short* psVar1;
-            short sVar2;
+            int sVar2;
             SomeTribeBehaviorTypeShort SVar3;
             int iVar4;
             int iVar5;

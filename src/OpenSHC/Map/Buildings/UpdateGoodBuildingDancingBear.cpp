@@ -18,7 +18,7 @@ namespace Map {
     void Buildings::UpdateGoodBuildingDancingBear()
     {
         byte bVar1;
-        short sVar2;
+        int sVar2;
         int iVar3;
         sVar2 = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;
         MACRO_CALL_MEMBER(AI::AICState_Func::addBuildingToTargetableBuildings, DAT_AICState::ptr)(

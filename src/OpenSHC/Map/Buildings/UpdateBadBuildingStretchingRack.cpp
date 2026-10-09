@@ -18,7 +18,7 @@ namespace Map {
     void Buildings::UpdateBadBuildingStretchingRack()
     {
         byte bVar1;
-        short sVar2;
+        int sVar2;
         int iVar3;
         iVar3 = DAT_CurrentBuildingID::instance;
         sVar2 = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;

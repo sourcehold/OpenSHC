@@ -20,7 +20,7 @@ namespace Map {
     void Buildings::UpdateBadBuildingGallows()
     {
         byte bVar1;
-        short sVar2;
+        int sVar2;
         uint uVar3;
         int buildingID;
         sVar2 = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;

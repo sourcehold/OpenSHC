@@ -29,9 +29,9 @@ namespace Map {
         int* piVar1;
         short* psVar2;
         byte bVar3;
-        short sVar4;
+        int sVar4;
         int iVar5;
-        short sVar6;
+        int sVar6;
         int iVar7;
         int iVar8;
         int iVar9;

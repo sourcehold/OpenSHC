@@ -18,7 +18,7 @@ namespace Map {
     void Buildings::UpdateBadBuildingDungeon()
     {
         byte bVar1;
-        short sVar2;
+        int sVar2;
         int iVar3;
         int buildingID;
         MACRO_CALL_MEMBER(Game::GameStateStructures_Func::addBuildingInRegistry, DAT_GameState::ptr)(

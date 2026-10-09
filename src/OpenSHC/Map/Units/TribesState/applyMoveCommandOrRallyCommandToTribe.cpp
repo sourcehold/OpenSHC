@@ -26,7 +26,7 @@ namespace Map {
             BOOLEnum _allAssassins;
             int _unitID;
             int _unitSelectionIndex;
-            short _targetUnitID;
+            int _targetUnitID;
             _unitSelectionIndex = 0;
             _allAssassins
                 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::isTribeAllAssassins, this)(tribeID);

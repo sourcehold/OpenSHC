@@ -17,7 +17,7 @@ namespace Map {
     void Buildings::UpdateKeepStronghold()
     {
         int* piVar1;
-        short sVar2;
+        int sVar2;
         short sVar3;
         byte bVar4;
         int _goldStep;

@@ -26,9 +26,9 @@ namespace Map {
         void TribesState::updateLionWolfTribeBehavior(int param_1)
         {
             short* psVar1;
-            short sVar2;
+            int sVar2;
             SomeTribeBehaviorTypeShort SVar3;
-            short sVar4;
+            int sVar4;
             BOOLEnum BVar5;
             BOOLEnum BVar6;
             BVar5 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::isTribeFreeOfTunnelingUnits, this)(

@@ -24,7 +24,7 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x00439730
     void Helpers::HandleBuildingSelectionSpeech(int buildingIndexUnk)
     {
-        short _requiredEmployeeCount;
+        int _requiredEmployeeCount;
         if (DAT_BuildingsState::instance.buildings[buildingIndexUnk].owner
             == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
             BuildingTypeShort _buildingType = DAT_BuildingsState::instance.buildings[buildingIndexUnk].buildingType;

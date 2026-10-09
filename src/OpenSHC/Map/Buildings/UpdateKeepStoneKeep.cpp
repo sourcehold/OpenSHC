@@ -17,7 +17,7 @@ namespace Map {
     void Buildings::UpdateKeepStoneKeep()
     {
         int* piVar1;
-        short sVar2;
+        int sVar2;
         short sVar3;
         int iVar4;
         byte bVar5;

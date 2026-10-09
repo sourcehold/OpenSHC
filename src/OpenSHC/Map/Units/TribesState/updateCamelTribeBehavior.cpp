@@ -27,7 +27,7 @@ namespace Map {
             SomeTribeBehaviorTypeShort SVar2;
             BOOLEnum BVar3;
             int iVar4;
-            short sVar5;
+            int sVar5;
             BVar3 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::isTribeFreeOfTunnelingUnits, this)(
                 param_1, this->tribes[param_1].uid);
             psVar1 = &this->tribes[param_1].unknownCounter01;

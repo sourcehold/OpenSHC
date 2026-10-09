@@ -27,16 +27,16 @@ namespace Map {
         void TribesState::updateRabbitTribeBehavior(int tribeID)
         {
             short* psVar1;
-            short sVar2;
+            int sVar2;
             SomeTribeBehaviorTypeShort SVar3;
-            short sVar4;
+            int sVar4;
             int iVar5;
             int iVar6;
             BOOLEnum BVar7;
             int iVar8;
             int _x10;
             int _y10;
-            short _targetUnitID;
+            int _targetUnitID;
             sVar2 = this->tribes[tribeID].selectionTargetUnitID;
             _x10 = (int)DAT_UnitsState::instance.units[sVar2].x / 10;
             _y10 = (int)DAT_UnitsState::instance.units[sVar2].y / 10;

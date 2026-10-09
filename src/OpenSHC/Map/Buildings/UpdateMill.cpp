@@ -34,8 +34,8 @@ namespace Map {
     {
         int* piVar1;
         byte bVar2;
-        short sVar3;
-        short sVar4;
+        int sVar3;
+        int sVar4;
         int buildingID;
         BOOLEnum BVar5;
         ushort uVar6;
