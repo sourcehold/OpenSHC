@@ -72,7 +72,7 @@ namespace Map {
             if (sVar2 == 0) {
                 if ((char)DAT_BuildingDefinedData::instance.BlacksmithsWorkshopAnimationFrames3
                         [DAT_BuildingsState::instance.buildings[iVar7].animationIndex]
-                    < '\x01')
+                    <= '\0')
                     goto LAB_0041338d;
                 DAT_BuildingsState::instance.buildings[iVar7].animationFrame
                     = (char)DAT_BuildingDefinedData::instance.BlacksmithsWorkshopAnimationFrames3
@@ -92,7 +92,7 @@ namespace Map {
                 iVar8 = iVar7 * 0x32c;
                 if ((char)DAT_BuildingDefinedData::instance.BlacksmithsWorkshopAnimationFrames6
                         [DAT_BuildingsState::instance.buildings[iVar7].animationIndex]
-                    < '\x01') {
+                    <= '\0') {
                 LAB_0041338d:
                     *(undefined2*)((int)&DAT_BuildingsState::instance.buildings[0].animationIndex + iVar8) = 0;
                     sVar2 = *(short*)((int)DAT_BuildingsState::instance.buildings[0].resources + iVar8 + -8);
@@ -125,7 +125,7 @@ namespace Map {
             } else if (sVar2 == 2) {
                 if ((char)DAT_BuildingDefinedData::instance.BlacksmithsWorkshopAnimationFrames4
                         [DAT_BuildingsState::instance.buildings[iVar7].animationIndex]
-                    < '\x01')
+                    <= '\0')
                     goto LAB_0041338d;
                 DAT_BuildingsState::instance.buildings[iVar7].animationFrame
                     = (char)DAT_BuildingDefinedData::instance.BlacksmithsWorkshopAnimationFrames4
@@ -137,7 +137,7 @@ namespace Map {
                 if (sVar2 == 4) {
                     if ((char)DAT_BuildingDefinedData::instance.BlacksmithsWorkshopAnimationFrames5
                             [DAT_BuildingsState::instance.buildings[iVar7].animationIndex]
-                        < '\x01')
+                        <= '\0')
                         goto LAB_0041338d;
                     DAT_BuildingsState::instance.buildings[iVar7].animationFrame
                         = (char)DAT_BuildingDefinedData::instance.BlacksmithsWorkshopAnimationFrames5
@@ -160,7 +160,7 @@ namespace Map {
                     iVar8 = iVar7 * 0x32c;
                     if ((char)DAT_BuildingDefinedData::instance.BlacksmithsWorkshopAnimationFrames6
                             [DAT_BuildingsState::instance.buildings[iVar7].animationIndex]
-                        < '\x01')
+                        <= '\0')
                         goto LAB_0041338d;
                     DAT_BuildingsState::instance.buildings[iVar7].animationFrame
                         = (char)DAT_BuildingDefinedData::instance.BlacksmithsWorkshopAnimationFrames6
@@ -177,7 +177,7 @@ namespace Map {
                     iVar8 = iVar7 * 0x32c;
                     if ((char)DAT_BuildingDefinedData::instance.BlacksmithsWorkshopAnimationFrames7
                             [DAT_BuildingsState::instance.buildings[iVar7].animationIndex]
-                        < '\x01')
+                        <= '\0')
                         goto LAB_0041338d;
                     DAT_BuildingsState::instance.buildings[iVar7].animationFrame
                         = (char)DAT_BuildingDefinedData::instance.BlacksmithsWorkshopAnimationFrames7
@@ -191,7 +191,7 @@ namespace Map {
                 if (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY) {
                     if ((char)DAT_BuildingDefinedData::instance.BlacksmithsWorkshopAnimationFrames8
                             [DAT_BuildingsState::instance.buildings[iVar7].animationIndex]
-                        < '\x01') {
+                        <= '\0') {
                     LAB_00413604:
                         *(undefined2*)((int)&DAT_BuildingsState::instance.buildings[0].animationIndex + iVar8) = 0;
                         sVar2 = *(short*)((int)DAT_BuildingsState::instance.buildings[0].resources + iVar8 + -8);
@@ -221,7 +221,7 @@ namespace Map {
                 } else {
                     if ((char)DAT_BuildingDefinedData::instance.BlacksmithsWorkshopAnimationFrames11
                             [DAT_BuildingsState::instance.buildings[iVar7].animationIndex]
-                        < '\x01')
+                        <= '\0')
                         goto LAB_00413604;
                     DAT_BuildingsState::instance.buildings[iVar7].animationFrame
                         = (char)DAT_BuildingDefinedData::instance.BlacksmithsWorkshopAnimationFrames11
@@ -246,7 +246,7 @@ namespace Map {
                 iVar8 = iVar7 * 0x32c;
                 if ((char)DAT_BuildingDefinedData::instance.BlacksmithsWorkshopAnimationFrames9
                         [DAT_BuildingsState::instance.buildings[iVar7].animationIndex]
-                    < '\x01')
+                    <= '\0')
                     goto LAB_00413604;
                 DAT_BuildingsState::instance.buildings[iVar7].animationFrame
                     = (char)DAT_BuildingDefinedData::instance.BlacksmithsWorkshopAnimationFrames9
@@ -267,7 +267,7 @@ namespace Map {
                 if (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY) {
                     if ((char)DAT_BuildingDefinedData::instance.BlacksmithsWorkshopAnimationFrames10
                             [DAT_BuildingsState::instance.buildings[iVar7].animationIndex]
-                        < '\x01')
+                        <= '\0')
                         goto LAB_00413604;
                     DAT_BuildingsState::instance.buildings[iVar7].animationFrame
                         = (char)DAT_BuildingDefinedData::instance.BlacksmithsWorkshopAnimationFrames10
@@ -276,7 +276,7 @@ namespace Map {
                 } else {
                     if ((char)DAT_BuildingDefinedData::instance.BlacksmithsWorkshopAnimationFrames12
                             [DAT_BuildingsState::instance.buildings[iVar7].animationIndex]
-                        < '\x01')
+                        <= '\0')
                         goto LAB_00413604;
                     DAT_BuildingsState::instance.buildings[iVar7].animationFrame
                         = (char)DAT_BuildingDefinedData::instance.BlacksmithsWorkshopAnimationFrames12
@@ -323,7 +323,7 @@ namespace Map {
         if (*(int*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame3 + iVar8) == 0) {
             if ((char)DAT_BuildingDefinedData::instance.BlacksmithsWorkshopAnimationFrames1[*(
                     int*)((int)&DAT_BuildingsState::instance.buildings[0].campgroundVclock + iVar8)]
-                < '\x01') {
+                <= '\0') {
                 *(undefined4*)((int)&DAT_BuildingsState::instance.buildings[0].campgroundVclock + iVar8) = 0;
                 sVar2 = *(short*)((int)DAT_BuildingsState::instance.buildings[0].resources + iVar8 + -8);
                 if (sVar2 == 0) {
@@ -357,7 +357,7 @@ namespace Map {
             iVar8 = iVar7 * 0x32c;
             if ((char)DAT_BuildingDefinedData::instance
                     .BlacksmithsWorkshopAnimationFrames2[DAT_BuildingsState::instance.buildings[iVar7].campgroundVclock]
-                < '\x01') {
+                <= '\0') {
                 DAT_BuildingsState::instance.buildings[iVar7].campgroundVclock = 0;
                 sVar2 = DAT_BuildingsState::instance.buildings[iVar7].state;
                 if (sVar2 == 0) {
@@ -387,7 +387,7 @@ namespace Map {
             }
             if ((char)DAT_BuildingDefinedData::instance.SecondaryOverlayAnimationFrames[*(
                     int*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar8)]
-                < '\x01') {
+                <= '\0') {
                 *(undefined4*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar8) = 0;
             }
             *(int*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationSprite2 + iVar8)
@@ -401,7 +401,7 @@ namespace Map {
             *piVar1 = *piVar1 + 1;
             if ((char)DAT_BuildingDefinedData::instance.SharedOverlayAnimationFrames
                     [*(int*)((int)&DAT_BuildingsState::instance.buildings[0].flagSlot.ownerFlagFrame + iVar8) / 2]
-                < '\x01') {
+                <= '\0') {
                 *(undefined4*)((int)&DAT_BuildingsState::instance.buildings[0].flagSlot.ownerFlagFrame + iVar8) = 0;
             }
             *(int*)((int)&DAT_BuildingsState::instance.buildings[0].overlayImageID + iVar8)

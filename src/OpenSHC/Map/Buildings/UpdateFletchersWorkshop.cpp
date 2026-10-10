@@ -113,7 +113,7 @@ namespace Map {
                 if (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY) {
                     if ((char)DAT_BuildingDefinedData::instance.FletchersWorkshopAnimationFrames1
                             [DAT_BuildingsState::instance.buildings[buildingID_00].animationIndex]
-                        < '\x01') {
+                        <= '\0') {
                         bVar6 = true;
                     } else {
                         iVar7 = (int)(char)DAT_BuildingDefinedData::instance.FletchersWorkshopAnimationFrames1
@@ -217,7 +217,7 @@ namespace Map {
         *piVar1 = *piVar1 + 1;
         if ((char)DAT_BuildingDefinedData::instance.SharedOverlayAnimationFrames
                 [*(int*)((int)&DAT_BuildingsState::instance.buildings[0].flagSlot.ownerFlagFrame + buildingID) / 2]
-            < '\x01') {
+            <= '\0') {
             *(undefined4*)((int)&DAT_BuildingsState::instance.buildings[0].flagSlot.ownerFlagFrame + buildingID) = 0;
         }
         *(int*)((int)&DAT_BuildingsState::instance.buildings[0].overlayImageID + buildingID)

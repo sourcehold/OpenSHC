@@ -70,7 +70,7 @@ namespace Map {
         playerID = (int)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;
         iVar10 = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].attackWave;
         if (((0 < iVar10) && (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY))
-            && ((char)DAT_TroopValueState::instance.attackInfo.nof_tribes[iVar10] < '\x01')) {
+            && ((char)DAT_TroopValueState::instance.attackInfo.nof_tribes[iVar10] <= '\0')) {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].logicalState
                 = Map::Buildings::BLS_REMOVE;
         }

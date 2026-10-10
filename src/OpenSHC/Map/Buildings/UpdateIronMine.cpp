@@ -239,7 +239,7 @@ namespace Map {
                 bVar2 = DAT_BuildingDefinedData::instance.IronMineAnimationFrames7[*(
                     int*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame2 + iVar5)];
             LAB_0041cfda:
-                if ((char)bVar2 < '\x01')
+                if ((char)bVar2 <= '\0')
                     goto LAB_0041cfdc;
             } else {
                 if (sVar3 == 2)
@@ -455,7 +455,7 @@ namespace Map {
             *piVar1 = *piVar1 + 1;
             if ((char)DAT_BuildingDefinedData::instance
                     .IronMineAnimationFrames12[DAT_BuildingsState::instance.buildings[iVar4].extraAnimationFrame3]
-                < '\x01')
+                <= '\0')
                 goto LAB_0041d3f4;
         }
         iVar5 = DAT_CurrentBuildingID::instance * 0x32c;
@@ -485,7 +485,7 @@ namespace Map {
         *piVar1 = *piVar1 + 1;
         if ((char)DAT_BuildingDefinedData::instance.SharedOverlayAnimationFrames
                 [*(int*)((int)&DAT_BuildingsState::instance.buildings[0].flagSlot.ownerFlagFrame + iVar5) / 2]
-            < '\x01') {
+            <= '\0') {
             *(undefined4*)((int)&DAT_BuildingsState::instance.buildings[0].flagSlot.ownerFlagFrame + iVar5) = 0;
         }
         *(int*)((int)&DAT_BuildingsState::instance.buildings[0].overlayImageID + iVar5)

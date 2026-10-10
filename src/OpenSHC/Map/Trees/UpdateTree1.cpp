@@ -35,7 +35,7 @@ namespace Map {
             } else {
                 _rng2Data = DAT_OrganismDefinedData::instance.Tree_1_B[_rng2];
             }
-            if ((char)_rng2Data < '\x01') {
+            if ((char)_rng2Data <= '\0') {
                 DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameIndex = 0;
                 DAT_LandscapeState::instance.trees[_tree].flag
                     = (uint)(DAT_LandscapeState::instance.trees[_tree].one == 2);

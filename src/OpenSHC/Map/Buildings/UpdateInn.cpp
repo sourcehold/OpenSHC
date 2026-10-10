@@ -179,7 +179,7 @@ namespace Map {
             *piVar1 = *piVar1 + 1;
             if ((char)DAT_BuildingDefinedData::instance.SharedOverlayAnimationFrames
                     [*(int*)((int)&DAT_BuildingsState::instance.buildings[0].flagSlot.ownerFlagFrame + iVar9) / 2]
-                < '\x01') {
+                <= '\0') {
                 *(undefined4*)((int)&DAT_BuildingsState::instance.buildings[0].flagSlot.ownerFlagFrame + iVar9) = 0;
             }
             *(int*)((int)&DAT_BuildingsState::instance.buildings[0].overlayImageID + iVar9)

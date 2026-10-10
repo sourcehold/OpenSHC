@@ -80,7 +80,7 @@ namespace Map {
         } else {
             bVar2 = DAT_OrganismDefinedData::instance.Tree_1_B[_index];
         }
-        if ((char)bVar2 < '\x01') {
+        if ((char)bVar2 <= '\0') {
             DAT_LandscapeState::instance.trees[_treeID].animationFrameIndex = 0;
             DAT_LandscapeState::instance.trees[_treeID].flag
                 = (uint)(DAT_LandscapeState::instance.trees[_treeID].one == 2);

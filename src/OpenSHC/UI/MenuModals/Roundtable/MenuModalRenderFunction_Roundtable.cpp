@@ -63,7 +63,7 @@ namespace UI {
                 if ((char)DAT_GameSynchronyState::instance.DAT_RoundTableOrderArray[iVar4] < 1
                     || (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[(
                            char)DAT_GameSynchronyState::instance.DAT_RoundTableOrderArray[iVar4]]
-                        < '\x01')
+                        <= '\0')
                     break;
                 if (y < (char)DAT_GameSynchronyState::instance
                         .DAT_PlayerGroupArray[(char)DAT_GameSynchronyState::instance.DAT_RoundTableOrderArray[iVar4]]) {

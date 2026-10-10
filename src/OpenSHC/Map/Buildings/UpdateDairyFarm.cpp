@@ -344,7 +344,7 @@ namespace Map {
             = DAT_BuildingsState::instance.buildings[iVar7].flagSlot.ownerFlagFrame + 1;
         if ((char)DAT_BuildingDefinedData::instance
                 .SharedOverlayAnimationFrames[DAT_BuildingsState::instance.buildings[iVar7].flagSlot.ownerFlagFrame / 2]
-            < '\x01') {
+            <= '\0') {
             DAT_BuildingsState::instance.buildings[iVar7].flagSlot.ownerFlagFrame = 0;
         }
         DAT_BuildingsState::instance.buildings[iVar7].overlayImageID

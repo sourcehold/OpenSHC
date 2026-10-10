@@ -92,7 +92,7 @@ namespace Map {
             if ((char)DAT_BuildingDefinedData::instance
                     .SharedOverlayAnimationFrames[DAT_BuildingsState::instance.buildings[iVar9].flagSlot.ownerFlagFrame
                         / 2]
-                < '\x01') {
+                <= '\0') {
                 DAT_BuildingsState::instance.buildings[iVar9].flagSlot.ownerFlagFrame = 0;
             }
             DAT_BuildingsState::instance.buildings[iVar9].overlayImageID
@@ -147,7 +147,7 @@ namespace Map {
                 != DAT_BuildingsState::instance.buildings[iVar9].tribeUID)) {
             _tribeID = 0;
         }
-        if (DAT_BuildingsState::instance.buildings[iVar9].randomOutpostField < '\x01') {
+        if (DAT_BuildingsState::instance.buildings[iVar9].randomOutpostField <= '\0') {
             uVar12 = (int)SEC_RNG::instance.currentNumber2 & 0x80000001;
             if ((int)uVar12 < 0) {
                 uVar12 = (uVar12 - 1 | 0xfffffffe) + 1;

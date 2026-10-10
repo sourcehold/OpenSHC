@@ -316,7 +316,7 @@ namespace UI {
                     && (DAT_MenuModalComposition1::instance.activeModalDialogID == OpenSHC::UI::Enums::MMT_NONE)) {
                     iVar3 = 1;
                     do {
-                        if ((char)DAT_GameSynchronyState::instance.DAT_RoundTableOrderArray[iVar3] < '\x01')
+                        if ((char)DAT_GameSynchronyState::instance.DAT_RoundTableOrderArray[iVar3] <= '\0')
                             goto LAB_00427f46;
                         iVar3 = iVar3 + 1;
                     } while (iVar3 < 9);

@@ -164,7 +164,7 @@ namespace Map {
                 iVar2 = DAT_CurrentBuildingID::instance;
                 bVar1 = DAT_BuildingDefinedData::instance.GateHouseLargeAnimationFrames
                             [DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex];
-                if ((char)bVar1 < '\x01') {
+                if ((char)bVar1 <= '\0') {
                     DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].pathLinkageRelated2 = 0;
                     MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::updatePathLinkageTileMapRelatedToGates,
                         DAT_PathFindingState::ptr)(iVar2);

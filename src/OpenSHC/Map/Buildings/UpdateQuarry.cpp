@@ -91,7 +91,7 @@ namespace Map {
                     *piVar1 = *piVar1 + 1;
                     bVar8 = DAT_BuildingDefinedData::instance
                                 .QuarryAnimationFrames1[DAT_BuildingsState::instance.buildings[iVar7].campgroundVclock];
-                    if ((char)bVar8 < '\x01') {
+                    if ((char)bVar8 <= '\0') {
                         DAT_BuildingsState::instance.buildings[iVar7].campgroundVclock = 0;
                     } else {
                         DAT_BuildingsState::instance.buildings[iVar7].extraAnimationSprite1 = (int)(char)bVar8;
@@ -112,7 +112,7 @@ namespace Map {
                         *piVar1 = *piVar1 + 1;
                         bVar8 = DAT_BuildingDefinedData::instance.QuarryAnimationFrames2
                                     [DAT_BuildingsState::instance.buildings[iVar7].campgroundVclock];
-                        if ((char)bVar8 < '\x01') {
+                        if ((char)bVar8 <= '\0') {
                             DAT_BuildingsState::instance.buildings[iVar7].campgroundVclock = 0;
                         } else {
                             DAT_BuildingsState::instance.buildings[iVar7].extraAnimationSprite1 = (char)bVar8 + 1;
@@ -144,7 +144,7 @@ namespace Map {
                             *piVar1 = *piVar1 + 1;
                             bVar8 = DAT_BuildingDefinedData::instance.QuarryAnimationFrames3
                                         [DAT_BuildingsState::instance.buildings[iVar7].campgroundVclock];
-                            if ((char)bVar8 < '\x01') {
+                            if ((char)bVar8 <= '\0') {
                                 DAT_BuildingsState::instance.buildings[iVar7].campgroundVclock = 0;
                             } else {
                                 DAT_BuildingsState::instance.buildings[iVar7].extraAnimationSprite1 = (char)bVar8 + 1;
@@ -164,7 +164,7 @@ namespace Map {
                             *piVar1 = *piVar1 + 1;
                             bVar8 = DAT_BuildingDefinedData::instance.QuarryAnimationFrames4
                                         [DAT_BuildingsState::instance.buildings[iVar7].campgroundVclock];
-                            if ((char)bVar8 < '\x01') {
+                            if ((char)bVar8 <= '\0') {
                                 DAT_BuildingsState::instance.buildings[iVar7].campgroundVclock = 0;
                             } else {
                                 DAT_BuildingsState::instance.buildings[iVar7].extraAnimationSprite1 = (char)bVar8 + 1;
@@ -239,7 +239,7 @@ namespace Map {
             *piVar1 = *piVar1 + 1;
             if ((char)DAT_BuildingDefinedData::instance
                     .QuarryAnimationFrames5[DAT_BuildingsState::instance.buildings[iVar10].extraAnimationFrame1]
-                < '\x01')
+                <= '\0')
                 goto LAB_0041d993;
             DAT_BuildingsState::instance.buildings[iVar10].extraAnimationSprite2
                 = (char)DAT_BuildingDefinedData::instance
@@ -256,7 +256,7 @@ namespace Map {
                 *piVar1 = *piVar1 + 1;
                 if ((char)DAT_BuildingDefinedData::instance
                         .QuarryAnimationFrames6[DAT_BuildingsState::instance.buildings[iVar10].extraAnimationFrame1]
-                    < '\x01')
+                    <= '\0')
                     goto LAB_0041d993;
                 DAT_BuildingsState::instance.buildings[iVar10].extraAnimationSprite2
                     = (char)DAT_BuildingDefinedData::instance
@@ -274,7 +274,7 @@ namespace Map {
                     *piVar1 = *piVar1 + 1;
                     if ((char)DAT_BuildingDefinedData::instance.SomeAnimationNumbersUnk
                             [DAT_BuildingsState::instance.buildings[iVar10].extraAnimationFrame1]
-                        < '\x01') {
+                        <= '\0') {
                     LAB_0041d993:
                         DAT_BuildingsState::instance.buildings[iVar10].extraAnimationFrame1 = 0;
                         goto LAB_0041d999;
@@ -289,7 +289,7 @@ namespace Map {
                     *piVar1 = *piVar1 + 1;
                     if ((char)DAT_BuildingDefinedData::instance
                             .QuarryAnimationFrames7[DAT_BuildingsState::instance.buildings[iVar10].extraAnimationFrame1]
-                        < '\x01')
+                        <= '\0')
                         goto LAB_0041d993;
                     DAT_BuildingsState::instance.buildings[iVar10].extraAnimationSprite2
                         = (char)DAT_BuildingDefinedData::instance.QuarryAnimationFrames7
@@ -315,7 +315,7 @@ namespace Map {
                 bVar8
                     = DAT_BuildingDefinedData::instance
                           .QuarryAnimationFrames8[DAT_BuildingsState::instance.buildings[iVar10].extraAnimationFrame2];
-                if ((char)bVar8 < '\x01') {
+                if ((char)bVar8 <= '\0') {
                     DAT_BuildingsState::instance.buildings[iVar10].extraAnimationFrame2 = 0;
                     goto LAB_0041ddf4;
                 }
@@ -348,7 +348,7 @@ namespace Map {
                         *piVar1 = *piVar1 + 1;
                         if ((char)DAT_BuildingDefinedData::instance.QuarryAnimationFrames11
                                 [DAT_BuildingsState::instance.buildings[iVar10].extraAnimationFrame2]
-                            < '\x01') {
+                            <= '\0') {
                             DAT_BuildingsState::instance.buildings[iVar10].extraAnimationFrame2 = 0;
                             bVar5 = true;
                             bVar12 = false;
@@ -374,7 +374,7 @@ namespace Map {
                             *piVar1 = *piVar1 + 1;
                             bVar8 = DAT_BuildingDefinedData::instance.QuarryAnimationFrames12
                                         [DAT_BuildingsState::instance.buildings[iVar10].extraAnimationFrame2];
-                            if ((char)bVar8 < '\x01') {
+                            if ((char)bVar8 <= '\0') {
                                 DAT_BuildingsState::instance.buildings[iVar10].extraAnimationFrame2 = 0;
                             } else {
                                 DAT_BuildingsState::instance.buildings[iVar10].extraAnimationSprite3
@@ -398,7 +398,7 @@ namespace Map {
                             *piVar1 = *piVar1 + 1;
                             bVar8 = DAT_BuildingDefinedData::instance.QuarryAnimationFrames13
                                         [DAT_BuildingsState::instance.buildings[iVar10].extraAnimationFrame2];
-                            if ((char)bVar8 < '\x01') {
+                            if ((char)bVar8 <= '\0') {
                                 DAT_BuildingsState::instance.buildings[iVar10].extraAnimationFrame2 = 0;
                             } else {
                                 DAT_BuildingsState::instance.buildings[iVar10].extraAnimationSprite3
@@ -432,7 +432,7 @@ namespace Map {
                             *piVar1 = *piVar1 + 1;
                             bVar8 = DAT_BuildingDefinedData::instance.QuarryAnimationFrames14
                                         [DAT_BuildingsState::instance.buildings[iVar10].extraAnimationFrame2];
-                            if ((char)bVar8 < '\x01') {
+                            if ((char)bVar8 <= '\0') {
                                 DAT_BuildingsState::instance.buildings[iVar10].extraAnimationFrame2 = 0;
                             } else {
                                 DAT_BuildingsState::instance.buildings[iVar10].extraAnimationSprite3
@@ -461,7 +461,7 @@ namespace Map {
                             *piVar1 = *piVar1 + 1;
                             if ((char)DAT_BuildingDefinedData::instance.QuarryAnimationFrames15
                                     [DAT_BuildingsState::instance.buildings[iVar10].extraAnimationFrame2]
-                                < '\x01') {
+                                <= '\0') {
                                 DAT_BuildingsState::instance.buildings[iVar10].extraAnimationFrame2 = 0;
                                 goto LAB_0041ddf4;
                             }
@@ -476,7 +476,7 @@ namespace Map {
                             *piVar1 = *piVar1 + 1;
                             if ((char)DAT_BuildingDefinedData::instance.QuarryAnimationFrames16
                                     [DAT_BuildingsState::instance.buildings[iVar10].extraAnimationFrame2]
-                                < '\x01') {
+                                <= '\0') {
                                 DAT_BuildingsState::instance.buildings[iVar10].extraAnimationFrame2 = 0;
                                 goto LAB_0041ddf4;
                             }
@@ -491,7 +491,7 @@ namespace Map {
                             *piVar1 = *piVar1 + 1;
                             if ((char)DAT_BuildingDefinedData::instance.QuarryAnimationFrames17
                                     [DAT_BuildingsState::instance.buildings[iVar10].extraAnimationFrame2]
-                                < '\x01') {
+                                <= '\0') {
                                 DAT_BuildingsState::instance.buildings[iVar10].extraAnimationFrame2 = 0;
                                 goto LAB_0041ddf4;
                             }
@@ -568,7 +568,7 @@ namespace Map {
             *piVar1 = *piVar1 + 1;
             bVar9 = DAT_BuildingDefinedData::instance
                         .QuarryAnimationFrames18[DAT_BuildingsState::instance.buildings[iVar10].extraAnimationFrame3];
-            if ((char)bVar9 < '\x01') {
+            if ((char)bVar9 <= '\0') {
                 DAT_BuildingsState::instance.buildings[iVar10].extraAnimationFrame3 = 0;
             } else {
                 DAT_BuildingsState::instance.buildings[iVar10].extraAnimationSprite4 = (char)bVar9 + 0xc1;
@@ -668,7 +668,7 @@ namespace Map {
         if ((char)DAT_BuildingDefinedData::instance
                 .SharedOverlayAnimationFrames[DAT_BuildingsState::instance.buildings[iVar10].flagSlot.ownerFlagFrame
                     / 2]
-            < '\x01') {
+            <= '\0') {
             DAT_BuildingsState::instance.buildings[iVar10].flagSlot.ownerFlagFrame = 0;
         }
         DAT_BuildingsState::instance.buildings[iVar10].overlayImageID

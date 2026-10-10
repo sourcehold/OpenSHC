@@ -149,7 +149,7 @@ namespace Map {
                 }
             } else {
                 sVar4 = DAT_BuildingsState::instance.buildings[iVar10].animationIndex;
-                if ((char)DAT_BuildingDefinedData::instance.HuntersPostAnimationFrames2[sVar4] < '\x01') {
+                if ((char)DAT_BuildingDefinedData::instance.HuntersPostAnimationFrames2[sVar4] <= '\0') {
                     bVar7 = true;
                     MACRO_CALL_MEMBER(
                         Map::Buildings::BuildingsState_Func::addResourceToStockpile, DAT_BuildingsState::ptr)(
@@ -232,7 +232,7 @@ namespace Map {
         *piVar1 = *piVar1 + 1;
         if ((char)DAT_BuildingDefinedData::instance.SharedOverlayAnimationFrames
                 [*(int*)((int)&DAT_BuildingsState::instance.buildings[0].flagSlot.ownerFlagFrame + iVar9) / 2]
-            < '\x01') {
+            <= '\0') {
             *(undefined4*)((int)&DAT_BuildingsState::instance.buildings[0].flagSlot.ownerFlagFrame + iVar9) = 0;
         }
         *(int*)((int)&DAT_BuildingsState::instance.buildings[0].overlayImageID + iVar9)

@@ -59,7 +59,7 @@ namespace Map {
             iVar4 = DAT_CurrentBuildingID::instance;
             if ((char)DAT_BuildingDefinedData::instance.WoodcuttersHutAnimationFrames
                     [DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex]
-                < '\x01') {
+                <= '\0') {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex = 0;
                 piVar1 = &DAT_BuildingsState::instance.buildings[iVar4].animationCycleCount;
                 *piVar1 = *piVar1 + 1;
@@ -93,7 +93,7 @@ namespace Map {
                 *piVar1 = *piVar1 + 1;
                 if ((char)DAT_BuildingDefinedData::instance.SharedOverlayAnimationFrames
                         [DAT_BuildingsState::instance.buildings[iVar6].flagSlot.ownerFlagFrame / 2]
-                    < '\x01') {
+                    <= '\0') {
                     DAT_BuildingsState::instance.buildings[iVar6].flagSlot.ownerFlagFrame = 0;
                 }
                 DAT_BuildingsState::instance.buildings[iVar6].overlayImageID

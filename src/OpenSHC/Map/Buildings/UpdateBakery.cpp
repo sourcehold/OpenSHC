@@ -193,7 +193,7 @@ namespace Map {
             }
             if ((char)DAT_BuildingDefinedData::instance.SecondaryOverlayAnimationFrames[*(
                     int*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar9)]
-                < '\x01') {
+                <= '\0') {
                 *(undefined4*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar9) = 0;
             }
             *(int*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationSprite2 + iVar9)
@@ -207,7 +207,7 @@ namespace Map {
             *piVar2 = *piVar2 + 1;
             if ((char)DAT_BuildingDefinedData::instance.SharedOverlayAnimationFrames
                     [*(int*)((int)&DAT_BuildingsState::instance.buildings[0].flagSlot.ownerFlagFrame + iVar9) / 2]
-                < '\x01') {
+                <= '\0') {
                 *(undefined4*)((int)&DAT_BuildingsState::instance.buildings[0].flagSlot.ownerFlagFrame + iVar9) = 0;
             }
             iVar8 = (int)(char)DAT_BuildingDefinedData::instance.SharedOverlayAnimationFrames
