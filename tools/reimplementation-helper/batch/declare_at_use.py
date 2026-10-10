@@ -21,7 +21,9 @@ import sys
 
 import common
 
-path_filter = sys.argv[1] if len(sys.argv) > 1 else ""
+args = [a for a in sys.argv[1:] if a != "--apply"]
+apply_changes = "--apply" in sys.argv[1:]
+path_filter = args[0] if args else ""
 
 DECL = re.compile(r"^(?P<type>(?:unsigned\s+|const\s+)*[A-Za-z_][\w:]*)\s+"
                   r"(?P<ptr>\**)\s*(?P<name>[A-Za-z_]\w*)\s*"
@@ -37,7 +39,7 @@ def depths(lines):
     return out
 
 
-def move(path):
+def move(path, write=True):
     text = common.read_text(path).replace("\r\n", "\n")
     brace = re.compile(r"\n[ \t]*\{[ \t]*\n").search(text, text.index("// FUNCTION:"))
     if not brace:
@@ -82,7 +84,8 @@ def move(path):
     if not drop:
         return None
     kept = [d[0] for d in decls if d[4] not in drop]
-    common.write_text(path, head + "\n".join(l for n, l in enumerate(lines) if n not in drop))
+    if write:
+        common.write_text(path, head + "\n".join(l for n, l in enumerate(lines) if n not in drop))
     return len(decls), len(drop), kept
 
 
@@ -90,12 +93,14 @@ touched = 0
 for f in common.list_files():
     if path_filter not in f:
         continue
-    result = move(f)
+    result = move(f, write=apply_changes)
     if not result:
         continue
     count, moved, kept = result
-    common.format_file(f)
+    if apply_changes:
+        common.format_file(f)
     touched += 1
     print("%-52s %2d declarations, %2d moved, left: %s"
           % (f.rsplit("/", 1)[-1][:-4], count, moved, " ".join(kept) or "-"))
-print("%d file(s) changed" % touched)
+print("%d file(s) changed%s"
+      % (touched, "" if apply_changes else " (dry run, pass --apply)"))

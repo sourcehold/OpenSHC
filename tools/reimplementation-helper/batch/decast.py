@@ -16,7 +16,9 @@ import sys
 
 import common
 
-path_filter = sys.argv[1] if len(sys.argv) > 1 else ""
+args = [a for a in sys.argv[1:] if a != "--apply"]
+apply_changes = "--apply" in sys.argv[1:]
+path_filter = args[0] if args else ""
 
 # (outer, inner) pairs where dropping the inner cast cannot change the conversion
 PAIRS = [("int", "int"), ("uint", "uint"), ("short", "short"), ("ushort", "ushort"),
@@ -89,8 +91,10 @@ for f in common.list_files():
         if n > 200:
             sys.exit("%s: not converging" % f)
     if n:
-        common.write_text(f, text)
-        common.format_file(f)
+        if apply_changes:
+            common.write_text(f, text)
+            common.format_file(f)
         print("%-52s %d" % (f.rsplit("/", 1)[-1][:-4], n))
         total += n
-print("%d doubled cast(s) collapsed" % total)
+print("%d doubled cast(s) collapsed%s"
+      % (total, "" if apply_changes else " (dry run, pass --apply)"))

@@ -92,6 +92,12 @@ def rewrite_one(text, at):
     shift = mask.bit_length()
     if mask + 1 != 1 << shift:            # not 2^k - 1: not this idiom
         return None
+    # The decompiler casts the bias operand only when the variable is itself unsigned
+    # (`(int)unitID >> 0x1f` against a plain `iVar5 >> 0x1f`), so that cast says the
+    # division has to stay signed in our source too. Dropping it compiles `/ 16` to an
+    # unsigned shr with no bias, which is the wrong value and a worse match: it cost
+    # addUnitToTribe 5 points, and keeping the cast gained 37.
+    signed_cast = m.group(1).strip().startswith("(int)")
     dividend = normalize(m.group(1))
 
     # the brackets one level further out must hold "dividend + bias"
@@ -109,11 +115,16 @@ def rewrite_one(text, at):
     m = SHIFT.match(text[end:])
     if not m or int(m.group(1)) != shift:
         return None
-    # A signed cast around the sum only existed to make the shift arithmetic, and the bias
-    # itself proves the dividend is already signed, so the cast goes with the shift.
+    # A signed cast around the sum only existed to make the shift arithmetic, so it goes
+    # with the shift -- but a cast on the dividend itself is load-bearing, see above.
     if text[:sum_open].rstrip().endswith("(int)"):
         start = text.rindex("(int)", 0, sum_open)
-    return text[:start] + "%s / %d" % (dividend, 1 << shift) + text[end + m.end():]
+    emit = dividend
+    if signed_cast:
+        if not re.match(r"\A[\w:.]+(\[[^\[\]]*\]|->\w+|\.\w+)*\Z", dividend):
+            emit = "(%s)" % dividend       # a compound dividend needs its own brackets
+        emit = "(int)" + emit
+    return text[:start] + "%s / %d" % (emit, 1 << shift) + text[end + m.end():]
 
 
 def process(text):
