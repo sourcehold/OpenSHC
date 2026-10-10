@@ -9,7 +9,7 @@ Measured as code-generation neutral over the UnitsState namespace (19 casts, no 
 any function), so it is a readability pass -- but re-measure after running it.
 
 usage:
-  decast.py [path-filter]
+  decast.py [path-filter] [--apply]
 """
 
 import sys

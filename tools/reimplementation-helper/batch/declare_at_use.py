@@ -13,7 +13,7 @@ Declaration position does not change code generation, so this is a readability p
 it before measuring, not instead of.
 
 usage:
-  declare_at_use.py [path-filter]
+  declare_at_use.py [path-filter] [--apply]
 """
 
 import re
