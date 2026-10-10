@@ -86,7 +86,7 @@ void Synchrony::LoadSkirmishCampaignData(int missionID)
     piVar4 = &pCVar9->team1;
     do {
         DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[iVar5 + 1] = (byte)*piVar4;
-        if (iVar7 <= iVar5) {
+        if (iVar5 >= iVar7) {
             DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[iVar5 + 1] = 0xff;
         }
         iVar5 = iVar5 + 1;
@@ -98,7 +98,7 @@ void Synchrony::LoadSkirmishCampaignData(int missionID)
         byte bVar2 = DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[iVar5];
         iVar6 = (int)(char)bVar2;
         DAT_GameState::instance.mapAndTime.playerGroupArray[iVar5] = iVar6;
-        if (('\0' < (char)bVar2) && (DAT_GameState::instance.mapAndTime.playerTeams[iVar5] = iVar6, iVar7 < iVar6)) {
+        if (('\0' < (char)bVar2) && (DAT_GameState::instance.mapAndTime.playerTeams[iVar5] = iVar6, iVar6 > iVar7)) {
             iVar7 = iVar6;
         }
         iVar5 = iVar5 + 1;

@@ -35,13 +35,13 @@ namespace Map {
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIncrement = 1;
         if ((char)DAT_BuildingDefinedData::instance
                 .CampGroundAnimationFrames[DAT_BuildingsState::instance.buildings[_currentBuildingID].animationIndex]
-            < '\x01') {
+            <= '\0') {
             DAT_BuildingsState::instance.buildings[_currentBuildingID].animationIndex = 0;
             DAT_BuildingsState::instance.buildings[_currentBuildingID].animationCycleCount
                 = DAT_BuildingsState::instance.buildings[_currentBuildingID].animationCycleCount + 1;
             DAT_SFX_Interval_Campfire::instance = DAT_SFX_Interval_Campfire::instance + 1;
             DAT_BuildingsState::instance.buildings[_currentBuildingID].animationCycleCompleted = 1;
-            if (0 < DAT_SFX_Interval_Campfire::instance) {
+            if (1 <= DAT_SFX_Interval_Campfire::instance) {
                 DAT_SFX_Interval_Campfire::instance = 0;
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                     (int)(short)DAT_BuildingsState::instance.buildings[_currentBuildingID].x,
