@@ -14,11 +14,10 @@ namespace Rendering {
         // FUNCTION: STRONGHOLDCRUSADER 0x00408E70
         void BinkControlClass::setBinkSndStreamAndStartTime(int binkObjIndex, SHC_SoundStream soundStreamIndexUnk)
         {
-            DWORD _currentSysTime;
             if ((DAT_SoundSystemState::instance.waveOutOpenUnk_0x8)
                 && (DAT_SoundSystemState::instance.soundActiveUnk_0x0)) {
                 this->soundStreamIndex[binkObjIndex] = soundStreamIndexUnk;
-                _currentSysTime = timeGetTime();
+                DWORD _currentSysTime = timeGetTime();
                 this->startTime[binkObjIndex] = _currentSysTime;
             }
         }

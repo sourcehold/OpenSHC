@@ -20,13 +20,11 @@ namespace UI {
     void Helpers::ReadMapHeaderFromFile(char* param_1)
     {
         char cVar1;
-        int iVar2;
-        uint uVar3;
         char* puVar4;
         char local_3f4[1008];
         char* puVar3;
-        uVar3 = MSVC_SecurityCookie::instance ^ (uint)local_3f4;
-        iVar2 = -(int)param_1;
+        uint uVar3 = MSVC_SecurityCookie::instance ^ (uint)local_3f4;
+        int iVar2 = -(int)param_1;
         do {
             cVar1 = *param_1;
             param_1[(int)(local_3f4 + iVar2)] = cVar1;

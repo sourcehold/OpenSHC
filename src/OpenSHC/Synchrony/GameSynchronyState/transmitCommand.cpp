@@ -21,15 +21,13 @@ namespace Synchrony {
         char* addressOfFullCommandObjectOrCommandParameters, size_t size, undefined4 idTo)
     {
         int iVar1;
-        BOOLEnum BVar2;
-        int _packetSize;
         char* _src;
         size_t local_3f0;
         char local_3ec[1000];
         uint local_4;
         DWORD _dwFlags;
         DWORD _dwPriority;
-        _packetSize = size;
+        int _packetSize = size;
         local_4 = MSVC_SecurityCookie::instance ^ (uint)&_src;
         _src = addressOfFullCommandObjectOrCommandParameters;
         if (this->currentGameMode == Game::GM_SOLITARY || this->currentGameMode == Game::GM_SKIRMISH_SINGLE_PLAYER
@@ -58,7 +56,7 @@ namespace Synchrony {
         }
         this->DAT_CurrentTransmitCommandPacketSize = _packetSize;
         if (commandCategory == 117) {
-            BVar2 = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
+            BOOLEnum BVar2 = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
             _dwPriority = 0xfffd;
             if (!BVar2) {
             LAB_00487dc7:

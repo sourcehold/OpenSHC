@@ -22,7 +22,6 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x00493980
     void MenuTextInputState::activateLoadOrSaveMapUI(int loadOrSaveMap)
     {
-        int iVar1;
         int* piVar2;
         DAT_MouseState::instance.waitCursorToggle = 1;
         MACRO_CALL(UI::Helpers_Func::SetCursorDependingOnProgramState)();
@@ -31,7 +30,7 @@ namespace UI {
         MACRO_CALL_MEMBER(IO::ResourceManager_Func::discoverMapFiles, DAT_ResourceManager::ptr)("maps\\*.map");
         MACRO_CALL_MEMBER(IO::ResourceManager_Func::mapNames_filterMapsIfMapLock, DAT_ResourceManager::ptr)();
         this->fileListEntryCount = DAT_ResourceManager::instance.mapFileCounter;
-        iVar1 = 0;
+        int iVar1 = 0;
         if (0 < DAT_ResourceManager::instance.mapFileCounter) {
             piVar2 = (int*)(&this->DAT_MapSelectionPreloadMapIndexMapping);
             do {

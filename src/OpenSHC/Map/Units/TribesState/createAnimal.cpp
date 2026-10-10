@@ -26,24 +26,17 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00525BA0
         dword TribesState::createAnimal(MappersEnum animalType, uint x, uint y, int tile)
         {
-            short sVar1;
-            dword tribeID;
-            int _tile;
             uint unitID;
-            byte bVar2;
-            int iVar3;
-            UnitType unitType;
-            int _rng2;
-            unitType = ((UnitType)0);
-            _rng2 = 0;
-            tribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, this)(0, 0);
+            UnitType unitType = ((UnitType)0);
+            int _rng2 = 0;
+            dword tribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, this)(0, 0);
             if ((int)tribeID < 1) {
                 return (dword)(0);
             }
             if (399 < x || 399 < y || *(char*)(y * 400 + 0x21aec98 + x) == '\0') {
                 return (dword)(0);
             }
-            _tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+            int _tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
             if (animalType == Commands::M_MAPPER_DEER) {
                 if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x4a5014b1U)) {
                     return (dword)(0);
@@ -87,7 +80,7 @@ namespace Map {
                     return (dword)(0);
                 }
             }
-            iVar3 = 0;
+            int iVar3 = 0;
             if (_rng2) {
                 do {
                     unitID = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
@@ -97,7 +90,7 @@ namespace Map {
                         DAT_UnitsState::instance.units[unitID].substate
                             = (byte)DAT_UnitsState::instance.units[unitID].fixedRng & 3;
                         if (unitType == Map::Units::UT_ANTELOPESHDEER) {
-                            bVar2 = (byte)DAT_UnitsState::instance.units[unitID].fixedRng & 7;
+                            byte bVar2 = (byte)DAT_UnitsState::instance.units[unitID].fixedRng & 7;
                             DAT_UnitsState::instance.units[unitID].antelopeBasedRngValue = bVar2;
                             if (bVar2 == 3) {
                                 DAT_UnitsState::instance.units[unitID].antelopeBasedRngValue = 1;
@@ -119,7 +112,7 @@ namespace Map {
                     iVar3 = iVar3 + 1;
                 } while (iVar3 < _rng2);
             }
-            sVar1 = this->tribes[tribeID].size;
+            short sVar1 = this->tribes[tribeID].size;
             this->tribes[tribeID].herdMinSize = sVar1 / 2;
             if (animalType == Commands::M_MAPPER_LION) {
                 this->tribes[tribeID].herdMaxSize = sVar1;

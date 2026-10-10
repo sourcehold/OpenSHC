@@ -20,18 +20,16 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x005119D0
     void HoveredState::calculateHoveredTile()
     {
-        int iVar1;
         int iVar2;
         int iVar3;
         int imageX;
-        int imageID;
         HoveredStateElement* piVar6;
         int imageY;
         int local_10;
         int local_c;
         int local_8;
-        iVar1 = DAT_TileMapState::instance.uiBuildingRotation;
-        imageID = 0;
+        int iVar1 = DAT_TileMapState::instance.uiBuildingRotation;
+        int imageID = 0;
         if (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY) {
             local_c = 0;
             local_10 = 0;
@@ -70,13 +68,13 @@ namespace UI {
                         DAT_ViewportRenderState::ptr)(IO::Graphics::GID_ANIM_FLAGS, imageID, local_c, local_10,
                         DAT_ViewportRenderState::instance.translationMatrix[piVar6->y].addXgetTile + piVar6->x, 0xd);
                     break;
-                    default:
-                        DAT_TileMapState::instance.skipPlacementFailChecks = 1;
-                        DAT_TileMapState::instance.uiBuildingRotation = piVar6->rotationOrExtraInfo;
-                        MACRO_CALL_MEMBER(Map::TileMapState_Func::setConstructionGFXLayerBasedOnPlacementChecks,
-                            DAT_TileMapState::ptr)(piVar6->x, piVar6->y,
-                            (MappersEnum)((int)((uint)(ushort)(short)piVar6->type)), piVar6->size);
-                        break;
+                default:
+                    DAT_TileMapState::instance.skipPlacementFailChecks = 1;
+                    DAT_TileMapState::instance.uiBuildingRotation = piVar6->rotationOrExtraInfo;
+                    MACRO_CALL_MEMBER(
+                        Map::TileMapState_Func::setConstructionGFXLayerBasedOnPlacementChecks, DAT_TileMapState::ptr)(
+                        piVar6->x, piVar6->y, (MappersEnum)((int)((uint)(ushort)(short)piVar6->type)), piVar6->size);
+                    break;
                 case Commands::M_MAPPER_HEADS:
                     imageID = piVar6->size + 1;
                     MACRO_CALL_MEMBER(Rendering::ViewportRenderState_Func::createFloatingLayerElement,

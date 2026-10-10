@@ -21,9 +21,8 @@ namespace UI {
         void NewInvasion::MenuItemActionHandler_NewInvasion_UnitButtons(int unitTypeMenuID, ...)
         {
             int _limit;
-            int _gmID;
             int _currentUnitCountOfType;
-            _gmID = 0;
+            int _gmID = 0;
             MACRO_CALL_MEMBER(Map::MapPropertiesState_Func::sumUnitCounts, DAT_MapPropertiesState::ptr)();
             _currentUnitCountOfType = *(int*)((int)&DAT_MapPropertiesState::instance
                                                   .scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]

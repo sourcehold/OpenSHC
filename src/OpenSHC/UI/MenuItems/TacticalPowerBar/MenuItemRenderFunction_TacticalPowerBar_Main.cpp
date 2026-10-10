@@ -29,7 +29,6 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004D9EC0
         void TacticalPowerBar::MenuItemRenderFunction_TacticalPowerBar_Main(int param_1, ...)
         {
-            int iVar1;
             int blendStrengthUnk;
             int _level;
             _level = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
@@ -37,7 +36,7 @@ namespace UI {
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
                 DAT_ButtonX::instance + 0x14, (int)(DAT_ButtonY::instance + 10), (int)(DAT_ButtonX::instance + 0x1e),
                 (int)(DAT_ButtonY::instance + 10), (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
-            iVar1 = param_1;
+            int iVar1 = param_1;
             switch (param_1) {
             case 0:
                 iVar1 = 5;

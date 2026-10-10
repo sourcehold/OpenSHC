@@ -18,10 +18,8 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00455300
         void TextureRenderCore::renderGM(eGM gmID, int imageID, int drawX, int drawY)
         {
-            int iVar1;
-            GmImageTypeInt _imageType;
-            iVar1 = GMTotalPicturesProcessed::instance[gmID];
-            _imageType = this->gmFileHeaderColorpaletteArray[gmID].ImageType;
+            int iVar1 = GMTotalPicturesProcessed::instance[gmID];
+            GmImageTypeInt _imageType = this->gmFileHeaderColorpaletteArray[gmID].ImageType;
             if ((_imageType != IO::Graphics::GIT_InterfaceElement)
                 && (_imageType != IO::Graphics::GIT_CompressedImage)) {
                 if (_imageType == IO::Graphics::GIT_Animation) {

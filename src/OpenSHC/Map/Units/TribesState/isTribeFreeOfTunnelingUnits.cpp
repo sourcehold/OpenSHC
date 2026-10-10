@@ -16,11 +16,9 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00525210
         BOOLEnum TribesState::isTribeFreeOfTunnelingUnits(int param_1, int param_2)
         {
-            int iVar1;
             int iVar2;
-            int unitSelectionIndex;
-            iVar1 = (int)this->tribes[param_1].size;
-            unitSelectionIndex = 0;
+            int iVar1 = (int)this->tribes[param_1].size;
+            int unitSelectionIndex = 0;
             if (0 < iVar1) {
                 do {
                     iVar2 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(

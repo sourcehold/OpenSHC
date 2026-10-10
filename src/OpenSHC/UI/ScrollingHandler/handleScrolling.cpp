@@ -18,10 +18,8 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x00468AD0
     void ScrollingHandler::handleScrolling()
     {
-        int _scrollDistanceMax;
-        DWORD _timeOfScroll;
         int _scrollDistanceDenominator;
-        _scrollDistanceMax = (this->scrollDistanceLimit * 2) / 3;
+        int _scrollDistanceMax = (this->scrollDistanceLimit * 2) / 3;
         if (DAT_MenuTextInputState::instance.currentModalDialog == UI::Enums::MMT_NO_MENU) {
             if (this->rightKeyDown_0x18) {
                 this->scrollRight = TRUE;
@@ -78,7 +76,8 @@ namespace UI {
         this->isScrolling_0x0 = TRUE;
         if (this->scrollSpeedSetting_0x38 == UI::SS_FAST) {
             _scrollDistanceDenominator
-                = (int)((ulonglong)((longlong)this->scrollAccelerationInterval * 0x55555555) >> 0x20) - this->scrollAccelerationInterval;
+                = (int)((ulonglong)((longlong)this->scrollAccelerationInterval * 0x55555555) >> 0x20)
+                - this->scrollAccelerationInterval;
             _scrollDistanceDenominator = (_scrollDistanceDenominator >> 1) - (_scrollDistanceDenominator >> 0x1f);
             _scrollDistanceMax = (_scrollDistanceMax * 0x85) / 100;
         } else {
@@ -90,7 +89,7 @@ namespace UI {
         }
         _scrollDistanceDenominator = this->scrollAccelerationInterval + _scrollDistanceDenominator;
     LAB_00468c01:
-        _timeOfScroll = timeGetTime();
+        DWORD _timeOfScroll = timeGetTime();
         this->timeScrolling_0x44 = _timeOfScroll - this->timeOfLastNotScroll_0x40;
         this->scrollDistanceBase = (int)(_timeOfScroll - this->timeOfLastNotScroll_0x40) / _scrollDistanceDenominator;
         if (_scrollDistanceMax < this->scrollDistanceBase) {

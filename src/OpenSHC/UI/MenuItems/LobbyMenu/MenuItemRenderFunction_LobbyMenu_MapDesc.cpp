@@ -36,24 +36,20 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004285F0
         void LobbyMenu::MenuItemRenderFunction_LobbyMenu_MapDesc(int param_1, ...)
         {
-            int iVar1;
-            int iVar2;
-            BOOLEnum BVar3;
-            int iVar4;
             char* pcVar5;
             int iVar6;
             int iVar7;
             int iVar8;
             int local_4;
-            BVar3 = MACRO_CALL(UI::Helpers_Func::AModalDialogIsActiveButIsNotQuitting)();
-            iVar2 = DAT_ButtonY::instance;
+            BOOLEnum BVar3 = MACRO_CALL(UI::Helpers_Func::AModalDialogIsActiveButIsNotQuitting)();
+            int iVar2 = DAT_ButtonY::instance;
             iVar7 = DAT_ButtonX::instance;
             if (!BVar3) {
                 iVar6 = DAT_ButtonW::instance + 0x65 + DAT_ButtonX::instance;
                 local_4 = iVar6 + -0x14;
-                iVar4 = (DAT_ButtonBackgroundBlendStrength::instance + -0x20) * 0x10;
+                int iVar4 = (DAT_ButtonBackgroundBlendStrength::instance + -0x20) * 0x10;
                 iVar8 = DAT_ButtonH::instance + 0x7a + DAT_ButtonY::instance;
-                iVar1 = DAT_ButtonY::instance + 3;
+                int iVar1 = DAT_ButtonY::instance + 3;
                 MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawBlendedBlackBox, DAT_PencilRenderCore::ptr)(
                     DAT_ButtonX::instance + -0x6e, iVar1, local_4, iVar8, (iVar4 / 32) + 0x20);
                 if (!DAT_ButtonBackgroundBlendStrength::instance) {

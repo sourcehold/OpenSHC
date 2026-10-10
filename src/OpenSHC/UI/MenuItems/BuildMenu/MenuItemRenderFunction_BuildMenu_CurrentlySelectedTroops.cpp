@@ -24,15 +24,12 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00439160
         void BuildMenu::MenuItemRenderFunction_BuildMenu_CurrentlySelectedTroops(int param_1, ...)
         {
-            int iVar1;
-            int iVar2;
-            int iVar3;
-            iVar3 = DAT_ButtonY::instance;
-            iVar2 = DAT_ButtonX::instance;
+            int iVar3 = DAT_ButtonY::instance;
+            int iVar2 = DAT_ButtonX::instance;
             if (!DAT_UnitsState::instance.nHasOwnedUnitInSelection) {
                 DAT_ButtonUnknownZero::instance = 1;
             }
-            iVar1 = DAT_UnitsState::instance.selectionSlots[param_1];
+            int iVar1 = DAT_UnitsState::instance.selectionSlots[param_1];
             DAT_ButtonUnknownZero::instance = 0;
             if (iVar1 == -1) {
                 DAT_ButtonUnknownZero::instance = 1;

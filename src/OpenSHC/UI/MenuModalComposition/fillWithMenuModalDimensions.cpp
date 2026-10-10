@@ -16,10 +16,10 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004AA3E0
     void MenuModalComposition::fillWithMenuModalDimensions(int* xPtr, int* yPtr, int* widthPtr, int* heigthPtr)
     {
-        BOOLEnum _areWeInAnInGameMenu;
         int _y;
         if (this->activeModalDialogID != UI::Enums::MMT_NONE) {
-            _areWeInAnInGameMenu = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
+            BOOLEnum _areWeInAnInGameMenu
+                = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
             if (!_areWeInAnInGameMenu) {
                 *xPtr = this->modalMenu.x;
                 _y = this->modalMenu.y;

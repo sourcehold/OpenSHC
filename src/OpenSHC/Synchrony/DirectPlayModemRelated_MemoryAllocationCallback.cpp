@@ -15,10 +15,9 @@ BOOLEnum __stdcall Synchrony::DirectPlayModemRelated_MemoryAllocationCallback(
     int* param_1, undefined4 param_2, char* param_3)
 {
     char cVar1;
-    BOOLEnum BVar2;
     char* pcVar3;
     char* pcVar4;
-    BVar2 = MACRO_CALL(OS_Func::isEqualGUID)((GUID*)param_1, (GUID*)GUID_DPAID_Modem::ptr);
+    BOOLEnum BVar2 = MACRO_CALL(OS_Func::isEqualGUID)((GUID*)param_1, (GUID*)GUID_DPAID_Modem::ptr);
     if (BVar2) {
         pcVar3 = param_3;
         do {

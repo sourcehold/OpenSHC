@@ -26,11 +26,9 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00424B10
         void GameStartEnterName::MenuView_GameStartEnterName_DoEveryFrame()
         {
-            DWORD DVar1;
-            bool bVar2;
             if (DAT_GameCore::instance.isNameEntryActive != TRUE) {
-                MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::drawGfxOnFlaggedSurface,
-                    DAT_TextureRenderCoreObject::ptr)(0,
+                MACRO_CALL_MEMBER(
+                    UI::Rendering::TextureRenderCore_Func::drawGfxOnFlaggedSurface, DAT_TextureRenderCoreObject::ptr)(0,
                     (DAT_WindowAndDirectDraw::instance.resolutionX
                         - DAT_TextureRenderCoreObject::instance.loadedGfxArray[0].width)
                         / 2,
@@ -38,7 +36,7 @@ namespace UI {
                         - DAT_TextureRenderCoreObject::instance.loadedGfxArray[0].height)
                         / 2);
                 if (DAT_GameCore::instance.isNameEntryActive == TRUE) {
-                    DVar1 = timeGetTime();
+                    DWORD DVar1 = timeGetTime();
                     if ((DVar1 - DAT_GameCore::instance.nameEntryStartTime < 0x3e9)
                         && (!DAT_MouseState::instance.draggingStopped)) {
                         if (!DAT_MouseState::instance.rightClickStop) {
@@ -49,7 +47,7 @@ namespace UI {
                         return;
                     }
                 } else {
-                    bVar2 = DAT_UserTextHandlerState::instance.returnPressed == 0;
+                    bool bVar2 = DAT_UserTextHandlerState::instance.returnPressed == 0;
                     DAT_UserTextHandlerState::instance.returnPressed = 0;
                     if (bVar2) {
                         DAT_UserTextHandlerState::instance.returnPressed = 0;
@@ -57,8 +55,7 @@ namespace UI {
                     }
                     MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog,
                         DAT_MenuModalComposition1::ptr)(UI::Enums::MMT_NONE, FALSE);
-                    MACRO_CALL_MEMBER(
-                        Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(9);
+                    MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(9);
                 }
                 MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     UI::Enums::MVT_MAIN_MENU, 0);

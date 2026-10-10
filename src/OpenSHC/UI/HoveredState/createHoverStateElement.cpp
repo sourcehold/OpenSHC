@@ -15,10 +15,9 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x00501110
     void HoveredState::createHoverStateElement(int x, int y, MappersEnum type, int size, int flag)
     {
-        int _index;
         MappersEnumInt* _pElement;
         if (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY) {
-            _index = 0;
+            int _index = 0;
             _pElement = &this->elements[0].type;
             while (*_pElement != Commands::M_MAPPER_NULL) {
                 _index = _index + 1;

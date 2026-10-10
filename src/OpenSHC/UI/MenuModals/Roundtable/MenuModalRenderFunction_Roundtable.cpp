@@ -27,14 +27,12 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004B1AC0
         void Roundtable::MenuModalRenderFunction_Roundtable(int x, int y, int width, int height)
         {
-            int iVar1;
             int gfxIndex;
-            int iVar2;
             int* piVar3;
             int iVar4;
             int blendStrengthUnk;
             int local_40[16];
-            iVar1 = y;
+            int iVar1 = y;
             if (DAT_MouseState::instance.rightClickStart) {
                 MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog, DAT_MenuModalComposition1::ptr)(
                     UI::Enums::MMT_NONE, FALSE);
@@ -43,7 +41,7 @@ namespace UI {
                 2, x + 8, y + 8);
             local_40[4] = 0x18e;
             local_40[8] = 0x18e;
-            iVar2 = 1;
+            int iVar2 = 1;
             local_40[2] = 0xd8;
             local_40[10] = 0xd8;
             y = 0;

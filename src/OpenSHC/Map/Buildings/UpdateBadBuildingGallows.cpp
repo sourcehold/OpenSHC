@@ -20,19 +20,16 @@ namespace Map {
     void Buildings::UpdateBadBuildingGallows()
     {
         byte bVar1;
-        int sVar2;
-        uint uVar3;
-        int buildingID;
-        sVar2 = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;
+        int sVar2 = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;
         MACRO_CALL_MEMBER(AI::AICState_Func::addBuildingToTargetableBuildings, DAT_AICState::ptr)(
             DAT_CurrentBuildingID::instance);
         MACRO_CALL_MEMBER(Game::GameStateStructures_Func::addBuildingInRegistry, DAT_GameState::ptr)(
             DAT_CurrentBuildingID::instance);
-        buildingID = DAT_CurrentBuildingID::instance;
+        int buildingID = DAT_CurrentBuildingID::instance;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderBlendStrength = 0;
-        MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updateBuildingSignpostCounter,
-            DAT_BuildingsState::ptr)(buildingID, 1);
-        uVar3 = DAT_GameState::instance.playerDataArray[sVar2].fearFactorLevel;
+        MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updateBuildingSignpostCounter, DAT_BuildingsState::ptr)(
+            buildingID, 1);
+        uint uVar3 = DAT_GameState::instance.playerDataArray[sVar2].fearFactorLevel;
         if ((int)uVar3 < -2) {
             DAT_BuildingsState::instance.buildings[buildingID].renderAnimation = 1;
         } else {
@@ -46,8 +43,9 @@ namespace Map {
     LAB_004185ad:
         DAT_BuildingsState::instance.buildings[buildingID].spriteOffetX = -0x23;
         DAT_BuildingsState::instance.buildings[buildingID].spriteOffetY = -0x6d;
-        bVar1 = DAT_BuildingDefinedData::instance
-                    .BadBuildingGallowsAnimationFrames[DAT_BuildingsState::instance.buildings[buildingID].animationIndex];
+        bVar1
+            = DAT_BuildingDefinedData::instance
+                  .BadBuildingGallowsAnimationFrames[DAT_BuildingsState::instance.buildings[buildingID].animationIndex];
         DAT_BuildingsState::instance.buildings[buildingID].animationFrame = (int)(char)bVar1;
         if ((char)bVar1 < 1) {
             DAT_BuildingsState::instance.buildings[buildingID].animationIndex = 0;
@@ -55,8 +53,7 @@ namespace Map {
         }
         if (DAT_BuildingsState::instance.buildings[buildingID].buildingIsVisuallyActive
             != DAT_BuildingsState::instance.buildings[buildingID].oldVisualActiveState) {
-            MACRO_CALL_MEMBER(Map::TileMapState_Func::updateBuildingGraphicsLayer, DAT_TileMapState::ptr)(
-                buildingID);
+            MACRO_CALL_MEMBER(Map::TileMapState_Func::updateBuildingGraphicsLayer, DAT_TileMapState::ptr)(buildingID);
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].oldVisualActiveState
                 = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingIsVisuallyActive;
         }

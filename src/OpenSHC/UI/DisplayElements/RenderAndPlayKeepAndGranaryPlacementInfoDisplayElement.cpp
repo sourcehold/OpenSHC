@@ -27,8 +27,6 @@ namespace UI {
     void DisplayElements::RenderAndPlayKeepAndGranaryPlacementInfoDisplayElement(
         int posX, int posY, DWORD whichBuildingIsMissing)
     {
-        int numInGroup;
-        BOOLEnum BVar1;
         char* pcVar2;
         int iVar3;
         int iVar4;
@@ -37,18 +35,18 @@ namespace UI {
         uint color2;
         int fontSize;
         int blendStrength;
-        BVar1 = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
+        BOOLEnum BVar1 = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
         if ((!BVar1) || (DAT_GameCore::instance.gameMode_2 == Game::GM_CRUSADER_TUTORIAL)) {
             MACRO_CALL(UI::DisplayElements_Func::CheckDisplayElementByIDAndSetForUnlimitedDisplay)(
                 UI::Enums::DEID_KEEP_AND_GRANERY_PLACEMENT_INFO, 0);
         }
-        numInGroup = whichBuildingIsMissing + 9;
-        pcVar2 = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_FEEDBACK, numInGroup);
+        int numInGroup = whichBuildingIsMissing + 9;
+        pcVar2 = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
+            DE::SHCDE::TEXT_FEEDBACK, numInGroup);
         iVar3 = MACRO_CALL_MEMBER(Text::FontSizeClass_Func::renderMultilineTextUnk,
             &DAT_TextManagerObject::instance.fontSizeClassArray[0x12])(pcVar2, 0, 0, 0x244, 0, 0, 1);
-        pcVar2 = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_FEEDBACK, numInGroup);
+        pcVar2 = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
+            DE::SHCDE::TEXT_FEEDBACK, numInGroup);
         iVar4 = MACRO_CALL_MEMBER(Text::FontSizeClass_Func::renderMultilineTextUnk,
             &DAT_TextManagerObject::instance.fontSizeClassArray[0x12])(pcVar2, 0, 0, 0x244, 0, 0, 2);
         blendStrength = 0;
@@ -58,8 +56,8 @@ namespace UI {
         maxWidth = 0x244;
         iVar3 = posY - iVar3;
         iVar4 = posX - iVar4;
-        pcVar2 = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_FEEDBACK, numInGroup);
+        pcVar2 = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
+            DE::SHCDE::TEXT_FEEDBACK, numInGroup);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderMultilineText6Unk, DAT_TextManagerObject::ptr)(
             pcVar2, iVar4, iVar3, maxWidth, color1, color2, fontSize, blendStrength);
         if (whichBuildingIsMissing == 1) {

@@ -23,13 +23,11 @@ namespace UI {
         void InGameMenu::MenuItemActionHandler_InGameMenu_ViewToKeeps(int param_1, ...)
         {
             int iVar1;
-            DWORD DVar2;
-            int iVar3;
             int* piVar5;
             int iVar4;
             dword dVar5;
             if (DAT_MenuModalComposition1::instance.activeModalDialogID == UI::Enums::MMT_NONE) {
-                DVar2 = timeGetTime();
+                DWORD DVar2 = timeGetTime();
                 if (1000 < DVar2 - DWORD_00b98410::instance) {
                     DAT_00b9840c::instance = 0;
                     DWORD_00b98410::instance = DVar2;
@@ -45,7 +43,7 @@ namespace UI {
                     dVar5 = 1;
                     iVar4 = -1;
                     piVar5 = DAT_GameState::instance.mapAndTime.playerKeepTile + 1;
-                    iVar3 = 2;
+                    int iVar3 = 2;
                     do {
                         if (-1 < piVar5[-1]) {
                             if (dVar5 == DAT_GameCore::instance.viewedKeepIndex) {

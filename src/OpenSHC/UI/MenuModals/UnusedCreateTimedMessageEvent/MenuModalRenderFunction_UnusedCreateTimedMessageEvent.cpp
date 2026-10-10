@@ -13,19 +13,15 @@ namespace UI {
         void UnusedCreateTimedMessageEvent::MenuModalRenderFunction_UnusedCreateTimedMessageEvent(
             int x, int y, int width, int height)
         {
-            int x2;
-            int y1;
-            int x1;
-            int y2;
             /*
               added by script: "Message"
              */
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner, DAT_PencilRenderCore::ptr)(
                 199, 0x2f, x, y, width, height);
-            y1 = y + 0x109;
-            x2 = x + 0x2b3;
-            x1 = x + 0xbd;
-            y2 = y + 0x1bc;
+            int y1 = y + 0x109;
+            int x2 = x + 0x2b3;
+            int x1 = x + 0xbd;
+            int y2 = y + 0x1bc;
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
                 x1, y + 0x108, x2, y + 0x108, (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(

@@ -22,9 +22,6 @@ namespace UI {
     void DisplayElements::RenderDebugNumbersDisplayElement(int posX, int posY, DWORD elementState)
     {
         int _loopEndCondition;
-        int _maxLoopDurationOfTheLast100;
-        int _someRelationBetweenLoopDurationAndTickrate;
-        int _gameLoopDurationBufferSum;
         int* _millisecLoopPointer;
         int _tickRateSum;
         int _averageMillisecLoopMain;
@@ -38,7 +35,7 @@ namespace UI {
         DAT_TickRateBuffer::instance[INT_GameLoopTimeDataIndex::instance] = _lastGameTickRate;
         INT_GameLoopTimeDataIndex::instance = INT_GameLoopTimeDataIndex::instance + 1;
         _tickRateSum = 0;
-        _gameLoopDurationBufferSum = 0;
+        int _gameLoopDurationBufferSum = 0;
         if (INT_GameLoopTimeDataIndex::instance == 100) {
             INT_GameLoopTimeDataIndex::instance = 0;
         }
@@ -66,7 +63,7 @@ namespace UI {
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
                 _lastGameLoopDuration, posX, posY + 5, Text::TTA_LEFT, 0x80ff, 0, 0xf, FALSE, 0);
         }
-        _maxLoopDurationOfTheLast100 = -1;
+        int _maxLoopDurationOfTheLast100 = -1;
         _millisecLoopPointer = DAT_GameLoopDurationBuffer::instance + 1;
         do {
             if (_maxLoopDurationOfTheLast100 < _millisecLoopPointer[-1]) {
@@ -95,14 +92,14 @@ namespace UI {
         }
         if (elementState != 0xfffffc18) {
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
-                (int)(1000 / (longlong)_averageMillisecLoopMain), posX + 0x30, posY + 0x14, Text::TTA_LEFT,
-                0x80ff, 0, 0x11, FALSE, 0);
+                (int)(1000 / (longlong)_averageMillisecLoopMain), posX + 0x30, posY + 0x14, Text::TTA_LEFT, 0x80ff, 0,
+                0x11, FALSE, 0);
         }
         DAT_CurrentFramerate::instance = (int)(1000 / (longlong)_averageMillisecLoopMain);
         if (!_tickRateSum) {
             _tickRateSum = 1;
         }
-        _someRelationBetweenLoopDurationAndTickrate = _gameLoopDurationBufferSum / _tickRateSum;
+        int _someRelationBetweenLoopDurationAndTickrate = _gameLoopDurationBufferSum / _tickRateSum;
         if (!_someRelationBetweenLoopDurationAndTickrate) {
             _someRelationBetweenLoopDurationAndTickrate = 1;
         }

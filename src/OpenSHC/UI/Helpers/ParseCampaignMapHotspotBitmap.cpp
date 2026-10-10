@@ -13,7 +13,6 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004D6F60
     void Helpers::ParseCampaignMapHotspotBitmap()
     {
-        byte bVar1;
         byte bVar2;
         FILE* _File;
         GFXRelatedBuffer1* pGVar3;
@@ -98,7 +97,7 @@ namespace UI {
                     iVar6 = 0;
                     iVar9 = 0;
                     do {
-                        bVar1 = *(byte*)(iVar6 + (int)local_c);
+                        byte bVar1 = *(byte*)(iVar6 + (int)local_c);
                         iVar7 = iVar6;
                         if ((bVar1) && (_File = local_8, (byte)(bVar1 - 0x15) < 0x14)) {
                             sVar8 = 1;

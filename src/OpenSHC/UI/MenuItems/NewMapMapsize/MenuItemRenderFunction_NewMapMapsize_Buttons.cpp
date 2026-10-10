@@ -38,8 +38,7 @@ namespace UI {
         {
             undefined4 uVar1;
             char local_18[20];
-            uint local_4;
-            local_4 = MSVC_SecurityCookie::instance ^ (uint)local_18;
+            uint local_4 = MSVC_SecurityCookie::instance ^ (uint)local_18;
             if ((DAT_MenuTextInputState::instance.currentModalDialog == UI::Enums::MMT_NO_MENU)
                 && (DAT_MenuModalComposition1::instance.activeModalDialogID == UI::Enums::MMT_NONE)) {
                 if (param_1 == 7) {

@@ -21,7 +21,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00521A90
         void TribesState::playUnitCombatSpeechForTarget(int selectionID, int unitID)
         {
-            short sVar1;
             UnitTypeShort UVar2;
             int _otherUnitID;
             UnitTypeInt _ptrptrCurrentSelectionID;
@@ -40,7 +39,7 @@ namespace Map {
             _ptrptrCurrentSelectionID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getMajoritySelectedUnitType,
                 this)(selectionID, (int*)&_ptrCurrentSelectionID);
             _ptrCurrentSelectionID_2 = _ptrCurrentSelectionID;
-            sVar1 = DAT_TribesState::instance.tribes[selectionID].size;
+            short sVar1 = DAT_TribesState::instance.tribes[selectionID].size;
             switch (_ptrptrCurrentSelectionID) {
             case Map::Units::UT_E_ARCHER:
             case Map::Units::UT_E_XBOW:

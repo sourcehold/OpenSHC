@@ -13,11 +13,10 @@ namespace Map {
         dword TribesState::spawnUnitsAroundLocation(
             undefined4 param_1, int aroundX, int aroundY, int playerID, UnitType unitType, int count)
         {
-            dword _tribeID;
             if ((aroundX <= 0) && (aroundY <= 0)) {
                 return (dword)(0);
             }
-            _tribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, this)(playerID, 0);
+            dword _tribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, this)(playerID, 0);
             if ((int)_tribeID <= 0) {
                 return (dword)(0);
             }

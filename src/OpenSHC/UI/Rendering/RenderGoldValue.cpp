@@ -18,12 +18,10 @@ namespace UI {
         int numberToRenderUnk;
         int iVar1;
         int iVar2;
-        int iVar3;
         int iVar4;
-        int iVar5;
         int local_c;
         int _gold;
-        iVar3 = DAT_GameSynchronyState::instance.currentPlayerSlotID;
+        int iVar3 = DAT_GameSynchronyState::instance.currentPlayerSlotID;
         iVar2 = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                     .populationCap;
         iVar4 = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
@@ -35,7 +33,7 @@ namespace UI {
                     .currentResources[0xf];
         DAT_TextManagerObject::instance.currentXOffset_0x0
             = (int)DAT_GMImageHeaders::instance.imh[GMTotalPicturesProcessed::instance[0x2e] + 0x7b].width;
-        iVar5 = 0;
+        int iVar5 = 0;
         if (999 < _gold) {
             iVar5 = 2;
         }
@@ -113,15 +111,15 @@ namespace UI {
         iVar4 = MACRO_CALL_MEMBER(Text::TextManager_Func::calcRenderedNumberWidth, DAT_TextManagerObject::ptr)(
             numberToRenderUnk, 0);
         iVar4 = iVar4 / 2;
-        MACRO_CALL_MEMBER(Text::TextManager_Func::renderPartOfNumberUnk, DAT_TextManagerObject::ptr)(
-            numberToRenderUnk, (DAT_MenuHandlerState::instance.x - iVar4) + 0x2eb,
-            DAT_MenuHandlerState::instance.y + 0x203, 2, iVar2, 0, 0);
-        MACRO_CALL_MEMBER(Text::TextManager_Func::renderPartOfNumberUnk, DAT_TextManagerObject::ptr)(
-            numberToRenderUnk, (DAT_MenuHandlerState::instance.x - iVar4) + 0x2eb,
-            DAT_MenuHandlerState::instance.y + 0x203, 1, iVar2, 0, 1);
-        MACRO_CALL_MEMBER(Text::TextManager_Func::renderPartOfNumberUnk, DAT_TextManagerObject::ptr)(
-            numberToRenderUnk, (DAT_MenuHandlerState::instance.x - iVar4) + 0x2eb,
-            DAT_MenuHandlerState::instance.y + 0x203, 0, iVar2, 0, 1);
+        MACRO_CALL_MEMBER(Text::TextManager_Func::renderPartOfNumberUnk, DAT_TextManagerObject::ptr)(numberToRenderUnk,
+            (DAT_MenuHandlerState::instance.x - iVar4) + 0x2eb, DAT_MenuHandlerState::instance.y + 0x203, 2, iVar2, 0,
+            0);
+        MACRO_CALL_MEMBER(Text::TextManager_Func::renderPartOfNumberUnk, DAT_TextManagerObject::ptr)(numberToRenderUnk,
+            (DAT_MenuHandlerState::instance.x - iVar4) + 0x2eb, DAT_MenuHandlerState::instance.y + 0x203, 1, iVar2, 0,
+            1);
+        MACRO_CALL_MEMBER(Text::TextManager_Func::renderPartOfNumberUnk, DAT_TextManagerObject::ptr)(numberToRenderUnk,
+            (DAT_MenuHandlerState::instance.x - iVar4) + 0x2eb, DAT_MenuHandlerState::instance.y + 0x203, 0, iVar2, 0,
+            1);
     }
 
 }

@@ -15,15 +15,10 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00471340
         void PencilRenderCore::drawBorderedBoxWithBlendedBackground(int xPos, int yPos, int width, int height)
         {
-            int iVar1;
-            int iVar2;
-            int imageID;
-            int iVar3;
             int iVar4;
-            int iVar5;
-            iVar1 = ((height + -1) / 0x18 + 1) * 0x18;
-            iVar2 = ((width + -1) / 0x18 + 1) * 0x18;
-            iVar3 = 0;
+            int iVar1 = ((height + -1) / 0x18 + 1) * 0x18;
+            int iVar2 = ((width + -1) / 0x18 + 1) * 0x18;
+            int iVar3 = 0;
             if (0 < iVar1) {
                 do {
                     if (!iVar3) {
@@ -31,16 +26,15 @@ namespace UI {
                     } else {
                         iVar4 = (-(uint)(iVar3 != iVar1 + -0x18) & 0xfffffffa) + 0xd;
                     }
-                    iVar5 = 0;
+                    int iVar5 = 0;
                     if (0 < iVar2) {
                         do {
-                            imageID = iVar4;
+                            int imageID = iVar4;
                             if (!iVar5) {
                             LAB_004713ce:
                                 MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
-                                    DAT_TextureRenderCoreObject::ptr)(IO::Graphics::GID_INTERFACE_ICONS_3,
-                                    imageID, iVar5 + xPos, iVar3 + yPos, IO::Graphics::GID_INTERFACE_ICONS_3,
-                                    imageID + 3, 0);
+                                    DAT_TextureRenderCoreObject::ptr)(IO::Graphics::GID_INTERFACE_ICONS_3, imageID,
+                                    iVar5 + xPos, iVar3 + yPos, IO::Graphics::GID_INTERFACE_ICONS_3, imageID + 3, 0);
                             } else {
                                 if (iVar5 == iVar2 + -0x18) {
                                     imageID = iVar4 + 2;

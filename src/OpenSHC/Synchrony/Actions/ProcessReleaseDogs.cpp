@@ -19,17 +19,14 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x00466430
     void Actions::ProcessReleaseDogs(int param_1, int buildingID, int buildingUID)
     {
-        ushort uVar1;
-        ushort uVar2;
         int iVar3;
         int iVar4;
-        int iVar5;
         short* psVar6;
         int iVar7;
         int* piVar8;
         int iVar9;
-        uVar1 = DAT_BuildingsState::instance.buildings[buildingID].x;
-        uVar2 = DAT_BuildingsState::instance.buildings[buildingID].y;
+        ushort uVar1 = DAT_BuildingsState::instance.buildings[buildingID].x;
+        ushort uVar2 = DAT_BuildingsState::instance.buildings[buildingID].y;
         if (DAT_BuildingsState::instance.buildings[buildingID].uid == buildingUID) {
             DAT_BuildingsState::instance.buildings[buildingID].flagonsOfAleOrCheeseOrReleaseDogs = 1;
             piVar8 = &DAT_BuildingsState::instance.buildings[buildingID].insideUnitUID1;
@@ -43,7 +40,7 @@ namespace Synchrony {
                 iVar9 = iVar9 + -1;
             } while (iVar9);
             iVar9 = (short)uVar2 * 8;
-            iVar5 = (short)uVar1 * 8;
+            int iVar5 = (short)uVar1 * 8;
             iVar7 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(0, param_1, iVar5,
                 iVar9, (int)(DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk),
                 Map::Units::UT_CAGEDOG);

@@ -29,9 +29,7 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x0047F860
     void GameSynchronyState::renderInGameChat(int param_1, int param_2, int param_3)
     {
-        DWORD DVar1;
         int iVar2;
-        int iVar3;
         char* pcVar4;
         int iVar5;
         TextAlignment alignment;
@@ -44,9 +42,9 @@ namespace Synchrony {
         this->chatMessageRenderIndex = this->DAT_ChatMessageArrayIndex;
         local_4 = 4;
         do {
-            iVar3 = this->chatMessageRenderIndex;
+            int iVar3 = this->chatMessageRenderIndex;
             if (this->DAT_ChatEventArray[this->chatMessageRenderIndex].flag == 1) {
-                DVar1 = timeGetTime();
+                DWORD DVar1 = timeGetTime();
                 if ((int)(DVar1 - this->DAT_ChatEventArray[iVar3].time) < 0x2711) {
                     iVar5 = this->DAT_ChatEventArray[iVar3].subjectPlayer;
                     _lordID = DAT_GameState::instance.playerDataArray[iVar5].lordID;

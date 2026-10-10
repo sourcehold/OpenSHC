@@ -19,10 +19,8 @@ namespace Map {
         BOOLEnum TribesState::isTribeAllAssassins(int tribeID)
         {
             int _unitID;
-            int iVar1;
-            int _unitSelectionIndex;
-            iVar1 = (int)this->tribes[tribeID].size;
-            _unitSelectionIndex = 0;
+            int iVar1 = (int)this->tribes[tribeID].size;
+            int _unitSelectionIndex = 0;
             if (0 < iVar1) {
                 do {
                     _unitID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(

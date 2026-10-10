@@ -15,8 +15,7 @@ namespace Map {
         void TribesState::applyMovementDistanceToUnitsInTribeBasedOnUnitNumberInTribe(int param_1)
         {
             int iVar1;
-            int unitSelectionIndex;
-            unitSelectionIndex = 0;
+            int unitSelectionIndex = 0;
             if (0 < this->tribes[param_1].size) {
                 do {
                     iVar1 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(

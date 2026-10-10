@@ -27,16 +27,13 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00418F90
     void Buildings::UpdateBadBuildingBurningStake()
     {
-        short sVar1;
-        int iVar2;
-        int iVar3;
-        iVar2 = DAT_CurrentBuildingID::instance;
-        sVar1 = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;
+        int iVar2 = DAT_CurrentBuildingID::instance;
+        short sVar1 = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].playerColorUnk = 0;
         MACRO_CALL_MEMBER(AI::AICState_Func::addBuildingToTargetableBuildings, DAT_AICState::ptr)(iVar2);
         MACRO_CALL_MEMBER(Game::GameStateStructures_Func::addBuildingInRegistry, DAT_GameState::ptr)(
             DAT_CurrentBuildingID::instance);
-        iVar3 = DAT_CurrentBuildingID::instance;
+        int iVar3 = DAT_CurrentBuildingID::instance;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].displayOwnerFlag = 0;
         DAT_BuildingsState::instance.buildings[iVar3].renderBlendStrength = 0;
         MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updateBuildingSignpostCounter, DAT_BuildingsState::ptr)(

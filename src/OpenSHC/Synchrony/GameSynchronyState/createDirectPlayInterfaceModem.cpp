@@ -13,9 +13,6 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x004874B0
     void GameSynchronyState::createDirectPlayInterfaceModem()
     {
-        uint uVar1;
-        int iVar2;
-        HRESULT HVar3;
         void* _allocateMem;
         int* _allocateMemLock;
         void* pvVar4;
@@ -24,7 +21,7 @@ namespace Synchrony {
         IDirectPlay4A* _refIDirectPlay;
         DWORD _playerAddress;
         GUID _guid;
-        uVar1 = MSVC_SecurityCookie::instance ^ (uint)&_interface;
+        uint uVar1 = MSVC_SecurityCookie::instance ^ (uint)&_interface;
         /*
           GUID for modem service provider
          */
@@ -32,12 +29,12 @@ namespace Synchrony {
         _refIDirectPlay = (IDirectPlay4A*)0x0;
         _interface = (IDirectPlay4A*)0x0;
         _playerAddress = 0;
-        iVar2 = DirectPlayCreate(&_guid, (LPDIRECTPLAY*)&_refIDirectPlay, 0);
+        int iVar2 = DirectPlayCreate(&_guid, (LPDIRECTPLAY*)&_refIDirectPlay, 0);
         if (0 <= iVar2) {
             /*
               create IDirectPlay4A
              */
-            HVar3 = _refIDirectPlay->QueryInterface(*GUID_IID_IDirectPlay4A::ptr, (LPVOID*)&_interface);
+            HRESULT HVar3 = _refIDirectPlay->QueryInterface(*GUID_IID_IDirectPlay4A::ptr, (LPVOID*)&_interface);
             if (HVar3 < 0) {
                 _refIDirectPlay->Release();
                 ;
@@ -61,10 +58,9 @@ namespace Synchrony {
             piVar5 = _allocateMemLock;
             HVar3 = _interface->GetPlayerAddress(0, _allocateMemLock, &_playerAddress);
             if (-1 < HVar3) {
-                this->DPLAYX_LOBBY
-                    ->EnumAddress((LPDPENUMADDRESSCALLBACK)MACRO_CALL(
-                                      Synchrony_Func::DirectPlayModemRelated_MemoryAllocationCallback),
-                        _allocateMemLock, _playerAddress, (void*)0x0);
+                this->DPLAYX_LOBBY->EnumAddress((LPDPENUMADDRESSCALLBACK)MACRO_CALL(
+                                                    Synchrony_Func::DirectPlayModemRelated_MemoryAllocationCallback),
+                    _allocateMemLock, _playerAddress, (void*)0x0);
             }
             _refIDirectPlay->Release();
             _interface->Release();

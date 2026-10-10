@@ -37,7 +37,6 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x00491040
     void GameSynchronyState::handleCommandLineArguments(char* arguments)
     {
-        uint uVar1;
         char* _pArguments;
         int _charIndex3;
         int _isConnect;
@@ -57,7 +56,7 @@ namespace Synchrony {
         char _argChar;
         char _char;
         char* _pCandidatePlus1;
-        uVar1 = MSVC_SecurityCookie::instance ^ (uint)auStack_40c;
+        uint uVar1 = MSVC_SecurityCookie::instance ^ (uint)auStack_40c;
         _candidateIndex = 0;
         _quotation = false;
         local_409 = '\0';
@@ -115,8 +114,7 @@ namespace Synchrony {
                             _candidates[3][_charIndex3] = _char;
                             _charIndex3 = _charIndex3 + 1;
                         } while (_char != '\0');
-                        _isConnect
-                            = MACRO_CALL(OS_Func::__stricmp)("+connect", (char const*)((int)(_candidates[0])));
+                        _isConnect = MACRO_CALL(OS_Func::__stricmp)("+connect", (char const*)((int)(_candidates[0])));
                         if (!_isConnect) {
                             _pConnectTarget = _candidates[1];
                             this->useTCPIP = TRUE;
@@ -176,34 +174,33 @@ namespace Synchrony {
                                     _charIndex3 = _charIndex3 + 1;
                                 } while (_charIndex3 < _connectArgLength);
                             }
-                            MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex,
-                                DAT_UserTextHandlerState::ptr)(5);
+                            MACRO_CALL_MEMBER(
+                                Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(5);
                             MACRO_CALL_MEMBER(Text::UserTextHandler_Func::copyIntoTextArray,
                                 DAT_UserTextHandlerState::ptr)(_candidates[3]);
                             _candidateIndex = local_408;
                             if (this->connectPort) {
-                                MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex,
-                                    DAT_UserTextHandlerState::ptr)(6);
+                                MACRO_CALL_MEMBER(
+                                    Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(6);
                                 MACRO_CALL_MEMBER(Text::UserTextHandler_Func::copyIntoTextArray,
                                     DAT_UserTextHandlerState::ptr)(_candidates[3] + _charIndex3 + 1);
                                 _candidateIndex = local_408;
                             }
                         } else {
-                            _charIndex3 = MACRO_CALL(OS_Func::__stricmp)(
-                                "+host", (char const*)((int)(_candidates[0])));
+                            _charIndex3 = MACRO_CALL(OS_Func::__stricmp)("+host", (char const*)((int)(_candidates[0])));
                             if (!_charIndex3) {
                                 this->useTCPIP = TRUE;
                                 this->willHost = 1;
                                 this->connectPort = atol(_candidates[1]);
                                 if (this->connectPort) {
-                                    MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex,
-                                        DAT_UserTextHandlerState::ptr)(6);
+                                    MACRO_CALL_MEMBER(
+                                        Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(6);
                                     MACRO_CALL_MEMBER(Text::UserTextHandler_Func::copyIntoTextArray,
                                         DAT_UserTextHandlerState::ptr)(_candidates[3]);
                                 }
                             } else {
-                                _charIndex3 = MACRO_CALL(OS_Func::__stricmp)(
-                                    "+name", (char const*)((int)(_candidates[0])));
+                                _charIndex3
+                                    = MACRO_CALL(OS_Func::__stricmp)("+name", (char const*)((int)(_candidates[0])));
                                 if (!_charIndex3) {
                                     _pCandidatePlus1 = _candidates[1];
                                     _charIndex3 = 0x191dc80 - (int)_pCandidatePlus1;
@@ -260,17 +257,15 @@ namespace Synchrony {
                     pcVar2 = pcVar2 + 1;
                 } while (_char != '\0');
                 if (pcVar2 == _pCandidatePlus1) {
-                    MACRO_CALL_MEMBER(
-                        Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(0);
+                    MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(0);
                     /*
                       added by script: "Lord Crusader"
                      */
                     _pCandidatePlus1 = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                         DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_GAME_OPTIONS, 0x30);
-                    MACRO_CALL_MEMBER(Text::UserTextHandler_Func::copyIntoTextArray,
-                        DAT_UserTextHandlerState::ptr)(_pCandidatePlus1);
-                    MACRO_CALL_MEMBER(
-                        Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(9);
+                    MACRO_CALL_MEMBER(Text::UserTextHandler_Func::copyIntoTextArray, DAT_UserTextHandlerState::ptr)(
+                        _pCandidatePlus1);
+                    MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(9);
                 }
                 this->isHost = this->willHost;
                 if (!this->willHost) {
@@ -287,8 +282,7 @@ namespace Synchrony {
                 } else {
                     MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::initializeMultiplayerLobby, this)();
                     _candidateIndex = MACRO_CALL_MEMBER(
-                        Synchrony::GameSynchronyState_Func::initializeDirectPlayAndCreateOrJoinSession, this)(
-                        FALSE);
+                        Synchrony::GameSynchronyState_Func::initializeDirectPlayAndCreateOrJoinSession, this)(FALSE);
                     if (_candidateIndex < 0) {
                         MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::disconnectDPlay, this)();
                     } else {

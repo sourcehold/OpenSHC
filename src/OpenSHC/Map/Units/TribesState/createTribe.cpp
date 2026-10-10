@@ -20,10 +20,9 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00522890
         int TribesState::createTribe(int playerID, int setAsCurrentTribeID)
         {
-            int _tribeID;
             DAT_CurrentTribeID::instance = 1;
             do {
-                _tribeID = DAT_CurrentTribeID::instance;
+                int _tribeID = DAT_CurrentTribeID::instance;
                 if (this->tribes[DAT_CurrentTribeID::instance].tribeState == 0) {
                     MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                         820, '\0', (void*)((int)(this->tribes + DAT_CurrentTribeID::instance)));

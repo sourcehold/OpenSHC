@@ -21,17 +21,13 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00524930
         void TribesState::sortTribePathDestinationsByCost(int tribeID, int horseAndRamCount)
         {
-            short sVar1;
             int iVar2;
             int iVar3;
             int iVar4;
             int iVar5;
             int iVar6;
             bool bVar7;
-            BOOLEnum BVar8;
-            int _nextOffset1;
             int iVar9;
-            int _nextOffset2;
             uint y;
             PathFindingStatePartB* _p2;
             uint x;
@@ -42,8 +38,8 @@ namespace Map {
             PathFindingStatePartB* _p;
             int _index1;
             int _index2;
-            BVar8 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::isTribeAllAssassins, this)(tribeID);
-            sVar1 = this->tribes[tribeID].selectionTargetUnitID;
+            BOOLEnum BVar8 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::isTribeAllAssassins, this)(tribeID);
+            short sVar1 = this->tribes[tribeID].selectionTargetUnitID;
             x = (uint)DAT_UnitsState::instance.units[sVar1].x;
             if (!horseAndRamCount) {
                 y = (uint)DAT_UnitsState::instance.units[sVar1].y;
@@ -60,7 +56,7 @@ namespace Map {
             }
             if (DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile1 != 0) {
                 _p = &DAT_PathFindingState::instance.searchQueue;
-                _nextOffset1 = 0;
+                int _nextOffset1 = 0;
                 _offset1 = 0;
                 do {
                     _tile1 = _p->destinationsArray[0].tile1;
@@ -159,7 +155,7 @@ namespace Map {
             iVar9 = 0;
             if (DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile1 != 0) {
                 _p2 = &DAT_PathFindingState::instance.searchQueue;
-                _nextOffset2 = 0;
+                int _nextOffset2 = 0;
                 _p2Tile2 = &DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile2OrAHelper;
                 _counter2 = 0;
                 do {

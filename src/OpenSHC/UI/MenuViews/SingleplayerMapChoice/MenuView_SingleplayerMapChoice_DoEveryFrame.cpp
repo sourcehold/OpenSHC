@@ -36,7 +36,6 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00448E90
         void SingleplayerMapChoice::MenuView_SingleplayerMapChoice_DoEveryFrame()
         {
-            int top;
             char cVar1;
             DWORD DVar2;
             char* pcVar3;
@@ -174,7 +173,7 @@ namespace UI {
                 iVar7 = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 0x8c;
             }
             iVar5 = (DAT_ButtonBackgroundBlendStrength::instance + -0x20) * 0x10;
-            top = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0xfd;
+            int top = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0xfd;
             local_3f8 = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 0x294;
             bottom = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x216;
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawBlendedBlackBox, DAT_PencilRenderCore::ptr)(

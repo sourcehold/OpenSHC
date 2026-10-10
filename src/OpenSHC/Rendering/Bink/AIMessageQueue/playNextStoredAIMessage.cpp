@@ -17,7 +17,6 @@ namespace Rendering {
         BOOLEnum AIMessageQueue::playNextStoredAIMessage()
         {
             char cVar1;
-            int iVar2;
             char* pcVar3;
             char (*pacVar4)[100];
             char (*pacVar5)[100];
@@ -25,8 +24,8 @@ namespace Rendering {
             int iVar7;
             char (*pacVar8)[100];
             if (this->currentMessageVfxFile_0xc[0] != '\0') {
-                MACRO_CALL_MEMBER(
-                    Rendering::Bink::BinkControlClass_Func::stopBinkPlayback, DAT_BinkControlState::ptr)(1);
+                MACRO_CALL_MEMBER(Rendering::Bink::BinkControlClass_Func::stopBinkPlayback, DAT_BinkControlState::ptr)(
+                    1);
             }
             this->mbr_0x928 = 0;
             DAT_GameCore::instance.countdown = 2;
@@ -55,7 +54,7 @@ namespace Rendering {
                             pacVar4 = (char (*)[100])(*pacVar4 + 1);
                         } while (*pcVar3 != '\0');
                         pacVar5 = pacVar5 + 0xb;
-                        iVar2 = 900 - (int)pacVar5;
+                        int iVar2 = 900 - (int)pacVar5;
                         do {
                             cVar1 = (*pacVar5)[0];
                             *(char*)((int)pacVar5 + (int)pacVar8 + iVar2) = cVar1;

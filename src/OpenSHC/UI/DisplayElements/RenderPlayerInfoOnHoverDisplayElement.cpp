@@ -46,19 +46,14 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004B0390
     void DisplayElements::RenderPlayerInfoOnHoverDisplayElement(int posX, int posY, DWORD elementState)
     {
-        DWORD DVar1;
-        uint uVar2;
-        int iVar3;
-        int iVar4;
         int iVar5;
-        uint blendStrength;
         BuildingTypeShort _buildingType;
-        iVar4 = 0;
+        int iVar4 = 0;
         if (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY) {
             if (DAT_GameCore::instance.currentMenuViewType != UI::Enums::MVT_BUILD_MENU) {}
             if (DAT_GameCore::instance.gameMode_2 != Game::GM_EDITOR) {}
         }
-        iVar3 = 0;
+        int iVar3 = 0;
         if (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_BUILDING_AND_STATUS_MENU) {
             if (DAT_GameCore::instance.activeMenuTab.tabType == UI::Enums::BASMTT_BARRACKS_OR_MPMENU_MODEM) {
                 posY = posY + -0x28;
@@ -97,11 +92,11 @@ namespace UI {
         if (DAT_MenuModalComposition2::instance.activeModalDialogID == UI::Enums::MMT_DISPLAY_AI_LORD_MESSAGE) {
             DAT_00df5530::instance = 0;
         }
-        blendStrength = 0;
+        uint blendStrength = 0;
         if (!iVar3) {
             if (DAT_00df5530::instance) {
-                DVar1 = timeGetTime();
-                uVar2 = DVar1 - INT_00df552c::instance;
+                DWORD DVar1 = timeGetTime();
+                uint uVar2 = DVar1 - INT_00df552c::instance;
                 if (uVar2 < 0x2d0) {
                     if (400 < uVar2) {
                         blendStrength = (uVar2 - 400) / 10;

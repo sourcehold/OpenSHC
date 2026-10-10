@@ -48,10 +48,8 @@ namespace UI {
         void TutorialBox::MenuItemActionHandler_TutorialBox_Main(int param_1, ...)
         {
             int iVar1;
-            int amount;
             char local_24[32];
-            uint local_4;
-            local_4 = MSVC_SecurityCookie::instance ^ (uint)local_24;
+            uint local_4 = MSVC_SecurityCookie::instance ^ (uint)local_24;
             if (param_1 == 2) {
                 MACRO_CALL_MEMBER(Input::MouseState_Func::resetMouseState2, DAT_MouseState::ptr)();
                 DAT_VideoBikQueue::instance.storedMessages_0x924 = 0;
@@ -111,7 +109,7 @@ namespace UI {
                         DAT_GameState::instance.playerDataArray[iVar1].rationsSetting2 = 2;
                         DAT_GameState::instance.playerDataArray[iVar1].rationsSetting3 = 2;
                         DAT_GameState::instance.playerDataArray[iVar1].popularity = 10000;
-                        amount = 0x4b - DAT_GameState::instance.playerDataArray[iVar1].totalFood;
+                        int amount = 0x4b - DAT_GameState::instance.playerDataArray[iVar1].totalFood;
                         if (0 < amount) {
                             MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::processResourceGain,
                                 DAT_BuildingsState::ptr)(iVar1, Game::Resources::RT_MEAT, amount);

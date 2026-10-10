@@ -25,7 +25,6 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00426B80
         void HistoricMissionSelect::MenuItemActionHandler_HistoricMissionSelect_General(int param_1, ...)
         {
-            DWORD DVar1;
             if ((DAT_MenuTextInputState::instance.currentModalDialog == UI::Enums::MMT_NO_MENU)
                 && (DAT_MenuModalComposition1::instance.activeModalDialogID == UI::Enums::MMT_NONE)) {
                 if (param_1 == 0xd) {
@@ -47,7 +46,7 @@ namespace UI {
                 } else {
                     DAT_GameCore::instance.missionNumber1to20 = (DAT_00b96100::instance - param_1) + -1;
                     BOOL_CurrentMenuClickState::instance = FALSE;
-                    DVar1 = timeGetTime();
+                    DWORD DVar1 = timeGetTime();
                     if (DAT_GameCore::instance.missionNumber1to20
                             == DAT_MenuTextInputState::instance.lastClickedListIndex
                         && (int)(DVar1 - DAT_MenuTextInputState::instance.lastListClickTime) < 500)

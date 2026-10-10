@@ -17,35 +17,28 @@ namespace Map {
         void TribesState::updateTribeUnitAssignments()
         {
             uint _unitID;
-            int _tribeUnitIndex;
-            int _tribeID;
-            int local_4;
-            int _tribeTime;
-            int _tribeSize;
-            int _state;
-            int _unitLogicalState;
             this->clans = 0;
             this->field2_0x8 = 1;
             DAT_CurrentTribeID::instance = 1;
             do {
-                _state = this->tribes[DAT_CurrentTribeID::instance].tribeState;
-                _tribeUnitIndex = 0;
+                int _state = this->tribes[DAT_CurrentTribeID::instance].tribeState;
+                int _tribeUnitIndex = 0;
                 if (_state) {
-                    _tribeID = DAT_CurrentTribeID::instance;
+                    int _tribeID = DAT_CurrentTribeID::instance;
                     if (_state != 3) {
-                        _tribeSize = this->tribes[DAT_CurrentTribeID::instance].size;
+                        int _tribeSize = this->tribes[DAT_CurrentTribeID::instance].size;
                         if (_tribeSize < 1) {
-                            _tribeTime = this->tribes[DAT_CurrentTribeID::instance].time;
+                            int _tribeTime = this->tribes[DAT_CurrentTribeID::instance].time;
                             if (_tribeTime && (int)DAT_GameCore::instance.mapTimeInTicks <= (int)_tribeTime
                                 && _tribeTime)
                                 goto LAB_00527425;
                         } else {
-                            local_4 = 0;
+                            int local_4 = 0;
                             if (0 < _tribeSize) {
                                 do {
                                     _unitID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getSpecificUnitFromTribe,
                                         this)(_tribeID, _tribeUnitIndex);
-                                    _unitLogicalState = DAT_UnitsState::instance.units[_unitID].logicalState;
+                                    int _unitLogicalState = DAT_UnitsState::instance.units[_unitID].logicalState;
                                     _tribeUnitIndex = _tribeUnitIndex + 1;
                                     if ((short)_unitLogicalState < 1
                                         || (2 < (short)_unitLogicalState

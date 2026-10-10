@@ -33,13 +33,12 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x0042D640
         void SinglePlayerMapChoice::MenuItemActionHandler_SingleplayerMapChoice_ButtonsAndHands(int param_1, ...)
         {
-            int iVar1;
             MenuViewType menuID;
             if (DAT_MenuTextInputState::instance.currentModalDialog != UI::Enums::MMT_NO_MENU) {}
             DAT_StopHandlingMenuItems::instance = 0;
             if (param_1 < -100) {
                 if (param_1 == -0x65) {
-                    iVar1 = DAT_00b95b74::instance + -0xcc;
+                    int iVar1 = DAT_00b95b74::instance + -0xcc;
                     if (iVar1 <= DAT_00b960f4::instance) {
                         DAT_StopHandlingMenuItems::instance = 0;
                     }

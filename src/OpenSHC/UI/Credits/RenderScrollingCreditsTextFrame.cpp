@@ -23,14 +23,8 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004DB390
     void Credits::RenderScrollingCreditsTextFrame(float param_1)
     {
-        int otherBlendValueUnk;
-        int xPos;
-        int yPos;
-        double param;
-        uint color;
-        int fontSize;
         FLOAT_00eb9b1c::instance = FLOAT_00eb9b1c::instance - FLOAT_Between1And5::instance * param_1;
-        param = (double)FLOAT_00eb9b1c::instance;
+        double param = (double)FLOAT_00eb9b1c::instance;
         if (param < (double)0 != (param == (double)0)) {
             INT_00eb9b20::instance = INT_00eb9b20::instance + 1;
             FLOAT_00eb9b1c::instance = (float)(param + (double)100.0);
@@ -41,11 +35,11 @@ namespace UI {
             param = (double)FLOAT_00eb9b1c::instance;
         }
         if (!DAT_00eb9b28::instance) {
-            yPos = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + DAT_00eb9b34::instance;
-            xPos = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + DAT_00eb9b30::instance;
-            color = DAT_00eb9b3c::instance;
-            fontSize = DAT_00eb9b40::instance;
-            otherBlendValueUnk = (long)(param);
+            int yPos = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + DAT_00eb9b34::instance;
+            int xPos = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + DAT_00eb9b30::instance;
+            uint color = DAT_00eb9b3c::instance;
+            int fontSize = DAT_00eb9b40::instance;
+            int otherBlendValueUnk = (long)(param);
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderSomeSpecificTextUnk, DAT_TextManagerObject::ptr)(
                 INT_00eb9b20::instance, otherBlendValueUnk, xPos, yPos, color, fontSize);
             return;

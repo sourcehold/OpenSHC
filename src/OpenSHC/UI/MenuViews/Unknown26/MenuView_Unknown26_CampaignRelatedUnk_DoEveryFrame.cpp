@@ -23,8 +23,7 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004E1E70
         void Unknown26::MenuView_Unknown26_CampaignRelatedUnk_DoEveryFrame()
         {
-            int iVar1;
-            iVar1 = MACRO_CALL(UI::Helpers_Func::TicksSinceCounterStart)();
+            int iVar1 = MACRO_CALL(UI::Helpers_Func::TicksSinceCounterStart)();
             if (iVar1) {
                 if (DAT_MouseState::instance.rightClickStop) {
                     MACRO_CALL(UI::Credits_Func::StopCreditsPlaybackAndSounds)();

@@ -20,10 +20,8 @@ namespace Map {
         {
             UnitTypeShort UVar1;
             int iVar2;
-            int iVar3;
-            int unitSelectionIndex;
-            iVar3 = (int)this->tribes[param_1].size;
-            unitSelectionIndex = 0;
+            int iVar3 = (int)this->tribes[param_1].size;
+            int unitSelectionIndex = 0;
             if (0 < iVar3) {
                 do {
                     iVar2 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(

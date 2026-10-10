@@ -36,22 +36,11 @@ namespace UI {
         UnitStateShort UVar1;
         ushort uVar2;
         short sVar3;
-        bool bVar4;
-        int iVar5;
         int iVar6;
-        int iVar7;
-        int iVar8;
-        int iVar9;
-        int iVar10;
-        int _unitID;
         uint uVar11;
-        int iVar12;
         int iVar13;
         int _owner;
         int iVar14;
-        int iVar15;
-        int local_4c;
-        int local_44;
         int* _tile;
         uint local_34;
         int local_30;
@@ -67,18 +56,18 @@ namespace UI {
         short _player;
         UnitTypeShort _unitType;
         int _viewportWidth;
-        iVar5 = height;
+        int iVar5 = height;
         local_8 = 1;
-        bVar4 = true;
+        bool bVar4 = true;
         local_c = 8;
         local_18 = width;
-        local_4c = 0;
+        int local_4c = 0;
         local_24 = 0;
         _mapSize = DAT_TileMapState::instance.mapSize;
         if (!DAT_TileMapState::instance.mapSize) {
             _mapSize = 400;
         }
-        iVar12 = 400 - _mapSize;
+        int iVar12 = 400 - _mapSize;
         if (width < 200) {
             iVar14 = iVar12 / 4;
             local_2c = iVar12 / 2 + 2;
@@ -143,14 +132,14 @@ namespace UI {
         this->y = yPos;
         this->height = height;
         this->widthFactor = widthFactor;
-        iVar7 = DAT_ViewportRenderState::instance.viewportState.viewportHeight + -5;
+        int iVar7 = DAT_ViewportRenderState::instance.viewportState.viewportHeight + -5;
         local_1c = (iVar7 * widthFactor) / this->oneOrTwo + -1 + widthFactor / local_8;
-        local_44 = (DAT_ViewportRenderState::instance.viewportState.viewportWidth * heightFactor) / local_8 + -1;
-        iVar8 = (width / widthFactor) * local_8;
-        iVar9 = (height / heightFactor) * local_8;
+        int local_44 = (DAT_ViewportRenderState::instance.viewportState.viewportWidth * heightFactor) / local_8 + -1;
+        int iVar8 = (width / widthFactor) * local_8;
+        int iVar9 = (height / heightFactor) * local_8;
         _isRGB16 = (uint)(DAT_WindowAndDirectDraw::instance.colorBitMode == 1381);
         local_10 = xOffset;
-        iVar10 = _mapSize / 2;
+        int iVar10 = _mapSize / 2;
         if (iVar10 < iVar8) {
             iVar14 = iVar14 - (iVar8 - iVar10) / 2;
             this->tileOffsetY = iVar12 / 2 - (iVar9 - _mapSize) / 2;
@@ -236,7 +225,7 @@ namespace UI {
             + yPos * DAT_PencilRenderCore::instance.horizontalByteSize + xPos * 2;
         iVar14 = (xOffset - local_4c) * 2 + 0x1a31654 + (iVar14 * heightFactor - local_24) * 400;
         do {
-            iVar15 = 0;
+            int iVar15 = 0;
             iVar10 = local_18;
             do {
                 *(undefined2*)(iVar7 + iVar15) = *(undefined2*)(iVar14 + iVar15);
@@ -269,7 +258,7 @@ namespace UI {
                         local_24 = iVar14 + widthFactor * -2;
                         _tile = DAT_ViewportRenderState::instance.screenPointToTileNumber + local_c + -10;
                         do {
-                            _unitID = (int)(short)DAT_TileMapState::instance.UnitLayer[*_tile];
+                            int _unitID = (int)(short)DAT_TileMapState::instance.UnitLayer[*_tile];
                             if (_unitID
                                 || (local_8 == 2
                                     && (_unitID = (int)(short)

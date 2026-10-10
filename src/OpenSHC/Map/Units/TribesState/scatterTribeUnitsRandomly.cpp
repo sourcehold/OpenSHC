@@ -19,24 +19,20 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00523920
         int TribesState::scatterTribeUnitsRandomly(int param_1)
         {
-            short sVar1;
             int iVar2;
             int iVar3;
-            int iVar4;
-            int unitSelectionIndex;
-            int index;
             if (!param_1) {
                 return 0;
             }
-            sVar1 = this->tribes[param_1].selectionTargetUnitID;
-            unitSelectionIndex = 0;
-            index = 100;
+            short sVar1 = this->tribes[param_1].selectionTargetUnitID;
+            int unitSelectionIndex = 0;
+            int index = 100;
             MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findSuitableSpawnLocationUnk,
                 DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[sVar1].x,
                 (int)(DAT_UnitsState::instance.units[sVar1].y), -1, -1, 5000, 0);
             iVar2 = MACRO_CALL_MEMBER(
                 Map::Navigation::PathFindingState_Func::getComputationalTileIndex, DAT_PathFindingState::ptr)();
-            iVar4 = (int)this->tribes[param_1].size;
+            int iVar4 = (int)this->tribes[param_1].size;
             if (iVar4 * 0x10 + 200 <= iVar2) {
                 if (0 < iVar4) {
                     do {

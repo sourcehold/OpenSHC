@@ -19,7 +19,6 @@ namespace Map {
     void Buildings::UpdateTower3()
     {
         int iVar1;
-        uint uVar2;
         int* piVar3;
         uint uVar4;
         uint uVar5;
@@ -55,14 +54,14 @@ namespace Map {
             MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::computeBuildingEntranceFlagsForOrientations,
                 DAT_BuildingsState::ptr)(iVar6);
         }
-        iVar1 = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::hasBuildingExitFlagForOrientation,
-            DAT_BuildingsState::ptr)(iVar6);
+        iVar1 = MACRO_CALL_MEMBER(
+            Map::Buildings::BuildingsState_Func::hasBuildingExitFlagForOrientation, DAT_BuildingsState::ptr)(iVar6);
         if (iVar1) {
             DAT_BuildingsState::instance.buildings[iVar6].extraAnimationSprite2 = 0x51;
             DAT_BuildingsState::instance.buildings[iVar6].animationFrame = 1;
         }
-        iVar1 = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::hasBuildingEntranceFlagForOrientation,
-            DAT_BuildingsState::ptr)(iVar6);
+        iVar1 = MACRO_CALL_MEMBER(
+            Map::Buildings::BuildingsState_Func::hasBuildingEntranceFlagForOrientation, DAT_BuildingsState::ptr)(iVar6);
         if (iVar1) {
             DAT_BuildingsState::instance.buildings[iVar6].extraAnimationSprite4 = 0x5a;
             DAT_BuildingsState::instance.buildings[iVar6].animationFrame = 1;
@@ -86,7 +85,7 @@ namespace Map {
         }
         if (0 < iVar1) {
             uVar4 = DAT_BuildingsState::instance.buildings[iVar6].fireRelatedRNG1;
-            uVar2 = (int)uVar4 >> 8;
+            uint uVar2 = (int)uVar4 >> 8;
             do {
                 uVar8 = uVar4 & 0xf;
                 uVar5 = uVar2 & 7;
@@ -108,8 +107,8 @@ namespace Map {
         if (DAT_BuildingsState::instance.field34_0x18e074) {
             iVar6 = 0;
             do {
-                MACRO_CALL_MEMBER(
-                    Map::TileMapState_Func::getBuildingSizeIndexMappingData, DAT_TileMapState::ptr)(iVar6, 5);
+                MACRO_CALL_MEMBER(Map::TileMapState_Func::getBuildingSizeIndexMappingData, DAT_TileMapState::ptr)(
+                    iVar6, 5);
                 iVar1 = DAT_ViewportRenderState::instance
                             .translationMatrix
                                 [(short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y

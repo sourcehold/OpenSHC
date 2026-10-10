@@ -11,8 +11,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00522550
         BOOLEnum TribesState::unitIsSelectedByPlayer(uint tribeID)
         {
-            uint uVar1;
-            uVar1 = tribeID & 0x8000000f;
+            uint uVar1 = tribeID & 0x8000000f;
             if ((int)uVar1 < 0) {
                 uVar1 = (uVar1 - 1 | 0xfffffff0) + 1;
             }

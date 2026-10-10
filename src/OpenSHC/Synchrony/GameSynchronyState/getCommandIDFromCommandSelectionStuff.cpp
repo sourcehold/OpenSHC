@@ -17,7 +17,6 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x00480440
     int GameSynchronyState::getCommandIDFromCommandSelectionStuff()
     {
-        int _counter2;
         int* _selectedPlayerIDAddress;
         GameCommandStateByte* _stateAddress;
         int _currentIndexCounter;
@@ -60,7 +59,7 @@ namespace Synchrony {
         /*
           reorder the selected commands list so that player ids with a lower number are   processed first.
          */
-        _counter2 = 0;
+        int _counter2 = 0;
         if (0 < this->MBR_someIndex) {
             _reorderedAnyoneUnk = true;
             do {

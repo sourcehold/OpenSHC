@@ -24,8 +24,6 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x00490920
     void GameSynchronyState::waitForMultiplayerHost()
     {
-        DWORD DVar1;
-        uint uVar2;
         this->currentGameMode = Game::GM_MULTIPLAYER;
         DAT_GameCore::instance.solitaryAllBuildingsAreFree = FALSE;
         DAT_GameCore::instance.solitaryAltUDungeon = FALSE;
@@ -34,8 +32,8 @@ namespace Synchrony {
             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
                 Commands::GCT_MULTIPLAYER_INITIATE_ANNOUNCE_HOST);
             this->DAT_TickCount = GetTickCount();
-            DVar1 = GetTickCount();
-            uVar2 = DVar1 - this->DAT_TickCount;
+            DWORD DVar1 = GetTickCount();
+            uint uVar2 = DVar1 - this->DAT_TickCount;
             /*
               20 seconds? 2 seconds? wait
              */

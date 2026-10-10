@@ -16,13 +16,10 @@ namespace UI {
     void Actions::SetStorageMarketFailState(int state, ResourceType resource)
     {
         BuildingType _building;
-        DWORD _currentTime;
-        int _playerSlot;
-        _building
-            = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::getBuildingStorageTypeForResourceType,
-                DAT_BuildingsState::ptr)(resource);
-        _playerSlot = DAT_GameSynchronyState::instance.currentPlayerSlotID;
-        _currentTime = timeGetTime();
+        _building = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::getBuildingStorageTypeForResourceType,
+            DAT_BuildingsState::ptr)(resource);
+        int _playerSlot = DAT_GameSynchronyState::instance.currentPlayerSlotID;
+        DWORD _currentTime = timeGetTime();
         DAT_GameState::instance.playerDataArray[_playerSlot].timeStorageMarketFailState = _currentTime;
         if (state == 3) {
             /*

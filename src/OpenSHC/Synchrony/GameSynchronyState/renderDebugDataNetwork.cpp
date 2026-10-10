@@ -24,10 +24,6 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x00488540
     void GameSynchronyState::renderDebugDataNetwork(int x, int y, int width, int height)
     {
-        int iVar1;
-        int iVar2;
-        int xParam;
-        bool bVar3;
         char* textAddress;
         int iVar4;
         int iVar5;
@@ -39,9 +35,9 @@ namespace Synchrony {
         BOOLEnum BVar10;
         int iVar11;
         int blendStrength;
-        iVar2 = y;
+        int iVar2 = y;
         iVar5 = x;
-        xParam = x + 2;
+        int xParam = x + 2;
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             "Packets in: ", xParam, y, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
@@ -55,7 +51,7 @@ namespace Synchrony {
         uVar8 = 0x80ff;
         TVar7 = Text::TTA_LEFT;
         iVar6 = y;
-        iVar1 = MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::getGameCommandArrayIndex, this)();
+        int iVar1 = MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::getGameCommandArrayIndex, this)();
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
             iVar1, iVar4, iVar6, TVar7, uVar8, iVar9, BVar10, iVar11);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
@@ -93,7 +89,7 @@ namespace Synchrony {
             y = y + 4;
             x = x + 1;
         } while (x < 9);
-        bVar3 = -1 < DAT_GameSynchronyState::instance.relativeTickTime;
+        bool bVar3 = -1 < DAT_GameSynchronyState::instance.relativeTickTime;
         iVar1 = iVar2 + 0x1c;
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             "Relative time: ", xParam, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);

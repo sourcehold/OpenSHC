@@ -17,12 +17,9 @@ namespace Synchrony {
     void GameSynchronyState::renderDebugDataSplitInfo(int x, int y, int width, int height)
     {
         int iVar1;
-        int xParam;
-        int iVar2;
-        uint color;
         int* piVar3;
         char* textAddress;
-        iVar2 = x + 2;
+        int iVar2 = x + 2;
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             "Splinter box ", iVar2, y, Text::TTA_LEFT, 0xffffff, 0x11, FALSE, 0);
         if (!this->splinterType) {
@@ -45,7 +42,7 @@ namespace Synchrony {
     LAB_0047efc0:
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             "Total split data items:  ", iVar2, y + 0x1c, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
-        xParam = x + 0xc;
+        int xParam = x + 0xc;
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
             this->totalSplitDataItems, xParam, y + 0x1c, Text::TTA_LEFT, 0x80ff, 0x12, TRUE, 0);
         if (!this->splinterType) {
@@ -61,7 +58,7 @@ namespace Synchrony {
             iVar2 = 10;
             do {
                 piVar3 = piVar3 + 1;
-                color = (-(uint)(piVar3[-0x9c4] != *piVar3) & 0xff000100) + 0xffffff;
+                uint color = (-(uint)(piVar3[-0x9c4] != *piVar3) & 0xff000100) + 0xffffff;
                 MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     piVar3[-0x9c4], xParam, y + 0x46, Text::TTA_LEFT, color, 0x12, FALSE, 0);
                 MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
@@ -97,8 +94,8 @@ namespace Synchrony {
                 iVar1 = y + 0x2a;
                 MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     "Total split players:  ", iVar2, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
-                MACRO_CALL_MEMBER(Text::TextManager_Func::renderLeftAlignedNumberToScreen,
-                    DAT_TextManagerObject::ptr)(this->totalSplitPlayers, xParam, iVar1, 0x80ff, 0x12, 1);
+                MACRO_CALL_MEMBER(Text::TextManager_Func::renderLeftAlignedNumberToScreen, DAT_TextManagerObject::ptr)(
+                    this->totalSplitPlayers, xParam, iVar1, 0x80ff, 0x12, 1);
                 MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     "First split player:  ", x + 0xca, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
                 iVar2 = this->firstSplitPlayer;
@@ -106,8 +103,8 @@ namespace Synchrony {
                 iVar1 = y + 0x2a;
                 MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     "Total split elements:  ", iVar2, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
-                MACRO_CALL_MEMBER(Text::TextManager_Func::renderLeftAlignedNumberToScreen,
-                    DAT_TextManagerObject::ptr)(this->totalSplitElements, xParam, iVar1, 0x80ff, 0x12, 1);
+                MACRO_CALL_MEMBER(Text::TextManager_Func::renderLeftAlignedNumberToScreen, DAT_TextManagerObject::ptr)(
+                    this->totalSplitElements, xParam, iVar1, 0x80ff, 0x12, 1);
                 MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     "First split element:  ", x + 0xca, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
                 iVar2 = this->firstSplitElement;
@@ -115,8 +112,8 @@ namespace Synchrony {
                 iVar1 = y + 0x2a;
                 MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     "Total split layers:  ", iVar2, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
-                MACRO_CALL_MEMBER(Text::TextManager_Func::renderLeftAlignedNumberToScreen,
-                    DAT_TextManagerObject::ptr)(this->totalSplitLayers, xParam, iVar1, 0x80ff, 0x12, 1);
+                MACRO_CALL_MEMBER(Text::TextManager_Func::renderLeftAlignedNumberToScreen, DAT_TextManagerObject::ptr)(
+                    this->totalSplitLayers, xParam, iVar1, 0x80ff, 0x12, 1);
                 MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     "First split layer:  ", x + 0xca, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
                 iVar2 = this->firstSplitLayer;
@@ -124,8 +121,8 @@ namespace Synchrony {
                 iVar1 = y + 0x2a;
                 MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     "Total split flies:  ", iVar2, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
-                MACRO_CALL_MEMBER(Text::TextManager_Func::renderLeftAlignedNumberToScreen,
-                    DAT_TextManagerObject::ptr)(this->totalSplitFlies, xParam, iVar1, 0x80ff, 0x12, 1);
+                MACRO_CALL_MEMBER(Text::TextManager_Func::renderLeftAlignedNumberToScreen, DAT_TextManagerObject::ptr)(
+                    this->totalSplitFlies, xParam, iVar1, 0x80ff, 0x12, 1);
                 MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     "First split fly:  ", x + 0xca, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
                 iVar2 = this->firstSplitFly;
@@ -133,8 +130,8 @@ namespace Synchrony {
                 iVar1 = y + 0x2a;
                 MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     "Total split moats:  ", iVar2, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
-                MACRO_CALL_MEMBER(Text::TextManager_Func::renderLeftAlignedNumberToScreen,
-                    DAT_TextManagerObject::ptr)(this->totalSplitMoats, xParam, iVar1, 0x80ff, 0x12, 1);
+                MACRO_CALL_MEMBER(Text::TextManager_Func::renderLeftAlignedNumberToScreen, DAT_TextManagerObject::ptr)(
+                    this->totalSplitMoats, xParam, iVar1, 0x80ff, 0x12, 1);
                 MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     "First split moat:  ", x + 0xca, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
                 iVar2 = this->firstSplitMoat;
@@ -142,8 +139,8 @@ namespace Synchrony {
                 iVar1 = y + 0x2a;
                 MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     "Total split teleports:  ", iVar2, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
-                MACRO_CALL_MEMBER(Text::TextManager_Func::renderLeftAlignedNumberToScreen,
-                    DAT_TextManagerObject::ptr)(this->totalSplitTeleports, xParam, iVar1, 0x80ff, 0x12, 1);
+                MACRO_CALL_MEMBER(Text::TextManager_Func::renderLeftAlignedNumberToScreen, DAT_TextManagerObject::ptr)(
+                    this->totalSplitTeleports, xParam, iVar1, 0x80ff, 0x12, 1);
                 MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     "First split teleport:  ", x + 0xca, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
                 iVar2 = this->firstSplitTeleports;
@@ -151,8 +148,8 @@ namespace Synchrony {
                 iVar1 = y + 0x2a;
                 MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     "Total split pitch ditchs:  ", iVar2, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
-                MACRO_CALL_MEMBER(Text::TextManager_Func::renderLeftAlignedNumberToScreen,
-                    DAT_TextManagerObject::ptr)(this->totalSplitPitchDitches, xParam, iVar1, 0x80ff, 0x12, 1);
+                MACRO_CALL_MEMBER(Text::TextManager_Func::renderLeftAlignedNumberToScreen, DAT_TextManagerObject::ptr)(
+                    this->totalSplitPitchDitches, xParam, iVar1, 0x80ff, 0x12, 1);
                 MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     "First split pitch ditch:  ", x + 0xca, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
                 iVar2 = this->firstSplitPitchDitch;
@@ -161,14 +158,14 @@ namespace Synchrony {
                 iVar1 = y + 0x2a;
                 MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     "Total split zones:  ", iVar2, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
-                MACRO_CALL_MEMBER(Text::TextManager_Func::renderLeftAlignedNumberToScreen,
-                    DAT_TextManagerObject::ptr)(this->totalSplitZones, xParam, iVar1, 0x80ff, 0x12, 1);
+                MACRO_CALL_MEMBER(Text::TextManager_Func::renderLeftAlignedNumberToScreen, DAT_TextManagerObject::ptr)(
+                    this->totalSplitZones, xParam, iVar1, 0x80ff, 0x12, 1);
                 MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     "First split zone:  ", x + 0xca, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
                 iVar2 = this->firstSplitZone;
             }
-            MACRO_CALL_MEMBER(Text::TextManager_Func::renderLeftAlignedNumberToScreen,
-                DAT_TextManagerObject::ptr)(iVar2, x + 0xd4, y + 0x2a, 0x80ff, 0x12, 1);
+            MACRO_CALL_MEMBER(Text::TextManager_Func::renderLeftAlignedNumberToScreen, DAT_TextManagerObject::ptr)(
+                iVar2, x + 0xd4, y + 0x2a, 0x80ff, 0x12, 1);
         }
         iVar1 = y + 0x2a;
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(

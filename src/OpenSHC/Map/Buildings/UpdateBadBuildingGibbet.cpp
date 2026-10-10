@@ -18,10 +18,8 @@ namespace Map {
     void Buildings::UpdateBadBuildingGibbet()
     {
         byte bVar1;
-        int sVar2;
-        int iVar3;
-        iVar3 = DAT_CurrentBuildingID::instance;
-        sVar2 = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;
+        int iVar3 = DAT_CurrentBuildingID::instance;
+        int sVar2 = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].playerColorUnk
             = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].fireRelatedRNG1 % 9;
         MACRO_CALL_MEMBER(AI::AICState_Func::addBuildingToTargetableBuildings, DAT_AICState::ptr)(iVar3);
@@ -30,8 +28,8 @@ namespace Map {
         iVar3 = DAT_CurrentBuildingID::instance;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].displayOwnerFlag = 0;
         DAT_BuildingsState::instance.buildings[iVar3].renderBlendStrength = 0;
-        MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updateBuildingSignpostCounter,
-            DAT_BuildingsState::ptr)(iVar3, 1);
+        MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updateBuildingSignpostCounter, DAT_BuildingsState::ptr)(
+            iVar3, 1);
         DAT_BuildingsState::instance.buildings[iVar3].renderAnimation
             = (ushort)(DAT_GameState::instance.playerDataArray[sVar2].fearFactorLevel < -3);
         bVar1 = DAT_BuildingDefinedData::instance

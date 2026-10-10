@@ -18,10 +18,8 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00463270
         void AlphaAndButtonSurface::ProcessBuildingClickBonus(int buildingIndex)
         {
-            int _playerIndex;
-            BuildingTypeShort _buildingType;
             if (0 < buildingIndex) {
-                _playerIndex = (int)DAT_BuildingsState::instance.buildings[buildingIndex].owner;
+                int _playerIndex = (int)DAT_BuildingsState::instance.buildings[buildingIndex].owner;
                 if (DAT_GameState::instance.mapAndTime.playerTeams[_playerIndex]
                         == DAT_GameState::instance.mapAndTime
                             .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID]
@@ -33,7 +31,8 @@ namespace UI {
                         (Map::Buildings::BuildingType)(int)(short)DAT_BuildingsState::instance.buildings[buildingIndex]
                             .buildingType,
                         1, _playerIndex);
-                    _buildingType = DAT_BuildingsState::instance.buildings[buildingIndex].buildingType;
+                    BuildingTypeShort _buildingType
+                        = DAT_BuildingsState::instance.buildings[buildingIndex].buildingType;
                     if (_buildingType == Map::Buildings::BT_MANORHOUSE || _buildingType == Map::Buildings::BT_STONEKEEP
                         || _buildingType == Map::Buildings::BT_STRONGHOLD
                         || _buildingType == Map::Buildings::BT_CAMPGROUND) {

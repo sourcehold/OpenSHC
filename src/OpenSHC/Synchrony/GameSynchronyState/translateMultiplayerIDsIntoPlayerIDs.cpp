@@ -15,13 +15,12 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x0047EAF0
     uint GameSynchronyState::translateMultiplayerIDsIntoPlayerIDs(int multiplayerID)
     {
-        uint _playerID;
         if ((this->currentGameMode != Game::GM_SOLITARY)
             && (this->currentGameMode != Game::GM_SKIRMISH_SINGLE_PLAYER)) {
             /*
               if in multiplayer
              */
-            _playerID = (uint)(this->currentPlayerFullIDArray[1] == multiplayerID);
+            uint _playerID = (uint)(this->currentPlayerFullIDArray[1] == multiplayerID);
             if (this->currentPlayerFullIDArray[2] == multiplayerID) {
                 _playerID = 2;
             }

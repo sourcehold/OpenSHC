@@ -24,10 +24,8 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00491D70
         void IdentityOptions::MenuItemRenderFunction_IdentityOptions_LordIcons(int param_1, ...)
         {
-            BOOLEnum BVar1;
-            int imageID;
             if (0x27 < param_1) {
-                BVar1 = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
+                BOOLEnum BVar1 = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
                 if (!BVar1) {
                     MACRO_CALL(UI::MenuItems::General_Func::
                             MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
@@ -43,7 +41,7 @@ namespace UI {
                 MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
                     DE::SHCDE::GM_INTERFACE_ICONS2, 0x21d, (int)(DAT_ButtonX::instance), (int)(DAT_ButtonY::instance));
             }
-            imageID = 0x21b;
+            int imageID = 0x21b;
             if (param_1 == 0x16) {
                 imageID = 0x21c;
             }

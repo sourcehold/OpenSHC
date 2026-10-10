@@ -16,8 +16,7 @@ using WindowsHelper::Enums::BOOLEnum;
 // FUNCTION: STRONGHOLDCRUSADER 0x0046CF10
 void Rendering::TicksStartCounter()
 {
-    BOOL _success;
-    _success = QueryPerformanceFrequency(DAT_PerformanceCounterFrequency::ptr);
+    BOOL _success = QueryPerformanceFrequency(DAT_PerformanceCounterFrequency::ptr);
     if (!_success) {
         DAT_HasNoQueryPerformanceFrequency::instance = TRUE;
         TIME_QueryMargin::instance = 0x10;

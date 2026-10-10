@@ -18,10 +18,8 @@ namespace Map {
         BOOLEnum TribesState::anyUnitsOfTribeAreOutsideCoverageOfPathFindingAlg(int tribeID, int algTileFlag)
         {
             int _unitID;
-            int iVar1;
-            int unitSelectionIndex;
-            iVar1 = (int)this->tribes[tribeID].size;
-            unitSelectionIndex = 0;
+            int iVar1 = (int)this->tribes[tribeID].size;
+            int unitSelectionIndex = 0;
             if (0 < iVar1) {
                 do {
                     _unitID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(

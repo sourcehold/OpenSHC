@@ -18,10 +18,9 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00522090
         void TribesState::playAttackCommandFeedback(int param_1)
         {
-            int iVar1;
             UnitType unitType;
             MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::selectionContainsCombatUnit, DAT_UnitsState::ptr)(1);
-            iVar1 = param_1;
+            int iVar1 = param_1;
             unitType
                 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getMajoritySelectedUnitType, this)(param_1, &param_1);
             if (unitType == Map::Units::UT_S_BATTERINGRAM || unitType == Map::Units::UT_S_CATAPULT

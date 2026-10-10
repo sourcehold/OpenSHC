@@ -10,11 +10,7 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004F4CD0
     void MenuHandlerState::computeBuildMenuTransitionShift()
     {
-        dword dVar1;
-        int iVar2;
-        int _currentTime;
-        int iVar3;
-        _currentTime = timeGetTime();
+        int _currentTime = timeGetTime();
         if (this->buildMenuTransitionProgress_0x38 == 100) {
             this->isBuildMenuTransitioning_0x18 = FALSE;
         }
@@ -27,10 +23,10 @@ namespace UI {
         } else {
             this->buildMenuTransitionProgress_0x38 = 100;
         }
-        iVar2 = this->buildMenuTransitionProgress_0x38 * 0x178 >> 0x1f;
-        iVar3 = (this->buildMenuTransitionProgress_0x38 * 0x178) / 100 + iVar2;
+        int iVar2 = this->buildMenuTransitionProgress_0x38 * 0x178 >> 0x1f;
+        int iVar3 = (this->buildMenuTransitionProgress_0x38 * 0x178) / 100 + iVar2;
         if (this->buildMenuTransitionDirection_0x2c < 1) {
-            dVar1 = -(iVar3 - iVar2);
+            dword dVar1 = -(iVar3 - iVar2);
             this->buildMenuBackgroundLeftShift_0x24 = dVar1 + 0x178;
             this->buildMenuItemsLeftShift_0x28 = this->buildMenuBackgroundLeftShift_0x24;
             if (this->buildMenuTransitionProgress_0x38 < 0x32) {

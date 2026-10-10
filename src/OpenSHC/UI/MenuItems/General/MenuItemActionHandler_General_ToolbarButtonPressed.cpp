@@ -60,7 +60,6 @@ namespace UI {
         void General::MenuItemActionHandler_General_ToolbarButtonPressed(MappersEnum buttonID)
         {
             BuildingType BVar1;
-            BOOLEnum BVar2;
             int iVar3;
             UnitType UVar4;
             uint uVar5;
@@ -81,7 +80,7 @@ namespace UI {
             if (DAT_GameCore::instance.gameMode_2 == Game::GM_CRUSADER_TUTORIAL) {
                 BVar1 = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,
                     DAT_BuildingsState::ptr)(buttonID);
-                BVar2 = MACRO_CALL(Game_Func::Tutorial_IsActionAllowed)(1, (int)(BVar1));
+                BOOLEnum BVar2 = MACRO_CALL(Game_Func::Tutorial_IsActionAllowed)(1, (int)(BVar1));
                 if (!BVar2) {
                     MACRO_CALL(UI::Helpers_Func::SetTutorialHintActiveWithTimestamp)();
                 }

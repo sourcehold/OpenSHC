@@ -26,7 +26,6 @@ namespace UI {
             int lineHeight, ushort fillColor, int blendStrength)
         {
             short sVar1;
-            short sVar2;
             ushort* _imageSource;
             int iVar3;
             int _imageId;
@@ -52,7 +51,7 @@ namespace UI {
             LAB_004555b4:
                 sVar1 = *(short*)(PTR_ARRAY_Unknown_UnitGMHeights::instance
                     + (GMTotalPicturesProcessed::instance[0x9c] + imageId) * 4 + 0x1c);
-                sVar2 = DAT_GMImageHeaders::instance.imh[_imageId].width;
+                short sVar2 = DAT_GMImageHeaders::instance.imh[_imageId].width;
                 if ((DAT_TextManagerObject::instance.field9_0x24) && (blendStrength != 0x20)) {
                     MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGMWithBlending, this)(
                         IO::Graphics::GID_INTERFACE_ICONS_3, imageId, xPos, (iVar3 - lineHeight) + _yPosUnk,

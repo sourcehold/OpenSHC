@@ -11,8 +11,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00522410
         int TribesState::getSpecificUnitFromTribe(int tribeID, int param_2)
         {
-            int iVar1;
-            int iVar2;
             short* psVar3;
             if (!param_2) {
                 DAT_Tribe_HighestID::instance = (int)this->tribes[tribeID].highestID;
@@ -20,8 +18,8 @@ namespace Map {
             }
             if (DAT_Tribe_HighestID::instance < 200) {
                 psVar3 = this->tribes[tribeID].unitSelectionBitMasked + DAT_Tribe_HighestID::instance;
-                iVar1 = DAT_Tribe_HighestID::instance;
-                iVar2 = DAT_00ee0fb4::instance;
+                int iVar1 = DAT_Tribe_HighestID::instance;
+                int iVar2 = DAT_00ee0fb4::instance;
                 do {
                     if ((*psVar3 != 0) && (iVar2 < 0x10)) {
                         do {

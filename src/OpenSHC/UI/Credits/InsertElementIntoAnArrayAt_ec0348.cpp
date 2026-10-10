@@ -9,10 +9,9 @@ namespace UI {
     void Credits::InsertElementIntoAnArrayAt_ec0348(
         int state, int xSpace, int param_3, int x, int y, int width, int param_7, int param_8, int param_9)
     {
-        int iVar1;
         CreditsRelatedStructure* pCVar2;
         if ((state == 1) || (state == 4)) {
-            iVar1 = 0;
+            int iVar1 = 0;
             pCVar2 = DAT_ARRAY_00ec0348::instance;
             while (pCVar2->isValid) {
                 pCVar2 = pCVar2 + 1;

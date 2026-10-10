@@ -20,13 +20,10 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004BBD90
         void TriggerInvasion::MenuItemActionHandler_TriggerInvasion_Main(int param_1, ...)
         {
-            int value;
-            int maximum;
-            int iVar1;
-            iVar1 = 0;
+            int iVar1 = 0;
             MACRO_CALL_MEMBER(Map::MapPropertiesState_Func::sumInvasionEventUnitCount, DAT_MapPropertiesState::ptr)();
-            value = DAT_MapPropertiesState::instance.invasionEventContent.unitCountsPerUnitType[param_1];
-            maximum = (value - DAT_MapPropertiesState::instance.DAT_InvasionEventItemUnitCountSum) + 500;
+            int value = DAT_MapPropertiesState::instance.invasionEventContent.unitCountsPerUnitType[param_1];
+            int maximum = (value - DAT_MapPropertiesState::instance.DAT_InvasionEventItemUnitCountSum) + 500;
             if (DAT_MissionAestheticsDefinedData::instance.InvasionUnitLimits[param_1] < maximum) {
                 maximum = DAT_MissionAestheticsDefinedData::instance.InvasionUnitLimits[param_1];
             }

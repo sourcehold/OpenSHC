@@ -24,13 +24,10 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00523A30
         void TribesState::drawFlagsAndUnitDestinations(int tribeID)
         {
-            short sVar1;
             UnitInstructionTypeShort UVar2;
-            uint uVar3;
             int _unitID;
             int iVar4;
             uint _rallyIndex;
-            int iVar5;
             short (*_pRallyPoints)[2];
             int tile;
             short _isRallying;
@@ -57,7 +54,7 @@ namespace Map {
                     _pRallyPoints = _pRallyPoints + 1;
                 } while ((int)_rallyIndex < (int)this->tribes[tribeID].rallyPointCount);
             }
-            iVar5 = 0;
+            int iVar5 = 0;
             if (0 < this->tribes[tribeID].size) {
                 do {
                     _unitID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getSpecificUnitFromTribe, this)(
@@ -68,7 +65,7 @@ namespace Map {
                         && DAT_UnitsState::instance.units[_unitID].unknownTestAgainst0_2 == 0
                         && DAT_UnitsState::instance.units[_unitID].owner
                             == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
-                        sVar1 = DAT_UnitsState::instance.units[_unitID].unitSpeedMatchingRelatedUnk;
+                        short sVar1 = DAT_UnitsState::instance.units[_unitID].unitSpeedMatchingRelatedUnk;
                         if (!sVar1) {
                             if (DAT_UnitsState::instance.units[_unitID].currentIndexInPathPlan
                                     < DAT_UnitsState::instance.units[_unitID].totalSizeOfPathPlan
@@ -155,7 +152,7 @@ namespace Map {
                                                 | 0x4000;
                                         }
                                     } else {
-                                        uVar3 = DAT_UnitsState::instance.units[_unitID].targetedBuildingTile;
+                                        uint uVar3 = DAT_UnitsState::instance.units[_unitID].targetedBuildingTile;
                                         if ((uVar3) && (DAT_TileMapState::instance.BuildingLayer[uVar3] != 0)) {
                                             DAT_BuildingsState::instance
                                                 .buildings[DAT_TileMapState::instance.BuildingLayer[uVar3]]

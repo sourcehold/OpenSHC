@@ -13,7 +13,6 @@ namespace UI {
     int Helpers::PrepareHistoryBook()
     {
         int iVar1;
-        uint uVar2;
         int* piVar3;
         int* piVar4;
         DAT_TextureRenderCoreObject::instance.totalLoadedGfx = 0;
@@ -41,7 +40,7 @@ namespace UI {
             (*(int (*)[4])(piVar3 + -1))[0] = iVar1 % 900 << 8;
             iVar1 = MACRO_CALL(OS_Func::_rand)();
             *piVar3 = iVar1 % 600 << 8;
-            uVar2 = MACRO_CALL(OS_Func::_rand)();
+            uint uVar2 = MACRO_CALL(OS_Func::_rand)();
             uVar2 = (int)uVar2 % 8;
             piVar3[1] = uVar2;
             iVar1 = MACRO_CALL(OS_Func::_rand)();

@@ -16,7 +16,6 @@ namespace Synchrony {
     void GameSynchronyState::sendSomeMultiplayerSyncMessageWithType(undefined4 syncPacketType2)
     {
         uint _playerID;
-        int _maxLatency;
         int _countdown;
         if (this->currentGameMode != Game::GM_SOLITARY && this->currentGameMode != Game::GM_SKIRMISH_SINGLE_PLAYER
             && this->DPLAYX_4A != (IDirectPlay4A*)0x0) {
@@ -40,7 +39,7 @@ namespace Synchrony {
                 this->commandDelay = this->commandDelay + -1;
                 this->receivedMatchTimesTrackerUnk = 0;
                 if (!this->syncRelatedCountdown) {
-                    _maxLatency = 0;
+                    int _maxLatency = 0;
                     if ((this->currentPlayerFullIDArray[1] != -1) && (0 < this->connectionLagInfoArray[1].average1)) {
                         _maxLatency = this->connectionLagInfoArray[1].average1;
                     }

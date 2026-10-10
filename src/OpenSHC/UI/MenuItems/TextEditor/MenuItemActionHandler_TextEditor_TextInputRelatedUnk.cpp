@@ -20,7 +20,6 @@ namespace UI {
         {
             WCHAR WVar1;
             uint uVar2;
-            int iVar3;
             WCHAR* pWVar4;
             int iVar5;
             int iVar6;
@@ -86,7 +85,7 @@ namespace UI {
             }
             uVar2 = MACRO_CALL_MEMBER(
                 Text::UserTextHandler_Func::dequeueInputBufferChar, DAT_UserTextHandlerState::ptr)();
-            iVar3 = DAT_TextEditorState::instance.activeHelpHotspotIndex;
+            int iVar3 = DAT_TextEditorState::instance.activeHelpHotspotIndex;
             pWVar7 = DAT_TextEditorState::instance.DAT_PointerToTemporaryTextMemory;
             if (uVar2 != 0xffffffff) {
                 if ((int)uVar2 < 0xf0) {

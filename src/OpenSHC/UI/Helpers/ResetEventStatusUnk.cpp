@@ -23,7 +23,6 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004D7200
     void Helpers::ResetEventStatusUnk()
     {
-        short sVar1;
         int iVar2;
         int iVar3;
         InGameEventUnionVersion* _event;
@@ -413,7 +412,7 @@ namespace UI {
         do {
             iVar5 = pIVar6->conditionIsTrue[iVar4];
             INT_ARRAY_00ed2630::instance[iVar4] = (int)(char)pSVar7->enabled;
-            sVar1 = pSVar7->value;
+            short sVar1 = pSVar7->value;
             INT_ARRAY_00ed3070::instance[iVar4] = iVar5;
             INT_ARRAY_00ed2fc8::instance[iVar4] = (int)sVar1;
             if (iVar4 == 4 || iVar4 == 5 || iVar4 == 6 || iVar4 == 0x11 || iVar4 == 7 || iVar4 == 1) {

@@ -36,16 +36,9 @@ namespace Map {
         {
             UnitStateShort UVar1;
             UnitTypeShort UVar2;
-            short sVar3;
-            bool bVar4;
-            bool bVar5;
-            bool bVar6;
-            int _targetUnitY;
-            int _tile;
             int _firstUnitID;
             int _navArea;
             uint _one;
-            int _firstUnit;
             uint _one2;
             uint _someUnitCanClimb;
             dword _area3;
@@ -55,33 +48,17 @@ namespace Map {
             int _unitID;
             dword dVar9;
             int _unitID_2;
-            int _targetUnitX;
-            short sVar10;
-            int _area;
-            int _targetUnitID;
-            int _tribeIndex_2;
-            int _tribeIndex_4;
-            bool _isWallGatehouseTower;
-            bool _isKeep;
-            int _tribeUnitIndex;
-            int _algTile2;
-            int _algTile;
             int _modulo;
             int _area_2;
             UnitTypeShort _unitType;
-            short _tribeSize;
-            int _searchBudget;
-            bool _bool1;
-            bool _isDefensiveStructure;
             int _targetUnitArea;
-            uint _y;
-            _y = y1;
-            _bool1 = false;
-            _tribeUnitIndex = 0;
-            bVar6 = false;
-            _algTile2 = 0;
-            _algTile = 0;
-            bVar4 = false;
+            uint _y = y1;
+            bool _bool1 = false;
+            int _tribeUnitIndex = 0;
+            bool bVar6 = false;
+            int _algTile2 = 0;
+            int _algTile = 0;
+            bool bVar4 = false;
             if (!x1) {
                 if (!y1) {
                     return (undefined4)(0);
@@ -97,15 +74,15 @@ namespace Map {
             if ((399 < y1) || (*(char*)(y1 * 400 + 0x21aec98 + x1) == '\0')) {
                 return (undefined4)(0);
             }
-            _targetUnitID = (int)this->tribes[tribeID].selectionTargetUnitID;
-            _targetUnitX = (int)DAT_UnitsState::instance.units[_targetUnitID].x;
-            _targetUnitY = (int)DAT_UnitsState::instance.units[_targetUnitID].y;
+            int _targetUnitID = (int)this->tribes[tribeID].selectionTargetUnitID;
+            int _targetUnitX = (int)DAT_UnitsState::instance.units[_targetUnitID].x;
+            int _targetUnitY = (int)DAT_UnitsState::instance.units[_targetUnitID].y;
             _targetUnitArea
                 = (short)DAT_TileMapState::instance
                       .PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[_targetUnitY].addXgetTile
                           + _targetUnitX];
-            _tile = DAT_ViewportRenderState::instance.translationMatrix[y1].addXgetTile + x1;
-            _area = (int)(short)DAT_TileMapState::instance.PathConnectionLayer[_tile];
+            int _tile = DAT_ViewportRenderState::instance.translationMatrix[y1].addXgetTile + x1;
+            int _area = (int)(short)DAT_TileMapState::instance.PathConnectionLayer[_tile];
             if (!(DAT_TileMapState::instance.LogicLayer[_tile] & 0x30)) {
                 DAT_PathFindingState::instance.field50_0x98 = 0;
                 this->fcn_mtribe = this->fcn_mtribe + 1;
@@ -139,7 +116,8 @@ namespace Map {
                  */
                 y1 = _area_2;
                 if (0 < _area) {
-                    _firstUnit = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::isTribeAllAssassins, this)(tribeID);
+                    int _firstUnit
+                        = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::isTribeAllAssassins, this)(tribeID);
                     if (!_firstUnit) {
                         if (_area != y1) {
                             _someUnitCanClimb = MACRO_CALL_MEMBER(
@@ -188,10 +166,10 @@ namespace Map {
                     }
                     this->ALG_ResultTileIndex = 0;
                     this->field6_0x18 = 0;
-                    _isWallGatehouseTower = (DAT_TileMapState::instance.LogicLayer[_tile] & 0x100U) != 0;
-                    bVar5 = false;
-                    _isKeep = (DAT_TileMapState::instance.LogicLayer[_tile] & 0x10000000U) != 0;
-                    _isDefensiveStructure = _isKeep || _isWallGatehouseTower;
+                    bool _isWallGatehouseTower = (DAT_TileMapState::instance.LogicLayer[_tile] & 0x100U) != 0;
+                    bool bVar5 = false;
+                    bool _isKeep = (DAT_TileMapState::instance.LogicLayer[_tile] & 0x10000000U) != 0;
+                    bool _isDefensiveStructure = _isKeep || _isWallGatehouseTower;
                     rallyBool = 1;
                     if (bVar4) {
                         MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathFindingWithBuildingsIncluded,
@@ -208,7 +186,7 @@ namespace Map {
                         Map::Units::TribesState_Func::anyUnitsOfTribeAreOutsideCoverageOfPathFindingAlg, this)(
                         tribeID, DAT_PathFindingState::instance.searchGeneration);
                     if (!_hasUnitInArea) {
-                        _searchBudget = 500;
+                        int _searchBudget = 500;
                         do {
                             _searchBudget = _searchBudget + 500;
                             if (0x13a0f < _searchBudget
@@ -373,7 +351,7 @@ namespace Map {
                             }
                         } while (_tribeUnitIndex < this->tribes[tribeID].size);
                     }
-                    _tribeIndex_2 = 0;
+                    int _tribeIndex_2 = 0;
                     if (0 < this->tribes[tribeID].size) {
                         do {
                             _unitID_2 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
@@ -489,8 +467,8 @@ namespace Map {
                     }
                     MACRO_CALL_MEMBER(Map::Units::TribesState_Func::applyUnitTopSpeedDelayBasedOnTribeSize, this)(
                         tribeID, FALSE);
-                    _tribeIndex_4 = 0;
-                    _tribeSize = this->tribes[tribeID].size;
+                    int _tribeIndex_4 = 0;
+                    short _tribeSize = this->tribes[tribeID].size;
                     this->tribes[tribeID].someUnitID = 0;
                     if (0 < _tribeSize) {
                         do {
@@ -533,8 +511,9 @@ namespace Map {
                                     || (DAT_UnitsState::instance.units[_targetUnitID]
                                             .digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300
                                         == 1))) {
-                                sVar3 = DAT_UnitsState::instance.units[_targetUnitID].topSpeedDelayIndex;
-                                sVar10 = (short)DAT_UnitSelectionDefinedData::instance.UnitInstructionMoveDelay[sVar3];
+                                short sVar3 = DAT_UnitsState::instance.units[_targetUnitID].topSpeedDelayIndex;
+                                short sVar10
+                                    = (short)DAT_UnitSelectionDefinedData::instance.UnitInstructionMoveDelay[sVar3];
                                 if (this->tribes[tribeID].unkIsAnimalTribe == 0) {
                                     if (-1 < this->field6_0x18) {
                                         sVar10 = sVar10 * 2;

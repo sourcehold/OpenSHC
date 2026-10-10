@@ -19,14 +19,10 @@ namespace Map {
         int TribesState::getTribeAliveStatus(int tribeID)
         {
             int _unit;
-            int _size;
-            int _index;
-            int _alive;
-            int _other;
-            _size = (int)this->tribes[tribeID].size;
-            _index = 0;
-            _other = 0;
-            _alive = 0;
+            int _size = (int)this->tribes[tribeID].size;
+            int _index = 0;
+            int _other = 0;
+            int _alive = 0;
             if (0 < _size) {
                 do {
                     _unit = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(

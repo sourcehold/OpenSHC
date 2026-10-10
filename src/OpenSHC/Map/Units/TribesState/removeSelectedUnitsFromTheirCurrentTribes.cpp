@@ -17,14 +17,13 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00525790
         void TribesState::removeSelectedUnitsFromTheirCurrentTribes(int playerID)
         {
-            uint uVar1;
             Unit* _pUnit;
             int _unitTribeID;
             int _tribeID;
             uint _unitID;
             bool _unitRemovedFromTribeByID[1250];
             Tribe* _pTribe;
-            uVar1 = MSVC_SecurityCookie::instance ^ (uint)_unitRemovedFromTribeByID;
+            uint uVar1 = MSVC_SecurityCookie::instance ^ (uint)_unitRemovedFromTribeByID;
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                 1250, '\0', (void*)((int)(_unitRemovedFromTribeByID)));
             _unitID = 1;

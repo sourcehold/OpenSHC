@@ -61,7 +61,6 @@ namespace UI {
         void General::MenuItemActionHandler_General_CreateEventCallbackFunction(int param_1, ...)
         {
             short sVar1;
-            BuildingTypeShort BVar2;
             char* pcVar3;
             BOOLEnum BVar4;
             dword dVar5;
@@ -465,7 +464,7 @@ namespace UI {
                         = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                               .keep.id;
                     if (0 < iVar8) {
-                        BVar2 = DAT_BuildingsState::instance.buildings[iVar8].buildingType;
+                        BuildingTypeShort BVar2 = DAT_BuildingsState::instance.buildings[iVar8].buildingType;
                         x1 = 0;
                         y1 = 0;
                         if (BVar2 == Map::Buildings::BT_MANORHOUSE) {

@@ -23,15 +23,13 @@ namespace Map {
         undefined4 TribesState::applyMoveCommandOrRallyCommandToTribe(
             int tribeID, undefined4 x1, undefined4 y1, undefined4 isRallying, int storeAsRallyPoint)
         {
-            BOOLEnum _allAssassins;
             int _unitID;
-            int _unitSelectionIndex;
-            int _targetUnitID;
-            _unitSelectionIndex = 0;
-            _allAssassins = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::isTribeAllAssassins, this)(tribeID);
+            int _unitSelectionIndex = 0;
+            BOOLEnum _allAssassins
+                = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::isTribeAllAssassins, this)(tribeID);
             this->tribes[tribeID].someUnitID = 0;
             if (storeAsRallyPoint) {
-                _targetUnitID = this->tribes[tribeID].selectionTargetUnitID;
+                int _targetUnitID = this->tribes[tribeID].selectionTargetUnitID;
                 this->tribes[tribeID].isRallyingUnk = (short)isRallying;
                 this->tribes[tribeID].rallyPointArray[0][0] = DAT_UnitsState::instance.units[_targetUnitID].x;
                 this->tribes[tribeID].rallyPointArray[0][1] = DAT_UnitsState::instance.units[_targetUnitID].y;

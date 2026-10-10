@@ -11,8 +11,7 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004948C0
         void LoadMap::MenuItemActionHandler_LoadMap_TableContent(int param_1, ...)
         {
-            DWORD DVar1;
-            DVar1 = timeGetTime();
+            DWORD DVar1 = timeGetTime();
             if (DAT_MenuTextInputState::instance.DAT_MenuLoadGameRelativeSelectionOffset + param_1
                 < DAT_MenuTextInputState::instance.fileListEntryCount) {
                 DAT_MenuTextInputState::instance.DAT_MenuLoadGameRelativeSelectionIndex = param_1;

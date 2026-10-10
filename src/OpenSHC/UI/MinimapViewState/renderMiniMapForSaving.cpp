@@ -12,15 +12,13 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004B7600
     void MinimapViewState::renderMiniMapForSaving(int param_1, int param_2, int param_3, int param_4)
     {
-        int iVar1;
-        int iVar2;
         int iVar3;
         int iVar4;
-        iVar1 = 400 - DAT_TileMapState::instance.mapSize;
+        int iVar1 = 400 - DAT_TileMapState::instance.mapSize;
         if (iVar1 == 400) {
             iVar1 = 0;
         }
-        iVar2 = ((iVar1 / 2) / 2 + 1) * 0x20;
+        int iVar2 = ((iVar1 / 2) / 2 + 1) * 0x20;
         iVar2 = (iVar2 / 32) + (DAT_ViewportRenderState::instance.viewportState.viewportHeight + -5) / 2;
         iVar1 = (iVar1 / 2) * 8 + 8;
         iVar1 = (iVar1 / 8) + DAT_ViewportRenderState::instance.viewportState.viewportWidth / 2;
@@ -36,8 +34,7 @@ namespace UI {
             iVar4 = 1;
             iVar3 = 2;
         }
-        MACRO_CALL_MEMBER(UI::MinimapViewState_Func::locatePlayerKeepPositionsOnMinimap, this)(
-            4, iVar3, iVar4);
+        MACRO_CALL_MEMBER(UI::MinimapViewState_Func::locatePlayerKeepPositionsOnMinimap, this)(4, iVar3, iVar4);
         this->lastRenderedXOffset = iVar2;
         this->lastRenderedYOffset = iVar1;
         this->needsRedraw = 1;

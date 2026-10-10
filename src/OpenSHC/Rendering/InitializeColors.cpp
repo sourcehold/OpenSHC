@@ -30,7 +30,6 @@ using Rendering::ColorMode;
 // FUNCTION: STRONGHOLDCRUSADER 0x00467890
 void Rendering::InitializeColors()
 {
-    uint _int16bit;
     COL_BLUE::instance.shortValue = 0x1f;
     COL_BLACK::instance.shortValue = 0;
     if (DAT_WindowAndDirectDraw::instance.colorBitMode == Rendering::RGB_555) {
@@ -61,7 +60,7 @@ void Rendering::InitializeColors()
         COL_VIVID_BLUE::instance.shortValue = 0x24bf;
         COL_VERY_SOFT_YELLOW::instance.shortValue = -0x1089;
     }
-    _int16bit = MACRO_CALL(UI::Rendering_Func::TransformToCurrentModeColor)(0xc0, 0xc0, 0xc0);
+    uint _int16bit = MACRO_CALL(UI::Rendering_Func::TransformToCurrentModeColor)(0xc0, 0xc0, 0xc0);
     COL_LIGHT_GREY::instance.shortValue = (short)_int16bit;
     _int16bit = MACRO_CALL(UI::Rendering_Func::TransformToCurrentModeColor)(0xd7, 0xd2, 0xa4);
     COL_GREYISH_YELLOW::instance.shortValue = (short)_int16bit;

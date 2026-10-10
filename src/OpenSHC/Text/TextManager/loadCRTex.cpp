@@ -27,7 +27,6 @@ namespace Text {
     // FUNCTION: STRONGHOLDCRUSADER 0x00473870
     void TextManager::loadCRTex()
     {
-        int _fileDescriptor;
         WCHAR* _lpWideCharStr;
         int _languageCompareResult;
         char* _langStr;
@@ -36,7 +35,7 @@ namespace Text {
         this->field6_0x18 = 0;
         this->textSurfaceTarget = Rendering::Enums::RT_SCREEN_MENU;
         this->field27_0x1348 = 0;
-        _fileDescriptor = MACRO_CALL(OS_Func::_ucrt_open)("cr.tex", _O_BINARY, 0);
+        int _fileDescriptor = MACRO_CALL(OS_Func::_ucrt_open)("cr.tex", _O_BINARY, 0);
         if (_fileDescriptor != -1) {
             MACRO_CALL(OS_Func::_ucrt_read)(_fileDescriptor, (void*)((int)(this->textOffsets)), (size_t)((int)(1040)));
             _lpWideCharStr = (WCHAR*)MACRO_CALL(OS_Func::_malloc)(702000);

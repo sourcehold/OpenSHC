@@ -59,7 +59,6 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004251A0
         void MainMenu::MenuItemActionHandler_MainMenu_Main(int param_1, ...)
         {
-            int iVar1;
             int iVar2;
             int iVar3;
             MenuViewType menuID;
@@ -125,8 +124,7 @@ namespace UI {
                 if ((int)DAT_GameCore::instance.directDrawStatus < 0x700) {}
                 MACRO_CALL_MEMBER(Text::UserTextHandler_Func::clearEntry, DAT_UserTextHandlerState::ptr)(5);
                 MACRO_CALL_MEMBER(Text::UserTextHandler_Func::clearEntry, DAT_UserTextHandlerState::ptr)(6);
-                DAT_GameSynchronyState::instance.nextModalDialog
-                    = UI::Enums::MMT_CHOOSE_NETWORK_SERVICE_PROVIDER;
+                DAT_GameSynchronyState::instance.nextModalDialog = UI::Enums::MMT_CHOOSE_NETWORK_SERVICE_PROVIDER;
                 DAT_GameSynchronyState::instance.kickedAtTime = 0;
                 DAT_GameSynchronyState::instance.ipArrayIndex = 0;
                 DAT_GameCore::instance.gameMode_2 = Game::GM_SKIRMISH_AND_MULTIPLAYER;
@@ -145,8 +143,8 @@ namespace UI {
                 DAT_MenuTextInputState::instance.DAT_MenuOptionsActionParameter = 9;
                 MACRO_CALL_MEMBER(UI::MenuTextInputState_Func::activateModalDialogAndClearText,
                     DAT_MenuTextInputState::ptr)(UI::Enums::MMT_YES_NO_DIALOG);
-                MACRO_CALL_MEMBER(
-                    Rendering::Bink::BinkControlClass_Func::stopBinkPlayback, DAT_BinkControlState::ptr)(0);
+                MACRO_CALL_MEMBER(Rendering::Bink::BinkControlClass_Func::stopBinkPlayback, DAT_BinkControlState::ptr)(
+                    0);
                 return;
             case 6:
                 /*
@@ -168,10 +166,9 @@ namespace UI {
                 DAT_GameCore::instance.buildmenuMenuTabToSwitchTo.buildMenuTab = UI::Enums::BMTT_CASTLE;
                 MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     UI::Enums::MVT_BUILD_MENU, 0);
-                MACRO_CALL_MEMBER(
-                    UI::MenuTextInputState_Func::clearModalDialog2to6, DAT_MenuTextInputState::ptr)();
-                MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog,
-                    DAT_MenuModalComposition1::ptr)(UI::Enums::MMT_TUTORIAL_BOX, FALSE);
+                MACRO_CALL_MEMBER(UI::MenuTextInputState_Func::clearModalDialog2to6, DAT_MenuTextInputState::ptr)();
+                MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog, DAT_MenuModalComposition1::ptr)(
+                    UI::Enums::MMT_TUTORIAL_BOX, FALSE);
                 MACRO_CALL(UI::Helpers_Func::InitTutorialStepTransition)(1);
                 DAT_00df555c::instance = DAT_MissionAestheticsDefinedData::instance.TutorialStepActionCount[0];
                 INT_DisableTutorialRestrictions::instance = 0;
@@ -184,7 +181,8 @@ namespace UI {
                 iVar2 = 1;
                 iVar3 = 0;
                 do {
-                    iVar1 = *(int*)((int)DAT_MissionAestheticsDefinedData::instance.TutorialStepActionCount + iVar3);
+                    int iVar1
+                        = *(int*)((int)DAT_MissionAestheticsDefinedData::instance.TutorialStepActionCount + iVar3);
                     *(int*)((int)INT_ARRAY_00df5598::instance + iVar3) = iVar2 + 1;
                     iVar3 = iVar3 + 4;
                     iVar2 = iVar2 + 2 + iVar1;
@@ -196,16 +194,15 @@ namespace UI {
                   credits
                  */
                 DAT_00b95954::instance = 0;
-                MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
-                    UI::Enums::MVT_CREDITS, 0);
+                MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(UI::Enums::MVT_CREDITS, 0);
                 return;
             case 8:
                 /*
                   options
                  */
                 DAT_GameSynchronyState::instance.currentPlayerSlotID = 0;
-                MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand,
-                    DAT_GameSynchronyState::ptr)(Commands::GCT_ASK_FOR_SLOT_ASSIGNMENT);
+                MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
+                    Commands::GCT_ASK_FOR_SLOT_ASSIGNMENT);
                 MACRO_CALL_MEMBER(UI::MenuTextInputState_Func::activateModalDialogAndClearText,
                     DAT_MenuTextInputState::ptr)(UI::Enums::MMT_MAIN_MENU_OPTIONS);
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(

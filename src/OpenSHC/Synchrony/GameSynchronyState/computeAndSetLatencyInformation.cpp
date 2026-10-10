@@ -15,11 +15,6 @@ namespace Synchrony {
     void GameSynchronyState::computeAndSetLatencyInformation()
     {
         uint uVar1;
-        DWORD _now_1;
-        DWORD _now_2;
-        BOOLEnum BVar2;
-        int _sum;
-        int _div;
         int* piVar3;
         int _counter;
         int _sum_2;
@@ -28,28 +23,27 @@ namespace Synchrony {
         if (this->DPLAY_ReceiveData.packet.commandProtocol == 0x7e) {
             this->syncPacketType = 0x7f;
             this->syncRelatedCounter = this->DPLAY_ReceiveData.prefixedPacket.packet.commandProtocol;
-            this->DPLAYX_SendAndReceiveREsult = this->DPLAYX_4A
-                                                    ->SendEx(this->DPLAYX_PlayerHandle, this->DPLAYX_ReceivedPlayerID,
-                                                        DPSEND_NOSENDCOMPLETEMSG | DPSEND_ASYNC | DPSEND_GUARANTEED,
-                                                        (void*)0x1998398, 2, 65000, 0, (void*)0x0, (DWORD_PTR*)0x0);
+            this->DPLAYX_SendAndReceiveREsult = this->DPLAYX_4A->SendEx(this->DPLAYX_PlayerHandle,
+                this->DPLAYX_ReceivedPlayerID, DPSEND_NOSENDCOMPLETEMSG | DPSEND_ASYNC | DPSEND_GUARANTEED,
+                (void*)0x1998398, 2, 65000, 0, (void*)0x0, (DWORD_PTR*)0x0);
             if (!this->DPLAYX_SendAndReceiveREsult) {}
             if (this->DPLAYX_SendAndReceiveREsult == -0x7ffffff6) {}
             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::handleUnexpectedDPlayXResult, this)();
         }
-        uVar1 = MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::translateMultiplayerIDsIntoPlayerIDs,
-            this)(this->DPLAYX_ReceivedPlayerID);
+        uVar1 = MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::translateMultiplayerIDsIntoPlayerIDs, this)(
+            this->DPLAYX_ReceivedPlayerID);
         /*
           playerID is never 0 in this logic, but it could be 0 with a mod
          */
-        _now_1 = timeGetTime();
+        DWORD _now_1 = timeGetTime();
         this->connectionLagInfoArray[uVar1].time = _now_1;
         if (this->connectionLagInfoArray[uVar1].counter
             != (int)(char)this->DPLAY_ReceiveData.prefixedPacket.packet.commandProtocol) {}
         this->connectionLagInfoArray[uVar1].subtractedMapTicks
             = (int)(DAT_GameCore::instance.mapTimeInTicks - this->connectionLagInfoArray[uVar1].mapTimeInTicks) / 2;
-        _now_2 = timeGetTime();
+        DWORD _now_2 = timeGetTime();
         this->connectionLagInfoArray[uVar1].subtractedTime = _now_2 - this->connectionLagInfoArray[uVar1].now >> 1;
-        BVar2 = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
+        BOOLEnum BVar2 = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
         if (!BVar2) {}
         this->connectionLagInfoArray[uVar1].checkFor0 = 1;
         _sum_2 = 0;
@@ -79,7 +73,7 @@ namespace Synchrony {
         }
         this->counter = 0;
     LAB_00488429:
-        _sum = 0;
+        int _sum = 0;
         if (this->limit) {
             if (0 < this->limit) {
                 piVar3 = this->historicalLagInfoPerPlayer[uVar1][2] + 1;
@@ -91,7 +85,7 @@ namespace Synchrony {
                     _countdown = _countdown + -1;
                 } while (_countdown);
             }
-            _div = _sum_2 / this->limit;
+            int _div = _sum_2 / this->limit;
             this->connectionLagInfoArray[uVar1].average2 = _sum / this->limit;
             this->connectionLagInfoArray[uVar1].average1 = _div;
         }

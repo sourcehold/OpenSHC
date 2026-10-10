@@ -22,20 +22,18 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x0047FB50
     void GameSynchronyState::renderChatMessageList(int xPos, int yPos, int param_3)
     {
-        int iVar1;
-        int iVar2;
         this->chatMessageRenderIndex = this->DAT_ChatMessageArrayIndex - param_3;
         if (this->chatMessageRenderIndex < 0) {
             this->chatMessageRenderIndex = this->chatMessageRenderIndex + 0x14;
         }
-        iVar2 = 0;
+        int iVar2 = 0;
         MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::setScreenMenuSurfaceHeightRange,
             DAT_TextureRenderCoreObject::ptr)(yPos + -0x48, yPos + 0x12);
         DAT_TextManagerObject::instance.field13_0x34 = 0x11;
         param_3 = 0;
         do {
             if (this->DAT_ChatEventArray[this->chatMessageRenderIndex].flag == 1) {
-                iVar1 = (DAT_ButtonBackgroundBlendStrength::instance + -0x20) * 0x20;
+                int iVar1 = (DAT_ButtonBackgroundBlendStrength::instance + -0x20) * 0x20;
                 MACRO_CALL_MEMBER(Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
                     this->DAT_ChatMessageSubjectPlayerNameArray[this->chatMessageRenderIndex], xPos, yPos,
                     Text::TTA_LEFT,

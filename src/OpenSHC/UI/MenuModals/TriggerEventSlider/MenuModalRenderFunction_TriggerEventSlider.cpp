@@ -19,8 +19,7 @@ namespace UI {
         void TriggerEventSlider::MenuModalRenderFunction_TriggerEventSlider(int x, int y, int width, int height)
         {
             int textNumInGroup;
-            int iVar1;
-            iVar1 = -1;
+            int iVar1 = -1;
             if (DAT_MapPropertiesState::instance.invasionEventContent.field44_0xa0 == 0x94) {
                 textNumInGroup = 0x92;
             } else {
@@ -30,11 +29,11 @@ namespace UI {
             }
             iVar1 = 2;
         LAB_004ac2a6:
-            MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner,
-                DAT_PencilRenderCore::ptr)(199, textNumInGroup, x, y, width, height);
+            MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner, DAT_PencilRenderCore::ptr)(
+                199, textNumInGroup, x, y, width, height);
             if (iVar1 != -1) {
-                MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM,
-                    DAT_TextureRenderCoreObject::ptr)(DE::SHCDE::GM_INTERFACE_ICONS2, iVar1 + 0x80,
+                MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
+                    DE::SHCDE::GM_INTERFACE_ICONS2, iVar1 + 0x80,
                     width / 2 + 8 + DAT_TextManagerObject::instance.currentXOffset_0x0 / 2 + x, y + 0x1a);
             }
         }

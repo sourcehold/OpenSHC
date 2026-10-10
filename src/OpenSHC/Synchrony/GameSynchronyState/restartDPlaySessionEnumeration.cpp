@@ -18,12 +18,10 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x00487390
     void GameSynchronyState::restartDPlaySessionEnumeration(BOOLEnum respectTimeout)
     {
-        DWORD _now;
         GUID _pGUID;
         DPSESSIONDESC2 _dpSessionDesc2;
-        uint local_4;
-        local_4 = MSVC_SecurityCookie::instance ^ (uint)&_pGUID;
-        _now = timeGetTime();
+        uint local_4 = MSVC_SecurityCookie::instance ^ (uint)&_pGUID;
+        DWORD _now = timeGetTime();
         _pGUID.Data2 = 0;
         _pGUID.Data3 = 0;
         _pGUID.Data1 = 0;

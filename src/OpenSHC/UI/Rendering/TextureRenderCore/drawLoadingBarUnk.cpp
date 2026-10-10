@@ -16,8 +16,7 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x0044C850
         void TextureRenderCore::drawLoadingBarUnk(GmID currentGmId, int barLengthUnk)
         {
-            DWORD _currentTime;
-            _currentTime = timeGetTime();
+            DWORD _currentTime = timeGetTime();
             if (0x1e < (int)(_currentTime - TIME_LastVisualLoadingBarUpdate::instance)) {
                 TIME_LastVisualLoadingBarUpdate::instance = _currentTime;
                 MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(

@@ -18,8 +18,7 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x00493900
     void MenuTextInputState::popModalDialog()
     {
-        MenuModalTypeInt _menuModalID;
-        _menuModalID = this->modalDialog_2;
+        MenuModalTypeInt _menuModalID = this->modalDialog_2;
         this->modalDialog_2 = this->modalDialog_3;
         this->modalDialog_3 = this->modalDialog_4;
         this->modalDialog_4 = this->modalDialog_5;
@@ -30,14 +29,12 @@ namespace UI {
             if (_menuModalID == UI::Enums::MMT_SAVE_MAP) {
                 this->fileListVisibleRowCount = 0x10;
                 DAT_UserTextHandlerState::instance.allowUserTextInput = 0;
-                MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(
-                    2);
-                MACRO_CALL_MEMBER(
-                    Text::UserTextHandler_Func::moveCursorToEnd, DAT_UserTextHandlerState::ptr)();
+                MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(2);
+                MACRO_CALL_MEMBER(Text::UserTextHandler_Func::moveCursorToEnd, DAT_UserTextHandlerState::ptr)();
                 DAT_UserTextHandlerState::instance.allowUserTextInput = 1;
             }
-            MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog,
-                DAT_MenuModalComposition1::ptr)((UI::Enums::MenuModalType)_menuModalID, TRUE);
+            MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog, DAT_MenuModalComposition1::ptr)(
+                (UI::Enums::MenuModalType)_menuModalID, TRUE);
         }
         MACRO_CALL_MEMBER(UI::MenuTextInputState_Func::clearAnyOtherModalDialogs, this)();
     }

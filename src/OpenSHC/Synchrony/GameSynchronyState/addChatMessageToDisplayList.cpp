@@ -13,7 +13,6 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x0047F6A0
     void GameSynchronyState::addChatMessageToDisplayList(int subjectPlayerID, int objectPlayerID)
     {
-        DWORD DVar1;
         char (*src)[250];
         char (*destination)[250];
         this->DAT_ChatMessageArrayIndex = this->DAT_ChatMessageArrayIndex + 1;
@@ -21,7 +20,7 @@ namespace Synchrony {
             this->DAT_ChatMessageArrayIndex = 0;
         }
         this->DAT_ChatEventArray[this->DAT_ChatMessageArrayIndex].subjectPlayer = subjectPlayerID;
-        DVar1 = timeGetTime();
+        DWORD DVar1 = timeGetTime();
         this->DAT_ChatEventArray[this->DAT_ChatMessageArrayIndex].time = DVar1;
         /*
           such a weird way to write: DAT_01a22de8

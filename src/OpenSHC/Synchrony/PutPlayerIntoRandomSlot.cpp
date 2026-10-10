@@ -11,17 +11,13 @@ namespace OpenSHC {
 // FUNCTION: STRONGHOLDCRUSADER 0x00428480
 void Synchrony::PutPlayerIntoRandomSlot(int param_1)
 {
-    int iVar1;
-    uint _playerPositionsCount;
-    uint uVar2;
-    int iVar3;
-    iVar1 = 0;
+    int iVar1 = 0;
     do {
         if ((int)DAT_GameSynchronyState::instance.playerPositionsArray[iVar1] == param_1 + -1) {}
         iVar1 = iVar1 + 1;
     } while (iVar1 < 8);
-    _playerPositionsCount = 0;
-    uVar2 = 0;
+    uint _playerPositionsCount = 0;
+    uint uVar2 = 0;
     if (-1 < DAT_GameCore::instance.keepPositions[0].x) {
         uVar2 = 1;
         if (-1 < DAT_GameSynchronyState::instance.playerPositionsArray[0]) {
@@ -58,7 +54,7 @@ void Synchrony::PutPlayerIntoRandomSlot(int param_1)
         _playerPositionsCount = _playerPositionsCount + 1;
     }
     if (_playerPositionsCount < uVar2) {
-        iVar3 = (int)SEC_RNG::instance.currentNumber1 % (int)(uVar2 - _playerPositionsCount);
+        int iVar3 = (int)SEC_RNG::instance.currentNumber1 % (int)(uVar2 - _playerPositionsCount);
         MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber1, SEC_RNG::ptr)();
         iVar1 = 0;
         while (DAT_GameCore::instance.keepPositions[iVar1].x < 0

@@ -39,15 +39,12 @@ namespace Rendering {
         // FUNCTION: STRONGHOLDCRUSADER 0x004B7C90
         void AIMessageQueue::playAiLordMessage(int param_1, int param_2)
         {
-            DWORD DVar1;
-            BOOLEnum BVar2;
             int iVar3;
             int iVar4;
             int iVar5;
-            int iVar6;
-            DVar1 = timeGetTime();
-            iVar6 = 0;
-            BVar2 = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
+            DWORD DVar1 = timeGetTime();
+            int iVar6 = 0;
+            BOOLEnum BVar2 = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
             if (BVar2) {
                 if (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_BUILDING_AND_STATUS_MENU) {
                     if (DAT_GameCore::instance.activeMenuTab.tabType == UI::Enums::BASMTT_BARRACKS_OR_MPMENU_MODEM) {

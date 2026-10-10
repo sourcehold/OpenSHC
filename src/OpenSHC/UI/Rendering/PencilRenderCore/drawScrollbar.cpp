@@ -19,11 +19,9 @@ namespace UI {
         void PencilRenderCore::drawScrollbar(
             uint xPos, int yPos, int height, int thumbYPos, BOOLEnum isDragged, int thumbHeight, int blendStrength)
         {
-            int _yPosEnd;
-            int _yPos;
             int alphaImageID;
-            _yPosEnd = height + yPos;
-            _yPos = yPos;
+            int _yPosEnd = height + yPos;
+            int _yPos = yPos;
             if (yPos <= _yPosEnd + -0x14) {
                 do {
                     MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,

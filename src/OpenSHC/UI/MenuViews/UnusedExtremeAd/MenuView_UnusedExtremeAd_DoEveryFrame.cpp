@@ -18,8 +18,7 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004E1AA0
         void UnusedExtremeAd::MenuView_UnusedExtremeAd_DoEveryFrame()
         {
-            int iVar1;
-            iVar1 = MACRO_CALL(UI::Helpers_Func::TicksSinceCounterStart)();
+            int iVar1 = MACRO_CALL(UI::Helpers_Func::TicksSinceCounterStart)();
             if (iVar1) {
                 if (DAT_MouseState::instance.rightClickStop) {
                     MACRO_CALL(UI::Credits_Func::StopCreditsPlaybackAndSounds)();

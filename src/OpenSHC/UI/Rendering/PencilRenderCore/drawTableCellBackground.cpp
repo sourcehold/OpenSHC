@@ -20,10 +20,8 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004692E0
         void PencilRenderCore::drawTableCellBackground(BOOLEnum isSelected, int indexToGetStripes, int blendStrength)
         {
-            int iVar1;
-            uint imageID;
-            iVar1 = DAT_ButtonX::instance;
-            imageID = ((int)(char)indexToGetStripes & 1U) * 2 | 0x45;
+            int iVar1 = DAT_ButtonX::instance;
+            uint imageID = ((int)(char)indexToGetStripes & 1U) * 2 | 0x45;
             if (!isSelected) {
                 if (!DAT_ButtonCurrentlyInteracting::instance) {
                     if (DAT_ButtonW::instance + DAT_ButtonX::instance <= DAT_ButtonX::instance) {}

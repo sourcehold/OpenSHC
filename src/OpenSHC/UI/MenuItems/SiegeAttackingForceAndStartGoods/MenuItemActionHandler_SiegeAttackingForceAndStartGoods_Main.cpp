@@ -26,10 +26,9 @@ namespace UI {
         void SiegeAttackingForceAndStartGoods::MenuItemActionHandler_SiegeAttackingForceAndStartGoods_Main(
             int param_1, ...)
         {
-            int iVar1;
             char** maximum;
             if (param_1 < 0) {
-                iVar1 = -param_1 + -1;
+                int iVar1 = -param_1 + -1;
                 if (iVar1 < 0x14) {
                     if (DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 == Map::MT_SIEGE) {
                         return;

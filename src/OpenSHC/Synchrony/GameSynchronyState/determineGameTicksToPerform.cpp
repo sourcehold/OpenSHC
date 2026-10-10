@@ -18,12 +18,10 @@ namespace Synchrony {
     int GameSynchronyState::determineGameTicksToPerform(int currentPlayerSlotID)
     {
         int iVar1;
-        int iVar2;
         int extraout_ECX;
         int _durationOfOneTick;
-        dword _gameSpeedLevel;
         int _relativeTickTime;
-        _gameSpeedLevel = this->skirmishGameSpeedLevel;
+        dword _gameSpeedLevel = this->skirmishGameSpeedLevel;
         if (!DAT_GameCore::instance.gameSpeedLevel) {
             DAT_GameCore::instance.gameSpeedLevel = 40;
         }
@@ -46,7 +44,7 @@ namespace Synchrony {
             _relativeTickTime = *(int*)(extraout_ECX + 0x109eac);
             if (-1 < *(int*)(extraout_ECX + 0x109eac)
                 && (iVar1 = *(int*)(extraout_ECX + 0x109ea8), _relativeTickTime = this->relativeTickTime, 0 < iVar1)) {
-                iVar2 = *(int*)(extraout_ECX + 0x109ea8);
+                int iVar2 = *(int*)(extraout_ECX + 0x109ea8);
                 if (*(int*)(extraout_ECX + 0x109ee8) + 0x4b < iVar2) {
                     this->relativeTickTime = iVar1;
                     if (*(int*)(extraout_ECX + 0x109260) < 1) {

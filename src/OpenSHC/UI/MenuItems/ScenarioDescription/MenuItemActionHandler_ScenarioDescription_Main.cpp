@@ -49,8 +49,7 @@ namespace UI {
         {
             int iVar1;
             char local_68[100];
-            uint local_4;
-            local_4 = MSVC_SecurityCookie::instance ^ (uint)local_68;
+            uint local_4 = MSVC_SecurityCookie::instance ^ (uint)local_68;
             if (DAT_MenuTextInputState::instance.currentModalDialog == UI::Enums::MMT_NO_MENU) {
                 switch (param_1) {
                 case 6:

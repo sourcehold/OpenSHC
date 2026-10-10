@@ -16,12 +16,10 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x004880E0
     void GameSynchronyState::sendSyncPacket126()
     {
-        DWORD _now;
-        BOOLEnum BVar1;
-        _now = timeGetTime();
+        DWORD _now = timeGetTime();
         if (this->currentGameMode != Game::GM_SOLITARY && this->currentGameMode != Game::GM_SKIRMISH_SINGLE_PLAYER
             && this->DPLAYX_4A != (IDirectPlay4A*)0x0) {
-            BVar1 = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
+            BOOLEnum BVar1 = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
             if (BVar1) {
                 this->syncRelatedCounter = this->syncRelated2 + '\x01';
                 this->connectionLagInfoArray[0].mapTimeInTicks = DAT_GameCore::instance.mapTimeInTicks;

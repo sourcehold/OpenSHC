@@ -15,8 +15,7 @@ namespace Map {
         void TribesState::unsetRallyRelatedFlagOnUnits(int tribeID)
         {
             int _unitID;
-            int _unitSelectionIndex;
-            _unitSelectionIndex = 0;
+            int _unitSelectionIndex = 0;
             if (0 < this->tribes[tribeID].size) {
                 do {
                     _unitID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(

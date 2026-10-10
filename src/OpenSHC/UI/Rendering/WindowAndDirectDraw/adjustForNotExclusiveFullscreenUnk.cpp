@@ -11,11 +11,9 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00467E50
         void WindowAndDirectDraw::adjustForNotExclusiveFullscreenUnk(LPRECT destinationRect, LPRECT sourceRect)
         {
-            int _screenWidth;
-            int _screenHeight;
             if (!this->runGameAsExclusiveFullscreen) {
-                _screenWidth = GetSystemMetrics(SM_CXSCREEN);
-                _screenHeight = GetSystemMetrics(SM_CYSCREEN);
+                int _screenWidth = GetSystemMetrics(SM_CXSCREEN);
+                int _screenHeight = GetSystemMetrics(SM_CYSCREEN);
                 if (destinationRect->left < 0) {
                     sourceRect->left = sourceRect->left - destinationRect->left;
                     destinationRect->left = 0;

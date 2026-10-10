@@ -30,23 +30,19 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x005244D0
         undefined4 TribesState::assignAttackTargetsForTribe(int tribeID, SomeTribeBehaviorType targetType)
         {
-            UnitStateShort UVar1;
-            UnitTypeShort UVar2;
             short sVar3;
-            BOOLEnum BVar4;
             uint _unitID;
             int _tile2;
             uint _freeTile;
             int iVar5;
             BOOLEnum BVar6;
-            int unitSelectionIndex;
             bool bVar7;
             uint _x;
             uint _y;
             short _targetTileY;
             uint _tile1;
-            unitSelectionIndex = 0;
-            BVar4 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::isTribeAllAssassins, this)(tribeID);
+            int unitSelectionIndex = 0;
+            BOOLEnum BVar4 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::isTribeAllAssassins, this)(tribeID);
             if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[this->tribes[tribeID].owner] != -1) {
                 return (undefined4)(0);
             }
@@ -176,10 +172,10 @@ namespace Map {
                                 }
                             }
                         } else {
-                            UVar1 = DAT_UnitsState::instance.units[_unitID].state.generic;
+                            UnitStateShort UVar1 = DAT_UnitsState::instance.units[_unitID].state.generic;
                             if (UVar1 != Map::Units::States::US_MELEE_ATTACK_WALL
                                 && UVar1 != Map::Units::States::US_MOVE_TO_DESTINATION && UVar1 != (UnitState)0x67) {
-                                UVar2 = DAT_UnitsState::instance.units[_unitID].unitType;
+                                UnitTypeShort UVar2 = DAT_UnitsState::instance.units[_unitID].unitType;
                                 if (UVar2 == Map::Units::UT_E_SPEAR) {
                                     bVar7 = UVar1 == Map::Units::States::US_AIM_WEAPONUnk;
                                 } else if (UVar2 == Map::Units::UT_E_ENGINEER) {

@@ -13,7 +13,6 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00455C60
         void TextureRenderCore::loadGmFiles(char* fileNameArray)
         {
-            int _currentLoadingBarStatus;
             int _lengthToCompare;
             char* _currentGmFilename;
             int _currentGmIndex;
@@ -24,7 +23,7 @@ namespace UI {
             /*
               Count gm files for the loading bar?
              */
-            _currentLoadingBarStatus = 0;
+            int _currentLoadingBarStatus = 0;
             _currentGmFilename = fileNameArray;
             do {
                 _currentLoadingBarStatus = _currentLoadingBarStatus;

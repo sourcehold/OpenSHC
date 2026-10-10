@@ -20,12 +20,11 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00424AD0
         void IntroVideo::MenuView_IntroVideo_DoEveryFrame()
         {
-            DWORD DVar1;
-            DVar1 = timeGetTime();
+            DWORD DVar1 = timeGetTime();
             if (399 < DVar1 - TIME_IntroVideo_Prepare::instance) {
                 if (DAT_MouseState::instance.draggingStopped) {
-                    MACRO_CALL_MEMBER(Rendering::Bink::BinkControlClass_Func::stopBinkPlayback,
-                        DAT_BinkControlState::ptr)(0);
+                    MACRO_CALL_MEMBER(
+                        Rendering::Bink::BinkControlClass_Func::stopBinkPlayback, DAT_BinkControlState::ptr)(0);
                 }
                 if (DAT_BinkControlState::instance.binkObjPtrArray[0] == (HBINK)0x0) {
                     MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(

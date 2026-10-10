@@ -19,10 +19,9 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x00490380
     void GameSynchronyState::removePlayerFromLobby(int playerID)
     {
-        BOOLEnum BVar1;
         GameCommandType commandType;
         this->syncRelatedStatusArray[playerID] = 1;
-        BVar1 = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
+        BOOLEnum BVar1 = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
         if ((BVar1) && (playerID != this->currentPlayerSlotID)) {
             this->DAT_GameCommandParam0 = playerID;
             this->DAT_GameCommandParam1 = this->kickDueToLagStatusUnk;

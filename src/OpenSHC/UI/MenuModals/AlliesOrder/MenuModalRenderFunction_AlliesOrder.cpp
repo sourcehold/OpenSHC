@@ -21,7 +21,6 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004AD2B0
         void AlliesOrder::MenuModalRenderFunction_AlliesOrder(int x, int y, int width, int height)
         {
-            int yParam;
             char* textAddress;
             int xParam;
             TextAlignment alignment;
@@ -35,7 +34,7 @@ namespace UI {
             fontSize = 0xf;
             color = 0xccfaff;
             alignment = Text::TTA_LEFT;
-            yParam = y + 0x19;
+            int yParam = y + 0x19;
             xParam = x + 0x1e;
             /*
               added by script: "Set Orders"

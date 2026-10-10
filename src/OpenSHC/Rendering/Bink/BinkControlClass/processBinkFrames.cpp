@@ -18,8 +18,6 @@ namespace Rendering {
         void BinkControlClass::processBinkFrames()
         {
             BOOLEnum _streamPlaying;
-            DWORD _currentSysTime;
-            long _frameNotDone;
             BinkControlClass* _ptrInBinkControlStruct;
             int _binkObjIndex;
             HBINK _binkObjPtr;
@@ -31,7 +29,7 @@ namespace Rendering {
                         Audio::MSS::SoundSystem_Func::isSampleOrStreamPlaying, DAT_SoundSystemState::ptr)(
                         (Audio::MSS::enums::SHC_SoundStream)(_ptrInBinkControlStruct->soundStreamIndex[0]));
                     if (_streamPlaying) {
-                        _currentSysTime = timeGetTime();
+                        DWORD _currentSysTime = timeGetTime();
                         if (_currentSysTime - _ptrInBinkControlStruct->startTime[0] < 20000)
                             goto LAB_0040923b;
                     }
@@ -41,18 +39,17 @@ namespace Rendering {
                 _ptrInBinkControlStruct->unknown01_zero[0] = 0;
                 _ptrInBinkControlStruct->unknown02_zero[0] = 0;
                 if (_ptrInBinkControlStruct->binkObjPtrArray[0] != (HBINK)0x0) {
-                    _frameNotDone = BinkWait(_ptrInBinkControlStruct->binkObjPtrArray[0]);
+                    long _frameNotDone = BinkWait(_ptrInBinkControlStruct->binkObjPtrArray[0]);
                     if (!_frameNotDone) {
                         BinkDoFrame(_ptrInBinkControlStruct->binkObjPtrArray[0]);
                         _binkObjPtr = _ptrInBinkControlStruct->binkObjPtrArray[0];
                         if ((_binkObjPtr->FrameNum == _binkObjPtr->Frames)
                             && (_ptrInBinkControlStruct->unknownParam03[0] == 0)) {
-                            if (_ptrInBinkControlStruct->soundStreamIndex[0]
-                                == Audio::MSS::enums::SND_STR_MUSIC) {
+                            if (_ptrInBinkControlStruct->soundStreamIndex[0] == Audio::MSS::enums::SND_STR_MUSIC) {
                                 if (_ptrInBinkControlStruct->unknownParam07[0] != 2) {
                                     _ptrInBinkControlStruct->unknown01_zero[0] = 1;
-                                    MACRO_CALL_MEMBER(Rendering::Bink::BinkControlClass_Func::stopBinkPlayback,
-                                        this)(_binkObjIndex);
+                                    MACRO_CALL_MEMBER(Rendering::Bink::BinkControlClass_Func::stopBinkPlayback, this)(
+                                        _binkObjIndex);
                                     goto LAB_0040929d;
                                 }
                             } else if (_ptrInBinkControlStruct->unknownParam07[0] != 2)

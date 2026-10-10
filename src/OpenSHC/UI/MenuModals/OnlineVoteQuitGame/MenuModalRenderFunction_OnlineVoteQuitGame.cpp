@@ -19,15 +19,13 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004937E0
         void OnlineVoteQuitGame::MenuModalRenderFunction_OnlineVoteQuitGame(int x, int y, int width, int height)
         {
-            DWORD DVar1;
-            int number;
             /*
               added by script: "End this game?"
              */
-            MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner,
-                DAT_PencilRenderCore::ptr)(0x4c, 0x3b, x, y, width, height);
-            DVar1 = timeGetTime();
-            number = 10 - (DVar1 - DAT_GameSynchronyState::instance.quitGameVoteRequestTime) / 1000;
+            MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner, DAT_PencilRenderCore::ptr)(
+                0x4c, 0x3b, x, y, width, height);
+            DWORD DVar1 = timeGetTime();
+            int number = 10 - (DVar1 - DAT_GameSynchronyState::instance.quitGameVoteRequestTime) / 1000;
             if (number < 0) {
                 number = 0;
             }

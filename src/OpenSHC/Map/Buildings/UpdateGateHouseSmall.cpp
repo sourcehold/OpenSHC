@@ -23,21 +23,14 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00423CD0
     void Buildings::UpdateGateHouseSmall()
     {
-        byte bVar1;
-        int iVar2;
-        uint uVar3;
         int iVar4;
-        uint uVar5;
-        uint uVar6;
-        uint uVar7;
-        int local_14;
         int local_10[4];
         MACRO_CALL_MEMBER(Game::GameStateStructures_Func::addBuildingInRegistry, DAT_GameState::ptr)(
             DAT_CurrentBuildingID::instance);
-        local_14 = (int)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingVariation;
+        int local_14 = (int)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingVariation;
         MACRO_CALL_MEMBER(
             Map::Buildings::BuildingsState_Func::updateGateDrawBridgeOpenCloseLogic, DAT_BuildingsState::ptr)();
-        iVar2 = DAT_CurrentBuildingID::instance;
+        int iVar2 = DAT_CurrentBuildingID::instance;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].someX
             = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x + 3;
         DAT_BuildingsState::instance.buildings[iVar2].someY = DAT_BuildingsState::instance.buildings[iVar2].y + 2;
@@ -80,11 +73,11 @@ namespace Map {
             iVar4 = 4;
         }
         if (0 < iVar4) {
-            uVar6 = DAT_BuildingsState::instance.buildings[iVar2].fireRelatedRNG1;
-            uVar3 = (int)uVar6 >> 8;
+            uint uVar6 = DAT_BuildingsState::instance.buildings[iVar2].fireRelatedRNG1;
+            uint uVar3 = (int)uVar6 >> 8;
             do {
-                uVar7 = uVar6 & 0xf;
-                uVar5 = uVar3 & 3;
+                uint uVar7 = uVar6 & 0xf;
+                uint uVar5 = uVar3 & 3;
                 uVar6 = uVar6 + 1;
                 uVar3 = uVar3 + 1;
                 iVar4 = iVar4 + -1;
@@ -107,7 +100,7 @@ namespace Map {
         DAT_BuildingsState::instance.buildings[iVar2].extraOverlayImage2 = 0;
         DAT_BuildingsState::instance.buildings[iVar2].animationIncrement = 1;
         DAT_BuildingsState::instance.buildings[iVar2].renderAnimation = 1;
-        bVar1 = DAT_BuildingsState::instance.buildings[iVar2].pathLinkageRelated2;
+        byte bVar1 = DAT_BuildingsState::instance.buildings[iVar2].pathLinkageRelated2;
         if (!bVar1) {
             if (DAT_BuildingsState::instance.buildings[iVar2].gateState == 10) {
                 DAT_BuildingsState::instance.buildings[iVar2].pathLinkageRelated2 = 1;

@@ -11,13 +11,12 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x0047EB80
     int GameSynchronyState::addPlayerToCurrentPlayerArray(int playerFullID)
     {
-        int _slot_2;
         int _slot;
         int* _pFullIdArrayPlus1_2;
         int* _fullIDArray;
         int* _pFullIdArrayPlus1;
         _fullIDArray = this->currentPlayerFullIDArray + 1;
-        _slot_2 = 1;
+        int _slot_2 = 1;
         _pFullIdArrayPlus1 = _fullIDArray;
         do {
             if (*_pFullIdArrayPlus1 == playerFullID) {

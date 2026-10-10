@@ -19,8 +19,7 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00469290
         void PencilRenderCore::renderUpDownButtonUnk(int isDownButtonUnk, int blendStrengthUnk)
         {
-            int _imageID;
-            _imageID = 0x51;
+            int _imageID = 0x51;
             if (!isDownButtonUnk) {
                 _imageID = 0x55;
             }

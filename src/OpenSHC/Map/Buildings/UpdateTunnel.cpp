@@ -22,13 +22,10 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00417FD0
     void Buildings::UpdateTunnel()
     {
-        UnitStateShort UVar1;
-        int iVar2;
         int iVar3;
-        short _unitID;
-        iVar2 = DAT_CurrentBuildingID::instance;
-        _unitID = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].unitRefID;
-        UVar1 = DAT_UnitsState::instance.units[_unitID].state.generic;
+        int iVar2 = DAT_CurrentBuildingID::instance;
+        short _unitID = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].unitRefID;
+        UnitStateShort UVar1 = DAT_UnitsState::instance.units[_unitID].state.generic;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIncrement = 1;
         if (UVar1 == (UnitState)3 || UVar1 == Map::Units::States::US_RELOAD_WEAPONUnk
             || DAT_UnitsState::instance.units[_unitID].dying != 0) {

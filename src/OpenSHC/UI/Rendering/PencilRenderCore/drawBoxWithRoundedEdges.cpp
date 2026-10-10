@@ -21,8 +21,6 @@ namespace UI {
         void PencilRenderCore::drawBoxWithRoundedEdges(
             int left, int top, int right, int bottom, RoundedBoxEdgeRoundingLevel roundingLevel)
         {
-            dword dVar1;
-            dword dVar2;
             BOOLEnum _drawReady;
             TextInputDefinedData* pTVar3;
             int iVar4;
@@ -35,8 +33,8 @@ namespace UI {
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::setupPencilSurface, this)();
             _drawReady = MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::setupPencil, this)(
                 left, top, right, bottom, 0);
-            dVar2 = this->drawEndX;
-            dVar1 = this->drawStartX;
+            dword dVar2 = this->drawEndX;
+            dword dVar1 = this->drawStartX;
             if (_drawReady && (int)(roundingLevel * 2) <= (int)(this->drawEndY - this->drawStartY)) {
                 iVar4 = 0;
                 this->drawStartX = dVar1;

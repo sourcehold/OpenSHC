@@ -16,8 +16,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00522CA0
         void TribesState::snapshotSelectionTribeAndComputeStance(int playerID)
         {
-            int _index;
-            int _countAggressive;
             int _unitTribeID;
             int _tribeCountdown;
             int _tribeID_chosen;
@@ -30,11 +28,11 @@ namespace Map {
             bool _atLeastTwoTribes;
             _atLeastTwoTribes = false;
             this->tribeCopiedToSlot0 = 0;
-            _index = 0;
+            int _index = 0;
             _stanceCount[0] = 0;
             _stanceCount[1] = 0;
             _stanceCount[2] = 0;
-            _countAggressive = _index;
+            int _countAggressive = _index;
             _countDefensive = 0;
             _countStandground = 0;
             if (1 < DAT_UnitsState::instance.maxUnitCount) {

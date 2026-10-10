@@ -12,29 +12,23 @@ namespace Synchrony {
     {
         int iVar1;
         uint _player;
-        int iVar2;
         uint _difference;
-        int _absoluteDifference;
-        int _newDiff2;
-        uint _min1IfNegative;
-        int _newDiff;
-        int _countDown;
-        _player = MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::translateMultiplayerIDsIntoPlayerIDs,
-            this)(this->DPLAYX_ReceivedPlayerID);
+        _player = MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::translateMultiplayerIDsIntoPlayerIDs, this)(
+            this->DPLAYX_ReceivedPlayerID);
         this->matchTimesArray[_player - 1]
             = this->receivedCommandMapTimeInTicks + this->connectionLagInfoArray[_player].average1;
-        _countDown = this->commandDelay;
-        iVar2 = (char)this->DPLAY_ReceiveData.packet.payload[0] + 10;
+        int _countDown = this->commandDelay;
+        int iVar2 = (char)this->DPLAY_ReceiveData.packet.payload[0] + 10;
         if ((this->commandDelay < iVar2)
             && (iVar1 = this->commandDelay + 5, this->commandDelay = iVar2, iVar1 <= iVar2)) {
             this->commandDelay = iVar1;
         }
         _difference = (DAT_GameCore::instance.mapTimeInTicks - this->receivedCommandMapTimeInTicks)
             - this->connectionLagInfoArray[_player].average1;
-        _min1IfNegative = (int)_difference >> 0x1f;
-        _absoluteDifference = (_difference ^ _min1IfNegative) - _min1IfNegative;
+        uint _min1IfNegative = (int)_difference >> 0x1f;
+        int _absoluteDifference = (_difference ^ _min1IfNegative) - _min1IfNegative;
         if (this->clTimeDiff < _absoluteDifference) {
-            _newDiff = this->clTimeDiff + 5;
+            int _newDiff = this->clTimeDiff + 5;
             if (_newDiff <= _absoluteDifference) {
                 _absoluteDifference = _newDiff;
             }
@@ -43,7 +37,7 @@ namespace Synchrony {
                 this->clTimeDiff = 45;
             }
         }
-        _newDiff2 = this->clTimeDiff + 10;
+        int _newDiff2 = this->clTimeDiff + 10;
         if ((this->commandDelay < _newDiff2) && (this->commandDelay = _newDiff2, _countDown + 5 <= _newDiff2)) {
             this->commandDelay = _countDown + 5;
         }

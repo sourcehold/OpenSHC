@@ -16,58 +16,33 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004AAB50
         void CreditsScroll::MenuModalRenderFunction_CreditsScroll(int x, int y, int width, int height)
         {
-            int left;
             int iVar1;
-            int right;
-            int iVar2;
-            int local_58;
-            int local_54;
-            int local_50;
-            int local_4c;
-            int local_48;
-            int local_44;
-            int local_40;
-            int local_3c;
-            int local_38;
-            int local_34;
-            int local_30;
-            int local_2c;
-            int local_28;
-            int local_24;
-            int local_20;
-            int local_1c;
-            int local_18;
-            int local_14;
-            int local_10;
-            int local_c;
-            int local_8;
             if (DAT_TextEditorState::instance.pendingCreditsFadeBorder) {
                 DAT_TextEditorState::instance.pendingCreditsFadeBorder = FALSE;
-                MACRO_CALL_MEMBER(
-                    Text::TextEditorState_Func::setTextRenderingLogic, DAT_TextEditorState::ptr)();
-                right = x + -1 + width;
-                local_58 = 0;
-                left = x + 1;
-                local_10 = -600;
-                local_14 = -0x23a;
-                local_18 = -0x21c;
-                local_1c = -0x1fe;
-                local_20 = -0x1e0;
-                local_24 = -0x1c2;
-                local_28 = -0x1a4;
-                local_2c = -0x186;
-                local_30 = -0x168;
-                local_34 = -0x14a;
-                local_38 = -300;
-                local_3c = -0x10e;
-                local_40 = -0xf0;
-                local_44 = -0xd2;
-                local_48 = -0xb4;
-                local_4c = -0x96;
-                local_50 = -0x5a;
-                local_54 = -0x3c;
-                local_c = 0x1e;
-                iVar2 = y;
+                MACRO_CALL_MEMBER(Text::TextEditorState_Func::setTextRenderingLogic, DAT_TextEditorState::ptr)();
+                int right = x + -1 + width;
+                int local_58 = 0;
+                int left = x + 1;
+                int local_10 = -600;
+                int local_14 = -0x23a;
+                int local_18 = -0x21c;
+                int local_1c = -0x1fe;
+                int local_20 = -0x1e0;
+                int local_24 = -0x1c2;
+                int local_28 = -0x1a4;
+                int local_2c = -0x186;
+                int local_30 = -0x168;
+                int local_34 = -0x14a;
+                int local_38 = -300;
+                int local_3c = -0x10e;
+                int local_40 = -0xf0;
+                int local_44 = -0xd2;
+                int local_48 = -0xb4;
+                int local_4c = -0x96;
+                int local_50 = -0x5a;
+                int local_54 = -0x3c;
+                int local_c = 0x1e;
+                int iVar2 = y;
                 do {
                     iVar1 = iVar2 + 3;
                     MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawBlendedBlackBox,
@@ -154,7 +129,7 @@ namespace UI {
                 local_54 = -0x78;
                 local_10 = -0x5a;
                 local_c = -0x3c;
-                local_8 = 0x1e;
+                int local_8 = 0x1e;
                 iVar2 = y + height;
                 do {
                     iVar1 = iVar2 + 3;

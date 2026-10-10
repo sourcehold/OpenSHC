@@ -20,8 +20,6 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x0047E3A0
         void WaitingForHost::MenuModalRenderFunction_WaitingForHost(int x, int y, int width, int height)
         {
-            int yParam;
-            int xParam;
             char* textAddress;
             TextAlignment alignment;
             BGR24 color;
@@ -32,9 +30,9 @@ namespace UI {
             keepOffsetX = FALSE;
             fontSize = 0x11;
             color = 0xc2f0eb;
-            yParam = y + 0x17;
+            int yParam = y + 0x17;
             alignment = Text::TTA_CENTER;
-            xParam = width / 2 + x;
+            int xParam = width / 2 + x;
             /*
               added by script: "Waiting for host..."
              */

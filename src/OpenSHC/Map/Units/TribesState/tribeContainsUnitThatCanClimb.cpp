@@ -15,10 +15,8 @@ namespace Map {
         undefined4 TribesState::tribeContainsUnitThatCanClimb(int param_1)
         {
             int iVar1;
-            int iVar2;
-            int unitSelectionIndex;
-            iVar2 = (int)this->tribes[param_1].size;
-            unitSelectionIndex = 0;
+            int iVar2 = (int)this->tribes[param_1].size;
+            int unitSelectionIndex = 0;
             if (0 < iVar2) {
                 do {
                     iVar1 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(

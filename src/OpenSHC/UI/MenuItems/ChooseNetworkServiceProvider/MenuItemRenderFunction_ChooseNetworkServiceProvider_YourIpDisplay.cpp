@@ -26,7 +26,6 @@ namespace UI {
         void ChooseNetworkServiceProvider::MenuItemRenderFunction_ChooseNetworkServiceProvider_YourIpDisplay(
             int param_1, ...)
         {
-            int yParam;
             char* textAddress;
             int xParam;
             TextAlignment alignment;
@@ -43,7 +42,7 @@ namespace UI {
                 fontSize = 0x12;
                 color = 0xccfaff;
                 alignment = Text::TTA_LEFT;
-                yParam = DAT_ButtonY::instance + 5;
+                int yParam = DAT_ButtonY::instance + 5;
                 xParam = DAT_ButtonX::instance;
                 /*
                   added by script: "Your IP:"

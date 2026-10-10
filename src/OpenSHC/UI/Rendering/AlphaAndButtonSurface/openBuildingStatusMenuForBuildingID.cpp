@@ -27,22 +27,19 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00463310
         BOOLEnum AlphaAndButtonSurface::openBuildingStatusMenuForBuildingID(int buildingID)
         {
-            short sVar1;
             int iVar2;
-            int iVar3;
-            dword dVar4;
             if ((buildingID < 1) || (DAT_GameCore::instance.gamePausedLogical)) {
                 return FALSE;
             }
-            sVar1 = DAT_BuildingsState::instance.buildings[buildingID].owner;
-            dVar4 = 1;
+            short sVar1 = DAT_BuildingsState::instance.buildings[buildingID].owner;
+            dword dVar4 = 1;
             if (sVar1 == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
             LAB_004633b5:
                 MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::extendResourceCountdownForPlayerBuildingsOfType,
                     DAT_BuildingsState::ptr)(
                     (Map::Buildings::BuildingType)(DAT_BuildingsState::instance.buildings[buildingID].buildingType), 1,
                     (int)((Map::Buildings::BuildingType)DAT_GameSynchronyState::instance.currentPlayerSlotID));
-                iVar3 = DAT_GameSynchronyState::instance.currentPlayerSlotID;
+                int iVar3 = DAT_GameSynchronyState::instance.currentPlayerSlotID;
                 switch (DAT_BuildingsState::instance.buildings[buildingID].buildingType) {
                 case Map::Buildings::BT_HOVEL:
                 case Map::Buildings::BT_HOUSE:

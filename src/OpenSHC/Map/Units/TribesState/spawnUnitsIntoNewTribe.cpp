@@ -14,14 +14,12 @@ namespace Map {
         dword TribesState::spawnUnitsIntoNewTribe(undefined4 counter, int tribeType, int x, int y, int playerID,
             UnitType unitType, UnitType unitType2, int unitType1Count, int unitType2Count)
         {
-            int microYPosition;
-            dword _tribeID;
             int _unitID;
             uint _unitID2;
             if ((x <= 0) && (y <= 0)) {
                 return (dword)(0);
             }
-            _tribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, this)(playerID, 0);
+            dword _tribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, this)(playerID, 0);
             if (0 < (int)_tribeID) {
                 this->tribes[_tribeID].tribeType = (AITribeTypeShort)tribeType;
                 this->tribes[_tribeID].someIndex = (short)counter;
@@ -40,7 +38,7 @@ namespace Map {
                     } while (tribeType);
                 }
                 if (0 < unitType2Count) {
-                    microYPosition = y * 8;
+                    int microYPosition = y * 8;
                     y = unitType2Count;
                     do {
                         _unitID2 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(

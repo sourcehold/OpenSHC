@@ -12,13 +12,11 @@ namespace UI {
     int GreatestLord::GetLowestRankedAlivePlayer()
     {
         int _alive;
-        int _playerID;
-        int _total;
-        _total = 0;
-        _playerID = 1;
+        int _total = 0;
+        int _playerID = 1;
         do {
-            _alive = MACRO_CALL_MEMBER(
-                Map::Units::UnitsState_Func::getAliveLordForPlayer, DAT_UnitsState::ptr)(_playerID);
+            _alive
+                = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::getAliveLordForPlayer, DAT_UnitsState::ptr)(_playerID);
             if (_alive) {
                 _total = _total + 1;
             }

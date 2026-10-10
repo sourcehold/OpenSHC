@@ -17,21 +17,18 @@ namespace UI {
         void AlphaAndButtonSurface::prepareButtonAndAlphaSurface()
         {
             dword dVar1;
-            int _currentIconIndex;
-            int _byteNumber;
             int _numOfAdditionalIconStates;
-            dword _maxImageHeight;
             GmIDInt _gmID;
             int _pictureInGm;
-            _byteNumber = 0;
+            int _byteNumber = 0;
             this->dim1_intMinimal350_1 = 0;
-            _maxImageHeight = 0;
+            dword _maxImageHeight = 0;
             do {
                 _numOfAdditionalIconStates
                     = *(int*)((int)&DAT_UIButtonDefinedData::instance.ButtonGmDataArray[0].numOfAdditionalIconStates_0x8
                           + _byteNumber)
                     + 1;
-                _currentIconIndex = 0;
+                int _currentIconIndex = 0;
                 if (0 < _numOfAdditionalIconStates) {
                     _gmID = *(
                         GmIDInt*)((int)&DAT_UIButtonDefinedData::instance.ButtonGmDataArray[0].gmId_0x0 + _byteNumber);

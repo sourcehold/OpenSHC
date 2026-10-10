@@ -24,17 +24,14 @@ namespace Synchrony {
     void GameSynchronyState::scheduleReceivedCommand(
         GameCommandType commandCategory, DWORD dxPlayerHandle, dword time, void* address)
     {
-        int iVar1;
         uint _playerID;
         if (this->DAT_GameCommandArrayIndex < 200) {
             if ((undefined1)commandCategory
-                == (Commands::GCT_SEND_RESYNC_TILEMAPDATA2
-                    | Commands::GCT_HOST_ANNOUNCE_TEAMS_AND_POSITIONS)) {
+                == (Commands::GCT_SEND_RESYNC_TILEMAPDATA2 | Commands::GCT_HOST_ANNOUNCE_TEAMS_AND_POSITIONS)) {
                 DAT_GameSynchronyState::instance.unknownIncrementBy40_01
                     = DAT_GameSynchronyState::instance.unknownIncrementBy40_01 + 40;
                 _playerID = MACRO_CALL_MEMBER(
-                    Synchrony::GameSynchronyState_Func::translateMultiplayerIDsIntoPlayerIDs, this)(
-                    dxPlayerHandle);
+                    Synchrony::GameSynchronyState_Func::translateMultiplayerIDsIntoPlayerIDs, this)(dxPlayerHandle);
                 if (_playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                     DAT_GameSynchronyState::instance.DAT_GameCommandArray[this->DAT_CurrentGameCommandID].time
                         = DAT_GameCore::instance.mapTimeInTicks + 1;
@@ -53,8 +50,7 @@ namespace Synchrony {
                 }
             }
             this->DAT_CurrentGameCommandID = this->DAT_GameCommandArrayIndex;
-            MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(0x4ec,
-                '\0',
+            MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(0x4ec, '\0',
                 (void*)((int)(&DAT_GameSynchronyState::instance.DAT_GameCommandArray[this->DAT_GameCommandArrayIndex]
                         .parameters)));
             DAT_GameSynchronyState::instance.DAT_GameCommandArray[this->DAT_CurrentGameCommandID].stateUnk
@@ -72,7 +68,7 @@ namespace Synchrony {
             if ((int)DAT_GameSynchronyState::instance.DAT_GameCommandArray[this->DAT_CurrentGameCommandID].time < 1) {
                 MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::copyData, DAT_LowLevelMemory::ptr)(
                     this->DAT_CommandSize, address, (void*)((int)(this->DAT_GameCommandFixedParameterLocation)));
-                iVar1 = this->DAT_CurrentGameCommandID;
+                int iVar1 = this->DAT_CurrentGameCommandID;
                 this->protocolInvokerPlayerID = MACRO_CALL_MEMBER(
                     Synchrony::GameSynchronyState_Func::translateMultiplayerIDsIntoPlayerIDs, this)(
                     DAT_GameSynchronyState::instance.DAT_GameCommandArray[this->DAT_CurrentGameCommandID].playerUnk);
@@ -89,8 +85,8 @@ namespace Synchrony {
                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::clearGameCommandEntry, this)(
                     this->DAT_CurrentGameCommandID);
             } else {
-                MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::copyData, DAT_LowLevelMemory::ptr)(
-                    this->DAT_CommandSize, address,
+                MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::copyData, DAT_LowLevelMemory::ptr)(this->DAT_CommandSize,
+                    address,
                     (void*)((int)(&DAT_GameSynchronyState::instance.DAT_GameCommandArray[this->DAT_CurrentGameCommandID]
                             .parameters)));
                 this->DAT_GameCommandArrayIndex = this->DAT_GameCommandArrayIndex + 1;

@@ -12,19 +12,15 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004ABBA0
         void BuildingAvailability::MenuModalRenderFunction_BuildingAvailability(int x, int y, int width, int height)
         {
-            int y1;
-            int x2;
-            int x1;
-            int y2;
             /*
               added by script: "Building Availability"
              */
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner, DAT_PencilRenderCore::ptr)(
                 199, 0xab, x, y, width, height);
-            y1 = y + 0x52;
-            x2 = x + 599;
-            x1 = x + 0x75;
-            y2 = y + 0x1cd;
+            int y1 = y + 0x52;
+            int x2 = x + 599;
+            int x1 = x + 0x75;
+            int y2 = y + 0x1cd;
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
                 x1, y + 0x51, x2, y + 0x51, (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(

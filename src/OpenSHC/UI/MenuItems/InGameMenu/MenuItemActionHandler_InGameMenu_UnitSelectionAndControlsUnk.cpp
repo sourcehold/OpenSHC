@@ -81,8 +81,6 @@ namespace UI {
             int sVar3;
             UnitTypeShort UVar4;
             BuildingTypeShort BVar5;
-            bool bVar6;
-            DWORD DVar7;
             BOOLEnum BVar8;
             uint _clickHitEnemy;
             uint _otherUnitIDUnk;
@@ -111,13 +109,13 @@ namespace UI {
             undefined4 _setRallying;
             uint flag1003;
             int _oneOr129;
-            DVar7 = timeGetTime();
+            DWORD DVar7 = timeGetTime();
             local_20 = -2;
             bVar16 = false;
             bVar17 = false;
             bVar18 = false;
             bVar15 = false;
-            bVar6 = false;
+            bool bVar6 = false;
             if (DAT_GameCore::instance.gamePausedLogical) {}
             BVar8 = MACRO_CALL(UI::DisplayElements_Func::GetIfDisplayElementStateNotZero)(
                 UI::Enums::DEID_KEEP_AND_GRANERY_PLACEMENT_INFO);

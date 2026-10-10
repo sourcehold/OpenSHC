@@ -39,14 +39,8 @@ namespace UI {
         dword tribeID;
         int iVar1;
         int _tile;
-        int iVar2;
-        int iVar3;
-        UnitType _unitType;
         GmID _gmID;
-        bool bVar4;
         GmID local_1c;
-        uint local_18;
-        int local_10;
         GmID local_8;
         int local_4;
         if (DAT_TileMapState::instance.DAT_ClickedTileX < 400 && DAT_TileMapState::instance.DAT_ClickedTileY < 400
@@ -56,12 +50,12 @@ namespace UI {
             _tile = DAT_ViewportRenderState::instance.translationMatrix[DAT_TileMapState::instance.DAT_ClickedTileY]
                         .addXgetTile
                 + DAT_TileMapState::instance.DAT_ClickedTileX;
-            iVar3 = -1;
-            iVar2 = -1;
-            _unitType = ((UnitType)0xffffffff);
-            local_10 = 1;
-            bVar4 = true;
-            local_18 = 0x40501481;
+            int iVar3 = -1;
+            int iVar2 = -1;
+            UnitType _unitType = ((UnitType)0xffffffff);
+            int local_10 = 1;
+            bool bVar4 = true;
+            uint local_18 = 0x40501481;
             switch (DAT_TileMapState::instance.currentMapperCommand) {
             case Commands::M_MAPPER_PEOPLE_ARCHERS:
                 _gmID = IO::Graphics::GID_BODY_ARCHER;

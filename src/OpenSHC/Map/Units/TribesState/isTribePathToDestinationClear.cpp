@@ -21,11 +21,9 @@ namespace Map {
         undefined4 TribesState::isTribePathToDestinationClear(
             int param_1, uint param_2, uint param_3, uint param_4, uint param_5)
         {
-            uint uVar1;
             int iVar2;
             int iVar3;
-            int local_4;
-            local_4 = 0;
+            int local_4 = 0;
             if (param_2 < 400 && param_3 < 400 && *(char*)(param_3 * 400 + 0x21aec98 + param_2) != '\0' && param_4 < 400
                 && param_5 < 400 && *(char*)(param_5 * 400 + 0x21aec98 + param_4) != '\0'
                 && (iVar2 = DAT_ViewportRenderState::instance.translationMatrix[param_5].addXgetTile + param_4,
@@ -33,7 +31,7 @@ namespace Map {
                             [DAT_ViewportRenderState::instance.translationMatrix[param_3].addXgetTile + param_2]
                         == DAT_TileMapState::instance.PathConnectionLayer[iVar2])) {
                 this->ALG_ResultTileIndex = 0;
-                uVar1 = DAT_TileMapState::instance.LogicLayer[iVar2];
+                uint uVar1 = DAT_TileMapState::instance.LogicLayer[iVar2];
                 MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findLinkageBasedPathOrWalkRadius,
                     DAT_PathFindingState::ptr)(param_4, param_5, -1, -1, 500, FALSE);
                 while (true) {

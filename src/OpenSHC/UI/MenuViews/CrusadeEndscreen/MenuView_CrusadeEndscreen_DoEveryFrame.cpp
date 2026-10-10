@@ -18,15 +18,13 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004E1F50
         void CrusadeEndscreen::MenuView_CrusadeEndscreen_DoEveryFrame()
         {
-            int iVar1;
-            iVar1 = MACRO_CALL(UI::Helpers_Func::TicksSinceCounterStart)();
+            int iVar1 = MACRO_CALL(UI::Helpers_Func::TicksSinceCounterStart)();
             if (iVar1) {
                 MACRO_CALL(Rendering_Func::ProcessCreditsScriptCommands)();
                 if ((0x3a < DAT_UnknownBinkIndex::instance) && (!INT_00ed27b8::instance)) {
-                    MACRO_CALL_MEMBER(
-                        Audio::MSS::SoundSystem_Func::setSomeSoundTime, DAT_SoundSystemState::ptr)();
-                    MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::setupVolumeAndSoundID,
-                        DAT_SoundSystemState::ptr)(DE::SHCDE::MUSIC_GERMAN_EGG);
+                    MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::setSomeSoundTime, DAT_SoundSystemState::ptr)();
+                    MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::setupVolumeAndSoundID, DAT_SoundSystemState::ptr)(
+                        DE::SHCDE::MUSIC_GERMAN_EGG);
                     INT_00ed27b8::instance = 1;
                 }
                 MACRO_CALL(Rendering_Func::RenderActiveCreditsElements)();

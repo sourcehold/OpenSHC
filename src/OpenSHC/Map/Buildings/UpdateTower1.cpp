@@ -16,19 +16,12 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00418C80
     void Buildings::UpdateTower1()
     {
-        int iVar1;
-        short sVar2;
-        uint uVar3;
-        int iVar4;
         int iVar5;
-        uint uVar6;
-        uint uVar7;
-        uint uVar8;
         int local_20[8];
         MACRO_CALL_MEMBER(Game::GameStateStructures_Func::addBuildingInRegistry, DAT_GameState::ptr)(
             DAT_CurrentBuildingID::instance);
-        iVar1 = DAT_CurrentBuildingID::instance;
-        iVar4 = DAT_CurrentBuildingID::instance * 0x32c;
+        int iVar1 = DAT_CurrentBuildingID::instance;
+        int iVar4 = DAT_CurrentBuildingID::instance * 0x32c;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderAnimation = 1;
         DAT_BuildingsState::instance.buildings[iVar1].displayOwnerFlag = 1;
         DAT_BuildingsState::instance.buildings[iVar1].animationFrame = 0;
@@ -66,11 +59,11 @@ namespace Map {
             iVar5 = 8;
         }
         if (0 < iVar5) {
-            uVar8 = DAT_BuildingsState::instance.buildings[iVar1].fireRelatedRNG1;
-            uVar3 = (int)uVar8 >> 8;
+            uint uVar8 = DAT_BuildingsState::instance.buildings[iVar1].fireRelatedRNG1;
+            uint uVar3 = (int)uVar8 >> 8;
             do {
-                uVar6 = uVar8 & 0xf;
-                uVar7 = uVar3 & 7;
+                uint uVar6 = uVar8 & 0xf;
+                uint uVar7 = uVar3 & 7;
                 uVar8 = uVar8 + 1;
                 uVar3 = uVar3 + 1;
                 iVar5 = iVar5 + -1;
@@ -86,14 +79,14 @@ namespace Map {
         DAT_BuildingsState::instance.buildings[iVar1].damageDecoration[6] = local_20[6];
         DAT_BuildingsState::instance.buildings[iVar1].damageDecoration[7] = local_20[7];
     LAB_00418e05:
-        sVar2 = DAT_BuildingsState::instance.buildings[iVar1].tileScanCountdown;
+        short sVar2 = DAT_BuildingsState::instance.buildings[iVar1].tileScanCountdown;
         if ((0 < sVar2)
             && (sVar2 = sVar2 + -1, DAT_BuildingsState::instance.buildings[iVar1].tileScanCountdown = sVar2, !sVar2)) {
             iVar5 = 0;
             sVar2 = 0;
             do {
-                MACRO_CALL_MEMBER(
-                    Map::TileMapState_Func::getBuildingSizeIndexMappingData, DAT_TileMapState::ptr)(iVar5, 3);
+                MACRO_CALL_MEMBER(Map::TileMapState_Func::getBuildingSizeIndexMappingData, DAT_TileMapState::ptr)(
+                    iVar5, 3);
                 iVar1 = DAT_CurrentBuildingID::instance;
                 if (DAT_TileMapState::instance
                         .UnitLayer[DAT_ViewportRenderState::instance

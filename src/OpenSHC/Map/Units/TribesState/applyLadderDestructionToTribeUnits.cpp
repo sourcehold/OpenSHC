@@ -21,9 +21,7 @@ namespace Map {
         {
             int unitID;
             BOOLEnum BVar1;
-            int unitSelectionIndex;
-            bool bVar2;
-            unitSelectionIndex = 0;
+            int unitSelectionIndex = 0;
             if (0 < this->tribes[param_1].size) {
                 do {
                     unitID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
@@ -36,7 +34,7 @@ namespace Map {
                         if (DAT_UnitsState::instance.units[unitID].tunnelerFinishedDigging == 2) {}
                         if (DAT_UnitsState::instance.units[unitID].state.generic
                             == Map::Units::States::US_MELEE_ATTACK) {}
-                        bVar2 = this->tribes[param_1].unknownBool02 == 0;
+                        bool bVar2 = this->tribes[param_1].unknownBool02 == 0;
                         BVar1 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::computeLadderClimbPath,
                             DAT_UnitsState::ptr)(unitID, (uint)(bVar2), 0, (int)(bVar2));
                         if (BVar1) {

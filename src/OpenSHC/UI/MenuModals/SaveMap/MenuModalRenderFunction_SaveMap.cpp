@@ -12,19 +12,15 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004931A0
         void SaveMap::MenuModalRenderFunction_SaveMap(int x, int y, int width, int height)
         {
-            int y1;
-            int x2;
-            int x1;
-            int y2;
             /*
               added by script: "Save"
              */
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner, DAT_PencilRenderCore::ptr)(
                 0x4a, 3, x, y, 0x130, height);
-            y1 = y + 0x22;
-            x2 = x + 0x29f;
-            x1 = x + 0x135;
-            y2 = y + 0x177;
+            int y1 = y + 0x22;
+            int x2 = x + 0x29f;
+            int x1 = x + 0x135;
+            int y2 = y + 0x177;
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
                 x1, y + 0x21, x2, y + 0x21, (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(

@@ -9,13 +9,10 @@ namespace Text {
     void TextEditorState::helpToken_insertSpaceForHelpTextToken(HelpTextToken token)
     {
         int iVar1;
-        int iVar2;
-        int iVar3;
-        iVar1
-            = MACRO_CALL_MEMBER(Text::TextEditorState_Func::helpToken_getHelpTokenAdvanceLength, this)(token);
+        iVar1 = MACRO_CALL_MEMBER(Text::TextEditorState_Func::helpToken_getHelpTokenAdvanceLength, this)(token);
         if (this->activeHelpHotspotIndex <= this->customHelpTextLength) {
-            iVar3 = (this->customHelpTextLength + iVar1) * 2;
-            iVar2 = this->customHelpTextLength;
+            int iVar3 = (this->customHelpTextLength + iVar1) * 2;
+            int iVar2 = this->customHelpTextLength;
             do {
                 *(WCHAR*)(iVar3 + (int)this->DAT_PointerToTemporaryTextMemory)
                     = this->DAT_PointerToTemporaryTextMemory[iVar2];

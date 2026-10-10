@@ -16,10 +16,9 @@ namespace Map {
         void TribesState::standUpAllTribeUnits(int param_1)
         {
             int iVar1;
-            int unitSelectionIndex;
             Tribe* psVar1;
             psVar1 = &this->tribes[param_1];
-            unitSelectionIndex = 0;
+            int unitSelectionIndex = 0;
             if (0 < psVar1->size) {
                 do {
                     iVar1 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
@@ -27,8 +26,7 @@ namespace Map {
                     unitSelectionIndex = unitSelectionIndex + 1;
                     if ((DAT_UnitsState::instance.units[iVar1].logicalState == Map::Units::ULS_NORMAL)
                         && (DAT_UnitsState::instance.units[iVar1].dying == 0)) {
-                        MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::standUpIfSeated, DAT_UnitsState::ptr)(
-                            iVar1);
+                        MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::standUpIfSeated, DAT_UnitsState::ptr)(iVar1);
                         DAT_UnitsState::instance.units[iVar1].animationCycleNumber = 0;
                         DAT_UnitsState::instance.units[iVar1].rabbitMovementSlowdown = '\0';
                     }

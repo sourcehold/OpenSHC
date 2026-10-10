@@ -18,10 +18,9 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004D8BB0
         void CrusadeMissionIntro::MenuItemRenderFunction_CrusadeMissionIntro_Main(int param_1, ...)
         {
-            bool bVar1;
             bool bVar2;
             bool bVar3;
-            bVar1 = false;
+            bool bVar1 = false;
             DAT_ButtonUnknownZero::instance = 0;
             if (DAT_GameCore::instance.currentTrailType == Game::TT_EXTREME) {
                 bVar3 = (DAT_GameCore::instance.extremeTrailProgress < 0x14);

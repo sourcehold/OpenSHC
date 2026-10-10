@@ -23,10 +23,7 @@ namespace UI {
         void GreatestLord::MenuItemRenderFunction_GreatestLord_Main(int param_1, ...)
         {
             int iVar1;
-            int iVar2;
             bool bVar3;
-            int drawX;
-            int drawY;
             if (param_1 == 0xb) {
                 bVar3 = DAT_GreatestLordDefinedData::instance.tableSortBy == 1;
             } else {
@@ -39,19 +36,19 @@ namespace UI {
             }
             if (bVar3) {
             LAB_004ae757:
-                iVar2 = 0xe;
+                int iVar2 = 0xe;
                 if (param_1 == 0xc) {
                     iVar2 = 1;
                 }
                 DAT_ButtonCurrentlyInteracting::instance = TRUE;
-                drawX = DAT_ButtonX::instance;
-                drawY = DAT_ButtonY::instance;
+                int drawX = DAT_ButtonX::instance;
+                int drawY = DAT_ButtonY::instance;
                 iVar1 = MACRO_CALL_MEMBER(UI::Rendering::ButtonGmData_Func::getPictureNumberInGm,
                     &DAT_UIButtonDefinedData::instance.ButtonGmDataArray[DAT_CurrentButtonGmDataIndex::instance])(TRUE);
-                MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM,
-                    DAT_TextureRenderCoreObject::ptr)((DE::SHCDE::eGM)DAT_UIButtonDefinedData::instance
-                                                          .ButtonGmDataArray[DAT_CurrentButtonGmDataIndex::instance]
-                                                          .gmId_0x0,
+                MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
+                    (DE::SHCDE::eGM)DAT_UIButtonDefinedData::instance
+                        .ButtonGmDataArray[DAT_CurrentButtonGmDataIndex::instance]
+                        .gmId_0x0,
                     iVar1 + iVar2, drawX, drawY);
             }
         LAB_004ae736:

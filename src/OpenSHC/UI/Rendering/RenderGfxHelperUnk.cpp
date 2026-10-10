@@ -11,14 +11,10 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004DA570
     void Rendering::RenderGfxHelperUnk(int loadedGfxIndex, int xPosInMenuRect, int yPosInMenuRect)
     {
-        int xPos;
-        int yPos;
-        int _height;
-        int _width;
-        _width = DAT_TextureRenderCoreObject::instance.loadedGfxArray[loadedGfxIndex].width;
-        _height = DAT_TextureRenderCoreObject::instance.loadedGfxArray[loadedGfxIndex].height;
-        xPos = xPosInMenuRect + DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
-        yPos = yPosInMenuRect + DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
+        int _width = DAT_TextureRenderCoreObject::instance.loadedGfxArray[loadedGfxIndex].width;
+        int _height = DAT_TextureRenderCoreObject::instance.loadedGfxArray[loadedGfxIndex].height;
+        int xPos = xPosInMenuRect + DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
+        int yPos = yPosInMenuRect + DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
         if ((_width == 0x400) && (_height == 0x300)) {
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::drawGfxOnFlaggedSurface,
                 DAT_TextureRenderCoreObject::ptr)(loadedGfxIndex,

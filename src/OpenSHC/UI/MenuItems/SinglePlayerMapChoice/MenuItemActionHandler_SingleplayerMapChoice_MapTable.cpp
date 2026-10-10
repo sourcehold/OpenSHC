@@ -42,8 +42,6 @@ namespace UI {
         void SinglePlayerMapChoice::MenuItemActionHandler_SingleplayerMapChoice_MapTable(int param_1, ...)
         {
             char cVar1;
-            uint uVar2;
-            DWORD _currentTime;
             char* pcVar3;
             char* puVar3;
             int* piVar4;
@@ -56,12 +54,12 @@ namespace UI {
             int modeUnk;
             char local_3f4[1008];
             char* puVar2;
-            uVar2 = MSVC_SecurityCookie::instance ^ (uint)local_3f4;
+            uint uVar2 = MSVC_SecurityCookie::instance ^ (uint)local_3f4;
             if (DAT_GameSynchronyState::instance.DAT_MapSelectionTotalNumber
                 <= DAT_GameSynchronyState::instance.DAT_MapSelectionScrollOffset + param_1)
                 goto LAB_00442f24;
             DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected = param_1;
-            _currentTime = timeGetTime();
+            DWORD _currentTime = timeGetTime();
             if (DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected
                         + DAT_GameSynchronyState::instance.DAT_MapSelectionScrollOffset
                     == DAT_MenuTextInputState::instance.lastClickedListIndex

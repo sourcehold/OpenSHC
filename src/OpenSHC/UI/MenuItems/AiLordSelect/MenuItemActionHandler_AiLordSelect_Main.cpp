@@ -25,7 +25,6 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004AE7D0
         void AiLordSelect::MenuItemActionHandler_AiLordSelect_Main(int param_1, ...)
         {
-            int iVar1;
             if (param_1 == 100) {
                 MACRO_CALL_MEMBER(Input::MouseState_Func::resetMouseState2, DAT_MouseState::ptr)();
                 DAT_MenuModalComposition1::instance.activeModalDialogID = UI::Enums::MMT_NONE;
@@ -33,7 +32,7 @@ namespace UI {
             if (param_1 <= DAT_GameCore::instance.numOfAIsWithCastleUnk) {
                 DAT_LobbyAddAICurrentlyHoveredAI::instance
                     = DAT_GameCore::instance.arrayOfLordIdsWithAIVsUnk[param_1 + -1];
-                iVar1 = 1;
+                int iVar1 = 1;
                 while (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[iVar1] != -1
                     || DAT_GameSynchronyState::instance.currentAIArray[iVar1] != 0) {
                     iVar1 = iVar1 + 1;

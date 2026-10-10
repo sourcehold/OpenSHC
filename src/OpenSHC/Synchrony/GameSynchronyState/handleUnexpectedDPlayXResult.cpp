@@ -12,8 +12,7 @@ namespace Synchrony {
     void GameSynchronyState::handleUnexpectedDPlayXResult()
     {
         char local_68[100];
-        uint local_4;
-        local_4 = MSVC_SecurityCookie::instance ^ (uint)local_68;
+        uint local_4 = MSVC_SecurityCookie::instance ^ (uint)local_68;
         if (this->DPLAYX_SendAndReceiveREsult != -0x7788fffb && this->DPLAYX_SendAndReceiveREsult != -0x7788fff6
             && this->DPLAYX_SendAndReceiveREsult != -0x7788ffec && this->DPLAYX_SendAndReceiveREsult != -0x7788f830
             && this->DPLAYX_SendAndReceiveREsult != -0x7788ffe2 && this->DPLAYX_SendAndReceiveREsult != -0x7788ffd8

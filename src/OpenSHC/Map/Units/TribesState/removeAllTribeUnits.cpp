@@ -14,9 +14,8 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00525470
         void TribesState::removeAllTribeUnits(int param_1)
         {
-            int iVar1;
             int iVar2;
-            iVar1 = 0;
+            int iVar1 = 0;
             if (0 < this->tribes[param_1].size) {
                 do {
                     iVar2 = iVar1 + 1;

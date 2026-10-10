@@ -32,7 +32,6 @@ namespace UI {
         void HistoricMissionPicture::MenuView_HistoricMissionPicture_DoEveryFrame()
         {
             BOOLEnum BVar1;
-            int _blendStrength;
             BVar1 = MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::isSampleOrStreamPlaying, DAT_SoundSystemState::ptr)(
                 Audio::MSS::enums::SND_STR_SFX_1Unk);
             if (!BVar1) {
@@ -50,7 +49,7 @@ namespace UI {
                 DAT_00ed2780::instance = 2;
             }
         LAB_004db652:
-            _blendStrength = MACRO_CALL(UI::Helpers_Func::TicksSinceCounterStart)();
+            int _blendStrength = MACRO_CALL(UI::Helpers_Func::TicksSinceCounterStart)();
             if (_blendStrength) {
                 MACRO_CALL(UI::Rendering_Func::RenderGfxHelperUnk)(0, 0, 0);
                 MACRO_CALL(UI::Rendering_Func::RenderHistoryBookEdgeUnk)();

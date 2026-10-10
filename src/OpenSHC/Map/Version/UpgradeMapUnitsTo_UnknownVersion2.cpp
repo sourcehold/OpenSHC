@@ -11,13 +11,12 @@
 namespace OpenSHC {
 namespace Map {
 
-    using Map::Units::UnitLogicState;
     using Map::Units::Unit;
+    using Map::Units::UnitLogicState;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x0053B260
     void Version::UpgradeMapUnitsTo_UnknownVersion2()
     {
-        int iVar1;
         short sVar2;
         Unit* psVar3;
         psVar3 = &DAT_UnitsState::instance.units[1];
@@ -30,7 +29,7 @@ namespace Map {
                     psVar3->movementCooldown = 0;
                 }
                 if (psVar3->maxHealth <= psVar3->health) {
-                    iVar1 = DAT_UnitPropertiesDefinedData::instance.BASE_HP[(short)psVar3->unitType];
+                    int iVar1 = DAT_UnitPropertiesDefinedData::instance.BASE_HP[(short)psVar3->unitType];
                     psVar3->maxHealth = iVar1;
                     psVar3->health = iVar1;
                     if (!psVar3->maxHealth) {

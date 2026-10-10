@@ -23,12 +23,11 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004B18D0
         void ChooseRandomNumberOfEnemies::MenuItemActionHandler_ChooseRandomNumberOfEnemies_Main(int param_1, ...)
         {
-            int iVar1;
             int* piVar2;
-            MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog,
-                DAT_MenuModalComposition1::ptr)(UI::Enums::MMT_NONE, FALSE);
+            MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog, DAT_MenuModalComposition1::ptr)(
+                UI::Enums::MMT_NONE, FALSE);
             if (0 < param_1) {
-                iVar1 = 2;
+                int iVar1 = 2;
                 do {
                     DAT_GameSynchronyState::instance.currentAIArray[iVar1] = 0;
                     DAT_GameSynchronyState::instance.DAT_PlayerSlotArraySomeValue[iVar1] = 0;
@@ -51,8 +50,8 @@ namespace UI {
                         param_1 = param_1 + -1;
                     } while (param_1);
                 }
-                MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::reorderTeamsAndPositions,
-                    DAT_GameSynchronyState::ptr)();
+                MACRO_CALL_MEMBER(
+                    Synchrony::GameSynchronyState_Func::reorderTeamsAndPositions, DAT_GameSynchronyState::ptr)();
                 DAT_GameSynchronyState::instance.reparseMaps = TRUE;
             }
         }

@@ -21,14 +21,12 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x00489100
     void GameSynchronyState::queueCommand(GameCommandType commandType)
     {
-        byte _commandType;
-        dword _time;
         this->DAT_CurrentGameCommandID = this->DAT_GameCommandArrayIndex;
         MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
             1260, '\0', (void*)((int)(&this->DAT_GameCommandArray[this->DAT_GameCommandArrayIndex].parameters)));
         this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].stateUnk = Commands::GCS_UNPROCESSED;
         this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].playerUnk = this->DPLAYX_PlayerHandle;
-        _commandType = (byte)commandType;
+        byte _commandType = (byte)commandType;
         this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].commandType = _commandType;
         if (this->mapTimeInTicksSinglePlayer < (int)DAT_GameCore::instance.mapTimeInTicks) {
             this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].time
@@ -47,7 +45,7 @@ namespace Synchrony {
         ((void (*)())DAT_ProtocolDefinedData::instance
                 .commandFunctions[this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].commandType + 0x15])();
         this->DAT_CommandParameterOffset = 0;
-        _time = this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].time;
+        dword _time = this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].time;
         if ((int)_time < 1) {
             /*
               time == 0 means it is an immediate (out of game time) command, commands that   don't change game state

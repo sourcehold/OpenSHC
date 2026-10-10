@@ -17,15 +17,12 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004240D0
     void Buildings::UpdateWoodGate1()
     {
-        byte bVar1;
-        int iVar2;
-        int buildingID;
         MACRO_CALL_MEMBER(Game::GameStateStructures_Func::addBuildingInRegistry, DAT_GameState::ptr)(
             DAT_CurrentBuildingID::instance);
-        iVar2 = (int)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingVariation;
-        MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updateGateDrawBridgeOpenCloseLogic,
-            DAT_BuildingsState::ptr)();
-        buildingID = DAT_CurrentBuildingID::instance;
+        int iVar2 = (int)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingVariation;
+        MACRO_CALL_MEMBER(
+            Map::Buildings::BuildingsState_Func::updateGateDrawBridgeOpenCloseLogic, DAT_BuildingsState::ptr)();
+        int buildingID = DAT_CurrentBuildingID::instance;
         if ((DAT_TileMapState::instance.mapOrientation == 2) || (DAT_TileMapState::instance.mapOrientation == 6)) {
             iVar2 = iVar2 + 1;
         }
@@ -47,19 +44,17 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[buildingID].extraAnimationSprite2 = 0x29;
             DAT_BuildingsState::instance.buildings[buildingID].extraAnimationSprite4 = 10;
         }
-        bVar1 = DAT_BuildingsState::instance.buildings[buildingID].pathLinkageRelated2;
+        byte bVar1 = DAT_BuildingsState::instance.buildings[buildingID].pathLinkageRelated2;
         if (!bVar1) {
             if (DAT_BuildingsState::instance.buildings[buildingID].gateState == 10) {
                 DAT_BuildingsState::instance.buildings[buildingID].pathLinkageRelated2 = 2;
-                MACRO_CALL_MEMBER(
-                    Map::Navigation::PathFindingState_Func::updatePathLinkageTileMapRelatedToGates,
+                MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::updatePathLinkageTileMapRelatedToGates,
                     DAT_PathFindingState::ptr)(buildingID);
             }
         } else if (bVar1 == 2) {
             if (DAT_BuildingsState::instance.buildings[buildingID].gateState == 0xb) {
                 DAT_BuildingsState::instance.buildings[buildingID].pathLinkageRelated2 = 0;
-                MACRO_CALL_MEMBER(
-                    Map::Navigation::PathFindingState_Func::updatePathLinkageTileMapRelatedToGates,
+                MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::updatePathLinkageTileMapRelatedToGates,
                     DAT_PathFindingState::ptr)(buildingID);
                 buildingID = DAT_CurrentBuildingID::instance;
             }

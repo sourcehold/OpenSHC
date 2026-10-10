@@ -32,8 +32,6 @@ namespace Map {
         {
             BOOLEnum BVar1;
             uint _x;
-            int _counter;
-            int _tile;
             uint _y;
             if (DAT_GameCore::instance.gameMode_2 != Game::GM_EDITOR
                 && DAT_GameCore::instance.gameMode_2 != Game::GM_SIEGE_THAT
@@ -42,7 +40,7 @@ namespace Map {
                 && DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY
                 && DAT_GameState::instance.mapAndTime.aliveDeerCount
                 && DAT_GameState::instance.mapAndTime.deerCount < 6) {
-                _counter = 0;
+                int _counter = 0;
                 while (true) {
                     _x = DAT_GameState::instance.mapAndTime.signpostsMapEdge[0][0].x;
                     _y = DAT_GameState::instance.mapAndTime.signpostsMapEdge[0][0].y;
@@ -58,7 +56,7 @@ namespace Map {
                     _counter = _counter + 1;
                     if (4 < _counter) {}
                 }
-                _tile = DAT_ViewportRenderState::instance.translationMatrix[_y].addXgetTile + _x;
+                int _tile = DAT_ViewportRenderState::instance.translationMatrix[_y].addXgetTile + _x;
                 if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x50501581U)) {
                     if (DAT_TileMapState::instance.OrganismLayer[_tile] == 0)
                         goto LAB_00526268;

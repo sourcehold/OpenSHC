@@ -20,7 +20,6 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004ADD90
         void AlliesSendGoods::MenuModalRenderFunction_AlliesSendGoods(int x, int y, int width, int height)
         {
-            int yParam;
             char* textAddress;
             int xParam;
             TextAlignment alignment;
@@ -33,7 +32,7 @@ namespace UI {
             fontSize = 0xf;
             color = 0xccfaff;
             alignment = Text::TTA_LEFT;
-            yParam = y + 0x19;
+            int yParam = y + 0x19;
             xParam = x + 0x14;
             /*
               "Send goods"   added by script: "Send Goods"

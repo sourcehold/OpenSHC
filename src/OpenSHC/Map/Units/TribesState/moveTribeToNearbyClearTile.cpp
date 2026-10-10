@@ -17,16 +17,14 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0052A640
         void TribesState::moveTribeToNearbyClearTile(int param_1)
         {
-            short sVar1;
-            uint uVar2;
             int iVar3;
             int* piVar4;
             uint uVar5;
             uint x1;
             uint y1;
-            sVar1 = this->tribes[param_1].selectionTargetUnitID;
+            short sVar1 = this->tribes[param_1].selectionTargetUnitID;
             uVar5 = (uint)DAT_UnitsState::instance.units[sVar1].x;
-            uVar2 = (uint)DAT_UnitsState::instance.units[sVar1].y;
+            uint uVar2 = (uint)DAT_UnitsState::instance.units[sVar1].y;
             piVar4 = &DAT_UnitSelectionDefinedData::instance.field1608_0xcc4[0].y;
             while (true) {
                 x1 = ((XYPair*)(piVar4 + -1))->x + uVar5;

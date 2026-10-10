@@ -18,14 +18,12 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00433370
         void InGameMenu::MenuItemActionHandler_InGameMenu_ProcessScribeAnimationChange(int param_1, ...)
         {
-            int iVar1;
-            DWORD _currentTime;
             int iVar2;
-            iVar1 = DAT_GameSynchronyState::instance.currentPlayerSlotID;
+            int iVar1 = DAT_GameSynchronyState::instance.currentPlayerSlotID;
             if (DAT_GameCore::instance.gameMode_2 == Game::GM_EDITOR) {}
             if (DAT_GameCore::instance.gameMode_2 == Game::GM_SIEGE_THAT) {}
             if (DAT_GameCore::instance.taxesSettingUnk) {
-                _currentTime = timeGetTime();
+                DWORD _currentTime = timeGetTime();
                 if ((int)(_currentTime - DAT_GameCore::instance.taxestimeUnk) < 0x3c) {}
                 DAT_GameCore::instance.taxestimeUnk = _currentTime;
                 if (!DAT_GameCore::instance.scribeAnimationPhase) {

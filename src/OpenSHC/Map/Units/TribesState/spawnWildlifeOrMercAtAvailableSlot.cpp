@@ -20,13 +20,12 @@ namespace Map {
         void TribesState::spawnWildlifeOrMercAtAvailableSlot()
         {
             int iVar1;
-            int iVar2;
             short* psVar3;
             uint y;
             uint x;
             if ((DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY)
                 || (0x9f < DAT_GameState::instance.mapAndTime.wildlifeCount)) {}
-            iVar2 = 0;
+            int iVar2 = 0;
             psVar3 = DAT_GameState::instance.mapAndTime.playerPopulationStatistics[6] + 0xe4;
             do {
                 if (iVar2 < 4) {

@@ -15,13 +15,11 @@ namespace Map {
         int TribesState::getNonDyingUnit(int tribeID)
         {
             int iVar1;
-            int unitSelectionIndex;
-            short _size;
             if (tribeID <= 0) {
                 return 0;
             }
-            unitSelectionIndex = 0;
-            _size = this->tribes[tribeID].size;
+            int unitSelectionIndex = 0;
+            short _size = this->tribes[tribeID].size;
             do {
                 if (_size <= unitSelectionIndex) {
                     return 0;

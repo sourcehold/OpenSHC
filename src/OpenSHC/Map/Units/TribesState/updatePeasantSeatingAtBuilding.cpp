@@ -21,12 +21,11 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00522210
         void TribesState::updatePeasantSeatingAtBuilding(int param_1, int param_2, int param_3)
         {
-            short sVar1;
             uint uVar2;
             short* psVar3;
             int iVar4;
             int local_8;
-            sVar1 = DAT_BuildingsState::instance.buildings[param_1].owner;
+            short sVar1 = DAT_BuildingsState::instance.buildings[param_1].owner;
             local_8 = 0;
             if (param_2 < 2) {
                 param_2 = 1;

@@ -36,13 +36,10 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00426340
         void Credits::MenuView_Credits_DoEveryFrame()
         {
-            SHORT SVar1;
-            DWORD DVar2;
-            int iVar3;
             int left;
             int top;
             int bottom;
-            DVar2 = timeGetTime();
+            DWORD DVar2 = timeGetTime();
             if (DAT_00b9610c::instance < 1) {
                 if (DAT_00b9610c::instance < 0) {
                     DAT_00b95b70::instance = 0x20 - (int)(DVar2 - INT_00b960d0::instance) / 0x32;
@@ -68,7 +65,7 @@ namespace UI {
                     INT_00b960d0::instance = DVar2;
                 }
             }
-            SVar1 = GetAsyncKeyState(VK_DOWN);
+            SHORT SVar1 = GetAsyncKeyState(VK_DOWN);
             if (SVar1) {
                 if (!DAT_ModifierKeyState::instance.shift) {
                     INT_00b960d4::instance = INT_00b960d4::instance + -0x3c;
@@ -76,7 +73,7 @@ namespace UI {
                     INT_00b960d4::instance = INT_00b960d4::instance + -200;
                 }
             }
-            iVar3 = (int)(DVar2 - INT_00b960d4::instance) / 0x1e + -600;
+            int iVar3 = (int)(DVar2 - INT_00b960d4::instance) / 0x1e + -600;
             if (iVar3 == DAT_TextEditorState::instance.helpContentScrollOffsetY) {
                 if (!DAT_TextEditorState::instance.pendingCreditsFadeBorder)
                     goto LAB_0042653a;

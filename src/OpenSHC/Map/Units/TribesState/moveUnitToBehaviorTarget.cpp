@@ -7,8 +7,8 @@
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 
-#include "OpenSHC/Globals/DAT_TribesState.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
+#include "OpenSHC/Globals/DAT_TribesState.hpp"
 #include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
@@ -24,19 +24,12 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00521280
         undefined4 TribesState::moveUnitToBehaviorTarget(int unitID, int param_2)
         {
-            short sVar1;
-            short sVar2;
-            bool bVar3;
             int iVar4;
-            uint x;
-            short sVar5;
-            uint uVar6;
-            uint local_c;
-            sVar1 = DAT_UnitsState::instance.units[unitID].tribeID;
-            bVar3 = false;
-            x = 0;
-            uVar6 = 0;
-            local_c = 0;
+            short sVar1 = DAT_UnitsState::instance.units[unitID].tribeID;
+            bool bVar3 = false;
+            uint x = 0;
+            uint uVar6 = 0;
+            uint local_c = 0;
             if (DAT_UnitsState::instance.units[unitID].logicalState != Map::Units::ULS_NORMAL) {
                 return (undefined4)(0);
             }
@@ -54,8 +47,8 @@ namespace Map {
                 return (undefined4)(0);
             }
             if (param_2 == 0x3f2) {
-                iVar4 = MACRO_CALL_MEMBER(
-                    Map::Units::TroopValueState_Func::findEnemyWalls, DAT_TroopValueState::ptr)(unitID);
+                iVar4 = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::findEnemyWalls, DAT_TroopValueState::ptr)(
+                    unitID);
             LAB_0052130b:
                 if (!iVar4)
                     goto LAB_0052143b;
@@ -69,12 +62,11 @@ namespace Map {
                 local_c = DAT_TroopValueState::instance.y;
             } else {
                 if (param_2 == 0x3fb) {
-                    iVar4 = MACRO_CALL_MEMBER(
-                        Map::Units::TroopValueState_Func::calculateTile2PeoplValueClosestToUnit,
+                    iVar4 = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::calculateTile2PeoplValueClosestToUnit,
                         DAT_TroopValueState::ptr)(unitID);
                     if (!iVar4) {
-                        iVar4 = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::findEnemyWalls,
-                            DAT_TroopValueState::ptr)(unitID);
+                        iVar4 = MACRO_CALL_MEMBER(
+                            Map::Units::TroopValueState_Func::findEnemyWalls, DAT_TroopValueState::ptr)(unitID);
                         if (!iVar4)
                             goto LAB_0052143b;
                         if (DAT_TribesState::instance.tribes[sVar1].selectionTargetUnitID == unitID) {
@@ -91,26 +83,25 @@ namespace Map {
                         goto LAB_00521333;
                     }
                     if (param_2 == 0x3f6) {
-                        iVar4 = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::findEnemyTowersOrGates,
-                            DAT_TroopValueState::ptr)(unitID);
+                        iVar4 = MACRO_CALL_MEMBER(
+                            Map::Units::TroopValueState_Func::findEnemyTowersOrGates, DAT_TroopValueState::ptr)(unitID);
                     } else {
                         if (param_2 == 0x413) {
-                            iVar4 = MACRO_CALL_MEMBER(
-                                Map::Units::TroopValueState_Func::getClosestWideValueBasedOnPlayer,
-                                DAT_TroopValueState::ptr)(unitID);
+                            iVar4
+                                = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getClosestWideValueBasedOnPlayer,
+                                    DAT_TroopValueState::ptr)(unitID);
                             goto LAB_0052130b;
                         }
                         if (param_2 == 0x414) {
-                            iVar4 = MACRO_CALL_MEMBER(
-                                Map::Units::TroopValueState_Func::getClosestWideValueBasedOnPlayer,
-                                DAT_TroopValueState::ptr)(unitID);
+                            iVar4
+                                = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getClosestWideValueBasedOnPlayer,
+                                    DAT_TroopValueState::ptr)(unitID);
                             goto LAB_00521333;
                         }
                         if (param_2 != 0x3f7)
                             goto LAB_0052143b;
-                        iVar4
-                            = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::findNearestDiggableMoatPoint,
-                                DAT_TroopValueState::ptr)(unitID);
+                        iVar4 = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::findNearestDiggableMoatPoint,
+                            DAT_TroopValueState::ptr)(unitID);
                     }
                     if (!iVar4)
                         goto LAB_0052143b;
@@ -126,8 +117,8 @@ namespace Map {
             if (!bVar3) {
                 return (undefined4)(0);
             }
-            sVar5 = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[uVar6];
-            sVar2 = DAT_UnitsState::instance.units[unitID].selectionTargetUnitID;
+            short sVar5 = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[uVar6];
+            short sVar2 = DAT_UnitsState::instance.units[unitID].selectionTargetUnitID;
             DAT_UnitsState::instance.units[unitID].attackAtTileY = sVar5;
             DAT_UnitsState::instance.units[unitID].targetedBuildingTile = uVar6;
             sVar5 = (short)uVar6 - (short)DAT_ViewportRenderState::instance.translationMatrix[sVar5].addXgetTile;
@@ -137,8 +128,7 @@ namespace Map {
                 DAT_TribesState::instance.tribes[sVar1].targetX = sVar5;
                 DAT_TribesState::instance.tribes[sVar1].targetY = DAT_UnitsState::instance.units[unitID].attackAtTileY;
             }
-            iVar4 = MACRO_CALL_MEMBER(
-                Map::Units::UnitsState_Func::stopUnitIfNextToTarget, DAT_UnitsState::ptr)(unitID);
+            iVar4 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::stopUnitIfNextToTarget, DAT_UnitsState::ptr)(unitID);
             if (!iVar4) {
                 MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::setDestinationForUnit, DAT_UnitsState::ptr)(
                     unitID, x, local_c, 0);

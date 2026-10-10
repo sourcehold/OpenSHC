@@ -25,7 +25,6 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004AE950
         void AiLordSelect::MenuItemRenderFunction_AiLordSelect_Main(int param_1, ...)
         {
-            int iVar1;
             if (param_1 == 100) {
                 MACRO_CALL(UI::MenuItems::General_Func::
                         MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
@@ -36,7 +35,7 @@ namespace UI {
             if (DAT_GameCore::instance.numOfAIsWithCastleUnk < param_1) {
                 DAT_ButtonUnknownZero::instance = 1;
             }
-            iVar1 = DAT_GameCore::instance.arrayOfLordIdsWithAIVsUnk[param_1 + -1];
+            int iVar1 = DAT_GameCore::instance.arrayOfLordIdsWithAIVsUnk[param_1 + -1];
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
                 DE::SHCDE::GM_INTERFACE_ICONS2, 0x22b, (int)(DAT_ButtonX::instance), (int)(DAT_ButtonY::instance));
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(

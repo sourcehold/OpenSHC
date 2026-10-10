@@ -18,10 +18,9 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00455390
         void TextureRenderCore::renderGMWithBlending(GmID GmID, int imageID, int drawX, int drawY, int blendStrengthUnk)
         {
-            int iVar1;
             ushort* _imageDataPtr;
             GmImageTypeInt _imageType;
-            iVar1 = GMTotalPicturesProcessed::instance[GmID];
+            int iVar1 = GMTotalPicturesProcessed::instance[GmID];
             _imageDataPtr
                 = (ushort*)(DAT_GMImageOffsets::instance[iVar1 + -1 + imageID] + (int)this->gmProcessedImageData);
             if (blendStrengthUnk != 0x20) {

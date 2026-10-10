@@ -38,7 +38,6 @@ namespace UI {
         void ScenarioDescription::MenuView_ScenarioDescription_Prepare()
         {
             int iVar1;
-            int iVar2;
             int* pIVar3;
             DAT_GameCore::instance.currentlyInGameUnk_0xa4 = FALSE;
             DAT_TextureRenderCoreObject::instance.totalLoadedGfx = 0;
@@ -85,7 +84,7 @@ namespace UI {
             if (DAT_GameCore::instance.missionNumber1to20 < 1) {
                 DAT_GameCore::instance.missionNumber1to20 = 1;
             }
-            iVar2 = DAT_GameCore::instance.missionNumber1to20;
+            int iVar2 = DAT_GameCore::instance.missionNumber1to20;
             if (!DAT_GameCore::instance.gameSuspended) {
                 if (DAT_GameCore::instance.gameMode_2 != Game::GM_BUILDERUnk) {
                     MACRO_CALL_MEMBER(Map::MapPropertiesState_Func::loadMapSiegeHeaderForMissionIndex,

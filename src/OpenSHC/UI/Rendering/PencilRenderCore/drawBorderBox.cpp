@@ -12,14 +12,13 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004711B0
         void PencilRenderCore::drawBorderBox(int left, int top, int right, int bottom, ushort color)
         {
-            dword dVar1;
             BOOLEnum _drawReady;
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::setupPencilSurface, this)();
             _drawReady = MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::setupPencil, this)(
                 left, top, right, bottom, color);
             if (_drawReady) {
                 MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawHorizontalLine, this)();
-                dVar1 = this->drawStartY;
+                dword dVar1 = this->drawStartY;
                 this->drawStartY = this->drawEndY;
                 MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawHorizontalLine, this)();
                 this->drawStartY = dVar1;

@@ -34,9 +34,6 @@ namespace UI {
             int iVar1;
             int iVar2;
             dword dVar3;
-            dword dVar4;
-            int _clickX;
-            int _clickY;
             int iVar5;
             if (param_1 == 1000) {
                 if (0 < DAT_SkirmishTrailRelated1::instance) {
@@ -118,9 +115,9 @@ namespace UI {
                         UI::Enums::MVT_SELECT_CRUSADE, 0);
                 }
                 if (param_1 == 1) {
-                    _clickX = DAT_MouseState::instance.screenSpaceX - DAT_ButtonX::instance;
-                    _clickY = DAT_MouseState::instance.screenSpaceY - DAT_ButtonY::instance;
-                    dVar4 = DAT_GameCore::instance.warchestTrailProgress;
+                    int _clickX = DAT_MouseState::instance.screenSpaceX - DAT_ButtonX::instance;
+                    int _clickY = DAT_MouseState::instance.screenSpaceY - DAT_ButtonY::instance;
+                    dword dVar4 = DAT_GameCore::instance.warchestTrailProgress;
                     iVar5 = DAT_GameCore::instance.extremeTrailProgress;
                     if (DAT_GameCore::instance.currentTrailType == Game::TT_FIRST_EDITION) {
                         dVar3 = 0;

@@ -32,7 +32,6 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00426FB0
         void Unused::MenuItemRenderFunction_UnusedSomeMissionStartUnk_General(int param_1, ...)
         {
-            int xParam;
             char* textAddress;
             int yParam;
             TextAlignment alignment;
@@ -63,7 +62,7 @@ namespace UI {
                 keepOffsetX = FALSE;
                 fontSize = 0x11;
                 alignment = Text::TTA_CENTER;
-                xParam = DAT_ButtonW::instance / 2 + DAT_ButtonX::instance;
+                int xParam = DAT_ButtonW::instance / 2 + DAT_ButtonX::instance;
                 yParam = DAT_ButtonY::instance + 8;
                 textAddress = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_MAINOPTIONS, param_1);

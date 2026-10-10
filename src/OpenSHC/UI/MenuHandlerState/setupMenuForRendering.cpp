@@ -15,10 +15,9 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004F6A80
     void MenuHandlerState::setupMenuForRendering(MenuViewType menuID)
     {
-        MenuViewTypeInt _menuID;
         MenuIDMenuElementAddressPair* _arrayElementOffset;
         Menu* _menuAddr;
-        _menuID = (this->pointerToMenuIDMenuElementAddressMap)->menuID;
+        MenuViewTypeInt _menuID = (this->pointerToMenuIDMenuElementAddressMap)->menuID;
         _arrayElementOffset = this->pointerToMenuIDMenuElementAddressMap;
         if (_menuID != UI::Enums::MVT_MENUVIEWID_MENU_PAIR_ENDMARKER) {
             while (_menuID != menuID) {
@@ -34,8 +33,7 @@ namespace UI {
              */
             _menuAddr = _arrayElementOffset->menuAddress;
             this->currentMenu = _menuAddr;
-            MACRO_CALL_MEMBER(UI::Menu_Func::handleMenuItems, _menuAddr)(
-                UI::Enums::MIHS_RESET_MENU_ITEM_STATEUnk);
+            MACRO_CALL_MEMBER(UI::Menu_Func::handleMenuItems, _menuAddr)(UI::Enums::MIHS_RESET_MENU_ITEM_STATEUnk);
             _menuAddr->zero = 0;
             (this->currentMenu)->one = 1;
             /*

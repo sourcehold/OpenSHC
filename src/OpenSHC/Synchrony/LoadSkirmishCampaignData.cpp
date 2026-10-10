@@ -5,6 +5,7 @@
 #include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
 #include "OpenSHC/Text/UserTextHandler.func.hpp"
 #include "OpenSHC/Commands/GameCommandType.hpp"
+#include "OpenSHC/Game/CampaignTrailMission.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/Game/TrailType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -15,21 +16,19 @@
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_SkirmishDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_UserTextHandlerState.hpp"
-#include "OpenSHC/Game/CampaignTrailMission.hpp"
 
 namespace OpenSHC {
 
 using Commands::GameCommandType;
+using Game::CampaignTrailMission;
 using Game::GameMode;
 using Game::TrailType;
 using WindowsHelper::Enums::BOOLEnum;
-using Game::CampaignTrailMission;
 
 // FUNCTION: STRONGHOLDCRUSADER 0x004C6B20
 void Synchrony::LoadSkirmishCampaignData(int missionID)
 {
     char cVar1;
-    byte bVar2;
     char* pcVar3;
     int* piVar4;
     int iVar5;
@@ -43,7 +42,7 @@ void Synchrony::LoadSkirmishCampaignData(int missionID)
     } else if (DAT_GameCore::instance.currentTrailType == Game::TT_WARCHEST) {
         pCVar9 = DAT_SkirmishDefinedData::instance.WarchestTrailMissions + missionID;
     }
-    pcVar3 = (char *)(pCVar9->mapNameAddress);
+    pcVar3 = (char*)(pCVar9->mapNameAddress);
     iVar7 = (int)CHAR_ARRAY_00eb0ab0::instance - (int)pcVar3;
     do {
         cVar1 = *pcVar3;
@@ -58,8 +57,7 @@ void Synchrony::LoadSkirmishCampaignData(int missionID)
         piVar4[9] = -1;
         piVar4 = piVar4 + 1;
     } while ((int)piVar4 < 0x191dea0);
-    pcVar3
-        = MACRO_CALL_MEMBER(Text::UserTextHandler_Func::getTextArrayPointer, DAT_UserTextHandlerState::ptr)(0);
+    pcVar3 = MACRO_CALL_MEMBER(Text::UserTextHandler_Func::getTextArrayPointer, DAT_UserTextHandlerState::ptr)(0);
     pacVar8 = DAT_GameSynchronyState::instance.DAT_PlayerNames + 1;
     do {
         cVar1 = *pcVar3;
@@ -97,7 +95,7 @@ void Synchrony::LoadSkirmishCampaignData(int missionID)
     iVar7 = 0;
     iVar5 = 1;
     do {
-        bVar2 = DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[iVar5];
+        byte bVar2 = DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[iVar5];
         iVar6 = (int)(char)bVar2;
         DAT_GameState::instance.mapAndTime.playerGroupArray[iVar5] = iVar6;
         if (('\0' < (char)bVar2) && (DAT_GameState::instance.mapAndTime.playerTeams[iVar5] = iVar6, iVar7 < iVar6)) {

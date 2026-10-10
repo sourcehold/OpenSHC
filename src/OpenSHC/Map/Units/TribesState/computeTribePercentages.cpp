@@ -21,23 +21,11 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x005270F0
         void TribesState::computeTribePercentages(int tribeID)
         {
-            short sVar1;
-            UnitStateShort UVar2;
-            short _percentage;
             uint _unitID;
             BOOLEnum BVar3;
-            int _tribeSize;
-            int iVar4;
-            int _countAttackingUnk;
-            int _countDying;
-            int _countMoving;
-            int _countRangeUnk;
-            int local_8;
-            short _movementSpeed;
-            UnitTypeShort _unitType;
-            _percentage = this->tribes[tribeID].selectionTargetUnitID;
-            iVar4 = 0;
-            sVar1 = this->tribes[tribeID].size;
+            short _percentage = this->tribes[tribeID].selectionTargetUnitID;
+            int iVar4 = 0;
+            short sVar1 = this->tribes[tribeID].size;
             this->tribes[tribeID].percentageDyingUnk = 0;
             this->tribes[tribeID].percentageMovingUnk = 0;
             this->tribes[tribeID].percentageAttackingUnk = 0;
@@ -46,11 +34,11 @@ namespace Map {
             this->tribes[tribeID].field154_0x2a0 = 0;
             this->tribes[tribeID].percentageSomething = 0;
             this->tribes[tribeID].movementSpeed = DAT_UnitsState::instance.units[_percentage].movementSpeed;
-            local_8 = 0;
-            _countRangeUnk = 0;
-            _countAttackingUnk = 0;
-            _countMoving = 0;
-            _countDying = 0;
+            int local_8 = 0;
+            int _countRangeUnk = 0;
+            int _countAttackingUnk = 0;
+            int _countMoving = 0;
+            int _countDying = 0;
             this->tribes[tribeID].unitType = DAT_UnitsState::instance.units[_percentage].unitType;
             if (0 < sVar1) {
                 do {
@@ -65,7 +53,7 @@ namespace Map {
                                 if (DAT_UnitsState::instance.units[_unitID].movementRelated != 8) {
                                     _countMoving = _countMoving + 1;
                                 }
-                                UVar2 = DAT_UnitsState::instance.units[_unitID].state.generic;
+                                UnitStateShort UVar2 = DAT_UnitsState::instance.units[_unitID].state.generic;
                                 if (UVar2 == Map::Units::States::US_MELEE_ATTACK) {
                                     _countAttackingUnk = _countAttackingUnk + 1;
                                 }
@@ -83,12 +71,12 @@ namespace Map {
                                         || (UVar2 == Map::Units::States::US_FIRE_WEAPONUnk))) {
                                     _countRangeUnk = _countRangeUnk + 1;
                                 }
-                                _unitType = this->tribes[tribeID].unitType;
+                                UnitTypeShort _unitType = this->tribes[tribeID].unitType;
                                 if (_unitType != (UnitType)0
                                     && DAT_UnitsState::instance.units[_unitID].unitType != _unitType) {
                                     this->tribes[tribeID].unitType = ((UnitType)0);
                                 }
-                                _movementSpeed = DAT_UnitsState::instance.units[_unitID].movementSpeed;
+                                short _movementSpeed = DAT_UnitsState::instance.units[_unitID].movementSpeed;
                                 if (this->tribes[tribeID].movementSpeed < _movementSpeed) {
                                     this->tribes[tribeID].movementSpeed = _movementSpeed;
                                 }
@@ -102,7 +90,7 @@ namespace Map {
                     }
                 } while (iVar4 < this->tribes[tribeID].size);
             }
-            _tribeSize = (int)this->tribes[tribeID].size;
+            int _tribeSize = (int)this->tribes[tribeID].size;
             if (!_tribeSize) {
                 _percentage = 100;
             } else {

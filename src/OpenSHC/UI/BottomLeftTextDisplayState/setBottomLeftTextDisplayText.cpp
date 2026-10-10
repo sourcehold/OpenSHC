@@ -15,11 +15,7 @@ namespace UI {
     void BottomLeftTextDisplayState::setBottomLeftTextDisplayText(int messageTypeUnk, int textGroupIndex,
         int textNumInGroup, TextMessageBLLookupStructUnion param_4, int importanceUnk, int displayDurationUnk)
     {
-        int iVar1;
-        TextMessageBLLookupStructTypeEnumInt TVar2;
-        int iVar3;
-        TextMessageBLLookupStructTypeEnumInt TVar4;
-        TVar4 = ((TextMessageBLLookupStructTypeEnum)0);
+        TextMessageBLLookupStructTypeEnumInt TVar4 = ((TextMessageBLLookupStructTypeEnum)0);
         if (!messageTypeUnk) {
             /*
               basically clear!
@@ -42,9 +38,10 @@ namespace UI {
             }
             if (DAT_RenderingDefinedData::instance.TextMessageLookupTable[0].messageType
                 != (TextMessageBLLookupStructTypeEnum)0xffffffff) {
-                iVar1 = 0;
-                TVar2 = DAT_RenderingDefinedData::instance.TextMessageLookupTable[0].messageType;
-                iVar3 = 0;
+                int iVar1 = 0;
+                TextMessageBLLookupStructTypeEnumInt TVar2
+                    = DAT_RenderingDefinedData::instance.TextMessageLookupTable[0].messageType;
+                int iVar3 = 0;
                 do {
                     if (TVar4 == TVar2
                         && param_4.buildingType

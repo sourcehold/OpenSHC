@@ -41,14 +41,10 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004B14C0
         void AlliesSendAndRequestGoods::MenuItemActionHandler_AlliesSendAndRequestGoods_Main(int param_1, ...)
         {
-            int playerID;
             BOOLEnum BVar1;
             int iVar2;
             int _space;
-            ResourceTypeInt _resourceType;
-            ResourceTypeMin1Int _resource;
-            int _sendAmount;
-            playerID = DAT_SomeTeamMemberPlayerIDArray::instance[DAT_LastTeamMemberIndex::instance];
+            int playerID = DAT_SomeTeamMemberPlayerIDArray::instance[DAT_LastTeamMemberIndex::instance];
             if (param_1 == 0x28) {}
             if (param_1 < 0x15) {
                 DAT_RequestedGoodsByWhoArray::instance[0] = param_1;
@@ -210,9 +206,10 @@ namespace UI {
                     }
                     MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog,
                         DAT_MenuModalComposition1::ptr)(UI::Enums::MMT_ALLIES, FALSE);
-                    _sendAmount = DAT_SentOrRequestedGoodsAmount::instance;
-                    _resource = DAT_RequestedGoodsByWhoArray::instance[0] + Game::Resources::RTM_WOOD;
-                    _resourceType = _resource;
+                    int _sendAmount = DAT_SentOrRequestedGoodsAmount::instance;
+                    ResourceTypeMin1Int _resource
+                        = DAT_RequestedGoodsByWhoArray::instance[0] + Game::Resources::RTM_WOOD;
+                    ResourceTypeInt _resourceType = _resource;
                     if (_resource == Game::Resources::RTM_WHEAT) {
                         _resourceType = DAT_RequestedGoodsByWhoArray::instance[0];
                     }

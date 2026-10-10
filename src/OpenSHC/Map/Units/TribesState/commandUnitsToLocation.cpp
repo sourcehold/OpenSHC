@@ -24,13 +24,10 @@ namespace Map {
         undefined4 TribesState::commandUnitsToLocation(
             int tribeID, uint destinationX, uint destinationY, undefined4 matchUnitSpeeds)
         {
-            bool bVar1;
             int _unitID;
-            int _selectionUnitID;
-            short _goToRallyPoint;
             UnitTypeShort _unitType;
-            _selectionUnitID = 0;
-            bVar1 = true;
+            int _selectionUnitID = 0;
+            bool bVar1 = true;
             if (0 < this->tribes[tribeID].size) {
                 do {
                     _unitID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
@@ -38,7 +35,7 @@ namespace Map {
                     _selectionUnitID = _selectionUnitID + 1;
                     if ((DAT_UnitsState::instance.units[_unitID].logicalState == Map::Units::ULS_NORMAL)
                         && (DAT_UnitsState::instance.units[_unitID].dying == 0)) {
-                        _goToRallyPoint = DAT_UnitsState::instance.units[_unitID].goToRallyPoint;
+                        short _goToRallyPoint = DAT_UnitsState::instance.units[_unitID].goToRallyPoint;
                         DAT_UnitsState::instance.units[_unitID].rallyRelatedFlag = 0;
                         if (!_goToRallyPoint && DAT_UnitsState::instance.units[_unitID].isSelectable_OR_matchTime != 0
                             && (MACRO_CALL_MEMBER(

@@ -28,13 +28,10 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00527440
         void TribesState::spawnQueuedReinforcementWaves()
         {
-            bool bVar1;
-            bool bVar2;
             int iVar3;
             dword dVar4;
             dword _tribeID1;
             int iVar5;
-            int _nUnits;
             int iVar6;
             int* piVar7;
             SiegeUnitCounts* pSVar8;
@@ -51,10 +48,10 @@ namespace Map {
             int _destinationIndex;
             int _newCount;
             _tribeType = 0;
-            bVar1 = false;
+            bool bVar1 = false;
             _unitType = ((UnitType)0);
             _destinationIndexTracker = 0;
-            bVar2 = false;
+            bool bVar2 = false;
             if (DAT_GameCore::instance.gameMode_2 != Game::GM_EDITOR
                 && DAT_GameCore::instance.gameMode_2 != Game::GM_SIEGE_THAT
                 && (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY
@@ -172,7 +169,7 @@ namespace Map {
                             }
                             do {
                                 _count = DAT_GameState::instance.mapAndTime.startGoods[_siegeInfoSubIndex + 0x19];
-                                _nUnits = _count;
+                                int _nUnits = _count;
                                 if (9 < _count) {
                                     _nUnits = 9;
                                 }

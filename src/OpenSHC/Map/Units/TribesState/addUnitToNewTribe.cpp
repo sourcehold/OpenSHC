@@ -28,20 +28,17 @@ namespace Map {
         BOOLEnum TribesState::addUnitToNewTribe(uint unitID)
         {
             int _tribeID;
-            int _newTribeID;
-            int _playerID;
-            UnitTypeShort _unitType;
             if (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY) {
                 return FALSE;
             }
-            _playerID = (int)DAT_UnitsState::instance.units[unitID].owner;
+            int _playerID = (int)DAT_UnitsState::instance.units[unitID].owner;
             if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[_playerID] == -1
                 && ((_tribeID = (int)DAT_UnitsState::instance.units[unitID].tribeID,
                         _tribeID < 1 || (this->tribes[_tribeID].uid != DAT_UnitsState::instance.units[unitID].tribeUID))
                     || (this->tribes[_tribeID].tribeState == 0))) {
-                _newTribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, this)(_playerID, 0);
+                int _newTribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, this)(_playerID, 0);
                 if (0 < _newTribeID) {
-                    _unitType = DAT_UnitsState::instance.units[unitID].unitType;
+                    UnitTypeShort _unitType = DAT_UnitsState::instance.units[unitID].unitType;
                     if (_unitType == Map::Units::UT_E_ARCHER) {
                         this->tribes[_newTribeID].tribeType = AI::Tribes::AITT_ARCHERS;
                     } else if (_unitType == Map::Units::UT_E_XBOW) {

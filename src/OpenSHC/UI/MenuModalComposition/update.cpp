@@ -21,23 +21,14 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004AA1F0
     void MenuModalComposition::update()
     {
-        int _x2;
         BOOLEnum _areWeInAnInGameMenu;
         int _isInTickingGameMode;
-        int _y2;
-        int _x3;
-        int _x;
-        int _width;
-        int _heigth;
-        int _height2;
-        int _modalMenuXPos;
-        uint _borderStyle;
         Menu* _menuPtr;
         int _y;
         this->minus1 = 0;
         this->mbr_0x78 = 0;
         if (this->activeModalDialogID == UI::Enums::MMT_NONE) {}
-        _borderStyle = (this->modalMenu).borderStyle;
+        uint _borderStyle = (this->modalMenu).borderStyle;
         if ((_borderStyle & 4) == 0 || (_borderStyle & 2) == 0)
             goto LAB_004aa311;
         if (DAT_MouseState::instance.leftClickStart == 0) {
@@ -45,7 +36,7 @@ namespace UI {
             if (this->modalDragDropUnk == 0)
                 goto LAB_004aa311;
         } else if (this->modalDragDropUnk == 0) {
-            _x = (this->modalMenu).x;
+            int _x = (this->modalMenu).x;
             if (_x <= DAT_MouseState::instance.screenSpaceX
                 && DAT_MouseState::instance.screenSpaceX < (this->modalMenu).width + _x
                 && (_y = (this->modalMenu).y, _y <= DAT_MouseState::instance.screenSpaceY)
@@ -60,9 +51,9 @@ namespace UI {
         if (!DAT_MouseState::instance.leftClickState) {
             this->modalDragDropUnk = 0;
         } else {
-            _x2 = DAT_MouseState::instance.screenSpaceX - this->mouseRelativeX;
+            int _x2 = DAT_MouseState::instance.screenSpaceX - this->mouseRelativeX;
             (this->modalMenu).x = _x2;
-            _y2 = DAT_MouseState::instance.screenSpaceY - this->mouseRelativeY;
+            int _y2 = DAT_MouseState::instance.screenSpaceY - this->mouseRelativeY;
             (this->modalMenu).y = _y2;
             if (_x2 < 0) {
                 (this->modalMenu).x = 0;
@@ -71,13 +62,13 @@ namespace UI {
                 (this->modalMenu).y = 0;
             }
             _areWeInAnInGameMenu = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
-            _width = (this->modalMenu).width;
-            _x3 = (this->modalMenu).x + _width;
+            int _width = (this->modalMenu).width;
+            int _x3 = (this->modalMenu).x + _width;
             if (!_areWeInAnInGameMenu) {
                 if (DAT_WindowAndDirectDraw::instance.gameResolutionX <= _x3) {
                     (this->modalMenu).x = DAT_WindowAndDirectDraw::instance.gameResolutionX - _width;
                 }
-                _heigth = (this->modalMenu).height;
+                int _heigth = (this->modalMenu).height;
                 if ((this->modalMenu).y + _heigth < DAT_WindowAndDirectDraw::instance.gameResolutionY)
                     goto LAB_004aa311;
                 _y = DAT_WindowAndDirectDraw::instance.gameResolutionY - _heigth;
@@ -85,7 +76,7 @@ namespace UI {
                 if (DAT_WindowAndDirectDraw::instance.gameResolutionX <= _x3) {
                     (this->modalMenu).x = DAT_WindowAndDirectDraw::instance.gameResolutionX - _width;
                 }
-                _height2 = (this->modalMenu).height;
+                int _height2 = (this->modalMenu).height;
                 if ((this->modalMenu).y + _height2 < DAT_WindowAndDirectDraw::instance.gameResolutionY + -0x80)
                     goto LAB_004aa311;
                 _y = (DAT_WindowAndDirectDraw::instance.gameResolutionY - _height2) + -0x80;
@@ -103,7 +94,7 @@ namespace UI {
         if (this->minus1 == -1) {
             this->minus1 = 0;
         } else {
-            _modalMenuXPos = (this->modalMenu).x;
+            int _modalMenuXPos = (this->modalMenu).x;
             if ((((_modalMenuXPos <= DAT_MouseState::instance.screenSpaceX)
                      && (DAT_MouseState::instance.screenSpaceX < (this->modalMenu).width + _modalMenuXPos))
                     && ((_y = (this->modalMenu).y,

@@ -37,8 +37,6 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x0042F140
         void NewMapMaptype::MenuItemRenderFunction_NewMapMaptype_Buttons(int param_1, ...)
         {
-            int fontSize;
-            int iVar1;
             if ((DAT_MenuTextInputState::instance.currentModalDialog == UI::Enums::MMT_NO_MENU)
                 && (DAT_MenuModalComposition1::instance.activeModalDialogID == UI::Enums::MMT_NONE)) {
                 if (param_1 == 7) {
@@ -70,8 +68,8 @@ namespace UI {
                     }
                     INT_00b95abc::instance = param_1;
                 }
-                iVar1 = 0x13;
-                fontSize = 0x11;
+                int iVar1 = 0x13;
+                int fontSize = 0x11;
                 if (DAT_TextManagerObject::instance.gameLanguage - Text::GL_FRENCH < 3) {
                     fontSize = 0x12;
                     iVar1 = 0x14;

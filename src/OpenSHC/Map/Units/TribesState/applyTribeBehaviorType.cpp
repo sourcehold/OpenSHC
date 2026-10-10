@@ -10,9 +10,8 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x005221A0
         void TribesState::applyTribeBehaviorType(int attackWave, SomeTribeBehaviorType tribeBehaviorType)
         {
-            int iVar1;
             Tribe* psVar2;
-            iVar1 = DAT_TroopValueState::instance.attackInfo.someCounter1;
+            int iVar1 = DAT_TroopValueState::instance.attackInfo.someCounter1;
             psVar2 = &this->tribes[1];
             do {
                 if (psVar2->tribeState && psVar2->attackWave == attackWave

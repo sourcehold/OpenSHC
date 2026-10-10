@@ -19,8 +19,7 @@ namespace Map {
         {
             int unitID;
             BOOLEnum BVar1;
-            int unitSelectionIndex;
-            unitSelectionIndex = 0;
+            int unitSelectionIndex = 0;
             if (0 < this->tribes[tribeID].size) {
                 do {
                     unitID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
@@ -28,8 +27,8 @@ namespace Map {
                     unitSelectionIndex = unitSelectionIndex + 1;
                     if ((DAT_UnitsState::instance.units[unitID].logicalState == Map::Units::ULS_NORMAL)
                         && (DAT_UnitsState::instance.units[unitID].dying == 0)) {
-                        BVar1 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::hasUnitReachedDestination,
-                            DAT_UnitsState::ptr)(unitID);
+                        BVar1 = MACRO_CALL_MEMBER(
+                            Map::Units::UnitsState_Func::hasUnitReachedDestination, DAT_UnitsState::ptr)(unitID);
                         if (!BVar1) {
                             return FALSE;
                         }

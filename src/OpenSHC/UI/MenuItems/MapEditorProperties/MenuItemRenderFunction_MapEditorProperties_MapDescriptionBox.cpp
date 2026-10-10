@@ -29,30 +29,22 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x0042EBC0
         void MapEditorProperties::MenuItemRenderFunction_MapEditorProperties_MapDescriptionBox(int param_1, ...)
         {
-            int top;
-            int right;
-            int top_00;
-            int y1;
-            int right_00;
-            int bottom;
-            int iVar1;
-            int iVar2;
-            iVar2 = DAT_ButtonY::instance;
-            iVar1 = DAT_ButtonX::instance;
+            int iVar2 = DAT_ButtonY::instance;
+            int iVar1 = DAT_ButtonX::instance;
             if (DAT_GameCore::instance.U2_mapType_singleOrMulti
                 && DAT_MenuTextInputState::instance.currentModalDialog == UI::Enums::MMT_NO_MENU
                 && DAT_MenuModalComposition1::instance.activeModalDialogID == UI::Enums::MMT_NONE) {
-                right_00 = DAT_ButtonW::instance + 0x18 + DAT_ButtonX::instance;
-                bottom = DAT_ButtonH::instance + -6 + DAT_ButtonY::instance;
-                top = DAT_ButtonY::instance + 4;
-                right = right_00 + -0x14;
+                int right_00 = DAT_ButtonW::instance + 0x18 + DAT_ButtonX::instance;
+                int bottom = DAT_ButtonH::instance + -6 + DAT_ButtonY::instance;
+                int top = DAT_ButtonY::instance + 4;
+                int right = right_00 + -0x14;
                 MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::dimBox, DAT_PencilRenderCore::ptr)(
                     DAT_ButtonX::instance, top, right, bottom);
-                top_00 = bottom + -0x23;
+                int top_00 = bottom + -0x23;
                 MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::dimBox, DAT_PencilRenderCore::ptr)(
                     right_00 + -0x13, top_00, right_00, bottom);
                 iVar1 = iVar1 + -1;
-                y1 = iVar2 + 3;
+                int y1 = iVar2 + 3;
                 MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
                     iVar1, y1, right_00 + 1, y1, (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
                 MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(

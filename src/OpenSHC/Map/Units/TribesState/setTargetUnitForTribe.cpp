@@ -15,11 +15,8 @@ namespace Map {
         void TribesState::setTargetUnitForTribe(int tribeID)
         {
             int _unitID;
-            int _unitSelectionIndex;
-            short _tribeTargetUnitID;
-            short _tribeSize;
-            _unitSelectionIndex = 0;
-            _tribeSize = this->tribes[tribeID].size;
+            int _unitSelectionIndex = 0;
+            short _tribeSize = this->tribes[tribeID].size;
             this->tribes[tribeID].selectionTargetUnitID = 0;
             if (0 < _tribeSize) {
                 do {
@@ -28,7 +25,7 @@ namespace Map {
                     _unitSelectionIndex = _unitSelectionIndex + 1;
                     if ((DAT_UnitsState::instance.units[_unitID].logicalState == Map::Units::ULS_NORMAL)
                         && (DAT_UnitsState::instance.units[_unitID].dying == 0)) {
-                        _tribeTargetUnitID = this->tribes[tribeID].selectionTargetUnitID;
+                        short _tribeTargetUnitID = this->tribes[tribeID].selectionTargetUnitID;
                         if (!_tribeTargetUnitID) {
                             this->tribes[tribeID].selectionTargetUnitID = (short)_unitID;
                             DAT_UnitsState::instance.units[_unitID].selectionTargetUnitID = (short)_unitID;

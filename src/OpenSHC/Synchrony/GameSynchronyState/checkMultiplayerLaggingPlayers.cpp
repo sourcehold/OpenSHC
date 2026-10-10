@@ -19,10 +19,6 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x00490480
     void GameSynchronyState::checkMultiplayerLaggingPlayers()
     {
-        BOOLEnum BVar1;
-        int iVar2;
-        DWORD _now;
-        DWORD _now2;
         int* piVar3;
         ConnectionLagInfo* piVar6;
         ConnectionLagInfo* pDVar7;
@@ -39,9 +35,9 @@ namespace Synchrony {
             this->shouldSendAnnouncementUnk = 0;
         }
         if ((!this->syncStatus) && (!this->saveRelated)) {
-            BVar1 = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
+            BOOLEnum BVar1 = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
             if (BVar1) {
-                iVar2 = 0;
+                int iVar2 = 0;
                 piVar6 = &this->connectionLagInfoArray[1];
                 piVar3 = this->currentPlayerFullIDArray + 1;
                 _anyIsZero = true;
@@ -63,7 +59,7 @@ namespace Synchrony {
                     piVar6 = piVar6 + 3;
                 } while (iVar2 < 9);
                 if (_anyIsZero) {
-                    _now = timeGetTime();
+                    DWORD _now = timeGetTime();
                     _playerID = 0;
                     pDVar7 = &this->connectionLagInfoArray[0];
                     piVar3 = this->currentPlayerFullIDArray;
@@ -88,7 +84,7 @@ namespace Synchrony {
                     } while (_playerID < 9);
                 }
             }
-            _now2 = timeGetTime();
+            DWORD _now2 = timeGetTime();
             if (1800 < (int)(_now2 - this->otherTime1)) {
                 this->otherTime1 = _now2;
                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::sendSyncPacket126, this)();

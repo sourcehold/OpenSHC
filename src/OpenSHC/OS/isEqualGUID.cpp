@@ -15,9 +15,7 @@ using WindowsHelper::Enums::BOOLEnum;
 BOOLEnum OS::isEqualGUID(GUID* param_1, GUID* param_2)
 {
     bool bVar1;
-    int iVar2;
-    uint uVar3;
-    uVar3 = 0x10;
+    uint uVar3 = 0x10;
     do {
         if (param_1->Data1 != param_2->Data1)
             goto LAB_0047c5f8;
@@ -30,7 +28,7 @@ BOOLEnum OS::isEqualGUID(GUID* param_1, GUID* param_2)
         bVar1 = false;
     } else {
     LAB_0047c5f8:
-        iVar2 = (uint)(byte)param_1->Data1 - (uint)(byte)param_2->Data1;
+        int iVar2 = (uint)(byte)param_1->Data1 - (uint)(byte)param_2->Data1;
         if (!iVar2) {
             if (uVar3 == 1)
                 goto LAB_0047c65f;

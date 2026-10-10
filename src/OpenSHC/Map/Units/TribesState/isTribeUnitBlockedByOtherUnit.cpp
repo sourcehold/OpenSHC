@@ -17,12 +17,9 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00524B30
         undefined4 TribesState::isTribeUnitBlockedByOtherUnit(int param_1)
         {
-            short sVar1;
             int iVar2;
-            int iVar3;
-            int unitSelectionIndex;
-            unitSelectionIndex = 0;
-            sVar1 = this->tribes[param_1].size;
+            int unitSelectionIndex = 0;
+            short sVar1 = this->tribes[param_1].size;
             while (true) {
                 do {
                     if (sVar1 <= unitSelectionIndex) {
@@ -47,7 +44,8 @@ namespace Map {
                 if (DAT_UnitsState::instance.units[iVar2].laddermanIsInPosition != '\0') {
                     return (undefined4)(0);
                 }
-                iVar3 = (int)(short)DAT_TileMapState::instance.UnitLayer[DAT_UnitsState::instance.units[iVar2].tile];
+                int iVar3
+                    = (int)(short)DAT_TileMapState::instance.UnitLayer[DAT_UnitsState::instance.units[iVar2].tile];
                 if (iVar3 && iVar2 != iVar3 && DAT_UnitsState::instance.units[iVar3].tunnelerFinishedDigging != 2) {
                     return (undefined4)(1);
                 }

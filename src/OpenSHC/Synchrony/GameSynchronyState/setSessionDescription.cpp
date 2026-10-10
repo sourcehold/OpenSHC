@@ -14,9 +14,8 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x0047DE00
     void GameSynchronyState::setSessionDescription()
     {
-        uint uVar1;
         DPSESSIONDESC2 local_54;
-        uVar1 = MSVC_SecurityCookie::instance ^ (uint)&local_54;
+        uint uVar1 = MSVC_SecurityCookie::instance ^ (uint)&local_54;
         if (this->isHost) {
             MACRO_CALL(OS_Func::_memset)(&local_54, 0, 0x50);
             local_54.guidApplication.Data1 = 0x1d5e2f48;

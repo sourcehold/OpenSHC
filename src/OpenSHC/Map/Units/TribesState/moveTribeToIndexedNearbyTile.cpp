@@ -17,20 +17,16 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0052A700
         int TribesState::moveTribeToIndexedNearbyTile(int param_1)
         {
-            short sVar1;
-            int iVar2;
             uint uVar3;
-            uint uVar4;
-            int iVar5;
             int* piVar6;
             uint uVar7;
             uint x1;
             uint y1;
-            sVar1 = this->tribes[param_1].selectionTargetUnitID;
-            uVar4 = (uint)DAT_UnitsState::instance.units[sVar1].y;
+            short sVar1 = this->tribes[param_1].selectionTargetUnitID;
+            uint uVar4 = (uint)DAT_UnitsState::instance.units[sVar1].y;
             uVar7 = (uint)DAT_UnitsState::instance.units[sVar1].x;
-            iVar2 = (int)this->tribes[param_1].someIndex;
-            iVar5 = iVar2 % 0x28;
+            int iVar2 = (int)this->tribes[param_1].someIndex;
+            int iVar5 = iVar2 % 0x28;
             if (iVar5 < 1) {
                 iVar5 = 0;
             } else if (0x27 < iVar5) {

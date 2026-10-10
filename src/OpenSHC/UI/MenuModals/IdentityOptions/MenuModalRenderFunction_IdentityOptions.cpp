@@ -24,7 +24,6 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00491AC0
         void IdentityOptions::MenuModalRenderFunction_IdentityOptions(int x, int y, int width, int height)
         {
-            DWORD DVar1;
             char* pcVar2;
             int iVar3;
             uint uVar4;
@@ -34,7 +33,7 @@ namespace UI {
             uint uVar7;
             int iVar8;
             int blendStrength;
-            DVar1 = timeGetTime();
+            DWORD DVar1 = timeGetTime();
             uVar4 = (DVar1 - TIME_IdentityOptions::instance) / 100;
             if (0xf < uVar4) {
                 uVar4 = 0;

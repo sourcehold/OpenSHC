@@ -18,7 +18,6 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x004800E0
     int GameSynchronyState::sendLongerDataSuchAsResync(GameCommandType commandCategory)
     {
-        int iVar1;
         this->DAT_CurrentGameCommandID = this->DAT_GameCommandArrayIndex;
         MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
             0x4ec, '\0', (void*)((int)(&this->DAT_GameCommandArray[this->DAT_GameCommandArrayIndex].parameters)));
@@ -31,7 +30,7 @@ namespace Synchrony {
         ((void (*)())DAT_ProtocolDefinedData::instance
                 .commandFunctions[this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].commandType + 0x15])();
         this->DAT_CommandParameterOffset = 0;
-        iVar1 = this->DAT_CommandSize;
+        int iVar1 = this->DAT_CommandSize;
         if (200 < this->DAT_CommandSize && (undefined1)commandCategory != Commands::GCT_SEND_RESYNC_LOGICALTILEMAP) {
             this->DAT_Packet.packet.commandProtocol = 0x7d;
             this->DAT_Packet.prefixedPacket.packet.commandProtocol = (undefined1)commandCategory;

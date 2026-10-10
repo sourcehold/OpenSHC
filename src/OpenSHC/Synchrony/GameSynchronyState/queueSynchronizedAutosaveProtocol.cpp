@@ -18,13 +18,11 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x0048C660
     void GameSynchronyState::queueSynchronizedAutosaveProtocol()
     {
-        BOOLEnum BVar1;
-        DWORD DVar2;
         if (this->currentGameMode != Game::GM_SOLITARY && this->currentGameMode != Game::GM_SKIRMISH_SINGLE_PLAYER
             && this->isHost && this->skirmishAutoSaveEveryMinutes && this->timeSkirmishGameStart) {
-            BVar1 = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
+            BOOLEnum BVar1 = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
             if (BVar1 && !this->syncStatus && !this->saveRelated) {
-                DVar2 = timeGetTime();
+                DWORD DVar2 = timeGetTime();
                 if (this->skirmishAutoSaveEveryMinutes * 60000 < (int)(DVar2 - this->timeSkirmishGameStart)) {
                     /*
                       autosave
