@@ -31,11 +31,25 @@ DECL = re.compile(r"^(?P<type>(?:unsigned\s+|const\s+)*[A-Za-z_][\w:]*)\s+"
 
 
 def depths(lines):
+    """Lowest brace depth each line's own code sits at.
+
+    A line is recorded at the minimum depth it reaches rather than the depth it opens at,
+    so a use on a closing-brace line is seen at the *outer* depth. `} while (cond);` is
+    the case that matters: recorded at the inner depth it slipped past the scope check
+    below, and a declaration moved into the do-block left the while condition referring
+    to an out-of-scope variable, which does not compile.
+    """
     out, d = [], 0
     for line in lines:
-        out.append(d)
         code = re.sub(r"//.*", "", line)
-        d += code.count("{") - code.count("}")
+        low = d
+        for ch in code:
+            if ch == "{":
+                d += 1
+            elif ch == "}":
+                d -= 1
+                low = min(low, d)
+        out.append(low)
     return out
 
 
@@ -89,18 +103,23 @@ def move(path, write=True):
     return len(decls), len(drop), kept
 
 
-touched = 0
-for f in common.list_files():
-    if path_filter not in f:
-        continue
-    result = move(f, write=apply_changes)
-    if not result:
-        continue
-    count, moved, kept = result
-    if apply_changes:
-        common.format_file(f)
-    touched += 1
-    print("%-52s %2d declarations, %2d moved, left: %s"
-          % (f.rsplit("/", 1)[-1][:-4], count, moved, " ".join(kept) or "-"))
-print("%d file(s) changed%s"
-      % (touched, "" if apply_changes else " (dry run, pass --apply)"))
+def main():
+    touched = 0
+    for f in common.list_files():
+        if path_filter not in f:
+            continue
+        result = move(f, write=apply_changes)
+        if not result:
+            continue
+        count, moved, kept = result
+        if apply_changes:
+            common.format_file(f)
+        touched += 1
+        print("%-52s %2d declarations, %2d moved, left: %s"
+              % (f.rsplit("/", 1)[-1][:-4], count, moved, " ".join(kept) or "-"))
+    print("%d file(s) changed%s"
+          % (touched, "" if apply_changes else " (dry run, pass --apply)"))
+
+
+if __name__ == "__main__":
+    main()
