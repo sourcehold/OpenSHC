@@ -41,8 +41,7 @@ namespace UI {
             basic_ofstream<char, struct std::char_traits<char>> _ofstream;
             BITMAPINFOHEADER _ptrBitmapInfoHeader;
             StringObject local_7fc;
-            char local_7e0[18];
-            char local_7ce[982];
+            char local_7e0[1000];
             char local_3f8[1000];
             uint local_10;
             int local_c;
