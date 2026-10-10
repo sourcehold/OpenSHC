@@ -278,6 +278,7 @@ SEC_RNG::ptr->currentNumber1 % 4
   }
   ```
   Consider this, should a switch structure arise with strange fallthrough and loops, like SHC_3BB0A8C1_0x004870B0.
+- Non-consecutive case labels will likely result in a mixture of if-else and switch cases, sometimes even only if-elses. These are hard to spot. One sign, outside of weird decompiler artifacts, is that logic might be put inside a lot of conditions that feature only a single variable. Another can be a lot of GOTOs.
 
 ### Loops
 
@@ -330,6 +331,8 @@ you might have found an unrolled loop. Therefore, try to reproduce the logic in 
 
 If GOTOs are present that clearly jump to the start of a loop, but the logic does not allow to do this without a GOTO, for example from a loop inside a loop, you might be able to move the continue or break condition to the outside. Methods could be placing a fitting condition related to the contained loop conditions after the loop or using a boolean flag that then functions as conditional. Both can sometimes be optimized away.
 
+If an explicit loop condition is removed from the compiler, it is able to prove all paths through the loop. If such a case happens where the condition is actually eliminated from the re-implementation, the re-implementation might be missing a condition that is present in the logic somewhere, but removed from the loop condition itself. The optimization pass failed to detect the resulting predictable loop in this latter case and the condition remains.
+
 A global used as a running counter alongside the loop index is usually incremented inside the loop, even when its final
 value is a constant. Ghidra shows the folded result: `DAT_CurrentUnitSlotID = 2500;` placed around the loop is really
 `DAT_CurrentUnitSlotID = 1;` before it and `DAT_CurrentUnitSlotID += 1;` as the first statement of the body. This was
@@ -371,6 +374,7 @@ unrolled body, write `for (int i = 1; i != 2500; ++i)` instead of `i < 2500` (SH
   { ...; return; } }`. A `for (...; i++)` with the same body does not produce it. Together with `int i = 0;`
   declared where the original's `xor esi, esi` sits (here before an earlier early-return test, which then compares
   against that zero register) this took `generateSiegeCreationInformation` from 39.4% to 100%.
+
 
 ### GOTO
 
@@ -422,7 +426,8 @@ so it is built with `/GL`. SHC_3BB0A8C1_0x00504EE0 went from 38.5% to 100% and S
 ### Parameters
 
 Parameters might not be pushed like normal in certain cases.
-Usually, if two functions are followed by each other, the parameters are pushed for the first function, then the call is executed and then parameters for the second function are pushed. If parameters for the second function are pushed before the first call, it might indicate that the first call was executed in place of a variable, to directly feed the return into the second function.
+Usually, if two functions are followed by each other, the parameters are pushed for the first function, then the call is executed and then parameters for the second function are pushed. If parameters for the second function are pushed before the first call, it might indicate that the first call was executed in place of a variable, to directly feed the return into the second function.  
+This possibility is actually universal. If a computation of a value happens between pushes of parameters, it makes it likely the value was computed in-place. The other way around is also possible. If a computed value is created completely or partially before any push, it might have been a temporary.
 
 ### Implicit functions
 
@@ -451,25 +456,36 @@ They are replaced by specific assembly instructions or otherwise inlined.
 A list of all intrinsics can be found in `intrin.h` in the std library, but these are mainly very low level instructions.
 However, there are also C functions that can be replaced by intrinsics. The following attempts to extract these from the header:
 
-| Intrinsic | Does                                                                                           |
-| --------- | ---------------------------------------------------------------------------------------------- |
-| `memcpy`  | Copies a memory block. **Does not support overlapping regions** (use `memmove` for overlap).   |
-| `memset`  | Fills a memory block with a byte value.                                                        |
-| `memcmp`  | Compares two memory blocks byte-by-byte.                                                       |
-| `memchr`  | Searches memory for the first occurrence of a byte.                                            |
-| `strcpy`  | Copies a null-terminated C string.                                                             |
-| `strlen`  | Returns the length of a null-terminated string (excluding `\0`).                               |
-| `strcmp`  | Compares two null-terminated C strings.                                                        |
-| `strcat`  | Appends one null-terminated C string to another.                                               |
-| `strncpy` | Copies up to N characters from a string; **may not null-terminate** if the source is too long. |
-| `strncmp` | Compares up to N characters of two strings.                                                    |
-| `wcscpy`  | Copies a null-terminated wide-character string.                                                |
-| `wcslen`  | Returns the length of a null-terminated wide string.                                           |
-| `ceil`    | Rounds a floating-point value upward to the nearest integer value.                             |
-| `abs`     | Returns the absolute value of an `int`.                                                        |
-| `labs`    | Returns the absolute value of a `long`.                                                        |
-| `longjmp` | Restores a saved execution context created by `setjmp`, continuing execution from that point.  |
-| `_setjmp` | Saves the current execution context for later restoration with `longjmp`.                      |
+| Intrinsic                 | Does                                                                                                                 |
+|---------------------------|----------------------------------------------------------------------------------------------------------------------|
+| `memcpy`                  | Copies a memory block. **Does not support overlapping regions** (use `memmove` for overlap).                         |
+| `memset`                  | Fills a memory block with a byte value.                                                                              |
+| `memcmp`                  | Compares two memory blocks byte-by-byte.                                                                             |
+| `memchr`                  | Searches memory for the first occurrence of a byte.                                                                  |
+| `strcpy`                  | Copies a null-terminated C string.                                                                                   |
+| `strlen`                  | Returns the length of a null-terminated string (excluding `\0`).                                                     |
+| `strcmp`                  | Compares two null-terminated C strings.                                                                              |
+| `strcat`                  | Appends one null-terminated C string to another.                                                                     |
+| `strncpy`                 | Copies up to N characters from a string; **may not null-terminate** if the source is too long.                       |
+| `strncmp`                 | Compares up to N characters of two strings.                                                                          |
+| `strset`                  | Sets every character in a null-terminated string to the specified character.                                         |
+| `_strset`                 | Microsoft-specific version of `strset`; sets every character in a null-terminated string to the specified character. |
+| `wcscpy`                  | Copies a null-terminated wide-character string.                                                                      |
+| `wcslen`                  | Returns the length of a null-terminated wide string.                                                                 |
+| `wcscmp`                  | Compares two null-terminated wide-character strings.                                                                 |
+| `wcscat`                  | Appends one null-terminated wide-character string to another.                                                        |
+| `wcsncpy`                 | Copies up to N wide characters; **may not null-terminate** if the source is too long.                                |
+| `wcsncmp`                 | Compares up to N wide characters of two strings.                                                                     |
+| `_wcsset`                 | Sets every character in a null-terminated wide string to the specified wide character.                               |
+| `ceil`                    | Returns the smallest integral floating-point value greater than or equal to the argument.                            |
+| `abs`                     | Returns the absolute value of an `int`.                                                                              |
+| `labs`                    | Returns the absolute value of a `long`.                                                                              |
+| `longjmp`                 | Restores a saved execution context created by `setjmp`, continuing execution from that point.                        |
+| `_setjmp`                 | Saves the current execution context for later restoration with `longjmp`.                                            |
+| `_AddressOfReturnAddress` | Returns the address of the current function's return-address storage.                                                |
+| `_WriteBarrier`           | Prevents certain compiler memory-write reorderings across the barrier.                                               |
+| `__trap`                  | Generates a processor/compiler trap, optionally with arguments.                                                      |
+
 
 In cases where the decompiler seems to perform one of these actions via simple instructions, one can also try one of these functions.
 
