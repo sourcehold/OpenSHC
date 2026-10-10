@@ -15,10 +15,7 @@ namespace Map {
             uint uVar2;
             short _size;
             if (DAT_UnitsState::instance.units[unitID].tribeID == 0) {
-                uVar2 = unitID & 0x8000000f;
-                if ((int)uVar2 < 0) {
-                    uVar2 = (uVar2 - 1 | 0xfffffff0) + 1;
-                }
+                uVar2 = (int)unitID % 16;
                 if ((ushort)(DAT_UnitSelectionDefinedData::instance.BitMaskHelper[uVar2]
                         & this->tribes[tribeID].unitSelectionBitMasked[(int)unitID / 16])
                     == 0) {}
@@ -31,10 +28,7 @@ namespace Map {
                 this->tribes[tribeID].tribeState = 3;
             }
             psVar1 = this->tribes[tribeID].unitSelectionBitMasked + ((int)unitID / 16);
-            uVar2 = unitID & 0x8000000f;
-            if ((int)uVar2 < 0) {
-                uVar2 = (uVar2 - 1 | 0xfffffff0) + 1;
-            }
+            uVar2 = (int)unitID % 16;
             *psVar1 = *psVar1 & DAT_UnitSelectionDefinedData::instance.BitMaskHelper2[uVar2];
             if (DAT_UnitsState::instance.units[unitID].tribeID == tribeID) {
                 DAT_UnitsState::instance.units[unitID].selectionTargetUnitID = 0;

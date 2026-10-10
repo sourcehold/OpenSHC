@@ -63,13 +63,11 @@ namespace UI {
                 if (DAT_MenuModalComposition1::instance.activeModalDialogID == UI::Enums::MMT_ROUNDTABLE) {
                     DAT_GameSynchronyState::instance.mapExistenceAckCountdown = 0;
                 }
-                if (DAT_MenuModalComposition1::instance.activeModalDialogID
-                    == UI::Enums::MMT_BASIC_AI_LORD_SELECT) {
+                if (DAT_MenuModalComposition1::instance.activeModalDialogID == UI::Enums::MMT_BASIC_AI_LORD_SELECT) {
                     DAT_GameSynchronyState::instance.mapExistenceAckCountdown = 0;
                 }
                 iVar1 = param_1;
-                if (DAT_MenuModalComposition1::instance.activeModalDialogID
-                    == UI::Enums::MMT_EXTENDED_AI_LORD_SELECT) {
+                if (DAT_MenuModalComposition1::instance.activeModalDialogID == UI::Enums::MMT_EXTENDED_AI_LORD_SELECT) {
                     DAT_GameSynchronyState::instance.mapExistenceAckCountdown = 0;
                 }
             }
@@ -128,18 +126,12 @@ namespace UI {
                             break;
                         do {
                             iVar2 = DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices[iVar4 + -1];
-                            uVar5 = DAT_GameSynchronyState::instance.mapPlayerCountArray[iVar2] + iVar3 & 0x80000007;
-                            if ((int)uVar5 < 0) {
-                                uVar5 = (uVar5 - 1 | 0xfffffff8) + 1;
-                            }
+                            uVar5 = (DAT_GameSynchronyState::instance.mapPlayerCountArray[iVar2] + iVar3) % 8;
                             uVar6
-                                = DAT_GameSynchronyState::instance.mapPlayerCountArray[DAT_MenuTextInputState::instance
-                                          .DAT_ArrayOfMapIndices[iVar4]]
-                                    + iVar3
-                                & 0x80000007;
-                            if ((int)uVar6 < 0) {
-                                uVar6 = (uVar6 - 1 | 0xfffffff8) + 1;
-                            }
+                                = (DAT_GameSynchronyState::instance.mapPlayerCountArray[DAT_MenuTextInputState::instance
+                                           .DAT_ArrayOfMapIndices[iVar4]]
+                                      + iVar3)
+                                % 8;
                             if ((int)uVar6 < (int)uVar5) {
                                 DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices[iVar4 + -1]
                                     = DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices[iVar4];
@@ -207,15 +199,15 @@ namespace UI {
             }
             if (-1 < iVar8) {
                 INT_00b95ab8::instance = 1;
-                MACRO_CALL(UI::MenuItems::LobbyMenu_Func::MenuItemActionHandler_LobbyMenu_MapSelectTable)(DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected);
+                MACRO_CALL(UI::MenuItems::LobbyMenu_Func::MenuItemActionHandler_LobbyMenu_MapSelectTable)(
+                    DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected);
             }
             iVar8 = 0;
             if (0 < iVar2) {
                 while (true) {
                     _Str2 = MACRO_CALL_MEMBER(IO::ResourceManager_Func::mapNames_getLoadedMapNameForIndex,
                         DAT_ResourceManager::ptr)(DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices[iVar8 + -1]);
-                    iVar2 = MACRO_CALL(OS_Func::__stricmp)(
-                        DAT_MapNameCache::instance, (char const*)((int)(_Str2)));
+                    iVar2 = MACRO_CALL(OS_Func::__stricmp)(DAT_MapNameCache::instance, (char const*)((int)(_Str2)));
                     if (!iVar2)
                         break;
                     iVar8 = iVar8 + 1;

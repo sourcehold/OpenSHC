@@ -20,10 +20,7 @@ namespace Map {
               basically, it sets a bit flag for every unitID that is in the selection
              */
             psVar1 = this->tribes[tribeID].unitSelectionBitMasked + ((int)unitID / 16);
-            _mod16 = unitID & 0x8000000f;
-            if ((int)_mod16 < 0) {
-                _mod16 = (_mod16 - 1 | 0xfffffff0) + 1;
-            }
+            _mod16 = (int)unitID % 16;
             *psVar1 = *psVar1 | DAT_UnitSelectionDefinedData::instance.BitMaskHelper[_mod16];
             if (this->tribes[tribeID].selectionTargetUnitID == 0) {
                 this->tribes[tribeID].selectionTargetUnitID = (short)unitID;

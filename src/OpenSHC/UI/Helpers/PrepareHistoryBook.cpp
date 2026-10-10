@@ -17,24 +17,24 @@ namespace UI {
         int* piVar3;
         int* piVar4;
         DAT_TextureRenderCoreObject::instance.totalLoadedGfx = 0;
-        MACRO_CALL_MEMBER(
-            UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)("sand.tgx");
-        MACRO_CALL_MEMBER(
-            UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)("pc0.tgx");
-        MACRO_CALL_MEMBER(
-            UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)("pc1.tgx");
-        MACRO_CALL_MEMBER(
-            UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)("pc2.tgx");
-        MACRO_CALL_MEMBER(
-            UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)("pc3.tgx");
-        MACRO_CALL_MEMBER(
-            UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)("pc4.tgx");
-        MACRO_CALL_MEMBER(
-            UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)("pc5.tgx");
-        MACRO_CALL_MEMBER(
-            UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)("pc6.tgx");
-        MACRO_CALL_MEMBER(
-            UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)("pc7.tgx");
+        MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
+            "sand.tgx");
+        MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
+            "pc0.tgx");
+        MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
+            "pc1.tgx");
+        MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
+            "pc2.tgx");
+        MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
+            "pc3.tgx");
+        MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
+            "pc4.tgx");
+        MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
+            "pc5.tgx");
+        MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
+            "pc6.tgx");
+        MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(
+            "pc7.tgx");
         piVar3 = INT_ARRAY_00eb0b28::instance[0] + 1;
         do {
             iVar1 = MACRO_CALL(OS_Func::_rand)();
@@ -42,10 +42,7 @@ namespace UI {
             iVar1 = MACRO_CALL(OS_Func::_rand)();
             *piVar3 = iVar1 % 600 << 8;
             uVar2 = MACRO_CALL(OS_Func::_rand)();
-            uVar2 = uVar2 & 0x80000007;
-            if ((int)uVar2 < 0) {
-                uVar2 = (uVar2 - 1 | 0xfffffff8) + 1;
-            }
+            uVar2 = (int)uVar2 % 8;
             piVar3[1] = uVar2;
             iVar1 = MACRO_CALL(OS_Func::_rand)();
             piVar4 = piVar3 + 4;
