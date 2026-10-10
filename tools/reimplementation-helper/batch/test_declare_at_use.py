@@ -59,6 +59,18 @@ CASES = [
     }
 }
 """, "imageX", None),
+    # an assignment inside a comma expression in a condition is not a statement, so no
+    # declaration can replace it
+    ("comma expression", """    int local_8;
+    int iVar1;
+    if ((-1 < k)
+        && (iVar1 = p->idx,
+            local_8 = n * 4,
+            iVar1 < p->len)) {
+        use(local_8);
+    }
+}
+""", "local_8", None),
     ("unused is dropped", """    int iVar4;
     use(0);
 }

@@ -80,6 +80,26 @@ def depths_after(lines):
     return out
 
 
+def paren_depth_before(lines):
+    """Round-bracket depth at the start of each line.
+
+    A declaration can only replace an assignment that is a statement in its own right.
+    Ghidra also emits assignments inside comma expressions in a condition, and a
+    continuation line of one starts with `var =` just like a statement does:
+
+        if ((-1 < x) && (i = p->idx, local_8 = n * 4, i < p->len)) {
+
+    predictUnitInterceptPosition got `int local_8 = ...` spliced in there, which is not
+    valid C++. A nonzero depth here says the line sits inside such an expression.
+    """
+    out, d = [], 0
+    for line in lines:
+        out.append(d)
+        code = re.sub(r"//.*", "", line)
+        d += code.count("(") - code.count(")")
+    return out
+
+
 def move(path, write=True):
     text = common.read_text(path).replace("\r\n", "\n")
     brace = re.compile(r"\n[ \t]*\{[ \t]*\n").search(text, text.index("// FUNCTION:"))
@@ -114,6 +134,9 @@ def move(path, write=True):
         first = uses[0]
         if not re.match(r"^\s*%s\s*=[^=]" % re.escape(var), lines[first]):
             continue                              # first touch is not a plain assignment
+        stmt = re.sub(r"//.*", "", lines[first]).rstrip()
+        if paren_depth_before(lines)[first] or not stmt.endswith(";"):
+            continue                              # an assignment inside an expression
         d = depths(lines)
         if any(d[n] < d[first] for n in range(first, uses[-1] + 1)):
             continue                              # the scope would not cover every use
