@@ -179,9 +179,8 @@ namespace Synchrony {
         this->skirmishWinCondition = 0;
         this->skirmishTroopsCostGold = 1;
         this->lobbyMapSortOrder = 6;
-        if ((((this->skirmishAutoSaveEveryMinutes) && (this->skirmishAutoSaveEveryMinutes != 5))
-                && (this->skirmishAutoSaveEveryMinutes != 10))
-            && (this->skirmishAutoSaveEveryMinutes != 0x14)) {
+        if (this->skirmishAutoSaveEveryMinutes && this->skirmishAutoSaveEveryMinutes != 5
+            && this->skirmishAutoSaveEveryMinutes != 10 && this->skirmishAutoSaveEveryMinutes != 0x14) {
             this->skirmishAutoSaveEveryMinutes = 10;
         }
         this->saveRelated = 0;
@@ -201,7 +200,8 @@ namespace Synchrony {
         this->skirmishExtremeMode2 = 0;
         this->DAT_MapFileReceivingState = 0;
         DAT_GameState::instance.mapAndTime.skirmishFogOfWar = 0;
-        MACRO_CALL(UI::DisplayElements_Func::CheckDisplayElementByIDAndSetForUnlimitedDisplay)(UI::Enums::DEID_WIN_DEFEAT_WINDOW, 0);
+        MACRO_CALL(UI::DisplayElements_Func::CheckDisplayElementByIDAndSetForUnlimitedDisplay)(
+            UI::Enums::DEID_WIN_DEFEAT_WINDOW, 0);
     }
 
 }

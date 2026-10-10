@@ -74,8 +74,8 @@ namespace Map {
                 do {
                     uVar10 = *piVar9 + (int)sVar3;
                     uVar6 = ((Point8IntXY*)(piVar9 + -1))->xOffset + (int)sVar2;
-                    if ((((uVar6 < 0x28) && (uVar10 < 0x28)) && (0 < this->grid[uVar6][uVar10].firstMember))
-                        && (_currentArea == this->grid[uVar6][uVar10].separateAreaID)) {
+                    if (uVar6 < 0x28 && uVar10 < 0x28 && 0 < this->grid[uVar6][uVar10].firstMember
+                        && _currentArea == this->grid[uVar6][uVar10].separateAreaID) {
                         if (!always0or1) {
                             if (this->grid[uVar6][uVar10].field13_0x34 == 0) {
                                 if (DAT_TribesState::instance.tribes[tribeID].tribeType
@@ -130,10 +130,8 @@ namespace Map {
                     = *(int*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix + iVar7) + _x10;
                 uVar10 = *(int*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix + iVar7 + 4)
                     + _y10;
-                if (((uVar6 < 0x28) && (uVar10 < 0x28))
-                    && ((0 < this->grid[uVar6][uVar10].firstMember
-                        && ((iVar7 = this->grid[uVar6][uVar10].casDisRelated2,
-                            iVar7 != 0 && (iVar7 < always2or3or5)))))) {
+                if (uVar6 < 0x28 && uVar10 < 0x28 && 0 < this->grid[uVar6][uVar10].firstMember
+                    && (iVar7 = this->grid[uVar6][uVar10].casDisRelated2, iVar7 != 0 && (iVar7 < always2or3or5))) {
                     this->grid[uVar6][uVar10].casDisRelated2 = 0;
                     always2or3or5 = iVar7;
                     local_18 = iVar8;
@@ -148,8 +146,8 @@ namespace Map {
                     + _y10;
                 uVar6
                     = *(int*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix + iVar8) + _x10;
-                if ((((uVar6 < 0x28) && (uVar10 < 0x28)) && (0 < this->grid[uVar6][uVar10].firstMember))
-                    && ((iVar8 = this->grid[uVar6][uVar10].casDisRelated2, iVar8 && (iVar8 < always2or3or5)))) {
+                if (uVar6 < 0x28 && uVar10 < 0x28 && 0 < this->grid[uVar6][uVar10].firstMember
+                    && (iVar8 = this->grid[uVar6][uVar10].casDisRelated2, iVar8 && (iVar8 < always2or3or5))) {
                     this->grid[uVar6][uVar10].casDisRelated2 = 0;
                     always2or3or5 = iVar8;
                     local_18 = iVar7;
@@ -164,10 +162,8 @@ namespace Map {
                     + _y10;
                 uVar6
                     = *(int*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix + iVar7) + _x10;
-                if (((uVar6 < 0x28) && (uVar10 < 0x28))
-                    && ((0 < this->grid[uVar6][uVar10].firstMember
-                        && ((iVar7 = this->grid[uVar6][uVar10].casDisRelated2,
-                            iVar7 != 0 && (iVar7 < always2or3or5)))))) {
+                if (uVar6 < 0x28 && uVar10 < 0x28 && 0 < this->grid[uVar6][uVar10].firstMember
+                    && (iVar7 = this->grid[uVar6][uVar10].casDisRelated2, iVar7 != 0 && (iVar7 < always2or3or5))) {
                     this->grid[uVar6][uVar10].casDisRelated2 = 0;
                     always2or3or5 = iVar7;
                     local_18 = iVar8;
@@ -182,8 +178,8 @@ namespace Map {
                     + _y10;
                 uVar6
                     = *(int*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix + iVar7) + _x10;
-                if ((((uVar6 < 0x28) && (uVar10 < 0x28)) && (0 < this->grid[uVar6][uVar10].firstMember))
-                    && ((iVar7 = this->grid[uVar6][uVar10].casDisRelated2, iVar7 && (iVar7 < always2or3or5)))) {
+                if (uVar6 < 0x28 && uVar10 < 0x28 && 0 < this->grid[uVar6][uVar10].firstMember
+                    && (iVar7 = this->grid[uVar6][uVar10].casDisRelated2, iVar7 && (iVar7 < always2or3or5))) {
                     this->grid[uVar6][uVar10].casDisRelated2 = 0;
                     always2or3or5 = iVar7;
                     local_18 = iVar8;
@@ -200,8 +196,7 @@ namespace Map {
             this->grid[_x10][_y10].field15_0x3c = 1;
             _destinationY = _y10 * 10 + 5;
             uVar6 = _x10 * 10 + 5;
-            if (((uVar6 < 400) && (_destinationY < 400))
-                && (*(char*)(_destinationY * 400 + 0x21aec98 + uVar6) != '\0')) {
+            if (uVar6 < 400 && _destinationY < 400 && *(char*)(_destinationY * 400 + 0x21aec98 + uVar6) != '\0') {
                 MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathFindingDeerAndLionsUnk,
                     DAT_PathFindingState::ptr)(_currentArea, uVar6, _destinationY);
                 DAT_TribesState::instance.tribes[tribeID]

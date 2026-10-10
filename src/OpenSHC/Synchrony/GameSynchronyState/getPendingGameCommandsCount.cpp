@@ -21,7 +21,7 @@ namespace Synchrony {
             pGVar3 = &this->DAT_GameCommandArray[this->MBR_GameCommandID].stateUnk;
             iVar2 = 200 - this->MBR_GameCommandID;
             do {
-                if ((*pGVar3 != ((GameCommandState)0)) && ((char)*pGVar3 < '\n')) {
+                if (*pGVar3 != (GameCommandState)0 && (char)*pGVar3 < '\n') {
                     iVar1 = iVar1 + 1;
                 }
                 pGVar3 = pGVar3 + 0x4f8;

@@ -32,12 +32,12 @@ namespace UI {
         {
             UI::TextMessageBLLookupStructUnion _noBlLookup;
             _noBlLookup.buildingType = (Commands::MappersEnum)0;
-            if ((((!DAT_GameSynchronyState::instance.syncStatus) && (!DAT_GameSynchronyState::instance.saveRelated))
-                    && ((DAT_TileMapState::instance.currentMapperCommand == Commands::M_MAPPER_WALL
-                        || (((DAT_TileMapState::instance.currentMapperCommand == Commands::M_MAPPER_WOODWALL
-                                 || (DAT_TileMapState::instance.currentMapperCommand == Commands::M_MAPPER_STAIR))
-                            || (DAT_TileMapState::instance.currentMapperCommand == Commands::M_MAPPER_CRENAL))))))
-                && (DAT_ViewportRenderState::instance.viewportState.field0_0x0)) {
+            if (!DAT_GameSynchronyState::instance.syncStatus && !DAT_GameSynchronyState::instance.saveRelated
+                && (DAT_TileMapState::instance.currentMapperCommand == Commands::M_MAPPER_WALL
+                    || (((DAT_TileMapState::instance.currentMapperCommand == Commands::M_MAPPER_WOODWALL
+                             || (DAT_TileMapState::instance.currentMapperCommand == Commands::M_MAPPER_STAIR))
+                        || (DAT_TileMapState::instance.currentMapperCommand == Commands::M_MAPPER_CRENAL))))
+                && DAT_ViewportRenderState::instance.viewportState.field0_0x0) {
                 DAT_MouseState::instance.field68_0x1dc = 1000;
                 if (!DAT_TileMapState::instance.flatViewToggleValue1) {
                     /*
@@ -46,8 +46,8 @@ namespace UI {
                     MACRO_CALL_MEMBER(
                         Rendering::ViewportRenderState_Func::setupMouseTileXY, DAT_ViewportRenderState::ptr)();
                 } else {
-                    MACRO_CALL_MEMBER(Rendering::ViewportRenderState_Func::setupMouseTileXY2,
-                        DAT_ViewportRenderState::ptr)();
+                    MACRO_CALL_MEMBER(
+                        Rendering::ViewportRenderState_Func::setupMouseTileXY2, DAT_ViewportRenderState::ptr)();
                 }
                 if (!DAT_MouseState::instance.leftClickStart) {
                     if ((!DAT_MouseState::instance.draggingStopped) && (!DAT_MouseState::instance.leftClickState)) {
@@ -74,8 +74,8 @@ namespace UI {
                     = Map::Buildings::BFRE_DEFAULT_CANT_PLACE_THAT_THERE;
                 DAT_TileMapState::instance.wallPlacementCost = 0;
                 DAT_TileMapState::instance.constructionTileCount
-                    = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::getWallTilesThatCanBeBuilt,
-                        DAT_GameState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID, 4);
+                    = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::getWallTilesThatCanBeBuilt, DAT_GameState::ptr)(
+                        DAT_GameSynchronyState::instance.currentPlayerSlotID, 4);
                 MACRO_CALL_MEMBER(Map::TileMapState_Func::validateWallBuildPath, DAT_TileMapState::ptr)(
                     DAT_GameSynchronyState::instance.currentPlayerSlotID,
                     (uint)((int)(DAT_TileMapState::instance.dragStartX)),
@@ -102,8 +102,8 @@ namespace UI {
                     DAT_GameSynchronyState::instance.DAT_GameCommandParam3 = DAT_TileMapState::instance.dragEndY;
                     DAT_GameSynchronyState::instance.DAT_GameCommandParam5
                         = DAT_TileMapState::instance.constructionTileCount;
-                    MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand,
-                        DAT_GameSynchronyState::ptr)(Commands::GCT_PLACE_WALL);
+                    MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
+                        Commands::GCT_PLACE_WALL);
                 } else if (DAT_TileMapState::instance.buildingPlacementFailReason
                     != Map::Buildings::BFRE_DEFAULT_CANT_PLACE_THAT_THERE) {
                     MACRO_CALL_MEMBER(UI::BottomLeftTextDisplayState_Func::setBottomLeftTextDisplayText,

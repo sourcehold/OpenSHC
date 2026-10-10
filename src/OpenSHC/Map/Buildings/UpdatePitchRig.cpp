@@ -111,7 +111,7 @@ namespace Map {
                 }
             }
         } else {
-            if (((sVar4 == 1) || (sVar4 == 2)) || (sVar4 == 3)) {
+            if (sVar4 == 1 || sVar4 == 2 || sVar4 == 3) {
                 if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationActive != 0) {
                     if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex == 3) {
                         MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(

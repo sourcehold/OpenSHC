@@ -49,12 +49,10 @@ namespace Map {
             if (1 < DAT_UnitsState::instance.maxUnitCount) {
                 psVar3 = &DAT_UnitsState::instance.units[1].dying;
                 do {
-                    if ((((psVar3[-0x10a] == Map::Units::ULS_NORMAL) && (*psVar3 == 0))
-                            && (psVar3[-0x105] == sVar1))
-                        && (((psVar3[-0x109] == Map::Units::UT_PEASANT
-                                 && (((UnitStateUnion*)(psVar3 + 0x10))->generic
-                                     == Map::Units::States::US_STAND_UPUnk))
-                            && (psVar3[0x4c] == param_1)))) {
+                    if (psVar3[-0x10a] == Map::Units::ULS_NORMAL && *psVar3 == 0 && psVar3[-0x105] == sVar1
+                        && psVar3[-0x109] == Map::Units::UT_PEASANT
+                        && ((UnitStateUnion*)(psVar3 + 0x10))->generic == Map::Units::States::US_STAND_UPUnk
+                        && psVar3[0x4c] == param_1) {
                         local_8 = local_8 + 1;
                         psVar3[0x78] = 0;
                         if (param_3 == 1) {
@@ -62,12 +60,11 @@ namespace Map {
                         }
                         if (local_8 == param_2) {
                             psVar3[0x77] = 1;
-                            MACRO_CALL_MEMBER(
-                                Map::Units::UnitsState_Func::standUpIfSeated, DAT_UnitsState::ptr)(iVar4);
+                            MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::standUpIfSeated, DAT_UnitsState::ptr)(iVar4);
                         } else if (psVar3[0x77] == 0) {
                             psVar3[0x78] = 1;
-                            MACRO_CALL_MEMBER(
-                                Map::Units::UnitsState_Func::sitDownIfStanding, DAT_UnitsState::ptr)(iVar4);
+                            MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::sitDownIfStanding, DAT_UnitsState::ptr)(
+                                iVar4);
                         }
                     }
                     iVar4 = iVar4 + 1;

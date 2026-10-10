@@ -21,7 +21,7 @@ namespace UI {
         yOffset = DAT_ViewportRenderState::instance.viewportState.viewportWidth / 2
             + (DAT_ViewportRenderState::instance.viewportState.viewportY / 8);
         this->DAT_SomeMiniMapCounterTill4 = 0;
-        if (((this->needsRedraw) || (xOffset != this->lastRenderedXOffset)) || (yOffset != this->lastRenderedYOffset)) {
+        if (this->needsRedraw || xOffset != this->lastRenderedXOffset || yOffset != this->lastRenderedYOffset) {
             if (DAT_TileMapState::instance.mapSize < 0xc9) {
                 heightFactor = 2;
                 widthFactor = 4;

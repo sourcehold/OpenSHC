@@ -1,11 +1,11 @@
 #include "../NewEventAction.func.hpp"
 
-#include "OpenSHC/UI/MenuModalComposition.func.hpp"
 #include "OpenSHC/UI/Helpers.func.hpp"
+#include "OpenSHC/UI/MenuModalComposition.func.hpp"
+#include "OpenSHC/Game/ScenarioEvents/InGameEventUnion.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
-#include "OpenSHC/Game/ScenarioEvents/InGameEventUnion.hpp"
 #include "OpenSHC/Globals/DAT_ButtonX.hpp"
 #include "OpenSHC/Globals/DAT_ButtonY.hpp"
 #include "OpenSHC/Globals/DAT_MapPropertiesState.hpp"
@@ -17,9 +17,9 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
+        using Game::ScenarioEvents::InGameEventUnion;
         using UI::Enums::MenuModalType;
         using WindowsHelper::Enums::BOOLEnum;
-        using Game::ScenarioEvents::InGameEventUnion;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004B9C00
         void NewEventAction::MenuItemActionHandler_NewEventAction_Main(int param_1, ...)
@@ -31,8 +31,8 @@ namespace UI {
             iVar2 = param_1;
             switch (param_1) {
             case 0x25:
-                MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog,
-                    DAT_MenuModalComposition1::ptr)(UI::Enums::MMT_NEW_EVENT, FALSE);
+                MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog, DAT_MenuModalComposition1::ptr)(
+                    UI::Enums::MMT_NEW_EVENT, FALSE);
                 return;
             case 0xb1:
             case 0xb2:
@@ -88,7 +88,7 @@ namespace UI {
                     iVar2 = DAT_MapPropertiesState::instance
                                 .scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
                                 .data.scenario.ScenarioEventType;
-                    if (((iVar2 == 2) || (iVar2 == 0x1a)) || (iVar2 == 0x1b)) {
+                    if (iVar2 == 2 || iVar2 == 0x1a || iVar2 == 0x1b) {
                         DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
                             .data.scenario.actionData = -1;
                     }
@@ -118,8 +118,7 @@ namespace UI {
                 destination
                     = &DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
                            .data;
-                MACRO_CALL_MEMBER(
-                    UI::MenuModalComposition_Func::setSliderParameters, DAT_MenuModalComposition2::ptr)(1,
+                MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::setSliderParameters, DAT_MenuModalComposition2::ptr)(1,
                     iVar2, (destination->scenario).actionData, (undefined*)((int)(destination)),
                     (void*)MACRO_CALL(UI::Helpers_Func::CaptureCurrentTimeToUnknownTime01));
                 DAT_MapPropertiesState::instance.sliderPopupX = DAT_ButtonX::instance + 0x3a;

@@ -17,15 +17,15 @@ namespace Map {
             int iVar1;
             uint uVar2;
             int unitSelectionIndex;
-            if (((0 < tribeID) && (this->tribes[tribeID].predatorNearby == 0))
+            if (0 < tribeID && this->tribes[tribeID].predatorNearby == 0
                 && (unitSelectionIndex = 0, 0 < this->tribes[tribeID].size)) {
                 do {
                     iVar1 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
                         tribeID, unitSelectionIndex);
                     unitSelectionIndex = unitSelectionIndex + 1;
-                    if (((DAT_UnitsState::instance.units[iVar1].logicalState == Map::Units::ULS_NORMAL)
-                            && (DAT_UnitsState::instance.units[iVar1].dying == 0))
-                        && (DAT_UnitsState::instance.units[iVar1].antelopeBasedRngValue == 2)) {
+                    if (DAT_UnitsState::instance.units[iVar1].logicalState == Map::Units::ULS_NORMAL
+                        && DAT_UnitsState::instance.units[iVar1].dying == 0
+                        && DAT_UnitsState::instance.units[iVar1].antelopeBasedRngValue == 2) {
                         uVar2 = DAT_UnitsState::instance.units[iVar1].fixedRng & 7;
                         if (uVar2 < 2) {
                             DAT_UnitsState::instance.units[iVar1].antelopeBasedRngValue = 0;

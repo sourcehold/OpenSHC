@@ -36,11 +36,11 @@ namespace UI {
             int local_40[16];
             iVar1 = y;
             if (DAT_MouseState::instance.rightClickStart) {
-                MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog,
-                    DAT_MenuModalComposition1::ptr)(UI::Enums::MMT_NONE, FALSE);
+                MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog, DAT_MenuModalComposition1::ptr)(
+                    UI::Enums::MMT_NONE, FALSE);
             }
-            MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderLoadedGfx,
-                DAT_TextureRenderCoreObject::ptr)(2, x + 8, y + 8);
+            MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderLoadedGfx, DAT_TextureRenderCoreObject::ptr)(
+                2, x + 8, y + 8);
             local_40[4] = 0x18e;
             local_40[8] = 0x18e;
             iVar2 = 1;
@@ -62,10 +62,10 @@ namespace UI {
             piVar3 = local_40;
             iVar4 = 1;
             do {
-                if (((char)DAT_GameSynchronyState::instance.DAT_RoundTableOrderArray[iVar4] < 1)
-                    || ((char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[(
-                            char)DAT_GameSynchronyState::instance.DAT_RoundTableOrderArray[iVar4]]
-                        < '\x01'))
+                if ((char)DAT_GameSynchronyState::instance.DAT_RoundTableOrderArray[iVar4] < 1
+                    || (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[(
+                           char)DAT_GameSynchronyState::instance.DAT_RoundTableOrderArray[iVar4]]
+                        < '\x01')
                     break;
                 if (y < (char)DAT_GameSynchronyState::instance
                         .DAT_PlayerGroupArray[(char)DAT_GameSynchronyState::instance.DAT_RoundTableOrderArray[iVar4]]) {
@@ -96,8 +96,7 @@ namespace UI {
             DAT_ButtonW::instance = 0x17c;
             DAT_ButtonH::instance = 0x28;
             if (DAT_00df4288::instance) {
-                MACRO_CALL_MEMBER(
-                    UI::BottomLeftTextDisplayState_Func::renderCurrentlyDisplayedTextConstructionCost,
+                MACRO_CALL_MEMBER(UI::BottomLeftTextDisplayState_Func::renderCurrentlyDisplayedTextConstructionCost,
                     DAT_BottomLeftTextDisplayState::ptr)(0);
                 DAT_00df4288::instance = 0;
             }

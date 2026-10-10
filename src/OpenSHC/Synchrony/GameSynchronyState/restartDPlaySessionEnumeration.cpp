@@ -1,8 +1,8 @@
 #include "../../Synchrony.func.hpp"
 
 #include "OpenSHC/OS.func.hpp"
-#include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
 #include "OpenSHC/Synchrony.func.hpp"
+#include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
 #include "OpenSHC/DirectPlay/EnumSessionsFlagsEnum.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -36,12 +36,12 @@ namespace Synchrony {
         _pGUID.Data4[6] = '\0';
         _pGUID.Data4[7] = '\0';
         MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::fetchSessionGUID, this)(&_pGUID);
-        if ((this->unkEnumerationRelatedBool == false)
-            && ((respectTimeout != TRUE || (2999 < (int)(_now - TIME_EnumerateSessionsMoment::instance))))) {
+        if (this->unkEnumerationRelatedBool == false
+            && (respectTimeout != TRUE || (2999 < (int)(_now - TIME_EnumerateSessionsMoment::instance)))) {
             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::clearSessionsList, this)();
             MACRO_CALL(OS_Func::_memset)(&_dpSessionDesc2, 0, 0x50);
             static const GUID _sessionAppGuid
-                = {0x1d5e2f48, 0xe8c0, 0x49e5, {0xae, 0xd8, 0xb1, 0x24, 0xda, 0x9e, 0x30, 0x59}};
+                = { 0x1d5e2f48, 0xe8c0, 0x49e5, { 0xae, 0xd8, 0xb1, 0x24, 0xda, 0x9e, 0x30, 0x59 } };
             _dpSessionDesc2.guidApplication = _sessionAppGuid;
             this->unkEnumerationRelatedBool = true;
             _dpSessionDesc2.dwSize = 0x50;
@@ -51,8 +51,7 @@ namespace Synchrony {
                  */
                 this->DPLAYX_4A->EnumSessions(&_dpSessionDesc2, 0,
                     MACRO_CALL(Synchrony_Func::EnumSessionsCallback_addSession_async), (void*)0x0,
-                    DirectPlay::ESFE_RETURN_STATUS | DirectPlay::ESFE_ASYNC_ENUMERATION
-                        | DirectPlay::ESFE_AVAILABLE);
+                    DirectPlay::ESFE_RETURN_STATUS | DirectPlay::ESFE_ASYNC_ENUMERATION | DirectPlay::ESFE_AVAILABLE);
             }
             this->unkEnumerationRelatedBool = false;
             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::resolveEqualEntries, this)((GUID*)&_pGUID);

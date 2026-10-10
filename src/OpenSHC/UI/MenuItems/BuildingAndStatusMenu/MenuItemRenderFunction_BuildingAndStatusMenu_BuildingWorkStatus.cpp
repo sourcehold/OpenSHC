@@ -51,8 +51,8 @@ namespace UI {
             BuildingTypeShort BVar2
                 = DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
                       .buildingType;
-            if ((0x27 < (short)BVar2) && ((short)BVar2 < 0x2d)) {}
-            if ((0x23 < (short)BVar2) && ((short)BVar2 < 0x27)) {}
+            if (0x27 < (short)BVar2 && (short)BVar2 < 0x2d) {}
+            if (0x23 < (short)BVar2 && (short)BVar2 < 0x27) {}
             if (DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
                     .hasAccessToKeep
                 == 0) {
@@ -71,9 +71,8 @@ namespace UI {
                 if (sVar3) {
                     if (sVar1) {
                         MACRO_CALL_MEMBER(Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
-                            DE::SHCDE::TEXT_IN_GENERAL_BUILDINGS, (int)(sVar3 + 4),
-                            (int)(DAT_ButtonX::instance + 0x96), (int)(DAT_ButtonY::instance), Text::TTA_LEFT,
-                            0, 0x12, FALSE);
+                            DE::SHCDE::TEXT_IN_GENERAL_BUILDINGS, (int)(sVar3 + 4), (int)(DAT_ButtonX::instance + 0x96),
+                            (int)(DAT_ButtonY::instance), Text::TTA_LEFT, 0, 0x12, FALSE);
                     }
                     /*
                       added by script: "No labour"

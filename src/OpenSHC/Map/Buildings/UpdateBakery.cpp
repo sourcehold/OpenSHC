@@ -9,6 +9,7 @@
 #include "OpenSHC/DE/SHCDE/eSFX.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
+#include "OpenSHC/Map/Units/States/UnitStateShort.hpp"
 
 #include "OpenSHC/Globals/DAT_AICState.hpp"
 #include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
@@ -20,7 +21,6 @@
 #include "OpenSHC/Globals/DAT_SFXState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
-#include "OpenSHC/Map/Units/States/UnitStateShort.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -55,8 +55,8 @@ namespace Map {
         if ((char)((char)DAT_BuildingsState::instance.buildings[iVar8].uid
                 + (char)DAT_GameCore::instance.mapTimeInTicks)
             == '\0') {
-            MACRO_CALL_MEMBER(Map::TileMapState_Func::updateBuildingPlacementRotationPreview,
-                DAT_TileMapState::ptr)((int)(short)DAT_BuildingsState::instance.buildings[iVar8].x,
+            MACRO_CALL_MEMBER(Map::TileMapState_Func::updateBuildingPlacementRotationPreview, DAT_TileMapState::ptr)(
+                (int)(short)DAT_BuildingsState::instance.buildings[iVar8].x,
                 (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar8].y)));
             iVar8 = DAT_CurrentBuildingID::instance;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingVariation
@@ -73,21 +73,18 @@ namespace Map {
         if (!sVar5) {
             if (DAT_BuildingsState::instance.buildings[iVar8].animationActive != 0) {
                 sVar5 = DAT_BuildingsState::instance.buildings[iVar8].animationIndex;
-                if ((((sVar5 == 0x15) || (sVar5 == 0x62)) || (sVar5 == 0x73))
-                    || (((sVar5 == 0xc0 || (sVar5 == 0xd1))
-                        || ((sVar5 == 0x11e || ((sVar5 == 0x12f || (sVar5 == 0x17c)))))))) {
+                if (sVar5 == 0x15 || sVar5 == 0x62 || sVar5 == 0x73 || sVar5 == 0xc0 || sVar5 == 0xd1 || sVar5 == 0x11e
+                    || sVar5 == 0x12f || sVar5 == 0x17c) {
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                         (int)(short)DAT_BuildingsState::instance.buildings[iVar8].x,
-                        (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar8].y)),
-                        DE::SHCDE::FX_BAKE2);
+                        (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar8].y)), DE::SHCDE::FX_BAKE2);
                     iVar8 = DAT_CurrentBuildingID::instance;
                 }
                 sVar5 = DAT_BuildingsState::instance.buildings[iVar8].animationIndex;
-                if ((((sVar5 == 0x23) || (sVar5 == 0x81)) || (sVar5 == 0xdf)) || (sVar5 == 0x13d)) {
+                if (sVar5 == 0x23 || sVar5 == 0x81 || sVar5 == 0xdf || sVar5 == 0x13d) {
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                         (int)(short)DAT_BuildingsState::instance.buildings[iVar8].x,
-                        (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar8].y)),
-                        DE::SHCDE::FX_BAKE);
+                        (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar8].y)), DE::SHCDE::FX_BAKE);
                     iVar8 = DAT_CurrentBuildingID::instance;
                 }
             }
@@ -147,19 +144,18 @@ namespace Map {
                 *(undefined2*)((int)&DAT_BuildingsState::instance.buildings[0].buildingIsVisuallyActive + iVar9) = 1;
                 goto LAB_004149f5;
             }
-            if (UVar6 == ((UnitState)3)) {
+            if (UVar6 == (UnitState)3) {
                 *(undefined2*)((int)&DAT_BuildingsState::instance.buildings[0].buildingIsVisuallyActive + iVar9) = 1;
                 goto LAB_004149f5;
             }
         }
         *(undefined2*)((int)&DAT_BuildingsState::instance.buildings[0].buildingIsVisuallyActive + iVar9) = 0;
     LAB_004149f5:
-        MACRO_CALL_MEMBER(
-            Map::Buildings::BuildingsState_Func::updateVisuallyActiveState, DAT_BuildingsState::ptr)(iVar8);
+        MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updateVisuallyActiveState, DAT_BuildingsState::ptr)(
+            iVar8);
         if (*(short*)((int)&DAT_BuildingsState::instance.buildings[0].buildingIsVisuallyActive + iVar9)
             != *(short*)((int)DAT_BuildingsState::instance.buildings[0].resources + iVar9 + -0x52)) {
-            MACRO_CALL_MEMBER(Map::TileMapState_Func::updateBuildingGraphicsLayer, DAT_TileMapState::ptr)(
-                iVar8);
+            MACRO_CALL_MEMBER(Map::TileMapState_Func::updateBuildingGraphicsLayer, DAT_TileMapState::ptr)(iVar8);
             iVar9 = DAT_CurrentBuildingID::instance * 0x32c;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].oldVisualActiveState
                 = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingIsVisuallyActive;
@@ -179,7 +175,8 @@ namespace Map {
             } else if (sVar5 < 0x120) {
                 *(undefined4*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationSprite1 + iVar9) = 0x42;
             } else {
-                *(uint*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationSprite1 + iVar9) = (0x17d < sVar5) + 0x43;
+                *(uint*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationSprite1 + iVar9)
+                    = (0x17d < sVar5) + 0x43;
             }
         }
         piVar2 = (int*)((int)&DAT_BuildingsState::instance.buildings[0].animationTickCounter + iVar9);

@@ -43,14 +43,14 @@ namespace Map {
                 _tribeID_1 = -1;
                 do {
                     _tribeID_chosen = _tribeID_1;
-                    if (((((_pUnit->logicalState == Map::Units::ULS_NORMAL) && (!_pUnit->dying))
-                             && (_pUnit->ifSelectedThenPlayerID == playerID))
-                            && ((_unitTribeID = (int)_pUnit->tribeID,
-                                0 < _unitTribeID
-                                    && (_stanceCount[(short)this->tribes[_unitTribeID].unitStance]
-                                        = _stanceCount[(short)this->tribes[_unitTribeID].unitStance] + 1,
-                                        _tribeID_chosen = _unitTribeID, _tribeID_1 != -1))))
-                        && (_unitTribeID != _tribeID_1)) {
+                    if (_pUnit->logicalState == Map::Units::ULS_NORMAL && !_pUnit->dying
+                        && _pUnit->ifSelectedThenPlayerID == playerID
+                        && (_unitTribeID = (int)_pUnit->tribeID,
+                            0 < _unitTribeID
+                                && (_stanceCount[(short)this->tribes[_unitTribeID].unitStance]
+                                    = _stanceCount[(short)this->tribes[_unitTribeID].unitStance] + 1,
+                                    _tribeID_chosen = _unitTribeID, _tribeID_1 != -1))
+                        && _unitTribeID != _tribeID_1) {
                         /*
                           if unit is in a tribe, count its tribes stance   and if
                          */

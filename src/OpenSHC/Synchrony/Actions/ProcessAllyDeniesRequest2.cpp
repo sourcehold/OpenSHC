@@ -40,8 +40,8 @@ namespace Synchrony {
             } while (cVar1 != '\0');
             iVar4 = 0;
         } else {
-            if (((iVar4 != 1) || (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[param_1] == -1))
-                || (param_1 != DAT_GameSynchronyState::instance.currentPlayerSlotID))
+            if (iVar4 != 1 || DAT_GameSynchronyState::instance.currentPlayerFullIDArray[param_1] == -1
+                || param_1 != DAT_GameSynchronyState::instance.currentPlayerSlotID)
                 goto LAB_004ad285;
             /*
               added by script: "Will not Attack"
@@ -57,8 +57,8 @@ namespace Synchrony {
             } while (cVar1 != '\0');
             iVar4 = DAT_GameState::instance.playerDataArray[param_2].requestedAttackTargetUnk;
         }
-        MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::addChatMessageToDisplayList,
-            DAT_GameSynchronyState::ptr)(param_2, iVar4);
+        MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::addChatMessageToDisplayList, DAT_GameSynchronyState::ptr)(
+            param_2, iVar4);
     LAB_004ad285:
         DAT_GameState::instance.playerDataArray[param_2].requestStateUnk = 0;
         DAT_GameState::instance.playerDataArray[param_1].isNotNervousByEnemyTroopValue = 0;

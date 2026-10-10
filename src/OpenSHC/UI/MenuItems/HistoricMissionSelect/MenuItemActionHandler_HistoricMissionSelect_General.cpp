@@ -48,8 +48,9 @@ namespace UI {
                     DAT_GameCore::instance.missionNumber1to20 = (DAT_00b96100::instance - param_1) + -1;
                     BOOL_CurrentMenuClickState::instance = FALSE;
                     DVar1 = timeGetTime();
-                    if ((DAT_GameCore::instance.missionNumber1to20 == DAT_MenuTextInputState::instance.lastClickedListIndex)
-                        && ((int)(DVar1 - DAT_MenuTextInputState::instance.lastListClickTime) < 500))
+                    if (DAT_GameCore::instance.missionNumber1to20
+                            == DAT_MenuTextInputState::instance.lastClickedListIndex
+                        && (int)(DVar1 - DAT_MenuTextInputState::instance.lastListClickTime) < 500)
                         goto LAB_00426c1c;
                     DAT_MenuTextInputState::instance.lastClickedListIndex = DAT_GameCore::instance.missionNumber1to20;
                     DAT_MenuTextInputState::instance.lastListClickTime = DVar1;

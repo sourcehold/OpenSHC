@@ -40,7 +40,7 @@ BOOLEnum OS::isEqualGUID(GUID* param_1, GUID* param_2)
                     goto LAB_0047c65f;
                 iVar2 = (uint) * (byte*)((int)&param_1->Data1 + 2) - (uint) * (byte*)((int)&param_2->Data1 + 2);
                 if (!iVar2) {
-                    if ((uVar3 == 3)
+                    if (uVar3 == 3
                         || (iVar2
                             = (uint) * (byte*)((int)&param_1->Data1 + 3) - (uint) * (byte*)((int)&param_2->Data1 + 3),
                             iVar2 == 0))

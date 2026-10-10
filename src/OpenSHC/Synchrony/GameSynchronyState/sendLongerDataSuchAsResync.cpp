@@ -32,16 +32,14 @@ namespace Synchrony {
                 .commandFunctions[this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].commandType + 0x15])();
         this->DAT_CommandParameterOffset = 0;
         iVar1 = this->DAT_CommandSize;
-        if ((200 < this->DAT_CommandSize)
-            && ((undefined1)commandCategory != Commands::GCT_SEND_RESYNC_LOGICALTILEMAP)) {
+        if (200 < this->DAT_CommandSize && (undefined1)commandCategory != Commands::GCT_SEND_RESYNC_LOGICALTILEMAP) {
             this->DAT_Packet.packet.commandProtocol = 0x7d;
             this->DAT_Packet.prefixedPacket.packet.commandProtocol = (undefined1)commandCategory;
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::moveLowerThreeBytesIntoParam2, DAT_LowLevelMemory::ptr)(
                 this->DAT_GameCommandArray + this->DAT_CurrentGameCommandID,
                 (void*)((int)(((int)&this->DAT_Packet + 2))));
-            iVar1 = MACRO_CALL_MEMBER(
-                Synchrony::GameSynchronyState_Func::compressOrCreateLengthPrefixedPacketUnk, this)(
-                this->DAT_CommandSize, (char*)((int)(this->DAT_GameCommandFixedParameterLocation)),
+            iVar1 = MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::compressOrCreateLengthPrefixedPacketUnk,
+                this)(this->DAT_CommandSize, (char*)((int)(this->DAT_GameCommandFixedParameterLocation)),
                 (void*)((int)(((int)&this->DAT_Packet + 5))));
             iVar1 = iVar1 + 1;
         }

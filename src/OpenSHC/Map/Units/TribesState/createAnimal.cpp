@@ -40,7 +40,7 @@ namespace Map {
             if ((int)tribeID < 1) {
                 return (dword)(0);
             }
-            if (((399 < x) || (399 < y)) || (*(char*)(y * 400 + 0x21aec98 + x) == '\0')) {
+            if (399 < x || 399 < y || *(char*)(y * 400 + 0x21aec98 + x) == '\0') {
                 return (dword)(0);
             }
             _tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
@@ -48,24 +48,21 @@ namespace Map {
                 if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x4a5014b1U)) {
                     return (dword)(0);
                 }
-                this->tribes[tribeID].tribeType
-                    = AI::Tribes::AITT_SWORDSMEN | AI::Tribes::AITT_SPEARMEN;
+                this->tribes[tribeID].tribeType = AI::Tribes::AITT_SWORDSMEN | AI::Tribes::AITT_SPEARMEN;
                 unitType = Map::Units::UT_ANTELOPESHDEER;
                 _rng2 = ((byte)SEC_RNG::instance.currentNumber2 & 3) + 9;
             } else if (animalType == Commands::M_MAPPER_LION) {
                 if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x4a5014b1U)) {
                     return (dword)(0);
                 }
-                this->tribes[tribeID].tribeType
-                    = AI::Tribes::AITT_SWORDSMEN | AI::Tribes::AITT_PIKEMEN;
+                this->tribes[tribeID].tribeType = AI::Tribes::AITT_SWORDSMEN | AI::Tribes::AITT_PIKEMEN;
                 unitType = Map::Units::UT_LIONSHWOLF;
                 _rng2 = ((byte)SEC_RNG::instance.currentNumber2 & 1) + 3;
             } else if (animalType == Commands::M_MAPPER_RABBIT) {
                 if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x4a5014b1U)) {
                     return (dword)(0);
                 }
-                this->tribes[tribeID].tribeType
-                    = AI::Tribes::AITT_SWORDSMEN | AI::Tribes::AITT_CROSSBOWMEN;
+                this->tribes[tribeID].tribeType = AI::Tribes::AITT_SWORDSMEN | AI::Tribes::AITT_CROSSBOWMEN;
                 unitType = Map::Units::UT_RABBIT;
                 _rng2 = ((byte)SEC_RNG::instance.currentNumber2 & 7) + 0xe;
             } else if (animalType == Commands::M_MAPPER_CAMEL) {
@@ -77,8 +74,8 @@ namespace Map {
                 _rng2 = ((byte)SEC_RNG::instance.currentNumber2 & 3) + 2;
             } else {
                 if (animalType == Commands::M_MAPPER_CROW_SEAGULL) {
-                    MACRO_CALL_MEMBER(Map::LandscapeState_Func::markNearbyTreesAsCrowTargets,
-                        DAT_LandscapeState::ptr)(x, (int)((int)(y)));
+                    MACRO_CALL_MEMBER(Map::LandscapeState_Func::markNearbyTreesAsCrowTargets, DAT_LandscapeState::ptr)(
+                        x, (int)((int)(y)));
                     return (dword)(0);
                 }
                 if (animalType == Commands::M_MAPPER_SEAGULL) {
@@ -138,13 +135,11 @@ namespace Map {
                 return (dword)(tribeID);
             }
             if (animalType == Commands::M_MAPPER_RABBIT) {
-                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::setRabbitSpawnXY, this)(
-                    x, (undefined4)((int)(y)));
+                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::setRabbitSpawnXY, this)(x, (undefined4)((int)(y)));
                 return (dword)(tribeID);
             }
             if (animalType == Commands::M_MAPPER_CAMEL) {
-                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::setCamelSpawnXY, this)(
-                    x, (undefined4)((int)(y)));
+                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::setCamelSpawnXY, this)(x, (undefined4)((int)(y)));
             }
             return (dword)(tribeID);
         }

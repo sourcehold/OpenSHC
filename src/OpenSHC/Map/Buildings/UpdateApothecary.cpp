@@ -36,7 +36,7 @@ namespace Map {
             DAT_CurrentBuildingID::instance);
         iVar2 = DAT_CurrentBuildingID::instance;
         iVar3 = (int)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].workerID[0];
-        if ((!iVar3) || (DAT_UnitsState::instance.units[iVar3].state.generic != ((UnitState)2))) {
+        if (!iVar3 || DAT_UnitsState::instance.units[iVar3].state.generic != (UnitState)2) {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingIsVisuallyActive = 0;
             DAT_BuildingsState::instance.buildings[iVar2].renderAnimation = 0;
             DAT_BuildingsState::instance.buildings[iVar2].animationIndex = 0;
@@ -44,8 +44,8 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingIsVisuallyActive = 1;
             DAT_BuildingsState::instance.buildings[iVar2].renderAnimation = 1;
         }
-        MACRO_CALL_MEMBER(
-            Map::Buildings::BuildingsState_Func::updateVisuallyActiveState, DAT_BuildingsState::ptr)(iVar2);
+        MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updateVisuallyActiveState, DAT_BuildingsState::ptr)(
+            iVar2);
         DAT_BuildingsState::instance.buildings[iVar2].animationIncrement = 1;
         if ((char)DAT_BuildingDefinedData::instance
                 .ApothecaryAnimationFrames[DAT_BuildingsState::instance.buildings[iVar2].animationIndex]
@@ -62,8 +62,7 @@ namespace Map {
                   .ApothecaryAnimationFrames[DAT_BuildingsState::instance.buildings[iVar2].animationIndex];
         if (DAT_BuildingsState::instance.buildings[iVar2].buildingIsVisuallyActive
             != DAT_BuildingsState::instance.buildings[iVar2].oldVisualActiveState) {
-            MACRO_CALL_MEMBER(Map::TileMapState_Func::updateBuildingGraphicsLayer, DAT_TileMapState::ptr)(
-                iVar2);
+            MACRO_CALL_MEMBER(Map::TileMapState_Func::updateBuildingGraphicsLayer, DAT_TileMapState::ptr)(iVar2);
             iVar2 = DAT_CurrentBuildingID::instance;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].oldVisualActiveState
                 = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingIsVisuallyActive;

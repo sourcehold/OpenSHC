@@ -136,8 +136,8 @@ namespace Map {
                     uVar9 = local_354 + _y10 * 10;
                     local_358 = 0;
                     do {
-                        if ((((uint)(local_358 + local_35c) < 400) && (uVar9 < 400))
-                            && (*(char*)(uVar9 * 400 + 0x21aec98 + local_358 + local_35c) != '\0')) {
+                        if ((uint)(local_358 + local_35c) < 400 && uVar9 < 400
+                            && *(char*)(uVar9 * 400 + 0x21aec98 + local_358 + local_35c) != '\0') {
                             pWVar7->firstMember = pWVar7->firstMember + 1;
                             _tile = DAT_ViewportRenderState::instance.translationMatrix[uVar9].addXgetTile + local_358
                                 + local_35c;
@@ -209,12 +209,12 @@ namespace Map {
                             if ((uVar6 & 0x2000000)) {
                                 this->grid[_x10][_y10].farmFieldTiles = this->grid[_x10][_y10].farmFieldTiles + 1;
                             }
-                            if (((int)DAT_TileMapState::instance.OrganismLayer[_tile] - 1U < 1999)
-                                && (((TVar3 = DAT_LandscapeState::instance
-                                             .trees[DAT_TileMapState::instance.OrganismLayer[_tile]]
-                                             .treeType,
-                                         TVar3 == ((TreeType)1) || (TVar3 == ((TreeType)2)))
-                                    || ((TVar3 == ((TreeType)3) || (TVar3 == ((TreeType)4))))))) {
+                            if ((int)DAT_TileMapState::instance.OrganismLayer[_tile] - 1U < 1999
+                                && ((TVar3 = DAT_LandscapeState::instance
+                                            .trees[DAT_TileMapState::instance.OrganismLayer[_tile]]
+                                            .treeType,
+                                        TVar3 == ((TreeType)1) || (TVar3 == ((TreeType)2)))
+                                    || ((TVar3 == ((TreeType)3) || (TVar3 == ((TreeType)4)))))) {
                                 this->grid[_x10][_y10].trees = this->grid[_x10][_y10].trees + 1;
                             }
                             if (DAT_TileMapState::instance.BuildingLayer[_tile] != 0) {
@@ -234,16 +234,12 @@ namespace Map {
                                     this->grid[_x10][_y10].keeps = this->grid[_x10][_y10].keeps + 1;
                                 } else if (BVar4 == Map::Buildings::BT_CAMPGROUND) {
                                     this->grid[_x10][_y10].keeps = this->grid[_x10][_y10].keeps + 1;
-                                } else if ((((BVar4 == Map::Buildings::BT_GATEHOUSELARGE)
-                                                || (BVar4 == Map::Buildings::BT_GATEHOUSESMALL))
-                                               || (((BVar4 == Map::Buildings::BT_WOODGATE1
-                                                        || ((((BVar4 == Map::Buildings::BT_WOODGATE2
-                                                                  || (BVar4 == Map::Buildings::BT_DRAWBRIDGE))
-                                                                 || (BVar4 == Map::Buildings::BT_TOWER1))
-                                                            || ((BVar4 == Map::Buildings::BT_TOWER2
-                                                                || (BVar4 == Map::Buildings::BT_TOWER3))))))
-                                                   || (BVar4 == Map::Buildings::BT_TOWER4))))
-                                    || (BVar4 == Map::Buildings::BT_TOWER5)) {
+                                } else if (BVar4 == Map::Buildings::BT_GATEHOUSELARGE
+                                    || BVar4 == Map::Buildings::BT_GATEHOUSESMALL
+                                    || BVar4 == Map::Buildings::BT_WOODGATE1 || BVar4 == Map::Buildings::BT_WOODGATE2
+                                    || BVar4 == Map::Buildings::BT_DRAWBRIDGE || BVar4 == Map::Buildings::BT_TOWER1
+                                    || BVar4 == Map::Buildings::BT_TOWER2 || BVar4 == Map::Buildings::BT_TOWER3
+                                    || BVar4 == Map::Buildings::BT_TOWER4 || BVar4 == Map::Buildings::BT_TOWER5) {
                                     this->grid[_x10][_y10].castlebuildings = this->grid[_x10][_y10].castlebuildings + 1;
                                 }
                                 if (*pBVar2 != Map::Buildings::BT_SIGNPOST) {

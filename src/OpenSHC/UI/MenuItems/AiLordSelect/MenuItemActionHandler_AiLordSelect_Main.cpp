@@ -34,8 +34,8 @@ namespace UI {
                 DAT_LobbyAddAICurrentlyHoveredAI::instance
                     = DAT_GameCore::instance.arrayOfLordIdsWithAIVsUnk[param_1 + -1];
                 iVar1 = 1;
-                while ((DAT_GameSynchronyState::instance.currentPlayerFullIDArray[iVar1] != -1
-                    || (DAT_GameSynchronyState::instance.currentAIArray[iVar1] != 0))) {
+                while (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[iVar1] != -1
+                    || DAT_GameSynchronyState::instance.currentAIArray[iVar1] != 0) {
                     iVar1 = iVar1 + 1;
                     if (8 < iVar1) {
                         DAT_MenuModalComposition1::instance.activeModalDialogID = UI::Enums::MMT_NONE;
@@ -46,15 +46,14 @@ namespace UI {
                     MACRO_CALL(Synchrony_Func::ResetAiVariationArrayValue)(iVar1);
                     DAT_GameSynchronyState::instance.DAT_PlayerSlotArraySomeValue[iVar1] = 1;
                     DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = iVar1;
-                    MACRO_CALL_MEMBER(
-                        Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
+                    MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
                         (Commands::GameCommandType)(Commands::GCT_SEND_RESYNC_TILEMAPDATA2
                             | Commands::GCT_LOAD_MAP_HEADER));
                     DAT_GameSynchronyState::instance.reparseMaps = TRUE;
                     MACRO_CALL(UI::Helpers_Func::PlayAMessageFromAI)(
                         DAT_GameSynchronyState::instance.currentAIArray[iVar1], 0x16);
-                    MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::reorderTeamsAndPositions,
-                        DAT_GameSynchronyState::ptr)();
+                    MACRO_CALL_MEMBER(
+                        Synchrony::GameSynchronyState_Func::reorderTeamsAndPositions, DAT_GameSynchronyState::ptr)();
                     iVar1 = 0;
                     if ((DAT_GameSynchronyState::instance.currentPlayerFullIDArray[1] != -1)
                         || (DAT_GameSynchronyState::instance.currentAIArray[1] != 0)) {

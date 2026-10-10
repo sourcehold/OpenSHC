@@ -20,12 +20,10 @@ namespace Synchrony {
     {
         BOOLEnum BVar1;
         DWORD DVar2;
-        if ((((this->currentGameMode != Game::GM_SOLITARY)
-                 && (this->currentGameMode != Game::GM_SKIRMISH_SINGLE_PLAYER))
-                && (this->isHost))
-            && ((this->skirmishAutoSaveEveryMinutes && (this->timeSkirmishGameStart)))) {
+        if (this->currentGameMode != Game::GM_SOLITARY && this->currentGameMode != Game::GM_SKIRMISH_SINGLE_PLAYER
+            && this->isHost && this->skirmishAutoSaveEveryMinutes && this->timeSkirmishGameStart) {
             BVar1 = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
-            if ((BVar1) && ((!this->syncStatus && (!this->saveRelated)))) {
+            if (BVar1 && !this->syncStatus && !this->saveRelated) {
                 DVar2 = timeGetTime();
                 if (this->skirmishAutoSaveEveryMinutes * 60000 < (int)(DVar2 - this->timeSkirmishGameStart)) {
                     /*
@@ -35,11 +33,10 @@ namespace Synchrony {
                     this->DAT_GameCommandParam0 = DAT_GameCore::instance.mapTimeInTicks;
                     this->lastAutoSaveTime = DVar2;
                     this->timeSkirmishGameStart = DVar2;
-                    this->DAT_GameCommandParam1 = MACRO_CALL_MEMBER(
-                        Synchrony::GameSynchronyState_Func::computeSomeHashOnUnitArray, this)();
+                    this->DAT_GameCommandParam1
+                        = MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::computeSomeHashOnUnitArray, this)();
                     this->DAT_GameCommandParam2 = 1;
-                    MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
-                        Commands::GCT_SAVE);
+                    MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(Commands::GCT_SAVE);
                 }
             }
         }

@@ -40,10 +40,10 @@ namespace Synchrony {
             _catapultID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe,
                 DAT_TribesState::ptr)(param_2, _unitSelectionIndex);
             _unitSelectionIndex = _unitSelectionIndex + 1;
-            if (((DAT_UnitsState::instance.units[_catapultID].logicalState == Map::Units::ULS_NORMAL)
-                    && (DAT_UnitsState::instance.units[_catapultID].dying == 0))
-                && ((UVar2 = DAT_UnitsState::instance.units[_catapultID].unitType,
-                    UVar2 == Map::Units::UT_S_CATAPULT || (UVar2 == Map::Units::UT_S_TREBUCHET)))) {
+            if (DAT_UnitsState::instance.units[_catapultID].logicalState == Map::Units::ULS_NORMAL
+                && DAT_UnitsState::instance.units[_catapultID].dying == 0
+                && (UVar2 = DAT_UnitsState::instance.units[_catapultID].unitType,
+                    UVar2 == Map::Units::UT_S_CATAPULT || (UVar2 == Map::Units::UT_S_TREBUCHET))) {
                 _amount = -(int)DAT_UnitsState::instance.units[_catapultID].stoneAmmunition;
                 _missingRocks = _amount + 20;
                 if (0 < _missingRocks) {
@@ -53,9 +53,8 @@ namespace Synchrony {
                         if ((int)_currStone < 1) {
                             return _currStone;
                         }
-                        MACRO_CALL_MEMBER(
-                            Map::Buildings::BuildingsState_Func::processResourceLoss, DAT_BuildingsState::ptr)(
-                            playerID, Game::Resources::RT_STONE, (int)((int)(_currStone)), 0);
+                        MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::processResourceLoss,
+                            DAT_BuildingsState::ptr)(playerID, Game::Resources::RT_STONE, (int)((int)(_currStone)), 0);
                         psVar1 = &DAT_UnitsState::instance.units[_catapultID].stoneAmmunition;
                         *psVar1 = *psVar1 + (short)_currStone * 2;
                         return &DAT_UnitsState::instance.units[_catapultID].stoneAmmunition;

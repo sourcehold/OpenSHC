@@ -36,9 +36,9 @@ namespace Map {
                     /*
                       bug: shouldn't this check if the unit is part of the tribe !? It checks for   being selected I see
                      */
-                    if ((((_pUnit->logicalState == Map::Units::ULS_NORMAL) && (!_pUnit->dying))
-                            && (_pUnit->owner == DAT_GameSynchronyState::instance.currentPlayerSlotID))
-                        && ((_pUnit->isSelected && ((short)_pUnit->unitType < 0x50)))) {
+                    if (_pUnit->logicalState == Map::Units::ULS_NORMAL && !_pUnit->dying
+                        && _pUnit->owner == DAT_GameSynchronyState::instance.currentPlayerSlotID && _pUnit->isSelected
+                        && (short)_pUnit->unitType < 0x50) {
                         *(int*)((int)_countOfUnitTypes + (short)_pUnit->unitType * 4)
                             = *(int*)((int)_countOfUnitTypes + (short)_pUnit->unitType * 4) + 1;
                     }
@@ -56,7 +56,7 @@ namespace Map {
                 }
                 _index = _index + Map::Units::UT_PEASANT;
             } while (_index < 80);
-            if ((_maximumTroopType != ((UnitType)0)) && (maximumCount != (int*)0x0)) {
+            if (_maximumTroopType != (UnitType)0 && maximumCount != (int*)0x0) {
                 *maximumCount = _maximumCount;
             }
             return (UnitType)(_maximumTroopType);

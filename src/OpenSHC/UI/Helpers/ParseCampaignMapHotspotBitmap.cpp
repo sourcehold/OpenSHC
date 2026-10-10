@@ -65,7 +65,7 @@ namespace UI {
             if (bVar10) {
                 iVar6 = -iVar6;
             }
-            if ((*(int*)((int)dstBuffer + 4) == 800) && (iVar6 == 600)) {
+            if (*(int*)((int)dstBuffer + 4) == 800 && iVar6 == 600) {
                 MACRO_CALL(OS_Func::_fseek)(_File, 10, FILE_BEGIN);
                 MACRO_CALL(OS_Func::_fread)(&local_1c, 4, 1, _File);
                 MACRO_CALL(OS_Func::_fseek)(_File, (long)((int)(local_1c)), FILE_BEGIN);

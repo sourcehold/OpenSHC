@@ -40,32 +40,31 @@ namespace Map {
             && (DAT_BuildingsState::instance.buildings[_buildingID].insideUnitUID1
                 == DAT_UnitsState::instance.units[_unitID].uid)) {
             iVar4 = 1;
-            if (DAT_UnitsState::instance.units[_unitID].state.generic
-                == Map::Units::States::USDU_WAITING_IN_CAGE) {
+            if (DAT_UnitsState::instance.units[_unitID].state.generic == Map::Units::States::USDU_WAITING_IN_CAGE) {
                 iVar3 = 1;
                 iVar4 = 1;
             }
         }
         _unitID = (int)DAT_BuildingsState::instance.buildings[_buildingID].insideUnitID2;
-        if (((_unitID)
-                && (DAT_BuildingsState::instance.buildings[_buildingID].insideUnitUID2
-                    == DAT_UnitsState::instance.units[_unitID].uid))
+        if (_unitID
+            && DAT_BuildingsState::instance.buildings[_buildingID].insideUnitUID2
+                == DAT_UnitsState::instance.units[_unitID].uid
             && (iVar4 = iVar4 + 1,
                 DAT_UnitsState::instance.units[_unitID].state.generic == Map::Units::States::USDU_WAITING_IN_CAGE)) {
             iVar3 = iVar3 + 1;
         }
         _unitID = (int)DAT_BuildingsState::instance.buildings[_buildingID].insideUnitID3;
-        if (((_unitID)
-                && (DAT_BuildingsState::instance.buildings[_buildingID].insideUnitUID3
-                    == DAT_UnitsState::instance.units[_unitID].uid))
+        if (_unitID
+            && DAT_BuildingsState::instance.buildings[_buildingID].insideUnitUID3
+                == DAT_UnitsState::instance.units[_unitID].uid
             && (iVar4 = iVar4 + 1,
                 DAT_UnitsState::instance.units[_unitID].state.generic == Map::Units::States::USDU_WAITING_IN_CAGE)) {
             iVar3 = iVar3 + 1;
         }
         _unitID = (int)DAT_BuildingsState::instance.buildings[_buildingID].insideUnitID4;
-        if (((_unitID)
-                && (DAT_BuildingsState::instance.buildings[_buildingID].insideUnitUID4
-                    == DAT_UnitsState::instance.units[_unitID].uid))
+        if (_unitID
+            && DAT_BuildingsState::instance.buildings[_buildingID].insideUnitUID4
+                == DAT_UnitsState::instance.units[_unitID].uid
             && (iVar4 = iVar4 + 1,
                 DAT_UnitsState::instance.units[_unitID].state.generic == Map::Units::States::USDU_WAITING_IN_CAGE)) {
             iVar3 = iVar3 + 1;

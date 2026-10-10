@@ -70,8 +70,8 @@ namespace Synchrony {
             if (!local_2c) {
                 if (1 < _someCounter) {
                     _somePlayerID = 1;
-                    while ((_teamMemberCounts[_somePlayerID] == 0
-                        || (_validPlayerCount = _validPlayerCount + 1, _teamMemberCounts[_somePlayerID] < 3))) {
+                    while (_teamMemberCounts[_somePlayerID] == 0
+                        || (_validPlayerCount = _validPlayerCount + 1, _teamMemberCounts[_somePlayerID] < 3)) {
                         _somePlayerID = _somePlayerID + 1;
                         if (8 < _somePlayerID) {
                             return _validPlayerCount;

@@ -52,13 +52,12 @@ namespace UI {
                                     .playerDeathRelated
                             == 0;
                     } else {
-                        bVar1 = DAT_GameSynchronyState::instance.currentGameMode
-                            == Game::GM_SKIRMISH_SINGLE_PLAYER;
+                        bVar1 = DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SKIRMISH_SINGLE_PLAYER;
                     }
-                    if (((!bVar1) || (DAT_GameCore::instance.gameMode_2 == Game::GM_EDITOR))
-                        || ((DAT_GameCore::instance.gameMode_2 == Game::GM_SIEGE_THAT
-                            || ((DAT_GameCore::instance.field24_0x6c
-                                || (DAT_GameCore::instance.gameMode_2 == Game::GM_CRUSADER_TUTORIAL))))))
+                    if (!bVar1 || DAT_GameCore::instance.gameMode_2 == Game::GM_EDITOR
+                        || DAT_GameCore::instance.gameMode_2 == Game::GM_SIEGE_THAT
+                        || DAT_GameCore::instance.field24_0x6c
+                        || DAT_GameCore::instance.gameMode_2 == Game::GM_CRUSADER_TUTORIAL)
                         break;
                 }
                 /*
@@ -78,15 +77,13 @@ namespace UI {
                         break;
                 } else if (!DAT_GameSynchronyState::instance.isHost)
                     break;
-                if ((((DAT_GameCore::instance.gameMode_2 != Game::GM_EDITOR)
-                         && (DAT_GameCore::instance.gameMode_2 != Game::GM_SIEGE_THAT))
-                        && (!DAT_GameCore::instance.field24_0x6c))
-                    && (DAT_GameCore::instance.gameMode_2 != Game::GM_CRUSADER_TUTORIAL)) {
+                if (DAT_GameCore::instance.gameMode_2 != Game::GM_EDITOR
+                    && DAT_GameCore::instance.gameMode_2 != Game::GM_SIEGE_THAT && !DAT_GameCore::instance.field24_0x6c
+                    && DAT_GameCore::instance.gameMode_2 != Game::GM_CRUSADER_TUTORIAL) {
                     /*
                       save
                      */
-                    MACRO_CALL_MEMBER(
-                        UI::MenuTextInputState_Func::loadOrSaveGame, DAT_MenuTextInputState::ptr)(10);
+                    MACRO_CALL_MEMBER(UI::MenuTextInputState_Func::loadOrSaveGame, DAT_MenuTextInputState::ptr)(10);
                     MACRO_CALL_MEMBER(Input::MouseState_Func::resetMouseState2, DAT_MouseState::ptr)();
                 }
                 break;
@@ -135,22 +132,21 @@ namespace UI {
                  */
                 MACRO_CALL_MEMBER(
                     UI::MenuTextInputState_Func::clearAnyOtherModalDialogs, DAT_MenuTextInputState::ptr)();
-                MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog,
-                    DAT_MenuModalComposition2::ptr)(UI::Enums::MMT_NONE, FALSE);
-                MACRO_CALL_MEMBER(Text::TextEditorState_Func::openInGameHelpDialog, DAT_TextEditorState::ptr)(
-                    0);
+                MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog, DAT_MenuModalComposition2::ptr)(
+                    UI::Enums::MMT_NONE, FALSE);
+                MACRO_CALL_MEMBER(Text::TextEditorState_Func::openInGameHelpDialog, DAT_TextEditorState::ptr)(0);
                 MACRO_CALL_MEMBER(Input::MouseState_Func::resetMouseState2, DAT_MouseState::ptr)();
                 return;
             case 0x27:
                 /*
                   "Briefing"
                  */
-                if (((DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY)
-                        && (DAT_GameCore::instance.gameMode_2 != Game::GM_CRUSADER_TUTORIAL))
-                    && (((DAT_GameCore::instance.gameMode_2 == Game::GM_CAMPAIGN_MISSION
-                             || (DAT_GameCore::instance.gameMode_2 == Game::GM_ECONOMIC_CAMPAIGN_SH1))
+                if (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY
+                    && DAT_GameCore::instance.gameMode_2 != Game::GM_CRUSADER_TUTORIAL
+                    && ((DAT_GameCore::instance.gameMode_2 == Game::GM_CAMPAIGN_MISSION
+                            || (DAT_GameCore::instance.gameMode_2 == Game::GM_ECONOMIC_CAMPAIGN_SH1))
                         || ((DAT_GameCore::instance.gameMode_2 == Game::GM_BUILDERUnk
-                            && (DAT_MapPropertiesState::instance.scenarionMissionType)))))) {
+                            && (DAT_MapPropertiesState::instance.scenarionMissionType))))) {
                     MACRO_CALL_MEMBER(
                         UI::MenuTextInputState_Func::clearAnyOtherModalDialogs, DAT_MenuTextInputState::ptr)();
                     DAT_GameCore::instance.gameSuspended = 1;
@@ -165,11 +161,11 @@ namespace UI {
                 /*
                   "Restart Mission"
                  */
-                if ((((DAT_GameCore::instance.gameMode_2 != Game::GM_CAMPAIGN_MISSION)
-                         && (DAT_GameCore::instance.gameMode_2 != Game::GM_ECONOMIC_CAMPAIGN_SH1))
-                        && ((DAT_GameCore::instance.gameMode_2 != Game::GM_BUILDERUnk
-                            || (DAT_GameCore::instance.field24_0x6c))))
-                    && (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SKIRMISH_SINGLE_PLAYER))
+                if (DAT_GameCore::instance.gameMode_2 != Game::GM_CAMPAIGN_MISSION
+                    && DAT_GameCore::instance.gameMode_2 != Game::GM_ECONOMIC_CAMPAIGN_SH1
+                    && (DAT_GameCore::instance.gameMode_2 != Game::GM_BUILDERUnk
+                        || (DAT_GameCore::instance.field24_0x6c))
+                    && DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SKIRMISH_SINGLE_PLAYER)
                     break;
                 goto LAB_00496da8;
             }

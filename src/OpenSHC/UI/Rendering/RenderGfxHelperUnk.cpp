@@ -25,14 +25,14 @@ namespace UI {
                 DAT_WindowAndDirectDraw::instance.resolutionX + -0x400 >> 1,
                 DAT_WindowAndDirectDraw::instance.resolutionY + -0x300 >> 1);
         }
-        if ((DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth <= xPos)
-            && (((_width + xPos <= DAT_WindowAndDirectDraw::instance.resolutionX
-                             - DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth
-                     && (DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight <= yPos))
-                && (_height + yPos <= DAT_WindowAndDirectDraw::instance.resolutionY
-                        - DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight)))) {
-            MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderLoadedGfx,
-                DAT_TextureRenderCoreObject::ptr)(loadedGfxIndex, xPos, yPos);
+        if (DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth <= xPos
+            && _width + xPos
+                <= DAT_WindowAndDirectDraw::instance.resolutionX - DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth
+            && DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight <= yPos
+            && _height + yPos <= DAT_WindowAndDirectDraw::instance.resolutionY
+                    - DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight) {
+            MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderLoadedGfx, DAT_TextureRenderCoreObject::ptr)(
+                loadedGfxIndex, xPos, yPos);
         }
         MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::drawGfxOnFlaggedSurface,
             DAT_TextureRenderCoreObject::ptr)(loadedGfxIndex, xPos, yPos);

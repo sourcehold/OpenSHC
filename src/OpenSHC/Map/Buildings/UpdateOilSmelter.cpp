@@ -159,8 +159,7 @@ namespace Map {
                 && (DAT_BuildingsState::instance.buildings[iVar5].animationIndex == 10)) {
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                     (int)(short)DAT_BuildingsState::instance.buildings[iVar5].x,
-                    (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar5].y)),
-                    DE::SHCDE::FX_POT_OPEN);
+                    (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar5].y)), DE::SHCDE::FX_POT_OPEN);
             }
             if ((DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationActive != 0)
                 && (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex == 0xd)) {
@@ -181,9 +180,9 @@ namespace Map {
                 piVar1 = DAT_BuildingsState::instance.buildings[iVar5].resources + 7;
                 *piVar1 = *piVar1 + -1;
                 iVar5 = DAT_BuildingsState::instance.buildings[iVar5].engineerUnitID;
-                if (((iVar5) && (DAT_UnitsState::instance.units[iVar5].unitType == Map::Units::UT_E_ENGINEER))
-                    && (DAT_UnitsState::instance.units[iVar5].state.generic
-                        == (Map::Units::States::US_STAND_UPUnk | Map::Units::States::US_IDLEUnk))) {
+                if (iVar5 && DAT_UnitsState::instance.units[iVar5].unitType == Map::Units::UT_E_ENGINEER
+                    && DAT_UnitsState::instance.units[iVar5].state.generic
+                        == (Map::Units::States::US_STAND_UPUnk | Map::Units::States::US_IDLEUnk)) {
                     DAT_UnitsState::instance.units[iVar5].resourceToDeposit = 1;
                 }
             } else {
@@ -306,14 +305,16 @@ namespace Map {
                 if (iVar5 < 9) {
                     *(int*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6) = iVar4 + 1;
                     if (iVar7 < 1) {
-                        *(undefined4*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6) = 0;
+                        *(undefined4*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6)
+                            = 0;
                         goto LAB_004164bc;
                     }
                     iVar7 = iVar7 + 0x70;
                 } else {
                     *(int*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6) = iVar4 + 1;
                     if (iVar7 < 1) {
-                        *(undefined4*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6) = 0;
+                        *(undefined4*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6)
+                            = 0;
                         goto LAB_004164bc;
                     }
                     iVar7 = iVar7 + 0x75;

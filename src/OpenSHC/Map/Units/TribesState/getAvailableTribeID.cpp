@@ -19,7 +19,7 @@ namespace Map {
             int _tribeID;
             if (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY) {
                 _tribeID = 1249;
-                while ((this->tribes[_tribeID].tribeState != 0 || (this->tribes[_tribeID].time != 0))) {
+                while (this->tribes[_tribeID].tribeState != 0 || this->tribes[_tribeID].time != 0) {
                     _tribeID = _tribeID + -1;
                     DAT_CurrentTribeID::instance = _tribeID;
                     if (_tribeID < 1) {
@@ -38,7 +38,7 @@ namespace Map {
                     /*
                       is tribe slot in use?
                      */
-                    while ((this->tribes[_tribeID].tribeState != 0 || (this->tribes[_tribeID].time != 0))) {
+                    while (this->tribes[_tribeID].tribeState != 0 || this->tribes[_tribeID].time != 0) {
                         _tribeID = _tribeID + -8;
                         DAT_CurrentTribeID::instance = _tribeID;
                         if (_tribeID < 1) {

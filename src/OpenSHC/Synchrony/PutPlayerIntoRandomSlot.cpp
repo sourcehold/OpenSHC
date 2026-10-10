@@ -61,9 +61,8 @@ void Synchrony::PutPlayerIntoRandomSlot(int param_1)
         iVar3 = (int)SEC_RNG::instance.currentNumber1 % (int)(uVar2 - _playerPositionsCount);
         MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber1, SEC_RNG::ptr)();
         iVar1 = 0;
-        while (((DAT_GameCore::instance.keepPositions[iVar1].x < 0
-                    || (-1 < DAT_GameSynchronyState::instance.playerPositionsArray[iVar1]))
-            || (iVar3 = iVar3 + -1, -1 < iVar3))) {
+        while (DAT_GameCore::instance.keepPositions[iVar1].x < 0
+            || -1 < DAT_GameSynchronyState::instance.playerPositionsArray[iVar1] || (iVar3 = iVar3 + -1, -1 < iVar3)) {
             iVar1 = iVar1 + 1;
             if (7 < iVar1) {}
         }

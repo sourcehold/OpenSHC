@@ -22,23 +22,21 @@ namespace UI {
             BuildingTypeShort _buildingType;
             if (0 < buildingIndex) {
                 _playerIndex = (int)DAT_BuildingsState::instance.buildings[buildingIndex].owner;
-                if ((DAT_GameState::instance.mapAndTime.playerTeams[_playerIndex]
+                if (DAT_GameState::instance.mapAndTime.playerTeams[_playerIndex]
                         == DAT_GameState::instance.mapAndTime
-                            .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID])
-                    || ((DAT_GameSynchronyState::instance.currentPlayerFullIDArray[_playerIndex] == -1
-                        && (DAT_GameSynchronyState::instance.currentAIArray[_playerIndex] != 0)))) {
+                            .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                    || (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[_playerIndex] == -1
+                        && (DAT_GameSynchronyState::instance.currentAIArray[_playerIndex] != 0))) {
                     MACRO_CALL_MEMBER(
                         Map::Buildings::BuildingsState_Func::extendResourceCountdownForPlayerBuildingsOfType,
                         DAT_BuildingsState::ptr)(
-                        (Map::Buildings::BuildingType)(int)(short)DAT_BuildingsState::instance
-                            .buildings[buildingIndex]
+                        (Map::Buildings::BuildingType)(int)(short)DAT_BuildingsState::instance.buildings[buildingIndex]
                             .buildingType,
                         1, _playerIndex);
                     _buildingType = DAT_BuildingsState::instance.buildings[buildingIndex].buildingType;
-                    if ((_buildingType == Map::Buildings::BT_MANORHOUSE)
-                        || (((_buildingType == Map::Buildings::BT_STONEKEEP
-                                 || (_buildingType == Map::Buildings::BT_STRONGHOLD))
-                            || (_buildingType == Map::Buildings::BT_CAMPGROUND)))) {
+                    if (_buildingType == Map::Buildings::BT_MANORHOUSE || _buildingType == Map::Buildings::BT_STONEKEEP
+                        || _buildingType == Map::Buildings::BT_STRONGHOLD
+                        || _buildingType == Map::Buildings::BT_CAMPGROUND) {
                         MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::displayPopularityAndGoldPopups,
                             DAT_BuildingsState::ptr)(buildingIndex, 0, 0, 0);
                     }

@@ -23,7 +23,7 @@ BOOL __stdcall Synchrony::EnumSessionsCallback_addSession_async(
     WCHAR* _pSessionName2;
     WCHAR _char;
     GUID* _pGUID;
-    if ((!(dwFlags & 1)) && (DAT_GameSynchronyState::instance.DPLAY_SessionsCount < 50)) {
+    if (!(dwFlags & 1) && DAT_GameSynchronyState::instance.DPLAY_SessionsCount < 50) {
         pWVar3 = lpThisSD->lpszSessionName;
         pWVar1 = pWVar3 + 1;
         do {

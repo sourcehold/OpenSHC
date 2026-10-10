@@ -22,11 +22,11 @@ namespace Map {
                     uint uVar3 = (uint)DAT_GameState::instance.mapAndTime.lionLocationsXY[uVar2].y;
                     *param_2 = uVar3;
                     uVar2 = *param_1;
-                    if ((((uVar2 < 400) && (uVar3 < 400)) && (*(char*)(uVar2 + 0x21aec98 + uVar3 * 400) != '\0'))
-                        && (!(DAT_TileMapState::instance
-                                  .LogicLayer[DAT_ViewportRenderState::instance.translationMatrix[uVar3].addXgetTile
-                                      + uVar2]
-                            & 0x4a5014b1U))) {
+                    if (uVar2 < 400 && uVar3 < 400 && *(char*)(uVar2 + 0x21aec98 + uVar3 * 400) != '\0'
+                        && !(DAT_TileMapState::instance
+                                 .LogicLayer[DAT_ViewportRenderState::instance.translationMatrix[uVar3].addXgetTile
+                                     + uVar2]
+                            & 0x4a5014b1U)) {
                         uVar2 = (DAT_GameState::instance.mapAndTime.animalSpawnSlotCursor + 1 + iVar4) % 4;
                         DAT_GameState::instance.mapAndTime.animalSpawnSlotCursor = (short)uVar2;
                         return (undefined4)(1);

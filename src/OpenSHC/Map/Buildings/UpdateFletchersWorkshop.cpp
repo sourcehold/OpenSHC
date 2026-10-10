@@ -10,6 +10,7 @@
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
+#include "OpenSHC/Map/Units/States/UnitStateShort.hpp"
 
 #include "OpenSHC/Globals/DAT_AICState.hpp"
 #include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
@@ -21,7 +22,6 @@
 #include "OpenSHC/Globals/DAT_SFXState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
-#include "OpenSHC/Map/Units/States/UnitStateShort.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -60,8 +60,8 @@ namespace Map {
         if ((char)((char)DAT_BuildingsState::instance.buildings[buildingID_00].uid
                 + (char)DAT_GameCore::instance.mapTimeInTicks)
             == '\0') {
-            MACRO_CALL_MEMBER(Map::TileMapState_Func::updateBuildingPlacementRotationPreview,
-                DAT_TileMapState::ptr)((int)(short)DAT_BuildingsState::instance.buildings[buildingID_00].x,
+            MACRO_CALL_MEMBER(Map::TileMapState_Func::updateBuildingPlacementRotationPreview, DAT_TileMapState::ptr)(
+                (int)(short)DAT_BuildingsState::instance.buildings[buildingID_00].x,
                 (int)((int)((short)DAT_BuildingsState::instance.buildings[buildingID_00].y)));
             buildingID_00 = DAT_CurrentBuildingID::instance;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingVariation
@@ -70,12 +70,11 @@ namespace Map {
         buildingID = buildingID_00 * 0x32c;
         bVar6 = true;
         sVar3 = DAT_BuildingsState::instance.buildings[buildingID_00].state;
-        if (DAT_BuildingsState::instance.buildings[buildingID_00].producedItemTypeNext
-            == Game::Resources::RT_BOW) {
+        if (DAT_BuildingsState::instance.buildings[buildingID_00].producedItemTypeNext == Game::Resources::RT_BOW) {
             if (!sVar3) {
-                if ((DAT_BuildingsState::instance.buildings[buildingID_00].animationActive != 0)
-                    && ((sVar3 = DAT_BuildingsState::instance.buildings[buildingID_00].animationIndex,
-                        sVar3 == 8 || (sVar3 == 0x3a)))) {
+                if (DAT_BuildingsState::instance.buildings[buildingID_00].animationActive != 0
+                    && (sVar3 = DAT_BuildingsState::instance.buildings[buildingID_00].animationIndex,
+                        sVar3 == 8 || (sVar3 == 0x3a))) {
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                         (int)(short)DAT_BuildingsState::instance.buildings[buildingID_00].x,
                         (int)((int)((short)DAT_BuildingsState::instance.buildings[buildingID_00].y)),
@@ -112,13 +111,13 @@ namespace Map {
                 if (sVar3 != 1)
                     goto LAB_00412fc8;
                 if (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY) {
-                    if ((char)DAT_BuildingDefinedData::instance
-                            .FletchersWorkshopAnimationFrames1[DAT_BuildingsState::instance.buildings[buildingID_00].animationIndex]
+                    if ((char)DAT_BuildingDefinedData::instance.FletchersWorkshopAnimationFrames1
+                            [DAT_BuildingsState::instance.buildings[buildingID_00].animationIndex]
                         < '\x01') {
                         bVar6 = true;
                     } else {
-                        iVar7 = (int)(char)DAT_BuildingDefinedData::instance
-                                    .FletchersWorkshopAnimationFrames1[DAT_BuildingsState::instance.buildings[buildingID_00].animationIndex];
+                        iVar7 = (int)(char)DAT_BuildingDefinedData::instance.FletchersWorkshopAnimationFrames1
+                                    [DAT_BuildingsState::instance.buildings[buildingID_00].animationIndex];
                     LAB_00412f7b:
                         DAT_BuildingsState::instance.buildings[buildingID_00].animationFrame = iVar7;
                         bVar6 = false;
@@ -139,7 +138,8 @@ namespace Map {
                       Done working on product
                      */
                     *piVar1 = *piVar1 + 1;
-                    *(undefined2*)((int)&DAT_BuildingsState::instance.buildings[0].animationCycleCompleted + buildingID) = 1;
+                    *(undefined2*)((int)&DAT_BuildingsState::instance.buildings[0].animationCycleCompleted + buildingID)
+                        = 1;
                     *(undefined2*)((int)DAT_BuildingsState::instance.buildings[0].resources + buildingID + -8) = 0;
                 }
             }
@@ -160,11 +160,10 @@ namespace Map {
             }
             if (sVar3 == 1) {
                 if (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY) {
-                    if ('\0' < (char)DAT_BuildingDefinedData::instance
-                            .FletchersWorkshopAnimationFrames2[DAT_BuildingsState::instance.buildings[buildingID_00].animationIndex]) {
-                        iVar7
-                            = (char)DAT_BuildingDefinedData::instance
-                                  .FletchersWorkshopAnimationFrames2[DAT_BuildingsState::instance.buildings[buildingID_00].animationIndex]
+                    if ('\0' < (char)DAT_BuildingDefinedData::instance.FletchersWorkshopAnimationFrames2
+                            [DAT_BuildingsState::instance.buildings[buildingID_00].animationIndex]) {
+                        iVar7 = (char)DAT_BuildingDefinedData::instance.FletchersWorkshopAnimationFrames2
+                                    [DAT_BuildingsState::instance.buildings[buildingID_00].animationIndex]
                             + 0x24;
                         goto LAB_00412f7b;
                     }
@@ -200,8 +199,8 @@ namespace Map {
         }
         *(undefined2*)((int)&DAT_BuildingsState::instance.buildings[0].buildingIsVisuallyActive + buildingID) = 0;
     LAB_00413026:
-        MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updateVisuallyActiveState,
-            DAT_BuildingsState::ptr)(buildingID_00);
+        MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updateVisuallyActiveState, DAT_BuildingsState::ptr)(
+            buildingID_00);
         if (*(short*)((int)&DAT_BuildingsState::instance.buildings[0].buildingIsVisuallyActive + buildingID)
             != *(short*)((int)DAT_BuildingsState::instance.buildings[0].resources + buildingID + -0x52)) {
             MACRO_CALL_MEMBER(Map::TileMapState_Func::updateBuildingGraphicsLayer, DAT_TileMapState::ptr)(

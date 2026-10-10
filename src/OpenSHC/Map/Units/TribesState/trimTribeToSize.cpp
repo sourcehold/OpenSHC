@@ -22,9 +22,8 @@ namespace Map {
             int _currentTribeID;
             _currentTribeID = DAT_CurrentTribeID::instance;
             unitSelectionIndex = 0;
-            if (((this->tribes[DAT_CurrentTribeID::instance].tribeState != 0)
-                    && (iVar3 = (int)this->tribes[DAT_CurrentTribeID::instance].size, smallerSize <= iVar3))
-                && (0 < iVar3)) {
+            if (this->tribes[DAT_CurrentTribeID::instance].tribeState != 0
+                && (iVar3 = (int)this->tribes[DAT_CurrentTribeID::instance].size, smallerSize <= iVar3) && 0 < iVar3) {
                 do {
                     iVar3 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
                         _currentTribeID, unitSelectionIndex);
@@ -33,7 +32,7 @@ namespace Map {
                     unitSelectionIndex = unitSelectionIndex + 1;
                     if ((((UVar2 == ((UnitLogicState)1)) || (UVar2 == Map::Units::ULS_NORMAL))
                             || (UVar2 == Map::Units::ULS_TRANSITIONING))
-                        && (smallerSize <= unitSelectionIndex)) {
+                        && smallerSize <= unitSelectionIndex) {
                         *pUVar1 = Map::Units::ULS_REMOVE;
                     }
                 } while (unitSelectionIndex < this->tribes[_currentTribeID].size);

@@ -38,11 +38,11 @@ namespace UI {
                 if (DAT_TileMapState::instance.editorActiveBrush < 1) {
                     DAT_TileMapState::instance.editorActiveBrush = 7;
                 }
-                if ((((DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_BIGROCK1)
-                         && (DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_BIGROCK2))
-                        && (DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_BIGROCK3))
-                    && ((DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_BIGROCK4
-                        && (DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_BIGROCK5))))
+                if (DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_BIGROCK1
+                    && DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_BIGROCK2
+                    && DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_BIGROCK3
+                    && DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_BIGROCK4
+                    && DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_BIGROCK5)
                     goto LAB_004315c1;
                 if (DAT_TileMapState::instance.editorActiveBrush == 2) {
                     DAT_TileMapState::instance.editorActiveBrush = 1;
@@ -64,12 +64,11 @@ namespace UI {
                 if (7 < DAT_TileMapState::instance.editorActiveBrush) {
                     DAT_TileMapState::instance.editorActiveBrush = 1;
                 }
-                if (((DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_BIGROCK1)
-                        && (DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_BIGROCK2))
-                    && ((DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_BIGROCK3
-                        && ((DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_BIGROCK4
-                            && (DAT_TileMapState::instance.currentMapperCommand
-                                != Commands::M_MAPPER_BIGROCK5))))))
+                if (DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_BIGROCK1
+                    && DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_BIGROCK2
+                    && DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_BIGROCK3
+                    && DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_BIGROCK4
+                    && DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_BIGROCK5)
                     goto LAB_004315c1;
                 if (DAT_TileMapState::instance.editorActiveBrush == 2) {
                 LAB_004315a2:
@@ -83,8 +82,8 @@ namespace UI {
                     goto LAB_004315c1;
                 }
                 goto LAB_00431832;
-                default:
-                    break;
+            default:
+                break;
             case Commands::M_MAPPER_MIN:
                 DAT_TileMapState::instance.mapperMax = FALSE;
                 DAT_TileMapState::instance.currentMapperCommand = param_1;
@@ -104,8 +103,7 @@ namespace UI {
                 return;
             case Commands::M_MAPPER_AFFECT_TYPE:
                 if (DAT_TileMapState::instance.editorAffectType + 1 < 2) {
-                    DAT_TileMapState::instance.editorAffectType
-                        = DAT_TileMapState::instance.editorAffectType + 1;
+                    DAT_TileMapState::instance.editorAffectType = DAT_TileMapState::instance.editorAffectType + 1;
                 }
                 DAT_TileMapState::instance.editorAffectType = 0;
                 return;
@@ -168,12 +166,12 @@ namespace UI {
                     DAT_TileMapState::instance.mapSize);
                 DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
                 MACRO_CALL_MEMBER(Map::TileMapState_Func::forceFullTileMapRedraw, DAT_TileMapState::ptr)();
-                MACRO_CALL_MEMBER(UI::MinimapViewState_Func::setTileColorsDependingOnMapSize,
-                    DAT_MinimapViewState::ptr)(0, 100);
-                MACRO_CALL_MEMBER(UI::MinimapViewState_Func::setMapPropertyDependingOnMapSize,
-                    DAT_MinimapViewState::ptr)(0, 100);
-                MACRO_CALL_MEMBER(Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize,
-                    DAT_ViewportRenderState::ptr)();
+                MACRO_CALL_MEMBER(
+                    UI::MinimapViewState_Func::setTileColorsDependingOnMapSize, DAT_MinimapViewState::ptr)(0, 100);
+                MACRO_CALL_MEMBER(
+                    UI::MinimapViewState_Func::setMapPropertyDependingOnMapSize, DAT_MinimapViewState::ptr)(0, 100);
+                MACRO_CALL_MEMBER(
+                    Rendering::ViewportRenderState_Func::setViewportBasedOnMapSize, DAT_ViewportRenderState::ptr)();
                 return;
             case Commands::M_MAPPER_MP_KEEP1:
             case Commands::M_MAPPER_MP_KEEP2:
@@ -187,7 +185,8 @@ namespace UI {
                     = param_1 - Commands::M_MAPPER_SUB_MODE_FEATURE_MP;
                 if (DAT_GameCore::instance.mapU2MiddleBytes[2] == 0) {
                     DAT_TileMapState::instance.currentMapperCommand
-                        = (Commands::MappersEnum)((DAT_GameCore::instance.mapU2MiddleBytes[1] != 0) + Commands::M_MAPPER_KEEP1);
+                        = (Commands::MappersEnum)((DAT_GameCore::instance.mapU2MiddleBytes[1] != 0)
+                            + Commands::M_MAPPER_KEEP1);
                 }
                 DAT_TileMapState::instance.currentMapperCommand = Commands::M_MAPPER_KEEP3;
             }

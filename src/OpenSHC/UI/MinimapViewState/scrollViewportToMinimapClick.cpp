@@ -26,10 +26,10 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004B5110
     void MinimapViewState::scrollViewportToMinimapClick()
     {
-        if ((DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_BUILD_MENU)
-            && (((DAT_GameCore::instance.activeMenuTab.buildMenuTab == UI::Enums::BMTT_SOLDIERS
-                     || (DAT_TileMapState::instance.shiftRelated0or3 == 1))
-                && (!DAT_MouseState::instance.rightClickState)))) {}
+        if (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_BUILD_MENU
+            && (DAT_GameCore::instance.activeMenuTab.buildMenuTab == UI::Enums::BMTT_SOLDIERS
+                || (DAT_TileMapState::instance.shiftRelated0or3 == 1))
+            && !DAT_MouseState::instance.rightClickState) {}
         DAT_ViewportRenderState::instance.viewportState.viewportX
             = ((((DAT_MouseState::instance.screenSpaceX - this->x) / this->widthFactor) * this->oneOrTwo
                    - (DAT_ViewportRenderState::instance.viewportState.viewportHeight + -5) / 2)

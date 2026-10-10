@@ -16,7 +16,7 @@ namespace Map {
             int iVar2;
             short* _Src;
             short* psVar3;
-            if ((receivedMapVersion != packagerMapVersion) && ((int)receivedMapVersion < 169)) {
+            if (receivedMapVersion != packagerMapVersion && (int)receivedMapVersion < 169) {
                 iVar2 = 1249;
                 _Dst = this->tribes + 0x4e1;
                 _Src = this->tribes[944].unitSelectionBitMasked + 0x7a;

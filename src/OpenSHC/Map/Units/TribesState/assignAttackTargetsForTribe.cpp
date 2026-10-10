@@ -55,11 +55,11 @@ namespace Map {
                     _unitID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
                         tribeID, unitSelectionIndex);
                     unitSelectionIndex = unitSelectionIndex + 1;
-                    if ((((DAT_UnitsState::instance.units[_unitID].logicalState == Map::Units::ULS_NORMAL)
-                             && (DAT_UnitsState::instance.units[_unitID].dying == 0))
-                            && (DAT_UnitsState::instance.units[_unitID].usingTeleport == 0))
-                        && ((DAT_UnitsState::instance.units[_unitID].field303_0x413 == 0
-                            && (DAT_UnitsState::instance.units[_unitID].moveableUnk != 0)))) {
+                    if (DAT_UnitsState::instance.units[_unitID].logicalState == Map::Units::ULS_NORMAL
+                        && DAT_UnitsState::instance.units[_unitID].dying == 0
+                        && DAT_UnitsState::instance.units[_unitID].usingTeleport == 0
+                        && DAT_UnitsState::instance.units[_unitID].field303_0x413 == 0
+                        && DAT_UnitsState::instance.units[_unitID].moveableUnk != 0) {
                         /*
                           fixme: this is some interesting data happening all over the unit code
                          */
@@ -77,9 +77,8 @@ namespace Map {
                                         = Map::Units::States::US_MOVE_TO_DESTINATION;
                                     if (targetType != Map::Units::STBT_0x414)
                                         goto LAB_0052471e;
-                                    _freeTile
-                                        = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::findFreeTileNearby,
-                                            DAT_UnitsState::ptr)(_unitID, _tile1);
+                                    _freeTile = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::findFreeTileNearby,
+                                        DAT_UnitsState::ptr)(_unitID, _tile1);
                                     if (_freeTile) {
                                         MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::setDestinationForUnit,
                                             DAT_UnitsState::ptr)(_unitID,
@@ -116,12 +115,11 @@ namespace Map {
                                             Map::Units::TroopValueState_Func::findEnemyBuildingsClosestToUnit,
                                             DAT_TroopValueState::ptr)(_unitID);
                                     } else if (targetType == Map::Units::STBT_0x3fb) {
-                                        _tile2 = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::
-                                                                       calculateTile2PeoplValueClosestToUnit,
+                                        _tile2 = MACRO_CALL_MEMBER(
+                                            Map::Units::TroopValueState_Func::calculateTile2PeoplValueClosestToUnit,
                                             DAT_TroopValueState::ptr)(_unitID);
                                     } else if (targetType == Map::Units::STBT_0x3fd) {
-                                        _tile2 = MACRO_CALL_MEMBER(
-                                            Map::Units::TroopValueState_Func::findEnemyLord,
+                                        _tile2 = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::findEnemyLord,
                                             DAT_TroopValueState::ptr)(_unitID);
                                     } else if (targetType == Map::Units::STBT_0x3f6) {
                                         _tile2 = MACRO_CALL_MEMBER(
@@ -135,8 +133,8 @@ namespace Map {
                                     } else {
                                         if (targetType != Map::Units::STBT_0x3f7)
                                             continue;
-                                        _tile2 = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::
-                                                                       calculateTile2MoatValueClosestToUnit,
+                                        _tile2 = MACRO_CALL_MEMBER(
+                                            Map::Units::TroopValueState_Func::calculateTile2MoatValueClosestToUnit,
                                             DAT_TroopValueState::ptr)(_unitID);
                                     }
                                     goto LAB_00524638;
@@ -160,18 +158,16 @@ namespace Map {
                                           .addXgetTile;
                                 DAT_UnitsState::instance.units[_unitID].unknownDigMoatOrWallAttackFlag1015
                                     = (undefined2)targetType;
-                                iVar5 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::stopUnitIfNextToTarget,
-                                    DAT_UnitsState::ptr)(_unitID);
+                                iVar5 = MACRO_CALL_MEMBER(
+                                    Map::Units::UnitsState_Func::stopUnitIfNextToTarget, DAT_UnitsState::ptr)(_unitID);
                                 if (!iVar5) {
                                     if (BVar4) {
                                         DAT_PathFindingState::instance.allAssassinsUnk = 1;
                                     }
-                                    BVar6
-                                        = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::setDestinationForUnit,
-                                            DAT_UnitsState::ptr)(_unitID, _x, _y, 0);
+                                    BVar6 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::setDestinationForUnit,
+                                        DAT_UnitsState::ptr)(_unitID, _x, _y, 0);
                                     if (!BVar6) {
-                                        DAT_UnitsState::instance.units[_unitID].logicalState
-                                            = Map::Units::ULS_REMOVE;
+                                        DAT_UnitsState::instance.units[_unitID].logicalState = Map::Units::ULS_REMOVE;
                                     }
                                 }
                                 if ((int)DAT_UnitsState::instance.units[_unitID].selectionTargetUnitID == _unitID) {
@@ -181,9 +177,8 @@ namespace Map {
                             }
                         } else {
                             UVar1 = DAT_UnitsState::instance.units[_unitID].state.generic;
-                            if (((UVar1 != Map::Units::States::US_MELEE_ATTACK_WALL)
-                                    && (UVar1 != Map::Units::States::US_MOVE_TO_DESTINATION))
-                                && (UVar1 != ((UnitState)0x67))) {
+                            if (UVar1 != Map::Units::States::US_MELEE_ATTACK_WALL
+                                && UVar1 != Map::Units::States::US_MOVE_TO_DESTINATION && UVar1 != (UnitState)0x67) {
                                 UVar2 = DAT_UnitsState::instance.units[_unitID].unitType;
                                 if (UVar2 == Map::Units::UT_E_SPEAR) {
                                     bVar7 = UVar1 == Map::Units::States::US_AIM_WEAPONUnk;
@@ -194,13 +189,12 @@ namespace Map {
                                 } else {
                                     if (UVar2 != Map::Units::UT_TUNNELER)
                                         goto LAB_00524621;
-                                    if ((((UVar1 == ((UnitState)2)) || (UVar1 == ((UnitState)3)))
-                                            || (UVar1 == Map::Units::States::US_RELOAD_WEAPONUnk))
-                                        || (UVar1 == Map::Units::States::US_STAND_UPUnk))
+                                    if (UVar1 == (UnitState)2 || UVar1 == (UnitState)3
+                                        || UVar1 == Map::Units::States::US_RELOAD_WEAPONUnk
+                                        || UVar1 == Map::Units::States::US_STAND_UPUnk)
                                         continue;
                                     bVar7 = UVar1
-                                        == (Map::Units::States::US_STAND_UPUnk
-                                            | Map::Units::States::US_IDLEUnk);
+                                        == (Map::Units::States::US_STAND_UPUnk | Map::Units::States::US_IDLEUnk);
                                 }
                                 if (!bVar7)
                                     goto LAB_00524621;

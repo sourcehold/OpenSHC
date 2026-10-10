@@ -68,7 +68,7 @@ namespace Map {
             bVar2 = DAT_BuildingDefinedData::instance
                         .WoodcuttersHutAnimationFrames[DAT_BuildingsState::instance.buildings[iVar4].animationIndex];
             DAT_BuildingsState::instance.buildings[iVar4].animationFrame = (int)(char)bVar2;
-            if (((char)bVar2 == 0x10) && (DAT_BuildingsState::instance.buildings[iVar4].animationActive != 0)) {
+            if ((char)bVar2 == 0x10 && DAT_BuildingsState::instance.buildings[iVar4].animationActive != 0) {
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                     (int)(short)DAT_BuildingsState::instance.buildings[iVar4].x,
                     (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar4].y)), DE::SHCDE::FX_SAW);

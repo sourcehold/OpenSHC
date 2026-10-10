@@ -28,8 +28,7 @@ namespace Map {
             int _unitSelectionIndex;
             int _targetUnitID;
             _unitSelectionIndex = 0;
-            _allAssassins
-                = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::isTribeAllAssassins, this)(tribeID);
+            _allAssassins = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::isTribeAllAssassins, this)(tribeID);
             this->tribes[tribeID].someUnitID = 0;
             if (storeAsRallyPoint) {
                 _targetUnitID = this->tribes[tribeID].selectionTargetUnitID;
@@ -46,14 +45,13 @@ namespace Map {
                     _unitID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
                         tribeID, _unitSelectionIndex);
                     _unitSelectionIndex = _unitSelectionIndex + 1;
-                    if ((((DAT_UnitsState::instance.units[_unitID].logicalState == Map::Units::ULS_NORMAL)
-                             && (DAT_UnitsState::instance.units[_unitID].dying == 0))
-                            && (DAT_UnitsState::instance.units[_unitID].usingTeleport == 0))
-                        && (((DAT_UnitsState::instance.units[_unitID].field303_0x413 == 0
-                                 && (DAT_UnitsState::instance.units[_unitID].state.generic
-                                     != Map::Units::States::US_MELEE_ATTACK))
-                            && ((DAT_UnitsState::instance.units[_unitID].moveableUnk != 0
-                                && (DAT_UnitsState::instance.units[_unitID].moveRelatedFlag != 1)))))) {
+                    if (DAT_UnitsState::instance.units[_unitID].logicalState == Map::Units::ULS_NORMAL
+                        && DAT_UnitsState::instance.units[_unitID].dying == 0
+                        && DAT_UnitsState::instance.units[_unitID].usingTeleport == 0
+                        && DAT_UnitsState::instance.units[_unitID].field303_0x413 == 0
+                        && DAT_UnitsState::instance.units[_unitID].state.generic != Map::Units::States::US_MELEE_ATTACK
+                        && DAT_UnitsState::instance.units[_unitID].moveableUnk != 0
+                        && DAT_UnitsState::instance.units[_unitID].moveRelatedFlag != 1) {
                         DAT_UnitsState::instance.units[_unitID].plannedDestinationX = (short)x1;
                         DAT_UnitsState::instance.units[_unitID].state.generic
                             = Map::Units::States::US_MOVE_TO_DESTINATION;
@@ -67,8 +65,7 @@ namespace Map {
                         if (_allAssassins) {
                             DAT_PathFindingState::instance.allAssassinsUnk = 1;
                         }
-                        MACRO_CALL_MEMBER(
-                            Map::Units::UnitsState_Func::setDestinationForUnit, DAT_UnitsState::ptr)(
+                        MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::setDestinationForUnit, DAT_UnitsState::ptr)(
                             _unitID, (uint)((int)((int)(short)x1)), (uint)((int)((int)(short)y1)), 0);
                     }
                 } while (_unitSelectionIndex < this->tribes[tribeID].size);

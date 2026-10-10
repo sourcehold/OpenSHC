@@ -28,9 +28,9 @@ namespace UI {
         }
         if (this->currentlyDisplayedTextIsDisplayedUnk) {
             if (importanceUnk < this->currentlyDisplayedTextImportanceUnk) {}
-            if (((textGroupIndex == this->currentlyDisplayedUnkTextGroupIndex_0x4)
-                    && (textNumInGroup == this->currentlyDisplayedUnkTextNumInGroup_0x8))
-                && (param_4.buildingType == this->currentlyDisplayedUnktextExtraObject.buildingType))
+            if (textGroupIndex == this->currentlyDisplayedUnkTextGroupIndex_0x4
+                && textNumInGroup == this->currentlyDisplayedUnkTextNumInGroup_0x8
+                && param_4.buildingType == this->currentlyDisplayedUnktextExtraObject.buildingType)
                 goto LAB_004f4e46;
         }
         this->countdown = 0;
@@ -41,16 +41,16 @@ namespace UI {
                 TVar4 = UI::Enums::TMBLLSTE_BUILDING_TEXT;
             }
             if (DAT_RenderingDefinedData::instance.TextMessageLookupTable[0].messageType
-                != ((TextMessageBLLookupStructTypeEnum)0xffffffff)) {
+                != (TextMessageBLLookupStructTypeEnum)0xffffffff) {
                 iVar1 = 0;
                 TVar2 = DAT_RenderingDefinedData::instance.TextMessageLookupTable[0].messageType;
                 iVar3 = 0;
                 do {
-                    if ((TVar4 == TVar2)
-                        && (param_4.buildingType
+                    if (TVar4 == TVar2
+                        && param_4.buildingType
                             == *(MappersEnum*)((int)&DAT_RenderingDefinedData::instance.TextMessageLookupTable[0]
                                                    .associatedType
-                                + iVar1))) {
+                                + iVar1)) {
                         this->currentlyDisplayedUnkTextGroupIndex_0x4
                             = DAT_RenderingDefinedData::instance.TextMessageLookupTable[iVar3].textGroupIndex;
                         this->currentlyDisplayedUnkTextNumInGroup_0x8
@@ -65,12 +65,11 @@ namespace UI {
         } else {
             this->currentlyDisplayedUnkTextGroupIndex_0x4 = textGroupIndex;
             this->currentlyDisplayedUnkTextNumInGroup_0x8 = textNumInGroup;
-            if (((messageTypeUnk == 1) && (textGroupIndex == 0x4d)) && (textNumInGroup == 1)) {
+            if (messageTypeUnk == 1 && textGroupIndex == 0x4d && textNumInGroup == 1) {
                 /*
                   "Not enough workers available to run this building."
                  */
-                MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
-                    "placement_warning1.wav");
+                MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)("placement_warning1.wav");
             }
         }
         this->currentlyDisplayedUnktextExtraObject = param_4;

@@ -120,15 +120,16 @@ namespace UI {
                         if (3 < DAT_GameState::instance.mapAndTime.difficulty) {
                             DAT_GameState::instance.mapAndTime.difficulty = 0;
                         }
-                        MACRO_CALL(UI::Helpers_Func::SomeSiegeRelatedCopying)(DAT_GameState::instance.mapAndTime.difficulty);
+                        MACRO_CALL(UI::Helpers_Func::SomeSiegeRelatedCopying)(
+                            DAT_GameState::instance.mapAndTime.difficulty);
                     }
                     break;
                 case 0x4a:
                     /*
                       Advanced?
                      */
-                    if (((!DAT_GameCore::instance.mapU4Int1_2) && (DAT_MapMissionType::instance == 2))
-                        && (DAT_GameSynchronyState::instance.currentPlayerSlotID == 2)) {
+                    if (!DAT_GameCore::instance.mapU4Int1_2 && DAT_MapMissionType::instance == 2
+                        && DAT_GameSynchronyState::instance.currentPlayerSlotID == 2) {
                         DAT_SH1_SiegeAdvancedMode::instance = DAT_SH1_SiegeAdvancedMode::instance ^ 1;
                     }
                     break;

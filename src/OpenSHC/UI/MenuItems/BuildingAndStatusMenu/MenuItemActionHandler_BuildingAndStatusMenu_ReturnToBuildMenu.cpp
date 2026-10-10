@@ -29,8 +29,7 @@ namespace UI {
         void BuildingAndStatusMenu::MenuItemActionHandler_BuildingAndStatusMenu_ReturnToBuildMenu(int param_1, ...)
         {
             bool bVar1;
-            MACRO_CALL_MEMBER(
-                Map::Buildings::BuildingsState_Func::extendResourceCountdownForPlayerBuildingsOfType,
+            MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::extendResourceCountdownForPlayerBuildingsOfType,
                 DAT_BuildingsState::ptr)((Map::Buildings::BuildingType)(short)DAT_BuildingsState::instance
                                              .buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
                                              .buildingType,
@@ -41,23 +40,23 @@ namespace UI {
             }
             if (!DAT_ViewportRenderState::instance.viewportState.field0_0x0) {}
             if (DAT_GameCore::instance.activeMenuTab.inBuildingTab == DE::SHCDE::IBM_INSIDE_BARRACKS) {
-                if ((0x14b < (int)DAT_TileMapState::instance.currentMapperCommand)
-                    && ((int)DAT_TileMapState::instance.currentMapperCommand < 0x153)) {}
+                if (0x14b < (int)DAT_TileMapState::instance.currentMapperCommand
+                    && (int)DAT_TileMapState::instance.currentMapperCommand < 0x153) {}
             } else if (DAT_GameCore::instance.activeMenuTab.tabType == UI::Enums::BASMTT_MERCENARYPOST) {
-                if ((0x167 < (int)DAT_TileMapState::instance.currentMapperCommand)
-                    && ((int)DAT_TileMapState::instance.currentMapperCommand < 0x16f)) {}
+                if (0x167 < (int)DAT_TileMapState::instance.currentMapperCommand
+                    && (int)DAT_TileMapState::instance.currentMapperCommand < 0x16f) {}
             } else if (DAT_GameCore::instance.activeMenuTab.tabType == UI::Enums::BASMTT_ENGINEERSGUILD) {
-                if ((0x16e < (int)DAT_TileMapState::instance.currentMapperCommand)
-                    && ((int)DAT_TileMapState::instance.currentMapperCommand < 0x171)) {}
+                if (0x16e < (int)DAT_TileMapState::instance.currentMapperCommand
+                    && (int)DAT_TileMapState::instance.currentMapperCommand < 0x171) {}
             } else {
                 if (DAT_GameCore::instance.activeMenuTab.tabType == UI::Enums::BASMTT_TUNNELERSGUILD) {
-                    bVar1 = DAT_TileMapState::instance.currentMapperCommand
-                        == Commands::M_MAPPER_PLACE_ASSEMBLY_POINTT1;
+                    bVar1
+                        = DAT_TileMapState::instance.currentMapperCommand == Commands::M_MAPPER_PLACE_ASSEMBLY_POINTT1;
                 } else {
                     if (DAT_GameCore::instance.activeMenuTab.tabType != UI::Enums::BASMTT_CATHEDRAL)
                         goto LAB_00440340;
-                    bVar1 = DAT_TileMapState::instance.currentMapperCommand
-                        == Commands::M_MAPPER_PLACE_ASSEMBLY_POINTK1;
+                    bVar1
+                        = DAT_TileMapState::instance.currentMapperCommand == Commands::M_MAPPER_PLACE_ASSEMBLY_POINTK1;
                 }
                 if (bVar1) {}
             }

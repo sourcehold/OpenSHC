@@ -57,21 +57,19 @@ namespace Rendering {
                 sfxFileName = sfxFileName + 1;
             } while (_runChar != '\0');
             this->mbr_0x928 = this->currentMessageUnknownValue2_0xd4;
-            MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::setExtraActiveModalDialog,
-                DAT_MenuModalComposition2::ptr)(UI::Enums::MMT_DISPLAY_AI_LORD_MESSAGE,
-                DAT_MenuHandlerState::instance.x + 0x2d5, DAT_WindowAndDirectDraw::instance.resolutionY + -0x99);
+            MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::setExtraActiveModalDialog, DAT_MenuModalComposition2::ptr)(
+                UI::Enums::MMT_DISPLAY_AI_LORD_MESSAGE, DAT_MenuHandlerState::instance.x + 0x2d5,
+                DAT_WindowAndDirectDraw::instance.resolutionY + -0x99);
             if (this->currentMessageVfxFile_0xc[0] != '\0') {
                 DAT_GameCore::instance.isBinkVideoPlaying = 1;
-                if ((DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_BUILD_MENU)
-                    && ((DAT_GameCore::instance.activeMenuTab.tabType == UI::Enums::BASMTT_SIEGETENT_SIEGETOWER
-                        || (DAT_GameCore::instance.activeMenuTab.tabType
-                            == UI::Enums::BASMTT_SIEGETENT_SHIELD)))) {
+                if (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_BUILD_MENU
+                    && (DAT_GameCore::instance.activeMenuTab.tabType == UI::Enums::BASMTT_SIEGETENT_SIEGETOWER
+                        || (DAT_GameCore::instance.activeMenuTab.tabType == UI::Enums::BASMTT_SIEGETENT_SHIELD))) {
                     MACRO_CALL_MEMBER(Game::GameCore_Func::swapBuildMenuTab, DAT_GameCore::ptr)();
                     if (DAT_GameCore::instance.buildmenuMenuTabToSwitchTo.tabType
                         == UI::Enums::BASMTT_SIEGETENT_SIEGETOWER) {
                         if (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_BUILD_MENU) {
-                            DAT_GameCore::instance.buildmenuMenuTabToSwitchTo.tabType
-                                = UI::Enums::BASMTT_HUNTERSHUT;
+                            DAT_GameCore::instance.buildmenuMenuTabToSwitchTo.tabType = UI::Enums::BASMTT_HUNTERSHUT;
                         } else if (DAT_GameCore::instance.currentMenuViewType
                             == UI::Enums::MVT_MAP_EDITOR_LANDSCAPING) {
                             DAT_GameCore::instance.landscapingmenuMenuTabToSwitchTo = 0xe7;
@@ -80,8 +78,8 @@ namespace Rendering {
                     MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                         (UI::Enums::MenuViewType)DAT_GameCore::instance.currentMenuViewType, 0);
                 }
-                MACRO_CALL_MEMBER(Rendering::Bink::BinkControlClass_Func::playBINK, DAT_BinkControlState::ptr)(
-                    1, binkFileName, 0, 0, DAT_MenuHandlerState::instance.x + 0x23b,
+                MACRO_CALL_MEMBER(Rendering::Bink::BinkControlClass_Func::playBINK, DAT_BinkControlState::ptr)(1,
+                    binkFileName, 0, 0, DAT_MenuHandlerState::instance.x + 0x23b,
                     DAT_MenuHandlerState::instance.y + 0x1d1, 1);
             }
             if (this->currentMessageSfxFile_0x70[0] != '\0') {
@@ -94,13 +92,12 @@ namespace Rendering {
                 _flagsAndLoopCount = -536870911;
                 _filename = MACRO_CALL_MEMBER(
                     IO::ResourceManager_Func::getFileNameOfCurrentActiveResource, DAT_ResourceManager::ptr)();
-                MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::playSoundOnStream3Unk,
-                    DAT_SoundSystemState::ptr)(_filename, _flagsAndLoopCount);
+                MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::playSoundOnStream3Unk, DAT_SoundSystemState::ptr)(
+                    _filename, _flagsAndLoopCount);
                 this->mbr_0x92c = 0;
                 if (this->currentMessageVfxFile_0xc[0] != '\0') {
-                    _isSpeech1Playing
-                        = MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::isSampleOrStreamPlaying,
-                            DAT_SoundSystemState::ptr)(Audio::MSS::enums::SND_STR_SPEECH_1);
+                    _isSpeech1Playing = MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::isSampleOrStreamPlaying,
+                        DAT_SoundSystemState::ptr)(Audio::MSS::enums::SND_STR_SPEECH_1);
                     if (_isSpeech1Playing) {
                         MACRO_CALL_MEMBER(Rendering::Bink::BinkControlClass_Func::setBinkSndStreamAndStartTime,
                             DAT_BinkControlState::ptr)(1, Audio::MSS::enums::SND_STR_SPEECH_1);

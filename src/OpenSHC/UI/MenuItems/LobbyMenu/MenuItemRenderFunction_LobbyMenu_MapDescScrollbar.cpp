@@ -25,18 +25,15 @@ namespace UI {
             int param_1, int thumbYPos, int param_3, int thumbHeight, BOOLEnum isDragged)
         {
             BOOLEnum BVar1;
-            if (((DAT_MenuModalComposition1::instance.activeModalDialogID != UI::Enums::MMT_ROUNDTABLE)
-                    && (DAT_MenuModalComposition1::instance.activeModalDialogID
-                        != UI::Enums::MMT_BASIC_AI_LORD_SELECT))
-                && (DAT_MenuModalComposition1::instance.activeModalDialogID
-                    != UI::Enums::MMT_EXTENDED_AI_LORD_SELECT)) {
+            if (DAT_MenuModalComposition1::instance.activeModalDialogID != UI::Enums::MMT_ROUNDTABLE
+                && DAT_MenuModalComposition1::instance.activeModalDialogID != UI::Enums::MMT_BASIC_AI_LORD_SELECT
+                && DAT_MenuModalComposition1::instance.activeModalDialogID != UI::Enums::MMT_EXTENDED_AI_LORD_SELECT) {
                 BVar1 = MACRO_CALL(UI::Helpers_Func::AModalDialogIsActiveButIsNotQuitting)();
                 if (!BVar1) {
                     DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = BVar1;
-                    MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawScrollbar,
-                        DAT_PencilRenderCore::ptr)(DAT_ButtonX::instance, (int)((int)(DAT_ButtonY::instance)),
-                        (int)((int)(DAT_ButtonH::instance)), thumbYPos, isDragged, thumbHeight,
-                        (int)((int)(DAT_ButtonBackgroundBlendStrength::instance)));
+                    MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawScrollbar, DAT_PencilRenderCore::ptr)(
+                        DAT_ButtonX::instance, (int)((int)(DAT_ButtonY::instance)), (int)((int)(DAT_ButtonH::instance)),
+                        thumbYPos, isDragged, thumbHeight, (int)((int)(DAT_ButtonBackgroundBlendStrength::instance)));
                 }
             }
         }

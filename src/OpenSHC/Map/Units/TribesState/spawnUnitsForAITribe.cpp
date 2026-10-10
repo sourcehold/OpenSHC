@@ -22,7 +22,7 @@ namespace Map {
             UnitTypeShort UVar1;
             int unitID;
             int aiUnitBehaviourType;
-            if (((0 < param_2) || (0 < param_3)) && (0 < param_6)) {
+            if (((0 < param_2) || (0 < param_3)) && 0 < param_6) {
                 microXPosition = param_2 * 8;
                 param_2 = param_6;
                 do {
@@ -31,11 +31,9 @@ namespace Map {
                     if (unitID) {
                         DAT_UnitsState::instance.units[unitID].calculatedOwnerPlayerIndex = param_7;
                         UVar1 = DAT_UnitsState::instance.units[unitID].unitType;
-                        if ((((UVar1 == Map::Units::UT_E_ARCHER) || (UVar1 == Map::Units::UT_E_XBOW))
-                                || ((UVar1 == Map::Units::UT_A_ARCHER
-                                    || ((UVar1 == Map::Units::UT_A_SLINGER
-                                        || (UVar1 == Map::Units::UT_A_HARCHER))))))
-                            || (UVar1 == Map::Units::UT_A_FIRETHROWER)) {
+                        if (UVar1 == Map::Units::UT_E_ARCHER || UVar1 == Map::Units::UT_E_XBOW
+                            || UVar1 == Map::Units::UT_A_ARCHER || UVar1 == Map::Units::UT_A_SLINGER
+                            || UVar1 == Map::Units::UT_A_HARCHER || UVar1 == Map::Units::UT_A_FIRETHROWER) {
                             aiUnitBehaviourType = 0x11;
                         } else {
                             aiUnitBehaviourType = 0x14;

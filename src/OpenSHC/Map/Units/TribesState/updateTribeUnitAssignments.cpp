@@ -36,25 +36,24 @@ namespace Map {
                         _tribeSize = this->tribes[DAT_CurrentTribeID::instance].size;
                         if (_tribeSize < 1) {
                             _tribeTime = this->tribes[DAT_CurrentTribeID::instance].time;
-                            if (((_tribeTime) && ((int)DAT_GameCore::instance.mapTimeInTicks <= (int)_tribeTime))
-                                && (_tribeTime))
+                            if (_tribeTime && (int)DAT_GameCore::instance.mapTimeInTicks <= (int)_tribeTime
+                                && _tribeTime)
                                 goto LAB_00527425;
                         } else {
                             local_4 = 0;
                             if (0 < _tribeSize) {
                                 do {
-                                    _unitID = MACRO_CALL_MEMBER(
-                                        Map::Units::TribesState_Func::getSpecificUnitFromTribe, this)(
-                                        _tribeID, _tribeUnitIndex);
+                                    _unitID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getSpecificUnitFromTribe,
+                                        this)(_tribeID, _tribeUnitIndex);
                                     _unitLogicalState = DAT_UnitsState::instance.units[_unitID].logicalState;
                                     _tribeUnitIndex = _tribeUnitIndex + 1;
-                                    if (((((short)_unitLogicalState < 1)
-                                             || ((2 < (short)_unitLogicalState
-                                                 && (_unitLogicalState != Map::Units::ULS_TRANSITIONING))))
-                                            || (DAT_UnitsState::instance.units[_unitID].dying != 0))
-                                        || (DAT_UnitsState::instance.units[_unitID].tribeID != _tribeID)) {
-                                        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::removeUnitFromTribe,
-                                            this)(_unitID, _tribeID);
+                                    if ((short)_unitLogicalState < 1
+                                        || (2 < (short)_unitLogicalState
+                                            && (_unitLogicalState != Map::Units::ULS_TRANSITIONING))
+                                        || DAT_UnitsState::instance.units[_unitID].dying != 0
+                                        || DAT_UnitsState::instance.units[_unitID].tribeID != _tribeID) {
+                                        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::removeUnitFromTribe, this)(
+                                            _unitID, _tribeID);
                                         _tribeID = DAT_CurrentTribeID::instance;
                                     } else {
                                         local_4 = local_4 + 1;

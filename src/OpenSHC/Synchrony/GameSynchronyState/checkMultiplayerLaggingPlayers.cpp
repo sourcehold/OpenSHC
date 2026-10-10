@@ -49,13 +49,13 @@ namespace Synchrony {
                     /*
                       this code does three at a time
                      */
-                    if (((piVar3[-1] != -1) && (iVar2 != this->currentPlayerSlotID)) && (piVar6[-1].checkFor0 == 0)) {
+                    if (piVar3[-1] != -1 && iVar2 != this->currentPlayerSlotID && piVar6[-1].checkFor0 == 0) {
                         _anyIsZero = false;
                     }
-                    if (((*piVar3 != -1) && (iVar2 + 1 != this->currentPlayerSlotID)) && (!piVar6->checkFor0)) {
+                    if (*piVar3 != -1 && iVar2 + 1 != this->currentPlayerSlotID && !piVar6->checkFor0) {
                         _anyIsZero = false;
                     }
-                    if (((piVar3[1] != -1) && (iVar2 + 2 != this->currentPlayerSlotID)) && (piVar6[1].checkFor0 == 0)) {
+                    if (piVar3[1] != -1 && iVar2 + 2 != this->currentPlayerSlotID && piVar6[1].checkFor0 == 0) {
                         _anyIsZero = false;
                     }
                     iVar2 = iVar2 + 3;
@@ -68,9 +68,8 @@ namespace Synchrony {
                     pDVar7 = &this->connectionLagInfoArray[0];
                     piVar3 = this->currentPlayerFullIDArray;
                     do {
-                        if (((*piVar3 != -1) && (_playerID != this->currentPlayerSlotID)) && (pDVar7->time)) {
-                            if (((15000 < (int)(_now - pDVar7->time)) && (this->isHost))
-                                && (!this->laggingPlayerIDUnk)) {
+                        if (*piVar3 != -1 && _playerID != this->currentPlayerSlotID && pDVar7->time) {
+                            if (15000 < (int)(_now - pDVar7->time) && this->isHost && !this->laggingPlayerIDUnk) {
                                 this->laggingPlayerIDUnk = _playerID;
                                 this->DAT_GameCommandParam0 = _playerID;
                                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
@@ -79,8 +78,8 @@ namespace Synchrony {
                             }
                             if (60000 < (int)(_now - pDVar7->time)) {
                                 this->kickDueToLagStatusUnk = 62;
-                                MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::removePlayerFromLobby,
-                                    this)(_playerID);
+                                MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::removePlayerFromLobby, this)(
+                                    _playerID);
                             }
                         }
                         _playerID = _playerID + 1;
@@ -94,10 +93,10 @@ namespace Synchrony {
                 this->otherTime1 = _now2;
                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::sendSyncPacket126, this)();
             }
-            if ((180 < (int)(_now2 - this->now2))
+            if (180 < (int)(_now2 - this->now2)
                 && (this->now2 = _now2,
-                    MACRO_CALL_MEMBER(
-                        Synchrony::GameSynchronyState_Func::sendSomeMultiplayerSyncMessageWithType, this)(0),
+                    MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::sendSomeMultiplayerSyncMessageWithType, this)(
+                        0),
                     0 < this->syncRelatedCountdown)) {
                 this->syncRelatedCountdown = this->syncRelatedCountdown + -1;
             }

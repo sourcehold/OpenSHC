@@ -83,7 +83,7 @@ namespace Map {
                     this->tribes[param_1].unknownCounter01 = 0;
                 }
                 SVar3 = this->tribes[param_1].tribeBehaviorType;
-                if (SVar3 == ((SomeTribeBehaviorType)0)) {
+                if (SVar3 == (SomeTribeBehaviorType)0) {
                     sVar4 = this->tribes[param_1].unknownAttackRelatedUpdateCounter;
                     sVar2 = sVar4 + 1;
                     this->tribes[param_1].unknownAttackRelatedUpdateCounter = sVar2;
@@ -91,17 +91,16 @@ namespace Map {
                         MACRO_CALL_MEMBER(Map::WildlifeState_Func::findAndSetNewRallyPointForDeerAndLions,
                             DAT_WildlifeState::ptr)(param_1, 2, 0);
                         if (0 < this->tribes[param_1].rallyPointCount) {
-                            MACRO_CALL_MEMBER(Map::Units::TribesState_Func::standUpAllTribeUnits, this)(
+                            MACRO_CALL_MEMBER(Map::Units::TribesState_Func::standUpAllTribeUnits, this)(param_1);
+                            MACRO_CALL_MEMBER(Map::Units::TribesState_Func::applyLadderDestructionToTribeUnits, this)(
                                 param_1);
-                            MACRO_CALL_MEMBER(Map::Units::TribesState_Func::applyLadderDestructionToTribeUnits,
-                                this)(param_1);
                         }
                     } else if (sVar2 == 0x96) {
                         if ((this->tribes[param_1].unknownBool02 == 0)
                             && (sVar2 = this->tribes[param_1].rallyPointCount, 0 < sVar2)) {
                             MACRO_CALL_MEMBER(
-                                Map::Units::TribesState_Func::giveUnitSelectionMoveInstructionNoMatchedSpeed,
-                                this)(param_1, (uint)((int)((int)this->tribes[param_1].rallyPointArray[sVar2 + -1][0])),
+                                Map::Units::TribesState_Func::giveUnitSelectionMoveInstructionNoMatchedSpeed, this)(
+                                param_1, (uint)((int)((int)this->tribes[param_1].rallyPointArray[sVar2 + -1][0])),
                                 (uint)((int)((int)this->tribes[param_1].rallyPointArray[sVar2 + -1][1])), 0, 0);
                         }
                     } else if (BVar5) {
@@ -109,8 +108,8 @@ namespace Map {
                         this->tribes[param_1].unknownAttackRelatedUpdateCounter = 0;
                     }
                 } else if ((SVar3 == Map::Units::STBT_1)
-                    && (psVar1 = (short*)&this->tribes[param_1].unknownAttackRelatedUpdateCounter, *psVar1 = *psVar1 + 1,
-                        this->tribes[param_1].unknownAttackRelatedUpdateCounter == 300)) {
+                    && (psVar1 = (short*)&this->tribes[param_1].unknownAttackRelatedUpdateCounter,
+                        *psVar1 = *psVar1 + 1, this->tribes[param_1].unknownAttackRelatedUpdateCounter == 300)) {
                     this->tribes[param_1].tribeBehaviorType = ((SomeTribeBehaviorType)0);
                     this->tribes[param_1].unknownAttackRelatedUpdateCounter = 0;
                 }

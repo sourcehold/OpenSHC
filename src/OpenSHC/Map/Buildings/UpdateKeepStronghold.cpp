@@ -35,8 +35,8 @@ namespace Map {
         bVar4 = (byte)DAT_GameCore::instance.mapTimeInTicks & 3;
         DAT_BuildingsState::instance.buildings[_buildingID].someY
             = DAT_BuildingsState::instance.buildings[_buildingID].y + 4;
-        if (((!bVar4) && (DAT_GameCore::instance.gameMode_2 != Game::GM_EDITOR))
-            && (DAT_GameCore::instance.gameMode_2 != Game::GM_SIEGE_THAT)) {
+        if (!bVar4 && DAT_GameCore::instance.gameMode_2 != Game::GM_EDITOR
+            && DAT_GameCore::instance.gameMode_2 != Game::GM_SIEGE_THAT) {
             _currentStartingGold = DAT_GameState::instance.playerDataArray[sVar2].startResources[0xf];
             if (0 < _currentStartingGold) {
                 _goldStep = 1;

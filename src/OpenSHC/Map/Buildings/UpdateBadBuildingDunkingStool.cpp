@@ -41,8 +41,8 @@ namespace Map {
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].playerColorUnk = 0;
         DAT_BuildingsState::instance.buildings[buildingID].displayOwnerFlag = 0;
         DAT_BuildingsState::instance.buildings[buildingID].renderBlendStrength = 0;
-        MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updateBuildingSignpostCounter,
-            DAT_BuildingsState::ptr)(buildingID, 1);
+        MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updateBuildingSignpostCounter, DAT_BuildingsState::ptr)(
+            buildingID, 1);
         if (DAT_GameState::instance.playerDataArray[sVar2].fearFactorLevel < -4) {
             DAT_BuildingsState::instance.buildings[buildingID].renderAnimation = 1;
             DAT_BuildingsState::instance.buildings[buildingID].buildingIsVisuallyActive = 1;
@@ -50,22 +50,21 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[buildingID].renderAnimation = 0;
             DAT_BuildingsState::instance.buildings[buildingID].buildingIsVisuallyActive = 0;
         }
-        bVar1 = DAT_BuildingDefinedData::instance
-                    .BadBuildingDunkingStoolAnimationFrames[DAT_BuildingsState::instance.buildings[buildingID].animationIndex];
+        bVar1 = DAT_BuildingDefinedData::instance.BadBuildingDunkingStoolAnimationFrames
+                    [DAT_BuildingsState::instance.buildings[buildingID].animationIndex];
         DAT_BuildingsState::instance.buildings[buildingID].animationFrame = (int)(char)bVar1;
         if ((char)bVar1 < 1) {
             DAT_BuildingsState::instance.buildings[buildingID].animationIndex = 0;
             DAT_BuildingsState::instance.buildings[buildingID].animationFrame = 1;
         }
-        if ((((DAT_BuildingsState::instance.buildings[buildingID].animationActive != 0)
-                 && (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_BUILDING_AND_STATUS_MENU))
-                && (DAT_GameCore::instance.activeMenuTab.tabType == UI::Enums::BASMTT_DUNKINGSTOOL))
-            && (buildingID == DAT_BuildingsState::instance.menuSelectedBuildingID)) {
+        if (DAT_BuildingsState::instance.buildings[buildingID].animationActive != 0
+            && DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_BUILDING_AND_STATUS_MENU
+            && DAT_GameCore::instance.activeMenuTab.tabType == UI::Enums::BASMTT_DUNKINGSTOOL
+            && buildingID == DAT_BuildingsState::instance.menuSelectedBuildingID) {
             if (DAT_BuildingsState::instance.buildings[buildingID].animationIndex == 4) {
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                     (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x,
-                    (int)((int)((short)DAT_BuildingsState::instance.buildings[buildingID].y)),
-                    DE::SHCDE::FX_WH_DUNK);
+                    (int)((int)((short)DAT_BuildingsState::instance.buildings[buildingID].y)), DE::SHCDE::FX_WH_DUNK);
                 buildingID = DAT_CurrentBuildingID::instance;
             }
             if (DAT_BuildingsState::instance.buildings[buildingID].animationIndex == 0x22) {
@@ -85,15 +84,13 @@ namespace Map {
             if (DAT_BuildingsState::instance.buildings[buildingID].animationIndex == 0x68) {
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                     (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x,
-                    (int)((int)((short)DAT_BuildingsState::instance.buildings[buildingID].y)),
-                    DE::SHCDE::FX_WH_LIFT);
+                    (int)((int)((short)DAT_BuildingsState::instance.buildings[buildingID].y)), DE::SHCDE::FX_WH_LIFT);
                 buildingID = DAT_CurrentBuildingID::instance;
             }
         }
         if (DAT_BuildingsState::instance.buildings[buildingID].buildingIsVisuallyActive
             != DAT_BuildingsState::instance.buildings[buildingID].oldVisualActiveState) {
-            MACRO_CALL_MEMBER(Map::TileMapState_Func::updateBuildingGraphicsLayer, DAT_TileMapState::ptr)(
-                buildingID);
+            MACRO_CALL_MEMBER(Map::TileMapState_Func::updateBuildingGraphicsLayer, DAT_TileMapState::ptr)(buildingID);
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].oldVisualActiveState
                 = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingIsVisuallyActive;
         }

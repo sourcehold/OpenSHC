@@ -18,23 +18,19 @@ namespace Synchrony {
         uint _playerID;
         int _maxLatency;
         int _countdown;
-        if (((this->currentGameMode != Game::GM_SOLITARY)
-                && (this->currentGameMode != Game::GM_SKIRMISH_SINGLE_PLAYER))
-            && (this->DPLAYX_4A != (IDirectPlay4A*)0x0)) {
+        if (this->currentGameMode != Game::GM_SOLITARY && this->currentGameMode != Game::GM_SKIRMISH_SINGLE_PLAYER
+            && this->DPLAYX_4A != (IDirectPlay4A*)0x0) {
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::moveLowerThreeBytesIntoParam2, DAT_LowLevelMemory::ptr)(
                 &DAT_GameCore::instance.mapTimeInTicks, (void*)((int)(&this->mapTimeInTicksLower3Bytes)));
             this->syncPacket2Type = (undefined1)syncPacketType2;
             this->syncParamTimeDiff = (undefined1)this->clTimeDiff;
-            this->DPLAYX_SendAndReceiveREsult
-                = this->DPLAYX_4A
-                      ->SendEx(this->DPLAYX_PlayerHandle, 0, DPSEND_NOSENDCOMPLETEMSG | DPSEND_ASYNC, (void*)0x194af7c,
-                          5, 65533, 0, (void*)0x0, (DWORD_PTR*)0x0);
+            this->DPLAYX_SendAndReceiveREsult = this->DPLAYX_4A->SendEx(this->DPLAYX_PlayerHandle, 0,
+                DPSEND_NOSENDCOMPLETEMSG | DPSEND_ASYNC, (void*)0x194af7c, 5, 65533, 0, (void*)0x0, (DWORD_PTR*)0x0);
             if ((this->DPLAYX_SendAndReceiveREsult) && (this->DPLAYX_SendAndReceiveREsult != -0x7ffffff6)) {
                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::handleUnexpectedDPlayXResult, this)();
             }
-            _playerID
-                = MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::translateMultiplayerIDsIntoPlayerIDs,
-                    this)(this->DPLAYX_PlayerHandle);
+            _playerID = MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::translateMultiplayerIDsIntoPlayerIDs,
+                this)(this->DPLAYX_PlayerHandle);
             /*
               matchTime
              */

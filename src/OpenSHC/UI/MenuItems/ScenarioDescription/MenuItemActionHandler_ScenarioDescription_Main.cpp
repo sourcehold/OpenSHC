@@ -12,11 +12,11 @@
 #include "OpenSHC/UI/MenuTextInputState.func.hpp"
 #include "OpenSHC/Commands/GameCommandType.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/Map/MapType2.hpp"
 #include "OpenSHC/UI/Enums/BuildingsAndStatusMenuTabType.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
 
-#include "OpenSHC/Map/MapType2.hpp"
 #include "OpenSHC/Globals/DAT_00eb0b24.hpp"
 #include "OpenSHC/Globals/DAT_00ed2794.hpp"
 #include "OpenSHC/Globals/DAT_00ed2798.hpp"
@@ -57,8 +57,8 @@ namespace UI {
                     if ((DAT_GameCore::instance.gameMode_2 == Game::GM_CAMPAIGN_MISSION)
                         || (DAT_GameCore::instance.gameMode_2 == Game::GM_ECONOMIC_CAMPAIGN_SH1)) {
                         DAT_00ed2798::instance = 0;
-                        MACRO_CALL_MEMBER(Text::TextEditorState_Func::closeHelpDialogAndReturnToMenu,
-                            DAT_TextEditorState::ptr)();
+                        MACRO_CALL_MEMBER(
+                            Text::TextEditorState_Func::closeHelpDialogAndReturnToMenu, DAT_TextEditorState::ptr)();
                         ;
                     }
                     break;
@@ -66,8 +66,8 @@ namespace UI {
                     if ((DAT_GameCore::instance.gameMode_2 == Game::GM_CAMPAIGN_MISSION)
                         || (DAT_GameCore::instance.gameMode_2 == Game::GM_ECONOMIC_CAMPAIGN_SH1)) {
                         DAT_00ed2798::instance = 2;
-                        MACRO_CALL_MEMBER(Text::TextEditorState_Func::closeHelpDialogAndReturnToMenu,
-                            DAT_TextEditorState::ptr)();
+                        MACRO_CALL_MEMBER(
+                            Text::TextEditorState_Func::closeHelpDialogAndReturnToMenu, DAT_TextEditorState::ptr)();
                         ;
                     }
                     break;
@@ -77,16 +77,16 @@ namespace UI {
                         DAT_00ed2798::instance = 3;
                         MACRO_CALL(OS_Func::_sprintf)(
                             local_68, "mission%d.hlp", DAT_GameCore::instance.missionNumber1to20);
-                        iVar1 = MACRO_CALL_MEMBER(Text::TextEditorState_Func::findOrAddHelpSectionName,
-                            DAT_TextEditorState::ptr)(local_68);
-                        MACRO_CALL_MEMBER(Text::TextEditorState_Func::openScenarioHelpDialog,
-                            DAT_TextEditorState::ptr)(iVar1);
+                        iVar1 = MACRO_CALL_MEMBER(
+                            Text::TextEditorState_Func::findOrAddHelpSectionName, DAT_TextEditorState::ptr)(local_68);
+                        MACRO_CALL_MEMBER(Text::TextEditorState_Func::openScenarioHelpDialog, DAT_TextEditorState::ptr)(
+                            iVar1);
                         ;
                     }
                     break;
                 case 10:
-                    MACRO_CALL_MEMBER(Text::TextEditorState_Func::closeHelpDialogAndReturnToMenu,
-                        DAT_TextEditorState::ptr)();
+                    MACRO_CALL_MEMBER(
+                        Text::TextEditorState_Func::closeHelpDialogAndReturnToMenu, DAT_TextEditorState::ptr)();
                     if (DAT_GameCore::instance.gameSuspended == 1) {
                         MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                             UI::Enums::MVT_BUILD_MENU, 0);
@@ -112,11 +112,10 @@ namespace UI {
                     DAT_GameCore::instance.buildmenuMenuTabToSwitchTo.tabType = UI::Enums::BASMTT_HUNTERSHUT;
                     MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                         UI::Enums::MVT_BUILD_MENU, 0);
-                    MACRO_CALL_MEMBER(
-                        UI::MenuTextInputState_Func::clearModalDialog2to6, DAT_MenuTextInputState::ptr)();
+                    MACRO_CALL_MEMBER(UI::MenuTextInputState_Func::clearModalDialog2to6, DAT_MenuTextInputState::ptr)();
                     DAT_00ed2794::instance = 0;
-                    MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::endSpeechStreamsAndResetLoopFlags,
-                        DAT_SoundSystemState::ptr)();
+                    MACRO_CALL_MEMBER(
+                        Audio::MSS::SoundSystem_Func::endSpeechStreamsAndResetLoopFlags, DAT_SoundSystemState::ptr)();
                     MACRO_CALL_MEMBER(Input::MouseState_Func::resetMouseState2, DAT_MouseState::ptr)();
                     ;
                     return;
@@ -169,10 +168,10 @@ namespace UI {
                         DAT_00ed27bc::instance = 0;
                         ;
                     }
-                    MACRO_CALL_MEMBER(Text::TextEditorState_Func::closeHelpDialogAndReturnToMenu,
-                        DAT_TextEditorState::ptr)();
-                    MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::endSpeechStreamsAndResetLoopFlags,
-                        DAT_SoundSystemState::ptr)();
+                    MACRO_CALL_MEMBER(
+                        Text::TextEditorState_Func::closeHelpDialogAndReturnToMenu, DAT_TextEditorState::ptr)();
+                    MACRO_CALL_MEMBER(
+                        Audio::MSS::SoundSystem_Func::endSpeechStreamsAndResetLoopFlags, DAT_SoundSystemState::ptr)();
                     if (!DAT_GameCore::instance.gameSuspended) {
                         if (DAT_GameCore::instance.gameMode_2 == Game::GM_CAMPAIGN_MISSION) {
                             MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
@@ -205,10 +204,10 @@ namespace UI {
                     ;
                     return;
                 case -1:
-                    if ((!DAT_00ed2798::instance)
-                        && (((DAT_GameCore::instance.gameMode_2 == Game::GM_CAMPAIGN_MISSION
-                                 || (DAT_GameCore::instance.gameMode_2 == Game::GM_ECONOMIC_CAMPAIGN_SH1))
-                            && (!DAT_GameCore::instance.gameSuspended)))) {
+                    if (!DAT_00ed2798::instance
+                        && (DAT_GameCore::instance.gameMode_2 == Game::GM_CAMPAIGN_MISSION
+                            || (DAT_GameCore::instance.gameMode_2 == Game::GM_ECONOMIC_CAMPAIGN_SH1))
+                        && !DAT_GameCore::instance.gameSuspended) {
                         DAT_GameState::instance.mapAndTime.difficulty
                             = DAT_GameState::instance.mapAndTime.difficulty + 1;
                         if (3 < DAT_GameState::instance.mapAndTime.difficulty) {

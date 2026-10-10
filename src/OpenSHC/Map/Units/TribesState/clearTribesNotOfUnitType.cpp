@@ -27,10 +27,10 @@ namespace Map {
             if (1 < DAT_UnitsState::instance.maxUnitCount) {
                 psVar1 = &DAT_UnitsState::instance.units[1];
                 do {
-                    if (((psVar1->owner == playerID) && (psVar1->ifSelectedThenPlayerID))
-                        && ((short)psVar1->unitType != unitType)) {
-                        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::removeUnitFromThisTribeIfInTribe,
-                            this)(unitID, (int)((int)(psVar1->tribeID)));
+                    if (psVar1->owner == playerID && psVar1->ifSelectedThenPlayerID
+                        && (short)psVar1->unitType != unitType) {
+                        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::removeUnitFromThisTribeIfInTribe, this)(
+                            unitID, (int)((int)(psVar1->tribeID)));
                         psVar1->ifSelectedThenPlayerID = 0;
                         DAT_UnitsState::instance.unitCountOfSelection[playerID]
                             = DAT_UnitsState::instance.unitCountOfSelection[playerID] + -1;
@@ -45,11 +45,9 @@ namespace Map {
             do {
                 if (psVar2->tribeState == 2) {
                     if (psVar2->selectionTargetUnitID == -1) {
-                        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::setTargetUnitForTribe, this)(
-                            _tribeID2);
+                        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::setTargetUnitForTribe, this)(_tribeID2);
                     }
-                    MACRO_CALL_MEMBER(Map::Units::TribesState_Func::setWhetherTribeContainsAnyUnits, this)(
-                        _tribeID2);
+                    MACRO_CALL_MEMBER(Map::Units::TribesState_Func::setWhetherTribeContainsAnyUnits, this)(_tribeID2);
                 }
                 _tribeID2 = _tribeID2 + 1;
                 psVar2 = psVar2 + 0x19a;

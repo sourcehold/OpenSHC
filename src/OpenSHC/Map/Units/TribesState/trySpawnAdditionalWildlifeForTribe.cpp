@@ -29,8 +29,8 @@ namespace Map {
                 || (param_1 < 1)) {
                 return (undefined4)(0);
             }
-            if ((this->tribes[param_1].predatorNearby == 0)
-                && ((DAT_GameCore::instance.missionNumber1to20 != 0x26 || (param_4 != 0x2f)))) {
+            if (this->tribes[param_1].predatorNearby == 0
+                && (DAT_GameCore::instance.missionNumber1to20 != 0x26 || (param_4 != 0x2f))) {
                 iVar7 = (int)this->tribes[param_1].selectionTargetUnitID;
                 iVar6 = iVar7;
                 if (param_4 == 0x2c) {
@@ -44,10 +44,10 @@ namespace Map {
                 sVar3 = DAT_UnitsState::instance.units[iVar6].y;
                 sVar4 = DAT_UnitsState::instance.units[iVar6].terrainOrClimbHeight;
                 this->tribes[param_1].field_0x288 = this->tribes[param_1].field_0x288 + 1;
-                if ((param_2 <= this->tribes[param_1].field_0x288)
+                if (param_2 <= this->tribes[param_1].field_0x288
                     && (this->tribes[param_1].field_0x288 = 0, 99 < (bVar5 & 0x7f))) {
-                    iVar6 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::countLivingNondyingUnitsForPlayer,
-                        DAT_UnitsState::ptr)(param_4);
+                    iVar6 = MACRO_CALL_MEMBER(
+                        Map::Units::UnitsState_Func::countLivingNondyingUnitsForPlayer, DAT_UnitsState::ptr)(param_4);
                     if (iVar6 < param_3) {
                         if (param_4 == 0x2f) {
                             MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createAnimal, this)(

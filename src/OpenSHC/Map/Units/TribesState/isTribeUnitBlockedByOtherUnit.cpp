@@ -41,16 +41,14 @@ namespace Map {
                 }
                 if (DAT_UnitsState::instance.units[iVar2].tunnelerFinishedDigging == 2)
                     break;
-                if (DAT_UnitsState::instance.units[iVar2].state.generic
-                    == Map::Units::States::US_MELEE_ATTACK) {
+                if (DAT_UnitsState::instance.units[iVar2].state.generic == Map::Units::States::US_MELEE_ATTACK) {
                     return (undefined4)(0);
                 }
                 if (DAT_UnitsState::instance.units[iVar2].laddermanIsInPosition != '\0') {
                     return (undefined4)(0);
                 }
                 iVar3 = (int)(short)DAT_TileMapState::instance.UnitLayer[DAT_UnitsState::instance.units[iVar2].tile];
-                if (((iVar3) && (iVar2 != iVar3))
-                    && (DAT_UnitsState::instance.units[iVar3].tunnelerFinishedDigging != 2)) {
+                if (iVar3 && iVar2 != iVar3 && DAT_UnitsState::instance.units[iVar3].tunnelerFinishedDigging != 2) {
                     return (undefined4)(1);
                 }
             }

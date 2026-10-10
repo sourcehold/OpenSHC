@@ -58,8 +58,8 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingIsVisuallyActive = 1;
         }
         sVar6 = DAT_BuildingsState::instance.buildings[iVar5].buildingIsVisuallyActive;
-        MACRO_CALL_MEMBER(
-            Map::Buildings::BuildingsState_Func::updateVisuallyActiveState, DAT_BuildingsState::ptr)(iVar5);
+        MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updateVisuallyActiveState, DAT_BuildingsState::ptr)(
+            iVar5);
         if (!sVar6) {
             DAT_BuildingsState::instance.buildings[iVar5].displayOwnerFlag = 0;
             DAT_BuildingsState::instance.buildings[iVar5].renderAnimation = 0;
@@ -129,9 +129,11 @@ namespace Map {
                 }
                 iVar5 = DAT_CurrentBuildingID::instance;
                 iVar9 = DAT_CurrentBuildingID::instance * 0x32c;
-                bVar3 = DAT_BuildingDefinedData::instance.InnAnimationFrames5
-                            [DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame3];
-                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite4 = (int)(char)bVar3;
+                bVar3 = DAT_BuildingDefinedData::instance
+                            .InnAnimationFrames5[DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
+                                    .extraAnimationFrame3];
+                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite4
+                    = (int)(char)bVar3;
                 if ((char)bVar3 == 0) {
                     iVar8 = (int)(char)DAT_BuildingDefinedData::instance.InnAnimationFrames5[0];
                     DAT_BuildingsState::instance.buildings[iVar5].extraAnimationFrame3 = 0;
@@ -143,7 +145,7 @@ namespace Map {
             }
         }
         if (0 < *(short*)((int)DAT_BuildingsState::instance.buildings[0].quarryLinkedOxTethers + iVar9 + -0x1a)) {
-            if ((iVar7)
+            if (iVar7
                 && (psVar2
                     = (short*)((int)DAT_BuildingsState::instance.buildings[0].quarryLinkedOxTethers + iVar9 + -0x18),
                     *psVar2 = *psVar2 + 1,
@@ -155,8 +157,8 @@ namespace Map {
                 psVar2 = (short*)((int)DAT_BuildingsState::instance.buildings[0].quarryLinkedOxTethers + iVar9 + -0x1a);
                 *psVar2 = *psVar2 + -1;
             }
-            if ((0 < *(short*)((int)DAT_BuildingsState::instance.buildings[0].quarryLinkedOxTethers + iVar9 + -0x1a))
-                && (*(short*)((int)DAT_BuildingsState::instance.buildings[0].workerID + iVar9) != 0)) {
+            if (0 < *(short*)((int)DAT_BuildingsState::instance.buildings[0].quarryLinkedOxTethers + iVar9 + -0x1a)
+                && *(short*)((int)DAT_BuildingsState::instance.buildings[0].workerID + iVar9) != 0) {
                 piVar1 = &DAT_GameState::instance.playerDataArray[sVar4].workingInnsCount;
                 *piVar1 = *piVar1 + 1;
             }

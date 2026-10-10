@@ -74,9 +74,9 @@ namespace UI {
         char local_24[32];
         uint local_4 = MSVC_SecurityCookie::instance ^ (uint)&local_48;
         local_48 = DAT_00df5560::instance;
-        if (((INT_DisableTutorialRestrictions::instance)
-                && (DAT_MenuModalComposition1::instance.activeModalDialogID != UI::Enums::MMT_TUTORIAL_BOX))
-            && (DAT_MenuModalComposition1::instance.activeModalDialogID != UI::Enums::MMT_TUTORIAL_BOX_WITH_LEAVE))
+        if (INT_DisableTutorialRestrictions::instance
+            && DAT_MenuModalComposition1::instance.activeModalDialogID != UI::Enums::MMT_TUTORIAL_BOX
+            && DAT_MenuModalComposition1::instance.activeModalDialogID != UI::Enums::MMT_TUTORIAL_BOX_WITH_LEAVE)
             goto LAB_004bd764;
         DWORD _now = timeGetTime();
         if (DAT_MenuModalComposition1::instance.activeModalDialogID == UI::Enums::MMT_NONE) {
@@ -85,8 +85,8 @@ namespace UI {
             } else {
                 menuModalID = UI::Enums::MMT_TUTORIAL_BOX;
             }
-            MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog,
-                DAT_MenuModalComposition1::ptr)(menuModalID, FALSE);
+            MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog, DAT_MenuModalComposition1::ptr)(
+                menuModalID, FALSE);
         }
         int iVar3 = DAT_00df5558::instance + DAT_TutorialCurrentStep::instance * 4;
         if (iVar3 != INT_00df5654::instance) {
@@ -94,33 +94,32 @@ namespace UI {
             INT_00df5654::instance = iVar3;
             DWORD_00df564c::instance = timeGetTime();
         }
-        if (((!INT_00df5650::instance) && (0 < DAT_00df5558::instance))
-            && ((DAT_00df5558::instance < DAT_00df555c::instance
-                && (DVar1 = timeGetTime(), 1000 < DVar1 - DWORD_00df564c::instance)))) {
+        if (!INT_00df5650::instance && 0 < DAT_00df5558::instance && DAT_00df5558::instance < DAT_00df555c::instance
+            && (DVar1 = timeGetTime(), 1000 < DVar1 - DWORD_00df564c::instance)) {
             INT_00df5650::instance = 1;
             MACRO_CALL(OS_Func::_sprintf)(local_44, "%s%s", "fx\\speech\\",
                 (DAT_00df5558::instance + DAT_TutorialCurrentStep::instance * 3) * 32 + 0xb3d810);
             BVar2 = MACRO_CALL(IO_Func::FileExists)(local_44);
             if (BVar2) {
-                MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::playAmbientStreamWithLoop,
-                    DAT_SoundSystemState::ptr)(local_44);
+                MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::playAmbientStreamWithLoop, DAT_SoundSystemState::ptr)(
+                    local_44);
             }
         }
         if ((DAT_00df5564::instance) && (1000 < _now - DWORD_00df5568::instance)) {
             DAT_00df5564::instance = 0;
         }
-        if ((!DAT_FileDoesntExist::instance)
-            && (((!DAT_00df5558::instance || (INT_00df5650::instance)) && (!DAT_00df5540::instance)))) {
+        if (!DAT_FileDoesntExist::instance && (!DAT_00df5558::instance || (INT_00df5650::instance))
+            && !DAT_00df5540::instance) {
             uVar4 = DAT_00df5544::instance;
             if (DAT_00df5558::instance < DAT_00df555c::instance + -1) {
                 BVar2 = MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::isSampleOrStreamPlaying,
                     DAT_SoundSystemState::ptr)(Audio::MSS::enums::SND_STR_SPEECH_1);
-                if (((!BVar2)
-                        && (BVar2 = MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::isSampleOrStreamPlaying,
-                                DAT_SoundSystemState::ptr)(Audio::MSS::enums::SND_STR_SPEECH_2),
-                            !BVar2))
-                    && ((DAT_SoundSystemState::instance.waveOutOpenUnk_0x8
-                        && (DAT_SoundSystemState::instance.soundActiveUnk_0x0)))) {
+                if (!BVar2
+                    && (BVar2 = MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::isSampleOrStreamPlaying,
+                            DAT_SoundSystemState::ptr)(Audio::MSS::enums::SND_STR_SPEECH_2),
+                        !BVar2)
+                    && DAT_SoundSystemState::instance.waveOutOpenUnk_0x8
+                    && DAT_SoundSystemState::instance.soundActiveUnk_0x0) {
                     MACRO_CALL(UI::MenuItems::TutorialBox_Func::MenuItemActionHandler_TutorialBox_Main)(1);
                 }
                 goto LAB_004bd354;
@@ -160,16 +159,16 @@ namespace UI {
                 goto LAB_004bd3e9;
             DAT_TutorialCurrentStep::instance = DAT_TutorialCurrentStep::instance + 1;
             if (INT_DisableTutorialRestrictions::instance) {
-                MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog,
-                    DAT_MenuModalComposition1::ptr)(UI::Enums::MMT_NONE, FALSE);
+                MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog, DAT_MenuModalComposition1::ptr)(
+                    UI::Enums::MMT_NONE, FALSE);
                 uVar4 = DAT_00df5544::instance;
                 goto LAB_004bd3e9;
             }
             if (DAT_TutorialCurrentStep::instance == 0x1f) {
-                MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog,
-                    DAT_MenuModalComposition1::ptr)(UI::Enums::MMT_NONE, FALSE);
-                MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog,
-                    DAT_MenuModalComposition1::ptr)(UI::Enums::MMT_TUTORIAL_BOX_WITH_LEAVE, FALSE);
+                MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog, DAT_MenuModalComposition1::ptr)(
+                    UI::Enums::MMT_NONE, FALSE);
+                MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog, DAT_MenuModalComposition1::ptr)(
+                    UI::Enums::MMT_TUTORIAL_BOX_WITH_LEAVE, FALSE);
             }
             MACRO_CALL(UI::Helpers_Func::InitTutorialStepTransition)(1);
             MACRO_CALL(UI::Helpers_Func::ResetTutorialActionTrackers)();
@@ -346,18 +345,18 @@ namespace UI {
                 iVar3 = DAT_00df556c::instance * 0x60;
                 DAT_00df556c::instance = DAT_00df556c::instance + 1;
                 MACRO_CALL(OS_Func::_sprintf)(local_24, "%s%s", "fx\\speech\\", iVar3 + 0xb3d810);
-                MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::playAmbientStreamWithLoop,
-                    DAT_SoundSystemState::ptr)(local_24);
+                MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::playAmbientStreamWithLoop, DAT_SoundSystemState::ptr)(
+                    local_24);
                 if (0x27 < DAT_00df556c::instance) {
                     DAT_00df556c::instance = 0x24;
                 }
             }
         }
-        if (((DAT_00df5560::instance)
-                && (DAT_MissionAestheticsDefinedData::instance
-                        .TutorialStepShowsContinueButton[DAT_TutorialCurrentStep::instance]
-                    != 0))
-            && (DAT_00df555c::instance + -1 <= DAT_00df5558::instance)) {
+        if (DAT_00df5560::instance
+            && DAT_MissionAestheticsDefinedData::instance
+                    .TutorialStepShowsContinueButton[DAT_TutorialCurrentStep::instance]
+                != 0
+            && DAT_00df555c::instance + -1 <= DAT_00df5558::instance) {
             /*
               show continue button?
              */

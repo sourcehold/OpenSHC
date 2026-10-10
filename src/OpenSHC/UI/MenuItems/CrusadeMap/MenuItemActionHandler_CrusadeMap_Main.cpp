@@ -41,12 +41,12 @@ namespace UI {
             if (param_1 == 1000) {
                 if (0 < DAT_SkirmishTrailRelated1::instance) {
                     if (DAT_GameCore::instance.currentTrailType == Game::TT_FIRST_EDITION) {
-                        if (((DAT_GameCore::instance.furthestSkirmishTrailMission < 0x31)
-                                && (DAT_GameCore::instance.skirmishTrailProgress
-                                    = DAT_GameCore::instance.furthestSkirmishTrailMission,
-                                    DAT_GameCore::instance.skirmishTrailMonthsTakenOrChicken[DAT_GameCore::instance
-                                            .furthestSkirmishTrailMission]
-                                        == -1))
+                        if (DAT_GameCore::instance.furthestSkirmishTrailMission < 0x31
+                            && (DAT_GameCore::instance.skirmishTrailProgress
+                                = DAT_GameCore::instance.furthestSkirmishTrailMission,
+                                DAT_GameCore::instance.skirmishTrailMonthsTakenOrChicken[DAT_GameCore::instance
+                                        .furthestSkirmishTrailMission]
+                                    == -1)
                             && (DAT_GameCore::instance.skirmishTrailMonthsTakenOrChicken[DAT_GameCore::instance
                                         .furthestSkirmishTrailMission] = -0x4b0,
                                 DAT_GameCore::instance.skirmishTrailProgress != 0x31)) {
@@ -58,12 +58,12 @@ namespace UI {
                             goto LAB_004d8f31;
                         }
                     } else if (DAT_GameCore::instance.currentTrailType == Game::TT_WARCHEST) {
-                        if (((DAT_GameCore::instance.furthestWarchestTrailMission < 0x1d)
-                                && (DAT_GameCore::instance.warchestTrailProgress
-                                    = DAT_GameCore::instance.furthestWarchestTrailMission,
-                                    DAT_GameCore::instance.warchestTrailMonthsTakenOrChicken[DAT_GameCore::instance
-                                            .furthestWarchestTrailMission]
-                                        == -1))
+                        if (DAT_GameCore::instance.furthestWarchestTrailMission < 0x1d
+                            && (DAT_GameCore::instance.warchestTrailProgress
+                                = DAT_GameCore::instance.furthestWarchestTrailMission,
+                                DAT_GameCore::instance.warchestTrailMonthsTakenOrChicken[DAT_GameCore::instance
+                                        .furthestWarchestTrailMission]
+                                    == -1)
                             && (DAT_GameCore::instance.warchestTrailMonthsTakenOrChicken[DAT_GameCore::instance
                                         .furthestWarchestTrailMission] = -0x4b0,
                                 DAT_GameCore::instance.warchestTrailProgress != 0x1d)) {
@@ -76,16 +76,16 @@ namespace UI {
                             MACRO_CALL_MEMBER(Game::GameCore_Func::setStartDateUnk, DAT_GameCore::ptr)(iVar5);
                             DAT_SkirmishTrailRelated1::instance = DAT_SkirmishTrailRelated1::instance + -1;
                             DWORD_00ed311c::instance = timeGetTime();
-                            MACRO_CALL_MEMBER(
-                                Audio::SFX::SFXState_Func::setSoundWithVariation, DAT_SFXState::ptr)(258, 100);
+                            MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::setSoundWithVariation, DAT_SFXState::ptr)(
+                                258, 100);
                         }
-                    } else if ((((DAT_GameCore::instance.currentTrailType == Game::TT_EXTREME)
-                                    && (DAT_GameCore::instance.furthestExtremeTrailMission < 0x13))
-                                   && (DAT_GameCore::instance.extremeTrailProgress
-                                       = DAT_GameCore::instance.furthestExtremeTrailMission,
-                                       DAT_GameCore::instance.extremeTrailMonthsTakenOrChicken[DAT_GameCore::instance
-                                               .furthestExtremeTrailMission]
-                                           == -1))
+                    } else if (DAT_GameCore::instance.currentTrailType == Game::TT_EXTREME
+                        && DAT_GameCore::instance.furthestExtremeTrailMission < 0x13
+                        && (DAT_GameCore::instance.extremeTrailProgress
+                            = DAT_GameCore::instance.furthestExtremeTrailMission,
+                            DAT_GameCore::instance.extremeTrailMonthsTakenOrChicken[DAT_GameCore::instance
+                                    .furthestExtremeTrailMission]
+                                == -1)
                         && (DAT_GameCore::instance
                                 .extremeTrailMonthsTakenOrChicken[DAT_GameCore::instance.furthestExtremeTrailMission]
                             = -0x4b0,
@@ -128,8 +128,8 @@ namespace UI {
                             if (DAT_GameCore::instance.furthestSkirmishTrailMission < (int)dVar3) {}
                             iVar1 = DAT_MissionDefinedData::instance.SkirmishTrailMissionPositions[dVar3][0];
                             iVar2 = DAT_MissionDefinedData::instance.SkirmishTrailMissionPositions[dVar3][1];
-                            if (((iVar1 + -10 <= _clickX) && (_clickX <= iVar1 + 10))
-                                && ((iVar2 + -10 <= _clickY && (_clickY <= iVar2 + 10)))) {
+                            if (iVar1 + -10 <= _clickX && _clickX <= iVar1 + 10 && iVar2 + -10 <= _clickY
+                                && _clickY <= iVar2 + 10) {
                             LAB_004d9190:
                                 DAT_GameCore::instance.extremeTrailProgress = iVar5;
                                 DAT_GameCore::instance.warchestTrailProgress = dVar4;
@@ -146,8 +146,8 @@ namespace UI {
                             while ((int)dVar4 <= DAT_GameCore::instance.furthestWarchestTrailMission) {
                                 iVar1 = DAT_MissionDefinedData::instance.WarchestTrailMissionPositions[dVar4][0];
                                 iVar2 = DAT_MissionDefinedData::instance.WarchestTrailMissionPositions[dVar4][1];
-                                if (((iVar1 + -10 <= _clickX) && (_clickX <= iVar1 + 10))
-                                    && ((iVar2 + -10 <= _clickY && (_clickY <= iVar2 + 10))))
+                                if (iVar1 + -10 <= _clickX && _clickX <= iVar1 + 10 && iVar2 + -10 <= _clickY
+                                    && _clickY <= iVar2 + 10)
                                     goto LAB_004d9190;
                                 dVar4 = dVar4 + 1;
                                 if (30 < (int)dVar4) {}
@@ -157,8 +157,8 @@ namespace UI {
                             while (iVar5 <= DAT_GameCore::instance.furthestExtremeTrailMission) {
                                 iVar1 = DAT_MissionDefinedData::instance.ExtremeTrailMissionPositions[iVar5][0];
                                 iVar2 = DAT_MissionDefinedData::instance.ExtremeTrailMissionPositions[iVar5][1];
-                                if ((((iVar1 + -10 <= _clickX) && (_clickX <= iVar1 + 10)) && (iVar2 + -10 <= _clickY))
-                                    && (_clickY <= iVar2 + 10))
+                                if (iVar1 + -10 <= _clickX && _clickX <= iVar1 + 10 && iVar2 + -10 <= _clickY
+                                    && _clickY <= iVar2 + 10)
                                     goto LAB_004d9190;
                                 iVar5 = iVar5 + 1;
                                 if (20 < iVar5) {}
@@ -168,7 +168,8 @@ namespace UI {
                 } else if (param_1 == 99) {
                     MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                         UI::Enums::MVT_RANKING_GAMES, 0);
-                    MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)((Audio::SFX::SoundEffectID)(Audio::SFX::SEID_UNIT_DAMAGE3 | Audio::SFX::SEID_ARROW_SHOOT));
+                    MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(
+                        (Audio::SFX::SoundEffectID)(Audio::SFX::SEID_UNIT_DAMAGE3 | Audio::SFX::SEID_ARROW_SHOOT));
                 }
             }
         }

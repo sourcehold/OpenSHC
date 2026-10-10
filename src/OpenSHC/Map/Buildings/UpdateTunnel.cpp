@@ -30,8 +30,8 @@ namespace Map {
         _unitID = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].unitRefID;
         UVar1 = DAT_UnitsState::instance.units[_unitID].state.generic;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIncrement = 1;
-        if (((UVar1 == ((UnitState)3)) || (UVar1 == Map::Units::States::US_RELOAD_WEAPONUnk))
-            || (DAT_UnitsState::instance.units[_unitID].dying != 0)) {
+        if (UVar1 == (UnitState)3 || UVar1 == Map::Units::States::US_RELOAD_WEAPONUnk
+            || DAT_UnitsState::instance.units[_unitID].dying != 0) {
             DAT_BuildingsState::instance.buildings[iVar2].animationIndex = 0;
             DAT_BuildingsState::instance.buildings[iVar2].renderAnimation = 0;
         } else {
@@ -55,7 +55,7 @@ namespace Map {
                         .TunnelAnimationFrames[DAT_BuildingsState::instance.buildings[iVar2].animationIndex];
             DAT_BuildingsState::instance.buildings[iVar2].animationFrame = iVar3;
             if (((iVar3 == 10) || (iVar3 == 0x19))
-                && (DAT_BuildingsState::instance.buildings[iVar2].animationActive != 0)) {
+                && DAT_BuildingsState::instance.buildings[iVar2].animationActive != 0) {
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                     (int)(short)DAT_BuildingsState::instance.buildings[iVar2].x,
                     (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar2].y)), DE::SHCDE::FX_DIG2);

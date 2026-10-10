@@ -87,11 +87,11 @@ namespace Map {
                     if (!this->DAT_DebugDataMapDataDisplayType) {
                         uint uVar1 = this->grid[iVar6][iVar8].separateAreaID;
                         uint uVar3 = uVar1 & 7;
-                        if ((((!uVar1) || (uVar5 = COL_RED::instance.shortValue, uVar3 == 1))
-                                || ((uVar5 = COL_BRIGHT_YELLOW::instance.shortValue,
-                                    uVar3 == 2
-                                        || ((uVar5 = COL_MODERATE_GREEN::instance.shortValue,
-                                            uVar3 == 3 || (uVar5 = COL_WHITE::instance.shortValue, uVar3 == 4))))))
+                        if (!uVar1 || (uVar5 = COL_RED::instance.shortValue, uVar3 == 1)
+                            || (uVar5 = COL_BRIGHT_YELLOW::instance.shortValue,
+                                uVar3 == 2
+                                    || ((uVar5 = COL_MODERATE_GREEN::instance.shortValue,
+                                        uVar3 == 3 || (uVar5 = COL_WHITE::instance.shortValue, uVar3 == 4))))
                             || (uVar5 = COL_DARK_CYAN_GREY::instance.shortValue, uVar3 == 5))
                             goto LAB_0052c526;
                         if (uVar3 == 6) {
@@ -119,11 +119,10 @@ namespace Map {
                                 goto LAB_0052c533;
                             }
                         } else if (this->DAT_DebugDataMapDataDisplayType == 2) {
-                            if ((((this->grid[iVar6][iVar8].separateAreaID != 0)
-                                     && (uVar5 = COL_DARK_GREEN::instance.shortValue,
-                                         this->grid[iVar6][iVar8].farmFieldTiles == 0))
-                                    && (uVar5 = COL_RED::instance.shortValue,
-                                        this->grid[iVar6][iVar8].rabbitCount == 0))
+                            if (this->grid[iVar6][iVar8].separateAreaID != 0
+                                && (uVar5 = COL_DARK_GREEN::instance.shortValue,
+                                    this->grid[iVar6][iVar8].farmFieldTiles == 0)
+                                && (uVar5 = COL_RED::instance.shortValue, this->grid[iVar6][iVar8].rabbitCount == 0)
                                 && (uVar5 = COL_WHITE::instance.shortValue,
                                     this->grid[iVar6][iVar8].field15_0x3c == 0)) {
                                 iVar7 = this->grid[iVar6][iVar8].field20_0x50;
@@ -149,22 +148,22 @@ namespace Map {
                                 }
                             }
                         } else if (this->DAT_DebugDataMapDataDisplayType == 5) {
-                            if (((this->grid[iVar6][iVar8].separateAreaID != 0)
-                                    && (uVar5 = COL_RED::instance.shortValue,
-                                        this->grid[iVar6][iVar8].unstalkedUnitCount == 0))
-                                && ((this->grid[iVar6][iVar8].buildingTiles == 0
-                                    && ((uVar5 = COL_BLACK::instance.shortValue,
-                                        this->grid[iVar6][iVar8].lionCount == 0
-                                            && (this->grid[iVar6][iVar8].camelCount == 0)))))) {
+                            if (this->grid[iVar6][iVar8].separateAreaID != 0
+                                && (uVar5 = COL_RED::instance.shortValue,
+                                    this->grid[iVar6][iVar8].unstalkedUnitCount == 0)
+                                && this->grid[iVar6][iVar8].buildingTiles == 0
+                                && (uVar5 = COL_BLACK::instance.shortValue,
+                                    this->grid[iVar6][iVar8].lionCount == 0
+                                        && (this->grid[iVar6][iVar8].camelCount == 0))) {
                                 iVar7 = this->grid[iVar6][iVar8].deerCount;
                                 uVar5 = COL_MODERATE_GREEN::instance.shortValue;
                                 goto joined_r0x0052c3aa;
                             }
                         } else if (this->DAT_DebugDataMapDataDisplayType == 6) {
-                            if ((((this->grid[iVar6][iVar8].separateAreaID != 0)
-                                     && (uVar5 = COL_RED::instance.shortValue, this->grid[iVar6][iVar8].deerCount == 0))
-                                    && (uVar5 = COL_VIVID_BLUE::instance.shortValue,
-                                        this->grid[iVar6][iVar8].lionCount == 0))
+                            if (this->grid[iVar6][iVar8].separateAreaID != 0
+                                && (uVar5 = COL_RED::instance.shortValue, this->grid[iVar6][iVar8].deerCount == 0)
+                                && (uVar5 = COL_VIVID_BLUE::instance.shortValue,
+                                    this->grid[iVar6][iVar8].lionCount == 0)
                                 && (uVar5 = COL_WHITE::instance.shortValue,
                                     this->grid[iVar6][iVar8].field15_0x3c == 0)) {
                                 iVar7 = this->grid[iVar6][iVar8].casDisRelated2;
@@ -186,15 +185,14 @@ namespace Map {
                             }
                         } else if (this->DAT_DebugDataMapDataDisplayType == 8) {
                             uVar5 = COL_WHITE::instance.shortValue;
-                            if (((this->grid[iVar6][iVar8].field24_0x60 == 0)
-                                    && (uVar5 = COL_BLACK::instance.shortValue,
-                                        this->grid[iVar6][iVar8].field25_0x64 == 0))
-                                && ((uVar5 = COL_BRIGHT_YELLOW::instance.shortValue,
+                            if (this->grid[iVar6][iVar8].field24_0x60 == 0
+                                && (uVar5 = COL_BLACK::instance.shortValue, this->grid[iVar6][iVar8].field25_0x64 == 0)
+                                && (uVar5 = COL_BRIGHT_YELLOW::instance.shortValue,
                                     this->grid[iVar6][iVar8].castlebuildings == 0
                                         && ((uVar5 = COL_BLUE::instance.shortValue,
                                             this->grid[iVar6][iVar8].separateAreaID != 0
                                                 && (uVar5 = COL_VIVID_BLUE::instance.shortValue,
-                                                    this->grid[iVar6][iVar8].unknownNonZero01 == 0)))))) {
+                                                    this->grid[iVar6][iVar8].unknownNonZero01 == 0))))) {
                                 iVar7 = this->grid[iVar6][iVar8].field27_0x6c;
                                 uVar5 = COL_RED::instance.shortValue;
                                 goto joined_r0x0052c335;
@@ -203,9 +201,9 @@ namespace Map {
                             if (this->DAT_DebugDataMapDataDisplayType != 9)
                                 continue;
                             uVar5 = COL_RED::instance.shortValue;
-                            if (((this->grid[iVar6][iVar8].field29_0x74 == 0)
-                                    && (uVar5 = COL_VIVID_BLUE::instance.shortValue,
-                                        this->grid[iVar6][iVar8].unknownNonZero01 == 0))
+                            if (this->grid[iVar6][iVar8].field29_0x74 == 0
+                                && (uVar5 = COL_VIVID_BLUE::instance.shortValue,
+                                    this->grid[iVar6][iVar8].unknownNonZero01 == 0)
                                 && (uVar5 = COL_BLUE::instance.shortValue,
                                     this->grid[iVar6][iVar8].separateAreaID != 0))
                                 goto LAB_0052c51f;
@@ -215,8 +213,8 @@ namespace Map {
                         iVar2 = y + iVar8 * 10;
                     }
                 LAB_0052c533:
-                    MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawColorBox,
-                        DAT_PencilRenderCore::ptr)(iVar4 + 1, iVar2 + 1, iVar4 + 9, iVar2 + 9, (ushort)((int)(uVar5)));
+                    MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(
+                        iVar4 + 1, iVar2 + 1, iVar4 + 9, iVar2 + 9, (ushort)((int)(uVar5)));
                 }
             }
             iVar8 = iVar8 + 1;

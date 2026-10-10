@@ -100,8 +100,8 @@ namespace Map {
                       [DAT_BuildingsState::instance.buildings[iVar9].flagSlot.ownerFlagFrame / 2];
         }
         if (DAT_GameCore::instance.gameMode_2 == Game::GM_EDITOR) {}
-        if (((GVar5 != Game::GM_SOLITARY) && (GVar5 != Game::GM_SKIRMISH_SINGLE_PLAYER))
-            && (DAT_GameState::instance.mapAndTime.skirmishNoRushTicks)) {}
+        if (GVar5 != Game::GM_SOLITARY && GVar5 != Game::GM_SKIRMISH_SINGLE_PLAYER
+            && DAT_GameState::instance.mapAndTime.skirmishNoRushTicks) {}
         if (DAT_BuildingsState::instance.buildings[iVar9].surroundingsRevealed == 0) {
             DAT_BuildingsState::instance.buildings[iVar9].surroundingsRevealed = 1;
             iVar6 = (int)DAT_BuildingsState::instance.buildings[iVar9].widthOrHeight / 2;
@@ -116,7 +116,7 @@ namespace Map {
                         piVar13 = &DAT_ViewportRenderState::instance.translationMatrix[iVar6 + -8].addXgetTile;
                         iVar10 = (iVar6 + 8) - (iVar6 + -8);
                         do {
-                            if (((uVar12 < 400) && (*local_18 != '\0'))
+                            if (uVar12 < 400 && *local_18 != '\0'
                                 && (iVar7 = (int)(short)DAT_TileMapState::instance.UnitLayer[*piVar13 + uVar12],
                                     iVar7 != 0)) {
                                 sVar3 = DAT_BuildingsState::instance.buildings[iVar9].owner;
@@ -226,8 +226,8 @@ namespace Map {
                     /*
                       spawn archer
                      */
-                    iVar9 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
-                        iVar8, iVar8, (int)((int)(DAT_BuildingsState::instance.buildings[iVar9].buildingEntryX * 8)),
+                    iVar9 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(iVar8, iVar8,
+                        (int)((int)(DAT_BuildingsState::instance.buildings[iVar9].buildingEntryX * 8)),
                         (int)((int)(DAT_BuildingsState::instance.buildings[iVar9].buildingEntryY * 8)), 8, unitType);
                     if (iVar9) {
                         DAT_UnitsState::instance.units[iVar9].aiUnitBehaviourType = 0x32;
@@ -252,18 +252,19 @@ namespace Map {
                                 + (int)(short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y;
                             uVar12 = iVar7 + -7 + iVar8 % 0xe;
                             MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
-                            if ((((int)pcVar1 < 400) && (uVar12 < 400))
-                                && (*(char*)(uVar12 * 400 + 0x21aec98 + (int)pcVar1) != '\0')) {
+                            if ((int)pcVar1 < 400 && uVar12 < 400
+                                && *(char*)(uVar12 * 400 + 0x21aec98 + (int)pcVar1) != '\0') {
                                 iVar8 = DAT_ViewportRenderState::instance.translationMatrix[iVar8 % 0xe + iVar7 + -7]
                                             .addXgetTile;
-                                int _unitPathConnection = (short)DAT_TileMapState::instance.PathConnectionLayer
-                                        [DAT_ViewportRenderState::instance
-                                                .translationMatrix[DAT_UnitsState::instance.units[iVar9].y]
-                                                .addXgetTile
-                                            + (int)DAT_UnitsState::instance.units[iVar9].x];
-                                int _targetMacroTile = (short)DAT_TileMapState::instance
-                                        .MacroLayer[iVar6 + iVar10 + iVar8 + 0x13a09];
-                                if ((_unitPathConnection == _targetMacroTile)
+                                int _unitPathConnection
+                                    = (short)DAT_TileMapState::instance.PathConnectionLayer
+                                          [DAT_ViewportRenderState::instance
+                                                  .translationMatrix[DAT_UnitsState::instance.units[iVar9].y]
+                                                  .addXgetTile
+                                              + (int)DAT_UnitsState::instance.units[iVar9].x];
+                                int _targetMacroTile
+                                    = (short)DAT_TileMapState::instance.MacroLayer[iVar6 + iVar10 + iVar8 + 0x13a09];
+                                if (_unitPathConnection == _targetMacroTile
                                     || (iVar7 = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::
                                                                       calculateCanPlayerUnitsNavigateToAreaFromArea,
                                             DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[iVar9].owner,
@@ -286,18 +287,18 @@ namespace Map {
                         local_14 = uVar12;
                         local_18 = pcVar1;
                         if (-1 < (int)local_18) {
-                            MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::setDestinationForUnit,
-                                DAT_UnitsState::ptr)(iVar9, (uint)((int)(local_18)), local_14, 0);
+                            MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::setDestinationForUnit, DAT_UnitsState::ptr)(
+                                iVar9, (uint)((int)(local_18)), local_14, 0);
                         }
                         iVar8 = DAT_CurrentBuildingID::instance;
                         iVar6 = 0;
                         psVar11 = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].workerID;
                         do {
-                            if ((psVar11[0xa1] < 1)
-                                || (DAT_UnitsState::instance.units[psVar11[0xa1]].uid
+                            if (psVar11[0xa1] < 1
+                                || DAT_UnitsState::instance.units[psVar11[0xa1]].uid
                                     != *(int*)(DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
                                                    .quarryLinkedOxTethers
-                                        + iVar6 * 2 + 0xf))) {
+                                        + iVar6 * 2 + 0xf)) {
                                 iVar10 = DAT_UnitsState::instance.units[iVar9].uid;
                                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
                                     .quarryLinkedOxTethers[iVar6 + 0xb] = (short)iVar9;
@@ -325,9 +326,8 @@ namespace Map {
         iVar9 = DAT_CurrentBuildingID::instance;
         if (!_tribeID) {
             iVar8 = 2000 - DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].outpostRelatedUnk06;
-            if (((DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY)
-                    || (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SKIRMISH_SINGLE_PLAYER))
-                || (399 < iVar8)) {
+            if (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY
+                || DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SKIRMISH_SINGLE_PLAYER || 399 < iVar8) {
                 if (iVar8 < 100) {
                     iVar8 = 100;
                 }
@@ -407,17 +407,16 @@ namespace Map {
                 }
                 iVar8 = iVar8 + 1;
             }
-            if (((uVar4 & 0x80)) && (iVar6 == iVar8)) {
+            if ((uVar4 & 0x80) && iVar6 == iVar8) {
                 DAT_BuildingsState::instance.buildings[iVar9].spawnUnitTypeIndex = 7;
             }
-            if (DAT_BuildingsState::instance.buildings[iVar9].buildingType
-                == Map::Buildings::BT_OUTPOST_ARABIAN) {
+            if (DAT_BuildingsState::instance.buildings[iVar9].buildingType == Map::Buildings::BT_OUTPOST_ARABIAN) {
                 psVar11 = &DAT_BuildingsState::instance.buildings[iVar9].spawnUnitTypeIndex;
                 *psVar11 = *psVar11 + 8;
             }
             local_10 = (int)DAT_BuildingsState::instance.buildings[iVar9].spawnUnitTypeIndex;
-            _tribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeForPlayer,
-                DAT_TribesState::ptr)((int)DAT_BuildingsState::instance.buildings[iVar9].owner);
+            _tribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(
+                (int)DAT_BuildingsState::instance.buildings[iVar9].owner);
             iVar9 = DAT_CurrentBuildingID::instance;
             if (_tribeID < 1) {}
             _tribeUID = DAT_TribesState::instance.tribes[_tribeID].uid;
@@ -444,9 +443,8 @@ namespace Map {
         if (iVar6 < iVar9) {
             iVar6 = iVar9;
         }
-        if (((DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY)
-                && (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SKIRMISH_SINGLE_PLAYER))
-            && (iVar6 < 0x32)) {
+        if (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY
+            && DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SKIRMISH_SINGLE_PLAYER && iVar6 < 0x32) {
             iVar6 = 0x32;
         }
         sVar3 = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].outpostRelatedUnk2;
@@ -456,10 +454,10 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[iVar8].field268_0x308 = SEC_RNG::instance.currentNumber2 % 0x28;
             MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
             sVar3 = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].outpostRelatedUnk3;
-            if ((sVar3 < 1)
-                || ((int)DAT_TribesState::instance.tribes[_tribeID].size
+            if (sVar3 < 1
+                || (int)DAT_TribesState::instance.tribes[_tribeID].size
                     < DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].outpostRelatedUnk05
-                        + -1)) {
+                        + -1) {
                 uVar12 = (uint)(DAT_BuildingDefinedData::instance.SpawnUnitProperties[local_10][4] != 0);
                 if (DAT_BuildingDefinedData::instance.SpawnUnitProperties[local_10][5] != 0) {
                     uVar12 = uVar12 + 1;
@@ -483,9 +481,9 @@ namespace Map {
                     uVar12 = uVar12 + 1;
                 }
                 if (((local_10 == 7) || (local_10 == 6))
-                    && (((!sVar3 && (DAT_TribesState::instance.tribes[_tribeID].size == 0))
+                    && ((!sVar3 && (DAT_TribesState::instance.tribes[_tribeID].size == 0))
                         || ((DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field273_0x312 != 0
-                            && (0 < DAT_TribesState::instance.tribes[_tribeID].size)))))) {
+                            && (0 < DAT_TribesState::instance.tribes[_tribeID].size))))) {
                     uVar12 = 1;
                 }
                 _randomUnitType
@@ -493,30 +491,29 @@ namespace Map {
                           .SpawnUnitProperties[local_10][(int)SEC_RNG::instance.currentNumber2 % (int)uVar12 + 4];
                 MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
                 local_18 = (char*)0x1;
-                if (((0 < DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].outpostRelatedUnk3)
-                        && (DAT_TribesState::instance.tribes[_tribeID].size == 0))
-                    && (DAT_GameState::instance.playerDataArray[sVar2].aiType != AI::AIT_NULL)) {
+                if (0 < DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].outpostRelatedUnk3
+                    && DAT_TribesState::instance.tribes[_tribeID].size == 0
+                    && DAT_GameState::instance.playerDataArray[sVar2].aiType != AI::AIT_NULL) {
                     local_18 = (char*)((int)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
                                            .outpostRelatedUnk05
                         / 2);
                     if (local_18 == (char*)0x0) {
                         local_18 = (char*)0x1;
                     }
-                    if (((local_10 == 7) || (local_10 == 6))
-                        && ((1 < (int)local_18 && (_randomUnitType == Map::Units::UT_S_CATAPULT)))) {
+                    if (((local_10 == 7) || (local_10 == 6)) && 1 < (int)local_18
+                        && _randomUnitType == Map::Units::UT_S_CATAPULT) {
                         _randomUnitType = DAT_BuildingDefinedData::instance.SpawnUnitProperties[local_10][5];
                     }
                 }
-                if (((DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY)
-                        || (DAT_GameSynchronyState::instance.currentGameMode
-                            == Game::GM_SKIRMISH_SINGLE_PLAYER))
-                    || (DAT_GameState::instance.playerDataArray[sVar2].count_2
+                if (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY
+                    || DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SKIRMISH_SINGLE_PLAYER
+                    || DAT_GameState::instance.playerDataArray[sVar2].count_2
                             + DAT_GameState::instance.playerDataArray[sVar2].armySize
-                        < DAT_GameState::instance.mapAndTime.armySizeLimit)) {
+                        < DAT_GameState::instance.mapAndTime.armySizeLimit) {
                     for (local_4 = 0; local_4 < (int)local_18; local_4++) {
                         iVar9 = (int)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;
-                        _randomUnitID = MACRO_CALL_MEMBER(
-                            Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(iVar9, iVar9,
+                        _randomUnitID = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
+                            iVar9, iVar9,
                             (int)((int)(DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
                                             .buildingEntryX
                                 * 8)),
@@ -573,8 +570,8 @@ namespace Map {
                         DAT_UnitsState::instance.units[_randomUnitID].aiUnitBehaviourType = 0x32;
                         DAT_UnitsState::instance.units[_randomUnitID].goToRallyPoint = 0;
                     }
-                    MACRO_CALL_MEMBER(
-                        Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(_tribeID,
+                    MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(
+                        _tribeID,
                         (uint)((int)((int)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
                                 .buildingEntryX)),
                         (uint)((int)((int)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
@@ -584,8 +581,7 @@ namespace Map {
                             <= DAT_TribesState::instance.tribes[_tribeID].size)
                         && (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].outpostRelatedUnk3
                             < 1)) {
-                        MACRO_CALL_MEMBER(
-                            AI::AICState_Func::aiRegisterTribeAndAssignTarget, DAT_AICState::ptr)(
+                        MACRO_CALL_MEMBER(AI::AICState_Func::aiRegisterTribeAndAssignTarget, DAT_AICState::ptr)(
                             _tribeID, DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].tribeUID);
                         iVar9 = DAT_CurrentBuildingID::instance;
                         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].tribeID = 0;

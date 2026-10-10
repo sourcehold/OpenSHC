@@ -18,8 +18,8 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x0052D690
     undefined4 WildlifeState::isSuitableWildlifeSpawnCell(int param_1, int param_2)
     {
-        if (((this->grid[param_1][param_2].unclaimedArea < 9) && (this->grid[param_1][param_2].trees < 5))
-            && (0x31 < this->grid[param_1][param_2].firstMember)) {
+        if (this->grid[param_1][param_2].unclaimedArea < 9 && this->grid[param_1][param_2].trees < 5
+            && 0x31 < this->grid[param_1][param_2].firstMember) {
             for (int direction = 0; direction < 8; ++direction) {
                 uint const x
                     = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.xOffset
@@ -27,8 +27,8 @@ namespace Map {
                 uint const y
                     = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.yOffset
                     + param_2;
-                if (((x < 0x28) && (y < 0x28))
-                    && ((0 < this->grid[x][y].firstMember) && (this->grid[x][y].unknownNonZero01 != 0))) {
+                if (x < 0x28 && y < 0x28 && 0 < this->grid[x][y].firstMember
+                    && this->grid[x][y].unknownNonZero01 != 0) {
                     return (undefined4)(1);
                 }
             }

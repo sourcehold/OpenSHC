@@ -47,15 +47,15 @@ namespace UI {
                     int playerID = (int)DAT_GameSynchronyState::instance.DAT_RoundTableOrderArray[param_1 - 10];
                     playerID_01
                         = (int)(char)DAT_GameSynchronyState::instance.DAT_RoundTableOrderArray[DAT_00df423c::instance];
-                    if ((((0 < playerID_01) && ((0 < playerID && (playerID != playerID_01))))
-                            && ((DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID_01] != -1
-                                || (BVar3 = MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::isAIPlayer,
-                                        DAT_GameSynchronyState::ptr)(playerID_01),
-                                    BVar3))))
-                        && ((DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] != -1
+                    if (0 < playerID_01 && 0 < playerID && playerID != playerID_01
+                        && (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID_01] != -1
+                            || (BVar3 = MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::isAIPlayer,
+                                    DAT_GameSynchronyState::ptr)(playerID_01),
+                                BVar3))
+                        && (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] != -1
                             || (BVar3 = MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::isAIPlayer,
                                     DAT_GameSynchronyState::ptr)(playerID),
-                                BVar3)))) {
+                                BVar3))) {
                         int iVar4 = 0;
                         for (playerID_00 = 1; playerID_00 < 9; playerID_00++) {
                             if ((DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID_00] != -1)
@@ -72,8 +72,8 @@ namespace UI {
                                     /*
                                       "Not the rodent"
                                      */
-                                    MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playWAVSFX,
-                                        DAT_SFXState::ptr)("Genie_13.wav");
+                                    MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
+                                        "Genie_13.wav");
                                 }
                                 DAT_00df4240::instance = 1;
                             }
@@ -83,8 +83,8 @@ namespace UI {
                                     /*
                                       "Oh no"
                                      */
-                                    MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playWAVSFX,
-                                        DAT_SFXState::ptr)("Genie_14.wav");
+                                    MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
+                                        "Genie_14.wav");
                                 }
                                 DAT_00df4298::instance = 1;
                             }
@@ -98,32 +98,32 @@ namespace UI {
                                     && ('\0' < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[1])) {
                                     bVar1 = DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[1];
                                 }
-                                if (('\0' < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[2])
-                                    && ((char)bVar1 < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[2])) {
+                                if ('\0' < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[2]
+                                    && (char)bVar1 < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[2]) {
                                     bVar1 = DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[2];
                                 }
-                                if (('\0' < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[3])
-                                    && ((char)bVar1 < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[3])) {
+                                if ('\0' < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[3]
+                                    && (char)bVar1 < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[3]) {
                                     bVar1 = DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[3];
                                 }
-                                if (('\0' < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[4])
-                                    && ((char)bVar1 < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[4])) {
+                                if ('\0' < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[4]
+                                    && (char)bVar1 < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[4]) {
                                     bVar1 = DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[4];
                                 }
-                                if (('\0' < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[5])
-                                    && ((char)bVar1 < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[5])) {
+                                if ('\0' < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[5]
+                                    && (char)bVar1 < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[5]) {
                                     bVar1 = DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[5];
                                 }
-                                if (('\0' < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[6])
-                                    && ((char)bVar1 < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[6])) {
+                                if ('\0' < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[6]
+                                    && (char)bVar1 < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[6]) {
                                     bVar1 = DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[6];
                                 }
-                                if (('\0' < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[7])
-                                    && ((char)bVar1 < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[7])) {
+                                if ('\0' < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[7]
+                                    && (char)bVar1 < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[7]) {
                                     bVar1 = DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[7];
                                 }
-                                if (('\0' < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[8])
-                                    && ((char)bVar1 < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[8])) {
+                                if ('\0' < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[8]
+                                    && (char)bVar1 < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[8]) {
                                     bVar1 = DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[8];
                                 }
                                 DAT_GameSynchronyState::instance
@@ -131,68 +131,67 @@ namespace UI {
                                             .DAT_RoundTableOrderArray[DAT_00df423c::instance]] = bVar1 + 1;
                                 DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[DAT_GameSynchronyState::instance
                                         .DAT_RoundTableOrderArray[param_1 - 10]] = bVar1 + 1;
-                                MACRO_CALL_MEMBER(
-                                    Audio::SFX::SFXState_Func::scheduleSFXVariation, DAT_SFXState::ptr)(7, 1);
-                                BVar3
-                                    = MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::shouldSoundXNotBePlaying,
-                                        DAT_SoundSystemState::ptr)();
-                                if (((!BVar3) && (2 < iVar4)) && (DAT_GameCore::instance.genieVoiceActive)) {
+                                MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::scheduleSFXVariation, DAT_SFXState::ptr)(
+                                    7, 1);
+                                BVar3 = MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::shouldSoundXNotBePlaying,
+                                    DAT_SoundSystemState::ptr)();
+                                if (!BVar3 && 2 < iVar4 && DAT_GameCore::instance.genieVoiceActive) {
                                     MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber1, SEC_RNG::ptr)();
                                     switch ((int)SEC_RNG::instance.currentNumber1 % 7) {
                                     case 0:
                                         /*
                                           "We will be invincible"
                                          */
-                                        MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playWAVSFX,
-                                            DAT_SFXState::ptr)("genie_05.wav");
+                                        MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
+                                            "genie_05.wav");
                                         break;
                                     case 1:
                                         /*
                                           "A worthy ally"
                                          */
-                                        MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playWAVSFX,
-                                            DAT_SFXState::ptr)("genie_06.wav");
+                                        MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
+                                            "genie_06.wav");
                                         break;
                                     case 2:
                                         /*
                                           "Watch my back"
                                          */
-                                        MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playWAVSFX,
-                                            DAT_SFXState::ptr)("genie_07.wav");
+                                        MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
+                                            "genie_07.wav");
                                         break;
                                     case 3:
                                         /*
                                           "Yeeees"
                                          */
-                                        MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playWAVSFX,
-                                            DAT_SFXState::ptr)("genie_08.wav");
+                                        MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
+                                            "genie_08.wav");
                                         break;
                                     case 4:
                                         /*
                                           "On my honour"
                                          */
-                                        MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playWAVSFX,
-                                            DAT_SFXState::ptr)("genie_09.wav");
+                                        MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
+                                            "genie_09.wav");
                                         break;
                                     case 5:
                                         /*
                                           "We rule"
                                          */
-                                        MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playWAVSFX,
-                                            DAT_SFXState::ptr)("genie_10.wav");
+                                        MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
+                                            "genie_10.wav");
                                         break;
                                     case 6:
                                         /*
                                           "I pledge allegiance"
                                          */
-                                        MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playWAVSFX,
-                                            DAT_SFXState::ptr)("genie_04.wav");
+                                        MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
+                                            "genie_04.wav");
                                     }
                                 }
                             } else {
                                 DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[playerID_01] = bVar1;
-                                MACRO_CALL_MEMBER(
-                                    Audio::SFX::SFXState_Func::scheduleSFXVariation, DAT_SFXState::ptr)(7, 1);
+                                MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::scheduleSFXVariation, DAT_SFXState::ptr)(
+                                    7, 1);
                             }
                         }
                     }
@@ -212,14 +211,13 @@ namespace UI {
                         MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::reorderTeamsAndPositions,
                             DAT_GameSynchronyState::ptr)();
                         DAT_00df423c::instance = 0;
-                        MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::scheduleSFXVariation, DAT_SFXState::ptr)(
-                            7, 0);
+                        MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::scheduleSFXVariation, DAT_SFXState::ptr)(7, 0);
                     }
                 } else if (param_1 == 100) {
                     DAT_MenuModalComposition1::instance.activeModalDialogID = UI::Enums::MMT_NONE;
                     MACRO_CALL_MEMBER(Input::MouseState_Func::resetMouseState2, DAT_MouseState::ptr)();
-                    MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::reorderTeamsAndPositions,
-                        DAT_GameSynchronyState::ptr)();
+                    MACRO_CALL_MEMBER(
+                        Synchrony::GameSynchronyState_Func::reorderTeamsAndPositions, DAT_GameSynchronyState::ptr)();
                     char cVar2 = '\0' < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[1];
                     if ('\0' < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[2]) {
                         cVar2 = cVar2 + '\x01';
@@ -246,8 +244,7 @@ namespace UI {
                         /*
                           "The sides are drawn"
                          */
-                        MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
-                            "Genie_02.wav");
+                        MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)("Genie_02.wav");
                     }
                 } else {
                     if (param_1 == 0x65) {
@@ -280,8 +277,8 @@ namespace UI {
                         if (DAT_00df423c::instance) {
                             DAT_00df423c::instance = 0;
                         }
-                    } else if (((param_1 == 0xc9) || (param_1 == 0xca))
-                        && ((DAT_00df423c::instance && ((INT_00df4244::instance != 1 || (param_1 == 0xc9)))))) {
+                    } else if (((param_1 == 0xc9) || (param_1 == 0xca)) && DAT_00df423c::instance
+                        && (INT_00df4244::instance != 1 || (param_1 == 0xc9))) {
                         DAT_00df423c::instance = 0;
                     }
                 }

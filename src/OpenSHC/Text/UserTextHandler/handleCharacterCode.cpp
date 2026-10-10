@@ -1,7 +1,7 @@
 #include "../UserTextHandler.func.hpp"
 
-#include "OpenSHC/Text/TextArrayIndexType.hpp"
 #include "OpenSHC/Text/UserTextHandler.func.hpp"
+#include "OpenSHC/Text/TextArrayIndexType.hpp"
 
 #include "OpenSHC/Globals/DAT_InsertKeyState.hpp"
 #include "OpenSHC/Globals/DAT_TextInputDefinedData.hpp"
@@ -23,9 +23,9 @@ namespace Text {
             if (DAT_TextInputDefinedData::instance.UserTextHandler_CharacterFilter_A_2_3[characterCode] == 0) {
                 return;
             }
-        } else if (((this->textArrayIndex == Text::TAIT_FIVE__NUMERIC_DOT)
-                       || (this->textArrayIndex == Text::TAIT_SIX__NUMERIC_ONLY))
-            || (this->textArrayIndex == Text::TAIT_SEVEN__NUMERIC_ONLY)) {
+        } else if (this->textArrayIndex == Text::TAIT_FIVE__NUMERIC_DOT
+            || this->textArrayIndex == Text::TAIT_SIX__NUMERIC_ONLY
+            || this->textArrayIndex == Text::TAIT_SEVEN__NUMERIC_ONLY) {
             if ((characterCode < 48) || (57 < characterCode)) {
                 if (this->textArrayIndex != Text::TAIT_FIVE__NUMERIC_DOT) {
                     return;
@@ -47,8 +47,7 @@ namespace Text {
                 < this->textBoxMaxCharactersArray[this->textArrayIndex])) {
             MACRO_CALL_MEMBER(Text::UserTextHandler_Func::shiftTextRightAtCursor, this)(
                 this->textCursorIndexArray[this->textArrayIndex],
-                this->textContentLengthArray[this->textArrayIndex]
-                    - this->textCursorIndexArray[this->textArrayIndex]);
+                this->textContentLengthArray[this->textArrayIndex] - this->textCursorIndexArray[this->textArrayIndex]);
         }
 
         if (this->textBoxMaxCharactersArray[this->textArrayIndex]
@@ -61,8 +60,7 @@ namespace Text {
          */
         this->textArray[this->textArrayIndex][this->textCursorIndexArray[this->textArrayIndex]] = characterCode;
         this->textCursorIndexArray[this->textArrayIndex] = this->textCursorIndexArray[this->textArrayIndex] + 1;
-        if (this->textBoxMaxCharactersArray[this->textArrayIndex]
-            < this->textCursorIndexArray[this->textArrayIndex]) {
+        if (this->textBoxMaxCharactersArray[this->textArrayIndex] < this->textCursorIndexArray[this->textArrayIndex]) {
             this->textCursorIndexArray[this->textArrayIndex] = this->textBoxMaxCharactersArray[this->textArrayIndex];
         }
         if (this->textCursorIndexArray[this->textArrayIndex] < 0) {

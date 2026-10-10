@@ -100,8 +100,7 @@ namespace UI {
                 iVar1 = MACRO_CALL_MEMBER(
                     Map::Units::UnitsState_Func::selectionContainsTunnelersOnly, DAT_UnitsState::ptr)();
                 if (iVar1) {
-                    MACRO_CALL(
-                        UI::MenuItems::General_Func::MenuItemActionHandler_General_ToolbarButtonPressed)(
+                    MACRO_CALL(UI::MenuItems::General_Func::MenuItemActionHandler_General_ToolbarButtonPressed)(
                         Commands::M_MAPPER_TUNNEL_CONSTRUCTION);
                 }
                 UVar3 = MACRO_CALL_MEMBER(
@@ -109,9 +108,9 @@ namespace UI {
                 uVar2 = MACRO_CALL_MEMBER(
                     Map::Units::UnitsState_Func::getFirstSelectedCatapultOrTrebuchetID, DAT_UnitsState::ptr)();
                 if (((UVar3 != Map::Units::UT_S_CATAPULT) && (UVar3 != Map::Units::UT_S_TREBUCHET))
-                    || (DAT_UnitsState::instance.units[uVar2]
+                    || DAT_UnitsState::instance.units[uVar2]
                             .digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300
-                        != 0)) {
+                        != 0) {
                     DAT_UnitsState::instance.pendingUnitControlMode = 5;
                     DAT_UnitsState::instance.unitControlsRelated = 5;
                     DAT_TileMapState::instance.field185_0x554a08 = 0xf;
@@ -145,14 +144,12 @@ namespace UI {
                 if (0 < *(int*)((int)DAT_GameState::instance.playerDataArray[0].isFoodTypeBanned + extraout_ECX + -8)) {
                     UVar3 = MACRO_CALL_MEMBER(
                         Map::Units::UnitsState_Func::getUnitTypeOfFirstSelectedUnit, DAT_UnitsState::ptr)();
-                    uVar2
-                        = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::getFirstSelectedCatapultOrTrebuchetID,
-                            DAT_UnitsState::ptr)();
-                    if (((UVar3 == Map::Units::UT_S_CATAPULT)
-                            || (UVar3 == Map::Units::UT_S_TREBUCHET))
-                        && (DAT_UnitsState::instance.units[uVar2]
+                    uVar2 = MACRO_CALL_MEMBER(
+                        Map::Units::UnitsState_Func::getFirstSelectedCatapultOrTrebuchetID, DAT_UnitsState::ptr)();
+                    if (((UVar3 == Map::Units::UT_S_CATAPULT) || (UVar3 == Map::Units::UT_S_TREBUCHET))
+                        && DAT_UnitsState::instance.units[uVar2]
                                 .digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300
-                            != 0)) {
+                            != 0) {
                         DAT_UnitsState::instance.pendingUnitControlMode = 0x16;
                         DAT_UnitsState::instance.unitControlsRelated = 0x16;
                         DAT_TileMapState::instance.field185_0x554a08 = 0xf;
@@ -164,7 +161,7 @@ namespace UI {
             case 0x1e:
                 UVar3 = MACRO_CALL_MEMBER(
                     Map::Units::UnitsState_Func::getUnitTypeOfFirstSelectedUnit, DAT_UnitsState::ptr)();
-                if (UVar3 == ((UnitType)0xffffffff)) {
+                if (UVar3 == (UnitType)0xffffffff) {
                     DAT_StopHandlingMenuItems::instance = 0;
                 }
                 MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::queueDisbandAndAttackCommand2Params,

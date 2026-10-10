@@ -35,11 +35,10 @@ namespace Map {
                 return FALSE;
             }
             _playerID = (int)DAT_UnitsState::instance.units[unitID].owner;
-            if ((DAT_GameSynchronyState::instance.currentPlayerFullIDArray[_playerID] == -1)
-                && ((
-                    (_tribeID = (int)DAT_UnitsState::instance.units[unitID].tribeID,
+            if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[_playerID] == -1
+                && ((_tribeID = (int)DAT_UnitsState::instance.units[unitID].tribeID,
                         _tribeID < 1 || (this->tribes[_tribeID].uid != DAT_UnitsState::instance.units[unitID].tribeUID))
-                    || (this->tribes[_tribeID].tribeState == 0)))) {
+                    || (this->tribes[_tribeID].tribeState == 0))) {
                 _newTribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, this)(_playerID, 0);
                 if (0 < _newTribeID) {
                     _unitType = DAT_UnitsState::instance.units[unitID].unitType;
@@ -62,8 +61,7 @@ namespace Map {
                     } else if (_unitType == Map::Units::UT_E_ENGINEER) {
                         this->tribes[_newTribeID].tribeType = AI::Tribes::AITT_ENGINEERS;
                     } else if (_unitType == Map::Units::UT_HOPSFARMER) {
-                        this->tribes[_newTribeID].tribeType
-                            = AI::Tribes::AITT_SWORDSMEN | AI::Tribes::AITT_LADDERMEN;
+                        this->tribes[_newTribeID].tribeType = AI::Tribes::AITT_SWORDSMEN | AI::Tribes::AITT_LADDERMEN;
                     } else if (_unitType == Map::Units::UT_TUNNELER) {
                         this->tribes[_newTribeID].tribeType = AI::Tribes::AITT_TUNNELERS;
                     } else if (_unitType == Map::Units::UT_A_ARCHER) {

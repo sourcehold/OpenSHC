@@ -50,17 +50,17 @@ namespace Rendering {
             BVar2 = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
             if (BVar2) {
                 if (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_BUILDING_AND_STATUS_MENU) {
-                    if (DAT_GameCore::instance.activeMenuTab.tabType
-                        == UI::Enums::BASMTT_BARRACKS_OR_MPMENU_MODEM) {
+                    if (DAT_GameCore::instance.activeMenuTab.tabType == UI::Enums::BASMTT_BARRACKS_OR_MPMENU_MODEM) {
                         iVar6 = -0x28;
                     } else {
-                        iVar6 = (-(uint)(DAT_GameCore::instance.activeMenuTab.tabType
-                                     != UI::Enums::BASMTT_MERCENARYPOST)
-                                    & 0x14)
+                        iVar6
+                            = (-(uint)(DAT_GameCore::instance.activeMenuTab.tabType != UI::Enums::BASMTT_MERCENARYPOST)
+                                  & 0x14)
                             - 0x28;
                     }
                 }
-                BVar2 = MACRO_CALL(UI::DisplayElements_Func::GetIfDisplayElementStateNotZero)(UI::Enums::DEID_KEEP_AND_GRANERY_PLACEMENT_INFO);
+                BVar2 = MACRO_CALL(UI::DisplayElements_Func::GetIfDisplayElementStateNotZero)(
+                    UI::Enums::DEID_KEEP_AND_GRANERY_PLACEMENT_INFO);
                 if (BVar2) {
                     iVar6 = iVar6 + -0x28;
                 }
@@ -71,9 +71,9 @@ namespace Rendering {
                     iVar4 = MACRO_CALL_MEMBER(Text::FontSizeClass_Func::renderMultilineWideTextUnk,
                         &DAT_TextManagerObject::instance.fontSizeClassArray[0x12])(
                         (WCHAR*)this->currentMessageText_0x8, 0, 0, 0x244, 0, 0, 2);
-                    MACRO_CALL_MEMBER(Text::TextManager_Func::renderMultilineWideTextUnk,
-                        DAT_TextManagerObject::ptr)((WCHAR*)this->currentMessageText_0x8, param_1 - iVar4,
-                        (iVar6 - iVar3) + param_2, 0x244, 0xccfaff, 0, 0x12, 0);
+                    MACRO_CALL_MEMBER(Text::TextManager_Func::renderMultilineWideTextUnk, DAT_TextManagerObject::ptr)(
+                        (WCHAR*)this->currentMessageText_0x8, param_1 - iVar4, (iVar6 - iVar3) + param_2, 0x244,
+                        0xccfaff, 0, 0x12, 0);
                 } else {
                     iVar3 = MACRO_CALL_MEMBER(Text::FontSizeClass_Func::renderMultilineTextUnk,
                         &DAT_TextManagerObject::instance.fontSizeClassArray[0x12])(
@@ -81,9 +81,9 @@ namespace Rendering {
                     iVar4 = MACRO_CALL_MEMBER(Text::FontSizeClass_Func::renderMultilineTextUnk,
                         &DAT_TextManagerObject::instance.fontSizeClassArray[0x12])(
                         this->currentMessageText_0x8, 0, 0, 0x244, 0, 0, 2);
-                    MACRO_CALL_MEMBER(Text::TextManager_Func::renderMultilineText6Unk,
-                        DAT_TextManagerObject::ptr)(this->currentMessageText_0x8, param_1 - iVar4,
-                        (iVar6 - iVar3) + param_2, 0x244, 0xccfaff, 0, 0x12, 0);
+                    MACRO_CALL_MEMBER(Text::TextManager_Func::renderMultilineText6Unk, DAT_TextManagerObject::ptr)(
+                        this->currentMessageText_0x8, param_1 - iVar4, (iVar6 - iVar3) + param_2, 0x244, 0xccfaff, 0,
+                        0x12, 0);
                 }
                 if (0 < (int)this->currentMessageUnknownValue2_0xd4) {
                     iVar3 = MACRO_CALL_MEMBER(Text::FontSizeClass_Func::renderMultilineTextUnk,
@@ -94,8 +94,7 @@ namespace Rendering {
                         &DAT_TextManagerObject::instance.fontSizeClassArray[0x12])(
                         DAT_GameSynchronyState::instance.DAT_PlayerNames[this->currentMessageUnknownValue2_0xd4], 0, 0,
                         0x244, 0, 0, 2);
-                    MACRO_CALL_MEMBER(
-                        Text::TextManager_Func::renderMultilineText6Unk, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(Text::TextManager_Func::renderMultilineText6Unk, DAT_TextManagerObject::ptr)(
                         DAT_GameSynchronyState::instance.DAT_PlayerNames[this->currentMessageUnknownValue2_0xd4],
                         param_1 - iVar5, (iVar6 - iVar3) + param_2, 0x244, 0xccfaff, 0, 0x12, 0);
                     iVar6 = 0;
@@ -122,12 +121,11 @@ namespace Rendering {
                 if (!BVar2) {
                     this->mbr_0x92c = 1;
                 }
-                if ((10000 < (int)(DVar1 - this->videoStartTimeUnk_0xd8)) || (!iVar4)) {
+                if (10000 < (int)(DVar1 - this->videoStartTimeUnk_0xd8) || !iVar4) {
                     if (this->currentMessageVfxFile_0xc[0] == '\0') {
-                        if ((((this->currentMessageSfxFile_0x70[0] != '\0')
-                                 && (DAT_SoundSystemState::instance.waveOutOpenUnk_0x8))
-                                && (DAT_SoundSystemState::instance.soundActiveUnk_0x0))
-                            && (!this->mbr_0x92c)) {}
+                        if (this->currentMessageSfxFile_0x70[0] != '\0'
+                            && DAT_SoundSystemState::instance.waveOutOpenUnk_0x8
+                            && DAT_SoundSystemState::instance.soundActiveUnk_0x0 && !this->mbr_0x92c) {}
                     } else if (DAT_BinkControlState::instance.binkObjPtrArray[1] != (HBINK)0x0) {
                     }
                     if (!DAT_GameCore::instance.gamePausedLogical) {

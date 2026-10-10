@@ -79,15 +79,13 @@ namespace UI {
                 != 0) {}
             if (DAT_GameCore::instance.gamePausedLogical) {}
             if (DAT_GameCore::instance.gameMode_2 == Game::GM_CRUSADER_TUTORIAL) {
-                BVar1 = MACRO_CALL_MEMBER(
-                    Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,
+                BVar1 = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,
                     DAT_BuildingsState::ptr)(buttonID);
                 BVar2 = MACRO_CALL(Game_Func::Tutorial_IsActionAllowed)(1, (int)((int)(BVar1)));
                 if (!BVar2) {
                     MACRO_CALL(UI::Helpers_Func::SetTutorialHintActiveWithTimestamp)();
                 }
-                BVar1 = MACRO_CALL_MEMBER(
-                    Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,
+                BVar1 = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,
                     DAT_BuildingsState::ptr)(buttonID);
                 MACRO_CALL(UI::Helpers_Func::SetTutorialBuildingActionState)(6, BVar1);
             }
@@ -108,8 +106,7 @@ namespace UI {
                         Map::Units::UnitsState_Func::returnFirstSelectedEngineer, DAT_UnitsState::ptr)();
                     if (!uVar5) {
                         iVar3 = MACRO_CALL_MEMBER(
-                            Map::Units::UnitsState_Func::countSelectedCatapultsAndTrebuchets,
-                            DAT_UnitsState::ptr)();
+                            Map::Units::UnitsState_Func::countSelectedCatapultsAndTrebuchets, DAT_UnitsState::ptr)();
                         if (!iVar3) {
                             DAT_StopHandlingMenuItems::instance = 0;
                         }
@@ -178,7 +175,7 @@ namespace UI {
             case Commands::M_MAPPER_PATROL:
                 UVar4 = MACRO_CALL_MEMBER(
                     Map::Units::UnitsState_Func::getUnitTypeOfFirstSelectedUnit, DAT_UnitsState::ptr)();
-                if (UVar4 == ((UnitType)0xffffffff)) {}
+                if (UVar4 == (UnitType)0xffffffff) {}
                 if (DAT_TribesState::instance.patrolButtonPressed) {
                     MACRO_CALL(UI::Helpers_Func::SetTribesPatrolButtonPressed)(0);
                     DAT_TribesState::instance.rallyCount = 1;
@@ -277,15 +274,13 @@ namespace UI {
                 break;
             case Commands::M_MAPPER_GATE_STONE1A:
             case Commands::M_MAPPER_GATE_STONE1B:
-                buttonID
-                    = (Commands::MappersEnum)((DAT_TileMapState::instance.mapOrientation / 2 + buttonID & 1)
-                        + Commands::M_MAPPER_GATE_STONE1A);
+                buttonID = (Commands::MappersEnum)((DAT_TileMapState::instance.mapOrientation / 2 + buttonID & 1)
+                    + Commands::M_MAPPER_GATE_STONE1A);
                 break;
             case Commands::M_MAPPER_GATE_STONE2A:
             case Commands::M_MAPPER_GATE_STONE2B:
-                buttonID
-                    = (Commands::MappersEnum)((DAT_TileMapState::instance.mapOrientation / 2 + buttonID & 1)
-                        + Commands::M_MAPPER_GATE_STONE2A);
+                buttonID = (Commands::MappersEnum)((DAT_TileMapState::instance.mapOrientation / 2 + buttonID & 1)
+                    + Commands::M_MAPPER_GATE_STONE2A);
                 break;
             case Commands::M_MAPPER_CATAPULT:
             case Commands::M_MAPPER_TREBUCHET:
@@ -295,70 +290,46 @@ namespace UI {
                 goto switchD_00444907_caseD_166;
             }
         switchD_00444907_caseD_122:
-            BVar1 = MACRO_CALL_MEMBER(
-                Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,
+            BVar1 = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,
                 DAT_BuildingsState::ptr)(buttonID);
-            if (BVar1 != ((BuildingType)0)) {
-                MACRO_CALL_MEMBER(Game::GameStateStructures_Func::checkRequiredResourcesForBuildingOrPlanToBuy,
-                    DAT_GameState::ptr)(
+            if (BVar1 != (BuildingType)0) {
+                MACRO_CALL_MEMBER(
+                    Game::GameStateStructures_Func::checkRequiredResourcesForBuildingOrPlanToBuy, DAT_GameState::ptr)(
                     buttonID, (int)((int)(DAT_GameSynchronyState::instance.currentPlayerSlotID)), TRUE);
             }
             DAT_TileMapState::instance.unitPlacementCount = 1;
             DAT_TileMapState::instance.currentMapperCommand = buttonID;
-            MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(
-                ((SoundEffectID)0x87));
-            if (((((((((buttonID != Commands::M_MAPPER_CATAPULT)
-                          && (buttonID != Commands::M_MAPPER_ARAB_BALLISTA))
-                         && (buttonID != Commands::M_MAPPER_TREBUCHET))
-                        && ((buttonID != Commands::M_MAPPER_SIEGE_TOWER
-                            && (buttonID != Commands::M_MAPPER_BATTERING_RAM))))
-                       && (buttonID != Commands::M_MAPPER_PORTABLE_SHIELD))
-                      && (((buttonID != Commands::M_MAPPER_TUNNEL_CONSTRUCTION
-                               && (DAT_TileMapState::instance.currentMapperCommand
-                                   != Commands::M_MAPPER_PLACE_ASSEMBLY_POINT1))
-                          && ((DAT_TileMapState::instance.currentMapperCommand
-                                  != Commands::M_MAPPER_PLACE_ASSEMBLY_POINT2
-                              && (((DAT_TileMapState::instance.currentMapperCommand
-                                           != Commands::M_MAPPER_PLACE_ASSEMBLY_POINT3
-                                       && (DAT_TileMapState::instance.currentMapperCommand
-                                           != Commands::M_MAPPER_PLACE_ASSEMBLY_POINT4))
-                                  && (DAT_TileMapState::instance.currentMapperCommand
-                                      != Commands::M_MAPPER_PLACE_ASSEMBLY_POINT5))))))))
-                     && ((DAT_TileMapState::instance.currentMapperCommand
-                             != Commands::M_MAPPER_PLACE_ASSEMBLY_POINT6
-                         && (DAT_TileMapState::instance.currentMapperCommand
-                             != Commands::M_MAPPER_PLACE_ASSEMBLY_POINT7))))
-                    && (((DAT_TileMapState::instance.currentMapperCommand
-                                 != Commands::M_MAPPER_PLACE_ASSEMBLY_POINTM1
-                             && (((DAT_TileMapState::instance.currentMapperCommand
-                                          != Commands::M_MAPPER_PLACE_ASSEMBLY_POINTM2
-                                      && (DAT_TileMapState::instance.currentMapperCommand
-                                          != Commands::M_MAPPER_PLACE_ASSEMBLY_POINTM3))
-                                 && ((DAT_TileMapState::instance.currentMapperCommand
-                                         != Commands::M_MAPPER_PLACE_ASSEMBLY_POINTM4
-                                     && (((DAT_TileMapState::instance.currentMapperCommand
-                                                  != Commands::M_MAPPER_PLACE_ASSEMBLY_POINTM5
-                                              && (DAT_TileMapState::instance.currentMapperCommand
-                                                  != Commands::M_MAPPER_PLACE_ASSEMBLY_POINTM6))
-                                         && (DAT_TileMapState::instance.currentMapperCommand
-                                             != Commands::M_MAPPER_PLACE_ASSEMBLY_POINTM7))))))))
-                        && (((DAT_TileMapState::instance.currentMapperCommand
-                                     != Commands::M_MAPPER_PLACE_ASSEMBLY_POINTE1
-                                 && (DAT_TileMapState::instance.currentMapperCommand
-                                     != Commands::M_MAPPER_PLACE_ASSEMBLY_POINTE2))
-                            && (DAT_TileMapState::instance.currentMapperCommand
-                                != Commands::M_MAPPER_PLACE_ASSEMBLY_POINTT1))))))
-                && ((DAT_TileMapState::instance.currentMapperCommand
-                        != Commands::M_MAPPER_PLACE_ASSEMBLY_POINTK1
-                    && (DAT_GameCore::instance.activeMenuTab.tabType != DAT_GameCore::instance.field12_0x30)))) {
+            MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(((SoundEffectID)0x87));
+            if (buttonID != Commands::M_MAPPER_CATAPULT && buttonID != Commands::M_MAPPER_ARAB_BALLISTA
+                && buttonID != Commands::M_MAPPER_TREBUCHET && buttonID != Commands::M_MAPPER_SIEGE_TOWER
+                && buttonID != Commands::M_MAPPER_BATTERING_RAM && buttonID != Commands::M_MAPPER_PORTABLE_SHIELD
+                && buttonID != Commands::M_MAPPER_TUNNEL_CONSTRUCTION
+                && DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_PLACE_ASSEMBLY_POINT1
+                && DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_PLACE_ASSEMBLY_POINT2
+                && DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_PLACE_ASSEMBLY_POINT3
+                && DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_PLACE_ASSEMBLY_POINT4
+                && DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_PLACE_ASSEMBLY_POINT5
+                && DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_PLACE_ASSEMBLY_POINT6
+                && DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_PLACE_ASSEMBLY_POINT7
+                && DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_PLACE_ASSEMBLY_POINTM1
+                && DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_PLACE_ASSEMBLY_POINTM2
+                && DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_PLACE_ASSEMBLY_POINTM3
+                && DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_PLACE_ASSEMBLY_POINTM4
+                && DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_PLACE_ASSEMBLY_POINTM5
+                && DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_PLACE_ASSEMBLY_POINTM6
+                && DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_PLACE_ASSEMBLY_POINTM7
+                && DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_PLACE_ASSEMBLY_POINTE1
+                && DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_PLACE_ASSEMBLY_POINTE2
+                && DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_PLACE_ASSEMBLY_POINTT1
+                && DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_PLACE_ASSEMBLY_POINTK1
+                && DAT_GameCore::instance.activeMenuTab.tabType != DAT_GameCore::instance.field12_0x30) {
                 DAT_GameCore::instance.buildmenuMenuTabToSwitchTo.tabType = DAT_GameCore::instance.field12_0x30;
                 MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     UI::Enums::MVT_BUILD_MENU, 0);
             }
             return;
         switchD_00444907_caseD_166:
-            uVar5 = MACRO_CALL_MEMBER(
-                Map::Units::UnitsState_Func::returnFirstSelectedEngineer, DAT_UnitsState::ptr)();
+            uVar5 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::returnFirstSelectedEngineer, DAT_UnitsState::ptr)();
         joined_r0x00444948:
             if (!uVar5) {
                 DAT_StopHandlingMenuItems::instance = 0;

@@ -29,24 +29,23 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x0042C090
         void Unknown33::MenuView_Unknown33_DoEveryFrame()
         {
-            int iVar1
-                = MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::checkAllPlayersReadyAndCleanupSlots,
-                    DAT_GameSynchronyState::ptr)();
+            int iVar1 = MACRO_CALL_MEMBER(
+                Synchrony::GameSynchronyState_Func::checkAllPlayersReadyAndCleanupSlots, DAT_GameSynchronyState::ptr)();
             if (iVar1) {
                 if (DAT_GameSynchronyState::instance.isHost) {
-                    MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand,
-                        DAT_GameSynchronyState::ptr)(Commands::GCT_HOST_SHARE_LOBBY_STATE);
+                    MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
+                        Commands::GCT_HOST_SHARE_LOBBY_STATE);
                     DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = 0;
-                    MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand,
-                        DAT_GameSynchronyState::ptr)(Commands::GCT_TRIGGER_LOBBY_PLAYER_INFORMATION_REFRESH);
+                    MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
+                        Commands::GCT_TRIGGER_LOBBY_PLAYER_INFORMATION_REFRESH);
                 }
                 for (iVar1 = 1; iVar1 < 9; iVar1++) {
-                    if ((DAT_GameSynchronyState::instance.currentPlayerFullIDArray[iVar1] == -1)
-                        && (((!DAT_GameCore::instance.mapU4Int0
-                                 || (iVar1 != DAT_GameState::instance.mapAndTime.somePlayerID))
-                            && (DAT_GameSynchronyState::instance.currentAIArray[iVar1] == 0)))) {
-                        MACRO_CALL_MEMBER(Game::GameStateStructures_Func::destroyPlayerCompletely,
-                            DAT_GameState::ptr)(iVar1);
+                    if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[iVar1] == -1
+                        && (!DAT_GameCore::instance.mapU4Int0
+                            || (iVar1 != DAT_GameState::instance.mapAndTime.somePlayerID))
+                        && DAT_GameSynchronyState::instance.currentAIArray[iVar1] == 0) {
+                        MACRO_CALL_MEMBER(Game::GameStateStructures_Func::destroyPlayerCompletely, DAT_GameState::ptr)(
+                            iVar1);
                     }
                 }
                 MACRO_CALL(Synchrony_Func::SetAIPlayerNickNames)();

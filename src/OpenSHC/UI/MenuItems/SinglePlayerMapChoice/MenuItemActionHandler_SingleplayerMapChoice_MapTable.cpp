@@ -62,10 +62,10 @@ namespace UI {
                 goto LAB_00442f24;
             DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected = param_1;
             _currentTime = timeGetTime();
-            if ((DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected
+            if (DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected
                         + DAT_GameSynchronyState::instance.DAT_MapSelectionScrollOffset
-                    == DAT_MenuTextInputState::instance.lastClickedListIndex)
-                && ((int)(_currentTime - DAT_MenuTextInputState::instance.lastListClickTime) < 500)) {
+                    == DAT_MenuTextInputState::instance.lastClickedListIndex
+                && (int)(_currentTime - DAT_MenuTextInputState::instance.lastListClickTime) < 500) {
                 DAT_MouseState::instance.waitCursorToggle = 1;
                 MACRO_CALL(UI::Helpers_Func::SetCursorDependingOnProgramState)();
                 MACRO_CALL(UI::MenuItems::SinglePlayerMapChoice_Func::

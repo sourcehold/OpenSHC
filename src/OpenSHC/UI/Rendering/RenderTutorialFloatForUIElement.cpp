@@ -28,10 +28,8 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004BC910
     void Rendering::RenderTutorialFloatForUIElement(int param_1)
     {
-        if ((((DAT_GameCore::instance.currentMenuViewType != UI::Enums::MVT_BUILDING_AND_STATUS_MENU)
-                 || (param_1 == 8))
-                || (param_1 == 10))
-            || ((param_1 == 0xb || (param_1 == 0xc)))) {
+        if (DAT_GameCore::instance.currentMenuViewType != UI::Enums::MVT_BUILDING_AND_STATUS_MENU || param_1 == 8
+            || param_1 == 10 || param_1 == 0xb || param_1 == 0xc) {
             switch (param_1) {
             case 2:
                 if ((DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_KEEP1)
@@ -40,19 +38,18 @@ namespace UI {
                 }
                 break;
             case 5:
-                if (((!DAT_00df5558::instance)
-                        && (DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_GRANARY))
-                    && (!DAT_00df5560::instance)) {
+                if (!DAT_00df5558::instance
+                    && DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_GRANARY
+                    && !DAT_00df5560::instance) {
                     MACRO_CALL(UI::Rendering_Func::RenderAnimatedTutorialFloatOverlay)(0x3c, 0x203);
                 }
                 break;
             case 8:
-                if (((!DAT_00df5558::instance)
-                        && (DAT_GameState::instance
-                                .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                                .rationsSetting
-                            != 4))
-                    && (DAT_GameCore::instance.activeMenuTab.tabType == UI::Enums::BASMTT_GRANARY_OR_MPMENU_TCPIP)) {
+                if (!DAT_00df5558::instance
+                    && DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                            .rationsSetting
+                        != 4
+                    && DAT_GameCore::instance.activeMenuTab.tabType == UI::Enums::BASMTT_GRANARY_OR_MPMENU_TCPIP) {
                     MACRO_CALL(UI::Rendering_Func::RenderAnimatedTutorialFloatOverlay)(0x18b, 0x23a);
                 }
                 break;
@@ -60,8 +57,7 @@ namespace UI {
                 if ((DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                             .taxesSetting
                         != 7)
-                    && (DAT_GameCore::instance.activeMenuTab.tabType
-                        == UI::Enums::BASMTT_KEEP_OR_MPMENU_IPX)) {
+                    && (DAT_GameCore::instance.activeMenuTab.tabType == UI::Enums::BASMTT_KEEP_OR_MPMENU_IPX)) {
                     MACRO_CALL(UI::Rendering_Func::RenderAnimatedTutorialFloatOverlay)(0x1ba, 0x217);
                 }
                 break;

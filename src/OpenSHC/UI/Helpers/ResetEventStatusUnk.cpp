@@ -197,9 +197,9 @@ namespace UI {
             _event = (InGameEventUnionVersion*)((int)&DAT_MapPropertiesState::instance.scenarioEvents[0]);
             iVar5 = DAT_MapPropertiesState::instance.eventsCount;
             do {
-                if ((_event->header.tl_type == 3)
-                    && (((iVar4 = (_event->data).scenario.ScenarioEventType, iVar4 == 1 || (iVar4 == 0x1b))
-                        && (*(char*)((int)&_event->data + 0xf) != '\0')))) {
+                if (_event->header.tl_type == 3
+                    && (iVar4 = (_event->data).scenario.ScenarioEventType, iVar4 == 1 || (iVar4 == 0x1b))
+                    && *(char*)((int)&_event->data + 0xf) != '\0') {
                     INT_00ec02e8::instance = 1;
                 }
                 _event = _event + 0xe4;
@@ -373,7 +373,7 @@ namespace UI {
         do {
             if (_event2->header.tl_type == 3) {
                 iVar4 = (_event2->data).scenario.ScenarioEventType;
-                if (((iVar4 == 1) || (iVar4 == 0x1b)) && (*(char*)((int)&_event2->data + 0xf) != '\0')) {
+                if (((iVar4 == 1) || (iVar4 == 0x1b)) && *(char*)((int)&_event2->data + 0xf) != '\0') {
                     INT_00ec02e8::instance = 1;
                 }
                 iVar4 = (_event2->data).scenario.ScenarioEventType;
@@ -397,13 +397,13 @@ namespace UI {
             if (DAT_MapPropertiesState::instance.eventsCount <= iVar4)
                 break;
             iVar3 = iVar5;
-            if (((pIVar4->header.tl_type == 3)
-                    && ((iVar2 = (pIVar4->data).scenario.ScenarioEventType, !iVar2 || (iVar2 == 0x1a))))
-                && ((iVar2 = pIVar4->header.year,
+            if (pIVar4->header.tl_type == 3
+                && (iVar2 = (pIVar4->data).scenario.ScenarioEventType, !iVar2 || (iVar2 == 0x1a))
+                && (iVar2 = pIVar4->header.year,
                     DAT_GameState::instance.mapAndTime.year < iVar2
                         || ((iVar3 = iVar4,
                             iVar2 == DAT_GameState::instance.mapAndTime.year
-                                && (DAT_GameState::instance.mapAndTime.month < pIVar4->header.month))))))
+                                && (DAT_GameState::instance.mapAndTime.month < pIVar4->header.month)))))
                 break;
         }
     LAB_004d7613:
@@ -416,8 +416,7 @@ namespace UI {
             sVar1 = pSVar7->value;
             INT_ARRAY_00ed3070::instance[iVar4] = iVar5;
             INT_ARRAY_00ed2fc8::instance[iVar4] = (int)sVar1;
-            if (((((iVar4 == 4) || (iVar4 == 5)) || (iVar4 == 6)) || ((iVar4 == 0x11 || (iVar4 == 7))))
-                || (iVar4 == 1)) {
+            if (iVar4 == 4 || iVar4 == 5 || iVar4 == 6 || iVar4 == 0x11 || iVar4 == 7 || iVar4 == 1) {
                 iVar5 = MACRO_CALL_MEMBER(Map::MapPropertiesState_Func::getDifficultyMultipliedValue,
                     DAT_MapPropertiesState::ptr)((int)sVar1);
                 INT_ARRAY_00ed2fc8::instance[iVar4] = iVar5;

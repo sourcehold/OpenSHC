@@ -21,14 +21,14 @@ namespace Synchrony {
     {
         short* psVar1;
         if (9 < DAT_GameState::instance.playerDataArray[param_1].currentResources[4]) {
-            MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::processResourceLoss,
-                DAT_BuildingsState::ptr)(param_1, Game::Resources::RT_STONE, 10, 0);
+            MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::processResourceLoss, DAT_BuildingsState::ptr)(
+                param_1, Game::Resources::RT_STONE, 10, 0);
             psVar1 = &DAT_UnitsState::instance.units[param_2].stoneAmmunition;
             *psVar1 = *psVar1 + 0x14;
         }
-        if (((DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY)
-                && (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[param_1] == -1))
-            && (DAT_GameSynchronyState::instance.currentAIArray[param_1] != 0)) {
+        if (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY
+            && DAT_GameSynchronyState::instance.currentPlayerFullIDArray[param_1] == -1
+            && DAT_GameSynchronyState::instance.currentAIArray[param_1] != 0) {
             DAT_GameState::instance.playerDataArray[param_1].resourcesToAcquireArray[4] = 10;
         }
     }

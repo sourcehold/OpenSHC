@@ -41,10 +41,10 @@ namespace Synchrony {
              */
             DAT_GameCore::instance.gameSpeedMultiplicator = 1;
             this->relativeTickTime = 0;
-            MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::computeLatencyAdjustmentFromMatchTimes,
-                this)(currentPlayerSlotID);
+            MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::computeLatencyAdjustmentFromMatchTimes, this)(
+                currentPlayerSlotID);
             _relativeTickTime = *(int*)(extraout_ECX + 0x109eac);
-            if ((-1 < *(int*)(extraout_ECX + 0x109eac))
+            if (-1 < *(int*)(extraout_ECX + 0x109eac)
                 && (iVar1 = *(int*)(extraout_ECX + 0x109ea8), _relativeTickTime = this->relativeTickTime, 0 < iVar1)) {
                 iVar2 = *(int*)(extraout_ECX + 0x109ea8);
                 if (*(int*)(extraout_ECX + 0x109ee8) + 0x4b < iVar2) {
@@ -59,7 +59,7 @@ namespace Synchrony {
                     }
                 } else {
                     _relativeTickTime = iVar1;
-                    if ((5 < iVar2)
+                    if (5 < iVar2
                         && (_gameSpeedLevel = ((5 - iVar2) * 2) / 3 + *(int*)(extraout_ECX + 0x106e38),
                             (int)_gameSpeedLevel < 15)) {
                         _gameSpeedLevel = 15;
@@ -94,18 +94,18 @@ namespace Synchrony {
             /*
               Execute game ticks
              */
-            if (((_durationOfOneTick < DAT_GameCore::instance.averageTimePerGameTick)
-                    && (_durationOfOneTick * 2 <= _relativeTickTime))
-                && (_durationOfOneTick == (int)(1000 / (longlong)(int)_gameSpeedLevel))) {
+            if (_durationOfOneTick < DAT_GameCore::instance.averageTimePerGameTick
+                && _durationOfOneTick * 2 <= _relativeTickTime
+                && _durationOfOneTick == (int)(1000 / (longlong)(int)_gameSpeedLevel)) {
                 /*
                   Slow down
                  */
                 DAT_MillisecCarry::instance = 0;
                 return 2;
             }
-            if ((((_durationOfOneTick * 7) / 10 < DAT_GameCore::instance.averageTimePerGameTick)
-                    && (_durationOfOneTick * 2 <= _relativeTickTime))
-                && (_durationOfOneTick == (int)(1000 / (longlong)(int)_gameSpeedLevel))) {
+            if ((_durationOfOneTick * 7) / 10 < DAT_GameCore::instance.averageTimePerGameTick
+                && _durationOfOneTick * 2 <= _relativeTickTime
+                && _durationOfOneTick == (int)(1000 / (longlong)(int)_gameSpeedLevel)) {
                 /*
                   Slow down
                  */

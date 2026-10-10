@@ -56,7 +56,7 @@ namespace UI {
                             DAT_00b95b3c::instance = 0;
                         }
                     }
-                } else if ((20000 < (int)(DVar2 - INT_00b960d0::instance)) && (!DAT_00b95954::instance)) {
+                } else if (20000 < (int)(DVar2 - INT_00b960d0::instance) && !DAT_00b95954::instance) {
                     DAT_00b9610c::instance = -1;
                     INT_00b960d0::instance = DVar2;
                 }
@@ -109,8 +109,8 @@ namespace UI {
                     left = 0;
                     bottom = DAT_WindowAndDirectDraw::instance.resolutionY;
                 }
-                MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawBlendedBlackBox,
-                    DAT_PencilRenderCore::ptr)(left, top, iVar3, bottom, DAT_00b95b70::instance);
+                MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawBlendedBlackBox, DAT_PencilRenderCore::ptr)(
+                    left, top, iVar3, bottom, DAT_00b95b70::instance);
             }
         LAB_0042653a:
             if (DAT_MouseState::instance.leftClickStart) {
@@ -118,8 +118,8 @@ namespace UI {
                     Text::TextEditorState_Func::closeHelpDialogAndReturnToMenu, DAT_TextEditorState::ptr)();
                 MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     UI::Enums::MVT_MAIN_MENU, 0);
-                MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog,
-                    DAT_MenuModalComposition1::ptr)(UI::Enums::MMT_NONE, FALSE);
+                MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog, DAT_MenuModalComposition1::ptr)(
+                    UI::Enums::MMT_NONE, FALSE);
             }
             return;
         }

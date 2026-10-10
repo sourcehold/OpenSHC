@@ -91,8 +91,7 @@ namespace Map {
                                 goto LAB_0041ceb6;
                             iVar8 = *(int*)((int)DAT_BuildingsState::instance.buildings[0].resources + iVar5 + -0x48);
                         }
-                        iVar4 = MACRO_CALL_MEMBER(
-                            Map::Buildings::BuildingsState_Func::getBuildingResourceAmountByUid,
+                        iVar4 = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::getBuildingResourceAmountByUid,
                             DAT_BuildingsState::ptr)(iVar4, iVar8, Game::Resources::RT_IRON);
                         *(ushort*)((int)DAT_BuildingsState::instance.buildings[0].resources + iVar5 + -8)
                             = (iVar4 < 7) - 1 & 6;
@@ -102,28 +101,32 @@ namespace Map {
                 if (sVar3 == 1) {
                     piVar1 = &DAT_BuildingsState::instance.buildings[iVar4].campgroundVclock;
                     *piVar1 = *piVar1 + 1;
-                    bVar7 = (char)DAT_BuildingDefinedData::instance
-                                .IronMineAnimationFrames3[DAT_BuildingsState::instance.buildings[iVar4].campgroundVclock]
+                    bVar7
+                        = (char)DAT_BuildingDefinedData::instance
+                              .IronMineAnimationFrames3[DAT_BuildingsState::instance.buildings[iVar4].campgroundVclock]
                         < '\0';
-                    bVar6 = DAT_BuildingDefinedData::instance
-                                .IronMineAnimationFrames3[DAT_BuildingsState::instance.buildings[iVar4].campgroundVclock]
+                    bVar6
+                        = DAT_BuildingDefinedData::instance
+                              .IronMineAnimationFrames3[DAT_BuildingsState::instance.buildings[iVar4].campgroundVclock]
                         == 0;
                     goto LAB_0041ce0a;
                 }
                 if (sVar3 == 2) {
                     piVar1 = &DAT_BuildingsState::instance.buildings[iVar4].campgroundVclock;
                     *piVar1 = *piVar1 + 1;
-                    bVar7 = (char)DAT_BuildingDefinedData::instance
-                                .IronMineAnimationFrames2[DAT_BuildingsState::instance.buildings[iVar4].campgroundVclock]
+                    bVar7
+                        = (char)DAT_BuildingDefinedData::instance
+                              .IronMineAnimationFrames2[DAT_BuildingsState::instance.buildings[iVar4].campgroundVclock]
                         < '\0';
-                    bVar6 = DAT_BuildingDefinedData::instance
-                                .IronMineAnimationFrames2[DAT_BuildingsState::instance.buildings[iVar4].campgroundVclock]
+                    bVar6
+                        = DAT_BuildingDefinedData::instance
+                              .IronMineAnimationFrames2[DAT_BuildingsState::instance.buildings[iVar4].campgroundVclock]
                         == 0;
                     goto LAB_0041ce0a;
                 }
                 if (sVar3 == 3) {
                     iVar5 = DAT_BuildingsState::instance.buildings[iVar4].campgroundVclock;
-                    if ((((!iVar5) || (iVar5 == 0x18)) || (iVar5 == 0x30)) || (iVar5 == 0x48)) {
+                    if (!iVar5 || iVar5 == 0x18 || iVar5 == 0x30 || iVar5 == 0x48) {
                         MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                             (int)(short)DAT_BuildingsState::instance.buildings[iVar4].x,
                             (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar4].y)),
@@ -133,11 +136,13 @@ namespace Map {
                     iVar5 = iVar4 * 0x32c;
                     piVar1 = &DAT_BuildingsState::instance.buildings[iVar4].campgroundVclock;
                     *piVar1 = *piVar1 + 1;
-                    bVar7 = (char)DAT_BuildingDefinedData::instance
-                                .IronMineAnimationFrames4[DAT_BuildingsState::instance.buildings[iVar4].campgroundVclock]
+                    bVar7
+                        = (char)DAT_BuildingDefinedData::instance
+                              .IronMineAnimationFrames4[DAT_BuildingsState::instance.buildings[iVar4].campgroundVclock]
                         < '\0';
-                    bVar6 = DAT_BuildingDefinedData::instance
-                                .IronMineAnimationFrames4[DAT_BuildingsState::instance.buildings[iVar4].campgroundVclock]
+                    bVar6
+                        = DAT_BuildingDefinedData::instance
+                              .IronMineAnimationFrames4[DAT_BuildingsState::instance.buildings[iVar4].campgroundVclock]
                         == 0;
                     goto LAB_0041ce0a;
                 }
@@ -146,22 +151,26 @@ namespace Map {
                 if (sVar3 == 5) {
                     piVar1 = &DAT_BuildingsState::instance.buildings[iVar4].campgroundVclock;
                     *piVar1 = *piVar1 + 1;
-                    bVar7 = (char)DAT_BuildingDefinedData::instance
-                                .IronMineAnimationFrames5[DAT_BuildingsState::instance.buildings[iVar4].campgroundVclock]
+                    bVar7
+                        = (char)DAT_BuildingDefinedData::instance
+                              .IronMineAnimationFrames5[DAT_BuildingsState::instance.buildings[iVar4].campgroundVclock]
                         < '\0';
-                    bVar6 = DAT_BuildingDefinedData::instance
-                                .IronMineAnimationFrames5[DAT_BuildingsState::instance.buildings[iVar4].campgroundVclock]
+                    bVar6
+                        = DAT_BuildingDefinedData::instance
+                              .IronMineAnimationFrames5[DAT_BuildingsState::instance.buildings[iVar4].campgroundVclock]
                         == 0;
                     goto LAB_0041ce0a;
                 }
                 if (sVar3 == 6) {
                     piVar1 = &DAT_BuildingsState::instance.buildings[iVar4].campgroundVclock;
                     *piVar1 = *piVar1 + 1;
-                    bVar7 = (char)DAT_BuildingDefinedData::instance
-                                .IronMineAnimationFrames6[DAT_BuildingsState::instance.buildings[iVar4].campgroundVclock]
+                    bVar7
+                        = (char)DAT_BuildingDefinedData::instance
+                              .IronMineAnimationFrames6[DAT_BuildingsState::instance.buildings[iVar4].campgroundVclock]
                         < '\0';
-                    bVar6 = DAT_BuildingDefinedData::instance
-                                .IronMineAnimationFrames6[DAT_BuildingsState::instance.buildings[iVar4].campgroundVclock]
+                    bVar6
+                        = DAT_BuildingDefinedData::instance
+                              .IronMineAnimationFrames6[DAT_BuildingsState::instance.buildings[iVar4].campgroundVclock]
                         == 0;
                     goto LAB_0041ce0a;
                 }
@@ -212,9 +221,8 @@ namespace Map {
                 *(undefined4*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame2 + iVar5) = 0;
                 sVar3 = *(short*)((int)DAT_BuildingsState::instance.buildings[0].resources + iVar5 + -4);
                 if (!sVar3) {
-                    if ((*(short*)((int)DAT_BuildingsState::instance.buildings[0].resources + iVar5 + -8) == 3)
-                        && (*(int*)((int)&DAT_BuildingsState::instance.buildings[0].campgroundVclock + iVar5)
-                            == 0x50)) {
+                    if (*(short*)((int)DAT_BuildingsState::instance.buildings[0].resources + iVar5 + -8) == 3
+                        && *(int*)((int)&DAT_BuildingsState::instance.buildings[0].campgroundVclock + iVar5) == 0x50) {
                         *(undefined2*)((int)DAT_BuildingsState::instance.buildings[0].resources + iVar5 + -4) = 1;
                     }
                 } else if (sVar3 == 1) {
@@ -299,22 +307,25 @@ namespace Map {
                             (int)*(short*)((int)DAT_BuildingsState::instance.buildings[0].resources + iVar5 + -0x30),
                             DE::SHCDE::FX_IRON_STRAIN);
                     }
-                    if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1 == 0x37) {
+                    if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1
+                        == 0x37) {
                         MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                             (int)(short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x,
                             (int)((
                                 int)((short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y)),
                             DE::SHCDE::FX_IRON_DUMP);
                     }
-                    if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1 == 0x41) {
+                    if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1
+                        == 0x41) {
                         MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                             (int)(short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x,
                             (int)((
                                 int)((short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y)),
                             DE::SHCDE::FX_IRON_LDUMP);
                     }
-                    iVar4 = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1;
-                    if (((iVar4 == 100) || (iVar4 == 0xbe)) || ((iVar4 == 0x118 || (iVar4 == 0x172)))) {
+                    iVar4
+                        = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1;
+                    if (iVar4 == 100 || iVar4 == 0xbe || iVar4 == 0x118 || iVar4 == 0x172) {
                         MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                             (int)(short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x,
                             (int)((
@@ -323,13 +334,14 @@ namespace Map {
                     }
                     iVar4 = DAT_CurrentBuildingID::instance;
                     iVar5 = DAT_CurrentBuildingID::instance * 0x32c;
-                    piVar1 = &DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1;
+                    piVar1
+                        = &DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1;
                     *piVar1 = *piVar1 + 1;
-                    bVar7 = (char)DAT_BuildingDefinedData::instance
-                                .IronMineAnimationFrames10[DAT_BuildingsState::instance.buildings[iVar4].extraAnimationFrame1]
+                    bVar7 = (char)DAT_BuildingDefinedData::instance.IronMineAnimationFrames10
+                                [DAT_BuildingsState::instance.buildings[iVar4].extraAnimationFrame1]
                         < '\0';
-                    bVar6 = DAT_BuildingDefinedData::instance
-                                .IronMineAnimationFrames10[DAT_BuildingsState::instance.buildings[iVar4].extraAnimationFrame1]
+                    bVar6 = DAT_BuildingDefinedData::instance.IronMineAnimationFrames10
+                                [DAT_BuildingsState::instance.buildings[iVar4].extraAnimationFrame1]
                         == 0;
                     goto LAB_0041d1f7;
                 }
@@ -427,9 +439,8 @@ namespace Map {
                 }
             } else if (sVar3 == 1) {
                 *(undefined2*)((int)DAT_BuildingsState::instance.buildings[0].resources + iVar5 + -2) = 0;
-                MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::addResourceToStockpile,
-                    DAT_BuildingsState::ptr)(iVar4,
-                    *(int*)((int)DAT_BuildingsState::instance.buildings[0].resources + iVar5 + -0x48),
+                MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::addResourceToStockpile, DAT_BuildingsState::ptr)(
+                    iVar4, *(int*)((int)DAT_BuildingsState::instance.buildings[0].resources + iVar5 + -0x48),
                     Game::Resources::RT_IRON, 1, 8, 1);
             }
         } else if (sVar3 == 1) {

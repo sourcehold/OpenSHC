@@ -38,14 +38,10 @@ namespace UI {
             dVar4 = 1;
             if (sVar1 == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
             LAB_004633b5:
-                MACRO_CALL_MEMBER(
-                    Map::Buildings::BuildingsState_Func::extendResourceCountdownForPlayerBuildingsOfType,
+                MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::extendResourceCountdownForPlayerBuildingsOfType,
                     DAT_BuildingsState::ptr)(
-                    (Map::Buildings::BuildingType)(DAT_BuildingsState::instance.buildings[buildingID]
-                            .buildingType),
-                    1,
-                    (int)((int)((
-                        Map::Buildings::BuildingType)DAT_GameSynchronyState::instance.currentPlayerSlotID)));
+                    (Map::Buildings::BuildingType)(DAT_BuildingsState::instance.buildings[buildingID].buildingType), 1,
+                    (int)((int)((Map::Buildings::BuildingType)DAT_GameSynchronyState::instance.currentPlayerSlotID)));
                 iVar3 = DAT_GameSynchronyState::instance.currentPlayerSlotID;
                 switch (DAT_BuildingsState::instance.buildings[buildingID].buildingType) {
                 case Map::Buildings::BT_HOVEL:
@@ -208,7 +204,7 @@ namespace UI {
                                     ((int)(DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight)),
                                     Map::Buildings::BT_GATEHOUSESMALL, 0),
                                 iVar3 != 0))
-                        && (DAT_BuildingsState::instance.buildings[iVar3].field241_0x2c6 != 0)) {
+                        && DAT_BuildingsState::instance.buildings[iVar3].field241_0x2c6 != 0) {
                         return FALSE;
                     }
                     dVar4 = 0x25;
@@ -329,8 +325,8 @@ namespace UI {
                 case Map::Buildings::BT_OUTPOST_EUROPEAN:
                 case Map::Buildings::BT_OUTPOST_ARABIAN:
                     if (DAT_GameCore::instance.gameMode_2 != Game::GM_EDITOR) {
-                        MACRO_CALL_MEMBER(Text::TextEditorState_Func::closeHelpDialogAndReturnToMenu,
-                            DAT_TextEditorState::ptr)();
+                        MACRO_CALL_MEMBER(
+                            Text::TextEditorState_Func::closeHelpDialogAndReturnToMenu, DAT_TextEditorState::ptr)();
                     LAB_0046340c:
                         DAT_BuildingsState::instance.selectedBuildingID = buildingID;
                         DAT_BuildingsState::instance.selectedBuildingUID
@@ -430,8 +426,7 @@ namespace UI {
             switchD_004633df_caseD_64:
                 dVar4 = 0x59;
             }
-            MACRO_CALL_MEMBER(
-                Text::TextEditorState_Func::closeHelpDialogAndReturnToMenu, DAT_TextEditorState::ptr)();
+            MACRO_CALL_MEMBER(Text::TextEditorState_Func::closeHelpDialogAndReturnToMenu, DAT_TextEditorState::ptr)();
             DAT_GameCore::instance.buildingandstatusmenuMenuTabToSwitchTo = dVar4;
             MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                 UI::Enums::MVT_BUILDING_AND_STATUS_MENU, 0);

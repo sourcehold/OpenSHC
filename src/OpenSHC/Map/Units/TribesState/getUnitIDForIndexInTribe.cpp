@@ -18,7 +18,7 @@ namespace Map {
                 do {
                     if (*psVar3 != 0) {
                         for (iVar2 = 0; iVar2 < 16; iVar2++) {
-                            if (((int)*psVar3 & 1 << ((byte)iVar2 & 0x1f))) {
+                            if ((int)*psVar3 & 1 << ((byte)iVar2 & 0x1f)) {
                                 if (_counter == unitSelectionIndex) {
                                     return iVar1 * 0x10 + iVar2;
                                 }

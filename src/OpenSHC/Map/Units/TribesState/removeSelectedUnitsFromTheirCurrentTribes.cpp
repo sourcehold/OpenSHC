@@ -31,11 +31,11 @@ namespace Map {
             if (1 < DAT_UnitsState::instance.maxUnitCount) {
                 _pUnit = &DAT_UnitsState::instance.units[1];
                 do {
-                    if ((((_pUnit->logicalState == Map::Units::ULS_NORMAL) && (!_pUnit->dying))
-                            && (_pUnit->ifSelectedThenPlayerID == playerID))
+                    if (_pUnit->logicalState == Map::Units::ULS_NORMAL && !_pUnit->dying
+                        && _pUnit->ifSelectedThenPlayerID == playerID
                         && (_unitTribeID = (int)_pUnit->tribeID, 0 < _unitTribeID)) {
-                        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::removeUnitFromThisTribeIfInTribe,
-                            this)(_unitID, _unitTribeID);
+                        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::removeUnitFromThisTribeIfInTribe, this)(
+                            _unitID, _unitTribeID);
                         _unitRemovedFromTribeByID[_unitTribeID] = true;
                     }
                     _unitID = _unitID + 1;
@@ -52,8 +52,7 @@ namespace Map {
                     if (_pTribe->selectionTargetUnitID == -1) {
                         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::setTargetUnitForTribe, this)(_tribeID);
                     }
-                    MACRO_CALL_MEMBER(Map::Units::TribesState_Func::setWhetherTribeContainsAnyUnits, this)(
-                        _tribeID);
+                    MACRO_CALL_MEMBER(Map::Units::TribesState_Func::setWhetherTribeContainsAnyUnits, this)(_tribeID);
                 }
                 _tribeID = _tribeID + 1;
                 _pTribe = _pTribe + 1;

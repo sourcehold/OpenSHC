@@ -19,9 +19,8 @@ namespace Synchrony {
         DWORD _now;
         BOOLEnum BVar1;
         _now = timeGetTime();
-        if (((this->currentGameMode != Game::GM_SOLITARY)
-                && (this->currentGameMode != Game::GM_SKIRMISH_SINGLE_PLAYER))
-            && (this->DPLAYX_4A != (IDirectPlay4A*)0x0)) {
+        if (this->currentGameMode != Game::GM_SOLITARY && this->currentGameMode != Game::GM_SKIRMISH_SINGLE_PLAYER
+            && this->DPLAYX_4A != (IDirectPlay4A*)0x0) {
             BVar1 = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
             if (BVar1) {
                 this->syncRelatedCounter = this->syncRelated2 + '\x01';
@@ -54,12 +53,10 @@ namespace Synchrony {
                 this->connectionLagInfoArray[7].now = _now;
                 this->connectionLagInfoArray[8].now = _now;
                 this->syncRelated2 = this->syncRelatedCounter;
-                this->DPLAYX_SendAndReceiveREsult = this->DPLAYX_4A
-                                                        ->SendEx(this->DPLAYX_PlayerHandle, 0, 1537 | 1537 | 1537,
-                                                            (void*)0x1998398, 2, 65000, 0, (void*)0x0, (DWORD_PTR*)0x0);
+                this->DPLAYX_SendAndReceiveREsult = this->DPLAYX_4A->SendEx(this->DPLAYX_PlayerHandle, 0,
+                    1537 | 1537 | 1537, (void*)0x1998398, 2, 65000, 0, (void*)0x0, (DWORD_PTR*)0x0);
                 if ((this->DPLAYX_SendAndReceiveREsult) && (this->DPLAYX_SendAndReceiveREsult != -0x7ffffff6)) {
-                    MACRO_CALL_MEMBER(
-                        Synchrony::GameSynchronyState_Func::handleUnexpectedDPlayXResult, this)();
+                    MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::handleUnexpectedDPlayXResult, this)();
                 }
             }
         }

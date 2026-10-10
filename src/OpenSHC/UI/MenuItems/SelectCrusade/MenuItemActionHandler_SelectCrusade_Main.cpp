@@ -42,7 +42,7 @@ namespace UI {
                 MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     UI::Enums::MVT_MAIN_MENU, 0);
             }
-            if (((param_1 == 1) || (param_1 == 3)) || (param_1 == 4)) {
+            if (param_1 == 1 || param_1 == 3 || param_1 == 4) {
                 DAT_GameCore::instance.gameSuspended = 0;
                 if (param_1 == 4) {
                     DAT_GameCore::instance.currentTrailType = Game::TT_EXTREME;
@@ -83,8 +83,8 @@ namespace UI {
                     pacVar2 = (char (*)[250])(*pacVar2 + 1);
                 } while (cVar1 != '\0');
                 DAT_GameSynchronyState::instance.currentPlayerSlotID = 0;
-                MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand,
-                    DAT_GameSynchronyState::ptr)(Commands::GCT_ASK_FOR_SLOT_ASSIGNMENT);
+                MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
+                    Commands::GCT_ASK_FOR_SLOT_ASSIGNMENT);
                 DAT_GameSynchronyState::instance.DAT_PlayerSlotArraySomeValue[0] = 1;
                 DAT_GameSynchronyState::instance.DAT_PlayerSlotArraySomeValue[1] = 1;
                 DAT_GameSynchronyState::instance.DAT_PlayerSlotArraySomeValue[2] = 1;

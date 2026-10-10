@@ -7,12 +7,12 @@
 #include "OpenSHC/Audio/MSS/enums/SHC_SoundStream.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
-#include "OpenSHC/Globals/DAT_ARRAY_00eb9b68.hpp"
-#include "OpenSHC/Globals/DAT_ARRAY_00ec0348.hpp"
 #include "OpenSHC/Globals/DAT_00eb0e40.hpp"
 #include "OpenSHC/Globals/DAT_00eb1234.hpp"
 #include "OpenSHC/Globals/DAT_00eb9af4.hpp"
 #include "OpenSHC/Globals/DAT_00ed2bd8.hpp"
+#include "OpenSHC/Globals/DAT_ARRAY_00eb9b68.hpp"
+#include "OpenSHC/Globals/DAT_ARRAY_00ec0348.hpp"
 #include "OpenSHC/Globals/DAT_BinkControlState.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_MouseState.hpp"
@@ -67,8 +67,8 @@ void Rendering::ProcessCreditsScriptCommands()
                 iVar8 = 0;
                 piVar7 = &DAT_ARRAY_00ec0348::instance[0].xSpace;
             LAB_004e0b60:
-                if ((((CreditsRelatedStructure*)(piVar7 + -1))->isValid != 1)
-                    || (*piVar7 != DAT_ARRAY_00eb9b68::instance[iVar9].soundStream))
+                if (((CreditsRelatedStructure*)(piVar7 + -1))->isValid != 1
+                    || *piVar7 != DAT_ARRAY_00eb9b68::instance[iVar9].soundStream)
                     goto LAB_004e0b74;
                 iVar1 = DAT_ARRAY_00ec0348::instance[iVar8].fadeMode;
             LAB_004e0b8e:
@@ -81,8 +81,8 @@ void Rendering::ProcessCreditsScriptCommands()
                 iVar8 = 0;
                 piVar7 = &DAT_ARRAY_00ec0348::instance[0].xSpace;
                 do {
-                    if ((((CreditsRelatedStructure*)(piVar7 + -1))->isValid == 2)
-                        && (*piVar7 == DAT_ARRAY_00eb9b68::instance[iVar9].soundStream)) {
+                    if (((CreditsRelatedStructure*)(piVar7 + -1))->isValid == 2
+                        && *piVar7 == DAT_ARRAY_00eb9b68::instance[iVar9].soundStream) {
                         iVar1 = DAT_ARRAY_00ec0348::instance[iVar8].fadeMode;
                         goto LAB_004e0b8e;
                     }
@@ -124,8 +124,8 @@ void Rendering::ProcessCreditsScriptCommands()
             case 7:
                 piVar7 = &DAT_ARRAY_00ec0348::instance[0].xSpace;
                 do {
-                    if ((((CreditsRelatedStructure*)(piVar7 + -1))->isValid == 1)
-                        && (*piVar7 == DAT_ARRAY_00eb9b68::instance[iVar9].soundStream)) {
+                    if (((CreditsRelatedStructure*)(piVar7 + -1))->isValid == 1
+                        && *piVar7 == DAT_ARRAY_00eb9b68::instance[iVar9].soundStream) {
                         ((CreditsRelatedStructure*)(piVar7 - 1))->blendStrength = 1.0f;
                         ((CreditsRelatedStructure*)(piVar7 - 1))->fadeMode = 2;
                     }
@@ -135,27 +135,26 @@ void Rendering::ProcessCreditsScriptCommands()
             case 8:
                 pCVar4 = DAT_ARRAY_00ec0348::instance;
                 do {
-                    if ((pCVar4->isValid == 1)
-                        && (pCVar4->xSpace == DAT_ARRAY_00eb9b68::instance[iVar9].soundStream)) {
+                    if ((pCVar4->isValid == 1) && (pCVar4->xSpace == DAT_ARRAY_00eb9b68::instance[iVar9].soundStream)) {
                         pCVar4->isValid = 0;
                     }
                     pCVar4 = pCVar4 + 1;
                 } while ((int)pCVar4 < 0xec0828);
                 break;
             case 9:
-                MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::endSoundStream, DAT_SoundSystemState::ptr)((Audio::MSS::enums::SHC_SoundStream)(DAT_ARRAY_00eb9b68::instance[iVar9].soundStream));
+                MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::endSoundStream, DAT_SoundSystemState::ptr)(
+                    (Audio::MSS::enums::SHC_SoundStream)(DAT_ARRAY_00eb9b68::instance[iVar9].soundStream));
                 iVar10 = DAT_UnknownBinkIndex::instance;
                 break;
             case 10:
-                MACRO_CALL_MEMBER(Rendering::Bink::BinkControlClass_Func::stopBinkPlayback,
-                    DAT_BinkControlState::ptr)(DAT_ARRAY_00eb9b68::instance[iVar9].soundStream);
+                MACRO_CALL_MEMBER(Rendering::Bink::BinkControlClass_Func::stopBinkPlayback, DAT_BinkControlState::ptr)(
+                    DAT_ARRAY_00eb9b68::instance[iVar9].soundStream);
                 iVar10 = DAT_UnknownBinkIndex::instance;
                 break;
             case 0xb:
                 pCVar4 = DAT_ARRAY_00ec0348::instance;
                 do {
-                    if ((pCVar4->isValid == 2)
-                        && (pCVar4->xSpace == DAT_ARRAY_00eb9b68::instance[iVar9].soundStream)) {
+                    if ((pCVar4->isValid == 2) && (pCVar4->xSpace == DAT_ARRAY_00eb9b68::instance[iVar9].soundStream)) {
                         pCVar4->isValid = 0;
                     }
                     pCVar4 = pCVar4 + 1;
@@ -166,10 +165,8 @@ void Rendering::ProcessCreditsScriptCommands()
                     DAT_ARRAY_00eb9b68::instance[iVar9].binkObjIndex,
                     (char*)&DAT_ARRAY_00eb9b68::instance[iVar9].binkFileName,
                     (DWORD)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].flagLoopCount)), 0,
-                    DAT_ARRAY_00eb9b68::instance[iVar9].x
-                        + DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth,
-                    DAT_ARRAY_00eb9b68::instance[iVar9].y
-                        + DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight,
+                    DAT_ARRAY_00eb9b68::instance[iVar9].x + DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth,
+                    DAT_ARRAY_00eb9b68::instance[iVar9].y + DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight,
                     (DWORD)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].field13_0x28)));
                 iVar10 = DAT_UnknownBinkIndex::instance;
                 break;
@@ -205,8 +202,8 @@ void Rendering::ProcessCreditsScriptCommands()
             case 0x10:
                 piVar7 = &DAT_ARRAY_00ec0348::instance[0].xSpace;
                 do {
-                    if ((((CreditsRelatedStructure*)(piVar7 + -1))->isValid == 2)
-                        && (*piVar7 == DAT_ARRAY_00eb9b68::instance[iVar9].soundStream)) {
+                    if (((CreditsRelatedStructure*)(piVar7 + -1))->isValid == 2
+                        && *piVar7 == DAT_ARRAY_00eb9b68::instance[iVar9].soundStream) {
                         ((CreditsRelatedStructure*)(piVar7 - 1))->blendStrength = 1.0f;
                         ((CreditsRelatedStructure*)(piVar7 - 1))->fadeMode = 2;
                     }
@@ -246,16 +243,18 @@ void Rendering::ProcessCreditsScriptCommands()
                 piVar4 = &DAT_ARRAY_00ec0348::instance[0].x;
                 do {
                     if (((CreditsRelatedStructure*)(piVar4 - 2))->isValid == 3) {
-                        if ((((CreditsRelatedStructure*)(piVar4 - 2))->xSpace <= DAT_MouseState::instance.screenSpaceX
-                                    - DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth)
-                            && (DAT_MouseState::instance.screenSpaceX
+                        if (((CreditsRelatedStructure*)(piVar4 - 2))->xSpace <= DAT_MouseState::instance.screenSpaceX
                                     - DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth
-                                < ((CreditsRelatedStructure*)(piVar4 - 2))->y + ((CreditsRelatedStructure*)(piVar4 - 2))->xSpace)) {
-                            if ((((CreditsRelatedStructure*)(piVar4 - 2))->x <= DAT_MouseState::instance.screenSpaceY
-                                        - DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight)
-                                && (DAT_MouseState::instance.screenSpaceY
+                            && DAT_MouseState::instance.screenSpaceX
+                                    - DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth
+                                < ((CreditsRelatedStructure*)(piVar4 - 2))->y
+                                    + ((CreditsRelatedStructure*)(piVar4 - 2))->xSpace) {
+                            if (((CreditsRelatedStructure*)(piVar4 - 2))->x <= DAT_MouseState::instance.screenSpaceY
                                         - DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight
-                                    < ((CreditsRelatedStructure*)(piVar4 - 2))->width + ((CreditsRelatedStructure*)(piVar4 - 2))->x))
+                                && DAT_MouseState::instance.screenSpaceY
+                                        - DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight
+                                    < ((CreditsRelatedStructure*)(piVar4 - 2))->width
+                                        + ((CreditsRelatedStructure*)(piVar4 - 2))->x)
                                 break;
                         }
                     }
@@ -283,8 +282,8 @@ void Rendering::ProcessCreditsScriptCommands()
             case 0x19:
                 if ((INT_00ed27a4::instance != 2)
                     && (DAT_BinkControlState::instance.binkObjPtrArray[0] != (HBINK)0x0)) {
-                    MACRO_CALL_MEMBER(Rendering::Bink::BinkControlClass_Func::stopBinkPlayback,
-                        DAT_BinkControlState::ptr)(0);
+                    MACRO_CALL_MEMBER(
+                        Rendering::Bink::BinkControlClass_Func::stopBinkPlayback, DAT_BinkControlState::ptr)(0);
                     iVar10 = DAT_UnknownBinkIndex::instance;
                 }
                 pCVar4 = DAT_ARRAY_00ec0348::instance;
@@ -301,7 +300,8 @@ void Rendering::ProcessCreditsScriptCommands()
             switchD_004e0abf_caseD_1d:
                 break;
             case 0x1b:
-                MACRO_CALL(UI::Rendering_Func::DisplayFullScreenTextPage)(DAT_ARRAY_00eb9b68::instance[iVar9].soundStream);
+                MACRO_CALL(UI::Rendering_Func::DisplayFullScreenTextPage)(
+                    DAT_ARRAY_00eb9b68::instance[iVar9].soundStream);
                 DWORD_00eb9ac4::instance = 1;
                 iVar10 = DAT_UnknownBinkIndex::instance;
                 break;
@@ -328,10 +328,10 @@ void Rendering::ProcessCreditsScriptCommands()
             case 0x27:
                 if (DAT_SoundSystemState::instance.sec_Section1055_0x3274
                     != DAT_ARRAY_00eb9b68::instance[iVar9].soundStream) {
-                    MACRO_CALL_MEMBER(
-                        Audio::MSS::SoundSystem_Func::setSomeSoundTime, DAT_SoundSystemState::ptr)();
-                    MACRO_CALL_MEMBER(
-                        Audio::MSS::SoundSystem_Func::setupVolumeAndSoundID, DAT_SoundSystemState::ptr)((DE::SHCDE::eMusicIDs)(DAT_ARRAY_00eb9b68::instance[DAT_UnknownBinkIndex::instance].soundStream));
+                    MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::setSomeSoundTime, DAT_SoundSystemState::ptr)();
+                    MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::setupVolumeAndSoundID, DAT_SoundSystemState::ptr)(
+                        (DE::SHCDE::eMusicIDs)(DAT_ARRAY_00eb9b68::instance[DAT_UnknownBinkIndex::instance]
+                                .soundStream));
                     iVar10 = DAT_UnknownBinkIndex::instance;
                 }
                 break;
@@ -359,8 +359,9 @@ void Rendering::ProcessCreditsScriptCommands()
             case 0x2a:
                 piVar6 = &DAT_ARRAY_00ec0348::instance[0].xSpace;
                 do {
-                    if ((((CreditsRelatedStructure*)(piVar6 - 1))->isValid == 4)
-                        && (((CreditsRelatedStructure*)(piVar6 - 1))->xSpace == DAT_ARRAY_00eb9b68::instance[iVar9].soundStream)) {
+                    if (((CreditsRelatedStructure*)(piVar6 - 1))->isValid == 4
+                        && ((CreditsRelatedStructure*)(piVar6 - 1))->xSpace
+                            == DAT_ARRAY_00eb9b68::instance[iVar9].soundStream) {
                         ((CreditsRelatedStructure*)(piVar6 - 1))->blendStrength = 1.0f;
                         ((CreditsRelatedStructure*)(piVar6 - 1))->fadeMode = 2;
                     }

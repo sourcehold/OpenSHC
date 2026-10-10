@@ -58,8 +58,8 @@ namespace Map {
                         tribeID, iVar4);
                     iVar4 = iVar4 + 1;
                     if (DAT_UnitsState::instance.units[_unitID].logicalState == Map::Units::ULS_NORMAL) {
-                        BVar3 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::isComputerManagedNonPeasant,
-                            DAT_UnitsState::ptr)(_unitID);
+                        BVar3 = MACRO_CALL_MEMBER(
+                            Map::Units::UnitsState_Func::isComputerManagedNonPeasant, DAT_UnitsState::ptr)(_unitID);
                         if (!BVar3) {
                             if (DAT_UnitsState::instance.units[_unitID].dying == 0) {
                                 if (DAT_UnitsState::instance.units[_unitID].movementRelated != 8) {
@@ -73,20 +73,19 @@ namespace Map {
                                     _countAttackingUnk = _countAttackingUnk + 1;
                                 }
                                 if (UVar2
-                                    == (Map::Units::States::US_DEATH_02
-                                        | Map::Units::States::US_STAND_UPUnk
+                                    == (Map::Units::States::US_DEATH_02 | Map::Units::States::US_STAND_UPUnk
                                         | Map::Units::States::US_RELOAD_WEAPONUnk)) {
                                     local_8 = local_8 + 1;
                                 }
-                                if ((DAT_UnitsState::instance.units[_unitID].field316_0x430 != 0)
-                                    && (((UVar2 == Map::Units::States::US_RELOAD_WEAPONUnk
-                                             || (UVar2 == Map::Units::States::US_AIM_WEAPONUnk))
-                                        || (UVar2 == Map::Units::States::US_FIRE_WEAPONUnk)))) {
+                                if (DAT_UnitsState::instance.units[_unitID].field316_0x430 != 0
+                                    && ((UVar2 == Map::Units::States::US_RELOAD_WEAPONUnk
+                                            || (UVar2 == Map::Units::States::US_AIM_WEAPONUnk))
+                                        || (UVar2 == Map::Units::States::US_FIRE_WEAPONUnk))) {
                                     _countRangeUnk = _countRangeUnk + 1;
                                 }
                                 _unitType = this->tribes[tribeID].unitType;
-                                if ((_unitType != ((UnitType)0))
-                                    && (DAT_UnitsState::instance.units[_unitID].unitType != _unitType)) {
+                                if (_unitType != (UnitType)0
+                                    && DAT_UnitsState::instance.units[_unitID].unitType != _unitType) {
                                     this->tribes[tribeID].unitType = ((UnitType)0);
                                 }
                                 _movementSpeed = DAT_UnitsState::instance.units[_unitID].movementSpeed;

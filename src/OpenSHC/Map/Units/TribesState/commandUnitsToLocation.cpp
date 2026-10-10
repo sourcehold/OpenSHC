@@ -40,40 +40,37 @@ namespace Map {
                         && (DAT_UnitsState::instance.units[_unitID].dying == 0)) {
                         _goToRallyPoint = DAT_UnitsState::instance.units[_unitID].goToRallyPoint;
                         DAT_UnitsState::instance.units[_unitID].rallyRelatedFlag = 0;
-                        if ((((((!_goToRallyPoint)
-                                   && ((DAT_UnitsState::instance.units[_unitID].isSelectable_OR_matchTime != 0
-                                       && (MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::
-                                                                 setAxisBasedDistanceResult,
-                                               DAT_DirectionAlgorithmState::ptr)(destinationX,
-                                               (int)((int)(destinationY)),
-                                               (int)((int)(DAT_UnitsState::instance.units[_unitID].x)),
-                                               (int)((int)(DAT_UnitsState::instance.units[_unitID].y))),
-                                           4 < DAT_DirectionAlgorithmState::instance.distanceHigh))))
-                                  && ((DAT_UnitsState::instance.units[_unitID].movementType_OR_targetUnitID == 0
-                                      || (DAT_UnitsState::instance
-                                              .units[DAT_UnitsState::instance.units[_unitID]
-                                                      .targetedUnitID__OR__engineerMannedSiegeEngineRef]
-                                              .logicalState
-                                          != Map::Units::ULS_NORMAL))))
-                                 && (((((_goToRallyPoint = DAT_UnitsState::instance.units[_unitID].shootTargetedUnit,
-                                            _goToRallyPoint == 0
-                                                || (this->tribes[DAT_CurrentTribeID::instance].countdown2 < 1))
-                                           || (DAT_UnitsState::instance.units[_unitID].unitType
-                                               == Map::Units::UT_A_HARCHER))
-                                          || (DAT_UnitsState::instance.units[_unitID].targetUID
-                                              != DAT_UnitsState::instance.units[_goToRallyPoint].uid))
-                                     && (DAT_UnitsState::instance.units[_unitID].state.generic
-                                         != Map::Units::States::US_MELEE_ATTACK))))
-                                && (((char)matchUnitSpeeds != '\0'
-                                    || (((_unitType = DAT_UnitsState::instance.units[_unitID].unitType,
-                                             _unitType != Map::Units::UT_S_FBALLISTA
-                                                 && (_unitType != Map::Units::UT_S_CATAPULT))
-                                        && ((_unitType != Map::Units::UT_S_SHIELD
-                                            && ((_unitType != Map::Units::UT_S_TOWER
-                                                && (_unitType != Map::Units::UT_S_BATTERINGRAM))))))))))
-                            && ((DAT_UnitsState::instance.units[_unitID].engineerRelatedUnk == 0
+                        if (!_goToRallyPoint && DAT_UnitsState::instance.units[_unitID].isSelectable_OR_matchTime != 0
+                            && (MACRO_CALL_MEMBER(
+                                    Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
+                                    DAT_DirectionAlgorithmState::ptr)(destinationX, (int)((int)(destinationY)),
+                                    (int)((int)(DAT_UnitsState::instance.units[_unitID].x)),
+                                    (int)((int)(DAT_UnitsState::instance.units[_unitID].y))),
+                                4 < DAT_DirectionAlgorithmState::instance.distanceHigh)
+                            && (DAT_UnitsState::instance.units[_unitID].movementType_OR_targetUnitID == 0
+                                || (DAT_UnitsState::instance
+                                        .units[DAT_UnitsState::instance.units[_unitID]
+                                                .targetedUnitID__OR__engineerMannedSiegeEngineRef]
+                                        .logicalState
+                                    != Map::Units::ULS_NORMAL))
+                            && (((_goToRallyPoint = DAT_UnitsState::instance.units[_unitID].shootTargetedUnit,
+                                     _goToRallyPoint == 0
+                                         || (this->tribes[DAT_CurrentTribeID::instance].countdown2 < 1))
+                                    || (DAT_UnitsState::instance.units[_unitID].unitType == Map::Units::UT_A_HARCHER))
+                                || (DAT_UnitsState::instance.units[_unitID].targetUID
+                                    != DAT_UnitsState::instance.units[_goToRallyPoint].uid))
+                            && DAT_UnitsState::instance.units[_unitID].state.generic
+                                != Map::Units::States::US_MELEE_ATTACK
+                            && ((char)matchUnitSpeeds != '\0'
+                                || (((_unitType = DAT_UnitsState::instance.units[_unitID].unitType,
+                                         _unitType != Map::Units::UT_S_FBALLISTA
+                                             && (_unitType != Map::Units::UT_S_CATAPULT))
+                                    && ((_unitType != Map::Units::UT_S_SHIELD
+                                        && ((_unitType != Map::Units::UT_S_TOWER
+                                            && (_unitType != Map::Units::UT_S_BATTERINGRAM))))))))
+                            && (DAT_UnitsState::instance.units[_unitID].engineerRelatedUnk == 0
                                 || ((DAT_UnitsState::instance.units[_unitID].resourceToDeposit != 0
-                                    && (DAT_UnitsState::instance.units[_unitID].field252_0x3c4 == 0)))))) {
+                                    && (DAT_UnitsState::instance.units[_unitID].field252_0x3c4 == 0))))) {
                             DAT_UnitsState::instance.units[_unitID].rallyRelatedFlag = 0;
                             bVar1 = false;
                         } else {

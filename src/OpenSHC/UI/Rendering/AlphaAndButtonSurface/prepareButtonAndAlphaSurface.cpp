@@ -36,7 +36,7 @@ namespace UI {
                     _gmID = *(
                         GmIDInt*)((int)&DAT_UIButtonDefinedData::instance.ButtonGmDataArray[0].gmId_0x0 + _byteNumber);
                     do {
-                        if ((_gmID != ((GmID)0))
+                        if (_gmID != (GmID)0
                             && (_pictureInGm
                                 = *(int*)((int)&DAT_UIButtonDefinedData::instance.ButtonGmDataArray[0].pictureInGm_0x4
                                     + _byteNumber),

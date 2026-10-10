@@ -29,12 +29,12 @@ namespace Map {
                     iVar2 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
                         param_1, unitSelectionIndex);
                     unitSelectionIndex = unitSelectionIndex + 1;
-                    if (((DAT_UnitsState::instance.units[iVar2].logicalState == Map::Units::ULS_NORMAL)
-                            && (DAT_UnitsState::instance.units[iVar2].dying == 0))
-                        && ((_isRallying = DAT_UnitsState::instance.units[iVar2].goToRallyPoint,
+                    if (DAT_UnitsState::instance.units[iVar2].logicalState == Map::Units::ULS_NORMAL
+                        && DAT_UnitsState::instance.units[iVar2].dying == 0
+                        && (_isRallying = DAT_UnitsState::instance.units[iVar2].goToRallyPoint,
                             DAT_UnitsState::instance.units[iVar2].rallyRelatedFlag = 0,
                             _isRallying != 0
-                                || (DAT_UnitsState::instance.units[iVar2].isSelectable_OR_matchTime == 0)))) {
+                                || (DAT_UnitsState::instance.units[iVar2].isSelectable_OR_matchTime == 0))) {
                         local_4 = 1;
                         DAT_UnitsState::instance.units[iVar2].rallyRelatedFlag = 1;
                     }

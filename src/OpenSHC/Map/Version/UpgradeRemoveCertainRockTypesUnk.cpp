@@ -17,9 +17,9 @@ namespace Map {
         iVar1 = 1;
         puVar1 = &DAT_LandscapeState::instance.rocks[1];
         do {
-            if ((puVar1->one)
-                && (((int)DAT_TileMapState::instance.OrganismLayer[puVar1->tile] != iVar1 + 2000
-                    || (!(DAT_TileMapState::instance.LogicLayer[puVar1->tile] & 0x80))))) {
+            if (puVar1->one
+                && ((int)DAT_TileMapState::instance.OrganismLayer[puVar1->tile] != iVar1 + 2000
+                    || (!(DAT_TileMapState::instance.LogicLayer[puVar1->tile] & 0x80)))) {
                 MACRO_CALL_MEMBER(Map::LandscapeState_Func::removeRock, DAT_LandscapeState::ptr)(iVar1);
             }
             puVar1 = puVar1 + 8;

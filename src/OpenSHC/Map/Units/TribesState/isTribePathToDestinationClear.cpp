@@ -26,13 +26,12 @@ namespace Map {
             int iVar3;
             int local_4;
             local_4 = 0;
-            if ((((param_2 < 400) && (param_3 < 400)) && (*(char*)(param_3 * 400 + 0x21aec98 + param_2) != '\0'))
-                && (((param_4 < 400 && (param_5 < 400))
-                    && ((*(char*)(param_5 * 400 + 0x21aec98 + param_4) != '\0'
-                        && (iVar2 = DAT_ViewportRenderState::instance.translationMatrix[param_5].addXgetTile + param_4,
-                            DAT_TileMapState::instance.PathConnectionLayer
-                                    [DAT_ViewportRenderState::instance.translationMatrix[param_3].addXgetTile + param_2]
-                                == DAT_TileMapState::instance.PathConnectionLayer[iVar2])))))) {
+            if (param_2 < 400 && param_3 < 400 && *(char*)(param_3 * 400 + 0x21aec98 + param_2) != '\0' && param_4 < 400
+                && param_5 < 400 && *(char*)(param_5 * 400 + 0x21aec98 + param_4) != '\0'
+                && (iVar2 = DAT_ViewportRenderState::instance.translationMatrix[param_5].addXgetTile + param_4,
+                    DAT_TileMapState::instance.PathConnectionLayer
+                            [DAT_ViewportRenderState::instance.translationMatrix[param_3].addXgetTile + param_2]
+                        == DAT_TileMapState::instance.PathConnectionLayer[iVar2])) {
                 this->ALG_ResultTileIndex = 0;
                 uVar1 = DAT_TileMapState::instance.LogicLayer[iVar2];
                 MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findLinkageBasedPathOrWalkRadius,
@@ -42,8 +41,8 @@ namespace Map {
                         if (this->tribes[param_1].size <= local_4) {
                             return (undefined4)(1);
                         }
-                        iVar2 = MACRO_CALL_MEMBER(
-                            Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(param_1, local_4);
+                        iVar2 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
+                            param_1, local_4);
                         local_4 = local_4 + 1;
                     } while ((DAT_UnitsState::instance.units[iVar2].logicalState != Map::Units::ULS_NORMAL)
                         || (DAT_UnitsState::instance.units[iVar2].dying != 0));
@@ -53,8 +52,8 @@ namespace Map {
                     if (499 < this->ALG_ResultTileIndex)
                         break;
                     iVar3 = (int)(short)DAT_TileMapState::instance.UnitLayer[iVar3];
-                    if ((((iVar3) && (iVar2 != iVar3)) && (DAT_UnitsState::instance.units[iVar3].tribeID != param_1))
-                        && (DAT_UnitsState::instance.units[iVar3].tunnelerFinishedDigging != 2)) {
+                    if (iVar3 && iVar2 != iVar3 && DAT_UnitsState::instance.units[iVar3].tribeID != param_1
+                        && DAT_UnitsState::instance.units[iVar3].tunnelerFinishedDigging != 2) {
                         return (undefined4)(0);
                     }
                 }

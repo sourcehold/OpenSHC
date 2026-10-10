@@ -37,7 +37,7 @@ namespace UI {
                 left, top, right, bottom, color);
             dVar2 = this->drawEndX;
             dVar1 = this->drawStartX;
-            if ((_drawReady) && ((int)(roundingLevel * 2) <= (int)(this->drawEndY - this->drawStartY))) {
+            if (_drawReady && (int)(roundingLevel * 2) <= (int)(this->drawEndY - this->drawStartY)) {
                 _currentIndexForX = 0;
                 this->drawStartX = dVar1;
                 this->drawEndX = dVar2;

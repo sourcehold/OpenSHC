@@ -40,10 +40,10 @@ namespace UI {
             && (DAT_GameCore::instance.currentMenuViewType != UI::Enums::MVT_MAP_EDITOR_LANDSCAPING)) {
             _menuStateNotZero = MACRO_CALL(UI::DisplayElements_Func::GetIfDisplayElementStateNotZero)(
                 UI::Enums::DEID_KEEP_AND_GRANERY_PLACEMENT_INFO);
-            if ((!_menuStateNotZero)
-                && ((DAT_GameCore::instance.currentMenuViewType != UI::Enums::MVT_BUILDING_AND_STATUS_MENU
+            if (!_menuStateNotZero
+                && (DAT_GameCore::instance.currentMenuViewType != UI::Enums::MVT_BUILDING_AND_STATUS_MENU
                     || ((DAT_GameCore::instance.activeMenuTab.tabType != UI::Enums::BASMTT_BARRACKS_OR_MPMENU_MODEM
-                        && (DAT_GameCore::instance.activeMenuTab.tabType != UI::Enums::BASMTT_MERCENARYPOST)))))) {
+                        && (DAT_GameCore::instance.activeMenuTab.tabType != UI::Enums::BASMTT_MERCENARYPOST))))) {
                 blendStrength = 0;
                 _menuStateNotZero = FALSE;
                 fontSize = 0x12;
@@ -51,9 +51,8 @@ namespace UI {
                 alignment = Text::TTA_LEFT;
                 _xParam = posX;
                 _yParam = posY;
-                _textAddress = MACRO_CALL_MEMBER(
-                    Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
-                    DE::SHCDE::TEXT_MONTHS, DAT_GameState::instance.mapAndTime.month);
+                _textAddress = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
+                    DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_MONTHS, DAT_GameState::instance.mapAndTime.month);
                 MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     _textAddress, _xParam, _yParam, alignment, color, fontSize, _menuStateNotZero, blendStrength);
                 MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(

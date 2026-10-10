@@ -25,14 +25,13 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00463A00
         BOOLEnum AlphaAndButtonSurface::SelectUnitAndOpenStatusMenu(int unitIndex)
         {
-            if ((((0 < unitIndex)
-                     && (DAT_UnitsState::instance.units[unitIndex].owner
-                         == DAT_GameSynchronyState::instance.currentPlayerSlotID))
-                    && (DAT_UnitsState::instance.units[unitIndex].isSelectable_OR_matchTime == 0))
-                && (((DAT_GameCore::instance.gameMode_2 != Game::GM_EDITOR
-                         && (DAT_GameCore::instance.gameMode_2 != Game::GM_SIEGE_THAT))
-                    && ((!DAT_GameCore::instance.gamePausedLogical
-                        && (DAT_UnitsState::instance.units[unitIndex].unitType != Map::Units::UT_S_TOWER)))))) {
+            if (0 < unitIndex
+                && DAT_UnitsState::instance.units[unitIndex].owner
+                    == DAT_GameSynchronyState::instance.currentPlayerSlotID
+                && DAT_UnitsState::instance.units[unitIndex].isSelectable_OR_matchTime == 0
+                && DAT_GameCore::instance.gameMode_2 != Game::GM_EDITOR
+                && DAT_GameCore::instance.gameMode_2 != Game::GM_SIEGE_THAT && !DAT_GameCore::instance.gamePausedLogical
+                && DAT_UnitsState::instance.units[unitIndex].unitType != Map::Units::UT_S_TOWER) {
                 MACRO_CALL_MEMBER(
                     Text::TextEditorState_Func::closeHelpDialogAndReturnToMenu, DAT_TextEditorState::ptr)();
                 DAT_GameCore::instance.buildingandstatusmenuMenuTabToSwitchTo = 0x46;

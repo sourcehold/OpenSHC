@@ -35,13 +35,13 @@ namespace Map {
             int _counter;
             int _tile;
             uint _y;
-            if ((((DAT_GameCore::instance.gameMode_2 != Game::GM_EDITOR)
-                     && (DAT_GameCore::instance.gameMode_2 != Game::GM_SIEGE_THAT))
-                    && ((DAT_GameCore::instance.gameMode_2 != Game::GM_BUILDERUnk
-                        || (DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 != Map::MT_SIEGE))))
-                && (((DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY
-                         && (DAT_GameState::instance.mapAndTime.aliveDeerCount))
-                    && (DAT_GameState::instance.mapAndTime.deerCount < 6)))) {
+            if (DAT_GameCore::instance.gameMode_2 != Game::GM_EDITOR
+                && DAT_GameCore::instance.gameMode_2 != Game::GM_SIEGE_THAT
+                && (DAT_GameCore::instance.gameMode_2 != Game::GM_BUILDERUnk
+                    || (DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 != Map::MT_SIEGE))
+                && DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY
+                && DAT_GameState::instance.mapAndTime.aliveDeerCount
+                && DAT_GameState::instance.mapAndTime.deerCount < 6) {
                 _counter = 0;
                 while (true) {
                     _x = DAT_GameState::instance.mapAndTime.signpostsMapEdge[0][0].x;
@@ -66,8 +66,7 @@ namespace Map {
                         (int)DAT_TileMapState::instance.OrganismLayer[_tile]);
                 }
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createAnimal, this)(
-                    Commands::M_MAPPER_DEER, _x, _y,
-                    (int)((int)((uint)DAT_TileMapState::instance.HeightLayer[_tile])));
+                    Commands::M_MAPPER_DEER, _x, _y, (int)((int)((uint)DAT_TileMapState::instance.HeightLayer[_tile])));
             }
         }
 

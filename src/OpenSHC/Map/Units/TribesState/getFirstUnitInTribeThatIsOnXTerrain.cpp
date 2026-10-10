@@ -25,10 +25,10 @@ namespace Map {
                     _unitID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
                         selectionID, _unitSelectionIndex);
                     _unitSelectionIndex = _unitSelectionIndex + 1;
-                    if (((DAT_UnitsState::instance.units[_unitID].logicalState == Map::Units::ULS_NORMAL)
-                            && (DAT_UnitsState::instance.units[_unitID].dying == 0))
-                        && ((DAT_TileMapState::instance.LogicLayer[DAT_UnitsState::instance.units[_unitID].tile]
-                            & 0x40000000U))) {
+                    if (DAT_UnitsState::instance.units[_unitID].logicalState == Map::Units::ULS_NORMAL
+                        && DAT_UnitsState::instance.units[_unitID].dying == 0
+                        && (DAT_TileMapState::instance.LogicLayer[DAT_UnitsState::instance.units[_unitID].tile]
+                            & 0x40000000U)) {
                         return _unitID;
                     }
                 } while (_unitSelectionIndex < iVar1);

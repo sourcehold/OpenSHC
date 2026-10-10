@@ -55,12 +55,12 @@ namespace UI {
             if (param_1 == 2) {
                 MACRO_CALL_MEMBER(Input::MouseState_Func::resetMouseState2, DAT_MouseState::ptr)();
                 DAT_VideoBikQueue::instance.storedMessages_0x924 = 0;
-                MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog,
-                    DAT_MenuModalComposition1::ptr)(UI::Enums::MMT_NONE, FALSE);
-                MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog,
-                    DAT_MenuModalComposition2::ptr)(UI::Enums::MMT_NONE, FALSE);
-                MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog,
-                    DAT_MenuModalComposition3::ptr)(UI::Enums::MMT_NONE, FALSE);
+                MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog, DAT_MenuModalComposition1::ptr)(
+                    UI::Enums::MMT_NONE, FALSE);
+                MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog, DAT_MenuModalComposition2::ptr)(
+                    UI::Enums::MMT_NONE, FALSE);
+                MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog, DAT_MenuModalComposition3::ptr)(
+                    UI::Enums::MMT_NONE, FALSE);
                 MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     UI::Enums::MVT_MAIN_MENU, 0);
                 MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::endSoundStream, DAT_SoundSystemState::ptr)(
@@ -69,17 +69,16 @@ namespace UI {
                     Audio::MSS::enums::SND_STR_SPEECH_2);
                 ;
             }
-            if (((param_1 == 1) && (DAT_00df5560::instance)) && (!DAT_00df5540::instance)) {
+            if (param_1 == 1 && DAT_00df5560::instance && !DAT_00df5540::instance) {
                 DAT_00df5558::instance = DAT_00df5558::instance + 1;
                 DAT_00df5560::instance = 0;
                 MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::endSoundStream, DAT_SoundSystemState::ptr)(
                     Audio::MSS::enums::SND_STR_SPEECH_1);
                 MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::endSoundStream, DAT_SoundSystemState::ptr)(
                     Audio::MSS::enums::SND_STR_SPEECH_2);
-                if (((DAT_TutorialCurrentStep::instance == 2) && (DAT_00df5558::instance == 1))
-                    && (0
-                        < DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                            .keep.id)) {
+                if (DAT_TutorialCurrentStep::instance == 2 && DAT_00df5558::instance == 1
+                    && 0 < DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                            .keep.id) {
                     DAT_00df5558::instance = 2;
                 }
                 MACRO_CALL(UI::Helpers_Func::ResetTutorialActionTrackers)();

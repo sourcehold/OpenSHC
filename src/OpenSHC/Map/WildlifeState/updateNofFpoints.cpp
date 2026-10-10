@@ -45,7 +45,7 @@ namespace Map {
         _someY = DAT_GameState::instance.mapAndTime
                      .signpostEntryData[DAT_TroopValueState::instance.attackInfo.field128056_0x469d4]
                      .y;
-        if ((((uVar6 < 400) && (_someY < 400)) && (*(char*)(_someY * 400 + 0x21aec98 + uVar6) != '\0'))
+        if (uVar6 < 400 && _someY < 400 && *(char*)(_someY * 400 + 0x21aec98 + uVar6) != '\0'
             && (_separateAreaID = DAT_TileMapState::instance
                     .PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[_someY].addXgetTile
                         + uVar6],
@@ -75,8 +75,8 @@ namespace Map {
                             + *(int*)((int)&DAT_ViewportRenderState::instance.translationMatrix[0].addXgetTile
                                 + local_10)
                             + 0x13a06];
-                        if (((_separateAreaID == _area) && ((uVar1 < 400 && (local_10 < 4788))))
-                            && (*(char*)(local_c + 0x21aec98 + uVar1) != '\0')) {
+                        if (_separateAreaID == _area && uVar1 < 400 && local_10 < 4788
+                            && *(char*)(local_c + 0x21aec98 + uVar1) != '\0') {
                             DAT_TroopValueState::instance.attackInfo.nof_fpointsArray[iVar5][0] = (short)uVar1;
                             DAT_TroopValueState::instance.attackInfo
                                 .nof_fpointsArray[DAT_TroopValueState::instance.attackInfo.nof_fpoints][1] = sVar8;
@@ -102,14 +102,13 @@ namespace Map {
                             DAT_TroopValueState::instance.attackInfo.nof_fpoints = iVar5;
                         }
                     }
-                    if ((((piVar5[40].field27_0x6c != 0) && (0 < piVar5[40].firstMember))
-                            && (uVar2 = DAT_TileMapState::instance.PathConnectionLayer
-                                    [*(int*)((int)&DAT_ViewportRenderState::instance.translationMatrix[0].addXgetTile
-                                         + local_10)
-                                        + uVar6],
-                                _separateAreaID == uVar2))
-                        && ((
-                            (uVar6 < 400 && (local_10 < 0x12b5)) && (*(char*)(local_c + 0x21aec98 + uVar6) != '\0')))) {
+                    if (piVar5[40].field27_0x6c != 0 && 0 < piVar5[40].firstMember
+                        && (uVar2 = DAT_TileMapState::instance.PathConnectionLayer
+                                [*(int*)((int)&DAT_ViewportRenderState::instance.translationMatrix[0].addXgetTile
+                                     + local_10)
+                                    + uVar6],
+                            _separateAreaID == uVar2)
+                        && uVar6 < 400 && local_10 < 0x12b5 && *(char*)(local_c + 0x21aec98 + uVar6) != '\0') {
                         DAT_TroopValueState::instance.attackInfo.nof_fpointsArray[iVar5][0] = (short)uVar6;
                         DAT_TroopValueState::instance.attackInfo
                             .nof_fpointsArray[DAT_TroopValueState::instance.attackInfo.nof_fpoints][1] = sVar8;
@@ -140,9 +139,8 @@ namespace Map {
                             + *(int*)((int)&DAT_ViewportRenderState::instance.translationMatrix[0].addXgetTile
                                 + local_10)
                             + 10];
-                        if ((_separateAreaID == uVar2)
-                            && (((uVar1 < 400 && (local_10 < 0x12b5))
-                                && (*(char*)(local_c + 0x21aec98 + uVar1) != '\0')))) {
+                        if (_separateAreaID == uVar2 && uVar1 < 400 && local_10 < 0x12b5
+                            && *(char*)(local_c + 0x21aec98 + uVar1) != '\0') {
                             DAT_TroopValueState::instance.attackInfo.nof_fpointsArray[iVar5][0] = (short)uVar1;
                             DAT_TroopValueState::instance.attackInfo
                                 .nof_fpointsArray[DAT_TroopValueState::instance.attackInfo.nof_fpoints][1] = sVar8;
@@ -174,8 +172,8 @@ namespace Map {
                             + *(int*)((int)&DAT_ViewportRenderState::instance.translationMatrix[0].addXgetTile
                                 + local_10)
                             + 0x14];
-                        if (((_separateAreaID == uVar2) && ((uVar1 < 400 && (local_10 < 0x12b5))))
-                            && (*(char*)(local_c + 0x21aec98 + uVar1) != '\0')) {
+                        if (_separateAreaID == uVar2 && uVar1 < 400 && local_10 < 0x12b5
+                            && *(char*)(local_c + 0x21aec98 + uVar1) != '\0') {
                             DAT_TroopValueState::instance.attackInfo.nof_fpointsArray[iVar5][0] = (short)uVar1;
                             DAT_TroopValueState::instance.attackInfo
                                 .nof_fpointsArray[DAT_TroopValueState::instance.attackInfo.nof_fpoints][1] = sVar8;
@@ -207,9 +205,8 @@ namespace Map {
                             + *(int*)((int)&DAT_ViewportRenderState::instance.translationMatrix[0].addXgetTile
                                 + local_10)
                             + 0x1e];
-                        if ((_separateAreaID == uVar2)
-                            && (((uVar1 < 400 && (local_10 < 0x12b5))
-                                && (*(char*)(local_c + 0x21aec98 + uVar1) != '\0')))) {
+                        if (_separateAreaID == uVar2 && uVar1 < 400 && local_10 < 0x12b5
+                            && *(char*)(local_c + 0x21aec98 + uVar1) != '\0') {
                             DAT_TroopValueState::instance.attackInfo.nof_fpointsArray[iVar5][0] = (short)uVar1;
                             DAT_TroopValueState::instance.attackInfo
                                 .nof_fpointsArray[DAT_TroopValueState::instance.attackInfo.nof_fpoints][1] = sVar8;

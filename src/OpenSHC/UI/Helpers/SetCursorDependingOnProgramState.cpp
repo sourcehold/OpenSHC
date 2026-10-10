@@ -33,19 +33,18 @@ namespace UI {
             _previousCursor = MACRO_CALL_MEMBER(Input::MouseState_Func::setCursor, DAT_MouseState::ptr)(3);
             return _previousCursor;
         }
-        if (((DAT_MenuTextInputState::instance.currentModalDialog == UI::Enums::MMT_NO_MENU)
-                && (!DAT_TextEditorState::instance.helpDialogVariant))
-            && (!DAT_TextEditorState::instance.isDialogStateInitialized)) {
-            if (((uint)DAT_MouseState::instance.field68_0x1dc < 1000)
-                || (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_INTRO_LOGOS)) {
+        if (DAT_MenuTextInputState::instance.currentModalDialog == UI::Enums::MMT_NO_MENU
+            && !DAT_TextEditorState::instance.helpDialogVariant
+            && !DAT_TextEditorState::instance.isDialogStateInitialized) {
+            if ((uint)DAT_MouseState::instance.field68_0x1dc < 1000
+                || DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_INTRO_LOGOS) {
                 _previousCursor = MACRO_CALL_MEMBER(Input::MouseState_Func::setCursor, DAT_MouseState::ptr)(1);
                 return _previousCursor;
             }
             if ((DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_BUILD_MENU)
                 && (DAT_TileMapState::instance.currentMapperCommand == Commands::M_MAPPER_DELETE)) {
                 if (!DAT_TileMapState::instance.demolishBlocked) {
-                    _previousCursor
-                        = MACRO_CALL_MEMBER(Input::MouseState_Func::setCursor, DAT_MouseState::ptr)(2);
+                    _previousCursor = MACRO_CALL_MEMBER(Input::MouseState_Func::setCursor, DAT_MouseState::ptr)(2);
                     return _previousCursor;
                 }
                 _previousCursor = MACRO_CALL_MEMBER(Input::MouseState_Func::setCursor, DAT_MouseState::ptr)(5);
@@ -58,16 +57,13 @@ namespace UI {
         }
         BVar1 = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
         if (!BVar1) {
-            if (((DAT_GameCore::instance.gameMode_2 == Game::GM_CAMPAIGN_MISSION)
-                    && (DAT_GameCore::instance.missionNumber1to20 - 6U < 5))
-                && ((DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_HISTORIC_CAMPAIGN_INTRO
+            if (DAT_GameCore::instance.gameMode_2 == Game::GM_CAMPAIGN_MISSION
+                && DAT_GameCore::instance.missionNumber1to20 - 6U < 5
+                && (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_HISTORIC_CAMPAIGN_INTRO
                     || ((((DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_HISTORIC_CAMPAIGN_OUTRO
-                              || (DAT_GameCore::instance.currentMenuViewType
-                                  == UI::Enums::MVT_SCENARIO_DESCRIPTION))
-                             || (DAT_GameCore::instance.currentMenuViewType
-                                 == UI::Enums::MVT_HISTORIC_MISSION_PICTURE))
-                        || (DAT_GameCore::instance.currentMenuViewType
-                            == UI::Enums::MVT_HISTORIC_MISSION_INTRO)))))) {
+                              || (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_SCENARIO_DESCRIPTION))
+                             || (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_HISTORIC_MISSION_PICTURE))
+                        || (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_HISTORIC_MISSION_INTRO))))) {
             LAB_0044050c:
                 _previousCursor = MACRO_CALL_MEMBER(Input::MouseState_Func::setCursor, DAT_MouseState::ptr)(6);
                 return _previousCursor;

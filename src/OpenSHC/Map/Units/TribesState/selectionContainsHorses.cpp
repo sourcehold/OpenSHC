@@ -29,11 +29,10 @@ namespace Map {
                     iVar2 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
                         param_1, unitSelectionIndex);
                     unitSelectionIndex = unitSelectionIndex + 1;
-                    if (((DAT_UnitsState::instance.units[iVar2].logicalState == Map::Units::ULS_NORMAL)
-                            && (DAT_UnitsState::instance.units[iVar2].dying == 0))
-                        && ((UVar1 = DAT_UnitsState::instance.units[iVar2].unitType,
-                            UVar1 == Map::Units::UT_A_HARCHER
-                                || (UVar1 == Map::Units::UT_E_KNIGHT)))) {
+                    if (DAT_UnitsState::instance.units[iVar2].logicalState == Map::Units::ULS_NORMAL
+                        && DAT_UnitsState::instance.units[iVar2].dying == 0
+                        && (UVar1 = DAT_UnitsState::instance.units[iVar2].unitType,
+                            UVar1 == Map::Units::UT_A_HARCHER || (UVar1 == Map::Units::UT_E_KNIGHT))) {
                         return TRUE;
                     }
                 } while (unitSelectionIndex < iVar3);

@@ -8,8 +8,10 @@
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/Game/GameMode2Int.hpp"
 #include "OpenSHC/Map/MapType2.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
+#include "OpenSHC/Text/TextAlignmentInt.hpp"
 #include "OpenSHC/UI/Enums/DisplayElementID.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -23,8 +25,6 @@
 #include "OpenSHC/Globals/DAT_WindowAndDirectDraw.hpp"
 #include "OpenSHC/Globals/GMTotalPicturesProcessed.hpp"
 #include "OpenSHC/Globals/PTR_ARRAY_Unknown_UnitGMHeights.hpp"
-#include "OpenSHC/Game/GameMode2Int.hpp"
-#include "OpenSHC/Text/TextAlignmentInt.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -33,13 +33,13 @@ namespace UI {
     using DE::SHCDE::eTextSections;
     using Game::GameMode;
     using Game::GameMode2;
+    using Game::GameMode2Int;
     using Map::MapType2;
     using Text::TextAlignment;
+    using Text::TextAlignmentInt;
     using UI::Enums::DisplayElementID;
     using UI::Enums::MenuViewType;
     using WindowsHelper::Enums::BOOLEnum;
-    using Game::GameMode2Int;
-    using Text::TextAlignmentInt;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00433DA0
     void DisplayElements::RenderStartingGoodDisplayElement(int posX, int posY, DWORD elementState)
@@ -66,12 +66,13 @@ namespace UI {
         iVar3 = 0;
         if (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_MAP_EDITOR_LANDSCAPING) {}
         if (DAT_GameCore::instance.gameMode_2 == Game::GM_EDITOR) {}
-        if (((DAT_GameCore::instance.gameMode_2 == Game::GM_BUILDERUnk)
-                && (DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 == Map::MT_SIEGE))
-            && (DAT_GameSynchronyState::instance.currentPlayerSlotID == 2)) {}
+        if (DAT_GameCore::instance.gameMode_2 == Game::GM_BUILDERUnk
+            && DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 == Map::MT_SIEGE
+            && DAT_GameSynchronyState::instance.currentPlayerSlotID == 2) {}
         if (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY) {
         LAB_00433e2b:
-            _stackMenuStateNotZero = MACRO_CALL(UI::DisplayElements_Func::GetIfDisplayElementStateNotZero)(UI::Enums::DEID_TIME_UNTIL_VICTORY);
+            _stackMenuStateNotZero = MACRO_CALL(UI::DisplayElements_Func::GetIfDisplayElementStateNotZero)(
+                UI::Enums::DEID_TIME_UNTIL_VICTORY);
             if ((_stackMenuStateNotZero)
                 || (_stackMenuStateNotZero = MACRO_CALL(UI::DisplayElements_Func::GetIfDisplayElementStateNotZero)(
                         UI::Enums::DEID_TIME_UNTIL_DEFEAT),
@@ -150,10 +151,10 @@ namespace UI {
             /*
               added by script: "Available Goods"
              */
-            _text = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_STARTUP, 1);
-            MACRO_CALL_MEMBER(Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                _text, _x, _y, (TextAlignment)((int)(_alignment)), uVar4, uVar5, iVar3, _stackMenuStateNotZero,
+            _text = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
+                DE::SHCDE::TEXT_STARTUP, 1);
+            MACRO_CALL_MEMBER(Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(_text, _x,
+                _y, (TextAlignment)((int)(_alignment)), uVar4, uVar5, iVar3, _stackMenuStateNotZero,
                 _currentPlayerSlotID);
             _currentGameModeUnk = DAT_GameCore::instance.gameMode_2;
         } else {
@@ -165,8 +166,7 @@ namespace UI {
                 iVar3 = 2;
             }
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderText, DAT_TextManagerObject::ptr)(
-                DE::SHCDE::TEXT_STARTUP, iVar3, posX, posY + 0x1e, Text::TTA_LEFT, 0xb8eefb, 0, 0x11,
-                FALSE);
+                DE::SHCDE::TEXT_STARTUP, iVar3, posX, posY + 0x1e, Text::TTA_LEFT, 0xb8eefb, 0, 0x11, FALSE);
             _currentGameModeUnk = DAT_GameCore::instance.gameMode_2;
         }
     LAB_00433f65:
@@ -178,8 +178,7 @@ namespace UI {
         iVar2 = iVar3 + -0x28;
         iVar3 = iVar3 >> 2;
         if (iVar2 < DAT_WindowAndDirectDraw::instance.resolutionX) {
-            MACRO_CALL_MEMBER(
-                UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
+            MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
                 DE::SHCDE::GM_INTERFACE_ICONS2, iVar3 + (0x22 - iVar3 / 6) * 6, iVar2 + posX, posY);
         } else if (_currentGameModeUnk != Game::GM_SIEGE_THAT) {
             DAT_GameState::instance.playerDataArray[_currentPlayerSlotID].someCount47 = 0;
@@ -192,8 +191,8 @@ namespace UI {
             if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                     .startResources[iVar3]
                 != 0) {
-                MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM,
-                    DAT_TextureRenderCoreObject::ptr)(DE::SHCDE::GM_INTERFACE_ICONS2, _currentPlayerSlotID,
+                MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
+                    DE::SHCDE::GM_INTERFACE_ICONS2, _currentPlayerSlotID,
                     (posX
                         - (int)*(short*)(PTR_ARRAY_Unknown_UnitGMHeights::instance
                               + (GMTotalPicturesProcessed::instance[0x2e] + _currentPlayerSlotID) * 4 + 0x1c)
@@ -229,9 +228,9 @@ namespace UI {
                     iVar2 = posX + 0x22;
                     textAddress = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                         DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_GOODS, iVar3);
-                    MACRO_CALL_MEMBER(Text::TextManager_Func::renderInGameTextWithShadow,
-                        DAT_TextManagerObject::ptr)(textAddress, iVar2, yParam, alignment, uVar4, uVar5, fontSize,
-                        _stackMenuStateNotZero, blendStrength);
+                    MACRO_CALL_MEMBER(Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
+                        textAddress, iVar2, yParam, alignment, uVar4, uVar5, fontSize, _stackMenuStateNotZero,
+                        blendStrength);
                 }
                 _yOffset = _yOffset + 30;
             }

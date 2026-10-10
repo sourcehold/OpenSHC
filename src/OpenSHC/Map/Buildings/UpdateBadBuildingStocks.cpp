@@ -38,8 +38,8 @@ namespace Map {
         iVar3 = DAT_CurrentBuildingID::instance;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].playerColorUnk = 0;
         DAT_BuildingsState::instance.buildings[iVar3].renderBlendStrength = 0;
-        MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updateBuildingSignpostCounter,
-            DAT_BuildingsState::ptr)(iVar3, 1);
+        MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updateBuildingSignpostCounter, DAT_BuildingsState::ptr)(
+            iVar3, 1);
         DAT_BuildingsState::instance.buildings[iVar3].renderAnimation
             = (ushort)(DAT_GameState::instance.playerDataArray[sVar2].fearFactorLevel < -1);
         bVar1 = DAT_BuildingDefinedData::instance
@@ -49,11 +49,11 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[iVar3].animationIndex = 0;
             DAT_BuildingsState::instance.buildings[iVar3].animationFrame = 1;
         }
-        if ((((DAT_BuildingsState::instance.buildings[iVar3].animationActive != 0)
-                 && (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_BUILDING_AND_STATUS_MENU))
-                && (DAT_GameCore::instance.activeMenuTab.tabType == UI::Enums::BASMTT_STOCKS))
-            && ((iVar3 == DAT_BuildingsState::instance.menuSelectedBuildingID
-                && (DAT_BuildingsState::instance.buildings[iVar3].animationIndex == 5)))) {
+        if (DAT_BuildingsState::instance.buildings[iVar3].animationActive != 0
+            && DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_BUILDING_AND_STATUS_MENU
+            && DAT_GameCore::instance.activeMenuTab.tabType == UI::Enums::BASMTT_STOCKS
+            && iVar3 == DAT_BuildingsState::instance.menuSelectedBuildingID
+            && DAT_BuildingsState::instance.buildings[iVar3].animationIndex == 5) {
             MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                 (int)(short)DAT_BuildingsState::instance.buildings[iVar3].x,
                 (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar3].y)), DE::SHCDE::FX_STOCKS);

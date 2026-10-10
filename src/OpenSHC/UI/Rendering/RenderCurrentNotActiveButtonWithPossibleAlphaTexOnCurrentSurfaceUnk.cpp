@@ -38,11 +38,11 @@ namespace UI {
         if (DAT_ButtonCurrentlyInteracting::instance) {
             iVar1 = iVar1 + 1;
         }
-        if (DAT_UIButtonDefinedData::instance.ButtonGmDataArray[iVar3].alphaGmIdUnk_0xc != ((GmID)0)) {
+        if (DAT_UIButtonDefinedData::instance.ButtonGmDataArray[iVar3].alphaGmIdUnk_0xc != (GmID)0) {
             if (DAT_ButtonBlendStrength::instance != 0x20) {
                 MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
-                    DAT_TextureRenderCoreObject::ptr)((IO::Graphics::GmID)buttonGmData->gmId_0x0,
-                    iVar1 + iVar2, (int)((int)(DAT_ButtonX::instance)), (int)((int)(DAT_ButtonY::instance)),
+                    DAT_TextureRenderCoreObject::ptr)((IO::Graphics::GmID)buttonGmData->gmId_0x0, iVar1 + iVar2,
+                    (int)((int)(DAT_ButtonX::instance)), (int)((int)(DAT_ButtonY::instance)),
                     (int)((int)(DAT_ButtonBlendStrength::instance)));
                 iVar3 = DAT_CurrentButtonGmDataIndex::instance;
             }

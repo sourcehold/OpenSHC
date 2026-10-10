@@ -90,10 +90,10 @@ namespace UI {
             pWVar7 = DAT_TextEditorState::instance.DAT_PointerToTemporaryTextMemory;
             if (uVar2 != 0xffffffff) {
                 if ((int)uVar2 < 0xf0) {
-                    if (DAT_TextEditorState::instance.pendingTokenTypeToSkip != ((HelpTextToken)0)) {
+                    if (DAT_TextEditorState::instance.pendingTokenTypeToSkip != (HelpTextToken)0) {
                         iVar3 = MACRO_CALL_MEMBER(
-                            Text::TextEditorState_Func::helpToken_getHelpTokenAdvanceLength,
-                            DAT_TextEditorState::ptr)((Text::Enums::HelpTextToken)DAT_TextEditorState::instance.pendingTokenTypeToSkip);
+                            Text::TextEditorState_Func::helpToken_getHelpTokenAdvanceLength, DAT_TextEditorState::ptr)(
+                            (Text::Enums::HelpTextToken)DAT_TextEditorState::instance.pendingTokenTypeToSkip);
                         DAT_TextEditorState::instance.activeHelpHotspotIndex
                             = DAT_TextEditorState::instance.activeHelpHotspotIndex + iVar3;
                         DAT_TextEditorState::instance.pendingTokenTypeToSkip = ((HelpTextToken)0);
@@ -147,12 +147,12 @@ namespace UI {
                         if (0 < DAT_TextEditorState::instance.activeHelpHotspotIndex) {
                             if ((ushort)DAT_TextEditorState::instance.DAT_PointerToTemporaryTextMemory
                                     [DAT_TextEditorState::instance.activeHelpHotspotIndex + -1]
-                                < ((HelpTextToken)0x20)) {
-                                iVar5 = MACRO_CALL_MEMBER(
-                                    Text::TextEditorState_Func::helpToken_getHelpTokenAdvanceLength,
-                                    DAT_TextEditorState::ptr)(
-                                    (Text::Enums::HelpTextToken)DAT_TextEditorState::instance.DAT_PointerToTemporaryTextMemory
-                                        [DAT_TextEditorState::instance.activeHelpHotspotIndex + -1]);
+                                < (HelpTextToken)0x20) {
+                                iVar5
+                                    = MACRO_CALL_MEMBER(Text::TextEditorState_Func::helpToken_getHelpTokenAdvanceLength,
+                                        DAT_TextEditorState::ptr)((Text::Enums::HelpTextToken)
+                                            DAT_TextEditorState::instance.DAT_PointerToTemporaryTextMemory
+                                                [DAT_TextEditorState::instance.activeHelpHotspotIndex + -1]);
                                 DAT_TextEditorState::instance.activeHelpHotspotIndex = iVar3 - iVar5;
                             } else {
                                 DAT_TextEditorState::instance.activeHelpHotspotIndex
@@ -165,7 +165,7 @@ namespace UI {
                             < DAT_TextEditorState::instance.customHelpTextLength) {
                             if ((ushort)DAT_TextEditorState::instance.DAT_PointerToTemporaryTextMemory
                                     [DAT_TextEditorState::instance.activeHelpHotspotIndex]
-                                < ((HelpTextToken)0x20)) {
+                                < (HelpTextToken)0x20) {
                                 iVar5 = MACRO_CALL_MEMBER(
                                     Text::TextEditorState_Func::helpToken_getHelpTokenAdvanceLength,
                                     DAT_TextEditorState::ptr)((Text::Enums::HelpTextToken)DAT_TextEditorState::instance
@@ -197,11 +197,10 @@ namespace UI {
                         break;
                     case 0xf8:
                         if (0 < DAT_TextEditorState::instance.activeHelpHotspotIndex) {
-                            iVar5 = MACRO_CALL_MEMBER(
-                                Text::TextEditorState_Func::helpToken_getHelpTokenAdvanceLength,
-                                DAT_TextEditorState::ptr)(
-                                (Text::Enums::HelpTextToken)DAT_TextEditorState::instance.DAT_PointerToTemporaryTextMemory
-                                    [DAT_TextEditorState::instance.activeHelpHotspotIndex + -1]);
+                            iVar5 = MACRO_CALL_MEMBER(Text::TextEditorState_Func::helpToken_getHelpTokenAdvanceLength,
+                                DAT_TextEditorState::ptr)((Text::Enums::HelpTextToken)
+                                    DAT_TextEditorState::instance.DAT_PointerToTemporaryTextMemory
+                                        [DAT_TextEditorState::instance.activeHelpHotspotIndex + -1]);
                             if (iVar3 < DAT_TextEditorState::instance.customHelpTextLength + iVar5) {
                                 iVar6 = (iVar3 - iVar5) * 2;
                                 do {
@@ -224,10 +223,9 @@ namespace UI {
                         break;
                     case 0xf9:
                         iVar5 = MACRO_CALL_MEMBER(
-                            Text::TextEditorState_Func::helpToken_getHelpTokenAdvanceLength,
-                            DAT_TextEditorState::ptr)((Text::Enums::HelpTextToken)DAT_TextEditorState::instance
-                                .DAT_PointerToTemporaryTextMemory[DAT_TextEditorState::instance
-                                        .activeHelpHotspotIndex]);
+                            Text::TextEditorState_Func::helpToken_getHelpTokenAdvanceLength, DAT_TextEditorState::ptr)(
+                            (Text::Enums::HelpTextToken)DAT_TextEditorState::instance.DAT_PointerToTemporaryTextMemory
+                                [DAT_TextEditorState::instance.activeHelpHotspotIndex]);
                         if (iVar3 < DAT_TextEditorState::instance.customHelpTextLength) {
                             if (iVar3 < DAT_TextEditorState::instance.customHelpTextLength + iVar5) {
                                 iVar6 = (iVar3 + iVar5) * 2;
@@ -246,8 +244,7 @@ namespace UI {
                     }
                 }
             switchD_00461715_caseD_a:
-                MACRO_CALL_MEMBER(
-                    Text::TextEditorState_Func::initializeAndLayoutHelpText, DAT_TextEditorState::ptr)();
+                MACRO_CALL_MEMBER(Text::TextEditorState_Func::initializeAndLayoutHelpText, DAT_TextEditorState::ptr)();
             }
             if ((ushort)DAT_TextEditorState::instance
                     .DAT_PointerToTemporaryTextMemory[DAT_TextEditorState::instance.activeHelpHotspotIndex]

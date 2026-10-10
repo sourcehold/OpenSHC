@@ -67,29 +67,28 @@ namespace Map {
             sVar2 = this->tribes[tribeID].predatorNearby;
             if (!sVar2) {
                 SVar3 = this->tribes[tribeID].tribeBehaviorType;
-                if (SVar3 == ((SomeTribeBehaviorType)0)) {
+                if (SVar3 == (SomeTribeBehaviorType)0) {
                     sVar4 = this->tribes[tribeID].unknownAttackRelatedUpdateCounter;
                     sVar2 = sVar4 + 1;
                     this->tribes[tribeID].unknownAttackRelatedUpdateCounter = sVar2;
                     if (!sVar4) {
-                        BVar7 = MACRO_CALL_MEMBER(Map::WildlifeState_Func::buildRallyPointPathForTribe,
-                            DAT_WildlifeState::ptr)(tribeID, 4);
+                        BVar7 = MACRO_CALL_MEMBER(
+                            Map::WildlifeState_Func::buildRallyPointPathForTribe, DAT_WildlifeState::ptr)(tribeID, 4);
                         if (!BVar7) {
                             MACRO_CALL_MEMBER(Map::WildlifeState_Func::findAndSetNewRallyPointForDeerAndLions,
                                 DAT_WildlifeState::ptr)(tribeID, 2, 1);
                         }
                         if (0 < this->tribes[tribeID].rallyPointCount) {
-                            MACRO_CALL_MEMBER(Map::Units::TribesState_Func::standUpAllTribeUnits, this)(
+                            MACRO_CALL_MEMBER(Map::Units::TribesState_Func::standUpAllTribeUnits, this)(tribeID);
+                            MACRO_CALL_MEMBER(Map::Units::TribesState_Func::applyLadderDestructionToTribeUnits, this)(
                                 tribeID);
-                            MACRO_CALL_MEMBER(Map::Units::TribesState_Func::applyLadderDestructionToTribeUnits,
-                                this)(tribeID);
                         }
                     } else if (sVar2 == 0x96) {
                         sVar2 = this->tribes[tribeID].rallyPointCount;
                         if (0 < sVar2) {
                             MACRO_CALL_MEMBER(
-                                Map::Units::TribesState_Func::giveUnitSelectionMoveInstructionNoMatchedSpeed,
-                                this)(tribeID, (uint)((int)((int)this->tribes[tribeID].rallyPointArray[sVar2 + -1][0])),
+                                Map::Units::TribesState_Func::giveUnitSelectionMoveInstructionNoMatchedSpeed, this)(
+                                tribeID, (uint)((int)((int)this->tribes[tribeID].rallyPointArray[sVar2 + -1][0])),
                                 (uint)((int)((int)this->tribes[tribeID].rallyPointArray[sVar2 + -1][1])), 0, 0);
                         }
                     } else if (BVar7) {

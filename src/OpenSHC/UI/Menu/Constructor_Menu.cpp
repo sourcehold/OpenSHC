@@ -59,9 +59,8 @@ namespace UI {
                     _nextMenuItem1 = (MenuItem*)((int)_shiftedCurrentMenuItemPtr + 0x4c);
                     _itemsToSkip = 0;
                     _currentMenuItemType = *(MenuItemTypeInt*)((int)_shiftedCurrentMenuItemPtr + 0x4c);
-                    while ((_currentMenuItemType != UI::Enums::MIT_LAST_ENTRY
-                        && (_currentMenuItemType
-                            != UI::Enums::MIT_TAB_CONSIDER_ITEM_SKIP_BECAUSE_OTHER_MENU_TAB))) {
+                    while (_currentMenuItemType != UI::Enums::MIT_LAST_ENTRY
+                        && _currentMenuItemType != UI::Enums::MIT_TAB_CONSIDER_ITEM_SKIP_BECAUSE_OTHER_MENU_TAB) {
                         if (_currentMenuItemType == UI::Enums::MIT_STOP_HANDLING)
                             goto LAB_004f419d;
                         _currentMenuItemPtr = _nextMenuItem1 + 1;
@@ -83,8 +82,7 @@ namespace UI {
                     _nextMenuItem2 = (MenuItem*)((int)_shiftedCurrentMenuItemPtr + 0x4c);
                     GVar1 = Rendering::Enums::GDI_NONE_0;
                     _nextMenuItemType2 = _nextMenuItem2->menuItemType;
-                    while ((_nextMenuItemType2 & UI::Enums::MIT_PART_OF_INTERACTION_GROUPUnk)
-                        != ((MenuItemType)0)) {
+                    while ((_nextMenuItemType2 & UI::Enums::MIT_PART_OF_INTERACTION_GROUPUnk) != (MenuItemType)0) {
                         if ((_nextMenuItem2->menuItemActionHandler).simple
                             == (UI::Callbacks::SimpleActionHandler*)0x0) {
                             _nextMenuItem2->menuItemActionHandler = _previousClickHandler;
@@ -99,7 +97,7 @@ namespace UI {
                     }
                     (_shiftedCurrentMenuItemPtr->firstItemTypeData).gmDataIndex = GVar1;
                     _currentMenuItemType = _nextMenuItem2->menuItemType;
-                    while (_currentMenuItemType == ((MenuItemType)0x11000000)) {
+                    while (_currentMenuItemType == (MenuItemType)0x11000000) {
                         _currentMenuItemPtr->menuItemType
                             = _currentMenuItemPtr->menuItemType | ((MenuItemType)0x20000000);
                         _previousClickHandler = _nextMenuItem2->menuItemActionHandler;
@@ -107,8 +105,8 @@ namespace UI {
                         _nextMenuItem3 = _nextMenuItem2 + 1;
                         GVar1 = Rendering::Enums::GDI_NONE_0;
                         _currentMenuItemType = _nextMenuItem3->menuItemType;
-                        while ((_currentMenuItemType & UI::Enums::MIT_PART_OF_INTERACTION_GROUPUnk)
-                            != ((MenuItemType)0)) {
+                        while (
+                            (_currentMenuItemType & UI::Enums::MIT_PART_OF_INTERACTION_GROUPUnk) != (MenuItemType)0) {
                             if ((_nextMenuItem3->menuItemActionHandler).simple
                                 == (UI::Callbacks::SimpleActionHandler*)0x0) {
                                 _nextMenuItem3->menuItemActionHandler = _previousClickHandler;
@@ -125,10 +123,10 @@ namespace UI {
                         _nextMenuItem2 = _nextMenuItem3;
                         _currentMenuItemType = _nextMenuItem3->menuItemType;
                     }
-                } else if ((_currentMenuItemType & 0x4000000) != ((MenuItemType)0)) {
+                } else if ((_currentMenuItemType & 0x4000000) != (MenuItemType)0) {
                     _currentMenuItemType = _currentMenuItemPtr->menuItemType;
-                    while (((_currentMenuItemType & 0x4000000) != ((MenuItemType)0)
-                        && (_currentMenuItemPtr != menuItemArrayAddress))) {
+                    while ((_currentMenuItemType & 0x4000000) != (MenuItemType)0
+                        && _currentMenuItemPtr != menuItemArrayAddress) {
                         _currentMenuItemPtr = _currentMenuItemPtr + -1;
                         _currentMenuItemType = _currentMenuItemPtr->menuItemType;
                     }

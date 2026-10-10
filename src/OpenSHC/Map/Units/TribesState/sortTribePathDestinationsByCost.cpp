@@ -2,21 +2,21 @@
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
+#include "OpenSHC/Map/Navigation/PathFindingStatePartB.hpp"
+#include "OpenSHC/Map/Navigation/PathHelper12.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
-#include "OpenSHC/Map/Navigation/PathFindingStatePartB.hpp"
-#include "OpenSHC/Map/Navigation/PathHelper12.hpp"
 
 namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using WindowsHelper::Enums::BOOLEnum;
         using Map::Navigation::PathFindingStatePartB;
         using Map::Navigation::PathHelper12;
+        using WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00524930
         void TribesState::sortTribePathDestinationsByCost(int tribeID, int horseAndRamCount)
@@ -55,8 +55,7 @@ namespace Map {
                         DAT_PathFindingState::ptr)(x, y, 0xffffffff, 0xffffffff, 100000, 0);
                 }
             } else {
-                MACRO_CALL_MEMBER(
-                    Map::Navigation::PathFindingState_Func::calculatePathKeepAndWallsGatesNotAllowed,
+                MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::calculatePathKeepAndWallsGatesNotAllowed,
                     DAT_PathFindingState::ptr)(
                     x, (int)((int)(DAT_UnitsState::instance.units[sVar1].y)), -1, -1, 100000);
             }
@@ -101,13 +100,13 @@ namespace Map {
                                         ->destinationsArray[0]
                                         .tile2OrAHelper
                         + iVar9);
-                    if (((!iVar2)
-                            || (iVar3 = *(int*)((int)&((PathFindingStatePartB*)(DAT_PathFindingState::instance.climbData
-                                                           + 200))
-                                                    ->destinationsArray[1]
-                                                    .tile1
-                                    + iVar9),
-                                iVar3 == 0))
+                    if (!iVar2
+                        || (iVar3
+                            = *(int*)((int)&((PathFindingStatePartB*)(DAT_PathFindingState::instance.climbData + 200))
+                                          ->destinationsArray[1]
+                                          .tile1
+                                + iVar9),
+                            iVar3 == 0)
                         || (iVar4
                             = *(int*)((int)&((PathFindingStatePartB*)(DAT_PathFindingState::instance.climbData + 200))
                                           ->destinationsArray[1]

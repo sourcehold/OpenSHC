@@ -33,18 +33,17 @@ namespace UI {
         int iVar2;
         int* puVar5;
         int iVar6;
-        if ((((DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY)
-                 || (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SKIRMISH_SINGLE_PLAYER))
-                || (DAT_GameSynchronyState::instance.saveRelated != 1))
-            || (action != 10)) {
+        if (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY
+            || DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SKIRMISH_SINGLE_PLAYER
+            || DAT_GameSynchronyState::instance.saveRelated != 1 || action != 10) {
             DAT_MouseState::instance.waitCursorToggle = 1;
             MACRO_CALL(UI::Helpers_Func::SetCursorDependingOnProgramState)();
             MACRO_CALL(OS_Func::_memset)(DAT_MinimapViewState::instance.loadedMiniMap, 0, 80000);
             INT_00b95b64::instance = 1;
             if ((DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY)
                 || (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SKIRMISH_SINGLE_PLAYER)) {
-                std::string _savesPath = MACRO_CALL_MEMBER(
-                    IO::ResourceManager_Func::paths_getSavesPath, DAT_ResourceManager::ptr)(true);
+                std::string _savesPath
+                    = MACRO_CALL_MEMBER(IO::ResourceManager_Func::paths_getSavesPath, DAT_ResourceManager::ptr)(true);
                 _savesPath.append("*.sav", 5);
                 MACRO_CALL_MEMBER(IO::ResourceManager_Func::discoverMapFiles, DAT_ResourceManager::ptr)(
                     _savesPath.c_str());
@@ -53,8 +52,8 @@ namespace UI {
                     (&this->DAT_MapSelectionPreloadMapIndexMapping)[_mapIndex] = _mapIndex;
                 }
             } else {
-                std::string _savesPath = MACRO_CALL_MEMBER(
-                    IO::ResourceManager_Func::paths_getSavesPath, DAT_ResourceManager::ptr)(true);
+                std::string _savesPath
+                    = MACRO_CALL_MEMBER(IO::ResourceManager_Func::paths_getSavesPath, DAT_ResourceManager::ptr)(true);
                 _savesPath.append("*.msv", 5);
                 MACRO_CALL_MEMBER(IO::ResourceManager_Func::discoverMapFiles, DAT_ResourceManager::ptr)(
                     _savesPath.c_str());
@@ -67,10 +66,9 @@ namespace UI {
                         *puVar5 = 1;
                         if (action != 10) {
                             DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = iVar6;
-                            MACRO_CALL_MEMBER(
-                                Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
-                                (Commands::GameCommandType)(Commands::GCT_LOAD_MAP_HEADER
-                                    | Commands::GCT_MULTIPLAYER_INITIATE_ANNOUNCE_HOST));
+                            MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand,
+                                DAT_GameSynchronyState::ptr)((Commands::GameCommandType)(Commands::GCT_LOAD_MAP_HEADER
+                                | Commands::GCT_MULTIPLAYER_INITIATE_ANNOUNCE_HOST));
                         }
                         iVar6 = iVar6 + 1;
                         puVar5 = puVar5 + 1;
@@ -101,10 +99,8 @@ namespace UI {
                 MACRO_CALL_MEMBER(UI::MenuTextInputState_Func::activateModalDialogAndClearText, this)(
                     UI::Enums::MMT_SAVE_MAP);
                 DAT_UserTextHandlerState::instance.allowUserTextInput = 0;
-                MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(
-                    2);
-                MACRO_CALL_MEMBER(
-                    Text::UserTextHandler_Func::moveCursorToEnd, DAT_UserTextHandlerState::ptr)();
+                MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(2);
+                MACRO_CALL_MEMBER(Text::UserTextHandler_Func::moveCursorToEnd, DAT_UserTextHandlerState::ptr)();
                 DAT_UserTextHandlerState::instance.allowUserTextInput = 1;
                 this->fileListContext = 3;
                 iVar6 = this->savedListOffset2;

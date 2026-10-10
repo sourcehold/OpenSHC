@@ -300,8 +300,7 @@ namespace UI {
                     if (6000 < iVar8) {
                         DAT_GameState::instance.playerDataArray[iVar7].popularity = (iVar8 + -6000) / 2 + 6000;
                     }
-                    MACRO_CALL_MEMBER(
-                        Game::GameStateStructures_Func::spawnPoisonCloudsAtRandomStorageOrArmyBuilding,
+                    MACRO_CALL_MEMBER(Game::GameStateStructures_Func::spawnPoisonCloudsAtRandomStorageOrArmyBuilding,
                         DAT_GameState::ptr)(iVar7, DAT_MapPropertiesState::instance.invasionEventContent.field49_0xa8);
                     pcVar10 = "Random_Events2.wav";
                     iVar8 = 2;
@@ -347,7 +346,7 @@ namespace UI {
                 case 0x91:
                     iVar8 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::findRecentOrSignpostSpawnLocation,
                         DAT_TribesState::ptr)(&dStack_4, (uint*)&param_1);
-                    if ((!iVar8)
+                    if (!iVar8
                         || (BVar4 = MACRO_CALL_MEMBER(Rendering::ViewportRenderState_Func::xyAreValid,
                                 DAT_ViewportRenderState::ptr)(dStack_4, (uint)((int)(param_1))),
                             iVar8 = DAT_GameSynchronyState::instance.currentPlayerSlotID, !BVar4))
@@ -363,14 +362,13 @@ namespace UI {
                         do {
                             MACRO_CALL_MEMBER(Map::Units::TribesState_Func::findRecentOrSignpostSpawnLocation,
                                 DAT_TribesState::ptr)(&dStack_4, (uint*)&param_1);
-                            dVar5 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createAnimal,
-                                DAT_TribesState::ptr)(Commands::M_MAPPER_LION, (uint)((int)(dStack_4)),
-                                (uint)((int)(param_1)),
+                            dVar5 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createAnimal, DAT_TribesState::ptr)(
+                                Commands::M_MAPPER_LION, (uint)((int)(dStack_4)), (uint)((int)(param_1)),
                                 (int)((int)((uint)
                                     * (byte*)(DAT_ViewportRenderState::instance.translationMatrix[param_1].addXgetTile
                                         + 0x1d32c38 + dStack_4))));
-                            MACRO_CALL_MEMBER(UI::MinimapViewState_Func::setSpawnMoment,
-                                DAT_MinimapViewState::ptr)(dStack_4, param_1);
+                            MACRO_CALL_MEMBER(UI::MinimapViewState_Func::setSpawnMoment, DAT_MinimapViewState::ptr)(
+                                dStack_4, param_1);
                             iVar7 = DAT_MapPropertiesState::instance.invasionEventContent.field49_0xa8;
                             iVar8 = iVar8 + 1;
                             DAT_TribesState::instance.tribes[dVar5].unknownBool02 = 0;
@@ -382,8 +380,7 @@ namespace UI {
                     pcVar9 = DAT_MissionAestheticsDefinedData::instance.RandomEvent8VideoName;
                     break;
                 case 0x92:
-                    BVar4 = MACRO_CALL_MEMBER(
-                        Game::GameStateStructures_Func::hasAnySignpost, DAT_GameState::ptr)();
+                    BVar4 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::hasAnySignpost, DAT_GameState::ptr)();
                     if (!BVar4)
                         goto switchD_004c1bae_caseD_8c;
                     DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
@@ -397,13 +394,11 @@ namespace UI {
                         DAT_TroopValueState::ptr)(DAT_TroopValueState::instance.attackInfo.inv_count, 0);
                     DAT_TroopValueState::instance.attackInfo
                         .attackWavePlayerIDArray[DAT_TroopValueState::instance.attackInfo.inv_count] = 8;
-                    iVar8
-                        = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::pickRandomAccessibleSignpostEntry,
-                            DAT_GameState::ptr)();
+                    iVar8 = MACRO_CALL_MEMBER(
+                        Game::GameStateStructures_Func::pickRandomAccessibleSignpostEntry, DAT_GameState::ptr)();
                     dVar5 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeWithSpawnedUnit,
                         DAT_TribesState::ptr)(0, 9, DAT_GameState::instance.mapAndTime.signpostEntryData[iVar8].x,
-                        DAT_GameState::instance.mapAndTime.signpostEntryData[iVar8].y, 8,
-                        Map::Units::UT_E_MACE,
+                        DAT_GameState::instance.mapAndTime.signpostEntryData[iVar8].y, 8, Map::Units::UT_E_MACE,
                         DAT_MapPropertiesState::instance.invasionEventContent.field49_0xa8 + 1);
                     MACRO_CALL_MEMBER(UI::MinimapViewState_Func::setSpawnMoment, DAT_MinimapViewState::ptr)(
                         DAT_GameState::instance.mapAndTime.signpostEntryData[iVar8].x,
@@ -423,25 +418,21 @@ namespace UI {
                     pcVar9 = DAT_MissionAestheticsDefinedData::instance.RandomEvent9VideoName;
                     break;
                 case 0x94:
-                    BVar4 = MACRO_CALL_MEMBER(
-                        Game::GameStateStructures_Func::hasAnySignpost, DAT_GameState::ptr)();
+                    BVar4 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::hasAnySignpost, DAT_GameState::ptr)();
                     if (!BVar4)
                         goto switchD_004c1bae_caseD_8c;
-                    iVar8
-                        = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::pickRandomAccessibleSignpostEntry,
-                            DAT_GameState::ptr)();
+                    iVar8 = MACRO_CALL_MEMBER(
+                        Game::GameStateStructures_Func::pickRandomAccessibleSignpostEntry, DAT_GameState::ptr)();
                     dVar5 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::spawnUnitsAroundLocation,
                         DAT_TribesState::ptr)(3, DAT_GameState::instance.mapAndTime.signpostEntryData[iVar8].x,
                         DAT_GameState::instance.mapAndTime.signpostEntryData[iVar8].y,
-                        (int)((int)(DAT_GameSynchronyState::instance.currentPlayerSlotID)),
-                        Map::Units::UT_E_ARCHER,
+                        (int)((int)(DAT_GameSynchronyState::instance.currentPlayerSlotID)), Map::Units::UT_E_ARCHER,
                         DAT_MapPropertiesState::instance.invasionEventContent.field49_0xa8);
                     param_1 = dVar5;
                     dVar6 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::spawnUnitsAroundLocation,
                         DAT_TribesState::ptr)(0xc, DAT_GameState::instance.mapAndTime.signpostEntryData[iVar8].x,
                         DAT_GameState::instance.mapAndTime.signpostEntryData[iVar8].y,
-                        (int)((int)(DAT_GameSynchronyState::instance.currentPlayerSlotID)),
-                        Map::Units::UT_E_MONK, 1);
+                        (int)((int)(DAT_GameSynchronyState::instance.currentPlayerSlotID)), Map::Units::UT_E_MONK, 1);
                     dStack_4 = dVar6;
                     MACRO_CALL_MEMBER(UI::MinimapViewState_Func::setSpawnMoment, DAT_MinimapViewState::ptr)(
                         DAT_GameState::instance.mapAndTime.signpostEntryData[iVar8].x,
@@ -491,10 +482,10 @@ namespace UI {
                             x1 = (int)(short)DAT_BuildingsState::instance.buildings[iVar8].x + 5;
                             y1 = (int)(short)DAT_BuildingsState::instance.buildings[iVar8].y + 5;
                         }
-                        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction,
-                            DAT_TribesState::ptr)(param_1, x1, y1, 0, 0, Map::Units::Instructions::UMSE_0);
-                        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction,
-                            DAT_TribesState::ptr)(dStack_4, x1, y1, 0, 0, Map::Units::Instructions::UMSE_0);
+                        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(
+                            param_1, x1, y1, 0, 0, Map::Units::Instructions::UMSE_0);
+                        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(
+                            dStack_4, x1, y1, 0, 0, Map::Units::Instructions::UMSE_0);
                     }
                     pcVar10 = "Random_Events11.wav";
                     iVar8 = 0xb;
@@ -509,8 +500,8 @@ namespace UI {
                         Map::Buildings::BuildingsState_Func::findFirstBuildingOfType, DAT_BuildingsState::ptr)(
                         DAT_GameSynchronyState::instance.currentPlayerSlotID, Map::Buildings::BT_WELL);
                     if (!iVar8) {
-                        iVar8 = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::findFirstBuildingOfType,
-                            DAT_BuildingsState::ptr)(
+                        iVar8 = MACRO_CALL_MEMBER(
+                            Map::Buildings::BuildingsState_Func::findFirstBuildingOfType, DAT_BuildingsState::ptr)(
                             DAT_GameSynchronyState::instance.currentPlayerSlotID, Map::Buildings::BT_WATERPOT);
                         pcVar10 = "general_message3.wav";
                         pcVar9 = DAT_MissionAestheticsDefinedData::instance.RandomEvent15VideoName;
@@ -533,8 +524,8 @@ namespace UI {
                  */
                 pcVar3 = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_ACTION, iVar8);
-                MACRO_CALL_MEMBER(Rendering::Bink::AIMessageQueue_Func::playEventVideoBik,
-                    DAT_VideoBikQueue::ptr)(pcVar3, pcVar9, pcVar10);
+                MACRO_CALL_MEMBER(Rendering::Bink::AIMessageQueue_Func::playEventVideoBik, DAT_VideoBikQueue::ptr)(
+                    pcVar3, pcVar9, pcVar10);
             switchD_004c1bae_caseD_8c:
                 MACRO_CALL_MEMBER(
                     UI::MenuTextInputState_Func::clearAnyOtherModalDialogs, DAT_MenuTextInputState::ptr)();
@@ -641,19 +632,18 @@ namespace UI {
                 pcVar9 = DAT_MissionAestheticsDefinedData::instance.RandomEvent6VideoName;
                 break;
             case 0x90:
-                iVar8
-                    = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::hasAvailableSpawnSlotForWildlifeOrMercs,
-                        DAT_TribesState::ptr)();
-                if ((!iVar8)
-                    || ((iVar8 = MACRO_CALL_MEMBER(
-                             Map::Buildings::BuildingsState_Func::findBuildingOfTypeForPlayer, DAT_BuildingsState::ptr)(
-                             DAT_GameSynchronyState::instance.currentPlayerSlotID, Map::Buildings::BT_HOPFARM),
+                iVar8 = MACRO_CALL_MEMBER(
+                    Map::Units::TribesState_Func::hasAvailableSpawnSlotForWildlifeOrMercs, DAT_TribesState::ptr)();
+                if (!iVar8
+                    || (iVar8 = MACRO_CALL_MEMBER(
+                            Map::Buildings::BuildingsState_Func::findBuildingOfTypeForPlayer, DAT_BuildingsState::ptr)(
+                            DAT_GameSynchronyState::instance.currentPlayerSlotID, Map::Buildings::BT_HOPFARM),
                         iVar8 == 0
                             && (iVar8
                                 = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::findBuildingOfTypeForPlayer,
                                     DAT_BuildingsState::ptr)(
                                     DAT_GameSynchronyState::instance.currentPlayerSlotID, Map::Buildings::BT_WHEATFARM),
-                                iVar8 == 0))))
+                                iVar8 == 0)))
                     goto LAB_004c19d6;
                 DAT_GameState::instance.mapAndTime.eventCountdownRabbitInfestation = 1200;
                 MACRO_CALL_MEMBER(
@@ -678,8 +668,8 @@ namespace UI {
                  */
                 pcVar10 = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_ACTION, 0xc);
-                MACRO_CALL_MEMBER(Rendering::Bink::AIMessageQueue_Func::playEventVideoBik,
-                    DAT_VideoBikQueue::ptr)(pcVar10, pcVar9, pcVar3);
+                MACRO_CALL_MEMBER(Rendering::Bink::AIMessageQueue_Func::playEventVideoBik, DAT_VideoBikQueue::ptr)(
+                    pcVar10, pcVar9, pcVar3);
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(
                     Audio::SFX::SEID_CHAPEL_BELL);
                 MACRO_CALL_MEMBER(
@@ -717,8 +707,7 @@ namespace UI {
             MACRO_CALL_MEMBER(Rendering::Bink::AIMessageQueue_Func::playEventVideoBik, DAT_VideoBikQueue::ptr)(
                 pcVar3, pcVar9, pcVar10);
         LAB_004c19d6:
-            MACRO_CALL_MEMBER(
-                UI::MenuTextInputState_Func::clearAnyOtherModalDialogs, DAT_MenuTextInputState::ptr)();
+            MACRO_CALL_MEMBER(UI::MenuTextInputState_Func::clearAnyOtherModalDialogs, DAT_MenuTextInputState::ptr)();
         }
 
     }

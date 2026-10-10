@@ -55,15 +55,15 @@ namespace Map {
             _unitType = ((UnitType)0);
             _destinationIndexTracker = 0;
             bVar2 = false;
-            if ((((DAT_GameCore::instance.gameMode_2 != Game::GM_EDITOR)
-                     && (DAT_GameCore::instance.gameMode_2 != Game::GM_SIEGE_THAT))
-                    && ((DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY
-                        || (((DAT_GameCore::instance.gameMode_2 == Game::GM_BUILDERUnk
-                                 || (DAT_GameCore::instance.gameMode_2 == Game::GM_CRUSADER_TUTORIAL))
-                            || (0 < DAT_GameState::instance
-                                    .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                                    .keep.id))))))
-                && (-1 < DAT_GameState::instance.mapAndTime.countUpTo201)) {
+            if (DAT_GameCore::instance.gameMode_2 != Game::GM_EDITOR
+                && DAT_GameCore::instance.gameMode_2 != Game::GM_SIEGE_THAT
+                && (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY
+                    || (((DAT_GameCore::instance.gameMode_2 == Game::GM_BUILDERUnk
+                             || (DAT_GameCore::instance.gameMode_2 == Game::GM_CRUSADER_TUTORIAL))
+                        || (0 < DAT_GameState::instance
+                                .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                                .keep.id))))
+                && -1 < DAT_GameState::instance.mapAndTime.countUpTo201) {
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::updateTribeUnitAssignments, this)();
                 _playerID_2 = DAT_GameSynchronyState::instance.currentPlayerSlotID;
                 if ((DAT_GameCore::instance.gameMode_2 == Game::GM_BUILDERUnk)
@@ -183,9 +183,8 @@ namespace Map {
                                     _destinationIndex = 0;
                                 }
                                 _nextDestination = _destinationIndexTracker + 1;
-                                _tribeID1 = MACRO_CALL_MEMBER(
-                                    Map::Units::TribesState_Func::createTribeWithSpawnedUnit, this)(
-                                    (short)_destinationIndexTracker, (undefined4)((int)(_tribeType)),
+                                _tribeID1 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeWithSpawnedUnit,
+                                    this)((short)_destinationIndexTracker, (undefined4)((int)(_tribeType)),
                                     DAT_GameState::instance.mapAndTime.unitMoveDestinationXYPairs[0][_destinationIndex]
                                         .x,
                                     DAT_GameState::instance.mapAndTime.unitMoveDestinationXYPairs[0][_destinationIndex]
@@ -208,8 +207,8 @@ namespace Map {
                         if (0x27 < _destinationIndexTracker) {
                             iVar5 = 0;
                         }
-                        dVar4 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeWithSpawnedUnit,
-                            this)((short)_destinationIndexTracker, 2,
+                        dVar4 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeWithSpawnedUnit, this)(
+                            (short)_destinationIndexTracker, 2,
                             DAT_GameState::instance.mapAndTime.unitMoveDestinationXYPairs[0][iVar5].x,
                             DAT_GameState::instance.mapAndTime.unitMoveDestinationXYPairs[0][iVar5].y, 2,
                             Map::Units::UT_TUNNELER, iVar6);
@@ -282,8 +281,8 @@ namespace Map {
                         do {
                             if ((DAT_GameSynchronyState::instance.currentPlayerFullIDArray[_playerID] != -1)
                                 || (DAT_GameSynchronyState::instance.currentAIArray[_playerID] != 0)) {
-                                dVar4 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::spawnUnitsIntoNewTribe,
-                                    this)(_destinationIndexTracker, _tribeType, (int)((int)(*piVar7)),
+                                dVar4 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::spawnUnitsIntoNewTribe, this)(
+                                    _destinationIndexTracker, _tribeType, (int)((int)(*piVar7)),
                                     (int)((int)(piVar7[1])), _playerID, (UnitType)((int)(_unitType)), ((UnitType)0),
                                     _unitType1Count, 0);
                                 this->tribes[dVar4].unknownAttackRelatedUpdateCounter = 0x32;
@@ -344,8 +343,8 @@ namespace Map {
                         do {
                             if ((DAT_GameSynchronyState::instance.currentPlayerFullIDArray[iVar5] != -1)
                                 || (DAT_GameSynchronyState::instance.currentAIArray[iVar5] != 0)) {
-                                dVar4 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::spawnUnitsIntoNewTribe,
-                                    this)(_destinationIndexTracker, _tribeType, (int)((int)(*piVar7)),
+                                dVar4 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::spawnUnitsIntoNewTribe, this)(
+                                    _destinationIndexTracker, _tribeType, (int)((int)(*piVar7)),
                                     (int)((int)(piVar7[1])), iVar5, (UnitType)((int)(_unitType)), ((UnitType)0),
                                     _unitType1Count, 0);
                                 this->tribes[dVar4].unknownAttackRelatedUpdateCounter = 0x32;
@@ -365,9 +364,9 @@ namespace Map {
                     DAT_GameState::instance.mapAndTime.countUpTo201
                         = DAT_GameState::instance.mapAndTime.countUpTo201 + 1;
                     iVar3 = 200;
-                    if ((DAT_GameCore::instance.gameMode_2 == Game::GM_SKIRMISH_AND_MULTIPLAYER)
-                        && ((DAT_GameCore::instance.isSkirmishTrail == TRUE
-                            && (DAT_GameCore::instance.currentTrailType == Game::TT_EXTREME)))) {
+                    if (DAT_GameCore::instance.gameMode_2 == Game::GM_SKIRMISH_AND_MULTIPLAYER
+                        && DAT_GameCore::instance.isSkirmishTrail == TRUE
+                        && DAT_GameCore::instance.currentTrailType == Game::TT_EXTREME) {
                         iVar3 = 0x32;
                     }
                     if (iVar3 < DAT_GameState::instance.mapAndTime.countUpTo201) {
@@ -463,9 +462,8 @@ namespace Map {
                                         }
                                         *(int*)(DAT_GameState::instance.mapAndTime.unused_0x3ff00
                                             + (_unitType1Count + iVar3) * 4) = iVar6 - iVar5;
-                                        dVar4 = MACRO_CALL_MEMBER(
-                                            Map::Units::TribesState_Func::spawnUnitsIntoNewTribe, this)(
-                                            _destinationIndexTracker, _tribeType, (int)((int)(*piVar7)),
+                                        dVar4 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::spawnUnitsIntoNewTribe,
+                                            this)(_destinationIndexTracker, _tribeType, (int)((int)(*piVar7)),
                                             (int)((int)(piVar7[1])), local_4, (UnitType)((int)(_unitType)),
                                             ((UnitType)0), iVar5, 0);
                                         this->tribes[dVar4].unknownAttackRelatedUpdateCounter = 0x32;

@@ -5,6 +5,7 @@
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
+#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -12,7 +13,6 @@
 #include "OpenSHC/Globals/DAT_MenuHandlerState.hpp"
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
-#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -20,9 +20,9 @@ namespace UI {
     using DE::SHCDE::eTextSections;
     using Map::Buildings::BuildingType;
     using Map::Units::States::UnitState;
+    using Rendering::Colors::BGR24;
     using Text::TextAlignment;
     using WindowsHelper::Enums::BOOLEnum;
-    using Rendering::Colors::BGR24;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00439440
     void BuildingMenus::RenderBuildingMenu_WorkshopWeaponProduction()
@@ -38,13 +38,12 @@ namespace UI {
         int iVar8;
         int iVar9;
         iVar4 = DAT_BuildingsState::instance.menuSelectedBuildingID;
-        if ((((DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID].buildingType
-                  == Map::Buildings::BT_FLETCHER)
-                 && (iVar1
-                     = (int)DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
-                         .workerID[0],
-                     iVar1 != 0))
-                && (DAT_UnitsState::instance.units[iVar1].state.generic == Map::Units::States::US_STAND_UPUnk))
+        if (DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID].buildingType
+                == Map::Buildings::BT_FLETCHER
+            && (iVar1 = (int)DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
+                    .workerID[0],
+                iVar1 != 0)
+            && DAT_UnitsState::instance.units[iVar1].state.generic == Map::Units::States::US_STAND_UPUnk
             && (BVar2 = MACRO_CALL(Map::Units_Func::CheckUnitProductionPaused)(iVar1), !BVar2)) {
             /*
               added by script: "Not producing - No Wood"
@@ -52,21 +51,21 @@ namespace UI {
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
                 DE::SHCDE::TEXT_IN_BLACKSMITHS_WORKSHOP, 0xb, DAT_MenuHandlerState::instance.x + 0xaf,
                 DAT_MenuHandlerState::instance.y + 0x1f9, Text::TTA_LEFT, 0, 0x12, FALSE);
-        } else if (((DAT_BuildingsState::instance.buildings[iVar4].buildingType == Map::Buildings::BT_POLETURNER)
-                       && (iVar1 = (int)DAT_BuildingsState::instance.buildings[iVar4].workerID[0], iVar1))
-            && ((DAT_UnitsState::instance.units[iVar1].state.generic == Map::Units::States::US_IDLEUnk
-                && (BVar2 = MACRO_CALL(Map::Units_Func::CheckUnitProductionPaused)(iVar1), !BVar2)))) {
+        } else if (DAT_BuildingsState::instance.buildings[iVar4].buildingType == Map::Buildings::BT_POLETURNER
+            && (iVar1 = (int)DAT_BuildingsState::instance.buildings[iVar4].workerID[0], iVar1)
+            && DAT_UnitsState::instance.units[iVar1].state.generic == Map::Units::States::US_IDLEUnk
+            && (BVar2 = MACRO_CALL(Map::Units_Func::CheckUnitProductionPaused)(iVar1), !BVar2)) {
             /*
               added by script: "Not producing - No Wood"
              */
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
                 DE::SHCDE::TEXT_IN_BLACKSMITHS_WORKSHOP, 0xb, DAT_MenuHandlerState::instance.x + 0xaf,
                 DAT_MenuHandlerState::instance.y + 0x1f9, Text::TTA_LEFT, 0, 0x12, FALSE);
-        } else if (((DAT_BuildingsState::instance.buildings[iVar4].buildingType == Map::Buildings::BT_BLACKSMITH)
-                       && (iVar1 = (int)DAT_BuildingsState::instance.buildings[iVar4].workerID[0], iVar1))
-            && ((DAT_UnitsState::instance.units[iVar1].state.generic
-                    == (Map::Units::States::US_STAND_UPUnk | Map::Units::States::US_IDLEUnk)
-                && (BVar2 = MACRO_CALL(Map::Units_Func::CheckUnitProductionPaused)(iVar1), !BVar2)))) {
+        } else if (DAT_BuildingsState::instance.buildings[iVar4].buildingType == Map::Buildings::BT_BLACKSMITH
+            && (iVar1 = (int)DAT_BuildingsState::instance.buildings[iVar4].workerID[0], iVar1)
+            && DAT_UnitsState::instance.units[iVar1].state.generic
+                == (Map::Units::States::US_STAND_UPUnk | Map::Units::States::US_IDLEUnk)
+            && (BVar2 = MACRO_CALL(Map::Units_Func::CheckUnitProductionPaused)(iVar1), !BVar2)) {
             /*
               added by script: "Not producing - No Iron"
              */
@@ -129,8 +128,8 @@ namespace UI {
         /*
           added by script: "Next:"
          */
-        pcVar3 = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_IN_BLACKSMITHS_WORKSHOP, 4);
+        pcVar3 = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
+            DE::SHCDE::TEXT_IN_BLACKSMITHS_WORKSHOP, 4);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             pcVar3, iVar5, iVar1, TVar6, BVar7, iVar8, BVar2, iVar9);
         switch (DAT_BuildingsState::instance.buildings[iVar4].producedItemType) {
@@ -159,8 +158,8 @@ namespace UI {
         TVar6 = Text::TTA_LEFT;
         iVar4 = DAT_MenuHandlerState::instance.y + 0x212;
         iVar1 = DAT_MenuHandlerState::instance.x + 0xb4;
-        pcVar3 = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_IN_BLACKSMITHS_WORKSHOP, _textNumInGroup);
+        pcVar3 = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
+            DE::SHCDE::TEXT_IN_BLACKSMITHS_WORKSHOP, _textNumInGroup);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             pcVar3, iVar1, iVar4, TVar6, BVar7, iVar5, BVar2, iVar8);
     }

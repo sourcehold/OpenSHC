@@ -16,9 +16,9 @@
 namespace OpenSHC {
 namespace Map {
 
+    using Map::Buildings::Building;
     using Map::Buildings::BuildingLogicalState;
     using Map::Buildings::BuildingType;
-    using Map::Buildings::Building;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x0041A520
     void Version::UpgradePitchDitchBuildingIntoPitchDitchObject()
@@ -28,8 +28,8 @@ namespace Map {
         Building* puVar3;
         puVar3 = &DAT_BuildingsState::instance.buildings[1];
         do {
-            if ((puVar3->logicalState != ((BuildingLogicalState)0))
-                && (puVar3->buildingType == Map::Buildings::BT_PITCHDITCH)) {
+            if (puVar3->logicalState != (BuildingLogicalState)0
+                && puVar3->buildingType == Map::Buildings::BT_PITCHDITCH) {
                 uVar2 = puVar3->currentTilePositionAdjusted;
                 uVar1 = puVar3->y;
                 DAT_TileMapState::instance.BuildingLayer[uVar2] = 0;

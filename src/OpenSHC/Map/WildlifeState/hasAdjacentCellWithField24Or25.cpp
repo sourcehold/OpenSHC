@@ -22,7 +22,7 @@ namespace Map {
                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.xOffset + param_1;
             uint const y
                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.yOffset + param_2;
-            if (((x < 0x28) && (y < 0x28)) && (0 < this->grid[x][y].firstMember)
+            if (x < 0x28 && y < 0x28 && 0 < this->grid[x][y].firstMember
                 && ((this->grid[x][y].field24_0x60 != 0) || (this->grid[x][y].field25_0x64 != 0))) {
                 return (undefined4)(1);
             }

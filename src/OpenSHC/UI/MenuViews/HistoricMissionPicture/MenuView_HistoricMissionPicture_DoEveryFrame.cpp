@@ -33,8 +33,8 @@ namespace UI {
         {
             BOOLEnum BVar1;
             int _blendStrength;
-            BVar1 = MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::isSampleOrStreamPlaying,
-                DAT_SoundSystemState::ptr)(Audio::MSS::enums::SND_STR_SFX_1Unk);
+            BVar1 = MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::isSampleOrStreamPlaying, DAT_SoundSystemState::ptr)(
+                Audio::MSS::enums::SND_STR_SFX_1Unk);
             if (!BVar1) {
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playAmbientSoundStreamUnk, DAT_SFXState::ptr)(
                     Audio::SFX::ASFXT_WIND_0);
@@ -78,7 +78,7 @@ namespace UI {
                     0, 400, 0x46, 0, 0, 0x10, TRUE, _blendStrength);
                 MACRO_CALL(UI::Rendering_Func::DrawLoadedMenuStringHelperWithBlending)(
                     1, 400, 0x6e, 0, 0, 0x10, TRUE, _blendStrength);
-                if ((DAT_00ed2780::instance)
+                if (DAT_00ed2780::instance
                     && (FLOAT_00ec0834::instance = FLOAT_Between1And5::instance + FLOAT_00ec0834::instance,
                         32.0 < FLOAT_00ec0834::instance != (FLOAT_00ec0834::instance == 32.0))) {
                     if (DAT_00ed2780::instance == 2) {

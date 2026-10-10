@@ -55,19 +55,18 @@ namespace Map {
                         iVar5 = ((this->tribes[tribeID].someUnitArrayIndex - local_c) + 10) % 10;
                         _unitID = (int)this->tribes[tribeID].someUnitArray[iVar5];
                         if (_unitID) {
-                            if ((((DAT_UnitsState::instance.units[_unitID].logicalState
-                                      == Map::Units::ULS_NORMAL)
-                                     && (DAT_UnitsState::instance.units[_unitID].dying == 0))
-                                    && (DAT_UnitsState::instance.units[_unitID].uid
-                                        == this->tribes[tribeID].someUnitUIDArray[iVar5]))
-                                && ((DAT_GameState::instance.mapAndTime
-                                            .playerTeams[DAT_UnitsState::instance.units[_targetUnitID].owner]
-                                        != DAT_GameState::instance.mapAndTime
-                                            .playerTeams[DAT_UnitsState::instance.units[_unitID].owner]
-                                    && (DAT_TileMapState::instance
-                                            .PathConnectionLayer[DAT_UnitsState::instance.units[_targetUnitID].tile]
-                                        == DAT_TileMapState::instance
-                                            .PathConnectionLayer[DAT_UnitsState::instance.units[_unitID].tile])))) {
+                            if (DAT_UnitsState::instance.units[_unitID].logicalState == Map::Units::ULS_NORMAL
+                                && DAT_UnitsState::instance.units[_unitID].dying == 0
+                                && DAT_UnitsState::instance.units[_unitID].uid
+                                    == this->tribes[tribeID].someUnitUIDArray[iVar5]
+                                && DAT_GameState::instance.mapAndTime
+                                        .playerTeams[DAT_UnitsState::instance.units[_targetUnitID].owner]
+                                    != DAT_GameState::instance.mapAndTime
+                                        .playerTeams[DAT_UnitsState::instance.units[_unitID].owner]
+                                && DAT_TileMapState::instance
+                                        .PathConnectionLayer[DAT_UnitsState::instance.units[_targetUnitID].tile]
+                                    == DAT_TileMapState::instance
+                                        .PathConnectionLayer[DAT_UnitsState::instance.units[_unitID].tile]) {
                                 iVar5 = (int)DAT_UnitsState::instance.units[_targetUnitID].microXPosition
                                     - (int)DAT_UnitsState::instance.units[_unitID].microXPosition;
                                 iVar4 = (int)DAT_UnitsState::instance.units[_targetUnitID].microYPosition
@@ -105,8 +104,8 @@ namespace Map {
                         if (DAT_UnitsState::instance.units[iVar5].tile == this->tribes[tribeID].someTile)
                             goto LAB_0052aa77;
                     }
-                    MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeAnInstruction, this)(tribeID,
-                        Map::Units::UIT_UNIT_ATTACK_UNIT, iVar5, this->tribes[tribeID].someUnitUID, 1);
+                    MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeAnInstruction, this)(
+                        tribeID, Map::Units::UIT_UNIT_ATTACK_UNIT, iVar5, this->tribes[tribeID].someUnitUID, 1);
                 } else {
                     this->tribes[tribeID].someUnitID = 0;
                 }
@@ -114,13 +113,11 @@ namespace Map {
             goto LAB_0052aa77;
         LAB_0052a9f2:
             do {
-                iVar4 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
-                    tribeID, iVar5);
+                iVar4 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(tribeID, iVar5);
                 iVar5 = iVar5 + 1;
-                if (((DAT_UnitsState::instance.units[iVar4].logicalState == Map::Units::ULS_NORMAL)
-                        && (DAT_UnitsState::instance.units[iVar4].dying == 0))
-                    && (DAT_UnitsState::instance.units[iVar4].state.generic
-                        != Map::Units::States::US_MELEE_ATTACK)) {
+                if (DAT_UnitsState::instance.units[iVar4].logicalState == Map::Units::ULS_NORMAL
+                    && DAT_UnitsState::instance.units[iVar4].dying == 0
+                    && DAT_UnitsState::instance.units[iVar4].state.generic != Map::Units::States::US_MELEE_ATTACK) {
                     switch (DAT_UnitsState::instance.units[iVar4].unitType) {
                     case Map::Units::UT_TUNNELER:
                     case Map::Units::UT_E_SPEAR:
@@ -152,15 +149,13 @@ namespace Map {
                         if (0 < _buildingIndex_2) {
                             iVar5 = 0;
                             do {
-                                iVar4
-                                    = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe,
-                                        this)(tribeID, iVar5);
+                                iVar4 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
+                                    tribeID, iVar5);
                                 iVar5 = iVar5 + 1;
-                                if (((DAT_UnitsState::instance.units[iVar4].logicalState
-                                         == Map::Units::ULS_NORMAL)
-                                        && (DAT_UnitsState::instance.units[iVar4].dying == 0))
-                                    && (DAT_UnitsState::instance.units[iVar4].state.generic
-                                        != Map::Units::States::US_MELEE_ATTACK)) {
+                                if (DAT_UnitsState::instance.units[iVar4].logicalState == Map::Units::ULS_NORMAL
+                                    && DAT_UnitsState::instance.units[iVar4].dying == 0
+                                    && DAT_UnitsState::instance.units[iVar4].state.generic
+                                        != Map::Units::States::US_MELEE_ATTACK) {
                                     switch (DAT_UnitsState::instance.units[iVar4].unitType) {
                                     case Map::Units::UT_TUNNELER:
                                     case Map::Units::UT_E_SPEAR:
@@ -179,8 +174,7 @@ namespace Map {
                                 }
                             } while (iVar5 < this->tribes[tribeID].size);
                         }
-                        MACRO_CALL_MEMBER(
-                            Map::Navigation::PathFindingState_Func::aggressiveStanceTargetBuildingAtRange,
+                        MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::aggressiveStanceTargetBuildingAtRange,
                             DAT_PathFindingState::ptr)(_targetUnitID, (int)((int)(15)));
                         if (DAT_PathFindingState::instance.ALG_ResultTile) {
                             _buildingIndex_2 = DAT_TileMapState::instance
@@ -199,8 +193,8 @@ namespace Map {
                         }
                     }
                 } else {
-                    BVar3 = MACRO_CALL_MEMBER(
-                        Map::Units::TribesState_Func::allUnitsReachedTheirDestination, this)(tribeID);
+                    BVar3 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::allUnitsReachedTheirDestination, this)(
+                        tribeID);
                     if (!BVar3) {}
                     _buildingIndex_2 = this->tribes[tribeID].rallyPointCount;
                     iVar5 = this->tribes[tribeID].currentRallyPointIndex + 1;
@@ -217,30 +211,28 @@ namespace Map {
                         y1 = (uint)this->tribes[tribeID].rallyPointArray[iVar5][1];
                         this->tribes[tribeID].currentRallyPointIndex = (short)iVar5;
                         UVar2 = DAT_UnitsState::instance.units[_targetUnitID].unitType;
-                        if (((UVar2 == Map::Units::UT_E_ARCHER) || (UVar2 == Map::Units::UT_E_XBOW))
-                            || ((UVar2 == Map::Units::UT_A_ARCHER
-                                || ((UVar2 == Map::Units::UT_A_SLINGER
-                                    || (UVar2 == Map::Units::UT_A_FIRETHROWER)))))) {
+                        if (UVar2 == Map::Units::UT_E_ARCHER || UVar2 == Map::Units::UT_E_XBOW
+                            || UVar2 == Map::Units::UT_A_ARCHER || UVar2 == Map::Units::UT_A_SLINGER
+                            || UVar2 == Map::Units::UT_A_FIRETHROWER) {
                             if (0x1b0 < DAT_UnitsState::instance.units[_targetUnitID].closestEnemyMicroDistance) {
-                                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction,
-                                    this)(tribeID, x1, y1, 0, 0, Map::Units::Instructions::UMSE_0);
+                                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, this)(
+                                    tribeID, x1, y1, 0, 0, Map::Units::Instructions::UMSE_0);
                             }
                         } else if (UVar2 == Map::Units::UT_A_HARCHER) {
                             MACRO_CALL_MEMBER(
-                                Map::Units::TribesState_Func::giveUnitSelectionMoveInstructionNoMatchedSpeed,
-                                this)(tribeID, x1, y1, 0, 0);
+                                Map::Units::TribesState_Func::giveUnitSelectionMoveInstructionNoMatchedSpeed, this)(
+                                tribeID, x1, y1, 0, 0);
                         } else if ((0x60 < DAT_UnitsState::instance.units[_targetUnitID].closestEnemyMicroDistance)
                             || (this->tribes[tribeID].unitStance != Map::Units::Behavior::USE_AGGRESSIVE)) {
                             MACRO_CALL_MEMBER(
-                                Map::Units::TribesState_Func::giveUnitSelectionMoveInstructionNoMatchedSpeed,
-                                this)(tribeID, x1, y1, 0, 0);
+                                Map::Units::TribesState_Func::giveUnitSelectionMoveInstructionNoMatchedSpeed, this)(
+                                tribeID, x1, y1, 0, 0);
                         }
                     }
                 }
             LAB_0052ac8d:
                 if (this->tribes[tribeID].pendingScatterMove != 0) {
-                    MACRO_CALL_MEMBER(Map::Units::TribesState_Func::moveTribeToIndexedNearbyTile, this)(
-                        tribeID);
+                    MACRO_CALL_MEMBER(Map::Units::TribesState_Func::moveTribeToIndexedNearbyTile, this)(tribeID);
                     this->tribes[tribeID].pendingScatterMove = 0;
                 }
             }

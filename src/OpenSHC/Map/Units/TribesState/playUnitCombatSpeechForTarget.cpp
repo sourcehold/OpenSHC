@@ -4,12 +4,12 @@
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
+#include "OpenSHC/Map/Units/UnitTypeInt.hpp"
 
-#include "OpenSHC/Globals/DAT_TribesState.hpp"
 #include "OpenSHC/Globals/DAT_EntityDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_SFXState.hpp"
+#include "OpenSHC/Globals/DAT_TribesState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
-#include "OpenSHC/Map/Units/UnitTypeInt.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -35,11 +35,10 @@ namespace Map {
             int _distance;
             TribesState* _ptrCurrentSelectionID_2;
             _ptrCurrentSelectionID = this;
-            _otherUnitID = MACRO_CALL_MEMBER(
-                Map::Units::UnitsState_Func::selectionContainsCombatUnit, DAT_UnitsState::ptr)(1);
-            _ptrptrCurrentSelectionID
-                = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getMajoritySelectedUnitType, this)(
-                    selectionID, (int*)&_ptrCurrentSelectionID);
+            _otherUnitID
+                = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::selectionContainsCombatUnit, DAT_UnitsState::ptr)(1);
+            _ptrptrCurrentSelectionID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getMajoritySelectedUnitType,
+                this)(selectionID, (int*)&_ptrCurrentSelectionID);
             _ptrCurrentSelectionID_2 = _ptrCurrentSelectionID;
             sVar1 = DAT_TribesState::instance.tribes[selectionID].size;
             switch (_ptrptrCurrentSelectionID) {
@@ -101,7 +100,8 @@ namespace Map {
                 _otherX = 0x59;
                 break;
             case Map::Units::UT_E_SPEAR:
-                MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)((Map::Units::UnitType)_ptrptrCurrentSelectionID, 0x15);
+                MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)(
+                    (Map::Units::UnitType)_ptrptrCurrentSelectionID, 0x15);
                 if (sVar1 < 0xf) {}
                 _otherX = 0x14;
                 break;
@@ -109,13 +109,14 @@ namespace Map {
             case Map::Units::UT_E_MACE:
             case Map::Units::UT_E_MONK:
                 UVar2 = DAT_UnitsState::instance.units[unitID].unitType;
-                if (((UVar2 == Map::Units::UT_E_KNIGHT) || (UVar2 == Map::Units::UT_E_SWORD))
-                    || (UVar2 == Map::Units::UT_LORD)) {
+                if (UVar2 == Map::Units::UT_E_KNIGHT || UVar2 == Map::Units::UT_E_SWORD
+                    || UVar2 == Map::Units::UT_LORD) {
                     _otherX = 0x11;
                 } else {
                     _otherX = 0x15;
                 }
-                MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)((Map::Units::UnitType)_ptrptrCurrentSelectionID, _otherX);
+                MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)(
+                    (Map::Units::UnitType)_ptrptrCurrentSelectionID, _otherX);
                 if (sVar1 < 0xf) {}
                 _otherX = 0x14;
                 break;
@@ -133,7 +134,8 @@ namespace Map {
                     (int)DAT_UnitsState::instance.units[_otherUnitID].x,
                     (int)((int)(DAT_UnitsState::instance.units[_otherUnitID].y)), _otherX);
             LAB_00521d1b:
-                MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)((Map::Units::UnitType)_ptrptrCurrentSelectionID, 0x15);
+                MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)(
+                    (Map::Units::UnitType)_ptrptrCurrentSelectionID, 0x15);
                 if (sVar1 < 0xf) {}
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
                     (int)DAT_UnitsState::instance.units[_otherUnitID].x,
@@ -143,14 +145,14 @@ namespace Map {
                 if (_ptrCurrentSelectionID == (TribesState*)0x1) {
                     _otherX = 0x56;
                 LAB_00521c6f:
-                    MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume,
-                        DAT_SFXState::ptr)((int)DAT_UnitsState::instance.units[_otherUnitID].x,
+                    MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
+                        (int)DAT_UnitsState::instance.units[_otherUnitID].x,
                         (int)((int)(DAT_UnitsState::instance.units[_otherUnitID].y)), _otherX);
                 } else {
                     if ((_ptrCurrentSelectionID == (TribesState*)0x2)
                         || (_ptrCurrentSelectionID == (TribesState*)0x3)) {
-                        MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume,
-                            DAT_SFXState::ptr)((int)DAT_UnitsState::instance.units[_otherUnitID].x,
+                        MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
+                            (int)DAT_UnitsState::instance.units[_otherUnitID].x,
                             (int)((int)(DAT_UnitsState::instance.units[_otherUnitID].y)), 0x57);
                     }
                     if (3 < (int)_ptrCurrentSelectionID_2) {
@@ -161,18 +163,21 @@ namespace Map {
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
                     (int)DAT_UnitsState::instance.units[_otherUnitID].x,
                     (int)((int)(DAT_UnitsState::instance.units[_otherUnitID].y)), 0x59);
-                MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)((Map::Units::UnitType)_ptrptrCurrentSelectionID, 0x15);
+                MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)(
+                    (Map::Units::UnitType)_ptrptrCurrentSelectionID, 0x15);
                 if (sVar1 < 0xf) {}
                 _otherX = 0xfa;
                 break;
-                default:
-                    UVar2 = DAT_UnitsState::instance.units[unitID].unitType;
-                if ((((UVar2 != Map::Units::UT_E_KNIGHT) && (UVar2 != Map::Units::UT_E_SWORD))
-                        && (UVar2 != Map::Units::UT_E_MACE))
-                    && ((UVar2 != Map::Units::UT_E_PIKE && (UVar2 != Map::Units::UT_LORD)))) {
-                    MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)((Map::Units::UnitType)_ptrptrCurrentSelectionID, 0x15);
+            default:
+                UVar2 = DAT_UnitsState::instance.units[unitID].unitType;
+                if (UVar2 != Map::Units::UT_E_KNIGHT && UVar2 != Map::Units::UT_E_SWORD
+                    && UVar2 != Map::Units::UT_E_MACE && UVar2 != Map::Units::UT_E_PIKE
+                    && UVar2 != Map::Units::UT_LORD) {
+                    MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)(
+                        (Map::Units::UnitType)_ptrptrCurrentSelectionID, 0x15);
                 }
-                MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)((Map::Units::UnitType)_ptrptrCurrentSelectionID, 0x11);
+                MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)(
+                    (Map::Units::UnitType)_ptrptrCurrentSelectionID, 0x11);
             case Map::Units::UT_E_ENGINEER:
                 return;
             case Map::Units::UT_A_SWORDSMAN:

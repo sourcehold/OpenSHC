@@ -66,9 +66,9 @@ namespace UI {
             case 7:
                 iVar1 = 4;
             }
-            if (((DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY)
-                    || (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SKIRMISH_SINGLE_PLAYER))
-                || (!DAT_GameState::instance.mapAndTime.skirmishNoRushTicks)) {
+            if (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY
+                || DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SKIRMISH_SINGLE_PLAYER
+                || !DAT_GameState::instance.mapAndTime.skirmishNoRushTicks) {
                 blendStrengthUnk = DAT_ButtonBlendStrength::instance;
                 if ((param_1 + 1) * 0x27c <= _level) {
                     if (!DAT_GameCore::instance.tacticalPowersDisplayFlag) {

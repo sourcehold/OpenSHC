@@ -100,28 +100,36 @@ namespace Synchrony {
                 do {
                     if ((_currentPlayerFullIdArray[-1] == 0) && (*_currentPlayerFullIdArray != 0)) {
                         if (_counter3 < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[1]) {
-                            DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[1] = DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[1] - 1;
+                            DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[1]
+                                = DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[1] - 1;
                         }
                         if (_counter3 < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[2]) {
-                            DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[2] = DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[2] - 1;
+                            DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[2]
+                                = DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[2] - 1;
                         }
                         if (_counter3 < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[3]) {
-                            DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[3] = DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[3] - 1;
+                            DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[3]
+                                = DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[3] - 1;
                         }
                         if (_counter3 < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[4]) {
-                            DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[4] = DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[4] - 1;
+                            DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[4]
+                                = DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[4] - 1;
                         }
                         if (_counter3 < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[5]) {
-                            DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[5] = DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[5] - 1;
+                            DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[5]
+                                = DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[5] - 1;
                         }
                         if (_counter3 < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[6]) {
-                            DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[6] = DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[6] - 1;
+                            DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[6]
+                                = DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[6] - 1;
                         }
                         if (_counter3 < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[7]) {
-                            DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[7] = DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[7] - 1;
+                            DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[7]
+                                = DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[7] - 1;
                         }
                         if (_counter3 < (char)DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[8]) {
-                            DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[8] = DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[8] - 1;
+                            DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[8]
+                                = DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[8] - 1;
                         }
                         if (_counter3 + 1 < 5) {
                             piVar5 = _currentPlayerFullIdArray;
@@ -150,7 +158,7 @@ namespace Synchrony {
                                 if (!bVar4) {
                                     bVar4 = 10;
                                 }
-                                if (((char)bVar4 < (char)_group) || (pcVar2 == (char*)0xffffffff)) {
+                                if ((char)bVar4 < (char)_group || pcVar2 == (char*)0xffffffff) {
                                     pcVar2 = (char*)(_playerGroupArray + -0x1a275b6);
                                     _group = bVar4;
                                 }
@@ -160,7 +168,7 @@ namespace Synchrony {
                                 if (!bVar4) {
                                     bVar4 = 10;
                                 }
-                                if (((char)bVar4 < (char)_group) || (pcVar2 == (char*)0xffffffff)) {
+                                if ((char)bVar4 < (char)_group || pcVar2 == (char*)0xffffffff) {
                                     pcVar2 = (char*)(_playerGroupArray + -0x1a275b5);
                                     _group = bVar4;
                                 }
@@ -170,7 +178,7 @@ namespace Synchrony {
                                 if (!bVar4) {
                                     bVar4 = 10;
                                 }
-                                if (((char)bVar4 < (char)_group) || (pcVar2 == (char*)0xffffffff)) {
+                                if ((char)bVar4 < (char)_group || pcVar2 == (char*)0xffffffff) {
                                     pcVar2 = (char*)(_playerGroupArray + -0x1a275b4);
                                     _group = bVar4;
                                 }
@@ -180,7 +188,7 @@ namespace Synchrony {
                                 if (!bVar4) {
                                     bVar4 = 10;
                                 }
-                                if (((char)bVar4 < (char)_group) || (pcVar2 == (char*)0xffffffff)) {
+                                if ((char)bVar4 < (char)_group || pcVar2 == (char*)0xffffffff) {
                                     pcVar2 = (char*)(_playerGroupArray + -0x1a275b3);
                                     _group = bVar4;
                                 }
@@ -198,8 +206,9 @@ namespace Synchrony {
                 }
                 if ((DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SKIRMISH_SINGLE_PLAYER)
                     && (DAT_GameSynchronyState::instance.isHost)) {
-                    MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)((Commands::GameCommandType)(Commands::GCT_START_OR_STOP_SEND_MAP_FILEUnk
-                        | Commands::GCT_HOST_SHARE_LOBBY_STATE));
+                    MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
+                        (Commands::GameCommandType)(Commands::GCT_START_OR_STOP_SEND_MAP_FILEUnk
+                            | Commands::GCT_HOST_SHARE_LOBBY_STATE));
                     MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
                         Commands::GCT_HOST_ANNOUNCE_TEAMS_AND_POSITIONS);
                 }

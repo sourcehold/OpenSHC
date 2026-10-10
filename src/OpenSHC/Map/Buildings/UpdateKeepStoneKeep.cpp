@@ -33,8 +33,8 @@ namespace Map {
         DAT_BuildingsState::instance.buildings[iVar6].someY = DAT_BuildingsState::instance.buildings[iVar6].y + 2;
         DAT_BuildingsState::instance.buildings[iVar6].displayOwnerFlag = 1;
         DAT_BuildingsState::instance.buildings[iVar6].extraAnimationSprite1 = 0x18;
-        if (((!bVar5) && (DAT_GameCore::instance.gameMode_2 != Game::GM_EDITOR))
-            && (DAT_GameCore::instance.gameMode_2 != Game::GM_SIEGE_THAT)) {
+        if (!bVar5 && DAT_GameCore::instance.gameMode_2 != Game::GM_EDITOR
+            && DAT_GameCore::instance.gameMode_2 != Game::GM_SIEGE_THAT) {
             iVar4 = DAT_GameState::instance.playerDataArray[sVar2].startResources[0xf];
             if (0 < iVar4) {
                 iVar7 = 1;

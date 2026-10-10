@@ -21,8 +21,7 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x0042A840
         void LobbyMenu::MenuItemActionHandler_LobbyMenu_SkirmishTypeAndBalance(int param_1, ...)
         {
-            if ((((!DAT_00b960dc::instance) && (DAT_GameSynchronyState::instance.isHost)) && (param_1 != 4))
-                && (param_1 != 0x14)) {
+            if (!DAT_00b960dc::instance && DAT_GameSynchronyState::instance.isHost && param_1 != 4 && param_1 != 0x14) {
                 if (param_1 - 1U < 3) {
                     DAT_GameSynchronyState::instance.skirmishGameIntensityType = param_1;
                 }
@@ -39,12 +38,11 @@ namespace UI {
                     }
                     if (param_1 == 0xc) {
                         MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(
-                            (Audio::SFX::SoundEffectID)(Audio::SFX::SEID_UNIT_DAMAGE3
-                                | Audio::SFX::SEID_ARROW_KILL));
+                            (Audio::SFX::SoundEffectID)(Audio::SFX::SEID_UNIT_DAMAGE3 | Audio::SFX::SEID_ARROW_KILL));
                     }
                 }
-                MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand,
-                    DAT_GameSynchronyState::ptr)(Commands::GCT_CHANGE_GAME_INTENSITY_OR_BALANCE);
+                MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
+                    Commands::GCT_CHANGE_GAME_INTENSITY_OR_BALANCE);
             }
         }
 

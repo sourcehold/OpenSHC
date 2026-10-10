@@ -62,13 +62,10 @@ namespace UI {
             if (DAT_MenuModalComposition1::instance.activeModalDialogID == UI::Enums::MMT_RECEIVE_MAP_FROM) {
                 return;
             }
-            if ((((((DAT_MenuModalComposition1::instance.activeModalDialogID == UI::Enums::MMT_SKIRMISH_PLAY_OPTIONS)
-                       && (param_1 != -1000))
-                      && (param_1 != -10))
-                     && ((param_1 != -0xb && (param_1 != -0xc))))
-                    && ((param_1 != -0xd && ((param_1 != -0xe && (param_1 != 99))))))
-                && ((param_1 != 100
-                    && ((((param_1 != 0x53 && (param_1 != 0x6d)) && (param_1 != 0x52)) && (param_1 != 0x5e)))))) {
+            if (DAT_MenuModalComposition1::instance.activeModalDialogID == UI::Enums::MMT_SKIRMISH_PLAY_OPTIONS
+                && param_1 != -1000 && param_1 != -10 && param_1 != -0xb && param_1 != -0xc && param_1 != -0xd
+                && param_1 != -0xe && param_1 != 99 && param_1 != 100 && param_1 != 0x53 && param_1 != 0x6d
+                && param_1 != 0x52 && param_1 != 0x5e) {
                 return;
             }
             if (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SKIRMISH_SINGLE_PLAYER) {

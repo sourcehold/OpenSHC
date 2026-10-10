@@ -38,7 +38,7 @@ namespace UI {
         this->mbr_0x78 = 0;
         if (this->activeModalDialogID == UI::Enums::MMT_NONE) {}
         _borderStyle = (this->modalMenu).borderStyle;
-        if (((_borderStyle & 4) == 0) || ((_borderStyle & 2) == 0))
+        if ((_borderStyle & 4) == 0 || (_borderStyle & 2) == 0)
             goto LAB_004aa311;
         if (DAT_MouseState::instance.leftClickStart == 0) {
         LAB_004aa272:
@@ -46,10 +46,10 @@ namespace UI {
                 goto LAB_004aa311;
         } else if (this->modalDragDropUnk == 0) {
             _x = (this->modalMenu).x;
-            if ((((_x <= DAT_MouseState::instance.screenSpaceX)
-                     && (DAT_MouseState::instance.screenSpaceX < (this->modalMenu).width + _x))
-                    && (_y = (this->modalMenu).y, _y <= DAT_MouseState::instance.screenSpaceY))
-                && (DAT_MouseState::instance.screenSpaceY < _y + 0xc)) {
+            if (_x <= DAT_MouseState::instance.screenSpaceX
+                && DAT_MouseState::instance.screenSpaceX < (this->modalMenu).width + _x
+                && (_y = (this->modalMenu).y, _y <= DAT_MouseState::instance.screenSpaceY)
+                && DAT_MouseState::instance.screenSpaceY < _y + 0xc) {
                 this->modalDragDropUnk = 1;
                 this->mouseRelativeX = DAT_MouseState::instance.screenSpaceX - _x;
                 this->mouseRelativeY = DAT_MouseState::instance.screenSpaceY - _y;
@@ -70,8 +70,7 @@ namespace UI {
             if (_y2 < 0) {
                 (this->modalMenu).y = 0;
             }
-            _areWeInAnInGameMenu
-                = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
+            _areWeInAnInGameMenu = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
             _width = (this->modalMenu).width;
             _x3 = (this->modalMenu).x + _width;
             if (!_areWeInAnInGameMenu) {
@@ -99,7 +98,7 @@ namespace UI {
             _y = (this->modalMenu).y;
             _menuPtr->xPosition = (this->modalMenu).x;
             _menuPtr->yPosition = _y;
-MACRO_CALL_MEMBER(UI::Menu_Func::updateMenuButtons, (this->modalMenu).pointerToMenu)();
+            MACRO_CALL_MEMBER(UI::Menu_Func::updateMenuButtons, (this->modalMenu).pointerToMenu)();
         }
         if (this->minus1 == -1) {
             this->minus1 = 0;
@@ -110,11 +109,10 @@ MACRO_CALL_MEMBER(UI::Menu_Func::updateMenuButtons, (this->modalMenu).pointerToM
                     && ((_y = (this->modalMenu).y,
                         _y <= DAT_MouseState::instance.screenSpaceY
                             && (DAT_MouseState::instance.screenSpaceY < (this->modalMenu).height + _y))))
-                || (this->modalDragDropUnk != 0)) {
+                || this->modalDragDropUnk != 0) {
                 this->minus1 = 1;
             }
-            _areWeInAnInGameMenu
-                = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
+            _areWeInAnInGameMenu = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
             if ((!_areWeInAnInGameMenu)
                 && (DAT_GameCore::instance.currentMenuViewType != UI::Enums::MVT_SCENARIO_DESCRIPTION)) {
                 this->minus1 = 1;
@@ -131,8 +129,7 @@ MACRO_CALL_MEMBER(UI::Menu_Func::updateMenuButtons, (this->modalMenu).pointerToM
             this->minus1 = (uint)(DAT_MenuHandlerState::instance.field18_0x3c != 0);
         }
         if ((_borderStyle & 0x1000) != 0) {
-            if ((this->minus1 != 0)
-                && (this->activeModalDialogID != UI::Enums::MMT_DISPLAY_SCENARIO_HELP_TEXT)) {
+            if ((this->minus1 != 0) && (this->activeModalDialogID != UI::Enums::MMT_DISPLAY_SCENARIO_HELP_TEXT)) {
                 this->mbr_0x78 = 1;
             }
             this->minus1 = 0;

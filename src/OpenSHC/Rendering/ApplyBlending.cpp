@@ -40,8 +40,8 @@ void Rendering::ApplyBlending(int param_1)
     uVar12 = (DAT_00ed3154::instance - DAT_RenderMap_YOffset::instance) + DAT_RenderMap_DrawSomeY::instance;
     if (!DAT_TextureRenderCoreObject::instance.isZoom2) {
         local_8 = DAT_BlendingDefinedData::instance.field164_0x27fc;
-        if ((DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.start <= (int)uVar12)
-            && ((int)uVar12 < DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.end)) {
+        if (DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.start <= (int)uVar12
+            && (int)uVar12 < DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.end) {
             puVar8 = (ushort*)((int)DAT_TextureRenderCoreObject::instance.gmProcessedImageData
                 + DAT_GMImageOffsets::instance[DAT_GmImageAddressToBeRendered::instance]);
             if (DAT_BlendFilterArrays::instance[0x20][0x1f][0] == 0) {
@@ -94,8 +94,8 @@ void Rendering::ApplyBlending(int param_1)
         }
     } else {
         local_8 = DAT_BlendingDefinedData::instance.field166_0x2dfc;
-        if ((DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.start <= (int)uVar12)
-            && ((int)uVar12 < DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.end)) {
+        if (DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.start <= (int)uVar12
+            && (int)uVar12 < DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.end) {
             iVar2 = DAT_GMImageOffsets::instance[DAT_GmImageAddressToBeRendered::instance];
             if (DAT_BlendFilterArrays::instance[0x20][0x1f][0] == 0) {
                 MACRO_CALL(UI::Rendering_Func::InitBlendFilterArraysUnk)();

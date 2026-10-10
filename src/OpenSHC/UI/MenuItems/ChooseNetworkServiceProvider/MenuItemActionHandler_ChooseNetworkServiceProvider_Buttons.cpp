@@ -44,7 +44,7 @@ namespace UI {
             char (*pacVar5)[20];
             char (*pacVar6)[20];
             char (*pacVar7)[250];
-            if (param_1 < ((ChooseNetworkServiceProviderButtonActions)0x80000000)) {
+            if (param_1 < (ChooseNetworkServiceProviderButtonActions)0x80000000) {
                 if (param_1 == UI::ChooseNetworkServiceProvider::CNSPBA_EXIT) {
                 LAB_00490d4f:
                     MACRO_CALL_MEMBER(
@@ -71,8 +71,7 @@ namespace UI {
                             UI::Enums::MVT_LOBBY_MENU, 0);
                         MACRO_CALL(Synchrony_Func::InitSkirmishLobbyData)();
                         Menu_LobbyMenu::instance.thousand = 0;
-                        MACRO_CALL(OS_Func::_memset)(
-                            DAT_GameSynchronyState::instance.DAT_PlayerNames, 0, 0x8ca);
+                        MACRO_CALL(OS_Func::_memset)(DAT_GameSynchronyState::instance.DAT_PlayerNames, 0, 0x8ca);
                         pcVar3 = MACRO_CALL_MEMBER(
                             Text::UserTextHandler_Func::getTextArrayPointer, DAT_UserTextHandlerState::ptr)(0);
                         pacVar7 = DAT_GameSynchronyState::instance.DAT_PlayerNames + 1;
@@ -82,8 +81,8 @@ namespace UI {
                             pcVar3 = pcVar3 + 1;
                             pacVar7 = (char (*)[250])(*pacVar7 + 1);
                         } while (cVar1 != '\0');
-                        MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::waitForMultiplayerHost,
-                            DAT_GameSynchronyState::ptr)();
+                        MACRO_CALL_MEMBER(
+                            Synchrony::GameSynchronyState_Func::waitForMultiplayerHost, DAT_GameSynchronyState::ptr)();
                         MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand,
                             DAT_GameSynchronyState::ptr)(Commands::GCT_ASK_FOR_SLOT_ASSIGNMENT);
                     }
@@ -92,8 +91,7 @@ namespace UI {
                 if (param_1 == UI::ChooseNetworkServiceProvider::CNSPBA_JOIN_GAME) {
                     DAT_GameSynchronyState::instance.isHost = FALSE;
                     DAT_GameSynchronyState::instance.kickedAtTime = 0;
-                    if (DAT_GameCore::instance.activeMenuTab.tabType
-                        == UI::Enums::BASMTT_GRANARY_OR_MPMENU_TCPIP) {
+                    if (DAT_GameCore::instance.activeMenuTab.tabType == UI::Enums::BASMTT_GRANARY_OR_MPMENU_TCPIP) {
                         pcVar2 = MACRO_CALL_MEMBER(
                             Text::UserTextHandler_Func::getTextArrayPointer, DAT_UserTextHandlerState::ptr)(5);
                         pcVar3 = pcVar2 + 1;
@@ -105,8 +103,8 @@ namespace UI {
                             pacVar6 = DAT_GameSynchronyState::instance.ipRelatedArray;
                             do {
                                 pacVar5 = pacVar6;
-                                pcVar3 = MACRO_CALL_MEMBER(Text::UserTextHandler_Func::getTextArrayPointer,
-                                    DAT_UserTextHandlerState::ptr)(5);
+                                pcVar3 = MACRO_CALL_MEMBER(
+                                    Text::UserTextHandler_Func::getTextArrayPointer, DAT_UserTextHandlerState::ptr)(5);
                                 iVar4 = MACRO_CALL(OS_Func::__stricmp)(pcVar3, (char const*)((int)(*pacVar5)));
                                 if (!iVar4)
                                     goto LAB_00490c30;
@@ -275,8 +273,8 @@ namespace UI {
                             DAT_GameSynchronyState::instance.ipRelatedArray[3][0x11] = '\0';
                             DAT_GameSynchronyState::instance.ipRelatedArray[3][0x12] = '\0';
                             DAT_GameSynchronyState::instance.ipRelatedArray[3][0x13] = '\0';
-                            pcVar3 = MACRO_CALL_MEMBER(Text::UserTextHandler_Func::getTextArrayPointer,
-                                DAT_UserTextHandlerState::ptr)(5);
+                            pcVar3 = MACRO_CALL_MEMBER(
+                                Text::UserTextHandler_Func::getTextArrayPointer, DAT_UserTextHandlerState::ptr)(5);
                             pacVar6 = DAT_GameSynchronyState::instance.ipRelatedArray + 3;
                             do {
                                 cVar1 = *pcVar3;
@@ -301,23 +299,23 @@ namespace UI {
                     }
                     MACRO_CALL_MEMBER(Input::MouseState_Func::resetMouseState2, DAT_MouseState::ptr)();
                 }
-            } else if (param_1 == ((ChooseNetworkServiceProviderButtonActions)0xffffffff)) {
+            } else if (param_1 == (ChooseNetworkServiceProviderButtonActions)0xffffffff) {
                 if (0 < DAT_GameSynchronyState::instance.scrollBarItemOffset) {
                     DAT_GameSynchronyState::instance.scrollBarItemOffset
                         = DAT_GameSynchronyState::instance.scrollBarItemOffset + -1;
                 }
             } else if ((int)param_1 < -9) {
-                if (param_1 == ((ChooseNetworkServiceProviderButtonActions)0xfffffff6)) {
+                if (param_1 == (ChooseNetworkServiceProviderButtonActions)0xfffffff6) {
                     if (DAT_GameSynchronyState::instance.gameSpyArcadeAvailable) {
                         DAT_WindowAndDirectDraw::instance.postWindowCloseMessage = 1;
                         DAT_GameSynchronyState::instance.openOnClose = TRUE;
                     }
                 } else {
-                    if (param_1 == ((ChooseNetworkServiceProviderButtonActions)0xffffd8f0))
+                    if (param_1 == (ChooseNetworkServiceProviderButtonActions)0xffffd8f0)
                         goto LAB_00490d4f;
-                    if (param_1 == ((ChooseNetworkServiceProviderButtonActions)0xfffffc18)) {
-                        MACRO_CALL_MEMBER(Text::UserTextHandler_Func::setTextEntryAndUpdateCursor,
-                            DAT_UserTextHandlerState::ptr)(
+                    if (param_1 == (ChooseNetworkServiceProviderButtonActions)0xfffffc18) {
+                        MACRO_CALL_MEMBER(
+                            Text::UserTextHandler_Func::setTextEntryAndUpdateCursor, DAT_UserTextHandlerState::ptr)(
                             5, (char*)(DAT_GameSynchronyState::instance.ipArrayIndex * 0x14 + 0x1a274a4));
                         DAT_GameSynchronyState::instance.ipArrayIndex
                             = DAT_GameSynchronyState::instance.ipArrayIndex + 1;
@@ -326,9 +324,9 @@ namespace UI {
                         }
                     }
                 }
-            } else if ((param_1 == ((ChooseNetworkServiceProviderButtonActions)0xfffffffe))
-                && (DAT_GameSynchronyState::instance.scrollBarItemOffset
-                    < DAT_GameSynchronyState::instance.scrollBarItemCount + -4)) {
+            } else if (param_1 == (ChooseNetworkServiceProviderButtonActions)0xfffffffe
+                && DAT_GameSynchronyState::instance.scrollBarItemOffset
+                    < DAT_GameSynchronyState::instance.scrollBarItemCount + -4) {
                 DAT_GameSynchronyState::instance.scrollBarItemOffset
                     = DAT_GameSynchronyState::instance.scrollBarItemOffset + 1;
             }

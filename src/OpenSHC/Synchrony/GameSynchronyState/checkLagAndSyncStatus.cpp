@@ -31,7 +31,7 @@ namespace Synchrony {
         /*
           current player full id array
          */
-        while ((piVar2[-0x40502] == -1 || (*piVar2 != 0))) {
+        while (piVar2[-0x40502] == -1 || *piVar2 != 0) {
             iVar4 = iVar4 + 1;
             piVar2 = piVar2 + 1;
             if (8 < iVar4)
@@ -41,8 +41,7 @@ namespace Synchrony {
             DVar3 = timeGetTime();
             if (DVar3 - DAT_GameSynchronyState::instance.announcementReceiveTime < 60000) {}
             DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = 0;
-            MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
-                Commands::GCT_KILL_GAME);
+            MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(Commands::GCT_KILL_GAME);
         }
         DVar3 = timeGetTime();
         if (DVar3 - DAT_GameSynchronyState::instance.announcementReceiveTime < 45000) {}
@@ -51,8 +50,7 @@ namespace Synchrony {
             if ((piVar7[-0x40502] != -1) && (*piVar7 == 0)) {
                 DAT_GameSynchronyState::instance.DAT_GameCommandParam1 = 0x3f;
                 DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = _player;
-                MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(
-                    Commands::GCT_LEAVE_GAME);
+                MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, this)(Commands::GCT_LEAVE_GAME);
                 *piVar7 = 1;
             }
             _player = _player + 1;

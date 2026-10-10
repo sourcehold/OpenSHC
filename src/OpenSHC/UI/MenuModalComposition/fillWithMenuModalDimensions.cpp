@@ -19,8 +19,7 @@ namespace UI {
         BOOLEnum _areWeInAnInGameMenu;
         int _y;
         if (this->activeModalDialogID != UI::Enums::MMT_NONE) {
-            _areWeInAnInGameMenu
-                = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
+            _areWeInAnInGameMenu = MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)();
             if (!_areWeInAnInGameMenu) {
                 *xPtr = this->modalMenu.x;
                 _y = this->modalMenu.y;
@@ -31,7 +30,7 @@ namespace UI {
             *yPtr = _y;
             *widthPtr = this->modalMenu.width;
             *heigthPtr = this->modalMenu.height;
-            if (((byte)this->modalMenu.borderStyle & 2)) {
+            if ((byte)this->modalMenu.borderStyle & 2) {
                 *yPtr = *yPtr + 0xc;
                 *heigthPtr = *heigthPtr + -0xc;
             }

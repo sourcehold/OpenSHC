@@ -59,15 +59,14 @@ namespace UI {
                  */
                 if (DAT_MenuTextInputState::instance.DAT_MenuLoadGameRelativeSelectionIndex == -1)
                     goto LAB_0049461b;
-                if (((DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY)
-                        && (DAT_GameSynchronyState::instance.currentGameMode
-                            != Game::GM_SKIRMISH_SINGLE_PLAYER))
-                    && (DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices
+                if (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY
+                    && DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SKIRMISH_SINGLE_PLAYER
+                    && DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices
                             [DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices
                                     [DAT_MenuTextInputState::instance.DAT_MenuLoadGameRelativeSelectionIndex
                                         + DAT_MenuTextInputState::instance.DAT_MenuLoadGameRelativeSelectionOffset + -1]
                                 + 499]
-                        == 0))
+                        == 0)
                     break;
                 iVar1 = DAT_MenuTextInputState::instance.DAT_MenuLoadGameRelativeSelectionIndex
                     + DAT_MenuTextInputState::instance.DAT_MenuLoadGameRelativeSelectionOffset;
@@ -108,8 +107,7 @@ namespace UI {
                         goto LAB_00494566;
                     }
                     if ((DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY)
-                        || (DAT_GameSynchronyState::instance.currentGameMode
-                            == Game::GM_SKIRMISH_SINGLE_PLAYER)) {
+                        || (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SKIRMISH_SINGLE_PLAYER)) {
                         pcVar6 = (local_3f4 - 1);
                         do {
                             _mapName = pcVar6;
@@ -133,12 +131,11 @@ namespace UI {
                     IO::ResourceManager_Func::doesFileOfActiveResourceExist, DAT_ResourceManager::ptr)();
                 if (BVar3) {
                     if ((DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY)
-                        && (DAT_GameSynchronyState::instance.currentGameMode
-                            != Game::GM_SKIRMISH_SINGLE_PLAYER)) {
-                        MACRO_CALL_MEMBER(UI::MenuTextInputState_Func::clearAnyOtherModalDialogs,
-                            DAT_MenuTextInputState::ptr)();
-                        pcVar6 = MACRO_CALL_MEMBER(IO::ResourceManager_Func::mapNames_getLoadedMapNameForIndex,
-                            DAT_ResourceManager::ptr)(
+                        && (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SKIRMISH_SINGLE_PLAYER)) {
+                        MACRO_CALL_MEMBER(
+                            UI::MenuTextInputState_Func::clearAnyOtherModalDialogs, DAT_MenuTextInputState::ptr)();
+                        pcVar6 = MACRO_CALL_MEMBER(
+                            IO::ResourceManager_Func::mapNames_getLoadedMapNameForIndex, DAT_ResourceManager::ptr)(
                             DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices[iVar1 + -1]);
                         _mapName = DAT_GameSynchronyState::instance.shortMapName;
                         do {
@@ -188,8 +185,7 @@ namespace UI {
                         goto LAB_0049477a;
                     }
                     if ((DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY)
-                        || (DAT_GameSynchronyState::instance.currentGameMode
-                            == Game::GM_SKIRMISH_SINGLE_PLAYER)) {
+                        || (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SKIRMISH_SINGLE_PLAYER)) {
                         pcVar6 = MACRO_CALL_MEMBER(
                             Text::UserTextHandler_Func::getCurrentText, DAT_UserTextHandlerState::ptr)();
                         do {
@@ -251,8 +247,7 @@ namespace UI {
                     IO::ResourceManager_Func::doesFileOfActiveResourceExist, DAT_ResourceManager::ptr)();
                 if (!BVar3) {
                     if ((DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY)
-                        || (DAT_GameSynchronyState::instance.currentGameMode
-                            == Game::GM_SKIRMISH_SINGLE_PLAYER)) {
+                        || (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SKIRMISH_SINGLE_PLAYER)) {
                         DAT_MenuTextInputState::instance.DAT_MenuOptionsActionParameter = 0x20;
                         dialogID = UI::Enums::MMT_PROGRESS_BAR_BOX;
                         goto LAB_0049481f;
@@ -269,12 +264,11 @@ namespace UI {
                     MACRO_CALL_MEMBER(
                         UI::MenuTextInputState_Func::clearAnyOtherModalDialogs, DAT_MenuTextInputState::ptr)();
                     DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = DAT_GameCore::instance.mapTimeInTicks;
-                    DAT_GameSynchronyState::instance.DAT_GameCommandParam1
-                        = MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::computeSomeHashOnUnitArray,
-                            DAT_GameSynchronyState::ptr)();
+                    DAT_GameSynchronyState::instance.DAT_GameCommandParam1 = MACRO_CALL_MEMBER(
+                        Synchrony::GameSynchronyState_Func::computeSomeHashOnUnitArray, DAT_GameSynchronyState::ptr)();
                     DAT_GameSynchronyState::instance.DAT_GameCommandParam2 = 0;
-                    MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand,
-                        DAT_GameSynchronyState::ptr)(Commands::GCT_SAVE);
+                    MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
+                        Commands::GCT_SAVE);
                 } else {
                     DAT_MenuTextInputState::instance.DAT_MenuOptionsActionParameter = 0x1e;
                     dialogID = UI::Enums::MMT_YES_NO_DIALOG;
@@ -283,8 +277,7 @@ namespace UI {
                         DAT_MenuTextInputState::ptr)(dialogID);
                 }
                 DAT_UserTextHandlerState::instance.allowUserTextInput = 0;
-                MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(
-                    9);
+                MACRO_CALL_MEMBER(Text::UserTextHandler_Func::resetToTextIndex, DAT_UserTextHandlerState::ptr)(9);
                 DAT_UserTextHandlerState::instance.allowUserTextInput = 1;
             LAB_00494849:
                 MACRO_CALL_MEMBER(Input::MouseState_Func::resetMouseState2, DAT_MouseState::ptr)();
@@ -299,7 +292,8 @@ namespace UI {
                 break;
             case -2:
                 if (DAT_MenuTextInputState::instance.DAT_MenuLoadGameRelativeSelectionOffset
-                    < DAT_MenuTextInputState::instance.fileListEntryCount - DAT_MenuTextInputState::instance.fileListVisibleRowCount) {
+                    < DAT_MenuTextInputState::instance.fileListEntryCount
+                        - DAT_MenuTextInputState::instance.fileListVisibleRowCount) {
                     DAT_MenuTextInputState::instance.DAT_MenuLoadGameRelativeSelectionOffset
                         = DAT_MenuTextInputState::instance.DAT_MenuLoadGameRelativeSelectionOffset + 1;
                     ;

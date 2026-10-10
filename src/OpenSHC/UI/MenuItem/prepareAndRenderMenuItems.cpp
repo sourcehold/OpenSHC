@@ -100,8 +100,7 @@ namespace UI {
                 }
                 iVar7 = this->itemWidth;
                 iVar5 = 0;
-                if ((this->menuItemType & UI::Enums::MIT_MENU_ITEM_TYPE_ID_PARTUnk)
-                    == UI::Enums::MIT_SCROLLBARUnk) {
+                if ((this->menuItemType & UI::Enums::MIT_MENU_ITEM_TYPE_ID_PARTUnk) == UI::Enums::MIT_SCROLLBARUnk) {
                     iVar7 = this->itemHeight;
                 }
                 iVar4 = (this->secondItemTypeData).buttonState.someTimestamp_1_0x0;
@@ -124,8 +123,8 @@ namespace UI {
                 (this->secondItemTypeData).buttonState.currentButtonPictureInGm_0xc
                     = DAT_CurrentButtonPictureInGm::instance;
             }
-            if ((this->menuPointer->hoveredItem == this)
-                && (DAT_ButtonCurrentlyInteracting::instance != (int)(short)(this->clicked | this->hovering))) {
+            if (this->menuPointer->hoveredItem == this
+                && DAT_ButtonCurrentlyInteracting::instance != (int)(short)(this->clicked | this->hovering)) {
                 this->menuPointer->zero = 0;
             }
             this->unknownZero = (short)DAT_ButtonUnknownZero::instance;

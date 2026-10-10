@@ -49,10 +49,10 @@ namespace UI {
         int local_10;
         GmID local_8;
         int local_4;
-        if (((DAT_TileMapState::instance.DAT_ClickedTileX < 400) && (DAT_TileMapState::instance.DAT_ClickedTileY < 400))
-            && (*(char*)(DAT_TileMapState::instance.DAT_ClickedTileY * 400 + 0x21aec98
-                    + DAT_TileMapState::instance.DAT_ClickedTileX)
-                != '\0')) {
+        if (DAT_TileMapState::instance.DAT_ClickedTileX < 400 && DAT_TileMapState::instance.DAT_ClickedTileY < 400
+            && *(char*)(DAT_TileMapState::instance.DAT_ClickedTileY * 400 + 0x21aec98
+                   + DAT_TileMapState::instance.DAT_ClickedTileX)
+                != '\0') {
             _tile = DAT_ViewportRenderState::instance.translationMatrix[DAT_TileMapState::instance.DAT_ClickedTileY]
                         .addXgetTile
                 + DAT_TileMapState::instance.DAT_ClickedTileX;
@@ -209,8 +209,7 @@ namespace UI {
                 local_18 = 0x50501581;
             }
             if ((DAT_GameCore::instance.gameMode_2 == Game::GM_SIEGE_THAT)
-                && (MACRO_CALL_MEMBER(
-                        Map::Buildings::BuildingsState_Func::getBuildingCost, DAT_BuildingsState::ptr)(
+                && (MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::getBuildingCost, DAT_BuildingsState::ptr)(
                         DAT_TileMapState::instance.currentMapperCommand, &local_4, (int*)&local_8),
                     DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                             .startResources[0xf]
@@ -218,7 +217,7 @@ namespace UI {
                 bVar4 = false;
             }
             if (!DAT_MouseState::instance.draggingStopped) {
-                if ((!(DAT_TileMapState::instance.LogicLayer[_tile] & local_18)) && (bVar4)) {
+                if (!(DAT_TileMapState::instance.LogicLayer[_tile] & local_18) && bVar4) {
                     if (_gmID == IO::Graphics::GID_BODY_SIEGE_TOWER) {
                         if (0 < iVar3) {
                             MACRO_CALL_MEMBER(Rendering::ViewportRenderState_Func::createFloatingLayerElement,
@@ -240,8 +239,8 @@ namespace UI {
                         MACRO_CALL_MEMBER(Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                             DAT_ViewportRenderState::ptr)(local_1c, iVar3, 0, 0x47, _tile, 0x18001d);
                     }
-                    MACRO_CALL_MEMBER(Rendering::ViewportRenderState_Func::createFloatingLayerElement,
-                        DAT_ViewportRenderState::ptr)(
+                    MACRO_CALL_MEMBER(
+                        Rendering::ViewportRenderState_Func::createFloatingLayerElement, DAT_ViewportRenderState::ptr)(
                         IO::Graphics::GID_BODY_SIEGE_TOWER, local_10, 0, 0, _tile, 0x18001d);
                 }
                 if (0 < iVar3) {
@@ -251,10 +250,9 @@ namespace UI {
                 MACRO_CALL_MEMBER(Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                     DAT_ViewportRenderState::ptr)(_gmID, local_10, 0, 0, _tile, 0x18000d);
             }
-            if ((!(DAT_TileMapState::instance.LogicLayer[_tile] & local_18)) && (bVar4)) {
+            if (!(DAT_TileMapState::instance.LogicLayer[_tile] & local_18) && bVar4) {
                 if (DAT_GameCore::instance.gameMode_2 == Game::GM_SIEGE_THAT) {
-                    MACRO_CALL_MEMBER(
-                        Map::Buildings::BuildingsState_Func::getBuildingCost, DAT_BuildingsState::ptr)(
+                    MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::getBuildingCost, DAT_BuildingsState::ptr)(
                         DAT_TileMapState::instance.currentMapperCommand, &local_4, (int*)&local_8);
                     MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::processResourceLoss,
                         DAT_BuildingsState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID,
@@ -268,14 +266,13 @@ namespace UI {
                         (int)((int)(DAT_TileMapState::instance.DAT_ClickedTileY * 8)),
                         (int)((int)((uint)DAT_TileMapState::instance.HeightLayer[_tile])), _unitType);
                 } else {
-                    tribeID = MACRO_CALL_MEMBER(
-                        Map::Units::TribesState_Func::spawnUnitsIntoNewTribe, DAT_TribesState::ptr)(0xffffffff,
-                        iVar2, (int)((int)(DAT_TileMapState::instance.DAT_ClickedTileX)),
-                        (int)((int)(DAT_TileMapState::instance.DAT_ClickedTileY)),
-                        (int)((int)(DAT_GameSynchronyState::instance.currentPlayerSlotID)), _unitType, ((UnitType)0),
-                        (int)((int)(DAT_TileMapState::instance.unitPlacementCount)), 0);
-                    bVar4 = DAT_TileMapState::instance.currentMapperCommand
-                        == Commands::M_MAPPER_PEOPLE_ENGINEERS_POTS;
+                    tribeID
+                        = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::spawnUnitsIntoNewTribe, DAT_TribesState::ptr)(
+                            0xffffffff, iVar2, (int)((int)(DAT_TileMapState::instance.DAT_ClickedTileX)),
+                            (int)((int)(DAT_TileMapState::instance.DAT_ClickedTileY)),
+                            (int)((int)(DAT_GameSynchronyState::instance.currentPlayerSlotID)), _unitType,
+                            ((UnitType)0), (int)((int)(DAT_TileMapState::instance.unitPlacementCount)), 0);
+                    bVar4 = DAT_TileMapState::instance.currentMapperCommand == Commands::M_MAPPER_PEOPLE_ENGINEERS_POTS;
                     DAT_TribesState::instance.tribes[tribeID].tribeBehaviorType = Map::Units::STBT_1;
                     DAT_TribesState::instance.tribes[tribeID].initialMoveOrderGiven = 1;
                     if ((bVar4) && (iVar3 = 0, 0 < DAT_TileMapState::instance.unitPlacementCount)) {

@@ -35,16 +35,15 @@ namespace Synchrony {
                 /*
                   stateAddress - 9 = time address
                  */
-                if (((*_stateAddress != ((GameCommandState)0)) && ((char)*_stateAddress < '\n'))
-                    && ((int)((GameCommand*)(_stateAddress + -9))->time
-                        <= (int)DAT_GameCore::instance.mapTimeInTicks)) {
+                if (*_stateAddress != (GameCommandState)0 && (char)*_stateAddress < '\n'
+                    && (int)((GameCommand*)(_stateAddress + -9))->time <= (int)DAT_GameCore::instance.mapTimeInTicks) {
                     /*
                       if this command has not been processed, but should be processed, and it has   been its time state
                       address - 5 = player
                      */
-                    this->protocolInvokerPlayerID = MACRO_CALL_MEMBER(
-                        Synchrony::GameSynchronyState_Func::translateMultiplayerIDsIntoPlayerIDs, this)(
-                        *(int*)(_stateAddress + -5));
+                    this->protocolInvokerPlayerID
+                        = MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::translateMultiplayerIDsIntoPlayerIDs,
+                            this)(*(int*)(_stateAddress + -5));
                     this->MBR_SelectedGameCommands[this->MBR_someIndex][0] = _currentIndexCounter;
                     this->MBR_SelectedGameCommands[this->MBR_someIndex][1] = this->protocolInvokerPlayerID;
                     this->MBR_someIndex = this->MBR_someIndex + 1;

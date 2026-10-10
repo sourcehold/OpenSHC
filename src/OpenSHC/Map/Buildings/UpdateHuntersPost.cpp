@@ -11,6 +11,7 @@
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
+#include "OpenSHC/Map/Units/UnitTypeShort.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_AICState.hpp"
@@ -21,7 +22,6 @@
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_SFXState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
-#include "OpenSHC/Map/Units/UnitTypeShort.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -30,9 +30,9 @@ namespace Map {
     using Game::GameMode;
     using Game::Resources::ResourceType;
     using Map::Units::UnitType;
+    using Map::Units::UnitTypeShort;
     using Map::Units::States::UnitState;
     using WindowsHelper::Enums::BOOLEnum;
-    using Map::Units::UnitTypeShort;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00423370
     void Buildings::UpdateHuntersPost()
@@ -61,13 +61,13 @@ namespace Map {
             bVar8 = true;
         }
         iVar9 = (int)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].workerID[1];
-        if (((iVar9)
-                && (DAT_UnitsState::instance.units[iVar9].uid
-                    == DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].workerUID[1]))
-            && ((UVar3 = DAT_UnitsState::instance.units[iVar9].unitType,
+        if (iVar9
+            && DAT_UnitsState::instance.units[iVar9].uid
+                == DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].workerUID[1]
+            && (UVar3 = DAT_UnitsState::instance.units[iVar9].unitType,
                 UVar3 == Map::Units::UT_BURNINGMAN
                     || ((UVar3 == Map::Units::UT_BURNING_ANIMAL_BIG
-                        || (UVar3 == Map::Units::UT_BURNING_ANIMAL_SMALL)))))) {
+                        || (UVar3 == Map::Units::UT_BURNING_ANIMAL_SMALL))))) {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].burningWorkerCountdown = 400;
         }
         sVar4 = DAT_BuildingsState::instance.buildings[iVar10].burningWorkerCountdown;
@@ -77,17 +77,17 @@ namespace Map {
         DAT_BuildingsState::instance.buildings[iVar10].renderAnimation
             = (ushort)(DAT_BuildingsState::instance.buildings[iVar10].workers[0] != 0);
         DAT_BuildingsState::instance.buildings[iVar10].displayOwnerFlag = 1;
-        if (((DAT_BuildingsState::instance.buildings[iVar10].numberOfAnimals == 0) && (bVar8))
-            && (DAT_BuildingsState::instance.buildings[iVar10].burningWorkerCountdown == 0)) {
-            MACRO_CALL_MEMBER(
-                Map::Buildings::BuildingsState_Func::buildingIsAccessible, DAT_BuildingsState::ptr)(iVar10, 0);
+        if (DAT_BuildingsState::instance.buildings[iVar10].numberOfAnimals == 0 && bVar8
+            && DAT_BuildingsState::instance.buildings[iVar10].burningWorkerCountdown == 0) {
+            MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::buildingIsAccessible, DAT_BuildingsState::ptr)(
+                iVar10, 0);
             MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::determineBuildingEntranceFromKeepArea,
                 DAT_BuildingsState::ptr)(DAT_CurrentBuildingID::instance, 2, FALSE);
             sVar4 = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingEntryX;
             iVar10 = DAT_CurrentBuildingID::instance;
-            if (((sVar4)
-                    && (sVar5 = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingEntryY,
-                        sVar5 != 0))
+            if (sVar4
+                && (sVar5 = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingEntryY,
+                    sVar5 != 0)
                 && (iVar9 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
                         (int)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner, 0,
                         (int)((int)(sVar4 * 8)), (int)((int)(sVar5 * 8)),
@@ -107,8 +107,7 @@ namespace Map {
                 iVar6 = DAT_UnitsState::instance.units[iVar9].uid;
                 DAT_BuildingsState::instance.buildings[iVar10].workerID[1] = (short)iVar9;
                 DAT_UnitsState::instance.units[iVar9].workplaceBuildingID_1 = (short)iVar10;
-                DAT_UnitsState::instance.units[iVar9].state.generic
-                    = Map::Units::States::US_DETERMINE_NEXT_STATEUnk;
+                DAT_UnitsState::instance.units[iVar9].state.generic = Map::Units::States::US_DETERMINE_NEXT_STATEUnk;
                 DAT_UnitsState::instance.units[iVar9].substate = -1;
                 DAT_UnitsState::instance.units[iVar9].facingDirection = 4;
                 DAT_UnitsState::instance.units[iVar9].disappearFadeAlphaCountdown = 0x20;
@@ -153,9 +152,9 @@ namespace Map {
                 sVar4 = DAT_BuildingsState::instance.buildings[iVar10].animationIndex;
                 if ((char)DAT_BuildingDefinedData::instance.HuntersPostAnimationFrames2[sVar4] < '\x01') {
                     bVar7 = true;
-                    MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::addResourceToStockpile,
-                        DAT_BuildingsState::ptr)(iVar10, DAT_BuildingsState::instance.buildings[iVar10].uid,
-                        Game::Resources::RT_MEAT, 1, 6, 1);
+                    MACRO_CALL_MEMBER(
+                        Map::Buildings::BuildingsState_Func::addResourceToStockpile, DAT_BuildingsState::ptr)(
+                        iVar10, DAT_BuildingsState::instance.buildings[iVar10].uid, Game::Resources::RT_MEAT, 1, 6, 1);
                     iVar10 = DAT_CurrentBuildingID::instance;
                 } else {
                     if ((DAT_BuildingsState::instance.buildings[iVar10].animationActive != 0) && (sVar4 == 4)) {
@@ -166,8 +165,8 @@ namespace Map {
                         iVar10 = DAT_CurrentBuildingID::instance;
                     }
                     DAT_BuildingsState::instance.buildings[iVar10].animationFrame
-                        = (int)(char)DAT_BuildingDefinedData::instance
-                              .HuntersPostAnimationFrames2[DAT_BuildingsState::instance.buildings[iVar10].animationIndex];
+                        = (int)(char)DAT_BuildingDefinedData::instance.HuntersPostAnimationFrames2
+                              [DAT_BuildingsState::instance.buildings[iVar10].animationIndex];
                 }
                 iVar9 = iVar10 * 0x32c;
                 DAT_BuildingsState::instance.buildings[iVar10].renderBlendStrength = 0;
@@ -220,7 +219,8 @@ namespace Map {
         } else if (iVar10 == 5) {
             *(undefined4*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationSprite1 + iVar9) = 0x18;
         } else {
-            *(uint*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationSprite1 + iVar9) = (iVar10 != 6) - 1 & 0x19;
+            *(uint*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationSprite1 + iVar9)
+                = (iVar10 != 6) - 1 & 0x19;
         }
         *(undefined1*)((int)DAT_BuildingsState::instance.buildings[0].quarryLinkedOxTethers + iVar9 + -0x33) = 0;
         if (*(short*)((int)DAT_BuildingsState::instance.buildings[0].workerID + iVar9 + 2) == 0) {

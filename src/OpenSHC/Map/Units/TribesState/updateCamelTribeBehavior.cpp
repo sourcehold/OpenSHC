@@ -76,19 +76,18 @@ namespace Map {
                     this->tribes[param_1].tribeBehaviorType = Map::Units::STBT_1;
                 }
                 SVar2 = this->tribes[param_1].tribeBehaviorType;
-                if (SVar2 == ((SomeTribeBehaviorType)0)) {
+                if (SVar2 == (SomeTribeBehaviorType)0) {
                     sVar5 = this->tribes[param_1].unknownAttackRelatedUpdateCounter;
                     this->tribes[param_1].unknownAttackRelatedUpdateCounter = sVar5 + 1;
                     if (!sVar5) {
                         MACRO_CALL_MEMBER(Map::WildlifeState_Func::findAndSetNewRallyPointForDeerAndLions,
                             DAT_WildlifeState::ptr)(param_1, 2, 1);
                         if (0 < this->tribes[param_1].rallyPointCount) {
-                            MACRO_CALL_MEMBER(Map::Units::TribesState_Func::standUpAllTribeUnits, this)(
-                                param_1);
+                            MACRO_CALL_MEMBER(Map::Units::TribesState_Func::standUpAllTribeUnits, this)(param_1);
                             iVar4 = (int)this->tribes[param_1].rallyPointCount;
                             MACRO_CALL_MEMBER(
-                                Map::Units::TribesState_Func::giveUnitSelectionMoveInstructionNoMatchedSpeed,
-                                this)(param_1, (uint)((int)((int)this->tribes[param_1].rallyPointArray[iVar4 + -1][0])),
+                                Map::Units::TribesState_Func::giveUnitSelectionMoveInstructionNoMatchedSpeed, this)(
+                                param_1, (uint)((int)((int)this->tribes[param_1].rallyPointArray[iVar4 + -1][0])),
                                 (uint)((int)((int)this->tribes[param_1].rallyPointArray[iVar4 + -1][1])), 0, 0);
                         }
                     } else if (BVar3) {

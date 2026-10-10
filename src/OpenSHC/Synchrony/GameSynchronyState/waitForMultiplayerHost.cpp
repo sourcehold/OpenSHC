@@ -39,7 +39,7 @@ namespace Synchrony {
             /*
               20 seconds? 2 seconds? wait
              */
-            while ((uVar2 < 20000 && (!this->DAT_HostAnnounced))) {
+            while (uVar2 < 20000 && !this->DAT_HostAnnounced) {
                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::receiveAllTransmittedCommands, this)();
                 DVar1 = GetTickCount();
                 uVar2 = DVar1 - this->DAT_TickCount;
@@ -49,8 +49,8 @@ namespace Synchrony {
                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::initializeMultiplayerLobby, this)();
                 MACRO_CALL_MEMBER(Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     UI::Enums::MVT_MP_CONNECTION, 0);
-                MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog,
-                    DAT_MenuModalComposition1::ptr)(UI::Enums::MMT_CHOOSE_NETWORK_SERVICE_PROVIDER, FALSE);
+                MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog, DAT_MenuModalComposition1::ptr)(
+                    UI::Enums::MMT_CHOOSE_NETWORK_SERVICE_PROVIDER, FALSE);
             }
         }
         this->DAT_HostAnnounced = 1;

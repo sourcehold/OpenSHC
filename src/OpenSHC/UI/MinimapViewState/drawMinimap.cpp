@@ -105,8 +105,7 @@ namespace UI {
                 MACRO_CALL_MEMBER(UI::MinimapViewState_Func::setTileColorsDependingOnMapSize, this)(0, 2);
                 MACRO_CALL_MEMBER(UI::MinimapViewState_Func::setMapPropertyDependingOnMapSize, this)(
                     this->field13_0x34, 2);
-                MACRO_CALL_MEMBER(
-                    Map::TileMapState_Func::collectCliffEdgeTilesForClimbData, DAT_TileMapState::ptr)();
+                MACRO_CALL_MEMBER(Map::TileMapState_Func::collectCliffEdgeTilesForClimbData, DAT_TileMapState::ptr)();
                 this->field13_0x34 = this->field13_0x34 + 2;
             } else {
                 MACRO_CALL_MEMBER(UI::MinimapViewState_Func::setTileColorsDependingOnMapSize, this)(
@@ -216,8 +215,7 @@ namespace UI {
         iVar7 = (xOffset * widthFactor) / local_8;
         local_c = local_c + 1 + iVar14 * 0x191 + xOffset;
         if (param_10 < 1) {
-            MACRO_CALL_MEMBER(
-                UI::Rendering::PencilRenderCore_Func::setupPencilSurface, DAT_PencilRenderCore::ptr)();
+            MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::setupPencilSurface, DAT_PencilRenderCore::ptr)();
         } else {
             DAT_PencilRenderCore::instance.surfacePtr = (ushort*)this->loadedMiniMap;
             DAT_PencilRenderCore::instance.horizontalByteSize = 400;
@@ -249,8 +247,7 @@ namespace UI {
             iVar7 = iVar7 + DAT_PencilRenderCore::instance.horizontalByteSize;
             height = height + -1;
         } while (height);
-        if (((param_10) && (DAT_TileMapState::instance.mapSize != 160))
-            && (DAT_TileMapState::instance.mapSize == 200)) {
+        if (param_10 && DAT_TileMapState::instance.mapSize != 160 && DAT_TileMapState::instance.mapSize == 200) {
             xPos = xPos + -2;
         }
         _mapSize = iVar13;
@@ -273,12 +270,12 @@ namespace UI {
                         _tile = DAT_ViewportRenderState::instance.screenPointToTileNumber + local_c + -10;
                         do {
                             _unitID = (int)(short)DAT_TileMapState::instance.UnitLayer[*_tile];
-                            if ((_unitID)
-                                || ((local_8 == 2
+                            if (_unitID
+                                || (local_8 == 2
                                     && (_unitID = (int)(short)
                                             DAT_TileMapState::instance.UnitLayer[DAT_ViewportRenderState::instance
                                                     .screenPointToTileNumber[xOffset + param_10 + local_c + -8]],
-                                        _unitID != 0)))) {
+                                        _unitID != 0))) {
                                 _player = DAT_UnitsState::instance.units[_unitID].owner;
                                 if (!_player) {
                                     (*(short*)&height)
@@ -337,18 +334,16 @@ namespace UI {
                                             = DAT_MiniMapDefinedData::instance.PlayerColorColors
                                                   [DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[_owner] * 4]
                                                   [_isRGB16];
-                                        if ((((DAT_GameState::instance.mapAndTime.playerTeams[_player]
-                                                  != DAT_GameState::instance.mapAndTime.playerTeams
-                                                      [DAT_GameSynchronyState::instance.currentPlayerSlotID])
-                                                 && (160 < DAT_UnitsState::instance.units[_unitID]
-                                                         .assassinsMicroDistanceToEnemyUnk))
-                                                && (UVar1 = DAT_UnitsState::instance.units[_unitID].state.generic,
-                                                    UVar1 != Map::Units::States::US_MELEE_ATTACK))
-                                            && ((UVar1 != Map::Units::States::US_MELEE_ATTACK_WALL
-                                                && ((DAT_GameSynchronyState::instance.currentGameMode
-                                                        != Game::GM_SOLITARY
-                                                    || (DAT_UnitsState::instance.units[_unitID].idleCounterUnk
-                                                        < 0x961))))))
+                                        if (DAT_GameState::instance.mapAndTime.playerTeams[_player]
+                                                != DAT_GameState::instance.mapAndTime
+                                                    .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                                            && 160 < DAT_UnitsState::instance.units[_unitID]
+                                                    .assassinsMicroDistanceToEnemyUnk
+                                            && (UVar1 = DAT_UnitsState::instance.units[_unitID].state.generic,
+                                                UVar1 != Map::Units::States::US_MELEE_ATTACK)
+                                            && UVar1 != Map::Units::States::US_MELEE_ATTACK_WALL
+                                            && (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY
+                                                || (DAT_UnitsState::instance.units[_unitID].idleCounterUnk < 0x961)))
                                             goto LAB_004b6eb4;
                                     }
                                 }
@@ -357,7 +352,7 @@ namespace UI {
                                     if (0 < widthFactor) {
                                         do {
                                             iVar14 = local_24 + xPos + local_30;
-                                            if (((xPos <= iVar14) && (iVar14 < iVar8 * widthFactor + xPos))
+                                            if (xPos <= iVar14 && iVar14 < iVar8 * widthFactor + xPos
                                                 && (local_2c = 0, 0 < heightFactor)) {
                                                 do {
                                                     *(ushort*)((int)DAT_PencilRenderCore::instance.surfacePtr
@@ -467,7 +462,7 @@ namespace UI {
                                         if (0 < widthFactor) {
                                             do {
                                                 iVar14 = local_24 + xPos + local_30;
-                                                if (((xPos <= iVar14) && (iVar14 < iVar8 * widthFactor + xPos))
+                                                if (xPos <= iVar14 && iVar14 < iVar8 * widthFactor + xPos
                                                     && (local_2c = 0, 0 < heightFactor)) {
                                                     do {
                                                         *(ushort*)((int)DAT_PencilRenderCore::instance.surfacePtr
@@ -507,16 +502,14 @@ namespace UI {
                                     }
                                     break;
                                 case Map::Units::UT_A_ASSASSIN:
-                                    if (((((DAT_GameState::instance.mapAndTime.playerTeams[sVar3]
-                                               == DAT_GameState::instance.mapAndTime.playerTeams[iVar14])
-                                              || (DAT_UnitsState::instance.units[iVar7].assassinsMicroDistanceToEnemyUnk
-                                                  < 160))
-                                             || (UVar1 = DAT_UnitsState::instance.units[iVar7].state.generic,
-                                                 UVar1 == Map::Units::States::US_MELEE_ATTACK))
-                                            || (UVar1 == Map::Units::States::US_MELEE_ATTACK_WALL))
-                                        || ((DAT_GameSynchronyState::instance.currentGameMode
-                                                == Game::GM_SOLITARY
-                                            && (0x960 < DAT_UnitsState::instance.units[iVar7].idleCounterUnk))))
+                                    if (DAT_GameState::instance.mapAndTime.playerTeams[sVar3]
+                                            == DAT_GameState::instance.mapAndTime.playerTeams[iVar14]
+                                        || DAT_UnitsState::instance.units[iVar7].assassinsMicroDistanceToEnemyUnk < 160
+                                        || (UVar1 = DAT_UnitsState::instance.units[iVar7].state.generic,
+                                            UVar1 == Map::Units::States::US_MELEE_ATTACK)
+                                        || UVar1 == Map::Units::States::US_MELEE_ATTACK_WALL
+                                        || (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY
+                                            && (0x960 < DAT_UnitsState::instance.units[iVar7].idleCounterUnk)))
                                         goto switchD_004b702c_caseD_35;
                                 }
                             }
@@ -534,7 +527,7 @@ namespace UI {
         /*
           draws viewport lines
          */
-        if (((flags & 2)) && (bVar4)) {
+        if ((flags & 2) && bVar4) {
             if (iVar6 < xPos) {
                 if (local_18 + xPos <= local_1c + iVar6) {}
                 local_1c = local_1c + (iVar6 - xPos);

@@ -31,9 +31,9 @@ namespace Map {
             DAT_CurrentBuildingID::instance);
         buildingID = DAT_CurrentBuildingID::instance;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderAnimation = 0;
-        MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::validateBuildingTetheredUnits,
-            DAT_BuildingsState::ptr)(buildingID);
-        if (((char)DAT_BuildingsState::instance.buildings[buildingID].numberOfAnimals < '\x04')
+        MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::validateBuildingTetheredUnits, DAT_BuildingsState::ptr)(
+            buildingID);
+        if ((char)DAT_BuildingsState::instance.buildings[buildingID].numberOfAnimals < '\x04'
             && (psVar1 = &DAT_BuildingsState::instance.buildings[buildingID].outpostRelatedUnk4, *psVar1 = *psVar1 + 1,
                 0x226 < DAT_BuildingsState::instance.buildings[buildingID].outpostRelatedUnk4)) {
             pbVar2 = &DAT_BuildingsState::instance.buildings[buildingID].numberOfAnimals;
@@ -76,8 +76,8 @@ namespace Map {
                     DAT_BuildingsState::instance.buildings[buildingID].extraAnimationFrame1 = 0;
                 }
                 DAT_BuildingsState::instance.buildings[buildingID].extraAnimationSprite2
-                    = (int)(char)DAT_BuildingDefinedData::instance
-                          .StablesAnimationFrames[DAT_BuildingsState::instance.buildings[buildingID].extraAnimationFrame1];
+                    = (int)(char)DAT_BuildingDefinedData::instance.StablesAnimationFrames
+                          [DAT_BuildingsState::instance.buildings[buildingID].extraAnimationFrame1];
             } else {
                 DAT_BuildingsState::instance.buildings[buildingID].extraAnimationSprite2 = 0x29;
             }
@@ -92,8 +92,8 @@ namespace Map {
                     DAT_BuildingsState::instance.buildings[buildingID].extraAnimationFrame2 = 0;
                 }
                 DAT_BuildingsState::instance.buildings[buildingID].extraAnimationSprite3
-                    = (int)(char)DAT_BuildingDefinedData::instance
-                          .StablesAnimationFrames[DAT_BuildingsState::instance.buildings[buildingID].extraAnimationFrame2];
+                    = (int)(char)DAT_BuildingDefinedData::instance.StablesAnimationFrames
+                          [DAT_BuildingsState::instance.buildings[buildingID].extraAnimationFrame2];
             } else {
                 DAT_BuildingsState::instance.buildings[buildingID].extraAnimationSprite3 = 0x28;
             }
@@ -108,8 +108,8 @@ namespace Map {
                     DAT_BuildingsState::instance.buildings[buildingID].extraAnimationFrame3 = 0;
                 }
                 DAT_BuildingsState::instance.buildings[buildingID].extraAnimationSprite4
-                    = (int)(char)DAT_BuildingDefinedData::instance
-                          .StablesAnimationFrames[DAT_BuildingsState::instance.buildings[buildingID].extraAnimationFrame3];
+                    = (int)(char)DAT_BuildingDefinedData::instance.StablesAnimationFrames
+                          [DAT_BuildingsState::instance.buildings[buildingID].extraAnimationFrame3];
             } else {
                 DAT_BuildingsState::instance.buildings[buildingID].extraAnimationSprite4 = 0x27;
             }

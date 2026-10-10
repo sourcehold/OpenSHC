@@ -31,14 +31,14 @@ namespace Synchrony {
             _pFullIdArrayPlus1_2 = _fullIDArray;
             do {
                 if (((*_pFullIdArrayPlus1_2 == -1) || (*_pFullIdArrayPlus1_2 == playerFullID))
-                    && (_pFullIdArrayPlus1_2[0x1b] < 1))
+                    && _pFullIdArrayPlus1_2[0x1b] < 1)
                     goto LAB_0047ebf4;
                 _slot = _slot + 1;
                 _pFullIdArrayPlus1_2 = _pFullIdArrayPlus1_2 + 1;
             } while (_slot < 9);
         }
         _slot = 1;
-        while ((*_fullIDArray != -1 && (*_fullIDArray != playerFullID))) {
+        while (*_fullIDArray != -1 && *_fullIDArray != playerFullID) {
             _slot = _slot + 1;
             _fullIDArray = _fullIDArray + 1;
             if (8 < _slot) {
