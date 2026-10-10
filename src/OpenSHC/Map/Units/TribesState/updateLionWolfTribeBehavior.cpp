@@ -109,7 +109,7 @@ namespace Map {
                         this->tribes[param_1].unknownAttackRelatedUpdateCounter = 0;
                     }
                 } else if ((SVar3 == Map::Units::STBT_1)
-                    && (psVar1 = &this->tribes[param_1].unknownAttackRelatedUpdateCounter, *psVar1 = *psVar1 + 1,
+                    && (psVar1 = (short*)&this->tribes[param_1].unknownAttackRelatedUpdateCounter, *psVar1 = *psVar1 + 1,
                         this->tribes[param_1].unknownAttackRelatedUpdateCounter == 300)) {
                     this->tribes[param_1].tribeBehaviorType = ((SomeTribeBehaviorType)0);
                     this->tribes[param_1].unknownAttackRelatedUpdateCounter = 0;

@@ -106,7 +106,7 @@ namespace Map {
                     } else {
                         this->tribes[tribeID].wanderIntervalTicks = 0x14;
                     }
-                    psVar1 = &this->tribes[tribeID].unknownAttackRelatedUpdateCounter;
+                    psVar1 = (short*)&this->tribes[tribeID].unknownAttackRelatedUpdateCounter;
                     *psVar1 = *psVar1 + 1;
                     if (this->tribes[tribeID].wanderIntervalTicks
                         <= this->tribes[tribeID].unknownAttackRelatedUpdateCounter) {
@@ -125,7 +125,7 @@ namespace Map {
                     MACRO_CALL_MEMBER(Map::Units::TribesState_Func::standUpAllTribeUnits, this)(tribeID);
                     MACRO_CALL_MEMBER(Map::Units::TribesState_Func::scatterTribeUnitsRandomly, this)(tribeID);
                 }
-                psVar1 = &this->tribes[tribeID].predatorNearby;
+                psVar1 = (short*)&this->tribes[tribeID].predatorNearby;
                 *psVar1 = *psVar1 + 1;
                 if (2999 < this->tribes[tribeID].predatorNearby) {
                     this->tribes[tribeID].predatorNearby = 0;

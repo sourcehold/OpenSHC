@@ -100,7 +100,7 @@ namespace Map {
                     if (this->tribes[param_1].unknownCounter01 < 0x65) {
                         sVar5 = 10;
                     }
-                    psVar1 = &this->tribes[param_1].unknownAttackRelatedUpdateCounter;
+                    psVar1 = (short*)&this->tribes[param_1].unknownAttackRelatedUpdateCounter;
                     *psVar1 = *psVar1 + 1;
                     if (sVar5 <= this->tribes[param_1].unknownAttackRelatedUpdateCounter) {
                         this->tribes[param_1].tribeBehaviorType = ((SomeTribeBehaviorType)0);

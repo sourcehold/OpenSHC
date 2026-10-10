@@ -30,7 +30,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0052AD50
         void TribesState::processDeerMoving(int tribeID)
         {
-            short* psVar1;
+            ushort* psVar1;
             int sVar2;
             int SVar3;
             int iVar4;
@@ -47,7 +47,7 @@ namespace Map {
             iVar4 = DAT_WildlifeState::instance.grid[_x10][_y10].lionCount;
             iVar5 = DAT_WildlifeState::instance.grid[_x10][_y10].marshTiles;
             iVar6 = DAT_WildlifeState::instance.grid[_x10][_y10].field18_0x48;
-            sVar2 = this->tribes[tribeID].size;
+            sVar2 = (ushort)this->tribes[tribeID].size;
             this->tribes[tribeID].unkIsAnimalTribe = 1;
             if (sVar2 < 0x1f) {
                 this->tribes[tribeID].herdMinSize = sVar2 / 2;

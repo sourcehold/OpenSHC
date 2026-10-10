@@ -118,7 +118,7 @@ namespace Map {
                             : MACRO_CALL_MEMBER(Map::Units::TribesState_Func::updateTribeCombatStanceBehavior,
                                   this)(DAT_CurrentTribeID::instance);
                     }
-                    psVar1 = &this->tribes[DAT_CurrentTribeID::instance].countdown;
+                    psVar1 = (short*)&this->tribes[DAT_CurrentTribeID::instance].countdown;
                     if (this->tribes[DAT_CurrentTribeID::instance].countdown != 0) {
                         *psVar1 = *psVar1 + -1;
                     }

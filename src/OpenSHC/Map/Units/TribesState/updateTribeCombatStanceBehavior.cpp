@@ -139,7 +139,7 @@ namespace Map {
             MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeAnInstruction, this)(
                 tribeID, ((UnitInstructionType)0x20), _unitID, DAT_UnitsState::instance.units[_unitID].uid, 0);
         LAB_0052aa77:
-            psVar1 = &this->tribes[tribeID].unknownAttackRelatedUpdateCounter;
+            psVar1 = (short*)&this->tribes[tribeID].unknownAttackRelatedUpdateCounter;
             *psVar1 = *psVar1 + 1;
             if (0x32 < this->tribes[tribeID].unknownAttackRelatedUpdateCounter) {
                 if (this->tribes[tribeID].isRallyingUnk == 0) {

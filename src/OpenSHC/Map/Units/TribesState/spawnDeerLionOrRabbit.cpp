@@ -56,7 +56,7 @@ namespace Map {
                 if (_tribeSize <= _unknown) {
                     param_2 = (int)(param_2 + (param_2 >> 0x1f & 3U)) >> 2;
                 }
-                psVar1 = &this->tribes[tribeID].field139_0x284;
+                psVar1 = (short*)&this->tribes[tribeID].field139_0x284;
                 *psVar1 = *psVar1 + 1;
                 if ((param_2 <= this->tribes[tribeID].field139_0x284)
                     && (sVar2 = this->tribes[tribeID].herdMaxSize, this->tribes[tribeID].field139_0x284 = 0,
