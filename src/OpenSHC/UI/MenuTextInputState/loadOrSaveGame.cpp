@@ -109,7 +109,7 @@ namespace UI {
             }
             if ((this->DAT_MenuLoadGameRelativeSelectionIndex != -1)
                 && (this->fileListSortOrder = iVar2, this->DAT_MenuLoadGameRelativeSelectionIndex = iVar1,
-                    this->DAT_MenuLoadGameRelativeSelectionOffset = iVar6, this->fileListEntryCount <= iVar6 + iVar1)) {
+                    this->DAT_MenuLoadGameRelativeSelectionOffset = iVar6, iVar6 + iVar1 >= this->fileListEntryCount)) {
                 this->DAT_MenuLoadGameRelativeSelectionIndex = 0;
                 this->DAT_MenuLoadGameRelativeSelectionOffset = 0;
             }

@@ -84,7 +84,7 @@ namespace UI {
                     DAT_00df5558::instance = DAT_00df5558::instance + -1;
                     MACRO_CALL(UI::Helpers_Func::InitTutorialStepTransition)(2);
                     DAT_00df5560::instance = 0;
-                    if (DAT_00df5554::instance + -1 <= DAT_TutorialCurrentStep::instance) {
+                    if (DAT_TutorialCurrentStep::instance >= DAT_00df5554::instance + -1) {
                         INT_DisableTutorialRestrictions::instance = 1;
                     }
                     if (DAT_MissionAestheticsDefinedData::instance
