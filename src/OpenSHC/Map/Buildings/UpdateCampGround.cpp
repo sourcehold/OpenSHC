@@ -86,7 +86,7 @@ namespace Map {
                 goto LAB_00418285;
             }
             if (DAT_BuildingsState::instance.buildings[_currentBuildingID].renderAnimation != 0) {
-                if (DAT_BuildingsState::instance.buildings[_currentBuildingID].extraOverlayImage10 < 1) {
+                if (DAT_BuildingsState::instance.buildings[_currentBuildingID].extraOverlayImage10 <= 0) {
                     DAT_BuildingsState::instance.buildings[_currentBuildingID].renderAnimation = 0;
                 }
                 DAT_BuildingsState::instance.buildings[_currentBuildingID].extraOverlayImage10

@@ -18,7 +18,7 @@ namespace Map {
             dword _tribeID;
             int _unitID;
             uint _unitID2;
-            if ((x < 1) && (y < 1)) {
+            if ((x <= 0) && (y <= 0)) {
                 return (dword)(0);
             }
             _tribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, this)(playerID, 0);

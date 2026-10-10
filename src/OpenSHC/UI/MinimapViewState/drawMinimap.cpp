@@ -115,7 +115,7 @@ namespace UI {
                 this->field13_0x34 = this->field13_0x34 + 2;
                 if (99 < (int)this->field13_0x34) {
                     this->field14_0x38 = this->field14_0x38 + -1;
-                    if (this->field14_0x38 < 1) {
+                    if (this->field14_0x38 <= 0) {
                         this->field14_0x38 = 0;
                     } else {
                         this->field13_0x34 = 0;
@@ -214,7 +214,7 @@ namespace UI {
         }
         iVar7 = (xOffset * widthFactor) / local_8;
         local_c = local_c + 1 + iVar14 * 0x191 + xOffset;
-        if (param_10 < 1) {
+        if (param_10 <= 0) {
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::setupPencilSurface, DAT_PencilRenderCore::ptr)();
         } else {
             DAT_PencilRenderCore::instance.surfacePtr = (ushort*)this->loadedMiniMap;
@@ -298,7 +298,7 @@ namespace UI {
                                             _owner = DAT_UnitsState::instance.units[_unitID].calculatedOwnerPlayerIndex;
                                         }
                                     }
-                                    if (_owner < 1) {
+                                    if (_owner <= 0) {
                                         _owner = 1;
                                     }
                                     switch (DAT_UnitsState::instance.units[_unitID].unitType) {

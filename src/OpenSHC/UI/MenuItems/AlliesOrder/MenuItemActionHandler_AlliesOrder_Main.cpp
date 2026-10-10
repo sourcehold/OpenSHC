@@ -31,7 +31,7 @@ namespace UI {
                         DAT_GameSynchronyState::instance.currentPlayerFullIDArray[_allyID] != -1
                             || (DAT_GameSynchronyState::instance.currentAIArray[_allyID] != 0))) {
                     DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = 0;
-                    if (param_1 < 7) {
+                    if (param_1 <= 6) {
                         DAT_GameSynchronyState::instance.DAT_GameCommandParam1
                             = DAT_RequestedGoodsByWhoArray::instance[param_1];
                     } else {

@@ -17,7 +17,7 @@ namespace Map {
             int iVar1;
             int unitSelectionIndex;
             short _size;
-            if (tribeID < 1) {
+            if (tribeID <= 0) {
                 return 0;
             }
             unitSelectionIndex = 0;

@@ -34,7 +34,7 @@ namespace Map {
             *psVar1 = *psVar1 + 1;
             sVar5 = this->tribes[param_1].unknownCounter01;
             this->tribes[param_1].unkIsAnimalTribe = 1;
-            if (7999 < sVar5) {
+            if (8000 <= sVar5) {
                 this->tribes[param_1].unknownCounter01 = 4000;
             }
             if ((BVar3)

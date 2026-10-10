@@ -15,11 +15,11 @@ namespace Map {
             short someIndex, undefined4 tribeType, int x, int y, int playerID, UnitType unitType, int count)
         {
             dword _tribeID;
-            if ((x < 1) && (y < 1)) {
+            if ((x <= 0) && (y <= 0)) {
                 return (dword)(0);
             }
             _tribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, this)(playerID, 0);
-            if ((int)_tribeID < 1) {
+            if ((int)_tribeID <= 0) {
                 return (dword)(0);
             }
             this->tribes[_tribeID].tribeType = (AITribeTypeShort)tribeType;
