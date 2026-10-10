@@ -138,7 +138,7 @@ namespace Map {
                 if (!DAT_GameState::instance.mapAndTime.difficulty) {
                     _limit = 3;
                 }
-                if ((DAT_TroopValueState::instance.attackInfo.aiTroops <= 0) || (DAT_TroopValueState::instance.attackInfo.field86974_0x20f74 <= 0)) {
+                if ((DAT_TroopValueState::instance.attackInfo.aiTroops < 1) || (DAT_TroopValueState::instance.attackInfo.field86974_0x20f74 < 1)) {
                     DAT_TroopValueState::instance.attackInfo.lowTroopValueRelated = 1;
                 }
                 if ((DAT_TroopValueState::instance.attackInfo.aiTroops * 3 < DAT_TroopValueState::instance.attackInfo.size) && (DAT_TroopValueState::instance.attackInfo.aiTroops < _limit)) {

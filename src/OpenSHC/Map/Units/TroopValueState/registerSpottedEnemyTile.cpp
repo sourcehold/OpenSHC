@@ -26,7 +26,7 @@ namespace Map {
             if (((((DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY)
                       && (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                               .keep.id
-                          <= 0))
+                          < 1))
                      && (iVar2 = (int)(short)DAT_TileMapState::instance.UnitLayer[param_1], 0 < iVar2))
                     && ((DAT_GameSynchronyState::instance
                                 .currentPlayerFullIDArray[DAT_UnitsState::instance.units[iVar2].owner]

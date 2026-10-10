@@ -19,7 +19,7 @@ namespace Map {
             int iVar2;
             short* psVar3;
             int iVar4;
-            if (param_2 <= 0) {
+            if (param_2 < 1) {
                 param_2 = 2;
             }
             psVar3 = &DAT_TribesState::instance.tribes[1].tribeID;
@@ -30,7 +30,7 @@ namespace Map {
                 psVar3 = psVar3 + 0x19a;
             } while ((int)psVar3 < 0x1762580);
             iVar4 = 0;
-            if (this->attackInfo.tribeIDArraySize <= 0) {}
+            if (this->attackInfo.tribeIDArraySize < 1) {}
         LAB_00518a50:
             iVar1 = this->attackInfo.tribeIDArray[iVar4];
             if (10 < this->attackInfo.tribeRelatedArrayValue0UpTo12[iVar4]) {}

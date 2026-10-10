@@ -30,12 +30,12 @@ namespace Map {
                 DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[sVar1].x,
                 (uint)((int)((int)DAT_UnitsState::instance.units[sVar1].y)),
                 (int)((int)(DAT_UnitsState::instance.units[sVar1].owner)), (uint)((int)(12)), 1);
-            if ((int)_tile <= 0) {
+            if ((int)_tile < 1) {
                 _tile = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathfindingRelated49ff20,
                     DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[sVar1].x,
                     (uint)((int)((int)DAT_UnitsState::instance.units[sVar1].y)),
                     (int)((int)(DAT_UnitsState::instance.units[sVar1].owner)), (uint)((int)(30)), 1);
-                if ((int)_tile <= 0) {
+                if ((int)_tile < 1) {
                     _tile = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathfindingRelated49ff20,
                         DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[sVar1].x,
                         (uint)((int)((int)DAT_UnitsState::instance.units[sVar1].y)),

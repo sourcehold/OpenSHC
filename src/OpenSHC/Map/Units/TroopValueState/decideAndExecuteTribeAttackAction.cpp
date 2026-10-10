@@ -57,12 +57,12 @@ namespace Map {
                 DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[_targetUnitID].x,
                 (uint)((int)((int)DAT_UnitsState::instance.units[_targetUnitID].y)),
                 (int)((int)(DAT_UnitsState::instance.units[_targetUnitID].owner)), 6);
-            if ((int)dVar1 <= 0) {
+            if ((int)dVar1 < 1) {
                 dVar1 = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findBestAttackTileByPathCost,
                     DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[_targetUnitID].x,
                     (uint)((int)((int)DAT_UnitsState::instance.units[_targetUnitID].y)),
                     (int)((int)(DAT_UnitsState::instance.units[_targetUnitID].owner)), (uint)((int)(30)));
-                if ((int)dVar1 <= 0) {
+                if ((int)dVar1 < 1) {
                     dVar1 = MACRO_CALL_MEMBER(
                         Map::Navigation::PathFindingState_Func::findBestAttackTileByPathCost,
                         DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[_targetUnitID].x,

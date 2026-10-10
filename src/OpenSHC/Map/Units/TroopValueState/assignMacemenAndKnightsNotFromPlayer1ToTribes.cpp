@@ -83,7 +83,7 @@ namespace Map {
             } else {
                 _knightLimit = 6;
             }
-            if (_macemenCount <= 0) {
+            if (_macemenCount < 1) {
                 DAT_TroopValueState::instance.attackInfo.macemenTribeCount = 0;
             } else if (_macemenLimit < _macemenCount) {
                 DAT_TroopValueState::instance.attackInfo.macemenTribeCount = _macemenCount / _macemenLimit + 1;
@@ -94,7 +94,7 @@ namespace Map {
             } else {
                 DAT_TroopValueState::instance.attackInfo.macemenTribeCount = 1;
             }
-            if (_count <= 0) {
+            if (_count < 1) {
                 DAT_TroopValueState::instance.attackInfo.knightTribeCount = 0;
             } else if (_knightLimit < _count) {
                 DAT_TroopValueState::instance.attackInfo.knightTribeCount = _count / _knightLimit + 1;
@@ -126,7 +126,7 @@ namespace Map {
                                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe,
                                     DAT_TribesState::ptr)(_unitID1, _tribeID1);
                                 _macemenCount = _macemenCount + -1;
-                                if (_macemenCount <= 0)
+                                if (_macemenCount < 1)
                                     goto LAB_0051ceba;
                                 _limitCounter = _limitCounter + 1;
                             }
@@ -159,7 +159,7 @@ namespace Map {
                                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe,
                                     DAT_TribesState::ptr)(_unitID2, _tribeID2);
                                 _knightCount = _knightCount + -1;
-                                if (_knightCount <= 0) {}
+                                if (_knightCount < 1) {}
                                 _limitCounter2 = _limitCounter2 + 1;
                             }
                             psVar2 = psVar2 + 0x248;
