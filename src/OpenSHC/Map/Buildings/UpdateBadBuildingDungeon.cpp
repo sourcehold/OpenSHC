@@ -33,7 +33,7 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[buildingID].buildingIsVisuallyActive = 1;
         } else {
             DAT_BuildingsState::instance.buildings[buildingID].renderAnimation = 0;
-            if (iVar3 < -1) {
+            if (iVar3 <= -2) {
                 DAT_BuildingsState::instance.buildings[buildingID].buildingIsVisuallyActive = 1;
             } else {
                 DAT_BuildingsState::instance.buildings[buildingID].buildingIsVisuallyActive = 0;

@@ -115,12 +115,12 @@ namespace Map {
                 + 0xb;
         }
         _ownerPlayerIndex = DAT_BuildingsState::instance.buildings[_currentBuildingID].field192_0x270;
-        if (_ownerPlayerIndex < 2) {
+        if (_ownerPlayerIndex <= 1) {
             DAT_BuildingsState::instance.buildings[_currentBuildingID].campStage = 1;
             DAT_BuildingsState::instance.buildings[_currentBuildingID].campStagePrevious = 1;
             goto LAB_00418476;
         }
-        if (_ownerPlayerIndex < 5) {
+        if (_ownerPlayerIndex <= 4) {
             DAT_BuildingsState::instance.buildings[_currentBuildingID].campStage = 3;
             DAT_BuildingsState::instance.buildings[_currentBuildingID].campStagePrevious = 3;
             goto LAB_00418476;

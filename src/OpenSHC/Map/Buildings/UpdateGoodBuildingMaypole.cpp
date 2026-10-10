@@ -49,7 +49,7 @@ namespace Map {
                       .GoodBuildingMaypoleAnimationFrames2[DAT_BuildingsState::instance.buildings[iVar4].animationIndex]
                 + 0x20;
             DAT_BuildingsState::instance.buildings[iVar4].animationFrame = iVar5;
-            if (iVar5 < 0x21) {
+            if (iVar5 <= 0x20) {
                 DAT_BuildingsState::instance.buildings[iVar4].animationIndex = 0;
                 DAT_BuildingsState::instance.buildings[iVar4].animationFrame = 0x21;
             }
