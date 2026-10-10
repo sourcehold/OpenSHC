@@ -622,13 +622,13 @@ namespace UI {
             case -2:
                 uVar3 = DAT_TextEditorState::instance.topVisibleLineIndex
                     - DAT_TextEditorState::instance.dialogContentHeight;
-                if ((int)((((int)uVar3 < 1) - 1 & uVar3) - 0x12)
+                if ((int)((((int)uVar3 <= 0) - 1 & uVar3) - 0x12)
                         <= (int)DAT_TextEditorState::instance.helpContentScrollOffsetY
                     || (DAT_TextEditorState::instance.helpContentScrollOffsetY
                         = DAT_TextEditorState::instance.helpContentScrollOffsetY + 0x12,
-                        (int)(((int)uVar3 < 1) - 1 & uVar3)
+                        (int)(((int)uVar3 <= 0) - 1 & uVar3)
                             < (int)DAT_TextEditorState::instance.helpContentScrollOffsetY)) {
-                    DAT_TextEditorState::instance.helpContentScrollOffsetY = ((int)uVar3 < 1) - 1 & uVar3;
+                    DAT_TextEditorState::instance.helpContentScrollOffsetY = ((int)uVar3 <= 0) - 1 & uVar3;
                 }
                 return;
             case -1:

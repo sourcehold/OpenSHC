@@ -30,7 +30,7 @@ namespace Text {
             _textWidth = MACRO_CALL_MEMBER(Text::FontSizeClass_Func::getWidthOfText,
                 &DAT_TextManagerObject::instance.fontSizeClassArray[fontSize])(
                 textAddress, (int)_textLengthHelper - (int)(textAddress + 1));
-            if ((int)alignment < 1) {
+            if ((int)alignment <= 0) {
                 if ((int)alignment < 0) {
                     xPos = xParam - _textWidth;
                 } else {

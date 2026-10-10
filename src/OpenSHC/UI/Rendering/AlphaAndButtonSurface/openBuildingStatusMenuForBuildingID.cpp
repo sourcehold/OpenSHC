@@ -28,7 +28,7 @@ namespace UI {
         BOOLEnum AlphaAndButtonSurface::openBuildingStatusMenuForBuildingID(int buildingID)
         {
             int iVar2;
-            if ((buildingID < 1) || (DAT_GameCore::instance.gamePausedLogical)) {
+            if ((buildingID <= 0) || (DAT_GameCore::instance.gamePausedLogical)) {
                 return FALSE;
             }
             short sVar1 = DAT_BuildingsState::instance.buildings[buildingID].owner;

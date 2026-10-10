@@ -47,7 +47,7 @@ BOOLEnum OS::isEqualGUID(GUID* param_1, GUID* param_2)
             }
         }
         bVar1 = true;
-        if (iVar2 < 1) {
+        if (iVar2 <= 0) {
             return FALSE;
         }
     }

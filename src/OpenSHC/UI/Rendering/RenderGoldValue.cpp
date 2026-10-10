@@ -37,7 +37,7 @@ namespace UI {
         if (999 < _gold) {
             iVar5 = 2;
         }
-        if (_gold < 1) {
+        if (_gold <= 0) {
             _gold = 0;
             local_c = 0xff;
         } else {

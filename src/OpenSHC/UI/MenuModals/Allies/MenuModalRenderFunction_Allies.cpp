@@ -57,7 +57,7 @@ namespace UI {
                 DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_ALLIES, 0);
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 pcVar1, iVar6, iVar2, TVar3, BVar4, iVar5, BVar7, blendStrength);
-            if (DAT_AlliesCount::instance < 1) {
+            if (DAT_AlliesCount::instance <= 0) {
                 iVar5 = 0;
                 BVar7 = FALSE;
                 iVar6 = 0x11;

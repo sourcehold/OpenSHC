@@ -65,7 +65,7 @@ namespace Synchrony {
             ((void (*)())DAT_ProtocolDefinedData::instance.commandFunctions
                     [DAT_GameSynchronyState::instance.DAT_GameCommandArray[this->DAT_CurrentGameCommandID].commandType
                         + 0x15])();
-            if ((int)DAT_GameSynchronyState::instance.DAT_GameCommandArray[this->DAT_CurrentGameCommandID].time < 1) {
+            if ((int)DAT_GameSynchronyState::instance.DAT_GameCommandArray[this->DAT_CurrentGameCommandID].time <= 0) {
                 MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::copyData, DAT_LowLevelMemory::ptr)(
                     this->DAT_CommandSize, address, (void*)((int)(this->DAT_GameCommandFixedParameterLocation)));
                 int iVar1 = this->DAT_CurrentGameCommandID;

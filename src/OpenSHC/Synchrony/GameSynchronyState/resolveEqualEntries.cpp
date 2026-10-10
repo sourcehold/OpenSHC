@@ -25,7 +25,7 @@ namespace Synchrony {
                             this->scrollBarItemOffset = _index;
                             this->scrollBarIndex = 0;
                         }
-                        this->scrollBarItemOffset = uVar1 & ((int)uVar1 < 1) - 1;
+                        this->scrollBarItemOffset = uVar1 & ((int)uVar1 <= 0) - 1;
                     }
                     this->scrollBarIndex = _index - this->scrollBarItemOffset;
                 }

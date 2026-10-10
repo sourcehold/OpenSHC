@@ -159,7 +159,7 @@ namespace UI {
                 IO::Graphics::GID_INTERFACE_ICONS_2, iVar4, iVar3, iVar5, (int)(blendStrength));
         LAB_004b0782:
             iVar4 = DAT_GameState::instance.mapAndTime.playerGroupArray[DAT_00df5530::instance];
-            if (iVar4 < 1) {}
+            if (iVar4 <= 0) {}
             MACRO_CALL_MEMBER(
                 UI::Rendering::TextureRenderCore_Func::renderGMWithBlending, DAT_TextureRenderCoreObject::ptr)(
                 IO::Graphics::GID_INTERFACE_ICONS_2, iVar4 * 2 + 0x1ed, iVar3 + 0x4c, iVar5, (int)(blendStrength));
@@ -196,7 +196,7 @@ namespace UI {
             DE::SHCDE::GM_INTERFACE_ICONS2, iVar4, iVar3, iVar5);
     LAB_004b0659:
         iVar4 = DAT_GameState::instance.mapAndTime.playerGroupArray[DAT_00df5530::instance];
-        if (iVar4 < 1) {}
+        if (iVar4 <= 0) {}
         MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
             DE::SHCDE::GM_INTERFACE_ICONS2, iVar4 * 2 + 0x1ed, iVar3 + 0x4c, iVar5);
     }

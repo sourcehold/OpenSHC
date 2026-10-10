@@ -30,7 +30,7 @@ namespace Synchrony {
             _pFullIdArrayPlus1_2 = _fullIDArray;
             do {
                 if (((*_pFullIdArrayPlus1_2 == -1) || (*_pFullIdArrayPlus1_2 == playerFullID))
-                    && _pFullIdArrayPlus1_2[0x1b] < 1)
+                    && _pFullIdArrayPlus1_2[0x1b] <= 0)
                     goto LAB_0047ebf4;
                 _slot = _slot + 1;
                 _pFullIdArrayPlus1_2 = _pFullIdArrayPlus1_2 + 1;

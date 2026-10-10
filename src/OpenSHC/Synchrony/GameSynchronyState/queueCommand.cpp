@@ -46,7 +46,7 @@ namespace Synchrony {
                 .commandFunctions[this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].commandType + 0x15])();
         this->DAT_CommandParameterOffset = 0;
         dword _time = this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].time;
-        if ((int)_time < 1) {
+        if ((int)_time <= 0) {
             /*
               time == 0 means it is an immediate (out of game time) command, commands that   don't change game state
               (gold, buildings, units, etc.), but rather operate on   a meta level

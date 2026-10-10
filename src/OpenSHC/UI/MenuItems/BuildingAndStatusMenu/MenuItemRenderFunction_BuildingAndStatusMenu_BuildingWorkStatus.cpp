@@ -47,7 +47,7 @@ namespace UI {
                     == 0)) {}
             if (DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
                     .buildingTypeBasedEmployeeCount
-                < 1) {}
+                <= 0) {}
             BuildingTypeShort BVar2
                 = DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
                       .buildingType;

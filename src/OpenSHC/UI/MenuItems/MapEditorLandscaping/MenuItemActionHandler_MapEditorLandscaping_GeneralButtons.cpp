@@ -35,7 +35,7 @@ namespace UI {
             }
             if (param_1 == Commands::M_MAPPER_AREA_BACK) {
                 DAT_TileMapState::instance.editorActiveBrush = DAT_TileMapState::instance.editorActiveBrush + -1;
-                if (DAT_TileMapState::instance.editorActiveBrush < 1) {
+                if (DAT_TileMapState::instance.editorActiveBrush <= 0) {
                     DAT_TileMapState::instance.editorActiveBrush = 7;
                 }
                 if (DAT_TileMapState::instance.currentMapperCommand != Commands::M_MAPPER_BIGROCK1

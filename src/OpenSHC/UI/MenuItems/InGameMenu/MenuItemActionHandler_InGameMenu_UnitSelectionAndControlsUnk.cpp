@@ -158,7 +158,7 @@ namespace UI {
                     MACRO_CALL_MEMBER(Input::MouseState_Func::resetMouseCursorState, DAT_MouseState::ptr)();
                     MACRO_CALL_MEMBER(Input::MouseState_Func::resetMouseState2, DAT_MouseState::ptr)();
                 } else {
-                    if (((DAT_UnitsState::instance.totalUnitsInSelection < 1)
+                    if (((DAT_UnitsState::instance.totalUnitsInSelection <= 0)
                             || (DAT_MouseState::instance.leftClickStartMoment == -1))
                         && (MACRO_CALL_MEMBER(
                                 Map::Units::UnitsState_Func::applyDragBoxSelectionByPriority, DAT_UnitsState::ptr)(),
@@ -249,7 +249,7 @@ namespace UI {
             if (DAT_TileMapState::instance.shiftRelated0or3 == 1
                 && DAT_UnitsState::instance.unitCountOfSelection[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                     < 1
-                && DAT_UnitsState::instance.totalUnitsInSelection < 1) {
+                && DAT_UnitsState::instance.totalUnitsInSelection <= 0) {
                 if ((DAT_GameCore::instance.buildmenuMenuTabToSwitchTo.tabType
                         == UI::Enums::BASMTT_SIEGETENT_BATTERINGRAM)
                     || (DAT_GameCore::instance.buildmenuMenuTabToSwitchTo.tabType
@@ -597,7 +597,7 @@ namespace UI {
                         MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::deselectAllUnitsOneByOne, DAT_UnitsState::ptr)();
                         MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::queueEscapeCommand, DAT_UnitsState::ptr)();
                     }
-                    if (DAT_UnitsState::instance.totalUnitsInSelection < 1) {
+                    if (DAT_UnitsState::instance.totalUnitsInSelection <= 0) {
                         MACRO_CALL_MEMBER(Input::MouseState_Func::beginPointSelectionBox, DAT_MouseState::ptr)();
                         MACRO_CALL_MEMBER(
                             Map::Units::UnitsState_Func::selectFirstUnitInDragBoxAnyPlayer, DAT_UnitsState::ptr)();

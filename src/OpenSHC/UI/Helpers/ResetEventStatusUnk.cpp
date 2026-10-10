@@ -206,7 +206,7 @@ namespace UI {
             } while (iVar5);
         }
         iVar5 = 0;
-        if (DAT_MapPropertiesState::instance.eventsCount < 1) {
+        if (DAT_MapPropertiesState::instance.eventsCount <= 0) {
             INT_ARRAY_00eb1238::instance[0] = 0;
             INT_ARRAY_00eb1238::instance[1] = 0;
             INT_ARRAY_00eb1238::instance[2] = 0;

@@ -48,7 +48,7 @@ namespace UI {
                     do {
                         iVar4 = 0;
                         iVar3 = 0;
-                        if (iVar5 < 1)
+                        if (iVar5 <= 0)
                             break;
                         do {
                             iVar1 = DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices[iVar3 + -1];
@@ -68,7 +68,7 @@ namespace UI {
                     do {
                         iVar4 = 0;
                         iVar3 = 0;
-                        if (iVar5 < 1)
+                        if (iVar5 <= 0)
                             break;
                         do {
                             iVar1 = DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices[iVar3 + -1];
@@ -90,7 +90,7 @@ namespace UI {
                     do {
                         iVar4 = 0;
                         iVar3 = 0;
-                        if (iVar5 < 1)
+                        if (iVar5 <= 0)
                             break;
                         do {
                             iVar1 = DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices[iVar3 + -1];
@@ -110,7 +110,7 @@ namespace UI {
                     do {
                         iVar4 = 0;
                         iVar3 = 0;
-                        if (iVar5 < 1)
+                        if (iVar5 <= 0)
                             break;
                         do {
                             iVar1 = DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices[iVar3 + -1];

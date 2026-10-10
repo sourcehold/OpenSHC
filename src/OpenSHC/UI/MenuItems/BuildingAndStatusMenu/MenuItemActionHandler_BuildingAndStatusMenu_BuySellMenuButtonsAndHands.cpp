@@ -156,7 +156,7 @@ namespace UI {
                                              .marketSelectedResourceType;
                 if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                         .currentResources[_resource]
-                    < 1) {
+                    <= 0) {
                     MACRO_CALL(UI::Actions_Func::SetStorageMarketFailState)(2, _resource);
                     /*
                       "Not enough goods"

@@ -17,7 +17,7 @@ namespace UI {
         this->buildMenuTransitionProgress_0x38
             = ((_currentTime - this->buildMenuTransitionStartTime_0x30) * 100) / this->buildMenuTransitionDuration_0x34;
         if (this->buildMenuTransitionProgress_0x38 < 0x65) {
-            if (this->buildMenuTransitionProgress_0x38 < 1) {
+            if (this->buildMenuTransitionProgress_0x38 <= 0) {
                 this->buildMenuTransitionProgress_0x38 = 1;
             }
         } else {
@@ -25,7 +25,7 @@ namespace UI {
         }
         int iVar2 = this->buildMenuTransitionProgress_0x38 * 0x178 >> 0x1f;
         int iVar3 = (this->buildMenuTransitionProgress_0x38 * 0x178) / 100 + iVar2;
-        if (this->buildMenuTransitionDirection_0x2c < 1) {
+        if (this->buildMenuTransitionDirection_0x2c <= 0) {
             dword dVar1 = -(iVar3 - iVar2);
             this->buildMenuBackgroundLeftShift_0x24 = dVar1 + 0x178;
             this->buildMenuItemsLeftShift_0x28 = this->buildMenuBackgroundLeftShift_0x24;

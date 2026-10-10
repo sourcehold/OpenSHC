@@ -35,10 +35,10 @@ namespace UI {
         int iVar3 = (int)DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID]
                         .currentHealth;
         local_18.shortValue = COL_LIME::instance.shortValue;
-        if ((iVar3 < 1)
+        if ((iVar3 <= 0)
             || (sVar1
                 = DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID].maxHealth,
-                sVar1 < 1)) {
+                sVar1 <= 0)) {
             iVar3 = 0;
         } else {
             iVar3 = (iVar3 * 100) / (int)sVar1;

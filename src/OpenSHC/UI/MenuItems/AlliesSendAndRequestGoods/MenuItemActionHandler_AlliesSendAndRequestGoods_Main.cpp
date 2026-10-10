@@ -96,7 +96,7 @@ namespace UI {
                         DAT_MenuModalComposition1::ptr)(UI::Enums::MMT_ALLIES, FALSE);
                 }
                 if (-1 < DAT_RequestedGoodsByWhoArray::instance[0]) {
-                    if (DAT_SentOrRequestedGoodsAmount::instance < 1) {}
+                    if (DAT_SentOrRequestedGoodsAmount::instance <= 0) {}
                     if (DAT_MenuModalComposition1::instance.activeModalDialogID
                         == UI::Enums::MMT_ALLIES_REQUEST_GOODS) {
                         if ((int*)(DAT_RequestedGoodsByWhoArray::instance[0] + 1) == (int*)0xf) {

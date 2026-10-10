@@ -40,11 +40,11 @@ namespace UI {
             int top;
             int bottom;
             DWORD DVar2 = timeGetTime();
-            if (DAT_00b9610c::instance < 1) {
+            if (DAT_00b9610c::instance <= 0) {
                 if (DAT_00b9610c::instance < 0) {
                     DAT_00b95b70::instance = 0x20 - (int)(DVar2 - INT_00b960d0::instance) / 0x32;
                     DAT_TextEditorState::instance.pendingCreditsFadeBorder = TRUE;
-                    if (DAT_00b95b70::instance < 1) {
+                    if (DAT_00b95b70::instance <= 0) {
                         DAT_00b95b3c::instance = DAT_00b95b3c::instance + 1;
                         DAT_00b9610c::instance = 1;
                         DAT_00b95b70::instance = 0;

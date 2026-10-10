@@ -81,7 +81,7 @@ namespace UI {
             }
             DAT_VideoBikQueue::instance.storedMessages_0x924 = 0;
             MACRO_CALL(Rendering_Func::TicksStartCounter)();
-            if (DAT_GameCore::instance.missionNumber1to20 < 1) {
+            if (DAT_GameCore::instance.missionNumber1to20 <= 0) {
                 DAT_GameCore::instance.missionNumber1to20 = 1;
             }
             int iVar2 = DAT_GameCore::instance.missionNumber1to20;

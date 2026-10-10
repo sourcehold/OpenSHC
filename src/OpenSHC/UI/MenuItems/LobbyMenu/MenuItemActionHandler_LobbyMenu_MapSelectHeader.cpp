@@ -77,7 +77,7 @@ namespace UI {
                     do {
                         iVar7 = 0;
                         iVar3 = 0;
-                        if (iVar1 < 1)
+                        if (iVar1 <= 0)
                             break;
                         do {
                             iVar4 = DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices[iVar3 + -1];
@@ -95,7 +95,7 @@ namespace UI {
                     do {
                         iVar7 = 0;
                         iVar3 = 0;
-                        if (iVar1 < 1)
+                        if (iVar1 <= 0)
                             break;
                         do {
                             iVar4 = DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices[iVar3 + -1];
@@ -122,7 +122,7 @@ namespace UI {
                         iVar9 = 0;
                         iVar4 = 0;
                         iVar7 = DAT_GameSynchronyState::instance.lobbyMapSortOrder;
-                        if (iVar1 < 1)
+                        if (iVar1 <= 0)
                             break;
                         do {
                             iVar2 = DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices[iVar4 + -1];
@@ -159,7 +159,7 @@ namespace UI {
                     do {
                         iVar7 = 0;
                         iVar3 = 0;
-                        if (iVar1 < 1)
+                        if (iVar1 <= 0)
                             break;
                         do {
                             iVar4 = DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices[iVar3 + -1];
@@ -179,7 +179,7 @@ namespace UI {
                     do {
                         iVar7 = 0;
                         iVar3 = 0;
-                        if (iVar1 < 1)
+                        if (iVar1 <= 0)
                             break;
                         do {
                             iVar4 = DAT_MenuTextInputState::instance.DAT_ArrayOfMapIndices[iVar3 + -1];

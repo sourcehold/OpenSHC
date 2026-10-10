@@ -92,7 +92,7 @@ namespace UI {
                         ;
                     }
                     if (DAT_GameCore::instance.gameMode_2 != Game::GM_BUILDERUnk) {
-                        if (DAT_GameCore::instance.missionNumber1to20 < 1) {
+                        if (DAT_GameCore::instance.missionNumber1to20 <= 0) {
                             DAT_GameCore::instance.missionNumber1to20 = 1;
                         }
                         DAT_GameCore::instance.section1066 = 1;

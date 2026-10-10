@@ -33,7 +33,7 @@ namespace Synchrony {
         short* _currStone;
         _currStone = &DAT_TribesState::instance.tribes[param_2].size;
         _unitSelectionIndex = 0;
-        if (*_currStone < 1) {
+        if (*_currStone <= 0) {
             return _currStone;
         }
         do {
@@ -50,7 +50,7 @@ namespace Synchrony {
                     _amount = (_amount + 20) / 2;
                     if (DAT_GameState::instance.playerDataArray[playerID].currentResources[4] < _amount) {
                         _currStone = (short*)DAT_GameState::instance.playerDataArray[playerID].currentResources[4];
-                        if ((int)_currStone < 1) {
+                        if ((int)_currStone <= 0) {
                             return _currStone;
                         }
                         MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::processResourceLoss,
