@@ -11,10 +11,9 @@ namespace Text {
     int UserTextHandler::getTextWidthUntilCurrentCursor()
     {
         int iVar1;
-        iVar1
-            = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextWidthTillCursorUnk, DAT_TextManagerObject::ptr)(
-                this->textArray[this->textArrayIndex], (int)((int)(this->textCursorIndexArray[this->textArrayIndex])),
-                (int)((int)(this->textArrayFontSizes[this->textArrayIndex])));
+        iVar1 = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextWidthTillCursorUnk, DAT_TextManagerObject::ptr)(
+            this->textArray[this->textArrayIndex], (int)(this->textCursorIndexArray[this->textArrayIndex]),
+            (int)(this->textArrayFontSizes[this->textArrayIndex]));
         return iVar1;
     }
 

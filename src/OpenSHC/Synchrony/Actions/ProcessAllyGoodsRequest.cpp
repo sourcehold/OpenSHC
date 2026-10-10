@@ -12,6 +12,7 @@
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
+#include "OpenSHC/Game/Resources/ResourceTypeInt.hpp"
 
 #include "OpenSHC/Globals/DAT_AICState.hpp"
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -19,7 +20,6 @@
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_SFXState.hpp"
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
-#include "OpenSHC/Game/Resources/ResourceTypeInt.hpp"
 
 namespace OpenSHC {
 namespace Synchrony {
@@ -59,16 +59,16 @@ namespace Synchrony {
             if (param_2 == Game::Resources::RT_PARTIALPITCH) {
                 _resourceType = Game::Resources::RT_PITCH;
             }
-            MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::processResourceGain,
-                DAT_BuildingsState::ptr)(param_1, (ResourceType)((int)(_resourceType)), param_3);
-            MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::processResourceLoss,
-                DAT_BuildingsState::ptr)(param_4, (ResourceType)((int)(_resourceType)), param_3, 0);
+            MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::processResourceGain, DAT_BuildingsState::ptr)(
+                param_1, (ResourceType)((int)(_resourceType)), param_3);
+            MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::processResourceLoss, DAT_BuildingsState::ptr)(
+                param_4, (ResourceType)((int)(_resourceType)), param_3, 0);
             iVar4 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::getSellPrice, DAT_GameState::ptr)(
-                param_1, (int)((int)(_resourceType)), param_3);
+                param_1, (int)(_resourceType), param_3);
             piVar1 = DAT_GameSynchronyState::instance.finalResults.finalGoodsRecieved + param_1;
             *piVar1 = *piVar1 + iVar4;
             iVar4 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::getSellPrice, DAT_GameState::ptr)(
-                param_1, (int)((int)(_resourceType)), param_3);
+                param_1, (int)(_resourceType), param_3);
             piVar1 = DAT_GameSynchronyState::instance.finalResults.finalGoodsSent + param_4;
             *piVar1 = *piVar1 + iVar4;
         }
@@ -78,8 +78,8 @@ namespace Synchrony {
             case Game::Resources::RT_GOLD:
                 sfxOffsetInArray = Audio::SFX::SEID_IRON_DEPOSIT;
                 break;
-                default:
-                    sfxOffsetInArray = Audio::SFX::SEID_FLOUR_DEPOSIT;
+            default:
+                sfxOffsetInArray = Audio::SFX::SEID_FLOUR_DEPOSIT;
                 break;
             case Game::Resources::RT_BOW:
             case Game::Resources::RT_CROSSBOW:
@@ -91,8 +91,7 @@ namespace Synchrony {
             case Game::Resources::RT_IRONARMOR:
                 sfxOffsetInArray = Audio::SFX::SEID_SWORD_DEPOSIT;
             }
-            MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(
-                sfxOffsetInArray);
+            MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(sfxOffsetInArray);
         }
         if ((DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY)
             && (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SKIRMISH_SINGLE_PLAYER)) {
@@ -112,7 +111,7 @@ namespace Synchrony {
                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::addChatMessageToDisplayList,
                     DAT_GameSynchronyState::ptr)(param_4, 0);
                 pcVar5 = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                    DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_GOODS, (int)((int)(param_2)));
+                    DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_GOODS, (int)(param_2));
                 MACRO_CALL(OS_Func::_sprintf)(
                     DAT_GameSynchronyState::instance.receivedChatMessage, "%d %s - ", param_3, pcVar5);
                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::addChatMessageToDisplayList,
@@ -134,7 +133,7 @@ namespace Synchrony {
                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::addChatMessageToDisplayList,
                     DAT_GameSynchronyState::ptr)(param_4, 0);
                 pcVar5 = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                    DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_GOODS, (int)((int)(param_2)));
+                    DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_GOODS, (int)(param_2));
                 MACRO_CALL(OS_Func::_sprintf)(
                     DAT_GameSynchronyState::instance.receivedChatMessage, "%d %s", param_3, pcVar5);
                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::addChatMessageToDisplayList,
@@ -145,8 +144,7 @@ namespace Synchrony {
             DAT_GameState::instance.playerDataArray[param_4].requestedGoodsArray1Unk[param_1] = 0;
             DAT_GameState::instance.playerDataArray[param_4].requestedGoodsArray2Unk[param_1] = 0;
         }
-        MACRO_CALL_MEMBER(AI::AICState_Func::playThanksBikFromPlayerToPlayer, DAT_AICState::ptr)(
-            param_1, param_4);
+        MACRO_CALL_MEMBER(AI::AICState_Func::playThanksBikFromPlayerToPlayer, DAT_AICState::ptr)(param_1, param_4);
     }
 
 }

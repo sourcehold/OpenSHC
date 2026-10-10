@@ -75,7 +75,7 @@ namespace Map {
             } else {
                 if (animalType == Commands::M_MAPPER_CROW_SEAGULL) {
                     MACRO_CALL_MEMBER(Map::LandscapeState_Func::markNearbyTreesAsCrowTargets, DAT_LandscapeState::ptr)(
-                        x, (int)((int)(y)));
+                        x, (int)(y));
                     return (dword)(0);
                 }
                 if (animalType == Commands::M_MAPPER_SEAGULL) {
@@ -83,7 +83,7 @@ namespace Map {
                         return (dword)(0);
                     }
                     MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::createSeagull, DAT_EntityState::ptr)(
-                        x * 8, (int)((int)(y * 8)));
+                        x * 8, (int)(y * 8));
                     return (dword)(0);
                 }
             }
@@ -91,10 +91,9 @@ namespace Map {
             if (_rng2) {
                 do {
                     unitID = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
-                        0, 0, (int)((int)(x * 8)), (int)((int)(y * 8)), tile, unitType);
+                        0, 0, (int)(x * 8), (int)(y * 8), tile, unitType);
                     if (unitID) {
-                        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, this)(
-                            unitID, (int)((int)(tribeID)));
+                        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, this)(unitID, (int)(tribeID));
                         DAT_UnitsState::instance.units[unitID].substate
                             = (byte)DAT_UnitsState::instance.units[unitID].fixedRng & 3;
                         if (unitType == Map::Units::UT_ANTELOPESHDEER) {

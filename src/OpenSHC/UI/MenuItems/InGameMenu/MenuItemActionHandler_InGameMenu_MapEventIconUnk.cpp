@@ -13,9 +13,8 @@ namespace UI {
         void InGameMenu::MenuItemActionHandler_InGameMenu_MapEventIconUnk(int param_1, ...)
         {
             int iVar1;
-            MACRO_CALL_MEMBER(Rendering::ViewportRenderState_Func::focusOnCoordinate,
-                DAT_ViewportRenderState::ptr)(DAT_MinimapViewState::instance.spawnMomentX[0],
-                (int)((int)(DAT_MinimapViewState::instance.spawnMomentY[0])));
+            MACRO_CALL_MEMBER(Rendering::ViewportRenderState_Func::focusOnCoordinate, DAT_ViewportRenderState::ptr)(
+                DAT_MinimapViewState::instance.spawnMomentX[0], (int)(DAT_MinimapViewState::instance.spawnMomentY[0]));
             iVar1 = 1;
             if (1 < DAT_MinimapViewState::instance.spawnMomentCount) {
                 do {

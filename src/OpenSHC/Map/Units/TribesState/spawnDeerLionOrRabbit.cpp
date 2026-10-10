@@ -68,8 +68,8 @@ namespace Map {
                         iVar3 = ((_unknown <= _tribeSize) - 1 & 0xffffffb5) + 100;
                     }
                     if (iVar3 <= (int)(_rng2 & 0x7f)) {
-                        _rng2 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(0, 0,
-                            (int)((int)(_unitX * 8)), (int)((int)(_unitY * 8)), (int)((int)(_terrainHeight)), unitType);
+                        _rng2 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
+                            0, 0, (int)(_unitX * 8), (int)(_unitY * 8), (int)(_terrainHeight), unitType);
                         if (_rng2) {
                             MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, this)(_rng2, tribeID);
                             DAT_UnitsState::instance.units[_rng2].substate

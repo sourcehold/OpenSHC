@@ -18,7 +18,7 @@ namespace Text {
     {
         int iVar1;
         iVar1 = MACRO_CALL_MEMBER(Text::TextManager_Func::computeTextWidth, DAT_TextManagerObject::ptr)(
-            this->textArray[this->textArrayIndex], (int)((int)(this->textArrayFontSizes[this->textArrayIndex])));
+            this->textArray[this->textArrayIndex], (int)(this->textArrayFontSizes[this->textArrayIndex]));
         if (this->textBoxMaxTextWidthDimensionArray[this->textArrayIndex] <= iVar1) {
             return 2;
         }

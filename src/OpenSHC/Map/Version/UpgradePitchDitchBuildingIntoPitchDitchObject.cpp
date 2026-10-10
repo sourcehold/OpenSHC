@@ -38,10 +38,9 @@ namespace Map {
                 DAT_TileMapState::instance.BuildingWasLayer[uVar2] = '\0';
                 DAT_TileMapState::instance.HeightLayer[uVar2] = DAT_TileMapState::instance.DefaultHeightLayer[uVar2];
                 MACRO_CALL_MEMBER(Map::TileMapState_Func::placePitchDitch, DAT_TileMapState::ptr)(
-                    (int)puVar3->owner, (uint)((int)((int)(short)puVar3->x)), (uint)((int)((int)(short)uVar1)));
-                MACRO_CALL_MEMBER(
-                    Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer, DAT_PathFindingState::ptr)(
-                    4, (uint)((int)((int)(short)puVar3->x)), (uint)((int)((int)(short)puVar3->y)));
+                    (int)puVar3->owner, (uint)((int)(short)puVar3->x), (uint)((short)uVar1));
+                MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
+                    DAT_PathFindingState::ptr)(4, (uint)((int)(short)puVar3->x), (uint)((int)(short)puVar3->y));
                 MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                     812, '\0', puVar3);
             }

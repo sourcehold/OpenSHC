@@ -30,20 +30,20 @@ namespace UI {
             int iVar1;
             char* textAddress;
             int xParam;
-            MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawBoxWithRoundedEdges,
-                DAT_PencilRenderCore::ptr)(DAT_ButtonX::instance, (int)((int)(DAT_ButtonY::instance)),
-                (int)((int)(DAT_ButtonW::instance + DAT_ButtonX::instance)),
-                (int)((int)(DAT_ButtonH::instance + DAT_ButtonY::instance)), UI::Enums::RBERL_SLIGHT);
+            MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawBoxWithRoundedEdges, DAT_PencilRenderCore::ptr)(
+                DAT_ButtonX::instance, (int)(DAT_ButtonY::instance),
+                (int)(DAT_ButtonW::instance + DAT_ButtonX::instance),
+                (int)(DAT_ButtonH::instance + DAT_ButtonY::instance), UI::Enums::RBERL_SLIGHT);
             iVar1 = MACRO_CALL_MEMBER(
                 Text::UserTextHandler_Func::getTextWidthUntilCurrentCursor, DAT_UserTextHandlerState::ptr)();
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(
-                DAT_ButtonX::instance + 6 + iVar1, (int)((int)(DAT_ButtonY::instance + 2)),
-                DAT_ButtonX::instance + 7 + iVar1, (int)((int)(DAT_ButtonH::instance + -4 + DAT_ButtonY::instance)),
-                (ushort)((int)(COL_DARK_LIME::instance.shortValue)));
+                DAT_ButtonX::instance + 6 + iVar1, (int)(DAT_ButtonY::instance + 2), DAT_ButtonX::instance + 7 + iVar1,
+                (int)(DAT_ButtonH::instance + -4 + DAT_ButtonY::instance),
+                (ushort)(COL_DARK_LIME::instance.shortValue));
             iVar1 = DAT_ButtonY::instance + 7;
             xParam = DAT_ButtonX::instance + 8;
-            textAddress = MACRO_CALL_MEMBER(
-                Text::UserTextHandler_Func::getCurrentText, DAT_UserTextHandlerState::ptr)();
+            textAddress
+                = MACRO_CALL_MEMBER(Text::UserTextHandler_Func::getCurrentText, DAT_UserTextHandlerState::ptr)();
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
                 textAddress, xParam, iVar1, Text::TTA_LEFT, 0xffffff, 0, 0x12, FALSE, 0);
         }

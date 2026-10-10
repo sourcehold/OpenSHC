@@ -67,7 +67,7 @@ namespace Map {
         int iVar6 = y;
         do {
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-                x1, iVar6, x + 0x192, iVar6, (ushort)((int)(COL_WHITE::instance.shortValue)));
+                x1, iVar6, x + 0x192, iVar6, (ushort)(COL_WHITE::instance.shortValue));
             iVar6 = iVar6 + 10;
             iVar7 = iVar7 + -1;
         } while (iVar7);
@@ -75,7 +75,7 @@ namespace Map {
         iVar6 = x1;
         do {
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-                iVar6, y, iVar6, y + 400, (ushort)((int)(COL_WHITE::instance.shortValue)));
+                iVar6, y, iVar6, y + 400, (ushort)(COL_WHITE::instance.shortValue));
             iVar6 = iVar6 + 10;
             iVar7 = iVar7 + -1;
             iVar8 = 0;
@@ -214,7 +214,7 @@ namespace Map {
                     }
                 LAB_0052c533:
                     MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(
-                        iVar4 + 1, iVar2 + 1, iVar4 + 9, iVar2 + 9, (ushort)((int)(uVar5)));
+                        iVar4 + 1, iVar2 + 1, iVar4 + 9, iVar2 + 9, (ushort)(uVar5));
                 }
             }
             iVar8 = iVar8 + 1;

@@ -17,9 +17,9 @@ namespace UI {
         void CrusadeEndscreen::MenuView_CrusadeEndscreen_DoInitial()
         {
             Menu* pMVar1;
-            MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(0,
-                0, DAT_WindowAndDirectDraw::instance.resolutionX, DAT_WindowAndDirectDraw::instance.resolutionY,
-                (ushort)((int)(COL_BLACK::instance.shortValue)));
+            MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(0, 0,
+                DAT_WindowAndDirectDraw::instance.resolutionX, DAT_WindowAndDirectDraw::instance.resolutionY,
+                (ushort)(COL_BLACK::instance.shortValue));
             MACRO_CALL(UI::Rendering_Func::DrawOuterMenuBorder)();
             DAT_MenuHandlerState::instance.y = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
             DAT_MenuHandlerState::instance.x = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;

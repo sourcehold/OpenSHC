@@ -29,8 +29,8 @@ namespace UI {
             }
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
                 DAT_TextureRenderCoreObject::ptr)(IO::Graphics::GID_INTERFACE_ICONS_3, _imageID,
-                (int)((int)(DAT_ButtonX::instance)), (int)((int)(DAT_ButtonY::instance)),
-                IO::Graphics::GID_INTERFACE_ICONS_3, _imageID + 2, blendStrengthUnk);
+                (int)(DAT_ButtonX::instance), (int)(DAT_ButtonY::instance), IO::Graphics::GID_INTERFACE_ICONS_3,
+                _imageID + 2, blendStrengthUnk);
         }
 
     }

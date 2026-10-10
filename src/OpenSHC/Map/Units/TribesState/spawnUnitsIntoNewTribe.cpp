@@ -29,11 +29,11 @@ namespace Map {
                 if (0 < unitType1Count) {
                     tribeType = unitType1Count;
                     do {
-                        _unitID = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit,
-                            DAT_UnitsState::ptr)(playerID, playerID, x * 8, y * 8, 8, unitType);
+                        _unitID = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
+                            playerID, playerID, x * 8, y * 8, 8, unitType);
                         if (_unitID) {
                             MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, this)(
-                                _unitID, (int)((int)(_tribeID)));
+                                _unitID, (int)(_tribeID));
                             DAT_UnitsState::instance.units[_unitID].aiUnitBehaviourType = 0;
                         }
                         tribeType = tribeType + -1;
@@ -43,11 +43,11 @@ namespace Map {
                     microYPosition = y * 8;
                     y = unitType2Count;
                     do {
-                        _unitID2 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit,
-                            DAT_UnitsState::ptr)(playerID, playerID, x * 8, microYPosition, 8, unitType2);
+                        _unitID2 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
+                            playerID, playerID, x * 8, microYPosition, 8, unitType2);
                         if (_unitID2) {
                             MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, this)(
-                                _unitID2, (int)((int)(_tribeID)));
+                                _unitID2, (int)(_tribeID));
                             DAT_UnitsState::instance.units[_unitID2].aiUnitBehaviourType = 0;
                         }
                         y = y + -1;

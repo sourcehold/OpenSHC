@@ -32,27 +32,23 @@ namespace UI {
                     MACRO_CALL(UI::MenuItems::General_Func::
                             MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
                 }
-                MACRO_CALL(
-                    UI::Rendering_Func::RenderCurrentNotActiveButtonWithPossibleAlphaTexOnCurrentSurfaceUnk)();
+                MACRO_CALL(UI::Rendering_Func::RenderCurrentNotActiveButtonWithPossibleAlphaTexOnCurrentSurfaceUnk)();
             }
-            MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM,
-                DAT_TextureRenderCoreObject::ptr)(DE::SHCDE::GM_INTERFACE_ICONS2, 0x22b,
-                (int)((int)(DAT_ButtonX::instance)), (int)((int)(DAT_ButtonY::instance)));
+            MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
+                DE::SHCDE::GM_INTERFACE_ICONS2, 0x22b, (int)(DAT_ButtonX::instance), (int)(DAT_ButtonY::instance));
             if (param_1 == 0x17) {
                 MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::drawBitmapFace,
                     DAT_TextureRenderCoreObject::ptr)(DAT_GameCore::instance.lordIconUnk + -2,
-                    (int)((int)(DAT_ButtonX::instance + 4)), (int)((int)(DAT_ButtonY::instance + 4)));
-                MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM,
-                    DAT_TextureRenderCoreObject::ptr)(DE::SHCDE::GM_INTERFACE_ICONS2, 0x21d,
-                    (int)((int)(DAT_ButtonX::instance)), (int)((int)(DAT_ButtonY::instance)));
+                    (int)(DAT_ButtonX::instance + 4), (int)(DAT_ButtonY::instance + 4));
+                MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
+                    DE::SHCDE::GM_INTERFACE_ICONS2, 0x21d, (int)(DAT_ButtonX::instance), (int)(DAT_ButtonY::instance));
             }
             imageID = 0x21b;
             if (param_1 == 0x16) {
                 imageID = 0x21c;
             }
-            MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM,
-                DAT_TextureRenderCoreObject::ptr)(DE::SHCDE::GM_INTERFACE_ICONS2, imageID,
-                (int)((int)(DAT_ButtonX::instance)), (int)((int)(DAT_ButtonY::instance)));
+            MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
+                DE::SHCDE::GM_INTERFACE_ICONS2, imageID, (int)(DAT_ButtonX::instance), (int)(DAT_ButtonY::instance));
             if (param_1 == 0x15) {
                 if (DAT_GameCore::instance.selectedLordTypeUnk) {}
             } else {
@@ -61,7 +57,7 @@ namespace UI {
             }
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
                 DAT_TextureRenderCoreObject::ptr)(IO::Graphics::GID_INTERFACE_ICONS_2, 0x202,
-                (int)((int)(DAT_ButtonX::instance + -6)), (int)((int)(DAT_ButtonY::instance + -6)),
+                (int)(DAT_ButtonX::instance + -6), (int)(DAT_ButtonY::instance + -6),
                 IO::Graphics::GID_INTERFACE_ICONS_2, 0x201, 0);
         }
 

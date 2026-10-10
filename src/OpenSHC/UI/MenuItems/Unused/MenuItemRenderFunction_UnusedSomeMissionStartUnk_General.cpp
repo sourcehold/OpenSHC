@@ -45,17 +45,17 @@ namespace UI {
                 && (DAT_MenuModalComposition1::instance.activeModalDialogID == UI::Enums::MMT_NONE)) {
                 if (!DAT_ButtonCurrentlyInteracting::instance) {
                     MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawBoxWithRoundedEdges,
-                        DAT_PencilRenderCore::ptr)(DAT_ButtonX::instance, (int)((int)(DAT_ButtonY::instance)),
-                        (int)((int)(DAT_ButtonW::instance + DAT_ButtonX::instance)),
-                        (int)((int)(DAT_ButtonH::instance + DAT_ButtonY::instance)), UI::Enums::RBERL_SLIGHT);
+                        DAT_PencilRenderCore::ptr)(DAT_ButtonX::instance, (int)(DAT_ButtonY::instance),
+                        (int)(DAT_ButtonW::instance + DAT_ButtonX::instance),
+                        (int)(DAT_ButtonH::instance + DAT_ButtonY::instance), UI::Enums::RBERL_SLIGHT);
                     backgroundColor = 0x3e66;
                     foregroundColor = 0xa2ff;
                 } else {
                     MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawBoxWithRoundedEdgesAndColor,
-                        DAT_PencilRenderCore::ptr)(DAT_ButtonX::instance, (int)((int)(DAT_ButtonY::instance)),
-                        (int)((int)(DAT_ButtonW::instance + DAT_ButtonX::instance)),
-                        (int)((int)(DAT_ButtonH::instance + DAT_ButtonY::instance)),
-                        (ushort)((int)(COL_BLUE::instance.shortValue)), UI::Enums::RBERL_SLIGHT);
+                        DAT_PencilRenderCore::ptr)(DAT_ButtonX::instance, (int)(DAT_ButtonY::instance),
+                        (int)(DAT_ButtonW::instance + DAT_ButtonX::instance),
+                        (int)(DAT_ButtonH::instance + DAT_ButtonY::instance), (ushort)(COL_BLUE::instance.shortValue),
+                        UI::Enums::RBERL_SLIGHT);
                     backgroundColor = 0;
                     foregroundColor = 0xffffff;
                 }
@@ -67,9 +67,9 @@ namespace UI {
                 yParam = DAT_ButtonY::instance + 8;
                 textAddress = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_MAINOPTIONS, param_1);
-                MACRO_CALL_MEMBER(Text::TextManager_Func::renderInGameTextWithShadow,
-                    DAT_TextManagerObject::ptr)(textAddress, xParam, yParam, alignment, foregroundColor,
-                    backgroundColor, fontSize, keepOffsetX, blendStrength);
+                MACRO_CALL_MEMBER(Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
+                    textAddress, xParam, yParam, alignment, foregroundColor, backgroundColor, fontSize, keepOffsetX,
+                    blendStrength);
             }
         }
 

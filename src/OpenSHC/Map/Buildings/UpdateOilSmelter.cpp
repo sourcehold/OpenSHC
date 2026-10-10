@@ -159,13 +159,13 @@ namespace Map {
                 && (DAT_BuildingsState::instance.buildings[iVar5].animationIndex == 10)) {
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                     (int)(short)DAT_BuildingsState::instance.buildings[iVar5].x,
-                    (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar5].y)), DE::SHCDE::FX_POT_OPEN);
+                    (int)((short)DAT_BuildingsState::instance.buildings[iVar5].y), DE::SHCDE::FX_POT_OPEN);
             }
             if ((DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationActive != 0)
                 && (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex == 0xd)) {
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                     (int)(short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x,
-                    (int)((int)((short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y)),
+                    (int)((short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y),
                     DE::SHCDE::FX_OIL_REFILL);
             }
             iVar5 = DAT_CurrentBuildingID::instance;

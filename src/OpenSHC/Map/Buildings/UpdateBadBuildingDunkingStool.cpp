@@ -64,27 +64,25 @@ namespace Map {
             if (DAT_BuildingsState::instance.buildings[buildingID].animationIndex == 4) {
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                     (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x,
-                    (int)((int)((short)DAT_BuildingsState::instance.buildings[buildingID].y)), DE::SHCDE::FX_WH_DUNK);
+                    (int)((short)DAT_BuildingsState::instance.buildings[buildingID].y), DE::SHCDE::FX_WH_DUNK);
                 buildingID = DAT_CurrentBuildingID::instance;
             }
             if (DAT_BuildingsState::instance.buildings[buildingID].animationIndex == 0x22) {
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                     (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x,
-                    (int)((int)((short)DAT_BuildingsState::instance.buildings[buildingID].y)),
-                    DE::SHCDE::FX_WH_BREATH1);
+                    (int)((short)DAT_BuildingsState::instance.buildings[buildingID].y), DE::SHCDE::FX_WH_BREATH1);
                 buildingID = DAT_CurrentBuildingID::instance;
             }
             if (DAT_BuildingsState::instance.buildings[buildingID].animationIndex == 0x48) {
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                     (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x,
-                    (int)((int)((short)DAT_BuildingsState::instance.buildings[buildingID].y)),
-                    DE::SHCDE::FX_WH_BREATH2);
+                    (int)((short)DAT_BuildingsState::instance.buildings[buildingID].y), DE::SHCDE::FX_WH_BREATH2);
                 buildingID = DAT_CurrentBuildingID::instance;
             }
             if (DAT_BuildingsState::instance.buildings[buildingID].animationIndex == 0x68) {
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                     (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x,
-                    (int)((int)((short)DAT_BuildingsState::instance.buildings[buildingID].y)), DE::SHCDE::FX_WH_LIFT);
+                    (int)((short)DAT_BuildingsState::instance.buildings[buildingID].y), DE::SHCDE::FX_WH_LIFT);
                 buildingID = DAT_CurrentBuildingID::instance;
             }
         }

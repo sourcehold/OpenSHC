@@ -59,13 +59,13 @@ namespace Map {
             if (DAT_BuildingsState::instance.buildings[iVar3].animationIndex == 0x2f) {
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                     (int)(short)DAT_BuildingsState::instance.buildings[iVar3].x,
-                    (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar3].y)), DE::SHCDE::FX_WITCH_BURN);
+                    (int)((short)DAT_BuildingsState::instance.buildings[iVar3].y), DE::SHCDE::FX_WITCH_BURN);
                 iVar3 = DAT_CurrentBuildingID::instance;
             }
             if (DAT_BuildingsState::instance.buildings[iVar3].animationIndex == 0x31) {
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                     (int)(short)DAT_BuildingsState::instance.buildings[iVar3].x,
-                    (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar3].y)), DE::SHCDE::FX_WITCH_SCREAM);
+                    (int)((short)DAT_BuildingsState::instance.buildings[iVar3].y), DE::SHCDE::FX_WITCH_SCREAM);
             }
         }
     }

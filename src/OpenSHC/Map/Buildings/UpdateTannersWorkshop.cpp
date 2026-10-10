@@ -55,7 +55,7 @@ namespace Map {
             == '\0') {
             MACRO_CALL_MEMBER(Map::TileMapState_Func::updateBuildingPlacementRotationPreview, DAT_TileMapState::ptr)(
                 (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x,
-                (int)((int)((short)DAT_BuildingsState::instance.buildings[buildingID].y)));
+                (int)((short)DAT_BuildingsState::instance.buildings[buildingID].y));
             buildingID = DAT_CurrentBuildingID::instance;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingVariation
                 = (short)DAT_TileMapState::instance.uiBuildingRotation;
@@ -101,7 +101,7 @@ namespace Map {
                 if (!sVar5 || sVar5 == 0xe || sVar5 == 0x1a || sVar5 == 0x29) {
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                         (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x,
-                        (int)((int)((short)DAT_BuildingsState::instance.buildings[buildingID].y)),
+                        (int)((short)DAT_BuildingsState::instance.buildings[buildingID].y),
                         DE::SHCDE::FX_TANNER_BRUSH1);
                     buildingID = DAT_CurrentBuildingID::instance;
                 }
@@ -109,7 +109,7 @@ namespace Map {
                 if (sVar5 == 7 || sVar5 == 0x15 || sVar5 == 0x21 || sVar5 == 0x2f) {
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                         (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x,
-                        (int)((int)((short)DAT_BuildingsState::instance.buildings[buildingID].y)),
+                        (int)((short)DAT_BuildingsState::instance.buildings[buildingID].y),
                         DE::SHCDE::FX_TANNER_BRUSH2);
                     buildingID = DAT_CurrentBuildingID::instance;
                 }
@@ -209,8 +209,7 @@ namespace Map {
                         || ((sVar5 == 0x28 || (sVar5 == 0x2e))))) {
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                         (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x,
-                        (int)((int)((short)DAT_BuildingsState::instance.buildings[buildingID].y)),
-                        DE::SHCDE::FX_TANNER_CUT);
+                        (int)((short)DAT_BuildingsState::instance.buildings[buildingID].y), DE::SHCDE::FX_TANNER_CUT);
                     buildingID = DAT_CurrentBuildingID::instance;
                 }
                 iVar7 = buildingID * 0x32c;

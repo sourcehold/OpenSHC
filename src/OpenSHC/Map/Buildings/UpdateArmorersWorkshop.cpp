@@ -9,6 +9,7 @@
 #include "OpenSHC/DE/SHCDE/eSFX.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
+#include "OpenSHC/Map/Units/States/UnitStateShort.hpp"
 
 #include "OpenSHC/Globals/DAT_AICState.hpp"
 #include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
@@ -20,7 +21,6 @@
 #include "OpenSHC/Globals/DAT_SFXState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
-#include "OpenSHC/Map/Units/States/UnitStateShort.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -56,9 +56,9 @@ namespace Map {
         if ((char)((char)DAT_BuildingsState::instance.buildings[buildingID].uid
                 + (char)DAT_GameCore::instance.mapTimeInTicks)
             == '\0') {
-            MACRO_CALL_MEMBER(Map::TileMapState_Func::updateBuildingPlacementRotationPreview,
-                DAT_TileMapState::ptr)((int)(short)DAT_BuildingsState::instance.buildings[buildingID].x,
-                (int)((int)((short)DAT_BuildingsState::instance.buildings[buildingID].y)));
+            MACRO_CALL_MEMBER(Map::TileMapState_Func::updateBuildingPlacementRotationPreview, DAT_TileMapState::ptr)(
+                (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x,
+                (int)((short)DAT_BuildingsState::instance.buildings[buildingID].y));
             buildingID = DAT_CurrentBuildingID::instance;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingVariation
                 = (short)DAT_TileMapState::instance.uiBuildingRotation;
@@ -67,13 +67,12 @@ namespace Map {
         sVar6 = DAT_BuildingsState::instance.buildings[buildingID].state;
         if (sVar6 == 0) {
             if ((DAT_BuildingsState::instance.buildings[buildingID].animationActive != 0)
-                && (DAT_BuildingDefinedData::instance
-                        .ArmorersWorkshopAnimationFrames1[DAT_BuildingsState::instance.buildings[buildingID].animationIndex]
+                && (DAT_BuildingDefinedData::instance.ArmorersWorkshopAnimationFrames1
+                        [DAT_BuildingsState::instance.buildings[buildingID].animationIndex]
                     == 5)) {
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                     (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x,
-                    (int)((int)((short)DAT_BuildingsState::instance.buildings[buildingID].y)),
-                    DE::SHCDE::FX_ARMOUR_HIT);
+                    (int)((short)DAT_BuildingsState::instance.buildings[buildingID].y), DE::SHCDE::FX_ARMOUR_HIT);
                 buildingID = DAT_CurrentBuildingID::instance;
             }
             iVar8 = buildingID * 0x32c;
@@ -109,8 +108,8 @@ namespace Map {
                 }
             }
         } else if (sVar6 == 1) {
-            bVar5 = DAT_BuildingDefinedData::instance
-                        .ArmorersWorkshopAnimationFrames3[DAT_BuildingsState::instance.buildings[buildingID].animationIndex];
+            bVar5 = DAT_BuildingDefinedData::instance.ArmorersWorkshopAnimationFrames3
+                        [DAT_BuildingsState::instance.buildings[buildingID].animationIndex];
             if ('\0' < (char)bVar5) {
                 DAT_BuildingsState::instance.buildings[buildingID].animationFrame = (int)(char)bVar5;
             }
@@ -147,12 +146,11 @@ namespace Map {
         }
         *(undefined2*)((int)&DAT_BuildingsState::instance.buildings[0].buildingIsVisuallyActive + iVar8) = 0;
     LAB_00414007:
-        MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updateVisuallyActiveState,
-            DAT_BuildingsState::ptr)(buildingID);
+        MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updateVisuallyActiveState, DAT_BuildingsState::ptr)(
+            buildingID);
         if (*(short*)((int)&DAT_BuildingsState::instance.buildings[0].buildingIsVisuallyActive + iVar8)
             != *(short*)((int)DAT_BuildingsState::instance.buildings[0].resources + iVar8 + -0x52)) {
-            MACRO_CALL_MEMBER(Map::TileMapState_Func::updateBuildingGraphicsLayer, DAT_TileMapState::ptr)(
-                buildingID);
+            MACRO_CALL_MEMBER(Map::TileMapState_Func::updateBuildingGraphicsLayer, DAT_TileMapState::ptr)(buildingID);
             iVar8 = DAT_CurrentBuildingID::instance * 0x32c;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].oldVisualActiveState
                 = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingIsVisuallyActive;

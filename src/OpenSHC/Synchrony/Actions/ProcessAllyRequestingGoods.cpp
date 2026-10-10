@@ -59,17 +59,17 @@ namespace Synchrony {
         } else if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[askedPlayerID] == -1) {
             MACRO_CALL_MEMBER(AI::AICState_Func::playGoodsSentBikFromPlayerToPlayer, DAT_AICState::ptr)(
                 askedPlayerID, askee);
-            MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::processResourceGain,
-                DAT_BuildingsState::ptr)(askee, _resourceType, amount);
-            MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::processResourceLoss,
-                DAT_BuildingsState::ptr)(askedPlayerID, _resourceType, amount, 0);
+            MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::processResourceGain, DAT_BuildingsState::ptr)(
+                askee, _resourceType, amount);
+            MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::processResourceLoss, DAT_BuildingsState::ptr)(
+                askedPlayerID, _resourceType, amount, 0);
             _gold1 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::getSellPrice, DAT_GameState::ptr)(
-                askedPlayerID, (int)((int)(_resourceType)), amount);
+                askedPlayerID, (int)(_resourceType), amount);
             piVar1 = DAT_GameSynchronyState::instance.finalResults.finalGoodsRecieved + askee;
             *piVar1 = *piVar1 + _gold1;
             piVar1 = DAT_GameSynchronyState::instance.finalResults.finalGoodsSent + askedPlayerID;
             _gold2 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::getSellPrice, DAT_GameState::ptr)(
-                askedPlayerID, (int)((int)(_resourceType)), amount);
+                askedPlayerID, (int)(_resourceType), amount);
             *piVar1 = *piVar1 + _gold2;
         } else {
             bVar5 = askedPlayerID == DAT_GameSynchronyState::instance.currentPlayerSlotID;

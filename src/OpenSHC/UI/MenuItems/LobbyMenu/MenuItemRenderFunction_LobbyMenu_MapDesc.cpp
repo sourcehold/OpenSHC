@@ -54,33 +54,28 @@ namespace UI {
                 iVar4 = (DAT_ButtonBackgroundBlendStrength::instance + -0x20) * 0x10;
                 iVar8 = DAT_ButtonH::instance + 0x7a + DAT_ButtonY::instance;
                 iVar1 = DAT_ButtonY::instance + 3;
-                MACRO_CALL_MEMBER(
-                    UI::Rendering::PencilRenderCore_Func::drawBlendedBlackBox, DAT_PencilRenderCore::ptr)(
+                MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawBlendedBlackBox, DAT_PencilRenderCore::ptr)(
                     DAT_ButtonX::instance + -0x6e, iVar1, local_4, iVar8, (iVar4 / 32) + 0x20);
                 if (!DAT_ButtonBackgroundBlendStrength::instance) {
                     local_4 = iVar7 + -0x6f;
-                    MACRO_CALL_MEMBER(
-                        UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(local_4,
-                        iVar2 + 2, iVar6 + 1, iVar2 + 2, (ushort)((int)(COL_VERY_SOFT_YELLOW::instance.shortValue)));
-                    MACRO_CALL_MEMBER(
-                        UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(local_4,
-                        iVar8 + 1, iVar6 + 1, iVar8 + 1, (ushort)((int)(COL_VERY_SOFT_YELLOW::instance.shortValue)));
-                    MACRO_CALL_MEMBER(
-                        UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-                        local_4, iVar1, local_4, iVar8, (ushort)((int)(COL_VERY_SOFT_YELLOW::instance.shortValue)));
-                    MACRO_CALL_MEMBER(
-                        UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-                        iVar6 + 1, iVar1, iVar6 + 1, iVar8, (ushort)((int)(COL_VERY_SOFT_YELLOW::instance.shortValue)));
-                    MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine,
-                        DAT_PencilRenderCore::ptr)(iVar6 + -0x14, iVar1, iVar6 + -0x14, iVar8,
-                        (ushort)((int)(COL_VERY_SOFT_YELLOW::instance.shortValue)));
+                    MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
+                        local_4, iVar2 + 2, iVar6 + 1, iVar2 + 2, (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
+                    MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
+                        local_4, iVar8 + 1, iVar6 + 1, iVar8 + 1, (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
+                    MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
+                        local_4, iVar1, local_4, iVar8, (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
+                    MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
+                        iVar6 + 1, iVar1, iVar6 + 1, iVar8, (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
+                    MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
+                        iVar6 + -0x14, iVar1, iVar6 + -0x14, iVar8,
+                        (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
                     local_4 = iVar6 + -0x14;
-                    MACRO_CALL_MEMBER(
-                        UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(local_4,
-                        iVar2 + 0x17, iVar6, iVar2 + 0x17, (ushort)((int)(COL_VERY_SOFT_YELLOW::instance.shortValue)));
-                    MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine,
-                        DAT_PencilRenderCore::ptr)(local_4, iVar8 + -0x14, iVar6, iVar8 + -0x14,
-                        (ushort)((int)(COL_VERY_SOFT_YELLOW::instance.shortValue)));
+                    MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
+                        local_4, iVar2 + 0x17, iVar6, iVar2 + 0x17,
+                        (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
+                    MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
+                        local_4, iVar8 + -0x14, iVar6, iVar8 + -0x14,
+                        (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
                 }
                 if ((DAT_GameSynchronyState::instance.DAT_MapSelectionTotalNumber)
                     && (DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected != -1)) {
@@ -97,41 +92,39 @@ namespace UI {
                     pcVar5 = MACRO_CALL(Global_Func::GetStringBasedOnHardcodedMaps)(pcVar5, &local_4);
                     iVar6 = (DAT_ButtonBackgroundBlendStrength::instance + -0x20) * 0x20;
                     iVar1 = iVar7 + -100;
-                    MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                        pcVar5, iVar1, (iVar2 - DAT_00b960f4::instance) + -8, Text::TTA_LEFT, 0xc2f0eb, 0x13,
-                        FALSE, (iVar6 / 32) + 0x20);
+                    MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(pcVar5,
+                        iVar1, (iVar2 - DAT_00b960f4::instance) + -8, Text::TTA_LEFT, 0xc2f0eb, 0x13, FALSE,
+                        (iVar6 / 32) + 0x20);
                     iVar6 = (DAT_ButtonBackgroundBlendStrength::instance + -0x20) * 0x20;
-                    MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                        "-", iVar7 + -0x5e, (iVar2 - DAT_00b960f4::instance) + -8, Text::TTA_LEFT, 0xc2f0eb,
-                        0x13, TRUE, (iVar6 / 32) + 0x20);
+                    MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)("-",
+                        iVar7 + -0x5e, (iVar2 - DAT_00b960f4::instance) + -8, Text::TTA_LEFT, 0xc2f0eb, 0x13, TRUE,
+                        (iVar6 / 32) + 0x20);
                     iVar6 = (DAT_ButtonBackgroundBlendStrength::instance + -0x20) * 0x20;
                     if (!DAT_GameCore::instance.savedMapBalance) {
                         iVar8 = 0x19b;
                     } else {
                         iVar8 = 0x19c;
                     }
-                    MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextFromTextGroup,
-                        DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, iVar8, iVar7 + -0x58,
-                        (iVar2 - DAT_00b960f4::instance) + -8, Text::TTA_LEFT, 0xc2f0eb, 0x13, TRUE,
-                        (iVar6 / 32) + 0x20);
+                    MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextFromTextGroup, DAT_TextManagerObject::ptr)(
+                        DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, iVar8, iVar7 + -0x58, (iVar2 - DAT_00b960f4::instance) + -8,
+                        Text::TTA_LEFT, 0xc2f0eb, 0x13, TRUE, (iVar6 / 32) + 0x20);
                     if (DAT_GameCore::instance.mapDescUseStringTable) {
                         if (DAT_GameCore::instance.mapDescUseStringTableIndex) {
                             iVar7 = (DAT_ButtonBackgroundBlendStrength::instance + -0x20) * 0x20;
                             MACRO_CALL_MEMBER(Text::TextManager_Func::renderMultilineTextUnk,
                                 DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_MAP_NAMES,
                                 DAT_GameCore::instance.mapDescUseStringTableIndex, iVar1,
-                                (iVar2 - DAT_00b960f4::instance) + 0xb, (int)((int)(DAT_ButtonW::instance + 0xaa)),
-                                0xc2f0eb, 0x13, (iVar7 / 32) + 0x20);
+                                (iVar2 - DAT_00b960f4::instance) + 0xb, (int)(DAT_ButtonW::instance + 0xaa), 0xc2f0eb,
+                                0x13, (iVar7 / 32) + 0x20);
                         }
                         MACRO_CALL_MEMBER(
                             UI::Rendering::TextureRenderCore_Func::setScreenMenuSurfaceHeightRangeToResolution,
                             DAT_TextureRenderCoreObject::ptr)();
                     }
                     iVar7 = (DAT_ButtonBackgroundBlendStrength::instance + -0x20) * 0x20;
-                    MACRO_CALL_MEMBER(Text::TextManager_Func::renderMultilineText5Unk,
-                        DAT_TextManagerObject::ptr)(DAT_GameCore::instance.mapDescription, iVar1,
-                        (iVar2 - DAT_00b960f4::instance) + 0xb, (int)((int)(DAT_ButtonW::instance + 0xaa)), 0xc2f0eb,
-                        0x13, (iVar7 / 32) + 0x20);
+                    MACRO_CALL_MEMBER(Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
+                        DAT_GameCore::instance.mapDescription, iVar1, (iVar2 - DAT_00b960f4::instance) + 0xb,
+                        (int)(DAT_ButtonW::instance + 0xaa), 0xc2f0eb, 0x13, (iVar7 / 32) + 0x20);
                     MACRO_CALL_MEMBER(
                         UI::Rendering::TextureRenderCore_Func::setScreenMenuSurfaceHeightRangeToResolution,
                         DAT_TextureRenderCoreObject::ptr)();

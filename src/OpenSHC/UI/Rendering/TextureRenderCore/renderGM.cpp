@@ -25,17 +25,16 @@ namespace UI {
             if ((_imageType != IO::Graphics::GIT_InterfaceElement)
                 && (_imageType != IO::Graphics::GIT_CompressedImage)) {
                 if (_imageType == IO::Graphics::GIT_Animation) {
-                    MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderUnitAnimationUnk, this)(
-                        drawX, drawY, (int)((int)(DAT_GMImageHeaders::instance.imh[imageID + iVar1 + -1].width)),
-                        (int)((int)(DAT_GMImageHeaders::instance.imh[imageID + iVar1 + -1].height)),
+                    MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderUnitAnimationUnk, this)(drawX, drawY,
+                        (int)(DAT_GMImageHeaders::instance.imh[imageID + iVar1 + -1].width),
+                        (int)(DAT_GMImageHeaders::instance.imh[imageID + iVar1 + -1].height),
                         (byte*)((int)((
                             DAT_GMImageOffsets::instance[iVar1 + -1 + imageID] + (int)this->gmProcessedImageData))));
                 }
             }
-            MACRO_CALL_MEMBER(
-                UI::Rendering::TextureRenderCore_Func::renderFunctionResponsibleForManyGameObjects, this)(
-                drawX, drawY, (int)((int)(DAT_GMImageHeaders::instance.imh[imageID + iVar1 + -1].width)),
-                (int)((int)(DAT_GMImageHeaders::instance.imh[imageID + iVar1 + -1].height)),
+            MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderFunctionResponsibleForManyGameObjects, this)(
+                drawX, drawY, (int)(DAT_GMImageHeaders::instance.imh[imageID + iVar1 + -1].width),
+                (int)(DAT_GMImageHeaders::instance.imh[imageID + iVar1 + -1].height),
                 (ushort*)((int)(
 
                     (DAT_GMImageOffsets::instance[iVar1 + -1 + imageID] + (int)this->gmProcessedImageData))));

@@ -69,9 +69,9 @@ namespace UI {
                         (uint)DAT_GameSynchronyState::instance.wanIP.S_un.S_un_b.s_b3,
                         (uint)DAT_GameSynchronyState::instance.wanIP.S_un.S_un_b.s_b4);
                 }
-                MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-                    local_68, (int)((int)(DAT_ButtonX::instance)), (int)((int)(DAT_ButtonY::instance + 5)),
-                    Text::TTA_LEFT, 0xccfaff, 0x12, TRUE, 0);
+                MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(local_68,
+                    (int)(DAT_ButtonX::instance), (int)(DAT_ButtonY::instance + 5), Text::TTA_LEFT, 0xccfaff, 0x12,
+                    TRUE, 0);
             };
         }
 

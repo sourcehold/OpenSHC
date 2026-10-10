@@ -38,11 +38,10 @@ namespace Map {
                             == Map::Units::States::US_MELEE_ATTACK) {}
                         bVar2 = this->tribes[param_1].unknownBool02 == 0;
                         BVar1 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::computeLadderClimbPath,
-                            DAT_UnitsState::ptr)(unitID, (uint)((int)(bVar2)), 0, (int)((int)((uint)bVar2)));
+                            DAT_UnitsState::ptr)(unitID, (uint)(bVar2), 0, (int)(bVar2));
                         if (BVar1) {
                             DAT_UnitsState::instance.units[unitID].state.generic
-                                = Map::Units::States::US_DEATH_02
-                                | Map::Units::States::US_STAND_UPUnk;
+                                = Map::Units::States::US_DEATH_02 | Map::Units::States::US_STAND_UPUnk;
                         }
                     }
                 } while (unitSelectionIndex < this->tribes[param_1].size);

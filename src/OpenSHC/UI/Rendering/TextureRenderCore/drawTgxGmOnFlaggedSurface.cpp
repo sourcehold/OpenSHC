@@ -23,14 +23,14 @@ namespace UI {
             _tgxSourcePtr = (ushort*)(DAT_GMImageOffsets::instance[iVar1 + -1 + imageIndexInGm]
                 + (int)this->gmProcessedImageData);
             if (this->gmFileHeaderColorpaletteArray[gmId].ImageType == IO::Graphics::GIT_InterfaceElement) {
-                MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::drawTgxOnFlaggedSurface, this)(xPos,
-                    yPos, (int)((int)(DAT_GMImageHeaders::instance.imh[imageIndexInGm + iVar1 + -1].width)),
-                    (int)((int)(DAT_GMImageHeaders::instance.imh[imageIndexInGm + iVar1 + -1].height)), _tgxSourcePtr);
+                MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::drawTgxOnFlaggedSurface, this)(xPos, yPos,
+                    (int)(DAT_GMImageHeaders::instance.imh[imageIndexInGm + iVar1 + -1].width),
+                    (int)(DAT_GMImageHeaders::instance.imh[imageIndexInGm + iVar1 + -1].height), _tgxSourcePtr);
             }
             if (this->gmFileHeaderColorpaletteArray[gmId].ImageType == IO::Graphics::GIT_CompressedImage) {
-                MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::drawTgxOnFlaggedSurface, this)(xPos,
-                    yPos, (int)((int)(DAT_GMImageHeaders::instance.imh[imageIndexInGm + iVar1 + -1].width)),
-                    (int)((int)(DAT_GMImageHeaders::instance.imh[imageIndexInGm + iVar1 + -1].height)), _tgxSourcePtr);
+                MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::drawTgxOnFlaggedSurface, this)(xPos, yPos,
+                    (int)(DAT_GMImageHeaders::instance.imh[imageIndexInGm + iVar1 + -1].width),
+                    (int)(DAT_GMImageHeaders::instance.imh[imageIndexInGm + iVar1 + -1].height), _tgxSourcePtr);
             }
         }
 

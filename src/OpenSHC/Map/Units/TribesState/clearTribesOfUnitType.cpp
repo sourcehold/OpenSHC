@@ -29,8 +29,8 @@ namespace Map {
                 do {
                     if ((psVar1->owner == param_1) && (psVar1->ifSelectedThenPlayerID)) {
                         if ((short)psVar1->unitType == param_2) {
-                            MACRO_CALL_MEMBER(Map::Units::TribesState_Func::removeUnitFromThisTribeIfInTribe,
-                                this)(unitID, (int)((int)(psVar1->tribeID)));
+                            MACRO_CALL_MEMBER(Map::Units::TribesState_Func::removeUnitFromThisTribeIfInTribe, this)(
+                                unitID, (int)(psVar1->tribeID));
                             psVar1->ifSelectedThenPlayerID = 0;
                             DAT_UnitsState::instance.unitCountOfSelection[param_1]
                                 = DAT_UnitsState::instance.unitCountOfSelection[param_1] + -1;
@@ -48,8 +48,7 @@ namespace Map {
                     if (*psVar2 == -1) {
                         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::setTargetUnitForTribe, this)(tribeID);
                     }
-                    MACRO_CALL_MEMBER(Map::Units::TribesState_Func::setWhetherTribeContainsAnyUnits, this)(
-                        tribeID);
+                    MACRO_CALL_MEMBER(Map::Units::TribesState_Func::setWhetherTribeContainsAnyUnits, this)(tribeID);
                 }
                 tribeID = tribeID + 1;
                 psVar2 = psVar2 + 0x19a;

@@ -18,7 +18,7 @@ namespace UI {
             if (DAT_GMImageHeaders::instance.imh[imageIndex].direction != 0) {
                 MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::transformTgxFromRGB555ToRGB565, this)(
                     (ushort*)((int)this->gmProcessedImageData + DAT_GMImageOffsets::instance[imageIndex] + 0x200),
-                    (int)((int)(DAT_GMImageSizes::instance[imageIndex] + -0x200)));
+                    (int)(DAT_GMImageSizes::instance[imageIndex] + -0x200));
             }
         }
 

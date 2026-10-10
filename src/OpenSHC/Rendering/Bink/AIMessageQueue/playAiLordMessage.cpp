@@ -107,7 +107,7 @@ namespace Rendering {
                     iVar3 = (param_2 - iVar3) + -0x30;
                     MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM,
                         DAT_TextureRenderCoreObject::ptr)(DE::SHCDE::GM_INTERFACE_ICONS2,
-                        (int)((int)(this->currentMessageUnknownValue2_0xd4 + 0x222)), iVar5, iVar3);
+                        (int)(this->currentMessageUnknownValue2_0xd4 + 0x222), iVar5, iVar3);
                     if (!iVar6) {
                         iVar6 = 0x21b;
                     } else {

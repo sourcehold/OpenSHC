@@ -36,8 +36,8 @@ namespace Map {
                     if (x < 400 && y < 400 && *(char*)(y * 400 + 0x21aec98 + x) != '\0'
                         && (iVar1 = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x,
                             (DAT_TileMapState::instance.LogicLayer[iVar1] & 0x50501581U) == 0)) {
-                        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createAnimal, this)(Commands::M_MAPPER_RABBIT,
-                            x, y, (int)((int)((uint)DAT_TileMapState::instance.HeightLayer[iVar1])));
+                        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createAnimal, this)(
+                            Commands::M_MAPPER_RABBIT, x, y, (int)(DAT_TileMapState::instance.HeightLayer[iVar1]));
                         this->unknownX_01 = x;
                         this->unknownY_01 = y;
                     }

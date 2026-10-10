@@ -227,8 +227,8 @@ namespace Map {
                       spawn archer
                      */
                     iVar9 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(iVar8, iVar8,
-                        (int)((int)(DAT_BuildingsState::instance.buildings[iVar9].buildingEntryX * 8)),
-                        (int)((int)(DAT_BuildingsState::instance.buildings[iVar9].buildingEntryY * 8)), 8, unitType);
+                        (int)(DAT_BuildingsState::instance.buildings[iVar9].buildingEntryX * 8),
+                        (int)(DAT_BuildingsState::instance.buildings[iVar9].buildingEntryY * 8), 8, unitType);
                     if (iVar9) {
                         DAT_UnitsState::instance.units[iVar9].aiUnitBehaviourType = 0x32;
                         DAT_UnitsState::instance.units[iVar9].goToRallyPoint = 0;
@@ -269,7 +269,7 @@ namespace Map {
                                                                       calculateCanPlayerUnitsNavigateToAreaFromArea,
                                             DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[iVar9].owner,
                                             (dword)_unitPathConnection, (dword)_targetMacroTile,
-                                            (int)((int)(DAT_UnitsState::instance.units[iVar9].unitCanClimb))),
+                                            (int)(DAT_UnitsState::instance.units[iVar9].unitCanClimb)),
                                         iVar7 != 0)) {
                                     if ((int)local_18 < 0) {
                                         local_18 = pcVar1;
@@ -288,7 +288,7 @@ namespace Map {
                         local_18 = pcVar1;
                         if (-1 < (int)local_18) {
                             MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::setDestinationForUnit, DAT_UnitsState::ptr)(
-                                iVar9, (uint)((int)(local_18)), local_14, 0);
+                                iVar9, (uint)(local_18), local_14, 0);
                         }
                         iVar8 = DAT_CurrentBuildingID::instance;
                         iVar6 = 0;
@@ -514,12 +514,10 @@ namespace Map {
                         iVar9 = (int)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;
                         _randomUnitID = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
                             iVar9, iVar9,
-                            (int)((int)(DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
-                                            .buildingEntryX
-                                * 8)),
-                            (int)((int)(DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
-                                            .buildingEntryY
-                                * 8)),
+                            (int)(DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingEntryX
+                                * 8),
+                            (int)(DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingEntryY
+                                * 8),
                             8, (UnitType)((int)(_randomUnitType)));
                         if (!_randomUnitID) {}
                         if (_randomUnitType == Map::Units::UT_S_CATAPULT) {
@@ -551,12 +549,12 @@ namespace Map {
                              */
                             _engineerID = MACRO_CALL_MEMBER(
                                 Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(iVar9, iVar9,
-                                (int)((int)(DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
-                                                .buildingEntryX
-                                    * 8)),
-                                (int)((int)(DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
-                                                .buildingEntryY
-                                    * 8)),
+                                (int)(DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
+                                          .buildingEntryX
+                                    * 8),
+                                (int)(DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
+                                          .buildingEntryY
+                                    * 8),
                                 8, Map::Units::UT_E_ENGINEER);
                             if (_engineerID) {
                                 DAT_UnitsState::instance.units[_engineerID].targetingType
@@ -572,10 +570,8 @@ namespace Map {
                     }
                     MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(
                         _tribeID,
-                        (uint)((int)((int)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
-                                .buildingEntryX)),
-                        (uint)((int)((int)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
-                                .buildingEntryY)),
+                        (uint)(DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingEntryX),
+                        (uint)(DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingEntryY),
                         0, 0, Map::Units::Instructions::UMSE_0);
                     if ((DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].outpostRelatedUnk05
                             <= DAT_TribesState::instance.tribes[_tribeID].size)

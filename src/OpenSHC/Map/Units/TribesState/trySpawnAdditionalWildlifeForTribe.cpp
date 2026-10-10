@@ -51,8 +51,7 @@ namespace Map {
                     if (iVar6 < param_3) {
                         if (param_4 == 0x2f) {
                             MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createAnimal, this)(
-                                Commands::M_MAPPER_CAMEL, (uint)((int)((int)sVar2)), (uint)((int)((int)sVar3)),
-                                (int)((int)(sVar4)));
+                                Commands::M_MAPPER_CAMEL, (uint)(sVar2), (uint)(sVar3), (int)(sVar4));
                         }
                         return (undefined4)(1);
                     }

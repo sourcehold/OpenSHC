@@ -62,7 +62,7 @@ namespace Map {
             == '\0') {
             MACRO_CALL_MEMBER(Map::TileMapState_Func::updateBuildingPlacementRotationPreview, DAT_TileMapState::ptr)(
                 (int)(short)DAT_BuildingsState::instance.buildings[buildingID_00].x,
-                (int)((int)((short)DAT_BuildingsState::instance.buildings[buildingID_00].y)));
+                (int)((short)DAT_BuildingsState::instance.buildings[buildingID_00].y));
             buildingID_00 = DAT_CurrentBuildingID::instance;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingVariation
                 = (short)DAT_TileMapState::instance.uiBuildingRotation;
@@ -77,7 +77,7 @@ namespace Map {
                         sVar3 == 8 || (sVar3 == 0x3a))) {
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                         (int)(short)DAT_BuildingsState::instance.buildings[buildingID_00].x,
-                        (int)((int)((short)DAT_BuildingsState::instance.buildings[buildingID_00].y)),
+                        (int)((short)DAT_BuildingsState::instance.buildings[buildingID_00].y),
                         DE::SHCDE::FX_FLETCH_LONG);
                     buildingID_00 = DAT_CurrentBuildingID::instance;
                 }

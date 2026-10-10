@@ -36,16 +36,17 @@ namespace Map {
             DAT_CurrentBuildingID::instance);
         iVar4 = DAT_CurrentBuildingID::instance;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderBlendStrength = 0;
-        MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updateBuildingSignpostCounter,
-            DAT_BuildingsState::ptr)(iVar4, 1);
+        MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updateBuildingSignpostCounter, DAT_BuildingsState::ptr)(
+            iVar4, 1);
         DAT_BuildingsState::instance.buildings[iVar4].renderAnimation
             = (ushort)(0 < DAT_GameState::instance.playerDataArray[sVar3].fearFactorLevel);
         DAT_BuildingsState::instance.buildings[iVar4].spriteOffetX = -0x23;
         DAT_BuildingsState::instance.buildings[iVar4].spriteOffetY = -0x4f;
         if (DAT_GameState::instance.playerDataArray[sVar3].popularity
             < (int)((DAT_BuildingsState::instance.buildings[iVar4].fireRelatedRNG1 & 0xffU) + 5000)) {
-            iVar5 = (char)DAT_BuildingDefinedData::instance
-                        .GoodBuildingMaypoleAnimationFrames2[DAT_BuildingsState::instance.buildings[iVar4].animationIndex]
+            iVar5
+                = (char)DAT_BuildingDefinedData::instance
+                      .GoodBuildingMaypoleAnimationFrames2[DAT_BuildingsState::instance.buildings[iVar4].animationIndex]
                 + 0x20;
             DAT_BuildingsState::instance.buildings[iVar4].animationFrame = iVar5;
             if (iVar5 < 0x21) {
@@ -53,8 +54,8 @@ namespace Map {
                 DAT_BuildingsState::instance.buildings[iVar4].animationFrame = 0x21;
             }
         } else {
-            bVar2 = DAT_BuildingDefinedData::instance
-                        .GoodBuildingMaypoleAnimationFrames1[DAT_BuildingsState::instance.buildings[iVar4].animationIndex];
+            bVar2 = DAT_BuildingDefinedData::instance.GoodBuildingMaypoleAnimationFrames1
+                        [DAT_BuildingsState::instance.buildings[iVar4].animationIndex];
             DAT_BuildingsState::instance.buildings[iVar4].animationFrame = (int)(char)bVar2;
             if ((char)bVar2 < 1) {
                 piVar1 = &DAT_BuildingsState::instance.buildings[iVar4].animationCycleCount;
@@ -64,8 +65,7 @@ namespace Map {
                 if (!(DAT_BuildingsState::instance.buildings[iVar4].animationCycleCount & 7)) {
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                         (int)(short)DAT_BuildingsState::instance.buildings[iVar4].x,
-                        (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar4].y)),
-                        DE::SHCDE::FX_MAYPOLE);
+                        (int)((short)DAT_BuildingsState::instance.buildings[iVar4].y), DE::SHCDE::FX_MAYPOLE);
                 }
             }
         }

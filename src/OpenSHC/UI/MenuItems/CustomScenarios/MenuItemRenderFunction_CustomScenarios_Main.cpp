@@ -77,13 +77,12 @@ namespace UI {
                     if (4 < param_1) {}
                     if (DAT_ButtonCurrentlyInteracting::instance) {
                         MACRO_CALL_MEMBER(Text::TextManager_Func::renderText, DAT_TextManagerObject::ptr)(
-                            DE::SHCDE::TEXT_MAP_TITLES, param_1 + -1,
-                            (int)((int)(DAT_ButtonX::instance + 0x1a)), (int)((int)(DAT_ButtonY::instance + 0x13)),
-                            Text::TTA_LEFT, 0xc2f0eb, 0, 0x11, FALSE);
+                            DE::SHCDE::TEXT_MAP_TITLES, param_1 + -1, (int)(DAT_ButtonX::instance + 0x1a),
+                            (int)(DAT_ButtonY::instance + 0x13), Text::TTA_LEFT, 0xc2f0eb, 0, 0x11, FALSE);
                     }
                     MACRO_CALL_MEMBER(Text::TextManager_Func::renderText, DAT_TextManagerObject::ptr)(
-                        DE::SHCDE::TEXT_MAP_TITLES, param_1 + -1, (int)((int)(DAT_ButtonX::instance + 0x1a)),
-                        (int)((int)(DAT_ButtonY::instance + 0x13)), Text::TTA_LEFT, 0xc2f0eb, 0, 0x11, FALSE);
+                        DE::SHCDE::TEXT_MAP_TITLES, param_1 + -1, (int)(DAT_ButtonX::instance + 0x1a),
+                        (int)(DAT_ButtonY::instance + 0x13), Text::TTA_LEFT, 0xc2f0eb, 0, 0x11, FALSE);
                 }
                 numInGroup = 1;
             }

@@ -24,15 +24,14 @@ namespace UI {
             int maximum;
             int iVar1;
             iVar1 = 0;
-            MACRO_CALL_MEMBER(
-                Map::MapPropertiesState_Func::sumInvasionEventUnitCount, DAT_MapPropertiesState::ptr)();
+            MACRO_CALL_MEMBER(Map::MapPropertiesState_Func::sumInvasionEventUnitCount, DAT_MapPropertiesState::ptr)();
             value = DAT_MapPropertiesState::instance.invasionEventContent.unitCountsPerUnitType[param_1];
             maximum = (value - DAT_MapPropertiesState::instance.DAT_InvasionEventItemUnitCountSum) + 500;
             if (DAT_MissionAestheticsDefinedData::instance.InvasionUnitLimits[param_1] < maximum) {
                 maximum = DAT_MissionAestheticsDefinedData::instance.InvasionUnitLimits[param_1];
             }
-            MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::setSliderParameters,
-                DAT_MenuModalComposition2::ptr)(0, maximum, value,
+            MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::setSliderParameters, DAT_MenuModalComposition2::ptr)(0,
+                maximum, value,
                 (undefined*)((int)(
 
                     (DAT_MapPropertiesState::instance.invasionEventContent.unitCountsPerUnitType + param_1))),
@@ -112,9 +111,9 @@ namespace UI {
             }
             DAT_MenuModalComposition2::instance.textGroup = 199;
             DAT_MenuModalComposition2::instance.textIndex = iVar1;
-            MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::setExtraActiveModalDialog,
-                DAT_MenuModalComposition2::ptr)(UI::Enums::MMT_OVERLAY_SLIDER,
-                (int)((int)(DAT_ButtonX::instance + -0x3e)), (int)((int)(DAT_ButtonY::instance + 0x19)));
+            MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::setExtraActiveModalDialog, DAT_MenuModalComposition2::ptr)(
+                UI::Enums::MMT_OVERLAY_SLIDER, (int)(DAT_ButtonX::instance + -0x3e),
+                (int)(DAT_ButtonY::instance + 0x19));
             return;
         }
 

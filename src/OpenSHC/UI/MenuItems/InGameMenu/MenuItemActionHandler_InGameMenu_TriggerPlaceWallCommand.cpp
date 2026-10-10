@@ -77,20 +77,16 @@ namespace UI {
                     = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::getWallTilesThatCanBeBuilt, DAT_GameState::ptr)(
                         DAT_GameSynchronyState::instance.currentPlayerSlotID, 4);
                 MACRO_CALL_MEMBER(Map::TileMapState_Func::validateWallBuildPath, DAT_TileMapState::ptr)(
-                    DAT_GameSynchronyState::instance.currentPlayerSlotID,
-                    (uint)((int)(DAT_TileMapState::instance.dragStartX)),
-                    (uint)((int)(DAT_TileMapState::instance.dragStartY)),
-                    (uint)((int)(DAT_TileMapState::instance.dragEndX)),
-                    (uint)((int)(DAT_TileMapState::instance.dragEndY)),
+                    DAT_GameSynchronyState::instance.currentPlayerSlotID, (uint)(DAT_TileMapState::instance.dragStartX),
+                    (uint)(DAT_TileMapState::instance.dragStartY), (uint)(DAT_TileMapState::instance.dragEndX),
+                    (uint)(DAT_TileMapState::instance.dragEndY),
                     (undefined4)((int)(DAT_TileMapState::instance.currentMapperCommand & 0xffff)));
                 if (!DAT_MouseState::instance.draggingStopped) {
                     DAT_TileMapState::instance.wallDragButtonUp = (uint)(!DAT_MouseState::instance.leftClickState);
                     MACRO_CALL_MEMBER(Map::TileMapState_Func::renderWallDragPreview, DAT_TileMapState::ptr)(
                         DAT_GameSynchronyState::instance.currentPlayerSlotID,
-                        (uint)((int)(DAT_TileMapState::instance.dragStartX)),
-                        (uint)((int)(DAT_TileMapState::instance.dragStartY)),
-                        (uint)((int)(DAT_TileMapState::instance.dragEndX)),
-                        (uint)((int)(DAT_TileMapState::instance.dragEndY)),
+                        (uint)(DAT_TileMapState::instance.dragStartX), (uint)(DAT_TileMapState::instance.dragStartY),
+                        (uint)(DAT_TileMapState::instance.dragEndX), (uint)(DAT_TileMapState::instance.dragEndY),
                         (undefined4)((int)(DAT_TileMapState::instance.currentMapperCommand & 0xffff)));
                 }
                 if (!DAT_TileMapState::instance.illegalBuild) {
@@ -107,8 +103,8 @@ namespace UI {
                 } else if (DAT_TileMapState::instance.buildingPlacementFailReason
                     != Map::Buildings::BFRE_DEFAULT_CANT_PLACE_THAT_THERE) {
                     MACRO_CALL_MEMBER(UI::BottomLeftTextDisplayState_Func::setBottomLeftTextDisplayText,
-                        DAT_BottomLeftTextDisplayState::ptr)(1, 0x4d,
-                        (int)((int)(DAT_TileMapState::instance.buildingPlacementFailReason)), _noBlLookup, 100, 6000);
+                        DAT_BottomLeftTextDisplayState::ptr)(
+                        1, 0x4d, (int)(DAT_TileMapState::instance.buildingPlacementFailReason), _noBlLookup, 100, 6000);
                 }
             }
         }

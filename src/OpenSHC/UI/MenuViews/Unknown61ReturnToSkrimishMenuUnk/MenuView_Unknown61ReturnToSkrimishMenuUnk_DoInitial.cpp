@@ -18,9 +18,9 @@ namespace UI {
         void Unknown61ReturnToSkrimishMenuUnk::MenuView_Unknown61ReturnToSkrimishMenuUnk_DoInitial()
         {
             Menu* pMVar1;
-            MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(0,
-                0, DAT_WindowAndDirectDraw::instance.resolutionX, DAT_WindowAndDirectDraw::instance.resolutionY,
-                (ushort)((int)(COL_BLACK::instance.shortValue)));
+            MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(0, 0,
+                DAT_WindowAndDirectDraw::instance.resolutionX, DAT_WindowAndDirectDraw::instance.resolutionY,
+                (ushort)(COL_BLACK::instance.shortValue));
             MACRO_CALL(UI::Rendering_Func::DrawOuterMenuBorder)();
             DAT_MenuHandlerState::instance.y = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
             DAT_MenuHandlerState::instance.x = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
@@ -28,8 +28,8 @@ namespace UI {
             (DAT_MenuHandlerState::instance.currentMenu)->yPosition
                 = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
             pMVar1->xPosition = DAT_MenuHandlerState::instance.x;
-            MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::drawGfxOnFlaggedSurface,
-                DAT_TextureRenderCoreObject::ptr)(0,
+            MACRO_CALL_MEMBER(
+                UI::Rendering::TextureRenderCore_Func::drawGfxOnFlaggedSurface, DAT_TextureRenderCoreObject::ptr)(0,
                 (DAT_WindowAndDirectDraw::instance.resolutionX
                     - DAT_TextureRenderCoreObject::instance.loadedGfxArray[0].width)
                     / 2,

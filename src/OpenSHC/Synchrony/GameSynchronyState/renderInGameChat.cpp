@@ -82,9 +82,9 @@ namespace Synchrony {
                     MACRO_CALL_MEMBER(Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
                         this->DAT_ChatMessageSubjectPlayerNameArray[this->chatMessageRenderIndex], param_1, param_2,
                         Text::TTA_LEFT,
-                        (uint)((int)(DAT_RenderingDefinedData::instance
+                        (uint)(DAT_RenderingDefinedData::instance
                                 .ColorArray[DAT_BlendingDefinedData::instance.PlayerSlotUnitColor
-                                        [this->DAT_ChatEventArray[this->chatMessageRenderIndex].subjectPlayer]])),
+                                        [this->DAT_ChatEventArray[this->chatMessageRenderIndex].subjectPlayer]]),
                         0, 0x13, FALSE, 0);
                     iVar3 = param_1;
                     if ((((!_lordID)
@@ -119,8 +119,8 @@ namespace Synchrony {
                             Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
                             this->DAT_ChatMessageObjectPlayerNameArray[this->chatMessageRenderIndex], iVar3 + 0xc,
                             param_2, Text::TTA_LEFT,
-                            (uint)((int)(DAT_RenderingDefinedData::instance
-                                    .ColorArray[DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[iVar5]])),
+                            (uint)(DAT_RenderingDefinedData::instance
+                                    .ColorArray[DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[iVar5]]),
                             0, 0x13, TRUE, 0);
                     }
                 } else {

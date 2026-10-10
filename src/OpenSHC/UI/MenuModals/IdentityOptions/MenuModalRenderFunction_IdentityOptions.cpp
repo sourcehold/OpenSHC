@@ -43,8 +43,8 @@ namespace UI {
             /*
               added by script: "Set-up Identity"
              */
-            MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner,
-                DAT_PencilRenderCore::ptr)(0x4a, 0x2d, x, y, width, height);
+            MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner, DAT_PencilRenderCore::ptr)(
+                0x4a, 0x2d, x, y, width, height);
             blendStrength = 0;
             iVar8 = 0x12;
             uVar7 = 0xccfaff;
@@ -79,15 +79,13 @@ namespace UI {
             }
             DAT_RenderedUnitOwner::instance = 1;
             if (iVar3 == 100) {
-                MACRO_CALL_MEMBER(
-                    UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                    DE::SHCDE::GM_BODY_LORD, (int)((int)(uVar4 * 8 + 0x83)), x + 0x73, y + 0x4b);
+                MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
+                    DE::SHCDE::GM_BODY_LORD, (int)(uVar4 * 8 + 0x83), x + 0x73, y + 0x4b);
                 iVar3 = DAT_CurrentlyRenderedSpriteID::instance;
             }
             if (iVar3 == 0xcd) {
-                MACRO_CALL_MEMBER(
-                    UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                    DE::SHCDE::GM_BODY_ARABIC_LORD, (int)((int)(uVar4 * 8 + 5)), x + 0x78, y + 0x4b);
+                MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
+                    DE::SHCDE::GM_BODY_ARABIC_LORD, (int)(uVar4 * 8 + 5), x + 0x78, y + 0x4b);
             }
         }
 

@@ -22,12 +22,12 @@ namespace UI {
         void Credits::MenuView_Credits_DoInitial()
         {
             Menu* pMVar1;
-            MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(0,
-                0, DAT_WindowAndDirectDraw::instance.resolutionX, DAT_WindowAndDirectDraw::instance.resolutionY,
-                (ushort)((int)(COL_BLACK::instance.shortValue)));
+            MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(0, 0,
+                DAT_WindowAndDirectDraw::instance.resolutionX, DAT_WindowAndDirectDraw::instance.resolutionY,
+                (ushort)(COL_BLACK::instance.shortValue));
             MACRO_CALL(UI::Rendering_Func::DrawOuterMenuBorder)();
-            MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::drawGfxOnFlaggedSurface,
-                DAT_TextureRenderCoreObject::ptr)(0,
+            MACRO_CALL_MEMBER(
+                UI::Rendering::TextureRenderCore_Func::drawGfxOnFlaggedSurface, DAT_TextureRenderCoreObject::ptr)(0,
                 (DAT_WindowAndDirectDraw::instance.resolutionX
                     - DAT_TextureRenderCoreObject::instance.loadedGfxArray[0].width)
                     / 2,

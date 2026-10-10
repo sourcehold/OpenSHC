@@ -54,7 +54,7 @@ namespace Synchrony {
                             return _currStone;
                         }
                         MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::processResourceLoss,
-                            DAT_BuildingsState::ptr)(playerID, Game::Resources::RT_STONE, (int)((int)(_currStone)), 0);
+                            DAT_BuildingsState::ptr)(playerID, Game::Resources::RT_STONE, (int)(_currStone), 0);
                         psVar1 = &DAT_UnitsState::instance.units[_catapultID].stoneAmmunition;
                         *psVar1 = *psVar1 + (short)_currStone * 2;
                         return &DAT_UnitsState::instance.units[_catapultID].stoneAmmunition;

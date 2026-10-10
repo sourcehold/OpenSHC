@@ -32,8 +32,8 @@ namespace UI {
                 if (!BVar1) {
                     DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = BVar1;
                     MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawScrollbar, DAT_PencilRenderCore::ptr)(
-                        DAT_ButtonX::instance, (int)((int)(DAT_ButtonY::instance)), (int)((int)(DAT_ButtonH::instance)),
-                        thumbYPos, isDragged, thumbHeight, (int)((int)(DAT_ButtonBackgroundBlendStrength::instance)));
+                        DAT_ButtonX::instance, (int)(DAT_ButtonY::instance), (int)(DAT_ButtonH::instance), thumbYPos,
+                        isDragged, thumbHeight, (int)(DAT_ButtonBackgroundBlendStrength::instance));
                 }
             }
         }

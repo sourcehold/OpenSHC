@@ -56,8 +56,7 @@ namespace Map {
                 }
             } else {
                 MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::calculatePathKeepAndWallsGatesNotAllowed,
-                    DAT_PathFindingState::ptr)(
-                    x, (int)((int)(DAT_UnitsState::instance.units[sVar1].y)), -1, -1, 100000);
+                    DAT_PathFindingState::ptr)(x, (int)(DAT_UnitsState::instance.units[sVar1].y), -1, -1, 100000);
             }
             if (DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile1 != 0) {
                 _p = &DAT_PathFindingState::instance.searchQueue;

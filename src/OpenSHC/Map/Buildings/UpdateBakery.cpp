@@ -57,7 +57,7 @@ namespace Map {
             == '\0') {
             MACRO_CALL_MEMBER(Map::TileMapState_Func::updateBuildingPlacementRotationPreview, DAT_TileMapState::ptr)(
                 (int)(short)DAT_BuildingsState::instance.buildings[iVar8].x,
-                (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar8].y)));
+                (int)((short)DAT_BuildingsState::instance.buildings[iVar8].y));
             iVar8 = DAT_CurrentBuildingID::instance;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingVariation
                 = (short)DAT_TileMapState::instance.uiBuildingRotation;
@@ -77,14 +77,14 @@ namespace Map {
                     || sVar5 == 0x12f || sVar5 == 0x17c) {
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                         (int)(short)DAT_BuildingsState::instance.buildings[iVar8].x,
-                        (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar8].y)), DE::SHCDE::FX_BAKE2);
+                        (int)((short)DAT_BuildingsState::instance.buildings[iVar8].y), DE::SHCDE::FX_BAKE2);
                     iVar8 = DAT_CurrentBuildingID::instance;
                 }
                 sVar5 = DAT_BuildingsState::instance.buildings[iVar8].animationIndex;
                 if (sVar5 == 0x23 || sVar5 == 0x81 || sVar5 == 0xdf || sVar5 == 0x13d) {
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                         (int)(short)DAT_BuildingsState::instance.buildings[iVar8].x,
-                        (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar8].y)), DE::SHCDE::FX_BAKE);
+                        (int)((short)DAT_BuildingsState::instance.buildings[iVar8].y), DE::SHCDE::FX_BAKE);
                     iVar8 = DAT_CurrentBuildingID::instance;
                 }
             }

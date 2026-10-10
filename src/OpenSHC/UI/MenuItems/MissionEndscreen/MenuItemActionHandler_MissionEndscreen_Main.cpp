@@ -29,8 +29,7 @@ namespace UI {
                     if ((char)INT_00eb0e44::instance == '\0') {
                         if (DAT_00ec082c::instance < 2) {
                             DAT_00ec082c::instance = 1;
-                            DAT_GameCore::instance.activeMenuTab.tabType
-                                = UI::Enums::BASMTT_BARRACKS_OR_MPMENU_MODEM;
+                            DAT_GameCore::instance.activeMenuTab.tabType = UI::Enums::BASMTT_BARRACKS_OR_MPMENU_MODEM;
                         }
                         DAT_00ec082c::instance = 3;
                         DAT_GameCore::instance.activeMenuTab.tabType = UI::Enums::BASMTT_INN_OR_MPMMENU_UNK;
@@ -59,9 +58,9 @@ namespace UI {
                     if ((char)INT_00eb0e44::instance == '\0') {
                         INT_00ed279c::instance = 1;
                     }
-                    MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawColorBox,
-                        DAT_PencilRenderCore::ptr)(0, 0, DAT_WindowAndDirectDraw::instance.resolutionX,
-                        DAT_WindowAndDirectDraw::instance.resolutionY, (ushort)((int)(COL_BLACK::instance.shortValue)));
+                    MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(0,
+                        0, DAT_WindowAndDirectDraw::instance.resolutionX, DAT_WindowAndDirectDraw::instance.resolutionY,
+                        (ushort)(COL_BLACK::instance.shortValue));
                     *(char*)&INT_00eb0e44::instance = 0;
                 }
             }

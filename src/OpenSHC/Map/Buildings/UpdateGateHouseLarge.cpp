@@ -35,8 +35,8 @@ namespace Map {
         MACRO_CALL_MEMBER(Game::GameStateStructures_Func::addBuildingInRegistry, DAT_GameState::ptr)(
             DAT_CurrentBuildingID::instance);
         local_14 = (int)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingVariation;
-        MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updateGateDrawBridgeOpenCloseLogic,
-            DAT_BuildingsState::ptr)();
+        MACRO_CALL_MEMBER(
+            Map::Buildings::BuildingsState_Func::updateGateDrawBridgeOpenCloseLogic, DAT_BuildingsState::ptr)();
         iVar2 = DAT_CurrentBuildingID::instance;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].someX
             = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x + 4;
@@ -136,8 +136,7 @@ namespace Map {
                     if (DAT_BuildingsState::instance.buildings[iVar2].animationIndex == 1) {
                         MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                             (int)(short)DAT_BuildingsState::instance.buildings[iVar2].x,
-                            (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar2].y)),
-                            DE::SHCDE::FX_PC_DROP);
+                            (int)((short)DAT_BuildingsState::instance.buildings[iVar2].y), DE::SHCDE::FX_PC_DROP);
                     }
                     if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex
                         == 0x14) {
@@ -160,8 +159,7 @@ namespace Map {
                         = (char)bVar1 + 6;
                 }
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].pathLinkageRelated2 = 2;
-                MACRO_CALL_MEMBER(
-                    Map::Navigation::PathFindingState_Func::updatePathLinkageTileMapRelatedToGates,
+                MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::updatePathLinkageTileMapRelatedToGates,
                     DAT_PathFindingState::ptr)(iVar2);
                 if (local_14 != 0x50) {
                     DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraOverlayImage2 = 6;
@@ -173,16 +171,14 @@ namespace Map {
                     && (DAT_BuildingsState::instance.buildings[iVar2].animationIndex == 1)) {
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                         (int)(short)DAT_BuildingsState::instance.buildings[iVar2].x,
-                        (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar2].y)),
-                        DE::SHCDE::FX_PC_LIFT);
+                        (int)((short)DAT_BuildingsState::instance.buildings[iVar2].y), DE::SHCDE::FX_PC_LIFT);
                 }
                 iVar2 = DAT_CurrentBuildingID::instance;
                 bVar1 = DAT_BuildingDefinedData::instance.GateHouseLargeAnimationFrames
                             [DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex];
                 if ((char)bVar1 < '\x01') {
                     DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].pathLinkageRelated2 = 0;
-                    MACRO_CALL_MEMBER(
-                        Map::Navigation::PathFindingState_Func::updatePathLinkageTileMapRelatedToGates,
+                    MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::updatePathLinkageTileMapRelatedToGates,
                         DAT_PathFindingState::ptr)(iVar2);
                 }
                 if (local_14 == 0x50) {

@@ -256,22 +256,21 @@ namespace UI {
                         DAT_TileMapState::instance.currentMapperCommand, &local_4, (int*)&local_8);
                     MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::processResourceLoss,
                         DAT_BuildingsState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID,
-                        Game::Resources::RT_GOLD, (int)((int)(local_8)), 0);
+                        Game::Resources::RT_GOLD, (int)(local_8), 0);
                 }
                 if (iVar2 < 0) {
                     MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
                         DAT_GameSynchronyState::instance.currentPlayerSlotID,
-                        (int)((int)(DAT_GameSynchronyState::instance.currentPlayerSlotID)),
-                        (int)((int)(DAT_TileMapState::instance.DAT_ClickedTileX * 8)),
-                        (int)((int)(DAT_TileMapState::instance.DAT_ClickedTileY * 8)),
-                        (int)((int)((uint)DAT_TileMapState::instance.HeightLayer[_tile])), _unitType);
+                        (int)(DAT_GameSynchronyState::instance.currentPlayerSlotID),
+                        (int)(DAT_TileMapState::instance.DAT_ClickedTileX * 8),
+                        (int)(DAT_TileMapState::instance.DAT_ClickedTileY * 8),
+                        (int)(DAT_TileMapState::instance.HeightLayer[_tile]), _unitType);
                 } else {
-                    tribeID
-                        = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::spawnUnitsIntoNewTribe, DAT_TribesState::ptr)(
-                            0xffffffff, iVar2, (int)((int)(DAT_TileMapState::instance.DAT_ClickedTileX)),
-                            (int)((int)(DAT_TileMapState::instance.DAT_ClickedTileY)),
-                            (int)((int)(DAT_GameSynchronyState::instance.currentPlayerSlotID)), _unitType,
-                            ((UnitType)0), (int)((int)(DAT_TileMapState::instance.unitPlacementCount)), 0);
+                    tribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::spawnUnitsIntoNewTribe,
+                        DAT_TribesState::ptr)(0xffffffff, iVar2, (int)(DAT_TileMapState::instance.DAT_ClickedTileX),
+                        (int)(DAT_TileMapState::instance.DAT_ClickedTileY),
+                        (int)(DAT_GameSynchronyState::instance.currentPlayerSlotID), _unitType, ((UnitType)0),
+                        (int)(DAT_TileMapState::instance.unitPlacementCount), 0);
                     bVar4 = DAT_TileMapState::instance.currentMapperCommand == Commands::M_MAPPER_PEOPLE_ENGINEERS_POTS;
                     DAT_TribesState::instance.tribes[tribeID].tribeBehaviorType = Map::Units::STBT_1;
                     DAT_TribesState::instance.tribes[tribeID].initialMoveOrderGiven = 1;

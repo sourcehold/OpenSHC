@@ -1,5 +1,3 @@
-#include <fcntl.h>
-
 #include "../TextManager.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
@@ -14,6 +12,8 @@
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_WideCharMultiByteState.hpp"
+
+#include <fcntl.h>
 
 namespace OpenSHC {
 namespace Text {
@@ -36,16 +36,13 @@ namespace Text {
         this->field6_0x18 = 0;
         this->textSurfaceTarget = Rendering::Enums::RT_SCREEN_MENU;
         this->field27_0x1348 = 0;
-        _fileDescriptor
-            = MACRO_CALL(OS_Func::_ucrt_open)("cr.tex", _O_BINARY, 0);
+        _fileDescriptor = MACRO_CALL(OS_Func::_ucrt_open)("cr.tex", _O_BINARY, 0);
         if (_fileDescriptor != -1) {
-            MACRO_CALL(OS_Func::_ucrt_read)(
-                _fileDescriptor, (void*)((int)(this->textOffsets)), (size_t)((int)(1040)));
+            MACRO_CALL(OS_Func::_ucrt_read)(_fileDescriptor, (void*)((int)(this->textOffsets)), (size_t)((int)(1040)));
             _lpWideCharStr = (WCHAR*)MACRO_CALL(OS_Func::_malloc)(702000);
-            MACRO_CALL(OS_Func::_ucrt_read)(
-                _fileDescriptor, (void*)((int)(_lpWideCharStr)), (size_t)((int)(702000)));
+            MACRO_CALL(OS_Func::_ucrt_read)(_fileDescriptor, (void*)((int)(_lpWideCharStr)), (size_t)((int)(702000)));
             MACRO_CALL_MEMBER(Util::WideCharMultiByteState_Func::wideCharToMultiByteWithSize,
-                DAT_WideCharMultiByteState::ptr)(this->textStart, _lpWideCharStr, (int)((int)(351000)));
+                DAT_WideCharMultiByteState::ptr)(this->textStart, _lpWideCharStr, (int)(351000));
             this->alternativeCodePageUsedUnk = FALSE;
             this->gameLanguage = Text::GL_ENGLISH;
             /*
@@ -58,50 +55,46 @@ namespace Text {
                 this->codePage = WindowsHelper::Enums::CP_WINDOWS_1250;
                 this->alternativeCodePageUsedUnk = TRUE;
                 MACRO_CALL_MEMBER(Util::WideCharMultiByteState_Func::wideCharToMultiByteWithSize,
-                    DAT_WideCharMultiByteState::ptr)(this->textStart, _lpWideCharStr, (int)((int)(351000)));
+                    DAT_WideCharMultiByteState::ptr)(this->textStart, _lpWideCharStr, (int)(351000));
                 this->gameLanguage = Text::GL_POLISH;
             } else {
                 _langStr = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset, this)(
                     DE::SHCDE::TEXT_LANGUAGE, 0);
-                _languageCompareResult
-                    = MACRO_CALL(OS_Func::__stricmp)("english", (char const*)((int)(_langStr)));
+                _languageCompareResult = MACRO_CALL(OS_Func::__stricmp)("english", (char const*)((int)(_langStr)));
                 if (!_languageCompareResult) {
                     this->gameLanguage = Text::GL_ENGLISH;
                 } else {
                     _langStr = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset, this)(
                         DE::SHCDE::TEXT_LANGUAGE, 0);
-                    _languageCompareResult
-                        = MACRO_CALL(OS_Func::__stricmp)("american", (char const*)((int)(_langStr)));
+                    _languageCompareResult = MACRO_CALL(OS_Func::__stricmp)("american", (char const*)((int)(_langStr)));
                     if (!_languageCompareResult) {
                         this->gameLanguage = Text::GL_AMERICAN;
                     } else {
-                        _langStr = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            this)(DE::SHCDE::TEXT_LANGUAGE, 0);
+                        _langStr = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset, this)(
+                            DE::SHCDE::TEXT_LANGUAGE, 0);
                         _languageCompareResult
                             = MACRO_CALL(OS_Func::__stricmp)("german", (char const*)((int)(_langStr)));
                         if (!_languageCompareResult) {
                             this->gameLanguage = Text::GL_GERMAN;
                         } else {
-                            _langStr = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                                this)(DE::SHCDE::TEXT_LANGUAGE, 0);
+                            _langStr = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset, this)(
+                                DE::SHCDE::TEXT_LANGUAGE, 0);
                             _languageCompareResult
                                 = MACRO_CALL(OS_Func::__stricmp)("french", (char const*)((int)(_langStr)));
                             if (!_languageCompareResult) {
                                 this->gameLanguage = Text::GL_FRENCH;
                             } else {
-                                _langStr
-                                    = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                                        this)(DE::SHCDE::TEXT_LANGUAGE, 0);
-                                _languageCompareResult = MACRO_CALL(OS_Func::__stricmp)(
-                                    "italian", (char const*)((int)(_langStr)));
+                                _langStr = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
+                                    this)(DE::SHCDE::TEXT_LANGUAGE, 0);
+                                _languageCompareResult
+                                    = MACRO_CALL(OS_Func::__stricmp)("italian", (char const*)((int)(_langStr)));
                                 if (!_languageCompareResult) {
                                     this->gameLanguage = Text::GL_ITALIAN;
                                 } else {
-                                    _langStr = MACRO_CALL_MEMBER(
-                                        Text::TextManager_Func::getTextStringInGroupAtOffset, this)(
-                                        DE::SHCDE::TEXT_LANGUAGE, 0);
-                                    _languageCompareResult = MACRO_CALL(OS_Func::__stricmp)(
-                                        "SPANISH", (char const*)((int)(_langStr)));
+                                    _langStr = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
+                                        this)(DE::SHCDE::TEXT_LANGUAGE, 0);
+                                    _languageCompareResult
+                                        = MACRO_CALL(OS_Func::__stricmp)("SPANISH", (char const*)((int)(_langStr)));
                                     if (!_languageCompareResult) {
                                         this->gameLanguage = Text::GL_SPANISH;
                                     }

@@ -43,9 +43,9 @@ namespace Map {
                         if (!_goToRallyPoint && DAT_UnitsState::instance.units[_unitID].isSelectable_OR_matchTime != 0
                             && (MACRO_CALL_MEMBER(
                                     Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
-                                    DAT_DirectionAlgorithmState::ptr)(destinationX, (int)((int)(destinationY)),
-                                    (int)((int)(DAT_UnitsState::instance.units[_unitID].x)),
-                                    (int)((int)(DAT_UnitsState::instance.units[_unitID].y))),
+                                    DAT_DirectionAlgorithmState::ptr)(destinationX, (int)(destinationY),
+                                    (int)(DAT_UnitsState::instance.units[_unitID].x),
+                                    (int)(DAT_UnitsState::instance.units[_unitID].y)),
                                 4 < DAT_DirectionAlgorithmState::instance.distanceHigh)
                             && (DAT_UnitsState::instance.units[_unitID].movementType_OR_targetUnitID == 0
                                 || (DAT_UnitsState::instance

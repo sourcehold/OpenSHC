@@ -53,7 +53,7 @@ namespace Map {
                 this->tribes[tribeID].herdMinSize = sVar2 / 2;
                 this->tribes[tribeID].herdMaxSize = sVar2 * 2;
             } else {
-                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::trimTribeToSize, this)(tribeID, (int)((int)(30)));
+                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::trimTribeToSize, this)(tribeID, (int)(30));
                 this->tribes[tribeID].herdMinSize = 0xf;
                 this->tribes[tribeID].herdMaxSize = 0x3c;
             }
@@ -67,9 +67,8 @@ namespace Map {
                     sVar2 = this->tribes[tribeID].selectionTargetUnitID;
                     this->tribes[tribeID].initialMoveOrderGiven = 1;
                     MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, this)(tribeID,
-                        (uint)((int)((int)DAT_UnitsState::instance.units[sVar2].x)),
-                        (uint)((int)((int)DAT_UnitsState::instance.units[sVar2].y)), 0, 0,
-                        Map::Units::Instructions::UMSE_0);
+                        (uint)(DAT_UnitsState::instance.units[sVar2].x),
+                        (uint)(DAT_UnitsState::instance.units[sVar2].y), 0, 0, Map::Units::Instructions::UMSE_0);
                     this->tribes[tribeID].tribeBehaviorType = Map::Units::STBT_1;
                 }
                 if (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_MAP_EDITOR_LANDSCAPING) {
@@ -101,8 +100,8 @@ namespace Map {
                             sVar2 = this->tribes[tribeID].currentRallyPointIndex;
                             MACRO_CALL_MEMBER(
                                 Map::Units::TribesState_Func::giveUnitSelectionMoveInstructionNoMatchedSpeed, this)(
-                                tribeID, (uint)((int)((int)this->tribes[tribeID].rallyPointArray[sVar2][0])),
-                                (uint)((int)((int)this->tribes[tribeID].rallyPointArray[sVar2][1])), 0, 0);
+                                tribeID, (uint)((int)this->tribes[tribeID].rallyPointArray[sVar2][0]),
+                                (uint)((int)this->tribes[tribeID].rallyPointArray[sVar2][1]), 0, 0);
                             this->tribes[tribeID].currentRallyPointIndex
                                 = this->tribes[tribeID].currentRallyPointIndex + 1;
                             if (this->tribes[tribeID].rallyPointCount <= this->tribes[tribeID].currentRallyPointIndex) {
@@ -129,12 +128,12 @@ namespace Map {
                             sVar2 = this->tribes[tribeID].selectionTargetUnitID;
                             MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                                 (int)DAT_UnitsState::instance.units[sVar2].x,
-                                (int)((int)(DAT_UnitsState::instance.units[sVar2].y)), DE::SHCDE::FX_DEER_RUN);
+                                (int)(DAT_UnitsState::instance.units[sVar2].y), DE::SHCDE::FX_DEER_RUN);
                             iVar8 = (int)this->tribes[tribeID].rallyPointCount;
                             MACRO_CALL_MEMBER(
                                 Map::Units::TribesState_Func::giveUnitSelectionMoveInstructionNoMatchedSpeed, this)(
-                                tribeID, (uint)((int)((int)this->tribes[tribeID].rallyPointArray[iVar8 + -1][0])),
-                                (uint)((int)((int)this->tribes[tribeID].rallyPointArray[iVar8 + -1][1])), 0, 0);
+                                tribeID, (uint)((int)this->tribes[tribeID].rallyPointArray[iVar8 + -1][0]),
+                                (uint)((int)this->tribes[tribeID].rallyPointArray[iVar8 + -1][1]), 0, 0);
                         }
                     }
                     this->tribes[tribeID].predatorNearby = this->tribes[tribeID].predatorNearby + 1;
@@ -148,8 +147,8 @@ namespace Map {
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::standUpAllTribeUnits, this)(tribeID);
                 sVar2 = this->tribes[tribeID].currentRallyPointIndex;
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, this)(tribeID,
-                    (uint)((int)((int)this->tribes[tribeID].rallyPointArray[sVar2][0])),
-                    (uint)((int)((int)this->tribes[tribeID].rallyPointArray[sVar2][1])), 0, 0,
+                    (uint)((int)this->tribes[tribeID].rallyPointArray[sVar2][0]),
+                    (uint)((int)this->tribes[tribeID].rallyPointArray[sVar2][1]), 0, 0,
                     Map::Units::Instructions::UMSE_0);
                 this->tribes[tribeID].currentRallyPointIndex = this->tribes[tribeID].currentRallyPointIndex + 1;
                 if (this->tribes[tribeID].rallyPointCount <= this->tribes[tribeID].currentRallyPointIndex) {

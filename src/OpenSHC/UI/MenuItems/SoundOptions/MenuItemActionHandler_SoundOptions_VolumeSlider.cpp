@@ -22,28 +22,28 @@ namespace UI {
             case 3:
                 if (!param_1) {
                     if (DAT_MenuTextInputState::instance.pendingStreamVolume0 != *currentValue) {
-                        MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::setVolumeUnk,
-                            DAT_SoundSystemState::ptr)(0, (int)((int)(*currentValue)));
+                        MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::setVolumeUnk, DAT_SoundSystemState::ptr)(
+                            0, (int)(*currentValue));
                     }
                     DAT_MenuTextInputState::instance.pendingStreamVolume0 = *currentValue;
                 }
                 if (param_1 != 1) {
                     if (param_1 != 2) {}
                     if (DAT_MenuTextInputState::instance.pendingStreamVolume3 != *currentValue) {
-                        MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::setVolumeUnk,
-                            DAT_SoundSystemState::ptr)(3, (int)((int)(*currentValue)));
-                        MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::setVolumeUnk,
-                            DAT_SoundSystemState::ptr)(4, (int)((int)(*currentValue)));
+                        MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::setVolumeUnk, DAT_SoundSystemState::ptr)(
+                            3, (int)(*currentValue));
+                        MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::setVolumeUnk, DAT_SoundSystemState::ptr)(
+                            4, (int)(*currentValue));
                     }
                     DAT_MenuTextInputState::instance.pendingStreamVolume3 = *currentValue;
                 }
                 if (DAT_MenuTextInputState::instance.pendingStreamVolume1 != *currentValue) {
                     MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::setVolumeUnk, DAT_SoundSystemState::ptr)(
-                        1, (int)((int)(*currentValue)));
+                        1, (int)(*currentValue));
                     MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::setVolumeUnk, DAT_SoundSystemState::ptr)(
-                        2, (int)((int)(*currentValue)));
+                        2, (int)(*currentValue));
                     MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::setVolumeUnk, DAT_SoundSystemState::ptr)(
-                        -1, (int)((int)(*currentValue)));
+                        -1, (int)(*currentValue));
                 }
                 DAT_MenuTextInputState::instance.pendingStreamVolume1 = *currentValue;
                 return;

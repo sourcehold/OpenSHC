@@ -255,10 +255,10 @@ namespace Map {
                             _targetUnitID, iVar11, (int*)&local_8, (int*)&unitInstructionType);
                         MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathPlanningForTribe,
                             DAT_PathFindingState::ptr)(tribeID, (undefined4)((int)(iVar11)), local_8,
-                            (uint)((int)(unitInstructionType)), id,
-                            (dword)((int)((int)(short)DAT_TileMapState::instance
+                            (uint)(unitInstructionType), id,
+                            (dword)((int)((short)DAT_TileMapState::instance
                                     .PathConnectionLayer[DAT_UnitsState::instance.units[_targetUnitID].tile])),
-                            (int)((int)(DAT_UnitsState::instance.units[_targetUnitID].owner)));
+                            (int)(DAT_UnitsState::instance.units[_targetUnitID].owner));
                         this->tribes[_param_1_tribeID].someUnitID = _param_3_id_x_tile_buildingID_copy;
                         this->tribes[_param_1_tribeID].someUnitUID = unitUID;
                         this->tribes[_param_1_tribeID].someTile = DAT_UnitsState::instance.units[iVar11].tile;
@@ -335,7 +335,7 @@ namespace Map {
                                                 DAT_PathFindingState::instance.allAssassinsUnk = 1;
                                             }
                                             MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::setDestinationForUnit,
-                                                DAT_UnitsState::ptr)(iVar11, uVar13, (uint)((int)((int)sVar9)), 0);
+                                                DAT_UnitsState::ptr)(iVar11, uVar13, (uint)(sVar9), 0);
                                             UVar10 = (UnitInstructionType)((int)DAT_UnitsState::instance.units[iVar11]
                                                                                .totalSizeOfPathPlan
                                                 / 2);
@@ -443,8 +443,8 @@ namespace Map {
                 this->tribes[tribeID].isRallyingUnk = 0;
                 if ((int)(short)_targetArea != 0) {
                     iVar11 = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::canNavigateFunctionReturnsArea,
-                        DAT_PathFindingState::ptr)(this->tribes[tribeID].owner, (dword)((int)((int)(short)_targetArea)),
-                        (uint)((int)(id)), (uint)((int)(unitUID)));
+                        DAT_PathFindingState::ptr)(
+                        this->tribes[tribeID].owner, (dword)((int)((short)_targetArea)), (uint)(id), (uint)(unitUID));
                     if (iVar11 == 0) {
                         return (undefined4)(1);
                     }
@@ -456,7 +456,7 @@ namespace Map {
                 iVar12 = 0;
                 this->tribes[_param_1_tribeID].isRallyingUnk = 0;
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveUnitSelectionMoveInstructionNoMatchedSpeed, this)(
-                    tribeID, uVar13, (uint)((int)(unitUID)), 0, 1);
+                    tribeID, uVar13, (uint)(unitUID), 0, 1);
                 if (0 < this->tribes[_param_1_tribeID].size) {
                     do {
                         iVar14 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
@@ -629,7 +629,7 @@ namespace Map {
                     }
                     MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathfindingForAttacksUnk,
                         DAT_PathFindingState::ptr)(tribeID, iVar11, id,
-                        (dword)((int)((int)(short)DAT_TileMapState::instance
+                        (dword)((int)((short)DAT_TileMapState::instance
                                 .PathConnectionLayer[DAT_UnitsState::instance.units[sVar9].tile])),
                         iVar12);
                     MACRO_CALL_MEMBER(Map::Units::TribesState_Func::sortTribePathDestinationsByCost, this)(
@@ -692,9 +692,8 @@ namespace Map {
                                         } else {
                                             DAT_PathFindingState::instance.allAssassinsUnk = 1;
                                         }
-                                        MACRO_CALL_MEMBER(
-                                            Map::Units::UnitsState_Func::setDestinationForUnit, DAT_UnitsState::ptr)(
-                                            _unitID, (uint)((int)(unitUID)), (uint)((int)((int)sVar9)), 0);
+                                        MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::setDestinationForUnit,
+                                            DAT_UnitsState::ptr)(_unitID, (uint)(unitUID), (uint)(sVar9), 0);
                                         DAT_UnitsState::instance.units[_unitID].movementType_OR_targetUnitID = 0;
                                         DAT_PathFindingState::instance.notAllAssassinsUnk = 0;
                                         uVar13 = *(uint*)id;
@@ -717,9 +716,8 @@ namespace Map {
                                                     .tileTranslationMatrix_YComponent[iVar12];
                                         unitUID = iVar12
                                             - DAT_ViewportRenderState::instance.translationMatrix[sVar9].addXgetTile;
-                                        BVar16 = MACRO_CALL_MEMBER(
-                                            Map::Units::UnitsState_Func::setDestinationForUnit, DAT_UnitsState::ptr)(
-                                            _unitID, (uint)((int)(unitUID)), (uint)((int)((int)sVar9)), 0);
+                                        BVar16 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::setDestinationForUnit,
+                                            DAT_UnitsState::ptr)(_unitID, (uint)(unitUID), (uint)(sVar9), 0);
                                         if (!BVar16)
                                             goto LAB_00528f32;
                                         DAT_UnitsState::instance.units[_unitID].targetingType
@@ -767,8 +765,8 @@ namespace Map {
                 _y = DAT_BuildingsState::instance.buildings[id].buildingEntryY;
                 _x = DAT_BuildingsState::instance.buildings[id].buildingEntryX;
                 _unitTribeIndex = 0;
-                BVar16 = MACRO_CALL_MEMBER(Rendering::ViewportRenderState_Func::xyAreValid,
-                    DAT_ViewportRenderState::ptr)((int)_x, (uint)((int)((int)_y)));
+                BVar16 = MACRO_CALL_MEMBER(
+                    Rendering::ViewportRenderState_Func::xyAreValid, DAT_ViewportRenderState::ptr)((int)_x, (uint)(_y));
                 if (!BVar16) {
                     return (undefined4)(0);
                 }
@@ -800,15 +798,14 @@ namespace Map {
                             DAT_UnitsState::instance.units[uVar13]._someY_2 = 0;
                             cVar7 = MACRO_CALL_MEMBER(
                                 Map::Buildings::BuildingsState_Func::resolveBuildingEntryAccessibility,
-                                DAT_BuildingsState::ptr)(iVar11, 1,
-                                (int)((int)(DAT_UnitsState::instance.units[uVar13].x)),
-                                (int)((int)(DAT_UnitsState::instance.units[uVar13].y)));
+                                DAT_BuildingsState::ptr)(iVar11, 1, (int)(DAT_UnitsState::instance.units[uVar13].x),
+                                (int)(DAT_UnitsState::instance.units[uVar13].y));
                             if (((((uint)(extraout_var) & 0xffffff) << 8) | (uint)(byte)(cVar7)) != 0
                                 && (iVar14 = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::
                                                                    calculateCanPlayerUnitsNavigateToAreaFromArea,
                                         DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[uVar13].owner,
                                         (dword)((int)(param_5)),
-                                        (dword)((int)((int)(short)DAT_TileMapState::instance
+                                        (dword)((int)((short)DAT_TileMapState::instance
                                                 .PathConnectionLayer[DAT_UnitsState::instance.units[uVar13].tile])),
                                         0),
                                     iVar14 != 0)) {
@@ -818,9 +815,8 @@ namespace Map {
                                 DAT_UnitsState::instance.units[uVar13].targetID_OR_targetBuildingID
                                     = _param_3_id_x_tile_buildingID_copy;
                                 DAT_UnitsState::instance.units[uVar13].targetUID = iVar14;
-                                MACRO_CALL_MEMBER(
-                                    Map::Units::UnitsState_Func::setDestinationForUnit, DAT_UnitsState::ptr)(
-                                    uVar13, (uint)((int)((int)sVar8)), (uint)((int)((int)sVar9)), 0);
+                                MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::setDestinationForUnit,
+                                    DAT_UnitsState::ptr)(uVar13, (uint)(sVar8), (uint)(sVar9), 0);
                                 if (DAT_BuildingsState::instance.buildings[iVar11].buildingType
                                     == Map::Buildings::BT_OILSMELTER) {
                                     DAT_UnitsState::instance.units[uVar13].state.generic
@@ -1084,7 +1080,7 @@ namespace Map {
                                                                    calculateCanPlayerUnitsNavigateToAreaFromArea,
                                         DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[uVar13].owner,
                                         (dword)((int)(param_5)),
-                                        (dword)((int)((int)(short)DAT_TileMapState::instance
+                                        (dword)((int)((short)DAT_TileMapState::instance
                                                 .PathConnectionLayer[DAT_UnitsState::instance.units[uVar13].tile])),
                                         0),
                                     iVar12 != 0)) {
@@ -1096,9 +1092,8 @@ namespace Map {
                                 DAT_UnitsState::instance.units[uVar13].targetID_OR_targetBuildingID
                                     = _param_3_id_x_tile_buildingID_copy;
                                 DAT_UnitsState::instance.units[uVar13].targetUID = iVar11;
-                                MACRO_CALL_MEMBER(
-                                    Map::Units::UnitsState_Func::setDestinationForUnit, DAT_UnitsState::ptr)(
-                                    uVar13, (uint)((int)((int)sVar8)), (uint)((int)((int)sVar9)), 0);
+                                MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::setDestinationForUnit,
+                                    DAT_UnitsState::ptr)(uVar13, (uint)(sVar8), (uint)(sVar9), 0);
                                 DAT_UnitsState::instance.units[uVar13].state.generic
                                     = Map::Units::States::US_LOOK_AROUNDUnk;
                                 DAT_UnitsState::instance.units[uVar13].targetingType = ((UnitInstructionType)0x15);
@@ -1181,17 +1176,16 @@ namespace Map {
                             break;
                         case Map::Units::UT_S_TOWER:
                             uVar19 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::findFreeTileNearby,
-                                DAT_UnitsState::ptr)(uVar13, (uint)((int)(iVar11)));
+                                DAT_UnitsState::ptr)(uVar13, (uint)(iVar11));
                             if (uVar19 != 0) {
                                 MACRO_CALL_MEMBER(
                                     Map::Units::UnitsState_Func::setDestinationForUnit, DAT_UnitsState::ptr)(uVar13,
-                                    (uint)((int)(uVar19
+                                    (uint)(uVar19
                                         - DAT_ViewportRenderState::instance
                                             .translationMatrix[DAT_ViewportRenderState::instance
                                                     .tileTranslationMatrix_YComponent[uVar19]]
-                                            .addXgetTile)),
-                                    (uint)((int)((int)DAT_ViewportRenderState::instance
-                                            .tileTranslationMatrix_YComponent[uVar19])),
+                                            .addXgetTile),
+                                    (uint)(DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[uVar19]),
                                     0);
                                 sVar9 = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[iVar11];
                                 DAT_UnitsState::instance.units[uVar13].targetingType = Map::Units::UIT_ATTACK_WALL;
@@ -1240,9 +1234,9 @@ namespace Map {
                     MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::
                                           findFreeSpaceNextToEnemyDefensiveStructureInSameAreaWithinDistance,
                         DAT_PathFindingState::ptr)(iVar11, id,
-                        (int*)((int)((int)(short)DAT_TileMapState::instance
+                        (int*)((int)((short)DAT_TileMapState::instance
                                 .PathConnectionLayer[DAT_UnitsState::instance.units[sVar9].tile])),
-                        iVar12, 0, (int)((int)(sVar8)));
+                        iVar12, 0, (int)(sVar8));
                     MACRO_CALL_MEMBER(Map::Units::TribesState_Func::sortTribePathDestinationsByCost, this)(
                         tribeID, _ramOrHorse);
                     if ((DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile2OrAHelper != 0)
@@ -1303,8 +1297,7 @@ namespace Map {
                                                           .addXgetTile;
                                                 BVar16 = MACRO_CALL_MEMBER(
                                                     Map::Units::UnitsState_Func::setDestinationForUnit,
-                                                    DAT_UnitsState::ptr)(
-                                                    iVar14, (uint)((int)(unitUID)), (uint)((int)((int)sVar9)), 0);
+                                                    DAT_UnitsState::ptr)(iVar14, (uint)(unitUID), (uint)(sVar9), 0);
                                                 if (BVar16) {
                                                     DAT_UnitsState::instance.units[iVar14].targetingType
                                                         = ((UnitInstructionType)0);
@@ -1354,7 +1347,7 @@ namespace Map {
                                         DAT_UnitsState::instance.units[iVar14].state.generic
                                             = Map::Units::States::US_MOVE_TO_DESTINATION;
                                         MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::setDestinationForUnit,
-                                            DAT_UnitsState::ptr)(iVar14, uVar13, (uint)((int)((int)sVar9)), 0);
+                                            DAT_UnitsState::ptr)(iVar14, uVar13, (uint)(sVar9), 0);
                                         DAT_PathFindingState::instance.notAllAssassinsUnk = 0;
                                         uVar13 = *(uint*)id;
                                         sVar9 = *(short*)id;
@@ -1399,9 +1392,9 @@ namespace Map {
                         MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::
                                               populateDestinationsArrayWithWallTileAndFreeTilePairInSameArea,
                             DAT_PathFindingState::ptr)(iVar11, id,
-                            (dword)((int)((int)(short)DAT_TileMapState::instance
+                            (dword)((int)((short)DAT_TileMapState::instance
                                     .PathConnectionLayer[DAT_UnitsState::instance.units[sVar9].tile])),
-                            (int)((int)(DAT_UnitsState::instance.units[sVar9].owner)));
+                            (int)(DAT_UnitsState::instance.units[sVar9].owner));
                         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::sortTribePathDestinationsByCost, this)(
                             tribeID, 0);
                         if ((DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile2OrAHelper != 0)
@@ -1435,9 +1428,8 @@ namespace Map {
                                     }
                                     DAT_UnitsState::instance.units[_laddermanID].state.generic
                                         = (ushort)(*piVar18 != 0) * 2 + Map::Units::States::US_MOVE_TO_DESTINATION;
-                                    MACRO_CALL_MEMBER(
-                                        Map::Units::UnitsState_Func::setDestinationForUnit, DAT_UnitsState::ptr)(
-                                        _laddermanID, _freeTileX, (uint)((int)((int)_freeTileY)), 0);
+                                    MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::setDestinationForUnit,
+                                        DAT_UnitsState::ptr)(_laddermanID, _freeTileX, (uint)(_freeTileY), 0);
                                     DAT_PathFindingState::instance.notAllAssassinsUnk = 0;
                                     _defensiveTile1 = *piVar18;
                                     _defensiveTile2 = *piVar18;
@@ -1675,11 +1667,11 @@ namespace Map {
                         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::predictUnitInterceptPosition, this)(
                             iVar12, iVar11, &param_5, (int*)&unitInstructionType);
                         MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathPlanningForTribe,
-                            DAT_PathFindingState::ptr)(tribeID, (undefined4)((int)(iVar11)), (uint)((int)(param_5)),
-                            (uint)((int)(unitInstructionType)), id,
-                            (dword)((int)((int)(short)DAT_TileMapState::instance
+                            DAT_PathFindingState::ptr)(tribeID, (undefined4)((int)(iVar11)), (uint)(param_5),
+                            (uint)(unitInstructionType), id,
+                            (dword)((int)((short)DAT_TileMapState::instance
                                     .PathConnectionLayer[DAT_UnitsState::instance.units[iVar12].tile])),
-                            (int)((int)(DAT_UnitsState::instance.units[iVar12].owner)));
+                            (int)(DAT_UnitsState::instance.units[iVar12].owner));
                         this->tribes[_param_1_tribeID].someUnitID = _param_3_id_x_tile_buildingID_copy;
                         this->tribes[_param_1_tribeID].someUnitUID = unitUID;
                         this->tribes[_param_1_tribeID].someTile = DAT_UnitsState::instance.units[iVar11].tile;
@@ -1762,8 +1754,7 @@ namespace Map {
                                                 DAT_PathFindingState::instance.allAssassinsUnk = 1;
                                             }
                                             MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::setDestinationForUnit,
-                                                DAT_UnitsState::ptr)(
-                                                iVar14, _x_528565, (uint)((int)((int)_y_528565)), 0);
+                                                DAT_UnitsState::ptr)(iVar14, _x_528565, (uint)(_y_528565), 0);
                                             DAT_UnitsState::instance.units[iVar14].moveDelay = 0;
                                             DAT_UnitsState::instance.units[iVar14].lookForEnemy = -0x32;
                                             if (DAT_UnitsState::instance.units[iVar14].movementType_OR_targetUnitID

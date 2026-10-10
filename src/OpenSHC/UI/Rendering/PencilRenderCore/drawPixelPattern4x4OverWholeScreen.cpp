@@ -19,7 +19,7 @@ namespace UI {
                     if (0 < DAT_WindowAndDirectDraw::instance.resolutionX) {
                         do {
                             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawPixelPattern4x4, this)(
-                                this->currentX, (int)((int)(this->currentY)));
+                                this->currentX, (int)(this->currentY));
                             this->currentX = this->currentX + 4;
                         } while ((int)this->currentX < DAT_WindowAndDirectDraw::instance.resolutionX);
                     }

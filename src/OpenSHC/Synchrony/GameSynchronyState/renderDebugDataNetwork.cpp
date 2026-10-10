@@ -2,24 +2,24 @@
 
 #include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
 #include "OpenSHC/Text/TextManager.func.hpp"
+#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
-#include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
+#include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/SEC_RNG.hpp"
-#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 
 namespace OpenSHC {
 namespace Synchrony {
 
+    using Rendering::Colors::BGR24;
     using Text::TextAlignment;
     using WindowsHelper::Enums::BOOLEnum;
-    using Rendering::Colors::BGR24;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00488540
     void GameSynchronyState::renderDebugDataNetwork(int x, int y, int width, int height)
@@ -61,15 +61,19 @@ namespace Synchrony {
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             " Adv: ", x + 0x16, y, Text::TTA_LEFT, 0xffffff, 0x12, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-            (int)DAT_GameSynchronyState::instance.DAT_LagIndicatorPerPlayer[1], x + 0x16, y, Text::TTA_LEFT, 0x80ff, 0x12, TRUE, 0);
+            (int)DAT_GameSynchronyState::instance.DAT_LagIndicatorPerPlayer[1], x + 0x16, y, Text::TTA_LEFT, 0x80ff,
+            0x12, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-            (int)DAT_GameSynchronyState::instance.DAT_LagIndicatorPerPlayer[2], x + 0x1b, y, Text::TTA_LEFT, 0x80ff, 0x12, TRUE, 0);
+            (int)DAT_GameSynchronyState::instance.DAT_LagIndicatorPerPlayer[2], x + 0x1b, y, Text::TTA_LEFT, 0x80ff,
+            0x12, TRUE, 0);
         iVar4 = x + 0x20;
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-            (int)DAT_GameSynchronyState::instance.DAT_LagIndicatorPerPlayer[3], iVar4, y, Text::TTA_LEFT, 0x80ff, 0x12, TRUE, 0);
+            (int)DAT_GameSynchronyState::instance.DAT_LagIndicatorPerPlayer[3], iVar4, y, Text::TTA_LEFT, 0x80ff, 0x12,
+            TRUE, 0);
         iVar6 = x + 0x25;
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-            (int)DAT_GameSynchronyState::instance.DAT_LagIndicatorPerPlayer[4], iVar6, y, Text::TTA_LEFT, 0x80ff, 0x12, TRUE, 0);
+            (int)DAT_GameSynchronyState::instance.DAT_LagIndicatorPerPlayer[4], iVar6, y, Text::TTA_LEFT, 0x80ff, 0x12,
+            TRUE, 0);
         iVar1 = y + 0xe;
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             "Timings ", xParam, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
@@ -95,12 +99,11 @@ namespace Synchrony {
             "Relative time: ", xParam, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
             DAT_GameSynchronyState::instance.relativeTickTime, xParam, iVar1, Text::TTA_LEFT,
-            (uint)((int)((bVar3 - 1 & 0xffff8000) + 0x80ff)), 0x12, TRUE, 0);
+            (uint)((bVar3 - 1 & 0xffff8000) + 0x80ff), 0x12, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             " Logical speed: ", iVar5 + 0x98, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-            DAT_GameCore::instance.gameTicksThisLoop, iVar5 + 0x98, iVar1, Text::TTA_LEFT, 0x80ff, 0x12, TRUE,
-            0);
+            DAT_GameCore::instance.gameTicksThisLoop, iVar5 + 0x98, iVar1, Text::TTA_LEFT, 0x80ff, 0x12, TRUE, 0);
         iVar1 = iVar2 + 0x2a;
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             "Crcs ", xParam, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
@@ -157,64 +160,88 @@ namespace Synchrony {
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             "CHI:", xParam, iVar1, Text::TTA_LEFT, 0xffffff, 0x13, FALSE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-            DAT_GameSynchronyState::instance.DAT_PlayerMatchTimes[DAT_GameSynchronyState::instance.currentPlayerSlotID * 0xc + 9] & 0xfff, xParam, iVar1,
-            Text::TTA_LEFT, 0x80ff, 0x13, TRUE, 0);
+            DAT_GameSynchronyState::instance
+                    .DAT_PlayerMatchTimes[DAT_GameSynchronyState::instance.currentPlayerSlotID * 0xc + 9]
+                & 0xfff,
+            xParam, iVar1, Text::TTA_LEFT, 0x80ff, 0x13, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             "  STR:", xParam, iVar1, Text::TTA_LEFT, 0xffffff, 0x13, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-            DAT_GameSynchronyState::instance.DAT_PlayerMatchTimes[DAT_GameSynchronyState::instance.currentPlayerSlotID * 0xc + 10] & 0xfff, xParam, iVar1,
-            Text::TTA_LEFT, 0x80ff, 0x13, TRUE, 0);
+            DAT_GameSynchronyState::instance
+                    .DAT_PlayerMatchTimes[DAT_GameSynchronyState::instance.currentPlayerSlotID * 0xc + 10]
+                & 0xfff,
+            xParam, iVar1, Text::TTA_LEFT, 0x80ff, 0x13, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             "  VEG:", xParam, iVar1, Text::TTA_LEFT, 0xffffff, 0x13, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-            DAT_GameSynchronyState::instance.DAT_PlayerMatchTimes[DAT_GameSynchronyState::instance.currentPlayerSlotID * 0xc + 0xb] & 0xfff, xParam, iVar1,
-            Text::TTA_LEFT, 0x80ff, 0x13, TRUE, 0);
+            DAT_GameSynchronyState::instance
+                    .DAT_PlayerMatchTimes[DAT_GameSynchronyState::instance.currentPlayerSlotID * 0xc + 0xb]
+                & 0xfff,
+            xParam, iVar1, Text::TTA_LEFT, 0x80ff, 0x13, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             "  TRI:", xParam, iVar1, Text::TTA_LEFT, 0xffffff, 0x13, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-            DAT_GameSynchronyState::instance.DAT_PlayerMatchTimes[DAT_GameSynchronyState::instance.currentPlayerSlotID * 0xc + 0xc] & 0xfff, xParam, iVar1,
-            Text::TTA_LEFT, 0x80ff, 0x13, TRUE, 0);
+            DAT_GameSynchronyState::instance
+                    .DAT_PlayerMatchTimes[DAT_GameSynchronyState::instance.currentPlayerSlotID * 0xc + 0xc]
+                & 0xfff,
+            xParam, iVar1, Text::TTA_LEFT, 0x80ff, 0x13, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             "  PLA:", xParam, iVar1, Text::TTA_LEFT, 0xffffff, 0x13, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-            DAT_GameSynchronyState::instance.DAT_PlayerMatchTimes[DAT_GameSynchronyState::instance.currentPlayerSlotID * 0xc + 0xd] & 0xfff, xParam, iVar1,
-            Text::TTA_LEFT, 0x80ff, 0x13, TRUE, 0);
+            DAT_GameSynchronyState::instance
+                    .DAT_PlayerMatchTimes[DAT_GameSynchronyState::instance.currentPlayerSlotID * 0xc + 0xd]
+                & 0xfff,
+            xParam, iVar1, Text::TTA_LEFT, 0x80ff, 0x13, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             "GAM:", xParam, iVar1, Text::TTA_LEFT, 0xffffff, 0x13, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-            DAT_GameSynchronyState::instance.DAT_PlayerMatchTimes[DAT_GameSynchronyState::instance.currentPlayerSlotID * 0xc + 0xe] & 0xfff, xParam, iVar1,
-            Text::TTA_LEFT, 0x80ff, 0x13, TRUE, 0);
+            DAT_GameSynchronyState::instance
+                    .DAT_PlayerMatchTimes[DAT_GameSynchronyState::instance.currentPlayerSlotID * 0xc + 0xe]
+                & 0xfff,
+            xParam, iVar1, Text::TTA_LEFT, 0x80ff, 0x13, TRUE, 0);
         iVar1 = iVar2 + 0x70;
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             "  LAY:", xParam, iVar1, Text::TTA_LEFT, 0xffffff, 0x13, FALSE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-            DAT_GameSynchronyState::instance.DAT_PlayerMatchTimes[DAT_GameSynchronyState::instance.currentPlayerSlotID * 0xc + 0xf] & 0xfff, xParam, iVar1,
-            Text::TTA_LEFT, 0x80ff, 0x13, TRUE, 0);
+            DAT_GameSynchronyState::instance
+                    .DAT_PlayerMatchTimes[DAT_GameSynchronyState::instance.currentPlayerSlotID * 0xc + 0xf]
+                & 0xfff,
+            xParam, iVar1, Text::TTA_LEFT, 0x80ff, 0x13, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             "  FLY:", xParam, iVar1, Text::TTA_LEFT, 0xffffff, 0x13, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-            DAT_GameSynchronyState::instance.DAT_PlayerMatchTimes[DAT_GameSynchronyState::instance.currentPlayerSlotID * 0xc + 0x10] & 0xfff, xParam, iVar1,
-            Text::TTA_LEFT, 0x80ff, 0x13, TRUE, 0);
+            DAT_GameSynchronyState::instance
+                    .DAT_PlayerMatchTimes[DAT_GameSynchronyState::instance.currentPlayerSlotID * 0xc + 0x10]
+                & 0xfff,
+            xParam, iVar1, Text::TTA_LEFT, 0x80ff, 0x13, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             "  MOAT:", xParam, iVar1, Text::TTA_LEFT, 0xffffff, 0x13, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-            DAT_GameSynchronyState::instance.DAT_PlayerMatchTimes[DAT_GameSynchronyState::instance.currentPlayerSlotID * 0xc + 0x11] & 0xfff, xParam, iVar1,
-            Text::TTA_LEFT, 0x80ff, 0x13, TRUE, 0);
+            DAT_GameSynchronyState::instance
+                    .DAT_PlayerMatchTimes[DAT_GameSynchronyState::instance.currentPlayerSlotID * 0xc + 0x11]
+                & 0xfff,
+            xParam, iVar1, Text::TTA_LEFT, 0x80ff, 0x13, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             "  TELE:", xParam, iVar1, Text::TTA_LEFT, 0xffffff, 0x13, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-            DAT_GameSynchronyState::instance.DAT_PlayerMatchTimes[DAT_GameSynchronyState::instance.currentPlayerSlotID * 0xc + 0x12] & 0xfff, xParam, iVar1,
-            Text::TTA_LEFT, 0x80ff, 0x13, TRUE, 0);
+            DAT_GameSynchronyState::instance
+                    .DAT_PlayerMatchTimes[DAT_GameSynchronyState::instance.currentPlayerSlotID * 0xc + 0x12]
+                & 0xfff,
+            xParam, iVar1, Text::TTA_LEFT, 0x80ff, 0x13, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             "  PIDI:", xParam, iVar1, Text::TTA_LEFT, 0xffffff, 0x13, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-            DAT_GameSynchronyState::instance.DAT_PlayerMatchTimes[DAT_GameSynchronyState::instance.currentPlayerSlotID * 0xc + 0x13] & 0xfff, xParam, iVar1,
-            Text::TTA_LEFT, 0x80ff, 0x13, TRUE, 0);
+            DAT_GameSynchronyState::instance
+                    .DAT_PlayerMatchTimes[DAT_GameSynchronyState::instance.currentPlayerSlotID * 0xc + 0x13]
+                & 0xfff,
+            xParam, iVar1, Text::TTA_LEFT, 0x80ff, 0x13, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             "  ZONE:", xParam, iVar1, Text::TTA_LEFT, 0xffffff, 0x13, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-            DAT_GameSynchronyState::instance.DAT_PlayerMatchTimes[DAT_GameSynchronyState::instance.currentPlayerSlotID * 0xc + 0x14] & 0xfff, xParam, iVar1,
-            Text::TTA_LEFT, 0x80ff, 0x13, TRUE, 0);
+            DAT_GameSynchronyState::instance
+                    .DAT_PlayerMatchTimes[DAT_GameSynchronyState::instance.currentPlayerSlotID * 0xc + 0x14]
+                & 0xfff,
+            xParam, iVar1, Text::TTA_LEFT, 0x80ff, 0x13, TRUE, 0);
         iVar1 = iVar2 + 0x7e;
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             "Chimps: ", xParam, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, FALSE, 0);
@@ -227,8 +254,7 @@ namespace Synchrony {
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             "id_count: ", xParam, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-            DAT_GameCore::instance.uniqueGameObjectTracker, xParam, iVar1, Text::TTA_LEFT, 0x80ff, 0x12, TRUE,
-            0);
+            DAT_GameCore::instance.uniqueGameObjectTracker, xParam, iVar1, Text::TTA_LEFT, 0x80ff, 0x12, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             "random no: ", xParam, iVar1, Text::TTA_LEFT, 0xffffff, 0x12, TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(

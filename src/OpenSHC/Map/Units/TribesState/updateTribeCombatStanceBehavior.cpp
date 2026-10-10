@@ -175,7 +175,7 @@ namespace Map {
                             } while (iVar5 < this->tribes[tribeID].size);
                         }
                         MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::aggressiveStanceTargetBuildingAtRange,
-                            DAT_PathFindingState::ptr)(_targetUnitID, (int)((int)(15)));
+                            DAT_PathFindingState::ptr)(_targetUnitID, (int)(15));
                         if (DAT_PathFindingState::instance.ALG_ResultTile) {
                             _buildingIndex_2 = DAT_TileMapState::instance
                                                    .BuildingLayer[DAT_PathFindingState::instance.ALG_ResultTile];

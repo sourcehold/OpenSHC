@@ -63,7 +63,7 @@ namespace Map {
             == '\0') {
             MACRO_CALL_MEMBER(Map::TileMapState_Func::updateBuildingPlacementRotationPreview, DAT_TileMapState::ptr)(
                 (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x,
-                (int)((int)((short)DAT_BuildingsState::instance.buildings[buildingID].y)));
+                (int)((short)DAT_BuildingsState::instance.buildings[buildingID].y));
             buildingID = DAT_CurrentBuildingID::instance;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingVariation
                 = (short)DAT_TileMapState::instance.uiBuildingRotation;
@@ -80,8 +80,7 @@ namespace Map {
                         || (((sVar3 == 0x6a || (sVar3 == 0x8c)) || (sVar3 == 0xaf))))) {
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                         (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x,
-                        (int)((int)((short)DAT_BuildingsState::instance.buildings[buildingID].y)),
-                        DE::SHCDE::FX_POLE_TURN);
+                        (int)((short)DAT_BuildingsState::instance.buildings[buildingID].y), DE::SHCDE::FX_POLE_TURN);
                     buildingID = DAT_CurrentBuildingID::instance;
                 }
                 iVar9 = buildingID * 0x32c;
@@ -162,8 +161,7 @@ namespace Map {
                         sVar3 == 2 || (sVar3 == 0x30))) {
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                         (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x,
-                        (int)((int)((short)DAT_BuildingsState::instance.buildings[buildingID].y)),
-                        DE::SHCDE::FX_POLE_GRIND);
+                        (int)((short)DAT_BuildingsState::instance.buildings[buildingID].y), DE::SHCDE::FX_POLE_GRIND);
                     buildingID = DAT_CurrentBuildingID::instance;
                 }
                 iVar9 = buildingID * 0x32c;

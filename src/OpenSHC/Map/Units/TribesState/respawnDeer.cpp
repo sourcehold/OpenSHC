@@ -66,7 +66,7 @@ namespace Map {
                         (int)DAT_TileMapState::instance.OrganismLayer[_tile]);
                 }
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createAnimal, this)(
-                    Commands::M_MAPPER_DEER, _x, _y, (int)((int)((uint)DAT_TileMapState::instance.HeightLayer[_tile])));
+                    Commands::M_MAPPER_DEER, _x, _y, (int)(DAT_TileMapState::instance.HeightLayer[_tile]));
             }
         }
 

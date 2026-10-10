@@ -91,7 +91,7 @@ namespace Map {
             == '\0') {
             MACRO_CALL_MEMBER(Map::TileMapState_Func::updateBuildingPlacementRotationPreview, DAT_TileMapState::ptr)(
                 (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x,
-                (int)((int)((short)DAT_BuildingsState::instance.buildings[buildingID].y)));
+                (int)((short)DAT_BuildingsState::instance.buildings[buildingID].y));
             buildingID = DAT_CurrentBuildingID::instance;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingVariation
                 = (short)DAT_TileMapState::instance.uiBuildingRotation;
@@ -108,7 +108,7 @@ namespace Map {
                     || (sVar3 == 400))) {
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                     (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x,
-                    (int)((int)((short)DAT_BuildingsState::instance.buildings[buildingID].y)), DE::SHCDE::FX_STIR);
+                    (int)((short)DAT_BuildingsState::instance.buildings[buildingID].y), DE::SHCDE::FX_STIR);
                 buildingID = DAT_CurrentBuildingID::instance;
             }
             bVar6 = DAT_BuildingDefinedData::instance
@@ -133,7 +133,7 @@ namespace Map {
                 && (DAT_BuildingsState::instance.buildings[buildingID].animationIndex == 5)) {
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                     (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x,
-                    (int)((int)((short)DAT_BuildingsState::instance.buildings[buildingID].y)), DE::SHCDE::FX_STIR);
+                    (int)((short)DAT_BuildingsState::instance.buildings[buildingID].y), DE::SHCDE::FX_STIR);
                 buildingID = DAT_CurrentBuildingID::instance;
             }
             bVar6 = DAT_BuildingDefinedData::instance
@@ -159,7 +159,7 @@ namespace Map {
                     && (DAT_BuildingsState::instance.buildings[buildingID].animationIndex == 5)) {
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                         (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x,
-                        (int)((int)((short)DAT_BuildingsState::instance.buildings[buildingID].y)), DE::SHCDE::FX_STIR);
+                        (int)((short)DAT_BuildingsState::instance.buildings[buildingID].y), DE::SHCDE::FX_STIR);
                     buildingID = DAT_CurrentBuildingID::instance;
                 }
                 bVar6 = DAT_BuildingDefinedData::instance
@@ -183,8 +183,7 @@ namespace Map {
                         && (DAT_BuildingsState::instance.buildings[buildingID].animationIndex == 5)) {
                         MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                             (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x,
-                            (int)((int)((short)DAT_BuildingsState::instance.buildings[buildingID].y)),
-                            DE::SHCDE::FX_STIR);
+                            (int)((short)DAT_BuildingsState::instance.buildings[buildingID].y), DE::SHCDE::FX_STIR);
                         buildingID = DAT_CurrentBuildingID::instance;
                     }
                     bVar6 = DAT_BuildingDefinedData::instance.BreweryAnimationFrames3

@@ -56,8 +56,7 @@ namespace Map {
                     iVar8 = DAT_CurrentBuildingID::instance, !BVar7)) {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].drawBridgeState1 = 1;
                 DAT_BuildingsState::instance.buildings[iVar8].animationIndex = 0;
-                MACRO_CALL_MEMBER(
-                    Map::TileMapState_Func::floodMoatUnderRemovedBuilding, DAT_TileMapState::ptr)(iVar8);
+                MACRO_CALL_MEMBER(Map::TileMapState_Func::floodMoatUnderRemovedBuilding, DAT_TileMapState::ptr)(iVar8);
                 iVar8 = DAT_CurrentBuildingID::instance;
                 puVar1 = &DAT_GameState::instance.playerDataArray[sVar3].someCount31;
                 *puVar1 = *puVar1 + 1;
@@ -109,7 +108,7 @@ namespace Map {
                     && (DAT_BuildingsState::instance.buildings[iVar8].animationActive != 0)) {
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                         (int)(short)DAT_BuildingsState::instance.buildings[iVar8].x,
-                        (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar8].y)),
+                        (int)((short)DAT_BuildingsState::instance.buildings[iVar8].y),
                         DE::SHCDE::FX_DRAWBRIDGE_RAISING);
                     iVar8 = DAT_CurrentBuildingID::instance;
                 }
@@ -120,7 +119,7 @@ namespace Map {
                     sfxOffsetInArray = DE::SHCDE::FX_DRAWBRIDGE_RAISED;
                 LAB_00417f21:
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
-                        (int)(short)uVar5, (int)((int)((short)uVar4)), sfxOffsetInArray);
+                        (int)(short)uVar5, (int)((short)uVar4), sfxOffsetInArray);
                     iVar8 = DAT_CurrentBuildingID::instance;
                 }
             }
@@ -133,8 +132,7 @@ namespace Map {
                 < '\x01') {
                 DAT_BuildingsState::instance.buildings[iVar8].animationIndex = 0;
                 DAT_BuildingsState::instance.buildings[iVar8].drawBridgeState1 = 0;
-                MACRO_CALL_MEMBER(Map::TileMapState_Func::createWaterForDrawBridge, DAT_TileMapState::ptr)(
-                    iVar8);
+                MACRO_CALL_MEMBER(Map::TileMapState_Func::createWaterForDrawBridge, DAT_TileMapState::ptr)(iVar8);
                 iVar8 = DAT_CurrentBuildingID::instance;
             } else {
                 DAT_BuildingsState::instance.buildings[iVar8].animationFrame
@@ -145,7 +143,7 @@ namespace Map {
                     && (DAT_BuildingsState::instance.buildings[iVar8].animationActive != 0)) {
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                         (int)(short)DAT_BuildingsState::instance.buildings[iVar8].x,
-                        (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar8].y)),
+                        (int)((short)DAT_BuildingsState::instance.buildings[iVar8].y),
                         DE::SHCDE::FX_DRAWBRIDGE_CONTROL);
                     iVar8 = DAT_CurrentBuildingID::instance;
                 }
@@ -153,7 +151,7 @@ namespace Map {
                     && (DAT_BuildingsState::instance.buildings[iVar8].animationActive != 0)) {
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                         (int)(short)DAT_BuildingsState::instance.buildings[iVar8].x,
-                        (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar8].y)),
+                        (int)((short)DAT_BuildingsState::instance.buildings[iVar8].y),
                         DE::SHCDE::FX_DRAWBRIDGE_LOWERING);
                     iVar8 = DAT_CurrentBuildingID::instance;
                 }

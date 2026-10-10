@@ -129,7 +129,7 @@ namespace UI {
         if (blendStrength) {
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
                 DAT_GameSynchronyState::instance.DAT_PlayerNames[DAT_00df5530::instance], posX + 0x28, posY,
-                Text::TTA_CENTER, 0xc2f0eb, 0, 0x10, FALSE, (int)((int)(blendStrength)));
+                Text::TTA_CENTER, 0xc2f0eb, 0, 0x10, FALSE, (int)(blendStrength));
             iVar3 = posX + (-0x30 - iVar3 / 2);
             iVar4 = 0;
             if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[DAT_00df5530::instance] == -1) {
@@ -138,7 +138,7 @@ namespace UI {
             iVar5 = posY + -0x26;
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                 DAT_TextureRenderCoreObject::ptr)(IO::Graphics::GID_INTERFACE_ICONS_2, DAT_00df5530::instance + 0x222,
-                iVar3, iVar5, (int)((int)(blendStrength)));
+                iVar3, iVar5, (int)(blendStrength));
             if (!iVar4) {
                 if (DAT_GameCore::instance.lordIcons[DAT_00df5530::instance] == 0) {
                     iVar4 = 0x21b;
@@ -147,10 +147,10 @@ namespace UI {
                         if (0 < DAT_TextureRenderCoreObject::instance.bitmapFaceSizes[DAT_00df5530::instance + 0x13]) {
                             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                                 DAT_TextureRenderCoreObject::ptr)(
-                                IO::Graphics::GID_INTERFACE_ICONS_2, 0x21d, iVar3, iVar5, (int)((int)(blendStrength)));
+                                IO::Graphics::GID_INTERFACE_ICONS_2, 0x21d, iVar3, iVar5, (int)(blendStrength));
                             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::drawBitmapFaceWithBlendUnk,
                                 DAT_TextureRenderCoreObject::ptr)(
-                                DAT_00df5530::instance + 0x13, iVar3 + 4, posY + -0x22, (int)((int)(blendStrength)));
+                                DAT_00df5530::instance + 0x13, iVar3 + 4, posY + -0x22, (int)(blendStrength));
                         }
                         goto LAB_004b0782;
                     }
@@ -161,13 +161,13 @@ namespace UI {
             }
             MACRO_CALL_MEMBER(
                 UI::Rendering::TextureRenderCore_Func::renderGMWithBlending, DAT_TextureRenderCoreObject::ptr)(
-                IO::Graphics::GID_INTERFACE_ICONS_2, iVar4, iVar3, iVar5, (int)((int)(blendStrength)));
+                IO::Graphics::GID_INTERFACE_ICONS_2, iVar4, iVar3, iVar5, (int)(blendStrength));
         LAB_004b0782:
             iVar4 = DAT_GameState::instance.mapAndTime.playerGroupArray[DAT_00df5530::instance];
             if (iVar4 < 1) {}
-            MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
-                DAT_TextureRenderCoreObject::ptr)(IO::Graphics::GID_INTERFACE_ICONS_2, iVar4 * 2 + 0x1ed, iVar3 + 0x4c,
-                iVar5, (int)((int)(blendStrength)));
+            MACRO_CALL_MEMBER(
+                UI::Rendering::TextureRenderCore_Func::renderGMWithBlending, DAT_TextureRenderCoreObject::ptr)(
+                IO::Graphics::GID_INTERFACE_ICONS_2, iVar4 * 2 + 0x1ed, iVar3 + 0x4c, iVar5, (int)(blendStrength));
         }
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
             DAT_GameSynchronyState::instance.DAT_PlayerNames[DAT_00df5530::instance], posX + 0x28, posY,

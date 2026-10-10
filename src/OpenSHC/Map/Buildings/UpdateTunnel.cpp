@@ -58,7 +58,7 @@ namespace Map {
                 && DAT_BuildingsState::instance.buildings[iVar2].animationActive != 0) {
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                     (int)(short)DAT_BuildingsState::instance.buildings[iVar2].x,
-                    (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar2].y)), DE::SHCDE::FX_DIG2);
+                    (int)((short)DAT_BuildingsState::instance.buildings[iVar2].y), DE::SHCDE::FX_DIG2);
             }
         }
     }

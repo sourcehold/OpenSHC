@@ -129,8 +129,7 @@ namespace Map {
                     if (!iVar5 || iVar5 == 0x18 || iVar5 == 0x30 || iVar5 == 0x48) {
                         MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                             (int)(short)DAT_BuildingsState::instance.buildings[iVar4].x,
-                            (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar4].y)),
-                            DE::SHCDE::FX_IRON_PULL);
+                            (int)((short)DAT_BuildingsState::instance.buildings[iVar4].y), DE::SHCDE::FX_IRON_PULL);
                         iVar4 = DAT_CurrentBuildingID::instance;
                     }
                     iVar5 = iVar4 * 0x32c;

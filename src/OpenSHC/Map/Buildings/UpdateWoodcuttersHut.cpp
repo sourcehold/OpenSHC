@@ -71,7 +71,7 @@ namespace Map {
             if ((char)bVar2 == 0x10 && DAT_BuildingsState::instance.buildings[iVar4].animationActive != 0) {
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                     (int)(short)DAT_BuildingsState::instance.buildings[iVar4].x,
-                    (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar4].y)), DE::SHCDE::FX_SAW);
+                    (int)((short)DAT_BuildingsState::instance.buildings[iVar4].y), DE::SHCDE::FX_SAW);
             }
             iVar5 = GMTotalPicturesProcessed::instance[0x43];
             iVar6 = DAT_CurrentBuildingID::instance;

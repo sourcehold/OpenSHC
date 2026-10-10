@@ -282,9 +282,8 @@ namespace Map {
                             if ((DAT_GameSynchronyState::instance.currentPlayerFullIDArray[_playerID] != -1)
                                 || (DAT_GameSynchronyState::instance.currentAIArray[_playerID] != 0)) {
                                 dVar4 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::spawnUnitsIntoNewTribe, this)(
-                                    _destinationIndexTracker, _tribeType, (int)((int)(*piVar7)),
-                                    (int)((int)(piVar7[1])), _playerID, (UnitType)((int)(_unitType)), ((UnitType)0),
-                                    _unitType1Count, 0);
+                                    _destinationIndexTracker, _tribeType, (int)(*piVar7), (int)(piVar7[1]), _playerID,
+                                    (UnitType)((int)(_unitType)), ((UnitType)0), _unitType1Count, 0);
                                 this->tribes[dVar4].unknownAttackRelatedUpdateCounter = 0x32;
                                 bVar2 = true;
                                 _destinationIndexTracker = _destinationIndexTracker + 1;
@@ -344,9 +343,8 @@ namespace Map {
                             if ((DAT_GameSynchronyState::instance.currentPlayerFullIDArray[iVar5] != -1)
                                 || (DAT_GameSynchronyState::instance.currentAIArray[iVar5] != 0)) {
                                 dVar4 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::spawnUnitsIntoNewTribe, this)(
-                                    _destinationIndexTracker, _tribeType, (int)((int)(*piVar7)),
-                                    (int)((int)(piVar7[1])), iVar5, (UnitType)((int)(_unitType)), ((UnitType)0),
-                                    _unitType1Count, 0);
+                                    _destinationIndexTracker, _tribeType, (int)(*piVar7), (int)(piVar7[1]), iVar5,
+                                    (UnitType)((int)(_unitType)), ((UnitType)0), _unitType1Count, 0);
                                 this->tribes[dVar4].unknownAttackRelatedUpdateCounter = 0x32;
                                 bVar2 = true;
                                 _destinationIndexTracker = _destinationIndexTracker + 1;
@@ -463,9 +461,9 @@ namespace Map {
                                         *(int*)(DAT_GameState::instance.mapAndTime.unused_0x3ff00
                                             + (_unitType1Count + iVar3) * 4) = iVar6 - iVar5;
                                         dVar4 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::spawnUnitsIntoNewTribe,
-                                            this)(_destinationIndexTracker, _tribeType, (int)((int)(*piVar7)),
-                                            (int)((int)(piVar7[1])), local_4, (UnitType)((int)(_unitType)),
-                                            ((UnitType)0), iVar5, 0);
+                                            this)(_destinationIndexTracker, _tribeType, (int)(*piVar7),
+                                            (int)(piVar7[1]), local_4, (UnitType)((int)(_unitType)), ((UnitType)0),
+                                            iVar5, 0);
                                         this->tribes[dVar4].unknownAttackRelatedUpdateCounter = 0x32;
                                         bVar1 = true;
                                         _destinationIndexTracker = _destinationIndexTracker + 1;

@@ -5,6 +5,7 @@
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/IO/FileResourceType.hpp"
 #include "OpenSHC/IO/Graphics/GmImageType.hpp"
+#include "OpenSHC/IO/Graphics/ImageHeader.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GMImageHeaders.hpp"
@@ -14,7 +15,6 @@
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_PictureNumToGmIDArray_UNUSED.hpp"
 #include "OpenSHC/Globals/DAT_ResourceManager.hpp"
-#include "OpenSHC/IO/Graphics/ImageHeader.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -22,8 +22,8 @@ namespace UI {
 
         using IO::FileResourceType;
         using IO::Graphics::GmImageType;
-        using WindowsHelper::Enums::BOOLEnum;
         using IO::Graphics::ImageHeader;
+        using WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004559B0
         void TextureRenderCore::loadGMFile(GmID gmID, char* gmFileName)
@@ -67,7 +67,7 @@ namespace UI {
             MACRO_CALL_MEMBER(IO::ResourceManager_Func::resolveResourceFileName, DAT_ResourceManager::ptr)(
                 IO::FRT_GM, (char const*)((int)(*shortFileName_00)));
             MACRO_CALL_MEMBER(IO::ResourceManager_Func::readFirstPartOfCurrentResourceIntoMemory,
-                DAT_ResourceManager::ptr)(this->gmFileHeaderColorpaletteArray + gmID, (int)((int)(5208)), "gm1");
+                DAT_ResourceManager::ptr)(this->gmFileHeaderColorpaletteArray + gmID, (int)(5208), "gm1");
             MACRO_CALL_MEMBER(IO::ResourceManager_Func::readNextPartOfCurrentResourceIntoMemory,
                 DAT_ResourceManager::ptr)(DAT_GMImageOffsets::instance + this->gmNumberOfProcessedPictures,
                 this->gmFileHeaderColorpaletteArray[gmID].numberOfPicturesInFile * 4, "gm1");
@@ -82,8 +82,7 @@ namespace UI {
                 this->gmAndGfxImageDataBuffer, this->gmFileHeaderColorpaletteArray[gmID].dataSize, "gm1");
             if (this->gmFileHeaderColorpaletteArray[gmID].ImageType == IO::Graphics::GIT_Animation) {
                 MACRO_CALL_MEMBER(
-                    UI::Rendering::TextureRenderCore_Func::transformGmColorTableFromRGB555To565IfRequired,
-                    this)(gmID);
+                    UI::Rendering::TextureRenderCore_Func::transformGmColorTableFromRGB555To565IfRequired, this)(gmID);
             }
             _currentImageOffset = DAT_GMImageOffsets::instance[this->gmNumberOfProcessedPictures];
             if (this->gmNumberOfProcessedPictures < this->gmFileHeaderColorpaletteArray[gmID].numberOfPicturesInFile
@@ -135,8 +134,7 @@ namespace UI {
                             = _currentTotalImagesSize + DAT_GMImageSizes::instance[_currentlyProcessedPictures];
                         _currentImageOffset
                             = _currentImageOffset + DAT_GMImageSizes::instance[_currentlyProcessedPictures];
-                        MACRO_CALL_MEMBER(
-                            UI::Rendering::TextureRenderCore_Func::adaptGmColorsToRGB565IfRequired, this)(
+                        MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::adaptGmColorsToRGB565IfRequired, this)(
                             gmID, _currentlyProcessedPictures);
                     }
                     _currentlyProcessedPictures = _currentlyProcessedPictures + 1;
@@ -149,7 +147,7 @@ namespace UI {
               Update loading bar
              */
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::drawLoadingBarUnk, this)(
-                gmID, (int)((int)(DAT_LoadingBarProgress::instance + 0xb4)));
+                gmID, (int)(DAT_LoadingBarProgress::instance + 0xb4));
         }
 
     }

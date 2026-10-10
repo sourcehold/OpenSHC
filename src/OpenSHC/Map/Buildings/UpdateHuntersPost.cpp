@@ -90,9 +90,8 @@ namespace Map {
                     sVar5 != 0)
                 && (iVar9 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
                         (int)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner, 0,
-                        (int)((int)(sVar4 * 8)), (int)((int)(sVar5 * 8)),
-                        (int)((int)(DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
-                                .terrainHeightUnk)),
+                        (int)(sVar4 * 8), (int)(sVar5 * 8),
+                        (int)(DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].terrainHeightUnk),
                         Map::Units::UT_HUNTERDOG),
                     iVar10 = DAT_CurrentBuildingID::instance, iVar9)) {
                 sVar4 = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingEntryY;
@@ -160,8 +159,7 @@ namespace Map {
                     if ((DAT_BuildingsState::instance.buildings[iVar10].animationActive != 0) && (sVar4 == 4)) {
                         MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                             (int)(short)DAT_BuildingsState::instance.buildings[iVar10].x,
-                            (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar10].y)),
-                            DE::SHCDE::FX_HUNTER_CUT);
+                            (int)((short)DAT_BuildingsState::instance.buildings[iVar10].y), DE::SHCDE::FX_HUNTER_CUT);
                         iVar10 = DAT_CurrentBuildingID::instance;
                     }
                     DAT_BuildingsState::instance.buildings[iVar10].animationFrame

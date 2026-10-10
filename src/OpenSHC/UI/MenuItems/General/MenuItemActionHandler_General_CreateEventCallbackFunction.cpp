@@ -348,7 +348,7 @@ namespace UI {
                         DAT_TribesState::ptr)(&dStack_4, (uint*)&param_1);
                     if (!iVar8
                         || (BVar4 = MACRO_CALL_MEMBER(Rendering::ViewportRenderState_Func::xyAreValid,
-                                DAT_ViewportRenderState::ptr)(dStack_4, (uint)((int)(param_1))),
+                                DAT_ViewportRenderState::ptr)(dStack_4, (uint)(param_1)),
                             iVar8 = DAT_GameSynchronyState::instance.currentPlayerSlotID, !BVar4))
                         goto switchD_004c1bae_caseD_8c;
                     DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
@@ -363,10 +363,10 @@ namespace UI {
                             MACRO_CALL_MEMBER(Map::Units::TribesState_Func::findRecentOrSignpostSpawnLocation,
                                 DAT_TribesState::ptr)(&dStack_4, (uint*)&param_1);
                             dVar5 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createAnimal, DAT_TribesState::ptr)(
-                                Commands::M_MAPPER_LION, (uint)((int)(dStack_4)), (uint)((int)(param_1)),
-                                (int)((int)((uint)
+                                Commands::M_MAPPER_LION, (uint)(dStack_4), (uint)(param_1),
+                                (int)((uint)
                                     * (byte*)(DAT_ViewportRenderState::instance.translationMatrix[param_1].addXgetTile
-                                        + 0x1d32c38 + dStack_4))));
+                                        + 0x1d32c38 + dStack_4)));
                             MACRO_CALL_MEMBER(UI::MinimapViewState_Func::setSpawnMoment, DAT_MinimapViewState::ptr)(
                                 dStack_4, param_1);
                             iVar7 = DAT_MapPropertiesState::instance.invasionEventContent.field49_0xa8;
@@ -426,13 +426,13 @@ namespace UI {
                     dVar5 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::spawnUnitsAroundLocation,
                         DAT_TribesState::ptr)(3, DAT_GameState::instance.mapAndTime.signpostEntryData[iVar8].x,
                         DAT_GameState::instance.mapAndTime.signpostEntryData[iVar8].y,
-                        (int)((int)(DAT_GameSynchronyState::instance.currentPlayerSlotID)), Map::Units::UT_E_ARCHER,
+                        (int)(DAT_GameSynchronyState::instance.currentPlayerSlotID), Map::Units::UT_E_ARCHER,
                         DAT_MapPropertiesState::instance.invasionEventContent.field49_0xa8);
                     param_1 = dVar5;
                     dVar6 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::spawnUnitsAroundLocation,
                         DAT_TribesState::ptr)(0xc, DAT_GameState::instance.mapAndTime.signpostEntryData[iVar8].x,
                         DAT_GameState::instance.mapAndTime.signpostEntryData[iVar8].y,
-                        (int)((int)(DAT_GameSynchronyState::instance.currentPlayerSlotID)), Map::Units::UT_E_MONK, 1);
+                        (int)(DAT_GameSynchronyState::instance.currentPlayerSlotID), Map::Units::UT_E_MONK, 1);
                     dStack_4 = dVar6;
                     MACRO_CALL_MEMBER(UI::MinimapViewState_Func::setSpawnMoment, DAT_MinimapViewState::ptr)(
                         DAT_GameState::instance.mapAndTime.signpostEntryData[iVar8].x,
@@ -539,17 +539,16 @@ namespace UI {
                 return;
             case 0x85:
                 MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
-                    DAT_GameSynchronyState::instance.currentPlayerSlotID,
-                    (int)((int)(SEC_RNG::instance.currentNumber2 % 9)),
+                    DAT_GameSynchronyState::instance.currentPlayerSlotID, (int)(SEC_RNG::instance.currentNumber2 % 9),
                     DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                             .campground.xEntry
                         * 8,
                     DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                             .campground.yEntry
                         * 8,
-                    (int)((int)((uint)DAT_TileMapState::instance.HeightLayer[DAT_GameState::instance
+                    (int)(DAT_TileMapState::instance.HeightLayer[DAT_GameState::instance
                             .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                            .campground.tileEntry])),
+                            .campground.tileEntry]),
                     Map::Units::UT_JUGGLER);
                 MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
                     DAT_GameSynchronyState::instance.currentPlayerSlotID, (SEC_RNG::instance.currentNumber2 >> 3) % 9,
@@ -559,7 +558,7 @@ namespace UI {
                     DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                             .campground.yEntry
                         * 8,
-                    (UnitType)((int)((uint)DAT_TileMapState::instance.HeightLayer[DAT_GameState::instance
+                    (UnitType)((int)(DAT_TileMapState::instance.HeightLayer[DAT_GameState::instance
                             .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                             .campground.tileEntry])),
                     Map::Units::UT_JUGGLER);
@@ -571,7 +570,7 @@ namespace UI {
                     DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                             .campground.yEntry
                         * 8,
-                    (UnitType)((int)((uint)DAT_TileMapState::instance.HeightLayer[DAT_GameState::instance
+                    (UnitType)((int)(DAT_TileMapState::instance.HeightLayer[DAT_GameState::instance
                             .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                             .campground.tileEntry])),
                     Map::Units::UT_JUGGLER);
@@ -583,7 +582,7 @@ namespace UI {
                     DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                             .campground.yEntry
                         * 8,
-                    (UnitType)((int)((uint)DAT_TileMapState::instance.HeightLayer[DAT_GameState::instance
+                    (UnitType)((int)(DAT_TileMapState::instance.HeightLayer[DAT_GameState::instance
                             .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                             .campground.tileEntry])),
                     Map::Units::UT_FIREEATER);
@@ -595,7 +594,7 @@ namespace UI {
                     DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                             .campground.yEntry
                         * 8,
-                    (UnitType)((int)((uint)DAT_TileMapState::instance.HeightLayer[DAT_GameState::instance
+                    (UnitType)((int)(DAT_TileMapState::instance.HeightLayer[DAT_GameState::instance
                             .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                             .campground.tileEntry])),
                     Map::Units::UT_FIREEATER);

@@ -34,8 +34,7 @@ namespace UI {
                     if (DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 == Map::MT_SIEGE) {
                         return;
                     }
-                } else if ((iVar1 < 0x1e)
-                    && (DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 != Map::MT_SIEGE)) {
+                } else if ((iVar1 < 0x1e) && (DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 != Map::MT_SIEGE)) {
                     return;
                 }
                 DAT_MapPropertiesState::instance.indexStored = iVar1;
@@ -43,8 +42,8 @@ namespace UI {
                     MACRO_CALL_MEMBER(
                         UI::MenuModalComposition_Func::setSliderParameters, DAT_MenuModalComposition2::ptr)(0,
                         *(int*)((int)DAT_MissionAestheticsDefinedData::ptr + iVar1 * 4 + 0x34b4),
-                        (int)((int)(DAT_MapPropertiesState::instance.SEC_StartingResources[*(
-                            int*)(DAT_MissionAestheticsDefinedData::ptr + iVar1 * 4 + 0x345c)])),
+                        (int)(DAT_MapPropertiesState::instance.SEC_StartingResources[*(
+                            int*)(DAT_MissionAestheticsDefinedData::ptr + iVar1 * 4 + 0x345c)]),
                         (undefined*)((int)(
 
                             (DAT_MapPropertiesState::instance.SEC_StartingResources
@@ -56,12 +55,11 @@ namespace UI {
                     DAT_MenuModalComposition2::instance.textGroup = 199;
                     MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::setExtraActiveModalDialog,
                         DAT_MenuModalComposition2::ptr)(UI::Enums::MMT_OVERLAY_SLIDER,
-                        (int)((int)(DAT_ButtonX::instance + -0x25)), (int)((int)(DAT_ButtonY::instance + 0x19)));
+                        (int)(DAT_ButtonX::instance + -0x25), (int)(DAT_ButtonY::instance + 0x19));
                     return;
                 }
                 if (iVar1 < 0x1e) {
-                    MACRO_CALL_MEMBER(
-                        Map::MapPropertiesState_Func::sumUnitPoints, DAT_MapPropertiesState::ptr)();
+                    MACRO_CALL_MEMBER(Map::MapPropertiesState_Func::sumUnitPoints, DAT_MapPropertiesState::ptr)();
                     iVar1 = (DAT_MapPropertiesState::instance
                                     .SEC_StartingResources[DAT_MapPropertiesState::instance.indexStored + 5]
                                 - DAT_MapPropertiesState::instance.DAT_MapEditorUnitPointsSum)
@@ -72,10 +70,10 @@ namespace UI {
                         iVar1 = DAT_MissionAestheticsDefinedData::instance
                                     .field1239_0x3554[DAT_MapPropertiesState::instance.indexStored];
                     }
-                    MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::setSliderParameters,
-                        DAT_MenuModalComposition2::ptr)(0, iVar1,
-                        (int)((int)(DAT_MapPropertiesState::instance
-                                .SEC_StartingResources[DAT_MapPropertiesState::instance.indexStored + 5])),
+                    MACRO_CALL_MEMBER(
+                        UI::MenuModalComposition_Func::setSliderParameters, DAT_MenuModalComposition2::ptr)(0, iVar1,
+                        (int)(DAT_MapPropertiesState::instance
+                                .SEC_StartingResources[DAT_MapPropertiesState::instance.indexStored + 5]),
                         (undefined*)((int)(
 
                             (DAT_MapPropertiesState::instance.SEC_StartingResources
@@ -91,8 +89,7 @@ namespace UI {
                     if (9 < -param_1 - 0x29U) {
                         return;
                     }
-                    MACRO_CALL_MEMBER(
-                        Map::MapPropertiesState_Func::sumUnitPoints, DAT_MapPropertiesState::ptr)();
+                    MACRO_CALL_MEMBER(Map::MapPropertiesState_Func::sumUnitPoints, DAT_MapPropertiesState::ptr)();
                     maximum = (char**)((DAT_MapPropertiesState::instance
                                                .SEC_StartingResources[DAT_MapPropertiesState::instance.indexStored + 5]
                                            - DAT_MapPropertiesState::instance.DAT_MapEditorUnitPointsSum)
@@ -104,9 +101,9 @@ namespace UI {
                                 .field614_0x9a8)[DAT_MapPropertiesState::instance.indexStored];
                     }
                     MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::setSliderParameters,
-                        DAT_MenuModalComposition2::ptr)(0, (int)((int)(maximum)),
-                        (int)((int)(DAT_MapPropertiesState::instance
-                                .SEC_StartingResources[DAT_MapPropertiesState::instance.indexStored + 5])),
+                        DAT_MenuModalComposition2::ptr)(0, (int)(maximum),
+                        (int)(DAT_MapPropertiesState::instance
+                                .SEC_StartingResources[DAT_MapPropertiesState::instance.indexStored + 5]),
                         (undefined*)((int)(
 
                             (DAT_MapPropertiesState::instance.SEC_StartingResources
@@ -117,11 +114,11 @@ namespace UI {
                 }
                 DAT_MenuModalComposition2::instance.textGroup = 199;
                 MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::setExtraActiveModalDialog,
-                    DAT_MenuModalComposition2::ptr)(UI::Enums::MMT_OVERLAY_SLIDER,
-                    (int)((int)(DAT_ButtonX::instance + -0x25)), (int)((int)(DAT_ButtonY::instance + 0x19)));
+                    DAT_MenuModalComposition2::ptr)(UI::Enums::MMT_OVERLAY_SLIDER, (int)(DAT_ButtonX::instance + -0x25),
+                    (int)(DAT_ButtonY::instance + 0x19));
             } else if (param_1 == 0x25) {
-                MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog,
-                    DAT_MenuModalComposition1::ptr)(UI::Enums::MMT_NONE, FALSE);
+                MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::activateModalDialog, DAT_MenuModalComposition1::ptr)(
+                    UI::Enums::MMT_NONE, FALSE);
                 return;
             }
             return;

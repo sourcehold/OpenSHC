@@ -34,8 +34,8 @@ namespace UI {
             if (DAT_MissionAestheticsDefinedData::instance.InvasionUnitLimits[unitTypeMenuID] < _limit) {
                 _limit = DAT_MissionAestheticsDefinedData::instance.InvasionUnitLimits[unitTypeMenuID];
             }
-            MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::setSliderParameters,
-                DAT_MenuModalComposition2::ptr)(0, _limit, _currentUnitCountOfType,
+            MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::setSliderParameters, DAT_MenuModalComposition2::ptr)(0,
+                _limit, _currentUnitCountOfType,
                 (undefined*)((int)(
 
                     ((int)&DAT_MapPropertiesState::instance
@@ -118,9 +118,9 @@ namespace UI {
             }
             DAT_MenuModalComposition2::instance.textGroup = 199;
             DAT_MenuModalComposition2::instance.textIndex = _gmID;
-            MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::setExtraActiveModalDialog,
-                DAT_MenuModalComposition2::ptr)(UI::Enums::MMT_OVERLAY_SLIDER,
-                (int)((int)(DAT_ButtonX::instance + -0x3e)), (int)((int)(DAT_ButtonY::instance + 0x19)));
+            MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::setExtraActiveModalDialog, DAT_MenuModalComposition2::ptr)(
+                UI::Enums::MMT_OVERLAY_SLIDER, (int)(DAT_ButtonX::instance + -0x3e),
+                (int)(DAT_ButtonY::instance + 0x19));
             return;
         }
 

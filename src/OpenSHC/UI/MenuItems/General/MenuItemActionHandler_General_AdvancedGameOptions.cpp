@@ -105,8 +105,8 @@ namespace UI {
                     (undefined*)((int)(&DAT_GameSynchronyState::instance.skirmishStartGold)),
                     (void*)MACRO_CALL(Synchrony::Commands_Func::QueueChangeGameIntensityOrBalance));
                 MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::setExtraActiveModalDialog,
-                    DAT_MenuModalComposition2::ptr)(UI::Enums::MMT_OVERLAY_SLIDER,
-                    (int)((int)(DAT_ButtonX::instance + 0x48)), (int)((int)(DAT_ButtonY::instance + 4)));
+                    DAT_MenuModalComposition2::ptr)(UI::Enums::MMT_OVERLAY_SLIDER, (int)(DAT_ButtonX::instance + 0x48),
+                    (int)(DAT_ButtonY::instance + 4));
                 DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray[0] = 1;
                 DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray[1] = 1;
                 DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray[2] = 1;
@@ -124,8 +124,8 @@ namespace UI {
                     (undefined*)((int)(&DAT_GameSynchronyState::instance.skirmishDefaultPopularity)),
                     (void*)MACRO_CALL(Synchrony::Commands_Func::QueueChangeGameIntensityOrBalance));
                 MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::setExtraActiveModalDialog,
-                    DAT_MenuModalComposition2::ptr)(UI::Enums::MMT_OVERLAY_SLIDER,
-                    (int)((int)(DAT_ButtonX::instance + 0x17)), (int)((int)(DAT_ButtonY::instance + 0x23)));
+                    DAT_MenuModalComposition2::ptr)(UI::Enums::MMT_OVERLAY_SLIDER, (int)(DAT_ButtonX::instance + 0x17),
+                    (int)(DAT_ButtonY::instance + 0x23));
                 DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray[0] = 1;
                 DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray[1] = 1;
                 DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray[2] = 1;
@@ -157,8 +157,8 @@ namespace UI {
                     (undefined*)((int)(&DAT_GameSynchronyState::instance.skirmishGameSpeedLevel)),
                     (void*)MACRO_CALL(UI::Helpers_Func::CallbackSetMultiplayerSpeedLevel));
                 MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::setExtraActiveModalDialog,
-                    DAT_MenuModalComposition2::ptr)(UI::Enums::MMT_OVERLAY_SLIDER,
-                    (int)((int)(DAT_ButtonX::instance + 0x48)), (int)((int)(DAT_ButtonY::instance + 4)));
+                    DAT_MenuModalComposition2::ptr)(UI::Enums::MMT_OVERLAY_SLIDER, (int)(DAT_ButtonX::instance + 0x48),
+                    (int)(DAT_ButtonY::instance + 4));
                 DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray[0] = 1;
                 DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray[1] = 1;
                 DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray[2] = 1;
@@ -196,7 +196,7 @@ namespace UI {
                     (undefined*)MACRO_CALL(Synchrony::Commands_Func::QueueChangeGameIntensityOrBalance));
                 MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::setExtraActiveModalDialog,
                     DAT_MenuModalComposition1::ptr)(UI::Enums::MMT_UNUSED_WIN_CONDITION,
-                    (int)((int)(DAT_ButtonX::instance + 5)), (int)((int)(DAT_ButtonY::instance + 0x23)));
+                    (int)(DAT_ButtonX::instance + 5), (int)(DAT_ButtonY::instance + 0x23));
                 DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray[0] = 1;
                 DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray[1] = 1;
                 DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray[2] = 1;
@@ -438,7 +438,7 @@ namespace UI {
                 if (param_1 == -1) {
                     MACRO_CALL_MEMBER(
                         UI::MenuModalComposition_Func::setSliderParameters, DAT_MenuModalComposition2::ptr)(2000,
-                        150000, (int)((int)(DAT_GameSynchronyState::instance.skirmishPoints)),
+                        150000, (int)(DAT_GameSynchronyState::instance.skirmishPoints),
                         (undefined*)((int)(&DAT_GameSynchronyState::instance.skirmishPoints)),
                         (void*)MACRO_CALL(Synchrony::Commands_Func::QueueChangeGameIntensityOrBalance));
                     DAT_MenuModalComposition2::instance.textGroup = 0x4f;
@@ -448,7 +448,7 @@ namespace UI {
                      */
                     MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::setExtraActiveModalDialog,
                         DAT_MenuModalComposition2::ptr)(UI::Enums::MMT_OVERLAY_SLIDER,
-                        (int)((int)(DAT_ButtonX::instance + -0x17)), (int)((int)(DAT_ButtonY::instance + 0x3f)));
+                        (int)(DAT_ButtonX::instance + -0x17), (int)(DAT_ButtonY::instance + 0x3f));
                     DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray[0] = 1;
                     DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray[1] = 1;
                     DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray[2] = 1;
@@ -549,32 +549,32 @@ namespace UI {
                             iVar5 = (DAT_ButtonBackgroundBlendStrength::instance + -0x20) * 0x20;
                             MACRO_CALL_MEMBER(Text::TextManager_Func::renderInGameText2, DAT_TextManagerObject::ptr)(
                                 DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 0x5f,
-                                (int)((int)(DAT_ButtonW::instance + -0x14 + DAT_ButtonX::instance)),
-                                (int)((int)(DAT_ButtonY::instance + 7)), Text::TTA_RIGHT, 0xb8e6f5, 0, 0x12, FALSE,
+                                (int)(DAT_ButtonW::instance + -0x14 + DAT_ButtonX::instance),
+                                (int)(DAT_ButtonY::instance + 7), Text::TTA_RIGHT, 0xb8e6f5, 0, 0x12, FALSE,
                                 (iVar5 / 32) + 0x20);
                         }
                         if (DAT_GameSynchronyState::instance.skirmishNoRushSetting == 1) {
                             iVar5 = (DAT_ButtonBackgroundBlendStrength::instance + -0x20) * 0x20;
                             MACRO_CALL_MEMBER(Text::TextManager_Func::renderInGameText2, DAT_TextManagerObject::ptr)(
                                 DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 0x60,
-                                (int)((int)(DAT_ButtonW::instance + -0x14 + DAT_ButtonX::instance)),
-                                (int)((int)(DAT_ButtonY::instance + 7)), Text::TTA_RIGHT, 0xb8e6f5, 0, 0x12, FALSE,
+                                (int)(DAT_ButtonW::instance + -0x14 + DAT_ButtonX::instance),
+                                (int)(DAT_ButtonY::instance + 7), Text::TTA_RIGHT, 0xb8e6f5, 0, 0x12, FALSE,
                                 (iVar5 / 32) + 0x20);
                         }
                         if (DAT_GameSynchronyState::instance.skirmishNoRushSetting == 2) {
                             iVar5 = (DAT_ButtonBackgroundBlendStrength::instance + -0x20) * 0x20;
                             MACRO_CALL_MEMBER(Text::TextManager_Func::renderInGameText2, DAT_TextManagerObject::ptr)(
                                 DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 0x61,
-                                (int)((int)(DAT_ButtonW::instance + -0x14 + DAT_ButtonX::instance)),
-                                (int)((int)(DAT_ButtonY::instance + 7)), Text::TTA_RIGHT, 0xb8e6f5, 0, 0x12, FALSE,
+                                (int)(DAT_ButtonW::instance + -0x14 + DAT_ButtonX::instance),
+                                (int)(DAT_ButtonY::instance + 7), Text::TTA_RIGHT, 0xb8e6f5, 0, 0x12, FALSE,
                                 (iVar5 / 32) + 0x20);
                         }
                         if (DAT_GameSynchronyState::instance.skirmishNoRushSetting == 3) {
                             iVar5 = (DAT_ButtonBackgroundBlendStrength::instance + -0x20) * 0x20;
                             MACRO_CALL_MEMBER(Text::TextManager_Func::renderInGameText2, DAT_TextManagerObject::ptr)(
                                 DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 0x62,
-                                (int)((int)(DAT_ButtonW::instance + -0x14 + DAT_ButtonX::instance)),
-                                (int)((int)(DAT_ButtonY::instance + 7)), Text::TTA_RIGHT, 0xb8e6f5, 0, 0x12, FALSE,
+                                (int)(DAT_ButtonW::instance + -0x14 + DAT_ButtonX::instance),
+                                (int)(DAT_ButtonY::instance + 7), Text::TTA_RIGHT, 0xb8e6f5, 0, 0x12, FALSE,
                                 (iVar5 / 32) + 0x20);
                         }
                         if (DAT_GameSynchronyState::instance.skirmishNoRushSetting == 4) {
@@ -584,8 +584,8 @@ namespace UI {
                              */
                             MACRO_CALL_MEMBER(Text::TextManager_Func::renderInGameText2, DAT_TextManagerObject::ptr)(
                                 DE::SHCDE::TEXT_SKIRMISH_MISC, 8,
-                                (int)((int)(DAT_ButtonW::instance + -0x14 + DAT_ButtonX::instance)),
-                                (int)((int)(DAT_ButtonY::instance + 7)), Text::TTA_RIGHT, 0xb8e6f5, 0, 0x12, FALSE,
+                                (int)(DAT_ButtonW::instance + -0x14 + DAT_ButtonX::instance),
+                                (int)(DAT_ButtonY::instance + 7), Text::TTA_RIGHT, 0xb8e6f5, 0, 0x12, FALSE,
                                 (iVar5 / 32) + 0x20);
                         }
                         bVar3 = false;
@@ -593,8 +593,8 @@ namespace UI {
                             iVar5 = (DAT_ButtonBackgroundBlendStrength::instance + -0x20) * 0x20;
                             MACRO_CALL_MEMBER(Text::TextManager_Func::renderInGameText2, DAT_TextManagerObject::ptr)(
                                 DE::SHCDE::TEXT_SKIRMISH_MISC, 9,
-                                (int)((int)(DAT_ButtonW::instance + -0x14 + DAT_ButtonX::instance)),
-                                (int)((int)(DAT_ButtonY::instance + 7)), Text::TTA_RIGHT, 0xb8e6f5, 0, 0x12, FALSE,
+                                (int)(DAT_ButtonW::instance + -0x14 + DAT_ButtonX::instance),
+                                (int)(DAT_ButtonY::instance + 7), Text::TTA_RIGHT, 0xb8e6f5, 0, 0x12, FALSE,
                                 (iVar5 / 32) + 0x20);
                             bVar3 = DAT_GameSynchronyState::instance.skirmishNoRushSetting == 5;
                         }

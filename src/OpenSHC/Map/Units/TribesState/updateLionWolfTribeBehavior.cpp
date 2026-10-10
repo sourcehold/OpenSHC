@@ -55,9 +55,8 @@ namespace Map {
                     this->tribes[param_1].unknownAttackRelatedUpdateCounter = 0;
                     this->tribes[param_1].initialMoveOrderGiven = 2;
                     MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, this)(param_1,
-                        (uint)((int)((int)DAT_UnitsState::instance.units[sVar2].x)),
-                        (uint)((int)((int)DAT_UnitsState::instance.units[sVar2].y)), 0, 0,
-                        Map::Units::Instructions::UMSE_0);
+                        (uint)(DAT_UnitsState::instance.units[sVar2].x),
+                        (uint)(DAT_UnitsState::instance.units[sVar2].y), 0, 0, Map::Units::Instructions::UMSE_0);
                     this->tribes[param_1].tribeBehaviorType = Map::Units::STBT_1;
                 }
                 if (sVar2 == 1) {
@@ -68,8 +67,8 @@ namespace Map {
                     MACRO_CALL_MEMBER(Map::Units::TribesState_Func::standUpAllTribeUnits, this)(param_1);
                     sVar2 = this->tribes[param_1].currentRallyPointIndex;
                     MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, this)(param_1,
-                        (uint)((int)((int)this->tribes[param_1].rallyPointArray[sVar2][0])),
-                        (uint)((int)((int)this->tribes[param_1].rallyPointArray[sVar2][1])), 0, 0,
+                        (uint)((int)this->tribes[param_1].rallyPointArray[sVar2][0]),
+                        (uint)((int)this->tribes[param_1].rallyPointArray[sVar2][1]), 0, 0,
                         Map::Units::Instructions::UMSE_0);
                     psVar1 = &this->tribes[param_1].currentRallyPointIndex;
                     *psVar1 = *psVar1 + 1;
@@ -100,8 +99,8 @@ namespace Map {
                             && (sVar2 = this->tribes[param_1].rallyPointCount, 0 < sVar2)) {
                             MACRO_CALL_MEMBER(
                                 Map::Units::TribesState_Func::giveUnitSelectionMoveInstructionNoMatchedSpeed, this)(
-                                param_1, (uint)((int)((int)this->tribes[param_1].rallyPointArray[sVar2 + -1][0])),
-                                (uint)((int)((int)this->tribes[param_1].rallyPointArray[sVar2 + -1][1])), 0, 0);
+                                param_1, (uint)((int)this->tribes[param_1].rallyPointArray[sVar2 + -1][0]),
+                                (uint)((int)this->tribes[param_1].rallyPointArray[sVar2 + -1][1]), 0, 0);
                         }
                     } else if (BVar5) {
                         this->tribes[param_1].tribeBehaviorType = Map::Units::STBT_1;

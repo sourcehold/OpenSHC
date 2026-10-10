@@ -35,9 +35,8 @@ namespace UI {
             _level = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                          .tacticalPowersBarLevel;
             MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-                DAT_ButtonX::instance + 0x14, (int)((int)(DAT_ButtonY::instance + 10)),
-                (int)((int)(DAT_ButtonX::instance + 0x1e)), (int)((int)(DAT_ButtonY::instance + 10)),
-                (ushort)((int)(COL_VERY_SOFT_YELLOW::instance.shortValue)));
+                DAT_ButtonX::instance + 0x14, (int)(DAT_ButtonY::instance + 10), (int)(DAT_ButtonX::instance + 0x1e),
+                (int)(DAT_ButtonY::instance + 10), (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
             iVar1 = param_1;
             switch (param_1) {
             case 0:
@@ -77,20 +76,20 @@ namespace UI {
                     }
                     MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                         DAT_TextureRenderCoreObject::ptr)(IO::Graphics::GID_INTERFACE_ICONS_3, iVar1 + 0x121,
-                        (int)((int)(DAT_ButtonX::instance)), (int)((int)(DAT_ButtonY::instance)),
-                        (int)((int)(DAT_ButtonBlendStrength::instance)));
+                        (int)(DAT_ButtonX::instance), (int)(DAT_ButtonY::instance),
+                        (int)(DAT_ButtonBlendStrength::instance));
                     if (!DAT_ButtonCurrentlyInteracting::instance) {}
                     MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                         DAT_TextureRenderCoreObject::ptr)(IO::Graphics::GID_INTERFACE_ICONS_3, 0x129,
-                        (int)((int)(DAT_ButtonX::instance)), (int)((int)(DAT_ButtonY::instance)),
-                        (int)((int)(DAT_ButtonBlendStrength::instance)));
+                        (int)(DAT_ButtonX::instance), (int)(DAT_ButtonY::instance),
+                        (int)(DAT_ButtonBlendStrength::instance));
                 }
             } else {
                 blendStrengthUnk = 0x20 - (0x20 - DAT_ButtonBlendStrength::instance) / 2;
             }
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGMWithBlending,
                 DAT_TextureRenderCoreObject::ptr)(IO::Graphics::GID_INTERFACE_ICONS_3, iVar1 + 0x12a,
-                (int)((int)(DAT_ButtonX::instance)), (int)((int)(DAT_ButtonY::instance)), blendStrengthUnk);
+                (int)(DAT_ButtonX::instance), (int)(DAT_ButtonY::instance), blendStrengthUnk);
         }
 
     }

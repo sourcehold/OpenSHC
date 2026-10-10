@@ -49,26 +49,26 @@ namespace Map {
                 if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex == 3) {
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                         (int)(short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x,
-                        (int)((int)((short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y)),
+                        (int)((short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y),
                         DE::SHCDE::FX_PITCH_SCOOP);
                 }
                 if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex == 0x14) {
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                         (int)(short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x,
-                        (int)((int)((short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y)),
+                        (int)((short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y),
                         DE::SHCDE::FX_PITCH_POUR);
                 }
                 if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex == 1) {
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                         (int)(short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x,
-                        (int)((int)((short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y)),
+                        (int)((short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y),
                         DE::SHCDE::FX_PITCH_WATERLAP);
                 }
                 sVar4 = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex;
                 if ((sVar4 == 10) || (sVar4 == 0x19)) {
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                         (int)(short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x,
-                        (int)((int)((short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y)),
+                        (int)((short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y),
                         DE::SHCDE::FX_MUDBUB);
                 }
             }

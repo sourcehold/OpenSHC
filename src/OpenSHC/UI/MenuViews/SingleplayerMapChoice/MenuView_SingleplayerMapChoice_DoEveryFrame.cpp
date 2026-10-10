@@ -182,22 +182,22 @@ namespace UI {
             if (!DAT_00b960dc::instance) {
                 iVar8 = iVar8 + 0x295;
                 iVar7 = iVar7 + -1;
-                MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(iVar7,
-                    iVar4 + 0xfc, iVar8, iVar4 + 0xfc, (ushort)((int)(COL_VERY_SOFT_YELLOW::instance.shortValue)));
-                MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(iVar7,
-                    iVar4 + 0x217, iVar8, iVar4 + 0x217, (ushort)((int)(COL_VERY_SOFT_YELLOW::instance.shortValue)));
-                MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(iVar7,
-                    iVar4 + 0x111, iVar8, iVar4 + 0x111, (ushort)((int)(COL_VERY_SOFT_YELLOW::instance.shortValue)));
                 MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-                    iVar7, top, iVar7, bottom, (ushort)((int)(COL_VERY_SOFT_YELLOW::instance.shortValue)));
+                    iVar7, iVar4 + 0xfc, iVar8, iVar4 + 0xfc, (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
                 MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-                    iVar8, top, iVar8, bottom, (ushort)((int)(COL_VERY_SOFT_YELLOW::instance.shortValue)));
+                    iVar7, iVar4 + 0x217, iVar8, iVar4 + 0x217, (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
                 MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-                    local_3f8 + -0x14, top, (int)((int)(local_3f8 + -0x14)), bottom,
-                    (ushort)((int)(COL_VERY_SOFT_YELLOW::instance.shortValue)));
+                    iVar7, iVar4 + 0x111, iVar8, iVar4 + 0x111, (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
                 MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-                    local_3f8 + -0x13, iVar4 + 0x202, (int)((int)(local_3f8)), iVar4 + 0x202,
-                    (ushort)((int)(COL_VERY_SOFT_YELLOW::instance.shortValue)));
+                    iVar7, top, iVar7, bottom, (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
+                MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
+                    iVar8, top, iVar8, bottom, (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
+                MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
+                    local_3f8 + -0x14, top, (int)(local_3f8 + -0x14), bottom,
+                    (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
+                MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
+                    local_3f8 + -0x13, iVar4 + 0x202, (int)(local_3f8), iVar4 + 0x202,
+                    (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
             };
             return;
         }

@@ -21,8 +21,8 @@ namespace UI {
                 left, top, right, bottom, 0);
             if (_drawReady) {
                 MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderBlendedBlackBox,
-                    DAT_TextureRenderCoreObject::ptr)(this->drawStartX, (int)((int)(this->drawStartY)),
-                    (int)((int)(this->drawEndX)), (int)((int)(this->drawEndY)), blendStrengh);
+                    DAT_TextureRenderCoreObject::ptr)(this->drawStartX, (int)(this->drawStartY), (int)(this->drawEndX),
+                    (int)(this->drawEndY), blendStrengh);
             }
         }
 

@@ -82,13 +82,13 @@ namespace Map {
                                     if (_freeTile) {
                                         MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::setDestinationForUnit,
                                             DAT_UnitsState::ptr)(_unitID,
-                                            (uint)((int)(_freeTile
+                                            (uint)(_freeTile
                                                 - DAT_ViewportRenderState::instance
                                                     .translationMatrix[DAT_ViewportRenderState::instance
                                                             .tileTranslationMatrix_YComponent[_freeTile]]
-                                                    .addXgetTile)),
-                                            (uint)((int)((int)DAT_ViewportRenderState::instance
-                                                    .tileTranslationMatrix_YComponent[_freeTile])),
+                                                    .addXgetTile),
+                                            (uint)(DAT_ViewportRenderState::instance
+                                                    .tileTranslationMatrix_YComponent[_freeTile]),
                                             0);
                                         sVar3 = DAT_ViewportRenderState::instance
                                                     .tileTranslationMatrix_YComponent[_tile1];

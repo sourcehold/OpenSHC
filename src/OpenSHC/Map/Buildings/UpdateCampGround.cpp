@@ -45,8 +45,7 @@ namespace Map {
                 DAT_SFX_Interval_Campfire::instance = 0;
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                     (int)(short)DAT_BuildingsState::instance.buildings[_currentBuildingID].x,
-                    (int)((int)((short)DAT_BuildingsState::instance.buildings[_currentBuildingID].y)),
-                    DE::SHCDE::FX_CAMPFIRE);
+                    (int)((short)DAT_BuildingsState::instance.buildings[_currentBuildingID].y), DE::SHCDE::FX_CAMPFIRE);
                 _currentBuildingID = DAT_CurrentBuildingID::instance;
             }
         }
@@ -111,8 +110,8 @@ namespace Map {
             }
         LAB_004182b0:
             DAT_BuildingsState::instance.buildings[_currentBuildingID].animationFrame
-                = (char)DAT_BuildingDefinedData::instance
-                      .CampGroundAnimationFrames[DAT_BuildingsState::instance.buildings[_currentBuildingID].animationIndex]
+                = (char)DAT_BuildingDefinedData::instance.CampGroundAnimationFrames
+                      [DAT_BuildingsState::instance.buildings[_currentBuildingID].animationIndex]
                 + 0xb;
         }
         _ownerPlayerIndex = DAT_BuildingsState::instance.buildings[_currentBuildingID].field192_0x270;
@@ -198,7 +197,7 @@ namespace Map {
             _vclock = 100;
         }
         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::updatePeasantSeatingAtBuilding, DAT_TribesState::ptr)(
-            _currentBuildingID, (int)((int)(_ownerPlayerIndex)), _vclock);
+            _currentBuildingID, (int)(_ownerPlayerIndex), _vclock);
         _currentBuildingID = DAT_CurrentBuildingID::instance;
     LAB_00418476:
         DAT_BuildingsState::instance.buildings[_currentBuildingID].field192_0x270 = 0;

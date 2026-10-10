@@ -179,15 +179,14 @@ namespace Map {
                     if ((_ownerPlayerIndex / 0xc < 0x1e) && (_ownerPlayerIndex % 0xc == 10)) {
                         MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                             (int)(short)DAT_BuildingsState::instance.buildings[iVar7].x,
-                            (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar7].y)),
-                            DE::SHCDE::FX_COW_MILK);
+                            (int)((short)DAT_BuildingsState::instance.buildings[iVar7].y), DE::SHCDE::FX_COW_MILK);
                         iVar7 = DAT_CurrentBuildingID::instance;
                     }
                 }
                 if (DAT_BuildingsState::instance.buildings[iVar7].extraAnimationFrame1 == 0x170) {
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                         (int)(short)DAT_BuildingsState::instance.buildings[iVar7].x,
-                        (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar7].y)), DE::SHCDE::FX_MILK_POUR);
+                        (int)((short)DAT_BuildingsState::instance.buildings[iVar7].y), DE::SHCDE::FX_MILK_POUR);
                     iVar7 = DAT_CurrentBuildingID::instance;
                 }
             } else if (bVar2 == 5) {
@@ -269,8 +268,8 @@ namespace Map {
                     .translationMatrix[DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[iVar6]]
                     .addXgetTile)
                 * 8,
-            (int)((int)(DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[iVar6] * 8)),
-            (int)((int)(DAT_BuildingsState::instance.buildings[iVar7].terrainHeightUnk)), Map::Units::UT_COW);
+            (int)(DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[iVar6] * 8),
+            (int)(DAT_BuildingsState::instance.buildings[iVar7].terrainHeightUnk), Map::Units::UT_COW);
         iVar7 = DAT_CurrentBuildingID::instance;
         if (!_cow)
             goto LAB_00416a00;

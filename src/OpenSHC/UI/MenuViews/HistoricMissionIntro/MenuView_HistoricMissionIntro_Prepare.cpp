@@ -30,31 +30,28 @@ namespace UI {
             uint local_4;
             local_4 = MSVC_SecurityCookie::instance ^ (uint)_tgxFileName;
             MACRO_CALL(UI::Helpers_Func::PrepareHistoryBook)();
-            MACRO_CALL(OS_Func::_sprintf)(
-                _tgxFileName, "m%dmap.tgx", DAT_GameCore::instance.missionNumber1to20);
-            DAT_00eb0b20::instance = MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::loadGfxFile,
-                DAT_TextureRenderCoreObject::ptr)(_tgxFileName);
+            MACRO_CALL(OS_Func::_sprintf)(_tgxFileName, "m%dmap.tgx", DAT_GameCore::instance.missionNumber1to20);
+            DAT_00eb0b20::instance = MACRO_CALL_MEMBER(
+                UI::Rendering::TextureRenderCore_Func::loadGfxFile, DAT_TextureRenderCoreObject::ptr)(_tgxFileName);
             DAT_NumberOfStoredMenuStrings::instance = 0;
-            pcVar1 = MACRO_CALL_MEMBER(
-                Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
-                (DE::SHCDE::eTextSections)(DAT_GameCore::instance.missionNumber1to20 * 4 + 95), 0);
+            pcVar1
+                = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
+                    (DE::SHCDE::eTextSections)(DAT_GameCore::instance.missionNumber1to20 * 4 + 95), 0);
             MACRO_CALL(UI::Helpers_Func::StoreStringInMenuStringArray)(pcVar1);
             pcVar1 = MACRO_CALL_MEMBER(
                 Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
-                (DE::SHCDE::eTextSections)(DAT_GameCore::instance.missionNumber1to20 * 4
-                    + DE::SHCDE::TEXT_TUTORIAL),
+                (DE::SHCDE::eTextSections)(DAT_GameCore::instance.missionNumber1to20 * 4 + DE::SHCDE::TEXT_TUTORIAL),
                 1);
             MACRO_CALL(UI::Helpers_Func::StoreStringInMenuStringArray)(pcVar1);
             pcVar1 = MACRO_CALL_MEMBER(
                 Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
-                (DE::SHCDE::eTextSections)(DAT_GameCore::instance.missionNumber1to20 * 4
-                    + DE::SHCDE::TEXT_TUTORIAL),
+                (DE::SHCDE::eTextSections)(DAT_GameCore::instance.missionNumber1to20 * 4 + DE::SHCDE::TEXT_TUTORIAL),
                 2);
             MACRO_CALL(UI::Helpers_Func::StoreStringInMenuStringArray)(pcVar1);
             FLOAT_00ec0834::instance = 0.0;
             DAT_00ed2780::instance = 1;
             MACRO_CALL(UI::Helpers_Func::TrimStoredMenuString)(
-                2, (undefined4)((int)(30)), (undefined4)((int)(380)), (int)((int)(740)), 0, (int)((int)(17)));
+                2, (undefined4)((int)(30)), (undefined4)((int)(380)), (int)(740), 0, (int)(17));
             MACRO_CALL(Rendering_Func::TicksStartCounter)();
             MACRO_CALL(UI::Helpers_Func::LoadTGX_shc_back)();
             ;

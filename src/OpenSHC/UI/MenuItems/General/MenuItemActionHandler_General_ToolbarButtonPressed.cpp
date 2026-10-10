@@ -81,7 +81,7 @@ namespace UI {
             if (DAT_GameCore::instance.gameMode_2 == Game::GM_CRUSADER_TUTORIAL) {
                 BVar1 = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,
                     DAT_BuildingsState::ptr)(buttonID);
-                BVar2 = MACRO_CALL(Game_Func::Tutorial_IsActionAllowed)(1, (int)((int)(BVar1)));
+                BVar2 = MACRO_CALL(Game_Func::Tutorial_IsActionAllowed)(1, (int)(BVar1));
                 if (!BVar2) {
                     MACRO_CALL(UI::Helpers_Func::SetTutorialHintActiveWithTimestamp)();
                 }
@@ -243,7 +243,7 @@ namespace UI {
                         (int)DAT_BuildingsState::instance.buildings[iVar3].surfaceAreaUnk != uVar5 * uVar5)) {
                     MACRO_CALL_MEMBER(Rendering::ViewportRenderState_Func::focusOnCoordinate,
                         DAT_ViewportRenderState::ptr)((short)DAT_BuildingsState::instance.buildings[iVar3].x + 1,
-                        (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar3].y + 1)));
+                        (int)((short)DAT_BuildingsState::instance.buildings[iVar3].y + 1));
                 }
                 break;
             case Commands::M_MAPPER_MOAT:
@@ -293,9 +293,8 @@ namespace UI {
             BVar1 = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,
                 DAT_BuildingsState::ptr)(buttonID);
             if (BVar1 != (BuildingType)0) {
-                MACRO_CALL_MEMBER(
-                    Game::GameStateStructures_Func::checkRequiredResourcesForBuildingOrPlanToBuy, DAT_GameState::ptr)(
-                    buttonID, (int)((int)(DAT_GameSynchronyState::instance.currentPlayerSlotID)), TRUE);
+                MACRO_CALL_MEMBER(Game::GameStateStructures_Func::checkRequiredResourcesForBuildingOrPlanToBuy,
+                    DAT_GameState::ptr)(buttonID, (int)(DAT_GameSynchronyState::instance.currentPlayerSlotID), TRUE);
             }
             DAT_TileMapState::instance.unitPlacementCount = 1;
             DAT_TileMapState::instance.currentMapperCommand = buttonID;

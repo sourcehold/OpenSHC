@@ -27,39 +27,37 @@ namespace UI {
             if (yPos <= _yPosEnd + -0x14) {
                 do {
                     MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
-                        DAT_TextureRenderCoreObject::ptr)(IO::Graphics::GID_INTERFACE_ICONS_3, 0x4f,
-                        (int)((int)(xPos)), _yPos, IO::Graphics::GID_INTERFACE_ICONS_3, 0x50, blendStrength);
+                        DAT_TextureRenderCoreObject::ptr)(IO::Graphics::GID_INTERFACE_ICONS_3, 0x4f, (int)(xPos), _yPos,
+                        IO::Graphics::GID_INTERFACE_ICONS_3, 0x50, blendStrength);
                     _yPos = _yPos + 0x14;
                 } while (_yPos <= _yPosEnd + -0x14);
             }
             for (; _yPos < _yPosEnd; _yPos = _yPos + 1) {
                 MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
-                    DAT_TextureRenderCoreObject::ptr)(IO::Graphics::GID_INTERFACE_ICONS_3, 0x5f,
-                    (int)((int)(xPos)), _yPos, IO::Graphics::GID_INTERFACE_ICONS_3, 0x60, blendStrength);
+                    DAT_TextureRenderCoreObject::ptr)(IO::Graphics::GID_INTERFACE_ICONS_3, 0x5f, (int)(xPos), _yPos,
+                    IO::Graphics::GID_INTERFACE_ICONS_3, 0x60, blendStrength);
             }
             if (isDragged) {
                 if (thumbHeight < 0x15) {
                     MACRO_CALL_MEMBER(
                         UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                        DE::SHCDE::GM_INTERFACE_ICONS3, 0x59, (int)((int)(xPos)), yPos + thumbYPos);
+                        DE::SHCDE::GM_INTERFACE_ICONS3, 0x59, (int)(xPos), yPos + thumbYPos);
                 }
-                MACRO_CALL_MEMBER(
-                    UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                    DE::SHCDE::GM_INTERFACE_ICONS3, 100, (int)((int)(xPos)), thumbYPos + yPos);
+                MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
+                    DE::SHCDE::GM_INTERFACE_ICONS3, 100, (int)(xPos), thumbYPos + yPos);
                 _yPos = thumbYPos + 10;
                 if (10 < thumbHeight + -10) {
                     _yPosEnd = thumbHeight + -0x14;
                     do {
                         MACRO_CALL_MEMBER(
                             UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                            DE::SHCDE::GM_INTERFACE_ICONS3, 0x65, (int)((int)(xPos)), _yPos + yPos);
+                            DE::SHCDE::GM_INTERFACE_ICONS3, 0x65, (int)(xPos), _yPos + yPos);
                         _yPos = _yPos + 1;
                         _yPosEnd = _yPosEnd + -1;
                     } while (_yPosEnd);
                 }
-                MACRO_CALL_MEMBER(
-                    UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                    DE::SHCDE::GM_INTERFACE_ICONS3, 0x66, (int)((int)(xPos)), yPos + _yPos);
+                MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
+                    DE::SHCDE::GM_INTERFACE_ICONS3, 0x66, (int)(xPos), yPos + _yPos);
             }
             if (thumbHeight < 0x15) {
                 alphaImageID = 0x5a;
@@ -67,17 +65,15 @@ namespace UI {
                 _yPos = thumbYPos;
             } else {
                 MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
-                    DAT_TextureRenderCoreObject::ptr)(IO::Graphics::GID_INTERFACE_ICONS_3, 100,
-                    (int)((int)(xPos)), thumbYPos + yPos, IO::Graphics::GID_INTERFACE_ICONS_3, 0x67,
-                    blendStrength);
+                    DAT_TextureRenderCoreObject::ptr)(IO::Graphics::GID_INTERFACE_ICONS_3, 100, (int)(xPos),
+                    thumbYPos + yPos, IO::Graphics::GID_INTERFACE_ICONS_3, 0x67, blendStrength);
                 _yPos = thumbYPos + 10;
                 if (10 < thumbHeight + -10) {
                     thumbYPos = thumbHeight + -0x14;
                     do {
                         MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
-                            DAT_TextureRenderCoreObject::ptr)(IO::Graphics::GID_INTERFACE_ICONS_3, 0x65,
-                            (int)((int)(xPos)), _yPos + yPos, IO::Graphics::GID_INTERFACE_ICONS_3, 0x68,
-                            blendStrength);
+                            DAT_TextureRenderCoreObject::ptr)(IO::Graphics::GID_INTERFACE_ICONS_3, 0x65, (int)(xPos),
+                            _yPos + yPos, IO::Graphics::GID_INTERFACE_ICONS_3, 0x68, blendStrength);
                         _yPos = _yPos + 1;
                         thumbYPos = thumbYPos + -1;
                     } while (thumbYPos);
@@ -86,9 +82,8 @@ namespace UI {
                 _yPosEnd = 0x66;
             }
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
-                DAT_TextureRenderCoreObject::ptr)(IO::Graphics::GID_INTERFACE_ICONS_3, _yPosEnd,
-                (int)((int)(xPos)), yPos + _yPos, IO::Graphics::GID_INTERFACE_ICONS_3, alphaImageID,
-                blendStrength);
+                DAT_TextureRenderCoreObject::ptr)(IO::Graphics::GID_INTERFACE_ICONS_3, _yPosEnd, (int)(xPos),
+                yPos + _yPos, IO::Graphics::GID_INTERFACE_ICONS_3, alphaImageID, blendStrength);
         }
 
     }

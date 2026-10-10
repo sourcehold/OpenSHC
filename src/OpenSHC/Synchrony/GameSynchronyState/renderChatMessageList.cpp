@@ -36,11 +36,12 @@ namespace Synchrony {
         do {
             if (this->DAT_ChatEventArray[this->chatMessageRenderIndex].flag == 1) {
                 iVar1 = (DAT_ButtonBackgroundBlendStrength::instance + -0x20) * 0x20;
-                MACRO_CALL_MEMBER(Text::TextManager_Func::renderInGameTextWithShadow,
-                    DAT_TextManagerObject::ptr)(this->DAT_ChatMessageSubjectPlayerNameArray[this->chatMessageRenderIndex],
-                    xPos, yPos, Text::TTA_LEFT,
-                    (uint)((int)(DAT_RenderingDefinedData::instance.ColorTable1[DAT_BlendingDefinedData::instance
-                            .PlayerSlotUnitColor[this->DAT_ChatEventArray[this->chatMessageRenderIndex].subjectPlayer]])),
+                MACRO_CALL_MEMBER(Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
+                    this->DAT_ChatMessageSubjectPlayerNameArray[this->chatMessageRenderIndex], xPos, yPos,
+                    Text::TTA_LEFT,
+                    (uint)(DAT_RenderingDefinedData::instance
+                            .ColorTable1[DAT_BlendingDefinedData::instance.PlayerSlotUnitColor
+                                    [this->DAT_ChatEventArray[this->chatMessageRenderIndex].subjectPlayer]]),
                     0, 0x13, FALSE, (iVar1 / 32) + 0x20);
                 iVar1 = MACRO_CALL_MEMBER(Text::FontSizeClass_Func::renderMultilineTextUnk,
                     &DAT_TextManagerObject::instance.fontSizeClassArray[0x13])(
@@ -50,13 +51,12 @@ namespace Synchrony {
                     iVar1 = (DAT_ButtonBackgroundBlendStrength::instance + -0x20) * 0x20;
                     yPos = yPos + -0x12;
                     iVar2 = iVar2 + 1;
-                    MACRO_CALL_MEMBER(
-                        Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
+                    MACRO_CALL_MEMBER(Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
                         this->DAT_ChatMessageSubjectPlayerNameArray[this->chatMessageRenderIndex], xPos, yPos,
                         Text::TTA_LEFT,
-                        (uint)((int)(DAT_RenderingDefinedData::instance
+                        (uint)(DAT_RenderingDefinedData::instance
                                 .ColorTable1[DAT_BlendingDefinedData::instance.PlayerSlotUnitColor
-                                        [this->DAT_ChatEventArray[this->chatMessageRenderIndex].subjectPlayer]])),
+                                        [this->DAT_ChatEventArray[this->chatMessageRenderIndex].subjectPlayer]]),
                         0, 0x13, FALSE, (iVar1 / 32) + 0x20);
                 }
                 iVar1 = (DAT_ButtonBackgroundBlendStrength::instance + -0x20) * 0x20;

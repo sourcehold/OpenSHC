@@ -15,8 +15,8 @@ namespace Text {
         if (iVar2 != 2) {
             MACRO_CALL_MEMBER(Text::UserTextHandler_Func::shiftTextLeftAtCursor, this)(
                 this->textCursorIndexArray[this->textArrayIndex],
-                (int)((int)(this->textContentLengthArray[this->textArrayIndex]
-                    - this->textCursorIndexArray[this->textArrayIndex])));
+                (int)(this->textContentLengthArray[this->textArrayIndex]
+                    - this->textCursorIndexArray[this->textArrayIndex]));
             pacVar3 = this->textArray + this->textArrayIndex;
             do {
                 pcVar1 = *pacVar3;

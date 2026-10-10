@@ -45,13 +45,13 @@ namespace Map {
                      */
                     MACRO_CALL_MEMBER(Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                         DAT_ViewportRenderState::ptr)(IO::Graphics::GID_FLOATS_NEW,
-                        (int)((int)(((*_pRallyPoints)[0] + DAT_TileMapState::instance.flagAnimationFrame + _rallyIndex
-                                        + (*_pRallyPoints)[1])
+                        (int)(((*_pRallyPoints)[0] + DAT_TileMapState::instance.flagAnimationFrame + _rallyIndex
+                                  + (*_pRallyPoints)[1])
                                 % 10
-                            + 0x61)),
+                            + 0x61),
                         0x12, -1,
-                        (int)((int)(DAT_ViewportRenderState::instance.translationMatrix[(*_pRallyPoints)[1]].addXgetTile
-                            + (*_pRallyPoints)[0])),
+                        (int)(DAT_ViewportRenderState::instance.translationMatrix[(*_pRallyPoints)[1]].addXgetTile
+                            + (*_pRallyPoints)[0]),
                         0xa0022);
                     _rallyIndex = _rallyIndex + 1;
                     _pRallyPoints = _pRallyPoints + 1;
@@ -101,22 +101,21 @@ namespace Map {
                                       .addXgetTile;
                             MACRO_CALL_MEMBER(Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                                 DAT_ViewportRenderState::ptr)(
-                                IO::Graphics::GID_CURSORS, (int)((int)(0x6a - sVar1)), 10, 6, tile, iVar4 << 0x10 | 2);
+                                IO::Graphics::GID_CURSORS, (int)(0x6a - sVar1), 10, 6, tile, iVar4 << 0x10 | 2);
                             iVar4 = DAT_TileMapState::instance.cursorOverlayAnimationFrame + -1;
                             if (7 < iVar4) {
                                 iVar4 = 0xf - iVar4;
                             }
                             MACRO_CALL_MEMBER(Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                                 DAT_ViewportRenderState::ptr)(IO::Graphics::GID_CURSORS, iVar4 + 0x52, 0xc, 6, tile,
-                                (int)((int)(DAT_UnitsState::instance.units[_unitID].unitSpeedMatchingRelatedUnk << 0x11
-                                    | 2)));
+                                (int)(DAT_UnitsState::instance.units[_unitID].unitSpeedMatchingRelatedUnk << 0x11 | 2));
                         }
                         UVar2 = DAT_UnitsState::instance.units[_unitID].targetingType;
                         if ((UVar2 == Map::Units::UIT_ATTACK_LAND) || (UVar2 == Map::Units::UIT_THROW_COW)) {
                             MACRO_CALL_MEMBER(Map::TileMapState_Func::spawnFloatingNumberAroundTile,
                                 DAT_TileMapState::ptr)((int)DAT_UnitsState::instance.units[_unitID].attackAtTileX,
-                                (int)((int)(DAT_UnitsState::instance.units[_unitID].attackAtTileY)),
-                                (int)((int)(DAT_UnitsState::instance.units[_unitID].unkAttackRelated)));
+                                (int)(DAT_UnitsState::instance.units[_unitID].attackAtTileY),
+                                (int)(DAT_UnitsState::instance.units[_unitID].unkAttackRelated));
                         } else {
                             if (UVar2 == Map::Units::UIT_FILL_MOAT) {
                                 iVar4 = (int)DAT_UnitsState::instance.units[_unitID].targetX

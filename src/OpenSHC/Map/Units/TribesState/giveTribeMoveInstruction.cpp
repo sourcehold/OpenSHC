@@ -114,8 +114,8 @@ namespace Map {
                 if (_targetUnitID == _firstUnitID) {
                     _navArea = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::canNavigateFunctionReturnsArea,
                         DAT_PathFindingState::ptr)(this->tribes[tribeID].owner, (dword)((int)(_area)),
-                        (uint)((int)((int)DAT_UnitsState::instance.units[_targetUnitID].x)),
-                        (uint)((int)((int)DAT_UnitsState::instance.units[_targetUnitID].y)));
+                        (uint)(DAT_UnitsState::instance.units[_targetUnitID].x),
+                        (uint)(DAT_UnitsState::instance.units[_targetUnitID].y));
                     if (!_navArea) {
                         _one = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::applyMoveCommandOrRallyCommandToTribe,
                             this)(tribeID, (undefined4)((int)(x1)), (undefined4)((int)(y1)),
@@ -147,7 +147,7 @@ namespace Map {
                             _area3 = MACRO_CALL_MEMBER(
                                 Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
                                 DAT_PathFindingState::ptr)(this->tribes[tribeID].owner, (dword)((int)(y1)),
-                                (dword)((int)(_area)), (int)((int)(_someUnitCanClimb)));
+                                (dword)((int)(_area)), (int)(_someUnitCanClimb));
                             if (!_area3) {
                                 iVar7 = MACRO_CALL_MEMBER(
                                     Map::Navigation::PathFindingState_Func::someBinaryAlgFunctionPathFinding,
@@ -167,7 +167,7 @@ namespace Map {
                             } else {
                                 iVar7 = MACRO_CALL_MEMBER(
                                     Map::Navigation::PathFindingState_Func::setClimbBasedOnClosestClimbData,
-                                    DAT_PathFindingState::ptr)(_targetUnitID, (int)((int)(y1)), (int)((int)(_area3)));
+                                    DAT_PathFindingState::ptr)(_targetUnitID, (int)(y1), (int)(_area3));
                                 if (!iVar7) {
                                     return (undefined4)(0);
                                 }
@@ -217,16 +217,16 @@ namespace Map {
                                     if (bVar4) {
                                         BVar8 = MACRO_CALL_MEMBER(
                                             Map::Navigation::PathFindingState_Func::pathFindingWithBuildingsIncluded,
-                                            DAT_PathFindingState::ptr)(x1, _y, (uint)((int)(_targetUnitX)),
-                                            (uint)((int)(_targetUnitY)), 100000, 0);
+                                            DAT_PathFindingState::ptr)(
+                                            x1, _y, (uint)(_targetUnitX), (uint)(_targetUnitY), 100000, 0);
                                         if (!BVar8) {
                                             return (undefined4)(0);
                                         }
                                     } else if (_bool1) {
                                         BVar8 = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::
                                                                       findPathUsingClimbingWithHeightMargin16,
-                                            DAT_PathFindingState::ptr)(x1, _y, (uint)((int)(_targetUnitX)),
-                                            (uint)((int)(_targetUnitY)), 100000, FALSE);
+                                            DAT_PathFindingState::ptr)(
+                                            x1, _y, (uint)(_targetUnitX), (uint)(_targetUnitY), 100000, FALSE);
                                         if (!BVar8) {
                                             return (undefined4)(0);
                                         }
@@ -319,7 +319,7 @@ namespace Map {
                                             dVar9 = MACRO_CALL_MEMBER(
                                                 Map::Navigation::PathFindingState_Func::
                                                     findNextTileByModuloAmongPreviousSearchNotOnDefensiveStructure,
-                                                DAT_PathFindingState::ptr)(3, (int)((int)(x1)), (int)((int)(_y)));
+                                                DAT_PathFindingState::ptr)(3, (int)(x1), (int)(_y));
                                             this->ALG_ResultTileIndex = this->ALG_ResultTileIndex + 1;
                                             if (dVar9)
                                                 goto LAB_0052691a;
@@ -336,7 +336,7 @@ namespace Map {
                                     }
                                     dVar9 = MACRO_CALL_MEMBER(
                                         Map::Navigation::PathFindingState_Func::pathFindingResultBased,
-                                        DAT_PathFindingState::ptr)(1, (int)((int)(x1)), (int)((int)(_y)), rallyBool);
+                                        DAT_PathFindingState::ptr)(1, (int)(x1), (int)(_y), rallyBool);
                                     this->ALG_ResultTileIndex = this->ALG_ResultTileIndex + 1;
                                     if (!dVar9) {
                                         bVar5 = true;
@@ -362,7 +362,7 @@ namespace Map {
                                 LAB_0052690c:
                                     MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::
                                                           findNextTileInExistingSearchThatIsModuloDistanceAway,
-                                        DAT_PathFindingState::ptr)(_modulo, (int)((int)(x1)), (int)((int)(_y)));
+                                        DAT_PathFindingState::ptr)(_modulo, (int)(x1), (int)(_y));
                                     this->ALG_ResultTileIndex = this->ALG_ResultTileIndex + 1;
                                 }
                             LAB_0052691a:
@@ -454,13 +454,13 @@ namespace Map {
                                              */
                                             MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::setDestinationForUnit,
                                                 DAT_UnitsState::ptr)(_unitID_2,
-                                                (uint)((int)(_algTile2
+                                                (uint)(_algTile2
                                                     - DAT_ViewportRenderState::instance
                                                         .translationMatrix[DAT_ViewportRenderState::instance
                                                                 .tileTranslationMatrix_YComponent[_algTile2]]
-                                                        .addXgetTile)),
-                                                (uint)((int)((int)DAT_ViewportRenderState::instance
-                                                        .tileTranslationMatrix_YComponent[_algTile2])),
+                                                        .addXgetTile),
+                                                (uint)(DAT_ViewportRenderState::instance
+                                                        .tileTranslationMatrix_YComponent[_algTile2]),
                                                 0);
                                             DAT_UnitsState::instance.units[_unitID_2].state.generic
                                                 = Map::Units::States::US_APPEAR;

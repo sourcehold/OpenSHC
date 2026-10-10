@@ -66,7 +66,7 @@ namespace Map {
                             DAT_PathFindingState::instance.allAssassinsUnk = 1;
                         }
                         MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::setDestinationForUnit, DAT_UnitsState::ptr)(
-                            _unitID, (uint)((int)((int)(short)x1)), (uint)((int)((int)(short)y1)), 0);
+                            _unitID, (uint)((short)x1), (uint)((short)y1), 0);
                     }
                 } while (_unitSelectionIndex < this->tribes[tribeID].size);
             }

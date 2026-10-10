@@ -44,8 +44,8 @@ namespace Synchrony {
             } while (iVar9);
             iVar9 = (short)uVar2 * 8;
             iVar5 = (short)uVar1 * 8;
-            iVar7 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(0, param_1,
-                iVar5, iVar9, (int)((int)(DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk)),
+            iVar7 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(0, param_1, iVar5,
+                iVar9, (int)(DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk),
                 Map::Units::UT_CAGEDOG);
             if (iVar7) {
                 DAT_UnitsState::instance.units[iVar7].workplaceBuildingID_1 = (short)buildingID;
@@ -56,7 +56,7 @@ namespace Synchrony {
                 DAT_BuildingsState::instance.buildings[buildingID].insideUnitUID1 = iVar4;
             }
             iVar7 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(0, param_1,
-                iVar5 + 8, iVar9, (int)((int)(DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk)),
+                iVar5 + 8, iVar9, (int)(DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk),
                 Map::Units::UT_CAGEDOG);
             if (iVar7) {
                 DAT_UnitsState::instance.units[iVar7].workplaceBuildingID_1 = (short)buildingID;
@@ -66,8 +66,8 @@ namespace Synchrony {
                 DAT_UnitsState::instance.units[iVar7].workplaceBuildingUID = iVar3;
                 DAT_BuildingsState::instance.buildings[buildingID].insideUnitUID2 = iVar4;
             }
-            iVar7 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(0, param_1,
-                iVar5, iVar9 + 8, (int)((int)(DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk)),
+            iVar7 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(0, param_1, iVar5,
+                iVar9 + 8, (int)(DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk),
                 Map::Units::UT_CAGEDOG);
             if (iVar7) {
                 DAT_UnitsState::instance.units[iVar7].workplaceBuildingID_1 = (short)buildingID;
@@ -78,7 +78,7 @@ namespace Synchrony {
                 DAT_BuildingsState::instance.buildings[buildingID].insideUnitUID3 = iVar4;
             }
             iVar9 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(0, param_1,
-                iVar5 + 8, iVar9 + 8, (int)((int)(DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk)),
+                iVar5 + 8, iVar9 + 8, (int)(DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk),
                 Map::Units::UT_CAGEDOG);
             if (iVar9) {
                 DAT_UnitsState::instance.units[iVar9].workplaceBuildingID_1 = (short)buildingID;
@@ -90,8 +90,7 @@ namespace Synchrony {
             }
             MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                 (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x,
-                (int)((int)((short)DAT_BuildingsState::instance.buildings[buildingID].y)),
-                DE::SHCDE::FX_DOG_CAGE);
+                (int)((short)DAT_BuildingsState::instance.buildings[buildingID].y), DE::SHCDE::FX_DOG_CAGE);
         }
     }
 

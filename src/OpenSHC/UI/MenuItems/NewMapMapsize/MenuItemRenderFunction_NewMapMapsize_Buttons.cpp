@@ -82,9 +82,8 @@ namespace UI {
                     uVar1 = 400;
                 }
                 MACRO_CALL(OS_Func::_sprintf)(local_18, "%dx%d", uVar1, uVar1);
-                MACRO_CALL_MEMBER(
-                    Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(local_18,
-                    (int)((int)(DAT_ButtonX::instance)), (int)((int)(DAT_ButtonY::instance + 0x13)),
+                MACRO_CALL_MEMBER(Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
+                    local_18, (int)(DAT_ButtonX::instance), (int)(DAT_ButtonY::instance + 0x13),
                     (TextAlignment)((int)(DAT_ButtonW::instance)), 0xc2f0eb, 0, 0x11, FALSE, 0);
             };
         }

@@ -132,14 +132,14 @@ namespace Map {
                 }
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
                     (int)DAT_UnitsState::instance.units[_otherUnitID].x,
-                    (int)((int)(DAT_UnitsState::instance.units[_otherUnitID].y)), _otherX);
+                    (int)(DAT_UnitsState::instance.units[_otherUnitID].y), _otherX);
             LAB_00521d1b:
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)(
                     (Map::Units::UnitType)_ptrptrCurrentSelectionID, 0x15);
                 if (sVar1 < 0xf) {}
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
                     (int)DAT_UnitsState::instance.units[_otherUnitID].x,
-                    (int)((int)(DAT_UnitsState::instance.units[_otherUnitID].y)), 0x14);
+                    (int)(DAT_UnitsState::instance.units[_otherUnitID].y), 0x14);
                 return;
             case Map::Units::UT_E_KNIGHT:
                 if (_ptrCurrentSelectionID == (TribesState*)0x1) {
@@ -147,13 +147,13 @@ namespace Map {
                 LAB_00521c6f:
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
                         (int)DAT_UnitsState::instance.units[_otherUnitID].x,
-                        (int)((int)(DAT_UnitsState::instance.units[_otherUnitID].y)), _otherX);
+                        (int)(DAT_UnitsState::instance.units[_otherUnitID].y), _otherX);
                 } else {
                     if ((_ptrCurrentSelectionID == (TribesState*)0x2)
                         || (_ptrCurrentSelectionID == (TribesState*)0x3)) {
                         MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
                             (int)DAT_UnitsState::instance.units[_otherUnitID].x,
-                            (int)((int)(DAT_UnitsState::instance.units[_otherUnitID].y)), 0x57);
+                            (int)(DAT_UnitsState::instance.units[_otherUnitID].y), 0x57);
                     }
                     if (3 < (int)_ptrCurrentSelectionID_2) {
                         _otherX = 0x58;
@@ -162,7 +162,7 @@ namespace Map {
                 }
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
                     (int)DAT_UnitsState::instance.units[_otherUnitID].x,
-                    (int)((int)(DAT_UnitsState::instance.units[_otherUnitID].y)), 0x59);
+                    (int)(DAT_UnitsState::instance.units[_otherUnitID].y), 0x59);
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeech, DAT_SFXState::ptr)(
                     (Map::Units::UnitType)_ptrptrCurrentSelectionID, 0x15);
                 if (sVar1 < 0xf) {}
@@ -184,11 +184,11 @@ namespace Map {
                 if (sVar1 < 0xf) {}
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
                     (int)DAT_UnitsState::instance.units[_otherUnitID].x,
-                    (int)((int)(DAT_UnitsState::instance.units[_otherUnitID].y)), 0x14);
+                    (int)(DAT_UnitsState::instance.units[_otherUnitID].y), 0x14);
             }
             MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
                 (int)DAT_UnitsState::instance.units[_otherUnitID].x,
-                (int)((int)(DAT_UnitsState::instance.units[_otherUnitID].y)), _otherX);
+                (int)(DAT_UnitsState::instance.units[_otherUnitID].y), _otherX);
         }
 
     }

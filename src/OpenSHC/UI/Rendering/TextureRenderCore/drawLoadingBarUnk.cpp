@@ -20,12 +20,10 @@ namespace UI {
             _currentTime = timeGetTime();
             if (0x1e < (int)(_currentTime - TIME_LastVisualLoadingBarUpdate::instance)) {
                 TIME_LastVisualLoadingBarUpdate::instance = _currentTime;
-                MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawColorBox,
-                    DAT_PencilRenderCore::ptr)(DAT_MenuHandlerState::instance.x + 236,
-                    (int)((int)(DAT_MenuHandlerState::instance.y + 571)),
+                MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(
+                    DAT_MenuHandlerState::instance.x + 236, (int)(DAT_MenuHandlerState::instance.y + 571),
                     (int)(currentGmId * 0x148) / barLengthUnk + 236 + DAT_MenuHandlerState::instance.x,
-                    (int)((int)(DAT_MenuHandlerState::instance.y + 579)),
-                    (ushort)((int)(COL_DARK_RED::instance.shortValue)));
+                    (int)(DAT_MenuHandlerState::instance.y + 579), (ushort)(COL_DARK_RED::instance.shortValue));
                 MACRO_CALL_MEMBER(UI::Rendering::WindowAndDirectDraw_Func::bltScreenMenuSurfaceToScreen,
                     DAT_WindowAndDirectDraw::ptr)(DAT_MenuHandlerState::instance.x + 0xeb,
                     DAT_MenuHandlerState::instance.y + 0x23a, DAT_MenuHandlerState::instance.x + 0x235,

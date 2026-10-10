@@ -56,9 +56,8 @@ namespace Map {
                 this->tribes[tribeID].initialMoveOrderGiven = 1;
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::standUpAllTribeUnits, this)(tribeID);
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, this)(tribeID,
-                    (uint)((int)((int)DAT_UnitsState::instance.units[_targetUnitID].x)),
-                    (uint)((int)((int)DAT_UnitsState::instance.units[_targetUnitID].y)), 0, 0,
-                    Map::Units::Instructions::UMSE_0);
+                    (uint)(DAT_UnitsState::instance.units[_targetUnitID].x),
+                    (uint)(DAT_UnitsState::instance.units[_targetUnitID].y), 0, 0, Map::Units::Instructions::UMSE_0);
                 this->tribes[tribeID].tribeBehaviorType = Map::Units::STBT_1;
             }
             if (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_MAP_EDITOR_LANDSCAPING) {
@@ -88,8 +87,8 @@ namespace Map {
                         if (0 < sVar2) {
                             MACRO_CALL_MEMBER(
                                 Map::Units::TribesState_Func::giveUnitSelectionMoveInstructionNoMatchedSpeed, this)(
-                                tribeID, (uint)((int)((int)this->tribes[tribeID].rallyPointArray[sVar2 + -1][0])),
-                                (uint)((int)((int)this->tribes[tribeID].rallyPointArray[sVar2 + -1][1])), 0, 0);
+                                tribeID, (uint)((int)this->tribes[tribeID].rallyPointArray[sVar2 + -1][0]),
+                                (uint)((int)this->tribes[tribeID].rallyPointArray[sVar2 + -1][1]), 0, 0);
                         }
                     } else if (BVar7) {
                         this->tribes[tribeID].tribeBehaviorType = Map::Units::STBT_1;

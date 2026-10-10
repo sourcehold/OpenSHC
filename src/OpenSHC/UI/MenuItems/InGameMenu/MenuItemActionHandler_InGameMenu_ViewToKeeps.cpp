@@ -87,10 +87,10 @@ namespace UI {
                                     .keep.id;
                         DWORD_00b98410::instance = DVar2;
                         if (iVar4) {
-                            MACRO_CALL_MEMBER(Rendering::ViewportRenderState_Func::focusOnCoordinate,
-                                DAT_ViewportRenderState::ptr)(
+                            MACRO_CALL_MEMBER(
+                                Rendering::ViewportRenderState_Func::focusOnCoordinate, DAT_ViewportRenderState::ptr)(
                                 (short)DAT_BuildingsState::instance.buildings[iVar4].x + 2,
-                                (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar4].y + 2)));
+                                (int)((short)DAT_BuildingsState::instance.buildings[iVar4].y + 2));
                         }
                     } else {
                         DWORD_00b98410::instance = DVar2;
@@ -114,10 +114,10 @@ namespace UI {
                         DAT_00b9840c::instance = 0;
                         DWORD_00b98410::instance = DVar2;
                         if (iVar4) {
-                            MACRO_CALL_MEMBER(Rendering::ViewportRenderState_Func::focusOnCoordinate,
-                                DAT_ViewportRenderState::ptr)(
+                            MACRO_CALL_MEMBER(
+                                Rendering::ViewportRenderState_Func::focusOnCoordinate, DAT_ViewportRenderState::ptr)(
                                 (short)DAT_BuildingsState::instance.buildings[iVar4].x + 2,
-                                (int)((int)((short)DAT_BuildingsState::instance.buildings[iVar4].y + 2)));
+                                (int)((short)DAT_BuildingsState::instance.buildings[iVar4].y + 2));
                         }
                     }
                 }

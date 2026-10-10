@@ -76,11 +76,11 @@ namespace UI {
                     && DAT_GameCore::instance.gameMode_2 != Game::GM_SIEGE_THAT
                     && (BVar1 = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::isEnemyTooCloseUnk,
                             DAT_PathFindingState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID,
-                            (uint)((int)(DAT_ViewportRenderState::instance.viewportState.mouseTileX)),
-                            (uint)((int)(DAT_ViewportRenderState::instance.viewportState.mouseTileY)),
-                            (int)((int)((-(uint)(DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY)
-                                            & 0xfffffff1)
-                                + 0x1e))),
+                            (uint)(DAT_ViewportRenderState::instance.viewportState.mouseTileX),
+                            (uint)(DAT_ViewportRenderState::instance.viewportState.mouseTileY),
+                            (int)((-(uint)(DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY)
+                                      & 0xfffffff1)
+                                + 0x1e)),
                         BVar1)) {
                     DAT_TileMapState::instance.demolishBlocked = 1;
                 }
@@ -116,26 +116,26 @@ namespace UI {
                                 .resourceToDeposit
                             != 0)) {
                         MACRO_CALL(Map::Entities_Func::IgniteFireAtMiniTile_Convenience)(_unitOwner,
-                            (int)((int)(DAT_UnitsState::instance
+                            (int)(DAT_UnitsState::instance
                                     .units[DAT_ViewportRenderState::instance.viewportState.mouseRayUnitID]
-                                    .microXPosition)),
-                            (int)((int)(DAT_UnitsState::instance
+                                    .microXPosition),
+                            (int)(DAT_UnitsState::instance
                                     .units[DAT_ViewportRenderState::instance.viewportState.mouseRayUnitID]
-                                    .microYPosition)),
-                            (int)((int)(DAT_UnitsState::instance
-                                            .units[DAT_ViewportRenderState::instance.viewportState.mouseRayUnitID]
-                                            .buildingHeight
+                                    .microYPosition),
+                            (int)(DAT_UnitsState::instance
+                                      .units[DAT_ViewportRenderState::instance.viewportState.mouseRayUnitID]
+                                      .buildingHeight
                                 + -8
                                 + DAT_UnitsState::instance
                                     .units[DAT_ViewportRenderState::instance.viewportState.mouseRayUnitID]
-                                    .terrainOrClimbHeight)),
+                                    .terrainOrClimbHeight),
                             5);
                         MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(
-                            0, (undefined4)((int)((int)DAT_UnitsState::instance.units[iVar2].owner)), 0,
-                            (int)((int)(DAT_UnitsState::instance.units[iVar2].microXPosition)),
-                            (int)((int)(DAT_UnitsState::instance.units[iVar2].microYPosition)),
-                            (int)((int)(DAT_UnitsState::instance.units[iVar2].buildingHeight
-                                + DAT_UnitsState::instance.units[iVar2].terrainOrClimbHeight)),
+                            0, (undefined4)((int)(DAT_UnitsState::instance.units[iVar2].owner)), 0,
+                            (int)(DAT_UnitsState::instance.units[iVar2].microXPosition),
+                            (int)(DAT_UnitsState::instance.units[iVar2].microYPosition),
+                            (int)(DAT_UnitsState::instance.units[iVar2].buildingHeight
+                                + DAT_UnitsState::instance.units[iVar2].terrainOrClimbHeight),
                             0, 0, 0, (EntityType)((int)(26)), 0);
                     }
                     totalHeight = (int)DAT_UnitsState::instance.units[iVar2].buildingHeight
@@ -149,16 +149,16 @@ namespace UI {
                     MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(0,
                         0, 0, microX, microY, totalHeight, microX + 1, microY + 1, totalHeight, ((EntityType)0x1e), 0);
                     MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
-                        (int)DAT_UnitsState::instance.units[iVar2].x,
-                        (int)((int)(DAT_UnitsState::instance.units[iVar2].y)), DE::SHCDE::FX_DEATH_CLUB2);
+                        (int)DAT_UnitsState::instance.units[iVar2].x, (int)(DAT_UnitsState::instance.units[iVar2].y),
+                        DE::SHCDE::FX_DEATH_CLUB2);
                     return;
                 }
                 DAT_TileMapState::instance.buildingPlacementFailReason
                     = Map::Buildings::BFRE_DEFAULT_CANT_PLACE_THAT_THERE;
                 iVar2 = MACRO_CALL_MEMBER(Map::TileMapState_Func::spreadFlagPlacementAlgorithm, DAT_TileMapState::ptr)(
                     DAT_GameSynchronyState::instance.currentPlayerSlotID,
-                    (uint)((int)(DAT_TileMapState::instance.DAT_ClickedTileX)),
-                    (uint)((int)(DAT_TileMapState::instance.DAT_ClickedTileY)));
+                    (uint)(DAT_TileMapState::instance.DAT_ClickedTileX),
+                    (uint)(DAT_TileMapState::instance.DAT_ClickedTileY));
                 if (iVar2) {
                     DAT_WallAndPitchState::instance.countdown = 0;
                     DAT_GameSynchronyState::instance.DAT_GameCommandParam0
@@ -171,8 +171,8 @@ namespace UI {
                 }
                 MACRO_CALL_MEMBER(Map::TileMapState_Func::evaluateBuildingPlacementAtCursor, DAT_TileMapState::ptr)(
                     DAT_GameSynchronyState::instance.currentPlayerSlotID,
-                    (uint)((int)(DAT_TileMapState::instance.DAT_ClickedTileX)),
-                    (uint)((int)(DAT_TileMapState::instance.DAT_ClickedTileY)));
+                    (uint)(DAT_TileMapState::instance.DAT_ClickedTileX),
+                    (uint)(DAT_TileMapState::instance.DAT_ClickedTileY));
                 if (!DAT_TileMapState::instance.buildingPlacementFail) {
                     DAT_WallAndPitchState::instance.countdown = 0;
                     if (!DAT_TileMapState::instance.placementOnMoat) {
@@ -218,8 +218,7 @@ namespace UI {
                         != Map::Buildings::BFRE_DEFAULT_CANT_PLACE_THAT_THERE) {
                         MACRO_CALL_MEMBER(UI::BottomLeftTextDisplayState_Func::setBottomLeftTextDisplayText,
                             DAT_BottomLeftTextDisplayState::ptr)(1, 0x4d,
-                            (int)((int)(DAT_TileMapState::instance.buildingPlacementFailReason)), _noBlLookup, 100,
-                            6000);
+                            (int)(DAT_TileMapState::instance.buildingPlacementFailReason), _noBlLookup, 100, 6000);
                         return;
                     }
                 }

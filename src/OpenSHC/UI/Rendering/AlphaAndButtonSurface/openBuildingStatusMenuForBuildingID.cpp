@@ -41,7 +41,7 @@ namespace UI {
                 MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::extendResourceCountdownForPlayerBuildingsOfType,
                     DAT_BuildingsState::ptr)(
                     (Map::Buildings::BuildingType)(DAT_BuildingsState::instance.buildings[buildingID].buildingType), 1,
-                    (int)((int)((Map::Buildings::BuildingType)DAT_GameSynchronyState::instance.currentPlayerSlotID)));
+                    (int)((Map::Buildings::BuildingType)DAT_GameSynchronyState::instance.currentPlayerSlotID));
                 iVar3 = DAT_GameSynchronyState::instance.currentPlayerSlotID;
                 switch (DAT_BuildingsState::instance.buildings[buildingID].buildingType) {
                 case Map::Buildings::BT_HOVEL:
@@ -433,8 +433,8 @@ namespace UI {
             DAT_BuildingsState::instance.newSelectedBuildingID = buildingID;
             DAT_BuildingsState::instance.newSelectedUnitID = 0;
             if (DAT_GameCore::instance.gameMode_2 == Game::GM_CRUSADER_TUTORIAL) {
-                MACRO_CALL(UI::Helpers_Func::SetTutorialBuildingActionState)(8,
-                    (BuildingType)((int)((int)(short)DAT_BuildingsState::instance.buildings[buildingID].buildingType)));
+                MACRO_CALL(UI::Helpers_Func::SetTutorialBuildingActionState)(
+                    8, (BuildingType)((int)((short)DAT_BuildingsState::instance.buildings[buildingID].buildingType)));
             }
             DAT_BuildingsState::instance.selectedBuildingID = 0;
             DAT_BuildingsState::instance.selectedBuildingUID = 0;

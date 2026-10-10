@@ -23,25 +23,24 @@ namespace Map {
             UnitType UVar4;
             int iVar5;
             int sfxOffsetInArray;
-            iVar3 = MACRO_CALL_MEMBER(
-                Map::Units::UnitsState_Func::selectionContainsCombatUnit, DAT_UnitsState::ptr)(1);
-            UVar4 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getMajoritySelectedUnitType, this)(
-                param_1, &param_1);
+            iVar3 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::selectionContainsCombatUnit, DAT_UnitsState::ptr)(1);
+            UVar4
+                = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getMajoritySelectedUnitType, this)(param_1, &param_1);
             iVar5 = param_1;
             switch (UVar4) {
             case Map::Units::UT_E_SWORD:
                 if (param_1 != 1) {
                     if (param_1 == 2) {
-                        MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume,
-                            DAT_SFXState::ptr)((int)DAT_UnitsState::instance.units[iVar3].x,
-                            (int)((int)(DAT_UnitsState::instance.units[iVar3].y)), 0xae);
+                        MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
+                            (int)DAT_UnitsState::instance.units[iVar3].x,
+                            (int)(DAT_UnitsState::instance.units[iVar3].y), 0xae);
                     }
                     if (param_1 < 3) {}
                     iVar5 = 0xaf;
                 LAB_0052188b:
-                    MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume,
-                        DAT_SFXState::ptr)((int)DAT_UnitsState::instance.units[iVar3].x,
-                        (int)((int)(DAT_UnitsState::instance.units[iVar3].y)), iVar5);
+                    MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
+                        (int)DAT_UnitsState::instance.units[iVar3].x, (int)(DAT_UnitsState::instance.units[iVar3].y),
+                        iVar5);
                 }
                 iVar5 = 0xad;
                 goto LAB_00521827;
@@ -49,14 +48,14 @@ namespace Map {
                 if (param_1 == 1) {
                     iVar5 = 0x56;
                 LAB_005218ec:
-                    MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume,
-                        DAT_SFXState::ptr)((int)DAT_UnitsState::instance.units[iVar3].x,
-                        (int)((int)(DAT_UnitsState::instance.units[iVar3].y)), iVar5);
+                    MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
+                        (int)DAT_UnitsState::instance.units[iVar3].x, (int)(DAT_UnitsState::instance.units[iVar3].y),
+                        iVar5);
                 } else {
                     if ((param_1 == 2) || (param_1 == 3)) {
-                        MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume,
-                            DAT_SFXState::ptr)((int)DAT_UnitsState::instance.units[iVar3].x,
-                            (int)((int)(DAT_UnitsState::instance.units[iVar3].y)), 0x57);
+                        MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
+                            (int)DAT_UnitsState::instance.units[iVar3].x,
+                            (int)(DAT_UnitsState::instance.units[iVar3].y), 0x57);
                     }
                     if (3 < iVar5) {
                         iVar5 = 0x58;
@@ -66,15 +65,14 @@ namespace Map {
                 iVar5 = 0x59;
             LAB_00521827:
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
-                    (int)DAT_UnitsState::instance.units[iVar3].x, (int)((int)(DAT_UnitsState::instance.units[iVar3].y)),
+                    (int)DAT_UnitsState::instance.units[iVar3].x, (int)(DAT_UnitsState::instance.units[iVar3].y),
                     iVar5);
                 return;
             case Map::Units::UT_E_ENGINEER:
                 if ((DAT_UnitsState::instance.units[iVar3].unitType == Map::Units::UT_E_ENGINEER)
                     && (DAT_UnitsState::instance.units[iVar3].resourceToDeposit != 0)) {
                     param_1 = 0x24;
-                    MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeechEffect, DAT_SFXState::ptr)(
-                        0x24);
+                    MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playUnitSpeechEffect, DAT_SFXState::ptr)(0x24);
                 }
                 break;
             case Map::Units::UT_S_CATAPULT:
@@ -125,7 +123,7 @@ namespace Map {
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
                     iVar5, iVar3, sfxOffsetInArray);
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocationFullVolume, DAT_SFXState::ptr)(
-                    (int)*psVar2, (int)((int)(*psVar1)), 0x59);
+                    (int)*psVar2, (int)(*psVar1), 0x59);
             }
         }
 

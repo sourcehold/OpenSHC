@@ -78,12 +78,12 @@ namespace UI {
                 }
                 if (param_1 == 1) {
                     MACRO_CALL_MEMBER(Text::TextManager_Func::renderText, DAT_TextManagerObject::ptr)(
-                        DE::SHCDE::TEXT_MAP_TITLES, 1, (int)((int)(DAT_ButtonX::instance + 0x1a)),
+                        DE::SHCDE::TEXT_MAP_TITLES, 1, (int)(DAT_ButtonX::instance + 0x1a),
                         DAT_ButtonY::instance + iVar1, Text::TTA_LEFT, 0xc2f0eb, 0, fontSize, FALSE);
                 }
                 if (param_1 == 2) {
                     MACRO_CALL_MEMBER(Text::TextManager_Func::renderText, DAT_TextManagerObject::ptr)(
-                        DE::SHCDE::TEXT_SHC_STANDALONE, 2, (int)((int)(DAT_ButtonX::instance + 0x1a)),
+                        DE::SHCDE::TEXT_SHC_STANDALONE, 2, (int)(DAT_ButtonX::instance + 0x1a),
                         DAT_ButtonY::instance + iVar1, Text::TTA_LEFT, 0xc2f0eb, 0, fontSize, FALSE);
                 }
                 if (param_1 == 3) {
@@ -91,7 +91,7 @@ namespace UI {
                       added by script: "New Crusader Map"
                      */
                     MACRO_CALL_MEMBER(Text::TextManager_Func::renderText, DAT_TextManagerObject::ptr)(
-                        DE::SHCDE::TEXT_MAP_TITLES, 2, (int)((int)(DAT_ButtonX::instance + 0x1a)),
+                        DE::SHCDE::TEXT_MAP_TITLES, 2, (int)(DAT_ButtonX::instance + 0x1a),
                         DAT_ButtonY::instance + iVar1, Text::TTA_LEFT, 0xc2f0eb, 0, fontSize, FALSE);
                 }
             }
