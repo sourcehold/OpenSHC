@@ -145,7 +145,7 @@ namespace Map {
             int unitRefUID; // 0x00000114 length: 4
             short state; // 0x00000118 length: 2
             short field117_0x11a; // 0x0000011A length: 2
-            short killingPitField; // 0x0000011C length: 2
+            ushort killingPitField; // 0x0000011C length: 2
             short field119_0x11e; // 0x0000011E length: 2
             int resources[25]; // 0x00000120 length: 100
             int currentNumberOfResource; // 0x00000184 length: 4
