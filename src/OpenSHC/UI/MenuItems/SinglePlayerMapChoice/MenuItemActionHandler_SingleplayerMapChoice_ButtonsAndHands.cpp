@@ -116,7 +116,7 @@ namespace UI {
                     if ((!DAT_GameCore::instance.mapU4Int1_2) && (DAT_MapMissionType::instance)) {
                         DAT_GameState::instance.mapAndTime.difficulty
                             = DAT_GameState::instance.mapAndTime.difficulty + 1;
-                        if (3 < DAT_GameState::instance.mapAndTime.difficulty) {
+                        if (4 <= DAT_GameState::instance.mapAndTime.difficulty) {
                             DAT_GameState::instance.mapAndTime.difficulty = 0;
                         }
                         MACRO_CALL(UI::Helpers_Func::SomeSiegeRelatedCopying)(

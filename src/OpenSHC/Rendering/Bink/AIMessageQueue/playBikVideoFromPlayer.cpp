@@ -20,7 +20,7 @@ namespace Rendering {
             int _negativePlayerIndex;
             char* _messageSfxFile;
             char** _messageVfxFile;
-            if ((aiType - 1U < 0x10) && (messageType - 1U < 0x21)) {
+            if ((aiType - 1U <= 0xf) && (messageType - 1U < 0x21)) {
                 MACRO_CALL_MEMBER(Rendering::Bink::AIMessageQueue_Func::prepareSFXandVFX, this)("", "",
                     (char*)((int)(DAT_MissionAestheticsDefinedData::instance.field92_0x170[aiType + -0x11])),
                     playerIndex);

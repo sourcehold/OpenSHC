@@ -60,7 +60,7 @@ namespace Map {
                         || (0 < DAT_GameState::instance
                                 .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                                 .keep.id))))
-                && -1 < DAT_GameState::instance.mapAndTime.countUpTo201) {
+                && 0 <= DAT_GameState::instance.mapAndTime.countUpTo201) {
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::updateTribeUnitAssignments, this)();
                 _playerID_2 = DAT_GameSynchronyState::instance.currentPlayerSlotID;
                 if ((DAT_GameCore::instance.gameMode_2 == Game::GM_BUILDERUnk)

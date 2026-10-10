@@ -30,7 +30,7 @@ namespace UI {
             do {
                 if (_unit->logicalState != Map::Units::ULS_INVISIBLE && _unit->owner == iVar1 && !_unit->isStalked
                     && (_unitType = (UnitTypeInt)(short)_unit->unitType,
-                        0 < (int)_unitType && (((int)_unitType < 66 || (70 < (int)_unitType))))) {
+                        0 <= (int)_unitType && (((int)_unitType <= 66 || (70 <= (int)_unitType))))) {
                     DAT_UnitTypeRelatedCounter::instance[_unitType]
                         = DAT_UnitTypeRelatedCounter::instance[_unitType] + 1;
                 }
