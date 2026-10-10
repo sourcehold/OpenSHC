@@ -130,20 +130,18 @@ namespace Synchrony {
                     MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::moveLowerThreeBytesIntoParam2,
                         DAT_LowLevelMemory::ptr)((void*)((int)&this->DPLAY_ReceiveData + 1),
                         (void*)((int)(&this->receivedCommandMapTimeInTicks)));
-                    if ((char)this->DPLAY_ReceiveData.packet.commandProtocol < 126) {
-                        if ((char)this->DPLAY_ReceiveData.packet.commandProtocol < 2) {
-                            MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::processSyncPacket, this)(
-                                (int)(char)this->DPLAY_ReceiveData.packet.commandProtocol);
-                        } else {
-                            this->packetsReceived = this->packetsReceived + 1;
-                            MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::scheduleReceivedCommand,
-                                this)((Commands::GameCommandType)this->DPLAY_ReceiveData.packet.commandProtocol,
-                                this->DPLAYX_ReceivedPlayerID, this->receivedCommandMapTimeInTicks,
-                                (void*)((int)&this->DPLAY_ReceiveData + 4));
-                        }
-                    } else {
+                    if (126 <= (char)this->DPLAY_ReceiveData.packet.commandProtocol) {
                         MACRO_CALL_MEMBER(
                             Synchrony::GameSynchronyState_Func::computeAndSetLatencyInformation, this)();
+                    } else if ((char)this->DPLAY_ReceiveData.packet.commandProtocol < 2) {
+                        MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::processSyncPacket, this)(
+                            (int)(char)this->DPLAY_ReceiveData.packet.commandProtocol);
+                    } else {
+                        this->packetsReceived = this->packetsReceived + 1;
+                        MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::scheduleReceivedCommand,
+                            this)((Commands::GameCommandType)this->DPLAY_ReceiveData.packet.commandProtocol,
+                            this->DPLAYX_ReceivedPlayerID, this->receivedCommandMapTimeInTicks,
+                            (void*)((int)&this->DPLAY_ReceiveData + 4));
                     }
                 }
                 if (this->currentGameMode == Game::GM_SOLITARY) {
