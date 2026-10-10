@@ -54,7 +54,7 @@ namespace Map {
                 _unitX = DAT_UnitsState::instance.units[_finalTargetUnitID].x;
                 _unitY = DAT_UnitsState::instance.units[_finalTargetUnitID].y;
                 if (_tribeSize <= _unknown) {
-                    param_2 = (int)(param_2 + (param_2 >> 0x1f & 3U)) >> 2;
+                    param_2 = param_2 / 4;
                 }
                 psVar1 = (short*)&this->tribes[tribeID].field139_0x284;
                 *psVar1 = *psVar1 + 1;
@@ -68,12 +68,10 @@ namespace Map {
                         iVar3 = ((_unknown <= _tribeSize) - 1 & 0xffffffb5) + 100;
                     }
                     if (iVar3 <= (int)(_rng2 & 0x7f)) {
-                        _rng2 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
-                            0, 0, (int)((int)(_unitX * 8)), (int)((int)(_unitY * 8)), (int)((int)(_terrainHeight)),
-                            unitType);
+                        _rng2 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(0, 0,
+                            (int)((int)(_unitX * 8)), (int)((int)(_unitY * 8)), (int)((int)(_terrainHeight)), unitType);
                         if (_rng2) {
-                            MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, this)(
-                                _rng2, tribeID);
+                            MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, this)(_rng2, tribeID);
                             DAT_UnitsState::instance.units[_rng2].substate
                                 = (byte)DAT_UnitsState::instance.units[_rng2].fixedRng & 3;
                             if (unitType == Map::Units::UT_ANTELOPESHDEER) {
@@ -81,8 +79,8 @@ namespace Map {
                             }
                             DAT_UnitsState::instance.units[_rng2].disappearFadeAlphaCountdown = 0x20;
                             if (unitType == Map::Units::UT_ANTELOPESHDEER) {
-                                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::updateAnimalHerdBehaviorState,
-                                    this)(tribeID);
+                                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::updateAnimalHerdBehaviorState, this)(
+                                    tribeID);
                             }
                             return TRUE;
                         }

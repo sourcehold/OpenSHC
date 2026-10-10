@@ -17,8 +17,7 @@ namespace Map {
                 uVar1 = (uVar1 - 1 | 0xfffffff0) + 1;
             }
             return (uint)((DAT_UnitSelectionDefinedData::instance.BitMaskHelper[uVar1]
-                & *(ushort*)(DAT_UnitsState::instance.selectedUnitsBitFlags
-                    + ((int)(tribeID + ((int)tribeID >> 0x1f & 0xfU)) >> 4) * 2)));
+                & *(ushort*)(DAT_UnitsState::instance.selectedUnitsBitFlags + ((int)tribeID / 16) * 2)));
         }
 
     }
