@@ -30,14 +30,12 @@ namespace Text {
             _textWidth = MACRO_CALL_MEMBER(Text::FontSizeClass_Func::getWidthOfText,
                 &DAT_TextManagerObject::instance.fontSizeClassArray[fontSize])(
                 textAddress, (int)_textLengthHelper - (int)(textAddress + 1));
-            if ((int)alignment <= 0) {
-                if ((int)alignment < 0) {
-                    xPos = xParam - _textWidth;
-                } else {
-                    xPos = xParam + this->currentXOffset_0x0;
-                }
-            } else {
+            if (0 < (int)alignment) {
                 xPos = xParam + (int)(alignment - _textWidth) / 2;
+            } else if ((int)alignment < 0) {
+                xPos = xParam - _textWidth;
+            } else {
+                xPos = xParam + this->currentXOffset_0x0;
             }
             this->currentXOffset_0x0 = this->currentXOffset_0x0 + _textWidth;
             _textLengthHelper = textAddress;

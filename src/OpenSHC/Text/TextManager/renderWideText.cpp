@@ -26,14 +26,12 @@ namespace Text {
             int _textWidth = MACRO_CALL_MEMBER(Text::FontSizeClass_Func::getWidthOfWideText,
                 &DAT_TextManagerObject::instance.fontSizeClassArray[fontSize])(
                 wideText, (int)pWVar2 - (int)(wideText + 1) >> 1);
-            if ((int)alignment <= 0) {
-                if ((int)alignment < 0) {
-                    _x = xPos - _textWidth;
-                } else {
-                    _x = xPos + this->currentXOffset_0x0;
-                }
-            } else {
+            if (0 < (int)alignment) {
                 _x = xPos + (int)(alignment - _textWidth) / 2;
+            } else if ((int)alignment < 0) {
+                _x = xPos - _textWidth;
+            } else {
+                _x = xPos + this->currentXOffset_0x0;
             }
             this->currentXOffset_0x0 = this->currentXOffset_0x0 + _textWidth;
             pWVar2 = wideText;
