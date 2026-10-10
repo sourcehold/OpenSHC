@@ -130,7 +130,7 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[iVar7].extraAnimationSprite1 = 0x46;
             DAT_BuildingsState::instance.buildings[iVar7].renderBlendStrength
                 = DAT_BuildingsState::instance.buildings[iVar7].renderBlendStrength + -1;
-            if (DAT_BuildingsState::instance.buildings[iVar7].renderBlendStrength < 1) {
+            if (DAT_BuildingsState::instance.buildings[iVar7].renderBlendStrength <= 0) {
                 DAT_BuildingsState::instance.buildings[iVar7].renderBlendStrength = 0;
                 DAT_BuildingsState::instance.buildings[iVar7].campgroundVclock = 0;
                 DAT_BuildingsState::instance.buildings[iVar7].dairyProductionStage = 2;
@@ -143,7 +143,7 @@ namespace Map {
                 DAT_BuildingsState::instance.buildings[iVar7].extraAnimationSprite2 = 0x1c;
                 DAT_BuildingsState::instance.buildings[iVar7].renderBlendStrength
                     = DAT_BuildingsState::instance.buildings[iVar7].renderBlendStrength + -1;
-                if (DAT_BuildingsState::instance.buildings[iVar7].renderBlendStrength < 1) {
+                if (DAT_BuildingsState::instance.buildings[iVar7].renderBlendStrength <= 0) {
                     DAT_BuildingsState::instance.buildings[iVar7].renderBlendStrength = 0;
                     DAT_BuildingsState::instance.buildings[iVar7].campgroundVclock = 0;
                     DAT_BuildingsState::instance.buildings[iVar7].extraAnimationFrame1 = 0;

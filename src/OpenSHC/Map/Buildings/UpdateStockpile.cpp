@@ -170,7 +170,7 @@ namespace Map {
                 bVar3 = true;
                 _buildingID = DAT_CurrentBuildingID::instance;
             }
-            if ((DAT_GameState::instance.playerDataArray[_owner].startResources[0x10] < 1)
+            if ((DAT_GameState::instance.playerDataArray[_owner].startResources[0x10] <= 0)
                 || (BVar4 = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::buildingHasSpaceForResource,
                         DAT_BuildingsState::ptr)(_buildingID, Game::Resources::RT_FLOUR),
                     !BVar4)) {

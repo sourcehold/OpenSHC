@@ -306,7 +306,7 @@ namespace Map {
                                     + 0xf) = iVar10;
                                 break;
                             }
-                            if ((*psVar11 < 1)
+                            if ((*psVar11 <= 0)
                                 || (DAT_UnitsState::instance.units[*psVar11].uid
                                     != DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
                                         .workerUID[iVar6])) {
@@ -418,7 +418,7 @@ namespace Map {
             _tribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(
                 (int)DAT_BuildingsState::instance.buildings[iVar9].owner);
             iVar9 = DAT_CurrentBuildingID::instance;
-            if (_tribeID < 1) {}
+            if (_tribeID <= 0) {}
             _tribeUID = DAT_TribesState::instance.tribes[_tribeID].uid;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].tribeID = (short)_tribeID;
             DAT_BuildingsState::instance.buildings[iVar9].tribeUID = _tribeUID;
@@ -576,7 +576,7 @@ namespace Map {
                     if ((DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].outpostRelatedUnk05
                             <= DAT_TribesState::instance.tribes[_tribeID].size)
                         && (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].outpostRelatedUnk3
-                            < 1)) {
+                            <= 0)) {
                         MACRO_CALL_MEMBER(AI::AICState_Func::aiRegisterTribeAndAssignTarget, DAT_AICState::ptr)(
                             _tribeID, DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].tribeUID);
                         iVar9 = DAT_CurrentBuildingID::instance;

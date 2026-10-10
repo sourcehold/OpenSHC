@@ -73,7 +73,7 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[iVar5].spriteOffetY = -0x5c;
             if ((char)DAT_BuildingDefinedData::instance
                     .OilSmelterAnimationFrames1[DAT_BuildingsState::instance.buildings[iVar5].animationIndex]
-                < 1) {
+                <= 0) {
                 DAT_BuildingsState::instance.buildings[iVar5].animationIndex = 0;
                 DAT_BuildingsState::instance.buildings[iVar5].state = 4;
             } else {
@@ -83,7 +83,7 @@ namespace Map {
                     + 0x20;
             }
             sVar3 = DAT_BuildingsState::instance.buildings[iVar5].renderBlendStrength;
-            if (sVar3 < 1) {
+            if (sVar3 <= 0) {
                 DAT_BuildingsState::instance.buildings[iVar5].animationIndex = 0;
                 DAT_BuildingsState::instance.buildings[iVar5].state = 4;
             } else {
@@ -95,7 +95,7 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[iVar5].spriteOffetY = -0x5c;
             if ((char)DAT_BuildingDefinedData::instance
                     .OilSmelterAnimationFrames2[DAT_BuildingsState::instance.buildings[iVar5].animationIndex]
-                < 1) {
+                <= 0) {
                 DAT_BuildingsState::instance.buildings[iVar5].animationIndex = 0;
                 DAT_BuildingsState::instance.buildings[iVar5].state = 5;
             } else {
@@ -116,7 +116,7 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[iVar5].spriteOffetY = -0x5c;
             if ((char)DAT_BuildingDefinedData::instance
                     .OilSmelterAnimationFrames3[DAT_BuildingsState::instance.buildings[iVar5].animationIndex]
-                < 1) {
+                <= 0) {
             LAB_0041622f:
                 DAT_BuildingsState::instance.buildings[iVar5].animationIndex = 0;
                 DAT_BuildingsState::instance.buildings[iVar5].animationCycleCompleted = 1;
@@ -141,7 +141,7 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[iVar5].spriteOffetY = -0x54;
             if ((char)DAT_BuildingDefinedData::instance
                     .OilSmelterAnimationFrames4[DAT_BuildingsState::instance.buildings[iVar5].animationIndex]
-                < 1) {
+                <= 0) {
                 DAT_BuildingsState::instance.buildings[iVar5].animationIndex = 0;
                 DAT_BuildingsState::instance.buildings[iVar5].state = 7;
             } else {
@@ -174,7 +174,7 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[iVar5].spriteOffetY = -0x54;
             if ((char)DAT_BuildingDefinedData::instance
                     .OilSmelterAnimationFrames5[DAT_BuildingsState::instance.buildings[iVar5].animationIndex]
-                < 1) {
+                <= 0) {
                 DAT_BuildingsState::instance.buildings[iVar5].animationIndex = 0;
                 DAT_BuildingsState::instance.buildings[iVar5].state = 8;
                 piVar1 = DAT_BuildingsState::instance.buildings[iVar5].resources + 7;
@@ -195,18 +195,18 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[iVar5].spriteOffetY = -0x54;
             iVar4 = (int)(char)DAT_BuildingDefinedData::instance
                         .OilSmelterAnimationFrames6[DAT_BuildingsState::instance.buildings[iVar5].animationIndex];
-            if (iVar4 < 1)
+            if (iVar4 <= 0)
                 goto LAB_0041622f;
             goto LAB_00416072;
         }
         iVar5 = *(int*)((int)&DAT_BuildingsState::instance.buildings[0].campgroundVclock + iVar6);
-        if (*(int*)((int)DAT_BuildingsState::instance.buildings[0].resources + iVar6 + 0x1c) < 1) {
+        if (*(int*)((int)DAT_BuildingsState::instance.buildings[0].resources + iVar6 + 0x1c) <= 0) {
             bVar2 = DAT_BuildingDefinedData::instance.OilSmelterAnimationFrames7[iVar5];
         } else {
             bVar2 = DAT_BuildingDefinedData::instance.OilSmelterAnimationFrames8[iVar5];
         }
         *(int*)((int)&DAT_BuildingsState::instance.buildings[0].campgroundVclock + iVar6) = iVar5 + 1;
-        if ((char)bVar2 < 1) {
+        if ((char)bVar2 <= 0) {
             *(undefined4*)((int)&DAT_BuildingsState::instance.buildings[0].campgroundVclock + iVar6) = 0;
         } else {
             *(int*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationSprite1 + iVar6) = (char)bVar2 + 0x3d;
@@ -223,7 +223,7 @@ namespace Map {
             iVar5 = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1;
             bVar2 = DAT_BuildingDefinedData::instance.OilSmelterAnimationFrames10[iVar5];
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1 = iVar5 + 1;
-            if ((char)bVar2 < 1) {
+            if ((char)bVar2 <= 0) {
                 DAT_BuildingsState::instance.buildings[iVar4].extraAnimationFrame1 = 0;
                 DAT_BuildingsState::instance.buildings[iVar4].field117_0x11a = 0;
                 goto LAB_004164bc;
@@ -231,7 +231,7 @@ namespace Map {
             iVar7 = (char)bVar2 + 0x7a;
         } else {
             iVar5 = *(int*)((int)DAT_BuildingsState::instance.buildings[0].resources + iVar6 + 0x1c);
-            if (iVar5 < 1) {
+            if (iVar5 <= 0) {
                 *(undefined4*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationSprite2 + iVar6) = 0;
                 *(undefined4*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6) = 0;
                 goto LAB_004164bc;
@@ -240,7 +240,7 @@ namespace Map {
                 iVar5 = *(int*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6);
                 bVar2 = DAT_BuildingDefinedData::instance.OilSmelterAnimationFrames9[iVar5];
                 *(int*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6) = iVar5 + 1;
-                if ((char)bVar2 < 1) {
+                if ((char)bVar2 <= 0) {
                     *(undefined4*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6) = 0;
                     goto LAB_004164bc;
                 }
@@ -249,7 +249,7 @@ namespace Map {
                 iVar5 = *(int*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6);
                 bVar2 = DAT_BuildingDefinedData::instance.OilSmelterAnimationFrames9[iVar5];
                 *(int*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6) = iVar5 + 1;
-                if ((char)bVar2 < 1) {
+                if ((char)bVar2 <= 0) {
                     *(undefined4*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6) = 0;
                     goto LAB_004164bc;
                 }
@@ -258,7 +258,7 @@ namespace Map {
                 iVar5 = *(int*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6);
                 bVar2 = DAT_BuildingDefinedData::instance.OilSmelterAnimationFrames9[iVar5];
                 *(int*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6) = iVar5 + 1;
-                if ((char)bVar2 < 1) {
+                if ((char)bVar2 <= 0) {
                     *(undefined4*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6) = 0;
                     goto LAB_004164bc;
                 }
@@ -267,7 +267,7 @@ namespace Map {
                 iVar5 = *(int*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6);
                 bVar2 = DAT_BuildingDefinedData::instance.OilSmelterAnimationFrames9[iVar5];
                 *(int*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6) = iVar5 + 1;
-                if ((char)bVar2 < 1) {
+                if ((char)bVar2 <= 0) {
                     *(undefined4*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6) = 0;
                     goto LAB_004164bc;
                 }
@@ -276,7 +276,7 @@ namespace Map {
                 iVar5 = *(int*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6);
                 bVar2 = DAT_BuildingDefinedData::instance.OilSmelterAnimationFrames9[iVar5];
                 *(int*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6) = iVar5 + 1;
-                if ((char)bVar2 < 1) {
+                if ((char)bVar2 <= 0) {
                     *(undefined4*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6) = 0;
                     goto LAB_004164bc;
                 }
@@ -285,7 +285,7 @@ namespace Map {
                 iVar5 = *(int*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6);
                 bVar2 = DAT_BuildingDefinedData::instance.OilSmelterAnimationFrames9[iVar5];
                 *(int*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6) = iVar5 + 1;
-                if ((char)bVar2 < 1) {
+                if ((char)bVar2 <= 0) {
                     *(undefined4*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6) = 0;
                     goto LAB_004164bc;
                 }
@@ -294,7 +294,7 @@ namespace Map {
                 iVar5 = *(int*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6);
                 bVar2 = DAT_BuildingDefinedData::instance.OilSmelterAnimationFrames9[iVar5];
                 *(int*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6) = iVar5 + 1;
-                if ((char)bVar2 < 1) {
+                if ((char)bVar2 <= 0) {
                     *(undefined4*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6) = 0;
                     goto LAB_004164bc;
                 }
@@ -304,7 +304,7 @@ namespace Map {
                 iVar7 = (int)(char)DAT_BuildingDefinedData::instance.OilSmelterAnimationFrames9[iVar4];
                 if (iVar5 < 9) {
                     *(int*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6) = iVar4 + 1;
-                    if (iVar7 < 1) {
+                    if (iVar7 <= 0) {
                         *(undefined4*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6)
                             = 0;
                         goto LAB_004164bc;
@@ -312,7 +312,7 @@ namespace Map {
                     iVar7 = iVar7 + 0x70;
                 } else {
                     *(int*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6) = iVar4 + 1;
-                    if (iVar7 < 1) {
+                    if (iVar7 <= 0) {
                         *(undefined4*)((int)&DAT_BuildingsState::instance.buildings[0].extraAnimationFrame1 + iVar6)
                             = 0;
                         goto LAB_004164bc;

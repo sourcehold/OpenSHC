@@ -132,7 +132,7 @@ namespace Map {
                 goto LAB_004236b1;
             DAT_BuildingsState::instance.buildings[iVar10].renderBlendStrength = 0;
         } else {
-            if ((sVar4 < 1) || (6 < sVar4)) {
+            if ((sVar4 <= 0) || (6 < sVar4)) {
                 if (sVar4 != 7)
                     goto LAB_004237a8;
                 bVar2 = DAT_BuildingDefinedData::instance

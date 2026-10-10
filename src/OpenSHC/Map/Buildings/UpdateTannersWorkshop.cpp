@@ -237,7 +237,7 @@ namespace Map {
                 if (DAT_BuildingsState::instance.buildings[buildingID].animationIndex != 0) {
                 LAB_004143b4:
                     sVar5 = *(short*)((int)DAT_BuildingsState::instance.buildings[0].resources + iVar7 + -0x62);
-                    if (sVar5 < 1)
+                    if (sVar5 <= 0)
                         goto LAB_00414528;
                     sVar5 = sVar5 + -1;
                     goto LAB_00414521;

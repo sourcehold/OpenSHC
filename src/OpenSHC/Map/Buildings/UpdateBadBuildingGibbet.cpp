@@ -35,7 +35,7 @@ namespace Map {
         bVar1 = DAT_BuildingDefinedData::instance
                     .BadBuildingGibbetAnimationFrames[DAT_BuildingsState::instance.buildings[iVar3].animationIndex];
         DAT_BuildingsState::instance.buildings[iVar3].animationFrame = (int)(char)bVar1;
-        if ((char)bVar1 < 1) {
+        if ((char)bVar1 <= 0) {
             DAT_BuildingsState::instance.buildings[iVar3].animationIndex = 0;
             DAT_BuildingsState::instance.buildings[iVar3].animationFrame = 1;
         }

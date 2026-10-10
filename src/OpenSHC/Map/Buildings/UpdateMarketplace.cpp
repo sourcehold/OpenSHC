@@ -76,7 +76,7 @@ namespace Map {
         bVar2 = DAT_BuildingDefinedData::instance
                     .AnimMarketPlace[DAT_BuildingsState::instance.buildings[buildingID].animationIndex];
         DAT_BuildingsState::instance.buildings[buildingID].animationFrame = (int)(char)bVar2;
-        if ((char)bVar2 < 1) {
+        if ((char)bVar2 <= 0) {
             DAT_BuildingsState::instance.buildings[buildingID].animationIndex = 0;
             piVar1 = &DAT_BuildingsState::instance.buildings[buildingID].animationCycleCount;
             *piVar1 = *piVar1 + 1;
@@ -94,7 +94,7 @@ namespace Map {
             }
             DAT_BuildingsState::instance.buildings[buildingID].renderBlendStrength = sVar3;
         }
-        if (DAT_BuildingsState::instance.buildings[buildingID].renderBlendStrength < 1) {
+        if (DAT_BuildingsState::instance.buildings[buildingID].renderBlendStrength <= 0) {
             DAT_BuildingsState::instance.buildings[buildingID].renderBlendStrength = 0;
         }
         if (0x1f < DAT_BuildingsState::instance.buildings[buildingID].renderBlendStrength) {

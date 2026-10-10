@@ -73,7 +73,7 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[iVar6].outpostRelatedUnk4 = sVar2 + -1;
         }
         sVar2 = DAT_BuildingsState::instance.buildings[iVar6].oxTetherRelatedUnitID;
-        if (sVar2 < 1) {
+        if (sVar2 <= 0) {
             if ((DAT_BuildingsState::instance.buildings[iVar6].workerID[0] != 0)
                 && (piVar1 = &DAT_BuildingsState::instance.buildings[iVar6].animationTickCounter, *piVar1 = *piVar1 + 1,
                     99 < DAT_BuildingsState::instance.buildings[iVar6].animationTickCounter)) {

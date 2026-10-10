@@ -92,7 +92,7 @@ namespace Map {
                 DAT_BuildingsState::instance.buildings[buildingID].resourceRelatedCountDown = 100;
                 bVar4 = true;
             }
-            if ((DAT_GameState::instance.playerDataArray[_playerID].startResources[0xd] < 1)
+            if ((DAT_GameState::instance.playerDataArray[_playerID].startResources[0xd] <= 0)
                 || (uVar5 = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::computeResourceSumForBuilding,
                         DAT_BuildingsState::ptr)(buildingID),
                     0xf9 < (int)uVar5)) {

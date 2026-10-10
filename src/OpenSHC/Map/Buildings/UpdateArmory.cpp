@@ -153,7 +153,7 @@ namespace Map {
                 DAT_BuildingsState::instance.buildings[buildingID].resourceRelatedCountDown = 100;
                 bVar9 = true;
             }
-            if ((DAT_GameState::instance.playerDataArray[_playerID].startResources[0x18] < 1)
+            if ((DAT_GameState::instance.playerDataArray[_playerID].startResources[0x18] <= 0)
                 || (uVar4 = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::getArmoryIDIfSpaceLeft,
                         DAT_BuildingsState::ptr)(buildingID, 0x18, _playerID, 1),
                     uVar4 == 0)) {

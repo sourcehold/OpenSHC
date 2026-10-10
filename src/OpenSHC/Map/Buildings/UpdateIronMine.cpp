@@ -470,7 +470,7 @@ namespace Map {
         }
     LAB_0041d47e:
         iVar4 = *(int*)((int)DAT_BuildingsState::instance.buildings[0].resources + iVar5 + 0x18);
-        if (iVar4 < 1) {
+        if (iVar4 <= 0) {
             *(undefined4*)((int)&DAT_BuildingsState::instance.buildings[0].extraOverlayImage1 + iVar5) = 0;
         } else if (iVar4 < 8) {
             *(int*)((int)&DAT_BuildingsState::instance.buildings[0].extraOverlayImage1 + iVar5) = iVar4 + 0xa2;

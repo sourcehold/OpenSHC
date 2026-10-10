@@ -57,7 +57,7 @@ namespace Map {
             bVar2 = DAT_BuildingDefinedData::instance.GoodBuildingMaypoleAnimationFrames1
                         [DAT_BuildingsState::instance.buildings[iVar4].animationIndex];
             DAT_BuildingsState::instance.buildings[iVar4].animationFrame = (int)(char)bVar2;
-            if ((char)bVar2 < 1) {
+            if ((char)bVar2 <= 0) {
                 piVar1 = &DAT_BuildingsState::instance.buildings[iVar4].animationCycleCount;
                 *piVar1 = *piVar1 + 1;
                 DAT_BuildingsState::instance.buildings[iVar4].animationIndex = 0;
