@@ -45,6 +45,20 @@ CASES = [
     use(iVar2);
 }
 """, "iVar2", None),
+    # a later case label jumps over the initialisation (C2360), and the label can sit
+    # after the last use, so the declaration has to stay put
+    ("switch arm", """    int imageX;
+    switch (k) {
+    case 1:
+        imageX = 0;
+        use(imageX);
+        break;
+    case 2:
+        use(0);
+        break;
+    }
+}
+""", "imageX", None),
     ("unused is dropped", """    int iVar4;
     use(0);
 }

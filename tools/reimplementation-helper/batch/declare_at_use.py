@@ -30,6 +30,17 @@ DECL = re.compile(r"^(?P<type>(?:unsigned\s+|const\s+)*[A-Za-z_][\w:]*)\s+"
                   r"(?P<arr>\[[^\]]*\])?\s*;$")
 
 
+def is_case_label(line):
+    """True for a `case ...:` or `default:` label.
+
+    Deliberately not a regex: an earlier version of this check compiled a literal
+    backspace where a word boundary was meant, so it matched nothing and the guard
+    below passed every switch it was written to reject.
+    """
+    s = line.strip()
+    return s.startswith("case ") or s.startswith("default:") or s.startswith("default :")
+
+
 def depths(lines):
     """Lowest brace depth each line's own code sits at.
 
@@ -50,6 +61,22 @@ def depths(lines):
                 d -= 1
                 low = min(low, d)
         out.append(low)
+    return out
+
+
+def depths_after(lines):
+    """Brace depth *after* each line, which is what says where a block ends.
+
+    depths() reports the lowest depth a line reaches so that a use on a closing line is
+    seen outside the block. That is the wrong measure for block extent: it makes an inner
+    `}` look like the end of the enclosing block, which stopped the case-label scan below
+    before it reached the label it was looking for.
+    """
+    out, d = [], 0
+    for line in lines:
+        code = re.sub(r"//.*", "", line)
+        d += code.count("{") - code.count("}")
+        out.append(d)
     return out
 
 
@@ -90,6 +117,19 @@ def move(path, write=True):
         d = depths(lines)
         if any(d[n] < d[first] for n in range(first, uses[-1] + 1)):
             continue                              # the scope would not cover every use
+        # A `case` label reached after the declaration jumps over its initialisation,
+        # which MSVC rejects with C2360. Brace depth cannot see this on its own, since
+        # every arm of a switch shares one depth. The scan also has to run to the end of
+        # the block enclosing the first use rather than to the last use, because the
+        # variable stays in scope that far: in calculateHoveredTile the offending label
+        # sits three lines *after* the last use of imageX.
+        after = depths_after(lines)
+        end = first + 1
+        while end < len(lines) and after[end] >= d[first]:
+            end += 1
+        if any(d[n] == d[first] and is_case_label(lines[n])
+               for n in range(first + 1, end)):
+            continue
         lines[first] = re.sub(r"^(\s*)%s\s*=" % re.escape(var),
                               lambda m: "%s%s %s%s =" % (m.group(1), vtype, ptr, var),
                               lines[first], count=1)
