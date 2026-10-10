@@ -52,7 +52,7 @@ namespace Map {
                                     != Map::Units::ULS_NORMAL))
                             && (((_goToRallyPoint = DAT_UnitsState::instance.units[_unitID].shootTargetedUnit,
                                      _goToRallyPoint == 0
-                                         || (this->tribes[DAT_CurrentTribeID::instance].countdown2 < 1))
+                                         || (this->tribes[DAT_CurrentTribeID::instance].countdown2 <= 0))
                                     || (DAT_UnitsState::instance.units[_unitID].unitType == Map::Units::UT_A_HARCHER))
                                 || (DAT_UnitsState::instance.units[_unitID].targetUID
                                     != DAT_UnitsState::instance.units[_goToRallyPoint].uid))

@@ -13,7 +13,7 @@ namespace Map {
             psVar1 = &this->tribes[1].unknownBool02;
             iVar2 = 1;
             do {
-                if (param_2 < 1) {}
+                if (param_2 <= 0) {}
                 if (psVar1[-0x139] != 0 && psVar1[-0x138] == param_1 && *psVar1 != 0) {
                     *psVar1 = 0;
                     psVar1[1] = 1;

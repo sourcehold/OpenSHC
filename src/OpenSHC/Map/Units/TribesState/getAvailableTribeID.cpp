@@ -22,7 +22,7 @@ namespace Map {
                 while (this->tribes[_tribeID].tribeState != 0 || this->tribes[_tribeID].time != 0) {
                     _tribeID = _tribeID + -1;
                     DAT_CurrentTribeID::instance = _tribeID;
-                    if (_tribeID < 1) {
+                    if (_tribeID <= 0) {
                         return 0;
                     }
                 }
@@ -41,7 +41,7 @@ namespace Map {
                     while (this->tribes[_tribeID].tribeState != 0 || this->tribes[_tribeID].time != 0) {
                         _tribeID = _tribeID + -8;
                         DAT_CurrentTribeID::instance = _tribeID;
-                        if (_tribeID < 1) {
+                        if (_tribeID <= 0) {
                             return 0;
                         }
                     }

@@ -29,7 +29,7 @@ namespace Map {
                 while (*psVar1 != 0) {
                     _selectionID = _selectionID + -8;
                     psVar1 = psVar1 + -0xcd0;
-                    if (_selectionID < 1) {
+                    if (_selectionID <= 0) {
                         return 0;
                     }
                 }

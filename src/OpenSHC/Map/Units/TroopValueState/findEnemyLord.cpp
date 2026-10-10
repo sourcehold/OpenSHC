@@ -13,7 +13,7 @@ namespace Map {
             int iVar1;
             int* piVar2;
             iVar1 = 0;
-            if (this->attackInfo.lord3 < 1) {
+            if (this->attackInfo.lord3 <= 0) {
                 return 0;
             }
             piVar2 = &this->attackInfo.lordValuesArray[0].unitID;

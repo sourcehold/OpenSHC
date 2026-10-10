@@ -149,7 +149,7 @@ namespace Map {
                                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe,
                                     DAT_TribesState::ptr)(_unitID, _tribeID2);
                                 _unitCount = _unitCount + -1;
-                                if (_unitCount < 1)
+                                if (_unitCount <= 0)
                                     goto LAB_0051b9cb;
                             }
                             _unitID = _unitID + 1;

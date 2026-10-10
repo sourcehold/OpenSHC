@@ -27,7 +27,7 @@ namespace Map {
                     int _tribeID = DAT_CurrentTribeID::instance;
                     if (_state != 3) {
                         int _tribeSize = this->tribes[DAT_CurrentTribeID::instance].size;
-                        if (_tribeSize < 1) {
+                        if (_tribeSize <= 0) {
                             int _tribeTime = this->tribes[DAT_CurrentTribeID::instance].time;
                             if (_tribeTime && (int)DAT_GameCore::instance.mapTimeInTicks <= (int)_tribeTime
                                 && _tribeTime)

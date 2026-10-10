@@ -40,7 +40,7 @@ namespace Map {
             }
             int iVar4 = (int)DAT_UnitsState::instance.units[targetUnitID].x;
             int iVar2 = (int)DAT_UnitsState::instance.units[targetUnitID].y;
-            if (DAT_UnitsState::instance.units[targetUnitID].stateBasedSpeed < 1) {
+            if (DAT_UnitsState::instance.units[targetUnitID].stateBasedSpeed <= 0) {
                 UVar1 = DAT_UnitsState::instance.units[targetUnitID].unitType;
                 if ((UVar1 == Map::Units::UT_E_KNIGHT)
                     && (DAT_UnitsState::instance.units[targetUnitID].isMatchingSpeed == false)) {
@@ -51,7 +51,7 @@ namespace Map {
             LAB_005215e9:
                 iVar3 = iVar3 / 2;
             }
-            if (DAT_UnitsState::instance.units[unitID].stateBasedSpeed < 1) {
+            if (DAT_UnitsState::instance.units[unitID].stateBasedSpeed <= 0) {
                 UVar1 = DAT_UnitsState::instance.units[unitID].unitType;
                 if ((UVar1 == Map::Units::UT_E_KNIGHT)
                     && (DAT_UnitsState::instance.units[unitID].isMatchingSpeed == false)) {

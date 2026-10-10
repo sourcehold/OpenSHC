@@ -43,7 +43,7 @@ namespace Map {
             if (0x6e < DAT_UnitsState::instance.units[param_1].terrainOrClimbHeight) {
                 iVar8 = 5;
             }
-            if (((iVar10 < 1) || (0x50 < DAT_UnitsState::instance.units[param_1].closestEnemyMicroDistance))
+            if (((iVar10 <= 0) || (0x50 < DAT_UnitsState::instance.units[param_1].closestEnemyMicroDistance))
                 || ((iVar9 = (int)DAT_UnitsState::instance.units[param_1].owner,
                     DAT_GameSynchronyState::instance.currentPlayerFullIDArray[iVar9] != -1
                         && (DAT_TribesState::instance.tribes[iVar10].unitStance
@@ -60,7 +60,7 @@ namespace Map {
                 iVar8 = DAT_PathFindingState::instance.field34_0x64;
                 if (DAT_TribesState::instance.tribes[iVar10].unitStance
                     == Map::Units::Behavior::USE_AGGRESSIVE) {
-                    if (DAT_PathFindingState::instance.ALGO_TotalTroopCount < 1) {
+                    if (DAT_PathFindingState::instance.ALGO_TotalTroopCount <= 0) {
                         return (undefined4)(0);
                     }
                 } else if ((DAT_PathFindingState::instance.ALGO_TotalTroopCount < 4)

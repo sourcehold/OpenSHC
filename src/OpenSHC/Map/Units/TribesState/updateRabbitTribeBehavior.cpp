@@ -116,7 +116,7 @@ namespace Map {
                 if (sVar2 == 1) {
                     MACRO_CALL_MEMBER(Map::WildlifeState_Func::findAndSetNewRallyPointForDeerAndLions,
                         DAT_WildlifeState::ptr)(tribeID, 3, 0);
-                    if (this->tribes[tribeID].rallyPointCount < 1) {
+                    if (this->tribes[tribeID].rallyPointCount <= 0) {
                         MACRO_CALL_MEMBER(Map::WildlifeState_Func::findAndSetNewRallyPointForDeerAndLions,
                             DAT_WildlifeState::ptr)(tribeID, 3, 1);
                     }

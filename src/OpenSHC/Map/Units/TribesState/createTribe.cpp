@@ -26,7 +26,7 @@ namespace Map {
                 if (this->tribes[DAT_CurrentTribeID::instance].tribeState == 0) {
                     MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                         820, '\0', (void*)((int)(this->tribes + DAT_CurrentTribeID::instance)));
-                    if (_tribeID < 1) {
+                    if (_tribeID <= 0) {
                         return 0;
                     }
                     if ((playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID) && (setAsCurrentTribeID)) {

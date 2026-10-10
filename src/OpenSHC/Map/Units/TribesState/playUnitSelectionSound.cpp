@@ -80,7 +80,7 @@ namespace Map {
             case Map::Units::UT_S_BATTERINGRAM:
                 iVar5 = MACRO_CALL_MEMBER(
                     Map::Units::UnitsState_Func::getRemainingRequiredEngineers, DAT_UnitsState::ptr)(iVar3);
-                if (iVar5 < 1) {
+                if (iVar5 <= 0) {
                     iVar5 = 0x68;
                     goto LAB_0052188b;
                 }

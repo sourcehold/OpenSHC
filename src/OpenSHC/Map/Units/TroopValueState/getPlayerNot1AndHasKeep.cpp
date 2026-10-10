@@ -29,7 +29,7 @@ namespace Map {
                 if (playerID == 1) {
                     return FALSE;
                 }
-                if (DAT_GameState::instance.playerDataArray[playerID].keep.id < 1) {
+                if (DAT_GameState::instance.playerDataArray[playerID].keep.id <= 0) {
                     return FALSE;
                 }
             }

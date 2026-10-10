@@ -27,7 +27,7 @@ namespace Map {
             uVar7 = (uint)DAT_UnitsState::instance.units[sVar1].x;
             int iVar2 = (int)this->tribes[param_1].someIndex;
             int iVar5 = iVar2 % 0x28;
-            if (iVar5 < 1) {
+            if (iVar5 <= 0) {
                 iVar5 = 0;
             } else if (0x27 < iVar5) {
                 return iVar2 / 0x28;

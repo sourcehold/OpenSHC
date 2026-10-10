@@ -34,7 +34,7 @@ namespace Map {
             iVar2 = this->attackInfo.attackWaveTicker[attackWave];
             iVar1 = iVar2 + 1;
             this->attackInfo.attackWaveTicker[attackWave] = iVar1;
-            if (iVar2 < 1) {
+            if (iVar2 <= 0) {
                 this->attackInfo.someCounter1 = this->attackInfo.someCounter1 + 1;
                 MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::removeSiegeBuildings,
                     DAT_BuildingsState::ptr)(attackWave, playerID);

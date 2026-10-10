@@ -20,7 +20,7 @@ namespace Map {
         undefined4 TribesState::trySpawnAdditionalWildlifeForTribe(int param_1, int param_2, int param_3, int param_4)
         {
             if ((DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_MAP_EDITOR_LANDSCAPING)
-                || (param_1 < 1)) {
+                || (param_1 <= 0)) {
                 return (undefined4)(0);
             }
             if (this->tribes[param_1].predatorNearby == 0

@@ -397,7 +397,7 @@ namespace Map {
                                 if (unitInstructionType == Map::Units::UIT_THROW_COW
                                     && (UVar4 = DAT_UnitsState::instance.units[_unitID_0x05_0x16].unitType,
                                         UVar4 == Map::Units::UT_S_CATAPULT || (UVar4 == Map::Units::UT_S_TREBUCHET))) {
-                                    if (DAT_GameState::instance.playerDataArray[unitUID].counter < 1) {
+                                    if (DAT_GameState::instance.playerDataArray[unitUID].counter <= 0) {
                                         DAT_UnitsState::instance.units[_unitID_0x05_0x16].field253_0x3c5 = 5;
                                     } else {
                                         DAT_UnitsState::instance.units[_unitID_0x05_0x16].targetingType

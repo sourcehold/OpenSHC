@@ -38,7 +38,7 @@ namespace Map {
             if (this->attackInfo.attackWaveTicker[attackID] == 0) {
                 this->attackInfo.someCounter1 = this->attackInfo.someCounter1 + 1;
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::aiRecomputeAttacks2, this)(1, attackID);
-                if (this->attackInfo.tentPoints < 1) {
+                if (this->attackInfo.tentPoints <= 0) {
                     MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::placeSiegeTentsAndAssignEngineers,
                         this)(attackID, 0);
                 } else {

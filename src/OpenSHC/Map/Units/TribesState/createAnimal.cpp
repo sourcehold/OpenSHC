@@ -30,7 +30,7 @@ namespace Map {
             UnitType unitType = ((UnitType)0);
             int _rng2 = 0;
             dword tribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, this)(0, 0);
-            if ((int)tribeID < 1) {
+            if ((int)tribeID <= 0) {
                 return (dword)(0);
             }
             if (399 < x || 399 < y || *(char*)(y * 400 + 0x21aec98 + x) == '\0') {

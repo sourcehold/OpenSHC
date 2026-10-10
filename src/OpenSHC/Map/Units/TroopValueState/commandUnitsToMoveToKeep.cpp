@@ -107,14 +107,14 @@ namespace Map {
                         _pUnit = _pUnit + 0x248;
                     } while ((int)_unitID < DAT_UnitsState::instance.maxUnitCount);
                 }
-                if (DAT_TribesState::instance.tribes[_swordsTribe].size < 1) {
+                if (DAT_TribesState::instance.tribes[_swordsTribe].size <= 0) {
                     DAT_TribesState::instance.tribes[_swordsTribe].tribeState = 3;
                 } else {
                     MACRO_CALL_MEMBER(
                         Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(
                         _swordsTribe, x1, y1 + 1, 0, 0, Map::Units::Instructions::UMSE_0);
                 }
-                if (DAT_TribesState::instance.tribes[_archersTribe].size < 1) {
+                if (DAT_TribesState::instance.tribes[_archersTribe].size <= 0) {
                     DAT_TribesState::instance.tribes[_archersTribe].tribeState = 3;
                 }
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction,

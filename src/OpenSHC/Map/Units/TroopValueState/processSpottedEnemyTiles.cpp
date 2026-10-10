@@ -35,7 +35,7 @@ namespace Map {
                     } else {
                         iVar2 = piVar3->value + -1;
                         piVar3->value = iVar2;
-                        if (iVar2 < 1) {
+                        if (iVar2 <= 0) {
                             piVar3->tile = 0;
                         }
                     }

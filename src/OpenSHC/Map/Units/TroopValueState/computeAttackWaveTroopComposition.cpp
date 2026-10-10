@@ -21,7 +21,7 @@ namespace Map {
             }
             if (9 < this->attackInfo.field86974_0x20f74) {
                 if (this->attackInfo.field86974_0x20f74 < 0x14) {
-                    if (this->attackInfo.spearmenAndMacemen < 1) {
+                    if (this->attackInfo.spearmenAndMacemen <= 0) {
                         this->attackInfo.field_0x20f44 = 0;
                     } else if (this->attackInfo.spearmenAndMacemen < 2) {
                         this->attackInfo.field_0x20f44 = 1;
@@ -40,7 +40,7 @@ namespace Map {
                     }
                     this->attackInfo.field_0x20f40 = 1;
                 } else if (this->attackInfo.field86974_0x20f74 < 0x1e) {
-                    if (this->attackInfo.spearmenAndMacemen < 1) {
+                    if (this->attackInfo.spearmenAndMacemen <= 0) {
                         this->attackInfo.field_0x20f44 = 0;
                     } else if (this->attackInfo.spearmenAndMacemen < 2) {
                         this->attackInfo.field_0x20f44 = 1;
@@ -65,7 +65,7 @@ namespace Map {
                     }
                     this->attackInfo.field_0x20f40 = (4 < this->attackInfo.pikemenSwordsmenAndMore) + 1;
                 } else {
-                    if (this->attackInfo.spearmenAndMacemen < 1) {
+                    if (this->attackInfo.spearmenAndMacemen <= 0) {
                         this->attackInfo.field_0x20f44 = 0;
                     } else if (this->attackInfo.spearmenAndMacemen < 2) {
                         this->attackInfo.field_0x20f44 = 1;
@@ -94,7 +94,7 @@ namespace Map {
                 }
                 goto LAB_00519672;
             }
-            if (this->attackInfo.spearmenAndMacemen < 1) {
+            if (this->attackInfo.spearmenAndMacemen <= 0) {
                 this->attackInfo.field_0x20f44 = 0;
             } else if (this->attackInfo.spearmenAndMacemen < 2) {
                 this->attackInfo.field_0x20f44 = 1;
@@ -112,7 +112,7 @@ namespace Map {
             } else {
                 this->attackInfo.field_0x20f54 = 1;
                 this->attackInfo.field_0x20f58 = 1;
-                if (this->attackInfo.pikemenSwordsmenAndMore < 1)
+                if (this->attackInfo.pikemenSwordsmenAndMore <= 0)
                     goto LAB_005193ed;
             }
             this->attackInfo.field_0x20f5c = 2;

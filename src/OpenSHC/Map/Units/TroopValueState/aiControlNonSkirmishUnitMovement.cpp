@@ -34,7 +34,7 @@ namespace Map {
                 && (DAT_GameCore::instance.gameMode_2 != Game::GM_SIEGE_THAT)) {
                 if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                         .keep.id
-                    < 1) {
+                    <= 0) {
                     MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::updateAttackInfoTick, this)();
                 }
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::recountAttackTroopValue, this)(0);
@@ -56,7 +56,7 @@ namespace Map {
                             iVar2 = iVar2 + 1;
                         } while (iVar2 < 0x32);
                         *piVar1 = 600;
-                    } else if (iVar2 < 1) {
+                    } else if (iVar2 <= 0) {
                         if (iVar2 < 0) {
                             *piVar1 = iVar2 + 1;
                         }
