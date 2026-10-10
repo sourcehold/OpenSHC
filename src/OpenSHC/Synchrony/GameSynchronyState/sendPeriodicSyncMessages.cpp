@@ -13,7 +13,7 @@ namespace Synchrony {
             this->otherTime1 = _now;
             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::sendSyncPacket126, this)();
         }
-        if (180 < (int)(_now - this->now2)) {
+        if (180 <= (int)(_now - this->now2)) {
             this->now2 = _now;
             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::sendSomeMultiplayerSyncMessageWithType, this)(0);
             if (0 < this->syncRelatedCountdown) {

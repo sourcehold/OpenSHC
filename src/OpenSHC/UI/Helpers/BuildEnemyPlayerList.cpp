@@ -29,7 +29,7 @@ namespace UI {
             if (_playerID != DAT_GameSynchronyState::instance.currentPlayerSlotID
                 && (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[_playerID] != -1
                     || (DAT_GameSynchronyState::instance.currentAIArray[_playerID] != 0))
-                && ((int)(DAT_GameCore::instance.mapTimeInTicks - DAT_GameCore::instance.section1127) < 400
+                && ((int)(DAT_GameCore::instance.mapTimeInTicks - DAT_GameCore::instance.section1127) <= 400
                     || (iVar1 = MACRO_CALL_MEMBER(
                             Map::Units::UnitsState_Func::getAliveLordForPlayer, DAT_UnitsState::ptr)(_playerID),
                         iVar1 != 0))

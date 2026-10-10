@@ -30,7 +30,7 @@ namespace UI {
             this->elements[_index].size = size;
             this->elements[_index].time
                 = DAT_GameSynchronyState::instance.commandDelay + 5 + DAT_GameCore::instance.mapTimeInTicks;
-            if (80 < flag) {
+            if (80 <= flag) {
                 flag = 15;
             }
             this->elements[_index].rotationOrExtraInfo = flag;
