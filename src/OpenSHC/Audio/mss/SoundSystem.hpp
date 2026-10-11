@@ -40,9 +40,9 @@ namespace Audio {
             int streamFileVolumeCurrentUnk_0x5c[5]; // 0x0000005C length: 20
             int streamVolume[5]; // 0x00000070 length: 20
             char currIdSoundFilenameUnk_0x84[200]; // 0x00000084 length: 200
-            int mbr_0x14c; // 0x0000014C length: 4
+            int musicVolumePercent; // 0x0000014C length: 4
             int currIdSoundFileVolumeUnk_0x150; // 0x00000150 length: 4
-            dword mbr_0x154; // 0x00000154 length: 4
+            dword musicFadeState; // 0x00000154 length: 4
             dword someSoundTime_0x158; // 0x00000158 length: 4
             int streamPaused_0x15c[5]; // 0x0000015C length: 20
             HSAMPLE musicSampleUnk_0x170; // 0x00000170 length: 4
@@ -65,7 +65,7 @@ namespace Audio {
             dword currentSoundIDVolumeUnk_0x327c; // 0x0000327C length: 4
             dword mbr_0x3280; // 0x00003280 length: 4
             int lastUsedSpeechStreamUnk_0x3284; // 0x00003284 length: 4
-            dword mbr_0x3288; // 0x00003288 length: 4
+            dword lastMusicChangeTime; // 0x00003288 length: 4
 
         private:
             SoundSystem(SoundSystem const&);

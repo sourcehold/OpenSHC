@@ -15,7 +15,7 @@ namespace UI {
 
             void __cdecl MenuView_GameStartEnterName_DoEveryFrame();
 
-            void __cdecl MenuView_GameStartEnterName_Prepare(void* param_1);
+            void __cdecl MenuView_GameStartEnterName_Prepare();
 
             void __cdecl MenuView_GameStartEnterName_DoInitial();
 

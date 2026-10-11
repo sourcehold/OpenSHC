@@ -45,7 +45,7 @@ namespace IO {
 
         BOOLEnum doExplode(int* hash, uchar* src, int sizeCompressed, uchar* dst, int sizeUncompressed);
 
-        int encodeData(int sizeUncompressed, undefined* src, undefined* dst);
+        int encodeData(int sizeUncompressed, uchar* src, uchar* dst);
 
         dword decodeData(void* source, void* destination);
     };

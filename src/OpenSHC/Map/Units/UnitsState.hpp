@@ -40,29 +40,29 @@ namespace Map {
         class UnitsState {
         public:
             int maxUnitCount; // 0x00000000 length: 4
-            int unitCount; // 0x00000004 length: 4
-            int unknownInitially0_01; // 0x00000008 length: 4
-            int lastSelectedUnitID; // 0x0000000C length: 4
-            int unitControlsRelated; // 0x00000010 length: 4
-            BOOLEnum field5_0x14; // 0x00000014 length: 4
-            int lostChimps; // 0x00000018 length: 4
-            int unitDistanceComputationResultUnk; // 0x0000001C length: 4
-            int totalUnitsInSelection; // 0x00000020 length: 4
+            uint field1_0x4; // 0x00000004 length: 4
+            undefined4 field2_0x8; // 0x00000008 length: 4
+            undefined4 field3_0xc; // 0x0000000C length: 4
+            undefined4 field4_0x10; // 0x00000010 length: 4
+            undefined4 pendingUnitControlMode; // 0x00000014 length: 4
+            undefined4 field6_0x18; // 0x00000018 length: 4
+            undefined4 field7_0x1c; // 0x0000001C length: 4
+            undefined4 field8_0x20; // 0x00000020 length: 4
             int unitCountOfSelection[9]; // 0x00000024 length: 36
             byte unusedBytes01[44]; // 0x00000048 length: 44
-            short selectedUnitsBitFlags[200]; // 0x00000074 length: 400
+            byte field11_0x74[400]; // 0x00000074 length: 400
             byte unusedBytes02[852]; // 0x00000204 length: 852
             BOOLEnum hasEngineerSelected; // 0x00000558 length: 4
             int field14_0x55c; // 0x0000055C length: 4
             int field15_0x560; // 0x00000560 length: 4
             int selectionEuropeanArchers; // 0x00000564 length: 4
-            int selectionSpearmen; // 0x00000568 length: 4
-            int selectionMacemen; // 0x0000056C length: 4
-            int selectionCrossbowmen; // 0x00000570 length: 4
-            int selectionPikemen; // 0x00000574 length: 4
-            int selectionSwordsmen; // 0x00000578 length: 4
-            int selectionKnights; // 0x0000057C length: 4
-            int selectionEngineers; // 0x00000580 length: 4
+            undefined4 field17_0x568; // 0x00000568 length: 4
+            undefined4 field18_0x56c; // 0x0000056C length: 4
+            undefined4 field19_0x570; // 0x00000570 length: 4
+            undefined4 field20_0x574; // 0x00000574 length: 4
+            undefined4 field21_0x578; // 0x00000578 length: 4
+            undefined4 field22_0x57c; // 0x0000057C length: 4
+            undefined4 field23_0x580; // 0x00000580 length: 4
             int selectionLaddermen; // 0x00000584 length: 4
             int selectionTunnelers; // 0x00000588 length: 4
             int selectionMonks; // 0x0000058C length: 4
@@ -84,13 +84,13 @@ namespace Map {
             int selectionFireBallista; // 0x000005CC length: 4
             int selectionSlots[8]; // 0x000005D0 length: 32
             int nHasOwnedUnitInSelection; // 0x000005F0 length: 4
-            int climbX2; // 0x000005F4 length: 4
-            int climbY2; // 0x000005F8 length: 4
+            undefined4 field45_0x5f4; // 0x000005F4 length: 4
+            undefined4 field46_0x5f8; // 0x000005F8 length: 4
             byte unusedBytes03[8]; // 0x000005FC length: 8
             dword field48_0x604; // 0x00000604 length: 4
-            int field49_0x608; // 0x00000608 length: 4
-            int euroUnitAcquisitionFailReason; // 0x0000060C length: 4
-            int euroUnitRequiredResource; // 0x00000610 length: 4
+            uint field49_0x608; // 0x00000608 length: 4
+            undefined4 field50_0x60c; // 0x0000060C length: 4
+            undefined4 field51_0x610; // 0x00000610 length: 4
             Unit units[2500]; // 0x00000614 length: 2920000
             short unusedUnitIDArray[2500]; // 0x002C9454 length: 5000
             int unusedUnitIDArrayIndex; // 0x002CA7DC length: 4

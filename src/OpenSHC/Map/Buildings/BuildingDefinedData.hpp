@@ -34,7 +34,7 @@ namespace Map {
         // SIZE: 0x0000B0F4
         typedef struct BuildingDefinedData {
 
-            byte field0_0x0[52]; // 0x00000000 length: 52
+            char FletchersWorkshopAnimationFrames1[52]; // 0x00000000 length: 52
             NoArgCallback* BuildingUpdateFunctions[110]; // 0x00000034 length: 440
             BuildingTypeShort BuildingPrioritiesWhenNoFire[32]; // 0x000001EC length: 64
             BuildingTypeShort BuildingPrioritiesWhenFire[32]; // 0x0000022C length: 64
@@ -50,15 +50,15 @@ namespace Map {
             TruncatedInt EmployeeCountPerBuildingType[110]; // 0x000011E4 length: 440
             int StorageLimitResourceTypeArray[26]; // 0x0000139C length: 104
             TruncatedInt field15_0x1404[110]; // 0x00001404 length: 440
-            TruncatedInt field16_0x15bc[110]; // 0x000015BC length: 440
+            TruncatedInt BuildingFlag1Defaults[110]; // 0x000015BC length: 440
             BOOLEnum field17_0x1774[110]; // 0x00001774 length: 440
-            TruncatedInt field18_0x192c[110]; // 0x0000192C length: 440
+            TruncatedInt BuildingFlag4Defaults[110]; // 0x0000192C length: 440
             int BuildingTypeHasHealth[110]; // 0x00001AE4 length: 440
             int BuildingIsGateHouseArray[110]; // 0x00001C9C length: 440
             int BuildingIsKeepArray[110]; // 0x00001E54 length: 440
             BOOLEnum IsGateOrTowerArray[110]; // 0x0000200C length: 440
             BOOLEnum field23_0x21c4[110]; // 0x000021C4 length: 440
-            TruncatedInt field24_0x237c[110]; // 0x0000237C length: 440
+            TruncatedInt BuildingFlag2Defaults[110]; // 0x0000237C length: 440
             int BuildingShowRubbleWhenDestroyed[110]; // 0x00002534 length: 440
             int BuildingTypeOwnable[110]; // 0x000026EC length: 440
             TruncatedInt BuildingHP[110]; // 0x000028A4 length: 440
@@ -76,142 +76,142 @@ namespace Map {
             short SpriteOffsets1[110][2][2]; // 0x00003A74 length: 880
             int AnimAdvanceThrottles[110]; // 0x00003DE4 length: 440
             int BuildingHeights[110]; // 0x00003F9C length: 440
-            int field42_0x4154[110]; // 0x00004154 length: 440
+            int BuildingDestroyedScoreWeight[110]; // 0x00004154 length: 440
             byte field43_0x430c[312]; // 0x0000430C length: 312
             byte FletcherWorkshopAnimationCycle[160]; // 0x00004444 length: 160
             byte field45_0x44e4[400]; // 0x000044E4 length: 400
             byte field46_0x4674[608]; // 0x00004674 length: 608
-            byte field47_0x48d4[56]; // 0x000048D4 length: 56
-            byte field48_0x490c[448]; // 0x0000490C length: 448
-            byte field49_0x4acc[112]; // 0x00004ACC length: 112
-            byte field50_0x4b3c[20]; // 0x00004B3C length: 20
-            byte field51_0x4b50[24]; // 0x00004B50 length: 24
-            byte field52_0x4b68[40]; // 0x00004B68 length: 40
-            byte field53_0x4b90[28]; // 0x00004B90 length: 28
-            byte field54_0x4bac[104]; // 0x00004BAC length: 104
-            byte field55_0x4c14[396]; // 0x00004C14 length: 396
-            byte field56_0x4da0[20]; // 0x00004DA0 length: 20
-            byte field57_0x4db4[420]; // 0x00004DB4 length: 420
-            byte field58_0x4f58[44]; // 0x00004F58 length: 44
-            byte field59_0x4f84[48]; // 0x00004F84 length: 48
-            byte field60_0x4fb4[36]; // 0x00004FB4 length: 36
-            byte field61_0x4fd8[36]; // 0x00004FD8 length: 36
-            byte field62_0x4ffc[20]; // 0x00004FFC length: 20
-            byte field63_0x5010[44]; // 0x00005010 length: 44
-            byte field64_0x503c[88]; // 0x0000503C length: 88
-            byte field65_0x5094[44]; // 0x00005094 length: 44
-            byte field66_0x50c0[12]; // 0x000050C0 length: 12
-            byte field67_0x50cc[64]; // 0x000050CC length: 64
-            byte field68_0x510c[56]; // 0x0000510C length: 56
-            byte field69_0x5144[72]; // 0x00005144 length: 72
-            byte field70_0x518c[80]; // 0x0000518C length: 80
-            byte field71_0x51dc[244]; // 0x000051DC length: 244
-            byte field72_0x52d0[36]; // 0x000052D0 length: 36
-            byte field73_0x52f4[112]; // 0x000052F4 length: 112
-            byte field74_0x5364[88]; // 0x00005364 length: 88
+            char FletchersWorkshopAnimationFrames2[56]; // 0x000048D4 length: 56
+            byte ArmorersWorkshopAnimationFrames1[448]; // 0x0000490C length: 448
+            byte ArmorersWorkshopAnimationFrames2[112]; // 0x00004ACC length: 112
+            byte ArmorersWorkshopAnimationFrames3[20]; // 0x00004B3C length: 20
+            byte HuntersPostAnimationFrames1[24]; // 0x00004B50 length: 24
+            char HuntersPostAnimationFrames2[40]; // 0x00004B68 length: 40
+            byte HuntersPostAnimationFrames3[28]; // 0x00004B90 length: 28
+            byte WoodcuttersHutAnimationFrames[104]; // 0x00004BAC length: 104
+            byte BakeryAnimationFrames1[396]; // 0x00004C14 length: 396
+            byte BakeryAnimationFrames2[20]; // 0x00004DA0 length: 20
+            byte BreweryAnimationFrames1[420]; // 0x00004DB4 length: 420
+            byte BreweryAnimationFrames2[44]; // 0x00004F58 length: 44
+            byte BreweryAnimationFrames3[48]; // 0x00004F84 length: 48
+            char BreweryAnimationFrames4[36]; // 0x00004FB4 length: 36
+            char BreweryAnimationFrames5[36]; // 0x00004FD8 length: 36
+            char BlacksmithsWorkshopAnimationFrames1[20]; // 0x00004FFC length: 20
+            char BlacksmithsWorkshopAnimationFrames2[44]; // 0x00005010 length: 44
+            char BlacksmithsWorkshopAnimationFrames3[88]; // 0x0000503C length: 88
+            char BlacksmithsWorkshopAnimationFrames4[44]; // 0x00005094 length: 44
+            char BlacksmithsWorkshopAnimationFrames5[12]; // 0x000050C0 length: 12
+            char BlacksmithsWorkshopAnimationFrames6[64]; // 0x000050CC length: 64
+            char BlacksmithsWorkshopAnimationFrames7[56]; // 0x0000510C length: 56
+            char BlacksmithsWorkshopAnimationFrames8[72]; // 0x00005144 length: 72
+            char BlacksmithsWorkshopAnimationFrames9[80]; // 0x0000518C length: 80
+            char BlacksmithsWorkshopAnimationFrames10[244]; // 0x000051DC length: 244
+            char BlacksmithsWorkshopAnimationFrames11[36]; // 0x000052D0 length: 36
+            char BlacksmithsWorkshopAnimationFrames12[112]; // 0x000052F4 length: 112
+            byte PoleturnersWorkshopAnimationFrames1[88]; // 0x00005364 length: 88
             byte field75_0x53bc[200]; // 0x000053BC length: 200
-            byte field76_0x5484[36]; // 0x00005484 length: 36
-            byte field77_0x54a8[36]; // 0x000054A8 length: 36
+            byte PoleturnersWorkshopAnimationFrames2[36]; // 0x00005484 length: 36
+            char PoleturnersWorkshopAnimationFrames3[36]; // 0x000054A8 length: 36
             byte field78_0x54cc[144]; // 0x000054CC length: 144
-            byte field79_0x555c[72]; // 0x0000555C length: 72
-            byte field80_0x55a4[28]; // 0x000055A4 length: 28
-            byte field81_0x55c0[20]; // 0x000055C0 length: 20
-            byte field82_0x55d4[260]; // 0x000055D4 length: 260
+            byte PoleturnersWorkshopAnimationFrames4[72]; // 0x0000555C length: 72
+            byte PoleturnersWorkshopAnimationFrames5[28]; // 0x000055A4 length: 28
+            char SecondaryOverlayAnimationFrames[20]; // 0x000055C0 length: 20
+            char BreweryAnimationFrames6[260]; // 0x000055D4 length: 260
             byte AnimTannerSolitary[44]; // 0x000056D8 length: 44
             byte AnimTanner[12]; // 0x00005704 length: 12
-            byte AnimTanner3[28]; // 0x00005710 length: 28
-            byte AnimTanner4[32]; // 0x0000572C length: 32
-            byte AnimTannerSolitary2[56]; // 0x0000574C length: 56
+            char field85_0x5710[28]; // 0x00005710 length: 28
+            char field86_0x572c[32]; // 0x0000572C length: 32
+            char field87_0x574c[56]; // 0x0000574C length: 56
             byte AnimTanner2[16]; // 0x00005784 length: 16
-            byte field89_0x5794[92]; // 0x00005794 length: 92
-            byte field90_0x57f0[36]; // 0x000057F0 length: 36
+            byte TannersWorkshopAnimationFrames1[92]; // 0x00005794 length: 92
+            byte TannersWorkshopAnimationFrames2[36]; // 0x000057F0 length: 36
             byte AnimTanner5[40]; // 0x00005814 length: 40
             byte AnimTannerSolitary4[152]; // 0x0000583C length: 152
             byte AnimTanner6[152]; // 0x000058D4 length: 152
             byte AnimTanner7[172]; // 0x0000596C length: 172
-            byte field95_0x5a18[52]; // 0x00005A18 length: 52
-            byte field96_0x5a4c[36]; // 0x00005A4C length: 36
-            byte field97_0x5a70[28]; // 0x00005A70 length: 28
-            byte field98_0x5a8c[64]; // 0x00005A8C length: 64
-            byte field99_0x5acc[20]; // 0x00005ACC length: 20
-            byte field100_0x5ae0[24]; // 0x00005AE0 length: 24
-            byte field101_0x5af8[28]; // 0x00005AF8 length: 28
-            byte field102_0x5b14[56]; // 0x00005B14 length: 56
+            byte TunnelAnimationFrames[52]; // 0x00005A18 length: 52
+            byte CampGroundAnimationFrames[36]; // 0x00005A4C length: 36
+            byte QuarryAnimationFrames1[28]; // 0x00005A70 length: 28
+            byte QuarryAnimationFrames2[64]; // 0x00005A8C length: 64
+            byte QuarryAnimationFrames3[20]; // 0x00005ACC length: 20
+            byte QuarryAnimationFrames4[24]; // 0x00005AE0 length: 24
+            byte QuarryAnimationFrames5[28]; // 0x00005AF8 length: 28
+            byte QuarryAnimationFrames6[56]; // 0x00005B14 length: 56
             byte SomeAnimationNumbersUnk[24]; // 0x00005B4C length: 24
-            byte field104_0x5b64[32]; // 0x00005B64 length: 32
-            byte field105_0x5b84[16]; // 0x00005B84 length: 16
-            byte field106_0x5b94[64]; // 0x00005B94 length: 64
-            byte field107_0x5bd4[112]; // 0x00005BD4 length: 112
-            byte field108_0x5c44[20]; // 0x00005C44 length: 20
-            byte field109_0x5c58[40]; // 0x00005C58 length: 40
-            byte field110_0x5c80[60]; // 0x00005C80 length: 60
-            byte field111_0x5cbc[72]; // 0x00005CBC length: 72
-            byte field112_0x5d04[24]; // 0x00005D04 length: 24
-            byte field113_0x5d1c[64]; // 0x00005D1C length: 64
-            byte field114_0x5d5c[16]; // 0x00005D5C length: 16
-            byte field115_0x5d6c[376]; // 0x00005D6C length: 376
-            byte field116_0x5ee4[264]; // 0x00005EE4 length: 264
-            byte field117_0x5fec[304]; // 0x00005FEC length: 304
-            byte field118_0x611c[384]; // 0x0000611C length: 384
-            byte field119_0x629c[88]; // 0x0000629C length: 88
-            byte field120_0x62f4[80]; // 0x000062F4 length: 80
-            byte field121_0x6344[472]; // 0x00006344 length: 472
-            byte field122_0x651c[112]; // 0x0000651C length: 112
-            byte field123_0x658c[104]; // 0x0000658C length: 104
-            byte field124_0x65f4[184]; // 0x000065F4 length: 184
-            byte field125_0x66ac[24]; // 0x000066AC length: 24
-            byte field126_0x66c4[12]; // 0x000066C4 length: 12
-            byte field127_0x66d0[60]; // 0x000066D0 length: 60
-            byte field128_0x670c[452]; // 0x0000670C length: 452
-            byte field129_0x68d0[36]; // 0x000068D0 length: 36
-            byte field130_0x68f4[84]; // 0x000068F4 length: 84
-            byte field131_0x6948[52]; // 0x00006948 length: 52
-            byte field132_0x697c[56]; // 0x0000697C length: 56
-            byte field133_0x69b4[104]; // 0x000069B4 length: 104
-            byte field134_0x6a1c[16]; // 0x00006A1C length: 16
-            byte field135_0x6a2c[16]; // 0x00006A2C length: 16
-            byte field136_0x6a3c[16]; // 0x00006A3C length: 16
-            byte field137_0x6a4c[136]; // 0x00006A4C length: 136
-            byte field138_0x6ad4[16]; // 0x00006AD4 length: 16
-            byte field139_0x6ae4[32]; // 0x00006AE4 length: 32
-            byte field140_0x6b04[36]; // 0x00006B04 length: 36
-            byte field141_0x6b28[28]; // 0x00006B28 length: 28
-            byte field142_0x6b44[32]; // 0x00006B44 length: 32
-            byte field143_0x6b64[264]; // 0x00006B64 length: 264
-            byte field144_0x6c6c[664]; // 0x00006C6C length: 664
-            byte field145_0x6f04[448]; // 0x00006F04 length: 448
-            byte field146_0x70c4[152]; // 0x000070C4 length: 152
-            byte field147_0x715c[644]; // 0x0000715C length: 644
-            byte field148_0x73e0[52]; // 0x000073E0 length: 52
-            byte field149_0x7414[80]; // 0x00007414 length: 80
-            byte field150_0x7464[48]; // 0x00007464 length: 48
-            byte field151_0x7494[48]; // 0x00007494 length: 48
-            byte field152_0x74c4[48]; // 0x000074C4 length: 48
-            byte field153_0x74f4[48]; // 0x000074F4 length: 48
-            byte field154_0x7524[48]; // 0x00007524 length: 48
-            byte field155_0x7554[48]; // 0x00007554 length: 48
-            byte field156_0x7584[40]; // 0x00007584 length: 40
-            byte field157_0x75ac[80]; // 0x000075AC length: 80
-            byte field158_0x75fc[40]; // 0x000075FC length: 40
-            byte field159_0x7624[72]; // 0x00007624 length: 72
-            byte field160_0x766c[80]; // 0x0000766C length: 80
-            byte field161_0x76bc[172]; // 0x000076BC length: 172
-            byte field162_0x7768[36]; // 0x00007768 length: 36
-            byte field163_0x778c[88]; // 0x0000778C length: 88
-            byte field164_0x77e4[160]; // 0x000077E4 length: 160
-            byte field165_0x7884[200]; // 0x00007884 length: 200
-            byte field166_0x794c[40]; // 0x0000794C length: 40
-            byte field167_0x7974[80]; // 0x00007974 length: 80
-            byte field168_0x79c4[80]; // 0x000079C4 length: 80
-            byte field169_0x7a14[344]; // 0x00007A14 length: 344
+            byte QuarryAnimationFrames7[32]; // 0x00005B64 length: 32
+            byte QuarryAnimationFrames8[16]; // 0x00005B84 length: 16
+            byte QuarryAnimationFrames9[64]; // 0x00005B94 length: 64
+            byte QuarryAnimationFrames10[112]; // 0x00005BD4 length: 112
+            byte QuarryAnimationFrames11[20]; // 0x00005C44 length: 20
+            byte QuarryAnimationFrames12[40]; // 0x00005C58 length: 40
+            byte QuarryAnimationFrames13[60]; // 0x00005C80 length: 60
+            byte QuarryAnimationFrames14[72]; // 0x00005CBC length: 72
+            byte QuarryAnimationFrames15[24]; // 0x00005D04 length: 24
+            byte QuarryAnimationFrames16[64]; // 0x00005D1C length: 64
+            byte QuarryAnimationFrames17[16]; // 0x00005D5C length: 16
+            byte QuarryAnimationFrames18[376]; // 0x00005D6C length: 376
+            byte QuarryAnimationFrames19[264]; // 0x00005EE4 length: 264
+            byte QuarryAnimationFrames20[304]; // 0x00005FEC length: 304
+            byte QuarryAnimationFrames21[384]; // 0x0000611C length: 384
+            byte IronMineAnimationFrames1[88]; // 0x0000629C length: 88
+            byte IronMineAnimationFrames2[80]; // 0x000062F4 length: 80
+            byte IronMineAnimationFrames3[472]; // 0x00006344 length: 472
+            byte IronMineAnimationFrames4[112]; // 0x0000651C length: 112
+            byte IronMineAnimationFrames5[104]; // 0x0000658C length: 104
+            byte IronMineAnimationFrames6[184]; // 0x000065F4 length: 184
+            byte IronMineAnimationFrames7[24]; // 0x000066AC length: 24
+            byte IronMineAnimationFrames8[12]; // 0x000066C4 length: 12
+            byte IronMineAnimationFrames9[60]; // 0x000066D0 length: 60
+            byte IronMineAnimationFrames10[452]; // 0x0000670C length: 452
+            byte IronMineAnimationFrames11[36]; // 0x000068D0 length: 36
+            byte IronMineAnimationFrames12[84]; // 0x000068F4 length: 84
+            char PitchRigAnimationFrames1[52]; // 0x00006948 length: 52
+            byte PitchRigAnimationFrames2[56]; // 0x0000697C length: 56
+            byte PitchRigAnimationFrames3[104]; // 0x000069B4 length: 104
+            char MillAnimationFrames1[16]; // 0x00006A1C length: 16
+            byte MillAnimationFrames2[16]; // 0x00006A2C length: 16
+            byte MillAnimationFrames3[16]; // 0x00006A3C length: 16
+            byte MillAnimationFrames4[136]; // 0x00006A4C length: 136
+            byte MillAnimationFrames5[16]; // 0x00006AD4 length: 16
+            byte DrawBridgeAnimationFrames1[32]; // 0x00006AE4 length: 32
+            byte DrawBridgeAnimationFrames2[36]; // 0x00006B04 length: 36
+            byte GateHouseLargeAnimationFrames[28]; // 0x00006B28 length: 28
+            byte GateHouseOverlayAnimationFrames[32]; // 0x00006B44 length: 32
+            byte DairyFarmAnimationFrames1[264]; // 0x00006B64 length: 264
+            byte DairyFarmAnimationFrames2[664]; // 0x00006C6C length: 664
+            byte DairyFarmAnimationFrames3[448]; // 0x00006F04 length: 448
+            byte DairyFarmAnimationFrames4[152]; // 0x000070C4 length: 152
+            char StablesAnimationFrames[644]; // 0x0000715C length: 644
+            byte OilSmelterAnimationFrames1[52]; // 0x000073E0 length: 52
+            byte OilSmelterAnimationFrames2[80]; // 0x00007414 length: 80
+            byte OilSmelterAnimationFrames3[48]; // 0x00007464 length: 48
+            byte OilSmelterAnimationFrames4[48]; // 0x00007494 length: 48
+            byte OilSmelterAnimationFrames5[48]; // 0x000074C4 length: 48
+            byte OilSmelterAnimationFrames6[48]; // 0x000074F4 length: 48
+            byte OilSmelterAnimationFrames7[48]; // 0x00007524 length: 48
+            byte OilSmelterAnimationFrames8[48]; // 0x00007554 length: 48
+            byte OilSmelterAnimationFrames9[40]; // 0x00007584 length: 40
+            byte OilSmelterAnimationFrames10[80]; // 0x000075AC length: 80
+            byte BadBuildingGallowsAnimationFrames[40]; // 0x000075FC length: 40
+            byte BadBuildingStocksAnimationFrames[72]; // 0x00007624 length: 72
+            byte BadBuildingDungeonAnimationFrames[80]; // 0x0000766C length: 80
+            byte BadBuildingDunkingStoolAnimationFrames[172]; // 0x000076BC length: 172
+            byte BadBuildingGibbetAnimationFrames[36]; // 0x00007768 length: 36
+            byte BadBuildingBurningStakeAnimationFrames[88]; // 0x0000778C length: 88
+            byte BadBuildingStretchingRackAnimationFrames[160]; // 0x000077E4 length: 160
+            byte BadBuildingChoppingBlockAnimationFrames[200]; // 0x00007884 length: 200
+            byte DogCageAnimationFrames[40]; // 0x0000794C length: 40
+            byte GoodBuildingMaypoleAnimationFrames1[80]; // 0x00007974 length: 80
+            byte GoodBuildingMaypoleAnimationFrames2[80]; // 0x000079C4 length: 80
+            byte GoodBuildingDancingBearAnimationFrames[344]; // 0x00007A14 length: 344
             byte AnimMarketPlace[104]; // 0x00007B6C length: 104
-            byte field171_0x7bd4[104]; // 0x00007BD4 length: 104
-            byte field172_0x7c3c[88]; // 0x00007C3C length: 88
-            byte field173_0x7c94[136]; // 0x00007C94 length: 136
-            byte field174_0x7d1c[140]; // 0x00007D1C length: 140
-            byte field175_0x7da8[36]; // 0x00007DA8 length: 36
-            byte field176_0x7dcc[80]; // 0x00007DCC length: 80
-            byte field177_0x7e1c[52]; // 0x00007E1C length: 52
+            byte ApothecaryAnimationFrames[104]; // 0x00007BD4 length: 104
+            byte InnAnimationFrames1[88]; // 0x00007C3C length: 88
+            byte InnAnimationFrames2[136]; // 0x00007C94 length: 136
+            byte InnAnimationFrames3[140]; // 0x00007D1C length: 140
+            byte InnAnimationFrames4[36]; // 0x00007DA8 length: 36
+            byte InnAnimationFrames5[80]; // 0x00007DCC length: 80
+            char SharedOverlayAnimationFrames[52]; // 0x00007E1C length: 52
             int BuildingAccessibleTilesCountForOneLarger[15]; // 0x00007E50 length: 60
             XYPair field179_0x7e8c[8]; // 0x00007E8C length: 64
             XYPair field180_0x7ecc[12]; // 0x00007ECC length: 96
@@ -265,8 +265,8 @@ namespace Map {
             XYPairShort EngineersParagroundOffsets[25]; // 0x00009FA4 length: 100
             undefined1 padding_0xa008[4]; // 0x0000A008 length: 4
             XYPairShort field412_0xa00c[16]; // 0x0000A00C length: 64
-            int field413_0xa04c[16][13]; // 0x0000A04C length: 832
-            int field414_0xa38c[4]; // 0x0000A38C length: 16
+            int SpawnUnitProperties[16][13]; // 0x0000A04C length: 832
+            int DrawBridgeAnimationFrames[4]; // 0x0000A38C length: 16
             int field415_0xa39c[52]; // 0x0000A39C length: 208
             int field416_0xa46c[52]; // 0x0000A46C length: 208
             int field417_0xa53c[26]; // 0x0000A53C length: 104

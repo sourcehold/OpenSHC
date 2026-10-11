@@ -85,7 +85,7 @@ namespace Map {
 
             void predictUnitInterceptPosition(int targetUnitID, int unitID, int* unitCurrentX, int* unitCurrentY);
 
-            UnitType getMajoritySelectedUnitType(undefined4 tribeID, int* maximumCount);
+            UnitType getMajoritySelectedUnitType(int tribeID, int* maximumCount);
 
             void playUnitSelectionSound(int param_1);
 

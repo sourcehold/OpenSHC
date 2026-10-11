@@ -561,7 +561,7 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x0041B940, &BuildingsState::hasBuildingAsNeighbour)
             hasBuildingAsNeighbour;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(undefined4, int, int, int, BuildingType, int), false,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(PlayerID, int, int, int, BuildingType, int), false,
                 Address::SHC_3BB0A8C1_0x0041BA00, &BuildingsState::findParticularBuilding)
             findParticularBuilding;
 

@@ -65,8 +65,8 @@ namespace Map {
             undefined4 field25_0x18e050; // 0x0018E050 length: 4
             char* DAT_CurrentlyPlayingBuildingBik; // 0x0018E054 length: 4
             BOOLEnum DAT_IsBuildingOrPeasantBinkPlaying; // 0x0018E058 length: 4
-            int field28_0x18e05c; // 0x0018E05C length: 4
-            undefined4 field29_0x18e060; // 0x0018E060 length: 4
+            int selectedBuildingID; // 0x0018E05C length: 4
+            undefined4 selectedBuildingUID; // 0x0018E060 length: 4
             BOOLEnum isFirstTickInLoop; // 0x0018E064 length: 4
             int DAT_DraggedTileCountVerified; // 0x0018E068 length: 4
             int INT_SelectedBuildingStoneWoodCost; // 0x0018E06C length: 4
@@ -361,7 +361,7 @@ namespace Map {
             BOOLEnum hasBuildingAsNeighbour(int playerID, int x, int y, int size, BuildingType type);
 
             int findParticularBuilding(
-                undefined4 param_1, int x, int y, int buildingSize, BuildingType buildingType, int buildingID);
+                PlayerID playerID, int x, int y, int buildingSize, BuildingType buildingType, int buildingID);
 
             int findAccessibleAreaNearBuildingLocation(int x, int y, int buildingSize);
 

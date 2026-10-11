@@ -22,7 +22,7 @@ namespace UI {
     public:
         dword currentlyDisplayedTextIsDisplayedUnk; // 0x00000000 length: 4
         dword currentlyDisplayedUnkTextGroupIndex_0x4; // 0x00000004 length: 4
-        dword currentlyDisplayedUnkTextNumInGroup_0x8; // 0x00000008 length: 4
+        int field2_0x8; // 0x00000008 length: 4
         TextMessageBLLookupStructUnion currentlyDisplayedUnktextExtraObject; // 0x0000000C length: 4
         int currentlyDisplayedTextImportanceUnk; // 0x00000010 length: 4
         int textMessageDurationUnk; // 0x00000014 length: 4

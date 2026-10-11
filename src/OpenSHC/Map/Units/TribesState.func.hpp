@@ -55,8 +55,8 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x00521500, &TribesState::predictUnitInterceptPosition)
             predictUnitInterceptPosition;
 
-            MACRO_FUNCTION_RESOLVER(UnitType (TribesState::*)(undefined4, int*), false,
-                Address::SHC_3BB0A8C1_0x00521720, &TribesState::getMajoritySelectedUnitType)
+            MACRO_FUNCTION_RESOLVER(UnitType (TribesState::*)(int, int*), false, Address::SHC_3BB0A8C1_0x00521720,
+                &TribesState::getMajoritySelectedUnitType)
             getMajoritySelectedUnitType;
 
             MACRO_FUNCTION_RESOLVER(void (TribesState::*)(int), false, Address::SHC_3BB0A8C1_0x005217E0,

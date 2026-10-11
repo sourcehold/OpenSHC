@@ -24,7 +24,7 @@ namespace UI {
         class AlphaAndButtonSurface {
         public:
             ushort* surfacePtr; // 0x00000000 length: 4
-            dword dim1_intMinimal350_1; // 0x00000004 length: 4
+            int field1_0x4; // 0x00000004 length: 4
             dword dim2_intMinimal350_2; // 0x00000008 length: 4
             int currentImageWidth; // 0x0000000C length: 4
 

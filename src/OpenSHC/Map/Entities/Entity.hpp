@@ -32,7 +32,7 @@ namespace Map {
             short unkThree_1; // 0x00000016 length: 2
             short originX; // 0x00000018 length: 2
             short originY; // 0x0000001A length: 2
-            short field12_0x1c; // 0x0000001C length: 2
+            short screenDirection; // 0x0000001C length: 2
             short nextEntityOnThisTileByID; // 0x0000001E length: 2
             short imageID; // 0x00000020 length: 2
             byte unused_0x22[6]; // 0x00000022 length: 6
@@ -58,19 +58,19 @@ namespace Map {
             short height_2; // 0x00000056 length: 2
             short startingHeight; // 0x00000058 length: 2
             short field37_0x5a; // 0x0000005A length: 2
-            short field38_0x5c; // 0x0000005C length: 2
-            short field39_0x5e; // 0x0000005E length: 2
+            short pathTargetX; // 0x0000005C length: 2
+            short pathDeltaX; // 0x0000005E length: 2
             short someMicroX; // 0x00000060 length: 2
-            short field41_0x62; // 0x00000062 length: 2
-            short field42_0x64; // 0x00000064 length: 2
+            short pathTargetY; // 0x00000062 length: 2
+            short pathDeltaY; // 0x00000064 length: 2
             short someMicroY; // 0x00000066 length: 2
-            short field44_0x68; // 0x00000068 length: 2
-            short field45_0x6a; // 0x0000006A length: 2
+            short pathDeltaZ; // 0x00000068 length: 2
+            short rotationFrameIndex; // 0x0000006A length: 2
             short someCounter_OR_hitGround; // 0x0000006C length: 2
-            short field47_0x6e; // 0x0000006E length: 2
-            short field48_0x70; // 0x00000070 length: 2
-            short field49_0x72; // 0x00000072 length: 2
-            short field50_0x74; // 0x00000074 length: 2
+            short pathErrorStepStraight; // 0x0000006E length: 2
+            short pathErrorStepDiagonal; // 0x00000070 length: 2
+            short pathError; // 0x00000072 length: 2
+            short pathAxisCase; // 0x00000074 length: 2
             byte unused_0x76[2]; // 0x00000076 length: 2
             int speedUnk; // 0x00000078 length: 4
             float vCos; // 0x0000007C length: 4
@@ -78,7 +78,7 @@ namespace Map {
             short travelledDistance; // 0x00000084 length: 2
             byte field56_0x86[2]; // 0x00000086 length: 2
             int orientation; // 0x00000088 length: 4
-            short field58_0x8c; // 0x0000008C length: 2
+            short totalFlightDistance; // 0x0000008C length: 2
             undefined1 padding_0x8e[2]; // 0x0000008E length: 2
             int heightDifference; // 0x00000090 length: 4
             short field62_0x94; // 0x00000094 length: 2
@@ -98,7 +98,7 @@ namespace Map {
             short someTracker; // 0x000000B4 length: 2
             short fireParameter_0xb6; // 0x000000B6 length: 2
             short field79_0xb8; // 0x000000B8 length: 2
-            short field80_0xba; // 0x000000BA length: 2
+            short clearanceStepsRemaining; // 0x000000BA length: 2
             short rng_2; // 0x000000BC length: 2
             short field82_0xbe; // 0x000000BE length: 2
             short field83_0xc0; // 0x000000C0 length: 2
