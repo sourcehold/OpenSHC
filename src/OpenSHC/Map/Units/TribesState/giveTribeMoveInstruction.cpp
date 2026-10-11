@@ -71,7 +71,7 @@ namespace Map {
                     return (undefined4)(0);
                 }
             }
-            if ((399 < y1) || (*(char*)(y1 * 400 + 0x21aec98 + x1) == '\0')) {
+            if ((399 < y1) || (*(char*)(y1 * 400 + (int)DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400 + x1) == '\0')) {
                 return (undefined4)(0);
             }
             int _targetUnitID = (int)this->tribes[tribeID].selectionTargetUnitID;

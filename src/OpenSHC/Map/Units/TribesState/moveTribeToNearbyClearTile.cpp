@@ -6,6 +6,7 @@
 
 #include "OpenSHC/Globals/DAT_UnitSelectionDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
+#include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -29,7 +30,7 @@ namespace Map {
             while (true) {
                 x1 = ((XYPair*)(piVar4 + -1))->x + uVar5;
                 y1 = *piVar4 + uVar2;
-                if (x1 < 400 && y1 < 400 && *(char*)(y1 * 400 + 0x21aec98 + x1) != '\0'
+                if (x1 < 400 && y1 < 400 && *(char*)(y1 * 400 + (int)DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400 + x1) != '\0'
                     && (iVar3 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::isTribePathToDestinationClear, this)(
                             param_1, uVar5, uVar2, x1, y1),
                         iVar3 != 0))

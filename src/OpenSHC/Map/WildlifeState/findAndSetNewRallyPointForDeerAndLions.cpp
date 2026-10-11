@@ -8,6 +8,7 @@
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
+#include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 #include "OpenSHC/Globals/SEC_RNG.hpp"
 
 namespace OpenSHC {
@@ -196,7 +197,7 @@ namespace Map {
             this->grid[_x10][_y10].field15_0x3c = 1;
             _destinationY = _y10 * 10 + 5;
             uVar6 = _x10 * 10 + 5;
-            if (uVar6 < 400 && _destinationY < 400 && *(char*)(_destinationY * 400 + 0x21aec98 + uVar6) != '\0') {
+            if (uVar6 < 400 && _destinationY < 400 && *(char*)(_destinationY * 400 + (int)DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400 + uVar6) != '\0') {
                 MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathFindingDeerAndLionsUnk,
                     DAT_PathFindingState::ptr)(_currentArea, uVar6, _destinationY);
                 DAT_TribesState::instance.tribes[tribeID]

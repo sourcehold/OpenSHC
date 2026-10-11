@@ -32,7 +32,7 @@ namespace Map {
                     x = (uint)DAT_GameState::instance.mapAndTime.rabbitSpawnXY[iVar2][0];
                     y = (uint)DAT_GameState::instance.mapAndTime.rabbitSpawnXY[iVar2][1];
                 LAB_005262f6:
-                    if (x < 400 && y < 400 && *(char*)(y * 400 + 0x21aec98 + x) != '\0'
+                    if (x < 400 && y < 400 && *(char*)(y * 400 + (int)DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400 + x) != '\0'
                         && (iVar1 = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x,
                             (DAT_TileMapState::instance.LogicLayer[iVar1] & 0x50501581U) == 0)) {
                         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createAnimal, this)(

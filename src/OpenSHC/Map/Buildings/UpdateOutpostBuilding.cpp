@@ -253,7 +253,7 @@ namespace Map {
                             uVar12 = iVar7 + -7 + iVar8 % 0xe;
                             MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
                             if ((int)pcVar1 < 400 && uVar12 < 400
-                                && *(char*)(uVar12 * 400 + 0x21aec98 + (int)pcVar1) != '\0') {
+                                && *(char*)(uVar12 * 400 + (int)DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400 + (int)pcVar1) != '\0') {
                                 iVar8 = DAT_ViewportRenderState::instance.translationMatrix[iVar8 % 0xe + iVar7 + -7]
                                             .addXgetTile;
                                 int _unitPathConnection

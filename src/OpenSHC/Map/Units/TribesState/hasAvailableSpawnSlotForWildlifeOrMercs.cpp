@@ -5,6 +5,7 @@
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
+#include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -24,7 +25,7 @@ namespace Map {
                         uint uVar3 = (uint)DAT_GameState::instance.mapAndTime.rabbitSpawnXY[iVar1][0];
                         uint uVar2 = (uint)DAT_GameState::instance.mapAndTime.rabbitSpawnXY[iVar1][1];
                         if ((uVar3 < 400) && (uVar2 < 400)) {
-                            bVar4 = *(char*)(uVar2 * 400 + 0x21aec98 + uVar3) == '\0';
+                            bVar4 = *(char*)(uVar2 * 400 + (int)DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400 + uVar3) == '\0';
                             goto LAB_00523574;
                         }
                     } else {

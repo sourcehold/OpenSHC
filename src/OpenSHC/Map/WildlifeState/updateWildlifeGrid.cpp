@@ -137,7 +137,7 @@ namespace Map {
                     local_358 = 0;
                     do {
                         if ((uint)(local_358 + local_35c) < 400 && uVar9 < 400
-                            && *(char*)(uVar9 * 400 + 0x21aec98 + local_358 + local_35c) != '\0') {
+                            && *(char*)(uVar9 * 400 + (int)DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400 + local_358 + local_35c) != '\0') {
                             pWVar7->firstMember = pWVar7->firstMember + 1;
                             _tile = DAT_ViewportRenderState::instance.translationMatrix[uVar9].addXgetTile + local_358
                                 + local_35c;

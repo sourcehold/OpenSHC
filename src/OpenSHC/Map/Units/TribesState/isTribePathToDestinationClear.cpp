@@ -24,8 +24,8 @@ namespace Map {
             int iVar2;
             int iVar3;
             int local_4 = 0;
-            if (param_2 < 400 && param_3 < 400 && *(char*)(param_3 * 400 + 0x21aec98 + param_2) != '\0' && param_4 < 400
-                && param_5 < 400 && *(char*)(param_5 * 400 + 0x21aec98 + param_4) != '\0'
+            if (param_2 < 400 && param_3 < 400 && *(char*)(param_3 * 400 + (int)DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400 + param_2) != '\0' && param_4 < 400
+                && param_5 < 400 && *(char*)(param_5 * 400 + (int)DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400 + param_4) != '\0'
                 && (iVar2 = DAT_ViewportRenderState::instance.translationMatrix[param_5].addXgetTile + param_4,
                     DAT_TileMapState::instance.PathConnectionLayer
                             [DAT_ViewportRenderState::instance.translationMatrix[param_3].addXgetTile + param_2]

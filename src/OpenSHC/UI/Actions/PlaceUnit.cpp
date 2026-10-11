@@ -44,7 +44,7 @@ namespace UI {
         GmID local_8;
         int local_4;
         if (DAT_TileMapState::instance.DAT_ClickedTileX < 400 && DAT_TileMapState::instance.DAT_ClickedTileY < 400
-            && *(char*)(DAT_TileMapState::instance.DAT_ClickedTileY * 400 + 0x21aec98
+            && *(char*)(DAT_TileMapState::instance.DAT_ClickedTileY * 400 + (int)DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400
                    + DAT_TileMapState::instance.DAT_ClickedTileX)
                 != '\0') {
             _tile = DAT_ViewportRenderState::instance.translationMatrix[DAT_TileMapState::instance.DAT_ClickedTileY]
