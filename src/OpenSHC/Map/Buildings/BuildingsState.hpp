@@ -9,7 +9,6 @@
 #pragma once
 
 #include "OpenSHC/Commands/MappersEnum.hpp"
-#include "OpenSHC/Game/Player/PlayerID.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Buildings/Building.hpp"
@@ -23,7 +22,6 @@ namespace Map {
     namespace Buildings {
 
         using OpenSHC::Commands::MappersEnum;
-        using OpenSHC::Game::Player::PlayerID;
         using OpenSHC::Game::Resources::ResourceType;
         using OpenSHC::IO::PackagedFileMagicNum;
         using OpenSHC::Map::Buildings::Building;
@@ -65,8 +63,8 @@ namespace Map {
             undefined4 field25_0x18e050; // 0x0018E050 length: 4
             char* DAT_CurrentlyPlayingBuildingBik; // 0x0018E054 length: 4
             BOOLEnum DAT_IsBuildingOrPeasantBinkPlaying; // 0x0018E058 length: 4
-            int field28_0x18e05c; // 0x0018E05C length: 4
-            undefined4 field29_0x18e060; // 0x0018E060 length: 4
+            int selectedBuildingID; // 0x0018E05C length: 4
+            undefined4 selectedBuildingUID; // 0x0018E060 length: 4
             BOOLEnum isFirstTickInLoop; // 0x0018E064 length: 4
             int DAT_DraggedTileCountVerified; // 0x0018E068 length: 4
             int INT_SelectedBuildingStoneWoodCost; // 0x0018E06C length: 4
@@ -118,15 +116,15 @@ namespace Map {
 
             int getEmptyBuildingCount(int playerID, BuildingType buildingType);
 
-            int countBuildingsForPlayer(PlayerID playerID, BuildingType buildingType, int includeBool);
+            int countBuildingsForPlayer(int playerID, BuildingType buildingType, int includeBool);
 
-            int countFarms(PlayerID playerID, int param_2);
+            int countFarms(int playerID, int param_2);
 
             int findFirstBuildingOfType(int playerID, BuildingType buildingType);
 
             int findFirstBuildingIDForPlayerAndType(int playerID, BuildingType buildingType);
 
-            int findNextBuildingForPlayerAndType(PlayerID playerID, BuildingType buildingType, int buildingID);
+            int findNextBuildingForPlayerAndType(int playerID, BuildingType buildingType, int buildingID);
 
             int findNextBuildingIDForOwnerAndType(int param_1, int param_2, int param_3);
 
@@ -361,7 +359,7 @@ namespace Map {
             BOOLEnum hasBuildingAsNeighbour(int playerID, int x, int y, int size, BuildingType type);
 
             int findParticularBuilding(
-                undefined4 param_1, int x, int y, int buildingSize, BuildingType buildingType, int buildingID);
+                int playerID, int x, int y, int buildingSize, BuildingType buildingType, int buildingID);
 
             int findAccessibleAreaNearBuildingLocation(int x, int y, int buildingSize);
 

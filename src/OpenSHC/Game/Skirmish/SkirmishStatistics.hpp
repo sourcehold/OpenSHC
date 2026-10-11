@@ -32,7 +32,7 @@ namespace Game {
             int finalWoodProduced[9]; // 0x0000056C length: 36
             int finalPitchProduced[9]; // 0x00000590 length: 36
             byte finalMaxBadThings[9]; // 0x000005B4 length: 9
-            byte finalKilledLords[9]; // 0x000005BD length: 9
+            char finalKilledLords[9]; // 0x000005BD length: 9
             byte padding2[2]; // 0x000005C6 length: 2
             int finalWeaponsProduced[9]; // 0x000005C8 length: 36
             int finalBuidingsDestroyed[9]; // 0x000005EC length: 36

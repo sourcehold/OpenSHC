@@ -14,7 +14,6 @@
 #include "OpenSHC/AI/AIVUnitType.hpp"
 #include "OpenSHC/AI/TileDistancePair.hpp"
 #include "OpenSHC/Commands/MappersEnum.hpp"
-#include "OpenSHC/Game/Player/PlayerID.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -28,7 +27,6 @@ namespace AI {
     using OpenSHC::AI::TileDistancePair;
     using OpenSHC::AI::AIC::AICSpecification;
     using OpenSHC::Commands::MappersEnum;
-    using OpenSHC::Game::Player::PlayerID;
     using OpenSHC::Game::Resources::ResourceType;
     using OpenSHC::Map::Units::UnitType;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
@@ -104,23 +102,23 @@ namespace AI {
 
         int getResourceRebuildDelay(int param_1);
 
-        int aiFarmChoice(PlayerID playerID);
+        int aiFarmChoice(int playerID);
 
-        int setNextFarmTypeToBuild(PlayerID playerID);
+        int setNextFarmTypeToBuild(int playerID);
 
         BOOLEnum aiShouldBuildFarm(int playerID);
 
         BOOLEnum aiShouldBuildWoodcutter(int playerID);
 
-        uint aiShouldBuildQuarry(PlayerID playerID);
+        uint aiShouldBuildQuarry(int playerID);
 
         undefined4 aiRequiresExtraOxtethers(int playerID);
 
-        uint aiShouldBuildIronMine(PlayerID playerID);
+        uint aiShouldBuildIronMine(int playerID);
 
-        uint aiShouldBuildPitchrig(PlayerID param_1);
+        uint aiShouldBuildPitchrig(int playerID);
 
-        BOOLEnum shouldNotBeBuildingHovel(PlayerID playerID, MappersEnum param_2);
+        BOOLEnum shouldNotBeBuildingHovel(int playerID, MappersEnum param_2);
 
         BOOLEnum shouldWaitWithBuildingNegativeFearFactor(int param_1, MappersEnum param_2);
 
@@ -438,7 +436,7 @@ namespace AI {
 
         BOOLEnum shouldNotBeBuildingGranary(int playerID, MappersEnum param_2);
 
-        BOOLEnum shouldNotBeBuildingArmoury(PlayerID playerID, MappersEnum param_2);
+        BOOLEnum shouldNotBeBuildingArmoury(int playerID, MappersEnum param_2);
 
         BOOLEnum shouldNotBuildKillingPits(int playerID, MappersEnum commandBuildingType);
 

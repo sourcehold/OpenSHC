@@ -97615,7 +97615,7 @@ enum {
     SHC_3BB0A8C1_0x00EE0FC4 = 0x00EE0FC4,
     // label: DAT_CurrentUnitSlotID
     // location:
-    // type: /uint
+    // type: /int
     SHC_3BB0A8C1_0x00EE0FC8 = 0x00EE0FC8,
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00EE0FCC = 0x00EE0FCC,

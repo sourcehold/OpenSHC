@@ -6,7 +6,6 @@
 #include "OpenSHC/AI/AIV/AIVBuildingType2.hpp"
 #include "OpenSHC/AI/AIVState.hpp"
 #include "OpenSHC/Commands/MappersEnum.hpp"
-#include "OpenSHC/Game/Player/PlayerID.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 namespace OpenSHC {
 namespace AI {
@@ -15,7 +14,6 @@ namespace AI {
         using OpenSHC::AI::AIGridComputationResourceType;
         using OpenSHC::AI::AIV::AIVBuildingType2;
         using OpenSHC::Commands::MappersEnum;
-        using OpenSHC::Game::Player::PlayerID;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // Constructor
@@ -56,18 +54,18 @@ namespace AI {
         rotateAIV;
 
         MACRO_FUNCTION_RESOLVER(
-            void (AIVState::*)(PlayerID), false, Address::SHC_3BB0A8C1_0x004ED240, &AIVState::aiPlaceFlag)
+            void (AIVState::*)(int), false, Address::SHC_3BB0A8C1_0x004ED240, &AIVState::aiPlaceFlag)
         aiPlaceFlag;
 
         MACRO_FUNCTION_RESOLVER(
-            void (AIVState::*)(PlayerID), false, Address::SHC_3BB0A8C1_0x004ED300, &AIVState::aiPlaceBrazier)
+            void (AIVState::*)(int), false, Address::SHC_3BB0A8C1_0x004ED300, &AIVState::aiPlaceBrazier)
         aiPlaceBrazier;
 
         MACRO_FUNCTION_RESOLVER(void (AIVState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004ED3B0,
             &AIVState::incrementStructureHeatMapTile)
         incrementStructureHeatMapTile;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (AIVState::*)(PlayerID, int, int), false, Address::SHC_3BB0A8C1_0x004ED410,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (AIVState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004ED410,
             &AIVState::aiPlaceAIVBuilding)
         aiPlaceAIVBuilding;
 
@@ -83,7 +81,7 @@ namespace AI {
             int (AIVState::*)(), false, Address::SHC_3BB0A8C1_0x004EDD00, &AIVState::computeLargestSeparateArea)
         computeLargestSeparateArea;
 
-        MACRO_FUNCTION_RESOLVER(int (AIVState::*)(PlayerID, MappersEnum), false, Address::SHC_3BB0A8C1_0x004EDDF0,
+        MACRO_FUNCTION_RESOLVER(int (AIVState::*)(int, MappersEnum), false, Address::SHC_3BB0A8C1_0x004EDDF0,
             &AIVState::findSuitableFarmLocationAndPlaceFarm)
         findSuitableFarmLocationAndPlaceFarm;
 
@@ -132,7 +130,7 @@ namespace AI {
         findSpotNearEngineersGuild;
 
         MACRO_FUNCTION_RESOLVER(
-            void (AIVState::*)(PlayerID), false, Address::SHC_3BB0A8C1_0x004EFC30, &AIVState::aiPlaceAdditionalOxtether)
+            void (AIVState::*)(int), false, Address::SHC_3BB0A8C1_0x004EFC30, &AIVState::aiPlaceAdditionalOxtether)
         aiPlaceAdditionalOxtether;
 
         MACRO_FUNCTION_RESOLVER(
@@ -147,7 +145,7 @@ namespace AI {
             void (AIVState::*)(int), false, Address::SHC_3BB0A8C1_0x004EFED0, &AIVState::aiPlaceQuarryAndOxtether)
         aiPlaceQuarryAndOxtether;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (AIVState::*)(PlayerID, int), false, Address::SHC_3BB0A8C1_0x004F0060,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (AIVState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004F0060,
             &AIVState::executeDefaultCastleAIV)
         executeDefaultCastleAIV;
 
@@ -164,7 +162,7 @@ namespace AI {
         tryPlaceAIVAndReturnFitPercentage;
 
         MACRO_FUNCTION_RESOLVER(
-            void (AIVState::*)(PlayerID), false, Address::SHC_3BB0A8C1_0x004F15C0, &AIVState::aiDecideOnNewBuildings)
+            void (AIVState::*)(int), false, Address::SHC_3BB0A8C1_0x004F15C0, &AIVState::aiDecideOnNewBuildings)
         aiDecideOnNewBuildings;
 
         MACRO_FUNCTION_RESOLVER(void (AIVState::*)(), false, Address::SHC_3BB0A8C1_0x004F1860,

@@ -7,7 +7,6 @@
 #include "OpenSHC/AI/AIUnitBehaviourType.hpp"
 #include "OpenSHC/AI/AIVUnitType.hpp"
 #include "OpenSHC/Commands/MappersEnum.hpp"
-#include "OpenSHC/Game/Player/PlayerID.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -19,7 +18,6 @@ namespace AI {
         using OpenSHC::AI::AIUnitBehaviourType;
         using OpenSHC::AI::AIVUnitType;
         using OpenSHC::Commands::MappersEnum;
-        using OpenSHC::Game::Player::PlayerID;
         using OpenSHC::Game::Resources::ResourceType;
         using OpenSHC::Map::Units::UnitType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
@@ -122,11 +120,11 @@ namespace AI {
         getResourceRebuildDelay;
 
         MACRO_FUNCTION_RESOLVER(
-            int (AICState::*)(PlayerID), false, Address::SHC_3BB0A8C1_0x004CB180, &AICState::aiFarmChoice)
+            int (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CB180, &AICState::aiFarmChoice)
         aiFarmChoice;
 
         MACRO_FUNCTION_RESOLVER(
-            int (AICState::*)(PlayerID), false, Address::SHC_3BB0A8C1_0x004CB1B0, &AICState::setNextFarmTypeToBuild)
+            int (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CB1B0, &AICState::setNextFarmTypeToBuild)
         setNextFarmTypeToBuild;
 
         MACRO_FUNCTION_RESOLVER(
@@ -138,7 +136,7 @@ namespace AI {
         aiShouldBuildWoodcutter;
 
         MACRO_FUNCTION_RESOLVER(
-            uint (AICState::*)(PlayerID), false, Address::SHC_3BB0A8C1_0x004CB330, &AICState::aiShouldBuildQuarry)
+            uint (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CB330, &AICState::aiShouldBuildQuarry)
         aiShouldBuildQuarry;
 
         MACRO_FUNCTION_RESOLVER(
@@ -146,14 +144,14 @@ namespace AI {
         aiRequiresExtraOxtethers;
 
         MACRO_FUNCTION_RESOLVER(
-            uint (AICState::*)(PlayerID), false, Address::SHC_3BB0A8C1_0x004CB4D0, &AICState::aiShouldBuildIronMine)
+            uint (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CB4D0, &AICState::aiShouldBuildIronMine)
         aiShouldBuildIronMine;
 
         MACRO_FUNCTION_RESOLVER(
-            uint (AICState::*)(PlayerID), false, Address::SHC_3BB0A8C1_0x004CB540, &AICState::aiShouldBuildPitchrig)
+            uint (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CB540, &AICState::aiShouldBuildPitchrig)
         aiShouldBuildPitchrig;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(PlayerID, MappersEnum), false, Address::SHC_3BB0A8C1_0x004CB5B0,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, MappersEnum), false, Address::SHC_3BB0A8C1_0x004CB5B0,
             &AICState::shouldNotBeBuildingHovel)
         shouldNotBeBuildingHovel;
 
@@ -784,7 +782,7 @@ namespace AI {
             &AICState::shouldNotBeBuildingGranary)
         shouldNotBeBuildingGranary;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(PlayerID, MappersEnum), false, Address::SHC_3BB0A8C1_0x004ECA60,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, MappersEnum), false, Address::SHC_3BB0A8C1_0x004ECA60,
             &AICState::shouldNotBeBuildingArmoury)
         shouldNotBeBuildingArmoury;
 

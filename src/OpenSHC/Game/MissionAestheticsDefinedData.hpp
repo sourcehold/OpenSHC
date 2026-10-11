@@ -19,21 +19,21 @@ namespace Game {
     // SIZE: 0x00005504
     typedef struct MissionAestheticsDefinedData {
 
-        char** field0_0x0; // 0x00000000 length: 4
-        char** field1_0x4; // 0x00000004 length: 4
-        char** field2_0x8; // 0x00000008 length: 4
-        char** field3_0xc; // 0x0000000C length: 4
-        char** field4_0x10; // 0x00000010 length: 4
-        char** field5_0x14; // 0x00000014 length: 4
-        char** field6_0x18; // 0x00000018 length: 4
-        char** field7_0x1c; // 0x0000001C length: 4
-        char** field8_0x20; // 0x00000020 length: 4
-        char** field9_0x24; // 0x00000024 length: 4
-        char** field10_0x28; // 0x00000028 length: 4
-        char** field11_0x2c; // 0x0000002C length: 4
-        char** field12_0x30; // 0x00000030 length: 4
-        char** field13_0x34; // 0x00000034 length: 4
-        char** field14_0x38; // 0x00000038 length: 4
+        char* RandomEvent1VideoName; // 0x00000000 length: 4
+        char* RandomEvent2VideoName; // 0x00000004 length: 4
+        char* RandomEvent3VideoName; // 0x00000008 length: 4
+        char* RandomEvent4VideoName; // 0x0000000C length: 4
+        char* RandomEvent5VideoName; // 0x00000010 length: 4
+        char* RandomEvent6VideoName; // 0x00000014 length: 4
+        char* RandomEvent7VideoName; // 0x00000018 length: 4
+        char* RandomEvent8VideoName; // 0x0000001C length: 4
+        char* RandomEvent9VideoName; // 0x00000020 length: 4
+        char* RandomEvent10VideoName; // 0x00000024 length: 4
+        char* RandomEvent11VideoName; // 0x00000028 length: 4
+        char* RandomEvent12VideoName; // 0x0000002C length: 4
+        char* RandomEvent13VideoName; // 0x00000030 length: 4
+        char* RandomEvent14VideoName; // 0x00000034 length: 4
+        char* RandomEvent15VideoName; // 0x00000038 length: 4
         char** field15_0x3c; // 0x0000003C length: 4
         char** field16_0x40; // 0x00000040 length: 4
         char** field17_0x44; // 0x00000044 length: 4
@@ -78,7 +78,7 @@ namespace Game {
         char** field56_0xe0; // 0x000000E0 length: 4
         char** field57_0xe4; // 0x000000E4 length: 4
         char** field58_0xe8; // 0x000000E8 length: 4
-        char** field59_0xec; // 0x000000EC length: 4
+        char* field59_0xec; // 0x000000EC length: 4
         char** field60_0xf0; // 0x000000F0 length: 4
         char** field61_0xf4; // 0x000000F4 length: 4
         char** field62_0xf8; // 0x000000F8 length: 4
@@ -1244,17 +1244,17 @@ namespace Game {
         int field1222_0x1328[7]; // 0x00001328 length: 28
         int unknown3[914]; // 0x00001344 length: 3656
         int field1224_0x218c[6]; // 0x0000218C length: 24
-        int field1225_0x21a4[4]; // 0x000021A4 length: 16
+        int MissionScoreByDifficulty[4]; // 0x000021A4 length: 16
         int DifficultyEventMultipliers[4]; // 0x000021B4 length: 16
-        int field1227_0x21c4[40]; // 0x000021C4 length: 160
-        int field1228_0x2264[40]; // 0x00002264 length: 160
-        int field1229_0x2304[40]; // 0x00002304 length: 160
-        int field1230_0x23a4[40]; // 0x000023A4 length: 160
-        byte field1231_0x2444[32][100]; // 0x00002444 length: 3200
+        int EventConditionMinValue[40]; // 0x000021C4 length: 160
+        int EventConditionMaxValue[40]; // 0x00002264 length: 160
+        int EventConditionValueScale[40]; // 0x00002304 length: 160
+        int EventConditionParamKind[40]; // 0x000023A4 length: 160
+        byte EventConditionOptionValues[32][100]; // 0x00002444 length: 3200
         int field1232_0x30c4[25]; // 0x000030C4 length: 100
         int field1233_0x3128; // 0x00003128 length: 4
-        int field1234_0x312c[174]; // 0x0000312C length: 696
-        int field1235_0x33e4[25]; // 0x000033E4 length: 100
+        int BuildingAvailabilityRowOrder[174]; // 0x0000312C length: 696
+        int EventConditionOptionTextOffsets[25]; // 0x000033E4 length: 100
         int field1236_0x3448[5]; // 0x00003448 length: 20
         int field1237_0x345c[22]; // 0x0000345C length: 88
         int field1238_0x34b4[40]; // 0x000034B4 length: 160
@@ -1265,9 +1265,9 @@ namespace Game {
         int BuildingAvailabilityStructIndexForNameArray[69]; // 0x000040CC length: 276
         undefined1 padding_0x41e0[4]; // 0x000041E0 length: 4
         char field1248_0x41e4[46][3][32]; // 0x000041E4 length: 4416
-        int field1249_0x5324[40]; // 0x00005324 length: 160
-        int field1250_0x53c4[40]; // 0x000053C4 length: 160
-        int field1251_0x5464[40]; // 0x00005464 length: 160
+        int TutorialStepActionCount[40]; // 0x00005324 length: 160
+        int TutorialStepShowsContinueButton[40]; // 0x000053C4 length: 160
+        int TutorialStepSpeechTrigger[40]; // 0x00005464 length: 160
 
     } MissionAestheticsDefinedData;
 #pragma pack(pop)
