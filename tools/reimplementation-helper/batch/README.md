@@ -12,7 +12,7 @@ rewrite sources, because the Visual Studio bundled one is too old for `.clang-fo
 
 | Script | Purpose |
 |---|---|
-| `build_quiet.py [--keep-going]` | `build.bat RelWithDebInfo OpenSHC.dll`, prints only errors and `BUILD_OK`/`BUILD_FAIL` (build.bat exits 0 even on errors). |
+| `build_quiet.py [--keep-going]` | `build.bat RelWithDebInfo OpenSHC.dll`, prints only errors and `BUILD_OK`/`BUILD_FAIL` (build.bat exits 0 even on errors). Retries once on a PDB server error, see the note below. |
 | `syntax_check.py [substr...]` | `cl /Zs` every (matching) list file serially; finds all compile errors in one pass without linking. |
 | `reccmp_report.py [--run] pct\|save\|cmp\|diff` | Match % and *normalized* % (call/tail-jump targets and resolver addresses ignored) per function, snapshots, before/after comparison, compact asm diffs. |
 | `orig_asm.py NAME [--both\|--stats]` | The **original** instruction stream of one function (not the interleaved diff), in address order; `--stats` reports the tells that decide how to reimplement it: `mov reg, 0` (handwritten asm), frame pointer (built /Od), frame size, jump tables. |
@@ -30,6 +30,8 @@ Analysis helpers, for deciding *what* to change when a function is stuck below 1
 | `diff_slots.py NAME` | Every `[esp + N]` slot with its access count on each side, and the slots only we use. Run after `diff_triage.py` reports `FRAME`. |
 | `diff_jcc.py [NAME]` | Comparisons whose operator is one strictness step off the original (`jl`/`jle`, `jg`/`jge`, `ja`/`jae`) or whose `cmp` operands are the other way round, with context. |
 | `diff_types.py [--run] [NAME]` | The non-comparison counterpart of `diff_jcc.py`: `movsx` against `movzx` for the same field (its signedness is wrong in the generated header), `add` against `sub` with the same magnitude (a sign error in a formula - how `2400/n + 40` was caught being `- 40`). It pairs only equal-length runs inside one reccmp block, so it stays quiet once the streams drift: it reports nothing across the 101 functions of `Game::GameStateStructures` and fires on both bugs when they are reintroduced. |
+| `quick_diff.py FILE.cpp... [-q]` | Compile one file with `/FA` and diff it against the original function disassembled straight from `_original/` - about 6 seconds, no link and no reccmp, so a dozen source variants can be tried in the time of one build. Shows the whole original function, which reccmp's diff does not when ours is shorter. A triage loop: confirm a 1.0 with `reccmp_report.py --run`, and do not trust a *rise* of its ratio below about 0.6 - on a badly matching function difflib rewards a different alignment, and one such "gain" was a 10-point loss in reccmp. |
+| `push_pattern.py FILE.cpp...` | Per call, the argument-push run as `pushes/interleaved` for both sides. A neat run (`0` interleaved) means every argument was already in a register or slot, i.e. the source had a **local**; a mixed run is what writing the expression inline at the call produces. A starred row is a call where the two sides disagree - add the local, or drop it, accordingly. Counts only calls whose set-up it can see, so a differing call *total* means our source has an extra call (a duplicated block), not that the tool failed. |
 | `reorder_search.py FILE NAME [--pairs] [--dry]` | Hill-climb the match % by reordering independent statements: permute runs of >=3 by default, or swap every adjacent independent pair with `--pairs`. Builds once per move and reverts anything that does not improve. |
 
 ### Choosing what to work on
@@ -99,3 +101,16 @@ bugs that Ghidra had decompiled wrongly.
 - A file whose `// FUNCTION:` address has no reccmp entry is reported as `--` / skipped.
   Check the address against `src/precomp/addresses-SHC-3BB0A8C1.hpp`.
 - Sources are always written as UTF-8 with LF line endings.
+- Every script that runs `cl.exe` sets this worktree's own `_MSPDBSRV_ENDPOINT_`
+  (`common.build_env`), the same name `build.bat` derives. `mspdbsrv.exe` is a per-user
+  singleton keyed on that endpoint and each worktree carries its own toolchain copy, so a
+  shared endpoint makes `cl.exe` talk to the wrong server and fail with
+  `fatal error C1090: PDB API call failed`.
+- `build_quiet.py` and `syntax_check.py` both retry such a failure twice, because it has two
+  causes. A wedged server survives the kill `build.bat` does up front, so the first retry stops
+  this worktree's `mspdbsrv.exe` (`common.kill_pdb_server`, never other worktrees'). A wedged
+  *endpoint* outlives every `mspdbsrv.exe` using it, so the second retry moves to a fresh name
+  (`common.fresh_pdb_endpoint`) rather than retrying into one that will keep failing.
+- In `syntax_check.py` a PDB failure is not just a lost run: the fatal line counts as an error
+  against whichever file hit it and the rest of the batch still gets checked, so without the
+  retries the output looks like a normal error list and hides the real compile errors.

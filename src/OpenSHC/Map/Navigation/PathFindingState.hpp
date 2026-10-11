@@ -300,6 +300,8 @@ namespace Map {
             void spawnUnitAndAddToTribe(
                 int playerID, int displayColor, int count, UnitType unitType, undefined4 tribeID);
 
+            void searchCertainPathLayer();
+
             void computeAttackVectorsBasedOnXAndY(int playerID);
 
             undefined4 findCrossAreaBridgeTileToTarget(int param_1, uint param_2, uint param_3);

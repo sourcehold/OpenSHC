@@ -55,6 +55,13 @@ if mode == "pct":
 elif mode == "save":
     snapshot = {e["name"]: [float(e["matching"]), common.normalized_ratio(e)]
                 for f, e, a in common.entries(byaddr) if e}
+    # A snapshot of a partial run is worse than no snapshot: every function it is missing reads
+    # as 0.0 later, so the comparison calls the whole namespace "better" and hides any real
+    # regression among the noise. Refuse instead, rather than writing a file that looks fine.
+    listed = sum(1 for _ in common.entries(byaddr))
+    if listed and len(snapshot) <= listed // 2:
+        sys.exit("refusing to save: the last reccmp run covers %d of the %d functions in the "
+                 "build list.\nRe-run with --run first." % (len(snapshot), listed))
     json.dump(snapshot, open(args[1], "w"), indent=0)
 
 elif mode == "cmp":

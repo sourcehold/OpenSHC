@@ -123,12 +123,26 @@ the surrounding text unparseable, and `/Zs` finds that in seconds instead of a f
 place, so every reccmp number then describes the code as it was before the edit. An "unchanged" percentage is the
 symptom. `build_quiet.py` now exits non-zero on `BUILD_FAIL` so `build && report` stops, and `load_diff()` warns when a
 source file is newer than `diff.json`; `reccmp_report.py` also warns when the last run covers only part of the build
-list, which is what `try_styles.py` leaves behind while it narrows the list to one function.
+list, which is what `try_styles.py` leaves behind while it narrows the list to one function. `try_styles.py` now
+restores the list *and* rebuilds before exiting, because restoring the list alone is not enough - the DLL is still
+the narrowed one, so `diff.json` keeps reporting a single function at the last variant's score and `--run` cannot
+repair it. That rebuild costs a few minutes per invocation and is worth paying.
+
+`try_styles.py` reports four decimals, and its tie test is exact. It used to parse the one-decimal percentage
+`reccmp_report.py` prints, so anything sharing a first decimal compared as a tie - which is how a variant 0.02
+points *below* its baseline got kept as "identical, so pick the readable one". Treat a tie from an older run as
+unverified.
 
 `orig_asm.py NAME` prints the **original** instruction stream of one function from the last reccmp run, rather than the
 interleaved diff `reccmp_report.py diff` gives you. Use it when the diff comes back truncated, or when you need the
 original's own jump targets and fall-through order to reconstruct control flow. It reads `reccmp/dll/diff.json`, so it
 works with no Ghidra connection.
+
+reccmp cuts the original's stream at the length of *our* function, so when ours is shorter the original's tail is
+simply missing from the diff (it reads as "the original has no `ret`"). `quick_diff.py FILE.cpp` disassembles the whole
+original function from `_original/` and diffs it against a `/FA` compile of that one file in about six seconds, with
+no link and no reccmp run. Use it to try source variants - it is what broke the `AI::AICState` plateau that
+`try_styles.py` at several minutes per variant had declared allocator-bound - and confirm the result with reccmp.
 
 `orig_asm.py NAME --stats` reports the signals that decide *how* a function has to be reimplemented. Check it before
 restyling anything large:
@@ -166,6 +180,16 @@ statements sit between two calls or on a loop back-edge.
 
 Compares generated binaries against the original executable.
 
+**Check the struct resolver flags before trusting any comparison.** The global data
+reimplementations are enabled by flipping the boolean in every `MACRO_STRUCT_RESOLVER` in
+`src/OpenSHC/Globals/*.hpp`, which is deliberately never committed, so a rebase, a fresh clone or a
+`git checkout` silently turns them all off. With them off, absolute addresses stop being
+distinguishable and the raw match drops across the whole namespace while the normalized match barely
+moves - which reads exactly like a catastrophic self-inflicted regression. One rebase cost ~3 points
+of namespace average this way, and a snapshot taken on one side of that change cannot be compared
+with anything measured on the other. `tools/reimplementation-control/enable_reimplemented_data.py`
+turns them back on; `git checkout -- src/OpenSHC/Globals/` turns them off again.
+
 ## Working on Many Functions
 
 When restyling or improving a large set of functions, work in batches (e.g. per folder) and verify each batch:
@@ -197,6 +221,8 @@ Style expected of reimplemented code:
   two rows helped one function and hurt its near-identical neighbour. Use `try_styles.py` rather than reasoning about it.
 - Use `for` loops (loop variable declared in the `for`), early returns instead of nested if/else, no `goto`,
   no pointer variables walking over arrays or structs, named fields and enum constants instead of offsets and magic numbers.
+  The early-return preference has one known exception, still tentative - see the note on arms sharing a tail among the
+  diff patterns below.
 - Never change the `// FUNCTION:` address line; keep generated headers untouched unless asked.
 - Write sources as UTF-8 with LF line endings.
 
@@ -219,6 +245,9 @@ Diff patterns that were reliable (more in the cheat sheet):
 - Callee-saved registers reused after a call without reload (`ecx`/`edx`) indicate LTCG (`cmake/compiler-flags-gl.txt`),
   not a source difference.
 - A mismatching argument count or `ret N` usually means the generated header is wrong; report it instead of working around it.
+- Instruction order is not statement order: the compiler schedules freely inside a boundary, so a long run of
+  independent stores into one object says nothing about the order the fields were assigned in the original source
+  (see the cheat sheet's *Statement Order*). Reordering the body to follow the asm makes the match worse.
 - Diffs can reveal real bugs in existing reimplementations (wrong constants, wrong strides); fix those.
 - `(-(uint)(c) & MASK) + BASE` in the decompiler output is a conditional it has already turned into mask-and-add:
   it is `c ? BASE + MASK : BASE`. Writing the conditional out recovers the same instructions and stops the constants
@@ -240,6 +269,34 @@ Diff patterns that were reliable (more in the cheat sheet):
 - Our `movzx` against the original's `movsx` on a `ushort` layer (`PathConnectionLayer`) means the original cast the
   read: `dword x = (short)layer[i]`, one `movsx`. Declaring the local `short` does not do it - the signedness comes
   from the cast on the array access, not from the destination.
+- `diff_types.py`'s `EXTEND` hint usually does **not** mean the header is wrong. Every field it flagged across
+  `Map::Units::UnitsState` was already correctly signed (`short OrganismLayer`, `short owner`,
+  `typedef short UnitTypeShort`). What it detects is a 16-bit load that needs a second instruction to sign-extend,
+  where the original does one `movsx`, and that arises three ways with three different fixes. This was the most
+  productive seam in that namespace, ten functions and most of a point of namespace average, after hand analysis of
+  the same functions had concluded they were allocator-bound:
+  - **A local declared `short` (or `ushort`) that holds a field read** - widen it to `int`. The safest of the three:
+    it cannot add a memory read, only change the extension width of one that already happens. One such local took
+    `resetUnitMovementState` from 85.7% to 95.2% and normalized 100%. 17 of 18 candidates gained.
+  - **A byte-sized local** (`diff_triage.py`'s `BYTE` column, nonzero on our side only) - widen it to `int`, worth
+    +12 points on `updateUnitFadeAndVisibilityNearStructures` alone. But only when the flag is set from constants:
+    one initialised from a `BOOLEnum`-returning call lost 3 points, because `bool x = call()` emits the test that
+    normalises the result to 0/1 while `int x = call()` stores it raw, so there the `bool` is load-bearing.
+  - **A field read repeatedly with no local at all** - give it one `int` local, but only when the value feeds
+    arithmetic, indexing, or a comparison against another variable (+4.7 on `calculateUnitMovementSpeed`). When it
+    feeds comparisons against *constants*, leave it alone: MSVC compares against the memory operand directly, and
+    introducing the local cost 11.8 points on `playHurtSFXForUnit` and 0.3 on `updateUnits`. This is the
+    unpredictable case the style notes above warn about; the `EXTEND` hint plus how the value is used is what makes
+    it decidable.
+  Signedness is what matters, not width: a `ushort` local widened to `int` zero-extends either way and gained
+  nothing. An `EXTEND` on an *array element* is weaker evidence than on a scalar - declaring a `ushort` scratch
+  array `short` and dropping fifteen `(short)` read casts was an exact tie.
+- `diff_triage.py`'s `FRAME` column is worth checking but, unlike `BYTE`, is not mechanically actionable. Every
+  cheap hypothesis for the frame mismatches in `Map::Units::UnitsState` came back an exact tie or worse: local
+  declaration order, array element type, widening unsigned locals, and splitting a local the decompiler had reused
+  for two values. `diff_slots.py` says the lowest-access extra slot is usually the culprit, so a function whose
+  extra slots are all heavily used has genuine live values rather than a stray local, and needs structural
+  understanding rather than a rule.
 - `jmp dword ptr [reg*4 + table]` on one side only is a dispatch-form mismatch: a `switch` over contiguous values
   becomes a jump table, an if/else-if chain becomes compares. Both directions have been worth several percent
   (`scan_dispatch.py` finds them). Handing some of a switch's values to `default:` and re-testing them with an `if`
@@ -255,6 +312,15 @@ Diff patterns that were reliable (more in the cheat sheet):
 - MSVC1400 at `/O2` never unrolls a loop, so a body repeated N times in the asm means the source was written out N
   times. A plain loop where the original is unrolled has cost 80 points on its own.
 - A flag stored with `mov dword ptr [..], 0/1` is an `int`, not a `bool`, which stores a byte.
+- Tentative, one clear case so far: where two arms of a condition share a tail, the nested `if/else` shape the
+  decompiler emits can beat the early returns the style list above asks for, because it decides *which* arm holds the
+  physical copy of the shared block. In `calculateTaxIncomeForPlayer` the original keeps the shared `(tax * 150) / 100`
+  in the second arm and jumps forward into it from the first; early returns put the copy in the first arm and made the
+  second jump backwards, and switching to nested `if/else` was worth 17 points. Read the original's own jump direction
+  with `orig_asm.py NAME` to see which arm should hold it. Treat this as a thing to try, not a rule: the same change
+  measured *worse* on `updateCrowding` (all three nested variants lost 9-14 points) and made no difference at all on
+  `showPopAndGoldPopup` and `createStatsPopUpEntities`, where every shape tied to the decimal because the gap there is
+  the loop base-pointer anchor. `try_styles.py` settles it per function; prefer the early-return form on a tie.
 
 ## Agent Skills
 

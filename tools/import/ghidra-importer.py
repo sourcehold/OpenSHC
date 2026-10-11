@@ -320,6 +320,9 @@ for obj in objs:
     collection.add(exporter.export_typedef(td))
 
 def write_patches(output_dir: pathlib.Path):
+  path = (output_dir / "OpenSHC" / "OS.hpp")
+  content = path.read_bytes().replace(b"void __cdecl _exit(", b"__declspec(noreturn) void __cdecl _exit(")
+  path.write_bytes(content)
   pass # Overwrite hpp files in this function
 
 if not args.dry_run:

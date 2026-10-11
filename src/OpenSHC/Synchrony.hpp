@@ -44,7 +44,7 @@ namespace Synchrony {
 
     void __cdecl ProgressBarRelated();
 
-    void __cdecl syncPlayerGroupArrays();
+    void __cdecl SyncPlayerGroupArrays();
 
     void __cdecl LoadSkirmishCampaignData(int missionID);
 

@@ -37,15 +37,22 @@ def run(*args):
 
 def measure(func):
     out = run(BATCH / "build_quiet.py")
-    if "BUILD_FAIL" in out and "C1090" in out:
-        # mspdbsrv occasionally dies mid-build; that is not the variant's fault
-        subprocess.run(["taskkill", "/F", "/IM", "mspdbsrv.exe"], capture_output=True)
+    if "BUILD_FAIL" in out and not out.strip().splitlines()[:-1]:
+        # A build that fails without naming a source line did not fail on the variant:
+        # mspdbsrv dies mid-build (C1090), and cmake's glob verification crashes with an
+        # access violation on the first build after the source list changed, which is
+        # every first variant. Both succeed on a plain retry.
+        common.kill_pdb_server()
         out = run(BATCH / "build_quiet.py")
     if "BUILD_FAIL" in out:
         return None, out
-    for line in run(BATCH / "reccmp_report.py", "--run", "pct").splitlines():
-        if line.strip().endswith("::" + func):
-            return float(line.split()[0]), None
+    run(BATCH / "reccmp_report.py", "--run", "pct")
+    # Read the ratio out of diff.json rather than parsing the printed percentage: that is
+    # formatted to one decimal, so every variant sharing a first decimal compared as an
+    # exact tie. One such "tie" was really 0.02 points below the baseline.
+    for entry in common.load_diff().values():
+        if entry["name"].endswith("::" + func):
+            return float(entry["matching"]) * 100, None
     return None, "function not found in the reccmp report"
 
 
@@ -78,7 +85,10 @@ def main():
             common.format_file(target)
             pct, err = measure(func)
             results.append((pct, style))
-            print("%-32s %s" % (style, "BUILD FAIL" if pct is None else "%.2f%%" % pct))
+            # four decimals, because two hid a real regression behind an apparent tie: a
+            # variant that printed the same "29.20%" as the baseline was actually 0.02
+            # points below it, which is one instruction in a large function
+            print("%-32s %s" % (style, "BUILD FAIL" if pct is None else "%.4f%%" % pct))
             if err:
                 for line in err.splitlines():
                     if "error" in line:
@@ -92,13 +102,19 @@ def main():
         sys.exit("every variant failed to build; original restored")
     best = ranked[0][0]
     tied = [s for p, s in ranked if abs(p - best) < 1e-9]
-    print("\nbest %.2f%% achieved by: %s" % (best, ", ".join(tied)))
+    print("\nbest %.4f%% achieved by: %s" % (best, ", ".join(tied)))
     if len(tied) > 1:
         print("(tied -- keeping %s; pick whichever reads best)" % tied[0])
     shutil.copy(vdir / (tied[0] + ".cpp"), target)
     common.format_file(target)
     (vdir / "results.json").write_text(
         json.dumps({s: p for p, s in results if p is not None}, indent=1), encoding="utf-8")
+
+    # The trials left the DLL and reccmp/dll/diff.json built from the narrowed list, so every
+    # batch tool would go on reporting the last variant's single-function result. Restoring
+    # the list is not enough -- rebuild so the tree, the DLL and the diff agree again.
+    print("\nrebuilding with the full list so later reports are valid...")
+    print(run(BATCH / "build_quiet.py").strip().splitlines()[-1])
 
 
 if __name__ == "__main__":

@@ -42,7 +42,7 @@ namespace Text {
         UserTextHandler() {};
         ~UserTextHandler() {};
 
-        void FUN_004694a0();
+        void initializeUserTextHandler();
 
         void resetToTextIndex(int textIndex);
 

@@ -47,11 +47,11 @@ namespace UI {
 
             BOOLEnum isMouseOnButtonImageUnk();
 
-            void ProcessBuildingClickBonus(int buildingIndex);
+            void processBuildingClickBonus(int buildingIndex);
 
             BOOLEnum openBuildingStatusMenuForBuildingID(int buildingID);
 
-            BOOLEnum SelectUnitAndOpenStatusMenu(int unitIndex);
+            BOOLEnum selectUnitAndOpenStatusMenu(int unitIndex);
 
             void renderBasicButton(int reverseOrBlendStrength, RenderTarget renderSurface);
         };

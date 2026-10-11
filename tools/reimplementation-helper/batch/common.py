@@ -27,6 +27,54 @@ TMP.mkdir(parents=True, exist_ok=True)
 DIFF_JSON = Path("reccmp/dll/diff.json")
 
 FUNCTION_RE = re.compile(r"//\s*FUNCTION:\s*STRONGHOLDCRUSADER\s+(0x[0-9A-Fa-f]+)")
+# ---------------------------------------------------------------- pdb server
+
+# mspdbsrv.exe is a per-user singleton keyed on _MSPDBSRV_ENDPOINT_, and every worktree carries its
+# own copy of the toolchain. Sharing one endpoint makes cl.exe talk to whichever copy started first
+# and fail with "fatal error C1090: PDB API call failed, error code '23'" (or C1033). build.bat
+# derives this same name, so setting it here keeps the two in step and also covers the scripts that
+# drive cl.exe or cmake directly instead of going through build.bat.
+PDB_ENDPOINT = "openshc_" + ROOT.name
+PDB_ERROR_RE = re.compile(r"fatal error C10(90|33)")
+
+
+def fresh_pdb_endpoint():
+    """A previously unused endpoint name for this worktree.
+
+    An endpoint can wedge in a way that outlives every mspdbsrv.exe using it: the name stays
+    unusable, and `cl.exe` keeps failing with C1090 no matter how often the server is killed and
+    restarted. Six consecutive builds failed that way once, across a fresh PCH and PDBs, while the
+    same tree built first try under a different name. So when killing the server does not help,
+    move to a new name rather than retrying into the same one.
+    """
+    return "%s_%d" % (PDB_ENDPOINT, os.getpid())
+
+
+def build_env(endpoint=None):
+    """Environment for anything that runs cl.exe, with this worktree's PDB endpoint.
+
+    An endpoint already set in the environment wins, so a caller can pin one for a whole session.
+    """
+    env = dict(os.environ)
+    if endpoint:
+        env["_MSPDBSRV_ENDPOINT_"] = endpoint
+    else:
+        env.setdefault("_MSPDBSRV_ENDPOINT_", PDB_ENDPOINT)
+    return env
+
+
+def kill_pdb_server():
+    """Stop this worktree's mspdbsrv.exe only.
+
+    Killing every instance by image name takes down the PDB server of any other worktree that is
+    building at the same time and fails their build with the same C1090.
+    """
+    subprocess.run(["powershell", "-NoProfile", "-Command",
+                    "Get-Process mspdbsrv -ErrorAction SilentlyContinue | "
+                    "Where-Object { $_.Path -like '%s*' } | "
+                    "Stop-Process -Force -ErrorAction SilentlyContinue"
+                    % str(ROOT).replace("'", "''")],
+                   capture_output=True)
 
 
 def list_files(existing_only=True):
@@ -93,7 +141,7 @@ def function_body_span(text, start=0):
 
 def run_reccmp():
     result = subprocess.run(
-        ["cmd", "/c", r"reccmp\dll\run.bat", "reccmp-reccmp", "--target", "STRONGHOLDCRUSADER", "--json", "diff.json"],
+        ["cmd", "/c", r"reccmp\dll\run.bat", "reccmp-reccmp", "--target", "STRONGHOLDCRUSADER", "--resolve-wrapped-calls", "--quiet", "--cache", "--json", "diff.json"],
         capture_output=True, text=True, stdin=subprocess.DEVNULL)
     if result.returncode:
         sys.exit("reccmp failed:\n" + result.stdout[-800:] + result.stderr[-800:])

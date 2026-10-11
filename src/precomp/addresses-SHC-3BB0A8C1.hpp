@@ -21250,7 +21250,7 @@ enum {
     // location: OpenSHC/UI/Rendering/AlphaAndButtonSurface
     // type: function
     SHC_3BB0A8C1_0x004630D0 = 0x004630D0,
-    // label: ProcessBuildingClickBonus
+    // label: processBuildingClickBonus
     // location: OpenSHC/UI/Rendering/AlphaAndButtonSurface
     // type: function
     SHC_3BB0A8C1_0x00463270 = 0x00463270,
@@ -21844,7 +21844,7 @@ enum {
     SHC_3BB0A8C1_0x004639F9 = 0x004639F9,
     // type: /byte
     SHC_3BB0A8C1_0x004639FA = 0x004639FA,
-    // label: SelectUnitAndOpenStatusMenu
+    // label: selectUnitAndOpenStatusMenu
     // location: OpenSHC/UI/Rendering/AlphaAndButtonSurface
     // type: function
     SHC_3BB0A8C1_0x00463A00 = 0x00463A00,
@@ -22468,7 +22468,7 @@ enum {
     // location: OpenSHC/UI/Rendering/PencilRenderCore
     // type: function
     SHC_3BB0A8C1_0x004692E0 = 0x004692E0,
-    // label: FUN_004694a0
+    // label: initializeUserTextHandler
     // location: OpenSHC/Text/UserTextHandler
     // type: function
     SHC_3BB0A8C1_0x004694A0 = 0x004694A0,
@@ -28162,7 +28162,7 @@ enum {
     SHC_3BB0A8C1_0x0049B5B0 = 0x0049B5B0,
     // type: function
     SHC_3BB0A8C1_0x0049B6B0 = 0x0049B6B0,
-    // label: calcApproxEuclideanDistance
+    // label: CalcApproxEuclideanDistance
     // location: OpenSHC/Map/Navigation
     // type: function
     SHC_3BB0A8C1_0x0049B8C0 = 0x0049B8C0,
@@ -29158,6 +29158,8 @@ enum {
     // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A67D0 = 0x004A67D0,
+    // label: searchCertainPathLayer
+    // location: OpenSHC/Map/Navigation/PathFindingState
     // type: function
     SHC_3BB0A8C1_0x004A6940 = 0x004A6940,
     // label: computeAttackVectorsBasedOnXAndY
@@ -29932,7 +29934,7 @@ enum {
     // location: OpenSHC/UI/MenuItems/AiLordSelect
     // type: function
     SHC_3BB0A8C1_0x004AE950 = 0x004AE950,
-    // label: syncPlayerGroupArrays
+    // label: SyncPlayerGroupArrays
     // location: OpenSHC/Synchrony
     // type: function
     SHC_3BB0A8C1_0x004AEA10 = 0x004AEA10,
@@ -66757,8 +66759,12 @@ enum {
     SHC_3BB0A8C1_0x0053F07C = 0x0053F07C,
     // type: /pointer
     SHC_3BB0A8C1_0x0053F084 = 0x0053F084,
+    // type: /int
+    SHC_3BB0A8C1_0x0053F088 = 0x0053F088,
     // type: function
     SHC_3BB0A8C1_0x0053F08F = 0x0053F08F,
+    // type: /pointer
+    SHC_3BB0A8C1_0x0053F09C = 0x0053F09C,
     // type: /pointer
     SHC_3BB0A8C1_0x0053F0AA = 0x0053F0AA,
     // type: function
@@ -97735,51 +97741,27 @@ enum {
     // label: DAT_WRS_Height
     // location:
     SHC_3BB0A8C1_0x00EE19F1 = 0x00EE19F1,
-    // type: /int
+    // label: FLAG_JokeAIMessageArray
+    // location:
+    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum[17]
     SHC_3BB0A8C1_0x00EE2350 = 0x00EE2350,
     // label: FLAG_ChristmasAIMessage01to04
     // location:
-    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
     SHC_3BB0A8C1_0x00EE2354 = 0x00EE2354,
-    // type: /int
-    SHC_3BB0A8C1_0x00EE2358 = 0x00EE2358,
-    // type: /int
-    SHC_3BB0A8C1_0x00EE235C = 0x00EE235C,
-    // type: /int
-    SHC_3BB0A8C1_0x00EE2360 = 0x00EE2360,
     // label: FLAG_JokeAIMessage05
     // location:
-    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
     SHC_3BB0A8C1_0x00EE2364 = 0x00EE2364,
     // label: FLAG_JokeAIMessage06
     // location:
-    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
     SHC_3BB0A8C1_0x00EE2368 = 0x00EE2368,
-    // type: /int
-    SHC_3BB0A8C1_0x00EE236C = 0x00EE236C,
-    // type: /int
-    SHC_3BB0A8C1_0x00EE2370 = 0x00EE2370,
     // label: FLAG_JokeAIMessage09
     // location:
-    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
     SHC_3BB0A8C1_0x00EE2374 = 0x00EE2374,
-    // type: /int
-    SHC_3BB0A8C1_0x00EE2378 = 0x00EE2378,
-    // type: /int
-    SHC_3BB0A8C1_0x00EE237C = 0x00EE237C,
     // label: FLAG_JokeAIMessage12
     // location:
-    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
     SHC_3BB0A8C1_0x00EE2380 = 0x00EE2380,
-    // type: /int
-    SHC_3BB0A8C1_0x00EE2384 = 0x00EE2384,
-    // type: /int
-    SHC_3BB0A8C1_0x00EE2388 = 0x00EE2388,
-    // type: /int
-    SHC_3BB0A8C1_0x00EE238C = 0x00EE238C,
     // label: FLAG_JokeAIMessage16
     // location:
-    // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
     SHC_3BB0A8C1_0x00EE2390 = 0x00EE2390,
     // label: TIME_ReceivedMessage_1
     // location:
