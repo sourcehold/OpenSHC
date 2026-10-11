@@ -15,6 +15,7 @@
 #include "OpenSHC/Globals/INT_00eb1230.hpp"
 #include "OpenSHC/Globals/INT_00eb9ac0.hpp"
 #include "OpenSHC/Globals/INT_00ed27a4.hpp"
+#include "OpenSHC/Globals/INT_00ec0828.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -47,7 +48,7 @@ namespace UI {
         do {
             pCVar1->isValid = 0;
             pCVar1 = pCVar1 + 1;
-        } while ((int)pCVar1 < 0xec0828);
+        } while ((int)pCVar1 < (int)&INT_00ec0828::instance);
         DAT_UnknownBinkIndex::instance = DAT_UnknownBinkIndex::instance + 1;
         if (DAT_UnknownBinkIndex::instance < DAT_UnknownBinkCount::instance) {
             do {

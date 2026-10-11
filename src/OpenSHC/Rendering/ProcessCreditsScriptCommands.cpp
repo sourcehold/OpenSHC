@@ -28,6 +28,8 @@
 #include "OpenSHC/Globals/INT_00eb0e30.hpp"
 #include "OpenSHC/Globals/INT_00ec083c.hpp"
 #include "OpenSHC/Globals/INT_00ed27a4.hpp"
+#include "OpenSHC/Globals/DAT_00ec082c.hpp"
+#include "OpenSHC/Globals/INT_00ec0828.hpp"
 
 namespace OpenSHC {
 
@@ -88,7 +90,7 @@ void Rendering::ProcessCreditsScriptCommands()
                     }
                     piVar7 = piVar7 + 0xd;
                     iVar8 = iVar8 + 1;
-                } while ((int)piVar7 < 0xec082c);
+                } while ((int)piVar7 < (int)&DAT_00ec082c::instance);
             LAB_004e0b98:
                 bVar11 = iVar8 == 0x18;
                 goto LAB_004e0b9b;
@@ -130,7 +132,7 @@ void Rendering::ProcessCreditsScriptCommands()
                         ((CreditsRelatedStructure*)(piVar7 - 1))->fadeMode = 2;
                     }
                     piVar7 = piVar7 + 0xd;
-                } while ((int)piVar7 < 0xec082c);
+                } while ((int)piVar7 < (int)&DAT_00ec082c::instance);
                 break;
             case 8:
                 pCVar4 = DAT_ARRAY_00ec0348::instance;
@@ -139,7 +141,7 @@ void Rendering::ProcessCreditsScriptCommands()
                         pCVar4->isValid = 0;
                     }
                     pCVar4 = pCVar4 + 1;
-                } while ((int)pCVar4 < 0xec0828);
+                } while ((int)pCVar4 < (int)&INT_00ec0828::instance);
                 break;
             case 9:
                 MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::endSoundStream, DAT_SoundSystemState::ptr)(
@@ -158,7 +160,7 @@ void Rendering::ProcessCreditsScriptCommands()
                         pCVar4->isValid = 0;
                     }
                     pCVar4 = pCVar4 + 1;
-                } while ((int)pCVar4 < 0xec0828);
+                } while ((int)pCVar4 < (int)&INT_00ec0828::instance);
                 break;
             case 0xc:
                 MACRO_CALL_MEMBER(Rendering::Bink::BinkControlClass_Func::playBINK, DAT_BinkControlState::ptr)(
@@ -208,7 +210,7 @@ void Rendering::ProcessCreditsScriptCommands()
                         ((CreditsRelatedStructure*)(piVar7 - 1))->fadeMode = 2;
                     }
                     piVar7 = piVar7 + 0xd;
-                } while ((int)piVar7 < 0xec082c);
+                } while ((int)piVar7 < (int)&DAT_00ec082c::instance);
                 break;
             case 0x11:
                 INT_00ed27a4::instance = DAT_ARRAY_00eb9b68::instance[iVar9].soundStream;
@@ -270,7 +272,7 @@ void Rendering::ProcessCreditsScriptCommands()
                         pCVar4->isValid = 0;
                     }
                     pCVar4 = pCVar4 + 1;
-                } while ((int)pCVar4 < 0xec0828);
+                } while ((int)pCVar4 < (int)&INT_00ec0828::instance);
                 break;
             case 0x18:
                 pFVar2 = (int)DAT_BinkControlState::instance.binkObjPtrArray[0];
@@ -292,7 +294,7 @@ void Rendering::ProcessCreditsScriptCommands()
                         pCVar4->isValid = 0;
                     }
                     pCVar4 = pCVar4 + 1;
-                } while ((int)pCVar4 < 0xec0828);
+                } while ((int)pCVar4 < (int)&INT_00ec0828::instance);
                 break;
             case 0x1a:
                 DAT_00ed2bd8::instance = 1;
@@ -366,7 +368,7 @@ void Rendering::ProcessCreditsScriptCommands()
                         ((CreditsRelatedStructure*)(piVar6 - 1))->fadeMode = 2;
                     }
                     piVar6 = piVar6 + 0xd;
-                } while ((int)piVar6 < 0xec082c);
+                } while ((int)piVar6 < (int)&DAT_00ec082c::instance);
                 break;
             case 0x2b:
                 DAT_00eb0e40::instance = 5;
