@@ -98,10 +98,10 @@ namespace UI {
             dword toArea;
             int _specificRange;
             int iVar14;
-            bool bVar15;
-            bool bVar16;
-            bool bVar17;
-            bool bVar18;
+            int bVar15;
+            int bVar16;
+            int bVar17;
+            int bVar18;
             int local_20;
             int* local_18;
             int _playerID;
@@ -111,11 +111,11 @@ namespace UI {
             int _oneOr129;
             DWORD DVar7 = timeGetTime();
             local_20 = -2;
-            bVar16 = false;
-            bVar17 = false;
-            bVar18 = false;
-            bVar15 = false;
-            bool bVar6 = false;
+            bVar16 = 0;
+            bVar17 = 0;
+            bVar18 = 0;
+            bVar15 = 0;
+            int bVar6 = 0;
             if (DAT_GameCore::instance.gamePausedLogical) {}
             BVar8 = MACRO_CALL(UI::DisplayElements_Func::GetIfDisplayElementStateNotZero)(
                 UI::Enums::DEID_KEEP_AND_GRANERY_PLACEMENT_INFO);
@@ -321,14 +321,14 @@ namespace UI {
                     - DAT_ViewportRenderState::instance.translationMatrix[_shooterID].addXgetTile;
                 local_20 = 2;
                 DAT_TileMapState::instance.cursorOverlayImageBase = 0x20;
-                bVar18 = false;
-                bVar17 = false;
+                bVar18 = 0;
+                bVar17 = 0;
                 if (DAT_TileMapState::instance.activeTacticalPower == 6
                     && (DAT_TileMapState::instance
                             .LogicLayer[DAT_ViewportRenderState::instance.viewportState.mouseAtomRefFloorTile]
                         & 0x100U)) {
                 LAB_00434f28:
-                    bVar18 = true;
+                    bVar18 = 1;
                 } else {
                     switch (DAT_TileMapState::instance.activeTacticalPower) {
                     case 2:
@@ -346,7 +346,7 @@ namespace UI {
                                   .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                                   .keep.xEntry;
                         _yDifference = _yDifference * _yDifference + iVar14 * iVar14;
-                        bVar17 = true;
+                        bVar17 = 1;
                         if (DAT_TileMapState::instance.activeTacticalPower == 3) {
                             bVar18 = (_yDifference < 0x3100);
                             iVar14 = -0x3100;
@@ -375,7 +375,7 @@ namespace UI {
                             iVar14 = _specificRange - DAT_UnitsState::instance.units[_yDifference].x;
                             _yDifference = _shooterID - DAT_UnitsState::instance.units[_yDifference].y;
                             _yDifference = _yDifference * _yDifference + iVar14 * iVar14;
-                            bVar18 = false;
+                            bVar18 = 0;
                             if (DAT_TileMapState::instance.activeTacticalPower == 3) {
                                 bVar16 = (_yDifference < 0x3100);
                                 iVar14 = _yDifference + -0x3100;
@@ -688,7 +688,7 @@ namespace UI {
                         && (_shooterID = MACRO_CALL_MEMBER(
                                 Map::Units::UnitsState_Func::selectionHasFootSoldiers, DAT_UnitsState::ptr)(),
                             _shooterID != 0))) {
-                    bVar15 = true;
+                    bVar15 = 1;
                     local_20 = 1;
                     DAT_TileMapState::instance.DAT_SelectionIconType = 0x19;
                     DAT_TileMapState::instance.cursorOverlayGmID = 0x10;
@@ -763,7 +763,7 @@ namespace UI {
                             case Map::Buildings::BT_TOWER5:
                                 break;
                             default:
-                                bVar17 = true;
+                                bVar17 = 1;
                                 goto LAB_00435e83;
                             }
                         }
@@ -881,7 +881,7 @@ namespace UI {
                                     Map::Units::UnitsState_Func::getSelectedEngineerCarryingResource,
                                     DAT_UnitsState::ptr)();
                                 if (!uVar9) {
-                                    bVar16 = true;
+                                    bVar16 = 1;
                                     DAT_TileMapState::instance.pendingUnitCommand = 10;
                                 } else {
                                     DAT_TileMapState::instance.pendingUnitCommand = 0xb;
@@ -1030,7 +1030,7 @@ namespace UI {
                                                 }
                                             } else {
                                                 _specificRange = -1;
-                                                bVar6 = true;
+                                                bVar6 = 1;
                                             }
                                             break;
                                         case Map::Units::UT_S_CATAPULT:
@@ -1125,7 +1125,7 @@ namespace UI {
                                             if (bVar18)
                                                 goto LAB_0043674b;
                                         } else {
-                                            bVar16 = true;
+                                            bVar16 = 1;
                                             DAT_TileMapState::instance.pendingUnitCommand = 1;
                                             DAT_TileMapState::instance.DAT_SelectionIconType = 9;
                                             DAT_TileMapState::instance.cursorOverlayImageBase = 0x20;
@@ -1214,7 +1214,7 @@ namespace UI {
                                                         || (UVar4 == Map::Units::UT_S_BATTERINGRAM))
                                                         goto switchD_004364b3_caseD_3a;
                                                     _shooterID = -1;
-                                                    bVar6 = true;
+                                                    bVar6 = 1;
                                                     break;
                                                 case Map::Units::UT_S_CATAPULT:
                                                     _shooterID = 0x15f9;
@@ -1269,7 +1269,7 @@ namespace UI {
                                                     - (int)DAT_UnitsState::instance.units[(int)local_18].y;
                                                 if (_specificRange * _specificRange + _yDifference * _yDifference
                                                     <= _shooterID) {
-                                                    bVar16 = true;
+                                                    bVar16 = 1;
                                                     DAT_TileMapState::instance.pendingUnitCommand = 6;
                                                     DAT_TileMapState::instance.cursorOverlayImageBase = 0x20;
                                                     DAT_TileMapState::instance.DAT_SelectionIconType = 9;
@@ -1333,7 +1333,7 @@ namespace UI {
                             sVar3 = DAT_UnitsState::instance.units[_otherUnitIDUnk]
                                         .digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300;
                             if ((sVar3) && (DAT_UnitsState::instance.units[_otherUnitIDUnk].isSelected != 0)) {
-                                bVar18 = true;
+                                bVar18 = 1;
                                 if (0 < sVar3) {
                                     _shooterID
                                         = (int)DAT_UnitsState::instance.units[_otherUnitIDUnk]
@@ -1342,7 +1342,7 @@ namespace UI {
                                     do {
                                         if (DAT_UnitsState::instance.units[*psVar10].state.generic
                                             == Map::Units::States::US_JESTER_ROAM_TO) {
-                                            bVar18 = false;
+                                            bVar18 = 0;
                                         }
                                         psVar10 = psVar10 + 1;
                                         _shooterID = _shooterID + -1;
@@ -1507,9 +1507,9 @@ namespace UI {
                 }
                 if (!DAT_ViewportRenderState::instance.viewportState.cursorTile)
                     goto LAB_00436953;
-                bVar18 = false;
+                bVar18 = 0;
                 while (true) {
-                    bVar17 = false;
+                    bVar17 = 0;
                     flag1003 = DAT_TileMapState::instance
                                    .LogicLayer[DAT_ViewportRenderState::instance.viewportState.cursorTile];
                     uVar1 = (short)DAT_TileMapState::instance
@@ -1540,12 +1540,12 @@ namespace UI {
                     BVar8 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::isTowerTileOvercrowdedByCurrentPlayer,
                         DAT_UnitsState::ptr)(DAT_ViewportRenderState::instance.viewportState.cursorTile);
                     if (BVar8) {
-                        bVar17 = false;
+                        bVar17 = 0;
                     }
                     _specificRange = MACRO_CALL_MEMBER(
                         Map::Units::UnitsState_Func::selectionHasMovableNonSiegeUnit, DAT_UnitsState::ptr)();
                     if (!_specificRange) {
-                        bVar17 = false;
+                        bVar17 = 0;
                     }
                     _yDifference = MACRO_CALL_MEMBER(
                         Map::Units::UnitsState_Func::selectionHasMixedAssaultAndInfantry, DAT_UnitsState::ptr)();
@@ -1565,14 +1565,14 @@ namespace UI {
                                             [DAT_ViewportRenderState::instance.viewportState.mouseAtomRefFloorTile]),
                                     100000),
                                 _yDifference == 0)) {
-                            bVar17 = false;
+                            bVar17 = 0;
                         }
                     }
                     _otherUnitIDUnk = MACRO_CALL_MEMBER(
                         Map::Units::UnitsState_Func::getSelectedLordIDIfOwnedByCurrentPlayer, DAT_UnitsState::ptr)();
                     if (!_otherUnitIDUnk || bVar17 || bVar16 || bVar18)
                         break;
-                    bVar18 = true;
+                    bVar18 = 1;
                     if ((DAT_TileMapState::instance
                                 .BuildingLayer[DAT_ViewportRenderState::instance.viewportState.cursorTile]
                             == 0)
@@ -1629,7 +1629,7 @@ namespace UI {
                     local_20 = 2;
                     goto LAB_00436d8a;
                 }
-                bVar17 = true;
+                bVar17 = 1;
             LAB_00436b8a:
                 if (DAT_ViewportRenderState::instance.viewportState.field27_0x6c == 1) {
                     DAT_TileMapState::instance.pendingUnitCommand = -1;
@@ -1657,7 +1657,7 @@ namespace UI {
                 if ((short)BVar5 < 0x2d) {
                     if ((int)DAT_BuildingsState::instance.buildings[_shooterID].owner
                         == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
-                        bVar16 = true;
+                        bVar16 = 1;
                     }
                     goto LAB_00436d33;
                 }
@@ -1759,7 +1759,7 @@ namespace UI {
                     local_20 = 2;
                     goto LAB_00436d33;
                 }
-                bVar18 = true;
+                bVar18 = 1;
                 local_18 = (int*)MACRO_CALL_MEMBER(
                     Map::Units::UnitsState_Func::selectionContainsCombatUnit, DAT_UnitsState::ptr)(1);
                 _shooterID = DAT_ViewportRenderState::instance.viewportState.mouseRayBuildingID;
@@ -1793,7 +1793,7 @@ namespace UI {
                                 || UVar4 == Map::Units::UT_S_BATTERINGRAM)
                                 goto switchD_0043662c_caseD_3a;
                             _shooterID = -1;
-                            bVar6 = true;
+                            bVar6 = 1;
                             break;
                         case Map::Units::UT_S_CATAPULT:
                             _shooterID = 0x15f9;
@@ -1838,7 +1838,7 @@ namespace UI {
                                              [DAT_ViewportRenderState::instance.viewportState.mouseAtomRefFloorTile]
                             - (int)DAT_UnitsState::instance.units[(int)local_18].y;
                         if (_specificRange * _specificRange + _yDifference * _yDifference <= _shooterID) {
-                            bVar16 = true;
+                            bVar16 = 1;
                             DAT_TileMapState::instance.pendingUnitCommand = 6;
                             DAT_TileMapState::instance.cursorOverlayImageBase = 0x20;
                             DAT_TileMapState::instance.DAT_SelectionIconType = 9;
