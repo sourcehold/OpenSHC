@@ -53,12 +53,12 @@ namespace Map {
             UnitTypeShort _unitType;
             int _targetUnitArea;
             uint _y = y1;
-            bool _bool1 = false;
+            int _bool1 = 0;
             int _tribeUnitIndex = 0;
-            bool bVar6 = false;
+            int bVar6 = 0;
             int _algTile2 = 0;
             int _algTile = 0;
-            bool bVar4 = false;
+            int bVar4 = 0;
             if (!x1) {
                 if (!y1) {
                     return (undefined4)(0);
@@ -100,7 +100,7 @@ namespace Map {
                         return (undefined4)(_one);
                     }
                     _targetUnitID = (int)this->tribes[tribeID].selectionTargetUnitID;
-                    _bool1 = true;
+                    _bool1 = 1;
                     _area_2 = _navArea;
                 } else {
                     _area_2 = _targetUnitArea;
@@ -139,7 +139,7 @@ namespace Map {
                                 if (!iVar7) {
                                     return (undefined4)(0);
                                 }
-                                bVar6 = true;
+                                bVar6 = 1;
                                 _algTile2 = DAT_PathFindingState::instance.ALG_TargetTile;
                                 _algTile = DAT_PathFindingState::instance.ALG_ResultTile;
                             } else {
@@ -152,7 +152,7 @@ namespace Map {
                             }
                         }
                     } else {
-                        bVar4 = true;
+                        bVar4 = 1;
                     }
                     if (storeAsRallyPoint) {
                         this->tribes[tribeID].isRallyingUnk = (short)rallyBool;
@@ -166,10 +166,10 @@ namespace Map {
                     }
                     this->ALG_ResultTileIndex = 0;
                     this->field6_0x18 = 0;
-                    bool _isWallGatehouseTower = (DAT_TileMapState::instance.LogicLayer[_tile] & 0x100U) != 0;
-                    bool bVar5 = false;
-                    bool _isKeep = (DAT_TileMapState::instance.LogicLayer[_tile] & 0x10000000U) != 0;
-                    bool _isDefensiveStructure = _isKeep || _isWallGatehouseTower;
+                    int _isWallGatehouseTower = (DAT_TileMapState::instance.LogicLayer[_tile] & 0x100U) != 0;
+                    int bVar5 = 0;
+                    int _isKeep = (DAT_TileMapState::instance.LogicLayer[_tile] & 0x10000000U) != 0;
+                    int _isDefensiveStructure = _isKeep || _isWallGatehouseTower;
                     rallyBool = 1;
                     if (bVar4) {
                         MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathFindingWithBuildingsIncluded,
@@ -189,8 +189,8 @@ namespace Map {
                         int _searchBudget = 500;
                         do {
                             _searchBudget = _searchBudget + 500;
-                            if (0x13a0f < _searchBudget
-                                || ((_bool1 || (_isDefensiveStructure)) && (7999 < _searchBudget))) {
+                            if (0x13a10 <= _searchBudget
+                                || ((_bool1 || (_isDefensiveStructure)) && (8000 <= _searchBudget))) {
                                 if (!DAT_PathFindingState::instance.field50_0x98) {
                                     if (bVar4) {
                                         BVar8 = MACRO_CALL_MEMBER(
@@ -301,7 +301,7 @@ namespace Map {
                                             this->ALG_ResultTileIndex = this->ALG_ResultTileIndex + 1;
                                             if (dVar9)
                                                 goto LAB_0052691a;
-                                            bVar5 = true;
+                                            bVar5 = 1;
                                             this->ALG_ResultTileIndex = 0;
                                             _modulo = 3;
                                         }
@@ -317,7 +317,7 @@ namespace Map {
                                         DAT_PathFindingState::ptr)(1, (int)(x1), (int)(_y), rallyBool);
                                     this->ALG_ResultTileIndex = this->ALG_ResultTileIndex + 1;
                                     if (!dVar9) {
-                                        bVar5 = true;
+                                        bVar5 = 1;
                                         this->ALG_ResultTileIndex = 0;
                                         goto LAB_00526908;
                                     }
