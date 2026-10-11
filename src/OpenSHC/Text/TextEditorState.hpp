@@ -10,6 +10,7 @@
 
 #include "OpenSHC/Text/Enums/HelpTextToken.hpp"
 #include "OpenSHC/Text/ImageHotspot.hpp"
+#include "OpenSHC/Text/LineLayout.hpp"
 #include "OpenSHC/UI/Enums/MenuViewTypeInt.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -20,6 +21,7 @@ namespace OpenSHC {
 namespace Text {
 
     using OpenSHC::Text::ImageHotspot;
+    using OpenSHC::Text::LineLayout;
     using OpenSHC::Text::Enums::HelpTextToken;
     using OpenSHC::UI::Enums::MenuViewTypeInt;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
@@ -33,7 +35,7 @@ namespace Text {
         int customHelpTextLength; // 0x00000004 length: 4
         undefined4 isDialogStateInitialized; // 0x00000008 length: 4
         undefined4 helpDialogVariant; // 0x0000000C length: 4
-        undefined4 useInGameHelpHandler; // 0x00000010 length: 4
+        int useInGameHelpHandler; // 0x00000010 length: 4
         MenuViewTypeInt savedMenuViewType; // 0x00000014 length: 4
         undefined4 savedActiveMenuTab; // 0x00000018 length: 4
         undefined4 savedMenuFlag; // 0x0000001C length: 4
@@ -71,13 +73,13 @@ namespace Text {
         int soundFileCount; // 0x00001494 length: 4
         char graphicFileNames[20][1000]; // 0x00001498 length: 20000
         int graphicFileCount; // 0x000062B8 length: 4
-        short lineLayoutTable[60000]; // 0x000062BC length: 120000
+        LineLayout lineLayoutTable[20000]; // 0x000062BC length: 120000
         int imageHotspotCount; // 0x0002377C length: 4
         ImageHotspot imageHotspotTable[50]; // 0x00023780 length: 400
         wchar_t* intArray1[20]; // 0x00023910 length: 80
         int field48_0x23960; // 0x00023960 length: 4
         int field49_0x23964; // 0x00023964 length: 4
-        int field50_0x23968; // 0x00023968 length: 4
+        int currentLinkId; // 0x00023968 length: 4
         int field51_0x2396c; // 0x0002396C length: 4
         int field52_0x23970; // 0x00023970 length: 4
 
@@ -92,7 +94,7 @@ namespace Text {
         // Constructor
         TextEditorState* Constructor_TextEditorState();
 
-        void setHelpWindowBounds(undefined4 x, undefined4 y, undefined4 height, undefined4 width);
+        void setHelpWindowBounds(int x, int y, int height, int width);
 
         void resetHelpStateFields();
 
@@ -156,17 +158,17 @@ namespace Text {
 
         void loadAndLayoutHelpContent();
 
-        void openBuildingHelpDialog(int param_1);
+        void openBuildingHelpDialog(int sectionId);
 
-        void openInGameHelpDialog(int param_1);
+        void openInGameHelpDialog(int sectionId);
 
-        void openScenarioHelpDialog(int param_1);
+        void openScenarioHelpDialog(int sectionId);
 
-        void openCreditsScrollDialog(int param_1);
+        void openCreditsScrollDialog(int sectionId);
 
-        void openMapDescriptionEditorDialog(int param_1);
+        void openMapDescriptionEditorDialog(int sectionId);
 
-        void setCustomHelpText(char* param_1, undefined4 param_2);
+        void setCustomHelpText(char* helpText, undefined4 bufferSize);
 
         void popHelpDialogStack();
 

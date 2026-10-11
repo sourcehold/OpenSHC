@@ -21,8 +21,8 @@ namespace Text {
             &TextEditorState::Constructor_TextEditorState)
         Constructor_TextEditorState;
 
-        MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(undefined4, undefined4, undefined4, undefined4), false,
-            Address::SHC_3BB0A8C1_0x0045D080, &TextEditorState::setHelpWindowBounds)
+        MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(int, int, int, int), false, Address::SHC_3BB0A8C1_0x0045D080,
+            &TextEditorState::setHelpWindowBounds)
         setHelpWindowBounds;
 
         MACRO_FUNCTION_RESOLVER(void (TextEditorState::*)(), false, Address::SHC_3BB0A8C1_0x0045D0C0,
