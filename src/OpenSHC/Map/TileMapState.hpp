@@ -9,7 +9,6 @@
 #pragma once
 
 #include "OpenSHC/Commands/MappersEnum.hpp"
-#include "OpenSHC/Game/Player/PlayerID.hpp"
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingFailReasonEnumInt.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
@@ -23,7 +22,6 @@ namespace OpenSHC {
 namespace Map {
 
     using OpenSHC::Commands::MappersEnum;
-    using OpenSHC::Game::Player::PlayerID;
     using OpenSHC::IO::PackagedFileMagicNum;
     using OpenSHC::Map::Moat;
     using OpenSHC::Map::PitchDitch;
@@ -68,7 +66,7 @@ namespace Map {
         ushort MiscDisplayLayer[80400]; // 0x00301C80 length: 160800
         byte DamageLayer[80400]; // 0x003290A0 length: 80400
         ushort MacroLayer[80400]; // 0x0033CAB0 length: 160800
-        ushort field30_0x363ed0[80400]; // 0x00363ED0 length: 160800
+        ushort PathConnectionLayer[80400]; // 0x00363ED0 length: 160800
         uchar PathLinkageLayer[80400]; // 0x0038B2F0 length: 80400
         uchar OccupancyLayer[80400]; // 0x0039ED00 length: 80400
         short CertainPathLayer[80400]; // 0x003B2710 length: 160800
@@ -82,7 +80,7 @@ namespace Map {
         undefined4 someLimit; // 0x00500224 length: 4
         undefined4 someYLike; // 0x00500228 length: 4
         undefined4 someYLikeLimit; // 0x0050022C length: 4
-        byte field44_0x500230[40][40]; // 0x00500230 length: 1600
+        byte mapping40x40[40][40]; // 0x00500230 length: 1600
         Moat moats[16000]; // 0x00500870 length: 256000
         int currentMoatCount; // 0x0053F070 length: 4
         undefined4 moatTileCount; // 0x0053F074 length: 4
@@ -148,7 +146,7 @@ namespace Map {
         undefined4 DAT_ClickedTileX; // 0x00554928 length: 4
         undefined4 DAT_ClickedTileY; // 0x0055492C length: 4
         undefined4 skipPlacementCheck; // 0x00554930 length: 4
-        int field123_0x554934; // 0x00554934 length: 4
+        int buildingPlacementFail; // 0x00554934 length: 4
         BuildingFailReasonEnumInt buildingPlacementFailReason; // 0x00554938 length: 4
         undefined4 placementWarning; // 0x0055493C length: 4
         undefined4 uiBuildingRotation; // 0x00554940 length: 4
@@ -634,7 +632,7 @@ namespace Map {
         BOOLEnum prepareAreaForBuildingPlacement(
             int playerID, uint x, uint y, MappersEnum commandBuildingType, int buildingWidthOrHeight);
 
-        void placeBuilding(PlayerID playerID, int x, int y, MappersEnum cbt, int buildingSize, int buildingOrientation);
+        void placeBuilding(int playerID, int x, int y, MappersEnum cbt, int buildingSize, int buildingOrientation);
 
         BOOLEnum processDamageToBuilding(int tile, uint xPosition, uint yPosition, int damageUnk, int param_5,
             int playerID, BOOLEnum aiBuildDelayRelated, int unitID);

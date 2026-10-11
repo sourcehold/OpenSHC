@@ -9,6 +9,7 @@
 #pragma once
 
 #include "OpenSHC/Game/Resources/ResourceTypeShort.hpp"
+#include "OpenSHC/Map/Buildings/BuildingFlagSlot.hpp"
 #include "OpenSHC/Map/Buildings/BuildingLogicalStateShort.hpp"
 #include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
 
@@ -17,6 +18,7 @@ namespace Map {
     namespace Buildings {
 
         using OpenSHC::Game::Resources::ResourceTypeShort;
+        using OpenSHC::Map::Buildings::BuildingFlagSlot;
         using OpenSHC::Map::Buildings::BuildingLogicalStateShort;
         using OpenSHC::Map::Buildings::BuildingTypeShort;
 
@@ -99,8 +101,8 @@ namespace Map {
             ushort microX; // 0x000000E8 length: 2
             ushort microY; // 0x000000EA length: 2
             short terrainHeightUnk; // 0x000000EC length: 2
-            short field96_0xee; // 0x000000EE length: 2
-            short field97_0xf0; // 0x000000F0 length: 2
+            short x; // 0x000000EE length: 2
+            short y; // 0x000000F0 length: 2
             undefined1 padding_0xf2[2]; // 0x000000F2 length: 2
             uint currentTilePositionAdjusted; // 0x000000F4 length: 4
             uint widthOrHeight; // 0x000000F8 length: 4
@@ -191,7 +193,7 @@ namespace Map {
             short campStage; // 0x00000274 length: 2
             short campStagePrevious; // 0x00000276 length: 2
             int buildingProgress; // 0x00000278 length: 4
-            int field197_0x27c; // 0x0000027C length: 4
+            int timeAlive; // 0x0000027C length: 4
             undefined1 padding_0x280[4]; // 0x00000280 length: 4
             int hovelVisualStyle; // 0x00000284 length: 4
             short suppressDestroyRefund; // 0x00000288 length: 2
@@ -204,7 +206,7 @@ namespace Map {
             byte drawBridgeState1; // 0x00000294 length: 1
             byte containsSiegeMangonel1OrBallista2; // 0x00000295 length: 1
             bool sleeping; // 0x00000296 length: 1
-            char field213_0x297; // 0x00000297 length: 1
+            char numberOfAnimals; // 0x00000297 length: 1
             byte dairyProductionStage; // 0x00000298 length: 1
             byte workerRotationIndex; // 0x00000299 length: 1
             short outpostRelatedUnk4; // 0x0000029A length: 2

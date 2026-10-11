@@ -9,7 +9,6 @@
 #pragma once
 
 #include "OpenSHC/Commands/MappersEnum.hpp"
-#include "OpenSHC/Game/Player/PlayerID.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Buildings/Building.hpp"
@@ -23,7 +22,6 @@ namespace Map {
     namespace Buildings {
 
         using OpenSHC::Commands::MappersEnum;
-        using OpenSHC::Game::Player::PlayerID;
         using OpenSHC::Game::Resources::ResourceType;
         using OpenSHC::IO::PackagedFileMagicNum;
         using OpenSHC::Map::Buildings::Building;
@@ -118,15 +116,15 @@ namespace Map {
 
             int getEmptyBuildingCount(int playerID, BuildingType buildingType);
 
-            int countBuildingsForPlayer(PlayerID playerID, BuildingType buildingType, int includeBool);
+            int countBuildingsForPlayer(int playerID, BuildingType buildingType, int includeBool);
 
-            int countFarms(PlayerID playerID, int param_2);
+            int countFarms(int playerID, int param_2);
 
             int findFirstBuildingOfType(int playerID, BuildingType buildingType);
 
             int findFirstBuildingIDForPlayerAndType(int playerID, BuildingType buildingType);
 
-            int findNextBuildingForPlayerAndType(PlayerID playerID, BuildingType buildingType, int buildingID);
+            int findNextBuildingForPlayerAndType(int playerID, BuildingType buildingType, int buildingID);
 
             int findNextBuildingIDForOwnerAndType(int param_1, int param_2, int param_3);
 
@@ -361,7 +359,7 @@ namespace Map {
             BOOLEnum hasBuildingAsNeighbour(int playerID, int x, int y, int size, BuildingType type);
 
             int findParticularBuilding(
-                PlayerID playerID, int x, int y, int buildingSize, BuildingType buildingType, int buildingID);
+                int playerID, int x, int y, int buildingSize, BuildingType buildingType, int buildingID);
 
             int findAccessibleAreaNearBuildingLocation(int x, int y, int buildingSize);
 

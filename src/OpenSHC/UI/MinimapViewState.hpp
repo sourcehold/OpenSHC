@@ -38,7 +38,7 @@ namespace UI {
         undefined4 field13_0x34; // 0x00000034 length: 4
         undefined4 field14_0x38; // 0x00000038 length: 4
         undefined4 minimapClickEnabled; // 0x0000003C length: 4
-        int field16_0x40; // 0x00000040 length: 4
+        int someMiniMapCounterTill4; // 0x00000040 length: 4
         ushort field17_0x44[80000]; // 0x00000044 length: 160000
         ushort minimapPixelBuffer[80000]; // 0x00027144 length: 160000
         short loadedMiniMap[200][200]; // 0x0004E244 length: 80000

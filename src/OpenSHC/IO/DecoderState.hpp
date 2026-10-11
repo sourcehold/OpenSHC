@@ -41,7 +41,7 @@ namespace IO {
 
         int decompressRLE(char* param_1, char* param_2);
 
-        BOOLEnum doImplode(int* ptrHash, int* ptrSize, undefined* src, undefined* dst, int sizeUncompressed);
+        BOOLEnum doImplode(int* ptrHash, int* ptrSize, uchar* src, uchar* dst, int sizeUncompressed);
 
         BOOLEnum doExplode(int* hash, uchar* src, int sizeCompressed, uchar* dst, int sizeUncompressed);
 

@@ -54,8 +54,8 @@ namespace UI {
         MenuModalTypeInt modalDialog_6; // 0x00000070 length: 4
         int fileListEntryCount; // 0x00000074 length: 4
         undefined4 fileListSortOrder; // 0x00000078 length: 4
-        int field34_0x7c; // 0x0000007C length: 4
-        int field35_0x80; // 0x00000080 length: 4
+        int menuLoadGameRelativeSelectionIndex; // 0x0000007C length: 4
+        int menuLoadGameRelativeSelectionOffset; // 0x00000080 length: 4
         undefined4 fileListVisibleRowCount; // 0x00000084 length: 4
         undefined4 DAT_SomeTextArrayIndex; // 0x00000088 length: 4
         undefined4 lastClickedListIndex; // 0x0000008C length: 4
@@ -67,9 +67,9 @@ namespace UI {
         int field44_0xa4; // 0x000000A4 length: 4
         int dialogResult; // 0x000000A8 length: 4
         undefined4 field46_0xac; // 0x000000AC length: 4
-        int field47_0xb0[500]; // 0x000000B0 length: 2000
+        int DAT_ArrayOfMapU3EndInt2[500]; // 0x000000B0 length: 2000
         undefined4 DAT_MapSelectionPreloadMapIndexMapping; // 0x00000880 length: 4
-        int field49_0x884[500]; // 0x00000884 length: 2000
+        int DAT_ArrayOfMapIndices[500]; // 0x00000884 length: 2000
         undefined4 DAT_ArrayOfMapIndices2[500]; // 0x00001054 length: 2000
         undefined1 padding_0x1824[4]; // 0x00001824 length: 4
 

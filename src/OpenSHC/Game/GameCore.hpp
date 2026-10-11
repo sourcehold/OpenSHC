@@ -62,7 +62,7 @@ namespace Game {
         dword historicCampaignNumber; // 0x0000003C length: 4
         int missionNumber1to20; // 0x00000040 length: 4
         ScenarioProgress scenarioProgress; // 0x00000044 length: 16
-        dword furthestMission; // 0x00000054 length: 4
+        int furthestMission; // 0x00000054 length: 4
         dword unlockAllHistoricalCampaigns; // 0x00000058 length: 4
         dword unused1; // 0x0000005C length: 4
         dword section1066; // 0x00000060 length: 4
@@ -83,15 +83,15 @@ namespace Game {
         dword section1127; // 0x0000009C length: 4
         dword field37_0xa0; // 0x000000A0 length: 4
         BOOLEnum currentlyInGameUnk_0xa4; // 0x000000A4 length: 4
-        int field39_0xa8; // 0x000000A8 length: 4
+        int gameSpeedMultiplicator; // 0x000000A8 length: 4
         dword performedGameTicksThisLoop; // 0x000000AC length: 4
         dword gameTicksThisLoop; // 0x000000B0 length: 4
         dword gameTicksLastLoop; // 0x000000B4 length: 4
-        int field43_0xb8; // 0x000000B8 length: 4
+        int averageTimePerGameTick; // 0x000000B8 length: 4
         dword timeBeforeRunningGameTicksThisLoop; // 0x000000BC length: 4
         int countdown; // 0x000000C0 length: 4
         int uniqueGameObjectTracker; // 0x000000C4 length: 4
-        int field47_0xc8; // 0x000000C8 length: 4
+        int gameSpeedLevel; // 0x000000C8 length: 4
         dword settingBubbleHelp; // 0x000000CC length: 4
         BOOLEnum isTimeHalted; // 0x000000D0 length: 4
         dword section1076; // 0x000000D4 length: 4
@@ -144,7 +144,7 @@ namespace Game {
         byte unused_0x1141[1003]; // 0x00001141 length: 1003
         int mapU4Int0; // 0x0000152C length: 4
         int mapU4Int0_2; // 0x00001530 length: 4
-        int field100_0x1534; // 0x00001534 length: 4
+        int U2_mapType_singleOrMulti; // 0x00001534 length: 4
         dword mapU2MiddleBytes[5]; // 0x00001538 length: 20
         int mapU2PlayersCount; // 0x0000154C length: 4
         int mapU4Int3_balanced; // 0x00001550 length: 4
@@ -174,7 +174,7 @@ namespace Game {
         dword skirmishTrailYearReached; // 0x00001F8C length: 4
         dword skirmishTrailStartDateMonths; // 0x00001F90 length: 4
         BOOLEnum isSkirmishTrail; // 0x00001F94 length: 4
-        int field130_0x1f98; // 0x00001F98 length: 4
+        int skirmishTrailProgress; // 0x00001F98 length: 4
         TrailTypeInt currentTrailType; // 0x00001F9C length: 4
         int furthestWarchestTrailMission; // 0x00001FA0 length: 4
         int warchestTrailMonthsTakenOrChicken[50]; // 0x00001FA4 length: 200
@@ -182,7 +182,7 @@ namespace Game {
         dword warchestTrailYearReached; // 0x00002134 length: 4
         dword warchestTrailStartDateMonths; // 0x00002138 length: 4
         dword field137_0x213c; // 0x0000213C length: 4
-        int field138_0x2140; // 0x00002140 length: 4
+        int warchestTrailProgress; // 0x00002140 length: 4
         int furthestExtremeTrailMission; // 0x00002144 length: 4
         int extremeTrailMonthsTakenOrChicken[50]; // 0x00002148 length: 200
         int extremeTrailStartDatesInMonths[50]; // 0x00002210 length: 200

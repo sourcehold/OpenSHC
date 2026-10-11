@@ -3,7 +3,6 @@
 */
 
 #include "OpenSHC/Commands/MappersEnum.hpp"
-#include "OpenSHC/Game/Player/PlayerID.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
@@ -16,7 +15,6 @@ namespace Map {
         namespace BuildingsState_Func {
 
             using OpenSHC::Commands::MappersEnum;
-            using OpenSHC::Game::Player::PlayerID;
             using OpenSHC::Game::Resources::ResourceType;
             using OpenSHC::IO::PackagedFileMagicNum;
             using OpenSHC::Map::Buildings::BuildingType;
@@ -89,12 +87,12 @@ namespace Map {
                 &BuildingsState::getEmptyBuildingCount)
             getEmptyBuildingCount;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(PlayerID, BuildingType, int), false,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingType, int), false,
                 Address::SHC_3BB0A8C1_0x0040A9B0, &BuildingsState::countBuildingsForPlayer)
             countBuildingsForPlayer;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(PlayerID, int), false, Address::SHC_3BB0A8C1_0x0040AA10,
-                &BuildingsState::countFarms)
+            MACRO_FUNCTION_RESOLVER(
+                int (BuildingsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0040AA10, &BuildingsState::countFarms)
             countFarms;
 
             MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingType), false, Address::SHC_3BB0A8C1_0x0040AA80,
@@ -105,7 +103,7 @@ namespace Map {
                 &BuildingsState::findFirstBuildingIDForPlayerAndType)
             findFirstBuildingIDForPlayerAndType;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(PlayerID, BuildingType, int), false,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingType, int), false,
                 Address::SHC_3BB0A8C1_0x0040AB30, &BuildingsState::findNextBuildingForPlayerAndType)
             findNextBuildingForPlayerAndType;
 
@@ -561,7 +559,7 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x0041B940, &BuildingsState::hasBuildingAsNeighbour)
             hasBuildingAsNeighbour;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(PlayerID, int, int, int, BuildingType, int), false,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int, int, int, BuildingType, int), false,
                 Address::SHC_3BB0A8C1_0x0041BA00, &BuildingsState::findParticularBuilding)
             findParticularBuilding;
 

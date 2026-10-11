@@ -119,9 +119,9 @@ namespace Map {
             char BreweryAnimationFrames6[260]; // 0x000055D4 length: 260
             byte AnimTannerSolitary[44]; // 0x000056D8 length: 44
             byte AnimTanner[12]; // 0x00005704 length: 12
-            char field85_0x5710[28]; // 0x00005710 length: 28
-            char field86_0x572c[32]; // 0x0000572C length: 32
-            char field87_0x574c[56]; // 0x0000574C length: 56
+            char AnimTanner3[28]; // 0x00005710 length: 28
+            char AnimTanner4[32]; // 0x0000572C length: 32
+            char AnimTannerSolitary2[56]; // 0x0000574C length: 56
             byte AnimTanner2[16]; // 0x00005784 length: 16
             byte TannersWorkshopAnimationFrames1[92]; // 0x00005794 length: 92
             byte TannersWorkshopAnimationFrames2[36]; // 0x000057F0 length: 36

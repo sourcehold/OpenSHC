@@ -26,7 +26,7 @@ namespace Game {
             byte magic; // 0x00000009 length: 1
             byte repeat; // 0x0000000A length: 1
             byte repeatMonths; // 0x0000000B length: 1
-            ScenarioEventCondition field6_0xc[40]; // 0x0000000C length: 160
+            ScenarioEventCondition conditions[40]; // 0x0000000C length: 160
             undefined1 padding_0xac[40]; // 0x000000AC length: 40
 
         } IngameScenarioEventItemContent;
