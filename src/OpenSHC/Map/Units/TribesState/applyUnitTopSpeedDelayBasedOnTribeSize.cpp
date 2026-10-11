@@ -27,7 +27,7 @@ namespace Map {
             short* _ptrMovementDistance;
             int _unitSelectionIndex;
             short _distance;
-            bool _foundUnsortedEntry;
+            int _foundUnsortedEntry;
             short _nextUnitID;
             short* _tribeSize;
             short _unitID;
@@ -69,7 +69,7 @@ namespace Map {
                     /*
                       Do a sort of the array, sort by distance value (low to high)
                      */
-                    _foundUnsortedEntry = false;
+                    _foundUnsortedEntry = 0;
                     /*
                       fixme:reuse: WARNING reuse of parameter
                      */
@@ -83,7 +83,7 @@ namespace Map {
                         _unitID = pUVar2->movementDistance;
                         _nextUnitID = pUVar2[1].movementDistance;
                         if ((!param_2) && (_nextUnitID < _unitID)) {
-                            _foundUnsortedEntry = true;
+                            _foundUnsortedEntry = 1;
                             pUVar2->unitID = _nextUnit->unitID;
                             _nextUnit->unitID = _distance;
                             pUVar2->movementDistance = _nextUnitID;

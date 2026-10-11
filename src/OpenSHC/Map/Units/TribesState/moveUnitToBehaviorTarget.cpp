@@ -26,7 +26,7 @@ namespace Map {
         {
             int iVar4;
             short sVar1 = DAT_UnitsState::instance.units[unitID].tribeID;
-            bool bVar3 = false;
+            int bVar3 = 0;
             uint x = 0;
             uint uVar6 = 0;
             uint local_c = 0;
@@ -109,7 +109,7 @@ namespace Map {
                 local_c = DAT_TroopValueState::instance.y;
             }
         LAB_0052142a:
-            bVar3 = true;
+            bVar3 = 1;
             x = DAT_TroopValueState::instance.x;
             uVar6 = DAT_TroopValueState::instance.tile;
         LAB_0052143b:
