@@ -16,7 +16,7 @@ namespace Game {
     {
         ++this->missionNumber1to20;
         MACRO_CALL_MEMBER(GameCore_Func::removeLadyAndJester, this)();
-        if (!this->unlockAllHistoricalCampaigns && this->missionNumber1to20 > (int)this->furthestMission) {
+        if (!this->unlockAllHistoricalCampaigns && this->missionNumber1to20 > this->furthestMission) {
             this->furthestMission = this->missionNumber1to20;
         }
         MACRO_CALL_MEMBER(IO::SettingsFileState_Func::writeUserConfig, DAT_SettingsFileState::ptr)();
