@@ -159,17 +159,17 @@ namespace Map {
         if (sVar2 == 5) {
             uVar3 = DAT_BuildingsState::instance.buildings[_currentBuildingID].timeAlive;
             if (uVar3 != 1) {
-                if ((int)uVar3 < 0x12d)
+                if ((int)uVar3 <= 0x12c)
                     goto LAB_00418476;
                 DAT_BuildingsState::instance.buildings[_currentBuildingID].timeAlive = 0;
                 DAT_BuildingsState::instance.buildings[_currentBuildingID].buildingProgress
                     = DAT_BuildingsState::instance.buildings[_currentBuildingID].buildingProgress + 1;
-                if (DAT_BuildingsState::instance.buildings[_currentBuildingID].buildingProgress < 6) {
-                LAB_0041845a:
-                    _ownerPlayerIndex = DAT_BuildingsState::instance.buildings[_currentBuildingID].campStage;
-                } else {
+                if (5 < DAT_BuildingsState::instance.buildings[_currentBuildingID].buildingProgress) {
                     _ownerPlayerIndex = 6;
                     DAT_BuildingsState::instance.buildings[_currentBuildingID].buildingProgress = 0;
+                } else {
+                LAB_0041845a:
+                    _ownerPlayerIndex = DAT_BuildingsState::instance.buildings[_currentBuildingID].campStage;
                 }
             LAB_00418461:
                 DAT_BuildingsState::instance.buildings[_currentBuildingID].campStagePrevious
@@ -183,12 +183,12 @@ namespace Map {
                 goto LAB_00418476;
             uVar3 = DAT_BuildingsState::instance.buildings[_currentBuildingID].timeAlive;
             if (uVar3 != 1) {
-                if ((int)uVar3 < 0x51)
+                if ((int)uVar3 <= 0x50)
                     goto LAB_00418476;
                 DAT_BuildingsState::instance.buildings[_currentBuildingID].timeAlive = 0;
                 DAT_BuildingsState::instance.buildings[_currentBuildingID].buildingProgress
                     = DAT_BuildingsState::instance.buildings[_currentBuildingID].buildingProgress + 1;
-                if (DAT_BuildingsState::instance.buildings[_currentBuildingID].buildingProgress < 0xd)
+                if (DAT_BuildingsState::instance.buildings[_currentBuildingID].buildingProgress <= 0xc)
                     goto LAB_0041845a;
                 _ownerPlayerIndex = 2;
                 DAT_BuildingsState::instance.buildings[_currentBuildingID].buildingProgress = 0;
