@@ -100,7 +100,7 @@ namespace UI {
             int iVar14;
             int bVar15;
             int bVar16;
-            int bVar17;
+            bool bVar17;
             int bVar18;
             int local_20;
             int* local_18;
@@ -112,7 +112,7 @@ namespace UI {
             DWORD DVar7 = timeGetTime();
             local_20 = -2;
             bVar16 = 0;
-            bVar17 = 0;
+            bVar17 = false;
             bVar18 = 0;
             bVar15 = 0;
             int bVar6 = 0;
@@ -322,7 +322,7 @@ namespace UI {
                 local_20 = 2;
                 DAT_TileMapState::instance.cursorOverlayImageBase = 0x20;
                 bVar18 = 0;
-                bVar17 = 0;
+                bVar17 = false;
                 if (DAT_TileMapState::instance.activeTacticalPower == 6
                     && (DAT_TileMapState::instance
                             .LogicLayer[DAT_ViewportRenderState::instance.viewportState.mouseAtomRefFloorTile]
@@ -346,7 +346,7 @@ namespace UI {
                                   .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                                   .keep.xEntry;
                         _yDifference = _yDifference * _yDifference + iVar14 * iVar14;
-                        bVar17 = 1;
+                        bVar17 = true;
                         if (DAT_TileMapState::instance.activeTacticalPower == 3) {
                             bVar18 = (_yDifference < 0x3100);
                             iVar14 = -0x3100;
@@ -763,7 +763,7 @@ namespace UI {
                             case Map::Buildings::BT_TOWER5:
                                 break;
                             default:
-                                bVar17 = 1;
+                                bVar17 = true;
                                 goto LAB_00435e83;
                             }
                         }
@@ -1509,7 +1509,7 @@ namespace UI {
                     goto LAB_00436953;
                 bVar18 = 0;
                 while (true) {
-                    bVar17 = 0;
+                    bVar17 = false;
                     flag1003 = DAT_TileMapState::instance
                                    .LogicLayer[DAT_ViewportRenderState::instance.viewportState.cursorTile];
                     uVar1 = (short)DAT_TileMapState::instance
@@ -1540,12 +1540,12 @@ namespace UI {
                     BVar8 = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::isTowerTileOvercrowdedByCurrentPlayer,
                         DAT_UnitsState::ptr)(DAT_ViewportRenderState::instance.viewportState.cursorTile);
                     if (BVar8) {
-                        bVar17 = 0;
+                        bVar17 = false;
                     }
                     _specificRange = MACRO_CALL_MEMBER(
                         Map::Units::UnitsState_Func::selectionHasMovableNonSiegeUnit, DAT_UnitsState::ptr)();
                     if (!_specificRange) {
-                        bVar17 = 0;
+                        bVar17 = false;
                     }
                     _yDifference = MACRO_CALL_MEMBER(
                         Map::Units::UnitsState_Func::selectionHasMixedAssaultAndInfantry, DAT_UnitsState::ptr)();
@@ -1565,7 +1565,7 @@ namespace UI {
                                             [DAT_ViewportRenderState::instance.viewportState.mouseAtomRefFloorTile]),
                                     100000),
                                 _yDifference == 0)) {
-                            bVar17 = 0;
+                            bVar17 = false;
                         }
                     }
                     _otherUnitIDUnk = MACRO_CALL_MEMBER(
@@ -1629,7 +1629,7 @@ namespace UI {
                     local_20 = 2;
                     goto LAB_00436d8a;
                 }
-                bVar17 = 1;
+                bVar17 = true;
             LAB_00436b8a:
                 if (DAT_ViewportRenderState::instance.viewportState.field27_0x6c == 1) {
                     DAT_TileMapState::instance.pendingUnitCommand = -1;
