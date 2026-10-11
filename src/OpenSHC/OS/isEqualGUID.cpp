@@ -22,7 +22,7 @@ BOOLEnum OS::isEqualGUID(GUID* param_1, GUID* param_2)
         uVar3 = uVar3 - 4;
         param_2 = (GUID*)&param_2->Data2;
         param_1 = (GUID*)&param_1->Data2;
-    } while (3 < uVar3);
+    } while (4 <= uVar3);
     if (!uVar3) {
     LAB_0047c65f:
         bVar1 = false;
