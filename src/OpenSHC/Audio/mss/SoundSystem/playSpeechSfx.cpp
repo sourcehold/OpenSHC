@@ -39,7 +39,8 @@ namespace Audio {
             this->streamFileVolumeNextUnk_0x48[4] = nextVolume;
             MACRO_CALL_MEMBER(SoundSystem_Func::playSoundStreamUnk, this)(
                 (SHC_SoundStream)DAT_SFXDefinedData::instance.speechStreamCursor, soundFileName, 1);
-            DAT_SoundSystemState::instance.lastUsedSpeechStreamUnk_0x3284 = DAT_SFXDefinedData::instance.speechStreamCursor;
+            DAT_SoundSystemState::instance.lastUsedSpeechStreamUnk_0x3284
+                = DAT_SFXDefinedData::instance.speechStreamCursor;
         }
     }
 

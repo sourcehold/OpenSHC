@@ -23,10 +23,12 @@ namespace Audio {
             if (this->musicFadeState == 1) {
                 this->streamFileVolumeNextUnk_0x48[0] = 0;
             } else {
-                this->streamFileVolumeNextUnk_0x48[0] = (this->musicVolumePercent * this->currIdSoundFileVolumeUnk_0x150) / 100;
+                this->streamFileVolumeNextUnk_0x48[0]
+                    = (this->musicVolumePercent * this->currIdSoundFileVolumeUnk_0x150) / 100;
             }
             MACRO_CALL_MEMBER(SoundSystem_Func::playSoundStreamUnk, this)(enums::SND_STR_MUSIC, filename, 0);
-            this->streamFileVolumeNextUnk_0x48[0] = (this->musicVolumePercent * this->currIdSoundFileVolumeUnk_0x150) / 100;
+            this->streamFileVolumeNextUnk_0x48[0]
+                = (this->musicVolumePercent * this->currIdSoundFileVolumeUnk_0x150) / 100;
         }
 
     }

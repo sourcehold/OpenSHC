@@ -152,8 +152,8 @@ namespace Audio {
                         if (DAT_SoundEffectsHelperData1::instance.playerTroopValueBaseline < 1) {
                             DAT_SoundEffectsHelperData1::instance.playerTroopValueBaseline = 1;
                         }
-                        int somePercentage1
-                            = (currentPlayerTotalTroopValue * 100) / DAT_SoundEffectsHelperData1::instance.playerTroopValueBaseline;
+                        int somePercentage1 = (currentPlayerTotalTroopValue * 100)
+                            / DAT_SoundEffectsHelperData1::instance.playerTroopValueBaseline;
                         if (100 < somePercentage1) {
                             somePercentage1 = 100;
                         }
@@ -215,8 +215,8 @@ namespace Audio {
                     return;
                 }
 
-                if (timeGetTime() - this->lastMusicChangeTime
-                    <= DAT_SFXDefinedData::instance.MusicDelays[DAT_SoundEffectsHelperData1::instance.musicDelayIndex]) {
+                if (timeGetTime() - this->lastMusicChangeTime <= DAT_SFXDefinedData::instance
+                        .MusicDelays[DAT_SoundEffectsHelperData1::instance.musicDelayIndex]) {
                     return;
                 }
 
@@ -290,8 +290,8 @@ namespace Audio {
                     return;
                 }
 
-                if (timeGetTime() - this->lastMusicChangeTime
-                    <= DAT_SFXDefinedData::instance.MusicDelays[DAT_SoundEffectsHelperData1::instance.musicDelayIndex]) {
+                if (timeGetTime() - this->lastMusicChangeTime <= DAT_SFXDefinedData::instance
+                        .MusicDelays[DAT_SoundEffectsHelperData1::instance.musicDelayIndex]) {
                     return;
                 }
 

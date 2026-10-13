@@ -18,8 +18,8 @@ namespace Audio {
                 return;
             }
             DAT_SoundSystemState::instance.streamFileVolumeNextUnk_0x48[1]
-                = DAT_SpeechDefinedData::instance.AmbientSounds[ambientSoundIndexUnk]
-                      .volumeUnk_0x28[DAT_SpeechDefinedData::instance.AmbientSounds[ambientSoundIndexUnk].variationIndex];
+                = DAT_SpeechDefinedData::instance.AmbientSounds[ambientSoundIndexUnk].volumeUnk_0x28
+                      [DAT_SpeechDefinedData::instance.AmbientSounds[ambientSoundIndexUnk].variationIndex];
             if (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_HISTORIC_MISSION_PICTURE
                 || DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_HISTORIC_MISSION_INTRO
                 || DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_HISTORIC_CAMPAIGN_INTRO) {

@@ -184,8 +184,7 @@ namespace Audio {
             int numberOfVariations = DAT_SpeechDefinedData::instance.UnitSpeech[actionID].numberOfVariations;
             if (1 < numberOfVariations) {
                 /* Calculate action speech variation. */
-                variationIndex
-                    = DAT_SpeechDefinedData::instance.UnitSpeech[actionID].variationCounter[_soundSet]++;
+                variationIndex = DAT_SpeechDefinedData::instance.UnitSpeech[actionID].variationCounter[_soundSet]++;
                 if (DAT_SpeechDefinedData::instance.UnitSpeech[actionID].variationCounter[_soundSet]
                     >= numberOfVariations) {
                     DAT_SpeechDefinedData::instance.UnitSpeech[actionID].variationCounter[_soundSet] = 0;

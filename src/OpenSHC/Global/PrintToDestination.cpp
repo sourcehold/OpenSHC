@@ -4,11 +4,11 @@
 namespace OpenSHC {
 
 // FUNCTION: STRONGHOLDCRUSADER 0x0045D060
-void Global::PrintToDestination(wchar_t* destination, wchar_t* format, ...)
+void Global::PrintToDestination(wchar_t* destination, wchar_t const* format, ...)
 {
     va_list args;
     va_start(args, format);
-    MACRO_CALL(OpenSHC::OS_Func::__vswprintf)(destination, format, args);
+    MACRO_CALL(OpenSHC::OS_Func::__vswprintf)(destination, (wchar_t*)format, args);
 }
 
 }
