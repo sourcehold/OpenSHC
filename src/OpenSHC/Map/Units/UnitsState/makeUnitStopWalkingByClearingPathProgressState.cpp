@@ -9,7 +9,7 @@ namespace Map {
         {
             this->units[unitID].currentIndexInPathPlan = 0;
             this->units[unitID].totalSizeOfPathPlan = 0;
-            this->units[unitID].unknownMovementRelated_0x2d2 = 0;
+            this->units[unitID].movementCooldown = 0;
             this->units[unitID].climbDataID = 0;
         }
 

@@ -36,12 +36,12 @@ namespace Text {
             = DAT_TextInputDefinedData::instance
                   .CharToImageSeqIDMapping[DAT_TextManagerObject::instance.alternativeCodePageUsedUnk][charId];
 
-        if (_xPos + this->whiteSpaceWidth_0x1c * 5 > DAT_TextManagerObject::instance.field2_0x8
-            && _xPos < DAT_TextManagerObject::instance.field3_0xc) {
+        if (_xPos + this->whiteSpaceWidth_0x1c * 5 > DAT_TextManagerObject::instance.textClipMin
+            && _xPos < DAT_TextManagerObject::instance.textClipMax) {
 
             if (imageSeqID == -1) {
                 if (charId >= ' ') {
-                    if (DAT_TextManagerObject::instance.field6_0x18 != 0) {
+                    if (DAT_TextManagerObject::instance.helpTextLinkActive != 0) {
                         MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
                             _xPos, this->baselineOffset_0x10 + 2 + _yPos, this->whiteSpaceWidth_0x1c + _xPos,
                             this->baselineOffset_0x10 + 2 + _yPos, _fillColorUnk);

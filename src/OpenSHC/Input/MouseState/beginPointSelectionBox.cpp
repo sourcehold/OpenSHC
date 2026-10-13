@@ -34,7 +34,7 @@ namespace Input {
             this->selectionBox.bottom = this->previousSelectionBox.bottom;
         }
 
-        DAT_MouseState::instance.field31_0x94 = 0;
+        DAT_MouseState::instance.selectionBoxState = 0;
         DAT_MouseState::instance.selectionBoxMode = 1;
     }
 

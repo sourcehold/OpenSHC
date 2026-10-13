@@ -18,7 +18,7 @@ namespace Audio {
         // FUNCTION: STRONGHOLDCRUSADER 0x0047BF20
         void SoundSystem::playRandomBackgroundMusicUnk()
         {
-            if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.field0_0x0 != 5) {
+            if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.musicState != 5) {
                 return;
             }
 
@@ -29,9 +29,9 @@ namespace Audio {
             //   this state and maybe one day tackled again when the last once are cleaned up.
             if (!MACRO_CALL_MEMBER(Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()
                 && (DAT_GameCore::instance.currentMenuViewType != UI::Enums::MVT_SCENARIO_DESCRIPTION
-                    || !DAT_GameCore::instance.field22_0x64)) {
-                if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.field0_0x0 == 5) {
-                    DAT_SoundEffectsHelperData1::instance.SEC_Section1079.field0_0x0 = 1;
+                    || !DAT_GameCore::instance.gameSuspended)) {
+                if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.musicState == 5) {
+                    DAT_SoundEffectsHelperData1::instance.SEC_Section1079.musicState = 1;
                 }
                 return;
             }
@@ -97,7 +97,7 @@ namespace Audio {
                     return;
                 }
             } else if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.volumeLevel == 1) {
-                if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.field6_0x18 == 0) {
+                if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.battleEndHandled == 0) {
                     if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.musicTracker == 0) {
                         MACRO_CALL_MEMBER(SoundSystem_Func::openSound, this)(
                             DAT_SFXDefinedData::instance.Pointers[30].musicFile);
@@ -117,10 +117,10 @@ namespace Audio {
                     }
                     return;
                 }
-                DAT_SoundEffectsHelperData1::instance.SEC_Section1079.field0_0x0 = 1;
+                DAT_SoundEffectsHelperData1::instance.SEC_Section1079.musicState = 1;
                 bVar7 = false;
             } else {
-                if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.field6_0x18 == 0) {
+                if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.battleEndHandled == 0) {
                     if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.musicTracker == 0) {
                         if (this->sec_Section1055_0x3274 != 25) {
                             MACRO_CALL_MEMBER(SoundSystem_Func::openSound, this)(
@@ -160,8 +160,8 @@ namespace Audio {
                                     continue;
                                 }
                                 int iVar1 = DAT_SFXDefinedData::instance.field3_0x4a4[i];
-                                int field6_0x34 = DAT_SoundEffectsHelperData1::instance.field6_0x34;
-                                if ((iVar1 == 1 && iVar1 == field6_0x34) || (iVar1 == 2 && iVar1 == field6_0x34)) {
+                                int battleMoodState = DAT_SoundEffectsHelperData1::instance.battleMoodState;
+                                if ((iVar1 == 1 && iVar1 == battleMoodState) || (iVar1 == 2 && iVar1 == battleMoodState)) {
                                     continue;
                                 }
                                 aiStack_50[iVar6++] = i;
@@ -189,7 +189,7 @@ namespace Audio {
                         return;
                     }
                 } else {
-                    DAT_SoundEffectsHelperData1::instance.SEC_Section1079.field0_0x0 = 1;
+                    DAT_SoundEffectsHelperData1::instance.SEC_Section1079.musicState = 1;
                     bVar7 = false;
                 }
             }

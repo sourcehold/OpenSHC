@@ -19,7 +19,7 @@ namespace Input {
         this->previousSelectionBox.bottom = 0;
 
         DAT_MouseState::instance.selectionBoxMode = 0;
-        DAT_MouseState::instance.field31_0x94 = 0;
+        DAT_MouseState::instance.selectionBoxState = 0;
     }
 
 }

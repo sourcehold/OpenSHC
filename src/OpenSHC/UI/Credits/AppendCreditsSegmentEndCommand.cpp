@@ -11,7 +11,7 @@ namespace UI {
         void AppendCreditsSegmentEndCommand()
         {
             if ((int)DAT_UnknownBinkCount::instance < 288) {
-                DAT_ARRAY_00eb9b68::instance[DAT_UnknownBinkCount::instance].field0_0x0 = 0x1f;
+                DAT_ARRAY_00eb9b68::instance[DAT_UnknownBinkCount::instance].commandType = 0x1f;
                 DAT_UnknownBinkCount::instance += 1;
             }
         }

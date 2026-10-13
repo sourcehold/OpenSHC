@@ -14,7 +14,7 @@ namespace UI {
         void AppendCreditsSoundStreamCommand(int command, SHC_SoundStream soundStream)
         {
             if ((int)DAT_UnknownBinkCount::instance < 288) {
-                DAT_ARRAY_00eb9b68::instance[DAT_UnknownBinkCount::instance].field0_0x0 = command;
+                DAT_ARRAY_00eb9b68::instance[DAT_UnknownBinkCount::instance].commandType = command;
                 DAT_ARRAY_00eb9b68::instance[DAT_UnknownBinkCount::instance].soundStream = soundStream;
                 DAT_UnknownBinkCount::instance += 1;
             }

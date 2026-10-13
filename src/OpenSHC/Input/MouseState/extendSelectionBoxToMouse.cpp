@@ -34,7 +34,7 @@ namespace Input {
             this->selectionBox.left, this->selectionBox.top, this->selectionBox.right, this->selectionBox.bottom);
 
         if (16 < DAT_DirectionAlgorithmState::instance.distanceHigh) {
-            DAT_MouseState::instance.field31_0x94 = 1;
+            DAT_MouseState::instance.selectionBoxState = 1;
         }
     }
 

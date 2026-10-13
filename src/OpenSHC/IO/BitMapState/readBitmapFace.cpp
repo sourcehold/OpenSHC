@@ -30,7 +30,7 @@ namespace IO {
                 }
             }
         }
-        DAT_TextureRenderCoreObject::instance.field69_0x98[faceIndex] = FACE_SIZE;
+        DAT_TextureRenderCoreObject::instance.bitmapFaceSizes[faceIndex] = FACE_SIZE;
         MACRO_CALL(OS_Func::_memcpy)(
             (void*)((int)DAT_TextureRenderCoreObject::instance.bitmapsFaces_0x94 + faceIndex * FACE_SIZE),
             copySurfaceOrigin, FACE_SIZE);

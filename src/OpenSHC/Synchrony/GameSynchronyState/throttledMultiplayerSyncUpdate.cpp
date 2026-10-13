@@ -16,8 +16,8 @@ namespace Synchrony {
             return;
         }
         DWORD const now = timeGetTime();
-        if (now - this->field309_0x109e94 > 10) {
-            this->field309_0x109e94 = now;
+        if (now - this->lastCommandReceiveTime > 10) {
+            this->lastCommandReceiveTime = now;
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::sendPeriodicSyncMessages, this)();
         }
     }
