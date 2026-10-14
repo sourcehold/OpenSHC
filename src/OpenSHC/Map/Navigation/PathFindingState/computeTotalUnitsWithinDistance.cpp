@@ -83,7 +83,7 @@ namespace Map {
                     if (0x13a10 < (int)this->searchQueue.currentDistance) {
                         return;
                     }
-                    if (this->searchQueue.currentDistance > distance) {
+                    if ((int)this->searchQueue.currentDistance > distance) {
                         return;
                     }
                     byte bVar1 = DAT_TileMapState::instance.PathLinkageLayer[uVar4];
