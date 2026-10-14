@@ -47,7 +47,7 @@ namespace Map {
                                     || (DAT_GameState::instance.mapAndTime.playerTeams[this->climbData[iVar7].owner]
                                         == DAT_GameState::instance.mapAndTime.playerTeams[playerID]))
                                 || (DAT_BuildingsState::instance.buildings[this->climbData[iVar7].buildingID]
-                                        .field241_0x2c6
+                                        .field239_0x2c6
                                     != 0))) {
                             aiStack_640[local_96c * 2 + 1] = 0;
                             aiStack_640[local_96c * 2] = iVar7;
