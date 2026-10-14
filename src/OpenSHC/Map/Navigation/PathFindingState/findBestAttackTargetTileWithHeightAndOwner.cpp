@@ -88,7 +88,7 @@ namespace Map {
                     uint uVar8 = DAT_TileMapState::instance.LogicLayer[uVar4];
                     uint uVar11 = (uint) * (byte*)(param_7 * 0x13a10 + 0x1ee2998 + uVar4);
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[uVar4];
-                    if (this->searchQueue.currentDistance <= param_1) {
+                    if ((int)this->searchQueue.currentDistance <= param_1) {
                         if ((DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY)
                             && (7 < param_6)) {
                             uVar11 = 1;
@@ -113,9 +113,9 @@ namespace Map {
                                     if ((uVar8 & 0x400) == 0) {
                                         iVar9 = 0x4b;
                                     }
-                                    if (this->searchQueue.currentDistance < 1) {
+                                    if ((int)this->searchQueue.currentDistance < 1) {
                                         iVar9 = 100000;
-                                    } else if (this->searchQueue.currentDistance < 0x10) {
+                                    } else if ((int)this->searchQueue.currentDistance < 0x10) {
                                         iVar9 = (iVar9 + -100) * this->searchQueue.currentDistance + 0x5dc;
                                     } else {
                                         iVar9 = this->searchQueue.currentDistance * iVar9;
@@ -126,16 +126,16 @@ namespace Map {
                                 && param_9 == 0) {
                                 iVar9 = (uint)DAT_TileMapState::instance.HeightLayer[uVar4]
                                     - (uint)DAT_TileMapState::instance.DefaultHeightLayer[uVar4];
-                                if (this->searchQueue.currentDistance < 1) {
+                                if ((int)this->searchQueue.currentDistance < 1) {
                                     iVar9 = 100000;
-                                } else if (this->searchQueue.currentDistance < 0x10) {
+                                } else if ((int)this->searchQueue.currentDistance < 0x10) {
                                     iVar9 = (0x14 - this->searchQueue.currentDistance) * 300 + iVar9;
                                 } else {
                                     iVar9 = this->searchQueue.currentDistance * 100 + iVar9;
                                 }
                             LAB_004a62e3:
                                 if (iVar9 < local_20
-                                    && (iVar7 = MACRO_CALL(OpenSHC::Map::Navigation_Func::calcApproxEuclideanDistance)(
+                                    && (iVar7 = MACRO_CALL(OpenSHC::Map::Navigation_Func::CalcApproxEuclideanDistance)(
                                             param_2, (int)(sVar1), (int)(param_3), iVar6),
                                         iVar7 <= param_1)) {
                                     local_20 = iVar9;
