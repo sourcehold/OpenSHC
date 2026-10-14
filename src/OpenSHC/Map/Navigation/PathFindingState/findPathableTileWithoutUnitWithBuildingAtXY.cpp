@@ -78,7 +78,7 @@ namespace Map {
                         if (0x13a10 < (int)this->searchQueue.currentDistance) {
                             return;
                         }
-                        if (0x19 < this->searchQueue.currentDistance) {
+                        if (0x19 < (int)this->searchQueue.currentDistance) {
                             return;
                         }
                         for (int _direction = 0; _direction < 8; _direction = _direction + 2) {
