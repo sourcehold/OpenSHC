@@ -90,7 +90,7 @@ namespace Map {
                         this->searchQueue.yQueue[this->searchQueue.writeIndex] = *psVar6 + sVar1;
                         this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar8;
                         this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                        if (80400 < this->searchQueue.writeIndex) {
+                        if (80400 <= (int)this->searchQueue.writeIndex) {
                             this->searchQueue.writeIndex = 0;
                         }
                     }
