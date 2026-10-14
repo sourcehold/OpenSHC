@@ -31,7 +31,7 @@ namespace Map {
                 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y2 * 400 + x2] != '\0') {
                 uint tile = DAT_ViewportRenderState::instance.translationMatrix[y2].addXgetTile + x2;
                 int iVar2 = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
-                short sVar1 = DAT_TileMapState::instance.WalkLayer[tile];
+                int sVar1 = DAT_TileMapState::instance.WalkLayer[tile];
                 x2 = 0;
                 this->field49_0x94 = 0;
                 y = (int)DAT_TileMapState::instance.CertainPathLayer[tile];
