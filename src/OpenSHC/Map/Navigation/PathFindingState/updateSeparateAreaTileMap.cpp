@@ -59,8 +59,8 @@ namespace Map {
             int* _tilesQueue = this->searchQueue.tilesQueue;
             short* _yQueue = this->searchQueue.yQueue;
             int* _dirMatrix = &DAT_TileMapState::instance.directionTranslationMatrix[0][0];
-            short _areaID = 1;
-            short _row = 0;
+            int _areaID = 1;
+            int _row = 0;
             int* _rowEnd = &DAT_ViewportRenderState::instance.translationMatrix[1].firstTileOfRow;
             for (int _first = 0; _first < 80400; _first = _first + 1) {
                 if (*_rowEnd <= _first) {
