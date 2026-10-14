@@ -105,7 +105,7 @@ namespace Map {
                                 + sVar3;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar5;
                             this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                            if (80400 < this->searchQueue.writeIndex) {
+                            if (80400 <= (int)this->searchQueue.writeIndex) {
                                 this->searchQueue.writeIndex = 0;
                             }
                         }
