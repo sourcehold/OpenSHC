@@ -57,7 +57,7 @@ namespace Map {
                     _x = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                     _y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
-                    if (this->searchQueue.currentDistance > maxDistance) {
+                    if ((int)this->searchQueue.currentDistance > maxDistance) {
                         return;
                     }
                     _index = 0;
