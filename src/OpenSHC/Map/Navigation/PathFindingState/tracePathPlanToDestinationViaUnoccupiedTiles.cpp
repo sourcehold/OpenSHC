@@ -21,9 +21,24 @@ namespace Map {
         /*
              @return bool whether destination was reached   decompilerscript: committed: 2025-01-30 21:57:43.216000
          */
+#pragma optimize("y", off) // original keeps an ebp frame
         // FUNCTION: STRONGHOLDCRUSADER 0x0049A370
         BOOLEnum PathFindingState::tracePathPlanToDestinationViaUnoccupiedTiles(uint x, uint y, uint destX, uint destY)
         {
+            byte* _pPathPlan;
+            int _budget;
+            int _direction;
+            uint _ppIndexInit;
+            uint _ppIndex;
+            Point8* _cardinal;
+            int* _dirMatrix;
+            uchar* _linkage;
+            uchar* _occupancy;
+            int _fireCount;
+            int _destTile;
+            uint _gen;
+            int _tile;
+            short* _walkLayer;
             if (399 < x || 399 < y || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
                 return FALSE;
             }
@@ -37,40 +52,30 @@ namespace Map {
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                     0x27420, '\0', (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
             }
-            /*
-              The original keeps every layer base and both end points in its own stack slot for the
-              whole walk rather than reloading the globals, so they are locals here too.
-             */
-            int _budget = 0;
-            uint _ppIndex = 0;
-            int _direction = 0;
-            uint _gen = (ushort)this->searchGeneration;
-            int _fireCount = DAT_EntityState::instance.fireCount;
-            short* _walkLayer = DAT_TileMapState::instance.WalkLayer;
-            uchar* _occupancy = DAT_TileMapState::instance.OccupancyLayer;
-            uchar* _linkage = DAT_TileMapState::instance.PathLinkageLayer;
-            int* _dirMatrix = &DAT_TileMapState::instance.directionTranslationMatrix[0][0];
-            Point8* _cardinal = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix;
-            int _tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
-            int _destTile = DAT_ViewportRenderState::instance.translationMatrix[destY].addXgetTile + destX;
-            byte* _pPathPlan = this->searchQueue.ptrPathPlan;
+            _budget = 0;
+            _ppIndexInit = 0;
+            _direction = 0;
+            _gen = (ushort)this->searchGeneration;
+            _fireCount = DAT_EntityState::instance.fireCount;
+            _tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+            _destTile = DAT_ViewportRenderState::instance.translationMatrix[destY].addXgetTile + destX;
+            _occupancy = DAT_TileMapState::instance.OccupancyLayer;
+            _walkLayer = DAT_TileMapState::instance.WalkLayer;
+            _linkage = DAT_TileMapState::instance.PathLinkageLayer;
+            _dirMatrix = &DAT_TileMapState::instance.directionTranslationMatrix[0][0];
+            _cardinal = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix;
             _ppIndex = this->searchQueue.pathPlanIndex;
+            _pPathPlan = this->searchQueue.ptrPathPlan;
             while (true) {
                 _budget = _budget + 1;
                 if (399 < _budget) {
                     break;
                 }
                 _walkLayer[_tile] = (short)_gen;
-                /*
-                  tile2 matches tile ?
-                 */
                 if (_tile == _destTile) {
                     this->searchQueue.pathPlanIndex = _ppIndex;
                     return TRUE;
                 }
-                /*
-                  tile is occupied and fire?
-                 */
                 if (_fireCount != 0 && _occupancy[_tile] != '\0') {
                     break;
                 }
@@ -107,21 +112,12 @@ namespace Map {
                     _direction = 2;
                     _canTraverseThisDirection = _canTraverseThisDirection & 4;
                 }
-                /*
-                  if cannot go any direction, stop
-                 */
                 if (_canTraverseThisDirection == 0) {
                     break;
                 }
-                /*
-                  update tile with new direction
-                 */
                 _tile = _tile + _dirMatrix[y * 8 + _direction];
                 x = x + _cardinal[_direction].int_.xOffset;
                 y = y + _cardinal[_direction].int_.yOffset;
-                /*
-                  store direction in path plan
-                 */
                 if ((_ppIndex & 1) == 0) {
                     _pPathPlan[_ppIndex >> 1] = (byte)_direction;
                 } else {
@@ -133,5 +129,6 @@ namespace Map {
             return FALSE;
         }
     }
+#pragma optimize("", on)
 }
 }
