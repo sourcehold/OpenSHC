@@ -75,7 +75,7 @@ namespace Map {
                             }
                             DAT_TileMapState::instance.CertainPathLayer[tile]
                                 = (short)this->searchQueue.currentDistance + 1;
-                            short sVar3 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar6]
+                            int sVar3 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar6]
                                               .short_.xOffset;
                             DAT_TileMapState::instance.WalkLayer[tile] = (short)this->searchGeneration;
                             this->searchQueue.xQueue[this->searchQueue.writeIndex] = sVar3 + sVar1;
