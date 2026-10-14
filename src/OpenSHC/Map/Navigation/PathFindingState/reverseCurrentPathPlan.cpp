@@ -12,8 +12,6 @@ namespace Map {
         {
             int bVar1;
             int bVar2;
-            uint _endIndex;
-            int _swapCounter;
             /*
               Index from start of path
              */
@@ -29,8 +27,8 @@ namespace Map {
                   Calculate number of swaps needed (swap pairs from both ends toward center)   Example: 8 elements = 4
                   swaps, 7 elements = 3 swaps
                  */
-                _swapCounter = (this->searchQueue.pathPlanIndex - 2 >> 1) + 1;
-                _endIndex = this->searchQueue.pathPlanIndex;
+                int _swapCounter = (this->searchQueue.pathPlanIndex - 2 >> 1) + 1;
+                uint _endIndex = this->searchQueue.pathPlanIndex;
                 do {
                     /*
                       === SWAP LOOP: Exchange elements from both ends ===   === EXTRACT DIRECTION AT START (uVar3) ===
