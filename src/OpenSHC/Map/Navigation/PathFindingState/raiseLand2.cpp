@@ -47,7 +47,7 @@ namespace Map {
                     int sVar2 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                     int sVar3 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[tile];
-                    if (this->searchQueue.currentDistance > maxDistance)
+                    if ((int)this->searchQueue.currentDistance > maxDistance)
                         break;
                     MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::raiseLand, DAT_TileMapState::ptr)(
                         tile, (uint)(sVar3), 4, 1);
