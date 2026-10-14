@@ -50,7 +50,7 @@ namespace Map {
                         if (0x13a10 < (int)this->searchQueue.currentDistance) {
                             return;
                         }
-                        if (this->searchQueue.currentDistance > someMax) {
+                        if ((int)this->searchQueue.currentDistance > someMax) {
                             return;
                         }
                         for (int _direction = 0; _direction < 8; _direction = _direction + 4) {
