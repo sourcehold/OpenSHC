@@ -53,8 +53,7 @@ namespace AI {
                 }
                 int const impassable = (char)this->heatMaps[gridX][gridY].impassableCount;
                 this->heatMaps[gridX][gridY].algorithmIterationNumber = this->mapExtraInfo.algorithmIterationNumber;
-                int const blockedCount
-                    = (char)this->heatMaps[gridX][gridY].tilesNotPartOfLargestAreaCount - impassable;
+                int const blockedCount = (char)this->heatMaps[gridX][gridY].tilesNotPartOfLargestAreaCount - impassable;
                 if (blockedCount >= 16) {
                     continue;
                 }
