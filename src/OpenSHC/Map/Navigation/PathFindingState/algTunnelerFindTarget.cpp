@@ -84,7 +84,7 @@ namespace Map {
                             return;
                         }
                         this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[iVar4];
-                        if (this->searchQueue.currentDistance > distance) {
+                        if ((int)this->searchQueue.currentDistance > distance) {
                             return;
                         }
                         paiVar8 = DAT_TileMapState::instance.directionTranslationMatrix + iVar7;
