@@ -73,7 +73,7 @@ namespace Map {
                     DAT_TileMapState::instance.someLimit = iVar5;
                 }
                 this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[uVar3];
-                if (this->searchQueue.currentDistance > param_1)
+                if ((int)this->searchQueue.currentDistance > param_1)
                     break;
                 piVar7 = DAT_TileMapState::instance.directionTranslationMatrix[iVar8] + 1;
                 DAT_TileMapState::instance.ChangedLayer[uVar3] = 2;
