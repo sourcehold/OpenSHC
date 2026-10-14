@@ -8,6 +8,7 @@
 #include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_AICState.hpp"
+#include "OpenSHC/Globals/DAT_AIVState.hpp"
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -97,7 +98,7 @@ namespace AI {
                 Map::Buildings::BuildingsState_Func::applySnoozedStateBasedOnPlayerData, DAT_BuildingsState::ptr)();
         }
         if (DAT_GameState::instance.mapAndTime.monthTicks == 10) {
-            MACRO_CALL_MEMBER(AIVState_Func::recomputeHeatmaps, this)(0);
+            MACRO_CALL_MEMBER(AIVState_Func::recomputeHeatmaps, DAT_AIVState::ptr)(0);
         }
     }
 
