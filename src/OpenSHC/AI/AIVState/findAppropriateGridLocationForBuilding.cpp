@@ -23,12 +23,7 @@ namespace AI {
         this->heatMaps[gridX][gridY].algorithmIterationNumber = this->mapExtraInfo.algorithmIterationNumber;
         this->heatMaps[gridX][gridY].algorithmVisitCountUnk = this->visitCount;
 
-        if (this->algAIndex == this->algBIndex) {
-            return;
-        }
-        uint candidateX;
-        uint candidateY;
-        for (;;) {
+        while (this->algAIndex != this->algBIndex) {
             int freeCount = 0;
             int const x = this->heatMapXArray[this->algAIndex];
             int const y = this->heatMapYArray[this->algAIndex];
@@ -37,9 +32,9 @@ namespace AI {
             }
             this->visitCount = (char)this->heatMaps[x][y].algorithmVisitCountUnk;
             for (int direction = 0; direction < 8; ++direction) {
-                candidateX
+                uint const candidateX
                     = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.xOffset + x;
-                candidateY
+                uint const candidateY
                     = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.yOffset + y;
                 if (this->heatMaps[x][y].isNotNearEdgeUnk && (candidateX > 79 || candidateY > 79)) {
                     continue;
@@ -72,19 +67,20 @@ namespace AI {
                 }
             }
             if (freeCount == 9) {
-                break;
+                // the result is the last visited neighbour
+                uint const resultY
+                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[7].int_.yOffset + y;
+                uint const resultX
+                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[7].int_.xOffset + x;
+                this->buildingApproriateGridXPosition = resultX;
+                this->buildingAppropriateGridYPosition = resultY;
+                return;
             }
             ++this->algAIndex;
             if ((int)this->algAIndex >= 6400) {
                 this->algAIndex = 0;
             }
-            if (this->algAIndex == this->algBIndex) {
-                return;
-            }
         }
-        // the result is the last visited neighbour
-        this->buildingAppropriateGridYPosition = candidateY;
-        this->buildingApproriateGridXPosition = candidateX;
     }
 
 }
