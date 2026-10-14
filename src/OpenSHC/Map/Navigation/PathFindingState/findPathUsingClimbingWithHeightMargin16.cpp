@@ -92,7 +92,7 @@ namespace Map {
                 int sVar1 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                 int sVar2 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                 this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
-                if (0x78 < this->searchQueue.currentDistance)
+                if (0x78 < (int)this->searchQueue.currentDistance)
                     break;
                 uint _tHeight = (uint)DAT_TileMapState::instance.HeightLayer[_tile];
                 _tLogic = DAT_TileMapState::instance.LogicLayer[_tile];
