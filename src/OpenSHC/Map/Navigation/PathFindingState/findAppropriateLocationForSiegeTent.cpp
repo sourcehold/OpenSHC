@@ -113,13 +113,13 @@ namespace Map {
                     /*
                       Safety check: if distance exceeds max tile count, abort
                      */
-                    if (80400 < this->searchQueue.currentDistance) {
+                    if (80400 < (int)this->searchQueue.currentDistance) {
                         return (dword)(0);
                     }
                     /*
                       If we've exceeded search radius, stop searching
                      */
-                    if (this->searchQueue.currentDistance > distanceUnk) {
+                    if ((int)this->searchQueue.currentDistance > distanceUnk) {
                         return (dword)(0);
                     }
                     /*
@@ -154,7 +154,7 @@ namespace Map {
                               === SIEGE TENT PLACEMENT VALIDATION ===   Only check for valid placement if distance > 4
                               (minimum spacing requirement)
                              */
-                            if (4 < this->searchQueue.currentDistance
+                            if (4 < (int)this->searchQueue.currentDistance
                                 && (short)DAT_TileMapState::instance.UnitLayer[_offsetTile] == 0 && bVar2) {
                                 /*
                                   Get height of candidate tile
