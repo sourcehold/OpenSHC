@@ -97,7 +97,7 @@ namespace Map {
                 if (0x13a10 < (int)this->searchQueue.currentDistance) {
                     return FALSE;
                 }
-                if (12 < this->searchQueue.currentDistance)
+                if (12 < (int)this->searchQueue.currentDistance)
                     break;
                 for (int _direction = 0; _direction < 8; _direction = _direction + 2) {
                     int _candidate = DAT_TileMapState::instance.directionTranslationMatrix[_y][_direction] + _tile;
