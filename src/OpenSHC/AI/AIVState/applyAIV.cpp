@@ -149,8 +149,8 @@ namespace AI {
                     x = 99 - relativeY;
                     y = relativeX;
                 } else if (this->aivs[aivID].keepOrientation == 2) {
-                    y = 99 - relativeX;
                     x = relativeY;
+                    y = 99 - relativeX;
                 }
                 int const tile
                     = DAT_ViewportRenderState::instance.translationMatrix[this->aivs[aivID].keepYOffset + y].addXgetTile
