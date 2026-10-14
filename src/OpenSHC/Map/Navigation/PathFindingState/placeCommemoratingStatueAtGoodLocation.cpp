@@ -85,7 +85,7 @@ namespace Map {
                     if (0x13a10 < (int)this->searchQueue.currentDistance) {
                         return;
                     }
-                    if (0x14 < this->searchQueue.currentDistance) {
+                    if (0x14 < (int)this->searchQueue.currentDistance) {
                         return;
                     }
                     MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::checkBuildingCanBePlacedHere,
@@ -183,7 +183,7 @@ namespace Map {
                         return;
                     }
                 }
-                DAT_TileMapState::instance.field122_0x554930 = 1;
+                DAT_TileMapState::instance.skipPlacementCheck = 1;
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::placeBuilding, DAT_TileMapState::ptr)(
                     playerID, (int)(sVar1), (int)(uVar7), commandBuildingType, 2, 0xf);
                 iVar3 = DAT_TileMapState::instance.placedBuildingID;
