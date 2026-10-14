@@ -1,4 +1,4 @@
-#include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "../PathFindingState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
