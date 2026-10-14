@@ -28,8 +28,6 @@ namespace Map {
             int _neswTile3;
             int _neswTile4;
             int _currentTile;
-            int _currentX;
-            int _currentY;
             if (destinationX <= 399 && destinationY <= 399
                 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[destinationY * 400 + destinationX]
                     != '\0') {
@@ -54,8 +52,8 @@ namespace Map {
                 if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                     while ((_currentTile = this->searchQueue.tilesQueue[this->searchQueue.readIndex],
                         -1 < _currentTile && (_currentTile < 80400))) {
-                        _currentX = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
-                        _currentY = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
+                        int _currentX = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
+                        int _currentY = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                         if ((short)DAT_TileMapState::instance.PathConnectionLayer[_currentTile] == originArea) {
                             this->climbX = (int)_currentX;
                             this->climbY = (int)_currentY;
