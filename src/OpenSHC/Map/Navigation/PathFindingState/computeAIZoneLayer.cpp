@@ -135,7 +135,7 @@ namespace Map {
                                 this->searchQueue.yQueue[this->searchQueue.writeIndex] = _directionOffset + _candidateY;
                                 this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _offsetTile;
                                 this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                                if (80400 < this->searchQueue.writeIndex)
+                                if (80400 <= (int)this->searchQueue.writeIndex)
                                     goto LAB_004a4914;
                             }
                             _direction = _direction + 1;
@@ -145,7 +145,7 @@ namespace Map {
                           Move to next tile in queue
                          */
                         this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                        if (80400 < this->searchQueue.readIndex) {
+                        if (80400 <= (int)this->searchQueue.readIndex) {
                             this->searchQueue.readIndex = 0;
                         }
                         /*
