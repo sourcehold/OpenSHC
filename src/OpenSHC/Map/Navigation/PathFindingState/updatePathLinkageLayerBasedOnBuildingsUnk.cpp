@@ -25,15 +25,13 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004999C0
         BOOLEnum PathFindingState::updatePathLinkageLayerBasedOnBuildingsUnk(int yUnk, int tile)
         {
-            byte bVar1;
             int iVar6;
             int (*paiVar8)[8];
             uint _height;
             int _directionIndex;
             int _building;
             bool bVar9;
-            bool bVar10;
-            bool bVar11;
+            bool _skip;
             byte _linkageResult;
             BOOLEnum _result;
             int local_28;
@@ -59,10 +57,10 @@ namespace Map {
                     DAT_BuildingDefinedData::instance.BuildingIsKeepArray[(short)_buildingType] != 0)) {
                 _result = TRUE;
             }
-            bool bVar2 = false;
-            bool bVar4 = false;
-            bool bVar3 = false;
-            bool bVar5 = false;
+            int bVar2 = 0;
+            int bVar4 = 0;
+            int bVar3 = 0;
+            int bVar5 = 0;
             byte bVar7 = 0;
             iVar6 = 0;
             _linkageResult = 0;
@@ -71,14 +69,14 @@ namespace Map {
                 if ((_logic & 0x10000000) == 0) {
                     if ((_logic & 2) == 0 && (_logic & 0x200000) == 0) {
                         if ((_logic & 0x800) != 0) {
-                            bVar4 = true;
+                            bVar4 = 1;
                             goto LAB_00499ada;
                         }
                         if ((_logic & 0x400000) != 0) {
                             return _result;
                         }
                         if ((_logic & 0x100) != 0) {
-                            bVar3 = true;
+                            bVar3 = 1;
                             if (DAT_TileMapState::instance.BuildingLayer[tile] != 0) {
                                 iVar6 = 2;
                             }
@@ -88,9 +86,9 @@ namespace Map {
                             return _result;
                         }
                     }
-                    bVar5 = true;
+                    bVar5 = 1;
                 } else {
-                    bVar2 = true;
+                    bVar2 = 1;
                     iVar6 = 1;
                 }
             }
@@ -153,34 +151,23 @@ namespace Map {
                         if ((_logic & 0x100) == 0 || iVar6 == 0) {
                             if (((bVar3) || (bVar4)) && (_logic & 0x100) != 0
                                 && DAT_TileMapState::instance.BuildingLayer[_tile] != 0) {
-                                bVar1 = DAT_TileMapState::instance.DamageLayer[tile];
-                                bVar11 = (bVar1 < '\x14');
-                                bVar10 = (char)(bVar1 - 0x14) < '\0';
-                                bVar9 = bVar1 == 0x14;
+                                _skip = (char)DAT_TileMapState::instance.DamageLayer[tile] > 0x14;
                             } else {
                                 _logic = (uint)DAT_TileMapState::instance.HeightLayer[_tile];
                                 if ((int)_logic < local_28)
                                     goto LAB_00499c4b;
-                                bVar11 = (_logic < local_24);
-                                bVar10 = (int)(_logic - local_24) < 0;
-                                bVar9 = _logic == local_24;
+                                _skip = (int)_logic > (int)local_24;
                             }
                         } else {
-                            bVar1 = DAT_TileMapState::instance.DamageLayer[_tile];
-                            bVar11 = (bVar1 < '\x14');
-                            bVar10 = (char)(bVar1 - 0x14) < '\0';
-                            bVar9 = bVar1 == 0x14;
+                            _skip = (char)DAT_TileMapState::instance.DamageLayer[_tile] > 0x14;
                         }
                     LAB_00499c3f:
-                        if (!bVar9 && bVar11 == bVar10)
+                        if (_skip)
                             goto LAB_00499c4b;
                     } else if (!bVar2) {
                         if (!bVar3)
                             goto LAB_00499c4b;
-                        bVar1 = DAT_TileMapState::instance.DamageLayer[tile];
-                        bVar11 = (bVar1 < '\x14');
-                        bVar10 = (char)(bVar1 - 0x14) < '\0';
-                        bVar9 = bVar1 == 0x14;
+                        _skip = (char)DAT_TileMapState::instance.DamageLayer[tile] > 0x14;
                         goto LAB_00499c3f;
                     }
                     _linkageResult = _linkageResult
