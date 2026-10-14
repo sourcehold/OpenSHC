@@ -102,7 +102,7 @@ namespace Map {
                       Increment queue write position
                      */
                     this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                    if (80400 < this->searchQueue.writeIndex) {
+                    if (80400 <= (int)this->searchQueue.writeIndex) {
                         this->searchQueue.writeIndex = 0;
                     }
                 }
@@ -122,7 +122,7 @@ namespace Map {
                     DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[this->searchQueue.writeIndex]]
                         = (short)this->searchGeneration;
                     this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                    if (80400 < this->searchQueue.writeIndex) {
+                    if (80400 <= (int)this->searchQueue.writeIndex) {
                         this->searchQueue.writeIndex = 0;
                     }
                 }
@@ -138,7 +138,7 @@ namespace Map {
                     DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[this->searchQueue.writeIndex]]
                         = (short)this->searchGeneration;
                     this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                    if (80400 < this->searchQueue.writeIndex) {
+                    if (80400 <= (int)this->searchQueue.writeIndex) {
                         this->searchQueue.writeIndex = 0;
                     }
                 }
@@ -154,7 +154,7 @@ namespace Map {
                     DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[this->searchQueue.writeIndex]]
                         = (short)this->searchGeneration;
                     this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                    if (80400 < this->searchQueue.writeIndex) {
+                    if (80400 <= (int)this->searchQueue.writeIndex) {
                         this->searchQueue.writeIndex = 0;
                     }
                 }
@@ -170,7 +170,7 @@ namespace Map {
                     DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[this->searchQueue.writeIndex]]
                         = (short)this->searchGeneration;
                     this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                    if (80400 < this->searchQueue.writeIndex) {
+                    if (80400 <= (int)this->searchQueue.writeIndex) {
                         this->searchQueue.writeIndex = 0;
                     }
                 }
