@@ -42,7 +42,8 @@ namespace Text {
         UserTextHandler() {};
         ~UserTextHandler() {};
 
-        void FUN_004694a0();
+        // Constructor
+        UserTextHandler* Constructor_UserTextHandler();
 
         void resetToTextIndex(int textIndex);
 
