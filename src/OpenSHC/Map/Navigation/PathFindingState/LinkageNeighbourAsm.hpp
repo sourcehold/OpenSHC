@@ -37,7 +37,8 @@
     int    _tile, _cY, _cLink
     short  _curGen, _cCardinalDistance
 
-  and takes the queue end as the WRITEIDX macro argument, which it advances. It clobbers eax, ebx, ecx, edx, esi and edi.
+  and takes the queue end as the WRITEIDX macro argument, which it advances. It clobbers eax, ebx, ecx, edx, esi and
+  edi.
 
   ID must be unique within the enclosing function; it exists only to keep the assembler labels of two
   expansions apart.
