@@ -56,7 +56,7 @@ namespace Map {
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[uVar5];
                     short sVar3 = this->searchQueue.yQueue[this->searchQueue.readIndex];
                     int iVar7 = (int)sVar3;
-                    if ((0x13a10 < (int)this->searchQueue.currentDistance) || (this->searchQueue.currentDistance > param_1))
+                    if ((0x13a10 < (int)this->searchQueue.currentDistance) || ((int)this->searchQueue.currentDistance > param_1))
                         break;
                     for (int iVar10 = 0; iVar10 < 8; iVar10 = iVar10 + 1) {
                         if ((DAT_TileMapState::instance.PathLinkageLayer[uVar5]
