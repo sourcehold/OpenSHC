@@ -1,11 +1,12 @@
 """Compile ONE source file and diff its code against the original function, in seconds.
 
-usage: quick_diff.py FILE.cpp... [-q]
+usage: quick_diff.py FILE.cpp... [-q] [-s]
 
 Compiles each file with a DLL compile command plus /FA (no link, no reccmp), disassembles the original function
 at the file's `// FUNCTION:` address straight from `_original/` with capstone, normalizes both streams (globals,
 call/jump targets and esp slots become tokens) and prints a difflib ratio and a unified diff (- original, + ours).
-`-q` prints the ratio only.
+`-q` prints the ratio only; `-s` keeps `[esp + N]` offsets instead of collapsing them to one token, for chasing
+stack-slot assignment (declaration order) once everything else matches.
 
 This is a triage loop, not the score: it is stricter than reccmp about register names and looser about stack
 offsets and constants, so confirm a 1.0000 with `reccmp_report.py --run`. Unlike reccmp it shows the *whole*
@@ -26,8 +27,9 @@ import capstone
 import common
 
 quiet = '-q' in sys.argv
-files = [os.path.abspath(f) for f in sys.argv[1:] if f != '-q']
-if not files:
+keep_slots = '-s' in sys.argv
+files = [os.path.abspath(f) for f in sys.argv[1:] if f not in ('-q', '-s')]
+if not files and __name__ == "__main__":
     sys.exit(__doc__)
 ROOT = str(common.ROOT).replace(chr(92), '/')
 os.chdir(ROOT)
@@ -109,11 +111,24 @@ def ours(f, cls, name):
         print('no code found for %s::%s' % (cls, name))
         return None
     res = []
+    # `_x$ = -16` lines define each local's offset; `_x$[esp+44H]` then means [esp + 0x44 - 16]
+    pre = txt[txt.rfind('_TEXT	SEGMENT', 0, m.start()):m.start()]
+    slots = {k: int(v) for k, v in re.findall(r'^(\w+\$\w*|tv\d+) = (-?\d+)', pre, re.M)}
+
+    def slot(mm):
+        base = slots.get(mm.group(1))
+        off = (int(mm.group(2)[:-1], 16) if mm.group(2).endswith('H') else int(mm.group(2))) if mm.group(2) else 0
+        # a hex offset keeps its sign in the first character: int('+1cH'[:-1], 16) handles it
+        if base is None:
+            return '[esp + ' + hex(off) + ']'
+        v = base + off
+        return '[esp + ' + hex(v) + ']' if v >= 0 else '[esp - ' + hex(-v) + ']'
     for l in m.group(2).splitlines():
         l = l.split(';')[0].strip()
-        if not l or l.endswith(':') or re.match(r'^\w+\$ = ', l) or l.startswith('npad') or l.startswith('$') or l.startswith('DD') or l.startswith('DB') or l.startswith('_'):
+        if not l or l.endswith(':') or re.match(r'^\w+\$\w* = ', l) or l.startswith('npad') or l.startswith('$') or l.startswith('DD') or l.startswith('DB') or l.startswith('_'):
             continue
         l = l.replace('\t', ' ')
+        l = re.sub(r'(\w+\$\w*|tv\d+)\[esp(?:([+-][0-9a-fA-F]+H|[+-]\d+))?\]', slot, l)
         op = l.split(' ')[0]
         if op.startswith('j') and 'DWORD PTR' not in l:
             l = op + (' L' if '$' in l else ' F')
@@ -142,7 +157,8 @@ def ours(f, cls, name):
 
 def canon(s):
     # esp-relative slots and globals compare loosely
-    s = re.sub(r'\[esp( [+-] 0x[0-9a-f]+)?\]', '[esp+N]', s)
+    if not keep_slots:
+        s = re.sub(r'\[esp( [+-] 0x[0-9a-f]+)?\]', '[esp+N]', s)
     s = re.sub(r'tv\d+\[', '[', s)
     s = re.sub(r'_\w+\$\w*\[', '[', s)
     s = s.replace('mov eax, G', 'mov eax, 0x51eb851f') if s == 'mov eax, G' else s
@@ -150,18 +166,27 @@ def canon(s):
     return s
 
 
-for f in files:
+def streams(f):
+    """(original, ours) normalized instruction lists for one source file."""
     src = open(f, encoding='utf-8').read()
     va = int(re.search(r'FUNCTION: STRONGHOLDCRUSADER (0x[0-9A-Fa-f]+)', src).group(1), 16)
-    a = [canon(x) for x in orig(va)]
     cls, name = re.search(r'FUNCTION: STRONGHOLDCRUSADER[^\n]*\n[^\n(]*?(\w+)::(\w+)\(', src).groups()
     b = ours(f, cls, name)
-    if b is None:
-        continue
-    b = [canon(x) for x in b]
-    ratio = difflib.SequenceMatcher(None, a, b, autojunk=False).ratio()
-    print('##### %s  ratio %.4f  orig %d ours %d' % (os.path.basename(f), ratio, len(a), len(b)))
-    if not quiet:
-        for l in difflib.unified_diff(a, b, lineterm='', n=2):
-            if not l.startswith(('---', '+++')):
-                print(l)
+    return [canon(x) for x in orig(va)], (None if b is None else [canon(x) for x in b])
+
+
+def main():
+    for f in files:
+        a, b = streams(f)
+        if b is None:
+            continue
+        ratio = difflib.SequenceMatcher(None, a, b, autojunk=False).ratio()
+        print('##### %s  ratio %.4f  orig %d ours %d' % (os.path.basename(f), ratio, len(a), len(b)))
+        if not quiet:
+            for l in difflib.unified_diff(a, b, lineterm='', n=2):
+                if not l.startswith(('---', '+++')):
+                    print(l)
+
+
+if __name__ == '__main__':
+    main()
