@@ -53,7 +53,7 @@ namespace Map {
                     if (0x13a10 < (int)this->searchQueue.currentDistance) {
                         return FALSE;
                     }
-                    if (this->searchQueue.currentDistance > maxDistance) {
+                    if ((int)this->searchQueue.currentDistance > maxDistance) {
                         return FALSE;
                     }
                     for (int _direction = 0; _direction < 8; _direction = _direction + 1) {
