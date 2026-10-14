@@ -77,7 +77,7 @@ namespace Map {
                     _result = 1;
                     break;
                 }
-                short _cCardinalDistance = _certainPath[_tile] + 1;
+                int _cCardinalDistance = _certainPath[_tile] + 1;
                 int _cY = (ushort)this->searchQueue.yQueue[_readIndex];
                 int _cLink = _linkage[_tile];
 
