@@ -120,7 +120,7 @@ namespace Map {
                         _currentY = this->searchQueue.yQueue[this->searchQueue.readIndex];
                         this->searchQueue.currentDistance
                             = (int)DAT_TileMapState::instance.CertainPathLayer[_currentTile];
-                        if (400 < this->searchQueue.currentDistance) {
+                        if (400 < (int)this->searchQueue.currentDistance) {
                             return FALSE;
                         }
                         _buildingID = DAT_TileMapState::instance.BuildingLayer[_currentTile];
