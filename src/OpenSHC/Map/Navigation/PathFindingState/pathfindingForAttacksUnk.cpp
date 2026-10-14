@@ -48,7 +48,7 @@ namespace Map {
             int iVar3 = (int)(short)DAT_BuildingsState::instance.buildings[buildingID].y;
             uint uVar7 = DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight;
             iVar10 = (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x;
-            byte bVar1
+            int bVar1
                 = DAT_TileMapState::instance.DefaultHeightLayer[DAT_BuildingsState::instance.buildings[buildingID]
                         .currentTilePositionAdjusted];
             short sVar2 = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
