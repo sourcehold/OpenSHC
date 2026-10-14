@@ -19,10 +19,7 @@ namespace Map {
             dword dVar2;
             dword dVar3;
             dword dVar4;
-            int iVar7;
             bool bVar8;
-            int local_96c;
-            int local_968;
             dword adStack_960[200];
             int aiStack_640[400];
             if (fromArea != toArea) {
@@ -30,10 +27,10 @@ namespace Map {
                 if ((toArea == 0) || (fromArea == 0)) {
                     return 0;
                 }
-                iVar7 = 1;
+                int iVar7 = 1;
                 this->DAT_Test_likely = this->DAT_Test_likely + 1;
-                local_96c = 0;
-                local_968 = 0;
+                int local_96c = 0;
+                int local_968 = 0;
                 for (iVar7 = 1; iVar7 < this->maxClimbDataCount; iVar7 = iVar7 + 1) {
                     if (this->climbData[iVar7].canBeUsed == 1
                         && this->climbData[iVar7].isRecognizedByPathfinding != 0) {
@@ -326,7 +323,7 @@ namespace Map {
                 this->field50_0x98 = 0;
                 fromArea = 0;
             }
-            LAB_ret:
+        LAB_ret:
             return (int)(fromArea);
         }
 
