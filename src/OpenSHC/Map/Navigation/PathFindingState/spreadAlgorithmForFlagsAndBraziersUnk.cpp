@@ -78,10 +78,10 @@ namespace Map {
                     local_4 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                     sVar2 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[tile];
-                    if (0x13a10 < this->searchQueue.currentDistance) {
+                    if (0x13a10 < (int)this->searchQueue.currentDistance) {
                         return (undefined4)(0);
                     }
-                    if (this->searchQueue.currentDistance > param_4) {
+                    if ((int)this->searchQueue.currentDistance > param_4) {
                         return (undefined4)(0);
                     }
                     iVar8 = 0;
