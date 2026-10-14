@@ -167,7 +167,7 @@ namespace Map {
                     int sVar3 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                     int sVar4 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[uVar6];
-                    if ((0x13a10 < (int)this->searchQueue.currentDistance) || (this->searchQueue.currentDistance > param_1))
+                    if ((0x13a10 < (int)this->searchQueue.currentDistance) || ((int)this->searchQueue.currentDistance > param_1))
                         break;
                     local_10 = this->searchQueue.tilesQueue + local_24;
                     local_14 = this->searchQueue.yQueue + local_24;
