@@ -51,7 +51,7 @@ namespace Map {
             int bVar1
                 = DAT_TileMapState::instance.DefaultHeightLayer[DAT_BuildingsState::instance.buildings[buildingID]
                         .currentTilePositionAdjusted];
-            short sVar2 = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
+            int sVar2 = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
             local_28 = 0;
             BOOLEnum BVar4 = MACRO_CALL_MEMBER(
                 OpenSHC::Map::Units::TribesState_Func::isTribeAllAssassins, DAT_TribesState::ptr)(tribeID);
