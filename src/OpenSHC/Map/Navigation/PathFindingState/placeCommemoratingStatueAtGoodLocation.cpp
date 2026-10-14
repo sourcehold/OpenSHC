@@ -42,9 +42,9 @@ namespace Map {
             MappersEnum commandBuildingType;
             uint uVar7;
             uint uVar8;
-            short sVar1 = DAT_GameState::instance.playerDataArray[playerID].someKeepRelatedX2;
+            int sVar1 = DAT_GameState::instance.playerDataArray[playerID].someKeepRelatedX2;
             uVar7 = (uint)sVar1;
-            short sVar2 = DAT_GameState::instance.playerDataArray[playerID].someKeepRelatedY2;
+            int sVar2 = DAT_GameState::instance.playerDataArray[playerID].someKeepRelatedY2;
             uVar8 = (uint)sVar2;
             if (uVar7 > 399 || uVar8 > 399
                 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[uVar8 * 400 + uVar7] == '\0') {
