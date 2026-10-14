@@ -60,7 +60,7 @@ namespace Map {
                     if (0x13a10 < (int)this->searchQueue.currentDistance) {
                         return (undefined4)(0);
                     }
-                    if (this->searchQueue.currentDistance > param_4) {
+                    if ((int)this->searchQueue.currentDistance > param_4) {
                         return (undefined4)(0);
                     }
                     short sVar3 = DAT_TileMapState::instance.BuildingLayer[iVar5];
