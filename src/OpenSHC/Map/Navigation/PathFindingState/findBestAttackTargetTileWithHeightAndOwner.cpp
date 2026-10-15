@@ -207,8 +207,8 @@ namespace Map {
                 } while (this->searchQueue.readIndex != this->searchQueue.writeIndex);
                 if (local_14 != -1) {
                     this->ALG_TargetX = local_14;
-                    this->ALG_TargetY = local_10;
                     this->ALG_TargetTile = local_c;
+                    this->ALG_TargetY = local_10;
                 }
             }
             return;
