@@ -63,7 +63,7 @@ namespace Map {
                             DAT_UnitsState::instance.units[iVar8].health
                                 = DAT_UnitsState::instance.units[iVar8].health + param_4;
                             int iVar5 = DAT_UnitsState::instance.units[iVar8].maxHealth;
-                            if (iVar5 < DAT_UnitsState::instance.units[iVar8].health) {
+                            if (DAT_UnitsState::instance.units[iVar8].health > iVar5) {
                                 DAT_UnitsState::instance.units[iVar8].health = iVar5;
                             }
                             if (iVar5 == 0) {
