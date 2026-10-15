@@ -29,7 +29,6 @@ namespace Map {
             uint uVar4;
             int iVar5;
             int iVar6;
-            int* piVar7;
             this->calculations = this->calculations + 1;
             this->searchGeneration = this->searchGeneration + 1;
             this->ALGO_TotalTroopValue = 0;
