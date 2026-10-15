@@ -20,8 +20,6 @@ namespace Map {
             uint _xDistance;
             uint _yDistance;
             int* _pTile;
-            uint _absX;
-            uint _absY;
             int iVar1;
             dword _result;
             int _tile;
@@ -40,11 +38,9 @@ namespace Map {
                                                      .tileTranslationMatrix_YComponent[_tile]]
                                              .addXgetTile)
                             - x,
-                        _absX = (int)_xDistance >> 0x1f,
                         _yDistance
                         = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile] - y,
-                        _absY = (int)_yDistance >> 0x1f,
-                        (int)(((_yDistance ^ _absY) - _absY) + ((_xDistance ^ _absX) - _absX)) % modulo == 0)
+                        (abs(_yDistance) + abs(_xDistance)) % modulo == 0)
                     && DAT_TileMapState::instance.CertainPathLayer[_tile] < 4000)
                     break;
                 iVar1 = iVar1 + 1;
