@@ -24,18 +24,18 @@ namespace Map {
                      */
                     int _index4000 = DAT_TileMapState::instance.someIndex * 4000;
                     int _someX = DAT_TileMapState::instance.someIndex * 120;
-                    int _pMap4040 = DAT_TileMapState::instance.someIndex * 40 + 0x1f93438;
+                    byte* _pMap4040 = DAT_TileMapState::instance.mapping40x40[DAT_TileMapState::instance.someIndex];
                     int _someYLikeLimit = DAT_TileMapState::instance.someYLikeLimit;
                     do {
                         if ((int)DAT_TileMapState::instance.someYLike <= _someYLikeLimit) {
                             flag_and_offset = DAT_TileMapState::instance.someYLike * 10 + 1;
                             int _someY = DAT_TileMapState::instance.someYLike;
                             do {
-                                if (*(char*)(_pMap4040 + _someY) != '\0') {
+                                if (_pMap4040[_someY] != '\0') {
                                     /*
                                       update this part
                                      */
-                                    *(undefined1*)(_pMap4040 + _someY) = 0;
+                                    _pMap4040[_someY] = 0;
                                     int _cur10 = 0;
                                     int _yOffset = _index4000;
                                     int _curX = _someX;
