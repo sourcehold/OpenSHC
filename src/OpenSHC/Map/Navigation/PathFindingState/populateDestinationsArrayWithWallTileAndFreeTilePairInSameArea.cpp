@@ -33,7 +33,6 @@ namespace Map {
             int iVar2;
             int* piVar3;
             XYPair* pXVar4;
-            short* psVar5;
             int (*paiVar6)[8];
             int _candidate;
             int _dIndex;
