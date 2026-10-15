@@ -40,8 +40,10 @@ namespace Map {
             uint local_18;
             int local_10;
             undefined4 local_8;
-            if (399 < param_2 || 399 < param_3
-                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[param_3 * 400 + param_2] == '\0') {
+            if (399 < param_2 || 399 < param_3) {
+                return (undefined4)(0);
+            }
+            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[param_3 * 400 + param_2] == '\0') {
                 return (undefined4)(0);
             }
             if (param_4 <= 399 && param_5 <= 399
