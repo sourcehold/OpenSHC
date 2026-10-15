@@ -114,7 +114,7 @@ namespace Map {
                         if (_currentTile == _tile2) {
                             return TRUE;
                         }
-                        if ((maxOptionsToTry <= this->searchQueue.readIndex) || (80399 < _currentTile))
+                        if ((maxOptionsToTry <= this->searchQueue.readIndex) || (80400 <= _currentTile))
                             break;
                         _currentX = this->searchQueue.xQueue[this->searchQueue.readIndex];
                         _currentY = this->searchQueue.yQueue[this->searchQueue.readIndex];
