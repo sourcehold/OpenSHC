@@ -36,8 +36,8 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A8AB0
         void PathFindingState::pathfindingUpdate_0x4a8ab0(int param_1)
         {
-            ushort uVar1;
-            ushort uVar2;
+            int uVar1;
+            int uVar2;
             int (*paiVar7)[8];
             int iVar8;
             int iVar9;
