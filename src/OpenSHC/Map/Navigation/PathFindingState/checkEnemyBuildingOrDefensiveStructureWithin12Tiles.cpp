@@ -31,7 +31,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049DB30
         BOOLEnum PathFindingState::checkEnemyBuildingOrDefensiveStructureWithin12Tiles(int playerID, uint x, uint y)
         {
-            short* psVar1;
             int (*paiVar2)[8];
             int bVar3;
             short _building;
