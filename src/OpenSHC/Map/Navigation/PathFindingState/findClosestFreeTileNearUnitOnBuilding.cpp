@@ -64,7 +64,7 @@ namespace Map {
                 iVar5 = (int)_y;
                 int _absDistX = abs(_x - x);
                 int _absDistY = abs(iVar5 - y);
-                if (_absDistY < _absDistX) {
+                if (_absDistX > _absDistY) {
                     _absDistY = _absDistX;
                 }
                 if (_absDistY < _lowestDist) {
