@@ -24,8 +24,6 @@ namespace Map {
         void PathFindingState::setWalkabilityBorderLogicLayerForSmallerMapSizes()
         {
             short sVar3;
-            short* psVar5;
-            int* piVar6;
             int _candidateTile;
             this->searchGeneration = this->searchGeneration + 1;
             this->resultTile = 0;
