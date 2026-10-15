@@ -227,7 +227,7 @@ namespace Map {
                             this)(playerID, (dword)((int)(fromArea)),
                             (dword)((int)((short)DAT_TileMapState::instance.PathConnectionLayer[_tile2])), 0),
                         _canNav != 0)
-                    && DAT_AICState::instance.aiBorderTilesIndex < 1000) {
+                    && (int)DAT_AICState::instance.aiBorderTilesIndex < 1000) {
                     /*
                       Add to candidate array (likely used by AI for strategic placement decisions)
                      */
