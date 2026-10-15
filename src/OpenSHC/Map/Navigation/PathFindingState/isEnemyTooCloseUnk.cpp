@@ -24,7 +24,10 @@ namespace Map {
             int _yEnemyDistance;
             int _enemies;
             short _enemyID;
-            if (399 < x || 399 < y || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
+            if (399 < x || 399 < y) {
+                return FALSE;
+            }
+            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
                 return FALSE;
             }
             _enemies = DAT_GameState::instance.playerDataArray[playerID].enemies;
