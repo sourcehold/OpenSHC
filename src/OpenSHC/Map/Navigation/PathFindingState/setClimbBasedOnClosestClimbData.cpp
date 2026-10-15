@@ -55,9 +55,9 @@ namespace Map {
                                     _distance = DAT_DirectionAlgorithmState::instance.distanceHigh
                                         + _pClimbData->numberOfUnitsUsing * 8;
                                     if (_distance < _minDistance) {
-                                        _climbData2 = _climbDataCounter;
-                                        _minDistance = _distance;
                                         _downOrUp = _downOrUp1;
+                                        _minDistance = _distance;
+                                        _climbData2 = _climbDataCounter;
                                         if (_downOrUp1 == 0) {
                                             this->climbX = _pClimbData->bottomXPosition;
                                             this->climbY = _pClimbData->bottomYPosition;
