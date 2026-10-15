@@ -24363,7 +24363,7 @@ SHC_3BB0A8C1_0x00497280 | 48.9% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004974D0 | 34.0% | Style pass, asm differs
 
-SHC_3BB0A8C1_0x00497690 | 13.6% | Style pass, asm differs
+SHC_3BB0A8C1_0x00497690 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00497740 | 49.5% | Style pass, asm differs
 
