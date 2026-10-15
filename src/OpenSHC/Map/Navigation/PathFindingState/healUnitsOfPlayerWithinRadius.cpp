@@ -28,9 +28,7 @@ namespace Map {
         {
             uint uVar4;
             short sVar6;
-            short* psVar7;
             int iVar8;
-            int* piVar9;
             this->searchGeneration = this->searchGeneration + 1;
             this->calculations = this->calculations + 1;
             if (32000 < this->searchGeneration) {
