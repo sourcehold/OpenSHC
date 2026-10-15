@@ -35,7 +35,6 @@ namespace Map {
             int iVar3;
             int iVar5;
             int (*paiVar6)[8];
-            short* psVar7;
             this->searchGeneration = this->searchGeneration + 1;
             this->calculations = this->calculations + 1;
             if (32000 < this->searchGeneration) {
