@@ -49,7 +49,7 @@ namespace Map {
                 if ((int)_tile < 0) {
                     return (dword)(0);
                 }
-                if (0x13a0f < (int)_tile) {
+                if (0x13a10 <= (int)_tile) {
                     return (dword)(0);
                 }
                 int sVar1 = this->searchQueue.xQueue[this->searchQueue.readIndex];
