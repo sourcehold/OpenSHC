@@ -110,8 +110,8 @@ namespace Map {
                                             local_1c = local_1c + -1;
                                         } while (local_1c != 0);
                                         _cur10 = _cur10 + 1;
-                                        _yOffset = _yOffset + 400;
                                         _curX = _curX + 0xc;
+                                        _yOffset = _yOffset + 400;
                                     } while (_cur10 < 10);
                                     _someYLikeLimit = DAT_TileMapState::instance.someYLikeLimit;
                                 }
