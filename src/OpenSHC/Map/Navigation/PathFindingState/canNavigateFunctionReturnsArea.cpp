@@ -24,7 +24,7 @@ namespace Map {
         {
             int (*paiVar5)[8];
             int iVar6;
-            ushort _area;
+            int _area;
             this->ALG_ResultTile = 0;
             this->ALG_ResultY = 0;
             this->ALG_ResultX = 0;
