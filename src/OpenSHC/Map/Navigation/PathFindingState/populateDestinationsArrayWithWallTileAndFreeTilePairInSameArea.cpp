@@ -151,7 +151,8 @@ namespace Map {
                                 break;
                             }
                             pXVar4 = pXVar4 + 1;
-                        } while ((int)pXVar4 < 0xb39238);
+                        } while ((int)pXVar4
+                            < (int)&DAT_ClimbLogicDefinedData::instance.CardinalHorizontalFirstSearchOrder[4]);
                     }
                     this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
                 } while ((int)this->searchQueue.readIndex < (int)this->searchQueue.writeIndex);
