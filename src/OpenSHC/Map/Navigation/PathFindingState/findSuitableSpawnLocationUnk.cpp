@@ -21,8 +21,10 @@ namespace Map {
         undefined4 PathFindingState::findSuitableSpawnLocationUnk(
             int x, int y, int x2, int y2, int param_5, int param_6)
         {
-            if (399 < (uint)x || 399 < (uint)y
-                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
+            if (399 < (uint)x || 399 < (uint)y) {
+                return (undefined4)(0);
+            }
+            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
                 return (undefined4)(0);
             }
             if (x2 != -1
