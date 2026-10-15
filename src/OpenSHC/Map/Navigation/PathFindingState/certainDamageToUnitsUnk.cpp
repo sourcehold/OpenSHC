@@ -78,7 +78,7 @@ namespace Map {
                 local_8 = OpenSHC::Map::Entities::ET_CATAPULT;
             }
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
-                while (uVar1 = this->searchQueue.tilesQueue[this->searchQueue.readIndex], uVar1 < 0x13a10) {
+                while (uVar1 = this->searchQueue.tilesQueue[this->searchQueue.readIndex], uVar1 <= 0x13a0f) {
                     int sVar2 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                     int sVar3 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[uVar1];
