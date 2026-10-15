@@ -102,10 +102,17 @@ namespace AI {
                     } else if (this->steps[0][index] != step) {
                         continue;
                     }
-                    uint const realX = this->aivs[aivID].keepXOffset + x;
-                    uint const realY = this->aivs[aivID].keepYOffset + y;
-                    if (realX > 399 || realY > 399
-                        || !DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[realY * 400 + realX]) {
+                    int const realY = this->aivs[aivID].keepYOffset + y;
+                    int const realX = this->aivs[aivID].keepXOffset + x;
+                    if (realX < 0 || realX > 399) {
+                        this->isHandled[index] = 1;
+                        continue;
+                    }
+                    if (realY < 0 || realY > 399) {
+                        this->isHandled[index] = 1;
+                        continue;
+                    }
+                    if (!DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[realY * 400 + realX]) {
                         this->isHandled[index] = 1;
                         continue;
                     }
