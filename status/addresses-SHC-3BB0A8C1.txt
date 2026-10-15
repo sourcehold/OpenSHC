@@ -37995,7 +37995,7 @@ SHC_3BB0A8C1_0x004F0060 | 53.6% | step < 50 fix; registers differ
 
 SHC_3BB0A8C1_0x004F0690 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004F0E80 | 88.9% | rest is scheduling + a hoisted
+SHC_3BB0A8C1_0x004F0E80 | 94.0% | rest is scheduling + a hoisted
 
 SHC_3BB0A8C1_0x004F1190 | 0.0% | Pending
 

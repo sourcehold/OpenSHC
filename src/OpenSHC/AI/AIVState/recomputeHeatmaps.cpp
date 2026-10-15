@@ -143,7 +143,8 @@ namespace AI {
             if (DAT_TileMapState::instance.LogicLayer[tile] & L_ROCKY) {
                 int const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
                 int const gridX = (tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile) / 5;
-                ++this->heatMaps[gridX][y / 5].impassableCount;
+                int const gridY = y / 5;
+                ++this->heatMaps[gridX][gridY].impassableCount;
             }
             if (DAT_TileMapState::instance.LogicLayer[tile] & L_TREE) {
                 int const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
