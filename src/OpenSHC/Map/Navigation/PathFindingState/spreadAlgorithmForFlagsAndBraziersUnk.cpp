@@ -47,7 +47,6 @@ namespace Map {
             uint uVar3;
             int iVar4;
             int iVar5;
-            short* psVar6;
             int (*paiVar7)[8];
             int iVar8;
             int local_8;
