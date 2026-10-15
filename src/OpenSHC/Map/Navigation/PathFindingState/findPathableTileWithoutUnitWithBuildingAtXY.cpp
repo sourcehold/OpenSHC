@@ -24,7 +24,7 @@ namespace Map {
         {
             int iVar2;
             int (*paiVar3)[8];
-            short _buildingAtStart;
+            int _buildingAtStart;
             int _tile;
             int _x;
             int _y;
