@@ -146,9 +146,9 @@ namespace Map {
                 iVar9
                     = (int)(short)uVar1 + DAT_ViewportRenderState::instance.translationMatrix[(short)uVar2].addXgetTile;
                 this->searchQueue.tilesQueue[uVar6] = iVar9;
-                DAT_TileMapState::instance.CertainPathLayer[iVar9] = (short)this->searchQueue.currentDistance;
                 DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[uVar6]]
                     = (short)this->searchGeneration;
+                DAT_TileMapState::instance.CertainPathLayer[iVar9] = (short)this->searchQueue.currentDistance;
                 uVar6 = uVar6 + 1;
             }
             if (DAT_GameState::instance.mapAndTime.signpostIDs[7] != 0) {
@@ -166,14 +166,14 @@ namespace Map {
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 while (uVar6 = this->searchQueue.tilesQueue[this->searchQueue.readIndex], uVar6 <= 0x13a0f) {
                     int sVar3 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
-                    int sVar4 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[uVar6];
+                    int sVar4 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                     if (0x13a10 < (int)this->searchQueue.currentDistance
                         || (int)this->searchQueue.currentDistance > param_1)
                         break;
                     local_10 = this->searchQueue.tilesQueue + local_24;
-                    local_14 = this->searchQueue.yQueue + local_24;
                     local_18 = this->searchQueue.xQueue + local_24;
+                    local_14 = this->searchQueue.yQueue + local_24;
                     for (int _direction = 0; _direction < 8; _direction = _direction + 1) {
                         iVar9 = DAT_TileMapState::instance.directionTranslationMatrix[sVar4][_direction] + uVar6;
                         uint uVar5 = DAT_TileMapState::instance.LogicLayer[iVar9];
@@ -240,9 +240,9 @@ namespace Map {
                                                 .clockwiseCardinalTranslationMatrix[_direction]
                                                 .int_.yOffset
                                     + sVar4;
+                                *local_10 = iVar9;
                                 local_14 = local_14 + 1;
                                 local_18 = local_18 + 1;
-                                *local_10 = iVar9;
                                 local_10 = local_10 + 1;
                             }
                             if ((uVar5 & 0x40000000) != 0) {
@@ -262,14 +262,14 @@ namespace Map {
                                 DAT_TileMapState::instance.LogicLayer[iVar9]
                                     = DAT_TileMapState::instance.LogicLayer[iVar9] & 0xbfffbfff;
                                 *local_18 = (short)iVar8 + sVar3;
+                                *local_10 = iVar9;
                                 *local_14 = (short)DAT_TerrainDefinedData::instance
                                                 .clockwiseCardinalTranslationMatrix[_direction]
                                                 .int_.yOffset
                                     + sVar4;
                                 local_18 = local_18 + 1;
-                                *local_10 = iVar9;
-                                local_10 = local_10 + 1;
                                 local_14 = local_14 + 1;
+                                local_10 = local_10 + 1;
                             }
                             if ((uVar5 & 8) != 0) {
                                 DAT_TileMapState::instance.LogicLayer[iVar9]
@@ -292,8 +292,8 @@ namespace Map {
             }
             if (0x9d08 < local_24) {
                 psVar12 = this->searchQueue.yQueue + 0x9d08;
-                piVar11 = this->searchQueue.tilesQueue + 0x9d08;
                 local_24 = local_24 + -0x9d08;
+                piVar11 = this->searchQueue.tilesQueue + 0x9d08;
                 do {
                     MACRO_CALL_MEMBER(
                         OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections, this)(

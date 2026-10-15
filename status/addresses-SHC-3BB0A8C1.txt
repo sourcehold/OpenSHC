@@ -25319,7 +25319,7 @@ SHC_3BB0A8C1_0x004A8860 | 47.5% | widen narrow locals to int
 
 SHC_3BB0A8C1_0x004A8900 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004A8AB0 | 65.6% | widen locals to int
+SHC_3BB0A8C1_0x004A8AB0 | 74.1% | statement order
 
 SHC_3BB0A8C1_0x004A91B0 | 0.0% | Pending
 
