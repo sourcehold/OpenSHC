@@ -49,12 +49,11 @@ namespace Map {
                     range / 2 < DAT_DirectionAlgorithmState::instance.distanceHigh)) {
                 piVar2 = piVar2 + 1;
                 piVar1 = piVar1 + 0xe7d;
-                if (0x117d56b < (int)piVar2) {
+                if ((int)&DAT_GameState::instance.mapAndTime.playerTeams[9] <= (int)piVar2) {
                     DAT_TileMapState::instance.buildingPlacementFailReason = ((BuildingFailReasonEnum)0x12);
                     return (undefined4)(1);
                 }
             }
-            return (undefined4)(0);
             return (undefined4)(0);
         }
 
