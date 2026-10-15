@@ -25,7 +25,6 @@ namespace Map {
         void PathFindingState::findWalkableTileThatDoesNotContainUnit(int unitID, uint x, uint y, int considerUnits)
         {
             uint _tHeight;
-            short* psVar2;
             uint _absHeight;
             int (*paiVar3)[8];
             int _area;
