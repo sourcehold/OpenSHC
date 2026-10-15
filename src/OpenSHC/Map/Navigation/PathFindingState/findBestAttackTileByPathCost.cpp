@@ -58,7 +58,7 @@ namespace Map {
                 if (iVar3 < 0) {
                     return (dword)(local_8);
                 }
-                if (0x13a0f < iVar3) {
+                if (0x13a10 <= iVar3) {
                     return (dword)(local_8);
                 }
                 int sVar2 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
