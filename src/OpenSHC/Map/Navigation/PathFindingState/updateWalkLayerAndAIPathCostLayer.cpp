@@ -6,6 +6,7 @@
 #include "OpenSHC/Globals/DAT_AICState.hpp"
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
+#include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
@@ -207,7 +208,7 @@ namespace Map {
                 /*
                   Stop if we've exceeded the maximum distance limit
                  */
-                if (limit < (int)this->searchQueue.currentDistance) {
+                if ((int)this->searchQueue.currentDistance > limit) {
                     return;
                 }
                 /*
@@ -217,7 +218,7 @@ namespace Map {
                 if (borderDistance != 0 && this->searchQueue.currentDistance == borderDistance
                     && (_canNav = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                         calculateCanPlayerUnitsNavigateToAreaFromArea,
-                            this)(playerID, (dword)((int)(fromArea)),
+                            DAT_PathFindingState::ptr)(playerID, (dword)((int)(fromArea)),
                             (dword)((int)((short)DAT_TileMapState::instance.PathConnectionLayer[_tile2])), 0),
                         _canNav != 0)
                     && (int)DAT_AICState::instance.aiBorderTilesIndex < 1000) {
