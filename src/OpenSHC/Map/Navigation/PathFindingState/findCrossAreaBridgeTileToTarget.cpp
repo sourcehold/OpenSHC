@@ -34,7 +34,6 @@ namespace Map {
             uint uVar9;
             int iVar10;
             uint uVar11;
-            int* piVar12;
             int iVar13;
             int local_20;
             uint local_14;
