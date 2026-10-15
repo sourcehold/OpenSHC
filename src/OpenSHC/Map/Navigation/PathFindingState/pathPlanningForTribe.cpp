@@ -81,8 +81,8 @@ namespace Map {
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 while (uVar11 = this->searchQueue.tilesQueue[this->searchQueue.readIndex], uVar11 <= 0x13a0f) {
-                    int sVar1 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                     int sVar2 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
+                    int sVar1 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[uVar11];
                     if ((0x13a10 < (int)this->searchQueue.currentDistance)
                         || (10 < (int)this->searchQueue.currentDistance))
@@ -197,9 +197,9 @@ namespace Map {
                         iVar12 = iVar5;
                     }
                     if (iVar12 == 1 && (abs(tribeID - uVar11) < 0x20)) {
+                        _destIndex = _destIndex + 1;
                         ((PathHelper12*)(_pDest2 + -1))->tile1
                             = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
-                        _destIndex = _destIndex + 1;
                         *_pDest2 = 1;
                         _pDest2 = _pDest2 + 3;
                         if (unitCount <= _destIndex) {
