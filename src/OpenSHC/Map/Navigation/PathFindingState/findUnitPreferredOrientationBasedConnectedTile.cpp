@@ -4,6 +4,7 @@
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/Navigation/Algorithms/XYPair.hpp"
 
+#include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_ClimbLogicDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_DirectionAlgorithmState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
@@ -47,7 +48,7 @@ namespace Map {
                 if ((int)(short)_area == _toArea
                     || (_can = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                      calculateCanPlayerUnitsNavigateToAreaFromArea,
-                            this)((int)DAT_UnitsState::instance.units[unitID].owner, (dword)((int)((short)_area)),
+                            DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[unitID].owner, (dword)((int)((short)_area)),
                             (dword)((int)(_toArea)), 0),
                         _can != 0))
                     break;
