@@ -23,7 +23,7 @@ namespace Map {
             pCVar1 = this->climbData;
             while (pCVar1 = pCVar1 + 1, pCVar1->canBeUsed != 0) {
                 _climbID = _climbID + 1;
-                if (199 < _climbID) {
+                if (200 <= _climbID) {
                     return 0;
                 }
             }
