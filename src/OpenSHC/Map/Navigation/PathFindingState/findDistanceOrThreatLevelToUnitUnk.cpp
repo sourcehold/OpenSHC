@@ -131,7 +131,7 @@ namespace Map {
                                 param_3 = 8;
                             }
                             param_3 = param_3 + 1 + this->searchQueue.currentDistance;
-                            if (local_8 < param_3) {
+                            if (param_3 > local_8) {
                                 local_c = iVar5;
                                 local_8 = param_3;
                             }
