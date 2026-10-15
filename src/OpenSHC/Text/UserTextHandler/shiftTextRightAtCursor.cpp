@@ -5,26 +5,25 @@
 namespace OpenSHC {
 namespace Text {
 
-    using OpenSHC::Text::TextArrayIndexType;
+    /*
+        Shifts characters in the current text slot right by one position,
+        making space for a new character insertion at the cursor. First places a null terminator at
+        param_2 + param_1 + 1 to cap the string, then walks backward copying each character one position
+        to the right. Used to implement character insertion in the text editor.
+    */
+
+    // FIXME: The logic here is completely unsafe, even compared to shiftTextLeftAtCursor. Even if count is 0, it will
+    // shift at least 1. No idea if this is sound.
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00469930
     void UserTextHandler::shiftTextRightAtCursor(int startIndex, int count)
     {
         this->textArray[this->textArrayIndex][count + startIndex + 1] = '\0';
-        int next;
         do {
-            /*
-              Moves everything an index forward to make space for the new char.   --TheRedDaemon
-             */
-            next = count + -1;
-            /*
-              write character
-             */
+            --count;
             this->textArray[this->textArrayIndex][count + startIndex]
-                = this->textArray[this->textArrayIndex - OpenSHC::Text::TAIT_ONE__FILTER_B]
-                                 [count + startIndex + 0xf9];
-            count = next;
-        } while (0 < next);
+                = this->textArray[this->textArrayIndex][count + startIndex - 1];
+        } while (count > 0);
     }
 
 }
