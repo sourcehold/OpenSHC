@@ -68,22 +68,22 @@ namespace Map {
             }
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findSuitableSpawnLocationUnk,
                 DAT_PathFindingState::ptr)(this->unitX, this->unitY, -1, -1, iVar6, 0);
+            local_14 = 10;
             _walkLayer = (short)DAT_TileMapState::instance.WalkLayer[_tile];
             _rng = (short)SEC_RNG::instance.currentNumber2;
             this->searchQueue.pathPlanIndex = 0;
             iVar6 = 10;
             local_24 = 1;
-            local_14 = 10;
             while (true) {
                 while (true) {
                     if ((_inBounds) && ((int)local_24 <= 1)) {
                         return (uint)(this->searchQueue.pathPlanIndex);
                     }
-                    _ptrTranslationMatrix = DAT_TileMapState::instance.directionTranslationMatrix[_y] + 1;
-                    _direction = 8;
-                    _init_10 = local_24;
-                    param_1 = local_24;
                     iVar4 = 2;
+                    param_1 = local_24;
+                    _init_10 = local_24;
+                    _direction = 8;
+                    _ptrTranslationMatrix = DAT_TileMapState::instance.directionTranslationMatrix[_y] + 1;
                     do {
                         _candidateTile = (*(int (*)[8])(_ptrTranslationMatrix + -1))[0] + _tile;
                         if ((short)DAT_TileMapState::instance.WalkLayer[_candidateTile] == _walkLayer) {
