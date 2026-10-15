@@ -24715,7 +24715,7 @@ SHC_3BB0A8C1_0x0049F2D0 | 85.0% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x0049F540 | 85.6% | reuse computed start tile
 
-SHC_3BB0A8C1_0x0049F7D0 | 20.9% | Style pass, asm differs
+SHC_3BB0A8C1_0x0049F7D0 | 22.6% | split bounds guard
 
 SHC_3BB0A8C1_0x0049F9B0 | 0.0% | Pending
 
