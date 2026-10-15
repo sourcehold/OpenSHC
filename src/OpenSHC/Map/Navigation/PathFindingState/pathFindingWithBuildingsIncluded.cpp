@@ -71,10 +71,10 @@ namespace Map {
             int _nextTileOption;
             uint uVar3;
             uint _tile2;
-            short _buildingID;
+            int _buildingID;
             uint _currentTile;
-            short _currentX;
-            short _currentY;
+            int _currentX;
+            int _currentY;
             uint _logical;
             if (399 < x || 399 < y) {
                 return FALSE;
