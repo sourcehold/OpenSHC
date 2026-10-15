@@ -25,7 +25,6 @@ namespace Map {
         {
             int (*paiVar1)[8];
             int _candidate;
-            int _offset;
             int _index;
             uint _tile;
             int _x;
