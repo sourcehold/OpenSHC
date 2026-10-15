@@ -18,8 +18,6 @@ namespace Map {
         dword PathFindingState::pathFindingResultBased(int param_1, int x, int y, int extraDistance)
         {
             int* _tilesPointer;
-            uint _isNegativeNumberX;
-            uint _isNegativeNumberY;
             int _index;
             int _distance;
             int _tile;
@@ -38,14 +36,8 @@ namespace Map {
                                                   .tileTranslationMatrix_YComponent[_tile]]
                                           .addXgetTile)
                         - x;
-                    _isNegativeNumberX = (int)_someX >> 0x1f;
                     uint _someY = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile] - y;
-                    _isNegativeNumberY = (int)_someY >> 0x1f;
-                    if ((int)(((_someY ^ _isNegativeNumberY) - _isNegativeNumberY)
-                            + ((_someX ^ _isNegativeNumberX) - _isNegativeNumberX))
-                                % param_1
-                            == 0
-                        && _distance < 4000) {
+                    if ((abs(_someY) + abs(_someX)) % param_1 == 0 && _distance < 4000) {
                         dword dVar1 = this->searchQueue.tilesQueue[_index];
                         DAT_TribesState::instance.ALG_ResultY = (int)this->searchQueue.yQueue[_index];
                         DAT_TribesState::instance.ALG_ResultTileIndex = _index;
