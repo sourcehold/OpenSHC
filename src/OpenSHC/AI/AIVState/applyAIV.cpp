@@ -24,9 +24,9 @@ namespace AI {
 
         // single buildings and the keep, steps is accessed as a flat 100 * 100 array
         int x;
-        int y;
+        int y = 0;
         int index = 0;
-        for (y = 0; y < 100; ++y) {
+        for (; y < 100; ++y) {
             for (x = 0; x < 100; ++x, ++index) {
                 if (this->isHandled[index]) {
                     continue;
@@ -58,8 +58,9 @@ namespace AI {
                         continue;
                     }
                     int const realY = this->aivs[aivID].keepYOffset + y;
+                    int const realX = this->aivs[aivID].keepXOffset + x;
                     if (!MACRO_CALL_MEMBER(Rendering::ViewportRenderState_Func::xyAreValid,
-                            DAT_ViewportRenderState::ptr)(this->aivs[aivID].keepXOffset + x, realY)) {
+                            DAT_ViewportRenderState::ptr)(realX, this->aivs[aivID].keepYOffset + y)) {
                         continue;
                     }
                     int const tile = DAT_ViewportRenderState::instance.translationMatrix[realY].addXgetTile
@@ -108,7 +109,9 @@ namespace AI {
                         this->isHandled[index] = 1;
                         continue;
                     }
-                    int const tile = DAT_ViewportRenderState::instance.translationMatrix[realY].addXgetTile
+                    int const tile
+                        = DAT_ViewportRenderState::instance.translationMatrix[this->aivs[aivID].keepYOffset + y]
+                              .addXgetTile
                         + this->aivs[aivID].keepXOffset + x;
                     this->aivs[aivID].aivBuildingSteps[step].buildStatus = AIVBSS_unbuilt;
                     this->aivs[aivID].aivBuildingSteps[step].buildingType = mapper;
