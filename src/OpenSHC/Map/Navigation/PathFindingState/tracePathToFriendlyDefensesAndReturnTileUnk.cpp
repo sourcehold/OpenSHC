@@ -48,7 +48,7 @@ namespace Map {
                 if (_candidateTile < 0) {
                     return 0;
                 }
-                if (0x13a0f < _candidateTile) {
+                if (0x13a10 <= _candidateTile) {
                     return 0;
                 }
                 int sVar2 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
