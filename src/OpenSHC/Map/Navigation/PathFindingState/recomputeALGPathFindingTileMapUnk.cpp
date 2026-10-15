@@ -41,7 +41,7 @@ namespace Map {
                 DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
                 DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
                 if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
-                    while (uVar3 = this->searchQueue.tilesQueue[this->searchQueue.readIndex], uVar3 < 0x13a10) {
+                    while (uVar3 = this->searchQueue.tilesQueue[this->searchQueue.readIndex], uVar3 <= 0x13a0f) {
                         DAT_TileMapState::instance.AIInfoLayer[uVar3]
                             = DAT_TileMapState::instance.AIInfoLayer[uVar3] | (byte)param_4;
                         int sVar1 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
