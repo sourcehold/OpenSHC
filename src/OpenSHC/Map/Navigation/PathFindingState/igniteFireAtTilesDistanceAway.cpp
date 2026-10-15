@@ -23,8 +23,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A2DD0
         undefined4 PathFindingState::igniteFireAtTilesDistanceAway(int tile, int maxDistance, int playerID)
         {
-            short* psVar3;
-            int* piVar4;
             int iVar5;
             int _index2;
             int _index;
