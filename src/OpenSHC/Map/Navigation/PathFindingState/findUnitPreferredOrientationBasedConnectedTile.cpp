@@ -4,9 +4,9 @@
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/Navigation/Algorithms/XYPair.hpp"
 
-#include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_ClimbLogicDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_DirectionAlgorithmState.hpp"
+#include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
@@ -29,7 +29,7 @@ namespace Map {
             XYPair* pXVar1;
             int _y;
             int _candidate;
-            ushort _area;
+            int _area;
             _y = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
             int _x = tile - DAT_ViewportRenderState::instance.translationMatrix[_y].addXgetTile;
             MACRO_CALL_MEMBER(
@@ -40,25 +40,20 @@ namespace Map {
             pXVar1
                 = DAT_ClimbLogicDefinedData::instance
                       .OrderedOrientationBasedCardinalDirectionList[DAT_DirectionAlgorithmState::instance.orientation];
-            tile = 0;
-            while (true) {
+            for (tile = 0; tile < 4; tile = tile + 1, pXVar1 = pXVar1 + 1) {
                 _candidate = DAT_ViewportRenderState::instance.translationMatrix[pXVar1->y + _y].addXgetTile
                     + ((XYPair*)&pXVar1->x)->x + _x;
-                dword _toArea = (dword) * (short*)((int)DAT_TileMapState::ptr + _candidate * 2 + 0x363ed0);
-                if ((int)(short)_area == _toArea
+                int _toArea = (short)DAT_TileMapState::instance.PathConnectionLayer[_candidate];
+                if (_area == _toArea
                     || (_can = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                      calculateCanPlayerUnitsNavigateToAreaFromArea,
-                            DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[unitID].owner, (dword)((int)((short)_area)),
-                            (dword)((int)(_toArea)), 0),
-                        _can != 0))
-                    break;
-                tile = tile + 1;
-                pXVar1 = pXVar1 + 1;
-                if (3 < tile) {
-                    return 0;
+                            DAT_PathFindingState::ptr)(
+                            (int)DAT_UnitsState::instance.units[unitID].owner, (dword)(_area), (dword)(_toArea), 0),
+                        _can != 0)) {
+                    return _candidate;
                 }
             }
-            return _candidate;
+            return 0;
         }
 
     }
