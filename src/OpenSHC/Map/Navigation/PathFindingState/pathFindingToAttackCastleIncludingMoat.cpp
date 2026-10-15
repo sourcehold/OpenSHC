@@ -52,7 +52,7 @@ namespace Map {
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             while (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 int _currentTile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
-                if ((_currentTile < 0) || (0x13a0f < _currentTile)) {
+                if ((_currentTile < 0) || (0x13a10 <= _currentTile)) {
                     return FALSE;
                 }
                 int _currentX = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
