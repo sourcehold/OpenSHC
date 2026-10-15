@@ -24399,7 +24399,7 @@ SHC_3BB0A8C1_0x0049A1C0 | 49.7% | named PathLinkageLayer
 
 SHC_3BB0A8C1_0x0049A2E0 | 25.9% | Style pass, asm differs
 
-SHC_3BB0A8C1_0x0049A370 | 11.2% | ebp frame via optimize(y,off)
+SHC_3BB0A8C1_0x0049A370 | 11.2% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x0049A5E0 | 78.3% | Style pass, asm differs
 
