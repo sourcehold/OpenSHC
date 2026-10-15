@@ -190,7 +190,7 @@ namespace Map {
                 /*
                   Bounds check
                  */
-                if (0x13a0f < _tile2) {
+                if (0x13a10 <= _tile2) {
                     return;
                 }
                 /*
