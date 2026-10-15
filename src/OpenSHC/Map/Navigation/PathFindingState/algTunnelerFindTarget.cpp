@@ -115,7 +115,7 @@ namespace Map {
                             }
                             psVar6 = psVar6 + 8;
                             paiVar8 = (int (*)[8])(*paiVar8 + 2);
-                        } while ((int)psVar6 < 0xb4908c);
+                        } while ((int)psVar6 < (int)&DAT_TerrainDefinedData::instance.field61_0x138);
                         this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
                         if (0x13a10 <= (int)this->searchQueue.readIndex) {
                             this->searchQueue.readIndex = 0;
