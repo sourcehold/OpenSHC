@@ -17,42 +17,27 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049A2E0
         void PathFindingState::updatePathLinkageTileMapRelatedToSiegeTower(int param_1)
         {
-            byte* pbVar1;
             int iVar2;
             int iVar3;
             int iVar4;
+            int iVar5;
             iVar4 = (int)(short)DAT_BuildingsState::instance.buildings[param_1].x;
             iVar2 = (int)(short)DAT_BuildingsState::instance.buildings[param_1].y;
-            DAT_TileMapState::instance
-                .PathLinkageLayer[DAT_ViewportRenderState::instance.translationMatrix[iVar2 + -1].addXgetTile + iVar4
-                    + 1]
-                = DAT_TileMapState::instance
-                      .PathLinkageLayer[DAT_ViewportRenderState::instance.translationMatrix[iVar2 + -1].addXgetTile
-                          + iVar4 + 1]
-                | 0x10;
-            DAT_TileMapState::instance
-                .PathLinkageLayer[DAT_ViewportRenderState::instance.translationMatrix[iVar2].addXgetTile + iVar4 + 1]
-                = DAT_TileMapState::instance
-                      .PathLinkageLayer[DAT_ViewportRenderState::instance.translationMatrix[iVar2].addXgetTile + iVar4
-                          + 1]
-                | 0x11;
-            DAT_TileMapState::instance
-                .PathLinkageLayer[DAT_ViewportRenderState::instance.translationMatrix[iVar2 + 2].addXgetTile + iVar4
-                    + 1]
-                = DAT_TileMapState::instance
-                      .PathLinkageLayer[DAT_ViewportRenderState::instance.translationMatrix[iVar2 + 2].addXgetTile
-                          + iVar4 + 1]
-                | 0x11;
+            iVar5 = DAT_ViewportRenderState::instance.translationMatrix[iVar2 + -1].addXgetTile + iVar4 + 1;
+            DAT_TileMapState::instance.PathLinkageLayer[iVar5]
+                = DAT_TileMapState::instance.PathLinkageLayer[iVar5] | 0x10;
+            iVar5 = DAT_ViewportRenderState::instance.translationMatrix[iVar2].addXgetTile + iVar4 + 1;
+            DAT_TileMapState::instance.PathLinkageLayer[iVar5]
+                = DAT_TileMapState::instance.PathLinkageLayer[iVar5] | 0x11;
+            iVar5 = DAT_ViewportRenderState::instance.translationMatrix[iVar2 + 2].addXgetTile + iVar4 + 1;
+            DAT_TileMapState::instance.PathLinkageLayer[iVar5]
+                = DAT_TileMapState::instance.PathLinkageLayer[iVar5] | 0x11;
+            iVar5 = DAT_ViewportRenderState::instance.translationMatrix[iVar2 + 3].addXgetTile + iVar4 + 1;
             iVar3 = DAT_ViewportRenderState::instance.translationMatrix[iVar2 + 1].addXgetTile + iVar4;
-            DAT_TileMapState::instance
-                .PathLinkageLayer[DAT_ViewportRenderState::instance.translationMatrix[iVar2 + 3].addXgetTile + iVar4
-                    + 1]
-                = DAT_TileMapState::instance
-                      .PathLinkageLayer[DAT_ViewportRenderState::instance.translationMatrix[iVar2 + 3].addXgetTile
-                          + iVar4 + 1]
-                | 1;
-            pbVar1 = (byte*)((int)DAT_TileMapState::instance.PathConnectionLayer + iVar3 + 0x2741f);
-            *pbVar1 = *pbVar1 | 4;
+            DAT_TileMapState::instance.PathLinkageLayer[iVar5]
+                = DAT_TileMapState::instance.PathLinkageLayer[iVar5] | 1;
+            DAT_TileMapState::instance.PathLinkageLayer[iVar3 + -1]
+                = DAT_TileMapState::instance.PathLinkageLayer[iVar3 + -1] | 4;
             DAT_TileMapState::instance.PathLinkageLayer[iVar3]
                 = DAT_TileMapState::instance.PathLinkageLayer[iVar3] | 0x44;
             DAT_TileMapState::instance.PathLinkageLayer[iVar3 + 2]
