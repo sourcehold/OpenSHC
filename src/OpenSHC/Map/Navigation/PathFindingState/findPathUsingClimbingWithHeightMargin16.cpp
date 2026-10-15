@@ -101,8 +101,8 @@ namespace Map {
                     break;
                 uint _tHeight = (uint)DAT_TileMapState::instance.HeightLayer[_tile];
                 _tLogic = DAT_TileMapState::instance.LogicLayer[_tile];
-                _direction = 0;
                 paiVar4 = DAT_TileMapState::instance.directionTranslationMatrix + sVar2;
+                _direction = 0;
                 do {
                     /*
                       for each direction, do:
@@ -182,11 +182,11 @@ namespace Map {
                                       .short_.xOffset;
                             DAT_TileMapState::instance.WalkLayer[_candidate] = (short)this->searchGeneration;
                             this->searchQueue.xQueue[this->searchQueue.writeIndex] = sVar3 + sVar1;
+                            this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
                             this->searchQueue.yQueue[this->searchQueue.writeIndex]
                                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                       .short_.yOffset
                                 + sVar2;
-                            this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _candidate;
                             this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
                             if (0x13a10 <= (int)this->searchQueue.writeIndex) {
                                 this->searchQueue.writeIndex = 0;
