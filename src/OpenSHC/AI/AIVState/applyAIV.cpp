@@ -62,12 +62,12 @@ namespace AI {
                             DAT_ViewportRenderState::ptr)(this->aivs[aivID].keepXOffset + x, realY)) {
                         continue;
                     }
+                    int const tile = DAT_ViewportRenderState::instance.translationMatrix[realY].addXgetTile
+                        + this->aivs[aivID].keepXOffset + x;
                     this->aivs[aivID].aivBuildingSteps[step].buildingType = mapper;
                     this->aivs[aivID].aivBuildingSteps[step].buildStatus = AIVBSS_unbuilt;
                     this->aivs[aivID].aivBuildingSteps[step].quantity = 1;
-                    this->aivs[aivID].aivBuildingSteps[step].location.tile.tile
-                        = DAT_ViewportRenderState::instance.translationMatrix[realY].addXgetTile
-                        + this->aivs[aivID].keepXOffset + x;
+                    this->aivs[aivID].aivBuildingSteps[step].location.tile.tile = tile;
                     if (step > this->aivs[aivID].totalSteps) {
                         this->aivs[aivID].totalSteps = step;
                     }
@@ -81,9 +81,6 @@ namespace AI {
         do {
             selected = FALSE;
             index = startY * 100;
-            if (startY >= 100) {
-                break;
-            }
             int step;
             MappersEnum mapper;
             for (y = startY; y < 100; ++y) {
@@ -106,22 +103,22 @@ namespace AI {
                     }
                     uint const realX = this->aivs[aivID].keepXOffset + x;
                     uint const realY = this->aivs[aivID].keepYOffset + y;
-                    if (realX <= 399 && realY <= 399
-                        && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[realY * 400 + realX]) {
-                        this->aivs[aivID].aivBuildingSteps[step].buildStatus = AIVBSS_unbuilt;
-                        this->aivs[aivID].aivBuildingSteps[step].buildingType = mapper;
-                        ++this->aivs[aivID].aivBuildingSteps[step].quantity;
-                        this->aivs[aivID].locationsArray[this->aivs[aivID].wallLocationsArrayIndex]
-                            = DAT_ViewportRenderState::instance.translationMatrix[realY].addXgetTile
-                            + this->aivs[aivID].keepXOffset + x;
-                        ++this->aivs[aivID].wallLocationsArrayIndex;
-                        if (step > this->aivs[aivID].totalSteps) {
-                            this->aivs[aivID].totalSteps = step;
-                        }
+                    if (realX > 399 || realY > 399
+                        || !DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[realY * 400 + realX]) {
                         this->isHandled[index] = 1;
-                    } else {
-                        this->isHandled[index] = 1;
+                        continue;
                     }
+                    int const tile = DAT_ViewportRenderState::instance.translationMatrix[realY].addXgetTile
+                        + this->aivs[aivID].keepXOffset + x;
+                    this->aivs[aivID].aivBuildingSteps[step].buildStatus = AIVBSS_unbuilt;
+                    this->aivs[aivID].aivBuildingSteps[step].buildingType = mapper;
+                    ++this->aivs[aivID].aivBuildingSteps[step].quantity;
+                    this->aivs[aivID].locationsArray[this->aivs[aivID].wallLocationsArrayIndex] = tile;
+                    ++this->aivs[aivID].wallLocationsArrayIndex;
+                    if (step > this->aivs[aivID].totalSteps) {
+                        this->aivs[aivID].totalSteps = step;
+                    }
+                    this->isHandled[index] = 1;
                 }
             }
         } while (selected);
