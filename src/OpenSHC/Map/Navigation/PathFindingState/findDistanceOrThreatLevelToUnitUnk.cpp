@@ -28,7 +28,6 @@ namespace Map {
             int (*paiVar3)[8];
             int iVar4;
             int iVar5;
-            short* psVar6;
             int local_c;
             int local_8;
             this->calculations = this->calculations + 1;
