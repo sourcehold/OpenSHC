@@ -76,7 +76,9 @@ namespace Map {
                                 || (DAT_EntityState::instance.entityArray[DAT_TileMapState::instance.EntityLayer[dVar4]]
                                         .entityType
                                     != OpenSHC::Map::Entities::ET_FIRE))
-                            && DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[*(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + playerID * 0x177bc + -0x10)][dVar4]
+                            && DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[*(
+                                   int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray
+                                   + playerID * 0x177bc + -0x10)][dVar4]
                                 == distanceUnk) {
                             if ((16 < (int)this->searchQueue.currentDistance) && (local_8 != 0)) {
                                 return (dword)(local_8);
