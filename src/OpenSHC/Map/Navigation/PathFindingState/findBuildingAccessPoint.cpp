@@ -54,11 +54,11 @@ namespace Map {
             int _pairsOfAccessAndAdjacent[200][2];
             int _accessibleTilesCount;
             int _yOffset;
-            byte _buidingDefHeight;
+            int _buidingDefHeight;
             uint _buildingSize;
-            byte _cHeight;
-            ushort _unitArea;
-            short _unitOwner;
+            int _cHeight;
+            int _unitArea;
+            int _unitOwner;
             /*
               === GET BUILDING INFORMATION ===
              */
