@@ -4,8 +4,8 @@
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/Location/Point8IntXY.hpp"
 
-#include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
+#include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
@@ -31,10 +31,7 @@ namespace Map {
         {
             int (*paiVar6)[8];
             int iVar7;
-            uint uVar8;
-            uint uVar9;
             int iVar10;
-            uint uVar11;
             int iVar13;
             int local_20;
             uint local_14;
@@ -107,20 +104,16 @@ namespace Map {
                                     (dword)((int)((short)uVar2)),
                                     (int)(DAT_UnitsState::instance.units[param_1].unitCanClimb));
                                 if (iVar7 != 0) {
-                                    uVar8 = (DAT_TerrainDefinedData::instance
-                                                    .clockwiseCardinalTranslationMatrix[_direction]
-                                                    .int_.yOffset
-                                                - param_3)
-                                        + (int)sVar4;
-                                    uVar11 = (int)uVar8 >> 0x1f;
-                                    uVar9 = (DAT_TerrainDefinedData::instance
-                                                    .clockwiseCardinalTranslationMatrix[_direction]
-                                                    .int_.xOffset
-                                                - param_2)
-                                        + (int)sVar3;
-                                    iVar10 = (uVar8 ^ uVar11) - uVar11;
-                                    uVar8 = (int)uVar9 >> 0x1f;
-                                    iVar7 = (uVar9 ^ uVar8) - uVar8;
+                                    iVar10 = abs(
+                                        (DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                                .int_.yOffset
+                                            - param_3)
+                                        + (int)sVar4);
+                                    iVar7 = abs(
+                                        (DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
+                                                .int_.xOffset
+                                            - param_2)
+                                        + (int)sVar3);
                                     if (iVar7 <= iVar10) {
                                         iVar7 = iVar10;
                                     }
