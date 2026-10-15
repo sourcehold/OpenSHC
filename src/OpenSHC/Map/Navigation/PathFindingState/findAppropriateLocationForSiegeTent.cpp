@@ -35,7 +35,7 @@ namespace Map {
             int iVar6;
             dword _offsetTile;
             uint uVar7;
-            uint uVar8;
+            uint _minHeight;
             int local_c;
             int _tile;
             /*
@@ -161,17 +161,17 @@ namespace Map {
                              */
                             if (4 < (int)this->searchQueue.currentDistance
                                 && (short)DAT_TileMapState::instance.UnitLayer[_offsetTile] == 0 && bVar2) {
+                                iVar6 = 0;
+                                local_c = 0;
                                 /*
                                   Get height of candidate tile
                                  */
                                 uVar7 = (uint)DAT_TileMapState::instance.HeightLayer[_offsetTile];
-                                iVar6 = 0;
-                                local_c = 0;
                                 /*
                                   Get pointer to movement direction offsets for checking surrounding tiles   Track
                                   minimum height in surrounding area
                                  */
-                                x = uVar7;
+                                _minHeight = uVar7;
                                 /*
                                   === CHECK 8 SURROUNDING TILES FOR TENT PLACEMENT ===   Loop checks tiles in groups of
                                   4 for optimization
@@ -200,14 +200,11 @@ namespace Map {
                                       Track height variation (for flatness check)
                                      */
                                     uint uVar3 = (uint)DAT_TileMapState::instance.HeightLayer[iVar5];
-                                    uVar8 = uVar3;
-                                    if ((uVar3 <= uVar7) && (uVar8 = uVar7, uVar3 < x)) {
-                                        /*
-                                          Update minimum height
-                                         */
-                                        x = uVar3;
+                                    if ((int)uVar3 > (int)uVar7) {
+                                        uVar7 = uVar3;
+                                    } else if ((int)uVar3 < (int)_minHeight) {
+                                        _minHeight = uVar3;
                                     }
-                                    uVar7 = uVar8;
                                     /*
                                       Update maximum height   Repeat checks for tiles 2, 3, and 4 in the group (Pattern
                                       repeats with piVar4[0],
@@ -231,11 +228,11 @@ namespace Map {
                                         break;
                                     }
                                     uVar3 = (uint)DAT_TileMapState::instance.HeightLayer[iVar5];
-                                    uVar8 = uVar3;
-                                    if ((uVar3 <= uVar7) && (uVar8 = uVar7, uVar3 < x)) {
-                                        x = uVar3;
+                                    if ((int)uVar3 > (int)uVar7) {
+                                        uVar7 = uVar3;
+                                    } else if ((int)uVar3 < (int)_minHeight) {
+                                        _minHeight = uVar3;
                                     }
-                                    uVar7 = uVar8;
                                     iVar5 = DAT_TileMapState::instance
                                                 .directionTranslationMatrix[DAT_TerrainDefinedData::instance
                                                                                 .clockwiseCardinalTranslationMatrix[y]
@@ -250,9 +247,10 @@ namespace Map {
                                         break;
                                     }
                                     uVar3 = (uint)DAT_TileMapState::instance.HeightLayer[iVar5];
-                                    uVar8 = uVar3;
-                                    if ((uVar3 <= uVar7) && (uVar8 = uVar7, uVar3 < x)) {
-                                        x = uVar3;
+                                    if ((int)uVar3 > (int)uVar7) {
+                                        uVar7 = uVar3;
+                                    } else if ((int)uVar3 < (int)_minHeight) {
+                                        _minHeight = uVar3;
                                     }
                                     iVar5 = DAT_TileMapState::instance
                                                 .directionTranslationMatrix[DAT_TerrainDefinedData::instance
@@ -265,13 +263,13 @@ namespace Map {
                                         || (short)DAT_TileMapState::instance.UnitLayer[iVar5] != 0
                                         || DAT_TileMapState::instance.BuildingLayer[iVar5] != 0) {
                                         iVar6 = iVar6 + 3;
-                                        uVar7 = uVar8;
                                         break;
                                     }
                                     uVar3 = (uint)DAT_TileMapState::instance.HeightLayer[iVar5];
-                                    uVar7 = uVar3;
-                                    if ((uVar3 <= uVar8) && (uVar7 = uVar8, uVar3 < x)) {
-                                        x = uVar3;
+                                    if ((int)uVar3 > (int)uVar7) {
+                                        uVar7 = uVar3;
+                                    } else if ((int)uVar3 < (int)_minHeight) {
+                                        _minHeight = uVar3;
                                     }
                                     local_c = local_c + 4;
                                     iVar6 = iVar6 + 4;
@@ -280,7 +278,7 @@ namespace Map {
                                   === FINAL VALIDATION ===   If all 8 surrounding tiles are clear (iVar6 == 8)   AND
                                   terrain is relatively flat (height difference < 12)
                                  */
-                                if (iVar6 == 8 && (int)(uVar7 - x) < 0xc) {
+                                if (iVar6 == 8 && (int)(uVar7 - _minHeight) < 0xc) {
                                     /*
                                       FOUND VALID LOCATION!
                                      */
