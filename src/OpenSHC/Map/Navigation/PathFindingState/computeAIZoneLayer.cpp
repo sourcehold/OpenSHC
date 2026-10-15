@@ -33,6 +33,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A4470
         void PathFindingState::computeAIZoneLayer(int attackedPlayerID, int canReachKeep, int param_3)
         {
+            int _areaID;
             uint uVar1;
             int _offsetTile;
             int _direction;
@@ -108,8 +109,8 @@ namespace Map {
                               this direction, OR   b) There's a gate (GATEHOUSELARGE or GATEHOUSESMALL) on the
                               tile
                              */
-                            if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] < '\x01'
-                                && (short)DAT_TileMapState::instance.PathConnectionLayer[_offsetTile] != 0
+                            if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] <= '\0'
+                                && (_areaID = (short)DAT_TileMapState::instance.PathConnectionLayer[_offsetTile], _areaID != 0)
                                 && ((DAT_TileMapState::instance.PathLinkageLayer[_candidateTile]
                                         & DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_direction])
                                         != 0
@@ -193,7 +194,7 @@ namespace Map {
                                   cliff, or border)   3. Either no building OR building allows passage (unknownFlag4
                                   == 0)
                                  */
-                                if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] < '\x01'
+                                if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] <= '\0'
                                     && (uVar1 = DAT_TileMapState::instance.LogicLayer[_offsetTile], (uVar1 & 0x31) == 0)
                                     && (DAT_TileMapState::instance.BuildingLayer[_offsetTile] == 0
                                         || (DAT_BuildingsState::instance
@@ -233,7 +234,7 @@ namespace Map {
                                   === TILE 2 (same logic as tile 1) ===
                                  */
                                 _offsetTile = *piVar3 + _direction;
-                                if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] < '\x01'
+                                if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] <= '\0'
                                     && (uVar1 = DAT_TileMapState::instance.LogicLayer[_offsetTile], (uVar1 & 0x31) == 0)
                                     && (DAT_TileMapState::instance.BuildingLayer[_offsetTile] == 0
                                         || (DAT_BuildingsState::instance
@@ -257,7 +258,7 @@ namespace Map {
                                   === TILE 3 (same logic as tile 1) ===
                                  */
                                 _offsetTile = piVar3[1] + _direction;
-                                if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] < '\x01'
+                                if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] <= '\0'
                                     && (uVar1 = DAT_TileMapState::instance.LogicLayer[_offsetTile], (uVar1 & 0x31) == 0)
                                     && (DAT_TileMapState::instance.BuildingLayer[_offsetTile] == 0
                                         || (DAT_BuildingsState::instance
@@ -281,7 +282,7 @@ namespace Map {
                                   === TILE 4 (same logic as tile 1) ===
                                  */
                                 _offsetTile = piVar3[2] + _direction;
-                                if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] < '\x01'
+                                if ((char)DAT_TileMapState::instance.AIZoneLayer[_offsetTile] <= '\0'
                                     && (uVar1 = DAT_TileMapState::instance.LogicLayer[_offsetTile], (uVar1 & 0x31) == 0)
                                     && (DAT_TileMapState::instance.BuildingLayer[_offsetTile] == 0
                                         || (DAT_BuildingsState::instance
