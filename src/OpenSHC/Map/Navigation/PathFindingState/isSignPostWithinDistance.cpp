@@ -38,8 +38,6 @@ namespace Map {
         BOOLEnum PathFindingState::isSignPostWithinDistance(uint x, uint y, int limit)
         {
             int iVar3;
-            short* psVar4;
-            int* piVar5;
             int iVar6;
             if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
                 return FALSE;
