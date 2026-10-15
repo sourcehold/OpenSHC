@@ -22,7 +22,10 @@ namespace Map {
         {
             uint uVar3;
             int iVar4;
-            if (x > 399 || y > 399 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
+            if (x > 399 || y > 399) {
+                return;
+            }
+            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
                 return;
             }
             this->searchGeneration = this->searchGeneration + 1;
