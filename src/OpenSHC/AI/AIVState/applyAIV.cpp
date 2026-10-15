@@ -152,11 +152,10 @@ namespace AI {
                     x = relativeY;
                     y = 99 - relativeX;
                 }
-                int const tile
+                DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlots[unitType][i]
                     = DAT_ViewportRenderState::instance.translationMatrix[this->aivs[aivID].keepYOffset + y].addXgetTile
                     + this->aivs[aivID].keepXOffset + x;
-                DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlots[unitType][i] = tile;
-                if (tile > 0) {
+                if (DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlots[unitType][i] > 0) {
                     ++DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount[unitType];
                 }
             }
