@@ -32,7 +32,6 @@ namespace Map {
         {
             UnitLogicStateShort UVar2;
             int iVar3;
-            short* psVar5;
             int (*paiVar6)[8];
             this->searchGeneration = this->searchGeneration + 1;
             this->calculations = this->calculations + 1;
