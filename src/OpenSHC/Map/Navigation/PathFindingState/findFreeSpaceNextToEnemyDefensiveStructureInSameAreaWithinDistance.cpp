@@ -42,7 +42,6 @@ namespace Map {
             int* piVar3;
             XYPair* pXVar4;
             BuildingTypeInt _buildingType;
-            short* psVar5;
             int (*paiVar6)[8];
             int _candidate;
             int _index;
