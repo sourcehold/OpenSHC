@@ -27,7 +27,10 @@ namespace Map {
         {
             int* piVar1;
             int* piVar2;
-            if (x > 399 || y > 399 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
+            if (x > 399 || y > 399) {
+                return (undefined4)(0);
+            }
+            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
                 return (undefined4)(0);
             }
             if (DAT_GameState::instance.playerDataArray[playerID].keep.id != 0
