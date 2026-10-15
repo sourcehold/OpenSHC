@@ -21,32 +21,29 @@ namespace Map {
             int _canBeUsed;
             int* _ptrUnitUID;
             int _unitID;
+            OpenSHC::Map::ClimbData* _climb;
             _counter = 0;
-            _canBeUsed = this->climbData[climbDataID].canBeUsed;
-            this->climbData[climbDataID].numberOfUnitsUsing = 0;
+            _climb = &this->climbData[climbDataID];
+            _canBeUsed = _climb->canBeUsed;
+            _climb->numberOfUnitsUsing = 0;
             if (_canBeUsed != 0) {
                 _ptrUnitID = &this->climbData[climbDataID].unitID1;
                 do {
                     _unitID = *_ptrUnitID;
                     if (_unitID != 0) {
+                        int _uid = (&this->climbData[climbDataID].unitUID1)[_counter];
                         _ptrUnitUID = &this->climbData[climbDataID].unitUID1 + _counter;
-                        if (DAT_UnitsState::instance.units[_unitID].logicalState == OpenSHC::Map::Units::ULS_NORMAL) {
-                            if (DAT_UnitsState::instance.units[_unitID].uid
-                                == (&this->climbData[climbDataID].unitUID1)[_counter]) {
-                                if (DAT_UnitsState::instance.units[_unitID].climbDataID == climbDataID) {
-                                    _ptrUnitUID = &this->climbData[climbDataID].numberOfUnitsUsing;
-                                    *_ptrUnitUID = *_ptrUnitUID + 1;
-                                } else {
-                                    *_ptrUnitID = 0;
-                                    *_ptrUnitUID = 0;
-                                }
-                            } else {
-                                *_ptrUnitID = 0;
-                                *_ptrUnitUID = 0;
-                            }
-                        } else {
+                        if (DAT_UnitsState::instance.units[_unitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
                             *_ptrUnitID = 0;
                             *_ptrUnitUID = 0;
+                        } else if (DAT_UnitsState::instance.units[_unitID].uid != _uid) {
+                            *_ptrUnitID = 0;
+                            *_ptrUnitUID = 0;
+                        } else if (DAT_UnitsState::instance.units[_unitID].climbDataID != climbDataID) {
+                            *_ptrUnitID = 0;
+                            *_ptrUnitUID = 0;
+                        } else {
+                            _climb->numberOfUnitsUsing = _climb->numberOfUnitsUsing + 1;
                         }
                     }
                     _counter = _counter + 1;
