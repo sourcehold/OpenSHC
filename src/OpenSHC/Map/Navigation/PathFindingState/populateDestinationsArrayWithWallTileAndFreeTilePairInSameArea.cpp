@@ -45,8 +45,8 @@ namespace Map {
             int _y;
             _tileY = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
             _axgt = DAT_ViewportRenderState::instance.translationMatrix[_tileY].addXgetTile;
-            this->searchGeneration = this->searchGeneration + 1;
             _dIndex = 0;
+            this->searchGeneration = this->searchGeneration + 1;
             if (32000 < this->searchGeneration) {
                 this->searchGeneration = 1;
                 MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
@@ -54,8 +54,8 @@ namespace Map {
             }
             this->searchQueue.currentDistance = 1;
             this->searchQueue.writeIndex = 1;
-            maxDestinations = maxDestinations * 2;
             this->searchQueue.readIndex = 0;
+            maxDestinations = maxDestinations * 2;
             if (maxDestinations < 500) {
                 if (maxDestinations < 50) {
                     maxDestinations = 50;
@@ -66,8 +66,8 @@ namespace Map {
             this->searchQueue.tilesQueue[0] = tile;
             this->searchQueue.yQueue[0] = _tileY;
             this->searchQueue.xQueue[0] = (short)tile - (short)_axgt;
-            DAT_TileMapState::instance.CertainPathLayer[tile] = 1;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
+            DAT_TileMapState::instance.CertainPathLayer[tile] = 1;
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 while (_tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex], _tile <= 0x13a0f) {
                     _x = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
@@ -93,10 +93,10 @@ namespace Map {
                             short sVar1
                                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                       .short_.xOffset;
+                            this->searchQueue.xQueue[this->searchQueue.writeIndex] = sVar1 + _x;
+                            DAT_TileMapState::instance.WalkLayer[_candidate] = (short)this->searchGeneration;
                             DAT_TileMapState::instance.CertainPathLayer[_candidate]
                                 = (short)this->searchQueue.currentDistance + 1;
-                            DAT_TileMapState::instance.WalkLayer[_candidate] = (short)this->searchGeneration;
-                            this->searchQueue.xQueue[this->searchQueue.writeIndex] = sVar1 + _x;
                             this->searchQueue.yQueue[this->searchQueue.writeIndex]
                                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                       .short_.yOffset
