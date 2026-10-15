@@ -173,7 +173,7 @@ namespace Map {
                                     ((PathHelper12*)(piVar11 + -1))->tile1 = tile2;
                                     *piVar11 = 0;
                                     piVar11 = piVar11 + 3;
-                                    if (param_3 <= local_28) {
+                                    if (local_28 >= param_3) {
                                         return;
                                     }
                                 }
