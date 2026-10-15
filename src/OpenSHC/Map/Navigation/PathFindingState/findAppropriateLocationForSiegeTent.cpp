@@ -143,10 +143,7 @@ namespace Map {
                              */
                             if (requiredDistanceFromAIZone != 0
                                 && (bVar2 = true,
-                                    *(byte*)(*(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray
-                                                 + playerID * 0x177bc + -0x10)
-                                            * 0x13a10
-                                        + 0x1ee2998 + _offsetTile)
+                                    DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[*(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + playerID * 0x177bc + -0x10)][_offsetTile]
                                         != requiredDistanceFromAIZone)) {
                                 bVar2 = 0;
                             }
