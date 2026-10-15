@@ -68,7 +68,6 @@ namespace Map {
             uint x, uint y, uint x2, uint y2, int maxOptionsToTry, int zeroMeansResetAlgorithm)
         {
             uint uVar1;
-            int* piVar2;
             int _nextTileOption;
             uint uVar3;
             uint _tile2;
