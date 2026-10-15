@@ -30,8 +30,6 @@ namespace Map {
         undefined4 PathFindingState::findSomeSuitableLocationUnk(int param_1, uint x, uint y, int param_4)
         {
             int iVar5;
-            short* psVar6;
-            int* piVar7;
             int iVar8;
             if (399 < x || 399 < y || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
                 return (undefined4)(0);
