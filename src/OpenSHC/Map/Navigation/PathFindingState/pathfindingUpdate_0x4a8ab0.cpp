@@ -163,7 +163,7 @@ namespace Map {
                     = (short)this->searchGeneration;
             }
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
-                while (uVar6 = this->searchQueue.tilesQueue[this->searchQueue.readIndex], uVar6 < 0x13a10) {
+                while (uVar6 = this->searchQueue.tilesQueue[this->searchQueue.readIndex], uVar6 <= 0x13a0f) {
                     int sVar3 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                     int sVar4 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[uVar6];
