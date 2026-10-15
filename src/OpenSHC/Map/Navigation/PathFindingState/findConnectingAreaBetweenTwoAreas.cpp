@@ -19,7 +19,6 @@ namespace Map {
         {
             undefined4 dVar2;
             int iVar1;
-            int iVar3;
             int* piVar5;
             int iVar6;
             dword dVar7;
@@ -68,18 +67,16 @@ namespace Map {
                             return (dword)(param_3);
                         }
                         adStack_960[iVar6] = dVar7;
+                        iVar6 = iVar6 + 1;
                         aiStack_640[iVar4 * 2 + 1] = 1;
-                        iVar3 = iVar6 + 1;
                         if (0 < (int)dVar8) {
-                            adStack_960[iVar6 + 1] = dVar8;
-                        LAB_004a5a12:
-                            iVar3 = iVar6 + 2;
+                            adStack_960[iVar6] = dVar8;
+                            iVar6 = iVar6 + 1;
                         }
                     } else {
                         dVar8 = this->climbData[iVar1].wallGroupAreaID;
                         if (dVar8 == param_3)
                             goto LAB_004a59a4;
-                        iVar3 = iVar6;
                         if (this->climbData[iVar1].buildingArea == param_3) {
                             if (dVar7 == param_2) {
                                 return (dword)(param_3);
@@ -88,22 +85,20 @@ namespace Map {
                                 return (dword)(param_3);
                             }
                             adStack_960[iVar6] = dVar7;
+                            iVar6 = iVar6 + 1;
                             aiStack_640[iVar4 * 2 + 1] = 1;
-                            adStack_960[iVar6 + 1] = dVar8;
-                            goto LAB_004a5a12;
+                            adStack_960[iVar6] = dVar8;
+                            iVar6 = iVar6 + 1;
                         }
                     }
                     iVar4 = iVar4 + 1;
-                    iVar6 = iVar3;
                 } while (iVar4 < local_96c);
-                if (0 < iVar3) {
+                if (0 < iVar6) {
                     do {
                         dVar7 = adStack_960[local_968];
                         local_968 = local_968 + 1;
                         iVar4 = 0;
-                        iVar6 = iVar3;
                         do {
-                            iVar3 = iVar6;
                             if (aiStack_640[iVar4 * 2 + 1] != 1) {
                                 iVar1 = aiStack_640[iVar4 * 2];
                                 dVar8 = this->climbData[iVar1].area;
@@ -118,11 +113,11 @@ namespace Map {
                                         return (dword)(dVar7);
                                     }
                                     adStack_960[iVar6] = dVar8;
+                                    iVar6 = iVar6 + 1;
                                     aiStack_640[iVar4 * 2 + 1] = 1;
-                                    iVar3 = iVar6 + 1;
                                     if ((int)dVar2 <= 0)
                                         goto LAB_004a5ad0;
-                                    adStack_960[iVar6 + 1] = dVar2;
+                                    adStack_960[iVar6] = dVar2;
                                 } else {
                                     dVar2 = this->climbData[iVar1].wallGroupAreaID;
                                     if (dVar2 == dVar7)
@@ -136,16 +131,16 @@ namespace Map {
                                         return (dword)(dVar7);
                                     }
                                     adStack_960[iVar6] = dVar8;
+                                    iVar6 = iVar6 + 1;
                                     aiStack_640[iVar4 * 2 + 1] = 1;
-                                    adStack_960[iVar6 + 1] = dVar2;
+                                    adStack_960[iVar6] = dVar2;
                                 }
-                                iVar3 = iVar6 + 2;
+                                iVar6 = iVar6 + 1;
                             }
                         LAB_004a5ad0:
                             iVar4 = iVar4 + 1;
-                            iVar6 = iVar3;
                         } while (iVar4 < local_96c);
-                    } while (local_968 < iVar3);
+                    } while (local_968 < iVar6);
                 }
             }
             return (dword)(0);
