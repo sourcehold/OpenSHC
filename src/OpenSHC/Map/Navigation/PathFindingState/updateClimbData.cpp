@@ -40,7 +40,7 @@ namespace Map {
                 }
             LAB_004a9740:
                 DAT_CurrentClimbDataID::instance = DAT_CurrentClimbDataID::instance + 1;
-                if (199 < DAT_CurrentClimbDataID::instance) {
+                if (200 <= (int)DAT_CurrentClimbDataID::instance) {
                     return;
                 }
             } while (true);
