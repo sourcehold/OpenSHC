@@ -25301,7 +25301,7 @@ SHC_3BB0A8C1_0x004A7090 | 99.6% | named matrix end field
 
 SHC_3BB0A8C1_0x004A75B0 | 43.7% | calls via global instance
 
-SHC_3BB0A8C1_0x004A79A0 | 38.2% | call via global instance
+SHC_3BB0A8C1_0x004A79A0 | 49.9% | abs() instead of shift idiom
 
 SHC_3BB0A8C1_0x004A7F50 | 51.8% | call via global instance
 

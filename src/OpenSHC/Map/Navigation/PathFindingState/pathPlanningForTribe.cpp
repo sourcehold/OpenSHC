@@ -37,8 +37,6 @@ namespace Map {
         {
             int iVar5;
             BOOLEnum BVar6;
-            uint uVar7;
-            uint uVar8;
             int (*paiVar9)[8];
             int* _pDest2;
             uint uVar11;
@@ -154,18 +152,13 @@ namespace Map {
                             DAT_BuildingsState::ptr)((int)DAT_TileMapState::instance.BuildingLayer[iVar12]);
                         uVar11 = uVar11 + iVar12;
                     }
-                    uVar7 = y - (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
-                    uVar8 = (int)uVar7 >> 0x1f;
-                    iVar5 = (uVar7 ^ uVar8) - uVar8;
-                    uVar7 = x - (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
-                    uVar8 = (int)uVar7 >> 0x1f;
-                    iVar12 = (uVar7 ^ uVar8) - uVar8;
+                    iVar5 = abs(y - (int)this->searchQueue.yQueue[this->searchQueue.readIndex]);
+                    iVar12 = abs(x - (int)this->searchQueue.xQueue[this->searchQueue.readIndex]);
                     if (iVar12 <= iVar5) {
                         iVar12 = iVar5;
                     }
                     if (iVar12 == 2
-                        && (uVar7 = (int)(tribeID - uVar11) >> 0x1f,
-                            (int)((tribeID - uVar11 ^ uVar7) - uVar7) < 0x20)) {
+                        && (abs(tribeID - uVar11) < 0x20)) {
                         _pDest1[-1] = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                         _destIndex = _destIndex + 1;
                         *_pDest1 = 1;
@@ -199,18 +192,13 @@ namespace Map {
                             DAT_BuildingsState::ptr)((int)DAT_TileMapState::instance.BuildingLayer[iVar12]);
                         uVar11 = uVar11 + iVar12;
                     }
-                    uVar7 = y - (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
-                    uVar8 = (int)uVar7 >> 0x1f;
-                    iVar5 = (uVar7 ^ uVar8) - uVar8;
-                    uVar7 = x - (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
-                    uVar8 = (int)uVar7 >> 0x1f;
-                    iVar12 = (uVar7 ^ uVar8) - uVar8;
+                    iVar5 = abs(y - (int)this->searchQueue.yQueue[this->searchQueue.readIndex]);
+                    iVar12 = abs(x - (int)this->searchQueue.xQueue[this->searchQueue.readIndex]);
                     if (iVar12 <= iVar5) {
                         iVar12 = iVar5;
                     }
                     if (iVar12 == 1
-                        && (uVar7 = (int)(tribeID - uVar11) >> 0x1f,
-                            (int)((tribeID - uVar11 ^ uVar7) - uVar7) < 0x20)) {
+                        && (abs(tribeID - uVar11) < 0x20)) {
                         ((PathHelper12*)(_pDest2 + -1))->tile1
                             = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                         _destIndex = _destIndex + 1;
