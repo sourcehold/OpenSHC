@@ -36,8 +36,6 @@ namespace Map {
         void PathFindingState::placeCommemoratingStatueAtGoodLocation(int playerID)
         {
             int iVar3;
-            short* psVar4;
-            int* piVar5;
             int iVar6;
             MappersEnum commandBuildingType;
             uint uVar7;
