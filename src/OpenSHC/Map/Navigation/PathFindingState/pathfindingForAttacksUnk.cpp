@@ -48,9 +48,8 @@ namespace Map {
             int iVar3 = (int)(short)DAT_BuildingsState::instance.buildings[buildingID].y;
             uint uVar7 = DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight;
             iVar10 = (int)(short)DAT_BuildingsState::instance.buildings[buildingID].x;
-            int bVar1
-                = DAT_TileMapState::instance.DefaultHeightLayer[DAT_BuildingsState::instance.buildings[buildingID]
-                        .currentTilePositionAdjusted];
+            int bVar1 = DAT_TileMapState::instance.DefaultHeightLayer[DAT_BuildingsState::instance.buildings[buildingID]
+                    .currentTilePositionAdjusted];
             int sVar2 = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
             local_28 = 0;
             BOOLEnum BVar4 = MACRO_CALL_MEMBER(
@@ -110,7 +109,8 @@ namespace Map {
                                 break;
                             }
                             pXVar8 = pXVar8 + 1;
-                        } while ((int)pXVar8 < 0xb39238);
+                        } while ((int)pXVar8
+                            < (int)&DAT_ClimbLogicDefinedData::instance.CardinalHorizontalFirstSearchOrder[4]);
                         local_24 = local_24 + 3;
                         local_28 = local_28 + 1;
                         if (local_28 >= param_3) {
