@@ -27,8 +27,8 @@ namespace Map {
             if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
                 return FALSE;
             }
-            int _directionIndex = 0;
-            do {
+            int _rowTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+            for (int _directionIndex = 0; _directionIndex < 8; _directionIndex = _directionIndex + 1) {
                 uint _x
                     = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_directionIndex].int_.xOffset
                     + x;
@@ -37,8 +37,7 @@ namespace Map {
                     + y;
                 if (_x <= 399 && _y <= 399
                     && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[_y * 400 + _x] != '\0') {
-                    int _tile = DAT_TileMapState::instance.directionTranslationMatrix[y][_directionIndex]
-                        + DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+                    int _tile = DAT_TileMapState::instance.directionTranslationMatrix[y][_directionIndex] + _rowTile;
                     if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0xb1U) == 0
                         && (DAT_TileMapState::instance.LogicLayer[_tile] & 0x50101400U) == 0) {
                         /*
@@ -50,11 +49,7 @@ namespace Map {
                         return TRUE;
                     }
                 }
-                _directionIndex = _directionIndex + 1;
-                if (7 < _directionIndex) {
-                    return FALSE;
-                }
-            } while (true);
+            }
             return FALSE;
         }
 
