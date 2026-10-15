@@ -96,11 +96,11 @@ namespace Map {
                                     = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                           .int_.xOffset
                                     + x2;
-                                _minDistance = DAT_DirectionAlgorithmState::instance.distanceHigh;
                                 this->climbY
                                     = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                           .int_.yOffset
                                     + uVar1;
+                                _minDistance = DAT_DirectionAlgorithmState::instance.distanceHigh;
                                 _status = 1;
                             }
                         }
