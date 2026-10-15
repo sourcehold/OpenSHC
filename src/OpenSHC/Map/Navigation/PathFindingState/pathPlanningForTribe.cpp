@@ -7,6 +7,7 @@
 #include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
+#include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
@@ -94,7 +95,7 @@ namespace Map {
                             && ((area == (int)(short)DAT_TileMapState::instance.PathConnectionLayer[iVar12]
                                     || (iVar5 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                                       calculateCanPlayerUnitsNavigateToAreaFromArea,
-                                            this)(playerID, (dword)((int)(area)),
+                                            DAT_PathFindingState::ptr)(playerID, (dword)((int)(area)),
                                             (dword)((int)((
                                                 int)(short)DAT_TileMapState::instance.PathConnectionLayer[iVar12])),
                                             0),
