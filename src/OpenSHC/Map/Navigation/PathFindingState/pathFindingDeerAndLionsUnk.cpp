@@ -159,7 +159,7 @@ namespace Map {
                             }
                         }
                         this->searchQueue.readIndex = this->searchQueue.readIndex + 1;
-                        if (80400 < (int)this->searchQueue.readIndex) {
+                        if (80400 <= (int)this->searchQueue.readIndex) {
                             this->searchQueue.readIndex = 0;
                         }
                         /*
