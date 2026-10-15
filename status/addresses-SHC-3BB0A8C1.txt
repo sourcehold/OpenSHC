@@ -25167,7 +25167,7 @@ SHC_3BB0A8C1_0x004A19B0 | 60.1% | reuse computed start tile
 
 SHC_3BB0A8C1_0x004A1AF0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004A1C40 | 96.0% | walking pointer base offset
+SHC_3BB0A8C1_0x004A1C40 | 98.7% | compare operand order
 
 SHC_3BB0A8C1_0x004A1CC0 | 0.0% | Pending
 

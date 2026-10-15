@@ -49,7 +49,7 @@ namespace Map {
                 || (MACRO_CALL_MEMBER(
                         OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                         DAT_DirectionAlgorithmState::ptr)(x, (int)(y), (int)(piVar1[-2]), (int)(piVar1[-1])),
-                    range / 2 < DAT_DirectionAlgorithmState::instance.distanceHigh)) {
+                    DAT_DirectionAlgorithmState::instance.distanceHigh > range / 2)) {
                 piVar2 = piVar2 + 1;
                 piVar1 = piVar1 + 0xe7d;
                 if ((int)&DAT_GameState::instance.mapAndTime.playerTeams[9] <= (int)piVar2) {
