@@ -23,13 +23,14 @@ namespace Map {
             int _enemyLoopCounter;
             int _yEnemyDistance;
             int _enemies;
-            short _enemyID;
+            int _enemyID;
             if (399 < x || 399 < y) {
                 return FALSE;
             }
             if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
                 return FALSE;
             }
+            int* _pEnemyUid = DAT_GameState::instance.mapAndTime.playerEnemenyUnitUIDShortList[playerID];
             _enemies = DAT_GameState::instance.playerDataArray[playerID].enemies;
             _enemyLoopCounter = 0;
             if (0 < _enemies) {
@@ -38,7 +39,8 @@ namespace Map {
                     _enemyID = *_enemyIdPtr;
                     if (DAT_UnitsState::instance.units[_enemyID].dying == 0
                         && DAT_UnitsState::instance.units[_enemyID].uid
-                            == *(int*)(playerID * 10000 + 0x11a66f0 + _enemyLoopCounter * 4)
+                            == DAT_GameState::instance.mapAndTime
+                                .playerEnemenyUnitUIDShortList[playerID][_enemyLoopCounter]
                         && (_xEnemyDistance = x - (int)DAT_UnitsState::instance.units[_enemyID].x,
                             _yEnemyDistance = y - (int)DAT_UnitsState::instance.units[_enemyID].y,
                             _yEnemyDistance * _yEnemyDistance + _xEnemyDistance * _xEnemyDistance
