@@ -25229,7 +25229,7 @@ SHC_3BB0A8C1_0x004A4550 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004A46C0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004A4930 | 68.4% | statement reorder
+SHC_3BB0A8C1_0x004A4930 | 75.7% | widen locals to int
 
 SHC_3BB0A8C1_0x004A4B30 | 79.0% | Style pass, asm differs
 

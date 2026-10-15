@@ -20,11 +20,11 @@ namespace Map {
             int fromXPosition;
             ClimbData* _pClimbData;
             ClimbData* _pClimbData2;
-            short _downOrUp1;
+            int _downOrUp1;
             int _climbDataID;
             int _climbData2;
             int _minDistance;
-            short _downOrUp;
+            int _downOrUp;
             int _distance;
             _minDistance = 1000;
             _climbData2 = 0;
