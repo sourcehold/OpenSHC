@@ -44,7 +44,6 @@ namespace Map {
             uint _heightDiff2;
             int _candidate2;
             XYPair* pXVar1;
-            uint uVar2;
             int _closestDistance;
             int _closestTile;
             int _entranceCandidate;
@@ -134,7 +133,7 @@ namespace Map {
                       === HEIGHT VALIDATION #2: Building Terrain Height ===   Check if access point is within 16 height
                       units of building's actual terrain   height
                      */
-                    if ((int)((_heightDiff ^ (int)_heightDiff >> 0x1f) - ((int)_heightDiff >> 0x1f)) < 32
+                    if (abs(_heightDiff) < 32
                         && ((int)(short)DAT_TileMapState::instance.PathConnectionLayer[_entranceCandidate]
                                 == (int)(short)_unitArea
                             || (_canNav = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
@@ -146,7 +145,7 @@ namespace Map {
                                 _canNav != 0))
                         && (_heightDiff2
                             = (int)DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk - (uint)_cHeight,
-                            uVar2 = (int)_heightDiff2 >> 0x1f, (int)((_heightDiff2 ^ uVar2) - uVar2) < 16)) {
+                            abs(_heightDiff2) < 16)) {
                         /*
                           === ACCESS POINT IS VALID - ADD TO LIST ===      Store the access tile
                          */
