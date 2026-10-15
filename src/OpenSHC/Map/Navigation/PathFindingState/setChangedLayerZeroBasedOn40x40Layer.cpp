@@ -17,19 +17,20 @@ namespace Map {
         void PathFindingState::setChangedLayerZeroBasedOn40x40Layer(uint flag_and_offset)
         {
             if ((this->field10_0x28 == 0) && (flag_and_offset == 0)) {
-                if ((int)DAT_TileMapState::instance.someIndex <= (int)DAT_TileMapState::instance.someLimit) {
-                    int _index10 = DAT_TileMapState::instance.someIndex * 10;
+                int _row = DAT_TileMapState::instance.someIndex;
+                if (_row <= (int)DAT_TileMapState::instance.someLimit) {
+                    int _index10 = _row * 10;
                     /*
                       10 400x400 rows
                      */
-                    int _index4000 = DAT_TileMapState::instance.someIndex * 4000;
-                    int _someX = DAT_TileMapState::instance.someIndex * 120;
-                    byte* _pMap4040 = DAT_TileMapState::instance.mapping40x40[DAT_TileMapState::instance.someIndex];
-                    int _someYLikeLimit = DAT_TileMapState::instance.someYLikeLimit;
+                    int _index4000 = _row * 4000;
+                    int _someX = _row * 120;
+                    byte* _pMap4040 = DAT_TileMapState::instance.mapping40x40[_row];
                     do {
-                        if ((int)DAT_TileMapState::instance.someYLike <= _someYLikeLimit) {
-                            flag_and_offset = DAT_TileMapState::instance.someYLike * 10 + 1;
-                            int _someY = DAT_TileMapState::instance.someYLike;
+                        int _someYLikeLimit = DAT_TileMapState::instance.someYLikeLimit;
+                        int _someY = DAT_TileMapState::instance.someYLike;
+                        if (_someY <= _someYLikeLimit) {
+                            flag_and_offset = _someY * 10 + 1;
                             do {
                                 if (_pMap4040[_someY] != '\0') {
                                     /*
@@ -54,51 +55,56 @@ namespace Map {
                                                 /*
                                                   is valid coordinate
                                                  */
-                                                *(undefined1*)(_x + 0x1c5ad87
-                                                    + *(int*)((int)&DAT_ViewportRenderState::instance
-                                                                  .translationMatrix[0]
-                                                                  .addXgetTile
-                                                        + _curX)) = 0;
+                                                DAT_TileMapState::instance
+                                                    .ChangedLayer[*(int*)((int)&DAT_ViewportRenderState::instance
+                                                                              .translationMatrix[0]
+                                                                              .addXgetTile
+                                                                      + _curX)
+                                                        + (_x - 1)] = 0;
                                             }
                                             if (_x <= 399 && _coord2 <= 399
                                                 && DAT_ViewportRenderState::instance
                                                         .DAT_BinaryTileMap400x400[_yOffset + _x]
                                                     != '\0') {
-                                                *(undefined1*)(*(int*)((int)&DAT_ViewportRenderState::instance
-                                                                           .translationMatrix[0]
-                                                                           .addXgetTile
-                                                                   + _curX)
-                                                    + 0x1c5ad88 + _x) = 0;
+                                                DAT_TileMapState::instance
+                                                    .ChangedLayer[*(int*)((int)&DAT_ViewportRenderState::instance
+                                                                              .translationMatrix[0]
+                                                                              .addXgetTile
+                                                                      + _curX)
+                                                        + _x] = 0;
                                             }
                                             if (_x + 1 <= 399 && _coord2 <= 399
                                                 && DAT_ViewportRenderState::instance
                                                         .DAT_BinaryTileMap400x400[_yOffset + _x + 1]
                                                     != '\0') {
-                                                *(undefined1*)(_x + 0x1c5ad89
-                                                    + *(int*)((int)&DAT_ViewportRenderState::instance
-                                                                  .translationMatrix[0]
-                                                                  .addXgetTile
-                                                        + _curX)) = 0;
+                                                DAT_TileMapState::instance
+                                                    .ChangedLayer[*(int*)((int)&DAT_ViewportRenderState::instance
+                                                                              .translationMatrix[0]
+                                                                              .addXgetTile
+                                                                      + _curX)
+                                                        + (_x + 1)] = 0;
                                             }
                                             if (_x + 2 <= 399 && _coord2 <= 399
                                                 && DAT_ViewportRenderState::instance
                                                         .DAT_BinaryTileMap400x400[_yOffset + _x + 2]
                                                     != '\0') {
-                                                *(undefined1*)(_x + 0x1c5ad8a
-                                                    + *(int*)((int)&DAT_ViewportRenderState::instance
-                                                                  .translationMatrix[0]
-                                                                  .addXgetTile
-                                                        + _curX)) = 0;
+                                                DAT_TileMapState::instance
+                                                    .ChangedLayer[*(int*)((int)&DAT_ViewportRenderState::instance
+                                                                              .translationMatrix[0]
+                                                                              .addXgetTile
+                                                                      + _curX)
+                                                        + (_x + 2)] = 0;
                                             }
                                             if (_x + 3 <= 399 && _coord2 <= 399
                                                 && DAT_ViewportRenderState::instance
                                                         .DAT_BinaryTileMap400x400[_yOffset + _x + 3]
                                                     != '\0') {
-                                                *(undefined1*)(_x + 0x1c5ad8b
-                                                    + *(int*)((int)&DAT_ViewportRenderState::instance
-                                                                  .translationMatrix[0]
-                                                                  .addXgetTile
-                                                        + _curX)) = 0;
+                                                DAT_TileMapState::instance
+                                                    .ChangedLayer[*(int*)((int)&DAT_ViewportRenderState::instance
+                                                                              .translationMatrix[0]
+                                                                              .addXgetTile
+                                                                      + _curX)
+                                                        + (_x + 3)] = 0;
                                             }
                                             _x = _x + 5;
                                             local_1c = local_1c + -1;
@@ -106,8 +112,8 @@ namespace Map {
                                         _cur10 = _cur10 + 1;
                                         _yOffset = _yOffset + 400;
                                         _curX = _curX + 0xc;
-                                        _someYLikeLimit = DAT_TileMapState::instance.someYLikeLimit;
                                     } while (_cur10 < 10);
+                                    _someYLikeLimit = DAT_TileMapState::instance.someYLikeLimit;
                                 }
                                 flag_and_offset = flag_and_offset + 10;
                                 _someY = _someY + 1;
@@ -115,10 +121,10 @@ namespace Map {
                         }
                         _index4000 = _index4000 + 4000;
                         _index10 = _index10 + 10;
-                        DAT_TileMapState::instance.someIndex = DAT_TileMapState::instance.someIndex + 1;
+                        _row = _row + 1;
                         _pMap4040 = _pMap4040 + 40;
                         _someX = _someX + 120;
-                    } while ((int)DAT_TileMapState::instance.someIndex <= (int)DAT_TileMapState::instance.someLimit);
+                    } while (_row <= (int)DAT_TileMapState::instance.someLimit);
                 }
                 this->mappingYRelated = 1000;
                 this->yLimit = 0;
