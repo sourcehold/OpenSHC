@@ -33,8 +33,11 @@ namespace AI {
                 this->mapExtraInfo.algBuildingPlacementNudge = 0;
             }
             for (int player = 1; player < 9; ++player) {
+                // the original tests the slot ID a third time through an alias of the same element
+                int const& fullID = DAT_GameSynchronyState::instance.currentPlayerFullIDArray[player];
                 if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[player] == -1
-                    && DAT_GameSynchronyState::instance.currentAIArray[player] == 0) {
+                    && DAT_GameSynchronyState::instance.currentAIArray[player] == 0
+                    && DAT_GameSynchronyState::instance.currentPlayerFullIDArray[player] == fullID) {
                     continue;
                 }
                 if (MACRO_CALL_MEMBER(Game::GameStateStructures_Func::checkKeepEnclosed, DAT_GameState::ptr)(player)) {
