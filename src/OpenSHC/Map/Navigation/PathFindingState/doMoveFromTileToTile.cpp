@@ -29,7 +29,6 @@ namespace Map {
         BOOLEnum PathFindingState::doMoveFromTileToTile(
             int unitID, int tile, int y, int direction, int param_5, int ignoreAssassinClimbing)
         {
-            short* psVar1;
             int bVar2;
             uint uVar3;
             int _targetTile;
