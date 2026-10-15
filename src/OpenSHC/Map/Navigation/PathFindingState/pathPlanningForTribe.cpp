@@ -131,7 +131,7 @@ namespace Map {
                 }
             }
             this->searchQueue.readIndex = 0;
-            if (0 < this->searchQueue.writeIndex) {
+            if (0 < (int)this->searchQueue.writeIndex) {
                 _pDest1 = &this->searchQueue.destinationsArray[0].tile2OrAHelper;
                 do {
                     /*
