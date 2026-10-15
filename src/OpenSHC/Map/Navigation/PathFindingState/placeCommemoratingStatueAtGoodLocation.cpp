@@ -75,7 +75,7 @@ namespace Map {
                     if (iVar3 < 0) {
                         return;
                     }
-                    if (0x13a0f < iVar3) {
+                    if (0x13a10 <= iVar3) {
                         return;
                     }
                     sVar1 = this->searchQueue.xQueue[this->searchQueue.readIndex];
