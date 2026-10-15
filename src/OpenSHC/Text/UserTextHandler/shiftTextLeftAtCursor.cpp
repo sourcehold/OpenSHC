@@ -10,9 +10,9 @@ namespace Text {
     // FUNCTION: STRONGHOLDCRUSADER 0x004698F0
     void UserTextHandler::shiftTextLeftAtCursor(int startIndex, int count)
     {
-        for (int remaining = count; remaining != 0; --remaining) {
-            this->textArray[this->textArrayIndex][startIndex]
-                = this->textArray[this->textArrayIndex][startIndex + 1];
+        while (count != 0) {
+            this->textArray[this->textArrayIndex][startIndex] = this->textArray[this->textArrayIndex][startIndex + 1];
+            --count;
             ++startIndex;
         }
     }
