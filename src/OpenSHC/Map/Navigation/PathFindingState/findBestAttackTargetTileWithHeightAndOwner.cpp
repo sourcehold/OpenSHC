@@ -86,7 +86,7 @@ namespace Map {
                     int sVar2 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                     iVar6 = (int)sVar2;
                     uint uVar8 = DAT_TileMapState::instance.LogicLayer[uVar4];
-                    uint uVar11 = (uint) * (byte*)(param_7 * 0x13a10 + 0x1ee2998 + uVar4);
+                    uint uVar11 = (uint) DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[param_7][uVar4];
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[uVar4];
                     if ((int)this->searchQueue.currentDistance <= param_1) {
                         if ((DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY)
