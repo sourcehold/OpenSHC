@@ -179,7 +179,7 @@ namespace Map {
                     goto LAB_004a7e8c;
             }
             this->searchQueue.readIndex = 0;
-            if (0 < this->searchQueue.writeIndex) {
+            if (0 < (int)this->searchQueue.writeIndex) {
                 _pDest2
                     = &((PathFindingStatePartB*)(this->climbData + 200))->destinationsArray[_destIndex].tile2OrAHelper;
                 do {
@@ -224,7 +224,7 @@ namespace Map {
             }
         LAB_004a7e8c:
             this->searchQueue.readIndex = 0;
-            if (0 < this->searchQueue.writeIndex) {
+            if (0 < (int)this->searchQueue.writeIndex) {
                 _pDest3
                     = &((PathFindingStatePartB*)(this->climbData + 200))->destinationsArray[_destIndex].tile2OrAHelper;
                 do {
