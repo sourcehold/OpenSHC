@@ -65,7 +65,7 @@ namespace Map {
                 if (_tile < 0) {
                     return FALSE;
                 }
-                if (0x13a0f < _tile) {
+                if (0x13a10 <= _tile) {
                     return FALSE;
                 }
                 _x = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
