@@ -49,7 +49,7 @@ namespace Map {
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             while (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 this->ALG_ResultTile = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
-                if ((this->ALG_ResultTile < 0) || (0x13a0f < this->ALG_ResultTile))
+                if ((this->ALG_ResultTile < 0) || (0x13a10 <= this->ALG_ResultTile))
                     break;
                 _x = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                 _y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
