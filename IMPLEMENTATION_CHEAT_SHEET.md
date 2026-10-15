@@ -208,6 +208,19 @@ SEC_RNG::ptr->currentNumber1 % 4
   followed by `+mov ..., dword ptr` of the same address; try the cast on the index first, then on the compared operand.
   The cast does nothing when the two uses are already different expressions (`hostChecksLobbyAIVAvailability` keeps
   its `currentAIArray[player]` reload for another reason), so measure with `quick_diff.py` before building.
+- **A read through a reference or pointer alias is not merged with the direct read.** `int const& r = arr[i];`
+  (or `int const* p = &arr[i];`) followed by `arr[i]` written out is two loads for MSVC 14, while `int const copy =
+  arr[i];` is merged with the direct read. This is the lever when the `(uint)` cast above is neutral, i.e. when the
+  second use is a plain value rather than an index:
+  - the original compares memory and reloads it after a branch (`cmp dword ptr [esi*4 + G], ebx; je ...;
+    mov ecx, dword ptr [esi*4 + G]`): keep the test on the field and read the value again through an alias,
+    `int const& ai = arr[player]; int const aiID = ai;` (`hostChecksLobbyAIVAvailability`, 68.6% -> 100%, together
+    with `int const* const availability = &this->array[aiIndex];` per outer iteration, which gave the original its
+    third induction register);
+  - the original compares a register to itself (`cmp eax, eax; je`): that is a third clause `arr[player] == ref`
+    with `int const& ref = arr[player];` - every spelling of `x == x`, a duplicated `== -1` and the casts fold away
+    (`updateBuildingsStateAndUpdateAIBuildingDecisions`, 91.3% -> 100%).
+  Our `/FA` listing shows `npad 5` where the original has `jmp` + `lea ecx, [ecx]`; that pair is the pad, not a diff.
 - **A constant index held in a local stops the per-struct multiply being shared.** When the original recomputes
   `playerID * 0x39f4` in every basic block (`mov eax, ecx; imul eax, eax, 0x39f4` three times, with `playerID` staying
   in its register) while we multiply once, the array index in the source was a *variable* that the optimizer only
