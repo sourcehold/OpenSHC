@@ -81,10 +81,10 @@ namespace Map {
                         continue;
                     }
                     if ((DAT_TileMapState::instance.BuildingLayer[_nextTile] != 0)
-                        && (2 < (int)(short)DAT_BuildingsState::instance
-                                    .buildings[DAT_TileMapState::instance.BuildingLayer[_nextTile]]
-                                    .buildingType
-                                - 0x4a)) {
+                        && (2 < (uint)((short)DAT_BuildingsState::instance
+                                        .buildings[DAT_TileMapState::instance.BuildingLayer[_nextTile]]
+                                        .buildingType
+                                    - 0x4a))) {
                         continue;
                     }
                     if ((DAT_TileMapState::instance.LogicLayer[_nextTile] & 0x40000000) != 0) {
