@@ -149,14 +149,14 @@ namespace Map {
                             DAT_TileMapState::instance.CertainPathLayer[iVar3]
                                 = (short)this->searchQueue.currentDistance + 1;
                             DAT_TileMapState::instance.WalkLayer[iVar3] = (short)this->searchGeneration;
-                            this->searchQueue.xQueue[this->searchQueue.writeIndex]
-                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[uVar4]
-                                      .short_.xOffset
-                                + sVar1;
                             this->searchQueue.yQueue[this->searchQueue.writeIndex]
                                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[uVar4]
                                       .short_.yOffset
                                 + _y;
+                            this->searchQueue.xQueue[this->searchQueue.writeIndex]
+                                = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[uVar4]
+                                      .short_.xOffset
+                                + sVar1;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = iVar3;
                             this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
                             if (0x13a10 <= (int)this->searchQueue.writeIndex) {
