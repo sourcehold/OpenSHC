@@ -24,8 +24,6 @@ namespace Map {
         void PathFindingState::budgetFloodFillOnCertainPathLayer(uint x, uint y, int marker, int budget)
         {
             int iVar1;
-            int* piVar2;
-            int* piVar3;
             uint _candidate;
             uint uVar4;
             short _distance;
