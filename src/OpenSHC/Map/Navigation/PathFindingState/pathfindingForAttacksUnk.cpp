@@ -6,6 +6,7 @@
 #include "OpenSHC/Map/Navigation/Algorithms/XYPair.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
+#include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_ClimbLogicDefinedData.hpp"
@@ -81,7 +82,7 @@ namespace Map {
                         && (((int)(short)DAT_TileMapState::instance.PathConnectionLayer[iVar13] == param_4
                                 || (iVar12 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                                    calculateCanPlayerUnitsNavigateToAreaFromArea,
-                                        this)(param_5, (dword)((int)(param_4)),
+                                        DAT_PathFindingState::ptr)(param_5, (dword)((int)(param_4)),
                                         (dword)((
                                             int)((int)(short)DAT_TileMapState::instance.PathConnectionLayer[iVar13])),
                                         0),
@@ -154,7 +155,7 @@ namespace Map {
                                             || (iVar15
                                                 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                                         calculateCanPlayerUnitsNavigateToAreaFromArea,
-                                                    this)(param_5, (dword)((int)(param_4)),
+                                                    DAT_PathFindingState::ptr)(param_5, (dword)((int)(param_4)),
                                                     (dword)((int)((short)(short)(short)
                                                             DAT_TileMapState::instance.PathConnectionLayer[tile2])),
                                                     0),
