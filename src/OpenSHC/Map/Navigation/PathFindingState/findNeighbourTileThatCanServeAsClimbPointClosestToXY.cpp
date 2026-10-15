@@ -29,7 +29,6 @@ namespace Map {
             int _candidate2;
             int _tile2;
             uint _c2Height;
-            int* piVar4;
             int _minDistance;
             BOOL _status;
             ushort _area1;
