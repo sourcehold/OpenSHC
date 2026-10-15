@@ -22,7 +22,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049CB00
         void PathFindingState::computeNextRallyPointDestination(int unitID, int xPos, int yPos)
         {
-            short* _pOffsets;
             int _cY_2;
             int (*_cY2)[8];
             int _cTile;
