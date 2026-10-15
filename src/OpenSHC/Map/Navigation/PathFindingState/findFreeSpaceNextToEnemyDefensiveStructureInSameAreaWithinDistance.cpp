@@ -80,8 +80,8 @@ namespace Map {
             this->searchQueue.readIndex = 0;
             this->searchQueue.tilesQueue[0] = tile;
             this->searchQueue.yQueue[0] = _origY;
-            this->searchQueue.xQueue[0] = (short)tile - (short)_origAXGT;
             DAT_TileMapState::instance.CertainPathLayer[tile] = 1;
+            this->searchQueue.xQueue[0] = (short)tile - (short)_origAXGT;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 while (_tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex], _tile <= 0x13a0f) {
@@ -105,13 +105,13 @@ namespace Map {
                             short sVar1
                                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                       .short_.xOffset;
+                            this->searchQueue.xQueue[this->searchQueue.writeIndex] = sVar1 + _x;
                             /*
                               queue tiles in same area that are pathable without climbing
                              */
                             DAT_TileMapState::instance.CertainPathLayer[_candidate]
                                 = (short)this->searchQueue.currentDistance + 1;
                             DAT_TileMapState::instance.WalkLayer[_candidate] = (short)this->searchGeneration;
-                            this->searchQueue.xQueue[this->searchQueue.writeIndex] = sVar1 + _x;
                             this->searchQueue.yQueue[this->searchQueue.writeIndex]
                                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
                                       .short_.yOffset
@@ -170,9 +170,9 @@ namespace Map {
                         if (((shortenedDistance != 1)
                                 || ((short)DAT_TileMapState::instance.UnitLayer[_candidate2] == 0))
                             && _candidate2 != 0) {
+                            *area = _candidate2;
                             area[-1] = _tile2;
                             _dIndex = _dIndex + 1;
-                            *area = _candidate2;
                             area = area + 3;
                             if (maxDestinations <= _dIndex) {
                                 return;
