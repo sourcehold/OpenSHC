@@ -30,13 +30,12 @@ namespace Map {
                     if (this->climbData[DAT_CurrentClimbDataID::instance].canBeUsed == 0) {
                         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::clearClimbData, this)(
                             DAT_CurrentClimbDataID::instance);
-                        iVar1 = this->debugGreatestClimbLoading;
-                    } else {
-                        this->numberOfClimbTeleports = this->numberOfClimbTeleports + 1;
-                        iVar1 = this->climbData[DAT_CurrentClimbDataID::instance].numberOfUnitsUsing;
-                        if (iVar1 <= this->debugGreatestClimbLoading)
-                            goto LAB_004a9740;
+                        goto LAB_004a9740;
                     }
+                    this->numberOfClimbTeleports = this->numberOfClimbTeleports + 1;
+                    iVar1 = this->climbData[DAT_CurrentClimbDataID::instance].numberOfUnitsUsing;
+                    if (iVar1 <= this->debugGreatestClimbLoading)
+                        goto LAB_004a9740;
                     this->debugGreatestClimbLoading = iVar1;
                 }
             LAB_004a9740:
