@@ -47,7 +47,7 @@ namespace Map {
             this->searchQueue.xQueue[0] = (short)param_2;
             this->searchQueue.tilesQueue[0]
                 = DAT_ViewportRenderState::instance.translationMatrix[param_3].addXgetTile + param_2;
-            int bVar1 = *(byte*)(param_4 * 0x13a10 + 0x1ee2998 + this->searchQueue.tilesQueue[0]);
+            int bVar1 = DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[param_4][this->searchQueue.tilesQueue[0]];
             DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
@@ -65,7 +65,7 @@ namespace Map {
                                 != 0
                             && (dVar6 = DAT_TileMapState::instance.directionTranslationMatrix[iVar7][iVar10] + uVar5,
                                 DAT_TileMapState::instance.WalkLayer[dVar6] != this->searchGeneration)) {
-                            uint uVar9 = (uint) * (byte*)(param_4 * 0x13a10 + 0x1ee2998 + dVar6);
+                            uint uVar9 = (uint) DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[param_4][dVar6];
                             if (uVar9 < 4) {
                                 uVar9 = 0;
                             LAB_0049fdba:
