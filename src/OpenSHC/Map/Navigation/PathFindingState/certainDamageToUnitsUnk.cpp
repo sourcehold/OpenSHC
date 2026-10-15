@@ -42,9 +42,7 @@ namespace Map {
         {
             short sVar5;
             short sVar6;
-            short* psVar8;
             int iVar9;
-            int* piVar10;
             int iVar11;
             eSFX sfxOffsetInArray;
             EntityType local_8;
