@@ -135,8 +135,8 @@ namespace Map {
                         } else if (0 < DAT_TileMapState::instance.CertainPathLayer[uVar4]) {
                             iVar1 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction + 3]
                                         .int_.xOffset;
-                            _tilesQueue[_writeIndex] = uVar4;
                             _xs[_writeIndex] = iVar1 + _yUnk;
+                            _tilesQueue[_writeIndex] = uVar4;
                             _ys[_writeIndex]
                                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction + 3]
                                       .int_.yOffset
