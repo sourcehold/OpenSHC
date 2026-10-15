@@ -25457,7 +25457,7 @@ SHC_3BB0A8C1_0x004A9200 | 48.7% | split bounds guard
 
 SHC_3BB0A8C1_0x004A94E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004A9510 | 54.0% | loop bound off-by-one
+SHC_3BB0A8C1_0x004A9510 | 73.0% | orig branch order + loop shape
 
 SHC_3BB0A8C1_0x004A9680 | 100.0% | Reimplemented
 
