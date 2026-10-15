@@ -23,7 +23,6 @@ namespace Map {
         undefined4 PathFindingState::findClosestFreeTileNearUnitOnBuilding(
             int buildingID, int unitID, int x, int y, int* pX, int* pY)
         {
-            uint uVar3;
             int (*paiVar4)[8];
             int iVar5;
             int _lowestDist;
@@ -63,9 +62,7 @@ namespace Map {
                 _x = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                 _y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                 iVar5 = (int)_y;
-                uint uVar1 = _x - x;
-                uVar3 = (int)uVar1 >> 0x1f;
-                int _absDistX = (uVar1 ^ uVar3) - uVar3;
+                int _absDistX = abs(_x - x);
                 int _absDistY = abs(iVar5 - y);
                 if (_absDistY < _absDistX) {
                     _absDistY = _absDistX;
