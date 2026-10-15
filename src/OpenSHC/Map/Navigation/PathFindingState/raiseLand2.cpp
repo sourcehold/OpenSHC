@@ -23,9 +23,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049A6D0
         void PathFindingState::raiseLand2(uint x, uint y, int maxDistance)
         {
-            short* psVar4;
             int iVar5;
-            int* piVar6;
             if (x > 399 || y > 399 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
                 return;
             }
