@@ -245,8 +245,8 @@ namespace Map {
                 if (local_968 < iVar5) {
                     do {
                         dVar2 = adStack_960[local_968];
-                        iVar6 = 0;
                         local_968 = local_968 + 1;
+                        iVar6 = 0;
                         if (0 < local_96c) {
                             do {
                                 if (aiStack_640[iVar6 * 2 + 1] != 1) {
