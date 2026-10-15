@@ -43,9 +43,9 @@ namespace Map {
             uint uVar7;
             int _nextCandidate;
             int _tile;
-            int sVar1 = DAT_UnitsState::instance.units[unitID].x;
+            short sVar1 = DAT_UnitsState::instance.units[unitID].x;
             uVar5 = (uint)sVar1;
-            int sVar2 = DAT_UnitsState::instance.units[unitID].y;
+            short sVar2 = DAT_UnitsState::instance.units[unitID].y;
             uVar7 = (uint)sVar2;
             this->calculations = this->calculations + 1;
             this->ALG_ResultTile = 0;
