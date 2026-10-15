@@ -33,8 +33,10 @@ namespace Map {
             short _buildingID;
             int _x;
             int _y;
-            if (399 < (uint)x || 399 < (uint)y
-                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
+            if (399 < (uint)x || 399 < (uint)y) {
+                return (undefined4)(0);
+            }
+            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
                 return (undefined4)(0);
             }
             this->calculations = this->calculations + 1;
