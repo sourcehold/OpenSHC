@@ -66,9 +66,9 @@ namespace Map {
             this->searchQueue.currentDistance = 1;
             this->searchQueue.writeIndex = 1;
             this->searchQueue.readIndex = 0;
+            this->searchQueue.yQueue[0] = sVar2;
             this->searchQueue.tilesQueue[0]
                 = DAT_ViewportRenderState::instance.translationMatrix[uVar7].addXgetTile + uVar5;
-            this->searchQueue.yQueue[0] = sVar2;
             this->searchQueue.xQueue[0] = sVar1;
             DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
@@ -77,8 +77,8 @@ namespace Map {
                 while ((_tile = this->searchQueue.tilesQueue[this->searchQueue.readIndex],
                     -1 < _tile && (_tile < 0x13a10))) {
                     sVar1 = this->searchQueue.xQueue[this->searchQueue.readIndex];
-                    sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
+                    sVar2 = this->searchQueue.yQueue[this->searchQueue.readIndex];
                     if (0x13a10 < (int)this->searchQueue.currentDistance) {
                         return;
                     }
