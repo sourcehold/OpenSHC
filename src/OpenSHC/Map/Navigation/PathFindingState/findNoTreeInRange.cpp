@@ -29,7 +29,6 @@ namespace Map {
         BOOLEnum PathFindingState::findNoTreeInRange(int budget, uint x, uint y)
         {
             int (*paiVar2)[8];
-            short* psVar3;
             int _tile;
             TreeTypeShort _treeType;
             this->ALG_ResultTile = 0;
