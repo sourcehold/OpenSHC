@@ -87,13 +87,13 @@ namespace Map {
              */
             this->searchQueue.currentDistance = 1;
             /*
-              Add starting position to queue
-             */
-            this->searchQueue.yQueue[0] = (short)y;
-            /*
               Convert 2D coordinates to 1D tile index
              */
             this->searchQueue.tilesQueue[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+            /*
+              Add starting position to queue
+             */
+            this->searchQueue.yQueue[0] = (short)y;
             /*
               Mark starting tile with distance 1
              */
@@ -162,11 +162,11 @@ namespace Map {
                             if (4 < (int)this->searchQueue.currentDistance
                                 && (short)DAT_TileMapState::instance.UnitLayer[_offsetTile] == 0 && bVar2) {
                                 iVar6 = 0;
-                                local_c = 0;
                                 /*
                                   Get height of candidate tile
                                  */
                                 uVar7 = (uint)DAT_TileMapState::instance.HeightLayer[_offsetTile];
+                                local_c = 0;
                                 /*
                                   Get pointer to movement direction offsets for checking surrounding tiles   Track
                                   minimum height in surrounding area
