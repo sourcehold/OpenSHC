@@ -45,7 +45,7 @@ namespace Map {
                             MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::addUnitToTribe,
                                 DAT_TribesState::ptr)(_unitID_2, tribeID);
                         }
-                        if (count < 1) {
+                        if (count <= 0) {
                             return;
                         }
                         MACRO_CALL_MEMBER(
