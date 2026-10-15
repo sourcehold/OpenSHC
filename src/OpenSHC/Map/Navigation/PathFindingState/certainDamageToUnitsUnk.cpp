@@ -122,9 +122,9 @@ namespace Map {
                             } else {
                                 sVar6 = (short)((DAT_UnitsState::instance.units[iVar9].health * 100) / iVar11);
                             }
-                            DAT_UnitsState::instance.units[iVar9].healthPercentage = sVar6;
                             DAT_UnitsState::instance.units[iVar9].healthbar
                                 = sVar6 / 10;
+                            DAT_UnitsState::instance.units[iVar9].healthPercentage = sVar6;
                         }
                         uVar4 = DAT_UnitsState::instance.units[iVar9].nextUnitOnTheSameTile;
                     }
