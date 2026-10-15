@@ -76,12 +76,12 @@ namespace Map {
             local_14 = 10;
             while (true) {
                 while (true) {
-                    _init_10 = local_24;
-                    if ((_inBounds) && (local_24 < 2)) {
+                    if ((_inBounds) && ((int)local_24 <= 1)) {
                         return (uint)(this->searchQueue.pathPlanIndex);
                     }
                     _ptrTranslationMatrix = DAT_TileMapState::instance.directionTranslationMatrix[_y] + 1;
                     _direction = 8;
+                    _init_10 = local_24;
                     param_1 = local_24;
                     iVar4 = 2;
                     do {
