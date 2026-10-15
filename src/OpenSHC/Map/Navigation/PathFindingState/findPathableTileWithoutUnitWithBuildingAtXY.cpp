@@ -22,7 +22,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049CE40
         void PathFindingState::findPathableTileWithoutUnitWithBuildingAtXY(int unitID, int x, int y)
         {
-            short* psVar1;
             int iVar2;
             int (*paiVar3)[8];
             short _buildingAtStart;
