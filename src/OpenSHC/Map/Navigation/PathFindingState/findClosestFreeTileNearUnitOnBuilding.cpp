@@ -23,7 +23,6 @@ namespace Map {
         undefined4 PathFindingState::findClosestFreeTileNearUnitOnBuilding(
             int buildingID, int unitID, int x, int y, int* pX, int* pY)
         {
-            short* psVar2;
             uint uVar3;
             int (*paiVar4)[8];
             int iVar5;
