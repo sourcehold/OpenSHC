@@ -28,7 +28,7 @@ namespace Map {
                 do {
                     uint _y = (uint)this->searchQueue.yQueue[this->searchQueue.readIndex];
                     int _tileCandidate = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
-                    uint _cost = (uint) * (byte*)(playerID * 0x13a10 + 0x1ee2998 + _tileCandidate);
+                    uint _cost = (uint) DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[playerID][_tileCandidate];
                     uint _x = _tileCandidate - DAT_ViewportRenderState::instance.translationMatrix[_y].addXgetTile;
                     if (_cost != 0 && maxCost <= (int)_cost && (int)_cost <= maxCost + 10
                         && DAT_TileMapState::instance.CertainPathLayer[_tileCandidate] != 100) {
