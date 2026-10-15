@@ -48,7 +48,7 @@ namespace Map {
             _tilesQueue[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
             do {
                 _tile = _tilesQueue[_readIndex];
-                if (0x13a0f < _tile) {
+                if (0x13a10 <= _tile) {
                     return;
                 }
                 if (budget <= _writeIndex) {
