@@ -9,6 +9,7 @@
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_ClimbLogicDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
+#include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
@@ -201,7 +202,7 @@ namespace Map {
                     this->searchQueue.readIndex = 0;
                 }
             }
-            this->searchNonmatchCount = this->searchNonmatchCount + 1;
+            DAT_PathFindingState::instance.searchNonmatchCount = DAT_PathFindingState::instance.searchNonmatchCount + 1;
             return FALSE;
         }
 
