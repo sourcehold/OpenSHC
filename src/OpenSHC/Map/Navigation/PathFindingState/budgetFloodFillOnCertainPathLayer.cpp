@@ -34,7 +34,6 @@ namespace Map {
             uint _tile;
             uint _xUnk;
             uint _yUnk;
-            _tilesQueue[999] = 0x49ddca;
             _readIndex = 0;
             int _writeIndex = 1;
             if (x > 399 || y > 399) {
