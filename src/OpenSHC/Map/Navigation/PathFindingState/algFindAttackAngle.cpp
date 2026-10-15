@@ -90,7 +90,7 @@ namespace Map {
                                 + _yOption;
                             this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _tile;
                             this->searchQueue.writeIndex = this->searchQueue.writeIndex + 1;
-                            if (80400 < (int)this->searchQueue.writeIndex) {
+                            if (80400 <= (int)this->searchQueue.writeIndex) {
                                 this->searchQueue.writeIndex = 0;
                             }
                         }
