@@ -35,8 +35,9 @@ namespace Map {
             ushort uVar1 = DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[param_1].tile];
             this->searchQueue.yQueue[0] = DAT_UnitsState::instance.units[param_1].y;
             this->searchQueue.xQueue[0] = DAT_UnitsState::instance.units[param_1].x;
-            this->searchQueue.tilesQueue[0] = DAT_UnitsState::instance.units[param_1].tile;
-            DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
+            int _startTile = DAT_UnitsState::instance.units[param_1].tile;
+            this->searchQueue.tilesQueue[0] = _startTile;
+            DAT_TileMapState::instance.CertainPathLayer[_startTile] = 1;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 do {
