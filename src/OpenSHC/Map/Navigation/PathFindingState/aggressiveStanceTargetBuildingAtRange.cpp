@@ -40,7 +40,6 @@ namespace Map {
         {
             int (*paiVar4)[8];
             uint uVar5;
-            short* psVar6;
             uint uVar7;
             int _nextCandidate;
             int _tile;
