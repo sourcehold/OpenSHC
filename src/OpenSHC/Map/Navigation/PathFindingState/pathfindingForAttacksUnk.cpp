@@ -90,7 +90,7 @@ namespace Map {
                             || ((BVar4 != FALSE
                                 && (BVar6 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                                   calculateCanReachUsingCachedAreaLogic,
-                                        this)(DAT_UnitsState::instance.units[sVar2].tile, iVar13),
+                                        DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[sVar2].tile, iVar13),
                                     BVar6 != FALSE))))
                         && (uVar5 = (int)DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk
                                 - (uint)DAT_TileMapState::instance.HeightLayer[iVar13],
@@ -164,7 +164,7 @@ namespace Map {
                                             && (BVar6
                                                 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                                         calculateCanReachUsingCachedAreaLogic,
-                                                    this)(DAT_UnitsState::instance.units[sVar2].tile, tile2),
+                                                    DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[sVar2].tile, tile2),
                                                 BVar6 != FALSE))))
                                     && (uVar7 = (int)DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk
                                             - (uint)DAT_TileMapState::instance.HeightLayer[tile2],
