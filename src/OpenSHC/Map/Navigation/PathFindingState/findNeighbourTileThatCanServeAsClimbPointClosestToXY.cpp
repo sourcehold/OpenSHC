@@ -77,7 +77,7 @@ namespace Map {
                                 DAT_BuildingsState::ptr)((int)DAT_TileMapState::instance.BuildingLayer[_candidate2]);
                             _c2Height = _c2Height + iVar2;
                         }
-                        if ((int)y2 <= (int)(_c2Height + 16) && (int)(_c2Height - 4294967280) <= (int)y2) {
+                        if ((int)y2 <= (int)(_c2Height + 16) && (int)y2 >= (int)(_c2Height - 16)) {
                             /*
                               if the height of this candidate tile is within 16 of the tile2 height   then, compute the
                               distance between x,y and the candidate2 tile
