@@ -42,7 +42,8 @@ namespace Map {
             this->searchQueue.currentDistance = 1;
             this->searchQueue.readIndex = 0;
             this->searchQueue.writeIndex = 1;
-            _unitArea = (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile];
+            _unitArea
+                = (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile];
             *pX = (int)DAT_UnitsState::instance.units[unitID].x;
             *pY = (int)DAT_UnitsState::instance.units[unitID].y;
             this->searchQueue.yQueue[0] = DAT_UnitsState::instance.units[unitID].y;
