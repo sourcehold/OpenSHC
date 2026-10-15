@@ -120,7 +120,7 @@ namespace Map {
                                     adStack_960[iVar6] = dVar8;
                                     aiStack_640[iVar4 * 2 + 1] = 1;
                                     iVar3 = iVar6 + 1;
-                                    if ((int)dVar2 < 1)
+                                    if ((int)dVar2 <= 0)
                                         goto LAB_004a5ad0;
                                     adStack_960[iVar6 + 1] = dVar2;
                                 } else {
