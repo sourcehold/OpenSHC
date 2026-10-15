@@ -23,7 +23,6 @@ namespace Map {
         void PathFindingState::updatePathLinkagesInAllEightDirections(int y, int tile)
         {
             int (*paiVar1)[8];
-            int* piVar2;
             int _someLinkageResult;
             _someLinkageResult = 0;
             MACRO_CALL_MEMBER(
