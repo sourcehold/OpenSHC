@@ -42,13 +42,13 @@ namespace Map {
                     DAT_DirectionAlgorithmState::instance.distanceHigh <= range)) {
                 return (undefined4)(0);
             }
-            piVar1 = &DAT_GameState::instance.playerDataArray[1].keep.yEntry;
+            piVar1 = &DAT_GameState::instance.playerDataArray[1].keep.tileEntry;
             piVar2 = DAT_GameState::instance.mapAndTime.playerTeams + 1;
             while (*piVar2 != DAT_GameState::instance.mapAndTime.playerTeams[playerID]
-                || ((BuildingEntryInfo*)(piVar1 + -2))->id == 0
+                || ((BuildingEntryInfo*)(piVar1 + -3))->id == 0
                 || (MACRO_CALL_MEMBER(
                         OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
-                        DAT_DirectionAlgorithmState::ptr)(x, (int)(y), (int)(piVar1[-1]), (int)(*piVar1)),
+                        DAT_DirectionAlgorithmState::ptr)(x, (int)(y), (int)(piVar1[-2]), (int)(piVar1[-1])),
                     range / 2 < DAT_DirectionAlgorithmState::instance.distanceHigh)) {
                 piVar2 = piVar2 + 1;
                 piVar1 = piVar1 + 0xe7d;
