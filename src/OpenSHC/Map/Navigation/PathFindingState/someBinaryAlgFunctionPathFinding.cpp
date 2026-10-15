@@ -45,7 +45,7 @@ namespace Map {
                     if (iVar4 < 0) {
                         return (undefined4)(1);
                     }
-                    if (0x13a0f < iVar4) {
+                    if (0x13a10 <= iVar4) {
                         return (undefined4)(1);
                     }
                     int sVar2 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
