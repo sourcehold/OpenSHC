@@ -113,7 +113,7 @@ namespace Map {
                         } while ((int)pXVar8 < 0xb39238);
                         local_24 = local_24 + 3;
                         local_28 = local_28 + 1;
-                        if (param_3 <= local_28) {
+                        if (local_28 >= param_3) {
                             return;
                         }
                     }
