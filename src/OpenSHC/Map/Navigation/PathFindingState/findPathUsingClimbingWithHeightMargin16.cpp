@@ -87,7 +87,7 @@ namespace Map {
                     this->searchMatchCounter = this->searchMatchCounter + 1;
                     return TRUE;
                 }
-                if ((budget <= this->searchQueue.readIndex) || (0x13a0f < _tile))
+                if ((budget <= this->searchQueue.readIndex) || (0x13a10 <= _tile))
                     break;
                 int sVar1 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                 int sVar2 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
