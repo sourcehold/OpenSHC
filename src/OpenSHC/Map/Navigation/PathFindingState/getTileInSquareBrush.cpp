@@ -36,7 +36,6 @@ namespace Map {
             /*
               __chkstk
              */
-            _tileArray[999] = 0x49be6a;
             _index_3 = 1;
             this->calculations = this->calculations + 1;
             this->searchGeneration = this->searchGeneration + 1;
