@@ -59,7 +59,7 @@ namespace Map {
                 }
                 int iVar4 = (int)sVar2 / 10;
                 int iVar5 = iVar8 / 10;
-                *(undefined1*)(iVar4 + 0x1f93438 + iVar5 * 0x28) = 2;
+                DAT_TileMapState::instance.mapping40x40[iVar5][iVar4] = 2;
                 if (iVar4 < (int)DAT_TileMapState::instance.someYLike) {
                     DAT_TileMapState::instance.someYLike = iVar4;
                 }
