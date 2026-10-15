@@ -24399,7 +24399,7 @@ SHC_3BB0A8C1_0x0049A1C0 | 52.8% | shifted row index variable
 
 SHC_3BB0A8C1_0x0049A2E0 | 96.3% | index locals + statement order
 
-SHC_3BB0A8C1_0x0049A370 | 11.2% | Style pass, asm differs
+SHC_3BB0A8C1_0x0049A370 | 12.5% | statement order
 
 SHC_3BB0A8C1_0x0049A5E0 | 78.3% | Style pass, asm differs
 

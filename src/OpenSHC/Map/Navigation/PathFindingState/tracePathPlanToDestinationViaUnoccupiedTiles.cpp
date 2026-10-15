@@ -62,8 +62,8 @@ namespace Map {
             _direction = 0;
             _gen = (ushort)this->searchGeneration;
             _fireCount = DAT_EntityState::instance.fireCount;
-            _tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
             _destTile = DAT_ViewportRenderState::instance.translationMatrix[destY].addXgetTile + destX;
+            _tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
             _occupancy = DAT_TileMapState::instance.OccupancyLayer;
             _walkLayer = DAT_TileMapState::instance.WalkLayer;
             _linkage = DAT_TileMapState::instance.PathLinkageLayer;
