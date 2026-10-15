@@ -194,6 +194,20 @@ SEC_RNG::ptr->currentNumber1 % 4
   arithmetic, an inlined accessor, in-place decrement, unsigned) all folded - only the missing local matters. The
   same applies to any other decompiler local for a field (`tracker`, `outerPatrolGroupsCount`): reading the field at
   every use took `getTargetableBuildingForPlayerID` from 65% to 100%.
+- **A field compared straight from memory and then reloaded was read with two different types.** The signature is
+  `cmp dword ptr [esi + off], -1; je ...; mov eax, dword ptr [esi + off]` in the original where we emit one load and
+  compare the register. MSVC 14.00 only CSEs two reads of the same expression, and an `int` compare and an unsigned
+  array index are not the same expression, so cast the *indexing* use to `(uint)` and keep the compare on the plain
+  field:
+  ```cpp
+  if (this->buildingApproriateGridXPosition == -1)
+      return;
+  this->heatMaps[(uint)this->buildingApproriateGridXPosition][(uint)this->buildingAppropriateGridYPosition] = ...;
+  ```
+  `AIVState::aiPlaceWoodcuttershut` went 91.4% -> 100% on that alone. Grep a reccmp diff for `-cmp dword ptr [...]`
+  followed by `+mov ..., dword ptr` of the same address; try the cast on the index first, then on the compared operand.
+  The cast does nothing when the two uses are already different expressions (`hostChecksLobbyAIVAvailability` keeps
+  its `currentAIArray[player]` reload for another reason), so measure with `quick_diff.py` before building.
 - **A constant index held in a local stops the per-struct multiply being shared.** When the original recomputes
   `playerID * 0x39f4` in every basic block (`mov eax, ecx; imul eax, eax, 0x39f4` three times, with `playerID` staying
   in its register) while we multiply once, the array index in the source was a *variable* that the optimizer only
