@@ -101,7 +101,7 @@ namespace Map {
                                 || ((_assasinsTribe != 0
                                     && (BVar6 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                                       calculateCanReachUsingCachedAreaLogic,
-                                            this)(iVar4, iVar12),
+                                            DAT_PathFindingState::ptr)(iVar4, iVar12),
                                         BVar6 != FALSE))))) {
                             short sVar3
                                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction]
