@@ -144,7 +144,7 @@ namespace Map {
                                     _dIndex = _dIndex + 1;
                                     ((PathHelper12*)(piVar3 + -1))->tile1 = _tile2;
                                     piVar3 = piVar3 + 3;
-                                    if (maxDestinations <= _dIndex) {
+                                    if (_dIndex >= maxDestinations) {
                                         return;
                                     }
                                     this->searchQueue.tilesQueue[this->searchQueue.readIndex] = -1;
@@ -171,7 +171,7 @@ namespace Map {
                         *piVar3 = 0;
                         _dIndex = _dIndex + 1;
                         piVar3 = piVar3 + 3;
-                        if (maxDestinations <= _dIndex) {
+                        if (_dIndex >= maxDestinations) {
                             return;
                         }
                     }
