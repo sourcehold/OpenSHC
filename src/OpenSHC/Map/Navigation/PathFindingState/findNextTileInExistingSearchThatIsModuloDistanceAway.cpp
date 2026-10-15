@@ -18,27 +18,23 @@ namespace Map {
         void PathFindingState::findNextTileInExistingSearchThatIsModuloDistanceAway(int modulo, int x, int y)
         {
             int iVar2;
-            uint uVar3;
-            uint uVar4;
+            int _dx;
+            int _dy;
             int* _pLastTile;
-            uint uVar5;
-            uint uVar6;
             int local_10;
             local_10 = 0;
             _pLastTile = this->searchQueue.tilesQueue + DAT_TribesState::instance.ALG_ResultTileIndex;
             while (true) {
                 int iVar1 = *_pLastTile;
                 if (0 < DAT_TileMapState::instance.CertainPathLayer[iVar1]
-                    && (uVar3 = (iVar1
-                                    - DAT_ViewportRenderState::instance
+                    && (_dx = (iVar1
+                                  - DAT_ViewportRenderState::instance
                                         .translationMatrix[DAT_ViewportRenderState::instance
                                                 .tileTranslationMatrix_YComponent[iVar1]]
                                         .addXgetTile)
                             - x,
-                        uVar5 = (int)uVar3 >> 0x1f,
-                        uVar4 = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[iVar1] - y,
-                        uVar6 = (int)uVar4 >> 0x1f,
-                        (int)(((uVar4 ^ uVar6) - uVar6) + ((uVar3 ^ uVar5) - uVar5)) % modulo == 0)
+                        _dy = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[iVar1] - y,
+                        (abs(_dy) + abs(_dx)) % modulo == 0)
                     && (iVar2 = DAT_TribesState::instance.ALG_ResultTileIndex,
                         DAT_TileMapState::instance.CertainPathLayer[iVar1] < 4000))
                     break;
