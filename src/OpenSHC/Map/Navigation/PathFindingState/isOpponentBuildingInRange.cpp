@@ -28,7 +28,6 @@ namespace Map {
             int playerID, int x, int y, int range, int param_5, int param_6, int keepRange)
         {
             int iVar1;
-            short* psVar2;
             int (*paiVar3)[8];
             int _tile;
             short _buildingID;
