@@ -50,8 +50,7 @@ namespace Map {
             this->searchQueue.xQueue[0] = DAT_UnitsState::instance.units[unitID].x;
             int _startTile = DAT_UnitsState::instance.units[unitID].tile;
             this->searchQueue.tilesQueue[0] = _startTile;
-            DAT_TileMapState::instance.CertainPathLayer[_startTile]
-                = (short)this->searchQueue.currentDistance;
+            DAT_TileMapState::instance.CertainPathLayer[_startTile] = (short)this->searchQueue.currentDistance;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             if (this->searchQueue.readIndex == this->searchQueue.writeIndex) {
                 return (undefined4)(1);
@@ -67,8 +66,7 @@ namespace Map {
                 uint uVar1 = _x - x;
                 uVar3 = (int)uVar1 >> 0x1f;
                 int _absDistX = (uVar1 ^ uVar3) - uVar3;
-                uVar1 = iVar5 - y >> 0x1f;
-                int _absDistY = (iVar5 - y ^ uVar1) - uVar1;
+                int _absDistY = abs(iVar5 - y);
                 if (_absDistY < _absDistX) {
                     _absDistY = _absDistX;
                 }
