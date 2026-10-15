@@ -60,16 +60,16 @@ namespace Map {
                 int iVar4 = (int)sVar2 / 10;
                 int iVar5 = iVar8 / 10;
                 *(undefined1*)(iVar4 + 0x1f93438 + iVar5 * 0x28) = 2;
-                if (iVar4 < DAT_TileMapState::instance.someYLike) {
+                if (iVar4 < (int)DAT_TileMapState::instance.someYLike) {
                     DAT_TileMapState::instance.someYLike = iVar4;
                 }
-                if (DAT_TileMapState::instance.someYLikeLimit < iVar4) {
+                if ((int)DAT_TileMapState::instance.someYLikeLimit < iVar4) {
                     DAT_TileMapState::instance.someYLikeLimit = iVar4;
                 }
-                if (iVar5 < DAT_TileMapState::instance.someIndex) {
+                if (iVar5 < (int)DAT_TileMapState::instance.someIndex) {
                     DAT_TileMapState::instance.someIndex = iVar5;
                 }
-                if (DAT_TileMapState::instance.someLimit < iVar5) {
+                if ((int)DAT_TileMapState::instance.someLimit < iVar5) {
                     DAT_TileMapState::instance.someLimit = iVar5;
                 }
                 this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[uVar3];
