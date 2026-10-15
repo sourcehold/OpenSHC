@@ -5,6 +5,7 @@
 #include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 #include "OpenSHC/Map/Navigation/Algorithms/XYPair.hpp"
 
+#include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_ClimbLogicDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
@@ -81,7 +82,7 @@ namespace Map {
                             && (area == (int)(short)DAT_TileMapState::instance.PathConnectionLayer[_candidate]
                                 || (iVar2 = MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                                                   calculateCanPlayerUnitsNavigateToAreaFromArea,
-                                        this)(playerID, (dword)((int)(area)),
+                                        DAT_PathFindingState::ptr)(playerID, (dword)((int)(area)),
                                         (dword)((int)((
                                             int)(short)DAT_TileMapState::instance.PathConnectionLayer[_candidate])),
                                         0),
