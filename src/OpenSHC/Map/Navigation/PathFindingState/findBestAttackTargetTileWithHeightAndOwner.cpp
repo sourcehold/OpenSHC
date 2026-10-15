@@ -51,7 +51,7 @@ namespace Map {
             uint local_8;
             local_14 = -1;
             local_10 = -1;
-            local_c = 0xffffffff;
+            local_c = -1;
             this->calculations = this->calculations + 1;
             local_20 = 1000000;
             this->ALG_TargetTile = 0;
@@ -113,7 +113,7 @@ namespace Map {
                                     if ((uVar8 & 0x400) == 0) {
                                         iVar9 = 0x4b;
                                     }
-                                    if ((int)this->searchQueue.currentDistance < 1) {
+                                    if ((int)this->searchQueue.currentDistance <= 0) {
                                         iVar9 = 100000;
                                     } else if ((int)this->searchQueue.currentDistance < 0x10) {
                                         iVar9 = (iVar9 + -100) * this->searchQueue.currentDistance + 0x5dc;
@@ -126,7 +126,7 @@ namespace Map {
                                 && param_9 == 0) {
                                 iVar9 = (uint)DAT_TileMapState::instance.HeightLayer[uVar4]
                                     - (uint)DAT_TileMapState::instance.DefaultHeightLayer[uVar4];
-                                if ((int)this->searchQueue.currentDistance < 1) {
+                                if ((int)this->searchQueue.currentDistance <= 0) {
                                     iVar9 = 100000;
                                 } else if ((int)this->searchQueue.currentDistance < 0x10) {
                                     iVar9 = (0x14 - this->searchQueue.currentDistance) * 300 + iVar9;
