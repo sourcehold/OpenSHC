@@ -22,7 +22,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049BBF0
         void PathFindingState::findFurthestSeaTile(int budget, uint x, uint y)
         {
-            short* psVar1;
             int (*paiVar2)[8];
             int _x;
             int _y;
