@@ -309,8 +309,9 @@ Diff patterns that were reliable (more in the cheat sheet):
 - Trust the asm over the decompilation for constants and their sign. Ghidra rendered `2400 / n + 40` where the binary
   has `sub eax, 0x28`, so the formula is `- 40`; the function reached 100% once corrected (`diff_types.py` finds these).
   A `(longlong)` in a Ghidra division is usually spurious too - it emits `_alldiv` where the original has a plain `idiv`.
-- MSVC1400 at `/O2` never unrolls a loop, so a body repeated N times in the asm means the source was written out N
-  times. A plain loop where the original is unrolled has cost 80 points on its own.
+- MSVC1400 at `/O2` does unroll small constant-trip loops (`applyAIV`'s 10-iteration unit loop comes out five copies
+  wide from a plain `for`), and `!=` as the bound suppresses it - see the cheat sheet. A body repeated N times in the
+  asm is therefore not proof that the source wrote it out N times; compile the plain loop first and compare.
 - A flag stored with `mov dword ptr [..], 0/1` is an `int`, not a `bool`, which stores a byte.
 - Tentative, one clear case so far: where two arms of a condition share a tail, the nested `if/else` shape the
   decompiler emits can beat the early returns the style list above asks for, because it decides *which* arm holds the
