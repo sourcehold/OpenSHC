@@ -33,7 +33,10 @@ namespace Map {
             BOOL _status;
             ushort _area1;
             uint uVar1 = y2;
-            if (399 < x || 399 < y || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
+            if (399 < x || 399 < y) {
+                return 0;
+            }
+            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
                 return 0;
             }
             if (x2 <= 399 && y2 <= 399
