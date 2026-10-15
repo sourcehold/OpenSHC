@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 
+#include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
@@ -65,7 +66,7 @@ namespace Map {
             } else {
                 iVar6 = 2000;
             }
-            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findSuitableSpawnLocationUnk, this)(
+            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findSuitableSpawnLocationUnk, DAT_PathFindingState::ptr)(
                 this->unitX, this->unitY, -1, -1, iVar6, 0);
             _walkLayer = DAT_TileMapState::instance.WalkLayer[_tile];
             _rng = (uint)SEC_RNG::instance.currentNumber2;
