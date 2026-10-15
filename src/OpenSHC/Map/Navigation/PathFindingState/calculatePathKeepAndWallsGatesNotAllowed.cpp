@@ -27,8 +27,10 @@ namespace Map {
             uint uVar4;
             int iVar6;
             uint _tile;
-            if (399 < (uint)x1 || 399 < (uint)y1
-                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y1 * 400 + x1] == '\0') {
+            if (399 < (uint)x1 || 399 < (uint)y1) {
+                return (undefined4)(0);
+            }
+            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y1 * 400 + x1] == '\0') {
                 return (undefined4)(0);
             }
             if (x2 == -1
