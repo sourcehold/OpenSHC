@@ -93,16 +93,16 @@ namespace Map {
                 }
             }
         LAB_00499ada:
-            _directionIndex = 0;
             paiVar8 = DAT_TileMapState::instance.directionTranslationMatrix + yUnk;
-            do {
+            for (_directionIndex = 0; _directionIndex < 8;
+                _directionIndex = _directionIndex + 1, paiVar8 = (int (*)[8])(*paiVar8 + 1)) {
                 int _tile = (*paiVar8)[0] + tile;
                 _logic = DAT_TileMapState::instance.LogicLayer[_tile];
                 local_20[_directionIndex] = _logic;
                 if ((_logic & 0x200000) == 0) {
                     if ((_logic & 0x800) != 0) {
                         if ((iVar6 == 1) || ('\x14' < (char)DAT_TileMapState::instance.DamageLayer[_tile]))
-                            goto LAB_00499c4b;
+                            continue;
                         goto LAB_00499bce;
                     }
                     if ((_logic & 2) == 0) {
@@ -141,7 +141,7 @@ namespace Map {
                             bVar9 = DAT_TileMapState::instance.BuildingLayer[_tile] == 0;
                         LAB_00499bcc:
                             if (!bVar9)
-                                goto LAB_00499c4b;
+                                continue;
                         }
                         goto LAB_00499bce;
                     }
@@ -155,7 +155,7 @@ namespace Map {
                             } else {
                                 _logic = (uint)DAT_TileMapState::instance.HeightLayer[_tile];
                                 if ((int)_logic < local_28)
-                                    goto LAB_00499c4b;
+                                    continue;
                                 _skip = (int)_logic > (int)local_24;
                             }
                         } else {
@@ -163,63 +163,58 @@ namespace Map {
                         }
                     LAB_00499c3f:
                         if (_skip)
-                            goto LAB_00499c4b;
+                            continue;
                     } else if (!bVar2) {
                         if (!bVar3)
-                            goto LAB_00499c4b;
+                            continue;
                         _skip = (char)DAT_TileMapState::instance.DamageLayer[tile] > 0x14;
                         goto LAB_00499c3f;
                     }
                     _linkageResult = _linkageResult
                         | DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[_directionIndex];
                 }
-            LAB_00499c4b:
-                _directionIndex = _directionIndex + 1;
-                paiVar8 = (int (*)[8])(*paiVar8 + 1);
-                if (7 < _directionIndex) {
-                    if (bVar5) {
-                        if ((_linkageResult & 1) == 0 && (bVar7 & 1) != 0) {
-                            if ((_linkageResult & 4) == 0 && (bVar7 & 4) != 0) {
-                                _linkageResult = _linkageResult & 0xfd;
-                            }
-                            if ((_linkageResult & 0x40) == 0 && (bVar7 & 0x40) != 0) {
-                                _linkageResult = _linkageResult & 0x7f;
-                            }
-                        }
-                        if ((_linkageResult & 0x10) == 0 && (bVar7 & 0x10) != 0) {
-                            if ((_linkageResult & 4) == 0 && (bVar7 & 4) != 0) {
-                                _linkageResult = _linkageResult & 0xf7;
-                            }
-                            if ((_linkageResult & 0x40) == 0 && (bVar7 & 0x40) != 0) {
-                                _linkageResult = _linkageResult & 0xdf;
-                            }
-                        }
-                    } else {
-                        if ((local_20[0] & 0x10000100) != 0 && (local_20[2] & 0x10000100) != 0
-                            && (local_20[1] & 0x10000100) == 0 && (local_20[1] & 2) == 0 && (local_20[0] & 0x800) == 0
-                            && (local_20[2] & 0x800) == 0) {
-                            _linkageResult = _linkageResult & 0xfd;
-                        }
-                        if ((local_20[0] & 0x10000100) != 0 && (local_20[6] & 0x10000100) != 0
-                            && (local_20[7] & 0x10000100) == 0 && (local_20[7] & 2) == 0 && (local_20[0] & 0x800) == 0
-                            && (local_20[6] & 0x800) == 0) {
-                            _linkageResult = _linkageResult & 0x7f;
-                        }
-                        if ((local_20[4] & 0x10000100) != 0 && (local_20[2] & 0x10000100) != 0
-                            && (local_20[3] & 0x10000100) == 0 && (local_20[3] & 2) == 0 && (local_20[4] & 0x800) == 0
-                            && (local_20[2] & 0x800) == 0) {
-                            _linkageResult = _linkageResult & 0xf7;
-                        }
-                        if ((local_20[4] & 0x10000100) != 0 && (local_20[6] & 0x10000100) != 0
-                            && (local_20[5] & 0x10000100) == 0 && (local_20[5] & 2) == 0 && (local_20[4] & 0x800) == 0
-                            && (local_20[6] & 0x800) == 0) {
-                            _linkageResult = _linkageResult & 0xdf;
-                        }
+            }
+            if (bVar5) {
+                if ((_linkageResult & 1) == 0 && (bVar7 & 1) != 0) {
+                    if ((_linkageResult & 4) == 0 && (bVar7 & 4) != 0) {
+                        _linkageResult = _linkageResult & 0xfd;
                     }
-                    DAT_TileMapState::instance.PathLinkageLayer[tile] = _linkageResult;
-                    return _result;
+                    if ((_linkageResult & 0x40) == 0 && (bVar7 & 0x40) != 0) {
+                        _linkageResult = _linkageResult & 0x7f;
+                    }
                 }
-            } while (true);
+                if ((_linkageResult & 0x10) == 0 && (bVar7 & 0x10) != 0) {
+                    if ((_linkageResult & 4) == 0 && (bVar7 & 4) != 0) {
+                        _linkageResult = _linkageResult & 0xf7;
+                    }
+                    if ((_linkageResult & 0x40) == 0 && (bVar7 & 0x40) != 0) {
+                        _linkageResult = _linkageResult & 0xdf;
+                    }
+                }
+            } else {
+                if ((local_20[0] & 0x10000100) != 0 && (local_20[2] & 0x10000100) != 0
+                    && (local_20[1] & 0x10000100) == 0 && (local_20[1] & 2) == 0 && (local_20[0] & 0x800) == 0
+                    && (local_20[2] & 0x800) == 0) {
+                    _linkageResult = _linkageResult & 0xfd;
+                }
+                if ((local_20[0] & 0x10000100) != 0 && (local_20[6] & 0x10000100) != 0
+                    && (local_20[7] & 0x10000100) == 0 && (local_20[7] & 2) == 0 && (local_20[0] & 0x800) == 0
+                    && (local_20[6] & 0x800) == 0) {
+                    _linkageResult = _linkageResult & 0x7f;
+                }
+                if ((local_20[4] & 0x10000100) != 0 && (local_20[2] & 0x10000100) != 0
+                    && (local_20[3] & 0x10000100) == 0 && (local_20[3] & 2) == 0 && (local_20[4] & 0x800) == 0
+                    && (local_20[2] & 0x800) == 0) {
+                    _linkageResult = _linkageResult & 0xf7;
+                }
+                if ((local_20[4] & 0x10000100) != 0 && (local_20[6] & 0x10000100) != 0
+                    && (local_20[5] & 0x10000100) == 0 && (local_20[5] & 2) == 0 && (local_20[4] & 0x800) == 0
+                    && (local_20[6] & 0x800) == 0) {
+                    _linkageResult = _linkageResult & 0xdf;
+                }
+            }
+            DAT_TileMapState::instance.PathLinkageLayer[tile] = _linkageResult;
+            return _result;
         }
 
     }
