@@ -90,8 +90,8 @@ namespace Map {
                                         goto LAB_ret;
                                     }
                                     adStack_960[iVar5] = dVar2;
-                                    iVar5 = iVar5 + 1;
                                     aiStack_640[iVar6 * 2 + 1] = 1;
+                                    iVar5 = iVar5 + 1;
                                     if (0 < (int)dVar3) {
                                         adStack_960[iVar5] = dVar3;
                                         iVar5 = iVar5 + 1;
@@ -158,8 +158,8 @@ namespace Map {
                                                 goto LAB_ret;
                                             }
                                             adStack_960[iVar5] = dVar3;
-                                            iVar5 = iVar5 + 1;
                                             aiStack_640[iVar6 * 2 + 1] = 1;
+                                            iVar5 = iVar5 + 1;
                                             if (0 < (int)dVar4) {
                                                 adStack_960[iVar5] = dVar4;
                                                 iVar5 = iVar5 + 1;
@@ -221,8 +221,8 @@ namespace Map {
                                     goto LAB_ret;
                                 }
                                 adStack_960[iVar5] = dVar2;
-                                iVar5 = iVar5 + 1;
                                 aiStack_640[iVar6 * 2 + 1] = 1;
+                                iVar5 = iVar5 + 1;
                                 if (0 < (int)dVar3) {
                                     adStack_960[iVar5] = dVar3;
                                     iVar5 = iVar5 + 1;
@@ -245,8 +245,8 @@ namespace Map {
                 if (local_968 < iVar5) {
                     do {
                         dVar2 = adStack_960[local_968];
-                        local_968 = local_968 + 1;
                         iVar6 = 0;
+                        local_968 = local_968 + 1;
                         if (0 < local_96c) {
                             do {
                                 if (aiStack_640[iVar6 * 2 + 1] != 1) {
@@ -283,8 +283,8 @@ namespace Map {
                                                 goto LAB_ret;
                                             }
                                             adStack_960[iVar5] = dVar3;
-                                            iVar5 = iVar5 + 1;
                                             aiStack_640[iVar6 * 2 + 1] = 1;
+                                            iVar5 = iVar5 + 1;
                                             if (0 < (int)dVar4) {
                                                 adStack_960[iVar5] = dVar4;
                                                 iVar5 = iVar5 + 1;
