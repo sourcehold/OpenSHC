@@ -37,7 +37,10 @@ namespace Map {
             _tilesQueue[999] = 0x49ddca;
             _readIndex = 0;
             int _writeIndex = 1;
-            if (x > 399 || y > 399 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
+            if (x > 399 || y > 399) {
+                return;
+            }
+            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
                 return;
             }
             this->DAT_Mini_spreads = this->DAT_Mini_spreads + 1;
