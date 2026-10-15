@@ -54,7 +54,7 @@ namespace Map {
                 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] != '\0') {
                 _tileArray[0] = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
                 _yArray[0] = y;
-                if (brushTileIndex < 1) {
+                if (brushTileIndex <= 0) {
                     this->resultY = y;
                     this->resultTile = _tileArray[0];
                     return;
