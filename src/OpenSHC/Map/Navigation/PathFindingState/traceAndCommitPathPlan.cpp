@@ -148,8 +148,8 @@ namespace Map {
                             = this->searchQueue.ptrPathPlan[(int)this->searchQueue.pathPlanIndex / 2]
                             + (byte)iVar4 * '\x10';
                     }
-                    this->searchQueue.pathPlanIndex = this->searchQueue.pathPlanIndex + 1;
                     tile = x2;
+                    this->searchQueue.pathPlanIndex = this->searchQueue.pathPlanIndex + 1;
                 } while ((int)this->searchQueue.pathPlanIndex < 800);
                 MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::reverseCurrentPathPlan, this)();
             }
