@@ -125,7 +125,7 @@ namespace Map {
                             }
                             DAT_UnitsState::instance.units[iVar9].healthPercentage = sVar6;
                             DAT_UnitsState::instance.units[iVar9].healthbar
-                                = (sVar6 / 10 + (sVar6 >> 0xf)) - (short)((longlong)(int)sVar6 * 0x66666667 >> 0x3f);
+                                = sVar6 / 10;
                         }
                         uVar4 = DAT_UnitsState::instance.units[iVar9].nextUnitOnTheSameTile;
                     }
