@@ -7,9 +7,9 @@
 #include "OpenSHC/Map/Location/Point8ShortXY.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
-#include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
+#include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
@@ -157,8 +157,7 @@ namespace Map {
                     if (iVar12 <= iVar5) {
                         iVar12 = iVar5;
                     }
-                    if (iVar12 == 2
-                        && (abs(tribeID - uVar11) < 0x20)) {
+                    if (iVar12 == 2 && (abs(tribeID - uVar11) < 0x20)) {
                         _pDest1[-1] = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                         _destIndex = _destIndex + 1;
                         *_pDest1 = 1;
@@ -197,8 +196,7 @@ namespace Map {
                     if (iVar12 <= iVar5) {
                         iVar12 = iVar5;
                     }
-                    if (iVar12 == 1
-                        && (abs(tribeID - uVar11) < 0x20)) {
+                    if (iVar12 == 1 && (abs(tribeID - uVar11) < 0x20)) {
                         ((PathHelper12*)(_pDest2 + -1))->tile1
                             = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
                         _destIndex = _destIndex + 1;
@@ -218,9 +216,9 @@ namespace Map {
                     = &((PathFindingStatePartB*)(this->climbData + 200))->destinationsArray[_destIndex].tile2OrAHelper;
                 do {
                     uint _yDiff3 = y - (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
-                    iVar12 = (_yDiff3 ^ (int)_yDiff3 >> 0x1f) - ((int)_yDiff3 >> 0x1f);
+                    iVar12 = abs(_yDiff3);
                     uint _xDiff3 = x - (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
-                    iVar4 = (_xDiff3 ^ (int)_xDiff3 >> 0x1f) - ((int)_xDiff3 >> 0x1f);
+                    iVar4 = abs(_xDiff3);
                     if (iVar4 <= iVar12) {
                         iVar4 = iVar12;
                     }
