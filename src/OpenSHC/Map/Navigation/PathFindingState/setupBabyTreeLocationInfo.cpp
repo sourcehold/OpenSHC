@@ -30,7 +30,6 @@ namespace Map {
         undefined4 PathFindingState::setupBabyTreeLocationInfo(int param_1, int treeType, uint x, uint y)
         {
             int iVar4;
-            short* psVar7;
             int (*paiVar8)[8];
             this->ALG_ResultTile = 0;
             this->ALG_ResultY = 0;
