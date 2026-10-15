@@ -88,7 +88,9 @@ namespace Map {
                     /*
                       // Sets to 1
                      */
-                    DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[*(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + playerID * 0x177bc + -0x10)][this->searchQueue.tilesQueue[this->searchQueue.writeIndex]]
+                    DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[*(
+                        int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + playerID * 0x177bc
+                        + -0x10)][this->searchQueue.tilesQueue[this->searchQueue.writeIndex]]
                         = (char)this->searchQueue.currentDistance;
                     /*
                       Mark as visited
@@ -111,7 +113,9 @@ namespace Map {
                     this->searchQueue.yQueue[this->searchQueue.writeIndex]
                         = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile + 1];
                     this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _tile + 1;
-                    DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[*(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + playerID * 0x177bc + -0x10)][this->searchQueue.tilesQueue[this->searchQueue.writeIndex]]
+                    DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[*(
+                        int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + playerID * 0x177bc
+                        + -0x10)][this->searchQueue.tilesQueue[this->searchQueue.writeIndex]]
                         = (char)this->searchQueue.currentDistance;
                     DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[this->searchQueue.writeIndex]]
                         = (short)this->searchGeneration;
@@ -124,7 +128,9 @@ namespace Map {
                     this->searchQueue.yQueue[this->searchQueue.writeIndex]
                         = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile + 2];
                     this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _tile + 2;
-                    DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[*(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + playerID * 0x177bc + -0x10)][this->searchQueue.tilesQueue[this->searchQueue.writeIndex]]
+                    DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[*(
+                        int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + playerID * 0x177bc
+                        + -0x10)][this->searchQueue.tilesQueue[this->searchQueue.writeIndex]]
                         = (char)this->searchQueue.currentDistance;
                     DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[this->searchQueue.writeIndex]]
                         = (short)this->searchGeneration;
@@ -137,7 +143,9 @@ namespace Map {
                     this->searchQueue.yQueue[this->searchQueue.writeIndex]
                         = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile + 3];
                     this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _tile + 3;
-                    DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[*(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + playerID * 0x177bc + -0x10)][this->searchQueue.tilesQueue[this->searchQueue.writeIndex]]
+                    DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[*(
+                        int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + playerID * 0x177bc
+                        + -0x10)][this->searchQueue.tilesQueue[this->searchQueue.writeIndex]]
                         = (char)this->searchQueue.currentDistance;
                     DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[this->searchQueue.writeIndex]]
                         = (short)this->searchGeneration;
@@ -150,7 +158,9 @@ namespace Map {
                     this->searchQueue.yQueue[this->searchQueue.writeIndex]
                         = (short)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile + 4];
                     this->searchQueue.tilesQueue[this->searchQueue.writeIndex] = _tile + 4;
-                    DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[*(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + playerID * 0x177bc + -0x10)][this->searchQueue.tilesQueue[this->searchQueue.writeIndex]]
+                    DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[*(
+                        int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + playerID * 0x177bc
+                        + -0x10)][this->searchQueue.tilesQueue[this->searchQueue.writeIndex]]
                         = (char)this->searchQueue.currentDistance;
                     DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[this->searchQueue.writeIndex]]
                         = (short)this->searchGeneration;
@@ -175,7 +185,7 @@ namespace Map {
                 /*
                   Bounds check
                  */
-                if (0x13a10 <= _tile2) {
+                if (0x13a0f < _tile2) {
                     return;
                 }
                 /*
@@ -185,12 +195,13 @@ namespace Map {
                 /*
                   Read the distance value for this tile from the AI path cost layer
                  */
-                this->searchQueue.currentDistance = (uint)
-                    DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[*(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + playerID * 0x177bc + -0x10)][_tile2];
+                this->searchQueue.currentDistance = (uint)DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[*(
+                    int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + playerID * 0x177bc
+                    + -0x10)][_tile2];
                 /*
                   Track maximum distance encountered, constitutes extra return value
                  */
-                if (this->distance < (int)this->searchQueue.currentDistance) {
+                if ((int)this->searchQueue.currentDistance > this->distance) {
                     this->distance = this->searchQueue.currentDistance;
                 }
                 /*
@@ -242,7 +253,9 @@ namespace Map {
                               SET DISTANCE = CURRENT DISTANCE + 1   This creates the distance map radiating from AI
                               zones
                              */
-                            DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[*(int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + playerID * 0x177bc + -0x10)][iVar2] = (char)this->searchQueue.currentDistance + '\x01';
+                            DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[*(
+                                int*)((int)DAT_TroopValueState::instance.attackInfo.hackValuesArray + playerID * 0x177bc
+                                + -0x10)][iVar2] = (char)this->searchQueue.currentDistance + '\x01';
                             /*
                               previous line sets pathfinding cost layer   Mark as visited
                              */
