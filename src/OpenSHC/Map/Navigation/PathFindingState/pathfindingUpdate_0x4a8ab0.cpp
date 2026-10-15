@@ -14,6 +14,7 @@
 #include "OpenSHC/Globals/DAT_EntityState.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
+#include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_SFXState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
@@ -232,7 +233,7 @@ namespace Map {
                                 DAT_TileMapState::instance.HeightLayer[iVar9]
                                     = DAT_TileMapState::instance.DefaultHeightLayer[iVar9];
                                 DAT_TileMapState::instance.DamageLayer[iVar9] = 0;
-                                this->toggleUpdateSeparateAreaTileMap = 1;
+                                DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
                                 DAT_TileMapState::instance.field204_0x554a30 = 1;
                                 *local_18 = (short)iVar8 + sVar3;
                                 *local_14 = (short)DAT_TerrainDefinedData::instance
