@@ -29,8 +29,10 @@ namespace Map {
             uint local_1c = 1000;
             dword local_14 = 0;
             int local_18 = 10000;
-            if (param_2 > 399 || param_3 > 399
-                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[param_3 * 400 + param_2] == '\0') {
+            if (param_2 > 399 || param_3 > 399) {
+                return (dword)(dVar6);
+            }
+            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[param_3 * 400 + param_2] == '\0') {
                 return (dword)(dVar6);
             }
             this->calculations = this->calculations + 1;
