@@ -80,7 +80,7 @@ namespace Map {
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 do {
                     uint uVar4 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
-                    if (0x13a0f < uVar4)
+                    if (0x13a10 <= uVar4)
                         break;
                     int sVar1 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                     int sVar2 = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
