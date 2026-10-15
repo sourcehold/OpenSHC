@@ -100,8 +100,8 @@ namespace Map {
                 if (800 <= _cCardinalDistance) {
                     break;
                 }
-                int _cY = (ushort)this->searchQueue.yQueue[_readIndex];
                 int _cLink = _linkage[_tile];
+                int _cY = (ushort)this->searchQueue.yQueue[_readIndex];
 
                 MACRO_LINKAGE_EXPAND_NEIGHBOURS(1, y)
 
