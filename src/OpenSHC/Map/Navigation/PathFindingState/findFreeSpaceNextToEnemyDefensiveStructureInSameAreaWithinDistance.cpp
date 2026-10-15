@@ -158,7 +158,7 @@ namespace Map {
                                              .buildings[DAT_TileMapState::instance.BuildingLayer[_candidate2]]
                                              .buildingType,
                                         _buildingType != OpenSHC::Map::Buildings::BT_STOCKPILE
-                                            && (2 < _buildingType - OpenSHC::Map::Buildings::BT_MANORHOUSE))))
+                                            && (2 < (uint)(_buildingType - OpenSHC::Map::Buildings::BT_MANORHOUSE)))))
                                 && DAT_GameState::instance.mapAndTime
                                         .playerTeams[(DAT_TileMapState::instance.WallOwnerLayer[_candidate2] & 7) + 1]
                                     != DAT_GameState::instance.mapAndTime.playerTeams[playerID])
