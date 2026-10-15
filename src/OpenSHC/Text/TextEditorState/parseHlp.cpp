@@ -5,8 +5,8 @@
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/Util/WideCharMultiByteState.func.hpp"
 #include "OpenSHC/Text/Enums/HelpTextPicturePositionToken.hpp"
-#include "OpenSHC/wstring-literals.hpp"
 #include "OpenSHC/string-literals.hpp"
+#include "OpenSHC/wstring-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_TextEditorState.hpp"
@@ -117,13 +117,16 @@ namespace Text {
                                                 if (!MACRO_CALL(OS_Func::__wcsicmp)(u_left_005a5714, picPosition)) {
                                                     this->DAT_PointerToTemporaryTextMemory[textMemIndex++]
                                                         = Enums::HTPPT_LEFT;
-                                                } else if (!MACRO_CALL(OS_Func::__wcsicmp)(u_right_005a5708, picPosition)) {
+                                                } else if (!MACRO_CALL(OS_Func::__wcsicmp)(
+                                                               u_right_005a5708, picPosition)) {
                                                     this->DAT_PointerToTemporaryTextMemory[textMemIndex++]
                                                         = Enums::HTPPT_RIGHT;
-                                                } else if (!MACRO_CALL(OS_Func::__wcsicmp)(u_centre_005a56f8, picPosition)) {
+                                                } else if (!MACRO_CALL(OS_Func::__wcsicmp)(
+                                                               u_centre_005a56f8, picPosition)) {
                                                     this->DAT_PointerToTemporaryTextMemory[textMemIndex++]
                                                         = Enums::HTPPT_CENTRE;
-                                                } else if (!MACRO_CALL(OS_Func::__wcsicmp)(u_here_005a56ec, picPosition)) {
+                                                } else if (!MACRO_CALL(OS_Func::__wcsicmp)(
+                                                               u_here_005a56ec, picPosition)) {
                                                     this->DAT_PointerToTemporaryTextMemory[textMemIndex++]
                                                         = Enums::HTPPT_HERE;
                                                 }
