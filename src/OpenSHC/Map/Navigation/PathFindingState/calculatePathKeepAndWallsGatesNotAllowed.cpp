@@ -25,7 +25,6 @@ namespace Map {
             int x1, int y1, int x2, int y2, int maxTries)
         {
             uint uVar4;
-            int* piVar5;
             int iVar6;
             uint _tile;
             if (399 < (uint)x1 || 399 < (uint)y1
