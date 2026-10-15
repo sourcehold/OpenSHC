@@ -22,7 +22,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049D640
         undefined4 PathFindingState::someBinaryAlgFunctionPathFinding(int param_1)
         {
-            short* psVar6;
             int (*paiVar7)[8];
             this->searchGeneration = this->searchGeneration + 1;
             if (32000 < this->searchGeneration) {
