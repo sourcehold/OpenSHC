@@ -72,7 +72,8 @@ namespace Map {
                     _x = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
                     _y = (int)this->searchQueue.yQueue[this->searchQueue.readIndex];
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
-                    if ((80400 < (int)this->searchQueue.currentDistance) || (10 < (int)this->searchQueue.currentDistance))
+                    if ((80400 < (int)this->searchQueue.currentDistance)
+                        || (10 < (int)this->searchQueue.currentDistance))
                         break;
                     for (int _direction = 0; _direction < 8; _direction = _direction + 1) {
                         _candidate = DAT_TileMapState::instance.directionTranslationMatrix[_y][_direction] + _tile;
