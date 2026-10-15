@@ -54,7 +54,7 @@ namespace Map {
                 if (iVar8 < this->mappingYRelated) {
                     this->mappingYRelated = iVar8;
                 }
-                if (this->yLimit < iVar8) {
+                if (iVar8 > this->yLimit) {
                     this->yLimit = iVar8;
                 }
                 int iVar4 = (int)sVar2 / 10;
@@ -63,13 +63,13 @@ namespace Map {
                 if (iVar4 < (int)DAT_TileMapState::instance.someYLike) {
                     DAT_TileMapState::instance.someYLike = iVar4;
                 }
-                if ((int)DAT_TileMapState::instance.someYLikeLimit < iVar4) {
+                if (iVar4 > (int)DAT_TileMapState::instance.someYLikeLimit) {
                     DAT_TileMapState::instance.someYLikeLimit = iVar4;
                 }
                 if (iVar5 < (int)DAT_TileMapState::instance.someIndex) {
                     DAT_TileMapState::instance.someIndex = iVar5;
                 }
-                if ((int)DAT_TileMapState::instance.someLimit < iVar5) {
+                if (iVar5 > (int)DAT_TileMapState::instance.someLimit) {
                     DAT_TileMapState::instance.someLimit = iVar5;
                 }
                 this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[uVar3];
