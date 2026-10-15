@@ -56,7 +56,7 @@ namespace Map {
                     if (iVar3 < 0) {
                         return 0;
                     }
-                    if (80400 < iVar3) {
+                    if (80400 <= iVar3) {
                         return 0;
                     }
                     int sVar1 = (int)this->searchQueue.xQueue[this->searchQueue.readIndex];
