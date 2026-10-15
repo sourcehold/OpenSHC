@@ -22,7 +22,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0049D0E0
         void PathFindingState::findFreeTileOnDefensiveStructure(int unitID, int x, int y)
         {
-            short* psVar3;
             int (*paiVar4)[8];
             int iVar5;
             int _tile;
