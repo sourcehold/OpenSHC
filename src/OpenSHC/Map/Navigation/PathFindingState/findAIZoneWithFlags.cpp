@@ -27,7 +27,10 @@ namespace Map {
             int _candidate;
             int _tile;
             this->calculations = this->calculations + 1;
-            if (x > 399 || y > 399 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
+            if (x > 399 || y > 399) {
+                return FALSE;
+            }
+            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
                 return FALSE;
             }
             this->searchGeneration = this->searchGeneration + 1;
