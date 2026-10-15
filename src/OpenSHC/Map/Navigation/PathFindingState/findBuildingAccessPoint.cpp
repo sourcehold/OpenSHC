@@ -179,7 +179,8 @@ namespace Map {
                             /*
                               Check all cardinal directions
                              */
-                        } while ((int)pXVar1 < 0xb39238);
+                        } while ((int)pXVar1
+                            < (int)&DAT_ClimbLogicDefinedData::instance.CardinalHorizontalFirstSearchOrder[4]);
                         /*
                           Increment valid access point count
                          */
