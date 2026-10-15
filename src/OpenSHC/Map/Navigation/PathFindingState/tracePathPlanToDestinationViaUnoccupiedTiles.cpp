@@ -28,7 +28,7 @@ namespace Map {
             byte* _pPathPlan;
             int _budget;
             int _direction;
-            uint _ppIndexInit;
+            int _result;
             uint _ppIndex;
             Point8* _cardinal;
             int* _dirMatrix;
@@ -39,10 +39,8 @@ namespace Map {
             uint _gen;
             int _tile;
             short* _walkLayer;
-            if (399 < x || 399 < y) {
-                return FALSE;
-            }
-            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
+            if (399 < x || 399 < y
+                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == '\0') {
                 return FALSE;
             }
             if (399 < destX || 399 < destY
@@ -56,7 +54,7 @@ namespace Map {
                     0x27420, '\0', (void*)((int)(DAT_TileMapState::instance.WalkLayer)));
             }
             _budget = 0;
-            _ppIndexInit = 0;
+            _result = 0;
             _direction = 0;
             _gen = (ushort)this->searchGeneration;
             _fireCount = DAT_EntityState::instance.fireCount;
@@ -67,8 +65,8 @@ namespace Map {
             _linkage = DAT_TileMapState::instance.PathLinkageLayer;
             _dirMatrix = &DAT_TileMapState::instance.directionTranslationMatrix[0][0];
             _cardinal = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix;
-            _ppIndex = this->searchQueue.pathPlanIndex;
             _pPathPlan = this->searchQueue.ptrPathPlan;
+            _ppIndex = this->searchQueue.pathPlanIndex;
             while (true) {
                 _budget = _budget + 1;
                 if (399 < _budget) {
@@ -76,60 +74,73 @@ namespace Map {
                 }
                 _walkLayer[_tile] = (short)_gen;
                 if (_tile == _destTile) {
-                    this->searchQueue.pathPlanIndex = _ppIndex;
-                    return TRUE;
+                    _result = 1;
+                    break;
                 }
                 if (_fireCount != 0 && _occupancy[_tile] != '\0') {
                     break;
                 }
-                int _canTraverseThisDirection = _linkage[_tile];
-                if ((int)destY < (int)y) {
-                    if ((int)destX < (int)x) {
+                byte _links = _linkage[_tile];
+                if ((int)y > (int)destY) {
+                    if ((int)x > (int)destX) {
                         _direction = 7;
-                        _canTraverseThisDirection = _canTraverseThisDirection & 0x80;
+                        if ((_links & 0x80) == 0) {
+                            break;
+                        }
                     } else if ((int)x < (int)destX) {
                         _direction = 1;
-                        _canTraverseThisDirection = _canTraverseThisDirection & 2;
+                        if ((_links & 2) == 0) {
+                            break;
+                        }
                     } else {
                         _direction = 0;
-                        _canTraverseThisDirection = _canTraverseThisDirection & 1;
+                        if ((_links & 1) == 0) {
+                            break;
+                        }
                     }
                 } else if ((int)y < (int)destY) {
-                    if ((int)destX < (int)x) {
+                    if ((int)x > (int)destX) {
                         _direction = 5;
-                        _canTraverseThisDirection = _canTraverseThisDirection & 0x20;
+                        if ((_links & 0x20) == 0) {
+                            break;
+                        }
                     } else if ((int)x < (int)destX) {
                         _direction = 3;
-                        _canTraverseThisDirection = _canTraverseThisDirection & 8;
+                        if ((_links & 8) == 0) {
+                            break;
+                        }
                     } else {
                         _direction = 4;
-                        _canTraverseThisDirection = _canTraverseThisDirection & 0x10;
+                        if ((_links & 0x10) == 0) {
+                            break;
+                        }
                     }
-                } else if ((int)destX < (int)x) {
+                } else if ((int)x > (int)destX) {
                     _direction = 6;
-                    _canTraverseThisDirection = _canTraverseThisDirection & 0x40;
-                } else {
-                    if ((int)destX <= (int)x) {
+                    if ((_links & 0x40) == 0) {
                         break;
                     }
+                } else if ((int)x < (int)destX) {
                     _direction = 2;
-                    _canTraverseThisDirection = _canTraverseThisDirection & 4;
-                }
-                if (_canTraverseThisDirection == 0) {
+                    if ((_links & 4) == 0) {
+                        break;
+                    }
+                } else {
                     break;
                 }
                 _tile = _tile + _dirMatrix[y * 8 + _direction];
                 x = x + _cardinal[_direction].int_.xOffset;
                 y = y + _cardinal[_direction].int_.yOffset;
-                if ((_ppIndex & 1) == 0) {
-                    _pPathPlan[_ppIndex >> 1] = (byte)_direction;
-                } else {
-                    _pPathPlan[_ppIndex >> 1] = (_pPathPlan[_ppIndex >> 1] & 0xf) | (byte)(_direction << 4);
-                }
+                uint _slot = _ppIndex;
                 _ppIndex = _ppIndex + 1;
+                if ((_slot & 1) == 0) {
+                    _pPathPlan[_slot >> 1] = (byte)_direction;
+                } else {
+                    _pPathPlan[_slot >> 1] = (_pPathPlan[_slot >> 1] & 0xf) | (byte)(_direction << 4);
+                }
             }
             this->searchQueue.pathPlanIndex = _ppIndex;
-            return FALSE;
+            return (BOOLEnum)_result;
         }
     }
 #pragma optimize("", on)
