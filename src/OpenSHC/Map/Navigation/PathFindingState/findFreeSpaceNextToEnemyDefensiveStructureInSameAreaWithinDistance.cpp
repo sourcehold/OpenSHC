@@ -174,7 +174,7 @@ namespace Map {
                             area[-1] = _tile2;
                             _dIndex = _dIndex + 1;
                             area = area + 3;
-                            if (maxDestinations <= _dIndex) {
+                            if (_dIndex >= maxDestinations) {
                                 return;
                             }
                             this->searchQueue.tilesQueue[this->searchQueue.readIndex] = -1;
