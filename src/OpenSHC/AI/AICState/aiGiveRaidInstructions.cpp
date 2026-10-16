@@ -29,8 +29,7 @@ namespace AI {
             >= this->aics[aicIndex].RaidRetargetDelay)
             DAT_GameState::instance.playerDataArray[playerID].raidRetargetDelayCounter = 0;
 
-        int totalRaidingTroopsUnk = DAT_GameState::instance.playerDataArray[playerID].totalRaidingTroopsUnk;
-        if (totalRaidingTroopsUnk == 0)
+        if (DAT_GameState::instance.playerDataArray[playerID].totalRaidingTroopsUnk == 0)
             DAT_GameState::instance.playerDataArray[playerID].someTotalDefenseTroopsRelatedCountdown = 0;
         else if (DAT_GameState::instance.playerDataArray[playerID].someTotalDefenseTroopsRelatedCountdown > 0)
             DAT_GameState::instance.playerDataArray[playerID].someTotalDefenseTroopsRelatedCountdown--;
@@ -45,21 +44,27 @@ namespace AI {
                 continue;
 
             int buildingID = 0;
-            int playerID_askerUnk = DAT_GameState::instance.playerDataArray[playerID].playerID_askerUnk;
+            int tile;
             if (DAT_GameState::instance.playerDataArray[playerID].requestStateUnk == 2
                 && MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::getAliveLordForPlayer, DAT_UnitsState::ptr)(
-                       playerID_askerUnk)
+                       DAT_GameState::instance.playerDataArray[playerID].playerID_askerUnk)
                     != 0) {
                 if (DAT_GameState::instance.playerDataArray[playerID].raidRetargetDelayCounter != 0)
                     continue;
                 buildingID
                     = MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::selectRandomBuildingIDFromListOfBuildingTypes,
-                        this)(playerID_askerUnk, i);
+                        this)(DAT_GameState::instance.playerDataArray[playerID].playerID_askerUnk, i);
                 if (buildingID == 0)
                     buildingID = MACRO_CALL_MEMBER(
                         OpenSHC::AI::AICState_Func::selectBuildingFromAListOfBuildingTypes, this)(playerID);
+                if (buildingID == 0)
+                    continue;
+                tile = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX
+                    + DAT_ViewportRenderState::instance
+                          .translationMatrix[DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY]
+                          .addXgetTile;
             } else if (DAT_GameState::instance.playerDataArray[playerID].someTotalDefenseTroopsRelatedCountdown == 0
-                && totalRaidingTroopsUnk < MACRO_CALL_MEMBER(
+                && DAT_GameState::instance.playerDataArray[playerID].totalRaidingTroopsUnk < MACRO_CALL_MEMBER(
                        OpenSHC::AI::AICState_Func::getCurrentDesiredAttackRaidUnitCount, this)(aicIndex, playerID)) {
                 if (DAT_GameState::instance.playerDataArray[playerID].raidRetargetDelayCounter != 0)
                     continue;
@@ -71,6 +76,12 @@ namespace AI {
                 if (buildingID == 0)
                     buildingID = MACRO_CALL_MEMBER(
                         OpenSHC::AI::AICState_Func::selectBuildingFromAListOfBuildingTypes, this)(playerID);
+                if (buildingID == 0)
+                    continue;
+                tile = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX
+                    + DAT_ViewportRenderState::instance
+                          .translationMatrix[DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY]
+                          .addXgetTile;
             } else if (DAT_SkirmishDefinedData::instance.TribeTypeID[i] == 182
                 || DAT_SkirmishDefinedData::instance.TribeTypeID[i] == 181) {
                 if (DAT_GameState::instance.playerDataArray[playerID].raidRetargetDelayCounter != 0)
@@ -86,6 +97,12 @@ namespace AI {
                     buildingID = MACRO_CALL_MEMBER(
                         OpenSHC::AI::AICState_Func::chooseRandomBuildingIDFromPlayersArrayOfBuildings, this)(
                         DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID_2Unk);
+                if (buildingID == 0)
+                    continue;
+                tile = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX
+                    + DAT_ViewportRenderState::instance
+                          .translationMatrix[DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY]
+                          .addXgetTile;
             } else {
                 if (MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::checkTribeActivityPercentages, this)(
                         tribeID, i, FALSE)
@@ -109,27 +126,21 @@ namespace AI {
                 targetBuildingID
                     = MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::chooseRandomBuildingIDFromPlayersArrayOfBuildings,
                         this)(DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID_2Unk);
-                if (targetBuildingID == 0) {
-                    DAT_TribesState::instance.tribes[tribeID].targetBuildingID = 0;
-                    DAT_GameState::instance.playerDataArray[playerID].someTotalDefenseTroopsRelatedCountdown = 0;
+                if (targetBuildingID != 0) {
+                    MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::relayTribeInstruction, DAT_UnitsState::ptr)(
+                        tribeID, OpenSHC::Map::Units::UIT_ATTACK_BUILDING, targetBuildingID,
+                        DAT_BuildingsState::instance.buildings[targetBuildingID].uid, 0);
+                    DAT_TribesState::instance.tribes[tribeID].targetBuildingID = targetBuildingID;
+                    DAT_TribesState::instance.tribes[tribeID].targetBuildingUID
+                        = DAT_BuildingsState::instance.buildings[targetBuildingID].uid;
+                    DAT_GameState::instance.playerDataArray[playerID].someTotalDefenseTroopsRelatedCountdown = 100;
                     continue;
                 }
-                MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::relayTribeInstruction, DAT_UnitsState::ptr)(
-                    tribeID, OpenSHC::Map::Units::UIT_ATTACK_BUILDING, targetBuildingID,
-                    DAT_BuildingsState::instance.buildings[targetBuildingID].uid, 0);
-                DAT_TribesState::instance.tribes[tribeID].targetBuildingID = targetBuildingID;
-                DAT_TribesState::instance.tribes[tribeID].targetBuildingUID
-                    = DAT_BuildingsState::instance.buildings[targetBuildingID].uid;
-                DAT_GameState::instance.playerDataArray[playerID].someTotalDefenseTroopsRelatedCountdown = 100;
+                DAT_TribesState::instance.tribes[tribeID].targetBuildingID = 0;
+                DAT_GameState::instance.playerDataArray[playerID].someTotalDefenseTroopsRelatedCountdown = 0;
                 continue;
             }
 
-            if (buildingID == 0)
-                continue;
-            int tile = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX
-                + DAT_ViewportRenderState::instance
-                      .translationMatrix[DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY]
-                      .addXgetTile;
             if (tile == 0)
                 continue;
 
