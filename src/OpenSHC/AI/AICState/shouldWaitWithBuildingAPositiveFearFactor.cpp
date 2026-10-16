@@ -7,9 +7,9 @@ namespace OpenSHC {
 namespace AI {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CB700
-    BOOLEnum AICState::shouldWaitWithBuildingAPositiveFearFactor(int playerID, Commands::MappersEnum param_2)
+    BOOLEnum AICState::shouldWaitWithBuildingAPositiveFearFactor(int playerID, Commands::MappersEnum mapper)
     {
-        switch (param_2) {
+        switch (mapper) {
         case Commands::M_MAPPER_GARDEN1:
         case Commands::M_MAPPER_GARDEN2:
         case Commands::M_MAPPER_GARDEN3:

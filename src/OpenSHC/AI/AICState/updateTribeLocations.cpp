@@ -15,9 +15,9 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004D4940
     void AICState::updateTribeLocations(int playerID)
     {
-        AITypeInt _aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
+        AITypeInt aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
 
-        if (_aiType == OpenSHC::AI::AIT_NULL) {
+        if (aiType == OpenSHC::AI::AIT_NULL) {
             return;
         }
 
@@ -25,7 +25,7 @@ namespace AI {
             = DAT_GameState::instance.playerDataArray[playerID].defWallPatrolRallyTimeWaitCounter + 1;
 
         if (DAT_GameState::instance.playerDataArray[playerID].defWallPatrolRallyTimeWaitCounter
-            >= this->aics[_aiType - 1].defWallPatrolRallyTime) {
+            >= this->aics[aiType - 1].defWallPatrolRallyTime) {
 
             DAT_GameState::instance.playerDataArray[playerID].defWallPatrolRallyTimeHits
                 = DAT_GameState::instance.playerDataArray[playerID].defWallPatrolRallyTimeHits + 1;

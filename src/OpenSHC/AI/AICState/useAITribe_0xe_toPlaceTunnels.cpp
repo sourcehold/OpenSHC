@@ -26,40 +26,40 @@ namespace AI {
     {
         if (DAT_GameState::instance.playerDataArray[playerID].aiType == OpenSHC::AI::AIT_NULL)
             return;
-        int _aiTribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[0xe];
-        if (_aiTribeID == 0)
+        int aiTribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[0xe];
+        if (aiTribeID == 0)
             return;
-        if (DAT_TribesState::instance.tribes[_aiTribeID].uid
+        if (DAT_TribesState::instance.tribes[aiTribeID].uid
             != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[0xe])
             return;
-        int _countdown = DAT_TribesState::instance.tribes[_aiTribeID].size;
+        int countdown = DAT_TribesState::instance.tribes[aiTribeID].size;
 
-        while (DAT_TribesState::instance.tribes[_aiTribeID].size != 0) {
-            if (_countdown <= 0)
+        while (DAT_TribesState::instance.tribes[aiTribeID].size != 0) {
+            if (countdown <= 0)
                 break;
 
-            int _unitID = MACRO_CALL_MEMBER(
-                OpenSHC::Map::Units::TribesState_Func::popUnitFromTribe, DAT_TribesState::ptr)(_aiTribeID);
+            int unitID = MACRO_CALL_MEMBER(
+                OpenSHC::Map::Units::TribesState_Func::popUnitFromTribe, DAT_TribesState::ptr)(aiTribeID);
             // Yes this line has to be right here for the code to match.
-            _countdown--;
+            countdown--;
 
-            int _tribeID = MACRO_CALL_MEMBER(
+            int tribeID = MACRO_CALL_MEMBER(
                 OpenSHC::Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(playerID);
 
-            DAT_TribesState::instance.tribes[_tribeID].attackWave
+            DAT_TribesState::instance.tribes[tribeID].attackWave
                 = DAT_GameState::instance.playerDataArray[playerID].currentAttackWave;
 
-            DAT_TribesState::instance.tribes[_tribeID].tribeType = OpenSHC::AI::Tribes::AITT_TUNNELERS;
+            DAT_TribesState::instance.tribes[tribeID].tribeType = OpenSHC::AI::Tribes::AITT_TUNNELERS;
 
-            DAT_TribesState::instance.tribes[_tribeID].tribeBehaviorType = OpenSHC::Map::Units::STBT_0x415;
+            DAT_TribesState::instance.tribes[tribeID].tribeBehaviorType = OpenSHC::Map::Units::STBT_0x415;
 
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(
-                _unitID, _tribeID);
+                unitID, tribeID);
 
             MACRO_CALL_MEMBER(
                 OpenSHC::Map::Units::TroopValueState_Func::placeSiegeTentOrTunnelAtSuitableLocationAndAssignEngineers,
                 DAT_TroopValueState::ptr)(
-                _tribeID, OpenSHC::Commands::M_MAPPER_TUNNEL_CONSTRUCTION, 50, (UnitInstructionType)21);
+                tribeID, OpenSHC::Commands::M_MAPPER_TUNNEL_CONSTRUCTION, 50, (UnitInstructionType)21);
         }
     }
 

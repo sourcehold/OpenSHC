@@ -7,7 +7,7 @@ namespace OpenSHC {
 namespace AI {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CB1B0
-    int AICState::setNextFarmTypeToBuild(PlayerID playerID)
+    int AICState::setNextFarmTypeToBuild(int playerID)
     {
         int aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
         if (aiType == AITA_NULL)

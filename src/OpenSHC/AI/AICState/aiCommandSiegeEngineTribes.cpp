@@ -55,20 +55,17 @@ namespace AI {
                 int tribeID = DAT_UnitsState::instance.units[unitID].tribeID;
                 if (tribeID == 0)
                     continue;
-                if (*(int*)((int)DAT_TroopValueState::instance.attackInfo.wideValuesArray + playerID * 0x177bc - 4)
-                    != 0)
+                if (DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].wide3 != 0)
                     MACRO_CALL_MEMBER(TribesState_Func::assignAttackTargetsForTribe, DAT_TribesState::ptr)(
                         tribeID, STBT_0x414);
             } else if (DAT_UnitsState::instance.units[unitID].unitType == UT_S_BATTERINGRAM) {
                 int tribeID = DAT_UnitsState::instance.units[unitID].tribeID;
                 if (tribeID == 0)
                     continue;
-                if (*(int*)((int)DAT_TroopValueState::instance.attackInfo.gateValuesArray + playerID * 0x177bc - 4)
-                    != 0)
+                if (DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].gate2 != 0)
                     MACRO_CALL_MEMBER(TribesState_Func::assignAttackTargetsForTribe, DAT_TribesState::ptr)(
                         tribeID, STBT_0x3f6);
-                else if (*(int*)((int)DAT_TroopValueState::instance.attackInfo.wideValuesArray + playerID * 0x177bc - 4)
-                    != 0)
+                else if (DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].wide3 != 0)
                     MACRO_CALL_MEMBER(TribesState_Func::assignAttackTargetsForTribe, DAT_TribesState::ptr)(
                         tribeID, STBT_0x413);
             } else if (DAT_UnitsState::instance.units[unitID].unitType == UT_S_SHIELD) {
@@ -79,7 +76,7 @@ namespace AI {
                     continue;
 
                 int targetTribeID = shieldTargetTribeIDs[shieldCount];
-                DAT_TribesState::instance.tribes[tribeID].field56_0x1f2 = targetTribeID;
+                DAT_TribesState::instance.tribes[tribeID].supportTribeID = targetTribeID;
                 DAT_TribesState::instance.tribes[tribeID].uid2 = DAT_TribesState::instance.tribes[targetTribeID].uid;
                 DAT_TribesState::instance.tribes[targetTribeID].tribeID = tribeID;
                 int targetUnitID = DAT_TribesState::instance.tribes[targetTribeID].selectionTargetUnitID;

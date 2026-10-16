@@ -9,7 +9,7 @@ namespace OpenSHC {
 namespace AI {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CDCA0
-    int AICState::selectRandomBuildingIDFromListOfBuildingTypes(int playerID, undefined4 param_2)
+    int AICState::selectRandomBuildingIDFromListOfBuildingTypes(int playerID, undefined4 raidTribeIndex)
     {
         int count = DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildingsTracker;
         if (count <= 0) {
