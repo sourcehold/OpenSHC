@@ -41,7 +41,7 @@ namespace Map {
                         pUVar2->field297_0x40d = iVar2 != 0;
                     }
                     iVar3 = iVar3 + 1;
-                    pUVar2 = pUVar2 + 0x248;
+                    pUVar2 = pUVar2 + 1;
                 } while (iVar3 < DAT_UnitsState::instance.maxUnitCount);
             }
         }
