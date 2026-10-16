@@ -68,11 +68,11 @@ namespace Map {
                     _absDistY = _absDistX;
                 }
                 if (_absDistY < _lowestDist) {
+                    *pY = iVar5;
                     /*
                       lowest manhatten distance
                      */
                     *pX = (int)_x;
-                    *pY = iVar5;
                     _lowestDist = _absDistY;
                 }
                 this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[_tile];
