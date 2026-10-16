@@ -57,8 +57,14 @@ namespace Map {
             DAT_TileMapState::instance.CertainPathLayer[_startTile] = 1;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
-                while ((iVar4 = this->searchQueue.tilesQueue[this->searchQueue.readIndex],
-                    -1 < iVar4 && (iVar4 < 0x13a10))) {
+                while (true) {
+                    iVar4 = this->searchQueue.tilesQueue[this->searchQueue.readIndex];
+                    if (iVar4 < 0) {
+                        break;
+                    }
+                    if (0x13a10 <= iVar4) {
+                        break;
+                    }
                     this->searchQueue.currentDistance = (int)DAT_TileMapState::instance.CertainPathLayer[iVar4];
                     if (0x13a10 < (int)this->searchQueue.currentDistance) {
                         return (undefined4)(0);
