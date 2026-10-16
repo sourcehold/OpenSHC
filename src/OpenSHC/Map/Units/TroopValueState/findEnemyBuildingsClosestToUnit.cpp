@@ -49,7 +49,7 @@ namespace Map {
                         }
                     }
                     local_14 = local_14 + 1;
-                    piVar2 = piVar2 + 4;
+                    piVar2 = piVar2 + 1;
                 } while (
                     local_14 < *(int*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray + iVar1 + -8));
                 if (-1 < local_8) {
