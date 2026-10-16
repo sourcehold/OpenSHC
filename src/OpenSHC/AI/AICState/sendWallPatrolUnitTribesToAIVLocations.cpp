@@ -37,6 +37,7 @@ namespace AI {
             OpenSHC::Game::GameStateStructures_Func::checkKeepEnclosed, DAT_GameState::ptr)(playerID);
 
         for (int i = 0; i < 3; i++) {
+            int j = 0;
             int count = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount
                             [DAT_SkirmishDefinedData::instance.MaxAIVLocationForPatrolUnits[i].aivUnitType];
             int groups = count;
@@ -52,7 +53,7 @@ namespace AI {
                 stepSize = 1;
             }
 
-            for (int j = 0, patrolGroupIndex = 0; j < groups; j++, patrolGroupIndex += stepSize) {
+            for (int patrolGroupIndex = 0; j < groups; j++, patrolGroupIndex += stepSize) {
                 int tribeID
                     = DAT_GameState::instance.playerDataArray[playerID]
                           .aiTribeIDs[DAT_SkirmishDefinedData::instance.MaxAIVLocationForPatrolUnits[i].tribeArrayOffset
