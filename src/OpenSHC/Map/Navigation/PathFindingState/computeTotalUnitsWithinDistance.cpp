@@ -89,12 +89,9 @@ namespace Map {
                     for (int iVar6 = 0; iVar6 < 8; iVar6 = iVar6 + 4) {
                         iVar5 = DAT_TileMapState::instance.directionTranslationMatrix[sVar3][iVar6] + uVar4;
                         if (DAT_TileMapState::instance.WalkLayer[iVar5] != this->searchGeneration) {
-                        if (someLogicalTileProperty == 0) {
-                            if ((DAT_TileMapState::instance.LogicLayer[iVar5] & 0x30) == 0)
-                                goto LAB_0049c880;
-                        } else if ((DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar6] & bVar1)
-                            != 0) {
-                        LAB_0049c880:
+                        if ((someLogicalTileProperty == 0 && (DAT_TileMapState::instance.LogicLayer[iVar5] & 0x30) == 0)
+                            || (someLogicalTileProperty != 0
+                                && (DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar6] & bVar1) != 0)) {
                             DAT_TileMapState::instance.CertainPathLayer[iVar5]
                                 = (short)this->searchQueue.currentDistance + 1;
                             DAT_TileMapState::instance.WalkLayer[iVar5] = (short)this->searchGeneration;
@@ -111,13 +108,9 @@ namespace Map {
                         }
                         iVar5 = DAT_TileMapState::instance.directionTranslationMatrix[sVar3][iVar6 + 1] + uVar4;
                         if (DAT_TileMapState::instance.WalkLayer[iVar5] != this->searchGeneration) {
-                        if (someLogicalTileProperty == 0) {
-                            if ((DAT_TileMapState::instance.LogicLayer[iVar5] & 0x30) == 0)
-                                goto LAB_0049c918;
-                        } else if ((DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar6 + 1]
-                                       & bVar1)
-                            != 0) {
-                        LAB_0049c918:
+                        if ((someLogicalTileProperty == 0 && (DAT_TileMapState::instance.LogicLayer[iVar5] & 0x30) == 0)
+                            || (someLogicalTileProperty != 0
+                                && (DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar6 + 1] & bVar1) != 0)) {
                             DAT_TileMapState::instance.CertainPathLayer[iVar5]
                                 = (short)this->searchQueue.currentDistance + 1;
                             DAT_TileMapState::instance.WalkLayer[iVar5] = (short)this->searchGeneration;
@@ -134,13 +127,9 @@ namespace Map {
                         }
                         iVar5 = DAT_TileMapState::instance.directionTranslationMatrix[sVar3][iVar6 + 2] + uVar4;
                         if (DAT_TileMapState::instance.WalkLayer[iVar5] != this->searchGeneration) {
-                        if (someLogicalTileProperty == 0) {
-                            if ((DAT_TileMapState::instance.LogicLayer[iVar5] & 0x30) == 0)
-                                goto LAB_0049c9b1;
-                        } else if ((DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar6 + 2]
-                                       & bVar1)
-                            != 0) {
-                        LAB_0049c9b1:
+                        if ((someLogicalTileProperty == 0 && (DAT_TileMapState::instance.LogicLayer[iVar5] & 0x30) == 0)
+                            || (someLogicalTileProperty != 0
+                                && (DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar6 + 2] & bVar1) != 0)) {
                             DAT_TileMapState::instance.CertainPathLayer[iVar5]
                                 = (short)this->searchQueue.currentDistance + 1;
                             DAT_TileMapState::instance.WalkLayer[iVar5] = (short)this->searchGeneration;
@@ -157,13 +146,9 @@ namespace Map {
                         }
                         iVar5 = DAT_TileMapState::instance.directionTranslationMatrix[sVar3][iVar6 + 3] + uVar4;
                         if (DAT_TileMapState::instance.WalkLayer[iVar5] != this->searchGeneration) {
-                        if (someLogicalTileProperty == 0) {
-                            if ((DAT_TileMapState::instance.LogicLayer[iVar5] & 0x30) == 0)
-                                goto LAB_0049ca4a;
-                        } else if ((DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar6 + 3]
-                                       & bVar1)
-                            != 0) {
-                        LAB_0049ca4a:
+                        if ((someLogicalTileProperty == 0 && (DAT_TileMapState::instance.LogicLayer[iVar5] & 0x30) == 0)
+                            || (someLogicalTileProperty != 0
+                                && (DAT_ClimbLogicDefinedData::instance.BitFlagHelperForPathLinkage[iVar6 + 3] & bVar1) != 0)) {
                             DAT_TileMapState::instance.CertainPathLayer[iVar5]
                                 = (short)this->searchQueue.currentDistance + 1;
                             DAT_TileMapState::instance.WalkLayer[iVar5] = (short)this->searchGeneration;
