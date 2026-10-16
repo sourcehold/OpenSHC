@@ -29,16 +29,16 @@ namespace Map {
             int local_8;
             iVar5 = 0;
             DAT_TroopValueState::instance.attackInfo.archerPoints = 0;
-            if ((int)DAT_TroopValueState::instance.attackInfo.field_0x20e00 < 0) {
+            if ((int)DAT_TroopValueState::instance.attackInfo.archerPointCountPrev < 0) {
                 local_c = 8;
-            } else if ((int)DAT_TroopValueState::instance.attackInfo.field_0x20e00 < 2) {
+            } else if ((int)DAT_TroopValueState::instance.attackInfo.archerPointCountPrev < 2) {
                 local_c = 5;
-            } else if ((int)DAT_TroopValueState::instance.attackInfo.field_0x20e00 < 4) {
+            } else if ((int)DAT_TroopValueState::instance.attackInfo.archerPointCountPrev < 4) {
                 local_c = 6;
-            } else if ((int)DAT_TroopValueState::instance.attackInfo.field_0x20e00 < 8) {
+            } else if ((int)DAT_TroopValueState::instance.attackInfo.archerPointCountPrev < 8) {
                 local_c = 7;
             } else {
-                local_c = (uint)(0x13 < (int)DAT_TroopValueState::instance.attackInfo.field_0x20e00) * 2 + 8;
+                local_c = (uint)(0x13 < (int)DAT_TroopValueState::instance.attackInfo.archerPointCountPrev) * 2 + 8;
             }
             do {
                 if (DAT_TileMapState::instance.AIInfoLayer[iVar5] == '\x02') {
@@ -86,7 +86,7 @@ namespace Map {
                 }
                 iVar5 = iVar5 + 1;
                 if (0x13a0f < iVar5) {
-                    DAT_TroopValueState::instance.attackInfo.field_0x20e00
+                    DAT_TroopValueState::instance.attackInfo.archerPointCountPrev
                         = DAT_TroopValueState::instance.attackInfo.archerPoints;
                 }
             } while (true);
