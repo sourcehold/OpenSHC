@@ -163,10 +163,10 @@ namespace Map {
                                     } else if ((DAT_TileMapState::instance.WallOwnerLayer[iVar7] & 7) + 1 == param_7) {
                                         uVar8 = (uint)DAT_TileMapState::instance.HeightLayer[iVar7];
                                     LAB_004a63f4:
-                                        if ((int)((param_5 * 2) / 3 + uVar10) < (int)uVar8) {
+                                        if ((int)uVar8 > (int)((param_5 * 2) / 3 + uVar10)) {
                                             sVar5 = 3;
                                         } else {
-                                            sVar5 = ((int)(param_5 / 3 + uVar10) < (int)uVar8) + 1;
+                                            sVar5 = ((int)uVar8 > (int)(param_5 / 3 + uVar10)) + 1;
                                         }
                                         short sVar3
                                             = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[iVar9]
