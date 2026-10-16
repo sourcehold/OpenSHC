@@ -5,6 +5,7 @@
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
 
@@ -18,27 +19,26 @@ namespace Map {
         void TroopValueState::pruneStaleTentPoints()
         {
             BOOLEnum BVar1;
-            int* piVar2;
-            piVar2 = &this->attackInfo.tentPointsValues[1].tribeID;
+            AttackInfoSubArrayElement3* point = &DAT_TroopValueState::instance.attackInfo.tentPointsValues[1];
             do {
-                if (piVar2[-1] == this->attackInfo.someCounter1) {
-                    if (*piVar2 != 0) {
+                if (point->someCounter != DAT_TroopValueState::instance.attackInfo.someCounter1) {
+                    MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
+                        0x20, '\0', (void*)((int)(point)));
+                } else {
+                    if (point->tribeID != 0) {
                         BVar1 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::tribeCorrespondsWithUID,
-                            DAT_TribesState::ptr)(*piVar2, (uint)(piVar2[1]));
+                            DAT_TribesState::ptr)(point->tribeID, point->tribeUID);
                         if (!BVar1) {
                             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                                0x20, '\0', (void*)((int)((AttackInfoSubArrayElement3*)(piVar2 + -4))));
+                                0x20, '\0', (void*)((int)(point)));
                         }
                     }
-                    if (0 < piVar2[2]) {
-                        piVar2[2] = piVar2[2] + -1;
+                    if (0 < point->three) {
+                        point->three = point->three + -1;
                     }
-                } else {
-                    MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                        0x20, '\0', (void*)((int)((AttackInfoSubArrayElement3*)(piVar2 + -4))));
                 }
-                piVar2 = piVar2 + 8;
-            } while ((int)piVar2 < 0x17a52b4);
+                point = point + 1;
+            } while (point < &DAT_TroopValueState::instance.attackInfo.tentPointsValues[2000]);
         }
 
     }
