@@ -34,7 +34,7 @@ namespace Map {
                 iVar1 = DAT_TroopValueState::instance.attackInfo.counter;
             }
             DAT_TroopValueState::instance.attackInfo.counter = iVar1 + 1;
-            if (0xf < DAT_TroopValueState::instance.attackInfo.counter) {
+            if (16 <= DAT_TroopValueState::instance.attackInfo.counter) {
                 DAT_TroopValueState::instance.attackInfo.counter = 0;
                 MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                     160, '\0', (void*)((int)(&DAT_TroopValueState::instance.attackInfo.aiTribeSizesPerTribeType)));
