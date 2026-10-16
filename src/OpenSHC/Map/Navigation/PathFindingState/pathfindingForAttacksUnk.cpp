@@ -56,12 +56,10 @@ namespace Map {
             BOOLEnum BVar4 = MACRO_CALL_MEMBER(
                 OpenSHC::Map::Units::TribesState_Func::isTribeAllAssassins, DAT_TribesState::ptr)(tribeID);
             param_3 = param_3 * 2;
-            if (param_3 <= 500) {
-                if (param_3 < 0x32) {
-                    param_3 = 0x32;
-                }
-            } else {
+            if (500 < param_3) {
                 param_3 = 500;
+            } else if (param_3 < 0x32) {
+                param_3 = 0x32;
             }
             iVar14 = DAT_BuildingDefinedData::instance.BuildingAccessibleTilesCount[uVar7];
             local_20 = 0;

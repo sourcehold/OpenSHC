@@ -25299,7 +25299,7 @@ SHC_3BB0A8C1_0x004A6ED0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004A7090 | 99.6% | named matrix end field
 
-SHC_3BB0A8C1_0x004A75B0 | 47.4% | bound literal from asm
+SHC_3BB0A8C1_0x004A75B0 | 49.2% | clamp arms from asm
 
 SHC_3BB0A8C1_0x004A79A0 | 64.1% | compare order from asm
 
