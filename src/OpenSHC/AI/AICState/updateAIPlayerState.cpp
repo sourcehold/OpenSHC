@@ -38,26 +38,26 @@ namespace AI {
 
         int _aiPlayerState = DAT_GameState::instance.playerDataArray[playerID].aiPlayerState;
         if (_aiPlayerState == 0) {
-            if (!MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::aiShouldAttackOrWaitForTeamCoordination, this)(
+            if (MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::aiShouldAttackOrWaitForTeamCoordination, this)(
                     playerID)) {
+                // proceed with attack
+                DAT_GameState::instance.playerDataArray[playerID].attackTicker = 0;
+                DAT_GameState::instance.playerDataArray[playerID].aiPlayerState = 1;
+                DAT_GameState::instance.playerDataArray[playerID].unitPatrolRecommandRelatedDelayValue = 0;
+                DAT_GameState::instance.playerDataArray[playerID].aiCoordinatedAttackPatience = 0;
+                MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAttackCoordinationLevel, this)(playerID);
+                MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setCurrentAttackStrength, this)(playerID);
+                MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setCurrentAttackRaidParameter, this)(playerID);
+                // fixme: struct layout. This looks like an int[10][8] attack tracker starting at
+                // attackedByPlayerArrayUnk (0x2BDC) and ending where aivUnitLocationSlots begins (0x2D1C).
+                (&DAT_GameState::instance
+                        .playerDataArray[DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID]
+                        .attackedByPlayerArrayUnk)[playerID * 8]++;
+            } else {
                 // send own units back to keep or campfire
                 MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::aiRetreatUnits, this)(playerID);
                 return;
             }
-
-            // proceed with attack
-            DAT_GameState::instance.playerDataArray[playerID].attackTicker = 0;
-            DAT_GameState::instance.playerDataArray[playerID].aiPlayerState = 1;
-            DAT_GameState::instance.playerDataArray[playerID].unitPatrolRecommandRelatedDelayValue = 0;
-            DAT_GameState::instance.playerDataArray[playerID].aiCoordinatedAttackPatience = 0;
-            MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAttackCoordinationLevel, this)(playerID);
-            MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setCurrentAttackStrength, this)(playerID);
-            MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setCurrentAttackRaidParameter, this)(playerID);
-            // fixme: struct layout. This looks like an int[10][8] attack tracker starting at
-            // attackedByPlayerArrayUnk (0x2BDC) and ending where aivUnitLocationSlots begins (0x2D1C).
-            (&DAT_GameState::instance
-                    .playerDataArray[DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID]
-                    .attackedByPlayerArrayUnk)[playerID * 8]++;
         } else if ((MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::hasNoTroopsOrAllAreDiggers, this)(playerID)
                        && _aiPlayerState != 9)
             || (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker > 0 && _aiPlayerState <= 5)
