@@ -60,14 +60,14 @@ namespace Map {
             this->searchQueue.currentDistance = 1;
             this->searchQueue.readIndex = 0;
             this->searchQueue.writeIndex = 1;
+            this->searchQueue.yQueue[0] = sVar2;
             this->searchQueue.tilesQueue[0]
                 = DAT_ViewportRenderState::instance.translationMatrix[uVar8].addXgetTile + uVar7;
-            this->searchQueue.yQueue[0] = sVar2;
-            this->searchQueue.xQueue[0] = sVar1;
-            DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
             DAT_TileMapState::instance.WalkLayer[this->searchQueue.tilesQueue[0]] = (short)this->searchGeneration;
+            this->searchQueue.xQueue[0] = sVar1;
             commandBuildingType = (OpenSHC::Commands::MappersEnum)((int)SEC_RNG::instance.currentNumber2 % 5
                 + OpenSHC::Commands::M_MAPPER_STATUE1);
+            DAT_TileMapState::instance.CertainPathLayer[this->searchQueue.tilesQueue[0]] = 1;
             MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
             if (this->searchQueue.readIndex != this->searchQueue.writeIndex) {
                 while (true) {
