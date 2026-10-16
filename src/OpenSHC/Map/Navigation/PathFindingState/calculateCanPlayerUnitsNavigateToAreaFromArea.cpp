@@ -67,8 +67,7 @@ namespace Map {
                                 dVar2 = this->climbData[iVar1].wallGroupAreaID;
                                 if ((dVar2 == fromArea)
                                     || (dVar3 = this->climbData[iVar1].buildingArea, dVar3 == fromArea)) {
-                                    fromArea = toArea;
-                                    goto LAB_ret;
+                                    return (int)(toArea);
                                 }
                                 adStack_960[iVar5] = dVar2;
                                 iVar5 = iVar5 + 1;
@@ -81,13 +80,11 @@ namespace Map {
                                 dVar3 = this->climbData[iVar1].wallGroupAreaID;
                                 if (dVar3 == toArea) {
                                     if (dVar2 == fromArea) {
-                                        fromArea = toArea;
-                                        goto LAB_ret;
+                                        return (int)(toArea);
                                     }
                                     dVar3 = this->climbData[iVar1].buildingArea;
                                     if (dVar3 == fromArea) {
-                                        fromArea = toArea;
-                                        goto LAB_ret;
+                                        return (int)(toArea);
                                     }
                                     adStack_960[iVar5] = dVar2;
                                     aiStack_640[iVar6 * 2 + 1] = 1;
@@ -98,12 +95,10 @@ namespace Map {
                                     }
                                 } else if (this->climbData[iVar1].buildingArea == toArea) {
                                     if (dVar2 == fromArea) {
-                                        fromArea = toArea;
-                                        goto LAB_ret;
+                                        return (int)(toArea);
                                     }
                                     if (dVar3 == fromArea) {
-                                        fromArea = toArea;
-                                        goto LAB_ret;
+                                        return (int)(toArea);
                                     }
                                     adStack_960[iVar5] = dVar2;
                                     iVar5 = iVar5 + 1;
@@ -130,13 +125,11 @@ namespace Map {
                                     if (dVar3 == dVar2) {
                                         dVar3 = this->climbData[iVar1].wallGroupAreaID;
                                         if (dVar3 == fromArea) {
-                                            fromArea = dVar2;
-                                            goto LAB_ret;
+                                            return (int)(dVar2);
                                         }
                                         dVar4 = this->climbData[iVar1].buildingArea;
                                         if (dVar4 == fromArea) {
-                                            fromArea = dVar2;
-                                            goto LAB_ret;
+                                            return (int)(dVar2);
                                         }
                                         adStack_960[iVar5] = dVar3;
                                         iVar5 = iVar5 + 1;
@@ -149,13 +142,11 @@ namespace Map {
                                         dVar4 = this->climbData[iVar1].wallGroupAreaID;
                                         if (dVar4 == dVar2) {
                                             if (dVar3 == fromArea) {
-                                                fromArea = dVar2;
-                                                goto LAB_ret;
+                                                return (int)(dVar2);
                                             }
                                             dVar4 = this->climbData[iVar1].buildingArea;
                                             if (dVar4 == fromArea) {
-                                                fromArea = dVar2;
-                                                goto LAB_ret;
+                                                return (int)(dVar2);
                                             }
                                             adStack_960[iVar5] = dVar3;
                                             aiStack_640[iVar6 * 2 + 1] = 1;
@@ -166,12 +157,10 @@ namespace Map {
                                             }
                                         } else if (this->climbData[iVar1].buildingArea == dVar2) {
                                             if (dVar3 == fromArea) {
-                                                fromArea = dVar2;
-                                                goto LAB_ret;
+                                                return (int)(dVar2);
                                             }
                                             if (dVar4 == fromArea) {
-                                                fromArea = dVar2;
-                                                goto LAB_ret;
+                                                return (int)(dVar2);
                                             }
                                             adStack_960[iVar5] = dVar3;
                                             iVar5 = iVar5 + 1;
@@ -198,8 +187,7 @@ namespace Map {
                             dVar2 = this->climbData[iVar1].wallGroupAreaID;
                             if ((dVar2 == fromArea)
                                 || (dVar3 = this->climbData[iVar1].buildingArea, dVar3 == fromArea)) {
-                                fromArea = toArea;
-                                goto LAB_ret;
+                                return (int)(toArea);
                             }
                             adStack_960[iVar5] = dVar2;
                             iVar5 = iVar5 + 1;
@@ -212,13 +200,11 @@ namespace Map {
                             dVar3 = this->climbData[iVar1].wallGroupAreaID;
                             if (dVar3 == toArea) {
                                 if (dVar2 == fromArea) {
-                                    fromArea = toArea;
-                                    goto LAB_ret;
+                                    return (int)(toArea);
                                 }
                                 dVar3 = this->climbData[iVar1].buildingArea;
                                 if (dVar3 == fromArea) {
-                                    fromArea = toArea;
-                                    goto LAB_ret;
+                                    return (int)(toArea);
                                 }
                                 adStack_960[iVar5] = dVar2;
                                 aiStack_640[iVar6 * 2 + 1] = 1;
@@ -229,8 +215,7 @@ namespace Map {
                                 }
                             } else if (this->climbData[iVar1].buildingArea == toArea) {
                                 if ((dVar2 == fromArea) || (dVar3 == fromArea)) {
-                                    fromArea = toArea;
-                                    goto LAB_ret;
+                                    return (int)(toArea);
                                 }
                                 adStack_960[iVar5] = dVar2;
                                 iVar5 = iVar5 + 1;
@@ -255,13 +240,11 @@ namespace Map {
                                     if (dVar3 == dVar2) {
                                         dVar3 = this->climbData[iVar1].wallGroupAreaID;
                                         if (dVar3 == fromArea) {
-                                            fromArea = dVar2;
-                                            goto LAB_ret;
+                                            return (int)(dVar2);
                                         }
                                         dVar4 = this->climbData[iVar1].buildingArea;
                                         if (dVar4 == fromArea) {
-                                            fromArea = dVar2;
-                                            goto LAB_ret;
+                                            return (int)(dVar2);
                                         }
                                         adStack_960[iVar5] = dVar3;
                                         iVar5 = iVar5 + 1;
@@ -274,13 +257,11 @@ namespace Map {
                                         dVar4 = this->climbData[iVar1].wallGroupAreaID;
                                         if (dVar4 == dVar2) {
                                             if (dVar3 == fromArea) {
-                                                fromArea = dVar2;
-                                                goto LAB_ret;
+                                                return (int)(dVar2);
                                             }
                                             dVar4 = this->climbData[iVar1].buildingArea;
                                             if (dVar4 == fromArea) {
-                                                fromArea = dVar2;
-                                                goto LAB_ret;
+                                                return (int)(dVar2);
                                             }
                                             adStack_960[iVar5] = dVar3;
                                             aiStack_640[iVar6 * 2 + 1] = 1;
@@ -291,12 +272,10 @@ namespace Map {
                                             }
                                         } else if (this->climbData[iVar1].buildingArea == dVar2) {
                                             if (dVar3 == fromArea) {
-                                                fromArea = dVar2;
-                                                goto LAB_ret;
+                                                return (int)(dVar2);
                                             }
                                             if (dVar4 == fromArea) {
-                                                fromArea = dVar2;
-                                                goto LAB_ret;
+                                                return (int)(dVar2);
                                             }
                                             adStack_960[iVar5] = dVar3;
                                             iVar5 = iVar5 + 1;
